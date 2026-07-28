@@ -158,6 +158,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Uzavřít sloučenou opravu po mergi bez tichého doznívání | „po merge opravy“, „sloučená oprava“ nebo „oprava po sloučení“ | krátká po-merge karta s ověřením běhu, úklidem pilotních stop, aktualizací mapy a dalším kontrolním datem |
 | Zkontrolovat sloučenou opravu po prvním provozním cyklu | „kontrola po mergi“, „oprava v provozu“ nebo „první cyklus po opravě“ | lehký provozní review, které ověří dopad opravy, datovou hranici, šum, dokumentaci a rozhodne zavřít, zúžit, opravit nebo vrátit |
 | Zjednodušit sloučenou opravu po prvním cyklu | „zjednodušení po prvním cyklu“, „oprava funguje ale bobtná“ nebo „procesní nános po opravě“ | redukční karta, která ponechá hodnotu opravy, vypne dočasný dohled, uklidí datové stopy a převede změnu do běžného režimu |
+| Uzavřít zjednodušenou sloučenou opravu do běžného režimu | „zjednodušená oprava hotovo“, „redukce po mergi hotovo“ nebo „oprava bez doznívání“ | zavírací karta, která potvrzuje odstraněný nános, funkční minimální signál, uklizené přístupy, aktuální runbook a konec mimořádných kontrol |
 | Automatizovat rutinu bez skrytého dozoru | „automatizace rutiny“, „automatizační karta“ nebo „vypínač automatizace“ | malý automatizační návrh s účelem, vstupy, výstupem, vlastníkem, logy, ručním rozhodnutím a datem revize |
 | Vyhodnotit automatizaci po prvních bězích | „review automatizace“, „automatizace po spuštění“ nebo „autopilot“ | rozhodnutí ponechat, zúžit, přepsat, vrátit do ruční rutiny nebo vypnout automatizaci podle nálezů, šumu a datové stopy |
 | Vypnout automatizaci bez zapomenutého běhu | „vypnutí automatizace“, „ukončený autopilot“ nebo „automatizace končí“ | vypínací karta s posledním během, revokací tokenů, úklidem výstupů, náhradním postupem a kontrolou veřejných slibů |
@@ -63998,6 +63999,117 @@ Výsledek není kosmetický. Z provozu zmizely dvě zbytečné kopie, tým má p
 
 Vezmi jednu sloučenou opravu, která podle prvního provozního cyklu funguje. Najdi jednu dočasnou věc, která kolem ní zůstala: kontrolní tabulku, chat kopii, export, debug log, nadbytečný alert, zvláštní přístup nebo starou šablonu. Vyplň redukční kartu a do konce týdne zruš právě tuto jednu stopu. Ponech jen minimální signál, který by reálně vedl k rozhodnutí.
 
+## Příloha: Uzavření zjednodušené sloučené opravy do běžného režimu bez doznívání
+
+Zjednodušení opravy odstraní nános. Uzavření potvrzuje, že nános opravdu zmizel a že tým se nevrátil k dočasnému provozu hned první týden poté. Je to malý, ale důležitý rozdíl: zjednodušení je akce, uzavření je verdikt.
+
+U automatizací je tento krok obzvlášť důležitý. Skript, report, alert nebo integrační tok může po opravě vypadat klidně, ale vedle něj mohou dál žít staré výstupy, pomocné exporty, pilotní oprávnění, výjimkové ruční kroky nebo dokumentace popisující stav před redukcí. Taková oprava není hotová. Jen se přestala tvářit jako problém.
+
+> Codyho komentář: Nejhorší procesní nános je ten, který už nikdo nepojmenovává. Když se něco dělá „pro jistotu“ a nikdo neumí říct, jaké rozhodnutí tím vznikne, je to skoro vždycky kandidát na vypnutí.
+
+### Zavři redukci až po jednom běžném průchodu
+
+Neuzavírej zjednodušenou opravu ve stejný den, kdy zrušíš dočasný report, export nebo kontrolu. Dej jí aspoň jeden běžný průchod v rytmu, ve kterém má fungovat. U denní automatizace to může být další den. U týdenního reportu další týden. U měsíčního procesu jeden měsíční cyklus, pokud riziko dovolí čekat.
+
+Průchod nemusí být velký audit. Stačí ověřit:
+
+- automatizace proběhla podle běžného spouštěče,
+- minimální signál vznikl na správném místě,
+- vlastník nemusel použít starý workaround,
+- nevznikl nový ruční export nebo chat kopie,
+- datová hranice odpovídá redukční kartě.
+
+Pokud některý bod neplatí, nepiš „hotovo“. Napiš, co se vrátilo, a rozhodni, jestli jde o drobný úklid, novou opravnou kartu nebo návrat k předchozí verzi.
+
+### Zkontroluj pět míst, kde se vrací starý provoz
+
+Doznívání opravy se málokdy vrací v hlavním kódu. Častěji zůstane v okolí: v dokumentaci, přístupech, notifikacích, exportech a lidských zvycích. Zavírací kontrola proto začíná mimo diff.
+
+| Místo | Co hledat | Co udělat |
+| --- | --- | --- |
+| Runbook | starý krok, který odkazuje na pilotní postup | přepsat ho na běžný režim nebo označit jako archiv |
+| Přístupy | dočasná role, sdílený účet, externí přístup, exportní oprávnění | odebrat nebo převést do běžně schváleného režimu |
+| Výstupy | kopie reportu v chatu, CSV soubor, ruční tabulka, duplicitní notifikace | ponechat jen minimální signál v místě práce |
+| Logy | debug payload, příliš dlouhá retence, obsah zákaznické práce | zúžit na technický stav, korelační ID a přiměřenou dobu držení |
+| Šablony | support makro, obchodní odpověď nebo interní snippet se starou pravdou | opravit, sloučit nebo archivovat |
+
+Dobrá kontrolní otázka: „Kdyby nový člověk nastoupil zítra, naučili bychom ho běžný stav, nebo pilotní obcházení?“ Pokud odpověď zní pilotní obcházení, uzavření ještě neproběhlo.
+
+### Napiš zavírací kartu
+
+Zavírací karta má být krátká a použitelná i za půl roku. Nepatří do ní celý příběh opravy. Patří do ní současná pravda a hranice návratu.
+
+| Pole | Co zapsat |
+| --- | --- |
+| Oprava | název sloučené opravy a datum zjednodušení |
+| Redukce | co bylo po prvním cyklu odstraněno |
+| Běžný signál | co zůstává pro ověření provozu |
+| Důkaz bez návratu | čím je vidět, že starý workaround, export nebo dohled se nevrátil |
+| Datový úklid | které dočasné soubory, logy, oprávnění nebo sdílení skončily |
+| Současný zdroj pravdy | kde je aktuální runbook, mapa automatizace nebo dokumentace |
+| Vlastník | kdo odpovídá za běžný režim |
+| Stop pravidlo | kdy se oprava znovu otevře |
+
+Karta má končit jedním z pěti verdiktů:
+
+| Verdikt | Kdy ho použít |
+| --- | --- |
+| Zavřít | oprava běží, nános zmizel, minimální signál stačí |
+| Zavřít s triggerem | vše je v pořádku, ale existuje jasný revizní spouštěč |
+| Dohlédnout jedním cyklem | skoro hotovo, ale jeden z úklidových bodů ještě čeká na potvrzení |
+| Otevřít malou následnou opravu | zůstal konkrétní problém, který má jasný rozsah |
+| Vrátit zjednodušení | redukce poškodila práci nebo skryla důležitý signál |
+
+### Nepřepisuj uzavření na nový proces
+
+Největší past je uzavřít opravu tak, že vznikne „měsíční meeting k ověření, že oprava je pořád uzavřená“. To je procesní úrok z něčeho, co mělo skončit.
+
+Běžný režim má mít jednu z těchto forem:
+
+- kontrola při existujícím review, které už tým dělá,
+- automatický technický signál bez osobního nebo zákaznického detailu,
+- krátký revizní trigger při změně vstupu, výstupu, dodavatele nebo vlastníka,
+- jasné stop pravidlo bez pravidelného ručního procházení všeho kolem.
+
+Pokud musí oprava po uzavření vyžadovat nový pravidelný dohled, pravděpodobně není uzavřená. Buď je pořád riziková, nebo tým nechal v provozu něco, co mělo zmizet.
+
+### Příklad: Retenční report po redukci konečně mlčí
+
+Po opravě retenčního reportu tým zrušil kopii CSV na sdíleném disku a vypnul chatovou notifikaci s celým výstupem. Zůstal jen odkaz v provozním panelu a měsíční počet chybových stavů. Po dalším týdenním běhu report vznikl správně, vlastník nepoužil starou ruční tabulku a v chatu se neobjevila žádná nová kopie.
+
+Zavírací karta:
+
+| Pole | Zápis |
+| --- | --- |
+| Oprava | metadata exportů v retenčním reportu, redukce po prvním cyklu |
+| Redukce | zrušena chat kopie a pilotní CSV na sdíleném disku |
+| Běžný signál | provozní panel ukazuje poslední běh, počet exportů a počet chybových stavů |
+| Důkaz bez návratu | vlastník nepoužil ruční seznam a nevznikl nový export mimo panel |
+| Datový úklid | smazány pilotní CSV soubory, vypnuté generování kopie, debug log zúžený na stav a korelační ID |
+| Současný zdroj pravdy | runbook reportu a mapa automatizací |
+| Vlastník | provozní vlastník reportu |
+| Stop pravidlo | dvě selhání běhu po sobě, návrat ručního seznamu nebo nové exportní pole mimo schválenou datovou hranici |
+| Verdikt | zavřít s triggerem při změně exportního schématu |
+
+Všimni si, že výsledek není „budeme to sledovat“. Výsledek je „běží to v běžném místě práce, staré kopie jsou pryč a znovu se tím zabýváme jen při konkrétním spouštěči“.
+
+### Checklist: Uzavření zjednodušené sloučené opravy
+
+- [ ] Zjednodušená oprava prošla aspoň jedním běžným průchodem.
+- [ ] Minimální signál vzniká na správném místě a vede k rozhodnutí.
+- [ ] Starý workaround, ruční seznam, export nebo chat kopie se nevrátily.
+- [ ] Dočasné přístupy, sdílení a pilotní oprávnění jsou odebrané nebo převedené do schváleného režimu.
+- [ ] Debug logy, exporty a pracovní kopie mají uklizenou nebo zkrácenou datovou stopu.
+- [ ] Runbook, mapa automatizací a dokumentace ukazují současnou pravdu.
+- [ ] Supportní, obchodní nebo interní šablony neobsahují starý postup.
+- [ ] Verdikt je jeden z pěti jasných stavů, ne pocitové „vypadá to dobře“.
+- [ ] Stop pravidlo říká, kdy se věc znovu otevře.
+- [ ] Uzavření nevytvořilo nový pravidelný dohled nad lidmi ani zákaznickými daty.
+
+### Mini úkol
+
+Vyber jednu opravu automatizace, kterou tým po prvním cyklu zjednodušil. Počkej na jeden běžný průchod a vyplň zavírací kartu. Zkontroluj hlavně místa mimo kód: runbook, přístupy, výstupy, logy a šablony. Pokud najdeš jednu stopu pilotu, neotevírej velký audit. Zavři právě tuto stopu, dopiš verdikt a nastav stop pravidlo.
+
 ## Zdroje
 
 - IETF RFC 9110: HTTP Semantics - význam HTTP přesměrování a stavů včetně `410 Gone` pro zdroje, které už nejsou dostupné: https://www.rfc-editor.org/rfc/rfc9110.html
@@ -64191,6 +64303,8 @@ Vezmi jednu sloučenou opravu, která podle prvního provozního cyklu funguje. 
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-28: Doplněna příloha o uzavření zjednodušené sloučené opravy do běžného režimu bez doznívání: ověření po jednom běžném průchodu, kontrola pěti míst návratu starého provozu, zavírací karta, pět jasných verdiktů, ochrana proti novému procesu, příklad retenčního reportu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro uzavření zjednodušené opravy po mergi. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-28: Doplněna příloha o zjednodušení sloučené opravy po prvním provozním cyklu bez procesního nánosu: rozlišení, kdy je čas redukovat místo dál opravovat, výběr jedné osy redukce, ponechání minimálního provozního signálu, redukční karta, pořadí úklidu, příklad retenčního reportu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro zjednodušení opravy po prvním cyklu. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
