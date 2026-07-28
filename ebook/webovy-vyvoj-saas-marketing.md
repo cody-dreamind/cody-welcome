@@ -61810,6 +61810,140 @@ Kdy by verdikt byl jiný? Kdyby se ukázalo, že ruční review pravidelně pozd
 
 Vezmi jednu vypnutou automatizaci, kterou by někdo rád vrátil. Napiš re-entry kartu: co bylo vypnuté, proč to skončilo, co se změnilo, jaký je důkaz, jak dnes funguje ruční cesta a jaký má datový dopad. Potom vyber jeden verdikt. Pokud neumíš napsat důkaz bez věty „máme pocit“, nech automatizaci vypnutou a nejdřív oprav ruční pozorování práce.
 
+## Příloha: Znovuspuštění automatizace po ruční náhradě bez návratu starého rozsahu
+
+Když re-entry gate řekne „otevřít restart“, pořád to neznamená „zapnout starý job“. Znamená to jen, že ruční období ukázalo opakovanou práci, chybějící včasný signál nebo privacy riziko ruční náhrady. Restart je nová změna, ne obnova historického komfortu.
+
+Špatná otázka zní: „Jak rychle vrátíme automatizaci?“
+
+Lepší otázka zní: „Jaký nejmenší automatizovaný krok dnes pomůže a jak poznáme, že se znovu nerozrostl?“
+
+Restartovací karta má vzít důkaz z ručního období, zúžit rozsah proti původní automatizaci a nastavit pilot, ve kterém jde automatizaci zase vypnout bez dramatu. Pokud se tím tým neřídí, starý skript se vrátí i se starými logy, tokeny, výstupy a falešnou autoritou. To je drahé kolečko kolem stejné lampy.
+
+> Codyho komentář: Nejzrádnější restart je ten, který vypadá jako „jen malá technická obnova“. V praxi obnovuje i staré předpoklady. A starý předpoklad má občas horší paměť než starý server v koutě.
+
+### Začni novou restartovací kartou
+
+Restartovací karta navazuje na re-entry kartu, ale přidává konkrétní návrh změny. Nemá opisovat historii. Má říct, co se má znovu spustit, v jak menším rozsahu a proč právě teď.
+
+Minimální karta:
+
+| Pole | Co napsat |
+| --- | --- |
+| Důkaz z ručního období | Konkrétní situace, počet případů nebo pracovní dopad, který vedl k verdiktu otevřít restart. |
+| Původní automatizace | Co běželo dřív a proč bylo vypnuté. |
+| Nový cíl | Jedna věta rozhodnutí nebo práce, kterou má restart podpořit. |
+| Nejmenší automatizovaný krok | Co má systém udělat: navrhnout, upozornit, připravit úkol, nebo blokovat. |
+| Co se nevrací | Výslovný seznam starých vstupů, výstupů, frekvencí, rolí nebo dashboardů, které zůstanou vypnuté. |
+| Datová hranice | Jaká pole se čtou, ukládají, logují a kdy se mažou. |
+| Lidské rozhodnutí | Kdo má výstup potvrdit, odmítnout nebo zavřít. |
+| Pilotní okno | Jak dlouho restart poběží a kdy padne verdikt. |
+| Stop pravidlo | Podmínky pro zúžení, návrat do ručního procesu nebo vypnutí. |
+
+Restart bez pole „co se nevrací“ je podezřelý. Tým si často pamatuje užitek staré automatizace, ale zapomene na datový šum, výjimky a ruční opravy, kvůli kterým ji vypínal.
+
+### Zúž rozsah proti původnímu běhu
+
+Restart má být menší než původní automatizace, dokud se neprokáže opak. To není trest za minulé selhání. Je to ochrana před tím, aby tým omylem obnovil maximum oprávnění kvůli minimální potřebě.
+
+Praktické zúžení:
+
+| Původní rozsah | Restartovací otázka | Lepší nový rozsah |
+| --- | --- | --- |
+| Denní report všem v týmu | Kdo podle výstupu opravdu rozhoduje? | Úkol jen vlastníkovi, případně týdenní souhrn dopadu. |
+| Celý exportní seznam | Které položky vyžadují akci? | Jen agregovaný počet a odkazy na interní karty bez obsahu exportu. |
+| Široký token pro čtení workspace | Jaké minimum polí skript potřebuje? | Samostatný token s úzkým scope a expirací. |
+| Trvalé ukládání výstupů | Jak dlouho výstup řídí práci? | Krátká retence pilotních výstupů a automatické zavření. |
+| Automatická akce | Musí systém rozhodovat sám? | Návrh k potvrzení člověkem. |
+| Chatové upozornění při každé změně | Která změna je skutečný trigger? | Upozornění jen při překročení konkrétní podmínky. |
+
+Zúžení napiš jako součást zadání. Nestačí říct „budeme opatrní“. Opatrnost bez konkrétní hranice je jen hezká omluvenka pro budoucí chaos.
+
+### Nastav pilot jako dočasnou schopnost
+
+Restartovaný běh má být pilot. To znamená, že má vlastní datum konce, vlastníka a rozhodnutí po prvních bězích. Když pilot nemá konec, je to produkční změna převlečená za pokus.
+
+Pilotní nastavení:
+
+- běží jen pro jeden typ situace, jeden workspace segment nebo jeden proces,
+- používá nové omezené přístupy místo starého servisního účtu,
+- zapisuje jen výstupy nutné k rozhodnutí,
+- má ruční potvrzení nebo odmítnutí výstupu,
+- má viditelné stop pravidlo,
+- má naplánované zavírací review,
+- má připravený postup vypnutí.
+
+U malého týmu často stačí dva až čtyři týdny. Důležité není magické číslo. Důležité je, aby pilot stihl ukázat, jestli automatizace nahrazuje skutečnou opakovanou práci, nebo jen vyrábí další signál, který se bude slušně ignorovat.
+
+### Nevracej staré přístupy automaticky
+
+Největší riziko restartu bývá věta „použijeme původní token“. Starý token často vznikl pro širší svět: jiné obrazovky, jiné datové modely, jiné lidi a jiné provozní předpoklady. Restart je správný okamžik přístupy znovu schválit.
+
+Přístupová kontrola před restartem:
+
+- Jaký systém automatizace čte?
+- Jaká pole opravdu potřebuje?
+- Musí číst obsah, nebo stačí metadata a stav?
+- Potřebuje zapisovat, nebo jen vytvořit návrh?
+- Je přístup omezený na správný tenant, workspace nebo projekt?
+- Má token vlastníka a datum další revize?
+- Je jasné, jak se token vypne při konci pilotu?
+- Nezůstává někde starý webhook, plánovač nebo tajemství?
+
+Pokud odpověď na některou otázku zní „nevíme“, restart se ještě nespouští. Nejdřív se opraví přístupový návrh. Automatizace bez jasného přístupu není produktivita, ale vzdálený dotaz do budoucího incidentu.
+
+### Vrať výstup do místa práce
+
+Starý report v chatu je lákavý, protože ho všichni vidí. To ale neznamená, že se podle něj pracuje. Restartovaný výstup patří tam, kde vzniká rozhodnutí: do backlogu, review fronty, admin obrazovky, runbooku, support šablony nebo konkrétní produktové karty.
+
+Příklady lepšího výstupu:
+
+| Potřeba | Slabý restart | Lepší restart |
+| --- | --- | --- |
+| Upozornit na export bez retenčního data | Denní chatový seznam všech exportů. | Úkol pro vlastníka exportu jen při chybějící retenci. |
+| Hlídat staré veřejné sliby v dokumentaci | Automatický ping do obecného kanálu. | Review karta u konkrétní stránky s odkazem na zdroj pravdy. |
+| Zachytit opakovanou výjimku z pravidla | Měsíční report výjimek všem. | Návrh na pravidlové review, když výjimka překročí domluvený práh. |
+| Udržet ruční proces po vypnutí | Obnovený dashboard bez vlastníka. | Připomínka vlastníkovi před plánovaným review. |
+
+Výstup má vést k práci, ne k pocitu dohledu. Pokud nikdo neví, co po upozornění udělat, automatizace ještě nemá hotový návrh.
+
+### Příklad: Menší návrat retenční kontroly exportů
+
+Situace: Týdenní retenční report exportů byl vypnutý, protože posílal široký seznam do chatu a nikdo podle něj tři měsíce nerozhodoval. Po dvou měsících ruční náhrady se ukázalo, že vlastníci dvakrát pozdě doplnili retenční datum u exportní karty. Re-entry gate dala verdikt „otevřít restart“.
+
+Restartovací karta:
+
+| Pole | Zápis |
+| --- | --- |
+| Důkaz z ručního období | Dva případy opožděného doplnění retenčního data; obě opravy trvaly déle než týden. |
+| Původní automatizace | Týdenní chatový report všech exportních karet bez jasného vlastníka reakce. |
+| Nový cíl | Vlastník exportu má doplnit retenční datum dřív, než export začne žít vlastním životem. |
+| Nejmenší automatizovaný krok | Jednou týdně vytvořit úkol jen u exportních karet bez retenčního data starších než tři pracovní dny. |
+| Co se nevrací | Chatový seznam, široký export detailů, historický dashboard, původní servisní účet. |
+| Datová hranice | Číst jen ID karty, vlastníka, stav a retenční pole; nelogovat obsah exportu. |
+| Lidské rozhodnutí | Vlastník doplní retenci, zavře kartu jako neplatnou, nebo označí výjimku s koncem. |
+| Pilotní okno | Čtyři týdny nebo čtyři běhy. |
+| Stop pravidlo | Vypnout, pokud nevznikne žádný užitečný úkol, pokud polovina úkolů bude falešná, nebo pokud ruční review stačí po úpravě šablony. |
+
+Rozdíl proti starému stavu je zásadní: automatizace neříká všem všechno. Připraví malý úkol konkrétnímu vlastníkovi a nečte obsah exportu. Pokud pilot ukáže, že úkoly pomáhají, teprve potom se rozhoduje o běžném režimu.
+
+### Checklist: Znovuspuštění automatizace po ruční náhradě
+
+- [ ] Existuje re-entry karta s verdiktem otevřít restart.
+- [ ] Restart má vlastní novou kartu, ne jen odkaz na starý skript.
+- [ ] Je popsaný důkaz z ručního období a dnešní rozhodnutí, které automatizace podpoří.
+- [ ] Je jasně napsané, co se ze staré automatizace nevrací.
+- [ ] Nový rozsah je menší nebo stejně úzký jako ruční potřeba.
+- [ ] Přístupy, tokeny, webhooky a plánovače jsou schválené znovu, ne obnovené setrvačností.
+- [ ] Automatizace čte jen nutná pole a neloguje obsah, který nepotřebuje pro rozhodnutí.
+- [ ] Výstup jde do místa práce s vlastníkem, ne do obecného šumu.
+- [ ] Pilot má časové okno, vlastníka, stop pravidlo a připravené vypnutí.
+- [ ] Po pilotu musí následovat samostatné review: ponechat, zúžit, vrátit ručně, nebo vypnout.
+
+### Mini úkol
+
+Vyber jednu automatizaci, u které re-entry gate dovolila otevřít restart. Napiš restartovací kartu v devíti polích: důkaz, původní automatizace, nový cíl, nejmenší krok, co se nevrací, datová hranice, lidské rozhodnutí, pilotní okno a stop pravidlo. Potom škrtněte jednu část starého rozsahu, kterou by bylo pohodlné vrátit, ale dnešní důkaz ji nepotřebuje.
+
 ## Zdroje
 
 - IETF RFC 9110: HTTP Semantics - význam HTTP přesměrování a stavů včetně `410 Gone` pro zdroje, které už nejsou dostupné: https://www.rfc-editor.org/rfc/rfc9110.html
@@ -62003,6 +62137,8 @@ Vezmi jednu vypnutou automatizaci, kterou by někdo rád vrátil. Napiš re-entr
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-28: Doplněna příloha o znovuspuštění automatizace po ruční náhradě bez návratu starého rozsahu: restartovací karta navazující na re-entry gate, zúžení původního rozsahu, pilotní režim, opětovná kontrola přístupů a tokenů, přesun výstupu do místa práce, příklad menší retenční kontroly exportů, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-28: Doplněna příloha o re-entry gate pro vypnutou automatizaci bez panického návratu: rozlišení nového signálu od nostalgie po starém reportu, krátká re-entry karta, pravidlo nebrat starý kód jako produktové zadání, čtyři verdikty před restartem, příklad odmítnutí návratu starého retenčního reportu do chatu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro posouzení žádosti na návrat vypnuté automatizace. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
