@@ -141,6 +141,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Vyhodnotit první změnu po převzetí schopnosti | „vyhodnocení první změny“, „změnový review“ nebo „první změna hotovo“ | krátké review dopadu, datové stopy, přístupů, dokumentace a dalšího kroku po první změně |
 | Převést první úspěšnou změnu do běžné rutiny | „běžná rutina po první změně“, „standardní režim“ nebo „z prvního úspěchu rutina“ | rutina se spouštěčem, vlastníkem, hranicí dat, přístupovou hranicí, revizí a stop pravidlem |
 | Zjednodušit nebo ukončit rutinu po několika cyklech | „retence rutiny“, „rutina po třech cyklech“ nebo „procesní sediment“ | rozhodnutí ponechat, zúžit, sloučit, automatizovat opatrně nebo zrušit opakovanou práci |
+| Vybrat správnou fázi práce s automatizací | „životní cyklus automatizace“, „mapa automatizace“ nebo „kde začít s automatizací“ | rozhodnutí, kterou automatizační kartu otevřít podle aktuálního stavu, rizika a datové hranice |
 | Automatizovat rutinu bez skrytého dozoru | „automatizace rutiny“, „automatizační karta“ nebo „vypínač automatizace“ | malý automatizační návrh s účelem, vstupy, výstupem, vlastníkem, logy, ručním rozhodnutím a datem revize |
 | Vyhodnotit automatizaci po prvních bězích | „review automatizace“, „automatizace po spuštění“ nebo „autopilot“ | rozhodnutí ponechat, zúžit, přepsat, vrátit do ruční rutiny nebo vypnout automatizaci podle nálezů, šumu a datové stopy |
 | Vypnout automatizaci bez zapomenutého běhu | „vypnutí automatizace“, „ukončený autopilot“ nebo „automatizace končí“ | vypínací karta s posledním během, revokací tokenů, úklidem výstupů, náhradním postupem a kontrolou veřejných slibů |
@@ -61999,6 +62000,121 @@ Tahle karta je schválně malá. Pokud potřebuje tři stránky, neřešíš roz
 
 Vyber jednu automatizaci, u které re-entry gate dovolila otevřít restart. Napiš restartovací kartu v devíti polích: důkaz, původní automatizace, nový cíl, nejmenší krok, co se nevrací, datová hranice, lidské rozhodnutí, pilotní okno a stop pravidlo. Potom škrtněte jednu část starého rozsahu, kterou by bylo pohodlné vrátit, ale dnešní důkaz ji nepotřebuje.
 
+## Příloha: Mapa životního cyklu automatizace bez bloudění mezi přílohami
+
+Automatizace je v e-booku schválně rozebraná do malých pracovních karet. Jedna karta řeší první návrh, druhá první běhy, další vypnutí, ruční náhradu, restart, pilot, drift, změnu vlastníka, změnu vstupu, změnu výstupu, frekvenci, pravomoc a výjimky. To je užitečné, když víš, kde jsi. Když nevíš, začneš listovat, dělat si vlastní zkratky a za chvíli máš místo automatizační hygieny procesní bludiště.
+
+Tahle příloha je mapa. Neříká „přečti všechno“. Říká: najdi aktuální stav automatizace, otevři jednu nejbližší kartu a uzavři jedno rozhodnutí. Privacy-first provoz nestojí na tom, že tým umí citovat každou přílohu. Stojí na tom, že v pravý čas nepřidá další data, oprávnění nebo autopilota jen proto, že je to technicky snadné.
+
+> Codyho komentář: Automatizace má životní cyklus stejně jako produktová funkce. Rozdíl je v tom, že funkci uživatelé vidí a stěžují si. Automatizace se umí tvářit užitečně dlouho po tom, co přestala pomáhat. To je půvabné asi jako tichý alarm bez adresáta.
+
+### Začni otázkou, v jakém stavu automatizace je
+
+Nejdřív nepřemýšlej o nástroji. Neptej se, jestli to má být cron, GitHub Action, interní skript, AI agent, webhook nebo ruční checklist. Nejdřív urč stav práce.
+
+Rychlá orientace:
+
+| Stav | Typická věta v týmu | Otevři nejdřív |
+| --- | --- | --- |
+| Rutina se opakuje ručně | „Děláme to každý týden stejně.“ | Automatizovat rutinu bez skrytého dozoru |
+| Automatizace právě vznikla | „První běhy vypadají zeleně.“ | Vyhodnotit automatizaci po prvních bězích |
+| Automatizace obtěžuje nebo nikdo nereaguje | „Posílá to výstupy, ale nic se nemění.“ | Vypnout automatizaci bez zapomenutého běhu |
+| Automatizace je vypnutá a chybí | „Možná bychom to měli vrátit.“ | Re-entry gate pro vypnutou automatizaci |
+| Ruční náhrada ukázala nový důkaz | „Ručně to jde, ale opakovaně nám něco uniká.“ | Znovuspuštění automatizace po ruční náhradě |
+| Restart proběhl v pilotu | „Pilot běží, co teď?“ | Kontrola po restartu automatizace |
+| Pilot dopadl dobře | „Necháme to běžet.“ | Standardní provoz automatizace po pilotu |
+| Automatizace běží delší dobu | „Pořád to asi funguje.“ | Provozní drift automatizace |
+| Automatizace má skončit později | „Ještě chvíli ji potřebujeme kvůli přechodu.“ | Odložené vypnutí automatizace |
+| Změnil se vlastník, vstup, výstup, frekvence nebo pravomoc | „Jen malá změna.“ | Příslušná změnová karta, ne tiché ladění |
+
+Pokud se v tabulce poznáš ve více řádcích, vyber ten s největším datovým rizikem. Změna oprávnění je důležitější než hezčí report. Změna pravomoci je důležitější než frekvence. Restart vypnuté automatizace je důležitější než nový nápad na rozšíření. Pohodlí počká. Data ne.
+
+### Rozliš čtyři druhy rozhodnutí
+
+Většina zmatku kolem automatizací vzniká tím, že tým míchá čtyři různé otázky do jedné debaty:
+
+| Otázka | Co rozhoduje | Typický výstup |
+| --- | --- | --- |
+| Máme práci automatizovat? | jestli rutina opravdu existuje a má jasné rozhodnutí | automatizační karta nebo rozhodnutí neautomatizovat |
+| Má automatizace dál běžet? | jestli výstup pořád vede k práci s přijatelnou stopou | ponechat, zúžit, vrátit ručně nebo vypnout |
+| Smí se automatizace změnit? | jestli nový vstup, výstup, frekvence nebo pravomoc mění riziko | změnová karta a pilot |
+| Co jsme se z automatizace naučili? | jestli výsledek patří do produktu, dokumentace nebo pravidla | učící karta nebo produktová oprava |
+
+Když někdo řekne „automatizace nefunguje“, doptej se, kterou otázku tím myslí. Možná nefunguje technicky. Možná funguje, ale nikdo podle ní nerozhoduje. Možná odhalila produktový problém. Možná má jen špatný výstup. Každý případ vede jinam.
+
+Praktické pravidlo: jedna schůzka nebo review má uzavřít jen jeden druh rozhodnutí. Pokud během kontroly driftu objevíš, že je potřeba změnit pravomoc automatizace, nezměň ji bokem. Zapiš drift verdikt a otevři samostatnou kartu pravomoci.
+
+### Použij datovou brzdu před technickou chutí
+
+Automatizace často začíná nevinně: přečíst jeden štítek, poslat jedno upozornění, připravit jeden úkol. Potom přijde první „jen“:
+
+- jen přidáme další pole,
+- jen připojíme support data,
+- jen dáme skriptu širší token,
+- jen uložíme debug výstup,
+- jen pošleme report širšímu týmu,
+- jen to necháme běžet častěji.
+
+Každé „jen“ si zaslouží malou brzdu:
+
+| Návrh | Brzdicí otázka |
+| --- | --- |
+| Nový vstup | Jaké rozhodnutí bez něj nejde udělat? |
+| Širší oprávnění | Proč nestačí metadata, stav nebo odkaz na zdroj pravdy? |
+| Delší logování | Kdy přesně log přestane řídit práci? |
+| Častější běh | Co se stane horšího, když počkáme do dalšího plánovaného okna? |
+| Automatická akce | Proč už nestačí návrh člověku k potvrzení? |
+| Širší publikum výstupu | Kdo podle výstupu opravdu něco zavírá? |
+
+Když neumíš odpovědět jednou větou, návrh ještě není připravený. Neznamená to automaticky „ne“. Znamená to „nejdřív dopiš účel a hranici“. Ano, je to méně vzrušující než rovnou upravit skript. Taky je to levnější než vysvětlovat, proč interní pomocník najednou čte půlku firmy.
+
+### Udělej jednu kartu místo nové vrstvy procesu
+
+Mapa životního cyklu nemá z každé automatizace udělat malý úřad. U malé automatizace stačí jedna karta, pokud obsahuje stav, rozhodnutí a další revizi. Důležité je nepřeskakovat hranice.
+
+Minimální univerzální karta:
+
+| Pole | Zápis |
+| --- | --- |
+| Stav | návrh / pilot / provoz / drift / změna / vypnutí / ruční náhrada / restart |
+| Důvod otevření | Co se stalo nebo co se opakuje. |
+| Rozhodnutí | Co přesně se teď dělá. |
+| Datová hranice | Co se smí číst, ukládat, posílat a jak dlouho. |
+| Vlastník | Kdo rozhoduje podle výstupu. |
+| Další kontrola | Datum, počet běhů nebo konkrétní změna reality. |
+| Stop pravidlo | Kdy se práce zúží, vrátí ručně nebo vypne. |
+
+Tahle karta se dá použít jako předstupeň ke konkrétní příloze. Když je stav „restart“, doplníš restartovací pole. Když je stav „drift“, doplníš rozdíly proti provozní kartě. Když je stav „vypnutí“, doplníš poslední běh, tokeny a úklid výstupů.
+
+### Příklad: Jeden skript, tři různé stavy
+
+Tým má skript, který hlídá exportní karty bez retenčního data.
+
+První měsíc: skript vznikl jako opatrný pilot. Čte jen ID karty, vlastníka, stav a retenční pole. Vytváří úkol vlastníkovi, ne chatový report všem. Správná karta je „review automatizace po prvních bězích“.
+
+Třetí měsíc: skript běží dobře, ale produkt přidal nový typ exportu. Tým neví, jestli ho má skript hlídat. Správná karta není obecné „vylepšíme skript“. Je to změna vstupu nebo revize ADR podle dopadu nového typu exportu.
+
+Šestý měsíc: výstupy už skoro nevznikají, protože produkt začal vyžadovat retenční datum přímo při vytvoření exportu. Správná karta není přidat další kontrolu. Správná karta je stop pravidlo, případně odložené vypnutí a kontrola po sunsetu.
+
+Stejný skript. Tři různé stavy. Tři různé správné otázky. Když to tým nerozliší, bude buď automatizovat věc, kterou produkt už vyřešil, nebo vypne užitečnou pojistku jen proto, že se změnil kontext.
+
+### Checklist: Mapa životního cyklu automatizace
+
+- [ ] Umíme pojmenovat aktuální stav automatizace jedním slovem: návrh, pilot, provoz, drift, změna, vypnutí, ruční náhrada nebo restart.
+- [ ] Otevřeli jsme jen jednu nejbližší kartu, ne deset podobných příloh.
+- [ ] Rozlišili jsme, zda řešíme běh, hodnotu, změnu, vypnutí nebo poučení.
+- [ ] Datová hranice je zapsaná dřív než technický návrh rozšíření.
+- [ ] Každé „jen přidáme“ má účel, vlastníka, retenci a stop pravidlo.
+- [ ] Výstup automatizace vede ke konkrétní práci nebo rozhodnutí.
+- [ ] Změna vstupu, výstupu, frekvence nebo pravomoci se nedělá bokem.
+- [ ] Pokud automatizace zůstává, víme kdy se znovu otevře.
+- [ ] Pokud automatizace končí, víme co se uklidí.
+- [ ] Pokud nevíme, kde jsme, začínáme univerzální kartou a teprve potom volíme konkrétní přílohu.
+
+### Mini úkol
+
+Vyber jednu automatizaci z vlastního provozu nebo backlogu. Neřeš kód. Napiš jen její aktuální stav, důvod otevření, datovou hranici a další kontrolu. Potom podle tabulky vyber jednu nejbližší přílohu e-booku. Pokud vybereš víc než jednu, vrať se o krok zpět a napiš, které rozhodnutí je teď nejdůležitější. Automatizace se dobře řídí po malých rozhodnutích. Velké mapy jsou užitečné jen tehdy, když tě dovedou k prvnímu kroku.
+
 ## Zdroje
 
 - IETF RFC 9110: HTTP Semantics - význam HTTP přesměrování a stavů včetně `410 Gone` pro zdroje, které už nejsou dostupné: https://www.rfc-editor.org/rfc/rfc9110.html
@@ -62192,6 +62308,8 @@ Vyber jednu automatizaci, u které re-entry gate dovolila otevřít restart. Nap
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-28: Doplněna příloha o mapě životního cyklu automatizace bez bloudění mezi přílohami: rychlá orientace podle stavu návrh/pilot/provoz/drift/změna/vypnutí/ruční náhrada/restart, rozlišení čtyř druhů rozhodnutí, datová brzda před technickým rozšiřováním, univerzální karta automatizace, příklad jednoho skriptu ve třech stavech, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro výběr správné fáze práce s automatizací. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-28: Doplněn rozcestník po pilotu restartované automatizace v příloze o znovuspuštění po ruční náhradě: verdikty ponechat, zúžit, přepsat, vrátit ručně nebo vypnout jsou navázané na další konkrétní karty, vznikla krátká karta rozcestníku a checklist nově hlídá, že po pilotu nevznikne mezistav bez vlastníka. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
