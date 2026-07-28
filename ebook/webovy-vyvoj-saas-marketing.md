@@ -151,6 +151,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Uzavřít zúženou opravu automatizace do běžného provozu | „zúžená oprava hotovo“, „oprava do rutiny“ nebo „standardní režim opravy“ | zavírací karta, která přepíše runbook, uklidí pilotní stopy, nastaví vlastníka a ukončí mimořádné sledování opravy |
 | Zkontrolovat uzavřenou opravu automatizace po běžném cyklu | „kontrola uzavřené opravy“, „oprava po běžném cyklu“ nebo „post-close review automatizace“ | lehké ověření, že oprava dál vede k práci, nevrací pilotní stopu, neobchází zúžení a nepotřebuje další proces |
 | Převést post-close nález zpět do mapy automatizací | „post-close nález“, „nález do mapy“ nebo „oprava po běžném cyklu našla problém“ | rozhodnutí, jestli nález patří do mapy, runbooku, nové opravné karty, nebo se má zavřít bez další práce |
+| Otevřít opravnou kartu z post-close nálezu bez recyklace pilotu | „opravná karta z nálezu“, „post-close karta“ nebo „nová oprava po review“ | nová karta s jedním důvodem, zúženým rozsahem, datovou hranicí, vlastníkem, kontrolním oknem a stop pravidlem |
 | Automatizovat rutinu bez skrytého dozoru | „automatizace rutiny“, „automatizační karta“ nebo „vypínač automatizace“ | malý automatizační návrh s účelem, vstupy, výstupem, vlastníkem, logy, ručním rozhodnutím a datem revize |
 | Vyhodnotit automatizaci po prvních bězích | „review automatizace“, „automatizace po spuštění“ nebo „autopilot“ | rozhodnutí ponechat, zúžit, přepsat, vrátit do ruční rutiny nebo vypnout automatizaci podle nálezů, šumu a datové stopy |
 | Vypnout automatizaci bez zapomenutého běhu | „vypnutí automatizace“, „ukončený autopilot“ nebo „automatizace končí“ | vypínací karta s posledním během, revokací tokenů, úklidem výstupů, náhradním postupem a kontrolou veřejných slibů |
@@ -63197,6 +63198,132 @@ Tady je správný výsledek skoro zklamavě malý: jeden řádek v mapě, jedna 
 
 Vezmi jedno post-close review z posledního měsíce. Najdi jeden nález a přepiš ho na rozhodovací větu ve tvaru: „Měníme ___ v ___, protože ___.“ Potom vyber jeden ze čtyř cílů: mapa, runbook, opravná karta, nebo zavřít bez práce. Pokud vznikne opravná karta, napiš hranici dat a stop pravidlo dřív než technické řešení. Pokud karta nevznikne, ukliď aspoň jednu stopu, která by mohla starý problém znovu oživit.
 
+## Příloha: Opravná karta z post-close nálezu bez recyklace pilotu
+
+Když post-close review najde skutečný problém, svádí to k rychlému návratu do pilotního režimu. Tým si řekne: „Už jsme to jednou řešili, tak prostě znovu otevřeme starý pilot, přidáme pár polí, pozveme víc lidí do výstupu a uvidíme.“ To zní prakticky, ale často je to jen pohodlný způsob, jak zrušit předchozí zúžení a vrátit do provozu datový smog, který už jednou měl skončit.
+
+Opravná karta z post-close nálezu má jiný účel. Nevrací tým zpátky do laboratoře. Vezme jeden konkrétní nález z běžného provozu, oddělí ho od staré historie a navrhne nejmenší opravu, která chrání původní hodnotu automatizace i nově nastavenou datovou hranici.
+
+> Codyho komentář: Post-close nález není časostroj. To, že se po uzavření objevila chyba, neznamená, že všechna stará pilotní oprávnění, logy a reporty měla pravdu. Znamená to jen, že realita poslala jednu novou zprávu. Odpověz na ni, ne na celý archiv nervozity.
+
+### Otevři kartu jen při změně chování
+
+Nová opravná karta má vzniknout až ve chvíli, kdy nestačí upravit mapu, runbook nebo jednu větu v dokumentaci. Pokud automatizace funguje a problém je jen v popisku, publiku nebo starém odkazu, oprav popisek, publikum nebo odkaz. Karta je potřeba tehdy, když se musí změnit samotné chování práce.
+
+Typické spouštěče:
+
+| Spouštěč | Proč nestačí drobná oprava |
+| --- | --- |
+| Automatizace používá nové vstupní pole | mění se datová hranice a možná i právní nebo bezpečnostní dopad |
+| Výstup vede k chybnému rozhodnutí | problém je v pravidle, ne jen v textu okolo |
+| Lidé výstup opakovaně obcházejí | buď je výstup nedůvěryhodný, nebo neodpovídá místu práce |
+| Ruční náhrada po uzavření vytváří exporty bokem | oprava automatizace může snížit datovou stopu proti ručnímu chaosu |
+| Stop pravidlo nejde použít | karta musí opravit rozhodovací hranici, ne jen prodloužit kontrolu |
+
+Praktické pravidlo: karta má začínat větou „měníme chování ___“, ne větou „podíváme se na ___“. Dívání je aktivita. Opravná karta má vést k rozhodnutí.
+
+### Odděl nový nález od starého pilotu
+
+Starý pilot je zdroj kontextu, ne výchozí šablona. Před otevřením karty napiš, co z pilotu je pořád pravda a co se už nesmí vrátit.
+
+Krátký oddělovací zápis:
+
+| Pole | Otázka |
+| --- | --- |
+| Nový nález | Co se stalo v běžném provozu po uzavření? |
+| Původní slib | Jakou hodnotu měla oprava chránit? |
+| Zrušené části pilotu | Které logy, příjemci, exporty, ruční kontroly nebo výjimky už nemají být součástí práce? |
+| Nová hranice | Co se může změnit tentokrát? |
+| Zakázaný návrat | Co se výslovně nevrací jen proto, že to bylo pohodlné při pilotu? |
+
+Tento zápis je užitečný hlavně u automatizací, které byly dřív přeměřené. Pokud si tým neřekne, co se nesmí vrátit, staré pomocné výstupy se potichu objeví znovu. Tentokrát navíc s pocitem, že jsou ospravedlněné „reálným nálezem“.
+
+### Napiš kartu s jedním důvodem
+
+Dobrá karta není sběrné místo pro všechno, co lidi během kontroly napadlo. Má jeden důvod, jednoho vlastníka a jedno kontrolní okno.
+
+Šablona karty:
+
+| Pole | Zápis |
+| --- | --- |
+| Nález | Jedna pozorovaná věc z post-close review |
+| Rozhodnutí | Jaké chování automatizace se má změnit |
+| Důvod | Proč to nejde zavřít mapou, runbookem ani malým úklidem |
+| Rozsah | Která část pravidla, vstupu, výstupu, frekvence nebo pravomoci se mění |
+| Mimo rozsah | Co se tentokrát výslovně neotevírá |
+| Datová hranice | Jaká data se smí použít, komu výstup smí odejít a jak dlouho stopa žije |
+| Vlastník | Kdo rozhodne o uzavření, zúžení nebo návratu |
+| Kontrolní okno | Jeden až tři běžné cykly podle rizika |
+| Stop pravidlo | Kdy kartu zavřít, zúžit, vrátit nebo vypnout |
+
+Pokud karta potřebuje víc než jeden důvod, rozděl ji. Smíchání nespolehlivého pravidla, širšího publika a nových vstupních dat do jedné opravy vypadá efektivně, ale při kontrole nebude jasné, co pomohlo a co jen zvětšilo dohled.
+
+### Chraň datovou hranici dřív než technické řešení
+
+Technické řešení je až druhá část. Nejdřív napiš, jaká data oprava nesmí rozšířit. U privacy-first provozu je to důležitější než rychlost implementace, protože nejjednodušší oprava bývá často „pošleme si víc informací“. To je přesně věta, po které má někdo v týmu zvednout obočí.
+
+Před návrhem řešení odpověz:
+
+- Potřebujeme nové vstupní pole, nebo stačí přesnější pravidlo nad stávajícími daty?
+- Musí výstup vidět víc lidí, nebo stačí lepší místo doručení pro původního vlastníka?
+- Potřebujeme delší retenci logů, nebo jen krátké kontrolní okno?
+- Musí automatizace udělat akci sama, nebo má dál jen navrhovat rozhodnutí?
+- Vznikne dočasný export, screenshot nebo ruční seznam, který musíme po kontrole smazat?
+
+Odpovědi vlož přímo do karty. Když zůstanou jen v chatu, oprava se při realizaci snadno rozteče. Chat je dobrý na domluvu, horší jako hranice dat.
+
+### Kontrolní okno nastav podle rizika
+
+Opravná karta po post-close nálezu nemá běžet neurčitě. Čím citlivější jsou data nebo silnější pravomoc automatizace, tím kratší má být kontrolní okno a tím jasnější musí být ruční dohled.
+
+Jednoduché vodítko:
+
+| Riziko opravy | Kontrolní okno | Kontrola |
+| --- | --- | --- |
+| Text nebo směrování výstupu | jeden běžný cyklus | ověřit, že výstup dorazil na správné místo a staré místo mlčí |
+| Pravidlo nad stejnými daty | jeden až dva cykly | porovnat několik výstupů s ručním rozhodnutím |
+| Nové vstupní pole | jeden krátký cyklus | ověřit účel pole, logy, retenci a možnost úklidu |
+| Silnější pravomoc automatizace | pilot s ručním potvrzením | kontrola každého zásahu, rollback a stop pravidlo předem |
+| Širší publikum výstupu | raději znovu zpochybnit potřebu | doložit, proč nestačí vlastník nebo agregovaný výstup |
+
+Nejhorší kontrolní okno je „uvidíme za měsíc“. Když nevíš, co za měsíc vyhodnotíš, nemáš kontrolní okno. Máš odklad.
+
+### Příklad: Post-close nález otevírá novou opravu
+
+Zúžený retenční report po prvním měsíci fungoval, ale při post-close review se ukázalo, že jeden typ exportu se do reportu nedostává. Není to chyba publika ani runbooku. Automatizace používá starý seznam exportních zdrojů, takže vlastník nemá úplný přehled o dočasných kopiích.
+
+Opravná karta:
+
+| Pole | Zápis |
+| --- | --- |
+| Nález | Report neobsahuje exporty vytvořené přes nový zákaznický portál. |
+| Rozhodnutí | Rozšířit vstupní seznam reportu o metadata exportů z portálu, ne o obsah exportů. |
+| Důvod | Bez této změny report nevede k úplnému úklidu dočasných kopií. |
+| Rozsah | Přidat zdroj metadat: ID exportu, typ, datum vytvoření, datum expirace, vlastník. |
+| Mimo rozsah | Nečíst obsah exportů, neposílat report do support kanálu, neobnovovat denní frekvenci pilotu. |
+| Datová hranice | Jen metadata nutná k úklidu; výstup vidí vlastník retenční mapy; logy opravy se mažou po kontrolním okně. |
+| Kontrolní okno | Dva týdenní běhy. |
+| Stop pravidlo | Pokud report po dvou bězích najde exporty a vlastník podle něj zavře práci bez ručního seznamu, karta se uzavře do běžné údržby. Pokud vznikne potřeba obsahu exportů, oprava se zastaví a otevře se nové rozhodnutí. |
+
+Tohle je skutečná nová karta, protože se mění vstup automatizace. Zároveň je záměrně úzká: přidává metadata, ne obsah. Vrací schopnost uklízet exporty, ne starý pilotní dohled.
+
+### Checklist: Opravná karta z post-close nálezu
+
+- [ ] Kartu otevírám jen proto, že se má změnit chování automatizace, ne jen text okolo.
+- [ ] Nový nález je oddělený od starého pilotu.
+- [ ] Vím, které části pilotu se výslovně nesmí vrátit.
+- [ ] Karta má jeden důvod, jednoho vlastníka a jedno kontrolní okno.
+- [ ] Rozsah popisuje konkrétní vrstvu: vstup, pravidlo, výstup, frekvenci, pravomoc nebo retenci.
+- [ ] Mimo rozsah je napsané stejně jasně jako rozsah.
+- [ ] Datová hranice je uvedená před technickým řešením.
+- [ ] Stop pravidlo říká, kdy opravu zavřít, zúžit, vrátit nebo zastavit.
+- [ ] Dočasné logy, exporty nebo ruční seznamy mají datum úklidu.
+- [ ] Výsledek karty se po kontrole vrátí do mapy automatizací, runbooku nebo zavíracího rozhodnutí.
+
+### Mini úkol
+
+Vezmi jeden post-close nález, který by mohl svádět k návratu starého pilotu. Napiš opravnou kartu v devíti polích: nález, rozhodnutí, důvod, rozsah, mimo rozsah, datová hranice, vlastník, kontrolní okno, stop pravidlo. Potom škrtni všechno, co je jen starý komfort z pilotu. Pokud po škrtnutí nezůstane změna chování automatizace, kartu neotevírej. Oprav mapu nebo runbook a zavři nález bez další práce.
+
 ## Zdroje
 
 - IETF RFC 9110: HTTP Semantics - význam HTTP přesměrování a stavů včetně `410 Gone` pro zdroje, které už nejsou dostupné: https://www.rfc-editor.org/rfc/rfc9110.html
@@ -63390,6 +63517,8 @@ Vezmi jedno post-close review z posledního měsíce. Najdi jeden nález a přep
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-28: Doplněna příloha o otevření opravné karty z post-close nálezu bez recyklace pilotu: pravidla, kdy karta vzniká až při změně chování automatizace, oddělení nového nálezu od starého pilotu, šablona karty s jedním důvodem, ochrana datové hranice před technickým řešením, kontrolní okno podle rizika, příklad doplnění metadat exportů do retenčního reportu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro opravnou kartu z post-close nálezu. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-28: Doplněna příloha o převodu post-close nálezu zpět do mapy automatizací bez nové fronty práce: rozlišení cílů nálezu na mapu, runbook, opravnou kartu nebo zavření bez práce, přepis pozorování na rozhodovací větu, omezená úprava mapy jen v dotčených polích, pravidla pro novou opravnou kartu, příklad retenčního reportu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro převod post-close nálezu do mapy. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
