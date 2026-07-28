@@ -157,6 +157,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Zkontrolovat implementovanou opravu před mergem | „review implementované opravy“, „před merge“ nebo „oprava před sloučením“ | review karta, která porovná hotovou změnu s realizační kartou, datovou hranicí, testem, dokumentací a zavíracím plánem |
 | Uzavřít sloučenou opravu po mergi bez tichého doznívání | „po merge opravy“, „sloučená oprava“ nebo „oprava po sloučení“ | krátká po-merge karta s ověřením běhu, úklidem pilotních stop, aktualizací mapy a dalším kontrolním datem |
 | Zkontrolovat sloučenou opravu po prvním provozním cyklu | „kontrola po mergi“, „oprava v provozu“ nebo „první cyklus po opravě“ | lehký provozní review, které ověří dopad opravy, datovou hranici, šum, dokumentaci a rozhodne zavřít, zúžit, opravit nebo vrátit |
+| Zjednodušit sloučenou opravu po prvním cyklu | „zjednodušení po prvním cyklu“, „oprava funguje ale bobtná“ nebo „procesní nános po opravě“ | redukční karta, která ponechá hodnotu opravy, vypne dočasný dohled, uklidí datové stopy a převede změnu do běžného režimu |
 | Automatizovat rutinu bez skrytého dozoru | „automatizace rutiny“, „automatizační karta“ nebo „vypínač automatizace“ | malý automatizační návrh s účelem, vstupy, výstupem, vlastníkem, logy, ručním rozhodnutím a datem revize |
 | Vyhodnotit automatizaci po prvních bězích | „review automatizace“, „automatizace po spuštění“ nebo „autopilot“ | rozhodnutí ponechat, zúžit, přepsat, vrátit do ruční rutiny nebo vypnout automatizaci podle nálezů, šumu a datové stopy |
 | Vypnout automatizaci bez zapomenutého běhu | „vypnutí automatizace“, „ukončený autopilot“ nebo „automatizace končí“ | vypínací karta s posledním během, revokací tokenů, úklidem výstupů, náhradním postupem a kontrolou veřejných slibů |
@@ -63886,6 +63887,117 @@ Dobré je, že výsledek není „automatizace funguje“. Výsledek je konkrét
 
 Vyber jednu opravu, která už prošla mergem a má za sebou první běžný cyklus. Najdi její po-merge kartu nebo ji zpětně napiš ve zkrácené podobě. Potom vyplň provozní review kartu: oprava, cyklus, původní slib, pozorování, datová kontrola, šum, dokumentace a verdikt. Pokud zjistíš, že tým dál používá starý workaround, neber to jako drobnost. Buď opravu zavři až po úklidu workaroundu, nebo otevři jednu následnou kartu s jasným důvodem.
 
+## Příloha: Zjednodušení sloučené opravy po prvním cyklu bez procesního nánosu
+
+První provozní cyklus často ukáže příjemnou věc: oprava funguje. Jenže spolu s ní může v provozu zůstat i dočasná opora z pilotu, ruční kontrolní tabulka, debug výstup, nadbytečný alert, zvláštní přístup, stará šablona nebo měření, které mělo existovat jen pro ověření.
+
+Zjednodušení není další optimalizační projekt. Je to úklid po práci, která už prokázala smysl. Cílem je ponechat hodnotu opravy a odstranit všechno, co vzniklo kvůli nejistotě prvního nasazení. Když se tento krok přeskočí, dočasné pojistky se potichu změní na běžný provoz. Tým pak platí dvojí cenu: víc práce a víc dat, než opravdu potřebuje.
+
+> Codyho komentář: Dobrá oprava po prvním cyklu nemá vypadat jako stanoviště krizového štábu. Má vypadat nudně. Nudný provoz je kompliment, jen se hůř prodává na poradě.
+
+### Poznej, že je čas zjednodušovat
+
+Nezjednodušuj ve chvíli, kdy oprava pořád mění podobu, selhává v běžném cyklu nebo není jasné, jestli vůbec řeší původní nález. Nejdřív uzavři základní kontrolu. Zjednodušení patří až do momentu, kdy máš tři věci:
+
+- oprava prokazatelně vyřešila původní nejistotu nebo chybu,
+- datová hranice se během prvního cyklu nerozšířila,
+- tým ví, který dočasný prvek už nepotřebuje.
+
+Pokud chybí první bod, nejde o zjednodušení, ale o opravu opravy. Pokud chybí druhý bod, nejdřív řeš privacy riziko. Pokud chybí třetí bod, projdi pilotní stopy a najdi jednu, která má největší náklad.
+
+### Vyber jednu osu redukce
+
+Zjednodušení se snadno rozleze, protože každá oprava má kolem sebe několik drobných stop. Vyber jednu osu a dokonči ji. Další osu nech na později, pokud má pořád smysl.
+
+| Osa | Co typicky zjednodušit | Pozor na |
+| --- | --- | --- |
+| Vstupy | odebrat pole, soubory, ruční seznamy nebo dočasné exporty | neztratit informaci nutnou pro původní rozhodnutí |
+| Výstupy | zkrátit report, sloučit zprávy, vypnout kopii do chatu | nenechat vlastníka bez signálu, že oprava běží |
+| Přístupy | odebrat pilotní roli, externí účet nebo sdílený disk | neodebrat účet dřív, než je výsledek předaný |
+| Logy | snížit detail, zkrátit retenci, vypnout debug režim | nepřijít o minimální provozní stopu pro chybu |
+| Dokumentace | smazat starý workaround, sloučit šablony, opravit runbook | nenechat dvě protichůdné pravdy |
+| Rytmus | zrušit mimořádné kontroly, změnit denní kontrolu na měsíční trigger | nezakrýt riziko, které se projevuje jen zřídka |
+
+Dobrá redukce má větu: „Po prvním cyklu ponecháváme ___, ale rušíme ___.“ Když věta nejde napsat bez vysvětlování celého projektu, rozsah je moc široký.
+
+### Nech jeden minimální signál
+
+Zjednodušení neznamená oslepnout. Znamená přestat sbírat signály, které už nevedou k rozhodnutí. Po úklidu by měla zůstat jedna minimální kontrola, která odpovídá běžnému riziku opravy.
+
+Příklady:
+
+- místo denního screenshotu reportu stačí měsíční kontrola, zda report vůbec vznikl,
+- místo seznamu všech položek stačí počet položek a počet chybových stavů,
+- místo kopie výstupu v chatu stačí odkaz v místě práce,
+- místo debug payloadu stačí korelační ID a technický stav,
+- místo ručního schválení každého běhu stačí stop pravidlo pro odchylku.
+
+Privacy-first otázka zní: „Co nejmenšího musí zůstat, aby tým poznal problém včas?“ Pokud odpověď obsahuje osobní data, obsah zákaznické práce nebo trvalý export, vrať se o krok zpět a hledej chudší signál.
+
+### Napiš redukční kartu
+
+Redukční karta má být kratší než původní opravná karta. Neobhajuje celou historii. Jen říká, proč něco mizí a co zůstává jako běžný režim.
+
+| Pole | Co zapsat |
+| --- | --- |
+| Oprava | jaká sloučená oprava prošla prvním cyklem |
+| Důkaz fungování | jaký signál ukázal, že oprava plní účel |
+| Co rušíme | jeden dočasný prvek: kontrolu, export, log, přístup, alert, šablonu nebo ruční seznam |
+| Co zůstává | minimální běžný signál nebo revizní trigger |
+| Datový úklid | co se smaže, zkrátí, anonymizuje nebo přestane vznikat |
+| Vlastník | kdo ověří, že redukce opravdu proběhla |
+| Stop pravidlo | kdy se zjednodušení vrátí do review nebo nové opravné karty |
+
+Karta nesmí skončit větou „monitoring ponechán“. To je gumová formulace. Napiš přesně, jaký signál zůstává, kdo ho vidí, kde žije a kdy se znovu kontroluje.
+
+### Uklízej ve správném pořadí
+
+Praktické pořadí snižuje riziko, že smažeš jediný důkaz dřív, než máš běžný režim připravený.
+
+1. Potvrď minimální signál, který zůstane.
+2. Oprav dokumentaci, aby ukazovala nový běžný postup.
+3. Zruš dočasné výstupy a ruční kontroly.
+4. Odeber dočasné přístupy a sdílení.
+5. Smaž nebo zkrať pilotní exporty, debug logy a pracovní kopie.
+6. Zapiš zavírací větu do původní karty nebo pracovního logu.
+
+Tímhle pořadím nejdřív chráníš schopnost provozu a potom uklízíš datovou stopu. Obráceně to může dopadnout tak, že tým přijde o kontext a začne si pro jistotu vytvářet nové kopie. A nové kopie jsou skoro vždycky horší než jedna dobře popsaná pravda.
+
+### Příklad: Report funguje, ale po opravě zůstal dvojí dohled
+
+Tým opravil retenční report exportů. Po prvním týdenním cyklu se ukázalo, že report obsahuje správná metadata a vlastník už nepotřebuje ruční seznam. Jenže pilotní nastavení pořád posílá kopii reportu do interního chatu a současně ukládá CSV export na sdílený disk.
+
+Redukční karta:
+
+| Pole | Zápis |
+| --- | --- |
+| Oprava | metadata exportů v retenčním reportu |
+| Důkaz fungování | první týdenní běh pokryl očekávané exporty a ruční seznam se nepoužil |
+| Co rušíme | kopii reportu v chatu a CSV export na sdíleném disku |
+| Co zůstává | odkaz na report v interním provozním panelu a měsíční kontrola počtu chybových stavů |
+| Datový úklid | smazat pilotní CSV, vypnout generování souboru, zkrátit debug log na technický stav a korelační ID |
+| Vlastník | provozní vlastník reportu |
+| Stop pravidlo | pokud dva běhy po sobě selžou nebo vlastník obnoví ruční seznam, otevřít novou opravnou kartu |
+
+Výsledek není kosmetický. Z provozu zmizely dvě zbytečné kopie, tým má pořád minimální signál a stará ruční cesta se nevrací jako pohodlná berlička.
+
+### Checklist: Zjednodušení sloučené opravy po prvním cyklu
+
+- [ ] Oprava prošla prvním běžným cyklem a řeší původní nález.
+- [ ] Zjednodušení řeší jednu osu, ne celý okolní systém.
+- [ ] Vím, který dočasný prvek ruším a proč už není potřeba.
+- [ ] Po redukci zůstává jeden minimální signál pro běžný provoz.
+- [ ] Ruším dočasné exporty, debug logy, kopie v chatu nebo ruční seznamy, které už nevedou k rozhodnutí.
+- [ ] Odebral jsem dočasné přístupy nebo sdílení vzniklé kvůli pilotu.
+- [ ] Dokumentace a runbook neobsahují starý workaround jako druhou pravdu.
+- [ ] Datový úklid má vlastníka a konkrétní datum.
+- [ ] Stop pravidlo říká, kdy se problém znovu otevře.
+- [ ] Výsledek je zapsaný v původní kartě nebo pracovním logu.
+
+### Mini úkol
+
+Vezmi jednu sloučenou opravu, která podle prvního provozního cyklu funguje. Najdi jednu dočasnou věc, která kolem ní zůstala: kontrolní tabulku, chat kopii, export, debug log, nadbytečný alert, zvláštní přístup nebo starou šablonu. Vyplň redukční kartu a do konce týdne zruš právě tuto jednu stopu. Ponech jen minimální signál, který by reálně vedl k rozhodnutí.
+
 ## Zdroje
 
 - IETF RFC 9110: HTTP Semantics - význam HTTP přesměrování a stavů včetně `410 Gone` pro zdroje, které už nejsou dostupné: https://www.rfc-editor.org/rfc/rfc9110.html
@@ -64079,6 +64191,8 @@ Vyber jednu opravu, která už prošla mergem a má za sebou první běžný cyk
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-28: Doplněna příloha o zjednodušení sloučené opravy po prvním provozním cyklu bez procesního nánosu: rozlišení, kdy je čas redukovat místo dál opravovat, výběr jedné osy redukce, ponechání minimálního provozního signálu, redukční karta, pořadí úklidu, příklad retenčního reportu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro zjednodušení opravy po prvním cyklu. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-28: Doplněna příloha o kontrole sloučené opravy po prvním provozním cyklu bez nového dohledu: ověření slíbeného signálu z po-merge karty, pětivrstvá kontrola dopadu, dat, místa práce, šumu a dokumentace, provozní review karta, pět verdiktů, příklad exportního reportu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro kontrolu opravy v provozu po mergi. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
