@@ -150,6 +150,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Zúžit opravu automatizace po review | „zúžení opravy automatizace“, „oprava pomáhá ale moc sbírá“ nebo „repair narrowing“ | malá zúžovací karta, která ponechá užitečný výsledek opravy, ale omezí vstupy, výstupy, pravomoc, příjemce, retenci nebo frekvenci |
 | Uzavřít zúženou opravu automatizace do běžného provozu | „zúžená oprava hotovo“, „oprava do rutiny“ nebo „standardní režim opravy“ | zavírací karta, která přepíše runbook, uklidí pilotní stopy, nastaví vlastníka a ukončí mimořádné sledování opravy |
 | Zkontrolovat uzavřenou opravu automatizace po běžném cyklu | „kontrola uzavřené opravy“, „oprava po běžném cyklu“ nebo „post-close review automatizace“ | lehké ověření, že oprava dál vede k práci, nevrací pilotní stopu, neobchází zúžení a nepotřebuje další proces |
+| Převést post-close nález zpět do mapy automatizací | „post-close nález“, „nález do mapy“ nebo „oprava po běžném cyklu našla problém“ | rozhodnutí, jestli nález patří do mapy, runbooku, nové opravné karty, nebo se má zavřít bez další práce |
 | Automatizovat rutinu bez skrytého dozoru | „automatizace rutiny“, „automatizační karta“ nebo „vypínač automatizace“ | malý automatizační návrh s účelem, vstupy, výstupem, vlastníkem, logy, ručním rozhodnutím a datem revize |
 | Vyhodnotit automatizaci po prvních bězích | „review automatizace“, „automatizace po spuštění“ nebo „autopilot“ | rozhodnutí ponechat, zúžit, přepsat, vrátit do ruční rutiny nebo vypnout automatizaci podle nálezů, šumu a datové stopy |
 | Vypnout automatizaci bez zapomenutého běhu | „vypnutí automatizace“, „ukončený autopilot“ nebo „automatizace končí“ | vypínací karta s posledním během, revokací tokenů, úklidem výstupů, náhradním postupem a kontrolou veřejných slibů |
@@ -63087,6 +63088,115 @@ Tady není potřeba přepisovat automatizaci. Problém nebyl v pravidle ani v k�
 
 Vyber jednu automatizaci, která byla nedávno opravená, zúžená nebo uzavřená do běžného režimu. Najdi jeden přirozený běžný cyklus a napiš post-close review v šesti polích: kontrolovaný cyklus, výstup vedl k práci, návrat pilotu, datová stopa, verdikt, další trigger. Pokud najdeš ruční obcházení zúžení, nevracej všechno zpátky. Nejdřív rozhodni, jestli chybí nutné pole, důvěra, změnová karta, nebo jen odvaha smazat starý zvyk.
 
+## Příloha: Převod post-close nálezu zpět do mapy automatizací bez nové fronty práce
+
+Post-close review má jednu nebezpečnou vlastnost: když ho uděláš poctivě, skoro vždycky něco najde. Ne nutně velký problém. Někdy jen starý kanál, špatný popisek v runbooku, pole ve výstupu, které nikdo nepoužil, nebo příjemce, který už u dané práce nemá být. Slabý tým z toho vyrobí novou frontu úkolů. Dobrý tým z toho vyrobí jedno rozhodnutí.
+
+Převod nálezu zpět do mapy automatizací je malá úklidová smyčka. Spojí konkrétní pozorování z běžného cyklu s místem, kde se o automatizaci dlouhodobě rozhoduje. Cílem není otevřít další audit ani vytvořit poradní tabulku pro tabulku. Cílem je zabránit tomu, aby post-close kontrola skončila jako poznámka v chatu, kterou si nikdo nepamatuje, ale všichni ji za tři měsíce znovu objeví.
+
+> Codyho komentář: Nález bez místa dopadu je jen provozní konfeta. Chvíli je vidět, pak zapadne do koberce a za půl roku ji někdo vítězoslavně zvedne jako nový problém. Mapu automatizací máme právě proto, aby se stejné věci nemusely objevovat pořád dokola v jiných šatech.
+
+### Rozliš čtyři cíle nálezu
+
+Ne každý nález patří do backlogu. Některé nálezy jsou jen oprava popisu. Některé jsou důkaz, že rozhodnutí drží. Některé ukazují na změnu reality. A některé jsou jen šum po kontrole. Před zápisem si vyber cíl.
+
+| Cíl | Kdy ho použít | Výstup |
+| --- | --- | --- |
+| Aktualizovat mapu | změnil se stav, vlastník, datová hranice, frekvence, příjemce nebo trigger | jeden upravený řádek v mapě automatizací |
+| Opravit runbook | automatizace běží správně, ale návod nebo místo pravdy vede lidi špatně | malý textový patch v runbooku nebo dokumentaci |
+| Otevřít opravnou kartu | nález mění účel, vstup, výstup, pravomoc, retenci nebo důvěryhodnost automatizace | jedna karta s vlastníkem, limitem a kontrolním oknem |
+| Zavřít bez práce | nález neovlivňuje rozhodnutí, riziko ani datovou stopu | krátký záznam „bez akce“ a žádný nový úkol |
+
+Praktické pravidlo: pokud nález nevyžaduje změnu stavu v mapě, změnu návodu, změnu chování nebo vědomé zavření, ještě není dost konkrétní. Přepiš ho z věty „něco je divné“ na větu „měníme ___, protože ___“.
+
+### Přepiš nález na rozhodovací větu
+
+Post-close review často obsahuje pozorování. Mapa automatizací potřebuje rozhodnutí. Mezi nimi je malý překlad.
+
+Slabý zápis:
+
+| Pole | Zápis |
+| --- | --- |
+| Nález | Report byl přeposlaný do starého kanálu. |
+
+Použitelný zápis:
+
+| Pole | Zápis |
+| --- | --- |
+| Rozhodovací věta | Příjemcem retenčního reportu zůstává pouze vlastník retenční mapy; starý support kanál není místo práce a v runbooku bude výslovně zrušený. |
+| Proč teď | První běžný cyklus ukázal návrat pilotního publika. |
+| Dopad na data | Snižujeme počet kopií výstupu a lidí s přístupem k němu. |
+| Další kontrola | Jen při dalším přeposlání mimo vlastníka nebo změně retenční mapy. |
+
+Rozhodovací věta má být dost ostrá, aby podle ní někdo mohl opravit mapu bez dalšího meetingu. Pokud potřebuješ pět odstavců kontextu, pravděpodobně nejde o malý post-close nález, ale o novou změnovou kartu.
+
+### Uprav mapu jen v polích, která se opravdu změnila
+
+Mapa automatizací nemá být románová kronika. Při převodu nálezu uprav jen pole, která rozhodnutí mění. Historii nech v post-close review nebo v rozhodovacím logu, ne v každé buňce mapy.
+
+Typická pole k úpravě:
+
+| Pole mapy | Kdy ho měnit |
+| --- | --- |
+| Stav | automatizace se vrací do opravy, zužuje se, vypíná, nebo zůstává v běžném režimu po potvrzení |
+| Vlastník | post-close review ukázalo, že skutečná práce leží u jiného člověka nebo týmu |
+| Datová hranice | vrátilo se pole, export, příloha, širší publikum nebo delší retence |
+| Pravomoc | automatizace začala dělat akci, která měla zůstat jen návrhem, nebo naopak tým potřebuje silnější zásah |
+| Frekvence | běžný cyklus ukázal, že rytmus je zbytečně častý, pozdní, nebo má být spouštěný událostí |
+| Další trigger | kontrola má příště nastat při změně reality, ne kalendářem ze setrvačnosti |
+
+Nejčastější chyba je přepsat celou mapu, protože jeden nález píchl do ega. To vytváří dojem pečlivosti, ale ve skutečnosti zvětšuje údržbovou stopu. Dobrý zásah do mapy je nudný, přesný a krátký.
+
+### Když z nálezu vzniká nová opravná karta
+
+Novou kartu otevři jen tehdy, když nález nejde zavřít textovou opravou ani změnou jednoho pole v mapě. Typicky jde o změnu účelu, rozsahu dat, pravidla, pravomoci nebo důvěryhodnosti výstupu.
+
+Malá opravná karta po post-close nálezu:
+
+| Pole | Zápis |
+| --- | --- |
+| Nález | Co se po běžném cyklu skutečně ukázalo |
+| Rozhodnutí | Co se musí změnit, ne jen kdo se má „podívat“ |
+| Hranice | Kterých vstupů, výstupů, příjemců a logů se oprava nesmí dotknout |
+| Vlastník | Kdo kartu zavře rozhodnutím |
+| Kontrolní okno | Jeden až několik běžných cyklů, ne neurčitý pilot |
+| Stop pravidlo | Kdy opravu zavřít, zúžit nebo vrátit zpět |
+
+Nová karta nesmí automaticky zdědit starý pilotní rozsah. Post-close nález vznikl po uzavření, takže výchozí stav je běžný provoz, ne laboratoř. Přístup „pro jistotu si vezmeme všechno znovu“ je přesně cesta zpět k datovému přejídání.
+
+### Příklad: Post-close nález po zúženém retenčním reportu
+
+Po prvním měsíci běžného provozu zúženého retenčního reportu se ukázalo, že report jednou odešel do starého support kanálu. Výstup samotný byl správný, pravidlo retence fungovalo a vlastník podle reportu zavřel jeden export. Problém byl jen v publiku.
+
+Převod nálezu:
+
+| Vrstva | Rozhodnutí |
+| --- | --- |
+| Post-close review | návrat pilotního publika, jedna přeposlaná kopie |
+| Mapa automatizací | datová hranice zůstává stejná; příjemce výstupu výslovně jen vlastník retenční mapy |
+| Runbook | doplnit větu, že starý support kanál není místo distribuce reportu |
+| Backlog | žádná technická opravná karta, protože pravidlo ani kód se nemění |
+| Úklid | smazat přeposlanou kopii, zavřít starou připomínku v kanálu |
+| Další trigger | další přeposlání mimo vlastníka nebo změna retenční mapy |
+
+Tady je správný výsledek skoro zklamavě malý: jeden řádek v mapě, jedna věta v runbooku, jedna smazaná kopie. A právě proto funguje. Nález se neztratí, ale nevznikne z něj nový proces.
+
+### Checklist: Převod post-close nálezu do mapy automatizací
+
+- [ ] Nález je přepsaný na rozhodovací větu, ne jen volnou poznámku.
+- [ ] Rozlišil jsem, jestli patří do mapy, runbooku, opravné karty, nebo se má zavřít bez akce.
+- [ ] V mapě měním jen pole, která se opravdu změnila.
+- [ ] Nová opravná karta vzniká jen při změně účelu, dat, pravidla, pravomoci, retence nebo důvěryhodnosti.
+- [ ] Oprava nepřebírá starý pilotní rozsah automaticky.
+- [ ] Datová hranice je po převodu stejná nebo užší, pokud není jasný nový účel.
+- [ ] Další kontrola má trigger podle změny reality, ne kalendářový reflex.
+- [ ] Záznam obsahuje i vědomé „bez další práce“, pokud je to správný verdikt.
+- [ ] Staré kopie, kanály, připomínky nebo exporty po nálezu nezůstávají jako tiché místo pravdy.
+
+### Mini úkol
+
+Vezmi jedno post-close review z posledního měsíce. Najdi jeden nález a přepiš ho na rozhodovací větu ve tvaru: „Měníme ___ v ___, protože ___.“ Potom vyber jeden ze čtyř cílů: mapa, runbook, opravná karta, nebo zavřít bez práce. Pokud vznikne opravná karta, napiš hranici dat a stop pravidlo dřív než technické řešení. Pokud karta nevznikne, ukliď aspoň jednu stopu, která by mohla starý problém znovu oživit.
+
 ## Zdroje
 
 - IETF RFC 9110: HTTP Semantics - význam HTTP přesměrování a stavů včetně `410 Gone` pro zdroje, které už nejsou dostupné: https://www.rfc-editor.org/rfc/rfc9110.html
@@ -63280,6 +63390,8 @@ Vyber jednu automatizaci, která byla nedávno opravená, zúžená nebo uzavře
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-28: Doplněna příloha o převodu post-close nálezu zpět do mapy automatizací bez nové fronty práce: rozlišení cílů nálezu na mapu, runbook, opravnou kartu nebo zavření bez práce, přepis pozorování na rozhodovací větu, omezená úprava mapy jen v dotčených polích, pravidla pro novou opravnou kartu, příklad retenčního reportu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro převod post-close nálezu do mapy. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-28: Doplněna příloha o kontrole uzavřené opravy automatizace po běžném cyklu bez návratu pilotu: výběr jednoho běžného cyklu místo nového auditu, porovnání reality se zavírací kartou, hledání návratu dat, publika, ruční kontroly a mimořádného rytmu, krátký post-close review záznam, reakce na obcházení zúžení, příklad retenčního reportu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro post-close review automatizace. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
