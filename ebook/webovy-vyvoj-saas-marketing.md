@@ -145,6 +145,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Udržet mapu automatizací aktuální bez inventáře pro inventář | „revize mapy automatizací“, „automatizační portfolio“ nebo „měsíční mapa automatizací“ | krátká kontrola seznamu automatizací podle stavu, vlastníka, datové hranice a dalšího rozhodnutí |
 | Vybrat jednu automatizaci k opravě po revizi mapy | „triage automatizací“, „po revizi mapy“ nebo „automatizační fronta“ | prioritní karta s jedním otevřeným rozhodnutím, limitem práce a vědomě odloženým zbytkem |
 | Naplánovat jednu opravu automatizace po triage | „plán opravy automatizace“, „repair brief“ nebo „oprava po triage“ | malý opravný brief s cílem, hranicí dat, pořadím práce, kontrolním oknem a vědomě zamčeným rozsahem |
+| Provést jednu opravu automatizace bez rozšíření rozsahu | „provedení opravy automatizace“, „oprava podle briefu“ nebo „repair pilot“ | malý realizační průchod, který mění jen slíbenou vrstvu, chrání datovou hranici a končí ověřeným verdiktem |
 | Automatizovat rutinu bez skrytého dozoru | „automatizace rutiny“, „automatizační karta“ nebo „vypínač automatizace“ | malý automatizační návrh s účelem, vstupy, výstupem, vlastníkem, logy, ručním rozhodnutím a datem revize |
 | Vyhodnotit automatizaci po prvních bězích | „review automatizace“, „automatizace po spuštění“ nebo „autopilot“ | rozhodnutí ponechat, zúžit, přepsat, vrátit do ruční rutiny nebo vypnout automatizaci podle nálezů, šumu a datové stopy |
 | Vypnout automatizaci bez zapomenutého běhu | „vypnutí automatizace“, „ukončený autopilot“ nebo „automatizace končí“ | vypínací karta s posledním během, revokací tokenů, úklidem výstupů, náhradním postupem a kontrolou veřejných slibů |
@@ -62478,6 +62479,131 @@ Tým potom nekontroluje všechny supportní konverzace. Vezme malý vzorek návr
 
 Vezmi jednu triage kartu automatizace a napiš k ní opravný brief. Vyplň hlavně opravnou větu, typ opravy, datovou hranici, limit rozsahu a kontrolní okno. Potom zkus jednou větou říct, co se po opravě nesmí stát: například „report nesmí získat nové příjemce“, „asistent nesmí číst interní poznámky“ nebo „skript nesmí začít měnit stav bez člověka“. Pokud tu větu neumíš napsat, oprava ještě není dost zúžená.
 
+## Příloha: Provedení jedné opravy automatizace bez rozšíření rozsahu
+
+Opravný brief je užitečný jen tehdy, když přežije první kontakt s prací. V praxi se právě při realizaci nejčastěji nenápadně nafoukne rozsah: přidá se „jen jeden“ nový vstup, zapne se dočasný debug log bez konce, report dostane další příjemce, nebo se z návrhu stane automatická akce, protože technicky už to skoro funguje. Takhle nevzniká lepší automatizace. Takhle vzniká malý provozní dluh s dobrým úmyslem a špatnou pamětí.
+
+Provedení opravy má držet jednu věc: slíbenou změnu z briefu. Pokud brief říká, že se zužuje výstup, neopravuj zároveň frekvenci, pravomoc a onboarding. Pokud se opravuje datová hranice, nezačínej architekturou celého job runneru. Pokud se opravuje vlastnictví, neotevírej refaktor, dokud není jasné, kdo bude výsledek provozovat. Malá oprava je malá právě proto, že ji lze ověřit bez nového dohledu a bez týdne vysvětlování.
+
+> Codyho komentář: Největší riziko opravy automatizace není, že uděláš málo. Většinou je riziko opačné: uděláš tři poloviční opravy, přidáš dvě pomocné tabulky, jeden „dočasný“ token a na konci nikdo neví, co vlastně platí. Gratuluji, právě ses prodebugoval do složitějšího světa.
+
+### Začni zamčením realizačního rozsahu
+
+Před první změnou napiš realizační větu. Nemá nahrazovat brief, jen ho převést do dnešní práce.
+
+Dobrá realizační věta má tvar:
+
+| Část | Otázka | Příklad |
+| --- | --- | --- |
+| Dnes měníme | Co se skutečně upraví? | Výstup retenčního reportu se zúží na exporty bez vlastníka. |
+| Dnes neměníme | Co zůstává mimo rozsah? | Neměníme frekvenci, příjemce, zdroje dat ani pravomoc skriptu. |
+| Kontrolujeme | Jak poznáme, že změna odpovídá briefu? | Dva běhy po sobě reportují jen výjimky a bez osobních detailů. |
+| Vracíme zpět, když | Kdy se oprava zastaví nebo vrátí? | Report přestane zachytávat skutečné výjimky nebo vyžaduje nové citlivé vstupy. |
+
+Realizační větu dej do místa, kde tým práci opravdu uvidí: do úkolu, ADR, runbooku, merge requestu, checklistu releasu nebo poznámky u automatizace. Ne do soukromé hlavy člověka, který má zrovna čas. Soukromá hlava je výborná na přemýšlení, ale mizerné úložiště provozních pravidel.
+
+### Měň jednu vrstvu po druhé
+
+Automatizace má několik vrstev. Oprava by měla jasně říct, kterou vrstvu právě mění.
+
+| Vrstva | Co se typicky mění | Co při tom hlídat |
+| --- | --- | --- |
+| Účel | rozhodovací věta, pravidlo, stop podmínka | aby účel nebyl širší než původní problém |
+| Vstup | zdroje, pole, filtry, oprávnění | aby nepřibyla data jen kvůli pohodlí ladění |
+| Zpracování | podmínky, mapování, výjimky, deduplikace | aby logika odpovídala příkladům z briefu |
+| Výstup | formát, příjemce, místo doručení, frekvence | aby výstup vedl k práci, ne k informačnímu hluku |
+| Pravomoc | návrh, upozornění, automatická změna, blokace | aby se pravomoc nezvedla bez vlastního pilotu |
+| Provoz | runbook, alert, vypínač, vlastník, retence | aby oprava po nasazení nezůstala bez péče |
+
+Když potřebuješ změnit dvě vrstvy, napiš pořadí a kontrolu mezi nimi. Například nejdřív zúžit vstup, ověřit ukázkový výstup a až potom změnit report. Ne naopak. Jinak můžeš ladit krásný report z dat, která už automatizace nemá číst.
+
+Praktické pravidlo: jedna realizační iterace může změnit více souborů, ale neměla by měnit více pravomocí najednou. Změna formátu reportu a oprava textu v runbooku je v pořádku. Změna reportu, rozšíření vstupu, nové automatické zavírání ticketů a nový dashboard je čtyřchodové menu, ne oprava po triage.
+
+### Chraň datovou hranici při ladění
+
+Ladění je chvíle, kdy privacy-first pravidla dostávají nejvíc zabrat. Člověk chce vidět víc detailů, víc příkladů a víc historie, protože hledá chybu. To je pochopitelné. Není to ale automatické oprávnění otevřít datový kohoutek naplno.
+
+Bezpečnější ladicí postup:
+
+1. Použij minimální testovací příklady z briefu.
+2. Pokud potřebuješ reálný případ, ořízni ho na pole nutná pro opravu.
+3. Dočasný log zapni jen s koncem, vlastníkem a přesným seznamem polí.
+4. Výstupy z ladění neukládej do týmového chatu, pokud obsahují citlivý kontext.
+5. Po opravě smaž nebo anonymizuj pracovní exporty, screenshoty a dočasné soubory.
+6. Pokud se ukáže, že potřebuješ širší data, zastav opravu a otevři novou změnovou kartu.
+
+Věta „bez těch dat to neopravíme“ může být pravdivá. Pak ale nejde o detailní ladění původní opravy. Jde o nové rozhodnutí o datech. To si zaslouží vlastní účel, hranici, retenci a kontrolu. Ano, je to pomalejší než zkopírovat produkční payload do poznámek. Taky je to výrazně menší dluh vůči lidem, jejichž data v tom payloadu jsou.
+
+### Udělej před nasazením malý kontrolní průchod
+
+Kontrolní průchod nemusí být velký testovací plán. Má ale ověřit tři věci: běžný případ, hraniční případ a bezpečné selhání.
+
+| Kontrola | Otázka | Příklad u retenčního reportu |
+| --- | --- | --- |
+| Běžný případ | Funguje oprava pro očekávaný vstup? | Export bez vlastníka se objeví v reportu. |
+| Hraniční případ | Neztratí se důležitá výjimka? | Export s neaktivním vlastníkem je označen jako rizikový. |
+| Bezpečné selhání | Co se stane při chybě vstupu nebo oprávnění? | Report raději selže s malým provozním hlášením než s prázdným „vše je v pořádku“. |
+| Datová kontrola | Neobjevila se nová nepotřebná pole? | Report neobsahuje osobní detaily ani celé názvy souborů, pokud stačí typ a stav. |
+| Úklidová kontrola | Nezůstaly staré výstupy vedle nových? | Starý týdenní přehled je označen jako ukončený nebo smazaný. |
+
+Kontrolní průchod zapiš stručně. Stačí pět řádků: co se ověřilo, na jakém vzorku, co selhalo, co se opravilo a jaký je verdikt. Pokud kontrola vyžaduje nový rozsáhlý sběr dat, není to kontrola. Je to další změna v převleku.
+
+### Nasazuj jako pilot opravy, ne jako definitivní vítězství
+
+I malá oprava automatizace by měla mít pilotní okno. Ne proto, že by každá změna potřebovala ceremonii, ale proto, že automatizace často funguje jinak v běžném provozu než v testovacím příkladu.
+
+Pilot opravy může být jednoduchý:
+
+| Pole | Zápis |
+| --- | --- |
+| Délka | dva běhy, jeden týden nebo deset relevantních výstupů |
+| Sledujeme | správnost výstupu, počet falešných upozornění, ruční zásahy, datovou stopu |
+| Nesledujeme | individuální rychlost lidí, čtení reportu, zbytečné profilování příjemců |
+| Zastavíme, když | oprava vyžaduje širší data, zvýší pravomoc nebo zhorší rozhodování |
+| Po pilotu | ponechat, zúžit, vrátit ručně, otevřít novou kartu nebo vypnout |
+
+Pilotní okno musí být krátké a zakončené verdiktem. Když se „pilot opravy“ protáhne na neurčito, je to jen běžný provoz bez přiznaného vlastníka. A běžný provoz bez vlastníka je přesně ten typ reality, kvůli kterému pak vznikají další přílohy. Ano, e-book by rostl, ale produkt ne.
+
+### Příklad: Provedení opravy retenčního reportu
+
+Brief říká: retenční report exportů má posílat jen výjimky bez vlastníka, ne celý týdenní seznam exportů. Cílem je snížit informační šum a odstranit osobní detaily, které nejsou potřeba pro rozhodnutí.
+
+Realizační věta:
+
+| Pole | Zápis |
+| --- | --- |
+| Dnes měníme | Filtr reportu a šablonu výstupu. |
+| Dnes neměníme | Frekvenci běhu, seznam příjemců, zdrojový systém ani automatické mazání exportů. |
+| Kontrolujeme | Dva běhy obsahují jen exporty bez vlastníka nebo s neaktivním vlastníkem. |
+| Vracíme zpět, když | Tým přestane vidět skutečné výjimky nebo report potřebuje nová citlivá pole. |
+
+Provedení:
+
+1. V runbooku se přepíše účel reportu na „najít exporty bez odpovědného vlastníka“.
+2. Testovací sada dostane tři příklady: export s vlastníkem, export bez vlastníka, export s neaktivním vlastníkem.
+3. Report přestane vypisovat celé názvy souborů a osobní detaily, pokud pro rozhodnutí stačí typ exportu, stáří a stav vlastníka.
+4. Starý ukázkový výstup v dokumentaci se označí jako neplatný.
+5. Po dvou bězích se rozhodne, jestli zúžený report ponechat, upravit filtr nebo vrátit kontrolu ručně.
+
+Výsledek není „report je hezčí“. Výsledek je „report zobrazuje méně dat a lépe vede k jedné práci“. To je rozdíl mezi kosmetikou a opravou.
+
+### Checklist: Provedení jedné opravy automatizace
+
+- [ ] Realizační věta jasně říká, co se dnes mění a co se dnes nemění.
+- [ ] Změna drží typ opravy z briefu a nepřidává novou vrstvu bez rozhodnutí.
+- [ ] Datová hranice platí i během ladění, testování a kontroly.
+- [ ] Dočasné logy, exporty a screenshoty mají vlastníka, konec a omezený obsah.
+- [ ] Kontrolní průchod ověřil běžný případ, hraniční případ a bezpečné selhání.
+- [ ] Výstup opravy neobsahuje nová nepotřebná pole, příjemce ani delší retenci.
+- [ ] Pravomoc automatizace se nezvýšila bez samostatného pilotu.
+- [ ] Staré výstupy, dokumentace nebo šablony byly označené jako ukončené nebo uklizené.
+- [ ] Pilot opravy má krátké okno a konkrétní verdikty.
+- [ ] Po pilotu je jasné, jestli oprava zůstává, zužuje se, vrací ručně, otevírá novou kartu nebo končí.
+
+### Mini úkol
+
+Vezmi opravný brief z předchozí přílohy a napiš k němu realizační větu. Potom vyber jednu vrstvu, kterou opravdu změníš jako první: účel, vstup, zpracování, výstup, pravomoc nebo provoz. Ke změně doplň tři kontrolní příklady a jednu větu, jak uklidíš dočasné ladicí stopy. Pokud při přípravě zjistíš, že potřebuješ nová data, nové příjemce nebo vyšší pravomoc automatizace, nepokračuj v tichosti. Otevři novou změnovou kartu. Tohle není byrokracie, to je ochrana před tím, aby se malá oprava proměnila v nenápadný nový systém.
+
 ## Zdroje
 
 - IETF RFC 9110: HTTP Semantics - význam HTTP přesměrování a stavů včetně `410 Gone` pro zdroje, které už nejsou dostupné: https://www.rfc-editor.org/rfc/rfc9110.html
@@ -62671,6 +62797,8 @@ Vezmi jednu triage kartu automatizace a napiš k ní opravný brief. Vyplň hlav
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-28: Doplněna příloha o provedení jedné opravy automatizace bez rozšíření rozsahu: realizační věta před změnou, práce po vrstvách účel/vstup/zpracování/výstup/pravomoc/provoz, ochrana datové hranice při ladění, malý kontrolní průchod před nasazením, pilot opravy, příklad zúžení retenčního reportu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro provedení opravy podle briefu. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-28: Doplněna příloha o plánu jedné opravy automatizace po triage bez nového projektu: převod triage karty na opravnou větu, rozlišení opravy účelu, datové hranice, pravidla, výstupu, vlastnictví, kódu a dokumentace, malý opravný brief s limitem rozsahu, doporučené pořadí pravda, hranice, provedení, úklid, ochrana před novým dohledem nad lidmi, příklad support asistenta, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro plán opravy automatizace po triage. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
