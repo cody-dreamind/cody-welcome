@@ -61951,6 +61951,36 @@ Praktické pořadí po restartu:
 
 Tím se z restartu nestane obnova staré pravdy. Stane se z něj ověřená změna práce s jasným koncem, dalším krokem a datovým úklidem.
 
+### Rozliš pět cest po pilotu restartu
+
+Po restartu není cílem najít nejhezčí pokračování. Cílem je zavřít pilot tak, aby automatizace nezůstala viset mezi experimentem a provozem. Ten mezistav je nebezpečný: lidé podle výstupu občas pracují, nikdo ho pořádně nevlastní, tokeny zůstávají aktivní a staré ruční náhrady se zároveň nepřestanou používat. Výsledkem není jistota, ale dvojí pravda s kalendářem.
+
+Rozcestník po pilotu:
+
+| Verdikt po pilotu | Použij další část | Co má vzniknout |
+| --- | --- | --- |
+| Ponechat | „Standardní provoz automatizace po pilotu bez tichého rozšíření“ | provozní karta s vlastníkem, vstupy, výstupy, revizí a vypínačem |
+| Zúžit | „Převod revize ADR do změny automatizace bez rozšíření dohledu“ | malá změnová karta pravidla, spouštěče, polí nebo výstupu |
+| Přepsat | „Uzavření změny automatizace po pilotu bez automatického vítězství“ | nový pilotní slib a rozhodnutí, co ze starého návrhu neplatí |
+| Vrátit ručně | „Ověřit náhradní ruční proces po vypnutí automatizace“ | ruční karta práce s jasným vlastníkem a bez skrytého exportu navíc |
+| Vypnout | „Vypnutí automatizace bez zapomenutého běhu“ | vypínací karta, revokace tokenů, úklid výstupů a kontrola starých slibů |
+
+Praktické pravidlo: pokud verdikt po pilotu nejde zapsat jedním řádkem, pilot ještě není vyhodnocený. Nespouštěj další úpravy kódu, dokud nemáš větu: „Po pilotu děláme ___, protože ___, a uklízíme ___.“ Bez této věty se tým velmi rychle vrátí k ladění za běhu. A ladění za běhu je občas nutné, ale jako dlouhodobá strategie připomíná opravu letadla podle zvuku motoru ve sluchátkách.
+
+Krátká karta rozcestníku:
+
+| Pole | Zápis |
+| --- | --- |
+| Pilot měl ověřit |  |
+| Skutečně pomohl tím, že |  |
+| Nepotřebně zatížil práci nebo data tím, že |  |
+| Verdikt | ponechat / zúžit / přepsat / vrátit ručně / vypnout |
+| Navazující část e-booku nebo runbooku |  |
+| Co se uklízí hned |  |
+| Kdy se znovu otevře |  |
+
+Tahle karta je schválně malá. Pokud potřebuje tři stránky, neřešíš rozcestník, ale nejasný provozní vztah k automatizaci. To je taky užitečné zjištění. Jen ho neprezentuj jako „skoro hotovo“.
+
 ### Checklist: Znovuspuštění automatizace po ruční náhradě
 
 - [ ] Existuje re-entry karta s verdiktem otevřít restart.
@@ -61963,6 +61993,7 @@ Tím se z restartu nestane obnova staré pravdy. Stane se z něj ověřená změ
 - [ ] Výstup jde do místa práce s vlastníkem, ne do obecného šumu.
 - [ ] Pilot má časové okno, vlastníka, stop pravidlo a připravené vypnutí.
 - [ ] Po pilotu musí následovat samostatné review: ponechat, zúžit, vrátit ručně, nebo vypnout.
+- [ ] Je předem jasné, která navazující karta nebo příloha se použije podle verdiktu pilotu.
 
 ### Mini úkol
 
@@ -62161,6 +62192,8 @@ Vyber jednu automatizaci, u které re-entry gate dovolila otevřít restart. Nap
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-28: Doplněn rozcestník po pilotu restartované automatizace v příloze o znovuspuštění po ruční náhradě: verdikty ponechat, zúžit, přepsat, vrátit ručně nebo vypnout jsou navázané na další konkrétní karty, vznikla krátká karta rozcestníku a checklist nově hlídá, že po pilotu nevznikne mezistav bez vlastníka. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-28: Vylepšena příloha o znovuspuštění automatizace po ruční náhradě o navazující podkapitolu, která po pilotu vede čtenáře ke kontrole po restartu, k jasnému verdiktu a případnému převodu do běžného provozu bez návratu starých tokenů, reportů a širokých logů. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
