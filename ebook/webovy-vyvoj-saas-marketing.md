@@ -145,6 +145,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Vyhodnotit automatizaci po prvních bězích | „review automatizace“, „automatizace po spuštění“ nebo „autopilot“ | rozhodnutí ponechat, zúžit, přepsat, vrátit do ruční rutiny nebo vypnout automatizaci podle nálezů, šumu a datové stopy |
 | Vypnout automatizaci bez zapomenutého běhu | „vypnutí automatizace“, „ukončený autopilot“ nebo „automatizace končí“ | vypínací karta s posledním během, revokací tokenů, úklidem výstupů, náhradním postupem a kontrolou veřejných slibů |
 | Ověřit náhradní ruční proces po vypnutí automatizace | „ruční proces po vypnutí“, „náhradní rutina“ nebo „kontrola po vypnutí automatizace“ | krátká ověřovací karta, že tým umí původní riziko pokrýt bez starého skriptu, nových exportů a skryté odpovědnosti |
+| Zkontrolovat odložené vypnutí po sunset okně | „kontrola sunsetu“, „sunset hotovo“ nebo „po odloženém vypnutí“ | zavírací kontrola, že poslední běh opravdu skončil, staré výstupy už neřídí práci a náhradní cesta má vlastníka |
 | Znovu spustit automatizaci po ruční náhradě | „znovuspuštění automatizace“, „automatizace po ručním procesu“ nebo „restart automatizace“ | restartovací karta s menším rozsahem, jasným spouštěčem, ručním rozhodnutím, omezenými logy a datem dalšího review |
 | Ověřit restartovanou automatizaci po pilotu | „kontrola po restartu automatizace“, „pilot automatizace hotovo“ nebo „restartovaný skript“ | rozhodnutí, zda automatizace po pilotu zůstane, zúží se, vrátí ručně, nebo se znovu vypne bez starých tokenů a datového šumu |
 | Převést úspěšný pilot automatizace do běžného provozu | „standardní provoz automatizace“, „automatizace po pilotu“ nebo „rutina ze skriptu“ | provozní karta automatizace s vlastníkem, revizním rytmem, limitem dat, stop pravidlem a plánem úklidu |
@@ -61550,6 +61551,149 @@ Výsledek: automatizace neskončila panickým vypnutím, ale ani nedostala nový
 
 Vyber jednu automatizaci, u které stop pravidlo říká „vypnout“, ale tým ji nechává běžet kvůli přechodu. Do třiceti minut napiš sunset kartu: důvod konce, poslední datum nebo počet běhů, povolený účel, zakázaný rozsah, ruční náhradu, vlastníka a úklid. Potom najdi jeden starý výstup, který by mohl dál řídit práci, a rovnou rozhodni, jestli se smaže, archivuje nebo přepíše na novou cestu.
 
+## Příloha: Kontrola po odloženém vypnutí automatizace bez návratu staré pravdy
+
+Odložené vypnutí končí až kontrolou po sunset okně. Ne ve chvíli, kdy někdo napíše „poslední běh hotovo“, ale ve chvíli, kdy je ověřené, že automatizace opravdu neběží, její výstupy už neřídí práci, tokeny jsou zavřené a náhradní cesta má vlastníka.
+
+Špatná otázka zní: „Doběhl poslední cron?“
+
+Lepší otázka zní: „Zůstalo po sunsetu něco, co se pořád tváří jako platná pravda?“
+
+Kontrola po odloženém vypnutí je malá provozní brzda proti návratu setrvačnosti. Má potvrdit, že přechodové okno bylo opravdu přechodové: žádný nový rozsah, žádní noví příjemci, žádné ruční kopírování starých reportů a žádný neoznačený archiv, který za měsíc někdo použije jako aktuální návod.
+
+> Codyho komentář: Sunset bez kontroly je jen optimistická poznámka v backlogu. A optimistické poznámky mají jednu slabinu: neumí vypnout token, opravit šablonu ani smazat starý dashboard.
+
+### Porovnej sunset kartu se skutečností
+
+Nezačínej hledáním souborů naslepo. Vrať se k sunset kartě a porovnej sliby se skutečností. Pokud karta nebyla napsaná, vytvoř krátký zavírací záznam zpětně. Není to ideální, ale je to lepší než předstírat, že vypnutí proběhlo řízeně.
+
+Kontrola se má ptát hlavně na rozdíl mezi plánem a realitou:
+
+| Otázka | Co hledat |
+| --- | --- |
+| Poslední běh | Proběhl ve slíbeném termínu nebo počtu běhů? |
+| Skutečné vypnutí | Je vypnutý plánovač, webhook, CI workflow, queue worker nebo externí trigger? |
+| Tokeny a role | Byla odebraná oprávnění, která už nemají účel? |
+| Výstupy | Přestaly dashboardy, chaty, e-maily a tabulky řídit práci? |
+| Náhrada | Existuje ruční nebo jiná cesta pro původní riziko, pokud ještě existuje? |
+| Retence | Mají přechodové logy, exporty a pracovní kopie konec životnosti? |
+
+Rozdíl mezi plánem a realitou neber jako selhání. Ber ho jako seznam posledních oprav. Důležité je, aby po kontrole nezůstalo žádné „asi už to neběží“. Buď to běží, nebo neběží. Buď výstup platí, nebo je archivní. Buď má náhrada vlastníka, nebo původní riziko není pokryté.
+
+### Napiš zavírací kartu sunsetu
+
+Po kontrole napiš krátkou zavírací kartu. Nemá opisovat celou historii automatizace. Má dát budoucímu čtenáři jasnou odpověď, jestli je věc hotová a kde je dnešní zdroj pravdy.
+
+Minimální karta:
+
+| Pole | Co napsat |
+| --- | --- |
+| Co končilo | Název automatizace, jobu, reportu nebo integračního pravidla. |
+| Důvod konce | Proč stop pravidlo vedlo k vypnutí nebo přechodovému konci. |
+| Poslední běh | Datum, výsledek a místo, kde je uložené nezbytné minimum důkazu. |
+| Vypnuté spouštěče | Cron, webhook, CI workflow, externí pravidlo, alert nebo ruční makro. |
+| Zavřená oprávnění | Tokeny, role, service účty a přístupy, které byly odebrané. |
+| Staré výstupy | Co bylo smazáno, archivováno nebo označeno jako historické. |
+| Dnešní náhrada | Ruční postup, sloučené review nebo vědomé rozhodnutí, že původní riziko zaniklo. |
+| Další kontrola | Datum nebo trigger, pokud je po vypnutí ještě rozumné ověřit návrat problému. |
+
+Karta je zavírací, takže nemá otevírat další široké téma. Pokud zjistíš, že náhrada neexistuje, vytvoř jeden navazující úkol s vlastníkem. Pokud zjistíš, že původní riziko zaniklo, napiš to. Mlčení se za rozhodnutí nepočítá.
+
+### Ověř, že stará cesta už neřídí práci
+
+Vypnutí automatizace může být technicky správné a provozně nehotové. Starý report může pořád viset v dashboardu, starý odkaz může být v support makru a starý alert může někdo ručně přeposílat dál. Proto kontroluj skutečná místa práce, ne jen repozitář.
+
+Stačí malý vzorek:
+
+| Krok | Co zkontrolovat |
+| --- | --- |
+| Poslední výstup | Je označený jako historický, nebo smazaný podle retence? |
+| Šablony | Neodkazují na vypnutou automatizaci, starý report nebo starý kanál? |
+| Runbook | Popisuje aktuální náhradu, ne starý postup? |
+| Backlog | Neexistují otevřené úkoly založené na výstupu, který už neplatí? |
+| Chat a e-mail | Nechodí ruční kopie starého reportu pod novým názvem? |
+| Přístupy | Nepřežil token jen proto, že se „může hodit“? |
+
+Ověření má najít živé zbytky, ne vymýšlet dokonalý audit. Když najdeš jednu starou šablonu, oprav ji. Když najdeš jeden přeživší token, odeber ho. Když najdeš tým, který pořád čeká na report, napiš nový ruční trigger nebo přiznej, že původní vypnutí ještě není hotové.
+
+### Hlídej skryté návraty staré automatizace
+
+Po vypnutí se starý proces často vrací nenápadně. Někdo si nechá poslední CSV „pro jistotu“, někdo zkopíruje výstup do nové tabulky, někdo začne ručně napodobovat automatický report v chatu. Výsledek je horší než původní stav: méně opakovatelnosti, víc ruční práce a často širší datová stopa.
+
+Zkontroluj typické návraty:
+
+| Skrytý návrat | Co s tím |
+| --- | --- |
+| Ruční kopírování starého reportu | Zrušit šablonu a nahradit ji novým ručním výstupem. |
+| Osobní export u vlastníka | Smazat nebo přesunout do řízeného místa s retencí. |
+| Nová tabulka bez vlastníka | Buď ji připojit k ruční kartě, nebo zrušit. |
+| Chatový kanál s historickými výstupy | Archivovat, označit jako neplatný a odkázat na novou cestu. |
+| Support makro odkazující na starý postup | Přepsat podle aktuální reality. |
+| Starý alert přesměrovaný na člověka | Vypnout, nebo znovu navrhnout jako novou automatizaci se schválenou pravomocí. |
+
+Privacy-first pravidlo je jednoduché: ruční náhrada nesmí sbírat víc dat jen proto, že už nemá technické mantinely. Když automatizace měla omezený payload, ruční postup nemá dostat celý seznam zákazníků. Když automatizace logovala jen agregovaný počet, ruční kontrola nemá začít ukládat jména lidí do sdílené tabulky.
+
+### Dej závěrečný verdikt
+
+Po kontrole nedávej neurčité „vypadá to dobře“. Zavři sunset jedním z pěti verdiktů:
+
+| Verdikt | Kdy dává smysl |
+| --- | --- |
+| Hotovo | Automatizace neběží, oprávnění jsou zavřená, staré výstupy neřídí práci a náhrada je jasná. |
+| Hotovo s drobnou opravou | Zbývá jedna šablona, odkaz nebo dokumentační poznámka bez datového rizika. |
+| Otevřít náhradní proces | Automatizace skončila, ale původní riziko nemá vlastníka nebo trigger. |
+| Prodloužit sunset | Vypnutí není bezpečně hotové, ale rozsah zůstává zmrazený a má nové krátké okno. |
+| Zastavit a revidovat | Kontrola odhalila, že vypnutí by nechalo nekryté důležité riziko nebo vedlo k širšímu ručnímu sběru dat. |
+
+Verdikt „prodloužit sunset“ používej opatrně. Musí mít nové datum, konkrétní blocker a zákaz rozšíření. Pokud ho tým použije podruhé, už nejde o odklad. Jde o signál, že původní rozhodnutí bylo nedotažené.
+
+### Příklad: Kontrola po sunsetu retenčního reportu exportů
+
+Situace: Týdenní automatizovaný report exportů měl čtyřtýdenní sunset okno. Po něm má být vypnutý a původní riziko má krýt měsíční privacy review.
+
+Zavírací karta:
+
+| Pole | Zápis |
+| --- | --- |
+| Co končilo | Týdenní report exportů bez retenčního data. |
+| Důvod konce | Tři měsíce bez rozhodnutí; původní riziko kryje měsíční privacy review. |
+| Poslední běh | Poslední report proběhl 31. srpna a obsahoval jen počet otevřených exportních karet. |
+| Vypnuté spouštěče | Cron vypnutý, chatová notifikace odebraná, starý alert zavřený. |
+| Zavřená oprávnění | Service token revokovaný, přístup k exportnímu reportovacímu endpointu odebraný. |
+| Staré výstupy | Chatový kanál archivovaný, dashboard označený jako historický, support makro přepsané. |
+| Dnešní náhrada | Měsíční privacy review prochází agregovaný seznam otevřených exportních karet. |
+| Další kontrola | Po prvním měsíčním review ověřit, že nikdo nečeká na starý týdenní report. |
+
+Kontrolní vzorek:
+
+| Kontrola | Výsledek |
+| --- | --- |
+| Dashboard | Starý dashboard viditelný jen v archivu, ne v aktivní navigaci. |
+| Šablony | Jedno support makro ještě odkazovalo na týdenní report. |
+| Přístupy | Token revokovaný, žádný nový osobní export nevznikl. |
+| Chat | Připnutá zpráva v kanálu odstraněná a kanál označený jako archivní. |
+| Náhrada | Měsíční privacy review má vlastníka a první termín. |
+| Oprava | Support makro přepsané na měsíční review a zavřené jako drobný follow-up. |
+
+Verdikt: hotovo s drobnou opravou. Automatizace je vypnutá, datová stopa se nezvětšila a jediný nález byla stará šablona, která už má opravu. Další kontrola proběhne po prvním měsíčním review.
+
+### Checklist: Kontrola po odloženém vypnutí automatizace
+
+- [ ] Sunset karta byla porovnaná se skutečným stavem.
+- [ ] Poslední běh je známý a nevyžaduje uchování zbytečných detailů.
+- [ ] Plánovače, webhooky, workflow, alerty a ruční makra jsou vypnuté nebo opravené.
+- [ ] Tokeny, role, service účty a integrační přístupy bez účelu jsou odebrané.
+- [ ] Staré dashboardy, chatové kanály, tabulky, e-maily a šablony neřídí práci.
+- [ ] Náhradní cesta pro původní riziko má trigger, vlastníka a jasný výstup, nebo je zapsané, že riziko zaniklo.
+- [ ] Přechodové logy, exporty a pracovní kopie mají retenci nebo jsou smazané.
+- [ ] Nevznikl nový ruční report s širší datovou stopou než původní automatizace.
+- [ ] Existuje jeden závěrečný verdikt sunsetu.
+- [ ] Pokud sunset pokračuje, má krátké nové okno, konkrétní blocker a zmrazený rozsah.
+
+### Mini úkol
+
+Vezmi jednu automatizaci, která měla odložené vypnutí, a porovnej sunset kartu se skutečností. Najdi poslední běh, jeden starý výstup, jeden přístup a jednu náhradní cestu. Ke každému napiš stav: zavřeno, opravit, nebo pokračuje s důvodem. Na konci dej jeden verdikt sunsetu. Bez verdiktu vypnutí ještě není hotové.
+
 ## Zdroje
 
 - IETF RFC 9110: HTTP Semantics - význam HTTP přesměrování a stavů včetně `410 Gone` pro zdroje, které už nejsou dostupné: https://www.rfc-editor.org/rfc/rfc9110.html
@@ -61743,6 +61887,8 @@ Vyber jednu automatizaci, u které stop pravidlo říká „vypnout“, ale tým
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-28: Doplněna příloha o kontrole po odloženém vypnutí automatizace bez návratu staré pravdy: porovnání sunset karty se skutečností, zavírací karta sunsetu, ověření starých výstupů a oprávnění, kontrola skrytých návratů staré automatizace, závěrečné verdikty, příklad kontroly retenčního reportu exportů, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro kontrolu sunsetu po odloženém vypnutí. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-27: Doplněna příloha o odloženém vypnutí automatizace bez návratu setrvačnosti: sunset karta s důvodem konce, přesným přechodovým oknem, zmrazením rozsahu, ruční náhradou, průběžným snižováním datové stopy, úklidem starých výstupů, příkladem retenčního reportu exportů, checklistem a mini úkolem; do rejstříku pracovních nástrojů přidána směrovka pro odložené vypnutí automatizace. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
