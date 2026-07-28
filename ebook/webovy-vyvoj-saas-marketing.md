@@ -149,6 +149,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Zkontrolovat opravu automatizace po pilotu | „kontrola opravy automatizace“, „oprava po pilotu“ nebo „repair review“ | krátké review, které ověří původní nález, datovou hranici, šum, ruční zásahy, úklid stop a rozhodne ponechat, zúžit, vrátit nebo zavřít |
 | Zúžit opravu automatizace po review | „zúžení opravy automatizace“, „oprava pomáhá ale moc sbírá“ nebo „repair narrowing“ | malá zúžovací karta, která ponechá užitečný výsledek opravy, ale omezí vstupy, výstupy, pravomoc, příjemce, retenci nebo frekvenci |
 | Uzavřít zúženou opravu automatizace do běžného provozu | „zúžená oprava hotovo“, „oprava do rutiny“ nebo „standardní režim opravy“ | zavírací karta, která přepíše runbook, uklidí pilotní stopy, nastaví vlastníka a ukončí mimořádné sledování opravy |
+| Zkontrolovat uzavřenou opravu automatizace po běžném cyklu | „kontrola uzavřené opravy“, „oprava po běžném cyklu“ nebo „post-close review automatizace“ | lehké ověření, že oprava dál vede k práci, nevrací pilotní stopu, neobchází zúžení a nepotřebuje další proces |
 | Automatizovat rutinu bez skrytého dozoru | „automatizace rutiny“, „automatizační karta“ nebo „vypínač automatizace“ | malý automatizační návrh s účelem, vstupy, výstupem, vlastníkem, logy, ručním rozhodnutím a datem revize |
 | Vyhodnotit automatizaci po prvních bězích | „review automatizace“, „automatizace po spuštění“ nebo „autopilot“ | rozhodnutí ponechat, zúžit, přepsat, vrátit do ruční rutiny nebo vypnout automatizaci podle nálezů, šumu a datové stopy |
 | Vypnout automatizaci bez zapomenutého běhu | „vypnutí automatizace“, „ukončený autopilot“ nebo „automatizace končí“ | vypínací karta s posledním během, revokací tokenů, úklidem výstupů, náhradním postupem a kontrolou veřejných slibů |
@@ -62965,6 +62966,127 @@ Výsledek: oprava už není projekt. Je to malá provozní schopnost s jasným �
 
 Vezmi jednu opravu automatizace, která už prošla zúžením nebo podobnou kontrolou. Napiš zavírací větu ve tvaru: „Ponecháváme ___, rušíme ___, další review nastane při ___.“ Potom projdi runbook, poslední report a příjemce výstupu. Najdi jednu pilotní stopu, která už nemá řídit práci, a zavři ji. Nakonec naplánuj první kontrolu po uzavření: jeden výstup, jedna otázka, jeden možný verdikt. Pokud žádnou pilotní stopu nenajdeš, zapiš aspoň trigger dalšího review. I uklizený konec potřebuje být dohledatelný, jinak se z něj stane další neviditelný zvyk.
 
+## Příloha: Kontrola uzavřené opravy automatizace po běžném cyklu bez návratu pilotu
+
+Oprava automatizace může být uzavřená, zúžená, zdokumentovaná a stejně se po pár bězích začne znovu rozlézat. Někdo si vyžádá staré pole „jen pro jistotu“. Jiný člověk pošle výstup do širšího kanálu, protože tam byl během pilotu. Třetí přidá ruční export, aby si ověřil, že automatizace opravdu vidí všechno. Najednou je z běžné opravy zase malý vyšetřovací seriál.
+
+Kontrola po běžném cyklu není další pilot. Je to krátká brzda po uzavření: jednou ověříš, jestli oprava žije v režimu, který jsi slíbil při zavírání. Pokud ano, necháš ji být. Pokud ne, otevřeš konkrétní nález. Cílem není najít práci navíc. Cílem je zabránit tomu, aby se dobrá oprava proměnila v trvalý provozní nános.
+
+> Codyho komentář: Největší riziko po uzavření opravy není chyba v kódu. Často je to návrat starého zvyku přes pohodlnou výjimku. Automatizace pak formálně běží správně, ale kolem ní se potichu vrátí přesně ta práce a data, které měla odstranit. Elegantní? Ne. Typické? Bohužel docela jo.
+
+### Vyber jeden běžný cyklus, ne nový audit
+
+Kontrola má sledovat skutečné použití po uzavření, ne znovu procházet celou historii opravy. Běžný cyklus je nejmenší přirozený úsek, ve kterém automatizace měla pomoct někomu udělat rozhodnutí nebo práci.
+
+Příklady běžného cyklu:
+
+| Typ automatizace | Běžný cyklus |
+| --- | --- |
+| Denní kontrola exportů | jeden až tři běžné běhy bez ručního zásahu autora |
+| Týdenní support report | jeden support review, kde se podle reportu něco zavřelo nebo otevřelo |
+| Měsíční billing kontrola | jeden účetní nebo provozní průchod |
+| Upozornění na výjimku | jedna reálná výjimka a její zavření |
+| Návrh úkolu do backlogu | jeden úkol od vzniku po rozhodnutí ponechat, upravit nebo zavřít |
+
+Pokud automatizace za kontrolní okno nevytvořila žádný relevantní výstup, neprodlužuj kontrolu donekonečna. Zapiš „bez signálu“ a rozhodni, jestli frekvence, spouštěč nebo samotný účel dávají smysl. Ticho může být v pořádku u bezpečnostní pojistky. U provozního reportu je ticho často zpráva, že report nepotřebuje běžet tak často.
+
+### Porovnej realitu se zavírací kartou
+
+Vrať se k zavírací kartě z předchozí přílohy. Ne ke všem poznámkám z pilotu, ne ke starým debatám, ne k tomu jednomu vláknu v chatu, kde se všichni tvářili rozhodně. Zavírací karta je smlouva s budoucím provozem.
+
+Kontrolní porovnání:
+
+| Zavírací slib | Otázka po běžném cyklu |
+| --- | --- |
+| Ponecháváme konkrétní zúžený výstup | Odpovídá skutečný výstup tomu, co bylo ponecháno? |
+| Rušíme pilotní příjemce | Nedostává výstup znovu širší skupina lidí? |
+| Rušíme dočasné logy nebo exporty | Nevznikly nové kopie se stejným obsahem bokem? |
+| Další review při změně reality | Neprobíhá pravidelné review jen ze setrvačnosti? |
+| Ruční náhrada má omezený rozsah | Nevyžaduje ruční postup víc dat než automatizace? |
+| Stop pravidlo je jasné | Ví vlastník, kdy automatizaci zúžit, vypnout nebo vrátit ručně? |
+
+Rozdíl proti kartě neznamená automaticky problém. Znamená jen, že je potřeba rozhodnutí. Pokud se širší výstup vrátil, protože zúžení odstranilo údaj nutný k práci, uprav zúžení. Pokud se vrátil jen proto, že někdo chtěl „lepší pocit kontroly“, vrať se k původní hranici dat.
+
+### Hledej čtyři návraty pilotu
+
+Pilotní režim se málokdy vrací s nápisem „vracíme pilotní režim“. Vrací se přes maličkosti. Proto při kontrole hledej čtyři konkrétní návraty.
+
+| Návrat | Jak vypadá | Co s tím |
+| --- | --- | --- |
+| Návrat dat | ve výstupu se znovu objevují pole odebraná při zúžení | ověř účel, jinak pole zase odeber |
+| Návrat publika | report chodí širší skupině než běžný vlastník potřebuje | zúž příjemce a nech odkaz na zdroj pravdy |
+| Návrat ruční kontroly | někdo si vedle automatizace drží tabulku, screenshoty nebo export | rozhodni, jestli automatizaci nevěří, nebo jen drží starý zvyk |
+| Návrat mimořádného rytmu | běží častější review než slíbené běžné kontroly | nastav trigger podle změny reality, ne podle nervozity |
+
+U každého návratu polož otázku: „Pomáhá to rozhodnutí, které automatizace skutečně obsluhuje?“ Pokud odpověď zní ne, není to kontrola kvality. Je to šum.
+
+### Zapiš krátký post-close review
+
+Záznam po běžném cyklu má být menší než zavírací karta. Pokud je delší, kontrola už možná vytváří vlastní proces. A to je přesně ten moment, kdy dokumentace začne nosit klobouk manažera, což jí nesluší.
+
+Použitelná karta:
+
+| Pole | Zápis |
+| --- | --- |
+| Kontrolovaný cyklus | jeden běh, jeden týden, jedna výjimka nebo jeden měsíční průchod |
+| Výstup vedl k práci? | ano/ne a jedna věta důkazu |
+| Návrat pilotu | žádný, data, publikum, ruční kontrola nebo mimořádný rytmus |
+| Datová stopa | co vzniklo a co se po kontrole maže |
+| Verdikt | ponechat, drobně opravit, zúžit, vrátit ručně, vypnout nebo otevřít nový nález |
+| Další trigger | kdy se k automatizaci vrátit příště |
+
+Verdikt „ponechat“ je plnohodnotný výsledek. Nepřidávej úkol jen proto, že kontrola proběhla. Když kontrola nic nenašla, její největší hodnota je potvrdit, že mimořádný režim může skončit.
+
+### Když kontrola najde obcházení zúžení
+
+Ruční obcházení zúžení je důležitý signál, ale ne vždy znamená, že zúžení bylo špatné. Někdy tým potřebuje lepší vysvětlení výstupu. Někdy chybí důvěra v automatizaci. Někdy se změnila práce, kterou má automatizace podporovat. A někdy si někdo prostě drží starý export, protože starý export je známý a známé věci vypadají jako bezpečí. To poslední je nejzrádnější, protože se tváří prakticky.
+
+Rozliš čtyři scénáře:
+
+| Scénář | Signál | Reakce |
+| --- | --- | --- |
+| Chybí nutné pole | bez odebraného údaje nejde uzavřít konkrétní rozhodnutí | vrať jen dané pole s účelem, vlastníkem a retencí |
+| Chybí důvěra | lidé dělají ruční porovnání, ale nenajdou rozdíl | přidej vysvětlitelný souhrn nebo ukázku pravidla, ne další data |
+| Změnil se proces | automatizace obsluhuje jinou situaci než při zavření | otevři novou změnovou kartu, nepřilepuj rozsah bokem |
+| Drží se starý zvyk | export nebo tabulka existuje, ale nikdo podle ní nerozhoduje | zruš ji a zapiš stop pravidlo pro návrat |
+
+Privacy-first reakce není automatické odmítnutí všeho navíc. Je to pomalá otázka položená rychle: „Které rozhodnutí bez toho nejde udělat?“ Pokud odpověď není konkrétní, údaj zpátky nepatří.
+
+### Příklad: Kontrola zúženého retenčního reportu po prvním měsíci
+
+Retenční report exportů byl po pilotu zúžený a uzavřený do běžného provozu. Po prvním měsíčním cyklu operations vlastník zkontroluje tři výstupy a jeden navazující úkol.
+
+Post-close review:
+
+| Pole | Zápis |
+| --- | --- |
+| Kontrolovaný cyklus | první měsíc po uzavření, tři týdenní reporty a jeden navazující úkol |
+| Výstup vedl k práci? | ano, jeden export byl předán vlastníkovi a dva byly zavřené podle retenční mapy |
+| Návrat pilotu | publikum: jeden report byl přeposlán do starého support kanálu |
+| Datová stopa | přeposlaná kopie smazaná, v runbooku doplněno, že výstup patří jen vlastníkovi retenční mapy |
+| Verdikt | ponechat zúžený report, opravit příjemce a zavřít starý kanálový návyk |
+| Další trigger | nový typ exportu, změna retenční mapy nebo další přeposlání mimo vlastníka |
+
+Tady není potřeba přepisovat automatizaci. Problém nebyl v pravidle ani v kódu. Problém byl v tom, že starý pilotní komunikační kanál pořád vypadal jako legitimní místo práce. Oprava je proto organizační: zavřít kanálovou stopu, upravit runbook a nechat zúžený report běžet dál.
+
+### Checklist: Kontrola uzavřené opravy automatizace
+
+- [ ] Kontroluji jeden běžný cyklus, ne celou historii pilotu.
+- [ ] Porovnávám skutečný stav se zavírací kartou.
+- [ ] Výstup automatizace vedl ke konkrétní práci, rozhodnutí nebo zavření výjimky.
+- [ ] Nevrátila se odebraná data bez nového jasného účelu.
+- [ ] Nevrátili se dočasní příjemci nebo pilotní kanály.
+- [ ] Nevznikla bokem ruční tabulka, screenshotová sada nebo export pro pocit jistoty.
+- [ ] Běžný review rytmus odpovídá riziku a rozhodnutí, ne setrvačnosti.
+- [ ] Pokud někdo obchází zúžení, rozlišuji nutné pole, chybějící důvěru, změnu procesu a starý zvyk.
+- [ ] Záznam kontroly obsahuje datovou stopu a její úklid.
+- [ ] Verdikt může být klidné „ponechat bez další práce“.
+- [ ] Další návrat k automatizaci je navázaný na trigger, ne na neurčitou nervozitu.
+
+### Mini úkol
+
+Vyber jednu automatizaci, která byla nedávno opravená, zúžená nebo uzavřená do běžného režimu. Najdi jeden přirozený běžný cyklus a napiš post-close review v šesti polích: kontrolovaný cyklus, výstup vedl k práci, návrat pilotu, datová stopa, verdikt, další trigger. Pokud najdeš ruční obcházení zúžení, nevracej všechno zpátky. Nejdřív rozhodni, jestli chybí nutné pole, důvěra, změnová karta, nebo jen odvaha smazat starý zvyk.
+
 ## Zdroje
 
 - IETF RFC 9110: HTTP Semantics - význam HTTP přesměrování a stavů včetně `410 Gone` pro zdroje, které už nejsou dostupné: https://www.rfc-editor.org/rfc/rfc9110.html
@@ -63158,6 +63280,8 @@ Vezmi jednu opravu automatizace, která už prošla zúžením nebo podobnou kon
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-28: Doplněna příloha o kontrole uzavřené opravy automatizace po běžném cyklu bez návratu pilotu: výběr jednoho běžného cyklu místo nového auditu, porovnání reality se zavírací kartou, hledání návratu dat, publika, ruční kontroly a mimořádného rytmu, krátký post-close review záznam, reakce na obcházení zúžení, příklad retenčního reportu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro post-close review automatizace. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-28: Vylepšena příloha o uzavření zúžené opravy automatizace o první kontrolu po uzavření: krátké ověření, zda výstup pořád vede k práci, nevrátily se pilotní stopy, nevzniklo ruční obcházení zúžení a stop pravidlo pořád sedí; doplněn úsporný záznam kontroly, dvě checklist položky a rozšířený mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
