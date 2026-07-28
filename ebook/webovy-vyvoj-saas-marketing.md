@@ -155,6 +155,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Převést opravnou kartu do backlogu bez ztráty hranic | „opravná karta do backlogu“, „backlog po post-close nálezu“ nebo „oprava čeká na práci“ | backlogový úkol, který nese důvod, datovou hranici, stop pravidlo a kontrolní okno bez nafouknutí do projektu |
 | Otevřít backlogovou opravu k realizaci bez rozmazání zadání | „backlogová oprava do práce“, „otevření opravy“ nebo „sprint opravy“ | realizační karta, která před prací potvrdí důvod, hranice, aktuálnost nálezu, test, úklid a stop pravidlo |
 | Zkontrolovat implementovanou opravu před mergem | „review implementované opravy“, „před merge“ nebo „oprava před sloučením“ | review karta, která porovná hotovou změnu s realizační kartou, datovou hranicí, testem, dokumentací a zavíracím plánem |
+| Uzavřít sloučenou opravu po mergi bez tichého doznívání | „po merge opravy“, „sloučená oprava“ nebo „oprava po sloučení“ | krátká po-merge karta s ověřením běhu, úklidem pilotních stop, aktualizací mapy a dalším kontrolním datem |
 | Automatizovat rutinu bez skrytého dozoru | „automatizace rutiny“, „automatizační karta“ nebo „vypínač automatizace“ | malý automatizační návrh s účelem, vstupy, výstupem, vlastníkem, logy, ručním rozhodnutím a datem revize |
 | Vyhodnotit automatizaci po prvních bězích | „review automatizace“, „automatizace po spuštění“ nebo „autopilot“ | rozhodnutí ponechat, zúžit, přepsat, vrátit do ruční rutiny nebo vypnout automatizaci podle nálezů, šumu a datové stopy |
 | Vypnout automatizaci bez zapomenutého běhu | „vypnutí automatizace“, „ukončený autopilot“ nebo „automatizace končí“ | vypínací karta s posledním během, revokací tokenů, úklidem výstupů, náhradním postupem a kontrolou veřejných slibů |
@@ -63672,6 +63673,112 @@ Tady review nevymýšlí nový projekt. Jen chrání původní opravu před tím
 
 Vezmi jednu hotovou opravu, která čeká na review. Nečti hned diff. Nejdřív si napiš původní realizační kartu nebo ji zpětně rekonstruuj v šesti větách. Potom vyplň pětibodovou review kartu: shoda s důvodem, datová hranice, publikum, pravomoc a zavření. Pokud najdeš návrh, který rozšiřuje data, příjemce nebo automatický zásah, neřeš ho komentářem „to je asi v pohodě“. Přepiš ho na samostatné rozhodnutí, nebo ho z aktuální opravy vyndej.
 
+## Příloha: Uzavření sloučené opravy po mergi bez tichého doznívání
+
+Merge není konec opravy. Je to okamžik, kdy se změna přestane tvářit jako návrh a začne ovlivňovat běžný provoz. Právě tady se často ztratí dvě věci: ověření, že oprava opravdu pomohla, a úklid dočasných stop, které vznikly během pilotu, review nebo ladění.
+
+U privacy-first oprav je po-merge fáze stejně důležitá jako samotný diff. Pokud oprava měnila datovou hranici, report, dokumentaci, rutinu, přístup nebo automatizaci, musí po sloučení vzniknout krátké zavírací rozhodnutí. Ne velký postmortem. Jen potvrzení, že změna běží, víme kdo ji vlastní, a nic kolem ní zbytečně nedoznívá.
+
+> Codyho komentář: „Merged“ je skvělé slovo pro Git. Pro provoz je trochu moc optimistické. Provoz se neptá, jestli je větev sloučená. Ptá se, jestli někdo uklidil dočasný export, upravil runbook a ví, co má zkontrolovat za týden.
+
+### Začni po-merge kartou
+
+Po sloučení opravy napiš krátkou kartu. Její účel není opisovat release notes, ale zavřít smyčku mezi původním nálezem, implementací a běžným provozem.
+
+Použij sedm polí:
+
+| Pole | Otázka | Příklad |
+| --- | --- | --- |
+| Původní nález | Jaký problém oprava řešila? | retenční report neobsahoval portálové exporty |
+| Sloučená změna | Co je teď v provozu jinak? | report přidává povolená metadata portálových exportů |
+| První ověření | Jak poznáme, že změna opravdu běží? | příští týdenní report obsahuje vzorek nových exportů |
+| Datová hranice | Co se po mergi nesmí rozšířit? | nepřidat obsah exportů, e-maily ani nové příjemce |
+| Úklid | Co se má smazat, vypnout nebo přepsat? | ruční seznam, pilotní poznámky a stará runbook věta |
+| Vlastník | Kdo rozhodne po kontrolním okně? | vlastník retenční mapy |
+| Další datum | Kdy se oprava zavře nebo vrátí k úpravě? | po dvou běžných týdenních bězích |
+
+Karta má být malá. Pokud se nevejde na několik řádků, pravděpodobně se nesloučila jen oprava, ale nový proces. Ten potřebuje vlastní provozní záznam.
+
+### Ověř běh v místě, kde změna pracuje
+
+Po mergi nekontroluj jen to, že deployment prošel. Ověř konkrétní místo práce, kde má oprava vytvářet hodnotu.
+
+Podle typu opravy projdi:
+
+| Typ opravy | Minimální ověření po mergi |
+| --- | --- |
+| Report nebo export | vznikl výstup s povolenými poli a správným příjemcem |
+| Automatizace | proběhl první běh, výstup vede na známé místo a chyba neukládá širší data |
+| Dokumentace | cílový text je dostupný, starý odkaz nemluví hlasitěji než nový |
+| Produktové pravidlo | pravidlo je na místě, kde tým skutečně zadává nebo reviewuje práci |
+| Formulář nebo onboarding | hlavní cesta funguje bez nového povinného pole a bez nového trackeru |
+| Přístupová změna | role odpovídají kartě a dočasné přístupy nezůstaly aktivní |
+
+Dobré ověření je blízko realitě a malé. Nepřidávej nový dashboard jen proto, abys dokázal, že oprava žije. Jeden výstup, jeden běh, jedna pracovní cesta a jedna datová kontrola často stačí.
+
+### Ukliď pilotní a review stopy
+
+Každá oprava po sobě může nechat stopu, která měla být dočasná. Samostatný seznam, export pro porovnání, testovací token, debug log, screenshot s daty, ruční workaround, poznámka v chatu, stará šablona nebo připomínka v kalendáři.
+
+Po mergi projdi pět míst:
+
+- pracovní soubory a dočasné exporty,
+- tokeny, role a sdílení vytvořené jen kvůli opravě,
+- logy, debug režimy a testovací výstupy,
+- dokumentaci, runbooky, šablony a odpovědní knihovny,
+- backlog, mapu automatizací, datovou mapu nebo rozhodovací log.
+
+Úklid není kosmetika. Pokud pilotní export zůstane v osobním disku, oprava sice prošla, ale datová stopa narostla. Pokud starý runbook dál radí ruční kontrolu, tým bude dělat opravu dvakrát. Pokud backlog nechá starý workaround otevřený, někdo ho za měsíc znovu objeví a bude se tvářit, že našel nový problém.
+
+### Zapiš po-merge verdikt
+
+Po prvním kontrolním okně napiš jeden verdikt. Nečekej na dokonalou jistotu. Cílem je uzavřít práci nebo otevřít další malou kartu s jasným důvodem.
+
+| Verdikt | Kdy ho použít | Co zapsat |
+| --- | --- | --- |
+| Zavřít | oprava funguje, úklid je hotový, datová hranice sedí | datum zavření a další běžný revizní trigger |
+| Ponechat v pozorování | oprava funguje, ale máme málo běhů | přesné datum konce pozorování a stop pravidlo |
+| Drobně opravit | změna pomáhá, ale chybí malá technická nebo textová úprava | jednu následnou kartu, ne nový projekt |
+| Zúžit | oprava pomáhá, ale sbírá, posílá nebo drží víc, než je potřeba | osu zúžení: vstupy, výstup, publikum, logy, retence nebo frekvence |
+| Vrátit | oprava neřeší původní nález nebo vytvořila horší provozní stav | návratový plán a úklid všech nových stop |
+
+Nejhorší varianta je žádný verdikt. Pak oprava zůstane napůl jako hotová změna a napůl jako pilot. To je přesně ten mezistav, ve kterém rostou zapomenuté tabulky, výjimky a „ještě to chvíli necháme“ procesy.
+
+### Příklad: Retenční report po sloučení opravy
+
+Tým sloučil opravu, která do retenčního reportu přidala metadata portálových exportů. Review před mergem povolilo jen ID, typ, datum vytvoření, expiraci a vlastníka. Žádný obsah exportu, žádný e-mail zákazníka a žádní noví příjemci.
+
+Po-merge karta:
+
+| Pole | Zápis |
+| --- | --- |
+| Původní nález | Portálové exporty unikaly z běžného retenčního reportu a vlastník je dohledával ručně. |
+| Sloučená změna | Týdenní report obsahuje povolená metadata portálových exportů. |
+| První ověření | Příští týden zkontrolovat jeden report proti vzorku exportů v portálu. |
+| Datová hranice | Report nesmí obsahovat obsah exportu, e-mail zákazníka ani nové příjemce. |
+| Úklid | Smazat ruční seznam exportů a vypnout pilotní debug log. |
+| Vlastník | Vlastník retenční mapy rozhodne po dvou bězích. |
+| Další datum | Druhý pátek po mergi. |
+
+Po dvou bězích report našel tři položky k výmazu, ruční seznam byl smazaný a debug log už neukládal payload. Verdikt: zavřít. Do runbooku přibyla jediná věta: „Portálové exporty se kontrolují přes retenční report; ruční seznam se nepoužívá.“ Hotovo. Ne epické, ale užitečné.
+
+### Checklist: Uzavření sloučené opravy po mergi
+
+- [ ] Po mergi existuje krátká karta s původním nálezem, změnou, ověřením, datovou hranicí, úklidem, vlastníkem a datem.
+- [ ] Ověření probíhá v místě, kde oprava skutečně pracuje.
+- [ ] Deployment nebo zelený build nepovažuji za jediný důkaz dopadu.
+- [ ] Datová hranice po mergi odpovídá review verdiktu.
+- [ ] Dočasné exporty, seznamy, tokeny, debug logy a pilotní poznámky mají jasný úklid.
+- [ ] Runbook, mapa automatizací, datová mapa nebo rozhodovací log ukazují současnou pravdu.
+- [ ] Backlog neobsahuje starý workaround jako otevřený úkol.
+- [ ] Po kontrolním okně existuje verdikt: zavřít, ponechat v pozorování, drobně opravit, zúžit nebo vrátit.
+- [ ] Pokud se oprava vrací nebo zužuje, nová karta má vlastní důvod a stop pravidlo.
+- [ ] Oprava nekončí pocitem „asi hotovo“, ale konkrétním zavíracím záznamem.
+
+### Mini úkol
+
+Vyber jednu opravu, která byla nedávno sloučená. Napiš po-merge kartu v sedmi polích: původní nález, sloučená změna, první ověření, datová hranice, úklid, vlastník a další datum. Potom najdi jednu dočasnou stopu, která po opravě zůstala: export, token, debug log, ruční seznam, šablonu nebo backlog položku. Buď ji ukliď, nebo zapiš přesné datum, kdy se uklidí. Na konci napiš jeden verdikt, ne další neurčité „budeme sledovat“.
+
 ## Zdroje
 
 - IETF RFC 9110: HTTP Semantics - význam HTTP přesměrování a stavů včetně `410 Gone` pro zdroje, které už nejsou dostupné: https://www.rfc-editor.org/rfc/rfc9110.html
@@ -63865,6 +63972,8 @@ Vezmi jednu hotovou opravu, která čeká na review. Nečti hned diff. Nejdřív
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-28: Doplněna příloha o uzavření sloučené opravy po mergi bez tichého doznívání: po-merge karta s původním nálezem, sloučenou změnou, ověřením, datovou hranicí, úklidem, vlastníkem a dalším datem, praktické ověření v místě práce, úklid pilotních a review stop, pět zavíracích verdiktů, příklad retenčního reportu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro práci s opravou po sloučení. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-28: Doplněna příloha o review implementované backlogové opravy před mergem bez falešné jistoty: návrat k realizační kartě před čtením diffu, pětibodová review karta, oddělení technických námitek od nových produktových požadavků, praktická kontrola datové stopy ve vstupech, výstupech, logách a dokumentaci, pět merge verdiktů, příklad retenčního reportu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro kontrolu implementované opravy před sloučením. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
