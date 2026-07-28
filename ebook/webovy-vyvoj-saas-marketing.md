@@ -152,6 +152,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Zkontrolovat uzavřenou opravu automatizace po běžném cyklu | „kontrola uzavřené opravy“, „oprava po běžném cyklu“ nebo „post-close review automatizace“ | lehké ověření, že oprava dál vede k práci, nevrací pilotní stopu, neobchází zúžení a nepotřebuje další proces |
 | Převést post-close nález zpět do mapy automatizací | „post-close nález“, „nález do mapy“ nebo „oprava po běžném cyklu našla problém“ | rozhodnutí, jestli nález patří do mapy, runbooku, nové opravné karty, nebo se má zavřít bez další práce |
 | Otevřít opravnou kartu z post-close nálezu bez recyklace pilotu | „opravná karta z nálezu“, „post-close karta“ nebo „nová oprava po review“ | nová karta s jedním důvodem, zúženým rozsahem, datovou hranicí, vlastníkem, kontrolním oknem a stop pravidlem |
+| Převést opravnou kartu do backlogu bez ztráty hranic | „opravná karta do backlogu“, „backlog po post-close nálezu“ nebo „oprava čeká na práci“ | backlogový úkol, který nese důvod, datovou hranici, stop pravidlo a kontrolní okno bez nafouknutí do projektu |
 | Automatizovat rutinu bez skrytého dozoru | „automatizace rutiny“, „automatizační karta“ nebo „vypínač automatizace“ | malý automatizační návrh s účelem, vstupy, výstupem, vlastníkem, logy, ručním rozhodnutím a datem revize |
 | Vyhodnotit automatizaci po prvních bězích | „review automatizace“, „automatizace po spuštění“ nebo „autopilot“ | rozhodnutí ponechat, zúžit, přepsat, vrátit do ruční rutiny nebo vypnout automatizaci podle nálezů, šumu a datové stopy |
 | Vypnout automatizaci bez zapomenutého běhu | „vypnutí automatizace“, „ukončený autopilot“ nebo „automatizace končí“ | vypínací karta s posledním během, revokací tokenů, úklidem výstupů, náhradním postupem a kontrolou veřejných slibů |
@@ -63324,6 +63325,109 @@ Tohle je skutečná nová karta, protože se mění vstup automatizace. Zárove�
 
 Vezmi jeden post-close nález, který by mohl svádět k návratu starého pilotu. Napiš opravnou kartu v devíti polích: nález, rozhodnutí, důvod, rozsah, mimo rozsah, datová hranice, vlastník, kontrolní okno, stop pravidlo. Potom škrtni všechno, co je jen starý komfort z pilotu. Pokud po škrtnutí nezůstane změna chování automatizace, kartu neotevírej. Oprav mapu nebo runbook a zavři nález bez další práce.
 
+## Příloha: Převod opravné karty do backlogu bez ztráty hranic
+
+Opravná karta je užitečná jen tehdy, když se z ní stane práce, která jde udělat, zkontrolovat a zavřít. Pokud po napsání zůstane jen jako hezký odstavec v dokumentu, tým si sice na chvíli připadá řízeně, ale provoz se nezmění. Druhé riziko je opačné: karta se přepíše do backlogu jako „opravit automatizaci“ a cestou ztratí datovou hranici, stop pravidlo i původní důvod. Pak už nejde o řízenou opravu. Je to jen nový úkol s dobrým rodokmenem a špatnou pamětí.
+
+Převod do backlogu má proto zachovat omezení, ne jen název práce. Backlogový úkol má nést tolik kontextu, aby vývojář, produktový vlastník nebo provozní člověk nemusel znovu otevírat starý pilot, chat, screenshoty a náhodné exporty.
+
+> Codyho komentář: Backlog je místo práce, ne prádelna rozhodnutí. Když do něj hodíš špinavou kartu bez hranic, nevyleze z ní čistý úkol. Vyleze jen větší úkol s menší odpovědností.
+
+### Přepiš kartu na úkol se slovesem
+
+Backlogová položka má začínat konkrétním chováním, které se má změnit. Ne „analýza reportu“, ne „podívat se na exporty“, ne „zlepšit automatizaci“. Sloveso má ukázat, co bude po dokončení jiné.
+
+Příklady přepisu:
+
+| Slabý název | Lepší název |
+| --- | --- |
+| Prověřit retenční report | Přidat metadata portálových exportů do retenčního reportu |
+| Upravit support asistenta | Zastavit odpovědi asistenta u dotazů s billing dopadem |
+| Zlepšit alerty | Přesměrovat alert na vlastníka služby a vypnout kopii do společného kanálu |
+| Vyřešit starý pilot | Zavřít pilotní exporty a ponechat jen týdenní agregovaný výstup |
+
+Dobré sloveso drží rozsah. Když ho neumíš napsat, opravná karta ještě není připravená do backlogu. Je pořád ve fázi rozhodnutí.
+
+### Přenes pět polí beze změny
+
+Při převodu do backlogu se nesmí ztratit pět polí z opravné karty. Můžeš je zkrátit, ale nesmíš je přeložit do mlhy.
+
+| Pole | Proč musí přežít převod |
+| --- | --- |
+| Důvod | aby úkol neotevíral starý pilot jen ze setrvačnosti |
+| Rozsah | aby práce neměnila další vrstvy automatizace bokem |
+| Mimo rozsah | aby se nevrátily zrušené logy, příjemci nebo exporty |
+| Datová hranice | aby implementace nezačala nejsnazší větou „přidejme víc dat“ |
+| Stop pravidlo | aby úkol nekončil jen mergem, ale ověřeným rozhodnutím |
+
+Krátká backlogová položka může vypadat takto:
+
+| Pole | Zápis |
+| --- | --- |
+| Název | Přidat metadata portálových exportů do retenčního reportu |
+| Proč teď | Post-close review ukázalo, že portálové exporty unikají běžnému úklidu. |
+| Rozsah | Přidat jen metadata exportu: ID, typ, vytvoření, expirace, vlastník. |
+| Mimo rozsah | Nečíst obsah exportů, nerozšiřovat publikum reportu, nevracet denní pilotní běh. |
+| Datová hranice | Výstup vidí vlastník retenční mapy; kontrolní logy z pilotu opravy se smažou po kontrole. |
+| Hotovo | Dva týdenní běhy ukážou portálové exporty a vlastník podle nich zavře úklid bez ručního seznamu. |
+
+Tahle karta je stručná, ale drží důležité mantinely. Když ji někdo vezme za týden, nemusí luštit historii rozhodnutí.
+
+### Rozděl práci na rozhodnutí, implementaci a kontrolu
+
+U oprav automatizací často nestačí jedno generické „done“. Potřebuješ tři malé fáze:
+
+| Fáze | Výstup |
+| --- | --- |
+| Rozhodnutí | potvrzená datová hranice, rozsah a mimo rozsah |
+| Implementace | změněný vstup, pravidlo, výstup, frekvence nebo pravomoc |
+| Kontrola | první běhy porovnané se stop pravidlem a úklid dočasných stop |
+
+Nemusí to být tři samostatné tickety. U malé opravy stačí tři části v jedné kartě. Důležité je, aby se karta nezavřela ve chvíli, kdy je kód hotový, ale až ve chvíli, kdy je jasné, jestli oprava opravdu pomohla a nezvětšila datovou stopu.
+
+Praktické pravidlo: pokud úkol mění data, publikum výstupu nebo pravomoc automatizace, definice hotovo musí obsahovat kontrolní běh. Bez něj je hotová jen implementace, ne oprava.
+
+### Nenech prioritu přepsat privacy hranici
+
+Backlog má přirozenou gravitaci k urgentním věcem. Když oprava automatizace soutěží s bugy, obchodními požadavky a novými funkcemi, někdo může zkusit zkrátit cestu: „Teď to rychle pošleme všem a pak se uvidí.“ To je přesně moment, kdy má karta chránit před ztrátou hranic.
+
+Při plánování položky polož tři otázky:
+
+- Zrychluje navržený kompromis práci, nebo jen rozšiřuje data, aby se nemuselo rozhodnout?
+- Dá se stejný výsledek ověřit na menším výstupu, kratší retenci nebo užším publiku?
+- Pokud opravu odložíme, jaký je nejmenší ruční postup, který nevytvoří nový exportní chaos?
+
+Odložená oprava je přijatelná, pokud má ruční náhradu s jasným koncem. Odložená oprava bez ruční hranice jen přesune problém z automatizace do lidí.
+
+### Příklad: Karta čeká na příští sprint
+
+Tým zjistil, že report exportů neobsahuje portálové exporty, ale tento týden má prioritu bezpečnostní patch. Oprava tedy nepůjde hned do implementace. Správný backlogový zápis nevypadá jako „udělat později“. Vypadá takto:
+
+| Pole | Zápis |
+| --- | --- |
+| Stav | Připraveno, čeká na kapacitu po bezpečnostním patchi |
+| Dočasná náhrada | Vlastník retenční mapy jednou týdně zkontroluje seznam portálových exportů bez exportu obsahu. |
+| Hranice náhrady | Žádné sdílené tabulky se zákaznickými daty, jen počet a ID exportů k úklidu. |
+| Trigger implementace | První volný plánovací slot po patchi nebo druhý týdenní ruční průchod. |
+| Stop náhrady | Ruční kontrola končí nasazením opravy nebo rozhodnutím report zrušit. |
+
+Tady backlog neztratil rozhodnutí. Jen přiznal, že práce čeká. To je fér. Horší by bylo tvářit se, že odklad nemá provozní náklad.
+
+### Checklist: Převod opravné karty do backlogu
+
+- [ ] Backlogová položka začíná slovesem a popisuje změnu chování.
+- [ ] Přežil důvod, rozsah, mimo rozsah, datová hranice a stop pravidlo.
+- [ ] Definice hotovo obsahuje ověření dopadu, ne jen dokončenou implementaci.
+- [ ] Pokud se mění data, publikum nebo pravomoc, existuje kontrolní běh.
+- [ ] Dočasná náhrada při odkladu má vlastníka, hranici dat a datum konce.
+- [ ] Priorita v backlogu nepřepsala privacy omezení z opravné karty.
+- [ ] Karta nevyžaduje čtení starého pilotu, aby ji šlo bezpečně udělat.
+- [ ] Po dokončení se výsledek vrátí do mapy automatizací, runbooku nebo zavíracího rozhodnutí.
+
+### Mini úkol
+
+Vezmi jednu opravnou kartu z post-close nálezu a přepiš ji na backlogovou položku. Napiš název se slovesem, jedno „proč teď“, rozsah, mimo rozsah, datovou hranici a definici hotovo. Potom zkus kartu předat někomu, kdo nečetl původní pilot. Pokud by musel hledat kontext ve starém chatu nebo exportu, karta ještě není připravená. Doplň hranice přímo do ní a staré nosiče nech spát.
+
 ## Zdroje
 
 - IETF RFC 9110: HTTP Semantics - význam HTTP přesměrování a stavů včetně `410 Gone` pro zdroje, které už nejsou dostupné: https://www.rfc-editor.org/rfc/rfc9110.html
@@ -63517,6 +63621,8 @@ Vezmi jeden post-close nález, který by mohl svádět k návratu starého pilot
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-28: Doplněna příloha o převodu opravné karty z post-close nálezu do backlogu bez ztráty hranic: přepis karty na úkol se slovesem, zachování důvodu, rozsahu, mimo rozsah, datové hranice a stop pravidla, rozdělení práce na rozhodnutí, implementaci a kontrolu, ochrana privacy hranic při prioritizaci, příklad odložené opravy čekající na sprint, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro backlog po post-close nálezu. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-28: Doplněna příloha o otevření opravné karty z post-close nálezu bez recyklace pilotu: pravidla, kdy karta vzniká až při změně chování automatizace, oddělení nového nálezu od starého pilotu, šablona karty s jedním důvodem, ochrana datové hranice před technickým řešením, kontrolní okno podle rizika, příklad doplnění metadat exportů do retenčního reportu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro opravnou kartu z post-close nálezu. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
