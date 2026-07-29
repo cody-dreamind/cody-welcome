@@ -66644,6 +66644,139 @@ Rozhodni:
 
 Vyber jednu šablonu, u které měsíční kontrola ukázala návrat stejného problému. Za dvacet minut napiš produktovou kartu: původní šablona, pracovní situace zákazníka, minimální důkaz, pravděpodobná vrstva příčiny, nejmenší oprava, co neměníš, datová hranice, ověření a stop pravidlo. Potom rozhodni, jestli první oprava patří do produktu, mikrotextu, dokumentace, pricingu nebo interního procesu. Pokud neumíš vybrat jednu vrstvu, karta je ještě moc široká.
 
+## Příloha: Ověření produktové opravy po nasazení bez nového dohledu
+
+Produktová oprava nekončí tím, že je nasazená. Končí až ve chvíli, kdy tým ví, jestli snížila původní nejistotu, nevytvořila novou datovou stopu a může přestat žít v mimořádném režimu. Bez téhle kontroly se snadno stane, že oprava zůstane viset mezi supportem, dokumentací a produktem jako „asi hotovo“. To je stav, který vypadá klidně jen do prvního zákaznického dotazu.
+
+Tahle příloha navazuje na produktovou kartu z návratu šablonového problému. Cílem není dokazovat úspěch za každou cenu. Cílem je udělat krátké review po nasazení: původní problém, skutečně změněné místo, minimální signály dopadu, privacy stopa, úklid šablon a jasný verdikt.
+
+> Codyho komentář: Nejhorší ověření je takové, které kvůli malé opravě založí větší sledovací systém než původní problém. Když opravíš jednu nejasnou větu v exportu, nepotřebuješ radar na každý pohyb myši. Potřebuješ vědět, jestli se lidé pořád ptají na stejnou věc.
+
+### Vrať se k původní produktové kartě
+
+Před kontrolou neotevírej analytiku, support ani backlog. Otevři původní kartu a připomeň si, co bylo slíbeno. Jinak budeš hodnotit podle toho, co je zrovna vidět, ne podle důvodu opravy.
+
+Zkontroluj pět polí:
+
+| Pole z původní karty | Kontrolní otázka |
+| --- | --- |
+| Vrácený problém | Je problém pořád popsaný jako pracovní situace, nebo se mezitím změnil? |
+| Nejmenší oprava | Byla opravdu nasazena slíbená změna, nebo něco širšího? |
+| Co neměníme | Zůstal zamčený rozsah zamčený i během implementace? |
+| Datová hranice | Nepřibylo nové sbírání, logování, export nebo sdílení dat? |
+| Ověření a stop pravidlo | Víme pořád, podle čeho rozhodneme ponechat, zúžit, vrátit nebo zavřít? |
+
+Pokud se během implementace změnil rozsah, kontrola musí začít tímto rozdílem. Ne proto, aby se někdo peskoval. Protože širší oprava má jiné riziko, jiné nosiče pravdy a často i jinou datovou stopu.
+
+### Ověř, že nasazená změna odpovídá realitě
+
+Produktová oprava může být technicky nasazená a přesto neřešit původní problém. Tlačítko se přejmenovalo, ale help centrum pořád slibuje starý rozsah. Mikrotext se upravil, ale sales šablona pořád používá původní větu. Backend se změnil, ale produktový stav zákazníkovi neříká, co se stalo.
+
+Udělej jeden pracovní průchod:
+
+1. Vezmi roli člověka z původní pracovní situace.
+2. Projdi přesně krok, kde nejistota vznikala.
+3. Ověř, že nová realita je vidět bez kontaktu se supportem.
+4. Zkontroluj navazující dokumentaci, šablonu, pricing nebo interní zdroj pravdy.
+5. Zapiš jednu větu: „Po nasazení člověk vidí ___ a nemusí se ptát na ___.“
+
+Příklad:
+
+> Po nasazení administrátor při rušení workspace vidí, že export zahrnuje pracovní data, ale auditní a bezpečnostní záznamy se řídí retenční politikou. Nemusí se ptát, proč export není „úplně všechno“.
+
+Pokud takovou větu neumíš napsat, oprava ještě není ověřená. Možná funguje technicky, ale ne jako produktové vysvětlení.
+
+### Použij malé signály dopadu
+
+Ověření po nasazení má být přiměřené velikosti opravy. U malé změny mikrotextu není potřeba zakládat nový dashboard. U změny pricingu nebo exportního toku může být naopak potřeba delší kontrolní okno a opatrnější review.
+
+Použitelné signály:
+
+| Signál | Jak ho číst |
+| --- | --- |
+| Návrat stejného support dotazu | Pokud se stejná otázka vrací ve stejném tvaru, oprava pravděpodobně nemířila na správné místo. |
+| Změna navazující otázky | Pokud se lidé ptají méně na rozsah a víc na konkrétní další krok, oprava možná odstranila první nejistotu. |
+| Použití původní šablony | Pokud support dál sahá po staré šabloně, buď není uklizená, nebo produkt pořád nevysvětluje realitu. |
+| Ruční průchod novým tokem | Pokud nový člověk v týmu pochopí stav bez interního vysvětlení, text a UI pravděpodobně fungují. |
+| Rozpor mezi nosiči pravdy | Pokud produkt, dokumentace a sales odpověď říkají něco jiného, oprava není zavřená. |
+
+U malého B2B SaaS často stačí porovnat kontrolní okno před a po opravě: třeba dva týdny před nasazením a dva týdny po něm. Nehledej statistickou jistotu tam, kde máš pět dotazů měsíčně. Hledej, jestli se změnil typ nejistoty a jestli tým umí podle výsledku rozhodnout.
+
+### Zkontroluj datovou stopu opravy
+
+Každá produktová oprava má privacy dopad, i když se zdá obsahová. Nový stav v UI může znamenat nový event. Nové exportní potvrzení může znamenat nový log. Nové support makro může kopírovat víc kontextu do CRM. Oprava nejistoty nesmí mimochodem založit nový zvyk sbírat víc dat „pro jistotu“.
+
+Privacy review po nasazení:
+
+| Oblast | Otázka |
+| --- | --- |
+| Eventy | Přibyl nový event? Má jasný účel, vlastníka, retenci a není osobní víc, než musí být? |
+| Logy | Neobsahují nové logy obsah exportu, text dotazu, jména, e-maily nebo zákaznické payloady? |
+| Support a CRM | Nekopíruje nová šablona celé konverzace nebo interní poznámky tam, kde stačí typ problému? |
+| Dokumentace | Neunikly do veřejného textu interní limity, bezpečnostní detaily nebo zákaznické příklady? |
+| Retence | Má nový dočasný kontrolní výřez datum smazání nebo uzavření? |
+
+Pokud oprava přidala nový signál jen pro ověření, napiš i datum jeho vypnutí. Pilotní měření bez konce je jen budoucí nepořádek v lepší košili.
+
+### Napiš review kartu po nasazení
+
+Review karta má být krátká a rozhodovací. Nepiš kroniku implementace. Tu už má commit, ticket nebo release poznámka. Tady potřebuješ vidět, jestli oprava splnila původní účel.
+
+| Pole | Zápis |
+| --- | --- |
+| Původní problém | Jedna pracovní situace z produktové karty. |
+| Nasazená změna | Co se skutečně změnilo v produktu, textu, dokumentaci, pricingu nebo procesu. |
+| Rozdíl proti plánu | Co bylo širší, užší nebo jiné než původně slíbená nejmenší oprava. |
+| Kontrolní okno | Od kdy do kdy se dopad ověřuje. |
+| Signály dopadu | Malý počet ručních nebo agregovaných signálů bez profilování lidí. |
+| Datová stopa | Co přibylo, co nepřibylo a co se po kontrole uklidí. |
+| Stav staré šablony | Ponechat, zúžit, přepsat, archivovat nebo převést na výjimkový postup. |
+| Verdikt | Ponechat, zúžit, doplnit, vrátit, nebo otevřít novou kartu. |
+
+Příklad:
+
+| Pole | Zápis |
+| --- | --- |
+| Původní problém | Administrátor při rušení workspace čekal export všech dat včetně auditních logů. |
+| Nasazená změna | Tlačítko a potvrzovací text mluví o exportu pracovních dat a odkazují na retenční pravidlo. |
+| Rozdíl proti plánu | Help centrum bylo upraveno jen v jedné části; pricing se neměnil. |
+| Kontrolní okno | 14 dní po nasazení. |
+| Signály dopadu | Jeden navazující dotaz místo čtyř v předchozím okně; support použil staré makro jednou a hned ho zúžil. |
+| Datová stopa | Nepřibyl nový event ani session recording; kontrolní poznámka je agregovaná a zůstane jen v kartě. |
+| Stav staré šablony | Zúžit na výjimečné případy ručního exportu. |
+| Verdikt | Ponechat opravu, uklidit šablonu a zavřít mimořádné sledování. |
+
+### Rozhodni, co dál
+
+Po kontrole vyber jeden verdikt. Bez verdiktu se review mění v další poznámku v backlogu.
+
+| Verdikt | Kdy ho použít | Další krok |
+| --- | --- | --- |
+| Ponechat a zavřít | Oprava snížila původní nejistotu a nevznikla nová datová stopa. | Uklidit starou šablonu, zavřít kontrolní okno a předat běžnou revizi vlastníkovi. |
+| Zúžit | Oprava pomáhá, ale je širší, hlučnější nebo sbírá víc dat, než je potřeba. | Omezit text, event, log, publikum nebo rozsah funkcionality. |
+| Doplnit | Oprava míří správně, ale chybí jeden navazující nosič pravdy. | Doplnit konkrétní dokumentaci, snippet, stav v UI nebo interní zdroj. |
+| Vrátit | Oprava vytvořila horší nejasnost, rozpor nebo privacy riziko. | Vrátit změnu a otevřít menší kartu se správnou příčinou. |
+| Otevřít novou kartu | Původní problém se změnil na jiný produktový signál. | Zavřít starou kartu a založit novou bez recyklace starých důkazů. |
+
+Největší disciplína je zavřít věc, která je dost dobrá. Pokud oprava snížila nejistotu, nevytvořila nový slib a datová stopa je čistá, nepřidávej další měření pro pocit kontroly. Zapiš verdikt a vrať tým k běžné práci.
+
+### Checklist: Ověření produktové opravy po nasazení
+
+- [ ] Otevřel jsem původní produktovou kartu, ne jen aktuální dashboard.
+- [ ] Ověřil jsem, že nasazená změna odpovídá původní pracovní situaci.
+- [ ] Prošel jsem produkt, dokumentaci, šablonu nebo pricing jako člověk z původního scénáře.
+- [ ] Použil jsem malé signály dopadu bez profilování lidí.
+- [ ] Zkontroloval jsem, zda nepřibyly zbytečné eventy, logy, exporty nebo CRM kopie.
+- [ ] Dočasné kontrolní poznámky mají jasný konec nebo místo uložení.
+- [ ] Stav původní šablony je rozhodnutý: ponechat, zúžit, přepsat, archivovat nebo převést na výjimku.
+- [ ] Review karta obsahuje kontrolní okno, signály, datovou stopu a verdikt.
+- [ ] Pokud oprava pomohla, ukončil jsem mimořádné sledování.
+- [ ] Pokud oprava nepomohla, otevřel jsem novou menší kartu místo dalšího plošného dohledu.
+
+### Mini úkol
+
+Vyber jednu produktovou opravu, která vznikla z opakovaného support nebo sales dotazu a už je nasazená. Za dvacet minut otevři původní kartu, projdi jednu pracovní cestu jako zákazník a napiš review kartu: původní problém, nasazená změna, rozdíl proti plánu, kontrolní okno, signály dopadu, datová stopa, stav staré šablony a verdikt. Pokud při kontrole najdeš nový event, log nebo ruční export zavedený jen kvůli ověření, dopiš k němu datum vypnutí nebo důvod, proč má zůstat v běžném provozu.
+
 ## Zdroje
 
 - IETF RFC 9110: HTTP Semantics - význam HTTP přesměrování a stavů včetně `410 Gone` pro zdroje, které už nejsou dostupné: https://www.rfc-editor.org/rfc/rfc9110.html
@@ -66837,6 +66970,8 @@ Vyber jednu šablonu, u které měsíční kontrola ukázala návrat stejného p
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-29: Doplněna příloha o ověření produktové opravy po nasazení bez nového dohledu: návrat k původní produktové kartě, pracovní průchod nasazenou změnou, malé signály dopadu bez profilování, kontrola datové stopy, review karta po nasazení, pět verdiktů pro další krok, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-29: Doplněna příloha o převodu návratu šablonového problému do produktové opravy bez profilování zákazníků: rozpoznání, kdy šablona už nestačí, zápis problému jako pracovní situace, minimální důkazy bez exportu konverzací, výběr vrstvy opravy, malá produktová karta, ověření dopadu bez nového dohledu, úprava původní šablony po změně reality, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
