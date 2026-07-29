@@ -66021,6 +66021,145 @@ Tým neopakoval plošnou kontrolu celého CRM. Našel jeden zdroj návratu, opra
 
 Vyber jednu nedávno opravenou šablonu a z předávací karty vezmi starý slib, novou odpověď a hlavní riziko. Zkontroluj maximálně pět prvních použití v jednom kanálu. Ulož jen kontrolní kartu: typ kanálu, nález, datovou stopu, zdroj případného návratu a verdikt. Pokud se starý slib nevrátil, kontrolu zavři. Pokud se vrátil, oprav jeden konkrétní nosič a naplánuj jediné ověření po opravě.
 
+## Příloha: Opravit šablony po první kontrole bez nekonečného ladění
+
+První kontrola odpovědí má skončit verdiktem. Když verdikt zní „opravit text“, „uklidit nosič“, „zúžit automatizaci“ nebo „předat do produktu“, láká to otevřít širokou revizi komunikace. To je přesně chvíle, kdy se z jedné užitečné kontroly stane provozní bahno. Oprava šablony po první kontrole má být malá, řízená a ukončitelná.
+
+Tahle příloha navazuje na kontrolní kartu prvních odpovědí po změně šablon. Neřeší znovu, proč se dokumentace stahovala nebo proč se původní šablona měnila. Řeší jeden nález z odpovědí: starý slib se vrátil, nová odpověď není dost jasná, automatizace vytáhla starý zdroj, nebo zákaznický dotaz odkryl reálnou díru v produktu. Cíl není mít dokonalou knihovnu odpovědí. Cíl je odstranit příčinu návratu staré pravdy a znovu ověřit jen dotčené místo.
+
+> Codyho komentář: Když první kontrola najde problém, není to ostuda. Ostuda je přidat tři nové review meetingy, čtyři tagy v CRM a nula opravených vět. Šablona nepotřebuje terapii, potřebuje jasnou opravu a konec.
+
+### Vezmi jen jeden nález z kontrolní karty
+
+Začni kontrolní kartou, ne pocitem. Vyber jeden konkrétní nález a přepiš ho do opravné věty.
+
+| Nález z kontroly | Opravná věta |
+| --- | --- |
+| Sales follow-up poslal staré PDF s exportním slibem. | Opravit sales snippet `offboarding_complete`, aby vedl na aktuální trust balíček a nesliboval „všechna data“. |
+| Support agent ručně dopsal starý rozsah exportu. | Zpřesnit support makro tak, aby odpověď pokryla běžnou otázku na auditní logy bez dopisování starého slibu. |
+| Automatický draft použil starý text ze znalostní báze. | Odebrat starý zdroj z automatického draftování a ověřit jeden nový draft. |
+| Nová odpověď vyvolala opakovaný dotaz na výjimku. | Doplnit rozhodovací větu pro danou výjimku nebo otevřít produktovou kartu, pokud výjimka není vyřešená. |
+| Interní runbook pořád vede na archivní stránku. | Přepsat odkaz v runbooku na aktuální zdroj pravdy a označit archivní stránku jako nepoužitelnou pro odpovědi. |
+
+Jedna opravná věta chrání rozsah. Pokud do ní nejde napsat název šablony, nosiče, automatizace nebo produktové díry, nález ještě není připravený k opravě. Vrať se k první kontrole a zjisti, odkud se stará pravda opravdu vrátila.
+
+### Rozhodni, kterou vrstvu opravuješ
+
+Šablonový nález může vypadat stejně, ale příčina může být jiná. Když opravíš špatnou vrstvu, problém se vrátí v trochu jiném kostýmu.
+
+| Vrstva | Kdy ji opravovat | Jak vypadá dobrá oprava |
+| --- | --- | --- |
+| Text šablony | Nová odpověď je pravdivá, ale nevede k bezpečnému dalšímu kroku. | Přepsaná formulace, jasná hranice slibu a jeden doporučený další krok. |
+| Nosič pravdy | Starý text žije v makru, PDF, wiki, runbooku nebo sales snippetu. | Starý nosič je opravený, archivovaný, přesměrovaný na zdroj pravdy nebo odstraněný z běžného použití. |
+| Automatizace | Draft, sekvence nebo AI pomocník vybírá starý zdroj nebo příliš široký kontext. | Omezený zdroj znalostí, užší trigger, ruční schválení nebo vypnutý automatický zásah. |
+| Produkt | Šablona vysvětluje nejistotu, kterou produkt neumí řešit. | Produktová karta s dopadem, datovou hranicí a rozhodnutím, co se má změnit v realitě. |
+| Týmové použití | Lidé nepoznají, kdy novou odpověď použít. | Krátká poznámka do zdroje pravdy, jeden příklad použití a odstranění staré zkratky. |
+
+Nejčastější chyba je opravovat text, když problém leží v nosiči nebo automatizaci. Druhá nejčastější chyba je otevřít produktový projekt, když stačí přepsat jednu větu. Ano, obě chyby jsou drahé. Jedna utrácí důvěru, druhá kalendář.
+
+### Napiš opravný brief na jednu obrazovku
+
+Opravný brief je menší než původní úklidová karta. Má vést k jedné změně a jednomu ověření.
+
+| Pole | Co zapsat |
+| --- | --- |
+| Původní kontrola | Odkaz nebo název kontrolní karty prvních odpovědí. |
+| Nález | Jedna věta, co se vrátilo nebo co nefungovalo. |
+| Vrstva opravy | Text, nosič, automatizace, produkt nebo týmové použití. |
+| Dotčené místo | Konkrétní makro, snippet, e-mail, runbook, zdroj automatizace nebo produktová karta. |
+| Co se mění | Jedna konkrétní úprava bez dalších vedlejších přání. |
+| Co se nemění | Věci, které zůstávají mimo rozsah této opravy. |
+| Datová hranice | Jaká data se pro opravu použijí a co se záměrně neotevírá. |
+| Ověření po opravě | Jeden průchod, jeden draft, jeden follow-up nebo jedna interní zkouška. |
+| Zavírací verdikt | Zavřít, zúžit, vrátit na ruční odpověď, předat do produktu nebo opakovat jediný průchod. |
+
+Pole „co se nemění“ není byrokracie. Je to brzda proti tomu, aby se z opravy support makra najednou stal redesign celého trust centra. To může být dobrý nápad, ale nesmí se tvářit jako drobná oprava po kontrole.
+
+### Přepiš text podle rozhodnutí člověka
+
+Když opravuješ samotnou šablonu, nepiš jen přesnější právnickou formulaci. Piš odpověď, která pomůže člověku udělat další krok bez nového šumu.
+
+Špatná oprava:
+
+> Export nemusí obsahovat všechna data.
+
+Lepší oprava:
+
+> Export obsahuje projektová data. Auditní a bezpečnostní záznamy mají samostatný retenční režim, takže nejsou součástí běžného exportu workspace. Pokud ukončujete účet, použijte postup „Export a výmaz workspace“ a u auditních logů požádejte o samostatné potvrzení podle typu plánu.
+
+Dobrá oprava má čtyři části:
+
+- říká současnou pravdu;
+- pojmenuje hranici starého slibu;
+- ukáže další krok;
+- neodkrývá interní provozní detail jen proto, aby odpověď působila přesvědčivěji.
+
+Privacy-first odpověď nemá člověka umlčet. Má mu dát dost informací pro rozhodnutí a nepřidat zbytečnou datovou stopu. Pokud odpověď vyžaduje individuální kontrolu, napiš proč a co přesně se bude kontrolovat. Nezakládej univerzální formulář „pošlete nám všechno a my se ozveme“, protože to je elegantní past na další osobní data.
+
+### Uklid starý nosič, ne jen viditelnou větu
+
+Když se starý slib vrátil ze snippetu, PDF nebo interní wiki, oprava textu v jedné odpovědi nestačí. Uklid zdroj, ze kterého se kopíruje.
+
+Praktické pořadí:
+
+1. Označ starý nosič jako nepoužitelný pro nové odpovědi.
+2. Přepiš nebo smaž starou větu.
+3. Oprav odkaz na aktuální zdroj pravdy.
+4. Pokud nosič zůstává archivní, přidej viditelný stav a datum poslední platnosti.
+5. Zkontroluj, že automatizace, makra a interní vyhledávání nepreferují archivní verzi.
+
+U archivních nosičů platí jednoduché pravidlo: archiv má vysvětlovat minulost, ne řídit současnou práci. Pokud staré PDF pořád vyhrává ve vyhledávání, je to prakticky aktivní dokumentace, i kdyby mělo v názvu „archive“. Název není řízení rizika. Bohužel. Bylo by to pohodlné.
+
+### Ověř jen místo opravy
+
+Po opravě nepotřebuješ znovu kontrolovat celý kanál. Ověř místo, kde se problém našel.
+
+| Opravená vrstva | Stačí ověřit |
+| --- | --- |
+| Support makro | Jeden běžný support draft pro stejný typ dotazu. |
+| Sales snippet | Jeden follow-up nebo demo odpověď bez starého odkazu. |
+| Interní runbook | Jeden průchod záskokem podle nového zdroje. |
+| Automatický draft | Jeden nový draft se stejným triggerem a omezeným kontextem. |
+| Produktová karta | Že karta vznikla s jasnou privacy hranicí a nebyla schovaná jako „později“. |
+
+Zapiš jen zavírací výsledek: co bylo opraveno, co se ověřilo, zda se starý slib vrátil a co se dál nedělá. Pokud se problém vrátí na stejném místě, neopakuj stejnou opravu. Změň vrstvu: z textu na nosič, z nosiče na automatizaci, z automatizace na ruční schválení nebo produktovou změnu.
+
+### Příklad: Sales snippet po exportním nálezu
+
+První kontrola exportních odpovědí našla, že support makro už je opravené, ale sales follow-up pořád posílá staré PDF „complete_workspace_export.pdf“. PDF obsahovalo větu „export includes all workspace data“. Tým tedy neotevřel nový audit všech sales materiálů. Otevřel opravný brief pro jeden snippet.
+
+| Pole | Zápis |
+| --- | --- |
+| Původní kontrola | Kontrolní karta prvních exportních odpovědí po změně support makra. |
+| Nález | Sales snippet `offboarding_complete` posílá staré PDF a vrací slib „all workspace data“. |
+| Vrstva opravy | Nosič pravdy. |
+| Dotčené místo | Sales snippet `offboarding_complete` a PDF připojené ve starém follow-upu. |
+| Co se mění | Snippet povede na aktuální trust balíček a PDF bude označené jako archivní, ne jako příloha pro nové odpovědi. |
+| Co se nemění | Neotevírá se celý pricing ani nový exportní proces. |
+| Datová hranice | Kontroluje se snippet a příloha, ne obsah zákaznických konverzací. |
+| Ověření po opravě | Jeden testovací follow-up pro offboarding bez starého PDF. |
+| Zavírací verdikt | Pokud follow-up nepoužije staré PDF ani starý slib, opravu zavřít. |
+
+Po opravě proběhl jeden testovací follow-up. Obsahoval aktuální trust balíček, žádné staré PDF a krátkou větu o samostatném režimu auditních logů. Tím oprava skončila. Tým nezaložil nový měsíční report všech sales odpovědí, protože nález měl konkrétní příčinu a ta byla odstraněná.
+
+### Checklist: Oprava šablon po první kontrole
+
+- [ ] Vycházím z jedné kontrolní karty, ne z obecného pocitu nekonzistence.
+- [ ] Nález je přepsaný do jedné opravné věty.
+- [ ] Rozhodl jsem, jestli opravuji text, nosič, automatizaci, produkt nebo týmové použití.
+- [ ] Opravný brief má dotčené místo, rozsah, datovou hranici a jedno ověření.
+- [ ] Výslovně jsem napsal, co se touto opravou nemění.
+- [ ] Nová odpověď říká současnou pravdu, hranici slibu a další krok.
+- [ ] Starý nosič pravdy je opravený, archivovaný nebo odstraněný z běžného použití.
+- [ ] Neotevírám zbytečně zákaznické konverzace ani osobní detaily.
+- [ ] Po opravě ověřuji jen místo, kde se problém našel.
+- [ ] Pokud se problém vrátil, měním vrstvu zásahu, neprotahuji stejnou opravu.
+- [ ] Oprava má zavírací verdikt a konec mimořádné kontroly.
+
+### Mini úkol
+
+Vezmi poslední kontrolní kartu, kde se po změně šablony vrátil starý slib. Za deset minut napiš jednu opravnou větu a urč vrstvu opravy. Potom vyplň opravný brief na jednu obrazovku: nález, dotčené místo, co se mění, co se nemění, datová hranice a jedno ověření. Oprav jen dotčený nosič nebo text. Nakonec proveď jeden kontrolní průchod a zapiš verdikt „zavřít, zúžit, vrátit ručně, předat do produktu, nebo opakovat jediný průchod“.
+
 ## Zdroje
 
 - IETF RFC 9110: HTTP Semantics - význam HTTP přesměrování a stavů včetně `410 Gone` pro zdroje, které už nejsou dostupné: https://www.rfc-editor.org/rfc/rfc9110.html
@@ -66214,6 +66353,8 @@ Vyber jednu nedávno opravenou šablonu a z předávací karty vezmi starý slib
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-29: Doplněna příloha o opravě šablon po první kontrole bez nekonečného ladění: práce s jedním nálezem z kontrolní karty, rozlišení vrstev opravy, opravný brief na jednu obrazovku, přepis odpovědi podle rozhodnutí člověka, úklid starého nosiče pravdy, ověření jen dotčeného místa, příklad sales snippetu po exportním nálezu, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-29: Doplněna příloha o kontrole prvních odpovědí po změně šablon bez návratu starého slibu: návrat k předávací kartě, výběr malého vzorku podle rizika, kontrola odpovědi místo člověka, kontrolní karta prvních odpovědí, rozlišení návratu starého slibu od nového problému, pět zavíracích verdiktů, příklad exportního makra, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
