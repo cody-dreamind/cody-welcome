@@ -66483,6 +66483,167 @@ Tohle je přesně velikost kontroly, která má smysl. Našla konkrétní nosič
 
 Vyber jednu šablonu, která byla před měsícem uzavřená do běžného provozu. Za patnáct minut napiš původní problém jednou větou, projdi její provozní kartu a ověř maximálně tři signály: návrat stejného dotazu, změnu reality a stav navazujících míst. Potom vyplň měsíční review kartu a uzavři ji verdiktem „ponechat, zúžit, opravit text, otevřít produktovou opravu, nebo archivovat“. Pokud kontrola potřebovala konkrétní výřez odpovědi, napiš i kdy se tento výřez zavře nebo smaže.
 
+## Příloha: Převod návratu šablonového problému do produktové opravy bez profilování zákazníků
+
+Když se stejný problém vrátí i po opravě šablony, další přepis textu často není řešení. Je to jen čistší náplast. Šablona může být pravdivá, stručná a správně uklizená, ale pokud zákazník pořád naráží na stejnou nejasnost v produktu, ceníku, dokumentaci nebo procesu, odpověď jen opakovaně vysvětluje realitu, která by měla být srozumitelná sama.
+
+Tahle příloha je pro chvíli, kdy měsíční kontrola šablony skončila verdiktem „otevřít produktovou opravu“. Cílem není založit nový sledovací program nad zákazníky. Cílem je převést opakovaný dotaz na malou produktovou kartu: co je nejasné, kde to vzniká, jakou nejmenší změnou to snížíme a jak poznáme dopad bez dalšího sběru osobních stop.
+
+> Codyho komentář: Pokud support musí stejnou věc vysvětlovat každý týden, support není hrdina. Support je detektor kouře. A když detektor kouře pípá pořád, nekupuješ další detektor. Hledáš, co se pálí.
+
+### Poznej, že šablona už nestačí
+
+Ne každý návrat dotazu je produktový problém. Jednotlivá výjimka může patřit do individuální odpovědi. Starý snippet může patřit do úklidu dokumentace. Produktovou opravu otevři až ve chvíli, kdy se ukáže vzor, který šablona neumí rozumně zastavit.
+
+Typické signály:
+
+| Signál | Co pravděpodobně znamená |
+| --- | --- |
+| Stejný navazující dotaz se vrací i po jasné odpovědi | Zákazník nerozumí stavu, hranici nebo dalšímu kroku ještě před kontaktem se supportem. |
+| Lidé šablonu obcházejí vlastním vysvětlením | Odpověď je možná pravdivá, ale neodpovídá běžné situaci zákazníka. |
+| Dotaz vzniká po konkrétním kroku v produktu | Problém je v rozhraní, mikrotextu, prázdném stavu, exportu, nastavení nebo chybějícím potvrzení. |
+| Sales, support a dokumentace používají tři různé verze pravdy | Produktový nebo obchodní slib není ukotvený v jednom místě. |
+| Výjimky se opakují u stejného plánu, segmentu nebo funkce | Možná chybí samostatná větev produktu, pricingu nebo dokumentace. |
+
+Produktovou opravu neotvírej kvůli tomu, že se někomu nelíbí formulace. Otevři ji kvůli tomu, že text dlouhodobě supluje chybějící srozumitelnost, stav nebo schopnost produktu.
+
+### Zapiš problém jako pracovní situaci
+
+Špatný zápis:
+
+> Zlepšit exportní komunikaci.
+
+Lepší zápis:
+
+> Zákazník při rušení účtu vidí tlačítko „Exportovat vše“, ale export nezahrnuje auditní logy a systémové bezpečnostní záznamy. Support proto opakovaně vysvětluje stejnou hranici exportu.
+
+Pracovní situace má mít čtyři části:
+
+| Část | Otázka | Příklad |
+| --- | --- | --- |
+| Kdo | Kdo na problém naráží v práci? | Administrátor při rušení workspace. |
+| Kdy | V jakém kroku nejistota vzniká? | Po kliknutí na export před zavřením účtu. |
+| Co neví | Jaké rozhodnutí nebo očekávání je rozbité? | Myslí si, že dostane úplně všechna data včetně auditních logů. |
+| Dopad | Co se kvůli tomu děje? | Píše supportu, odkládá zrušení nebo ztrácí důvěru v exportní slib. |
+
+Tento zápis drží tým u skutečné práce zákazníka. Jakmile problém zapíšeš jako „zlepšit komunikaci“, otevřeš dveře k dalším textům, bannerům a vysvětlením. Jakmile ho zapíšeš jako pracovní situaci, můžeš opravit rozhraní, stav, dokumentaci, pricing nebo proces.
+
+### Omez důkazy na minimální výřez
+
+Produktová karta nepotřebuje profil zákazníka, časovou osu jeho chování ani export všech support konverzací. Potřebuje jen tolik důkazů, aby bylo jasné, že problém existuje a má opakovatelnou příčinu.
+
+Stačí například:
+
+- tři anonymizované typy navazujících dotazů,
+- počet opakování za poslední kontrolní okno bez jmen zákazníků,
+- jeden screenshot problematického kroku bez osobních dat,
+- odkaz na veřejnou dokumentaci, která je nejasná nebo v rozporu s produktem,
+- poznámka supportu nebo sales, která popisuje vzor, ne konkrétní osobu.
+
+Co do karty nepatří:
+
+- celé zákaznické vlákno,
+- interní poznámky o náladě nebo schopnostech zákazníka,
+- osobní údaje, které nejsou potřeba k pochopení problému,
+- nový tracking kroku jen proto, aby problém vypadal vědecky,
+- tabulka s jednotlivými uživateli, pokud rozhodnutí jde udělat agregovaně.
+
+Privacy-first pravidlo: pokud důkaz nejde vysvětlit bez identifikace člověka, zeptej se, jestli opravdu řešíš produktový vzor, nebo jen jeden citlivý případ. Jeden citlivý případ může být důležitý, ale patří do řízeného support, security nebo legal postupu, ne do obecné produktové karty.
+
+### Vyber vrstvu opravy
+
+Když se šablonový problém vrací, tým často automaticky přepíše help centrum. Někdy je to správně. Často ale jen opravuje nejviditelnější místo, ne příčinu.
+
+Rozliš pět vrstev:
+
+| Vrstva | Kdy ji opravit | Příklad změny |
+| --- | --- | --- |
+| Produktový stav | Produkt ukazuje nejasný nebo nepravdivě široký stav. | Tlačítko „Exportovat vše“ přejmenovat na „Exportovat pracovní data“ a doplnit krátký stav rozsahu. |
+| Mikrotext v toku | Nejasnost vzniká v konkrétním kroku. | Přidat větu před potvrzením exportu: „Auditní a bezpečnostní záznamy se řídí retenční politikou.“ |
+| Dokumentace | Zákazník hledá odpověď před akcí nebo po ní. | Přepsat stránku o exportu podle skutečných typů dat a dalšího kroku. |
+| Pricing nebo plán | Dotaz vzniká jen kvůli rozdílu mezi plány. | Ukázat v pricingu, který plán má jaký export, retenci nebo podporu. |
+| Interní proces | Problém vzniká v předání mezi sales, supportem a produktem. | Jeden zdroj pravdy pro exportní slib a revizní trigger při změně retence. |
+
+Nejmenší dobrá oprava je ta, která mění místo vzniku nejistoty. Pokud zákazník tápe v UI, nepomůže dokonalý interní snippet. Pokud sales slibuje něco jiného než produkt, nepomůže další odstavec v help centru. Pokud dokumentace mlčí, nemusíš hned přepisovat rozhraní.
+
+### Napiš produktovou kartu z návratu šablony
+
+Karta má být malá. Jedna obrazovka, jeden vlastník, jedno kontrolní okno. Žádný projektový román.
+
+| Pole | Zápis |
+| --- | --- |
+| Původní šablona | Název makra, snippetu nebo odpovědi, která problém opakovaně řešila. |
+| Vrácený problém | Jedna pracovní situace podle části kdo/kdy/co neví/dopad. |
+| Minimální důkaz | Agregovaný nebo anonymizovaný signál bez zbytečných osobních dat. |
+| Příčina podle týmu | Produktový stav, mikrotext, dokumentace, pricing nebo interní proces. |
+| Nejmenší oprava | Jedna změna, kterou lze nasadit nebo publikovat samostatně. |
+| Co neměníme | Výslovně zamčený rozsah, aby oprava nebobtnala. |
+| Datová hranice | Co při opravě nebudeme sbírat, exportovat ani ukládat. |
+| Ověření | Jak poznáme dopad bez profilování lidí. |
+| Stop pravidlo | Kdy opravu ponechat, vrátit, zúžit nebo zavřít. |
+
+Příklad vyplnění:
+
+| Pole | Zápis |
+| --- | --- |
+| Původní šablona | Support makro `export_scope`. |
+| Vrácený problém | Administrátor při rušení workspace čeká kompletní export všeho, protože produkt používá slovo „vše“, ale auditní a bezpečnostní logy se exportem neřídí. |
+| Minimální důkaz | Čtyři navazující dotazy na rozsah exportu za měsíc, bez exportu celých vláken; jeden anonymizovaný příklad otázky. |
+| Příčina podle týmu | Produktový mikrotext a help centrum nejsou sladěné. |
+| Nejmenší oprava | Upravit text tlačítka a doplnit krátkou větu o rozsahu exportu v potvrzovacím kroku. |
+| Co neměníme | Neměníme exportní backend, retenční politiku ani pricing. |
+| Datová hranice | Nesledujeme individuální exportní cestu, nepřidáváme session recording ani nový osobní event. |
+| Ověření | Po dvou týdnech ručně zkontrolovat počet navazujících dotazů na rozsah exportu a jednu ukázkovou odpověď, pokud vznikne. |
+| Stop pravidlo | Pokud se dotazy sníží a nevznikne nový nepravdivý slib, opravu zavřít; pokud dotazy zůstanou, otevřít samostatnou dokumentační změnu. |
+
+### Ověř dopad bez nového dohledu
+
+Produktová oprava se má ověřit tam, kde původně bolela. To ale neznamená přidat nový tracking na každé kliknutí. Často stačí krátké kontrolní okno a ruční signály.
+
+Použitelné ověření:
+
+- porovnat počet stejného typu dotazu před a po opravě,
+- zkontrolovat, jestli support dál potřebuje šablonu pro stejný problém,
+- projít jednu veřejnou stránku nebo produktový tok jako nový zákazník,
+- ověřit, že sales, support a dokumentace používají stejnou pravdu,
+- zavřít nebo upravit starou šablonu, pokud už není hlavním řešením.
+
+Pozor na falešnou přesnost. Když máš malý B2B SaaS a měsíčně pět podobných dotazů, nepotřebuješ statistický ohňostroj. Potřebuješ vědět, jestli se po opravě lidé ptají méně, jinak, nebo na hlubší věc. Ruční review malého vzorku je tady často férovější než nový analytický aparát.
+
+### Uprav šablonu až po změně reality
+
+Když produktová oprava projde, vrať se k původní šabloně. Ne proto, aby se dál ladila donekonečna, ale aby odpovídala nové realitě.
+
+Rozhodni:
+
+| Stav po opravě | Co udělat se šablonou |
+| --- | --- |
+| Problém zmizel | Archivovat šablonu nebo ji zúžit na výjimečné případy. |
+| Problém se zmenšil | Přepsat šablonu jako krátké doplnění k novému produktu nebo dokumentaci. |
+| Problém se změnil | Otevřít novou kartu s novou příčinou, ne recyklovat starou opravu. |
+| Problém zůstal | Vrátit se k vrstvě příčiny a zkontrolovat, jestli oprava mířila na správné místo. |
+| Vznikl citlivý okrajový případ | Převést ho do řízeného support, legal nebo security postupu. |
+
+Šablona nemá zůstat jako trvalé vysvětlení starého problému, který už produkt vyřešil. Jinak bude tým dál odpovídat podle minulosti. Starý text se v dokumentaci a snippetech kopíruje překvapivě snadno, takže ho po změně reality zavři viditelně.
+
+### Checklist: Produktová oprava po návratu šablonového problému
+
+- [ ] Mám doložené, že se vrací stejný problém, ne jen jedna výjimka.
+- [ ] Problém je popsaný jako pracovní situace zákazníka.
+- [ ] Důkazy jsou agregované, anonymizované nebo minimální.
+- [ ] Neexportuji celé konverzace a nezakládám nový osobní tracking.
+- [ ] Vybral jsem vrstvu opravy: produktový stav, mikrotext, dokumentace, pricing nebo interní proces.
+- [ ] Produktová karta má jednu nejmenší opravu a jednoho vlastníka.
+- [ ] Karta říká, co se teď výslovně nemění.
+- [ ] Datová hranice popisuje, co nebudeme sbírat ani ukládat.
+- [ ] Ověření dopadu jde udělat bez profilování zákazníků.
+- [ ] Po opravě se vrátím k původní šabloně a rozhodnu, jestli ji ponechat, zúžit, přepsat nebo archivovat.
+- [ ] Pokud se ukáže citlivý jednotlivý případ, nepřevádím ho násilím na obecnou produktovou změnu.
+
+### Mini úkol
+
+Vyber jednu šablonu, u které měsíční kontrola ukázala návrat stejného problému. Za dvacet minut napiš produktovou kartu: původní šablona, pracovní situace zákazníka, minimální důkaz, pravděpodobná vrstva příčiny, nejmenší oprava, co neměníš, datová hranice, ověření a stop pravidlo. Potom rozhodni, jestli první oprava patří do produktu, mikrotextu, dokumentace, pricingu nebo interního procesu. Pokud neumíš vybrat jednu vrstvu, karta je ještě moc široká.
+
 ## Zdroje
 
 - IETF RFC 9110: HTTP Semantics - význam HTTP přesměrování a stavů včetně `410 Gone` pro zdroje, které už nejsou dostupné: https://www.rfc-editor.org/rfc/rfc9110.html
@@ -66676,6 +66837,8 @@ Vyber jednu šablonu, která byla před měsícem uzavřená do běžného provo
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-29: Doplněna příloha o převodu návratu šablonového problému do produktové opravy bez profilování zákazníků: rozpoznání, kdy šablona už nestačí, zápis problému jako pracovní situace, minimální důkazy bez exportu konverzací, výběr vrstvy opravy, malá produktová karta, ověření dopadu bez nového dohledu, úprava původní šablony po změně reality, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-29: Doplněna příloha o měsíční kontrole šablony po uzavření bez sledování lidí: kontrola podle provozní karty, malé signály bez profilování, hledání návratu původního problému, čtení výjimek jako produktového signálu, ověření automatických draftů, měsíční review karta, pět verdiktů, příklad exportního makra po měsíci, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
