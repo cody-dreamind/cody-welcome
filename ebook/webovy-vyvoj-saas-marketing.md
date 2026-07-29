@@ -64484,6 +64484,131 @@ Po realizaci není potřeba oslavný report. Stačí zavírací věta: „Šablo
 
 Vyber jednu backlogovou kartu, která vznikla z provozní lekce. Nezačínej ji hned dělat. Nejdřív napiš čtyřvětý realizační brief, vyber jeden typ změny a doplň konkrétní „mimo rozsah“. Pokud neumíš napsat, jak změnu ověříš na jednom skutečném použití bez nového sledování lidí, vrať kartu o krok zpět a zúž ji. Lepší je menší hotová lekce než velké poučení, které se tváří jako projekt.
 
+## Příloha: Uzavření backlogové karty z provozní lekce bez falešného hotovo
+
+Backlogová lekce je hotová až ve chvíli, kdy změna opravdu zlepšila práci, ne když někdo odškrtl ticket. U běžných funkcí bývá lákavé říct „merge proběhl, hotovo“. U provozních lekcí je to slabé. Lekce vznikla z toho, že tým něco přehlédl, špatně předal, zbytečně měřil, držel starý přístup nebo měl rozbitou pravdu v dokumentaci. Zavření proto musí potvrdit, že se podobná slabina příště hůř zopakuje.
+
+Dobré uzavření má tři cíle: ověřit dopad, uklidit datové a procesní stopy a přenést výsledek do místa, kde bude dál řídit práci. Není to nový audit. Je to krátké rozhodnutí, které brání tomu, aby se z lekce stala jen další vrstva dokumentace, kterou nikdo nepoužije.
+
+> Codyho komentář: „Hotovo, protože je to v mainu“ je krásná věta pro změny CSS barvy tlačítka. U provozní lekce je to trochu jako říct „uklidili jsme kuchyň“, zatímco špinavé nádobí jen přesunulo kariéru do trouby.
+
+### Vrať se k realizačnímu briefu
+
+Před zavřením otevři čtyři věty, se kterými karta šla do práce. Nehledej nejdřív diff, komentáře ani vedlejší nápady. Brief říká, co mělo být změněno, proč, čeho se změna neměla dotknout a jak mělo vypadat hotovo.
+
+Zavírací kontrola:
+
+| Otázka | Dobrý signál |
+| --- | --- |
+| Změnili jsme slíbené místo? | Šablona, runbook, test, produktový text nebo dokumentace jsou upravené právě tam, kde tým pracuje. |
+| Nezměnili jsme víc, než bylo slíbeno? | Vedlejší nálezy jsou zapsané zvlášť nebo zavřené, ne přilepené k této kartě. |
+| Platí původní důvod? | Změna pořád reaguje na lekci, ne na novou náladu v týmu. |
+| Zůstala privacy hranice? | Nevznikly nové vstupy, exporty, logy, příjemci ani delší retence bez samostatného rozhodnutí. |
+| Máme jedno skutečné použití? | Nové pravidlo, šablona nebo text už pomohly v reálné práci, ne jen v představě autora. |
+
+Pokud na některou otázku odpovíš „ne“, karta ještě není zavřená. To neznamená ostudu. Znamená to, že je potřeba buď dokončit slíbenou změnu, nebo změnit verdikt a otevřít novou menší kartu.
+
+### Ověř dopad na jednom pracovním průchodu
+
+Lekční kartu neověřuj dlouhým sledováním lidí. Vyber jeden přirozený průchod práce, ve kterém se nové pravidlo mělo projevit. Může to být první nový brief, jedno review, jeden supportní případ, jeden suchý průchod runbookem nebo jedna změna veřejného textu.
+
+Praktická ověření:
+
+| Typ změny | Jak poznáš, že funguje |
+| --- | --- |
+| Upravená šablona | Nová karta obsahuje doplněné pole a vlastník podle něj udělal rozhodnutí. |
+| Upravený runbook | Člověk, který postup nepsal, podle něj zvládne určit další krok nebo eskalaci. |
+| Upravená dokumentace | Jedna odpověď zákazníkovi nebo kolegovi používá novou pravdu bez starého slibu. |
+| Upravené review | Review zachytí nebo vědomě zavře otázku, kvůli které lekce vznikla. |
+| Upravený produktový text | Čtenář nebo uživatel pochopí dopad akce bez dalšího vysvětlování od týmu. |
+| Upravená automatizační karta | Nová automatizace před spuštěním popíše vstup, výstup, příjemce, retenci a ruční brzdu. |
+
+Ověření zapiš jako větu, ne jako report. Například: „První nový exportní brief vyplnil minimální signál, příjemce a retenci; podle pole retence jsme zrušili posílání detailního CSV do chatu.“ To je mnohem užitečnější než screenshot tabulky se zeleným stavem.
+
+### Ukliď stopy po realizaci
+
+Provozní lekce často během realizace vytvoří dočasné poznámky, exporty, kopie dokumentů, pilotní odkazy nebo testovací zprávy. Když zůstanou žít, tým si zadělá na dvojí pravdu. Jedna je oficiální, druhá je ta, kterou někdo za tři měsíce najde ve starém vlákně a začne podle ní pracovat.
+
+Úklidový průchod:
+
+| Stopu zkontroluj | Co s ní udělat |
+| --- | --- |
+| Dočasné dokumenty | Přenést rozhodnutí do cílového místa a dočasný soubor archivovat nebo smazat podle účelu. |
+| Exporty a přílohy | Ověřit, že nejsou potřeba pro další práci, a zavřít je podle retenčního pravidla. |
+| Pilotní odkazy | Nahradit je odkazem na běžnou dokumentaci nebo je odstranit. |
+| Komentáře v ticketu | Nechat jen rozhodnutí, důkaz ověření a odkaz na místo pravdy. |
+| Staré šablony | Označit jako neplatné, sloučit nebo odstranit z míst, odkud je lidé kopírují. |
+| Přístupy | Odebrat dočasné role, sdílení a tokeny, které byly potřeba jen pro realizaci. |
+
+Privacy-first uzavření se často pozná právě podle toho, co po práci nezůstalo. Žádný nový dashboard, žádný nový pravidelný export, žádná širší skupina příjemců, žádné „pro jistotu to budeme sledovat každý týden“.
+
+### Napiš zavírací záznam
+
+Zavírací záznam má být krátký a použitelný i bez autora změny. Nepiš historii celé debaty. Napiš výsledek, důkaz, hranici a další stav.
+
+Šablona:
+
+| Pole | Zápis |
+| --- | --- |
+| Původní lekce | Jaké slabé místo karta řešila. |
+| Změna | Co se skutečně upravilo a kde je nové místo pravdy. |
+| Ověření | Na jakém jednom použití se ukázalo, že změna funguje. |
+| Privacy dopad | Co se nezvětšilo, co se zúžilo nebo co bylo uklizeno. |
+| Úklid | Jaké dočasné dokumenty, exporty, přístupy nebo odkazy skončily. |
+| Verdikt | Zavřít, zúžit, vrátit, otevřít novou kartu nebo zahodit jako neplatnou lekci. |
+| Další trigger | Kdy se k věci vrátit, pokud vůbec. |
+
+Dobrá zavírací věta může znít takto: „Lekce z nadměrného exportního reportu je zavřená: šablona automatizačního briefu má tři nová pole, první nový brief je použil k omezení výstupu, dočasný dokument je smazaný, starý odkaz v mapě opravený a nevznikl nový pravidelný dohled.“
+
+### Rozhodni jedním z pěti verdiktů
+
+Ne každá realizovaná lekce má stejný konec. Zavření není vždy „ponechat“. Někdy práce ukáže, že původní karta byla příliš široká, neplatná nebo vedla na jiný problém.
+
+| Verdikt | Kdy ho použít | Co následuje |
+| --- | --- | --- |
+| Zavřít | Změna funguje, stopa je uklizená a nevznikl nový dohled. | Karta končí, zůstává jen místo pravdy a případný revizní trigger. |
+| Zúžit | Změna pomáhá, ale sbírá moc dat nebo přidává moc procesu. | Otevři malou redukční kartu s jednou osou zúžení. |
+| Vrátit | Změna neřeší původní lekci nebo zvyšuje riziko. | Vrať se k předchozímu stavu a zapiš důvod bez hledání viníka. |
+| Otevřít novou kartu | Práce našla nový samostatný problém. | Nová karta dostane vlastní důvod, rozsah a privacy hranici. |
+| Zavřít jako neplatné | Původní lekce už neplatí nebo byla vyřešena jinde. | Karta končí s krátkým vysvětlením, bez další práce. |
+
+Verdikt musí být rozhodnutí, ne nálada. „Ještě to necháme chvíli běžet“ není verdikt, pokud neříká, co se bude dít, kdo to vlastní, jak dlouho a co se potom rozhodne.
+
+### Příklad: Šablona briefu je zavřená po prvním použití
+
+Tým po předchozí opravě zjistil, že exportní automatizace vznikaly bez jasné hranice výstupu. Backlogová lekce proto šla do práce jako úprava šablony automatizačního briefu.
+
+Zavírací záznam:
+
+| Pole | Zápis |
+| --- | --- |
+| Původní lekce | Exportní report posílal detailní data, protože brief nepojmenoval minimální signál, příjemce a retenci. |
+| Změna | Šablona automatizačního briefu má nová pole pro minimální signál, příjemce výstupu a retenci výstupu. |
+| Ověření | První nový brief pro billing export vyplnil všechna tři pole a podle nich zůstal výstup agregovaný. |
+| Privacy dopad | Nepřibyl nový export osobních detailů, starý ukázkový CSV soubor byl smazaný a příjemci zůstali omezení. |
+| Úklid | Mapa automatizací odkazuje na novou šablonu, starý draft briefu je odstraněný a pilotní poznámky jsou zavřené. |
+| Verdikt | Zavřít. |
+| Další trigger | Vrátit se jen při nové automatizaci, která pole nedokáže vyplnit bez výjimky. |
+
+Tady není potřeba měsíční dohled nad všemi briefy. Stačí, že nové místo pravdy existuje, první použití prošlo a karta má trigger pro výjimku. Kdyby se výjimky začaly opakovat, vznikne nová konkrétní karta. Ne plošné přilepení další kontroly na všechno.
+
+### Checklist: Uzavření backlogové karty z provozní lekce
+
+- [ ] Zavírám podle původního realizačního briefu, ne podle dojmu z poslední debaty.
+- [ ] Změna se stala v místě, kde tým opravdu pracuje.
+- [ ] Mám jedno skutečné použití nebo suchý průchod, který ověřil dopad.
+- [ ] Privacy hranice se nerozšířila bez samostatného rozhodnutí.
+- [ ] Dočasné dokumenty, exporty, odkazy, komentáře a přístupy jsou uklizené.
+- [ ] Staré šablony nebo návody už nevedou lidi ke staré pravdě.
+- [ ] Zavírací záznam má původní lekci, změnu, ověření, privacy dopad, úklid, verdikt a trigger.
+- [ ] Verdikt je jeden z pěti: zavřít, zúžit, vrátit, otevřít novou kartu nebo zavřít jako neplatné.
+- [ ] Nové nálezy mají vlastní kartu, ne tajný přívěsek u této práce.
+- [ ] Po zavření nevznikl nový pravidelný dohled jen proto, že tým nechce pustit kontrolu z ruky.
+
+### Mini úkol
+
+Vezmi jednu dokončenou backlogovou kartu, která vznikla z provozní lekce. Napiš zavírací záznam do sedmi polí: původní lekce, změna, ověření, privacy dopad, úklid, verdikt a další trigger. Pokud neumíš doložit jedno skutečné použití, karta ještě není hotová. Pokud při zavírání najdeš nový problém, zapiš ho jako samostatnou rozhodovací větu a původní kartu nezvětšuj. Backlog není těsto na knedlíky; čím víc do něj hněteš, tím méně drží tvar.
+
 ## Zdroje
 
 - IETF RFC 9110: HTTP Semantics - význam HTTP přesměrování a stavů včetně `410 Gone` pro zdroje, které už nejsou dostupné: https://www.rfc-editor.org/rfc/rfc9110.html
@@ -64677,6 +64802,8 @@ Vyber jednu backlogovou kartu, která vznikla z provozní lekce. Nezačínej ji 
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-29: Doplněna příloha o uzavření backlogové karty z provozní lekce bez falešného hotovo: návrat k realizačnímu briefu, ověření dopadu na jednom pracovním průchodu, úklid dočasných dokumentů, exportů, odkazů a přístupů, zavírací záznam, pět jasných verdiktů, příklad šablony automatizačního briefu, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-29: Doplněna příloha o otevření backlogové lekce do práce bez ztráty původního smyslu: ověření aktuálnosti lekce, čtyřvětý realizační brief, zamčení jednoho typu změny, ochrana rozsahu a privacy hranice, malé ověření na skutečném použití, příklad retenčního reportu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro otevření backlogové lekce do práce. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
