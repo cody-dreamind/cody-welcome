@@ -207,6 +207,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Změnit publikum převzaté dokumentace bez rozmazání hranic | „publikum převzaté dokumentace“, „nový vlastník mění publikum“ nebo „převzatá dokumentace veřejně“ | publikační změnová karta, která chrání původní účel, datovou hranici, přístupy a staré nosiče pravdy |
 | Změnit publikum dokumentace bez nechtěného zveřejnění | „změna publika dokumentace“, „veřejná interní sdílená vrstva“ nebo „publikum dokumentace“ | publikační karta, která určí co je veřejné, řízeně sdílené, interní nebo neveřejné a jak se uklidí odkazy, příklady a přístupy |
 | Zkontrolovat změnu publika dokumentace po prvním použití | „kontrola publika dokumentace“, „publikum po publikaci“ nebo „veřejná dokumentace po změně“ | kontrolní karta, která ověří čtenáře, citlivé detaily, odkazy, sdílení, indexaci a dopad bez sledování lidí |
+| Ověřit změnu publika převzaté dokumentace po prvním použití | „kontrola převzaté dokumentace“, „nový vlastník po publikaci“ nebo „publikační změna po předání“ | kontrola, že nový vlastník drží hranice z předání, starý vlastník není tichý zachránce a změna publika nepřepsala odpovědnost |
 | Stáhnout nebo zúžit veřejnou dokumentaci bez ztráty důvěry | „stažení veřejné dokumentace“, „zúžení veřejného slibu“ nebo „veřejný text končí“ | stahovací karta s důvodem, náhradní odpovědí, opravou odkazů, archivem a kontrolou starých slibů |
 | Uklidit šablony po stažení dokumentace bez návratu starého slibu | „šablony po stažení dokumentace“, „starý slib v makru“ nebo „support šablony po změně“ | krátký úklid maker, obchodních textů, onboardingových zpráv, automatických odpovědí a interních snippetů po změně veřejné pravdy |
 | Ověřit první odpovědi po změně šablon bez návratu starého slibu | „kontrola odpovědí po změně šablon“, „první odpovědi po stažení“ nebo „makro v provozu“ | kontrola několika skutečných odpovědí, navazujících dotazů, starých odkazů, automatizací a datové hranice po úpravě šablon |
@@ -65604,6 +65605,123 @@ Výsledek: dokumentace se rozšíří, ale ne nekontrolovaně. Veřejná FAQ zů
 
 Vyber jednu převzatou dokumentační stránku, kterou někdo navrhuje ukázat jinému publiku. Za dvacet pět minut vyplň publikační změnovou kartu a napiš jednu větu: „Změna publika je bezpečná jen pokud ___ zůstane ___“. Potom oprav jedno navazující místo, které by po změně mohlo posílat starou nebo moc širokou odpověď. Pokud takové místo neumíš najít, změna ještě není připravená k publikaci.
 
+## Příloha: Kontrola změny publika převzaté dokumentace po prvním použití bez ztráty vlastnictví
+
+Když dokumentace nejdřív projde sloučením, potom předáním vlastnictví a nakonec změnou publika, vzniká zvláštní riziko: každý krok může vypadat správně, ale odpovědnost se mezi nimi potichu rozpustí. Starý vlastník si pořád pamatuje kontext, nový vlastník změnil publikum, support používá novou verzi a sales si nechal starý text „pro jistotu“. Výsledkem není dokumentace. Výsledkem je malý organizační mlýn na polopravdy.
+
+Tahle kontrola navazuje na obecnou kontrolu publika dokumentace. Neřeší znovu, jestli se do veřejné vrstvy dostal interní detail. Řeší hlavně, jestli po změně publika pořád platí vlastnictví z předávací karty: kdo rozhoduje, kdo opravuje, kdo drží datovou hranici a kdo má právo říct „tenhle text už neodpovídá realitě“.
+
+> Codyho komentář: Předaná dokumentace bez vlastnictví je jako klíče od kanceláře v květináči. Praktické, dokud se nic neděje. Pak najednou všichni vědí, že to byl vlastně vždycky špatný nápad.
+
+### Vrať se ke třem kartám najednou
+
+U převzaté dokumentace nestačí otevřít jen publikační změnovou kartu. Potřebuješ vedle sebe tři záznamy:
+
+| Karta | Proč je důležitá |
+| --- | --- |
+| Merge nebo sloučení | Říká, která stránka se stala cílovou pravdou a které staré zdroje měly ztichnout. |
+| Předání vlastnictví | Říká, kdo za stránku ručí, kdo je záskok a jaké hranice nový vlastník převzal. |
+| Změna publika | Říká, komu je text nově určený, co se nesmělo přenést a co se muselo přepsat. |
+
+Kontrola po prvním použití se ptá: drží tyto tři záznamy pohromadě? Pokud merge karta říká, že staré support makro končí, předávací karta říká, že vlastníkem je customer success, ale po změně publika pořád opravy dělá původní produktový autor, vlastnictví není předané. Jen se tváří, že je.
+
+### Ověř, kdo udělal první opravu
+
+První použití změněné dokumentace skoro vždycky najde drobnost: neurčitou větu, špatný odkaz, chybějící hranici, starou šablonu nebo zákaznický dotaz. Sleduj, kdo drobnost opravil.
+
+| Situace | Co znamená | Další krok |
+| --- | --- | --- |
+| Opravu udělal nový vlastník | Předání pravděpodobně funguje. | Zapsat opravu a pokračovat běžným revizním triggerem. |
+| Opravu navrhl nový vlastník, ale schválil původní vlastník | Hranice pravomoci je nejasná. | Doplnit, co nový vlastník smí měnit sám. |
+| Opravu udělal původní vlastník bez nového vlastníka | Předání je jen formální. | Vrátit se k předávací kartě a udělat krátké převzetí znovu. |
+| Opravu udělal někdo třetí, protože „to hořelo“ | Dokumentace má provozní díru. | Určit dočasného vlastníka incidentní opravy a potom vrátit vlastnictví do normálu. |
+| Oprava nevznikla, i když problém všichni viděli | Vlastnictví nemá pracovní sílu. | Zúžit rozsah dokumentace nebo změnit vlastníka. |
+
+Tahle kontrola není personální audit. Nehledá viníka. Hledá, jestli systém vlastnictví přežil první reálný kontakt s prací. Pokud ne, oprav systém, ne jen větu.
+
+### Zkontroluj, že nový vlastník drží hranici publika
+
+Po změně publika bývá největší tlak na „rychlé vysvětlení“. Nový vlastník chce pomoct, sales chce uzavřít obchod, support chce odbavit ticket. V tom tlaku se snadno poruší původní hranice.
+
+Zeptej se:
+
+- Neposlal nový vlastník starou interní verzi jako přílohu, protože veřejná odpověď byla moc stručná?
+- Nepřidal do veřejného textu detail, který měl zůstat v řízeně sdílené nebo interní vrstvě?
+- Neobešel schválení tím, že změnu udělal v šabloně místo v cílovém dokumentu?
+- Nezůstala původní stránka jako „rychlejší“ zdroj pravdy pro tým?
+- Umí záskok najít novou hranici bez vysvětlování od původního autora?
+
+Privacy-first pointa je jednoduchá: změna publika má snížit zmatek, ne rozšířit počet míst, kde mohou uniknout interní nebo osobní detaily.
+
+### Napiš vlastnické review po publikaci
+
+Použij krátkou kartu. Má spojit obsahový dopad se stavem vlastnictví.
+
+| Pole | Co zapsat |
+| --- | --- |
+| Cílový dokument | Která převzatá stránka, šablona nebo balíček změnil publikum. |
+| Nový vlastník | Kdo měl po předání nést kvalitu, slib a hranici publika. |
+| První použití | Kde se změněná dokumentace poprvé použila ve skutečné práci. |
+| První nález | Jaká nejasnost, chyba nebo stará stopa se objevila. |
+| Kdo zasáhl | Kdo opravu navrhl, schválil a provedl. |
+| Hranice publika | Zda veřejná, sdílená, interní a neveřejná vrstva zůstaly oddělené. |
+| Záskok | Zda záskok umí najít aktuální pravdu a provést malou opravu. |
+| Starý vlastník | Zda je jen konzultant pro historii, nebo pořád tichý provozní vlastník. |
+| Verdikt | Ponechat vlastnictví, doplnit pravomoc, zopakovat předání, zúžit publikum nebo změnit vlastníka. |
+
+Dobré review končí jedním rozhodnutím. Nemá znovu otevřít celý merge, celý trust balíček ani celou dokumentační strategii. Když se při kontrole objeví větší problém, otevři samostatnou kartu. Nepoužívej review jako nákupní košík na všechny bolístky.
+
+### Rozhodni podle vlastnictví, ne podle počtu dotazů
+
+U převzaté dokumentace může první použití přinést dotaz a přesto být v pořádku. Důležitější je, jestli dotaz umí obsloužit nový vlastník bez návratu ke staré neformální pravdě.
+
+| Verdikt | Kdy použít | Co udělat |
+| --- | --- | --- |
+| Ponechat vlastnictví | Nový vlastník opravil drobnost, hranice drží a záskok se orientuje. | Zavřít mimořádnou kontrolu a nechat běžný revizní trigger. |
+| Doplnit pravomoc | Nový vlastník ví, co je špatně, ale neví, co smí změnit. | Dopsat hranici změn jazyka, odkazů, slibu a publika. |
+| Zopakovat předání | Opravy pořád tahá původní autor nebo neformální znalost. | Udělat krátké nové předání s jedním pracovním testem. |
+| Zúžit publikum | Nový vlastník drží text, ale nové publikum vyžaduje moc interního vysvětlování. | Vrátit část do řízeně sdílené nebo interní vrstvy. |
+| Změnit vlastníka | Dokumentace patří k jiné práci, než se při předání myslelo. | Převést vlastnictví na roli, která řeší reálné dotazy a změny. |
+
+Po verdiktu vždy uklid jednu věc: starý odkaz, starou šablonu, neplatnou přílohu, poznámku v runbooku nebo nejasnou pravomoc. Bez úklidu je verdikt jen hezká věta v logu. Těch už má svět dost.
+
+### Příklad: Převzatý trust balíček po prvním sales použití
+
+Customer success převzal po sloučení dokumentaci k exportu dat a změnil část interního support makra na řízeně sdílený trust balíček. Sales ho použil u prvního většího zájemce. Zákazník se doptal, zda exportní soubor obsahuje auditní logy.
+
+Vlastnické review:
+
+| Pole | Zápis |
+| --- | --- |
+| Cílový dokument | Trust balíček „Export dat a ukončení workspace“. |
+| Nový vlastník | Customer success lead. |
+| První použití | Sales follow-up po bezpečnostním dotazníku. |
+| První nález | Chyběla věta, že auditní logy mají samostatný režim exportu a retence. |
+| Kdo zasáhl | Customer success navrhl odpověď, product owner ověřil pravdu, customer success upravil balíček. |
+| Hranice publika | Interní názvy jobů a přesný postup oprávnění zůstaly v support makru. |
+| Záskok | Záskok našel balíček i interní makro, ale nevěděl, kdo schvaluje změnu slibu. |
+| Starý vlastník | Původní autor jen potvrdil historický důvod odděleného režimu auditních logů. |
+| Verdikt | Doplnit pravomoc: customer success smí upravit vysvětlení, změnu slibu schvaluje product owner. |
+
+Výsledek není další velký dokument. Jen jedna doplněná pravomoc, jedna věta v balíčku a jedna opravená poznámka v předávací kartě. Starý vlastník se nevrací do provozu, nový vlastník ví, kde je hranice, a sales má aktuální odpověď bez interní přílohy.
+
+### Checklist: Kontrola změny publika převzaté dokumentace
+
+- [ ] Při kontrole jsem otevřel merge kartu, předávací kartu a publikační změnovou kartu.
+- [ ] Ověřil jsem první skutečné použití změněného publika na konkrétní práci.
+- [ ] Vím, kdo navrhl, schválil a provedl první opravu nebo vysvětlení.
+- [ ] Nový vlastník umí udělat běžnou opravu bez původního autora.
+- [ ] Je jasné, kdy nový vlastník potřebuje schválení změny slibu, datové hranice nebo publika.
+- [ ] Záskok najde aktuální zdroj pravdy a umí projít malou opravu.
+- [ ] Starý vlastník není tichý provozní vlastník schovaný za „jen se ho zeptáme“.
+- [ ] Veřejná, řízeně sdílená, interní a neveřejná vrstva zůstaly oddělené.
+- [ ] Kontrola nevyžadovala sledovat jednotlivé čtenáře ani zakládat nový dashboard.
+- [ ] Po verdiktu jsem uklidil jednu starou stopu nebo doplnil jednu hranici vlastnictví.
+
+### Mini úkol
+
+Vyber jednu dokumentaci, která byla sloučená, předaná novému vlastníkovi a potom ukázaná jinému publiku. Najdi první reálné použití a vyplň vlastnické review po publikaci. Na konci napiš jednu větu: „Nový vlastník tuto dokumentaci opravdu vlastní, pokud bez původního autora umí ___.“ Pokud větu neumíš doplnit, neopravuj jen text. Zopakuj předání na jednom malém pracovním testu.
+
 ## Zdroje
 
 - IETF RFC 9110: HTTP Semantics - význam HTTP přesměrování a stavů včetně `410 Gone` pro zdroje, které už nejsou dostupné: https://www.rfc-editor.org/rfc/rfc9110.html
@@ -65797,6 +65915,8 @@ Vyber jednu převzatou dokumentační stránku, kterou někdo navrhuje ukázat j
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-29: Doplněna příloha o kontrole změny publika převzaté dokumentace po prvním použití bez ztráty vlastnictví: práce se třemi kartami najednou, ověření kdo udělal první opravu, kontrola hranice publika u nového vlastníka, vlastnické review po publikaci, verdikty podle stavu vlastnictví, příklad převzatého trust balíčku po prvním sales použití, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro ověření změny publika převzaté dokumentace. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-29: Doplněna příloha o změně publika převzaté dokumentace bez rozmazání hranic: návrat k předávací kartě, rozlišení změny publika od změny pravdy, publikační změnová karta, úklid navazujících maker, UI odkazů, trust balíčků a sdílených odkazů, příklad převodu support makra do řízeně sdíleného trust balíčku, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro změnu publika převzaté dokumentace. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
