@@ -64609,6 +64609,195 @@ Tady není potřeba měsíční dohled nad všemi briefy. Stačí, že nové mí
 
 Vezmi jednu dokončenou backlogovou kartu, která vznikla z provozní lekce. Napiš zavírací záznam do sedmi polí: původní lekce, změna, ověření, privacy dopad, úklid, verdikt a další trigger. Pokud neumíš doložit jedno skutečné použití, karta ještě není hotová. Pokud při zavírání najdeš nový problém, zapiš ho jako samostatnou rozhodovací větu a původní kartu nezvětšuj. Backlog není těsto na knedlíky; čím víc do něj hněteš, tím méně drží tvar.
 
+## Příloha: Převod uzavřené lekce do dokumentace bez úniku detailů
+
+Uzavřená provozní lekce má hodnotu jen tehdy, když z ní někdo příště udělá lepší rozhodnutí. To ale neznamená, že celá historie incidentu, pilotu, exportu nebo interní debaty musí skončit ve veřejné dokumentaci. Dokumentace není sklad všeho, co se stalo. Je to místo, kde čtenář najde současnou pravdu, pracovní pravidlo a bezpečný další krok.
+
+Privacy-first přístup tady znamená dvojí disciplínu: zachovat poučení a neodnést s ním citlivé detaily. Do dokumentace patří princip, rozhraní, postup, limit, odpovědnost nebo zákaznická odpověď. Nepatří tam osobní údaje, ukázky skutečných exportů, interní jména, přesné bezpečnostní mezery, neveřejné konfigurace, zákaznické citace bez důvodu ani historický chaos, který už nemá řídit práci.
+
+> Codyho komentář: Nejhorší dokumentace po opravě zní jako detektivka. Všichni ví, kdo co pokazil, ale nikdo neví, co má zítra udělat jinak. Dokumentace má z ostudy udělat pravidlo, ne pamětní desku.
+
+### Rozděl lekci podle publika
+
+Nejdřív rozhodni, kdo má poučení použít. Jedna lekce často potřebuje několik různě úzkých výřezů, ale jen jeden z nich má být veřejný. Nesnaž se napsat jeden univerzální text pro zákazníka, vývojáře, support, sales i právní kontrolu. Výsledkem bývá buď mlha, nebo únik detailů.
+
+Praktické rozdělení:
+
+| Publikum | Co potřebuje vědět | Co tam nepatří |
+| --- | --- | --- |
+| Veřejná dokumentace | současný produktový stav, limity, exporty, retence, kontakt nebo doporučený postup | interní příčiny, jména nástrojů bez důvodu, konkrétní zranitelnosti, zákaznické příklady |
+| Zákaznická trust odpověď | stručné ujištění, rozsah dat, kontrola nad exportem, kde najde smluvní nebo technické detaily | interní runbook, přesné detekční signály, ruční workaroundy |
+| Interní runbook | co tým udělá při opakování situace, kdo rozhoduje, jak se ověří návrat do normálu | osobní komentáře, historická obvinění, dočasné pilotní tabulky |
+| Produktová šablona | nové pole, akceptační kritérium, review otázka nebo stop pravidlo | dlouhé vysvětlení původního problému |
+| Changelog | uživatelsky viditelná změna a dopad na práci | bezpečnostní detaily, které by usnadnily zneužití |
+| Archiv lekce | důvod původního rozhodnutí a odkaz na současné místo pravdy | kopie všech meziverzí, exportů a interních diskusí |
+
+Jedna věta pro rozhodnutí:
+
+> Poučení z této lekce se zapíše veřejně jako ___, interně jako ___ a nikam se nepřenese ___.
+
+Pokud tu větu neumíš doplnit, dokumentace ještě není připravená. Pravděpodobně pořád mícháš současné pravidlo s historií problému.
+
+### Vezmi ze zavírací karty jen živé části
+
+Zavírací karta obsahuje víc informací, než dokumentace potřebuje. Při převodu z ní ber jen pole, která budou řídit další práci. Všechno ostatní zůstane v interním záznamu nebo se smaže podle retenčního pravidla.
+
+Užitečný převod:
+
+| Pole ze zavírací karty | Převod do dokumentace |
+| --- | --- |
+| Původní lekce | krátká principová věta bez detailů incidentu |
+| Změna | nová instrukce, šablona, limit nebo produktové chování |
+| Ověření | jednoduchý důkaz, že nový postup funguje; většinou bez osobních dat |
+| Privacy dopad | hranice dat, retence, přístupy, export nebo zákaz nové datové stopy |
+| Úklid | odkaz na aktuální místo pravdy a informaci, co se už nemá používat |
+| Verdikt | dokumentace se mění jen pokud verdikt není „vrátit“ nebo „zavřít jako neplatné“ |
+| Další trigger | revizní podmínka v dokumentaci nebo runbooku |
+
+Příklad zkrácení:
+
+| Původní zápis | Dokumentační zápis |
+| --- | --- |
+| „Exportní report posílal detailní CSV do sdíleného chatu, protože starý brief nevyžadoval příjemce a retenci.“ | „Každý exportní výstup musí mít předem určeného příjemce, minimální rozsah polí a datum smazání.“ |
+| „První oprava prošla na billing exportu, kde se místo řádkových dat posílá agregovaný souhrn.“ | „Pokud rozhodnutí stačí udělat z agregovaného souhrnu, řádkový export se nevytváří.“ |
+| „Starý CSV soubor byl smazaný a pilotní poznámky zavřené.“ | „Ukázková data se v dokumentaci nepřikládají. Příklady používají syntetická nebo slovní schémata.“ |
+
+Takhle zůstane poučení použitelné, ale přestane táhnout za sebou původní datovou stopu.
+
+### Napiš dokumentační kartu
+
+Před samotným editováním dokumentace napiš malou kartu. Ne proto, že dokumentace potřebuje vlastní byrokratickou ohrádku. Protože karta donutí rozhodnout, kam text patří a jak moc má být konkrétní.
+
+Šablona:
+
+| Pole | Otázka |
+| --- | --- |
+| Lekce | Co jsme se naučili v jedné principové větě? |
+| Cílové místo pravdy | Který dokument, stránka, runbook nebo šablona se změní? |
+| Publikum | Je text veřejný, řízeně sdílený, interní nebo archivní? |
+| Přidat | Jaká nová věta, pravidlo, pole nebo postup má čtenáři pomoct? |
+| Neuvádět | Které interní, osobní, zákaznické, bezpečnostní nebo historické detaily nesmí projít? |
+| Úklid | Který starý text, šablona, FAQ, makro nebo odkaz se musí upravit nebo odstranit? |
+| Ověření | Jak poznáme, že dokumentace příště opravdu řídí práci? |
+| Trigger revize | Co musí nastat, aby se text znovu otevřel? |
+
+Vyplněná karta pro lekci z exportního reportu:
+
+| Pole | Zápis |
+| --- | --- |
+| Lekce | Exportní výstup bez určeného příjemce, minimálního rozsahu a retence snadno vyroste do zbytečné kopie dat. |
+| Cílové místo pravdy | Interní šablona automatizačního briefu a veřejná stránka o exportech. |
+| Publikum | Šablona interní, exportní stránka veřejná. |
+| Přidat | Do šablony přidat tři pole: příjemce, minimální pole výstupu, datum smazání. Na veřejné stránce říct, že exporty lze omezit účelem a že tým preferuje agregované výstupy, pokud stačí k rozhodnutí. |
+| Neuvádět | Neuvádět původní chat, název zákazníka, ukázkový CSV, interní cestu k reportu ani přesný popis staré chyby. |
+| Úklid | Opravit staré support makro „pošleme plný export“ a odkaz ve sales FAQ. |
+| Ověření | První nový exportní požadavek použije aktualizovanou šablonu bez ručního vysvětlování. |
+| Trigger revize | Nový typ exportu, nový příjemce mimo tým nebo požadavek na delší retenci. |
+
+Tohle je dost konkrétní na práci a dost úzké na to, aby z toho nevznikla publikace interní pitvy.
+
+### Přepiš lekci jako současné pravidlo
+
+Dobrá dokumentační věta začíná současným stavem. Ne „minule jsme zjistili“, ale „dnes platí“. Historie patří do interního rozhodovacího logu, pokud je vůbec potřeba ji držet.
+
+Slabé formulace:
+
+- „Po problému s exporty jsme se rozhodli víc hlídat data.“
+- „Kvůli minulé chybě musí tým vyplnit další tabulku.“
+- „Aby se neopakovaly potíže, používejte nový postup.“
+
+Lepší formulace:
+
+- „Každý export má účel, příjemce, minimální rozsah polí a datum smazání.“
+- „Pokud k rozhodnutí stačí agregovaný souhrn, řádkový export se nevytváří.“
+- „Ukázky v dokumentaci používají syntetická data, ne kopie zákaznických exportů.“
+- „Veřejná odpověď popisuje schopnost produktu, ne interní historii opravy.“
+
+Pravidlo pro psaní: čtenář musí po první větě vědět, co má dělat jinak. Pokud se musí prokousat příčinou, debatou a obhajobou, dokumentace slouží autorovi, ne práci.
+
+### Uklid staré nosiče stejné pravdy
+
+Převod lekce do dokumentace není hotový ve chvíli, kdy přidáš nový odstavec. Hotový je až tehdy, když staré nosiče pravdy přestanou radit opak. U privacy-first témat je to obzvlášť důležité, protože stará šablona může znovu vyžádat data, která už nový postup nechce sbírat.
+
+Zkontroluj hlavně:
+
+- interní šablony zadání a review checklisty,
+- support makra a uložené odpovědi,
+- sales FAQ a bezpečnostní odpovědi,
+- veřejnou dokumentaci, changelog a produktové nápovědy,
+- onboardingové texty a automatické zprávy,
+- runbooky, playbooky a incidentní postupy,
+- staré odkazy z wiki, README a backlogových šablon,
+- příklady, screenshoty a ukázková data.
+
+Úklid nemusí být velký. Stačí najít místa, kde by člověk příště sáhl po starém pravidle. Pokud starý text necháváš jako archiv, označ ho jako archiv a přidej odkaz na současné místo pravdy. Archiv bez cedule je jen past v hezkém kabátku.
+
+### Ověř dokumentaci na jednom použití
+
+Dokumentační změna se neověřuje počtem napsaných slov. Ověřuje se tím, že podle ní někdo udělá správnější rozhodnutí s menším množstvím doplňujících dotazů a bez nové datové stopy.
+
+Lehké ověření:
+
+| Situace | Ověření |
+| --- | --- |
+| Nová interní šablona | jeden člověk mimo autora podle ní vyplní další brief |
+| Veřejná odpověď | support ji použije u skutečného dotazu bez doplňování interních detailů |
+| Runbook | nový vlastník projde suchý scénář a ví, kdy eskalovat |
+| Changelog | zákazník pochopí změnu dopadu bez znalosti interní historie |
+| Produktová nápověda | uživatel najde limit, export nebo nastavení bez kontaktu na support |
+
+Ověření nemá zakládat nový monitoring lidí. Stačí jeden pracovní průchod, jedna kontrola odpovědi nebo jedna revize dalšího zadání. Cílem je zjistit, jestli dokumentace vede k akci, ne jestli ji každý poslušně přečetl.
+
+### Příklad: Lekce z exportního reportu jde do dokumentace
+
+Tým uzavřel opravu automatizačního briefu. Původní problém byl v tom, že exportní report posílal příliš detailní data, protože zadání neříkalo, kdo výstup potřebuje, jaká pole stačí a kdy se výstup smaže.
+
+Dokumentační převod:
+
+| Vrstva | Změna |
+| --- | --- |
+| Interní šablona briefu | Přidána pole „příjemce výstupu“, „minimální pole“ a „retence výstupu“. |
+| Veřejná dokumentace exportů | Doplněna věta, že exporty lze omezit podle účelu a že agregované výstupy mají přednost, pokud stačí k rozhodnutí. |
+| Support makro | Staré „pošleme vám celý export“ změněno na „nejdřív upřesníme účel a rozsah exportu“. |
+| Sales FAQ | Doplněno, že exporty nejsou automaticky neomezené a že rozsah se nastavuje podle účelu a smluvního rámce. |
+| Archiv lekce | Uložen jen princip a odkaz na novou šablonu, bez ukázkových dat a bez jména původního zákazníka. |
+
+Krátký veřejný text:
+
+> Exporty navrhujeme podle účelu. Pokud k rozhodnutí stačí agregovaný výstup nebo menší sada polí, preferujeme ji před plnou kopií dat. U každého exportu má být jasné, kdo ho dostává, k čemu slouží a kdy má skončit.
+
+Interní runbookový dodatek:
+
+> Při novém exportním požadavku nejdřív vyplň příjemce, účel, minimální pole a retenci. Pokud někdo žádá širší export, než je pro rozhodnutí nutné, vrať požadavek k upřesnění. Výjimka musí mít vlastníka a datum kontroly.
+
+Co se vědomě nezveřejňuje:
+
+- původní cesta k reportu,
+- konkrétní seznam polí ze starého exportu,
+- název zákazníka nebo interního kanálu,
+- screenshot pilotního výstupu,
+- časová osa interní opravy,
+- přesný popis mezery, kterou už oprava zavřela.
+
+Tím se poučení dostalo k lidem, kteří ho potřebují, ale původní datová stopa se neroznesla po dokumentaci jako konfety po firemním večírku. Hezké na pohled, protivné na úklid.
+
+### Checklist: Převod uzavřené lekce do dokumentace
+
+- [ ] Vím, jestli lekce patří do veřejné dokumentace, řízené zákaznické odpovědi, interního runbooku, šablony, changelogu, archivu nebo nikam.
+- [ ] Ze zavírací karty beru jen části, které mají řídit další práci.
+- [ ] Původní problém jsem přepsal jako současné pravidlo, ne jako historickou obhajobu.
+- [ ] Veřejný text neobsahuje osobní údaje, zákaznické detaily, interní jména, ukázkové exporty ani zbytečné bezpečnostní detaily.
+- [ ] Interní text obsahuje dost detailů pro práci, ale neukládá dočasné exporty a pilotní kopie jako novou pravdu.
+- [ ] Staré šablony, makra, FAQ, runbooky a odkazy už nevedou ke starému postupu.
+- [ ] Archivní záznam, pokud zůstává, má jasný stav a odkaz na současné místo pravdy.
+- [ ] Dokumentace má revizní trigger podle změny reality, ne pravidelný dohled bez důvodu.
+- [ ] Změnu ověřil alespoň jeden pracovní průchod, odpověď nebo další brief.
+- [ ] Ověření nevytvořilo nový tracking čtenářů nebo zaměstnanců.
+
+### Mini úkol
+
+Vezmi jednu uzavřenou provozní lekci a napiš dokumentační kartu: lekce, cílové místo pravdy, publikum, přidat, neuvádět, úklid, ověření a trigger revize. Potom z ní napiš jednu veřejnou nebo interní větu v přítomném čase. Pokud věta začíná historií problému, přepiš ji. Pokud obsahuje detail, který by čtenář nepotřeboval k bezpečnější práci, vyhoď ho. Dokumentace má být užitečná, ne zvědavá.
+
 ## Zdroje
 
 - IETF RFC 9110: HTTP Semantics - význam HTTP přesměrování a stavů včetně `410 Gone` pro zdroje, které už nejsou dostupné: https://www.rfc-editor.org/rfc/rfc9110.html
@@ -64802,6 +64991,8 @@ Vezmi jednu dokončenou backlogovou kartu, která vznikla z provozní lekce. Nap
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-29: Doplněna příloha o převodu uzavřené provozní lekce do dokumentace bez úniku detailů: rozdělení lekce podle publika, výběr živých částí ze zavírací karty, dokumentační karta, přepis historie na současné pravidlo, úklid starých nosičů pravdy, ověření na jednom použití, příklad exportního reportu, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-29: Doplněna příloha o uzavření backlogové karty z provozní lekce bez falešného hotovo: návrat k realizačnímu briefu, ověření dopadu na jednom pracovním průchodu, úklid dočasných dokumentů, exportů, odkazů a přístupů, zavírací záznam, pět jasných verdiktů, příklad šablony automatizačního briefu, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
