@@ -66917,6 +66917,134 @@ Všimni si, co v té větě není: žádné „budeme dál sledovat“, žádný
 
 Vyber jednu opravu, která po nasazení nepomohla nebo vytvořila nový zmatek. Za dvacet minut napiš návratovou kartu: původní oprava, nález z review, vrstva selhání, návratový krok, co zachováš, co uklidíš, nové ověření a stop pravidlo. Potom vyber jednu datovou nebo dokumentační stopu a rovnou jí dej verdikt. Nakonec napiš zavírací větu ve tvaru „Vracíme nebo nahrazujeme ___, ponecháváme ___, uklízíme ___ a další pokus otevřeme jen tehdy, když ___.“ Pokud první reakce zní „musíme to celé předělat“, vrať se k jedné menší větě: „Vracíme nebo zužujeme ___, protože ___.“
 
+## Příloha: Převod ověřené produktové opravy do běžného provozu bez nového procesu
+
+Když produktová oprava projde ověřením, tým má tendenci ji ještě chvíli hlídat. To je lidské, ale drahé. Oprava, která funguje, nemá zůstat ve zvláštním režimu jen proto, že vznikla z opakovaného problému. Má se převést do běžné práce: dokumentace, šablon, review checklistu, provozní rutiny nebo produktových pravidel. Pak se mimořádné sledování zavře.
+
+Tahle příloha navazuje na review po nasazení. Cílem je rozhodnout, kde má ověřená oprava žít dál, kdo ji vlastní, jak se bude přirozeně revidovat a co se smaže po kontrolním okně. Bez tohoto kroku se z každé dobré opravy stane malý trvalý proces. A malé trvalé procesy jsou přesně ten typ nepořádku, který za půl roku nikdo nechce vysvětlovat.
+
+> Codyho komentář: Úspěšná oprava nemá dostat památník. Má dostat vlastníka, jedno místo pravdy a datum, kdy se přestane tvářit jako mimořádná událost. Produkt není album zásahů, je to nástroj pro lidi.
+
+### Začni zavíracím verdiktem
+
+Nejdřív otevři review kartu po nasazení a přečti si verdikt. Do běžného provozu převáděj jen opravu, u které platí jedna z těchto vět:
+
+| Verdikt po ověření | Co znamená pro převod |
+| --- | --- |
+| Ponechat a zavřít | Oprava funguje a může se stát běžnou součástí produktu nebo dokumentace. |
+| Zúžit a ponechat | Funkční jádro zůstává, ale musí se omezit rozsah, publikum, měření nebo text. |
+| Doplnit a zavřít | Oprava funguje, jen chybí jeden navazující nosič pravdy. |
+
+Pokud byl verdikt „vrátit“ nebo „otevřít novou kartu“, nepřeváděj nic do rutiny. Nejdřív dokonči návratovou kartu. Jinak bys normalizoval neověřenou realitu.
+
+Krátká vstupní věta:
+
+„Oprava ___ zůstává, protože ___; do běžného provozu převádíme ___ a mimořádné sledování končí ___.“
+
+Tahle věta odděluje produktovou pravdu od pracovních zbytků. Když ji neumíš napsat, oprava ještě není dost jasná.
+
+### Urči jedno místo pravdy
+
+Ověřená oprava často změnila víc míst: UI, help centrum, support šablonu, pricing poznámku, onboardingový e-mail nebo interní runbook. Do běžného provozu ale nesmí vstoupit jako šest polovičních pravd. Vyber jedno primární místo, podle kterého se budou ostatní místa opravovat.
+
+| Typ opravy | Primární místo pravdy | Navazující místa |
+| --- | --- | --- |
+| Změna chování v produktu | Produktový stav, UI text nebo API kontrakt | Dokumentace, changelog, support šablona, testy |
+| Vysvětlení hranice služby | Veřejná dokumentace nebo pricing poznámka | Sales snippet, onboarding, trust balíček |
+| Změna exportu nebo retence | Datová mapa, retenční pravidlo nebo administrátorský tok | Help centrum, DPA odpověď, support makro |
+| Změna onboardingového kroku | Onboardingový tok a akceptační kritéria | Produktová dokumentace, aktivace metrika, interní review |
+| Změna interního procesu | Runbook nebo pracovní šablona | Produktový backlog, support odpovědi, rozhodovací log |
+
+Pravidlo je jednoduché: člověk, který za tři měsíce opravuje stejnou oblast, musí vědět, kam se podívat jako první. Pokud jsou dvě místa stejně autoritativní, máš dvě budoucí chyby.
+
+### Přepiš mimořádnou kontrolu na běžný trigger
+
+Mimořádné kontrolní okno po nasazení je užitečné, ale nemá žít donekonečna. Nahraď ho běžným triggerem: změna produktu, změna dodavatele, změna pricingu, nový typ support dotazu, release dotčené části nebo pravidelná lehká revize.
+
+| Mimořádný signál | Běžný trigger po převodu |
+| --- | --- |
+| Ruční sledování každého dotazu po opravě | Měsíční kontrola typů dotazů v agregované podobě. |
+| Dočasná poznámka v supportu | Revize support šablony při návratu stejné otázky. |
+| Pilotní event pro ověření textu | Zrušení eventu a ponechání jen agregovaného produktového signálu, pokud je opravdu potřeba. |
+| Kontrola sales odpovědí po změně slibu | Revize sales snippetu při změně pricingu nebo nabídky. |
+| Ruční kontrola exportního toku | Zařazení do běžného release checklistu pro datově citlivé změny. |
+
+Převod do rutiny neznamená „nikdy se k tomu nevracet“. Znamená „vracet se tehdy, když se změní realita“. To je privacy-first rozdíl mezi provozní péčí a tichým dohledem.
+
+### Napiš provozní kartu opravy
+
+Provozní karta je malá. Má nahradit dlouhý příběh opravy jedním přehledem pro budoucí práci.
+
+| Pole | Zápis |
+| --- | --- |
+| Oprava | Co zůstává v produktu, dokumentaci, šabloně nebo procesu. |
+| Důvod | Jakou pracovní nejistotu oprava snížila. |
+| Místo pravdy | Jeden primární zdroj, podle kterého se mají řídit další texty a změny. |
+| Vlastník | Role nebo tým, který smí rozhodnout o další úpravě. |
+| Navazující místa | Kde se musí držet soulad: UI, help, sales, support, runbook, metrika. |
+| Datová hranice | Jaká data oprava potřebuje, co nesbírá a co se po pilotu smaže. |
+| Revizní trigger | Událost, která kartu znovu otevře. |
+| Stop pravidlo | Kdy se karta sloučí, zjednoduší, archivuje nebo smaže. |
+
+Příklad:
+
+| Pole | Zápis |
+| --- | --- |
+| Oprava | Exportní obrazovka rozlišuje pracovní data a retenční záznamy. |
+| Důvod | Administrátor při rušení workspace potřeboval vědět, proč export neobsahuje všechny auditní logy. |
+| Místo pravdy | Administrátorský exportní tok a retenční pravidlo v dokumentaci. |
+| Vlastník | Produktový vlastník administrace. |
+| Navazující místa | Help centrum, support makro, enterprise trust odpověď, release checklist pro exporty. |
+| Datová hranice | Žádný nový event; kontrolní poznámka z review zůstává agregovaně v kartě a surové dotazy se nekopírují. |
+| Revizní trigger | Změna exportního rozsahu, retence nebo opakovaný dotaz na auditní záznamy. |
+| Stop pravidlo | Pokud se část exportu přepracuje, karta se sloučí do nové dokumentace exportu a stará odpověď se archivuje. |
+
+### Uklid pilotní a podpůrné stopy
+
+Než opravu označíš za běžnou, zavři všechno, co vzniklo jen kvůli ověření. Tady se často schovává největší privacy dluh: dočasný event bez konce, sdílený export support dotazů, ruční tabulka s citlivými příklady nebo starý feature flag.
+
+Úklid před zavřením:
+
+- smaž nebo vypni pilotní eventy, parametry a dashboardy bez dlouhodobého účelu,
+- odstraň surové exporty dotazů, pokud už z nich vznikl agregovaný poznatek,
+- zavři dočasné přístupy, které byly potřeba jen pro ověření,
+- archivuj staré šablony tak, aby je tým omylem nepoužíval,
+- oprav odkazy v dokumentaci, changelogu, onboardingových e-mailech a sales materiálech,
+- dopiš do release nebo rozhodovacího logu jen tolik detailu, kolik pomůže budoucímu rozhodnutí.
+
+Pokud některá stopa zůstává, musí mít běžný účel. „Možná se bude hodit“ není účel. To je jen nepořádek s hezčím hlasem.
+
+### Předání do běžné práce
+
+Oprava je převedená až ve chvíli, kdy ji někdo umí změnit bez autora původního zásahu. Proto nestačí zavřít ticket. Vlastník musí vědět, kde je místo pravdy, jaký trigger má sledovat a co nesmí rozšířit bez nové karty.
+
+Předávací věta:
+
+„Od teď se ___ řídí podle ___, vlastníkem je ___, revize nastane při ___ a mimořádné kontroly ___ končí ___.“
+
+Příklad:
+
+„Od teď se vysvětlení exportu řídí podle administrátorského exportního toku a retenční dokumentace, vlastníkem je produktový vlastník administrace, revize nastane při změně exportního rozsahu nebo retence a mimořádné kontroly support dotazů končí po dnešním agregovaném zápisu.“
+
+Tohle je nudná věta. Dobře. Nudné provozní věty drží produkt pohromadě lépe než krásná tabule bez vlastníka.
+
+### Checklist: Převod ověřené produktové opravy do běžného provozu
+
+- [ ] Oprava má po nasazení verdikt ponechat, zúžit a ponechat, nebo doplnit a zavřít.
+- [ ] Napsal jsem vstupní větu, proč oprava zůstává a kdy končí mimořádné sledování.
+- [ ] Vybral jsem jedno primární místo pravdy.
+- [ ] Navazující UI, dokumentace, šablony, pricing, sales texty nebo runbooky jsou se zdrojem pravdy sladěné.
+- [ ] Dočasné kontrolní okno je nahrazené běžným revizním triggerem.
+- [ ] Provozní karta obsahuje vlastníka, datovou hranici, revizní trigger a stop pravidlo.
+- [ ] Pilotní eventy, dashboardy, exporty, poznámky a přístupy mají verdikt.
+- [ ] Staré šablony nejdou omylem používat jako aktuální odpověď.
+- [ ] Předávací věta říká, kdo smí opravu dál měnit.
+- [ ] Oprava nepřidala nový proces tam, kde stačí existující release, support nebo dokumentační rutina.
+
+### Mini úkol
+
+Vyber jednu produktovou opravu, která podle review po nasazení funguje. Za dvacet pět minut napiš provozní kartu: oprava, důvod, místo pravdy, vlastník, navazující místa, datová hranice, revizní trigger a stop pravidlo. Potom najdi jednu pilotní stopu, která vznikla jen kvůli ověření, a rozhodni, zda se smaže, archivuje, sloučí do běžného záznamu nebo zůstane s jasným účelem. Nakonec napiš předávací větu ve tvaru „Od teď se ___ řídí podle ___, vlastníkem je ___, revize nastane při ___ a mimořádné kontroly ___ končí ___.“
+
 ## Zdroje
 
 - IETF RFC 9110: HTTP Semantics - význam HTTP přesměrování a stavů včetně `410 Gone` pro zdroje, které už nejsou dostupné: https://www.rfc-editor.org/rfc/rfc9110.html
@@ -67110,6 +67238,8 @@ Vyber jednu opravu, která po nasazení nepomohla nebo vytvořila nový zmatek. 
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-29: Doplněna příloha o převodu ověřené produktové opravy do běžného provozu bez nového procesu: vstupní zavírací verdikt, volba jednoho místa pravdy, převod mimořádného sledování na běžný revizní trigger, provozní karta opravy, úklid pilotních a podpůrných stop, předávací věta, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-29: Zpřesněna příloha o vrácení nebo nahrazení neúspěšné produktové opravy o uzavření návratu bez druhé mlhy: zavírací věta, rozlišení rychlého rollbacku, zúžení, náhradní menší karty, převodu na jinou vrstvu a úplného zavření, příklad exportního textu, nová checklist položka a rozšířený mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
