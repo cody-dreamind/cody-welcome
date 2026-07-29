@@ -66177,6 +66177,140 @@ Pokud se oprava nezavírá, nesmí pokračovat jako další kolo ladění. Musí
 
 Vezmi poslední kontrolní kartu, kde se po změně šablony vrátil starý slib. Za deset minut napiš jednu opravnou větu a urč vrstvu opravy. Potom vyplň opravný brief na jednu obrazovku: nález, dotčené místo, co se mění, co se nemění, datová hranice a jedno ověření. Oprav jen dotčený nosič nebo text. Nakonec proveď jeden kontrolní průchod a zapiš verdikt „zavřít, zúžit, vrátit ručně, předat do produktu, nebo opakovat jediný průchod“.
 
+## Příloha: Uzavření opravené šablony do běžného provozu bez doznívající kontroly
+
+Opravená šablona není hotová ve chvíli, kdy je přepsaná. Hotová je až tehdy, když se ví, kde žije, kdo ji vlastní, kdy se má znovu otevřít a které mimořádné kontroly po opravě končí. Jinak se z jedné opravené odpovědi stane nový poloproces: všichni ji používají trochu jinak, někdo ji hlídá bokem, automatizace má starý zdroj a po třech týdnech nikdo neví, jestli se problém vlastně vyřešil.
+
+Tahle příloha navazuje na opravný brief a kontrolní průchod po opravě šablony. Neřeší už, jestli byla původní formulace špatně. Řeší převod do běžného režimu: šablona má jeden zdroj pravdy, jasný spouštěč použití, vlastníka, hranici dat a stop pravidlo. Mimořádná pozornost po opravě má skončit stejně vědomě, jako začala.
+
+> Codyho komentář: Největší riziko po dobré opravě není další chyba. Je to tiché doznívání. Lidi dál kontrolují věci „pro jistotu“, kopírují si bokem lepší verzi a za měsíc máte tři pravdy místo jedné. To není opatrnost. To je chaos v košili.
+
+### Zavři opravu až po zavírací větě
+
+Nepřeváděj šablonu do běžného provozu jen proto, že někdo napsal „hotovo“. Vrať se k zavírací větě z předchozí přílohy a ověř, že obsahuje čtyři věci:
+
+| Část zavírací věty | Proč je důležitá |
+| --- | --- |
+| Co bylo opraveno | Aby se neopravovala znovu jiná vrstva pod stejným názvem. |
+| Co bylo ověřeno | Aby tým věděl, že kontrola proběhla na skutečném použití, ne jen v editoru. |
+| Co už se dál nehlídá mimořádně | Aby oprava nevyráběla trvalý dohled. |
+| Co zůstává jako trigger pro budoucí revizi | Aby se šablona otevřela při změně reality, ne při každém neklidu. |
+
+Použitelná zavírací věta:
+
+> Support makro `export_scope` je opravené, jeden běžný draft prošel bez starého slibu, staré PDF je archivní a mimořádná kontrola exportních odpovědí končí. Šablona se znovu otevře při změně exportního rozsahu, retence auditních logů nebo veřejného trust balíčku.
+
+Nepoužitelná zavírací věta:
+
+> Budeme to sledovat.
+
+Druhá věta neříká nic o vlastníkovi, rozsahu, datové hranici ani konci. Je to malý kouřový oblak. Vypadá aktivně, ale nedá se podle ní pracovat.
+
+### Vytvoř provozní kartu šablony
+
+Provozní karta není nová dokumentační vrstva pro parádu. Je to krátký záznam, který říká, jak se šablona používá v běžném režimu.
+
+| Pole | Co zapsat |
+| --- | --- |
+| Název šablony | Konkrétní makro, snippet, e-mail, odpověď v helpdesku nebo interní odpovědní blok. |
+| Zdroj pravdy | Místo, odkud se má šablona brát. Ne kopie v chatu, ne staré PDF. |
+| Spouštěč použití | Kdy se má použít a kdy se naopak použít nesmí. |
+| Vlastník | Člověk nebo role, která odpovídá za pravdivost šablony. |
+| Záskok | Kdo ji může upravit, když vlastník není dostupný. |
+| Datová hranice | Jaká data jsou pro odpověď potřeba a co se nemá otevírat. |
+| Navazující místa | Makra, sales snippety, produktová dokumentace, automatické drafty nebo interní runbooky. |
+| Revizní trigger | Konkrétní změna reality, která šablonu znovu otevírá. |
+| Stop pravidlo | Kdy se mimořádná kontrola definitivně ukončí. |
+
+Karta má být krátká. Pokud potřebuje celou stránku vysvětlování, pravděpodobně šablona není šablona, ale náhradní produktová dokumentace. To je jiný typ práce.
+
+### Přepiš šablonu do běžného zdroje pravdy
+
+Po opravě často zůstane dobrá verze v opravné kartě, komentáři u ticketu nebo jedné ručně upravené odpovědi. To je nebezpečné, protože tým pak používá správný text jen tehdy, když si pamatuje, kde vznikl. Běžný provoz potřebuje jedno místo, kam se jde pro aktuální odpověď.
+
+Praktické pořadí:
+
+1. Přenes finální text do hlavního zdroje pravdy.
+2. Zkontroluj, že starý text není výše ve vyhledávání, makru nebo interní wiki.
+3. Oprav odkazy v navazujících snippetech a automatických draftech.
+4. U starých kopií napiš stav: archiv, nahrazeno, nepoužívat pro nové odpovědi.
+5. Zavři opravnou kartu odkazem na běžný zdroj, ne vložením další kopie textu.
+
+Nejhorší varianta je nechat „správnou verzi“ v issue a do dokumentace dát jen poznámku „viz ticket“. Ticket je historická stopa, ne zdroj pravdy pro běžnou odpověď. Historie má pomáhat pochopit rozhodnutí. Nemá řídit každodenní práci.
+
+### Nastav revizi podle změny reality
+
+Šablona nemá mít nekonečný kalendářový dohled jen proto, že jednou zlobila. Lepší je revize podle změny reality.
+
+| Trigger | Proč šablonu otevřít |
+| --- | --- |
+| Změnil se produktový rozsah | Odpověď může slibovat víc nebo míň, než produkt opravdu dělá. |
+| Změnila se retence, export nebo mazání dat | Odpověď může být privacy nebo právně citlivá. |
+| Změnil se veřejný trust balíček nebo dokumentace | Šablona může odkazovat na starou veřejnou pravdu. |
+| Změnil se dodavatel nebo místo zpracování | Odpověď může špatně popsat datovou cestu. |
+| Opakuje se stejný navazující dotaz | Šablona je možná pravdivá, ale nevede k rozhodnutí. |
+| Automatizace začala šablonu používat novým způsobem | Ruční odpověď se mohla potichu proměnit v široký automatický zásah. |
+
+Kalendářová revize dává smysl u vysoce citlivých odpovědí, ale i tam má být lehká: „zkontrolovat pravdivost proti současnému produktu a zdrojům“, ne „projít všechny konverzace“. Privacy-first provoz se nepozná podle toho, že se nikdy nic nekontroluje. Pozná se podle toho, že kontrola má účel, hranici a konec.
+
+### Ukonči mimořádnou kontrolu viditelně
+
+Po opravě bývá lákavé ještě chvíli sledovat každou odpověď. Krátké ověření je rozumné. Nekonečné hlídání je nový proces bez rozhodnutí. Proto napiš ukončení mimořádné kontroly přímo do provozní karty.
+
+| Situace | Co ukončit |
+| --- | --- |
+| Jeden draft prošel bez starého slibu. | Ruční kontrolu každé nové odpovědi stejného typu. |
+| Starý nosič byl archivovaný a vyhledávání vede na nový zdroj. | Paralelní seznam míst, kde se starý text hledal. |
+| Automatický draft používá omezený zdroj a ruční schválení. | Dočasné porovnávání všech draftů proti historické odpovědi. |
+| Produktová karta vznikla pro reálnou díru. | Ladění šablony jako náhrady za produktovou změnu. |
+| Šablona už má vlastníka a trigger. | Neformální „mrkni na to občas“ u lidí mimo vlastnictví. |
+
+Viditelné ukončení chrání tým i data. Když není napsané, co už se nekontroluje, někdo bude dál otevírat staré odpovědi, exportovat vzorky nebo číst konverzace „pro jistotu“. A přesně tím se z malé opravy stane datový nános.
+
+### Příklad: Exportní makro přechází do běžného režimu
+
+Tým opravil support makro `export_scope`, protože stará odpověď slibovala kompletní export všech workspace dat. Nová odpověď vysvětluje, že běžný export obsahuje projektová data, zatímco auditní a bezpečnostní záznamy mají samostatný retenční režim. Jeden kontrolní draft prošel bez starého slibu.
+
+Provozní karta může vypadat takto:
+
+| Pole | Zápis |
+| --- | --- |
+| Název šablony | Support makro `export_scope`. |
+| Zdroj pravdy | Interní trust odpověď „Export a ukončení workspace“. |
+| Spouštěč použití | Dotaz zákazníka na rozsah exportu před ukončením nebo migrací workspace. |
+| Kdy nepoužít | Individuální právní žádost, incident, bezpečnostní audit s vlastním dotazníkem nebo spor o data. |
+| Vlastník | Customer success lead. |
+| Záskok | Produktový vlastník datových exportů. |
+| Datová hranice | Odpovídat podle typu plánu a veřejného trust balíčku; neotevírat obsah workspace ani interní auditní logy bez konkrétní žádosti a oprávnění. |
+| Navazující místa | Sales snippet `offboarding_complete`, help centrum „Export workspace“, interní runbook pro ukončení účtu. |
+| Revizní trigger | Změna exportního rozsahu, retenčního režimu auditních logů, trust balíčku nebo billing plánů. |
+| Stop pravidlo | Po jednom běžném draftu bez starého slibu končí mimořádná kontrola odpovědí. |
+
+Zavírací zápis:
+
+> Makro `export_scope` je v běžném zdroji pravdy, staré PDF je archivní, sales snippet odkazuje na trust balíček a jeden support draft prošel. Mimořádná kontrola exportních odpovědí končí. Další revize se spustí jen při změně exportu, retence, trust balíčku nebo opakovaném navazujícím dotazu.
+
+To je dost. Tým nemusí zakládat nový dashboard kvality odpovědí, pokud opravná karta ukázala konkrétní příčinu a ta je zavřená. Když se podobný dotaz vrátí, otevře se nový signál podle triggeru, ne staré mimořádné hlídání.
+
+### Checklist: Uzavření opravené šablony do běžného provozu
+
+- [ ] Mám zavírací větu z opravného průchodu.
+- [ ] Je jasné, co bylo opraveno a co bylo ověřeno.
+- [ ] Finální text je v běžném zdroji pravdy, ne jen v ticketu nebo chatu.
+- [ ] Staré kopie jsou opravené, archivované, označené nebo odstraněné z běžného použití.
+- [ ] Šablona má vlastníka a záskok.
+- [ ] Je napsané, kdy se šablona má použít a kdy ne.
+- [ ] Datová hranice říká, co se pro odpověď smí a nesmí otevírat.
+- [ ] Navazující makra, snippety, automatizace a dokumentace nevedou na starou pravdu.
+- [ ] Revizní trigger vychází ze změny reality, ne z neurčité nervozity.
+- [ ] Mimořádná kontrola po opravě má viditelný konec.
+- [ ] Nevznikl nový trvalý reporting, export nebo čtení zákaznických konverzací bez jasného účelu.
+- [ ] Zavírací zápis říká, kdy se téma znovu otevře a kdy zůstane zavřené.
+
+### Mini úkol
+
+Vyber jednu šablonu, která byla nedávno opravená a ověřená. Za patnáct minut napiš její provozní kartu: zdroj pravdy, spouštěč použití, kdy ji nepoužít, vlastník, záskok, datová hranice, navazující místa, revizní trigger a stop pravidlo. Potom přenes finální text do běžného zdroje pravdy, označ staré kopie a napiš jednu zavírací větu, která výslovně ukončí mimořádnou kontrolu.
+
 ## Zdroje
 
 - IETF RFC 9110: HTTP Semantics - význam HTTP přesměrování a stavů včetně `410 Gone` pro zdroje, které už nejsou dostupné: https://www.rfc-editor.org/rfc/rfc9110.html
@@ -66370,6 +66504,8 @@ Vezmi poslední kontrolní kartu, kde se po změně šablony vrátil starý slib
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-29: Doplněna příloha o uzavření opravené šablony do běžného provozu bez doznívající kontroly: zavírací věta po opravě, provozní karta šablony, převod finálního textu do zdroje pravdy, revizní triggery podle změny reality, viditelné ukončení mimořádné kontroly, příklad exportního makra, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-29: Zpřesněna příloha o opravě šablon po první kontrole o stop pravidlo „Rozhodni, jestli oprava končí“: tabulka stavů po ověření, zavírací věty pro ukončení, zúžení, úklid nosiče, předání do produktu nebo návrat k menšímu privacy-first signálu; doplněna checklist položka pro zavírací větu. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
