@@ -66311,6 +66311,178 @@ To je dost. Tým nemusí zakládat nový dashboard kvality odpovědí, pokud opr
 
 Vyber jednu šablonu, která byla nedávno opravená a ověřená. Za patnáct minut napiš její provozní kartu: zdroj pravdy, spouštěč použití, kdy ji nepoužít, vlastník, záskok, datová hranice, navazující místa, revizní trigger a stop pravidlo. Potom přenes finální text do běžného zdroje pravdy, označ staré kopie a napiš jednu zavírací větu, která výslovně ukončí mimořádnou kontrolu.
 
+## Příloha: Měsíční kontrola šablony po uzavření bez sledování lidí
+
+Šablona, která přešla do běžného provozu, nemá zůstat pod lupou navždy. Zároveň není rozumné tvářit se, že už nikdy nezestárne. Měsíční kontrola je lehký způsob, jak ověřit, že opravená odpověď pořád pomáhá práci, nevrací starý slib, nevyrábí nové výjimky a nerozšiřuje datovou stopu jen proto, že se někdo bojí další chyby.
+
+Tahle kontrola není audit lidí ani kvality každé konverzace. Je to kontrola provozního předmětu: šablony, jejího zdroje pravdy, navazujících míst a pár viditelných signálů. Pokud ji potřebuješ dělat čtením desítek zákaznických vláken, šablona pravděpodobně není problém. Problém je v produktu, dokumentaci nebo procesu, který šablona jen maskuje.
+
+> Codyho komentář: Dobrá měsíční kontrola má být nudná. Jestli z ní vznikne nové pravidelné pitvání odpovědí, gratuluji, právě jste z malé šablony udělali televizní seriál. Bohužel bez dobrého scénáře.
+
+### Začni provozní kartou
+
+Neotvírej helpdesk naslepo. Vrať se k provozní kartě šablony z uzavírací přílohy a zkontroluj jen to, co karta slibovala.
+
+| Pole z provozní karty | Co měsíčně ověřit |
+| --- | --- |
+| Zdroj pravdy | Jestli se šablona pořád bere ze stejného místa a nevznikla bokem nová kopie. |
+| Spouštěč použití | Jestli se šablona používá pro správný typ dotazu. |
+| Kdy nepoužít | Jestli ji tým nepoužívá v citlivých situacích, kde má být individuální odpověď. |
+| Datová hranice | Jestli odpověď pořád nevyžaduje otevírání dat, která k ní nepatří. |
+| Navazující místa | Jestli makra, dokumentace, sales snippety a automatické drafty neukazují na starou pravdu. |
+| Revizní trigger | Jestli od uzavření nenastala změna produktu, retence, dodavatele, dokumentace nebo publika. |
+| Stop pravidlo | Jestli mimořádná kontrola opravdu skončila a nevrátila se neformálně. |
+
+Kontrola má začínat otázkou „změnila se realita?“, ne otázkou „najdeme něco špatně?“. Druhá otázka je nekonečná. První vede k rozhodnutí.
+
+### Vyber malé signály bez profilování
+
+Měsíční kontrola nepotřebuje sledovat konkrétního zákazníka od prvního kliknutí po poslední odpověď. Většinou stačí malý, účelový vzorek a agregované provozní poznámky.
+
+Použitelné signály:
+
+- počet navazujících dotazů na stejnou věc,
+- jeden nebo dva anonymizované příklady odpovědi, pokud je opravdu potřeba ověřit text,
+- poznámka supportu, že se vrátil starý typ nejasnosti,
+- změna v produktu, dokumentaci, ceně, exportu nebo retenci,
+- nález, že automatický draft použil šablonu v jiném kontextu,
+- ruční seznam starých nosičů pravdy, které se po uzavření ještě objevily.
+
+Nepoužitelné signály:
+
+- plošné čtení všech odpovědí daného člověka,
+- session recording k tomu, jak zákazník hledal odpověď,
+- export zákaznických konverzací do nové tabulky „pro jistotu“,
+- nový dashboard s osobními metrikami rychlosti nebo přesnosti odpovědí,
+- automatické skórování supportu podle toho, jestli použil správnou větu.
+
+Privacy-first kontrola má chránit pravdivost odpovědi, ne vyrábět dohled nad lidmi. Pokud potřebuješ pracovat s konkrétní konverzací, vezmi nejmenší možný výřez: dotaz, odpověď a výsledek. Jména, obsah workspace, interní poznámky a obchodní detaily do měsíční kontroly nepatří, pokud nejsou nezbytné pro konkrétní rozhodnutí.
+
+### Hledej návrat starého problému
+
+Největší hodnota měsíční kontroly je poznat, jestli se vrátil původní problém. Ne jestli šablona zní dokonale. Ne jestli by šla ještě stylisticky uhladit. Původní problém byl důvod, proč se práce vůbec otevřela.
+
+Napiš si původní problém jednou větou:
+
+> Staré exportní makro slibovalo kompletní export všech workspace dat a tím vytvářelo nepravdivé očekávání u zákazníků před ukončením účtu.
+
+Potom kontroluj jen návrat této věty:
+
+| Signál | Co znamená |
+| --- | --- |
+| Stejný navazující dotaz se vrátil | Šablona možná není dost rozhodovací nebo produkt pořád neumí ukázat hranici exportu. |
+| Starý slib se objevil v nové odpovědi | Některý nosič pravdy nebyl uklizený nebo se používá bokem. |
+| Support šablonu obchází ručním vysvětlením | Šablona je pravdivá, ale nepoužitelná v běžném rozhovoru. |
+| Sales používá jiný slib než support | Problém je ve sdíleném obchodním nebo trust zdroji, ne jen v makru. |
+| Automatický draft použil šablonu mimo kontext | Je potřeba zúžit spouštěč, ne kontrolovat víc lidí. |
+
+Když se problém nevrátil, nehledej další práci jen proto, že už máš otevřený dokument. Napiš „ponechat beze změny“ a zavři kontrolu. Disciplína někdy znamená neudělat nic. To je pro týmy extrémně nepřirozené a přesně proto užitečné.
+
+### Sleduj výjimky jako produktový signál
+
+Jednotlivá výjimka není důkaz selhání šablony. Může jít o specifický zákaznický případ, bezpečnostní dotazník, právní žádost nebo nestandardní plán. Opakované výjimky už ale něco říkají.
+
+Měsíční kontrola má výjimky číst podle příčiny:
+
+| Typ výjimky | Pravděpodobná reakce |
+| --- | --- |
+| Zákazník má specifický právní dotaz | Nepřepisovat šablonu, odkázat na řízený právní nebo trust postup. |
+| Všichni se ptají na stejný detail | Doplnit veřejnou dokumentaci nebo produktový text. |
+| Šablona vyžaduje ruční vysvětlení pokaždé | Přepsat ji podle rozhodnutí člověka, ne podle interní terminologie. |
+| Výjimka vzniká jen u jednoho starého plánu | Doplnit větev pro starý plán nebo jasné omezení použití. |
+| Výjimka vzniká kvůli produktu | Otevřít produktovou opravu, šablonu dál neladit jako náplast. |
+
+Tady je důležité nepodlehnout reflexu „přidejme další odstavec“. Každý další odstavec v šabloně zvyšuje šanci, že ji lidé přestanou používat, zkopírují si vlastní zkrácenou verzi a pravda se znovu rozpadne. Když šablona opakovaně potřebuje složité větvení, možná je čas změnit dokumentaci, rozhraní, pricing nebo exportní tok.
+
+### Zkontroluj automatické drafty a pomocné nástroje
+
+Pokud šablonu používá automatizace, asistent, helpdesk makro nebo interní snippet nástroj, měsíční kontrola má ověřit i technickou cestu. Ne proto, aby se zkoumalo každé použití, ale aby šablona neutekla ze svého původního kontextu.
+
+Zeptej se:
+
+- Bere automatický draft text ze zdroje pravdy, nebo z historické kopie?
+- Má draft jasné místo pro lidské schválení, pokud odpověď může měnit obchodní, právní nebo trust slib?
+- Nezačala automatizace přidávat do odpovědi data, která původní šablona nepotřebovala?
+- Nezůstaly po opravě testovací exporty, prompt logy nebo porovnávací tabulky?
+- Je jasné, kdy se má automatický návrh vypnout nebo vrátit do ručního režimu?
+
+Měsíční kontrola automatizace má být krátká. Stačí ověřit zdroj, spouštěč, výstup a úklid stop. Pokud se objeví širší problém, neřeš ho v kontrole šablony. Otevři samostatnou produktovou, dokumentační nebo automatizační kartu s vlastním účelem a datovou hranicí.
+
+### Napiš měsíční review kartu
+
+Výstup kontroly má být tak krátký, aby ho někdo přečetl i v úterý mezi dvěma hovory. Ideální karta má jednu obrazovku.
+
+| Pole | Zápis |
+| --- | --- |
+| Šablona | Název makra, snippetu nebo odpovědi. |
+| Původní problém | Jedna věta, proč se šablona opravovala. |
+| Kontrolované signály | Co se ověřilo bez plošného sledování lidí. |
+| Změna reality | Ano/ne a co přesně se změnilo. |
+| Návrat starého slibu | Ano/ne a kde se objevil. |
+| Výjimky | Žádné, jednotlivé, opakované nebo produktové. |
+| Datová stopa kontroly | Jaký minimální výřez byl použit a kdy se smaže nebo zavře. |
+| Verdikt | Ponechat, zúžit, opravit text, otevřít produktovou opravu, nebo archivovat. |
+| Další kontrola | Trigger nebo datum, pokud kalendářová kontrola dává smysl. |
+
+Karta nemá obsahovat dlouhé citace zákazníků ani interní detaily. Když potřebuješ doložit konkrétní příklad, odkazuj na řízené interní místo a v kartě popiš jen typ problému. E-book není návod na únik citlivých detailů pod záminkou dokumentace. Hezký pokus, ale ne.
+
+### Rozhodni jedním z pěti verdiktů
+
+Měsíční kontrola končí verdiktem. Bez verdiktu je to jen další zápis do bahna.
+
+| Verdikt | Kdy ho použít | Co udělat |
+| --- | --- | --- |
+| Ponechat | Původní problém se nevrátil, realita se nezměnila, výjimky nejsou opakované. | Zavřít kontrolu a nechat šablonu v běžném režimu. |
+| Zúžit | Šablona se používá moc široce nebo v citlivých situacích. | Upravit spouštěč použití, kdy nepoužít a případně automatický draft. |
+| Opravit text | Odpověď je pravdivá, ale lidé po ní dál nechápou další krok. | Přepsat jednu část textu a ověřit jedním pracovním průchodem. |
+| Otevřít produktovou opravu | Šablona opakovaně vysvětluje chybu, nejasnost nebo díru v produktu. | Založit produktovou kartu a šablonu dál neladit jako hlavní řešení. |
+| Archivovat | Šablona už nemá platný spouštěč nebo její účel zanikl. | Označit ji jako archivní, uklidit odkazy a navazující místa. |
+
+Nejčastější chyba je nechat verdikt „oprava textu“, i když realita křičí „produktová oprava“. Pokud zákazníci pořád nechápou export, protože rozhraní ukazuje tlačítko „Exportovat vše“, šablona není hlavní problém. Hlavní problém je produktový slib v UI.
+
+### Příklad: Exportní makro po měsíci
+
+Před měsícem tým uzavřel opravu makra `export_scope`. Makro už neslibuje kompletní export všech workspace dat a má jasně popsanou hranici auditních a bezpečnostních záznamů. Mimořádná kontrola skončila po jednom běžném draftu.
+
+Měsíční review karta:
+
+| Pole | Zápis |
+| --- | --- |
+| Šablona | Support makro `export_scope`. |
+| Původní problém | Starý text sliboval kompletní export všech workspace dat. |
+| Kontrolované signály | Počet navazujících dotazů na rozsah exportu, jedna anonymizovaná ukázka odpovědi, kontrola sales snippetu a help centra. |
+| Změna reality | Ne. Exportní rozsah, retence auditních logů ani trust balíček se nezměnily. |
+| Návrat starého slibu | Ne v support makru. Ano v jednom starém sales snippetu, který nebyl v hlavním seznamu navazujících míst. |
+| Výjimky | Jednotlivá výjimka u enterprise zákazníka s vlastním bezpečnostním dotazníkem. |
+| Datová stopa kontroly | Použit anonymizovaný výřez jedné odpovědi a ruční kontrola veřejných textů; bez exportu konverzací. |
+| Verdikt | Zúžit a uklidit nosič. Makro zůstává, sales snippet se opravuje a přidává se do navazujících míst. |
+| Další kontrola | Jen při změně exportu, retence, trust balíčku nebo opakovaném návratu starého slibu. |
+
+Zavírací věta:
+
+> Makro `export_scope` po měsíci funguje v běžném režimu. Starý slib se nevrátil do support odpovědí, ale objevil se v jednom sales snippetu, který byl opravený a doplněný do navazujících míst. Další kontrola se nespouští kalendářově, pouze při změně exportu, retence, trust balíčku nebo opakovaném návratu stejného dotazu.
+
+Tohle je přesně velikost kontroly, která má smysl. Našla konkrétní nosič staré pravdy, opravila ho a nezaložila trvalý dohled nad odpověďmi.
+
+### Checklist: Měsíční kontrola šablony
+
+- [ ] Začal jsem provozní kartou, ne náhodným čtením konverzací.
+- [ ] Původní problém je napsaný jednou větou.
+- [ ] Kontroluji návrat problému, ne dokonalost formulace.
+- [ ] Používám malé signály bez profilování lidí.
+- [ ] Neexportuji zákaznické konverzace jen pro pohodlí kontroly.
+- [ ] Ověřil jsem, zda se změnila realita produktu, dokumentace, retence, dodavatel nebo publikum.
+- [ ] Zkontroloval jsem výjimky podle příčiny, ne podle nálady.
+- [ ] Pokud šablonu používá automatizace, ověřil jsem zdroj, spouštěč, výstup a úklid stop.
+- [ ] Napsal jsem měsíční review kartu na jednu obrazovku.
+- [ ] Kontrola končí jedním z pěti verdiktů.
+- [ ] Pokud se problém nevrátil, šablonu nechávám být.
+- [ ] Pokud se problém opakuje kvůli produktu, otevírám produktovou opravu místo dalšího ladění textu.
+
+### Mini úkol
+
+Vyber jednu šablonu, která byla před měsícem uzavřená do běžného provozu. Za patnáct minut napiš původní problém jednou větou, projdi její provozní kartu a ověř maximálně tři signály: návrat stejného dotazu, změnu reality a stav navazujících míst. Potom vyplň měsíční review kartu a uzavři ji verdiktem „ponechat, zúžit, opravit text, otevřít produktovou opravu, nebo archivovat“. Pokud kontrola potřebovala konkrétní výřez odpovědi, napiš i kdy se tento výřez zavře nebo smaže.
+
 ## Zdroje
 
 - IETF RFC 9110: HTTP Semantics - význam HTTP přesměrování a stavů včetně `410 Gone` pro zdroje, které už nejsou dostupné: https://www.rfc-editor.org/rfc/rfc9110.html
@@ -66504,6 +66676,8 @@ Vyber jednu šablonu, která byla nedávno opravená a ověřená. Za patnáct m
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-29: Doplněna příloha o měsíční kontrole šablony po uzavření bez sledování lidí: kontrola podle provozní karty, malé signály bez profilování, hledání návratu původního problému, čtení výjimek jako produktového signálu, ověření automatických draftů, měsíční review karta, pět verdiktů, příklad exportního makra po měsíci, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-29: Doplněna příloha o uzavření opravené šablony do běžného provozu bez doznívající kontroly: zavírací věta po opravě, provozní karta šablony, převod finálního textu do zdroje pravdy, revizní triggery podle změny reality, viditelné ukončení mimořádné kontroly, příklad exportního makra, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
