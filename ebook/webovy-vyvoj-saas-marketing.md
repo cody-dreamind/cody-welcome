@@ -64958,6 +64958,136 @@ To je dost malý úkol na rychlé zavření a dost konkrétní na to, aby změni
 
 Vyber jednu nedávno upravenou dokumentační stránku, šablonu nebo support odpověď. Napiš větu „má pomoct člověku v situaci ___ udělat ___ bez ___“. Potom udělej jeden pracovní průchod na modelovém scénáři a vyplň kontrolní kartu. Pokud najdeš staré makro nebo šablonu, která říká opak, neopravuj všechno. Otevři jednu konkrétní navazující opravu s vlastníkem a datem kontroly.
 
+## Příloha: Zjednodušení dokumentace, která už práci neřídí
+
+Dokumentace se většinou nerozbije najednou. Spíš pomalu přestane řídit práci. Lidé ji obcházejí, protože je moc dlouhá. Support používá vlastní zkrácenou odpověď. Produktový člověk raději pošle starý chat. Nový kolega neví, která stránka je aktuální. A tým si pořád říká, že dokumentace existuje, takže problém je přece vyřešený. Není. Jen se přesunul do tišší místnosti.
+
+Zjednodušení dokumentace není stylistická kúra. Je to provozní rozhodnutí: co má dál řídit práci, co se má zúžit, co sloučit, co archivovat a co smazat. Privacy-first hodnota je tady praktická. Čím méně starých textů drží zbytečné postupy, exporty, přístupy a veřejné sliby při životě, tím menší je riziko, že někdo udělá správně vypadající krok podle špatné pravdy.
+
+> Codyho komentář: Nejhorší dokumentace není ta, která chybí. Tu aspoň vidíš. Horší je dokumentace, která vypadá aktuálně, ale nenápadně popisuje produkt z minulého roku. To je historický kostým s produkčním dopadem.
+
+### Poznej text, který už nepracuje
+
+Nezačínej otázkou „co všechno máme upravit“. Začni otázkou „který text už nepomáhá rozhodnutí“. Signály bývají docela obyčejné:
+
+| Signál | Co může znamenat |
+| --- | --- |
+| Lidé opakovaně posílají doplňující dotazy k věci, která je údajně zdokumentovaná. | Text je špatně umístěný, moc obecný nebo neodpovídá pracovní situaci. |
+| Existují dvě podobné stránky s jinými formulacemi. | Tým má souběžnou pravdu a každá strana může vést k jinému slibu. |
+| Dokumentace se cituje jen jako obrana „někde to máme“. | Text neřídí práci, jen chrání pocit hotova. |
+| Nový člověk podle ní nedokáže udělat první krok bez autora. | Chybí příklad, pořadí kroků nebo aktuální hranice odpovědnosti. |
+| Veřejná stránka slibuje širší schopnost než produkt nebo provoz skutečně drží. | Dokumentace je obchodní riziko, ne pomoc. |
+| Interní runbook obsahuje staré tokeny, staré odkazy nebo starý datový rozsah. | Text může vracet tým ke zbytečným přístupům nebo exportům. |
+
+Jeden signál nestačí na plošný úklid. Stačí na otevření jedné dokumentační karty. To je rozdíl mezi prací a jarním úklidem kanceláře s výmluvou na strategii.
+
+### Vyber jeden z pěti verdiktů
+
+Zjednodušení dokumentace má skončit rozhodnutím, ne neurčitým „upravit později“. Použij pět verdiktů:
+
+| Verdikt | Kdy ho použít | Co udělat |
+| --- | --- | --- |
+| Ponechat | Text pořád řídí práci a neexistuje silnější místo pravdy. | Nech ho být, jen zapiš další trigger revize. |
+| Zúžit | Text má užitečné jádro, ale je zavalený historií, výjimkami nebo interními detaily. | Nech jen části, které pomáhají dnešnímu rozhodnutí. |
+| Sloučit | Více textů odpovídá na stejnou pracovní otázku. | Vyber cílovou stránku a přesuň nejlepší části bez duplicit. |
+| Archivovat | Text má historickou nebo učící hodnotu, ale nemá řídit nové případy. | Označ stav, datum, důvod a aktuální náhradu. |
+| Smazat | Text mate, drží starý proces nebo nemá dnešní účel. | Odstraň ho a ukliď odkazy, šablony i navigaci. |
+
+Verdikt „zúžit“ je často nejpraktičtější. Neříká „text byl špatný“. Říká „text přežil svůj původní rozsah“. To je normální. Produkty se mění, týmy se učí a dokumentace nemá být muzeum všech meziverzí.
+
+### Napiš zavírací kartu dokumentu
+
+U každého většího zjednodušení napiš krátkou kartu. Chrání tým před tím, aby užitečné poučení zmizelo spolu se starým textem.
+
+| Pole | Co zapsat |
+| --- | --- |
+| Dokument | Název, odkaz a kde se používá. |
+| Původní účel | Proč vznikl a jakou práci měl řídit. |
+| Dnešní pracovní otázka | Jakou otázku má člověk po přečtení umět uzavřít. |
+| Nález | Proč text dnes mate, bobtná nebo neřídí práci. |
+| Verdikt | Ponechat, zúžit, sloučit, archivovat nebo smazat. |
+| Co zachovat | Jedna až tři věci, které mají dál hodnotu. |
+| Co odstranit | Staré sliby, interní detaily, zbytečné příklady, duplicitní postupy nebo mrtvé odkazy. |
+| Privacy kontrola | Nezůstává textem podporovaný zbytečný sběr, export, přístup nebo sdílení? |
+| Úklid nosičů | Kde opravit odkazy, makra, šablony, onboarding nebo automatizace. |
+| Další trigger | Kdy se k textu vrátit, pokud vůbec. |
+
+Karta nemá být další dokumentace k dokumentaci. Má být účtenka za rozhodnutí. Když ji po měsíci otevřeš, musí být jasné, proč text zůstal, zmizel nebo se sloučil.
+
+### Zjednodušuj v pořadí dopadu
+
+Když najdeš dokumentační nepořádek, nesnaž se uklidit všechno najednou. Začni tam, kde starý text může způsobit špatný krok.
+
+Pořadí:
+
+1. Veřejné sliby zákazníkům: pricing, trust, exporty, dostupnost, retence, bezpečnostní tvrzení.
+2. Pracovní šablony, které lidé používají denně: support makra, sales FAQ, onboarding role, release checklist.
+3. Provozní postupy: incident runbooky, obnovovací návody, automatizační postupy, přístupové checklisty.
+4. Interní učící materiály: postmortemy, staré ADR, historické poznámky.
+5. Čistě orientační texty, které nikdo aktivně nepoužívá.
+
+Privacy-first pravidlo: přednost má text, který může vést k širšímu sběru dat, delší retenci, zbytečnému exportu, moc širokému přístupu nebo nepravdivému veřejnému slibu. Ne ten, který jen nevypadá elegantně.
+
+### Uklid staré nosiče, jinak se pravda vrátí
+
+Samotné přepsání cílové stránky nestačí. Starý postup často přežije v místech, kam se při úklidu nikdo nepodívá.
+
+Zkontroluj hlavně:
+
+| Nosič | Otázka |
+| --- | --- |
+| Support makra | Nenabízí starou odpověď, širší export nebo neplatný slib? |
+| Sales FAQ | Neprodává schopnost, kterou dokumentace zúžila nebo ukončila? |
+| Onboarding | Neučí nové lidi starý postup jako výchozí? |
+| Runbooky | Neobsahují staré kroky, tokeny, URL nebo datový rozsah? |
+| Automatizace | Neposílá report, který měl po zjednodušení skončit? |
+| Navigace a interní odkazy | Nevedou lidé pořád na archivní nebo sloučenou stránku? |
+| Veřejné metadata | Nezůstala stará stránka lákat z vyhledávání na neplatný slib? |
+
+Pokud nosič nejde opravit hned, zapiš jeden konkrétní úkol. Ne „uklidit dokumentaci“, ale „odebrat starý exportní slib ze sales FAQ a odkázat na trust odpověď k řízenému exportu“. Sloveso, místo, důvod, vlastník.
+
+### Příklad: Zúžení starého exportního návodu
+
+Tým má interní návod „Jak připravit zákaznický export“. Vznikl v době, kdy exporty dělali ručně vývojáři. Později přibyla produktová funkce, veřejná trust odpověď a support makro. Starý návod ale pořád obsahuje detailní kroky k ručnímu exportu, staré názvy tabulek a větu „na požádání lze dodat kompletní historii aktivit“.
+
+Zavírací karta:
+
+| Pole | Zápis |
+| --- | --- |
+| Dokument | Interní návod k ručnímu zákaznickému exportu. |
+| Původní účel | Pomoci vývojáři připravit výjimečný export před existencí produktové funkce. |
+| Dnešní pracovní otázka | Kdy stačí produktový export a kdy je potřeba výjimka s účelem, rozsahem a retencí. |
+| Nález | Návod prodlužuje život starého ručního procesu a naznačuje neomezený export. |
+| Verdikt | Zúžit a archivovat technickou historii. |
+| Co zachovat | Rozhodovací otázky: účel, rozsah polí, příjemce, retence, schválení. |
+| Co odstranit | Staré názvy tabulek, kompletní historii aktivit, ruční kroky bez současné kontroly. |
+| Privacy kontrola | Nový text nesmí navádět k plošnému exportu ani k ukládání kopie bez data smazání. |
+| Úklid nosičů | Support makro, sales FAQ a odkaz v onboarding checklistu. |
+| Další trigger | Změna exportních polí, retence nebo návrat dotazu na „kompletní export“. |
+
+Výsledek:
+
+> Návod zůstává jako krátká rozhodovací stránka pro výjimky. Technická historie je archivovaná, aktivní odkazy vedou na produktový export a trust odpověď. Starý slib „kompletní historie aktivit“ zmizel ze sales FAQ.
+
+To je dobrý konec. Dokumentace je kratší, pravdivější a méně hladová po datech.
+
+### Checklist: Zjednodušení dokumentace
+
+- [ ] Vybral jsem jeden dokument nebo jednu malou skupinu duplicit, ne celou wiki.
+- [ ] Popsal jsem, jakou dnešní pracovní otázku má text uzavírat.
+- [ ] Vybral jsem verdikt: ponechat, zúžit, sloučit, archivovat nebo smazat.
+- [ ] Zachoval jsem jen části, které pomáhají dnešnímu rozhodnutí.
+- [ ] Odstranil jsem staré sliby, interní detaily, mrtvé odkazy a zbytečné výjimky.
+- [ ] Zkontroloval jsem privacy dopad: sběr, export, přístup, retenci a sdílení.
+- [ ] Opravil jsem nejdůležitější staré nosiče pravdy nebo k nim zapsal konkrétní úkol.
+- [ ] Archivované části mají stav, datum, důvod a aktuální náhradu.
+- [ ] Veřejný text neslibuje víc, než produkt a provoz umí držet.
+- [ ] Další trigger je konkrétní událost, ne neurčité „někdy uklidit“.
+
+### Mini úkol
+
+Najdi jednu dokumentační stránku, kterou tým často obchází nebo cituje jen jako „někde to máme“. Vyplň zavírací kartu a vyber jeden verdikt. Pokud zvolíš zúžení nebo sloučení, nech v cílovém textu jen pracovní otázku, aktuální postup, privacy hranici a další trigger. Potom oprav jeden starý nosič pravdy: makro, FAQ, runbook, onboardingový odkaz nebo automatizovaný report.
+
 ## Zdroje
 
 - IETF RFC 9110: HTTP Semantics - význam HTTP přesměrování a stavů včetně `410 Gone` pro zdroje, které už nejsou dostupné: https://www.rfc-editor.org/rfc/rfc9110.html
@@ -65151,6 +65281,8 @@ Vyber jednu nedávno upravenou dokumentační stránku, šablonu nebo support od
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-29: Doplněna příloha o zjednodušení dokumentace, která už práci neřídí: signály stárnoucí dokumentace, pět verdiktů ponechat/zúžit/sloučit/archivovat/smazat, zavírací karta dokumentu, pořadí úklidu podle dopadu, úklid starých nosičů pravdy, příklad zúžení exportního návodu, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-29: Doplněna příloha o ověření dokumentační změny po lekci bez falešné jistoty: slíbené použití dokumentace, kontrola starých nosičů pravdy, jeden pracovní průchod bez trackingu, kontrolní karta, pět verdiktů, příklad trust odpovědi po změně retence, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
