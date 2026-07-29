@@ -65223,6 +65223,146 @@ Tohle je přesně ten typ sloučení, který nevypadá dramaticky, ale sníží 
 
 Najdi dvě dokumentační stránky, makra nebo FAQ odpovědi, které řeší stejnou otázku jinými slovy. Napiš jednu pracovní otázku, vyber cílovou stránku a vyplň merge kartu. Potom udělej jen první praktický krok: oprav jeden nejdůležitější odkaz nebo šablonu, která dnes vede na slabší verzi pravdy. Zbytek zapiš jako navazující úklid s vlastníkem a datem kontroly.
 
+## Příloha: Ověření dokumentačního merge po prvním používání bez falešného klidu
+
+Sloučení dokumentace vypadá hotově ve chvíli, kdy je cílová stránka napsaná a staré odkazy opravené. Ve skutečnosti je hotové až tehdy, když podle ní někdo udělá práci a nevytáhne u toho starou pravdu z makra, paměti, chatu, onboardingu nebo automatického reportu. Dokumentační merge bez ověření je jen uklizený stůl. První použití ukáže, jestli se na něm dá opravdu pracovat.
+
+Ověření po sloučení nemá být nový audit dokumentace. Je to krátká kontrola jednoho reálného průchodu: support odpoví zákazníkovi, sales použije trust text v nákupní debatě, produkt zadá změnu podle nové stránky, nový člověk projde onboardingem, provoz vyřeší rutinní situaci podle sloučeného runbooku. Cíl je zjistit, jestli cílová stránka řídí práci, staré odkazy mlčí a nevznikla širší datová nebo publikační stopa.
+
+> Codyho komentář: Největší nepřítel dokumentačního merge není špatný Markdown. Je to člověk, který si pamatuje starou větu a použije ji, protože „vždycky jsme to tak říkali“. Paměť je skvělá věc. Jen občas běží na zastaralé verzi.
+
+### Začni slíbenou kontrolou z merge karty
+
+Při sloučení sis měl napsat, kdy a na jakém použití ověříš výsledek. Nezačínej tedy od otázky „co všechno ještě projít“. Začni od původního slibu.
+
+Kontrolní věta může znít:
+
+> Po prvních třech exportních dotazech ověříme, zda support používá cílovou trust odpověď, neposílá staré makro a nezapisuje do interních poznámek víc údajů, než potřebuje pro rozhodnutí.
+
+Nebo:
+
+> Po prvním onboardingu nového support člověka ověříme, zda se dostal na cílovou stránku, pochopil datovou hranici a nepotřeboval starý interní návod.
+
+Dobrá kontrola má čtyři hranice:
+
+| Hranice | Co znamená |
+| --- | --- |
+| Použití | Která konkrétní pracovní situace ověří merge. |
+| Publikum | Kdo stránku použije a komu se výstup posílá. |
+| Datová stopa | Jaké údaje se při ověření smějí číst, ukládat nebo sdílet. |
+| Verdikt | Jaké rozhodnutí po kontrole padne. |
+
+Pokud kontrola nemá použití, sklouzne do čtení textu pro dobrý pocit. Pokud nemá datovou hranici, snadno si vyrobíš nové screenshoty, exporty a poznámky jen proto, abys ověřil, že dokumentace říká „sbírejte méně dat“. To je přesně ten typ ironie, který by měl zůstat v komedii, ne v provozu.
+
+### Proveď jeden pracovní průchod
+
+Ověření musí být napojené na práci. Vyber jeden skutečný případ nebo jeden cvičný průchod, který věrně simuluje běžný scénář. Neotevírej pět náhodných dokumentů a nehledej dokonalost.
+
+Průchod veď přes pět otázek:
+
+| Otázka | Co hledáš |
+| --- | --- |
+| Našel člověk cílovou stránku? | Navigace, interní odkazy, makra a vyhledávání vedou na správné místo. |
+| Uzavřel podle ní rozhodnutí? | Text odpovídá na pracovní otázku, ne jen vysvětluje pozadí. |
+| Nepoužil starý nosič pravdy? | Staré makro, FAQ, onboarding, chat snippet nebo tabulka se nevrátily do práce. |
+| Držel datovou hranici? | Průchod nevyžádal širší export, delší retenci, nový přístup ani zbytečný screenshot. |
+| Vznikl použitelný výstup? | Odpověď zákazníkovi, zadání, runbook krok nebo interní rozhodnutí je jasné a kratší než před mergem. |
+
+Nepotřebuješ dokonalé měření. Stačí krátké pozorování a jeden záznam. Privacy-first kontrola dokumentace je víc podobná ochutnání jídla než instalaci kamer do kuchyně.
+
+### Porovnej cílovou stránku se starými stopami
+
+I když pracovní průchod dopadne dobře, stará pravda může zůstat schovaná jinde. Po prvním použití proto udělej malý úklidový scan jen v místech, která měla vazbu na merge kartu.
+
+Zkontroluj:
+
+| Místo | Signál problému |
+| --- | --- |
+| Interní vyhledávání | Starý dokument se zobrazuje výš než cílová stránka. |
+| Support makra | Makro kopíruje starou formulaci místo odkazu na cílovou odpověď. |
+| Sales a onboarding materiály | Lidé používají prezentaci nebo checklist s původním slibem. |
+| Automatizované drafty | Šablona zprávy nebo report vkládá starý odkaz. |
+| Veřejné URL | Stará stránka je dál indexovaná jako aktuální odpověď. |
+| Runbooky | Technický postup obsahuje vložený zastaralý text místo odkazu na zdroj pravdy. |
+
+Neprohledávej celý firemní vesmír. Cílem je ověřit místa uvedená v merge kartě a jedno nebo dvě nejpravděpodobnější místa návratu. Když najdeš další vrstvu duplicit mimo rozsah, zapiš ji jako nový nález. Nepřidávej ji potají do právě uzavíraného merge, protože tím z jedné kontroly uděláš nekonečný sklep.
+
+### Napiš merge review kartu
+
+Po kontrole zapiš krátký výsledek. Stačí tabulka:
+
+| Pole | Co zapsat |
+| --- | --- |
+| Cílová stránka | Který dokument nebo URL byl po sloučení ověřen. |
+| Pracovní použití | Na jakém dotazu, onboardingu, zadání nebo provozním kroku proběhla kontrola. |
+| Výsledek práce | Co člověk podle stránky udělal. |
+| Staré stopy | Které staré odkazy, makra, šablony nebo texty se ještě ozvaly. |
+| Datová hranice | Zda průchod držel původní omezení sběru, exportu, přístupů, sdílení a retence. |
+| Oprava | Jeden konkrétní úklid nebo textová úprava, pokud byla potřeba. |
+| Verdikt | Ponechat, opravit, zúžit, vrátit do merge nebo otevřít produktový problém. |
+| Další trigger | Událost, která má dokumentaci znovu otevřít. |
+
+Karta má chránit rozhodnutí, ne vyrábět archiv pocitů. Nepiš do ní celé zákaznické vlákno, osobní údaje ani interní citace, které nejsou nutné. Stačí popsat typ situace a výsledek.
+
+### Rozhodni jedním z pěti verdiktů
+
+Po prvním používání dej merge jasný stav:
+
+| Verdikt | Kdy ho použít | Další krok |
+| --- | --- | --- |
+| Ponechat | Cílová stránka řídí práci, staré stopy mlčí a datová hranice drží. | Zavřít merge a nechat jen běžný revizní trigger. |
+| Opravit | Text je správný, ale jeden odkaz, formulace nebo šablona mate lidi. | Udělat malou opravu a krátce ji ověřit při dalším použití. |
+| Zúžit | Stránka je moc široká a táhne do sebe další témata nebo publika. | Omezit ji na jednu pracovní otázku a zbytek přesunout nebo zavřít. |
+| Vrátit do merge | Stará duplicita pořád řídí práci nebo vznikla nová souběžná pravda. | Otevřít merge kartu znovu s přesnějším odkazovým úklidem. |
+| Otevřít produktový problém | Dokumentace je konzistentní, ale popisuje stav, který lidem stejně neumožňuje práci udělat dobře. | Převést nález do produktu, pricingu, support procesu nebo provozu. |
+
+Nejzdravější výsledek není vždy „ponechat“. Někdy je první používání cenné právě tím, že ukáže, že dokumentace nebyla problém. Problém byl produktový slib, chybějící export, matoucí role nebo příliš ruční proces. V takové chvíli text nelakuj. Přiznej, že je čas změnit realitu.
+
+### Příklad: Trust odpověď po sloučení support makra
+
+Tým sloučil veřejnou trust odpověď k exportu dat a staré support makro. Po dvou týdnech chce ověřit, jestli merge funguje.
+
+Kontrolní průchod:
+
+| Krok | Zjištění |
+| --- | --- |
+| Support řešil nový exportní dotaz. | Použil cílovou trust odpověď a doplnil jen kontext zákazníkova účelu. |
+| Interní vyhledávání na „kompletní export“ | Pořád našlo staré makro jako druhý výsledek. |
+| Odpověď zákazníkovi | Neslíbila plošnou kopii všeho a vysvětlila rozsah exportu lidsky. |
+| Datová stopa | Nevznikl nový screenshot ani pracovní export pro samotné ověření. |
+| Onboarding supportu | Už odkazuje na cílovou stránku. |
+
+Merge review karta:
+
+| Pole | Zápis |
+| --- | --- |
+| Cílová stránka | Trust odpověď „Jak funguje export dat“. |
+| Pracovní použití | Jeden nový exportní dotaz v supportu. |
+| Výsledek práce | Zákazník dostal odpověď s účelem, rozsahem a dalším krokem. |
+| Staré stopy | Staré makro je pořád dohledatelné interním vyhledáváním. |
+| Datová hranice | Drží: žádný nový export ani širší interní poznámky. |
+| Oprava | Označit staré makro jako nahrazené a odebrat ho z výsledků interního vyhledávání, pokud to systém umožňuje. |
+| Verdikt | Opravit. |
+| Další trigger | Další změna exportního rozsahu nebo návrat dotazu na „kompletní export“. |
+
+Výsledek není dramatický. Cílový text pracuje, ale stará stopa ještě šeptá. Jedna malá oprava stačí. Není potřeba zakládat měsíční kontrolní rituál, komisi pro makra ani dashboard „dokumentační konzistence“. Prosím, nechme dashboardy spát.
+
+### Checklist: Ověření dokumentačního merge po prvním používání
+
+- [ ] Vycházím ze slíbené kontroly v merge kartě, ne z nového plošného auditu.
+- [ ] Ověřil jsem jeden skutečný nebo věrně cvičný pracovní průchod.
+- [ ] Zkontroloval jsem, že člověk našel cílovou stránku a dokázal podle ní rozhodnout.
+- [ ] Ověřil jsem nejdůležitější staré nosiče pravdy: odkazy, makra, FAQ, onboarding, runbooky nebo automatizované drafty.
+- [ ] Kontrola nevytvořila zbytečný export, screenshot, osobní poznámku ani novou analytickou stopu.
+- [ ] Napsal jsem krátkou merge review kartu s výsledkem, starými stopami, datovou hranicí a verdiktem.
+- [ ] Rozhodl jsem jedním z pěti verdiktů: ponechat, opravit, zúžit, vrátit do merge nebo otevřít produktový problém.
+- [ ] Pokud se objevila duplicita mimo rozsah, zapsal jsem ji jako nový nález místo nafouknutí aktuální kontroly.
+- [ ] Další trigger je konkrétní změna nebo návrat problému, ne pravidelné čtení pro dobrý pocit.
+
+### Mini úkol
+
+Vezmi poslední sloučenou dokumentační stránku a najdi jedno skutečné použití, na kterém ji ověříš. Vyplň merge review kartu v osmi řádcích. Pokud najdeš starý odkaz nebo šablonu, oprav jen tu nejpravděpodobnější cestu návratu staré pravdy. Pokud zjistíš, že text je správný, ale práce pořád nejde udělat dobře, nepiš další odstavec. Otevři produktový nebo provozní problém.
+
 ## Zdroje
 
 - IETF RFC 9110: HTTP Semantics - význam HTTP přesměrování a stavů včetně `410 Gone` pro zdroje, které už nejsou dostupné: https://www.rfc-editor.org/rfc/rfc9110.html
@@ -65416,6 +65556,8 @@ Najdi dvě dokumentační stránky, makra nebo FAQ odpovědi, které řeší ste
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-29: Doplněna příloha o ověření dokumentačního merge po prvním používání bez falešného klidu: kontrola podle původní merge karty, jeden pracovní průchod, porovnání cílové stránky se starými stopami, merge review karta, pět verdiktů, příklad trust odpovědi po sloučení support makra, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-29: Doplněna příloha o sloučení podobné dokumentace bez ztráty kontextu: rozlišení užitečného opakování, formální, konfliktní a historické duplicity, výběr cílové stránky podle práce, merge karta, pořadí důvěry při slučování, úklid odkazů a starých nosičů pravdy, příklad sloučení odpovědí k exportu dat, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
