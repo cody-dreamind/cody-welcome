@@ -64798,6 +64798,166 @@ Tím se poučení dostalo k lidem, kteří ho potřebují, ale původní datová
 
 Vezmi jednu uzavřenou provozní lekci a napiš dokumentační kartu: lekce, cílové místo pravdy, publikum, přidat, neuvádět, úklid, ověření a trigger revize. Potom z ní napiš jednu veřejnou nebo interní větu v přítomném čase. Pokud věta začíná historií problému, přepiš ji. Pokud obsahuje detail, který by čtenář nepotřeboval k bezpečnější práci, vyhoď ho. Dokumentace má být užitečná, ne zvědavá.
 
+## Příloha: Ověření dokumentační změny po lekci bez falešné jistoty
+
+Dokumentace po provozní lekci není hotová ve chvíli, kdy je věta napsaná a commitnutá. Hotová je až tehdy, když podle ní někdo udělá lepší rozhodnutí ve skutečné práci. Jinak máš jen novější text, který hezky sedí vedle starých šablon, makro odpovědí a pracovních zvyků. To je dokumentační dvojí pravda: oficiálně platí nové pravidlo, prakticky tým pořád sahá po staré cestě.
+
+Ověření dokumentační změny má být malé, věcné a nešmírovací. Nepotřebuješ sledovat, kdo stránku otevřel, jak dlouho četl, kam pohyboval myší nebo jestli scrolloval až na konec. Potřebuješ jeden pracovní průchod: někdo podle nové dokumentace odpoví zákazníkovi, připraví brief, projde runbook, udělá exportní rozhodnutí nebo opraví šablonu. Výsledek buď ukáže, že text řídí práci, nebo že je pořád jen dekorace.
+
+> Codyho komentář: Největší past dokumentace je věta „už je to někde napsané“. Napsané neznamená nalezené, pochopené ani použité. Napsané znamená jen to, že problém teď umí být tišejší.
+
+### Začni od slíbeného použití
+
+Každá dokumentační změna má mít konkrétní situaci, ve které má pomoct. Pokud ji neumíš pojmenovat, nejspíš ověřuješ text pro dobrý pocit, ne pro práci.
+
+Zapiš jednu větu:
+
+> Tato dokumentační změna má příště pomoct člověku v situaci ___ udělat ___ bez ___.
+
+Příklady:
+
+| Změna dokumentace | Slíbené použití |
+| --- | --- |
+| Nová šablona exportního briefu | Produktový člověk vymezí účel, příjemce, minimální pole a retenci exportu bez následného lovení detailů v chatu. |
+| Veřejná odpověď k retenci dat | Zákazník pochopí, jak dlouho držíme pracovní data, bez posílání neveřejného runbooku. |
+| Interní runbook pro vypnutí automatizace | Nový vlastník vypne běh skriptu bez autora původní opravy a bez ponechání starých tokenů. |
+| Support makro po změně produktu | Support odpoví na opakovaný dotaz bez slibu, který už produkt nebo privacy hranice nepodporují. |
+| Changelogová poznámka | Zákazník pochopí dopad změny bez znalosti interní příčiny. |
+
+Pokud slíbené použití zní jako „lidé budou víc informovaní“, zúž ho. Informovanost není práce. Práce je odpovědět, rozhodnout, nastavit, zrušit, předat, ověřit nebo říct ne.
+
+### Porovnej nový text se starými nosiči pravdy
+
+Dokumentace často selže mimo stránku, kterou jsi právě upravil. Starý postup přežije v šabloně, uložené odpovědi, interním checklistu, starém odkazu nebo v paměti člověka, který problém řešil naposledy. Ověření proto nezačíná čtením nového textu, ale hledáním míst, odkud by se příště vzala opačná odpověď.
+
+Rychlá kontrolní tabulka:
+
+| Místo | Otázka |
+| --- | --- |
+| Veřejná dokumentace | Tvrdí stránka totéž co nový zdroj pravdy? |
+| Interní runbook | Nepopírá nový text pracovním postupem ze staré situace? |
+| Support makra | Nenabízí uložená odpověď širší export, delší retenci nebo silnější slib než nový text? |
+| Sales FAQ | Neprodává obchodní text schopnost, kterou dokumentace zúžila? |
+| Backlogové šablony | Nevyžaduje staré zadání pole, měření nebo přístup, který už nemá vznikat? |
+| Automatizace | Neposílá starý report, digest nebo upozornění odpověď podle staré pravdy? |
+| Changelog a release notes | Nevysvětlují změnu tak, že odkryjí interní detail nebo starou chybu zbytečně nahlas? |
+
+Nejde o plošný audit celé firmy. Vyber místa, která člověk v dané situaci skutečně použije. U exportního briefu to bude šablona, support makro a veřejná stránka exportů. U incidentního runbooku to bude runbook, alert, eskalační kontakt a poslední postmortem odkaz. Zbytek nechej být, pokud nemá reálnou cestu k rozhodnutí.
+
+### Proveď jeden pracovní průchod
+
+Nejlepší test dokumentace je malá simulace nebo první skutečné použití. Vyber člověka, který změnu nepsal, a dej mu konkrétní úkol. Nesleduj jeho obrazovku kvůli mikrochování. Sleduj výsledek a otázky, které musel položit.
+
+Průchod může vypadat takhle:
+
+1. Dej člověku situaci, kterou má dokumentace řešit.
+2. Pošli ho na cílové místo pravdy, ne na interní vysvětlení celé historie.
+3. Nechej ho připravit odpověď, brief, rozhodnutí nebo provozní krok.
+4. Zapiš, kde se zastavil, co musel dohledat a zda požádal o citlivější data.
+5. Rozhodni, jestli dokumentaci zavřít, zpřesnit, přesunout, nebo opravit související šablonu.
+
+Příklad zadání:
+
+> Zákazník se ptá, jestli mu můžeme poslat detailní export všech aktivit za poslední rok. Použij aktuální dokumentaci k exportům a připrav odpověď, která nejdřív vyjasní účel, rozsah polí a retenci.
+
+Dobrý výsledek:
+
+| Signál | Co znamená |
+| --- | --- |
+| Člověk našel správné místo pravdy bez znalosti historie | navigace funguje |
+| Odpověď neobsahuje interní detaily původní opravy | hranice sdílení drží |
+| Odpověď žádá účel a minimální rozsah místo plného exportu | nové pravidlo řídí práci |
+| Není potřeba nový tracking, screenshot ani kopie zákaznických dat | ověření zůstalo privacy-first |
+| Staré makro se při průchodu ukázalo jako riziko | další oprava je konkrétní, ne pocitová |
+
+Špatný výsledek není ostuda. Je to přesně důvod, proč ověřuješ. Ostuda je zavřít dokumentaci bez použití a pak se divit, že příští člověk udělal starou chybu podle staré odpovědi.
+
+### Napiš kontrolní kartu
+
+Po průchodu nevyráběj dlouhý report. Stačí krátká karta, která uzavře, co se stalo a co se má změnit.
+
+Šablona:
+
+| Pole | Zápis |
+| --- | --- |
+| Dokumentační změna | Co jsme upravili a kde je cílové místo pravdy? |
+| Slíbené použití | Jaké rozhodnutí, odpověď nebo postup měla změna podpořit? |
+| Testovaný průchod | Kdo nebo jaký scénář změnu použil? |
+| Fungovalo | Co šlo podle dokumentace bez dodatečného vysvětlování? |
+| Nejasné | Kde člověk váhal, hledal starý text nebo potřeboval interní kontext? |
+| Privacy kontrola | Nevytvořilo ověření novou osobní stopu, export nebo širší sdílení? |
+| Staré nosiče | Které šablony, makra, odkazy nebo automatizace ještě nesou starou pravdu? |
+| Verdikt | Zavřít, zpřesnit, přesunout, opravit související nosič, nebo vrátit změnu. |
+| Další krok | Jedna konkrétní akce s vlastníkem a datem kontroly. |
+
+Vyplněná karta:
+
+| Pole | Zápis |
+| --- | --- |
+| Dokumentační změna | Veřejná stránka exportů a interní šablona exportního briefu. |
+| Slíbené použití | Připravit odpověď na požadavek širokého exportu bez automatického slibu plné kopie dat. |
+| Testovaný průchod | Support připravil odpověď na modelový dotaz zákazníka. |
+| Fungovalo | Odpověď začala účelem, příjemcem, minimálním rozsahem a retencí. |
+| Nejasné | Staré support makro pořád nabízelo „kompletní export“. |
+| Privacy kontrola | Nebyl použit skutečný zákaznický export ani session nahrávka. Stačil modelový dotaz. |
+| Staré nosiče | Support makro a sales FAQ. |
+| Verdikt | Dokumentace zůstává, navazující oprava je úklid maker. |
+| Další krok | Do pátku upravit makro a po první skutečné odpovědi zkontrolovat, že se starý slib nevrátil. |
+
+Karta má chránit rozhodnutí, ne autora. Pokud z ní nejde poznat další krok, je moc obecná. Pokud z ní jde poznat víc interních detailů než z dokumentace samotné, je moc zvědavá.
+
+### Rozhodni podle pěti verdiktů
+
+Po ověření si vyber jeden verdikt. Neotevírej pět souběžných oprav jen proto, že jsi při průchodu našel pět nehezkých rohů.
+
+| Verdikt | Kdy ho použít | Další krok |
+| --- | --- | --- |
+| Zavřít | Dokumentace pomohla a staré nosiče nevedou k opačnému postupu. | Zapiš trigger další revize a skonči mimořádnou pozornost. |
+| Zpřesnit | Text je správně umístěný, ale chybí příklad, limit nebo rozhodovací věta. | Uprav cílové místo pravdy, ne celé okolí. |
+| Přesunout | Text je dobrý, ale čtenář ho hledá jinde. | Přesuň nebo propoj místo pravdy, staré místo označ. |
+| Opravit nosič | Dokumentace je správná, ale šablona, makro nebo automatizace pořád používá starou pravdu. | Otevři jednu navazující opravu pro konkrétní nosič. |
+| Vrátit | Nový text vede ke špatnému rozhodnutí nebo zbytečně rozšiřuje datovou stopu. | Vrať změnu a otevři novou lekci s užším cílem. |
+
+Verdikt „ještě to sledujme“ používej opatrně. Často je to jen maskované odložení rozhodnutí. Pokud opravdu potřebuješ další pozorování, napiš přesný spouštěč: například „otevřít po prvním skutečném exportním požadavku“ nebo „otevřít, pokud se do dvou týdnů vrátí stejný support dotaz“. Bez spouštěče je to procesní kouř.
+
+### Příklad: Nová trust odpověď po změně retence
+
+Tým po provozní lekci změnil veřejnou odpověď k retenci pracovních exportů. Starý text říkal, že exporty se drží „podle potřeby“. Nový text říká, že každý export má účel, vlastníka a datum smazání, a že pokud stačí agregovaný výstup, detailní kopie se nevytváří.
+
+Ověření:
+
+| Krok | Výsledek |
+| --- | --- |
+| Modelový zákaznický dotaz | „Jak dlouho držíte export aktivit a kdo se k němu dostane?“ |
+| Použité místo pravdy | Veřejná trust stránka plus interní exportní brief. |
+| Připravená odpověď | Odpověď vysvětlila účel, omezení rozsahu, vlastníka a retenci bez sdílení interní cesty k exportnímu skriptu. |
+| Nález | Sales FAQ pořád používalo starou formulaci „export kdykoliv na vyžádání“. |
+| Privacy dopad | Ověření proběhlo na modelovém dotazu bez skutečných zákaznických dat. |
+| Verdikt | Dokumentaci ponechat, otevřít jednu opravu Sales FAQ. |
+
+Navazující úkol:
+
+> Do středy přepsat jednu odpověď v Sales FAQ tak, aby export neprodávala jako neomezenou kopii dat, ale jako řízený výstup podle účelu, rozsahu a retence.
+
+To je dost malý úkol na rychlé zavření a dost konkrétní na to, aby změnil práci. Přesně ten typ nudně užitečné věci, kterou máme rádi. Nuda s dopadem je pořád lepší než dramatický audit bez změny.
+
+### Checklist: Ověření dokumentační změny po lekci
+
+- [ ] Dokumentační změna má jednu větu slíbeného použití.
+- [ ] Ověření vychází ze skutečné pracovní situace, ne z obecného čtení textu.
+- [ ] Testuje ji někdo jiný než autor změny, pokud to velikost týmu dovolí.
+- [ ] Nezakládám nový tracking čtenářů, zaměstnanců ani zákazníků.
+- [ ] Ověření nepoužívá skutečný export, screenshot, nahrávku nebo osobní data, pokud stačí modelový scénář.
+- [ ] Zkontroloval jsem nejdůležitější staré nosiče pravdy: šablony, makra, FAQ, runbooky, automatizace a odkazy.
+- [ ] Napsal jsem krátkou kontrolní kartu s výsledkem, privacy dopadem a verdiktem.
+- [ ] Vybral jsem jeden z pěti verdiktů: zavřít, zpřesnit, přesunout, opravit nosič, nebo vrátit.
+- [ ] Další krok má vlastníka, datum kontroly a omezený rozsah.
+- [ ] Pokud dokumentace funguje, ukončil jsem mimořádné sledování místo zakládání nové rutiny.
+
+### Mini úkol
+
+Vyber jednu nedávno upravenou dokumentační stránku, šablonu nebo support odpověď. Napiš větu „má pomoct člověku v situaci ___ udělat ___ bez ___“. Potom udělej jeden pracovní průchod na modelovém scénáři a vyplň kontrolní kartu. Pokud najdeš staré makro nebo šablonu, která říká opak, neopravuj všechno. Otevři jednu konkrétní navazující opravu s vlastníkem a datem kontroly.
+
 ## Zdroje
 
 - IETF RFC 9110: HTTP Semantics - význam HTTP přesměrování a stavů včetně `410 Gone` pro zdroje, které už nejsou dostupné: https://www.rfc-editor.org/rfc/rfc9110.html
@@ -64991,6 +65151,8 @@ Vezmi jednu uzavřenou provozní lekci a napiš dokumentační kartu: lekce, cí
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-29: Doplněna příloha o ověření dokumentační změny po lekci bez falešné jistoty: slíbené použití dokumentace, kontrola starých nosičů pravdy, jeden pracovní průchod bez trackingu, kontrolní karta, pět verdiktů, příklad trust odpovědi po změně retence, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-29: Doplněna příloha o převodu uzavřené provozní lekce do dokumentace bez úniku detailů: rozdělení lekce podle publika, výběr živých částí ze zavírací karty, dokumentační karta, přepis historie na současné pravidlo, úklid starých nosičů pravdy, ověření na jednom použití, příklad exportního reportu, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
