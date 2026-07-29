@@ -65088,6 +65088,141 @@ To je dobrý konec. Dokumentace je kratší, pravdivější a méně hladová po
 
 Najdi jednu dokumentační stránku, kterou tým často obchází nebo cituje jen jako „někde to máme“. Vyplň zavírací kartu a vyber jeden verdikt. Pokud zvolíš zúžení nebo sloučení, nech v cílovém textu jen pracovní otázku, aktuální postup, privacy hranici a další trigger. Potom oprav jeden starý nosič pravdy: makro, FAQ, runbook, onboardingový odkaz nebo automatizovaný report.
 
+## Příloha: Sloučení podobné dokumentace bez ztráty kontextu
+
+Podobná dokumentace je zákeřnější než dokumentace špatná. Špatný text lidé rychle přestanou používat. Dva skoro dobré texty ale vytvoří souběžnou pravdu: support odkazuje na jeden, sales na druhý, produktový tým zná třetí interní poznámku a nový člověk si vybere podle toho, který odkaz našel první. Výsledek nevypadá jako incident. Jen se pomalu rozjede způsob práce, sliby zákazníkům a datové hranice.
+
+Sloučení dokumentace není mechanické slepení dvou stránek. Je to rozhodnutí, která stránka má být cílová pravda, co se zachová jako důkaz nebo příklad, co se zahodí jako historie a kde se uklidí staré odkazy. Privacy-first hodnota je tady jednoduchá: jedna pravdivá stránka s jasnou hranicí dat je lepší než pět polopravd, které každá dovolují trochu jiný export, přístup nebo retenci.
+
+> Codyho komentář: Když má tým dvě odpovědi na stejnou otázku, nemá bohatou dokumentaci. Má malou loterii. A zákazník obvykle vyhraje tu nejméně výhodnou větu, protože ta zní nejvíc jako slib.
+
+### Poznej skutečnou duplicitu
+
+Ne každé opakování je problém. Některé věci se mají opakovat: bezpečnostní hranice, zákaz plošných exportů, princip nejmenších přístupů nebo místo, kde člověk najde aktuální trust odpověď. Problém vzniká, když podobné stránky odpovídají na stejnou pracovní otázku a vedou k jinému kroku.
+
+Rozlišuj čtyři typy podobnosti:
+
+| Typ | Příklad | Verdikt |
+| --- | --- | --- |
+| Užitečné opakování | Veřejná dokumentace i interní runbook říkají, že export má účel, rozsah a retenci. | Nechat, ale odkázat na stejné místo pravdy. |
+| Formální duplicita | Dvě interní stránky popisují stejné kroky jen jinými slovy. | Sloučit do jedné cílové stránky. |
+| Konfliktní duplicita | Sales FAQ slibuje širší export než trust dokumentace. | Vybrat pravdu, opravit slib a uklidit nosiče. |
+| Historická duplicita | Starý návod popisuje předchozí proces, ale není označený jako archiv. | Archivovat nebo smazat podle hodnoty. |
+
+Praktický test: polož si otázku „Kdyby nový člověk našel jen jednu z těchto stránek, udělal by stejný krok jako podle druhé?“ Pokud ne, nejde o kosmetiku. Jde o provozní riziko.
+
+### Vyber cílovou stránku podle práce, ne podle stáří
+
+Cílová stránka není automaticky ta nejnovější, nejdelší ani nejlépe napsaná. Vyber ji podle toho, kde má člověk ve skutečné práci skončit.
+
+Dobrá cílová stránka splňuje pět podmínek:
+
+| Podmínka | Otázka |
+| --- | --- |
+| Pracovní situace | Řeší konkrétní otázku člověka, nebo jen ukládá znalost? |
+| Aktuální realita | Odpovídá dnešnímu produktu, provozu, rolím a datovým hranicím? |
+| Publikační vrstva | Je jasné, zda je veřejná, řízeně sdílená, interní nebo neveřejná? |
+| Odkazovatelnost | Dá se na ni bezpečně odkázat ze šablon, FAQ, runbooků a onboardingů? |
+| Udržitelnost | Má vlastníka, trigger revize a rozumnou délku? |
+
+Pokud žádná existující stránka tyto podmínky nesplňuje, nevyráběj třetí verzi vedle dvou starých. Vyber jednu cílovou URL nebo dokument a přepiš ji. Zbytek se musí sloučit, archivovat, přesměrovat nebo smazat. Jinak jen přidáš další vrstvu mlhy.
+
+### Napiš merge kartu
+
+Před editací napiš krátkou kartu sloučení. Zabrání tomu, aby se při přepisu ztratily užitečné důkazy, odkazy nebo rozhodnutí.
+
+| Pole | Co zapsat |
+| --- | --- |
+| Pracovní otázka | Jakou otázku má cílová stránka po sloučení uzavřít. |
+| Cílová stránka | Která URL, stránka nebo dokument zůstává jako místo pravdy. |
+| Sloučené zdroje | Které stránky, makra, FAQ nebo runbooky se slučují. |
+| Co zachovat | Nejlepší příklady, rozhodnutí, varování, privacy hranice nebo veřejné formulace. |
+| Co zahodit | Staré sliby, duplicitní kroky, interní detaily, neplatné odkazy nebo historické výjimky. |
+| Publikum | Kdo smí cílovou stránku číst a kdo má dostat jen veřejný výřez. |
+| Datová hranice | Jaká data, exporty, přístupy, logy nebo retence se textem nesmí rozšířit. |
+| Odkazový úklid | Kde se musí opravit odkazy, navigace, šablony, makra a automatizace. |
+| Archiv | Co zůstane jako archivní stopa a s jakým vysvětlením. |
+| Kontrola po sloučení | Kdy a na jakém použití ověřit, že cílová stránka opravdu řídí práci. |
+
+Karta má být krátká. Jedna stránka, klidně jen tabulka. Pokud potřebuješ sepsat román, pravděpodobně neslučuješ dokumentaci, ale řešíš produktový konflikt, který se do textu jen schoval.
+
+### Slučuj podle pořadí důvěry
+
+Při samotném sloučení nepřesouvej obsah v pořadí, v jakém jsi ho našel. Použij pořadí důvěry:
+
+1. Současná produktová realita: co produkt opravdu umí, ne co kdysi sliboval.
+2. Právní a privacy hranice: účel, rozsah, retence, přístupy a sdílení.
+3. Veřejné sliby: pricing, trust, bezpečnostní a exportní formulace.
+4. Provozní postup: kdo co dělá, kdy a podle jakého signálu.
+5. Příklady: jen ty, které odpovídají dnešní realitě.
+6. Historie: pouze pokud vysvětluje důležité rozhodnutí, jinak pryč.
+
+Tohle pořadí chrání tým před nejčastější chybou: zachovat hezký starý příklad, který nenápadně povoluje širší data než dnešní pravidlo. Příklad je dobrý sluha, ale mizerný zákoník. Pokud odporuje pravidlu, letí příklad.
+
+### Uklid odkazy, aby stará pravda neměla kudy zpět
+
+Po sloučení nestačí napsat „hotovo“ do karty. Staré stránky často přežívají přes odkazy a šablony. Udělej malý odkazový úklid:
+
+| Místo | Kontrola |
+| --- | --- |
+| Navigace a indexy | Vedou na cílovou stránku, ne na starý zdroj? |
+| Support makra | Neposílají zákazníkovi archivní nebo širší odpověď? |
+| Sales FAQ | Nezůstala tam obchodně pohodlná, ale provozně nepravdivá věta? |
+| Onboarding | Učí nové lidi jednu cílovou pravdu? |
+| Runbooky | Odkazují na aktuální postup a neobsahují zkopírovaný starý text? |
+| Automatizace a šablony zpráv | Nevkládají do reportů nebo odpovědí staré odkazy? |
+| Veřejné metadata | Neindexuje se stránka, která už nemá být veřejným slibem? |
+
+U veřejných URL zvol vědomě, co se stane se starou stránkou. Někdy stačí přesměrování. Někdy je lepší krátká archivní poznámka. Někdy má být stránka pryč. Důležité je, aby stará URL dál neprodávala neplatný slib jen proto, že se na ni kdysi dobře odkazovalo.
+
+### Příklad: Sloučení dvou odpovědí k exportu dat
+
+Tým má veřejnou trust odpověď „Jak funguje export dat“ a interní support makro „Zákazník chce kompletní export“. Oba texty řeší stejnou otázku, ale jinak:
+
+| Zdroj | Problém |
+| --- | --- |
+| Trust odpověď | Správně popisuje řízený export podle účelu, rozsahu a retence. |
+| Support makro | Nabízí „kompletní export historie“ bez vysvětlení výjimek a smazání kopie. |
+| Onboarding supportu | Odkazuje jen na makro, ne na trust odpověď. |
+
+Merge karta:
+
+| Pole | Zápis |
+| --- | --- |
+| Pracovní otázka | Jak odpovědět zákazníkovi, který chce export, aniž bychom slíbili plošnou kopii všeho. |
+| Cílová stránka | Veřejná trust odpověď k exportu dat. |
+| Sloučené zdroje | Support makro a onboardingový odkaz. |
+| Co zachovat | Jednoduchou lidskou formulaci z makra a rozhodovací otázky z trust odpovědi. |
+| Co zahodit | Větu „kompletní export historie“ a starý interní odkaz na ruční postup. |
+| Publikum | Zákazník dostane veřejnou odpověď; interní výjimky zůstanou v runbooku bez citlivých detailů. |
+| Datová hranice | Export má účel, rozsah polí, příjemce, datum předání a datum smazání pracovní kopie. |
+| Odkazový úklid | Support makro a onboarding supportu povedou na trust odpověď. |
+| Archiv | Staré makro bez odkazu do běžné práce, jen s důvodem nahrazení. |
+| Kontrola po sloučení | Po dvou týdnech projít několik odpovědí na exportní dotazy bez ukládání nové osobní analytiky. |
+
+Výsledek:
+
+> Support má kratší odpověď, která odkazuje na veřejnou trust stránku. Interní výjimky se řeší přes runbook, ne přes obchodně lákavý slib. Starý onboardingový odkaz je opravený.
+
+Tohle je přesně ten typ sloučení, který nevypadá dramaticky, ale sníží riziko. Méně textů, méně rozdílných slibů, méně datového šumu.
+
+### Checklist: Sloučení podobné dokumentace
+
+- [ ] Vybral jsem jednu pracovní otázku, ne celou dokumentační oblast.
+- [ ] Rozlišil jsem užitečné opakování, formální duplicitu, konfliktní duplicitu a historickou duplicitu.
+- [ ] Určil jsem cílovou stránku podle dnešní práce, ne podle stáří nebo délky.
+- [ ] Napsal jsem merge kartu se zdroji, zachovanými částmi, zahazovanými částmi a datovou hranicí.
+- [ ] Zachoval jsem pravidla, důkazy a aktuální příklady, ne historické pohodlí.
+- [ ] Odstranil jsem staré sliby, které rozšiřovaly export, přístup, retenci nebo sdílení.
+- [ ] Rozhodl jsem, co se stane se starými URL a interními stránkami.
+- [ ] Opravil jsem nejdůležitější odkazy v navigaci, šablonách, makrech, provozních návodech a onboardingu.
+- [ ] U veřejných textů jsem zkontroloval metadata, aby stará stránka dál nelákala na neplatný slib.
+- [ ] Naplánoval jsem jednu kontrolu po sloučení na skutečné pracovní situaci.
+
+### Mini úkol
+
+Najdi dvě dokumentační stránky, makra nebo FAQ odpovědi, které řeší stejnou otázku jinými slovy. Napiš jednu pracovní otázku, vyber cílovou stránku a vyplň merge kartu. Potom udělej jen první praktický krok: oprav jeden nejdůležitější odkaz nebo šablonu, která dnes vede na slabší verzi pravdy. Zbytek zapiš jako navazující úklid s vlastníkem a datem kontroly.
+
 ## Zdroje
 
 - IETF RFC 9110: HTTP Semantics - význam HTTP přesměrování a stavů včetně `410 Gone` pro zdroje, které už nejsou dostupné: https://www.rfc-editor.org/rfc/rfc9110.html
@@ -65281,6 +65416,8 @@ Najdi jednu dokumentační stránku, kterou tým často obchází nebo cituje je
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-29: Doplněna příloha o sloučení podobné dokumentace bez ztráty kontextu: rozlišení užitečného opakování, formální, konfliktní a historické duplicity, výběr cílové stránky podle práce, merge karta, pořadí důvěry při slučování, úklid odkazů a starých nosičů pravdy, příklad sloučení odpovědí k exportu dat, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-29: Doplněna příloha o zjednodušení dokumentace, která už práci neřídí: signály stárnoucí dokumentace, pět verdiktů ponechat/zúžit/sloučit/archivovat/smazat, zavírací karta dokumentu, pořadí úklidu podle dopadu, úklid starých nosičů pravdy, příklad zúžení exportního návodu, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
