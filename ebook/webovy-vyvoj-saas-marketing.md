@@ -65887,6 +65887,140 @@ Po úklidu se nezaložil nový formulář „požádejte o všechna data a my se
 
 Vyber jednu staženou nebo zúženou veřejnou stránku a napiš její starý slib jednou větou. Za třicet minut najdi tři místa, kde se stejný slib mohl opakovat: jedno supportní, jedno obchodní nebo onboardingové a jedno interní. U každého napiš verdikt „ponechat, přepsat, zúžit, převést do řízené vrstvy, nebo otevřít produktovou opravu“. Potom oprav jednu nejrizikovější šablonu a ověř ji jedním běžným pracovním průchodem.
 
+## Příloha: Kontrola prvních odpovědí po změně šablon bez návratu starého slibu
+
+Opravená šablona není hotová ve chvíli, kdy ji někdo přepsal. Hotová je až ve chvíli, kdy ji tým použije v běžné práci a starý slib se nevrátí boční cestou. První odpovědi po změně jsou proto malé kontrolní okno: nechceš auditovat celý support, ale chceš zjistit, jestli nová pravda opravdu prošla do rukou lidí, automatizací a navazujících textů.
+
+Tahle příloha navazuje na úklid šablon po stažení nebo zúžení dokumentace. Neřeší už samotné přepisování maker. Řeší první skutečné použití: support odpověď, sales follow-up, onboardingový e-mail, automatický draft nebo interní odpověď, kde se má ukázat, jestli tým drží aktuální hranici slibu.
+
+> Codyho komentář: Nejlepší kontrola šablony není schůzka o šabloně. Je to jeden běžný dotaz, jedna odpověď a klidná otázka: „Poslali jsme člověku aktuální pravdu, nebo jsme z nostalgie doručili minulý release?“
+
+### Vrať se k předávací kartě
+
+Nezačínej kontrolu otevřením inboxu. Začni kartou, kterou měl úklid šablon předat do první kontroly. V ní má být starý slib, nová odpověď, hlavní riziko, kontrolní vzorek a hranice dat. Bez téhle karty se první kontrola snadno rozpadne na obecné čtení komunikace, což je pomalé, invazivní a obvykle nepřinese lepší rozhodnutí.
+
+Před kontrolou si ověř čtyři věci:
+
+| Otázka | Co musí být jasné |
+| --- | --- |
+| Co se nesmí vrátit? | Jedna přesná stará věta, URL, PDF, produktový rozsah nebo obchodní slib. |
+| Co se má používat místo toho? | Nová krátká odpověď nebo odkaz na aktuální zdroj pravdy. |
+| Kde kontrolujeme první použití? | Konkrétní kanál: support makro, sales follow-up, onboarding, automatický draft nebo interní snippet. |
+| Kde kontrolovat nebudeme? | Kanály a data, která nejsou nutná pro dané rozhodnutí. |
+
+Pokud neumíš vyplnit druhý řádek, kontrola ještě není připravená. Nejde jen o odstranění staré věty. Tým potřebuje bezpečnou náhradu, jinak si ji každý dopíše po svém a stará pravda se vrátí v kreativnějším kostýmu.
+
+### Vyber malý vzorek podle rizika
+
+Kontrola prvních odpovědí nemá být plošné sledování lidí. Vyber malý vzorek podle toho, kde by stará odpověď způsobila největší škodu: falešný obchodní slib, špatné očekávání při nákupu, nejasnost kolem dat, právní nejistotu nebo supportní zmatek.
+
+| Riziko | Rozumný první vzorek |
+| --- | --- |
+| Starý slib o rozsahu exportu dat | 3-5 support odpovědí nebo draftů k exportu a offboardingu. |
+| Stažený pricing nebo planový limit | 2 sales follow-upy a jedna veřejná pricing odpověď. |
+| Změna dostupnosti funkce | 3 odpovědi z podpory a jeden onboardingový odkaz. |
+| Zúžení privacy nebo bezpečnostního tvrzení | 2 řízeně sdílené trust odpovědi a jeden bezpečnostní dotazník. |
+| Oprava automatického draftu | 3 poslední vygenerované drafty bez ukládání celého obsahu konverzací. |
+
+Vzorek má být dost malý na ruční kontrolu a dost konkrétní na verdikt. Když po pěti průchodech nevidíš problém, pravděpodobně nepotřebuješ dvacet dalších. Když problém vidíš hned v prvním průchodu, další sběr dat ho neudělá pravdivějším. Prostě oprav zdroj návratu.
+
+### Kontroluj odpověď, ne člověka
+
+Privacy-first kontrola se ptá, jestli systém doručil správnou odpověď. Neptá se, kdo „selhal“, kdo klikl špatně nebo kdo měl málo disciplíny. Pokud se starý slib vrátil, obvykle je příčina v systému: starý snippet zůstal v nástroji, automatizace vybírá šablonu podle starého tagu, interní dokument pořád vede na archivní PDF, nebo nová odpověď není dost použitelná.
+
+Při kontrole zapisuj jen pracovní nález:
+
+| Místo osobní stopy | Zapiš provozní signál |
+| --- | --- |
+| Jméno zákazníka | Typ dotazu nebo situace. |
+| Jméno support agenta | Kanál nebo šablona, která odpověď vytvořila. |
+| Celý obsah zprávy | Jedna věta s návratem starého slibu nebo potvrzením nové odpovědi. |
+| Screenshot inboxu | Odkaz na šablonu, makro nebo interní zdroj pravdy. |
+| Hodnocení výkonu člověka | Systémová příčina: starý zdroj, nejasná náhrada, automatizace, chybějící školení. |
+
+Tohle pravidlo chrání tým i zákazníka. Kontrola odpovědí má zlepšit provozní pravdu, ne založit nový sklad citlivých komunikací.
+
+### Napiš kontrolní kartu prvních odpovědí
+
+Jedna kontrola se dá uzavřít krátkou kartou. Nemá dokazovat, že už nikdy nic neselže. Má rozhodnout, jestli změna šablon funguje v prvním běžném použití.
+
+| Pole | Co zapsat |
+| --- | --- |
+| Změněný slib | Starý slib nebo odkaz, který se nesmí vrátit. |
+| Nová odpověď | Aktuální formulace nebo zdroj pravdy. |
+| Kontrolní vzorek | Kolik odpovědí, draftů nebo průchodů bylo ověřeno a z jakého kanálu. |
+| Výsledek | Bez návratu starého slibu, návrat starého slibu, nejasná formulace, nebo produktový problém. |
+| Datová stopa | Co se pro kontrolu uložilo a co se záměrně neukládalo. |
+| Zdroj návratu | Pokud se problém objevil: staré makro, dokument, automatizace, onboarding, sales materiál nebo ruční dopisování. |
+| Verdikt | Zavřít, opravit text, uklidit nosič, předat do produktu, zúžit automatizaci. |
+| Další kontrola | Jen pokud verdikt opravdu vyžaduje opakování; jinak žádná. |
+
+Karta má být kratší než původní odpověď. Pokud kontrolní záznam obsahuje kompletní komunikaci, jména, screenshoty a výpisy z CRM, nejspíš kontroluješ víc, než potřebuješ. Přesnost není totéž co hromadění stop.
+
+### Rozliš návrat slibu od nového problému
+
+Při prvních odpovědích narazíš na různé typy nálezů. Neházej je do jednoho pytle, jinak bude tým opravovat šablony, když má změnit produkt, nebo naopak otevře produktový projekt kvůli jedné staré větě.
+
+| Nález | Co znamená | Správná reakce |
+| --- | --- | --- |
+| Odpověď použila staré makro beze změny. | Úklid nosiče nebyl dokončený. | Opravit nebo vypnout makro a ověřit jeden další průchod. |
+| Odpověď použila novou šablonu, ale agent doplnil starý slib ručně. | Nová odpověď nepokrývá běžnou otázku nebo tým nezná hranici. | Zpřesnit šablonu a krátce vysvětlit změnu týmu. |
+| Automatický draft vytáhl starý text. | Stará pravda žije v automatizaci nebo znalostní bázi. | Uklidit zdroj automatizace a zkontrolovat logiku výběru šablony. |
+| Zákazník se ptá na výjimku, kterou nová odpověď neřeší. | Možná nejde o šablonu, ale o chybějící produktovou nebo trust odpověď. | Otevřít produktovou nebo dokumentační kartu. |
+| Nová odpověď je pravdivá, ale vyvolává opakovaný dotaz. | Formulace je možná moc úzká, neurčitá nebo bez dalšího kroku. | Přepsat odpověď jako rozhodovací text, ne přidávat sledování. |
+
+Dobrá kontrola neříká jen „něco je špatně“. Říká, na které vrstvě se problém vrací. Šablona, produkt, automatizace, dokumentace a školení jsou různé zásahy. Když je zaměníš, práce se začne točit v kruhu.
+
+### Uzavři kontrolu bez nového dohledu
+
+Po první kontrole si vyber jeden z pěti verdiktů:
+
+| Verdikt | Kdy ho použít | Co udělat |
+| --- | --- | --- |
+| Zavřít | První vzorek nevrátil starý slib a nová odpověď vedla k jasnému dalšímu kroku. | Zapsat zavření a konec mimořádné kontroly. |
+| Opravit text | Nová odpověď je pravdivá, ale nejasná nebo svádí k ručnímu dopisování. | Přepsat šablonu a ověřit jeden další průchod. |
+| Uklidit nosič | Starý slib žije ve starém makru, PDF, automatizaci nebo interní wiki. | Opravit zdroj návratu a aktualizovat předávací kartu. |
+| Předat do produktu | Odpověď opakovaně naráží na skutečnou mezeru ve funkci, exportu, nastavení nebo procesu. | Otevřít produktovou kartu s privacy hranicí. |
+| Zúžit automatizaci | Automatický draft nebo sekvence pracuje moc široce a vrací starou pravdu. | Omezit vstupy, zdroje nebo pravomoc automatizace. |
+
+Mimořádná kontrola má mít konec. Když ji necháš běžet ze zvyku, stane se novým sledovacím procesem. Pokud první odpovědi fungují, zavři ji. Pokud nefungují, oprav konkrétní vrstvu a kontroluj jen tu. To je méně dramatické, ale výrazně použitelnější.
+
+### Příklad: První odpovědi po změně exportního makra
+
+Tým po stažení starého exportního návodu opravil support makro. Starý slib zněl: „Export obsahuje všechna data workspace.“ Nová odpověď říká, že export obsahuje projektová data a auditní logy mají samostatný režim exportu a retence.
+
+Kontrolní karta:
+
+| Pole | Zápis |
+| --- | --- |
+| Změněný slib | „Export obsahuje všechna data workspace.“ |
+| Nová odpověď | „Export pokrývá projektová data; bezpečnostní a auditní záznamy řešíme podle samostatného retenčního postupu.“ |
+| Kontrolní vzorek | 4 support drafty k exportu a 1 sales follow-up k ukončení workspace. |
+| Výsledek | 4 odpovědi byly v pořádku; sales follow-up odkazoval na staré PDF. |
+| Datová stopa | Uložen jen typ kanálu, název šablony a nález; bez jmen zákazníků a bez obsahu zpráv. |
+| Zdroj návratu | Sales snippet „offboarding_complete“ měl starý odkaz. |
+| Verdikt | Uklidit nosič. |
+| Další kontrola | Po opravě sales snippetu ověřit jeden další follow-up, pak zavřít. |
+
+Tým neopakoval plošnou kontrolu celého CRM. Našel jeden zdroj návratu, opravil ho a ověřil přesně ten kanál, kde se starý slib vrátil. Žádné nové měření, žádný export zákaznických konverzací, žádná velká porada o tom, že „musíme být konzistentnější“. Ano, i to je produktivita. Jen bez konfety.
+
+### Checklist: Kontrola prvních odpovědí po změně šablon
+
+- [ ] Mám předávací kartu z úklidu šablon.
+- [ ] Znám jednu starou větu, URL nebo formulaci, která se nesmí vrátit.
+- [ ] Znám novou odpověď nebo aktuální zdroj pravdy.
+- [ ] Vybral jsem malý vzorek podle rizika, ne podle zvědavosti.
+- [ ] Kontroluji odpověď, šablonu a systém, ne výkon jednotlivých lidí.
+- [ ] Neukládám celé zákaznické konverzace, screenshoty ani osobní detaily, pokud nejsou nutné.
+- [ ] Umím rozlišit staré makro, ruční dopisování, automatizační zdroj, nejasnou odpověď a produktový problém.
+- [ ] Kontrolní karta obsahuje výsledek, datovou stopu, zdroj návratu a verdikt.
+- [ ] Pokud se starý slib vrátil, opravuji konkrétní nosič nebo vrstvu.
+- [ ] Pokud se starý slib nevrátil, zavírám mimořádnou kontrolu.
+
+### Mini úkol
+
+Vyber jednu nedávno opravenou šablonu a z předávací karty vezmi starý slib, novou odpověď a hlavní riziko. Zkontroluj maximálně pět prvních použití v jednom kanálu. Ulož jen kontrolní kartu: typ kanálu, nález, datovou stopu, zdroj případného návratu a verdikt. Pokud se starý slib nevrátil, kontrolu zavři. Pokud se vrátil, oprav jeden konkrétní nosič a naplánuj jediné ověření po opravě.
+
 ## Zdroje
 
 - IETF RFC 9110: HTTP Semantics - význam HTTP přesměrování a stavů včetně `410 Gone` pro zdroje, které už nejsou dostupné: https://www.rfc-editor.org/rfc/rfc9110.html
@@ -66080,6 +66214,8 @@ Vyber jednu staženou nebo zúženou veřejnou stránku a napiš její starý sl
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-29: Doplněna příloha o kontrole prvních odpovědí po změně šablon bez návratu starého slibu: návrat k předávací kartě, výběr malého vzorku podle rizika, kontrola odpovědi místo člověka, kontrolní karta prvních odpovědí, rozlišení návratu starého slibu od nového problému, pět zavíracích verdiktů, příklad exportního makra, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-29: Zpřesněna nejnovější příloha o úklidu šablon po stažení dokumentace o předávací kartu pro první kontrolu odpovědí: změněná šablona, starý slib, nová odpověď, kontrolní vzorek, hlavní riziko, hranice dat a možné verdikty. Cílem je navázat úklid šablon na už existující část o kontrole odpovědí bez duplikace textu a bez nových externích tvrzení. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
