@@ -65827,6 +65827,28 @@ Ověř:
 
 Zapiš jen výsledek kontroly, ne celý obsah komunikace. Věta „první support průchod k exportu použil novou šablonu a neobsahoval starý slib o všech datech“ je pro pracovní log hodnotnější než uložený screenshot zákaznické zprávy.
 
+### Předej úklid do první kontroly
+
+Úklid šablon má skončit tak, aby další člověk věděl, co přesně ověřit. Jinak se první kontrola změní v obecné čtení odpovědí a tým znovu otevře celou debatu o dokumentaci. Po úklidu proto napiš malou předávací kartu.
+
+| Pole | Co zapsat |
+| --- | --- |
+| Změněná šablona | Název makra, e-mailu, sales textu, onboardingové zprávy nebo automatického draftu. |
+| Starý slib | Jedna věta, která se nesmí vrátit do odpovědí. |
+| Nová odpověď | Krátká formulace, kterou má tým použít místo staré pravdy. |
+| První kontrola | Kolik odpovědí nebo průchodů zkontrolujeme a do kdy. |
+| Hlavní riziko | Stará URL, staré PDF, ručně dopisovaný slib, přesdílení detailů nebo obcházení šablony. |
+| Kde nebudeme hledat | Kanály, exporty nebo zákaznické detaily, které pro tuto kontrolu nejsou nutné. |
+| Verdikty | Zavřít, opravit text, uklidit nosič, předat do produktu nebo zúžit automatizaci. |
+
+Předávací karta je krátká pojistka proti dvěma extrémům: bezstarostnému „hotovo“ a nekonečnému auditu všeho, co kdy tým napsal. Dobrá karta řekne, kde hledat návrat staré pravdy, a zároveň nastaví hranici, kam už kvůli kontrole nelezeš. Privacy-first provoz není jen sbírat méně dat. Je to i schopnost nenechat kontrolu bobtnat za hranici rozhodnutí.
+
+Příklad předávací věty:
+
+> Při prvních pěti exportních odpovědích ověříme, že se nevrací slib „všechna data workspace“, že sales neposílá staré PDF a že do kontrolního záznamu nepřenášíme jména zákazníků ani obsah exportů.
+
+Tahle věta stačí. Další příloha v e-booku už řeší samotnou kontrolu odpovědí po změně šablon; předávací karta jen zajistí, že do ní tým vstoupí s jasnou otázkou, ne s batohem starých obav.
+
 ### Příklad: Stažený exportní návod a support makro
 
 Tým stáhl starou veřejnou stránku „Jak exportovat všechna data workspace“, protože už neodpovídala produktu. Nový stav je přesnější: projektová data jsou exportovatelná přímo, auditní logy mají samostatnou retenci a vyžadují zvláštní postup.
@@ -65858,6 +65880,7 @@ Po úklidu se nezaložil nový formulář „požádejte o všechna data a my se
 - [ ] Interní provozní detaily nezůstaly jako náhrada veřejné dokumentace.
 - [ ] Nález, který vyžaduje změnu produktu, má vlastní produktovou kartu.
 - [ ] První pracovní použití nové šablony proběhlo bez staré odpovědi.
+- [ ] Předal jsem první kontrolu pomocí krátké karty s rizikem, vzorkem, hranicí dat a verdikty.
 - [ ] Po úklidu jsem zavřel mimořádnou kontrolu a nenechal běžet nový dohled ze zvyku.
 
 ### Mini úkol
@@ -66057,6 +66080,8 @@ Vyber jednu staženou nebo zúženou veřejnou stránku a napiš její starý sl
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-29: Zpřesněna nejnovější příloha o úklidu šablon po stažení dokumentace o předávací kartu pro první kontrolu odpovědí: změněná šablona, starý slib, nová odpověď, kontrolní vzorek, hlavní riziko, hranice dat a možné verdikty. Cílem je navázat úklid šablon na už existující část o kontrole odpovědí bez duplikace textu a bez nových externích tvrzení. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-29: Doplněna příloha o úklidu šablon po stažení dokumentace bez návratu starého slibu: práce se změněnou větou jako kotvou, kontrola pěti tříd nosičů pravdy, rozlišení opravy textu od opravy reality, úklidová karta šablon, přepis šablony jako rozhodovací odpovědi, ověření prvního použití bez plošného sledování, příklad staženého exportního návodu, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
