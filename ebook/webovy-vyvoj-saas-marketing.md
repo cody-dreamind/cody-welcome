@@ -65363,6 +65363,133 @@ Výsledek není dramatický. Cílový text pracuje, ale stará stopa ještě še
 
 Vezmi poslední sloučenou dokumentační stránku a najdi jedno skutečné použití, na kterém ji ověříš. Vyplň merge review kartu v osmi řádcích. Pokud najdeš starý odkaz nebo šablonu, oprav jen tu nejpravděpodobnější cestu návratu staré pravdy. Pokud zjistíš, že text je správný, ale práce pořád nejde udělat dobře, nepiš další odstavec. Otevři produktový nebo provozní problém.
 
+## Příloha: Předání vlastnictví sloučené dokumentace bez osiřelé pravdy
+
+Sloučená dokumentace často selže až po tom, co původní autor přestane hlídat odkazy, otázky a drobné výjimky. Cílová stránka sice existuje, první použití dopadlo dobře, ale nikdo už přesně neví, kdo ji má upravit při změně produktu, kdo smí schválit výjimku a kde končí veřejná odpověď. Vznikne dokument bez vlastníka. Na první pohled uklizený. Ve skutečnosti čeká na první změnu reality.
+
+Předání vlastnictví není formální podpis pod stránkou. Je to malá provozní dohoda: kdo drží kvalitu odpovědi, kdo má záskok, kdy se stránka znovu otevírá, jaké má publikum a jak se pozná, že už práci neřídí. U privacy-first dokumentace je to zvlášť důležité, protože stará věta o exportu, retenci nebo přístupech může být nebezpečnější než starý screenshot.
+
+> Codyho komentář: Dokumentace bez vlastníka je jako sdílený hrnek v kuchyňce. Všichni tvrdí, že ho používají opatrně, ale nikdo nechce řešit, co v něm zůstalo po pátku. U datových slibů je to podstatně méně roztomilé.
+
+### Předej odpovědnost, ne jen odkaz
+
+Po ověřeném merge napiš jednu vlastnickou větu. Musí být konkrétnější než „produkt se stará o dokumentaci“.
+
+Dobré věty:
+
+- „Trust odpověď k exportu dat vlastní product ops; support ji smí použít v odpovědi zákazníkovi, ale změnu rozsahu exportu schvaluje produkt a privacy vlastník.“
+- „Runbook pro obnovu statického webu vlastní technický lead; marketing může navrhnout text veřejné status odpovědi, ale nesmí měnit provozní kroky.“
+- „Onboardingovou stránku pro nové administrátory vlastní customer success; změny polí ve formuláři se otevírají jako produktová karta, ne jako tichá editace návodu.“
+
+Špatné věty:
+
+- „Dokumentace je společná.“
+- „Když si někdo všimne chyby, opraví ji.“
+- „Tohle ví support.“
+
+Společné vlastnictví může fungovat u čtení. U změn skoro nikdy. Když dokumentace obsahuje veřejný slib, datovou hranici nebo provozní postup, potřebuje jednoho vlastníka kvality a jednoho záskokového člověka nebo roli.
+
+### Napiš předávací kartu
+
+Předávací karta má být kratší než původní merge karta. Neopisuj historii sloučení. Předej současný stav a pravidla údržby.
+
+| Pole | Co zapsat |
+| --- | --- |
+| Cílová stránka | Dokument, URL nebo interní stránka, která zůstává jako místo pravdy. |
+| Pracovní otázka | Jakou otázku má stránka uzavírat. |
+| Vlastník kvality | Člověk nebo role, která odpovídá za aktuálnost a přesnost. |
+| Záskok | Kdo může udělat revizi, když vlastník není dostupný. |
+| Publikum | Veřejné, řízeně sdílené, interní nebo neveřejné použití. |
+| Datová hranice | Co text nesmí rozšířit: sběr, export, přístup, sdílení, retenci nebo logování. |
+| Revizní trigger | Jaká událost stránku znovu otevře. |
+| Místa napojení | Které šablony, runbooky, onboardingy, FAQ nebo automatizace na stránku odkazují. |
+| První malý úkol | Jedna drobná práce nového vlastníka během prvních 30 dní. |
+
+První malý úkol je důležitý. Nový vlastník se nemá jen nechat zapsat do tabulky. Má si dokument osahat na malé změně: opravit jeden odkaz, zkontrolovat jedno makro, projít jednu odpověď nebo aktualizovat jednu větu podle aktuální reality. Tím se ukáže, jestli opravdu rozumí hranici stránky.
+
+### Nastav revizní trigger podle změny reality
+
+Nejhorší revizní pravidlo zní „každého půl roku se na to podíváme“. Někdy se hodí jako pojistka, ale samo o sobě nechrání před starou pravdou. Lepší jsou triggery podle událostí.
+
+Příklady triggerů:
+
+| Událost | Proč otevírá dokumentaci |
+| --- | --- |
+| Změna exportního rozsahu | Veřejný slib, support odpověď a interní runbook musí zůstat sladěné. |
+| Nový dodavatel v datové cestě | Mění se přístup, uložení dat nebo sdílení. |
+| Změna pricingu nebo plánu | Staré FAQ může slíbit funkci nebo limit, který už neplatí. |
+| Nový typ role nebo oprávnění | Dokumentace přístupů může začít navádět k širším právům. |
+| Incident nebo opakovaný support dotaz | Text možná neřídí práci nebo je příliš mlhavý. |
+| Stažení veřejné stránky | Odkazy, šablony a metadata musí přestat šířit starý slib. |
+
+Trigger má být událost, kterou tým pozná i bez sledování lidí. Nepotřebuješ měřit, kdo stránku četl a kolik sekund na ní strávil. Potřebuješ vědět, že se změnila realita, ke které se stránka vyjadřuje.
+
+### Odděl změny textu od změn pravdy
+
+Nový vlastník musí vědět, co smí upravit sám a co už je produktové nebo provozní rozhodnutí.
+
+Rozlišuj čtyři vrstvy změn:
+
+| Vrstva | Příklad | Kdo rozhoduje |
+| --- | --- | --- |
+| Jazyková oprava | Zjednodušení věty, odstranění nejasného slova, oprava odkazu. | Vlastník dokumentace. |
+| Strukturní oprava | Přesun části do lepšího místa, sloučení dvou odstavců, zkrácení příkladu. | Vlastník dokumentace, případně reviewer z týmu. |
+| Změna slibu | Nový rozsah exportu, jiná retence, jiný plán, jiné SLA. | Produkt, obchod, právní nebo provozní vlastník podle dopadu. |
+| Změna datové hranice | Nový sběr, sdílení, přístup, logování nebo delší uchování. | Privacy/provozní vlastník před publikací. |
+
+Toto rozdělení brání tomu, aby dokumentace nenápadně změnila produkt. Text má popisovat pravdu, ne ji potají vyrábět. Když vlastník dokumentace zjistí, že správná odpověď by vyžadovala širší export nebo nový přístup, nevyřeší to elegantní formulací. Otevře produktovou nebo provozní kartu.
+
+### Udrž napojená místa viditelná
+
+Sloučená stránka většinou nežije sama. Má odkazy ze supportu, sales FAQ, onboardingů, runbooků, interního vyhledávání, šablon e-mailů nebo automatizovaných draftů. Při předání proto ulož malý seznam napojených míst.
+
+Stačí jednoduchá tabulka:
+
+| Místo | Typ vazby | Vlastník | Co hlídat |
+| --- | --- | --- | --- |
+| Support makro k exportu | Odkazuje na cílovou trust odpověď. | Support lead | Makro nekopíruje starý širší slib. |
+| Onboarding supportu | Učí nového člověka použít cílovou stránku. | Customer success | Nový člověk nenachází archivní návod jako hlavní zdroj. |
+| Interní runbook exportu | Popisuje výjimky a technický postup. | Product ops | Veřejná odpověď neobsahuje interní kroky. |
+| Sales FAQ | Používá veřejnou formulaci v nákupní debatě. | Sales | Neslibuje rychlejší nebo širší export než produkt umí. |
+
+Nemusí to být centrální portál s formulářem na všechno. Často stačí několik řádků v předávací kartě. Hlavní je, aby nový vlastník věděl, kde se stará pravda může vrátit.
+
+### Příklad: Předání trust odpovědi po sloučení exportních textů
+
+Po sloučení veřejné trust odpovědi a starého support makra je cílová stránka ověřená na jednom exportním dotazu. Teď ji potřebuje převzít nový vlastník.
+
+Předávací karta:
+
+| Pole | Zápis |
+| --- | --- |
+| Cílová stránka | Trust odpověď „Jak funguje export dat“. |
+| Pracovní otázka | Jak zákazníkovi vysvětlit export bez slibu plošné kopie všeho. |
+| Vlastník kvality | Product ops. |
+| Záskok | Support lead pro jazykové opravy, privacy vlastník pro datovou hranici. |
+| Publikum | Veřejná odpověď; interní výjimky zůstávají v neveřejném runbooku. |
+| Datová hranice | Export má účel, rozsah polí, příjemce, datum předání a smazání pracovní kopie. |
+| Revizní trigger | Změna exportní funkce, nový typ dat v exportu nebo návrat dotazu na „kompletní export“. |
+| Místa napojení | Support makro, onboarding supportu, sales FAQ, interní runbook exportu. |
+| První malý úkol | Do 30 dní zkontrolovat jeden nový exportní dotaz a ověřit, že odpověď používá cílovou stránku. |
+
+Co se nepředává: staré makro jako zdroj pravdy, osobní poznámky ze zákaznického vlákna, interní debata o výjimkách ani dočasný pracovní export. Nový vlastník potřebuje pravidlo a místa napojení, ne historickou bažinu.
+
+### Checklist: Předání vlastnictví sloučené dokumentace
+
+- [ ] Sloučená stránka má jednoho vlastníka kvality a jeden záskok.
+- [ ] Vlastnická věta říká, kdo smí měnit jazyk, strukturu, slib a datovou hranici.
+- [ ] Předávací karta obsahuje cílovou stránku, pracovní otázku, publikum, datovou hranici a revizní trigger.
+- [ ] Revizní trigger vychází ze změny produktu, provozu, dat, pricingu nebo opakovaného dotazu, ne z neurčitého „někdy“.
+- [ ] Je vidět, které šablony, runbooky, FAQ, onboardingy a automatizace na stránku navazují.
+- [ ] Nový vlastník má první malý úkol do 30 dní.
+- [ ] Předání nevytvořilo nový export, osobní sledování používání dokumentace ani zbytečný dashboard.
+- [ ] Staré zdroje pravdy jsou archivované, přesměrované, označené nebo odebrané z běžné práce.
+- [ ] Pokud změna textu vyžaduje změnu reality, vzniká produktová nebo provozní karta.
+
+### Mini úkol
+
+Vyber jednu sloučenou dokumentační stránku, která už prošla prvním ověřením. Napiš vlastnickou větu a vyplň předávací kartu. Potom novému vlastníkovi dej jeden malý úkol: opravit jeden navazující odkaz, projít jedno makro nebo ověřit jednu skutečnou odpověď. Pokud při tom zjistí, že dokumentace jen zakrývá slabý produktový nebo provozní stav, neřešte to další větou v textu. Otevřete kartu změny reality.
+
 ## Zdroje
 
 - IETF RFC 9110: HTTP Semantics - význam HTTP přesměrování a stavů včetně `410 Gone` pro zdroje, které už nejsou dostupné: https://www.rfc-editor.org/rfc/rfc9110.html
@@ -65556,6 +65683,8 @@ Vezmi poslední sloučenou dokumentační stránku a najdi jedno skutečné pou�
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-29: Doplněna příloha o předání vlastnictví sloučené dokumentace bez osiřelé pravdy: vlastnická věta, předávací karta, revizní triggery podle změny reality, rozlišení jazykové změny od změny slibu a datové hranice, viditelná napojená místa, příklad trust odpovědi po sloučení exportních textů, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-29: Doplněna příloha o ověření dokumentačního merge po prvním používání bez falešného klidu: kontrola podle původní merge karty, jeden pracovní průchod, porovnání cílové stránky se starými stopami, merge review karta, pět verdiktů, příklad trust odpovědi po sloučení support makra, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
