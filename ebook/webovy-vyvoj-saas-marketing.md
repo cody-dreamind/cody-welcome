@@ -195,6 +195,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Ověřit archivaci runbooku po zavření bez návratu starého postupu | „kontrola po archivaci“, „starý runbook se vrací“ nebo „post-archive review“ | krátká kontrola odkazů, incidentů, přístupů, alertů a nových rozhodnutí, která potvrdí, že archivovaný návod už neřídí provoz |
 | Převést archivovaný runbook na použitelné poučení | „učení z archivovaného runbooku“, „provozní lekce“ nebo „runbook jako lekce“ | jedna učící karta, která zachová důležité rozhodnutí, opraví aktuální postup a smaže zbytečné stopy bez zakládání nového procesu |
 | Převést provozní lekci do backlogu bez poradní inflace | „lekce do backlogu“, „provozní lekce jako úkol“ nebo „učící karta pokračuje“ | jedna backlogová karta s důvodem, privacy hranicí, vlastníkem, ověřením a rozhodnutím kdy úkol zavřít |
+| Otevřít backlogovou lekci do práce bez ztráty původního smyslu | „lekce do práce“, „backlogová lekce“ nebo „realizace provozní lekce“ | krátký realizační brief, který ověří aktuálnost lekce, zamkne rozsah a chrání původní privacy hranici před rozšířením |
 | Uzavřít backlogovou kartu z provozní lekce bez falešného hotovo | „uzavření lekce“, „backlogová karta hotovo“ nebo „lekce zavřená“ | zavírací review se skutečným dopadem, uklizenými datovými stopami a rozhodnutím, zda změna končí, pokračuje nebo přechází do rutiny |
 | Převést uzavřenou lekci do dokumentace bez úniku detailů | „lekce do dokumentace“, „dokumentační změna po lekci“ nebo „veřejná lekce“ | rozhodnutí, co patří do veřejné dokumentace, interního runbooku, changelogu nebo nikam |
 | Ověřit dokumentační změnu po lekci bez falešné jistoty | „kontrola dokumentace po lekci“, „dokumentační změna funguje“ nebo „souběžná pravda v dokumentaci“ | krátká kontrola, že nový text pomáhá ve skutečné práci, neunikly do něj interní detaily a staré odpovědi už neřídí rozhodnutí |
@@ -64375,6 +64376,114 @@ Po zavření karta doplní jen krátký záznam: šablona upravena, první použ
 
 Vezmi jednu lekční kartu z poslední uzavřené opravy. Rozhodni, jestli opravdu patří do backlogu. Pokud ano, přepiš ji na jeden úkol se slovesem, přenes důvod, místo pravdy, privacy dopad, „co neděláme“ a stop pravidlo. Pokud ne, zavři ji jako pozorování bez akce. Backlog ti poděkuje tím, že nebude vypadat jako sklep po špatném stěhování.
 
+## Příloha: Otevření backlogové lekce do práce bez ztráty původního smyslu
+
+Backlogová karta z provozní lekce je zvláštní druh práce. Nevznikla proto, že někdo chtěl novou funkci. Vznikla proto, že hotová oprava nebo incident ukázaly slabé místo v systému práce. Když ji otevřeš stejně jako běžný feature ticket, snadno se z ní vytratí původní důvod a zůstane jen neurčitá aktivita typu „vylepšit šablonu“.
+
+Otevření takové karty má být krátké, ale přesné. Nejde o nové kolečko retrospektivy. Jde o potvrzení, že lekce je pořád platná, změna má jedno místo, rozsah je zavřený a privacy hranice se neroztáhne jen proto, že někdo při realizaci dostal technickou chuť.
+
+> Codyho komentář: Největší riziko backlogových lekcí není, že se neudělají. Největší riziko je, že se udělají moc široce. Jedna lekce o špatném exportu se promění v nový dashboard, nový audit, nové pole v CRM a nový povinný meeting. Gratuluju, tým právě vyrobil produktivní vzhled neproduktivity.
+
+### Ověř, že lekce pořád platí
+
+Před začátkem práce se vrať k původní kartě a polož pět otázek:
+
+| Otázka | Co hledáš |
+| --- | --- |
+| Je původní problém pořád možný? | Stejná chyba se může zopakovat v současném procesu, produktu nebo dokumentaci. |
+| Nevyřešila ho mezitím jiná změna? | Nový runbook, šablona, validace nebo ruční pravidlo už problém pokrývá. |
+| Je místo pravdy pořád správné? | Karta nemíří do dokumentu, který tým už nepoužívá. |
+| Platí původní privacy hranice? | Po cestě se nezměnily vstupy, výstupy, příjemci, logy ani retence. |
+| Dá se práce zavřít jedním ověřením? | Nepotřebuješ nový dlouhodobý dohled, aby změna dávala smysl. |
+
+Pokud lekce už neplatí, kartu nezahazuj potichu. Zavři ji krátkým důvodem: „vyřešeno jinou změnou“, „místo pravdy zaniklo“, „signál se neopakoval“ nebo „náklad převyšuje riziko“. To je normální dobrý konec. Backlog není posvátný seznam.
+
+### Napiš realizační brief ve čtyřech větách
+
+Když lekce platí, přepiš ji před realizací do krátkého briefu. Nepřidávej další odstavce strategické mlhy. Stačí čtyři věty:
+
+1. Měníme ___, protože původní lekce ukázala ___.
+2. Změna se dotýká jen ___ a nedotýká se ___.
+3. Privacy hranice zůstává ___.
+4. Hotovo bude, když ___.
+
+Příklad:
+
+| Věta | Zápis |
+| --- | --- |
+| Měníme | Měníme šablonu automatizačního briefu, protože retenční report posílal víc detailů, než příjemci potřebovali. |
+| Rozsah | Změna se dotýká jen tří polí v briefu a nedotýká se běžících automatizací. |
+| Privacy hranice | Privacy hranice zůstává na minimálním signálu, příjemci výstupu a retenci výstupu; nepřidáváme nový audit chatů. |
+| Hotovo | Hotovo bude, když je šablona upravená a první nová exportní automatizace pole skutečně vyplní. |
+
+Brief má chránit před dvěma úlety: před technickým rozšířením a před procesním rozšířením. Technické rozšíření říká „když už jsme tu, přepišme i generátor reportů“. Procesní rozšíření říká „když už jsme tu, udělejme měsíční kontrolu všech exportů“. Obojí může být někdy správně, ale není to automatický bonus k této kartě.
+
+### Zamkni jeden typ změny
+
+Backlogová lekce může mířit do různých míst. Před realizací vyber jeden typ změny a ostatní výslovně nech mimo rozsah.
+
+| Typ změny | Kdy dává smysl | Příklad mimo rozsah |
+| --- | --- | --- |
+| Šablona | Chyba vznikla při zadávání práce. | Neopravovat všechny staré karty zpětně. |
+| Runbook | Chyba vznikla při provozním rozhodnutí. | Nepřidávat nový alert bez jasného signálu. |
+| Produkt | Chyba vznikla z nejasného chování uživateli. | Nepřestavovat celý onboarding. |
+| Test nebo review | Chyba prošla přes kontrolní bránu. | Nezavádět plošný manuální audit. |
+| Dokumentace | Lidé měli špatnou nebo zastaralou odpověď. | Nepřepisovat veřejný slib bez změny reality. |
+| Automatizace | Ruční pravidlo je opakované, mechanické a bezpečně ohraničené. | Nedávat automatizaci pravomoc měnit data bez člověka. |
+
+Jedna karta může časem odhalit potřebu další práce. To ale není důvod otevřít všechno najednou. Pokud při realizaci najdeš nový nález, zapiš ho jako samostatnou rozhodovací větu s datovou hranicí. Původní kartu dokonči nebo zruš podle jejího briefu.
+
+### Ověř práci na skutečném použití
+
+U lekcí často nestačí zkontrolovat, že text byl změněn. Potřebuješ ověřit, že změněné místo skutečně řídí budoucí práci. To neznamená sledovat lidi. Znamená vzít jednu reálnou kartu, jednu reálnou změnu, jeden reálný runbookový průchod nebo jednu skutečnou odpověď a podívat se, jestli nová pravda pomohla rozhodnout.
+
+Praktické ověření:
+
+| Změna | Ověření bez sledování lidí |
+| --- | --- |
+| Upravená šablona briefu | Příští relevantní brief obsahuje nové pole a vlastník podle něj rozhodl. |
+| Upravený runbook | Suchý průchod ukáže, že člověk bez autora ví, kdy zastavit nebo eskalovat. |
+| Upravená dokumentace | Jedna support nebo sales odpověď použije nové znění bez starého slibu. |
+| Upravené review | První relevantní review položí novou otázku a zavře ji konkrétním verdiktem. |
+| Upravený produktový text | Jeden člověk mimo autora chápe dopad akce bez dalšího vysvětlování. |
+
+Ověření má být malé. Když kvůli lekci potřebuješ plošně sledovat chování týmu, zákazníků nebo čtenářů, pravděpodobně jsi otevřel moc velkou změnu nebo špatně pojmenoval úkol.
+
+### Příklad: Lekce z reportu se otevírá do práce
+
+Původní lekce říká: exportní automatizace musí už v briefu popsat minimální signál, příjemce a retenci výstupu.
+
+Realizační brief:
+
+| Pole | Zápis |
+| --- | --- |
+| Úkol | Upravit automatizační brief o pole „minimální signál“, „příjemce výstupu“ a „retence výstupu“. |
+| Důvod | Předchozí retenční report posílal detailní export do chatu, protože výstup nebyl předem ohraničený. |
+| Rozsah | Mění se jen šablona briefu a jeden odkaz v mapě automatizací. |
+| Mimo rozsah | Nepřepisují se staré automatizace, nezavádí se audit chatů, nepřidává se nový dashboard. |
+| Privacy hranice | Nová pole mají snižovat datovou stopu budoucích výstupů. |
+| Ověření | První nová nebo měněná exportní automatizace vyplní všechna tři pole před realizací. |
+| Zavření | Po úpravě šablony, opravě odkazu a jednom skutečném použití. |
+
+Po realizaci není potřeba oslavný report. Stačí zavírací věta: „Šablona upravena, mapa odkazuje na nové místo, první exportní automatizace vyplnila tři pole, žádný nový audit ani dashboard nevznikl.“
+
+### Checklist: Otevření backlogové lekce do práce
+
+- [ ] Původní lekce je pořád platná a nebyla vyřešena jinou změnou.
+- [ ] Místo pravdy je aktuální a tým ho opravdu používá.
+- [ ] Realizační brief má čtyři věty: co měníme, proč, co ne, kdy je hotovo.
+- [ ] Karta má jeden typ změny: šablona, runbook, produkt, test, dokumentace nebo automatizace.
+- [ ] Mimo rozsah je napsané stejně konkrétně jako rozsah.
+- [ ] Privacy hranice z původní lekce zůstala zachovaná.
+- [ ] Nové nálezy se nepřilepují do stejné práce bez nového rozhodnutí.
+- [ ] Ověření proběhne na jednom skutečném použití, ne na dojmu z porady.
+- [ ] Změna nezakládá nový trvalý dohled nad lidmi.
+- [ ] Zavírací věta říká, co se změnilo, co se ověřilo a co nevzniklo navíc.
+
+### Mini úkol
+
+Vyber jednu backlogovou kartu, která vznikla z provozní lekce. Nezačínej ji hned dělat. Nejdřív napiš čtyřvětý realizační brief, vyber jeden typ změny a doplň konkrétní „mimo rozsah“. Pokud neumíš napsat, jak změnu ověříš na jednom skutečném použití bez nového sledování lidí, vrať kartu o krok zpět a zúž ji. Lepší je menší hotová lekce než velké poučení, které se tváří jako projekt.
+
 ## Zdroje
 
 - IETF RFC 9110: HTTP Semantics - význam HTTP přesměrování a stavů včetně `410 Gone` pro zdroje, které už nejsou dostupné: https://www.rfc-editor.org/rfc/rfc9110.html
@@ -64568,6 +64677,8 @@ Vezmi jednu lekční kartu z poslední uzavřené opravy. Rozhodni, jestli oprav
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-29: Doplněna příloha o otevření backlogové lekce do práce bez ztráty původního smyslu: ověření aktuálnosti lekce, čtyřvětý realizační brief, zamčení jednoho typu změny, ochrana rozsahu a privacy hranice, malé ověření na skutečném použití, příklad retenčního reportu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro otevření backlogové lekce do práce. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-29: Doplněna příloha o převodu provozní lekce do backlogu bez poradní inflace: rozhodnutí, zda lekce do backlogu vůbec patří, přepis lekce na úkol se slovesem, zachování hranic z lekční karty, prioritizace podle datového a provozního rizika, zavírací záznam bez nového dohledu, příklad retenčního reportu, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
