@@ -204,6 +204,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Sloučit podobnou dokumentaci bez ztráty kontextu | „sloučení dokumentace“, „cílová pravda“ nebo „dokumentační merge“ | merge karta s cílovou stránkou, zachovanými důkazy, opravenými odkazy, hranicí sdílení a kontrolou po sloučení |
 | Ověřit dokumentační merge po prvním používání | „kontrola po sloučení dokumentace“, „merge review“ nebo „stará pravda po sloučení“ | krátké ověření, že cílová stránka řídí práci, staré odkazy mlčí a nevznikla širší datová ani publikační stopa |
 | Předat vlastnictví sloučené dokumentace bez osiřelé pravdy | „předání sloučené dokumentace“, „nový vlastník dokumentace“ nebo „dokumentace po merge“ | předávací karta s vlastníkem, záskokem, revizním triggerem, přístupovou hranicí a prvním malým úkolem po převzetí |
+| Změnit publikum převzaté dokumentace bez rozmazání hranic | „publikum převzaté dokumentace“, „nový vlastník mění publikum“ nebo „převzatá dokumentace veřejně“ | publikační změnová karta, která chrání původní účel, datovou hranici, přístupy a staré nosiče pravdy |
 | Změnit publikum dokumentace bez nechtěného zveřejnění | „změna publika dokumentace“, „veřejná interní sdílená vrstva“ nebo „publikum dokumentace“ | publikační karta, která určí co je veřejné, řízeně sdílené, interní nebo neveřejné a jak se uklidí odkazy, příklady a přístupy |
 | Zkontrolovat změnu publika dokumentace po prvním použití | „kontrola publika dokumentace“, „publikum po publikaci“ nebo „veřejná dokumentace po změně“ | kontrolní karta, která ověří čtenáře, citlivé detaily, odkazy, sdílení, indexaci a dopad bez sledování lidí |
 | Stáhnout nebo zúžit veřejnou dokumentaci bez ztráty důvěry | „stažení veřejné dokumentace“, „zúžení veřejného slibu“ nebo „veřejný text končí“ | stahovací karta s důvodem, náhradní odpovědí, opravou odkazů, archivem a kontrolou starých slibů |
@@ -65490,6 +65491,119 @@ Co se nepředává: staré makro jako zdroj pravdy, osobní poznámky ze zákazn
 
 Vyber jednu sloučenou dokumentační stránku, která už prošla prvním ověřením. Napiš vlastnickou větu a vyplň předávací kartu. Potom novému vlastníkovi dej jeden malý úkol: opravit jeden navazující odkaz, projít jedno makro nebo ověřit jednu skutečnou odpověď. Pokud při tom zjistí, že dokumentace jen zakrývá slabý produktový nebo provozní stav, neřešte to další větou v textu. Otevřete kartu změny reality.
 
+## Příloha: Změna publika převzaté dokumentace bez rozmazání hranic
+
+Nový vlastník dokumentace má po převzetí často dobrou motivaci: zpřístupnit užitečný text širšímu publiku. Interní runbook by mohl pomoct supportu. Support makro by mohlo být veřejné FAQ. Řízeně sdílený trust balíček by mohl ušetřit sales týmu opakované odpovědi. Někdy je to správný krok. Jindy tím tým nenápadně přesune interní pravdu do veřejného prostoru, aniž by změnil produkt, provoz nebo odpovědnost.
+
+Tahle situace je jiná než první publikace dokumentace. Text už má historii, vlastníka, staré odkazy, předávací kartu a často i implicitní pravidla. Změna publika proto nemá začít otázkou „kam to dáme?“, ale „kterou hranici z předání tím měníme?“
+
+> Codyho komentář: Nový vlastník má právo dokumentaci zlepšit. Nemá právo z interní poznámky udělat veřejný slib jen proto, že to vypadá jako rychlý win. Rychlé winy jsou fajn. Rychlé úniky už méně, překvapivě.
+
+### Vrať se k předávací kartě
+
+Nejdřív otevři předávací kartu převzaté dokumentace. Pokud neexistuje, napiš její minimální verzi zpětně: cílová stránka, pracovní otázka, vlastník, publikum, datová hranice, přístupová hranice a revizní trigger. Teprve potom rozhoduj o změně publika.
+
+Zkontroluj hlavně:
+
+- původní pracovní otázku,
+- současné publikum,
+- kdo smí měnit jazyk, slib a datovou hranici,
+- které šablony, runbooky, FAQ, onboardingy nebo automatizace na dokumentaci navazují,
+- jaký trigger změnu otevřel,
+- co bylo při předání výslovně ponechané interně nebo neveřejně.
+
+Pokud změnu publika nespustil konkrétní pracovní důvod, ale jen pocit „mělo by to být transparentnější“, zpomal. Transparentnost je dobrá, když čtenáři pomáhá rozhodnout se nebo jednat. Není dobrá, když jen přesune interní detaily na veřejný web a přidá týmu další slib k hlídání.
+
+### Rozliš změnu publika od změny pravdy
+
+Převzatá dokumentace může změnit publikum, aniž by se změnila pravda. Může ale také odhalit, že pravdu změnit musíte.
+
+Použij jednoduché rozlišení:
+
+| Situace | Co to znamená | Další krok |
+| --- | --- | --- |
+| Stejná pravda, širší publikum | Text lze přepsat pro čtenáře bez změny produktu nebo procesu. | Připrav publikační změnovou kartu a ořež interní detail. |
+| Stejná pravda, užší publikum | Veřejný nebo sdílený text byl moc detailní nebo matoucí. | Zúžit stránku, upravit odkazy a dát čtenáři náhradní cestu. |
+| Jiná pravda | Produkt, pricing, export, retence nebo provoz se změnil. | Nejdřív změnit zdroj pravdy a až potom publikum. |
+| Nejasná pravda | Tým neumí říct, co vlastně platí. | Otevřít produktovou nebo provozní kartu, ne publikovat kompromisní mlhu. |
+
+Praktické pravidlo: když veřejná verze potřebuje spoustu výjimek, interních vysvětlivek a opatrných poznámek, problém možná není v publiku. Problém je v tom, že současná pravda není dost čistá.
+
+### Napiš publikační změnovou kartu
+
+Karta má chránit hranice z předání. Nemá znovu opisovat celou dokumentaci.
+
+| Pole | Co zapsat |
+| --- | --- |
+| Převzatý dokument | Která stránka, makro, runbook nebo balíček mění publikum. |
+| Původní publikum | Kdo směl text číst a používat před změnou. |
+| Nové publikum | Veřejné, řízeně sdílené, interní nebo neveřejné. |
+| Trigger změny | Proč se publikum mění právě teď. |
+| Pracovní výsledek | Jakou konkrétní práci má změna usnadnit. |
+| Co se nesmí přenést | Interní názvy, zákaznické příklady, screenshoty, provozní postupy, výjimky nebo bezpečnostní detail. |
+| Co se musí přepsat | Věty, které byly psané pro původní publikum a nové by je četlo špatně. |
+| Navazující místa | Šablony, odkazy, UI, sitemap, PDF, onboarding, runbooky a automatizace. |
+| Schválení hranice | Kdo potvrzuje publikum, datovou hranici a změnu slibu. |
+| Kontrola po změně | Jedno datum nebo trigger pro ověření prvního použití. |
+
+Nejdůležitější pole je „co se nesmí přenést“. Když z interního textu děláš veřejnou odpověď, nejde jen o hezčí copy. Musíš odstranit detaily, které čtenář nepotřebuje a které by týmu zvětšily provozní nebo bezpečnostní stopu.
+
+### Přepiš navazující místa podle nové vrstvy
+
+Změna publika se obvykle rozbije na starých nosičích. Jeden dokument je upravený, ale makro, onboarding nebo automatický draft pořád mluví původním jazykem.
+
+Projdi minimálně:
+
+| Místo | Kontrola |
+| --- | --- |
+| Support makra | Neodkazují na interní text, pokud už existuje veřejná nebo řízeně sdílená odpověď. |
+| Sales odpovědi | Neslibují víc než nová veřejná nebo sdílená vrstva. |
+| Produktové UI | Odkaz vede na dokumentaci odpovídající roli uživatele. |
+| Interní runbooky | Neobsahují vloženou veřejnou formulaci jako náhradu provozního postupu. |
+| Trust balíčky | Nepřebírají interní screenshoty, názvy systémů ani historické poznámky. |
+| Sitemap a RSS | Veřejná změna se distribuuje jen tehdy, když má být novým veřejným obsahem. |
+| Sdílené odkazy | Mají účel, vlastníka a konec platnosti, pokud nejde o veřejnou stránku. |
+
+Začni nejkratší cestou k zákazníkovi. Pokud starý slib sedí v support makru, oprav ho dřív než pátou interní stránku. Pokud je starý odkaz v aplikaci, oprav ho dřív než prezentaci, kterou nikdo nepoužil půl roku.
+
+### Příklad: Převzaté support makro jako řízeně sdílený trust balíček
+
+Customer success převzal po merge dokumentaci k exportu dat. Při prvním měsíci provozu zjistí, že sales opakovaně posílá ručně upravené odpovědi nákupním týmům. Navrhne z části support makra udělat řízeně sdílený trust balíček.
+
+Publikační změnová karta:
+
+| Pole | Zápis |
+| --- | --- |
+| Převzatý dokument | Support makro „Export dat a ukončení workspace“. |
+| Původní publikum | Interní support a product ops. |
+| Nové publikum | Řízeně sdílený trust balíček pro nákupní a bezpečnostní kontrolu. |
+| Trigger změny | Tři opakované sales dotazy na rozsah exportu za poslední měsíc. |
+| Pracovní výsledek | Sales pošle konzistentní odpověď bez ručního opisování interního makra. |
+| Co se nesmí přenést | Interní názvy jobů, přesný kontrolní postup oprávnění, zákaznické příklady a staré výjimky. |
+| Co se musí přepsat | Technické kroky na čitelné vysvětlení rozsahu exportu, odpovědnosti admina a omezené dostupnosti souboru. |
+| Navazující místa | Sales šablona, trust FAQ, interní support makro, onboarding supportu. |
+| Schválení hranice | Customer success lead, product owner account settings a privacy vlastník. |
+| Kontrola po změně | Po prvních dvou použitích ověřit, zda zákazník nepotřeboval interní doplnění a zda sales neposlal staré makro. |
+
+Výsledek: dokumentace se rozšíří, ale ne nekontrolovaně. Veřejná FAQ zůstane stručná, řízeně sdílený balíček odpoví nákupu a interní support makro si nechá provozní detaily. Tři vrstvy, jedna pravda. Ne úplná magie, jen slušná hygiena.
+
+### Checklist: Změna publika převzaté dokumentace
+
+- [ ] Otevřel jsem původní předávací kartu nebo jsem doplnil její minimální zpětnou verzi.
+- [ ] Znám trigger změny publika a pracovní výsledek, který má změna přinést.
+- [ ] Rozlišil jsem změnu publika od změny produktu, slibu, datové hranice nebo provozního postupu.
+- [ ] Je jasné, co zůstává veřejné, řízeně sdílené, interní a neveřejné.
+- [ ] V kartě je výslovně napsané, co se nesmí přenést do nového publika.
+- [ ] Nový text je přepsaný pro čtenáře, ne jen zkopírovaný z původní vrstvy.
+- [ ] Navazující makra, UI odkazy, trust balíčky, onboardingy, runbooky a sdílené odkazy odpovídají nové vrstvě.
+- [ ] Řízeně sdílené materiály mají účel, vlastníka a konec sdílení.
+- [ ] Dopad ověřím jedním nebo dvěma pracovními průchody bez sledování jednotlivých čtenářů.
+- [ ] Pokud změna publika odhalila nejasnou pravdu, vznikla produktová nebo provozní karta místo dalšího kompromisního textu.
+
+### Mini úkol
+
+Vyber jednu převzatou dokumentační stránku, kterou někdo navrhuje ukázat jinému publiku. Za dvacet pět minut vyplň publikační změnovou kartu a napiš jednu větu: „Změna publika je bezpečná jen pokud ___ zůstane ___“. Potom oprav jedno navazující místo, které by po změně mohlo posílat starou nebo moc širokou odpověď. Pokud takové místo neumíš najít, změna ještě není připravená k publikaci.
+
 ## Zdroje
 
 - IETF RFC 9110: HTTP Semantics - význam HTTP přesměrování a stavů včetně `410 Gone` pro zdroje, které už nejsou dostupné: https://www.rfc-editor.org/rfc/rfc9110.html
@@ -65683,6 +65797,8 @@ Vyber jednu sloučenou dokumentační stránku, která už prošla prvním ově�
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-29: Doplněna příloha o změně publika převzaté dokumentace bez rozmazání hranic: návrat k předávací kartě, rozlišení změny publika od změny pravdy, publikační změnová karta, úklid navazujících maker, UI odkazů, trust balíčků a sdílených odkazů, příklad převodu support makra do řízeně sdíleného trust balíčku, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro změnu publika převzaté dokumentace. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-29: Doplněna příloha o předání vlastnictví sloučené dokumentace bez osiřelé pravdy: vlastnická věta, předávací karta, revizní triggery podle změny reality, rozlišení jazykové změny od změny slibu a datové hranice, viditelná napojená místa, příklad trust odpovědi po sloučení exportních textů, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
