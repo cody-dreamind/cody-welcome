@@ -216,6 +216,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Ověřit šablonu po měsíci běžného provozu bez sledování lidí | „měsíční kontrola šablony“, „šablona po uzavření“ nebo „provozní návrat problému“ | lehké review návratu starého problému, nových výjimek, podpůrné dokumentace, automatických draftů a rozhodnutí, zda šablonu nechat být |
 | Převést návrat šablonového problému do produktové opravy | „produktová oprava po návratu“, „šablona nestačí“ nebo „změnit realitu“ | malá produktová karta, která z opakovaného dotazu udělá opravu stavu, textu, procesu nebo obchodního slibu bez profilování zákazníků |
 | Ověřit produktovou opravu po nasazení bez nového dohledu | „kontrola produktové opravy“, „oprava po nasazení“ nebo „změna reality hotovo“ | krátké review, zda oprava snížila nejistotu, nezaložila novou datovou stopu a může se zavřít nebo zúžit |
+| Vrátit nebo nahradit neúspěšnou produktovou opravu bez paniky | „rollback produktové opravy“, „oprava nepomohla“ nebo „nová karta po neúspěchu“ | návratová karta, která oddělí rychlé vrácení od nové menší opravy, uklidí datové stopy a ochrání tým před druhou širokou změnou |
 | Převést ověřenou produktovou opravu do běžného provozu | „produktová oprava do rutiny“, „oprava zavřená“ nebo „běžný provoz po opravě“ | zavírací karta, která určí vlastníka, dokumentaci, metriky, šablony, datové limity a další revizní trigger bez nového dohledu |
 | Zkontrolovat produktovou opravu po měsíci běžného provozu | „měsíční kontrola produktové opravy“, „oprava v provozu“ nebo „návrat problému po opravě“ | lehké review, zda oprava pořád řeší původní nejistotu, nevznikl kolem ní nový procesní odpad a není potřeba ji zjednodušit |
 | Zjednodušit produktovou opravu po měsíční kontrole | „zjednodušení opravy“, „procesní nános po opravě“ nebo „oprava funguje ale bobtná“ | redukční karta, která ponechá hodnotu opravy, vypne zbytečné měření, sloučí šablony, odebere přístupy a nastaví jasné stop pravidlo |
@@ -66777,6 +66778,118 @@ Největší disciplína je zavřít věc, která je dost dobrá. Pokud oprava sn
 
 Vyber jednu produktovou opravu, která vznikla z opakovaného support nebo sales dotazu a už je nasazená. Za dvacet minut otevři původní kartu, projdi jednu pracovní cestu jako zákazník a napiš review kartu: původní problém, nasazená změna, rozdíl proti plánu, kontrolní okno, signály dopadu, datová stopa, stav staré šablony a verdikt. Pokud při kontrole najdeš nový event, log nebo ruční export zavedený jen kvůli ověření, dopiš k němu datum vypnutí nebo důvod, proč má zůstat v běžném provozu.
 
+## Příloha: Vrácení nebo nahrazení neúspěšné produktové opravy bez paniky
+
+Ne každá produktová oprava vyjde. Někdy se ukáže, že nová věta v UI jen přesunula zmatek o obrazovku dál. Jindy oprava vyřeší support dotaz, ale přidá nový event, log nebo export, který privacy-first tým nechce držet. A občas se prostě trefíš vedle: příčina nebyla v produktu, ale v obchodním slibu, dokumentaci nebo v tom, že zákazník potřeboval jasnější hranici služby.
+
+Neúspěšná oprava není ostuda. Ostuda je předstírat, že funguje, protože už je nasazená. Tahle příloha pomáhá vybrat mezi rychlým návratem, zúžením a novou menší kartou bez toho, aby tým spustil další širokou změnu „pro jistotu“.
+
+> Codyho komentář: Rollback není prohra. Je to brzda. A brzdy nejsou na autě proto, že řidič neumí řídit, ale proto, že cesta občas udělá něco hloupého.
+
+### Poznej, co přesně selhalo
+
+Nejdřív rozděl selhání podle vrstvy. Jinak se snadno stane, že vrátíš celý release kvůli jedné špatné větě, nebo naopak necháš v produktu změnu, která technicky funguje, ale kazí důvěru.
+
+| Typ selhání | Jak vypadá | První reakce |
+| --- | --- | --- |
+| Textové | Lidé dál nerozumí stavu, ale produkt dělá správnou věc. | Přepsat nebo zúžit mikrotext, dokumentaci nebo šablonu. |
+| Produktové | Nový tok pořád neřeší původní pracovní situaci. | Vrátit změnu nebo otevřít menší produktovou kartu. |
+| Datové | Oprava přidala zbytečný event, log, export nebo CRM kopii. | Vypnout sběr, uklidit dočasné stopy a znovu navrhnout ověření. |
+| Provozní | Tým musí ručně hlídat nový stav nebo obcházet proces. | Zúžit opravu, doplnit runbook nebo vrátit ruční výjimku do kontrolovaného režimu. |
+| Obchodní | Produkt je v pořádku, ale slib v sales, pricingu nebo nabídce říká něco jiného. | Opravit veřejný nebo obchodní slib, ne produktovou logiku. |
+
+Jedna věta pomáhá udržet hlavu čistou: „Selhala vrstva ___, protože člověk pořád nemůže ___ bez ___.“ Pokud místo vrstvy píšeš „celé je to špatně“, ještě nejsi připravený na rozhodnutí. Jsi připravený na deset minut klidného čtení review karty.
+
+### Vyber nejmenší návratový krok
+
+Návrat nemusí znamenat smazání celé změny. U malé opravy často stačí vrátit jednu větu, vypnout dočasný event, obnovit starý odkaz nebo zúžit šablonu. Cílem je zastavit škodu a zachovat poznatek.
+
+Použij čtyři možnosti:
+
+| Možnost | Kdy ji použít | Co nesmí zůstat viset |
+| --- | --- | --- |
+| Vrátit | Oprava zhoršuje pochopení, bezpečnost nebo privacy dopad. | Staré a nové nosiče pravdy nesmí současně slibovat různé věci. |
+| Zúžit | Oprava pomáhá jen části situací nebo sbírá víc dat, než potřebuje. | Dočasné měření, širší publikum a pomocné exporty musí mít konec. |
+| Doplnit | Oprava je správná, ale chybí jeden navazující text, stav nebo šablona. | Doplnění nesmí otevřít druhou produktovou změnu bez karty. |
+| Nahradit | Původní hypotéza byla špatně a je potřeba jiná menší oprava. | Nová karta nesmí recyklovat staré důkazy jako jistotu. |
+
+Prakticky: pokud oprava přidala nový tracking jen proto, aby se ověřilo, zda oprava funguje, první návratový krok je vypnout nebo zkrátit tento tracking. Produktová nejistota se nemá léčit datovou závislostí.
+
+### Napiš návratovou kartu
+
+Návratová karta má být kratší než původní produktová karta. Neobhajuje, kdo měl pravdu. Drží rozhodnutí, co se vrací, co zůstává a jak se pozná, že tým nepřidal další chaos.
+
+| Pole | Zápis |
+| --- | --- |
+| Původní oprava | Co bylo nasazeno a proč. |
+| Nález z review | Jedna věta, co nefungovalo nebo jaké privacy riziko vzniklo. |
+| Vrstva selhání | Text, produkt, data, provoz nebo obchodní slib. |
+| Návratový krok | Vrátit, zúžit, doplnit nebo nahradit. |
+| Co zachováme | Poznatek, funkční část, test, dokumentační věta nebo žádná část. |
+| Co uklidíme | Eventy, logy, exporty, šablony, odkazy, feature flagy, interní poznámky. |
+| Nové ověření | Jeden malý signál bez profilování lidí. |
+| Stop pravidlo | Kdy se návrat zavře nebo kdy se otevře nová karta. |
+
+Příklad:
+
+| Pole | Zápis |
+| --- | --- |
+| Původní oprava | Text u exportu měl vysvětlit, proč auditní logy nejsou součástí běžného exportu. |
+| Nález z review | Lidé přestali čekat auditní logy v exportu, ale začali si myslet, že logy nejdou získat vůbec. |
+| Vrstva selhání | Textové a obchodní. |
+| Návratový krok | Zúžit text a doplnit řízeně sdílenou trust odpověď pro enterprise dotazy. |
+| Co zachováme | Rozlišení pracovních dat a retenčních záznamů. |
+| Co uklidíme | Dočasnou support poznámku s konkrétními zákaznickými dotazy po 14 dnech. |
+| Nové ověření | Ruční kontrola tří dalších dotazů na export bez kopírování celých vláken. |
+| Stop pravidlo | Pokud se další dotazy ptají už jen na proces žádosti, návrat zavřít. |
+
+### Uklid datové a dokumentační stopy
+
+Neúspěšná oprava po sobě často nechá víc stop než úspěšná. Když něco vracíš, zkontroluj nejen kód nebo text, ale i to, co vzniklo kolem ověření.
+
+Úklidový seznam:
+
+- dočasné eventy a parametry v analytice,
+- ladicí logy a korelační poznámky,
+- exporty support konverzací nebo sales poznámek,
+- interní šablony, které popisují už vrácenou realitu,
+- feature flagy a segmenty použité jen pro kontrolní okno,
+- dokumentační stránky, které byly upravené podle neúspěšné opravy,
+- odkazy v help centru, changelogu, onboardingových e-mailech a sales materiálech.
+
+U každé stopy napiš verdikt: ponechat, přepsat, archivovat, smazat, nebo přesunout do nové karty. Pokud nevíš, proč má stopa zůstat, pravděpodobně má zmizet. Privacy-first provoz není muzeum každého omylu.
+
+### Otevři novou kartu jen s novým důvodem
+
+Neúspěšná oprava láká k okamžitému pokusu číslo dvě. To může být správně, ale jen když má druhý pokus lepší důvod než „tak zkusíme něco jiného“. Nová karta má vzniknout až po návratové kartě, aby nenesla starý rozsah a staré datové návyky.
+
+Nová karta musí odpovědět:
+
+| Otázka | Dobrá odpověď |
+| --- | --- |
+| Co jsme se naučili z neúspěchu? | Konkrétní vrstva selhání, ne obecný pocit. |
+| Co už víme nedělat? | Jedna věc, kterou druhý pokus nebude opakovat. |
+| Co zůstává původním problémem? | Pracovní situace člověka, ne interní název ticketu. |
+| Co bude menší než minule? | Rozsah, publikum, datová stopa nebo kontrolní okno. |
+| Jak poznáme dost dobrý výsledek? | Jeden signál a stop pravidlo. |
+
+Když druhý pokus neumíš udělat menší než první, vrať se k důkazům. Možná ještě nevíš, co opravdu opravuješ.
+
+### Checklist: Vrácení nebo nahrazení neúspěšné produktové opravy
+
+- [ ] Rozlišil jsem selhání podle vrstvy: text, produkt, data, provoz nebo obchodní slib.
+- [ ] Vybral jsem jeden návratový krok: vrátit, zúžit, doplnit nebo nahradit.
+- [ ] Návratová karta říká, co se zachová a co se uklidí.
+- [ ] Dočasné eventy, logy, exporty a kontrolní poznámky mají verdikt.
+- [ ] Dokumentace, šablony, sales texty a odkazy nešíří vrácenou realitu.
+- [ ] Pokud vzniká druhý pokus, je menší než první a má nový důvod.
+- [ ] Nové ověření používá malý signál bez profilování lidí.
+- [ ] Stop pravidlo říká, kdy se návrat zavře nebo kdy vznikne nová karta.
+
+### Mini úkol
+
+Vyber jednu opravu, která po nasazení nepomohla nebo vytvořila nový zmatek. Za dvacet minut napiš návratovou kartu: původní oprava, nález z review, vrstva selhání, návratový krok, co zachováš, co uklidíš, nové ověření a stop pravidlo. Potom vyber jednu datovou nebo dokumentační stopu a rovnou jí dej verdikt. Pokud první reakce zní „musíme to celé předělat“, napiš nejdřív jednu menší větu: „Vracíme nebo zužujeme ___, protože ___.“
+
 ## Zdroje
 
 - IETF RFC 9110: HTTP Semantics - význam HTTP přesměrování a stavů včetně `410 Gone` pro zdroje, které už nejsou dostupné: https://www.rfc-editor.org/rfc/rfc9110.html
@@ -66970,6 +67083,8 @@ Vyber jednu produktovou opravu, která vznikla z opakovaného support nebo sales
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-29: Doplněna příloha o vrácení nebo nahrazení neúspěšné produktové opravy bez paniky: rozlišení selhání podle vrstvy textu, produktu, dat, provozu a obchodního slibu, výběr návratového kroku, návratová karta, úklid datových a dokumentačních stop, pravidla pro menší druhý pokus, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro rollback produktové opravy. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-29: Doplněna příloha o ověření produktové opravy po nasazení bez nového dohledu: návrat k původní produktové kartě, pracovní průchod nasazenou změnou, malé signály dopadu bez profilování, kontrola datové stopy, review karta po nasazení, pět verdiktů pro další krok, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
