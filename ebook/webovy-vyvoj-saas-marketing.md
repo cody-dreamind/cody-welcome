@@ -66875,6 +66875,32 @@ Nová karta musí odpovědět:
 
 Když druhý pokus neumíš udělat menší než první, vrať se k důkazům. Možná ještě nevíš, co opravdu opravuješ.
 
+### Uzavři návrat bez druhé mlhy
+
+Návrat nebo náhrada neúspěšné opravy má také skončit. Jinak se z ní stane druhý paralelní příběh: původní oprava je napůl vrácená, nová karta napůl otevřená, staré šablony napůl archivované a tým napůl přesvědčený, že ví, co platí. Poloviční pravda je v produktu drahá věc. V privacy-first provozu navíc často drží i poloviční data, která už nemají účel.
+
+Po návratové kartě napiš krátkou zavírací větu:
+
+„Vracíme nebo nahrazujeme ___, ponecháváme ___, uklízíme ___ a další pokus otevřeme jen tehdy, když ___.“
+
+Tahle věta má tři praktické funkce. Říká, co se člověku v produktu znovu změní. Říká, které stopy po neúspěšném ověření už nemají žít. A hlavně brání tomu, aby se druhý pokus rozjel jen ze zvyku.
+
+Použij jednoduché rozdělení:
+
+| Výsledek návratu | Co znamená | Co musí být zavřené |
+| --- | --- | --- |
+| Rychlý rollback | Původní změna se vrací, protože zhoršila pochopení, bezpečnost nebo datovou stopu. | Nové texty, eventy, logy, šablony a dokumentace nesmí dál popisovat vrácenou realitu. |
+| Zúžení opravy | Funkční část zůstává, ale rozsah, publikum, měření nebo datová stopa se zmenšuje. | Širší pilotní měření, dočasné přístupy a staré varianty šablon mají konec. |
+| Náhradní menší karta | Původní hypotéza byla nepřesná a další pokus má nový důvod. | Původní karta je uzavřená, nová karta nepřebírá staré důkazy jako jistotu. |
+| Převod na jinou vrstvu | Problém nebyl v produktu, ale v textu, sales slibu, dokumentaci nebo procesu. | Produktový backlog nenese úkol, který má ve skutečnosti řešit obchodní nebo dokumentační zdroj pravdy. |
+| Úplné zavření | Změna nepomohla a není dost důkazů pro další pokus. | Dočasné kontroly končí a zůstává jen stručné poučení bez surových osobních detailů. |
+
+Příklad zavírací věty:
+
+„Zužujeme nový exportní text, ponecháváme rozlišení pracovních dat a retenčních záznamů, uklízíme dočasnou support poznámku a další produktový pokus otevřeme jen tehdy, když se opakovaně vrátí dotaz na proces získání auditních záznamů.“
+
+Všimni si, co v té větě není: žádné „budeme dál sledovat“, žádný nový dashboard, žádný export všech konverzací. Je tam rozhodnutí, úklid a podmínka návratu. To většinou stačí.
+
 ### Checklist: Vrácení nebo nahrazení neúspěšné produktové opravy
 
 - [ ] Rozlišil jsem selhání podle vrstvy: text, produkt, data, provoz nebo obchodní slib.
@@ -66885,10 +66911,11 @@ Když druhý pokus neumíš udělat menší než první, vrať se k důkazům. M
 - [ ] Pokud vzniká druhý pokus, je menší než první a má nový důvod.
 - [ ] Nové ověření používá malý signál bez profilování lidí.
 - [ ] Stop pravidlo říká, kdy se návrat zavře nebo kdy vznikne nová karta.
+- [ ] Zavírací věta odděluje rollback, zúžení, náhradní kartu nebo úplné zavření.
 
 ### Mini úkol
 
-Vyber jednu opravu, která po nasazení nepomohla nebo vytvořila nový zmatek. Za dvacet minut napiš návratovou kartu: původní oprava, nález z review, vrstva selhání, návratový krok, co zachováš, co uklidíš, nové ověření a stop pravidlo. Potom vyber jednu datovou nebo dokumentační stopu a rovnou jí dej verdikt. Pokud první reakce zní „musíme to celé předělat“, napiš nejdřív jednu menší větu: „Vracíme nebo zužujeme ___, protože ___.“
+Vyber jednu opravu, která po nasazení nepomohla nebo vytvořila nový zmatek. Za dvacet minut napiš návratovou kartu: původní oprava, nález z review, vrstva selhání, návratový krok, co zachováš, co uklidíš, nové ověření a stop pravidlo. Potom vyber jednu datovou nebo dokumentační stopu a rovnou jí dej verdikt. Nakonec napiš zavírací větu ve tvaru „Vracíme nebo nahrazujeme ___, ponecháváme ___, uklízíme ___ a další pokus otevřeme jen tehdy, když ___.“ Pokud první reakce zní „musíme to celé předělat“, vrať se k jedné menší větě: „Vracíme nebo zužujeme ___, protože ___.“
 
 ## Zdroje
 
@@ -67083,6 +67110,8 @@ Vyber jednu opravu, která po nasazení nepomohla nebo vytvořila nový zmatek. 
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-29: Zpřesněna příloha o vrácení nebo nahrazení neúspěšné produktové opravy o uzavření návratu bez druhé mlhy: zavírací věta, rozlišení rychlého rollbacku, zúžení, náhradní menší karty, převodu na jinou vrstvu a úplného zavření, příklad exportního textu, nová checklist položka a rozšířený mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-29: Doplněna příloha o vrácení nebo nahrazení neúspěšné produktové opravy bez paniky: rozlišení selhání podle vrstvy textu, produktu, dat, provozu a obchodního slibu, výběr návratového kroku, návratová karta, úklid datových a dokumentačních stop, pravidla pro menší druhý pokus, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro rollback produktové opravy. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
