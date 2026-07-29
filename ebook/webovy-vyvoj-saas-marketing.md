@@ -66142,6 +66142,22 @@ První kontrola exportních odpovědí našla, že support makro už je opraven�
 
 Po opravě proběhl jeden testovací follow-up. Obsahoval aktuální trust balíček, žádné staré PDF a krátkou větu o samostatném režimu auditních logů. Tím oprava skončila. Tým nezaložil nový měsíční report všech sales odpovědí, protože nález měl konkrétní příčinu a ta byla odstraněná.
 
+### Rozhodni, jestli oprava končí
+
+Oprava šablony má mít konec. Jinak se kolem jedné věty vytvoří malý proces, který po měsíci žere víc pozornosti než původní problém. Po kontrolním průchodu proto nepiš jen „vypadá to lépe“. Napiš zavírací větu.
+
+| Stav po ověření | Zavírací věta | Co dál |
+| --- | --- | --- |
+| Starý slib se nevrátil a nový text vede k dalšímu kroku. | Oprava je zavřená. | Převést šablonu do běžného režimu a ukončit mimořádnou kontrolu. |
+| Starý slib se nevrátil, ale odpověď je pořád nejasná. | Oprava se zúží na jednu formulaci. | Přepsat jen problémovou větu a ověřit jeden další draft. |
+| Starý slib se vrátil z jiného nosiče. | Text opravený, problém je v nosiči pravdy. | Uklidit konkrétní wiki, PDF, snippet nebo automatizační zdroj. |
+| Odpověď je správná, ale zákazník pořád naráží na stejnou nejistotu. | Šablona už není hlavní problém. | Otevřít produktovou, procesní nebo obchodní kartu. |
+| Oprava vyžaduje nové sledování lidí, aby působila bezpečně. | Oprava překročila privacy hranici. | Vrátit se k menšímu signálu nebo ručnímu review konkrétního případu. |
+
+Dobrá zavírací věta má být nudná a použitelná: „Support makro `export_scope` je opravené, jeden draft bez starého slibu prošel, staré PDF je archivní a další kontrola se nespouští.“ To je mnohem lepší než neurčité „budeme sledovat kvalitu odpovědí“. V privacy-first provozu je neurčitá věta často jen hezčí název pro budoucí tracking.
+
+Pokud se oprava nezavírá, nesmí pokračovat jako další kolo ladění. Musí změnit typ práce: z textu na nosič, z nosiče na automatizaci, z automatizace na produkt, nebo z produktu na obchodní slib. Jakmile neumíš říct, jaký typ práce se mění, pravděpodobně jen držíš otevřenou kartu, aby nikdo nemusel rozhodnout. To se tváří opatrně, ale v provozu je to drahé.
+
 ### Checklist: Oprava šablon po první kontrole
 
 - [ ] Vycházím z jedné kontrolní karty, ne z obecného pocitu nekonzistence.
@@ -66154,6 +66170,7 @@ Po opravě proběhl jeden testovací follow-up. Obsahoval aktuální trust balí
 - [ ] Neotevírám zbytečně zákaznické konverzace ani osobní detaily.
 - [ ] Po opravě ověřuji jen místo, kde se problém našel.
 - [ ] Pokud se problém vrátil, měním vrstvu zásahu, neprotahuji stejnou opravu.
+- [ ] Po ověření mám zavírací větu, která říká, zda oprava končí, zužuje se, mění vrstvu nebo přechází do produktu.
 - [ ] Oprava má zavírací verdikt a konec mimořádné kontroly.
 
 ### Mini úkol
@@ -66353,6 +66370,8 @@ Vezmi poslední kontrolní kartu, kde se po změně šablony vrátil starý slib
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-29: Zpřesněna příloha o opravě šablon po první kontrole o stop pravidlo „Rozhodni, jestli oprava končí“: tabulka stavů po ověření, zavírací věty pro ukončení, zúžení, úklid nosiče, předání do produktu nebo návrat k menšímu privacy-first signálu; doplněna checklist položka pro zavírací větu. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-29: Doplněna příloha o opravě šablon po první kontrole bez nekonečného ladění: práce s jedním nálezem z kontrolní karty, rozlišení vrstev opravy, opravný brief na jednu obrazovku, přepis odpovědi podle rozhodnutí člověka, úklid starého nosiče pravdy, ověření jen dotčeného místa, příklad sales snippetu po exportním nálezu, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
