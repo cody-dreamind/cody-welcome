@@ -64235,6 +64235,146 @@ Výsledek je malý, ale ostrý. Příště se stejná chyba zastaví v návrhu a
 
 Vezmi jednu opravu automatizace, kterou už tým zavřel. Vyplň lekční kartu do deseti řádků. Vyber jedno primární místo, kam poznatek patří, a napiš jednu věc, kterou kvůli němu vědomě nebudeš zavádět: nový dashboard, nový meeting, nový export, nové sledování lidí nebo nový věčný checklist. Pokud lekce nemá jasný dopad na další rozhodnutí, zavři ji jako pozorování bez akce.
 
+## Příloha: Převod provozní lekce do backlogu bez poradní inflace
+
+Lekce z uzavřené opravy je užitečná jen tehdy, když změní budoucí práci. Pokud zůstane v retrospektivě jako hezká věta, tým si připadá moudřejší, ale příští zadání se napíše stejně. Pokud se naopak každá lekce automaticky promění v nový proces, tým začne nosit minulost v batohu a říká tomu kvalita.
+
+Backlog je správné místo jen pro lekce, které potřebují konkrétní změnu produktu, dokumentace, automatizace, testu nebo provozního pravidla. Není to odkladiště pocitů. Dobrá backlogová karta z lekce má malé sloveso, jasný důvod, hranici dat a podmínku zavření. Špatná karta zní „zlepšit práci s automatizacemi“. To je billboard, ne úkol.
+
+> Codyho komentář: Poradní inflace vzniká nenápadně. Jeden poznatek, jedna schůzka, jedna kontrolní tabulka, jeden pravidelný report. Za měsíc tým tráví víc času dokazováním, že se učí, než skutečným učením. Backlog má být chirurgický nástroj, ne muzeum dobrých úmyslů.
+
+### Rozhodni, jestli lekce patří do backlogu
+
+Než z lekce uděláš úkol, polož tři otázky:
+
+- Změní tato lekce konkrétní budoucí práci?
+- Má změna jedno místo v produktu, kódu, dokumentaci, šabloně nebo runbooku?
+- Dá se uzavřít bez trvalého dohledu?
+
+Pokud aspoň na dvě otázky odpovíš ne, lekce do backlogu nepatří. Může zůstat v pracovním logu retrospektivy jako pozorování. To není selhání. Je to ochrana backlogu před usazeninami.
+
+Praktické třídění:
+
+| Typ lekce | Patří do backlogu? | Správný výstup |
+| --- | --- | --- |
+| Chybí pole v automatizačním briefu | ano | upravit šablonu briefu |
+| Tým měl obecně špatný pocit z pilotu | ne hned | zapsat pozorování a čekat na opakovaný signál |
+| Runbook neříká, kdy přepnout na ruční režim | ano | doplnit stop pravidlo do runbooku |
+| Jedna osoba zapomněla poslat update | většinou ne | opravit komunikační očekávání v konkrétním úkolu |
+| Export obsahoval moc detailů | ano | zúžit výstup a přidat pravidlo minimálního signálu |
+| Schůzka byla dlouhá | ne samo o sobě | zkrátit příští agendu, pokud to brzdí rozhodnutí |
+
+Backlogová karta vzniká až ve chvíli, kdy lekce ukazuje na změnu systému práce, ne jen na náladu po náročném týdnu.
+
+### Přepiš lekci na úkol se slovesem
+
+Lekce bývá obecná. Backlog potřebuje konkrétní akci. Převod udělej ve třech krocích:
+
+1. Vezmi větu lekce.
+2. Najdi místo, kde se má změnit budoucí práce.
+3. Napiš úkol, který začíná slovesem a končí ověřitelným stavem.
+
+Příklady převodu:
+
+| Lekce | Backlogový úkol |
+| --- | --- |
+| U automatizací s exportem chybí retenční hranice. | Doplnit do šablony automatizačního briefu pole „retence výstupu“ a „místo úklidu“. |
+| Vlastník nevěděl, kdy automatizaci vypnout. | Přidat do runbooku stop pravidlo pro dva po sobě jdoucí chybové běhy. |
+| Report posílal lidem víc detailů, než potřebovali. | Zúžit výstup reportu na agregovaný stav a odkaz na místo práce. |
+| Review před mergem neověřilo datovou stopu. | Přidat do review checklistu otázku na vstupy, výstupy, logy a retenci změny. |
+| Support odpověď slibovala víc, než produkt uměl. | Upravit veřejnou odpověď a interní makro na současný provozní stav. |
+
+Sloveso je důležité, protože nutí kartu být dokončitelnou. „Retenční hranice“ není úkol. „Doplnit retenční pole do šablony“ už úkol je.
+
+### Přenes hranice z lekční karty
+
+Při převodu do backlogu se často ztratí nejdůležitější část: hranice. Někdo vezme jen název lekce a za týden z něj vznikne velká iniciativa. Proto z lekční karty přenes beze změny pět polí:
+
+| Pole | Proč ho přenést |
+| --- | --- |
+| Důvod | aby úkol neplaval jako obecné zlepšení |
+| Místo pravdy | aby nevznikly kopie ve více dokumentech |
+| Privacy dopad | aby se změna nerozšířila na nový sběr dat |
+| Co neděláme | aby úkol neotevřel nový dashboard, meeting nebo export |
+| Stop pravidlo | aby se karta dala zavřít nebo zrušit |
+
+Backlogová karta z lekce může vypadat takto:
+
+| Pole | Zápis |
+| --- | --- |
+| Úkol | Doplnit do šablony automatizačního briefu pole pro minimální signál a retenci výstupu. |
+| Důvod | Uzavřená oprava retenčního reportu ukázala, že exportní automatizace bez hranice výstupu kopírují moc dat. |
+| Místo pravdy | Šablona automatizačního briefu. |
+| Privacy dopad | Snižuje datovou stopu budoucích automatizací. |
+| Co neděláme | Nezakládáme měsíční audit všech existujících automatizací. |
+| Ověření | Příští nová automatizace s exportem použije doplněné pole v briefu. |
+| Stop pravidlo | Pokud se tři měsíce žádná exportní automatizace neotevře, karta se zavře jako nepotřebná změna šablony. |
+
+Všimni si, že karta neřeší celý svět. Nemění proces, neotevírá audit, nevyžaduje novou roli. Jen opravuje místo, kde se příští podobná chyba může zastavit nejlevněji.
+
+### Zařaď kartu podle rizika, ne podle čerstvé bolesti
+
+Čerstvá bolest má tendenci vypadat důležitěji než starší systémový problém. Backlog ale nemá poslouchat hlasitost emocí. U lekcí z provozu se hodí jednoduché pořadí:
+
+1. Nejdřív úkoly, které brání opakovanému úniku dat, zbytečnému exportu nebo širokému přístupu.
+2. Potom úkoly, které snižují provozní riziko pro zákazníka.
+3. Potom úkoly, které zrychlují budoucí práci týmu.
+4. Nakonec kosmetické úpravy šablon a textů, které nemění rozhodování.
+
+Když je lekce důležitá, ale ne akutní, dej jí kontrolní datum místo falešné priority. Například: „Otevřít při příští automatizaci s exportem“ je lepší než držet kartu tři měsíce nahoře v backlogu jen proto, že vypadá bezpečnostně. Backlog plný permanentně důležitých položek je jen tabule s lepší typografií.
+
+### Uzavři kartu výsledkem, ne debatou
+
+Karta z provozní lekce je hotová, když se změnilo místo budoucí práce a je jasné, co se nebude dělat navíc. Nestačí, že tým „probral téma“. Probraná témata mají zvláštní schopnost vracet se jako špatně pojmenované úkoly.
+
+Zavírací záznam může být krátký:
+
+| Pole | Otázka |
+| --- | --- |
+| Změněno | Co přesně se změnilo v šabloně, runbooku, testu, produktu nebo dokumentaci? |
+| Ověřeno | Kde je vidět, že změna funguje při skutečné práci? |
+| Datová stopa | Snížila se, nezměnila, nebo se vědomě rozšířila? |
+| Úklid | Zmizel starý text, starý checklist, starý export nebo stará připomínka? |
+| Co nepokračuje | Jaký dohled, meeting, report nebo tabulka se po zavření nespouští? |
+
+Pokud zavírací záznam neumí odpovědět na „co nepokračuje“, karta pravděpodobně nechala otevřený procesní ocásek. A procesní ocásky rostou. Ne dramaticky. Hůř: nenápadně.
+
+### Příklad: Lekce z retenčního reportu jde do backlogu
+
+Retrospektiva uzavřené opravy retenčního reportu vytvořila lekci: každá automatizace, která pracuje s exportním výstupem, musí už v briefu určit minimální signál, příjemce a retenci.
+
+Backlogová karta:
+
+| Pole | Zápis |
+| --- | --- |
+| Úkol | Upravit šablonu automatizačního briefu o tři pole: minimální signál, příjemce výstupu, retence výstupu. |
+| Důvod | Předchozí report zbytečně posílal celé exporty do chatu, protože brief nevymezil hranici výstupu. |
+| Místo pravdy | Automatizační brief, ne samostatný checklist. |
+| Privacy dopad | Snižuje riziko kopírování zákaznických detailů mimo místo práce. |
+| Co neděláme | Nezavádíme pravidelnou kontrolu všech chatových zpráv ani nový exportní dashboard. |
+| Ověření | Při příští exportní automatizaci musí brief vyplnit všechna tři pole, jinak nejde do realizace. |
+| Vlastník | Vlastník automatizační šablony. |
+| Zavření | Po úpravě šablony a jednom použití na nové nebo změněné automatizaci. |
+
+Po zavření karta doplní jen krátký záznam: šablona upravena, první použití ověřeno, starý samostatný checklist nevznikl. Hotovo. Žádná poradní slavobrána, žádný nový rituál.
+
+### Checklist: Převod provozní lekce do backlogu
+
+- [ ] Lekce patří do backlogu jen tehdy, když mění konkrétní budoucí práci.
+- [ ] Úkol začíná slovesem a má jedno místo změny.
+- [ ] Důvod je převzatý z uzavřené lekční karty.
+- [ ] Místo pravdy je jedno; ostatní dokumenty na něj maximálně odkazují.
+- [ ] Privacy dopad je zapsaný ještě před prioritizací.
+- [ ] Karta výslovně říká, co se kvůli lekci nedělá.
+- [ ] Priorita vychází z datového a provozního rizika, ne z čerstvé bolesti.
+- [ ] Ověření proběhne při skutečné práci, ne jen při poradě.
+- [ ] Zavírací záznam uklidí staré stopy a nepoužitý dočasný materiál.
+- [ ] Po zavření nevzniká nový pravidelný dohled bez jasného rozhodnutí.
+
+### Mini úkol
+
+Vezmi jednu lekční kartu z poslední uzavřené opravy. Rozhodni, jestli opravdu patří do backlogu. Pokud ano, přepiš ji na jeden úkol se slovesem, přenes důvod, místo pravdy, privacy dopad, „co neděláme“ a stop pravidlo. Pokud ne, zavři ji jako pozorování bez akce. Backlog ti poděkuje tím, že nebude vypadat jako sklep po špatném stěhování.
+
 ## Zdroje
 
 - IETF RFC 9110: HTTP Semantics - význam HTTP přesměrování a stavů včetně `410 Gone` pro zdroje, které už nejsou dostupné: https://www.rfc-editor.org/rfc/rfc9110.html
@@ -64428,6 +64568,8 @@ Vezmi jednu opravu automatizace, kterou už tým zavřel. Vyplň lekční kartu 
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-29: Doplněna příloha o převodu provozní lekce do backlogu bez poradní inflace: rozhodnutí, zda lekce do backlogu vůbec patří, přepis lekce na úkol se slovesem, zachování hranic z lekční karty, prioritizace podle datového a provozního rizika, zavírací záznam bez nového dohledu, příklad retenčního reportu, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-29: Doplněna příloha o retrospektivě uzavřené automatizační opravy bez procesu navíc: současná pravda místo historie bolesti, oddělení poznatku od nového dohledu, lekční karta, přenos poznatku do jednoho místa pravdy, privacy kontrola lekce, příklad retenčního reportu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro lekci po uzavřené opravě. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
