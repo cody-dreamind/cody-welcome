@@ -159,6 +159,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Zkontrolovat sloučenou opravu po prvním provozním cyklu | „kontrola po mergi“, „oprava v provozu“ nebo „první cyklus po opravě“ | lehký provozní review, které ověří dopad opravy, datovou hranici, šum, dokumentaci a rozhodne zavřít, zúžit, opravit nebo vrátit |
 | Zjednodušit sloučenou opravu po prvním cyklu | „zjednodušení po prvním cyklu“, „oprava funguje ale bobtná“ nebo „procesní nános po opravě“ | redukční karta, která ponechá hodnotu opravy, vypne dočasný dohled, uklidí datové stopy a převede změnu do běžného režimu |
 | Uzavřít zjednodušenou sloučenou opravu do běžného režimu | „zjednodušená oprava hotovo“, „redukce po mergi hotovo“ nebo „oprava bez doznívání“ | zavírací karta, která potvrzuje odstraněný nános, funkční minimální signál, uklizené přístupy, aktuální runbook a konec mimořádných kontrol |
+| Udělat retrospektivu uzavřené automatizační opravy bez procesu navíc | „retrospektiva opravy“, „lekce po uzavření“ nebo „co jsme se naučili po opravě“ | krátká lekční karta, která rozliší použitelný poznatek od dojmu, přenese ho do jednoho místa pravdy a neotevře nový pravidelný dohled |
 | Automatizovat rutinu bez skrytého dozoru | „automatizace rutiny“, „automatizační karta“ nebo „vypínač automatizace“ | malý automatizační návrh s účelem, vstupy, výstupem, vlastníkem, logy, ručním rozhodnutím a datem revize |
 | Vyhodnotit automatizaci po prvních bězích | „review automatizace“, „automatizace po spuštění“ nebo „autopilot“ | rozhodnutí ponechat, zúžit, přepsat, vrátit do ruční rutiny nebo vypnout automatizaci podle nálezů, šumu a datové stopy |
 | Vypnout automatizaci bez zapomenutého běhu | „vypnutí automatizace“, „ukončený autopilot“ nebo „automatizace končí“ | vypínací karta s posledním během, revokací tokenů, úklidem výstupů, náhradním postupem a kontrolou veřejných slibů |
@@ -64110,6 +64111,130 @@ Všimni si, že výsledek není „budeme to sledovat“. Výsledek je „běž�
 
 Vyber jednu opravu automatizace, kterou tým po prvním cyklu zjednodušil. Počkej na jeden běžný průchod a vyplň zavírací kartu. Zkontroluj hlavně místa mimo kód: runbook, přístupy, výstupy, logy a šablony. Pokud najdeš jednu stopu pilotu, neotevírej velký audit. Zavři právě tuto stopu, dopiš verdikt a nastav stop pravidlo.
 
+## Příloha: Retrospektiva uzavřené automatizační opravy bez procesu navíc
+
+Uzavřená oprava je vhodný okamžik pro učení, ale špatný okamžik pro vymýšlení další vrstvy dohledu. Tým už ví, co bylo rozbité, co pomohlo, co se muselo zúžit a co po uzavření zůstalo jako běžný signál. Teď je potřeba ten poznatek převést do jednoho místa pravdy, ne založit novou schůzku s názvem „kontrola kontrol“.
+
+Retrospektiva po automatizační opravě má být malá. Její výstup není pocit, že jsme se poučili. Výstup je rozhodnutí, kam přesně poznatek patří: do produktu, runbooku, mapy automatizací, testu, support odpovědi, nebo nikam. Ano, i „nikam“ je platný verdikt. Ne každá bolest si zaslouží památník.
+
+> Codyho komentář: Proces navíc často vzniká z dobrého svědomí. Někdo nechce, aby se chyba zopakovala, a tak přidá pravidelné ruční ověřování. Jenže pokud ruční ověřování neslouží konkrétnímu rozhodnutí, je to jen drahá připomínka minulého stresu.
+
+### Začni současnou pravdou, ne historií bolesti
+
+Retrospektiva nemá znovu vyprávět celý incident, pilot ani opravu. Historie už je v kartách předchozích kroků. Tady stačí začít větou:
+
+„Po uzavření opravy dnes platí ___ a příště chceme dřív poznat ___.“
+
+Tahle věta drží tým u současné reality. Neřeší, kdo co přehlédl, ani kolik bylo mezikroků. Zajímá ji jen to, jak se má příště změnit rozhodnutí nebo návrh systému.
+
+Dobrá lekce má tři vlastnosti:
+
+- dá se použít před další podobnou změnou,
+- nevyžaduje sledovat chování konkrétních lidí nebo zákazníků,
+- má jasné místo, kde má žít.
+
+Špatná lekce zní „musíme být opatrnější“. To je nálada, ne provozní pravidlo. Použitelná lekce zní „automatizace, která posílá celý export do chatu, nesmí projít review bez retenčního pole a vlastníka výstupu“.
+
+### Odděl poznatek od nového dohledu
+
+Nejrychlejší cesta k procesnímu nánosu je zaměnit učení za kontrolu. Retrospektiva má odpovědět na otázku, co příště navrhnout jinak. Nemá vytvořit stálou povinnost dokládat, že se minulá chyba nevrací.
+
+Použij jednoduché rozlišení:
+
+| Nález | Správná reakce | Čemu se vyhnout |
+| --- | --- | --- |
+| Chyběla hranice dat ve briefu | doplnit pole do šablony briefu | měsíčně ručně kontrolovat všechny briefy |
+| Výstup chodil moc širokému publiku | opravit pravidlo příjemců v runbooku | zavést ruční schvalování každé notifikace |
+| Debug log obsahoval zbytečný detail | změnit logovací vzor a test | číst logy preventivně kvůli pocitu bezpečí |
+| Vlastník nevěděl, kdy zasáhnout | doplnit stop pravidlo a příklad | založit nový status meeting |
+| Starý export přežil pilot | přidat úklidovou položku do zavírací karty | udržovat tabulku všech historických exportů navždy |
+
+Pokud poznatek nejde převést do šablony, runbooku, testu, mapy nebo veřejné odpovědi, možná ještě není zralý. Zapiš ho jako pozorování a zavři ho bez akce. Backlog není sklad dojmů.
+
+### Napiš lekční kartu
+
+Lekční karta má být kratší než původní opravná karta. Je to kondenzát, ne román s výskytem slova „synergie“, takže bacha.
+
+| Pole | Co zapsat |
+| --- | --- |
+| Uzavřená oprava | název opravy a datum zavření |
+| Současná pravda | jak automatizace funguje po uzavření |
+| Lekce | co má tým udělat jinak příště |
+| Typ lekce | produkt, data, provoz, dokumentace, test, komunikace, žádná akce |
+| Kam patří | konkrétní šablona, runbook, mapa automatizací, test, FAQ, backlog nebo archiv |
+| Privacy dopad | jestli lekce snižuje, nemění nebo zvyšuje datovou stopu |
+| Protiopatření | jedna úprava, pokud je potřeba |
+| Stop pravidlo | kdy by se lekce měla znovu otevřít |
+| Co neděláme | jaký dohled, tracking nebo proces vědomě nepřidáváme |
+
+Nejdůležitější pole je „co neděláme“. Chrání tým před tím, aby z jedné rozumné lekce vznikla nová pravidelná práce bez konce. Pokud ho neumíš vyplnit, pravděpodobně ještě nevíš, kde končí učení a začíná úzkost.
+
+### Přenes poznatek jen do jednoho místa pravdy
+
+Stejnou lekci nepřepisuj do pěti dokumentů. Když ji zapíšeš do runbooku, wiki, checklistu, support makra a projektového nástroje, právě jsi založil pět míst, která budou časem lhát jinak.
+
+Vyber podle typu změny:
+
+| Typ lekce | Primární místo | Příklad zápisu |
+| --- | --- | --- |
+| Produktová | produktový backlog nebo rozhodovací karta | „exportní pole musí mít vlastníka a účel“ |
+| Datová | datová mapa nebo šablona automatizačního briefu | „výstup nesmí obsahovat celé zákaznické payloady“ |
+| Provozní | runbook nebo mapa automatizací | „po dvou selháních přepnout na ruční režim“ |
+| Dokumentační | veřejná nebo interní odpovědní knihovna | „zákazníkům vysvětlujeme agregovaný signál, ne interní pipeline“ |
+| Testovací | regresní test nebo kontrolní checklist před mergem | „log obsahuje korelační ID, ne obsah exportu“ |
+| Žádná akce | pracovní log uzavření | „pozorování zaznamenáno, bez opakovaného dopadu“ |
+
+Když lekce zasahuje více míst, napiš do ostatních jen odkaz na primární zdroj pravdy. Neopisuj celý obsah. Kopie v dokumentaci se nemnoží proto, že jsou zlé; množí se proto, že to vypadá jako pečlivost.
+
+### Hlídej, aby lekce nesnídala soukromí
+
+Poučení z automatizace nesmí být záminka k tomu, aby tým začal sledovat víc lidí, víc polí nebo delší historii. Nejlepší lekce často snižuje datovou stopu: ořeže výstup, zpřesní účel, zkrátí retenci nebo přesune signál z osobní úrovně na agregovanou.
+
+Před uzavřením lekční karty polož tři otázky:
+
+- Přidáváme kvůli lekci nový sběr dat, nebo jen lepší pravidlo pro existující práci?
+- Jde signál vyhodnotit agregovaně, technicky nebo ručně na malém vzorku bez profilování?
+- Má lekce konec životnosti, nebo se právě rodí další věčný report?
+
+Pokud odpověď ukazuje na širší sběr dat, vrať se o krok zpět. Možná nepotřebuješ nový event, ale jasnější stop pravidlo. Možná nepotřebuješ dashboard, ale lepší runbook. A možná nepotřebuješ nic; i to je provozní zralost, jen méně efektní na poradě.
+
+### Příklad: Retenční report jako lekce pro další automatizace
+
+Tým uzavřel opravu retenčního reportu. Po redukci zůstává jen provozní panel s posledním během, počtem exportů a počtem chybových stavů. Staré CSV kopie zmizely, chatová notifikace s celým výstupem je vypnutá a runbook ukazuje současnou pravdu.
+
+Lekční karta:
+
+| Pole | Zápis |
+| --- | --- |
+| Uzavřená oprava | metadata exportů v retenčním reportu, zavřeno po redukci |
+| Současná pravda | report běží v panelu, posílá agregovaný stav a nešíří celé exporty do chatu |
+| Lekce | automatizace s exportním výstupem musí už v briefu určit příjemce, účel, retenci a minimální signál |
+| Typ lekce | datová a provozní |
+| Kam patří | šablona automatizačního briefu; v mapě automatizací jen odkaz |
+| Privacy dopad | snižuje datovou stopu, protože brání kopírování celých exportů |
+| Protiopatření | přidat do briefu pole „minimální signál místo úplného výstupu“ |
+| Stop pravidlo | znovu otevřít při nové automatizaci, která posílá export mimo místo práce |
+| Co neděláme | nezavádíme měsíční ruční kontrolu všech chatů ani nový monitoring práce vlastníka |
+
+Výsledek je malý, ale ostrý. Příště se stejná chyba zastaví v návrhu automatizace, ne až při úklidu po pilotu.
+
+### Checklist: Retrospektiva uzavřené automatizační opravy
+
+- [ ] Retrospektiva začíná současnou pravdou, ne dlouhou historií opravy.
+- [ ] Lekce říká, co příště udělat jinak před podobnou změnou.
+- [ ] Poznatek je odlišený od nového pravidelného dohledu.
+- [ ] Lekční karta má konkrétní místo pravdy.
+- [ ] Pokud lekce zasahuje více míst, ostatní místa jen odkazují na primární zdroj.
+- [ ] Privacy dopad je výslovně zapsaný.
+- [ ] Lekce nepřidává sledování lidí, zákaznických detailů ani věčnou retenci.
+- [ ] „Co neděláme“ chrání tým před novým procesem navíc.
+- [ ] Stop pravidlo říká, kdy se lekce znovu otevře.
+- [ ] Pokud není jasná akce, pozorování je zavřené bez backlogového strašení.
+
+### Mini úkol
+
+Vezmi jednu opravu automatizace, kterou už tým zavřel. Vyplň lekční kartu do deseti řádků. Vyber jedno primární místo, kam poznatek patří, a napiš jednu věc, kterou kvůli němu vědomě nebudeš zavádět: nový dashboard, nový meeting, nový export, nové sledování lidí nebo nový věčný checklist. Pokud lekce nemá jasný dopad na další rozhodnutí, zavři ji jako pozorování bez akce.
+
 ## Zdroje
 
 - IETF RFC 9110: HTTP Semantics - význam HTTP přesměrování a stavů včetně `410 Gone` pro zdroje, které už nejsou dostupné: https://www.rfc-editor.org/rfc/rfc9110.html
@@ -64303,6 +64428,8 @@ Vyber jednu opravu automatizace, kterou tým po prvním cyklu zjednodušil. Poč
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-29: Doplněna příloha o retrospektivě uzavřené automatizační opravy bez procesu navíc: současná pravda místo historie bolesti, oddělení poznatku od nového dohledu, lekční karta, přenos poznatku do jednoho místa pravdy, privacy kontrola lekce, příklad retenčního reportu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro lekci po uzavřené opravě. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-28: Doplněna příloha o uzavření zjednodušené sloučené opravy do běžného režimu bez doznívání: ověření po jednom běžném průchodu, kontrola pěti míst návratu starého provozu, zavírací karta, pět jasných verdiktů, ochrana proti novému procesu, příklad retenčního reportu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro uzavření zjednodušené opravy po mergi. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
