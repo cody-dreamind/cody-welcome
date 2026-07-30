@@ -294,6 +294,158 @@ Tohle je dobra strategie. Neni sexy, ale setri mesice prace.
 
 ---
 
+## 3. Webova architektura pro male tymy
+
+Architektura pro maly SaaS tym nema byt sbirka modernich slov. Ma byt dohoda, ktera drzi produkt rychly, srozumitelny a provozovatelny i ve chvili, kdy se neco rozbije v patek odpoledne. Dobry navrh poznas podle toho, ze se da vysvetlit novemu cloveku za dvacet minut a incident se da ladit bez archeologicke expedice.
+
+Zakladni pravidlo: dokud nemas jasny duvod pro slozitost, vyber jednodussi variantu. Jedna aplikace, jedna databaze, jeden primarni deploy proces a par dobre popsanych integraci casto vydrzi dele, nez se zda. Slozitost pridavej az ve chvili, kdy resi skutecny tlak: vykon, izolaci dat, bezpecnostni hranici, tymovou odpovednost nebo rozdilny release rytmus.
+
+### 3.1 Vychozi stack: nudny je kompliment
+
+Pro prvni verze SaaS produktu vetsinou dobre funguje:
+
+- marketingovy web jako staticky nebo server-renderovany frontend,
+- aplikace jako jeden hlavni backend,
+- jedna primarni relacni databaze,
+- objektove uloziste pro soubory, pokud jsou potreba,
+- emailova sluzba pro transakcni zpravy,
+- fronta jen pro praci, ktera opravdu nemusi probehnout v requestu,
+- jednoduchy monitoring dostupnosti, chyb a zakladnich metrik.
+
+Tohle neni obhajoba technologicke nudy z lenosti. Je to obhajoba provozni citelnosti. Kdyz maly tym rozbije monolit, obvykle vi, kde hledat. Kdyz rozbije pet sluzeb, tri queue workery a dva serverless experimenty, muze se debugging rychle zmenit v cestopis.
+
+**Codyho komentar:** Framework si vybiram podle toho, jestli zmensuje pocet rozhodnuti, ktera musi tym denne delat. Ne podle toho, jestli zrovna vypada dobre na konferencnim slidu.
+
+Prakticky rozhodovaci filtr:
+
+| Otazka | Pokud ano | Pokud ne |
+| --- | --- | --- |
+| Ma tym s technologii realnou zkusenost? | Je to kandidat. | Pocitej cenu uceni a provoznich chyb. |
+| Umi framework server-side rendering nebo staticky vystup pro verejne stranky? | Lepsi pro SEO a rychlost. | Budes vic hlidat vykon a indexaci. |
+| Je jednoduche nasadit ho v EU prostredi mimo uzavreny hosting? | Drzi privacy-first hodnotu. | Hrozi vendor lock-in. |
+| Existuje jasna cesta k testum a migracim? | Produkt pujde menit s mensim stresem. | Dluh prijde rychle. |
+| Umi tym vysvetlit deploy a rollback? | Provoz je realny. | Je to demo, ne system. |
+
+### 3.2 Oddel marketingovy web od aplikacnich dat
+
+Marketingovy web a SaaS aplikace maji jiny rytmus. Web casto meni texty, CTA, landing pages a obsah. Aplikace meni prihlaseni, billing, uzivatelska data a produktove funkce. Nemusi to hned byt dva repozitare, ale musi byt jasne, kde konci verejna vrstva a kde zacina prace s osobnimi nebo zakaznickymi daty.
+
+Dobry vzor:
+
+- Verejne stranky jsou cacheovatelne, rychle a bez prihlaseni.
+- Formular pro leady posila jen minimalni data do jednoho kontrolovaneho endpointu.
+- Aplikacni API nepouziva stejne endpointy pro verejne kampanove experimenty.
+- Admin rozhrani neni schovane jen "tajnou URL", ale ma vlastni autentizaci a prava.
+- Produktove eventy nejsou automaticky marketingove eventy.
+
+**Priklad hranice:**
+
+Landing page ma formular "Chci konzultaci". Endpoint prijme email, volitelnou zpravu, timestamp, zdroj kampane a souhlas se zpracovanim, pokud je potreba. Neposila kompletni fingerprint prohlizece do reklamni site, neuklada vsechny hlavicky requestu a nevytvari uzivatelsky profil pred tim, nez se clovek opravdu stane uzivatelem.
+
+Kdyz pozdeji pridas aplikaci, lead se muze preklopit do zakaznicke evidence az ve chvili, kdy vznikne obchodni vztah nebo jasny follow-up. Je to drobnost, ale chrani to pred stavem, kdy se kazdy navstevnik webu tvari jako potencialni zaznam v CRM.
+
+### 3.3 Vykonnostni rozpocet misto pozdejsi paniky
+
+Rychlost webu je produktova vlastnost. Pomaha SEO, konverzim i duvere. Zakladni metriky Core Web Vitals sleduji hlavni nacteni obsahu, odezvu na interakci a vizualni stabilitu. Oficialni web.dev uvadi prahy pro dobry zazitek: LCP do 2,5 s, INP do 200 ms a CLS do 0,1, merene typicky na 75. percentilu navstev: https://web.dev/articles/vitals
+
+Maly tym si z toho muze udelat jednoduchy vykonnostni rozpocet:
+
+- HTML prvni obrazovky se ma vratit rychle; klientskou logiku pridej jen tam, kde ma jasny duvod.
+- Hlavni obrazek nebo hero prvek ma mit definovane rozmery.
+- JavaScript na verejnych strankach ma byt vyjimka, ne defaultni skladska hala.
+- Fonty nacitej stridme a s fallbackem.
+- Treti strany poustej jen pokud prinaseji jasnou hodnotu.
+- Kazda nova integrace musi odpovedet na otazku: kolik pridava requestu, dat a rizika?
+
+**Priklad pravidla do pull requestu:**
+
+"Verejna landing page nesmi pridat novy externi skript bez popisu ucelu, dat, regionu zpracovani a dopadu na rychlost. Pokud jde jen o mereni zvedavosti, nepoustime ho."
+
+Tohle zni prisne, ale je to velmi prakticke. Vykonnostni dluh se malokdy objevi jednim velkym rozhodnutim. Vetsinou prijde po malych "jen tenhle widget" vyjimkach.
+
+### 3.4 Cache: levny vykon, kdyz znas pravidla
+
+HTTP cache je jedna z nejlevnejsich optimalizaci, protoze umozni znovu pouzit uz stazene odpovedi. MDN popisuje, ze cache uklada odpoved k requestu a pri dalsim requestu ji muze znovu pouzit misto dotazu na puvodni server: https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Caching. Hlavnim ridicim mechanismem je hlavicka `Cache-Control`, ktera urcuje, jak a jak dlouho mohou prohlizece nebo sdilene cache odpoved drzet: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Cache-Control
+
+Prakticka pravidla:
+
+- Hashovane staticke assety (`app.a1b2c3.js`, `style.d4e5f6.css`) mohou mit dlouhou cache.
+- HTML dokumenty verejnych stranek cacheuj opatrne, aby slo rychle vydat opravu textu nebo pravni informace.
+- Prihlasene stranky s osobnimi daty nastav tak, aby se neukladaly ve sdilenych cache.
+- API odpovedi rozdel podle citlivosti: verejny katalog je jiny pripad nez fakturacni udaje.
+- Po deployi over, ze se nova verze opravdu dostane k uzivatelum.
+
+Jednoducha sablona uvazovani:
+
+| Typ odpovedi | Typicke cache chovani |
+| --- | --- |
+| Hashovane CSS/JS/obrazky | Dlouha cache, protoze zmena vytvori novy soubor. |
+| Verejne HTML | Kratka cache nebo revalidace podle release procesu. |
+| Prihlasene HTML | Soukrome nebo bez ulozeni podle citlivosti. |
+| Osobni API data | Bez sdilene cache, opatrne s prohlizecem. |
+| Verejne API pro obsah | Cache s jasnou invalidaci. |
+
+Cache neni jen vykon. Je to i spravnost a soukromi. Spatne nastaveny cache header muze ukazat stare ceny, starou verzi pravnich dokumentu nebo v horsim pripade citliva data tam, kde nemaji byt.
+
+### 3.5 Prostredi a data: produkce neni hriste
+
+Kazdy SaaS by mel mit jasne oddelene prostredi:
+
+- local pro vyvoj,
+- staging nebo preview pro kontrolu zmen,
+- production pro skutecne uzivatele.
+
+Nejdulezitejsi pravidlo: produkcni osobni data se netahaji do lokalniho vyvoje jen proto, ze je to pohodlne. Kdyz potrebujes realisticka data, vytvor anonymizovany nebo synteticky dataset. Kdyz potrebujes debug konkretniho problemu, pracuj s minimalnim vyrezem, jasnym ucelem, logem pristupu a casovym omezenim.
+
+Pro male tymy staci jednoduchy provozni protokol:
+
+- Kdo ma pristup do produkce?
+- Kdy byl pristup naposledy zkontrolovan?
+- Jak se vytvari a rotuji tajemstvi?
+- Kde jsou zalohy a jak se zkousi obnova?
+- Jak se oznaci incident?
+- Kdo muze pustit migraci databaze?
+- Jak se vraci posledni dobry deploy?
+
+Tohle neni byrokracie. Je to zkratka pro situace, kdy nemas cas premyslet. Kdyz spadne aplikace, nechces vymyslet proces. Chces ho pouzit.
+
+### 3.6 Zavislosti a supply chain: mene balicku, mene prekvapeni
+
+Kazdy balicek v projektu je kod, kteremu davame duveru. U maleho produktu je lakave pridat knihovnu na kazdou drobnost, ale zavislosti maji cenu: aktualizace, zranitelnosti, licence, transitive dependencies a pripadne opustene balicky.
+
+OWASP Software Component Verification Standard resi rizika softwaroveho dodavatelskeho retezce a komponent: https://owasp.org/www-project-software-component-verification-standard/. OWASP ASVS zase poskytuje kontrolni ramec pro overovani bezpecnostnich pozadavku webovych aplikaci: https://owasp.org/www-project-application-security-verification-standard/
+
+Minimalni pravidla pro zavislosti:
+
+- Nepridavej balicek kvuli peti radkum jednoduche logiky.
+- Pred pridanim zkontroluj licenci, aktivitu projektu a velikost transitive stromu.
+- Automaticky sleduj zranitelnosti a aktualizace.
+- Kriticke balicky aktualizuj v malych davkach, ne jednou za rok v panice.
+- U autentizace, kryptografie a plateb pouzij proverene reseni, ale rozumnej jeho hranicim.
+- Zapis, proc byla zavislost vybrana, pokud je pro produkt kriticka.
+
+**Priklad maleho pravidla do tymu:**
+
+"Nova produkcni zavislost musi mit duvod v pull requestu. Pokud nahrazuje trivialni kod, neprijmeme ji. Pokud resi bezpecnostne citlivou oblast, musi byt zkontrolovana podle dokumentace a mit vlastnika."
+
+### Checklist: architektura prvniho SaaS releasu
+
+- [ ] Umim jednou vetou popsat hlavni runtime architekturu.
+- [ ] Verejny web a aplikacni data maji jasnou hranici.
+- [ ] Formular sbira jen minimalni data a posila je do kontrolovaneho endpointu.
+- [ ] Admin cast ma skutecnou autentizaci a prava.
+- [ ] Mam vykonnostni rozpocet pro verejne stranky.
+- [ ] Sleduji LCP, INP a CLS aspon pri dulezitych zmenach.
+- [ ] Staticke assety maji promyslenou cache a invalidaci.
+- [ ] Osobni nebo prihlasena data se neukladaji ve sdilene cache.
+- [ ] Produkcni data se nepouzivaji volne v lokalnim vyvoji.
+- [ ] Mam popsany rollback, zalohy a obnovu.
+- [ ] Tajemstvi nejsou v repozitari a maji jasny zpusob rotace.
+- [ ] Nove zavislosti maji duvod, vlastnika a zakladni bezpecnostni kontrolu.
+- [ ] Kriticke integrace lze vypnout nebo obejit bez kolapsu celeho produktu.
+
+---
+
 ## Zdroje
 
 - GDPR, Regulation (EU) 2016/679, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
@@ -306,6 +458,11 @@ Tohle je dobra strategie. Neni sexy, ale setri mesice prace.
 - Paul Graham, Do Things that Don't Scale: https://www.paulgraham.com/ds.html
 - Strategyzer, Value Proposition Canvas: https://www.strategyzer.com/library/the-value-proposition-canvas
 - Intercom, More than mattresses: using Jobs-to-be-Done research for software: https://www.intercom.com/blog/mattresses-using-jobs-done-research-software/
+- web.dev, Web Vitals: https://web.dev/articles/vitals
+- MDN Web Docs, HTTP caching: https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Caching
+- MDN Web Docs, Cache-Control header: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Cache-Control
+- OWASP Software Component Verification Standard: https://owasp.org/www-project-software-component-verification-standard/
+- OWASP Application Security Verification Standard: https://owasp.org/www-project-application-security-verification-standard/
 
 ---
 
@@ -313,3 +470,4 @@ Tohle je dobra strategie. Neni sexy, ale setri mesice prace.
 
 - 2026-07-30: Zalozena struktura e-booku, doplnen uvod, osnova a hotova prvni kapitola o privacy-first zakladu SaaS webu vcetne praktickych prikladu, checklistu a zdroju.
 - 2026-07-30: Dopsana druha kapitola o produktove strategii od vyberu problemu pres rozhovory a placene piloty po prvni mesic rozhodovaciho rytmu.
+- 2026-07-30: Dopsana treti kapitola o webove architekture pro male tymy vcetne vykonnostniho rozpoctu, cache pravidel, prace s prostredimi, zavislostmi a checklistu pred prvnim SaaS releasem.
