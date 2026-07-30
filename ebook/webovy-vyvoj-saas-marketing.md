@@ -222,6 +222,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Zjednodušit produktovou opravu po měsíční kontrole | „redukční karta po měsíční kontrole“, „zjednodušení opravy“, „procesní nános po opravě“ nebo „oprava funguje ale bobtná“ | redukční karta, která ponechá hodnotu opravy, vypne zbytečné měření, sloučí šablony, odebere přístupy a nastaví jasné stop pravidlo |
 | Uzavřít zjednodušenou produktovou opravu bez nového procesu | „uzavření zjednodušené opravy“, „redukovaná oprava hotovo“ nebo „stop pravidlo po zjednodušení“ | zavírací review, které potvrdí odstraněný nános, funkční minimální signál a konec mimořádných kontrol |
 | Přenést poučení z uzavřené opravy do produktových pravidel | „poučení z opravy“, „produktové pravidlo“ nebo „oprava naučila tým“ | jedna principová věta, která z uzavřené opravy zlepší budoucí zadávání, review, onboarding nebo dokumentaci bez nového procesu |
+| Zkontrolovat nové produktové pravidlo proti existujícím pravidlům | „duplicitní pravidlo“, „pravidlový registr“ nebo „pravidlo už existuje“ | krátké rozhodnutí, zda nové poučení založit, připojit ke starému pravidlu, zpřesnit existující otázku nebo nezakládat nic |
 | Převést produktové pravidlo do zadání bez byrokracie | „pravidlo v zadání“, „review otázka“ nebo „produktové pravidlo v praxi“ | malá úprava šablony zadání, akceptačních kritérií nebo review checklistu, která pravidlo dostane do běžné práce bez nového procesu |
 | Ověřit produktové pravidlo po prvním použití | „kontrola pravidla“, „první použití pravidla“ nebo „pravidlo pomohlo“ | krátké review jedné reálné změny, které rozhodne, zda pravidlo ponechat, zúžit, přesunout, přepsat nebo zrušit |
 | Upravit produktové pravidlo po první kontrole | „úprava pravidla“, „pravidlo po kontrole“ nebo „pravidlo se ladí“ | malý změnový balík, který z verdiktu udělá přesnější otázku, lepší místo použití nebo uklizené zrušení bez další procesní vrstvy |
@@ -67790,6 +67791,153 @@ Co nedělat:
 
 Vezmi jednu uzavřenou produktovou opravu z posledního měsíce. Za třicet minut napiš kartu pravidla s těmito poli: název, vzniklo z, spouštěč, review otázka, privacy hranice, místo použití, vlastník, revizní trigger a stop pravidlo. Pak pravidlo vlož jen na jedno místo, kde se bude opravdu používat. Výsledek zakonči větou: „Poučení z opravy ___ se mění v pravidlo ___, používá se při ___, nesmí zavést ___ a zkontrolujeme ho při ___.“
 
+## Příloha: Kontrola nového produktového pravidla proti existujícím pravidlům bez duplicitní smyčky
+
+Nové produktové pravidlo je užitečné jen tehdy, když zlepšuje další práci. Jakmile tým po každé opravě založí nové pravidlo bez kontroly starších pravidel, vznikne jiný problém: pravidla se začnou překrývat, odporovat si nebo opakovat stejnou myšlenku různými slovy.
+
+To je nenápadně drahé. Člověk v zadání pak neví, jestli má splnit otázku z produktové šablony, starý checklist z retrospektivy, poznámku v dokumentaci nebo novější pravidlo z review. Výsledek není lepší kvalita, ale unavené odškrtávání. A to je přesně chvíle, kdy pravidlo přestává řídit práci a stává se procesní tapetou.
+
+Tahle příloha řeší jednoduchou bránu: než založíš nové pravidlo, zkontroluj, jestli už podobné pravidlo existuje a co s ním udělat.
+
+> Codyho komentář: Pravidla mají být krátká paměť týmu, ne kronika všech omylů. Když si každá lekce založí vlastní miniaturní ústavu, tým za chvíli neví, podle které země vlastně pracuje.
+
+### Začni záměrem pravidla, ne jeho textem
+
+Dvě pravidla můžou znít jinak a přitom chránit stejný pracovní okamžik. Naopak dvě podobné věty můžou chránit odlišná rizika. Proto neporovnávej jen formulaci. Porovnávej spouštěč, rozhodnutí a hranici dat.
+
+Před založením pravidla si napiš čtyři věty:
+
+| Otázka | Co hledáš |
+| --- | --- |
+| Kdy se pravidlo spustí? | typ změny, obrazovka, proces nebo role |
+| Jaké rozhodnutí má zlepšit? | konkrétní review, zadání, návrh, release nebo odpověď |
+| Jakému opakování má zabránit? | starý dotaz, nejasný slib, chybějící stav, datový nános |
+| Jaká data kvůli němu nechceme sbírat? | individuální kliky, exporty vláken, osobní poznámky, zbytečné logy |
+
+Teprve potom hledej v existujících pravidlech. Ne podle přesného názvu, ale podle práce, ve které se pravidlo použije.
+
+### Prohledej tři místa pravdy
+
+Nemusíš dělat celofiremní audit. Stačí rychlá kontrola míst, kde se pravidla reálně používají.
+
+Typická tři místa:
+
+| Místo | Co hledat | Signál duplicity |
+| --- | --- | --- |
+| Šablona zadání nebo akceptační kritéria | otázky před implementací | dvě otázky chtějí stejnou kontrolu jinými slovy |
+| Review checklist | UX, security, data nebo release kontrola | pravidlo se ptá na stejnou hranici ve dvou fázích bez důvodu |
+| Dokumentace nebo runbook | trvalý zdroj pravdy pro tým | stará lekce říká totéž, ale s jiným příkladem nebo zastaralým názvem |
+
+Pokud pravidlo nežije ani v jednom pracovním místě, možná už v praxi neexistuje. Pak nejdřív zjisti, jestli se opravdu používá. Archivní poznámka z retrospektivy není totéž jako aktivní pravidlo.
+
+Praktické hledání:
+
+- hledej podle slovesa: exportovat, smazat, změnit plán, pozvat uživatele, odeslat notifikaci,
+- hledej podle rizika: retence, přístup, veřejný slib, log, support odpověď, pricing,
+- hledej podle místa práce: produktová karta, PR template, UX review, support makro, runbook,
+- hledej podle datové hranice: nesbírat kliky, nepřidávat export, neukládat osobní poznámky.
+
+Pokud za deset minut nic nenajdeš, nezakládej pátrací projekt. Zapiš, kde jsi hledal, a pokračuj rozhodnutím.
+
+### Rozhodni jedním z pěti verdiktů
+
+Nové poučení nemusí vždy skončit novým pravidlem. Použij pět verdiktů:
+
+| Verdikt | Kdy ho použít | Co udělat |
+| --- | --- | --- |
+| Založit nové pravidlo | Neexistuje podobný spouštěč ani review otázka. | Přidej kartu pravidla a jedno místo použití. |
+| Připojit ke starému pravidlu | Staré pravidlo sedí, ale chybí mu nový příklad nebo spouštěč. | Rozšiř jednu větu nebo příklad, nevyráběj druhé pravidlo. |
+| Zpřesnit existující pravidlo | Staré pravidlo je příliš obecné a nová lekce ukázala lepší otázku. | Přepiš pravidlo na konkrétnější formulaci a odstraň starou mlhu. |
+| Sloučit dvě pravidla | Dvě pravidla chrání stejný okamžik a liší se jen historickým původem. | Vyber cílovou větu, zachovej nejlepší hranici a archivuj duplicitu. |
+| Nezakládat nic | Lekce byla jednorázová, nepravděpodobná nebo už ji řeší produktová změna. | Zapiš rozhodnutí do zavíracího review a nepřidávej další kontrolu. |
+
+Nejtěžší verdikt je „nezakládat nic“. Týmy ho podceňují, protože se zdá méně aktivní. Ve skutečnosti je často nejdospělejší: říká, že poučení už je obsažené v opraveném produktu, dokumentaci nebo šabloně a nepotřebuje další nosič.
+
+### Chraň pravidlo před historickým balastem
+
+Když připojuješ novou lekci ke starému pravidlu, nepřepisuj do něj celý příběh. Pravidlo má pomáhat budoucí práci, ne dokazovat, že tým trpěl poctivě.
+
+Dobré doplnění:
+
+| Slabé doplnění | Lepší doplnění |
+| --- | --- |
+| „Po incidentu s exportem z června kontrolovat exporty důkladněji.“ | „U exportu před releasem ověřit rozsah dat, výjimky a konec životnosti dočasného souboru.“ |
+| „Při změně pricingu nezapomenout na support.“ | „Při změně limitu plánu aktualizovat pricing, entitlement, support makro a veřejnou dokumentaci ze stejného zdroje pravdy.“ |
+| „Neopakovat problém s onboardingem.“ | „U nové onboardingové otázky ověřit, že je nutná pro první hodnotu, ne jen pohodlná pro tým.“ |
+
+Historie patří do zavíracího review nebo interního rozhodovacího logu. Aktivní pravidlo má nést jen spouštěč, otázku, hranici a místo použití.
+
+### Privacy kontrola duplicity
+
+Duplicitní pravidla nejsou jen procesní problém. Umí vytvářet i zbytečnou datovou stopu. Jedno pravidlo žádá ruční kontrolu support dotazů, druhé přidá analytický event, třetí chce export z CRM a čtvrté navrhne dashboard. Všechna míří na stejnou nejistotu, ale dohromady z ní vyrobí malý dohledový systém.
+
+Před potvrzením pravidla zkontroluj:
+
+- Nesbírá nové pravidlo data, která už sbírá jiné pravidlo?
+- Nevyžaduje kontrola export osobních detailů, když stačí agregovaný nebo ruční signál?
+- Nezakládá druhý report pro stejné rozhodnutí?
+- Není privacy hranice v jednom pravidle přísnější než v druhém?
+- Dá se staré pravidlo zúžit, když nové pravidlo lépe popisuje realitu?
+
+Privacy-first cíl není mít co nejvíc pojistek. Cíl je mít jednu funkční pojistku na správném místě.
+
+### Karta kontroly duplicity pravidla
+
+Použij krátkou kartu ještě před tím, než pravidlo vložíš do šablony:
+
+| Pole | Zápis |
+| --- | --- |
+| Nové poučení | Jaká lekce vznikla z uzavřené opravy. |
+| Navržený spouštěč | Kdy by se pravidlo mělo použít. |
+| Hledaná místa | Které šablony, checklisty nebo dokumenty byly zkontrolované. |
+| Podobná pravidla | Název a místo existujících pravidel, pokud existují. |
+| Verdikt | založit, připojit, zpřesnit, sloučit nebo nezakládat |
+| Cílové místo pravdy | Jedno místo, kde po rozhodnutí pravidlo žije. |
+| Úklid | Co se odstraní, archivuje nebo odkáže. |
+| Privacy hranice | Co se kvůli pravidlu nesmí nově měřit, exportovat ani sdílet. |
+| První ověření | Kdy se pravidlo poprvé použije nebo zkontroluje. |
+
+Karta má být malá. Pokud se z ní stane dvoustránkový audit pravidel, problém není karta. Problém je, že tým už pravděpodobně potřebuje zjednodušit celý pravidlový systém.
+
+### Příklad: Exportní pravidlo už existuje
+
+Situace: po opravě exportní dokumentace vznikne návrh pravidla:
+
+„Při každé změně exportu musí být zkontrolováno, že support zná přesný rozsah exportu.“
+
+Rychlá kontrola najde starší pravidlo v produktové šabloně:
+
+„U každé datové akce ověřit rozsah dat, výjimky a navazující retenci před releasem.“
+
+Rozhodnutí:
+
+| Pole | Zápis |
+| --- | --- |
+| Verdikt | Připojit ke starému pravidlu. |
+| Proč | Starší pravidlo už chrání stejný pracovní okamžik. Nová lekce jen ukazuje, že support makro je navazující nosič pravdy. |
+| Úprava | Do příkladu u pravidla přidat „u exportu zkontrolovat i support makro a veřejný návod“. |
+| Úklid | Nezakládat samostatné support pravidlo. Zrušit draft nové checklist položky. |
+| Privacy hranice | Nezavádět nový report support konverzací; stačí ruční kontrola prvních několika odpovědí podle už existujícího postupu. |
+
+Výsledek je lepší než nové pravidlo: tým posílí existující místo pravdy, nezaloží druhou kontrolu a nezvětší datovou stopu.
+
+### Checklist: Kontrola nového pravidla proti existujícím pravidlům
+
+- [ ] Nové pravidlo má jasný spouštěč, rozhodnutí a privacy hranici.
+- [ ] Hledal jsem podle práce a rizika, ne jen podle názvu pravidla.
+- [ ] Zkontroloval jsem nejvýše tři hlavní místa, kde pravidla skutečně žijí.
+- [ ] Našel jsem podobná pravidla nebo jsem zapsal, kde jsem hledal.
+- [ ] Rozhodl jsem jedním z verdiktů: založit, připojit, zpřesnit, sloučit nebo nezakládat.
+- [ ] Pokud pravidlo vzniklo, má jedno cílové místo pravdy.
+- [ ] Pokud pravidlo nevzniklo, je jasné proč.
+- [ ] Uklidil jsem duplicitní draft, starou větu nebo zavádějící odkaz.
+- [ ] Kvůli pravidlu nevznikl nový export osobních dat, individuální tracking ani druhý report pro stejné rozhodnutí.
+- [ ] Vím, kdy se pravidlo poprvé použije nebo kdy se verdikt zkontroluje.
+
+### Mini úkol
+
+Vyber jedno nové poučení z poslední opravy a před založením pravidla udělej desetiminutovou kontrolu duplicity. Vyplň kartu: nové poučení, navržený spouštěč, hledaná místa, podobná pravidla, verdikt, cílové místo pravdy, úklid, privacy hranice a první ověření. Výstup zakonči větou: „Poučení ___ nezakládá duplicitní pravidlo; verdikt je ___, cílové místo je ___, uklidíme ___ a kvůli tomu nesbíráme ___.“
+
 ## Zdroje
 
 - IETF RFC 9110: HTTP Semantics - význam HTTP přesměrování a stavů včetně `410 Gone` pro zdroje, které už nejsou dostupné: https://www.rfc-editor.org/rfc/rfc9110.html
@@ -67983,6 +68131,8 @@ Vezmi jednu uzavřenou produktovou opravu z posledního měsíce. Za třicet min
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-30: Doplněna příloha o kontrole nového produktového pravidla proti existujícím pravidlům bez duplicitní smyčky: porovnání spouštěče, rozhodnutí a privacy hranice, rychlé prohledání tří míst pravdy, pět verdiktů pro založení, připojení, zpřesnění, sloučení nebo nezaložení pravidla, karta kontroly duplicity, příklad exportního pravidla, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro duplicitní pravidla. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-30: Doplněna příloha o převodu poučení z uzavřené produktové opravy do produktového pravidla bez procesu navíc: práce s konkrétní uzavřenou opravou, přepis lekce do jedné použitelné věty, výběr jediného místa použití, ochrana privacy hranice, karta produktového pravidla, příklad exportní opravy převedené do review otázky, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
