@@ -68527,6 +68527,24 @@ Změnová karta:
 
 Zavírací věta: „Exportní pravidlo bylo zpřesněné z obecné kontroly na popis polí, výjimek a retence; starý checklist bod končí a další ověření proběhne na první běžné exportní změně bez reálných zákaznických dat.“
 
+### Zkontroluj, zda už pravidlo nemá starší dvojče
+
+Před tím, než upravené pravidlo prohlásíš za nové znění, projdi rychle tři místa: šablonu zadání, review checklist a dokumentaci k dané oblasti. Cílem není audit pravidel. Cílem je nevyrobit druhé pravidlo, které říká skoro totéž jinými slovy.
+
+Použij jednoduchý filtr:
+
+| Co najdeš | Co udělat |
+| --- | --- |
+| Stejný pracovní okamžik i stejné rozhodnutí | sloučit formulaci do jednoho cílového pravidla |
+| Stejné rozhodnutí, ale jiné místo práce | vybrat místo, kde rozhodnutí vzniká nejdřív |
+| Stejná hodnota, ale jiný praktický výstup | ponechat obě pravidla, ale doplnit jasné „kdy použít“ |
+| Staré pravidlo bez vlastníka a použití | archivovat ho nebo smazat se stručným důvodem |
+| Nové pravidlo jen opakuje privacy zásadu | přepsat ho na konkrétní otázku, nebo ho nezakládat |
+
+Do změnové karty přidej jednu větu: „Kontrola starších pravidel našla ___; cílová pravda je ___ a stará stopa ___.“ Tahle věta ušetří další iteraci, protože další člověk nebude muset znovu luštit, jestli pravidlo přibylo, nebo jen změnilo místo.
+
+> Codyho komentář: Duplicitní pravidla jsou nenápadná daň za dobré úmysly. Každé z nich vypadá rozumně samo o sobě, ale dohromady učí tým odškrtávat místo přemýšlet.
+
 ### Checklist: Úprava produktového pravidla po první kontrole
 
 - [ ] Vycházím z jednoho konkrétního nálezu z první kontroly.
@@ -68534,6 +68552,7 @@ Zavírací věta: „Exportní pravidlo bylo zpřesněné z obecné kontroly na 
 - [ ] Nové znění vede k akci v zadání, ne k obecnému souhlasu.
 - [ ] Pravidlo má jasnou privacy hranici pro data, exporty, logy, přístupy nebo měření.
 - [ ] Upravuje se jeden cílový nosič pravdy.
+- [ ] Před uložením jsem zkontroloval, zda pravidlo nemá starší dvojče v zadání, review checklistu nebo dokumentaci.
 - [ ] Starý nosič je smazaný, sloučený nebo označený jako archivní s datem úklidu.
 - [ ] Úprava nepřidává nový individuální tracking, screenshotovou povinnost ani kontrolní dashboard.
 - [ ] Existuje krátké kritérium „netýká se“, pokud by pravidlo jinak dopadalo moc široce.
@@ -68543,7 +68562,7 @@ Zavírací věta: „Exportní pravidlo bylo zpřesněné z obecné kontroly na 
 
 ### Mini úkol
 
-Vezmi poslední pravidlo, které po prvním použití nedostalo verdikt „ponechat“. Do dvaceti minut vyber jeden nález, urč měněnou vrstvu a napiš změnovou kartu: původní pravidlo, nález, nové znění, cílový nosič, úklid, privacy hranice, ověření a stop pravidlo. Pak uprav jen jedno cílové místo pravdy a výsledek zakonči větou: „Pravidlo ___ bylo upravené v ___, protože ___; stará stopa ___ končí a další ověření proběhne při ___.“
+Vezmi poslední pravidlo, které po prvním použití nedostalo verdikt „ponechat“. Do dvaceti minut vyber jeden nález, urč měněnou vrstvu a napiš změnovou kartu: původní pravidlo, nález, nové znění, cílový nosič, úklid, privacy hranice, ověření a stop pravidlo. Před uložením zkontroluj tři místa, kde může existovat starší dvojče pravidla: šablonu zadání, review checklist a dokumentaci k dané oblasti. Pak uprav jen jedno cílové místo pravdy a výsledek zakonči větou: „Pravidlo ___ bylo upravené v ___, protože ___; stará stopa ___ končí, kontrola dvojčete našla ___ a další ověření proběhne při ___.“
 
 ## Zdroje
 
@@ -68738,6 +68757,8 @@ Vezmi poslední pravidlo, které po prvním použití nedostalo verdikt „ponec
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-30: Rozšířena nejnovější příloha o úpravě produktového pravidla po první kontrole o kontrolu staršího dvojčete pravidla: rychlé prohledání šablony zadání, review checklistu a dokumentace, tabulka verdiktů pro sloučení, přesun, ponechání nebo archivaci duplicitní stopy, nová věta do změnové karty, doplněná checklist položka a upravený mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-30: Doplněna příloha o úpravě produktového pravidla po první kontrole bez nekonečného ladění: výběr jednoho nálezu z review, rozlišení formulace, místa použití a důkazu, přepis pravidla na akci v zadání, úprava jediného nosiče pravdy, ochrana před novým dohledem, změnová karta, exportní příklad, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
