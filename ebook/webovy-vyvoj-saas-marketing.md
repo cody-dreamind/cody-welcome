@@ -67045,6 +67045,139 @@ Tohle je nudná věta. Dobře. Nudné provozní věty drží produkt pohromadě 
 
 Vyber jednu produktovou opravu, která podle review po nasazení funguje. Za dvacet pět minut napiš provozní kartu: oprava, důvod, místo pravdy, vlastník, navazující místa, datová hranice, revizní trigger a stop pravidlo. Potom najdi jednu pilotní stopu, která vznikla jen kvůli ověření, a rozhodni, zda se smaže, archivuje, sloučí do běžného záznamu nebo zůstane s jasným účelem. Nakonec napiš předávací větu ve tvaru „Od teď se ___ řídí podle ___, vlastníkem je ___, revize nastane při ___ a mimořádné kontroly ___ končí ___.“
 
+## Příloha: Měsíční kontrola produktové opravy po běžném provozu bez návratu problému
+
+Produktová oprava, která přešla do běžného provozu, si po měsíci zaslouží jednu lehkou kontrolu. Ne proto, aby se z ní stal nový proces. Spíš proto, aby tým ověřil dvě věci: původní nejistota se nevrátila a kolem opravy nevznikl nový nános měření, šablon, výjimek nebo ručních zkratek.
+
+Měsíční kontrola není pokračování pilotu. Je to první pohled na opravu v normálním počasí: po několika skutečných zákaznických situacích, běžných support odpovědích, jednom nebo dvou releasech a prvních malých úpravách dokumentace. Pokud oprava obstála, mimořádná pozornost končí. Pokud ne, otevře se menší karta s jasným důvodem.
+
+> Codyho komentář: Měsíc po opravě se neptej „kolik dat ještě můžeme nasbírat“. Ptej se „je tahle oprava pořád nejmenší rozumná věc, která řeší původní problém?“. To je rozdíl mezi produktem a amatérskou meteorologií v dashboardu.
+
+### Začni provozní kartou opravy
+
+Neotevírej analytiku jako první. Otevři provozní kartu, kterou jsi napsal při převodu opravy do běžného režimu. Kontrola má být proti slibu, ne proti náladě týmu.
+
+Z karty si vytáhni:
+
+| Pole z provozní karty | Otázka po měsíci |
+| --- | --- |
+| Důvod opravy | Snížila se původní nejistota, nebo se jen přesunula jinam? |
+| Místo pravdy | Řídí se podle něj UI, dokumentace, support a sales texty? |
+| Datová hranice | Zůstala oprava uvnitř slíbeného minima dat? |
+| Revizní trigger | Nastala událost, která měla kartu znovu otevřít? |
+| Stop pravidlo | Je čas kartu zúžit, sloučit, archivovat nebo nechat být? |
+
+Krátká vstupní věta:
+
+„Po měsíci kontrolujeme opravu ___ proti slibu ___; neotevíráme nový pilot, jen ověřujeme návrat problému, datovou stopu a provozní nános.“
+
+Když tuhle větu neumíš napsat, pravděpodobně kontroluješ moc široké téma. Vrať se k jedné opravě.
+
+### Použij malé signály bez nového sledování
+
+Po měsíci už většinou nepotřebuješ nový event, session recording ani detailní export konverzací. Stačí malé signály, které tým stejně má v běžné práci.
+
+| Signál | Jak ho číst privacy-first |
+| --- | --- |
+| Typy support dotazů | Počítej kategorie dotazů, ne jednotlivé lidi ani celé konverzace. |
+| Sales nebo onboarding nejistoty | Zapiš opakované otázky jako pracovní situace, ne jako profil zákazníka. |
+| Produktové chyby a ruční zásahy | Sleduj počet a příčinu zásahů, ne osobní historii uživatele. |
+| Interní výjimky | Zaznamenej, proč výjimka vznikla a zda ukazuje na pravidlo, které se láme. |
+| Dokumentační úpravy | Hledej místa, kde tým musel znovu vysvětlovat stejnou věc. |
+
+Dobré měsíční review se vejde do jedné obrazovky. Pokud musíš kvůli kontrole zakládat další dashboard, nejdřív napiš, jaké rozhodnutí bez něj nejde udělat. Když žádné takové rozhodnutí nemáš, dashboard nepatří do kontroly.
+
+### Hledej návrat původního problému
+
+Původní problém se často nevrací stejnou větou. Uživatelé se neptají „vrátil se nám problém z ticketu 184?“. Ptají se jinak, obcházejí tok, žádají ruční výjimku nebo začnou používat starý dokument.
+
+Typické návraty:
+
+| Návrat | Co to pravděpodobně znamená |
+| --- | --- |
+| Lidé pořád píšou stejný dotaz jinými slovy. | Oprava nevysvětluje rozhodnutí v okamžiku, kdy ho člověk potřebuje. |
+| Support používá ruční dovysvětlení mimo šablonu. | Šablona nebo dokumentace je moc obecná, nebo UI pořád mlčí. |
+| Sales slibuje výjimku, aby obešel nejasnost. | Obchodní slib není sladěný s produktem nebo pricingem. |
+| Tým přidal interní checklist jen pro tuto opravu. | Oprava možná přesunula problém do provozu místo do produktu. |
+| Objevil se nový event „pro jistotu“. | Datová hranice opravy se začíná rozpouštět. |
+
+Návrat problému není selhání týmu. Je to informace, že oprava řešila jen jednu vrstvu. Selhání by bylo nechat návrat žít jako tichou ruční práci.
+
+### Zkontroluj procesní nános
+
+I funkční oprava může po měsíci bobtnat. Někdo přidá extra report, někdo začne kopírovat dotazy do tabulky, někdo si nechá dočasný admin přístup, protože „ještě kdyby něco“. Tady privacy-first provoz vyhrává nudnou disciplínou: co nemá účel, končí.
+
+Projdi pět míst nánosu:
+
+| Místo | Kontrolní otázka |
+| --- | --- |
+| Měření | Zůstal nějaký pilotní event, dashboard nebo ruční export bez rozhodnutí? |
+| Šablony | Nevznikly dvě podobné odpovědi s drobným rozdílem? |
+| Dokumentace | Nemá produkt dvě místa pravdy pro stejnou hranici? |
+| Přístupy | Nepřežil dočasný přístup člověku nebo nástroji po ověřovacím okně? |
+| Meetingy a kontroly | Není kolem opravy schůzka, která jen opakuje běžný review rytmus? |
+
+Každý nános označ jedním verdiktem: ponechat s účelem, sloučit, zúžit, archivovat nebo smazat. Bez verdiktu zůstane nános v provozu jako malý přilepený proces. A přilepený proces je odborný termín z oboru „proč máme dvanáct tabulek a žádnou jistotu“.
+
+### Napiš měsíční kontrolní kartu
+
+Karta má být krátká a použitelná i za tři měsíce. Neopisuj historii opravy. Zapiš jen současný stav a rozhodnutí.
+
+| Pole | Zápis |
+| --- | --- |
+| Oprava | Název nebo krátká věta opravy. |
+| Původní problém | Jakou nejistotu měla snížit. |
+| Měsíční signály | Maximálně tři agregované nebo kvalitativní signály. |
+| Návrat problému | Ano/ne a kde se projevil. |
+| Datová stopa | Co zůstalo, co se zúží a co se smaže. |
+| Procesní nános | Jaké reporty, šablony, přístupy nebo kontroly přibyly. |
+| Verdikt | Ponechat, zjednodušit, opravit, vrátit, nebo otevřít novou kartu. |
+| Další krok | Jedno sloveso, vlastník a datum kontroly, pokud je potřeba. |
+
+Příklad:
+
+| Pole | Zápis |
+| --- | --- |
+| Oprava | Exportní obrazovka vysvětluje rozdíl mezi pracovními daty a retenčními záznamy. |
+| Původní problém | Administrátoři nevěděli, proč export neobsahuje všechny auditní logy. |
+| Měsíční signály | Dva support dotazy na export, žádný dotaz na „chybějící logy“, jeden interní návrh na detailnější text. |
+| Návrat problému | Ne v původní podobě; jen interní nejistota u právního wording review. |
+| Datová stopa | Pilotní tabulka dotazů se smaže, zůstane jen agregovaný záznam v kartě. |
+| Procesní nános | Duplicitní support snippet se sloučí do hlavního makra. |
+| Verdikt | Ponechat a zjednodušit. |
+| Další krok | Support do pátku sloučí snippet a produktový vlastník smaže pilotní tabulku po kontrole agregovaného zápisu. |
+
+### Rozhodni jedním z pěti verdiktů
+
+Měsíční kontrola musí skončit rozhodnutím. Jinak se z ní stane pravidelný pocitový rituál, což je drahý způsob, jak se tvářit zaměstnaně.
+
+| Verdikt | Kdy ho použít | Další krok |
+| --- | --- | --- |
+| Ponechat bez další práce | Původní problém se nevrací, datová stopa je čistá a nevznikl nános. | Zavři kartu a nech jen běžný revizní trigger. |
+| Zjednodušit | Oprava funguje, ale kolem ní zůstaly zbytečné reporty, šablony nebo kontroly. | Otevři malou redukční kartu. |
+| Opravit jednu vrstvu | Problém se vrací jen v UI, dokumentaci, supportu, pricingu nebo procesu. | Otevři úzkou produktovou nebo dokumentační kartu. |
+| Vrátit nebo nahradit | Oprava zhoršila práci, zvýšila riziko nebo vytvořila větší nejistotu. | Použij návratovou kartu a ukliď stopy. |
+| Otevřít novou kartu | Měsíční kontrola našla jiný problém než původní oprava. | Zapiš nový důvod a nepřepisuj starou kartu zpětně. |
+
+Verdikt „nechat sledovat další měsíc“ používej jen tehdy, když přesně víš, jaké rozhodnutí za měsíc uděláš. Jinak je to jen prodloužený pilot s lepším kloboukem.
+
+### Checklist: Měsíční kontrola produktové opravy
+
+- [ ] Kontrola vychází z provozní karty opravy, ne z obecného dojmu.
+- [ ] Napsal jsem vstupní větu, co kontrolujeme a co záměrně znovu neotevíráme.
+- [ ] Použil jsem malé signály z běžné práce bez nového sledování lidí.
+- [ ] Ověřil jsem, jestli se původní problém nevrátil jinou cestou.
+- [ ] Zkontroloval jsem měření, šablony, dokumentaci, přístupy a meetingy.
+- [ ] Každý procesní nános má verdikt ponechat, sloučit, zúžit, archivovat nebo smazat.
+- [ ] Datová stopa opravy odpovídá původní hranici.
+- [ ] Pilotní tabulky, exporty a eventy mají jasný konec nebo nový běžný účel.
+- [ ] Měsíční karta má jeden závěrečný verdikt.
+- [ ] Pokud vznikl další úkol, má jedno sloveso, vlastníka a datum kontroly.
+
+### Mini úkol
+
+Vyber jednu produktovou opravu, která je aspoň několik týdnů v běžném provozu. Za třicet minut napiš měsíční kontrolní kartu: oprava, původní problém, tři malé signály, návrat problému, datová stopa, procesní nános, verdikt a další krok. Nepřidávej nový event ani dashboard. Pokud najdeš nános, vyber jeden k okamžitému úklidu a napiš zavírací větu: „Po měsíční kontrole zůstává ___, končí ___ a další revize nastane jen při ___.“
+
 ## Zdroje
 
 - IETF RFC 9110: HTTP Semantics - význam HTTP přesměrování a stavů včetně `410 Gone` pro zdroje, které už nejsou dostupné: https://www.rfc-editor.org/rfc/rfc9110.html
@@ -67238,6 +67371,8 @@ Vyber jednu produktovou opravu, která podle review po nasazení funguje. Za dva
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-30: Doplněna příloha o měsíční kontrole produktové opravy po běžném provozu bez návratu problému: kontrola podle provozní karty, malé signály bez nového sledování, návrat původního problému jinou cestou, procesní nános v měření, šablonách, dokumentaci, přístupech a meetingu, měsíční kontrolní karta, pět verdiktů, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-29: Doplněna příloha o převodu ověřené produktové opravy do běžného provozu bez nového procesu: vstupní zavírací verdikt, volba jednoho místa pravdy, převod mimořádného sledování na běžný revizní trigger, provozní karta opravy, úklid pilotních a podpůrných stop, předávací věta, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
