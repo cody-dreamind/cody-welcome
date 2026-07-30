@@ -67212,6 +67212,52 @@ Příklad předání:
 
 Takové předání drží kontinuitu: měsíční kontrola skončila, redukce začala a původní oprava se nerozmazala do dalšího kola všeobecné údržby. Produkt tím získá lehčí provoz a tým nezaloží nový dohled jen proto, že starý dohled vypíná. To by byl pěkný procesní akrobatický výkon, ale pořád špatný nápad.
 
+### Když verdikt zní opravit jednu vrstvu, drž hranici řezu
+
+Verdikt „opravit jednu vrstvu“ je užitečný právě proto, že chrání původní opravu před zbytečným přepsáním. Měsíční kontrola může ukázat, že hodnota změny zůstává, ale jedna vrstva ji kazí: text v UI, dokumentace, support šablona, pricingový slib, onboardingový krok nebo interní provozní postup.
+
+Nejdřív pojmenuj vrstvu, ne řešení. Pokud napíšeš „přidat další vysvětlení do každé obrazovky“, už jsi přeskočil rozhodnutí. Lepší věta zní:
+
+„Původní oprava ___ funguje, ale problém se vrací ve vrstvě ___, protože člověk v okamžiku ___ nevidí/nechápe/nedostane ___.“
+
+Příklad:
+
+„Původní oprava exportního stavu funguje, ale problém se vrací ve vrstvě support šablony, protože zákazník po odmítnutí úplného exportu nedostane jasné vysvětlení rozdílu mezi pracovními daty a retenčním záznamem.“
+
+Potom zúžuj podle jedné tabulky:
+
+| Vrstva | Typická oprava | Co neotevírat znovu |
+| --- | --- | --- |
+| UI text | Jedna věta v místě rozhodnutí, prázdný stav nebo jasnější název akce. | Celý flow, pokud lidé narážejí jen na jednu nejasnou větu. |
+| Dokumentace | Jeden odstavec, příklad nebo odkaz na aktuální místo pravdy. | Nový dokumentační strom kvůli jedné opakované otázce. |
+| Support šablona | Přepis odpovědi podle rozhodnutí zákazníka a jasné hranice dat. | Export celých konverzací nebo plošné hodnocení agentů. |
+| Pricing nebo sales slib | Zpřesnění limitu, plánu, výjimky nebo veřejného závazku. | Kompletní změnu cen, pokud selhal jen popis hranice. |
+| Provozní postup | Jeden krok runbooku, vlastník kontroly nebo zavírací věta. | Nový meetingový rytmus bez jasného rozhodnutí. |
+
+Úzká karta opravy jedné vrstvy:
+
+| Pole | Zápis |
+| --- | --- |
+| Původní oprava | Co zůstává platné a nemá se přepisovat. |
+| Selhávající vrstva | UI, dokumentace, support, pricing, onboarding nebo provoz. |
+| Moment tření | Kdy přesně se člověk nebo tým znovu zasekne. |
+| Malá změna | Jedno sloveso a jedno místo, kde změna proběhne. |
+| Datová hranice | Jak změnu ověříme bez nového sledování lidí. |
+| Stop pravidlo | Kdy kartu zavřeme, sloučíme do běžné dokumentace nebo vrátíme. |
+
+Příklad:
+
+| Pole | Zápis |
+| --- | --- |
+| Původní oprava | Exportní obrazovka rozlišuje pracovní data a retenční záznamy. |
+| Selhávající vrstva | Support šablona. |
+| Moment tření | Zákazník po žádosti o úplný export dostane příliš právnickou odpověď. |
+| Malá změna | Přepsat hlavní support makro na tři věty: co export obsahuje, co neobsahuje a kde je veřejné vysvětlení retence. |
+| Datová hranice | Ověřit na dalších pěti odpovědích jen kvalitu textu, ne profil zákazníka ani celou historii účtu. |
+| Stop pravidlo | Po pěti použitích rozhodnout ponechat, zkrátit nebo vrátit; mimořádný vzorek smazat. |
+
+Když jedna vrstva potřebuje opravu, nepoužívej ji jako záminku k druhé produktové expedici. Oprav vrstvu, která prokazatelně selhává, a ostatní nech běžet. Privacy-first provoz je i schopnost nedotýkat se dat, procesů a obrazovek, které problém nedělají.
+
 ### Checklist: Měsíční kontrola produktové opravy
 
 - [ ] Kontrola vychází z provozní karty opravy, ne z obecného dojmu.
@@ -67226,10 +67272,11 @@ Takové předání drží kontinuitu: měsíční kontrola skončila, redukce za
 - [ ] Verdikt je předaný do správné navazující karty nebo zavírací věty.
 - [ ] Pokud verdikt zní zjednodušit, do redukční karty jsem nepřenesl víc dat, než je potřeba pro úklid nánosu.
 - [ ] Pokud vznikl další úkol, má jedno sloveso, vlastníka a datum kontroly.
+- [ ] Pokud verdikt zní opravit jednu vrstvu, pojmenoval jsem vrstvu, moment tření a jednu malou změnu bez přepsání celé opravy.
 
 ### Mini úkol
 
-Vyber jednu produktovou opravu, která je aspoň několik týdnů v běžném provozu. Za třicet minut napiš měsíční kontrolní kartu: oprava, původní problém, tři malé signály, návrat problému, datová stopa, procesní nános, verdikt a další krok. Nepřidávej nový event ani dashboard. Pokud najdeš nános, vyber jeden k okamžitému úklidu a napiš předávací větu: „Měsíční kontrola opravy ___ skončila verdiktem ___; další nosič rozhodnutí je ___, vlastníkem je ___ a staré mimořádné sledování ___.“ Pokud je verdikt „zjednodušit“, založ redukční kartu jen ze čtyř polí: co zůstává, co se uklízí, jaké je riziko úklidu a jaký minimální signál nahradí mimořádný dohled.
+Vyber jednu produktovou opravu, která je aspoň několik týdnů v běžném provozu. Za třicet minut napiš měsíční kontrolní kartu: oprava, původní problém, tři malé signály, návrat problému, datová stopa, procesní nános, verdikt a další krok. Nepřidávej nový event ani dashboard. Pokud najdeš nános, vyber jeden k okamžitému úklidu a napiš předávací větu: „Měsíční kontrola opravy ___ skončila verdiktem ___; další nosič rozhodnutí je ___, vlastníkem je ___ a staré mimořádné sledování ___.“ Pokud je verdikt „zjednodušit“, založ redukční kartu jen ze čtyř polí: co zůstává, co se uklízí, jaké je riziko úklidu a jaký minimální signál nahradí mimořádný dohled. Pokud je verdikt „opravit jednu vrstvu“, založ úzkou kartu: původní oprava, selhávající vrstva, moment tření, malá změna, datová hranice a stop pravidlo.
 
 ## Zdroje
 
@@ -67424,6 +67471,8 @@ Vyber jednu produktovou opravu, která je aspoň několik týdnů v běžném pr
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-30: Zpřesněna nejnovější příloha o měsíční kontrole produktové opravy o praktický postup pro verdikt „opravit jednu vrstvu“: pojmenování selhávající vrstvy, momentu tření, malé změny, datové hranice a stop pravidla bez přepisování celé původní opravy. Doplněna tabulka vrstev, úzká karta opravy, příklad support šablony po exportním tření, checklist položka a rozšířený mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-30: Zpřesněna aktuální příloha o měsíční kontrole produktové opravy o praktické předání verdiktu „zjednodušit“ do redukční karty: zachování funkční hodnoty, výběr konkrétního procesního nánosu, pojmenování rizika úklidu a nahrazení mimořádného dohledu minimálním signálem z běžné práce. Doplněna tabulka předání, příklad exportního stavu, checklist položka a upravený mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
