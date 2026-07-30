@@ -68314,6 +68314,46 @@ Po prvním použití nepiš „budeme sledovat“. To je jen měkké odložení 
 
 Verdikt musí říct, kdo udělá další krok a kde se změní nosič pravdy. Bez toho je to jen pocit s razítkem.
 
+### Předej verdikt do jedné navazující karty
+
+První review pravidla se nesmí zaseknout ve větě „někdo to upraví“. Jakmile vybereš verdikt, napiš jednu navazující kartu nebo zavírací větu. Ne pět úkolů, ne nový seznam kontrol. Jednu kartu, která zachová smysl pravidla a zároveň uklidí stopu po ověřování.
+
+Použij tuhle převodní tabulku:
+
+| Verdikt | Kam ho předat | Co musí karta obsahovat |
+| --- | --- | --- |
+| Ponechat | zavírací věta prvního review | proč pravidlo zůstává, kde žije a kdy se znovu otevře |
+| Zpřesnit | změnová karta pravidla | původní otázka, nález, nové znění, datová hranice a stará stopa k úklidu |
+| Přesunout | předávací karta nosiče pravdy | odkud otázka mizí, kam jde a kdo upraví cílovou šablonu |
+| Sloučit | úklidová karta duplicity | cílové pravidlo, zachované poučení, smazaná duplicita a kontrola odkazů |
+| Smazat | zavírací záznam pravidla | důvod konce, co se odstraní a co se nemá později vracet jako stará pravda |
+
+Karta má vždy obsahovat i privacy hranici. U pravidel je lákavé přidávat kontrolní důkazy: screenshoty, exporty, kopie vláken, nové eventy. Jenže pokud pravidlo původně vzniklo kvůli menší datové stopě, jeho oprava nesmí vyrobit nový datový šuplík. Ověření má vycházet z běžné práce: z upraveného zadání, testovacího scénáře, veřejného textu, anonymizovaného příkladu nebo krátkého rozhodovacího záznamu.
+
+Praktický tvar navazující karty:
+
+| Pole | Otázka |
+| --- | --- |
+| Verdikt | Co přesně padlo po prvním použití? |
+| Důvod | Jaký konkrétní nález verdikt vyvolal? |
+| Cílové místo | Kde se pravidlo změní nebo zavře? |
+| Úklid | Která stará otázka, šablona, poznámka nebo kontrolní stopa zmizí? |
+| Privacy hranice | Jak zabráníme novému sběru, exportu, logu nebo přístupu? |
+| Ověření | Při jaké další běžné práci poznáme, že verdikt byl provedený? |
+
+Příklad předání po verdiktu „zpřesnit“:
+
+| Pole | Zápis |
+| --- | --- |
+| Verdikt | Zpřesnit exportní otázku. |
+| Důvod | Původní otázka vedla k odpovědi „ano“, ale nezměnila rozsah exportu ani text pro uživatele. |
+| Cílové místo | Produktová karta pro exportní změny. |
+| Úklid | Smazat obecný checklist bod „zkontrolovat export“. |
+| Privacy hranice | Důkazem bude návrh dialogu a seed CSV, ne export reálných dat. |
+| Ověření | Při nejbližší exportní změně ověřit, zda otázka doplnila rozsah polí, výjimky nebo retenci souboru. |
+
+Tohle je most mezi review a skutečnou změnou. Bez něj se verdikty mění na pěkně znějící závěry, které se po týdnu tváří, že nikdy neexistovaly. Dokument, který nemá další krok, se umí ztratit i bez technické chyby.
+
 ### Příklad: Exportní pravidlo po prvním použití
 
 Situace: tým dříve převedl pravidlo „export musí před akcí říct rozsah, výjimky a konec životnosti souboru“ do produktové karty jako otázku: „Popisuje UI před akcí rozsah dat, výjimky a retenci dočasného souboru?“
@@ -68343,12 +68383,13 @@ To je ideální tvar: pravidlo pomohlo před implementací, nevytvořilo nový d
 - [ ] Pokud důkaz obsahoval citlivější informace, je jasné proč, kde leží a kdy skončí.
 - [ ] Starý duplicitní nosič byl smazaný, sloučený nebo vědomě ponechaný s důvodem.
 - [ ] Verdikt je jeden z pěti: ponechat, zpřesnit, přesunout, sloučit nebo smazat.
+- [ ] Verdikt je předaný do jedné navazující karty nebo zavírací věty.
 - [ ] Další krok má vlastníka a jedno cílové místo pravdy.
 - [ ] Review končí zavírací větou, ne neurčitým „budeme sledovat“.
 
 ### Mini úkol
 
-Vezmi poslední pravidlo, které se dostalo do zadání, a ověř jeho první reálné použití. Do patnácti minut vyplň kartu: pravidlo, první použití, odpověď v zadání, co se změnilo, minimální důkaz, privacy dopad, starý nosič, verdikt a další krok. Výsledek zakonči větou: „Pravidlo ___ po prvním použití ___, protože ___; další krok je ___ a žádný nový dohled kvůli tomu nevzniká.“
+Vezmi poslední pravidlo, které se dostalo do zadání, a ověř jeho první reálné použití. Do patnácti minut vyplň kartu: pravidlo, první použití, odpověď v zadání, co se změnilo, minimální důkaz, privacy dopad, starý nosič, verdikt a další krok. Pokud verdikt není „ponechat“, dopiš jednu navazující kartu s cílovým místem, úklidem a privacy hranicí. Výsledek zakonči větou: „Pravidlo ___ po prvním použití ___, protože ___; další krok je ___ a žádný nový dohled kvůli tomu nevzniká.“
 
 ## Zdroje
 
@@ -68543,6 +68584,8 @@ Vezmi poslední pravidlo, které se dostalo do zadání, a ověř jeho první re
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-30: Rozšířena příloha o ověření produktového pravidla po prvním použití o předání verdiktu do jedné navazující karty nebo zavírací věty: převodní tabulka pro verdikty ponechat, zpřesnit, přesunout, sloučit a smazat, praktická karta s cílovým místem, úklidem, privacy hranicí a ověřením, exportní příklad, doplněná checklist položka a upravený mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-30: Doplněna příloha o ověření produktového pravidla po prvním použití bez falešné jistoty: návrat k zadávací kartě, kontrola změny zadání místo poslušného checkboxu, ověření minimálního důkazu bez nového sledování, karta prvního použití, pět verdiktů, exportní příklad, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
