@@ -67623,6 +67623,173 @@ Tohle je dost. Není potřeba zakládat nový měsíční meeting „export clar
 
 Vezmi jednu redukční kartu, která už uklidila pilotní nános. Za dvacet minut napiš zavírací větu, vyber jedno běžné místo pravdy a projdi pět věcí: produktový text, support odpověď, dokumentaci, datové stopy a dočasné přístupy. Pak zruš jeden mimořádný rytmus, který po opravě přežil jen ze zvyku. Výsledek zapiš ve tvaru: „Zjednodušená oprava ___ je uzavřená: běžný stav ___, nános ___ skončil, zdroj pravdy ___, návrat problému ___ a vlastník ___.“
 
+## Příloha: Poučení z uzavřené opravy jako produktové pravidlo bez procesu navíc
+
+Uzavřená produktová oprava má ještě jeden užitečný výstup: krátké poučení pro příští práci. Ne proto, aby tým začal vyplňovat další formulář, ale aby se stejná chyba nemusela znovu pracně objevovat v jiném rohu produktu.
+
+Produktové pravidlo je jedna praktická věta, která pomáhá při zadávání, review, návrhu obrazovky, support odpovědi nebo dokumentaci. Má být tak malé, aby se dalo použít při běžné práci bez školení a bez nového kontrolního výboru. Pokud pravidlo potřebuje vlastní meeting, pravděpodobně není pravidlo, ale nehotový proces v převleku.
+
+> Codyho komentář: Dobré pravidlo má zlepšit příští rozhodnutí. Špatné pravidlo jen připomíná, že se někdy něco pokazilo. To druhé je muzeum bolesti. Hezké vitríny, mizerná produktivita.
+
+### Začni uzavřenou opravou, ne dojmem
+
+Pravidlo nevyráběj z pocitu „měli bychom být opatrnější“. To je pravda skoro vždycky a užitečné skoro nikdy. Vrať se k zavíracímu review a hledej konkrétní důvod, proč oprava vůbec vznikla.
+
+Vstupní otázky:
+
+- Co uživatel, zákazník nebo tým nechápal před opravou?
+- Která vrstva selhala: produktový text, chování funkce, pricing, dokumentace, support šablona, přístupové pravidlo nebo měření?
+- Jaký nános vznikl během opravy a co jsme museli uklidit?
+- Který jednoduchý návyk by pravděpodobně zabránil opakování?
+- Kde se ten návyk přirozeně použije příště?
+
+Poučení musí vyrůst z konkrétního případu. Jinak skončí jako věta „komunikovat jasněji“, což zní moudře, ale při review pull requestu s tím neuděláš vůbec nic.
+
+### Přepiš lekci na jednu použitelnou větu
+
+Produktové pravidlo napiš tak, aby se podle něj dalo rozhodnout v aktuální práci. Pomáhá tvar:
+
+„Když měníme ___, vždy před releasem ověříme ___, protože ___.“
+
+Nebo:
+
+„U každé funkce, která ___, musí být viditelné ___ a nesmí se kvůli tomu sbírat ___.“
+
+Silné pravidlo má tři části:
+
+| Část | Otázka | Příklad |
+| --- | --- | --- |
+| Spouštěč | Kdy se pravidlo použije? | Když měníme export, import nebo mazání dat. |
+| Kontrola | Co se má ověřit? | Uživatel vidí rozsah dat, výjimky a navazující retenci ještě před akcí. |
+| Hranice | Co pravidlo nedovoluje rozšířit? | Kvůli ověření nepřidáváme session recording ani detailní sledování každého kliknutí. |
+
+Pravidlo nesmí být delší než běžná akceptační podmínka. Když potřebuje odstavec výkladu, vytvoř raději krátký návod a z pravidla nech jen review otázku.
+
+### Vyber místo, kde pravidlo bude pracovat
+
+Poučení se snadno ztratí, pokud žije jen v závěru review. Přesuň ho tam, kde vznikají podobná rozhodnutí.
+
+Typická místa:
+
+| Místo | Kdy se hodí | Jak má pravidlo vypadat |
+| --- | --- | --- |
+| Šablona zadání | Opakuje se chyba v nových funkcích. | Jedna otázka v části akceptačních kritérií. |
+| Design nebo UX review checklist | Problém byl ve vysvětlení stavu, akce nebo dopadu. | Krátká kontrolní věta před předáním do vývoje. |
+| Pull request template | Problém byl v implementačním dopadu, logování, datech nebo přístupech. | Checkbox s konkrétní hranicí dat. |
+| Support knowledge base | Problém se projevil hlavně v odpovědích zákazníkům. | Jedna standardní formulace a odkaz na zdroj pravdy. |
+| Runbook | Problém byl provozní nebo incidentní. | Jeden krok v běžném postupu, ne nový samostatný runbook. |
+| Pricing nebo obchodní kontrola | Problém byl ve veřejném slibu nebo limitech plánu. | Kontrola, že slib odpovídá skutečnému entitlementu. |
+
+Vyber jedno primární místo. Nekopíruj stejnou větu do pěti šablon, pokud k tomu nemáš důvod. Kopie pravidel stárnou potichu a za půl roku tým řeší, která verze je vlastně pravda. Skvělé, objevili jsme distribuovaný systém pro nedůvěru.
+
+### Chraň privacy hranici pravidla
+
+Poučení z opravy často svádí k tomu, že tým chce „pro jistotu“ měřit víc. Pravidlo ale nemá zavádět nový dohled. Má zlepšit návrh práce předem.
+
+Před uložením pravidla si napiš:
+
+- Jaké rozhodnutí má pravidlo zlepšit?
+- Jaký minimální důkaz stačí při review?
+- Jaká data kvůli pravidlu výslovně nesbíráme?
+- Kdy pravidlo zkontrolujeme, zúžíme nebo zrušíme?
+
+Privacy-first verze pravidla vypadá například takto:
+
+„U každé změny exportu ověříme v review, že UI před akcí popisuje rozsah exportovaných dat a výjimky; dopad po releasu sledujeme jen přes běžné support štítky a ruční kontrolu opakovaných dotazů, ne přes individuální klikací stopu.“
+
+Tohle je pravidlo. Ne dashboard. Ne nový event na každé tlačítko. Ne další vrstva, která bude jednou sama potřebovat redukční kartu. Ano, i pravidla umí bobtnat. Jsou to vlastně malé procesní croissanty, jen bez másla a radosti.
+
+### Napiš kartu produktového pravidla
+
+Karta má být krátká. Cílem je zachovat důvod a hranice, ne opisovat historii celé opravy.
+
+| Pole | Co zapsat |
+| --- | --- |
+| Název pravidla | Krátká pracovní věta, podle které se dá hledat. |
+| Vzniklo z | Odkaz nebo název uzavřené opravy, ne celá kronika. |
+| Spouštěč | Situace, kdy se pravidlo použije. |
+| Review otázka | Jedna otázka, kterou tým položí při běžné práci. |
+| Privacy hranice | Co se kvůli pravidlu nesmí nově sbírat, exportovat nebo sdílet. |
+| Místo použití | Jedna šablona, checklist, runbook nebo dokumentace. |
+| Vlastník | Role, která hlídá přesnost pravidla. |
+| Revizní trigger | Kdy pravidlo znovu otevřít. |
+| Stop pravidlo | Kdy ho zrušit nebo sloučit s jiným pravidlem. |
+
+Příklad krátké karty:
+
+| Pole | Zápis |
+| --- | --- |
+| Název pravidla | Export musí před akcí říct rozsah a výjimky. |
+| Vzniklo z | Uzavřená oprava vysvětlení exportu po opakovaných dotazech zákazníků. |
+| Spouštěč | Každá změna exportu, importu, mazání nebo přenositelnosti dat. |
+| Review otázka | Vidí člověk před akcí, co dostane, co nedostane a co se stane po dokončení? |
+| Privacy hranice | Nepřidáváme individuální sledování kliků ani session recording exportní obrazovky. |
+| Místo použití | Produktová šablona zadání v části „Dopad na data“. |
+| Vlastník | Produktový vlastník exportu. |
+| Revizní trigger | Změna datového modelu exportu nebo tři opakované dotazy na rozsah exportu. |
+| Stop pravidlo | Pokud se pravidlo sloučí do obecnějšího pravidla pro datové akce, archivovat tuto samostatnou kartu. |
+
+### Přidej pravidlo bez byrokratického rozšíření
+
+Nasazení pravidla má být menší než původní oprava. Praktický postup:
+
+1. Vyber jednu šablonu nebo checklist.
+2. Přidej jednu otázku nebo checkbox.
+3. Odstraň starší duplicitní větu, pokud existuje.
+4. Napiš vlastníkovi, kde pravidlo žije a kdy se má revidovat.
+5. Po prvním použití pravidla udělej krátkou kontrolu: pomohlo rozhodnutí, nebo jen zpomalilo práci?
+
+Nedělej z první lekce nový „produktový governance proces“. Malé pravidlo má přežít tím, že je užitečné. Ne tím, že na něj někdo lepí termíny a barevné štítky.
+
+### Příklad: Exportní oprava se mění v review otázku
+
+Situace: tým uzavřel opravu exportní obrazovky. Původní problém byl v tom, že zákazníci čekali, že běžný export obsahuje i bezpečnostní logy, retenční historii a interní auditní stopy. Produkt to technicky nikdy nesliboval, ale text v UI byl příliš obecný.
+
+Zavírací review potvrdilo:
+
+| Zjištění | Dopad |
+| --- | --- |
+| Produktový text už jasně říká rozsah exportu. | Zákazník ví, co export obsahuje, ještě před akcí. |
+| Veřejný návod odpovídá UI. | Support nemusí vysvětlovat jinou pravdu než produkt. |
+| Dočasný dashboard byl vypnut. | Oprava nezůstala závislá na mimořádném sledování. |
+| Staré makro bylo sloučeno. | Sales a support neposílají rozdílné odpovědi. |
+
+Produktové pravidlo:
+
+„U každé datové akce, která slibuje export, import, smazání nebo přenos dat, musí review ověřit tři věci: rozsah dat, výjimky a konec životnosti navazujících kopií. Ověření se dělá čtením UI a dokumentace, ne sledováním individuálního chování lidí.“
+
+Kam ho dát:
+
+| Místo | Úprava |
+| --- | --- |
+| Produktová šablona zadání | Přidat otázku: „Popisuje UI před akcí rozsah dat, výjimky a navazující retenci?“ |
+| UX review checklist | Přidat kontrolu textu před destruktivní nebo exportní akcí. |
+| Support knowledge base | Odkázat na veřejný návod jako zdroj pravdy pro rozsah exportu. |
+
+Co nedělat:
+
+- Nezakládat nový exportní dashboard jen kvůli pravidlu.
+- Nekopírovat celé zavírací review do šablony zadání.
+- Nepřidávat povinný právní review krok pro každou drobnou textovou změnu.
+- Nechat pravidlo zrušitelné, pokud se později sloučí do obecnější kontroly datových akcí.
+
+### Checklist: Poučení z uzavřené opravy jako produktové pravidlo
+
+- [ ] Vycházím z konkrétní uzavřené opravy, ne z obecného pocitu.
+- [ ] Pravidlo má spouštěč, review otázku a privacy hranici.
+- [ ] Dá se použít při běžné práci bez nového meetingu.
+- [ ] Je uložené v jednom primárním místě pravdy.
+- [ ] Nekopíruje se do pěti šablon bez vlastníka.
+- [ ] Kvůli pravidlu nevzniká nové individuální sledování, export ani dashboard.
+- [ ] Pravidlo má vlastníka a revizní trigger.
+- [ ] Má stop pravidlo pro zrušení, zúžení nebo sloučení.
+- [ ] Po prvním použití ověřím, jestli pomohlo rozhodnutí.
+- [ ] Starší duplicitní pravidla, šablony nebo poznámky jsou uklizené.
+
+### Mini úkol
+
+Vezmi jednu uzavřenou produktovou opravu z posledního měsíce. Za třicet minut napiš kartu pravidla s těmito poli: název, vzniklo z, spouštěč, review otázka, privacy hranice, místo použití, vlastník, revizní trigger a stop pravidlo. Pak pravidlo vlož jen na jedno místo, kde se bude opravdu používat. Výsledek zakonči větou: „Poučení z opravy ___ se mění v pravidlo ___, používá se při ___, nesmí zavést ___ a zkontrolujeme ho při ___.“
+
 ## Zdroje
 
 - IETF RFC 9110: HTTP Semantics - význam HTTP přesměrování a stavů včetně `410 Gone` pro zdroje, které už nejsou dostupné: https://www.rfc-editor.org/rfc/rfc9110.html
@@ -67816,6 +67983,8 @@ Vezmi jednu redukční kartu, která už uklidila pilotní nános. Za dvacet min
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-30: Doplněna příloha o převodu poučení z uzavřené produktové opravy do produktového pravidla bez procesu navíc: práce s konkrétní uzavřenou opravou, přepis lekce do jedné použitelné věty, výběr jediného místa použití, ochrana privacy hranice, karta produktového pravidla, příklad exportní opravy převedené do review otázky, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-30: Doplněna příloha o zavíracím review po redukční kartě bez nového dohledu: zavírací věta, běžné místo pravdy, minimální důkaz rozhodnutí, ukončení mimořádného rytmu, sanity kontrola hodnoty po redukci, příklad exportní opravy, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
