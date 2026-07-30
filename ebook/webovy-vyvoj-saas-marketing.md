@@ -223,6 +223,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Uzavřít zjednodušenou produktovou opravu bez nového procesu | „uzavření zjednodušené opravy“, „redukovaná oprava hotovo“ nebo „stop pravidlo po zjednodušení“ | zavírací review, které potvrdí odstraněný nános, funkční minimální signál a konec mimořádných kontrol |
 | Přenést poučení z uzavřené opravy do produktových pravidel | „poučení z opravy“, „produktové pravidlo“ nebo „oprava naučila tým“ | jedna principová věta, která z uzavřené opravy zlepší budoucí zadávání, review, onboarding nebo dokumentaci bez nového procesu |
 | Zkontrolovat nové produktové pravidlo proti existujícím pravidlům | „duplicitní pravidlo“, „pravidlový registr“ nebo „pravidlo už existuje“ | krátké rozhodnutí, zda nové poučení založit, připojit ke starému pravidlu, zpřesnit existující otázku nebo nezakládat nic |
+| Předat verdikt kontroly pravidla do úklidu | „verdikt pravidla“, „úklid po kontrole duplicity“ nebo „kam s rozhodnutím“ | malý prováděcí záznam, který říká, kdo upraví cílové místo pravdy, co se smaže, co se archivuje a jak se ověří, že pravidlo nezačalo žít dvakrát |
 | Převést produktové pravidlo do zadání bez byrokracie | „pravidlo v zadání“, „review otázka“ nebo „produktové pravidlo v praxi“ | malá úprava šablony zadání, akceptačních kritérií nebo review checklistu, která pravidlo dostane do běžné práce bez nového procesu |
 | Ověřit produktové pravidlo po prvním použití | „kontrola pravidla“, „první použití pravidla“ nebo „pravidlo pomohlo“ | krátké review jedné reálné změny, které rozhodne, zda pravidlo ponechat, zúžit, přesunout, přepsat nebo zrušit |
 | Upravit produktové pravidlo po první kontrole | „úprava pravidla“, „pravidlo po kontrole“ nebo „pravidlo se ladí“ | malý změnový balík, který z verdiktu udělá přesnější otázku, lepší místo použití nebo uklizené zrušení bez další procesní vrstvy |
@@ -67938,6 +67939,133 @@ Výsledek je lepší než nové pravidlo: tým posílí existující místo prav
 
 Vyber jedno nové poučení z poslední opravy a před založením pravidla udělej desetiminutovou kontrolu duplicity. Vyplň kartu: nové poučení, navržený spouštěč, hledaná místa, podobná pravidla, verdikt, cílové místo pravdy, úklid, privacy hranice a první ověření. Výstup zakonči větou: „Poučení ___ nezakládá duplicitní pravidlo; verdikt je ___, cílové místo je ___, uklidíme ___ a kvůli tomu nesbíráme ___.“
 
+## Příloha: Předání verdiktu kontroly pravidla do úklidu bez druhého registru
+
+Kontrola duplicity pravidla je hotová až ve chvíli, kdy se její verdikt objeví v běžné práci. Nestačí napsat „připojit ke starému pravidlu“ nebo „nezaložit nic“ a odejít s pocitem dobře odvedené prevence. Bez malého předání se z verdiktu stane další poznámka, která existuje vedle pravidel, místo aby pravidla uklidila.
+
+Tahle chyba je častá hlavně u týmů, které se snaží být poctivé. Po kontrole založí tabulku pravidel, sloupec se stavem, sloupec s vlastníkem, sloupec s revizí a pak ještě další pravidlo, jak se má tabulka udržovat. Výsledek vypadá dospěle, ale práce se nezlepší. Člověk pořád neví, kterou větu má použít při příštím zadání.
+
+Předání verdiktu má být menší než samotné pravidlo. Je to krátký prováděcí krok: uprav jedno místo pravdy, ukliď jednu starou stopu a nastav jedno ověření.
+
+> Codyho komentář: Když po kontrole duplicity vznikne nový registr duplicity, proces právě vyhrál nad produktem. Gratuluju, máš víc evidence a stejně rozbitou práci.
+
+### Přepiš verdikt na práci, ne na stav
+
+Verdikt sám o sobě není dokončený úkol. Je to rozhodnutí, které musí někdo převést na konkrétní změnu. Proto ho nepředávej jako štítek, ale jako malý pracovní zápis.
+
+| Verdikt z kontroly | Slabé předání | Použitelné předání |
+| --- | --- | --- |
+| Připojit ke starému pravidlu | „Připojit k exportnímu pravidlu.“ | „V produktové šabloně u pravidla exportu doplnit příklad support makra; smazat draft samostatné checklist položky.“ |
+| Zpřesnit existující pravidlo | „Zpřesnit pravidlo.“ | „Přepsat otázku v review z obecného ,zkontrolovat data' na ,má export rozsah, výjimky a konec životnosti souboru?'“ |
+| Sloučit dvě pravidla | „Sloučit pravidla.“ | „Nechat větu z produktové šablony, převzít privacy hranici ze support checklistu a archivovat starý support bod.“ |
+| Nezakládat nic | „Nezakládat.“ | „Zapsat důvod do zavíracího review a smazat návrh nové otázky z draftu zadání.“ |
+
+Dobré předání má sloveso, místo a konec. „Upravit otázku v šabloně“ je práce. „Pravidlo zpřesněno“ je nálada s razítkem.
+
+### Urči jeden cílový nosič pravdy
+
+Po kontrole duplicity často existují tři lákavá místa: původní pravidlo, nový návrh a poznámka z kontroly. Aktivní má zůstat jen jedno místo, kde člověk pravidlo potká při práci.
+
+Vyber cílový nosič podle toho, kde se rozhodnutí opravdu dělá:
+
+| Kde se rozhodnutí děje | Cílový nosič pravdy | Co tam patří |
+| --- | --- | --- |
+| Při zadávání změny | produktová karta, issue šablona, brief | jedna review otázka nebo akceptační kritérium |
+| Při kontrole před releasem | release checklist, QA scénář, PR template | kontrolní věta s jasnou hranicí hotovo |
+| Při odpovědi zákazníkovi | support makro, help článek, trust odpověď | pracovní formulace a odkaz na aktuální produktovou pravdu |
+| Při provozním zásahu | runbook, incident checklist | rozhodovací krok, ne historický popis incidentu |
+
+Pokud pravidlo nepatří do žádného cílového nosiče, pravděpodobně nemá být aktivním pravidlem. Možná stačí archivní poznámka v review. To není selhání. To je zdravé omezení procesní skládky.
+
+### Uklid staré stopy ve stejném průchodu
+
+Nejhorší varianta je upravit cílové pravidlo a nechat starý návrh žít vedle něj. Po dvou měsících někdo najde starý draft, vezme ho vážně a vrátí duplicitu do práce.
+
+Každé předání musí obsahovat aspoň jeden úklidový krok:
+
+- smazat draft nové checklist položky,
+- přepsat starou otázku na odkaz na cílové pravidlo,
+- archivovat historickou lekci s důvodem, proč už není aktivní,
+- odstranit starý odkaz ze support makra,
+- zavřít backlog položku, která už nemá vlastní důvod,
+- zrušit dočasný report, který vznikl jen kvůli ověření pravidla.
+
+Úklid piš konkrétně. „Staré věci uklidit“ je pozvánka k tomu, aby staré věci zůstaly. Lepší je: „Smazat draft checklist položky v šabloně support review a v zavíracím review nechat jen větu s důvodem.“
+
+### Chraň předání před novým dohledem
+
+Předání verdiktu nemá dokazovat, že tým bude pravidlo navždy poslouchat. Má jen zajistit, že rozhodnutí nezůstane viset ve vzduchu. Proto k němu nepřidávej nový dashboard, ruční měsíční audit všech pravidel ani export historických odpovědí.
+
+Stačí malé ověření:
+
+| Co ověřit | Minimální signál |
+| --- | --- |
+| Cílové pravidlo je na správném místě | příští relevantní karta nebo review otázku opravdu obsahuje |
+| Stará duplicita už nepřekáží | starý draft, odkaz nebo checklist bod je pryč nebo jasně archivovaný |
+| Privacy hranice se nezvětšila | nevznikl nový export osobních dat, individuální tracking ani report pro stejné rozhodnutí |
+| Lidé vědí, kterou větu použít | při prvním použití nepadne otázka „podle kterého pravidla jedeme?“ |
+
+První ověření může proběhnout při nejbližší reálné změně. Pokud žádná taková změna měsíc nepřijde, neorganizuj kvůli tomu meeting. Zapiš, že pravidlo čeká na přirozené použití, a vrať se k němu při další práci.
+
+### Karta předání verdiktu pravidla
+
+Použij krátkou kartu, která se dá vyplnit za deset minut:
+
+| Pole | Zápis |
+| --- | --- |
+| Verdikt kontroly | založit, připojit, zpřesnit, sloučit nebo nezakládat |
+| Cílový nosič pravdy | Jedno místo, kde bude pravidlo nebo jeho náhrada žít. |
+| Konkrétní změna | Věta, otázka, příklad nebo odkaz, který se upraví. |
+| Úklid staré stopy | Draft, checklist, odkaz, report nebo poznámka, která skončí. |
+| Vlastník změny | Role nebo člověk odpovědný za úpravu nosiče pravdy. |
+| Privacy hranice | Co kvůli předání nesmí nově vzniknout. |
+| První ověření | Nejbližší reálná situace, kde se ukáže, že pravidlo žije jen jednou. |
+| Zavírací věta | Jedna věta, která uzavře kontrolu duplicity. |
+
+Karta nemá být registr pravidel. Je to lístek k provedení jednoho verdiktu. Po úklidu může zůstat jen v zavíracím review nebo rozhodovacím logu, pokud má hodnotu pro budoucí vysvětlení.
+
+### Příklad: Dvě exportní otázky po kontrole duplicity
+
+Situace: tým po opravě exportu navrhl nové pravidlo pro support:
+
+„Support musí před odpovědí zákazníkovi ověřit, jestli export obsahuje pracovní data, nebo i auditní stopu.“
+
+Kontrola duplicity našla starší produktové pravidlo:
+
+„U každé datové akce ověřit rozsah dat, výjimky a konec životnosti dočasného souboru před releasem.“
+
+Verdikt: připojit ke starému pravidlu a doplnit support příklad.
+
+Karta předání:
+
+| Pole | Zápis |
+| --- | --- |
+| Cílový nosič pravdy | Produktová šablona pro datové akce. |
+| Konkrétní změna | K existujícímu pravidlu přidat příklad: „u exportu zkontrolovat i support makro a veřejný návod“. |
+| Úklid staré stopy | Smazat draft samostatné support checklist položky. |
+| Vlastník změny | Product owner exportu. |
+| Privacy hranice | Nezavádět report support konverzací ani export zákaznických dotazů. |
+| První ověření | Příští změna exportu v produktové kartě. |
+| Zavírací věta | „Support poučení se připojuje k existujícímu exportnímu pravidlu; aktivní pravda je v produktové šabloně, draft support pravidla končí a kvůli tomu nesbíráme nové konverzační exporty.“ |
+
+Tým tak neztratil poučení ze supportu, ale ani nevytvořil druhou kontrolu pro stejný okamžik.
+
+### Checklist: Předání verdiktu kontroly pravidla
+
+- [ ] Verdikt je přepsaný na konkrétní práci se slovesem, místem a koncem.
+- [ ] Existuje jeden cílový nosič pravdy.
+- [ ] Je jasné, kdo upraví cílové místo.
+- [ ] Stará duplicitní stopa se smaže, archivuje nebo přepíše ve stejném průchodu.
+- [ ] Historie zůstává jen tam, kde vysvětluje rozhodnutí, ne v aktivním checklistu.
+- [ ] Kvůli předání nevzniká nový registr, dashboard ani plošný audit pravidel.
+- [ ] Privacy hranice říká, co se nesmí nově měřit, exportovat ani sdílet.
+- [ ] První ověření je navázané na reálnou práci, ne na nový meeting.
+- [ ] Zavírací věta říká, kde pravidlo žije a co končí.
+
+### Mini úkol
+
+Vezmi poslední kartu kontroly duplicity pravidla. Do deseti minut vyplň kartu předání: verdikt, cílový nosič pravdy, konkrétní změna, úklid staré stopy, vlastník, privacy hranice, první ověření a zavírací věta. Potom proveď nebo zadej jen jednu úpravu v cílovém místě pravdy a jednu úklidovou akci. Výstup zakonči větou: „Verdikt ___ je předaný do ___, stará stopa ___ končí a ověříme to při ___.“
+
 ## Zdroje
 
 - IETF RFC 9110: HTTP Semantics - význam HTTP přesměrování a stavů včetně `410 Gone` pro zdroje, které už nejsou dostupné: https://www.rfc-editor.org/rfc/rfc9110.html
@@ -68131,6 +68259,8 @@ Vyber jedno nové poučení z poslední opravy a před založením pravidla udě
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-30: Doplněna příloha o předání verdiktu kontroly pravidla do úklidu bez druhého registru: převod verdiktu na konkrétní práci, výběr jediného cílového nosiče pravdy, úklid starých duplicitních stop, privacy-first ochrana před novým dohledem, karta předání, exportní příklad, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro předání verdiktu pravidla do úklidu. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-30: Doplněna příloha o kontrole nového produktového pravidla proti existujícím pravidlům bez duplicitní smyčky: porovnání spouštěče, rozhodnutí a privacy hranice, rychlé prohledání tří míst pravdy, pět verdiktů pro založení, připojení, zpřesnění, sloučení nebo nezaložení pravidla, karta kontroly duplicity, příklad exportního pravidla, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro duplicitní pravidla. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
