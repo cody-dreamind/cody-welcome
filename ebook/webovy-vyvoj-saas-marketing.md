@@ -68218,6 +68218,138 @@ První použití při změně limitu ukáže, že otázka donutila tým pojmenov
 
 Vezmi jedno aktivní produktové pravidlo a za dvacet minut ho převeď do zadání. Vyber pracovní okamžik, jednu cílovou šablonu, formuluj jednu otázku, napiš kdy se netýká a urč minimální důkaz bez nového sledování. Pak smaž nebo slouč jednu starou duplicitní položku. Výsledek zakonči větou: „Pravidlo ___ je nově v zadání jako otázka ___, netýká se ___, důkaz stačí ___ a stará položka ___ končí.“
 
+## Příloha: Ověření produktového pravidla po prvním použití bez falešné jistoty
+
+Pravidlo vložené do zadání ještě není hotová změna. Je to hypotéza, že jedna otázka ve správném okamžiku zlepší práci týmu. První reálné použití má ukázat, jestli otázka skutečně změnila zadání, zmenšila riziko nebo pomohla rozhodnout rozsah. Pokud se jen odškrtla a nikdo podle ní nic neudělal, pravidlo zatím nepracuje. Má hezký kabát, ale žádnou práci v rukou.
+
+Tahle příloha navazuje na převod produktového pravidla do zadání. Cíl je ověřit první použití pravidla na jedné konkrétní kartě, bez plošného auditu, nového dashboardu a sledování lidí. Zajímá nás výsledek práce, ne profil člověka, který šablonu vyplnil.
+
+> Codyho komentář: První použití pravidla není maturity test pro tým. Je to kontrola, jestli jsme pravidlo vložili na správné místo, napsali ho srozumitelně a nevyrobili další checkbox, který se tváří jako kvalita.
+
+### Vrať se k původní zadávací kartě
+
+Nezačínej dojmem z posledního meetingu. Otevři kartu, kterou vznikl převod pravidla do zadání, a ověř jen to, co bylo slíbené. Pokud původní karta chybí, napiš ji zpětně v minimální podobě. Bez toho bude review sklouzávat k obecnému „funguje nám ta šablona?“ a to je spolehlivá cesta k dalšímu dokumentu, který nikdo nechce.
+
+Pro první ověření stačí šest polí:
+
+| Pole | Co zkontrolovat |
+| --- | --- |
+| Pravidlo | Jaké rozhodnutí nebo riziko mělo pravidlo chránit. |
+| Otázka v zadání | Přesná formulace, kterou člověk při práci viděl. |
+| První karta | Konkrétní úkol, issue, brief nebo release, kde se otázka použila. |
+| Minimální důkaz | Co mělo stačit k ověření bez nového sledování. |
+| Stop pravidlo | Kdy otázku zúžit, přesunout, sloučit nebo smazat. |
+| Starý nosič | Jaká duplicita nebo stará otázka měla po převodu skončit. |
+
+Pokud při ověřování neumíš najít první kartu, pravidlo pravděpodobně nebylo připojené k práci. V tom případě nehodnoť kvalitu odpovědi. Nejdřív oprav spouštěč: kdo má otázku vidět, kdy a v jaké šabloně.
+
+### Sleduj změnu zadání, ne poslušnost
+
+Dobré první použití poznáš podle toho, že otázka změnila obsah zadání. Člověk doplnil hranici, pojmenoval zdroj pravdy, zúžil rozsah, přidal akceptační kritérium, odmítl zbytečné měření nebo přesunul sběr dat do pozdější fáze. To je signál, že pravidlo pomohlo myslet dřív, než se začalo stavět.
+
+Slabé první použití vypadá jinak:
+
+| Co vidíš | Co to nejspíš znamená | Co udělat |
+| --- | --- | --- |
+| Odpověď je jen „ano“ bez dopadu na zadání | otázka je moc obecná nebo se dá snadno odškrtnout | přepsat ji na konkrétní výsledek |
+| Odpověď kopíruje text pravidla | člověk neví, jak ji použít na danou práci | přidat příklad nebo kritérium „netýká se“ |
+| Otázka vyvolala export osobních dat | důkaz je přehnaný nebo špatně definovaný | zúžit minimální důkaz |
+| Tým otázku přeskočil | pravidlo je ve špatném okamžiku nebo není vlastník | přesunout do fáze, kde se rozhodnutí opravdu dělá |
+| Kvůli otázce vznikla nová porada | pravidlo je moc široké | rozdělit ho na jednu rozhodovací otázku |
+
+Review nemá trestat člověka za špatnou odpověď. Má opravit pravidlo, formulaci nebo místo použití. Pokud se stejná otázka ve třech kartách mění na prázdnou frázi, problém není v morálce týmu. Problém je v návrhu pravidla.
+
+### Ověř minimální důkaz
+
+U privacy-first provozu je důkaz často větší riziko než samotná změna. Tým chce mít jistotu, a tak začne ukládat screenshoty s osobními daty, exportovat konverzace, zakládat nové eventy nebo pořizovat záznamy obrazovky. Výsledek působí poctivě, ale ve skutečnosti zvětšuje datovou stopu kvůli kontrole, která měla data chránit. Krásná ironie, jen trochu drahá.
+
+Při prvním použití proto zkontroluj:
+
+- stačil důkaz slíbený v zadávací kartě,
+- důkaz neobsahoval osobní data, pokud to nebylo nutné,
+- nevznikl nový trvalý log nebo analytický event jen kvůli review,
+- odkazovaný návrh, test nebo text jde pochopit i za měsíc,
+- důkaz má jasné místo a nemusí se kopírovat do dalších nástrojů.
+
+Příklady přiměřených důkazů:
+
+| Situace | Dobrý minimální důkaz | Přehnaný důkaz |
+| --- | --- | --- |
+| Úprava exportu | testovací CSV se seed daty a akceptační kritérium | export reálných zákaznických dat do sdílené složky |
+| Změna pricing limitu | odkaz na entitlement a upravený text pricingu | seznam zákazníků, kteří limit historicky překročili |
+| Nový onboardingový dotaz | návrh obrazovky a věta, proč je dotaz nutný pro první hodnotu | session recordings všech nových registrací |
+| Změna support makra | anonymizovaný vzor odpovědi | kopie celého zákaznického vlákna v produktu |
+
+Pravidlo, které potřebuje moc důkazů, často není pravidlo. Je to pokus nahradit chybějící vlastnictví dohledem. Vrať ho do menší podoby.
+
+### Napiš kartu prvního použití
+
+Karta prvního použití má být krátká. Její smysl není založit další proces, ale udělat jedno rozhodnutí o pravidle.
+
+| Pole | Zápis |
+| --- | --- |
+| Pravidlo | Jedna věta pravidla, které bylo použité. |
+| První použití | Odkaz nebo název konkrétní karty, změny nebo releasu. |
+| Odpověď v zadání | Jak tým na otázku odpověděl. |
+| Co se změnilo | Jak otázka upravila rozsah, text, akceptační kritérium, data nebo release. |
+| Důkaz | Jaký minimální důkaz byl použitý. |
+| Privacy dopad | Zda vznikl nový sběr, export, log, přístup nebo sdílení. |
+| Starý nosič | Zda byla odstraněná duplicita, kterou měl převod nahradit. |
+| Verdikt | Ponechat, zpřesnit, přesunout, sloučit nebo smazat. |
+| Další krok | Jedna malá úprava, pokud je potřeba. |
+
+Kartu vyplňuj z reálné práce, ne z diskuse. Pokud se lidé neshodnou, co otázka znamenala, napiš to jako nález formulace, ne jako nekonečnou debatu o kultuře. Kultura se v produktu pozná podle toho, co jde udělat opakovatelně i ve čtvrtek odpoledne.
+
+### Rozhodni jedním z pěti verdiktů
+
+Po prvním použití nepiš „budeme sledovat“. To je jen měkké odložení rozhodnutí. Vyber jeden z pěti verdiktů a předej ho do konkrétní akce.
+
+| Verdikt | Kdy platí | Další krok |
+| --- | --- | --- |
+| Ponechat | otázka změnila práci a důkaz byl přiměřený | zavřít první review a nechat pravidlo v šabloně |
+| Zpřesnit | otázka pomohla, ale odpovědi byly mlhavé | upravit formulaci nebo doplnit krátký příklad |
+| Přesunout | otázka přišla pozdě nebo příliš brzy | dát ji do jiné fáze práce |
+| Sloučit | podobná otázka už existuje jinde | spojit ji s cílovou položkou a odstranit duplicitu |
+| Smazat | pravidlo nevedlo k rozhodnutí nebo chrání něco, co už řeší produkt | odstranit otázku a zapsat důvod |
+
+Verdikt musí říct, kdo udělá další krok a kde se změní nosič pravdy. Bez toho je to jen pocit s razítkem.
+
+### Příklad: Exportní pravidlo po prvním použití
+
+Situace: tým dříve převedl pravidlo „export musí před akcí říct rozsah, výjimky a konec životnosti souboru“ do produktové karty jako otázku: „Popisuje UI před akcí rozsah dat, výjimky a retenci dočasného souboru?“
+
+První použití proběhlo při úpravě CSV exportu faktur.
+
+| Pole | Zápis |
+| --- | --- |
+| Odpověď v zadání | UI ukáže, že export obsahuje fakturační údaje za vybrané období, neobsahuje interní poznámky a dočasný soubor se smaže po 24 hodinách. |
+| Co se změnilo | Do akceptačních kritérií přibyl text před exportem a test s fakturou mimo vybrané období. |
+| Důkaz | Návrh dialogu a testovací CSV se seed daty. |
+| Privacy dopad | Nevznikl nový event ani export reálných dat. |
+| Starý nosič | Starý checklist bod „zkontrolovat export“ byl smazaný. |
+| Verdikt | Ponechat otázku, protože změnila zadání a důkaz byl přiměřený. |
+
+Zavírací věta: „Exportní pravidlo po prvním použití zůstává v produktové kartě beze změny, starý obecný checklist bod je smazaný a další review proběhne jen při změně datové akce.“
+
+To je ideální tvar: pravidlo pomohlo před implementací, nevytvořilo nový dohled a skončilo jasným rozhodnutím.
+
+### Checklist: Ověření produktového pravidla po prvním použití
+
+- [ ] Ověřuji jednu reálnou kartu, ne celou organizaci.
+- [ ] Mám původní zadávací kartu nebo její minimální rekonstrukci.
+- [ ] Vím, jakou otázku člověk při práci skutečně viděl.
+- [ ] Kontroluji změnu zadání, ne poslušné vyplnění šablony.
+- [ ] Důkaz nevyžadoval nový individuální tracking, session recording ani export osobních dat.
+- [ ] Pokud důkaz obsahoval citlivější informace, je jasné proč, kde leží a kdy skončí.
+- [ ] Starý duplicitní nosič byl smazaný, sloučený nebo vědomě ponechaný s důvodem.
+- [ ] Verdikt je jeden z pěti: ponechat, zpřesnit, přesunout, sloučit nebo smazat.
+- [ ] Další krok má vlastníka a jedno cílové místo pravdy.
+- [ ] Review končí zavírací větou, ne neurčitým „budeme sledovat“.
+
+### Mini úkol
+
+Vezmi poslední pravidlo, které se dostalo do zadání, a ověř jeho první reálné použití. Do patnácti minut vyplň kartu: pravidlo, první použití, odpověď v zadání, co se změnilo, minimální důkaz, privacy dopad, starý nosič, verdikt a další krok. Výsledek zakonči větou: „Pravidlo ___ po prvním použití ___, protože ___; další krok je ___ a žádný nový dohled kvůli tomu nevzniká.“
+
 ## Zdroje
 
 - IETF RFC 9110: HTTP Semantics - význam HTTP přesměrování a stavů včetně `410 Gone` pro zdroje, které už nejsou dostupné: https://www.rfc-editor.org/rfc/rfc9110.html
@@ -68411,6 +68543,8 @@ Vezmi jedno aktivní produktové pravidlo a za dvacet minut ho převeď do zadá
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-30: Doplněna příloha o ověření produktového pravidla po prvním použití bez falešné jistoty: návrat k zadávací kartě, kontrola změny zadání místo poslušného checkboxu, ověření minimálního důkazu bez nového sledování, karta prvního použití, pět verdiktů, exportní příklad, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-30: Doplněna příloha o převodu produktového pravidla do zadání bez byrokracie: výběr pracovního okamžiku, přepis pravidla na konkrétní otázku nebo akceptační kritérium, vložení do nejmenšího nosiče, ochrana před checkboxovým divadlem, zadávací karta, ověření prvního použití, pricing příklad, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
