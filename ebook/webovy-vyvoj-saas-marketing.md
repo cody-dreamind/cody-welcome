@@ -68066,6 +68066,158 @@ Tým tak neztratil poučení ze supportu, ale ani nevytvořil druhou kontrolu pr
 
 Vezmi poslední kartu kontroly duplicity pravidla. Do deseti minut vyplň kartu předání: verdikt, cílový nosič pravdy, konkrétní změna, úklid staré stopy, vlastník, privacy hranice, první ověření a zavírací věta. Potom proveď nebo zadej jen jednu úpravu v cílovém místě pravdy a jednu úklidovou akci. Výstup zakonči větou: „Verdikt ___ je předaný do ___, stará stopa ___ končí a ověříme to při ___.“
 
+## Příloha: Převod produktového pravidla do zadání bez byrokracie
+
+Produktové pravidlo začne opravdu pracovat až ve chvíli, kdy ovlivní nové zadání. Dokud leží v rozhodovacím logu, v retrospektivě nebo v pěkně pojmenovaném dokumentu, je to spíš památka na minulé poučení. Užitečné je teprve tehdy, když člověku při psaní další karty připomene správnou otázku dřív, než tým zopakuje starou chybu.
+
+Tahle příloha řeší malý, ale důležitý převod: jak vzít hotové pravidlo, vložit ho do běžného zadávání a nezaložit kvůli tomu nový formulář, meeting ani kontrolní vrstvu. Cíl není mít dokonalejší šablonu. Cíl je, aby příští práce měla méně nejasností, méně datového nánosu a jasnější definici hotovo.
+
+> Codyho komentář: Pravidlo, které se nedostane do zadání, je jako bezpečnostní pás uložený v kufru. Technicky existuje. Prakticky při první zatáčce moc nepomůže.
+
+### Začni pracovním okamžikem
+
+Nejdřív si ujasni, kdy má pravidlo člověka zastavit nebo zpřesnit jeho rozhodnutí. Nepřepisuj pravidlo automaticky do každé šablony, která v organizaci existuje. Hledej konkrétní okamžik, kde se dělá chyba, které má pravidlo zabránit.
+
+Pomáhá rozlišit čtyři typy okamžiků:
+
+| Okamžik | Kde pravidlo použít | Příklad |
+| --- | --- | --- |
+| Zadání nové funkce | issue šablona, produktová karta, brief | „Jaký dopad má změna na data a retenci?“ |
+| Návrh UI nebo textu | design review, obsahová karta, UX checklist | „Vidí člověk před akcí rozsah a důsledky?“ |
+| Implementace | PR template, technický checklist | „Nevzniká nový log, export nebo oprávnění mimo zadání?“ |
+| Release | release checklist, QA scénář | „Odpovídá produkt, dokumentace, support a pricing stejnému slibu?“ |
+
+Vyber jedno hlavní místo. Pokud pravidlo patří do více okamžiků, nejdřív ho vlož tam, kde chyba vzniká nejdřív. Pozdější kontrola má zachytit výjimky, ne nahrazovat špatné zadání.
+
+### Přepiš pravidlo na otázku
+
+Pravidlo v rozhodovacím logu může být delší. V zadání má fungovat jako krátká otázka nebo akceptační kritérium. Formulace musí být tak konkrétní, aby na ni šlo odpovědět ano, ne nebo netýká se.
+
+Převod vypadá takto:
+
+| Pravidlo | Otázka do zadání |
+| --- | --- |
+| U datových akcí musí být před releasem jasný rozsah dat, výjimky a konec životnosti kopií. | Popisuje UI před akcí, jaká data se exportují, co v exportu není a kdy dočasný soubor končí? |
+| Při změně pricing limitu musí stejná pravda platit v entitlementu, pricing stránce, dokumentaci a support makru. | Které čtyři nosiče pravdy se mění společně s limitem plánu? |
+| Onboardingová otázka musí sloužit první hodnotě uživatele, ne pohodlí týmu. | Je tato otázka nutná pro první hodnotu, nebo ji můžeme přesunout až do nastavení? |
+| Nové měření musí mít rozhodnutí, vlastníka a stop pravidlo. | Jaké rozhodnutí tímto eventem uděláme a kdy event smažeme nebo zúžíme? |
+
+Dobrá otázka nemá být právnický test ani obecná morální připomínka. „Mysleli jsme na privacy?“ je slabé. „Jaká nová osobní data změna ukládá, komu se posílají a kdy končí?“ už vede k práci.
+
+### Vlož pravidlo do nejmenšího nosiče
+
+Produktové zadání často trpí opačným problémem než dokumentace: každý chce přidat jednu malou položku. Po roce je šablona dlouhá jako menší smlouva a lidé ji vyplňují mechanicky. Proto pravidlo nevkládej jako novou sekci, pokud stačí jeden řádek v existující části.
+
+Rozhodovací vodítko:
+
+| Situace | Nejmenší použitelná úprava |
+| --- | --- |
+| Šablona už má část „Dopad na data“ | Přidej jednu konkrétní otázku do této části. |
+| Šablona má akceptační kritéria | Přepiš pravidlo na jedno kritérium hotovo. |
+| Šablona má jen obecný popis úkolu | Přidej krátké pole „Dopad a hranice“ místo celé nové kapitoly. |
+| Pravidlo se týká jen vzácného typu změny | Přidej volitelný blok nebo odkaz na specializovaný checklist. |
+| Pravidlo řeší support nebo obchodní slib | Vlož ho do navazujícího makra nebo obchodní karty, ne do každého technického issue. |
+
+Menší nosič se lépe udržuje. Pokud změna v šabloně vyžaduje vysvětlující odstavec, pravděpodobně patří do dokumentace a do zadání má jít jen odkaz nebo jedna otázka.
+
+### Chraň zadání před checkboxovým divadlem
+
+Checkbox je užitečný jen tehdy, když reprezentuje reálnou kontrolu. Jakmile se z něj stane automatické „ano“, zvyšuje sebevědomí bez zvýšení kvality. To je špatný obchod a ještě ošklivě svítí v retrospektivě.
+
+Před vložením nové položky zkontroluj:
+
+- jde odpovědět bez hledání ve třech dalších dokumentech,
+- člověk ví, kdy může napsat „netýká se“,
+- položka nevyžaduje nový export dat jen pro vyplnění šablony,
+- otázka pomáhá rozhodnout rozsah práce, ne jen dokumentovat dobrou vůli,
+- starší podobná položka se smaže nebo sloučí.
+
+Pokud pravidlo potřebuje důkaz, definuj minimální důkaz. Například odkaz na upravený help článek, screenshot lokálního stavu bez osobních dat, ruční poznámka z review nebo testovací scénář se seed daty. Nepožaduj plošné logy, nahrávky sessions ani exporty zákaznických konverzací jen proto, že se chceš cítit jistěji.
+
+### Napiš zadávací kartu
+
+Když pravidlo převádíš do zadání poprvé, použij krátkou kartu. Pomůže oddělit samotné pravidlo od změny šablony.
+
+| Pole | Zápis |
+| --- | --- |
+| Pravidlo | Název nebo jedna věta aktivního produktového pravidla. |
+| Pracovní okamžik | Kdy se má pravidlo použít: zadání, UX review, implementace nebo release. |
+| Cílová šablona | Jedno místo, kam pravidlo vstoupí. |
+| Nová otázka | Přesná formulace do zadání nebo checklistu. |
+| Kdy netýká se | Krátké pravidlo pro legitimní přeskočení. |
+| Minimální důkaz | Co stačí přiložit nebo ověřit bez nového sledování. |
+| Úklid | Jaká stará otázka, poznámka nebo duplicitní šablona končí. |
+| První použití | Nejbližší reálná karta, kde se otázka vyzkouší. |
+| Stop pravidlo | Kdy otázku zúžit, přesunout nebo smazat. |
+
+Příklad:
+
+| Pole | Zápis |
+| --- | --- |
+| Pravidlo | Export musí před akcí říct rozsah, výjimky a konec životnosti souboru. |
+| Pracovní okamžik | Zadání nové nebo změněné datové akce. |
+| Cílová šablona | Produktová karta v části „Dopad na data“. |
+| Nová otázka | Popisuje UI před akcí rozsah dat, výjimky a retenci dočasného souboru? |
+| Kdy netýká se | Jen u změn, které nemění žádnou datovou akci, export, import ani mazání. |
+| Minimální důkaz | Odkaz na návrh obrazovky nebo text akceptačního kritéria; bez session recording. |
+| Úklid | Smazat starou obecnou otázku „zkontrolovat export“. |
+| První použití | Příští úprava CSV exportu faktur. |
+| Stop pravidlo | Pokud se otázka sloučí do obecné kontroly datových akcí, samostatný bod archivovat. |
+
+### Ověř první použití, ne celou šablonu
+
+Po vložení pravidla neorganizuj audit všech zadání. Vyber první reálnou kartu, kde se otázka použije, a zkontroluj tři věci:
+
+| Kontrola | Dobrá známka | Varování |
+| --- | --- | --- |
+| Otázka změnila zadání | tým doplnil rozsah, hranici nebo akceptační kritérium | všichni ji jen odškrtli bez změny práce |
+| Důkaz byl přiměřený | stačil návrh, text, test nebo ruční review | někdo musel exportovat osobní data nebo zavádět nový event |
+| Šablona zůstala únosná | přibyla jedna jasná otázka a stará duplicita zmizela | šablona bobtná, ale rozhodnutí jsou pořád stejně mlhavá |
+
+První použití zakonči malým verdiktem:
+
+- ponechat otázku beze změny,
+- zpřesnit formulaci,
+- přesunout otázku do jiné fáze práce,
+- sloučit ji s existující položkou,
+- smazat ji, protože pravidlo už chrání produkt jiným způsobem.
+
+Tohle není nový pravidelný audit. Je to jednorázová kontrola, že převod z pravidla do zadání nezaložil další procesní plevel.
+
+### Příklad: Pricing limit v zadání bez rozmazání odpovědnosti
+
+Situace: po několika dotazech zákazníků tým zjistil, že změny limitů plánů se nepropíší jednotně do produktu, pricing stránky, dokumentace a support odpovědí. Vzniklo produktové pravidlo:
+
+„Při změně limitu plánu musí být před releasem potvrzené jedno místo pravdy a všechny veřejné i interní nosiče musí odpovídat stejnému entitlementu.“
+
+Převod do zadání:
+
+| Místo | Úprava |
+| --- | --- |
+| Produktová karta | Přidat otázku: „Který entitlement je zdroj pravdy a které texty se mění společně s limitem?“ |
+| Akceptační kritéria | „Pricing stránka, help článek a support makro používají stejný název limitu jako produkt.“ |
+| Privacy hranice | Kvůli ověření se neexportují individuální usage data zákazníků; stačí testovací účet a kontrola textů. |
+| Úklid | Smazat starý checklist bod „informovat support“, protože neříká co přesně se má změnit. |
+
+První použití při změně limitu ukáže, že otázka donutila tým pojmenovat zdroj pravdy dřív, než šel release do QA. To je dobrý výsledek. Nebyl potřeba nový dashboard, nové sledování ani půlhodinový meeting o tom, jestli „komunikace byla dost komunikativní“. Malé vítězství civilizace.
+
+### Checklist: Převod produktového pravidla do zadání
+
+- [ ] Vím, ve kterém pracovním okamžiku má pravidlo pomoct.
+- [ ] Pravidlo je přepsané na jednu konkrétní otázku nebo akceptační kritérium.
+- [ ] Otázka má jasné „ano“, „ne“ nebo „netýká se“.
+- [ ] Pravidlo vstupuje do jednoho cílového nosiče, ne do všech šablon najednou.
+- [ ] Nová položka nahrazuje nebo zpřesňuje starou duplicitu, pokud existovala.
+- [ ] Minimální důkaz nevyžaduje nový individuální tracking, export ani session recording.
+- [ ] Je jasné, kdy se otázka legitimně přeskočí.
+- [ ] První použití je navázané na reálnou kartu nebo změnu.
+- [ ] Po prvním použití existuje verdikt: ponechat, zpřesnit, přesunout, sloučit nebo smazat.
+- [ ] Šablona po úpravě pomáhá zadání, místo aby jen přidávala další checkbox.
+
+### Mini úkol
+
+Vezmi jedno aktivní produktové pravidlo a za dvacet minut ho převeď do zadání. Vyber pracovní okamžik, jednu cílovou šablonu, formuluj jednu otázku, napiš kdy se netýká a urč minimální důkaz bez nového sledování. Pak smaž nebo slouč jednu starou duplicitní položku. Výsledek zakonči větou: „Pravidlo ___ je nově v zadání jako otázka ___, netýká se ___, důkaz stačí ___ a stará položka ___ končí.“
+
 ## Zdroje
 
 - IETF RFC 9110: HTTP Semantics - význam HTTP přesměrování a stavů včetně `410 Gone` pro zdroje, které už nejsou dostupné: https://www.rfc-editor.org/rfc/rfc9110.html
@@ -68259,6 +68411,8 @@ Vezmi poslední kartu kontroly duplicity pravidla. Do deseti minut vyplň kartu 
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-30: Doplněna příloha o převodu produktového pravidla do zadání bez byrokracie: výběr pracovního okamžiku, přepis pravidla na konkrétní otázku nebo akceptační kritérium, vložení do nejmenšího nosiče, ochrana před checkboxovým divadlem, zadávací karta, ověření prvního použití, pricing příklad, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-30: Doplněna příloha o předání verdiktu kontroly pravidla do úklidu bez druhého registru: převod verdiktu na konkrétní práci, výběr jediného cílového nosiče pravdy, úklid starých duplicitních stop, privacy-first ochrana před novým dohledem, karta předání, exportní příklad, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro předání verdiktu pravidla do úklidu. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
