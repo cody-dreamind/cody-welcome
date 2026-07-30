@@ -67460,6 +67460,169 @@ Pokud záznam nejde napsat jednou větou, redukce je pořád rozpracovaná nebo 
 
 Vezmi měsíční kontrolní kartu s verdiktem „zjednodušit“. Za třicet minut napiš redukční kartu: původní oprava, co zůstává, co se uklízí, důvod úklidu, riziko úklidu, náhradní signál, vlastník a stop pravidlo. Vyber jeden nános s největším datovým nebo provozním rizikem a ukliď ho jako první. Nakonec napiš zavírací větu ve tvaru: „Redukce opravy ___ je zavřená: hodnota ___ zůstává v ___, nános ___ skončil, datová stopa ___ byla uklizena a návrat problému poznáme přes ___.“
 
+## Příloha: Zavírací review po redukční kartě bez nového dohledu
+
+Redukční karta uklidila pilotní nános. Teď je potřeba udělat poslední, často opomíjený krok: zavřít zjednodušenou opravu tak, aby se z ní nestala nová procesní ozdoba. Tým má vědět, co po úklidu zůstává jako běžný provoz, co skončilo definitivně a kdy se téma může znovu otevřít.
+
+Uzavření není oslava ani dlouhá prezentace. Je to krátké provozní rozhodnutí, které chrání tři věci: funkční hodnotu opravy, vyčištěnou datovou stopu a pozornost týmu. Pokud po zjednodušení zůstane otevřená karta „ještě to radši sledujme“, redukce se nepovedla. Jen vyměnila jeden nános za druhý.
+
+> Codyho komentář: Nejlepší proces po dobré opravě je často žádný nový proces. Když změna funguje, dokumentuj hranici, ukliď stopy a nech tým pracovat. Věčné „radši ještě měsíc kontrolovat“ je jen pilot s nalepeným knírem.
+
+### Začni zavírací větou
+
+Zavírací věta má být napsaná dřív než zápis do dokumentace. Donutí tým pojmenovat výsledek bez mlhy. Pokud ji nejde napsat jednou nebo dvěma větami, oprava ještě není uzavřená, nebo se do ní přimíchalo víc témat.
+
+Dobrá zavírací věta odpovídá na pět otázek:
+
+| Otázka | Co musí být jasné |
+| --- | --- |
+| Co zůstává | Jaké chování, text, pravidlo nebo workflow je teď běžný stav. |
+| Co skončilo | Který pilotní event, report, export, přístup, tabulka, šablona nebo meeting byl ukončen. |
+| Kde je pravda | Jedno místo, ze kterého se bude dál vycházet. |
+| Jak se vrátí problém | Minimální signál, který otevře nové rozhodnutí, ne nový dohled. |
+| Kdo drží běžný stav | Vlastník, který hlídá kvalitu v normálním rytmu práce. |
+
+Šablona:
+
+„Zjednodušená oprava ___ je uzavřená: běžný stav je ___, pilotní nános ___ skončil, zdroj pravdy je ___, návrat problému poznáme přes ___ a vlastníkem běžné údržby je ___.“
+
+Příklad:
+
+„Zjednodušená oprava exportního vysvětlení je uzavřená: běžný stav je jasný text na exportní obrazovce a jedna support odpověď, pilotní tabulka dotazů i duplicitní snippet skončily, zdroj pravdy je veřejný návod k exportu, návrat problému poznáme přes opakovaný support štítek `export nejistota` a vlastníkem běžné údržby je support lead.“
+
+Tahle věta je zároveň hranice. Kdo chce později znovu přidat měření, ruční kontrolu nebo širší přístup, musí otevřít nové rozhodnutí s novým důvodem.
+
+### Přepiš výsledek do běžného místa pravdy
+
+Po redukci bývá výsledek rozptýlený: část je v produktovém zadání, část v support šabloně, část v interní poznámce a část v hlavě člověka, který úklid udělal. Uzavření má vybrat jedno běžné místo pravdy podle toho, kde se oprava skutečně používá.
+
+| Typ opravy | Běžné místo pravdy | Co tam patří |
+| --- | --- | --- |
+| Text v produktu | Produktový copy zdroj, design systém nebo dokumentace obrazovky. | Finální formulace, důvod omezení a vlastník změny. |
+| Support odpověď | Support knowledge base nebo sada maker. | Jedna schválená odpověď, hranice sdílení a revizní trigger. |
+| Pricing nebo obchodní slib | Pricing dokumentace, webová stránka nebo sales playbook. | Aktuální slib, výjimky, pravidlo pro změnu a datum poslední kontroly. |
+| Datové pravidlo | Datová mapa, retenční karta nebo záznam o činnosti. | Účel, kategorie dat, retence, přístupy a ukončené dočasné stopy. |
+| Provozní postup | Runbook nebo provozní karta služby. | Běžný postup, eskalace, ruční náhrada a stop pravidlo mimořádného režimu. |
+
+Nevytvářej nové místo jen kvůli tomu, že oprava proběhla. Pokud existuje běžná dokumentace, patří výsledek tam. Nová stránka je oprávněná jen tehdy, když tým dosud neměl žádné místo pravdy a kvůli tomu se opakovaně vracely chyby.
+
+### Ulož jen důkaz rozhodnutí, ne celý pilot
+
+Privacy-first uzavření nearchivuje všechno „pro jistotu“. Zachová se jen důkaz, který bude užitečný při budoucím rozhodnutí: proč oprava zůstala, co bylo uklizeno a jak se pozná návrat problému. Detailní zákaznické dotazy, pracovní exporty, screenshoty s osobními údaji a pilotní tabulky nemají žít jen proto, že se kdysi hodily.
+
+Minimální záznam:
+
+| Pole | Příklad |
+| --- | --- |
+| Rozhodnutí | Oprava zůstává v běžném provozu po zjednodušení. |
+| Důvod | Měsíční kontrola nenašla návrat původního problému a redukce odstranila pilotní nános. |
+| Uklizené stopy | Smazána pilotní tabulka, vypnut dočasný event, odebrán dočasný přístup. |
+| Zachované místo pravdy | Veřejný návod k exportu a jedna support odpověď. |
+| Signál návratu | Tři opakované dotazy stejné kategorie ve čtyřtýdenním support review. |
+| Datum další běžné revize | Jen při změně exportního chování, retence nebo právního textu. |
+
+Co po uzavření typicky nemá zůstat:
+
+- surové exporty zákaznických dotazů použité při pilotu,
+- screenshoty obrazovek s reálnými účty,
+- dočasné dashboardy bez dalšího rozhodnutí,
+- osobní poznámky hodnotitelů, které nejsou potřeba pro výsledek,
+- širší přístupy udělené kvůli ověření opravy,
+- duplicitní makra a interní snippety se starým slibem.
+
+Pokud nějaký důkaz musí zůstat kvůli právnímu, bezpečnostnímu nebo smluvnímu důvodu, označ účel, vlastníka a retenci. „Možná se to bude hodit“ není účel. To je jen odložený problém v dražším kabátě.
+
+### Zruš mimořádný rytmus viditelně
+
+Po pilotu a redukci často přežívají kalendářové pozůstatky: týdenní kontrola, připomínka v projektovém nástroji, zvláštní kanál, ruční status nebo poznámka v dashboardu. Uzavření musí říct, co se ruší, co se převádí do běžného rytmu a co se nikdy nemělo stát trvalou prací.
+
+Převodní tabulka:
+
+| Dočasný rytmus | Uzavření |
+| --- | --- |
+| Týdenní kontrola opravy | Zrušit; návrat řeší běžné produktové review jen při splnění signálu. |
+| Samostatný dashboard | Vypnout nebo sloučit do existující metriky, pokud pořád řídí rozhodnutí. |
+| Ruční čtení všech odpovědí | Ukončit; ponechat jen revizi při změně šablony. |
+| Dočasný Slack/Telegram alert | Vypnout; incidentní nebo supportní alerty nechat jen podle běžných pravidel. |
+| Extra meeting s původním autorem opravy | Zrušit; vlastnictví přechází na běžnou roli. |
+
+Zavírací věta pro rytmus:
+
+„Mimořádné review opravy ___ končí dne ___; běžný návrat tématu spouští pouze ___ a první odpovědnost má ___.“
+
+Tahle věta je důležitá i pro lidi. Když není jasné, že mimořádná pozornost skončila, tým si ji často nechá jako pojistku. Pojistka pak potichu zdražuje každou další změnu.
+
+### Ověř, že zjednodušení nezhoršilo práci
+
+Uzavření nepotřebuje nový pilot, ale potřebuje malou sanity kontrolu. Neověřuj znovu celý původní problém. Ověř jen to, že zjednodušení neodstranilo věc, která držela hodnotu opravy.
+
+Rychlá kontrola:
+
+| Oblast | Kontrolní otázka |
+| --- | --- |
+| Produkt | Vidí uživatel pořád jasnou odpověď ve chvíli rozhodnutí? |
+| Support | Má tým jednu aktuální odpověď bez starého slibu? |
+| Dokumentace | Odkazuje interní i veřejná dokumentace na stejné místo pravdy? |
+| Data | Skončily dočasné exporty, eventy, tabulky a přístupy? |
+| Provoz | Ví vlastník, kdy téma znovu otevřít a kdy ho nechat být? |
+
+Příklad sanity kontroly:
+
+1. Otevři exportní obrazovku v běžném testovacím účtu.
+2. Přečti finální text jako zákazník, který chce vědět, co export dostane.
+3. Najdi support makro a ověř, že neopakuje starý slib.
+4. Zkontroluj, že pilotní tabulka a dočasný event už nemají aktivní použití.
+5. Zapiš jednu větu: „Hodnota zůstala, nános skončil, další kontrola jen při ___.“
+
+Kontrola má trvat minuty. Pokud se z ní stane půldenní audit, pravděpodobně redukce neuzavřela správnou hranici.
+
+### Příklad: Uzavření zjednodušené exportní opravy
+
+Situace: produkt před měsícem opravil vysvětlení exportu dat. Zákazníci se ptali, proč export neobsahuje bezpečnostní logy a retenční záznamy. Oprava přidala jasný text do produktu, veřejný návod a support odpověď. Po měsíční kontrole nevznikal původní dotaz, ale zůstal dočasný dashboard, tabulka dotazů a staré makro.
+
+Redukce už udělala:
+
+| Nános | Stav |
+| --- | --- |
+| Pilotní tabulka dotazů | Smazána po převedení výsledku do agregovaného záznamu. |
+| Dočasný dashboard | Vypnut, protože neřídil žádné další rozhodnutí. |
+| Staré support makro | Sloučeno do jedné odpovědi v knowledge base. |
+| Dočasný produktový přístup pro autora opravy | Odebrán po kontrole textu v testovacím účtu. |
+
+Uzavírací záznam:
+
+| Pole | Zápis |
+| --- | --- |
+| Běžný stav | Exportní obrazovka a veřejný návod vysvětlují, že běžný export obsahuje pracovní data účtu, ne oddělené bezpečnostní a retenční záznamy. |
+| Zdroj pravdy | Veřejný návod k exportu a navázaná support odpověď. |
+| Uklizené stopy | Pilotní tabulka, dashboard, staré makro a dočasný přístup skončily. |
+| Signál návratu | Tři opakované dotazy k exportnímu rozsahu během čtyř týdnů v běžném support review. |
+| Vlastník | Support lead hlídá odpověď, produktový vlastník hlídá změny exportního chování. |
+| Verdikt | Oprava zůstává v běžném provozu bez mimořádného sledování. |
+
+Finální věta:
+
+„Zjednodušená exportní oprava je uzavřená: běžný stav je text na exportní obrazovce, veřejný návod a jedna support odpověď, pilotní dashboard i tabulka skončily, zdroj pravdy je návod k exportu, návrat problému poznáme přes opakovaný štítek `export rozsah` v běžném support review a vlastníkem další údržby je support lead společně s produktovým vlastníkem exportu.“
+
+Tohle je dost. Není potřeba zakládat nový měsíční meeting „export clarity council“. Angličtina by tomu možná dala drahý pocit, ale pořád by to byl meeting o uklizeném problému.
+
+### Checklist: Zavírací review po redukční kartě
+
+- [ ] Mám jednu zavírací větu, která říká běžný stav, konec nánosu, zdroj pravdy, signál návratu a vlastníka.
+- [ ] Výsledek je přepsaný do běžného místa pravdy, ne do nové ad hoc stránky.
+- [ ] Pilotní exporty, tabulky, screenshoty, eventy a dashboardy mají konec nebo nový jasný účel.
+- [ ] Dočasné přístupy udělené kvůli ověření nebo redukci jsou odebrané.
+- [ ] Duplicitní šablony a staré sliby jsou smazané, sloučené nebo označené jako archivní.
+- [ ] Mimořádné review, meetingy, připomínky a alerty jsou ukončené nebo převedené do existujícího rytmu.
+- [ ] Minimální signál návratu je konkrétní a nevyžaduje sledování individuálního chování lidí.
+- [ ] Vlastník ví, kdy téma znovu otevřít a kdy ho nechat být.
+- [ ] Sanity kontrola ověřila jen dopad zjednodušení, ne celý původní pilot.
+- [ ] Uzavření nezaložilo nový report, proces ani pravidelnou kontrolu.
+
+### Mini úkol
+
+Vezmi jednu redukční kartu, která už uklidila pilotní nános. Za dvacet minut napiš zavírací větu, vyber jedno běžné místo pravdy a projdi pět věcí: produktový text, support odpověď, dokumentaci, datové stopy a dočasné přístupy. Pak zruš jeden mimořádný rytmus, který po opravě přežil jen ze zvyku. Výsledek zapiš ve tvaru: „Zjednodušená oprava ___ je uzavřená: běžný stav ___, nános ___ skončil, zdroj pravdy ___, návrat problému ___ a vlastník ___.“
+
 ## Zdroje
 
 - IETF RFC 9110: HTTP Semantics - význam HTTP přesměrování a stavů včetně `410 Gone` pro zdroje, které už nejsou dostupné: https://www.rfc-editor.org/rfc/rfc9110.html
@@ -67653,6 +67816,8 @@ Vezmi měsíční kontrolní kartu s verdiktem „zjednodušit“. Za třicet mi
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-30: Doplněna příloha o zavíracím review po redukční kartě bez nového dohledu: zavírací věta, běžné místo pravdy, minimální důkaz rozhodnutí, ukončení mimořádného rytmu, sanity kontrola hodnoty po redukci, příklad exportní opravy, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-30: Doplněna příloha o redukční kartě po měsíční kontrole bez návratu pilotu a zpřesněna směrovka v rejstříku pracovních nástrojů: zachovací věta, výběr jednoho procesního nánosu, karta úklidu, náhrada mimořádného dohledu minimálním běžným signálem, pořadí úklidu podle datového rizika, sjednocení šablon, zavírací rozhodnutí, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
