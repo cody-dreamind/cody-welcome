@@ -67161,6 +67161,30 @@ Měsíční kontrola musí skončit rozhodnutím. Jinak se z ní stane pravideln
 
 Verdikt „nechat sledovat další měsíc“ používej jen tehdy, když přesně víš, jaké rozhodnutí za měsíc uděláš. Jinak je to jen prodloužený pilot s lepším kloboukem.
 
+### Předej verdikt do správné navazující karty
+
+Měsíční kontrola nesmí skončit jen větou v poznámkách. Verdikt má někam dopadnout: do zavření, redukční karty, úzké opravy, rollbacku nebo nové karty. Tím se zabrání tomu, že tým měsíc po opravě znovu otevře celou historii a začne sbírat další data jen proto, že nemá jasný další nosič rozhodnutí.
+
+Použij jednoduché směrování:
+
+| Verdikt z měsíční kontroly | Kam ho předej | Co se nesmí stát |
+| --- | --- | --- |
+| Ponechat bez další práce | Zavírací věta v provozní kartě opravy. | Nevznikne další měsíční kontrola ze setrvačnosti. |
+| Zjednodušit | Redukční karta se seznamem nánosu a stop pravidlem. | Neotevře se nový pilot ani plošné měření „pro jistotu“. |
+| Opravit jednu vrstvu | Úzká karta pro UI, dokumentaci, support, pricing nebo proces. | Nepřepíše se původní oprava celá, když selhala jen jedna vrstva. |
+| Vrátit nebo nahradit | Návratová karta s úklidem datových a dokumentačních stop. | Nenechá se běžet stará oprava vedle nové náhrady. |
+| Otevřít novou kartu | Nová produktová nebo provozní karta s vlastním důvodem. | Nepřilepí se nový problém zpětně k původní opravě. |
+
+Předání by mělo mít jednu větu:
+
+„Měsíční kontrola opravy ___ skončila verdiktem ___; další nosič rozhodnutí je ___, vlastníkem je ___ a staré mimořádné sledování ___.“
+
+Příklad:
+
+„Měsíční kontrola exportního vysvětlení skončila verdiktem zjednodušit; další nosič rozhodnutí je redukční karta support šablon, vlastníkem je support lead a staré mimořádné sledování pilotní tabulky končí po sloučení šablon.“
+
+Tahle věta je malá, ale užitečná. Říká, kdo drží další krok, kam se zapisuje pravda a co naopak končí. Bez ní se verdikt snadno rozpustí do „někdo by se na to měl podívat“, což je nejrychlejší cesta k nové tabulce bez majitele.
+
 ### Checklist: Měsíční kontrola produktové opravy
 
 - [ ] Kontrola vychází z provozní karty opravy, ne z obecného dojmu.
@@ -67172,11 +67196,12 @@ Verdikt „nechat sledovat další měsíc“ používej jen tehdy, když přesn
 - [ ] Datová stopa opravy odpovídá původní hranici.
 - [ ] Pilotní tabulky, exporty a eventy mají jasný konec nebo nový běžný účel.
 - [ ] Měsíční karta má jeden závěrečný verdikt.
+- [ ] Verdikt je předaný do správné navazující karty nebo zavírací věty.
 - [ ] Pokud vznikl další úkol, má jedno sloveso, vlastníka a datum kontroly.
 
 ### Mini úkol
 
-Vyber jednu produktovou opravu, která je aspoň několik týdnů v běžném provozu. Za třicet minut napiš měsíční kontrolní kartu: oprava, původní problém, tři malé signály, návrat problému, datová stopa, procesní nános, verdikt a další krok. Nepřidávej nový event ani dashboard. Pokud najdeš nános, vyber jeden k okamžitému úklidu a napiš zavírací větu: „Po měsíční kontrole zůstává ___, končí ___ a další revize nastane jen při ___.“
+Vyber jednu produktovou opravu, která je aspoň několik týdnů v běžném provozu. Za třicet minut napiš měsíční kontrolní kartu: oprava, původní problém, tři malé signály, návrat problému, datová stopa, procesní nános, verdikt a další krok. Nepřidávej nový event ani dashboard. Pokud najdeš nános, vyber jeden k okamžitému úklidu a napiš předávací větu: „Měsíční kontrola opravy ___ skončila verdiktem ___; další nosič rozhodnutí je ___, vlastníkem je ___ a staré mimořádné sledování ___.“
 
 ## Zdroje
 
@@ -67371,6 +67396,8 @@ Vyber jednu produktovou opravu, která je aspoň několik týdnů v běžném pr
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-30: Zpřesněna nejnovější příloha o měsíční kontrole produktové opravy o předání verdiktu do správné navazující karty: zavírací věta, redukční karta, úzká oprava jedné vrstvy, návratová karta nebo nová produktová karta. Doplněna tabulka směrování verdiktů, předávací věta, checklist položka a upravený mini úkol, aby měsíční kontrola nekončila neurčitým „sledovat dál“. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-30: Doplněna příloha o měsíční kontrole produktové opravy po běžném provozu bez návratu problému: kontrola podle provozní karty, malé signály bez nového sledování, návrat původního problému jinou cestou, procesní nános v měření, šablonách, dokumentaci, přístupech a meetingu, měsíční kontrolní karta, pět verdiktů, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
