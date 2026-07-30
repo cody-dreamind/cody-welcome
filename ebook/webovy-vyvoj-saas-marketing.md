@@ -446,10 +446,182 @@ Minimalni pravidla pro zavislosti:
 
 ---
 
+## 4. Landing page, ktera prodava bez manipulace
+
+Landing page neni plakatek pro interni ego. Je to rozhodovaci stranka pro cloveka, ktery ma problem, malo casu a otevrenych deset dalsich tabu. Dobry web mu rychle rekne, jestli je na spravnem miste, co se zmeni po pouziti produktu, proc tomu ma verit a jaky je dalsi krok.
+
+Privacy-first landing page ma jeste jednu povinnost navic: nesmi prodavat tak, ze si duveru vezme zkratkou. Zadny tlak pres falesnou urgentnost, zadne schovane podminky, zadne reklamni pixely pred souhlasem a zadne formulare, ktere si rikaji o data jen proto, ze se jednou mozna budou hodit.
+
+Evropska pravidla proti nekalym obchodnim praktikam resi mimo jine klamava a agresivni jednani vuci spotrebitelum: https://commission.europa.eu/law/law-topic/consumer-protection-law/unfair-commercial-practices-and-price-indication/unfair-commercial-practices-directive_en. EDPB ve svych pokynech k deceptive design patterns ukazuje, jak muze rozhrani znejasnovat data, volby a prava uzivatelu v GDPR kontextu: https://www.edpb.europa.eu/documents/guideline/guidelines-032022-on-deceptive-design-patterns-in-social-media-platform_en. I kdyz SaaS prodavas B2B, prakticky princip je stejny: dobra konverze neni vyjimka z ferovosti.
+
+### 4.1 Prvni obrazovka: jedna veta, jeden dukaz, jedna akce
+
+Prvni viewport nema vysvetlit celou firmu. Ma potvrdit relevanci.
+
+Minimalni skladba:
+
+- headline s kategorii nebo vysledkem,
+- podnadpis s konkretni cilovou skupinou a problemem,
+- primarni CTA,
+- jeden dukaz duvery,
+- jasny privacy-first signal, pokud je pro zakaznika dulezity.
+
+**Slaby priklad:**
+
+> Revolucni platforma pro chytrejsi rust vaseho podnikani.
+
+To je univerzalni mlha. Muze to byt CRM, kurz vareni, nebo krabice se samolepkami.
+
+**Lepsi priklad:**
+
+> Prehled neodpovezenych B2B poptavek pro mala studia.
+>
+> Cody hlida emailove leady, pripomene follow-up a drzi zakaznicka data v evropskem provozu bez reklamniho sledovani.
+
+Tahle verze rika komu, co, proc a s jakym omezenim. Nemusi byt dokonala. Musi byt testovatelna.
+
+Kontrola prvni obrazovky:
+
+- Je do peti sekund jasne, pro koho produkt je?
+- Je z textu poznat konkretni problem?
+- Je CTA sloveso, ne dekorace?
+- Je videt aspon jeden dukaz duvery?
+- Nezakryva design hlavni sdeleni?
+- Nepotrebuje stranka treti stranu jen proto, aby se zobrazila?
+
+**Codyho komentar:** Kdyz headline potrebuje tri odstavce vysvetleni, neni hluboky. Je rozbity. Hluboke veci se daji rict jednoduse, jen to boli pri psani.
+
+### 4.2 Slabsi sliby, silnejsi dukazy
+
+Landing page casto prohrava tim, ze slibuje moc a dokazuje malo. "Usetrete cas", "zvyste produktivitu", "ziskejte kontrolu" jsou validni smer, ale samy o sobe nejsou dukaz. Clovek potrebuje videt, jak se produkt dotyka jeho reality.
+
+Pouzij dukazy podle vyspelosti produktu:
+
+| Faze | Co ukazat |
+| --- | --- |
+| Pred produktem | Popis problemu, konkretni workflow, nabidku pilotu, zakladatelskou expertizu. |
+| Po prvnich pilotech | Anonymizovane priklady vysledku, citace se souhlasem, screenshoty bez osobnich dat. |
+| Po prvnich zakaznicich | Pripadove studie, metriky z realneho pouziti, integrace a provozni garance. |
+| U zraleho SaaS | Segmentove use-cases, bezpecnostni dokumenty, SLA, reference a migracni plan. |
+
+Dukaz nemusi byt logo velke firmy. U maleho produktu je casto lepsi screenshot pred/po, kratky anonymizovany zapis nebo presny popis procesu.
+
+**Priklad dukazu pro privacy-first analytiku:**
+
+"Ukazeme, ktere landing pages vedou k poptavce. Nemodelujeme reklamni profil navstevnika a neposilame eventy do cross-site reklamni site. V zakladu meri stranka jen navstevu, zdroj, CTA klik a odeslani formulare."
+
+Tohle neni jen eticky odstavec. Je to prodejni argument pro firmu, ktera nechce vysvetlovat marketingovy stack pravnikovi az po spusteni kampane.
+
+### 4.3 CTA a formular: kazde pole musi mit praci
+
+CTA ma byt rozhodnuti, ne hadanka. "Odeslat" je technicky popis tlacitka. "Domluvit 20min call", "Ziskat audit webu" nebo "Vyzkouset demo" popisuje vysledek pro uzivatele.
+
+Formular je misto, kde se duvera rychle rozbije. W3C WCAG 2.2 pozaduje, aby formulare poskytovaly stitky nebo instrukce tam, kde uzivatel zadava vstup, a aby automaticky detekovane chyby byly popsane textem: https://www.w3.org/TR/WCAG22/. Prakticky to znamena, ze pole musi byt srozumitelna, povinna pole poznatelna a chyba ma rict, co se stalo a jak to opravit.
+
+Minimalni lead formular:
+
+- email,
+- volitelna zprava,
+- volitelny vyber tematu, pokud opravdu pomaha trideni,
+- jasne vysvetleni, co se stane po odeslani,
+- odkaz na ochranu osobnich udaju.
+
+Co do prvniho formulare typicky nepatri:
+
+- telefon jako povinne pole, pokud nejdriv odpovidas emailem,
+- velikost firmy, pokud podle ni nic nedelas,
+- rozpocet, pokud nemas varianty nabidky,
+- osobni udaje "pro jistotu",
+- predzaskrtnute marketingove souhlasy.
+
+**Priklad mikrotextu pod formularem:**
+
+"Odpovime emailem. Data pouzijeme jen pro vyrizeni dotazu a pripadny navazujici obchodni kontakt. Neposilame je do reklamniho pixelu."
+
+Je to kratke, konkretni a pro evropskeho zakaznika mnohem uzitecnejsi nez obecne "Vase soukromi je pro nas dulezite".
+
+### 4.4 Cena a riziko: neschovavej nepohodlne casti
+
+Pokud produkt prodavas pres landing page, cena nemusi byt vzdy verejna do posledni koruny. Ale dalsi krok musi byt poctivy. "Od 990 Kc mesicne" je v poradku, pokud zakaznik rychle zjisti, co v tom je a co neni. "Kontaktujte nas" je v poradku u komplexniho B2B prodeje, pokud jasne popises, proc je potreba call a jak vypada proces.
+
+Co ma byt jasne pred konverzi:
+
+- zda jde o trial, pilot, demo, audit nebo placenou objednavku,
+- jestli clovek dostane automaticky pristup, nebo ho nekdo kontaktuje,
+- zda bude potreba smlouva, DPA nebo technicka integrace,
+- jake jsou minimalni zavazky,
+- jak se da spoluprace ukoncit,
+- kde se budou zpracovavat data.
+
+**Priklad feroveho pilotu:**
+
+"Placeny pilot na 30 dni. Spolecne vybereme jeden workflow, nastavime ho pro vas tym a po 30 dnech rozhodnete, jestli pokracujeme. Behem pilotu sbirame jen data potrebna pro nastavene workflow a po ukonceni je na zadost smazeme nebo exportujeme."
+
+Tady se prodava vysledek, ale bez mlhy kolem zavazku. To je u B2B casto silnejsi nez agresivni sleva s odpoctem.
+
+### 4.5 Persvaze neni totez co past
+
+Landing page muze presvedcovat. Ma ukazat hodnotu, snizit nejistotu a pomoct cloveku rozhodnout se. Problem zacina ve chvili, kdy design tlaci cloveka k volbe, kterou by pri jasnych informacich neudelal.
+
+Prakticke hranice:
+
+| Ferovy vzor | Manipulativni vzor |
+| --- | --- |
+| "Domluvit demo" a "Zatim ne" jsou oba citelne. | Odmitnuti je schovane nebo zahanbujici. |
+| Sleva ma jasne podminky a konec. | Odpocty se resetuji pri kazde navsteve. |
+| Social proof je overitelny nebo anonymizovany poctive. | Falesne notifikace tvrdi, ze si produkt prave nekdo koupil. |
+| Cookie volby jsou srozumitelne. | Souhlas je vyrazny a odmitnuti slozite. |
+| Form rika, proc chce data. | Form vyzaduje data bez zjevneho duvodu. |
+
+EDPB u deceptive design patterns popisuje mimo jine vzory, ktere uzivatele nechavaji v nejasnosti, ztezuji orientaci nebo skryvaji informace a kontrolni prvky nad daty. Pro SaaS landing page si z toho vezmi jednoduche pravidlo: kdyz bys musel trik obhajovat slovy "vsak oni si toho nevsimnou", ven s tim.
+
+**Codyho komentar:** Nejlepsi konverzni optimalizace je nabidka, ktera sedi na realny problem. Druha nejlepsi je odstranit zbytecne treneni. Triky jsou az mnohem dal a vetsinou smrdi v logach, supportu i reputaci.
+
+### 4.6 Mereni landing page bez datoveho prejedeni
+
+Landing page nepotrebuje maximalni sledovani. Potrebuje odpovedet na par produktovych otazek:
+
+- Ktere zdroje privadeji relevantni lidi?
+- Rozumi lide prvnimu sdeleni?
+- Klika nekdo na hlavni CTA?
+- Dokonci lide formular?
+- Jake otazky prichazeji po odeslani?
+
+Minimalni privacy-first plan mereni:
+
+| Otazka | Signal | Akce |
+| --- | --- | --- |
+| Funguje headline? | Nizky klik na CTA pri relevantni navstevnosti | Prepsat prvni obrazovku podle jazyka zakazniku. |
+| Je CTA srozumitelne? | Kliky na sekundarni odkazy, malo primarnich kliknuti | Zpresnit sloveso a vysledek CTA. |
+| Je formular prilis tezky? | Zacaty formular bez odeslani | Odebrat pole nebo zlepsit mikrotext. |
+| Prichazi spravni lide? | Kvalita poptavek podle zdroje | Presmerovat distribuci, ne pridat sledovani. |
+| Brzdi privacy obavy? | Dotazy na data, hosting, DPA | Pridat jasnou sekci o provozu a zpracovani dat. |
+
+Do interniho zapisu pridej i kvalitativni poznatky. Napriklad: "Tri lide se ptali, jestli data odchazi do USA" je pro privacy-first SaaS stejne dulezity signal jako konverzni pomer. Mozna nepotrebujes dalsi pixel. Mozna potrebujes jednu srozumitelnou vetu o architekture.
+
+### Checklist: landing page pred spustenim
+
+- [ ] Prvni obrazovka rika komu produkt pomaha, s cim a jaky je dalsi krok.
+- [ ] Hlavni CTA popisuje uzivatelsky vysledek.
+- [ ] Stranka obsahuje konkretni dukaz primereny fazi produktu.
+- [ ] Privacy-first provoz je viditelny tam, kde ovlivnuje rozhodnuti.
+- [ ] Formular sbira jen data potrebna pro dalsi krok.
+- [ ] Povinna pole, chyby a potvrzeni odeslani jsou srozumitelne.
+- [ ] Cena, pilot nebo demo proces nemaji schovane podminky.
+- [ ] Zadny souhlas, odmitnuti ani zruseni neni navrzene jako past.
+- [ ] Mereni odpovida na konkretni rozhodovaci otazky.
+- [ ] Marketingove skripty a netechnicke cookies se nespousti pred souhlasem.
+- [ ] Stranka funguje i bez socialnich embeddu a sledovacich widgetu.
+- [ ] Po kazde kampani se vyhodnoti kvalita leadu, ne jen pocet navstev.
+
+---
+
 ## Zdroje
 
 - GDPR, Regulation (EU) 2016/679, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
 - EDPB Guidelines 05/2020 on consent under Regulation 2016/679: https://www.edpb.europa.eu/documents/guideline/guidelines-052020-on-consent-under-regulation-2016679_en
+- EDPB Guidelines 03/2022 on deceptive design patterns in social media platform interfaces: https://www.edpb.europa.eu/documents/guideline/guidelines-032022-on-deceptive-design-patterns-in-social-media-platform_en
+- European Commission, Unfair commercial practices directive: https://commission.europa.eu/law/law-topic/consumer-protection-law/unfair-commercial-practices-and-price-indication/unfair-commercial-practices-directive_en
 - UOOU, Cookies - otazky a odpovedi: https://uoou.gov.cz/verejnost/qa-otazky-a-odpovedi/cookies
 - OWASP Top 10 2025, A01 Broken Access Control: https://owasp.org/Top10/2025/A01_2025-Broken_Access_Control/
 - OWASP HTTP Headers Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Headers_Cheat_Sheet.html
@@ -463,6 +635,7 @@ Minimalni pravidla pro zavislosti:
 - MDN Web Docs, Cache-Control header: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Cache-Control
 - OWASP Software Component Verification Standard: https://owasp.org/www-project-software-component-verification-standard/
 - OWASP Application Security Verification Standard: https://owasp.org/www-project-application-security-verification-standard/
+- W3C, Web Content Accessibility Guidelines 2.2: https://www.w3.org/TR/WCAG22/
 
 ---
 
@@ -471,3 +644,4 @@ Minimalni pravidla pro zavislosti:
 - 2026-07-30: Zalozena struktura e-booku, doplnen uvod, osnova a hotova prvni kapitola o privacy-first zakladu SaaS webu vcetne praktickych prikladu, checklistu a zdroju.
 - 2026-07-30: Dopsana druha kapitola o produktove strategii od vyberu problemu pres rozhovory a placene piloty po prvni mesic rozhodovaciho rytmu.
 - 2026-07-30: Dopsana treti kapitola o webove architekture pro male tymy vcetne vykonnostniho rozpoctu, cache pravidel, prace s prostredimi, zavislostmi a checklistu pred prvnim SaaS releasem.
+- 2026-07-30: Dopsana ctvrta kapitola o landing page, ktera prodava bez manipulace, vcetne CTA, formularu, ferovych dukazu, pricingu, mereni a checklistu.
