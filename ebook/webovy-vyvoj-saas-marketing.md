@@ -1193,12 +1193,203 @@ Offboarding patri do onboarding kapitoly zamerne. Kdyz od zacatku vis, jak data 
 
 ---
 
+## 8. Cenotvorba a balicky bez zmatku
+
+Cena neni jen cislo v tabulce. Je to signal, komu produkt slouzi, jakou hodnotu slibuje, jake zakaznik nese riziko a kolik prace bude mit tym se supportem, billingem a provozem. Spatna cenotvorba dokaze znicit dobry produkt dvojim zpusobem: bud ho podstreli tak, ze se neuzivi, nebo ho zabali tak slozite, ze zakaznik utece driv, nez pochopi rozdil mezi planem Pro, Plus, Growth a "Business Advanced Lite". To posledni zni jako prichut energy drinku, ne jako strategie.
+
+Privacy-first SaaS ma u cen jeste jednu vyhodu: muze prodavat klid. Evropsky provoz, kontrola nad daty, jednoduche exporty, zadne reklamni sledovani a jasne smluvni podminky nejsou dekorace. Pro cast zakazniku jsou to nakupni duvody. Proto je neschovavej az do FAQ.
+
+U cen pro spotrebitele v EU pocitej s tim, ze transparentnost neni jen dobry mrav. Evropska komise popisuje Price Indication Directive jako pravidla pro jasne uvadeni prodejni ceny a jednotkove ceny u spotrebitelskych produktu: https://commission.europa.eu/law/law-topic/consumer-protection-law/unfair-commercial-practices-and-price-indication/price-indication-directive_en. Consumer Rights Directive resi mimo jine informace pred nakupem a pravo zrusit online nakup v EU kontextu: https://commission.europa.eu/law/law-topic/consumer-protection-law/consumer-contract-law/consumer-rights-directive_en. U B2B SaaS se detaily budou lisit podle smluv, zeme a typu zakaznika, ale produktove pravidlo je stejne: cena ma byt citelna pred rozhodnutim, ne az po fakture.
+
+### 8.1 Zacni hodnotovou metrikou
+
+Hodnotova metrika je jednotka, podle ktere zakaznik prirozene chape rust hodnoty. Neni to vzdy pocet uzivatelu. U nekterych produktu dava smysl pocet projektu, sledovanych endpointu, odeslanych faktur, aktivnich klientu, ulozenych dokumentu nebo automatizovanych workflow.
+
+Dobry pricing se pta:
+
+- Kdy zakaznik z produktu dostava vic hodnoty?
+- Kdy nam roste realny naklad na provoz?
+- Kdy je dalsi jednotka jednoduse pochopitelna?
+- Kdy by limit pusobil ferove, a kdy jako past?
+- Da se metrika zmerit bez zbytecneho profilovani lidi?
+
+Priklady:
+
+| Produkt | Slaba metrika | Lepsi kandidat |
+| --- | --- | --- |
+| Monitoring webu | Pocet prihlasenych uzivatelu | Pocet sledovanych endpointu a frekvence kontroly. |
+| CRM pro mala studia | Pocet sedadel od prvniho dne | Pocet aktivnich obchodnich pipeline nebo kontaktu v rozumnych pasmech. |
+| Znalostni portal | Pocet clanku | Pocet internich clenu plus verejne portaly. |
+| Analytika | Pocet dashboardu | Objem agregovanych udalosti nebo pocet webu. |
+| Automatizace follow-upu | Pocet kliknuti | Pocet aktivnich workflow nebo klientskych procesu. |
+
+Pozor na metriky, ktere trestaji uspech spatnym smerem. Kdyz nastroj slibuje tymovou spolupraci, ale kazdy novy clen okamzite zvysi cenu, zakaznik muze produkt drzet v jednom sdilenem uctu. To je spatne pro bezpecnost, audit i retenci. Nekdy je lepsi zakladni pocet clenu zahrnout do balicku a zpoplatnit az hodnotovy objem.
+
+**Codyho komentar:** Cena ma zakaznika ucit, co je v produktu dulezite. Kdyz uctujes podle nahodne technicke promenne, ucis ho optimalizovat proti tobe. Pak se oba divite, proc je vztah divny.
+
+### 8.2 Tri balicky staci casteji, nez si myslis
+
+Pro prvni verejnou verzi obvykle staci tri urovne:
+
+- Start: zakaznik si overi hodnotu s malym rizikem.
+- Team: hlavni plan pro segment, na kterem chces stavet.
+- Business: vyssi limity, tymove prvky, smluvni nebo bezpecnostni potreby.
+
+Balicky nemaji byt sklad funkcni pyrotechniky. Maji vyjadrit rozdil v situaci zakaznika.
+
+| Balicek | Pro koho | Co typicky obsahuje |
+| --- | --- | --- |
+| Start | Jednotlivec nebo maly tym testuje workflow. | Zakladni hodnota, nizke limity, samoobsluzny setup. |
+| Team | Cilovy zakaznik pouziva produkt pravidelne. | Vyssi limity, spoluprace, export, normalni support. |
+| Business | Firma potrebuje jistotu a kontrolu. | Role, audit log, DPA proces, priorita supportu, individualni nastaveni. |
+
+U privacy-first SaaS dava smysl nedavat zakladni kontrolu nad daty jen do nejdrazsiho planu. Export dat, zruseni uctu, jasne mazani a zakladni privacy dokumentace nejsou luxusni doplnky. Jsou soucast duvery. Do vyssich planu patri spis rozsahlejsi audit logy, SSO, vlastni DPA workflow, vyssi retence logu podle smlouvy nebo dedikovane provozni nastaveni.
+
+**Priklad spatneho rozdeleni:**
+
+- Free: bez exportu, bez smazani dat, bez jasne podpory.
+- Pro: konecne normalni funkcnost.
+- Enterprise: pravo vedet, kde jsou data.
+
+**Lepsi rozdeleni:**
+
+- Start: zakladni produkt, export dat a jednoduche zruseni.
+- Team: spoluprace, vyssi limity, historie a lepsi support.
+- Business: pokrocile role, audit, smluvni dokumenty a provozni garance.
+
+Cena tim rika: "Soukromi neni upsell. Kontrola je zaklad. Vyssi plan plati za slozitejsi provoz a organizacni potreby."
+
+### 8.3 Trial, freemium nebo placeny pilot
+
+Ne kazdy SaaS potrebuje free plan. Ne kazdy potrebuje trial. A ne kazdy B2B produkt se dobre prodava samoobsluzne. Vyber podle toho, kolik prace stoji dodat prvni hodnotu a jak velkou duveru musi zakaznik predat.
+
+| Model | Kdy dava smysl | Hlavni riziko |
+| --- | --- | --- |
+| Free plan | Produkt ma nizky marginalni naklad a samostatnou viralitu. | Support pro neplatice sezere tym. |
+| Casove omezeny trial | Hodnota se da ukazat rychle bez slozite integrace. | Uzivatel nestihne aktivaci a trial jen protece. |
+| Placeny pilot | B2B problem je drahy, setup potrebuje spolupraci. | Pilot se stane zakazkovou praci bez produktu. |
+| Demo request | Nakup potrebuje vysvetleni, smlouvu nebo security kontext. | Formular sbira leady, ale nevaliduje ochotu platit. |
+| Usage-based | Hodnota i naklad rostou s pouzitim. | Zakaznik se boji nepredvidatelne faktury. |
+
+Pro evropsky B2B SaaS casto funguje placeny pilot lepe nez nekonecny free plan. Zakaznik ukaze vazny zajem, ty omezis rozsah a oba vite, co se ma za 30 dni stat. Pilot ale musi mit jasny vystup.
+
+Sablona pilotu:
+
+```text
+Delka: 30 dni
+Cil: [jeden konkretni vysledek]
+Rozsah: [jeden workflow / jeden tym / jeden web]
+Data: [co presne se zpracuje, kde a proc]
+Cena: [castka nebo kreditovatelna castka]
+Na konci: pokracovani / export / smazani
+```
+
+U usage-based modelu pridej stropy a varovani. "Zaplatite podle pouziti" zni ferove, dokud zakaznik nevi, jestli ho chyba v integraci bude stat trojnasobek. Nastav limit, upozorneni pred prekrocenim a jednoduchy prehled spotreby.
+
+### 8.4 Sleva neni strategie
+
+Slevy umi pomoct, ale nesmi nahrazovat hodnotu. Nejhorsi sleva je ta, ktera zakaznika nauci cekat. Druha nejhorsi je ta, ktera vytvori chaos v tom, kdo plati kolik a proc.
+
+Ferove slevy:
+
+- maji jasny duvod,
+- maji jasny konec,
+- nemeni podminky potichu,
+- nevyzaduji klamavou urgentnost,
+- jdou vysvetlit i stavajicim zakaznikum.
+
+U spotrebitelskych cen v EU si dej pozor na prezentaci slev a predchozich cen. Primarni smernik je opet transparentnost a neklamani; Price Indication Directive a pravidla proti nekalym obchodnim praktikam k tomu davaji pravni ramec. U B2B je prostor smluvnejsi, ale reputacni logika zustava: falesna "sleva do pulnoci", ktera se obnovuje kazdy den, je levny trik a drahy signal neduvery.
+
+Lepsi nez obecna sleva:
+
+- pilot s omezenym rozsahem,
+- rocni platba za jasne nizsi cenu,
+- startup nebo neziskovy plan s podminkami,
+- migracni kredit za realnou praci,
+- garance vraceni penez v dobre definovanem pripade.
+
+**Priklad ferove rocni nabidky:**
+
+"Rocni platba ma dva mesice zdarma, protoze nam snizuje fakturacni administrativu a dava produktu stabilnejsi planovani. Mesicni plan lze ukoncit kazdy mesic."
+
+To je citelne. Zakaznik vi, co ziska a co dava na oplatku.
+
+### 8.5 Billing, DPH a smluvni realita
+
+Cenik na webu je jen viditelna cast. Pod nim musi fungovat billing, fakturace, dane, pristupy, zruseni a refundy. Jakmile prodavas pres hranice, hlavne B2C v EU, res DPH a fakturacni pravidla s ucetnim nebo danovym poradcem. Evropsky VAT One Stop Shop popisuje OSS jako zjednoduseni pro podniky prodavajici zbozi a dodavajici sluzby koncovym spotrebitelum v EU: https://vat-one-stop-shop.ec.europa.eu/index_en. Pro SaaS je prakticke mit to vyresene driv, nez prvni nemecky zakaznik klikne na "Buy" a fakturacni system se zacne tvarit prekvapene.
+
+Minimalni billing checklist:
+
+- Ceny jasne rikaji, zda jsou bez DPH nebo vcetne DPH.
+- Faktura obsahuje spravne identifikacni udaje.
+- System umi pracovat s B2B a B2C rozdilem, pokud prodavas obema.
+- Zmena planu ma jasny dopad na cenu a limity.
+- Zruseni predplatneho je dostupne a potvrzene emailem.
+- Refundy maji pravidla, ktera support umi vysvetlit.
+- Pristup po nezaplaceni faktury ma lidsky rozumnou grace period.
+- Export dat je mozny pred definitivnim ukoncenim pristupu.
+
+Nepouzivej billing jako past. Kdyz zakaznik odchazi, nech ho odejit ciste. U B2B se velmi casto vrati pozdeji, pokud odchod nebyl drama. Pokud ho zamknes pres skryte zruseni, mozna vyhrajes jednu fakturu a prohrajes doporuceni.
+
+### 8.6 Cenik jako produktova stranka
+
+Cenik neni ucetni tabulka. Je to jedna z nejdulezitejsich produktovych stranek. Ma pomoct cloveku vybrat, snizit nejistotu a jasne ukazat, co se stane po kliknuti.
+
+Dobry SaaS cenik obsahuje:
+
+- jednu vetu, pro koho je kazdy plan,
+- hlavni rozdily mezi plany,
+- limity napsane lidsky,
+- jasne CTA pro kazdy plan,
+- odpovedi na nakupni obavy,
+- privacy a provozni signal,
+- informaci o DPH, fakturaci a zruseni,
+- odkaz na podminky a ochranu osobnich udaju.
+
+**Priklad mikrocopy pod cenikem:**
+
+"Ceny jsou uvedene bez DPH pro firemni zakazniky. Data provozujeme v evropskem prostredi, nepouzivame reklamni pixely a export je dostupny ve vsech placenych planech."
+
+To neni dlouhe. Ale odpovida na tri realne otazky: kolik to stoji, kde jsou data a jestli se zakaznik muze dostat ven.
+
+Kontrola ceniku:
+
+| Otazka | Proc je dulezita |
+| --- | --- |
+| Pozna cilovy zakaznik doporuceny plan do 10 sekund? | Snizuje rozhodovaci treneni. |
+| Je videt, co se stane po kliknuti? | Omezuje strach z pasti. |
+| Jsou limity spojene s hodnotou? | Cena pusobi feroveji. |
+| Jsou privacy prvky konkretni? | Duvera neni jen slogan. |
+| Je dostupne zruseni, export a kontakt? | Zakaznik vidi kontrolu. |
+
+**Codyho komentar:** Cenik je dobra zkouska toho, jestli produktu sam rozumis. Kdyz neumim vysvetlit rozdil mezi plany jednou vetou, mozna nemam pricing problem. Mozna mam produktovy problem v kostymu pricingu.
+
+### Checklist: cenotvorba a balicky
+
+- [ ] Mam vybranou hodnotovou metriku, ktera odpovida uzitku i nakladum.
+- [ ] Zakaznik neplati vic jen proto, ze produkt pouziva bezpecneji nebo tymoveji.
+- [ ] Balicky jsou postavene podle situace zakaznika, ne podle interniho seznamu funkci.
+- [ ] Zakladni export, zruseni a kontrola nad daty nejsou luxusni upsell.
+- [ ] Trial, freemium nebo pilot odpovida narocnosti aktivace.
+- [ ] Usage-based cena ma stropy, upozorneni a citelny prehled spotreby.
+- [ ] Slevy maji jasny duvod, konec a pravidla.
+- [ ] Cenik rika, zda ceny jsou bez DPH nebo vcetne DPH.
+- [ ] U preshranicniho prodeje mam overeny billing, DPH a OSS dopady s odbornikem.
+- [ ] Zmena planu, refund, zruseni a nezaplacena faktura maji popsany proces.
+- [ ] Cenik obsahuje privacy-first signal, pokud je soucast hodnoty produktu.
+- [ ] Po kliknuti na CTA je jasne, zda jde o trial, pilot, demo nebo objednavku.
+
+---
+
 ## Zdroje
 
 - GDPR, Regulation (EU) 2016/679, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
 - EDPB Guidelines 05/2020 on consent under Regulation 2016/679: https://www.edpb.europa.eu/documents/guideline/guidelines-052020-on-consent-under-regulation-2016679_en
 - EDPB Guidelines 03/2022 on deceptive design patterns in social media platform interfaces: https://www.edpb.europa.eu/documents/guideline/guidelines-032022-on-deceptive-design-patterns-in-social-media-platform_en
 - European Commission, Unfair commercial practices directive: https://commission.europa.eu/law/law-topic/consumer-protection-law/unfair-commercial-practices-and-price-indication/unfair-commercial-practices-directive_en
+- European Commission, Price Indication Directive: https://commission.europa.eu/law/law-topic/consumer-protection-law/unfair-commercial-practices-and-price-indication/price-indication-directive_en
+- European Commission, Consumer Rights Directive: https://commission.europa.eu/law/law-topic/consumer-protection-law/consumer-contract-law/consumer-rights-directive_en
+- European Commission, VAT One Stop Shop: https://vat-one-stop-shop.ec.europa.eu/index_en
 - UOOU, Cookies - otazky a odpovedi: https://uoou.gov.cz/verejnost/qa-otazky-a-odpovedi/cookies
 - OWASP Top 10 2025, A01 Broken Access Control: https://owasp.org/Top10/2025/A01_2025-Broken_Access_Control/
 - OWASP HTTP Headers Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Headers_Cheat_Sheet.html
@@ -1242,3 +1433,4 @@ Offboarding patri do onboarding kapitoly zamerne. Kdyz od zacatku vis, jak data 
 - 2026-07-30: Dopsana pata kapitola o obsahovem marketingu, SEO a distribuci pres primarni kanaly vcetne RSS/Atom, technickeho SEO, redakcniho rytmu, privacy-first mereni a checklistu.
 - 2026-07-30: Dopsana sesta kapitola o analytice bez zbytecneho sledovani vcetne mericiho planu, katalogu eventu, atribuce, retence dat a checklistu privacy-first analytiky.
 - 2026-07-30: Dopsana sedma kapitola o onboardingu, aktivaci a retenci v SaaS vcetne aktivacniho momentu, registrace, bezpecneho prihlaseni, emailu, offboardingu a checklistu.
+- 2026-07-30: Dopsana osma kapitola o cenotvorbe a baliccich vcetne hodnotove metriky, trialu/pilotu, slev, billing reality, privacy-first ceniku a checklistu.
