@@ -68564,6 +68564,129 @@ Do změnové karty přidej jednu větu: „Kontrola starších pravidel našla _
 
 Vezmi poslední pravidlo, které po prvním použití nedostalo verdikt „ponechat“. Do dvaceti minut vyber jeden nález, urč měněnou vrstvu a napiš změnovou kartu: původní pravidlo, nález, nové znění, cílový nosič, úklid, privacy hranice, ověření a stop pravidlo. Před uložením zkontroluj tři místa, kde může existovat starší dvojče pravidla: šablonu zadání, review checklist a dokumentaci k dané oblasti. Pak uprav jen jedno cílové místo pravdy a výsledek zakonči větou: „Pravidlo ___ bylo upravené v ___, protože ___; stará stopa ___ končí, kontrola dvojčete našla ___ a další ověření proběhne při ___.“
 
+## Příloha: Uzavření upraveného produktového pravidla po kontrolním okně bez věčného pilotu
+
+Upravené produktové pravidlo potřebuje ještě jeden malý krok: zavřít kontrolní okno. Bez toho pravidlo zůstane v divném mezistavu. Už není staré, ještě není normální, všichni se na něj dívají opatrně a každý další výskyt začne větou „radši to ještě pohlídáme“. Takhle se rodí procesní nános. Ne z velkého rozhodnutí, ale z neuzavřeného dobrého úmyslu.
+
+Cíl této přílohy je jednoduchý: ověřit upravené pravidlo na jedné další práci, vybrat jeden verdikt a uklidit dočasné stopy. Nezakládáme registr pravidel. Neotevíráme dlouhou retrospektivu. Zavřeme jednu úpravu tak, aby pravidlo buď normálně pomáhalo, nebo slušně odešlo.
+
+> Codyho komentář: Pilot, který nemá konec, není opatrnost. Je to pronájem nejistoty na dobu neurčitou. A fakturu většinou platí tým v podobě dalších checkboxů.
+
+### Vrať se k důvodu úpravy
+
+Kontrolní okno má ověřit důvod, kvůli kterému se pravidlo měnilo. Pokud se pravidlo upravovalo proto, že otázka chodila pozdě, nehodnoť během zavírání celý proces zadávání. Pokud se měnil důkaz, neřeš najednou tón všech šablon. Drž se původního řezu.
+
+Začni krátkým shrnutím:
+
+| Pole | Zápis |
+| --- | --- |
+| Původní pravidlo | Jak zněla stará věta nebo otázka. |
+| Důvod úpravy | Co při první kontrole selhalo. |
+| Upravené znění | Jak pravidlo zní teď. |
+| Kontrolní okno | Na jaké jedné práci se mělo ověřit. |
+| Očekávaná změna | Jaké rozhodnutí, text, rozsah nebo důkaz se měl zlepšit. |
+
+Dobrá zavírací kontrola nepotřebuje deset vstupů. Potřebuje vědět, zda oprava řešila původní problém. Když se během ověření objeví nový problém, zapiš ho zvlášť. Nesmí potichu rozšířit kontrolní okno.
+
+### Ověř jedno použití v běžné práci
+
+Pravidlo má projít běžnou prací, ne laboratorní debatou. Ideální důkaz je konkrétní zadání, produktová karta, support šablona, review komentář nebo testovací scénář, kde se upravená otázka skutečně objevila a něco změnila.
+
+Ptej se:
+
+- Přišlo pravidlo ve správný pracovní okamžik?
+- Změnilo rozhodnutí před implementací, publikací nebo odpovědí zákazníkovi?
+- Bylo srozumitelné bez autora původní úpravy?
+- Stačil důkaz bez reálných zákaznických exportů, osobních screenshotů nebo nového trackingu?
+- Vznikla díky pravidlu menší datová stopa, jasnější hranice nebo lepší úklid?
+
+Pokud odpověď zní „pravidlo bylo vidět, ale nic nezměnilo“, neznamená to automaticky selhání. Někdy pravidlo jen potvrdí dobrý návrh. Pak ale musí být jasné, co potvrdilo: například že export obsahuje jen povolená pole, dočasný soubor má retenci a support šablona neposílá zákazníka do staré dokumentace.
+
+### Vyber jeden zavírací verdikt
+
+Po ověření vyber jeden verdikt. Jeden. Ne „ponechat, ale ještě zúžit a zároveň přesunout“. To je převlečený nový úkol. Zavírací verdikt má ukázat, co se stane s pravidlem teď.
+
+| Verdikt | Kdy ho použít | Praktický krok |
+| --- | --- | --- |
+| Ponechat | Pravidlo pomohlo ve správný čas a nevytvořilo zbytečnou stopu. | Nechat ho v cílovém nosiči a zrušit mimořádnou kontrolu. |
+| Zúžit | Pravidlo pomohlo, ale dopadá na moc široký typ práce. | Doplnit jasné „platí pro“ a „netýká se“. |
+| Přesunout | Pravidlo je užitečné, ale pořád se objevuje pozdě. | Přesunout ho do nejbližšího místa rozhodnutí a staré místo uklidit. |
+| Sloučit | Upravené pravidlo opakuje jiné aktivní pravidlo. | Vybrat jedno cílové znění a druhou stopu smazat nebo archivovat. |
+| Ukončit | Pravidlo nezměnilo rozhodnutí nebo přidalo víc tření než hodnoty. | Odebrat ho z aktivní práce a ponechat jen krátký důvod konce. |
+
+Verdikt „ponechat“ neznamená „sledovat navždy“. Znamená, že pravidlo se vrací do běžného provozu. Další revize má přijít až při změně kontextu: nový typ dat, nový export, změna pricingu, incident, opakovaný zákaznický dotaz nebo situace, kdy pravidlo třikrát po sobě nepomohlo.
+
+### Ukliď dočasné stopy po kontrole
+
+Kontrolní okno často nechá drobný nepořádek: úkoly, komentáře, pomocné poznámky, kopie šablon a připomínky v chatu. Zavření pravidla není hotové, dokud tyto stopy dál nepředstírají, že jsou aktivní pravda.
+
+Použij jednoduchý úklid:
+
+| Stopa | Co s ní |
+| --- | --- |
+| Dočasný úkol kontroly | Zavřít s verdiktem a odkazem na aktuální pravidlo. |
+| Staré znění otázky | Smazat, sloučit nebo označit jako archivní s důvodem. |
+| Pomocný příklad | Přepsat na anonymní scénář, pokud má zůstat. |
+| Screenshot nebo export | Smazat, pokud už splnil účel; jinak určit retenci a přístup. |
+| Nový navazující problém | Převést do samostatné backlogové karty s vlastním důvodem. |
+
+Privacy-first hranice je tady jednoduchá: důkaz o tom, že pravidlo funguje, nemá být nový důvod držet osobní data. Pokud si tým chce ponechat příklad, ať z něj udělá pracovní scénář bez jmen, e-mailů, obsahu zákaznického účtu a interních detailů.
+
+### Napiš zavírací kartu
+
+Zavírací karta má být kratší než původní změnová karta. Její úkol není vysvětlit celou historii. Má říct, zda úprava přešla do běžné práce a co končí.
+
+| Pole | Zápis |
+| --- | --- |
+| Pravidlo | Aktuální znění pravidla nebo otázky. |
+| Ověřená práce | Jedna změna, kde se pravidlo použilo. |
+| Co se změnilo | Rozhodnutí, rozsah, důkaz, text nebo datová hranice. |
+| Verdikt | Ponechat, zúžit, přesunout, sloučit nebo ukončit. |
+| Cílové místo | Kde pravidlo nově žije, pokud zůstává. |
+| Úklid | Co se smazalo, sloučilo, archivovalo nebo zavřelo. |
+| Privacy výsledek | Jaký důkaz zůstává a co bylo odstraněno. |
+| Trigger další revize | Konkrétní změna kontextu, ne kalendář z viny. |
+
+Zavírací věta může znít: „Upravené exportní pravidlo zůstává v produktové kartě pro datové akce, protože při první další exportní změně doplnilo rozsah polí a retenci; dočasný review úkol končí, screenshot byl smazaný a další revize přijde jen při novém typu exportu nebo změně retence.“
+
+### Příklad: Pricing pravidlo po kontrolním okně
+
+Situace: tým upravil pravidlo pro pricing změny. Původní otázka „Je pricing jasný?“ vedla k povrchnímu ano. Nové znění říká: „U každé změny limitu napiš, kdo limit uvidí, co se stane po dosažení limitu, jak se zákazník dozví další krok a zda změna vyžaduje nové měření používání.“
+
+Kontrolní okno proběhlo na změně limitu počtu projektů v menším plánu.
+
+Zavírací karta:
+
+| Pole | Zápis |
+| --- | --- |
+| Pravidlo | U změny limitu popsat viditelnost, následky, další krok a datový dopad. |
+| Ověřená práce | Úprava limitu projektů v plánu Start. |
+| Co se změnilo | Pricing text doplnil následky limitu a produktová karta odmítla nový individuální event. |
+| Verdikt | Ponechat, ale zúžit jen na změny limitů a účtování. |
+| Cílové místo | Pricing změnová karta. |
+| Úklid | Starý obecný bod „zkontrolovat pricing“ byl smazaný z release checklistu. |
+| Privacy výsledek | Zůstal anonymní pracovní příklad; žádná nová telemetry událost nevznikla. |
+| Trigger další revize | Nový typ účtování, změna metriky používání nebo opakovaný sales dotaz na limity. |
+
+Výsledek není velká metodika. Je to jedno pravidlo na správném místě, s menším rozsahem a bez nového sledování lidí. Přesně ten typ nudného vítězství, který v provozu šetří nervy.
+
+### Checklist: Uzavření upraveného produktového pravidla
+
+- [ ] Vím, proč se pravidlo původně upravovalo.
+- [ ] Ověřil jsem jednu běžnou práci, ne simulaci ani obecný pocit týmu.
+- [ ] Důkaz ukazuje změnu rozhodnutí, textu, rozsahu, důkazu nebo datové hranice.
+- [ ] Vybral jsem jeden zavírací verdikt.
+- [ ] Aktivní pravidlo má jedno cílové místo pravdy.
+- [ ] Staré znění, duplicitní otázky a dočasné kontrolní úkoly jsou uklizené.
+- [ ] Screenshoty, exporty a pracovní příklady nezůstaly uložené bez účelu a retence.
+- [ ] Nový problém je samostatná backlogová karta, ne přílepek kontrolního okna.
+- [ ] Další revize je navázaná na změnu kontextu, ne na nekonečný rituál.
+- [ ] Výsledek končí jednou větou, kterou pochopí i člověk mimo původní review.
+
+### Mini úkol
+
+Vyber jedno pravidlo, které bylo po první kontrole upravené a už se znovu použilo. Do patnácti minut vyplň zavírací kartu: pravidlo, ověřená práce, co se změnilo, verdikt, cílové místo, úklid, privacy výsledek a trigger další revize. Potom zavři dočasný kontrolní úkol a smaž nebo anonymizuj důkazy, které už splnily účel. Výsledek zakonči větou: „Pravidlo ___ po kontrolním okně ___, protože ___; aktivní pravda je ___, dočasná stopa ___ končí a další revize přijde jen při ___.“
+
 ## Zdroje
 
 - IETF RFC 9110: HTTP Semantics - význam HTTP přesměrování a stavů včetně `410 Gone` pro zdroje, které už nejsou dostupné: https://www.rfc-editor.org/rfc/rfc9110.html
@@ -68757,6 +68880,8 @@ Vezmi poslední pravidlo, které po prvním použití nedostalo verdikt „ponec
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-30: Doplněna příloha o uzavření upraveného produktového pravidla po kontrolním okně bez věčného pilotu: návrat k původnímu důvodu úpravy, ověření jednoho použití v běžné práci, výběr jediného zavíracího verdiktu, úklid dočasných stop, zavírací karta, pricing příklad, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-30: Rozšířena nejnovější příloha o úpravě produktového pravidla po první kontrole o kontrolu staršího dvojčete pravidla: rychlé prohledání šablony zadání, review checklistu a dokumentace, tabulka verdiktů pro sloučení, přesun, ponechání nebo archivaci duplicitní stopy, nová věta do změnové karty, doplněná checklist položka a upravený mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
