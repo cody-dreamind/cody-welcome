@@ -989,6 +989,210 @@ Rozdil mezi agregaci a osobnim zaznamem vysvetli i interne. "Mame mesicni pocet 
 
 ---
 
+## 7. Onboarding, aktivace a retence v SaaS
+
+Onboarding neni prohlidka aplikace. Je to cesta od prvniho slibu k prvnimu skutecnemu vysledku. Kdyz se uzivatel zaregistruje, jeste nic nevyhral. Jen ti venoval trochu duvery, casu a casto i osobnich nebo firemnich dat. Tvoje prace je tu duveru rychle promenit v hodnotu.
+
+Aktivace je okamzik, kdy uzivatel poprve udela neco, co mu ukaze smysl produktu. Retence je dukaz, ze se k tomu smyslu vraci. Maly SaaS tym proto nepotrebuje nekonecny onboarding checklist s konfeti. Potrebuje vedet, jaka jedna akce vede k hodnote, co uzivateli brani ji udelat a jak ho provest bez zbytecneho sledovani.
+
+Privacy-first princip je jednoduchy: onboarding ma sbirat jen data, ktera jsou nutna pro dodani hodnoty, bezpecnost nebo smluvni vztah. GDPR mluvi o data protection by design and by default v clanku 25: system ma byt navrzen tak, aby se zpracovavaly jen osobni udaje potrebne pro konkretni ucel: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng. To je presne spravny produktovy standard pro prvni dny uzivatele.
+
+### 7.1 Aktivacni moment: najdi prvni dukaz hodnoty
+
+Aktivacni moment neni nutne registrace, login ani dokonceny profil. To jsou jen mechanicke kroky. Aktivace nastane, kdyz uzivatel poprve uvidi, ze produkt resi jeho problem.
+
+Priklady:
+
+| Typ produktu | Slaba aktivacni metrika | Lepsi aktivacni moment |
+| --- | --- | --- |
+| CRM pro male studio | Vytvoren ucet | Prvni lead ma nastaveny dalsi krok a datum follow-upu. |
+| Analytika | Vlozen tracking kod | Uzivatel vidi prvni relevantni konverzni signal. |
+| Znalostni portal | Vytvoren workspace | Prvni odpoved je publikovana a poslana klientovi. |
+| Fakturacni SaaS | Vyplnen profil firmy | Prvni faktura je odeslana nebo pripravena k odeslani. |
+| Monitoring | Pridan endpoint | Prvni upozorneni nebo zeleny uptime report dorazi spravne osobe. |
+
+Dobry onboarding se navrhuje pozpatku:
+
+1. Co je prvni konkretni vysledek, kvuli kteremu zakaznik prisel?
+2. Jake minimalni informace potrebuji, abych ho k vysledku dostal?
+3. Ktery krok lze odstranit, odlozit nebo predvyplnit?
+4. Kde muze vzniknout chyba, strach nebo pochybnost?
+5. Jak uzivatel pozna, ze se posunul?
+
+**Priklad:**
+
+Produkt slibuje, ze majitel agentury nezapomene na follow-up po odeslane nabidce. Aktivacni moment neni "pridal integraci emailu". Lepsi moment je "Cody nasel tri otevrene nabidky bez odpovedi a navrhl komu dnes napsat". Pokud plna emailova integrace vyzaduje prilis dat a duvery, prvni verze muze fungovat rucnim importem nebo preposlanim vybranych emailu do kontrolovane schranky.
+
+**Codyho komentar:** Kdyz aktivaci meris podle toho, ze uzivatel klikl na pet tlacitek, pravdepodobne meris, jak dobre snasi administrativu. Aktivace ma byt signal hodnoty, ne endurance test.
+
+### 7.2 Registrace: ber jen to, co potrebujes ted
+
+Registracni formular je prvni provozni slib. Rika: "Tolik dat po tobe chceme, abychom ti dodali hodnotu." Pokud chce produkt pri prvnim kroku jmeno, prijmeni, telefon, firmu, obrat, roli, velikost tymu a marketingovy souhlas, mel by umet velmi dobre vysvetlit proc.
+
+Minimalni varianty podle situace:
+
+| Situace | Rozumny zacatek |
+| --- | --- |
+| Trial pro jeden ucet | Email, heslo nebo magic link, prijeti podminek. |
+| B2B demo | Pracovni email a kratky popis problemu. |
+| Placeny pilot | Fakturacni udaje az pri objednavce, ne pri prvnim zajmu. |
+| Produkt s tymy | Nejdrive zakladatel workspace, pozvanky az pozdeji. |
+| Citliva data | Jasne vysvetleni ucelu, pristupu, retence a bezpecnostnich opatreni. |
+
+EDPB pokyny k transparentnosti zduraznuji, ze informace pro subjekt udaju maji byt srozumitelne, pristupne a podane jasnym jazykem: https://www.edpb.europa.eu/documents/guideline/article-29-working-party-guidelines-on-transparency-under-regulation-2016679_en. V onboarding praxi to znamena: nedavej pravni dulezitost jen do dlouhe stranky v paticce. Kriticky mikrotext patri primo ke kroku, kde uzivatel data predava.
+
+**Priklad mikrotextu u pozvani clena tymu:**
+
+"Pozvany clovek dostane email s odkazem do vaseho workspace. Jeho email pouzijeme jen pro pozvani, prihlaseni a bezpecnostni udalosti k tomuto uctu."
+
+To je lepsi nez obecne "Souhlasite se zpracovanim osobnich udaju", ktere casto nerika nic uzitecneho.
+
+### 7.3 Bezpecne prihlaseni bez zbytecne bolesti
+
+Onboarding a bezpecnost se nesmi brat jako nepratele. Spatne zabezpeceni znici duveru. Prehnane treneni zase znici aktivaci. Cilem je primerene riziku.
+
+OWASP Authentication Cheat Sheet shrnuje dobre praxe pro prihlasovani, praci s hesly, chybove hlasky a ochranu proti utokum na ucty: https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html. Pro zapomenute heslo pouzij OWASP Forgot Password Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Forgot_Password_Cheat_Sheet.html. NIST SP 800-63-4 je aktualni sada digital identity guidelines a cast SP 800-63B-4 resi autentizaci a spravu autentizatoru: https://pages.nist.gov/800-63-4/ a https://csrc.nist.gov/pubs/sp/800/63/b/4/final.
+
+Prakticka pravidla pro maly SaaS:
+
+- Podporuj password manager: dovol dlouha hesla a vkladani do pole.
+- Nevyzaduj nesmyslne skladani hesel typu "jedno velke pismeno, jeden symbol a zakaz kopirovani"; radeji kontroluj slaba nebo kompromitovana hesla.
+- MFA nabidni minimalne pro adminy a ucty s citlivymi daty.
+- Magic link muze byt dobry start, ale mysli na bezpecnost emailove schranky a expiraci odkazu.
+- Chybove hlasky u loginu nedavej tak, aby prozrazovaly existenci uctu.
+- Reset hesla musi mit kratkou platnost tokenu, jednorazove pouziti a jasny audit.
+- Pozvanky do tymu musi byt omezene casem a idealne roli.
+
+Bezpecnostni mikrotext ma byt konkretni:
+
+> "Odkaz pro prihlaseni plati 15 minut a lze ho pouzit jen jednou."
+
+To je pro uzivatele uzitecnejsi nez strasit slovem "bezpecnost" bez detailu.
+
+### 7.4 Onboarding checklist ma mizet, ne rust
+
+Checklist v aplikaci je dobry sluha a spatny pan. Ma uzivateli ukazat cestu k prvni hodnote, ne mu pripominat, ze jeste nesplnil interni prani produktoveho tymu.
+
+Dobry aktivacni checklist:
+
+- ma 3 az 5 kroku,
+- zacina nejmensim krokem k vysledku,
+- ukazuje stav a dalsi akci,
+- dovoluje preskocit veci, ktere nejsou nutne,
+- nevyzaduje data jen kvuli "kompletaci profilu",
+- po dokonceni zmizi nebo se zmeni na uzitecny stav.
+
+**Priklad pro monitoring endpointu:**
+
+1. Pridej prvni URL.
+2. Vyber, kam poslat upozorneni.
+3. Over testovaci alert.
+4. Nastav tiche hodiny nebo eskalaci.
+
+Tohle je cesta k hodnote. Kroky jako "nahraj logo firmy" nebo "vypln pozici" mohou pockat, pokud nemaji bezprostredni praci.
+
+Empty states jsou soucast onboardingu. Prazdna obrazovka nema rikat jen "Nic tu neni". Ma nabidnout dalsi akci a ukazat tvar budouci hodnoty.
+
+**Priklad:**
+
+"Zatim nesledujes zadnou URL. Pridej prvni endpoint a Cody behem minuty overi, jestli odpovida."
+
+Kratke, akcni, bez teatralniho vysvetlovani produktu.
+
+### 7.5 Aktivacni emaily a notifikace: servis, ne honicka
+
+Email muze pomoct aktivaci, ale snadno se zmeni v otravny buben. Privacy-first SaaS by mel rozlisovat transakcni a marketingovou komunikaci.
+
+Transakcni emaily jsou napriklad:
+
+- potvrzeni registrace,
+- magic link,
+- pozvanka do workspace,
+- faktura,
+- upozorneni na bezpecnostni udalost,
+- alert z produktu,
+- potvrzeni exportu nebo smazani dat.
+
+Marketingove nebo produktove nurture emaily jsou jiny rezim. Potrebuji jasne nastaveni preferenci, odhlaseni a rozumnou frekvenci. Pokud si nejsi jisty pravnim rezimem, over ho pred spustenim kampane. U B2B SaaS je prakticky lepsi zacit s malo emaily, ktere maji jasny servisni ucel.
+
+Minimalni aktivacni sekvence pro trial:
+
+| Cas | Email | Ucel |
+| --- | --- | --- |
+| Ihned | Potvrzeni a dalsi krok | Dostat uzivatele k prvni hodnote. |
+| Po 24 h bez aktivace | Jedna konkretni pomoc | Odstranit nejcastejsi blokaci. |
+| Po prvnim uspechu | Shrnut vysledek | Ukazat, co se povedlo a co dal. |
+| Pred koncem trialu | Stav a moznosti | Ferove rict, co skonci a jak pokracovat. |
+
+**Priklad emailu po 24 hodinach bez aktivace:**
+
+Predmet: "Chybi prvni URL k monitoringu"
+
+Text: "Zatim neni co hlidat. Pridej jednu URL a Cody posle testovaci vysledek. Pokud monitoring zatim jen vyhodnocujes, odpovez na tento email a poslu kratky postup bez nastavovani dalsich dat."
+
+Tady neni manipulace ani falesna nalehavost. Jen kontext a pomoc.
+
+### 7.6 Retence: navrat k hodnote, ne zavislost na triku
+
+Retence neni umele drzeni uzivatele v aplikaci. Je to opakovany navrat k uzitku. Pokud uzivatel nemusi byt v produktu kazdy den, nenut ho. U fakturace muze byt zdrava retence mesicni. U monitoringu muze byt zdrave, ze uzivatel aplikaci neotevira, dokud nedorazi alert nebo report.
+
+Rozlis tri typy retence:
+
+| Typ | Co znamena | Priklad |
+| --- | --- | --- |
+| Akcni retence | Uzivatel opakovane dela klicovou akci. | Kazdy tyden uzavre follow-upy. |
+| Vysledkova retence | Produkt pravidelne doda hodnotu i bez klikani. | Monitoring posle mesicni uptime report. |
+| Tymova retence | Produkt se stane soucasti procesu vice lidi. | Obchod a delivery sdili stejny stav zakazky. |
+
+Metriky vybir podle hodnoty:
+
+- aktivovane ucty po 7 dnech,
+- pocet uctu s prvnim hodnotovym vystupem,
+- navrat ke klicove akci po tydnu nebo mesici,
+- pocet zakazniku, kteri pouzili export, report nebo sdileni,
+- churn duvody z realnych rozhovoru,
+- pomer support dotazu k aktivovanym uctum.
+
+Privacy-first retence se nepokousi nahradit hodnotu sledovanim. Nepotrebuje vedet kazdy pohyb mysi. Potrebuje poznat, jestli zakaznik dosahl vysledku. Nekdy to zjistis eventem. Nekdy kratkym emailem. Nekdy obchodnim rozhovorem.
+
+**Priklad rozhodnuti:**
+
+"Po trech tydnech vidime, ze 60 % novych workspace zalozi projekt, ale jen 20 % pozve druheho clena. Rozhovory ukazaly, ze se boji poslat kolegum nehotovy stav. Pristi iterace nebude dalsi notifikace. Pridame soukromy draft workspace a preview pozvanky."
+
+To je retencni prace. Ne spam. Ne dark pattern. Produktove zmenseni strachu.
+
+### 7.7 Offboarding je soucast duvery
+
+Dobry SaaS mysli i na odchod. Zni to proti obchodnimu pudu, ale u B2B produktu je ferovy offboarding cast duvery. Zakaznik ma vedet, jak exportovat data, zrusit trial, zmenit plan, odebrat clena tymu nebo smazat account.
+
+Zaklad:
+
+- Export dat je dostupny bez support detektivky.
+- Zruseni trialu nebo planu nema byt navrzene jako labyrint.
+- Mazani dat vysvetluje, co se smaze hned, co zustava kvuli ucetnictvi nebo pravnim povinnostem a jak dlouho.
+- Odebrani clena tymu resi vlastnictvi jeho obsahu.
+- Po ukonceni pristupu se uzivateli neposilaji dalsi produktove nurture emaily, pokud k tomu neni jasny duvod a pravni zaklad.
+
+Offboarding patri do onboarding kapitoly zamerne. Kdyz od zacatku vis, jak data opusti system, navrhnes cistsi datovy model, lepsi role a mensi zavislost na dodavatelich.
+
+### Checklist: onboarding, aktivace a retence
+
+- [ ] Mam definovany jeden hlavni aktivacni moment.
+- [ ] Registrace sbira jen data potrebna pro prvni hodnotu, bezpecnost nebo smlouvu.
+- [ ] Kriticke zpracovani dat vysvetluje mikrotext primo v toku.
+- [ ] Login, reset hesla a pozvanky maji zakladni bezpecnostni pravidla.
+- [ ] Admini a citlive ucty maji MFA nebo jasny plan jeho zavedeni.
+- [ ] Aktivacni checklist ma 3 az 5 kroku a vede k vysledku.
+- [ ] Empty states nabizeji konkretni dalsi akci.
+- [ ] Transakcni emaily jsou oddelene od marketingovych.
+- [ ] Aktivacni komunikace pomaha odstranit blokaci, ne vyvolat paniku.
+- [ ] Retencni metriky meri navrat k hodnote, ne jen pocet loginu.
+- [ ] Churn duvody sbiram kvalitativne a bez zbytecneho profilovani.
+- [ ] Export, zruseni uctu a mazani dat jsou popsane uz pred vetsim provozem.
+- [ ] Vim, ktera data zustavaji po ukonceni zakaznika a proc.
+
+---
+
 ## Zdroje
 
 - GDPR, Regulation (EU) 2016/679, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
@@ -1008,6 +1212,11 @@ Rozdil mezi agregaci a osobnim zaznamem vysvetli i interne. "Mame mesicni pocet 
 - MDN Web Docs, Cache-Control header: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Cache-Control
 - OWASP Software Component Verification Standard: https://owasp.org/www-project-software-component-verification-standard/
 - OWASP Application Security Verification Standard: https://owasp.org/www-project-application-security-verification-standard/
+- OWASP Authentication Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html
+- OWASP Forgot Password Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Forgot_Password_Cheat_Sheet.html
+- NIST SP 800-63-4, Digital Identity Guidelines: https://pages.nist.gov/800-63-4/
+- NIST SP 800-63B-4, Authentication and Authenticator Management: https://csrc.nist.gov/pubs/sp/800/63/b/4/final
+- EDPB, Guidelines on transparency under Regulation 2016/679: https://www.edpb.europa.eu/documents/guideline/article-29-working-party-guidelines-on-transparency-under-regulation-2016679_en
 - W3C, Web Content Accessibility Guidelines 2.2: https://www.w3.org/TR/WCAG22/
 - Google Search Central, SEO Starter Guide: https://developers.google.com/search/docs/fundamentals/seo-starter-guide
 - Google Search Central, How to specify a canonical URL: https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls
@@ -1032,3 +1241,4 @@ Rozdil mezi agregaci a osobnim zaznamem vysvetli i interne. "Mame mesicni pocet 
 - 2026-07-30: Dopsana ctvrta kapitola o landing page, ktera prodava bez manipulace, vcetne CTA, formularu, ferovych dukazu, pricingu, mereni a checklistu.
 - 2026-07-30: Dopsana pata kapitola o obsahovem marketingu, SEO a distribuci pres primarni kanaly vcetne RSS/Atom, technickeho SEO, redakcniho rytmu, privacy-first mereni a checklistu.
 - 2026-07-30: Dopsana sesta kapitola o analytice bez zbytecneho sledovani vcetne mericiho planu, katalogu eventu, atribuce, retence dat a checklistu privacy-first analytiky.
+- 2026-07-30: Dopsana sedma kapitola o onboardingu, aktivaci a retenci v SaaS vcetne aktivacniho momentu, registrace, bezpecneho prihlaseni, emailu, offboardingu a checklistu.
