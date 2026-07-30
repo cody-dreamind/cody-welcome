@@ -67185,6 +67185,33 @@ Příklad:
 
 Tahle věta je malá, ale užitečná. Říká, kdo drží další krok, kam se zapisuje pravda a co naopak končí. Bez ní se verdikt snadno rozpustí do „někdo by se na to měl podívat“, což je nejrychlejší cesta k nové tabulce bez majitele.
 
+### Když verdikt zní zjednodušit, nepřepisuj opravu celou
+
+Verdikt „zjednodušit“ neznamená, že se původní produktová oprava znovu otevře od nuly. Znamená, že hodnota opravy pravděpodobně zůstává, ale její podpůrné lešení už stojí v cestě. Tohle je menší práce než nový produktový problém: má odstranit nános, ne znovu debatovat o celém rozhodnutí.
+
+Použij existující přílohu „Zjednodušení produktové opravy po měsíční kontrole bez ztráty hodnoty“ jako redukční kartu. Z měsíční kontroly do ní přenes jen čtyři věci:
+
+| Přenesená věc | Co z ní má vzniknout |
+| --- | --- |
+| Funkční hodnota opravy | Věta, co musí zůstat zachované. |
+| Procesní nános | Konkrétní tabulka, event, šablona, přístup, export nebo meeting k odstranění. |
+| Riziko úklidu | Jeden scénář, který by se mohl zhoršit, ne seznam obav. |
+| Minimální signál návratu | Hrubý signál z běžné práce, který nahradí mimořádný dohled. |
+
+Nepřenášej celou historii, všechny staré tickety ani osobní konverzace. Redukční karta má dostat rozhodnutí do práce, ne archivovat původní stres ve vyšším rozlišení. Pokud k úklidu potřebuješ detailnější důkaz, napiš přesně, jaké rozhodnutí bez něj nejde udělat a kdy se důkaz smaže.
+
+Příklad předání:
+
+| Pole | Zápis |
+| --- | --- |
+| Verdikt z měsíční kontroly | Zjednodušit. |
+| Co zůstává | Produktový stav exportu a veřejný návod. |
+| Co se uklízí | Pilotní tabulka dotazů, duplicitní support makro a dočasný pohled na exportní frontu. |
+| Minimální signál | Opakovaný support štítek `export nejistota` nebo změna exportní fronty. |
+| Další karta | Redukční karta exportního stavu, vlastník produktový lead. |
+
+Takové předání drží kontinuitu: měsíční kontrola skončila, redukce začala a původní oprava se nerozmazala do dalšího kola všeobecné údržby. Produkt tím získá lehčí provoz a tým nezaloží nový dohled jen proto, že starý dohled vypíná. To by byl pěkný procesní akrobatický výkon, ale pořád špatný nápad.
+
 ### Checklist: Měsíční kontrola produktové opravy
 
 - [ ] Kontrola vychází z provozní karty opravy, ne z obecného dojmu.
@@ -67197,11 +67224,12 @@ Tahle věta je malá, ale užitečná. Říká, kdo drží další krok, kam se 
 - [ ] Pilotní tabulky, exporty a eventy mají jasný konec nebo nový běžný účel.
 - [ ] Měsíční karta má jeden závěrečný verdikt.
 - [ ] Verdikt je předaný do správné navazující karty nebo zavírací věty.
+- [ ] Pokud verdikt zní zjednodušit, do redukční karty jsem nepřenesl víc dat, než je potřeba pro úklid nánosu.
 - [ ] Pokud vznikl další úkol, má jedno sloveso, vlastníka a datum kontroly.
 
 ### Mini úkol
 
-Vyber jednu produktovou opravu, která je aspoň několik týdnů v běžném provozu. Za třicet minut napiš měsíční kontrolní kartu: oprava, původní problém, tři malé signály, návrat problému, datová stopa, procesní nános, verdikt a další krok. Nepřidávej nový event ani dashboard. Pokud najdeš nános, vyber jeden k okamžitému úklidu a napiš předávací větu: „Měsíční kontrola opravy ___ skončila verdiktem ___; další nosič rozhodnutí je ___, vlastníkem je ___ a staré mimořádné sledování ___.“
+Vyber jednu produktovou opravu, která je aspoň několik týdnů v běžném provozu. Za třicet minut napiš měsíční kontrolní kartu: oprava, původní problém, tři malé signály, návrat problému, datová stopa, procesní nános, verdikt a další krok. Nepřidávej nový event ani dashboard. Pokud najdeš nános, vyber jeden k okamžitému úklidu a napiš předávací větu: „Měsíční kontrola opravy ___ skončila verdiktem ___; další nosič rozhodnutí je ___, vlastníkem je ___ a staré mimořádné sledování ___.“ Pokud je verdikt „zjednodušit“, založ redukční kartu jen ze čtyř polí: co zůstává, co se uklízí, jaké je riziko úklidu a jaký minimální signál nahradí mimořádný dohled.
 
 ## Zdroje
 
@@ -67396,6 +67424,8 @@ Vyber jednu produktovou opravu, která je aspoň několik týdnů v běžném pr
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-30: Zpřesněna aktuální příloha o měsíční kontrole produktové opravy o praktické předání verdiktu „zjednodušit“ do redukční karty: zachování funkční hodnoty, výběr konkrétního procesního nánosu, pojmenování rizika úklidu a nahrazení mimořádného dohledu minimálním signálem z běžné práce. Doplněna tabulka předání, příklad exportního stavu, checklist položka a upravený mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-30: Zpřesněna nejnovější příloha o měsíční kontrole produktové opravy o předání verdiktu do správné navazující karty: zavírací věta, redukční karta, úzká oprava jedné vrstvy, návratová karta nebo nová produktová karta. Doplněna tabulka směrování verdiktů, předávací věta, checklist položka a upravený mini úkol, aby měsíční kontrola nekončila neurčitým „sledovat dál“. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
