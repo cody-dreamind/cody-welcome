@@ -817,6 +817,178 @@ Redakcni kontrola pred publikaci:
 
 ---
 
+## 6. Analytika bez zbytecneho sledovani
+
+Analytika ma pomahat rozhodovat. Nema byt tajna druha aplikace, ktera si o uzivateli pamatuje vic nez samotny produkt. U maleho SaaS je nejcennejsi znat par dobrych signalu: odkud prisli spravni lide, kde pochopili hodnotu, kde narazili, co vyzkouseli a co je presvedcilo zaplatit. To jde udelat bez reklamniho profilu, bez sledovani napric weby a bez datoveho kobercoveho naletu.
+
+Privacy-first analytika stoji na jednoduchem pravidle: nejdrive definuj rozhodnuti, potom signal, potom nejmensi data. Opacny postup vytvori dashboard, ktery vypada chytre, ale pri kazde produktove otazce stejne skonci vetou "tohle vlastne nemerime".
+
+CNIL u mereni navstevnosti popisuje podminky, za kterych mohou byt nektere audience measurement cookies ve Francii vyjimkou ze souhlasu, mimo jine informovani uzivatele, moznost namitky, omezeni ucelu na audience measurement nebo A/B testing a zakaz propojovani s jinymi zpracovanimi: https://www.cnil.fr/en/sheet-ndeg16-use-analytics-your-websites-and-applications. To neni univerzalni pravni kladivo pro celou Evropu, ale jako produktovy kompas je to uzitecne: mereni ma byt uzke, vysvetlitelne a oddelene od reklamniho sledovani.
+
+### 6.1 Merici plan zacina rozhodnutim
+
+Pred instalaci analytiky si napis tabulku, ktera se vejde na jednu stranku. Sloupce: rozhodnuti, signal, data, akce, vlastnik. Kdyz neumime vyplnit akci, event zatim neexistuje. Ano, je to radikalni. Nekdo by tomu rekl dospelost.
+
+| Rozhodnuti | Signal | Nejmensi data | Akce |
+| --- | --- | --- | --- |
+| Funguje hlavni nabidka? | Klik na primarni CTA z relevantni navstevnosti | URL, referer, typ CTA, cas | Prepsat headline nebo CTA. |
+| Je demo formular moc dlouhy? | Zacaty formular bez odeslani | URL formulare, anonymni session nebo agregace, typ chyby | Odebrat pole, zlepsit mikrotext. |
+| Aktivuje se novy uzivatel? | Dokonceni prvni hodnotove akce | Account ID, krok onboardingu, cas | Zmenit onboarding nebo pridat pomoc. |
+| Vraci se zakaznici k jadru produktu? | Opakovane pouziti klicove funkce | Account ID, funkce, den | Upravit produkt nebo edukaci. |
+| Ma kampan obchodni kvalitu? | Lead se zmenil na kvalifikovany rozhovor | Zdroj, kampan, stav leadu | Presunout distribucni energii. |
+
+Rozdil mezi dobrou a spatnou analytikou neni v poctu eventu. Je v tom, jestli se po tydnu da rict: "Na zaklade tohohle zmenime X." Kdyz ne, jen skladujes digitalni prach.
+
+**Priklad:**
+
+Maly B2B SaaS chce zjistit, jestli landing page pro "privacy-first analytiku" dava smysl. Nepotrebuje heatmapu, nahravani navstev a kompletni profil uzivatele. Staci:
+
+- navsteva stranky podle refereru,
+- klik na "Domluvit technicky call",
+- odeslani formulare,
+- kvalita leadu zapsana rucne po odpovedi,
+- poznamka, zda se lead ptal na EU provoz, DPA nebo export dat.
+
+Za dva tydny vis, zda stranka pritahuje spravne lidi. Nevis, kam kazdy jednotlivec hybal mysi. To je v poradku. Produkt se nestavi z voyeurismu.
+
+### 6.2 Eventy pojmenovavej podle produktu, ne podle nastroje
+
+Nazvy eventu jsou interni jazyk produktu. Kdyz je nechame nahodne rust, analytika se rozpadne na `click_button`, `button_click`, `ctaClicked`, `lead_submit` a `form_success`, coz je pet zpusobu jak nerict nic.
+
+Pravidla pojmenovani:
+
+- Pouzij sloveso a objekt: `cta_clicked`, `demo_requested`, `workspace_created`.
+- Drz jeden cas a format, typicky snake_case.
+- Neposilej osobni udaje v nazvu eventu ani v parametrech.
+- Oddel marketingove eventy od produktovych.
+- Zapis kazdy produkcni event do jednoducheho katalogu.
+
+Minimalni katalog eventu:
+
+| Event | Kdy vznikne | Parametry | Ucel |
+| --- | --- | --- | --- |
+| `pricing_viewed` | Nacteni ceniku | plan_context, referer_group | Zjistit zajem o nabidku. |
+| `demo_requested` | Odeslani demo formulare | page_slug, consent_context | Merit poptavku bez obsahu zpravy. |
+| `signup_started` | Zacatek registrace | source_group | Najit brzdy pred uctem. |
+| `activation_completed` | Prvni hodnotova akce | account_type | Merit skutecnou aktivaci. |
+| `export_requested` | Zadost o export dat | export_type | Sledovat duveru a provozni potreby. |
+
+U parametru plati stejna zdrzenlivost jako u formulare. `company_size_bucket` muze byt uzitecny. `full_email`, `phone`, `message_body` a `user_agent_raw` v analytice vetsinou nemaji co delat. Pokud je potrebujes pro obchod, patri do CRM nebo support systemu s jasnym ucelem a pristupovymi pravidly, ne do obecneho event streamu.
+
+**Codyho komentar:** Event bez popisu je jako kabel bez stitku v serverovne. Dokud vse funguje, nikomu nevadi. Ve chvili, kdy hledas problem, zacnes smlouvat s vesmirem.
+
+### 6.3 Webova analytika: zacni agregovane
+
+Pro verejny web je casto nejlepsi agregovana webova analytika, ktera nevyzaduje cookies a nesnazi se identifikovat cloveka napric weby. Umami ve FAQ uvadi, ze tracking code nepouziva cookies, neidentifikuje uzivatele a nesleduje je napric weby: https://umami.is/docs/faq. Plausible popisuje cookieless analytiku bez osobnich dat a bez persistentnich identifikatoru: https://plausible.io/data-policy. Matomo zase umoznuje privacy konfiguraci vcetne rezimu bez cookies, pokud je spravne nastaven: https://matomo.org/faq/new-to-piwik/how-do-i-use-matomo-analytics-without-consent-or-cookie-banner/.
+
+Tohle neni automaticke razitko "nemusime nic resit". Vzdy se ptej:
+
+- Co presne nastroj sbira?
+- Bezi v EU regionu nebo self-hosted prostredi?
+- Existuje DPA, pokud zpracovava data jako dodavatel?
+- Posila data dalsim stranam?
+- Jak dlouho se data drzi?
+- Lze data exportovat a mazat?
+- Je konfigurace bez cookies skutecne zapnuta?
+- Je mereni popsane v privacy dokumentu srozumitelnym jazykem?
+
+Prakticky vyber:
+
+| Situace | Vhodny pristup |
+| --- | --- |
+| Jednoduchy marketingovy web | Cookieless agregovana analytika, par CTA eventu. |
+| SaaS aplikace s accounty | Produktove eventy vazane na ucet, ne na reklamni identitu. |
+| Enterprise B2B | Oddelene webove mereni, produktova analytika a auditni logy. |
+| Citliva data | Minimalni eventy, kratka retence, silnejsi pristupova pravidla. |
+| Experimenty | A/B test jen s jasnym ucelem, bez reklamniho profilu. |
+
+Jedna vec je dulezita: webova analytika, produktova analytika a auditni log nejsou totez. Webova analytika rika, co se deje na verejnem webu. Produktova analytika pomaha zlepsovat pouziti aplikace. Auditni log slouzi k dohledatelnosti dulezitych akci. Kdyz z nich udelas jeden velky hrnec, vznikne pravni, provozni i produktovy gulasek. Bez knedliku.
+
+### 6.4 Produktova analytika bez sledovani
+
+U SaaS aplikace potrebujes rozumet aktivaci, retenci a hodnotovym momentum. To ale neznamena, ze musis sledovat kazde kliknuti. Zacni od zivota zakaznika.
+
+Mapa prvnich eventu:
+
+| Faze | Otazka | Event |
+| --- | --- | --- |
+| Registrace | Zvlada clovek vytvorit ucet? | `signup_completed` |
+| Nastaveni | Dostane se k prvnimu smysluplnemu nastaveni? | `workspace_configured` |
+| Aktivace | Probehla prvni akce s hodnotou? | `first_value_created` |
+| Spoluprace | Zapojil se dalsi clovek z tymu? | `member_invited` |
+| Retence | Vraci se k hlavni funkci opakovane? | `core_action_completed` |
+| Monetizace | Narazil na limit nebo upgrade moment? | `upgrade_intent_shown` |
+| Duvera | Zadal export, smazani nebo security dokument? | `data_control_requested` |
+
+U kazdeho eventu si dej pozor na tri hranice:
+
+- Identita: opravdu potrebujes user ID, nebo staci account ID, cohorta nebo agregace?
+- Obsah: neposilej do analytiky text dokumentu, zpravy, nahrane soubory ani volne vstupy.
+- Retence: nepotrebujes vecne drzet surove eventy, kdyz rozhodujes podle mesicnich agregaci.
+
+**Priklad aktivacni metriky:**
+
+Produkt pomaha tymum hlidat follow-upy. Aktivace neni registrace. Aktivace je moment, kdy uzivatel prida prvni lead a nastavi prvni pripominku. Event muze byt `first_followup_scheduled` s parametry `account_type`, `source_group` a `days_to_first_value`. Neni potreba posilat jmeno klienta, obsah emailu ani poznamku z callu.
+
+### 6.5 Atribuce bez zavislosti na reklamnim profilu
+
+Marketing chce vedet, co funguje. To je legitimni. Problem zacina, kdyz se z legitimni otazky stane sledovani cloveka od reklamy pres web az do produktu a zpatky do retargetingu.
+
+Privacy-first atribuce pro maly SaaS:
+
+- Pouzivej citelne UTM parametry pro kampane.
+- Ukladej zdroj u leadu jen v rozsahu potrebnem pro obchodni vyhodnoceni.
+- Pracuj s agregaci podle kanalu, ne s kompletnim individualnim profilem.
+- Vyhodnocuj kvalitu leadu rucne nebo ve vlastnim CRM, ne pres reklamni pixel.
+- U referral partneru pouzij jednoduche referencni kody misto treti strany, pokud to jde.
+- U placenych kampani pocitej i s tim, ze cast konverzi zamerne neuvidis. Cena za soukromi neni chyba v tabulce, je to volba.
+
+Sablona UTM pravidel:
+
+```text
+utm_source: kde odkaz vznikl, napriklad linkedin, partner-web, newsletter
+utm_medium: typ distribuce, napriklad organic, referral, paid, email
+utm_campaign: citelny nazev kampane, napriklad 2026-07-privacy-audit
+utm_content: varianta odkazu, jen pokud ji opravdu vyhodnocujeme
+Zakazano: osobni udaje, emaily, nazvy klientu bez duvodu, interni tajne nazvy
+```
+
+Kdyz lead prijde pres kampan, obchodni zapis muze obsahovat `source_group=partner-web` a `campaign=privacy-audit`. Nemusi obsahovat celou historii navstev. Pro vetsinu raneho SaaS je kvalitativni vyhodnoceni "z 12 poptavek byly 4 relevantni, 2 chtely EU hosting, 1 koupila pilot" uzitecnejsi nez reklamni dashboard s presnosti na dve desetinna mista.
+
+### 6.6 Retence, pristupy a mazani analytickych dat
+
+Data maji mit konec zivota. To zni temne, ale je to spis uklid. GDPR princip omezeni ulozeni rika, ze osobni udaje nemaji byt drzeny dele, nez je nutne pro dany ucel: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng. U analytiky si proto nastav retenci podle skutecneho pouziti.
+
+Prakticky navrh:
+
+- Surove webove eventy drzet kratce, pokud vubec existuji.
+- Agregovane mesicni reporty drzet dele, pokud pomahaji strategii.
+- Produktove eventy s vazbou na account omezit podle ucelu a smluv.
+- Debug logy drzet kratce a oddelit je od analytiky.
+- Pristup k analytice dat jen lidem, kteri podle nich delaji praci.
+- Exporty z analytiky neposilat volne do tabulek bez kontroly.
+- Pri ukonceni zakaznika vedet, co se maze, co zustava agregovane a proc.
+
+Rozdil mezi agregaci a osobnim zaznamem vysvetli i interne. "Mame mesicni pocet aktivovanych accountu" je jiny rizikovy profil nez "mame sest let eventu kazdeho uzivatele vcetne obsahu jeho akci". Prvni pomaha ridit produkt. Druhe se casto jen tvari jako budoucnostni poklad a mezitim zveda riziko.
+
+### Checklist: privacy-first analytika
+
+- [ ] Kazdy event ma napsane rozhodnuti, ktere pomaha udelat.
+- [ ] Webova analytika, produktova analytika a auditni log jsou oddelene.
+- [ ] Nazvy eventu maji jednotny format a katalog.
+- [ ] Do analytiky neposilam emaily, telefony, zpravy, dokumenty ani volne texty.
+- [ ] Verejny web meri agregovane signaly a CTA, ne reklamni profily.
+- [ ] Nastroj pro webovou analytiku je cookieless nebo ma jasne vyreseny souhlas.
+- [ ] U dodavatele vim, kde jsou data, kdo je zpracovava a jak dlouho se drzi.
+- [ ] Produktove eventy meri aktivaci a hodnotu, ne kazdy nahodny klik.
+- [ ] UTM pravidla nepovoluje osobni udaje ani interni citlive nazvy.
+- [ ] Kvalitu kampani hodnotim podle leadu a obchodu, ne jen podle page views.
+- [ ] Surova data maji retenci, agregace maji jasny ucel.
+- [ ] Pristup k analytice je omezeny podle role.
+- [ ] Privacy dokumenty lidsky vysvetluji, co merime a proc.
+
+---
+
 ## Zdroje
 
 - GDPR, Regulation (EU) 2016/679, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
@@ -845,6 +1017,10 @@ Redakcni kontrola pred publikaci:
 - RSS Advisory Board, RSS 2.0 Specification: https://www.rssboard.org/rss-specification
 - RFC 4287, The Atom Syndication Format: https://www.rfc-editor.org/rfc/rfc4287
 - Schema.org, BlogPosting: https://schema.org/BlogPosting
+- CNIL, Use analytics on your websites and applications: https://www.cnil.fr/en/sheet-ndeg16-use-analytics-your-websites-and-applications
+- Umami, FAQ: https://umami.is/docs/faq
+- Plausible Analytics, Data Policy: https://plausible.io/data-policy
+- Matomo, Use Matomo without consent or cookie banner: https://matomo.org/faq/new-to-piwik/how-do-i-use-matomo-analytics-without-consent-or-cookie-banner/
 
 ---
 
@@ -855,3 +1031,4 @@ Redakcni kontrola pred publikaci:
 - 2026-07-30: Dopsana treti kapitola o webove architekture pro male tymy vcetne vykonnostniho rozpoctu, cache pravidel, prace s prostredimi, zavislostmi a checklistu pred prvnim SaaS releasem.
 - 2026-07-30: Dopsana ctvrta kapitola o landing page, ktera prodava bez manipulace, vcetne CTA, formularu, ferovych dukazu, pricingu, mereni a checklistu.
 - 2026-07-30: Dopsana pata kapitola o obsahovem marketingu, SEO a distribuci pres primarni kanaly vcetne RSS/Atom, technickeho SEO, redakcniho rytmu, privacy-first mereni a checklistu.
+- 2026-07-30: Dopsana sesta kapitola o analytice bez zbytecneho sledovani vcetne mericiho planu, katalogu eventu, atribuce, retence dat a checklistu privacy-first analytiky.
