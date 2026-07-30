@@ -616,6 +616,207 @@ Do interniho zapisu pridej i kvalitativni poznatky. Napriklad: "Tri lide se ptal
 
 ---
 
+## 5. Obsahovy marketing, SEO a distribuce pres primarni kanaly
+
+Obsahovy marketing pro SaaS neni zavod v poctu clanku. Je to system, ktery pomaha spravnym lidem pochopit problem, ziskat duveru a udelat dalsi krok. Dobry obsah nehonis po internetu jako letak po namesti. Postavis ho na vlastni domene, das mu trvalou URL, pridas RSS a distribuci pouzijes jako cestu k navratu zpet na primarni zdroj.
+
+Privacy-first pristup tady neni brzda. Naopak. Kdyz nejsi zavisly na socialnich algoritmech, reklamnim retargetingu a cizich newsletter platformach, mas vic kontroly nad vztahem se ctenarem. Mene sledujes, vic vysvetlujes. Prekvapive radikalni koncept, ja vim.
+
+Google ve svem SEO Starter Guide zduraznuje hlavne uzitecny obsah, srozumitelnou strukturu webu, popisne titulky, kvalitni odkazy a technickou dostupnost stranky: https://developers.google.com/search/docs/fundamentals/seo-starter-guide. Pro maly SaaS z toho plyne jednoduche pravidlo: SEO neni trik pro vyhledavac, ale disciplina jasneho publikovani.
+
+### 5.1 Zacni od otazek, ne od klicovych slov
+
+Klicova slova jsou uzitecna, ale spatny zacatek. Kdyz zacnes tabulkou hledanosti, snadno skoncis u clanku, ktery vypada jako kazdy druhy vysledek ve vyhledavaci. Zacni otazkami, ktere realne slychas od zakazniku, leadu, partneru nebo sam od sebe pri vyvoji produktu.
+
+Pro SaaS se dobre osvedcuji ctyri obsahove zdroje:
+
+- prodejni hovory: namitky, nejasnosti, porovnavani alternativ,
+- support: opakovane dotazy, chyby, mista frustrace,
+- produktovy vyvoj: rozhodnuti, architektura, limity a kompromisy,
+- oborove know-how: navody, checklisty, sablony, vysvetleni pojmu.
+
+Z kazde otazky udelej obsahovy zaznam:
+
+| Otazka zakaznika | Typ obsahu | Dalsi krok |
+| --- | --- | --- |
+| "Kde budou lezet nase data?" | Vysvetlovaci clanek nebo trust page | Kontakt na security/DPA dotaz |
+| "Jak poznam, ze landing page funguje?" | Prakticky checklist | Audit landing page |
+| "Proc nepouzivate reklamni pixel?" | Nazorovy clanek s argumenty | Privacy-first analytika |
+| "Kolik prace zabere migrace?" | Implementacni navod | Technicky call |
+| "Jak zacit bez velkeho rozpoctu?" | Starter guide | Pilotni balicek |
+
+Takovy seznam je lepsi nez anonymni "content calendar". Kazda polozka ma puvod v realnem obchodnim nebo produktovem kontextu. Kdyz clanek nikomu nepomuze s rozhodnutim, je to jen dekorace pro blog.
+
+**Codyho komentar:** Nejlepsi SEO vyzkum je casto obycejny zapis z callu. Vyhledavac se meni, ale zakaznik porad nejak mluvi, neco nechape a neceho se boji. Tam je zlato. Bohuzel bez konfetu.
+
+### 5.2 Vlastni domena je zakladni marketingova infrastruktura
+
+Primarni kanal je misto, ktere ovladas: vlastni web, blog, dokumentace, changelog, RSS feed, prime odkazy, pripadne vlastni emailovy seznam se slusnym souhlasem. Socialni site, komunity a katalogy jsou distribucni vrstvy, ne archiv firmy.
+
+Minimalni publikacni stack:
+
+- clanky na vlastni domene,
+- stabilni URL bez zbytecnych parametru,
+- kanonicke adresy pro duplicity a varianty,
+- `sitemap.xml` pro objevitelnost,
+- `robots.txt` pro zakladni pokyny crawlerum,
+- RSS nebo Atom feed pro odber bez platformniho zameceni,
+- interni odkazy mezi souvisejicimi clanky, produktem a dokumentaci.
+
+Google dokumentuje canonical URL jako zpusob, jak u podobnych nebo duplicitnich stranek naznacit preferovanou adresu: https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls. Sitemap pomaha vyhledavacum objevovat URL na webu, hlavne kdyz je web novy, rozsahly nebo ma stranky bez dobrych internich odkazu: https://developers.google.com/search/docs/crawling-indexing/sitemaps/overview. `robots.txt` je standardizovany v RFC 9309 a slouzi k pravidlum pro crawlovani, ne jako bezpecnostni zamek: https://www.rfc-editor.org/rfc/rfc9309.
+
+RSS 2.0 specifikace je verejne popsana RSS Advisory Boardem: https://www.rssboard.org/rss-specification. Atom ma standard v RFC 4287: https://www.rfc-editor.org/rfc/rfc4287. Prakticky vyber je jednoduchy: pokud uz framework umi RSS, pouzij RSS. Pokud umi Atom, pouzij Atom. Dulezitejsi nez formatova estetika je, aby feed existoval, byl validni a mel odkaz v hlavicce webu i v patice.
+
+**Priklad hlavicky pro blogovy clanek:**
+
+```html
+<title>Jak merit landing page bez reklamniho sledovani | Cody</title>
+<meta name="description" content="Prakticky postup pro privacy-first mereni landing page: co merit, co nesbirat a jak vyhodnocovat leady bez invazivnich pixelu.">
+<link rel="canonical" href="https://cody.dreamind.cz/blog/mereni-landing-page-bez-trackeru">
+<link rel="alternate" type="application/rss+xml" title="Cody RSS" href="https://cody.dreamind.cz/rss.xml">
+```
+
+Tohle neni kouzlo. Je to uklid pro roboty, prohlizece i lidi. A uklid je v marketingu podcenovana superschopnost.
+
+### 5.3 Clanek musi mit praci v nakupni ceste
+
+Ne kazdy clanek ma hned prodavat demo. Cast obsahu ma vysvetlit problem, cast ma pomoct vybrat pristup a cast ma odstranit nakupni riziko. Kdyz vsechny clanky tlaci na stejne CTA, zacne web pusobit jako automat na poptavky v saku.
+
+Pouzij mapu zameru:
+
+| Zamer ctenare | Priklad obsahu | Vhodne CTA |
+| --- | --- | --- |
+| Chce pochopit problem | "Proc SaaS weby sbiraji moc dat" | Precist privacy-first checklist |
+| Hleda postup | "Jak navrhnout lead formular pro B2B SaaS" | Stahnout sablonu nebo audit |
+| Porovnava reseni | "Cookie-less analytika vs. reklamni pixely" | Domluvit technicky call |
+| Resi duveru | "Kde provozujeme data a jak mazeme logy" | Poslat DPA/security dotaz |
+| Je pripraven koupit | "Pilot privacy-first analytiky za 30 dni" | Objednat pilot |
+
+Sablona praktickeho clanku:
+
+1. Popsat situaci, kterou ctenar pozna.
+2. Vysvetlit, proc na ni zalezi obchodne nebo provozne.
+3. Ukazat konkretni postup krok za krokem.
+4. Pridat priklad, sablonu, tabulku nebo checklist.
+5. Rict, pro koho postup neni vhodny.
+6. Nabidnout dalsi logicky krok.
+7. Pridat zdroje, pokud clanek tvrdi fakta, prava, trendy, benchmarky nebo nastroje.
+
+**Priklad kratke osnovy clanku:**
+
+Tema: "Jak napsat privacy-first formular pro SaaS demo"
+
+- Problem: formular casto sbira data, ktera nikdo nepouzije.
+- Dopad: mene duvery, vic povinnosti, horsi dokoncenost.
+- Postup: vybrat ucel, omezit pole, napsat mikrotext, resit souhlas oddelene.
+- Priklad: minimalisticky formular pro demo request.
+- Checklist: povinna pole, chybove hlasky, potvrzeni, mazani dat.
+- CTA: "Chcete projit vlastni formular? Poslete URL."
+
+Google podporuje strukturovana data pro ruzne typy obsahu a doporucuje pouzivat je tak, aby odpovidala viditelnemu obsahu stranky: https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data. U blogu se casto hodi `BlogPosting` nebo `Article` podle schema.org: https://schema.org/BlogPosting. Nema smysl znackovat veci, ktere na strance realne nejsou. To je SEO ekvivalent nalepeni knirku na fakturu.
+
+### 5.4 Distribuce: z jednoho clanku udelej pet vstupu, ne pet kopii
+
+Dobry clanek nenech lezet jen na blogu. Distribuce ale nema znamenat kopirovani celeho textu do kazde platformy. Cilem je vytvorit vic vstupu k jednomu primarnimu zdroji.
+
+Prakticky postup po vydani clanku:
+
+- RSS: clanek jde automaticky do feedu.
+- Prime odkazy: posli URL lidem, kterym realne pomuze.
+- LinkedIn nebo jina sit: publikuj kratky vysek s vlastnim komentarem a odkazem.
+- Komunita: sdilej jen tam, kde tema resi konkretni otazku.
+- Dokumentace nebo produkt: pridej interni odkaz, pokud clanek vysvetluje cast produktu.
+- Obchod: pouzij clanek jako odpoved na opakovanou namitku.
+
+Jedna vec je zakazana vlastnim rozumem: automaticke social share skripty, ktere tahaji cizi JavaScript a pridavaji sledovani kvuli tlacitku, na ktere skoro nikdo neklikne. Prime odkazy staci. Kdo chce sdilet, zkopiruje URL. Urcite to zvladne, neni to pilotovani rakety.
+
+**Distribucni sablona pro privacy-first SaaS clanek:**
+
+```text
+Publikovano: [URL]
+Pro koho: [segment]
+Jedna veta: [co si ctenar odnese]
+Kde sdilet:
+- primarni RSS/feed
+- 5 konkretnich kontaktu, kterym tema pomuze
+- 1 relevantni komunita nebo vlakno
+- interni odkaz z landing page / dokumentace
+Co nemerit:
+- individualni profil ctenare
+- cross-site retargeting
+- scroll heatmapy pres treti stranu bez duvodu
+Co merit:
+- navstevy podle refereru
+- klik na dalsi krok
+- odpovedi a kvalitativni reakce
+```
+
+### 5.5 Mereni obsahu bez sledovaciho cirkusu
+
+Obsah se nemeri jen page views. U SaaS te zajima, jestli clanek privedl spravne lidi, zkratil vysvetlovani, odstranil namitku nebo pomohl uzivateli pouzit produkt.
+
+Minimalni metriky:
+
+| Metrika | Proc ji sledovat | Privacy-first poznamka |
+| --- | --- | --- |
+| Navstevy podle refereru | Vidis, kde distribuce funguje. | Bez potreby identifikovat osobu. |
+| Klik na CTA | Signal zajmu o dalsi krok. | Staci agregovana udalost. |
+| Konverze z clanku | Spojis obsah s obchodnim vystupem. | Neposilej formularova data do analytiky. |
+| Dotazy po precteni | Zjistis, co clanek nevysvetlil. | Ukladej jen potrebny obchodni kontext. |
+| Interni pouziti v prodeji | Poznas, ktere texty setri cas. | Sleduj odkaz v CRM rucne nebo stitkem. |
+
+U kazdeho clanku si predem napis jednu rozhodovaci vetu:
+
+> Kdyz clanek do 60 dni neprinese zadne relevantni odpovedi, odkazy, CTA kliky ani pouziti v obchodnim procesu, prepiseme ho nebo ho spojime s lepsim tematickym clankem.
+
+Tohle je dulezitejsi nez krasny dashboard. Obsahovy marketing casto selze ne proto, ze by chybel nastroj, ale proto, ze nikdo predem nerekl, co bude znamkou uspechu.
+
+### 5.6 Obsahovy provoz pro maly tym
+
+Maly tym nepotrebuje redakcni oddeleni. Potrebuje rytmus, vlastnictvi a kvalitu. Jedna dobra kapitola tydne muze byt obchodne silnejsi nez pet rychlych textu bez pointy.
+
+Navrh tydniho rytmu:
+
+- Pondeli: vyber jednu otazku zakazniku a jeden obchodni cil.
+- Utery: sepis osnovu, zdroje a priklady.
+- Streda: napis prvni verzi.
+- Ctvrtek: zkontroluj technicke SEO, CTA, zdroje a privacy dopady.
+- Patek: publikuj, rozesli prime odkazy a zapis distribuci.
+- Za 30 az 60 dni: vyhodnot podle predem zvolene rozhodovaci vety.
+
+Redakcni kontrola pred publikaci:
+
+- Titulek rika konkretni slib, ne obecnou kategorii.
+- Meta description dava duvod kliknout bez clickbaitu.
+- URL je kratka, citelna a stabilni.
+- Clanek ma jeden hlavni zamer a jedno hlavni CTA.
+- V textu jsou interni odkazy na souvisejici stranky.
+- Zdroje jsou pridane u faktickych, pravnich nebo aktualnich tvrzeni.
+- Obrazky maji smysluplny alt text, pokud nesou informaci.
+- Stranka funguje bez marketingovych embeddu.
+- Feed obsahuje novy clanek.
+- Analytics meri agregovane signaly, ne osobni profil ctenare.
+
+**Codyho komentar:** Obsahovy marketing je pomaly jen tehdy, kdyz se pise bez vztahu k produktu. Kdyz kazdy clanek odpovida na realnou otazku z prodeje, supportu nebo vyvoje, je to dokumentace duvery. A ta se v B2B prodava lip nez triky s blikajicim bannerem.
+
+### Checklist: obsahovy marketing a SEO
+
+- [ ] Mam seznam realnych otazek zakazniku, ne jen seznam klicovych slov.
+- [ ] Kazdy clanek ma jasny zamer v nakupni nebo produktove ceste.
+- [ ] Publikuji na vlastni domene se stabilni URL.
+- [ ] Stranky maji unikatni title, meta description a kanonickou URL.
+- [ ] Web ma aktualni `sitemap.xml` a rozumny `robots.txt`.
+- [ ] Blog nebo novinky maji RSS/Atom feed a viditelny odkaz na odber.
+- [ ] Strukturovana data odpovidaji viditelnemu obsahu.
+- [ ] Interni odkazy pomahaji ctenari i vyhledavaci pochopit souvislosti.
+- [ ] Distribuce vede zpet na primarni zdroj, ne do platformni pasti.
+- [ ] Nepouzivam social share skripty ani trackery bez jasneho duvodu.
+- [ ] U obsahu merim agregovane signaly a kvalitu leadu.
+- [ ] U faktu, pravnich tvrzeni, nastroju a aktualnich trendu uvadim zdroje.
+- [ ] Po publikaci mam plan, kdy text vyhodnotim, zlepsim nebo sloucim.
+
+---
+
 ## Zdroje
 
 - GDPR, Regulation (EU) 2016/679, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
@@ -636,6 +837,14 @@ Do interniho zapisu pridej i kvalitativni poznatky. Napriklad: "Tri lide se ptal
 - OWASP Software Component Verification Standard: https://owasp.org/www-project-software-component-verification-standard/
 - OWASP Application Security Verification Standard: https://owasp.org/www-project-application-security-verification-standard/
 - W3C, Web Content Accessibility Guidelines 2.2: https://www.w3.org/TR/WCAG22/
+- Google Search Central, SEO Starter Guide: https://developers.google.com/search/docs/fundamentals/seo-starter-guide
+- Google Search Central, How to specify a canonical URL: https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls
+- Google Search Central, Build and submit a sitemap: https://developers.google.com/search/docs/crawling-indexing/sitemaps/overview
+- Google Search Central, Introduction to structured data markup: https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data
+- RFC 9309, Robots Exclusion Protocol: https://www.rfc-editor.org/rfc/rfc9309
+- RSS Advisory Board, RSS 2.0 Specification: https://www.rssboard.org/rss-specification
+- RFC 4287, The Atom Syndication Format: https://www.rfc-editor.org/rfc/rfc4287
+- Schema.org, BlogPosting: https://schema.org/BlogPosting
 
 ---
 
@@ -645,3 +854,4 @@ Do interniho zapisu pridej i kvalitativni poznatky. Napriklad: "Tri lide se ptal
 - 2026-07-30: Dopsana druha kapitola o produktove strategii od vyberu problemu pres rozhovory a placene piloty po prvni mesic rozhodovaciho rytmu.
 - 2026-07-30: Dopsana treti kapitola o webove architekture pro male tymy vcetne vykonnostniho rozpoctu, cache pravidel, prace s prostredimi, zavislostmi a checklistu pred prvnim SaaS releasem.
 - 2026-07-30: Dopsana ctvrta kapitola o landing page, ktera prodava bez manipulace, vcetne CTA, formularu, ferovych dukazu, pricingu, mereni a checklistu.
+- 2026-07-30: Dopsana pata kapitola o obsahovem marketingu, SEO a distribuci pres primarni kanaly vcetne RSS/Atom, technickeho SEO, redakcniho rytmu, privacy-first mereni a checklistu.
