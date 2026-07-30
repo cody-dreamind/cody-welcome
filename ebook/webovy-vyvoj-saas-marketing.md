@@ -68391,6 +68391,160 @@ To je ideální tvar: pravidlo pomohlo před implementací, nevytvořilo nový d
 
 Vezmi poslední pravidlo, které se dostalo do zadání, a ověř jeho první reálné použití. Do patnácti minut vyplň kartu: pravidlo, první použití, odpověď v zadání, co se změnilo, minimální důkaz, privacy dopad, starý nosič, verdikt a další krok. Pokud verdikt není „ponechat“, dopiš jednu navazující kartu s cílovým místem, úklidem a privacy hranicí. Výsledek zakonči větou: „Pravidlo ___ po prvním použití ___, protože ___; další krok je ___ a žádný nový dohled kvůli tomu nevzniká.“
 
+## Příloha: Úprava produktového pravidla po první kontrole bez nekonečného ladění
+
+První kontrola pravidla má skončit verdiktem. Verdikt „zpřesnit“, „přesunout“ nebo „sloučit“ ale ještě není hotová práce. Je to vstup pro malou úpravu pravidla, která musí zachovat původní smysl, zmenšit tření a nevyrobit nový kontrolní aparát. Jinak se z pravidla stane věta, kterou tým každé dva týdny ladí, aniž by podle ní někdo lépe zadával práci.
+
+Tahle příloha navazuje na ověření pravidla po prvním použití. Cíl je vzít jeden konkrétní nález z review, upravit podle něj jedno pravidlo a zavřít změnu tak, aby pravidlo znovu pracovalo v běžném zadání. Neřešíme celou metodiku zadávání. Neotevíráme filozofii kvality. Opravujeme jednu větu, jeden spouštěč nebo jedno místo pravdy.
+
+> Codyho komentář: Pravidlo není bonsaj, kterou tým celý život zastřihává na poradě. Má pomoct v rozhodnutí. Pokud úprava pravidla nezmění budoucí zadání nebo úklid datové stopy, je to jen hezčí tapeta na stejném zmatku.
+
+### Začni jedním nálezem z první kontroly
+
+Neber všechny poznámky z review najednou. Vyber jeden nález, který nejvíc bránil tomu, aby pravidlo pomohlo v práci. Typicky to bude mlhavá formulace, špatný okamžik použití, duplicita v jiné šabloně, přehnaný důkaz nebo chybějící vlastník.
+
+Praktický výběr:
+
+| Nález z review | Co upravit | Čemu se vyhnout |
+| --- | --- | --- |
+| Odpověď byla jen „ano“ | otázku přepsat na požadovaný výstup | nepřidávat další tři checkboxy |
+| Otázka přišla pozdě | přesunout pravidlo do briefu nebo návrhu | nedržet ho i na starém místě pro jistotu |
+| Důkaz byl moc těžký | zmenšit minimální důkaz | nezakládat nový report pro každou změnu |
+| Existuje podobné pravidlo jinde | sloučit formulaci do cílového pravidla | nenechat dvě místa pravdy |
+| Tým nevěděl, kdy pravidlo neplatí | doplnit krátké „netýká se“ kritérium | nevyrábět dlouhou výjimkovou politiku |
+
+Vybraný nález napiš jednou větou: „Pravidlo ___ při prvním použití selhalo v ___, protože ___; úprava se dotkne jen ___.“ Pokud věta obsahuje tři různé příčiny, rozděl práci. Jedna úprava má mít jeden důvod.
+
+### Rozliš formulaci, místo a důkaz
+
+Před editací pravidla rozhodni, kterou vrstvu opravdu měníš. Slabé review často skončí přepisem textu, i když problém byl jinde. Otázka může být srozumitelná, ale leží ve špatné fázi práce. Nebo je na správném místě, ale vyžaduje důkaz, který tlačí tým k exportům dat.
+
+Použij tři vrstvy:
+
+| Vrstva | Kdy ji měnit | Příklad opravy |
+| --- | --- | --- |
+| Formulace | lidé otázku viděli, ale odpověď nezměnila zadání | z „zkontrolovat export“ udělat „která pole export obsahuje, která vědomě neobsahuje a kdy soubor končí“ |
+| Místo použití | lidé otázku řešili moc pozdě nebo mimo rozhodnutí | přesunout ji z release checklistu do produktové karty |
+| Důkaz | pravidlo vedlo k těžkému nebo citlivému ověřování | nahradit screenshot zákaznických dat testovacím scénářem se seed daty |
+
+Měň jen jednu hlavní vrstvu. Když změníš formulaci, místo i důkaz najednou, další použití už neřekne, co vlastně pomohlo. Malá změna má být čitelná i pro člověka, který u prvního review nebyl.
+
+### Přepiš pravidlo na akci v zadání
+
+Dobré pravidlo není obecná morální věta. Je to věta, která člověku při zadávání pomůže udělat malé rozhodnutí. Proto ji piš jako otázku, akceptační kritérium nebo krátký požadovaný výstup.
+
+Místo:
+
+„Myslet na privacy u exportu.“
+
+Napiš:
+
+„Před exportem popiš rozsah polí, výjimky, místo dočasného uložení a dobu smazání souboru. Důkazem je testovací export se seed daty.“
+
+Místo:
+
+„Zkontrolovat, že pricing limit je jasný.“
+
+Napiš:
+
+„Pricing karta říká, co se stane po dosažení limitu, kdo akci uvidí a zda se kvůli limitu sbírá nové používání. Pokud ne, doplň text před releasem.“
+
+Krátká kontrola formulace:
+
+- začíná pracovním okamžikem, ne abstraktní hodnotou,
+- říká, co se má doplnit, zúžit, odmítnout nebo ověřit,
+- obsahuje hranici dat, pokud se pravidlo týká sběru, exportu, logů nebo přístupů,
+- dá se splnit bez nové porady,
+- má jasné „netýká se“, pokud by jinak dopadalo na příliš mnoho změn.
+
+### Uprav jen jeden nosič pravdy
+
+Pravidlo musí žít tam, kde se podle něj skutečně pracuje. Pokud ho zároveň upravíš v šabloně zadání, release checklistu, interní wiki a starém dokumentu k auditu, vyrobíš souběžnou pravdu. Za měsíc nikdo neví, která věta platí.
+
+Postup:
+
+1. Vyber cílový nosič: produktová karta, akceptační kritéria, review otázka, support šablona nebo runbook.
+2. Uprav pravidlo pouze tam.
+3. Starý nosič smaž, slouč nebo označ jako archivní.
+4. Pokud starý nosič musí dočasně zůstat, přidej odkaz na cílové místo a datum úklidu.
+5. Zapiš zavírací větu, kde pravidlo teď žije.
+
+Příklad zavírací věty: „Exportní pravidlo teď žije jen v produktové kartě pro datové akce; starý release checklist bod byl smazaný a důkaz zůstává testovací export se seed daty.“
+
+Tohle je malý úklid, ale hodně brání budoucí zmatkové archeologii.
+
+### Chraň úpravu před novým dohledem
+
+Když pravidlo jednou selže, tým má tendenci přidat kontrolu kontroly. Povinný screenshot. Povinný komentář. Povinný report. Povinné schválení někým, kdo stejně nemá kontext. U privacy-first pravidel je to obzvlášť nebezpečné: oprava pravidla nesmí být důvodem k širšímu sledování práce nebo lidí.
+
+Privacy hranice úpravy má odpovědět na pět otázek:
+
+| Otázka | Dobrá odpověď |
+| --- | --- |
+| Jaký důkaz stačí? | běžná karta, návrh, test se seed daty, anonymizovaný příklad nebo veřejný text |
+| Co se nesmí sbírat? | osobní data zákazníků, session recordings, interní poznámky mimo účel, nové individuální eventy |
+| Kde úprava žije? | v jednom pracovním nosiči, ne v nové kontrolní tabulce |
+| Kdo ji ověří? | vlastník cílové šablony nebo reviewer dané změny |
+| Kdy mimořádná pozornost končí? | po jednom dalším použití nebo po předem daném pracovním okamžiku |
+
+Pokud úprava pravidla vyžaduje nový dashboard, pravděpodobně neopravuje pravidlo. Obchází nedůvěru. To je jiný problém a nemá se schovávat do šablony zadání.
+
+### Napiš změnovou kartu pravidla
+
+Změnová karta má být malá a konkrétní. Stačí tahle tabulka:
+
+| Pole | Zápis |
+| --- | --- |
+| Původní pravidlo | Jak znělo před první kontrolou. |
+| Nález | Co se při prvním použití ukázalo. |
+| Měněná vrstva | Formulace, místo použití nebo důkaz. |
+| Nové znění | Přesná věta, otázka nebo akceptační kritérium. |
+| Cílový nosič | Kde pravidlo nově žije. |
+| Úklid | Co se smaže, sloučí nebo označí jako archivní. |
+| Privacy hranice | Jaký důkaz stačí a co se nesmí sbírat. |
+| Ověření | Kdy a na jaké běžné práci se úprava zkontroluje. |
+| Stop pravidlo | Kdy pravidlo zúžit, přesunout, sloučit nebo smazat. |
+
+Karta nemá obsahovat historii všech debat. Historie patří do rozhodovacího logu jen tehdy, pokud vysvětluje budoucí riziko. Běžná úprava pravidla potřebuje důvod, nové znění a jasný úklid staré stopy.
+
+### Příklad: Exportní otázka po slabé první odpovědi
+
+Situace: pravidlo v produktové kartě znělo „Zkontrolovat, že export neobsahuje zbytečná data.“ Při první změně týkající se CSV exportu tým odpověděl „ano“, ale nezapsal rozsah polí, výjimky ani retenci souboru. Review dalo verdikt „zpřesnit“.
+
+Změnová karta:
+
+| Pole | Zápis |
+| --- | --- |
+| Původní pravidlo | Zkontrolovat, že export neobsahuje zbytečná data. |
+| Nález | Odpověď byla odškrtnutá, ale nezměnila zadání ani test. |
+| Měněná vrstva | Formulace a důkaz. |
+| Nové znění | „Popiš povolená pole exportu, vědomě vyloučená pole a dobu smazání dočasného souboru. Důkazem je seed CSV nebo test datového kontraktu.“ |
+| Cílový nosič | Produktová karta pro datové akce. |
+| Úklid | Smazat starou obecnou otázku v release checklistu. |
+| Privacy hranice | Nepoužívat reálné zákaznické exporty jako důkaz. |
+| Ověření | Při nejbližší exportní úpravě zkontrolovat, zda otázka doplnila pole, výjimky nebo retenci. |
+| Stop pravidlo | Pokud se otázka znovu jen odškrtne, převést ji na akceptační kritérium v šabloně exportní funkce. |
+
+Zavírací věta: „Exportní pravidlo bylo zpřesněné z obecné kontroly na popis polí, výjimek a retence; starý checklist bod končí a další ověření proběhne na první běžné exportní změně bez reálných zákaznických dat.“
+
+### Checklist: Úprava produktového pravidla po první kontrole
+
+- [ ] Vycházím z jednoho konkrétního nálezu z první kontroly.
+- [ ] Vím, jestli měním formulaci, místo použití nebo důkaz.
+- [ ] Nové znění vede k akci v zadání, ne k obecnému souhlasu.
+- [ ] Pravidlo má jasnou privacy hranici pro data, exporty, logy, přístupy nebo měření.
+- [ ] Upravuje se jeden cílový nosič pravdy.
+- [ ] Starý nosič je smazaný, sloučený nebo označený jako archivní s datem úklidu.
+- [ ] Úprava nepřidává nový individuální tracking, screenshotovou povinnost ani kontrolní dashboard.
+- [ ] Existuje krátké kritérium „netýká se“, pokud by pravidlo jinak dopadalo moc široce.
+- [ ] Další ověření proběhne na běžné práci, ne na nové poradě.
+- [ ] Karta má stop pravidlo pro zúžení, přesun, sloučení nebo smazání.
+- [ ] Výsledek končí zavírací větou, kde pravidlo teď žije a co starého končí.
+
+### Mini úkol
+
+Vezmi poslední pravidlo, které po prvním použití nedostalo verdikt „ponechat“. Do dvaceti minut vyber jeden nález, urč měněnou vrstvu a napiš změnovou kartu: původní pravidlo, nález, nové znění, cílový nosič, úklid, privacy hranice, ověření a stop pravidlo. Pak uprav jen jedno cílové místo pravdy a výsledek zakonči větou: „Pravidlo ___ bylo upravené v ___, protože ___; stará stopa ___ končí a další ověření proběhne při ___.“
+
 ## Zdroje
 
 - IETF RFC 9110: HTTP Semantics - význam HTTP přesměrování a stavů včetně `410 Gone` pro zdroje, které už nejsou dostupné: https://www.rfc-editor.org/rfc/rfc9110.html
@@ -68584,6 +68738,8 @@ Vezmi poslední pravidlo, které se dostalo do zadání, a ověř jeho první re
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-30: Doplněna příloha o úpravě produktového pravidla po první kontrole bez nekonečného ladění: výběr jednoho nálezu z review, rozlišení formulace, místa použití a důkazu, přepis pravidla na akci v zadání, úprava jediného nosiče pravdy, ochrana před novým dohledem, změnová karta, exportní příklad, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-30: Rozšířena příloha o ověření produktového pravidla po prvním použití o předání verdiktu do jedné navazující karty nebo zavírací věty: převodní tabulka pro verdikty ponechat, zpřesnit, přesunout, sloučit a smazat, praktická karta s cílovým místem, úklidem, privacy hranicí a ověřením, exportní příklad, doplněná checklist položka a upravený mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
