@@ -152,6 +152,148 @@ U maleho tymu je casto nejlepsi zacit s mene nastroji a lepsim procesem. Jeden d
 
 ---
 
+## 2. Produktova strategie: od napadu k prvnim platicim zakaznikum
+
+Produktova strategie pro maly SaaS neni tricetistrankovy dokument s grafy, ktere nikdo necte. Je to sada rozhodnuti: komu slouzime, jaky bolestivy problem resime, proc tomu zakaznik veri, jak rychle dokazeme dodat hodnotu a za co nam nekdo zaplati. Dokud tyhle odpovedi nejsou ostre, kazda dalsi funkce jen zvetsuje mlhu.
+
+YC ve svych zakladnich startup radach opakuje veci jako "launch now", "build something people want", "do things that don't scale" a hledani prvnich 10 az 100 zakazniku, kteri produkt opravdu miluji: https://www.ycombinator.com/library/4D-yc-s-essential-startup-advice. Paul Graham stejny princip rozebira v eseji "Do Things that Don't Scale": https://www.paulgraham.com/ds.html. Prakticky preklad pro evropsky privacy-first SaaS: nejdrive najdi maly segment s akutni potrebou, vyres ho rucne a teprve potom automatizuj.
+
+### 2.1 Vyber problem, ne kategorii
+
+"Delame CRM pro male firmy" je kategorie. "Pomahame malym B2B studiim neztratit poptavky mezi emailem, Telegramem a poznamkami po callu" je problem. Kategorie se spatne overuje, protoze lide obvykle nekupuji kategorii. Kupuji posun: mene chaosu, rychlejsi odpoved, mensi riziko, vic obchodu, min rucni prace.
+
+Dobry problem ma pet vlastnosti:
+
+- Je konkretni: da se popsat jednou situaci ze zivota zakaznika.
+- Je casty: deje se opakovane, ne jednou za uhersky rok.
+- Je drahy: stoji cas, penize, duveru, energii nebo prilezitosti.
+- Ma vlastnika: existuje clovek, ktery za nej citi odpovednost.
+- Ma stavajici workaround: zakaznik uz dnes neco dela, i kdyz neohrabane.
+
+**Priklad slabe formulace:**
+
+"Firmy potrebuji lepsi produktivitu."
+
+**Priklad ostre formulace:**
+
+"Majitel male agentury kazde rano rucne prochazi email, fakturacni system a task manager, aby zjistil, ktere placene prace stoji kvuli chybejicimu schvaleni od klienta."
+
+Ta druha veta uz napovida, s kym mluvit, co sledovat, jakou hodnotu slibit a jake integrace opravdu davaji smysl.
+
+### 2.2 Rozhovory pred kodem: hledej dukaz chovani
+
+Prvni rozhovory nejsou prodejni pitch. Jsou to detektivni schuzky. Neptas se "Libil by se vam muj produkt?", protoze slusni lide umi z lasky ke klidu odkyvat i veci, ktere nikdy nekoupi. Ptej se na minulost, rozhodnuti a konkretni situace.
+
+Pouzij tento scenar pro 20 az 30 minut:
+
+1. "Kdy jste tohle naposledy resil?"
+2. "Co tomu predchazelo?"
+3. "Jak jste to vyresil dnes?"
+4. "Co na tom bylo nejotravnejsi nebo nejdrazsi?"
+5. "Kdo dalsi do toho vstupoval?"
+6. "Co se stane, kdyz se to nevyresi?"
+7. "Za co uz dnes platite, aby se problem zmensil?"
+8. "Kdybyste si mohl nechat jednu cast zautomatizovat, ktera by to byla?"
+
+Zapisuj doslovne vyrazy zakaznika. Ne kvuli teatralnimu copywritingu, ale protoze jejich jazyk je casto presnejsi nez tvoje interni nazvy. Kdyz pet lidi rekne "honim schvaleni", nepremenuj to v produktu na "approval lifecycle orchestration". To zni jako nemoc firemniho intranetu.
+
+Framework Jobs-to-be-Done se pouziva prave k pochopeni realneho posunu, ktery zakaznik hleda. Intercom popisuje, ze u softwaru pomaha zkouset, proc firmy "najimaji" a "vyhazuji" produkty a kde vznikaji prilezitosti pro inovaci: https://www.intercom.com/blog/mattresses-using-jobs-done-research-software/. Strategyzer Value Proposition Canvas podobne oddeluje zakaznicke prace, bolesti a zisky od samotnych vlastnosti produktu: https://www.strategyzer.com/library/the-value-proposition-canvas.
+
+**Codyho komentar:** Nejhorsi validace je formular, kde se lide prihlasi k "zajmu", protoze je to zadarmo a nic to po nich nechce. Lepsi je jeden clovek, ktery rekne: "Tohle bych chtel pouzit pristi tyden, kam poslu fakturacni udaje?"
+
+### 2.3 Nabidka pro prvnich pet platicich zakazniku
+
+Prvnich pet zakazniku nekupuje hotovy stroj. Kupuji duveru, rychlost a jasny vysledek. Proto nabidka nemusi byt siroka, ale musi byt konkretni.
+
+Sablona nabidky:
+
+> Pomahame [konkretni segment] vyresit [konkretni problem] tak, aby [meritelny nebo pozorovatelny vysledek] bez [neprijemny kompromis].
+
+Priklady:
+
+- Pomahame malym B2B studiim sledovat rozpracovane poptavky tak, aby do 24 hodin vedely, komu maji napsat, bez sdileni celeho mailboxu s americkym CRM.
+- Pomahame evropskym SaaS firmam sbirat produktovou analytiku tak, aby videly aktivaci a retenci, bez reklamniho sledovani uzivatelu napric webem.
+- Pomahame odbornym konzultantum premenit opakovane dotazy klientu na znalostni portal tak, aby usetrili support cas, bez uzavreni obsahu do socialni platformy.
+
+Pro prvni prodej staci i concierge verze: cast reseni delas rucne za kulisami. Kdyz zakaznik zaplati za vysledek, mas signal. Kdyz zaplati jen za slib dashboardu, mas spis test designu.
+
+Minimalni obchodni balicek pro prvni zakazniky:
+
+- Jedna cilova persona a jeji hlavni problem.
+- Jedna stranka s vysvetlenim vysledku, ne vsech funkci.
+- Jedna cena nebo pilotni podminky, ktere se daji rict nahlas bez kalkulacky.
+- Jedna jasna dalsi akce: call, audit, demo nebo objednavka.
+- Jeden interni zapis, co presne se zakaznikovi slibuje.
+
+Privacy-first hodnota patri primo do nabidky, ne az do paticky. Jestli je evropsky provoz, minimalizace dat a zadne reklamni pixely skutecna vyhoda, rekni to jednoduse: "Produkt je navrzeny pro evropske firmy, ktere chteji mit zakaznicka data pod kontrolou."
+
+### 2.4 MVP neni mala verze vseho
+
+MVP neni produkt, kde ma kazda budouci funkce smutnou polovicni variantu. Je to nejmensi spolehliva cesta k overeni jednoho rizika.
+
+Typicka rizika:
+
+- Problemove riziko: opravdu to lidi boli?
+- Segmentove riziko: boli to prave tento typ zakaznika?
+- Hodnotove riziko: dava navrzene reseni citelny vysledek?
+- Platebni riziko: zaplati za to nekdo ted, ne "az bude cas"?
+- Provozni riziko: umime to dodat bez chaosu a bez zbytecneho sbirani dat?
+
+Vyber jedno hlavni riziko pro dalsi tyden a navrhni experiment. Ne pet experimentu. Jeden.
+
+| Riziko | Lepsi experiment nez stavet cely produkt |
+| --- | --- |
+| Nevim, jestli problem existuje | 10 rozhovoru podle konkretniho scenare |
+| Nevim, jestli lide zaplati | Nabidka placeneho pilotu se skutecnou cenou |
+| Nevim, co ma byt prvni funkce | Rucni concierge sluzba pro 2 zakazniky |
+| Nevim, zda zprava rezonuje | 3 verze landing page textu poslane primo relevantnim lidem |
+| Nevim, zda privacy-first vadi nebo pomaha | Rozhovor o nakupnich blokerech, DPA, hostingu a internich pravidlech |
+
+U privacy-first SaaS si dej pozor na "docasne" nastroje. Docasny americky CRM export se umi stat trvalou integraci rychleji, nez stihnes rict vendor lock-in. Kdyz testujes rucne, drz data v minimalni evidenci, omez pristupy a predem si rekni, kdy pilotni data smazes.
+
+### 2.5 Rozhodovaci rytmus na prvni mesic
+
+Produktova strategie neni jednorazova porada. Je to rytmus. Prvni mesic nepotrebujes dokonaly roadmap software. Potrebujes pravidelne rozhodovat podle toho, co ses naucil.
+
+Navrh rytmu:
+
+- Pondeli: vyber jeden hlavni predpoklad tydne.
+- Utery az ctvrtek: rozhovory, prodej, prototyp nebo concierge dodani.
+- Patek: zapis poznatky, rozhodni "pokracovat, zmenit, zahodit".
+- Kazdy tyden: oslov 10 konkretnich lidi, ne anonymni publikum.
+- Kazde dva tydny: zkontroluj, zda produkt nesbira vic dat, nez potrebuje.
+
+Zapis pro kazdy tyden by se mel vejit na jednu stranku:
+
+- Co jsme si mysleli?
+- Co jsme udelali?
+- Co jsme slyseli nebo videli?
+- Co nas prekvapilo?
+- Co ted prestaneme delat?
+- Co udelame priste?
+
+**Priklad rozhodnuti:**
+
+"Mysleli jsme si, ze zakaznici chteji prehled vsech leadu. Po osmi rozhovorech se ukazalo, ze akutni bolest je jen pripominani neodpovezenych nabidek po trech dnech. Tento tyden nestavime CRM. Stavime jednoduchy signal 'komu se ozvat dnes'."
+
+Tohle je dobra strategie. Neni sexy, ale setri mesice prace.
+
+### Checklist: od napadu k prvnim platbam
+
+- [ ] Problem umim popsat jednou konkretni situaci.
+- [ ] Mam seznam alespon 20 lidi nebo firem, ktere tento problem mohou mit.
+- [ ] Vedl jsem rozhovory o minulem chovani, ne o hypotetickem zajmu.
+- [ ] Zapsal jsem presna slova zakazniku.
+- [ ] Vim, jake workaroundy pouzivaji dnes.
+- [ ] Mam jednu vetu nabidky podle segmentu, problemu, vysledku a kompromisu.
+- [ ] Prvni verze overuje jedno hlavni riziko.
+- [ ] Nabidka obsahuje skutecnou dalsi akci a cenu nebo pilotni podminky.
+- [ ] Privacy-first provoz je soucast hodnoty, ne jen pravni dokument.
+- [ ] Pilotni data maji jasny ucel, pristupova pravidla a datum smazani.
+- [ ] Kazdy tyden rozhodnu, co pokracuje, co se meni a co konci.
+
+---
+
 ## Zdroje
 
 - GDPR, Regulation (EU) 2016/679, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
@@ -160,9 +302,14 @@ U maleho tymu je casto nejlepsi zacit s mene nastroji a lepsim procesem. Jeden d
 - OWASP Top 10 2025, A01 Broken Access Control: https://owasp.org/Top10/2025/A01_2025-Broken_Access_Control/
 - OWASP HTTP Headers Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Headers_Cheat_Sheet.html
 - MDN, Strict-Transport-Security header: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Strict-Transport-Security
+- Y Combinator, YC's essential startup advice: https://www.ycombinator.com/library/4D-yc-s-essential-startup-advice
+- Paul Graham, Do Things that Don't Scale: https://www.paulgraham.com/ds.html
+- Strategyzer, Value Proposition Canvas: https://www.strategyzer.com/library/the-value-proposition-canvas
+- Intercom, More than mattresses: using Jobs-to-be-Done research for software: https://www.intercom.com/blog/mattresses-using-jobs-done-research-software/
 
 ---
 
 ## Pracovni log
 
 - 2026-07-30: Zalozena struktura e-booku, doplnen uvod, osnova a hotova prvni kapitola o privacy-first zakladu SaaS webu vcetne praktickych prikladu, checklistu a zdroju.
+- 2026-07-30: Dopsana druha kapitola o produktove strategii od vyberu problemu pres rozhovory a placene piloty po prvni mesic rozhodovaciho rytmu.
