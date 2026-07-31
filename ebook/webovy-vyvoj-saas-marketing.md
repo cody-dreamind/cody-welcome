@@ -4319,10 +4319,162 @@ Napr. doplnit exportni postup, otestovat export, odstranit stary API klic nebo a
 
 ---
 
+## Prakticka priloha: Mini DPIA pred novou funkci za 60 minut
+
+DPIA, tedy posouzeni vlivu na ochranu osobnich udaju, neni kouzelna compliance ceremonie. Je to strukturovany zpusob, jak se predem zeptat: muze tahle zmena lidem ublizit, zbytecne je sledovat, omezit jejich kontrolu nad daty nebo vytvorit riziko, ktere pak budeme draze vysvetlovat?
+
+GDPR v clanku 35 vyzaduje posouzeni vlivu, pokud je pravdepodobne, ze typ zpracovani povede k vysokemu riziku pro prava a svobody fyzickych osob. Primarni text GDPR je zde: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng. WP29/EDPB metodika k DPIA popisuje kriteria vysokeho rizika a prakticky postup pro vyhodnoceni: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/data-protection-impact-assessment-dpia_en
+
+U maleho SaaS nemusis delat plnou DPIA pro kazde tlacitko. Ale mini DPIA filtr se hodi pred kazdou zmenou, ktera pridava novy typ dat, noveho dodavatele, automaticke rozhodovani, monitoring uzivatelu, integraci s komunikaci nebo praci s citlivejsim obsahem. Kdyz filtr ukaze vysoke riziko, zastav zkratku a udelej plnejsi posouzeni s pravnikem nebo clovekem odpovednym za ochranu dat.
+
+**Codyho komentar:** Mini DPIA je jako technicky design review, jen misto "spadne nam to?" pridava otazku "bude to divne, nefer nebo neobhajitelne, az se zakaznik zepta?" Obvykle je levnejsi odpovedet pred releasem.
+
+### 1. Kdy mini DPIA spustit
+
+Pouzij ji, pokud nova funkce dela aspon jednu z techto veci:
+
+- sbira novou kategorii osobnich udaju,
+- meni ucel existujicich dat,
+- posila data novemu dodavateli,
+- propojuje data z vice systemu,
+- zavadi profilovani, scoring nebo automaticke doporuceni,
+- zaznamenava chovani uzivatelu detailneji nez driv,
+- pracuje s exporty, mazanim, supportem nebo auditnim logem,
+- zveda retenci dat,
+- pridava AI zpracovani nad zakaznickym nebo internim obsahem,
+- meni pristupy k produkcnim datum.
+
+**Priklad:**
+
+Chces pridat "chytre doporuceni leadu k follow-upu". Pokud model vidi jen agregovany stav pipeline, riziko je mensi. Pokud cte cele emaily, poznamky z callu, jmena klientu a historii obchodnika, mini DPIA musi zcervenat. Ne proto, ze AI je zakazana, ale proto, ze datovy dopad uz neni detail v user story.
+
+### 2. Jednostrankova sablona
+
+```text
+Nazev zmeny:
+
+Vlastnik:
+
+Proc zmenu delame:
+[produktovy nebo obchodni cil]
+
+Koho se tyka:
+[uzivatel / admin / zakaznik zakaznika / navstevnik webu]
+
+Jake data zpracujeme:
+[kategorie, ne vsechny sloupce]
+
+Je tam citlivy nebo vysoce rizikovy kontext:
+[ano/ne + proc]
+
+Novy ucel zpracovani:
+[ano/ne + popis]
+
+Novy dodavatel nebo region:
+[ano/ne + kde]
+
+Automaticke rozhodovani, scoring nebo profilovani:
+[ano/ne + dopad na cloveka]
+
+Retence:
+[jak dlouho a proc]
+
+Pristupy:
+[kdo data uvidi]
+
+Export a mazani:
+[jak lze data dostat ven nebo odstranit]
+
+Rizika pro cloveka:
+[ztrata kontroly, nechtene zverejneni, diskriminace, spam, bezpecnost, reputace]
+
+Opatreni:
+[minimalizace, agregace, pseudonymizace, pristupy, logy, souhlas, vypnuti]
+
+Rozhodnuti:
+[pokracovat / upravit / zastavit / predat na plnou DPIA]
+```
+
+Sablona ma byt kratka. Pokud odpovedi bobtnaji na pet stran, pravdepodobne uz nejde o mini posouzeni a stoji za to udelat plnou DPIA.
+
+### 3. Rizikovy filtr v peti otazkach
+
+| Otazka | Zelena odpoved | Cervena odpoved |
+| --- | --- | --- |
+| Jsou data nutna pro slibenou hodnotu? | Ano, bez nich funkce nejde dodat. | Sbira se to pro "mozna pozdeji". |
+| Rozumi uzivatel, co se deje? | Mikrotext a privacy dokument sedi na realny tok. | Data se pouziji zpusobem, ktery by uzivatel necekal. |
+| Lze ucel splnit mensim detailem? | Pouzijeme agregaci, kratkou retenci nebo omezeny vyrez. | Posilame kompletni obsah, protoze je to pohodlne. |
+| Je dodavatel kontrolovatelny? | Region, DPA, pristupy, export a mazani jsou jasne. | Nevim, kde data skoncila, ale SDK se snadno instaluje. |
+| Ma clovek kontrolu? | Existuje export, oprava, zruseni nebo smazani podle situace. | Data zustanou v systemu bez jasneho konce. |
+
+Kdyz mas jednu cervenou odpoved, zkus navrhnout upravu. Kdyz mas vice cervenych odpovedi nebo se zmena tyka citlivych dat, automatickeho rozhodovani s dopadem na cloveka nebo rozsahleho monitoringu, nepretlacuj to silou. Zastav release a udelej hlubsi posouzeni.
+
+### 4. Opatreni, ktera casto staci
+
+Ne kazde riziko se resi pravnim odstavcem. Casto pomuze produktova nebo technicka uprava:
+
+- Odebrat pole z formulare.
+- Zmenit volny text na vyber z kategorii.
+- Zkratit retenci surovych dat.
+- Ukladat agregaci misto historie jednotlivce.
+- Oddelit support obsah od produktove analytiky.
+- Omezit pristup podle role.
+- Pridat auditni log pro admin akce.
+- Vypnout export do dodavatele, dokud neni hotova DPA.
+- Pridat jasny mikrotext primo do toku.
+- Udelat funkci opt-in tam, kde ji uzivatel nemusi ocekavat.
+
+**Priklad upravy:**
+
+Puvodni navrh: "Budeme nahravat vsechny onboarding cally a AI z nich udela profil zakaznika."
+
+Lepsi navrh: "Call se nahraje jen po jasnem potvrzeni, prepis zustane v EU ulozisti, shrnuti obsahuje jen dohodnute potreby a rozhodnuti, surova nahravka se smaze po 30 dnech, pokud neni potreba k zakaznickemu procesu."
+
+To neni jen privacy zlepseni. Je to i lepsi produktovy design: mene dat, jasnejsi ucel, mensi supportni trapeni.
+
+### 5. 60min postup
+
+```text
+00-05 min: Popis zmeny jednou vetou.
+Co pridavame a proc.
+
+05-15 min: Sepis data a ucel.
+Jake kategorie dat, odkud, kam, proc.
+
+15-25 min: Projdi rizikovy filtr.
+Nutnost, ocekavani uzivatele, minimalizace, dodavatel, kontrola.
+
+25-40 min: Navrhni opatreni.
+Co odebrat, agregovat, zkratit, omezit, vysvetlit nebo oddelit.
+
+40-50 min: Rozhodni.
+Pokracovat, upravit, zastavit, nebo predat na plnou DPIA.
+
+50-60 min: Zapis vystup do issue nebo rozhodovaciho logu.
+Vlastnik, opatreni, termin, signal pro znovuotevreni.
+```
+
+### Checklist: mini DPIA
+
+- [ ] Je jasne, proc zmenu delame a koho se tyka.
+- [ ] Jsou popsane kategorie dat, ucel, systemy, dodavatele a regiony.
+- [ ] Je overene, zda nejde o novy ucel zpracovani.
+- [ ] Je zkontrolovane, zda zmena nepridava profilovani nebo automaticke rozhodovani s dopadem na cloveka.
+- [ ] Data jsou minimalizovana na skutecnou potrebu funkce.
+- [ ] Retence ma konec a vlastnika.
+- [ ] Pristupy jsou omezene podle role.
+- [ ] Export, oprava nebo mazani jsou popsane podle typu dat.
+- [ ] Mikrotext a privacy dokument odpovidaji realnemu toku.
+- [ ] Cervena rizika maji opatreni, termin a vlastnika.
+- [ ] Pokud riziko zustava vysoke, zmena nejde ven bez plnejsiho posouzeni.
+
+---
+
 ## Zdroje
 
 - GDPR, Regulation (EU) 2016/679, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
 - EDPB Guidelines 07/2020 on the concepts of controller and processor in the GDPR: https://www.edpb.europa.eu/system/files/2023-10/EDPB_guidelines_202007_controllerprocessor_final_en.pdf
+- WP29/EDPB Guidelines on Data Protection Impact Assessment (DPIA): https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/data-protection-impact-assessment-dpia_en
 - EDPB Guidelines 9/2022 on personal data breach notification under GDPR: https://www.edpb.europa.eu/documents/guideline/guidelines-92022-on-personal-data-breach-notification-under-gdpr_en
 - Directive (EU) 2022/2555, NIS2 Directive, EUR-Lex: https://eur-lex.europa.eu/eli/dir/2022/2555/oj/eng
 - ENISA, Cybersecurity guide for SMEs - 12 steps to securing your business: https://www.enisa.europa.eu/publications/cybersecurity-guide-for-smes
@@ -4393,3 +4545,4 @@ Napr. doplnit exportni postup, otestovat export, odstranit stary API klic nebo a
 - 2026-07-31: Pridana prakticka priloha Zakaznicka podpora bez datove pasti za 60 minut vcetne support datoveho kontraktu, triage, sablon odpovedi a checklistu.
 - 2026-07-31: Pridana prakticka priloha Subprocesori a zmeny dodavatelu za 60 minut vcetne verejneho seznamu, procesu zmeny, oznamovaci sablony a checklistu.
 - 2026-07-31: Pridana prakticka priloha Exit plan dodavatele za 45 minut vcetne karty kritickeho dodavatele, exportni kontroly, nouzoveho fallbacku a ukoncovaciho checklistu.
+- 2026-07-31: Pridana prakticka priloha Mini DPIA pred novou funkci za 60 minut vcetne rizikoveho filtru, sablony posouzeni, opatreni a checklistu.
