@@ -2840,6 +2840,234 @@ Nejdulezitejsi kontrola zni: "Kdyby se zakaznik zeptal na dukaz, dokazeme ho dod
 
 ---
 
+## Mesicni privacy-first provozni audit
+
+Jednou za mesic si maly SaaS tym zaslouzi kratkou kontrolu reality. Ne velky audit s tabulkou, ze ktere se potichu odstehuje radost ze zivota. Spis 90 minut, kdy se projde produkt, data, dodavatele, monitoring, obsah a obchodni sliby. Cilem neni najit vinu. Cilem je zachytit male odchylky driv, nez se z nich stanou drahe problemy.
+
+Mesicni audit je nejuzitecnejsi po launchi, kdy produkt zije a zacina nabirat vyjimky: jeden novy formular, jeden novy supportni nastroj, jedna docasna tabulka, jeden "rychly" export pro obchod. Kazda vec sama o sobe vypada nevinne. Dohromady ale umi posunout produkt od privacy-first provozu k datovemu skladisti s hezkou patickou.
+
+Pravidlo: audit ma koncit tremi vystupy:
+
+- co je v poradku,
+- co se opravuje tento mesic,
+- co se vedome odklada a proc.
+
+Bez tretiho bodu se audit zmeni v moralni cviceni. Bez druheho bodu v divadlo. Bez prvniho bodu v depresi s odrazkami.
+
+### 1. Priprav vstupy za poslednich 30 dni
+
+Pred auditem si priprav minimum kontextu:
+
+- posledni produkcni releasy,
+- nove nebo zmenene formulare,
+- nove integrace a dodavatele,
+- nejcastejsi support dotazy,
+- chyby z monitoringu a incidenty,
+- zmeny v ceniku, obchodnich slibech nebo trust page,
+- exporty dat, mazani uctu a privacy/security dotazy,
+- nejnavstevovanejsi obsah a stranky s hlavnim CTA.
+
+Nepotrebujes vsechno otevrit najednou. Staci vedet, kde jsou zdroje pravdy. Pokud tym nema zdroj pravdy, prvni nalez auditu je prave tohle.
+
+Sablona pripravy:
+
+```text
+Auditni obdobi:
+[od - do]
+
+Hlavni zmeny:
+[releasy, nove funkce, kampane, dodavatele]
+
+Zakaznicke signaly:
+[support, obchod, churn, privacy/security dotazy]
+
+Provozni signaly:
+[incidenty, downtime, zalohy, chyby, alerty]
+
+Datove zmeny:
+[nova pole, nove eventy, exporty, retence, mazani]
+```
+
+### 2. Projdi hlavni uzivatelskou cestu
+
+Vyber jednu hlavni cestu. Ne vsechny. Typicky:
+
+- navstevnik prijde na landing page a posle poptavku,
+- uzivatel se registruje a dosahne aktivacniho momentu,
+- zakaznik exportuje data,
+- admin prida clena tymu,
+- zakaznik meni plan nebo rusi ucet.
+
+U kazdeho kroku si napis:
+
+| Otazka | Co hledat |
+| --- | --- |
+| Je dalsi akce jasna? | Tlacitko, mikrotext, potvrzeni, chyba. |
+| Sbira se jen nutne minimum dat? | Pole formulare, telemetry, logy, eventy. |
+| Je vysvetlen ucel zpracovani? | Mikrotext, privacy link, trust page. |
+| Funguje cesta technicky? | Smoke test, email, redirect, ulozeni. |
+| Da se cesta opustit ferove? | Zruseni, zpet, export, odhlaseni. |
+
+**Priklad nalezu:**
+
+"Demo formular nove vyzaduje telefon, ale obchod odpovida primarne emailem. Telefon neni potreba pro prvni krok. Akce: zmenit telefon na volitelne pole nebo ho odstranit, upravit mikrotext a zkontrolovat, zda se neposila do analytiky."
+
+Tohle je maly nalez s velkym dopadem. Snizuje treneni, rozsah dat i pravni vysvetlovani.
+
+### 3. Zkontroluj datovou mapu a eventy
+
+Datova mapa nemusi byt dokonala, ale musi odpovidat realite. Jednou mesicne zkontroluj:
+
+- nepribyla nova osobni data,
+- nepribyl novy dodavatel,
+- nezmenil se region zpracovani,
+- nevznikl novy export mimo hlavni system,
+- nejsou v logach cele zpravy, tokeny nebo volne vstupy,
+- eventy porad odpovidaji mericimu planu,
+- retence odpovida ucelu.
+
+Rychla tabulka zmen:
+
+| Zmena | Proc vznikla | Data | System | Retence | Rozhodnuti |
+| --- | --- | --- | --- | --- | --- |
+| nove pole ve formulari | trideni poptavek | tema dotazu | aplikace | po dobu obchodniho kontaktu | ponechat |
+| export supportu do tabulky | rucni analyza chyb | email + obsah zpravy | lokalni soubor | nejasna | smazat a nahradit anonymnim souhrnem |
+| novy event | mereni aktivace | account_id + krok | analytika | 12 mesicu | ponechat, dopsat do katalogu |
+
+Kdyz neumis u radku vyplnit ucel nebo retenci, je to kandidat na odstraneni. Data, ktera nikdo neumi obhajit, nejsou budoucnostni poklad. Jsou neuklizeny sklep.
+
+### 4. Over dodavatele a pristupy
+
+Dodavatele se meni tise. Nekdo prida trial, propoji formular, zapne novou funkci v analytice nebo pozve kolegu do adminu. Mesicni audit ma zachytit hlavne drift.
+
+Kontrolni otazky:
+
+- Kteri dodavatele dostali za posledni mesic nova data?
+- Ma kazdy dodavatel jasny ucel a vlastnika?
+- Je porad pravda, co o dodavatelich rikame v trust page nebo privacy dokumentu?
+- Ma kazdy pristup duvod?
+- Odesli lide maji odebrane pristupy?
+- Jsou admin ucty chranene MFA, pokud to dava smysl podle rizika?
+- Existuje exportni nebo vypinaci plan pro kriticke dodavatele?
+
+Vendor review nemusi byt roman. Pro mensi nastroj staci ctyri vety:
+
+```text
+Dodavatel:
+Proc ho pouzivame:
+Jaka data tam jdou:
+Kde jsou data / jaky je smluvni ramec:
+Jak ho vypneme:
+```
+
+**Codyho komentar:** "Pouzivame to jen interne" neni odpoved na datovou otazku. Interni nastroj muze mit nejcitlivejsi data v cele firme, protoze se do nej v dobre vire kopiruje vsechno, co zrovna hori.
+
+### 5. Zkontroluj verejne sliby
+
+Verejny web, cenik, trust page, privacy dokumenty a obchodni deck musi mluvit stejnou reci. Pokud produkt slibuje "provoz v EU", ale nova emailova automatizace posila metadata jinam, neni problem jen pravni. Je to problem duvery.
+
+Projdi hlavne:
+
+- headline a CTA na hlavni landing page,
+- cenik a popis planu,
+- trust page,
+- privacy/cookies dokumenty,
+- onboarding mikrotexty,
+- obchodni sablony,
+- FAQ a dokumentaci.
+
+U kazde vety si poloz:
+
+- Je porad pravdiva?
+- Je dost konkretni?
+- Mame pro ni interni dukaz?
+- Neprozrazuje zbytecne citlive provozni detaily?
+- Nepusobi jako slib, ktery zatim neumime splnit?
+
+**Priklad opravy slibu:**
+
+Misto:
+
+> "Vsechna data zustavaji v EU."
+
+Lepe, pokud realita je slozitejsi:
+
+> "Aplikacni data, databaze a zalohy provozujeme v EU. U podpurnych dodavatelu evidujeme ucel, region a smluvni podminky v dodavatelskem prehledu."
+
+Presnost je lepsi nez maximalisticka veta, ktera se rozbije pri prvnim security dotazniku.
+
+### 6. Vyber tri opravy, zbytek odloz
+
+Audit bez priorit je jen dalsi backlog. Na konci vyber maximalne tri opravy:
+
+- jednu rychlou opravu duvery nebo textu,
+- jednu opravu datove stopy,
+- jednu provozni nebo technickou opravu.
+
+Sablona vystupu:
+
+```text
+Mesicni audit:
+[datum]
+
+Co je v poradku:
+[3 kratke body]
+
+Oprava 1 - duvera/text:
+[co, vlastnik, termin, dukaz hotovo]
+
+Oprava 2 - data:
+[co, vlastnik, termin, dukaz hotovo]
+
+Oprava 3 - provoz:
+[co, vlastnik, termin, dukaz hotovo]
+
+Vedome odkladame:
+[co a proc]
+
+Znovu otevreme, kdyz:
+[signal]
+```
+
+Priklad:
+
+```text
+Oprava 1 - duvera/text:
+Trust page tvrdi, ze analytika je bez cookies, ale privacy dokument to rika jen obecne.
+Vlastnik: produkt
+Termin: patek
+Dukaz hotovo: trust page a privacy dokument maji stejnou formulaci a odkaz na merici plan.
+
+Oprava 2 - data:
+Lead formular posila obsah zpravy do obecne analytiky.
+Vlastnik: vyvoj
+Termin: streda
+Dukaz hotovo: event obsahuje jen page_slug a form_status, zprava zustava jen v CRM/mailboxu.
+
+Oprava 3 - provoz:
+Restore test databaze nebyl spusten posledni dva mesice.
+Vlastnik: provoz
+Termin: ctvrtek
+Dukaz hotovo: zapis restore drillu s casem obnovy a problemem, pokud nastal.
+```
+
+### Checklist: mesicni audit
+
+- [ ] Audit ma jasne obdobi a vlastnika.
+- [ ] Jsou zkontrolovane hlavni zmeny produktu, obsahu, dodavatelu a dat.
+- [ ] Jedna hlavni uzivatelska cesta byla projita rucne.
+- [ ] Formularova pole maji aktualni ucel.
+- [ ] Eventy odpovidaji mericimu planu a neposilaji volne osobni udaje.
+- [ ] Logy a exporty nemaji zbytecne citlivy obsah.
+- [ ] Datova mapa odpovida realnym systemum.
+- [ ] Dodavatele maji ucel, region, pristupy a vypinaci plan.
+- [ ] Verejne sliby odpovidaji skutecnemu provozu.
+- [ ] Vybrane jsou maximalne tri opravy pro dalsi mesic.
+- [ ] Odlozene problemy maji duvod a signal pro znovuotevreni.
+- [ ] Vysledek auditu je ulozeny tam, kde ho tym priste najde.
+
+---
+
 ## Zdroje
 
 - GDPR, Regulation (EU) 2016/679, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
@@ -2904,3 +3132,4 @@ Nejdulezitejsi kontrola zni: "Kdyby se zakaznik zeptal na dukaz, dokazeme ho dod
 - 2026-07-31: Pridan 90min audit existujiciho SaaS vcetne casoveho planu, auditu hlavniho toku, datove stopy a sablony vystupu.
 - 2026-07-31: Doplnena sedmidenni navazujici iterace po 90min auditu, ktera prevadi nalezy do tri konkretnich oprav s vlastnikem, vystupem a overenim.
 - 2026-07-31: Pridana prakticka priloha Trust page za 60 minut vcetne osnovy, mikrocopy pro duverove obavy, hodinoveho postupu a checklistu.
+- 2026-07-31: Pridana prakticka priloha Mesicni privacy-first provozni audit pro pravidelnou kontrolu datove mapy, dodavatelu, verejnych slibu a tri prioritnich oprav.
