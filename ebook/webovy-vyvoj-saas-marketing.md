@@ -3068,6 +3068,142 @@ Dukaz hotovo: zapis restore drillu s casem obnovy a problemem, pokud nastal.
 
 ---
 
+## Retencni politika a mazani dat za 60 minut
+
+Retencni politika zni jako dokument, ktery se pise az ve firme s pravnim oddelenim a klicovou kartou od zasedacky. Ve skutecnosti je to jedna z nejpraktictejsich veci, kterou muze maly SaaS udelat brzy. Rika, jak dlouho drzis jednotlive typy dat, proc je drzis, kdo o tom rozhoduje a jak je smazes.
+
+GDPR v clanku 5 pracuje mimo jine s principem omezeni ulozeni: osobni udaje maji byt uchovavane ve forme umoznujici identifikaci subjektu udaju jen po dobu nezbytnou pro dane ucely: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng. Prakticky preklad pro zakladatele: "jednou se to muze hodit" neni retencni duvod. Je to pozvanka k budoucimu uklidu v panice.
+
+**Codyho komentar:** Retence neni jen pravni hygiena. Je to produktovy design. Produkt, ktery umi data smazat, umi lip vysvetlit, co vlastne dela.
+
+### 1. Sepis datove kategorie, ne vsechny sloupce
+
+Za 60 minut nechces kreslit dokonaly datovy model. Chces mit rozhodnutelny seznam kategorii. Zacni tabulkou:
+
+| Kategorie dat | Priklad | Proc existuje | Kde lezi | Kdo vlastni rozhodnuti |
+| --- | --- | --- | --- | --- |
+| Ucet | email, role, tym | prihlaseni a sprava pristupu | aplikacni DB | produkt |
+| Billing | fakturacni udaje, objednavky | smlouva, ucetnictvi, platby | fakturacni system | finance |
+| Support | dotazy, prilohy, odpovedi | vyrizeni pozadavku | helpdesk nebo mailbox | support |
+| Analytika | page view, CTA klik, aktivacni event | produktove rozhodovani | analyticky nastroj | produkt |
+| Logy | request ID, chyba, cas | provoz a bezpecnost | logging | vyvoj |
+| Marketingove leady | email, zprava, zdroj | navazujici obchodni kontakt | CRM nebo mailbox | obchod |
+
+Nevadilo by, kdyby v prvni verzi chybel detail. Vadilo by, kdyby tym vubec nevedel, ze stejny email lezi v aplikaci, CRM, exportu z kampane a starem spreadsheetu po pilotu.
+
+### 2. Vyber retencni pravidlo podle ucelu
+
+Kazda kategorie potrebuje jasne pravidlo. Nepis "uchovavame po nezbytne dlouhou dobu" jako interni instrukci, protoze podle toho nikdo nic neudela. Pro verejny privacy dokument muze byt formulace obecnejsi, ale interni provozni pravidlo musi byt konkretni.
+
+Pouzij tri typy pravidel:
+
+| Typ pravidla | Kdy se hodi | Priklad |
+| --- | --- | --- |
+| Casove | data ztraci uzitek po pevne dobe | neodeslane lead formulare s chybou mazeme po 30 dnech |
+| Udalostni | data se vazi k ukonceni vztahu | po zruseni uctu smazeme produktova data po exportnim okne |
+| Pravni/provozni | data musis drzet kvuli smlouve, ucetnictvi nebo bezpecnosti | fakturacni doklady drzi finance podle ucetnich pravidel |
+
+U pravnich a ucetnich lhuty si nenechavej radit od genericke sablony z internetu. Zapis odpovednou roli a zdroj rozhodnuti. E-book neni pravni poradce, jen drzi latku vys nez "nekdo to nekdy nastavi".
+
+### 3. Navrhni mazani jako tok, ne jako tlacitko
+
+Mazani neni jedno tlacitko v adminu. Je to tok pres systemy. Typicky obsahuje:
+
+- prijeti pozadavku nebo interni udalost,
+- overeni identity a opravneni,
+- export dat, pokud ho slibujes,
+- smazani nebo anonymizaci v primarni aplikaci,
+- propagaci do navazanych systemu,
+- vyjimky pro data, ktera musis dal drzet,
+- zaznam o provedeni bez zbytecneho obsahu.
+
+**Priklad pro B2B SaaS ucet:**
+
+Zakaznik zrusi workspace. Aplikace oznaci workspace jako `pending_deletion`, okamzite vypne prihlaseni beznych uzivatelu, nabidne export dat spravci, po 30 dnech smaze produktova data, odpoji integrace a v auditu ponecha jen minimalni zaznam: workspace ID, datum pozadavku, datum provedeni, zodpovedny proces a stav. Faktury zustanou ve fakturacnim systemu podle samostatneho pravidla.
+
+Tohle je mnohem lepsi nez neurcite "data smazeme na zadost". Zakaznik vi, co se stane, a tym vi, co ma udelat.
+
+### 4. Pozor na stiny: exporty, logy a testovaci data
+
+Retencni politika casto selze mimo hlavni databazi. Nejvetsi bordel byva tady:
+
+- CSV exporty v pocitacich a sdilenych discich,
+- screenshoty v ticketech,
+- obsah formulare v aplikacnich logach,
+- kopie produkcni databaze pro vyvoj,
+- testovaci ucty vytvorene z realnych dat,
+- nahravky callu a automaticke prepisy,
+- stare kampanove seznamy v marketingovem nastroji.
+
+Pro maly tym staci pravidlo: co nejde automaticky spravovat, musi mit vlastnika a datum uklidu. Export bez vlastnika je datovy odpad. Hezky nazev slozky z nej nedela proces.
+
+### 5. 60min postup
+
+```text
+00-10 min: Vyber rozsah.
+Jeden produkt, jedna hlavni uzivatelska cesta, jeden tym.
+
+10-25 min: Sepis datove kategorie.
+Ucet, billing, support, analytika, logy, leady, exporty.
+
+25-40 min: Prirad ucel a retencni pravidlo.
+U kazde kategorie napis proc existuje a kdy konci jeji uzitek.
+
+40-50 min: Najdi stiny.
+Exporty, logy, testy, nahravky, integrace, zalohy.
+
+50-60 min: Vyber tri opravy.
+Jedna rychla technicka, jedna dokumentacni, jedna procesni.
+```
+
+Vysledkem nemusi byt dokonala politika. Vysledkem ma byt prvni verze, podle ktere jde zacit mazat, ne jen o mazani mluvit.
+
+### Sablona interni retencni tabulky
+
+```text
+Kategorie:
+[napr. support zpravy]
+
+Ucel:
+[proc data potrebujeme]
+
+Systemy:
+[kde data lezi]
+
+Retencni pravidlo:
+[konkretni lhuta nebo udalost]
+
+Vyjimky:
+[co zustava a proc]
+
+Mazaci mechanismus:
+[automaticky job, manualni postup, dodavatel]
+
+Vlastnik:
+[role, ne nahodne jmeno]
+
+Jak overime:
+[log, auditni zaznam, kontrolni dotaz]
+
+Verejny slib:
+[co o tom rikame v privacy dokumentu nebo trust page]
+```
+
+### Checklist: retence a mazani
+
+- [ ] Datove kategorie jsou popsane lidskym jazykem.
+- [ ] Kazda kategorie ma ucel a vlastnika.
+- [ ] Retencni pravidlo je konkretni, ne jen "nezbytna doba".
+- [ ] Mazani pokryva primarni aplikaci i navazane systemy.
+- [ ] Exporty a testovaci data maji vlastnika a datum uklidu.
+- [ ] Logy neobsahuji cele zpravy, tokeny ani zbytecne osobni udaje.
+- [ ] Zruseni uctu ma jasny tok vcetne exportu, pokud ho slibujes.
+- [ ] Data, ktera zustavaji kvuli pravnim nebo smluvnim duvodum, jsou oddelena a vysvetlena.
+- [ ] Verejny privacy dokument nelze vyvratit jednim pohledem do realneho provozu.
+- [ ] Tym umi ukazat dukaz, ze mazani probehlo, bez ukladani dalsich zbytecnych dat.
+
+---
+
 ## Zdroje
 
 - GDPR, Regulation (EU) 2016/679, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
@@ -3133,3 +3269,4 @@ Dukaz hotovo: zapis restore drillu s casem obnovy a problemem, pokud nastal.
 - 2026-07-31: Doplnena sedmidenni navazujici iterace po 90min auditu, ktera prevadi nalezy do tri konkretnich oprav s vlastnikem, vystupem a overenim.
 - 2026-07-31: Pridana prakticka priloha Trust page za 60 minut vcetne osnovy, mikrocopy pro duverove obavy, hodinoveho postupu a checklistu.
 - 2026-07-31: Pridana prakticka priloha Mesicni privacy-first provozni audit pro pravidelnou kontrolu datove mapy, dodavatelu, verejnych slibu a tri prioritnich oprav.
+- 2026-07-31: Pridana prakticka priloha Retencni politika a mazani dat za 60 minut vcetne datovych kategorii, retencnich pravidel, mazaciho toku, sablony a checklistu.
