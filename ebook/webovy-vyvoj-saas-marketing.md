@@ -5090,6 +5090,193 @@ Produkt + provoz.
 
 ---
 
+## Demo call bez slibu navic za 45 minut
+
+Demo call neni divadelni predstaveni produktu. Je to spolecne overeni, jestli konkretni problem, zakaznikuv kontext a tvoje reseni patri k sobe. Spatne demo ukazuje kazde menu, kazdy filtr a kazdou planovanou funkci. Dobre demo ukazuje cestu od bolesti k vysledku a zaroven chrani tym pred sliby, ktere by pozdeji sebraly mesice vyvoje.
+
+Privacy-first demo ma jeste jednu praci navic: nesmi z obchodniho rozhovoru udelat nenapadny datovy vysavac. Neptej se na informace, ktere nepotrebujes pro posouzeni fitu. Neukladej nahravky, prepisy a interni dokumenty bez jasneho duvodu. A kdyz zakaznik rekne neco o datech, hostingu nebo schvalovacim procesu, zapis to jako obchodni signal, ne jako volnou poznamku v deseti nastrojich.
+
+### 1. Pred callem si vyber jednu hypotezu
+
+Na demo nechod s cilem "ukazat produkt". To je moc siroke. Jdi tam s jednou hypotezou.
+
+Priklady:
+
+- Zakaznik ztraci B2B poptavky kvuli chybejicimu follow-upu.
+- Zakaznik chce merit landing page, ale nechce reklamni pixel.
+- Zakaznik potrebuje support portal, ale nechce kopirovat data do dalsi platformy.
+- Zakaznik ma problem s onboardingem, protoze prvni hodnota prijde pozde.
+- Zakaznik resi security/DPA dotazy driv, nez vidi samotny produkt.
+
+Sablona pred callem:
+
+```text
+Zakaznik:
+Segment:
+Co si myslime, ze ho boli:
+Co chceme overit:
+Jak vypada signal fitu:
+Jak vypada signal ne-fitu:
+Co nesmime slibit:
+Jake data na callu nepotrebujeme:
+```
+
+Posledni dva radky jsou dulezite. Obchodni tlak umi z rozumneho SaaS udelat zakazkovou dilnu s cizim roadmap kompasem. Kdyz predem vis, co neslibujes, mas na callu mensi sanci sahnout po vete "to samozrejme umime", ktera v prekladu znamena "vyvojari si pozdeji trochu poplacou".
+
+### 2. Prvnich 10 minut patri realite, ne slidum
+
+Zacni kratkym ramcem a pak se ptej na skutecny stav. Demo ma byt relevantni az po tom, co vis, do jake situace ho zasazujes.
+
+Scenar:
+
+1. "Rad bych nejdriv pochopil, jak to resite dnes, a pak ukazu jen casti, ktere na to sedi."
+2. "Kdy jste tenhle problem naposledy resil?"
+3. "Co presne se stalo?"
+4. "Kdo byl do toho zapojeny?"
+5. "Co jste udelali rucne nebo mimo system?"
+6. "Kde vznikla ztrata casu, penez nebo duvery?"
+7. "Co by se muselo zmenit, aby to pro vas stalo za pilot?"
+
+Neptej se "libi se vam tahle funkce?". Ptej se, co se stalo naposledy. Minule chovani je lepsi kompas nez zdvorile pritakani.
+
+### 3. Ukazuj cestu, ne katalog funkci
+
+Demo by melo mit jeden hlavni tok. Pokud produkt resi lead follow-upy, ukaz cestu od prichozi poptavky k dalsi akci. Pokud resi analytiku, ukaz cestu od kampane k rozhodnuti. Pokud resi support, ukaz cestu od dotazu k odpovedi, ktera nevynasi zbytecna data.
+
+Sablona demo toku:
+
+| Cast | Co ukazat | Co neukazovat |
+| --- | --- | --- |
+| Problem | Konkretni situace zakaznika | Obecny produktovy manifest |
+| Vstup | Minimalni data potrebna pro zacatek | Vsechna dostupna nastaveni |
+| Prace | 2 az 3 kroky k vysledku | Kazdy filtr a edge-case |
+| Vystup | Rozhodnuti, report, follow-up nebo export | Dekorativni dashboard |
+| Kontrola | Kde jsou data, kdo je vidi, jak se da odejit | Slova "to je nekde v nastaveni" |
+
+**Priklad:**
+
+U privacy-first analytiky neukazuj deset grafu navstevnosti. Ukaz jednu landing page, jeden CTA event, jedno odeslani formulare a rucni kvalifikaci leadu. Pak rekni: "Tady vidime, ze partner-web privedl tri relevantni poptavky. Nepotrebovali jsme k tomu reklamni profil navstevnika ani obsah formulare v analytice."
+
+To je obchodne silnejsi nez barevny dashboard, ktery neodpovida na zadne rozhodnuti.
+
+### 4. Privacy otazky preved na rozhodnuti
+
+Kdyz se zakaznik pta na data, neber to jako prekazku v prodeji. Je to znamka, ze uz premysli o realnem nasazeni.
+
+Typicke otazky a dobra reakce:
+
+| Otazka | Dobra reakce |
+| --- | --- |
+| Kde budou nase data? | Rict aktualni stav presne podle systemu a regionu. Pokud neco neni jiste, oznacit to jako otevreny bod. |
+| Mate DPA? | Rict, zda je pripravena, kdo ji resi a v jake fazi prijde do procesu. |
+| Muzeme data exportovat? | Ukazat nebo popsat realny export, ne jen slibit "nejak to pujde". |
+| Co se maze po ukonceni? | Vysvetlit kategorie dat: account, fakturace, logy, agregace. |
+| Pouzivate AI nebo dodavatele? | Rict, kde pomahaji, jaka data do nich smi a jaka ne. |
+
+Kdyz odpoved neznas, nepokousej se znit chytre. Rekni:
+
+```text
+Tohle nechci odhadovat. Zapisu to jako security/privacy bod a vratim se s presnou odpovedi:
+system, region, typ dat, retence a kdo ma pristup.
+```
+
+Tohle je lepsi nez improvizovany slib. Zakaznik si presnost pamatuje. A tym za ni jednou neposle fakturu ve forme vikendove migrace.
+
+### 5. Zaver callu musi mit maly dalsi krok
+
+Na konci dema nesmi zustat mlha typu "ozveme se". Domluv jeden dalsi krok, ktery odpovida urovni fitu.
+
+Moznosti:
+
+- Ne-fit: poslat kratke shrnuti, proc to ted neni vhodne.
+- Slaby fit: poslat jeden relevantni clanek, checklist nebo auditni otazku.
+- Stredni fit: domluvit technicky call k datum, integracim nebo procesu.
+- Silny fit: nabidnout placeny pilot s jasnym vystupem.
+- Enterprise fit: poslat security/DPA balicek a navrhnout pilotni rozsah.
+
+Sablona zaveru:
+
+```text
+Co jsme slyseli:
+[tri konkretni body]
+
+Kde vidime fit:
+[jedna az dve veci]
+
+Kde zatim fit nevidime nebo co je otevrene:
+[rizika, data, integrace, cena]
+
+Dalsi krok:
+[konkretni akce, vlastnik, datum]
+```
+
+Pokud dalsi krok nema vlastnika a datum, neni to dalsi krok. Je to prani v kalendari bez kalendare.
+
+### 6. Zapis po callu: mene textu, vic rozhodnuti
+
+Po callu napis kratky zaznam do CRM nebo interni evidence. Neopisuj vsechno. Uloz jen to, co pomaha rozhodnout.
+
+Minimalni zapis:
+
+| Pole | Co zapisovat |
+| --- | --- |
+| Segment | Typ firmy, role, velikost v rozumnem pasmu. |
+| Problem | Konkretni situace, kterou zakaznik popsal. |
+| Dnesni workaround | Co pouziva ted a proc to nestaci. |
+| Hodnota | Co by se muselo zlepsit, aby zaplatil. |
+| Privacy/security body | Dotazy na data, hosting, DPA, export, mazani. |
+| Fit | silny / mozny / slaby / ne-fit |
+| Dalsi krok | Akce, vlastnik, datum. |
+| Co neslibovat | Jasna hranice pro dalsi komunikaci. |
+
+Nepatri tam:
+
+- cele interni dokumenty zakaznika,
+- osobni poznamky bez obchodniho ucelu,
+- nahravka "pro jistotu",
+- obsah, ktery patri do supportu nebo pravniho procesu,
+- citlive informace sdilene omylem.
+
+**Codyho komentar:** Dobry demo zapis neni roman. Je to mapa dalsiho rozhodnuti. Kdyz z nej nejde poznat, jestli pokracovat, zmenit nabidku nebo rict ne, byl to jen stenograficky sport.
+
+### 7. 45min postup
+
+```text
+00-05 min: Ramovani
+Rict cil callu, potvrdit cas a domluvit, ze nejdriv pochopime situaci.
+
+05-15 min: Discovery
+Ptani na posledni realny pripad, workaround, dopad a rozhodovatele.
+
+15-30 min: Cileny demo tok
+Ukazat jen cestu k jednomu vysledku. Prubezne navazovat na slova zakaznika.
+
+30-36 min: Data a provoz
+Projit, jaka data jsou potreba, kde jsou hranice, co je otevrene.
+
+36-41 min: Fit a rizika
+Rict nahlas, kde fit vidis a kde zatim ne.
+
+41-45 min: Dalsi krok
+Domluvit jednu akci, vlastnika a datum. Zadna mlha.
+```
+
+### Checklist: demo call bez slibu navic
+
+- [ ] Pred callem mam jednu hypotezu a signal fitu.
+- [ ] Vim, co na callu nesmime slibit.
+- [ ] Prvnich 10 minut zjistuje realny stav, neukazuje menu.
+- [ ] Demo ma jeden hlavni tok k vysledku.
+- [ ] Neukazuji funkce, ktere nesouvisi s problemem zakaznika.
+- [ ] Privacy a security otazky zapisuji jako rozhodovaci body.
+- [ ] Neznamou odpoved neodhaduji, ale vracim se s presnym follow-upem.
+- [ ] Dalsi krok ma vlastnika, datum a jasny vystup.
+- [ ] Zapis po callu obsahuje problem, workaround, hodnotu, fit a rizika.
+- [ ] Do CRM neukladam citlive nebo zbytecne informace.
+- [ ] Po trech az peti demech hledam opakovane vzory v namitkach a slibech.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -5175,3 +5362,4 @@ Produkt + provoz.
 - 2026-07-31: Pridana prakticka priloha Changelog jako duvera, marketing a provoz za 45 minut vcetne kategorii, sablony, distribuce a privacy/security kontrol.
 - 2026-07-31: Pridana prakticka priloha Vyber AI nastroje pred prvnim promptem za 45 minut vcetne vendor karty, prompt policy, lidske kontroly a checklistu pred adopci.
 - 2026-07-31: Pridana prakticka priloha Rozhodovaci zaznamy pro maly SaaS za 45 minut vcetne sablony, datoveho dopadu, kontrolnich bodu a checklistu.
+- 2026-07-31: Pridana prakticka priloha Demo call bez slibu navic za 45 minut vcetne scenare discovery, cileneho dema, privacy otazek, zapisu po callu a checklistu.
