@@ -2063,6 +2063,299 @@ U privacy-first produktu sleduj hlavne dotazy na data. Pokud se vice lidi pta na
 
 ---
 
+## 12. Prilohy: sablony, metriky, auditni otazky
+
+Prilohy nejsou odkladiste vseho, co se neveslo do kapitol. Jsou to pracovni nastroje, ktere se daji zkopirovat do realneho projektu, upravit a pouzivat. U maleho SaaS tymu maji sablony jednu velkou vyhodu: snizuji pocet rozhodnuti, ktera se musi vymyslet pokazde znovu.
+
+Ber je jako vychozi stav, ne jako vytesane prikazani. Pokud sablona neodpovida realite produktu, uprav ji. Pokud se opakuje stejna otazka od zakazniku, pridej ji. Pokud nektera metrika nevede k rozhodnuti, smaz ji. Nejvetsi hrich sablony je predstirat poradek, zatimco tym dal improvizuje.
+
+**Codyho komentar:** Dobra sablona je nudna tak akorat. Kdyz je prilis volna, nepomaha. Kdyz je prilis slozita, nikdo ji nepouzije. Ideal je dokument, ktery prezijes otevrit i v patek odpoledne.
+
+### 12.1 Jednostrankovy product brief
+
+Pouzij ho pred stavbou landing page, MVP, pilotu nebo vetsi funkce. Cilem je rychle zjistit, jestli vsichni mluvi o stejnem produktu.
+
+```text
+Nazev:
+
+Pro koho to je:
+[konkretni segment, ne "male firmy"]
+
+Problem:
+[jedna situace ze zivota zakaznika]
+
+Proc to boli:
+[cas / penize / riziko / ztracena prilezitost / duvera]
+
+Stavajici workaround:
+[jak to resi dnes]
+
+Slib hodnoty:
+[co bude po pouziti lepsi]
+
+Prvni hodnotovy moment:
+[co musi uzivatel udelat nebo videt]
+
+Mimo rozsah:
+[co zamerne nestavime]
+
+Privacy-first dopad:
+[jaka data sbirame, proc, kde a jak dlouho]
+
+Dukaz, ze to funguje:
+[platba / pilot / aktivace / rozhovor / metrika]
+```
+
+Kontrola kvality:
+
+- Segment se da najit a oslovit.
+- Problem popisuje chovani, ne kategorii softwaru.
+- Slib hodnoty jde overit v kratkem case.
+- Mimo rozsah je konkretni, ne diplomaticke "zatim".
+- Datovy dopad je popsany lidsky, ne jen odkazem na pravni text.
+
+### 12.2 Sablona privacy-first landing page
+
+Tahle sablona pomaha napsat stranku, ktera prodava jasne, ale bez manipulace a zbytecneho sledovani.
+
+```text
+H1:
+[kategorie nebo vysledek pro konkretni segment]
+
+Podnadpis:
+[problem + vysledek + dulezity privacy/provozni signal]
+
+Primarni CTA:
+[sloveso + vysledek, napr. "Domluvit 20min audit"]
+
+Dukaz duvery:
+[reference / screenshot / proces / zakladatelska expertiza / anonymizovany vysledek]
+
+Sekce Problem:
+[3 az 5 situaci, ktere zakaznik pozna]
+
+Sekce Reseni:
+[jak produkt meni workflow, ne jen seznam funkci]
+
+Sekce Jak to funguje:
+[3 kroky od prvni akce k vysledku]
+
+Sekce Data a provoz:
+[kde jsou data, co se nesbira, export, mazani, dodavatele]
+
+Cena / pilot / dalsi krok:
+[co se stane po kliknuti, zavazek, DPH kontext, zruseni]
+
+FAQ:
+[nakupni, technicke, privacy a provozni otazky]
+```
+
+Zakazane zkratky:
+
+- Falesna urgentnost a resetujici se odpocet.
+- Predzaskrtnuty marketingovy souhlas.
+- Povinne pole bez jasne prace.
+- Social share skripty misto primarni URL.
+- Obecne "data jsou v bezpeci" bez popisu, co to znamena.
+
+### 12.3 Merici plan pro web a SaaS
+
+Merici plan se pise pred implementaci eventu. Pokud nejde doplnit sloupec "Akce", event nema pravo na existenci.
+
+| Rozhodnuti | Signal | Data | Akce | Vlastnik |
+| --- | --- | --- | --- | --- |
+| Funguje nabidka? | CTA klik a demo request | URL, referer group, CTA typ | Prepsat headline nebo nabidku | marketing / founder |
+| Brzdi formular? | Zacaty formular bez odeslani | formular, typ chyby, agregace | Odebrat pole nebo zlepsit mikrotext | produkt |
+| Aktivuje se uzivatel? | Prvni hodnotova akce | account ID, faze onboardingu | Upravit onboarding | produkt |
+| Ma kampan kvalitu? | Lead se posune do obchodniho rozhovoru | source group, campaign, stav leadu | Presunout distribuci | obchod |
+| Vznika privacy obava? | Dotazy na hosting, DPA, export, mazani | typ dotazu, zdroj | Doplnit trust sekci nebo FAQ | founder / legal |
+
+Minimalni pravidla:
+
+- Do analytiky neposilej obsah zprav, dokumenty, emaily ani telefony.
+- U webu preferuj agregovane mereni bez cross-site profilu.
+- Produktove eventy vaz na hodnotu, ne na kazde kliknuti.
+- Surova data maji retenci, agregace maji ucel.
+- Auditni log oddel od produktove analytiky.
+
+### 12.4 Vendor review pro novy nastroj
+
+Vypln pred tim, nez novy nastroj dostane produkcni nebo zakaznicka data.
+
+```text
+Dodavatel:
+
+Ucel:
+
+Proc nestaci stavajici nastroj nebo jednodussi proces:
+
+Data, ktera tam posilame:
+
+Obsahuje osobni udaje:
+[ano/ne + jake]
+
+Obsahuje zakaznicka nebo interni citliva data:
+[ano/ne + jake]
+
+Region ulozeni a zpracovani:
+
+Subdodavatele:
+
+DPA / smluvni opora:
+
+Pristupy v tymu:
+
+Retence:
+
+Export:
+
+Mazani:
+
+Monitoring selhani:
+
+Plan B pri vypadku nebo odchodu:
+
+Vlastnik:
+```
+
+Rozhodnuti:
+
+- Pokud nastroj nema jasny ucel, nezavadej ho.
+- Pokud neni jasne, kde jsou data, nepovazuj ho za vyreseny.
+- Pokud nejde exportovat, nepouzivej ho jako system pravdy.
+- Pokud nema rozumne role, nedavej do nej citliva data.
+- Pokud posila data mimo EU, zapis duvod a riziko.
+
+### 12.5 Incident karta
+
+Incident karta ma byt kratka. Pri incidentu nikdo nechce lovit spravnou kapitolu v epickem dokumentu.
+
+```text
+Nazev incidentu:
+
+Uroven:
+[P1/P2/P3]
+
+Detekce:
+[kdy a jak jsme to zjistili]
+
+Dopad:
+[uzivatele / data / platby / web / interni provoz]
+
+Co vime:
+
+Co zatim nevime:
+
+Prvni mitigace:
+
+Vlastnik incidentu:
+
+Technicky vlastnik:
+
+Komunikace:
+[interni / zakaznici / dodavatel / urad / verejny status]
+
+Data:
+[jsou dotceny osobni udaje? jake? kolik subjektu?]
+
+Dalsi update:
+[cas]
+```
+
+Po obnoveni dopln:
+
+```text
+Pricina:
+
+Co obnovilo sluzbu:
+
+Co zmensilo dopad:
+
+Co chybelo:
+
+Preventivni opatreni:
+
+Vlastnik opatreni:
+
+Termin:
+```
+
+### 12.6 Predlaunch audit v 30 minutach
+
+Kdyz je malo casu, projdi aspon tento rychly audit. Neni to nahrada za plnou kontrolu, ale zachyti nejcastejsi prusvihy.
+
+| Oblast | Otazka | Hotovo |
+| --- | --- | --- |
+| Nabidka | Je do 5 sekund jasne, pro koho produkt je? | [ ] |
+| CTA | Je dalsi krok konkretni a funkcni? | [ ] |
+| Formular | Ma kazde pole jasny ucel? | [ ] |
+| Privacy | Je videt, co se deje s daty po odeslani? | [ ] |
+| Cookies | Netechnicke skripty cekaji na souhlas? | [ ] |
+| SEO | Existuje title, description, canonical, sitemap a robots? | [ ] |
+| Mobil | Hlavni tok funguje na mobilu? | [ ] |
+| Email | Dorazi transakcni email? | [ ] |
+| Monitoring | Nekdo se dozvi o rozbitem formulari nebo webu? | [ ] |
+| Rollback | Je jasne, jak vratit posledni dobrou verzi? | [ ] |
+| Zalohy | Existuje aktualni zaloha a nekdo vi, kde je? | [ ] |
+| Support | Je pripravena odpoved na prvni dotazy o cene, datech a zruseni? | [ ] |
+
+Rychle stop pravidlo:
+
+```text
+Launch zastavime, pokud nefunguje hlavni CTA, formular, registrace, billing, transakcni email, privacy souhlas nebo rollback.
+```
+
+### 12.7 Tydni review po launchi
+
+Prvni tydny po launchi rozhoduj podle malo signalu a hodne reality. Tuhle sablonu vypln kazdy patek.
+
+```text
+Tyden:
+
+Hlavni cil tydne:
+
+Co jsme vydali:
+
+Kolik relevantnich lidi prislo:
+
+Kolik lidi udelalo hlavni dalsi krok:
+
+Jake byly nejcastejsi dotazy:
+
+Jake byly nejcastejsi blokace:
+
+Co jsme se naucili o problemu:
+
+Co jsme se naucili o cene:
+
+Co jsme se naucili o datech a duvere:
+
+Jedno rozhodnuti na pristi tyden:
+
+Co prestaneme delat:
+```
+
+Dobry review zapis neni dlouhy. Ma byt pravdivy. Kdyz cisla nic nerikaji, napis rozhovory. Kdyz rozhovory chybi, napis, koho oslovis. Kdyz se kazdy tyden resi stejna blokace, neni to nahoda. Je to produktova zprava s blikajicim majakem.
+
+### Zaverecny checklist: provozovatelny SaaS bez datove kocoviny
+
+- [ ] Produkt ma konkretni segment, problem a prvni hodnotovy moment.
+- [ ] Landing page rika pravdu jednoduse a bez manipulativnich vzoru.
+- [ ] Formulare sbiraji jen data, ktera maji jasnou praci.
+- [ ] Privacy-first hodnota je viditelna v produktu, ceniku i provozu.
+- [ ] Mereni zacina rozhodnutim, ne touhou mit vic grafu.
+- [ ] Web publikuje na vlastni domene, se stabilnimi URL a RSS/Atom feedem.
+- [ ] Architektura je srozumitelna malemu tymu a ma jasnou hranici dat.
+- [ ] Dodavatele jsou zkontrolovani podle dat, regionu, pristupu, exportu a mazani.
+- [ ] Zalohy se nejen vytvareji, ale i testuji.
+- [ ] Incidenty maji jednoduchy runbook a vlastnika.
+- [ ] Zakaznik umi prijit, pochopit hodnotu, zaplatit, exportovat data a odejit bez labyrintu.
+- [ ] Tym pravidelne maze praci, metriky, nastroje a data, ktere uz nemaji ucel.
+
+Tohle je prakticky smysl celeho e-booku: stavet produkty, ktere jsou rychle, obchodne pouzitelne a provozne dospele, aniz by po ceste sbiraly vsechna data sveta. Mene kouzel. Vice kontroly. A kdyz uz ma byt chaos, at je aspon v backlogu, ne v osobnich udajich zakazniku.
+
+---
+
 ## Zdroje
 
 - GDPR, Regulation (EU) 2016/679, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
@@ -2122,3 +2415,4 @@ U privacy-first produktu sleduj hlavne dotazy na data. Pokud se vice lidi pta na
 - 2026-07-31: Dopsana devata kapitola o produktivite zakladatele vcetne jedne fronty prace, tydenniho rytmu, hluboke prace, inboxu, automatizaci, osobniho provozniho manualu a checklistu.
 - 2026-07-31: Dopsana desata kapitola o evropskem provozu vcetne hostingu, datove mapy, zaloh, incident runbooku, vendor review, provozniho rytmu a checklistu.
 - 2026-07-31: Dopsana jedenacta kapitola s checklistem pred verejnym spustenim vcetne launch gate, SEO a duvery, formularu, smoke testu, provozni pripravy a postmortem sablony.
+- 2026-07-31: Dopsana dvanacta kapitola s praktickymi prilohami: product brief, landing page sablona, merici plan, vendor review, incident karta, predlaunch audit a zaverecny checklist.
