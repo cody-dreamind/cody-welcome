@@ -5277,6 +5277,157 @@ Domluvit jednu akci, vlastnika a datum. Zadna mlha.
 
 ---
 
+## Follow-up po demu bez natlaku za 45 minut
+
+Demo call bez dobreho follow-upu je jako landing page bez CTA: neco se stalo, mozna to bylo i zajimave, ale nikdo nevi, co ma nasledovat. Cilem follow-upu neni zavalit zakaznika materialy, poslat osm priloh a "jen se pripomenout". Cilem je potvrdit, co jste pochopili, co je otevrene, co se stane priste a jaka data nebo pristupy k tomu opravdu potrebujete.
+
+Privacy-first follow-up ma jeste jednu vrstvu navic: nepreposila citlive detaily napric nastroji, nevytvari zbytecnou evidenci a neslibuje vic, nez produkt a provoz unesou.
+
+### 1. Posli shrnuti do 24 hodin
+
+Rychlost follow-upu neni obchodni trik. Je to signal provozni discipliny. Kdyz se zakaznik pta na security, hosting nebo export dat a odpoved dorazi za tyden jako neupravena hromada poznamek, tezko mu vysvetlis, ze v produktu budete peclivi.
+
+Minimalni struktura emailu:
+
+```text
+Predmet: Shrnuti dalsiho kroku po demu: [problem / produkt]
+
+Ahoj [jmeno],
+
+diky za dnesni call. Zapsal jsem si tri veci:
+
+1. Resite [konkretni problem].
+2. Dnes to obchazite pres [workaround].
+3. Hodnota by pro vas byla [vysledek].
+
+Vidim fit hlavne v:
+- [fit 1]
+- [fit 2]
+
+Otevrene body:
+- [privacy/security/integrace/cena]
+- [co overime my / co potrebujeme od vas]
+
+Dalsi krok:
+[akce], vlastnik [jmeno], do [datum].
+
+Cody
+```
+
+Neposilej kompletni prepis callu. Zakaznik nepotrebuje stenografii. Potrebuje videt, ze rozumis problemu a mas konkretni dalsi krok.
+
+### 2. Oddel obchodni shrnuti od security odpovedi
+
+Kdyz na callu padnou dotazy na data, DPA, region, subprocesory nebo mazani, neposilej je jako volnou vetu mezi obchodnimi argumenty. Udelej kratkou sekci "Data a provoz" a drz se faktu.
+
+Priklad:
+
+```text
+Data a provoz
+- Kontaktni udaje pouzijeme jen pro obchodni navazani a pilot.
+- Do analytiky neukladame obsah formularu ani obsah komunikace.
+- Otevreny bod: potvrdit retenci aplikacnich logu pro pilotni prostredi.
+- Otevreny bod: poslat seznam subprocesoru pred podpisem pilotu.
+```
+
+Tohle je lepsi nez veta "vse je GDPR compliant". Ta casto nic neznamena a hlavne neodpovida na praktickou otazku: co se deje s daty?
+
+**Codyho komentar:** Kdyz obchodnik rekne "GDPR mame poresene", slysim v dalkach slabe piskani produkcniho incidentu. Lepsi je rict pet presnych veci, ktere opravdu plati.
+
+### 3. Pracuj s namitkami jako s produktovym signalem
+
+Namitka neni porazka. Je to informace o tom, co musi byt v produktu, dokumentaci nebo nabidce jasnejsi.
+
+| Namitka | Co znamena | Dobra reakce |
+| --- | --- | --- |
+| "Musim to probrat s IT." | Produkt vstupuje do dat nebo infrastruktury. | Poslat technicke shrnuti, datovou mapu a navrhnout 20min call s IT. |
+| "Nevime, jestli na to mame cas." | Hodnota neni dost konkretni nebo onboarding vypada tezce. | Navrhnout maly pilot s jednim tokem a jasnym vystupem. |
+| "Mame uz nastroj." | Neresite kategorii, ale migraci nebo doplnek. | Zeptat se, co stavajici nastroj nezvlada a co nesmite rozbit. |
+| "Cena je vysoka." | Bud neni jasna hodnota, nebo segment nesedi. | Vratit se k dopadu problemu, ne okamzite ke sleve. |
+| "Co s daty po ukonceni?" | Zakaznik premysli realisticky. | Popsat export, mazani, logy a fakturacni data oddelene. |
+
+Po kazdem tydnu si vyber tri nejcastejsi namitky. Pokud se opakuji, nevyresis je jen lepsim emailem. Patri do landing page, trust page, onboarding materialu nebo produktu.
+
+### 4. Nedelej z follow-upu datovy vysavac
+
+Typicka chyba po demu: "Poslete nam prosim export, pristup do systemu, ukazkova data, seznam uzivatelu a idealne vsechny aktualni procesy." To je moc brzo a moc siroke.
+
+Lepsi pristup:
+
+- Ptej se jen na data potrebna pro dalsi krok.
+- Pokud potrebujes ukazkova data, nabidni anonymizovanou sablonu.
+- Nepozaduj pristupy, pokud staci screenshot nebo popis toku.
+- Nastav datum, kdy pilotni podklady smazes.
+- U citlivych dat nejdriv domluv kanal, pristupy a ucel.
+
+Sablona zadosti:
+
+```text
+Pro dalsi krok nepotrebujeme pristup do vaseho systemu.
+Staci nam anonymizovany priklad jednoho toku:
+
+- odkud vstup prichazi,
+- kdo ho resi,
+- jak vypada hotovy vystup,
+- kde dnes vznikne zdrzeni.
+
+Neposilejte prosim osobni udaje koncovych zakazniku ani interni dokumenty, ktere s tim nesouvisi.
+```
+
+Tahle veta chrani obe strany. Zakaznik vidi, ze nehonis data jen proto, ze se nekde daji ulozit.
+
+### 5. Nastav tri mozne dalsi kroky
+
+Follow-up se pise snaz, kdyz predem vis, kam muze vest.
+
+| Signal po demu | Dalsi krok |
+| --- | --- |
+| Silny fit, jasny problem, vlastnik existuje | Placeny pilot s rozsahem, terminem a vystupem. |
+| Dobry fit, ale chybi technicke potvrzeni | Technicky/privacy call s rozhodovateli. |
+| Zajem bez bolesti | Poslat edukacni obsah a nechat kontakt v lehke evidenci. |
+| Slaby fit | Zdvorile uzavrit a pripadne doporucit jinou cestu. |
+| Nejasny problem | Navrhnout kratky discovery call misto dalsiho dema. |
+
+Nejvetsi past je "budeme v kontaktu". To zni mile, ale operacne je to prazdna promenna. Bud existuje dalsi akce, nebo kontakt uzavri.
+
+### 6. 45min postup
+
+```text
+00-05 min: Prepis realitu do tri bodu
+Problem, workaround, pozadovana hodnota.
+
+05-12 min: Rozhodni fit
+Silny / mozny / slaby / ne-fit. Neprikrasluj.
+
+12-22 min: Sepis follow-up
+Shrnuti, otevrene body, dalsi krok, vlastnik, datum.
+
+22-30 min: Zkontroluj data
+Odstran z emailu citlive detaily, ktere nejsou potreba.
+
+30-38 min: Aktualizuj CRM
+Uloz jen rozhodovaci informace: problem, fit, namitky, dalsi krok.
+
+38-45 min: Vytvor jednu zpetnou vazbu pro produkt nebo web
+Namitka, nejasnost nebo opakovany dotaz se musi nekam propsat.
+```
+
+### Checklist: follow-up po demu
+
+- [ ] Follow-up odchazi do 24 hodin.
+- [ ] Email ma tri konkretni pozorovani z callu.
+- [ ] Fit je pojmenovany vecne, ne optimisticky.
+- [ ] Otevrene privacy/security body jsou oddelene od obchodnich slibu.
+- [ ] Neznamou odpoved neodhaduji.
+- [ ] Dalsi krok ma vlastnika, datum a vystup.
+- [ ] Neptam se na data, ktera nejsou nutna pro dalsi krok.
+- [ ] Pokud potrebuji priklad, zadam anonymizovanou sablonu.
+- [ ] CRM obsahuje jen rozhodovaci informace.
+- [ ] Opakujici se namitku prevadim do produktu, webu nebo dokumentace.
+- [ ] Kontakt bez jasne bolesti nenechavam strasit v pipeline navzdy.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -5363,3 +5514,4 @@ Domluvit jednu akci, vlastnika a datum. Zadna mlha.
 - 2026-07-31: Pridana prakticka priloha Vyber AI nastroje pred prvnim promptem za 45 minut vcetne vendor karty, prompt policy, lidske kontroly a checklistu pred adopci.
 - 2026-07-31: Pridana prakticka priloha Rozhodovaci zaznamy pro maly SaaS za 45 minut vcetne sablony, datoveho dopadu, kontrolnich bodu a checklistu.
 - 2026-07-31: Pridana prakticka priloha Demo call bez slibu navic za 45 minut vcetne scenare discovery, cileneho dema, privacy otazek, zapisu po callu a checklistu.
+- 2026-07-31: Pridana prakticka priloha Follow-up po demu bez natlaku za 45 minut vcetne sablon emailu, prace s namitkami, datove minimalizace a checklistu.
