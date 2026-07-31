@@ -2501,6 +2501,160 @@ Kdyz po 30 dnech nemas vic jasno v segmentu, nabidce, datech, cene a hlavnim tok
 
 ---
 
+## 90min audit existujiciho SaaS
+
+Ne vzdy zacinas na zelene louce. Casto uz existuje web, aplikace, analytika, par dodavatelu, nejake kampane, tri generace formularu a jeden soubor s nazvem `final-final-pricing-v3`. V takove situaci nepomuze dalsi velka strategie. Pomuze rychly audit, ktery najde par veci s nejvetsim dopadem.
+
+Cilem 90min auditu neni vyresit vsechno. Cilem je rozhodnout, co opravit jako prvni, co zamerne nechat byt a kde je privacy-first riziko vetsi nez uzitek. Audit delame s jednim pravidlem: kazdy nalez musi mit dopad, vlastnika a dalsi krok. Jinak je to jen hezky pojmenovana uzkost.
+
+### Priprava pred auditem
+
+Pred schuzkou si priprav jen zakladni vstupy:
+
+- URL hlavni landing page, ceniku a registrace nebo demo formulare,
+- pristup k agregovane analytice nebo aspon posledni distribucni poznamky,
+- seznam hlavnich dodavatelu,
+- privacy dokumenty, cookies text a obchodni podminky,
+- poslednich 5 az 10 dotazu od leadu, zakazniku nebo supportu,
+- aktualni hlavni obchodni cil.
+
+Pokud neco chybi, nezastavuj audit. Chybejici dokument nebo metrika je taky nalez.
+
+### Casovy plan auditu
+
+| Cas | Oblast | Co hledat | Vystup |
+| --- | --- | --- | --- |
+| 0-10 min | Cil | Pro koho produkt je a co ma audit zlepsit. | Jedna auditni otazka. |
+| 10-25 min | Nabidka | Zda prvni obrazovka rika problem, vysledek a dalsi krok. | 1-3 copy opravy. |
+| 25-40 min | Hlavni tok | CTA, formular, registrace, potvrzeni, chyba. | Seznam blokaci v toku. |
+| 40-55 min | Data | Co se sbira, kam se posila, co je navic. | Mala datova mapa toku. |
+| 55-70 min | Mereni | Eventy, cookies, UTM, kvalita leadu. | Co merit, zrusit nebo prejmenovat. |
+| 70-80 min | Provoz | Hosting, zalohy, monitoring, rollback, dodavatele. | Nejvetsi provozni riziko. |
+| 80-90 min | Rozhodnuti | Co udelat prvni a co odlozit. | 3 ukoly na 7 dni. |
+
+Auditni otazka musi byt konkretni. Ne "jak zlepsit web". Lepsi:
+
+> "Proc z relevantni navstevnosti na landing page nevznika dost demo requestu, aniz bychom pridali invazivni tracking?"
+
+Nebo:
+
+> "Ktera data v prvnim trial toku sbirame bez jasneho ucelu a jak to zjednodusit do tydne?"
+
+### Jak hodnotit nalezy
+
+Pouzij jednoduchou matici:
+
+| Nalez | Dopad na obchod | Dopad na duveru/data | Narocnost | Rozhodnuti |
+| --- | --- | --- | --- | --- |
+| Povinne telefonni cislo v demo formulari | stredni | stredni | nizka | odebrat nebo udelat volitelne |
+| Nejasne "EU hosting" bez popisu | stredni | vysoka | nizka | prepsat trust mikrocopy |
+| Social share skript na blogu | nizky | stredni | nizka | nahradit primym odkazem |
+| Chybejici restore test | nizky dnes, vysoky pri incidentu | vysoka | stredni | naplanovat test obnovy |
+| Eventy `button_click` bez katalogu | stredni | stredni | stredni | prejmenovat a omezit eventy |
+
+Priorita neni nejhlasitejsi problem. Priorita je vec s vysokym dopadem a rozumnou opravitelnosti. Kdyz najdes deset problemu, vyber tri. Zbytek zapis do backlogu s datem, ne do hlavy.
+
+### Rychly audit hlavniho toku
+
+Projdi cestu jako novy clovek:
+
+1. Otevri hlavni landing page.
+2. Do peti sekund rekni, komu produkt slouzi.
+3. Najdi primarni CTA.
+4. Klikni na nej.
+5. Vypln formular jen nejnutnejsimi daty.
+6. Zkus chybu ve formulari.
+7. Zkontroluj potvrzeni po odeslani.
+8. Najdi, kde je popsano zpracovani dat.
+9. Over, zda bez souhlasu nebezi netechnicke skripty.
+10. Zapis, kde ses musel domyslet, co se stane dal.
+
+Pri kazdem kroku si poloz dve otazky:
+
+- Co tady clovek potrebuje vedet, aby pokracoval?
+- Jaka data tu po nem chceme a proc?
+
+**Codyho komentar:** Kdyz nejde hlavni tok projit bez vysvetlovani clenem tymu, neni to "potrebuje onboarding". Je to nejasny produktovy slib. Onboarding nema zachranovat mlhu.
+
+### Rychly audit datove stopy
+
+Pro jeden hlavni tok vypln:
+
+```text
+Tok:
+[napr. demo request / registrace / trial aktivace]
+
+Data, ktera uzivatel zada:
+
+Data, ktera vytvorime automaticky:
+
+Kam data odchazeji:
+
+Kdo k nim ma pristup:
+
+Co se posila do analytiky:
+
+Co se loguje:
+
+Kdy data mazeme nebo agregujeme:
+
+Co muzeme smazat, omezit nebo odlozit:
+```
+
+Hledej hlavne tyto chyby:
+
+- formular sbira vic, nez je potreba pro dalsi krok,
+- analytika obsahuje volne texty, emaily nebo cele identifikatory,
+- logy ukladaji cele requesty,
+- UTM parametry obsahuji interni nebo osobni informace,
+- data se posilaji do dodavatele bez jasneho vlastnika,
+- neexistuje odpoved na export, smazani nebo ukonceni uctu.
+
+Datova stopa nema byt dokonala za 90 minut. Ma byt viditelna. Co je videt, jde zlepsit.
+
+### Vystup auditu
+
+Na konci nenech jen poznamky. Vystup ma byt kratky a rozhodnutelny:
+
+```text
+Auditni otazka:
+
+Nejdulezitejsi zjisteni:
+1.
+2.
+3.
+
+Co opravime do 7 dni:
+1.
+2.
+3.
+
+Co zatim zamerne nebudeme delat:
+1.
+2.
+
+Privacy-first riziko:
+
+Obchodni prilezitost:
+
+Vlastnik:
+
+Datum kontroly:
+```
+
+Dobry audit konci malym zavazkem. Napriklad:
+
+- odebrat dve pole z demo formulare,
+- prepsat privacy mikrotext pod CTA,
+- zrusit jeden zbytecny skript,
+- doplnit katalog peti eventu,
+- naplanovat restore test,
+- napsat odpoved na nejcastejsi dotaz k hostingu.
+
+Tohle jsou male veci, ale posouvaji produkt z "nejak to funguje" do "vime, co delame". A to je v malem SaaS rozdil mezi improvizaci a provozem.
+
+---
+
 ## Zdroje
 
 - GDPR, Regulation (EU) 2016/679, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
@@ -2562,3 +2716,4 @@ Kdyz po 30 dnech nemas vic jasno v segmentu, nabidce, datech, cene a hlavnim tok
 - 2026-07-31: Dopsana jedenacta kapitola s checklistem pred verejnym spustenim vcetne launch gate, SEO a duvery, formularu, smoke testu, provozni pripravy a postmortem sablony.
 - 2026-07-31: Dopsana dvanacta kapitola s praktickymi prilohami: product brief, landing page sablona, merici plan, vendor review, incident karta, predlaunch audit a zaverecny checklist.
 - 2026-07-31: Pridan 30denni akcni plan po docteni, ktery prevadi e-book do tydnovych vystupu pro nabidku, hlavni cestu, mereni a provoz.
+- 2026-07-31: Pridan 90min audit existujiciho SaaS vcetne casoveho planu, auditu hlavniho toku, datove stopy a sablony vystupu.
