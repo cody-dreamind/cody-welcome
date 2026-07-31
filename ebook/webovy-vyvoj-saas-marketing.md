@@ -4026,9 +4026,147 @@ Diky, tohle eviduji jako produktovy navrh. Nechci slibovat termin bez overeni do
 
 ---
 
+## Subprocesori a zmeny dodavatelu za 60 minut
+
+Subprocesor neni pravni detail, ktery se resi az ve chvili, kdy velky zakaznik posle DPA dotaznik. Je to soucast architektury duvery. Kdyz SaaS pouziva hosting, emailovou sluzbu, monitoring, support desk, platebni branu nebo analytiku, cast datoveho toku casto opousti hlavni aplikaci. Privacy-first provoz neznamena, ze nikdy nepouzijes externi nastroj. Znamena, ze vis, co kam tece, proc, kdo za to odpovida a jak se zmena komunikuje.
+
+GDPR v clanku 28 popisuje pravidla pro zpracovatele a dalsi zpracovatele vcetne pozadavku na predchozi konkretni nebo obecne pisemne povereni a informovani spravce o zamyslenych zmenach, aby mel moznost namitky: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng. EDPB Guidelines 07/2020 vysvetluji role spravce a zpracovatele a proc je spravne urceni odpovednosti prakticky dulezite: https://www.edpb.europa.eu/system/files/2023-10/EDPB_guidelines_202007_controllerprocessor_final_en.pdf.
+
+Prakticky preklad pro maly SaaS: pokud zakaznik sveruje data tobe a ty je posilas dalsimu dodavateli, musi byt tahle cast retezce viditelna, smluvne pokryta a provozne zvladnutelna. Ne maximalne slozita. Viditelna.
+
+### 1. Rozlis dodavatele podle datoveho dopadu
+
+Ne kazdy dodavatel patri na verejny seznam subprocesoru. Firma na kancelarske zidle nejspis nepracuje se zakaznickymi daty v produktu. Emailova sluzba pro transakcni zpravy uz ano. Cilem prvni hodiny neni vyrobit pravni encyklopedii, ale rozdelit nastroje podle realne datove stopy.
+
+Pouzij ctyri skupiny:
+
+| Skupina | Priklad | Co resit |
+| --- | --- | --- |
+| Kriticky subprocesor | hosting, databaze, objektove uloziste | region, DPA, pristupy, zalohy, incidenty, exit plan |
+| Datovy provozni nastroj | transakcni email, support desk, monitoring chyb | typy dat, retence, maskovani, pristupy |
+| Marketingovy nastroj | analytika, kampanove formulare, newsletter | souhlas, minimalizace, oddeleni od produktovych dat |
+| Bez dat nebo s verejnymi daty | staticky asset hosting bez logu, dokumentacni nastroj pro verejne texty | overit, ze do nej netecou osobni nebo interni data |
+
+Prvni chyba je mit seznam "dodavatelu". Lepsi je mit seznam "dodavatelu podle dat". Stejny nastroj muze byt nevinny u verejne dokumentace a citlivy, kdyz do nej zacnes posilat screenshoty z produkcni administrace.
+
+**Codyho komentar:** Vendor list bez datovych kategorii je dekorace. Hezka do auditu, k nicemu pri incidentu. Pri realnem problemu se nikdo nepta "kolik mame log". Pta se "kde presne jsou data a kdo je muze videt".
+
+### 2. Vytvor verejny seznam, ktery se da udrzovat
+
+Verejny seznam subprocesoru ma byt citelny pro zakaznika i udrzitelny pro tym. U maleho SaaS staci jednoducha stranka v trust centru, dokumentaci nebo privacy sekci. Nemusi odhalovat citlive detaily infrastruktury, ale mela by rict dost na to, aby zakaznik pochopil datovou stopu.
+
+Minimalni sloupce:
+
+| Dodavatel | Ucel | Typ dat | Region | Role | Poznamka |
+| --- | --- | --- | --- | --- | --- |
+| [nazev] | hosting aplikace | zakaznicka a technicka data | EU | subprocesor | DPA uzavrena |
+| [nazev] | transakcni emaily | email, obsah systemovych zprav | EU nebo EHP | subprocesor | marketing oddelen |
+| [nazev] | monitoring chyb | technicke logy, stack trace | EU | subprocesor | osobni data maskovana |
+
+Do verejne verze nedavej zbytecne interni nazvy serveru, IP rozsahy, konkretni admin uzivatele nebo technicke detaily, ktere zvysuji bezpecnostni riziko. Verejna stranka ma budovat duveru, ne slouzit jako mapa k provozu.
+
+Dobry mikrotext nad tabulkou:
+
+```text
+Tento seznam ukazuje hlavni dodavatele, kteri nam pomahaji provozovat produkt a mohou zpracovavat zakaznicka nebo technicka data. Nastroje vybirame s preferenci evropskeho provozu, minimalizace dat a jasnych smluvnich pravidel.
+```
+
+Dobry mikrotext pod tabulkou:
+
+```text
+Pokud planujeme pridat nebo nahradit dodavatele, ktery muze ovlivnit zpracovani zakaznickych dat, informujeme zakazniky podle smlouvy nebo DPA. Pro privacy a DPA dotazy piste na [kontakt].
+```
+
+Tahle formulace neni nahrada smlouvy. Je to verejny orientacni bod. Smlouva a DPA maji rict presny mechanismus souhlasu, oznameni a namitek.
+
+### 3. Nastav proces zmeny dodavatele
+
+Nejvetsi riziko nevznika pri prvnim sepsani seznamu. Vznika o tri mesice pozdeji, kdy nekdo prida "jen maly nastroj" na onboarding, support nebo mereni. Proto musi mit zmena dodavatele maly, rychly a povinny proces.
+
+Minimalni zmena dodavatele:
+
+1. Popsat ucel: proc nastroj potrebujeme a co se bez nej neda rozumne delat.
+2. Popsat data: jake kategorie dat do nej pujdou a co do nej nesmi.
+3. Overit region: kde se data ukladaji a kde je muze dodavatel zpracovavat.
+4. Overit smlouvu: DPA, podminky, subprocesori dodavatele, export, mazani.
+5. Overit pristupy: kdo v tymu bude mit ucet a jak se pristup zrusi.
+6. Overit vypnuti: jak nastroj vypneme, kdyz nefunguje nebo prestane byt vhodny.
+7. Aktualizovat verejny seznam, interni datovou mapu a privacy dokumenty, pokud je to potreba.
+
+Rozhodovaci pravidlo:
+
+> Dodavatel se nepridava do produkce, dokud nema vlastnika, ucel, datove hranice, smluvni stav a vypinaci plan.
+
+Tohle pravidlo je kratke schvalovaci rizeni pro male tymy. Nezabije rychlost, ale zachyti presne ty chyby, ktere se pozdeji spatne vysvetluji zakaznikovi.
+
+### 4. Oznameni zmeny: vecne, kratke, bez marketingu
+
+Kdyz se meni subprocesor, zakaznik nepotrebuje roman o tom, jak nova integrace posune synergii. Potrebuje vedet, co se meni, proc, jakych dat se to tyka, od kdy a co muze udelat, pokud ma otazky nebo namitku podle smlouvy.
+
+Sablona oznameni:
+
+```text
+Predmet: Zmena v seznamu subprocesoru od [datum]
+
+Dobry den,
+
+od [datum] planujeme pridat/nahradit dodavatele [nazev] pro [ucel].
+
+Dotcena data: [kategorie dat]
+Region zpracovani: [region]
+Duvod zmeny: [strucny prakticky duvod]
+Dopad na produkt: [zadny / popis dopadu]
+Dokumentace: [odkaz na aktualizovany seznam subprocesoru]
+
+Pokud mate ke zmene dotaz nebo chcete uplatnit postup podle nasi smlouvy/DPA, napiste do [datum nebo lhuta podle smlouvy] na [kontakt].
+
+Cody / Dreamind
+```
+
+Upozorneni: lhuty, mechanismus namitek a pravni ucinky se musi ridit skutecnou smlouvou. Tohle je komunikacni sablona, ne univerzalni pravni klauzule. Ano, pravni texty jsou casto nudne. Presne proto ma byt produktova komunikace vecna a cista.
+
+### 5. 60min postup
+
+Casovy plan pro prvni verzi:
+
+| Cas | Vystup |
+| --- | --- |
+| 0-10 min | Seznam vsech nastroju, ktere se dotykaji produktu, webu, supportu, emailu, analytiky, plateb a monitoringu. |
+| 10-25 min | Rozdeleni podle toho, zda zpracovavaji zakaznicka, osobni, technicka, obchodni nebo jen verejna data. |
+| 25-40 min | Vyplneni verejne tabulky pro hlavni subprocesory vcetne ucelu, typu dat a regionu. |
+| 40-50 min | Zapis procesu pro pridani nebo nahrazeni dodavatele. |
+| 50-60 min | Kontrola, jestli verejna stranka, DPA odpovedi, datova mapa a privacy dokumenty nerikaji kazdy neco jineho. |
+
+Kdyz narazis na nejasnost, nevyres ji kouzelnou vetou "data mohou byt zpracovana kdekoliv". Zapis ji jako riziko:
+
+```text
+Nejasnost: nevim, zda [dodavatel] uklada support prilohy v EU.
+Dopad: mohou obsahovat screenshoty se zakaznickymi daty.
+Vlastnik: [jmeno]
+Dalsi krok: overit dokumentaci a DPA do [datum], do te doby neposilat prilohy s osobnimi daty.
+```
+
+Takhle vypada dospela prace s nejistotou. Ne predstirani jistoty.
+
+### Checklist: subprocesori a zmeny dodavatelu
+
+- [ ] Mam seznam nastroju, ktere se dotykaji produktu, webu, supportu, emailu, analytiky, plateb a monitoringu.
+- [ ] U kazdeho nastroje vim, zda zpracovava osobni, zakaznicka, technicka, obchodni nebo jen verejna data.
+- [ ] Kriticti dodavatele maji ucel, region, DPA stav, pristupy, retenci a exit plan.
+- [ ] Verejny seznam subprocesoru je citelny a neprozrazuje zbytecne citlive technicke detaily.
+- [ ] Smlouva nebo DPA rika, jak se resi pridani nebo nahrada subprocesoru.
+- [ ] Zmena dodavatele ma vlastnika, duvod, datove hranice a vypinaci plan.
+- [ ] Privacy dokumenty, trust page, datova mapa a obchodni odpovedi si neodporuji.
+- [ ] Marketingove a support nastroje nejsou automaticky napojene na produktova data.
+- [ ] Pristupy k dodavatelskym nastrojum se pravidelne kontroluji a po odchodu cloveka rusi.
+- [ ] Nejasnosti jsou zapsane jako rizika s vlastnikem a terminem overeni.
+
+---
+
 ## Zdroje
 
 - GDPR, Regulation (EU) 2016/679, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
+- EDPB Guidelines 07/2020 on the concepts of controller and processor in the GDPR: https://www.edpb.europa.eu/system/files/2023-10/EDPB_guidelines_202007_controllerprocessor_final_en.pdf
 - EDPB Guidelines 9/2022 on personal data breach notification under GDPR: https://www.edpb.europa.eu/documents/guideline/guidelines-92022-on-personal-data-breach-notification-under-gdpr_en
 - Directive (EU) 2022/2555, NIS2 Directive, EUR-Lex: https://eur-lex.europa.eu/eli/dir/2022/2555/oj/eng
 - ENISA, Cybersecurity guide for SMEs - 12 steps to securing your business: https://www.enisa.europa.eu/publications/cybersecurity-guide-for-smes
@@ -4097,3 +4235,4 @@ Diky, tohle eviduji jako produktovy navrh. Nechci slibovat termin bez overeni do
 - 2026-07-31: Pridana prakticka priloha Incidentove cviceni za 45 minut vcetne scenaru, prvnich kroku, komunikace, vystupu oprav a checklistu.
 - 2026-07-31: Pridana prakticka priloha Security a DPA dotaznik bez paniky za 60 minut vcetne odpovedniho balicku, presnych formulaci, hranic slibu a checklistu pripravenosti.
 - 2026-07-31: Pridana prakticka priloha Zakaznicka podpora bez datove pasti za 60 minut vcetne support datoveho kontraktu, triage, sablon odpovedi a checklistu.
+- 2026-07-31: Pridana prakticka priloha Subprocesori a zmeny dodavatelu za 60 minut vcetne verejneho seznamu, procesu zmeny, oznamovaci sablony a checklistu.
