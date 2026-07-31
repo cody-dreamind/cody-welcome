@@ -4917,6 +4917,179 @@ Zapis rozhodnuti a datum dalsi kontroly.
 
 ---
 
+## Rozhodovaci zaznamy pro maly SaaS za 45 minut
+
+Male tymy casto nedoplaci na to, ze udelaly spatne rozhodnuti. Doplaci na to, ze po dvou mesicich nikdo nevi, proc ho udelaly. Pak se stane klasika: vraci se stejna debata, novy clovek otevre stare tema, zakaznik se zepta na hosting a tym lovi odpoved v chatu, kde je mezi tim recept na obed a deset memu. Rozhodovaci zaznam je lek proti zbytecne amnezii.
+
+Nemusi to byt tezka architektonicka ceremonie. Pro maly SaaS staci kratky zapis: co resime, co jsme vybrali, proc, jake alternativy jsme odmitli, jaky ma rozhodnuti dopad na data a kdy ho znovu otevreme. Hodnota neni v dokumentu samotnem. Hodnota je v tom, ze dalsi rozhodnuti uz nezacina od nuly.
+
+### 1. Zapisuj rozhodnuti, ktera meni budouci moznosti
+
+Nezapisuj kazdou barvu tlacitka. Zapisuj veci, ktere maji cenu, riziko nebo dlouhy stin.
+
+Typicky patri do rozhodovaciho zaznamu:
+
+- vyber hostingu nebo regionu,
+- zavedeni analytiky, CRM, support nastroje nebo AI asistenta,
+- zmena autentizace,
+- rozhodnuti sbirat novy typ osobnich udaju,
+- zavedeni placeneho planu, trialu nebo pilotu,
+- zmena hlavni produktove metriky,
+- rozhodnuti nedelat cast funkce, i kdyz ji zakaznici chteji,
+- vypnuti integrace nebo dodavatele,
+- verejny slib na trust page, ceniku nebo v obchodni nabidce.
+
+Pravidlo: kdyz by sis za tri mesice rekl "proc jsme to takhle sakra udelali?", zapis to. Budouci ty ti za to nepodekuje, protoze bude mit plne ruce prace, ale aspon nebude vypadat jako detektiv bez spisu.
+
+### 2. Pouzij jednu sablonu pro produkt, techniku i privacy
+
+Sablona musi byt dost kratka, aby ji clovek vyplnil hned po rozhodnuti, ne "az bude klid". Klid v SaaS prijde presne tri minuty po tom, co se rozbije produkce, takze na nej nespolivej.
+
+```text
+# RZ-YYYY-MM-DD-kratky-nazev
+
+Stav:
+Navrh / schvaleno / zruseno / nahrazeno
+
+Kontext:
+Co resime a proc ted.
+
+Rozhodnuti:
+Co presne delame.
+
+Alternativy:
+1. [moznost] - proc ne
+2. [moznost] - proc ne
+
+Dopad na zakaznika:
+Co se zmeni pro uzivatele, support nebo obchod.
+
+Dopad na data:
+Jake osobni, firemni nebo technicke udaje pribudou, zmizi nebo se presunou.
+
+Dopad na provoz:
+Monitoring, zalohy, incidenty, pristupy, vendor lock-in, naklady.
+
+Otevrene otazky:
+Co jeste nevime.
+
+Kontrola:
+Kdy a podle ceho rozhodnuti znovu zkontrolujeme.
+
+Vlastnik:
+Kdo hlida, ze se rozhodnuti nezmeni v zapomenuty slib.
+```
+
+Nazev "RZ" je zamerne nudny. Klidne pouzij "ADR", "decision log" nebo "produktove rozhodnuti". Dulezite je, aby to slo najit. Idealni ulozeni: `docs/decisions/` v repozitari, nebo interni znalostni baze, ktera ma export a neni zamcena za osobni ucet jednoho cloveka.
+
+### 3. Datovy dopad patri do kazdeho vetsiho rozhodnuti
+
+Privacy-first tym se nepta na data az ve chvili, kdy nekdo pise privacy policy. Pta se pri rozhodnuti. Kdyz vyberas support nastroj, menis datovou mapu. Kdyz pridavas onboarding dotaznik, menis rozsah sberu. Kdyz zapinas session replay, menis ocekavani uzivatele. Kdyz do produktu pridas AI asistenta, menis riziko vynaseni vstupu i vystupu.
+
+Minimalni datova cast rozhodovaciho zaznamu:
+
+| Otazka | Dobra odpoved |
+| --- | --- |
+| Jake nove udaje sbirame? | Konkretni pole nebo eventy, ne "uzivatelska data". |
+| Proc je potrebujeme? | Jedna veta navazana na funkci nebo povinnost. |
+| Kde budou ulozene? | System, region, vlastnik. |
+| Kdo k nim ma pristup? | Role, ne jmena jen podle momentalni nalady. |
+| Jak dlouho zustanou? | Retence nebo spoustec mazani. |
+| Jak je zakaznik uvidi nebo smaze? | Export, admin, support proces, automaticke mazani. |
+
+Kdyz na nekterou otazku neumite odpovedet, rozhodnuti jeste neni hotove. Mozna je spravne ho i tak udelat, ale riziko musi byt videt. Neviditelne riziko je nejdrazsi druh optimizmu.
+
+### 4. Rozhodnuti nesmi byt soudni rozsudek
+
+Dobry zaznam neni zbran pro vetu "ale tady je napsano, ze...". Je to stav poznani v urcitem case. Proto do nej patri kontrolni bod.
+
+Priklady kontrol:
+
+- "Zkontrolovat po 30 dnech, jestli novy onboarding zvysil aktivaci bez zvyseni support dotazu."
+- "Zkontrolovat pri prvnim enterprise zakaznikovi, jestli zvoleny hosting staci pro DPA pozadavky."
+- "Zkontrolovat pred spustenim placenych kampani, jestli analytika meri konverze bez reklamniho sledovani."
+- "Zkontrolovat po prvnim incidentu, jestli runbook odpovida realite."
+
+Kdyz rozhodnuti prestane platit, nevymyslej historii. Pripoj novy zaznam a puvodni oznac jako nahrazeny. Transparentni stopa je lepsi nez dokonale vypadajici dokument, ktery prelakovava realitu.
+
+### 5. 45min postup
+
+```text
+00-05 min: Vyber rozhodnuti.
+Zvol jednu vec, ktera ma dopad na produkt, data, provoz nebo obchod.
+
+05-12 min: Popis kontext.
+Proc se rozhoduje ted, co je tlak a co by se stalo bez rozhodnuti.
+
+12-20 min: Napis presne rozhodnuti.
+Jedna az tri vety. Bez mlhy, bez "budeme se snazit".
+
+20-28 min: Seznam alternativy.
+Minimalne dve odmitnute moznosti a proc neprosly.
+
+28-36 min: Dopad na data a provoz.
+Nova data, pristupy, retence, monitoring, zalohy, dodavatele.
+
+36-42 min: Nastav kontrolu.
+Datum, metrika nebo udalost, kdy se rozhodnuti znovu otevre.
+
+42-45 min: Uloz a odkazuj.
+Dej zaznam do rozhodovaci slozky a pridej odkaz do issue, PR nebo interniho ukolu.
+```
+
+### Priklad: kratky rozhodovaci zaznam
+
+```text
+# RZ-2026-07-31-analytics-without-ads
+
+Stav:
+Schvaleno
+
+Kontext:
+Potrebujeme vedet, ktere obsahove kanaly vedou k demo poptavkam.
+Nechceme spoustet reklamni pixely ani sledovat uzivatele napric weby.
+
+Rozhodnuti:
+Pouzijeme privacy-first analytiku bez cross-site profilu a budeme merit jen page_view,
+klik na hlavni CTA, odeslani formulare a chybu formulare.
+
+Alternativy:
+1. Reklamni pixel - odmitnuto kvuli zbytecnemu sledovani a cookie slozitosti.
+2. Vlastni log analyza - odlozeno, protoze tym ted potrebuje rychlejsi vystup.
+
+Dopad na zakaznika:
+Web zustane bez marketingoveho sledovani. Cookie lista nebude potreba, pokud nepridame
+jine netechnicke cookies.
+
+Dopad na data:
+Nesbirame jmena ani emaily v analytice. Formularova data zustavaji oddelene od eventu.
+Retence analytickych eventu se kontroluje mesicne.
+
+Dopad na provoz:
+Pridat kontrolu dostupnosti mericiho skriptu a otestovat, ze formular funguje i pri vypadku analytiky.
+
+Kontrola:
+Po 30 dnech: jestli metriky pomohly rozhodnout o jednom kanalu a jedne uprave landing page.
+
+Vlastnik:
+Produkt + provoz.
+```
+
+### Checklist: rozhodovaci zaznamy
+
+- [ ] Zapisujeme jen rozhodnuti s realnym dopadem, ne kazdou drobnost.
+- [ ] Kazdy zaznam ma kontext, rozhodnuti, alternativy a vlastnika.
+- [ ] U produktovych a technickych zmen je popsany dopad na zakaznika.
+- [ ] U vsech vetsich rozhodnuti je popsany dopad na data.
+- [ ] U dodavatelu je jasne, kde data lezi a jak se da odejit.
+- [ ] U verejnych slibu je jasne, kdo je umi splnit a kontrolovat.
+- [ ] Rozhodnuti ma kontrolni bod, ne jen datum vytvoreni.
+- [ ] Nahrazena rozhodnuti se nemazou, ale oznaci jako nahrazena.
+- [ ] Zaznam je odkazany z issue, PR, roadmapy nebo interniho ukolu.
+- [ ] Novy clovek v tymu podle zaznamu pochopi proc, nejen co.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -5001,3 +5174,4 @@ Zapis rozhodnuti a datum dalsi kontroly.
 - 2026-07-31: Pridana prakticka priloha AI asistenti v SaaS tymu bez vynaseni dat za 60 minut vcetne rizikovych rezimu, minimalizace promptu, tymovych pravidel a checklistu.
 - 2026-07-31: Pridana prakticka priloha Changelog jako duvera, marketing a provoz za 45 minut vcetne kategorii, sablony, distribuce a privacy/security kontrol.
 - 2026-07-31: Pridana prakticka priloha Vyber AI nastroje pred prvnim promptem za 45 minut vcetne vendor karty, prompt policy, lidske kontroly a checklistu pred adopci.
+- 2026-07-31: Pridana prakticka priloha Rozhodovaci zaznamy pro maly SaaS za 45 minut vcetne sablony, datoveho dopadu, kontrolnich bodu a checklistu.
