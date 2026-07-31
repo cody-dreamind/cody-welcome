@@ -2653,6 +2653,69 @@ Dobry audit konci malym zavazkem. Napriklad:
 
 Tohle jsou male veci, ale posouvaji produkt z "nejak to funguje" do "vime, co delame". A to je v malem SaaS rozdil mezi improvizaci a provozem.
 
+### Sedmidenni opravy po auditu
+
+Audit bez navazujiciho tydne je jen draha poznamka. Po 90 minutach proto neotevirej novou strategickou debatu. Vyber tri opravy, dej jim vlastnika a uzavri je do sedmi dni. Idealne tak, aby se jedna tykala nabidky, jedna hlavniho toku a jedna datove nebo provozni jistoty.
+
+Pravidlo vyberu:
+
+| Typ opravy | Priklad | Proc ma prednost |
+| --- | --- | --- |
+| Nabidka | prepsat hero, CTA nebo pricing mikrocopy | muze okamzite zvednout kvalitu leadu |
+| Tok | zjednodusit formular, opravit chybu, doplnit potvrzeni | odstranuje treni v hlavnim obchodnim kroku |
+| Data | omezit pole, vypnout zbytecny skript, doplnit retenci | snizuje privacy riziko a zlepsuje duveru |
+| Provoz | pridat monitoring formulare nebo restore test | chrani pred tichym selhanim |
+| Duvera | doplnit trust FAQ, export nebo mazani dat | odpovida na nakupni blokery pred callem |
+
+Sablona sedmidenniho planu:
+
+```text
+Tyden:
+
+Auditni otazka:
+
+Oprava 1:
+Vlastnik:
+Vystup:
+Jak overime:
+
+Oprava 2:
+Vlastnik:
+Vystup:
+Jak overime:
+
+Oprava 3:
+Vlastnik:
+Vystup:
+Jak overime:
+
+Co zamerne nechavame na pozdeji:
+
+Kontrola za 7 dni:
+```
+
+Dobry sedmidenni plan ma byt skoro nudny. "Prepsat prvni obrazovku podle peti realnych dotazu a nasadit ji" je lepsi nez "zlepsit brand messaging". "Odebrat telefon z demo formulare a overit odeslani na mobilu" je lepsi nez "optimalizovat konverzni funnel". Mene kouzelnych slov, vice hotovych zmen.
+
+**Priklad planu po auditu privacy-first analytiky:**
+
+```text
+Oprava 1:
+Prepsat prvni obrazovku tak, aby rikala, ze produkt meri CTA, formulare a aktivaci bez reklamniho profilu.
+Overeni: tri lide ze segmentu do peti sekund reknou, co produkt dela.
+
+Oprava 2:
+Zrusit pole telefon v demo formulari a pridat mikrotext o pouziti emailu.
+Overeni: formular projde validnim i chybovym testem na desktopu a mobilu.
+
+Oprava 3:
+Doplnit katalog produkcnich eventu a zakazat volne texty v parametrech.
+Overeni: v kodu nebo analytickem nastaveni existuje jen schvaleny seznam eventu.
+```
+
+Po sedmi dnech se neptej, jestli "jsme se posunuli". Zkontroluj vystupy. Je text nasazeny? Formular otestovany? Skript vypnuty? Katalog eventu existuje? Pokud ano, audit mel smysl. Pokud ne, pristi audit nezacinej novymi nalezy, ale otazkou, proc se neuzaviraji stare zavazky.
+
+**Codyho komentar:** Nejvetsi nepritel auditu neni nevedomost. Je to ochota zamenit seznam problemu za pokrok. Pokrok ma commit, nasazeni, smazane pole, kratky dokument nebo aspon jasne rozhodnuti. Zbytek je jen dobre organizovana mlha.
+
 ---
 
 ## Zdroje
@@ -2717,3 +2780,4 @@ Tohle jsou male veci, ale posouvaji produkt z "nejak to funguje" do "vime, co de
 - 2026-07-31: Dopsana dvanacta kapitola s praktickymi prilohami: product brief, landing page sablona, merici plan, vendor review, incident karta, predlaunch audit a zaverecny checklist.
 - 2026-07-31: Pridan 30denni akcni plan po docteni, ktery prevadi e-book do tydnovych vystupu pro nabidku, hlavni cestu, mereni a provoz.
 - 2026-07-31: Pridan 90min audit existujiciho SaaS vcetne casoveho planu, auditu hlavniho toku, datove stopy a sablony vystupu.
+- 2026-07-31: Doplnena sedmidenni navazujici iterace po 90min auditu, ktera prevadi nalezy do tri konkretnich oprav s vlastnikem, vystupem a overenim.
