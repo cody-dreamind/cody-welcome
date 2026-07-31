@@ -1381,6 +1381,246 @@ Kontrola ceniku:
 
 ---
 
+## 9. Produktivita zakladatele: system prace, ne dalsi aplikace
+
+Zakladatel maleho SaaS tymu ma zvlastni druh problemu: vsechno je dulezite a skoro nic neni hotove. Produkt chce funkce, web chce texty, zakaznici chteji odpovedi, ucetni chce doklady, monitoring chce pozornost a hlava chce obcas predstirat, ze je normalni organ, ne zalozni server pro vsechny poznamky sveta.
+
+Produktivita proto neni o tom najit kouzelnou aplikaci. Je to o tom mit system, ktery opakovane rozhoduje, co se dnes neudela. Bez toho se prace meni v nekonecne prepinani kontextu: rano produkt, dopoledne support, po obede pricing, vecer bug, v noci "jen rychle" novy nastroj. Vysledek je spousta pohybu a malo tahu.
+
+Privacy-first pohled sem patri vic, nez se zda. Kdyz mas system prace zalozeny na nahodnych SaaS nastrojich, kopirovani zakaznickych dat do AI chatu a sdilenych tabulkach bez pravidel, nevyrabis jen chaos. Vyrabis datove riziko. Dobry pracovni system ma drzet rozhodnuti, kontext a zakaznicka data pod kontrolou.
+
+### 9.1 Jedna hlavni fronta prace
+
+Maly tym nepotrebuje deset boardu. Potrebuje jednu pravdivou frontu prace. Pravdivou znamena, ze kdyz se na ni podivas, vidis realitu: co je rozpracovane, co ceka, co blokuje prodej, co blokuje zakaznika a co je jen sympaticky napad pro nekdy.
+
+Minimalni sloupce:
+
+| Sloupec | Co v nem smi byt |
+| --- | --- |
+| Inbox | Nove veci bez rozhodnuti. |
+| Pristi | Veci, ktere maji realnou sanci prijit na radu. |
+| Tento tyden | Zavazek tymu na aktualni tyden. |
+| Dnes | Prace, ktera ma skutecne probehnout dnes. |
+| Ceka | Blokovane veci s jasnym dalsim clovekem nebo datem. |
+| Hotovo | Uzavrene veci vcetne odkazu na vystup. |
+
+Pravidlo pro zakladatele: `Dnes` neni druha verze backlogu. Ma obsahovat malo veci. Idealne jednu az tri dulezite polozky, ktere posunou produkt nebo obchod. Kdyz je tam dvanact ukolu, neni to plan. Je to prosba vesmiru, aby porusil fyziku.
+
+Kazda polozka ve fronte ma mit:
+
+- jedno sloveso,
+- jasny vystup,
+- vlastnika,
+- dalsi krok,
+- odkaz na kontext,
+- rozhodnuti, jestli obsahuje zakaznicka nebo interni data.
+
+**Priklad slabe polozky:**
+
+"Pricing"
+
+**Lepsi polozka:**
+
+"Prepsat pricing page pro Team plan tak, aby do 10 sekund vysvetlila limit projektu, export dat a DPH. Vystup: PR s textem a screenshotem."
+
+Tohle uz jde udelat, zkontrolovat a dokoncit.
+
+### 9.2 Tydenni rozhodovaci rytmus
+
+Produktivita bez rytmu se rozpadne pri prvnim incidentu. Rytmus neni byrokracie. Je to predem domluvena chvile, kdy se rozhoduje misto improvizuje.
+
+Jednoduchy rytmus pro prvni SaaS:
+
+| Kdy | Otazka | Vystup |
+| --- | --- | --- |
+| Pondeli rano | Co je jedna vec, ktera tento tyden nejvic posune produkt nebo prodej? | Tydenni priorita. |
+| Kazdy den rano | Co dnes dokonci hodnotu, ne jen aktivitu? | 1 az 3 ukoly v `Dnes`. |
+| Kazdy den konec prace | Co zustalo otevrene a proc? | Aktualizovana fronta, zadne tajemne rozpracovano. |
+| Patek | Co jsme se naucili od zakazniku, dat a provozu? | 3 poznatky a jedno rozhodnuti. |
+| Mesicne | Co musime prestat delat? | Smazane nebo odlozene iniciativy. |
+
+Tydenni priorita ma byt konkretni. "Zlepsit aktivaci" je tema. "Zkratit cestu od registrace k prvnimu importu kontaktu z 5 kroku na 3 a otestovat s 3 zakazniky" je priorita.
+
+Pouzij sablonu:
+
+```text
+Tento tyden vyhrajeme, pokud:
+[konkretni vysledek]
+
+Nejvetsi riziko:
+[co muze vysledek zablokovat]
+
+Nebudeme delat:
+[1 az 3 veci, ktere by lakaly pozornost]
+
+Dukaz hotovo:
+[odkaz, screenshot, metrika, odpoved zakaznika, commit]
+```
+
+Nejcennejsi radek je "Nebudeme delat". Zakladatel bez seznamu odmitnutych veci ma jen delsi seznam viny.
+
+### 9.3 Chran hlubokou praci jako produkcni databazi
+
+Hluboka prace je cas, kdy vznikaji veci, ktere nejdou vyresit mezi dvema notifikacemi: architektura, text hlavni nabidky, refaktor kritickeho toku, cenotvorba, rozhovorovy synthesis, rozhodnuti o segmentu. Kdyz tenhle cas rozsekas, nevznikne mensi verze kvalitni prace. Vznikne hromada polotovaru.
+
+Minimalni ochrana:
+
+- Dve az tri bloky tydne po 90 az 120 minutach.
+- Pred blokem napsany jeden vystup.
+- Zavrene inboxy a chaty, pokud nejsi v incident rezimu.
+- Poznamka "kam se vratit", kdyz blok prerusi neco duleziteho.
+- Po bloku kratky zapis vysledku do fronty prace.
+
+**Priklad dobreho hlubokeho bloku:**
+
+```text
+Blok: Utery 9:00-10:30
+Vystup: Navrh noveho onboarding checklistu pro import prvnich dat.
+Vstupy: 5 poslednich support dotazu, aktualni flow, aktivacni metrika.
+Hotovo znamena: Markdown navrh s kroky, mikrocopy a jednim merenym eventem.
+```
+
+To je pracovni jednotka. "Promyslet onboarding" je mlha v kabate.
+
+Kdyz delas s citlivym kontextem, dej si jeste jedno pravidlo: do externich AI nastroju neposilej cele exporty zakaznickych dat, interni smlouvy ani logy s osobnimi udaji. Pokud chces pomoc s formulaci nebo analyzou, anonymizuj vstup, zmensi ho na relevantni cast a zapis si, co kam odchazi. Produktivita, ktera zvysi datove riziko, neni produktivita. Je to dluh v peknem kabate.
+
+**Codyho komentar:** Nejrychlejsi zpusob, jak vypadat zaneprazdnene, je odpovidat na vsechno hned. Nejrychlejsi zpusob, jak neco postavit, je nektere veci nechat chvili cekat. Ano, ego si odfrkne. Produkt podekuje.
+
+### 9.4 Inboxy, meetingy a rozhodnuti
+
+Zakladatel ma obvykle moc inboxu: email, chat, kalendar, GitHub, support, fakturace, monitoring, poznamky, hlasovky, dokumenty. Problem neni existence inboxu. Problem je, kdyz kazdy inbox muze kdykoli rozhodovat o tvem dni.
+
+Rozdel komunikaci na tri rezimy:
+
+| Rezim | Co sem patri | Reakce |
+| --- | --- | --- |
+| Incident | Produkce nejde, platby nejdou, bezpecnostni problem. | Hned. |
+| Provozni tok | Zakaznicke odpovedi, review, faktury, planovane blokace. | V urcenych kontrolach. |
+| Asynchronni kontext | Napady, odkazy, poznamky, "nekdy by se melo". | Do inboxu, rozhodnout pozdeji. |
+
+Meeting ma mit vlastnika a jeden ze tri ucelu:
+
+- rozhodnout,
+- synchronizovat blokaci,
+- naucit se neco od zakaznika nebo trhu.
+
+Kdyz meeting nema vystup, patri do asynchronni zpravy. Kdyz se na meetingu jen cte dokument, mel byt dokument poslany predem. Kdyz se na meetingu opakuje stejna debata potreti, chybi rozhodovaci pravidlo.
+
+Sablona rozhodnuti:
+
+```text
+Rozhodnuti:
+[co plati]
+
+Proc:
+[2 az 4 vety]
+
+Alternativy:
+[co jsme zvazili]
+
+Dopad:
+[produkt / obchod / provoz / data]
+
+Znovu otevreme, kdyz:
+[konkretni signal]
+```
+
+Posledni radek je dulezity. Bez nej se tym vraci ke starym debatam pokazde, kdyz nekdo najde novy clanek nebo ma po kave silnejsi nazor.
+
+Privacy-first doplnek: rozhodnuti o nastrojich zapisuj stejne peclive jako produktova rozhodnuti. Kdyz zavades novy CRM, podporu, analytiku nebo AI asistenta, zapis data flow: jaka data tam jdou, proc, kdo ma pristup, jak se exportuji a jak se smazou. Neni to brzda. Je to ochrana pred budoucim "kdo to tam vlastne posilal?"
+
+### 9.5 Automatizuj opakovane, ne nepochopene
+
+Automatizace je skvela sluha a docela drahy chaos generator. Neautomatizuj proces, ktery jeste neumite udelat rucne konzistentne. Nejdrive ho popis, zjednodus, over a teprve pak automatizuj.
+
+Dobri kandidati:
+
+- kontrola dostupnosti webu,
+- zalozeni standardniho projektu,
+- generovani fakturacniho exportu,
+- publikacni checklist,
+- zaloha databaze,
+- vytvoreni release poznamky z uzavrenych polozek,
+- pravidelny report metrik bez osobnich detailu.
+
+Spatni kandidati:
+
+- automaticke posilani marketingu bez jasneho souhlasu,
+- automaticke skore leadu z nahodne poskladanych osobnich dat,
+- automaticke mazani produkcnich dat bez obnovitelne zalohy,
+- automaticke odpovedi zakaznikum bez kontroly tonu a faktu,
+- slozity workflow, ktery nikdo neumi vysvetlit jednou vetou.
+
+Pred kazdou automatizaci odpovez:
+
+- Kolikrat tydne se to deje?
+- Kolik casu to realne bere?
+- Co se stane, kdyz automatizace selze?
+- Jaka data zpracuje?
+- Lze ji vypnout bez dopadu na zakaznika?
+- Kdo dostane upozorneni pri chybe?
+
+**Priklad dobre male automatizace:**
+
+Kazdou hodinu se zkontroluje dostupnost marketingoveho webu. Kdyz web odpovi, nic se nedeje. Kdyz neodpovi, system spusti diagnostiku a zapise vysledek. Clovek dostane zpravu az ve chvili, kdy je potreba rozhodnuti nebo rucni zasah.
+
+Tohle setri pozornost a neposila zbytecna data nikam ven. Presne tak ma automatizace vypadat: malo hluku, jasny ucel, kontrolovatelny dopad.
+
+### 9.6 Osobni provozni manual zakladatele
+
+Zakladatel je taky soucast systemu. Kdyz vsechno stoji na tom, co si zrovna pamatuje, firma je krehka. Osobni provozni manual neni ezoterika. Je to kratky dokument, ktery rika, jak pracujes, kdy jsi dostupny, jak eskalovat problem a jak poznat, ze uz je toho moc.
+
+Minimalni obsah:
+
+- Kdy kontroluji inboxy.
+- Co je incident a co pocka.
+- Jak planuji tyden.
+- Kde je pravdiva fronta prace.
+- Kde jsou rozhodnuti a provozni dokumentace.
+- Jake typy dat nikdy nekopiruji do externich nastroju.
+- Jak vypada dobry pozadavek na me.
+- Co delam, kdyz mam vic ukolu nez kapacity.
+
+Sablona pozadavku:
+
+```text
+Co potrebujes:
+[konkretni vystup]
+
+Proc ted:
+[dopad nebo deadline]
+
+Kontext:
+[odkazy, zakaznik, souvislosti]
+
+Data:
+[obsahuje osobni / citliva / interni data?]
+
+Hotovo znamena:
+[jak poznas, ze je prace dokoncena]
+```
+
+Tahle sablona vypada obycejne, ale snizi pulku nedorozumeni. Hlavne u maleho tymu, kde jeden clovek strida role podle toho, odkud zrovna hori.
+
+### Checklist: produktivita zakladatele
+
+- [ ] Existuje jedna pravdiva fronta prace, ne deset soubeznych seznamu.
+- [ ] Polozky maji sloveso, vystup, vlastnika a odkaz na kontext.
+- [ ] `Dnes` obsahuje jen realne dokoncitelne prace.
+- [ ] Tyden ma jednu hlavni prioritu a jasne receno, co se delat nebude.
+- [ ] Kazdy den konci aktualizaci otevrenych veci.
+- [ ] Hluboka prace ma bloky v kalendari a predem definovany vystup.
+- [ ] Inboxy maji rezim kontroly; jen incidenty maji pravo prerusit den.
+- [ ] Meetingy slouzi k rozhodnuti, odstraneni blokace nebo uceni od zakaznika.
+- [ ] Rozhodnuti jsou zapsana vcetne duvodu, dopadu a signalu pro znovuotevreni.
+- [ ] Nove nastroje maji popsanou datovou stopu: co tam jde, proc, pristupy, export a mazani.
+- [ ] Automatizuji jen procesy, ktere umime rucne delat konzistentne.
+- [ ] Automatizace maji monitoring selhani a jdou vypnout.
+- [ ] Zakaznicka a interni data nekopiruji do externich nastroju bez duvodu, minimalizace a kontroly.
+- [ ] Existuje kratky osobni provozni manual zakladatele.
+
+---
+
 ## Zdroje
 
 - GDPR, Regulation (EU) 2016/679, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
@@ -1434,3 +1674,4 @@ Kontrola ceniku:
 - 2026-07-30: Dopsana sesta kapitola o analytice bez zbytecneho sledovani vcetne mericiho planu, katalogu eventu, atribuce, retence dat a checklistu privacy-first analytiky.
 - 2026-07-30: Dopsana sedma kapitola o onboardingu, aktivaci a retenci v SaaS vcetne aktivacniho momentu, registrace, bezpecneho prihlaseni, emailu, offboardingu a checklistu.
 - 2026-07-30: Dopsana osma kapitola o cenotvorbe a baliccich vcetne hodnotove metriky, trialu/pilotu, slev, billing reality, privacy-first ceniku a checklistu.
+- 2026-07-31: Dopsana devata kapitola o produktivite zakladatele vcetne jedne fronty prace, tydenniho rytmu, hluboke prace, inboxu, automatizaci, osobniho provozniho manualu a checklistu.
