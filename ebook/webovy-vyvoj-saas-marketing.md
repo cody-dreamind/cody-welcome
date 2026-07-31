@@ -2356,6 +2356,151 @@ Tohle je prakticky smysl celeho e-booku: stavet produkty, ktere jsou rychle, obc
 
 ---
 
+## 30denni akcni plan po docteni
+
+E-book bez dalsi akce je jen hezky usporadany pocit viny. Tady je prakticky plan na prvni mesic, ktery malemu tymu pomuze prevest principy do produktu, webu a provozu. Nepocita s velkym tymem ani s dokonalym rozpoctem. Pocita s tim, ze kazdy tyden ma vzniknout jeden hmatatelny vystup.
+
+### Tyden 1: Zostri nabidku a hranici dat
+
+Cil tydne: vedet, komu produkt slouzi, co presne slibuje a jaka data k tomu opravdu potrebuje.
+
+Vystupy:
+
+- jedna veta nabidky podle segmentu, problemu, vysledku a kompromisu,
+- seznam 10 az 20 lidi nebo firem pro rozhovory,
+- mapa dat pro hlavni tok od landing page po prvni hodnotu,
+- prvni verze privacy-first slibu pro web.
+
+Pracovni postup:
+
+1. Vyber jeden segment, ne trh. "Mala B2B studia" je lepsi nez "firmy".
+2. Popis jednu situaci, ve ktere problem boli.
+3. Sepis vsechna data, ktera v toku sbiras.
+4. U kazdeho pole napis ucel, vlastnika, uloziste, retenci a duvod.
+5. Skrtni vse, co neumis obhajit jednou vetou.
+
+Mini checklist:
+
+- [ ] Nabidka se da precist nahlas bez firemni mlhy.
+- [ ] Hlavni formular ma jen pole potrebna pro dalsi krok.
+- [ ] Privacy-first hodnota je napsana jako produktovy benefit.
+- [ ] Vim, ktera data jsou technicka, obchodni, produktova a auditni.
+- [ ] Mam plan, kdy nepotrebna pilotni data smazu.
+
+**Codyho komentar:** Prvni tyden neni o tom, aby produkt vypadal vetsi. Je o tom, aby prestal predstirat, ze slouzi vsem. Vsem neslouzi ani kava. A ta ma vyrazne lepsi distribuci nez vetsina SaaS.
+
+### Tyden 2: Postav nebo oprav hlavni cestu
+
+Cil tydne: dostat cloveka od prvni navstevy k dalsimu kroku bez zbytecneho treneni.
+
+Vystupy:
+
+- upravena prvni obrazovka landing page,
+- jedno hlavni CTA,
+- zjednoduseny formular nebo registrace,
+- zakladni technicke SEO,
+- smoke test hlavniho toku.
+
+Pracovni postup:
+
+1. Prepis prvni obrazovku tak, aby rikala komu pomahas, s cim a co se stane po kliknuti.
+2. Zkontroluj title, meta description, canonical, sitemap, robots a RSS/Atom odkaz.
+3. Projdi formular pole po poli a kazdemu dej praci.
+4. Napis potvrzeni po odeslani: co se stalo, kdy prijde odpoved a co uzivatel muze cekat.
+5. Otestuj tok na mobilu, desktopu a pomalem pripojeni.
+
+Mini checklist:
+
+- [ ] Do 5 sekund je jasne, pro koho stranka je.
+- [ ] CTA neni "Odeslat", ale konkretni dalsi krok.
+- [ ] Chybove hlasky formulare rikaji, co opravit.
+- [ ] Stranka nepotrebuje socialni embed ani reklamni skript k tomu, aby fungovala.
+- [ ] Hlavni konverzni tok nekdo rucne prosel od zacatku do konce.
+
+### Tyden 3: Nastav mereni, ktere vede k rozhodnuti
+
+Cil tydne: merit malo veci, ale tak, aby podle nich slo neco zmenit.
+
+Vystupy:
+
+- merici plan na jednu stranku,
+- katalog prvnich eventu,
+- pravidla pro UTM,
+- rozhodovaci veta pro landing page, onboarding nebo obsah,
+- zakladni retence analytickych dat.
+
+Pracovni postup:
+
+1. Sepis tri rozhodnuti, ktera chces v pristich 30 dnech udelat.
+2. Ke kazdemu rozhodnuti pridej signal a nejmensi data.
+3. Oddel webovou analytiku, produktove eventy a auditni log.
+4. Zakaz osobni udaje v UTM parametrech a analytickych eventech.
+5. Nastav kratkou retenci pro surova data a delsi zivot jen pro agregace s jasnym ucelem.
+
+Mini checklist:
+
+- [ ] Kazdy event ma popsany ucel.
+- [ ] Do analytiky neposilam obsah zprav, dokumentu ani plne kontakty.
+- [ ] Kampane vyhodnocuji podle kvality leadu, ne jen navstev.
+- [ ] Mam jasne pojmenovane zdroje a kampane.
+- [ ] Vim, kdo ma k analytice pristup a proc.
+
+### Tyden 4: Zpevni provoz a priprav obchodni realitu
+
+Cil tydne: aby produkt nespadl na prvni zakaznicke otazce o datech, cene, exportu nebo incidentu.
+
+Vystupy:
+
+- kratky provozni runbook,
+- vendor review pro hlavni dodavatele,
+- kontrola zaloh a obnovy,
+- cenik nebo pilotni nabidka bez schovanych podminek,
+- offboarding mini-proces.
+
+Pracovni postup:
+
+1. Zapis, kde produkt bezi, kde jsou data, kdo ma pristup a jak se dela rollback.
+2. U kazdeho dodavatele over region, DPA, export, mazani, pristupy a plan B.
+3. Otestuj obnovu aspon jednoho typu zalohy.
+4. U ceniku vysvetli, co je v cene, co se stane po kliknuti a jak lze skoncit.
+5. Sepis, co se smaze pri odchodu zakaznika, co zustava kvuli ucetnictvi nebo pravnim povinnostem a jak dlouho.
+
+Mini checklist:
+
+- [ ] Nekdo umi popsat deploy, rollback a obnovu bez loveni v historii chatu.
+- [ ] Dodavatele maji jasny ucel a datovou hranici.
+- [ ] Cenik neresi soukromi jako upsell.
+- [ ] Export a zruseni uctu nejsou schovane za support labyrintem.
+- [ ] Incident karta ma vlastnika, uroven dopadu a dalsi update.
+
+### Patecni review: jedna stranka pravdy
+
+Na konci kazdeho tydne vypln stejnou sablonu. Nemen ji kazdy patek, jinak budes optimalizovat formular misto firmy.
+
+```text
+Tyden:
+
+Hlavni predpoklad:
+
+Co jsme zmenili:
+
+Co jsme zmerili nebo slyseli:
+
+Co nas prekvapilo:
+
+Co zrusime:
+
+Co zlepsime:
+
+Jedno rozhodnuti na dalsi tyden:
+
+Data, ktera muzeme smazat:
+```
+
+Kdyz po 30 dnech nemas vic jasno v segmentu, nabidce, datech, cene a hlavnim toku, nebyl problem v tom, ze plan byl maly. Problem byl v tom, ze se prace rozutekla. Zmensi rozsah a zopakuj mesic jen pro jednu cast produktu.
+
+---
+
 ## Zdroje
 
 - GDPR, Regulation (EU) 2016/679, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
@@ -2416,3 +2561,4 @@ Tohle je prakticky smysl celeho e-booku: stavet produkty, ktere jsou rychle, obc
 - 2026-07-31: Dopsana desata kapitola o evropskem provozu vcetne hostingu, datove mapy, zaloh, incident runbooku, vendor review, provozniho rytmu a checklistu.
 - 2026-07-31: Dopsana jedenacta kapitola s checklistem pred verejnym spustenim vcetne launch gate, SEO a duvery, formularu, smoke testu, provozni pripravy a postmortem sablony.
 - 2026-07-31: Dopsana dvanacta kapitola s praktickymi prilohami: product brief, landing page sablona, merici plan, vendor review, incident karta, predlaunch audit a zaverecny checklist.
+- 2026-07-31: Pridan 30denni akcni plan po docteni, ktery prevadi e-book do tydnovych vystupu pro nabidku, hlavni cestu, mereni a provoz.
