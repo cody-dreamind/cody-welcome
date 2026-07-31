@@ -4759,8 +4759,169 @@ Vlastni URL, feed, cilena zprava dotcenym zakaznikum.
 
 ---
 
+## Vyber AI nastroje pred prvnim promptem za 45 minut
+
+AI nastroj se do maleho SaaS tymu casto dostane neformalne: nekdo ho vyzkousi na text, nekdo na support odpoved, nekdo na kus kodu a najednou v nem lezi interni kontext, cast logu, export z CRM nebo screenshot zakaznicke administrace. To neni adopce. To je datovy unik v pomalem tempu a s hezkym onboardingem.
+
+Privacy-first pravidlo je jednoduche: pred prvnim produkcnim pouzitim AI nastroje si rozhodni, jaka data do nej smi, jaka nesmi a jak poznas, ze vystup vyzaduje lidskou kontrolu. U evropskeho SaaS to neni jen zdravy rozum. AI Act pracuje s rizikovym pristupem, transparentnosti a povinnostmi pro urcite AI systemy; Evropska komise uvadi, ze pravidla pro GPAI se zacala uplatnovat 2. srpna 2025 a pravidla transparentnosti podle clanku 50 od 2. srpna 2026: https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai. Prakticky harmonogram shrnuje AI Act Service Desk: https://ai-act-service-desk.ec.europa.eu/en/ai-act/timeline/timeline-implementation-eu-ai-act.
+
+Tohle neni pravni rozbor. Je to provozni filtr pro tym, ktery nechce resit compliance az ve chvili, kdy se zakaznik zepta: "A kam jste poslali nase data?"
+
+**Codyho komentar:** AI je skvely pomocnik na zkraceni prace. Ale pokud do nej bez rozmyslu sypes zakaznicka data, neni to produktivita. Je to outsourcing uvazovani i odpovednosti. A to je kombinace, ktera vetsinou zraje spatne.
+
+### 1. Zarad nastroj podle rezimu pouziti
+
+Nejdrive neresis vendor logo. Resis rezim. Stejny model muze byt nizke riziko pro generovani obecneho blogoveho outline a vysoke riziko pro analyzu support ticketu se zakaznickymi daty.
+
+| Rezim | Priklad | Zakladni pravidlo |
+| --- | --- | --- |
+| Verejny obsah | Navrh titulku, osnovy, obecneho checklistu | Bez osobnich a internich dat, zdroje overit. |
+| Interni produktova prace | Shrnuty backlog, anonymizovane poznamky z callu | Posilat jen minimalni kontext a odstranit identifikatory. |
+| Kod | Refaktor, testy, vysvetleni chyby | Neposilat secrets, produkcni dumpy ani neverejne pristupy. |
+| Support | Navrh odpovedi zakaznikovi | Lidska kontrola povinna, minimalizovat obsah ticketu. |
+| Rozhodovani o lidech | Hiring, hodnoceni vykonu, prioritizace kandidatu | Bez pravni a eticke kontroly nepoustet. |
+| Citliva data | Zdravotni, financni, detska, biometricka nebo security data | Defaultne zakazat, dokud neni jasny pravni a bezpecnostni ramec. |
+
+U kazdeho rezimu si zapis hranici:
+
+- jaka data smi do promptu,
+- jaka data nesmi nikdy,
+- kdo muze nastroj pouzit,
+- kdy je nutna lidska kontrola,
+- kde se uklada vystup,
+- jak se vystup oznaci, pokud jde ven.
+
+### 2. Zeptej se na data driv nez na funkce
+
+AI nastroj muze vypadat podobne jako bezny SaaS, ale jeho datova stopa je casto citlivejsi. Prompt umi obsahovat zakaznicke problemy, obchodni plany, logy, kod, osobni udaje i interni rozhodnuti v jednom balicku. Proto potrebujes kratkou vendor kartu.
+
+Sablona vendor karty:
+
+```text
+Nastroj:
+[nazev a URL]
+
+Ucel:
+[na co ho tym pouzije]
+
+Data povolena:
+[napr. verejne texty, anonymizovane poznamky, ukazky kodu bez secrets]
+
+Data zakazana:
+[osobni udaje, zakaznicke exporty, produkcni logy, smlouvy, tajemstvi]
+
+Region a zpracovani:
+[kde jsou data, zda lze zvolit EU, kdo je zpracovatel]
+
+Trenovani na vstupech:
+[ano/ne/nastaveni/nejiste]
+
+Retence:
+[jak dlouho drzi prompt, vystup, logy]
+
+Pristupy:
+[kdo v tymu, role, MFA]
+
+Vypnuti:
+[export, smazani, ukonceni uctu]
+
+Vlastnik:
+[clovek odpovedny za kontrolu]
+```
+
+Kdyz vendor neumi odpovedet na zakladni otazky o zpracovani, retenci a pristupech, neni to automaticky konec. Ale znamena to, ze do nej nepatri citlive ani zakaznicke vstupy.
+
+### 3. Nastav prompt policy pro tym
+
+Prompt policy ma byt kratka. Kdyz ma sest stran, nikdo ji nepouzije. Staci pravidla, ktera clovek udrzi v hlave a ktera se daji kontrolovat.
+
+Minimalni pravidla:
+
+- Neposilej do AI cele zakaznicke exporty.
+- Neposilej secrets, tokeny, hesla, privatni klice ani `.env` soubory.
+- Neposilej produkcni logy bez redakce osobnich udaju a internich identifikatoru.
+- U supportu pouzij anonymizovane shrnuti misto cele konverzace, pokud to staci.
+- U pravnich, danovych, bezpecnostnich a zdravotnich tvrzeni over primarni zdroje.
+- Vystup AI, ktery jde zakaznikovi nebo verejne ven, musi zkontrolovat clovek.
+- Pokud je obsah generovany AI a muze pusobit jako realny obraz, audio, video nebo verejna informacni zprava, res transparentni oznaceni podle pouziti.
+
+Priklad povoleneho promptu:
+
+```text
+Prepis nasledujici anonymizovanou support odpoved do klidnejsi cestiny.
+Zakaznik resi obecne problem s importem CSV, bez osobnich dat.
+Zachovej fakt, ze limit je 10 MB a import lze opakovat.
+```
+
+Priklad zakazaneho promptu:
+
+```text
+Tady je export supportu za posledni mesic vcetne emailu, jmen klientu a internich poznamek.
+Najdi nespokojene zakazniky a napis jim odpoved.
+```
+
+Rozdil neni v tom, jestli AI umi pomoct. Rozdil je v tom, jestli tym porad kontroluje data a odpovednost.
+
+### 4. Lidska kontrola neni formalita
+
+AI vystup muze byt stylisticky presvedcivy a fakticky krivy. Proto definuj, co znamena review podle typu prace.
+
+| Vystup | Kontrola pred pouzitim |
+| --- | --- |
+| Blog nebo marketing | Fakta, zdroje, ton, sliby, SEO metadata, privacy tvrzeni. |
+| Support odpoved | Fakticka spravnost, empatie, zadne sdileni interniho kontextu. |
+| Kod | Testy, security dopad, licence, zadne vlozene secrets. |
+| Produktove rozhodnuti | Zda vychazi z realnych dat, ne jen z hezkeho shrnuti. |
+| Pravni nebo compliance text | Primarni zdroje a kontrola odbornikem podle rizika. |
+
+U AI asistenta v produktu je kontrola jeste prisnejsi. Pokud uzivatel komunikuje s botem, musi rozumet, ze komunikuje s AI, pokud to kontext vyzaduje. Pokud AI generuje obsah jmenem produktu, potrebujes logiku, kdo za nej odpovida, jak se hlasi chyba a jak se zabrani vynaseni dat mezi ucty.
+
+### 5. 45min postup
+
+```text
+00-05 min: Popis pouziti.
+Napis jednu vetu, k cemu ma AI nastroj slouzit a kdo ho bude pouzivat.
+
+05-12 min: Zaraz rizikovy rezim.
+Verejny obsah, interni prace, kod, support, rozhodovani o lidech, citliva data.
+
+12-22 min: Vypln vendor kartu.
+Data, region, retence, trenovani, pristupy, vypnuti, vlastnik.
+
+22-30 min: Napis prompt policy.
+Tri povolene priklady, tri zakazane priklady, lidska kontrola.
+
+30-38 min: Otestuj minimalni vstup.
+Pouzij anonymizovany nebo verejny priklad a zkontroluj kvalitu vystupu.
+
+38-45 min: Rozhodni.
+Povolit / povolit jen pro verejna data / pilot s omezenim / zakazat.
+Zapis rozhodnuti a datum dalsi kontroly.
+```
+
+### Checklist: AI nastroj pred adopci
+
+- [ ] Vim, k cemu presne AI nastroj slouzi.
+- [ ] Pouziti je zarazene do rizikoveho rezimu.
+- [ ] Mam seznam dat, ktera do nastroje smi a nesmi.
+- [ ] Vim, zda se vstupy pouzivaji pro trenovani nebo zlepsovani sluzby.
+- [ ] Vim, kde jsou data zpracovana a jak dlouho se drzi.
+- [ ] Pristup ma jen role, ktere nastroj realne potrebuji.
+- [ ] MFA je zapnute u adminu nebo citlivejsich uctu.
+- [ ] Prompt policy obsahuje povolene a zakazane priklady.
+- [ ] AI vystupy pro zakazniky a verejnost kontroluje clovek.
+- [ ] Pravni, bezpecnostni a aktualni tvrzeni se overuji z primarnich zdroju.
+- [ ] Je jasne, kdy se AI obsah musi oznacit nebo transparentne vysvetlit.
+- [ ] Existuje postup pro export, smazani a vypnuti nastroje.
+- [ ] Rozhodnuti ma vlastnika a datum dalsi kontroly.
+
+---
+
 ## Zdroje
 
+- AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
+- European Commission, AI Act: https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai
+- AI Act Service Desk, Timeline for the Implementation of the EU AI Act: https://ai-act-service-desk.ec.europa.eu/en/ai-act/timeline/timeline-implementation-eu-ai-act
 - GDPR, Regulation (EU) 2016/679, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
 - EDPB Guidelines 07/2020 on the concepts of controller and processor in the GDPR: https://www.edpb.europa.eu/system/files/2023-10/EDPB_guidelines_202007_controllerprocessor_final_en.pdf
 - WP29/EDPB Guidelines on Data Protection Impact Assessment (DPIA): https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/data-protection-impact-assessment-dpia_en
@@ -4839,3 +5000,4 @@ Vlastni URL, feed, cilena zprava dotcenym zakaznikum.
 - 2026-07-31: Pridana prakticka priloha Mini DPIA pred novou funkci za 60 minut vcetne rizikoveho filtru, sablony posouzeni, opatreni a checklistu.
 - 2026-07-31: Pridana prakticka priloha AI asistenti v SaaS tymu bez vynaseni dat za 60 minut vcetne rizikovych rezimu, minimalizace promptu, tymovych pravidel a checklistu.
 - 2026-07-31: Pridana prakticka priloha Changelog jako duvera, marketing a provoz za 45 minut vcetne kategorii, sablony, distribuce a privacy/security kontrol.
+- 2026-07-31: Pridana prakticka priloha Vyber AI nastroje pred prvnim promptem za 45 minut vcetne vendor karty, prompt policy, lidske kontroly a checklistu pred adopci.
