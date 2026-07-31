@@ -3696,6 +3696,170 @@ Kdy cviceni zopakujeme:
 
 ---
 
+## Security a DPA dotaznik bez paniky za 60 minut
+
+Jakmile SaaS zacne prodavat B2B zakaznikum, driv nebo pozdeji prijde security dotaznik, DPA pozadavek nebo tabulka od nakupu. Nekdy ma dvacet otazek, nekdy dve ste. Nektere otazky jsou rozumne, jine vypadaji, jako by je nekdo vytahl z enterprise hradu a poslal male firme pro radost. Cilem neni vyplnit vse za kazdou cenu. Cilem je odpovedet pravdive, rychle a tak, aby se z odpovedi nestal slib, ktery produkt realne neumi splnit.
+
+Privacy-first SaaS ma vyhodu, pokud si pripravi odpovedi dopredu: kde jsou data, kdo k nim ma pristup, jak funguje export, mazani, zalohy, incidenty, subdodavatele a logy. To jsou stejne otazky, ktere se opakuji v prodeji, trust page i provozu. Security dotaznik tedy neni jen administrativni otrava. Je to zrcadlo provozni dospelosti.
+
+Pravni cast vzdy validuj podle konkretni situace. DPA a role spravce/zpracovatele se odviji od toho, co produkt dela a pro koho. GDPR dava zakladni ramec pro zpracovatelske smlouvy v clanku 28 a pro technicka a organizacni opatreni v clanku 32: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng. Bezpecnostni checklisty ber jako praktickou pomucku, ne jako nahrazku pravnika.
+
+**Codyho komentar:** Nejhorsi odpoved na security dotaznik je sebevedome "ano" u vseho. Druha nejhorsi je tricetistrankovy dokument, ve kterem nikdo nepozna, co produkt opravdu dela. Pravda byva kratsi a mnohem uzitecnejsi.
+
+### 1. Rozdel otazky podle vlastnika
+
+Security dotaznik nevyrizuj jako jeden velky blob. Rozdel ho podle oblasti a vlastnika:
+
+| Oblast | Typicke otazky | Vlastnik |
+| --- | --- | --- |
+| Data a role | jaka data zpracovavate, jste spravce nebo zpracovatel, kde jsou data | founder / produkt / legal |
+| Hosting a infrastruktura | region, zalohy, sifrovani, dostupnost, SLA | provoz / vyvoj |
+| Pristupy | kdo ma admin pristup, MFA, revize pristupu, offboarding lidi | provoz / security |
+| Aplikacni bezpecnost | autentizace, logovani, zranitelnosti, testovani | vyvoj |
+| Incidenty | detekce, reakce, breach proces, komunikace | provoz / legal |
+| Dodavatele | subprocesori, DPA, regiony, export, mazani | founder / provoz |
+| Retence a mazani | jak dlouho drzis data, export, smazani, zalohy | produkt / provoz |
+
+U kazde otazky si pridej stav:
+
+- `odpoved mame`,
+- `odpoved mame, ale musi se zpresnit`,
+- `neumime splnit`,
+- `potrebujeme pravni validaci`,
+- `potrebujeme technickou zmenu`.
+
+Tohle zni banalne, ale zabrani tomu, aby tym omylem slibil funkci, ktera neexistuje. Kdyz dotaznik chce SSO a produkt ho nema, odpoved neni "ano, casem". Odpoved je: "SSO aktualne neni soucasti standardniho planu; pro Business plan je na roadmap nebo individualni domluvu." Pokud to neni pravda ani na roadmap, napis to jeste presneji.
+
+### 2. Priprav zakladni odpovedni balicek
+
+Nemusis pri kazdem leadu psat vse znovu. Udrzuj kratky balicek odpovedi, ktery se da poslat nebo pouzit pri vyplnovani tabulek.
+
+Minimalni balicek:
+
+- trust page nebo security overview,
+- datova mapa hlavniho toku,
+- seznam hlavnich dodavatelu a regionu,
+- DPA nebo postup pro uzavreni DPA,
+- popis technickych a organizacnich opatreni,
+- postup pro export, mazani a offboarding,
+- incidentovy proces a kontakt,
+- informace o tom, co zamerne neslibujete verejne.
+
+Sablona interniho security overview:
+
+```text
+Produkt:
+
+Typ zakazniku:
+
+Role v GDPR:
+[typicky spravce / zpracovatel / kombinace podle scenare]
+
+Hlavni data:
+[ucty, obsah, billing, support, logy, analytika]
+
+Region:
+[aplikace, databaze, soubory, zalohy, logy]
+
+Pristupy:
+[role, MFA, revize, produkcni pristupy]
+
+Bezpecnostni zaklad:
+[HTTPS, sifrovani, zalohy, monitoring, patching, logging]
+
+Incidenty:
+[detekce, owner, komunikace, breach posouzeni]
+
+Subdodavatele:
+[kategorie, region, DPA, export/mazani]
+
+Omezeni:
+[co zatim neumime: SSO, vlastni region, pen test, certifikace]
+
+Kontakt:
+[security / privacy / DPA]
+```
+
+Omezeni jsou dulezita. Pokud nejsou v dokumentu, prodej nebo zakaznik si je domysli. A domyslene sliby maji zvyk vratit se v nejhorsim moznem okamziku.
+
+### 3. Odpovidej presne, ne maximalisticky
+
+Bezpecnostni dotazniky casto svadi k odpovedim typu "ano, pravidelne" nebo "data jsou sifrovana". Jenze dobry zakaznik se zepta dal: jak pravidelne, ktera data, kde, kdo ma klice, co je mimo rozsah?
+
+Lepsi vzory:
+
+| Mlhava odpoved | Presnejsi odpoved |
+| --- | --- |
+| "Data jsou v EU." | "Aplikacni databaze a primarni zalohy jsou v EU regionu. Subdodavatele evidujeme v dodavatelskem prehledu." |
+| "Pristupy kontrolujeme." | "Admin pristupy revidujeme mesicne a pri odchodu clena tymu je rusime v offboarding checklistu." |
+| "Mame zalohy." | "Databaze ma automaticke zalohy; restore test zapisujeme podle provozniho rytmu." |
+| "Incidenty resime rychle." | "Incidenty tridime P1/P2/P3, vedeme timeline a u osobnich udaju posuzujeme GDPR breach povinnosti." |
+| "Nepouzivame trackery." | "Verejny web nemeri navstevniky pres reklamni profil; netechnicke skripty nepoustime bez odpovidajiciho souhlasu." |
+
+Kdyz odpoved neznas, nenahrazuj ji optimismem. Napis "overujeme" a dej termin. Pokud dotaznik nepovoluje text a chce jen ano/ne, pridej komentar do pruvodniho emailu nebo prilohy. Bezpecnost neni test s hadanim spravne odpovedi.
+
+### 4. Kdy rict ne nebo "zatim ne"
+
+Ne kazdy pozadavek ma maly SaaS splnit hned. Nektere veci patri do vetsiho planu, nektere do enterprise varianty a nektere jsou mimo rozumny rozsah produktu.
+
+Typicke pozadavky a realisticka reakce:
+
+| Pozadavek | Reakce maleho SaaS |
+| --- | --- |
+| Vlastni dedikovany region | Jen pokud je to obchodne a provozne udrzitelne. Jinak popsat aktualni EU region. |
+| SSO/SAML | Business/enterprise kandidat, ne nutne pro prvni self-service plan. |
+| Penetracni test kazdy kvartal | Mozna pozdeji; ted popsat aktualni testovani, dependency kontrolu a plan. |
+| Kompletni seznam subdodavatelu verejne | Verejne kategorie, detail na vyzadani pod rozumnym procesem. |
+| Neomezena retence logu | Casto spatny napad; vysvetlit kratkou technickou retenci a agregace. |
+| Poslani internich runbooku | Sdilet prehled procesu, ne citlive provozni detaily. |
+
+Rict "zatim ne" je profesionalni, pokud k tomu pridas alternativu:
+
+```text
+Tuto schopnost aktualne nenabizime ve standardnim planu. Pro vase posouzeni muzeme dodat popis soucasneho nastaveni, datovou mapu a DPA. Pokud je [pozadavek] nakupni podminka, muzeme ho vyhodnotit jako soucast Business varianty.
+```
+
+Tohle je ferove. Nepredstira to hotovou enterprise zralost, ale nezavira to obchodni rozhovor.
+
+### 5. 60min postup
+
+```text
+00-10 min: Sesbirej posledni security, DPA a privacy otazky od leadu.
+
+10-20 min: Rozdel je podle oblasti: data, hosting, pristupy, aplikace, incidenty, dodavatele, retence.
+
+20-35 min: Vypln security overview z existujici datove mapy, trust page a runbooku.
+
+35-45 min: Oznac mezery: co neumime splnit, co nevim, co musi validovat pravnik nebo provoz.
+
+45-55 min: Napis 5 az 10 opakovatelnych odpovedi pro obchod a support.
+
+55-60 min: Vyber tri opravy: jedna verejna veta, jedna interni tabulka, jedna technicka/procesni mezera.
+```
+
+Priklad tri oprav:
+
+- doplnit na trust page presnejsi vetu o regionu zaloh,
+- vytvorit tabulku subdodavatelu s ucelem, regionem a DPA stavem,
+- pridat mesicni revizi admin pristupu do provozniho rytmu.
+
+To jsou male zmeny, ktere zrychli dalsi prodej a snizi riziko, ze se security odpovedi budou vyrabet improvizovane v inboxu.
+
+### Checklist: security a DPA pripravenost
+
+- [ ] Existuje kratke security overview s pravdivymi odpovedmi.
+- [ ] Je jasne, zda produkt v dane situaci vystupuje jako spravce, zpracovatel nebo oboji.
+- [ ] Datova mapa pokryva hlavni data, systemy, regiony, pristupy, retenci a mazani.
+- [ ] Hlavni dodavatele maji ucel, region, DPA stav, export a mazani.
+- [ ] Trust page, privacy dokument a obchodni odpovedi si neodporuji.
+- [ ] U pristupu je popsana role, MFA tam, kde dava smysl, a revize.
+- [ ] Zalohy, restore testy a incident runbook maji realny proces, ne jen vetu v prezentaci.
+- [ ] Je jasne, ktere pozadavky zatim neumime nebo nechceme slibit.
+- [ ] Citlive interni detaily se nesdili verejne bez duvodu.
+- [ ] Opakovane odpovedi maji vlastnika pravdivosti a datum dalsi kontroly.
+
+---
+
 ## Zdroje
 
 - GDPR, Regulation (EU) 2016/679, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
@@ -3765,3 +3929,4 @@ Kdy cviceni zopakujeme:
 - 2026-07-31: Pridana prakticka priloha Recyklace obsahu bez platformni pasti za 45 minut vcetne vyberu vhodneho obsahu, distribuce pres primarni URL, knihovny odpovedi a checklistu.
 - 2026-07-31: Pridana prakticka priloha Lead magnet bez datove pasti za 60 minut vcetne vyberu formatu, datoveho kontraktu, landing sablony, distribuce a checklistu.
 - 2026-07-31: Pridana prakticka priloha Incidentove cviceni za 45 minut vcetne scenaru, prvnich kroku, komunikace, vystupu oprav a checklistu.
+- 2026-07-31: Pridana prakticka priloha Security a DPA dotaznik bez paniky za 60 minut vcetne odpovedniho balicku, presnych formulaci, hranic slibu a checklistu pripravenosti.
