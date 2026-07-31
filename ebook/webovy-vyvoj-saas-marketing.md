@@ -3559,6 +3559,143 @@ Pokud nestihas, vyhod PDF. HTML stranka s checklistem je casto lepsi: da se aktu
 
 ---
 
+## Prakticka priloha: Incidentove cviceni za 45 minut
+
+Incident runbook, ktery nikdo nikdy nezkusil, je prani s nadpisem. Nemusis cekat na velkou certifikaci ani drahy audit. Jednou za mesic si vezmi 45 minut a projdi jeden realisticky scenar: nedostupny web, chybna migrace, unik pristupoveho tokenu, rozbite odesilani emailu, podezrely export dat nebo spatne nastavena cache u prihlasene casti.
+
+Cil cviceni neni dramatizovat. Cil je zjistit, jestli tym vi, kdo rozhoduje, kde jsou logy, jak se vypina skodliva zmena, koho informovat a kdy uz nejde jen o technicky problem. U incidentu s osobnimi udaji mysli na GDPR clanek 33 a interni pravidlo: nejdrive zjistit fakta, omezit dopad, zachovat dukazy a rychle eskalovat pravni nebo bezpecnostni posouzeni.
+
+**Codyho komentar:** Incidentove cviceni je jako test zalohy. Nejspis se ukaze, ze neco chybi. To neni ostuda. Ostuda je zjistit to az pri realnem incidentu a delat ze Slacku improvizovane ridici centrum.
+
+### 1. Vyber jeden scenar
+
+Nepouzivej abstraktni "mame incident". Vyber konkretni situaci:
+
+| Scenar | Co overuje |
+| --- | --- |
+| Web neodpovida 20 minut | Monitoring, eskalaci, rollback, komunikaci se zakazniky. |
+| Migrace pokazila cast dat | Zalohy, obnovu, vlastnictvi databaze, audit zmen. |
+| Unikl API token dodavatele | Rotaci tajemstvi, vendor kontakt, rozsah dopadu. |
+| Emailova integrace poslala spatnou zpravu | Logy, vypnuti integrace, opravu dat, omluvu. |
+| Cache ukazala cizi obsah | Bezpecnostni hranice, purge cache, pravni posouzeni. |
+
+Scenar zapis jednou vetou:
+
+```text
+V 10:15 monitoring hlasi, ze produkcni web vraci 500 na hlavni landing page a demo formular neodesila leady.
+```
+
+### 2. Projdi prvnich 15 minut
+
+Prvnich 15 minut rozhoduje, jestli se incident zmensi, nebo rozleze.
+
+Checklist:
+
+- [ ] Kdo je incident owner?
+- [ ] Kdo zapisuje casovou osu?
+- [ ] Ktery system je dotceny?
+- [ ] Je dopad na dostupnost, data, platby, nebo bezpecnost?
+- [ ] Kde jsou aktualni logy a metriky?
+- [ ] Lze problem omezit vypnutim feature flagu, rollbackem nebo zastavenim integrace?
+- [ ] Je potreba chranit dukazy pred premazanim?
+
+Nepreskakuj zapis casu. Minimalni timeline muze vypadat takto:
+
+```text
+10:15 monitoring hlasi chybu
+10:17 incident owner potvrzen
+10:20 zjisteno: chyba po deployi verze abc123
+10:25 spusten rollback na predchozi verzi
+10:31 formular znovu odesila testovaci lead
+10:38 kontrola logu: zatim bez zjevneho pristupu k cizim datum
+```
+
+### 3. Rozhodni, koho informovat
+
+Ne kazdy incident patri hned do verejneho status page. Ale kazdy incident potrebuje jasne rozhodnuti o komunikaci.
+
+Rozdel prijemce:
+
+| Skupina | Kdy informovat |
+| --- | --- |
+| Interni tym | Hned, pokud muze pomoct nebo musi prestat delat zmeny. |
+| Zakaznici | Kdyz je dotcena dostupnost, data, platby nebo jejich prace. |
+| Dodavatel | Kdyz incident muze byt na jeho strane nebo vyzaduje jeho logy. |
+| Pravni/bezpecnostni odpovednost | Kdyz muze jit o osobni udaje, smluvni dopad nebo breach. |
+| Dozorovy urad | Az po posouzeni podle GDPR/NIS2 a relevantnich povinnosti. |
+
+Sablona interni zpravy:
+
+```text
+Incident: [kratky nazev]
+Stav: vysetrujeme / omezeno / obnoveno
+Dopad: [co zatim vime]
+Owner: [jmeno]
+Zakaz zmen: [ano/ne, ktere systemy]
+Dalsi update: [cas]
+```
+
+Sablona zakaznicke zpravy:
+
+```text
+Od [cas] resime problem s [sluzba/funkce].
+Dopad: [konkretne a bez spekulaci].
+Aktualni stav: [co jsme udelali].
+Dalsi update posleme do [cas].
+```
+
+Rikej mene, ale presne. "Nekteri uzivatele mohli zaznamenat problem" je horsi nez "Demo formular mezi 10:15 a 10:31 neodesilal zpravy". Prvni veta je mlha, druha je informace.
+
+### 4. Po cviceni zapis tri opravy
+
+Cviceni bez oprav je divadlo. Na konci vyber maximalne tri veci, ktere zmensi pristi riziko.
+
+Priklady oprav:
+
+- pridat odkaz na hosting konzoli do provozni dokumentace,
+- zkratit pristup k produkcnim logum jen na potrebne role,
+- doplnit runbook pro rollback migrace,
+- nastavit test obnovy zalohy jednou mesicne,
+- pridat alert na chyby demo formulare,
+- dopsat vendor kontakt a DPA odkaz,
+- zmenit logovani tak, aby neukladalo obsah formularu.
+
+Sablona vystupu:
+
+```text
+Scenar:
+[co jsme cvicili]
+
+Co fungovalo:
+[3 body]
+
+Co chybelo:
+[3 body]
+
+Opravy do 7 dni:
+1. [vystup, vlastnik, datum]
+2. [vystup, vlastnik, datum]
+3. [vystup, vlastnik, datum]
+
+Kdy cviceni zopakujeme:
+[datum nebo spoustec]
+```
+
+### Checklist: incidentove cviceni
+
+- [ ] Scenar je konkretni a realisticky.
+- [ ] Je urceny incident owner a zapisovatel timeline.
+- [ ] Tym vi, kde jsou logy, metriky, deploye, zalohy a kontakty na dodavatele.
+- [ ] Je jasne, kdy pouzit rollback, feature flag nebo vypnuti integrace.
+- [ ] U scenare se posoudi dopad na osobni udaje a smluvni zavazky.
+- [ ] Komunikace rozlisuje fakta, odhady a dalsi update.
+- [ ] Po cviceni vzniknou maximalne tri opravy s vlastnikem.
+- [ ] Opravy se kontroluji do 7 dni.
+- [ ] Runbook se aktualizuje podle toho, co cviceni odhalilo.
+- [ ] Zakaznicka data se pri cviceni nepouzivaji zbytecne; staci testovaci nebo anonymizovany scenar.
+
+---
+
 ## Zdroje
 
 - GDPR, Regulation (EU) 2016/679, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
@@ -3627,3 +3764,4 @@ Pokud nestihas, vyhod PDF. HTML stranka s checklistem je casto lepsi: da se aktu
 - 2026-07-31: Pridana prakticka priloha Retencni politika a mazani dat za 60 minut vcetne datovych kategorii, retencnich pravidel, mazaciho toku, sablony a checklistu.
 - 2026-07-31: Pridana prakticka priloha Recyklace obsahu bez platformni pasti za 45 minut vcetne vyberu vhodneho obsahu, distribuce pres primarni URL, knihovny odpovedi a checklistu.
 - 2026-07-31: Pridana prakticka priloha Lead magnet bez datove pasti za 60 minut vcetne vyberu formatu, datoveho kontraktu, landing sablony, distribuce a checklistu.
+- 2026-07-31: Pridana prakticka priloha Incidentove cviceni za 45 minut vcetne scenaru, prvnich kroku, komunikace, vystupu oprav a checklistu.
