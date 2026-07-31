@@ -4470,6 +4470,136 @@ Vlastnik, opatreni, termin, signal pro znovuotevreni.
 
 ---
 
+## AI asistenti v SaaS tymu bez vynaseni dat za 60 minut
+
+AI asistent umi malemu SaaS tymu usetrit hodiny: shrne rozhovor, navrhne varianty textu, pomuze s SQL dotazem, najde mezery v checklistu, pripravi odpoved na support nebo zprehledni incidentovou casovou osu. Stejne rychle ale umi z produktu udelat datovy cednik, pokud do nej tym bez premysleni kopiruje zakaznicke exporty, logy, smlouvy, screenshoty adminu a cele mailboxy.
+
+Privacy-first pristup k AI neni "AI nepouzivat". Je to pouzivat ji tak, aby data, ucel, dodavatel, retence a vystup mely stejne jasna pravidla jako u analytiky, supportu nebo CRM. AI asistent je dodavatel nebo interni system podle toho, kde bezi a co zpracovava. V obou pripadech plati: nejdrive minimalizuj vstup, potom se ptej na genialitu modelu.
+
+**Codyho komentar:** Nejrychlejsi cesta k chytre odpovedi je casto poslat AI vsechno. Nejrychlejsi cesta k rozumnemu provozu je poslat ji jen to, co opravdu potrebuje. Ano, je to mene pohodlne. Ale porad mene bolestive nez vysvetlovat zakaznikovi, proc jeho data skoncila v promptu "jen na chvilku".
+
+### 1. Rozdel AI pouziti podle rizika
+
+Ne kazde pouziti AI ma stejny datovy dopad. Preklad anonymniho marketingoveho odstavce je jiny svet nez analyza produkcnich logu s emaily a tokeny.
+
+| Pouziti | Typicke riziko | Rozumny rezim |
+| --- | --- | --- |
+| Copywriting bez internich dat | nizke | bez osobnich udaju, bez zakaznickych detailu |
+| Shrnuty rozhovor s leadem | stredni | souhlas nebo jasny ucel, minimalizace, odstraneni zbytecnych detailu |
+| Support odpoved | stredni | anonymizovat vstup, clovek schvaluje vystup |
+| Debug logu | vysoke | redakce tokenu, emailu, IP a obsahu requestu |
+| Analytika chovani uzivatelu | vysoke | agregace, zadne volne texty, jasna retence |
+| Automaticke rozhodovani o zakaznikovi | velmi vysoke | mini DPIA nebo plnejsi posouzeni pred releasem |
+
+Pravidlo: pokud AI vystup muze ovlivnit zakaznika, cenu, pristup, support prioritu, bezpecnostni rozhodnuti nebo zpracovani osobnich udaju, nepatri do rezimu "zkusime a uvidime". Patri do navrhu, posouzeni a testu.
+
+### 2. Vstup minimalizuj pred promptem
+
+Pred kazdym promptem si poloz pet otazek:
+
+- Potrebuji poslat realna data, nebo staci synteticky priklad?
+- Potrebuji cele vlakno, nebo jen relevantni vyrez?
+- Obsahuje vstup emaily, telefony, tokeny, adresy, faktury nebo volne texty zakazniku?
+- Je v promptu interni obchodni nebo technicka informace, ktera nema opustit tym?
+- Bude vystup pouzit verejne, zakaznicky nebo jen interne?
+
+Minimalizace v praxi:
+
+| Puvodni vstup | Lepsi vstup |
+| --- | --- |
+| cely export leadu z CRM | 5 anonymizovanych radku s kategoriemi a stavem |
+| produkcni stack trace s tokenem | redigovany stack trace bez secretu a osobnich udaju |
+| cele support vlakno | kratke shrnuti problemu bez jmen a priloh |
+| nahravka callu | schvaleny prepis jen relevantni casti |
+| screenshot adminu | orezany screenshot bez osobnich dat |
+
+Kdyz si nejsi jisty, pouzij synteticka data. Napriklad misto realneho emailu `jana@klient.cz` pouzij `user@example.eu`. Misto nazvu zakaznika pouzij `zakaznik A`. Misto cele smluvni vety popis situaci vlastnimi slovy.
+
+### 3. Zapis pravidla do tymu
+
+AI policy pro maly tym nemusi byt dlouha. Ma byt dost konkretni, aby clovek vedel, co muze udelat bez ptani a co uz vyzaduje kontrolu.
+
+Sablona:
+
+```text
+AI nastroje pouzivame pro:
+[copy, brainstorming, kontrolu textu, anonymizovane technicke priklady, interni sablony]
+
+Bez schvaleni neposilame:
+[zakaznicka data, osobni udaje, smlouvy, produkcni logy, tokeny, exporty, interni roadmapu]
+
+Povoleny rezim pro citlivejsi praci:
+[anonymizace, self-hosted / EU provoz, konkretni dodavatel, DPA, retence]
+
+Vystupy, ktere musi schvalit clovek:
+[support odpovedi, pravni texty, security odpovedi, verejne clanky, cenove navrhy]
+
+Kam zapisujeme vyjimky:
+[rozhodovaci log / vendor review / mini DPIA]
+```
+
+Tahle pravidla zmensuji improvizaci. Kdyz novy clovek v tymu nevi, co je povolene, obvykle vyhraje pohodli. A pohodli ma v datove discipline velmi presvedcivy usmev.
+
+### 4. AI vystup neni pravda, ale navrh
+
+U e-booku, blogu nebo marketingu muze AI pomoct s formulaci. U supportu, prava, bezpecnosti a provozu musi byt vystup zkontrolovany clovekem, ktery rozumi realite produktu.
+
+Kontrola vystupu:
+
+- Fakticka tvrzeni maji zdroj nebo interni dukaz.
+- Pravne relevantni formulace nejsou vydavane za pravni radu.
+- Bezpecnostni navody neprozrazuji zbytecne interni detaily.
+- Vystup neslibuje funkce, ktere produkt nema.
+- Vystup neobsahuje vlozena osobni data ze vstupu.
+- Ton odpovida znacce a situaci.
+
+**Priklad spatne AI odpovedi pro support:**
+
+> "Vase data jsou u nas vzdy 100% bezpecna a nikdy neopusti Evropu."
+
+**Lepsi kontrolovana odpoved:**
+
+> "Aplikacni data provozujeme v EU regionu a pristupy omezujeme podle role. Pokud potrebujete detail pro vlastni vendor review, poslu vam trust page a DPA postup."
+
+Prvni veta je maximalisticky slib. Druha je overitelna a uzitecna.
+
+### 5. 60min postup
+
+```text
+00-10 min: Sepis tri nejcastejsi AI pouziti v tymu.
+Napr. support odpovedi, copywriting, debug, meeting shrnuti.
+
+10-20 min: U kazdeho pouziti oznac data.
+Osobni, zakaznicka, interni, verejna, anonymizovana.
+
+20-35 min: Nastav pravidla vstupu.
+Co se smi poslat, co se musi anonymizovat, co je zakazane.
+
+35-45 min: Nastav kontrolu vystupu.
+Ktere vystupy schvaluje clovek a podle jakeho checklistu.
+
+45-55 min: Dopln vendor review.
+Dodavatel, region, DPA, retence, export, mazani, vypnuti.
+
+55-60 min: Vyber jednu opravu.
+Napr. redakce logu pred promptem, sablona support odpovedi, zakaz realnych exportu.
+```
+
+### Checklist: AI bez datove pasti
+
+- [ ] Tym vi, k cemu AI pouziva a k cemu ji nepouziva.
+- [ ] Citlive vstupy se minimalizuji, anonymizuji nebo zustavaji mimo AI nastroj.
+- [ ] Produkcni logy, tokeny, exporty a cele support vlakna se neposilaji bez redakce.
+- [ ] Zakaznicke a osobni udaje maji jasny ucel, dodavatele, retenci a pristupova pravidla.
+- [ ] AI dodavatel ma vyplneny vendor review, pokud zpracovava interni nebo zakaznicka data.
+- [ ] Vystupy pro zakazniky, pravni texty, security odpovedi a verejne clanky kontroluje clovek.
+- [ ] AI nevytvari automaticka rozhodnuti s dopadem na cloveka bez posouzeni rizika.
+- [ ] Prompty a vystupy se neukladaji dele, nez je potreba.
+- [ ] Verejne sliby o AI odpovidaji tomu, co produkt opravdu dela.
+- [ ] Existuje jednoduchy postup, jak AI zpracovani vypnout nebo obejit.
+
+---
+
 ## Zdroje
 
 - GDPR, Regulation (EU) 2016/679, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
@@ -4546,3 +4676,4 @@ Vlastnik, opatreni, termin, signal pro znovuotevreni.
 - 2026-07-31: Pridana prakticka priloha Subprocesori a zmeny dodavatelu za 60 minut vcetne verejneho seznamu, procesu zmeny, oznamovaci sablony a checklistu.
 - 2026-07-31: Pridana prakticka priloha Exit plan dodavatele za 45 minut vcetne karty kritickeho dodavatele, exportni kontroly, nouzoveho fallbacku a ukoncovaciho checklistu.
 - 2026-07-31: Pridana prakticka priloha Mini DPIA pred novou funkci za 60 minut vcetne rizikoveho filtru, sablony posouzeni, opatreni a checklistu.
+- 2026-07-31: Pridana prakticka priloha AI asistenti v SaaS tymu bez vynaseni dat za 60 minut vcetne rizikovych rezimu, minimalizace promptu, tymovych pravidel a checklistu.
