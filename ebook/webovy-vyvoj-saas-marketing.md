@@ -1864,6 +1864,205 @@ Kdyz tym nedokaze odpovedet behem deseti minut, neni to ostuda. Je to levny sign
 
 ---
 
+## 11. Checklist pred verejnym spustenim
+
+Launch neni kouzelny okamzik, kdy produkt prestane byt nedokonaly. Je to kontrolovany prechod z "stavime a ucime se v malem" do "nekdo cizi se na to muze spolehnout". U maleho SaaS je nejhorsi launch ten, ktery se tvari jako slavnost, ale nema pripraveny formular, rollback, pravni texty, supportni odpovedi ani monitoring.
+
+Dobry launch checklist nema byt byrokraticky oltar. Ma zachytit veci, ktere se spatne opravuji pod tlakem: rozbite prvni kroky, nejasne ceny, zbytecne sbirani dat, neexistujici zalohy, chybejici zdroje v obsahu a marketingove skripty, ktere se spusti driv nez souhlas. Jinymi slovy: veci, ktere vypadaji male, dokud kvuli nim neprijde prvni zakaznik o duveru.
+
+Privacy-first launch ma jeste jednu latku: kdyz nevis, proc data sbiras, kde jsou a jak je smazes, nejsi pripraveny. GDPR principy minimalizace, omezeni ulozeni a privacy by design nejsou posledni kontrola pravnika. Jsou produktovy filtr uz pred verejnym tlacitkem: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng.
+
+### 11.1 Launch gate: co musi byt pravda
+
+Pred spustenim si napis jednu stranku s odpovedmi. Ne prezentaci. Ne roadmapu. Jednu stranku, ktera rika, proc launch dava smysl ted.
+
+Sablona:
+
+```text
+Produkt spoustime pro:
+[konkretni segment]
+
+Hlavni problem:
+[jedna situace, kterou zakaznik pozna]
+
+Prvni hodnota:
+[co ma uzivatel dokazat nebo ziskat behem prvniho pouziti]
+
+Placeny nebo obchodni signal:
+[objednavka / pilot / demo request / cekaci listina s jasnym follow-upem]
+
+Nejvetsi riziko:
+[technicke / obchodni / pravni / provozni]
+
+Co nespoustime:
+[veci, ktere zustavaji mimo rozsah]
+
+Kdy launch zastavime:
+[konkretni signal, napr. rozbity signup, nefunkcni billing, nejasny datovy tok]
+```
+
+Posledni dva radky jsou nejdulezitejsi. Launch bez rozsahu se snadno nafoukne. Launch bez stop pravidla se snadno premeni v improvizovanou produkci.
+
+**Priklad stop pravidla:**
+
+"Nespoustime placene kampane, dokud demo formular nema potvrzeny zapis leadu, odeslani emailu, chybovou hlasku, privacy mikrotext a monitoring selhani."
+
+Tohle je rozumnejsi nez "snad si nekdo vsimne, kdyz to nepujde".
+
+### 11.2 Obsah, SEO a duvera
+
+Verejny web musi pred launchem odpovedet na tri otazky: co nabizis, proc tomu verit a co se stane po dalsim kroku. SEO technika je dulezita, ale nema zachranovat nejasnou nabidku. Google SEO Starter Guide resi uzitecny obsah, strukturu, titulky a dostupnost: https://developers.google.com/search/docs/fundamentals/seo-starter-guide. Prakticky: stranka musi byt citelna pro lidi i stroje.
+
+Kontrola verejnych stranek:
+
+- Homepage nebo hlavni landing page rika do par sekund, pro koho produkt je.
+- Hlavni CTA popisuje vysledek, ne jen technickou akci.
+- Pricing nebo pilotni podminky nemaji schovane zavazky.
+- Ochrana osobnich udaju a cookies jsou dostupne z paticky.
+- RSS nebo primarni odkazy jsou dostupne bez social share skriptu.
+- Kazda dulezita stranka ma `title`, meta description a kanonickou URL.
+- `sitemap.xml` obsahuje verejne dulezite URL.
+- `robots.txt` neblokuje omylem dulezite stranky.
+- Strukturovana data odpovidaji tomu, co je na strance videt.
+- Vsechny fakticke, pravni nebo aktualni tvrzeni maji zdroj.
+
+**Priklad predlaunch chyby:**
+
+Landing page tvrdi "EU provoz", ale nikde nerika, co to znamena. Lepsi je napsat: "Aplikace, databaze a zalohy provozujeme v EU regionu; marketingove mereni nepouziva reklamni profily." Pokud to zatim neni pravda pro vsechny vrstvy, napis presnejsi vetu. Duvera neroste z maximalniho sloganu, ale z presnosti.
+
+### 11.3 Formulare, souhlasy a datove toky
+
+Kazdy formular je maly datovy kontrakt. Pred launchem si projdi vsechny vstupy: kontakt, demo, registrace, newsletter, support, objednavka, export, mazani. U kazdeho pole musi byt jasne, proc existuje.
+
+Kontrolni tabulka:
+
+| Formular | Data | Ucel | Kam se posila | Retence | Co se stane po odeslani |
+| --- | --- | --- | --- | --- | --- |
+| Demo request | email, zprava | odpoved a obchodni follow-up | mailbox/CRM | dle obchodniho procesu | potvrzeni a odpoved |
+| Registrace | email, heslo/magic link | vytvoreni uctu | aplikacni DB | po dobu uctu | vstup do onboardingu |
+| Support | email, popis problemu | pomoc zakaznikovi | helpdesk/email | dle SLA | ticket nebo odpoved |
+| Export dat | account ID, typ exportu | splneni pozadavku | aplikace/storage | kratka technicka retence | odkaz nebo potvrzeni |
+
+U cookies a podobnych identifikatoru plati prakticky test: spousti se neco, co neni nezbytne pro fungovani webu? Pokud ano, potrebujes resit souhlas a srozumitelne volby. UOOU ma ceske Q&A ke cookies zde: https://uoou.gov.cz/verejnost/qa-otazky-a-odpovedi/cookies. EDPB pokyny k souhlasu zduraznuji, ze souhlas ma byt svobodny, konkretni, informovany a jednoznacny: https://www.edpb.europa.eu/documents/guideline/guidelines-052020-on-consent-under-regulation-2016679_en.
+
+Minimalni launch pravidla:
+
+- Netechnicke cookies ani marketingove skripty se nespousti pred souhlasem.
+- Odmitnuti souhlasu je stejne dostupne jako prijeti.
+- Formular nerika "souhlas se zpracovanim", kdyz realne staci informovat o ucelu.
+- Marketingovy souhlas neni predzaskrtnuty ani svazany s objednavkou, pokud neni nutny.
+- Obsah zpravy z formulare se neposila do analytiky.
+- Chybove logy neobsahuji cele request body.
+- Potvrzovaci email nerika vic, nez je potreba.
+
+**Codyho komentar:** Nejrychlejsi privacy audit je otazka "Co se stane s timhle polem po odeslani?" Pokud odpoved zni "to nevim", pole nema na launchi co delat. Brutalni? Mozna. Ucinne? Bohuzel ano.
+
+### 11.4 Technicky smoke test
+
+Smoke test neni kompletni test suite. Je to kratka kontrola, ze hlavni slib produktu nezakopne o prvni klik. U verejneho launchu ho udelej tesne pred spustenim a znovu po deployi.
+
+Minimalni smoke test pro SaaS:
+
+1. Otevri homepage a hlavni landing page na desktopu i mobilu.
+2. Klikni hlavni CTA.
+3. Odesli formular s validnimi daty.
+4. Odesli formular s chybou a over srozumitelnou hlasku.
+5. Projdi registraci nebo demo request od zacatku do potvrzeni.
+6. Over transakcni email.
+7. Over pricing CTA nebo pilotni objednavkovy tok.
+8. Over, ze analytics meri jen planovane eventy.
+9. Over, ze bez souhlasu nebezi netechnicke skripty.
+10. Over 404, 500 chybovou stranku a zakladni monitoring.
+
+Bezpecnostni minimum pred launchem:
+
+- HTTPS funguje na vsech verejnych URL.
+- HSTS je zapnute az po overeni cele domeny.
+- Admin neni verejne dohledatelny bez autentizace.
+- Hesla, tokeny a API klice nejsou v repozitari.
+- Chybove hlasky neprozrazuji citlive detaily.
+- Uploady maji limity, pokud existuji.
+- Zakladni HTTP hlavicky jsou nastaveny podle rizika.
+
+OWASP HTTP Headers Cheat Sheet je prakticky zdroj pro hlavicky: https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Headers_Cheat_Sheet.html. U autentizace se drz overenych doporuceni z OWASP Authentication Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html.
+
+### 11.5 Provoz: monitoring, rollback a prvni den
+
+Launch day neni cas na objevovani, kde se cte log a kdo umi vratit deploy. Predem si priprav tri veci: monitoring, rollback a komunikacni pravidlo.
+
+Minimalni provozni priprava:
+
+- Uptime monitoring sleduje hlavni web, aplikaci a kriticky formular.
+- Error monitoring nebo logy ukazuji nove chyby po deployi.
+- Alerty chodi cloveku, ktery muze jednat.
+- Rollback postup je napsany a vyzkouseny.
+- Databazove migrace maji plan navratu nebo aspon bezpecny forward fix.
+- Zaloha pred vetsi zmenou existuje a je dohledatelna.
+- Status nebo zakaznicka komunikace ma pripravenou sablonu.
+- Prvni den ma jeden vlastnik launch provozu.
+
+Prvni den sleduj malo veci:
+
+| Signal | Proc |
+| --- | --- |
+| Dostupnost webu a aplikace | Zakladni duvera. |
+| Odeslani formulare nebo signup | Hlavni obchodni tok. |
+| Transakcni emaily | Bez nich casto vypada produkt rozbite. |
+| Chyby po deployi | Rychle zachyceni regresi. |
+| Kvalita prvnich leadu | Validace nabidky, ne jen navstevnosti. |
+| Dotazy na data, cenu a zruseni | Co neni dost jasne na webu. |
+
+Prvni den nemer padesat grafu. Dej si hodinu po spusteni, konec dne a dalsi rano. Zapis, co se stalo, co se opravilo a co se presune do dalsi iterace. Pokud nic nespadlo, gratuluju potichu a podivej se na kvalitu leadu. Ticho v monitoringu neni strategie, jen prijemna chvile.
+
+### 11.6 Launch postmortem bez dramatu
+
+I uspesny launch si zaslouzi postmortem. Ne proto, aby se nasly chyby za kazdou cenu, ale proto, aby se z reality stala dalsi verze systemu.
+
+Sablona po 24 az 72 hodinach:
+
+```text
+Co jsme spustili:
+
+Co fungovalo:
+
+Co nefungovalo:
+
+Co nas prekvapilo:
+
+Jake dotazy prisly od lidi:
+
+Jake privacy/provozni otazky se objevily:
+
+Co opravime hned:
+
+Co pridame do dalsi iterace:
+
+Co uz priste neudelame:
+```
+
+U privacy-first produktu sleduj hlavne dotazy na data. Pokud se vice lidi pta na hosting, DPA, export, mazani nebo analytiku, neni to otrava. Je to copywritingovy material a produktovy signal. Pridat jasnou trust sekci muze byt lepsi nez pridat dalsi funkci.
+
+### Checklist: verejne spusteni
+
+- [ ] Launch ma jasne napsany segment, problem, prvni hodnotu a stop pravidla.
+- [ ] Homepage nebo landing page vysvetli nabidku bez interniho zargonu.
+- [ ] Hlavni CTA vede k funkcni dalsi akci.
+- [ ] Pricing, pilot nebo demo proces jsou ferove popsane.
+- [ ] Privacy dokumenty, cookies a podminky jsou dostupne a odpovidaji realnemu provozu.
+- [ ] Vsechny formulare maji popsany ucel, cilovy system, retenci a potvrzeni.
+- [ ] Netechnicke cookies a marketingove skripty respektuji souhlas.
+- [ ] Web ma title, meta description, canonical, sitemap a robots kontrolu.
+- [ ] RSS nebo primarni odber existuje, pokud publikujes obsah.
+- [ ] Smoke test pro hlavni tok prosel na desktopu i mobilu.
+- [ ] Transakcni emaily dorazi a maji spravny obsah.
+- [ ] HTTPS, admin pristup, secret hodnoty a zakladni hlavicky jsou zkontrolovane.
+- [ ] Monitoring sleduje dostupnost, chyby a kriticke formulare.
+- [ ] Rollback postup je znamy a pred vetsim releasem existuje zaloha.
+- [ ] Prvni den ma vlastnika provozu a jasny rytmus kontroly.
+- [ ] Po launchi je naplanovane kratke postmortem.
+
+---
+
 ## Zdroje
 
 - GDPR, Regulation (EU) 2016/679, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
@@ -1922,3 +2121,4 @@ Kdyz tym nedokaze odpovedet behem deseti minut, neni to ostuda. Je to levny sign
 - 2026-07-30: Dopsana osma kapitola o cenotvorbe a baliccich vcetne hodnotove metriky, trialu/pilotu, slev, billing reality, privacy-first ceniku a checklistu.
 - 2026-07-31: Dopsana devata kapitola o produktivite zakladatele vcetne jedne fronty prace, tydenniho rytmu, hluboke prace, inboxu, automatizaci, osobniho provozniho manualu a checklistu.
 - 2026-07-31: Dopsana desata kapitola o evropskem provozu vcetne hostingu, datove mapy, zaloh, incident runbooku, vendor review, provozniho rytmu a checklistu.
+- 2026-07-31: Dopsana jedenacta kapitola s checklistem pred verejnym spustenim vcetne launch gate, SEO a duvery, formularu, smoke testu, provozni pripravy a postmortem sablony.
