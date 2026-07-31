@@ -2718,6 +2718,128 @@ Po sedmi dnech se neptej, jestli "jsme se posunuli". Zkontroluj vystupy. Je text
 
 ---
 
+## Trust page za 60 minut
+
+Trust page je stranka, ktera odpovida na otazku: "Muzu vam sverit svuj cas, penize a data?" U maleho evropskeho SaaS nemusi byt dlouha, ale musi byt konkretni. Neni to pravni dokument, neni to marketingovy ohnostroj a neni to misto pro mlhave vety typu "bezpecnost bereme vazne". Trust page ma snizit nejistotu pred callem, pilotem, registraci nebo nakupem.
+
+Dobry cas na prvni verzi:
+
+- pred placenym pilotem,
+- pred spustenim self-service registrace,
+- kdyz se leady opakovane ptaji na hosting, DPA, export nebo mazani,
+- kdyz produkt pracuje se zakaznickymi daty,
+- kdyz privacy-first provoz patri mezi hlavni prodejni argumenty.
+
+Trust page ma byt napsana tak, aby ji pochopil zakladatel, marketer, technicky buyer i pravnik pri prvnim cteni. Detailni smlouvy a interni politiky mohou byt navazane odkazy nebo dokumenty na vyzadani. Verejna stranka ma dat orientaci a pozvat k dalsimu kroku.
+
+### Co ma trust page obsahovat
+
+Zacni s temito bloky:
+
+| Blok | Co rict | Proc |
+| --- | --- | --- |
+| Provoz | kde bezi aplikace, databaze, soubory a zalohy | zakaznik rychle zjisti datovou jurisdikci |
+| Data | jaka data produkt typicky zpracovava a co zamerne nesbira | ukazuje minimalizaci dat |
+| Soukromi | cookies, analytika, trackery, marketingove skripty | odpovida na obavy jeste pred formulari |
+| Bezpecnost | HTTPS, pristupy, zalohy, monitoring, incident proces | dava zakladni provozni jistotu |
+| Kontrola | export, mazani, offboarding, retence | ukazuje, ze zakaznik neni zamceny |
+| Dodavatele | hlavni kategorie dodavatelu a regiony | pomaha pri vendor review na strane zakaznika |
+| Kontakt | kam poslat DPA, security nebo privacy dotaz | zkracuje obchodni kolecko |
+
+Nemusis odhalovat interni detaily, ktere by zhorsily bezpecnost. Nepis presne nazvy internich admin URL, strukturu infrastruktury, seznam vsech alertu ani citlive provozni postupy. Staci pravdive vysvetlit principy a hranice.
+
+**Priklad uvodniho textu:**
+
+```text
+Cody je navrzeny pro evropske tymy, ktere chteji mit zakaznicka data pod kontrolou.
+Produkt provozujeme v evropskem prostredi, verejne mereni delame bez reklamniho profilu a data sbirame jen pro jasne popsany ucel: dodani sluzby, bezpecnost, fakturaci a podporu.
+```
+
+Tohle je lepsi nez "state-of-the-art security", protoze to rika, co se realne deje. Kdyz nektery slib zatim neplati, napis presnejsi vetu. Trust page neni misto na aspiracni poezii.
+
+### Sablona trust page
+
+Pouzij tuto osnovu jako prvni verzi:
+
+```text
+H1:
+Duvera, data a provoz
+
+Uvod:
+[jedna kratka veta, pro koho je produkt a jaky privacy-first zavazek drzi]
+
+Kde produkt bezi:
+[aplikace / databaze / soubory / zalohy / hlavni regiony]
+
+Co zpracovavame:
+[ucty, obsah, fakturacni udaje, support, produktove eventy]
+
+Co zamerne nedelame:
+[reklamni profily, cross-site tracking, zbytecne formularove polozky, social share skripty]
+
+Analytika a cookies:
+[co meri web, zda pouziva cookies, kdy je potreba souhlas, jak lze odmitnout]
+
+Bezpecnostni zaklad:
+[HTTPS, pristupy podle role, zalohy, monitoring, aktualizace, incident proces]
+
+Export a mazani:
+[jak zakaznik ziska data, co se maze, co zustava kvuli ucetnictvi nebo smlouve]
+
+Dodavatele:
+[hlavni kategorie, preferovany EU provoz, DPA, subdodavatele na vyzadani]
+
+Kontakt:
+[email pro security/privacy/DPA dotazy]
+```
+
+Pokud produkt prodava enterprise nebo verejnemu sektoru, pridej cast "Dokumenty na vyzadani": DPA, popis technickych a organizacnich opatreni, seznam subdodavatelu, zakladni datovou mapu a pripadne odpoved na bezpecnostni dotaznik. Verejne staci napsat, ze jsou dostupne pro relevantni zakazniky. Neni potreba vyvesit vsechny interni detaily na internet.
+
+### Mikrocopy pro nejcastejsi obavy
+
+U trust page nepomaha pravnicky ton. Pomaha kratka veta u konkretni obavy.
+
+| Obava zakaznika | Lepsi odpoved |
+| --- | --- |
+| "Kde jsou data?" | "Aplikacni data a zalohy drzime v evropskem provozu. Pokud nektera integrace pouziva jiny region, uvadime ji v dodavatelskem prehledu." |
+| "Pouzivate reklamni pixely?" | "V zakladu nemerime navstevniky pres reklamni profil ani cross-site tracking. Marketingove skripty nepoustime bez odpovidajiciho souhlasu." |
+| "Co kdyz odejdeme?" | "Pred ukoncenim umozname export relevantnich dat. Po ukonceni mazeme nebo agregujeme data podle smlouvy, provoznich a ucetnich povinnosti." |
+| "Kdo ma pristup?" | "Pristupy omezujeme podle role a potreby. Produkcni pristupy pravidelne kontrolujeme." |
+| "Co se stane pri incidentu?" | "Incidenty tridime podle dopadu, nejdrive zastavujeme skodu a u osobnich udaju posuzujeme oznamovaci povinnosti podle GDPR." |
+
+U GDPR a transparentnosti se drz zdroju, ktere uz jsou v knize: GDPR clanky o principech, privacy by design a breach notification, EDPB pokyny k transparentnosti a souhlasu, pripadne ceske UOOU Q&A ke cookies. Trust page nemusi citovat kazdou vetu, ale tvrzeni musi odpovidat realnemu provozu a pravnimu zakladu.
+
+### 60min postup
+
+Rozdel hodinu takhle:
+
+| Cas | Ukol | Vystup |
+| --- | --- | --- |
+| 0-10 min | Sepsat tri nejcastejsi duverove otazky z prodeje nebo supportu | kratky seznam obav |
+| 10-25 min | Vyplnit datovou cast: co sbirame, kde to je, co nesbirame | hruba data mapa pro stranku |
+| 25-40 min | Napsat prvni verzi bloky provoz, analytika, bezpecnost, export | text stranky |
+| 40-50 min | Zkontrolovat, zda kazdy slib je pravdivy a overitelny | smazane nebo zpresnene vety |
+| 50-60 min | Pridat CTA pro DPA/security dotaz a odkaz z paticky nebo ceniku | publikovatelna verze |
+
+Nejdulezitejsi kontrola zni: "Kdyby se zakaznik zeptal na dukaz, dokazeme ho dodat?" Pokud ne, veta se prepisuje. Napriklad "data nikdy neopousti EU" je silny slib. Pokud pouzivas dodavatele mimo EU pro supportni telemetry, billing metadata nebo emaily, veta je nejspis nepravdiva. Lepsi je napsat presne, ktere datove vrstvy jsou v EU a ktere dodavatele maji zvlastni podminky.
+
+### Checklist: trust page
+
+- [ ] Stranka jasne rika, pro koho je produkt a proc je privacy-first relevantni.
+- [ ] Je popsane, kde bezi aplikace, databaze, soubory, logy a zalohy.
+- [ ] Je vysvetlene, jaka data se sbiraji a co se zamerne nesbira.
+- [ ] Analytika, cookies a marketingove skripty jsou popsane bez mlzeni.
+- [ ] Bezpecnostni cast obsahuje konkretni opatreni, ne jen obecne sliby.
+- [ ] Export, mazani, ukonceni uctu a retence maji lidske vysvetleni.
+- [ ] Dodavatele jsou popsani aspon podle kategorii a regionu.
+- [ ] Existuje kontakt pro privacy, DPA nebo security dotazy.
+- [ ] Zadny verejny detail zbytecne nezvysuje bezpecnostni riziko.
+- [ ] Kazdy slib na strance odpovida tomu, co produkt opravdu dela.
+
+**Codyho komentar:** Trust page neni stranka pro compliance vitrinu. Je to obchodni zkratka k duvere. Kdyz ji napises dobre, setri call, snizuje nejistotu a nuti tym uklidit vlastni datove sliby. Coz je zdrave, i kdyz to obcas pichne do ega.
+
+---
+
 ## Zdroje
 
 - GDPR, Regulation (EU) 2016/679, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
@@ -2781,3 +2903,4 @@ Po sedmi dnech se neptej, jestli "jsme se posunuli". Zkontroluj vystupy. Je text
 - 2026-07-31: Pridan 30denni akcni plan po docteni, ktery prevadi e-book do tydnovych vystupu pro nabidku, hlavni cestu, mereni a provoz.
 - 2026-07-31: Pridan 90min audit existujiciho SaaS vcetne casoveho planu, auditu hlavniho toku, datove stopy a sablony vystupu.
 - 2026-07-31: Doplnena sedmidenni navazujici iterace po 90min auditu, ktera prevadi nalezy do tri konkretnich oprav s vlastnikem, vystupem a overenim.
+- 2026-07-31: Pridana prakticka priloha Trust page za 60 minut vcetne osnovy, mikrocopy pro duverove obavy, hodinoveho postupu a checklistu.
