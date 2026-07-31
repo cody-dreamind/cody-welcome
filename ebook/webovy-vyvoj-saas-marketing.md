@@ -3860,6 +3860,172 @@ To jsou male zmeny, ktere zrychli dalsi prodej a snizi riziko, ze se security od
 
 ---
 
+## Zakaznicka podpora bez datove pasti za 60 minut
+
+Support je u maleho SaaS casto prvni skutecny datovy sklad. Zakaznici do nej posilaji screenshoty, exporty, fakturacni udaje, interni kontext, chybove hlasky, nahravky obrazovky a nekdy i tajemstvi, ktera tam nikdy nemela byt. Pokud podpora zacina jako jeden sdileny inbox, neni to problem. Problem je, kdyz nikdo nerekne, co do nej patri, kdo to vidi, jak dlouho se to drzi a jak se z toho dela produktove uceni bez kopirovani osobnich dat do dalsich nastroju.
+
+Privacy-first support neni o tom, ze odpovedi budou pomale a sterilni. Je o tom, ze zakaznik dostane pomoc bez zbytecne datove sklizne a tym se z kazdeho ticketu uci bez toho, aby si rozsiril stopu dat do peti mist.
+
+### 1. Support neni jen inbox
+
+Rozdel podporu na ctyri vrstvy:
+
+| Vrstva | Co obsahuje | Typicke riziko |
+| --- | --- | --- |
+| Prijem | email, formular, chat, telefonicka poznamka | prilis mnoho povinnych poli |
+| Reseni | ticket, interni komentar, diagnostika, logy | kopirovani citlivych dat do komentaru |
+| Uceni | tagy, pryciny, castost, dopad | mereni lidi misto problemu |
+| Znalost | help clanky, sablony odpovedi, changelog | verejne prozrazeni interniho nebo zakaznickeho detailu |
+
+Kazda vrstva ma mit vlastni pravidlo. Do prijmu patri jen to, co je potreba pro odpoved. Do reseni patri technicky kontext, ale ne cele exporty "pro jistotu". Do uceni patri agregovane poznatky. Do znalostni baze patri zobecnene reseni bez identifikace zakaznika.
+
+**Codyho komentar:** Nejrychlejsi support neni ten, ktery vidi vsechno. Nejrychlejsi support je ten, ktery vidi spravne minimum a umi se zeptat na chybejici kontext az ve chvili, kdy je opravdu potreba.
+
+### 2. Navrhni prijem jako datovy kontrakt
+
+Support formular nebo emailova sablona ma rict zakaznikovi, co poslat a co neposilat. Tim snizis riziko i cas reseni.
+
+Minimalni pole pro prvni B2B SaaS:
+
+- pracovni email,
+- organizace nebo workspace ID, pokud existuje,
+- typ problemu,
+- kratky popis,
+- dopad na praci,
+- volitelny screenshot bez citlivych udaju,
+- souhlas s tim, ze support muze pro reseni nahlednout na zakladni technicky kontext uctu, pokud je to soucast podminek produktu.
+
+Co do prvniho formulare typicky nepatri:
+
+- rodne cislo, cislo dokladu nebo jine statni identifikatory,
+- heslo nebo API klice,
+- platebni karta,
+- cele databazove exporty,
+- screenshoty s osobnimi udaji tretich osob,
+- "prihlasovaci udaje pro test" poslane volnym textem.
+
+Kratka veta nad formularem:
+
+```text
+Neposilejte nam hesla, API klice, platebni karty ani exporty s osobnimi udaji. Pokud budeme potrebovat citlivejsi podklady, domluvime bezpecnejsi zpusob predani.
+```
+
+Tohle neni pravnicka poezie. Je to provozni brzda proti spatnym datovym tokum.
+
+### 3. Triage podle dopadu, ne podle hluku
+
+Bez triage se z podpory stane fronta podle toho, kdo pise nejhlasiteji. Maly tym potrebuje jednoduchou klasifikaci:
+
+| Priorita | Definice | Prvni reakce |
+| --- | --- | --- |
+| P1 | produkt je nedostupny nebo zakaznik nemuze delat kritickou praci | potvrdit prijem, otevrit incident, priradit ownera |
+| P2 | dulezita funkce selhava, existuje workaround | potvrdit dopad, dat orientacni dalsi krok |
+| P3 | chyba nebo nejasnost s omezenym dopadem | vyresit ve standardni fronte |
+| P4 | napad, dotaz, kosmetika | zaznamenat, propojit s roadmap nebo knowledge base |
+
+Ke kazdemu ticketu staci pet internich poli:
+
+- `impact`: co zakaznik nemuze udelat,
+- `scope`: jeden uzivatel, tym, vice zakazniku,
+- `data_sensitivity`: bez osobnich dat / osobni data / citlive nebo zakaznicke dokumenty,
+- `owner`: kdo resi dalsi krok,
+- `next_update_at`: kdy se zakaznik dozvi dalsi stav.
+
+Pole `data_sensitivity` je dulezite. Kdyz ticket obsahuje screenshot s osobnimi udaji, nechovej se k nemu jako k beznemu bug reportu. Omez kopirovani, neposilej ho do verejnych kanalu, neukladej ho do nahodneho projektoveho boardu a po vyreseni zkontroluj retenci.
+
+### 4. Z odpovedi delej znalost bez kopirovani dat
+
+Kazdy opakovany dotaz by mel zanechat neco lepsiho nez dalsi dlouhy email. Vyber jednu z techto stop:
+
+- uprav help clanek,
+- pridej odpoved do interni knihovny sablon,
+- zaloz produktovy nalez s agregovanou pricinou,
+- zlepsi text v UI,
+- pridej validaci nebo prazdny stav,
+- dopln monitoring pro chybu, kterou support odhalil rucne.
+
+Zakaznicka zprava:
+
+```text
+Nemuzu pozvat kolegu, tlacitko je sede a nevim proc.
+```
+
+Spatny interni prepis:
+
+```text
+Klient Novakovi s.r.o. ma admina jana@... a nejde mu pozvat petra@...
+```
+
+Lepsi produktovy nalez:
+
+```text
+Invite flow: uzivatel s roli Editor vidi disabled tlacitko Pozvat clena bez vysvetleni. Dopad: nejmene 3 support dotazy za 14 dni. Navrh: zobrazit tooltip "Pozvat cleny muze jen Admin" a odkaz na zadost adminovi.
+```
+
+Ucis se z problemu, ne z identity cloveka. To je rozdil mezi produktovym rizenim a support archeologii.
+
+### 5. 60min postup
+
+```text
+00-10 min: Vypis vsechny kanaly, kudy dnes prichazi support: email, formular, chat, socialni site, osobni zpravy.
+
+10-20 min: U kazdeho kanalu zapis, jaka data prijima, kdo k nim ma pristup a kde se ukladaji.
+
+20-30 min: Napis datovy kontrakt pro zakaznika: co posilat, co neposilat, kdy si vyzadate citlivejsi podklady.
+
+30-40 min: Nastav ctyri priority P1-P4 a pet internich poli: impact, scope, data_sensitivity, owner, next_update_at.
+
+40-50 min: Vyber deset poslednich dotazu a oznac, ktere patri do help clanku, UI textu, monitoringu nebo roadmapy.
+
+50-60 min: Smaz nebo omez jedno zbytecne misto, kam se support data kopiruji, a pridej pravidlo do interniho manualu.
+```
+
+Vystup po hodine nema byt novy helpdesk system. Ma to byt jasny support provozni list:
+
+- kanaly,
+- prijimana data,
+- pristupy,
+- priority,
+- citlivost dat,
+- pravidla pro screenshoty a exporty,
+- tri opakovatelne sablony odpovedi,
+- jedna zmena, ktera snizi pocet budoucich ticketu.
+
+### Sablony odpovedi
+
+Kdyz zakaznik posle citlive udaje:
+
+```text
+Diky, vidim, ze zprava obsahuje citlive udaje. Kvuli bezpecnosti je nebudeme dal kopirovat do internich poznamek. Pro dalsi diagnostiku prosim neposilejte hesla, API klice ani cele exporty. Pokud budeme potrebovat dalsi podklady, navrhneme bezpecnejsi zpusob predani.
+```
+
+Kdyz problem patri do incidentu:
+
+```text
+Diky za nahlaseni. Dopad bereme jako kriticky a predavam ho do incident procesu. Dalsi stav poslu nejpozdeji v [cas]. Pokud se mezitim zmeni rozsah dopadu, odpovezte prosim do tohoto vlakna.
+```
+
+Kdyz jde o produktovy navrh:
+
+```text
+Diky, tohle eviduji jako produktovy navrh. Nechci slibovat termin bez overeni dopadu, ale pridavam ho k souvisejicim pozadavkum a pokud se dostane do planu, dame vedet v changelogu nebo primo ve vlakne.
+```
+
+### Checklist: privacy-first support
+
+- [ ] Vime, kudy vsemi kanaly prichazi support.
+- [ ] Formular a sablony rikaji, co zakaznik nema posilat.
+- [ ] Povinna pole odpovidaji realne potrebe pro prvni odpoved.
+- [ ] Tickety maji prioritu podle dopadu, ne podle nalady pisatele.
+- [ ] U ticketu se oznacuje citlivost dat.
+- [ ] Screenshoty, exporty a logy se nekopiruji do zbytecnych nastroju.
+- [ ] Help clanky a produktove nalezy neobsahuji identifikaci zakaznika bez duvodu.
+- [ ] Existuje pravidlo retence pro uzavrene tickety a prilohy.
+- [ ] Support umi eskalovat incident bez improvizace.
+- [ ] Opakovane dotazy se prevadi na UI opravy, help clanky nebo monitoring.
+
+---
+
 ## Zdroje
 
 - GDPR, Regulation (EU) 2016/679, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
@@ -3930,3 +4096,4 @@ To jsou male zmeny, ktere zrychli dalsi prodej a snizi riziko, ze se security od
 - 2026-07-31: Pridana prakticka priloha Lead magnet bez datove pasti za 60 minut vcetne vyberu formatu, datoveho kontraktu, landing sablony, distribuce a checklistu.
 - 2026-07-31: Pridana prakticka priloha Incidentove cviceni za 45 minut vcetne scenaru, prvnich kroku, komunikace, vystupu oprav a checklistu.
 - 2026-07-31: Pridana prakticka priloha Security a DPA dotaznik bez paniky za 60 minut vcetne odpovedniho balicku, presnych formulaci, hranic slibu a checklistu pripravenosti.
+- 2026-07-31: Pridana prakticka priloha Zakaznicka podpora bez datove pasti za 60 minut vcetne support datoveho kontraktu, triage, sablon odpovedi a checklistu.
