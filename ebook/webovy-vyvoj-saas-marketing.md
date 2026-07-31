@@ -4163,6 +4163,162 @@ Takhle vypada dospela prace s nejistotou. Ne predstirani jistoty.
 
 ---
 
+## Exit plan dodavatele za 45 minut
+
+Dodavatele se casto vybiraji podle toho, jak rychle pomohou dnes. To je pochopitelne. Problem je, kdyz se nikdo nezepta, jak se od nich odejde zitra. Exit plan neni pesimisticka fantazie. Je to kratka odpoved na otazku: "Co udelame, kdyz dodavatel zdrazi, prestane vyhovovat privacy-first hodnotam, zmeni region zpracovani, ma vypadek, nebo ho musime vypnout kvuli incidentu?"
+
+U maleho SaaS nemusi mit kazdy nastroj dvacetistrankovy kontinuitni plan. Ale kazdy nastroj, ktery drzi zakaznicka data, prihlaseni, platby, emaily, logy nebo hlavni provozni tok, ma mit aspon minimalni vystupni dvere. Bez nich se z integrace stava klec s peknym onboardingem.
+
+**Codyho komentar:** Vendor lock-in nevznikne ve chvili, kdy podepises smlouvu. Vznikne ve chvili, kdy prestanes vedet, kde je export, co by se rozbilo po vypnuti a kdo by to vubec resil. To neni strategie. To je Stockholm syndrom s API klicem.
+
+### 1. Rozdel dodavatele podle bolesti pri odchodu
+
+Nejdrive si nepis dlouhy plan pro vsechny nastroje. Vyber ty, jejichz vypnuti by bolelo produkt, zakazniky nebo data.
+
+| Typ dodavatele | Co se stane pri problemu | Minimalni exit myslenka |
+| --- | --- | --- |
+| Hosting a databaze | produkt muze byt nedostupny, obnova muze byt slozita | export dat, infrastruktura jako kod, restore postup |
+| Transakcni email | neodchazi registrace, faktury, alerty nebo reset hesla | zalozni poskytovatel nebo rucni nouzovy proces |
+| Platby a billing | nejde zaplatit, fakturovat nebo zmenit plan | export faktur, seznam aktivnich predplatnych, manualni fallback |
+| Support desk | ztrati se komunikace se zakazniky | export ticketu, mailbox fallback, pravidla pro prilohy |
+| Analytika | tym ztrati historicke signaly | agregovane reporty, katalog eventu mimo nastroj |
+| Monitoring | tym nevidi vypadky nebo chyby | druhy jednoduchy uptime check, manualni kontrola kritickych toku |
+
+Prakticke pravidlo: cim vic dodavatel drzi produkcni data nebo kriticky tok, tim konkretnejsi exit plan potrebuje. Nastroj na kresleni verejnych diagramu muze pockat. Databaze, emaily a billing ne.
+
+### 2. Vypln jednu kartu pro kritickeho dodavatele
+
+Pro kazdeho kritickeho dodavatele staci prvni verze na jednu obrazovku:
+
+```text
+Dodavatel:
+
+Kriticky ucel:
+[proc bez nej produkt nefunguje nebo ztraci duveru]
+
+Data v dodavateli:
+[kategorie dat, ne vsechny sloupce]
+
+Co by se rozbilo pri vypnuti:
+[uzivatelsky tok, interni proces, reporting, billing]
+
+Jak exportujeme data:
+[format, postup, kdo ma pristup, jak casto testujeme]
+
+Jak dlouho by trval prechod:
+[hodiny / dny / tydny + hlavni omezeni]
+
+Nouzovy fallback:
+[manualni proces nebo jednodussi nahrada]
+
+Co musime smazat po odchodu:
+[data, exporty, tokeny, webhooky, pristupy]
+
+Vlastnik:
+[role]
+
+Posledni kontrola:
+[datum]
+```
+
+Kdyz u polozky "Jak exportujeme data" napises "nevim", neni to selhani. Je to nalez. Selhani by bylo nechat to tak a doufat, ze exportni tlacitko existuje presne ve chvili, kdy ho budes potrebovat.
+
+### 3. Otestuj export pred krizi
+
+Export, ktery nikdo nikdy nezkusil, je podobny zaloze bez restore testu. Na papire uklidnuje, v realite muze zklamat.
+
+U kritickych dodavatelu si aspon jednou vyzkousej:
+
+- vytvorit export,
+- otevrit ho bez specialniho nastroje, pokud to jde,
+- zkontrolovat, zda obsahuje data, ktera bys potreboval pri migraci,
+- zkontrolovat, zda neobsahuje zbytecne osobni nebo citlive informace,
+- ulozit ho jen do kontrolovaneho mista,
+- smazat testovaci export podle pravidla retence.
+
+**Priklad:**
+
+Support desk umi exportovat tickety jako CSV. Test ukaze, ze prilohy se exportuji zvlast a odkazy expiruji po par dnech. To je dulezite vedet pred odchodem. Exit plan se upravi: pred migraci se exportuji tickety i prilohy, citlive prilohy se prenesou jen tam, kde maji pokracujici ucel, a zbytek se smaze po potvrzeni migrace.
+
+### 4. Navrhni nouzovy fallback
+
+Fallback nemusi byt elegantni. Ma drzet nejdulezitejsi slib po omezenou dobu.
+
+| Tok | Nouzovy fallback |
+| --- | --- |
+| Demo request | formular docasne posila email primo do kontrolovane schranky |
+| Registrace pres magic link | docasne vypnout self-service a prijimat manualni pozvanky |
+| Transakcni emaily | druhy poskytovatel pro kriticke sablony nebo rucni odeslani pres mailbox |
+| Billing | export aktivnich zakazniku a manualni fakturacni proces |
+| Monitoring | externi uptime check plus rucni smoke test hlavniho toku |
+| Analytika | agregovany server-side log hlavni konverze bez osobnich detailu |
+
+Nouzovy fallback ma mit jasne omezeni:
+
+```text
+Fallback pouzijeme maximalne [doba], jen pro [kriticky tok].
+Po dobu fallbacku nesbirame [data navic].
+Zakaznikum komunikujeme [dopad a dalsi update].
+Po obnoveni zkontrolujeme [data, emaily, faktury, logy].
+```
+
+Tahle veta zabrani tomu, aby se "docasne" reseni stalo trvalym provozem, ktery nikdo nikdy nenavrhl.
+
+### 5. Ukonceni dodavatele jako checklist
+
+Kdyz dodavatele vypinas, nejde jen prestat platit fakturu. Musis uklidit data, pristupy a integrace.
+
+Checklist ukonceni:
+
+- [ ] Exportovana data jsou ulozena jen tam, kde maji pokracujici ucel.
+- [ ] Testovaci exporty a docasne soubory jsou smazane.
+- [ ] Produkcni webhooky, API klice a tokeny jsou zrusene.
+- [ ] Uzivatelske ucty v dodavatelskem nastroji jsou odebrane.
+- [ ] SSO nebo OAuth aplikace je vypnuta, pokud existovala.
+- [ ] DNS, emailove zaznamy nebo tracking skripty uz na dodavatele neukazuji.
+- [ ] Privacy dokument, trust page a subprocesor seznam jsou aktualizovane.
+- [ ] Zakaznici jsou informovani, pokud to vyzaduje smlouva, DPA nebo dopad na sluzbu.
+- [ ] Retence u dodavatele je potvrzena nebo je podana zadost o smazani.
+- [ ] Interni runbook rika, co nahradilo puvodni nastroj.
+
+Nejdulezitejsi cast je kontrola po vypnuti. Otevri produkt, projdi hlavni tok a over, ze nikde nezustal mrtvy skript, webhook nebo integrace, ktera potichu pada do logu. Stare integrace maji talent delat hluk presne ve chvili, kdy uz na ne nikdo nemysli.
+
+### 6. 45min postup
+
+```text
+00-05 min: Vyber jednoho kritickeho dodavatele.
+Napr. email, hosting, billing, support nebo analytiku.
+
+05-15 min: Vypln kartu dodavatele.
+Ucel, data, rozbite toky, vlastnik, posledni kontrola.
+
+15-25 min: Najdi export a zkus ho popsat.
+Format, rozsah, pristup, omezeni, misto ulozeni.
+
+25-35 min: Navrhni nouzovy fallback.
+Co bude fungovat, co nebude, jak dlouho a kdo rozhoduje.
+
+35-40 min: Zapis ukoncovaci checklist.
+Tokeny, webhooky, pristupy, data, dokumentace, komunikace.
+
+40-45 min: Vyber jednu opravu.
+Napr. doplnit exportni postup, otestovat export, odstranit stary API klic nebo aktualizovat datovou mapu.
+```
+
+### Checklist: exit plan dodavatele
+
+- [ ] Kriticti dodavatele jsou oznaceni podle dopadu na produkt, data a zakazniky.
+- [ ] Kazdy kriticky dodavatel ma vlastnika a kartu s daty, exportem, fallbackem a vypnutim.
+- [ ] Export byl aspon jednou vyzkouseny nebo je zapsane riziko s terminem testu.
+- [ ] Nouzovy fallback drzi hlavni slib produktu bez sbirani zbytecnych dat.
+- [ ] Ukonceni dodavatele zahrnuje data, tokeny, webhooky, pristupy, dokumentaci a komunikaci.
+- [ ] Trust page, privacy dokumenty a seznam subprocesoru se aktualizuji pri relevantni zmene.
+- [ ] Testovaci exporty a docasne migracni soubory maji pravidlo smazani.
+- [ ] Tym vi, co by se rozbilo prvni hodinu po vypnuti dodavatele.
+- [ ] Exit plan se kontroluje aspon u kritickych dodavatelu pri mesicnim nebo kvartalnim auditu.
+
+---
+
 ## Zdroje
 
 - GDPR, Regulation (EU) 2016/679, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
@@ -4236,3 +4392,4 @@ Takhle vypada dospela prace s nejistotou. Ne predstirani jistoty.
 - 2026-07-31: Pridana prakticka priloha Security a DPA dotaznik bez paniky za 60 minut vcetne odpovedniho balicku, presnych formulaci, hranic slibu a checklistu pripravenosti.
 - 2026-07-31: Pridana prakticka priloha Zakaznicka podpora bez datove pasti za 60 minut vcetne support datoveho kontraktu, triage, sablon odpovedi a checklistu.
 - 2026-07-31: Pridana prakticka priloha Subprocesori a zmeny dodavatelu za 60 minut vcetne verejneho seznamu, procesu zmeny, oznamovaci sablony a checklistu.
+- 2026-07-31: Pridana prakticka priloha Exit plan dodavatele za 45 minut vcetne karty kritickeho dodavatele, exportni kontroly, nouzoveho fallbacku a ukoncovaciho checklistu.
