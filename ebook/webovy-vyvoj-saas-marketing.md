@@ -4600,6 +4600,165 @@ Napr. redakce logu pred promptem, sablona support odpovedi, zakaz realnych expor
 
 ---
 
+## Changelog jako duvera, marketing a provoz za 45 minut
+
+Changelog je casto brany jako technicky odpad z releasu. Par odrazek, ktere nekdo rychle zkopiruje z issue trackeru, aby bylo splneno. Jenze u SaaS je dobre vedeny changelog maly duverovy dokument: zakaznik vidi, ze produkt zije, obchodnik ma co poslat po follow-upu, support ma kam odkazat a tym ma verejnou pamet rozhodnuti.
+
+Privacy-first changelog ma jeste jednu vyhodu. Nemusi byt zavisly na socialni siti, newsletterove platforme ani reklamnim pixelu. Staci stabilni URL, RSS/Atom odber, interni odkaz z aplikace a kratka disciplina pri psani. Zmeny produktu pak nejsou zamcene v cizim feedu, kde je zitra sezere algoritmus a pozitra tri reklamy na boty.
+
+Keep a Changelog popisuje changelog jako kuratovany, chronologicky serazeny seznam vyznamnych zmen pro kazdou verzi projektu a doporucuje psat ho pro lidi, ne pro stroje: https://keepachangelog.com/en/1.1.0/. Semantic Versioning zase dava verzim vyznam pres `MAJOR.MINOR.PATCH`, kde major signalizuje nekompatibilni API zmenu, minor zpetne kompatibilni funkcionalitu a patch opravu: https://semver.org/. Pro SaaS aplikaci nemusis slepe verit kazde open-source konvenci, ale princip je uzitecny: uzivatel ma rychle poznat, co se zmenilo a jestli ho to ovlivni.
+
+**Codyho komentar:** Changelog neni misto pro oslavne fanfary typu "vylepsili jsme uzivatelsky zazitek". To je veta, ktera umi nerict vubec nic s nebetycnou sebeduverou. Napis, co se realne zmenilo, koho se to tyka a co ma clovek udelat.
+
+### 1. Rozhodni, pro koho changelog pises
+
+Jeden produkt muze mit vic vrstev zmen:
+
+| Publikum | Co potrebuje vedet | Kde to patri |
+| --- | --- | --- |
+| Bezni uzivatele | Nova funkce, zmena chovani, oprava bolesti | Verejny changelog nebo novinky v aplikaci |
+| Admini zakaznika | Dopad na prava, data, billing, integrace | Release notes, email adminum, trust page |
+| Vyvojari | API zmeny, deprecations, breaking changes | Developer changelog, docs, API reference |
+| Interni tym | Proc zmena vznikla, rizika, rollback | Interni release karta |
+| Bezpecnost a compliance | Incident, oprava zranitelnosti, subprocesor | Trust page, security notes, cilena komunikace |
+
+Nemichej vse do jednoho hluku. Verejny changelog ma byt srozumitelny pro cloveka, ktery produkt pouziva. Developer notes mohou byt detailnejsi. Interni release karta muze obsahovat odkazy na issue, logy a provozni kontext, ale tyhle detaily nepatri automaticky ven.
+
+### 2. Kazda polozka musi odpovedet na tri otazky
+
+Dobry zaznam odpovi:
+
+- Co se zmenilo?
+- Koho se to tyka?
+- Co ma uzivatel udelat, pokud vubec neco?
+
+Slaby zaznam:
+
+> Vylepsena integrace fakturace.
+
+Lepsi zaznam:
+
+> Fakturacni export ted umi filtrovat doklady podle mesice a stavu zaplaceni. Tyka se adminu v tarifech Team a Business. Stare exporty zustavaji beze zmeny.
+
+U privacy-first produktu pridavej datovy dopad tam, kde je relevantni:
+
+> Nova integrace s helpdeskem posila jen email zakaznika, ID uctu a text ticketu. Neodesila produktove eventy ani interni poznamky. Integraci lze vypnout v nastaveni workspace.
+
+Tahle veta pomaha obchodne i provozne. Zakaznik nemusi hadat, co se deje s daty, a support ma presnou odpoved.
+
+### 3. Pouzij stale kategorie
+
+Drz malou sadu kategorii, aby se changelog dal rychle scanovat:
+
+| Kategorie | Kdy ji pouzit |
+| --- | --- |
+| `Added` | Nova funkce nebo nova moznost. |
+| `Changed` | Zmena existujiciho chovani. |
+| `Fixed` | Oprava chyby. |
+| `Deprecated` | Vec bude odstranena nebo nahrazena. |
+| `Removed` | Vec uz neni dostupna. |
+| `Security` | Bezpecnostni oprava nebo dulezite bezpecnostni upozorneni. |
+| `Privacy` | Zmena zpracovani dat, retence, exportu, integrace nebo souhlasu. |
+
+Kategorie `Privacy` neni v kazde konvenci, ale pro evropsky SaaS dava smysl. Zakaznik diky ni rychle najde zmeny, ktere ovlivnuji jeho vendor review, DPA dotazy nebo interni schvalovani.
+
+### 4. Sablona verejneho changelogu
+
+```markdown
+## 2026-07-31
+
+### Added
+
+- Pridali jsme export seznamu leadu do CSV pro adminy workspace.
+
+### Changed
+
+- Formular pro demo ted ukazuje presnejsi potvrzeni, co se stane po odeslani.
+
+### Fixed
+
+- Opravili jsme chybu, kvuli ktere se u nekterych leadu nezobrazil zdroj kampane.
+
+### Privacy
+
+- Zkratili jsme retenci technickych logu formularu z 30 na 14 dni. Obsah zpravy se do aplikacnich logu neuklada.
+
+### Action needed
+
+- Pokud pouzivate vlastni exportni skript, zkontrolujte novy sloupec `lead_source`.
+```
+
+Nemusis pouzit vsechny sekce v kazdem releasu. Prazdne nadpisy jsou jen ceremonialni sum. Dulezite je, aby se vyznamne zmeny neztratily.
+
+### 5. Co do changelogu nepatri
+
+Verejny changelog neni dump interniho vyvoje. Nepatri do nej:
+
+- cele commit messages,
+- interni nazvy zakazniku,
+- screenshoty s osobnimi daty,
+- presne detaily zranitelnosti pred opravou nebo pred informovanim dotcenych zakazniku,
+- roadmap sliby bez rozhodnuti,
+- "optimalizace" bez vysvetleni dopadu,
+- vtipy na ucet uzivatelu, kteri nahlasili chybu.
+
+U bezpecnostnich oprav pis tak, aby byl zakaznik informovany, ale aby text zbytecne nepomahal utocnikovi. Napriklad: "Opravili jsme chybu v kontrole prav u exportu; dotcene zakazniky jsme kontaktovali primo" je lepsi verejna veta nez technicky navod, kudy se do chyby trefit.
+
+### 6. Distribuce bez platformni pasti
+
+Po vydani releasu pouzij tri vrstvy:
+
+- Verejny changelog na vlastni domene.
+- RSS/Atom feed pro odber zmen.
+- Cilena zprava jen tem zakaznikum, kterych se zmena tyka.
+
+Neposilej vsechno vsem. Kdyz mala oprava copy v nastaveni prijde jako email cele databazi, ucis zakazniky ignorovat dulezite zpravy. Kdyz breaking change API schovas jen do blogu, ucis je neverit releasum. Distribuce je soucast produktu.
+
+Prakticka pravidla:
+
+- Bezny release patri do changelogu a feedu.
+- Zmena, ktera vyzaduje akci, patri i do aplikace nebo emailu pro dotcene role.
+- Zmena zpracovani dat patri do trust page, privacy dokumentu nebo cilene komunikace podle dopadu.
+- Incident nebo security problem ma vlastni postup, ne marketingovy odstavec.
+- Socialni site pouzij jen jako kratke oznameni s odkazem na primarni URL.
+
+### 7. 45min postup
+
+```text
+00-05 min: Vyber posledni release nebo poslednich 7 dni prace.
+Vezmi issue, PR, support tikety a vlastni poznamky.
+
+05-15 min: Odfiltruj sum.
+Vyhod interni refaktory bez dopadu, mechanicke zmeny a drobnosti, ktere uzivatele nemusi cist.
+
+15-25 min: Rozdel zmeny do kategorii.
+Added, Changed, Fixed, Security, Privacy, Action needed.
+
+25-35 min: Prepis polozky lidsky.
+Co se zmenilo, koho se to tyka, co ma clovek udelat.
+
+35-40 min: Zkontroluj datovy a bezpecnostni dopad.
+Zadne osobni udaje, zadne interni detaily, zadne maximalisticke sliby.
+
+40-45 min: Publikuj a rozdistribuuj.
+Vlastni URL, feed, cilena zprava dotcenym zakaznikum.
+```
+
+### Checklist: changelog, ktery neotravuje
+
+- [ ] Changelog je na vlastni domene nebo v dokumentaci, ne jen v socialnim prispevku.
+- [ ] Ma stabilni URL a jde odebiran pres RSS/Atom nebo podobny primarni kanal.
+- [ ] Kazda polozka rika, co se zmenilo a koho se to tyka.
+- [ ] Zmeny jsou rozdelene do stabilnich kategorii.
+- [ ] Breaking changes, deprecations a action needed jsou viditelne.
+- [ ] Privacy a security dopady nejsou schovane mezi drobnostmi.
+- [ ] Text neobsahuje osobni data, interni nazvy zakazniku ani zbytecne detaily zranitelnosti.
+- [ ] Zakaznici dotceni dulezitou zmenou dostanou cilene oznameni.
+- [ ] Release notes neobsahuji sliby, ktere produkt jeste nedela.
+- [ ] Interni tym vi, kdo changelog pise, kontroluje a publikuje.
+
+---
+
 ## Zdroje
 
 - GDPR, Regulation (EU) 2016/679, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
@@ -4645,6 +4804,8 @@ Napr. redakce logu pred promptem, sablona support odpovedi, zakaz realnych expor
 - Umami, FAQ: https://umami.is/docs/faq
 - Plausible Analytics, Data Policy: https://plausible.io/data-policy
 - Matomo, Use Matomo without consent or cookie banner: https://matomo.org/faq/new-to-piwik/how-do-i-use-matomo-analytics-without-consent-or-cookie-banner/
+- Keep a Changelog, Version 1.1.0: https://keepachangelog.com/en/1.1.0/
+- Semantic Versioning 2.0.0: https://semver.org/
 
 ---
 
@@ -4677,3 +4838,4 @@ Napr. redakce logu pred promptem, sablona support odpovedi, zakaz realnych expor
 - 2026-07-31: Pridana prakticka priloha Exit plan dodavatele za 45 minut vcetne karty kritickeho dodavatele, exportni kontroly, nouzoveho fallbacku a ukoncovaciho checklistu.
 - 2026-07-31: Pridana prakticka priloha Mini DPIA pred novou funkci za 60 minut vcetne rizikoveho filtru, sablony posouzeni, opatreni a checklistu.
 - 2026-07-31: Pridana prakticka priloha AI asistenti v SaaS tymu bez vynaseni dat za 60 minut vcetne rizikovych rezimu, minimalizace promptu, tymovych pravidel a checklistu.
+- 2026-07-31: Pridana prakticka priloha Changelog jako duvera, marketing a provoz za 45 minut vcetne kategorii, sablony, distribuce a privacy/security kontrol.
