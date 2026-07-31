@@ -1621,9 +1621,255 @@ Tahle sablona vypada obycejne, ale snizi pulku nedorozumeni. Hlavne u maleho tym
 
 ---
 
+## 10. Provoz v Evrope: hosting, zalohy, incidenty a dodavatele
+
+Provoz neni to, co zacne az po launchi. Provoz je vsechno, co rozhoduje, jestli produkt zustane dostupny, obnovitelny, vysvetlitelny a pravne obhajitelny, kdyz se veci pokazi. U maleho SaaS se casto resi hlavne rychlost vyvoje, ale zakaznik si nekupuje jen funkce. Kupuje i duveru, ze jeho data nezmizi, nebudou putovat po svete bez duvodu a ze v pripade problemu neuslysi jen "zkousime zjistit, co se stalo".
+
+Privacy-first evropsky provoz stoji na ctyrech rozhodnutich:
+
+- kde produkt bezi,
+- jak jsou data zalohovana a obnovovana,
+- jak se zachazi s incidenty,
+- kteri dodavatele se smi dotknout dat.
+
+GDPR u osobnich udaju vyzaduje mimo jine integritu, duvernost a schopnost spravce dolozit soulad. Pri poruseni zabezpeceni osobnich udaju muze vzniknout povinnost oznamit incident dozorovemu uradu bez zbytecneho odkladu a, pokud je to mozne, do 72 hodin podle clanku 33 GDPR: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng. EDPB k tomu vydal prakticke pokyny k oznamovani data breach: https://www.edpb.europa.eu/documents/guideline/guidelines-92022-on-personal-data-breach-notification-under-gdpr_en.
+
+NIS2 pridava evropsky ramec kyberbezpecnosti pro vybrane sektory a typy organizaci. Ne kazdy maly SaaS do nej spadne, ale jeho logika je uzitecna i pro firmy mimo primou pusobnost: rizikove rizeni, incident reporting, odpovednost vedeni, bezpecnost dodavatelskeho retezce a kontinuita provozu. Oficialni text smernice je zde: https://eur-lex.europa.eu/eli/dir/2022/2555/oj/eng.
+
+**Codyho komentar:** Nejlepsi provozni dokumentace neni slozka s nazvem "compliance". Je to par kratkych souboru, podle kterych dokazes ve tri rano obnovit sluzbu, najit vlastnika systemu a rict zakaznikovi pravdu bez improvizovane poezie.
+
+### 10.1 Hosting: EU region neni detail v objednavce
+
+Hosting je prvni velke privacy-first rozhodnuti. Vyber poskytovatele neurcuje jen cenu serveru, ale i jurisdikci, logovani, supportni pristupy, zalohy, dostupnost regionu a to, jak slozite bude pozdeji vysvetlit datove toky zakaznikum.
+
+Minimalni otazky pred vyberem hostingu:
+
+- Nabizi poskytovatel EU datove centrum a lze ho vynutit pro vsechny relevantni sluzby?
+- Kde konci zalohy, snapshoty, logy a supportni dumpy?
+- Kdo ma pristup k produkcnim datum a jak se pristupy audituji?
+- Existuje DPA nebo podobna smlouva pro zpracovani osobnich udaju?
+- Lze data rozumne exportovat pri odchodu?
+- Ma poskytovatel status page, incident history a jasne SLA?
+- Jak se resi smazani dat po ukonceni sluzby?
+
+Pro maly SaaS obvykle dava smysl zacit jednoduse:
+
+| Vrstva | Konzervativni volba | Proc |
+| --- | --- | --- |
+| Marketingovy web | staticky build nebo server-renderovana aplikace v EU | malo pohyblivych casti, snazsi cache, mensi riziko vypadku |
+| Aplikace | jeden primarni EU region | mensi latence pro evropske zakazniky, jednodussi compliance |
+| Databaze | spravovana databaze s EU regionem a sifrovanymi zalohami | mene provozniho rizika nez vlastni ruce na kazdem detailu |
+| Soubory | objektove uloziste v EU s lifecycle pravidly | oddeleni uploadu od aplikace, snazsi retence |
+| Monitoring | uptime a chybove logy s minimalnimi osobnimi daty | rychla detekce bez zbytecneho sledovani uzivatelu |
+
+Pozor na "EU region" jako marketingovy slib. U nekterych nastroju bezi hlavni data v EU, ale telemetry, billing metadata, supportni logy nebo AI funkce mohou odchazet jinam. To nemusi byt automaticky zakazane, ale musi to byt vedome rozhodnuti, ne prekvapeni po prvnim enterprise dotazniku.
+
+Prakticke pravidlo: pokud nedokazes jednou vetou vysvetlit, kde jsou produkcni data a zalohy, hosting jeste neni pripraveny na vazne zakazniky.
+
+### 10.2 Datova mapa: mala tabulka, velka uspora nervu
+
+Datova mapa je provozni mapa toho, co v produktu existuje. Nemusi to byt obri diagram. Staci tabulka, ktera odpovi na zakladni otazky pri prodeji, incidentu, auditu i migraci.
+
+Minimalni sablona:
+
+| Data | Ucel | System | Region | Pristup | Retence | Mazani |
+| --- | --- | --- | --- | --- | --- | --- |
+| Ucet uzivatele | prihlaseni a sprava sluzby | aplikacni databaze | EU | backend + admin role | po dobu smlouvy | automaticky po offboardingu |
+| Fakturacni udaje | vystaveni dokladu | fakturace | EU / dle dodavatele | finance | dle ucetnich povinnosti | po uplynuti lhuty |
+| Produktove eventy | aktivace a retence | analytika | EU | produktovy tym | 6-12 mesicu | agregace nebo smazani |
+| Support zpravy | pomoc zakaznikovi | helpdesk / email | EU preferovane | support | dle SLA | na zadost nebo po uzavreni |
+| Logy | diagnostika chyb | logging | EU | vyvoj/provoz | kratka technicka retence | rotace |
+
+U kazdeho radku si poloz tri doplnujici otazky:
+
+- Je tam osobni udaj?
+- Je tam interni nebo obchodne citliva informace?
+- Lze ucel splnit s mensim detailem?
+
+**Priklad privacy-first zjednoduseni:**
+
+Misto ukladani cele IP adresy v produktove analytice pouzij agregaci, kratkou retenci nebo anonymizaci podle schopnosti zvoleneho nastroje. Misto logovani celeho request body loguj typ chyby, request ID a technicky kontext. Misto kopirovani zakaznickych dat do chatu s dodavatelem posli reprodukcni kroky na anonymnim prikladu.
+
+Datova mapa se hodi i obchodne. Kdyz se zakaznik zepta "kde jsou nase data?", neodpovidas dojmem. Otevres tabulku a reknes pravdu.
+
+### 10.3 Zalohy: zaloha, kterou nikdo netestoval, je prani
+
+Zalohy nejsou hotove ve chvili, kdy cloud ukazuje zelenou ikonku. Zaloha je hotova az tehdy, kdyz umis obnovit konkretni system v rozumnem case a vis, kolik dat muzes ztratit.
+
+Dve zakladni metriky:
+
+- RPO: kolik dat si muzes dovolit ztratit.
+- RTO: jak dlouho muze trvat obnova.
+
+Pro prvni SaaS si stanov jednoduchou tabulku:
+
+| System | RPO | RTO | Test obnovy |
+| --- | --- | --- | --- |
+| Produkcni databaze | 15 minut az 24 hodin podle typu produktu | 2-8 hodin | mesicne nebo pred vetsim releasem |
+| Uploady zakazniku | 24 hodin nebo lepe | 8-24 hodin | kvartalne |
+| Marketingovy web | git jako zdroj pravdy | 1 hodina | pri zmene deploy procesu |
+| Konfigurace a infrastruktura | po kazde zmene | 2-4 hodiny | po vetsim refaktoru infrastruktury |
+
+Prakticke minimum:
+
+- Automaticke databazove zalohy.
+- Oddelene ulozeni zaloh od primarniho systemu.
+- Sifrovani zaloh.
+- Pristup k obnoveni omezeny na male mnozstvi lidi.
+- Dokumentovany postup obnovy.
+- Pravidelny restore test do izolovaneho prostredi.
+- Evidence, co se testovalo a jak dlouho obnova trvala.
+
+ENISA v doporucenich pro male a stredni podniky zduraznuje pripravu na incidenty, zalohy, cloudova rizika a prakticke kroky kyberhygieny: https://www.enisa.europa.eu/publications/cybersecurity-guide-for-smes.
+
+**Priklad restore drillu:**
+
+Jednou mesicne vytvor izolovane testovaci prostredi, obnov posledni databazovou zalohu, spust zakladni smoke test a zapis vysledek:
+
+```text
+Datum:
+System:
+Zaloha z casu:
+Obnova trvala:
+Overeno:
+Problemy:
+Dalsi krok:
+```
+
+Pokud restore test nikdo nechce delat, zjednodus ho. Lepsi je pet minut realneho testu nez dvacetistrankovy plan, ktery nikdo nikdy nespustil.
+
+### 10.4 Incidenty: nejdrive zastavit skodu, potom psat roman
+
+Incident neni jen hacker v kapuci. Incident muze byt rozbity deploy, unik logu, spatne nastavene pristupy, smazana data, omylem odeslany export, vadna integrace nebo formular, ktery tyden neposila poptavky. Provoz potrebuje jednoduchou klasifikaci, aby tym nepanikaril ani nezaspal.
+
+Navrh tri urovni:
+
+| Uroven | Popis | Reakce |
+| --- | --- | --- |
+| P1 | vypadek produkce, ztrata dat, mozny unik osobnich udaju | okamzita reakce, incident lead, casova osa |
+| P2 | degradace hlavni funkce, problem s platbami, caste chyby | reakce v pracovnim rezimu nebo pohotovosti podle SLA |
+| P3 | mensi chyba bez dopadu na data a hlavni tok | bezny backlog s jasnym vlastnikem |
+
+Minimalni incident runbook:
+
+1. Potvrd dopad: co nefunguje, komu, od kdy.
+2. Zastav skodu: vypni integraci, vrat deploy, omez pristup, izoluj system.
+3. Zachovej dukazy: logy, casy, konfigurace, ale nekopiruj osobni data vic, nez je nutne.
+4. Urc vlastnika incidentu: jeden clovek ridi, ostatni resi.
+5. Rozhodni o komunikaci: interni, zakaznicka, pravni, regulatorni.
+6. Pokud jde o osobni udaje, posud GDPR breach povinnosti.
+7. Po obnoveni sepis kratky postmortem s opatrenimi.
+
+Sablona casove osy:
+
+```text
+Incident:
+Zacatek dopadu:
+Detekce:
+Prvni reakce:
+Mitigace:
+Obnoveno:
+Dopad na data:
+Dopad na zakazniky:
+Komunikace:
+Preventivni opatreni:
+```
+
+U GDPR incidentu neni nejdulezitejsi napsat krasny dokument. Nejdrive musis rychle zjistit, zda doslo k poruseni zabezpeceni osobnich udaju, jake typy dat jsou dotcene, kolika lidi se to tyka, jaka je pravdepodobnost rizika a zda je potreba oznameni uradu nebo dotcenym osobam. U slozitejsich pripadu patri do hry pravnik a poverena osoba, pokud ji organizace ma.
+
+**Codyho komentar:** Incident komunikace ma byt nudna, presna a pravdiva. Kdyz nevis, rekni co vis, co overujes a kdy prijde dalsi update. Marketingova mlha v incidentu nevypada profesionalne. Vypada jako kourovy alarm prelepeny samolepkou "brand voice".
+
+### 10.5 Dodavatele: integrace ma mit vystupni dvere
+
+Dodavatel neni jen firma v seznamu faktur. Je to soucast tveho bezpecnostniho a datoveho modelu. U maleho SaaS se nejcasteji podcenuji nastroje, ktere vypadaji "jen interni": chat, helpdesk, nahravani callu, AI asistenti, projektove rizeni, error tracking a sdilene dokumenty.
+
+Pred zavedenim dodavatele vypln kratke vendor review:
+
+```text
+Dodavatel:
+Ucel:
+Jake data tam posilame:
+Obsahuje osobni udaje:
+Obsahuje zakaznicka data:
+Region ulozeni:
+Subdodavatele:
+DPA / smluvni opora:
+Pristupy v tymu:
+Export:
+Mazani:
+Plan B pri vypadku nebo odchodu:
+Vlastnik:
+```
+
+Rozhodovaci pravidla:
+
+- Pokud nastroj nepotrebuje osobni data, neposilej je tam.
+- Pokud nastroj nema jasny export, nepouzivej ho jako primarni system pravdy.
+- Pokud nastroj nema rozumnou kontrolu pristupu, nedavej do nej citliva data.
+- Pokud nastroj bezi mimo EU nebo ma nejasne subdodavatele, vyzaduj silnejsi duvod.
+- Pokud se bez nastroje neda produkt provozovat, musi mit vlastnika, monitoring a plan nahrady.
+
+Vendor lock-in neni jen technicky problem. Je to i privacy problem. Kdyz nejde rozumne exportovat nebo smazat data, ztracis kontrolu prave ve chvili, kdy ji potrebujes nejvic.
+
+### 10.6 Provozni rytmus pro maly tym
+
+Provoz nemusi byt byrokraticky, kdyz ma rytmus. Staci par opakovanych kontrol, ktere jsou kratke a maji vystup.
+
+Tydenne:
+
+- projit uptime a hlavni chyby,
+- zkontrolovat neuspesne joby a formulare,
+- projit otevrene bezpecnostni aktualizace,
+- overit, ze zalohy bezi,
+- zavrit nebo vlastnit otevrene provozni ukoly.
+
+Mesicne:
+
+- restore test vybrane zalohy,
+- revize pristupu v admin nastrojich,
+- kontrola dodavatelu s novymi datovymi toky,
+- kontrola retence logu a analytiky,
+- kratky review incidentu a near-miss udalosti.
+
+Kvartalne:
+
+- aktualizace datove mapy,
+- revize nejdulezitejsich DPA a subdodavatelu,
+- tabletop incident cviceni,
+- kontrola RPO/RTO proti realite produktu,
+- cisteni starych pristupu, tokenu a integraci.
+
+**Priklad jednoducheho tabletop cviceni:**
+
+"V patek v 16:30 zjistime, ze support omylem poslal export zakaznickych uzivatelu spatnemu prijemci. Co je prvnich 30 minut? Kdo rozhoduje? Kde najdeme seznam dotcenych dat? Kdo komunikuje? Jak poznames, zda jde o GDPR breach?"
+
+Kdyz tym nedokaze odpovedet behem deseti minut, neni to ostuda. Je to levny signal, ze runbook potrebuje doplnit drive, nez ho otestuje realita.
+
+### Checklist: evropsky privacy-first provoz
+
+- [ ] Vim, ve kterem regionu bezi aplikace, databaze, soubory, logy a zalohy.
+- [ ] U hostingu a hlavnich dodavatelu mam DPA nebo jinou smluvni oporu, pokud zpracovavaji osobni udaje.
+- [ ] Existuje aktualni datova mapa pro hlavni typy dat.
+- [ ] Logy neukladaji cele requesty, hesla, tokeny ani zbytecne osobni udaje.
+- [ ] Pro kazdy kriticky system mam stanovene RPO a RTO.
+- [ ] Zalohy jsou sifrovane a oddelene od primarniho systemu.
+- [ ] Restore test probehl a vysledek je zapsany.
+- [ ] Incidenty maji urovne P1/P2/P3 a jasny runbook.
+- [ ] U osobnich udaju existuje postup pro posouzeni GDPR breach a pripadne oznameni.
+- [ ] Dodavatele maji vyplneny vendor review vcetne regionu, pristupu, exportu a mazani.
+- [ ] Klicove nastroje maji vlastnika a plan B.
+- [ ] Pristupy, tokeny a admin role se pravidelne reviduji.
+- [ ] Provozni rytmus ma tydenni, mesicni a kvartalni kontroly.
+- [ ] Zakaznicka komunikace pri incidentu je pripravena jako sablona: vecna, presna, bez zbytecneho mlzeni.
+
+---
+
 ## Zdroje
 
 - GDPR, Regulation (EU) 2016/679, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
+- EDPB Guidelines 9/2022 on personal data breach notification under GDPR: https://www.edpb.europa.eu/documents/guideline/guidelines-92022-on-personal-data-breach-notification-under-gdpr_en
+- Directive (EU) 2022/2555, NIS2 Directive, EUR-Lex: https://eur-lex.europa.eu/eli/dir/2022/2555/oj/eng
+- ENISA, Cybersecurity guide for SMEs - 12 steps to securing your business: https://www.enisa.europa.eu/publications/cybersecurity-guide-for-smes
 - EDPB Guidelines 05/2020 on consent under Regulation 2016/679: https://www.edpb.europa.eu/documents/guideline/guidelines-052020-on-consent-under-regulation-2016679_en
 - EDPB Guidelines 03/2022 on deceptive design patterns in social media platform interfaces: https://www.edpb.europa.eu/documents/guideline/guidelines-032022-on-deceptive-design-patterns-in-social-media-platform_en
 - European Commission, Unfair commercial practices directive: https://commission.europa.eu/law/law-topic/consumer-protection-law/unfair-commercial-practices-and-price-indication/unfair-commercial-practices-directive_en
@@ -1675,3 +1921,4 @@ Tahle sablona vypada obycejne, ale snizi pulku nedorozumeni. Hlavne u maleho tym
 - 2026-07-30: Dopsana sedma kapitola o onboardingu, aktivaci a retenci v SaaS vcetne aktivacniho momentu, registrace, bezpecneho prihlaseni, emailu, offboardingu a checklistu.
 - 2026-07-30: Dopsana osma kapitola o cenotvorbe a baliccich vcetne hodnotove metriky, trialu/pilotu, slev, billing reality, privacy-first ceniku a checklistu.
 - 2026-07-31: Dopsana devata kapitola o produktivite zakladatele vcetne jedne fronty prace, tydenniho rytmu, hluboke prace, inboxu, automatizaci, osobniho provozniho manualu a checklistu.
+- 2026-07-31: Dopsana desata kapitola o evropskem provozu vcetne hostingu, datove mapy, zaloh, incident runbooku, vendor review, provozniho rytmu a checklistu.
