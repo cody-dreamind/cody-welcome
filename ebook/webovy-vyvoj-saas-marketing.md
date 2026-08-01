@@ -5998,6 +5998,251 @@ Smaz zbytecne detaily, zapis namitku tydne a jednu zmenu pro web nebo produkt.
 
 ---
 
+## Predavka z obchodu do onboardingu bez ztraty kontextu za 45 minut
+
+Kdyz lead projde kvalifikaci, demo dopadne dobre a zakaznik rekne ano, prichazi moment, kde male SaaS tymy casto ztraci duveru. Obchodnik slibil vysledek, zakladatel ma v hlave tri detaily z callu, vyvojar vidi jen obecny ukol "nastavit klienta" a zakaznik musi vsechno vysvetlovat znovu. To neni onboarding. To je reset konverzace s horsi naladou.
+
+Dobry handoff neni dlouhy dokument. Je to kratka predavka, ktera prevede obchodni slib do provozni reality: co ma zakaznik ziskat, co bylo opravdu dohodnuto, jaka data jsou potreba, kdo je vlastnik a kde jsou hranice. Privacy-first pristup tady pomaha, protoze nuti oddelit uzitecny kontext od datoveho smeti.
+
+**Codyho komentar:** Zakaznik nema poznat, kde u vas konci prodej a zacina implementace. Ma poznat jen to, ze tym vi, co dela. Interni chaos je funkcni detail, ne zakaznicka zkusenost.
+
+### 1. Handoff zacina poslednim obchodnim slibem
+
+Predavka se nema psat od nuly. Zacina u posledniho slibu, ktery zakaznik slysel nebo dostal emailem. Pokud se v nabidce pise "pilot overi follow-up neodpovezenych poptavek do 30 dnu", onboarding nesmi zacit obecnou vetou "nastavime CRM".
+
+Minimalni handoff karta:
+
+```text
+Zakaznik / segment:
+Kontaktni vlastnik:
+Interni vlastnik:
+Slibeny vysledek:
+Pilotni nebo prvni tok:
+Co je mimo rozsah:
+Data potrebna pro start:
+Data, ktera nechceme:
+Privacy/security otevrene body:
+Prvni zakaznicky milnik:
+Datum dalsiho rozhodnuti:
+```
+
+Tri pole jsou kriticka:
+
+| Pole | Proc je dulezite |
+| --- | --- |
+| Slibeny vysledek | Brani tomu, aby onboarding sklouzl do seznamu funkci. |
+| Co je mimo rozsah | Chrani tym pred tichym rozsirovanim pilotu. |
+| Data, ktera nechceme | Pripomina, ze minimalizace dat je aktivni rozhodnuti. |
+
+Slovo "slibeny" ber vazne. Pokud nevis, co bylo slibeno, nepokracuj v implementaci podle dojmu. Nejdriv srovnej realitu s obchodem a zakaznikem. Lepsi je jedna neprijemna upresnujici veta pred startem nez tri tydny dodavat neco, co nikdo nekoupil.
+
+### 2. Preved zajem na prvni milnik
+
+Onboarding neni "nastaveni vseho". Prvni faze ma mit jeden milnik, po kterem zakaznik citelne pozna hodnotu.
+
+Priklady:
+
+| Produkt | Spatny start | Lepsi prvni milnik |
+| --- | --- | --- |
+| CRM pro male studio | Importovat vsechny kontakty. | Prvni nova poptavka ma vlastnika a follow-up datum. |
+| Analytics | Zapnout vsechny eventy. | Vidime navstevu, CTA klik a odeslani formulare bez obsahu formulare. |
+| Knowledge base | Prevest cely archiv supportu. | Publikovat 10 odpovedi na nejcastejsi dotazy. |
+| Workflow tool | Zmapovat celou firmu. | Jeden schvalovaci tok projde od vstupu k vystupu. |
+| Monitoring | Sledovat vsechny systemy. | Jeden kriticky endpoint ma alert, vlastnika a runbook. |
+
+Sablona milniku:
+
+```text
+Prvni onboardingovy milnik je hotovy, kdyz [role] dokaze [akce]
+na [jednom toku / jednom datasetu / jednom procesu] bez [kompromis]
+a tym vi, jak se vysledek overi.
+```
+
+Priklad:
+
+```text
+Prvni milnik je hotovy, kdyz obchodni vlastnik dokaze u nove poptavky videt
+stav, vlastnika a dalsi krok bez toho, aby nam daval pristup do celeho mailboxu.
+```
+
+To je lepsi nez "nastaven onboarding", protoze se podle toho da pracovat, testovat i rozhodovat.
+
+### 3. Datovy start udelej jako kontrakt
+
+Nejnebezpecnejsi veta v onboardingu je: "Poslete nam, co mate, nejak se v tom zorientujeme." To je pozvanka k datovemu bahnu. Zakaznik posle exporty, screenshoty, historicke tabulky, pristupy a interni dokumenty. Tym je ulozi na pet mist, cast z toho nepotrebuje a za pul roku nikdo nevi, proc to existuje.
+
+Lepsi je datovy start:
+
+```text
+Pro prvni milnik potrebujeme:
+- [datova kategorie 1] v rozsahu [konkretni limit],
+- [datova kategorie 2] pouze anonymizovane nebo synteticky,
+- kontakt na vlastnika procesu,
+- potvrzeni, kde smime data drzet a do kdy je uklidime.
+
+Pro prvni milnik nepotrebujeme:
+- kompletni historii,
+- pristup do celeho systemu,
+- osobni data lidi mimo pilotni tok,
+- produkcni exporty bez predem schvaleneho ucelu,
+- data poslana pres nehlidany kanal.
+```
+
+Datovy kontrakt patri do onboardingove zpravy i interni karty. Kdyz zakaznik posle vic, nez bylo dohodnuto, neni to bonus. Je to uklidovy ukol.
+
+Prakticke pravidlo:
+
+- Co neni potreba pro prvni milnik, nevyzaduj.
+- Co prislo omylem, smaz nebo vrat do schvaleneho toku.
+- Co musi zustat, oznac ucelem, vlastnikem a retenci.
+- Co je citlive, neposilej dal pres pohodlne kanaly.
+
+Privacy-first onboarding neni pomalejsi. Jen nedela bordel, ktery se pozdeji tvari jako compliance projekt.
+
+### 4. Udelej internich 15 minut pred prvnim zakaznickym callem
+
+Pred prvnim onboardingovym callem si tym sedne na 15 minut. Ne kvuli ceremonii, ale kvuli tomu, aby nikdo neimprovizoval sliby.
+
+Agenda:
+
+```text
+00-03 min: Co zakaznik koupil nebo schvalil?
+03-06 min: Jaky je prvni milnik?
+06-09 min: Jaka data potrebujeme a jaka nechceme?
+09-12 min: Co je mimo rozsah a jak to rekneme?
+12-15 min: Kdo vede call, kdo zapisuje, kdo vlastni dalsi krok?
+```
+
+Vystup musi byt kratky:
+
+- jedna veta vysledku,
+- jeden prvni milnik,
+- seznam dat pro start,
+- seznam zakazanych slibu,
+- vlastnik dalsi akce.
+
+Zakazane sliby zapis nahlas. Napriklad:
+
+```text
+Neslibujeme automaticky import historie.
+Neslibujeme integraci se vsemi mailboxy.
+Neslibujeme, ze pilot vyresi reporting pro cele vedeni.
+Neslibujeme retenci dat delsi, nez je dohodnuta.
+```
+
+Tohle zni negativne jen na papire. V praxi je to hygienicka pomucka. Tym, ktery vi, co neslibuje, pusobi sebejisteji nez tym, ktery prikyvne vsemu a pak zmizi do "overime interni kapacity".
+
+### 5. Prvni onboardingovy email ma snizit nejistotu
+
+Zakaznik po podpisu nebo potvrzeni nesmi dostat jen kalendarovou pozvanku. Posli kratky email, ktery potvrdi rozsah, prvni milnik a datovy postup.
+
+Sablona:
+
+```text
+Predmet: Start onboardingu: [produkt / pilot / prvni milnik]
+
+Ahoj [jmeno],
+
+navazujeme na domluveny pilot pro [problem / vysledek].
+
+Prvni milnik:
+[jedna veta, kdy je prvni faze hotova]
+
+Na prvni call pripravime:
+- [co pripravime my],
+- [co overime],
+- [co bude vystupem callu].
+
+Od vas zatim potrebujeme jen:
+- [minimalni vstup],
+- [kontakt / rozhodnuti],
+- [pripadne anonymizovany priklad].
+
+Prosim neposilejte zatim produkcni exporty ani osobni data mimo tento rozsah.
+Pokud realna data budou potreba, domluvime predem ucel, kanal, pristupy a retenci.
+
+Dalsi krok:
+[call / ukol], vlastnik [jmeno], termin [datum].
+
+Cody
+```
+
+Tento email dela dve veci naraz: zakaznik vi, co se bude dit, a tym ma pisemne potvrzenou datovou brzdu. Krasne nudne. Presne tak to ma byt.
+
+### 6. Po prvnim milniku zavri smycku
+
+Jakmile je prvni milnik hotovy, neprechazej automaticky na dalsi prani. Nejdriv zavri smycku:
+
+- Co jsme dorucili?
+- Jak zakaznik pozna hodnotu?
+- Co zustava otevrene?
+- Jaka data jsme pouzili?
+- Co smazeme nebo ponechame a proc?
+- Co je dalsi placeny nebo schvaleny krok?
+
+Sablona kratkeho vyhodnoceni:
+
+```text
+Milnik:
+Stav: hotovo / castecne / blokovano
+Dukaz:
+Otevrene body:
+Data pouzita:
+Data k uklidu:
+Dalsi krok:
+Rozhodnuti zakaznika do:
+```
+
+Pokud se pri milniku objevily nove pozadavky, nerozpoustej je do onboardingu. Dej je do backlogu s jednim ze stavu:
+
+| Stav | Vyklad |
+| --- | --- |
+| `next_phase` | Ma hodnotu, ale patri az po vyhodnoceni milniku. |
+| `needs_discovery` | Neni jasny problem nebo vlastnik. |
+| `not_now` | Nesedi do aktualniho rozsahu. |
+| `privacy_review` | Vyvolava novy datovy, bezpecnostni nebo pravni dopad. |
+
+Tak se onboarding nezmeni v nekonecny proud "jeste jedne drobnosti".
+
+### 7. 45min postup
+
+```text
+00-07 min: Prepis posledni slib
+Co zakaznik opravdu schvalil, jaky vysledek ceka a co je mimo rozsah.
+
+07-15 min: Definuj prvni milnik
+Jedna role, jeden tok, jeden overitelny vysledek.
+
+15-23 min: Sepis datovy kontrakt
+Co potrebujeme, co nechceme, kanal, pristupy, retence, uklid.
+
+23-30 min: Udelej interni handoff
+Vlastnici, zakazane sliby, otevrene privacy/security body.
+
+30-38 min: Posli onboardingovy email
+Potvrdit milnik, vstupy, datovou hranici a dalsi krok.
+
+38-45 min: Priprav vyhodnoceni milniku
+Sablona pro stav, dukaz, data k uklidu a rozhodnuti dalsi faze.
+```
+
+### Checklist: predavka do onboardingu
+
+- [ ] Handoff vychazi z posledniho obchodniho slibu.
+- [ ] Je jasne, co zakaznik schvalil a co neschvalil.
+- [ ] Prvni milnik je jeden overitelny vysledek, ne seznam nastaveni.
+- [ ] Interni vlastnik a zakaznicky vlastnik jsou pojmenovani.
+- [ ] Je zapsane, co je mimo rozsah.
+- [ ] Existuje seznam dat potrebnych pro prvni milnik.
+- [ ] Existuje seznam dat, ktera nechceme.
+- [ ] Produkcni exporty a osobni data maji predem schvaleny ucel, kanal a retenci.
+- [ ] Tym si pred prvnim callem projde zakazane sliby.
+- [ ] Zakaznik dostal onboardingovy email s milnikem a datovou hranici.
+- [ ] Po prvnim milniku se vyhodnoti hodnota, otevrene body a datovy uklid.
+- [ ] Nove pozadavky jdou do dalsi faze, discovery, privacy review nebo mimo rozsah.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -6088,3 +6333,4 @@ Smaz zbytecne detaily, zapis namitku tydne a jednu zmenu pro web nebo produkt.
 - 2026-08-01: Pridana prakticka priloha Pilotni nabidka bez rozsahove exploze za 60 minut vcetne uspechu pilotu, rozsahu, datove hranice, ceny, vyhodnoceni a checklistu.
 - 2026-08-01: Pridana prakticka priloha Demo sandbox bez zakaznickych dat za 45 minut vcetne syntetickych dat, hranic sandboxu, mikrotextu, uklidu po demu a checklistu.
 - 2026-08-01: Pridana prakticka priloha Kvalifikace leadu bez CRM bordelu za 45 minut vcetne rozhodovacich poli, jednoducheho skore, sablon reakci, tydenniho uklidu pipeline a checklistu.
+- 2026-08-01: Pridana prakticka priloha Predavka z obchodu do onboardingu bez ztraty kontextu za 45 minut vcetne handoff karty, datoveho kontraktu, onboardingoveho emailu, vyhodnoceni milniku a checklistu.
