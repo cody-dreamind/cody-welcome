@@ -8969,6 +8969,163 @@ Minuty 40 az 45: zapis, kdy kampan vyhodnotis, kdo se podiva na leady a co bude 
 
 ---
 
+## Referral a partnerska doporuceni bez sledovaciho cirkusu za 45 minut
+
+Doporuceni od spokojeneho zakaznika, partnera nebo kamaradske firmy muze byt pro maly SaaS silnejsi nez kampan s dokonalym dashboardem. Jenze referral program se snadno zvrhne v dalsi vrstvu trackingu: unikatni odkazy pro kazdeho cloveka, cookie na pul roku, automaticke obohacovani kontaktu a reporty, ktere vypadaji chytre hlavne proto, ze sbiraji vsechno. Privacy-first varianta je nudnejsi, ale cistejsi: jasny partnersky slib, lidsky srozumitelny referral kod, minimalni evidence a rucni potvrzeni kvality leadu.
+
+Prakticky cil teto prilohy: za 45 minut pripravit referral proces, ktery jde spustit s par partnery bez reklamniho pixelu, bez profilovani a bez toho, aby se z doporuceni stala mala datova burza.
+
+### 1. Nejdriv rozhodni, co je ferove doporuceni
+
+Referral neni jen "nekdo privede lead". Potrebujes vedet, jaka situace je pro vsechny strany ferova.
+
+Tri typy doporuceni:
+
+| Typ | Kdy dava smysl | Co hlidat |
+| --- | --- | --- |
+| Zakaznicke doporuceni | Zakaznik zna firmu se stejnym problemem | Netlac na sdileni interniho kontextu ani dat jine firmy. |
+| Partnerske doporuceni | Partner prodava navazujici sluzbu | Oddel obchodni motivaci od produktoveho slibu. |
+| Obsahove doporuceni | Nekdo sdili clanek, sablonu nebo audit | Mer zdroj obsahu, ne identitu ctenare. |
+
+Spatny start:
+
+> Dej nam kontakty na firmy, ktere by to mohlo zajimat.
+
+Lepsi start:
+
+> Pokud znas nekoho, kdo resi privacy-first analytiku v SaaS, posli mu primy odkaz na audit. Kdyz se ozve, muze uvest tvuj partnersky kod.
+
+Rozdil je velky. V prvnim pripade tahas osobni data pres treti osobu. V druhem pripade nechavas cloveka, ktery ma zajem, aby sam udelal dalsi krok.
+
+**Codyho komentar:** Dobre doporuceni je predstaveni, ne predani pytle kontaktu. Kdyz partner musi posilat spreadsheet s cizimi emaily, proces uz smrdi i pres VPN.
+
+### 2. Pouzij kod, kteremu rozumi clovek
+
+Nemusis hned stavet affiliate system. Pro prvnich pet az deset partneru staci stabilni referral kod nebo kampanovy odkaz podle stejne logiky jako UTM parametry. Dokumentace ke kampanovym URL od Googlu popisuje zakladni principy zdroju a kampani tady: https://support.google.com/analytics/answer/10917952. Ty principy muzes pouzit i bez Google Analytics.
+
+Priklad odkazu:
+
+```text
+https://example.cz/privacy-audit?utm_source=partner-novak&utm_medium=referral&utm_campaign=privacy-audit-2026-08
+```
+
+Nebo jeste jednodussi varianta:
+
+```text
+https://example.cz/privacy-audit?ref=novak
+```
+
+Pravidla pro referral kod:
+
+- Kod oznacuje partnera nebo kanal, ne konkretniho navstevnika.
+- Do kodu nedavej email, telefon, ICO ani jmeno doporucene firmy.
+- Kod nemeni cenu ani obsah nabidky skrytym zpusobem.
+- Jeden partner ma jeden stabilni kod pro danou nabidku.
+- Kody eviduj v male tabulce s vlastnikem, ucelem a datem kontroly.
+
+Minimalni tabulka:
+
+| Kod | Partner | Nabidka | Odmena | Stav | Poznamka |
+| --- | --- | --- | --- | --- | --- |
+| `novak` | Novak Consulting | Privacy audit | 10 % z prvni platby | aktivni | Domluveno pro B2B SaaS leady |
+| `rss-hosting` | Hostingovy partner | EU provozni audit | bez odmeny | aktivni | Obsahove doporuceni z clanku |
+
+Pokud potrebujes presne priradit provizi, udelej to po odeslani formulare a rucnim potvrzeni. Nesnaz se identifikovat kazdeho anonymniho navstevnika jen proto, aby tabulka vypadala presneji.
+
+### 3. Formular ma chranit doporuceneho cloveka
+
+Referral formular nema byt past na leady. Clovek musi pochopit, proc se ptas na partnera, co s informaci udelas a co se nestane.
+
+Minimalni pole:
+
+- pracovni email,
+- firma nebo projekt,
+- jedna veta k problemu,
+- volitelne pole "kdo vas doporucil",
+- souhlas s kontaktovanim kvuli teto poptavce, pokud ho v danem toku potrebujes,
+- odkaz na privacy informace.
+
+Priklad mikrotextu:
+
+> Kod doporuceni pouzijeme jen pro vyhodnoceni partnerstvi a pripadnou provizi. Nepredavame partnerovi obsah poptavky bez vaseho souhlasu.
+
+Tohle je dulezite. Partner ma vedet, ze doporuceni prislo a zda splnilo domluvena pravidla. Nemusi ale automaticky videt problem, rozpocet, interni kontext ani zpravu z formulare. Pokud ma partner dal spolupracovat na obchodu, rekni to predem a nech zakaznika vedet, kdo bude v komunikaci.
+
+### 4. Odmenu navrhni tak, aby nekazila duveru
+
+Referral program se rozbije ve chvili, kdy odmena motivuje ke spatnym leadum. Male SaaS nepotrebuje nejvetsi mozny objem. Potrebuje doporuceni, ktere dava smysl pro produkt, segment a hodnoty.
+
+Jednoduche varianty:
+
+| Varianta | Kdy ji pouzit | Riziko |
+| --- | --- | --- |
+| Podekovani bez penez | Komunitni nebo obsahove doporuceni | Muze byt malo motivujici pro aktivni partnery. |
+| Fixni odmena za kvalifikovany call | Kdyz je call jasne definovany | Muze motivovat ke schuzkam bez realne potreby. |
+| Procento z prvni platby | Kdyz jde o obchodni partnerstvi | Musis presne rict, co je prvni platba a kdy vznikne narok. |
+| Reciprocal referral | Dve firmy si posilaji relevantni klienty | Snadno vznikne socialni tlak misto kvality. |
+
+Prakticka pravidla:
+
+- Odmenu vaz na kvalifikovany vysledek, ne na pouhy klik.
+- Nepis "dozivotni provize", pokud nemas proces na dlouhodobe vyuctovani.
+- Partnerovi nedavej pristup do CRM jen kvuli kontrole odmen.
+- V nabidce priznej, pokud je doporuceni motivovane provizi.
+- Jednou mesicne zkontroluj, zda partner neprinasi leady mimo segment.
+
+Ferovy referral nesmi menit produktove rozhodovani. Kdyz lead neni vhodny, odmitni ho normalne. Neprodavej spatnou implementaci jen proto, ze nekdo cekal provizi.
+
+### 5. Vyhodnocuj malo signalu, ale pravidelne
+
+Minimalni vyhodnoceni referral programu:
+
+| Signal | Proc ho sledovat |
+| --- | --- |
+| Pocet poptavek podle kodu | Vidis, zda partnerstvi vubec zije. |
+| Pocet kvalifikovanych leadu | Oddelis zajem od relevantniho byznysu. |
+| Pocet zakazek | Overis obchodni dopad. |
+| Prumerna doba do prvni odpovedi | Referral lead by nemel spadnout do inboxoveho bahna. |
+| Pocet nevhodnych leadu | Signal, ze partner spatne rozumi nabidce. |
+| Privacy incidenty nebo stiznosti | Okamzity duvod proces zastavit a opravit. |
+
+Jednou za mesic si projdi tri otazky:
+
+- Kteri partneri privedli relevantni poptavky?
+- Ktere poptavky byly mimo segment a proc?
+- Musime upravit text, kod, odmenu nebo pravidla sdileni dat?
+
+Kdyz program tri mesice neprinese nic relevantniho, nenech ho bezet jen proto, ze "uz je nastaveny". Vypni neaktivni kody, uklid landing page a rekni partnerum, co se meni.
+
+### 6. 45min postup
+
+Prvnich 5 minut: napis jednu vetu, pro koho referral program je a jaky problem ma doporuceni resit.
+
+Minuty 5 az 12: vyber prvni 3 partnery nebo zdroje. U kazdeho napis, proc dava smysl a jake leady nechces.
+
+Minuty 12 az 20: vytvor referral kody a tabulku evidence. Zkontroluj, ze kody neobsahuji osobni udaje ani interni informace.
+
+Minuty 20 az 28: uprav landing page nebo formular. Pridej volitelne pole "kdo vas doporucil" a mikrotext k pouziti referral kodu.
+
+Minuty 28 az 35: sepis kratkou partnerskou zpravu: co maji sdilet, komu to patri, co neslibovat a jak funguje odmena.
+
+Minuty 35 az 40: priprav rucni vyhodnoceni leadu s poli kod, relevance, dalsi krok a odmena.
+
+Minuty 40 az 45: nastav datum prvni kontroly. Referral program bez kontroly je jen dalsi zapomenuty formular s hezcim nazvem.
+
+### Checklist: referral bez sledovaciho cirkusu
+
+- [ ] Vim, jaky typ doporuceni chci: zakaznicke, partnerske nebo obsahove.
+- [ ] Referral kod oznacuje kanal nebo partnera, ne konkretniho navstevnika.
+- [ ] Odkazy neobsahuji emaily, jmena doporucenych firem ani interni poznamky.
+- [ ] Formular sbira jen data potrebna pro odpoved na poptavku.
+- [ ] Mikrotext vysvetluje, jak pouziju referral kod a co partner neuvidi.
+- [ ] Partner nema automaticky pristup do CRM ani k obsahu poptavky.
+- [ ] Odmena je navazana na kvalifikovany vysledek, ne na nahodne kliky.
+- [ ] Partner vi, co nesmi slibovat za produkt, support, compliance ani roadmapu.
+- [ ] Jednou mesicne kontroluji kvalitu leadu a nevhodne zdroje.
+- [ ] Neaktivni nebo nekvalitni kody vypinam misto toho, abych je nechal hnit.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -9088,3 +9245,4 @@ Minuty 40 az 45: zapis, kdy kampan vyhodnotis, kdo se podiva na leady a co bude 
 - 2026-08-01: Pridana prakticka priloha Platebni a fakturacni tok bez datove laviny za 60 minut vcetne ceniku, checkoutu, platebni brany, fakturacni retence, selhani plateb a checklistu.
 - 2026-08-01: Pridana prakticka priloha DPA zmena dodavatele bez rozbite duvery za 60 minut vcetne karty zmeny, DPA kontroly, subprocesorske komunikace a checklistu.
 - 2026-08-01: Pridana prakticka priloha Kampan bez reklamniho pixelu za 45 minut vcetne UTM konvence, minimalniho mereni, datoveho mikrotextu, vyhodnoceni leadu a checklistu.
+- 2026-08-01: Pridana prakticka priloha Referral a partnerska doporuceni bez sledovaciho cirkusu za 45 minut vcetne referral kodu, formularoveho mikrotextu, odmen, vyhodnoceni kvality leadu a checklistu.
