@@ -8009,6 +8009,171 @@ Kdo export udrzuje, jak casto se zkousi obnova/import a kde je dokumentace forma
 
 ---
 
+## Zadosti subjektu udaju bez supportoveho chaosu za 60 minut
+
+Zadost subjektu udaju neni jen pravni email, ktery se preposle "nekam do backofficu". Je to test toho, jestli produkt opravdu vi, jaka data drzi, proc je drzi a kdo je umi bezpecne najit. Kdyz proces nemas, kazda zadost vypada jako incident. Kdyz proces mas, je to normalni provozni ukon: prijmout, overit, vymezit, odpovedet, zapsat.
+
+GDPR v clanku 12 rika, ze odpoved na zadosti podle clanku 15 az 22 ma prijit bez zbytecneho odkladu a nejpozdeji do jednoho mesice od prijeti; u slozitych nebo pocetnych zadosti lze lhutu prodlouzit o dalsi dva mesice, ale subjekt musi byt informovan do jednoho mesice vcetne duvodu: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng. EDPB v pokynech k pravu na pristup zduraznuje, ze spravce ma byt pripraven zadosti prijimat, posuzovat a vyrizovat bezpecne, pritom nesmi zbytecne komplikovat vykon prav subjektu udaju: https://www.edpb.europa.eu/system/files/2023-04/edpb_guidelines_202201_data_subject_rights_access_v2_en.pdf.
+
+Prakticky cil pro maly SaaS: mit jeden viditelny vstup, jednu interni kartu zadosti, jasne overeni identity, mapu systemu, sablony odpovedi a auditni stopu. Nepotrebujes hned pravni workflow platformu. Potrebujes prestat lovit osobni udaje po Slacku, emailech, CRM, logach a zaloznich CSV souborech jako detektiv po pate kave.
+
+### 1. Rozpoznej typ zadosti driv, nez zacnes exportovat
+
+Lide casto nepouziji pravni termin. Napisi "poslete mi, co o mne mate", "smazte muj ucet", "opravte fakturacni email", "odhlaste me", nebo "nechci, abyste me kontaktovali". System ma umet tyhle formulace prevest na typ zadosti, ale ne prechytracene.
+
+| Formulace od cloveka | Pravdepodobny typ | Prvni krok |
+| --- | --- | --- |
+| "Chci vedet, co o mne mate." | pristup k osobnim udajum | overit identitu a najit relevantni data |
+| "Chci kopii svych dat." | pristup nebo portabilita | upresnit rozsah a format |
+| "Smazte muj ucet." | vymaz/offboarding | oddelit aktivni data, retenci, zalohy a ucetni povinnosti |
+| "Opravte muj email." | oprava | overit vlastnictvi a zmenit v primarnim systemu |
+| "Uz mi nepiste." | namitka/odhlaseni | zastavit prislusny kontaktni ucel |
+| "Kde jste vzali muj kontakt?" | informace o zdroji a ucelu | dohledat puvod kontaktu a pravni titul |
+
+U kazde zadosti vytvor kartu:
+
+```text
+request_id: DSAR-YYYY-###
+received_at: [ISO timestamp]
+channel: email / formular / support / postovni adresa
+requester: [kontakt]
+account_or_workspace: [pokud existuje]
+request_type: pristup / oprava / vymaz / omezeni / namitka / portabilita / nejasne
+deadline: [datum]
+owner: [jmeno nebo role]
+identity_check: pending / verified / not_needed / failed
+systems_to_search:
+- app database
+- billing
+- support
+- email/contact list
+- logs
+status: received / waiting_for_identity / in_progress / answered / closed
+```
+
+Datum prijeti nepocitej az od chvile, kdy si toho nekdo vsimne po dovolene. Pokud zadost prijde na oficialni kontaktni kanal, hodiny bezi. EDPB k tomu prakticky doporucuje mechanismy pro presmerovani a zastupy, aby zadosti nezustaly u cloveka, ktery zrovna neni dostupny.
+
+### 2. Over identitu primerene, ne maximalne
+
+Overeni identity ma chranit data, ne vytvaret dalsi datovy problem. Kdyz se prihlaseny uzivatel pta pres aplikaci, cast overeni uz mas. Kdyz nekdo pise z emailu, ktery je v uctu, muzes pouzit potvrzovaci link nebo odpoved do stejne schranky. Kdyz zadost prichazi z cizi adresy a ty mas predat citlive informace, potrebujes silnejsi overeni.
+
+Primerena pravidla:
+
+- Nepozaduj kopii obcanky automaticky u kazde zadosti.
+- Pokud doklad opravdu potrebujes, rekni presne proc a jake casti muze clovek zacit.
+- Neptej se na vic udaju, nez potrebujes k overeni.
+- Doklady a overovaci prilohy neukladej trvale do support nastroje.
+- Kdyz identitu neumis overit, vysvetli co chybi a zastav predani dat.
+
+**Codyho komentar:** Nejabsurdnejsi privacy pattern je "abychom chranili vase soukromi, poslete nam scan celeho dokladu do emailu". Nekdy je silne overeni nutne, ale default ma byt proporcionalita, ne datovy hlad v saku.
+
+### 3. Hledej podle datove mapy, ne podle pameti
+
+Zadost nejde vyridit dobre, pokud nikdo nevi, kde data zijou. Proto ma byt soucasti procesu kratka vyhledavaci mapa. Nemusi byt dokonala, ale musi pokryt systemy, kde se osobni udaje realne objevuji.
+
+Minimalni mapa pro SaaS:
+
+| System | Co hledat | Poznamka k riziku |
+| --- | --- | --- |
+| Aplikacni databaze | ucet, profil, nastaveni, obsah uzivatele | pozor na data jinych clenu workspace |
+| Billing | faktury, platby, danove udaje | cast muze mit povinnou retenci |
+| Support | tickety, prilohy, interni poznamky | rediguj poznamky a data tretich osob |
+| Email marketing | souhlasy, odhlaseni, kampane | oddel transakcni a marketingove ucely |
+| Analytika | identifikatory, eventy, agregace | u privacy-first analytiky casto nebude osobni profil |
+| Logy | IP, user ID, chyby, auditni stopa | omez rozsah podle ucelu a retence |
+| Dokumentace/CRM | obchodni poznamky, demo zapisy | pozor na subjektivni interni poznamky |
+
+U kazdeho systemu si zapis, jestli se prohledava podle emailu, user ID, workspace ID, fakturacniho kontaktu nebo jineho identifikatoru. Kdyz najdes data, ktera do systemu nepatri, nevyrabej z toho tichou vyjimku. Zapis navazujici opravu: retence, minimalizace, presun nebo smazani.
+
+### 4. Odpoved ma byt srozumitelna, ne jen kompletni
+
+U prave na pristup nejde jen o ZIP plny souboru. Clovek ma pochopit, co se zpracovava a proc. Prakticka odpoved by mela mit dve vrstvy:
+
+- kratke shrnuti pro cloveka,
+- prilohu nebo export s daty v citelnem formatu.
+
+Sablona odpovedi:
+
+```text
+Predmet: Odpoved na vasi zadost o osobni udaje
+
+Dobry den,
+
+potvrzujeme, ze jsme vyridili vasi zadost prijatou dne [datum].
+
+Zpracovavame tyto hlavni kategorie udaju:
+- ucetni a kontaktni udaje,
+- data spojena s pouzivanim sluzby,
+- komunikaci se supportem,
+- provozni a bezpecnostni zaznamy v omezenem rozsahu.
+
+Prilozeny export obsahuje [rozsah]. Neobsahuje [co je vylouceno a proc], napriklad data jinych osob, interni bezpecnostni informace nebo udaje, ktere uz nejsou uchovavany.
+
+Odkaz ke stazeni je platny do [datum]. Po expiraci bude exportni soubor smazan.
+
+Pokud s odpovedi nesouhlasite nebo chcete rozsah upresnit, napiste na [kontakt].
+```
+
+Do odpovedi nepis "vsechna vase data", pokud si nejsi jisty, ze je to pravda. Lepsi je presne vymezit rozsah: "data z aplikacni databaze, billing systemu a support komunikace k datu X". Presnost je duveryhodnejsi nez velka veta.
+
+### 5. Smazani neni jedno tlacitko
+
+Zadost o smazani je casto nejslozitejsi, protoze se potkavaji prava subjektu, smluvni vztah, ucetnictvi, bezpecnostni logy, zalohy a prava ostatnich lidi ve workspace. Proces proto musi rozlisit:
+
+| Vrstva | Typicka akce |
+| --- | --- |
+| Aktivni produktova data | smazat, anonymizovat nebo odpojit od identity |
+| Workspace obsah | overit, zda nejde o data firmy nebo jinych uzivatelu |
+| Billing a ucetnictvi | ponechat podle pravni retence, omezit pristup |
+| Marketing | odhlasit a zapsat suppression signal |
+| Support | omezit nebo redigovat podle rizika a potreby |
+| Bezpecnostni logy | ponechat po definovanou dobu, pokud je legitimni duvod |
+| Zalohy | neobnovovat smazana data zpet do aktivniho provozu a nechat expirovat podle politiky |
+
+Zakaznikovi rekni pravdu jednoduse: co smazes hned, co anonymizujes, co musis drzet a kdy zmizi ze zaloh. Neomlouvej to pravnickou mlhou. Pokud si nejsi jisty, eskaluj na pravnika, ale neztrac datum a stav zadosti.
+
+### 6. 60min postup
+
+```text
+00-08 min: Vytvor jeden vstup pro zadosti.
+Email nebo formular, ktery je uvedeny v privacy dokumentech a nekdo ho opravdu hlida.
+
+08-18 min: Zaloz kartu zadosti.
+ID, datum prijeti, kanal, typ, deadline, vlastnik, stav overeni identity.
+
+18-30 min: Projdi datovou mapu.
+Aplikace, billing, support, emaily, analytika, logy, CRM, dokumentace.
+
+30-40 min: Navrhni overeni identity.
+Co staci pro nizke riziko, co je potreba u citlivych dat, co se nesmi sbirat zbytecne.
+
+40-50 min: Priprav dve sablony odpovedi.
+Jednu pro pristup/export, jednu pro smazani nebo castecne smazani s retenci.
+
+50-56 min: Nastav auditni stopu.
+Kdo hledal, v jakych systemech, kdy odpovedel, co bylo predano nebo smazano.
+
+56-60 min: Udelej minitest.
+Vezmi fiktivniho uzivatele a projdi, jestli bys zadost dokazal vyridit bez improvizace.
+```
+
+### Checklist: zadosti subjektu udaju
+
+- [ ] Privacy dokumenty uvadeji jasny kontakt pro zadosti subjektu udaju.
+- [ ] Existuje karta zadosti s datumem prijeti, typem, lhutu, vlastnikem a stavem.
+- [ ] Zadosti umi zachytit i support a obchod, nejen pravni inbox.
+- [ ] Identita se overuje primerene podle rizika.
+- [ ] Kopie dokladu se nevyzaduji automaticky a neukladaji se zbytecne.
+- [ ] Datova mapa rika, ktere systemy se maji prohledat.
+- [ ] Odpoved rozlisuje shrnuti pro cloveka a strojove citelny export.
+- [ ] Data tretich osob, tajemstvi a interni bezpecnostni informace se pred predanim posuzuji.
+- [ ] Zadost o smazani rozlisuje aktivni data, billing, logy, support, zalohy a pravni retenci.
+- [ ] Vsechny kroky jsou zapsane v auditni stope.
+- [ ] Lhuta jednoho mesice je sledovana od prijeti zadosti.
+- [ ] Pro slozite zadosti existuje sablona informovani o prodlouzeni lhuty.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -8116,3 +8281,4 @@ Kdo export udrzuje, jak casto se zkousi obnova/import a kde je dokumentace forma
 - 2026-08-01: Pridana prakticka priloha Pristupova prava a offboarding bez zapomenutych uctu za 45 minut vcetne inventare pristupu, roli, onboarding/offboarding karet, revizniho rytmu a checklistu.
 - 2026-08-01: Pridana prakticka priloha Transakcni emaily bez datove pasti za 45 minut vcetne kategorizace sablon, minimalizace dat, SPF/DKIM/DMARC, odhlaseni a checklistu.
 - 2026-08-01: Pridana prakticka priloha Export dat pro zakaznika bez improvizace za 60 minut vcetne typu exportu, formatu, overeni prijemce, retence a checklistu.
+- 2026-08-01: Pridana prakticka priloha Zadosti subjektu udaju bez supportoveho chaosu za 60 minut vcetne triage, overeni identity, datove mapy, odpovedi, mazani a checklistu.
