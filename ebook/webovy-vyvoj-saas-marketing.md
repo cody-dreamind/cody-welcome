@@ -5428,6 +5428,195 @@ Namitka, nejasnost nebo opakovany dotaz se musi nekam propsat.
 
 ---
 
+## Pilotni nabidka bez rozsahove exploze za 60 minut
+
+Po dobrem demu casto prijde nejnebezpecnejsi veta: "Poslete nam prosim nabidku." Zni to jako vyhra. Ve skutecnosti je to test, jestli umis prevest zajem do maleho, kontrolovatelneho zavazku. Spatna nabidka slibi cely budouci produkt, prida tri integrace "pro jistotu", necha otevreny uspech a rozmaze datovou odpovednost. Dobra pilotni nabidka je kratka, konkretni a trochu nudna. Nuda je tady kompliment.
+
+Pilot neni levnejsi enterprise implementace. Je to overeni jedne hodnotove hypotezy v realnem provozu s omezenym rozsahem, jasnym vystupem a dohodnutym rozhodnutim na konci.
+
+**Codyho komentar:** Kdyz pilot nema hranici, neni to pilot. Je to neplacena produktova roadmapa v kostymu obchodni prilezitosti.
+
+### 1. Zacni jednou vetou uspechu
+
+Nez napises cenu, napis vetu, podle ktere bude jasne, zda pilot stal za to.
+
+Sablona:
+
+```text
+Pilot bude uspesny, pokud [konkretni tym/role] dokaze do [datum/obdobi]
+udelat [konkretni cinnost] s vysledkem [pozorovatelny dopad],
+bez [neprijatelny kompromis].
+```
+
+Priklady:
+
+- Pilot bude uspesny, pokud obchodni tym do 30 dnu uvidi vsechny nove B2B poptavky na jednom miste a dokaze ke kazde priradit dalsi krok bez sdileni celeho mailboxu.
+- Pilot bude uspesny, pokud support do dvou tydnu premeni 20 opakovanych odpovedi na verejnou znalostni bazi a snizi pocet rucnich odpovedi na stejne dotazy.
+- Pilot bude uspesny, pokud zakladatel kazde pondeli dostane prehled aktivace novych uctu bez exportu osobnich dat do reklamni analytiky.
+
+Slaba veta uspechu:
+
+```text
+Cilem je otestovat, jestli by reseni mohlo byt vhodne.
+```
+
+To neni uspech. To je mlha v kozenych botach.
+
+### 2. Rozsah popis jako vystupy, ne jako seznam funkci
+
+Zakaznik kupuje posun. Funkce jsou jen zpusob, jak k nemu dojit. Proto nabidka nemuze byt jen:
+
+- dashboard,
+- integrace,
+- notifikace,
+- administrace,
+- export.
+
+Lepsi je popsat vystupy:
+
+| Vystup | Co zakaznik dostane | Co je mimo pilot |
+| --- | --- | --- |
+| Jedna pilotni cesta | Napriklad prijem poptavky, prirazeni vlastnika a dalsi krok. | Vsechny typy poptavek, vsechny pobocky, vsechny historicke importy. |
+| Zakladni nastaveni roli | Kdo vidi pilotni data a kdo muze menit stav. | Plny enterprise permission model. |
+| Jeden report rozhodnuti | Prehled, zda pilot setri cas nebo snizuje riziko. | Datovy sklad, reklamni atribuce, osobni profily uzivatelu. |
+| Predavaci dokument | Jak pilot funguje, kde jsou data, jak se vypne. | Kompletni provozni manual pro celou firmu. |
+
+V nabidce pouzij vetu:
+
+```text
+Pilot je zamerne omezeny na jeden tok. Pokud se behem pilotu objevi dalsi
+pozadavky, zapiseme je do backlogu a po vyhodnoceni rozhodneme, zda patri do
+dalsi faze.
+```
+
+Tahle veta setri tydny zivota. A taky kavu, coz je v malem tymu prakticky menova rezerva.
+
+### 3. Datovou hranici dej do nabidky, ne az do DPA
+
+Privacy-first pilot ma uz v obchodni nabidce rict, jaka data potrebujes a jaka nechces. Neschovavej to az do pravni prilohy. Obchodni vlastnik musi pochopit, ze datova minimalizace je soucast implementace.
+
+Minimalni datovy blok:
+
+```text
+Pro pilot potrebujeme:
+- pracovni kontakt na pilotni vlastniky,
+- popis jednoho procesu,
+- anonymizovane nebo synteticke priklady vstupu,
+- pristup pouze k systemum nutnym pro dohodnuty tok, pokud nestaci export.
+
+Pro pilot nepotrebujeme:
+- kompletni historicka data,
+- osobni udaje koncovych zakazniku mimo pilotni ucel,
+- pristup do celeho mailboxu,
+- produkcni prihlaseni bez casoveho omezeni,
+- data, ktera nesouvisi s pilotni hypotezou.
+```
+
+Pokud zakaznik potrebuje test na realnych datech, napis to presne:
+
+```text
+Pouziti realnych dat schvalime samostatne pred importem. Predem urcime ucel,
+rozsah, pristupy, retenci, zpusob smazani a kontakt pro incidenty.
+```
+
+To neni brzda obchodu. Je to zpusob, jak pozdeji nevysvetlovat, proc v prototypu lezi data, ktera tam nikdy nemela byt.
+
+### 4. Cena ma krmit rozhodnuti, ne nekonecne ladeni
+
+Pilot zdarma vypada snadneji pro prodej, ale casto vyrobi spatny signal. Zakaznik bez zavazku snadno rekne ano, ale neda cas, data ani rozhodovatele. Placeny pilot nemusi byt drahy. Musi byt dost skutecny na to, aby obe strany jednaly vazne.
+
+Jednoducha struktura:
+
+| Cast ceny | Proc existuje |
+| --- | --- |
+| Fixni cena pilotu | Kryje pripravu, implementaci a vyhodnoceni. |
+| Jasne trvani | Brani tomu, aby se pilot natahl do nekonecna. |
+| Volitelna dalsi faze | Oddeli overeni od plne implementace. |
+| Kredit do dalsi faze jen vyjimecne | Pouzij jen pokud to nerozbije ekonomiku a nesmaze hodnotu pilotu. |
+
+Veta do nabidky:
+
+```text
+Pilot trva 30 dni od zahajeni. Po skonceni probehne vyhodnoceni podle
+dohodnutych kriterii a rozhodneme: pokracovat, upravit rozsah, nebo pilot
+ukoncit a smazat pilotni data podle dohodnute retence.
+```
+
+Vyhni se formulacim:
+
+- "Cena se upresni podle narocnosti."
+- "Pilot muze trvat podle potreby."
+- "Pripadne dalsi pozadavky zahrneme prubezne."
+- "Data si nechame pro budouci analyzu."
+
+Kazda z tech vet zni pratelsky. V provozu je to otevreny ucet.
+
+### 5. Vyhodnoceni naplanuj pred startem
+
+Pilot bez vyhodnoceni je demo, ktere se zapomnelo vypnout. Uz v nabidce napis, kdo a kdy rekne, co dal.
+
+Tabulka vyhodnoceni:
+
+| Oblast | Otazka | Dukaz |
+| --- | --- | --- |
+| Hodnota | Usetrilo to cas, penize, riziko nebo chaos? | Konkretni priklad pred/po, ne jen pocit. |
+| Pouzivani | Pouzil to cilovy tym opakovane? | Pocet dokoncenych pilotnich toku nebo kvalitativni zpetna vazba. |
+| Provoz | Slo to provozovat bez rucniho hrdinstvi? | Seznam incidentu, podpory a rucnich zasahu. |
+| Data | Zustali jsme v dohodnutem rozsahu dat? | Kontrola importu, pristupu, logu a retence. |
+| Obchod | Existuje vlastnik dalsi faze a rozpocet? | Jmeno vlastnika, dalsi krok, termin rozhodnuti. |
+
+Sablona zaverecneho rozhodnuti:
+
+```text
+Na konci pilotu zvolime jednu ze tri variant:
+
+1. Pokracujeme do placene faze s rozsahem [X].
+2. Prodlouzime pilot pouze kvuli overeni [konkretni nejasnost] do [datum].
+3. Pilot ukoncime, exportujeme domluvena data a zbytek smazeme do [datum].
+```
+
+Varianta "nechame to otevrene" v seznamu neni. Pokud ji nekdo potrebuje, znamena to, ze chybi vlastnik nebo hodnota.
+
+### 6. 60min postup
+
+```text
+00-08 min: Napis jednu vetu uspechu
+Kdo, co, do kdy, s jakym dopadem a bez jakeho kompromisu.
+
+08-18 min: Omez rozsah
+Jeden tok, jeden tym, jeden vystup. Zbytek do backlogu.
+
+18-30 min: Sepis datovou hranici
+Co potrebujeme, co nepotrebujeme, jak dlouho data zustanou.
+
+30-40 min: Navrhni cenu a trvani
+Fixni pilot, jasny konec, oddelena dalsi faze.
+
+40-50 min: Dopln vyhodnoceni
+Kriteria, vlastnik, datum rozhodnuti, tri mozne vysledky.
+
+50-60 min: Zkontroluj sliby
+Vyhod vse, co zni jako neomezena implementace, garance bez dukazu nebo
+datovy pristup "pro jistotu".
+```
+
+### Checklist: pilotni nabidka
+
+- [ ] Nabidka ma jednu vetu uspechu.
+- [ ] Pilot overuje jeden tok, ne celou produktovou vizi.
+- [ ] Vystupy jsou popsane jazykem zakaznicke hodnoty.
+- [ ] Je jasne, co je mimo rozsah.
+- [ ] Datova hranice je primo v nabidce.
+- [ ] Nepozaduji kompletni historicka data, pokud nejsou nutna.
+- [ ] Realna data maji samostatne schvaleni, ucel, pristupy a retenci.
+- [ ] Pilot ma pevne trvani a datum vyhodnoceni.
+- [ ] Cena nevytvari nekonecny zavazek.
+- [ ] Na konci jsou jen tri rozhodnuti: pokracovat, cilene prodlouzit, nebo ukoncit.
+- [ ] Ukonceni obsahuje export, smazani a vlastnika.
+- [ ] Vsechny nove pozadavky jdou do backlogu, ne rovnou do pilotu.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -5515,3 +5704,4 @@ Namitka, nejasnost nebo opakovany dotaz se musi nekam propsat.
 - 2026-07-31: Pridana prakticka priloha Rozhodovaci zaznamy pro maly SaaS za 45 minut vcetne sablony, datoveho dopadu, kontrolnich bodu a checklistu.
 - 2026-07-31: Pridana prakticka priloha Demo call bez slibu navic za 45 minut vcetne scenare discovery, cileneho dema, privacy otazek, zapisu po callu a checklistu.
 - 2026-07-31: Pridana prakticka priloha Follow-up po demu bez natlaku za 45 minut vcetne sablon emailu, prace s namitkami, datove minimalizace a checklistu.
+- 2026-08-01: Pridana prakticka priloha Pilotni nabidka bez rozsahove exploze za 60 minut vcetne uspechu pilotu, rozsahu, datove hranice, ceny, vyhodnoceni a checklistu.
