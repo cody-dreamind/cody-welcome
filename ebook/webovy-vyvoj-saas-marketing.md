@@ -8811,6 +8811,164 @@ Minuty 55 az 60: zapis rozhodnuti: spustit, spustit po doplneni odpovedi, nebo z
 
 ---
 
+## Kampan bez reklamniho pixelu za 45 minut
+
+Marketingova kampan nemusi zacit tim, ze na web nalepis dalsi sledovaci skript. Pro maly SaaS casto staci cista landing page, oznacene odkazy, minimalni analytika, kvalifikacni otazka ve formulari a rucni vyhodnoceni kvality leadu. Je to mene blyskave nez reklamni dashboard, ale rychleji zjistis to hlavni: odkud prisli lide, kteri opravdu chteji mluvit.
+
+UTM parametry jsou obycejne parametry v URL, ktere pomahaji oznacit zdroj, medium, kampan a dalsi kontext odkazu; Google je popisuje v dokumentaci ke kampanovym URL: https://support.google.com/analytics/answer/10917952. Nepatri jen do Google Analytics. Muzes je zpracovat i vlastni nebo privacy-first analytikou, pokud nesbiras vic dat, nez potrebujes. U odchozich odkazu a sdileni citlivych URL si zaroven hlidej `Referrer-Policy`; MDN popisuje, ze tato HTTP hlavicka ridi, kolik referrer informaci prohlizec posle pri dalsich requestech: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Referrer-Policy.
+
+Prakticky cil teto prilohy: za 45 minut pripravit kampan, ktera meri obchodni rozhodnuti bez profilovani navstevniku napric webem.
+
+### 1. Zacni kampanovou otazkou
+
+Pred tim, nez resis grafiku, texty nebo rozesilku, napis jednu rozhodovaci otazku.
+
+Spatne:
+
+> Kolik lidi prijde na web?
+
+Lepsi:
+
+> Privede clanek pro zakladatele B2B SaaS aspon tri relevantni poptavky na 20min call behem dvou tydnu?
+
+Dobra kampanova otazka ma:
+
+- cilovou skupinu,
+- kanal nebo zdroj,
+- akci, kterou ma clovek udelat,
+- casove okno,
+- rozhodnuti, ktere podle vysledku udelas.
+
+**Codyho komentar:** Navstevnost je prijemna droga. Relevantni lead je jidlo. Kdyz mas hlad, nesbirej lajky na talir.
+
+### 2. Oznac odkazy tak, aby jim rozumel clovek
+
+UTM parametry maji byt nudne a konzistentni. Kdyz je kazdy odkaz pojmenovany jinak, kampanove vyhodnoceni se zmeni v rucni archeologii.
+
+Jednoducha dohoda:
+
+| Parametr | Co znamena | Priklad |
+| --- | --- | --- |
+| `utm_source` | Kde odkaz lezi | `linkedin`, `rss`, `partner-web`, `newsletter` |
+| `utm_medium` | Typ distribuce | `post`, `email`, `referral`, `direct-message` |
+| `utm_campaign` | Nazev konkretni kampane | `privacy-saas-audit-2026-08` |
+| `utm_content` | Varianta odkazu nebo CTA | `hero-cta`, `case-study-link`, `ps-note` |
+
+Pravidla:
+
+- Pouzivej mala pismena, pomlcky a jeden jazyk.
+- Do URL nedavej email, jmeno, firmu ani interni poznamky.
+- Neoznacuj kazdy link jinou kampani, kdyz patri ke stejne nabidce.
+- Kampanovy nazev drz stabilni po celou dobu vyhodnoceni.
+- U kratkych kampani zapis odkazy do jedne tabulky, at vis, co jsi pustil ven.
+
+Priklad:
+
+```text
+https://example.cz/audit-saas?utm_source=rss&utm_medium=post&utm_campaign=privacy-saas-audit-2026-08&utm_content=main-cta
+```
+
+Tohle je dost presne pro rozhodovani a porad to neni osobni profil. Jen popisuje, odkud prisla navsteva.
+
+### 3. Mer cestu k poptavce, ne celeho cloveka
+
+Minimalni plan mereni pro jednu kampan:
+
+| Signal | Proc ho meris |
+| --- | --- |
+| Navsteva landing page se zdrojem kampane | Vidis, zda distribuce vubec privedla lidi. |
+| Klik na hlavni CTA | Poznas, zda nabidka vyvolava akci. |
+| Zacaty formular | Odhalis treneni mezi zajmem a odeslanim. |
+| Odeslany formular | Meris obchodni vystup. |
+| Kvalifikace leadu po rucni kontrole | Oddelis relevantni poptavky od sumu. |
+
+Co do kampane typicky nepatri:
+
+- cross-site reklamni pixel pred souhlasem,
+- session replay na kazdeho navstevnika,
+- fingerprinting,
+- automaticke obohacovani leadu z externich databazi,
+- ukladani celeho referreru s citlivymi query parametry.
+
+Kdyz potrebujes retargeting, pojmenuj si to jako samostatne rozhodnuti s pravnim a datovym dopadem. Neschovavej ho pod "bezna analytika". Privacy-first marketing muze byt ambiciozni, ale nesmi se tvarit, ze sledovani neni sledovani, jen protoze je hezky zabalene v dashboardu.
+
+### 4. Landing page priprav jako kampanovy kontrakt
+
+Kampanovy slib, landing page a formular musi mluvit stejnym jazykem. Pokud clanek slibuje "audit privacy-first analytiky", landing page nema najednou prodavat obecnou digitalni transformaci. Clovek prisel kvuli jednomu duvodu.
+
+Minimum pro kampanovou landing page:
+
+- jedna headline veta podle kampanove otazky,
+- jeden konkretni vystup,
+- kratky dukaz kompetence,
+- jasna cena nebo dalsi krok,
+- formular s minimalnim poctem poli,
+- mikrotext k datovemu pouziti,
+- odkaz na privacy dokumenty,
+- RSS nebo primarni URL pro dalsi obsah misto socialnich widgetu.
+
+Priklad mikrotextu:
+
+> Odpovime k poptavce emailem. Zdroj kampane pouzijeme jen pro vyhodnoceni, odkud prisly relevantni dotazy. Nepouzivame reklamni pixel ani profilovani napric webem.
+
+Tenhle text neni pravni magie. Je to srozumitelny slib. A kdyz ho napises, musi odpovidat realite v kodu i nastaveni analytiky.
+
+### 5. Vyhodnot leady rucne a kratce
+
+Po kampani nesleduj jen konverzni pomer. U maleho SaaS je dulezitejsi kvalita.
+
+Jednoducha tabulka:
+
+| Pole | Priklad |
+| --- | --- |
+| Datum | 2026-08-01 |
+| Zdroj | `rss / post / privacy-saas-audit-2026-08` |
+| Segment | B2B SaaS, 3 lide v tymu |
+| Problem | Nejasna analytika a cookie lista |
+| Relevance | A / B / C |
+| Dalsi krok | 20min call / poslat sablonu / odmitnout |
+| Poznamka k datovym obavam | Ptal se na EU hosting a DPA |
+
+Relevance muze byt jednoducha:
+
+- A: odpovida segmentu, ma akutni problem, existuje dalsi krok.
+- B: zajimavy kontakt, ale problem neni urgentni.
+- C: mimo segment nebo jen obecna zvedavost.
+
+Kdyz kampan privede 300 navstev, 12 formularu a 0 relevantnich leadu, problem neni v analytice. Problem je ve slibu, distribuci nebo segmentu. Kdyz privede 40 navstev a 3 dobre cally, mozna mas kanal, ktery stoji za dalsi iteraci, i kdyz graf nevypada jako ohnostroj.
+
+### 6. 45min postup
+
+Prvnich 5 minut: napis kampanovou otazku a rozhodnuti, ktere podle vysledku udelas.
+
+Minuty 5 az 12: priprav UTM konvenci a jeden seznam odkazu. Zkontroluj, ze v parametrech nejsou osobni ani interni data.
+
+Minuty 12 az 22: projdi landing page. Srovnej headline, CTA, formular a mikrotext s kampanovym slibem.
+
+Minuty 22 az 30: nastav minimalni eventy: navsteva kampane, CTA klik, odeslani formulare a chyba formulare. Nic navic bez duvodu.
+
+Minuty 30 az 35: zkontroluj `Referrer-Policy`, odchozi odkazy a sdileni URL. U citlivych cest neposilej zbytecny query string dal.
+
+Minuty 35 az 40: priprav rucni tabulku kvality leadu a pravidlo A/B/C.
+
+Minuty 40 az 45: zapis, kdy kampan vyhodnotis, kdo se podiva na leady a co bude znamenat "pokracovat".
+
+### Checklist: kampan bez reklamniho pixelu
+
+- [ ] Kampan ma jednu rozhodovaci otazku.
+- [ ] Vim, jaky segment oslovuji a jakou akci chci.
+- [ ] UTM parametry jsou konzistentni a neobsahuji osobni udaje.
+- [ ] Landing page odpovida presne kampanovemu slibu.
+- [ ] Formular sbira jen data potrebna pro dalsi krok.
+- [ ] Mikrotext rika, co se stane s poptavkou a zdrojem kampane.
+- [ ] Merim navstevu, CTA, formular a kvalitu leadu, ne celeho cloveka.
+- [ ] Nepoustim reklamni pixel, session replay ani obohacovani leadu bez samostatneho rozhodnuti a souhlasu, pokud je potreba.
+- [ ] `Referrer-Policy` nepropousti zbytecne citlive URL dal.
+- [ ] Vyhodnoceni obsahuje kvalitu leadu, nejen pocet navstev.
+- [ ] Po kampani rozhodnu: zopakovat, upravit nabidku, zmenit kanal nebo zastavit.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -8857,6 +9015,7 @@ Minuty 55 az 60: zapis rozhodnuti: spustit, spustit po doplneni odpovedi, nebo z
 - Google Search Central, How to specify a canonical URL: https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls
 - Google Search Central, Build and submit a sitemap: https://developers.google.com/search/docs/crawling-indexing/sitemaps/overview
 - Google Search Central, Introduction to structured data markup: https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data
+- Google Analytics Help, URL builders: Collect campaign data with custom URLs: https://support.google.com/analytics/answer/10917952
 - RFC 9309, Robots Exclusion Protocol: https://www.rfc-editor.org/rfc/rfc9309
 - RSS Advisory Board, RSS 2.0 Specification: https://www.rssboard.org/rss-specification
 - RFC 4287, The Atom Syndication Format: https://www.rfc-editor.org/rfc/rfc4287
@@ -8870,6 +9029,7 @@ Minuty 55 az 60: zapis rozhodnuti: spustit, spustit po doplneni odpovedi, nebo z
 - RFC 7489, Domain-based Message Authentication, Reporting, and Conformance (DMARC): https://datatracker.ietf.org/doc/html/rfc7489
 - RFC 8058, Signaling One-Click Functionality for List Email Headers: https://datatracker.ietf.org/doc/html/rfc8058
 - Google Help, Email sender guidelines: https://support.google.com/mail/answer/81126
+- MDN, Referrer-Policy header: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Referrer-Policy
 - Keep a Changelog, Version 1.1.0: https://keepachangelog.com/en/1.1.0/
 - Semantic Versioning 2.0.0: https://semver.org/
 
@@ -8927,3 +9087,4 @@ Minuty 55 az 60: zapis rozhodnuti: spustit, spustit po doplneni odpovedi, nebo z
 - 2026-08-01: Pridana prakticka priloha Logovani a monitoring bez osobnich udaju navic za 45 minut vcetne typu logu, zakazanych dat, retence, alertu a release checklistu.
 - 2026-08-01: Pridana prakticka priloha Platebni a fakturacni tok bez datove laviny za 60 minut vcetne ceniku, checkoutu, platebni brany, fakturacni retence, selhani plateb a checklistu.
 - 2026-08-01: Pridana prakticka priloha DPA zmena dodavatele bez rozbite duvery za 60 minut vcetne karty zmeny, DPA kontroly, subprocesorske komunikace a checklistu.
+- 2026-08-01: Pridana prakticka priloha Kampan bez reklamniho pixelu za 45 minut vcetne UTM konvence, minimalniho mereni, datoveho mikrotextu, vyhodnoceni leadu a checklistu.
