@@ -9477,6 +9477,164 @@ Minuty 50 az 60: pridej do kalendare kontrolu po akci: smazani nepotrebnych dat,
 
 ---
 
+## Komunita bez platformniho zamku za 60 minut
+
+Komunita kolem SaaS produktu nemusi zacit jako Slack workspace, Discord server nebo LinkedIn skupina, ktera vyzaduje dalsi login, dalsi profil a dalsi notifikacni peklo. Casto staci mnohem jednodussi vec: pravidelne misto, kde se lide muzou ptat, dostavat odpovedi, navrhovat temata a videt, ze produkt ma ziveho spravce.
+
+Privacy-first komunita neni komunita bez kontaktu. Je to komunita, kde clovek vi, komu pise, co se s jeho zpravou stane a kde zustane historie. U evropskeho SaaS je to obchodni vyhoda: mene zavislosti na platformach, mensi datova stopa a vetsi sance, ze obsah bude dohledatelny i za rok.
+
+### 1. Nejdriv vyber typ komunity
+
+Ne kazdy produkt potrebuje real-time chat. Ten vypada zive, ale rychle vytvari zavazek odpovidat porad. Pro maly tym je lepsi vybrat format podle toho, co ma komunita delat.
+
+| Cil | Vhodny format | Proc |
+| --- | --- | --- |
+| Sbirat caste dotazy | Verejne FAQ nebo diskusni vlakna u dokumentace | Odpovedi se daji znovu pouzit. |
+| Pomahat zakaznikum s nastavenim | Email alias nebo helpdesk fronta | Mene verejneho sdileni dat, lepsi kontrola kontextu. |
+| Budovat odborne publikum | Blog, RSS, komentare pres moderovany formular | Obsah zustava na vlastni domene. |
+| Zapojit power users | Mala pozvankova skupina | Staci malo lidi s kvalitnim signalem. |
+| Testovat roadmapu | Pravidelny office hours call | Rychlejsi rozhodnuti nez nekonecne vlakno. |
+
+Pravidlo:
+
+> Komunitni kanal vyber podle rozhodnuti, ktere chces delat, ne podle toho, kde zrovna vsichni krici nejhlasiteji.
+
+**Priklad:**
+
+Pokud potrebujes zjistit, proc se zakaznici zasekavaji pri importu dat, verejna socialni skupina je zbytecne siroka. Lepsi je kratky formular "Co vam branilo dokoncit import?" a navazujici email. Kdyz se stejna odpoved opakuje petkrat, udelej z ni clanek, checklist nebo opravu produktu.
+
+### 2. Vytvor komunitni kontrakt
+
+Pred spustenim kanalu napis jednu kratkou kartu. Neni to korporatni manifest. Je to dohoda, ktera chrani zakazniky i tym.
+
+```text
+Kanal:
+[nazev a URL]
+
+Ucel:
+[proc existuje]
+
+Kdo ho cte:
+[role nebo tym]
+
+Co sem patri:
+[typy dotazu, napadu, problemu]
+
+Co sem nepatri:
+[osobni udaje, zakaznicka data, tajemstvi, incidenty]
+
+Retence:
+[jak dlouho uchovavame zpravy nebo exporty]
+
+Verejnost:
+[verejne / jen pro zakazniky / interni]
+
+Fallback:
+[kam psat, kdyz je vec urgentni nebo citliva]
+```
+
+Mikrotext pro formular nebo uvodni zpravu:
+
+```text
+Neposilejte sem prosim osobni udaje zakazniku, pristupy ani interni dokumenty. Pokud potrebujeme citlivy kontext, domluvime bezpecnejsi kanal.
+```
+
+Tohle neni paranoia. Je to servis pro uzivatele, kteri v rychlosti posilaji screenshoty, exporty a detaily problemu. Jasna hranice predem je levnejsi nez uklid po spatnem sdileni.
+
+### 3. Vlastni domena ma byt misto pravdy
+
+Platformy jsou dobre na dosah. Vlastni domena je dobra na pamet. Kdyz vznikne uzitecna odpoved, patri na URL, kterou kontrolujes: dokumentace, blog, changelog, FAQ nebo znalostni baze.
+
+Minimalni tok:
+
+1. Dotaz prijde emailem, formularem nebo v male skupine.
+2. Odpovis konkretne cloveku.
+3. Pokud je odpoved opakovatelna, anonymizuj ji.
+4. Preved ji do verejneho clanku, FAQ nebo checklistu.
+5. V dalsim follow-upu posilej primarni URL, ne screenshot z platformy.
+
+Takto komunita nevyrabi jen notifikace. Vyrabi knihovnu odpovedi, ktera zlepsuje support, SEO i onboarding.
+
+**Codyho komentar:** Socialni platforma je pronajaty megafon. Vlastni web je dilna. Megafon se hodi, kdyz chces zavolat lidi dovnitr. Ale znalosti bych si v nem neskladoval, protoze pronajem se umi tvarit jako vlastnictvi az do prvni zmeny pravidel.
+
+### 4. Komentare moderuj jako produktovy vstup
+
+Komentar neni jen text pod clankem. Je to signal. Nekdy supportni, nekdy produktovy, nekdy obchodni. Pokud vsechno skonci v jednom inboxu, tym rychle ztrati prehled.
+
+Pouzij tri kose:
+
+| Kos | Co tam patri | Dalsi krok |
+| --- | --- | --- |
+| Odpoved | Dotaz, na ktery existuje jasna odpoved | Odpovez, pripadne pridej do FAQ. |
+| Signal | Opakovany problem, namitka nebo napad | Pridej do feedback loopu s odkazem na zdroj. |
+| Riziko | Citliva data, incident, pravni dotaz, bezpecnost | Presun do kontrolovaneho interniho procesu. |
+
+U verejnych komentaru nastav moderaci minimalne pro prvni zpravu cloveka. Ne kvuli cenzure, ale kvuli spamu, osobnim udajum a nahodnym screenshotum. Automaticke publikovani muze byt prijemne, dokud nekdo nevlozi token, email klienta nebo debug vypis.
+
+### 5. Metriky komunity drz lidske
+
+Komunita se da merit bez sledovani jednotlivcu napric webem. Zacni s metrikami, ktere vedou k rozhodnuti:
+
+- pocet kvalitnich dotazu za tyden,
+- opakovane tema dotazu,
+- cas do prvni odpovedi,
+- pocet odpovedi prevedenych do dokumentace,
+- pocet produktovych zmen vzniklych z komunitniho signalu,
+- pocet citlivych prispevku, ktere bylo potreba presunout jinam.
+
+Vyhni se vanity metrikam typu "pocet clenu" bez aktivity. Tisic tichych lidi v uzavrene platforme muze mit mensi hodnotu nez dvacet zakazniku, kteri kazdy mesic polozi presny dotaz a pomuzou zlepsit produkt.
+
+Maly tydenni zapis muze vypadat takto:
+
+```text
+Tyden:
+[datum]
+
+Nejcastejsi tema:
+[tema]
+
+Co jsme odpovedeli verejne:
+[URL]
+
+Co jde do produktu:
+[issue / rozhodnuti]
+
+Co mazeme nebo presouvame:
+[citlive prispevky, exporty, screenshoty]
+
+Jedna zmena na pristi tyden:
+[konkretni krok]
+```
+
+### 6. 60min postup
+
+Prvnich 10 minut: napis ucel komunity jednou vetou. Napriklad: "Pomahat zakaznikum rychle vyresit onboarding a premenovat opakovane dotazy na verejnou dokumentaci." Pokud veta zni jako "budovat engagement", prepis ji. To slovo casto znamena, ze nikdo nevi, co se ma stat.
+
+Minuty 10 az 20: vyber kanal. Pro B2B SaaS casto staci email alias, formular u dokumentace a pravidelne office hours. Real-time chat pridej az ve chvili, kdy vis, kdo ho bude obsluhovat.
+
+Minuty 20 az 30: napis komunitni kontrakt: ucel, kdo cte zpravy, co sem patri, co sem nepatri, retence a urgentni fallback.
+
+Minuty 30 az 40: priprav tri sablony odpovedi: bezny dotaz, citliva data, produktovy napad. U citlivych dat vzdy presun konverzaci do bezpecnejsiho kanalu a nenech je ve verejnem vlakne.
+
+Minuty 40 az 50: zaloz misto pravdy na vlastni domene. Muze to byt stranka "Komunita a podpora", FAQ nebo verejny index odpovedi. Pridej RSS nebo primy odkaz, pokud dava smysl.
+
+Minuty 50 az 60: nastav tydenni review. Projdi dotazy, vyber jednu odpoved k publikovani, jednu vec do produktu a jednu vec k uklidu. Komunita bez udrzby je jen pomale rostouci archiv kompromisu.
+
+### Checklist: komunita bez platformniho zamku
+
+- [ ] Vim, proc komunita existuje a jake rozhodnuti ma zlepsovat.
+- [ ] Zvoleny kanal odpovida velikosti tymu a rychlosti odpovedi.
+- [ ] Komunitni kontrakt rika, co sem patri a co sem nepatri.
+- [ ] Uvodni mikrotext zakazuje posilat osobni udaje, pristupy a interni dokumenty.
+- [ ] Uzitecne odpovedi se prevadi na vlastni URL, ne zustavaji jen v platforme.
+- [ ] Verejne komentare maji moderaci pro spam a nahodne citlive informace.
+- [ ] Citlive prispevky se presouvaji do kontrolovaneho procesu.
+- [ ] Metriky meri kvalitu signalu, ne jen pocet clenu.
+- [ ] Tydenni review konci jednou publikovanou odpovedi, jednim produktovym signalem nebo jednim uklidem.
+- [ ] Komunita ma fallback pro urgentni support, incidenty a bezpecnostni hlasky.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -9600,3 +9758,4 @@ Minuty 50 az 60: pridej do kalendare kontrolu po akci: smazani nepotrebnych dat,
 - 2026-08-01: Pridana prakticka priloha Referral a partnerska doporuceni bez sledovaciho cirkusu za 45 minut vcetne referral kodu, formularoveho mikrotextu, odmen, vyhodnoceni kvality leadu a checklistu.
 - 2026-08-01: Pridana prakticka priloha Pripadova studie bez prozrazeni zakaznickych dat za 60 minut vcetne datoveho semaforu, prace s citacemi, screenshoty, sablony a checklistu.
 - 2026-08-01: Pridana prakticka priloha Webinar a workshop bez registracni pasti za 60 minut vcetne registrace, nahravek, follow-upu, datove cesty nastroju a checklistu.
+- 2026-08-01: Pridana prakticka priloha Komunita bez platformniho zamku za 60 minut vcetne volby kanalu, komunitniho kontraktu, vlastni domeny, moderace, metrik a checklistu.
