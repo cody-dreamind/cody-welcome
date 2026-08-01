@@ -7017,6 +7017,205 @@ Tri otazky: co opravime, co overime, co zavreme.
 
 ---
 
+## Roadmapa bez slibotechny za 45 minut
+
+Roadmapa neni verejny seznam prani, ktery ma uklidnit kazdeho leadu na demu. Je to rozhodovaci nastroj: co budeme delat ted, co overujeme, co zatim nedelame a proc. U maleho SaaS je dobra roadmapa kratka, srozumitelna a ochranena pred dvema nemocemi: nafukovanim rozsahu a sliby, ktere vznikly v obchodnim stresu.
+
+Privacy-first produkt ma jeste jednu vrstvu navic. Kazda funkce muze menit datovou stopu. Novy export, integrace, AI sumarizace, audit log nebo pozvanky pro externisty nejsou jen "feature". Jsou to nove toky dat, nove role, nove retention otazky a nove odpovedi pro zakazniky.
+
+### 1. Rozdel roadmapu na tri horizonty
+
+Nepotrebujes presne datum u kazde karty. Potrebujes, aby tym i zakaznik pochopili miru zavazku.
+
+Pouzij tri horizonty:
+
+| Horizont | Vyklad | Co tam patri |
+| --- | --- | --- |
+| Ted | Aktivne stavime nebo opravujeme | Prace s vlastnikem, jasnym vystupem a ocekavanym overenim |
+| Dale | Overeno jako dulezite, ale jeste ne naplanovane | Problemy s dukazem dopadu, cekaji na kapacitu nebo technicke rozhodnuti |
+| Zkoumame | Signal existuje, reseni neni jasne | Rozhovory, prototypy, piloty, analyza rizik |
+
+Vse ostatni patri do archivu, ne do roadmapy. Archiv neni hrbitov. Je to misto, kde se drzi odlozene veci bez toho, aby kazdy tyden predstiraly prioritu.
+
+**Codyho komentar:** Datum na karte umi vyrobit falesny pocit presnosti. Kdyz tym nevi rozsah, zavislosti ani datovy dopad, "Q4" neni plan. Je to kostym pro nejistotu.
+
+### 2. Kazda roadmap karta musi mit rozhodovaci jadro
+
+Karta typu "Pridat integraci s X" je slaba. Neodpovida, proc to delat, komu to pomuze ani jak poznas uspech. Lepsi karta popisuje problem a vysledek.
+
+Sablona:
+
+```text
+Nazev:
+[problem nebo vysledek, ne jen funkce]
+
+Segment:
+[komu to pomuze]
+
+Zakaznicky problem:
+[konkretni situace, idealne opakovany signal]
+
+Navrhovany vystup:
+[co se zmeni v produktu, procesu nebo dokumentaci]
+
+Meritko uspechu:
+[co bude po vydani pozorovatelne lepsi]
+
+Datovy dopad:
+[nove osobni udaje / nova integrace / novy export / zadna zmena / nevim]
+
+Rozhodnuti:
+[stavime ted / overit / rozdelit / odlozit / zavrit]
+
+Vlastnik:
+[kdo kartu posune nebo zavre]
+```
+
+Priklad:
+
+```text
+Nazev:
+Export otevrenych pripadu pro mesicni report
+
+Segment:
+Admini v B2B tymech s pravidelnym reportingem
+
+Zakaznicky problem:
+Admini jednou mesicne rucne kopiruji otevrene pripady do tabulky pro vedeni.
+
+Navrhovany vystup:
+CSV export filtrovaneho seznamu s minimalni sadou poli.
+
+Meritko uspechu:
+Zakaznik dokaze vytvorit report bez screenshotu a rucniho prepisu.
+
+Datovy dopad:
+Export zakaznickych dat. Nutna kontrola poli, pravomoci a audit log.
+
+Rozhodnuti:
+Overit rozsah exportu na dvou zakaznickych scenarich.
+
+Vlastnik:
+Produkt + technicky lead
+```
+
+Takhle napsana karta nezarucuje, ze funkce vznikne. Zarucuje, ze se o ni da rozumne rozhodnout.
+
+### 3. Verejne sliby drz mensi nez interni plan
+
+Verejna roadmapa muze byt uzitecna pro duveru, ale nesmi byt sklad nedokoncenych zavazku. Pokud ji mas, publikuj radsi temata a problemy nez presne slibovane funkce.
+
+Lepsi verejne formulace:
+
+- "Zlepsujeme exporty pro tymovy reporting."
+- "Pracujeme na prehlednejsim nastaveni pristupu pro externi spolupracovniky."
+- "Zkoumame jednodussi onboarding pro firmy s vice workspace."
+- "Pripravujeme podrobnejsi dokumentaci k EU provozu a subprocesorum."
+
+Rizikove formulace:
+
+- "Integrace s kazdym ucetnim systemem do konce mesice."
+- "AI bude automaticky cist vsechny zpravy a navrhovat odpovedi."
+- "Enterprise security pack pristi kvartal."
+- "Brzy podporime vsechny exporty, ktere budete potrebovat."
+
+Kdyz zakaznik pozaduje konkretni slib, odpovez pres problem a hranici:
+
+```text
+Rozumim, ze potrebujete [vysledek].
+Ted overujeme nejmensi rozsah, ktery to vyresi bez zbytecneho exportu dat a bez nove trvale integrace.
+Do [datum interniho rozhodnuti] vam rekneme, jestli to pujde do nejblizsiho planu, nebo jestli nabidneme jine reseni.
+```
+
+Tahle odpoved neni vyhybani. Je to dospele zachazeni s nejistotou.
+
+### 4. Privacy review dej pred odhad, ne po nem
+
+Spousta tymu nejdrive odhadne praci a az potom zjisti, ze funkce meni prava, logy, subprocesory nebo retention. Pak je roadmapa plna polovicnich zavazku a technicky tym vypada jako brzda. Oprav to poradi.
+
+Pred odhadem si poloz pet otazek:
+
+- Vznika nove osobni nebo zakaznicke datum?
+- Meni se, kdo data vidi, exportuje nebo maze?
+- Posilame data do noveho dodavatele nebo regionu?
+- Musime zmenit privacy dokumentaci, DPA, seznam subprocesoru nebo napovedu?
+- Potrebujeme audit log, pristupove role, retenci nebo offboarding?
+
+Pokud je odpoved "ano" nebo "nevim", karta nejde rovnou do "Ted". Nejdrive potrebuje kratke posouzeni. Nemusi to byt pravni roman. Casto staci deset radku: co se meni, koho se to tyka, jaka data tecou, jak se omezi pristup a co se musi dopsat do dokumentace.
+
+### 5. Roadmap review ma koncit zavrenymi rozhodnutimi
+
+Roadmap meeting bez zavrenych rozhodnuti je jen komentovana prohlidka nejistoty. Nastav si pravidlo: kazde review musi neco posunout do jednoho z peti stavu.
+
+Stavy:
+
+- `stavime`: ma vlastnika, vystup a overeni,
+- `overujeme`: chybi dukaz, bezi rozhovor/prototyp/audit,
+- `delime`: karta je moc velka, vzniknou mensi rozhodnuti,
+- `odkladame`: dulezite, ale ted ne,
+- `zavirame`: neodpovida strategii, nema dopad nebo by vytvorilo spatny datovy kompromis.
+
+Sablona zapisu z review:
+
+```text
+Datum:
+[YYYY-MM-DD]
+
+Rozhodnuti:
+[karta] -> [stav]
+
+Proc:
+[1 az 3 vety]
+
+Datova poznamka:
+[zadna zmena / co je potreba overit / co se nesmi slibit]
+
+Dalsi krok:
+[konkretni akce, vlastnik, termin]
+```
+
+Nejvetsi hodnota roadmap review casto neni v tom, co pridate. Je v tom, co konecne zavrete.
+
+### 6. 45min postup
+
+```text
+00-05 min: Vytvor tri horizonty.
+Ted, Dale, Zkoumame. Vse ostatni dej do archivu.
+
+05-12 min: Vyber deset nejviditelnejsich karet.
+U kazde prepis na problem, segment a navrhovany vystup.
+
+12-20 min: Dopln datovy dopad.
+Oznac nove exporty, integrace, role, logy, AI zpracovani a retenci.
+
+20-28 min: Vyhod rizikove sliby.
+Prepis verejne formulace z funkci na problemy a temata.
+
+28-35 min: Rozhodni pet stavu.
+Stavime, overujeme, delime, odkladame, zavirame.
+
+35-42 min: U karet v "Ted" dopln vlastnika a overeni.
+Bez vlastnika to neni plan. Bez overeni to neni produktova prace.
+
+42-45 min: Zapis zmeny pro tym.
+Jedna veta co se stavi, jedna co se overuje, jedna co se zavrelo.
+```
+
+### Checklist: roadmapa bez slibotechny
+
+- [ ] Roadmapa ma tri horizonty: Ted, Dale, Zkoumame.
+- [ ] Karty popisuji problem a vysledek, ne jen nazev funkce.
+- [ ] Kazda aktivni karta ma segment, vlastnika a meritko uspechu.
+- [ ] Datovy dopad je videt pred odhadem prace.
+- [ ] Verejna roadmapa slibuje temata opatrneji nez interni plan.
+- [ ] Obchod nepouziva roadmapu jako nahradu za jasne "ted ne".
+- [ ] Privacy zmeny maji predem zapsane dopady na dokumentaci, role a dodavatele.
+- [ ] Review konci rozhodnutim: stavime, overujeme, delime, odkladame nebo zavirame.
+- [ ] Archiv je povoleny a pouzivany, aby roadmapa nebyla muzeum napadu.
+- [ ] Zakaznikum se komunikuje vysledek a hranice, ne neurcite "brzy".
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -7112,3 +7311,4 @@ Tri otazky: co opravime, co overime, co zavreme.
 - 2026-08-01: Pridana prakticka priloha Status page a incident komunikace za 45 minut vcetne komponent, komunikacnich prahu, sablon updatu, planovane udrzby a checklistu.
 - 2026-08-01: Pridana prakticka priloha Obnova ze zalohy bez paniky za 45 minut vcetne karty zalohy, rezimu obnovy, runbooku, testu obnovy, komunikace a checklistu.
 - 2026-08-01: Pridana prakticka priloha Feedback loop bez datoveho skladu za 45 minut vcetne feedback karty, rozhodovacich kosu, minimalnich metrik, zavirani smycky se zakaznikem a checklistu.
+- 2026-08-01: Pridana prakticka priloha Roadmapa bez slibotechny za 45 minut vcetne tri horizontu, roadmap karty, privacy review, verejnych slibu a checklistu.
