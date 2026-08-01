@@ -5617,6 +5617,181 @@ datovy pristup "pro jistotu".
 
 ---
 
+## Demo sandbox bez zakaznickych dat za 45 minut
+
+Demo sandbox je prostredi, kde muze zakaznik pochopit produkt bez toho, aby ti hned predal produkcni data, pristupy do internich systemu nebo exporty, ktere budou za mesic smutne lezet v testovaci databazi. Pro maly SaaS je to jedna z nejlepsich privacy-first investic: zrychluje prodej, chrani duveru a zmensuje provozni riziko.
+
+Sandbox neni jen "testovaci ucet". Je to promysleny pribeh produktu s bezpecnymi daty. Ma ukazat realnou hodnotu, ale nesmi predstirat, ze fiktivni data jsou dukaz produkcni pripravenosti. Zakaznik musi videt, co produkt dela, jaka data by normalne potreboval a kde zacina skutecna implementace.
+
+**Codyho komentar:** Nejhorsi demo je takove, ktere potrebuje realny export zakaznika jen proto, aby vypadalo zajimave. Pokud produkt umi vysvetlit hodnotu, umi ji ukazat i na bezpecnem prikladu. Pokud ne, problem neni v datech.
+
+### 1. Vyber jeden demo scenar
+
+Sandbox nema ukazat vsechny funkce. Ma ukazat jeden typicky posun. Vyber scenar, ktery odpovida hlavni nabidce produktu.
+
+Priklady:
+
+| Produkt | Demo scenar | Co ma zakaznik pochopit |
+| --- | --- | --- |
+| CRM pro male studio | Nova poptavka, dalsi krok, follow-up po trech dnech. | Produkt brani ztracenym obchodnim prilezitostem. |
+| Monitoring | Endpoint spadne, prijde alert, vznikne incident poznamka. | Produkt zkracuje reakci a drzi historii. |
+| Znalostni portal | Support dotaz se zmeni na verejnou odpoved. | Opakovane odpovedi se meni na trvalou znalost. |
+| Analytika | Landing page vede k demo requestu a kvalifikovanemu leadu. | Mereni pomaha rozhodovat bez reklamniho profilu. |
+| Fakturacni workflow | Navrh faktury projde kontrolou a odeslanim. | Produkt zmensuje chyby v pravidelnem procesu. |
+
+Dobry scenar ma zacatek, konflikt a vysledek:
+
+```text
+Zacatek: prisel novy vstup nebo problem.
+Konflikt: bez produktu by se ztratil, zpozil nebo resil rucne.
+Vysledek: produkt ukaze dalsi krok, rozhodnuti nebo hotovy vystup.
+```
+
+Nesnaz se v sandboxu ukazat vsechno. Kdyz demo potrebuje petnact minut orientace v menu, neni to demo. Je to prohlidka skladu.
+
+### 2. Vytvor synteticka data jako produktovy material
+
+Synteticka data nejsou nahodny lorem ipsum. Maji pusobit realisticky, ale nesmi patrit skutecnemu zakaznikovi, cloveku ani firme. Cilem je ukazat tvar problemu, ne prenest realitu do testu.
+
+Pravidla:
+
+- Nepouzivej jmena realnych zakazniku, leadu, zamestnancu ani firem.
+- Nepouzivej skutecne emaily, telefony, adresy, ICO, faktury ani domeny klientu.
+- Nepouzivej exporty z produkce "jen anonymizovane", pokud anonymizaci neumite overit.
+- Dej datum realisticke rozdily: ruzne stavy, chyby, opozdene kroky, prazdne hodnoty.
+- Oznac demo data jako demo data primo v rozhrani.
+- Udrzuj dataset maly. Sandbox neni datovy sklad.
+
+Jednoducha struktura demo datasetu:
+
+| Kategorie | Priklad bezpecneho obsahu |
+| --- | --- |
+| Kontakty | `anna.demo@example.test`, `Petr z ukazkove agentury` |
+| Firmy | `Severni Studio`, `Atlas Demo s.r.o.` |
+| Zakazky | `Redesign poptavkove stranky`, `Audit formularu` |
+| Udalosti | `Poptavka prisla v pondeli`, `Follow-up ceka 3 dny` |
+| Chyby | `Chybi vlastnik`, `Nejasny dalsi krok` |
+
+Pouzij rezervovane nebo testovaci domeny tam, kde to jde. `example.test` nebo `example.com` je lepsi nez domyslet adresu, ktera nahodou patri skutecne firme. Mala vec, velky rozdil. Internet si pamatuje trapasy velmi ochotne.
+
+### 3. Oddel demo rezim od produkce
+
+Sandbox muze byt samostatne prostredi, demo tenant nebo predpripraveny ucet. Dulezite je, aby mel jasne hranice.
+
+Minimalni hranice:
+
+- Demo ucet nema pristup k produkcnim datum jinych zakazniku.
+- Demo akce neposilaji skutecne emaily mimo kontrolovane testovaci adresy.
+- Integrace jsou vypnute, mockovane nebo pripojene jen na testovaci endpointy.
+- Platby, faktury a notifikace maji testovaci rezim.
+- Logy ze sandboxu se nedrzi dele, nez je potreba.
+- Po kazdem demu lze sandbox resetovat do znameho stavu.
+
+Tabulka rizik:
+
+| Riziko | Opatreni |
+| --- | --- |
+| Demo omylem posle email realne osobe. | Povolit jen whitelist testovacich adres. |
+| Zakaznik nahraje realna data do sandboxu. | Viditelne upozorneni a blokace uploadu, pokud neni potreba. |
+| Obchodnik upravi demo data a rozbije dalsi demo. | Resetovatelny seed nebo snapshot. |
+| Sandbox ma stejna prava jako produkce. | Samostatne role a omezeny scope. |
+| Demo logy obsahuji citlive vstupy. | Kratka retence, maskovani a zakaz volnych textu v logach. |
+
+V rozhrani pouzij jednoduchy banner:
+
+```text
+Demo rezim: pracujete se syntetickymi daty. Nevkladejte realna osobni ani zakaznicka data.
+```
+
+Tohle neni alibi. Je to provozni brzda proti lidske rychlosti. Lide umi nahrat CSV do cehokoli, co ma tlacitko "Import".
+
+### 4. Ukaz datovou hranici primo v demu
+
+Privacy-first demo nemusi mit dvacetislajdovou vsuvku o GDPR. Staci ukazat datovou hranici ve chvili, kdy na ni zakaznik prirozene narazi.
+
+Priklady mikrotextu:
+
+- U importu: "Pro demo pouzijte jen synteticky soubor. Realny import resime az v pilotu s dohodnutym rozsahem a retenci."
+- U integrace: "V demu je integrace simulovana. Produkcni pripojeni vyzaduje schvaleni pristupu a vlastnika dat."
+- U reportu: "Report pracuje s agregovanymi demo udaji, ne s osobnimi profily."
+- U exportu: "Export ukazuje format dat, ktery lze pouzit pri ukonceni nebo migraci."
+
+Datovou hranici ukaz i obchodne:
+
+```text
+V demu nebudeme potrebovat vase produkcni data. Pokud se rozhodnete pro pilot,
+spolecne urcime minimalni datovy rozsah, pristupy, retenci a zpusob smazani.
+```
+
+Takova veta snizuje treneni u opatrnych firem. Zakaznik nemusi hned resit, zda ti muze poslat interni export. Nejdriv pochopi hodnotu. Pak se bavite o odpovednem provozu.
+
+### 5. Po demu uklid
+
+Sandbox je zdroj duvery jen tehdy, kdyz se udrzuje. Jinak se z nej rychle stane historicke muzeum rozbitych ukazek.
+
+Po kazdem demu udelej kratky uklid:
+
+- Resetuj demo data do vychoziho stavu.
+- Smaz pripadne vstupy, ktere zakaznik omylem vlozil.
+- Zkontroluj, ze nevznikly skutecne notifikace, pozvanky nebo exporty.
+- Zapis otazky zakaznika bez zbytecnych osobnich detailu.
+- Pokud se objevila nova namitka, preved ji do webu, FAQ, trust page nebo produktu.
+- Pokud demo vyzadovalo improvizaci, rozhodni, zda upravit sandbox nebo prodejni scenar.
+
+Sablona zapisu po demu:
+
+```text
+Zakaznik: [firma nebo segment]
+Scenar: [ktery demo tok jsme ukazali]
+Co pochopil rychle:
+Co bylo nejasne:
+Privacy/security dotazy:
+Data vlozena do sandboxu: zadna / smazano / vyzaduje kontrolu
+Dalsi krok:
+Uprava sandboxu:
+```
+
+Neukladej do zapisu cele citace, screenshoty se zakaznickymi daty ani technicke detaily, ktere nepotrebujes pro dalsi krok. Obchodni pamet ma byt uzitecna, ne hladova.
+
+### 6. 45min postup
+
+```text
+00-07 min: Vyber jeden demo scenar
+Kdo ma co pochopit a jaky vysledek uvidi.
+
+07-17 min: Navrhni synteticky dataset
+5 az 15 polozek, realisticke stavy, zadna realna identita.
+
+17-27 min: Zkontroluj hranice sandboxu
+Emaily, integrace, platby, logy, reset, prava.
+
+27-35 min: Dopln mikrotexty
+Kde jsou data demo, kde by zacinal pilot, co se nema vkladat.
+
+35-42 min: Projdi demo jako zakaznik
+Jedna cesta od problemu k vysledku bez vysvetlovaci mlhy.
+
+42-45 min: Pridej uklidovy checklist
+Co se po demu resetuje, maze a zapisuje.
+```
+
+### Checklist: demo sandbox
+
+- [ ] Sandbox ukazuje jeden hlavni scenar, ne cely produktovy katalog.
+- [ ] Demo data jsou synteticka a nejsou odvozena z produkcnich exportu.
+- [ ] Zadna demo hodnota neobsahuje realny email, telefon, adresu nebo klientsky identifikator.
+- [ ] Demo ucet nema pristup k produkcnim datum.
+- [ ] Emaily, notifikace, platby a integrace jsou v testovacim nebo mock rezimu.
+- [ ] V rozhrani je jasne videt, ze jde o demo data.
+- [ ] Uzivatel je varovan, aby nevkladal realna data.
+- [ ] Sandbox lze resetovat do znameho stavu.
+- [ ] Po demu se maze vse, co zakaznik omylem vlozil.
+- [ ] Zapis po demu obsahuje rozhodovaci poznatky, ne zbytecna osobni data.
+- [ ] Datova hranice pro budouci pilot je vysvetlena pred importem realnych dat.
+- [ ] Otazky z dema se vraci do produktu, webu, FAQ nebo trust page.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -5705,3 +5880,4 @@ datovy pristup "pro jistotu".
 - 2026-07-31: Pridana prakticka priloha Demo call bez slibu navic za 45 minut vcetne scenare discovery, cileneho dema, privacy otazek, zapisu po callu a checklistu.
 - 2026-07-31: Pridana prakticka priloha Follow-up po demu bez natlaku za 45 minut vcetne sablon emailu, prace s namitkami, datove minimalizace a checklistu.
 - 2026-08-01: Pridana prakticka priloha Pilotni nabidka bez rozsahove exploze za 60 minut vcetne uspechu pilotu, rozsahu, datove hranice, ceny, vyhodnoceni a checklistu.
+- 2026-08-01: Pridana prakticka priloha Demo sandbox bez zakaznickych dat za 45 minut vcetne syntetickych dat, hranic sandboxu, mikrotextu, uklidu po demu a checklistu.
