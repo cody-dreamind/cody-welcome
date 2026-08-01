@@ -7661,6 +7661,199 @@ Kazdy kriticky system musi mit cloveka, ktery za prava odpovida.
 
 ---
 
+## Transakcni emaily bez datove pasti za 45 minut
+
+Email je v SaaS porad hlavni provozni kanal. Potvrzuje registraci, obnovuje heslo, zve lidi do tymu, posila faktury, hlasi incidenty a nekdy zachrani onboarding, ktery se v aplikaci zasekl. Prave proto se s nim musi zachazet jako s casti produktu, ne jako s marketingovou odkladaci plochou.
+
+Privacy-first pravidlo je jednoduche: transakcni email ma dorucit konkretni provozni informaci cloveku, ktery ji ocekava. Nema byt nenapadny newsletter, sledovaci senzor ani sklad osobnich dat v hlavickach, odkazech a sablonach.
+
+Technicky zaklad dorucitelnosti stoji hlavne na autentizaci domeny. SPF popisuje RFC 7208: https://datatracker.ietf.org/doc/html/rfc7208. DKIM popisuje RFC 6376: https://datatracker.ietf.org/doc/html/rfc6376. DMARC popisuje RFC 7489: https://datatracker.ietf.org/doc/html/rfc7489. Google ve svych sender guidelines aktualne pozaduje autentizaci emailu a u bulk senderu mimo jine SPF, DKIM a DMARC: https://support.google.com/mail/answer/81126. Prakticky preklad: i maly SaaS si ma dat DNS a odesilani do poradku driv, nez zacne ladit krasu tlacitek v emailu.
+
+### 1. Rozdel emaily podle ucelu
+
+Nejdriv si udelej inventar. Vetsina malych produktu ma emaily promichane podle toho, kdo je napsal jako prvni. To pak vede k tomu, ze reset hesla vypada jako kampan a marketingovy email pouziva stejnou odesilaci identitu jako faktura. Bordel v mailingu je nudny problem, dokud neni prvni blacklist nebo pravni dotaz.
+
+Zakladni kategorie:
+
+| Typ emailu | Priklad | Hlavni pravidlo |
+| --- | --- | --- |
+| Autentizace | potvrzeni emailu, reset hesla, 2FA kod | Kratke, bez marketingu, vysoka priorita. |
+| Ucet a tym | pozvanka, zmena role, export dat | Jasny kontext, kdo akci vyvolal a co se stane. |
+| Billing | faktura, neuspesna platba, konec trialu | Presne castky, terminy, zadne mlzeni. |
+| Produktovy provoz | limit, import hotov, chyba integrace | Rict dopad a dalsi krok. |
+| Bezpecnost | nove prihlaseni, zmena hesla, incident | Minimalni detail, rychla cesta k reakci. |
+| Marketing | newsletter, edukacni serie, kampan | Oddeleny souhlas, odhlaseni, jiny rytmus. |
+
+U kazde sablony zapis jednu vetu ucelu:
+
+```text
+Tento email existuje proto, aby [prijemce] mohl [konkretni akce nebo rozhodnuti].
+```
+
+Kdyz se veta neda napsat, email nejspis nema existovat. Kdyz veta zni "abychom mu pripomneli, ze existujeme", neni to transakcni email. Je to marketing, jen s knirkem.
+
+### 2. Minimalizuj data v sablone i odkazech
+
+Email se casto preposila, indexuje ve firemnim mailboxu, konci v supportu a zustava v archivech dele, nez aplikacni logy. Proto do nej neposilej data, ktera nejsou potreba pro rozhodnuti.
+
+Dobry transakcni email obsahuje:
+
+- kdo akci vyvolal, pokud je to pro prijemce dulezite,
+- co se stalo,
+- ktery ucet nebo workspace je dotceny,
+- jaky je dalsi krok,
+- do kdy je potreba reagovat,
+- kam napsat, pokud je neco spatne.
+
+Co do emailu typicky nepatri:
+
+- cele zpravy zakazniku,
+- osobni data tretich osob bez jasneho duvodu,
+- tajne tokeny v citelnem textu,
+- dlouhe debug chyby,
+- kompletni exporty jako prilohy,
+- skryte tracking pixely u provoznich zprav.
+
+U odkazu pouzivej kratkodobe, jednou pouzitelne tokeny tam, kde jde o citlivou akci. Token nedavej do logu jako volny text a po pouziti ho zneplatni. U resetu hesla neposilej nove heslo emailem. Posli odkaz na bezpecny tok, nastav expiraci a po dokonceni posli kratke potvrzeni.
+
+**Priklad reset emailu:**
+
+```text
+Predmet: Obnova pristupu k uctu Cody
+
+Dostali jsme zadost o obnovu pristupu k uctu [email].
+
+Odkaz je platny 30 minut:
+[obnovit pristup]
+
+Pokud jste o obnovu nezadali, email ignorujte. Heslo zustane beze zmeny.
+```
+
+Je to nudne. To je presne cil. Reset hesla nema byt copywritersky festival.
+
+### 3. Odesilaci domena a autentizace jsou soucast produktu
+
+Pro maly SaaS nastav aspon:
+
+- samostatnou odesilaci subdomenu, napriklad `mail.example.com` nebo `notify.example.com`,
+- SPF zaznam pro autorizovane odesilatele,
+- DKIM podpisy pro odesilane zpravy,
+- DMARC politiku nejdriv v rezimu sledovani a potom prisneji podle vysledku,
+- oddelene streamy pro transakcni a marketingove emaily,
+- monitoring bounce, complaint a delivery problemu.
+
+Minimalni rollout DMARC:
+
+```text
+1. Zmapuj, kdo smi posilat za domenu.
+2. Nastav SPF a DKIM u kazdeho legitimniho odesilatele.
+3. Zapni DMARC s p=none a reporty do kontrolovane schranky nebo nastroje.
+4. Oprav legitimni odesilatele, kteri neprochazeji.
+5. Postupne prejdi na quarantine nebo reject, pokud vis, co delas.
+```
+
+DMARC neni magicke brneni. Pomaha prijemcum poznat, zda email opravdu souvisi s domenou v odesilateli. Kdyz ale posilas pres pet nastroju a nikdo nevi ktere, reporty ti ukazou hlavne mapu vlastniho chaosu. To je neprijemne, ale uzitecne.
+
+### 4. Marketing nepasuj do transakcnich zprav
+
+Transakcni email ma mit jasny provozni ucel. Muze obsahovat drobny kontext produktu, ale nesmi zneuzivat pozornost, kterou prijemce dava dulezite zprave.
+
+Ferove:
+
+- ve fakture kratce pripomenout, kde stahnout smluvni dokumenty,
+- v pozvance do tymu vysvetlit, kdo pozvanku poslal,
+- po dokonceni exportu dat pridat odkaz na nastaveni retence.
+
+Podezrele:
+
+- do resetu hesla pridat "mimochodem sleva jen dnes",
+- do incident emailu vlozit upsell,
+- poslat produktovy tip v emailu, ktery se tvari jako bezpecnostni upozorneni,
+- pouzit transakcni stream pro lidi, kteri se neodhlasili z marketingu.
+
+U marketingovych a hromadnych emailu res odhlaseni jako prvotridni funkci. RFC 8058 popisuje one-click mechanismus pro `List-Unsubscribe`: https://datatracker.ietf.org/doc/html/rfc8058. I kdyz neposilas velke objemy, prakticke pravidlo je stejne: odhlaseni ma byt snazsi nez stiznost. Skryte odhlaseni neni rustova strategie, je to prosba o reputacni facku.
+
+**Codyho komentar:** Kdyz nekdo otevre email kvuli fakture, neni to pozvanka k tomu, abychom mu prodali tri dalsi veci. Je to faktura. Internet prezije jednu mene chytrou kampan.
+
+### 5. Sablony pis pro stresove situace
+
+Transakcni emaily se casto ctou ve spechu. Clovek nevi, proc platba selhala, proc se nemuze prihlasit, proc ma noveho admina v uctu nebo jestli prisel phishing. Text proto musi byt kratky, konkretni a konzistentni.
+
+Sablona provozniho emailu:
+
+```text
+Predmet: [Co se stalo] v [produkt / workspace]
+
+Co se stalo:
+[jedna az dve vety]
+
+Co to znamena:
+[dopad pro prijemce]
+
+Co muzete udelat:
+[primarni akce]
+
+Bezpecnost a data:
+[kratka informace, pokud se tyka pristupu, dat nebo soukromi]
+
+Kontakt:
+[support email nebo status page]
+```
+
+Priklady mikrocopy:
+
+| Situace | Lepsi veta |
+| --- | --- |
+| Pozvanka do tymu | "Ondrej vas pozval do workspace Dreamind jako editor." |
+| Zmena role | "Vase role se zmenila z editor na viewer. Pokud to necekate, odpovezte na tento email." |
+| Export hotov | "Export je pripraveny ke stazeni 7 dni. Po teto dobe odkaz zneplatnime." |
+| Neuspesna platba | "Platba se nepodarila. Sluzba zustava aktivni do [datum]." |
+| Bezpecnostni upozorneni | "Zaznamenali jsme nove prihlaseni. Pokud jste to nebyli vy, obnovte heslo a kontaktujte podporu." |
+
+Kazdy email o datech ma rict, co se stane dal. "Vas export je hotov" je malo. "Export je hotov, odkaz je platny 7 dni a potom soubor smazeme" je uz provozni informace.
+
+### 6. 45min postup
+
+```text
+00-07 min: Sepis vsechny emaily.
+Registrace, reset hesla, pozvanky, billing, export, incidenty, produktove notifikace, marketing.
+
+07-14 min: Rozdel je do kategorii.
+Transakcni, bezpecnostni, billing, produktove, marketingove. Oznac sporne pripady.
+
+14-22 min: U tri nejdulezitejsich sablon sniz data.
+Odeber zbytecne osobni udaje, debug texty, tracking pixely a prilohy.
+
+22-30 min: Zkontroluj domenu.
+SPF, DKIM, DMARC, odesilaci subdomena, oddeleni transakcnich a marketingovych streamu.
+
+30-36 min: Prepis predmety a prvni odstavec.
+Kazdy email musi rict, co se stalo a co ma prijemce udelat.
+
+36-41 min: Nastav odhlaseni a preference.
+Marketing musi mit jasne odhlaseni. Produktove notifikace maji mit preference tam, kde to dava smysl.
+
+41-45 min: Zapis vlastnika a test.
+Kdo sablony udrzuje, jak se testuje doruceni a kdy se kontroluji bounce/complaint problemy.
+```
+
+### Checklist: transakcni emaily
+
+- [ ] Vsechny emaily maji kategorii a vlastnika.
+- [ ] Transakcni emaily nejsou pouzivane jako schovany marketing.
+- [ ] Reset hesla a citlive odkazy pouzivaji kratkodobe tokeny.
+- [ ] Emailove sablony neobsahuji zbytecne osobni udaje ani debug vypisy.
+- [ ] Provozni emaily nemaji tracking pixely bez jasneho duvodu.
+- [ ] Odesilaci domena ma nastavene SPF, DKIM a DMARC.
+- [ ] Transakcni a marketingove emaily maji oddeleny stream nebo aspon jasne oddelenou konfiguraci.
+- [ ] Marketingove emaily maji jednoduche odhlaseni.
+- [ ] Bounce a complaint signaly nekdo pravidelne kontroluje.
+- [ ] Bezpecnostni emaily jsou kratke, jasne a bez upsellu.
+- [ ] Exportni a datove emaily rikaji, kdy odkaz nebo soubor prestane platit.
+- [ ] Sablony se testuji pred zmenou v produkci.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -7709,6 +7902,11 @@ Kazdy kriticky system musi mit cloveka, ktery za prava odpovida.
 - Umami, FAQ: https://umami.is/docs/faq
 - Plausible Analytics, Data Policy: https://plausible.io/data-policy
 - Matomo, Use Matomo without consent or cookie banner: https://matomo.org/faq/new-to-piwik/how-do-i-use-matomo-analytics-without-consent-or-cookie-banner/
+- RFC 7208, Sender Policy Framework (SPF): https://datatracker.ietf.org/doc/html/rfc7208
+- RFC 6376, DomainKeys Identified Mail (DKIM): https://datatracker.ietf.org/doc/html/rfc6376
+- RFC 7489, Domain-based Message Authentication, Reporting, and Conformance (DMARC): https://datatracker.ietf.org/doc/html/rfc7489
+- RFC 8058, Signaling One-Click Functionality for List Email Headers: https://datatracker.ietf.org/doc/html/rfc8058
+- Google Help, Email sender guidelines: https://support.google.com/mail/answer/81126
 - Keep a Changelog, Version 1.1.0: https://keepachangelog.com/en/1.1.0/
 - Semantic Versioning 2.0.0: https://semver.org/
 
@@ -7759,3 +7957,4 @@ Kazdy kriticky system musi mit cloveka, ktery za prava odpovida.
 - 2026-08-01: Pridana prakticka priloha Roadmapa bez slibotechny za 45 minut vcetne tri horizontu, roadmap karty, privacy review, verejnych slibu a checklistu.
 - 2026-08-01: Pridana prakticka priloha Experimenty a A/B testy bez sledovaciho cirkusu za 60 minut vcetne experiment karty, minimalnich eventu, ochrannych metrik, retence dat a checklistu.
 - 2026-08-01: Pridana prakticka priloha Pristupova prava a offboarding bez zapomenutych uctu za 45 minut vcetne inventare pristupu, roli, onboarding/offboarding karet, revizniho rytmu a checklistu.
+- 2026-08-01: Pridana prakticka priloha Transakcni emaily bez datove pasti za 45 minut vcetne kategorizace sablon, minimalizace dat, SPF/DKIM/DMARC, odhlaseni a checklistu.
