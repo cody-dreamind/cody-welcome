@@ -6243,6 +6243,197 @@ Sablona pro stav, dukaz, data k uklidu a rozhodnuti dalsi faze.
 
 ---
 
+## Status page a incident komunikace za 45 minut
+
+Status page neni verejna nastenka hanby. Je to misto, kde zakaznik rychle zjisti, jestli problem vidi jen on, nebo jestli se neco deje na strane sluzby. U maleho SaaS muze byt prvni verze velmi jednoducha: jedna verejna nebo poloverejna stranka, kratke sablony komunikace, jasne urovne dopadu a pravidlo, kdo smi publikovat update.
+
+Privacy-first pohled je tady dulezity. Pri incidentu je tlak rict hodne veci rychle. Jenze verejna komunikace nesmi vyzradit osobni udaje, konkretni interni konfiguraci, bezpecnostni detaily ani jmena zakazniku bez souhlasu. Dobra status komunikace je presna, ale minimalni. Rika, co se deje, koho se to tyka, co delate a kdy prijde dalsi update.
+
+U incidentu s osobnimi udaji se verejna status page nerovna GDPR oznameni. To je samostatne posouzeni podle dopadu, rizika a povinnosti z clanku 33 a 34 GDPR. Status page muze informovat o dostupnosti nebo funkcnosti, ale pravni komunikaci musi ridit odpovedny clovek podle realnych faktu.
+
+**Codyho komentar:** Nejhorsi status page je ta, ktera mlci, dokud zakaznici sami neudelaji support frontu z vlastni paniky. Druha nejhorsi je ta, ktera v prvnim updatu vyzradi vic internich detailu nez rocni security dotaznik.
+
+### 1. Rozhodni, co bude na status page
+
+Pro prvni verzi nepotrebujes slozity portal. Potrebujes seznam komponent, ktere zakaznik realne vnima.
+
+Typicke komponenty:
+
+| Komponenta | Co znamena pro zakaznika |
+| --- | --- |
+| Verejny web | Landing page, dokumentace, blog, cenik. |
+| Aplikace | Prihlaseni, hlavni produktove rozhrani. |
+| API | Integrace a automatizace. |
+| Formular / lead tok | Demo request, kontakt, registrace. |
+| Emaily | Transakcni emaily, pozvanky, alerty. |
+| Billing | Platby, faktury, zmena planu. |
+| Export dat | Exporty, offboarding, datove pozadavky. |
+
+Nepublikuj komponenty, ktere by zbytecne prozrazovaly vnitrni architekturu. "Primarni databaze cluster eu-central-1" je pro verejnou stranku prilis konkretni. "Aplikace" nebo "Produktova databaze" obvykle staci. Zakaznik potrebuje dopad, ne mapu infrastruktury.
+
+Minimalni stavy:
+
+- `operational`: funguje normalne,
+- `degraded`: funguje pomaleji nebo castecne,
+- `partial_outage`: cast sluzby nejde,
+- `major_outage`: hlavni tok je nedostupny,
+- `maintenance`: planovana udrzba.
+
+U kazdeho stavu si interne napis, kdo ho muze nastavit a kdy se ma vratit na normal. Bez toho status page casem zatuhne v rezimu "degraded", protoze nikdo nechce rozhodnout, ze uz je hotovo.
+
+### 2. Nastav prahy pro komunikaci
+
+Ne kazda chyba patri na status page. Kazda chyba ale potrebuje rozhodnuti, jestli patri do interniho incidentu, support odpovedi nebo verejne komunikace.
+
+Prakticka pravidla:
+
+| Situace | Komunikace |
+| --- | --- |
+| Kratky vypadek bez zakaznickeho dopadu | Interni zapis, bez verejneho updatu. |
+| Hlavni web nebo aplikace nejde vice nez par minut | Status page update a interni incident. |
+| Formular neprijima poptavky | Status page nebo cilena komunikace podle dopadu. |
+| Transakcni emaily se opozduji | Status update, pokud brzdi prihlaseni, pozvanky nebo billing. |
+| Podezreni na dopad na osobni udaje | Interni eskalace a pravni/security posouzeni pred formulaci. |
+| Planovana udrzba | Oznameni predem, okno dopadu, po dokonceni uzavreni. |
+
+Prvni update ma jit rychle, ale nemusi mit vsechny odpovedi. Staci potvrdit dopad a dalsi update.
+
+Sablona prvniho updatu:
+
+```text
+Vysetrujeme problem s [komponenta].
+Dopad: [konkretni pozorovatelny dopad, napr. demo formular muze vracet chybu].
+Zacatek: [cas, pokud ho vime].
+Pracujeme na omezeni dopadu.
+Dalsi update: [cas].
+```
+
+Sablona prubezneho updatu:
+
+```text
+Stav: [vysetrujeme / omezeno / oprava nasazena / monitorujeme].
+Dopad: [co se zmenilo].
+Co delame: [jedna vec bez citlivych detailu].
+Dalsi update: [cas].
+```
+
+Sablona uzavreni:
+
+```text
+Problem s [komponenta] je vyresen.
+Dopad trval od [cas] do [cas].
+Zakladni pricina: [kratce, bez zbytecnych internich detailu].
+Preventivni krok: [co menime, pokud uz je rozhodnuto].
+```
+
+### 3. Oddel status update od postmortemu
+
+Status update je kratka provozni informace. Postmortem je pozdejsi vysvetleni, co se stalo, proc a co se meni. Nemichej je dohromady v prvnich minutach incidentu.
+
+Status update odpovida:
+
+- co je rozbite,
+- koho se to tyka,
+- jestli existuje workaround,
+- kdy bude dalsi zprava.
+
+Postmortem odpovida:
+
+- jaka byla pricina,
+- proc nebyla zachycena drive,
+- co snizilo dopad,
+- co chybelo,
+- jaka opatreni maji vlastnika a termin.
+
+U maleho SaaS staci verejny postmortem pro vetsi incidenty, ktere ovlivnily dostupnost, data, platby nebo duveru. U mensich problemu staci interni zaznam a cilena odpoved zakaznikum, pokud se jich to dotklo.
+
+Sablona kratkeho verejneho postmortemu:
+
+```text
+Shrnuti:
+[jedna az dve vety]
+
+Casova osa:
+[detekce, mitigace, obnova]
+
+Dopad:
+[komponenty, zakaznicke akce, cas]
+
+Pricina:
+[pravdivy, ale primerene obecny popis]
+
+Co menime:
+[1 az 3 opatreni]
+
+Co zustava bez dopadu:
+[napr. "Nenasli jsme dopad na zakaznicka data", jen pokud je to overene]
+```
+
+Pozor na posledni radek. Nepsat "data jsou v bezpeci", pokud realne jen "zatim nevime o dopadu". Rozdil mezi overenym faktem a aktualnim stavem vysetrovani je v incidentu dost podstatny detail. Takovy maly detail, co umi rozhodnout, jestli vypadate profesionalne, nebo jako kreativni oddeleni pozaru.
+
+### 4. Planovana udrzba bez prekvapeni
+
+Planovana udrzba je taky komunikace duvery. Zakaznik nema zjistit z chybove hlasky, ze prave menis databazi.
+
+Pred udrzbou napis:
+
+- kdy zacne,
+- jak dlouho muze trvat,
+- ktere casti budou dotcene,
+- zda bude produkt nedostupny nebo jen pomalejsi,
+- co zakaznik nemusi delat,
+- kam se ozvat pri problemu.
+
+Sablona:
+
+```text
+Planovana udrzba probehne [datum, cas, casove pasmo].
+Dopad: [komponenta] muze byt kratce nedostupna.
+Ocekavane okno: [delka].
+Duvod: [kratce, napr. databazova udrzba / infrastruktura / bezpecnostni aktualizace].
+Po dokonceni pridame update na status page.
+```
+
+U privacy-first produktu nepouzivej udrzbu jako vymluvu pro pridani noveho dodavatele bez review. Kdyz se meni datovy tok, patri to i do dodavatelskeho prehledu, privacy dokumentu nebo interni datove mapy podle dopadu.
+
+### 5. 45min postup
+
+```text
+00-05 min: Vyber komponenty.
+Verejny web, aplikace, API, formulare, emaily, billing, export.
+
+05-15 min: Napis komunikacni prahy.
+Kdy staci interni zapis, kdy status update, kdy cilena zakaznicka zprava.
+
+15-25 min: Priprav tri sablony.
+Prvni update, prubezny update, uzavreni.
+
+25-35 min: Priprav planovanou udrzbu.
+Sablona s casem, dopadem, oknem a kontaktem.
+
+35-45 min: Zkontroluj privacy a security hranice.
+Co nikdy nepsat verejne, kdo schvaluje breach komunikaci, kde se uklada timeline.
+```
+
+Vysledkem ma byt dokument, ktery lze pouzit pri prvnim realnem problemu bez hledani slov. Incident je spatny cas na literarni improvizaci. Kratka sablona je v tu chvili laskavost k zakaznikum i vlastnimu nervovemu systemu.
+
+### Checklist: status page a incident komunikace
+
+- [ ] Status page obsahuje komponenty podle zakaznickeho dopadu, ne podle vnitrni architektury.
+- [ ] Existuji jasne stavy: operational, degraded, partial outage, major outage, maintenance.
+- [ ] Je napsane, kdo muze publikovat update.
+- [ ] Existuji prahy pro interni zapis, status update a cilene informovani zakazniku.
+- [ ] Prvni update potvrzuje dopad a cas dalsi zpravy.
+- [ ] Prubezne updaty rozlisuji fakta, odhady a dalsi kroky.
+- [ ] Uzavreni incidentu rika cas dopadu a overenou pricinu, pokud je znama.
+- [ ] Verejna komunikace neprozrazuje citlive interni detaily.
+- [ ] U osobnich udaju existuje oddelene GDPR/security posouzeni.
+- [ ] Planovana udrzba se oznamuje predem s casem, dopadem a kontaktem.
+- [ ] Postmortem ma vlastnika opatreni a termin.
+- [ ] Timeline incidentu se uklada interni, ale bez zbytecneho kopirovani osobnich dat.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -6334,3 +6525,4 @@ Sablona pro stav, dukaz, data k uklidu a rozhodnuti dalsi faze.
 - 2026-08-01: Pridana prakticka priloha Demo sandbox bez zakaznickych dat za 45 minut vcetne syntetickych dat, hranic sandboxu, mikrotextu, uklidu po demu a checklistu.
 - 2026-08-01: Pridana prakticka priloha Kvalifikace leadu bez CRM bordelu za 45 minut vcetne rozhodovacich poli, jednoducheho skore, sablon reakci, tydenniho uklidu pipeline a checklistu.
 - 2026-08-01: Pridana prakticka priloha Predavka z obchodu do onboardingu bez ztraty kontextu za 45 minut vcetne handoff karty, datoveho kontraktu, onboardingoveho emailu, vyhodnoceni milniku a checklistu.
+- 2026-08-01: Pridana prakticka priloha Status page a incident komunikace za 45 minut vcetne komponent, komunikacnich prahu, sablon updatu, planovane udrzby a checklistu.
