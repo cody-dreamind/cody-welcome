@@ -7424,6 +7424,243 @@ Kdy experiment konci, kdo ho vyhodnoti a kam se zapise rozhodnuti.
 
 ---
 
+## Prakticka priloha: Pristupova prava a offboarding bez zapomenutych uctu za 45 minut
+
+Pristupy jsou nudne jen do chvile, nez byvaly dodavatel porad vidi produkcni administraci, obchodnik ma export vsech leadu v osobnim nastroji nebo sdilene heslo zije dele nez pulka roadmapy. U maleho SaaS tymu se pristupova prava casto resi az ve stresu. Privacy-first provoz to dela obracene: nejdriv jasna pravidla, potom pohodli.
+
+GDPR v clanku 5 pracuje mimo jine s minimalizaci dat, omezenim ulozeni, integritou a duvernosti: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng. OWASP radi broken access control mezi klicova rizika webovych aplikaci: https://owasp.org/Top10/2025/A01_2025-Broken_Access_Control/. ENISA ve sve prirucce pro male a stredni firmy doporucuje zakladni kyberbezpecnost stavet na praktickych organizacnich opatrenich, ne jen na technickych nastrojich: https://www.enisa.europa.eu/publications/cybersecurity-guide-for-smes.
+
+Prakticky preklad: kdo nepotrebuje data k praci, nema je videt. Kdo uz pro tym nepracuje, nema pristup vubec. Kdo potrebuje docasny pristup, ma mit konec napsany predem.
+
+### 1. Udelej inventar pristupu, ne lov duchu v nastrojich
+
+Prvni krok neni kupovat dalsi identity platformu. Prvni krok je zjistit, kde vlastne existuji ucty.
+
+Zacni tabulkou:
+
+| System | Kdo ma pristup | Role | Proc | Vlastnik | Kontrola |
+| --- | --- | --- | --- | --- | --- |
+| Hosting | Ondrej, DevOps dodavatel | admin, deploy | provoz a incidenty | CTO | mesicne |
+| Databaze | Backend lead | read/write | migrace a incidenty | CTO | mesicne |
+| Analytika | marketing, founder | viewer | kampane a konverze | marketing | kvartalne |
+| Emailing | support | operator | odpovedi zakaznikum | support lead | mesicne |
+| Billing | finance, founder | admin, viewer | faktury a platby | finance | mesicne |
+
+U kazdeho radku chces vedet:
+
+- co je to za system,
+- jaka data v nem jsou,
+- kdo ma pristup,
+- jestli je pristup osobni nebo sdileny,
+- jaka role je prirazena,
+- proc pristup existuje,
+- kdo ho schvaluje,
+- kdy se naposledy kontroloval.
+
+Sdilene ucty oznac jako incident cekajici na vhodnou chvili. Nekdy je docasne nevyhodis hned, protoze nastroj nema lepsi model prav. Ale musis vedet, kde jsou, kdo zna heslo a kdy je nahradis.
+
+**Codyho komentar:** "Mame to v heslovniku" neni odpoved na otazku, kdo muze co udelat. Heslovnik je trezor. Prava jsou provozni rozhodnuti. Kdyz se tyhle dve veci pletou, nekdo driv nebo pozdeji dostane vetsi kladivo, nez potrebuje.
+
+### 2. Role pojmenuj podle prace, ne podle ega
+
+Role `admin` je pohodlna, ale nebezpecne navykova. Pro maly SaaS staci jednoducha sada:
+
+| Role | Kdy ji pouzit | Co typicky nesmi |
+| --- | --- | --- |
+| Owner | vlastnik systemu, fakturace, kriticke nastaveni | byt sdilena role pro beznou praci |
+| Admin | sprava uzivatelu, konfigurace, incidenty | denni rutinni pouziti bez duvodu |
+| Editor | uprava obsahu, kampani, sablon | menit prava a exportovat vse |
+| Operator | vyrizeni supportu nebo obchodniho toku | menit konfiguraci systemu |
+| Viewer | kontrola, reporting, audit | upravy, exporty, mazani |
+| Temporary | kratka pomoc dodavatele | zustat bez data expirace |
+
+Pravidlo je jednoduche: clovek ma mit nejmensi roli, se kterou dokonci praci bez obchazeni systemu. Kdyz nekdo potrebuje vyssi roli jednou za mesic, nedelej z ni trvale nastaveni. Udelej docasne zvyseni s duvodem a koncem.
+
+Priklad zadosti:
+
+```text
+Kdo:
+Jana, marketing
+
+System:
+Analytika webu
+
+Pozadovana role:
+Editor na 7 dni
+
+Duvod:
+Nastaveni cilu pro novou landing page kampan.
+
+Konec:
+2026-08-08, potom zpet na Viewer.
+
+Schvalil:
+Owner analytiky
+```
+
+Tahle karta muze zit v issue, interni poznamce nebo ticketu. Dulezite je, aby existovala mimo chat, ktery za tyden nikdo nenajde.
+
+### 3. Onboarding pristupu delaj jako checklist
+
+Novy clovek nema dostat "vsechno, at muze zacit". Ma dostat to, co potrebuje pro prvni tyden. Zbytek se prida podle realne prace.
+
+Minimalni onboarding karta:
+
+```text
+Clovek:
+[jmeno / role]
+
+Start:
+[datum]
+
+Prvni odpovednost:
+[co ma realne delat]
+
+Nutne systemy:
+- [system] / [role] / [duvod]
+- [system] / [role] / [duvod]
+
+Zakazane zkratky:
+- zadne sdilene produkcni prihlaseni
+- zadne exporty zakaznickych dat do osobnich nastroju
+- zadne kopirovani produkcnich dat do lokalniho vyvoje
+
+Kontrola po 14 dnech:
+[kdo zkontroluje, jestli prava sedi]
+```
+
+Dobry onboarding pristupu ma tri vystupy:
+
+- clovek vi, kde pracovat,
+- vlastnik systemu vi, proc pristup existuje,
+- tym vi, kdy se pristup znovu zkontroluje.
+
+U dodavatelu pridej jeste rozsah prace a konec spoluprace. Dodavatel bez data revize je bud trvaly clen tymu, nebo budouci prekvapeni. Vyber si, co z toho je pravda, a podle toho nastav prava.
+
+### 4. Offboarding musi byt rychlejsi nez rozluckovy call
+
+Offboarding neni emocionalni udalost. Je to provozni tok. Ma byt kratky, spustitelny a hotovy ve stejny den, kdy konci pristupova potreba.
+
+Offboarding karta:
+
+```text
+Clovek / dodavatel:
+[jmeno]
+
+Konec prace:
+[datum a cas]
+
+Systemy k odebrani:
+- hosting
+- repozitare
+- analytika
+- CRM / lead evidence
+- email / support
+- billing
+- cloud storage
+- monitoring
+- heslovnik
+- komunikacni nastroje
+
+Data k predani:
+- rozpracovane ukoly
+- dokumentace
+- otevrene incidenty
+- zakaznicke kontexty
+
+Tajemstvi k rotaci:
+- API klice, pokud byly sdilene nebo pristupne
+- deploy tokeny
+- webhook secrety
+- zalozni pristupy
+
+Potvrzeni:
+[vlastnik] zkontroloval audit log / seznam uzivatelu.
+```
+
+Nejdulezitejsi pravidlo: odebrani pristupu nenechavej jen na cloveku, ktery odchazi. Je to odpovednost vlastnika systemu. Kdyz clovek odchazi v dobrem, je to porad stejne pravidlo. Bezpecnost nema byt zavisla na nalade posledniho dne.
+
+### 5. Pravidelna revize prav ma mit rytmus
+
+Pristupy se nekazi naraz. Kazi se postupne. Jeden docasny admin, jeden zapomenuty dodavatel, jeden export do nastroje "jen na analyzu" a najednou mas datovou stopu, kterou nikdo neumi obhajit.
+
+Navrh rytmu pro maly SaaS:
+
+- tydne: zkontroluj nove a docasne pristupy,
+- mesicne: projdi produkcni systemy, billing, hosting, databazi, podporu a analytiku,
+- kvartalne: projdi vsechny dodavatele a integrace,
+- po incidentu: zkontroluj, jestli pristupy nezvetsily dopad,
+- po zmene role: sniz prava driv, nez clovek zacne delat novou praci.
+
+Mesicni revize muze byt kratka:
+
+```text
+System:
+[nazev]
+
+Zmeny od minule:
+[nove ucty / odebrane ucty / role]
+
+Docasne pristupy:
+[kdo, proc, konec]
+
+Prebytecna prava:
+[co snizit]
+
+Sdilene ucty:
+[existuji? plan nahrady]
+
+Exporty:
+[kdo muze exportovat data a proc]
+
+Rozhodnuti:
+[tri konkretni upravy]
+```
+
+U privacy-first SaaS je zvlast dulezite hlidat exporty. Viewer role, ktera umi jednim klikem stahnout vsechny zakazniky, neni jen viewer. Je to exportni role v prevleku.
+
+### 6. 45min postup
+
+```text
+00-08 min: Vyber deset nejdulezitejsich systemu.
+Hosting, repozitare, databaze, billing, support, analytika, email, storage, monitoring, heslovnik.
+
+08-18 min: Sepis lidi a role.
+U kazdeho systemu zapis, kdo ma pristup a proc.
+
+18-25 min: Oznac rizika.
+Sdilene ucty, trvali admini, byvali dodavatele, exportni prava, chybejici 2FA.
+
+25-32 min: Sniz jednu zbytecnou roli.
+Vyber opravu, kterou muzes udelat hned bez velke migrace.
+
+32-38 min: Vytvor onboarding a offboarding kartu.
+Jedna sablona pro nove pristupy, jedna pro odebrani.
+
+38-43 min: Nastav revizni rytmus.
+Kdo a kdy kontroluje docasne, produkcni a dodavatelske pristupy.
+
+43-45 min: Zapis vlastnika.
+Kazdy kriticky system musi mit cloveka, ktery za prava odpovida.
+```
+
+### Checklist: pristupova prava a offboarding
+
+- [ ] Existuje seznam kritickych systemu a vlastniku.
+- [ ] U kazdeho pristupu vime, kdo ho ma, proc a v jake roli.
+- [ ] Sdilene ucty jsou oznacene a maji plan nahrady.
+- [ ] Admin role nejsou pouzivane pro beznou denni praci.
+- [ ] Docasne pristupy maji datum konce.
+- [ ] Dodavatele maji pristup jen k tomu, co odpovida rozsahu prace.
+- [ ] Exportni prava jsou vedena jako samostatne riziko.
+- [ ] Onboarding pristupu zacina minimalnim rozsahem pro prvni praci.
+- [ ] Offboarding karta pokryva hosting, repo, data, billing, support, analytiku i heslovnik.
+- [ ] Po odchodu se podle potreby rotuji sdilena tajemstvi a tokeny.
+- [ ] Pristupy se kontroluji pravidelne, ne az po problemu.
+- [ ] Vetsi zmeny prav se zapisuji jako provozni rozhodnuti.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -7521,3 +7758,4 @@ Kdy experiment konci, kdo ho vyhodnoti a kam se zapise rozhodnuti.
 - 2026-08-01: Pridana prakticka priloha Feedback loop bez datoveho skladu za 45 minut vcetne feedback karty, rozhodovacich kosu, minimalnich metrik, zavirani smycky se zakaznikem a checklistu.
 - 2026-08-01: Pridana prakticka priloha Roadmapa bez slibotechny za 45 minut vcetne tri horizontu, roadmap karty, privacy review, verejnych slibu a checklistu.
 - 2026-08-01: Pridana prakticka priloha Experimenty a A/B testy bez sledovaciho cirkusu za 60 minut vcetne experiment karty, minimalnich eventu, ochrannych metrik, retence dat a checklistu.
+- 2026-08-01: Pridana prakticka priloha Pristupova prava a offboarding bez zapomenutych uctu za 45 minut vcetne inventare pristupu, roli, onboarding/offboarding karet, revizniho rytmu a checklistu.
