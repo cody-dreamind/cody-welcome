@@ -7216,6 +7216,214 @@ Jedna veta co se stavi, jedna co se overuje, jedna co se zavrelo.
 
 ---
 
+## Prakticka priloha: Experimenty a A/B testy bez sledovaciho cirkusu za 60 minut
+
+Experiment v SaaS nema byt omluva pro to, ze zacnes sbirat vsechno o vsech. Ma byt kratke, predem popsane overeni jedne nejistoty. Dobre navrzeny experiment umi zodpovedet produktovou nebo marketingovou otazku bez toho, aby z uzivatelu delal laboratorni mys s identifikatorem pres pul internetu.
+
+Privacy-first experiment ma ctyri pravidla:
+
+- meri jen to, co je potreba pro konkretni rozhodnuti,
+- neprekresluje UX do manipulace,
+- drzi data co nejbliz produktu a tymu,
+- konci rozhodnutim, ne dalsim dashboardem.
+
+EDPB popisuje deceptive design patterns jako rozhrani, ktere lidi vedou k nechtenym, nevedomym nebo pro ne skodlivym rozhodnutim: https://www.edpb.europa.eu/documents/guideline/guidelines-032022-on-deceptive-design-patterns-in-social-media-platform_en. Evropska komise podobne resi nekale obchodni praktiky a transparentnost vuci spotrebitelum: https://commission.europa.eu/law/law-topic/consumer-protection-law/unfair-commercial-practices-and-price-indication/unfair-commercial-practices-directive_en. Prakticky preklad pro SaaS: rustovy experiment nesmi byt hezky pojmenovany natlak.
+
+### 1. Zacni rozhodnutim, ne variantou tlacitka
+
+Spatna otazka:
+
+```text
+Zvedne zelene CTA konverzi?
+```
+
+Lepsi otazka:
+
+```text
+Rozumi navstevnici z B2B agentur rychleji tomu, ze nabizime audit datove stopy webu, kdyz hlavni CTA rika "Ziskat audit webu" misto "Domluvit konzultaci"?
+```
+
+Rozdil je zasadni. Prvni otazka meri barvu. Druha meri srozumitelnost nabidky pro konkretni segment. Barva muze nahodne vyhrat a nic te nenaucit. Srozumitelnost nabidky ti rekne, jestli mas problem v copy, v pozicovani nebo ve forme dalsiho kroku.
+
+Pred experimentem vypln jednu kartu:
+
+```text
+Nazev experimentu:
+[jedna veta]
+
+Rozhodnuti po experimentu:
+Kdyz [metrika] bude [hranice], udelame [konkretni zmena].
+Kdyz ne, udelame [navrat / jina varianta / dalsi rozhovor].
+
+Segment:
+[komu se experiment ukazuje]
+
+Hypoteza:
+Verime, ze [zmena] pomuze [segmentu] udelat [akce], protoze [duvod].
+
+Primarni metrika:
+[jedna metrika]
+
+Ochranna metrika:
+[co nesmi zhorsit duveru, kvalitu leadu, odhlaseni, support]
+
+Data:
+[jake eventy nebo zaznamy sbirame]
+
+Retence:
+[kdy agregovana a surova data mazeme]
+
+Stop podminka:
+[kdy experiment zastavime drive]
+```
+
+Pokud kartu neumite vyplnit, experiment jeste neni pripraveny. To neni byrokracie. Je to ochrana pred tim, aby se z tymu nestali lide, kteri kazdy patek posouvaji tlacitka a rikaji tomu strategie.
+
+### 2. Mer malo, ale presne
+
+Pro maly SaaS vetsinou staci ctyri typy experimentu:
+
+| Typ experimentu | Co overuje | Minimalni data |
+| --- | --- | --- |
+| Nabidka | Jestli lide chapou hodnotu | navsteva stranky, klik na CTA, kvalita dotazu |
+| Onboarding | Jestli uzivatel dojde k prvni hodnote | start registrace, dokonceni klicove akce, chyba |
+| Pricing | Jestli balicky odpovidaji rozhodovani zakaznika | zobrazeni ceniku, klik na plan, dotaz na obchod |
+| Aktivace | Jestli nova funkce meni chovani | pouziti funkce, navrat do toku, support signal |
+
+Eventy pojmenuj podle udalosti, ne podle interniho HTML:
+
+```text
+pricing_viewed
+demo_requested
+signup_started
+workspace_created
+first_report_exported
+onboarding_step_failed
+```
+
+Vyhni se eventum typu:
+
+```text
+button_blue_clicked
+hero_variant_b_seen
+user_hesitated_7_seconds
+scroll_depth_87
+```
+
+Nekdy je technicky detail uzitecny, ale casto jen vyrabi dojem presnosti. Experiment ma vest k rozhodnuti. Nepotrebujes vedet kazde mikrohnuti kurzoru, abys poznal, ze lide nerozumi ceniku.
+
+### 3. Randomizace bez osobni slozky
+
+A/B test casto potrebuje konzistentne ukazat stejnemu navstevnikovi stejnou variantu. To ale neznamena, ze musis stavet trvaly profil.
+
+Privacy-first varianty:
+
+- serverova volba podle anonymni session, pokud uz session existuje pro produktovy duvod,
+- kratkodoba cookie jen pro experiment, pokud ji umis jasne popsat a smazat,
+- rozdeleni podle kampanove URL pro maly traffic,
+- casove okenko pro jednoduche marketingove testy, pokud nehrozi zkresleni,
+- rucni porovnani dvou landing pages pro prvni signal.
+
+Priklad bezpecnejsiho nastaveni:
+
+```text
+Experiment:
+CTA na landing page
+
+Identifikator:
+Nahodna kratkodoba hodnota ulozena jen pro tento experiment
+
+Retence:
+14 dni pro surove udalosti, potom jen agregace podle varianty
+
+Zakazane:
+Propojovani s reklamnim profilem, export do socialnich siti, sdileni emailu pred odeslanim formulare
+```
+
+Pokud experiment potrebuje osobni data, zeptej se proc. Casto zjistis, ze nepotrebujes identitu uzivatele, ale jen pocet dokoncenych akci podle varianty.
+
+### 4. Ochranna metrika chrani pred hloupym vitezstvim
+
+Nejjednodussi experimenty vyhravaji tim, ze zvysi jednu metriku a rozbiji neco dulezitejsiho. Napriklad agresivnejsi pop-up zvysi pocet emailu, ale zhorsi kvalitu leadu, zvysi odhlaseni a ubere duveru. To neni vyhra. To je pujcka s vysokym urokem.
+
+Ke kazdemu experimentu pridej ochrannou metriku:
+
+- CTA test: nesmi klesnout kvalita leadu podle obchodniho zapisu.
+- Pricing test: nesmi narust pocet dotazu "co vlastne dostanu?".
+- Onboarding test: nesmi narust support k prvnimu nastaveni.
+- Email test: nesmi narust odhlaseni nebo odpovedi typu "proc mi to posilate?".
+- Trial test: nesmi snizit pocet uzivatelu, kteri realne aktivuji hlavni funkci.
+
+**Codyho komentar:** Kdyz varianta vyhraje jen proto, ze lidi vic zmati, neni to optimalizace. Je to dluh v duvere. A ten se v B2B vetsinou splati v nejhorsi mozne chvili: pri security dotazniku, obnoveni smlouvy nebo prvnim incidentu.
+
+### 5. Nepouzivej experimenty na veci, kde mas proste mluvit s lidmi
+
+Maly traffic neni ostuda. Ostuda je delat z peti navstevniku statisticky zavod. Pokud mas malo dat, pouzij experiment jako strukturovany rozhovor nebo concierge test.
+
+Misto A/B testu udelej:
+
+- pet rozhovoru s lidmi, kteri opustili onboarding,
+- review nahravky demo callu a dotazu na pricing,
+- rucni audit deseti poptavek,
+- test dvou textu v follow-up emailech,
+- dvoustrankovy prototyp poslanim primym odkazem trem zakaznikum.
+
+Priklad:
+
+```text
+Nejistota:
+Nevi zakaznici, jestli potrebujeme pristup k jejich produkcnim datum.
+
+Experiment bez velke analytiky:
+Na trust page pridame kratky blok "Co nepotrebujeme videt" a behem peti demo callu sledujeme, jestli se tato obava objevi mene casto.
+
+Rozhodnuti:
+Kdyz se otazka opakuje dal, doplnime samostatnou dokumentaci k pristupum a ukazku demo sandboxu.
+```
+
+Tohle neni vedecky dokonale. Je to ale dost dobre pro produktove rozhodnuti v malem tymu.
+
+### 6. 60min postup
+
+```text
+00-08 min: Vyber jednu nejistotu.
+Napr. "Lide nerozumi balicku Team" nebo "Registrace pada na prvnim importu".
+
+08-15 min: Napis rozhodnuti predem.
+Co presne zmenis, kdyz experiment vyjde? Co udelas, kdyz nevyjde?
+
+15-25 min: Vyber primarni a ochrannou metriku.
+Jedna metrika pro vyhru, jedna pro duveru nebo kvalitu.
+
+25-35 min: Navrhni minimalni data.
+Seznam eventu, retenci, kde data lezi a kdo k nim ma pristup.
+
+35-45 min: Priprav variantu.
+Jen jedna zmena najednou: text, poradi kroku, cena, vysvetleni, CTA.
+
+45-52 min: Zkontroluj UX proti manipulaci.
+Zadny skryty odmitaci krok, zadne predskrtle souhlasy, zadny natlakovy countdown bez reality.
+
+52-60 min: Zapis start a stop podminku.
+Kdy experiment konci, kdo ho vyhodnoti a kam se zapise rozhodnuti.
+```
+
+### Checklist: experiment bez datoveho hladu
+
+- [ ] Experiment resi jednu jasnou nejistotu.
+- [ ] Pred startem existuje rozhodnuti pro vyhru i pro prohru.
+- [ ] Primarni metrika neni vanity cislo bez obchodniho dopadu.
+- [ ] Existuje ochranna metrika pro duveru, kvalitu nebo support.
+- [ ] Sbirame jen eventy nutne pro vyhodnoceni.
+- [ ] Identifikator experimentu neni trvaly profil uzivatele.
+- [ ] Data zustavaji v evropskem provozu nebo v predem schvalenem dodavateli.
+- [ ] Surova data maji kratkou retenci a po vyhodnoceni zustava jen agregace.
+- [ ] Varianta nepouziva natlakove, klamave nebo skryte volby.
+- [ ] Experiment nezacina, pokud by vyzadoval novy neovereny tracker.
+- [ ] Vysledek konci zapisem rozhodnuti, ne jen screenshotem grafu.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -7312,3 +7520,4 @@ Jedna veta co se stavi, jedna co se overuje, jedna co se zavrelo.
 - 2026-08-01: Pridana prakticka priloha Obnova ze zalohy bez paniky za 45 minut vcetne karty zalohy, rezimu obnovy, runbooku, testu obnovy, komunikace a checklistu.
 - 2026-08-01: Pridana prakticka priloha Feedback loop bez datoveho skladu za 45 minut vcetne feedback karty, rozhodovacich kosu, minimalnich metrik, zavirani smycky se zakaznikem a checklistu.
 - 2026-08-01: Pridana prakticka priloha Roadmapa bez slibotechny za 45 minut vcetne tri horizontu, roadmap karty, privacy review, verejnych slibu a checklistu.
+- 2026-08-01: Pridana prakticka priloha Experimenty a A/B testy bez sledovaciho cirkusu za 60 minut vcetne experiment karty, minimalnich eventu, ochrannych metrik, retence dat a checklistu.
