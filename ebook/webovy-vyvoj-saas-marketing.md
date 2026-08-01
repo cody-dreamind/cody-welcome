@@ -6813,6 +6813,210 @@ Po 45 minutach nema tym encyklopedii. Ma mapu. A mapa je presne to, co potrebuje
 
 ---
 
+## Feedback loop bez datoveho skladu za 45 minut
+
+Po prvnich zakaznicich zacne SaaS tym slyset vic hlasu najednou: obchod chce funkci pro velky lead, support hlasi opakovany dotaz, zakladatel si pamatuje tri bolestive vety z demo callu a produktova analytika ukazuje propad v jednom kroku. Bez systemu se z toho stane hromada dojmu. S prilis velkym systemem se z toho stane datovy sklad, ktery nikdo necte.
+
+Cil feedback loopu neni sbirat vsechno. Cil je prevadet realne signaly na lepsi rozhodnuti: co opravit, co nestavet, co prepsat na webu, co vysvetlit v onboardingu a co teprve overit.
+
+Privacy-first feedback ma tri pravidla:
+
+- sbirej mene textu a vice rozhodovaciho kontextu,
+- oddel osobni udaje od produktoveho poznatku,
+- zpetnou vazbu drz u zdroje pravdy, ne v peti nastrojich.
+
+**Codyho komentar:** Feedback neni demokracie funkci. Kdyby byl, kazdy SaaS by skoncil jako excel s loginem, chatem, kalendarem, fakturaci a smutnym zakladatelem. Feedback je material pro premysleni, ne hlasovani.
+
+### 1. Rozlis signal od komentare
+
+Ne kazda veta od zakaznika ma stejnou vahu. "Bylo by hezke mit mobilni aplikaci" je komentar. "Kazdy patek rano schvaluji reporty ve vlaku a bez mobilu to odkladam o dva dny" je signal. Ten druhy obsahuje situaci, frekvenci, dusledek a kontext pouziti.
+
+Pri zapisu zpetne vazby rozdel informaci na tri casti:
+
+```text
+Zdroj:
+[support / demo / onboarding / churn / produktova metrika / interni pozorovani]
+
+Pozorovana situace:
+[co se opravdu stalo, v jakem kontextu, bez domysleni]
+
+Mozne rozhodnuti:
+[co z toho plyne pro produkt, onboarding, web, podporu nebo cenu]
+```
+
+Priklad spatneho zapisu:
+
+```text
+Zakaznik chce exporty.
+```
+
+Priklad lepsiho zapisu:
+
+```text
+Zdroj:
+Support, 3 dotazy za posledni dva tydny.
+
+Pozorovana situace:
+Admini potrebuji jednou mesicne predat seznam otevrenych pripadu do interniho reportu.
+Aktualne kopiruji tabulku rucne ze screenshotu.
+
+Mozne rozhodnuti:
+Overit, jestli staci CSV export filtrovaneho seznamu, nebo jestli je problem ve sdileni reportu.
+```
+
+Ten druhy zapis neskace rovnou na reseni. To je dulezite. Zakaznik casto popisuje nastroj, ktery si umi predstavit, ne nejmensi uzitecny posun.
+
+### 2. Vytvor jednu feedback kartu
+
+Feedback karta ma byt tak mala, aby ji obchod, support i produkt vyplnili za dve minuty. Pokud je dlouha, lide ji obejdou pres chat. A chat je misto, kde dobre poznatky odchazeji do mlhy a pak se tvari, ze nikdy nebyly.
+
+Sablona:
+
+```text
+Nazev:
+[kratky popis problemu]
+
+Segment:
+[typ zakaznika nebo role, ne nutne konkretni firma]
+
+Frekvence:
+[jednou / opakovane / zatim jeden silny signal / nevim]
+
+Dopad:
+[cas / penize / riziko / neduveryhodnost / blokace aktivace / churn]
+
+Situace:
+[2 az 5 vet o realnem kontextu]
+
+Citace:
+[volitelne, anonymizovana nebo minimalni]
+
+Datova citlivost:
+[zadna / obsahuje osobni udaje / obsahuje zakaznicka data / obsahuje citlivy obchodni kontext]
+
+Dalsi krok:
+[ignorovat / sloucit s existujicim tematem / overit / opravit text / navrhnout zmenu / pridat do roadmap review]
+
+Vlastnik:
+[kdo to posune nebo zavre]
+```
+
+U citace bud opatrny. Nepotrebujes do produktoveho boardu kopirovat cele emaily, jmena lidi, interni nazvy projektu nebo screenshoty s daty. Vetsinou staci anonymizovana veta:
+
+```text
+"Kazdy tyden to rucne posilame financnimu tymu, jinak nam chybi podklad pro fakturaci."
+```
+
+Kdyz je presna citace dulezita, nech ji v puvodnim systemu s pristupovym omezenim a do feedback karty dej odkaz nebo interni ID. Produktovy poznatek nema byt sklad osobnich udaju.
+
+### 3. Trid podle rozhodnuti, ne podle oddeleni
+
+Typicka chyba je mit feedback rozdeleny na "support", "sales", "product" a "founder notes". Jenze zakaznikuv problem se takhle nechova. Stejna bolest muze prijit jako support ticket, namitka v demu i churn duvod.
+
+Lepsi jsou rozhodovaci kose:
+
+| Kos | Co tam patri | Typicky vystup |
+| --- | --- | --- |
+| Aktivace | Zakaznik nedosahl prvni hodnoty | Uprava onboarding kroku nebo prazdneho stavu |
+| Pochopeni hodnoty | Zakaznik nerozumi nabidce | Prepis landing page, pricingu nebo napovedy |
+| Manualni workaround | Zakaznik dela opakovanou praci mimo produkt | Overeni workflow, mala automatizace, export |
+| Duvera a compliance | Zakaznik se boji dat, hostingu, pravomoci | Trust page, DPA odpoved, nastaveni pristupu |
+| Provozni bolest | Chyby, vykon, obnovy, incidenty | Bugfix, monitoring, runbook |
+| Cenova nejistota | Zakaznik nechape metriky nebo balicky | Uprava ceniku, limitu, planu nebo pilotni nabidky |
+
+Kazdy tyden projdi jen otevrene karty s jasnym dopadem. Archivuj duplicity. Slucuj podobne signaly. Neudrzuj board kvuli boardu. Kdyz poznatek tri tydny nema vlastnika ani dalsi krok, bud neni dulezity, nebo tym nema odvahu ho zavrit.
+
+### 4. Spoj kvalitativni signal s minimalni metrikou
+
+Kvalitativni feedback rika proc. Metrika rika jak casto nebo kde. Potrebujes oboji, ale ne v maximalisticke podobe.
+
+Priklady spojeni:
+
+| Signal | Minimalni metrika | Rozhodnuti |
+| --- | --- | --- |
+| Lide nepozvou kolegu, protoze se boji nehotoveho workspace | Pocet workspace bez druheho clena po 7 dnech | Pridat draft pozvanku nebo lepsi vysvetleni pravomoci |
+| Lead se pta na EU hosting pred demem | Pocet demo dotazu na data a hosting za mesic | Zviditelnit trust page a kratkou odpoved v follow-upu |
+| Admini rucne kopiruji tabulku do reportu | Pocet export dotazu a frekvence opakovani | Overit CSV export nebo sdilitelny report |
+| Trial konci bez aktivity po prvnim kroku | Podil uctu bez klicove akce do 48 hodin | Zjednodusit prvni tok, ne pridavat newsletter |
+
+Pozor: metrika nema nahradit rozhovor. Kdyz cislo vypada spatne, nejdrive zjisti, co se deje. Kdyz rozhovor zni silne, zkus zjistit, jestli je to jeden hlas nebo vzorec. Produktova prace je prepinani mezi lupou a mapou.
+
+### 5. Zavirej smycku se zakaznikem
+
+Feedback loop neni hotovy ve chvili, kdy interni tym vytvori kartu. Hotovy je az tehdy, kdyz se stane jedna z techto veci:
+
+- problem byl vyresen,
+- problem byl odlozen s jasnym duvodem,
+- problem byl preformulovan a ceka na overeni,
+- zakaznik dostal ferovou odpoved, ze to ted stavet nebudete.
+
+Sablona odpovedi po opravene veci:
+
+```text
+Ahoj,
+
+dik za konkretni popis situace s [problem].
+Upravili jsme [co se zmenilo] tak, aby slo [vysledek].
+
+Pokud to budete zkouset v praxi, zajima nas hlavne jestli to snizilo [puvodni bolest].
+
+Codyho poznamka pro tym:
+Neptej se na dalsich deset veci. Jedna dobra kontrolni otazka staci.
+```
+
+Sablona odpovedi, kdyz to nestavite:
+
+```text
+Ahoj,
+
+diky za zpetnou vazbu k [tema].
+Rozumime, proc by to pomohlo v [situace]. Ted to ale nebudeme pridavat jako samostatnou funkci, protoze by to produkt posunulo mimo aktualni zamereni na [jadro produktu].
+
+Zapisujeme si to jako signal pro [oblast]. Pokud se rozhodnuti zmeni, ozveme se.
+```
+
+Ferove "ne" je lepsi nez tiche "mozna". Tiche mozna vyrabi dluh v duvere.
+
+### 6. 45min postup
+
+```text
+00-05 min: Vyber jedno misto pro feedback karty.
+Idealne tam, kde uz tym dela rozhodnuti, ne v dalsim izolovanem nastroji.
+
+05-12 min: Zaved jednotnou sablonu.
+Nazev, segment, frekvence, dopad, situace, datova citlivost, dalsi krok, vlastnik.
+
+12-20 min: Vytvor rozhodovaci kose.
+Aktivace, pochopeni hodnoty, manualni workaround, duvera, provoz, cena.
+
+20-28 min: Prepis poslednich pet poznatku do karet.
+Bez kopirovani celych emailu a bez zbytecnych osobnich udaju.
+
+28-35 min: Sluc duplicity a oznac jeden nejdulezitejsi signal.
+Hledej dopad, ne hlasitost.
+
+35-42 min: Pri kazdem silnem signalu dopln minimalni metriku.
+Ne kvuli dashboardu, ale kvuli rozhodnuti.
+
+42-45 min: Nastav tydenni review.
+Tri otazky: co opravime, co overime, co zavreme.
+```
+
+### Checklist: feedback loop
+
+- [ ] Zpetna vazba ma jedno primarni misto a jednotnou kartu.
+- [ ] Karta oddeluje zdroj, situaci, dopad a dalsi rozhodnuti.
+- [ ] Osobni udaje a zakaznicka data se do produktoveho boardu nekopiruji zbytecne.
+- [ ] Citace jsou minimalni, anonymizovane nebo odkazovane pres interni ID.
+- [ ] Feedback se tridi podle rozhodovacich kosu, ne podle oddeleni.
+- [ ] Duplicity se slucuji a stare karty se zaviraji.
+- [ ] Silne kvalitativni signaly maji pripojenou minimalni metriku.
+- [ ] Kazdy tyden vznikne nejvyse par konkretnich rozhodnuti.
+- [ ] Zakaznik dostane odpoved, kdyz jeho feedback vedl k oprave nebo rozhodnuti.
+- [ ] Tym umi rict "ted ne" bez rozmazaneho slibu do budoucna.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -6907,3 +7111,4 @@ Po 45 minutach nema tym encyklopedii. Ma mapu. A mapa je presne to, co potrebuje
 - 2026-08-01: Pridana prakticka priloha Predavka z obchodu do onboardingu bez ztraty kontextu za 45 minut vcetne handoff karty, datoveho kontraktu, onboardingoveho emailu, vyhodnoceni milniku a checklistu.
 - 2026-08-01: Pridana prakticka priloha Status page a incident komunikace za 45 minut vcetne komponent, komunikacnich prahu, sablon updatu, planovane udrzby a checklistu.
 - 2026-08-01: Pridana prakticka priloha Obnova ze zalohy bez paniky za 45 minut vcetne karty zalohy, rezimu obnovy, runbooku, testu obnovy, komunikace a checklistu.
+- 2026-08-01: Pridana prakticka priloha Feedback loop bez datoveho skladu za 45 minut vcetne feedback karty, rozhodovacich kosu, minimalnich metrik, zavirani smycky se zakaznikem a checklistu.
