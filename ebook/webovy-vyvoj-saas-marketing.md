@@ -7854,6 +7854,161 @@ Kdo sablony udrzuje, jak se testuje doruceni a kdy se kontroluji bounce/complain
 
 ---
 
+## Export dat pro zakaznika bez improvizace za 60 minut
+
+Export dat je jedna z tech funkci, ktere vypadaji nudne, dokud ji nekdo opravdu nepotrebuje. Zakaznik odchazi, auditor se pta na evidenci, uzivatel chce kopii svych osobnich udaju, nebo firma potrebuje presunout data do jineho systemu. V tu chvili se ukaze, jestli produkt bere kontrolu nad daty vazne, nebo jestli byla "data jsou vase" jen pekna veta na landing page.
+
+Privacy-first SaaS ma mit export jako provozni schopnost, ne jako hrdinsky SQL dotaz napsany ve stresu. Cilem neni exportovat vsechno, co kdy databaze videla. Cilem je dodat spravna data spravnemu prijemci ve spravnem rozsahu, citelnem formatu a s jasnou expiraci.
+
+GDPR rozlisuje mimo jine pravo na pristup podle clanku 15 a pravo na prenositelnost podle clanku 20. Pravo na pristup zahrnuje potvrzeni, zda se osobni udaje zpracovavaji, pristup k nim a souvisejici informace o zpracovani. Pravo na prenositelnost se tyka osobnich udaju, ktere subjekt poskytl spravci, pokud zpracovani stoji na souhlasu nebo smlouve a probiha automatizovane: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng. EDPB k pristupu zduraznuje, ze cil je dat lidem kontrolu nad jejich osobnimi udaji a umoznit jim zpracovani overit: https://www.edpb.europa.eu/system/files/2023-04/edpb_guidelines_202201_data_subject_rights_access_v2_en.pdf. K prenositelnosti existuji samostatne pokyny WP242 endorsovane EDPB: https://www.edpb.europa.eu/documents/guideline/guidelines-on-the-right-to-data-portability-under-regulation-2016679-wp242_en.
+
+Pravni poznamka: ne kazdy zakaznicky export je automaticky GDPR portabilita. B2B export celeho workspace, ucetni export, auditni balicek a odpoved na zadost subjektu udaju mohou mit rozdilny pravni rezim, rozsah a prijemce. Produktovy proces je ale podobny: overit zadost, vymezit rozsah, minimalizovat riziko, predat citelne a zapsat, co se stalo.
+
+### 1. Rozdel typy exportu
+
+Nejdriv si pojmenuj, jake exporty produkt vubec umi. Kdyz se vsechny zadosti resi jednim tlacitkem "Download all", je to pohodlne jen do prvniho incidentu.
+
+| Typ exportu | Kdo ho typicky zada | Co obsahuje | Riziko |
+| --- | --- | --- | --- |
+| Osobni pristup | konkretni uzivatel | osobni udaje o danem cloveku a informace o zpracovani | zamenena identita, data jinych lidi |
+| Portabilita | uzivatel nebo zakaznik v roli subjektu udaju | poskytnuta data ve strukturovanem formatu | prilis siroky rozsah, spatny format |
+| Workspace export | admin zakaznika | data uctu, konfigurace, zaznamy tymu | odhaleni dat clenu tymu nebo klientu |
+| Ucetni export | finance/admin | faktury, platby, objednavky | danove a smluvni souvislosti |
+| Auditni export | security/admin | vybrane logy, pristupy, zmeny | citlive provozni detaily |
+| Offboarding export | odchazejici zakaznik | data potrebna pro migraci nebo archivaci | chaos kolem mazani a retence |
+
+U kazdeho typu zapis:
+
+- kdo ho smi vyvolat,
+- co presne obsahuje,
+- co zamerne neobsahuje,
+- v jakem formatu se predava,
+- jak dlouho je dostupny,
+- kde se zapisuje auditni stopa.
+
+**Codyho komentar:** Export bez definice rozsahu je jako "poslete mi vsechno". Zni jednoduse, dokud nezjistis, ze "vsechno" obsahuje osobni udaje kolegu, interni poznamky, logy, tokeny a historicky bordel z migrace. To pak neni export. To je dobrodruzny sport.
+
+### 2. Format ma byt citelny i prenositelny
+
+Export neni zaloha pro vyvojare. Je to vystup pro cloveka, firmu nebo jiny system. Proto potrebujes format, ktery je bezny, dokumentovany a bez zbytecne zavislosti na jednom dodavateli.
+
+Prakticke formaty:
+
+| Data | Format | Poznamka |
+| --- | --- | --- |
+| Tabulkove zaznamy | CSV | Dobre pro faktury, leady, seznamy, jednoduche importy. |
+| Strukturovana data | JSON | Dobre pro objekty, vztahy, konfiguraci a API migrace. |
+| Dokumenty | puvodni soubory + manifest | Zachovej puvodni soubory, pridej seznam a metadata. |
+| Auditni zaznamy | JSONL nebo CSV | Radek po radku, s casem, aktorem a akci. |
+| Souhrn pro cloveka | PDF nebo HTML | Jen jako doplnek, ne jediny strojove citelny format. |
+
+Ke kazdemu exportu pridej `README` nebo manifest:
+
+```text
+export_type: workspace_export
+workspace: [nazev nebo ID]
+generated_at: [ISO timestamp]
+requested_by: [role nebo user ID]
+format_version: 1
+files:
+- leads.csv: seznam obchodnich zaznamu
+- users.csv: clenove workspace a role
+- settings.json: konfigurace uctu
+excluded:
+- aplikacni debug logy
+- tajemstvi, tokeny a interni systemove identifikatory
+- data jinych workspace
+retention:
+- odkaz platny 7 dni
+- exportni soubor bude pote smazan
+```
+
+Format verzuj. Jakmile jednou zakaznikovi reknes, ze `leads.csv` ma sloupec `email`, nema se pristi mesic potichu jmenovat `contact_mail`, protoze nekdo "uklidil naming". Stabilita exportu je soucast produktu.
+
+### 3. Over prijemce a omez cestu k souboru
+
+Export je casto koncentrovana hromada dat. Proto ma mit silnejsi pravidla nez bezne zobrazeni v aplikaci.
+
+Minimalni pravidla:
+
+- Export muze zadat jen role, ktera k tomu ma opravneni.
+- U citliveho exportu vyzaduj potvrzeni heslem nebo druhym faktorem.
+- Pred vygenerovanim ukaz rozsah: co bude uvnitr a co ne.
+- Velke exporty generuj asynchronne a posli jen upozorneni, ne soubor jako prilohu.
+- Odkaz na stazeni ma byt kratkodoby a navazany na prihlaseneho uzivatele.
+- Stazeni exportu zapis do auditniho logu.
+- Po expiraci soubor opravdu smaz, ne jen schovej odkaz.
+
+Email o hotovem exportu nema obsahovat samotna data. Staci:
+
+```text
+Predmet: Export dat je pripraveny
+
+Export pro workspace [nazev] je pripraveny ke stazeni.
+
+Odkaz je platny do [datum a cas]. Po expiraci soubor smazeme.
+
+Pokud jste export nezadali, kontaktujte podporu.
+```
+
+Kdyz export obsahuje data vice lidi, pridej interni brzdu: kdo smi export schvalit a jestli ma prijemce pravo videt vsechny zahrnute zaznamy. Admin zakaznika casto smi exportovat workspace, ale to neznamena, ze ma dostat interni systemovou historii nebo debug data.
+
+### 4. Rozlis export, mazani a retenci
+
+Export neni konec pribehu. Casto souvisi s ukoncenim sluzby, opravou dat nebo zadosti o vymaz. Proto u kazdeho exportu zapis navazujici stav:
+
+| Situace | Co udelat |
+| --- | --- |
+| Zakaznik chce kopii pred ukoncenim | Export, potvrzeni prevzeti, potom retencni nebo mazaci proces podle smlouvy. |
+| Uzivatel chce pristup ke svym osobnim udajum | Overit identitu, dodat relevantni kopii a informace o zpracovani. |
+| Zakaznik chce prenos do jineho systemu | Dodat strojove citelny format a popis schematu. |
+| Zakaznik chce smazani | Oddelit export pred smazanim, pravni retenci a skutecne vymazani. |
+| Auditor chce dukaz | Dodat vybrany rozsah, ne kompletni surova data. |
+
+Nejhorsi je slibit "smazeme vse" a potom zjistit, ze cast dat zustava v zaloze, logu, emailu nebo u dodavatele. Ferovejsi je napsat: "Aktivni data smazeme do X dni, zalohy expiruji podle retencni politiky do Y dni, ucetni doklady drzime podle pravnich povinnosti." Ano, je to mene romanticke. Ale pravdive.
+
+### 5. 60min postup
+
+```text
+00-08 min: Sepis existujici exporty.
+Tlacitka v aplikaci, rucni SQL exporty, support postupy, billing exporty, auditni balicky.
+
+08-18 min: Rozdel exporty podle typu a prijemce.
+Osobni pristup, portabilita, workspace, billing, audit, offboarding.
+
+18-28 min: U jednoho kritickeho exportu popis schema.
+Soubory, sloupce, format, co obsahuje a co zamerne neobsahuje.
+
+28-38 min: Nastav pravidla pristupu.
+Kdo smi export zadat, kdo ho schvaluje, jak se overuje identita a kdy je potreba 2FA.
+
+38-48 min: Navrhni bezpecne predani.
+Asynchronni generovani, kratkodoby odkaz, auditni log, expirace, smazani souboru.
+
+48-55 min: Propoj export s retenci.
+Co se deje po offboardingu, jak dlouho zustava export dostupny, co zustava v agregaci nebo zalohach.
+
+55-60 min: Zapis vlastnika a test.
+Kdo export udrzuje, jak casto se zkousi obnova/import a kde je dokumentace formatu.
+```
+
+### Checklist: export dat
+
+- [ ] Kazdy typ exportu ma definovany ucel, prijemce a rozsah.
+- [ ] Exporty maji bezny strojove citelny format, typicky CSV nebo JSON.
+- [ ] Kazdy export ma manifest nebo README s popisem souboru.
+- [ ] Format exportu je verzovany.
+- [ ] Export neobsahuje tajemstvi, tokeny, debug vypisy ani data jinych uctu bez duvodu.
+- [ ] Citlive exporty vyzaduji silne overeni a spravnou roli.
+- [ ] Exportni odkazy jsou kratkodobe a vazane na autorizovaneho uzivatele.
+- [ ] Stazeni a vytvoreni exportu se zapisuje do auditniho logu.
+- [ ] Exportni soubory se po expiraci mazou.
+- [ ] Email o exportu neposila data jako prilohu.
+- [ ] Offboarding rozlisuje export, smazani, pravni retenci a zalohy.
+- [ ] Existuje test, ze export jde precist nebo importovat mimo puvodni aplikaci.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -7889,6 +8044,8 @@ Kdo sablony udrzuje, jak se testuje doruceni a kdy se kontroluji bounce/complain
 - NIST SP 800-63-4, Digital Identity Guidelines: https://pages.nist.gov/800-63-4/
 - NIST SP 800-63B-4, Authentication and Authenticator Management: https://csrc.nist.gov/pubs/sp/800/63/b/4/final
 - EDPB, Guidelines on transparency under Regulation 2016/679: https://www.edpb.europa.eu/documents/guideline/article-29-working-party-guidelines-on-transparency-under-regulation-2016679_en
+- EDPB Guidelines 01/2022 on data subject rights - Right of access: https://www.edpb.europa.eu/system/files/2023-04/edpb_guidelines_202201_data_subject_rights_access_v2_en.pdf
+- EDPB/WP29 Guidelines on the right to data portability under Regulation 2016/679: https://www.edpb.europa.eu/documents/guideline/guidelines-on-the-right-to-data-portability-under-regulation-2016679-wp242_en
 - W3C, Web Content Accessibility Guidelines 2.2: https://www.w3.org/TR/WCAG22/
 - Google Search Central, SEO Starter Guide: https://developers.google.com/search/docs/fundamentals/seo-starter-guide
 - Google Search Central, How to specify a canonical URL: https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls
@@ -7958,3 +8115,4 @@ Kdo sablony udrzuje, jak se testuje doruceni a kdy se kontroluji bounce/complain
 - 2026-08-01: Pridana prakticka priloha Experimenty a A/B testy bez sledovaciho cirkusu za 60 minut vcetne experiment karty, minimalnich eventu, ochrannych metrik, retence dat a checklistu.
 - 2026-08-01: Pridana prakticka priloha Pristupova prava a offboarding bez zapomenutych uctu za 45 minut vcetne inventare pristupu, roli, onboarding/offboarding karet, revizniho rytmu a checklistu.
 - 2026-08-01: Pridana prakticka priloha Transakcni emaily bez datove pasti za 45 minut vcetne kategorizace sablon, minimalizace dat, SPF/DKIM/DMARC, odhlaseni a checklistu.
+- 2026-08-01: Pridana prakticka priloha Export dat pro zakaznika bez improvizace za 60 minut vcetne typu exportu, formatu, overeni prijemce, retence a checklistu.
