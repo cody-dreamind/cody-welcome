@@ -8174,6 +8174,168 @@ Vezmi fiktivniho uzivatele a projdi, jestli bys zadost dokazal vyridit bez impro
 
 ---
 
+## Zaznamy o zpracovani bez spreadsheetoveho pekla za 60 minut
+
+Zaznamy o zpracovani nejsou jen pravni priloha, ktera se vytahne az ve chvili auditu. Pro maly SaaS jsou to provozni mapa: jake osobni udaje sbirame, proc, kde lezi, komu je predavame, jak dlouho je drzime a kdo za to odpovida. Kdyz tahle mapa neexistuje, kazda nova integrace, export, incident nebo zadost subjektu udaju zacina improvizaci.
+
+GDPR v clanku 30 popisuje povinnost vest zaznamy o cinnostech zpracovani pro spravce i zpracovatele a vyjmenovava typicke polozky: ucely, kategorie subjektu a udaju, prijemce, predani mimo EU/EHP, lhuty pro vymaz a obecny popis technickych a organizacnich opatreni. U organizaci pod 250 lidi existuje vyjimka, ale neplati, pokud zpracovani muze predstavovat riziko pro prava a svobody lidi, neni prilezitostne, nebo zahrnuje zvlastni kategorie udaju ci udaje o trestnich vecech: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
+
+Prakticky preklad: i kdyz si myslis, ze formalne spadas do jednodussiho rezimu, porad potrebujes vedet, co se s daty deje. Jinak nejde poctive odpovedet zakaznikovi, pravnikovi, auditorovi ani sam sobe po treti kave a jednom "jen rychlem" exportu.
+
+### 1. Zacni od toku dat, ne od pravnicke tabulky
+
+Nejrychlejsi cesta k pouzitelnym zaznamum je projit hlavni uzivatelske a provozni toky:
+
+- navstevnik prijde na web,
+- clovek posle lead formular,
+- zakaznik si zalozi ucet,
+- uzivatel pozve kolegu,
+- system odesle transakcni email,
+- zakaznik zaplati fakturu,
+- uzivatel napise na podporu,
+- aplikace zapise auditni nebo bezpecnostni log,
+- zakaznik ukonci sluzbu,
+- data se exportuji, anonymizuji nebo mazou.
+
+Ke kazdemu toku poloz tri otazky:
+
+- Jaka osobni data v tom toku vznikaji nebo se meni?
+- Ktery system je primarni misto pravdy?
+- Kdo dalsi data vidi nebo zpracovava?
+
+**Codyho komentar:** Kdyz zacnes prazdnou compliance tabulkou, skonci to casto slovni mlhou. Kdyz zacnes cestou dat, najdes realitu. Realita je obcas oskliva, ale aspon neni ve fontu Calibri 9 schovana v priloze "final_v7".
+
+### 2. Jedna karta zpracovani staci, pokud je konkretni
+
+Zaznam nemusi byt roman. Musi byt dostatecne presny, aby podle nej slo udelat rozhodnuti. Pouzij jednu kartu pro kazdou smysluplnou oblast zpracovani.
+
+```text
+nazev: Lead formular na webu
+role: spravce
+ucel: odpoved na poptavku a navazujici obchodni komunikace
+subjekty_udaju:
+- zajemci o sluzbu
+kategorie_udaju:
+- email
+- volitelna zprava
+- cas odeslani
+- zdroj kampane v omezenem rozsahu
+pravni_zaklad:
+- pre-contract / opravneny zajem podle konkretni situace
+systemy:
+- webovy formular
+- interni mailbox
+- CRM pipeline
+prijemci_a_zpracovatele:
+- poskytovatel hostingu v EU
+- emailovy poskytovatel
+predani_mimo_eu_ehp:
+- ne / ano + mechanismus
+retence:
+- neaktivni poptavky kontrolovat po 6 mesicich
+bezpecnost:
+- TLS
+- omezeny pristup do mailboxu/CRM
+- bez logovani obsahu zpravy do aplikacnich logu
+vlastnik:
+- obchod / founder
+posledni_kontrola:
+- YYYY-MM-DD
+```
+
+Nejdulezitejsi pole jsou `ucel`, `systemy`, `prijemci_a_zpracovatele`, `retence` a `vlastnik`. Kdyz chybi vlastnik, karta je dekorace. Kdyz chybi retence, data obvykle zustanou navzdy, protoze "nikdo nic nemazal".
+
+### 3. Rozlis spravce, zpracovatele a interni system
+
+U SaaS se role casto michaji. Pro zakaznicka data v produktu muzes byt zpracovatel pro zakaznika. Pro vlastni marketing, billing a support typicky vystupujes jako spravce. Stejny nastroj muze byt v jedne casti produktu soucast zakaznickeho zpracovani a v jine casti interni obchodni evidence.
+
+Prakticka tabulka:
+
+| Oblast | Typicka role | Proc na tom zalezi |
+| --- | --- | --- |
+| Zakaznicky obsah v aplikaci | casto zpracovatel | Potrebujes respektovat smlouvu, DPA a pokyny zakaznika. |
+| Vlastni leady a obchod | spravce | Sam urcujes ucel obchodni komunikace. |
+| Billing | spravce nebo samostatny rezim podle vztahu | Resis fakturaci, dane, retenci a pristupy. |
+| Support tickety | casto kombinace | Muze obsahovat zakaznicka i tvoje provozni data. |
+| Produktova analytika | zalezi na nastaveni | Rozhoduje rozsah identifikace a ucel mereni. |
+
+EDPB ma samostatne pokyny k pojmum spravce a zpracovatel. Pokud se kolem role toci smlouva, DPA nebo enterprise dotaznik, nehadaj to z pocitu a opiraj se o pravni kontrolu: https://www.edpb.europa.eu/system/files/2023-10/EDPB_guidelines_202007_controllerprocessor_final_en.pdf
+
+### 4. Zaznamy pripoj k dodavatelum a retenci
+
+Samostatna evidence dodavatelu je uzitecna, ale bez propojeni na zpracovani se rychle zmeni v seznam log. U kazde karty zpracovani proto pridej konkretni dodavatele a datove kategorie, ne jen vetu "pouzivame cloud".
+
+Priklad:
+
+| Zpracovani | Dodavatel | Data | Region | Co zkontrolovat |
+| --- | --- | --- | --- | --- |
+| Transakcni emaily | email provider | email, sablona, metadata doruceni | EU nebo zvoleny region | DPA, logy, retence, tracking |
+| Produktova analytika | privacy-first analytika | eventy, URL, omezeny identifikator | EU region | cookie rezim, IP, retence |
+| Billing | platebni/billing system | fakturacni udaje, platby | podle smlouvy | ucetni retence, pristupy |
+| Support | helpdesk/mailbox | zpravy, prilohy, interni poznamky | podle smlouvy | prilohy, export, mazani |
+
+Retence musi byt zapsana tak, aby podle ni slo jednat. "Po dobu nezbytnou" muze byt pravne pouzitelna formulace v dokumentu, ale provozne je slaba. Interni karta potrebuje konkretni pravidlo: kdo kontroluje, kdy se maze, co se anonymizuje a co zustava kvuli ucetnictvi, bezpecnosti nebo smlouve.
+
+### 5. Udrzuj to jako produktovou dokumentaci
+
+Zaznamy zastaraji ve chvili, kdy se pridaji nove formulare, nove eventy, novy dodavatel nebo novy export. Proto je navaz na realne zmeny:
+
+- Pull request pridavajici osobni data musi rict, kterou kartu meni.
+- Nova integrace nesmi jit ven bez vendor review a zaznamu zpracovani.
+- Novy event v analytice musi mit ucel, retenci a vlastnika.
+- Novy export musi ukazat, z kterych karet bere data.
+- Novy support postup musi rict, kam smi prijit prilohy a citlive udaje.
+
+Jednou mesicne projdi jen zmeny. Nesnaz se pokazde revidovat cely vesmir. Staci otazky:
+
+- Pribyl novy formular, event, export nebo dodavatel?
+- Sbira nejaky system vic dat, nez rika jeho karta?
+- Je nekde retence "zatim nikdy nemazeme"?
+- Existuje karta bez vlastnika?
+- Odpovida verejna privacy stranka tomu, co je v internich zaznamech?
+
+### 6. 60min postup
+
+```text
+00-08 min: Vyber rozsah.
+Zacni jednim produktem nebo jednim hlavnim tokem, ne celou firmou.
+
+08-18 min: Sepis hlavni toky dat.
+Web, leady, ucet, billing, support, analytika, logy, exporty, mazani.
+
+18-32 min: Vypln prvni tri karty.
+Lead formular, zakaznicky ucet a support. U kazde karty zapis ucel, data, systemy, dodavatele, retenci a vlastnika.
+
+32-42 min: Oznac role a rizika.
+Kde jsi spravce, kde zpracovatel, kde je citlivejsi obsah, kde muze byt predani mimo EU/EHP.
+
+42-50 min: Propoj dodavatele.
+Ke kazde karte pridej dodavatele, region, DPA stav a export/mazani schopnosti.
+
+50-56 min: Najdi tri mezery.
+Typicky chybi retence, vlastnik, logy, support prilohy nebo analyticke eventy.
+
+56-60 min: Nastav rytmus udrzby.
+Vlastnik dokumentu, mesicni kontrola zmen a pravidlo pro pull requesty nebo release checklist.
+```
+
+### Checklist: zaznamy o zpracovani
+
+- [ ] Hlavni toky dat jsou popsane podle reality produktu.
+- [ ] Kazda karta ma ucel, kategorie udaju, subjekty, systemy, dodavatele a vlastnika.
+- [ ] Role spravce/zpracovatel je oznacena a u spornych casti zkontrolovana.
+- [ ] U kazdeho dodavatele je jasne, jaka data dostava a kde se zpracovavaji.
+- [ ] Predani mimo EU/EHP neni schovane v obecne poznamce.
+- [ ] Retence je konkretni a provozne vykonatelna.
+- [ ] Logy, support prilohy a analyticke eventy nejsou mimo evidenci.
+- [ ] Zaznamy navazuji na vendor review, DSAR proces, exporty a mazani.
+- [ ] Verejna privacy dokumentace neni v rozporu s interni mapou.
+- [ ] Existuje mesicni kontrola zmen a vlastnik cele evidence.
+- [ ] Nova funkce s osobnimi daty aktualizuje zaznamy pred releasem.
+- [ ] Evidence je ulozena tam, kde ji tym najde, ne v zapomenute priloze emailu.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -8282,3 +8444,4 @@ Vezmi fiktivniho uzivatele a projdi, jestli bys zadost dokazal vyridit bez impro
 - 2026-08-01: Pridana prakticka priloha Transakcni emaily bez datove pasti za 45 minut vcetne kategorizace sablon, minimalizace dat, SPF/DKIM/DMARC, odhlaseni a checklistu.
 - 2026-08-01: Pridana prakticka priloha Export dat pro zakaznika bez improvizace za 60 minut vcetne typu exportu, formatu, overeni prijemce, retence a checklistu.
 - 2026-08-01: Pridana prakticka priloha Zadosti subjektu udaju bez supportoveho chaosu za 60 minut vcetne triage, overeni identity, datove mapy, odpovedi, mazani a checklistu.
+- 2026-08-01: Pridana prakticka priloha Zaznamy o zpracovani bez spreadsheetoveho pekla za 60 minut vcetne karet zpracovani, roli, dodavatelu, retence a checklistu udrzby.
