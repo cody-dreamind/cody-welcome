@@ -9288,6 +9288,195 @@ Minuty 55 az 60: zapis vlastnika studie, datum kontroly a misto, kde bude ulozen
 
 ---
 
+## Webinar a workshop bez registracni pasti za 60 minut
+
+Webinar je dobry format pro B2B SaaS, kdyz chces vysvetlit slozitejsi problem, ukazat zpusob premysleni a otevrit konverzaci s lidmi, kteri jeste nejsou pripraveni na demo call. Spatny webinar je ale jen lead magnet s kamerou: dlouhy formular, povinne telefonni cislo, automaticke prihlaseni do newsletteru, nahravka rozeslana bez jasneho pravidla a po akci pet follow-upu, ze "mista se rychle plni", i kdyz sedis sam v kancelari.
+
+Privacy-first webinar ma mensi ambici a lepsi vysledek: pozvat spravne lidi, predat praktickou hodnotu, sebrat jen data nutna pro organizaci a navazat lidsky tam, kde k tomu ucastnik dal rozumny signal.
+
+GDPR princip minimalizace dat rika, ze osobni udaje maji byt primerene, relevantni a omezene na to, co je nezbytne pro dany ucel. Primarni text je v clanku 5 GDPR: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng. Prakticky preklad pro webinar: email pro poslani odkazu dava smysl, rodne cislo prekvapive stale ne.
+
+### 1. Rozhodni, jestli registrace vubec musi existovat
+
+Ne kazda vzdelavaci akce potrebuje gate. Pokud je cilem sireni povedomi, castejsi a privacy-first cesta je verejna stranka s terminem, primym odkazem do kalendare, RSS oznameni a nasledne publikovana nahravka nebo textovy recap. Registrace dava smysl, kdyz:
+
+- potrebujes poslat pristupovy odkaz,
+- je kapacita opravdu omezena,
+- chces pripravit obsah podle otazek ucastniku,
+- navazuje konkretni nabidka nebo konzultace,
+- akce neni verejna kvuli zakaznickemu nebo oborovemu kontextu.
+
+Slaby duvod pro registraci:
+
+> "Chceme mit leady."
+
+Lepsi duvod:
+
+> "Posilame odkaz do mistnosti, predem sbirame jednu otazku a po akci posleme nahravku jen lidem, kteri o ni stoji."
+
+Pokud registrace existuje jen proto, aby se z anonymniho ctenare stal radek v CRM, je to marketingova berlicka. Casto lip funguje otevreny obsah a jasna vyzva: "Chcete to projit na vasem produktu? Napiste nam."
+
+**Codyho komentar:** Kdyz je obsah dobry, nemusi se schovavat za formular jako server pod stolem. Formular ma byt servisni prvek, ne past na emaily.
+
+### 2. Registracni formular drz kratky a pravdivy
+
+Minimalni formular pro vetsinu B2B webinaru:
+
+| Pole | Povinne? | Proc |
+| --- | --- | --- |
+| Email | Ano | Poslani odkazu, pripomenuti a materialu po akci. |
+| Jmeno | Volitelne | Osobnejsi komunikace, ale neni nutne pro pristup. |
+| Firma | Volitelne | Pomaha prizpusobit priklady, ale neni nutna. |
+| Otazka k tematu | Volitelne | Zlepsuje obsah a dava prirozeny signal zajmu. |
+| Souhlas s navazujicim obsahem | Oddelene | Jen pokud chces posilat dalsi marketingove zpravy. |
+
+Neptej se na telefon, rozpocet, pocet zamestnancu a rozhodovaci pravomoc, pokud nejde o uzavreny workshop pro kvalifikovane zajemce. U otevreneho vzdelavaciho webinaru to pusobi jako obchodni kontrola u vstupu.
+
+Mikrotext pod formularem:
+
+```text
+Email pouzijeme pro poslani odkazu na webinar, pripomenuti a materialu k teto akci. Do newsletteru vas neprihlasime automaticky.
+```
+
+Pokud chces nabidnout newsletter nebo dalsi pozvanky, dej oddeleny checkbox:
+
+```text
+[ ] Chci dostavat dalsi prakticke pozvanky a materialy od Dreamindu.
+```
+
+Checkbox nema byt predvyplneny. Souhlas ma byt samostatne rozhodnuti, ne drobne pismo pod tlacitkem.
+
+### 3. Nahravku res jako samostatny datovy objekt
+
+Nahravka webinaru muze obsahovat osobni udaje: jmena ucastniku, hlas, chat, dotazy, sdilenou obrazovku, interni ukazky nebo nahodne notifikace. Proto pred akci rozhodni:
+
+- jestli se bude nahravat,
+- kdo nahravku dostane,
+- jak dlouho bude ulozena,
+- kde bude ulozena,
+- kdo ji muze stahnout,
+- jestli bude verejna, neverejna nebo jen interni,
+- jak odstranis chat, seznam ucastniku a omylem zachycene detaily.
+
+Prakticke pravidlo:
+
+> Nahravka neni automaticky stejny obsah jako verejny clanek. Je to zaznam realne komunikace a podle toho s ni zachazej.
+
+Pred zacatkem rekni jednu kratkou vetu:
+
+```text
+Webinar budeme nahravat pro registrovane ucastniky. Dotazy muzete posilat do chatu; pokud nechcete byt v nahravce, pouzijte anonymizovanou formulaci nebo nam napiste po akci emailem.
+```
+
+Pro verejne publikovani je casto lepsi udelat cistou verzi: kratke video bez chatu, prepsany clanek, checklist nebo slide deck. Zisk z obsahu zustane, datove riziko klesne.
+
+### 4. Follow-up ma navazovat na signal, ne na hlad CRM
+
+Po akci rozdel ucastniky podle chovani, ktere je ferove a minimalni:
+
+| Signal | Vhodna reakce |
+| --- | --- |
+| Registroval se, neprisel | Posli material a jednu vetu, ze se muze ozvat. |
+| Prislibil ucast a prisel | Posli material, recap a odkaz na souvisejici obsah. |
+| Polozil konkretni otazku | Odpovez na otazku osobne a nabidni dalsi krok. |
+| Pozadal o konzultaci | Predej do obchodniho toku s jasnym kontextem. |
+| Souhlasil s dalsimi pozvankami | Zarad do vybraneho seznamu, ne do vsech kampani sveta. |
+
+Nepotrebujes sledovat kazdou sekundu sledovani videa. U maleho SaaS je casto cennejsi rucne projit deset otazek nez automaticky skore na 500 tichych divaku.
+
+Sablona follow-upu pro vsechny ucastniky:
+
+```text
+Ahoj,
+
+diky za zajem o webinar [tema]. Tady je shrnuti a materialy:
+
+- recap: [URL]
+- checklist: [URL]
+- nahravka: [URL, pokud existuje]
+
+Pokud resite podobnou situaci u sebe, odpovezte jednou vetou, co je nejvetsi brzda. Podle toho poslu konkretni dalsi krok.
+
+Cody / Dreamind
+```
+
+Sablona odpovedi na konkretni otazku:
+
+```text
+Ahoj,
+
+na webinaru jste se ptali na [tema]. Kratka odpoved: [odpoved].
+
+Pokud to chcete overit na vasem toku, staci poslat obecny popis procesu bez zakaznickych dat. Navrhnu, kde zacit.
+```
+
+### 5. Nastroje vybirej podle datove cesty
+
+Pred vyberem webinar platformy si napis malou kartu:
+
+```text
+Nastroj:
+[nazev]
+
+Data:
+registrace, emaily, chat, nahravky, IP/logy, analytics
+
+Region:
+[kde jsou data ulozena]
+
+Pristupy:
+[kdo z tymu a dodavatele vidi data]
+
+Retence:
+[kdy mazeme registrace, chat a nahravky]
+
+Export:
+[jak ziskame seznam ucastniku a jak ho smazeme]
+
+Fallback:
+[co pouzijeme, kdyz nastroj vypadne]
+```
+
+Preferuj reseni, kde dokazes oddelit:
+
+- registracni stranku,
+- samotne vysilani,
+- nahravku,
+- follow-up email,
+- marketingovy seznam.
+
+Kdyz jeden nastroj vlastni celou cestu a posila data do dalsich integraci automaticky, je pohodlny, ale hure se vysvetluje. U privacy-first provozu chces vedet, kam email a chat doputuje, ne jen doufat, ze v dashboardu existuje tlacitko "export".
+
+### 6. 60min postup
+
+Prvnich 10 minut: napis cil akce jednou vetou. Napriklad: "Pomoci zakladatelum B2B SaaS zkontrolovat, jestli jejich onboarding sbira zbytecna data." Pokud cil nezni jako uzitek pro ucastnika, prepis ho.
+
+Minuty 10 az 20: rozhodni, jestli bude registrace otevrena, uzavrena nebo zadna. Pokud registrace existuje, nech jen email a volitelnou otazku.
+
+Minuty 20 az 30: priprav landing text: komu je akce urcena, co si odnese, kdo vede obsah, jak se pracuje s daty a jestli bude nahravka.
+
+Minuty 30 az 40: nastav datovou cestu. Kde se ulozi registrace, kdo je uvidi, kdy se smazou, kde bude nahravka a jak se oddeli newsletter souhlas.
+
+Minuty 40 az 50: napis follow-up pro tri skupiny: neprisel, prisel, polozil otazku. Zamer se na uzitecny dalsi krok, ne na tlak.
+
+Minuty 50 az 60: pridej do kalendare kontrolu po akci: smazani nepotrebnych dat, ulozeni anonymizovaneho recapu, rucni vyhodnoceni otazek a jedno rozhodnuti, co zlepsit priste.
+
+### Checklist: webinar bez registracni pasti
+
+- [ ] Cil akce je napsany jako uzitek pro ucastnika, ne jako interni lead target.
+- [ ] Vim, jestli registrace opravdu musi existovat.
+- [ ] Formular sbira jen email a pripadne volitelne pole, ktere zlepsuje obsah.
+- [ ] Newsletter nebo dalsi pozvanky maji oddeleny, nepredvyplneny souhlas.
+- [ ] Mikrotext jasne rika, k cemu email pouziju.
+- [ ] Pred akci je jasne, jestli se nahrava a kdo nahravku dostane.
+- [ ] Chat, seznam ucastniku a nahravka maji stanovene ulozeni a mazani.
+- [ ] Follow-up je rozdeleny podle rozumneho signalu, ne podle invazivniho sledovani.
+- [ ] Nastroj ma zmapovanou datovou cestu, region, pristupy, retenci a export.
+- [ ] Po akci mazeme nepotrebna data a nechavame si jen to, co ma dalsi ucel.
+- [ ] Verejny recap nebo checklist muze zit na vlastni URL a pres RSS, ne jen uvnitr platformy.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -9410,3 +9599,4 @@ Minuty 55 az 60: zapis vlastnika studie, datum kontroly a misto, kde bude ulozen
 - 2026-08-01: Pridana prakticka priloha Kampan bez reklamniho pixelu za 45 minut vcetne UTM konvence, minimalniho mereni, datoveho mikrotextu, vyhodnoceni leadu a checklistu.
 - 2026-08-01: Pridana prakticka priloha Referral a partnerska doporuceni bez sledovaciho cirkusu za 45 minut vcetne referral kodu, formularoveho mikrotextu, odmen, vyhodnoceni kvality leadu a checklistu.
 - 2026-08-01: Pridana prakticka priloha Pripadova studie bez prozrazeni zakaznickych dat za 60 minut vcetne datoveho semaforu, prace s citacemi, screenshoty, sablony a checklistu.
+- 2026-08-01: Pridana prakticka priloha Webinar a workshop bez registracni pasti za 60 minut vcetne registrace, nahravek, follow-upu, datove cesty nastroju a checklistu.
