@@ -8651,6 +8651,166 @@ Nova placena funkce musi rict cenu, danovy rezim, data, retenci, zruseni a fallb
 
 ---
 
+## DPA zmena dodavatele bez rozbite duvery za 60 minut
+
+Zmena dodavatele zni jako technicky ukol: vymenit nastroj, prepnout API klic, otestovat tok, hotovo. U privacy-first SaaS je to ale i duverovy ukol. Kdyz novy nastroj zpracovava osobni udaje zakazniku, meni se datova mapa, pravni dokumenty, interni pristupy, pripadne seznam subprocesoru a cast slibu, ktere mas verejne na webu.
+
+GDPR v clanku 28 rika, ze spravce ma pouzivat jen zpracovatele s dostatecnymi garancemi, a ze zpracovatel nema zapojit dalsiho zpracovatele bez predchoziho specifickeho nebo obecneho pisemneho povoleni spravce. Pri obecnem povoleni ma zpracovatel informovat o zamyslenych zmenach, aby spravce mohl namitat: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng. EDPB v Guidelines 07/2020 pripomina, ze role spravce a zpracovatele se neurcuji podle nalepky ve smlouve, ale podle realneho rozhodovani o ucelech a prostredcich zpracovani: https://www.edpb.europa.eu/documents/guideline/guidelines-072020-on-the-concepts-of-controller-and-processor-in-the-gdpr_en. EDPB Opinion 22/2024 se zameruje na povinnosti pri spolehance na zpracovatele a subprocesory: https://www.edpb.europa.eu/system/files/2024-10/edpb_opinion_202422_relianceonprocessors-sub-processors_en.pdf.
+
+Prakticky preklad: kdyz pridavas novy support tool, emailovy provider, AI sluzbu, monitoring, platby nebo datove uloziste, neni to jen radek v changelogu. Je to zmena datoveho retezce. A ten ma byt viditelny, vysvetlitelny a vratny.
+
+### 1. Rozlis tri typy zmen
+
+Ne kazda zmena dodavatele potrebuje stejnou ceremonii. Zacni klasifikaci.
+
+| Typ zmeny | Priklad | Co kontrolovat |
+| --- | --- | --- |
+| Bez osobnich dat | Nastroj pro build statickych assetu bez pristupu k produkci | Licence, pristupy, supply chain, zadne DPA typicky neni jadro. |
+| Osobni data zakazniku | Support system, CRM, transakcni emaily, fakturace | DPA, data region, subprocesori, retence, mazani, export. |
+| Citliva nebo kriticka data | Uloziste souboru, autentizace, auditni logy, AI nad zakaznickym obsahem | Bezpecnostni review, DPIA filtr, fallback, oznameni zakaznikum, presna smluvni hranice. |
+
+Kdyz si nejsi jisty, zarad zmenu o uroven vyse. Ne proto, aby se tym zabetonoval v papirech, ale proto, ze levnejsi je odhalit problem pred integraci nez po tom, co se data rozjela do noveho retezce.
+
+**Codyho komentar:** Dodavatel, ktery "jen pomaha s produktivitou", casto vidi vic dat nez hlavni produkt. Presne tady vznikaji male, pohodlne a velmi drahe slepe skvrny.
+
+### 2. Vytvor kartu zmeny dodavatele
+
+Karta ma byt kratka. Cilem neni vyrobit pravni roman, ale mit jedno misto, kde je videt, co se meni a proc.
+
+```text
+Zmena dodavatele
+
+Nazev:
+Vlastnik:
+Datum rozhodnuti:
+Planovane spusteni:
+
+Proc menime:
+Jaky proces nebo funkci dodavatel podporuje:
+Jaka data uvidi:
+Kategorie subjektu udaju:
+Role dodavatele:
+- zpracovatel
+- samostatny spravce
+- spolecny spravce
+- bez osobnich dat
+
+Data region:
+Subprocesori:
+Prenos mimo EU/EHP:
+DPA / smlouva:
+Retence:
+Mazani a export:
+Pristupy v nasem tymu:
+Fallback pri vypnuti:
+Verejne dokumenty k aktualizaci:
+Zakaznici k informovani:
+Rozhodnuti:
+```
+
+Nejdulezitejsi radek je `Role dodavatele`. Kdyz dodavatel zpracovava data jen podle tvych pokynu, typicky resis zpracovatelsky vztah. Kdyz si urcuje vlastni ucely, muze byt samostatnym spravcem. Kdyz spolecne urcujete ucel i prostredky, muze jit o spolecne spravce. Nazev v marketingovem webu dodavatele neni rozhodujici; rozhoduje realny tok dat a kontrola nad nim.
+
+### 3. Zkontroluj DPA bez pravnickeho kouroveho efektu
+
+DPA nebo zpracovatelska smlouva nema byt soubor, ktery nekdo nahraje do slozky `legal` a uz se na nej nikdy nepodiva. Pro maly SaaS staci prakticka kontrola:
+
+- Popisuje smlouva predmet, dobu, povahu a ucel zpracovani?
+- Rika, jake typy osobnich udaju a kategorie osob se zpracovavaji?
+- Zavazuje dodavatele zpracovavat data jen podle dokumentovanych pokynu?
+- Resi mlcenlivost lidi, kteri maji k datum pristup?
+- Odkazuje na primerena technicka a organizacni opatreni?
+- Popisuje pomoc pri zadostech subjektu udaju, bezpecnosti, incidentech a DPIA?
+- Rika, co se stane s daty po konci sluzby?
+- Umoznujes audit nebo alespon rozumne dolozeni souladu?
+- Popisuje subprocesory a proces jejich zmeny?
+- Je jasne, zda a jak probiha prenos mimo EU/EHP?
+
+Pokud neco chybi, neznamena to automaticky stopku. Znamena to, ze mas otazku pred podpisem nebo pred zapnutim integrace. U bezneho B2B SaaS je zdrave mit kratky seznam "nepustime bez odpovedi":
+
+- data region neni jasny,
+- nelze zjistit subprocesory,
+- neni popsane mazani po ukonceni,
+- dodavatel si vyhrazuje pouzit zakaznicka data pro vlastni trenink, marketing nebo neurcite zlepsovani bez jasne hranice,
+- neumime vypnout integraci bez ztraty hlavni sluzby.
+
+### 4. Aktualizuj verejny seznam subprocesoru
+
+Jestli zakaznikum slibujes transparentni seznam subprocesoru, musi zit. Zastaraly seznam je horsi nez zadny, protoze vytvari dojem kontroly a pritom posila lidi do mapy z minuleho leta.
+
+Minimalni verejny zaznam:
+
+| Dodavatel | Ucel | Data | Region | Poznamka |
+| --- | --- | --- | --- | --- |
+| Email provider | Transakcni emaily | Email, sablona zpravy, stav doruceni | EU/EHP podle smlouvy | Bez marketingovych seznamu. |
+| Hosting | Provoz aplikace | Aplikacni a zakaznicka data | EU datacentrum | Primarni produkcni infrastruktura. |
+| Monitoring | Dostupnost a chyby | Technicke logy bez obsahu pozadavku | EU nebo minimalizovany prenos | Kratka retence. |
+
+U kazde polozky napis ucel lidsky. "Infrastructure services" je moc mlhave. "Provoz aplikace a databaze" je lepsi. U dat nepouzivej frazi "personal data as needed". Napis typy: email, fakturacni udaje, technicke logy, ID uctu, metadata souboru. Kdyz verejny seznam pusobi nudne, je to dobre. Duvera nema znit jako reklamni kampan.
+
+### 5. Oznam zmenu podle dopadu
+
+Ne kazdou technickou zmenu musis posilat vsem zakaznikum jako dramaticky bulletin. Ale kdyz se meni subprocesor pro zakaznicka data, region zpracovani, typ dat nebo bezpecnostni hranice, zakaznik ma dostat jasnou informaci vcas.
+
+Jednoducha matice:
+
+| Dopad | Komunikace |
+| --- | --- |
+| Bez osobnich dat a bez vlivu na sluzbu | Interni changelog. |
+| Novy subprocesor bez zmeny typu dat a regionu | Aktualizace seznamu a notifikace podle smlouvy. |
+| Zmena regionu, typu dat nebo kriticke funkce | Email spravcum uctu, datum ucinnosti, moznost dotazu nebo namitky. |
+| Vysoke riziko nebo nejistota | Odlozit spusteni, udelat privacy/security review, pripadne DPIA. |
+
+Sablona oznameni:
+
+```text
+Predmet: Aktualizace subprocesoru pro [sluzba/proces]
+
+Dobry den,
+
+od [datum] planujeme pouzivat [dodavatel] pro [ucel].
+Dodavatel bude zpracovavat [typy dat] v rozsahu potrebnem pro [konkretni proces].
+Data region: [region].
+Seznam subprocesoru jsme aktualizovali zde: [URL].
+
+Zmena nema vliv na [co se nemeni: cenu, hlavni funkcnost, vase nastaveni].
+Pokud mate k teto zmene dotaz nebo namitku podle smluvnich podminek, napiste nam do [datum/kontakt].
+
+Cody / Dreamind
+```
+
+Neprehanet, nezamlcovat. To je cela magie. Zakaznik nepotrebuje pet odstavcu korporatni vaty. Potrebuje vedet, co se meni, proc, jaka data to zasahuje a co muze delat.
+
+### 6. 60min postup
+
+Prvnich 10 minut: pojmenuj zmenu, vlastnika a duvod. Pokud duvod zni "protoze to ma hezky dashboard", pridej jeste obchodni nebo provozni duvod, jinak zmena nema prioritu.
+
+Minuty 10 az 20: vypln kartu zmeny dodavatele. Hlavne data, role, region, subprocesory, retence, mazani a fallback.
+
+Minuty 20 az 35: projdi DPA nebo smluvni podminky podle checklistu. Oznac cervene body, ktere brani spusteni.
+
+Minuty 35 az 45: aktualizuj datovou mapu, seznam subprocesoru, zaznamy o zpracovani a interni pristupy.
+
+Minuty 45 az 55: priprav komunikaci. Rozhodni, zda staci interni changelog, verejny seznam, nebo email zakaznikum.
+
+Minuty 55 az 60: zapis rozhodnuti: spustit, spustit po doplneni odpovedi, nebo zastavit. Bez zapisu se tym za tri mesice nebude pamatovat, proc to proslo.
+
+### Checklist: DPA zmena dodavatele
+
+- [ ] Vim, proc dodavatele menime a jaky proces podporuje.
+- [ ] Je jasne, zda dodavatel zpracovava osobni data.
+- [ ] Role dodavatele je posouzena podle realneho toku dat, ne podle nazvu ve smlouve.
+- [ ] DPA nebo smluvni dokument pokryva clanek 28 v praktickych bodech.
+- [ ] Znam data region a pripadne prenosy mimo EU/EHP.
+- [ ] Mam seznam subprocesoru a proces jejich zmeny.
+- [ ] Retence, mazani a export jsou popsane pred spustenim.
+- [ ] Interni pristupy k novemu nastroji maji vlastnika a role.
+- [ ] Datova mapa a zaznamy o zpracovani jsou aktualizovane.
+- [ ] Verejny seznam subprocesoru odpovida realite.
+- [ ] Zakaznici dostanou oznameni, pokud to vyzaduje smlouva, dopad nebo ferovost.
+- [ ] Existuje fallback nebo exit plan, pokud dodavatel prestane vyhovovat.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -8658,6 +8818,7 @@ Nova placena funkce musi rict cenu, danovy rezim, data, retenci, zruseni a fallb
 - AI Act Service Desk, Timeline for the Implementation of the EU AI Act: https://ai-act-service-desk.ec.europa.eu/en/ai-act/timeline/timeline-implementation-eu-ai-act
 - GDPR, Regulation (EU) 2016/679, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
 - EDPB Guidelines 07/2020 on the concepts of controller and processor in the GDPR: https://www.edpb.europa.eu/system/files/2023-10/EDPB_guidelines_202007_controllerprocessor_final_en.pdf
+- EDPB Opinion 22/2024 on certain obligations following from the reliance on processors and sub-processors: https://www.edpb.europa.eu/system/files/2024-10/edpb_opinion_202422_relianceonprocessors-sub-processors_en.pdf
 - WP29/EDPB Guidelines on Data Protection Impact Assessment (DPIA): https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/data-protection-impact-assessment-dpia_en
 - EDPB Guidelines 9/2022 on personal data breach notification under GDPR: https://www.edpb.europa.eu/documents/guideline/guidelines-92022-on-personal-data-breach-notification-under-gdpr_en
 - Directive (EU) 2022/2555, NIS2 Directive, EUR-Lex: https://eur-lex.europa.eu/eli/dir/2022/2555/oj/eng
@@ -8765,3 +8926,4 @@ Nova placena funkce musi rict cenu, danovy rezim, data, retenci, zruseni a fallb
 - 2026-08-01: Pridana prakticka priloha Zaznamy o zpracovani bez spreadsheetoveho pekla za 60 minut vcetne karet zpracovani, roli, dodavatelu, retence a checklistu udrzby.
 - 2026-08-01: Pridana prakticka priloha Logovani a monitoring bez osobnich udaju navic za 45 minut vcetne typu logu, zakazanych dat, retence, alertu a release checklistu.
 - 2026-08-01: Pridana prakticka priloha Platebni a fakturacni tok bez datove laviny za 60 minut vcetne ceniku, checkoutu, platebni brany, fakturacni retence, selhani plateb a checklistu.
+- 2026-08-01: Pridana prakticka priloha DPA zmena dodavatele bez rozbite duvery za 60 minut vcetne karty zmeny, DPA kontroly, subprocesorske komunikace a checklistu.
