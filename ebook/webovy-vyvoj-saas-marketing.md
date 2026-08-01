@@ -8494,6 +8494,163 @@ Nova funkce s osobnimi daty musi rict, co loguje, co neloguje a jak dlouho to dr
 
 ---
 
+## Platebni a fakturacni tok bez datove laviny za 60 minut
+
+Platba je misto, kde se produkt potka s pravem, ucetnictvim, duverou a nervy zakaznika. Maly SaaS tu casto udela dve chyby naraz: schova cenu za mlhu a zaroven posle platebni, fakturacni a produktova data do vice nastroju, nez je potreba. Privacy-first pristup neznamena, ze billing bude spartanska tabulka v koutku. Znamena, ze kazdy udaj ma jasnou praci a zakaznik vi, co se deje pred kliknutim na "zaplatit".
+
+U evropskeho SaaS si pred spustenim over hlavne DPH rezim, B2B/B2C rozdily, pravidla pro digitalni sluzby a spotrebitelske informace. Evropska komise popisuje rezim VAT One Stop Shop pro preshranicni DPH v EU zde: https://vat-one-stop-shop.ec.europa.eu/index_en. Pro spotrebitele jsou dulezite i pravidla k digitalnimu obsahu a digitalnim sluzbam: https://commission.europa.eu/law/law-topic/consumer-protection-law/digital-contracts_en a Consumer Rights Directive: https://commission.europa.eu/law/law-topic/consumer-protection-law/consumer-contract-law/consumer-rights-directive_en. Tohle neni vyzva delat si pravni oddeleni z README. Je to vyzva neprodavat naslepo.
+
+### 1. Rozdel data podle ucelu
+
+Billing neni jeden kyblik. Rozdel ho aspon na pet toku:
+
+| Tok | Minimalni data | Proc existuje |
+| --- | --- | --- |
+| Cenik | plan, cena, mena, obdobi, limity | zakaznik ma vedet, co kupuje |
+| Checkout | email, fakturacni udaje, zvoleny plan, platebni stav | vytvoreni objednavky a platby |
+| Platba | platebni token nebo reference od brany | zpracovani platby bez ukladani karty v produktu |
+| Fakturace | fakturacni identita, danove udaje, cislo dokladu | ucetni a danove povinnosti |
+| Produktovy pristup | account ID, plan, limity, stav predplatneho | povoleni funkci v aplikaci |
+
+Produktova aplikace typicky nepotrebuje znat cislo karty, detailni odpoved platebni brany ani kompletni fakturacni historii v kazdem requestu. Staci ji stabilni informace: plan, stav predplatneho, limity, datum obnoveni a pripadne grace period.
+
+**Codyho komentar:** Kdyz se billingova integrace stane hlavnim zdrojem pravdy pro cele uzivatelske konto, driv nebo pozdeji zacne obchodni logika prosakovat do mist, kde ji nikdo nechce ladit. Platebni brana ma brat penize. Produkt ma dodavat hodnotu. Nepletme jim identity.
+
+### 2. Cenik musi rict, co se bude fakturovat
+
+Dobry cenik neni jen cislo. Je to kontrakt o ocekavanich. Pred platbou ma byt jasne:
+
+- co je v planu zahrnute,
+- jestli jde o mesicni, rocni, jednorazovou nebo pilotni platbu,
+- zda jsou ceny bez DPH nebo vcetne DPH,
+- kdy se predplatne obnovuje,
+- co se stane po prekroceni limitu,
+- jak se plan zrusi nebo zmeni,
+- kde se zpracovavaji fakturacni a produktova data.
+
+Pokud prodavas B2B, napis to jednoduse. Napriklad: "Ceny jsou uvedene bez DPH. Fakturace probiha mesicne. Predplatne lze ukoncit do konce fakturacniho obdobi." Pokud prodavas spotrebitelum, over si pozadavky na informacni povinnosti, pravo odstoupeni, digitalni sluzby a zobrazeni celkove ceny vcetne dani. Cena schovana v poznamce pod carou neni growth hack. Je to zadost o support ticket.
+
+### 3. Checkout sbira jen to, co potrebuje objednavka
+
+Minimalni checkout pro B2B SaaS:
+
+- pracovni email,
+- nazev firmy nebo jmeno fakturacni osoby podle typu zakaznika,
+- fakturacni adresa, pokud je potreba pro doklad,
+- IC/DIC nebo VAT ID, pokud ho pouzivas pro danove urceni,
+- zvoleny plan a fakturacni obdobi,
+- potvrzeni obchodnich a privacy dokumentu,
+- platebni reference vracena platebni branou.
+
+Co do checkoutu nepatri "pro jistotu":
+
+- telefon, pokud neni potreba k plneni,
+- role ve firme, pokud podle ni nemenis proces,
+- marketingovy souhlas spojeny s nakupem,
+- kompletni profil firmy natazeny z enrichment nastroje,
+- interni obchodni poznamky viditelne supportu bez duvodu.
+
+Jestli potrebujes dodatecne informace pro onboarding, ptej se az po platbe nebo v prvnim nastaveni produktu. Checkout ma byt kratky a duveryhodny. Onboarding muze byt kontextovy.
+
+### 4. Platebni branu drz mimo osobni detaily produktu
+
+Platebni brana potrebuje data k platbe a pripadne k fakturaci. Nepotrebuje vedet, jake dokumenty zakaznik nahrava, ktere funkce pouziva, jaky ma interni projekt nebo co psal supportu. Integraci navrhni tak, aby mezi produktem a platbou tekly jen nezbytne identifikatory a stavy.
+
+Prakticky model:
+
+```text
+product_account_id: acc_123
+billing_customer_id: cus_456
+plan: team
+subscription_status: active
+current_period_end: 2026-09-01
+last_payment_status: paid
+```
+
+Do produktu neukladej plne platebni odpovedi jen proto, ze se snad jednou budou hodit. Uloz technickou referenci, stav a auditni stopu udalosti. Detail nech v systemu, ktery je k tomu urceny a ma odpovidajici pristupova prava.
+
+### 5. Fakturacni doklady maji vlastni retenci
+
+Fakturace ma jine povinnosti nez produktova analytika. Proto ma mit vlastni retencni pravidlo, vlastnika a pristup. Ucetni doklad nelze mazat stejne jako testovaci event z onboardingoveho flow. Zaroven to ale neni duvod, aby se fakturacni adresa zobrazovala kazdemu adminovi produktu.
+
+Oddel minimalne:
+
+| Kategorie | Kdo typicky potrebuje pristup | Poznamka |
+| --- | --- | --- |
+| Fakturacni identita | finance, opravnene admin role | kvuli dokladum a danim |
+| Platebni stav | produkt, support, finance | staci stav a plan, ne karta |
+| Produktove vyuziti | produktovy tym, support podle potreby | neprelevat automaticky do faktur |
+| Support k platbe | support a finance | kratka historie, jasny ticket |
+| Audit zmen planu | finance, security/admin | kdo zmenil plan, kdy a proc |
+
+Retenci zapis lidsky: "Fakturacni doklady drzime podle ucetnich a danovych povinnosti. Produktove eventy k checkoutu agregujeme nebo mazeme podle mericiho planu. Platebni tokeny neukladame v aplikaci." To je srozumitelne pro tym i pro zakaznika.
+
+### 6. Selhani platby neni pozvanka ke spamu
+
+Chyba platby je normalni provozni situace. Karta expirovala, banka platbu odmitla, firma meni kartu nebo se neco rozbilo mezi branou a aplikaci. Komunikace ma byt jasna, kratka a bez natlaku.
+
+Minimalni postup:
+
+1. Prvni email: co se stalo, jak opravit platbu, do kdy zustane pristup aktivni.
+2. Druha pripominka: konkretni datum omezeni pristupu, kontakt na podporu.
+3. Grace period: produkt zustane dostupny podle pravidel, ale nove placene funkce se nemusi aktivovat.
+4. Omezeni: omez pristup predvidatelne, bez mazani dat jako trestu.
+5. Ukonceni: vysvetli export a retenci dat po ukonceni.
+
+**Priklad emailu:**
+
+```text
+Predmet: Nepodarilo se obnovit predplatne
+
+Dnes se nepodarilo zpracovat platbu za plan Team. Pristup zustava aktivni do 2026-09-08.
+
+Platebni udaje muzete aktualizovat v nastaveni fakturace. Pokud je problem na nasi strane nebo potrebujete vystavit doklad jinak, odpovezte na tento email.
+
+Data kvuli teto chybe nikam neposilame navic a pristup neomezime bez dalsiho upozorneni.
+```
+
+### 7. 60min postup
+
+```text
+00-08 min: Nakresli billing tok.
+Cenik -> checkout -> platebni brana -> faktura -> produktovy pristup -> zruseni/export.
+
+08-16 min: Oznac data v kazdem kroku.
+Co je fakturacni, co platebni, co produktove, co supportni a co analyticke.
+
+16-25 min: Vyhod nepotrebna pole.
+Telefon, enrichment, marketingovy souhlas, interni poznamky a cokoliv, co nema praci v objednavce.
+
+25-35 min: Napis cenikove mikrocopy.
+DPH, obdobi, obnoveni, limity, zruseni, data region a zakladni support.
+
+35-45 min: Navrhni stavy predplatneho.
+trial, active, past_due, grace, suspended, canceled. Ke kazdemu napis dopad na produkt.
+
+45-52 min: Nastav fakturacni pristupy.
+Kdo vidi doklady, kdo vidi platebni stav, kdo muze menit plan a kdo vidi audit.
+
+52-60 min: Pridej billing do release checklistu.
+Nova placena funkce musi rict cenu, danovy rezim, data, retenci, zruseni a fallback pri chybe platby.
+```
+
+### Checklist: billing bez datove laviny
+
+- [ ] Cenik jasne rika, co se fakturuje a v jakem obdobi.
+- [ ] Je zrejme, zda jsou ceny bez DPH nebo vcetne DPH.
+- [ ] Checkout sbira jen udaje potrebne pro objednavku, platbu a doklad.
+- [ ] Marketingovy souhlas neni podminkou nakupu.
+- [ ] Platebni karta ani platebni tajemstvi nejsou ukladane v aplikaci.
+- [ ] Produkt zna jen stav predplatneho, plan, limity a potrebne identifikatory.
+- [ ] Fakturacni doklady maji vlastni retencni pravidlo.
+- [ ] Pristup k fakturacnim udajum je oddeleny od bezneho produktoveho supportu.
+- [ ] Zmena planu a rucni upravy maji auditni stopu.
+- [ ] Selhani platby ma jasnou grace period a slusnou komunikaci.
+- [ ] Zruseni predplatneho zahrnuje export, retenci a mazani dat.
+- [ ] Billing tok lze vysvetlit zakaznikovi bez mlzeni a bez pravnickeho karaoke.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -8510,6 +8667,7 @@ Nova funkce s osobnimi daty musi rict, co loguje, co neloguje a jak dlouho to dr
 - European Commission, Unfair commercial practices directive: https://commission.europa.eu/law/law-topic/consumer-protection-law/unfair-commercial-practices-and-price-indication/unfair-commercial-practices-directive_en
 - European Commission, Price Indication Directive: https://commission.europa.eu/law/law-topic/consumer-protection-law/unfair-commercial-practices-and-price-indication/price-indication-directive_en
 - European Commission, Consumer Rights Directive: https://commission.europa.eu/law/law-topic/consumer-protection-law/consumer-contract-law/consumer-rights-directive_en
+- European Commission, Digital contracts: https://commission.europa.eu/law/law-topic/consumer-protection-law/digital-contracts_en
 - European Commission, VAT One Stop Shop: https://vat-one-stop-shop.ec.europa.eu/index_en
 - UOOU, Cookies - otazky a odpovedi: https://uoou.gov.cz/verejnost/qa-otazky-a-odpovedi/cookies
 - OWASP Top 10 2025, A01 Broken Access Control: https://owasp.org/Top10/2025/A01_2025-Broken_Access_Control/
@@ -8606,3 +8764,4 @@ Nova funkce s osobnimi daty musi rict, co loguje, co neloguje a jak dlouho to dr
 - 2026-08-01: Pridana prakticka priloha Zadosti subjektu udaju bez supportoveho chaosu za 60 minut vcetne triage, overeni identity, datove mapy, odpovedi, mazani a checklistu.
 - 2026-08-01: Pridana prakticka priloha Zaznamy o zpracovani bez spreadsheetoveho pekla za 60 minut vcetne karet zpracovani, roli, dodavatelu, retence a checklistu udrzby.
 - 2026-08-01: Pridana prakticka priloha Logovani a monitoring bez osobnich udaju navic za 45 minut vcetne typu logu, zakazanych dat, retence, alertu a release checklistu.
+- 2026-08-01: Pridana prakticka priloha Platebni a fakturacni tok bez datove laviny za 60 minut vcetne ceniku, checkoutu, platebni brany, fakturacni retence, selhani plateb a checklistu.
