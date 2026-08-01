@@ -9126,6 +9126,168 @@ Minuty 40 az 45: nastav datum prvni kontroly. Referral program bez kontroly je j
 
 ---
 
+## Pripadova studie bez prozrazeni zakaznickych dat za 60 minut
+
+Pripadova studie je silny marketingovy format, protoze ukazuje realny problem, cestu a vysledek. Jenze u B2B SaaS muze snadno sklouznout k tomu, ze verejne prozradis vic, nez je zdrave: interni proces zakaznika, strukturu tymu, pouzivane nastroje, bezpecnostni slabiny, konkretni objemy dat nebo osobni udaje lidi, kteri v pribehu ani nechteji byt.
+
+Privacy-first pripadova studie ma jednoduchy cil: ukazat dost konkretni hodnotu pro podobne zakazniky, ale neudelat z referencniho zakaznika vystavni vitrinu jeho internich rizik. Dobra studie prodava duveru tim, ze je presna, ferova a schvalena.
+
+EDPB rozlisuje anonymizaci a pseudonymizaci: pseudonymizace snizuje propojeni dat s konkretni osobou, ale neodstranuje ho automaticky; skutecne anonymizovana data uz nemaji byt spojitelna s jednotlivcem. Prehled EDPB k tematu je tady: https://www.edpb.europa.eu/topics/ai-and-technology/anonymisation-pseudonymisation_en. Prakticky preklad pro marketing: "prejmenovali jsme zakaznika na Firmu A" neni kouzelny plast neviditelnosti.
+
+### 1. Nez zacnes psat, udelej datovy semafor
+
+Rozdel informace do tri skupin:
+
+| Typ informace | Priklad | Jak s ni pracovat |
+| --- | --- | --- |
+| Zelena | Verejny obor, obecny typ problemu, schvalena citace | Muze do textu, pokud sedi s kontextem. |
+| Zluta | Velikost tymu, proces, metriky pred/po, pouzite integrace | Zobecni, agreguj nebo nech schvalit presne zneni. |
+| Cervena | Osobni udaje, security slabiny, interni ceny, incidenty, citlive objemy dat | Nepublikuj bez jasneho duvodu, souhlasu a smluvni kontroly. |
+
+Priklad:
+
+> "Zakaznik mel v CRM 18 742 kontaktu vcetne poznamek obchodniku a exportoval je do nastroje X."
+
+Lepsi verze:
+
+> "B2B tym s tisici kontaktu potreboval omezit, ktere leady se posilaji do externich nastroju, a oddelit obchodni poznamky od marketingove analytiky."
+
+Druha verze porad rika, pro koho je problem relevantni. Nevyzrazuje ale konkretni objemy, nastroje ani interni provozni detail.
+
+**Codyho komentar:** Nejlepsi case study neni ta, ktera rekne vsechno. Je to ta, po ktere podobny zakaznik rekne "tohle je muj problem" a referencni zakaznik nemusi psat rozzureny email.
+
+### 2. Vysledek popisuj pres rozhodnuti, ne pres sledovani
+
+Marketing miluje cisla. Cisla jsou fajn, pokud jsou pravdiva, srozumitelna a nevznikla zbytecnym sledovanim lidi.
+
+Bezpecnejsi typy vysledku:
+
+- zkraceni konkretniho procesu,
+- mene rucnich kroku,
+- rychlejsi odpoved zakaznikovi,
+- snizeni poctu nastroju v datove ceste,
+- jasnejsi odpovednost v tymu,
+- mensi rozsah sbiranych dat,
+- lepsi auditovatelnost a export.
+
+Slaba veta:
+
+> "Zvedli jsme efektivitu o 37 % diky pokrocilemu sledovani chovani uzivatelu."
+
+Lepsi veta:
+
+> "Tym prestal rucne kontrolovat tri nastroje a zavedl jeden denni seznam follow-upu. Po mesici dokazal odpovidat na nove B2B poptavky do dalsiho pracovniho dne bez toho, aby posilal obsah mailboxu do dalsi analyticke sluzby."
+
+Tohle je konkretni a pritom nepotrebuje invazivni detail. Ukazuje zmenu v praci, ne honbu za presnym procentem za kazdou cenu.
+
+### 3. Citace musi byt schvalena, kontext taky
+
+Citace bez kontextu umi byt neferova i tehdy, kdyz je doslovna. U B2B referenci proto pouzivej maly schvalovaci balicek:
+
+- finalni text citace,
+- jmeno a role, pokud maji byt verejne,
+- nazev firmy a logo, pokud maji byt verejne,
+- vecny kontext kolem citace,
+- metriky nebo tvrzeni, ktere citace podporuje,
+- datum schvaleni,
+- clovek, ktery schvaleni dal.
+
+Pokud zakaznik nechce byt jmenovany, respektuj to. Anonymni studie muze porad fungovat, kdyz je dobra:
+
+> "Cesky B2B SaaS s peticlennym tymem podpory" je pro ctenare uzitecnejsi nez "nas klient".
+
+Vyhni se formulacim, ktere anonymitu rozbiji kombinaci detailu. "Vyrobce specializovaneho softwaru pro veterinarni kliniky v Brne s 12 lidmi" muze byt v praxi skoro jmeno firmy.
+
+### 4. Screenshoty cisti jako produktovy material, ne jako nahodne obrazky
+
+Screenshot prodava rychle, ale take rychle vynasi data. Pred publikaci zkontroluj:
+
+- jmena, emaily, telefony a avatary,
+- nazvy zakazniku zakaznika,
+- interni poznamky, castky a smluvni detaily,
+- URL s tokeny nebo query parametry,
+- casy, ID, cisla faktur a objednavek,
+- chyby, ktere ukazuji infrastrukturu,
+- nazvy internich workspace nebo projektu.
+
+Nejspolehlivejsi je pouzit demo data vytvorena pro publikaci. Rozmazani obrazku neni idealni strategie: nekdy jde text obnovit, nekdy zustane poznatelny kontext a skoro vzdy to vypada jako rychla oprava misto profesionalni reference.
+
+Prakticky postup:
+
+1. Vytvor demo workspace se syntetickymi daty.
+2. Nastav stejne stavy, ktere chces ukazat v pribehu.
+3. Udelej screenshoty z demo prostredi.
+4. Nech je projit privacy kontrolou stejne jako text.
+5. Uloz zdroj screenshotu a datum, kdy vznikl.
+
+### 5. Struktura studie, ktera neprodava mlhu
+
+Pouzij sest casti:
+
+| Cast | Otazka |
+| --- | --- |
+| Kontext | Pro koho byl problem relevantni? |
+| Problem | Co se delo pred zmenou? |
+| Riziko | Co by se stalo, kdyby se nic nezmenilo? |
+| Reseni | Co se zavedlo a proc prave to? |
+| Vysledek | Co se zlepsilo pozorovatelnym zpusobem? |
+| Privacy pouceni | Ktera data se nesbirala, omezila nebo lepe ridila? |
+
+Sablona:
+
+```text
+Zakaznik:
+[segment, velikost nebo role bez zbytecne identifikace]
+
+Problem:
+[konkretni situace z provozu]
+
+Pred zmenou:
+[rucni kroky, ztraty, rizika]
+
+Co jsme udelali:
+[3 az 5 rozhodnuti nebo zasahu]
+
+Vysledek:
+[pozorovatelny posun, pripadne schvalena metrika]
+
+Privacy-first detail:
+[co jsme zamerne nesbirali, kam data nesla, co se zjednodusilo]
+
+Schvaleno:
+[kdo, kdy, rozsah publikace]
+```
+
+### 6. 60min postup
+
+Prvnich 10 minut: vyber jednu referenci a napis, proc ma byt verejna. Pokud neumis rict, komu pomuze pri rozhodovani, neni to studie, ale dekorace.
+
+Minuty 10 az 20: udelej datovy semafor. Oznac zelene, zlute a cervene informace. Cervene informace vyrad hned.
+
+Minuty 20 az 35: napis prvni verzi podle struktury kontext, problem, riziko, reseni, vysledek a privacy pouceni.
+
+Minuty 35 az 45: prepis metriky a screenshoty tak, aby neprozrazovaly zakaznicka nebo osobni data. Kde to nejde, pouzij demo data nebo textovy popis.
+
+Minuty 45 az 55: priprav schvalovaci balicek pro zakaznika. Posli jen finalni text, citace, obrazky a seznam verejnych tvrzeni, ne interni poznamky z projektu.
+
+Minuty 55 az 60: zapis vlastnika studie, datum kontroly a misto, kde bude ulozene schvaleni. Bez schvaleni nepublikuj.
+
+### Checklist: pripadova studie bez vyzrazeni dat
+
+- [ ] Vim, komu ma studie pomoct pri nakupnim rozhodnuti.
+- [ ] Informace jsou rozdelene na zelene, zlute a cervene.
+- [ ] Nepublikuji osobni udaje, interni ceny, security slabiny ani citlive objemy dat.
+- [ ] Pseudonymizace neni zamena za anonymizaci.
+- [ ] Metriky jsou schvalene, vysvetlene a nevyzaduji zbytecne sledovani lidi.
+- [ ] Citace maji schvalene presne zneni i kontext.
+- [ ] Screenshoty pouzivaji demo nebo dukladne vycistena data.
+- [ ] Anonymni popis zakaznika nejde snadno zpetne spojit s jedinou firmou.
+- [ ] Privacy-first detail je soucast pribehu, ne dodatecna poznamka.
+- [ ] Mam ulozene datum schvaleni a rozsah toho, co smi byt verejne.
+- [ ] Studie ma naplanovanou kontrolu, aby casem nelhala o produktu nebo zakaznikovi.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -9136,6 +9298,7 @@ Minuty 40 az 45: nastav datum prvni kontroly. Referral program bez kontroly je j
 - EDPB Opinion 22/2024 on certain obligations following from the reliance on processors and sub-processors: https://www.edpb.europa.eu/system/files/2024-10/edpb_opinion_202422_relianceonprocessors-sub-processors_en.pdf
 - WP29/EDPB Guidelines on Data Protection Impact Assessment (DPIA): https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/data-protection-impact-assessment-dpia_en
 - EDPB Guidelines 9/2022 on personal data breach notification under GDPR: https://www.edpb.europa.eu/documents/guideline/guidelines-92022-on-personal-data-breach-notification-under-gdpr_en
+- EDPB, Anonymisation / pseudonymisation: https://www.edpb.europa.eu/topics/ai-and-technology/anonymisation-pseudonymisation_en
 - Directive (EU) 2022/2555, NIS2 Directive, EUR-Lex: https://eur-lex.europa.eu/eli/dir/2022/2555/oj/eng
 - ENISA, Cybersecurity guide for SMEs - 12 steps to securing your business: https://www.enisa.europa.eu/publications/cybersecurity-guide-for-smes
 - EDPB Guidelines 05/2020 on consent under Regulation 2016/679: https://www.edpb.europa.eu/documents/guideline/guidelines-052020-on-consent-under-regulation-2016679_en
@@ -9246,3 +9409,4 @@ Minuty 40 az 45: nastav datum prvni kontroly. Referral program bez kontroly je j
 - 2026-08-01: Pridana prakticka priloha DPA zmena dodavatele bez rozbite duvery za 60 minut vcetne karty zmeny, DPA kontroly, subprocesorske komunikace a checklistu.
 - 2026-08-01: Pridana prakticka priloha Kampan bez reklamniho pixelu za 45 minut vcetne UTM konvence, minimalniho mereni, datoveho mikrotextu, vyhodnoceni leadu a checklistu.
 - 2026-08-01: Pridana prakticka priloha Referral a partnerska doporuceni bez sledovaciho cirkusu za 45 minut vcetne referral kodu, formularoveho mikrotextu, odmen, vyhodnoceni kvality leadu a checklistu.
+- 2026-08-01: Pridana prakticka priloha Pripadova studie bez prozrazeni zakaznickych dat za 60 minut vcetne datoveho semaforu, prace s citacemi, screenshoty, sablony a checklistu.
