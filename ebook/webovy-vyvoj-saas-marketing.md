@@ -6610,6 +6610,209 @@ Po 45 minutach nemas dokonaly disaster recovery program. Mas ale prvni obnovitel
 
 ---
 
+## Dokumentacni hub bez firemniho smetiste za 45 minut
+
+Dokumentace maleho SaaS tymu se casto rodi hrdinsky a umira potichu. Nejdriv vznika v chatu, pak v poznamkach po callu, pak v issue, pak ve sdilenem dokumentu, pak v hlavach lidi, kteri zrovna nemaji cas. Vysledek je znamy: zakaznik se zepta na retenci dat, obchodnik najde starou vetu, vyvoj ma jinou realitu a nekdo v provozu tise doufa, ze se nikdo nezepta na restore test.
+
+Dokumentacni hub neni dalsi wiki pro vsechno. Je to jedno primarni misto, kde maly tym drzi rozhodnuti, provozni postupy, datovou mapu, odpovedi pro obchod a opakovatelne sablony. Privacy-first hodnota tady neni jen obsah. Je to zpusob prace: dokumentace ma mit vlastnika, datum kontroly, jasny rozsah a minimum citlivych dat.
+
+**Codyho komentar:** Dokumentace, kterou nikdo neotevre pri realnem problemu, je dekorace. Hezka mozna, ale stejne dekorace. Dobra dokumentace se pozna podle toho, ze ji nekdo pouzije v patek v 16:47 a nezacne u toho prehodnocovat zivotni volby.
+
+### 1. Vyber jedno misto pravdy
+
+Prvni rozhodnuti je nudne a zasadni: kde dokumentace zije. Muze to byt slozka v repozitari, interni wiki nebo znalostni baze. Dulezite je, aby splnovala par pravidel:
+
+- da se vyhledavat,
+- ma historii zmen,
+- jde exportovat,
+- pristupy jsou podle role,
+- neni zavisla na osobnim uctu jednoho cloveka,
+- je jasne, co je verejne, interni a citlive.
+
+Pro maly technicky tym je casto dobry zacatek slozka `docs/` v repozitari:
+
+```text
+docs/
+  decisions/
+  operations/
+  privacy/
+  sales/
+  support/
+  templates/
+```
+
+Neni to povinnost. Je to vzor mysleni. Rozhodnuti a runbooky patri blizko produktu. Obchodni odpovedi a trust texty mohou byt v kontrolovane znalostni bazi. Hlavni je, aby existoval index, ktery rika, kde co hledat.
+
+### 2. Rozdel dokumenty podle pouziti
+
+Neptej se "jakou dokumentaci mame napsat?". Ptej se "kdo ji bude pouzivat a v jake situaci?".
+
+| Typ dokumentu | Kdo ho pouzije | Kdy |
+| --- | --- | --- |
+| Rozhodovaci zaznam | produkt, vyvoj, founder | kdyz se vraci stare tema nebo meni dodavatel |
+| Datova mapa | obchod, legal, provoz | pri DPA dotazu, auditu, incidentu nebo nove funkci |
+| Runbook | provoz, vyvoj | pri incidentu, obnoveni, deployi nebo rollbacku |
+| Trust odpovedi | obchod, support | kdyz se zakaznik pta na hosting, export, mazani nebo AI |
+| Support sablony | support, founder | pri opakovanych dotazech |
+| Launch checklist | produkt, marketing, vyvoj | pred verejnym spustenim nebo kampani |
+
+Kazdy dokument musi mit jednu vetu ucelu. Pokud ji neumime napsat, dokument nejspis nema jasnou praci.
+
+Sablona hlavicky:
+
+```text
+Nazev:
+
+Ucel:
+[proc dokument existuje]
+
+Kdy pouzit:
+[situace]
+
+Vlastnik:
+[role nebo clovek]
+
+Posledni kontrola:
+[datum]
+
+Citlivost:
+verejne / interni / citlive
+```
+
+Hlavicka vypada jako drobnost, ale resi velkou cast chaosu. Kdyz dokument nema vlastnika ani datum, je to historicky artefakt. Muze byt uzitecny, ale nesmi se tvarit jako aktualni pravda.
+
+### 3. Do dokumentace neukladej data, ktera tam nepatri
+
+Dokumentace casto bobtna proto, ze se do ni lepi cele priklady z reality. Screenshot adminu. Export z CRM. Support vlakno. Cast logu. Jmeno zakaznika. Interni cena. Token, ktery "uz stejne neplati". Tohle neni kontext. To je datova stopa bez retence.
+
+Pravidla:
+
+- Pouzivej anonymizovane nebo synteticke priklady.
+- U incidentu zapisuj timeline a dopad, ne cele osobni zaznamy.
+- U support prikladu popis problemu, ne identitu zakaznika.
+- U security dokumentu nesdilej interni detaily, ktere zvysuji riziko.
+- U obchodnich odpovedi oddel obecnou sablonu od konkretniho zakaznickeho vlakna.
+- Kdyz dokument obsahuje citlive informace, oznac ho a omez pristup.
+
+**Priklad spatne dokumentace:**
+
+```text
+Klient Novakovi s.r.o. poslal export se 420 kontakty, chyba byla u jana@...
+```
+
+**Lepsi zapis:**
+
+```text
+Import kontaktu selhal u radku s chybejicim povinnym polem `email`.
+Dopad: import se zastavil bez citelne chyby.
+Oprava: validace pred importem a zprava s cislem radku.
+```
+
+Produkt se z toho nauci stejne. Data zustanou mensi. Vsichni spi o trochu lip, coz je podcenovana SaaS metrika.
+
+### 4. Udrzuj dokumenty pres rytmus, ne pres hrdinstvi
+
+Dokumentace se neudrzuje tim, ze si jednou rocne nekdo vezme dovolenou a prepise wiki. Udrzuje se malymi navazanymi pravidly:
+
+| Udalost | Co aktualizovat |
+| --- | --- |
+| Novy dodavatel | vendor review, subprocesori, datova mapa, trust odpovedi |
+| Nova funkce s daty | mini DPIA, datova mapa, privacy mikrotext, event katalog |
+| Incident | timeline, runbook, postmortem, preventivni opatreni |
+| Launch | launch checklist, changelog, status pravidla, support sablony |
+| Security dotaz | security overview, FAQ, trust page, rozhodovaci zaznam |
+| Ukonceni dodavatele | exit plan, tokeny, dokumentace, subprocesor seznam |
+
+Prakticke pravidlo do pull requestu nebo issue:
+
+```text
+Meni tato zmena verejny slib, datovy tok, dodavatele, retenci, pristup nebo provozni postup?
+Pokud ano, pridej odkaz na aktualizovany dokument.
+```
+
+Tohle neni byrokracie. Je to zpusob, jak zabranit tomu, aby kod a verejna pravda jely kazdy jinym vlakem.
+
+### 5. Vytvor index odpovedi pro obchod a support
+
+Obchod a support nepotrebuji pro kazdy dotaz cist cele runbooky. Potrebuji kratke odpovedi s odkazem na zdroj pravdy.
+
+Sablona knihovny odpovedi:
+
+```text
+Otazka:
+[napr. Kde bezi vase data?]
+
+Kratka odpoved:
+[2 az 4 vety, ktere lze poslat zakaznikovi]
+
+Co neslibovat:
+[maximalisticke nebo neoverene vety]
+
+Interni zdroj:
+[datova mapa / trust page / rozhodovaci zaznam]
+
+Vlastnik:
+[kdo hlida pravdivost]
+
+Posledni kontrola:
+[datum]
+```
+
+Priklad:
+
+```text
+Otazka:
+Pouzivate AI nad nasimi daty?
+
+Kratka odpoved:
+AI zpracovani pouzivame jen v rozsahu popsane funkce nebo dohodnuteho procesu.
+Zakaznicka data neposilame do AI nastroju bez jasneho ucelu, datove hranice a odpovidajiciho dodavatelskeho posouzeni.
+
+Co neslibovat:
+"AI nikdy nepouzivame" nebo "vse je automaticky v EU", pokud to neodpovida realite.
+```
+
+Tahle knihovna chrani pred improvizaci. Kdyz se odpoved zmeni, upravis jedno misto, ne deset starych emailu v hlavach lidi.
+
+### 6. 45min postup
+
+```text
+00-05 min: Vyber misto pravdy.
+Repo docs, wiki nebo znalostni baze s exportem a historii.
+
+05-12 min: Vytvor index.
+Rozhodnuti, provoz, privacy, obchod, support, sablony.
+
+12-22 min: Vyber pet kritickych dokumentu.
+Datova mapa, vendor review, incident runbook, trust odpovedi, launch checklist.
+
+22-32 min: Pridej hlavicky.
+Ucel, kdy pouzit, vlastnik, posledni kontrola, citlivost.
+
+32-40 min: Uklid citlive priklady.
+Nahrad realna data syntetickymi nebo anonymizovanymi.
+
+40-45 min: Nastav udrzovaci pravidlo.
+Ktere udalosti musi aktualizovat dokumentaci a kdo to hlida.
+```
+
+Po 45 minutach nema tym encyklopedii. Ma mapu. A mapa je presne to, co potrebujes, kdyz se nekdo zepta na DPA, spadne formular nebo se vrati stare rozhodnuti o analytice.
+
+### Checklist: dokumentacni hub
+
+- [ ] Existuje jedno primarni misto, kde se hledaji rozhodnuti a provozni postupy.
+- [ ] Dokumentace ma index a jasne kategorie.
+- [ ] Kriticke dokumenty maji vlastnika, ucel, citlivost a datum posledni kontroly.
+- [ ] Datova mapa, vendor review, incident runbook a trust odpovedi jsou dohledatelne.
+- [ ] Dokumenty nepouzivaji realna zakaznicka data, pokud to neni nezbytne a rizene.
+- [ ] Obchod a support maji kratke odpovedi s odkazem na zdroj pravdy.
+- [ ] Verejne sliby se daji dohledat k interni realite.
+- [ ] Zmena dodavatele, datoveho toku, retence nebo verejneho slibu aktualizuje dokumentaci.
+- [ ] Stare dokumenty se oznacuji jako nahrazene, ne potichu prepisuji bez kontextu.
+- [ ] Dokumentacni hub jde exportovat nebo prenest, kdyz se meni nastroj.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -6698,6 +6901,7 @@ Po 45 minutach nemas dokonaly disaster recovery program. Mas ale prvni obnovitel
 - 2026-07-31: Pridana prakticka priloha Demo call bez slibu navic za 45 minut vcetne scenare discovery, cileneho dema, privacy otazek, zapisu po callu a checklistu.
 - 2026-07-31: Pridana prakticka priloha Follow-up po demu bez natlaku za 45 minut vcetne sablon emailu, prace s namitkami, datove minimalizace a checklistu.
 - 2026-08-01: Pridana prakticka priloha Pilotni nabidka bez rozsahove exploze za 60 minut vcetne uspechu pilotu, rozsahu, datove hranice, ceny, vyhodnoceni a checklistu.
+- 2026-08-01: Pridana prakticka priloha Dokumentacni hub bez firemniho smetiste za 45 minut vcetne mista pravdy, vlastniku dokumentu, prace s citlivymi priklady, udrzovaciho rytmu a checklistu.
 - 2026-08-01: Pridana prakticka priloha Demo sandbox bez zakaznickych dat za 45 minut vcetne syntetickych dat, hranic sandboxu, mikrotextu, uklidu po demu a checklistu.
 - 2026-08-01: Pridana prakticka priloha Kvalifikace leadu bez CRM bordelu za 45 minut vcetne rozhodovacich poli, jednoducheho skore, sablon reakci, tydenniho uklidu pipeline a checklistu.
 - 2026-08-01: Pridana prakticka priloha Predavka z obchodu do onboardingu bez ztraty kontextu za 45 minut vcetne handoff karty, datoveho kontraktu, onboardingoveho emailu, vyhodnoceni milniku a checklistu.
