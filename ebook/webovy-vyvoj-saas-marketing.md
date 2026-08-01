@@ -9635,6 +9635,202 @@ Minuty 50 az 60: nastav tydenni review. Projdi dotazy, vyber jednu odpoved k pub
 
 ---
 
+## Zakaznicky pruzkum bez zbytecneho profilovani za 45 minut
+
+Zakaznicky pruzkum ma byt nastroj pro rozhodnuti, ne dalsi formular, ktery lidem sahne do kalendare, role, rozpoctu, lokace a nalady jen proto, ze to nastroj umi. U maleho SaaS vetsinou nechces vedet vsechno. Chces vedet, co zlepsit pristi tyden, co prestalo fungovat a proc nekdo porad jeste nedosel k hodnote.
+
+Privacy-first pruzkum ma tri pravidla:
+
+- pta se jen na otazky, ktere povedou k rozhodnuti,
+- odpovedi drzi oddelene od zbytecneho profilu zakaznika,
+- predem rika, kdo odpovedi cte a jak se pouziji.
+
+Tohle neni akademicka cistota. Kdyz se zakaznik boji napsat pravdu, protoze ma pocit, ze se odpoved prilepi k jeho obchodnimu profilu na vecnost, dostanes uhlazenou mlhu. A mlha je spatny produktovy vstup.
+
+### 1. Vyber jeden duvod pruzkumu
+
+Nejdriv rozhodni, proc se ptas. Jeden pruzkum nema najednou merit spokojenost, sbirat produktove napady, kvalifikovat upsell, validovat cenik a testovat marketingovy slogan. To uz neni pruzkum, to je vyslech s hezkym tlacitkem.
+
+Pouzij jeden z peti rezimu:
+
+| Rezim | Kdy ho pouzit | Hlavni vystup |
+| --- | --- | --- |
+| Aktivace | Uzivatel prosel onboardingem. | Co mu pomohlo nebo brzdilo prvni hodnotu. |
+| Retence | Zakaznik produkt pouziva opakovane. | Co drzi hodnotu a co se opakuje jako bolest. |
+| Churn | Zakaznik odchazi nebo prestal pouzivat produkt. | Hlavni duvod odchodu a mozna oprava. |
+| Funkce | Prave byla vydana zmena. | Jestli zmena resi realny use-case. |
+| Duvera | Zakaznici se ptaji na data, hosting nebo bezpecnost. | Ktere informace chybi v produktu, dokumentaci nebo obchodu. |
+
+**Priklad spatneho zadani:**
+
+"Chceme zjistit, jak jsou zakaznici spokojeni a co by chteli."
+
+**Lepsi zadani:**
+
+"Chceme zjistit, proc nove tymy po registraci nedokonci import dat do 48 hodin."
+
+Druhe zadani rika, koho oslovit, kdy se ptat, jake odpovedi hledat a co se mozna zmeni v produktu. Prvni zadani vyrobi barevny report a pak ticho.
+
+### 2. Otazky pis tak, aby sly menit na praci
+
+Kazda otazka musi mit vlastnika rozhodnuti. Pokud nikdo nevi, co s odpovedi udela, otazku smaz.
+
+Minimalni sada pro aktivacni pruzkum:
+
+```text
+Predmet:
+Pomohlo vam prvni nastaveni?
+
+Otazky:
+1. Co jste chteli v Codym udelat?
+2. Kde jste se zasekli nebo zpomalili?
+3. Co by melo byt jasnejsi pred prvnim pouzitim?
+4. Muzeme se ozvat s jednim doplnujicim dotazem? [ano/ne]
+```
+
+Minimalni sada pro churn pruzkum:
+
+```text
+Predmet:
+Co nam uteklo?
+
+Otazky:
+1. Jakou praci mel produkt puvodne resit?
+2. Co byl hlavni duvod, proc nepokracujete?
+3. Co pouzijete misto nej?
+4. Je neco, co bychom meli smazat, exportovat nebo uzavrit?
+```
+
+U churnu je posledni otazka dulezita. Odchod zakaznika neni jen marketingovy signal. Je to provozni okamzik: data, pristupy, fakturace, exporty, otevrene integrace a sliby. Kdyz se na to nezeptas, cast uklidu zustane ve vzduchu.
+
+**Codyho komentar:** NPS otazka muze byt uzitecna, ale sama o sobe nerekne, co opravit. Skore bez textoveho duvodu je jako budik bez ciferniku. Dela hluk, ale porad nevis, kolik je.
+
+### 3. Nespojuj odpovedi s profilem, pokud nemusis
+
+U maleho B2B SaaS casto staci vedet segment a stav v produktu, ne plnou identitu respondenta. Jinak vypada odpoved od trial uzivatele, jinak od platiciho admina a jinak od cloveka, ktery produkt pouziva kazdy den. Ale nepotrebujes kvuli tomu tahat cely CRM zaznam do survey nastroje.
+
+Prakticke urovne identifikace:
+
+| Uroven | Kdy staci | Co sbirat |
+| --- | --- | --- |
+| Anonymni | Obecna zpetna vazba k dokumentaci nebo obsahu. | Odpoved, cas, volitelny segment. |
+| Pseudonymni | Produktovy pruzkum, kde potrebujes fazi uzivatele. | Interni ID nebo hash, plan, faze onboardingu. |
+| Identifikovana | Follow-up k problemu, support nebo account management. | Kontakt jen se souhlasem nebo jasnym ucelem. |
+
+Vyhni se automatickemu pribaleni vseho, co nastroj nabizi: IP adresy, user-agent, presna lokace, reklamni identifikatory, historie kampani, velikost firmy z obohacovaci databaze. Pokud to nepouzijes pro konkretni rozhodnuti, je to jen dalsi vec, kterou musis chranit a vysvetlovat.
+
+Dobry mikrotext pod pruzkum:
+
+```text
+Odpovedi pouzijeme pro zlepseni onboardingu. Nepotrebujeme vase osobni udaje; kontakt na sebe nechte jen pokud chcete, abychom se ozvali s doplnujicim dotazem.
+```
+
+U identifikovaneho pruzkumu bud jeste konkretnejsi:
+
+```text
+Odpoved uvidi produktovy tym a clovek odpovedny za vas ucet. Pouzijeme ji pro opravu konkretniho onboardingoveho kroku, ne pro reklamni profilovani.
+```
+
+### 4. Vyhodnocuj rucne driv, nez automatizujes
+
+Prvnich 20 az 50 odpovedi necti pres dashboard. Precti je. Rucne. Pomalu. S oznacenim temat.
+
+Jednoducha taxonomie:
+
+- `nejasny-start`: clovek nevi, co udelat po registraci,
+- `chybi-data`: hodnota nevznikla, protoze chybi import nebo integrace,
+- `duvera`: otazky na hosting, data, smlouvy, pristupy,
+- `cena`: nejistota kolem planu, limitu nebo fakturace,
+- `vykon`: pomalost, chyby, prerusene toky,
+- `feature-gap`: chybejici schopnost, ktera blokuje hodnotu,
+- `nice-to-have`: napad, ktery zni dobre, ale neblokuje vysledek.
+
+Po vyhodnoceni si napis rozhodovaci zapis:
+
+```text
+Pruzkum:
+[nazev / datum]
+
+Koho jsme oslovili:
+[segment + pocet]
+
+Nejcastejsi tema:
+[tema + priklad odpovedi bez osobnich udaju]
+
+Co opravime:
+[jedna konkretni vec]
+
+Co zatim ignorujeme:
+[duvod]
+
+Co doplnime do dokumentace nebo landing page:
+[URL / plan]
+
+Kdy se k tomu vratime:
+[datum]
+```
+
+Kdyz vysledek neskonci praci, dokumentaci nebo rozhodnutim, pruzkum byl jen ritual. Hezky ritual, ale porad ritual.
+
+### 5. Pruzkum neposilej kazdemu porad
+
+Survey fatigue existuje i bez slozite terminologie. Kdyz se ptas po kazdem kliknuti, lide prestanou odpovidat nebo zacnou klikat cokoli, aby meli klid. Pruzkum ma mit spravny moment.
+
+Vhodne momenty:
+
+- po dokonceni prvni hodnoty,
+- po selhani duleziteho toku,
+- po 30 dnech placeneho pouzivani,
+- pri ukonceni trialu,
+- po vyresenem support ticketu,
+- po vydani zmeny, ktera se tyka konkretni skupiny.
+
+Nevhodne momenty:
+
+- hned po registraci, kdy clovek jeste nic nevi,
+- uprostred kriticke prace,
+- po kazdem drobnem eventu,
+- v mailu, ktery se tvari jako osobni zprava, ale je to automat,
+- s otazkami, na ktere uz odpoved znas z produktu.
+
+Pravidlo frekvence:
+
+```text
+Jeden uzivatel nedostane vic nez jeden produktovy pruzkum za 30 dni, pokud sam neotevre support nebo nepozada o follow-up.
+```
+
+Tohle pravidlo chrani vztah i kvalitu dat. Mene odpovedi muze byt lepsi, kdyz jsou od lidi, kteri maji kontext a nejsou otraveny.
+
+### 6. 45min postup
+
+Prvnich 5 minut: napis jednu vetu, proc pruzkum existuje. Jestli veta neobsahuje rozhodnuti, ktere chces udelat, pruzkum neposilej.
+
+Minuty 5 az 12: vyber spravny segment a moment. Napriklad "tymy, ktere zalozily ucet, ale do 48 hodin nedokoncily import".
+
+Minuty 12 az 22: napis maximalne ctyri otazky. U kazde si poznamenej, co se podle odpovedi muze zmenit.
+
+Minuty 22 az 30: pridej datovy mikrotext. Rekni, kdo odpovedi cte, k cemu slouzi, zda je kontakt volitelny a jak se resi follow-up.
+
+Minuty 30 az 38: priprav jednoduchou tabulku pro vyhodnoceni: respondent nebo anonymni ID, segment, tema, citace bez citlivych dat, navrzeny krok.
+
+Minuty 38 az 45: nastav rozhodovaci termin. Napriklad "ctvrtek 14:00, vybereme jednu opravu onboardingu a jednu zmenu dokumentace". Bez terminu se pruzkum snadno zmeni v slozku "nekdy".
+
+### Checklist: pruzkum bez zbytecneho profilovani
+
+- [ ] Pruzkum ma jeden duvod a jedno rozhodnuti, ktere ma zlepsit.
+- [ ] Oslovuji jen segment, ktery muze dat relevantni odpoved.
+- [ ] Otazky se ptaji na konkretni zkusenost, ne na obecne dojmy.
+- [ ] Kazda otazka ma vlastnika rozhodnuti.
+- [ ] Kontakt je volitelny, pokud neni nutny pro supportni follow-up.
+- [ ] Odpovedi nejsou automaticky spojene s celym CRM profilem.
+- [ ] Nesbiram IP, presnou lokaci, reklamni identifikatory ani historii kampani bez jasneho duvodu.
+- [ ] Mikrotext rika, kdo odpovedi cte a jak se pouziji.
+- [ ] Vyhodnoceni ma tematicke stitky a jednu konkretni dalsi akci.
+- [ ] Jeden uzivatel nedostava produktovy pruzkum casteji, nez dava smysl.
+- [ ] Po vyhodnoceni vznikne oprava, dokumentacni zmena, obchodni poznatek nebo vedome rozhodnuti nic nemenit.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -9759,3 +9955,4 @@ Minuty 50 az 60: nastav tydenni review. Projdi dotazy, vyber jednu odpoved k pub
 - 2026-08-01: Pridana prakticka priloha Pripadova studie bez prozrazeni zakaznickych dat za 60 minut vcetne datoveho semaforu, prace s citacemi, screenshoty, sablony a checklistu.
 - 2026-08-01: Pridana prakticka priloha Webinar a workshop bez registracni pasti za 60 minut vcetne registrace, nahravek, follow-upu, datove cesty nastroju a checklistu.
 - 2026-08-01: Pridana prakticka priloha Komunita bez platformniho zamku za 60 minut vcetne volby kanalu, komunitniho kontraktu, vlastni domeny, moderace, metrik a checklistu.
+- 2026-08-01: Pridana prakticka priloha Zakaznicky pruzkum bez zbytecneho profilovani za 45 minut vcetne vyberu duvodu, otazek, urovni identifikace, vyhodnoceni a checklistu.
