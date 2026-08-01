@@ -6434,6 +6434,182 @@ Vysledkem ma byt dokument, ktery lze pouzit pri prvnim realnem problemu bez hled
 
 ---
 
+## Obnova ze zalohy bez paniky za 45 minut
+
+Zaloha neni strategie. Strategie je obnovit produkt do pouzitelneho stavu, vedet, o jaka data prijdes, komu to rict a co zmenit, aby se stejna bolest neopakovala. Maly SaaS tym casto zalohy "ma", ale nikdy nezkousel, jestli z nich opravdu postavi aplikaci. To je krasna forma optimismu, bohuzel dost draha.
+
+Privacy-first provoz k tomu pridava dalsi hranici: obnova nesmi byt vymluva pro kopirovani produkcnich dat do nahodnych laptopu, sdilenych disku a testovacich databazi. Pri incidentu je tlak na rychlost, ale datova disciplina se nema vypinat. Prave tehdy je nejvic potreba.
+
+### 1. Popis zalohu jako produktovou schopnost
+
+Nezacinej technickou vetou "mame snapshot kazdou noc". Zacni tim, co to znamena pro zakaznika a pro tym.
+
+Minimalni karta zalohy:
+
+| Otazka | Odpoved |
+| --- | --- |
+| Co zalohujeme? | Databaze, nahrane soubory, konfigurace, pripadne vybrane logy. |
+| Co nezalohujeme? | Cache, docasne exporty, debug vystupy, data po expiraci retence. |
+| Jak casto? | Frekvence podle dopadu ztraty dat, ne podle defaultu hostingu. |
+| Jak dlouho drzime? | Retence podle provozni potreby a smluvnich/pravnich hranic. |
+| Kde zalohy lezi? | Region, dodavatel, pristupova pravidla. |
+| Kdo muze obnovit? | Konkretni role nebo lide, ne "nekdo z vyvoje". |
+| Kdy jsme obnovu naposledy testovali? | Datum, vysledek, nalezy. |
+
+Rozlis dve metriky, ktere si tym musi rict lidsky:
+
+- RPO: kolik dat si muzeme dovolit ztratit.
+- RTO: jak dlouho muze trvat navrat do pouzitelneho stavu.
+
+Nemusis z toho delat enterprise ceremonii. Staci veta: "U lead formulare si muzeme dovolit ztratit maximalne poslednich 15 minut prijmu a chceme ho obnovit do 60 minut." Takova veta je uz rozhodnuti. "Mame backup" je jen nalepka.
+
+### 2. Obnova ma mit tri rezimy
+
+Ne kazdy problem vyzaduje plnou obnovu produkce. Kdyz mas jen spatne smazany zaznam, plny restore cele databaze muze napachat vic skody nez puvodni chyba.
+
+Prakticke rezimy:
+
+| Rezim | Kdy se hodi | Hlavni riziko |
+| --- | --- | --- |
+| Selektivni obnova | Jeden zaznam, soubor, konfigurace nebo mensi sada dat. | Omylem obnovis i data, ktera mela zustat smazana. |
+| Obnova do izolovaneho prostredi | Potrebujes zjistit stav zalohy nebo vytahnout cast dat. | Produkcni data uniknou do testu nebo lokalniho vyvoje. |
+| Plna obnova produkce | Produkcni databaze nebo uloziste je vazne poskozene. | Ztrata novych zmen, nekonzistence a spatna komunikace dopadu. |
+
+U izolovane obnovy si predem nastav pravidla:
+
+- Prostredi je pristupne jen lidem, kteri obnovu resi.
+- Data se nepouzivaji pro vyvoj novych funkci.
+- Po ukonceni se prostredi smaze.
+- Exporty z obnovy maji vlastnika a datum smazani.
+- Pokud se obnovuji osobni data, existuje jasny ucel a zapis pristupu.
+
+**Codyho komentar:** Testovaci databaze s nahodnou produkcni kopii je nejrychlejsi cesta, jak z "chteli jsme debugovat" udelat "ted vysvetlujeme, proc to ma pristup cela firma". Nedoporucuji jako firemni sport.
+
+### 3. Runbook musi byt kratky a spustitelny
+
+Runbook pro obnovu nema byt obecny manifest. Ma byt navod, ktery pouzijes ve stresu. Pis ho tak, aby sel projit krok po kroku.
+
+Sablona runbooku:
+
+```text
+Nazev: Obnova [komponenta] ze zalohy
+Vlastnik: [role/jmeno]
+Posledni test: [datum]
+
+Kdy spustit:
+- [konkretni stav nebo incident]
+
+Pred obnovou:
+- Zastavit zapis / zapnout maintenance, pokud je potreba.
+- Ulozit aktualni stav, pokud to dava smysl.
+- Zapsat cas incidentu a cas posledni dobre zalohy.
+- Informovat interni vlastniky.
+
+Postup:
+1. Overit dostupnost zalohy.
+2. Obnovit do izolovaneho prostredi nebo primo podle rezimu.
+3. Zkontrolovat integritu: pocet klicovych zaznamu, migrace, soubory.
+4. Provest smoke test hlavniho toku.
+5. Prepnout provoz nebo selektivne prenest data.
+6. Monitorovat chyby a zakaznicky dopad.
+
+Po obnoveni:
+- Uzavrit status update.
+- Zapsat ztraceny cas/datovy dopad.
+- Smazat docasne exporty a izolovane prostredi.
+- Pridat 1 az 3 preventivni opatreni.
+```
+
+Do runbooku nepatri tajemstvi, tokeny ani hesla. Patri tam odkaz na spravce tajemstvi nebo interni proces, jak je ziskat. Dokument s heslem uprostred je jen incident, ktery jeste nema datum.
+
+### 4. Test obnovy delaj jako cviceni, ne jako auditni divadlo
+
+Test obnovy je uspesny jen tehdy, kdyz dokaze odpovedet na tri otazky:
+
+- Dostali jsme se k zaloham?
+- Umime z nich obnovit produktove pouzitelny stav?
+- Vime, co by zakaznik realne poznal?
+
+45min test nemusi pokryt vsechny katastrofy. Vyber jednu komponentu a jeden scenar.
+
+Priklady scenaru:
+
+| Scenar | Co overuje |
+| --- | --- |
+| Obnova lead formulare | Prijem poptavek, emailova notifikace, minimalni ztrata leadu. |
+| Obnova nahranych souboru | Vazba mezi databazi a objektovym ulozistem. |
+| Obnova konfigurace | Tajemstvi, env promenne, deploy proces. |
+| Obnova jednoho accountu | Selektivni obnova bez prepisu ostatnich dat. |
+| Obnova po chybne migraci | Rollback, kompatibilita schema a aplikace. |
+
+Pri testu mer:
+
+- cas do nalezeni spravne zalohy,
+- cas obnovy,
+- pocet rucnich kroku,
+- chybejici pristupy,
+- nejasne casti runbooku,
+- data nebo exporty, ktere po testu musis uklidit.
+
+Vystup testu nema byt "probehlo". Vystup ma byt: "Obnova trvala 32 minut, chybel pristup k objektovemu ulozisti, smoke test formulare prosel, docasne prostredi smazano, opravujeme runbook a pristupovou roli."
+
+### 5. Komunikace po obnoveni
+
+Kdyz obnova ovlivnila zakazniky, komunikuj vecne. Neprehanej jistotu a neschovavej dopad za mlhu.
+
+Sablona kratke zpravy:
+
+```text
+Obnovili jsme [komponenta] do provozu.
+Dopad: [co zakaznici mohli pozorovat].
+Obdobi dopadu: [cas od-do].
+Data: [overeny stav, napr. "neevidujeme ztratu dat" nebo "mohly chybet zaznamy vytvorene mezi X a Y"].
+Co delame dal: [jeden konkretni preventivni krok].
+```
+
+Pokud nevis, jestli doslo ke ztrate dat, nerikej, ze nedoslo. Rekni, ze to overujes a kdy prijde dalsi update. Zakaznici snesou neprijemnou pravdu lepe nez sebevedome kouzleni se slovy.
+
+### 6. 45min postup
+
+```text
+00-05 min: Vyber jednu kritickou komponentu.
+Databaze, soubory, formular, billing, konfigurace nebo export.
+
+05-12 min: Vypln kartu zalohy.
+Co zalohujeme, kde to lezi, kdo ma pristup, kdy byl posledni test.
+
+12-22 min: Vyber rezim obnovy.
+Selektivni, izolovana, nebo plna obnova. Zapis rizika pro data.
+
+22-35 min: Napis runbook.
+Kdy spustit, kroky pred obnovou, obnova, smoke test, uklid.
+
+35-42 min: Projdi komunikaci.
+Kdy informovat status page, support, konkretni zakazniky.
+
+42-45 min: Naplanuj prvni test.
+Datum, vlastnik, scenar a ocekavany vystup.
+```
+
+Po 45 minutach nemas dokonaly disaster recovery program. Mas ale prvni obnovitelny kus provozu. To je lepsi nez dokonaly dokument, ktery nikdo nikdy nepouzil.
+
+### Checklist: obnova ze zalohy
+
+- [ ] Vim, ktere komponenty jsou kriticke pro zakaznicky provoz.
+- [ ] U kazde komponenty je jasne, co se zalohuje a co ne.
+- [ ] Znam RPO a RTO aspon pro hlavni tok.
+- [ ] Zalohy maji region, retenci, pristupy a vlastnika.
+- [ ] Existuji tri rezimy obnovy: selektivni, izolovana a plna.
+- [ ] Produkcni data se pri testu nekopiruji do volneho vyvoje.
+- [ ] Izolovane obnovy maji datum smazani a omezeny pristup.
+- [ ] Runbook obsahuje kroky pred obnovou, obnovu, smoke test a uklid.
+- [ ] Tajemstvi nejsou ulozena primo v runbooku.
+- [ ] Obnova byla testovana a ma zapsany vysledek.
+- [ ] Po obnoveni vim, co rict zakaznikum a co zatim nerikat.
+- [ ] Po kazdem testu nebo incidentu vzniknou maximalne tri konkretni opravy.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -6526,3 +6702,4 @@ Vysledkem ma byt dokument, ktery lze pouzit pri prvnim realnem problemu bez hled
 - 2026-08-01: Pridana prakticka priloha Kvalifikace leadu bez CRM bordelu za 45 minut vcetne rozhodovacich poli, jednoducheho skore, sablon reakci, tydenniho uklidu pipeline a checklistu.
 - 2026-08-01: Pridana prakticka priloha Predavka z obchodu do onboardingu bez ztraty kontextu za 45 minut vcetne handoff karty, datoveho kontraktu, onboardingoveho emailu, vyhodnoceni milniku a checklistu.
 - 2026-08-01: Pridana prakticka priloha Status page a incident komunikace za 45 minut vcetne komponent, komunikacnich prahu, sablon updatu, planovane udrzby a checklistu.
+- 2026-08-01: Pridana prakticka priloha Obnova ze zalohy bez paniky za 45 minut vcetne karty zalohy, rezimu obnovy, runbooku, testu obnovy, komunikace a checklistu.
