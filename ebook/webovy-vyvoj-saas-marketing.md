@@ -5792,6 +5792,212 @@ Co se po demu resetuje, maze a zapisuje.
 
 ---
 
+## Kvalifikace leadu bez CRM bordelu za 45 minut
+
+Lead po demu, formulare nebo pilotni poptavce neni trofej do tabulky. Je to nedokoncene rozhodnuti. Bud ma jasny problem, vlastnika, dalsi krok a rozumny fit, nebo jen zabira misto v pipeline a tvari se jako obchodni prilezitost. Maly SaaS nepotrebuje slozity scoring model. Potrebuje rychle poznat, komu pomoct hned, koho edukovat, koho slusne odmitnout a jaka data u toho vubec nema sbirat.
+
+Privacy-first kvalifikace ma jednoduchou vyhodu: kdyz si predem reknes, co potrebujes vedet pro rozhodnuti, CRM se nestane skladistem nahodnych osobnich detailu, prepisu callu a exportu "pro pozdeji". Mene dat, vic jasnosti. Radikalne nenapadne, skoro az podezrele prakticke.
+
+**Codyho komentar:** Nekvalifikovany lead neni pipeline. Je to odkladiste optimismu. Optimismus je fajn do pondelni kavy, horsi je jako prodejni system.
+
+### 1. Kvalifikuj podle rozhodnuti, ne podle dojmu
+
+Zakladni otazka neni "vypada to zajimave?". Zakladni otazka je: "Vime, co ma byt dalsi konkretni krok, a mame duvod ho udelat?"
+
+Pouzij pet poli:
+
+| Pole | Co zjistit | Proc to staci |
+| --- | --- | --- |
+| Problem | Jakou konkretni situaci chce zakaznik zmenit. | Bez problemu prodavas kategorii, ne vysledek. |
+| Dopad | Co se stane, kdyz problem zustane. | Oddeli bolest od zvedavosti. |
+| Vlastnik | Kdo muze rozhodnout nebo posunout dalsi krok. | Bez vlastnika se lead rozplyne. |
+| Data/provoz | Jaka data, integrace nebo pravidla vstupuji do hry. | Privacy a security nejsou dodatek po prodeji. |
+| Dalsi krok | Co se stane, kdo to udela a do kdy. | Bez terminu je to jen mila konverzace. |
+
+Stav leadu drz jednoduchy:
+
+| Stav | Kdy ho pouzit | Dalsi akce |
+| --- | --- | --- |
+| `new` | Prisla poptavka, jeste neni pochopena. | Do 24 hodin odpovedet nebo naplanovat discovery. |
+| `qualified` | Problem, vlastnik a dalsi krok jsou jasne. | Poslat pilot, demo, technicky call nebo nabidku. |
+| `educate` | Problem existuje, ale nacasovani nebo vlastnik chybi. | Poslat konkretni obsah a nastavit lehky follow-up. |
+| `not_fit` | Segment, potreba nebo datovy pozadavek nesedi. | Slusne uzavrit, pripadne doporucit jinou cestu. |
+| `closed` | Zakaznik koupil, odmitl nebo nereaguje po domluvenem limitu. | Uklidit pipeline a dodrzet retenci dat. |
+
+Vyhni se stavum typu `maybe`, `hot`, `super hot`, `call later asi` a dalsim malym pomnickum vnitrni bezradnosti. CRM ma pomahat rozhodovat, ne skladovat naladu obchodnika.
+
+### 2. Lead score udrz lidsky a vysvetlitelny
+
+Skore muze byt uzitecne, pokud se da vysvetlit jednou vetou. Nechces tajemny soucet dvaceti signalu, kteremu nikdo neveri a vsichni ho rucne obchazeji.
+
+Jednoducha matice:
+
+| Signal | 0 bodu | 1 bod | 2 body |
+| --- | --- | --- | --- |
+| Problem | Obecny zajem | Popsana oblast | Konkretni opakovany pripad |
+| Dopad | Nejasny | Cas nebo frustrace | Penize, riziko, ztracene obchody |
+| Vlastnik | Neznamy | Influencer | Rozhodovatel nebo jasny sponsor |
+| Nacasovani | Nekdy | Tento kvartal | Ted nebo do 30 dnu |
+| Privacy/provoz fit | Nejasny | Otevrene otazky | Nase privacy-first hodnota je vyhoda |
+
+Interpretace:
+
+- 8 az 10 bodu: kvalifikovany lead, res dalsi krok rychle.
+- 5 az 7 bodu: mozny fit, dopln chybejici odpovedi.
+- 0 az 4 body: edukace nebo uzavreni, nehonit za kazdou cenu.
+
+Skore neni pravda. Je to pomucka pro prioritu. Pokud ma lead nizke skore, ale strategicky dava smysl, zapis duvod slovy. Pokud ma vysoke skore jen proto, ze nekdo klikl na pet stranek, brzdi. Kliky nejsou bolest. Bolest je bolest.
+
+### 3. CRM zaznam ma byt maly, ale rozhodovaci
+
+Do CRM patri jen informace, ktere pomahaji obchodu, podpore, implementaci nebo privacy rozhodnuti. Zbytek patri pryc.
+
+Minimalni zaznam:
+
+```text
+Firma/segment:
+Kontaktni role:
+Zdroj:
+Problem jednou vetou:
+Dnesni workaround:
+Dopad:
+Vlastnik rozhodnuti:
+Privacy/security/provozni otazky:
+Fit: qualified / educate / not_fit
+Dalsi krok:
+Vlastnik u nas:
+Datum dalsiho kroku:
+Co neslibovat:
+Retence / uklid:
+```
+
+Co do CRM nepatri:
+
+- cele prepisy callu,
+- osobni poznamky bez obchodniho ucelu,
+- interni dokumenty zakaznika,
+- screenshoty s produkcnimi daty,
+- volne kopie emailu, pokud staci shrnuti,
+- osobni udaje dalsich lidi, kteri nejsou soucasti rozhodnuti.
+
+Pokud si nejsi jisty, jestli informaci ulozit, zeptej se: "Kdo podle toho udela jakou akci?" Kdyz odpoved neexistuje, neukladej to. CRM neni pamet internetu. Dikybohu.
+
+### 4. Nadefinuj tri rychle reakce
+
+Kvalifikace bez reakce je jen trideni. Pro kazdy vysledek mej pripraveny dalsi krok.
+
+**Kvalifikovany lead**
+
+```text
+Ahoj [jmeno],
+
+diky za kontext. Vidim dobry fit v tom, ze resite [problem] a potrebujete
+[vysledek] bez [datovy/provozni kompromis].
+
+Navrhuji dalsi krok: [demo / pilotni nabidka / technicky call] do [datum].
+Predem nepotrebujeme zadna produkcni data. Pokud bude potreba ukazka procesu,
+staci anonymizovany priklad podle sablony.
+
+Cody
+```
+
+**Lead k edukaci**
+
+```text
+Ahoj [jmeno],
+
+zatim bych to netlacil do pilotu. Z toho, co pisete, je hlavni otevreny bod
+[problem / vlastnik / nacasovani].
+
+Posilam konkretni material k [tema]. Pokud se dostanete do situace [signal],
+dava smysl navazat 20min callem.
+
+Cody
+```
+
+**Ne-fit**
+
+```text
+Ahoj [jmeno],
+
+diky za popis. Tady bych byl opatrny: podle toho, co potrebujete, nejsme ted
+nejlepsi cesta hlavne kvuli [duvod].
+
+Nechci slibovat reseni, ktere by bylo mimo nas aktualni rozsah. Pokud se zadani
+zmeni smerem k [oblast, kde fit existuje], rad se k tomu vratim.
+
+Cody
+```
+
+Slusne "ne" je obchodni aktivum. Chrani kapacitu, reputaci i produkt. A obcas se z nej za pul roku vrati mnohem lepsi zakaznik, protoze si pamatuje, ze jsi neprodal blbost.
+
+### 5. Uklid pipeline kazdy tyden
+
+Pipeline starnou rychle. Bez uklidu v nich zustanou kontakty, ktere nemaji vlastnika, datum ani duvod existence.
+
+Tydenni uklid:
+
+- Vsechny `new` leady starsi nez 7 dni musi mit odpoved nebo uzavreni.
+- Vsechny `qualified` leady musi mit dalsi krok s datem.
+- Vsechny `educate` leady musi mit duvod, proc zustavaji v evidenci.
+- Vsechny `not_fit` leady se uzaviraji a nekrmi marketingovym optimismem.
+- U starych leadu zkontroluj, zda jeste existuje ucel pro drzeni kontaktu.
+- Opakujici se namitky preved do webu, FAQ, trust page nebo produktu.
+
+Sablona tydenniho prehledu:
+
+```text
+Nove leady:
+Kvalifikovane leady:
+Leady k edukaci:
+Uzavrene ne-fit:
+Nejcastejsi namitka tydne:
+Nejcastejsi privacy/security dotaz:
+Jedna uprava webu nebo produktu:
+Lead data k uklidu:
+```
+
+Jedna uprava tydne staci. Kdyz kazdy tyden z jednoho opakovaneho dotazu vznikne lepsi text, sablona nebo produktovy detail, prodej se postupne zjednodusuje. Ne magicky. Proste nudne spravne.
+
+### 6. 45min postup
+
+```text
+00-08 min: Vyber leady
+Projdi nove poptavky, posledni dema a otevrene follow-upy.
+
+08-18 min: Dopln pet rozhodovacich poli
+Problem, dopad, vlastnik, data/provoz, dalsi krok.
+
+18-25 min: Pridej jednoduche skore
+Nepocitej klikaci magii. Hodnot realnou bolest, vlastnika a nacasovani.
+
+25-32 min: Rozhodni stav
+Qualified, educate, not_fit nebo closed. Zadna mlha.
+
+32-40 min: Odesli dalsi reakci
+Pouzij jednu ze tri sablon a uprav ji podle reality.
+
+40-45 min: Uklid CRM
+Smaz zbytecne detaily, zapis namitku tydne a jednu zmenu pro web nebo produkt.
+```
+
+### Checklist: kvalifikace leadu
+
+- [ ] Kazdy lead ma problem popsan jednou konkretni vetou.
+- [ ] Vim, jaky dopad problem ma a proc se ma resit ted.
+- [ ] Je jasny vlastnik na strane zakaznika.
+- [ ] Je jasny vlastnik dalsi akce u nas.
+- [ ] Privacy/security/provozni otazky jsou zapsane oddelene od obchodnich dojmu.
+- [ ] CRM neobsahuje cele prepisy, produkcni data ani zbytecne osobni detaily.
+- [ ] Lead ma stav `qualified`, `educate`, `not_fit` nebo `closed`.
+- [ ] Kvalifikovany lead ma dalsi krok s datem.
+- [ ] Lead k edukaci ma duvod, proc zustava v evidenci.
+- [ ] Ne-fit lead je slusne uzavreny.
+- [ ] Kazdy tyden uklizim pipeline a stare kontakty bez ucelu.
+- [ ] Opakovane namitky se vraci do webu, produktu, FAQ nebo trust page.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -5881,3 +6087,4 @@ Co se po demu resetuje, maze a zapisuje.
 - 2026-07-31: Pridana prakticka priloha Follow-up po demu bez natlaku za 45 minut vcetne sablon emailu, prace s namitkami, datove minimalizace a checklistu.
 - 2026-08-01: Pridana prakticka priloha Pilotni nabidka bez rozsahove exploze za 60 minut vcetne uspechu pilotu, rozsahu, datove hranice, ceny, vyhodnoceni a checklistu.
 - 2026-08-01: Pridana prakticka priloha Demo sandbox bez zakaznickych dat za 45 minut vcetne syntetickych dat, hranic sandboxu, mikrotextu, uklidu po demu a checklistu.
+- 2026-08-01: Pridana prakticka priloha Kvalifikace leadu bez CRM bordelu za 45 minut vcetne rozhodovacich poli, jednoducheho skore, sablon reakci, tydenniho uklidu pipeline a checklistu.
