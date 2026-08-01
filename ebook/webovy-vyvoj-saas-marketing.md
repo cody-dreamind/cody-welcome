@@ -8336,6 +8336,164 @@ Vlastnik dokumentu, mesicni kontrola zmen a pravidlo pro pull requesty nebo rele
 
 ---
 
+## Logovani a monitoring bez osobnich udaju navic za 45 minut
+
+Logy jsou jedna z veci, ktere zacnou jako technicka pomucka a skonci jako neplanovana databaze vseho, co se kdy stalo. Pro SaaS je to riziko i prilezitost. Dobre logy pomuzou najit chybu, odhalit incident a vysvetlit, co se stalo. Spatne logy sbiraji cele requesty, tokeny, zpravy, emaily, IP adresy a kusy zakaznickych dat jen proto, ze nekdo kdysi napsal `console.log(req.body)`.
+
+Privacy-first pristup neni "nelogovat nic". Je to logovat presne to, co potrebujes pro provoz, bezpecnost a audit, a zbytek nechat tam, kam patri. OWASP Logging Cheat Sheet doporucuje navrhovat aplikacni logovani jako samostatnou schopnost a zaroven upozornuje, ze citliva data do logu nepatri: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html. OWASP Top 10 2025 radi chyby v security loggingu a alertingu mezi rizika, mimo jine kvuli nedostatecnemu logovani, nejasnym logum nebo uniku citlivych informaci pres logy: https://owasp.org/Top10/2025/A09_2025-Security_Logging_and_Alerting_Failures/
+
+### 1. Rozdel logy podle ucelu
+
+Nejdriv si rekni, k cemu log existuje. Kdyz ucel neumis pojmenovat, pravdepodobne logujes ze zvyku.
+
+Prakticke kategorie:
+
+| Kategorie | Co resi | Co do ni nepatri |
+| --- | --- | --- |
+| Provozni log | chyby, latence, dostupnost, stav integraci | cela tela requestu a osobni obsah |
+| Bezpecnostni log | prihlaseni, zmeny prav, podezrele pokusy | hesla, tokeny, session cookies |
+| Auditni log | kdo zmenil dulezite nastaveni nebo data | nepotrebny obsah puvodniho zaznamu |
+| Produktova metrika | aktivace, konverze, dokoncene workflow | osobni profil uzivatele bez jasneho ucelu |
+| Debug log | docasne ladeni konkretni chyby | trvale sbirani vsech detailu |
+
+**Codyho komentar:** Debug log v produkci je jako provizorni kabel pres chodbu. Jeden den zachrani situaci, treti mesic uz je to architektura. Dej mu datum konce.
+
+### 2. Vytvor pravidlo "nikdy nelogujeme"
+
+Seznam zakazanych polozek musi byt kratky a nekompromisni. Ne proto, ze by tym nemel rozum, ale protoze incidenty vznikaji ve stresu, pri refaktoru nebo pri rychlem debugovani.
+
+Nikdy neloguj:
+
+- hesla, reset tokeny, magic link tokeny a session cookies,
+- kompletni autentizacni hlavicky,
+- platebni karty a platebni tajemstvi,
+- cele texty zakaznickych zprav, dokumentu nebo priloh,
+- kompletni exporty dat,
+- cele request/response body u endpointu s osobnimi daty,
+- dlouhodobe identifikatory, pokud staci kratky request ID nebo hash,
+- citlive interni poznamky ze supportu.
+
+Kdyz potrebujes korelovat udalosti, pouzij technicky identifikator. Napriklad `request_id`, `account_id`, `event_id` nebo hash emailu se soli ulozenou mimo logy. Kdyz potrebujes videt konkretni obsah, otevri primarni system s pristupovymi pravy a auditni stopou. Log nema byt zadni vchod do zakaznickych dat.
+
+### 3. Loguj udalost, ne cely svet
+
+Dobra log udalost rika, co se stalo, kde, kdy, s jakym vysledkem a jak ji propojit s dalsimi udalostmi. Nemusi obsahovat vsechny okolnosti.
+
+Sablona bezpecne log udalosti:
+
+```text
+timestamp: 2026-08-01T10:15:30Z
+level: warn
+event: lead_form_delivery_failed
+request_id: req_123
+account_id: null
+actor_type: anonymous
+resource_type: lead_form
+resource_id: public_contact
+result: failed
+reason_code: email_provider_timeout
+source: web
+pii_in_event: no
+retention: 30d
+```
+
+U prihlasene aplikace pridej identifikator uctu nebo uzivatele jen tam, kde je potreba pro reseni incidentu nebo auditu. U verejneho webu casto staci request ID, typ udalosti, vysledek a technicky duvod.
+
+**Spatne:**
+
+```text
+Lead form failed: {"email":"jana@example.com","message":"Mame problem s fakturaci...","ip":"...","headers":{...}}
+```
+
+**Lepsi:**
+
+```text
+level=warn event=lead_form_delivery_failed request_id=req_123 reason_code=email_provider_timeout form_id=contact
+```
+
+### 4. Retence logu musi byt kratsi nez "az se nekdo zepta"
+
+Logy maji vlastni zivotni cyklus. Provozni debug log nepotrebujes drzet roky. Auditni log pro dulezite zmeny muze potrebovat delsi retenci. Bezpecnostni logy musi byt dostupne dost dlouho na vysetreni incidentu, ale porad plati minimalizace.
+
+Jednoduche vychozi pravidlo pro maly SaaS:
+
+| Typ logu | Vychozi retence | Poznamka |
+| --- | --- | --- |
+| Verbose debug | hodiny az dny | jen docasne, s vlastnikem a datem vypnuti |
+| Provozni chyby | 14-30 dni | dost na ladeni bez dlouheho ocasu dat |
+| Bezpecnostni udalosti | 90-180 dni | podle rizika produktu a smluv |
+| Audit dulezitych zmen | 1-2 roky nebo podle smluv | minimalni obsah, jasny pristup |
+| Metriky dostupnosti | agregovane dlouhodobe | bez osobnich detailu |
+
+Tohle nejsou univerzalni pravni lhuty. Je to provozni start. U regulovanych odvetvi, enterprise smluv nebo citlivych dat si retenci over pravne a smluvne. Interni karta logovani by mela rict: kdo vlastni retenci, kde se nastavuje mazani a jak se overi, ze mazani opravdu bezi.
+
+### 5. Alerty pis pro akci, ne pro hluk
+
+Alert, na ktery nikdo nereaguje, neni monitoring. Je to tapeta. Pro maly tym staci mene alertu, ale kazdy musi mit jasnou akci.
+
+Dobry alert obsahuje:
+
+- co se deje,
+- dopad na uzivatele nebo data,
+- prvni kontrolni krok,
+- odkaz na runbook,
+- vlastnika,
+- kdy eskalovat.
+
+Priklady alertu, ktere davaji smysl:
+
+| Signal | Proc alertovat | Prvni krok |
+| --- | --- | --- |
+| kontaktni formular ma vysokou chybovost | ztracis poptavky | over email provider a posledni deploy |
+| neobvykle mnoho neuspesnych prihlaseni | mozne credential stuffing | zkontroluj IP rozsahy, rate limit a uzamceni |
+| export dat selhal | zakaznik nedostane vystup | over frontu, uloziste a auditni zaznam |
+| skok v 5xx chybach | produkt muze byt rozbity | zkontroluj release, databazi a externi sluzby |
+| zmena admin prav | vysoke riziko zneuziti | over actor, duvod a schvaleni |
+
+Naopak nealertuj kazdy jeden 404, kazde odmitnute validacni pravidlo nebo kazdy pomaly request, pokud z toho nikdo nema udelat konkretni krok. Udelej z toho dashboard nebo tydenni review.
+
+### 6. 45min postup
+
+```text
+00-07 min: Sepis hlavni toky.
+Lead formular, registrace, prihlaseni, billing, export, support, admin zmeny.
+
+07-14 min: Rozdel logy podle ucelu.
+Provozni, bezpecnostni, auditni, produktove metriky a docasny debug.
+
+14-22 min: Vytvor zakazany seznam.
+Tokeny, hesla, cela tela requestu, zpravy, prilohy, platebni tajemstvi, kompletni hlavicky.
+
+22-30 min: Navrhni 10 klicovych udalosti.
+Kazda udalost ma event name, vysledek, request ID, vlastnika a informaci, zda obsahuje osobni data.
+
+30-36 min: Nastav retenci.
+Pro kazdou kategorii zvol vychozi dobu, misto mazani a odpovednou osobu.
+
+36-42 min: Vyber alerty.
+Nejvyse pet alertu pro realnou akci. Ke kazdemu pridej prvni krok a runbook.
+
+42-45 min: Zapis pravidlo do release checklistu.
+Nova funkce s osobnimi daty musi rict, co loguje, co neloguje a jak dlouho to drzi.
+```
+
+### Checklist: logovani a monitoring
+
+- [ ] Kazdy typ logu ma popsany ucel.
+- [ ] Existuje kratky seznam dat, ktera se nikdy neloguji.
+- [ ] Aplikace neloguje cela request/response body u citlivych endpointu.
+- [ ] Eventy maji stabilni nazvy, vysledek, request ID a rozumny kontext.
+- [ ] Debug logy v produkci maji vlastnika a datum vypnuti.
+- [ ] Bezpecnostni udalosti zahrnuji prihlaseni, zmeny prav a dulezite exporty.
+- [ ] Auditni logy neobsahuji vic osobnich dat, nez je potreba.
+- [ ] Retence je nastavena podle kategorie logu a pravidelne se overuje.
+- [ ] Pristup do logovaciho nastroje maji jen lide, kteri ho potrebuji.
+- [ ] Alerty maji vlastnika, prvni krok a odkaz na runbook.
+- [ ] Monitoring dostupnosti sleduje uzivatelsky dopad, ne jen stav serveru.
+- [ ] Release checklist obsahuje kontrolu novych logu, eventu a osobnich dat.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -8356,6 +8514,8 @@ Vlastnik dokumentu, mesicni kontrola zmen a pravidlo pro pull requesty nebo rele
 - UOOU, Cookies - otazky a odpovedi: https://uoou.gov.cz/verejnost/qa-otazky-a-odpovedi/cookies
 - OWASP Top 10 2025, A01 Broken Access Control: https://owasp.org/Top10/2025/A01_2025-Broken_Access_Control/
 - OWASP HTTP Headers Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Headers_Cheat_Sheet.html
+- OWASP Logging Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+- OWASP Top 10 2025, A09 Security Logging and Alerting Failures: https://owasp.org/Top10/2025/A09_2025-Security_Logging_and_Alerting_Failures/
 - MDN, Strict-Transport-Security header: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Strict-Transport-Security
 - Y Combinator, YC's essential startup advice: https://www.ycombinator.com/library/4D-yc-s-essential-startup-advice
 - Paul Graham, Do Things that Don't Scale: https://www.paulgraham.com/ds.html
@@ -8445,3 +8605,4 @@ Vlastnik dokumentu, mesicni kontrola zmen a pravidlo pro pull requesty nebo rele
 - 2026-08-01: Pridana prakticka priloha Export dat pro zakaznika bez improvizace za 60 minut vcetne typu exportu, formatu, overeni prijemce, retence a checklistu.
 - 2026-08-01: Pridana prakticka priloha Zadosti subjektu udaju bez supportoveho chaosu za 60 minut vcetne triage, overeni identity, datove mapy, odpovedi, mazani a checklistu.
 - 2026-08-01: Pridana prakticka priloha Zaznamy o zpracovani bez spreadsheetoveho pekla za 60 minut vcetne karet zpracovani, roli, dodavatelu, retence a checklistu udrzby.
+- 2026-08-01: Pridana prakticka priloha Logovani a monitoring bez osobnich udaju navic za 45 minut vcetne typu logu, zakazanych dat, retence, alertu a release checklistu.
