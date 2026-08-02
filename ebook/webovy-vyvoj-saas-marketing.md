@@ -9831,6 +9831,124 @@ Minuty 38 az 45: nastav rozhodovaci termin. Napriklad "ctvrtek 14:00, vybereme j
 
 ---
 
+## Win-loss rozhovory bez CRM vyslechu za 45 minut
+
+Win-loss rozhovor je kratky rozhovor s clovekem, ktery nedavno koupil, nekoupil, odlozil rozhodnuti nebo odesel. Cilem neni dokazat, ze prodej udelal vsechno spravne. Cilem je zjistit, co se v realnem rozhodovani stalo: jaky problem zakaznik resil, s cim produkt porovnaval, kde vznikla duvera, kde se rozpadla a co bylo pro dalsi krok rozhodujici.
+
+Privacy-first verze ma jedno pravidlo: sbirej jen poznatky, ktere meni produkt, nabidku nebo prodejni proces. Nepotrebujes nahravat kazdy povzdech, tahat osobni detaily do CRM ani delat z odmitnuteho leadu trvaly profil. Casto staci 20 minut, dobre otazky, anonymizovany zapis a jasna kategorie rozhodnuti.
+
+### Kdy win-loss delat
+
+Nedelej rozhovory nahodne. Vyber momenty, kde je cerstva pamet a jasny obchodni dopad:
+
+- vyhrany zakaznik po prvnim tydnu pouzivani,
+- ztraceny lead do 14 dni od rozhodnuti,
+- pilot, ktery skoncil bez pokracovani,
+- zakaznik, ktery zrusil ucet nebo neprodlouzil,
+- prilezitost, ktera se zasekla bez odpovedi.
+
+U maleho SaaS staci kazdy tyden 2 az 3 rozhovory. Pokud nemas objem, zapisuj aspon strukturovane duvody z emailu a callu. Dulezite je nemichat dohromady dojmy obchodnika, odpoved zakaznika a vlastni interpretaci. To jsou tri ruzne veci.
+
+### Segmentace bez profilovani
+
+Pred rozhovorem si nastav jen par pracovnich kategorii:
+
+| Pole | Priklad | Proc staci |
+| --- | --- | --- |
+| Stav | win, loss, no decision, churn | Vis, jaky typ rozhodnuti analyzujes. |
+| Segment | mala agentura, B2B SaaS, konzultant | Spojis vzory podle use-casu, ne podle osobniho profilu. |
+| Hlavni use-case | follow-up leadu, reporting, onboarding | Pomaha zlepsit produkt a copy. |
+| Velikost dopadu | nizky, stredni, vysoky | Oddeli kosmeticke namitky od obchodnich blokacu. |
+| Duvod rozhodnuti | cena, duvera, cas, funkcni mezera, priorita | Vytvori prakticke kose pro dalsi praci. |
+
+Co do zapisu nepatri, pokud to nema jasny ucel:
+
+- osobni poznamky o cloveku,
+- soukrome detaily z firmy,
+- kompletni interni citace bez souhlasu,
+- nahravka "pro jistotu",
+- domnenky typu "nemel rozpocet" bez toho, aby to zaznelo.
+
+**Codyho komentar:** Nejvetsi hodnota win-loss rozhovoru neni veta "byli jsme moc drazi". Hodnota je veta "nevedeli jsme, jestli nam to projde pres interni security kontrolu do konce kvartalu". Prvni zni jako sleva. Druha ukazuje chybejici trust page, DPA balicek nebo lepsi pilotni nabidku.
+
+### Scenar na 20 minut
+
+Drz rozhovor kratky a vecny. Neobhajuj produkt. Neopravuj cloveka uprostred odpovedi. Pokud neco boli, zapis to.
+
+1. "Co se u vas delo ve chvili, kdy jste zacali resit tento problem?"
+2. "Co jste zkouseli pred nami nebo vedle nas?"
+3. "Ktery moment vas posunul bliz k rozhodnuti?"
+4. "Kde jste mel nejvetsi nejistotu?"
+5. "Co vam chybelo, abyste rozhodl rychleji?"
+6. "Kdo dalsi do rozhodnuti vstupoval?"
+7. "Kdybyste mel nasi nabidku vysvetlit kolegovi, jak byste ji popsal?"
+8. "Co bychom meli zmenit, aby dalsi podobny zakaznik nemusel premyslet tak dlouho?"
+
+U ztracenych obchodu pridej jednu citlivou otazku:
+
+> "Vybrali jste jinou cestu, odlozili rozhodnuti, nebo problem prestal byt priorita?"
+
+Tohle je dulezite. "Prohrali jsme s konkurenci" je jina lekce nez "zakaznik nerozhodl nic". U no-decision problemu casto nepomuze vic funkci. Pomuze mensi pilot, jasnejsi dalsi krok nebo lepsi dukaz hodnoty.
+
+### Zapis, ktery jde pouzit
+
+Po rozhovoru udelej zapis do jedne karty:
+
+```text
+Datum:
+Stav: win / loss / no decision / churn
+Segment:
+Use-case:
+Hlavni spoustec:
+Porovnavane alternativy:
+Nejvetsi nejistota:
+Rozhodujici dukaz nebo blokace:
+Presna veta zakaznika:
+Codyho interpretace:
+Dalsi akce:
+Retence zapisu do:
+```
+
+Presnou vetu zakaznika pouzij interne pro zlepseni jazyka. Pokud ji chces zverejnit jako referenci, potrebujes samostatne potvrzeni presneho zneni. Anonymizovana lekce typu "tri firmy z peti se ptaly na EU hosting pred cenou" je obvykle uzitecnejsi nez honba za logem.
+
+### Jak z toho udelat rozhodnuti
+
+Kazdy patek projdi poslednich 5 az 10 karet a hledej opakujici se vzory. Nevyhodnocuj rozhovor po jednom jako referendum o cele firme.
+
+| Vzor | Pravdepodobny zasah |
+| --- | --- |
+| Lide nerozumi prvni vete nabidky | Prepsat hero, demo intro a outbound email. |
+| Casto se ptaji na data a hosting | Pridat trust page, DPA odpovedi a architektonicky prehled. |
+| Vyhrava konkurence kvuli integraci | Overit, zda je integrace skutecny deal-breaker, ne jen pohodlna vymluva. |
+| Obchody konci na "ted ne" | Zmensit pilot, zkratit time-to-value, pridat konkretni trigger k navratu. |
+| Zakaznici odchazi po aktivaci | Projit onboarding a prvni hodnotovy moment, ne jen posilat slevu. |
+
+Jedna iterace ma skoncit jednou zmenou: prepsany use-case, nova cast trust page, upraveny pilot, odstranene pole ve formulari, zjednodusene demo nebo novy onboardingovy krok. Pokud skonci jen "musime byt lepsi v komunikaci", je to krasne mlhave a prakticky k nicemu.
+
+### 45min postup
+
+- 0-5 min: Vyber jeden typ rozhodnuti, treba ztracene piloty z poslednich 30 dni.
+- 5-10 min: Vytvor seznam 3 az 5 lidi a napis jim kratkou zadost o 20min rozhovor.
+- 10-15 min: Priprav scenar a kartu zapisu.
+- 15-35 min: Udelej prvni rozhovor nebo zpracuj existujici email/call poznamky.
+- 35-42 min: Oznac hlavni duvod, nejistotu a dalsi akci.
+- 42-45 min: Rozhodni jednu malou zmenu, kterou udelas tento tyden.
+
+### Checklist: win-loss bez datoveho balastu
+
+- [ ] Rozhovor ma jasny obchodni nebo produktovy ucel.
+- [ ] Oslovuji jen lidi, u kterych je rozhodnuti cerstve.
+- [ ] Nesbiram osobni detaily, ktere nepomahaji rozhodnuti.
+- [ ] Oddeluji presna slova zakaznika od vlastni interpretace.
+- [ ] Ztracene obchody rozlisuji na konkurenci, odklad a no-decision.
+- [ ] Zapis ma retenci a vlastnika.
+- [ ] Verejne citace pouzivam jen se samostatnym potvrzenim.
+- [ ] Kazdy tyden hledam vzory napric vice rozhovory.
+- [ ] Vysledek konci jednou konkretni zmenou v produktu, nabidce nebo procesu.
+- [ ] Privacy-first namitky zapisuji jako obchodni signal, ne jako pravni otravu.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -9956,3 +10074,4 @@ Minuty 38 az 45: nastav rozhodovaci termin. Napriklad "ctvrtek 14:00, vybereme j
 - 2026-08-01: Pridana prakticka priloha Webinar a workshop bez registracni pasti za 60 minut vcetne registrace, nahravek, follow-upu, datove cesty nastroju a checklistu.
 - 2026-08-01: Pridana prakticka priloha Komunita bez platformniho zamku za 60 minut vcetne volby kanalu, komunitniho kontraktu, vlastni domeny, moderace, metrik a checklistu.
 - 2026-08-01: Pridana prakticka priloha Zakaznicky pruzkum bez zbytecneho profilovani za 45 minut vcetne vyberu duvodu, otazek, urovni identifikace, vyhodnoceni a checklistu.
+- 2026-08-02: Pridana prakticka priloha Win-loss rozhovory bez CRM vyslechu za 45 minut vcetne segmentace, scenare rozhovoru, zapisove karty, vyhodnoceni vzoru a checklistu.
