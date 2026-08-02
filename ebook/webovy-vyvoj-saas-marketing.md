@@ -11523,6 +11523,196 @@ Napriklad pridat exportni README, vypnout API klice pri deaktivaci nebo dopsat s
 
 ---
 
+## Import a migrace dat bez spinavych exportu za 60 minut
+
+Migrace zakaznickych dat je okamzik pravdy. Zakaznik uz ti duveruje natolik, ze chce do produktu prinest kus sve reality: kontakty, projekty, faktury, historii komunikace, nastaveni nebo dokumenty. Kdyz import navrhnes spatne, dostanes do systemu datovy neporadek, bezpecnostni riziko a support vlakno delsi nez obchodni nabidka.
+
+Privacy-first migrace ma jednoduchy cil: prijmout jen data, ktera jsou potreba pro domluveny ucel, zpracovat je predvidatelne, ukazat zakaznikovi vysledek a uklidit docasne soubory. Zadny "poslete nam export celeho CRM a nejak to nacpeme dovnitr". To je migrace ve stylu popelnice s API tokenem.
+
+GDPR pravo na prenositelnost dat resi prijem osobnich udaju ve strukturovanem, bezne pouzivanem a strojove citelnem formatu za urcitych podminek; EDPB k nemu ma samostatne pokyny: https://www.edpb.europa.eu/documents/guideline/guidelines-on-the-right-to-data-portability-under-regulation-2016679-wp242_en. I kdyz zrovna nejde o formalni zadost subjektu udaju, produktove pravidlo je uzitecne: export a import maji byt citelne, predvidatelne a prenositelne, ne zamcene v ritualu jednoho dodavatele.
+
+### 1. Nejdriv popis ciloveho stavu, potom soubor
+
+Import nezacina tlacitkem "upload CSV". Zacina vetou, co ma po migraci fungovat.
+
+Priklady dobrych cilu:
+
+- "Zakaznik chce mit v Codym seznam aktivnich B2B leadu s poslednim kontaktem a odpovednym clovekem."
+- "Tym chce prenest otevrene support tickety, aby neztratil rozpracovane pozadavky."
+- "Firma chce nahrat katalog sluzeb a cen, aby sla postavit prvni nabidka."
+
+Priklady spatnych cilu:
+
+- "Importujeme vse z puvodniho systemu."
+- "Nahrajeme historicka data, kdyby se hodila."
+- "Dame to do databaze a pozdeji vymyslime, co s tim."
+
+Pred importem si napis importni kartu:
+
+```text
+Nazev migrace:
+Zakaznik:
+Ucel:
+Cilovy stav po migraci:
+Zdrojovy system:
+Typy dat:
+Osobni udaje:
+Citliva data:
+Co neimportujeme:
+Docasne uloziste:
+Datum smazani zdrojovych souboru:
+Vlastnik:
+```
+
+Radek "Co neimportujeme" je povinny. Kdyz zustane prazdny, tym se casto boji neco zahodit a skonci s archivem, ktery nikdo nepouzije, ale vsichni ho musi chranit.
+
+### 2. Datovy kontrakt chrani produkt i zakaznika
+
+Datovy kontrakt rika, jake sloupce nebo objekty import prijima, co je povinne, co je volitelne, jak se validuje hodnota a co se stane pri chybe.
+
+Priklad pro import leadu:
+
+| Pole | Povinne | Validace | Poznamka |
+| --- | --- | --- | --- |
+| `company_name` | ano | 1 az 160 znaku | Firma nebo organizace. |
+| `contact_email` | ne | format emailu | Nepovinne, pokud existuje jen firma. |
+| `owner_email` | ano | musi existovat v tymu | Komu lead patri. |
+| `last_contact_at` | ne | ISO datum | Bez casu, pokud presnost neni potreba. |
+| `status` | ano | `new`, `active`, `paused`, `won`, `lost` | Mapuje se na interni stav. |
+| `note` | ne | max 1000 znaku | Nepatri sem cele emailove vlakno. |
+
+Datovy kontrakt ma byt dostupny zakaznikovi pred importem. Idealne jako kratky popis, prikladovy soubor a seznam typickych chyb. Pokud import delate rucne jako concierge, stejny kontrakt pouzij interne. Rucni prace neni vyjimka z pravidel, jen mene automatizovana verze systemu.
+
+Privacy-first pravidlo: kdyz pole nepotrebujes pro prvni hodnotu produktu, neimportuj ho. Kdyz ho mozna budes potrebovat pozdeji, vytvor pozdejsi importni krok s novym ucelem.
+
+### 3. Upload je bezpecnostni hranice
+
+Soubor od zakaznika je neduveryhodny vstup, i kdyz zakaznik neni utocnik. Muze byt spatne exportovany, prilis velky, v jinem kodovani, s rozbitymi radky, s makry, se vzorci nebo s daty, ktera do produktu nepatri. OWASP File Upload Cheat Sheet doporucuje mimo jine whitelist povolenych pripon a typu, kontrolu velikosti, prejmenovani souboru, ulozeni mimo webroot a dalsi validace: https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html
+
+Minimalni pravidla:
+
+- Povol jen formaty, ktere opravdu podporujes.
+- Nastav limit velikosti a poctu radku.
+- Soubor prejmenuj internim identifikatorem.
+- Neukladej upload do verejne dostupne cesty.
+- Nezpracovavej soubor se systemovymi opravnenimi, ktera nepotrebuje.
+- Po importu soubor smaz podle importni karty.
+- Chybu ukaz jako opravitelny problem, ne jako stack trace.
+
+CSV ma jeste jednu past: tabulkove programy mohou hodnoty zacinajici znaky jako `=`, `+`, `-` nebo `@` interpretovat jako vzorce. OWASP popisuje CSV injection jako riziko pri vkladani neduveryhodneho vstupu do CSV exportu: https://owasp.org/www-community/attacks/CSV_Injection. Pri importu to znamena dve veci: neber spreadsheet jako bezpecny zdroj pravdy a pri pozdejsim exportu z produktu osetri hodnoty, ktere by se mohly otevrit jako vzorce.
+
+### 4. Import musi mit nahled, ne jen tlacitko "hotovo"
+
+Dobra migrace ma tri kroky:
+
+1. Nahrat a zkontrolovat zdroj.
+2. Ukazat nahled mapovani a problemu.
+3. Potvrdit import a ulozit auditni zaznam.
+
+Nahled by mel ukazat:
+
+- kolik radku nebo objektu bude importovano,
+- kolik radku ma chybu,
+- ktera pole se mapuji na ktera produktova pole,
+- jake hodnoty budou normalizovane,
+- ktere sloupce ignorujeme,
+- zda vzniknou duplicity.
+
+Priklad hlaseni:
+
+```text
+Soubor obsahuje 842 radku.
+Importovano bude 791 leadu.
+31 radku ma chybejici vlastnika.
+20 radku vypada jako duplicita podle domeny a nazvu firmy.
+Sloupce "private_note", "phone_raw" a "linkedin_url" neimportujeme, protoze nejsou soucasti domluveneho ucelu.
+```
+
+Tohle je mnohem lepsi nez tiche "import probehl". Zakaznik i support vidi, co se stalo. A kdyz se ozve problem, nehleda se pravda v puvodnim souboru ulozenem nekde v download slozce.
+
+### 5. Rollback a uklid priprav predem
+
+Import bez rollbacku je odvazny sport. Nemusi jit vzdy udelat dokonaly undo, ale musi existovat plan.
+
+Moznosti:
+
+- Import zapis pod `import_batch_id`.
+- Nove zaznamy oznac jako vytvorene migraci.
+- Upravene zaznamy loguj s predchozi hodnotou, pokud je to primerene.
+- Duplicity dej nejdriv do review, ne rovnou do slouceni.
+- Pri chybe import zastav po validaci, ne az po pulce databaze.
+- Docasne soubory smaz po potvrzeni vysledku nebo po kratke retenci.
+
+Prakticky kompromis pro maly SaaS: prvni verze importu muze byt polorucni, ale musi mit opakovatelny postup. Jeden skript, jedna importni karta, jeden vzorek dat, jeden zapis vysledku. Kdyz migraci delas podruhe, nechces lovit prikazy z historie terminalu.
+
+### 6. Potvrzeni migrace je soucast produktu
+
+Po importu posli zakaznikovi kratke potvrzeni. Ne marketingovy roman, ale provozni pravdu.
+
+```text
+Predmet: Import dat pro [nazev] dokoncen
+
+Ahoj [jmeno],
+
+import pro [ucel] je hotovy.
+
+Vysledek:
+- importovano: [pocet] zaznamu,
+- preskoceno kvuli chybe: [pocet],
+- slouceno jako duplicita: [pocet],
+- neimportovane sloupce: [seznam],
+- docasny zdrojovy soubor bude smazan: [datum].
+
+Pokud chcete zkontrolovat preskocene radky, poslu vam opraveny soubor nebo seznam chyb bez zbytecnych osobnich udaju.
+
+Cody
+```
+
+Zakaznik tak vidi, ze migrace mela hranice. To buduje vic duvery nez slib "vsechno jsme preklopili". Vsechno je casto jen hezci nazev pro neporadek.
+
+### 7. 60min postup
+
+```text
+00-05 min: Vyber jeden migracni scenar.
+Napriklad import leadu z puvodniho CRM nebo import aktivnich ticketu.
+
+05-15 min: Vypln importni kartu.
+Ucel, cilovy stav, typy dat, co neimportujeme, docasne uloziste a datum smazani.
+
+15-25 min: Sepis datovy kontrakt.
+Povinna pole, validace, limity, mapovani stavu a pravidla pro duplicity.
+
+25-35 min: Navrhni upload a validaci.
+Povolene formaty, velikost, ulozeni, bezpecnostni kontroly a chybove hlasky.
+
+35-45 min: Navrhni nahled importu.
+Pocet zaznamu, chyby, ignorovane sloupce, duplicity a potvrzeni pred zapisem.
+
+45-52 min: Doplni rollback a uklid.
+Import batch ID, log vysledku, smazani zdrojovych souboru a odpovedny clovek.
+
+52-60 min: Napis zakaznicke potvrzeni.
+Jedna sablona pro hotovy import a jedna kratka odpoved pro import s chybami.
+```
+
+### Checklist: import a migrace dat
+
+- [ ] Import ma jasny ucel a cilovy stav po migraci.
+- [ ] Existuje radek "Co neimportujeme".
+- [ ] Datovy kontrakt popisuje pole, validace, limity a duplicity.
+- [ ] Zakaznik zna format a typicke chyby pred odeslanim dat.
+- [ ] Upload povoluje jen podporovane formaty a ma limit velikosti.
+- [ ] Zdrojovy soubor neni ulozeny verejne ani natrvalo.
+- [ ] Import ukazuje nahled pred zapisem do produkcnich dat.
+- [ ] Chybove radky lze opravit bez posilani celeho exportu znovu, pokud to dava smysl.
+- [ ] Kazdy import ma batch ID nebo podobny auditni identifikator.
+- [ ] Existuje rollback nebo aspon postup pro opravu spatne migrace.
+- [ ] Docasne soubory maji datum smazani.
+- [ ] Zakaznik dostane konkretni potvrzeni vysledku migrace.
+- [ ] Exporty z produktu osetruji riziko CSV/formula injection.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -11549,6 +11739,8 @@ Napriklad pridat exportni README, vypnout API klice pri deaktivaci nebo dopsat s
 - OWASP Logging Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
 - OWASP Top 10 2025, A09 Security Logging and Alerting Failures: https://owasp.org/Top10/2025/A09_2025-Security_Logging_and_Alerting_Failures/
 - OWASP Secrets Management Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html
+- OWASP File Upload Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html
+- OWASP CSV Injection: https://owasp.org/www-community/attacks/CSV_Injection
 - OWASP API Security Top 10 2023: https://owasp.org/API-Security/editions/2023/en/0x11-t10/
 - OWASP REST Security Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/REST_Security_Cheat_Sheet.html
 - MDN, Strict-Transport-Security header: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Strict-Transport-Security
@@ -11663,3 +11855,4 @@ Napriklad pridat exportni README, vypnout API klice pri deaktivaci nebo dopsat s
 - 2026-08-02: Pridana prakticka priloha Expansion a upsell bez loveni v osobnich datech za 60 minut vcetne typu rozsireni, vysvetlitelnych signalu, expansion karty, servisni zpravy a checklistu.
 - 2026-08-02: Pridana prakticka priloha Renewal a prodlouzeni spoluprace bez automaticke pasti za 45 minut vcetne renewal karty, hodnotovych signalu, datove kontroly, emailove sablony a checklistu.
 - 2026-08-02: Pridana prakticka priloha Zruseni uctu a mazani dat bez schovanych dveri za 60 minut vcetne odchodovych stavu, exportu, mazaciho jobu, subprocesoru, potvrzovacich sablon a checklistu.
+- 2026-08-02: Pridana prakticka priloha Import a migrace dat bez spinavych exportu za 60 minut vcetne importni karty, datoveho kontraktu, bezpecneho uploadu, nahledu, rollbacku a checklistu.
