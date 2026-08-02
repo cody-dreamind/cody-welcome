@@ -10089,6 +10089,168 @@ SLA sliby nesmi odporovat realnemu provozu, incident runbooku ani privacy dokume
 
 ---
 
+## Churn a odchod zakaznika bez pomsty za 45 minut
+
+Odchod zakaznika neni osobni urazka produktu. Je to signal. Nekdy produkt nedodal hodnotu, nekdy se zmenil rozpocet, nekdy zakaznik vyrostl jinam a nekdy byl spatne kvalifikovany uz na zacatku. Maly SaaS tym z toho potrebuje dostat pouceni, ale nesmi pri tom z odchodu udelat temny tunel, ve kterem se zakaznik musi proklikat pres tri emoce a jednu skrytou slevu.
+
+Privacy-first odchod znamena tri veci:
+
+- zakaznik vi, co se stane s pristupem, daty a fakturaci,
+- zruseni je stejne srozumitelne jako aktivace,
+- zpetna vazba se sbira dobrovolne a v minimalnim rozsahu.
+
+**Codyho komentar:** Produkt, ktery umi slusne pustit zakaznika ven, pusobi dospeleji nez produkt, ktery se ho drzi za kotnik. A ano, nektere retention playbooky by si zaslouzily dat do sklepa vedle faxu.
+
+### 1. Rozlis churn podle priciny, ne podle emoce
+
+Prvni chyba je hazet vsechny odchody do jedne kolonky "churn". Tim ztratis informaci, ktera by mohla zmenit produkt, onboarding nebo prodej.
+
+Pouzij jednoduchou mapu:
+
+| Typ odchodu | Co to typicky znamena | Co z toho plyne |
+| --- | --- | --- |
+| Neaktivovany trial | Zakaznik nedosel k prvni hodnote. | Zlepsit onboarding, demo data, prvni ukol nebo kvalifikaci. |
+| Aktivni, ale neplatici | Hodnota byla zajimava, ale ne dost jasna pro cenu. | Zkontrolovat pricing, balicky a komunikaci vysledku. |
+| Platici bez pouzivani | Produkt koupil nekdo jiny nez uzivatel, nebo chybi navyk. | Zlepsit handoff, role, reminder a spravu tymu. |
+| Platici s pouzivanim | Problem je v cene, podpore, chybejici funkci nebo interni zmene. | Udelat kratky rozhovor a zaznam dopadu. |
+| Technicky nuceny odchod | Integrace, vykon, bezpecnost nebo compliance blokuje provoz. | Eskalovat jako produktove/provozni riziko. |
+
+Cilem neni udelat z odchodu detektivni roman. Staci vedet, jestli problem vznikl pred hodnotou, po hodnote, pri platbe, pri provozu nebo mimo produkt.
+
+### 2. Exit flow musi nejdriv rict dopad
+
+Kdyz zakaznik klikne na zruseni, nepotrebuje prednasku o tom, jak moc ho budete postradat. Potrebuje vedet:
+
+- kdy skonci pristup,
+- co se stane s fakturaci,
+- jak exportovat data,
+- kdo v tymu bude zmenou ovlivnen,
+- zda existuje grace period,
+- jak lze ucet obnovit, pokud to vubec jde,
+- kdy a jak se budou data mazat podle nastavene retence.
+
+Priklad mikrotextu:
+
+```text
+Zrusenim planu zustane ucet aktivni do konce zaplaceneho obdobi. Pred koncem
+muzete exportovat data v Nastaveni -> Export. Po ukonceni pristupu budeme data
+drzet podle nasi retencni politiky a potom je smazeme nebo anonymizujeme podle
+typu dat.
+```
+
+Tohle je lepsi nez tlacitko "Jste si jisti?" bez kontextu. Jasny dopad snizuje support dotazy a chrani duveru.
+
+### 3. Zpetnou vazbu sbirej jako pozvanku, ne jako past
+
+Exit dotaznik ma byt kratky a volitelny. Pokud uzivatel nechce odpovedet, musi byt schopny odejit bez pocitu, ze ho produkt drzi jako rukojmi.
+
+Minimalni exit otazky:
+
+```text
+Co je hlavni duvod odchodu?
+[ ] Produkt jsme nepouzivali
+[ ] Nevidime dost hodnoty za cenu
+[ ] Chybi nam konkretni funkce
+[ ] Presli jsme na jine reseni
+[ ] Interni zmena nebo rozpocet
+[ ] Technicky/provozni problem
+[ ] Jiny duvod
+
+Chcete doplnit jednu vetu?
+[volitelne textove pole]
+```
+
+Neptej se hned na deset detailu, roli, velikost firmy, obrat a konkurenci. Pokud mas validni duvod pozadat o rozhovor, udelej to az po zruseni a oddelene:
+
+```text
+Chcete nam dat 15 minut k pochopeni odchodu? Pomuze nam opravit produkt, ale
+zruseni na tom nezavisi.
+```
+
+### 4. Retencni nabidka nesmi byt manipulace
+
+Sleva muze byt legitimni, kdyz resi skutecny problem. Nema byt tajna cena pro lidi, kteri najdou zruseni. To uci zakazniky, ze cenik neni pravda.
+
+Ferove retention moznosti:
+
+| Signal | Rozumna reakce | Co nedelat |
+| --- | --- | --- |
+| Produkt se nepouziva | Nabidnout pauzu, onboarding nebo zmenseni planu. | Tvrdit, ze odchod znici data bez jasneho vysvetleni. |
+| Cena je problem | Ukazat nizsi plan nebo rocni platbu, pokud dava smysl. | Schovat slevu az na posledni obrazovku jako tajny trik. |
+| Chybi funkce | Nabidnout workaround nebo roadmap signal bez slibu. | Slibit termin, ktery tym nedokaze dodat. |
+| Technicky problem | Otevrit support nebo incident follow-up. | Presmerovat cloveka do obecneho help centra bez kontextu. |
+| Interni zmena | Nabidnout export, pauzu nebo ukonceni bez dramatu. | Posilat agresivni sekvenci emailu po zruseni. |
+
+Retention neni boj se zakaznikem. Je to pokus najit spravedlivy dalsi krok. Kdyz spravedlivy dalsi krok neexistuje, nech ho odejit ciste.
+
+### 5. Interni churn karta pro rozhodnuti
+
+Kazdy odchod neni duvod k panice. Ale opakovany vzor je duvod k praci. Udrzuj jednoduchou churn kartu:
+
+```text
+Zakaznik / segment:
+Plan:
+Stav pred odchodem: trial / aktivni / neaktivni / past_due / enterprise
+Hlavni duvod:
+Posledni aktivacni milnik:
+Posledni support kontakt:
+Dotcene funkce:
+Byl nabidnut export: ano/ne/nerelevantni
+Byla nabidnuta rozumna alternativa: ano/ne
+Produktovy signal:
+Navrhovana akce:
+Vlastnik:
+```
+
+Jednou tydne projdi karty za posledni obdobi a hledej vzory:
+
+- odchody pred aktivaci,
+- casty problem s jednou integraci,
+- nejasna cena pro konkretni segment,
+- chybny handoff z obchodu,
+- support slib, ktery produkt realne neplni,
+- opakovane dotazy na export nebo mazani dat.
+
+Rozhodnuti ma byt konkretni. Ne "zlepsit retenci", ale "zkratit prvni onboardingovy ukol na 5 minut" nebo "pridat exportni vysvetleni do cancellation flow".
+
+### 6. 45min postup
+
+```text
+00-06 min: Sepis typy odchodu.
+Trial bez aktivace, aktivni trial, platici neaktivni, platici aktivni, technicky nuceny odchod.
+
+06-14 min: Napis dopad zruseni.
+Pristup, fakturace, export, tymovi clenove, grace period, mazani a obnova.
+
+14-21 min: Navrhni exit dotaznik.
+Jedna hlavni otazka, volitelna veta, zadne povinne profilovani.
+
+21-29 min: Vytvor ferove retention reakce.
+Pauza, nizsi plan, onboarding, support follow-up, export. Bez skrytych triku.
+
+29-37 min: Zaloz churn kartu.
+Segment, stav, duvod, posledni milnik, support kontakt, produktovy signal, vlastnik.
+
+37-45 min: Projdi poslednich 5 odchodu nebo hypotetickych scenaru.
+Ke kazdemu napis jednu produktovou akci, jednu support akci nebo "bez akce".
+```
+
+### Checklist: churn bez pomsty
+
+- [ ] Zakaznik pred zrusenim vidi dopad na pristup, fakturaci a data.
+- [ ] Export dat je dostupny nebo jasne vysvetleny pred ukoncenim pristupu.
+- [ ] Exit dotaznik je volitelny a kratky.
+- [ ] Zruseni nezavisi na vyplneni dotazniku ani rozhovoru.
+- [ ] Retencni nabidka je ferova a odpovida skutecnemu problemu.
+- [ ] Skryte slevy a falesna urgentnost nejsou soucast flow.
+- [ ] Support dostane kontext bez zbytecnych osobnich dat.
+- [ ] Churn karta rozlisuje stav zakaznika a posledni aktivacni milnik.
+- [ ] Kazdy tyden se vyhodnocuji vzory, ne jen jednotlive emoce.
+- [ ] Kazdy opakovany vzor konci rozhodnutim: produkt, onboarding, pricing, support nebo kvalifikace.
+- [ ] Privacy dokumenty, retencni politika a exit flow si neodporuji.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -10216,3 +10378,4 @@ SLA sliby nesmi odporovat realnemu provozu, incident runbooku ani privacy dokume
 - 2026-08-01: Pridana prakticka priloha Zakaznicky pruzkum bez zbytecneho profilovani za 45 minut vcetne vyberu duvodu, otazek, urovni identifikace, vyhodnoceni a checklistu.
 - 2026-08-02: Pridana prakticka priloha Win-loss rozhovory bez CRM vyslechu za 45 minut vcetne segmentace, scenare rozhovoru, zapisove karty, vyhodnoceni vzoru a checklistu.
 - 2026-08-02: Pridana prakticka priloha SLA a support limity bez prehnanych slibu za 45 minut vcetne priorit P1-P4, support kanalu, hranic rozsahu, planu podpory a checklistu.
+- 2026-08-02: Pridana prakticka priloha Churn a odchod zakaznika bez pomsty za 45 minut vcetne exit flow, dobrovolne zpetne vazby, ferovych retention reakci a churn karty.
