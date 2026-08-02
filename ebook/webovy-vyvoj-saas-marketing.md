@@ -12322,6 +12322,128 @@ Datum, vlastnik, pravidlo pro zavirani starych veci a maximum otevrenych P3 tick
 
 ---
 
+## Aktualizace zavislosti bez patchovaci paniky za 60 minut
+
+Zavislosti nejsou jen radky v `package.json`, `composer.json`, `requirements.txt` nebo `go.mod`. Jsou to cizi rozhodnuti ve tvem produktu. Vetsinou pomahaji, obcas nesou zranitelnost, opustenou knihovnu, problem s licenci nebo riziko v build procesu. OWASP v Top 10 2025 rozsiruje pohled z "vulnerable and outdated components" na sirsi tema software supply chain failures: https://owasp.org/Top10/2025/0x00_2025-Introduction/. Prakticky preklad: nestaci jednou za cas kliknout "update all" a doufat, ze testy zachyti realitu.
+
+Privacy-first SaaS potrebuje aktualizacni rytmus, ktery chrani uzivatele, data i cas maleho tymu. Cilem neni mit vzdy nejnovejsi verzi vseho. Cilem je vedet, co pouzivas, co je kriticke, co je zranitelne, co se da rychle opravit a kdy je lepsi udelat planovanou migraci.
+
+### 1. Udelej inventar zavislosti jako mapu rizik
+
+Prvni krok neni skener. Prvni krok je jednoduchy inventar:
+
+| Oblast | Priklady | Proc na tom zalezi |
+| --- | --- | --- |
+| Runtime zavislosti | framework, auth knihovna, ORM, payment SDK | Bezi v produkci a muze ovlivnit data. |
+| Build zavislosti | bundler, transpiler, CI akce, pluginy | Muze menit artefakty, ktere nasazujes. |
+| Dev zavislosti | test runner, linter, lokalni nastroje | Mensi produkcni dopad, ale stale riziko v CI. |
+| Infrastrukturni image | Docker base image, databaze, reverse proxy | Casto obsahuje OS balicky a vlastni CVE. |
+| Externi skripty | widgety, embed, CDN knihovny | Bezi u uzivatele a mohou sbirat data. |
+
+U kazde kriticke zavislosti si zapis vlastnika, kde se aktualizuje, jak se testuje a co se stane pri rozbiti. Bez vlastnika je zavislost jen ticha dohoda, ze se na ni vsichni budou divat pozde.
+
+### 2. Automat najde problem, clovek rozhodne prioritu
+
+Software Composition Analysis nastroje pomahaji najit verejne zname zranitelnosti. OWASP Dependency-Check popisuje SCA pristup, ktery identifikuje komponenty a hlasi vazby na verejne CVE: https://owasp.org/www-project-dependency-check/. OWASP Dependency-Track jde dal pres praci se SBOM a rizikem softwaroveho retezce: https://owasp.org/www-project-dependency-track/. OpenSSF Scorecard zase hodnoti bezpecnostni signaly open source projektu: https://scorecard.dev/.
+
+Tohle jsou vstupy, ne verdikt. Prioritu nastav podle kombinace:
+
+- Je zranitelnost verejne zneuzivana? CISA KEV katalog je dobry signal pro urgentni pozornost: https://www.cisa.gov/known-exploited-vulnerabilities-catalog.
+- Bezi knihovna v produkci, nebo jen pri lokalnim vyvoji?
+- Dotyka se autentizace, autorizace, platby, uploadu, parsovani souboru nebo osobnich dat?
+- Existuje bezpecny patch bez velke migrace?
+- Mame testy na tok, ktereho se update dotkne?
+- Da se riziko docasne omezit konfiguraci, vypnutim funkce nebo blokaci vstupu?
+
+**Codyho komentar:** Alert s vysokym CVSS neni automaticky nejdulezitejsi vec v produktu. Kriticka knihovna v admin exportu muze byt horsi nez hlasita zranitelnost v dev nastroji, ktery se do produkce nikdy nedostane. Panika je spatny prioritizacni algoritmus, i kdyz ma cervenou ikonku.
+
+### 3. Rozdel aktualizace na tri proudy
+
+Maly tym potrebuje jednoduchy system:
+
+| Proud | Priklad | Reakce |
+| --- | --- | --- |
+| Emergency patch | aktivne zneuzivana zranitelnost v produkcni ceste | stejny den: owner, fix, smoke test, nasazeni, zapis |
+| Bezpecnostni udrzba | vysoky nebo stredni risk bez aktivniho zneuziti | tento tyden: update branch, testy, plan release |
+| Hygiena | minor verze, deprecace, dev tooling | pravidelny maintenance slot |
+
+Do emergency proudu nepatri kazdy roboticky report. Kdyz vsechno hori, nehori nic, jen tym smrdi kourem. Emergency znamena realny dopad na data, dostupnost, autentizaci, integritu nebo duveru.
+
+### 4. Patch karta misto chaotickeho vlaku commitu
+
+Pro dulezite aktualizace pouzij kratkou kartu:
+
+```text
+PATCH KARTA
+
+Nazev:
+Dotcene zavislosti:
+Typ: emergency / bezpecnostni udrzba / hygiena
+Duvod:
+Produkci dopad:
+Datovy dopad:
+Dotcene toky:
+Testy:
+Rollback:
+Komunikace:
+Vlastnik:
+Termin:
+```
+
+Datovy dopad je povinny. Pokud update meni zpusob logovani, exportu, autentizace, analytiky, uploadu nebo komunikace s dodavatelem, neni to jen technicka zmena. Je to zmena v tom, jak produkt zachazi s duverou.
+
+### 5. Testuj chovani, ne jen instalaci
+
+`npm audit fix` nebo podobny prikaz umi zmenit strom zavislosti, ale sam o sobe nedokazuje, ze produkt porad dela spravnou vec. Minimalni sada overeni:
+
+- instalace zavislosti probehne ciste z lockfile,
+- unit nebo integracni testy pro dotcene oblasti projdou,
+- hlavni uzivatelsky tok funguje,
+- login, odhlaseni a reset hesla se nerozbily,
+- formular, checkout nebo export neuklada vic dat nez predtim,
+- logy po smoke testu neobsahuji tajemstvi ani cele payloady,
+- rollback je skutecne mozny, ne jen vysloveny.
+
+NIST SSDF bere bezpecny vyvoj jako sadu praktik napric zivotnim cyklem softwaru, ne jako jednorazovy audit pred releasem: https://csrc.nist.gov/pubs/sp/800/218/final. To sedi i pro maly SaaS. Aktualizace zavislosti je soucast vyvoje, ne uklidova prace pro patek vecer.
+
+### 6. 60min postup
+
+```text
+0-10 min: Projdi nove alerty.
+Oddel produkcni runtime, build, dev tooling a infrastrukturu.
+
+10-20 min: Oznac dopad.
+Autentizace, osobni data, platby, uploady, admin, exporty a verejne endpointy maji prednost.
+
+20-30 min: Vyber akci.
+Emergency patch dnes, bezpecnostni udrzba tento tyden, hygiena do maintenance slotu.
+
+30-40 min: Vytvor patch kartu.
+Zapis duvod, dotcene toky, testy, rollback, datovy dopad a vlastnika.
+
+40-52 min: Proved nejmensi bezpecnou zmenu.
+Aktualizuj jednu logickou skupinu zavislosti, ne cely vesmir.
+
+52-60 min: Over a uzavri.
+Spust testy, smoke test, zkontroluj diff/lockfile a zapis dalsi krok.
+```
+
+### Checklist: aktualizace zavislosti bez patchovaci paniky
+
+- [ ] Vim, ktere zavislosti bezi v produkci a ktere jsou jen vyvojove.
+- [ ] Kriticke zavislosti maji vlastnika a jednoduchy testovaci postup.
+- [ ] Alerty se tridi podle skutecneho dopadu, ne jen podle barvy v dashboardu.
+- [ ] Aktivne zneuzivane zranitelnosti maji samostatny emergency tok.
+- [ ] Aktualizace s dopadem na data maji popsanou datovou zmenu.
+- [ ] Lockfile je soucast kontroly, ne nahodny sum v commitu.
+- [ ] Testy overuji dotcene produktove toky, nejen instalaci balicku.
+- [ ] Rollback existuje pred nasazenim rizikove aktualizace.
+- [ ] Opustene nebo malo udrzovane knihovny maji migracni plan.
+- [ ] Externi skripty a CDN se neposuzuji jen jako frontend detail.
+- [ ] Po patchi zustane kratky zapis: co se menilo, proc, jak se overilo a co jeste hlidat.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -12394,6 +12516,12 @@ Datum, vlastnik, pravidlo pro zavirani starych veci a maximum otevrenych P3 tick
 - Keep a Changelog, Version 1.1.0: https://keepachangelog.com/en/1.1.0/
 - Semantic Versioning 2.0.0: https://semver.org/
 - Martin Fowler, Feature Toggles (aka Feature Flags): https://martinfowler.com/articles/feature-toggles.html
+- OWASP Top 10 2025 Introduction: https://owasp.org/Top10/2025/0x00_2025-Introduction/
+- OWASP Dependency-Check: https://owasp.org/www-project-dependency-check/
+- OWASP Dependency-Track: https://owasp.org/www-project-dependency-track/
+- OpenSSF Scorecard: https://scorecard.dev/
+- CISA Known Exploited Vulnerabilities Catalog: https://www.cisa.gov/known-exploited-vulnerabilities-catalog
+- NIST SP 800-218, Secure Software Development Framework (SSDF) Version 1.1: https://csrc.nist.gov/pubs/sp/800/218/final
 
 ---
 
@@ -12470,3 +12598,4 @@ Datum, vlastnik, pravidlo pro zavirani starych veci a maximum otevrenych P3 tick
 - 2026-08-02: Pridana prakticka priloha Schvalovani citlivych admin akci bez brzdici byrokracie za 45 minut vcetne matice dopadu, schvalovaci karty, emergency override a checklistu.
 - 2026-08-02: Pridana prakticka priloha Support eskalace bez datoveho ohnostroje za 45 minut vcetne eskalacni karty, priority P1-P4, oddeleni citlivych artefaktu a checklistu.
 - 2026-08-02: Pridana prakticka priloha Bug triage a technicky dluh bez nekonecneho backlogu za 45 minut vcetne prioritizace, privacy-first filtru, dluhovych ticketu, mesicniho uklidu a checklistu.
+- 2026-08-02: Pridana prakticka priloha Aktualizace zavislosti bez patchovaci paniky za 60 minut vcetne inventare zavislosti, prioritizace alertu, patch karty, testovani a checklistu.
