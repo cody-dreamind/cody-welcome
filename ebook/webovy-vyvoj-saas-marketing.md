@@ -9949,6 +9949,146 @@ Jedna iterace ma skoncit jednou zmenou: prepsany use-case, nova cast trust page,
 
 ---
 
+## SLA a support limity bez prehnanych slibu za 45 minut
+
+SLA neni kouzelna veta "jsme tu pro vas 24/7". Je to smlouva o ocekavani: kdy reagujete, co povazujete za kriticky problem, jake kanaly supportu existuji, co je mimo rozsah a jak se komunikuje vypadek. Pro maly SaaS je nejvetsi chyba slibit enterprise provoz jen proto, aby obchodni email vypadal silneji. Zakaznik si nekupuje poeticky zavazek. Kupuje predvidatelnost.
+
+Privacy-first SLA ma jeste jednu hranici: support nemuze pri kazdem problemu chtit kompletni export, admin pristup nebo screenshoty plne osobnich dat. Rychla pomoc nesmi znamenat, ze se z podpory stane nehlidany datovy sklad.
+
+**Codyho komentar:** SLA je jako cenik pro provozni duveru. Kdyz je mlhave, kazdy si do nej promita vlastni prani. A prani maji v incidentu velmi spatnou dostupnost.
+
+### 1. Rozdel problemy podle dopadu
+
+Nezacinej casem reakce. Zacni dopadem na zakaznika. Jinak skoncis u situace, kdy kosmeticka chyba v nastaveni dostane stejnou prioritu jako nefunkcni prihlaseni.
+
+| Priorita | Dopad | Priklad | Reakce |
+| --- | --- | --- | --- |
+| P1 | Zakaznik nemuze pouzivat hlavni produktovy tok nebo je podezreni na dopad na data. | Aplikace nejde, prihlaseni nejde, export ukazuje chybu u vice uctu. | Incident proces, rychly prvni update, jasny owner. |
+| P2 | Dulezita funkce je degradovana, ale existuje workaround. | Emailove notifikace maji zpozdeni, import ceka ve fronte. | Prioritni support, dalsi update podle dopadu. |
+| P3 | Problem omezuje cast pouziti, ale neblokuje hlavni praci. | Nejasna hlaska, chyba v jednom filtru, drobna nekonzistence. | Standardni support fronta. |
+| P4 | Dotaz, navrh nebo kosmetika. | Prani noveho exportu, uprava textu, napad do roadmapy. | Zapis, odpoved, pripadne produktovy backlog. |
+
+U kazde priority si napis i proti-priklady. Napriklad "neumim najit nastaveni" neni automaticky P1, pokud produkt bezi a problem je edukacni. Naopak "formular obcas neodesle lead" muze byt P1 nebo P2 podle toho, zda se ztraci obchodni data.
+
+### 2. Cas reakce neni cas opravy
+
+Zakaznici casto slysi "odpovime do 2 hodin" jako "opravime do 2 hodin". Pokud to tak nemyslis, napis to jasne.
+
+Rozlis:
+
+- prvni reakci: potvrzeni, ze problem vidis a kdo ho vlastni,
+- dalsi update: kdy prijde nova informace,
+- mitigaci: omezeni dopadu nebo workaround,
+- opravu: skutecne odstraneni priciny,
+- postmortem: pozdejsi vysvetleni a preventivni opatreni.
+
+Priklad jednoducheho SLA textu:
+
+```text
+U P1 incidentu potvrzujeme prijem co nejrychleji v pracovni dobe nebo podle
+dohodnute pohotovosti. Prvni reakce neznamena garantovanou opravu; znamena,
+ze incident ma vlastnika, posuzujeme dopad a posleme dalsi update v urcenem case.
+```
+
+Tohle je mnohem poctivejsi nez slib "vyresime ihned". Nektere veci nejdou vyresit ihned. Jdou ale ihned vlastnit.
+
+### 3. Definuj support kanaly
+
+Kdyz ma zakaznik problem, nema hadat, jestli psat na osobni email, Telegram, obchodnikovi, supportu nebo do komentare pod changelog. Kanaly urcuji i datovou stopu.
+
+| Kanal | Kdy ho pouzit | Datove pravidlo |
+| --- | --- | --- |
+| Support email nebo portal | Bezny support, P2-P4. | Neposilat hesla, tokeny ani zbytecne exporty. |
+| Incident kontakt | P1 nebo podezreni na data/security dopad. | Minimalni fakta, citlive prilohy jen domluvenym kanalem. |
+| Obchodni kontakt | Cena, smlouva, rozsireni pilotu. | Neprijimat technicke exporty mimo support tok. |
+| Status page | Obecna dostupnost a provozni updates. | Bez osobnich dat a bez citlivych internich detailu. |
+
+Do SLA pridej vetu:
+
+```text
+Pro rychle reseni prosim pouzijte support kanal a neposilejte produkcni exporty,
+hesla, API klice ani citlive screenshoty, pokud si je vyzadane nedomluvime.
+```
+
+Zni to drobne. Ale prave tahle veta muze zabranit tomu, aby nekdo v panice poslal do supportu kompletni databazovy export.
+
+### 4. Co je mimo rozsah
+
+Mimo rozsah neni nepratelska cast dokumentu. Je to prevence spatnych ocekavani.
+
+Typicky mimo standardni support:
+
+- vyvoj zakazkovych funkci,
+- opravy dat poskozenych mimo produkt,
+- analyza cizich systemu bez dohodnuteho rozsahu,
+- migrace historickych dat bez samostatne domluvy,
+- pravni, danove nebo bezpecnostni poradenstvi mimo produktovy kontext,
+- nonstop pohotovost, pokud neni soucasti planu nebo smlouvy.
+
+Lepsi formulace nez suche "neni podporovano":
+
+```text
+Tyto pozadavky neresime ve standardnim supportu. Pokud jsou pro vas dulezite,
+muzeme je vyhodnotit jako samostatny pilot, Business pozadavek nebo partnerskou
+implementaci s vlastnim rozsahem a datovymi pravidly.
+```
+
+Takhle nezaviras dvere. Jen nedovolujes, aby se support zmenil v bezednou konzultacni sluzbu.
+
+### 5. SLA podle planu bez privacy upsellu
+
+Je normalni, ze vyssi plan ma rychlejsi podporu, dedikovane kanaly nebo lepsi provozni zavazky. Neni normalni, aby zakladni kontrola nad daty byla luxusni doplnek.
+
+Ferove rozdeleni:
+
+| Oblast | Start | Team | Business |
+| --- | --- | --- | --- |
+| Bezny support | email, standardni fronta | rychlejsi priorita | dedikovany kontakt nebo kanal |
+| Incidenty | status page a support | cilene updates pro adminy | domluveny incident proces |
+| Export dat | dostupny zakladni export | sirsi exporty a historie | individualni exportni proces |
+| Security/DPA | zakladni trust page | DPA proces | rozsahlejsi dotazniky a review |
+| Pohotovost | typicky ne | podle dohody | smluvne definovana |
+
+Privacy-first zaklad jako export, mazani, vysvetleni zpracovani dat a rozumna incident komunikace patri do produktu. Vyssi plan muze platit za slozitejsi provozni obsluhu, ne za pravo nebyt uvaznen.
+
+### 6. 45min postup
+
+```text
+00-07 min: Sepis hlavni support situace.
+Vypadek, chyba, dotaz, security obava, billing, export, feature request.
+
+07-15 min: Rozdel priority P1-P4.
+Podle dopadu na hlavni tok, data, platby a praci zakaznika.
+
+15-23 min: Napis rozdil mezi reakci, mitigaci a opravou.
+Zakaznik musi vedet, co presne slibujete.
+
+23-31 min: Definuj kanaly.
+Support, incident, obchod, status page. Ke kazdemu datove pravidlo.
+
+31-38 min: Sepis mimo rozsah.
+Zakazkove prace, migrace, pravni poradenstvi, pohotovost mimo plan.
+
+38-45 min: Zkontroluj cenik a trust page.
+SLA sliby nesmi odporovat realnemu provozu, incident runbooku ani privacy dokumentum.
+```
+
+### Checklist: SLA a support limity
+
+- [ ] Priority jsou definovane podle dopadu, ne podle hlasitosti pozadavku.
+- [ ] P1/P2/P3/P4 maji priklady i proti-priklady.
+- [ ] Je jasny rozdil mezi prvni reakci, mitigaci, opravou a postmortem.
+- [ ] Support kanaly jsou popsane a zakaznik vi, kam psat.
+- [ ] Support pravidla rikaji, jaka data neposilat.
+- [ ] Citlive prilohy, exporty a pristupy maji samostatny domluveny tok.
+- [ ] Mimo rozsah je napsany vecne a obchodne pouzitelne.
+- [ ] Vyssi plan muze mit lepsi obsluhu, ale zakladni kontrola nad daty neni upsell.
+- [ ] SLA odpovida realne kapacite tymu.
+- [ ] SLA, status page, incident runbook, cenik a trust page si neodporuji.
+- [ ] Po kazdem vetsim incidentu se zkontroluje, zda SLA odpovidalo realite.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -10075,3 +10215,4 @@ Jedna iterace ma skoncit jednou zmenou: prepsany use-case, nova cast trust page,
 - 2026-08-01: Pridana prakticka priloha Komunita bez platformniho zamku za 60 minut vcetne volby kanalu, komunitniho kontraktu, vlastni domeny, moderace, metrik a checklistu.
 - 2026-08-01: Pridana prakticka priloha Zakaznicky pruzkum bez zbytecneho profilovani za 45 minut vcetne vyberu duvodu, otazek, urovni identifikace, vyhodnoceni a checklistu.
 - 2026-08-02: Pridana prakticka priloha Win-loss rozhovory bez CRM vyslechu za 45 minut vcetne segmentace, scenare rozhovoru, zapisove karty, vyhodnoceni vzoru a checklistu.
+- 2026-08-02: Pridana prakticka priloha SLA a support limity bez prehnanych slibu za 45 minut vcetne priorit P1-P4, support kanalu, hranic rozsahu, planu podpory a checklistu.
