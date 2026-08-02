@@ -12941,6 +12941,234 @@ Text v UI:
 
 ---
 
+## API dokumentace bez supportu na kazdy endpoint za 60 minut
+
+Zakaznicke API je slib. Kdyz je dokumentace nepresna, support pak nedela podporu produktu, ale prekladatele mezi tim, co API skutecne dela, a tim, co si zakaznik musel domyslet. U maleho SaaS to vypada nenapadne: jeden endpoint pro export, jeden webhook, jeden token. Pak prijde prvni vetsi zakaznik, chce napojeni do sveho systemu a najednou se resi autentizace, limity, chyby, idempotence, zmeny verzi a kdo smi videt jaka data.
+
+OpenAPI Specification popisuje standardni, jazykove nezavislou podobu HTTP API, ktera pomaha lidem i strojum pochopit schopnosti sluzby bez cteni zdrojoveho kodu: https://spec.openapis.org/oas/latest.html. To neznamena, ze kazdy maly produkt musi mit hned verejny developersky portal. Znamena to, ze kontrakt API ma byt citelny, verzovany a testovatelny.
+
+### 1. Zacni rozhodnutim, pro koho API je
+
+API dokumentace nema byt katalog vseho, co backend umi. Ma odpovedet konkretnimu integratorovi:
+
+- Jsem zakaznik a chci exportovat vlastni data.
+- Jsem partner a chci zakladat zaznamy z vlastniho systemu.
+- Jsem interni tym a potrebuji stabilni administracni rozhrani.
+- Jsem auditor a potrebuji pochopit, kudy mohou tect data.
+
+Pro kazdy rezim se lisi rozsah, autorizace, priklady i odpovednost. Verejne zakaznicke API by melo ukazovat jen stabilni podporovane endpointy. Interni endpointy do dokumentace pro zakaznika nepatri ani jako "schovane sekce". Schovana dokumentace neni bezpecnostni hranice, jen pozvanka k nedorozumeni.
+
+**Codyho komentar:** API je produktovy povrch, ne odpadni trubka z databaze. Kdyz endpoint existuje jen proto, ze se tak nejsnaz dotazuje tabulka, jeste to neni zakaznicka schopnost.
+
+### 2. Minimalni kontrakt endpointu
+
+U kazdeho endpointu staci zacat s touto kartou:
+
+```text
+Nazev:
+Ucel:
+Kdo ho smi volat:
+Metoda a cesta:
+Autentizace:
+Pozadovana opravneni:
+Request parametry:
+Request body:
+Uspechova odpoved:
+Chybove odpovedi:
+Rate limit:
+Idempotence:
+Retence dat vzniklych volanim:
+Priklad cURL:
+Kontakt pri problemu:
+```
+
+Nejdulezitejsi casti jsou ucel, opravneni a chyby. Parametry se daji opsat z kodu, ale ucel a hranice musi nekdo rozhodnout. Prave tam vznikaji privacy-first rozdily.
+
+Spatny popis:
+
+```text
+GET /users
+Vrati uzivatele.
+```
+
+Lepsi popis:
+
+```text
+GET /v1/members
+Vrati cleny organizace, ke ktere patri API klic. Nevraci osobni poznamky, interni support stavy ani auditni zaznamy. Endpoint je urceny pro synchronizaci aktivnich uctu do zakaznickeho intranetu.
+```
+
+Ten druhy popis rika, kdo je vlastnik dat, kde je hranice a co integrator nemuze ocekavat.
+
+### 3. Autentizace a tajemstvi popisuj bez zkratek
+
+Kdyz dokumentace rika jen "vlozte token do headeru", zakaznik si casto doplni nebezpecne detaily sam. Napis presne:
+
+- kde se API klic vytvari,
+- kdo ho smi vytvorit,
+- zda je videt jen jednou,
+- jak se omezi opravneni,
+- jak se rotuje,
+- jak se zneplatni,
+- zda ma expiraci,
+- jak se pozna posledni pouziti.
+
+Bearer tokeny se v HTTP bezne posilaji pres `Authorization: Bearer ...`; RFC 6750 popisuje zpusob pouziti bearer tokenu v OAuth 2.0 kontextu: https://www.rfc-editor.org/rfc/rfc6750. Pro maly SaaS z toho plyne prakticke pravidlo: token je nositel pristupu. Kdo ho ma, muze jednat jako prislusny klient, pokud nemas dalsi ochrany. Proto do dokumentace pridej i zakazy:
+
+```text
+API klic nevkladejte do frontendu, mobilni aplikace distribuovane koncovym uzivatelum, verejneho repozitare ani do screenshotu posilanych supportu.
+```
+
+Privacy-first detail: API klic nema byt univerzalni "admin vseho". Umoznuje-li produkt vice rozsahu, zaved omezeni typu `read:exports`, `write:contacts`, `read:invoices`. Kdyz zatim scopes nemas, dokumentuj alespon, ze klic dedi opravneni organizace a doporucuj samostatny servisni ucet.
+
+### 4. Chyby musi byt pro lidi i stroje
+
+HTTP status kody maji mit konzistentni vyznam podle HTTP semantiky v RFC 9110: https://www.rfc-editor.org/rfc/rfc9110.html. Pro API je prakticke pouzit jednotny format chyb, aby integrator nemusel parsovat text "neco se pokazilo". RFC 9457 popisuje Problem Details pro HTTP API: https://datatracker.ietf.org/doc/html/rfc9457.
+
+Minimalni chyba:
+
+```json
+{
+  "type": "https://docs.example.eu/errors/rate-limit",
+  "title": "Rate limit exceeded",
+  "status": 429,
+  "detail": "This API key exceeded the limit for export requests.",
+  "instance": "req_01J8..."
+}
+```
+
+Do `detail` nedavej osobni udaje, cele dotazy, interni nazvy tabulek ani tajemstvi. `instance` ma byt technicke ID, ktere support najde v logu. Zakaznik potrebuje vedet, co ma udelat dal, ne videt vnitrek systemu.
+
+Zakladni sada chyb:
+
+| Stav | Kdy ho vratit | Co dodat |
+| --- | --- | --- |
+| `400` | Request nejde zpracovat kvuli formatu nebo validaci | Konkretni pole a oprava |
+| `401` | Chybi nebo neplati autentizace | Jak se spravne autentizovat |
+| `403` | Volajici nema opravneni | Ktere opravneni chybi |
+| `404` | Zdroj neexistuje nebo k nemu volajici nema pristup | Bez prozrazeni cizi existence |
+| `409` | Konflikt stavu nebo duplicitni operace | Jak konflikt vyresit |
+| `422` | Obsah dava syntakticky smysl, ale porusuje business pravidlo | Pravidlo a pole |
+| `429` | Prekrocen limit | `Retry-After` nebo cas dalsiho pokusu |
+| `5xx` | Chyba na strane sluzby | Request ID a status page |
+
+### 5. Ukaz priklad, ktery lze spustit
+
+Dokumentace bez spustitelneho prikladu je hezka teorie. Pro kazdy dulezity tok pridej jeden cURL priklad a jednu realnou odpoved. Pouzij synteticka data, ktera nevypadaji jako z produkcniho exportu.
+
+```bash
+curl -sS https://api.example.eu/v1/exports \\
+  -H "Authorization: Bearer $EXAMPLE_API_KEY" \\
+  -H "Content-Type: application/json" \\
+  -d '{
+    "type": "contacts",
+    "format": "csv",
+    "fields": ["email", "company", "created_at"]
+  }'
+```
+
+Dobry priklad ukaze:
+
+- jak nastavit hlavicky,
+- jak vypada minimalni request,
+- co je volitelne,
+- jak vypada odpoved,
+- kde zjistit stav asynchronni operace,
+- jak dlouho je vysledek dostupny,
+- co se loguje a co ne.
+
+U exportu pridej retenci primo do odpovedi:
+
+```json
+{
+  "id": "exp_01J8...",
+  "status": "processing",
+  "download_url": null,
+  "expires_at": "2026-08-09T12:00:00Z"
+}
+```
+
+Tohle je mala vec, ale snizuje support dotazy a zaroven drzi datovou hygienu.
+
+### 6. Zmeny verzi bez prekvapeni
+
+API zije dele nez prvni frontend. Proto dokumentuj:
+
+- aktualni verzi,
+- zpusob verzovani,
+- co je breaking change,
+- jak dlouho podporujes starou verzi,
+- kde je changelog,
+- jak zakaznik dostane upozorneni na zmenu.
+
+Prakticke pravidlo: nova volitelna pole v odpovedi nejsou problem, odebrani pole problem je. Zmena vyznamu pole je jeste horsi, protoze se rozbije tise. Kdyz menis semantiku, vytvor novou verzi nebo nove pole a stare nech dozit.
+
+Mikrocopy do dokumentace:
+
+```text
+Stabilni endpointy ve `/v1` nemenime zpusobem, ktery by rozbil existujici integrace, bez predchoziho oznameni a migracniho okna. Experimentalni endpointy jsou oznacene `beta` a nejsou vhodne pro kriticke procesy.
+```
+
+### 7. 60min postup
+
+```text
+0-10 min: Vyber jeden zakaznicky tok.
+Export, zalozeni zaznamu, webhook nebo synchronizace seznamu.
+
+10-20 min: Sepis kontrakt.
+Ucel, opravneni, request, odpoved, chyby, rate limit a retence.
+
+20-35 min: Vytvor nebo oprav OpenAPI popis.
+Pridej schema, priklady, security scheme a popisy chyb.
+
+35-45 min: Dopln spustitelny priklad.
+cURL, synteticka data, ukazka uspechu a jedna typicka chyba.
+
+45-55 min: Projdi privacy-first hranice.
+Minimalni pole, zadne tajne hodnoty v prikladech, zadna zbytecna data v chybach.
+
+55-60 min: Pridej changelog poznamku.
+Co se zmenilo, od kdy to plati a kdo je kontakt pro integratory.
+```
+
+### Sablona dokumentacni karty API
+
+```text
+Endpoint:
+Stav: stable / beta / deprecated
+Ucel:
+Typicky integrator:
+Datove kategorie:
+Autentizace:
+Scopes/opravneni:
+Rate limit:
+Idempotency key:
+Uspechova odpoved:
+Chybove odpovedi:
+Retence technickych zaznamu:
+Retence vystupu:
+Breaking change pravidla:
+Priklad:
+Support kontakt:
+```
+
+### Checklist: API dokumentace bez supportu na kazdy endpoint
+
+- [ ] Verejna dokumentace ukazuje jen podporovane endpointy, ne interni zkratky.
+- [ ] Kazdy endpoint ma popsan ucel, opravneni a datove kategorie.
+- [ ] OpenAPI popis odpovida realnemu chovani aplikace.
+- [ ] Priklady pouzivaji synteticka data a nejdou zkopirovat jako produkcni tajemstvi.
+- [ ] Autentizace vysvetluje vytvoreni, ulozeni, rotaci a zneplatneni klice.
+- [ ] Zakaznik vi, ktere scopes nebo role potrebuje.
+- [ ] Chyby maji konzistentni strukturu a neprozrazuji cizi data ani interni detaily.
+- [ ] `429` odpoved rika, kdy ma klient zkusit dalsi pokus.
+- [ ] Exporty a asynchronni operace vraci stav, technicke ID a retenci vysledku.
+- [ ] Breaking changes maji migracni okno a changelog.
+- [ ] Support umi podle request ID dohledat problem bez sdileni celeho payloadu.
+- [ ] Dokumentace obsahuje kontakt pro integracni potize a hranice podpory.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -13002,6 +13230,8 @@ Text v UI:
 - RFC 6585, Additional HTTP Status Codes: https://datatracker.ietf.org/doc/html/rfc6585
 - RFC 9110, HTTP Semantics: https://www.rfc-editor.org/rfc/rfc9110.html
 - RFC 9457, Problem Details for HTTP APIs: https://datatracker.ietf.org/doc/html/rfc9457
+- RFC 6750, The OAuth 2.0 Authorization Framework: Bearer Token Usage: https://www.rfc-editor.org/rfc/rfc6750
+- OpenAPI Specification, latest published version: https://spec.openapis.org/oas/latest.html
 - Schema.org, BlogPosting: https://schema.org/BlogPosting
 - CNIL, Use analytics on your websites and applications: https://www.cnil.fr/en/sheet-ndeg16-use-analytics-your-websites-and-applications
 - Umami, FAQ: https://umami.is/docs/faq
@@ -13103,3 +13333,4 @@ Text v UI:
 - 2026-08-02: Pridana prakticka priloha API limity a chybove odpovedi bez trestani zakazniku za 60 minut vcetne rate limitu, 429 odpovedi, retry pravidel, dokumentace a checklistu.
 - 2026-08-02: Pridana prakticka priloha CSV exporty a reporty bez datoveho vysavace za 45 minut vcetne datoveho kontraktu, CSV Injection ochrany, asynchronnich exportu, UI varovani a checklistu.
 - 2026-08-02: Pridana prakticka priloha Souborove uploady a prilohy bez datove skluzavky za 60 minut vcetne ucelu uploadu, validace, metadat, retence, UI mikrocopy a checklistu.
+- 2026-08-02: Pridana prakticka priloha API dokumentace bez supportu na kazdy endpoint za 60 minut vcetne kontraktu endpointu, autentizace, chyb, prikladu, verzovani a checklistu.
