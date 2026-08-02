@@ -11154,6 +11154,177 @@ Nepoustej hromadnou kampan. Over jednu prilezitost lidsky a uprav pravidla podle
 
 ---
 
+## Renewal a prodlouzeni spoluprace bez automaticke pasti za 45 minut
+
+Renewal je okamzik, kdy se ukaze, jestli SaaS opravdu dodava hodnotu. Neni to jen fakturacni udalost. Je to pravidelna kontrola vztahu: co zakaznik pouziva, co se zmenilo, kde vzniklo riziko, co uz nema smysl a jestli je dalsi obdobi ferove pro obe strany.
+
+Spatny renewal se tvari jako ticha administrativa. Zakaznik si vsimne az nove faktury, obchodnik doufa, ze nikdo nic neotevre, a produktovy tym se tvari, ze absence stiznosti je dukaz spokojenosti. Privacy-first renewal dela opak: vcas pripomene kontext, ukaze hodnotu, zkontroluje data a da zakaznikovi jasnou volbu.
+
+### 1. Renewal zacina driv nez posledni tyden
+
+U maleho SaaS staci jednoduchy rytmus:
+
+- 60 dni pred koncem obdobi: zkontroluj stav uctu, vyuziti, otevrene problemy a sliby z minula.
+- 45 dni pred koncem: priprav interni renewal kartu.
+- 30 dni pred koncem: ozvi se zakaznikovi s hodnotou, riziky a navrhem dalsiho kroku.
+- 14 dni pred koncem: uzavri rozhodnuti, uprav rozsah nebo priprav offboarding.
+- Po renewalu: zapis, co se zmenilo a co uz neslibovat.
+
+Kdyz je produkt mesicni bez smluvniho cyklu, pouzij stejny princip kvartalne. Ne kazdy zakaznik potrebuje call. Kazdy dulezity zakaznik ale potrebuje, aby nekdo pravidelne vedel, proc zustava.
+
+**Codyho komentar:** "Nikdo si nestezuje" neni signal zdravi. Je to jen ticho. Ticho muze znamenat spokojenost, ale taky to, ze produkt uz davno prestal byt dulezity a jenom prochazi kartou.
+
+### 2. Renewal karta misto paniky v CRM
+
+Pro kazdy vyznamny ucet si priprav jednu kartu. Ma byt kratka, citelna a pouzitelna pro obchod, support i produkt.
+
+```text
+Account:
+Soucasny plan a obdobi:
+Hlavni puvodni cil:
+Co se podarilo:
+Co se nepodarilo:
+Otevrene problemy:
+Vyuzite casti produktu:
+Nevyuzite casti produktu:
+Data a integrace v provozu:
+Zmeny v tymu nebo procesu zakaznika:
+Navrh dalsiho obdobi:
+Co doporucujeme snizit, vypnout nebo uklidit:
+Riziko churnu:
+Kdo vlastni dalsi krok:
+Datum dalsiho kontaktu:
+```
+
+Tahle karta neni sbirka osobnich poznamek o jednotlivych lidech. Drz ji na urovni accountu, cilu, workflow a provoznich zavazku. Pokud potrebujes zminit konkretni kontakt, napis jen roli a potrebny dalsi krok.
+
+### 3. Ukaz hodnotu, ale nepocitej ji kouzelnou metrikou
+
+Renewal zprava ma zakaznikovi pripomenout, proc produkt existuje. Neprehanet, nevymyslet ROI z mokreho ubrousku, nevytrhavat metriky z kontextu.
+
+Pouzitelne hodnotove signaly:
+
+| Signal | Jak ho formulovat |
+| --- | --- |
+| Dokoncene workflow | "Tento kvartal probehlo 48 schvaleni bez rucniho obihani emailu." |
+| Snizeni support zateze | "Opakovane dotazy k onboarding dokumentum klesly po zverejneni portalu." |
+| Lepsi provozni kontrola | "Mate nastavene role pro 3 tymy a auditni log pro kriticke zmeny." |
+| Menci datova stopa | "Behem pilotu jsme nepouzili marketingove pixely a data zustala v dohodnutem provoznim rozsahu." |
+| Rychlejsi reakce | "Incidentni kontakt, status page a exportni postup jsou pripravene pred dalsi sezonou." |
+
+Slabe signaly:
+
+- pocet prihlaseni bez vazby na vysledek,
+- pocet kliknuti bez jasneho rozhodnuti,
+- umele procento "engagementu",
+- grafy, ktere vypadaji dobre, ale nikdo podle nich nic neudelal,
+- osobni aktivita jednotlivcu jako argument pro fakturu.
+
+Kdyz hodnotu neumime ukazat bez invazivniho sledovani, neni odpoved "sledovat vic". Odpoved je zpresnit, jakou praci ma produkt pro zakaznika delat.
+
+### 4. Nabidni tri ferove varianty
+
+Renewal nemusi vzdy znamenat "stejny plan nebo vyssi". Ferova nabidka casto obsahuje tri varianty:
+
+```text
+1. Pokracovat beze zmeny
+   Dava smysl, pokud aktualni rozsah odpovida pouziti a nejsou otevrena rizika.
+
+2. Upravit rozsah
+   Snizit, rozsirit, vypnout nepouzivany modul, pridat provozni zavazek nebo zmenit pocet mist.
+
+3. Ukoncit nebo prevest
+   Pouzit exit plan, export dat, mazani, predani dokumentace a vypnuti integraci.
+```
+
+Treti varianta neni prohra. U zakaznika, kteremu produkt uz nesedi, je dustojny odchod lepsi nez dalsi rok nespokojenosti. Casto se vrati pozdeji, kdyz ma znovu spravny problem. A kdyz se nevrati, aspon po sobe nezanechas pachut.
+
+### 5. Zkontroluj data pred dalsim obdobim
+
+Renewal je idealni misto pro privacy uklid. Zeptej se:
+
+- Sbira produkt porad jen data, ktera odpovidaji aktualnimu ucelu?
+- Nezustala po pilotu zapnuta integrace, kterou uz nikdo nepouziva?
+- Nelezi v supportu exporty, screenshoty nebo prilohy, ktere mely byt smazane?
+- Odpovida seznam subprocesoru tomu, co je realne zapojene?
+- Je stale spravne nastaveni retence logu, zaloh a auditni historie?
+- Maji pristup jen lide, kteri ho porad potrebuji?
+- Neprodavame zakaznikovi funkci, ktera zvysi datovou stopu bez jasne hodnoty?
+
+Pokud se rozsah meni, zapis datovy dopad rovnou do renewal karty. Jedna veta casto staci:
+
+```text
+Datovy dopad: Pridavame integraci na fakturaci. Bude prenaset firemni identifikacni udaje, fakturacni email a stav platby. Neposilame obsah projektovych poznamek ani aktivitu jednotlivych uzivatelu.
+```
+
+### 6. Renewal email bez mlhy
+
+Sablona pro zakaznika:
+
+```text
+Predmet: Navrh dalsiho obdobi pro [produkt/projekt]
+
+Ahoj [jmeno],
+
+blizi se konec soucasneho obdobi, tak jsem pripravil kratke shrnuti.
+
+Puvodni cil byl [cil]. Za posledni obdobi se podarilo [konkretni vysledek].
+Otevrene zustava [problem nebo riziko].
+
+Navrhuji jednu ze tri cest:
+
+1. pokracovat beze zmeny,
+2. upravit rozsah na [konkretni zmena],
+3. nebo pripravit ukonceni vcetne exportu/mazani dat a vypnuti integraci.
+
+Z datoveho pohledu se pri variante [doporucena varianta] meni [nic / konkretni dopad].
+
+Muzu poslat detailni navrh nebo to projit na 20min callu.
+
+Cody
+```
+
+Tahle zprava neschovava fakturu za "jen pripominam". Dava zakaznikovi kontext, volbu a datovy dopad. Presne takhle ma B2B komunikace znit, kdyz nechces prodavat mlhou.
+
+### 7. 45min postup
+
+```text
+00-05 min: Vyber jeden ucet pred renewalem.
+Neber vsechny naraz. Zacni tam, kde je hodnota nebo riziko nejvetsi.
+
+05-15 min: Vypln renewal kartu.
+Puvodni cil, vysledky, otevrene problemy, vyuziti a navrh dalsiho obdobi.
+
+15-25 min: Projdi datovou stopu.
+Integrace, pristupy, support prilohy, logy, exporty, retence a subprocesori.
+
+25-32 min: Vyber tri varianty.
+Beze zmeny, uprava rozsahu, ukonceni nebo prevod.
+
+32-40 min: Napis renewal email.
+Jedna zprava, konkretni vysledky, jasny dalsi krok, zadne umele urgency.
+
+40-45 min: Zapis follow-up.
+Kdo odpovida, kdy se ozve, kdy se karta uzavre nebo smaze.
+```
+
+### Checklist: renewal bez automaticke pasti
+
+- [ ] Renewal resim predem, ne az v den faktury.
+- [ ] Mam jednu kratkou renewal kartu pro account.
+- [ ] Hodnotu ukazuji pres vysledky, workflow a provozni dopad.
+- [ ] Nepouzivam osobni klikaci historii jako hlavni argument.
+- [ ] Zakaznik ma jasnou variantu pokracovat, upravit rozsah nebo odejit.
+- [ ] U zmeny rozsahu znam datovy dopad.
+- [ ] Nepouzivane integrace a pristupy se uklidi.
+- [ ] Support prilohy, exporty a pilotni data maji jasnou retenci.
+- [ ] Renewal email rika otevrene problemy, nejen uspechy.
+- [ ] Dalsi krok ma vlastnika a datum.
+- [ ] Pokud spoluprace konci, existuje exportni a mazaci postup.
+- [ ] Z renewal poznatku vznikne aspon jedno produktove nebo provozni rozhodnuti.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -11291,3 +11462,4 @@ Nepoustej hromadnou kampan. Over jednu prilezitost lidsky a uprav pravidla podle
 - 2026-08-02: Pridana prakticka priloha Feature flags a postupny rollout bez chaosu za 60 minut vcetne typu flagu, rollout runbooku, segmentace bez profilovani, test matice, uklidu a checklistu.
 - 2026-08-02: Pridana prakticka priloha Health score a QBR bez sledovani lidi za 60 minut vcetne account-level signalu, akci podle stavu, QBR sablony, zapisu a checklistu.
 - 2026-08-02: Pridana prakticka priloha Expansion a upsell bez loveni v osobnich datech za 60 minut vcetne typu rozsireni, vysvetlitelnych signalu, expansion karty, servisni zpravy a checklistu.
+- 2026-08-02: Pridana prakticka priloha Renewal a prodlouzeni spoluprace bez automaticke pasti za 45 minut vcetne renewal karty, hodnotovych signalu, datove kontroly, emailove sablony a checklistu.
