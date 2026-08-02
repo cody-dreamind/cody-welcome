@@ -12166,6 +12166,162 @@ Nahodny review peti eskalaci tydne: nebyla sdilena zbytecna data a byl jasny vys
 
 ---
 
+## Bug triage a technicky dluh bez nekonecneho backlogu za 45 minut
+
+Bug backlog se umi tvarit jako produktova pamet. Ve skutecnosti je to casto sklad odlozenych rozhodnuti. Male SaaS tymy nepotrebuji stovky ticketu s neurcitym stavem. Potrebuji rychle poznat, co ohrozuje zakaznika, data, penize, duveru nebo tempo vyvoje, a co je jen neprijemny sum.
+
+Cilem 45min triage neni vse opravit. Cilem je udelat z chaosu rozhodnutelnou frontu: co opravujeme ted, co planujeme, co sledujeme a co zavirame.
+
+**Codyho komentar:** Backlog neni svaty archiv. Kdyz ticket sest mesicu nikomu nechybel, mozna to neni dluh, ale jen digitalni prach s dobrym sebevedomim.
+
+### 1. Oddel bug, dluh, riziko a napad
+
+Do jedne fronty se casto michaji ctyri ruzne veci:
+
+| Typ | Co to znamena | Typicka reakce |
+| --- | --- | --- |
+| Bug | Produkt se chova jinak, nez ma. | Opravit podle dopadu a opakovatelnosti. |
+| Technicky dluh | Kod nebo provoz ztezuje dalsi zmeny. | Naplanovat s jasnym duvodem a hranici. |
+| Riziko | Muze vzniknout bezpecnostni, datovy nebo provozni problem. | Vyhodnotit dopad, mitigovat, priradit vlastnika. |
+| Napad | Mohlo by to byt lepsi nebo hezci. | Presunout do product discovery nebo zavrit. |
+
+Nejvetsi chyba je oznacit vsechno jako bug. Pak se v jedne fronte potka rozbity checkout, nehezka mezera v UI, refaktor validaci a napad na novy dashboard. Vysledek: nikdo nevi, co ma bolet jako prvni.
+
+### 2. Kazdy zaznam potrebuje reprodukci nebo rozhodnuti
+
+Minimalni bug karta:
+
+```text
+Nazev:
+
+Typ:
+[bug / technicky dluh / riziko / napad]
+
+Dopad:
+[uzivatel / ucet / data / platby / admin / provoz]
+
+Kroky k reprodukci:
+1.
+2.
+3.
+
+Ocekavane chovani:
+
+Skutecne chovani:
+
+Dukaz:
+[screenshot bez osobnich dat / request ID / log ID / verze / prohlizec]
+
+Obchazka:
+[existuje/neexistuje]
+
+Navrhovane rozhodnuti:
+[opravit ted / naplanovat / sledovat / zavrit]
+
+Vlastnik:
+```
+
+Kdyz nejde bug reprodukovat, neznamena to automaticky zavrit. Znamena to zmenit typ prace: doplnit logging, zeptat se na chybejici kontext, pridat kontrolu nebo ticket sloucit s podobnym vzorem. Ale "nejde reprodukovat" bez dalsiho kroku je jen slusnejsi forma ztraty casu.
+
+### 3. Priorita podle dopadu, ne podle hlasitosti
+
+Jednoducha prioritizace:
+
+| Priorita | Kdy ji pouzit | Priklad |
+| --- | --- | --- |
+| P0 | Bezpecnost, ztrata dat, rozbite platby nebo velka nedostupnost. | Uzivatel vidi cizi fakturu, nejde se prihlasit cele firme. |
+| P1 | Hlavni tok je rozbity pro cast zakazniku a workaround je slaby. | Novy uzivatel nedokonci onboarding kvuli validaci. |
+| P2 | Produkt funguje, ale bug zpomaluje praci nebo kazi duveru. | Export ma spatne razeni, ale data jsou spravna. |
+| P3 | Kosmetika, okrajovy pripad, maly diskomfort. | Preteceny text v prazdnem stavu na vzacnem rozliseni. |
+| Debt | Neni incident, ale zhorsuje rychlost nebo riziko budoucich zmen. | Duplicitni billing logika ve dvou modulech. |
+
+Privacy-first filtr pridej pred beznou prioritizaci:
+
+- Muze problem odhalit osobni, zakaznicka nebo interni data?
+- Muze problem prodlouzit retenci dat, ktera mela byt smazana?
+- Muze problem obejit souhlas, prava nebo auditni stopu?
+- Muze problem poslat data do spatne integrace?
+- Muze problem ztizit export, mazani nebo obnovu dat?
+
+Pokud je odpoved ano, ticket neni jen "technicky". Je to duverove riziko a potrebuje vlastnika.
+
+### 4. Dluh musi mit cenu i stopku
+
+Technicky dluh se neopravuje proto, ze existuje. Opravuje se, kdyz blokuje konkretni zmenu, zvysuje provozni riziko nebo prodrazuje caste upravy.
+
+Dobry dluhovy ticket rika:
+
+- ktery workflow ztezuje,
+- jak casto na nej tym narazi,
+- co se stane, kdyz zustane dalsi mesic,
+- jak mala oprava by stacila,
+- kde je hranice, aby se z toho nestal refaktor bez dna.
+
+**Spatny ticket:**
+
+> Refaktorovat dashboard.
+
+**Lepsi ticket:**
+
+> Sjednotit vypocet aktivnich uctu ve trech mistech. Dnes se metrika lisi v adminu, billing reportu a QBR exportu. Cilem je jeden helper a testy pro tri stavy uctu. Mimo rozsah: redesign dashboardu a nove metriky.
+
+Rozdil neni v poctu slov. Rozdil je v tom, ze druha verze se da dokoncit.
+
+### 5. Zavirej stare veci bez sentimentu
+
+Jednou mesicne projdi stare bugy a dluhy. Kazdy zaznam musi skoncit v jednom z peti stavu:
+
+| Stav | Vyklad |
+| --- | --- |
+| Opravit ted | Ma dopad a jasny dalsi krok. |
+| Naplanovat | Neni urgentni, ale patri do konkretniho cyklu. |
+| Sledovat | Chybi dukaz nebo se ceka na opakovani. Ma datum dalsi kontroly. |
+| Sloucit | Je to stejny vzor jako jiny ticket. |
+| Zavrit | Neni relevantni, neexistuje dukaz, nebo cena prevysuje prinos. |
+
+Zavreni neni selhani. Selhani je drzet stovky neplatnych ticketu, kvuli kterym nikdo neveri ani tem dulezitym.
+
+### 6. 45min postup
+
+```text
+00-05 min: Vytahni 20 nejstarsich a 20 nejnovejsich zaznamu.
+Nemusis cist cely backlog. Potrebujes vzorek reality.
+
+05-12 min: Oznac typ.
+Bug, technicky dluh, riziko nebo napad. Smichane tickety rozdel.
+
+12-20 min: Pridej privacy-first filtr.
+U kazde veci se zeptej, zda muze ovlivnit data, souhlas, audit, export, mazani nebo integrace.
+
+20-28 min: Prirad prioritu.
+P0/P1/P2/P3/Debt podle dopadu, ne podle emoce.
+
+28-35 min: Vyber pet rozhodnuti.
+Dve opravy ted, jeden dluh do planu, jeden zaznam sledovat, jeden zavrit.
+
+35-41 min: Dopln chybejici reprodukci.
+U dulezitych veci pridej kroky, dukaz, obchazku a vlastnika.
+
+41-45 min: Nastav pristi review.
+Datum, vlastnik, pravidlo pro zavirani starych veci a maximum otevrenych P3 ticketu.
+```
+
+### Checklist: bug triage bez nekonecneho backlogu
+
+- [ ] Bugy, technicky dluh, rizika a napady nejsou v jedne nerozlisene hromade.
+- [ ] Kazdy dulezity bug ma kroky k reprodukci nebo jasny dalsi diagnosticky krok.
+- [ ] Priorita vychazi z dopadu na uzivatele, data, platby, provoz a duveru.
+- [ ] Privacy-first filtr zachyti problemy s daty, souhlasem, exportem, mazanim a integracemi.
+- [ ] Technicky dluh ma popsany konkretni dopad, maly rozsah a hranici hotovo.
+- [ ] Stare tickety se pravidelne zaviraji, slucuji nebo posouvaji do planu.
+- [ ] P0/P1 veci maji vlastnika a cas dalsiho updatu.
+- [ ] Kosmeticke a okrajove veci neblokujou opravy hlavniho toku.
+- [ ] Backlog review konci rozhodnutim, ne jen prebarvenymi labely.
+- [ ] Tymy vedi, kdy je lepsi opravit problem hned a kdy nejdriv dopsat pozorovani.
+- [ ] Zavrene tickety maji kratky duvod, aby se stejna debata nevracela kazdy mesic.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -12313,3 +12469,4 @@ Nahodny review peti eskalaci tydne: nebyla sdilena zbytecna data a byl jasny vys
 - 2026-08-02: Pridana prakticka priloha Auditni stopa v adminu bez vnitrniho slideni za 60 minut vcetne auditniho kontraktu, impersonace, pristupu, retence a checklistu.
 - 2026-08-02: Pridana prakticka priloha Schvalovani citlivych admin akci bez brzdici byrokracie za 45 minut vcetne matice dopadu, schvalovaci karty, emergency override a checklistu.
 - 2026-08-02: Pridana prakticka priloha Support eskalace bez datoveho ohnostroje za 45 minut vcetne eskalacni karty, priority P1-P4, oddeleni citlivych artefaktu a checklistu.
+- 2026-08-02: Pridana prakticka priloha Bug triage a technicky dluh bez nekonecneho backlogu za 45 minut vcetne prioritizace, privacy-first filtru, dluhovych ticketu, mesicniho uklidu a checklistu.
