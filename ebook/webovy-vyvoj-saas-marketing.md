@@ -13544,6 +13544,207 @@ Datum posledni kontroly:
 
 ---
 
+## Release runbook bez patecni rulety za 60 minut
+
+Release neni jen `git push` s nadeji, ze si produkce sedne sama. U maleho SaaS je release okamzik, kdy se potkava produkt, infrastruktura, data, support a obchodni sliby. Kdyz ten okamzik ridis jen pameti jednoho vyvojare, mas proces napsany mizicim inkoustem.
+
+Cil release runbooku neni udelat z kazde zmeny vojenskou operaci. Cil je, aby tym predem vedel, co se nasazuje, koho se to muze dotknout, jak poznas uspech, kde jsou datova rizika a jak rychle se vratis zpet, kdyz se neco rozbije. NIST SSDF pracuje s myslenkou, ze bezpecny vyvoj neni posledni kontrola pred releasem, ale opakovatelny proces pres pripravu, ochranu, produkci a reakci na zranitelnosti: https://csrc.nist.gov/pubs/sp/800/218/final
+
+### 1. Rozdel releasy podle dopadu
+
+Ne vsechny releasy potrebuji stejny ritual. Oprava preklepu v dokumentaci a migrace zakaznickych prav nejsou stejna liga. Kdyz pouzijes jeden proces na vsechno, bude bud smesne tezky, nebo nebezpecne lehky.
+
+Prakticke rozdeleni:
+
+| Typ releasu | Priklad | Minimalni kontrola |
+| --- | --- | --- |
+| Text / obsah | landing page, napoveda, mikrocopy | kontrola odkazu, SEO dopadu a nepravdivych slibu |
+| UI bez dat | nove razeni, prazdny stav, navigace | smoke test hlavni cesty a responzivita |
+| Produktovy tok | onboarding, checkout, export | test vstupu, vystupu, chyb a support dopadu |
+| Datova zmena | migrace, retence, role, billing | plan obnovy, test na kopii, vlastnik rollbacku |
+| Integrace | webhook, email, platby, CRM | sandbox test, idempotence, limity, vypnuti integrace |
+| Bezpecnost | auth, prava, audit, uploady | review prav, logu, hlavicek, tajemstvi a incident plan |
+
+Pravidlo: cim bliz je zmena k osobnim udajum, fakturaci, prihlasovani nebo mazani dat, tim konkretnejsi musi byt runbook. Ne proto, ze milujeme tabulky. Protoze u techto zmen nechces premyslet poprve az ve chvili, kdy produkce kasle krev.
+
+### 2. Release karta misto roztrousenych poznamek
+
+Kazdy vetsi release by mel mit jednu kartu. Nemusi zit v drahem nastroji. Muze to byt issue, Markdown dokument nebo radek v internim trackeru. Dulezite je, aby na jednom miste odpovidala na otazky, ktere se jinak schovaji v chatu.
+
+Minimalni release karta:
+
+- co se meni,
+- proc se to meni,
+- koho se to muze dotknout,
+- jaka data zmena cte, meni, uklada nebo maze,
+- ktere feature flags nebo konfigurace se meni,
+- jaky je plan nasazeni,
+- jak poznas uspech,
+- jak poznas problem,
+- jaky je rollback nebo fallback,
+- kdo je vlastnik releasu,
+- kdo ma byt informovan pred a po nasazeni.
+
+**Priklad kratke karty:**
+
+```text
+Nazev: Export faktur do CSV
+Typ: produktovy tok + datovy export
+Vlastnik: product / backend
+Zmena: Zakaznik muze stahnout CSV s fakturami za zvolene obdobi.
+Data: cislo faktury, datum, castka, mena, stav, fakturacni firma, DIC.
+Zakazana data: interni poznamky, support vlakna, platebni tokeny.
+Nasazeni: feature flag pro 3 interni ucty, potom 10 pilotnich zakazniku.
+Uspech: export se vytvori do 30 s pro bezny rozsah a neobsahuje zakazane sloupce.
+Problem: chybne sloupce, timeout, neopravneny pristup, nejasny rozsah dat.
+Rollback: vypnout feature flag, ponechat endpoint nepristupny, smazat docasne exporty.
+Komunikace: changelog po pilotu, support dostane screenshot a seznam omezeni.
+```
+
+Privacy-first release karta ma jednu specialni vlastnost: datovy dopad neni poznamka pod carou. Je to normalni cast definice hotovo.
+
+### 3. Preflight kontrola: chytej levne chyby pred produkci
+
+Preflight je kratka kontrola pred nasazenim. Nema suplovat testy ani code review, ale chyta veci, ktere automat casto nevidi: spatny text, spatny ucet, spatny region, rozbity formular, zapomenuty debug log.
+
+Preflight otazky:
+
+- Bezi testy nebo aspon relevantni smoke kontrola?
+- Nasazuje se spravna vetev, commit a konfigurace?
+- Jsou migrace vratne, nebo maji aspon overeny fallback?
+- Nepresunula zmena data do noveho dodavatele nebo regionu?
+- Nepribyl novy cookie, pixel, iframe nebo externi script?
+- Neobjevily se v logach osobni udaje, tokeny nebo cele payloady?
+- Ma support pripravene minimum informaci, pokud se zakaznik ozve?
+- Je jasne, kdo release sleduje prvnich 15 az 30 minut?
+
+**Codyho komentar:** Nejlevnejsi incident je ten, ktery vypada jako nudna polozka v preflight checklistu. "Zapomneli jsme vypnout debug log" je legrace jen do chvile, nez je v log agregatoru pulka formularu.
+
+### 4. Rollout po malych kruzich
+
+I kdyz mas dobry test, produkce je jiny organismus. Ma skutecne ucty, pomalejsi sit, stare prohlizece, lidske zkratky a data, ktera nikdo nevymyslel v idealnim seed scenari. Proto je u rizikovejsich zmen rozumne nasazovat po kruzich.
+
+Jednoduchy rollout:
+
+1. Interni ucet.
+2. Jeden testovaci nebo pilotni zakaznik.
+3. Mala skupina relevantnich zakazniku.
+4. Vsichni zakaznici v jednom planu nebo segmentu.
+5. Verejne zapnuti.
+
+Kazdy kruh musi mit stop pravidlo. Napriklad:
+
+- chyba v pristupu k cizim datum,
+- vice nez 2 % chybovost hlavni akce,
+- opakovany support dotaz na stejnou nejasnost,
+- export obsahuje sloupec mimo datovy kontrakt,
+- metrika konverze nebo aktivace prudce spadne bez vysvetleni.
+
+Rollout bez stop pravidla je jen pomalejsi zpusob, jak stejnou chybu rozneses postupne.
+
+### 5. Rollback neni ostuda
+
+Rollback je normalni nastroj provozu, ne priznani porazky. Ostuda je zmena, kterou neumite vypnout, vratit nebo obejit, protoze se nikdo predem nezeptal, co se stane pri selhani.
+
+Tri urovne navratu:
+
+- Vypnuti feature flagu: nejrychlejsi varianta pro UI a funkcni zmeny.
+- Fallback konfigurace: prepnuti na starsi provider, starsi sablonu, jiny tok.
+- Technicky rollback: navrat verze aplikace, migrace nebo datovy opravny skript.
+
+U datovych zmen si nenech namluvit, ze rollback je vzdy stejne jednoduchy jako deploy. Kdyz migrace prepocita prava, smaze pole nebo posle data do integrace, zpetny krok musi byt popsany zvlast. Nekdy spravna odpoved neni "rollback", ale "zastavit pristup, zachovat dukazy, spustit opravny skript a komunikovat dopad".
+
+### 6. Post-release kontrola a kratky zapis
+
+Release konci az kontrolou po nasazeni. Ne tim, ze CI zezelenalo. Po nasazeni zkontroluj hlavni cestu, chyby, logy, metriky a support kanaly. U vetsi zmeny pridej kratky zapis, aby se dalsi release neopakoval z nuly.
+
+Post-release zapis muze mit pet radku:
+
+```text
+Release:
+Nasazeno kdy:
+Overeno:
+Nalezy:
+Dalsi oprava:
+```
+
+Priklady nalezu:
+
+- "Formular funguje, ale potvrzovaci email ma nejasny predmet."
+- "Export je rychly pro 1 mesic, ale 12 mesicu potrebuje asynchronni job."
+- "Webhook retry funguje, ale log obsahuje moc detailni payload."
+- "Zakaznici se ptaji, zda nova role vidi faktury; doplnit napovedu."
+
+Takovy zapis neni administrativa. Je to pamet tymu. A pamet tymu je levnejsi nez stejny incident trikrat po sobe.
+
+### 7. 60min postup
+
+```text
+0-10 min: Vyber jeden blizky release.
+Nepopisuj vsechny budouci releasy. Vezmi realnou zmenu, ktera pujde nasadit nebo pripravit tento tyden.
+
+10-20 min: Zarad dopad.
+Obsah, UI, produktovy tok, data, integrace nebo bezpecnost. Pridej vlastnika a zakaznicke skupiny.
+
+20-35 min: Vypln release kartu.
+Co se meni, data, rizika, uspech, problem, rollback, komunikace.
+
+35-45 min: Napis preflight checklist.
+Omez ho na 8-12 polozek, ktere by opravdu zastavily nebo zmenily nasazeni.
+
+45-55 min: Navrhni rollout a stop pravidla.
+Interni ucet, pilot, mala skupina, vsichni. U kazdeho kroku jeden signal pokracovat a jeden signal zastavit.
+
+55-60 min: Udelej jednu okamzitou opravu.
+Pridej feature flag, dopln rollback poznamku, vycisti debug log, nebo priprav support mikrotext.
+```
+
+### Sablona release karty
+
+```text
+Nazev releasu:
+Typ zmeny:
+Vlastnik:
+Datum / okno nasazeni:
+Co se meni:
+Proc se to meni:
+Dotcene role / zakaznici:
+Dotcene systemy:
+Data ctena:
+Data menena:
+Data ukladana:
+Data mazana:
+Novy dodavatel / region:
+Feature flag / konfigurace:
+Migrace:
+Preflight kontroly:
+Rollout kroky:
+Stop pravidla:
+Signal uspechu:
+Signal problemu:
+Rollback / fallback:
+Support poznamka:
+Changelog / komunikace:
+Post-release kontrola:
+```
+
+### Checklist: release runbook bez patecni rulety
+
+- [ ] Kazdy vetsi release ma vlastnika a jednu kartu pravdy.
+- [ ] Typ releasu odpovida realnemu dopadu, ne velikosti pull requestu.
+- [ ] Datovy dopad je popsany pred nasazenim.
+- [ ] Nove cookies, pixely, iframe nebo externi skripty maji privacy review.
+- [ ] Migrace maji overeny plan obnovy nebo jasny opravny postup.
+- [ ] Feature flagy maji vlastnika, stop pravidlo a datum uklidu.
+- [ ] Preflight kontrola obsahuje spravny commit, konfiguraci, hlavni cestu a logy.
+- [ ] Rollout probiha po kruzich, pokud zmena saha na data, prava, platby nebo integrace.
+- [ ] Rollback je popsany konkretneji nez "vratime to".
+- [ ] Support vi, co se zmenilo a co ma delat pri prvnim dotazu.
+- [ ] Po releasu probehla kontrola metrik, chyb, logu a zakaznicke cesty.
+- [ ] Kratky post-release zapis zachytil nalezy a dalsi opravu.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -13711,3 +13912,4 @@ Datum posledni kontroly:
 - 2026-08-02: Pridana prakticka priloha API dokumentace bez supportu na kazdy endpoint za 60 minut vcetne kontraktu endpointu, autentizace, chyb, prikladu, verzovani a checklistu.
 - 2026-08-02: Pridana prakticka priloha Servisni ucty a machine-to-machine pristupy bez sdilenych hesel za 45 minut vcetne scoped opravneni, tajemstvi, auditu, offboardingu a checklistu.
 - 2026-08-02: Pridana prakticka priloha Testovaci prostredi a seed data bez kopirovani produkce za 60 minut vcetne rizik prostredi, seed scenaru, produkcnich vyjimek, oddelenych secrets, retence a checklistu.
+- 2026-08-02: Pridana prakticka priloha Release runbook bez patecni rulety za 60 minut vcetne release karty, preflight kontroly, postupneho rollout planu, rollbacku, post-release zapisu a checklistu.
