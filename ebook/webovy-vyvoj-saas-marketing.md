@@ -11713,6 +11713,137 @@ Jedna sablona pro hotovy import a jedna kratka odpoved pro import s chybami.
 
 ---
 
+## Auditni stopa v adminu bez vnitrniho slideni za 60 minut
+
+Admin rozhrani je misto, kde se da SaaS produkt zachranit i znicit. Support opravi spatne nastaveny ucet, obchodnik doplni fakturacni kontakt, zakladatel rucne spusti migraci a technik proveri incident. To vsechno muze byt legitimni prace. Problem zacina ve chvili, kdy nikdo nevi, kdo se na co dival, proc to udelal a jestli k tomu mel opravneni.
+
+Auditni stopa neni totalni kamera nad lidmi ve firme. Je to omezeny zaznam citlivych akci, ktery chrani zakaznika, produkt i tym. OWASP v Logging Cheat Sheet rozlisuje bezne provozni logy, bezpecnostni logy a auditni stopy a upozornuje, ze se ma logovat podle ucelu, ne pro radost z hromadeni dat: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html. Pro pristupy plati princip nejmensich opravneni, deny-by-default a kontrola opravneni na kazdy request; shrnuje to OWASP Authorization Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html.
+
+### 1. Oddel auditni stopu od aplikacnich logu
+
+Aplikacni log odpovida na otazku: "Proc se system choval divne?" Auditni stopa odpovida na otazku: "Kdo udelal citlivou akci a na zaklade ceho?" Kdyz je smichas do jednoho proudu, vznikne bordel, ktery je moc podrobny pro support a moc nepresny pro incident.
+
+Do auditni stopy patri hlavne:
+
+- zobrazeni citlivych zakaznickych dat v adminu,
+- export dat,
+- zmena role nebo opravneni,
+- reset hesla nebo MFA pro jineho uzivatele,
+- zmena billing udaju,
+- spusteni importu, migrace nebo mazani,
+- zmena integrace nebo webhooku,
+- impersonace zakaznika,
+- rucni zmena stavu uctu, planu nebo limitu.
+
+Do auditni stopy naopak vetsinou nepatri cele telo zpravy, cele CRM poznamky, kompletni export, obsah dokumentu ani citlive hodnoty pred zmenou a po zmene. Pro audit casto staci typ akce, objekt, cas, aktor, duvod, vysledek a technicky identifikator.
+
+### 2. Navrhni auditni zaznam jako produktovy kontrakt
+
+Nejdriv si napis jednu radku, kterou by pochopil i zakaznik:
+
+```text
+Kdyz nekdo z naseho tymu provede citlivou akci nad zakaznickym uctem, ulozime kdo, kdy, nad cim, jakou akci, proc a s jakym vysledkem.
+```
+
+Minimalni auditni zaznam:
+
+| Pole | Priklad | Poznamka |
+| --- | --- | --- |
+| `event_id` | `aud_01K...` | Jedinecny identifikator. |
+| `occurred_at` | `2026-08-02T14:20:00Z` | UTC cas, bez lokalni magie. |
+| `actor_type` | `employee`, `system`, `customer` | Oddeli cloveka od jobu. |
+| `actor_id` | `usr_123` | Bez emailu, pokud staci interni ID. |
+| `account_id` | `acc_456` | Zakaznicky ucet nebo workspace. |
+| `action` | `customer_export_created` | Stabilni slovnik akci. |
+| `target_type` | `contact`, `invoice`, `api_key` | Nad cim se akce stala. |
+| `target_id` | `cnt_789` | ID objektu, ne jeho obsah. |
+| `reason` | `support_ticket_321` | Proc k akci doslo. |
+| `result` | `success`, `denied`, `failed` | I odmitnute akce jsou dulezite. |
+| `request_id` | `req_abc` | Vazba na technicke logy. |
+
+Kdyz potrebujes zaznamenat zmenu hodnoty, uloz spis informaci typu `changed_fields: ["billing_email", "plan"]` nez stare a nove hodnoty. Pokud je zmena sama o sobe citliva, napr. zapnuti exportu nebo zmena role na admina, podrobnost patri do schvalovaciho zaznamu, ne do nekonecneho logu.
+
+### 3. Impersonace musi byt viditelna a kratka
+
+Impersonace, tedy prihlaseni clena tymu "jako zakaznik", je pohodlna a nebezpecna. Casto zacina dobrym umyslem: "Jen se podivam, proc mu to nejde." Bez pravidel z toho ale vznikne vnitrni sledovani, ktere se spatne vysvetluje i hure brani.
+
+Pravidla pro privacy-first impersonaci:
+
+- Povolit jen vybranym rolim, ne kazdemu v supportu automaticky.
+- Vyzadat duvod pred startem, napriklad ticket ID.
+- Zobrazit v UI jasny indikator, ze clovek jedna v cizim uctu.
+- Zakazat citlive akce bez dalsiho potvrzeni.
+- Automaticky ukoncit relaci po kratkem case.
+- Zapsat start, konec a vsechny citlive akce do auditni stopy.
+- Kde to dava smysl, preferovat read-only nahled pred plnym prevzetim uctu.
+
+**Codyho komentar:** Impersonace bez duvodu je jako univerzalni klic od vsech bytu v dome. Mozna ho ma spravce, ale nechces, aby lezel na recepci vedle kavy.
+
+### 4. Pristup k auditni stope neni pro kazdeho
+
+Auditni stopa muze obsahovat citlive provozni informace. Proto neni rozumne ji ukazovat cele firme. Rozdel pristupy podle prace:
+
+- Support vidi zaznamy vztazene ke svym ticketum a zakaznickemu uctu.
+- Security nebo provoz vidi bezpecnostni eventy a podezrele vzory.
+- Admin vidi zmeny roli, exporty, mazani a billing akce.
+- Zakaznik muze dostat omezeny audit log sveho workspace, pokud je to soucast produktu.
+
+Zakladni pravidlo: kdo muze auditni stopu cist, nesmi ji umet tise menit. Kdo muze resit incident, potrebuje dost kontextu, ale ne nutne osobni obsah zakaznickych dat. Kdo dela obchodni follow-up, nepotrebuje vedet, ze konkretni uzivatel otevrel citlivy dokument ve 22:14.
+
+GDPR stoji na minimalizaci, omezeni ucelu a integrite a duvernosti zpracovani. Pro auditni stopu to znamena, ze "bezpecnost" neni volny prukaz k neomezenemu sbirani vseho: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng.
+
+### 5. Retence a export auditni stopy maji mit hranice
+
+Auditni stopa musi prezit dele nez debug log, ale nemusi zit vecne. Nastav retenci podle rizika, smluv a provozni potreby. U maleho B2B SaaS muze davat smysl:
+
+- 30 az 90 dni pro bezne admin zobrazeni bez citlive zmeny,
+- 12 az 24 mesicu pro zmeny opravneni, exporty, mazani, billing a integrace,
+- delsi retence jen tam, kde ji obhajis smluvne, pravne nebo bezpecnostne.
+
+Kdyz zakaznik pozada o vysvetleni incidentu, auditni stopa ti pomuze odpovedet konkretne: kdy akce probehla, kdo ji provedl, proc, jake objekty byly dotcene a jaky byl nasledujici krok. EDPB ma samostatne pokyny k oznamovani poruseni zabezpeceni osobnich udaju podle GDPR, ktere je dobre mit po ruce pri incidentovem runbooku: https://www.edpb.europa.eu/documents/guideline/guidelines-92022-on-personal-data-breach-notification-under-gdpr_en.
+
+### 6. 60min postup
+
+```text
+00-08 min: Vyber deset nejcitlivejsich admin akci.
+Exporty, mazani, zmeny roli, impersonace, billing, webhooky, importy a reset prihlaseni.
+
+08-18 min: Sepis auditni kontrakt.
+Kdo, kdy, co, nad cim, proc, vysledek a technicky request ID.
+
+18-28 min: Oznac data, ktera do auditu nepatri.
+Obsah zprav, cele exporty, hesla, tokeny, osobni poznamky a nepotrebne hodnoty pred/po.
+
+28-38 min: Navrhni pravidla pristupu.
+Kdo audit vidi, kdo ho muze filtrovat, kdo muze exportovat a kdo ho nesmi menit.
+
+38-48 min: Doplni impersonaci.
+Duvod pred startem, viditelny indikator, kratka relace, read-only rezim a log ukonceni.
+
+48-55 min: Nastav retenci.
+Kratsi pro bezne zobrazeni, delsi pro zmeny opravneni, exporty, mazani a billing.
+
+55-60 min: Napis tri testy.
+Citliva akce se zaloguje, odmitnuta akce se zaloguje, audit nezapisuje zakazane hodnoty.
+```
+
+### Checklist: auditni stopa v adminu
+
+- [ ] Existuje seznam citlivych admin akci.
+- [ ] Auditni stopa je oddelena od debug a aplikacnich logu.
+- [ ] Kazdy zaznam ma aktora, cas, akci, cil, duvod, vysledek a request ID.
+- [ ] Audit nezapisuje cele zpravy, exporty, hesla, tokeny ani zbytecne osobni udaje.
+- [ ] Odmitnute pokusy o citlive akce se loguji.
+- [ ] Impersonace vyzaduje duvod a je viditelna v rozhrani.
+- [ ] Impersonace ma casovy limit a preferuje read-only rezim.
+- [ ] Pristup k auditni stope je omezen podle role a ucelu.
+- [ ] Auditni stopu nelze bezne upravovat nebo mazat z admin UI.
+- [ ] Retence auditnich zaznamu je popsana podle typu akce.
+- [ ] Existuji testy, ktere hlidaji, ze se citlive akce loguji.
+- [ ] Zakaznikovi lze pri incidentu vysvetlit dotcene akce bez vyzrazeni zbytecnych dat.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -11739,6 +11870,7 @@ Jedna sablona pro hotovy import a jedna kratka odpoved pro import s chybami.
 - OWASP Logging Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
 - OWASP Top 10 2025, A09 Security Logging and Alerting Failures: https://owasp.org/Top10/2025/A09_2025-Security_Logging_and_Alerting_Failures/
 - OWASP Secrets Management Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html
+- OWASP Authorization Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html
 - OWASP File Upload Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html
 - OWASP CSV Injection: https://owasp.org/www-community/attacks/CSV_Injection
 - OWASP API Security Top 10 2023: https://owasp.org/API-Security/editions/2023/en/0x11-t10/
@@ -11856,3 +11988,4 @@ Jedna sablona pro hotovy import a jedna kratka odpoved pro import s chybami.
 - 2026-08-02: Pridana prakticka priloha Renewal a prodlouzeni spoluprace bez automaticke pasti za 45 minut vcetne renewal karty, hodnotovych signalu, datove kontroly, emailove sablony a checklistu.
 - 2026-08-02: Pridana prakticka priloha Zruseni uctu a mazani dat bez schovanych dveri za 60 minut vcetne odchodovych stavu, exportu, mazaciho jobu, subprocesoru, potvrzovacich sablon a checklistu.
 - 2026-08-02: Pridana prakticka priloha Import a migrace dat bez spinavych exportu za 60 minut vcetne importni karty, datoveho kontraktu, bezpecneho uploadu, nahledu, rollbacku a checklistu.
+- 2026-08-02: Pridana prakticka priloha Auditni stopa v adminu bez vnitrniho slideni za 60 minut vcetne auditniho kontraktu, impersonace, pristupu, retence a checklistu.
