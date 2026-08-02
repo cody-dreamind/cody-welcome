@@ -12444,6 +12444,199 @@ Spust testy, smoke test, zkontroluj diff/lockfile a zapis dalsi krok.
 
 ---
 
+## API limity a chybove odpovedi bez trestani zakazniku za 60 minut
+
+Jakmile SaaS nabidne API, webhooks, import nebo verejne endpointy, prestava byt provoz jen otazka hezke aplikace. Kazdy klient muze omylem poslat tisic requestu misto deseti. Kazda integrace muze opakovat stejnou chybu dokola. A kazdy utocnik doufa, ze tvoje ochrana bude bud zadna, nebo tak hruba, ze rozbije normalni zakazniky.
+
+Privacy-first pristup k API limitum neni "sledujme vsechny co nejvic". Je to opacne: chran sluzbu pomoci nejnizsi potrebne identity, citelnych pravidel a odpovedi, ktere klientovi pomuzou opravit chovani. Rate limit, error format a abuse ochrana jsou soucast produktoveho UX. Jen ho misto cloveka cte vyvojar, worker nebo integrace ve dve rano.
+
+OWASP API Security Top 10 2023 upozornuje mimo jine na unrestricted resource consumption a broken authentication: https://owasp.org/API-Security/editions/2023/en/0x11-t10/. RFC 6585 definuje HTTP status `429 Too Many Requests`: https://datatracker.ietf.org/doc/html/rfc6585. RFC 9457 zase popisuje standardni problem details format pro HTTP API chyby: https://datatracker.ietf.org/doc/html/rfc9457. Prakticky preklad: kdyz klient brzdis, rekni proc, na jak dlouho a co ma udelat jinak.
+
+### 1. Nejdriv rozdel limity podle rizika
+
+Jeden globalni limit pro cele API vypada jednoduse, ale casto vytvari nespravedlnost. Import, prihlaseni, webhook retry a cteni verejneho katalogu nejsou stejna operace. Jiny dopad maji na infrastrukturu, data i zakaznika.
+
+Rozdel endpointy do tri skupin:
+
+| Skupina | Priklad | Co chranis |
+| --- | --- | --- |
+| Kriticke a citlive | login, reset hesla, export dat, admin akce | ucet, data, autorizaci |
+| Nakladove | import, reporty, hromadne exporty, AI zpracovani | vykon, fronty, fakturacni naklad |
+| Bezny provoz | cteni seznamu, detail zaznamu, stav jobu | dostupnost a stabilitu |
+
+Limity potom navrhuj podle toho, co se muze pokazit:
+
+- Pri loginu chran ucet, ne jen server.
+- Pri exportu chran data a kapacitu.
+- Pri importu chran databazi, queue a cistotu dat.
+- Pri webhooks chran prijemce pred retry bouri.
+- Pri verejnem API chran plan zakaznika i infrastrukturu.
+
+**Codyho komentar:** Limit neni trest. Je to zabradli. Kdyz dobreho zakaznika bez vysvetleni shodis na `429`, prave jsi zabradli natrel na neviditelno. Elegantni asi jako sklenene dvere bez nalepky.
+
+### 2. Vyber identitu limitu, ne osobni slozku
+
+Rate limit musi byt k necemu privazany. Spatny vyber identity bud nic neochrani, nebo vytvori zbytecne osobni sledovani.
+
+Prakticke varianty:
+
+| Identita | Kdy se hodi | Pozor |
+| --- | --- | --- |
+| API klic | server-to-server integrace | rotace, vlastnik, unik v logu |
+| Account ID | B2B produkt a tymove pouziti | nesmi trestat vsechny za jeden rozbity worker bez moznosti zjistit zdroj |
+| User ID | citlive uzivatelske akce | nepouzivat pro marketingovy profil |
+| IP adresa | hruba ochrana verejnych endpointu | NAT, kancelare, mobilni site, osobni udaj v GDPR kontextu |
+| Job ID / import ID | dlouhe operace | musi mit expiraci a vlastnika |
+
+Privacy-first default:
+
+- Pro prihlasene API preferuj account nebo API klic.
+- IP adresu pouzij jako doplnkovy technicky signal, ne jako hlavni produktovy profil.
+- U citlivych akci kombinuj limit podle uctu, uzivatele a typu akce.
+- Do analytiky neposilej surove IP, tokeny, request body ani query s osobnimi udaji.
+- Do logu ukladej `limit_bucket`, `endpoint_group`, `account_id` nebo hash klice, pokud to staci.
+
+Kdyz potrebujes silnejsi abuse obranu, zapis si duvod. "Boti nam plni formular" je duvod. "Jednou by se to mohlo hodit pro segmentaci" neni duvod. To je zacatek datoveho skluzavky.
+
+### 3. Odpoved `429` musi byt navod, ne zed
+
+Klient, ktery narazi na limit, potrebuje vedet tri veci:
+
+- co se stalo,
+- kdy to muze zkusit znovu,
+- jak problem dlouhodobe vyresit.
+
+Minimalni odpoved:
+
+```http
+HTTP/1.1 429 Too Many Requests
+Content-Type: application/problem+json
+Retry-After: 60
+```
+
+```json
+{
+  "type": "https://example.com/problems/rate-limit",
+  "title": "Rate limit exceeded",
+  "status": 429,
+  "detail": "Import API reached the per-account write limit. Retry after 60 seconds.",
+  "instance": "/api/imports/req_123",
+  "limit_scope": "account",
+  "retry_after_seconds": 60
+}
+```
+
+RFC 9457 problem details se hodi proto, ze klienti nemusi parsovat nahodny text. Ty zase nemusis vymyslet vlastni format pro kazdy endpoint. Jen si dej pozor, aby `detail` neprozrazoval citlive informace. Odpoved nema rikat "user rethy@dreamind.cz exceeded login limit from IP..." pokud to nepotrebuje prijemce videt.
+
+Pravidla pro chybove odpovedi:
+
+- Pouzij spravny HTTP status, ne vsechno jako `200` s internim `error=true`.
+- U limitu pridej `Retry-After`, kdyz klient muze rozumne cekat.
+- Dej chybe stabilni `type`, aby se dala dokumentovat.
+- Neposilej stack trace, SQL chyby, tokeny ani interni nazvy sluzeb.
+- U validacnich chyb rekni, ktere pole je spatne a proc.
+- U autorizace nerozlisuj zbytecne "ucet existuje" a "spatne heslo".
+
+### 4. Backoff a retry: chran obe strany
+
+Retry bez pravidel je zesilovac incidentu. Kdyz integrace pri chybe okamzite opakuje request, maly problem se rychle zmeni v provozni tlak. Proto musi byt retry politika soucast dokumentace i implementace.
+
+Doporuceny zaklad:
+
+- Klient respektuje `Retry-After`.
+- Worker pouziva exponencialni backoff s jitterem.
+- Neopakuji se chyby validace typu `400`, dokud se nezmeni vstup.
+- `401` a `403` vedou k oprave pristupu, ne k nekonecnemu retry.
+- `429` a cast `5xx` chyb muzou jit do opakovani podle limitu.
+- Po vycerpani retry vznikne viditelny failed stav, ne ticha ztrata.
+
+Sablona retry pravidla:
+
+```text
+Operace:
+
+Opakujeme pri:
+[429 / 502 / 503 / timeout]
+
+Neopakujeme pri:
+[400 / 401 / 403 / 404 podle kontextu]
+
+Max pokusu:
+
+Backoff:
+
+Jitter:
+
+Co se stane po selhani:
+
+Co logujeme:
+
+Co nikdy nelogujeme:
+```
+
+U webhooku a importu pridej idempotency key. Bez nej muze retry vytvorit duplicity, dvoji faktury, dva importy nebo dvakrat odeslane notifikace. Idempotence neni luxusni vzor pro velke firmy. Je to levny zpusob, jak si neudelat vlastni support peklo.
+
+### 5. Dokumentuj limity jako soucast produktu
+
+API limit, o kterem vi jen backend, je budoucni support ticket. Zakaznik potrebuje vedet, jak se chovat normalne, co se stane pri prekroceni a kdy ma pozadat o vyssi limit.
+
+Dokumentace by mela obsahovat:
+
+- limity podle planu nebo typu endpointu,
+- rozdil mezi ctecimi a zapisovacimi operacemi,
+- chovani pri prekroceni limitu,
+- ukazku `429` odpovedi,
+- retry doporuceni,
+- kontakt nebo postup pro navyseni limitu,
+- vysvetleni, jaka data se pouzivaji pro vyhodnoceni limitu.
+
+**Priklad mikrocopy do API dokumentace:**
+
+```text
+Limity pocitame primarne na urovni accountu a API klice. IP adresu pouzivame jen jako technicky signal pro ochranu verejnych endpointu a kratkodobou abuse detekci. Do limitovacich logu neukladame request body ani obsah importovanych dat.
+```
+
+Tohle je mala veta, ale pro privacy-first B2B zakaznika muze rozhodnout vic nez dalsi odznacek v patice.
+
+### 6. 60min postup
+
+```text
+0-10 min: Vyber jeden API tok.
+Zacni importem, exportem, webhookem nebo loginem. Ne celou platformou.
+
+10-20 min: Popis riziko.
+Co se stane pri moc mnoha requestech, retry smycce nebo utoku?
+
+20-30 min: Navrhni limit.
+Zvol scope: API klic, account, user, endpoint group nebo kombinaci.
+
+30-40 min: Navrhni error odpoved.
+Pouzij 429, Retry-After a problem details format bez citlivych detailu.
+
+40-50 min: Napis retry pravidla.
+Co klient opakuje, co neopakuje, kolikrat a s jakym backoffem?
+
+50-60 min: Dopln dokumentaci a test.
+Priprav ukazku odpovedi, jeden test limitu a kontrolu logu.
+```
+
+### Checklist: API limity bez datoveho hladu
+
+- [ ] Endpointy jsou rozdelene podle rizika a nakladu.
+- [ ] Limity nejsou jeden hruby globalni vypinac pro cele API.
+- [ ] Identita limitu pouziva nejmensi potrebny signal.
+- [ ] IP adresa neni hlavni produktovy profil, pokud existuje lepsi scope.
+- [ ] `429` odpoved rika, kdy a jak ma klient retry zkusit.
+- [ ] Chybove odpovedi maji stabilni format, idealne podle RFC 9457.
+- [ ] Error detail neprozrazuje osobni data, tokeny ani interni infrastrukturu.
+- [ ] Retry pravidla rozlisuji validacni chyby, autorizaci, limity a docasne vypadky.
+- [ ] Dlouhe operace a webhooky pouzivaji idempotenci.
+- [ ] Dokumentace API ukazuje limity, priklad chyby a postup pro navyseni.
+- [ ] Logy limitu maji retenci a neobsahuji request body.
+- [ ] Support vi, jak rozeznat abuse, rozbitou integraci a legitimni potrebu vyssiho limitu.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -12502,6 +12695,9 @@ Spust testy, smoke test, zkontroluj diff/lockfile a zapis dalsi krok.
 - RFC 9309, Robots Exclusion Protocol: https://www.rfc-editor.org/rfc/rfc9309
 - RSS Advisory Board, RSS 2.0 Specification: https://www.rssboard.org/rss-specification
 - RFC 4287, The Atom Syndication Format: https://www.rfc-editor.org/rfc/rfc4287
+- RFC 6585, Additional HTTP Status Codes: https://datatracker.ietf.org/doc/html/rfc6585
+- RFC 9110, HTTP Semantics: https://www.rfc-editor.org/rfc/rfc9110.html
+- RFC 9457, Problem Details for HTTP APIs: https://datatracker.ietf.org/doc/html/rfc9457
 - Schema.org, BlogPosting: https://schema.org/BlogPosting
 - CNIL, Use analytics on your websites and applications: https://www.cnil.fr/en/sheet-ndeg16-use-analytics-your-websites-and-applications
 - Umami, FAQ: https://umami.is/docs/faq
@@ -12599,3 +12795,4 @@ Spust testy, smoke test, zkontroluj diff/lockfile a zapis dalsi krok.
 - 2026-08-02: Pridana prakticka priloha Support eskalace bez datoveho ohnostroje za 45 minut vcetne eskalacni karty, priority P1-P4, oddeleni citlivych artefaktu a checklistu.
 - 2026-08-02: Pridana prakticka priloha Bug triage a technicky dluh bez nekonecneho backlogu za 45 minut vcetne prioritizace, privacy-first filtru, dluhovych ticketu, mesicniho uklidu a checklistu.
 - 2026-08-02: Pridana prakticka priloha Aktualizace zavislosti bez patchovaci paniky za 60 minut vcetne inventare zavislosti, prioritizace alertu, patch karty, testovani a checklistu.
+- 2026-08-02: Pridana prakticka priloha API limity a chybove odpovedi bez trestani zakazniku za 60 minut vcetne rate limitu, 429 odpovedi, retry pravidel, dokumentace a checklistu.
