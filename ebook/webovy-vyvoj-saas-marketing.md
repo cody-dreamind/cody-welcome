@@ -12777,6 +12777,170 @@ Odstran nepotrebny sloupec, pridej varovani v UI, pridej test rizikove bunky neb
 
 ---
 
+## Souborove uploady a prilohy bez datove skluzavky za 60 minut
+
+Upload souboru je misto, kde se produkt velmi rychle potka s realitou. Uzivatele nahraji screenshot, CSV, smlouvu, fakturu, log, fotku obrazovky nebo "jen malou prilohu". V te prilose muze byt osobni udaj, interni tajemstvi, malware, spatny format, moc velky soubor nebo data uplne jineho zakaznika. Privacy-first SaaS nema uploady zakazat. Ma je navrhnout tak, aby byly uzitecne, omezene a provozne zvladnutelne.
+
+GDPR princip minimalizace dat v clanku 5 rika, ze osobni udaje maji byt primerene, relevantni a omezene na to, co je nezbytne pro dany ucel: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng. U uploadu je to prakticka veta, ne pravni dekorace. Pokud uzivatel ma nahrat doklad o zaplaceni, nepotrebujes po nem cely ZIP firemniho ucetnictvi. OWASP File Upload Cheat Sheet pak pripomina technickou stranu: validace typu, kontrola pripony, limit velikosti, nahodne nazvy souboru, ukladani mimo webroot a skenovani tam, kde dava smysl: https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html.
+
+### 1. Kazdy upload musi mit ucel a hranici
+
+Prvni otazka neni "kam soubor ulozime?", ale "proc soubor vubec potrebujeme?". Upload bez jasneho ucelu je datovy magnet. Casem k nemu nekdo prida dalsi typ souboru, dalsi zobrazeni v adminu, dalsi export a najednou mas uloziste citlivych prilepku bez vlastnika.
+
+Rozdel uploady podle ucelu:
+
+| Typ uploadu | Priklad | Hlavni riziko |
+| --- | --- | --- |
+| Operativni priloha | screenshot chyby v supportu | osobni udaje na obrazovce |
+| Importni soubor | CSV se zakazniky | spatny format, cizi data, velky rozsah |
+| Doklad | faktura, potvrzeni, smlouva | citlive obchodni a identifikacni udaje |
+| Produktovy obsah | logo, obrazek, dokument | verejne zobrazeni, autorska prava, malware |
+| Diagnosticky artefakt | log, HAR, crash report | tokeny, cookies, interni URL |
+
+Ke kazdemu typu si napis kratkou hranici: kdo ho smi nahrat, jake formaty jsou povolene, jak dlouho se drzi, kdo ho uvidi a co se stane po vyreseni pozadavku.
+
+**Priklad spatneho zadani:**
+
+"Nahrajte soubor, ktery nam pomuze problem vyresit."
+
+**Priklad lepsiho zadani:**
+
+"Nahrajte screenshot chyby ve formatu PNG nebo JPG. Pred nahranim prosim zakryjte osobni udaje klientu, tokeny a castky, ktere s chybou nesouvisi."
+
+To druhe neni alibismus. Je to pomoc uzivateli, aby neposlal vic dat, nez je potreba.
+
+### 2. Validuj vice vrstev, ne jen priponu
+
+Pripona souboru je napoveda, ne dukaz. `faktura.pdf` muze byt neco jineho nez PDF a `screenshot.png` muze mit velikost rodinneho archivu. Bezpecny upload kombinuje vice kontrol.
+
+Minimalni technicky postup:
+
+- Povolit jen konkretni typy souboru podle ucelu.
+- Kontrolovat priponu i detekovany MIME typ.
+- Nastavit limit velikosti pro soubor i celkovy objem na ucet.
+- Prejmenovat soubor na serverovy identifikator, neukladat uzivatelsky nazev jako cestu.
+- Ukladat soubory mimo verejny webroot nebo do privatniho bucketu.
+- Pri stazeni kontrolovat opravneni, ne spolehat na neuhadnutelnou URL.
+- U rizikovych formatu spustit antivirovou nebo obsahovou kontrolu.
+- U obrazku zvazit prekodovani, odstraneni metadat a generovani nahledu.
+
+**Codyho komentar:** Kdyz upload validujes jen podle toho, ze nazev konci `.pdf`, tak vlastne pouzivas bezpecnostni model "soubor se slusne predstavil". To je roztomile, ale ne moc profesionalni.
+
+### 3. Metadata jsou taky data
+
+Soubor neni jen obsah. Ma nazev, velikost, typ, autora, EXIF metadata, datum vytvoreni, komentare, revize, skryte listy v tabulce nebo vlozene nahledy. U SaaS produktu muze byt nejvetsi problem prave v tom, co uzivatel nevidi.
+
+Prakticka pravidla:
+
+- U obrazku pro verejne zobrazeni odstran EXIF metadata, pokud nejsou potreba.
+- U dokumentu neukazuj puvodni nazev souboru verejne, pokud muze obsahovat jmeno klienta nebo interni popis.
+- U support priloh zobraz internimu tymu varovani, ze soubor muze obsahovat osobni nebo citliva data.
+- U logu a HAR souboru nabidni instrukce, jak odstranit cookies, tokeny a authorization hlavicky pred nahranim.
+- Do analytiky neposilej nazvy souboru ani cesty.
+- Do logu ukladej technicke ID souboru, stav kontroly, velikost a typ, ne obsah.
+
+OWASP Logging Cheat Sheet obecne doporucuje vynechat z logu citliva data, session identifikatory, access tokeny, hesla a zbytecne osobni udaje: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html. U uploadu to znamena hlavne nelogovat cele cesty, puvodni nazvy a obsah chybove analyzy, pokud by mohly prozradit data zakaznika.
+
+### 4. Retence priloh musi byt kratsi nez lenost tymu
+
+Prilohy se rady zapominaji. Ticket se zavre, obchod probehne, import se dokonci, ale soubor zustane v ulozisti dalsi roky. Privacy-first pravidlo: soubor ma zit jen tak dlouho, jak zije jeho ucel.
+
+Navrh retence:
+
+| Typ souboru | Vychozi retence | Poznamka |
+| --- | --- | --- |
+| Support screenshot | do vyreseni + kratka rezerva | po uzavreni ticketu automaticky smazat nebo anonymizovat |
+| Importni CSV | hodiny az dny | po uspesnem importu drzet jen importni report |
+| Diagnosticky log | kratce, podle incidentu | omezit pristup a retenci predem |
+| Fakturacni doklad | podle ucetnich pravidel | oddelit od produktovych priloh |
+| Verejny asset | dokud je publikovany | resit vlastnictvi, nahrady a smazani |
+
+Nejjednodussi oprava v malem SaaS je pridat `expires_at` ke kazdemu docasnemu souboru. Druha nejjednodussi je pravidelny job, ktery expiraci opravdu provede. Treti je admin pohled, kde nekdo vidi soubory bez retencniho pravidla. Bez toho se z retence stane prani napsane hezkym fontem.
+
+### 5. UI ma zmensovat riziko pred nahranim
+
+Uzivatel casto nechce porusit pravidla. Jen nevi, co vsechno v souboru je. Dobre UI ho vede pred nahranim, ne az v chybove hlasce.
+
+Dobry upload dialog obsahuje:
+
+- povolene formaty,
+- maximalni velikost,
+- kratky popis ucelu,
+- upozorneni na data, ktera nema nahravat,
+- informaci o pristupu a retenci,
+- stav kontroly po nahrani,
+- moznost soubor odebrat pred odeslanim.
+
+Mikrocopy pro support:
+
+```text
+Priloha bude pouzita jen k vyreseni tohoto ticketu. Pred nahranim prosim zakryjte osobni udaje, pristupove tokeny a informace, ktere s problemem nesouvisi.
+```
+
+Mikrocopy pro import:
+
+```text
+CSV po importu automaticky smazeme. V aplikaci zustane jen importni report: pocet radku, chyby validace a technicke ID importu.
+```
+
+### 6. 60min postup
+
+```text
+0-10 min: Vyber jeden upload.
+Support priloha, import CSV, produktovy obrazek nebo diagnosticky log.
+
+10-20 min: Pojmenuj ucel a hranice.
+Kdo nahrava, proc, kdo vidi, jak dlouho soubor zije.
+
+20-35 min: Zkontroluj techniku.
+Formaty, velikost, MIME typ, prejmenovani, uloziste, opravneni, skenovani.
+
+35-45 min: Zkontroluj metadata a logy.
+Nazvy souboru, EXIF, tokeny, analytika, logy, auditni zaznam.
+
+45-55 min: Nastav retenci.
+`expires_at`, mazaci job, oddeleni ucetnich dokladu od docasnych priloh.
+
+55-60 min: Oprav jednu vec v UI.
+Pridej mikrocopy, limit, varovani nebo moznost odebrat soubor pred odeslanim.
+```
+
+### Sablona upload karty
+
+```text
+Nazev uploadu:
+Ucel:
+Typicky uzivatel:
+Povolene formaty:
+Limit velikosti:
+Zakazana data:
+Kdo muze soubor zobrazit:
+Kde je ulozen:
+Kontroly pri nahrani:
+Metadata, ktera odstranujeme:
+Retence:
+Mazaci mechanismus:
+Auditni stopa:
+Text v UI:
+```
+
+### Checklist: souborove uploady bez datove skluzavky
+
+- [ ] Kazdy upload ma jasny ucel a vlastnika.
+- [ ] Povolene formaty odpovidaji realnemu pouziti, ne pohodli vyvoje.
+- [ ] System kontroluje priponu, MIME typ, velikost a opravneni.
+- [ ] Soubor se uklada pod serverovym ID, ne jako uzivatelska cesta.
+- [ ] Soubory nejsou verejne dostupne bez autorizacni kontroly.
+- [ ] Rizikove soubory maji skenovani nebo oddeleny proces kontroly.
+- [ ] UI pred nahranim rika, ktera data uzivatel nema posilat.
+- [ ] Nazvy souboru, metadata a obsah priloh nejdou zbytecne do logu ani analytiky.
+- [ ] Docasne prilohy maji `expires_at` a skutecny mazaci job.
+- [ ] Importni soubory se po zpracovani nahrazuji importnim reportem.
+- [ ] Support tym vi, jak zachazet s prilohami obsahujicimi osobni nebo citliva data.
+- [ ] Verejny privacy dokument odpovida realne retenci a pristupu k priloham.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -12938,3 +13102,4 @@ Odstran nepotrebny sloupec, pridej varovani v UI, pridej test rizikove bunky neb
 - 2026-08-02: Pridana prakticka priloha Aktualizace zavislosti bez patchovaci paniky za 60 minut vcetne inventare zavislosti, prioritizace alertu, patch karty, testovani a checklistu.
 - 2026-08-02: Pridana prakticka priloha API limity a chybove odpovedi bez trestani zakazniku za 60 minut vcetne rate limitu, 429 odpovedi, retry pravidel, dokumentace a checklistu.
 - 2026-08-02: Pridana prakticka priloha CSV exporty a reporty bez datoveho vysavace za 45 minut vcetne datoveho kontraktu, CSV Injection ochrany, asynchronnich exportu, UI varovani a checklistu.
+- 2026-08-02: Pridana prakticka priloha Souborove uploady a prilohy bez datove skluzavky za 60 minut vcetne ucelu uploadu, validace, metadat, retence, UI mikrocopy a checklistu.
