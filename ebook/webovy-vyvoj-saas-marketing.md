@@ -10450,6 +10450,184 @@ Secret scanning, masking logu, pravidlo do PR nebo kratky README pro tym.
 
 ---
 
+## Webhooky a integrace bez datoveho prelivu za 60 minut
+
+Webhook vypada jako mala technicka vec: jedna URL, jeden podpis, par JSON poli a hotovo. Ve skutecnosti je to hranice mezi dvema systemy. A hranice je misto, kde se privacy-first produkt bud chova dospele, nebo zacne posilat data do sveta stylem "ono se to nejak zpracuje".
+
+Dobry webhook ma mit stejny respekt jako verejne API: jasny ucel, minimalni payload, autentizaci, ochranu proti opakovani, logovani bez citlivych dat, retry pravidla a vypnuti bez dramatu. OWASP API Security Top 10 2023 pripomina rizika kolem autorizace objektu, autentizace, nadmerneho cerpani zdroju, spatne inventarizace API a nebezpecneho pouzivani cizich API: https://owasp.org/API-Security/editions/2023/en/0x11-t10/. Pro REST rozhrani OWASP doporucuje HTTPS a access control na kazdem ne-verejnem endpointu: https://cheatsheetseries.owasp.org/cheatsheets/REST_Security_Cheat_Sheet.html.
+
+**Codyho komentar:** Integrace je jako firemni dvere. To, ze se oteviraji automaticky, neznamena, ze maji byt bez zamku, bez cedulky a bez zaznamu, kdo prosvistel dovnitr.
+
+### 1. Zacni kontraktem, ne endpointem
+
+Pred implementaci webhooku vypln maly kontrakt. Pokud ho neumime vyplnit, endpoint jeste nema vzniknout.
+
+```text
+Webhook:
+Smer: prijimame / posilame
+Ucel:
+Spousteci udalost:
+Prijemce nebo odesilatel:
+Data v payloadu:
+Obsahuje osobni udaje:
+Obsahuje zakaznicka data:
+Autentizace a podpis:
+Retry pravidla:
+Retence logu:
+Jak vypnout:
+Vlastnik:
+```
+
+Rozdil mezi "posilame vse, co mame" a "posilame jen stav objednavky a ID" je rozdil mezi integraci a datovou povodni. Payload ma byt navrzeny podle prace prijemce, ne podle pohodli vyvojare.
+
+Priklad spatneho payloadu:
+
+```json
+{
+  "event": "lead.created",
+  "lead": {
+    "email": "zakaznik@example.com",
+    "phone": "+420...",
+    "message": "Cele zneni zpravy z formulare...",
+    "utm": "...",
+    "ip": "...",
+    "userAgent": "...",
+    "internalNotes": "..."
+  }
+}
+```
+
+Lepsi payload pro notifikaci do interniho workflow:
+
+```json
+{
+  "event": "lead.created",
+  "lead_id": "lead_123",
+  "source_group": "partner-web",
+  "created_at": "2026-08-02T09:15:00Z",
+  "next_action": "review_in_crm"
+}
+```
+
+Kdo potrebuje detail, at si ho nacte z primarniho systemu s vlastnimi pravy. Webhook nema byt tajny export cele databaze v malem kabate.
+
+### 2. Podpis, cas a idempotence
+
+Prijimany webhook musi umet poznat, ze zprava prisla od spravneho odesilatele, nebyla cestou zmenena a nejde o stare opakovane volani.
+
+Prakticke minimum:
+
+- HTTPS bez vyjimek.
+- Sdileny secret nebo verejny klic podle schopnosti dodavatele.
+- Podpis nad surovym telem requestu, ne nad pozdeji preformatovanym JSONem.
+- Timestamp v hlavicce nebo payloadu.
+- Kratke tolerancni okno pro replay, typicky minuty, ne dny.
+- `event_id` pro idempotentni zpracovani.
+- Odmitnuti duplicit bez vedlejsich efektu.
+
+Priklad rozhodnuti:
+
+```text
+Webhook prijmeme jen pokud:
+- podpis sedi,
+- timestamp neni starsi nez 5 minut,
+- event_id jsme jeste nezpracovali,
+- event patri existujicimu accountu,
+- account ma integraci porad zapnutou.
+```
+
+Idempotence je nudne slovo pro velmi praktickou vec: kdyz dodavatel posle stejnou udalost trikrat, nevystavis tri faktury, nevytvoris tri ucty a neposles tri emaily. To je mala vec, ktera vypada mala presne do prvniho incidentu.
+
+### 3. Retry pravidla bez laviny
+
+Webhooky selhavaji. Sit si odkasle, prijemce ma deploy, dodavatel posle spicku udalosti, DNS ma spatny den. Proto retry pravidla patri do navrhu, ne az do supportu.
+
+Dobry retry plan:
+
+| Situace | Reakce |
+| --- | --- |
+| `2xx` | Udalost povazuj za prijatou. |
+| `4xx` kvuli validaci | Neopakuj donekonecna, zapis chybu a upozorni vlastnika integrace. |
+| `401/403` | Pozastav integraci nebo vyzaduj rotaci secretu. |
+| `429` | Respektuj rate limit a pouzij backoff. |
+| `5xx` nebo timeout | Opakuj s exponencialnim backoffem a limitem pokusu. |
+
+U odchozich webhooku pridej frontu a dead-letter stav. Kdyz se event nepodari dorucit, nemel by se ztratit potichu ani blokovat cely produkt. V adminu nebo internim nastroji ukaz stav: doruceno, ceka, selhalo, vypnuto.
+
+Privacy-first doplnek: pri chybe neposilej do logu cele telo webhooku. Loguj `event_id`, typ udalosti, cil integrace, stav, cas a technicky duvod. Detail payloadu patri jen do kratkodobeho debug rezimu s omezenym pristupem.
+
+### 4. Integrace musi jit vypnout a uklidit
+
+Kazda integrace potrebuje vypinac. Ne takovy, ktery je schovany v databazi a umi ho pouzit jen clovek s magickou znalosti produkcni konzole. Normalni vypinac.
+
+Pri vypnuti integrace rozhodni:
+
+- Zastavi se jen nove udalosti, nebo i retry fronta?
+- Co se stane s uz rozpracovanymi eventy?
+- Mazou se tokeny hned, nebo po kratke ochranne lhute?
+- Zustanou agregovane provozni statistiky?
+- Dostane zakaznik potvrzeni?
+- Je potreba informovat dodavatele?
+
+Sablona offboardingu integrace:
+
+```text
+Integrace:
+Vypnuto kdy:
+Vypnul kdo:
+Zastaveno:
+Zbyvajici fronta:
+Tokeny:
+Data u dodavatele:
+Export pred ukoncenim:
+Potvrzeni zakaznikovi:
+```
+
+Vendor lock-in casto zacina nevinnym webhookem. Nejdriv posilas malo dat, pak vic, pak dodavatel zacne byt jedine misto, kde vidis historii stavu. Primarni pravda ma zustat u tebe, pokud nejde o vedome a smluvne pokryte rozhodnuti.
+
+### 5. 60min postup
+
+```text
+00-08 min: Vyber jednu existujici nebo planovanou integraci.
+Idealne takovou, ktera posila leady, platby, support, produktove eventy nebo notifikace.
+
+08-18 min: Vypln webhook kontrakt.
+Smer, ucel, data, osobni udaje, prijemce, podpis, retry, retence, vlastnik.
+
+18-28 min: Zmensi payload.
+Vyhod pole, ktera prijemce nepotrebuje pro dalsi akci. Nahrad obsah referencnim ID.
+
+28-38 min: Zkontroluj zabezpeceni prijmu.
+HTTPS, podpis, timestamp, event_id, idempotence, vazba na account a vypnuta integrace.
+
+38-48 min: Navrhni retry a logovani.
+Backoff, limity, dead-letter stav, alert vlastnikovi, log bez celeho payloadu.
+
+48-55 min: Dopln vypnuti a offboarding.
+Co se stane s tokeny, frontou, daty u dodavatele a potvrzenim zakaznikovi.
+
+55-60 min: Zapis jednu opravu do fronty prace.
+Vyber nejvetsi riziko: chybi podpis, moc dat v payloadu, zadna idempotence, zadny vypinac.
+```
+
+### Checklist: webhooky a integrace
+
+- [ ] Kazdy webhook ma napsany ucel, smer, vlastnika a datovy kontrakt.
+- [ ] Payload obsahuje jen data potrebna pro dalsi akci.
+- [ ] Osobni udaje a obsah zakaznickych zprav se neposilaji, pokud nejsou nutne.
+- [ ] Prijem webhooku overuje podpis nebo jinou silnou autentizaci.
+- [ ] Timestamp a `event_id` chrani pred replay a duplicitami.
+- [ ] Zpracovani webhooku je idempotentni.
+- [ ] Endpoint overuje, ze udalost patri spravnemu accountu a zapnute integraci.
+- [ ] Retry pravidla maji backoff, limit pokusu a dead-letter stav.
+- [ ] Logy neukladaji cele payloady, tokeny ani volne texty.
+- [ ] Integrace ma normalni vypinac a popsany offboarding.
+- [ ] Tokeny a webhook secrety maji rotaci a revokaci.
+- [ ] Primarni pravda zustava ve vlastnim systemu nebo je vyjimka vedome popsana.
+- [ ] Dodavatel integrace je zahrnuty ve vendor review, pokud zpracovava osobni nebo zakaznicka data.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -10477,6 +10655,7 @@ Secret scanning, masking logu, pravidlo do PR nebo kratky README pro tym.
 - OWASP Top 10 2025, A09 Security Logging and Alerting Failures: https://owasp.org/Top10/2025/A09_2025-Security_Logging_and_Alerting_Failures/
 - OWASP Secrets Management Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html
 - OWASP API Security Top 10 2023: https://owasp.org/API-Security/editions/2023/en/0x11-t10/
+- OWASP REST Security Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/REST_Security_Cheat_Sheet.html
 - MDN, Strict-Transport-Security header: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Strict-Transport-Security
 - Y Combinator, YC's essential startup advice: https://www.ycombinator.com/library/4D-yc-s-essential-startup-advice
 - Paul Graham, Do Things that Don't Scale: https://www.paulgraham.com/ds.html
@@ -10581,3 +10760,4 @@ Secret scanning, masking logu, pravidlo do PR nebo kratky README pro tym.
 - 2026-08-02: Pridana prakticka priloha SLA a support limity bez prehnanych slibu za 45 minut vcetne priorit P1-P4, support kanalu, hranic rozsahu, planu podpory a checklistu.
 - 2026-08-02: Pridana prakticka priloha Churn a odchod zakaznika bez pomsty za 45 minut vcetne exit flow, dobrovolne zpetne vazby, ferovych retention reakci a churn karty.
 - 2026-08-02: Pridana prakticka priloha API klice a tajemstvi bez lepicich papiru za 45 minut vcetne inventare secrets, pristupu, rotace, logovani, zakaznickych API klicu a checklistu.
+- 2026-08-02: Pridana prakticka priloha Webhooky a integrace bez datoveho prelivu za 60 minut vcetne datoveho kontraktu, podpisu, idempotence, retry pravidel, vypnuti integrace a checklistu.
