@@ -10959,6 +10959,201 @@ Vyber jeden account, priprav zapis a po QBR uprav sablonu podle reality.
 
 ---
 
+## Expansion a upsell bez loveni v osobnich datech za 60 minut
+
+Rostouci SaaS se casem dostane k otazce: jak poznat, ze zakaznik potrebuje vyssi plan, dalsi modul nebo vice mist? Spatna odpoved zni: sleduj kazde kliknuti kazde osoby a prodej ve chvili, kdy algoritmus vyciti sanci. Lepsi odpoved zni: hledej situace, kde zakaznik narazil na prirozeny limit hodnoty a dalsi krok mu opravdu pomuze.
+
+Expansion neni trik, jak z uctu vytrepat dalsi fakturu. Je to rozsireni spoluprace, ktere ma byt obhajitelne i pred zakaznikem: "Tady uz zjevne delate vic prace, mate vic tymu, vice dat nebo vyssi naroky na provoz. Tohle nastaveni vam zmensi riziko nebo usetri rucni obchazeni."
+
+### 1. Rozlis tri typy rozsireni
+
+Ne kazdy upsell je stejny. Kdyz je smichas do jedne kolonky "prodat vic", zacnes tlacit spatnou nabidku ve spatnou chvili.
+
+**Kapacitni expansion** znamena, ze zakaznik prirozene roste:
+
+- vice uzivatelu,
+- vice projektu,
+- vice zaznamu,
+- vice integraci,
+- vyssi objem transakci,
+- castejsi exporty nebo API volani.
+
+Tady je ferovy signal spotreba sdilene kapacity na urovni accountu. Ne kolikrat se Jana z finance prihlasila v pondeli.
+
+**Hodnotovy expansion** znamena, ze zakaznik chce dosahnout vyssiho vysledku:
+
+- automatizace opakovane rucni prace,
+- pokrocile reporty,
+- schvalovaci workflow,
+- role a prava pro vice tymu,
+- auditni logy,
+- SLA nebo prioritni podpora.
+
+Tady signal hledej v rozhovorech, support ticketech, QBR a opakovanych workarounds. Kdyz se zakaznik pta potreti na export pro management, mozna nepotrebuje "enterprise plan". Mozna potrebuje lepsi souhrn vysledku.
+
+**Rizikovy expansion** znamena, ze se zmenil provozni kontext:
+
+- produkt pouziva vice oddeleni,
+- v datech jsou citlivejsi informace,
+- zakaznik potrebuje DPA prilohu nebo security review,
+- zacinaji resit audit,
+- slibuje se vyssi dostupnost.
+
+Tady je upsell legitimni jen tehdy, kdyz vyssi plan opravdu obsahuje vyssi provozni zavazek, ne jen zamcenou privatnost. Soukromi a zakladni bezpecnost nemaji byt luxusni funkce.
+
+### 2. Najdi expansion signaly, ktere bys dokazal vysvetlit
+
+Dobry expansion signal jde rict zakaznikovi nahlas bez studu. Pokud by veta znela divne, signal nejspis patri do kose.
+
+Pouzitelne signaly:
+
+| Signal | Co muze znamenat | Ferova reakce |
+| --- | --- | --- |
+| Account dlouhodobe vyuziva 80 % limitu projektu | Tym narazi na kapacitu | Poslat prehled limitu a moznosti navyseni |
+| Vice lidi z jedne firmy zada pristup | Produkt se siri do dalsiho tymu | Nabidnout tymovy plan a prava |
+| Opakovane support dotazy na reporty | Zakaznik potrebuje lepsi vystup | Ukazat modul/reporting workflow |
+| Rucni exporty pribyvaji | Data tecou mimo produkt | Navrhnout automatizaci nebo API |
+| QBR ukaze novy cil | Puvodni rozsah uz nestaci | Navrhnout konkretni rozsireni podle cile |
+
+Slabe signaly:
+
+- nekdo otevrel pricing page,
+- nekdo se dival na dokumentaci premium funkce,
+- uzivatel se prihlasil vecer,
+- clovek klikl na tlacitko, ale nic nedokoncil,
+- support zprava obsahuje slovo "drahe".
+
+Tyhle signaly mohou byt kontext, ale samy o sobe nejsou duvod ke kampani. Jsou moc blizko osobnimu sledovani a moc daleko od realne hodnoty.
+
+### 3. Vytvor expansion kartu misto dalsiho CRM pole
+
+Pro kazdy potencialni upsell si udelej kratkou kartu. Cilem neni zaznamenat vsechno. Cilem je oddelit realnou prilezitost od obchodniho prani.
+
+```text
+Account:
+Soucasny plan:
+Pozorovany signal:
+Proc to muze byt problem:
+Navrhovany dalsi krok:
+Hodnota pro zakaznika:
+Data, ktera jsme pouzili:
+Data, ktera nepotrebujeme:
+Kdo to overi:
+Kdy se ozveme:
+Kdy kartu smazeme nebo uzavreme:
+```
+
+Priklad:
+
+```text
+Account: Studio Nova
+Soucasny plan: Team
+Pozorovany signal: 9 z 10 aktivnich projektu, 3 zadosti o dalsi role za posledni mesic
+Proc to muze byt problem: Projektovi manazeri sdileji jeden pristup a obchazeji prava
+Navrhovany dalsi krok: 20min call o tymovem nastaveni a rolich
+Hodnota pro zakaznika: Mene sdilenych pristupu, jasnejsi odpovednost, prostor pro dalsi projekty
+Data, ktera jsme pouzili: Account-level limity a support pozadavky
+Data, ktera nepotrebujeme: Aktivita jednotlivych lidi po strankach
+Kdo to overi: Customer success
+Kdy se ozveme: Po pondelnim check-inu
+Kdy kartu smazeme nebo uzavreme: Do 30 dni bez reakce
+```
+
+### 4. Upsell zprava ma byt servisni, ne lovecky email
+
+Dobra expansion zprava nezacina "Mam pro vas skvelou nabidku". Zacina pozorovanim, ktere zakaznik pozna. Pak nabidne volbu.
+
+Sablona:
+
+```text
+Predmet: Narazite u [oblast] na limit?
+
+Ahoj [jmeno],
+
+vsimli jsme si na urovni vaseho uctu, ze [konkretni account-level signal].
+Muze to byt v poradku, ale casto to znamena, ze tym zacina [konkretni dopad].
+
+Pokud chcete, muzeme projit dve moznosti:
+
+1. upravit stavajici nastaveni, aby vam soucasny plan jeste stacil,
+2. nebo ukazat, kdy dava smysl [konkretni rozsireni].
+
+Nepotrebujeme k tomu zadna osobni data navic. Staci 20 minut a priklad vaseho bezneho workflow.
+
+Cody
+```
+
+Proc to funguje:
+
+- Zakaznik vidi duvod kontaktu.
+- Neni tlacen do vetsiho planu jako jedine spravne odpovedi.
+- Prvni moznost je optimalizace soucasneho nastaveni.
+- Datova hranice je recena primo.
+
+**Codyho komentar:** Nejlepsi upsell je casto veta "Mozna vam staci jen lepe nastavit soucasny plan." Kratkodobe to muze snizit fakturu. Dlouhodobe to zvysi duveru. A duvera je v B2B SaaS velmi tvrdohlava mena.
+
+### 5. Cenove limity pis jako produktove hranice
+
+Limity v ceniku nemaji byt past. Maji pomoct zakaznikovi vybrat plan, ktery odpovida jeho provozu.
+
+Spatne:
+
+- "Pokrocila bezpecnost jen v Enterprise."
+- "Export dat jen ve vyssim planu."
+- "Zakladni auditni historie za priplatek."
+- "Kontaktujte obchod" bez vysvetleni, proc cena neni verejna.
+
+Lepe:
+
+- "SAML/SSO pro tymy, ktere spravuji pristupy centralne."
+- "Rozsirena auditni historie pro regulovane provozy."
+- "Vyssi API limity pro automatizovane workflow."
+- "Individualni SLA pro produkty, kde vypadek ovlivni zakaznickou podporu nebo prijmy."
+
+Privacy-first pravidlo: zakladni export dat, smazani dat, transparentni sprava souhlasu a primerena bezpecnost nesmi byt rukojmi ceniku. Vyssi plan muze pridat pohodli, automatizaci, garance nebo rozsah. Nemel by pridat teprve zakladni respekt k datu zakaznika.
+
+### 6. 60min postup
+
+```text
+00-08 min: Vyber jeden plan nebo segment.
+Napr. tymy na hranici kapacity, accounty pred renewalem nebo zakaznici s castymi exporty.
+
+08-18 min: Napis tri typy expansionu.
+Kapacitni, hodnotovy a rizikovy. Ke kazdemu dej jeden realny priklad z produktu.
+
+18-30 min: Vyber 5 vysvetlitelnych signalu.
+Pouzij hlavne account-level data, support vzory, QBR poznamky a limity produktu.
+
+30-40 min: Vytvor expansion kartu.
+Pridej signal, hodnotu, dalsi krok, pouzita data a datum uzavreni.
+
+40-50 min: Napis jednu servisni zpravu.
+Zacni pozorovanim, nabidni optimalizaci soucasneho nastaveni i moznost rozsireni.
+
+50-56 min: Zkontroluj cenove hranice.
+Najdi, jestli neprodavas privacy nebo zakladni export jako luxusni funkci.
+
+56-60 min: Vyber jeden account.
+Nepoustej hromadnou kampan. Over jednu prilezitost lidsky a uprav pravidla podle odpovedi.
+```
+
+### Checklist: expansion bez loveni v datech
+
+- [ ] Rozlisuji kapacitni, hodnotovy a rizikovy expansion.
+- [ ] Expansion signal jde vysvetlit zakaznikovi nahlas.
+- [ ] Nepouzivam osobni klikaci historii jako hlavni prodejni spoustec.
+- [ ] Signal je primarne na urovni accountu nebo tymu.
+- [ ] Ke kazde prilezitosti existuje konkretni hodnota pro zakaznika.
+- [ ] Prvni navrh muze byt i optimalizace soucasneho planu.
+- [ ] Zprava zakaznikovi jasne rika, proc se ozvame.
+- [ ] Zakaznik neni tlacen do jedine odpovedi.
+- [ ] Expansion karta obsahuje i data, ktera nepotrebujeme.
+- [ ] Prilezitost ma datum uzavreni nebo smazani.
+- [ ] Cenik neprodava zakladni soukromi jako premium funkci.
+- [ ] Vyssi plan pridava rozsah, garanci, automatizaci nebo provozni zavazek.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -11095,3 +11290,4 @@ Vyber jeden account, priprav zapis a po QBR uprav sablonu podle reality.
 - 2026-08-02: Pridana prakticka priloha Webhooky a integrace bez datoveho prelivu za 60 minut vcetne datoveho kontraktu, podpisu, idempotence, retry pravidel, vypnuti integrace a checklistu.
 - 2026-08-02: Pridana prakticka priloha Feature flags a postupny rollout bez chaosu za 60 minut vcetne typu flagu, rollout runbooku, segmentace bez profilovani, test matice, uklidu a checklistu.
 - 2026-08-02: Pridana prakticka priloha Health score a QBR bez sledovani lidi za 60 minut vcetne account-level signalu, akci podle stavu, QBR sablony, zapisu a checklistu.
+- 2026-08-02: Pridana prakticka priloha Expansion a upsell bez loveni v osobnich datech za 60 minut vcetne typu rozsireni, vysvetlitelnych signalu, expansion karty, servisni zpravy a checklistu.
