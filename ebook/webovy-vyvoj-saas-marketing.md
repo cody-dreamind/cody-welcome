@@ -12009,6 +12009,163 @@ Bez schvaleni akce neprojde. Stare schvaleni expirovalo. Kdo dela 24h review eme
 
 ---
 
+## Support eskalace bez datoveho ohnostroje za 45 minut
+
+Support eskalace je okamzik, kdy bezna odpoved prestava stacit a problem musi jit k vyvoji, provozu, billing tymu, security nebo zakladateli. V malem SaaS se to casto dela v chatu: nekdo vlozi screenshot, kus logu, email zakaznika, ID uctu, interni poznamku a prosebne "muzete na to nekdo kouknout?". Funguje to rychle. Do prvniho incidentu, prvniho hledani souvislosti nebo prvni otazky: proc se zakaznicka data valela ve vlakne, kde je nepotrebovalo deset lidi.
+
+Privacy-first eskalace neni pomala. Je jen strukturovana. Cilem je dostat spravnemu cloveku presne tolik kontextu, kolik potrebuje k rozhodnuti nebo oprave, a neudelat z kazdeho problemu maly datovy vybuch. GDPR principy minimalizace, omezeni ucelu a integrity a duvernosti jsou dobry filtr i pro interni komunikaci: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng. OWASP Logging Cheat Sheet navic pripomina, ze citliva data nepatri bezhlave do logu a provoznich zaznamu: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html.
+
+### 1. Nejdriv rozlis eskalaci od predavani chaosu
+
+Eskalace neni "nevim, tak to poslu dal". Eskalace ma znamenat, ze problem ma jasny dopad, vycerpane zakladni kroky a konkretni otazku pro dalsi roli.
+
+Tri typy eskalace:
+
+| Typ | Kdy nastava | Komu patri |
+| --- | --- | --- |
+| Produktova | Zakaznik nerozumi toku nebo mu chybi ocekavana moznost. | Product owner, zakladatel, UX. |
+| Technicka | Funkce pada, data se nepropisuji, integrace vraci chyby. | Vyvoj, provoz. |
+| Rizikova | Problem se tyka pristupu, osobnich dat, fakturace, mazani nebo incidentu. | Security, provoz, odpovedna role. |
+
+Kazdy typ potrebuje jiny kontext. Product owner nepotrebuje cele request logy. Vyvojar nepotrebuje osobni obsah zakaznicke zpravy, pokud staci ID chyby a kroky reprodukce. Security nepotrebuje dramaticky popis z chatu, ale cas, dopad, dotcena data, aktory a provedene kroky.
+
+Slaba eskalace:
+
+```text
+Acme pise, ze jim to nejde. Tady je screenshot celeho uctu a export CSV, pls help.
+```
+
+Lepsi eskalace:
+
+```text
+Ticket sup_842, ucet acc_456, dopad P2: import kontaktu konci chybou 422.
+Zakaznik zkousel 3x mezi 09:12-09:18 UTC. Soubor je ulozeny v bezpecnem uploadu,
+do vlakna ho neprikladam. Potrebuji zjistit, jestli chyba vznikla validaci nebo parserem.
+```
+
+Ten druhy text je kratsi, bezpecnejsi a pouzitelnejsi. Zazrak, ktery se vejde do ctyr radku. Skoro podezrele.
+
+### 2. Eskalacni karta musi mit minimalni, ale dostatecny kontext
+
+Zaved jednu sablonu. Ne proto, aby support vyplnoval formular pro radost z poli, ale aby dalsi clovek nemusel lovit podstatu ve dvaceti zpravach.
+
+Minimalni eskalacni karta:
+
+| Pole | Priklad |
+| --- | --- |
+| `ticket_id` | `sup_842` |
+| `account_id` | `acc_456` |
+| `priority` | `P1`, `P2`, `P3`, `P4` |
+| `reported_at` | UTC cas |
+| `customer_impact` | import kontaktu nejde dokoncit |
+| `expected_result` | validni CSV projde nahledem |
+| `actual_result` | API vraci 422 bez vysvetleni |
+| `steps_tried` | kontrola formatu, novy upload, jiny prohlizec |
+| `safe_artifacts` | request ID, trace ID, anonymizovany priklad radku |
+| `restricted_artifacts` | puvodni soubor, screenshot s osobnimi daty |
+| `question_for_owner` | validace nebo parser? |
+| `next_update_due` | kdy se zakaznikovi ozveme |
+
+Karta ma jasne oddelit, co muze jit do bezneho interniho vlakna, a co patri do nastroje s pristupem podle role. Zakaznicky export, screenshot s osobnimi daty, faktura, obsah dokumentu nebo webhook payload nepatri do obecneho chatu. Kdyz je nekdo opravdu potrebuje, ziska je pres produktovy admin, auditovanou prilohu, ticket system nebo jiny kontrolovany kanal.
+
+### 3. Pravidlo dvou vrstev: verejne vlakno a citlivy trezor
+
+V praxi funguje jednoduchy model:
+
+- Vlakno pro koordinaci obsahuje ID, dopad, stav, vlastnika a dalsi krok.
+- Citlive artefakty jsou ulozene oddelene s omezenym pristupem a retenci.
+
+Do koordinacniho vlakna patri:
+
+- `ticket_id`, `account_id`, `request_id`, `trace_id`,
+- priorita a dopad na zakaznika,
+- kroky reprodukce bez osobnich hodnot,
+- jmeno interniho vlastnika,
+- dalsi update a stav opravy.
+
+Do koordinacniho vlakna nepatri:
+
+- cele CSV, PDF, faktury a exporty,
+- hesla, tokeny, API klice nebo session hodnoty,
+- screenshoty s osobnimi udaji, pokud nejsou redigovane,
+- obsah zakaznickych dokumentu,
+- interni dohady typu "zakaznik to urcite rozbil sam".
+
+**Codyho komentar:** Chat je skvely na koordinaci, spatny archiv a priserne misto pravdy. Kdyz v nem lezi zakaznicka data, vznikne datovy sklad s memy a nulovou retenci. To neni produktova strategie, to je archeologie budoucich problemu.
+
+### 4. Priorita musi ridit reakci, ne hlasitost
+
+Nejhlasitejsi zakaznik nemusi mit nejvetsi incident. A tichy zakaznik s rozbitou fakturaci muze byt prave ten, kde horime. Priority proto definuj podle dopadu.
+
+Jednoducha matice:
+
+| Priorita | Dopad | Reakce |
+| --- | --- | --- |
+| P1 | Sluzba je nedostupna, hrozi ztrata dat nebo bezpecnostni incident. | Okamzite vlastnictvi, incident rezim, pravidelne updaty. |
+| P2 | Zakaznik nemuze dokoncit dulezity tok, existuje omezeny workaround. | Vlastnik dnes, cas dalsiho updatu, jasna oprava nebo mitigace. |
+| P3 | Problem omezuje praci, ale neblokuje zakladni hodnotu. | Zaradit do bezne fronty s terminem odpovedi. |
+| P4 | Dotaz, kosmetika, navrh zlepseni. | Odpovedet, evidovat, spojit s product feedbackem. |
+
+Priorita se muze zmenit. Kdyz P3 odhali unik dat, stava se z nej rizikova eskalace. Kdyz P1 ma rychlou mitigaci a zadny dopad na data, muze prejit do postmortem a normalni opravy. Dulezite je zmenu zapsat, ne ji ztratit v pocitu.
+
+ENISA ve svem guide pro male a stredni firmy doporucuje pripravovat se na incidenty predem, vcetne roli, odpovednosti a zakladnich postupu: https://www.enisa.europa.eu/publications/cybersecurity-guide-for-smes. Eskalacni karta je mala, ale prakticka cast tehle pripravy.
+
+### 5. Vlastnik eskalace neni ten, kdo naposledy napsal
+
+Kazda eskalace musi mit jednoho vlastnika. Ne nutne cloveka, ktery vsechno opravi. Vlastnika, ktery hlida, ze vec ma dalsi krok, zakaznik dostane update a po vyreseni zustane kratky zaznam.
+
+Role vlastnika:
+
+- potvrdi prioritu,
+- doplni chybejici kontext,
+- urci dalsiho resitele,
+- hlida cas dalsiho updatu zakaznikovi,
+- rozhodne, zda jde o incident, bug, product feedback nebo provozni ukol,
+- po vyreseni doplni pricinu a preventivni opatreni.
+
+Bez vlastnika vznikne ping-pong. Support ceka na vyvoj, vyvoj ceka na logy, provoz ceka na potvrzeni dopadu, zakaznik ceka na odpoved a vsichni cekaji na zazrak. Ten byva vytizeny.
+
+### 6. 45min postup
+
+```text
+00-06 min: Sepis pet poslednich eskalaci.
+U kazde napis, kdo ji resil, co chybelo a jaka data se zbytecne kopirovala.
+
+06-12 min: Definuj tri typy eskalace.
+Produktova, technicka a rizikova. Ke kazde pridej vlastnika nebo roli.
+
+12-20 min: Vytvor eskalacni kartu.
+Ticket, ucet, priorita, dopad, kroky, request ID, citlive prilohy a konkretni otazka.
+
+20-27 min: Rozdel komunikaci na dve vrstvy.
+Co smi do koordinacniho vlakna a co patri do kontrolovaneho uloziste nebo adminu.
+
+27-34 min: Nastav prioritu P1-P4 podle dopadu.
+Ne podle hlasitosti zakaznika ani podle toho, kdo ma dnes nejvic stresu.
+
+34-40 min: Urcuj vlastnika.
+Kazda otevrena eskalace ma cloveka, dalsi krok a cas dalsiho updatu.
+
+40-45 min: Dopln jednu kontrolu.
+Nahodny review peti eskalaci tydne: nebyla sdilena zbytecna data a byl jasny vysledek?
+```
+
+### Checklist: support eskalace bez datoveho ohnostroje
+
+- [ ] Existuji definovane typy eskalace: produktova, technicka a rizikova.
+- [ ] Support vi, kdy eskalovat a kdy jeste doplnit zakladni informace.
+- [ ] Eskalacni karta obsahuje ticket, ucet, prioritu, dopad, kroky, artefakty a konkretni otazku.
+- [ ] Koordinacni vlakno neobsahuje cele exporty, faktury, tokeny ani screenshoty s osobnimi daty.
+- [ ] Citlive artefakty jsou ulozene oddelene s omezenym pristupem a retenci.
+- [ ] Priority P1-P4 jsou popsane podle dopadu, ne podle hlasitosti.
+- [ ] Kazda eskalace ma vlastnika a cas dalsiho updatu zakaznikovi.
+- [ ] Rizikova eskalace umi prejit do incident rezimu.
+- [ ] Po vyreseni zustane kratky zapis priciny, opravy a prevence.
+- [ ] Tydne se kontroluje maly vzorek eskalaci kvuli datove hygiene.
+- [ ] Zakaznik dostane srozumitelnou odpoved bez interniho sumu a vymluv.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -12155,3 +12312,4 @@ Bez schvaleni akce neprojde. Stare schvaleni expirovalo. Kdo dela 24h review eme
 - 2026-08-02: Pridana prakticka priloha Import a migrace dat bez spinavych exportu za 60 minut vcetne importni karty, datoveho kontraktu, bezpecneho uploadu, nahledu, rollbacku a checklistu.
 - 2026-08-02: Pridana prakticka priloha Auditni stopa v adminu bez vnitrniho slideni za 60 minut vcetne auditniho kontraktu, impersonace, pristupu, retence a checklistu.
 - 2026-08-02: Pridana prakticka priloha Schvalovani citlivych admin akci bez brzdici byrokracie za 45 minut vcetne matice dopadu, schvalovaci karty, emergency override a checklistu.
+- 2026-08-02: Pridana prakticka priloha Support eskalace bez datoveho ohnostroje za 45 minut vcetne eskalacni karty, priority P1-P4, oddeleni citlivych artefaktu a checklistu.
