@@ -12637,6 +12637,146 @@ Priprav ukazku odpovedi, jeden test limitu a kontrolu logu.
 
 ---
 
+## CSV exporty a reporty bez datoveho vysavace za 45 minut
+
+CSV export vypada nevinne: par sloupcu, tlacitko "Stahnout" a hotovo. V SaaS produktu je to ale hranice, kde se data velmi snadno presunou z kontrolovane aplikace do notebooku, sdilene slozky, emailove prilohy nebo tabulky, ktera prezije pet internich reorganizaci. Privacy-first export nema zakaznikovi branit v praci. Ma mu dat pouzitelna data bez toho, aby se z kazdeho reportu stal maly datovy vybuch.
+
+Technicky zaklad CSV popisuje RFC 4180, vcetne oddeleni zaznamu po radcich, volitelne hlavicky a escapovani uvozovek a carek: https://www.rfc-editor.org/rfc/rfc4180. Bezpecnostni cast je mene poeticka: OWASP upozornuje na CSV Injection, kdy spreadsheet muze bunku zacinajici napriklad `=`, `+`, `-`, `@`, tabulatorem nebo carriage returnem vyhodnotit jako vzorec: https://owasp.org/www-community/attacks/CSV_Injection. A OWASP Logging Cheat Sheet pripomina, ze logy nemaji zbytecne obsahovat citliva data ani cele vstupy: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html.
+
+### 1. Export neni databazovy dump
+
+Prvni pravidlo: exportuj produktovy pohled, ne interni schema. Zakaznik nepotrebuje videt vsechny sloupce, ktere mas v tabulce. Potrebuje odpovedet na konkretni otazku: "Ktere faktury jsou po splatnosti?", "Kteri uzivatele jsou aktivni?", "Jake tickety cekaji na reakci?" nebo "Co si mam prenest do jineho systemu?"
+
+Rozdel exporty na tri typy:
+
+| Typ exportu | K cemu slouzi | Co do nej patri |
+| --- | --- | --- |
+| Operativni report | Rychla prace v tymu | Jen pole nutna pro rozhodnuti v dalsich dnech |
+| Auditni export | Kontrola, compliance, interni revize | Stabilni sloupce, casy, identifikatory, stav a duvod |
+| Prenos dat | Migrace nebo odchod zakaznika | Dokumentovany format, kompletni relevantni data, jasna retence |
+
+Kdyz je export urceny pro operativu, nema v nem byt interni poznamka supportu, cele telo komunikace ani historicka metadata, ktera nikdo nepouzije. Kdyz je export urceny pro prenos dat, nesmi byt osekanou tabulkou jen proto, ze se to snadneji generuje.
+
+**Priklad spatneho exportu:**
+
+Soubor `users.csv` obsahuje email, jmeno, roli, posledni prihlaseni, IP adresu posledniho prihlaseni, interni poznamku admina, hash externiho ID, stav billing profilu a posledni text support ticketu.
+
+**Priklad lepsiho exportu:**
+
+Operativni report "Uzivatele a role" obsahuje `user_id`, `email`, `role`, `status`, `last_active_at` a `created_at`. Auditni export pristupu je oddeleny, ma vlastni opravneni a obsahuje jen to, co je potreba pro kontrolu pristupu.
+
+### 2. Sloupce schvaluj jako datovy kontrakt
+
+Kazdy export by mel mit kratkou kartu. Ne v enterprise wiki, kde ji najdou jen archeologove, ale pobliz kodu, dokumentace nebo admin rozhrani.
+
+Sablona exportni karty:
+
+```text
+Nazev exportu:
+Ucel:
+Kdo muze export spustit:
+Typicke pouziti:
+Sloupce a vyznam:
+Osobni udaje:
+Citliva nebo interni data:
+Retence v aplikaci:
+Retence stazeneho souboru doporucena zakaznikovi:
+Format a kodovani:
+Limit velikosti:
+Auditni stopa:
+```
+
+Minimalni pravidlo pro sloupce: kazdy sloupec musi mit vlastnika argumentu. Kdyz nikdo neumi rict, k cemu slouzi, sloupec ven nepatri. "Mozna se bude hodit" je pozvanka do datoveho sberneho dvora.
+
+### 3. CSV Injection res pred stazenim, ne az po incidentu
+
+Spreadsheety umi byt az prekvapive aktivni. Pokud exportujes hodnoty zadane uzivateli, utocnik muze do pole vlozit text, ktery tabulkovy procesor po otevreni vyhodnoti jako vzorec. OWASP proto doporucuje pristup, kdy jsou pole obalena uvozovkami, vnitrni uvozovky escapovane a rizikove bunky osetrene tak, aby se neprovedly jako formule.
+
+Prakticky postup:
+
+- Vsechny hodnoty serializuj pres CSV knihovnu, ne rucnim spojovanim stringu.
+- Pole obsahujici carku, uvozovku nebo novy radek nech korektne escapovat.
+- U hodnot z uzivatelskeho vstupu kontroluj zacatek bunky pred znaky `=`, `+`, `-`, `@`, tabulator a carriage return.
+- Rizikovou hodnotu neutralizuj konzistentne, napriklad prefixem apostrofu uvnitr CSV hodnoty podle zvolene politiky.
+- V exportni dokumentaci popis, ze textove hodnoty mohou byt kvuli spreadsheet bezpecnosti osetrene.
+
+**Codyho komentar:** CSV export testovany jen na "Petr Novak" neni test. Dej do testovacich dat jmeno `=HYPERLINK("https://example.invalid","klik")` a uvidis, jestli mas export, nebo maly ohnostroj v tabulce.
+
+### 4. Velke exporty potrebuji proces, ne delsi timeout
+
+Jakmile export trva dele nez par sekund, neposilej uzivatele cekat na spinner. Dlouhe exporty maji byt asynchronni: uzivatel pozada o soubor, system vytvori job, zaznamena vlastnika, pripravi soubor a nabidne stazeni po omezenou dobu.
+
+Rozumny model:
+
+- Uzivatel vybere rozsah a vidi odhad poctu radku.
+- System potvrdi, jestli export obsahuje osobni udaje.
+- Export bezi jako job s limitem velikosti a casu.
+- Soubor je ulozen docasne, sifrovane nebo v privatnim ulozisti.
+- Link ke stazeni je kratkodoby a vazany na prihlaseneho uzivatele.
+- Po expiraci se soubor smaze automaticky.
+- Auditni stopa zaznamena kdo, kdy, jaky export a jaky rozsah spustil.
+
+Do logu nepatri cele radky exportu. Pro provoz typicky staci `export_id`, typ exportu, vlastnik uctu, pocet radku, stav, cas zpracovani, velikost souboru a chybovy kod. Pokud potrebujes debug konkretni chyby, pouzij kratkodobou diagnostiku s omezenym pristupem a jasnym uklidem.
+
+### 5. UI musi ukazat datovou vahu akce
+
+Tlacitko "Exportovat vse" je pohodlne a nebezpecne. U exportu dej uzivateli moznost zmensit rozsah driv, nez soubor vznikne.
+
+Dobry exportni dialog obsahuje:
+
+- nazev exportu,
+- rozsah dat,
+- pocet zaznamu nebo odhad,
+- seznam hlavni typy poli,
+- upozorneni na osobni nebo citlive udaje,
+- volbu formatu, pokud dava smysl,
+- datum expirace odkazu,
+- jasne potvrzeni.
+
+Mikrocopy:
+
+```text
+Export obsahuje osobni udaje uzivatelu v tomto workspace. Stahujte ho jen pro uvedeny ucel a po pouziti ho ulozte podle internich pravidel nebo smazte.
+```
+
+To neni pravni zaklinadlo. Je to produktova brzda v miste, kde uzivatel dela datove rozhodnuti.
+
+### 6. 45min postup
+
+```text
+0-10 min: Vyber jeden existujici export.
+Pojmenuj jeho ucel, typ a typickeho uzivatele.
+
+10-20 min: Projdi sloupce.
+Oznac osobni udaje, interni data a sloupce bez jasneho pouziti.
+
+20-30 min: Zkontroluj techniku.
+Over CSV knihovnu, escapovani, kodovani, limit velikosti a CSV Injection test.
+
+30-38 min: Zkontroluj provoz.
+Najdi logy, auditni stopu, retenci souboru a opravneni ke stazeni.
+
+38-45 min: Udelej jednu opravu.
+Odstran nepotrebny sloupec, pridej varovani v UI, pridej test rizikove bunky nebo nastav expiraci souboru.
+```
+
+### Checklist: CSV exporty bez datoveho vysavace
+
+- [ ] Kazdy export ma jasny ucel a typ: operativni, auditni nebo prenosovy.
+- [ ] Export neobsahuje interni schema jen proto, ze existuje v databazi.
+- [ ] Kazdy sloupec ma popis a obhajeny duvod.
+- [ ] Osobni a citliva data jsou v exportu viditelne oznacena pro uzivatele.
+- [ ] CSV generuje knihovna, ne rucni spojovani stringu.
+- [ ] Hodnoty s carkami, uvozovkami a novymi radky jsou korektne escapovane.
+- [ ] Uzivatelske vstupy jsou osetrene proti CSV Injection.
+- [ ] Velke exporty bezi asynchronne s limitem velikosti a casu.
+- [ ] Stazitelne soubory maji expiraci a vazbu na opravneni.
+- [ ] Auditni stopa zaznamena typ exportu, rozsah, vlastnika a cas.
+- [ ] Logy neobsahuji cele radky exportu ani zbytecne osobni udaje.
+- [ ] UI pred exportem ukazuje rozsah, datovou citlivost a dalsi doporuceny krok.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -12707,6 +12847,7 @@ Priprav ukazku odpovedi, jeden test limitu a kontrolu logu.
 - RFC 6376, DomainKeys Identified Mail (DKIM): https://datatracker.ietf.org/doc/html/rfc6376
 - RFC 7489, Domain-based Message Authentication, Reporting, and Conformance (DMARC): https://datatracker.ietf.org/doc/html/rfc7489
 - RFC 8058, Signaling One-Click Functionality for List Email Headers: https://datatracker.ietf.org/doc/html/rfc8058
+- RFC 4180, Common Format and MIME Type for CSV Files: https://www.rfc-editor.org/rfc/rfc4180
 - Google Help, Email sender guidelines: https://support.google.com/mail/answer/81126
 - MDN, Referrer-Policy header: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Referrer-Policy
 - Keep a Changelog, Version 1.1.0: https://keepachangelog.com/en/1.1.0/
@@ -12796,3 +12937,4 @@ Priprav ukazku odpovedi, jeden test limitu a kontrolu logu.
 - 2026-08-02: Pridana prakticka priloha Bug triage a technicky dluh bez nekonecneho backlogu za 45 minut vcetne prioritizace, privacy-first filtru, dluhovych ticketu, mesicniho uklidu a checklistu.
 - 2026-08-02: Pridana prakticka priloha Aktualizace zavislosti bez patchovaci paniky za 60 minut vcetne inventare zavislosti, prioritizace alertu, patch karty, testovani a checklistu.
 - 2026-08-02: Pridana prakticka priloha API limity a chybove odpovedi bez trestani zakazniku za 60 minut vcetne rate limitu, 429 odpovedi, retry pravidel, dokumentace a checklistu.
+- 2026-08-02: Pridana prakticka priloha CSV exporty a reporty bez datoveho vysavace za 45 minut vcetne datoveho kontraktu, CSV Injection ochrany, asynchronnich exportu, UI varovani a checklistu.
