@@ -13745,6 +13745,250 @@ Post-release kontrola:
 
 ---
 
+## Produktove metriky bez vanity dashboardu za 60 minut
+
+Metriky maji pomahat rozhodovat. Ne dokazovat, ze produkt "nejak roste", protoze graf vypada do prava nahoru, kdyz se spravne priblizi osa. Maly SaaS tym nepotrebuje tucet panelu, ktere nikdo necte. Potrebuje maly metrickovy strom: hlavni vysledek, par vstupnich signalu, jasne hranice kvality a pravidelny rytmus rozhodovani.
+
+Privacy-first verze tohoto pristupu ma jeste jednu vyhodu: nuti te merit na urovni produktu, uctu nebo udalosti, ne na urovni slidenych jednotlivcu. Misto "co presne delal tento clovek v utery ve 23:14" se ptas: "Dostava zakaznik hodnotu, kterou jsme slibili? Kde se tok lame? Co mame zlepsit tento tyden?"
+
+### 1. Zacni rozhodnutim, ne dashboardem
+
+Nejdriv si napis tri rozhodnuti, ktera chces metrikami delat. Bez toho se dashboard nafoukne na vitrinu cisel.
+
+Priklady rozhodnuti:
+
+- Mame zlepsovat akvizici, nebo aktivaci?
+- Je onboarding dost jasny pro nove zakazniky?
+- Ktery segment ma realnejsi sanci na placene rozsireni?
+- Ktera cast produktu zpusobuje nejvic support prace?
+- Muzeme vypnout starou funkci bez rozbite duvery?
+
+Kazde rozhodnuti preved na otazku:
+
+```text
+Rozhodnuti: Mame prepsat onboarding?
+Otazka: Kolik novych uctu dojde k prvnimu hodnotnemu vysledku do 7 dni?
+```
+
+Potom teprve vybirej metriku. Kdyz zacnes nastrojem, skoncis u toho, co umi nastroj pekne nakreslit. Kdyz zacnes rozhodnutim, casteji skoncis u jednoducheho cisla, ktere jde precist i v pondeli rano bez ritualu.
+
+**Codyho komentar:** Dashboard je dobry sluha a spatny sef. Jakmile se tym zacne ptat "jak zvedneme tuhle krivku" misto "co se ma zlepsit pro zakaznika", cisla prevzala volant.
+
+### 2. Postav metrickovy strom z peti vrstev
+
+Metrickovy strom je mapa, jak se vysledek produktu sklada z mensich signalu. Nemusi byt dokonaly. Ma byt dost dobry na to, aby sis nevymyslel nahodne ukoly.
+
+Pouzij pet vrstev:
+
+| Vrstva | Otazka | Priklad |
+| --- | --- | --- |
+| Obchodni vysledek | Proc produkt existuje? | Mesicni opakovany prijem, placene ucty, retence firem |
+| Zakaznicka hodnota | Co zakaznik ziska? | Dokoncene audity, vyresene tikety, vystavene reporty |
+| Aktivace | Kdy poprve zazije hodnotu? | Prvni import, prvni publikovana stranka, prvni sdileny vystup |
+| Vstupni akce | Co musi udelat predtim? | Registrace, pozvani kolegy, nahrani souboru, nastaveni integrace |
+| Kvalitativni signal | Co nam cislo nerekne? | Duvod odchodu, support dotaz, poznamka z dema |
+
+Priklad pro B2B SaaS na schvalovani obsahu:
+
+```text
+Obchodni vysledek: placene tymy, ktere zustanou dalsi mesic
+Zakaznicka hodnota: obsah schvaleny bez ztracenych emailu
+Aktivace: tym vytvori prvni workflow a schvali prvni polozku
+Vstupni akce: pozvani druheho cloveka, nahrani prvniho navrhu, nastaveni role
+Kvalitativni signal: "usetri nam to pondelni kontrolni call"
+```
+
+Takhle postaveny strom je prakticky i pro marketing. Neoptimalizuj jen na navstevnost. Sleduj, jestli konkretni obsah privadi lidi, kteri rozumi problemu, projdou hlavni cestou a dokazou rict, proc by produkt pouzili.
+
+### 3. Vanity metriky nech jako kontext, ne jako cil
+
+Vanity metrika je cislo, ktere vypada dobre, ale samo o sobe nerika, co mas udelat. Navstevnost, pocet zobrazeni, registrace zdarma, followers nebo pocet stazenych PDF muzou byt uzitecny kontext. Problem nastane, kdyz se stanou cilem.
+
+Rozlis tri typy metrik:
+
+- Vysledkove: penize, retence, aktivni zakaznicke ucty, dokoncene hodnotne vystupy.
+- Diagnosticke: konverze kroku, chybovost formulare, cas do aktivace, odpoved supportu.
+- Kontextove: navstevnost, imprese, prokliky, otevreni emailu, socialni reakce.
+
+Kdyz kontextova metrika roste a vysledkova ne, neoslavuj. Ptej se:
+
+- Privadime spravny segment?
+- Slibuje marketing neco jineho nez produkt dodava?
+- Je hlavni akce viditelna a srozumitelna?
+- Neni formular nebo trial prilis tezky?
+- Nemeri se konverze v miste, ktere nema obchodni hodnotu?
+
+**Priklad:**
+
+Clanek privede 2 000 navstev, 80 lidi klikne na CTA a nikdo nepozada o demo. To neni uspech jen proto, ze graf navstevnosti hezky poskocil. Mozna clanek lovi prilis obecne publikum. Mozna CTA slibuje audit, ale stranka chce rovnou registraci. Mozna tema patri do edukace, ne do akvizice. Rozhodnuti neni "napsat vic takovych clanku". Rozhodnuti je upravit navazujici cestu nebo zmenit obsahovy cil.
+
+### 4. Mer na urovni uctu, ne osobniho detektiva
+
+U B2B SaaS casto nepotrebujes vedet vse o jednotlivci. Casto staci account-level pohled: co se deje s firmou, pracovnim prostorem nebo projektem. To snizuje datovou stopu a lepe odpovida tomu, jak se v B2B nakupuje a obnovuje spoluprace.
+
+Privacy-first pravidla:
+
+- Ukladej agregovane signaly, pokud nepotrebujes individualni historii.
+- Oddel produktovou analytiku od supportnich a obchodnich poznamek.
+- Neposilej obsah zakaznickych dat do analytiky. Event `document_approved` staci; nazev dokumentu tam nepatri.
+- Pseudonymizuj identifikatory tam, kde neni nutne zobrazovat email nebo jmeno.
+- Nastav retenci eventu podle rozhodnuti, ktera z nich delas.
+- Do metrik nedavej pole "jen pro jistotu". Jistota je nejdrazsi datovy typ.
+
+Priklad dobrych eventu:
+
+```text
+workspace_created
+member_invited
+first_project_created
+first_export_completed
+integration_connected
+approval_completed
+```
+
+Priklad zbytecne hladovych eventu:
+
+```text
+user_read_document_title
+user_opened_client_contract_filename
+user_copied_customer_email
+user_viewed_invoice_amount_with_note
+```
+
+Pokud metrika potrebuje pracovat s citlivym obsahem, zastav se. Mozna meri spatnou vec. Mozna ma byt signal odvozeny v aplikaci a do analytiky ma odejit jen bezpecny stav, napriklad `risk_review_required: true`.
+
+### 5. Nastav prahy pro akci predem
+
+Metrika bez prahu je pozvanka k nekonecnemu debatnimu krouzku. Predem si rekni, co znamena dobre, varovne a spatne.
+
+Sablona:
+
+```text
+Metrika:
+Proc ji sledujeme:
+Segment:
+Frekvence:
+Zelena zona:
+Zluta zona:
+Cervena zona:
+Akce pri zlute:
+Akce pri cervene:
+Kdy metriku zrusime:
+```
+
+Priklad:
+
+```text
+Metrika: aktivace noveho workspace
+Proc ji sledujeme: ukazuje, zda novy tym pochopi prvni hodnotu
+Segment: nove B2B ucty s pozvanim aspon jednoho clena
+Frekvence: tydne
+Zelena zona: 60 % workspace dokonci prvni hodnotny vystup do 7 dni
+Zluta zona: 40-59 %
+Cervena zona: pod 40 %
+Akce pri zlute: projit 5 poslednich onboarding zaznamu a 3 support dotazy
+Akce pri cervene: zastavit nove onboarding experimenty, opravit hlavni tok
+Kdy metriku zrusime: az bude aktivace stabilni 8 tydnu a nahradi ji retencni signal
+```
+
+Prahy nemusi byt dokonale. Dulezite je, ze brani tomu, aby se kazdy tyden znovu vyjednavalo, jestli je problem problem. Maly tym potrebuje energii na opravy, ne na soudni proces s grafem.
+
+### 6. Tydni metricka porada bez prezentacniho divadla
+
+Jednou tydne staci 30 minut. Zadny slajdovy festival. Jeden dokument, pet otazek, jedno rozhodnuti.
+
+Agenda:
+
+```text
+1. Co se zmenilo proti minulemu tydnu?
+2. Ktera metrika je mimo dohodnuty prah?
+3. Co je nejpravdepodobnejsi vysvetleni?
+4. Jake jedno rozhodnuti udelame tento tyden?
+5. Jak overime, ze to pomohlo?
+```
+
+Pravidla:
+
+- Porovnavas stejne segmenty, ne nahodne smichane uzivatele.
+- U kazde zmeny hledas i kvalitativni kontext.
+- Neresis vsechny grafy. Resis jeden nejdulezitejsi problem.
+- Nepridavas novou metriku bez rozhodnuti, ktere ma podporit.
+- Metriky, ktere tri mesice nikdo nepouzil pro rozhodnuti, mazes nebo archivujes.
+
+Vystup z porady ma byt kratky:
+
+```text
+Datum:
+Hlavni signal:
+Interpretace:
+Rozhodnuti:
+Vlastnik:
+Kontrola za:
+```
+
+Tohle je schvalne nudne. Nudny system, ktery se opakuje, porazi genialni dashboard, na ktery se vsichni divaji jen pred board meetingem.
+
+### 7. 60min postup
+
+```text
+0-10 min: Vyber jedno rozhodnuti.
+Napr. onboarding, aktivace, retence, kvalita leadu nebo support zatez.
+
+10-20 min: Nakresli petivrstvy strom.
+Obchodni vysledek, zakaznicka hodnota, aktivace, vstupni akce, kvalitativni signal.
+
+20-30 min: Vyber 3-5 metrik.
+Jednu vysledkovou, dve diagnosticke, jednu kontextovou a jeden kvalitativni signal.
+
+30-40 min: Zkontroluj datovou stopu.
+Vyhod osobni udaje, obsah zakaznickych dat a pole "pro jistotu".
+
+40-50 min: Nastav prahy a akce.
+Zelena, zluta, cervena zona. U kazde problemove zony konkretni dalsi krok.
+
+50-60 min: Zaloz tydni zapis.
+Jedna stranka nebo jeden dokument, ktery bude tym aktualizovat kazdy tyden.
+```
+
+### Sablona metrickove karty
+
+```text
+Nazev metriky:
+Typ: vysledkova / diagnosticka / kontextova / kvalitativni
+Rozhodnuti, ktere podporuje:
+Segment:
+Definice citatele:
+Definice jmenovatele:
+Casove okno:
+Zdroj dat:
+Osobni udaje:
+Citliva data:
+Retence:
+Zelena zona:
+Zluta zona:
+Cervena zona:
+Akce pri problemu:
+Vlastnik:
+Datum posledni revize:
+```
+
+### Checklist: produktove metriky bez vanity dashboardu
+
+- [ ] Kazda metrika podporuje konkretni rozhodnuti.
+- [ ] Existuje jeden jednoduchy metrickovy strom pro hlavni produktovy tok.
+- [ ] Tym rozlisuje vysledkove, diagnosticke a kontextove metriky.
+- [ ] Vanity metriky nejsou samy o sobe cilem.
+- [ ] Eventy neposilaji obsah zakaznickych dat do analytiky.
+- [ ] Kde to jde, meri se na urovni uctu, workspace nebo projektu.
+- [ ] Identifikatory jsou pseudonymizovane, pokud neni potreba jmeno nebo email.
+- [ ] Retence eventu odpovida realnemu rozhodovacimu oknu.
+- [ ] Pro hlavni metriky existuji zelene, zlute a cervene prahy.
+- [ ] Tydni porada konci jednim rozhodnutim, vlastnikem a terminem kontroly.
+- [ ] Nepouzivane metriky se pravidelne mazou nebo archivuji.
+- [ ] Marketing, produkt a support sdili stejnou definici aktivace a hodnoty.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -13913,3 +14157,4 @@ Post-release kontrola:
 - 2026-08-02: Pridana prakticka priloha Servisni ucty a machine-to-machine pristupy bez sdilenych hesel za 45 minut vcetne scoped opravneni, tajemstvi, auditu, offboardingu a checklistu.
 - 2026-08-02: Pridana prakticka priloha Testovaci prostredi a seed data bez kopirovani produkce za 60 minut vcetne rizik prostredi, seed scenaru, produkcnich vyjimek, oddelenych secrets, retence a checklistu.
 - 2026-08-02: Pridana prakticka priloha Release runbook bez patecni rulety za 60 minut vcetne release karty, preflight kontroly, postupneho rollout planu, rollbacku, post-release zapisu a checklistu.
+- 2026-08-02: Pridana prakticka priloha Produktove metriky bez vanity dashboardu za 60 minut vcetne metrickoveho stromu, privacy-first eventu, prahu pro akci, tydniho rytmu a checklistu.
