@@ -11325,6 +11325,204 @@ Kdo odpovida, kdy se ozve, kdy se karta uzavre nebo smaze.
 
 ---
 
+## Zruseni uctu a mazani dat bez schovanych dveri za 60 minut
+
+Zruseni uctu neni okrajova obrazovka pro lidi, ktere uz nechces videt. Je to posledni velky test duvery. Kdyz zakaznik odchazi a produkt zacne delat klikaci labyrint, schovavat export, nutit call nebo premlouvat pres umele slevy, rikas tim: "Vase data jsou nase paka." To je presny opak privacy-first provozu.
+
+Evropsky kontext je dulezity, protoze GDPR obsahuje pravo na vymaz podle clanku 17 a pravo na prenositelnost podle clanku 20. Primarni text GDPR je tady: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng. EDPB v roce 2026 publikoval vysledky koordinovane akce k pravu na vymaz a upozornil mimo jine na problemy s internimi postupy, informovanim lidi a posuzovanim situaci, kdy pravo na vymaz neni absolutni: https://www.edpb.europa.eu/documents/coordinated-enforcement-framework/coordinated-enforcement-action-implementation-of-the-0_en.
+
+Prakticky preklad pro maly SaaS: offboarding nesmi byt jen tlacitko "smazat". Musi umet rozlisit export, deaktivaci, retenci, zakonny duvod pro dalsi ulozeni, technicke zalohy, subprocesory a potvrzeni pro zakaznika. A musi to umet bez toho, aby kazdy pripad skoncil jako adrenalinovy sport pro support.
+
+### 1. Rozdel odchod na pet stavu
+
+Nejvetsi chaos vznikne, kdyz tym pouziva jedno slovo "smazani" pro pet ruznych veci. Zaved jasne stavy:
+
+| Stav | Co znamena | Typicka akce |
+| --- | --- | --- |
+| Zruseni predplatneho | Zakaznik nechce dalsi fakturaci. | Ukoncit billing, zachovat pristup do konce obdobi podle podminek. |
+| Deaktivace uctu | Ucet uz nejde bezne pouzivat. | Zastavit prihlaseni, API klice, webhooky a notifikace. |
+| Export dat | Zakaznik chce kopii dat. | Vytvorit prenositelny export s omezenou platnosti odkazu. |
+| Vymaz provoznich dat | Data uz nejsou potreba pro puvodni ucel. | Smazat nebo anonymizovat podle datove mapy a retence. |
+| Retence z duvodu povinnosti | Cast dat musi zustat. | Oddelit je, omezit pristup, vysvetlit duvod a dobu ulozeni. |
+
+Tahle tabulka ma byt videt v produktu, support manualu i interni dokumentaci. Kdyz zakaznik klikne "zrusit ucet", nema tim automaticky nastat pravni i technicka exploze. Produkt se ma zeptat, co presne chce udelat, a vysvetlit dopad.
+
+**Codyho komentar:** Tlacitko "Delete everything" vypada statecne, ale casto je to jen maskovana neznalost vlastnich dat. Dobry produkt vi, co umi smazat hned, co potrebuje exportovat, co musi docasne podrzet a proc.
+
+### 2. Navrhni odchodovou obrazovku jako rozhodnuti
+
+Odchodovy tok ma byt kratky a pravdivy. Nechci tam videt pet obrazovek smutnych hlasek, odpocty, "opravdu opravdu opravdu?" a tlacitko pro zruseni v barve mokreho chodniku.
+
+Minimalni tok:
+
+1. Stranka ukaze, co se stane se sluzbou, fakturaci a daty.
+2. Zakaznik muze stahnout export, pokud dava smysl.
+3. Zakaznik vybere, jestli chce ukoncit predplatne, deaktivovat ucet nebo pozadat o vymaz.
+4. Produkt ukaze dopad na tym, integrace, API klice a naplanovane ulohy.
+5. Zakaznik potvrdi akci.
+6. System posle potvrzeni s casem, stavem a dalsimi kroky.
+
+Mikrocopy muze vypadat takhle:
+
+```text
+Zruseni predplatneho zastavi dalsi fakturaci. Do konce zaplaceneho obdobi zustane pristup aktivni.
+
+Deaktivace uctu vypne prihlaseni, API klice, webhooky a naplanovane odesilky.
+
+Vymaz dat spusti proces smazani dat, ktera uz nepotrebujeme pro poskytovani sluzby, pravni povinnosti nebo obranu pravnich naroku. Pred vymazem doporucujeme stahnout export.
+```
+
+Tohle neni pravnicka elegance. Je to obycejna slusnost. Zakaznik vidi rozdil mezi obchodnim ukoncenim a datovym vymazem, support dostane mene zmatenych dotazu a produktovy tym ma lepsi hranice.
+
+### 3. Export pred smazanim ma byt pouzitelny
+
+Export neni splneny jen tim, ze nekomu posles ZIP s nahodnymi JSON soubory a poprejes mu hodne stesti. Pro B2B SaaS ma byt export citelny pro cloveka a zpracovatelny pro system.
+
+Pouzitelny export typicky obsahuje:
+
+- `README.txt` s popisem obsahu a casem exportu,
+- strukturovana data v CSV nebo JSON,
+- prilohy v puvodnim formatu,
+- vztahy mezi zaznamy pres stabilni ID,
+- seznam toho, co export neobsahuje a proc,
+- informaci o platnosti odkazu ke stazeni,
+- kontakt pro problem s exportem.
+
+Priklad `README.txt`:
+
+```text
+Export uctu: [nazev uctu]
+Vytvoreno: [datum a cas]
+Obsahuje: projekty, uzivatele, nastaveni workflow, prilohy, auditni udalosti k nastaveni
+Neobsahuje: interni systemove logy, agregovane produktove metriky, data ponechana kvuli fakturacnim povinnostem
+Format: CSV + JSON + prilohy
+Odkaz je platny do: [datum]
+```
+
+Export neposilej jako bezny email attachment, pokud obsahuje citliva data. Lepsi je kratkodoby odkaz, pristup po prihlaseni, nebo rucni predani po overeni prijemce u vetsich zakazniku. Po stazeni nebo vyprseni odkazu exportni balicek smaz.
+
+### 4. Mazaci job musi mit mapu, ne odvahu
+
+Mazani dat v SaaS by nemelo byt rucni hledani v databazi. Potrebujes datovou mapu, ktera rika, kde data daneho uctu ziji.
+
+Pro kazdou kategorii si zapis:
+
+| Kategorie | Kde lezi | Akce pri odchodu | Retence | Vlastnik |
+| --- | --- | --- | --- | --- |
+| Profil uctu | hlavni DB | smazat nebo anonymizovat | podle smlouvy | produkt |
+| Fakturacni doklady | billing system | ponechat podle ucetnich pravidel | definovana v internim policy | finance |
+| Prilohy | object storage | smazat po exportu | kratka ochranna lhuta | engineering |
+| Logy | monitoring | neobsahuji obsah, expirace dle log policy | kratka | platform |
+| Support komunikace | helpdesk/mailbox | vycistit prilohy a zbytecne udaje | podle support policy | support |
+| Zalohy | backup storage | neobnovovat aktivne, zmizet podle rotace zaloh | podle backup policy | platform |
+
+Mazaci job ma byt idempotentni: kdyz spadne uprostred a pustis ho znovu, nema udelat skodu. Mel by zapisovat stav po krocich:
+
+```text
+deletion_requested
+export_ready
+account_deactivated
+integrations_disabled
+primary_data_deleted
+external_processors_notified
+backup_expiry_recorded
+confirmation_sent
+closed
+```
+
+U kazdeho kroku zapis jen technicky stav, cas a minimalni identifikator. Neni potreba logovat cele zpravy, seznam vsech souboru nebo osobni obsah. Mazaci log je provozni doklad, ne nove uloziste osobnich dat.
+
+### 5. Subprocesori nesmi zustat mimo zaber
+
+Kdyz data posilas do dalsich nastroju, zruseni uctu se netyka jen tvoji databaze. Musis vedet, kteri subprocesori maji data daneho zakaznika a jaka akce je potreba.
+
+Jednoducha karta:
+
+```text
+Subprocesor:
+Typ dat:
+Ucel:
+Mazani pres API / portal / support:
+SLA nebo obvykla doba vymazu:
+Doklad o pozadavku:
+Vlastnik:
+```
+
+U nekritickych nastroju muze stacit vypnuti integrace a retence podle smlouvy. U kritickych nastroju chces jasny postup predem. Nejhorsi chvile na cteni DPA je ve chvili, kdy zakaznik prave pozadal o vymaz a support ma v kalendari dalsich osm veci.
+
+Privacy-first pravidlo: pokud neumime u dodavatele rozumne smazat nebo exportovat data, nemame mu je posilat bez velmi dobreho duvodu.
+
+### 6. Potvrzeni pro zakaznika ma byt konkretni
+
+Po zruseni nebo vymazu neposilej mlhave "vase zadost byla zpracovana". Rekni, co se stalo a co jeste zustava.
+
+Sablona:
+
+```text
+Predmet: Potvrzeni ukonceni uctu [nazev]
+
+Ahoj [jmeno],
+
+potvrzuji, ze jsme dne [datum] zpracovali pozadavek pro ucet [nazev].
+
+Hotovo:
+- predplatne bylo ukonceno k [datum],
+- prihlaseni a API klice jsou vypnute,
+- hlavni provozni data byla [smazana/anonymizovana],
+- export byl pripraven do [datum] a odkaz vyprsi [datum].
+
+Ponechavame pouze data, ktera musime drzet kvuli [fakturace / pravni povinnost / obrana naroku / technicka rotace zaloh]. Pristup k nim je omezeny a budou odstranena podle nasi retencni politiky.
+
+Pokud neco nesedi, odpovezte na tento email.
+
+Cody
+```
+
+Kdyz nejde vymaz provest uplne, rekni to vecne. Pravo na vymaz neni absolutni a v nekterych situacich existuji legitimni duvody pro dalsi ulozeni, ale zakaznik nemusi lustit, co se deje za oponou. Vysvetleni ma byt konkretni, kratke a overitelne.
+
+### 7. 60min postup
+
+```text
+00-05 min: Vyber jeden odchodovy scenar.
+Typicky zacni "zakaznik rusi ucet a chce export pred smazanim".
+
+05-15 min: Sepis pet stavu odchodu.
+Zruseni predplatneho, deaktivace, export, vymaz, retence.
+
+15-25 min: Projdi datovou mapu.
+Hlavni DB, billing, object storage, logy, support, zalohy, subprocesori.
+
+25-35 min: Navrhni obrazovku a emaily.
+Jedna rozhodovaci stranka, potvrzeni zadosti, potvrzeni hotove akce.
+
+35-45 min: Navrhni mazaci job jako stavovy tok.
+Kroky, idempotence, auditni zaznam, chyba a opakovani.
+
+45-52 min: Zkontroluj support postup.
+Kdo overuje prijemce, kdo resi vyjimky, kam se pise pravni nejistota.
+
+52-60 min: Vyber jednu opravu pro tento tyden.
+Napriklad pridat exportni README, vypnout API klice pri deaktivaci nebo dopsat subprocesorskou kartu.
+```
+
+### Checklist: zruseni uctu a mazani dat
+
+- [ ] Rozlisuji zruseni predplatneho, deaktivaci, export, vymaz a retenci.
+- [ ] Odchodovy tok neni navrzeny jako past.
+- [ ] Zakaznik pred potvrzenim vidi dopad na pristup, fakturaci, integrace a data.
+- [ ] Export je citelny, prenositelny a ma popis obsahu.
+- [ ] Odkaz na export ma omezenou platnost a primerene overeni pristupu.
+- [ ] Datova mapa rika, kde jsou data uctu ulozena.
+- [ ] Mazaci job je idempotentni a zapisuje stav po krocich.
+- [ ] Log mazani neuklada zbytecny osobni obsah.
+- [ ] Subprocesori maji popsanou mazaci nebo vypinaci cestu.
+- [ ] Fakturacni, pravni a backup retence jsou oddelene od aktivnich dat.
+- [ ] Zakaznik dostane konkretni potvrzeni, co bylo smazano a co zustava.
+- [ ] Support vi, kam predat nejasny pravni pripad.
+- [ ] Po odchodu vznikne jedna produktova nebo provozni oprava, ne jen zavreny ticket.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -11370,6 +11568,7 @@ Kdo odpovida, kdy se ozve, kdy se karta uzavre nebo smaze.
 - EDPB, Guidelines on transparency under Regulation 2016/679: https://www.edpb.europa.eu/documents/guideline/article-29-working-party-guidelines-on-transparency-under-regulation-2016679_en
 - EDPB Guidelines 01/2022 on data subject rights - Right of access: https://www.edpb.europa.eu/system/files/2023-04/edpb_guidelines_202201_data_subject_rights_access_v2_en.pdf
 - EDPB/WP29 Guidelines on the right to data portability under Regulation 2016/679: https://www.edpb.europa.eu/documents/guideline/guidelines-on-the-right-to-data-portability-under-regulation-2016679-wp242_en
+- EDPB Coordinated Enforcement Action, implementation of the right to erasure by controllers: https://www.edpb.europa.eu/documents/coordinated-enforcement-framework/coordinated-enforcement-action-implementation-of-the-0_en
 - W3C, Web Content Accessibility Guidelines 2.2: https://www.w3.org/TR/WCAG22/
 - Google Search Central, SEO Starter Guide: https://developers.google.com/search/docs/fundamentals/seo-starter-guide
 - Google Search Central, How to specify a canonical URL: https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls
@@ -11463,3 +11662,4 @@ Kdo odpovida, kdy se ozve, kdy se karta uzavre nebo smaze.
 - 2026-08-02: Pridana prakticka priloha Health score a QBR bez sledovani lidi za 60 minut vcetne account-level signalu, akci podle stavu, QBR sablony, zapisu a checklistu.
 - 2026-08-02: Pridana prakticka priloha Expansion a upsell bez loveni v osobnich datech za 60 minut vcetne typu rozsireni, vysvetlitelnych signalu, expansion karty, servisni zpravy a checklistu.
 - 2026-08-02: Pridana prakticka priloha Renewal a prodlouzeni spoluprace bez automaticke pasti za 45 minut vcetne renewal karty, hodnotovych signalu, datove kontroly, emailove sablony a checklistu.
+- 2026-08-02: Pridana prakticka priloha Zruseni uctu a mazani dat bez schovanych dveri za 60 minut vcetne odchodovych stavu, exportu, mazaciho jobu, subprocesoru, potvrzovacich sablon a checklistu.
