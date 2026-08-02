@@ -10251,6 +10251,205 @@ Ke kazdemu napis jednu produktovou akci, jednu support akci nebo "bez akce".
 
 ---
 
+## API klice a tajemstvi bez lepicich papiru za 45 minut
+
+API klice, tokeny, webhook secrets, databazova hesla, signing keys a recovery kody jsou male textove retezce s velkym dopadem. U maleho SaaS tymu casto zacnou nevinne: jeden token v `.env`, jeden klic v CI, jeden webhook secret v dokumentaci, jeden sdileny login do podpory. Pak prijde prvni externi integrace, druhy prostredi, treti dodavatel a najednou nikdo nevi, ktery klic ma jaky ucel, kdo ho muze cist a co se stane pri jeho uniku.
+
+Privacy-first provoz neznamena jen chranit osobni data v databazi. Znamena chranit i pristupove prostredky, ktere k tem datum vedou. OWASP Secrets Management Cheat Sheet doporucuje centralizovat a standardizovat spravu tajemstvi, resit pristupova prava, auditing, rotaci, revokaci a cely zivotni cyklus tajemstvi: https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html. OWASP API Security Top 10 zase pripomina, ze API rizika casto vznikaji kolem autentizace, autorizace a spatne chranenych endpointu: https://owasp.org/API-Security/editions/2023/en/0x11-t10/.
+
+**Codyho komentar:** Tajemstvi v repozitari je jako klic pod rohozkou, jen s tim rozdilem, ze rohozku indexuji roboti a nekdo ma notifikace. Pohodlne? Ano. Moudre? Ani omylem.
+
+### 1. Udelej inventar tajemstvi
+
+Nez zacnes kupovat vault a kreslit architekturu, napis obycejnou tabulku. Cilem neni dokonalost. Cilem je prestat mit tajemstvi, o kterych nikdo nevi.
+
+| Tajemstvi | Ucel | Prostredi | Kde je ulozene | Kdo ma pristup | Rotace | Plan pri uniku |
+| --- | --- | --- | --- | --- | --- | --- |
+| Databazove heslo | pripojeni aplikace k DB | production | secrets manager / hosting | aplikace, 2 admini | pri incidentu nebo periodicky | vytvorit nove, deploy, revokovat stare |
+| Email API key | transakcni emaily | production | CI/runtime secret | aplikace, provoz | pri zmene dodavatele nebo incidentu | zrusit klic, vytvorit novy, overit odesilani |
+| Webhook secret | overeni udalosti z plateb | production | runtime secret | aplikace | pri podezreni na unik | rotovat u dodavatele i v aplikaci |
+| Admin recovery key | nouzovy pristup | break-glass | oddelene uloziste | 1-2 povereni lide | po pouziti | zapsat pouziti, vymenit |
+
+Minimalni typy, ktere hledej:
+
+- `.env` soubory,
+- CI/CD secrets,
+- hostingove promene,
+- databazova hesla,
+- API klice dodavatelu,
+- webhook signing secrets,
+- OAuth client secrets,
+- SSH klice,
+- TLS certifikaty a private keys,
+- recovery kody pro admin ucty,
+- sdilene login udaje k dodavatelum.
+
+U kazde polozky si poloz dve neprijemne otazky:
+
+- Kdyby unikla dnes, poznali bychom to?
+- Umime ji vymenit bez paniky a bez celodenni odstavky?
+
+Pokud odpoved zni ne, mas dobry prvni ukol.
+
+### 2. Oddel prostredi a prava
+
+Nejbezpecnejsi tajemstvi je to, ktere nepotrebuje lidske oko. Druhe nejlepsi je to, ktere vidi jen clovek s realnym duvodem. Nejhorsi je "vsichni vyvojari maji vsechno, protoze je nas malo". Presne male tymy potrebuji jednoducha pravidla, protoze u nich jeden omyl rychle zasahne cely produkt.
+
+Zakladni pravidla:
+
+- Production secrets nejsou v lokalnim vyvoji.
+- Staging ma vlastni klice, ne kopii produkce.
+- CI ma jen tajemstvi potrebna pro konkretni pipeline.
+- Vyvojari nemaji trvaly pristup k produkcnim datum ani klicum bez duvodu.
+- Sdilene osobni ucty u dodavatelu nahrazuje rolemi a individualnim pristupem.
+- Break-glass pristup existuje, ale jeho pouziti se zapisuje a po pouziti kontroluje.
+
+Priklad spatneho vzoru:
+
+```text
+Jeden `.env.production` soubor v tymovem chatu, protoze "jen rychle nasadime".
+```
+
+Lepsi vzor:
+
+```text
+Produkce bere secrets z hostingoveho nebo samostatneho secrets manageru.
+Vyvojar vidi jen nazvy promennych a sandbox hodnoty. Pri incidentu existuje
+kratky break-glass postup s vlastnikem a zapisem.
+```
+
+Tajemstvi nejsou jen technicka konfigurace. Jsou pristupova prava v komprimovane podobe. Chovej se k nim podle toho.
+
+### 3. Rotace bez divadla
+
+Rotace klicu se casto odklada, protoze zni jako velky provozni ukol. U maleho SaaS staci zacit jednoduse: vedet, co se musi vymenit, kde se to meni, jak se overi nova hodnota a kdy lze starou hodnotu zrusit.
+
+Sablona rotace:
+
+```text
+Tajemstvi:
+
+Proc rotujeme:
+[periodicka rotace / odchod clena tymu / incident / zmena dodavatele]
+
+Kde vytvorit novou hodnotu:
+
+Kde ji nasadit:
+
+Jak overit:
+
+Kdy revokovat starou hodnotu:
+
+Kdo potvrdi hotovo:
+
+Co se zapise do logu:
+```
+
+Pro kriticke klice podporuj prekryv:
+
+- vytvor novy klic,
+- nasad aplikaci tak, aby ho pouzivala,
+- over hlavni tok,
+- teprve potom zrus stary klic.
+
+U webhooku a podpisovych klicu si dej pozor na casove okno, kdy system musi prijmout starou i novou hodnotu. Kdyz to dodavatel podporuje, pouzij dual-secret nebo verzi podpisu. Kdyz ne, naplanuj kratke okno a smoke test.
+
+### 4. Klice v kodu a logach: najdi, zrus, pouc se
+
+Tajemstvi se nesmi dostat do repozitare, issue trackeru, chatu, screenshotu ani logu. Kdyz se to stane, nesmaz jen radek a netvar se, ze se cas vratil. Git historie, forky, cache, build logy a notifikace umi byt velmi vytrvale.
+
+Postup pri nalezu:
+
+1. Predpokladej, ze tajemstvi uniklo.
+2. Vytvor novou hodnotu.
+3. Nasad novou hodnotu.
+4. Revokuj starou.
+5. Zkontroluj logy pouziti, pokud existuji.
+6. Odstran tajemstvi z viditelnych mist, ale nespolhej na to jako na hlavni opravu.
+7. Pridej kontrolu, aby se stejny typ uniku neopakoval.
+
+Uzitecne kontroly:
+
+- secret scanning v repozitari,
+- pre-commit kontrola pro bezne typy klicu,
+- CI kontrola, ktera odmita znamy vzor tajemstvi,
+- zakaz logovani celych requestu a hlavicek s tokeny,
+- masking citlivych promennych v CI logach,
+- kratka dokumentace, kam tajemstvi patri a kam ne.
+
+**Priklad logovaciho pravidla:**
+
+```text
+Nikdy nelogujeme Authorization, Cookie, Set-Cookie, API klice, webhook payloady
+s osobnimi daty ani cele request body. Pro ladeni pouzivame request ID, typ chyby,
+systemovy stav a minimalni technicky kontext.
+```
+
+Tohle je maly text, ale muze zachranit hodne vysvetlovani po incidentu.
+
+### 5. API klice pro zakazniky
+
+Pokud SaaS vydava API klice zakaznikum, navrhni je jako produktovou funkci, ne jako radek v databazi. Zakaznik ma vedet, k cemu klic slouzi, kdo ho vytvoril, kdy byl naposledy pouzit a jak ho zrusit.
+
+Minimalni pravidla:
+
+- Klic zobraz jen jednou pri vytvoreni.
+- Ukladej jen hash nebo jinou bezpecnou reprezentaci, pokud to architektura dovoluje.
+- Klic ma nazev, vlastnika a rozsah prav.
+- Podporuj expiraci nebo aspon rucni revokaci.
+- Ukaz posledni pouziti bez detailu, ktere by zbytecne profilovaly uzivatele.
+- Dovol vytvorit novy klic pred zrusenim stareho.
+- Pri zruseni klice jasne rekni dopad na integrace.
+
+Priklad UI mikrocopy:
+
+```text
+API klic ukazeme jen jednou. Ulozte ho do sveho secrets manageru.
+Klic nepouzivejte v prohlizeci ani ve verejnem repozitari.
+```
+
+Zakaznicke API klice patri i do offboardingu. Kdyz zakaznik odchazi, musi byt jasne, zda se klice zrusi hned, po konci obdobi nebo pri smazani workspace. U firemnich uctu mysli i na odchod clena tymu: osobni token by nemel dal zit jako tichy produkcni pristup.
+
+### 6. 45min postup
+
+```text
+00-08 min: Najdi tajemstvi.
+.env, CI, hosting, dodavatele, webhooky, databaze, SSH, recovery kody.
+
+08-16 min: Vypln inventarni tabulku.
+Ucel, prostredi, ulozeni, pristupy, rotace, plan pri uniku.
+
+16-24 min: Oddel produkci od vyvoje.
+Oznac produkcni secrets, ktere se nesmi objevit lokalne nebo v chatu.
+
+24-32 min: Vyber tri nejrizikovejsi polozky.
+Typicky sdilene admin ucty, produkcni `.env`, neni jasna rotace, token v CI logu.
+
+32-39 min: Napis rotacni postup pro jednu kritickou polozku.
+Vytvoreni nove hodnoty, deploy, overeni, revokace stare.
+
+39-45 min: Pridej ochrannou kontrolu.
+Secret scanning, masking logu, pravidlo do PR nebo kratky README pro tym.
+```
+
+### Checklist: API klice a tajemstvi
+
+- [ ] Existuje inventar hlavnich produkcnich tajemstvi.
+- [ ] Kazde tajemstvi ma ucel, prostredi, vlastnika a misto ulozeni.
+- [ ] Produkcni secrets nejsou v repozitari, chatu ani lokalnim sdilenem souboru.
+- [ ] Staging a development nepouzivaji produkcni klice.
+- [ ] CI/CD ma jen minimalni potrebna prava.
+- [ ] Lidsky pristup k produkcnim secrets je omezeny a auditovatelny.
+- [ ] Kriticke klice maji popsany postup rotace a revokace.
+- [ ] Pri nalezu tajemstvi v kodu se klic rotuje, ne jen smaze z diffu.
+- [ ] Logy maskuji tokeny, cookies, authorization hlavicky a webhook secrets.
+- [ ] Zakaznicke API klice maji nazev, vlastnika, rozsah prav a revokaci.
+- [ ] Zakaznik vidi dopad zruseni klice pred potvrzenim.
+- [ ] Offboarding clena tymu a zakaznika resi i tokeny a integrace.
+- [ ] Break-glass pristup existuje, ale jeho pouziti se zapisuje a po pouziti kontroluje.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -10276,6 +10475,8 @@ Ke kazdemu napis jednu produktovou akci, jednu support akci nebo "bez akce".
 - OWASP HTTP Headers Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Headers_Cheat_Sheet.html
 - OWASP Logging Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
 - OWASP Top 10 2025, A09 Security Logging and Alerting Failures: https://owasp.org/Top10/2025/A09_2025-Security_Logging_and_Alerting_Failures/
+- OWASP Secrets Management Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html
+- OWASP API Security Top 10 2023: https://owasp.org/API-Security/editions/2023/en/0x11-t10/
 - MDN, Strict-Transport-Security header: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Strict-Transport-Security
 - Y Combinator, YC's essential startup advice: https://www.ycombinator.com/library/4D-yc-s-essential-startup-advice
 - Paul Graham, Do Things that Don't Scale: https://www.paulgraham.com/ds.html
@@ -10379,3 +10580,4 @@ Ke kazdemu napis jednu produktovou akci, jednu support akci nebo "bez akce".
 - 2026-08-02: Pridana prakticka priloha Win-loss rozhovory bez CRM vyslechu za 45 minut vcetne segmentace, scenare rozhovoru, zapisove karty, vyhodnoceni vzoru a checklistu.
 - 2026-08-02: Pridana prakticka priloha SLA a support limity bez prehnanych slibu za 45 minut vcetne priorit P1-P4, support kanalu, hranic rozsahu, planu podpory a checklistu.
 - 2026-08-02: Pridana prakticka priloha Churn a odchod zakaznika bez pomsty za 45 minut vcetne exit flow, dobrovolne zpetne vazby, ferovych retention reakci a churn karty.
+- 2026-08-02: Pridana prakticka priloha API klice a tajemstvi bez lepicich papiru za 45 minut vcetne inventare secrets, pristupu, rotace, logovani, zakaznickych API klicu a checklistu.
