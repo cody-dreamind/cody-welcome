@@ -13169,6 +13169,195 @@ Support kontakt:
 
 ---
 
+## Servisni ucty a machine-to-machine pristupy bez sdilenych hesel za 45 minut
+
+Servisni ucet je uzivatel, ktery nema telo, kalendar ani spatnou naladu po pondelni porade. Prave proto je nebezpecne s nim zachazet jako s beznym clovekem v administraci. Machine-to-machine pristupy casto drzi billing, synchronizace, reporting, webhooky, importy, exporty nebo interni automatizace. Kdyz jsou navrzene spatne, vznikne jeden nesmrtelny ucet `admin@firma.cz`, jeho heslo zna pulka tymu a auditni stopa ukazuje jen to, ze "nekdo neco udelal".
+
+Privacy-first provoz potrebuje opak: kazdy neclovecky pristup ma mit vlastnika, omezeny ucel, minimalni prava, rotaci, audit a jasne vypnuti. OWASP Secrets Management Cheat Sheet resi cely zivotni cyklus tajemstvi vcetne rotace a revokace: https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html. OWASP Authorization Cheat Sheet pripomina princip least privilege a kontrolu pristupu na serveru: https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html.
+
+**Codyho komentar:** Sdilene heslo k servisnimu uctu je provozni dluh v kostymu "rychleho reseni". Funguje presne do chvile, kdy potrebujes zjistit, kdo co spustil, nebo kdy token omylem odtece do logu.
+
+### 1. Rozdel servisni pristupy podle ucelu
+
+Nejdriv prestan uvazovat v pojmu "jeden technicky ucet pro vsechno". Rozdel pristupy podle toku:
+
+| Tok | Lepsi identita nez jeden sdileny admin |
+| --- | --- |
+| Billing synchronizace | servisni ucet `billing-sync` jen pro fakturacni operace |
+| Import zakaznickych dat | kratkodoby importni token pro konkretni projekt |
+| Monitoring dostupnosti | read-only token pro health endpointy |
+| Datovy export | oddeleny exportni job s omezenou platnosti vysledku |
+| Interni automatizace | service account s vlastnikem a popisem akce |
+| Partnerska integrace | klientsky API klic se scopes a limity |
+
+Kazdy ucet by mel odpovidat jedne vete:
+
+```text
+[identita] muze delat [akce] nad [rozsahem dat] kvuli [ucelu] do [doby / revize].
+```
+
+Priklad:
+
+```text
+billing-sync muze cist stav aktivnich subscription a zapisovat fakturacni reference kvuli mesicni fakturaci. Nema pristup k support zpravam, souborum ani marketingovym eventum. Vlastnik je finance ops, kontrola kazde ctvrtleti.
+```
+
+Kdyz se jedna veta neda napsat, pristup je prilis siroky nebo spatne pojmenovany.
+
+### 2. Prava navrhuj od prazdne sady
+
+U servisnich uctu je pohodlne dat `admin`, protoze to zrychli integraci. Jenze pozdeji uz nikdo nevi, ktera opravneni jsou skutecne potreba. Zacni od prazdne sady a pridej jen akce, ktere tok opravdu potrebuje.
+
+Minimalni kontrola pred vydanim tokenu:
+
+- Jake endpointy nebo operace bude identita volat?
+- Potrebuje cteni, zapis, mazani, nebo jen spusteni jobu?
+- Potrebuje vsechny zakazniky, jeden workspace, nebo jeden projekt?
+- Potrebuje volne texty, prilohy a osobni udaje, nebo staci stav a technicke ID?
+- Muze token vytvaret dalsi tokeny? Pokud ano, proc?
+- Kdy pristup vyprsi nebo kdy se znovu schvaluje?
+
+**Priklad spatneho rozsahu:**
+
+Partner dostane API klic s pristupem ke vsem kontaktum, exportum a historickym eventum, protoze zatim jen testuje integraci.
+
+**Lepsi rozsah:**
+
+Partner dostane sandbox klic s testovacimi daty. Produkcni klic prijde az po schvaleni rozsahu, ma `read:orders` a `write:fulfillment`, je omezeny na konkretni tenant a jeho pouziti se loguje bez celeho payloadu.
+
+### 3. Tajemstvi nesmi byt dokumentace
+
+API klic, client secret nebo private key neni poznamka do wiki. Je to pristupovy prostredek. Dokumentace ma popsat, jak tajemstvi vznikne, kde se ulozi, kdo ho muze zobrazit, jak se rotuje a jak se zrusi. Nemusi obsahovat samotnou hodnotu.
+
+Zakladni pravidla:
+
+- Tajemstvi nepatri do repozitare, chatu, screenshotu ani support ticketu.
+- UI ma hodnotu ukazat jen pri vytvoreni, pokud to produktovy tok dovoluje.
+- Logy nikdy neukladaji cele tokeny ani authorization hlavicky.
+- Tokeny maji prefix nebo technicke ID, podle ktereho se daji dohledat bez zverejneni cele hodnoty.
+- Rotace ma byt bez vypadku: novy token, prepnuti klienta, overeni provozu, zneplatneni stareho.
+- Emergency revokace ma byt rychlejsi nez hledani cloveka, ktery "asi vi, kde to je".
+
+Prakticky kompromis pro male tymy: kdyz nemas plnohodnotny secrets manager, pouzij aspon jedno kontrolovane misto s pristupy podle roli, auditni stopou a jasnym zakazem kopirovani do dokumentace. Ale ber to jako docasny stupen, ne jako architektonicky cil.
+
+### 4. Audituj akci, ne jen prihlaseni
+
+U servisniho uctu nestaci vedet, ze token existuje. Potrebujes vedet, co udelal a proc to jde vysvetlit.
+
+Dobry auditni zaznam pro machine-to-machine akci obsahuje:
+
+- identitu servisniho uctu nebo klienta,
+- akci,
+- cilovy tenant, projekt nebo resource ID,
+- vysledek,
+- cas,
+- request ID,
+- verzi integrace nebo klienta, pokud ji znas,
+- duvod nebo job ID u internich automatizaci.
+
+Co do auditu nepatri:
+
+- cele request payloady s osobnimi daty,
+- cele response body,
+- tokeny,
+- zbytecne IP adresy, pokud je nepouzivas k bezpecnostnimu ucelu,
+- volne texty zakazniku bez jasneho duvodu.
+
+**Priklad:**
+
+```text
+2026-08-02T10:15:03Z service_account=billing-sync action=invoice.reference.write tenant=acme-eu result=success request_id=req_7Gf2 job_id=billing_2026_08
+```
+
+Tenhle zaznam pomuze pri debugovani i auditu. Nepotrebuje pritom kopii faktury, email zakaznika ani obsah celeho requestu.
+
+### 5. Offboarding plati i pro roboty
+
+Kdyz odchazi clovek, resis pristupy. Kdyz konci integrace, pilot, dodavatel nebo automatizace, musis udelat to same. Servisni ucty maji tendenci prezivat, protoze nikomu nepatri dost osobne.
+
+Offboarding servisniho pristupu:
+
+- oznac integraci jako ukoncovanou,
+- zastav planovane joby,
+- prepnout provoz na novou identitu nebo fallback,
+- zneplatnit tokeny a refresh tokeny,
+- odebrat webhooky a callback URL,
+- zkontrolovat posledni uspesne akce,
+- smazat docasne exporty a testovaci data,
+- aktualizovat datovou mapu, subprocesory a dokumentaci,
+- ponechat jen auditni stopu podle retence.
+
+Nejlepsi offboarding je ten, ktery se da spustit bez archeologie. Kdyz inventar servisnich uctu rika vlastnika, ucel a napojene toky, vypnuti neni detektivka.
+
+### 6. 45min postup
+
+```text
+00-05 min: Vyber jeden servisni pristup.
+Napr. billing-sync, exportni job, partner API klic nebo monitoring token.
+
+05-12 min: Napis jednu vetu ucelu.
+Kdo muze delat co, nad cim, proc a do kdy.
+
+12-22 min: Zkontroluj prava.
+Odeber admin prava, pokud nejsou nutna. Rozdel cteni, zapis, mazani a rozsah tenantu.
+
+22-30 min: Zkontroluj tajemstvi.
+Kde je token ulozeny, kdo ho vidi, jak se rotuje, jak se revokuje.
+
+30-38 min: Zkontroluj audit.
+Je videt akce, vysledek, resource ID a request ID bez citlivych payloadu?
+
+38-45 min: Zapis offboarding.
+Kdo ucet vypne, co se stane s webhooky, exporty, dokumentaci a datovou mapou.
+```
+
+### Sablona karty servisniho uctu
+
+```text
+Nazev:
+
+Vlastnik:
+
+Ucel:
+
+Systemy:
+
+Rozsah dat:
+
+Opravneni:
+
+Token / secret ulozen v:
+
+Rotace:
+
+Revokace:
+
+Auditni zaznamy:
+
+Napojene webhooky / joby:
+
+Fallback pri vypnuti:
+
+Posledni kontrola:
+
+Datum dalsi kontroly:
+```
+
+### Checklist: servisni ucty bez sdilenych hesel
+
+- [ ] Kazdy servisni ucet ma vlastnika, ucel a popis rozsahu.
+- [ ] Neexistuje jeden sdileny admin ucet pro nesouvisejici automatizace.
+- [ ] Prava jsou navrzena od prazdne sady a odpovidaji konkretnim operacim.
+- [ ] Produkcni pristupy jsou oddelene od sandboxu a testu.
+- [ ] Tajemstvi nejsou v repozitari, chatu, wiki ani logach.
+- [ ] Tokeny maji rotaci, revokaci a technicke ID pro dohledani.
+- [ ] Audit zachycuje akci, vysledek a resource ID bez citlivych payloadu.
+- [ ] Partneri a dodavatele maji vlastni identity, ne sdileny interni ucet.
+- [ ] Offboarding integrace maze tokeny, webhooky, docasne exporty a pristupy.
+- [ ] Datova mapa a dokumentace se aktualizuji pri vzniku i vypnuti pristupu.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -13334,3 +13523,4 @@ Support kontakt:
 - 2026-08-02: Pridana prakticka priloha CSV exporty a reporty bez datoveho vysavace za 45 minut vcetne datoveho kontraktu, CSV Injection ochrany, asynchronnich exportu, UI varovani a checklistu.
 - 2026-08-02: Pridana prakticka priloha Souborove uploady a prilohy bez datove skluzavky za 60 minut vcetne ucelu uploadu, validace, metadat, retence, UI mikrocopy a checklistu.
 - 2026-08-02: Pridana prakticka priloha API dokumentace bez supportu na kazdy endpoint za 60 minut vcetne kontraktu endpointu, autentizace, chyb, prikladu, verzovani a checklistu.
+- 2026-08-02: Pridana prakticka priloha Servisni ucty a machine-to-machine pristupy bez sdilenych hesel za 45 minut vcetne scoped opravneni, tajemstvi, auditu, offboardingu a checklistu.
