@@ -13358,6 +13358,192 @@ Datum dalsi kontroly:
 
 ---
 
+## Testovaci prostredi a seed data bez kopirovani produkce za 60 minut
+
+Testovaci prostredi je misto, kde se ma bezpecne rozbit budoucnost, ne minula data zakazniku. V malem SaaS tymu ale casto vznikne rychla zkratka: "vezmeme kopii produkcni databaze, at mame realisticka data". Realisticke to je. Taky je to nejrychlejsi cesta k tomu, aby se osobni udaje, obchodni tajemstvi, access tokeny a interni poznamky prestehovaly do prostredi s horsimi pristupy, slabsi retenci a mensim dohledem.
+
+Privacy-first pravidlo je jednoduche: testuj realne scenare na nerealnych datech. Produkcni data patri do produkce, do kontrolovane obnovy nebo do presne schvalene diagnostiky s uklidem. Ne do lokalniho vyvoje jen proto, ze se nechce psat seed skript. GDPR principy minimalizace, omezeni ucelu, omezeni ulozeni a integrity a duvernosti jsou pro to prakticky filtr: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng. OWASP Authorization Cheat Sheet a Logging Cheat Sheet pak pomahaji udrzet pristupy a provozni zaznamy pod kontrolou: https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html a https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html.
+
+**Codyho komentar:** Testovaci databaze plna produkcnich emailu neni "rychlejsi QA". Je to dluh, ktery umi pockat presne do prvniho screenshotu v support chatu.
+
+### 1. Rozdel prostredi podle rizika
+
+Ne kazde neprodukcni prostredi ma stejny ucel. Kdyz vsechno oznacis jako "staging", nikdo nevi, jaka data tam smi a kdo ma pravo neco spustit.
+
+| Prostredi | Ucel | Data | Pristup |
+| --- | --- | --- | --- |
+| Lokalni vyvoj | rychla prace vyvojare | synteticka seed data | vyvojari, bez produkcnich secrets |
+| Preview / review app | kontrola konkretni zmeny | synteticka nebo anonymni fixture | tym podle potreby, kratka zivotnost |
+| Staging | integracni testy pred releasem | synteticka data podobna realnym scenarum | omezeny tym, audit dulezitych akci |
+| Demo sandbox | ukazka zakaznikovi | synteticky pribeh produktu | obchod, support, zakaznik podle role |
+| Izolovana obnova | restore test nebo incident diagnostika | produkcni zaloha jen pri schvalenem ucelu | kratkodoby pristup, prisny uklid |
+
+Minimalni pravidlo: kazde prostredi ma vlastnika, ucel, povoleny typ dat, pravidlo pristupu a pravidlo zruseni. Pokud to nejde napsat jednou vetou, prostredi je spis nahodny server s nadeji.
+
+### 2. Seed data pis jako produktovy pribeh
+
+Synteticka data nejsou nahodne `test@test.cz` a tri radky v tabulce. Dobra seed data popisuji scenare, ktere produkt potrebuje overit:
+
+- novy zakaznik pred aktivaci,
+- aktivni zakaznik s vice rolemi,
+- ucet po splatnosti,
+- import s validacnimi chybami,
+- webhook, ktery se opakuje,
+- uzivatel bez opravneni,
+- zruseny ucet s naplanovanym smazanim,
+- export s velkym objemem radku,
+- edge case s diakritikou, dlouhym nazvem a prazdnou volitelnou hodnotou.
+
+Sablona seed scenare:
+
+```text
+Nazev scenare:
+Produktovy stav:
+Proc existuje:
+Data, ktera obsahuje:
+Role a opravneni:
+Ocekavane chovani:
+Zakazane zkratky:
+Testy, ktere na nem bezi:
+```
+
+Priklad:
+
+```text
+Nazev scenare: workspace-po-splatnosti
+Produktovy stav: zakaznik ma aktivni tym, ale posledni faktura selhala
+Proc existuje: overeni billing banneru, omezeni exportu a support zpravy
+Data, ktera obsahuje: synteticke firmy, neexistujici emaily na example.test, falesne castky
+Role a opravneni: owner, finance, read-only clen
+Ocekavane chovani: owner vidi vyzvu k platbe, read-only clen nevidi billing detail
+Zakazane zkratky: zadne realne faktury, zadne realne platebni identifikatory
+Testy, ktere na nem bezi: billing UI, export prav, support handoff
+```
+
+Tohle pomaha vyvoji i obchodu. Demo pak neukazuje prazdnou aplikaci a QA nemusi prosit o produkcni kopii pokazde, kdyz se testuje slozitejsi stav.
+
+### 3. Produkcni kopie povol jen jako vyjimku
+
+Nekdy je potreba reprodukovat problem, ktery synteticka data neumely zachytit. To neznamena, ze produkcni dump smi byt vychozi nastroj. Udelej z nej schvalovanou vyjimku s presnym ucelem.
+
+Rozhodovaci filtr:
+
+- Jde problem reprodukovat na syntetickych datech?
+- Staci agregace, vzorek bez identifikatoru nebo anonymizovana kopie?
+- Ktera konkretni data jsou potreba?
+- Kdo pristup schvaluje?
+- Kde bude kopie ulozena?
+- Kdo k ni bude mit pristup?
+- Kdy se smaze?
+- Jak dolozime, ze se smazala?
+
+Stop pravidlo:
+
+```text
+Produkcnich dat se nedotykame, pokud neumime predem napsat ucel, rozsah, pristup, retenci a uklid.
+```
+
+Kdyz uz produkcni data pouzijes pro izolovanou diagnostiku, zmensi rozsah. Neber celou databazi, kdyz staci jeden tenant. Neber vsechny tabulky, kdyz staci objednavky a stav zpracovani. Neber prilohy, kdyz chyba sedi v metadatech. A hlavne: po skonceni prace nesmi zustat "docasna" kopie bez datumu smazani.
+
+### 4. Secrets a integrace oddel od zacatku
+
+Testovaci prostredi nesmi mluvit se skutecnym svetem omylem. Nejvetsi skody casto nevzniknou tim, ze staging spadne, ale tim, ze posle realny email, zavola produkcni webhook, vystavi fakturu nebo smaze data v cizi integraci.
+
+Kontroly pro neprodukcni prostredi:
+
+- vlastni databaze,
+- vlastni storage nebo bucket,
+- vlastni emailovy provider v testovacim rezimu nebo sink mailbox,
+- vlastni webhook endpointy,
+- oddelene API klice pro platby, mapy, AI, CRM a monitoring,
+- zakaz produkcnich secrets v lokalnim `.env`,
+- viditelny banner nebo hostname, ze nejde o produkci,
+- defaultni vypnuti externich notifikaci.
+
+Prakticka pojistka: vsechny neprodukcni emaily smeruj do zachytne schranky nebo povol jen whitelist adres. U webhooku pouzij testovaci endpointy a loguj jen technicky stav, ne cele payloady. U plateb pouzij test mode a zakaz sdileni produkcnich API klicu mezi prostredimi.
+
+### 5. Testovaci data maji mit vlastni retenci
+
+Seed data muzes obnovovat porad. Docasne importy, preview aplikace, testovaci exporty a incidentni kopie ne. Proto kazde prostredi potrebuje uklidovy rytmus.
+
+Navrh retence:
+
+| Typ dat | Vychozi retence | Uklid |
+| --- | --- | --- |
+| Seed fixtures v repozitari | dlouhodobe | review pri zmenach produktu |
+| Preview databaze | dny | automaticke smazani po merge nebo zavreni vetve |
+| Testovaci exporty | hodiny az dny | expirace odkazu a souboru |
+| Importni soubory ve stagingu | dny | smazani po testu |
+| Izolovana produkcni kopie | co nejkratsi vyjimka | schvaleny termin a potvrzeni smazani |
+| Demo sandbox | podle obchodniho cyklu | reset mezi zakazniky |
+
+Do pracovnich pravidel pridej vetu:
+
+```text
+Kdyz prostredi nema vlastnika a datum dalsi kontroly, nesmi obsahovat zadna zakaznicka ani osobni data.
+```
+
+Tohle zni prisne, ale setri cas. Nejhorsi uklid je ten, ktery zacne otazkou "vi nekdo, co je tahle databaze z brezna?".
+
+### 6. 60min postup
+
+```text
+0-10 min: Sepis prostredi.
+Lokalni vyvoj, preview, staging, demo, obnovovaci prostredi a jejich vlastniky.
+
+10-20 min: Oznac povolena data.
+U kazdeho prostredi napis: synteticka, anonymizovana, produkcni vyjimka, nebo zakaz.
+
+20-30 min: Najdi produkcni presahy.
+Hledej produkcni secrets, realne emaily, webhooky, platby, storage a logy.
+
+30-40 min: Navrhni seed scenare.
+Vyber tri produktove stavy, ktere nahradi potrebu produkcni kopie.
+
+40-50 min: Nastav uklid.
+Preview expirace, mazani testovacich exportu, reset sandboxu a vlastnik retence.
+
+50-60 min: Udelej jednu okamzitou opravu.
+Odeber produkcni klic ze stagingu, pridej email sink, vytvor seed kartu nebo zapis pravidlo pro produkcni vyjimky.
+```
+
+### Sablona karty prostredi
+
+```text
+Nazev prostredi:
+Ucel:
+Vlastnik:
+Kdo ma pristup:
+Povolena data:
+Zakazana data:
+Secrets a integrace:
+Emaily a notifikace:
+Webhooky:
+Logy:
+Retence:
+Reset / uklid:
+Kdy lze pouzit produkcni data:
+Schvalovatel vyjimky:
+Datum posledni kontroly:
+```
+
+### Checklist: testovaci prostredi bez kopirovani produkce
+
+- [ ] Kazde prostredi ma ucel, vlastnika a povoleny typ dat.
+- [ ] Lokalni vyvoj a preview aplikace nepouzivaji produkcni databaze.
+- [ ] Staging ma oddelene secrets, storage, webhooky, emaily a platby.
+- [ ] Produkcni kopie je vyjimka se schvalenim, rozsahem, retenci a uklidem.
+- [ ] Seed data pokryvaji realne produktove scenare, ne jen prazdny stav.
+- [ ] Demo sandbox pouziva synteticka data a reset mezi zakazniky.
+- [ ] Testovaci emaily jdou do sinku nebo jen na whitelist adres.
+- [ ] Testovaci exporty, importy a preview databaze maji expiraci.
+- [ ] Logy z testu neobsahuji tokeny, realne emaily ani cele payloady.
+- [ ] Pristup do neprodukcniho prostredi neni sirsi jen proto, ze "to neni produkce".
+- [ ] Existuje stop pravidlo pro pouziti produkcnich dat mimo produkci.
+- [ ] Datova mapa rozlisuje produkci, staging, demo a izolovanou obnovu.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -13524,3 +13710,4 @@ Datum dalsi kontroly:
 - 2026-08-02: Pridana prakticka priloha Souborove uploady a prilohy bez datove skluzavky za 60 minut vcetne ucelu uploadu, validace, metadat, retence, UI mikrocopy a checklistu.
 - 2026-08-02: Pridana prakticka priloha API dokumentace bez supportu na kazdy endpoint za 60 minut vcetne kontraktu endpointu, autentizace, chyb, prikladu, verzovani a checklistu.
 - 2026-08-02: Pridana prakticka priloha Servisni ucty a machine-to-machine pristupy bez sdilenych hesel za 45 minut vcetne scoped opravneni, tajemstvi, auditu, offboardingu a checklistu.
+- 2026-08-02: Pridana prakticka priloha Testovaci prostredi a seed data bez kopirovani produkce za 60 minut vcetne rizik prostredi, seed scenaru, produkcnich vyjimek, oddelenych secrets, retence a checklistu.
