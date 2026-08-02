@@ -11844,6 +11844,171 @@ Citliva akce se zaloguje, odmitnuta akce se zaloguje, audit nezapisuje zakazane 
 
 ---
 
+## Schvalovani citlivych admin akci bez brzdici byrokracie za 45 minut
+
+Auditni stopa rekne, co se stalo. Schvalovani citlivych admin akci ma zabranit tomu, aby se nebezpecna vec stala omylem, potichu nebo pod tlakem. Nejde o to udelat z maleho SaaS korporatni labyrint. Jde o to oddelit beznou support praci od akci, ktere mohou zmenit penize, prava, data nebo duveru zakaznika.
+
+Privacy-first tym by mel mit jednoduchou odpoved na otazku: "Ktere akce muze jeden clovek udelat sam a ktere potrebuji druhy par oci?" OWASP Authorization Cheat Sheet pripomina princip nejmensich opravneni, deny-by-default a kontrolu opravneni na kazdy request: https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html. OWASP Logging Cheat Sheet zase pomaha oddelit auditni zaznam od beznych logu: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html. Schvalovani je prakticky most mezi obojim.
+
+### 1. Rozdel akce podle dopadu
+
+Ne kazde kliknuti v adminu potrebuje schvaleni. Kdyz support upravi preklep v nazvu firmy nebo preposle odkaz na napovedu, druhy clovek by jen zdrzoval. Schvalovani patri tam, kde chyba vytvori skodu, ktera se spatne vraci zpatky.
+
+Typicke citlive akce:
+
+- zmena role na admina nebo ownera,
+- vypnuti MFA pro jineho uzivatele,
+- export zakaznickych dat,
+- hromadne mazani dat,
+- rucni zmena tarifu, limitu nebo fakturacniho stavu,
+- spusteni migrace nebo importu nad produkcnim uctem,
+- zmena webhooku nebo integrace, ktera posila data ven,
+- impersonace s moznosti zapisovat,
+- prodlouzeni trialu nebo sleva mimo bezna pravidla,
+- vypnuti bezpecnostniho omezeni kvuli jednomu pripadu.
+
+Jednoducha matice:
+
+| Dopad | Priklad | Schvaleni |
+| --- | --- | --- |
+| Nizky | oprava nazvu workspace | Bez schvaleni, auditovat podle potreby. |
+| Stredni | prodlouzeni trialu o 7 dni | Schvaleni podle role nebo pravidel. |
+| Vysoky | export osobnich dat | Povinne schvaleni a duvod. |
+| Kriticky | mazani uctu, vypnuti MFA, zmena ownera | Dva kroky, druhy schvalovatel, audit a notifikace. |
+
+Pravidlo: kdyz bys akci musel zakaznikovi vysvetlovat v incidentu, nejspis patri aspon do auditu. Kdyz by mohla zmenit pristup, penize nebo data, nejspis patri i do schvalovani.
+
+### 2. Schvalovaci karta misto volneho slibu v chatu
+
+Nejvetsi chyba je schvalovat citlive akce stylem "mrkni na to, prosim" v nahodnem chatu. Po tydnu nikdo nevi, co bylo schvaleno, kdo to schvalil a jestli se provedla stejna vec. Schvaleni musi byt strukturovane, ale kratke.
+
+Minimalni schvalovaci karta:
+
+| Pole | Priklad |
+| --- | --- |
+| `request_id` | `admreq_01K...` |
+| `requested_by` | interni ID clena tymu |
+| `requested_at` | UTC cas |
+| `account_id` | dotceny zakaznicky ucet |
+| `action` | `billing_plan_override` |
+| `reason` | `support_ticket_812`, `contract_addendum_44` |
+| `expected_effect` | tarif bude zmenen z Pro na Business |
+| `data_touched` | billing metadata, ne obsah dokumentu |
+| `risk_level` | stredni, vysoky, kriticky |
+| `approver_id` | druhy clovek nebo role |
+| `expires_at` | kdy schvaleni prestava platit |
+| `result` | approved, rejected, expired, executed |
+
+Schvaleni by nemelo byt bianco sek. Kdyz nekdo schvali "opravit ucet klienta", je to malo. Kdyz schvali "zmenit billing email u `acc_456` na zaklade ticketu `812`", je to pouzitelne.
+
+### 3. Dva typy schvaleni: pravidlo a clovek
+
+Ne vsechno musi kontrolovat clovek. Cast schvalovani jde vyresit pravidly:
+
+- Support lead muze prodlouzit trial nejvyse jednou a nejvyse o 14 dni.
+- Fakturacni role muze opravit billing email, ale ne zmenit ownera.
+- Export dat muze spustit jen owner zakaznickeho uctu nebo interni admin s overenym ticketem.
+- Hromadne mazani musi mit druhy schvalovaci krok vzdy.
+- Impersonace s write opravnenim musi expirovat po kratkem case.
+
+Kde pravidlo nestaci, pouzij cloveka. Dulezite je, aby schvalovatel nebyl stejny clovek jako zadatel a aby mel dost kontextu. Schvalovatel nepotrebuje videt cely obsah zakaznickych dat, ale musi videt ucet, akci, duvod, dopad a riziko.
+
+**Codyho komentar:** Dobre schvalovani neni "pockej, az se nekdo slitovne ozve". Je to mala brzda presne tam, kde by jinak jeden unaveny klik mohl vytvorit velky problem.
+
+### 4. UI musi brzdit omyl, ne praci
+
+Citliva admin akce ma mit jine rozhrani nez bezne ulozeni formulare. Ne kvuli dramatu, ale kvuli pozornosti. Clovek ma poznat, ze dela neco s dopadem.
+
+Prakticke prvky:
+
+- jasny nadpis akce: "Zmenit ownera workspace",
+- shrnuti dopadu pred potvrzenim,
+- pole pro duvod nebo vazbu na ticket,
+- zobrazeni dotceneho uctu a objektu,
+- potvrzeni pres presny text u kritickych akci,
+- expirace schvaleni, aby stare povoleni neslo pouzit pozdeji,
+- disabled tlacitko, dokud chybi povinne informace,
+- po provedeni jasny vysledek a odkaz na auditni zaznam.
+
+Slaby text:
+
+```text
+Opravdu chcete pokracovat?
+```
+
+Lepsi text:
+
+```text
+Menite ownera workspace "Acme EU" z uzivatele usr_123 na usr_789.
+Tato akce zmeni administracni prava a bude zapsana do auditni stopy.
+```
+
+To neni jen UX. Je to prevence incidentu.
+
+### 5. Nouzovy rezim musi byt predem popsany
+
+Obcas nastane situace, kdy cekani na druhy par oci muze skodit: bezpecnostni incident, rozbita platba, blokovany zakaznik pred kritickym terminem. Proto ma mit SaaS nouzovy rezim. Ne tajnou vyjimku. Popsany proces.
+
+Nouzovy rezim:
+
+- lze pouzit jen pro definovane typy incidentu,
+- vyzaduje duvod a casovy limit,
+- automaticky posle notifikaci odpovedne roli,
+- zapise vsechny akce do auditni stopy,
+- po skonceni vynuti kratky review zapis,
+- nesmi trvale obejit pristupova prava.
+
+Priklad:
+
+```text
+Emergency override pouzij jen kdyz produkcni incident brani zakaznikovi v zakladni praci
+nebo hrozi ztrata dat. Do 24 hodin musi probehnout review: proc byl override potreba,
+co se provedlo, jestli byla dotcena osobni data a co upravime, aby se to neopakovalo.
+```
+
+Nouzovy rezim bez review je jen administrativni zadni vchod. A zadni vchody maji zvyk rust.
+
+### 6. 45min postup
+
+```text
+00-07 min: Sepis deset nejcitlivejsich admin akci.
+Role, MFA, export, mazani, billing, import, webhooky, impersonace a slevy mimo pravidla.
+
+07-15 min: Rozdel je na nizky, stredni, vysoky a kriticky dopad.
+Ke kazde akci napis, co se stane pri chybe.
+
+15-23 min: Navrhni pravidla schvaleni.
+Kde staci role a limit, kde musi byt druhy clovek, kde musi byt emergency override.
+
+23-31 min: Vytvor schvalovaci kartu.
+Zadatel, ucet, akce, duvod, dopad, dotcena data, expirace, schvalovatel a vysledek.
+
+31-38 min: Uprav mikrocopy pro jednu kritickou akci.
+Text musi rict konkretne, co se meni a proc je to citlive.
+
+38-43 min: Napoj schvaleni na auditni stopu.
+Audit musi umet ukazat zadost, schvaleni, provedeni i odmitnuti.
+
+43-45 min: Napis dva testy a jeden provozni dotaz.
+Bez schvaleni akce neprojde. Stare schvaleni expirovalo. Kdo dela 24h review emergency override?
+```
+
+### Checklist: schvalovani citlivych admin akci
+
+- [ ] Existuje seznam admin akci podle dopadu.
+- [ ] Kriticke akce nejdou provest bez druheho kroku nebo schvaleni.
+- [ ] Zadatel a schvalovatel nejsou stejny clovek.
+- [ ] Schvaleni obsahuje ucet, akci, duvod, dopad, dotcena data a expiraci.
+- [ ] UI pred potvrzenim ukazuje konkretni dopad, ne obecnou hlasku.
+- [ ] Odmitnute, vyprsene i provedene akce se zapisuji do auditni stopy.
+- [ ] Nouzovy rezim ma jasne podminky, casovy limit a povinne review.
+- [ ] Bezne support akce nejsou zbytecne brzdene.
+- [ ] Pravidla schvalovani jsou popsana pro tym i provoz.
+- [ ] Existuji testy pro provedeni bez schvaleni, expiraci a auditni zapis.
+- [ ] Zakaznikovi lze vysvetlit, kdo citlivou akci schvalil a proc.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -11989,3 +12154,4 @@ Citliva akce se zaloguje, odmitnuta akce se zaloguje, audit nezapisuje zakazane 
 - 2026-08-02: Pridana prakticka priloha Zruseni uctu a mazani dat bez schovanych dveri za 60 minut vcetne odchodovych stavu, exportu, mazaciho jobu, subprocesoru, potvrzovacich sablon a checklistu.
 - 2026-08-02: Pridana prakticka priloha Import a migrace dat bez spinavych exportu za 60 minut vcetne importni karty, datoveho kontraktu, bezpecneho uploadu, nahledu, rollbacku a checklistu.
 - 2026-08-02: Pridana prakticka priloha Auditni stopa v adminu bez vnitrniho slideni za 60 minut vcetne auditniho kontraktu, impersonace, pristupu, retence a checklistu.
+- 2026-08-02: Pridana prakticka priloha Schvalovani citlivych admin akci bez brzdici byrokracie za 45 minut vcetne matice dopadu, schvalovaci karty, emergency override a checklistu.
