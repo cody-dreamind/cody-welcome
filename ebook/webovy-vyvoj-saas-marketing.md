@@ -10628,6 +10628,172 @@ Vyber nejvetsi riziko: chybi podpis, moc dat v payloadu, zadna idempotence, zadn
 
 ---
 
+## Feature flags a postupny rollout bez chaosu za 60 minut
+
+Feature flag je provozni vypinac pro chovani produktu. Spravne pouzity pomaha pustit zmenu male skupine lidi, vypnout problem bez celeho rollbacku a oddelit deploy od okamziku, kdy se funkce opravdu objevi zakaznikum. Spatne pouzity flag je skryta druha aplikace uvnitr aplikace: nikdo nevi, kdo co vidi, testy se mnozi a stary kod zustava v produktu jako technicky dluh s knirkem.
+
+Martin Fowleruv text o feature toggles rozlisuje mimo jine release toggles, experiment toggles, ops toggles a permissioning toggles a zaroven upozornuje, ze ruzne typy prepinacu maji jinou zivotnost a jiny provozni rezim: https://martinfowler.com/articles/feature-toggles.html. Pro maly SaaS je pointa jednoducha: flag neni hracka pro tajne funkce. Je to rozhodnuti, ktere musi mit ucel, vlastnika, test a datum uklidu.
+
+Privacy-first pohled pridava jeste jednu otazku: podle ceho vlastne rozhodujeme, kdo funkci uvidi? Pokud k tomu potrebujeme detailni profilovani, krizove sledovani nebo export uzivatelu do dalsiho nastroje, mozna rollout resi technicke riziko tak, ze vytvari datove riziko. To neni vyhra, to je jen presun problemu do jine kapsy.
+
+**Codyho komentar:** Feature flag je dobry sluha a mizerny sklad. Kdyz pres nej ridis release, parada. Kdyz pres nej roky schovavas nerozhodnost, mas v kodu male muzeum strachu.
+
+### 1. Rozlis typ flagu driv, nez ho pridas
+
+Pred kazdym novym flagem vypln malou kartu:
+
+```text
+Flag:
+Typ: release / ops / permissioning / experiment
+Ucel:
+Kdo ho muze prepnout:
+Komu se zmena zobrazi:
+Jake metriky sledujeme:
+Jaky je fallback:
+Kdy flag smazeme:
+Vlastnik:
+```
+
+Rozdil mezi typy je prakticky:
+
+| Typ flagu | Kdy dava smysl | Typicka zivotnost |
+| --- | --- | --- |
+| Release | Funkce je nasazena, ale jeste ne verejne zapnuta. | Dny az tydny. |
+| Ops | Potrebujes rychle vypnout narocnou nebo rizikovou cast systemu. | Dlouhodobe, ale malo pocetne. |
+| Permissioning | Funkce patri jen nekterym planum, rolim nebo zakaznikum. | Dlouhodobe jako soucast produktu. |
+| Experiment | Overujes variantu sdeleni, toku nebo funkce. | Kratce, s predem danou metrikou. |
+
+Nejvetsi neporadek vznikne, kdyz se release flag potichu zmeni na permissioning flag. Napriklad funkce "nova fakturace" mela byt do tydne pro vsechny, ale po trech mesicich ji ma zapnutych pet zakazniku, tri maji starou verzi a nikdo nevi proc. V tu chvili uz nemas rollout. Mas dve produktove reality.
+
+### 2. Rollout plan pis jako maly runbook
+
+Postupne zapinani ma mit kroky. Ne pocit.
+
+Sablona rollout planu:
+
+```text
+Funkce:
+Predpokladany dopad:
+Rizika:
+Skupina 0: interni test
+Skupina 1: 1-3 pratelsti zakaznici
+Skupina 2: 10-20 % vhodnych accountu
+Skupina 3: vsichni vhodni zakaznici
+Stop podminky:
+Rollback nebo vypnuti:
+Komunikace:
+Uklid flagu:
+```
+
+Stop podminky jsou dulezitejsi nez optimisticky plan. Priklady:
+
+- chybovost endpointu nad domluveny limit,
+- narust support dotazu k dane funkci,
+- nedoruceni transakcnich emailu,
+- spatne namapovana prava,
+- dotazy zakazniku na data, ktere jsme neumeli vysvetlit,
+- zmena vytvari vic rucni prace, nez slibovala usetrit.
+
+Kdyz se stop podminka naplni, nevymyslej filozofii. Vypni flag, zapis incident nebo regresi, rozhodni dalsi opravu. Feature flag ma snizit cas mezi "neco je spatne" a "zakaznik uz to neciti".
+
+### 3. Segmentace bez zbytecneho profilovani
+
+Rollout casto potrebuje vybrat skupinu uzivatelu. To ale neznamena, ze musis sbirat dalsi osobni data.
+
+Privacy-first varianty vyberu:
+
+- interni accounty,
+- konkretni zakaznici, kteri souhlasili s pilotem,
+- plan nebo role, ktere uz v produktu existuji,
+- nahodny stabilni vyber podle account ID, ne podle osobniho profilu,
+- technicka schopnost prostredi, napriklad zapnuta integrace,
+- region nebo datovy rezim jen pokud je to produktove a pravne relevantni.
+
+Co je podezrele:
+
+- posilat seznam uzivatelu do externi feature flag sluzby bez kontroly datove cesty,
+- rozhodovat podle reklamniho segmentu,
+- michat produktove flagy s marketingovym trackingem,
+- pouzivat email jako verejny identifikator ve fronte experimentu,
+- nechavat podporu rucne prepinat funkce bez auditu.
+
+Prakticky kompromis: pro vetsinu B2B SaaS staci rozhodovat na urovni accountu. Account ma plan, stav pilotu, zemi provozu, zapnute integrace a vlastnika. Jednotlivy clovek nemusi byt profilovany jen proto, aby videl novou tabulku o tyden pozdeji nez kolega.
+
+### 4. Testuj kombinace, ktere muzou bolet
+
+Kazdy flag pridava kombinace. Tri binarni flagy nejsou tri stavy, ale osm kombinaci. Kdyz se k tomu prida role, plan a integrace, mas maly labyrint. Proto netestuj vsechno naslepo. Testuj rizikove pruseciky.
+
+Minimalni test matice:
+
+| Oblast | Co overit |
+| --- | --- |
+| Vypnuto | Stary tok funguje a neukazuje nove UI napul. |
+| Zapnuto | Novy tok funguje pro cilovou skupinu. |
+| Prava | Uzivatel bez opravneni funkci nevidi ani pres primou URL. |
+| Data | Nova funkce neuklada vic dat, nez bylo popsano. |
+| Logy | Logy neobsahuji osobni udaje, tokeny ani cele payloady. |
+| Rollback | Vypnuti flagu vrati produkt do pouzitelneho stavu. |
+
+U permissioning flagu pridej test fakturace a planu. U ops flagu pridej test vykonu a degradovaneho rezimu. U experimentu pridej test, ze se varianta nezmeni pri kazdem refreshi, pokud to nema byt soucast navrhu.
+
+### 5. Uklid flagu je soucast definice hotovo
+
+Flag bez data uklidu je bud budouci incident, nebo budouci archeologie. Release flag ma zmizet, jakmile je funkce zapnuta pro vsechny vhodne zakazniky a stara cesta uz neni potreba. Experiment flag ma zmizet, jakmile existuje rozhodnuti. Ops flag muze zustat, ale musi byt popsany a viditelny v provoznim manualu.
+
+Definice hotovo pro release flag:
+
+- funkce je zapnuta pro cilovou skupinu,
+- fallback byl pouzit nebo overen,
+- support vi, co se zmenilo,
+- dokumentace a changelog jsou aktualizovane,
+- stara vetev kodu je odstranena,
+- flag je smazany z konfigurace,
+- metriky a logy neobsahuji docasne debug udaje.
+
+Uklid nenechavej na "nekdy po launchi". Po launchi prijde dalsi launch, potom zakaznicky pozadavek, potom faktury a najednou je z docasneho flagu rodinne stribro. Bez lesku, zato s velkou sentimentalni hodnotou pro nikoho.
+
+### 6. 60min postup
+
+```text
+00-08 min: Vyber jednu funkci, ktera je ted za flagem nebo ho bude potrebovat.
+Zamer se na funkci s dopadem na data, prava, billing, onboarding nebo integrace.
+
+08-18 min: Vypln kartu flagu.
+Typ, ucel, vlastnik, cilova skupina, fallback, metriky a datum uklidu.
+
+18-30 min: Napis rollout plan.
+Interni test, prvni zakaznici, sirsi zapnuti, stop podminky, komunikace a vypnuti.
+
+30-40 min: Zkontroluj segmentaci.
+Odstran identifikatory, ktere nepotrebujes. Preferuj account-level rozhodnuti.
+
+40-50 min: Navrhni test matici.
+Vypnuto, zapnuto, prava, data, logy, rollback. Pridej billing nebo integrace podle funkce.
+
+50-56 min: Naplanuj uklid.
+Vytvor konkretni ukol na odstraneni flagu, stareho kodu a docasnych logu.
+
+56-60 min: Zapis rozhodnuti.
+Bud flag pridat s runbookem, upravit existujici rollout, nebo stary flag smazat.
+```
+
+### Checklist: feature flags a rollout
+
+- [ ] Kazdy flag ma typ, ucel, vlastnika a datum dalsi kontroly.
+- [ ] Release flag ma plan odstraneni uz pri vytvoreni.
+- [ ] Rollout ma jasne skupiny a stop podminky.
+- [ ] Vypnuti flagu je rychlejsi nez rollback cele aplikace.
+- [ ] Segmentace nepouziva osobni profilovani, pokud neni nutne.
+- [ ] Externi flag sluzba neni misto, kam potichu odteka seznam uzivatelu.
+- [ ] Prava se kontroluji na backendu, ne jen skrytim UI.
+- [ ] Testy pokryvaji vypnuty stav, zapnuty stav, prava, data a rollback.
+- [ ] Logy neobsahuji docasne debug udaje po skonceni rollout faze.
+- [ ] Support a obchod vi, kdo funkci vidi a co slibit nesmi.
+- [ ] Changelog a dokumentace odpovidaji skutecne zapnutemu stavu.
+- [ ] Stare release a experiment flagy se pravidelne mazou.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -10695,6 +10861,7 @@ Vyber nejvetsi riziko: chybi podpis, moc dat v payloadu, zadna idempotence, zadn
 - MDN, Referrer-Policy header: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Referrer-Policy
 - Keep a Changelog, Version 1.1.0: https://keepachangelog.com/en/1.1.0/
 - Semantic Versioning 2.0.0: https://semver.org/
+- Martin Fowler, Feature Toggles (aka Feature Flags): https://martinfowler.com/articles/feature-toggles.html
 
 ---
 
@@ -10761,3 +10928,4 @@ Vyber nejvetsi riziko: chybi podpis, moc dat v payloadu, zadna idempotence, zadn
 - 2026-08-02: Pridana prakticka priloha Churn a odchod zakaznika bez pomsty za 45 minut vcetne exit flow, dobrovolne zpetne vazby, ferovych retention reakci a churn karty.
 - 2026-08-02: Pridana prakticka priloha API klice a tajemstvi bez lepicich papiru za 45 minut vcetne inventare secrets, pristupu, rotace, logovani, zakaznickych API klicu a checklistu.
 - 2026-08-02: Pridana prakticka priloha Webhooky a integrace bez datoveho prelivu za 60 minut vcetne datoveho kontraktu, podpisu, idempotence, retry pravidel, vypnuti integrace a checklistu.
+- 2026-08-02: Pridana prakticka priloha Feature flags a postupny rollout bez chaosu za 60 minut vcetne typu flagu, rollout runbooku, segmentace bez profilovani, test matice, uklidu a checklistu.
