@@ -10794,6 +10794,171 @@ Bud flag pridat s runbookem, upravit existujici rollout, nebo stary flag smazat.
 
 ---
 
+## Health score a QBR bez sledovani lidi za 60 minut
+
+Customer success se v malem SaaS snadno zmeni na tabulku podezreni: kdo se prihlasil, kdo klikl, kdo neklikl, kdo "vypada rizikove". Jenze dobry health score nema byt osobni dohled nad jednotlivymi lidmi. Ma byt provozni signal, jestli zakaznicky ucet dostava hodnotu, kvuli ktere plati.
+
+Privacy-first verze zacina na urovni accountu. Neptas se: "Co delal Jana vcera v 21:47?" Ptas se: "Pouziva firma hlavni hodnotovy tok, ma rozbite integrace, vyresi svoje ukoly a ozve se, kdyz neco drhne?"
+
+QBR, tedy pravidelne zhodnoceni spoluprace, potom neni prezentace s deseti grafy a firemnim ohnostrojem. Je to kratka schuzka, kde zakaznik vidi, co se zlepsilo, co brzdi hodnotu a jake dalsi rozhodnuti dava smysl.
+
+### 1. Definuj zdravi uctu podle vysledku
+
+Nejdriv napis jednu vetu:
+
+```text
+Zakaznicky ucet je zdravy, kdyz [cilovy segment] pravidelne dosahuje [hlavni vysledek] bez [kriticky problem].
+```
+
+Priklady:
+
+- U support nastroje: "Ucet je zdravy, kdyz tym vyresi vetsinu dotazu v domluvenem SLA a eskalace nejsou blokovane chybejicim kontextem."
+- U analytickeho SaaS: "Ucet je zdravy, kdyz produktovy tym pravidelne vidi aktivaci, retenci a hlavni drop-off bez exportu osobnich dat do reklamni platformy."
+- U B2B workflow nastroje: "Ucet je zdravy, kdyz kazdy tyden projdou hlavni schvalovaci tok bez rucniho dohledavani v emailech."
+
+Az potom vybirej signaly. Kdyz zacnes tim, co umis snadno merit, skoncis u vanity health score: pocet prihlaseni, pocet kliknuti a barevny status, ktery vypada chytre, ale nikomu nepomuze rozhodnout.
+
+### 2. Pouzij malo signalu, ale dobrych
+
+Zakladni health score muze mit pet oblasti:
+
+| Oblast | Signal | Privacy-first varianta |
+| --- | --- | --- |
+| Aktivace | Dokoncen hlavni setup | Account-level stav, ne osobni klikaci historie. |
+| Pouzivani | Probehl hlavni hodnotovy tok | Souhrn za ucet a obdobi. |
+| Kvalita | Chyby, selhani integraci, nedorucene emaily | Technicke eventy bez obsahu zprav. |
+| Vztah | Otevrene blokery a support tikety | Kategorie problemu, ne kompletni prepis konverzaci. |
+| Obchod | Plan, renewal datum, rozsah vyuziti | Minimalni fakturacni a smluvni udaje. |
+
+Kazdy signal musi mit akci. Pokud nevis, co udelas, kdyz signal zcervena, nedavej ho do score.
+
+Priklad:
+
+- Aktivace nedokoncena 14 dni po startu -> poslat osobni email s jednou konkretni otazkou.
+- Integrace pada treti den po sobe -> otevrit technicky incident nebo nabidnout call.
+- Hlavni tok se nepouzil 30 dni -> zeptat se, jestli se zmenil proces, vlastnik nebo priorita.
+- Support tiket ceka na nas vic nez tri pracovni dny -> eskalovat interne, ne poslat dalsi marketing.
+
+**Codyho komentar:** Health score bez navazujici akce je teplomer prilepeny na zed. Mozna vypada profesionalne, ale nemoc podle nej nevylecis.
+
+### 3. Barvy pomahaji, kdyz nejsou magie
+
+Jednoduchost je vyhoda. Pro maly SaaS staci tri stavy:
+
+- Zelena: ucet dosahuje hlavni hodnoty a nema otevrene blokery.
+- Zluta: hodnota je castecna, existuje riziko nebo chybi dalsi krok.
+- Cervena: zakaznik pravdepodobne nedostava hodnotu, nebo je blokovany technickym/procesnim problemem.
+
+Ke kazde barve pridej duvod. Ne "health 61". Napis:
+
+```text
+Status: zluta
+Duvod: hlavni integrace je zapnuta, ale posledni 2 tydny nemela zadny uspesny prenos.
+Navrzeny krok: overit s vlastnikem, zda se zmenil zdrojovy system nebo proces.
+Vlastnik: customer success
+Kontrola: pristi patek
+```
+
+Vyhni se automatickemu skore, ktere micha technicke signaly, obchodni dojem a osobni aktivitu do jednoho cisla. Kdyz uz cislo pouzijes, musi byt vysvetlitelne. Zakaznik i interni tym maji rozumet, proc status vznikl.
+
+### 4. QBR priprav jako rozhodovaci schuzku
+
+QBR nema byt galerie vseho, co produkt umi. Cilem je dohodnout dalsi nejdulezitejsi krok.
+
+Minimalni agenda:
+
+```text
+1. Co bylo cilem spoluprace?
+2. Co se povedlo dolozit?
+3. Kde je brzda hodnoty?
+4. Co zmenime na procesu, nastaveni nebo rozsahu?
+5. Kdo udela dalsi krok a do kdy?
+```
+
+Datovy balicek pro QBR:
+
+- 3 hlavni vysledky za account,
+- 1 az 3 otevrene blokery,
+- technicky stav integraci,
+- doporuceni dalsiho kroku,
+- seznam slibu z minule schuzky a jejich stav.
+
+Nepotrebujes seznam vsech uzivatelu, casy prihlaseni, klikaci mapy ani screenshoty internich dat. Pokud chces ukazat ukazku, pouzij agregovane vysledky, anonymizovany priklad nebo screenshot pripraveny primo pro prezentaci.
+
+### 5. Zapis po QBR musi byt kratky a pouzitelny
+
+Po schuzce neposilej roman. Posli zapis, podle ktereho se da pracovat:
+
+```text
+Predmet: Shrnuti QBR: [zakaznik] / [obdobi]
+
+Diky za dnesni QBR. Domluvili jsme se na techto bodech:
+
+1. Cil na dalsi obdobi:
+2. Nase ukoly:
+3. Ukoly na strane zakaznika:
+4. Rizika nebo blokery:
+5. Termin dalsi kontroly:
+
+Datova poznamka:
+Pracovali jsme se souhrnnymi account-level signaly a technickym stavem integraci.
+Nepotrebujeme doplnovat osobni aktivitu jednotlivych uzivatelu.
+```
+
+Interni zapis muze byt o neco bohatsi, ale porad disciplinovany:
+
+- rozhodnuti,
+- vlastnik,
+- datum kontroly,
+- obchodni dopad,
+- produktovy poznatek,
+- datovy dopad,
+- veci, ktere neslibovat.
+
+Prave posledni bod je v B2B SaaS zlato. Na callu se snadno slibi export, integrace, SLA nebo "to urcite pujde". Zapis "neslibovat" chrani produkt, obchod i duveru.
+
+### 6. 60min postup
+
+```text
+00-08 min: Vyber jeden typ zakaznika.
+Napr. novy zakaznik po onboardingu, account pred renewalem nebo ucet s nizkym vyuzitim.
+
+08-18 min: Napis definici zdraveho uctu.
+Jedna veta, ktera popisuje vysledek, ne aktivitu v aplikaci.
+
+18-30 min: Vyber 5 signalu.
+Aktivace, hlavni hodnotovy tok, technicka kvalita, vztah/support a obchodni kontext.
+
+30-40 min: Pridej akce ke stavum.
+Co se stane pri zelene, zlute a cervene. Kdo je vlastnik a kdy se kontroluje.
+
+40-50 min: Sestav QBR sablonu.
+Agenda, datovy balicek, rozhodnuti, dalsi krok a hranice dat.
+
+50-56 min: Zkontroluj privacy dopad.
+Odstran osobni aktivitu, kterou nepotrebujes. Preferuj account-level souhrny.
+
+56-60 min: Naplanuj prvni pouziti.
+Vyber jeden account, priprav zapis a po QBR uprav sablonu podle reality.
+```
+
+### Checklist: health score a QBR
+
+- [ ] Health score popisuje dosahovani hodnoty, ne jen frekvenci prihlaseni.
+- [ ] Vetsina signalu je na urovni accountu, ne osoby.
+- [ ] Kazdy signal ma jasnou navazujici akci.
+- [ ] Barvy nebo cisla jsou vysvetlitelne bez interni magie.
+- [ ] Technicke problemy se nemichaji s obchodnim dojmem bez popisu.
+- [ ] QBR ma jeden hlavni cil a jeden dalsi krok.
+- [ ] Prezentace nepouziva citlive screenshoty ani osobni aktivitu bez duvodu.
+- [ ] Zapis po QBR oddeluje nase ukoly, ukoly zakaznika a otevrene blokery.
+- [ ] Interni zapis obsahuje i veci, ktere neslibovat.
+- [ ] Retence QBR poznamek je rozumna a odpovida jejich ucelu.
+- [ ] Zakaznik vi, jake souhrnne signaly se pouzivaji pro zlepsovani spoluprace.
+- [ ] Health score se pravidelne cisti od signalu, podle kterych se uz nerozhoduje.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -10929,3 +11094,4 @@ Bud flag pridat s runbookem, upravit existujici rollout, nebo stary flag smazat.
 - 2026-08-02: Pridana prakticka priloha API klice a tajemstvi bez lepicich papiru za 45 minut vcetne inventare secrets, pristupu, rotace, logovani, zakaznickych API klicu a checklistu.
 - 2026-08-02: Pridana prakticka priloha Webhooky a integrace bez datoveho prelivu za 60 minut vcetne datoveho kontraktu, podpisu, idempotence, retry pravidel, vypnuti integrace a checklistu.
 - 2026-08-02: Pridana prakticka priloha Feature flags a postupny rollout bez chaosu za 60 minut vcetne typu flagu, rollout runbooku, segmentace bez profilovani, test matice, uklidu a checklistu.
+- 2026-08-02: Pridana prakticka priloha Health score a QBR bez sledovani lidi za 60 minut vcetne account-level signalu, akci podle stavu, QBR sablony, zapisu a checklistu.
