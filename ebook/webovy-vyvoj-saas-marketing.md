@@ -15480,6 +15480,173 @@ Dodavatel, duvod, datova stopa, alternativa, vlastnik, datum dalsi kontroly.
 
 ---
 
+## Stahovatelne soubory bez lead-gate pasti za 45 minut
+
+PDF checklist, cenik, srovnavaci tabulka, jednorazovy audit nebo technicky whitepaper muze byt uzitecny. Problem zacina ve chvili, kdy se z kazdeho souboru stane minove pole: skryty formular, nejasna verze, stary pricing, nepristupny scan, sledovaci redirect a soubor jmenem `final_FINAL_v7_nove.pdf`.
+
+Privacy-first pristup je jednodussi: pokud ma soubor verejnou hodnotu, dej mu vlastni URL, jasny kontext, primy odkaz a minimalni mereni. Pokud potrebujes kontakt, rekni proc. Nestav umele brany tam, kde staci dobra nabidka a moznost ozvat se.
+
+MDN u hlavicky `Content-Disposition` popisuje, ze odpoved muze byt zobrazena inline nebo nabidnuta jako stazitelna priloha, vcetne nazvu souboru: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Disposition. U odkazu v HTML existuje i `download` atribut, ale MDN upozornuje, ze prohlizec nemusi stazeni vzdy provest presne podle prani stranky: https://developer.mozilla.org/en-US/docs/Web/API/HTMLAnchorElement/download. Prakticky preklad: chovani downloadu navrhni, ale nespolihaj na nej jako na jediny navigacni model.
+
+**Codyho komentar:** Lead magnet neni magnet, kdyz z cloveka tahas firemni telefon za dvoustrankove PDF. To neni marketing. To je drobna vymena duvery za spreadsheet.
+
+### 1. HTML je vychozi format, PDF je export
+
+Pokud obsah patri na web, zacni HTML strankou. Je indexovatelna, citelna na mobilu, snadneji aktualizovatelna, dostupna pres RSS a da se prolinkovat na konkretni cast. PDF pridej jako doplnek pro tisk, sdileni mimo web, obchodni prilohu nebo offline pouziti.
+
+Dobry vzor:
+
+- Kanonicka HTML stranka obsahuje plny text nebo aspon prakticky souhrn.
+- PDF je odkazovane jako export aktualni verze.
+- Na strance je uvedeno datum posledni aktualizace.
+- Stary soubor se neprepisuje potichu, pokud na nej vedou odkazy z kampani nebo emailu.
+- PDF nema byt jedine misto, kde existuji klicove pravni, cenove nebo provozni informace.
+
+**Priklad:**
+
+Misto "Stahnete si checklist pred launchi" jako zavreny formular udelej verejnou stranku "Checklist pred launchi SaaS". Nahore dej webovou verzi checklistu, dole odkaz "Stahnout PDF pro interni poradu". Kdo chce pracovat v prohlizeci, zustane na webu. Kdo chce dokument poslat kolegovi, ma soubor. Ty nemeris deset osobnich signalu, ale porad vis, jestli stranka a PDF pomahaji.
+
+### 2. Soubor potrebuje kartu, ne jen odkaz
+
+Kazdy stahovatelny material by mel mit malou kartu v dokumentaci nebo CMS. Ne proto, aby se marketing topil v tabulkach, ale aby se soubor nestal zapomenutym slibem.
+
+```text
+Nazev materialu:
+[napr. Checklist pred launchi SaaS]
+
+Primarni URL:
+[kanonicka HTML stranka]
+
+Soubor:
+[cesta / URL / repozitar]
+
+Format:
+[HTML / PDF / CSV / XLSX / ZIP]
+
+Ucel:
+[proc existuje a komu pomaha]
+
+Obsahuje citliva data?
+[ne / synteticka / zakaznicka se souhlasem / interni]
+
+Verze a datum:
+[v1.0, 2026-08-03]
+
+Vlastnik:
+[role nebo clovek]
+
+Datum dalsi kontroly:
+[datum]
+```
+
+Karta pomaha hlavne u ceniku, security overview, DPA priloh, whitepaperu a sales decku. Tyhle materialy maji neprijemnou vlastnost: obchod je posle zakaznikovi jeste pul roku po tom, co se zmenil produkt, hosting nebo cena. Tady se rodila nejedna supportni bolest, jen mela hezke logo.
+
+### 3. Download bez sledovaciho labyrintu
+
+Stazeni souboru muze byt legitimni event. Ale nepotrebujes kvuli nemu stavet osobni profil navstevnika.
+
+Minimalni privacy-first mereni:
+
+| Otazka | Signal | Co nesbirat bez duvodu |
+| --- | --- | --- |
+| Pouziva nekdo material? | pocet kliknuti na download | osobni identita kazdeho ctenare |
+| Odkud prichazi zajem? | source group nebo UTM kampan | kompletni fingerprint prohlizece |
+| Ktery format pomaha? | klik na HTML vs PDF | scroll heatmapy treti strany |
+| Vede material k poptavce? | nasledna poptavka se zdrojem | automaticky marketingovy profil |
+
+Prakticke pravidlo: verejny checklist nech verejny. Pokud je soubor skutecne obchodni asset, muzes vedle nej nabidnout dobrovolny kontakt:
+
+```text
+Chcete k checklistu projit vlastni web?
+Napiste nam email a poslete URL. Checklist je verejny; kontakt pouzijeme jen pro odpoved.
+```
+
+Tohle je cistejsi nez povinny gate. Lide, kteri jen sbiraji informace, te nepotrebuji v CRM. Lide s realnym problemem se ozvou, kdyz nabidka sedi.
+
+### 4. Nazvy, hlavicky a cache nejsou detail
+
+Stazitelny soubor je soucast produktu. Chovej se k nemu stejne jako k verejne strance.
+
+Technicka minima:
+
+- Pouzij citelny souborovy nazev bez internich zkratek: `saas-launch-checklist-2026-08.pdf`.
+- Nastav spravny `Content-Type`.
+- U souboru, ktery ma byt stazen, nastav podle potreby `Content-Disposition: attachment; filename="..."`.
+- U souboru, ktery se muze zobrazit v prohlizeci, zvaz `inline`, ale pocitej s tim, ze prohlizece se mohou chovat odlisne.
+- Verzeuj materialy, ktere se posilaji v obchodnich emailech.
+- U ceniku a pravnich dokumentu cacheuj opatrne, aby se oprava dostala ven rychle.
+- U velkych souboru ukaz velikost, aby mobilni uzivatel vedel, do ceho jde.
+
+**Priklad odkazu:**
+
+```html
+<a href="/media/saas-launch-checklist-2026-08.pdf" download>
+  Stahnout checklist jako PDF (420 kB)
+</a>
+```
+
+A k tomu na serveru jasne hlavicky. Odkaz pomaha UX, hlavicky pomahaji konzistentnimu doruceni. Ani jedno nenahrazuje smysluplny kontext na strance.
+
+### 5. Pristupnost PDF zkontroluj pred publikaci
+
+PDF neni automaticky pristupne jen proto, ze se da otevrit. W3C uvadi PDF techniky pro WCAG, vcetne textovych alternativ, bookmarku, spravneho poradi cteni, tagovani tabulek a OCR u skenovanych dokumentu: https://www.w3.org/WAI/WCAG22/Techniques/.
+
+Zakladni kontrola:
+
+- Text jde oznacit a kopirovat, nejde jen o obrazek stranky.
+- Dokument ma smysluplny titulek.
+- Nadpisy a poradi cteni odpovidaji obsahu.
+- Obrazky maji alternativni text nebo jsou oznacene jako dekorativni.
+- Tabulky maji hlavicky a nejsou jen screenshotem.
+- Odkazy maji citelny text.
+- Kontrast a velikost textu jsou pouzitelne.
+- Existuje HTML alternativa pro lidi, kterym PDF nesedi.
+
+Pokud PDF vzniklo ze screenshotu nebo scanu, ber ho jako rizikovy. OCR muze pomoct, ale nevytvori samo dobrou strukturu dokumentu. Pro checklisty, navody a whitepapery je casto nejlepsi psat zdroj v Markdownu nebo CMS a z nej generovat HTML i PDF.
+
+### 6. 45min postup
+
+```text
+00-05 min: Vyber jeden material.
+Checklist, cenik, whitepaper, sales deck, security overview nebo PDF prilohu.
+
+05-10 min: Najdi kanonickou pravdu.
+Kde je aktualni obsah: HTML stranka, repo, CMS, cloud dokument, nebo jen PDF?
+
+10-18 min: Zkontroluj datovou stopu.
+Je soubor verejny, gated, merene stazeni, redirect, email automatizace, CRM zapis?
+
+18-25 min: Uklid soubor a URL.
+Citelny nazev, verze, velikost, primy odkaz, spravne hlavicky nebo aspon jasny download odkaz.
+
+25-33 min: Zkontroluj pristupnost.
+Text, nadpisy, poradi cteni, odkazy, alt texty, tabulky, HTML alternativa.
+
+33-40 min: Zkontroluj sliby.
+Ceny, hosting, privacy tvrzeni, screenshoty, kontakt, datum, podminky.
+
+40-45 min: Zapis kartu materialu.
+Vlastnik, datum dalsi kontroly, zdroj dat, kde se material pouziva.
+```
+
+### Checklist: stahovatelne soubory bez lead-gate pasti
+
+- [ ] Material ma jasny ucel a cilovou skupinu.
+- [ ] Existuje kanonicka HTML stranka, pokud obsah patri na web.
+- [ ] PDF je doplnek, ne jedina verze duleziteho obsahu.
+- [ ] Odkaz na soubor je primy a srozumitelny.
+- [ ] Soubor ma citelny nazev, verzi a datum.
+- [ ] U vetsich souboru je uvedena velikost.
+- [ ] Technicke hlavicky odpovidaji zamyslenemu chovani.
+- [ ] Stazeni se meri jen v rozsahu, ktery vede k rozhodnuti.
+- [ ] Verejny obsah neni zbytecne schovany za formularem.
+- [ ] Pokud formular existuje, jasne rika, proc chce data a co se stane.
+- [ ] PDF je pristupne nebo ma kvalitni HTML alternativu.
+- [ ] Material nema stary pricing, neplatny privacy slib ani realna data bez souhlasu.
+- [ ] Karta materialu ma vlastnika a datum dalsi kontroly.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -15561,6 +15728,9 @@ Dodavatel, duvod, datova stopa, alternativa, vlastnik, datum dalsi kontroly.
 - RFC 4180, Common Format and MIME Type for CSV Files: https://www.rfc-editor.org/rfc/rfc4180
 - Google Help, Email sender guidelines: https://support.google.com/mail/answer/81126
 - MDN, Referrer-Policy header: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Referrer-Policy
+- MDN, Content-Disposition header: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Disposition
+- MDN, HTMLAnchorElement download property: https://developer.mozilla.org/en-US/docs/Web/API/HTMLAnchorElement/download
+- W3C WAI, All WCAG 2.2 Techniques: https://www.w3.org/WAI/WCAG22/Techniques/
 - Keep a Changelog, Version 1.1.0: https://keepachangelog.com/en/1.1.0/
 - Semantic Versioning 2.0.0: https://semver.org/
 - Martin Fowler, Feature Toggles (aka Feature Flags): https://martinfowler.com/articles/feature-toggles.html
@@ -15664,3 +15834,4 @@ Dodavatel, duvod, datova stopa, alternativa, vlastnik, datum dalsi kontroly.
 - 2026-08-03: Pridana prakticka priloha Produktove screenshoty a demo materialy bez uniku dat za 45 minut vcetne demo datasetu, redakce citlivych casti, schvalovaci karty a checklistu.
 - 2026-08-03: Pridana prakticka priloha Obrazky, alt texty a media bez trackeru za 45 minut vcetne roli obrazku, alt textu, optimalizace, embed rizik, media karty a checklistu.
 - 2026-08-03: Pridana prakticka priloha Video a externi embedy bez neviditelneho sledovani za 45 minut vcetne dvoukrokoveho embeddu, transcriptu, iframe omezeni, datove mapy a checklistu.
+- 2026-08-03: Pridana prakticka priloha Stahovatelne soubory bez lead-gate pasti za 45 minut vcetne HTML/PDF rozhodnuti, download mereni, technickych hlavicek, pristupnosti a checklistu.
