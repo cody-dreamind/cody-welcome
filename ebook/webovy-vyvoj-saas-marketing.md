@@ -15021,6 +15021,165 @@ Kdo smi menit slugy, kdy se dela redirect a jak se kontroluje sitemap.
 
 ---
 
+## Produktove screenshoty a demo materialy bez uniku dat za 45 minut
+
+Screenshoty prodavaji lepe nez obecne sliby. Ukazuji realny tvar produktu, zmensuji nejistotu a pomahaji zakaznikovi predstavit si vlastni pouziti. Jenze screenshot je taky export dat. Casto obsahuje jmena klientu, emaily, nazvy projektu, interni poznamky, URL, fakturacni castky, casy, ID uctu nebo casti workflow, ktere by v marketingu nikdy nemely byt.
+
+Privacy-first pravidlo je jednoduche: demo material nesmi byt vedlejsi kanal pro vynaseni zakaznickeho kontextu. Pokud se screenshot objevi na webu, v prezentaci, dokumentaci, support clanku nebo pripadove studii, musi byt stejne promysleny jako formular nebo export.
+
+**Codyho komentar:** Rozmazany screenshot neni automaticky anonymizace. Casto je to jen datovy unik v mlze. Kdyz nekdo pozna firmu podle loga, barvy projektu, castky nebo poradi ukolu, rozmazal jsi spatnou vec.
+
+### 1. Rozdel materialy podle rizika
+
+Ne vsechny ukazky maji stejny dopad. Pred tvorbou si vyber rezim.
+
+| Rezim | Kde se pouzije | Datove pravidlo |
+| --- | --- | --- |
+| Verejny marketing | web, blog, socialni prispevek, katalog | jen synteticka nebo pisemne schvalena data |
+| Prodejni demo | prezentace pro konkretniho leada | synteticka data nebo zakaznikem schvaleny vyrez |
+| Support navod | znalostni baze, help centrum | synteticky priklad, zadne realne ucty |
+| Interni ladeni | issue, incident, PR | minimalni vyrez, pristupove omezeni, kratka retence |
+| Pripadova studie | web, PDF, sales deck | schvaleny obsah, citace a rozsah pouziti |
+
+Verejne materialy ber jako nevratne. Jakmile screenshot jednou projde feedem, cache, vyhledavacem nebo cizi prezentaci, uz nad nim nemas plnou kontrolu. Proto do verejne vrstvy patri data vytvorena pro ukazku, ne rychly vyrez z produkce.
+
+### 2. Vytvor demo dataset jako produktovy asset
+
+Nejlepsi ochrana je nemaskovat realna data, ale nepouzit je vubec. Demo dataset ma byt soucast produktu podobne jako logo nebo onboarding text.
+
+Dobry demo dataset:
+
+- ukazuje realne scenare, ne nahodne `Test 123`,
+- pouziva fiktivni firmy, osoby, domeny a castky,
+- neobsahuje podobnost se skutecnym zakaznikem bez duvodu,
+- ma konzistentni jazyk a ton produktu,
+- obsahuje i prazdne stavy, chyby a limity,
+- jde znovu vygenerovat po zmene UI.
+
+**Priklad syntetickych dat pro B2B follow-up SaaS:**
+
+```text
+Firma: Sever Studio s.r.o.
+Lead: Nova poptavka webove prezentace
+Stav: Nabidka odeslana
+Dalsi krok: Ozvat se ve ctvrtek
+Poznamka: Klient chce porovnat dve varianty rozsahu.
+```
+
+Je to dost konkretni, aby screenshot pusobil realne, ale neprozrazuje skutecneho klienta. Vyhni se domenam a jmenum realnych firem, pokud nemas souhlas. Pro domeny pouzij radeji rezervovane nebo vlastni demo adresy, ne nahodnou existujici firmu.
+
+### 3. Redakce neni jen rozmazani
+
+Kdyz musis pracovat s realnym screenshotem, udelej redakci jako kontrolovany proces.
+
+Co kontrolovat:
+
+- jmena lidi, firem, projektu a workspace,
+- emaily, telefony, adresy a ID,
+- URL s tokeny, query parametry nebo internimi nazvy,
+- castky, faktury, objednavky a obchodni stavy,
+- casy a datumy, podle kterych lze poznat zakaznika,
+- komentare, tasky, popisky a volne texty,
+- avatar obrazky, loga a favicony,
+- metadata souboru a nazvy exportu.
+
+Redakcni pravidlo:
+
+```text
+Nejdriv nahradit zdrojova data.
+Kdyz to nejde, vyrezat citlivou cast.
+Kdyz to nejde, prekryt nepruhlednou vrstvou.
+Kdyz to nejde, screenshot nepouzivat.
+```
+
+Rozmazani pouzij jen pro casti, ktere nejsou citlive nebo ktere nechces vizualne zvyraznit. Citlivy text prekryj nepruhledne. U videa mysli i na jednotlive snimky, titulky, kurzor, autocomplete, historii prohlizece a notifikace.
+
+### 4. Schvaleni zapis pred publikaci
+
+U kazdeho verejneho materialu si nech kratkou kartu. Neni to administrativa pro radost. Je to obrana pred vetou "kdo tohle pustil ven?"
+
+```text
+Material:
+[screenshot / video / deck / clanek / pripadova studie]
+
+Kde bude pouzit:
+[URL, prezentace, dokumentace, sales deck]
+
+Zdroj dat:
+[synteticka / zakaznicka se souhlasem / interni anonymizovana]
+
+Obsahuje osobni udaje:
+[ne / ano + jake]
+
+Obsahuje zakaznicka nebo interni data:
+[ne / ano + jake]
+
+Redakcni kroky:
+[co bylo nahrazeno, vyrezano nebo prekryto]
+
+Schvalil:
+[vlastnik produktu / zakaznik / pravni / marketing]
+
+Datum kontroly:
+```
+
+U pripadovych studii pridej jeste rozsah souhlasu: jmeno firmy, logo, citace, screenshot, metriky, doba pouziti a moznost odvolani nebo aktualizace. Neschovavej do jednoho "muzeme vas zminit" vsechno od loga po detailni provozni obrazovku.
+
+### 5. Demo materialy pravidelne uklizej
+
+Stare screenshoty umi lhat. Ukazuji neexistujici UI, stare ceny, zastarale privacy sliby nebo dodavatele, ktere uz nepouzivas. Jednou mesicne projdi verejne a obchodni materialy stejne jako URL nebo cenik.
+
+Kontroluj:
+
+- zda screenshot odpovida aktualnimu produktu,
+- zda neukazuje stary plan, cenu nebo limit,
+- zda privacy tvrzeni porad sedi na realny provoz,
+- zda odkaz vede na aktualni dokumentaci,
+- zda material nema byt archivovan nebo smazan,
+- zda decky v obchodu nepouzivaji starou verzi pravdy.
+
+Prakticke pravidlo: screenshot bez vlastnika a data kontroly je podezrely. Ne proto, ze by byl spatny, ale protoze nikdo nevi, jestli porad rika pravdu.
+
+### 6. 45min postup
+
+```text
+00-05 min: Vyber material.
+Ktery screenshot, demo deck, video nebo navod se ma publikovat nebo opravit?
+
+05-12 min: Urci rezim rizika.
+Verejny marketing, prodejni demo, support navod, interni ladeni nebo pripadova studie.
+
+12-22 min: Projdi datovy obsah.
+Jmena, firmy, emaily, castky, URL, tokeny, volne texty, metadata, loga.
+
+22-32 min: Nahrad data.
+Pouzij synteticky dataset nebo nepruhledne prekryti tam, kde nejde upravit zdroj.
+
+32-38 min: Zkontroluj kontext.
+Neprozrazuje kombinace obrazovek zakaznika, cenu, interni proces nebo verejny slib, ktery uz neplati?
+
+38-43 min: Zapis kartu materialu.
+Zdroj dat, redakce, vlastnik, misto pouziti, datum kontroly.
+
+43-45 min: Publikuj nebo vrat k oprave.
+Kdyz neni jasny souhlas nebo datovy puvod, material nejde ven.
+```
+
+### Checklist: screenshoty a demo materialy
+
+- [ ] Verejne screenshoty pouzivaji synteticka nebo pisemne schvalena data.
+- [ ] Demo dataset vypada realisticky, ale nepopisuje skutecneho zakaznika.
+- [ ] Realne screenshoty maji kontrolu jmen, emailu, firem, castek, URL a volnych textu.
+- [ ] Citlive casti jsou nahrazene nebo nepruhledne prekryte, ne jen dekorativne rozmazane.
+- [ ] Video materialy neukazuji notifikace, historii prohlizece, autocomplete ani tokeny.
+- [ ] Pripadove studie maji jasny rozsah souhlasu pro logo, citace, metriky a obrazky.
+- [ ] Kazdy verejny material ma vlastnika, misto pouziti a datum posledni kontroly.
+- [ ] Stare screenshoty v sales decku, dokumentaci a blogu se pravidelne reviduji.
+- [ ] Screenshot neobsahuje privacy nebo provozni slib, ktery uz neni pravda.
+- [ ] Pokud neni jasny puvod dat, material se nepublikuje.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -15198,3 +15357,4 @@ Kdo smi menit slugy, kdy se dela redirect a jak se kontroluje sitemap.
 - 2026-08-03: Pridana prakticka priloha Alerty a interni notifikace bez hluku za 45 minut vcetne klasifikace zprav, alert karty, datove minimalizace, priorit, testovani a checklistu.
 - 2026-08-03: Pridana prakticka priloha Mesicni uklid dat a verejnych slibu za 60 minut vcetne uklidu dat, nastroju, verejnych tvrzeni, signalu a checklistu.
 - 2026-08-03: Pridana prakticka priloha URL hygiena, presmerovani a kanonicke adresy za 45 minut vcetne inventare URL, status kodu, canonical tagu, sitemap/RSS kontroly a checklistu.
+- 2026-08-03: Pridana prakticka priloha Produktove screenshoty a demo materialy bez uniku dat za 45 minut vcetne demo datasetu, redakce citlivych casti, schvalovaci karty a checklistu.
