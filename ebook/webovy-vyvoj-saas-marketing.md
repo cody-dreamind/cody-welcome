@@ -17300,6 +17300,171 @@ Tri rozhodnuti na dalsi mesic:
 
 ---
 
+## Redakcni backlog a aktualizace obsahu bez honby za novinkami za 60 minut
+
+Obsahovy marketing po prvnich desitkach clanku casto nezabiji nedostatek napadu, ale prilis mnoho polotovaru. Nekde je rozepsany clanek, ktery uz nikdo nechce dokoncit. Jinde lezi dobry navod se zastaralym screenshotem. Vedle toho pribyvaji napady z obchodnich callu, supportu, SEO dotazu a nahlych "mohli bychom napsat neco o..." vnuknuti. Bez redakcniho backlogu se z toho stane sklizen na divoko: hodne pohybu, malo sklizne.
+
+Google ve sve dokumentaci k people-first obsahu doporucuje tvorbu, ktera pomaha lidem, pridava vlastni hodnotu a neni primarne vyrabena kvuli manipulaci vyhledavani; soucasne varuje pred psanim o trendech jen proto, ze jsou trendy, a pred zmenou data bez skutecne obsahove zmeny: https://developers.google.com/search/docs/fundamentals/creating-helpful-content. SEO starter guide pak dava smysl brat jako technicky doprovod k uzitecnemu obsahu, ne jako nahradu za jasnou odpoved: https://developers.google.com/search/docs/fundamentals/seo-starter-guide. Pro privacy-first distribuci patri mezi zaklad primarni URL a feed; RSS 2.0 specifikace popisuje kanal jako seznam polozek s odkazy, nazvy a metadaty, coz je porad solidni jednoduchy format pro odber bez platformniho zamku: https://www.rssboard.org/rss-specification.
+
+**Codyho komentar:** Redakcni kalendar neni posvatna tabulka pro disciplinovane lidi v rolacich. Je to zpusob, jak zabranit tomu, aby marketing kazdy tyden zacinal znovu od prazdne stranky a aktualni nalady.
+
+### 1. Rozdel backlog na ctyri kose
+
+Jeden seznam napadu je malo. Misi se v nem obchodni odpovedi, SEO prilezitosti, supportni dluh, produktove novinky a stare texty k oprave. Rozdel backlog podle prace, kterou ma obsah udelat.
+
+| Kos | Kdy sem napad patri | Typicky vystup | Riziko bez rizeni |
+| --- | --- | --- | --- |
+| Prodejni odpoved | Opakuje se stejna namitka nebo otazka pred nakupem | clanek, case study, srovnani, FAQ | obchod vysvetluje porad dokola to same |
+| Aktivace a support | Zakaznik se zasekava po registraci nebo v nastaveni | navod, checklist, knowledge base clanek | support supluje chybejici produktove vysvetleni |
+| Autorita a vyhledavani | Tema ma dlouhodobou poptavku a souvisi s nabidkou | hlubsi pruvodce, slovnik, prakticka priloha | web pritahuje navstevnost bez obchodniho smeru |
+| Udrzba duvery | Stary obsah obsahuje pravni, produktove nebo bezpecnostni tvrzeni | aktualizace, archivace, presmerovani | verejne sliby prestanou odpovidat realite |
+
+Kazdy napad musi mit duvod. Radek "napsat neco o AI" je jen mlha ve spreadsheetu. Radek "zakaznici se ptaji, zda muzeme pouzit AI asistenta nad jejich tickety; potrebujeme clanek o rezimech dat" uz ma vlastnika, cil a pravdepodobny dopad.
+
+### 2. U kazdeho napadu zapis rozhodovaci kartu
+
+Backlog ma byt maly a rozhodnutelny. Ke kazdemu napadu pridej kartu:
+
+```text
+Nazev:
+Kos: prodej / aktivace / autorita / udrzba
+Primarni otazka:
+Cilovy ctenar:
+Kde jsme signal videli:
+Navazujici CTA:
+Data a zdroje k overeni:
+Privacy riziko:
+Stav: napad / outline / draft / review / publikovano / aktualizovat / archivovat
+Vlastnik:
+Deadline nebo datum revize:
+```
+
+Priklad:
+
+```text
+Nazev: Jak vybrat EU analytiku pro maly SaaS
+Kos: prodej
+Primarni otazka: Jak merit produkt bez reklamniho sledovani uzivatelu?
+Cilovy ctenar: founder B2B SaaS pred prvnim launch
+Kde jsme signal videli: 3 demo cally, 2 dotazy z formulare, obsahovy report
+Navazujici CTA: 30min privacy-first audit mereni
+Data a zdroje k overeni: dokumentace vybranych nastroju, DPA, cookie rezimy
+Privacy riziko: neporovnavat nastroje podle neoverenych tvrzeni o regionech
+Stav: outline
+Vlastnik: marketing + technicky reviewer
+Deadline nebo datum revize: 2026-08-17
+```
+
+Tahle karta chrani pred dvema chybami. Prvni je psat clanek, ktery nikdo nepotrebuje. Druha je publikovat text, ktery sice dobre zni, ale obsahuje tvrzeni, ktera nikdo neoveril.
+
+### 3. Prioritizuj podle signalu, ne podle hluku
+
+Jednou tydne vyber jen par polozek. Pouzij jednoduche skore 0 az 2:
+
+| Faktor | 0 bodu | 1 bod | 2 body |
+| --- | --- | --- | --- |
+| Obchodni dopad | hezky napad | odpovida na castou otazku | odblokuje prodej nebo renewal |
+| Uzivatelska bolest | nejasna | nekdo to zminil | opakovany problem v supportu nebo callu |
+| Trvanlivost | rychla novinka | sezonne tema | dlouhodobe rozhodovaci tema |
+| Duvod k aktualizaci | zadny | drobna nepresnost | pravni, bezpecnostni nebo produktova zmena |
+| Distribuce | neni jasna | jeden kanal | primarni URL, RSS, interni odkazy, obchodni navazani |
+
+Polozky s 7 az 10 body jdou do prace. Polozky se 4 az 6 body zustanou v backlogu nebo se spoji s jinym tematem. Polozky pod 4 body smazej nebo zaparkuj bez vycitek. Backlog neni archiv vsech napadu, ktere kdy prosly kolem kafe.
+
+### 4. Aktualizace neni prepsani data v titulku
+
+Udrzba obsahu ma mit jasna pravidla. Datum posledni aktualizace zmen jen tehdy, kdyz se zmenil obsah tak, ze to pomaha ctenari: doplnil jsi novy zdroj, opravil nepresnost, prepsal postup, aktualizoval screenshot, pridal novou sablonu nebo zmenil doporuceni.
+
+U kazde aktualizace zapis:
+
+```text
+URL:
+Proc aktualizujeme:
+Co se zmenilo:
+Jake zdroje byly overeny:
+Co zustava nejiste:
+Kdo provedl review:
+Datum dalsi kontroly:
+```
+
+Prakticke pravidlo:
+
+- Pravni, bezpecnostni a privacy texty kontroluj pravidelne a po relevantni zmene regulace nebo produktu.
+- Produktove navody kontroluj po kazde vetsi zmene UI nebo workflow.
+- Marketingove landing stranky kontroluj po zmene nabidky, ceny, ciloveho segmentu nebo CTA.
+- Evergreen clanky kontroluj podle vykonu a dotazu, ne podle paniky, ze "dlouho nic nevyslo".
+- Slabe texty bez signalu nema cenu donekonecna lestit; bud je spoj, presmeruj, nebo archivuj.
+
+### 5. Archivace je normalni hygienicka prace
+
+Ne kazdy obsah si zaslouzi vecny zivot. Pokud clanek uz neodpovida nabidce, ctenari ani zdrojum, mas tri moznosti:
+
+| Situace | Akce | Poznamka |
+| --- | --- | --- |
+| Tema je stale dulezite, ale text je stary | Aktualizuj stejnou URL | Zachovas historii a odkazy. |
+| Tema se prekryva s lepsim clankem | Sluc a presmeruj | Pouzij jasne presmerovani a uprav interni odkazy. |
+| Tema uz nepatri k produktu | Archivuj nebo odindexuj podle kontextu | Vysvetli, proc text zustava jen jako archiv. |
+
+Privacy-first detail: kdyz archivujes obsah, zkontroluj i prilozeny material. Stare PDF, screenshoty a videa casto preziji dele nez samotny clanek. Prave tam se schovavaji stare nazvy zakazniku, interni URL, ukazkove emaily nebo obrazky z produkce.
+
+### 6. 60min postup
+
+```text
+00-08 min: Vytahni zdroje napadu.
+Projdi posledni obchodni dotazy, support temata, Search Console dotazy, produktove novinky a stare clanky k revizi.
+
+08-18 min: Rozdel napady do ctyr kosu.
+Prodejni odpoved, aktivace/support, autorita/vyhledavani, udrzba duvery.
+
+18-30 min: Dopln rozhodovaci karty jen u top 10 napadu.
+U zbytku staci kratky nazev nebo rovnou smazani.
+
+30-42 min: Ohodnot priority.
+Pouzij skore 0 az 2 pro obchodni dopad, bolest, trvanlivost, duvod k aktualizaci a distribuci.
+
+42-52 min: Vyber praci na dalsi tyden.
+Maximalne jeden novy clanek, jedna aktualizace a jedna distribucni/navazujici akce.
+
+52-58 min: Zapis zdroje k overeni a review vlastnika.
+U pravnich, bezpecnostnich, cenovych a produktovych tvrzeni nepublikuj bez overeni.
+
+58-60 min: Uklid backlog.
+Smaz duplicitni napady, spoj podobne polozky a nastav datum dalsi revize.
+```
+
+### Sablona redakcniho tydne
+
+```text
+Tyden:
+Hlavni obchodni tema:
+Novy obsah:
+Aktualizace:
+Distribuce:
+Interni odkazy k doplneni:
+Zdroje k overeni:
+Reviewer:
+Publikacni datum:
+Datum dalsi revize:
+Co tento tyden nebudeme delat:
+```
+
+Posledni radek je dulezity. Kdyz tym nerekne, co nebude delat, redakcni plan se nafoukne jako task manager po trech workshopech. A pak se nikomu nechce otevrit.
+
+### Checklist: redakcni backlog bez honby za novinkami
+
+- [ ] Napady jsou rozdelene na prodej, aktivaci/support, autoritu/vyhledavani a udrzbu duvery.
+- [ ] Kazdy prioritni napad ma primarni otazku, ciloveho ctenare a navazujici CTA.
+- [ ] U kazdeho textu je zapsano, kde vznikl signal.
+- [ ] Pravni, bezpecnostni, cenova a produktova tvrzeni maji pred publikaci zdroj k overeni.
+- [ ] Datum aktualizace menime jen po realne obsahove zmene.
+- [ ] Stare screenshoty, PDF a videa jsou soucasti obsahove revize.
+- [ ] Redakcni tyden obsahuje maximalne jednu hlavni novou vec a jednu udrzbu.
+- [ ] Distribuce vede na primarni URL, RSS/feed nebo prime odkazy, ne na platformni zamky.
+- [ ] Backlog se pravidelne maze, spojuje a zkracuje.
+- [ ] Kazda publikovana nebo aktualizovana vec ma datum dalsi kontroly.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -17507,3 +17672,4 @@ Tri rozhodnuti na dalsi mesic:
 - 2026-08-03: Pridana prakticka priloha Lead scoring bez invazivniho enrichmentu za 45 minut vcetne fit/zajem/nalihavost pravidel, follow-up sablon, retence a mesicniho auditu scoringu.
 - 2026-08-03: Pridana prakticka priloha Obsah pro AI vyhledavani bez GEO magie za 60 minut vcetne odpovedovych assetu, RSS/feed hygieny, AI redakcni kontroly, aktualizaci a checklistu.
 - 2026-08-03: Pridana prakticka priloha Mereni obsahoveho vykonu bez sledovani lidi za 60 minut vcetne obsahove scorecard, minimalnich eventu, Search Console/Bing kontroly, lidske atribuce a checklistu.
+- 2026-08-03: Pridana prakticka priloha Redakcni backlog a aktualizace obsahu bez honby za novinkami za 60 minut vcetne prioritizace napadu, aktualizaci, archivace, tydenni sablony a checklistu.
