@@ -17465,6 +17465,211 @@ Posledni radek je dulezity. Kdyz tym nerekne, co nebude delat, redakcni plan se 
 
 ---
 
+## Publikacni review obsahu bez brzdici byrokracie za 45 minut
+
+Dobry obsahovy proces nepotrebuje deset schvalovatelu a tri firemni ceremonie. Potrebuje ale posledni kontrolu pred tim, nez se text stane verejnym slibem. U SaaS obsahu je publikace casto vic nez marketing: muze obsahovat produktova tvrzeni, bezpecnostni sliby, pravni interpretace, screenshoty, ceny, nazvy dodavatelu, odkazy na dokumentaci a neprimo i obchodni argumenty. Jedna chyba pak umi zit v indexu, RSS cteckach, cache, archivech a sales emailech mnohem dele nez radost z rychleho publish tlacitka.
+
+Google Search Central doporucuje tvorit uzitecny, spolehlivy a people-first obsah a SEO starter guide pripomina, ze technicka optimalizace ma vyhledavacum i lidem pomoct obsah pochopit, ne zakryt slabou odpoved: https://developers.google.com/search/docs/fundamentals/creating-helpful-content a https://developers.google.com/search/docs/fundamentals/seo-starter-guide. Pro privacy-first SaaS k tomu pridej jeste jednu vrstvu: pred publikaci se ujisti, ze text zbytecne neprozrazuje data, neslibuje vic nez produkt umi a nepotrebuje sledovaci infrastrukturu jen kvuli distribuci.
+
+**Codyho komentar:** Publikacni review neni lov preklepu s vaznou tvari. Je to posledni sance zastavit vetu, ktera by za tri mesice znela jako "to jsme asi nemeli slibovat verejne".
+
+### 1. Rozdel review na pet bran
+
+Jedna dlouha kontrola se snadno zmeni v chaos. Rozdel ji na pet bran, ktere jdou projit rychle a opakovatelne.
+
+| Brana | Co hlida | Kdo typicky kontroluje |
+| --- | --- | --- |
+| Hodnota | Odpovida text na realnou otazku a vede k rozhodnuti? | autor nebo obsahovy vlastnik |
+| Presnost | Jsou fakta, ceny, nastroje a pravni tvrzeni overena? | odborny reviewer |
+| Privacy | Neutekla osobni, zakaznicka nebo interni data? | privacy nebo provozni vlastnik |
+| Technika | Ma stranka metadata, odkazy, canonical, sitemap/feed a pristupnostni minimum? | web/SEO vlastnik |
+| Distribuce | Vime, kam obsah pujde a co se bude merit? | marketing nebo obchod |
+
+U maleho tymu to muze byt jeden clovek ve dvou rolach, ale brany maji zustat oddelene. Kdyz kontrolujes najednou argumentaci, alt text, DPA tvrzeni a social post, mozek zacne odpoustet veci, ktere by v samostatne kontrole videl.
+
+### 2. Presnost: kazde tvrzeni musi mit majitele
+
+Ne vsechno v clanku potrebuje externi odkaz. Vlastni postup, zkusenost, priklad a Codyho komentar mohou stat samy o sobe, pokud jsou jasne oznacene jako nazor nebo interni doporuceni. Problem jsou tvrzeni, ktera vypadaji jako fakt:
+
+- pravni povinnosti,
+- aktualni stav nastroje nebo ceny,
+- technicke limity,
+- bezpecnostni doporuceni,
+- regulatorni terminy,
+- benchmarky a statistiky,
+- srovnani dodavatelu.
+
+Pro takova tvrzeni pouzij jednoduchou znacku v draftu:
+
+```text
+[ZDROJ] Cookie consent musi byt...
+[OVERIT] Nastroj X nabizi EU region...
+[CODY] Pro maly SaaS bych zacal...
+```
+
+Pred publikaci nesmi zustat zadne `[ZDROJ]` ani `[OVERIT]`. Bud dopln primarni zdroj, zmen tvrzeni na opatrnejsi formulaci, nebo ho vyhod. Kdyz nejde overit, nepatri do verejneho textu jako jistota.
+
+**Priklad upravy:**
+
+```text
+Slabe:
+Vetsina firem dnes prechazi na AI search a klasicke SEO konci.
+
+Lepsi:
+Vyhledavani se meni, ale Google ve sve dokumentaci popisuje optimalizaci pro generativni funkce ve vyhledavani porad jako soucast SEO, ne jako oddelenou magickou disciplinu: https://developers.google.com/search/docs/fundamentals/ai-optimization-guide
+```
+
+Prvni veta je trendova mlha. Druha dava zdroj, drzi se rozsahu a nestrasi ctenare kvuli efektu.
+
+### 3. Privacy review: text je taky datovy tok
+
+Obsah muze vynest data i bez formulare. Nejrizikovejsi jsou screenshoty, PDF, videa, ukazkove exporty, citace zakazniku, logy, konfiguracni priklady a pripadove studie. Pred publikaci projdi:
+
+- Jmena lidi, firem, domeny, emaily, ID uctu a interni URL.
+- Screenshoty s navigaci, notifikacemi, avatary, logy nebo nazvy zakazniku.
+- Priklady API requestu s tokeny, workspace ID, realnymi daty nebo internimi endpointy.
+- Citace, u kterych neni jasny souhlas a rozsah pouziti.
+- Soubory ke stazeni, ktere mohou mit metadata, historii revizi nebo skryte listy.
+- Videonahravky a embedy, ktere mohou spustit treti stranu pred souhlasem.
+
+Privacy-first oprava nemusi znamenat, ze obsah bude nudny. Pouzij synteticka data, anonymizovany scenar nebo presne popsanou situaci bez identifikatoru.
+
+```text
+Misto:
+Klient Acme s domenou acme-example.cz mel v lednu 43 neodpovezenych poptavek.
+
+Pouzij:
+Mala B2B agentura mela za mesic desitky poptavek bez dalsiho follow-upu. V pilotu jsme zacali merit jen stav poptavky, datum posledni odpovedi a dalsi krok.
+```
+
+U technickych prikladu pouzivej `example.com`, synteticke ID a jasne oznacene fiktivni hodnoty. Kdyz clanek potrebuje realne cislo nebo citaci, zapis si souhlas, kontext a datum.
+
+### 4. SEO a technicka hygiena bez trikovani
+
+SEO review je kontrola citelnosti. Ne hon na hacky.
+
+Minimalni technicka karta pred publikaci:
+
+```text
+URL:
+Title:
+Meta description:
+H1:
+Canonical:
+Open Graph title/description/image:
+Strukturovana data:
+Interni odkazy dovnitr:
+Interni odkazy ven:
+Sitemap/feed stav:
+Datum publikace:
+Datum dalsi revize:
+```
+
+Google dokumentace o strukturovanych datech rika, ze markup pomaha vyhledavacum obsah pochopit a povolit specialni zobrazeni tam, kde je markup validni a odpovida obsahu stranky: https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data. Prakticky: nepouzivej `FAQPage`, `HowTo` nebo `BlogPosting` jako dekoraci, kdyz stranka realne neobsahuje odpovidajici obsah. Schema musi sedet na text.
+
+Kontrolni otazky:
+
+- Je URL popisna a bez kampanovych parametru?
+- Je H1 jedinecny a odpovida skutecnemu slibu clanku?
+- Neopakujeme v title jen obecne slovo "kompletni pruvodce" bez konkretniho rozhodnuti?
+- Ma meta description duvod ke kliknuti, ne jen vycpavku?
+- Vedou interni odkazy na dalsi relevantni sablony, checklisty nebo produktove stranky?
+- Je canonical stejny jako primarni verejna URL?
+- Dostane se clanek do sitemap a RSS/Atom feedu?
+- Maji informacni obrazky alt text a dekorativni obrazky nezaclani cteckam?
+
+WCAG 2.2 resi mimo jine textove alternativy a praci s formularemi a chybami: https://www.w3.org/TR/WCAG22/. U obsahoveho webu to preloz do zakladu: nadpisy nejsou jen vizualni velikosti, odkazy musi davat smysl mimo kontext a obrazek, ktery nese informaci, potrebuje popis.
+
+### 5. Distribuce: publikace nekonci kliknutim na publish
+
+Pred publikaci si rekni, kam obsah pujde. Ne proto, aby se z jednoho clanku vyrobil obsahovy spam, ale aby dobra odpoved nasla lidi, kterym pomuze.
+
+Distribucni karta:
+
+```text
+Primarni URL:
+RSS/feed:
+Interni odkazy z existujicich stranek:
+Obchodni pouziti:
+Support pouziti:
+Newsletter/digest:
+Primarni social post:
+Mereni:
+Datum vyhodnoceni:
+```
+
+Privacy-first pravidla distribuce:
+
+- Primarni cil je vlastni URL, ne platformni kopie.
+- Social post ma byt ukazka a odkaz, ne plna nahrada obsahu.
+- Nepouzivej zkracovace, ktere skryvaji cil a sbiraji zbytecna data.
+- U newsletteru preferuj archiv na vlastni domene a prime odkazy.
+- UTM parametry drz na urovni kampane, ne osoby.
+- Pokud obsah slouzi obchodu, dej sales tymu jednu vetu, kdy ho posilat.
+
+**Priklad sales instrukce:**
+
+```text
+Posilej po demu, kdyz se zakaznik pta na DPA, EU hosting nebo subprocesory. Neposilej jako obecny follow-up vsem leadum.
+```
+
+Distribuce ma byt cilena podle potreby, ne podle toho, ze marketingovy kalendar zrovna vyzaduje dalsi odkaz.
+
+### 6. 45min postup
+
+```text
+00-06 min: Precti clanek jako ctenar.
+Jednou vetou zapis, komu pomaha a jake rozhodnuti po nem udela.
+
+06-14 min: Projdi presnost.
+Najdi pravni, technicka, cenova, produktova a trendova tvrzeni. Dopln primarni zdroje nebo zjemni formulaci.
+
+14-22 min: Projdi privacy rizika.
+Screenshoty, citace, priklady, soubory, videa, logy, interni URL a metadata.
+
+22-32 min: Projdi SEO a pristupnost.
+Title, description, H1, canonical, interni odkazy, strukturovana data, sitemap/feed, alt texty.
+
+32-39 min: Projdi distribuci a mereni.
+Primarni URL, RSS, digest, obchodni pouziti, minimalni eventy a datum vyhodnoceni.
+
+39-45 min: Zapis publikacni rozhodnuti.
+Publikovat / vratit k uprave / archivovat. U upravy zapis jednu konkretni blokaci, ne roman.
+```
+
+### Sablona publikacniho rozhodnuti
+
+```text
+URL nebo draft:
+Rozhodnuti: publikovat / vratit / archivovat
+Proc:
+Blokace:
+Zdroje overeny:
+Privacy kontrola:
+Technicka kontrola:
+Distribuce:
+Reviewer:
+Datum dalsi revize:
+```
+
+### Checklist: publikacni review obsahu
+
+- [ ] Text odpovida na jednu konkretni otazku a ma jasneho ctenare.
+- [ ] Vlastni nazory jsou oznacene jako Codyho komentar nebo interni pohled.
+- [ ] Pravni, technicka, cenova, produktova a trendova tvrzeni maji zdroj nebo opatrnou formulaci.
+- [ ] Screenshoty, videa, PDF a priklady neobsahuji zakaznicka ani interni data navic.
+- [ ] Citace maji souhlas a jasny kontext pouziti.
+- [ ] URL, title, meta description, H1 a canonical jsou hotove.
+- [ ] Strukturovana data odpovidaji realnemu obsahu stranky.
+- [ ] Interni odkazy vedou na relevantni souvisejici obsah nebo produktovou akci.
+- [ ] Clanek se dostane do sitemap a RSS/Atom feedu.
+- [ ] Obrazky a formulare splnuji zakladni pristupnostni kontrolu.
+- [ ] Distribuce vede na primarni URL a nepouziva zbytecne sledovaci presmerovani.
+- [ ] Mereni pouziva agregovane signaly a minimalni eventy.
+- [ ] Je zapsane datum vyhodnoceni a dalsi revize.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -17673,3 +17878,4 @@ Posledni radek je dulezity. Kdyz tym nerekne, co nebude delat, redakcni plan se 
 - 2026-08-03: Pridana prakticka priloha Obsah pro AI vyhledavani bez GEO magie za 60 minut vcetne odpovedovych assetu, RSS/feed hygieny, AI redakcni kontroly, aktualizaci a checklistu.
 - 2026-08-03: Pridana prakticka priloha Mereni obsahoveho vykonu bez sledovani lidi za 60 minut vcetne obsahove scorecard, minimalnich eventu, Search Console/Bing kontroly, lidske atribuce a checklistu.
 - 2026-08-03: Pridana prakticka priloha Redakcni backlog a aktualizace obsahu bez honby za novinkami za 60 minut vcetne prioritizace napadu, aktualizaci, archivace, tydenni sablony a checklistu.
+- 2026-08-03: Pridana prakticka priloha Publikacni review obsahu bez brzdici byrokracie za 45 minut vcetne bran review, kontroly zdroju, privacy rizik, SEO hygieny, distribuce a checklistu.
