@@ -16766,6 +16766,169 @@ Smazat pole, upravit text, vypnout webhook, zkratit retenci nebo opravit chybu.
 
 ---
 
+## Lead scoring bez invazivniho enrichmentu za 45 minut
+
+Kvalifikace leadu ma pomoct obchodu rozhodnout, komu se ozvat driv a jakou odpoved poslat. Nema z kazde poptavky vyrobit soukromy dossier. U maleho B2B SaaS casto staci par vysvetlitelnych signalu: typ problemu, segment, casova nalihavost, fit s nabidkou a kvalita dalsiho kroku. Zbytek je casto jen datovy hlad prevleceny za "sales intelligence".
+
+GDPR v clanku 5 znovu pripomina minimalizaci dat a omezeni ucelu: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng. U profilovani a automatizovaneho rozhodovani EDPB/WP29 pokyny vysvetluji, ze profilovani muze vzniknout i z kombinace osobnich dat pro vyhodnoceni nebo predikci chovani, preferenci a zajmu: https://www.edpb.europa.eu/documents/guideline/guidelines-automated-individual-decision-making-and-profiling-regulation-2016679_en. Prakticky preklad: kdyz lead automaticky hodnotis, segmentujes nebo radis podle osobnich signalu, musis vedet proc, z ceho, s jakym dopadem a jak to cloveku vysvetlis.
+
+**Codyho komentar:** Skore leadu neni kristalova koule. Je to prioritizacni pomucka. Jakmile se podle nej zacnou zavirat dvere bez lidske kontroly, prestava to byt pomucka a zacina to byt produktove riziko v obleku.
+
+### 1. Rozlis fit, zajem a nalihavost
+
+Jedno cislo umi vypadat chytre, ale casto schova tri ruzne veci:
+
+- fit: jestli lead patri do ciloveho segmentu,
+- zajem: jestli clovek udelal akci, ktera ukazuje realnou poptavku,
+- nalihavost: jestli problem potrebuje resit ted.
+
+Lepsi nez `score = 87` je mala karta:
+
+```text
+Fit: vysoky
+Zajem: stredni
+Nalihavost: neznama
+Dalsi krok: poslat 3 otazky pred demem
+Proc: segment sedi, popis problemu je konkretni, ale chybi termin rozhodnuti
+```
+
+Tahle karta se da zkontrolovat. Cislo bez vysvetleni ne.
+
+### 2. Pouzij jen signaly, ktere umi ovlivnit odpoved
+
+Kazdy signal musi mit praci. Pokud podle nej neposilas jinou odpoved, nenastavuj jinou prioritu ani nemenis nabidku, signal nepotrebujes.
+
+| Signal | Dobra prace | Spatna prace |
+| --- | --- | --- |
+| Typ problemu | Vybrat relevantni odpoved nebo case study. | Stavet osobni profil zajmu. |
+| Segment firmy | Rozlisit, jestli produkt sedi. | Automaticky vyloucit male firmy bez kontroly. |
+| Casovy horizont | Rozhodnout rychlost follow-upu. | Tlak pres falesnou urgentnost. |
+| Zdroj poptavky | Vyhodnotit kvalitu kanalu. | Sledovat cloveka napric weby. |
+| Velikost tymu | Navrhnout spravny onboarding. | Dohadovat rozpocet bez kontextu. |
+
+Enrichment z externich databazi ber jako vyjimku, ne default. Pred zapnutim si odpovez:
+
+- Jaky konkretni obchodni krok bude diky enrichingu lepsi?
+- Je zdroj dat duveryhodny, aktualni a legalne pouzitelny?
+- Umi dodavatel dolozit roli, region, DPA a retenci?
+- Jak clovek zjisti, ze jsme data doplnili z jineho zdroje?
+- Co se stane, kdyz enrichment vypneme?
+
+Kdyz odpovedi nejsou jasne, zustan u dat, ktera clovek sam poskytl, a u agregovanych kampanovych signalu.
+
+### 3. Nastav skore jako pravidla, ne jako tajny soud
+
+Pro maly tym staci vysvetlitelny scoring:
+
+```text
+Fit:
+- vysoky: cilovy segment, problem sedi na nabidku
+- stredni: segment sedi, problem je sirsi nebo nejasny
+- nizky: mimo segment nebo mimo aktualni produkt
+
+Zajem:
+- vysoky: poptavka obsahuje konkretni problem a termin
+- stredni: klik na demo nebo odpoved na kampan bez detailu
+- nizky: obecny dotaz bez dalsiho kontextu
+
+Nalihavost:
+- vysoka: dopad probiha ted nebo ma pevny deadline
+- stredni: problem se opakuje, ale neni termin
+- neznama: chybi casovy kontext
+```
+
+Automatizace muze navrhnout stav, ale clovek ma mit moznost ho opravit. U leadu s nizkym fitem neposilej ticho. Posli kratkou odpoved, doporuc alternativu nebo slusne rekni, proc ted nepokracujete. Privacy-first marketing neni jen o datech. Je i o tom, ze cloveka nezamknes do cernych der CRM.
+
+### 4. Follow-up podle stavu, ne podle natlaku
+
+Lead scoring ma zlepsit relevanci odpovedi.
+
+```text
+Vysoky fit, vysoka nalihavost:
+Predmet: Navrh dalsiho kroku k [problem]
+
+Diky za konkretni popis. Podle toho, co pisete, dava smysl kratky call nad jednim workflow: [workflow].
+Navrhuji 20 minut, kde overime rozsah, data, ktera by se zpracovavala, a prvni meritelny vystup.
+
+Stredni fit, nejasna nalihavost:
+Predmet: Dve otazky pred demem
+
+Diky za zajem. Nez posleme demo, pomuze mi upresnit:
+1. Kdy jste tento problem resili naposledy?
+2. Co se stane, kdyz zustane dalsi mesic stejne?
+
+Nizky fit:
+Predmet: K vasemu dotazu
+
+Diky za zpravu. Podle popisu to ted neni nejlepsi fit pro nas produkt, protoze se soustredime na [segment/problem].
+At neztracite cas, doporucil bych spis [typ reseni nebo dalsi krok].
+```
+
+Co neposilat:
+
+- "Videli jsme, ze jste byl trikrat na pricingu." Pusobi to jako sledovani, protoze to sledovani je.
+- "Mate posledni sanci." Pokud neni skutecna, je to past.
+- Automaticky seriovy follow-up kazdy den bez ohledu na odpoved.
+- Personalizaci z dat, ktera clovek neceka, ze mate.
+
+### 5. Retence a audit scoringu
+
+Lead scoring se musi uklizet stejne jako kampanove exporty.
+
+Minimalni pravidla:
+
+- Surove signaly z formulare drz jen po dobu obchodniho ucelu.
+- Odvozene skore ukladej s duvodem, ne jen cislem.
+- Stare skore pravidelne prepocitej nebo archivuj, protoze kontext starnouciho leadu se meni.
+- Pokud lead odmitne marketing nebo pozada o smazani, scoring se musi propsat do stejneho uklidu.
+- Citlive nebo prekvapive signaly nepouzivej pro prioritizaci bez jasneho pravniho a produktoveho duvodu.
+
+Jednou mesicne projdi deset nahodnych leadu a odpovez:
+
+- Rozumime, proc maji dany stav?
+- Pouzili jsme jen data, ktera bychom umeli vysvetlit?
+- Poslali jsme relevantni odpoved?
+- Drzime data dele, nez je potreba?
+- Nevylucuje pravidlo systematicky segment, ktery by si zaslouzil lidskou kontrolu?
+
+### 6. 45min postup
+
+```text
+00-06 min: Vyber jeden vstup leadu.
+Demo formular, pilot, audit, webinar, partner referral nebo odpoved na kampan.
+
+06-14 min: Rozdel signaly na fit, zajem a nalihavost.
+Pouzij jen data z formulare, kampanoveho zdroje a vlastni obchodni komunikace.
+
+14-22 min: Smaz nebo zakaz jeden signal bez prace.
+Typicky externi enrichment, osobni detail v URL, prilis jemne chovani na webu nebo nepouzivane pole.
+
+22-30 min: Napis vysvetlitelna pravidla.
+Vysoky/stredni/nizky fit, zajem a nalihavost vcetne duvodu.
+
+30-38 min: Priprav tri follow-up sablony.
+Vysoky fit, nejasny fit, nizky fit. Bez natlaku a bez prekvapive personalizace.
+
+38-45 min: Nastav uklid.
+Retence surovych signalu, audit deseti leadu mesicne, vlastnik scoringu a datum revize.
+```
+
+### Checklist: lead scoring bez invazivniho enrichmentu
+
+- [ ] Skore rozlisuje fit, zajem a nalihavost.
+- [ ] Kazdy signal ma jasnou praci v odpovedi nebo prioritizaci.
+- [ ] Nepouzivam externi enrichment bez dolozeneho ucelu, zdroje, DPA, regionu a retence.
+- [ ] UTM, referral a webove signaly neslouzi ke skrytemu osobnimu profilu.
+- [ ] Automatizace navrhuje stav, ale clovek ho muze opravit.
+- [ ] Lead s nizkym fitem nedostane ticho, ale slusnou odpoved nebo alternativu.
+- [ ] Follow-up nepouziva prekvapive osobni detaily.
+- [ ] Odvozene skore ma ulozeny duvod, ne jen cislo.
+- [ ] Surove signaly maji omezenou retenci.
+- [ ] Odvolani, smazani nebo uzavreni leadu se propise i do scoringu.
+- [ ] Jednou mesicne kontroluji vzorek leadu a dopad pravidel.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -16780,6 +16943,7 @@ Smazat pole, upravit text, vypnout webhook, zkratit retenci nebo opravit chybu.
 - Directive (EU) 2022/2555, NIS2 Directive, EUR-Lex: https://eur-lex.europa.eu/eli/dir/2022/2555/oj/eng
 - ENISA, Cybersecurity guide for SMEs - 12 steps to securing your business: https://www.enisa.europa.eu/publications/cybersecurity-guide-for-smes
 - EDPB Guidelines 05/2020 on consent under Regulation 2016/679: https://www.edpb.europa.eu/documents/guideline/guidelines-052020-on-consent-under-regulation-2016679_en
+- EDPB/WP29 Guidelines on automated individual decision-making and profiling under Regulation 2016/679: https://www.edpb.europa.eu/documents/guideline/guidelines-automated-individual-decision-making-and-profiling-regulation-2016679_en
 - EDPB Guidelines 03/2022 on deceptive design patterns in social media platform interfaces: https://www.edpb.europa.eu/documents/guideline/guidelines-032022-on-deceptive-design-patterns-in-social-media-platform_en
 - European Commission, Unfair commercial practices directive: https://commission.europa.eu/law/law-topic/consumer-protection-law/unfair-commercial-practices-and-price-indication/unfair-commercial-practices-directive_en
 - European Commission, Price Indication Directive: https://commission.europa.eu/law/law-topic/consumer-protection-law/unfair-commercial-practices-and-price-indication/price-indication-directive_en
@@ -16962,3 +17126,4 @@ Smazat pole, upravit text, vypnout webhook, zkratit retenci nebo opravit chybu.
 - 2026-08-03: Pridana prakticka priloha Consent log a audit preferenci bez datoveho skladu za 60 minut vcetne rozliseni souhlasu, preference centra, importu historickych kontaktu, auditu a checklistu.
 - 2026-08-03: Pridana prakticka priloha Marketingovy datovy inventar bez prekvapeni za 45 minut vcetne kampanove karty, UTM pravidel, uklidu po kampani a checklistu.
 - 2026-08-03: Pridana prakticka priloha Formularovy tok bez zbytecnych poli za 60 minut vcetne trideni poli, mikrotextu, pristupne validace, datove cesty a checklistu.
+- 2026-08-03: Pridana prakticka priloha Lead scoring bez invazivniho enrichmentu za 45 minut vcetne fit/zajem/nalihavost pravidel, follow-up sablon, retence a mesicniho auditu scoringu.
