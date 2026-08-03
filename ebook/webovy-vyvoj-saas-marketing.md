@@ -17149,6 +17149,157 @@ Datum revize, vlastnik, signaly pro aktualizaci a jedna veta changelogu.
 
 ---
 
+## Mereni obsahoveho vykonu bez sledovani lidi za 60 minut
+
+Obsahovy marketing se da pokazit dvema zpusoby. Prvni je nemerit nic a spolehat na pocit, ze clanek "mel dobry vibe". Druhy je merit vsechno na urovni osoby a pak z obsahu udelat jen dalsi sledovaci trychtyr. Privacy-first cesta je skromnejsi a praktictejsi: merit vykon stranky, dotazu, kanalu a obchodniho navazani, ale nevyrabet osobni profily ctenaru.
+
+Google Search Console ma Performance report pro vyhledavani, kde se pracuje mimo jine s kliky, zobrazenimi, CTR a pozici ve vysledcich. Definice techto metrik Google popisuje v dokumentaci Search Console: https://support.google.com/webmasters/answer/7042828?hl=en a samotny Performance report shrnuje zde: https://support.google.com/webmasters/answer/7576553?hl=en. Bing Webmaster Tools nabizi URL inspection pro kontrolu crawl, indexace, SEO a markup detailu konkretni URL: https://www.bing.com/webmasters/help/url-inspection-55a30305. Pro vlastni webovou analytiku muzes merit pageviews a vlastni eventy treba v Umami; dokumentace k eventum je tady: https://docs.umami.is/docs/track-events.
+
+**Codyho komentar:** Cilem neni dokazat, ze kazdy clanek neco "konvertuje". Cilem je poznat, ktere texty pomahaji lidem udelat rozhodnuti, a ktere jen zabiraji misto v sitemap jako zapomenuty hrnek v zasedacce.
+
+### 1. Nejdriv oddel tri typy signalu
+
+Jeden clanek muze mit vic roli. Kdyz vsechno meris jednou metrikou, zacnes trestat obsah, ktery dela jinou praci.
+
+Rozdel signaly takhle:
+
+| Typ signalu | Co meri | Priklad metriky | Co z toho rozhodnes |
+| --- | --- | --- | --- |
+| Vyhledavaci signal | Jestli je stranka nalezitelna | impressions, clicks, CTR, query | Upravit title, nadpisy, odpoved, interni odkazy |
+| Uzivatelsky signal | Jestli stranka vede k dalsimu kroku | CTA click, scroll k checklistu, download sablony | Zlepsit strukturu, priklad, CTA nebo format |
+| Obchodni signal | Jestli obsah pomaha prodeji | kvalifikovany lead s referenci na clanek, demo dotaz, reply | Napsat navazujici clanek, case study nebo prodejni material |
+
+Nejvetsi chyba je delat z obchodniho signalu osobni sledovani. Kdyz nekdo napise "Ctu vas clanek o DPA, muzeme to probrat?", nepotrebujes vedet, ktere tri odstavce cetl pred tydnem v mobilu. Potrebujes vedet, ze tema DPA pritahuje relevantni poptavky a ze clanek ma byt udrzovany.
+
+### 2. Vytvor obsahovy scorecard, ne dashboard pro ozdobu
+
+Pro kazdy dulezity clanek si udelej jednoduchou kartu. Jedna radka ve spreadsheetu staci. Nepotrebujes BI projekt.
+
+```text
+URL:
+Tema:
+Primarni otazka:
+Typ obsahu: navod / checklist / srovnani / vysvetleni / sablona
+Cilova persona:
+Primarni CTA:
+Zdrojovy kanal:
+Vyhledavaci signal:
+Uzivatelsky signal:
+Obchodni signal:
+Posledni aktualizace:
+Dalsi rozhodnuti:
+```
+
+Priklad:
+
+```text
+URL: /blog/dpa-subprocesori-saas
+Tema: DPA a subprocesori
+Primarni otazka: Co ma maly SaaS ukazat zakaznikovi pred podpisem DPA?
+Typ obsahu: checklist
+Cilova persona: B2B SaaS founder nebo ops lead
+Primarni CTA: Domluvit 30min privacy-first audit
+Zdrojovy kanal: organic search, direct, newsletter archiv
+Vyhledavaci signal: roste impressions na "subprocesori saas"
+Uzivatelsky signal: 6 kliknuti na audit CTA za mesic
+Obchodni signal: 2 kvalifikovane poptavky zminuji clanek
+Posledni aktualizace: 2026-08-03
+Dalsi rozhodnuti: doplnit sablonu seznamu subprocesoru
+```
+
+Scorecard ma mit rozhodnuti, ne jen cisla. Kdyz u radku neni dalsi akce, nejspis sledujes metriku jen proto, ze existuje.
+
+### 3. Mer eventy bez osobnich vlastnosti
+
+U obsahoveho webu typicky staci malo eventu:
+
+| Event | Kdy vznikne | Povinne vlastnosti | Zakazane vlastnosti |
+| --- | --- | --- | --- |
+| `content_cta_click` | Klik na hlavni CTA v clanku | `slug`, `cta_id` | email, jmeno, firma |
+| `template_download` | Klik na sablonu nebo PDF | `slug`, `asset_id` | query s osobnim tokenem |
+| `rss_link_click` | Klik na RSS/Atom odkaz | `page_type` | identifikator uzivatele |
+| `toc_jump` | Skok na sekci v dlouhem navodu | `slug`, `section_id` | session poznamky |
+| `form_submit_success` | Uspesne odeslani navazujiciho formulare | `form_id`, `source_slug` | cele telo formulare |
+
+Nazvy eventu maji byt stabilni a nudne. "Kliknul_na_super_modry_button_vpravo" je vtipne presne jednou, pak boli reporty. V Umami lze eventy posilat pres `data-umami-event` nebo JavaScript, ale i tam plati stejne pravidlo: neposilej do event dat osobni udaje, kdyz k rozhodnuti staci slug a typ akce.
+
+### 4. Search Console ber jako mapu poptavky, ne jako realtime radar
+
+Search Console ukazuje, na jake dotazy a stranky web ziskava zobrazeni a kliky ve vyhledavani. Prakticky pouziti:
+
+- Stranka ma hodne zobrazeni a nizke CTR: uprav title, description a prvni odpoved.
+- Stranka ma dotazy mimo zamysleny problem: pridej presnejsi uvod nebo vytvor samostatny clanek.
+- Stranka ma kliky, ale zadne dalsi akce: zkontroluj, jestli CTA navazuje na realny zamer ctenare.
+- Stranka roste na citlivem nebo pravnim tematu: pridej datum aktualizace, primarni zdroje a vlastnika revize.
+- Stranka pada po aktualizaci: projdi zmeny titulku, interni odkazy, canonical, status kody a indexaci.
+
+Nedelej z toho hodinove mackani refresh. U obsahu dava vetsi smysl tydenni nebo mesicni rytmus. Vyjimka je migrace webu, launch noveho obsahu nebo podezreni na technickou chybu.
+
+### 5. Obchodni attribution udelej lidsky
+
+Privacy-first attribution muze byt jednoducha:
+
+- Do kontaktniho formulare pridej volitelne pole "Co vas k nam privedlo?".
+- V CRM nebo lead evidenci nech jedno pole `source_note`, kam obchodnik zapise zminenou stranku nebo tema.
+- U kampani pouzij UTM na urovni kampane, ne osobni identifikatory.
+- U newsletteru preferuj odpovedi, kliky na vlastni URL a archiv, ne sledovani kazdeho otevreni.
+- Jednou mesicne projdi vyhrane a ztracene leady a zapis, ktery obsah pomohl rozhodnuti.
+
+Tohle nebude dokonale atribucni divadlo. Bude to ale pouzitelne, vysvetlitelne a mnohem mene krehke nez snaha spojit kazdeho cloveka pres pet nastroju.
+
+### 6. 60min postup
+
+```text
+00-08 min: Vyber 5 az 10 dulezitych obsahovych URL.
+Zacni strankami, ktere maji obchodni nebo duverovy vyznam.
+
+08-18 min: Dopln scorecard.
+U kazde URL zapis personu, otazku, CTA, zdrojovy kanal a vlastnika.
+
+18-30 min: Zkontroluj vyhledavaci signaly.
+Search Console: impressions, clicks, CTR, dotazy a stranky. U Bing zkontroluj aspon URL inspection u prioritnich URL.
+
+30-40 min: Zkontroluj webove eventy.
+CTA, downloady, formular, RSS/linky. Eventy nech agregovane podle URL a akce.
+
+40-50 min: Dopln obchodni signal.
+Projdi posledni leady, demo poznamky a odpovedi. Zapis jen tema nebo URL, ne osobni historii cteni.
+
+50-58 min: Vyber tri rozhodnuti.
+Jedna aktualizace obsahu, jedna technicka oprava, jedna distribucni akce.
+
+58-60 min: Zapis datum dalsi revize.
+Bez terminu se z mereni stane jen dalsi tabulka, ktera ti bude vycitat existenci.
+```
+
+### Sablona mesicniho obsahoveho reportu
+
+```text
+Obdobi:
+Top 3 stranky podle obchodniho prinosu:
+Top 3 stranky podle vyhledavaci poptavky:
+Stranky k aktualizaci:
+Technicke problemy:
+Obsahove mezery:
+Co prestaneme merit:
+Tri rozhodnuti na dalsi mesic:
+```
+
+### Checklist: mereni obsahoveho vykonu bez sledovani lidi
+
+- [ ] U kazde dulezite URL vim, jakou otazku ma zodpovedet.
+- [ ] Vyhledavaci, uzivatelske a obchodni signaly jsou oddelene.
+- [ ] Eventy neobsahuji email, jmeno, firmu ani volny text od uzivatele.
+- [ ] UTM parametry neobsahuji osobni ani citlive informace.
+- [ ] Search Console pouzivam pro dotazy, CTR a technicke signaly, ne jako realtime stresometr.
+- [ ] Bing URL inspection pouzivam u prioritnich nebo problemovych URL.
+- [ ] Obchodni attribution se opira o dobrovolnou odpoved nebo rucni poznamku.
+- [ ] Mesicni report konci rozhodnutim, ne jen screenshotem grafu.
+- [ ] U pravnich, bezpecnostnich a produktovych clanku je datum posledni aktualizace.
+- [ ] Existuje seznam signalu, ktere schvalene nesbirame.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -17205,6 +17356,8 @@ Datum revize, vlastnik, signaly pro aktualizaci a jedna veta changelogu.
 - Google Search Central, Creating helpful, reliable, people-first content: https://developers.google.com/search/docs/fundamentals/creating-helpful-content
 - Google Search Central, Google's guidance on generative AI content on your website: https://developers.google.com/search/docs/fundamentals/using-gen-ai-content
 - Google Search Central, Optimizing your website for generative AI features on Google Search: https://developers.google.com/search/docs/fundamentals/ai-optimization-guide
+- Google Search Console Help, Performance report: https://support.google.com/webmasters/answer/7576553?hl=en
+- Google Search Console Help, Impressions, position, and clicks: https://support.google.com/webmasters/answer/7042828?hl=en
 - Google Search Central, Video SEO best practices: https://developers.google.com/search/docs/appearance/video
 - Google Search Central, Redirects and Google Search: https://developers.google.com/search/docs/crawling-indexing/301-redirects
 - Google Search Central, How to specify a canonical URL: https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls
@@ -17226,6 +17379,7 @@ Datum revize, vlastnik, signaly pro aktualizaci a jedna veta changelogu.
 - Schema.org, BlogPosting: https://schema.org/BlogPosting
 - CNIL, Use analytics on your websites and applications: https://www.cnil.fr/en/sheet-ndeg16-use-analytics-your-websites-and-applications
 - Umami, FAQ: https://umami.is/docs/faq
+- Umami, Track events: https://docs.umami.is/docs/track-events
 - Plausible Analytics, Data Policy: https://plausible.io/data-policy
 - Matomo, Use Matomo without consent or cookie banner: https://matomo.org/faq/new-to-piwik/how-do-i-use-matomo-analytics-without-consent-or-cookie-banner/
 - RFC 7208, Sender Policy Framework (SPF): https://datatracker.ietf.org/doc/html/rfc7208
@@ -17248,6 +17402,7 @@ Datum revize, vlastnik, signaly pro aktualizaci a jedna veta changelogu.
 - OpenSSF Scorecard: https://scorecard.dev/
 - CISA Known Exploited Vulnerabilities Catalog: https://www.cisa.gov/known-exploited-vulnerabilities-catalog
 - NIST SP 800-218, Secure Software Development Framework (SSDF) Version 1.1: https://csrc.nist.gov/pubs/sp/800/218/final
+- Bing Webmaster Tools, URL Inspection: https://www.bing.com/webmasters/help/url-inspection-55a30305
 
 ---
 
@@ -17351,3 +17506,4 @@ Datum revize, vlastnik, signaly pro aktualizaci a jedna veta changelogu.
 - 2026-08-03: Pridana prakticka priloha Formularovy tok bez zbytecnych poli za 60 minut vcetne trideni poli, mikrotextu, pristupne validace, datove cesty a checklistu.
 - 2026-08-03: Pridana prakticka priloha Lead scoring bez invazivniho enrichmentu za 45 minut vcetne fit/zajem/nalihavost pravidel, follow-up sablon, retence a mesicniho auditu scoringu.
 - 2026-08-03: Pridana prakticka priloha Obsah pro AI vyhledavani bez GEO magie za 60 minut vcetne odpovedovych assetu, RSS/feed hygieny, AI redakcni kontroly, aktualizaci a checklistu.
+- 2026-08-03: Pridana prakticka priloha Mereni obsahoveho vykonu bez sledovani lidi za 60 minut vcetne obsahove scorecard, minimalnich eventu, Search Console/Bing kontroly, lidske atribuce a checklistu.
