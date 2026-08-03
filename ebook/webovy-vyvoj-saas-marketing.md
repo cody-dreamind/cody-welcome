@@ -15647,6 +15647,185 @@ Vlastnik, datum dalsi kontroly, zdroj dat, kde se material pouziva.
 
 ---
 
+## Newsletter a produktovy digest bez platformniho zamku za 45 minut
+
+Newsletter umi byt dobry primarni kanal, ale jen pokud neni postaveny jako mala sledovaci tovarna. Pro SaaS je casto lepsi mluvit o "produktovem digestu": kratke pravidelne zprave, ktera shrnuje uzitecne novinky, navody, provozni zmeny a dalsi kroky. Nejde o kazdodenni lov pozornosti. Jde o spolehlivy vztah s lidmi, kteri chteji dostavat konkretni hodnotu.
+
+Privacy-first pravidlo je jednoduche: obsah ma zit na vlastni domene, email ma byt pohodlny kanal odberu a odhlaseni ma byt stejne normalni jako prihlaseni. Kdyz se z newsletteru stane black box v cizi platforme, kde nevis, kdo co sleduje, jak dlouho drzi data a kam posila eventy, ztracis presne tu kontrolu, kterou Dreamind nechce obetovat kvuli hezkemu grafu otevreni.
+
+RSS a email se nemaji prat. RSS je idealni verejny zdroj bez platformniho zamku. Email je vhodny pro lidi, kteri chteji doruceni do inboxu. Dobry system umi mit oboji: verejny archiv a feed jako kanonickou pravdu, email jako distribuci.
+
+### 1. Nejdrive urci typ zpravy
+
+Ne vsechno patri do jednoho seznamu. Kdyz smichas produktove novinky, obchodni kampane, security oznameni a blog do jedne hromady, preference prestanou davat smysl.
+
+Rozdel zpravy minimalne takto:
+
+| Typ zpravy | Priklad | Odhlaseni |
+| --- | --- | --- |
+| Produktovy digest | Mesicni souhrn navodu, zmen a novych clanku | Ano, samostatna preference. |
+| Marketingova nabidka | Pozvanka na webinar, audit, pilot nebo novy balicek | Ano, samostatna preference. |
+| Transakcni zprava | Reset hesla, faktura, potvrzeni akce | Ne jako marketing, ale musi byt vecna a nezbytna. |
+| Servisni oznameni | Incident, planovana udrzba, dulezita zmena podminek | Podle povahy vztahu a smlouvy, ne jako bezny newsletter. |
+
+Zakladni chyba je posilat vsechno v rezimu "protoze mame email". Emailova adresa neni univerzalni povolenka. Je to kontakt pro konkretni ucel.
+
+**Codyho komentar:** Kdyz neumis rict, proc konkretni clovek dostava konkretni zpravu, pravdepodobne neposilas newsletter. Posilas firemni nervozitu ve formatu HTML.
+
+### 2. Vlastni archiv je misto pravdy
+
+Kazdy digest by mel mit verejnou nebo aspon stabilni webovou verzi. Email potom nemusi nest cely vesmir. Staci kratky uvod, odkazy a jasne CTA.
+
+Minimalni struktura:
+
+- webova verze digestu na vlastni domene,
+- RSS/Atom feed pro verejne polozky,
+- emailova verze s odkazy na kanonicke URL,
+- odkaz na preference a odhlaseni v kazdem marketingovem emailu,
+- interni karta, ktera rika, komu a proc se zprava posila.
+
+**Priklad weboveho archivu:**
+
+```text
+/novinky/2026-08-digest
+Title: Srpnovy digest: privacy-first onboarding, exporty a screenshoty
+Obsah:
+- 3 nove prakticke navody
+- 1 produktova zmena
+- 1 provozni poznamka
+- odkazy na zdrojove clanky
+- CTA: domluvit 20min audit onboardingoveho toku
+```
+
+Kdyz nekdo preposle email kolegovi, kolega se dostane na verejnou URL, ne do rozbiteho sledovaciho redirectu. Kdyz nekdo pouziva RSS, dostane stejnou hodnotu bez inboxu. To je maly detail, ktery dela kanal odolnejsi.
+
+### 3. Sbirani kontaktu bez obchodni mlhy
+
+Prihlaseni k digestu ma byt oddelene od poptavky, trialu a stazeni materialu. Pokud clovek chce checklist, neznamena to automaticky, ze chce kazdy tyden obchodni email. Pokud chce obchodni call, neznamena to automaticky, ze chce produktove novinky.
+
+Dobry prihlasovaci formular:
+
+- rika, co bude chodit,
+- rika, jak casto to typicky bude,
+- neslibuje "zadny spam" jako nahradu za konkretni popis,
+- nepouziva predzaskrtnuty souhlas,
+- uklada jen email a pripadne jazyk nebo segment, pokud ho opravdu pouzijes,
+- potvrdi prihlaseni a ukaze, kde lze zmenit preference.
+
+**Priklad mikrotextu:**
+
+```text
+Jednou mesicne poslu prakticky digest o SaaS, webu a privacy-first provozu v Evrope. Email pouziju jen pro tento odber. Odhlaseni je v kazde zprave.
+```
+
+Pokud potrebujes segmentaci, zacni jednoduse:
+
+| Segment | Proc ho sbirat | Kdy ho nesbirat |
+| --- | --- | --- |
+| Jazyk | Posilas ceskou a anglickou verzi. | Mas jen jednu jazykovou verzi. |
+| Role | Posilas jine priklady pro founder/marketing/dev. | Obsah je stejny pro vsechny. |
+| Zakaznik vs. nezakaznik | Oddelis produktove novinky od verejneho marketingu. | Nemuzes segment udrzovat aktualni. |
+
+Segmentace ma slouzit lepsimu obsahu, ne tajnemu bodovani lidi. Kdyz parametr nepouzijes pro lepsi zpravu, je to jen datovy suvenyr.
+
+### 4. Mereni: mene eventu, vice odpovedi
+
+Newsletterove platformy radi ukazuji opens, kliky, geografii, zarizeni a nekdy i chovani jednotlivcu. Pro maly SaaS vetsinou staci mene.
+
+Privacy-first merici plan:
+
+| Otazka | Signal | Akce |
+| --- | --- | --- |
+| Ma digest smysl? | Odpovedi, forwardy, kliky na hlavni odkazy | Pokracovat nebo zmenit format. |
+| Pomaha prodeji? | Relevantni poptavky po vydani | Pridat clanek do obchodni knihovny. |
+| Je obsah moc siroky? | Malo kliknuti na vsechny odkazy, zadne odpovedi | Zuzit tema dalsiho vydani. |
+| Je frekvence moc vysoka? | Odhlaseni po serii emailu | Snizit frekvenci nebo zlepsit preference. |
+| Chybi duvera? | Odpovedi na data, DPA, hosting, export | Pridat trust blok nebo samostatnou stranku. |
+
+Oteviranost emailu ber opatrne. Kvuli proxy, blokovani obrazku a mail klientum je to signal s omezenou presnosti. Lepsi je sledovat klik na dalsi krok, odpoved, kvalitu leadu a to, jestli se obsah pouziva v obchodnim nebo supportnim procesu.
+
+RFC 8058 popisuje one-click odhlaseni pres emailove hlavicky `List-Unsubscribe` a `List-Unsubscribe-Post`: https://datatracker.ietf.org/doc/html/rfc8058. Prakticky preklad: odhlaseni nema byt detektivni hra. U marketingovych zprav patri viditelny odkaz do tela emailu a technicke odhlasovaci hlavicky tam, kde je system umi korektne obslouzit.
+
+### 5. Emailovy nastroj vybirej podle datove cesty
+
+Nastroj na newsletter nevybirej jen podle editoru sablon. Vyber ho podle toho, jak zachazi s daty a jak dobre zapadne do evropskeho provozu.
+
+Kontrolni otazky:
+
+- Kde jsou ulozene kontakty a eventy?
+- Lze zvolit EU region nebo self-hosted provoz?
+- Existuje DPA a seznam subprocesoru?
+- Lze vypnout nebo omezit tracking otevreni a kliknuti?
+- Jak funguje export a smazani kontaktu?
+- Da se spravovat vice preferenci misto jednoho vseobecneho seznamu?
+- Podporuje technicke odhlasovaci hlavicky a jasne unsubscribe odkazy?
+- Co se stane s daty po ukonceni sluzby?
+
+U maleho tymu muze byt rozumna i jednoducha varianta: vlastni seznam kontaktu v CRM, verejny RSS archiv a rucne nebo polorucne posilany mesicni digest pres transakcne vhodny emailovy system. Neni to maximalne automatizovane, ale je to citelne. Automatizaci pridej az ve chvili, kdy setri praci bez toho, aby zatemnila datovou cestu.
+
+### 6. 45min postup
+
+```text
+00-05 min: Vyber jeden typ digestu.
+Produktove novinky, blogovy souhrn, edukacni serial nebo zakaznicky update.
+
+05-10 min: Napis slib odberu.
+Co bude chodit, komu, jak casto a proc to ma hodnotu.
+
+10-17 min: Navrhni datovy kontrakt.
+Jake udaje sbiras, kde lezi, kdo k nim ma pristup, kdy se mazou.
+
+17-25 min: Udelej preference.
+Oddel marketing, produktovy digest a nezbytne servisni zpravy.
+
+25-32 min: Priprav sablonu vydani.
+Webova URL jako kanonicka pravda, email jako kratka distribuce.
+
+32-38 min: Nastav mereni.
+Kliky na hlavni odkazy, odpovedi, relevantni leady, odhlaseni.
+
+38-43 min: Zkontroluj odhlaseni.
+Viditelny link, preference centrum, technicke hlavicky, zadne zahanbovani.
+
+43-45 min: Zapis vlastnika a dalsi revizi.
+Kdo seznam spravuje, kdy se kontroluje retence a nepouzivane segmenty.
+```
+
+### Sablona digest karty
+
+```text
+Nazev digestu:
+Komu chodi:
+Proc existuje:
+Frekvence:
+Kanonicka URL archivu:
+Zdroj kontaktu:
+Kategorie zpravy:
+Preference/odhlaseni:
+Sbira se:
+Nesbira se:
+Metriky:
+Vlastnik:
+Datum dalsi kontroly:
+```
+
+### Checklist: newsletter bez platformniho zamku
+
+- [ ] Digest ma jasny ucel, frekvenci a cilovou skupinu.
+- [ ] Verejny obsah ma kanonickou URL na vlastni domene.
+- [ ] RSS/Atom zustava dostupny pro lidi, kteri nechteji email.
+- [ ] Marketingovy odber je oddeleny od transakcnich a servisnich zprav.
+- [ ] Souhlas neni predzaskrtnuty ani schovany v jinem formulari.
+- [ ] Formular sbira jen email a nezbytne preference.
+- [ ] Kazda zprava ma jasny odkaz na odhlaseni nebo preference.
+- [ ] Nastroj ma zkontrolovanou datovou cestu, DPA, region a subprocesory.
+- [ ] Tracking otevreni a kliknuti je omezeny na skutecne potrebne signaly.
+- [ ] Emailove eventy se nepropojuji s reklamnim profilem.
+- [ ] Seznam kontaktu ma vlastnika, retenci a pravidelny uklid.
+- [ ] Odhlaseni se respektuje bez rucniho support ticketu.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -15835,3 +16014,4 @@ Vlastnik, datum dalsi kontroly, zdroj dat, kde se material pouziva.
 - 2026-08-03: Pridana prakticka priloha Obrazky, alt texty a media bez trackeru za 45 minut vcetne roli obrazku, alt textu, optimalizace, embed rizik, media karty a checklistu.
 - 2026-08-03: Pridana prakticka priloha Video a externi embedy bez neviditelneho sledovani za 45 minut vcetne dvoukrokoveho embeddu, transcriptu, iframe omezeni, datove mapy a checklistu.
 - 2026-08-03: Pridana prakticka priloha Stahovatelne soubory bez lead-gate pasti za 45 minut vcetne HTML/PDF rozhodnuti, download mereni, technickych hlavicek, pristupnosti a checklistu.
+- 2026-08-03: Pridana prakticka priloha Newsletter a produktovy digest bez platformniho zamku za 45 minut vcetne typu zprav, archivu na vlastni domene, sbirani kontaktu, mereni, vyberu nastroje a checklistu.
