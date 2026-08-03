@@ -16929,6 +16929,226 @@ Retence surovych signalu, audit deseti leadu mesicne, vlastnik scoringu a datum 
 
 ---
 
+## Obsah pro AI vyhledavani bez GEO magie za 60 minut
+
+Vyhledavani se meni, ale zakladni disciplina zustava prekvapive stejna: mit vlastni URL, jasne odpovedi, overitelne informace, technicky citelny web a obsah, ktery opravdu pomaha cloveku s rozhodnutim. Kdyz nekdo slibuje tajny recept na "GEO" nebo "AEO", zpozorni. Google ve sve dokumentaci k optimalizaci pro generativni AI ve vyhledavani rika, ze pro Google Search je optimalizace pro generativni vyhledavani porad SEO, ne oddelena sada magickych souboru a hacku: https://developers.google.com/search/docs/fundamentals/ai-optimization-guide
+
+To je dobra zprava pro privacy-first SaaS. Nemusis pridavat dalsi sledovaci vrstvu, nakupovat pochybne zminky ani generovat tuny textu, ktery vypada jako odpoved, ale nic neresi. Potrebujes lepsi informacni architekturu, presnejsi obsah a distribuci pres kanaly, ktere mas pod kontrolou.
+
+Google Search Central zaroven dlouhodobe doporucuje tvorit uzitecny, spolehlivy a people-first obsah, ne obsah psany primarne pro vyhledavac: https://developers.google.com/search/docs/fundamentals/creating-helpful-content. U AI generovaneho obsahu Google zduraznuje presnost, kvalitu a relevanci vcetne metadat, strukturovanych dat a alt textu: https://developers.google.com/search/docs/fundamentals/using-gen-ai-content
+
+**Codyho komentar:** Nejlepsi "AI SEO" pro maly SaaS je odpovedet na otazku zakaznika lip nez deset recyklovanych clanku pred tebou. Zadna kosmicka veda. Jen mene mlhy a vic skutecne prace.
+
+### 1. Zacni od rozhodovacich otazek
+
+AI odpovedi, klasicke vysledky vyhledavani i lidske sdileni maji jednu spolecnou vec: povrchove clanky rychle starnou. Proto pro obsahovy plan nepouzivej jen klicova slova. Pouzij rozhodovaci otazky, ktere clovek resi pred nakupem, implementaci nebo zmenou dodavatele.
+
+Pro SaaS typicky funguje techto sest typu otazek:
+
+| Typ otazky | Priklad | Dobra odpoved obsahuje |
+| --- | --- | --- |
+| Problem | Proc nam pada aktivace po registraci? | Symptomy, mozne priciny, prvni test. |
+| Rozhodnuti | Mame stavet vlastni analytiku, nebo pouzit nastroj? | Varianty, kompromisy, rozhodovaci pravidlo. |
+| Implementace | Jak nastavit consent log? | Kroky, schema dat, validacni checklist. |
+| Riziko | Co se muze pokazit pri externim embeddu? | Datova cesta, technicke riziko, fallback. |
+| Nakup | Na co se ptat dodavatele pred DPA? | Konkretni otazky, cervene vlajky, vystup. |
+| Udrzba | Jak casto kontrolovat subprocesory? | Rytmus, vlastnik, sablona zapisu. |
+
+Prakticky postup:
+
+- Vezmi poslednich 20 dotazu z obchodu, supportu, emailu nebo callu.
+- Prepis je do prirozene reci zakaznika.
+- Sluc duplicity, ale nezhlazuj jazyk do korporatni omacky.
+- U kazde otazky dopis, jake rozhodnuti ma clovek po precteni udelat.
+- Vyber jednu otazku, kde mas vlastni zkusenost, priklad nebo sablonu.
+
+Slaby clanek:
+
+```text
+10 trendu v SaaS marketingu pro rok 2026
+```
+
+Lepsi clanek:
+
+```text
+Jak merit kampan bez reklamniho pixelu: UTM pravidla, lead kvalita a privacy-first vyhodnoceni
+```
+
+Ten druhy nadpis slibuje konkretni rozhodnuti a vystup. Ma vetsi sanci pomoct cloveku, a tim i vyhledavaci, RSS cteckam, newsletter archivu a internimu sales tymu.
+
+### 2. Udelej z clanku odpovedovy asset
+
+Odpovedovy asset neni jen blogpost. Je to verejna URL, ktera umi byt:
+
+- odkaz v emailu po demu,
+- interni argument pro obchodnika,
+- zdroj pro support,
+- vysledek ve vyhledavani,
+- polozka v RSS,
+- reference v dokumentaci,
+- zaklad pro kratky social post bez kopirovani celeho obsahu.
+
+Struktura dobreho odpovedoveho assetu:
+
+```text
+Title:
+Jasne tema, ne slovni mlha.
+
+Shrnuti:
+3-5 vet, komu text pomuze a jake rozhodnuti po nem udela.
+
+Kdy to resit:
+Situace, symptomy, typ firmy.
+
+Rozhodovaci pravidlo:
+Jak poznat dobrou variantu.
+
+Postup:
+Kroky v poradku, ve kterem je jde udelat.
+
+Priklad:
+Realisticky, anonymizovany nebo synteticky.
+
+Checklist:
+Kontrola pred publikaci nebo implementaci.
+
+Zdroje:
+Primarni odkazy pro fakta, pravidla, standardy nebo dokumentaci.
+```
+
+Pro AI vyhledavani i klasicke SEO je dulezite, aby stranka nebyla jen sbirka tvrzeni. Google SEO starter guide popisuje SEO jako pomoc vyhledavacum pochopit obsah a lidem rozhodnout se, zda stranku navstivi: https://developers.google.com/search/docs/fundamentals/seo-starter-guide. Prakticky preklad: pis tak, aby bylo jasne, co stranka pokryva, pro koho je, co je vlastni zkusenost a co je zdrojovane tvrzeni.
+
+### 3. Nepis pro robota, ale mysli na strojovou citelnost
+
+Strojova citelnost neni spam. Je to slusna hygiena:
+
+- jeden hlavni titul,
+- logicka hierarchie nadpisu,
+- popisne URL,
+- meta title a description,
+- canonical URL,
+- citelne tabulky,
+- alt text u obrazku, ktere nesou informaci,
+- strukturovana data tam, kde odpovidaji realnemu obsahu,
+- sitemap a RSS nebo Atom feed.
+
+RSS je porad silny privacy-first kanal, protoze umoznuje lidem sledovat obsah bez platformniho algoritmu a bez nutnosti predat email. RSS Advisory Board popisuje RSS 2.0 jako format pro syndikaci weboveho obsahu: https://www.rssboard.org/rss-specification. Atom je standardizovany alternativni feed format v RFC 4287: https://www.rfc-editor.org/rfc/rfc4287
+
+Pro maly SaaS staci:
+
+- `/blog/slug-clanku/` jako primarni URL,
+- `/rss.xml` nebo `/feed.xml`,
+- viditelny odkaz na RSS v paticce nebo u blogu,
+- stejny canonical odkaz v HTML i v sitemap,
+- feed polozka s titulkem, URL, datem aktualizace a kratkym popisem,
+- zadne zkracovace a sledovaci presmerovani jako povinna cesta.
+
+**Priklad dobre URL:**
+
+```text
+/blog/mereni-kampane-bez-reklamniho-pixelu/
+```
+
+**Priklad URL, ktera si koleduje o uklid:**
+
+```text
+/blog/post?id=123&utm_source=nav&utm_medium=card&ref=homepage
+```
+
+UTM patri do kampanoveho odkazu, ne do kanonicke adresy obsahu.
+
+### 4. AI asistenta pouzij jako redaktora, ne jako autora bez brzd
+
+AI muze pomoct s osnovou, kontrolou duplicity, navrhem titulku nebo prepisem support odpovedi do clanku. Nesmi ale byt duvodem, proc publikujes text bez vlastni odpovednosti. U obsahu pro evropsky SaaS je riziko hlavne ve trech mistech:
+
+- AI vymysli fakt, zdroj nebo neexistujici benchmark.
+- Do promptu vlozis zakaznicka data, ktera tam nemaji byt.
+- Text zni spravne, ale neobsahuje zadny vlastni priklad ani rozhodovaci pravidlo.
+
+Pravidla pro AI asistenta v obsahu:
+
+- Do promptu nedavej osobni data zakazniku, interni smlouvy ani neverejne incidenty.
+- Pro fakta, pravni povinnosti, ceny, nastroje a aktualni trendy vzdy vyzadej zdroje a over je.
+- Nech AI navrhnout varianty, ale finalni tvrzeni podepis clovek nebo jasne oznac Codyho komentar.
+- Genericky odstavec nahrad prikladem z produktu, sablonou nebo checklistem.
+- U kazdeho clanku si poloz otazku: "Co tady ctenar dostane, co nedostane v prumerne odpovedi z chatu?"
+
+Slaby AI vystup:
+
+```text
+Firmy by mely dbat na soukromi, protoze duvera je dulezita.
+```
+
+Lepsi vystup po redakci:
+
+```text
+Pred pridanim noveho support widgetu zkontroluj tri veci: jestli se chat spousti pred souhlasem, zda posila IP adresu a URL do treti strany, a jak dlouho dodavatel drzi transcript. Vystupem ma byt jedna radka v datove mape, ne pocit, ze "support je vyreseny".
+```
+
+### 5. Aktualizace obsahu je produktovy proces
+
+U SaaS obsahu nestaci publikovat a zapomenout. Clanky o cenach, nastrojich, pravnich povinnostech, bezpecnosti, API nebo SEO starnou. Proto kazdy dulezity asset potrebuje udrzbu.
+
+Prakticky audit jednou mesicne:
+
+- Najdi 10 nejnavstevovanejsich nebo obchodne nejpouzivanejsich clanku.
+- U kazdeho zkontroluj datum posledni aktualizace.
+- Otestuj vsechny primarni odkazy.
+- Zkontroluj, zda verejne sliby stale odpovidaji realnemu produktu.
+- Dopln zmeny ve zdrojich, pokud se opiras o pravidla nebo dokumentaci.
+- Zkontroluj, zda clanek neobsahuje zbytecne embedy nebo zastarale tracking parametry.
+- Uprav interni odkazy na novejsi sablony, checklisty nebo dokumentaci.
+
+Kdyz clanek aktualizujes, priznej to:
+
+```text
+Aktualizovano 2026-08-03: Doplnili jsme cast o AI vyhledavani podle aktualni dokumentace Google Search Central a pridali kontrolu RSS/feed distribuce.
+```
+
+Tohle je male, ale buduje duveru. U technickeho obsahu je datum casto soucast hodnoty.
+
+### 6. 60min postup
+
+```text
+00-08 min: Vyber jednu rozhodovaci otazku.
+Pouzij realny dotaz z obchodu, supportu, dema nebo interniho auditu.
+
+08-15 min: Napis slib stranky.
+Komu pomuze, jake rozhodnuti udela a co po precteni vznikne.
+
+15-25 min: Navrhni odpovedovy asset.
+Shrnuti, kdy to resit, rozhodovaci pravidlo, postup, priklad, checklist.
+
+25-35 min: Over zdroje.
+Google/Search/docs pro SEO, primarni standardy, regulator nebo dokumentace nastroje.
+
+35-45 min: Udelej strojovou hygienu.
+Title, description, nadpisy, canonical, interni odkazy, sitemap/feed, alt texty.
+
+45-52 min: Odstran datove pasti.
+Embedy, tracking presmerovani, zbytecne formulare, lead-gate tam, kde staci verejna URL.
+
+52-60 min: Naplanuj udrzbu.
+Datum revize, vlastnik, signaly pro aktualizaci a jedna veta changelogu.
+```
+
+### Checklist: obsah pro AI vyhledavani bez GEO magie
+
+- [ ] Clanek odpovida na jednu konkretni rozhodovaci otazku.
+- [ ] Je jasne, pro koho obsah je a kdy ho pouzit.
+- [ ] Obsah obsahuje vlastni priklad, sablonu, checklist nebo rozhodovaci pravidlo.
+- [ ] Fakta, pravidla, trendy a nastroje maji primarni zdroje.
+- [ ] AI generovane casti prosly lidskou kontrolou presnosti a relevance.
+- [ ] Do AI promptu nesla zakaznicka ani jina citliva data.
+- [ ] Stranka ma title, description, popisnou URL a logickou hierarchii nadpisu.
+- [ ] Canonical URL, sitemap a RSS/Atom feed ukazuji na primarni adresu.
+- [ ] Obsah nevyzaduje platformni prihlaseni, aby byl citelny.
+- [ ] Nejsou tu povinne zkracovace, social embedy ani tracking presmerovani.
+- [ ] Datum aktualizace je viditelne u obsahu, ktery muze zastarat.
+- [ ] Existuje vlastnik a termin dalsi revize.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -16982,6 +17202,9 @@ Retence surovych signalu, audit deseti leadu mesicne, vlastnik scoringu a datum 
 - W3C, Web Content Accessibility Guidelines 2.2: https://www.w3.org/TR/WCAG22/
 - W3C WAI, Making Audio and Video Media Accessible: https://www.w3.org/WAI/media/av/
 - Google Search Central, SEO Starter Guide: https://developers.google.com/search/docs/fundamentals/seo-starter-guide
+- Google Search Central, Creating helpful, reliable, people-first content: https://developers.google.com/search/docs/fundamentals/creating-helpful-content
+- Google Search Central, Google's guidance on generative AI content on your website: https://developers.google.com/search/docs/fundamentals/using-gen-ai-content
+- Google Search Central, Optimizing your website for generative AI features on Google Search: https://developers.google.com/search/docs/fundamentals/ai-optimization-guide
 - Google Search Central, Video SEO best practices: https://developers.google.com/search/docs/appearance/video
 - Google Search Central, Redirects and Google Search: https://developers.google.com/search/docs/crawling-indexing/301-redirects
 - Google Search Central, How to specify a canonical URL: https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls
@@ -17127,3 +17350,4 @@ Retence surovych signalu, audit deseti leadu mesicne, vlastnik scoringu a datum 
 - 2026-08-03: Pridana prakticka priloha Marketingovy datovy inventar bez prekvapeni za 45 minut vcetne kampanove karty, UTM pravidel, uklidu po kampani a checklistu.
 - 2026-08-03: Pridana prakticka priloha Formularovy tok bez zbytecnych poli za 60 minut vcetne trideni poli, mikrotextu, pristupne validace, datove cesty a checklistu.
 - 2026-08-03: Pridana prakticka priloha Lead scoring bez invazivniho enrichmentu za 45 minut vcetne fit/zajem/nalihavost pravidel, follow-up sablon, retence a mesicniho auditu scoringu.
+- 2026-08-03: Pridana prakticka priloha Obsah pro AI vyhledavani bez GEO magie za 60 minut vcetne odpovedovych assetu, RSS/feed hygieny, AI redakcni kontroly, aktualizaci a checklistu.
