@@ -14537,6 +14537,162 @@ Verze textu:
 
 ---
 
+## Alerty a interni notifikace bez hluku za 45 minut
+
+Alert je slib, ze nekdo udela akci. Notifikace je informace, ktera muze byt uzitecna. Report je prehled pro pozdejsi rozhodnuti. Kdyz se tyhle tri veci smichaji do jednoho kanalu, tym se behem mesice nauci vse ignorovat. Pak prijde skutecny incident a nejdulezitejsi zprava vypada stejne jako "novy lead z testovaci kampane". Skvele, postavili jsme pozarni alarm, ktery cinka i pri vareni caje.
+
+Privacy-first pohled je tady jednoduchy: interni zpravy nesmi byt skryty export osobnich nebo zakaznickych dat. Chat, email, push notifikace a incident nastroj nejsou odpadkove potrubi pro cele requesty, tokeny, zpravy z formularu, fakturacni udaje nebo screenshoty s produkcnimi daty. Maji poslat minimum kontextu, spravnemu cloveku, se spravnou prioritou a odkazem do systemu, kde jsou data chranena.
+
+OWASP Top 10 2025 uvadi Security Logging & Alerting Failures jako kategorii A09 a zduraznuje, ze logy bez alertingu maji malou hodnotu pro odhaleni incidentu: https://owasp.org/Top10/2025/A09_2025-Security_Logging_and_Alerting_Failures/. OWASP Logging Cheat Sheet zaroven doporucuje opatrne resit, co se do logu uklada a co se z nich ma vyloucit, hlavne u citlivych dat: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html. Prakticky preklad: alerty maji byt akcni, ale datove hubene.
+
+### 1. Nejdriv pojmenuj typ zpravy
+
+Nez napojis novy webhook do chatu, rozdel zpravy do ctyr kosu:
+
+| Typ | Kdy se posila | Reakce |
+| --- | --- | --- |
+| Emergency alert | Dopad na dostupnost, data, autentizaci, platby nebo bezpecnost | Nekdo okamzite vlastni reseni. |
+| Operacni alert | Hrozi problem, ale sluzba jeste funguje | Vlastnik resi v pracovnim rytmu podle priority. |
+| Obchodni notifikace | Prisla relevantni poptavka, platba, renewal nebo churn signal | Obchod nebo success udela dalsi krok. |
+| Report | Souhrn za den, tyden nebo kampan | Nikdo nereaguje hned, pouziva se pro rozhodnuti. |
+
+Jedno pravidlo: emergency kanal nesmi nest zpravy, ktere nevyzaduji rychlou lidskou reakci. Jakmile tam jednou zacne chodit "denni navstevnost blogu", kanal je mrtvy. Mozna jeste dycha, ale jen proto, ze ho nikdo nema odvahu archivovat.
+
+### 2. Alert karta misto volne vety v chatu
+
+Kazdy alert by mel mit stejnou strukturu. Ne proto, ze milujeme formularovou estetiku, ale protoze ve stresu je konzistence levna inteligence.
+
+Minimalni alert karta:
+
+```text
+Nazev: [kratky problem]
+Priorita: P1 / P2 / P3
+Dopad: [koho se to tyka a co nefunguje]
+Signal: [co presne alert spustilo]
+Zacatek: [cas prvniho signalu]
+Vlastnik: [tym nebo clovek]
+Dalsi krok: [co udelat ted]
+Odkaz: [runbook, dashboard nebo ticket]
+Data: [jaka data alert obsahuje a proc]
+```
+
+Spatna zprava:
+
+> Error 500!!! kouknete na to nekdo
+
+Lepsi zprava:
+
+> P2: Demo formular vraci 500 na `/demo` od 14:20 UTC. Dopad: nove poptavky nejdou odeslat. Signal: 12 selhani za 5 minut. Dalsi krok: overit delivery endpoint podle runbooku. Alert neobsahuje obsah formularu.
+
+Rozdil neni kosmeticky. Druha zprava rika, proc to resit, kde zacit a co v ni zamerne neni.
+
+### 3. Citliva data nech za odkazem
+
+Interni notifikace maji svadet k pohodli: "Posleme do chatu rovnou vsechno, at nemusime klikat." Jenze chat byva sirsi kanal nez aplikace. Maji k nemu pristup lide, kteri nepotrebuji videt osobni data, historie se exportuje, zpravy se indexuji a integrace mohou mit vlastni retenci.
+
+Do alertu typicky patri:
+
+- anonymni nebo pseudonymni ID udalosti,
+- account ID nebo zakaznicky slug, pokud je to internim procesem dovolene,
+- typ problemu,
+- agregovany pocet udalosti,
+- cas, prostredi a verze,
+- odkaz do interniho systemu s pristupovymi pravy.
+
+Do alertu typicky nepatri:
+
+- cele telo formularu,
+- email, telefon nebo adresa zakaznika,
+- session tokeny, API klice a reset odkazy,
+- platebni udaje,
+- screenshoty s produkcnimi daty,
+- obsah soukrome komunikace,
+- cele request/response payloady.
+
+**Codyho komentar:** Kdyz notifikace obsahuje vic osobnich dat nez samotna obrazovka, kterou potrebuje clovek otevrit po prihlaseni, neurychlili jsme praci. Jen jsme vytvorili neoficialni kopii databaze s veselou ikonou u kanalu.
+
+### 4. Priorita musi ridit kanal
+
+Ne kazdy signal potrebuje stejny kanal. Dobry system pouziva kanal podle dopadu:
+
+| Priorita | Priklad | Kanal | Ocekavana reakce |
+| --- | --- | --- | --- |
+| P1 | Vypadek prihlaseni, unik dat, nefunkcni platby | Incident kanal + on-call | Okamzite prevzeti. |
+| P2 | Formular pro leady selhava, webhooky maji frontu, exporty stoji | Operacni kanal + ticket | Resit dnes. |
+| P3 | Narust validacnich chyb, pomaly endpoint, problem u jednoho zakaznika | Ticket nebo denni ops kanal | Naplanovat podle dopadu. |
+| Info | Novy lead, dokonceny export, tydenni souhrn | Obchodni kanal nebo report | Reakce podle workflow. |
+
+Vyhni se dvema extremum. Prvni je vsechno posilat do jednoho kanalu. Druhy je mit tolik kanalu, ze nikdo nevi, kde je pravda. Pro maly tym casto staci:
+
+- `incidents` pro P1 a potvrzene P2,
+- `ops` pro provozni signaly,
+- `sales` nebo CRM pro obchodni udalosti,
+- tydenni report do dokumentu nebo emailu.
+
+Kazdy kanal ma mit popis: co tam patri, kdo ho sleduje, kdy se pouzije a kdy se zprava maze nebo archivuje.
+
+### 5. Udelej alerty testovatelne
+
+Alert, ktery nikdo nikdy netestoval, je prani. Minimalni test je jednoducha otazka: kdyz se tento signal spusti v sobotu vecer, vi nekdo co delat?
+
+Testuj tyhle veci:
+
+- Signal se opravdu spusti pri simulovane chybe.
+- Zprava ma spravnou prioritu a jde do spravneho kanalu.
+- Neobsahuje zakazane osobni nebo tajne hodnoty.
+- Odkaz vede na existujici runbook nebo dashboard.
+- Vlastnik je clovek nebo tym, ne "nekdo".
+- Alert ma potlaceni duplicit, aby nevytopil kanal stovkou kopii.
+- Po vyreseni existuje zpusob, jak alert zavrit nebo ztisit.
+
+Prakticky priklad:
+
+Demo formular ma alert na 10 selhani za 5 minut. Test jednou mesicne posle validni testovaci request do stagingu, jeden zamerne rozbity request a overi, ze produkcni alert nezahrnuje obsah zpravy. Pokud alert mlci, opravis monitoring. Pokud krici prilis casto, upravis prahy. Oboje je lepsi nez zjistit po tydnu, ze leady padaji do kanalu, ktery nikdo necte.
+
+### 6. 45min postup
+
+1. 0-5 min: Vyber jeden kanal, ktery dnes nejvic sumi nebo naopak mlci pri dulezitych problemech.
+2. 5-12 min: Rozdel poslednich 20 zprav na emergency alert, operacni alert, obchodni notifikaci a report.
+3. 12-20 min: U kazdeho alertu dopln dopad, vlastnika, dalsi krok a odkaz na misto pravdy.
+4. 20-28 min: Vyhazej z notifikaci osobni data, tajemstvi a cele payloady; nech jen ID a odkaz za opravnenim.
+5. 28-35 min: Nastav nebo navrhni priority P1-P3 a kanal pro kazdou z nich.
+6. 35-42 min: Vyber dva nejdulezitejsi alerty a proved test: spusteni, obsah, kanal, reakce.
+7. 42-45 min: Zapis pravidlo do runbooku a pridej datum dalsi revize.
+
+### Sablona alert pravidla
+
+```text
+Nazev alertu:
+Proc existuje:
+Priorita:
+Signal:
+Prah:
+Kanal:
+Vlastnik:
+Runbook:
+Co zprava obsahuje:
+Co zprava nesmi obsahovat:
+Jak se testuje:
+Jak se zavira:
+Datum dalsi revize:
+```
+
+### Checklist: alerty a notifikace bez hluku
+
+- [ ] Kazda zprava je alert, notifikace nebo report.
+- [ ] Emergency kanal obsahuje jen veci, ktere vyzaduji rychlou lidskou reakci.
+- [ ] Alert ma dopad, signal, vlastnika, dalsi krok a odkaz.
+- [ ] Notifikace neposilaji cele formulare, tokeny, platebni data ani soukrome zpravy.
+- [ ] Citliva data zustavaji v systemu s pristupovymi pravy.
+- [ ] Priority P1-P3 maji popsane kanaly a ocekavanou reakci.
+- [ ] Alerty maji potlaceni duplicit a jasny zpusob zavreni.
+- [ ] Dva nejdulezitejsi alerty jsou pravidelne testovane.
+- [ ] Obchodni notifikace vedou do CRM nebo pipeline, ne do nekonecneho chatu.
+- [ ] Reporty maji rytmus a rozhodovaci otazku, ne jen hezky graf.
+- [ ] Jednou mesicne projdu, ktere alerty nikdo necte, a zrusim nebo prepisu je.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -14709,3 +14865,4 @@ Verze textu:
 - 2026-08-03: Pridana prakticka priloha Self-service znalostni baze bez supportniho bludiste za 60 minut vcetne struktury clanku, privacy bloku, mereni vyhledavani, udrzby a checklistu.
 - 2026-08-03: Pridana prakticka priloha Produktova edukace a in-app oznameni bez otravneho sledovani za 45 minut vcetne kanalu, minimalniho mereni, changelogu, sablony oznamovaci karty a checklistu.
 - 2026-08-03: Pridana prakticka priloha Souhlasy a preference bez temnych vzoru za 60 minut vcetne inventare rozhodnuti, preference centra, auditovatelneho zaznamu souhlasu, odvolani a checklistu.
+- 2026-08-03: Pridana prakticka priloha Alerty a interni notifikace bez hluku za 45 minut vcetne klasifikace zprav, alert karty, datove minimalizace, priorit, testovani a checklistu.
