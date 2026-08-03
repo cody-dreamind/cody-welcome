@@ -14852,6 +14852,175 @@ Co bylo smazano, co bylo zpresneno, co zustava jako riziko s terminem.
 
 ---
 
+## URL hygiena, presmerovani a kanonicke adresy za 45 minut
+
+URL adresa je mala smlouva s navstevnikem, vyhledavacem, supportem i budoucim tebou. Kdyz ji jednou posles do kampane, faktury, dokumentace, API odpovedi nebo blogu, zacne zit vlastnim zivotem. Proto je levnejsi mit par pravidel driv, nez web vyroste do stavu, kde jedna stranka existuje ve ctyrech verzich a nikdo nevi, ktera je pravda.
+
+Google Search Central popisuje presmerovani jako zpusob, jak navstevnikum a vyhledavacum rict, ze stranka ma nove umisteni. U duplicit nebo velmi podobnych stranek Google uvadi kanonikalizaci pres redirecty, `rel="canonical"` a sitemapu jako signaly ruzne sily. MDN u HTTP statusu pripomina rozdil mezi trvalymi a docasnymi presmerovanimi, hlavne u 301, 302, 307 a 308.
+
+Privacy-first hodnota je tady jednoducha: neopravuj URL chaos dalsim sledovacim nastrojem. Nejdriv vylad vlastni adresy, interni odkazy, sitemapu, canonical tagy a serverove odpovedi. Az potom ma smysl merit, co se deje.
+
+**Codyho komentar:** Spatna URL je jako spatne pojmenovana promenna, jen verejna a indexovana. Da se s ni zit, ale kazdy dalsi mesic stoji vic.
+
+### 1. Vyber jednu kanonickou pravdu
+
+Nejdriv rozhodni, jak vypada normalni URL. Bez toho budes jen lepit vyjimky.
+
+Zakladni rozhodnuti:
+
+| Oblast | Rozhodnuti |
+| --- | --- |
+| Protokol | Vse verejne bezi na `https://`. |
+| Hostname | Jedna hlavni varianta, napriklad `example.cz`, ne nahodne `www` i bez `www`. |
+| Lomitko | Jedno pravidlo pro trailing slash. |
+| Jazyk | Jasna struktura, treba `/cs/` a `/en/`, pokud mas vic jazyku. |
+| Parametry | Kampanove parametry nejsou samostatny obsah. |
+| Slug | Citelny, kratky, bez datumoveho sumu, pokud datum neni soucast produktu. |
+
+Priklad:
+
+```text
+Kanonicka URL:
+https://example.cz/blog/privacy-first-analytika
+
+Variace, ktere maji koncit na ni:
+http://example.cz/blog/privacy-first-analytika
+https://www.example.cz/blog/privacy-first-analytika
+https://example.cz/blog/privacy-first-analytika/
+https://example.cz/blog/privacy-first-analytika?utm_source=linkedin
+```
+
+UTM parametry pouzivej pro vyhodnoceni kampane, ale nenech z nich vzniknout paralelni obsah. Stranka ma mit jednu kanonickou adresu, kterou posilas do sitemap, internich odkazu, RSS a dokumentace.
+
+### 2. Udelej inventar nejdulezitejsich URL
+
+Za 45 minut neprojdes cely internet. Projdi URL, ktere maji obchodni nebo provozni dopad:
+
+- homepage,
+- pricing,
+- kontakt nebo demo,
+- hlavni landing pages,
+- pet nejnavstevovanejsich clanku,
+- dokumentaci a trust page,
+- prihlaseni a registraci,
+- verejne API dokumenty,
+- sitemapu,
+- RSS nebo Atom feed.
+
+Ke kazde URL zapis:
+
+```text
+URL:
+Ucel:
+Kanonicka verze:
+Interni odkazy ukazuji na:
+Status kod:
+Canonical tag:
+Je v sitemap:
+Poznamka:
+```
+
+Hledej hlavne duplicity, smycky a stare kampanove adresy. Typicky bordel:
+
+- homepage dostupna pres `www` i bez `www`,
+- stary slug clanku vraci 200 s kopii noveho textu,
+- `http` varianta se nepresmeruje na `https`,
+- sitemap obsahuje stare URL,
+- canonical tag ukazuje na jinou adresu, nez kam vedou interni odkazy,
+- landing page po kampani zmizela bez nahrady,
+- produktova dokumentace ma stare odkazy na neexistujici stranky.
+
+### 3. Vyber spravny status kod
+
+Presmerovani neni jen "nekam to posli". Status kod rika, jestli je presun trvaly, docasny a jak se ma zachovat metoda requestu.
+
+Prakticka tabulka:
+
+| Situace | Typicky kod | Poznamka |
+| --- | --- | --- |
+| Stranka se trvale presunula na novy slug | 301 nebo 308 | 308 zachova metodu a telo requestu, proto je opatrnejsi u non-GET toku. |
+| Docasna kampan nebo A/B test | 302 nebo 307 | Po skonceni testu odstranit, ne nechat zit rok. |
+| Formular po odeslani vede na potvrzeni | 303 | Hodne se hodi po POST, aby refresh neposlal formular znovu. |
+| Obsah uz neexistuje a nema nahradu | 404 nebo 410 | Lepsi jasny konec nez presmerovani vseho na homepage. |
+| Stranka ma jasnou novou nahradu | 301 | Uzivatel i vyhledavac dostanou lepsi cestu. |
+
+Google u testovani doporucuje pro docasne testovaci redirecty pouzit 302, ne 301, a experiment drzet jen tak dlouho, jak je potreba. To je dobry obecny princip: docasna URL musi mit datum uklidu.
+
+### 4. Canonical tag neni odpustek na chaos
+
+`rel="canonical"` je signal, ne kouzelna plachta pres neporadek. Pouzij ho, kdyz existuji podobne nebo duplicitni verze obsahu, ale zaroven sjednot interni odkazy, sitemapu a redirecty.
+
+Dobry vzor:
+
+```html
+<link rel="canonical" href="https://example.cz/blog/privacy-first-analytika">
+```
+
+Kontrolni otazky:
+
+- Ukazuje canonical na plne kvalifikovanou verejnou URL?
+- Je canonical self-referencing u hlavni verze stranky?
+- Neukazuje canonical na presmerovanou nebo neexistujici URL?
+- Odpovida canonical tomu, co je v sitemap?
+- Vedou interni odkazy na stejnou kanonickou verzi?
+- Neindexuje se stejny obsah pod URL s tracking parametry?
+
+Kdyz se tyto signaly hadaji, vyhledavac si muze vybrat sam. To neni drama u maleho blogu, ale u produktoveho webu to muze rozbit reporty, sdileni, snippet ve vyhledavani i podporu.
+
+### 5. Sitemap a RSS drzi primarni distribuci
+
+Sitemap neni databaze vseho, co kdy existovalo. Je to seznam dulezitych URL, ktere chces dat vyhledavacum ke crawlovani. Google upozornuje, ze sitemap pomaha objevovani URL, ale negarantuje crawl ani indexaci. Proto ji ber jako pomocny signal, ne jako nahradu za dobrou navigaci a interni odkazy.
+
+Privacy-first distribuce ma jeste jeden kanal: RSS nebo Atom. Feed musi ukazovat na stejne kanonicke URL jako web. Kdyz clanek zmenis, nepublikuj ho pod novou adresou jen proto, ze CMS vytvoril lepsi slug. Bud zachovej permalink, nebo udelej redirect a oprav feed.
+
+Prakticka pravidla:
+
+- Sitemap obsahuje jen kanonicke 200 URL.
+- RSS/Atom odkazy vedou na kanonicke URL.
+- Stare clanky s novym slugem maji redirect.
+- Odstranene stranky nejsou v sitemap.
+- Interni navigace nepouziva URL s UTM parametry.
+- Dokumentace a emailove sablony odkazuji na stabilni adresy.
+
+### 6. 45min postup
+
+```text
+00-05 min: Zapis pravidla URL.
+Protokol, hostname, trailing slash, jazyky, parametry.
+
+05-15 min: Vyber 15 dulezitych URL.
+Homepage, pricing, lead formular, top clanky, trust page, dokumentace, feed.
+
+15-25 min: Over odpovedi.
+Zkontroluj status kody, redirect chainy a zda neexistuji dve 200 verze stejne stranky.
+
+25-33 min: Over canonical a sitemap.
+Porovnej canonical tag, sitemap URL a interni odkazy.
+
+33-40 min: Oprav nejvetsi chyby.
+Trvale presuny dej na 301/308, docasne oznac terminem uklidu, stare sitemap URL odeber.
+
+40-45 min: Zapis pravidlo do provozni dokumentace.
+Kdo smi menit slugy, kdy se dela redirect a jak se kontroluje sitemap.
+```
+
+### Checklist: URL hygiena
+
+- [ ] Existuje jedno pravidlo pro hlavni domenu, HTTPS a trailing slash.
+- [ ] Nejdulezitejsi URL maji jasny ucel a kanonickou verzi.
+- [ ] Interni odkazy nepouzivaji nahodne varianty stejne adresy.
+- [ ] Trvale presunute stranky maji 301 nebo 308 redirect.
+- [ ] Docasne redirecty maji duvod a datum uklidu.
+- [ ] Odstranene stranky nepresmerovavam slepe na homepage.
+- [ ] Canonical tagy ukazuji na existujici kanonicke URL.
+- [ ] Sitemap obsahuje jen dulezite kanonicke URL s odpovedi 200.
+- [ ] RSS nebo Atom feed vede na stejne primarni adresy jako web.
+- [ ] Kampanove parametry se nepouzivaji jako interni odkazy.
+- [ ] Zmena slugu ma checklist: redirect, sitemap, RSS, interni odkazy, dokumentace.
+- [ ] Jednou mesicne projdu top URL podle navstevnosti, support dotazu a kampani.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -14903,6 +15072,7 @@ Co bylo smazano, co bylo zpresneno, co zustava jako riziko s terminem.
 - EDPB Coordinated Enforcement Action, implementation of the right to erasure by controllers: https://www.edpb.europa.eu/documents/coordinated-enforcement-framework/coordinated-enforcement-action-implementation-of-the-0_en
 - W3C, Web Content Accessibility Guidelines 2.2: https://www.w3.org/TR/WCAG22/
 - Google Search Central, SEO Starter Guide: https://developers.google.com/search/docs/fundamentals/seo-starter-guide
+- Google Search Central, Redirects and Google Search: https://developers.google.com/search/docs/crawling-indexing/301-redirects
 - Google Search Central, How to specify a canonical URL: https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls
 - Google Search Central, Build and submit a sitemap: https://developers.google.com/search/docs/crawling-indexing/sitemaps/overview
 - Google Search Central, Introduction to structured data markup: https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data
@@ -14913,6 +15083,7 @@ Co bylo smazano, co bylo zpresneno, co zustava jako riziko s terminem.
 - RFC 6585, Additional HTTP Status Codes: https://datatracker.ietf.org/doc/html/rfc6585
 - RFC 9110, HTTP Semantics: https://www.rfc-editor.org/rfc/rfc9110.html
 - RFC 9457, Problem Details for HTTP APIs: https://datatracker.ietf.org/doc/html/rfc9457
+- MDN, Redirections in HTTP: https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Redirections
 - RFC 6750, The OAuth 2.0 Authorization Framework: Bearer Token Usage: https://www.rfc-editor.org/rfc/rfc6750
 - OpenAPI Specification, latest published version: https://spec.openapis.org/oas/latest.html
 - Schema.org, BlogPosting: https://schema.org/BlogPosting
@@ -15026,3 +15197,4 @@ Co bylo smazano, co bylo zpresneno, co zustava jako riziko s terminem.
 - 2026-08-03: Pridana prakticka priloha Souhlasy a preference bez temnych vzoru za 60 minut vcetne inventare rozhodnuti, preference centra, auditovatelneho zaznamu souhlasu, odvolani a checklistu.
 - 2026-08-03: Pridana prakticka priloha Alerty a interni notifikace bez hluku za 45 minut vcetne klasifikace zprav, alert karty, datove minimalizace, priorit, testovani a checklistu.
 - 2026-08-03: Pridana prakticka priloha Mesicni uklid dat a verejnych slibu za 60 minut vcetne uklidu dat, nastroju, verejnych tvrzeni, signalu a checklistu.
+- 2026-08-03: Pridana prakticka priloha URL hygiena, presmerovani a kanonicke adresy za 45 minut vcetne inventare URL, status kodu, canonical tagu, sitemap/RSS kontroly a checklistu.
