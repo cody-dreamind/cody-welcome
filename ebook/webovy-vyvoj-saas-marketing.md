@@ -16219,6 +16219,197 @@ Datum kontroly:
 
 ---
 
+## Prakticka priloha: Consent log a audit preferenci bez datoveho skladu za 60 minut
+
+Souhlas a preference nejsou jen UI problem. Jsou to provozni fakta, ktera musi jit vysvetlit, zmenit a v rozumnem rozsahu dolozit. Privacy-first SaaS proto nepotrebuje obri "consent platformu" nalepenou na kazdy roh webu. Potrebuje jednoduchy model: co clovek odsouhlasil, k cemu to patri, kdy se to stalo, jakou verzi textu videl a jak snadno to muze vzit zpet.
+
+GDPR v clanku 7 rika, ze spravce musi byt schopen dolozit souhlas a ze odvolani ma byt stejne jednoduche jako jeho udeleni: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng. EDPB Guidelines 05/2020 k souhlasu zduraznuji svobodnost, konkretni ucel, informovanost a jednoznacnou akci: https://www.edpb.europa.eu/documents/guideline/guidelines-052020-on-consent-under-regulation-2016679_en. Prakticky preklad: "nekdo nekdy klikl na zelene tlacitko" neni system. Je to prani s timestampem.
+
+**Codyho komentar:** Consent log nema byt sklad na vsechno, co uzivatel udelal. Ma byt pokladni uctenka k duvere: strucna, dohledatelna a pouzitelna, kdyz se nekdo zepta "proc mi tohle posilate?".
+
+### 1. Nejdriv oddel souhlas od preference a smluvni nutnosti
+
+Ne kazda volba v produktu je souhlas. Cast zpracovani muze byt nutna pro plneni smlouvy, cast pro bezpecnost, cast pro opravneny zajem a cast opravdu stoji na souhlasu. Kdyz vsechno nazves souhlasem, vyrobis si zmatek: uzivatel nevi, co muze vypnout, support nevi, co ma vysvetlit, a produkt nevi, jestli po odvolani prestane fungovat.
+
+Prakticke rozdeleni:
+
+| Typ rozhodnuti | Priklad | Co evidovat |
+| --- | --- | --- |
+| Nezbytne zpracovani | Prihlaseni, faktura, bezpecnostni alert | Ucel v privacy dokumentu, ne consent checkbox. |
+| Preference | Jazyk, tema UI, frekvence produktovych notifikaci | Aktualni hodnota, zdroj zmeny, cas zmeny. |
+| Marketingovy souhlas | Mesicni digest, produktove novinky pro nezakazniky | Ucel, text, verze, cas udeleni a odvolani. |
+| Cookie nebo analyticky souhlas | Netechnicke cookies, marketingove skripty | Kategorie, stav, verze banneru, zarizeni v minimalnim rozsahu. |
+| Produktove opravneni | Role v tymu, pristup k projektu | Audit prava, ne marketingovy consent log. |
+
+Prvni pravidlo pro maly SaaS: pokud je zpracovani nutne pro dodani objednane sluzby, neschovavej ho za souhlas. Vysvetli ho v podminkach, privacy dokumentu a v relevantnim mikrotextu. Souhlas pouzij tam, kde ma clovek skutecnou volbu bez trestu.
+
+### 2. Consent event musi byt maly a presny
+
+Consent log nemusi obsahovat IP adresu, kompletni user-agent, celou obrazovku a deset marketingovych parametru. Ma obsahovat dost informaci na to, abys dolozil rozhodnuti a dokazal ho respektovat.
+
+Minimalni zaznam:
+
+| Pole | Proc existuje |
+| --- | --- |
+| `subject_id` nebo kontakt | Ke komu se rozhodnuti vztahuje. |
+| `decision_type` | Souhlas, odvolani, zmena preference, potvrzeni informace. |
+| `purpose` | Konkretni ucel, napriklad `monthly_digest` nebo `analytics_optional`. |
+| `status` | Granted, denied, withdrawn, changed. |
+| `text_version` | Jakou verzi textu clovek videl. |
+| `source` | Web formular, preference centrum, admin import, support zadost. |
+| `occurred_at` | Kdy se rozhodnuti stalo. |
+| `actor` | Uzivatel, admin, systemovy job nebo support. |
+
+Volitelne muzes pridat `country_context`, `locale`, `account_id` nebo hash technickeho identifikatoru, pokud to ma skutecny provozni duvod. Neposilej do consent logu obsah zpravy, obchodni poznamky, interni skore leadu ani cele requesty. To uz neni souhlas. To je datovy vysavac s dobrym PR.
+
+**Priklad JSON zaznamu:**
+
+```json
+{
+  "subject_id": "contact_123",
+  "decision_type": "consent",
+  "purpose": "monthly_digest",
+  "status": "granted",
+  "text_version": "digest-signup-v3",
+  "source": "website_footer_form",
+  "occurred_at": "2026-08-03T13:00:00Z",
+  "actor": "data_subject"
+}
+```
+
+Kdyz se text u formulare zmeni, nedelej tichy prepis historie. Vytvor novou verzi textu a nove souhlasy vaz na ni. Historie ma odpovidat tomu, co clovek realne videl.
+
+### 3. Preference centrum je provozni rozhrani, ne labyrint
+
+Odvolani souhlasu nema byt email na podporu, pokud byl souhlas udelen jednim klikem na webu. Preference centrum by melo byt dostupne z paticky emailu, z uctu a podle situace i z cookie nastaveni na webu.
+
+Minimalni preference centrum:
+
+- ukaze aktualni stav voleb,
+- oddeli marketing, produktove tipy a nezbytne servisni zpravy,
+- vysvetli dopad vypnuti,
+- ulozi zmenu okamzite,
+- potvrdi zmenu bez tlaku na navrat,
+- nevyzaduje prihlaseni, pokud jde o odhlaseni z verejneho newsletteru pres podepsany odkaz,
+- loguje zmenu stejne peclive jako puvodni souhlas.
+
+**Priklad textu u preference:**
+
+```text
+Mesicni SaaS digest
+Jednou mesicne posleme prakticke navody a novinky z Codyho webu. Vypnuti neovlivni transakcni emaily k vasemu uctu.
+```
+
+Tohle je ferove. Uzivatel vi, co vypina, a zaroven nema pocit, ze se vypnutim rozbije fakturace nebo bezpecnostni upozorneni.
+
+### 4. Importy a migrace souhlasu res rucne opatrne
+
+Nejvetsi bordel v souhlasech casto nevznikne v novem formulari. Vznikne pri migraci z puvodniho newsletter nastroje, CRM nebo historicke tabulky. "Mame tu nejake kontakty" neni dost.
+
+Pred importem si udelej kartu zdroje:
+
+```text
+Zdroj kontaktu:
+Puvodni ucel:
+Jak byl souhlas ziskan:
+Existuje dokaz nebo log:
+Text, ktery kontakt videl:
+Datum rozsahu:
+Lze rozlisit souhlas od zakaznicke komunikace:
+Co importujeme:
+Co neimportujeme:
+Kdo import schvalil:
+```
+
+Pokud neumis dolozit marketingovy souhlas, neposilej na seznam marketingovy digest. Muzou existovat jine legitimni duvody pro servisni komunikaci zakaznikum, ale to neni pozvanka k zamichani vsech kontaktu do jednoho mailing listu.
+
+Prakticky fallback pro nejiste historicke kontakty:
+
+- Neprevadej je automaticky do marketingoveho odberu.
+- Posli jen nezbytnou servisni zpravu, pokud k tomu existuje jasny duvod.
+- U verejneho obsahu preferuj RSS, blog a prime odkazy.
+- U lidi, se kterymi mas aktivni obchodni vztah, res dalsi kontakt v ramci konkretniho vztahu, ne masove kampane.
+
+### 5. Audit preferenci delat pravidelne, ale maly
+
+Jednou za mesic nebo kvartal staci kratka kontrola. Cilem neni vytvorit dalsi reportingovy ritual. Cilem je chytit rozpad mezi UI, databazi, emailovym nastrojem a privacy dokumentem.
+
+Auditni otazky:
+
+- Odpovida text ve formulari ulozene `text_version`?
+- Jde kazdy marketingovy odber odhlasit jednim zjevnym krokem?
+- Jsou odhlaseni respektovana ve vsech odesilacich nastrojich?
+- Neexistuji stare segmenty, ktere uz nikdo nepouziva?
+- Nejsou v consent logu osobni udaje navic?
+- Maji preference vlastnika?
+- Je privacy dokument aktualni proti realnemu chovani produktu?
+- Umi support vysvetlit rozdil mezi marketingem, produktem a nezbytnou zpravou?
+
+Kdyz najdes nesoulad, neopravuj jen text. Oprav i tok. Nejbezpecnejsi privacy dokument je ten, ktery popisuje jednoduche chovani produktu. Jakmile dokument musi omlouvat chaos, prohravas.
+
+### 6. 60min postup
+
+```text
+00-08 min: Sepis vsechna mista rozhodnuti.
+Cookie banner, newsletter, demo formular, preference v uctu, produktove notifikace, support importy.
+
+08-15 min: Rozdel je podle pravni a produktove povahy.
+Nezbytne zpracovani, preference, souhlas, opravneni nebo auditni udalost.
+
+15-25 min: Navrhni minimalni consent event.
+Subject, purpose, status, text_version, source, occurred_at, actor.
+
+25-35 min: Zkontroluj odvolani.
+Je stejne jednoduche jako udeleni? Existuje cesta bez support ticketu?
+
+35-43 min: Projdi historicke zdroje.
+Newsletter nastroj, CRM, tabulky, importy, stare lead magnety.
+
+43-52 min: Udelej test end-to-end.
+Prihlaseni, zmena preference, odhlaseni, zobrazeni v adminu, respektovani pri odeslani.
+
+52-57 min: Uklid data navic.
+Vyhod osobni udaje z eventu, ktere nepotrebujes k dolozeni rozhodnuti.
+
+57-60 min: Zapis vlastnika a dalsi audit.
+Kdo drzi texty, schema, preference centrum a importni pravidla.
+```
+
+### Sablona consent karty
+
+```text
+Ucel:
+Typ rozhodnuti:
+Kde se ziska:
+Text pro uzivatele:
+Verze textu:
+Ukladana pole:
+Kde se ulozi:
+Kde se respektuje:
+Jak se odvola:
+Co se stane po odvolani:
+Retence:
+Vlastnik:
+Datum dalsi kontroly:
+```
+
+### Checklist: consent log a audit preferenci
+
+- [ ] Vim, ktera zpracovani jsou nezbytna a ktera opravdu stoji na souhlasu.
+- [ ] Souhlas neni predzaskrtnuty, skryty ani spojeny s nesouvisejici akci.
+- [ ] U kazdeho souhlasu eviduji ucel, stav, cas, zdroj a verzi textu.
+- [ ] Historicke verze textu se neprepisuji zpetne.
+- [ ] Consent log neobsahuje obsah zprav, citlive obchodni poznamky ani raw requesty.
+- [ ] Odvolani je stejne jednoduche jako udeleni.
+- [ ] Preference centrum oddeluje marketing, produktove tipy a nezbytne servisni zpravy.
+- [ ] Odhlaseni se propise do vsech nastroju, ktere zpravy odesilaji.
+- [ ] Import historickych kontaktu ma dolozeny zdroj a ucel.
+- [ ] Nejiste kontakty nejsou automaticky pridane do marketingoveho seznamu.
+- [ ] Support umi dohledat stav preference bez pristupu k nepotrebnym datum.
+- [ ] Jednou mesicne nebo kvartalne kontroluji soulad UI, logu, email nastroje a privacy dokumentu.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -16411,3 +16602,4 @@ Datum kontroly:
 - 2026-08-03: Pridana prakticka priloha Newsletter a produktovy digest bez platformniho zamku za 45 minut vcetne typu zprav, archivu na vlastni domene, sbirani kontaktu, mereni, vyberu nastroje a checklistu.
 - 2026-08-03: Pridana prakticka priloha Mikrocopy formularu a prazdnych stavu bez pravnicke mlhy za 45 minut vcetne textu poli, chybovych hlasek, prazdnych stavu, pristupnosti a checklistu.
 - 2026-08-03: Pridana prakticka priloha Chybove a stavove stranky bez ztraty duvery za 45 minut vcetne HTTP statusu, 404/401/403/500 textu, API chyb, udrzby a checklistu.
+- 2026-08-03: Pridana prakticka priloha Consent log a audit preferenci bez datoveho skladu za 60 minut vcetne rozliseni souhlasu, preference centra, importu historickych kontaktu, auditu a checklistu.
