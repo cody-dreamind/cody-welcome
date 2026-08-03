@@ -15347,6 +15347,139 @@ Vlastnik, zdroj, misto pouziti, datum dalsi kontroly.
 
 ---
 
+## Video a externi embedy bez neviditelneho sledovani za 45 minut
+
+Video umi na SaaS webu zkratit cestu k pochopeni produktu. Dvouminutove demo casto vysvetli vic nez deset screenshotu. Jenze video je taky jedna z nejrychlejsich cest, jak na web pritahnout cizi prehravac, cookies, autoplay, tracking pixely, doporucovaci algoritmus a obsah, ktery se mimo tvoji kontrolu zmeni.
+
+Privacy-first video neni "zadne video". Je to video, ktere ma jasny ucel, textovou alternativu, minimalni datovou stopu a nedela z navstevnika zdroj signalu pro cizi platformu jeste predtim, nez se rozhodl obsah pustit.
+
+W3C WAI doporucuje u audio a video obsahu resit titulky, prepisy, popis vizualnich informaci a pristupny prehravac: https://www.w3.org/WAI/media/av/. Google Search Central u video obsahu zduraznuje jasnou vlastni stranku videa, dostupne metadata, nahledy a indexovatelnost: https://developers.google.com/search/docs/appearance/video. Pro embedy je uzitecne znat i `iframe` sandbox a omezovani pravomoci iframe prvku podle MDN: https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/iframe.
+
+**Codyho komentar:** Nejhorsi video embed je ten, ktery se na strance spusti driv nez myslenka. Navstevnik chtel zjistit, jestli mu produkt pomuze. Ne pozvat tri domeny na malou datovou oslavu.
+
+### 1. Rozhodni, jestli video patri na vlastni URL
+
+Video by melo mit vlastni kanonickou stranku, pokud splnuje aspon dve z techto podminek:
+
+- Vysvetluje hlavni use case produktu.
+- Bude se posilat v obchodnich emailech nebo follow-upech.
+- Ma dlouhodobou hodnotu pro dokumentaci nebo onboarding.
+- Obsahuje transcript, priklady nebo odkazy na dalsi kroky.
+- Chces, aby se dalo sdilet primou URL bez socialni platformy.
+
+Kratke pomocne video uvnitr dokumentace vlastni stranku nepotrebuje vzdy. Ale hlavni demo, webinar, produktovy walkthrough nebo edukacni video ano. Vlastni URL ti dava kontrolu nad textem, kontextem, analytikou, retenci dat, canonical adresou a tim, co se stane, kdyz dodavatel prehravace zmeni pravidla.
+
+Minimalni struktura video stranky:
+
+```text
+H1: Co video vysvetluje
+Kratky kontext: Pro koho je a kdy ho pustit
+Staticky nahled: obrazek bez ciziho skriptu
+Prehrani: vlastni prehravac nebo embed az po kliknuti
+Transcript: textova verze obsahu
+Odkazy: dokumentace, demo, checklist, pricing
+Datova poznamka: co se stane pri prehrani videa
+```
+
+### 2. Pouzij dvoukrokovy embed
+
+Pokud musis pouzit externi video platformu, nenacitej ji automaticky pri otevreni stranky. Pouzij dvoukrokovy vzor:
+
+1. Na strance zobraz vlastni staticky nahled, nazev videa, delku a kratkou datovou poznamku.
+2. Externi prehravac nacti az po kliknuti na "Prehrat video".
+
+Priklad mikrocopy:
+
+```text
+Prehrat video
+Video se nacte z externi sluzby. Po kliknuti muze tato sluzba zpracovat technicke udaje o prehrani.
+```
+
+Tohle je ferovejsi nez tichy iframe. Navstevnik vi, co se stane, a web zustava rychly i pro lidi, kteri video nikdy nespusti.
+
+### 3. Omez iframe pravomoci
+
+Kdyz iframe opravdu pouzijes, nastav ho jako rizikovy prvek, ne jako bezpecnou dekoraci. Minimum pro review:
+
+- `sandbox` pouzij, pokud ho konkretni embed zvladne.
+- `allow` nastav jen na schopnosti, ktere video potrebuje.
+- Nepovoluj kameru, mikrofon, geolokaci ani clipboard, pokud pro to neni jasny duvod.
+- Nastav rozumny `referrerpolicy`.
+- Zkontroluj, jake requesty embed vytvari pred kliknutim a po kliknuti.
+- Popis dodavatele a datovy tok pridej do datove mapy.
+
+Permissions Policy umi omezovat vybrane browser funkce v dokumentu a iframu; MDN ji popisuje jako mechanismus pro povoleni nebo zakazani browser schopnosti: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Permissions-Policy. Neber to jako kouzelnou hradbu, ale jako dalsi vrstvu, ktera snizi blast radius spatne nastaveneho embeddu.
+
+### 4. Transcript neni bonus
+
+Transcript pomaha lidem, kteri nemohou nebo nechteji pustit zvuk, lidem s asistivnimi technologiemi, vyhledavacum i obchodnikovi, ktery chce z videa rychle vytahnout tri vety do follow-upu.
+
+Prakticka sablona:
+
+```text
+Nazev videa:
+[co video vysvetluje]
+
+Delka:
+[mm:ss]
+
+Shrnuti:
+[3-5 vet, komu video pomaha a co v nem je]
+
+Transcript:
+[text po blocich, s casovymi znackami u delsiho videa]
+
+Dulezite odkazy:
+[dokumentace / demo / kontakt / clanek / checklist]
+
+Datova poznamka:
+[kde je video hostovane, co se stane pri prehrani, zda existuje alternativa bez prehravace]
+```
+
+U produktovych videi dej pozor na casove bomby: stary pricing, stare UI, jmena zakazniku, realne emaily, interni URL, debug panely, notifikace a tokeny. Video se hure opravuje nez odstavec, proto ho kontroluj stejne prisne jako sales deck.
+
+### 5. 45min postup
+
+```text
+00-06 min: Vyber jedno video nebo embed.
+Homepage demo, webinar, mapa, socialni post, slide deck nebo dokumentacni video.
+
+06-12 min: Urci ucel.
+Co ma clovek po zhlednuti umet, pochopit nebo udelat?
+
+12-20 min: Zkontroluj datovou stopu.
+Ktere domeny se nacitaji pred kliknutim, po kliknuti a pri prehravani?
+
+20-28 min: Navrhni privacy-first variantu.
+Vlastni URL, staticky nahled, transcript, primy odkaz nebo dvoukrokovy embed.
+
+28-35 min: Oprav pristupnost.
+Titulky, transcript, textovy popis dulezitych vizualnich informaci, ovladatelny prehravac.
+
+35-41 min: Omez technicke riziko.
+Iframe allowlist, sandbox podle moznosti, referrer policy, zadne zbytecne browser schopnosti.
+
+41-45 min: Zapis kartu embeddu.
+Dodavatel, duvod, datova stopa, alternativa, vlastnik, datum dalsi kontroly.
+```
+
+### Checklist: video a embedy
+
+- [ ] Video ma jasny ucel a vlastnika.
+- [ ] Hlavni produktove video ma vlastni kanonickou URL nebo dobry duvod, proc ji nema.
+- [ ] Stranka funguje i bez automaticky nacteneho externiho prehravace.
+- [ ] Externi embed se nacita az po vedomem kliknuti, pokud to jde.
+- [ ] U videa existuje transcript nebo textove shrnuti podle dulezitosti obsahu.
+- [ ] Dulezite vizualni informace nejsou dostupne jen ve videu.
+- [ ] Iframe nema zbytecne pravomoce.
+- [ ] Embed je zapsany v datove mape jako dodavatelsky tok.
+- [ ] Video neobsahuje realna zakaznicka data, interni URL, tokeny ani zastarale cenove sliby.
+- [ ] Existuje staticky nahled bez ciziho tracking skriptu.
+- [ ] RSS nebo textova verze obsahu dava smysl i bez prehravace.
+- [ ] Datum dalsi kontroly je zapsane u videa nebo embeddu.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -15397,7 +15530,9 @@ Vlastnik, zdroj, misto pouziti, datum dalsi kontroly.
 - EDPB/WP29 Guidelines on the right to data portability under Regulation 2016/679: https://www.edpb.europa.eu/documents/guideline/guidelines-on-the-right-to-data-portability-under-regulation-2016679-wp242_en
 - EDPB Coordinated Enforcement Action, implementation of the right to erasure by controllers: https://www.edpb.europa.eu/documents/coordinated-enforcement-framework/coordinated-enforcement-action-implementation-of-the-0_en
 - W3C, Web Content Accessibility Guidelines 2.2: https://www.w3.org/TR/WCAG22/
+- W3C WAI, Making Audio and Video Media Accessible: https://www.w3.org/WAI/media/av/
 - Google Search Central, SEO Starter Guide: https://developers.google.com/search/docs/fundamentals/seo-starter-guide
+- Google Search Central, Video SEO best practices: https://developers.google.com/search/docs/appearance/video
 - Google Search Central, Redirects and Google Search: https://developers.google.com/search/docs/crawling-indexing/301-redirects
 - Google Search Central, How to specify a canonical URL: https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls
 - Google Search Central, Build and submit a sitemap: https://developers.google.com/search/docs/crawling-indexing/sitemaps/overview
@@ -15410,6 +15545,8 @@ Vlastnik, zdroj, misto pouziti, datum dalsi kontroly.
 - RFC 9110, HTTP Semantics: https://www.rfc-editor.org/rfc/rfc9110.html
 - RFC 9457, Problem Details for HTTP APIs: https://datatracker.ietf.org/doc/html/rfc9457
 - MDN, Redirections in HTTP: https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Redirections
+- MDN, iframe element: https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/iframe
+- MDN, Permissions-Policy header: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Permissions-Policy
 - RFC 6750, The OAuth 2.0 Authorization Framework: Bearer Token Usage: https://www.rfc-editor.org/rfc/rfc6750
 - OpenAPI Specification, latest published version: https://spec.openapis.org/oas/latest.html
 - Schema.org, BlogPosting: https://schema.org/BlogPosting
@@ -15526,3 +15663,4 @@ Vlastnik, zdroj, misto pouziti, datum dalsi kontroly.
 - 2026-08-03: Pridana prakticka priloha URL hygiena, presmerovani a kanonicke adresy za 45 minut vcetne inventare URL, status kodu, canonical tagu, sitemap/RSS kontroly a checklistu.
 - 2026-08-03: Pridana prakticka priloha Produktove screenshoty a demo materialy bez uniku dat za 45 minut vcetne demo datasetu, redakce citlivych casti, schvalovaci karty a checklistu.
 - 2026-08-03: Pridana prakticka priloha Obrazky, alt texty a media bez trackeru za 45 minut vcetne roli obrazku, alt textu, optimalizace, embed rizik, media karty a checklistu.
+- 2026-08-03: Pridana prakticka priloha Video a externi embedy bez neviditelneho sledovani za 45 minut vcetne dvoukrokoveho embeddu, transcriptu, iframe omezeni, datove mapy a checklistu.
