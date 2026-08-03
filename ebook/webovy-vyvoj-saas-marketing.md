@@ -15180,6 +15180,173 @@ Kdyz neni jasny souhlas nebo datovy puvod, material nejde ven.
 
 ---
 
+## Obrazky, alt texty a media bez trackeru za 45 minut
+
+Obrazky dokazou SaaS webu pomoct rychleji nez dlouhy odstavec: screenshot ukaze realny tok, diagram vysvetli architekturu, graf zjednodusi rozhodnuti a fotka tymu muze pridat duveru. Stejne snadno ale obrazky umi rozbit rychlost webu, prozradit zakaznicka data, vytvorit falesny slib nebo pripojit cizi tracker jen proto, ze se nekomu libil embed.
+
+Privacy-first pristup k mediim neni o tom, ze web bude suchy. Je o tom, ze kazdy obrazek ma praci, vlastnika a datovou kontrolu. Pokud obrazek nic nevysvetluje, zpomaluje stranku a jeste tahne cizi skript, neni to vizualni design. Je to dekorativni dluh.
+
+WCAG 2.2 resi mimo jine textove alternativy pro netextovy obsah a princip, ze informace nesmi byt dostupna jen pro lidi, kteri vidi obrazek: https://www.w3.org/TR/WCAG22/. Prakticky preklad pro SaaS: kdyz screenshot nebo graf nese dulezitou informaci, popis musi byt dostupny i textem. Kdyz je obrazek jen dekorace, nema si hrat na obsah.
+
+**Codyho komentar:** Alt text neni SEO kouzelna kapsle. Je to servis pro lidi, asistivni technologie a situace, kdy obrazek nenacte. Kdyz do nej nacpes deset klicovych slov, nepises dostupny web. Pises maly billboard do mista, kde mel byt popisek.
+
+### 1. Nejdrive urci praci obrazku
+
+Kazdy obrazek pred publikaci zarad do jedne z peti roli:
+
+| Role | Priklad | Jak s nim pracovat |
+| --- | --- | --- |
+| Informacni | screenshot produktu, graf, diagram toku | Potrebuje presny alt text nebo textovy popis vedle. |
+| Duverovy | fotka tymu, logo zakaznika se souhlasem, certifikacni odkaz | Potrebuje zdroj, souhlas a kontrolu aktualnosti. |
+| Navigacni | ikona tlacitka, obrazkove menu | Musi mit textovy nazev akce. |
+| Dekorativni | pozadi, abstraktni textura, oddelovac | Alt prazdny, aby nerusil asistivni technologii. |
+| Prodejni material | hero screenshot, produktovy mockup, case study obrazek | Potrebuje kontrolu slibu, dat a verze produktu. |
+
+Pokud obrazek nejde zaradit, nejspis nema na strance praci. A kdyz nema praci, zeptej se, proc ma dostat datovy prenos, misto v layoutu a pozornost ctenare.
+
+### 2. Alt text pis podle ucelu, ne podle souboru
+
+Nazev souboru `dashboard-final-3.png` nikomu nepomaha. Dobry alt text popisuje informaci, kterou by clovek z obrazku ziskal.
+
+Priklady:
+
+| Obrazek | Slaby alt | Lepsi alt |
+| --- | --- | --- |
+| Screenshot demo formulare | `formular` | `Demo formular se dvema poli: pracovnim emailem a volitelnym popisem problemu.` |
+| Graf konverzi | `graf` | `Graf ukazuje, ze partner-web privedl mene navstev, ale vice kvalifikovanych demo requestu nez socialni site.` |
+| Dekorativni pozadi | `modry gradient` | prazdny alt, pokud nenese informaci |
+| Ikona exportu | `ikona` | `Exportovat data` |
+| Screenshot trust page | `trust page` | `Trust page s bloky Provoz, Data, Bezpecnost, Export a Dodavatele.` |
+
+Pravidlo: kdyz obrazek zmizi, co musi ctenar porad vedet? To patri do alt textu nebo do textu vedle obrazku.
+
+U slozitejsich grafu a diagramu nepokousej alt text natahovat do romanu. Dej kratky alt a pod obrazek pridej textovy souhrn:
+
+```text
+Alt: Diagram datoveho toku demo formulare.
+
+Popis pod obrazkem:
+Formular uklada email a zpravu do CRM/mailboxu. Do analytiky odchazi jen stav odeslani, page slug a source group; obsah zpravy se do eventu neposila.
+```
+
+Tohle je lepsi pro lidi, pro vyhledavac i pro budouciho cloveka v tymu, ktery bude po roce zkoumat, co obrazek vlastne sliboval.
+
+### 3. Optimalizuj velikost driv, nez resis CDN
+
+Obrazek muze zlepsit duveru a zaroven zabit rychlost. Pro maly SaaS web staci par jednoduchych pravidel:
+
+- Nepublikuj obri screenshot v plnem rozliseni, pokud se zobrazuje jako maly nahled.
+- Pouzij moderni format tam, kde ho stack podporuje.
+- Nastav rozmery obrazku, aby stranka neposkakovala pri nacitani.
+- Hero obrazek nepouzivej jako vymluvu pro pomaly prvni viewport.
+- Lazy-load pouzij pro obrazky mimo prvni obrazovku.
+- Externi obrazky nestahuj z cizich domen, pokud nemas jasny duvod a kontrolu.
+
+Webova rychlost neni jen technicka metrika. Pomala stranka kazi prvni dojem a zbytecne zvysuje datovy prenos. Privacy-first web nema byt asketicky, ale ma se chovat ohleduplne: stahovat jen to, co je potreba, kdyz je to potreba.
+
+**Priklad rozhodnuti:**
+
+Hero sekce chce ukazat produkt. Misto 4MB screenshotu cele aplikace pouzij orezany, redigovany a optimalizovany obrazek prvniho toku. Do dalsi sekce pridej mensi screenshot detailu a textovy popis. Ctenar pochopi produkt rychleji a mobilni pripojeni se nebude tvarit, ze prave streamuje dokument o vesmiru.
+
+### 4. Embed neni zadarmo
+
+Video, prezentace, mapa, socialni post nebo analytics widget z treti strany muze vypadat jako rychla cesta k hezcimu webu. Jenze embed casto znamena externi JavaScript, cookies, requesty na cizi domenu, fonty, telemetry a riziko, ze obsah zmizi nebo se zmeni bez tvoji kontroly.
+
+Pred kazdym embedem se zeptej:
+
+- Je embed nutny pro pochopeni obsahu?
+- Existuje staticky nahled s primym odkazem misto skriptu?
+- Posila embed data tretim stranam pred souhlasem?
+- Funguje stranka bez embeddu?
+- Jak se obsah zobrazi v RSS nebo cteckach?
+- Co se stane, kdyz dodavatel embed zmeni nebo vypne?
+
+Privacy-first alternativa:
+
+| Potreba | Lepsi prvni varianta |
+| --- | --- |
+| Video z workshopu | Vlastni stranka se statickym nahledem a odkazem na prehrani. |
+| Socialni post | Citovat kratky relevantni smysl a odkazovat primo na zdroj. |
+| Mapa pobocky | Textova adresa a primy odkaz na mapu. |
+| Slide deck | Export PDF nebo HTML shrnuti na vlastni domene. |
+| Produktove demo | Vlastni screenshoty a kratke video bez ciziho tracking skriptu. |
+
+Kdyz embed opravdu potrebujes, popis ho v datove mape jako dodavatelsky tok. Neni to "jen iframe". Je to cast stranky, ktera muze posilat informace mimo tvuj web.
+
+### 5. Media karta pred publikaci
+
+U verejnych nebo prodejnich materialu si zapis malou kartu. Ne kvuli byrokracii, ale proto, abys za tri mesice vedel, odkud obrazek je a zda porad smi ven.
+
+```text
+Material:
+[nazev obrazku, videa, grafu nebo decku]
+
+Kde se pouziva:
+[URL / landing page / sales deck / dokumentace]
+
+Role:
+[informacni / duverovy / dekorativni / prodejni / navigacni]
+
+Zdroj dat:
+[synteticka data / verejna data / zakaznik se souhlasem / interni demo]
+
+Kontrola citlivosti:
+[jmena, emaily, firmy, castky, URL, tokeny, metadata, notifikace]
+
+Alt text nebo textovy popis:
+[hotovo / neni potreba, protoze dekorativni]
+
+Vlastnik:
+[role nebo clovek]
+
+Datum dalsi kontroly:
+[datum]
+```
+
+Karta je zvlast uzitecna u sales decku, protoze ten ma tendenci prezit tri verze produktu, dve zmeny ceniku a jeden zapomenuty screenshot s realnym jmenem zakaznika. Marketingove materialy starnou potichu, ale v B2B prodeji je potichu porad dost nahlas.
+
+### 6. 45min postup
+
+```text
+00-05 min: Vyber jednu stranku nebo material.
+Homepage, trust page, pricing, dokumentace, sales deck nebo case study.
+
+05-12 min: Seznam vsechna media.
+Screenshoty, grafy, ikony, videa, embedy, loga, PDF.
+
+12-20 min: U kazdeho urci roli.
+Informacni, duverovy, navigacni, dekorativni nebo prodejni.
+
+20-30 min: Zkontroluj data a sliby.
+Jmena, emaily, firmy, castky, URL, tokeny, stary pricing, nepravdivy UI stav.
+
+30-37 min: Dopln alt texty a textove popisy.
+Informacni obrazky popsat, dekorativni umlcet.
+
+37-42 min: Zkontroluj vykon a treti strany.
+Velikost souboru, rozmery, lazy-load, externi embedy, requesty.
+
+42-45 min: Zapis media kartu.
+Vlastnik, zdroj, misto pouziti, datum dalsi kontroly.
+```
+
+### Checklist: obrazky a media
+
+- [ ] Kazdy obrazek ma jasnou roli nebo je odstraneny.
+- [ ] Informacni obrazky maji alt text nebo textovy popis.
+- [ ] Dekorativni obrazky nerusi asistivni technologie.
+- [ ] Screenshoty neobsahuji realne zakaznicke udaje bez souhlasu.
+- [ ] Grafy maji slovni shrnuti hlavniho zaveru.
+- [ ] Obrazky jsou orezane a optimalizovane pro realne pouziti.
+- [ ] Layout ma nastavene rozmery, aby pri nacitani neposkakoval.
+- [ ] Externi embedy nejsou pouzite jen kvuli pohodli.
+- [ ] Socialni, video a mapove embedy neposilaji data tretim stranam pred souhlasem.
+- [ ] Sales decky a dokumentace maji vlastnika kontroly obrazku.
+- [ ] Verejne materialy nemaji zastarale privacy, cenove ani provozni sliby.
+- [ ] Media karta rika, kde se material pouziva a kdy se ma znovu zkontrolovat.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -15358,3 +15525,4 @@ Kdyz neni jasny souhlas nebo datovy puvod, material nejde ven.
 - 2026-08-03: Pridana prakticka priloha Mesicni uklid dat a verejnych slibu za 60 minut vcetne uklidu dat, nastroju, verejnych tvrzeni, signalu a checklistu.
 - 2026-08-03: Pridana prakticka priloha URL hygiena, presmerovani a kanonicke adresy za 45 minut vcetne inventare URL, status kodu, canonical tagu, sitemap/RSS kontroly a checklistu.
 - 2026-08-03: Pridana prakticka priloha Produktove screenshoty a demo materialy bez uniku dat za 45 minut vcetne demo datasetu, redakce citlivych casti, schvalovaci karty a checklistu.
+- 2026-08-03: Pridana prakticka priloha Obrazky, alt texty a media bez trackeru za 45 minut vcetne roli obrazku, alt textu, optimalizace, embed rizik, media karty a checklistu.
