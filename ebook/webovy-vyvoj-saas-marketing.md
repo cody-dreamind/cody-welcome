@@ -14225,6 +14225,157 @@ Vlastnik:
 
 ---
 
+## Produktova edukace a in-app oznameni bez otravneho sledovani za 45 minut
+
+Kdyz SaaS roste, zacnes resit nenapadny problem: jak lidem rict, ze se neco zmenilo, aniz bys z aplikace udelal adventni kalendar modalu. Produktova edukace ma uzivateli pomoct udelat dalsi spravny krok. Nema byt nahrada za nejasne UI, marketingovy megafon ani vymluva pro dalsi sledovaci knihovnu.
+
+Privacy-first verze je jednoducha: zmeny popisuj na primarnich URL, v aplikaci ukazuj jen relevantni a kratke signaly, mer jen to, podle ceho dokazes produktove rozhodnout, a nech uzivatele odlozit nebo zavrit veci bez trestu.
+
+### 1. Rozdel oznameni podle duvodu, ne podle nadseni tymu
+
+Ne kazda novinka potrebuje stejny kanal. Prvni filtr je duvod, proc ma uzivatel zpravu videt.
+
+| Typ zpravy | Kdy ji pouzit | Nejlepsi kanal |
+| --- | --- | --- |
+| Nova funkce | Uzivatel ziska novou schopnost nebo rychlejsi tok. | Changelog, kratky in-app tip, dokumentace |
+| Zmena stavajiciho toku | Meni se misto, nazev, pravidlo nebo chovani. | In-app banner v kontextu, changelog, email pro vlastniky uctu |
+| Bezpecnostni nebo privacy zmena | Meni se prace s daty, pristupy, exportem nebo dodavatelem. | Primarni URL, email vlastnikovi uctu, auditni poznamka |
+| Billing zmena | Meni se cena, plan, limit, fakturacni pravidlo nebo platebni tok. | Email, billing obrazovka, dokumentace |
+| Incident nebo degradace | Sluzba nefunguje podle slibu. | Status page, email podle dopadu, viditelna zprava v aplikaci |
+| Onboarding tip | Uzivatel je v konkretni situaci poprve. | Inline tip primo u akce |
+
+Pravidlo: kdyz neumim rict, jake rozhodnuti ma uzivatel po zprave udelat, zpravu neposilam. "Mame novou vec" neni rozhodnuti. "Zapnete novy export, pokud predavate reporty klientum" uz rozhodnuti je.
+
+### 2. Modal je posledni moznost, ne vychozi komponenta
+
+Modal prerusi praci. To je nekdy spravne, treba pri rizikove zmene pristupu nebo nevratne akci. Pro vetsinu edukace je ale lepsi klidnejsi forma:
+
+- inline tip u prvku, ktery se opravdu tyka dane zmeny,
+- maly banner na strance, kde ma informace kontext,
+- tecka nebo odznak u navigace, pokud zmena neni urgentni,
+- changelog s primarni URL, na kterou jde odkazovat,
+- dokumentacni clanek pro detail,
+- email jen pro zmeny, ktere si zaslouzi doruceni mimo aplikaci.
+
+Otravne oznameni ma obvykle tri znaky: nejde zavrit, vraci se po kazdem refreshi a nuti uzivatele cist marketingovy text ve chvili, kdy chtel pracovat. To neni edukace. To je okupace pozornosti.
+
+**Codyho komentar:** Kdyz produkt potrebuje pet vyskakovacich oken, aby clovek pochopil jednu novou funkci, problem neni v uzivateli. Problem je v tom, ze funkce nema dost jasne misto v produktu. Au, ale lepsi bolet u navrhu nez u churnu.
+
+### 3. Mer adopci bez osobniho detektiva
+
+U edukace casto staci vedet, jestli zprava pomaha. Nepotrebujes detailni casovou osu kazdeho uzivatele.
+
+Minimalni privacy-first eventy:
+
+| Otazka | Minimalni signal | Co s tim udelas |
+| --- | --- | --- |
+| Videli lide zpravu? | Pocet zobrazeni podle typu uctu nebo planu | Poznas dosah bez osobniho profilu. |
+| Zavreli ji okamzite? | Agregovana mira zavreni | Zkratis text nebo zmenis kanal. |
+| Klikli na navod? | Klik na primarni URL clanku | Zlepsis dokumentaci nebo mikrocopy. |
+| Pouzili funkci? | Account-level aktivace funkce | Vyhodnotis realnou adopci. |
+| Zpusobila zmena support? | Pocet ticketu se stitkem zmeny | Doplnis navod nebo upravis tok. |
+
+Vyhni se eventum typu `hovered_tooltip_for_1_7_seconds`, pokud z nich neplyne konkretni rozhodnuti. Stejne tak nedavej do event payloadu text zadaneho pole, email uzivatele, cele URL s tokeny nebo interni obsah zakaznika.
+
+Dobry kompromis je ukladat stav oznameni na urovni uctu nebo anonymni session podle potreby produktu:
+
+- `announcement_id`
+- `account_segment`
+- `shown_at`
+- `dismissed_at`
+- `clicked_doc`
+- `activated_feature`
+
+Kdyz potrebujes pamatovat zavreni banneru, casto staci technicky stav v aplikaci nebo lokalni nastaveni. Pokud se z toho stava marketingovy profil, zastav se a zeptej se, kdo z toho ma uzitek.
+
+### 4. Changelog je misto pravdy, ne odkladiste vet
+
+Changelog ma tri role: pomaha zakaznikum pochopit vyvoj produktu, podporuje obchodni duveru a drzi tym u zeme. Kdyz existuje verejna primarni URL pro zmenu, muzes na ni odkazovat z aplikace, supportu, emailu i dokumentace bez kopirovani textu do peti nastroju.
+
+Keep a Changelog doporucuje strukturu zmen kolem kategorii jako Added, Changed, Deprecated, Removed, Fixed a Security: https://keepachangelog.com/en/1.1.0/. Pro SaaS ji preloz prakticky:
+
+- `Pridano`: nova schopnost, ktera uzivateli neco umozni.
+- `Zmeneno`: uprava existujiciho toku nebo pravidla.
+- `Opraveno`: chyba, ktera mela dopad na praci.
+- `Bezpecnost a data`: zmena kolem pristupu, exportu, retence, auditu nebo dodavatelu.
+- `Dokumentace`: navody, ktere meni schopnost uzivatele neco vyresit sam.
+
+Privacy-first detail: changelog ma byt dostupny bez socialni platformy, bez newsletterove pasti a bez reklamniho pixelu. RSS nebo Atom feed je porad prakticky kanal pro lidi i firmy, ktere chteji sledovat zmeny bez zavislosti na algoritmu. Specifikace RSS 2.0 je zde: https://www.rssboard.org/rss-specification a Atom zde: https://www.rfc-editor.org/rfc/rfc4287.
+
+### 5. Text oznameni pis jako servisni zpravu
+
+Dobry in-app text je kratky, konkretni a nehraje si na ohnostroj.
+
+Slaba verze:
+
+> Objevte nasi revolucni novou zkusenost s reporty!
+
+Lepsi verze:
+
+> Reporty ted muzete exportovat po klientech. Hodilo se to hlavne tymum, ktere predavaji mesicni vysledky mimo aplikaci.
+
+Jeste lepsi, kdyz je v kontextu:
+
+> Export po klientech je dostupny tady. Stahuje jen sloupce vybrane v aktualnim filtru.
+
+Sablona mikrotextu:
+
+> [Co se zmenilo.] [Komu to pomuze.] [Co se stane s daty nebo kde jsou limity.] [Primarni odkaz.]
+
+Priklady:
+
+- `Webhooky ted podporuji podpis payloadu. Hodit se to bude tymum, ktere napojuji produkcni integrace. Tajemstvi se zobrazi jen pri vytvoreni. Navod: /docs/webhooks-signatures.`
+- `Export aktivit je novy v adminu uctu. Obsahuje jen auditni udalosti, ne obsah zakaznickych zprav. Detail: /changelog/audit-export.`
+- `Stary importni format vypneme 30. zari 2026. Dotcene ucty maji v nastaveni kontrolu kompatibility. Postup migrace: /docs/import-migration.`
+
+U pristupnosti mysli na to, ze oznameni nesmi byt dostupne jen barvou, animaci nebo mizicim toastem. WCAG 2.2 je primarni referencni dokument pro pristupnost weboveho obsahu: https://www.w3.org/TR/WCAG22/.
+
+### 6. 45min postup
+
+0-10 minut: Vyber jednu zmenu, kterou potrebujes komunikovat. Napis, kdo ji musi vedet, proc a co ma po precteni udelat.
+
+10-20 minut: Rozhodni kanal. Pouzij changelog jako primarni misto pravdy. In-app zpravu dej jen tam, kde ma kontext. Email posli jen vlastnikum nebo adminum, kterych se zmena opravdu tyka.
+
+20-30 minut: Napis servisni text podle sablony. Zkontroluj, jestli obsahuje dopad na data, pokud se zmena tyka exportu, pristupu, retence, analytiky, billing toku nebo integrace.
+
+30-38 minut: Navrhni minimalni mereni. Staci zobrazeni, zavreni, klik na navod, account-level aktivace a support stitek. Zadny obsah zakaznickych dat do eventu.
+
+38-45 minut: Pridej uklid. Zprava ma expiraci, vlastnika, odkaz na detail a pravidlo, kdy se prestane zobrazovat.
+
+### Sablona oznamovaci karty
+
+```text
+Nazev zmeny:
+Typ zpravy: nova funkce / zmena toku / privacy-security / billing / incident / onboarding tip
+Komu se zobrazi:
+Kde se zobrazi:
+Primarni URL:
+Text oznameni:
+Co ma uzivatel udelat:
+Datovy dopad:
+Minimalni eventy:
+Kdy zprava expiruje:
+Vlastnik:
+Support stitek:
+```
+
+### Checklist: produktova edukace bez otravneho sledovani
+
+- [ ] Kazde oznameni ma jasny duvod a rozhodnuti pro uzivatele.
+- [ ] Changelog nebo dokumentace je primarni URL, na kterou jde odkazovat.
+- [ ] Modal pouzivas jen pro zmeny, ktere opravdu musi prerusit praci.
+- [ ] In-app zprava se zobrazuje v kontextu, kde ma uzivatel co udelat.
+- [ ] Text je servisni, kratky a bez nafoukle marketingove mlhy.
+- [ ] Privacy, security, billing a datove zmeny maji explicitni dopad na data.
+- [ ] Mereni adopce je minimalni a idealne account-level.
+- [ ] Event payloady neobsahuji osobni data, obsah zakaznika ani tokeny v URL.
+- [ ] Zprava jde zavrit nebo odlozit, pokud nejde o kriticky stav.
+- [ ] Oznamenim nastavujes expiraci a vlastnika.
+- [ ] RSS/Atom nebo prime URL umoznuji sledovat zmeny bez socialni platformy.
+- [ ] Support vi, jakou zmenu zprava komunikuje a jaky stitek pouzit.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -14395,3 +14546,4 @@ Vlastnik:
 - 2026-08-02: Pridana prakticka priloha Release runbook bez patecni rulety za 60 minut vcetne release karty, preflight kontroly, postupneho rollout planu, rollbacku, post-release zapisu a checklistu.
 - 2026-08-02: Pridana prakticka priloha Produktove metriky bez vanity dashboardu za 60 minut vcetne metrickoveho stromu, privacy-first eventu, prahu pro akci, tydniho rytmu a checklistu.
 - 2026-08-03: Pridana prakticka priloha Self-service znalostni baze bez supportniho bludiste za 60 minut vcetne struktury clanku, privacy bloku, mereni vyhledavani, udrzby a checklistu.
+- 2026-08-03: Pridana prakticka priloha Produktova edukace a in-app oznameni bez otravneho sledovani za 45 minut vcetne kanalu, minimalniho mereni, changelogu, sablony oznamovaci karty a checklistu.
