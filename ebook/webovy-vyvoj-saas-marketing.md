@@ -13989,6 +13989,242 @@ Datum posledni revize:
 
 ---
 
+## Self-service znalostni baze bez supportniho bludiste za 60 minut
+
+Znalostni baze neni sklad odlozenych navodu. Je to produktova soucast, ktera ma snizit nejistotu zakaznika v presny okamzik, kdy nevi, co dal. Kdyz je dobre udelana, zkracuje onboarding, zmensuje supportni frontu a zveda duveru. Kdyz je spatne udelana, jen presune chaos z chatu do dalsiho mista, ktere nikdo neudrzuje.
+
+Privacy-first pohled je jednoduchy: pomoz zakaznikovi bez toho, aby ses ho hned ptal na email, poustel pres nej sledovaci skripty nebo zaviral odpovedi do platformy, kterou nejde normalne prohledat. Dobra znalostni baze ma verejne URL, funguje bez prihlaseni tam, kde to jde, ma RSS nebo changelog pro novinky a meri jen to, co pomaha zlepsit obsah.
+
+### 1. Nejdriv rozdel obsah podle situace zakaznika
+
+Zakaznik nehleda "dokumentaci". Hleda odpoved na konkretni napeti:
+
+- Chci zacit a nevim, co nastavit jako prvni.
+- Neco se rozbilo a potrebuji se rychle odblokovat.
+- Potrebuji vysvetlit rozhodnuti kolegovi nebo pravnikovi.
+- Chci udelat pokrocily krok a nechci rozbit data.
+- Odchazim, exportuji nebo menim dodavatele.
+
+Podle toho rozdel znalostni bazi do peti kosu:
+
+| Kos | Ucel | Typicke clanky |
+| --- | --- | --- |
+| Start | Dostat cloveka k prvni hodnote | zalozeni uctu, prvni projekt, pozvani tymu |
+| Reseni problemu | Rychle odblokovat chybu | prihlaseni, fakturace, import, integrace |
+| Rozhodovani | Pomoci nakupu a internimu schvaleni | bezpecnost, DPA, hosting, subprocesori |
+| Pokrocile pouziti | Zmensit support u slozitejsich toku | API, role, exporty, webhooky |
+| Ukonceni a kontrola | Dat zakaznikovi klid pri zmene | export dat, mazani, offboarding |
+
+Tohle rozdeleni je dulezitejsi nez hezka navigace. Navigace muze byt pozdeji. Situacni kose ti hned ukazou, kde mas mezery.
+
+**Priklad:**
+
+Pokud support porad odpovida na otazku "Kde najdu fakturu?", nepatri to do blogu, do FAQ na konci landing page ani do interniho Slack vlakna. Patri to do clanku v kosi "Reseni problemu" s nazvem "Kde stahnout fakturu a zmenit fakturacni email".
+
+### 2. Pis clanky jako rozhodovaci jednotky
+
+Dobry supportni clanek ma jeden cil. Ne tri. Kdyz uzivatel otevrel navod k importu CSV, nechce cist filozofii datove migrace. Chce vedet, jak pripravit soubor, co se stane pri chybe a jak import vratit.
+
+Sablona clanku:
+
+```text
+Nazev:
+Pro koho to je:
+Kdy to pouzit:
+Co budete potrebovat:
+Kroky:
+Co se stane po dokonceni:
+Caste chyby:
+Bezpecnost a data:
+Kdy kontaktovat podporu:
+Posledni aktualizace:
+Vlastnik:
+```
+
+Nazev pis podle sloves a vysledku:
+
+- "Pozvat clena tymu"
+- "Zmenit fakturacni email"
+- "Exportovat projektova data"
+- "Obnovit pristup pres zapomenute heslo"
+- "Pripojit webhook a otestovat podpis"
+
+Slaby nazev je "Nastaveni uctu". To je police, ne odpoved. Lepsi je "Zmenit jmeno pracovniho prostoru" nebo "Vypnout pristup clena tymu". Ano, je to mene monumentalni. Presne proto to funguje.
+
+### 3. Bezpecnostni a privacy informace dej primo do navodu
+
+Privacy stranka je nutna, ale sama o sobe nestaci. Zakaznik potrebuje citlivou informaci prave ve chvili, kdy dela citlivou akci. U exportu chce vedet, kdo export uvidi. U webhooku chce vedet, co se posila ven. U podpory chce vedet, jestli musi poslat screenshot se zakaznickymi daty.
+
+Do kazdeho navodu pridej kratky blok:
+
+```text
+Bezpecnost a data
+- Tato akce pracuje s:
+- Data se odesilaji do:
+- Pristup potrebuje role:
+- Auditni stopa uklada:
+- Mazani nebo zmena je mozne:
+```
+
+Priklad pro export:
+
+```text
+Bezpecnost a data
+- Export obsahuje nazvy projektu, clenstvi v tymu a vybrane zaznamy.
+- Export se nevytvari pres treti marketingovy nastroj.
+- Odkaz ke stazeni vidi jen uzivatel s roli Owner nebo Admin.
+- Auditni stopa uklada cas, uzivatele, typ exportu a ID workspace.
+- Soubor je automaticky smazan po 7 dnech.
+```
+
+Tohle neni pravnicke divadlo. Je to prakticka brzda proti tomu, aby tym pozdeji do exportu pridal "jen jeste jedno pole" a nikdo si nevsiml, ze z navodu zmizela pravda.
+
+### 4. Vyhledavani ma slouzit odpovedi, ne profilovani
+
+Vyhledavani ve znalostni bazi je uzitecne, ale nemusi z nej vzniknout profil zakaznika. Pro maly SaaS obvykle staci agregovane dotazy a seznam dotazu bez vysledku.
+
+Mer:
+
+- hledany vyraz,
+- pocet vysledku,
+- kliknuty clanek,
+- zda po hledani vznikl support ticket,
+- den nebo tyden, ne nutne presny cas,
+- jazyk nebo sekci, pokud je to potreba pro obsah.
+
+Nemer:
+
+- cele session replaye cteni dokumentace,
+- osobni historii vsech dotazu konkretniho uzivatele,
+- obsah zakaznickych dat vlozeny do vyhledavani,
+- cross-site identifikatory,
+- marketingove publikum podle prectenych clanku.
+
+Pokud nekdo do vyhledavani vlozi email, token nebo cast smlouvy, system by to mel umet minimalne nezobrazovat v internich reportech. Idealni je dotazy pred ulozenim ocistit o zjevne citlive vzory: emaily, API klice, dlouhe tokeny, telefonni cisla a URL s parametry.
+
+**Codyho komentar:** Search logy jsou takovy maly supportni rentgen. Hodne pomahaji, ale kdyz je sbiras bez filtru, najdes v nich i veci, ktere jsi nikdy nechtel vlastnit.
+
+### 5. Napoj support, ale neschovej odpovedi za ticket
+
+Znalostni baze a support maji byt jeden system uceni. Kazdy opakovany ticket je kandidat na clanek, kazdy spatny clanek je kandidat na opravu produktu.
+
+Jednoduche pravidlo:
+
+- Jeden dotaz jednou odpovez cloveku.
+- Druhy podobny dotaz dopln do existujiciho clanku.
+- Treti podobny dotaz vytahni do samostatneho navodu nebo oprav produktovy tok.
+
+Support formular ve znalostni bazi ma byt stridmy:
+
+```text
+Predmet:
+Email pro odpoved:
+URL stranky nebo ID workspace:
+Co jste zkouseli:
+Co jste cekali:
+Co se stalo:
+Souhlasite s prilohou screenshotu bez citlivych dat:
+```
+
+Pole "URL stranky nebo ID workspace" je lepsi nez volny dump situace. Uzivatel pak neposila pulku databaze do textarea. Kdyz potrebujes citlive artefakty, vyzadej si je samostatnym bezpecnym kanalem a s jasnou retenci.
+
+### 6. Udrzba: kazdy clanek musi mit vlastnika a datum
+
+Dokumentace starne potichu. Produkt se meni, tlacitka se prejmenuji, screenshoty zhnednou a jednou zjistis, ze nejnavstevovanejsi navod popisuje UI, ktere uz pul roku neexistuje. Klasika. Neni to katastrofa, jen signal, ze dokumentace nema provozni rytmus.
+
+Minimum pro udrzbu:
+
+- Kazdy clanek ma vlastnika.
+- Kazdy clanek ma datum posledni vecne kontroly.
+- Kriticke clanky maji revizi po kazdem releasu, ktery meni dany tok.
+- Support muze oznacit clanek jako "neodpovida realite".
+- Metriky bez vysledku a support dotazy bez clanku se prochazi jednou tydne.
+- Archivovane clanky zustanou presmerovane, pokud na ne vede verejna URL.
+
+Prakticky staci jedna tabulka:
+
+```text
+Clanek:
+Kos:
+Vlastnik:
+Produktovy tok:
+Posledni kontrola:
+Trigger revize:
+Nejblizsi akce:
+```
+
+Kdyz pouzivas screenshoty, udrzuj je jako pomoc, ne jako jediny navod. Textove kroky musi fungovat i bez obrazku. U pristupnosti mysli na to, ze obrazky potrebuji alternativni popis a navod nesmi stat jen na barve nebo vizualnim umisteni. WCAG 2.2 je dobry primarni ramec pro pristupnost weboveho obsahu: https://www.w3.org/TR/WCAG22/
+
+### 7. 60min postup
+
+```text
+0-10 min: Vyber deset nejcastejsich supportnich otazek.
+Vezmi posledni tickety, emaily nebo dotazy z dema. Bez osobnich detailu.
+
+10-20 min: Rozdel je do peti kosu.
+Start, reseni problemu, rozhodovani, pokrocile pouziti, ukonceni a kontrola.
+
+20-30 min: Napis tri nejdulezitejsi clanky podle sablony.
+Kazdy clanek resi jednu situaci, ne celou oblast produktu.
+
+30-40 min: Dopln blok "Bezpecnost a data".
+U kazde akce popis, jaka data se zpracovavaji a kdo k nim ma pristup.
+
+40-50 min: Nastav minimalni mereni.
+Sleduj dotazy bez vysledku, nejctenejsi clanky a nasledne support tickety bez osobniho profilovani.
+
+50-60 min: Prirad vlastniky a revizni trigger.
+Kazdy clanek ma datum kontroly a udalost, pri ktere se musi znovu projit.
+```
+
+### Sablona supportniho clanku
+
+```text
+# [Sloveso + vysledek]
+
+Pro koho to je:
+Kdy to pouzit:
+Co budete potrebovat:
+
+## Kroky
+1.
+2.
+3.
+
+## Co se stane po dokonceni
+
+## Caste chyby
+
+## Bezpecnost a data
+- Tato akce pracuje s:
+- Data se odesilaji do:
+- Pristup potrebuje:
+- Auditni stopa uklada:
+- Retence nebo mazani:
+
+## Kdy kontaktovat podporu
+
+Posledni vecna kontrola:
+Vlastnik:
+```
+
+### Checklist: self-service znalostni baze bez supportniho bludiste
+
+- [ ] Znalostni baze je rozdelena podle situaci zakaznika, ne podle interni organizace tymu.
+- [ ] Nejdulezitejsi clanky maji nazvy podle akce a vysledku.
+- [ ] Kazdy clanek resi jednu konkretni situaci.
+- [ ] Kriticke navody obsahuji blok "Bezpecnost a data".
+- [ ] Verejne odpovedi nejsou schovane jen v support ticketech nebo socialnich platformach.
+- [ ] Support formular nesbira citlive artefakty bez jasneho duvodu.
+- [ ] Vyhledavani uklada jen agregovane nebo ocistene signaly.
+- [ ] Search logy neobsahuji emaily, tokeny, cele URL s parametry ani obsah zakaznickych dat.
+- [ ] Kazdy clanek ma vlastnika a datum posledni kontroly.
+- [ ] Release, ktery meni produktovy tok, spousti revizi souvisejici dokumentace.
+- [ ] Archivovane verejne URL maji presmerovani nebo jasne vysvetleni.
+- [ ] Navody jsou pouzitelne i bez obrazku a respektuji zakladni pristupnost.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -14158,3 +14394,4 @@ Datum posledni revize:
 - 2026-08-02: Pridana prakticka priloha Testovaci prostredi a seed data bez kopirovani produkce za 60 minut vcetne rizik prostredi, seed scenaru, produkcnich vyjimek, oddelenych secrets, retence a checklistu.
 - 2026-08-02: Pridana prakticka priloha Release runbook bez patecni rulety za 60 minut vcetne release karty, preflight kontroly, postupneho rollout planu, rollbacku, post-release zapisu a checklistu.
 - 2026-08-02: Pridana prakticka priloha Produktove metriky bez vanity dashboardu za 60 minut vcetne metrickoveho stromu, privacy-first eventu, prahu pro akci, tydniho rytmu a checklistu.
+- 2026-08-03: Pridana prakticka priloha Self-service znalostni baze bez supportniho bludiste za 60 minut vcetne struktury clanku, privacy bloku, mereni vyhledavani, udrzby a checklistu.
