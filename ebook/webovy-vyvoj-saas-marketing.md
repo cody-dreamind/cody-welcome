@@ -16576,6 +16576,196 @@ Datum vyhodnoceni, data k smazani, agregace, vlastnik a jedna navazujici zmena.
 
 ---
 
+## Formularovy tok bez zbytecnych poli za 60 minut
+
+Formular je casto prvni misto, kde se privacy-first slib potka s realitou. Marketing chce kvalifikovat lead, obchod chce kontext, produkt chce vedet, co clovek resi, pravnik chce souhlas a vyvojar chce co nejmene hran. Vysledek by nemel byt formular, ktery vypada jako vstupni pohovor do korporatniho sklepa.
+
+Dobry formularovy tok ma jednu praci: pomoct cloveku dokoncit konkretni akci s minimalnim mnozstvim dat, ktera opravdu potrebujes pro dalsi krok. GDPR princip minimalizace dat je v clanku 5, transparentnost zpracovani resi mimo jine clanky 12 az 14: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng. EDPB k transparentnosti zduraznuje, ze informace maji byt srozumitelne a dostupne ve spravny okamzik: https://www.edpb.europa.eu/documents/guideline/article-29-working-party-guidelines-on-transparency-under-regulation-2016679_en. U pristupnosti formularu se opiram o WCAG 2.2, hlavne cast 3.3 Input Assistance: https://www.w3.org/TR/WCAG22/.
+
+### 1. Nejdriv pojmenuj obchodni moment
+
+Neexistuje jeden "kontaktni formular". Existuje nekolik ruznych momentu:
+
+- zajemce chce demo,
+- uzivatel zaklada ucet,
+- zakaznik hlasi problem,
+- partner posila doporuceni,
+- clovek stahuje soubor,
+- firma se hlasi na pilot.
+
+Kazdy moment ma jiny ucel, jiny minimalni rozsah dat a jinou odpoved po odeslani. Kdyz je smichas do jednoho obriho formulare, vznikne nejhorsi varianta: malo konverzi, hodne odpadu a spousta poli, ktera nikdo nepouzije.
+
+Sablona jedne vety:
+
+```text
+Tento formular existuje proto, aby [typ cloveka] mohl [akce] a my mohli [nase dalsi akce] bez [zbytecny zasah do soukromi nebo zdrzeni].
+```
+
+Priklad:
+
+```text
+Tento formular existuje proto, aby provozni reditel SaaS firmy mohl pozadat o 30min audit analytiky a my mohli poslat relevantni termin a pripravu bez sbirani celeho stacku, rozpoctu a osobnich profilu clenu tymu.
+```
+
+### 2. Rozdel pole na nutna, volitelna a zakazana
+
+U kazdeho pole si napis, co se stane, kdyz ho nebudeme mit. Jestli odpoved zni "mozna se to bude hodit", pole patri pryc nebo mezi volitelne otazky po prvnim kontaktu.
+
+| Pole | Vychozi rozhodnuti | Proc |
+| --- | --- | --- |
+| Pracovni email | Nutne u B2B kontaktu | Bez nej nejde odpovedet ani domluvit dalsi krok. |
+| Jmeno | Casto volitelne | Slusi se, ale pro prvni odpoved nemusi byt povinne. |
+| Telefon | Volitelne | Vyuzij jen kdyz opravdu volas a clovek s tim pocita. |
+| Firma | Volitelne nebo nutne podle nabidky | U enterprise dema pomaha, u newsletteru je zbytecna. |
+| Velikost firmy | Spis volitelne | Kvalifikace leadu nema byt vyslech pred prvni hodnotou. |
+| Rozpocet | Opatrne | U pilotu muze davat smysl, u obecneho kontaktu pusobi invazivne. |
+| Volny text | Nutne jen s limitem | Je uzitecny, ale muze obsahovat citliva data. Dej instrukci, co sem nepatri. |
+| Marketingovy souhlas | Samostatne rozhodnuti | Neschovavej ho do odeslani poptavky. |
+
+**Codyho komentar:** Nejlepsi kvalifikacni otazka neni vzdy dalsi pole. Casto je to lepsi text nad formularem. Kdyz nabidka jasne rika, pro koho je a pro koho neni, cast nevhodnych leadu odpadne sama. To je elegantni. A zdarma, coz je muj oblibeny cenovy plan.
+
+### 3. Mikrotext rika ucel pred odeslanim
+
+Clovek nema zjistit az v privacy policy, co se stane po kliknuti na tlacitko. U formulare dej kratky text primo pred odeslanim:
+
+```text
+Ozveme se k pozadavku na demo. Udaje nepouzivame pro reklamni profilovani a neposilame je do socialnich pixelu.
+```
+
+U volneho textu pridej hranici:
+
+```text
+Neposilejte sem hesla, tokeny ani osobni data zakazniku. Staci popsat situaci obecne.
+```
+
+U marketingove volby oddel transakcni komunikaci od odberu:
+
+```text
+[ ] Chci obcas dostat prakticke tipy k privacy-first SaaS provozu. Odhlasit se muzu v kazdem emailu.
+```
+
+Ne:
+
+```text
+Odeslanim souhlasite se zpracovanim pro obchodni a marketingove ucely.
+```
+
+Ta veta micha nutnou odpoved na poptavku s marketingem a jeste se tvari, ze clovek nema volbu. To je presne ten typ "rychleho reseni", ktere pak zere duveru po malych kouscich.
+
+### 4. Validace ma pomahat, ne trestat
+
+Pristupny formular ma jasne popisky, textove chybove hlasky a navod, jak chybu opravit. WCAG 2.2 u input assistance rika, ze zjistena chyba ma byt identifikovana a popsana textem a ze vstupy maji mit popisky nebo instrukce: https://www.w3.org/TR/WCAG22/. Technicky zaklad pro HTML inputy a atributy jako `type`, `name`, `required` nebo `autocomplete` popisuje MDN: https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input.
+
+Prakticka pravidla:
+
+- Label musi existovat i v HTML, ne jen jako placeholder.
+- Povinna pole oznac viditelne a srozumitelne.
+- Chyba patri k poli a ma rict, co udelat dal.
+- Po neuspesnem odeslani zachovej vyplnena data, pokud to neni bezpecnostni riziko.
+- U dlouheho formulare dej souhrn chyb nahoru a odkazy na konkretni pole.
+- Nepouzivej cervenou jako jediny signal chyby.
+- Automaticke doplnovani nastav jen tam, kde dava smysl a nevede ke spatnemu vyplneni.
+
+Priklady chyb:
+
+```text
+Slabe: Email je spatne.
+Lepsi: Zadejte email ve formatu jmeno@firma.cz.
+
+Slabe: Povinne pole.
+Lepsi: Napis jednou vetou, co chcete probrat na demu.
+
+Slabe: Telefon neni validni.
+Lepsi: Telefon je volitelny. Pokud ho chcete pridat, pouzijte mezinarodni format, napriklad +420 777 123 456.
+```
+
+### 5. Datova cesta zacina tlacitkem
+
+Odeslani formulare neni konec. Je to zacatek datove cesty. Pro kazdy formular si zapis:
+
+- kam se data ulozi,
+- komu prijde notifikace,
+- zda se data posilaji do CRM, email nastroje nebo podpory,
+- co se loguje technicky,
+- jak dlouho zustavaji surova data,
+- jak clovek opravi nebo smaze zadost,
+- co se stane pri chybnem odeslani.
+
+Minimalni datova karta formulare:
+
+```text
+Nazev formulare:
+
+Primarni URL:
+
+Ucel:
+
+Povinna pole:
+
+Volitelna pole:
+
+Pole, ktera nikdy nesbirame:
+
+Systemy po odeslani:
+
+Notifikace:
+
+Logovani:
+
+Retence:
+
+Kdo odpovida:
+
+Text pred odeslanim:
+
+Chybove stavy:
+```
+
+Kdyz formular posila data do vice systemu, pridej jeden test: odesli testovaci poptavku a zkontroluj, kde vsude se objevila. Casto zjistis, ze stary webhook posila leady do nastroje, ktery uz nikdo nepouziva. To neni integrace, to je datovy dluh s usmevem na tvari.
+
+### 6. 60min postup
+
+```text
+00-08 min: Vyber jeden dulezity formular.
+Demo, kontakt, pilot, support, newsletter, download nebo partner referral.
+
+08-15 min: Napis jednu vetu obchodniho momentu.
+Kdo formular pouziva, jakou akci dela a co udelas po odeslani.
+
+15-28 min: Roztrid pole.
+Nutna, volitelna, pozdeji, zakazana. U kazdeho povinneho pole napis duvod.
+
+28-38 min: Uprav mikrotext.
+Ucel pred odeslanim, hranice volneho textu, oddeleni marketingove preference.
+
+38-48 min: Zkontroluj pristupnost a validaci.
+Labely, required stav, chybove hlasky, zachovani hodnot, klavesnice, souhrn chyb.
+
+48-55 min: Projdi datovou cestu.
+Databaze, email, CRM, analytika, logy, exporty, notifikace, retence.
+
+55-60 min: Zapis jednu opravu.
+Smazat pole, upravit text, vypnout webhook, zkratit retenci nebo opravit chybu.
+```
+
+### Checklist: formularovy tok bez zbytecnych poli
+
+- [ ] Formular ma jednu jasnou praci a jednu primarni dalsi akci.
+- [ ] Kazde povinne pole ma napsany duvod.
+- [ ] Volny text upozornuje, co do nej nepatri.
+- [ ] Marketingovy odber je oddeleny od odeslani poptavky.
+- [ ] Text pred odeslanim rika, co se stane s pozadavkem.
+- [ ] Labely nejsou jen placeholdery.
+- [ ] Chybove hlasky jsou textove, konkretni a propojene s polem.
+- [ ] Formular jde vyplnit klavesnici.
+- [ ] Po validacni chybe se neztrati bezpecne vyplnena data.
+- [ ] Formularova data se neposilaji do analytiky jako volny text.
+- [ ] Vim, ktere systemy data po odeslani dostanou.
+- [ ] Retence surovych formularovych dat je popsana.
+- [ ] Stare webhooky, notifikace a exporty jsou vypnute.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -16660,6 +16850,7 @@ Datum vyhodnoceni, data k smazani, agregace, vlastnik a jedna navazujici zmena.
 - MDN, Referrer-Policy header: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Referrer-Policy
 - MDN, Content-Disposition header: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Disposition
 - MDN, HTMLAnchorElement download property: https://developer.mozilla.org/en-US/docs/Web/API/HTMLAnchorElement/download
+- MDN, input HTML element: https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input
 - W3C WAI, All WCAG 2.2 Techniques: https://www.w3.org/WAI/WCAG22/Techniques/
 - Keep a Changelog, Version 1.1.0: https://keepachangelog.com/en/1.1.0/
 - Semantic Versioning 2.0.0: https://semver.org/
@@ -16770,3 +16961,4 @@ Datum vyhodnoceni, data k smazani, agregace, vlastnik a jedna navazujici zmena.
 - 2026-08-03: Pridana prakticka priloha Chybove a stavove stranky bez ztraty duvery za 45 minut vcetne HTTP statusu, 404/401/403/500 textu, API chyb, udrzby a checklistu.
 - 2026-08-03: Pridana prakticka priloha Consent log a audit preferenci bez datoveho skladu za 60 minut vcetne rozliseni souhlasu, preference centra, importu historickych kontaktu, auditu a checklistu.
 - 2026-08-03: Pridana prakticka priloha Marketingovy datovy inventar bez prekvapeni za 45 minut vcetne kampanove karty, UTM pravidel, uklidu po kampani a checklistu.
+- 2026-08-03: Pridana prakticka priloha Formularovy tok bez zbytecnych poli za 60 minut vcetne trideni poli, mikrotextu, pristupne validace, datove cesty a checklistu.
