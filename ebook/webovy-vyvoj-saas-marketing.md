@@ -14693,6 +14693,165 @@ Datum dalsi revize:
 
 ---
 
+## Mesicni uklid dat a verejnych slibu za 60 minut
+
+SaaS se nerozbije jen velkym spatnym rozhodnutim. Casto se rozpadne po malych "docasne" vyjimkach: jeden export do tabulky, jeden formular s polem navic, jeden stary pilotni dataset, jeden dodavatel po testu, jedna veta na webu, ktera kdysi platila a ted uz spis kreativne doufa. Mesicni uklid je kratky ritual, ktery tyhle drobnosti vytahne na svetlo driv, nez se z nich stane auditni, supportni nebo obchodni problem.
+
+Privacy-first provoz neni jen o tom, co nepridas. Je i o tom, co pravidelne mazes, zpresnujes a zaviras. Data bez ucelu, metriky bez rozhodnuti, alerty bez reakce a sliby bez vlastnika jsou stejny druh neporadku. Jen kazdy smrdi v jinem nastroji.
+
+**Codyho komentar:** Nejlevnejsi compliance je uklid vcas. Nejdrassi je archeologie po roce, kdy se nekdo zepta, proc mame v peti systemech tri ruzne odpovedi na stejnou otazku.
+
+### 1. Projdi ctyri hromady
+
+Za jednu hodinu neuklidis celou firmu. Vyber ctyri hromady, ktere maji nejvetsi dopad na duveru:
+
+| Hromada | Co hledat | Typicka oprava |
+| --- | --- | --- |
+| Data | exporty, stare leady, pilotni datasety, logy, prilohy | smazat, anonymizovat, priradit retenci |
+| Nastroje | trialy, integrace, webhooky, AI pomocnici, tabulky | vypnout, doplnit vendor review, urcit vlastnika |
+| Verejne sliby | web, trust page, cenik, FAQ, privacy dokumenty | zpresnit vetu, odebrat nepravdivy slib, pridat odkaz |
+| Provozni signal | alerty, reporty, metriky, support tagy | zrusit hluk, pridat rozhodovaci otazku, nastavit prah |
+
+Pravidlo: kdyz vec nema ucel, vlastnika a datum dalsi kontroly, bud ji uklid, nebo ji oznac jako riziko. Nenech ji jen "zatim byt". To je nejkratsi cesta k tomu, aby za tri mesice nikdo nevedel, jestli se na ni muze sahnout.
+
+### 2. Data: zacni od mist, kam se kopiruje rucne
+
+Nejvetsi neporadek vetsinou nelezi v primarni databazi. Lezi tam, kde lide resili problem rychle: CSV exporty, sdilene disky, support prilohy, screenshoty, docasne tabulky, testovaci importy, nahravky callu a stare pilotni slozky.
+
+Rychla kontrola:
+
+- Existuji exporty starsi nez 30 dni bez vlastnika?
+- Lezi nekde pilotni data po ukoncenem pilotu?
+- Obsahuji support tickety prilohy, ktere uz nejsou potreba?
+- Jsou v logach cele zpravy, emaily nebo request body?
+- Ma nekdo lokalni kopii produkcnich dat pro debug?
+- Existuje dataset, u ktereho nikdo nevi, odkud pochazi?
+
+U kazdeho nalezu zvol jednu akci:
+
+| Stav | Akce |
+| --- | --- |
+| Data uz nemaji ucel | Smazat a zapsat, ze bylo uklizeno. |
+| Data maji ucel, ale chybi retence | Doplnit vlastnika a datum smazani. |
+| Data jsou citliva a jsou ve spatnem miste | Presunout do kontrolovaneho systemu nebo odstranit. |
+| Nevis, jestli se smi smazat | Oznacit riziko a dat termin overeni. |
+
+**Priklad:**
+
+Po pilotu zustal v tymove slozce soubor `pilot-leads-final.csv`. Obsahuje emaily a poznamky z obchodnich rozhovoru. Pilot skoncil pred dvema mesici. Rozumna akce: overit, zda existuje obchodni nebo smluvni duvod data dal drzet, prenest nutne minimum do CRM, zbytek smazat a do pilotni sablony pridat radek "datum uklidu dat".
+
+### 3. Nastroje: vypni to, co uz neni soucast systemu
+
+Docasny nastroj se umi tvarit jako trvaly proces. Proto projdi za posledni mesic:
+
+- nove trialy,
+- nove integrace,
+- zapnute webhooky,
+- AI nebo analyticke nastroje,
+- sdilene dokumenty s daty,
+- nastroje, ktere uz nikdo aktivne nepouziva.
+
+U kazdeho nastroje si poloz pet otazek:
+
+1. Jake data tam jdou?
+2. Kdo ma pristup?
+3. Je to porad potreba?
+4. Jak se data exportuji nebo mazou?
+5. Co se rozbije, kdyz to vypneme?
+
+Pokud odpoved na ctvrty nebo paty bod neexistuje, nastroj neni jen nastroj. Je to zavislost bez mapy.
+
+Minimalni rozhodnuti:
+
+```text
+Nastroj:
+Stav: ponechat / vypnout / overit
+Duvod:
+Data:
+Vlastnik:
+Dalsi kontrola:
+```
+
+Kdyz nastroj vypinas, nezapomen na API klice, webhooky, exporty, pristupy, DNS nebo vlozene skripty. Vypnout fakturaci dodavatele a nechat jeho skript na webu je uklid jen napul. Takovy ten uklid, kdy je mistnost krasna, ale vsechen bordel je ve skrini a dvere drzi kolenem.
+
+### 4. Verejne sliby: zkontroluj, jestli porad mluvi pravdu
+
+Verejny slib ma delsi zivot nez interni rozhodnuti. Jedna veta na trust page muze prezit tri migrace, dva dodavatele a jeden refaktor onboardingu. Proto ji jednou mesicne projdi.
+
+Kontroluj hlavne:
+
+- "data jsou v EU",
+- "nepouzivame trackery",
+- "export je dostupny",
+- "smazani probehne do X dni",
+- "odpovidame do X hodin",
+- "bez cookies",
+- "zadne AI nad zakaznickymi daty",
+- "DPA dostupna na vyzadani",
+- cenikove limity a planove rozdily.
+
+U kazde vety si napis:
+
+| Otazka | Proc |
+| --- | --- |
+| Je to porad pravda? | Produkt a dodavatele se meni rychleji nez web. |
+| Je to dost konkretni? | Mlhava veta zvysuje pocet dotazu. |
+| Mame pro to interni dukaz? | Bez dukazu je slib jen hezky text. |
+| Kdo ji vlastni? | Bez vlastnika zastara. |
+
+Lepsi je zpresnit slib nez ho nafukovat. Misto "vsechna data zustavaji v EU" napis presneji: "Aplikacni data a primarni zalohy provozujeme v EU; podpurne dodavatele evidujeme v seznamu subprocesoru." Pokud to odpovida realite, je to silnejsi nez maximalisticka veta, ktera neprezije prvni security dotaznik.
+
+### 5. Signaly: nech si jen ty, ktere meni praci
+
+Metriky, alerty a reporty maji tendenci se mnozit. Kazdy novy dashboard vypada uzitecne v den vzniku. O mesic pozdeji uz se na nej nikdo nediva, ale porad zije a obcas nekoho znervozni.
+
+Pro kazdy pravidelny signal se zeptej:
+
+- Kdo ho cte?
+- Jake rozhodnuti podle nej dela?
+- Kdy naposledy vedl ke zmene?
+- Obsahuje osobni nebo zakaznicka data?
+- Lze ho nahradit agregaci nebo tydnim review?
+
+Pokud signal nema odpoved, zrus ho nebo prepis. Pro maly tym je jeden dobry tydenni report lepsi nez pet kanalu, kde kazdy den neco blikne a nikdo nevi, jestli je to dulezite.
+
+### 6. 60min postup
+
+```text
+00-10 min: Vyber rozsah.
+Jeden produkt, jeden tym nebo jeden hlavni tok. Ne celou firmu.
+
+10-25 min: Uklid data.
+Najdi stare exporty, pilotni data, support prilohy a logy bez ucelu.
+
+25-35 min: Uklid nastroje.
+Projdi nove trialy, integrace, webhooky a pristupy. Oznac ponechat/vypnout/overit.
+
+35-45 min: Uklid verejne sliby.
+Zkontroluj trust page, cenik, privacy texty, FAQ a onboarding mikrocopy.
+
+45-55 min: Uklid signaly.
+Zrus nebo prepis alerty, reporty a metriky bez vlastnika nebo rozhodnuti.
+
+55-60 min: Zapis tri vysledky.
+Co bylo smazano, co bylo zpresneno, co zustava jako riziko s terminem.
+```
+
+### Checklist: mesicni uklid
+
+- [ ] Uklid ma jasny rozsah a vlastnika.
+- [ ] Stare exporty a pilotni datasety maji rozhodnuti: smazat, ponechat s retenci, nebo overit.
+- [ ] Support prilohy a screenshoty se nedrzi bez ucelu.
+- [ ] Docasne nastroje, webhooky a trialy maji stav ponechat/vypnout/overit.
+- [ ] U aktivnich dodavatelu je jasne, jaka data vidi a kdo ma pristup.
+- [ ] Verejne sliby na webu, trust page, ceniku a privacy textech odpovidaji realite.
+- [ ] Maximalisticke vety jsou zpresnene na overitelne formulace.
+- [ ] Alerty a reporty maji vlastnika a rozhodovaci otazku.
+- [ ] Nepouzivane metriky se rusi nebo presouvaji do agregovaneho review.
+- [ ] Vysledek uklidu obsahuje tri veci: smazano, zpresneno, riziko s terminem.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -14866,3 +15025,4 @@ Datum dalsi revize:
 - 2026-08-03: Pridana prakticka priloha Produktova edukace a in-app oznameni bez otravneho sledovani za 45 minut vcetne kanalu, minimalniho mereni, changelogu, sablony oznamovaci karty a checklistu.
 - 2026-08-03: Pridana prakticka priloha Souhlasy a preference bez temnych vzoru za 60 minut vcetne inventare rozhodnuti, preference centra, auditovatelneho zaznamu souhlasu, odvolani a checklistu.
 - 2026-08-03: Pridana prakticka priloha Alerty a interni notifikace bez hluku za 45 minut vcetne klasifikace zprav, alert karty, datove minimalizace, priorit, testovani a checklistu.
+- 2026-08-03: Pridana prakticka priloha Mesicni uklid dat a verejnych slibu za 60 minut vcetne uklidu dat, nastroju, verejnych tvrzeni, signalu a checklistu.
