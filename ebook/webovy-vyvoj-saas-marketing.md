@@ -16410,6 +16410,172 @@ Datum dalsi kontroly:
 
 ---
 
+## Marketingovy datovy inventar bez prekvapeni za 45 minut
+
+Marketing u maleho SaaS umi nenapadne vyrobit vic datovych toku nez samotny produkt. Landing page ma formular, kampan ma UTM, webinar ma registraci, newsletter ma preference, partnersky odkaz ma referral kod, lead magnet ma download a obchod si k tomu prida poznamku do CRM. Kazda cast sama vypada nevinne. Dohromady z toho muze byt mapa, kterou nikdo neumi vysvetlit.
+
+Marketingovy datovy inventar je kratka kontrola: jake kampane bezi, jaka data sbiraji, kam odchazeji, kdo je pouziva a kdy skonci jejich ucel. Neni to brzda marketingu. Je to zpusob, jak neztratit privacy-first hodnotu ve chvili, kdy se pridavaji "jen male" kampanove experimenty.
+
+**Codyho komentar:** Marketing bez inventare dat je jako kuchyn bez popisku na krabickach. Chvili to vypada v pohode, pak nekdo otevre "lead magnet final" a najde tam tri roky stare emaily. Romantika jak z auditu.
+
+### 1. Sepis kampane podle realneho toku
+
+Nezacinej podle nastroju. Zacni podle toho, kudy clovek jde.
+
+| Tok | Typicka data | Hlavni riziko |
+| --- | --- | --- |
+| Landing page s CTA | referer, UTM, CTA klik, formular status | mereni vic, nez je potreba pro rozhodnuti |
+| Lead magnet | email, volitelny zajem, download event | schovane prihlaseni k marketingu |
+| Webinar | email, role, dotaz, ucast | nahravky a follow-up bez jasneho ucelu |
+| Partner/referral | kod partnera, zdroj, stav leadu | sledovani konkretni osoby misto kvality kanalu |
+| Newsletter | email, preference, odhlaseni | duplicity mezi nastroji a nefunkcni odvolani |
+| Remarketingova kampan | identifikator, publikum, pixel | cross-site sledovani a souhlasova slozitost |
+
+U kazdeho toku si zapis:
+
+- kde zacina,
+- co clovek vidi,
+- jaka data zada,
+- co meri web,
+- kam data odchazeji,
+- kdo podle nich dela rozhodnuti,
+- kdy se data mazou nebo agreguji.
+
+Kdyz u nektereho toku neumis vyplnit "kdo podle toho dela rozhodnuti", data pravdepodobne jen skladujes. Skladovani neni strategie, jen pomalejsi forma uklidu.
+
+### 2. Jedna karta pro kazdou kampan
+
+Kampanova karta ma byt kratka a provozni. Mela by jit vyplnit pred spustenim kampane a zkontrolovat po jejim konci.
+
+```text
+Nazev kampane:
+
+Primarni URL:
+
+Cil:
+[jake rozhodnuti nebo obchodni vysledek kampan podporuje]
+
+Segment:
+[komu je kampan urcena]
+
+Data od cloveka:
+[formularova pole, preference, volitelne odpovedi]
+
+Merene signaly:
+[page view, CTA klik, formular odeslan, download, odpoved]
+
+Zakazana data:
+[email v UTM, obsah zpravy v analytice, raw request, social pixel bez souhlasu]
+
+Systemy:
+[web, analytika, CRM, email nastroj, support]
+
+Retence:
+[kdy kampanove surove zaznamy konci, co zustava agregovane]
+
+Vlastnik:
+
+Datum vyhodnoceni:
+```
+
+Karta neni kvuli papiru. Je kvuli jedne vete: "Tuhle kampan muzeme vysvetlit zakaznikovi i sami sobe." Pokud ne, kampan neni pripravena.
+
+### 3. UTM nejsou misto pro osobni informace
+
+UTM parametry maji popsat zdroj a kampan, ne cloveka. Bezpecna konvence:
+
+```text
+utm_source=partner-web
+utm_medium=referral
+utm_campaign=2026-08-trust-page-audit
+utm_content=cta-footer
+```
+
+Zakazane nebo rizikove:
+
+```text
+utm_content=jana-novakova
+utm_campaign=lead-abc-soukromy-klient
+utm_source=email-import-z-crm
+```
+
+Jestli potrebujes vedet, kteremu partnerovi patri lead, pouzij referral kod nebo obchodni evidenci. Nedavej osobni ani interni citlive informace do URL. URL cestuje pres prohlizece, logy, screenshoty, support tikety a nekdy i pres cizi nastroje. Je to spatne misto pro tajemstvi.
+
+### 4. Po kampani uklid, ne jen report
+
+Vyhodnoceni kampane nema byt jen graf navstevnosti. U privacy-first provozu ma koncit i datovym uklidem.
+
+Po kampani zkontroluj:
+
+- zda se zastavily docasne formularove varianty,
+- zda UTM nebo referral kody zustaly citelne a bez osobnich udaju,
+- zda se nepotrebne exporty smazaly,
+- zda se leady bez dalsiho ucelu uzavrely nebo nastavily k retenci,
+- zda se preference a odhlaseni propsaly do vsech nastroju,
+- zda verejna stranka neslibuje kampan, ktera uz skoncila,
+- zda insight skoncil v produktu, webu nebo obchodni sablone, ne jen v prezentaci.
+
+Sablona po kampani:
+
+```text
+Kampan:
+
+Co jsme chteli rozhodnout:
+
+Co jsme zjistili:
+
+Kvalita leadu:
+
+Privacy nebo duverove dotazy:
+
+Data k ponechani:
+
+Data k smazani:
+
+Zmena pro web/produkt/prodej:
+
+Datum uklidu:
+```
+
+Kdyz kampan nic nerozhodla, napis to. Je to lepsi nez vymyslet optimisticky graf. Priste zmensi otazku, zjednodus signal nebo mluv primo s lidmi.
+
+### 5. 45min postup
+
+```text
+00-07 min: Sepis aktivni marketingove toky.
+Landing pages, lead magnety, webinary, newslettery, partner odkazy, kampane.
+
+07-15 min: U kazdeho toku zapis data.
+Co clovek zada, co meri web, co jde do CRM/emailu/analytiky.
+
+15-25 min: Vypln kampanovou kartu pro jednu nejdulezitejsi kampan.
+Cil, segment, data, signaly, systemy, retence, vlastnik.
+
+25-32 min: Zkontroluj UTM a referral pravidla.
+Zakaz osobni udaje, nazvy klientu a interni tajne nazvy v URL.
+
+32-39 min: Najdi jednu datovou prebytecnost.
+Pole, export, pixel, event nebo duplicitu, ktera nema rozhodovaci praci.
+
+39-45 min: Nastav uklid po kampani.
+Datum vyhodnoceni, data k smazani, agregace, vlastnik a jedna navazujici zmena.
+```
+
+### Checklist: marketingovy datovy inventar
+
+- [ ] Kazda aktivni kampan ma vlastnika a primarni URL.
+- [ ] Vim, jaka data clovek zadava a jaka data meri web.
+- [ ] Formularova data nejdou do obecne analytiky jako volny text.
+- [ ] UTM parametry neobsahuji osobni udaje, nazvy klientu ani interni citlive informace.
+- [ ] Referral a partner signaly meri kanal, ne skryty osobni profil.
+- [ ] Lead magnet nebo webinar neprepisuje jednorazovy kontakt na marketingovy odber bez jasne volby.
+- [ ] Preference a odhlaseni se propisuji do vsech relevantnich nastroju.
+- [ ] Docasne kampanove exporty maji datum smazani.
+- [ ] Po kampani zustava agregovany poznatek, ne hromada surovych dat.
+- [ ] Verejne sliby, formulare a privacy texty odpovidaji tomu, co kampan opravdu dela.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -16603,3 +16769,4 @@ Datum dalsi kontroly:
 - 2026-08-03: Pridana prakticka priloha Mikrocopy formularu a prazdnych stavu bez pravnicke mlhy za 45 minut vcetne textu poli, chybovych hlasek, prazdnych stavu, pristupnosti a checklistu.
 - 2026-08-03: Pridana prakticka priloha Chybove a stavove stranky bez ztraty duvery za 45 minut vcetne HTTP statusu, 404/401/403/500 textu, API chyb, udrzby a checklistu.
 - 2026-08-03: Pridana prakticka priloha Consent log a audit preferenci bez datoveho skladu za 60 minut vcetne rozliseni souhlasu, preference centra, importu historickych kontaktu, auditu a checklistu.
+- 2026-08-03: Pridana prakticka priloha Marketingovy datovy inventar bez prekvapeni za 45 minut vcetne kampanove karty, UTM pravidel, uklidu po kampani a checklistu.
