@@ -16034,6 +16034,191 @@ Kdy se ma zkontrolovat:
 
 ---
 
+## Prakticka priloha: Chybove a stavove stranky bez ztraty duvery za 45 minut
+
+Chybova stranka je produktovy moment. Uzivatel uz narazil na problem, robot vyhledavace se snazi pochopit stav URL a support by nemel dostat jen screenshot s textem "nefunguje to". Dobre navrzena 404, 410, 500 nebo maintenance stranka proto musi udelat tri veci naraz: rict pravdu, nabidnout dalsi krok a neprozradit vic dat, nez je nutne.
+
+HTTP status kody nejsou dekorace pro vyvojare. RFC 9110 definuje semantiku HTTP odpovedi a Google Search Central popisuje, jak status kody a sitove chyby ovlivnuji crawling a indexaci: https://www.rfc-editor.org/rfc/rfc9110.html a https://developers.google.com/search/docs/crawling-indexing/http-network-errors. Pro API chyby se hodi standard Problem Details podle RFC 9457: https://datatracker.ietf.org/doc/html/rfc9457.
+
+**Codyho komentar:** Nejhorsi chybova stranka je ta, ktera se tvari jako normalni obsah. Uzivatel je zmatenejsi, crawler ma bordel a tym pak ladi SEO, ktere si sam podkopl.
+
+### 1. Rozdel chyby podle publika
+
+Ne vsechny chyby patri do stejne sablony. Verejna landing page, prihlasena aplikace a API endpoint maji jiny kontext.
+
+| Situace | Co ma uzivatel vedet | Co nema unikat |
+| --- | --- | --- |
+| 404 nenalezena stranka | Stranka neexistuje nebo se presunula, kam jit dal. | Interni routing, stack trace, podobne soukrome URL. |
+| 410 smazany obsah | Obsah byl zamerne odstraneny a nevrati se. | Detaily o tom, proc byl konkretni zakaznicky obsah smazan. |
+| 401/403 pristup | Je potreba prihlaseni nebo chybi opravneni. | Zda konkretni objekt existuje, pokud to uzivatel nema videt. |
+| 429 limit | Pozadavek je docasne omezeny, kdy to zkusit znovu. | Interni limity cele infrastruktury. |
+| 500 chyba aplikace | Problem je na nasi strane, co delat ted. | Technicke detaily, tokeny, SQL, request body. |
+| Planovana udrzba | Co je nedostupne, od kdy do kdy, kde sledovat stav. | Zbytecne detaily o infrastrukture a dodavatelich. |
+
+Pro verejny web chces pomoct cloveku pokracovat. Pro aplikaci chces navic chranit zakaznicka data. Pro API chces dat stroji strukturovanou odpoved, kterou klient umi zpracovat.
+
+### 2. 404 neni omluva, ale rozcestnik
+
+Dobra 404 stranka nerika jen "stranka nenalezena". Ma byt mala navigacni pomoc.
+
+Minimalni obsah:
+
+- jasny nadpis,
+- kratke vysvetleni bez viny uzivatele,
+- odkaz na homepage nebo hlavni cast produktu,
+- vyhledavani nebo odkazy na dulezite sekce, pokud web ma obsah,
+- kontakt, pokud clovek hledal neco obchodne duleziteho,
+- spravny HTTP status `404`.
+
+Priklad textu:
+
+```text
+Stranku jsme nenasli
+
+Odkaz je mozna stary nebo je v adrese preklep. Muzete prejit na hlavni stranku,
+otevrit archiv clanku nebo nam napsat, pokud tu neco duleziteho chybi.
+
+[Hlavni stranka] [Archiv clanku] [Kontakt]
+```
+
+U privacy-first webu nepridavej na 404 stranku automaticky externi search widget, social embed nebo analyticky koktejl. Jestli meris 404, staci minimalni event: URL cesta, referer, cas a status. Neni potreba profilovat cloveka, ktery klikl na rozbity odkaz.
+
+### 3. 401 a 403 nesmi prozrazovat objekty
+
+Prihlaseni a opravneni jsou citlivejsi nez bezna 404. Pokud uzivatel nema opravneni k projektu, fakture nebo exportu, text nesmi zbytecne potvrdit, ze konkretni objekt existuje.
+
+Slabe:
+
+```text
+Projekt "Akvizice firmy XY" existuje, ale nemate k nemu pristup.
+```
+
+Lepsi:
+
+```text
+K teto strance nemate pristup
+
+Zkontrolujte, ze jste prihlaseni spravnym uctem. Pokud ma byt stranka soucasti
+vaseho pracoviste, pozadejte spravce o pristup.
+```
+
+Do internich logu si uloz request ID, user/account ID, cilovy typ objektu a rozhodnuti autorizace. Do UI nedavej interni pravidla, role ani seznam lidi, kteri pristup maji. To patri do admin rozhrani, ne do chybove hlasky.
+
+### 4. 500 stranka ma priznat problem a zachovat klid
+
+Serverova chyba je okamzik, kdy se uzivatel pta dve veci: "Ztratil jsem data?" a "Mam to zkouset znovu?" Odpovez primo.
+
+Sablona:
+
+```text
+Neco se nepodarilo
+
+Problem je na nasi strane. Pokud jste prave odesilali formular, zkontrolujte prosim
+potvrzeni v emailu. Kdyz neprijde, zkuste akci znovu nebo nam napiste s kodem chyby:
+REQ-20260803-1421.
+
+[Zkusit znovu] [Kontaktovat podporu]
+```
+
+Request ID je uzitecne, pokud neni odvoditelne z osobnich dat a samo o sobe neotevira pristup k detailum incidentu. Nikdy neukazuj stack trace, raw chybu databaze, cesty na serveru, tokeny, cele request body nebo emailove adresy jinych uzivatelu.
+
+### 5. API chyby pis pro klienta, ne pro debug konzoli
+
+API odpoved ma byt stabilni kontrakt. Pokud klient posle spatny pozadavek, ma vedet, co opravit. Pokud narazi na limit, ma vedet, kdy to zkusit znovu. Pokud nastane serverova chyba, ma dostat request ID a obecny typ problemu.
+
+Jednoducha odpoved podle Problem Details:
+
+```json
+{
+  "type": "https://example.com/problems/rate-limit",
+  "title": "Rate limit exceeded",
+  "status": 429,
+  "detail": "Too many requests for this API key. Retry after 60 seconds.",
+  "instance": "/requests/REQ-20260803-1421"
+}
+```
+
+Privacy-first pravidlo: `detail` nesmi obsahovat citlive hodnoty z requestu. Pokud validujes email, cislo faktury nebo nazev zakaznika, vrat pole a pravidlo, ne cele osobni nebo obchodni udaje. Interni debug zustava v logu s omezenym pristupem a retenci.
+
+### 6. Stavove stranky a udrzba maji mit predem napsane texty
+
+Planovana udrzba se nema psat ve stresu pet minut pred deployem. Priprav si tri sablony:
+
+```text
+Planovana udrzba
+Od [cas] do [cas] bude nedostupna [cast sluzby]. Data zustavaji ulozena a po dokonceni neni potreba zadna akce.
+
+Degradace sluzby
+[Cast sluzby] je pomalejsi nebo castecne nedostupna. Pracujeme na oprave. Dalsi update dame do [cas].
+
+Incident vyresen
+Sluzba je obnovena. Strucny popis dopadu: [dopad]. Preventivni kroky doplnime do postmortem zaznamu.
+```
+
+Komunikuj rozsah dopadu, ne interni drama. Kdyz vypadne externi dodavatel, rekni, ktera funkce je ovlivnena a co ma zakaznik delat. Nemusis verejne rozebirat celou architekturu.
+
+### 7. 45min postup
+
+```text
+00-05 min: Sepis nejcastejsi chybove stavy.
+404, 410, 401, 403, 429, 500, planovana udrzba, degradace sluzby.
+
+05-12 min: Zkontroluj skutecne HTTP statusy.
+Stranka s textem "nenalezeno" nesmi vracet 200. Prihlasena chyba nesmi byt verejna cache.
+
+12-20 min: Prepis texty pro cloveka.
+Co se stalo, co se stalo s daty, co ma udelat dal.
+
+20-28 min: Odeber citlive detaily.
+Stack trace, SQL chyby, interni URL, osobni udaje a existence cizich objektu pryc z UI.
+
+28-34 min: Pridej request ID a support cestu.
+ID musi pomoct supportu, ale nesmi byt pristupovy klic k datu.
+
+34-39 min: Uprav API chyby.
+Stabilni `status`, `title`, `type`, kratky `detail`, zadne citlive hodnoty.
+
+39-43 min: Otestuj pristupnost.
+Text jde precist, fokus se neztrati, tlacitka maji jasny nazev, chyba neni jen cervena barva.
+
+43-45 min: Zapis vlastnika.
+Kdo drzi chybove texty, status page sablony a mapu kodu aktualni.
+```
+
+### Sablona karty chyboveho stavu
+
+```text
+Stav:
+HTTP status:
+Kde se muze stat:
+Co vi uzivatel:
+Co nesmime prozradit:
+Primarni dalsi krok:
+Support informace:
+Logovana metadata:
+Retence logu:
+Vlastnik:
+Datum kontroly:
+```
+
+### Checklist: chybove a stavove stranky
+
+- [ ] 404, 410, 401, 403, 429 a 500 maji spravny HTTP status.
+- [ ] Chybove stranky se netvari jako normalni obsah s `200 OK`.
+- [ ] 404 stranka nabizi rozumny dalsi krok bez externich trackeru.
+- [ ] 401/403 neprozrazuji existenci objektu, ke kterym uzivatel nema pristup.
+- [ ] 500 stranka rika, zda ma uzivatel akci opakovat nebo kontaktovat podporu.
+- [ ] UI nikdy neukazuje stack trace, SQL chyby, tokeny ani raw requesty.
+- [ ] API chyby maji stabilni strukturu a neobsahuji citlive hodnoty.
+- [ ] Rate limit odpoved rika, kdy to zkusit znovu.
+- [ ] Maintenance a incident texty jsou pripravene predem.
+- [ ] Chybove eventy meri minimum nutne pro opravu.
+- [ ] Prihlasene a osobni odpovedi nejsou ulozene ve sdilene cache.
+- [ ] Texty jsou pristupne a nespolihaji jen na barvu nebo ikonku.
+- [ ] Kazdy chybovy stav ma vlastnika a datum dalsi kontroly.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -16091,6 +16276,7 @@ Kdy se ma zkontrolovat:
 - Google Search Central, How to specify a canonical URL: https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls
 - Google Search Central, Build and submit a sitemap: https://developers.google.com/search/docs/crawling-indexing/sitemaps/overview
 - Google Search Central, Introduction to structured data markup: https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data
+- Google Search Central, How HTTP status codes, and network and DNS errors affect Google Search: https://developers.google.com/search/docs/crawling-indexing/http-network-errors
 - Google Analytics Help, URL builders: Collect campaign data with custom URLs: https://support.google.com/analytics/answer/10917952
 - RFC 9309, Robots Exclusion Protocol: https://www.rfc-editor.org/rfc/rfc9309
 - RSS Advisory Board, RSS 2.0 Specification: https://www.rssboard.org/rss-specification
@@ -16224,3 +16410,4 @@ Kdy se ma zkontrolovat:
 - 2026-08-03: Pridana prakticka priloha Stahovatelne soubory bez lead-gate pasti za 45 minut vcetne HTML/PDF rozhodnuti, download mereni, technickych hlavicek, pristupnosti a checklistu.
 - 2026-08-03: Pridana prakticka priloha Newsletter a produktovy digest bez platformniho zamku za 45 minut vcetne typu zprav, archivu na vlastni domene, sbirani kontaktu, mereni, vyberu nastroje a checklistu.
 - 2026-08-03: Pridana prakticka priloha Mikrocopy formularu a prazdnych stavu bez pravnicke mlhy za 45 minut vcetne textu poli, chybovych hlasek, prazdnych stavu, pristupnosti a checklistu.
+- 2026-08-03: Pridana prakticka priloha Chybove a stavove stranky bez ztraty duvery za 45 minut vcetne HTTP statusu, 404/401/403/500 textu, API chyb, udrzby a checklistu.
