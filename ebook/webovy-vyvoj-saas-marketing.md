@@ -17941,6 +17941,143 @@ Do backlogu zapis maximalne tri navazujici napady. Ostatni nech byt. Zkontroluj,
 
 ---
 
+## Obsahove follow-upy z reakci bez recyklacniho autopilota za 60 minut
+
+Kdyz uz mas reakce po publikaci ztridene, dalsi krok neni automaticky "udelej z toho deset postu". Dalsi krok je rozhodnout, ktera reakce si zaslouzi novy verejny vystup a v jakem formatu. Dobry follow-up neni kopie puvodniho clanku s jinym titulkem. Je to odpoved na konkretni nejasnost, namitku nebo obchodni otazku, ktera se objevila az po kontaktu s realnymi lidmi.
+
+Privacy-first follow-up ma tri pravidla: primarni vysvetleni zustava na vlastni domene, citlive reakce se zobecnuji a platformy dostavaji jen ukazku s odkazem zpet. Takhle z reakci vznikne obsahovy system, ne dalsi socialni kolecko pro algoritmus, ktery se tvari jako sef redakce.
+
+### 1. Vyber jen jednu reakci, ktera zmeni rozhodnuti
+
+Po publikaci casto vznikne vic potencialnich napadu. Nekdo chce detailni navod, nekdo nesouhlasi, nekdo prida edge-case, nekdo chce checklist. Vsechno muze byt uzitecne, ale hodinova iterace potrebuje jeden hlavni vystup.
+
+Vyber reakci podle toho, jestli meni rozhodnuti ctenare:
+
+| Typ reakce | Dobry follow-up | Slaby follow-up |
+| --- | --- | --- |
+| Opakovana otazka | FAQ nebo navazujici navod | Odpoved jen ve vlakne komentaru |
+| Silna namitka | Clanek s hranicemi doporuceni | Obranny post o tom, ze jsme to mysleli dobre |
+| Prakticky priklad | Anonymizovana sablona nebo checklist | Screenshot se zacernenymi jmeny a zbytkem dat v rohu |
+| Obchodni signal | Vysvetleni nakupniho rozhodnuti | "Napis nam do DM" bez dalsi hodnoty |
+| Technicka nejasnost | Mini runbook nebo rozhodovaci strom | Dalsi obecny odstavec do puvodniho clanku |
+
+Pravidlo: jestli follow-up neumi odpovedet na otazku "co po precteni udelam jinak?", nech ho v backlogu.
+
+### 2. Zvol format podle prace, ne podle platformy
+
+Format vychazi z prace, kterou ma obsah udelat. Platforma je az distribucni detail.
+
+| Potreba ctenare | Primarni format | Distribucni ukazka |
+| --- | --- | --- |
+| Rychle rozhodnout | Kratky rozhodovaci checklist | 3 body a odkaz na checklist |
+| Pochopit hranici doporuceni | FAQ nebo "kdy ano/kdy ne" | Jedna namitka s odkazem |
+| Pouzit postup v tymu | Sablona nebo runbook | Ukazka prvnich poli sablony |
+| Presvedcit kolegu | Strucny argumentar | Jedna citelna veta bez clickbaitu |
+| Porovnat varianty | Tabulka trade-offu | Vyrez jedne varianty a primarni URL |
+
+Kdyz reakce prisla ze socialni site, neznamenaji socialni site automaticky nejlepsi format odpovedi. Casto je lepsi napsat malou stranku na vlastni domene, pridat ji do RSS/Atom feedu a na platformy poslat jen kratkou anotaci.
+
+**Codyho komentar:** Repurposing neni mlynek na obsah. Je to preklad jedne uzitecne odpovedi do formatu, kde ji clovek muze pouzit. Kdyz z clanku vznikne pet odstavcu bez nove prace pro ctenare, jen jsme vynalezli hluk s workflow.
+
+### 3. Udelej z reakce bezpecny vstup
+
+Pred psanim si reakci ocisti. Cilem neni vytahnout z lidi "autenticky material" za kazdou cenu. Cilem je zachovat ponauceni a odstranit veci, ktere do verejneho obsahu nepatri.
+
+Bezpecna vstupni karta:
+
+```md
+## Follow-up vstup
+
+- Puvodni obsah:
+- Typ reakce:
+- Co ctenar realne resil:
+- Co bylo nejasne:
+- Co nesmime citovat:
+- Osobni nebo firemni detaily k odstraneni:
+- Verejna formulace problemu:
+- Navrzeny format:
+- Primarni URL po publikaci:
+- Kde bude ukazka distribuovana:
+```
+
+Priklad prepisu:
+
+- Puvodni reakce: "U klienta [firma] nam pravnik stopl [nastroj], protoze se posila kompletni event stream mimo EU."
+- Verejna formulace: "Nektere firmy narazi pri vyberu analytiky na problem, ze do dodavatele posilaji vic eventu, nez potrebuji pro rozhodnuti, a nemaji jasne popsany datovy tok."
+- Follow-up: "Jak zmensit analyticky event stream pred vendor review za 45 minut."
+
+Takovy prepis chrani zdroj reakce a zaroven zachova praktickou hodnotu.
+
+### 4. Primarni URL uprav driv nez socialni ukazku
+
+Pokud follow-up vysvetluje neco, co patri i k puvodnimu clanku, nejdriv oprav nebo dopln primarni URL. Teprve potom priprav samostatnou ukazku pro distribuci. Jinak vznikne zvlastni situace: nejlepsi vysvetleni zije na platforme, kterou nevlastnis, a puvodni clanek zustane horsi.
+
+Postup:
+
+1. Dopln puvodni clanek o kratke FAQ, poznamku nebo odkaz na follow-up.
+2. U noveho follow-upu pridej zpetny odkaz na puvodni text.
+3. Do internich odkazu pouzij popisny anchor text, ne "kliknete zde".
+4. V distribucni ukazce uved primarni URL bez zkracovace, pokud to kanal dovoluje.
+5. Mereni delej pres agregovane zdroje navstevnosti a UTM bez osobnich identifikatoru.
+
+Tento postup pomaha SEO, ctenarum i provozu. Jedna URL se stava aktualnejsi, druha pridava hloubku a platformni post je jen rozcestnik.
+
+### 5. Z follow-upu vytvor maly obsahovy balicek
+
+Jeden follow-up muze mit tri az pet malych vystupu, ale jen pokud kazdy dela jinou praci. Balicek pro jednu reakci muze vypadat takhle:
+
+| Vystup | Ucel | Datove pravidlo |
+| --- | --- | --- |
+| Doplnene FAQ v puvodnim clanku | Zlepsit primarni obsah | Bez citace soukrome reakce |
+| Samostatny navod | Dat tymu pouzitelny postup | Pouzit synteticky priklad |
+| Kratka socialni ukazka | Privest ctenare na primarni URL | Bez sledovaciho skriptu a bez osobnich dat |
+| Interni backlog polozka | Zapsat produktovy signal | Jen zobecneny problem a dopad |
+| Support/obchodni odpoved | Uzavrit smycku s clovekem | Jen potrebny kontext v prislusnem systemu |
+
+Nemusis delat vsechno. Minimum je jedna oprava primarniho obsahu a jedna odpoved tam, kde reakce vznikla. Balicek dava smysl az ve chvili, kdy reakce ukazuje opakovany problem nebo ma obchodni dopad.
+
+### 6. 60min postup
+
+**0-10 minut: vyber reakce**
+
+Otevri reakcni kartu a vyber jednu reakci, ktera ma nejvetsi rozhodovaci hodnotu. Zapis, proc stoji za follow-up.
+
+**10-20 minut: bezpecny prepis**
+
+Odstran osobni udaje, nazvy firem, interni screenshoty a citace, ktere nemas schvalene. Prepis problem do obecne, ale porad konkretni formulace.
+
+**20-35 minut: primarni vystup**
+
+Napis nebo uprav primarni obsah. Pokud jde o opravu faktu, dopln zdroj. Pokud jde o nazor nebo interpretaci, oznac ji jako Codyho komentar.
+
+**35-45 minut: distribucni ukazka**
+
+Priprav kratkou anotaci pro vlastni digest, RSS poznamku, LinkedIn nebo jiny kanal, ale bez zavislosti na embeddu, pixelu nebo zkracovaci odkazu. Ukazka ma slibit konkretni vysledek, ne "novy obsah je venku".
+
+**45-55 minut: propojeni a backlog**
+
+Propoj novy follow-up s puvodnim clankem. Do backlogu zapis maximalne jednu dalsi navazujici ideu, jinak se z reakci stane neukliditelna hromada.
+
+**55-60 minut: privacy kontrola**
+
+Zkontroluj, ze verejny text neprozrazuje zdroj reakce, soukroma data, interni proces zakaznika ani identifikatory v URL. Potom teprve publikuj nebo posli k review.
+
+### Checklist: obsahove follow-upy z reakci
+
+- [ ] Vybral jsem jednu reakci s jasnou rozhodovaci hodnotou.
+- [ ] Vim, jestli vystup ma byt FAQ, checklist, navod, sablona nebo argumentar.
+- [ ] Soukrome formulace jsou zobecnene a necituji se bez souhlasu.
+- [ ] Primarni URL je doplnena driv nez platformni ukazka.
+- [ ] Novy follow-up odkazuje zpet na puvodni obsah.
+- [ ] Distribucni text neobsahuje osobni udaje ani interni kontext.
+- [ ] UTM parametry jsou citelne a neobsahuji identifikatory lidi nebo firem.
+- [ ] Pokud opravuji fakt, pridavam zdroj.
+- [ ] Pokud jde o muj nazor, oznacuji ho jako Codyho komentar.
+- [ ] V backlogu zustala maximalne jedna dalsi akce z teto reakce.
+- [ ] Follow-up ma prakticky vystup, ne jen novou variaci stejneho textu.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -18152,3 +18289,4 @@ Do backlogu zapis maximalne tri navazujici napady. Ostatni nech byt. Zkontroluj,
 - 2026-08-03: Pridana prakticka priloha Publikacni review obsahu bez brzdici byrokracie za 45 minut vcetne bran review, kontroly zdroju, privacy rizik, SEO hygieny, distribuce a checklistu.
 - 2026-08-03: Pridana prakticka priloha Distribucni checklist po publikaci bez platformni zavislosti za 45 minut vcetne distribucni karty, vlastnich kanalu, socialnich ukazek, UTM pravidel a checklistu.
 - 2026-08-03: Pridana prakticka priloha Reakce po publikaci bez ztraty kontextu za 45 minut vcetne reakcnich karet, trideni signalu, prevodu odpovedi na verejnou hodnotu a checklistu.
+- 2026-08-03: Pridana prakticka priloha Obsahove follow-upy z reakci bez recyklacniho autopilota za 60 minut vcetne vyberu reakce, bezpecneho prepisu, primarni URL, distribucni ukazky a checklistu.
