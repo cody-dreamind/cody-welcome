@@ -17806,6 +17806,141 @@ Otevri clanek v anonymnim okne, klikni na odkazy, zkontroluj feed, zkontroluj mo
 
 ---
 
+## Reakce po publikaci bez ztraty kontextu za 45 minut
+
+Distribuce nekonci ve chvili, kdy odkaz odejde do sveta. Skutecna hodnota casto prijde az potom: nekdo polozi presnou otazku, doplni pripad z praxe, upozorni na chybu, sdili clanek ve vlastnim kontextu nebo se ozve s obchodnim problemem. Kdyz tyhle reakce nechas rozpadnout mezi socialni notifikace, soukrome zpravy a nahodne zalozky v prohlizeci, prijdes o zpetnou vazbu i o material pro dalsi obsah.
+
+Privacy-first pristup nerika, ze mas ignorovat reakce mimo vlastni web. Rika, ze je mas zpracovat tak, aby primarni znalost zustala u tebe, data lidi se nezbirala navic a ctenar nebyl nuceny vstoupit do sledovaci platformy jen proto, aby mohl navazat.
+
+### 1. Oddel signal od sumu
+
+Po publikaci si reakce rozdel do peti kosu:
+
+| Kos | Co tam patri | Co s tim udelat |
+| --- | --- | --- |
+| Oprava | Fakticka chyba, nepresnost, rozbity odkaz, zastaraly priklad | Opravit clanek a zapsat zmenu. |
+| Otazka | Vec, kterou clanek nevysvetlil dost jasne | Doplnit FAQ, navazujici odstavec nebo samostatny clanek. |
+| Namitka | Nesouhlas, alternativa, riziko, jiny use-case | Zkontrolovat argument a pripadne doplnit hranice doporuceni. |
+| Obchodni signal | Poptavka, konkretni problem, zadost o audit nebo demo | Predat do obchodniho toku s minimalnim kontextem. |
+| Distribucni signal | Citace, odkaz, pozvanka, sdileni relevantnim publikem | Zapsat zdroj a rozhodnout, jestli ma smysl navazat. |
+
+Ne kazdy komentar je ukol. Cast reakci je jen okamzita energie platformy. Ukol vznikne az ve chvili, kdy je jasne, co by zmena zlepsila: presnost, srozumitelnost, konverzi, podporu pro prodej nebo duveru.
+
+**Codyho komentar:** Nejlepsi reakce neni ta nejhlasitejsi. Je to ta, ktera ukaze, kde realny clovek narazil na nejasnost nebo rozhodnuti.
+
+### 2. Vytvor reakcni kartu
+
+Pro kazdy publikovany obsah staci jedna mala karta. Neni to CRM pro komentare. Je to misto, kde se rozhodne, co stoji za praci.
+
+```md
+## Reakce: [nazev obsahu]
+
+- Primarni URL:
+- Datum publikace:
+- Kanaly sledovane:
+- Opravy:
+- Otazky:
+- Namitky:
+- Obchodni signaly:
+- Distribucni signaly:
+- Co doplnime do clanku:
+- Co patri do backlogu:
+- Co ignorujeme:
+- Datum dalsi kontroly:
+```
+
+Do karty neprepisuj cele soukrome zpravy ani osobni udaje navic. Staci shrnuti typu: "Zakladatel B2B SaaS se ptal, jak merit demo poptavky bez user-level profilu." Pokud je potreba navazat obchodne, uloz kontakt tam, kde patri obchodni komunikace, ne do obsahoveho dokumentu.
+
+### 3. Odpovidej tak, aby vznikala verejna hodnota
+
+Kdyz se opakuje stejna otazka, odpoved nemusi zustat v jednom vlakne. Preved ji na verejny blok:
+
+- doplnene FAQ pod clanek,
+- kratky navazujici clanek,
+- changelog zmena,
+- priklad ve znalostni bazi,
+- mikrocopy v produktu,
+- obchodni odpoved s odkazem na primarni zdroj.
+
+Priklad:
+
+> Otazka: "Jak poznam, jestli muzu merit formular bez cookie listy?"
+>
+> Lepsi vystup nez desetkrat odpovedet v komentarich: doplnit do clanku kratkou sekci "Kdy merici event nepotrebuje cookie" s odkazem na cookies Q&A UOOU a jasnym upozornenim, ze nejde o pravni radu.
+
+Takhle se reakce meni na obsahovy asset. Platformni vlakno muze zmizet, ale tvoje odpoved zustane na vlastni domene, v RSS/Atom feedu a v internich odkazech.
+
+### 4. Soukrome zpravy nejsou obsahovy sklad
+
+Reakce v soukromych zpravach maji vyssi riziko. Lide tam casto poslou interni screenshot, jmeno zakaznika, cenovy kontext nebo konkretni popis incidentu. S tim zachazej jako s pracovnim podkladem, ne jako s citovatelnym materialem.
+
+Pravidla:
+
+- Bez souhlasu necituj jmeno, firmu ani presnou formulaci.
+- Screenshoty a priklady pred pouzitim rediguj nebo nahrad syntetickym prikladem.
+- Do obsahove karty zapis jen zobecneny poznatek.
+- Pokud reakce vypada jako support pozadavek, presun ji do support toku.
+- Pokud reakce vypada jako poptavka, presun ji do lead toku.
+- Pokud reakce obsahuje citliva data, nenech ji lezet v nahodnem kanalu bez vlastnika.
+
+**Priklad prepisu do bezpecneho poznatku:**
+
+Soukroma zprava rika: "U klienta ACME mame v logu cele telo requestu z checkoutu a bojime se, ze tam pada fakturacni adresa."
+
+Do obsahove karty patri: "Ctenari resi riziko logovani osobnich udaju v checkoutu. Doplnit priklad logovaciho pravidla pro formulare a platby."
+
+### 5. Reakce mer podle rozhodnuti, ne podle ega
+
+U reakci se snadno meri to, co je videt: pocet lajku, komentaru a sdileni. To muze pomoct, ale samo o sobe to nerika, co dal. Uzitecnejsi je sledovat rozhodovaci signaly:
+
+| Signal | Otazka |
+| --- | --- |
+| Opakovana otazka | Ktera cast clanku neni jasna? |
+| Kvalitni namitka | Kde ma doporuceni hranici nebo vyjimku? |
+| Citace odbornikem | Ktery odstavec je nejsilnejsi a zaslouzi rozsireni? |
+| Obchodni reakce | Ktery problem ma kupni intenzitu? |
+| Rozbity odkaz nebo zastaraly detail | Kde je potreba udrzbovy proces? |
+
+Jednou tydne si vezmi tri nejuzitecnejsi reakce a rozhodni jednu akci. Ne petnact. Jednu. Opravit odstavec, doplnit FAQ, napsat navazujici clanek, poslat follow-up, nebo zalozit produktovy ticket.
+
+### 6. 45min postup
+
+**0-8 minut: sesbirani reakci**
+
+Projdi jen kanaly, ktere byly v distribucni karte. Neotvirej nahodne dalsi platformy jen ze zvedavosti. Zapis odkazy na verejne reakce a zobecnene poznamky ze soukromych reakci.
+
+**8-18 minut: trideni do kosu**
+
+Kazdou reakci zarad jako opravu, otazku, namitku, obchodni signal, distribucni signal nebo sum. U soukromych zprav odstran osobni detaily, ktere nejsou potreba pro rozhodnuti.
+
+**18-28 minut: jedna verejna aktualizace**
+
+Vyber nejdulezitejsi opravu nebo otazku a uprav primarni obsah. Pokud jde o fakticke tvrzeni, dopln zdroj. Pokud jde o Codyho nazor, oznac ho jako komentar.
+
+**28-36 minut: odpovedi lidem**
+
+Odpovez tam, kde reakce vznikla, ale odkazuj na primarni URL nebo doplnenou sekci. U obchodnich signalu neposilej dlouhy verejny pitch. Nabidni dalsi jasny krok.
+
+**36-45 minut: backlog a uklid**
+
+Do backlogu zapis maximalne tri navazujici napady. Ostatni nech byt. Zkontroluj, ze v obsahove karte nezustaly osobni udaje, ktere tam nemaji byt, a nastav dalsi kontrolu za 7 az 14 dni.
+
+### Checklist: reakce po publikaci
+
+- [ ] Mam reakcni kartu pro dany obsah.
+- [ ] Reakce jsou rozdelene na opravy, otazky, namitky, obchodni signaly, distribucni signaly a sum.
+- [ ] Soukrome zpravy nejsou citovane bez souhlasu.
+- [ ] Do obsahove karty neukladam zbytecne osobni udaje.
+- [ ] Opakovane otazky prevadim na verejnou hodnotu na primarni domene.
+- [ ] Fakticke opravy maji zdroj nebo jasne oznaceni nejistoty.
+- [ ] Obchodni signaly predavam do lead toku, ne do obsahoveho chaosu.
+- [ ] Support pozadavky predavam do support toku.
+- [ ] Po kazdem tydnu vznikne maximalne jedna hlavni obsahova akce.
+- [ ] Mereni reakci rika, co zlepsit, ne jen kolik lidi kliklo.
+- [ ] Navazujici odpovedi odkazuji na primarni URL misto kopirovani celeho obsahu do platformy.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -18016,3 +18151,4 @@ Otevri clanek v anonymnim okne, klikni na odkazy, zkontroluj feed, zkontroluj mo
 - 2026-08-03: Pridana prakticka priloha Redakcni backlog a aktualizace obsahu bez honby za novinkami za 60 minut vcetne prioritizace napadu, aktualizaci, archivace, tydenni sablony a checklistu.
 - 2026-08-03: Pridana prakticka priloha Publikacni review obsahu bez brzdici byrokracie za 45 minut vcetne bran review, kontroly zdroju, privacy rizik, SEO hygieny, distribuce a checklistu.
 - 2026-08-03: Pridana prakticka priloha Distribucni checklist po publikaci bez platformni zavislosti za 45 minut vcetne distribucni karty, vlastnich kanalu, socialnich ukazek, UTM pravidel a checklistu.
+- 2026-08-03: Pridana prakticka priloha Reakce po publikaci bez ztraty kontextu za 45 minut vcetne reakcnich karet, trideni signalu, prevodu odpovedi na verejnou hodnotu a checklistu.
