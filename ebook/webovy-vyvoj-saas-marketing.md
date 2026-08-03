@@ -14376,6 +14376,167 @@ Support stitek:
 
 ---
 
+## Souhlasy a preference bez temnych vzoru za 60 minut
+
+Souhlas neni jen pravni checkbox. Je to produktovy slib: "Tady mas kontrolu a my ji budeme respektovat i tehdy, kdyz se nam marketingove hodi opak." U maleho SaaS se souhlasy rychle rozlezou do cookies, emailu, produktovych notifikaci, integraci, newsletteru, beta funkci a podpory. Kdyz je nechas jako hromadu nahodnych poli v ruznych nastrojich, vznikne chaos, ktery pozdeji boli vic nez prvni poctiva tabulka.
+
+Privacy-first pristup zacina jednoduse: oddel nezbytne provozni zpracovani od volitelnych preferenci, vysvetli kazdy ucel bez pravnicke mlhy a udelej odvolani stejne jednoduche jako udeleni. U cookies a podobnych technologii cesky UOOU zduraznuje rozliseni technickych a netechnickych cookies, souhlas pro netechnicke cookies a to, ze nesouhlas ma byt dostupny bez natlaku a ve srovnatelnem provedeni jako souhlas: https://uoou.gov.cz/verejnost/qa-otazky-a-odpovedi/cookies. GDPR pak obecne pracuje s pozadavkem, aby souhlas byl svobodny, konkretni, informovany a jednoznacny: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng.
+
+**Codyho komentar:** Preference centrum neni misto, kde uzivatele unavis k souhlasu. Je to misto, kde dokazujes, ze "kontrola nad daty" neni jen hezka veta pro pitch deck.
+
+### 1. Nejdriv udelej inventar rozhodnuti
+
+Nepis hned UI. Nejdriv sepis, kde v produktu nebo webu clovek dela rozhodnuti o datech a komunikaci.
+
+Typicke kategorie:
+
+- technicke cookies a uloziste nutne pro fungovani,
+- analytika prvni strany,
+- marketingove cookies nebo reklamni mereni,
+- produktove emaily nutne pro ucet,
+- marketingove emaily a newsletter,
+- in-app oznameni,
+- beta funkce nebo early access,
+- integrace, ktere posilaji data mimo hlavni system,
+- sdileni testimonialu, citaci nebo pripadovych studii,
+- support pristup k uctu nebo debug artefaktum.
+
+U kazde kategorie si napis tri veci: ucel, pravni nebo provozni duvod a misto, kde muze uzivatel volbu zmenit. Pokud u volby neumis rict, kde se meni, nemas preferenci. Mas jen historickou nehodu v databazi.
+
+### 2. Oddel souhlas, preferenci a nezbytnou zpravu
+
+V produktu se casto plete troje:
+
+| Typ | Priklad | Co s tim |
+| --- | --- | --- |
+| Nezbytna provozni zprava | reset hesla, faktura, bezpecnostni upozorneni | Neprezentuj jako marketingovou volbu, ale neposilej do ni reklamu. |
+| Preference komunikace | mesicni produktovy digest, tipy pro adminy | Umoznuje snadnou zmenu a vysvetli dopad vypnuti. |
+| Souhlas se zpracovanim nebo ulozenim | netechnicke cookies, marketingove mereni, testimonial | Potrebujes jasny aktivni krok a dukaz, kdy a k cemu byl dan. |
+
+Prakticke pravidlo: kdyz zprava souvisi s bezpecnosti, uctem, billingem nebo plnenim smlouvy, neptej se na ni stylem "Chcete od nas dostavat emaily?" Rekni jasne, proc je nutna. Kdyz jde o rustovy newsletter, beta pozvanky nebo marketingove mereni, neschovavej to mezi provozni text.
+
+**Priklad spatneho spojeni:**
+
+> Souhlasim s obchodnimi podminkami, ochranou osobnich udaju a zaslanim novinek.
+
+Tohle micha smluvni krok, informacni dokument a marketingovy souhlas. Uzivatel nevi, co realne odmita nebo prijima.
+
+**Lepsi verze:**
+
+- `Prectl jsem si obchodni podminky a beru je na vedomi jako soucast objednavky.`
+- `Novinky a prakticke tipy chci dostavat emailem. Lze kdykoli odhlasit.`
+- `Volitelne analyticke cookies povolim az po vysvetleni v cookie nastaveni.`
+
+### 3. Preference centrum musi byt jedno misto pravdy
+
+U maleho SaaS nemusi preference centrum byt velka obrazovka. Muze to byt stranka v nastaveni uctu nebo spravcovsky panel pro organizaci. Dulezite je, aby neslo o pet roztrousenych prepinacu, z nichz tri ziji v emailovem nastroji a dva v aplikaci.
+
+Minimalni struktura:
+
+- `Komunikace`: produktove tipy, novinky, webinare, pripadne digesty.
+- `Mereni`: volitelna analytika, pokud ji pouzivas na urovni uctu nebo webu.
+- `Integrace`: ktere externi sluzby mohou dostavat data a proc.
+- `Beta a vyzkum`: pozvanky k rozhovorum, testovani funkci, produktove pruzkumy.
+- `Historie souhlasu`: kdy byla volba zmenena, kym a z jakeho rozhrani.
+
+Pro B2B SaaS rozlis osobni a account-level volby. Admin muze rozhodovat o integraci nebo account-level analytice, ale jednotliveho cloveka nenuti k marketingovemu newsletteru. Kdyz je volba na urovni organizace, napis to do UI lidsky:
+
+> Tuhle volbu nastavuje vlastnik uctu pro celou organizaci. Ovlivnuje produktove mereni, ne marketingove emaily jednotlivcu.
+
+### 4. Souhlas zapisuj jako auditovatelny fakt
+
+Kdyz je souhlas pravni nebo provozni opora, musi byt pozdeji dohledatelny. Ne z paranoie, ale kvuli podpore, auditu a duvere.
+
+Zaznam souhlasu by mel obsahovat:
+
+- identifikator subjektu nebo uctu,
+- ucel a verzi textu, ke kteremu se clovek vyjadril,
+- stav `granted`, `denied`, `withdrawn` nebo `not_asked`,
+- timestamp,
+- zdroj rozhrani,
+- jazyk nebo lokalizaci textu,
+- verzi privacy/cookie dokumentu, pokud je relevantni,
+- minimalni technicky kontext pro dokazani toku, ne plny fingerprint.
+
+Co do zaznamu typicky nepatri:
+
+- cele IP adresy bez jasneho duvodu,
+- kompletni user-agent navzdy,
+- obsah formulare,
+- tokeny v URL,
+- presne behavioralni udalosti okolo volby.
+
+Kdyz potrebujes dokazovat, ze rozhrani bylo ferove, udelej screenshot nebo verzovanou kopii textu souhlasu v repozitari nebo dokumentacnim hubu. Je to cistsi nez sbirat zbytecne identifikatory kazdeho navstevnika.
+
+### 5. Odvolani nedelej jako support ticket
+
+Nejvetsi test souhlasu neni okamzik prijeti. Je to okamzik odmitnuti nebo odvolani. Pokud clovek musi psat na podporu, hledat skryty odkaz nebo se prihlasovat do neexistujiciho uctu, kontrola je jen divadlo.
+
+Prakticke vzory:
+
+- V paticce webu dej odkaz `Nastaveni cookies`, pokud pouzivas cookie listu.
+- V kazdem marketingovem emailu dej prime odhlaseni.
+- V aplikaci dej preference do nastaveni uctu, ne jen do onboardingoveho kroku.
+- U account-level souhlasu ukaz, kdo ho muze menit.
+- Po odvolani rekni, co se stane hned a co muze dobehnout pozdeji.
+
+Priklad potvrzeni:
+
+> Marketingove emaily jsou vypnute. Provozni zpravy k uctu, fakturam a bezpecnosti budeme posilat dal, protoze jsou potreba pro fungovani sluzby.
+
+Tohle je lepsi nez tiche "Ulozeno", protoze jasne rozlisuje preference od nezbytnych zprav.
+
+### 6. 60min postup
+
+0-10 minut: Sepis vsechna mista, kde uzivatel nebo admin dava souhlas, nastavuje komunikaci nebo zapina integraci. Zahrn web, aplikaci, emaily, support, onboarding a billing.
+
+10-20 minut: Rozdel polozky na nezbytne provozni zpracovani, preference a souhlasy. U kazde polozky pridej ucel a vlastnika.
+
+20-32 minut: Navrhni jedno preference centrum nebo jednu tabulku pravdy. Urci, ktere volby jsou osobni a ktere patri cele organizaci.
+
+32-42 minut: Zkontroluj mikrotexty. Kazda volba ma rict, co se zapne, komu data odchazeji, jak dlouho volba plati a kde ji lze zmenit.
+
+42-52 minut: Navrhni zaznam souhlasu. Drz ho kratky: stav, ucel, verze textu, timestamp, zdroj a minimalni identita.
+
+52-60 minut: Udelej test odvolani. Najdi nejrychlejsi cestu, jak odmitnout cookies, odhlasit email a vypnout volitelnou integraci. Kde to nejde do dvou minut, vznikl ukol.
+
+### Sablona karty souhlasu nebo preference
+
+```text
+Nazev volby:
+Typ: nezbytne / preference / souhlas
+Uroven: osoba / organizace / verejny navstevnik
+Ucel:
+Co se zapne:
+Jake osobni udaje se pouziji:
+Dodavatele nebo prijemci:
+Vychozi stav:
+Kde se volba meni:
+Jak se odvola:
+Co zustava aktivni i po vypnuti:
+Retence zaznamu:
+Vlastnik:
+Verze textu:
+```
+
+### Checklist: souhlasy a preference bez temnych vzoru
+
+- [ ] Vim, kde vsude produkt sbira souhlas nebo komunikacni preferenci.
+- [ ] Nezbytne provozni zpravy nejsou smichane s marketingem.
+- [ ] Souhlas neni predzaskrtnuty ani schovany v hromadne vete.
+- [ ] Odmitnuti je stejne jednoduche a viditelne jako prijeti.
+- [ ] Preference centrum je jedno misto pravdy nebo ma jasnou synchronizaci.
+- [ ] Rozlisuji osobni volby a volby cele organizace.
+- [ ] Kazda volba ma ucel, vlastnika a srozumitelny mikrotext.
+- [ ] Zaznam souhlasu uklada verzi textu, stav, cas a zdroj rozhrani.
+- [ ] Zaznam souhlasu nesbira plny fingerprint ani obsah formulare bez duvodu.
+- [ ] Marketingove emaily maji prime odhlaseni.
+- [ ] Cookie nastaveni jde znovu otevrit z verejne stranky.
+- [ ] Support vi, co odpovedet, kdyz se zakaznik pta "proc jste mi to poslali?".
+- [ ] Jednou za kvartal projdu, jestli nove integrace nepridaly nove preference.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -14547,3 +14708,4 @@ Support stitek:
 - 2026-08-02: Pridana prakticka priloha Produktove metriky bez vanity dashboardu za 60 minut vcetne metrickoveho stromu, privacy-first eventu, prahu pro akci, tydniho rytmu a checklistu.
 - 2026-08-03: Pridana prakticka priloha Self-service znalostni baze bez supportniho bludiste za 60 minut vcetne struktury clanku, privacy bloku, mereni vyhledavani, udrzby a checklistu.
 - 2026-08-03: Pridana prakticka priloha Produktova edukace a in-app oznameni bez otravneho sledovani za 45 minut vcetne kanalu, minimalniho mereni, changelogu, sablony oznamovaci karty a checklistu.
+- 2026-08-03: Pridana prakticka priloha Souhlasy a preference bez temnych vzoru za 60 minut vcetne inventare rozhodnuti, preference centra, auditovatelneho zaznamu souhlasu, odvolani a checklistu.
