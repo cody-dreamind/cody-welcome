@@ -15826,6 +15826,214 @@ Datum dalsi kontroly:
 
 ---
 
+## Mikrocopy formularu a prazdnych stavu bez pravnicke mlhy za 45 minut
+
+Mikrocopy je drobny text v produktu: popisek pole, veta pod formularem, prazdny stav tabulky, potvrzeni po akci, chybova hlaska nebo kratky text u checkboxu. Zni to jako detail, ale u privacy-first SaaS je to cast produktu, ktera casto rozhoduje, jestli clovek vi, co se deje s jeho daty.
+
+Dobry produktovy text nepredstira pravni dokument. Ma byt presny, lidsky a pouzitelny v okamziku rozhodnuti. GDPR v clanku 12 mluvi o transparentnich informacich ve strucne, srozumitelne a snadno pristupne forme: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng. EDPB k transparentnosti doplnuje, ze informace maji byt dostupne v relevantnim case a nemaji uzivatele zahltit: https://www.edpb.europa.eu/documents/guideline/article-29-working-party-guidelines-on-transparency-under-regulation-2016679_en. Prakticky preklad: dlouha privacy policy v paticce nenahradi jasnou vetu vedle pole, ktere prave chce osobni udaj.
+
+Mikrocopy neni jen pro formulare. Stejne dulezite jsou prazdne stavy. Kdyz novy zakaznik vidi "Zatim zadna data", nevi, jestli ma neco importovat, pozvat kolegu, pockat na synchronizaci, nebo napsat supportu. Prazdny stav ma rict, proc je prazdny, co s tim jde udelat a jaka data se pri dalsim kroku budou pouzivat.
+
+**Codyho komentar:** Nejlepsi mikrocopy je jako dobry kolega u stolu. Nerika "kliknutim souhlasite s komplexnim zpracovanim". Rekne: "Tady zadate email, abychom vam poslali potvrzeni. Nic dalsiho z toho nedelame." Mnohem mene kouzel, mnohem vice duvery.
+
+### 1. Rozdel texty podle okamziku rozhodnuti
+
+Nejdriv si nepis hezke vety. Udelej inventar mist, kde uzivatel dela rozhodnuti nebo narazi na nejistotu.
+
+Typicke situace:
+
+| Misto | Co uzivatel resi | Co ma mikrocopy vysvetlit |
+| --- | --- | --- |
+| Prihlasovaci formular | Proc chcete email a heslo? | Ucel prihlaseni, bezpecnost, dalsi krok. |
+| Kontaktni formular | Co se stane po odeslani? | Kdo odpovi, kdy, k cemu se data pouziji. |
+| Import dat | Co se nahraje a kdo to uvidi? | Rozsah importu, kontrola pred potvrzenim, smazani testu. |
+| Pozvani kolegy | Jakou roli dostane? | Opravneni, viditelnost dat, moznost odebrani. |
+| Preference | Co zmenim a co nezmenim? | Typ zprav, frekvence, rozdil mezi marketingem a servisem. |
+| Prazdna tabulka | Je neco rozbite? | Proc tu nic neni a jaky je nejblizsi krok. |
+| Chyba | Ztratil jsem data? | Co se stalo, co zustalo bezpecne, jak pokracovat. |
+
+Pro kazde misto si poloz tri otazky:
+
+- Co se uzivatel boji udelat?
+- Jake minimum informaci potrebuje prave ted?
+- Ktery odkaz patri do detailu, aby hlavni obrazovka nezmutovala v pravni knihu?
+
+Kdyz odpoved neumis dat jednou vetou, problem casto neni text. Problem je nejasny produktovy tok.
+
+### 2. U formulare rekni ucel pred odeslanim
+
+Formular je zadost o duveru. Kazde pole by melo mit obhajitelny ucel. Pokud sbiras email, telefon, firmu nebo poznamku, rekni, proc to pomaha dalsimu kroku.
+
+Slabe texty:
+
+```text
+Vyplnte udaje.
+Souhlasim se zpracovanim osobnich udaju.
+Odeslat.
+```
+
+Lepsi texty:
+
+```text
+Pracovni email
+Pouzijeme ho jen pro odpoved k teto poptavce.
+
+Co resite?
+Staci jedna veta. Pomuze nam odpovedet konkretneji.
+
+Odeslat poptavku
+```
+
+U checkboxu bud obzvlast opatrny. Ne kazda akce potrebuje souhlasovy checkbox. Pokud clovek posila poptavku, odpoved na poptavku typicky neni newsletter. Marketingovy odber ma byt samostatne rozhodnuti se samostatnym textem.
+
+Priklad oddeleni:
+
+```text
+[ ] Chci dostavat mesicni digest o SaaS, webu a privacy-first provozu.
+Email pro poptavku pouzijeme k odpovedi. Digest muzete kdykoliv odhlasit.
+```
+
+Text nesmi maskovat rozsah zpracovani. "Zadny spam" je sympaticke, ale nepresne. Lepsi je "Jednou mesicne poslu digest" nebo "Ozveme se do dvou pracovnich dnu k teto poptavce." Konkretni veta snizuje nejistotu a zlepsuje support, protoze lide se nemusi doptavat, co bude dal.
+
+### 3. Chybove hlasky nesmi obvinovat uzivatele
+
+Chyba je misto, kde produkt snadno ztrati duveru. Spatna hlaska rika "Neplatny vstup". Lepsi hlaska rika, co opravit a proc.
+
+Pravidla pro privacy-first chybove hlasky:
+
+- Nerikej vic technickych detailu, nez je potreba pro opravu.
+- Neprozrazuj, jestli konkretni email existuje v systemu, pokud by to slo zneuzit.
+- U odesilani formulare rekni, zda se data ulozila, nebo ne.
+- Dej dalsi krok: zkusit znovu, upravit pole, napsat na podporu.
+- Neposilej uzivatele do slepe ulicky bez kontaktu.
+
+Priklady:
+
+| Situace | Slabe | Lepsi |
+| --- | --- | --- |
+| Povinne pole | `Chyba validace` | `Doplnte prosim pracovni email, abychom mohli odpovedet.` |
+| Reset hesla | `Email nenalezen` | `Pokud u nas ucet existuje, poslali jsme instrukce pro obnovu hesla.` |
+| Formular spadl | `Server error` | `Poptavku se nepodarilo odeslat. Text jsme neulozili. Zkuste to prosim znovu nebo napiste na email.` |
+| Velky soubor | `File too large` | `Soubor ma vic nez povoleny limit. Nahrajte mensi soubor nebo poslete odkaz.` |
+
+Bezpecnost a srozumitelnost se nemusi vylucovat. Uzivatel nepotrebuje stack trace. Potrebuje vedet, jestli ma akci opakovat a jestli jeho data nezmizela v cerne dire.
+
+### 4. Prazdny stav ma byt dalsi krok, ne smutny billboard
+
+Prazdne stavy jsou skvela prilezitost pro edukaci bez otravovani. Misto prazdne tabulky rekni, co tu jednou bude a jak se tam data dostanou.
+
+Sablona prazdneho stavu:
+
+```text
+Nadpis: Zatim tu nejsou zadne [objekty]
+Veta: [Objekty] se objevi po [akci nebo udalosti].
+Privacy veta: Pri [akci] pouzijeme jen [minimalni data].
+Akce: [Primarni dalsi krok]
+Sekundarni odkaz: [Dokumentace nebo priklad]
+```
+
+Priklad pro import kontaktu:
+
+```text
+Zatim tu nejsou zadne kontakty
+Kontakty se objevi po importu CSV nebo po prvni poptavce z webu.
+Pri importu nejdriv ukazeme nahled a nic neulozime, dokud ho nepotvrdite.
+[Importovat CSV] [Jak pripravit soubor]
+```
+
+Priklad pro analytiku:
+
+```text
+Zatim nemame zadne produktove eventy
+Eventy se zacnou zobrazovat po nasazeni mericiho klice do aplikace.
+Sbirejte jen udalosti, podle kterych budete delat rozhodnuti. Identifikace osob neni pro zakladni metriky potreba.
+[Zobrazit merici plan] [Pridat prvni event]
+```
+
+Prazdny stav nema byt marketingovy letak. Ma pomoct uzivateli dokoncit praci. Kdyz do nej das pet CTA, kratke video, tri ilustrace a "Zjistete vice", ztratil jsi vyhodu jasneho momentu.
+
+### 5. Text musi jit precist i ve stresu
+
+Mikrocopy casto cte clovek, ktery specha, resi chybu nebo se boji, ze neco rozbil. Proto musi byt pristupne a scanovatelne. WCAG 2.2 je primarni standard pro pristupnost webu: https://www.w3.org/TR/WCAG22/. Pro mikrocopy z toho plyne jednoduchy provozni zaklad:
+
+- Pis kratke vety.
+- Nepredavej vyznam jen barvou.
+- Chybovou zpravu dej blizko problemoveho pole.
+- Tlum pravnicke zkratky, interni nazvy a anglicismy.
+- Tlacitko pojmenuj podle akce, ne podle procesu.
+- U destruktivni akce rekni dopad pred potvrzenim.
+
+Priklady tlacitek:
+
+| Slabe | Lepsi |
+| --- | --- |
+| `Submit` | `Odeslat poptavku` |
+| `Continue` | `Pokracovat k nahledu importu` |
+| `Delete` | `Smazat export` |
+| `Confirm` | `Potvrdit odhlaseni` |
+
+Pozor: pokud drzis e-book nebo produkt bez diakritiky kvuli technickemu kontextu, je to provozni kompromis. Ve verejnem ceskem produktu je normalne lepsi diakritiku pouzivat. Text bez diakritiky muze byt hure citelny a pusobit jako nouzovy rezim.
+
+### 6. 45min postup
+
+```text
+00-05 min: Vyber jeden tok.
+Kontaktni formular, import, pozvani kolegy, preference, onboarding nebo mazani dat.
+
+05-10 min: Najdi rozhodovaci mista.
+Pole, checkboxy, potvrzeni, chyby, prazdne stavy a destruktivni akce.
+
+10-18 min: Ke kazdemu mistu napis ucel.
+Proc text existuje, jakou nejistotu snizuje a co nesmi slibit.
+
+18-28 min: Prepis texty do lidske reci.
+Kratke vety, konkretni dalsi krok, zadne pravnicke mlhy.
+
+28-34 min: Pridej privacy vetu jen tam, kde pomaha.
+Co sbirame, proc, kdo to uvidi, kdy se to maze nebo kde je detail.
+
+34-39 min: Zkontroluj chyby a prazdne stavy.
+Uzivatel musi vedet, jestli ma akci opakovat, upravit nebo kontaktovat podporu.
+
+39-43 min: Udelej rychly a11y scan.
+Text blizko pole, dost kontrastu, zadny vyznam jen barvou, jasne nazvy tlacitek.
+
+43-45 min: Zapis vlastnika textu.
+Kdo text meni pri zmene toku, dodavatele, retence nebo obchodniho slibu.
+```
+
+### Sablona mikrocopy karty
+
+```text
+Tok:
+Obrazovka:
+Misto textu:
+Uzivatelska nejistota:
+Data v tomto kroku:
+Co se stane po akci:
+Text:
+Odkaz na detail:
+Kdo text vlastni:
+Kdy se ma zkontrolovat:
+```
+
+### Checklist: mikrocopy bez pravnicke mlhy
+
+- [ ] Kazde pole ve formulari ma jasny ucel.
+- [ ] U citlivejsich poli je kratce vysvetleno, proc existuji.
+- [ ] Marketingovy odber neni schovany v jinem formulari.
+- [ ] Tlacitka popisuji skutecnou akci.
+- [ ] Chybove hlasky rikaji, co opravit a co se stalo s daty.
+- [ ] Reset hesla a prihlaseni neprozrazuji zbytecne existenci uctu.
+- [ ] Prazdne stavy rikaji, proc jsou prazdne a co je dalsi krok.
+- [ ] Destruktivni akce predem rikaji dopad a moznost obnovy.
+- [ ] Privacy veta je v okamziku rozhodnuti, ne jen v paticce.
+- [ ] Detailni pravni text zustava dostupny pres odkaz.
+- [ ] Texty jsou citelne, pristupne a nespolihaji jen na barvu.
+- [ ] Mikrocopy ma vlastnika a revizi pri zmene produktu nebo datove cesty.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -16015,3 +16223,4 @@ Datum dalsi kontroly:
 - 2026-08-03: Pridana prakticka priloha Video a externi embedy bez neviditelneho sledovani za 45 minut vcetne dvoukrokoveho embeddu, transcriptu, iframe omezeni, datove mapy a checklistu.
 - 2026-08-03: Pridana prakticka priloha Stahovatelne soubory bez lead-gate pasti za 45 minut vcetne HTML/PDF rozhodnuti, download mereni, technickych hlavicek, pristupnosti a checklistu.
 - 2026-08-03: Pridana prakticka priloha Newsletter a produktovy digest bez platformniho zamku za 45 minut vcetne typu zprav, archivu na vlastni domene, sbirani kontaktu, mereni, vyberu nastroje a checklistu.
+- 2026-08-03: Pridana prakticka priloha Mikrocopy formularu a prazdnych stavu bez pravnicke mlhy za 45 minut vcetne textu poli, chybovych hlasek, prazdnych stavu, pristupnosti a checklistu.
