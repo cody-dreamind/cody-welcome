@@ -17670,6 +17670,142 @@ Datum dalsi revize:
 
 ---
 
+## Distribucni checklist po publikaci bez platformni zavislosti za 45 minut
+
+Publikace clanku je jen polovina prace. Druha polovina je dostat ho k lidem tak, aby zustal dohledatelny, citovatelny a nemusel zit jako kratky zablesk v cizim feedu. Privacy-first distribuce neni ticha distribuce. Je to distribuce, ktera posila lidi na primarni URL, meri jen to, co pomaha rozhodnout dalsi krok, a nenecha hodnotu obsahu zamcenou v jedne socialni platforme.
+
+Zakladni pravidlo: kazdy obsahovy vystup ma jednu domovskou adresu. Socialni sit, komunita, email, digest nebo partnersky odkaz jsou jen cesty k ni. Kdyz se diskuse rozpadne do peti kopii bez kanonickeho zdroje, ztracis SEO signal, historickou citovatelnost i kontrolu nad upravami.
+
+### 1. Priprav distribucni kartu jeste pred publikaci
+
+Distribucni karta nemusi byt velky dokument. Staci kratky blok u clanku:
+
+| Pole | Priklad |
+| --- | --- |
+| Primarni URL | `https://example.cz/blog/privacy-first-analytics` |
+| Cil clanku | Ziskat kvalitni demo poptavky od B2B zakladatelu |
+| Hlavni publikum | Founder nebo produktovy clovek v evropskem SaaS |
+| Jedna veta pro sdileni | Jak merit SaaS web bez reklamniho pixelu a datoveho skladu |
+| 3 kanaly | RSS, LinkedIn profil zakladatele, partnersky digest |
+| Mereni | UTM pouze na kampan a kanal, bez osobnich identifikatoru |
+| Navazujici akce | Interni odkaz na audit analytiky, CTA na konzultaci |
+| Vyhodnoceni | Za 14 dni: navstevnost, kvalitni poptavky, citace, dotazy |
+
+Karta nuti rozhodnout, komu clanek slouzi. Bez toho se snadno sklouzne k mechanickemu "hodime to vsude". To neni strategie, to je obsahovy konfetomet.
+
+### 2. Nejdrive vlastni kanaly
+
+Poradi distribuce ma zacinat tam, kde mas nejvetsi kontrolu:
+
+1. clanek na vlastni domene,
+2. RSS nebo Atom feed,
+3. interni odkazy ze souvisejicich stranek,
+4. vlastni archiv digestu nebo newsletteru,
+5. prime odkazy v obchodnich a support odpovedich,
+6. az potom socialni site a cizi platformy.
+
+RSS a Atom nejsou retro ozdoba. Jsou jednoduchy zpusob, jak nechat lidi odebira obsah bez algoritmickeho zprostredkovatele. Specifikace RSS 2.0 je tady: https://www.rssboard.org/rss-specification a Atom popisuje RFC 4287: https://www.rfc-editor.org/rfc/rfc4287. Prakticky dopad: feed musi obsahovat spravny titulek, URL, datum, popis a stabilni identifikator. Kdyz se feed rozbije, rozbijes vlastni distribucni infrastrukturu.
+
+Interni odkazy nejsou jen SEO trik. Jsou servis pro ctenare. Kdyz clanek o analytice odkazuje na merici plan, consent log a formularovy tok, ctenar nemusi hadat, kde pokracovat. Google Search Central ma zakladni SEO doporuceni k tvorbe uzitecneho obsahu a strukture webu zde: https://developers.google.com/search/docs/fundamentals/creating-helpful-content
+
+### 3. Socialni prispevky delej jako ukazku, ne kopii
+
+Kdyz das cely clanek na socialni sit, budujes archiv nekomu jinemu. Lepsi je publikovat kratkou ukazku:
+
+- problem, ktery clanek resi,
+- jednu praktickou vetu nebo checklistovy bod,
+- primarni odkaz,
+- jasne oznaceni, komu to pomuze.
+
+Priklad:
+
+> Pokud mate SaaS landing page, ktera meri kazdy pohyb uzivatele, ale nikdo podle tech dat nerozhoduje, problem neni v dashboardu. Problem je v mericim planu. Sepsal jsem prakticky postup, jak zacit s agregovanou analytikou bez reklamniho pixelu: [primarni URL]
+
+Nepouzivej social share skripty, ktere nacitaji treti strany uz pri otevreni clanku. Staci obycejne odkazy nebo serverem vygenerovana tlacitka bez ciziho JavaScriptu. Sdileni ma byt akce ctenare, ne automaticky datovy odtok.
+
+### 4. UTM konvence musi byt mala a citelna
+
+UTM parametry pomahaji rozlisit kampane, ale nesmi se z nich stat popis cloveka. Nepatri do nich email, jmeno firmy, telefon, segment "high_value_lead" ani interni poznamka z CRM. Google dokumentuje pouziti URL builderu pro kampanove parametry zde: https://support.google.com/analytics/answer/10917952
+
+Minimalni konvence:
+
+| Parametr | Pouziti | Priklad |
+| --- | --- | --- |
+| `utm_source` | misto nebo partner | `rss`, `linkedin`, `partner_digest` |
+| `utm_medium` | typ kanalu | `organic`, `email`, `community` |
+| `utm_campaign` | kampan nebo obsahovy balicek | `privacy_analytics_2026q3` |
+| `utm_content` | varianta odkazu, pokud ji opravdu testujes | `checklist_teaser` |
+
+Kdyz na jeden clanek potrebujes dvacet UTM variant, casto neoptimalizujes distribuci, ale vyrabis report, ktery nikdo nevyhodnoti. Zacni s malo parametry a po kampani uklid odkazy v internich dokumentech.
+
+### 5. Distribuci mer podle kvality signalu
+
+Po publikaci sleduj tri typy signalu:
+
+- Dosah: navstevnost na primarni URL, odbery feedu, zobrazeni v kanalech.
+- Zajem: kliky na navazujici odkazy, odpovedi, ulozeni, citace, dotazy.
+- Obchodni dopad: demo poptavky, odpovedi od spravnych lidi, kvalifikovane konverzace.
+
+Ne vsechno musi byt automaticky spojene do jednoho profilu. U maleho B2B SaaS casto staci jednoducha poznamka: "Clanek X privedl tri relevantni odpovedi a jednu demo poptavku od firmy v cilovem segmentu." To je lepsi signal nez anonymni graf s deseti tisici impresi.
+
+**Codyho komentar:** Mereni distribuce ma rict, co zopakovat, co zahodit a co zlepsit. Pokud z nej vznikne jen hezky report pro uklid duse, udelej mensi report a vetsi praci.
+
+### 6. 45min postup
+
+**0-10 minut: primarni URL a karta**
+
+Zkontroluj, ze clanek ma kanonickou URL, title, meta description, spravny datum a interni kartu distribuce. Zapis cil, publikum, tri kanaly a datum vyhodnoceni.
+
+**10-20 minut: vlastni kanaly**
+
+Over, ze se clanek dostal do sitemap a RSS/Atom feedu. Pridej 2 az 4 interni odkazy ze souvisejicich stranek. Pokud mas digest archiv, vytvor kratky zaznam s odkazem na primarni URL.
+
+**20-30 minut: socialni a partnerske ukazky**
+
+Napis 2 az 3 kratke ukazky podle publika. Kazda ma mit jednu myslenku, jeden odkaz a zadny sledovaci skript. Partnerum posli primarni URL a kratkou anotaci, ne balicek pixelu.
+
+**30-38 minut: mereni**
+
+Priprav UTM jen pro kanaly, kde opravdu potrebujes rozlisit zdroj. Nepouzivej osobni udaje ani interni obchodni stavy v URL. V analytice nastav jen agregovane vyhodnoceni kampane.
+
+**38-45 minut: kontrola a kalendar**
+
+Otevri clanek v anonymnim okne, klikni na odkazy, zkontroluj feed, zkontroluj mobilni rozlozeni a naplanuj vyhodnoceni za 7 az 14 dni. Do backlogu zapis jeden mozny follow-up: aktualizace, navazujici clanek, pripadova studie nebo FAQ.
+
+### Sablona distribucni karty
+
+```md
+## Distribuce: [nazev clanku]
+
+- Primarni URL:
+- Cil:
+- Publikum:
+- Hlavni veta pro sdileni:
+- Kanaly:
+- UTM pravidla:
+- Interni odkazy pridane:
+- Privacy kontrola:
+- Datum vyhodnoceni:
+- Signal uspechu:
+- Dalsi krok:
+```
+
+### Checklist: distribuce po publikaci
+
+- [ ] Clanek ma jednu primarni URL a canonical.
+- [ ] Clanek je v sitemap a RSS/Atom feedu.
+- [ ] Existuji interni odkazy ze souvisejicich stranek.
+- [ ] Socialni prispevky jsou ukazky, ne plne kopie clanku.
+- [ ] Vsechny distribucni odkazy vedou na primarni domenu nebo jasny partnersky zdroj.
+- [ ] Nepouzivam social share skripty ani externi embedy bez duvodu.
+- [ ] UTM parametry neobsahuji osobni udaje, nazvy firem ani CRM stavy.
+- [ ] Mereni je agregovane a odpovida realnemu rozhodnuti.
+- [ ] Partnerum posilam odkaz a anotaci, ne sledovaci infrastrukturu.
+- [ ] Je naplanovane vyhodnoceni za 7 az 14 dni.
+- [ ] V backlogu je zapsany jeden follow-up podle reakci ctenaru.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -17879,3 +18015,4 @@ Datum dalsi revize:
 - 2026-08-03: Pridana prakticka priloha Mereni obsahoveho vykonu bez sledovani lidi za 60 minut vcetne obsahove scorecard, minimalnich eventu, Search Console/Bing kontroly, lidske atribuce a checklistu.
 - 2026-08-03: Pridana prakticka priloha Redakcni backlog a aktualizace obsahu bez honby za novinkami za 60 minut vcetne prioritizace napadu, aktualizaci, archivace, tydenni sablony a checklistu.
 - 2026-08-03: Pridana prakticka priloha Publikacni review obsahu bez brzdici byrokracie za 45 minut vcetne bran review, kontroly zdroju, privacy rizik, SEO hygieny, distribuce a checklistu.
+- 2026-08-03: Pridana prakticka priloha Distribucni checklist po publikaci bez platformni zavislosti za 45 minut vcetne distribucni karty, vlastnich kanalu, socialnich ukazek, UTM pravidel a checklistu.
