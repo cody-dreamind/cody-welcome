@@ -19685,6 +19685,191 @@ Stop pravidla:
 
 ---
 
+## AI support odpovedi bez tichych akci za 60 minut
+
+AI v zakaznicke podpore je lakava, protoze slibuje rychlejsi odpovedi, mene rutiny a lepsi vyuziti znalostni baze. Problem je, ze support neni hriste pro sebejistou improvizaci. V ticketu se potkavaji osobni udaje, obchodni kontext, technicke detaily, smluvni sliby, frustrace zakaznika a nekdy i tajemstvi vlozena omylem. Kdyz AI odpovi spatne, neni to jen "model se spletl". Je to zmatek pro zakaznika a prace navic pro tym.
+
+OWASP Top 10 for LLM and Generative AI Applications upozornuje na rizika jako prompt injection, uniky citlivych informaci, nadmerna autonomie a spatne zachazeni s vystupy: https://genai.owasp.org/llm-top-10/. NIST AI RMF a generative AI profil doporucuji rizika AI systemu ridit pres jasne role, mereni, testovani, governance a monitoring: https://www.nist.gov/itl/ai-risk-management-framework a https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence. Prakticky preklad pro maly SaaS: zacni s AI jako navrhovacem odpovedi pro cloveka, ne jako autonomnim support agentem, ktery potichu meni stav uctu.
+
+**Codyho komentar:** Nejvetsi omyl u AI supportu neni halucinace v jedne vete. Je to presvedceni, ze "rychleji" automaticky znamena "lepe". Support neni zavod v odepisovani. Je to zavod v reseni spravneho problemu s minimalnim datovym bordelem.
+
+### 1. Rozdel odpovedi podle dopadu
+
+Ne kazdy support dotaz potrebuje stejnou uroven opatrnosti. Pred implementaci si rozdel situace podle toho, co muze AI pokazit.
+
+| Typ odpovedi | Priklad | AI rezim |
+| --- | --- | --- |
+| Informacni nizky dopad | odkaz na verejnou dokumentaci, vysvetleni limitu | navrh odpovedi se zdrojem |
+| Account kontext | dotaz na fakturaci, plan, limity konkretni firmy | navrh jen po overeni opravneni |
+| Technicky zasah | restart integrace, zmena nastaveni, export dat | AI muze pripravit navrh, akci dela clovek |
+| Citliva oblast | bezpecnostni incident, pravni dotaz, DPA, mazani dat | predat specializovanemu vlastnikovi |
+| Nejasny nebo emocionalni ticket | nespokojenost, hrozba odchodu, konflikt slibu | AI muze shrnout, ne odpovidat samostatne |
+
+Prvni verze by mela umet jen nizky dopad a interni navrhy. Pokud uz chces automaticke odpovedi, omez je na verejne informace, jasne zdroje a jednoduche situace, kde spatna odpoved nezmeni data, penize ani smluvni zavazek.
+
+### 2. Napis support smlouvu o chovani
+
+AI funkce potrebuje kratkou smlouvu o chovani. Ne marketingovy popis, ale provozni hranice.
+
+Sablona:
+
+```text
+AI support asistent pomaha support agentovi pripravit odpoved na zakaznicky ticket.
+Smis pouzit: verejnou dokumentaci, schvalene help centrum, interni support runbooky povolene pro danou roli.
+Nesmim pouzit: tickety jinych zakazniku, obchodni poznamky bez opravneni, tajemstvi, surove logy, pravni dohady.
+Nesmim delat: posilat odpoved zakaznikovi bez potvrzeni cloveka, menit nastaveni uctu, slibovat roadmapu, potvrzovat incident bez vlastnika.
+Musim: ukazat zdroje, priznat nejistotu, oznacit citliva data, predat rizikove dotazy cloveku.
+```
+
+Tahle smlouva patri do produktove dokumentace, testu i UI mikrocopy. Kdyz ji mas jen v promptu, je krehka. Kdyz je propsana do pristupu, evaluace a rozhrani, zacina byt skutecna.
+
+### 3. Vstupni filtr: ticket neni cisty text
+
+Support ticket muze obsahovat vsechno: emaily, adresy, fakturacni udaje, tokeny, stack trace, screenshoty, jmena kolegu, interni komentare a frustraci. Pred odeslanim do modelu udelej vstupni filtr.
+
+Minimalni filtr:
+
+- Oddel zpravu zakaznika od internich poznamek.
+- Vyhodnot, zda ticket obsahuje tajemstvi nebo pristupove udaje.
+- Omez historicky kontext na relevantni cast, ne cele vlakno od roku raz dva.
+- Prilohy neposilej automaticky; nejdriv urci typ a citlivost.
+- Surove logy zkrat a rediguj.
+- Do promptu vloz jen account kontext, ktery je nutny pro odpoved.
+
+**Priklad spatneho vstupu:**
+
+AI dostane cele vlakno vcetne interni poznamky "zakaznik je nastvany, ale smluvne jsme mu to nikdy neslibili", exportu debug logu a screenshotu s API klicem. Potom ma navrhnout milejsi odpoved. Gratuluji, prave jsi z helpdesku udelal datovy vysavac s lepsim slovosledem.
+
+**Lepsi vstup:**
+
+AI dostane dotaz zakaznika, jeho plan, relevantni verejnou dokumentaci, jeden schvaleny interni runbook a informaci, ze v puvodnim ticketu bylo detekovano tajemstvi, ktere se nema opakovat. Vystup ma obsahovat odpoved, zdroje a upozorneni pro agenta.
+
+### 4. Vystup musi byt navrh, ne pravda z hory
+
+Support agent potrebuje videt, co je jistota, co je odhad a co vyzaduje kontrolu. Vystup proto strukturuj.
+
+Sablona vystupu:
+
+```text
+Navrh odpovedi:
+[kratka odpoved pro zakaznika]
+
+Zdroje:
+- [nazev dokumentu / URL / datum]
+
+Kontrola pro agenta:
+- [co overit pred odeslanim]
+- [zda odpoved obsahuje slib, cenu, termin nebo bezpecnostni tvrzeni]
+
+Riziko:
+nizke / stredni / vysoke
+
+Predat cloveku:
+ano/ne + duvod
+```
+
+Kdyz AI nema zdroj, nesmi vymyslet. Kdyz si zdroje odporuji, ma to rict. Kdyz dotaz smeruje na pravni vyklad, bezpecnostni incident nebo smluvni zavazek, ma pripravit shrnuti pro vlastnika, ne odpoved s predstiranou autoritou.
+
+Mikrocopy v rozhrani:
+
+```text
+AI pripravila navrh podle dostupnych zdroju. Pred odeslanim zkontroluj fakta, sliby a zakaznicka data.
+```
+
+Tohle neni zbabelost. Je to normalni provozni brzda, ktera chrani zakaznika i tym.
+
+### 5. Tiche akce zakaz v prvni verzi
+
+Autonomni akce jsou nejrychlejsi cesta k incidentu, pokud nejsou vymezene lepe nez "AI to zvladne". Prvni verze support asistenta by nemela sama:
+
+- posilat odpoved zakaznikovi,
+- menit plan nebo nastaveni uctu,
+- resetovat hesla nebo tokeny,
+- spoustet export nebo mazani dat,
+- zakladat refundaci nebo kredit,
+- potvrzovat SLA nebo incident,
+- prirazovat zakaznikovi segment podle citliveho chovani.
+
+Pokud AI navrhuje akci, zapis ji jako navrh s duvodem, vstupy, dopadem a potvrzenim cloveka. U citlivych akci pridej druhou kontrolu nebo roli vlastnika.
+
+Prakticke pravidlo:
+
+| Akce | Prvni verze |
+| --- | --- |
+| Navrhnout odpoved podle dokumentace | ano, s lidskou kontrolou |
+| Shrnut ticket pro eskalaci | ano, bez citlivych detailu navic |
+| Oznacit chybejici zdroj v dokumentaci | ano |
+| Poslat odpoved zakaznikovi | ne |
+| Zmenit nastaveni uctu | ne |
+| Exportovat nebo smazat data | ne |
+
+Pozdeji muzes pridat automatizaci, ale az po evalech, auditni stope, rolovych opravnenich, stop pravidlech a moznosti rychle vypnout chovani. Bez toho to neni produktivita. Je to tlacitko "prekvap me" v produkci.
+
+### 6. 60min postup
+
+| Cas | Ukol | Vystup |
+| --- | --- | --- |
+| 0-10 min | Vyber jeden support use-case | napr. navrh odpovedi na verejne dokumentovane dotazy |
+| 10-20 min | Rozdel dopady odpovedi | nizky, account, technicky zasah, citlive |
+| 20-30 min | Napis smlouvu o chovani | smi / nesmi / musi / predat |
+| 30-40 min | Navrhni vstupni filtr | co se rediguje, co se nikdy neposila |
+| 40-50 min | Navrhni vystupni sablonu | odpoved, zdroje, kontrola, riziko |
+| 50-60 min | Sepis stop pravidla a prvnich 10 eval ticketu | spousteci brany pred pilotem |
+
+Kdyz behem hodiny zjistis, ze support nema aktualni dokumentaci, nejdriv oprav dokumentaci. AI nad chaotickym zdrojem neni asistent. Je to rychlejsi zpusob, jak siris stary chaos.
+
+### 7. Priklad: navrh odpovedi na dotaz k exportu dat
+
+Ticket:
+
+```text
+Dobry den, potrebujeme export vsech dat naseho workspace pro interni audit.
+Muzete nam ho poslat do patku?
+```
+
+Spravny AI navrh:
+
+```text
+Navrh odpovedi:
+Dobry den,
+export dat muzeme pripravit podle vaseho planu a opravneni k workspace. Nez ho spustime, potrebujeme overit, kdo je opravneny prijemce a jaky rozsah dat ma export obsahovat. Posleme vam kratke potvrzeni rozsahu a bezpecny postup predani.
+
+Zdroje:
+- Help centrum: Export dat z workspace
+- Interni runbook: Overeni prijemce exportu
+
+Kontrola pro agenta:
+- overit roli zadatele ve workspace
+- overit, zda export obsahuje osobni nebo fakturacni data
+- neposilat export jako prilohu bez schvaleneho kanalu
+
+Riziko:
+stredni
+
+Predat cloveku:
+ano, pokud zadatel nema administracni roli nebo pozaduje fakturacni/osobni data mimo bezny export
+```
+
+Spatny AI navrh by byl: "Jasne, export vam poslu do patku." Proc? Protoze slibuje termin, neoveruje prijemce, nevymezuje rozsah a ignoruje datovou cestu.
+
+### Checklist: AI support odpovedi bez tichych akci
+
+- [ ] AI support ma jeden jasny use-case a vlastnika.
+- [ ] Odpovedi jsou rozdelene podle dopadu a rizika.
+- [ ] Prvni verze pripravuje navrhy pro cloveka, ne autonomni odpovedi.
+- [ ] Existuje smlouva o chovani: smi, nesmi, musi, predat.
+- [ ] Vstupni filtr oddeluje zpravu zakaznika, interni poznamky, prilohy a logy.
+- [ ] Tajemstvi, tokeny a zbytecne osobni udaje se rediguji pred odeslanim do modelu.
+- [ ] Vystup obsahuje navrh odpovedi, zdroje, kontrolu pro agenta, riziko a predani cloveku.
+- [ ] AI umi rict, ze zdroj chybi nebo si zdroje odporuji.
+- [ ] Tiche akce jsou v prvni verzi zakazane.
+- [ ] Citlive oblasti jako incidenty, DPA, mazani dat a pravni dotazy maji lidskeho vlastnika.
+- [ ] Eval set obsahuje citlive udaje, prompt injection, chybejici zdroje, konflikt zdroju a neopravnene pozadavky.
+- [ ] Logovani neuklada cele prompty ani plne zakaznicke konverzace bez jasneho duvodu.
+- [ ] Funkci lze rychle vypnout bez dopadu na bezny support proces.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -19910,3 +20095,4 @@ Stop pravidla:
 - 2026-08-04: Pridana prakticka priloha AI decision log bez skladovani promptu za 60 minut vcetne minimalni auditni stopy, retence, pristupu a checklistu.
 - 2026-08-04: Pridana prakticka priloha AI eval set pred produkci bez testovani na zakaznicich za 60 minut vcetne chovani funkce, eval pripadu, rubriky, stop pravidel a checklistu.
 - 2026-08-04: Pridana prakticka priloha RAG znalostni baza bez vysavani internich dat za 60 minut vcetne katalogu zdroju, chunk metadat, pristupove kontroly, nejistoty, uklidu a checklistu.
+- 2026-08-04: Pridana prakticka priloha AI support odpovedi bez tichych akci za 60 minut vcetne dopadu odpovedi, smlouvy o chovani, vstupniho filtru, vystupni sablony, zakazu tichych akci a checklistu.
