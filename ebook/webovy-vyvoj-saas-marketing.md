@@ -20630,6 +20630,213 @@ Po hodine ma byt jasne, jestli upgrade muze do interniho pilotu, potrebuje dalsi
 
 ---
 
+## AI observabilita a nakladove limity bez promptoveho skladu za 60 minut
+
+AI funkce bez observability je cerna skrinka s fakturou na konci mesice. Nevis, proc odpoved trvala dlouho, proc se zvysil pocet predavek cloveku, proc model zacal vracet spatny format nebo proc se po jedne kampani rozjel ucet za inference. Instinktivni reakce byva logovat cele prompty a vystupy. To je pohodlne pro debugging, ale spatne pro privacy-first provoz. Casto tim vytvoris druhou kopii zakaznickych dat, tentokrat v nastroji, ktery puvodne mel slouzit jen k monitoringu.
+
+OpenTelemetry popisuje observabilitu pres signaly jako traces, metrics a logs a W3C Trace Context standardizuje sireni kontextu requestu mezi sluzbami: https://opentelemetry.io/docs/concepts/observability-primer/ a https://www.w3.org/TR/trace-context/. OWASP Top 10 for LLM and Generative AI Applications zarazuje mezi rizika i unbounded consumption, tedy nekontrolovanou spotrebu zdroju u LLM aplikaci: https://genai.owasp.org/llm-top-10/. Prakticky preklad: mer chovani AI funkce tak, abys dokazal ladit kvalitu, latenci, chyby a naklady, ale nedelal z monitoringu tajny archiv promptu.
+
+**Codyho komentar:** "Budeme logovat vsechno a pak to promazeme" je veta, ktera starnuti nezvlada. Za tri mesice nikdo nevi, co je "vsechno", kdo to cte a proc se to jeste nesmazalo. Zacni mensim zaznamem. Mozek i audit ti podekuji.
+
+### 1. Rozdel observabilitu podle otazek, ne podle nastroju
+
+Nezacinej vyberem dashboardu. Zacni otazkami, na ktere musis umet odpovedet pri beznem provozu:
+
+- Funguje AI funkce pro uzivatele, nebo jen vraci odpovedi?
+- Kolik pozadavku konci validacni chybou?
+- Ktere use-casy nejcasteji padaji do lidske kontroly?
+- Kdy se zvysila latence nebo timeouty?
+- Ktere workspace nebo funkce generuji nezvykle naklady?
+- Ktery model, prompt nebo zdroj znalostni baze byl pouzit u problemoveho vystupu?
+- Slo o chybu modelu, zdroje, validace, toolu nebo opravneni?
+
+Z techto otazek vyjde mala sada signalu:
+
+| Signal | Co meri | Co nesmi zbytecne obsahovat |
+| --- | --- | --- |
+| Metriky | pocty requestu, chyby, latence, tokeny, cenu, handoff | text promptu, cele odpovedi, osobni udaje |
+| Trace | cesta requestu pres API, retrieval, model, validaci, tool | citlive parametry, obsah dokumentu, exporty |
+| Log udalosti | rozhodnuti aplikace, validacni chybu, policy duvod | cele tickety, logy zakaznika, tajemstvi |
+| Eval vysledek | porovnani verzi a regresi | realne incidenty bez redakce |
+
+Kdyz potrebujes obsah pro ladeni, udelej explicitni debug rezim s kratkou retenci, omezenym pristupem a redakci. Nenech ho bezet jako vychozi provoz.
+
+### 2. Minimalni AI runtime zaznam
+
+Pro vetsinu malych SaaS funkci staci runtime zaznam, ktery popisuje rozhodnuti a technicky kontext bez plneho obsahu.
+
+Sablona:
+
+```markdown
+# AI runtime event
+
+timestamp:
+environment:
+feature:
+workspace_id_hash:
+request_id:
+trace_id:
+model:
+model_version:
+prompt_template_version:
+policy_version:
+knowledge_source_version:
+input_data_class:
+output_visibility: internal_draft | customer_visible | action_intent
+tool_mode: none | read_only | draft_only | approval_required | autonomous
+validation_result: passed | blocked | repaired | handoff
+handoff_reason:
+error_code:
+latency_ms:
+input_tokens_bucket:
+output_tokens_bucket:
+estimated_cost_bucket:
+retention_until:
+```
+
+Vsimni si `bucket` poli. U provozniho dashboardu casto nepotrebujes presny pocet tokenu u konkretniho cloveka. Staci rozsahy: `0-1k`, `1k-4k`, `4k-16k`, `16k+`. Presna cisla si nech pro agregovane metriky po funkci, modelu a dni.
+
+Co do zaznamu nedavat bez specialniho duvodu:
+
+- cele prompty a cele vystupy,
+- jmena lidi, emaily a telefonni cisla,
+- text support ticketu,
+- surove retrieved chunky,
+- API klice, tokeny, cookies a session identifikatory,
+- platebni a fakturacni detaily,
+- texty internich poznamek a smluv.
+
+Pokud nekdo rekne "ale bez promptu to nejde ladit", odpoved neni automaticky "tak loguj vse". Odpoved je: "Pro jaky typ incidentu potrebujeme obsah, kdo ho smi videt, jak ho redigujeme a kdy zmizi?"
+
+### 3. Nakladove limity jsou produktova ochrana
+
+AI naklady nejsou jen finance. Kdyz se rozjede smycka, nekontrolovany import nebo agent, ktery vola tool dokola, muze to ohrozit dostupnost, support i duveru. Limit tedy neni lakomost. Je to pojistka.
+
+Minimalni limity:
+
+| Limit | Priklad | Reakce |
+| --- | --- | --- |
+| Per request | maximalni vstupni velikost, timeout, token cap | zkratit kontext nebo predat cloveku |
+| Per workspace | denni pocet AI requestu nebo cost budget | zpomalit, zobrazit interni alert, ne tise zdrazovat |
+| Per user role | support agent muze generovat drafty, viewer ne | blokovat podle role |
+| Per tool | export tool jen po schvaleni a s idempotenci | nevykonat bez procesu |
+| Per zdroj | maximalni pocet retrieved chunku | vratit nejistotu misto vysavani cele baze |
+| Per incident | pri anomalii vypnout AI nebo tool calling | kill switch a incident karta |
+
+Prakticke stop pravidlo:
+
+```text
+Pokud AI funkce za 15 minut prekroci 3x bezny pocet requestu, 2x beznou P95 latenci,
+nebo 2x bezny nakladovy bucket na workspace, prejde do draft-only nebo read-only rezimu
+a zalozi interni alert s request_id a trace_id.
+```
+
+Cisla si uprav podle reality. Dulezite je, aby limit existoval driv nez prvni bot, spatny import nebo marketingovy spike.
+
+### 4. Alerty: malo, ale s rozhodnutim
+
+AI alert bez navazane akce je dalsi hluk. Nastav jen ty alerty, ktere maji vlastnika a reakci.
+
+Startovni sada:
+
+| Alert | Prah | Kdo reaguje | Prvni akce |
+| --- | --- | --- | --- |
+| Validacni chyby | prudky rust oproti beznemu stavu | technicky vlastnik | zkontrolovat schema, prompt, model verzi |
+| Handoff cloveku | narust u jedne funkce nebo zdroje | produkt/support | najit chybejici dokumentaci nebo policy konflikt |
+| Timeouty | P95 nad limitem | technicky vlastnik | zkratit kontext, proverit provider/API |
+| Nakladova anomalie | workspace nebo funkce mimo budget | provoz/produkt | zapnout limit, zjistit use-case |
+| Policy block | opakovane bloky stejneho typu | privacy/security | rozhodnout, zda jde o utok, chybu UX nebo legitimni pozadavek |
+| Tool denied | vysoke mnozstvi zakazanych tool callu | security/produkt | zkontrolovat prompt injection a opravneni |
+
+U kazdeho alertu pridej link na runbook. Alert "AI je divna" nikomu nepomuze. Alert "support_draft validation_error rate 8 %, model v3, prompt 2026-08-04, trace sample tady" uz je pouzitelny.
+
+### 5. Debug rezim s retenci, ne navzdy otevrene okno
+
+Nekdy obsah potrebujes. Treba kdyz se opakuje spatna odpoved, zdroj si odporuje, nebo validace blokuje legitimni dotaz. Vytvor proto debug rezim:
+
+- zapina ho jen opravnena role,
+- zapina se na konkretni funkci, workspace nebo request pattern,
+- ma duvod a vlastnika,
+- uklada redigovany vstup a vystup,
+- ma kratkou retenci, napr. 24 hodin az 7 dni podle dopadu,
+- po skonceni vygeneruje zaver a data smaze,
+- nikdy neuklada tajemstvi ani plne exporty.
+
+Sablona debug povoleni:
+
+```markdown
+# AI debug povoleni
+
+Funkce:
+Duvod:
+Rozsah:
+Co se bude ukladat:
+Co se bude redigovat:
+Kdo ma pristup:
+Retence:
+Kdy se vypina:
+Vlastnik:
+```
+
+Debug rezim neni zkratka kolem privacy pravidel. Je to kontrolovany ventil pro situace, kdy agregovana metrika nestaci.
+
+### 6. 60min postup
+
+| Cas | Ukol | Vystup |
+| --- | --- | --- |
+| 0-10 min | Vyber jednu AI funkci | seznam provoznich otazek |
+| 10-20 min | Navrhni runtime event | minimalni pole bez obsahu navic |
+| 20-30 min | Nastav metriky | requesty, chyby, handoff, latence, token/cost bucket |
+| 30-40 min | Definuj limity | per request, workspace, role, tool, zdroj |
+| 40-50 min | Vyber alerty | prah, vlastnik, prvni akce |
+| 50-60 min | Sepis debug rezim | duvod, rozsah, retence, pristupy |
+
+Po hodine bys mel umet odpovedet: "Co se deje?", "Kolik to stoji?", "Kdy to vypneme?", "Kdo to smi ladit?" a "Ktera data kvuli tomu zbytecne nedrzime?"
+
+### 7. Priklad: support draft s rostouci latenci
+
+Signal:
+
+```text
+support_ai_draft ma P95 latenci 18 s misto obvyklych 6 s.
+Cost bucket na request presel z 1k-4k do 16k+.
+Handoff zustal stejny, validacni chyby nerostou.
+```
+
+Vyklad:
+
+- Pravdepodobne se zvetsil vstupni kontext nebo retrieval vraci prilis mnoho dokumentu.
+- Nejde zatim o kvalitu odpovedi, ale o provozni degradaci a naklady.
+- Neni potreba cist cele prompty u vsech requestu.
+
+Prvni akce:
+
+1. Omezit pocet retrieved chunku na puvodni limit.
+2. Zkontrolovat posledni zmenu znalostni baze.
+3. Pustit eval set s latencni metrikou.
+4. Zapnout debug jen pro tri reprezentativni requesty s redakci obsahu.
+5. Po oprave smazat debug artefakty a nechat agregovane metriky.
+
+Spatna reakce by byla zapnout plne logovani promptu pro vsechny support tickety. Tim sice mozna najdes pricinu, ale zaroven vyrobis novy datovy problem.
+
+### Checklist: AI observabilita bez promptoveho skladu
+
+- [ ] AI funkce ma definovane provozni otazky, na ktere observabilita odpovida.
+- [ ] Metriky meri requesty, chyby, handoff, latenci, token/cost bucket a validace.
+- [ ] Trace propojuje request, retrieval, model, validaci a tool bez citliveho obsahu.
+- [ ] Runtime event uklada verze modelu, promptu, policy a zdroju.
+- [ ] `workspace_id` nebo uzivatel jsou hashovane nebo agregovane podle potreby.
+- [ ] Cele prompty a vystupy se neloguji ve vychozim rezimu.
+- [ ] Nakladove limity existuji per request, workspace, roli, tool a zdroj.
+- [ ] Alerty maji prah, vlastnika, runbook a prvni akci.
+- [ ] Debug rezim je casove omezeny, schvaleny a redigovany.
+- [ ] Retence telemetry je popsana podle typu signalu.
+- [ ] Kill switch umi prepnout funkci do read-only nebo draft-only rezimu.
+- [ ] Po incidentu nebo debugovani se maze obsah, ktery uz nema ucel.
+- [ ] Dashboard ukazuje rozhodovaci metriky, ne jen hezke grafy.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -20736,12 +20943,15 @@ Po hodine ma byt jasne, jestli upgrade muze do interniho pilotu, potrebuje dalsi
 - NIST SP 800-218, Secure Software Development Framework (SSDF) Version 1.1: https://csrc.nist.gov/pubs/sp/800/218/final
 - NIST AI Risk Management Framework: https://www.nist.gov/itl/ai-risk-management-framework
 - NIST AI 600-1, Artificial Intelligence Risk Management Framework: Generative Artificial Intelligence Profile: https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence
+- OpenTelemetry, Observability primer: https://opentelemetry.io/docs/concepts/observability-primer/
+- W3C Trace Context: https://www.w3.org/TR/trace-context/
 - Bing Webmaster Tools, URL Inspection: https://www.bing.com/webmasters/help/url-inspection-55a30305
 
 ---
 
 ## Pracovni log
 
+- 2026-08-04: Pridana prakticka priloha AI observabilita a nakladove limity bez promptoveho skladu za 60 minut vcetne runtime eventu, metrik, limitu, alertu, debug rezimu a checklistu.
 - 2026-08-04: Pridana prakticka priloha AI model upgrade bez rozbite produkce za 60 minut vcetne upgrade karty, eval setu, canary rollout, minimalniho logovani, rollbacku a checklistu.
 - 2026-08-04: Pridana prakticka priloha AI vendor karta bez compliance prekvapeni za 60 minut vcetne use-case karty, datovych trid, vendor review, rozhodovaci matice, eval setu a checklistu.
 - 2026-07-30: Zalozena struktura e-booku, doplnen uvod, osnova a hotova prvni kapitola o privacy-first zakladu SaaS webu vcetne praktickych prikladu, checklistu a zdroju.
