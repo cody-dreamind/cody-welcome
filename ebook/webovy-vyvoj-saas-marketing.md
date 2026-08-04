@@ -21718,6 +21718,146 @@ Ocekavane chovani:
 
 ---
 
+## AI export a mazani dat bez rucniho lovu ve skladech za 60 minut
+
+Jakmile do SaaS produktu pridas AI funkci, pribude nenapadna povinnost: vedet, kde vsude se uzivatelska data objevi. Ne jen v hlavni databazi. Taky v prompt builderu, eventech, cache, vektorove databazi, eval vzorcich, support nastroji, logu chyby, vendor konzoli a obcas v exportu, ktery si nekdo odlozil do sdilene slozky. To neni horror. To je normalni provoz, pokud ho navrhnes. Horror zacina ve chvili, kdy prijde zadost o pristup nebo vymaz a tym zacne psat do Slacku: "Nevite nekdo, kde vsude mame prompty?"
+
+GDPR dava lidem prava jako pristup k osobnim udajum, opravu, vymaz, omezeni zpracovani, namitku a prenositelnost. European Commission k zadostem jednotlivcu prakticky shrnuje, ze organizace musi umet tyto pozadavky resit a typicky odpovedet bez zbytecneho odkladu; GDPR v clanku 12 pracuje se zakladni lhutou jednoho mesice. Zdroje: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/dealing-individuals-requests_en a https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
+
+EDPB ma samostatne pokyny k pravu na pristup. Pro produktovy tym z toho plyne jednoducha vec: export neni jen dump databaze. Musis umet vysvetlit kategorie dat, ucel, prijemce, dobu ulozeni a dalsi kontext tak, aby to clovek dokazal pochopit. Zdroj: https://www.edpb.europa.eu/documents/guideline/guidelines-012022-on-data-subject-rights-right-of-access_en
+
+### 1. Zmapuj AI stopy podle zivotniho cyklu
+
+U kazde AI funkce si udelej mapu podle toho, co se s datem deje od vstupu po uklid:
+
+| Faze | Typicka data | Otazka pro tym |
+| --- | --- | --- |
+| Vstup | prompt, vybrany dokument, metadata uctu, role uzivatele | Je to vsechno nutne pro odpoved? |
+| Zpracovani | sestaveny prompt, kontext z RAG, tool volani | Co se posila mimo nasi infrastrukturu? |
+| Vystup | odpoved, navrh akce, confidence, citace zdroju | Ukladame vystup jako osobni udaj? |
+| Observabilita | latence, model, tokeny, chyba, request ID | Lze debugovat bez textu promptu? |
+| Zlepsovani | feedback, eval pripad, anotace, testovaci vzorek | Je to anonymizovane, nebo porad identifikovatelne? |
+| Retence | cache, backup, vendor log, export | Kdy a jak to mizi? |
+
+Pro maly SaaS staci jedna tabulka v dokumentaci. Dulezite je, aby mela vlastnika a aby odpovidala realnemu kodu. Datova mapa, kterou nikdo neaktualizuje, je compliance cosplay. Pekny kostym, nulova ochrana.
+
+### 2. Rozdel zadosti podle toho, co opravdu menis
+
+Ne kazda zadost znamena stejnou technickou akci. V AI produktu rozlisuj minimalne:
+
+- **Pristup:** clovek chce vedet, co o nem zpracovavas a dostat kopii relevantnich dat.
+- **Vymaz:** clovek chce smazat data, kde uz nemas duvod je drzet.
+- **Oprava:** clovek upozorni, ze profil, metadata nebo ulozeny vystup jsou spatne.
+- **Omezeni:** clovek nechce s daty dal pracovat, dokud se spor nevyresi.
+- **Prenositelnost:** clovek chce strojove citelny export dat, ktera ti poskytl a kde se pravo aplikuje.
+- **Namitka:** clovek nesouhlasi s urcitym zpracovanim, typicky u opravneneho zajmu.
+
+Prakticky dopad: tlacitko "Smazat ucet" nema tajne resit vsechny pravni situace. Ma spustit jasny tok s vysvetlenim, co se smaze hned, co se drzi kvuli ucetnictvi nebo bezpecnosti, co zmizi po retenci a koho informujes, pokud data odesla k dodavateli.
+
+### 3. Exportni balicek: citelny pro cloveka, pouzitelny pro stroj
+
+AI export by nemel byt ZIP plny nahodnych JSON souboru s nazvy `final_final_2.json`. Zacni dvouvrstvym vystupem:
+
+```text
+export/
+  README.txt
+  account.json
+  ai-interactions.jsonl
+  ai-feedback.jsonl
+  uploaded-files.csv
+  audit-summary.json
+```
+
+`README.txt` lidsky vysvetli, co je soucasti exportu, co soucasti neni a proc. `account.json` obsahuje profilova data. `ai-interactions.jsonl` muze obsahovat jednotlive AI interakce, pokud je ukladas a pokud patri do rozsahu exportu. `ai-feedback.jsonl` ukaze hodnoceni odpovedi bez internich poznamek, ktere patri do bezpecnostniho nebo obchodniho provozu. `uploaded-files.csv` uvede soubory a stav ulozeni. `audit-summary.json` muze popsat request ID, cas vytvoreni exportu a verzi exportniho formatu.
+
+Privacy-first pravidlo: exportuj to, co ma clovek dostat, ne vsechno, co se ti podari vyhrabat. Interni bezpecnostni logy, data jinych lidi, obchodni tajemstvi nebo prava tretich osob mohou vyzadovat omezeni. To ale neznamena, ze export muze byt cerny box s vetou "ver nam, kamo".
+
+### 4. Mazani musi byt fronta, ne heroic SQL v patek vecer
+
+Mazani v AI systemu navrhni jako idempotentni workflow:
+
+1. Prijmi zadost a over identitu rozumnym zpusobem.
+2. Vytvor interni `deletion_request_id` bez kopirovani citliveho textu zadosti do vsech nastroju.
+3. Najdi datove lokace podle AI datove mapy.
+4. Smaz nebo anonymizuj primarni data podle pravniho duvodu a retence.
+5. Zneplatni cache, embeddingy a odvozene indexy.
+6. Odesli pozadavek relevantnim zpracovatelum, pokud data drzi.
+7. Zapis minimalni auditni stopu: co bylo provedeno, kdy, jakou verzi postupu a jaky vysledek.
+
+Idempotentni znamena, ze kdyz se krok spusti dvakrat, nerozbije system. To je u mazani krasne nudna vlastnost. Nudna jako dobre udelany backup, coz je kompliment.
+
+### 5. Vektorove databaze a embeddingy nejsou vyjimka
+
+RAG systemy casto selzou na tom, ze smazou dokument, ale nechaji jeho chunky v indexu. Nebo smazou chunky, ale nechaji metadata s nazvem klienta. Proto musi mit kazdy vlozeny kus dat stabilni vazbu na zdroj:
+
+```text
+source_id: doc_123
+tenant_id: acme_demo
+subject_scope: account_user_456
+retention_policy: customer_content_standard
+created_at: 2026-08-04
+delete_after: 2026-11-04
+```
+
+Kdyz prijde vymaz nebo ukonceni smlouvy, nemas hledat podobne texty podle semantiky. Mazes podle zdrojoveho ID, tenant ID a retencni politiky. Pokud index neumoznuje spolehlive mazani podle metadat, neni to produkcni uloziste pro osobni nebo zakaznicka data. Je to demo hracka. Hezka, ale hracka.
+
+### 6. Backupy: transparentnost misto kouzelneho slibu
+
+U zaloh casto nejde fyzicky mazat jeden zaznam okamzite bez zniceni integrity zalohy. To neznamena, ze je v poradku rict "backupy jsou mimo GDPR" a jit si udelat kafe. Lepsi pravidlo:
+
+- Primarni system smaze data podle zadosti.
+- Zaloha ma jasnou retenci a omezeny pristup.
+- Obnova ze zalohy musi znovu aplikovat mazaci frontu.
+- V odpovedi uzivateli vysvetlis, jak se se zalohami zachazi.
+- Test obnovy kontroluje i opakovane provedeni mazani.
+
+Jestli backup vraci smazane AI interakce do produkce, nemas backup. Mas zombie automat. A zombie automat je sice vyborny na film, ale spatny na audit.
+
+### 7. 60min postup
+
+**0-10 min:** Vyber jednu AI funkci a napis vsechny datove lokace: databaze, logy, cache, vendor, RAG, feedback, eval, backup.
+
+**10-25 min:** Udelej exportni mapu. Ke kazde lokaci napis, jestli patri do pristupu, prenositelnosti, vymazu, omezeni nebo jen do interni auditni stopy.
+
+**25-40 min:** Navrhni mazaci workflow jako frontu s kroky, vlastnikem, retry pravidlem a auditnim zaznamem.
+
+**40-50 min:** Zkontroluj RAG a embeddingy. Over, ze maji zdrojove ID, tenant ID a retencni politiku.
+
+**50-60 min:** Napis uzivatelskou odpoved pro tri scenare: zadost prijata, zadost dokoncena, cast dat nelze smazat kvuli zakonne nebo smluvni retenci.
+
+### 8. Priklad: uzivatel chce smazat AI historii
+
+Spatna odpoved:
+
+```text
+Vase AI data jsme smazali.
+```
+
+Proc je spatna: neni jasne, co jsou AI data, jestli zmizely embeddingy, jestli se zpracoval vendor, co zustava v zalohach a zda existuje auditni stopa.
+
+Lepsi odpoved:
+
+```text
+Prijali jsme zadost o vymaz historie AI asistenta pro vas ucet. Smazeme ulozene konverzace, souvisejici feedback a odvozene vyhledavaci indexy. Provozni logy bez obsahu promptu zustanou po omezenou dobu kvuli bezpecnosti a spolehlivosti sluzby. Pokud se data nachazela u zpracovatele, odeslali jsme mu navazujici pozadavek. Po dokonceni poslu potvrzeni s prehledem provedenych kroku.
+```
+
+Tahle odpoved neslibuje magii. Rika rozsah, hranice a dalsi krok. To je u privacy-first produktu dulezitejsi nez marketingove "data jsou nase priorita".
+
+### Checklist: AI export a mazani dat
+
+- [ ] Kazda AI funkce ma mapu datovych lokaci vcetne logu, cache, RAG a vendoru.
+- [ ] Existuje rozdil mezi exportem pro pristup a strojove citelnou prenositelnosti.
+- [ ] Export ma lidsky README soubor a verzovany format.
+- [ ] Mazani bezi jako idempotentni fronta, ne jako rucni SQL zasah.
+- [ ] RAG chunky a embeddingy lze mazat podle zdrojoveho ID a tenant ID.
+- [ ] Cache a odvozene indexy maji jasne invalidacni pravidlo.
+- [ ] Vendor pozadavky na vymaz maji vlastnika, stav a auditni stopu.
+- [ ] Backupy maji retenci a obnova znovu aplikuje mazaci frontu.
+- [ ] Uzivatelske odpovedi jasne rikaji rozsah, hranice a termin.
+- [ ] Minimalni auditni stopa neobsahuje zbytecny obsah promptu.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -21725,6 +21865,8 @@ Ocekavane chovani:
 - AI Act Service Desk, Timeline for the Implementation of the EU AI Act: https://ai-act-service-desk.ec.europa.eu/en/ai-act/timeline/timeline-implementation-eu-ai-act
 - EDPB Opinion 28/2024 on certain data protection aspects related to the processing of personal data in the context of AI models: https://www.edpb.europa.eu/documents/opinion-of-the-board-art-64/opinion-282024-on-certain-data-protection-aspects-related-to_en
 - GDPR, Regulation (EU) 2016/679, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
+- European Commission, Dealing with individuals' requests: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/dealing-individuals-requests_en
+- EDPB Guidelines 01/2022 on data subject rights - Right of access: https://www.edpb.europa.eu/documents/guideline/guidelines-012022-on-data-subject-rights-right-of-access_en
 - EDPB Guidelines 07/2020 on the concepts of controller and processor in the GDPR: https://www.edpb.europa.eu/system/files/2023-10/EDPB_guidelines_202007_controllerprocessor_final_en.pdf
 - EDPB Opinion 22/2024 on certain obligations following from the reliance on processors and sub-processors: https://www.edpb.europa.eu/system/files/2024-10/edpb_opinion_202422_relianceonprocessors-sub-processors_en.pdf
 - WP29/EDPB Guidelines on Data Protection Impact Assessment (DPIA): https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/data-protection-impact-assessment-dpia_en
@@ -21835,6 +21977,7 @@ Ocekavane chovani:
 
 ## Pracovni log
 
+- 2026-08-04: Pridana prakticka priloha AI export a mazani dat bez rucniho lovu ve skladech za 60 minut vcetne mapy AI stop, exportniho balicku, mazaci fronty, RAG mazani, backup pravidel a checklistu.
 - 2026-08-04: Pridana prakticka priloha AI anonymizace a synteticka data bez falesneho klidu za 60 minut vcetne rozliseni surovych/pseudonymizovanych/anonymizovanych dat, redakce podle ucelu, re-identifikacniho testu, datoveho kontraktu a checklistu.
 - 2026-08-04: Pridana prakticka priloha AI fallback a degradace sluzby bez paniky za 60 minut vcetne klasifikace selhani, degradacnich rezimu, fallback karty, retry pravidel, uzivatelskych textu a checklistu.
 - 2026-08-04: Pridana prakticka priloha AI datova klasifikace a routing bez posilani vseho vsude za 60 minut vcetne datovych trid, routing karty, redakce, provozni matice a checklistu.
