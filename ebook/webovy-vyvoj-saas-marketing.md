@@ -21228,6 +21228,187 @@ Vysledek: funkce zustane pouzitelna i pri problemu, ale nevyrobi tichy obchvat k
 
 ---
 
+## AI opravneni a akce bez autonomniho kovboje za 60 minut
+
+AI v SaaS je nejnebezpecnejsi ve chvili, kdy prestane jen psat text a zacne delat veci. Navrh odpovedi je jedna liga. Zmena fakturacniho planu, export zakaznickych dat, pozvani uzivatele, smazani projektu nebo odeslani emailu je liga, kde uz nechces spolehat na vetu v system promptu: "bud opatrny". To je jako napsat na dvere serverovny "prosime nehor" a rikat tomu pozarni ochrana.
+
+OWASP Top 10 for LLM and Generative AI Applications upozornuje na rizika nadmerne autonomie, citlivych informaci a prompt injection: https://genai.owasp.org/llm-top-10/. OWASP Authorization Cheat Sheet zase drzi zakladni pravidlo, ze autorizace musi byt vynucena aplikaci a konzistentne kontrolovana na serveru: https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html. Prakticky preklad: model muze navrhnout akci, ale produkt musi rozhodnout, jestli ji vubec smi provest.
+
+### 1. Rozdel AI na text, navrh a akci
+
+Nejdriv si udelej inventar, co AI funkce realne dela. Nepis "AI assistant". To je marketingovy mlhovy stroj. Pis konkretni schopnosti.
+
+| Uroven | Co AI dela | Vychozi pravidlo |
+| --- | --- | --- |
+| Text | shrne, prelozi, navrhne formulaci | povolit po vstupni a vystupni validaci |
+| Navrh | pripravi strukturovany draft pro cloveka | vyzadovat viditelne potvrzeni |
+| Read-only dotaz | cte data v rozsahu uzivatele | kontrolovat prava pred retrievalem |
+| Akce s nizkym dopadem | vytvori draft, ulozi poznamku, pripravi stitek | potvrzeni nebo jasne undo |
+| Akce se strednim dopadem | odesle email, zmeni stav ticketu, vytvori pozvanku | explicitni potvrzeni a auditni stopa |
+| Akce s vysokym dopadem | smaze data, zmeni billing, meni prava, exportuje osobni data | clovek, role, duvod a casto druhy krok schvaleni |
+
+Tohle rozdeleni patri do produktu i do kodu. Pokud je vsechno schovane za jeden endpoint `POST /ai/act`, bude se ti spatne vysvetlovat, proc jeden prompt smel jen shrnout ticket a druhy najednou vytvoril export vsech kontaktu.
+
+### 2. Tooly navrhuj jako interni API s pravnim pasem
+
+Tool calling svadi k tomu, ze modelu das sadu schopnosti a cekas, ze si vybere dobre. Privacy-first varianta je obracena: aplikace nejdriv vybere povolene schopnosti podle uzivatele, workspace, planu, datove tridy a aktualniho rezimu. Model pak muze zadat jen akci, kterou aplikace uz predem povolila.
+
+Minimalni karta toolu:
+
+```text
+Tool:
+Ucel:
+Kdo ho smi vyvolat:
+Jaka data smi cist:
+Jaka data smi menit:
+Zakazane vstupy:
+Povinne validace:
+Potrebuje potvrzeni cloveka:
+Ma undo nebo rollback:
+Co se loguje:
+Co se nikdy neloguje:
+Fallback pri chybe:
+Vlastnik:
+Datum revize:
+```
+
+Ukazka:
+
+```text
+Tool: create_support_reply_draft
+Ucel: vytvorit draft odpovedi support specialistovi
+Kdo ho smi vyvolat: support role v danem workspace
+Jaka data smi cist: text ticketu, verejna dokumentace, stav planu bez platebnich detailu
+Jaka data smi menit: zadna zakaznicka data, pouze draft odpovedi
+Zakazane vstupy: tokeny, hesla, cele exporty, data z jineho workspace
+Povinne validace: zdroje odkazuji jen na povolenou dokumentaci, zadny slib kompenzace
+Potrebuje potvrzeni cloveka: ano, pred odeslanim emailu
+Ma undo nebo rollback: draft lze smazat, email se neposila automaticky
+Co se loguje: request_id, ticket_id, tool_name, policy_version, vysledek validace
+Co se nikdy neloguje: plny text ticketu, plny prompt, tajemstvi, pristupove tokeny
+Fallback pri chybe: schvalena support sablona a manual queue
+Vlastnik: Head of Support
+Datum revize: 2026-08-04
+```
+
+### 3. Povolenka musi byt kratkodoba a uzka
+
+AI akce by nemela dostat trvale opravneni "delat veci jmenem uzivatele". Lepsi je kratkodoba povolenka pro jednu konkretni operaci. V praxi to znamena, ze UI, server a tool runtime sdili maly kontext: kdo chce co udelat, na kterem objektu, proc, s jakym dopadem a do kdy povoleni plati.
+
+Pravidla pro povolenku:
+
+- Vaz ji na konkretniho uzivatele, workspace a objekt, ne na obecnou roli.
+- Nastav kratkou platnost v minutach, ne ve dnech.
+- Povolit jen jednu akci nebo malou davku stejneho typu.
+- Nepridavej nova data do kontextu jen proto, ze tool selhal.
+- Po pouziti povolenku zneplatni.
+- Pri zmene dopadu vyzaduj novy souhlas nebo schvaleni.
+
+**Codyho komentar:** Model nema byt spravce s klici od cele budovy. Ma byt stazista s propustkou do jedne mistnosti, na jeden ukol a s vratnym stitkem. Ano, stazista muze byt genialni. Porad je to stazista.
+
+### 4. Potvrzeni cloveka musi byt informovane
+
+"Chces pokracovat?" neni potvrzeni. Je to alibi. Dobre potvrzeni rika, co se stane, ktera data se pouziji, komu se neco posle, jestli je akce vratna a co se ulozi do auditni stopy.
+
+Sablona potvrzeni pro AI akci:
+
+```text
+AI navrhuje akci:
+Dopad:
+Objekt:
+Data pouzita pro rozhodnuti:
+Co se zmeni:
+Co se neposle ani nezmeni:
+Je akce vratna:
+Auditni zaznam:
+Tlacitka: Schvalit / Upravit / Zrusit
+```
+
+Priklad pro odeslani support odpovedi:
+
+```text
+AI navrhuje akci: odeslat odpoved zakaznikovi
+Dopad: stredni, externi komunikace
+Objekt: ticket #4821
+Data pouzita pro rozhodnuti: posledni zprava zakaznika, verejna dokumentace, stav planu Basic
+Co se zmeni: email bude odeslan na kontakt v ticketu a ulozen do historie komunikace
+Co se neposle ani nezmeni: nezmeni se plan, fakturace, prava ani data v uctu
+Je akce vratna: odeslany email nelze vratit, lze poslat opravu
+Auditni zaznam: ulozi se schvalujici uzivatel, cas, ticket_id, policy_version a template_id
+```
+
+Tahle obrazovka mozna prida jeden klik. Zato ubere deset debat po incidentu.
+
+### 5. Testuj zle priklady, ne jen hezke demo
+
+AI akce potrebuji testy, ktere zamerne zkousi obchvaty. Hezke demo s normalnim ticketem je zaklad, ale produkt se lame na nudnych hranach: cizi workspace, zmeneny objekt po nacteni, prompt injection ve vstupu, vyprsela povolenka, chybejici role, moc velky export, nevratna akce bez potvrzeni.
+
+Testovaci matice:
+
+| Scenar | Ocekavane chovani |
+| --- | --- |
+| Uzivatel nema pravo cist objekt | tool se vubec nespusti |
+| Prompt ve vstupu prikazuje ignorovat pravidla | text se bere jako neduveryhodny obsah |
+| AI navrhne tool mimo allowlist | aplikace akci zamitne |
+| Povolenka vyprsela | uzivatel musi znovu potvrdit akci |
+| Objekt se mezi navrhem a potvrzenim zmenil | potvrzeni se zneplatni a zobrazi se nova kontrola |
+| Akce je nevratna | vyzaduje explicitni potvrzeni a jasny dopad |
+| Vystup obsahuje zakazany slib | zustane jako chyba validace, ne jako draft k odeslani |
+| Tool selze | fallback nezkousi sirsi prava ani vice dat |
+
+### 6. 60min postup
+
+0-10 minut: Vyber jednu AI funkci, ktera muze delat akce nebo pripravovat akce. Sepis jeji skutecne schopnosti bez marketingovych slov.
+
+10-20 minut: Rozdel schopnosti na text, navrh, read-only dotaz, nizky dopad, stredni dopad a vysoky dopad.
+
+20-35 minut: Vypln kartu toolu pro jednu nejrizikovejsi akci. Zapis, kdo ji smi vyvolat, co smi cist, co smi menit a co se nikdy nesmi stat.
+
+35-45 minut: Navrhni potvrzovaci obrazovku. Musi rikat dopad, objekt, data, zmenu, vratnost a auditni zaznam.
+
+45-55 minut: Dopln testovaci matici se zlymi priklady: prompt injection, cizi workspace, vyprsela povolenka, zmeneny objekt a tool mimo allowlist.
+
+55-60 minut: Vytvor jeden ticket do backlogu: "AI tool permissions hardening" s vlastnikem, terminem a jasnym acceptance criteria.
+
+### 7. Priklad: AI pripravuje zmenu stavu faktury
+
+Spatna verze:
+
+1. Uzivatel napise: "Oznac fakturu jako zaplacenou."
+2. AI zavola tool podle textu.
+3. Faktura se zmeni.
+4. Log obsahuje prompt a odpoved.
+
+Lepsi verze:
+
+1. Server overi, ze uzivatel ma pravo cist a menit konkretni fakturu v danem workspace.
+2. AI smi pripravit jen navrh akce `mark_invoice_paid_draft`.
+3. Produkt ukaze potvrzeni: cislo faktury, castku, zakaznika, dopad na reporting, vratnost a auditni stopu.
+4. Uzivatel s prislusnou roli potvrdi akci.
+5. Server znovu overi prava a zkontroluje, ze se faktura od navrhu nezmenila.
+6. Akce se provede bez toho, aby model dostal platebni detaily mimo nutny kontext.
+7. Audit log ulozi actor_id, invoice_id, action, cas, policy_version a request_id, ne plny prompt.
+
+Vysledek: AI pomaha s rychlosti, ale autorizace, potvrzeni a audit zustavaji v aplikaci. Presne tam, kde maji byt.
+
+### Checklist: AI opravneni a akce
+
+- [ ] AI schopnosti jsou rozdelene na text, navrh, read-only dotaz a akce podle dopadu.
+- [ ] Kazdy tool ma kartu s ucelem, povolenymi daty, zakazanymi vstupy a vlastnikem.
+- [ ] Aplikace vybira allowlist toolu pred volanim modelu.
+- [ ] Model nikdy nerozhoduje sam o rozsahu opravneni.
+- [ ] Kratkodobe povolenky jsou vazane na uzivatele, workspace, objekt a jednu akci.
+- [ ] Stredni a vysoky dopad vyzaduje informovane potvrzeni cloveka.
+- [ ] Nevratne akce maji extra brzdu, jasny text dopadu a auditni stopu.
+- [ ] Prava se kontroluji pred navrhem i tesne pred provedenim akce.
+- [ ] Zmena objektu mezi navrhem a potvrzenim zneplatni povolenku.
+- [ ] Tool mimo allowlist se zamitne bez pokusu o kreativni obchazku.
+- [ ] Testy pokryvaji prompt injection, cizi workspace, vyprseni povolenky a validacni selhani.
+- [ ] Logy obsahuji identifikatory a policy verze, ne plne prompty, odpovedi nebo tajemstvi.
+- [ ] Fallback nikdy nerozsiruje prava ani neposila vice dat kvuli opakovani requestu.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -21463,3 +21644,4 @@ Vysledek: funkce zustane pouzitelna i pri problemu, ale nevyrobi tichy obchvat k
 - 2026-08-04: Pridana prakticka priloha AI support odpovedi bez tichych akci za 60 minut vcetne dopadu odpovedi, smlouvy o chovani, vstupniho filtru, vystupni sablony, zakazu tichych akci a checklistu.
 - 2026-08-04: Pridana prakticka priloha AI incident a kill switch bez produkcniho dramatu za 60 minut vcetne klasifikace incidentu, vypinacu, incident karty, navratu do provozu a checklistu.
 - 2026-08-04: Pridana prakticka priloha Prompt injection a tool calling bez slepe duvery za 60 minut vcetne vrstev duvery, schema toolu, validaci, rizikoveho filtru, prikladu exportu dat a checklistu.
+- 2026-08-04: Pridana prakticka priloha AI opravneni a akce bez autonomniho kovboje za 60 minut vcetne dopadove klasifikace, tool karty, kratkodobych povolenek, potvrzeni cloveka, testovaci matice a checklistu.
