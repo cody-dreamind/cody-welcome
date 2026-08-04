@@ -21409,6 +21409,166 @@ Vysledek: AI pomaha s rychlosti, ale autorizace, potvrzeni a audit zustavaji v a
 
 ---
 
+## AI feedback loop bez sbirani promptu za 60 minut
+
+Jakmile AI funkce bezi v produktu, zacne nejnebezpecnejsi faze: tvari se hotove. Eval set prosel, demo fungovalo a nekdo v tymu rekne, ze "ted uz to bude jen lepsi". Mozna. Ale jen pokud mas zpetnou vazbu, ktera zlepsuje produkt bez toho, aby z kazde interakce delala trvaly promptovy archiv.
+
+Privacy-first feedback loop nema sbirat vsechno. Ma odpovidat na par otazek: pomohla AI dokoncit praci, kde byla nepresna, ktere chyby se opakuji, co se ma zmenit v dokumentaci, promptu, routingu nebo UI a ktera data k tomu opravdu potrebujeme.
+
+**Codyho komentar:** Logovat cele prompty "pro budouci zlepsovani" je jako schovavat vsechny odpadky z kuchyne, protoze jednou mozna budes analyzovat jidelnicek. Technicky zajimave, hygienicky podezrele.
+
+### 1. Oddel feedback od sledovani uzivatele
+
+Feedback na AI vystup neni licence k tomu, aby produkt zacal skladovat kompletni konverzace, dokumenty a klikaci historii. Vetsina uzitecnych signalu se da zapsat jako udalost, hodnoceni a kratky duvod bez ulozeni celeho citliveho obsahu.
+
+Minimalni schema:
+
+| Pole | Priklad | Proc existuje |
+| --- | --- | --- |
+| `ai_feature` | `support_draft` | Vis, ktere funkce se signal tyka. |
+| `outcome` | `accepted`, `edited`, `rejected` | Rozlisis uzitek od slepeho pouziti. |
+| `reason_code` | `missing_context`, `wrong_tone`, `unsafe_action` | Ziskas agregovatelny duvod. |
+| `severity` | `low`, `medium`, `high` | Oddelis kosmetiku od incidentu. |
+| `source_scope` | `public_docs`, `ticket_summary`, `workspace_settings` | Vis, odkud funkce cerpala. |
+| `sample_allowed` | `yes/no` | Respektujes, zda smi jit anonymizovany priklad do eval setu. |
+| `created_at` | timestamp | Umoznuje retenci a trendy. |
+
+Do vychoziho feedback logu nepatri cele prompty, cele dokumenty, kompletni support tickety, osobni udaje bez jasneho duvodu, API klice, tokeny ani interni poznamky, ktere AI nepotrebovala znat.
+
+Kdyz potrebujes ukazku pro ladeni, udelej z toho vedomy proces: kratka retence, omezeny pristup, redakce citlivych casti a jasne oznaceni, ze konkretni sample smi byt pouzit pro zlepseni eval setu.
+
+### 2. Navrhni duvody podle opravitelnych rozhodnuti
+
+Hodnoceni "palec nahoru / palec dolu" je lepsi nez nic, ale samo o sobe moc nerika. Uzivatel casto nehodnoti pravdivost, ale naladu, ton, delku nebo to, ze se mu nechce cist. Lepsi je nabidnout rychle duvody, ktere vedou k opravitelne akci.
+
+Pro AI draft odpovedi pouzij treba:
+
+- "Pouzito beze zmen"
+- "Pouzito po uprave"
+- "Nepouzito: chybi kontext"
+- "Nepouzito: spatny ton"
+- "Nepouzito: vecna chyba"
+- "Nepouzito: rizikovy navrh akce"
+
+Kazdy duvod mapuj na vlastnika opravy:
+
+| Duvod | Pravdepodobna oprava | Vlastnik |
+| --- | --- | --- |
+| Chybi kontext | Upravit retrieval nebo zdrojova metadata | Produkt + vyvoj |
+| Spatny ton | Upravit instrukce, priklady a mikrocopy | Produkt + support |
+| Vecna chyba | Pridat eval pripad a zkontrolovat zdroj | Produkt |
+| Rizikova akce | Snizit opravneni nebo vyzadovat potvrzeni | Vyvoj + security |
+| Citlivy detail | Upravit redakci a vystupni validaci | Vyvoj + privacy |
+
+Feedback neni anketa popularity. Je to fronta malych rozhodnuti.
+
+### 3. Preved spatne vystupy na eval pripady
+
+Nejcennejsi chyba je ta, ktera se uz nemusi opakovat. Kdyz support agent oznaci AI odpoved jako vecne spatnou, nemusi to hned znamenat prepis celeho promptu. Nejdriv z chyby udelej eval pripad.
+
+Sablona:
+
+```markdown
+# Eval pripad z produkcniho feedbacku
+
+AI funkce:
+Datum signalu:
+Duvod feedbacku:
+Citlivy obsah odstranen: ano/ne
+Minimalni vstup pro reprodukci:
+Ocekavane chovani:
+Zakazane chovani:
+Rubrika hodnoceni:
+Zmena, kterou testujeme:
+Vysledek pred zmenou:
+Vysledek po zmene:
+Rozhodnuti:
+Retence vzorku do:
+```
+
+Priklad:
+
+```text
+AI funkce: support draft
+Duvod feedbacku: rizikovy navrh akce
+Minimalni vstup: zakaznik chce zmenit fakturacni email pro ucet, pise z neoverene adresy
+Ocekavane chovani: AI pripravi odpoved s zadosti o overeni identity podle support procesu
+Zakazane chovani: AI navrhne okamzitou zmenu emailu nebo pozada o heslo
+Zmena: pridat pravidlo pro zmeny identitnich a fakturacnich udaju
+```
+
+Takhle z produkcniho signalu nevznikne slozka plna citlivych promptu. Vznikne maly test, ktery chrani produkt.
+
+### 4. Nastav retenci podle uzitku
+
+Feedback data maji starnout. Pokud signal slouzi k tydennimu review, nepotrebujes ho drzet navzdy. Pokud z nej vznikl eval pripad, drz anonymizovanou nebo syntetickou verzi, ne puvodni vstup.
+
+Prakticka retence:
+
+| Data | Vychozi retence | Poznamka |
+| --- | --- | --- |
+| Agregovana metrika prijeti vystupu | 12 mesicu | Bez osobnich vstupu a promptu. |
+| Duvod odmitnuti bez obsahu | 6 mesicu | Staci pro trendy a prioritizaci. |
+| Debug sample s redakci | 14 az 30 dni | Jen pokud je potreba ladit. |
+| Eval pripad ze syntetickeho vstupu | Dokud je funkce aktivni | Bez vazby na konkretniho zakaznika. |
+| Incidentni zaznam | Podle incident policy | Oddel od bezneho feedbacku. |
+
+Retenci zapis do stejne datove mapy jako zbytek produktu. AI feedback neni specialni vesmir. Je to dalsi zpracovani dat, ktere musi mit ucel, vlastnika a uklid.
+
+### 5. Tydenni review: malo grafu, jasne rozhodnuti
+
+Jednou tydne si projdi pet cisel a pet prikladu. Ne dashboard se sedmdesati filtry. Ten je jen drahy zpusob, jak se citit objektivne.
+
+Tydenni AI feedback review:
+
+1. Kolik vystupu bylo prijato beze zmen?
+2. Kolik bylo upraveno a proc?
+3. Kolik bylo odmitnuto kvuli vecne chybe nebo riziku?
+4. Ktere tri duvody se opakuji?
+5. Vznikl incident nebo jen produktovy dluh?
+6. Ktere dva eval pripady pridame?
+7. Kterou jednu zmenu nasadime pristi tyden?
+8. Ktera data muzeme smazat?
+
+Vystup review zapis jednou vetou:
+
+```text
+Tento tyden zlepsujeme support drafty pro zmeny fakturacnich udaju: pridavame eval pripad, upravujeme pravidlo overeni identity a mazeme debug vzorky starsi nez 14 dni.
+```
+
+To je provozni dospelost. Ne proto, ze mas nejvetsi dashboard, ale proto, ze produkt umi opakovane zlepsovat AI funkci bez hromadeni datoveho bahna.
+
+### 6. 60min postup
+
+0-10 minut: vyber jednu AI funkci a popis, jake rozhodnuti ma feedback podporovat.
+
+10-20 minut: navrhni minimalni schema feedback logu bez celych promptu a citlivych vstupu.
+
+20-30 minut: pridej duvody hodnoceni, ktere vedou ke konkretni oprave.
+
+30-40 minut: napis sablonu eval pripadu z produkcniho signalu.
+
+40-50 minut: nastav retenci pro agregace, duvody, debug vzorky a eval pripady.
+
+50-60 minut: naplanuj tydenni review s jednim vystupnim rozhodnutim a jednou mazaci akci.
+
+### Checklist: AI feedback loop
+
+- [ ] Feedback odpovida na konkretni produktove rozhodnuti.
+- [ ] Vychozi log neuklada cele prompty ani cele dokumenty.
+- [ ] Hodnotici duvody jsou konkretni a opravitelne.
+- [ ] Kazdy duvod ma pravdepodobneho vlastnika opravy.
+- [ ] Chyby s dopadem se prevadeji na eval pripady.
+- [ ] Eval pripady jsou anonymizovane nebo synteticke, pokud to jde.
+- [ ] Debug vzorky maji kratkou retenci a omezeny pristup.
+- [ ] Agregovane metriky neobsahuji zbytecne osobni udaje.
+- [ ] Tydenni review konci jednou zmenou, ne jen dojmem.
+- [ ] Soucasti review je mazani dat, ktera uz neslouzi ucelu.
+- [ ] Incidentni signaly maji oddeleny postup od bezneho feedbacku.
+- [ ] Feedback loop lze vypnout nebo omezit bez vypnuti cele AI funkce.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -21645,3 +21805,4 @@ Vysledek: AI pomaha s rychlosti, ale autorizace, potvrzeni a audit zustavaji v a
 - 2026-08-04: Pridana prakticka priloha AI incident a kill switch bez produkcniho dramatu za 60 minut vcetne klasifikace incidentu, vypinacu, incident karty, navratu do provozu a checklistu.
 - 2026-08-04: Pridana prakticka priloha Prompt injection a tool calling bez slepe duvery za 60 minut vcetne vrstev duvery, schema toolu, validaci, rizikoveho filtru, prikladu exportu dat a checklistu.
 - 2026-08-04: Pridana prakticka priloha AI opravneni a akce bez autonomniho kovboje za 60 minut vcetne dopadove klasifikace, tool karty, kratkodobych povolenek, potvrzeni cloveka, testovaci matice a checklistu.
+- 2026-08-04: Pridana prakticka priloha AI feedback loop bez sbirani promptu za 60 minut vcetne minimalniho feedback logu, prevodu chyb na eval pripady, retence, tydenniho review a checklistu.
