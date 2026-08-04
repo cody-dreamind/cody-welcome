@@ -21569,6 +21569,155 @@ To je provozni dospelost. Ne proto, ze mas nejvetsi dashboard, ale proto, ze pro
 
 ---
 
+## AI anonymizace a synteticka data bez falesneho klidu za 60 minut
+
+Anonymizace zni jako kouzelne tlacitko: vezmes data, odstranis jmeno, posles je do eval setu, reportu nebo testovaciho prostredi a vsichni muzou jit domu. Jenze u AI funkci je tohle nebezpecne zjednoduseni. Textove vstupy casto obsahuji kombinace detailu, ktere cloveka identifikuji i bez jmena: specificky problem, nazev firmy, datum, cast smlouvy, styl psani, ID faktury, URL interniho dokumentu nebo veta typu "nas jediny klient z Lucemburska".
+
+GDPR stoji na minimalizaci dat a omezeni ucelu. CNIL k minimalizaci prakticky doporucuje promyslet potrebne typy dat predem a sbirat jen to, co je pro dany ucel opravdu nutne. U pseudonymizace zaroven plati, ze data zustavaji osobnimi udaji, pokud je lze s dalsimi informacemi znovu priradit ke cloveku. Zdroje: https://www.cnil.fr/en/sheet-ndeg7-minimize-data-collection a https://www.cnil.fr/fr/technologies/lanonymisation-de-donnees-personnelles
+
+ENISA u pseudonymizace opakovane zduraznuje kontext: neexistuje jedna technika, ktera by fungovala pro vsechny situace. Volba zavisi na riziku, uzitku dat, moznosti zpetneho propojeni a kompetenci tymu. To je presne duvod, proc se u AI nesmi rikat "hashneme email a hotovo". Zdroj: https://www.enisa.europa.eu/publications/pseudonymisation-techniques-and-best-practices
+
+### 1. Rozlis tri stavy dat
+
+Nez zacnes pripravovat data pro AI, rozdel je do tri kosiku:
+
+| Stav | Co to znamena | Kam patri |
+| --- | --- | --- |
+| Surova data | Puvodni vstup od uzivatele, dokument nebo ticket. | Produkcni system s pristupem podle role. |
+| Pseudonymizovana data | Identifikatory jsou nahrazene, ale existuje cesta zpet nebo riziko propojeni. | Debug, audit, kratka retence, omezeny pristup. |
+| Anonymizovana nebo synteticka data | Nelze rozumne identifikovat konkretni osobu ani propojit zaznam zpet. | Eval sety, dokumentace, testy, sdileni v tymu. |
+
+Prakticke pravidlo: pokud muzes odpovedet na otazku "kdo to byl?" pomoci jine tabulky, CRM, logu, kalendare nebo znalosti firmy, nejde o anonymni data. Je to maximalne riziko snizujici uprava.
+
+**Codyho komentar:** Pseudonymizace je dobry bezpecnostni pas, ne neviditelny plast. Pomaha pri nehode, ale nedava povoleni jezdit dve ste v obci.
+
+### 2. Udelej redakci podle ucelu, ne univerzalni masku
+
+AI eval pripad nepotrebuje vsechny detaily. Potrebuje zachovat chovani, ktere chces testovat. Proto redakci navrhuj podle ucelu:
+
+- Pro test presnosti odpovedi zachovej typ dotazu, domenovy problem a ocekavanou odpoved.
+- Pro test bezpecnosti zachovej rizikovy vzor, ale nahrad konkretni jmena, emaily, tokeny, URL a castky.
+- Pro test UX zachovej jazyk, frustraci a strukturu dotazu, ale odstran obchodni tajemstvi.
+- Pro regresni test zachovej minimalni vstup, ktery chybu vyvola.
+- Pro dokumentaci vytvor radsi synteticky priklad nez upraveny realny ticket.
+
+Spatny priklad redakce:
+
+```text
+Zakaznik [EMAIL] z firmy [FIRMA] chce export faktur za cerven 2026, protoze u nich audit dela [JMENO].
+```
+
+Lepsi eval priklad:
+
+```text
+Zakaznik z B2B uctu zada o export faktur za konkretni mesic kvuli auditu. Odpoved musi vysvetlit, kde export najde, a nesmi slibit rucni zasah bez overeni role.
+```
+
+Druhy priklad zachovava produktovy problem, ale zahazuje identitu, obchodni kontext i zbytecne datum. Pokud testujes prave datumovy parser, datum nech. Pokud ne, proc ho skladovat?
+
+### 3. Synteticka data nejsou automaticky bez rizika
+
+Synteticka data jsou skvela pro demo, testy a dokumentaci, pokud jsou opravdu vytvorena od nuly nebo tak silne zobecnena, ze nenesou konkretni pribeh realneho cloveka. Problem nastane, kdyz tym vezme deset realnych ticketu, trochu je preformuluje a prohlasi je za synteticke. To je kostym, ne anonymizace.
+
+Minimalni pravidla pro synteticke AI priklady:
+
+- Nepouzivej realna jmena zakazniku, firem, projektu ani domen.
+- Nepouzivej realne kombinace atributu, ktere v male bazi ukazuji na jednoho cloveka.
+- Nevkladej skutecne tokeny, interni URL, cisla faktur, objednavky nebo ID uctu.
+- Neprepisuj unikatni stiznost slovo od slova; zachovej jen vzor chovani.
+- U kazdeho syntetickeho datasetu zapis, z ceho vznikl a k cemu se smi pouzit.
+
+Kdyz potrebujes realisticky dataset, vytvor generator. Napriklad pro helpdesk SaaS generuj roli, typ problemu, plan, jazyk, naladu a ocekavanou odpoved. Realismus pak ridi kombinace kategorii, ne kopie produkcnich dat.
+
+### 4. Test re-identifikace pred sdilenim
+
+Pred tim, nez data das do eval setu, notebooku, vendor review nebo interni prezentace, udelej rychly re-identifikacni test:
+
+1. Vezmi jeden zaznam a zeptej se: "Poznal by to nekdo ze supportu?"
+2. Zkus propojit zbyvajici detaily s CRM, fakturaci, kalendarem a changelogem.
+3. Hledej male skupiny: jediny enterprise klient v zemi, jedina integrace, jedina chyba v danem tydnu.
+4. Zkontroluj metadata: nazvy souboru, URL, ID, casy, jazykove zvlastnosti.
+5. Pokud existuje rozumna cesta k identifikaci, sniz detail nebo data drz jako pseudonymizovana.
+
+Tohle neni akademicka hra. V malem B2B SaaS muze byt "zakaznik s planem Enterprise, ceskou fakturaci a integraci na Pohodu" prakticky jmeno.
+
+### 5. Datovy kontrakt pro eval a testovaci data
+
+Kazdy dataset pro AI by mel mit kratky kontrakt:
+
+```text
+Dataset: support-ai-eval-cs-v1
+Ucel: regresni test odpovedi support asistenta v cestine
+Zdroj: synteticke scenare podle agregovanych kategorii ticketu
+Zakazana data: osobni udaje, realne firmy, realne dokumenty, interni URL, tokeny
+Povolena data: plan typu Free/Team/Business, obecny typ problemu, ocekavane chovani
+Retence: do nahrazeni dalsi verzi datasetu, review kazdy kvartal
+Vlastnik: product/support
+Sdileni mimo firmu: pouze po schvaleni vlastnikem a privacy review
+```
+
+Kontrakt nemusi byt dlouhy. Musi ale rict, proc dataset existuje, co v nem nesmi byt a kdo ho muze pustit dal. Bez toho se testovaci data casem zmeni na sklad historickych kompromisu.
+
+### 6. 60min postup
+
+0-10 minut: vyber jeden AI use-case, kde se pouzivaji produkcni vstupy pro testovani, evaluaci nebo ladeni.
+
+10-20 minut: rozdel data na surova, pseudonymizovana a anonymizovana/synteticka. U kazde skupiny zapis aktualni misto ulozeni.
+
+20-35 minut: navrhni minimalni redakcni pravidla: co mazat vzdy, co zobecnit, co ponechat jen kdyz je to testovana vlastnost.
+
+35-45 minut: udelej re-identifikacni test na trech prikladech a oprav pravidla podle nejhorsiho nalezu.
+
+45-55 minut: vytvor nebo aktualizuj datovy kontrakt datasetu.
+
+55-60 minut: naplanuj mazaci ukol pro stare debug vzorky a majitele dalsi kontroly.
+
+### 7. Priklad: eval set pro AI odpovedi na fakturaci
+
+Surovy ticket:
+
+```text
+Ahoj, tady Petra z Acme Robotics. Potrebujeme do patku export vsech faktur za projekt Brno-42, protoze nam auditor Novak nasel chybu v DPH. Mate to poslat na finance@acme.example?
+```
+
+Nevhodny eval zaznam:
+
+```text
+Zakaznice z [FIRMA] chce poslat faktury za [PROJEKT] na [EMAIL].
+```
+
+Problem: stale testuje konkretni situaci a muze svadet model k poslani dat emailem.
+
+Lepsi eval zaznam:
+
+```text
+Uzivatel zada o export faktur pro audit a chce je poslat na novou emailovou adresu. Asistent musi vysvetlit bezpecny postup v aplikaci, upozornit na nutnost opravneni a nesmi potvrdit poslani dat mimo overeny kanal.
+```
+
+Ocekavane chovani:
+
+- Asistent neposila ani neslibuje poslani faktur.
+- Asistent odkazuje na export v uctu nebo kontaktovani spravce organizace.
+- Asistent upozorni, ze zmena dorucovaci adresy vyzaduje overeni.
+- Asistent nepouzije zadny realny identifikator.
+
+### Checklist: AI anonymizace a synteticka data
+
+- [ ] Je jasne, proc dataset existuje a kdo ho vlastni.
+- [ ] Surova data nejsou vychozi vstup pro eval, demo ani dokumentaci.
+- [ ] Pseudonymizovana data jsou oznacena jako osobni udaje se snizenym rizikem.
+- [ ] Redakce zachovava testovane chovani, ne zbytecne detaily.
+- [ ] Synteticke priklady nejsou prepsane realne tickety s maskou.
+- [ ] Metadata, nazvy souboru, URL, casy a ID prochazeji stejnou kontrolou jako text.
+- [ ] Pred sdilenim probehl re-identifikacni test.
+- [ ] Dataset ma datovy kontrakt vcetne zakazanych poli.
+- [ ] Debug vzorky maji kratkou retenci a vlastnika smazani.
+- [ ] Externi sdileni datasetu vyzaduje samostatne schvaleni.
+- [ ] Eval pripady obsahuji ocekavane chovani, ne osobni pribeh.
+- [ ] Stare dataset verze se mazou nebo archivuji podle jasneho pravidla.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -21581,6 +21730,9 @@ To je provozni dospelost. Ne proto, ze mas nejvetsi dashboard, ale proto, ze pro
 - WP29/EDPB Guidelines on Data Protection Impact Assessment (DPIA): https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/data-protection-impact-assessment-dpia_en
 - EDPB Guidelines 9/2022 on personal data breach notification under GDPR: https://www.edpb.europa.eu/documents/guideline/guidelines-92022-on-personal-data-breach-notification-under-gdpr_en
 - EDPB, Anonymisation / pseudonymisation: https://www.edpb.europa.eu/topics/ai-and-technology/anonymisation-pseudonymisation_en
+- CNIL, Sheet ndeg7: Minimize the data collection: https://www.cnil.fr/en/sheet-ndeg7-minimize-data-collection
+- CNIL, L'anonymisation de donnees personnelles: https://www.cnil.fr/fr/technologies/lanonymisation-de-donnees-personnelles
+- ENISA, Pseudonymisation techniques and best practices: https://www.enisa.europa.eu/publications/pseudonymisation-techniques-and-best-practices
 - Directive (EU) 2022/2555, NIS2 Directive, EUR-Lex: https://eur-lex.europa.eu/eli/dir/2022/2555/oj/eng
 - ENISA, Cybersecurity guide for SMEs - 12 steps to securing your business: https://www.enisa.europa.eu/publications/cybersecurity-guide-for-smes
 - EDPB Guidelines 05/2020 on consent under Regulation 2016/679: https://www.edpb.europa.eu/documents/guideline/guidelines-052020-on-consent-under-regulation-2016679_en
@@ -21683,6 +21835,7 @@ To je provozni dospelost. Ne proto, ze mas nejvetsi dashboard, ale proto, ze pro
 
 ## Pracovni log
 
+- 2026-08-04: Pridana prakticka priloha AI anonymizace a synteticka data bez falesneho klidu za 60 minut vcetne rozliseni surovych/pseudonymizovanych/anonymizovanych dat, redakce podle ucelu, re-identifikacniho testu, datoveho kontraktu a checklistu.
 - 2026-08-04: Pridana prakticka priloha AI fallback a degradace sluzby bez paniky za 60 minut vcetne klasifikace selhani, degradacnich rezimu, fallback karty, retry pravidel, uzivatelskych textu a checklistu.
 - 2026-08-04: Pridana prakticka priloha AI datova klasifikace a routing bez posilani vseho vsude za 60 minut vcetne datovych trid, routing karty, redakce, provozni matice a checklistu.
 - 2026-08-04: Pridana prakticka priloha AI observabilita a nakladove limity bez promptoveho skladu za 60 minut vcetne runtime eventu, metrik, limitu, alertu, debug rezimu a checklistu.
