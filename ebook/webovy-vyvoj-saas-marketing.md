@@ -20273,6 +20273,211 @@ Do logu nepatri cele CSV, obsah cele zpravy ani zbytecne osobni udaje. Privacy-f
 
 ---
 
+## AI vendor karta bez compliance prekvapeni za 60 minut
+
+AI funkce v SaaS produktu nejsou jen vyber modelu podle kvality odpovedi. Jsou to dodavatelske, datove, bezpecnostni a produktove rozhodnuti. Pokud model vidi zakaznicka data, support tickety, dokumenty, logy nebo interni know-how, mas nove misto, kde muze uniknout kontext, vzniknout nepravdiva odpoved nebo se rozmazat odpovednost.
+
+K 4. srpnu 2026 je AI Act podle Evropske komise obecne pouzitelny od 2. srpna 2026, pricemz nektere casti maji vlastni harmonogram: zakazane praktiky a AI literacy od 2. unora 2025, pravidla pro GPAI modely od 2. srpna 2025, transparentnostni pravidla od srpna 2026 a cast vysokorizikovych systemu pozdeji podle typu pouziti. Aktualni prehled drzi Evropska komise tady: https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai. Primarni text AI Actu je Regulation (EU) 2024/1689: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng.
+
+Prakticky preklad: i kdyz dnes stavis "jen" supportniho asistenta, nevybirej AI dodavatele stylem "odpovida pekne a ma hezke demo". Nejdriv si napis kartu pouziti, dat a rizik.
+
+### 1. Zacni use-casem, ne modelem
+
+Spatna otazka:
+
+```text
+Ktery model je nejlepsi?
+```
+
+Lepsi otazka:
+
+```text
+Jakou jednu praci ma AI v produktu udelat, s jakymi daty, pro koho, s jakym dopadem a kdo nese odpovednost?
+```
+
+Vypln use-case kartu:
+
+```markdown
+# AI use-case karta
+
+Nazev funkce:
+Uzivatel:
+Prace, kterou AI dela:
+Vstupni data:
+Vystup:
+Dopad spatne odpovedi:
+Smi AI delat akce, nebo jen navrhy:
+Je vystup videt zakaznikovi:
+Je v procesu clovek:
+Jake osobni nebo duverne udaje mohou projit modelem:
+Kde se data ukladaji:
+Jak dlouho se drzi:
+Jak funkci vypneme:
+```
+
+Priklad:
+
+```text
+Funkce: navrh supportni odpovedi
+AI dela: shrne ticket a pripravi draft odpovedi podle verejne dokumentace
+Nedela: neodesila email, nemeni stav uctu, nevytvari export
+Dopad chyby: spatna rada zakaznikovi, mozne prozrazeni interniho kontextu
+Kontrola: support agent musi odpoved schvalit
+Data: ticket text, verejne clanky, account plan bez fakturacnich detailu
+Retence: draft a minimalni auditni stopa, ne cely prompt navzdy
+```
+
+Dokud karta nejde vyplnit, nema smysl porovnavat benchmarky. Benchmark muze rict, ze model dobre resi obecne ulohy. Neodpovi, jestli smi videt tvoje support tickety a jestli mas pravo poslat je konkretni treti strane.
+
+### 2. Rozdel data podle citlivosti
+
+AI vendor review zacina inventarem dat. Ne proto, ze tabulky jsou zabavne. Nejsou. Ale proto, ze bez nich nevis, co vlastne posilas mimo svuj produkt.
+
+Minimalni datove tridy:
+
+| Trida | Priklad | Vychozi pravidlo |
+| --- | --- | --- |
+| Verejne | dokumentace, verejny changelog, blog | lze pouzit pro RAG a odpovedi, porad hlidat presnost |
+| Zakaznicke provozni | ticket, nastaveni workspace, nazvy projektu | posilat jen s ucelem, scope a retenci |
+| Osobni | email, jmeno, role, IP adresa | minimalizovat, pseudonymizovat, neposilat bez duvodu |
+| Citlive obchodni | smlouvy, ceny, interni poznamky, pipeline | jen pokud je use-case opravdu potrebuje |
+| Tajemstvi | tokeny, hesla, API klice, private keys | nikdy neposilat do modelu |
+
+U kazde tridy napis:
+
+- zda muze jit do promptu,
+- zda muze jit do embeddingu,
+- zda muze byt ulozena u dodavatele,
+- zda se pouziva pro trenink nebo zlepsovani sluzby,
+- kdo ma pristup k logum,
+- jak se data mazou.
+
+EDPB ve stanovisku k AI modelum resi mimo jine anonymitu modelu, pravni zaklad a dusledky nezakonneho zpracovani osobnich dat pri vyvoji a nasazeni AI: https://www.edpb.europa.eu/documents/opinion-of-the-board-art-64/opinion-282024-on-certain-data-protection-aspects-related-to_en. Pro maly SaaS je z toho prakticke pravidlo: neschovavej se za slovo "AI". Pokud prochazi osobni data, porad resis GDPR, ucel, minimalizaci, transparentnost, pristupy a mazani.
+
+**Codyho komentar:** Nejlevnejsi AI compliance je neposlat modelu data, ktera nepotrebuje. Je to neuveritelne primitivni trik. Proto tak casto funguje.
+
+### 3. Vendor karta: deset otazek pred integraci
+
+Pro kazdeho AI dodavatele vypln jednu kartu. Nepotrebujes roman, potrebujes odpovedi, ktere se daji overit.
+
+```markdown
+# AI vendor karta
+
+Dodavatel:
+Model / sluzba:
+Use-case:
+Role podle GDPR:
+Region zpracovani:
+Region ulozeni logu:
+DPA / smluvni dokumenty:
+Subprocesori:
+Pouziti dat pro trenink:
+Retence promptu a vystupu:
+Moznost vypnout logovani:
+Export a mazani dat:
+Bezpecnostni dokumentace:
+Incidentni oznamovani:
+AI Act relevance:
+Fallback / exit plan:
+Vlastnik v tymu:
+Datum dalsi revize:
+```
+
+Deset rozhodovacich otazek:
+
+1. Bezi zpracovani v EU, nebo aspon v jasne zvolenych regionech?
+2. Jsou prompty a vystupy pouzity pro trenink modelu nebo zlepsovani sluzby?
+3. Jak dlouho se drzi logy a kdo k nim ma pristup?
+4. Existuje DPA a seznam subprocesoru?
+5. Lze nastavit nulovou nebo kratkou retenci?
+6. Lze oddelit produkcni data od testovacich a eval dat?
+7. Ma dodavatel jasne incidentni oznamovani?
+8. Umi produkt fungovat degradovane bez AI dodavatele?
+9. Je vystup modelu oznaceny uzivateli tam, kde je to potreba?
+10. Kdo u nas schvaluje zmenu modelu nebo poskytovatele?
+
+Pokud odpoved na trenink dat zni "zalezi na konfiguraci", zapis presnou konfiguraci. Pokud odpoved na region zni "global infrastructure", zjisti konkretni datovou cestu. Pokud odpoved na mazani zni "kontaktujte support", ber to jako provozni riziko, ne jako detail.
+
+### 4. Rozhodovaci matice: kdy AI dodavatele pustit do produktu
+
+Pouzij jednoduchy semafor:
+
+| Stav | Podminky | Rozhodnuti |
+| --- | --- | --- |
+| Zelena | verejna nebo pseudonymizovana data, kratka retence, DPA, zadny trenink na datech, clovek schvaluje vystup | lze pustit omezeny pilot |
+| Zluta | zakaznicka data, nejasna retence, chybi cast dokumentace, nizky dopad chyby | nejdriv doplnit smlouvy, nastaveni a testy |
+| Cervena | tajemstvi, citlive osobni udaje bez nutnosti, trenink na datech, nejasny region, AI dela nevratne akce | nepoustet |
+
+Matice neni pravni posouzeni. Je to produktovy filtr, ktery zabrani tomu, aby se "rychly prototyp" potichu stal produkcnim tokem.
+
+Priklad rozhodnuti:
+
+```text
+Funkce: sumarizace verejne dokumentace pro support
+Data: verejne clanky + kratky dotaz bez identifikatoru
+Vendor: EU region, data se nepouzivaji pro trenink, retence 30 dni
+Rezim: draft-only
+Rozhodnuti: pilot povolen pro interni support, bez automatickeho odesilani zakaznikovi
+Revize: za 30 dni podle chyb, rychlosti a support reakci
+```
+
+### 5. Eval set patri i k vendor review
+
+Vendor muze vypadat dobre na obecnem testu a selhat presne na tvem typu dat. Pred nasazenim priprav maly eval set:
+
+- 10 beznych dotazu,
+- 5 nejasnych dotazu,
+- 5 dotazu s nedostatecnym zdrojem,
+- 5 prompt injection pokusu,
+- 5 dotazu na cizi data nebo vyssi opravneni,
+- 5 pripadu, kde ma model rict "nevim" nebo predat cloveku.
+
+U kazdeho prikladu napis ocekavane chovani:
+
+```markdown
+# Eval priklad
+
+Vstup:
+Ocekavany vystup:
+Zakazane chovani:
+Povolene zdroje:
+Riziko:
+Kdy predat cloveku:
+```
+
+Neukladej do eval setu realne zakaznicke tickety bez redakce. Vytvor synteticke nebo anonymizovane priklady, ktere zachovaji problem, ale ne identitu. Testovaci data maji mit stejnou disciplinu jako produkcni data, jen s mene adrenalinem.
+
+### 6. 60min postup
+
+| Cas | Ukol | Vystup |
+| --- | --- | --- |
+| 0-10 min | Vyber jednu AI funkci | use-case karta |
+| 10-20 min | Rozdel vstupni a vystupni data | datove tridy a zakazy |
+| 20-30 min | Vypln vendor kartu | region, DPA, retence, trenink, subprocesori |
+| 30-40 min | Oznac AI Act a GDPR otazky | seznam nejasnosti pro pravni/provozni review |
+| 40-50 min | Navrhni semafor rozhodnuti | zelena/zluta/cervena pravidla |
+| 50-60 min | Priprav prvnich 10 eval pripadu | test bez produkcnich osobnich dat |
+
+Po hodine by mel byt jasny dalsi krok: pustit interni pilot, doplnit smluvni nebo technicke nastaveni, nebo integraci zastavit. Vsechny tri vysledky jsou dobre. Nejhorsi vysledek je neurcite "vypada to zajimave, zkusime to na produkci".
+
+### Checklist: AI vendor review
+
+- [ ] AI funkce ma jednu jasnou praci a vlastnika.
+- [ ] Vstupni data jsou rozdelena podle citlivosti.
+- [ ] Tajemstvi a zbytecne osobni udaje jsou explicitne zakazane.
+- [ ] Vim, zda dodavatel pouziva data pro trenink nebo zlepsovani sluzby.
+- [ ] Region zpracovani a ulozeni logu je overeny, ne odhadnuty.
+- [ ] Existuje DPA, seznam subprocesoru a postup pro zmeny.
+- [ ] Retence promptu, vystupu a logu ma nastaveny limit.
+- [ ] Vystup AI je draft nebo ma lidske schvaleni u rizikovych akci.
+- [ ] AI Act relevance je zapsana podle typu use-casu a role firmy.
+- [ ] Eval set testuje bezne dotazy, nejistotu, prompt injection a neopravnene pozadavky.
+- [ ] Produkcni data se nepouzivaji jako testovaci material bez redakce.
+- [ ] Existuje fallback, vypinac a plan zmeny dodavatele.
+- [ ] Datum dalsi revize je v kalendari nebo provoznim rytmu.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -20385,6 +20590,7 @@ Do logu nepatri cele CSV, obsah cele zpravy ani zbytecne osobni udaje. Privacy-f
 
 ## Pracovni log
 
+- 2026-08-04: Pridana prakticka priloha AI vendor karta bez compliance prekvapeni za 60 minut vcetne use-case karty, datovych trid, vendor review, rozhodovaci matice, eval setu a checklistu.
 - 2026-07-30: Zalozena struktura e-booku, doplnen uvod, osnova a hotova prvni kapitola o privacy-first zakladu SaaS webu vcetne praktickych prikladu, checklistu a zdroju.
 - 2026-07-30: Dopsana druha kapitola o produktove strategii od vyberu problemu pres rozhovory a placene piloty po prvni mesic rozhodovaciho rytmu.
 - 2026-07-30: Dopsana treti kapitola o webove architekture pro male tymy vcetne vykonnostniho rozpoctu, cache pravidel, prace s prostredimi, zavislostmi a checklistu pred prvnim SaaS releasem.
