@@ -21031,6 +21031,203 @@ Vysledek: tym ma rychlejsi follow-up, ale produkt neprevezme odpovednost za obch
 
 ---
 
+## AI fallback a degradace sluzby bez paniky za 60 minut
+
+AI funkce musi umet selhat slusne. Ne proto, ze modely jsou spatne, ale protoze kazda zavislost obcas zpomali, zdrazi, zmeni chovani, vrati nesmysl nebo narazi na policy hranici. Privacy-first SaaS proto nesmi mit jediny stav "AI odpovedela, tak to posleme dal". Potrebuje rezimy: plna funkce, omezeny vystup, rucni fronta, read-only provoz a vypnuti.
+
+NIST AI Risk Management Framework doporucuje rizika AI systemu ridit prubezne pres mapovani, mereni, rizeni a governance: https://www.nist.gov/itl/ai-risk-management-framework. OWASP Top 10 for LLM and Generative AI Applications zase pripomina rizika jako prompt injection, nadmerna autonomie nebo nebezpecne nakladani s citlivymi informacemi: https://genai.owasp.org/llm-top-10/. Prakticky preklad pro maly SaaS: fallback neni hezka chybova hlaska. Je to produktova brzda, ktera chrani zakaznika, data i rozpocet.
+
+### 1. Rozdel selhani podle dopadu
+
+Ne kazde selhani AI ma stejny dopad. Kdyz AI nevygeneruje navrh blogoveho titulku, uzivatel si povzdechne a napise ho sam. Kdyz AI spatne navrhne zmenu prav, cenu nebo odpoved na pravni dotaz, uz to neni povzdech. To je problem s dopadem.
+
+Jednoducha klasifikace:
+
+| Typ selhani | Priklad | Vychozi reakce |
+| --- | --- | --- |
+| Nedostupnost | model timeout, vendor error, rate limit | nabidnout rucni tok nebo pozdejsi zpracovani |
+| Nekvalitni vystup | odpoved mimo format, halucinace, nizka jistota | neukazovat jako hotovou vec, vratit draft nebo vysvetlit omezeni |
+| Bezpecnostni riziko | prompt injection, pokus o exfiltraci dat, tool misuse | zastavit request, zalogovat technickou stopu, eskalovat podle pravidel |
+| Privacy riziko | vstup obsahuje token, citlive udaje nebo zbytecny osobni kontext | redigovat nebo zastavit pred volanim modelu |
+| Nakladovy problem | request by prekrocil limit tokenu, workspace nebo vendor rozpoctu | vratit zkraceny rezim, frontu nebo limitni zpravu |
+
+Tahle tabulka patri do product specu, ne jen do hlavy vyvojare. Kdyz ji nemas, kazdy incident se resi improvizaci. Improvizace je v jazzu skvela. V zachazeni se zakaznickymi daty uz mene.
+
+### 2. Navrhni degradacni rezimy
+
+Degradace znamena, ze produkt pri problemu nezmizi, jen zmeni rozsah sluzby. U AI funkci to byva nejlepsi cesta, protoze mnoho uzitku lze dodat i bez plne autonomie.
+
+Prakticke rezimy:
+
+| Rezim | Co uzivatel vidi | Kdy pouzit |
+| --- | --- | --- |
+| Full AI | AI navrhne vystup podle bezneho toku | vsechny kontroly prosly |
+| Draft-only | AI ukaze navrh, clovek musi potvrdit kazdou akci | stredni dopad, nizsi jistota, obchodni nebo support komunikace |
+| Template fallback | produkt nabidne schvalenou sablonu bez modelu | vendor timeout, limit nakladu, policy blok |
+| Manual queue | pozadavek jde do fronty pro cloveka | citlive vstupy, neschvaleny use-case, opakovane selhani |
+| Read-only | AI smi shrnout nebo vysvetlit, nesmi menit data | incident, audit, rollout noveho modelu |
+| Off | funkce je vypnuta a UI ukaze jasny dalsi krok | bezpecnostni incident nebo rozbita validace |
+
+U kazdeho rezimu si zapis, jestli meni data, posila komunikaci, vola tool, uklada obsah nebo jen zobrazuje text. To je nejrychlejsi zpusob, jak oddelit pohodlnou asistenci od rizikove autonomie.
+
+**Codyho komentar:** Nejlepsi fallback je ten, ktery uzivatel vnima jako profesionalni omezeni, ne jako rozbity automat. "Ted pouzijeme overenou sablonu a predame to cloveku" zni mnohem lepe nez "AI se nepovedla, zkuste refresh".
+
+### 3. Udelej fallback kartu pro kazdy AI use-case
+
+Vedle routing karty pridej malou fallback kartu. Jeji smysl je jednoduchy: kdyz neco selze, produkt nevyjednava sam se sebou.
+
+```text
+AI use-case:
+Primarni vystup:
+Co se nikdy nesmi stat:
+Selhani, ktera cekame:
+Validace pred zobrazenim:
+Degradacni rezimy:
+Uzivatelska zprava:
+Interni alert:
+Kdy eskalovat cloveku:
+Kdy vypnout funkci:
+Kdy zkusit znovu:
+Co logujeme:
+Co nelogujeme:
+Vlastnik:
+Datum posledni revize:
+```
+
+Ukazka pro AI navrh odpovedi supportu:
+
+```text
+AI use-case: Navrh odpovedi support specialistovi
+Primarni vystup: draft odpovedi s odkazy na verejnou dokumentaci
+Co se nikdy nesmi stat: automaticke odeslani zakaznikovi, slib kompenzace, zmena uctu
+Selhani, ktera cekame: timeout modelu, odpoved bez zdroju, pokus ticketu instruovat AI k exportu dat
+Validace pred zobrazenim: povinny format, zakazane sliby, odkazy jen na povolene zdroje
+Degradacni rezimy: template fallback, manual queue, read-only
+Uzivatelska zprava: "Navrh ted nelze pripravit. Pouzij schvalenou sablonu nebo predej ticket cloveku."
+Interni alert: az pri 5 selhanich za 10 minut nebo pri bezpecnostnim filtru
+Kdy eskalovat cloveku: citlive udaje, pravni dotaz, billing spor, admin prava
+Kdy vypnout funkci: opakovane validacni selhani nebo incident P1/P2
+Kdy zkusit znovu: pouze po timeoutu, max jednou, bez rozsireni kontextu
+Co logujeme: request_id, typ selhani, model_version, policy_version, cost bucket
+Co nelogujeme: plny ticket, plny prompt, plnou odpoved, tajemstvi
+Vlastnik: Head of Support
+Datum posledni revize: 2026-08-04
+```
+
+Karta by mela byt kratka. Kdyz ma tri stranky, nikdo ji v incidentu neotevre.
+
+### 4. Fallback texty pis jako produkt, ne jako vymluvu
+
+Uzivatelska zprava musi rict tri veci: co se stalo, co produkt neudelal kvuli ochrane uzivatele a jaky je dalsi krok. Neni potreba vysvetlovat vektorove databaze, token limity ani vendor chyby.
+
+Spatne:
+
+> AI endpoint failed. Retry later.
+
+Lepsi:
+
+> Navrh se nepodarilo bezpecne pripravit. Nic jsme neodeslali ani nezmenili. Pouzij schvalenou sablonu, nebo predej pozadavek cloveku.
+
+Spatne:
+
+> Tento obsah porusuje policy.
+
+Lepsi:
+
+> V textu jsou udaje, ktere do AI zpracovani neposilame. Odstran pristupy, privatni odkazy nebo osobni detaily, pak to muzes zkusit znovu.
+
+U privacy-first produktu je dulezite ukazat zdrzenlivost jako hodnotu. Kdyz produkt rekne "tohle neudelam automaticky", nemusi to byt porazka. Muze to byt presne duvod, proc mu zakaznik veri.
+
+### 5. Retry pravidla bez datoveho nafukovani
+
+Retry je nenapadna past. Kdyz model neodpovi, nekdo snadno prida "zkus to znovu s vetsim kontextem". A najednou se do druheho pokusu posila vic dat, vic historie a vic priloh. To neni fallback. To je panic upload.
+
+Pravidla pro retry:
+
+- Retry povol jen u technickych chyb, jako timeout nebo docasny rate limit.
+- Retry nepouzivej u bezpecnostniho filtru, privacy filtru ani validacniho selhani vystupu.
+- Druhy pokus nesmi rozsirit datovy rozsah.
+- Pocet pokusu omez per request a per workspace.
+- Po opakovanem selhani prejdi na template fallback nebo manual queue.
+- Retry loguj technicky, ale bez kopirovani promptu a vystupu.
+
+Priklad:
+
+```text
+timeout -> retry 1x se stejnym redigovanym vstupem
+rate_limit -> fronta nebo pozdejsi zpracovani
+policy_block -> zadny retry, ukaz vysvetleni a dalsi krok
+validation_failed -> zadny retry, vrat draft-only nebo manual queue
+secret_detected -> zastavit, nic neodesilat
+```
+
+### 6. 60min postup
+
+Prvnich 10 minut:
+
+- Vyber jednu existujici nebo planovanou AI funkci.
+- Napis, jaky je jeji primarni vystup a co se nikdy nesmi stat.
+- Oznac, zda vystup meni data, prava, cenu nebo komunikaci.
+
+10 az 25 minut:
+
+- Sepis pet nejpravdepodobnejsich selhani.
+- U kazdeho rozhodni: retry, draft-only, template fallback, manual queue, read-only nebo off.
+- Zakaz retry pro security a privacy selhani.
+
+25 az 40 minut:
+
+- Vypln fallback kartu.
+- Napis dve uzivatelske zpravy: jednu pro technicky problem, jednu pro privacy blok.
+- Napis interni alert jen pro stav, kde nekdo opravdu musi jednat.
+
+40 az 50 minut:
+
+- Pridej tri testy: timeout, validacni selhani, detekovany secret.
+- Over, ze zadny test nerozsiri prompt pri druhem pokusu.
+- Over, ze fallback nevola zadny tool bez potvrzeni.
+
+50 az 60 minut:
+
+- Napoj kartu na kill switch, observabilitu a runbook incidentu.
+- Pridej vlastnika a datum revize.
+- Vyber jednu rychlou opravu: omez retry, pridej template fallback, nebo zmen copy v UI.
+
+### 7. Priklad: AI shrnuti dlouheho dokumentu
+
+SaaS produkt nabizi shrnuti dlouheho dokumentu pro zakaznicky tym. Bez fallbacku vypada tok jednoduse: nahraj dokument, AI vrati shrnuti. V realite muze dokument obsahovat osobni udaje, interni smluvni ceny, prilohy, tabulky, komentare nebo privatni odkazy.
+
+Rozumny tok:
+
+1. Upload projde typovou a velikostni kontrolou.
+2. Produkt zobrazi upozorneni, ze dokument nema obsahovat hesla, tokeny ani data mimo ucel zpracovani.
+3. Pred AI volanim probehne klasifikace a redakce.
+4. Pokud redakce najde tajemstvi, request se zastavi a nic se neposila modelu.
+5. Pokud je dokument prilis dlouhy, produkt nabidne shrnuti po sekcich bez pridani dalsich zdroju.
+6. Pokud model timeoutne, retry probehne maximalne jednou se stejnym redigovanym vstupem.
+7. Pokud validace vystupu selze, uzivatel dostane manual queue nebo sablonu pro rucni shrnuti.
+8. Log obsahuje jen request ID, typ selhani, verze pravidel a velikostni bucket.
+
+Vysledek: funkce zustane pouzitelna i pri problemu, ale nevyrobi tichy obchvat kolem datove klasifikace.
+
+### Checklist: AI fallback a degradace sluzby
+
+- [ ] Kazdy AI use-case ma fallback kartu.
+- [ ] Je jasne napsane, co se nikdy nesmi stat.
+- [ ] Selhani jsou rozdelena na nedostupnost, kvalitu, security, privacy a naklady.
+- [ ] Existuji rezimy full AI, draft-only, template fallback, manual queue, read-only a off.
+- [ ] Retry je povolen jen u technickych chyb a nikdy nerozsiruje datovy rozsah.
+- [ ] Security a privacy bloky se neopakuji automaticky.
+- [ ] Uzivatelske zpravy rikaji, co se stalo, co produkt neudelal a jaky je dalsi krok.
+- [ ] Fallback nevola tool akce bez explicitniho pravidla nebo lidskeho potvrzeni.
+- [ ] Alerty vznikaji jen tam, kde existuje vlastnik a prvni akce.
+- [ ] Logy obsahuji typ selhani, verze pravidel a cost/size bucket, ne plny prompt.
+- [ ] Fallback je napojeny na kill switch, observabilitu, eval set a incident runbook.
+- [ ] Existuji testy pro timeout, validacni selhani, detekovany secret a manual queue.
+- [ ] Stav vypnuti funkce je pro uzivatele srozumitelny a pro tym rychle vratitelny.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -21145,6 +21342,7 @@ Vysledek: tym ma rychlejsi follow-up, ale produkt neprevezme odpovednost za obch
 
 ## Pracovni log
 
+- 2026-08-04: Pridana prakticka priloha AI fallback a degradace sluzby bez paniky za 60 minut vcetne klasifikace selhani, degradacnich rezimu, fallback karty, retry pravidel, uzivatelskych textu a checklistu.
 - 2026-08-04: Pridana prakticka priloha AI datova klasifikace a routing bez posilani vseho vsude za 60 minut vcetne datovych trid, routing karty, redakce, provozni matice a checklistu.
 - 2026-08-04: Pridana prakticka priloha AI observabilita a nakladove limity bez promptoveho skladu za 60 minut vcetne runtime eventu, metrik, limitu, alertu, debug rezimu a checklistu.
 - 2026-08-04: Pridana prakticka priloha AI model upgrade bez rozbite produkce za 60 minut vcetne upgrade karty, eval setu, canary rollout, minimalniho logovani, rollbacku a checklistu.
