@@ -19152,11 +19152,188 @@ Pokud v kroku 20 az 35 nevis, kde dodavatel zpracovava data nebo zda pouziva vst
 
 ---
 
+## AI decision log bez skladovani promptu za 60 minut
+
+Jakmile AI funkce zacne realne pomahat v produktu, prijde dalsi otazka: co si o jejim pouziti nechame jako stopu? Bez logu nevis, proc se neco stalo. Se spatnymi logy zase vyrobis druhou databazi osobnich udaju, promptu, citlivych vstupu a internich poznamek. Privacy-first odpoved neni "nelogovat nic". Je to logovat presne tolik, kolik potrebujes pro audit, podporu, bezpecnost a zlepsovani, a zbytek vedome zahodit.
+
+AI Act u vysoce rizikovych AI systemu pocita s automaticky generovanymi logy a jejich uchovanim po dobu primerenou ucelu; oficialni text je v narizeni (EU) 2024/1689: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng. Ne kazda SaaS AI funkce bude high-risk, ale princip dohledatelnosti je uzitecny i u mensich asistovanych funkci. EDPB v Opinion 28/2024 k AI modelum zaroven resi ochranu osobnich udaju pri vyvoji a nasazeni AI modelu: https://www.edpb.europa.eu/documents/opinion-of-the-board-art-64/opinion-282024-on-certain-data-protection-aspects-related-to_en. NIST AI RMF pouziva prakticky slovnik pro rizika AI a zduraznuje rizeni dopadu na lidi, organizace a spolecnost: https://www.nist.gov/itl/ai-risk-management-framework.
+
+Tahle priloha je 60min sablona pro maly SaaS tym. Cilem neni vytvorit compliance bunker. Cilem je mit dost informaci na otazku "co se stalo a proc?", ale ne tolik, aby se z logu stal nehlidany archiv zakaznickych dat.
+
+**Codyho komentar:** Prompt neni odpadkovy kos, log neni sklad. Kdyz do obou nechame padat vsechno, za tri mesice budeme resit forensic archeologii misto produktu. To je draha verze lenosti.
+
+### 1. Rozlis tri typy stop
+
+Nejdriv si rekni, jakou stopu vlastne potrebujes. U AI funkci se casto pletou tri ruzne veci:
+
+| Typ stopy | K cemu slouzi | Co do ni typicky patri |
+| --- | --- | --- |
+| Produktovy log | pochopit pouziti funkce | cas, tenant/account, typ akce, vysledek, stav |
+| Auditni log | dohledat dopad na zakaznika | kdo spustil funkci, jaky objekt se menil, kdo potvrdil vystup |
+| Diagnosticky log | opravit chybu nebo kvalitu | technicky request ID, model, verze prompt sablony, error kod, latence |
+
+Nejvetsi chyba je davat do vsech tri stop plny prompt, plny vystup a cele zakaznicke dokumenty. Vetsinou to nepotrebujes. Potrebujes dohledat kontext a rozhodnuti, ne ukladat kopii vstupu navzdy.
+
+### 2. Zapis minimalni AI decision log
+
+Pro asistovanou AI funkci zacni touto strukturou:
+
+```text
+AI decision log:
+
+Log ID:
+Cas:
+Tenant nebo account ID:
+Uzivatel nebo role:
+AI funkce:
+Ucel:
+Objekt dopadu:
+Model nebo dodavatel:
+Verze prompt sablony:
+Vstupni datove kategorie:
+Vystupni typ:
+Automaticke rozhodnuti: ano/ne
+Lidske potvrzeni: kdo/kdy/nevyzadovano
+Vysledek: prijato/upraveno/odmitnuto/chyba
+Error kod:
+Retence:
+Odkaz na interni kartu funkce:
+```
+
+Dulezite je slovo "kategorie". Misto ulozeni celeho vstupu zapis:
+
+- `support_ticket_last_3_messages`,
+- `account_health_summary`,
+- `release_diff_metadata`,
+- `product_feedback_excerpt`,
+- `synthetic_demo_data`.
+
+Kdyz pozdeji nekdo potrebuje vedet, co se stalo, ma identifikator, typ vstupu a verzi sablony. Kdyz potrebuje obsah, musi projit pres normalni opravneni v puvodnim systemu, ne pres volne prohledavatelnou kopii v AI logu.
+
+### 3. Co nelogovat bez specialniho duvodu
+
+Zakazane nebo vysoce rizikove polozky dej primo do pravidel:
+
+- plne prompty se zakaznickymi osobnimi daty,
+- plne AI vystupy obsahujici osobni nebo smluvni detaily,
+- hesla, tokeny, API klice, session hodnoty,
+- platebni udaje,
+- cele exporty databaze,
+- soukrome zpravy tretich osob mimo ucel podpory,
+- zdravotni, financni, personalni nebo jine citlive kategorie bez posouzeni,
+- obsah dokumentu, kde staci hash, ID nebo datova kategorie.
+
+Kdyz tym argumentuje "ale treba se to bude hodit na zlepsovani modelu", zeptej se:
+
+- Jake konkretni zlepseni bez toho nejde udelat?
+- Kdo bude mit pristup?
+- Jak dlouho to bude ulozene?
+- Lze pouzit anonymizovany vzorek?
+- Je to popsane v dokumentaci pro zakaznika?
+- Da se funkce zlepsovat z agregovanych signalu misto obsahu?
+
+Pokud odpovedi nejsou jasne, neloguj obsah. Technicky hlad je horsi poradce nez pravnik po treti kave.
+
+### 4. Retence podle dopadu
+
+Retence ma odpovidat ucelu. Jedna doba pro vsechny AI logy je pohodlna, ale obvykle spatna.
+
+| Uroven AI funkce | Priklad | Typicka retence |
+| --- | --- | --- |
+| A - interni pomoc | navrh interni poznamky bez zakaznickych dat | 14-30 dni diagnostiky |
+| B - asistovana prace | navrh support odpovedi s lidskym potvrzenim | 30-90 dni auditni stopa podle support procesu |
+| C - obchodni dopad | lead priorita nebo churn signal | 90-180 dni, pokud je potreba vysvetlit rozhodnuti |
+| D - citliva oblast | automaticky dopad na pristup, cenu nebo prava | individualni posouzeni, pravni a bezpecnostni review |
+
+U high-risk AI systemu si over konkretni povinnost podle AI Act a souvisejicich pravidel. U bezne SaaS asistence si drz vlastni princip: log ma prezit dost dlouho na support a audit, ale ne dele jen ze zvyku.
+
+### 5. Pristupy a rozhrani
+
+AI logy maji byt citlive i tehdy, kdyz neobsahuji plny prompt. Kombinace casu, accountu, funkce a vysledku muze stale prozradit hodne.
+
+Minimalni pristupova pravidla:
+
+- Produkt vidi agregovane pouziti a kvalitu, ne obsah zakaznickych pripadu.
+- Support vidi logy jen pro accounty, ktere resi.
+- Vyvoj vidi diagnostiku pres request ID a error kody.
+- Bezpecnost nebo povereny admin vidi auditni stopu pro incidenty.
+- Export logu ma schvaleni, ucel a expiraci.
+- Pristup k AI logum se kontroluje v pravidelne revizi prav.
+
+UI pro interni log nema byt fulltextova vyhledavaci krabice na vsechno. Zacni filtry: tenant, funkce, cas, vysledek, error kod, verze sablony. Fulltext nad obsahem je skoro vzdycky signal, ze ukladas moc.
+
+### 6. 60min postup
+
+| Cas | Ukol | Vystup |
+| --- | --- | --- |
+| 0-10 min | Vyber jednu AI funkci | konkretni use-case a vlastnik |
+| 10-20 min | Rozdel stopy | produktovy, auditni, diagnosticky log |
+| 20-35 min | Navrhni pole logu | minimalni decision log bez plneho promptu |
+| 35-45 min | Nastav zakazana data a retenci | pravidla, co nelogovat a kdy mazat |
+| 45-55 min | Urcete pristupy | kdo vidi agregace, audit a diagnostiku |
+| 55-60 min | Zapis rozhodnuti | karta logovani a dalsi kontrolni datum |
+
+Po hodine ma existovat konkretni karta pro jednu funkci. Ne obecna smernice "AI logy resime rozumne". Ta veta nevydrzi prvni bug.
+
+### 7. Priklad: shrnuti support ticketu
+
+AI funkce:
+
+> Support agent si necha navrhnout shrnuti poslednich tri zprav ve vlakne. Vystup se neodesila zakaznikovi automaticky. Agent ho muze upravit a ulozit jako interni poznamku.
+
+AI decision log:
+
+```text
+Log ID: ailog_2026_08_04_001
+Cas: 2026-08-04 09:10 UTC
+Tenant nebo account ID: acc_123
+Uzivatel nebo role: support_agent
+AI funkce: support_thread_summary
+Ucel: rychla orientace pred odpovedi
+Objekt dopadu: ticket_456
+Model nebo dodavatel: vendor_x_eu_region
+Verze prompt sablony: support_summary_v3
+Vstupni datove kategorie: support_ticket_last_3_messages
+Vystupni typ: draft_internal_summary
+Automaticke rozhodnuti: ne
+Lidske potvrzeni: user_789 / 2026-08-04 09:12 UTC
+Vysledek: upraveno
+Error kod: none
+Retence: 90 dni
+Odkaz na interni kartu funkce: ai-feature-support-summary
+```
+
+Co se neulozi:
+
+- cele tri zpravy,
+- plny prompt,
+- plne zneni draftu pred upravou,
+- tokeny nebo technicke hlavicky requestu.
+
+Kdyz se pozdeji resi stiznost, tym vi, ktera funkce bezela, kdo ji pouzil, jaky ticket se tykal, jaka sablona byla ve hre a kdo vystup potvrdil. Obsah se dohleda v support systemu podle standardnich opravneni.
+
+### Checklist: AI decision log bez datoveho skladu
+
+- [ ] Pro kazdou AI funkci vim, zda potrebuji produktovy, auditni nebo diagnosticky log.
+- [ ] Log uklada datove kategorie a identifikatory, ne automaticky plny prompt.
+- [ ] Je napsane, ktera data se nikdy neloguji bez specialniho posouzeni.
+- [ ] Log obsahuje verzi prompt sablony, model/dodavatele a vysledek.
+- [ ] U vystupu s dopadem na zakaznika je zaznamenana lidska kontrola.
+- [ ] Retence odpovida ucelu a urovni dopadu funkce.
+- [ ] Pristupy k AI logum jsou oddelene pro produkt, support, vyvoj a bezpecnost.
+- [ ] Export logu ma vlastnika, duvod a casove omezeni.
+- [ ] Logy lze smazat podle retencni politiky bez rucniho loveni.
+- [ ] Trust page ani DPA neslibuji neco jineho, nez AI logovani realne dela.
+- [ ] Po prvnim mesici provozu probehne kontrola: co logujeme navic a co nam chybi.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
 - European Commission, AI Act: https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai
 - AI Act Service Desk, Timeline for the Implementation of the EU AI Act: https://ai-act-service-desk.ec.europa.eu/en/ai-act/timeline/timeline-implementation-eu-ai-act
+- EDPB Opinion 28/2024 on certain data protection aspects related to the processing of personal data in the context of AI models: https://www.edpb.europa.eu/documents/opinion-of-the-board-art-64/opinion-282024-on-certain-data-protection-aspects-related-to_en
 - GDPR, Regulation (EU) 2016/679, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
 - EDPB Guidelines 07/2020 on the concepts of controller and processor in the GDPR: https://www.edpb.europa.eu/system/files/2023-10/EDPB_guidelines_202007_controllerprocessor_final_en.pdf
 - EDPB Opinion 22/2024 on certain obligations following from the reliance on processors and sub-processors: https://www.edpb.europa.eu/system/files/2024-10/edpb_opinion_202422_relianceonprocessors-sub-processors_en.pdf
@@ -19254,6 +19431,7 @@ Pokud v kroku 20 az 35 nevis, kde dodavatel zpracovava data nebo zda pouziva vst
 - OpenSSF Scorecard: https://scorecard.dev/
 - CISA Known Exploited Vulnerabilities Catalog: https://www.cisa.gov/known-exploited-vulnerabilities-catalog
 - NIST SP 800-218, Secure Software Development Framework (SSDF) Version 1.1: https://csrc.nist.gov/pubs/sp/800/218/final
+- NIST AI Risk Management Framework: https://www.nist.gov/itl/ai-risk-management-framework
 - Bing Webmaster Tools, URL Inspection: https://www.bing.com/webmasters/help/url-inspection-55a30305
 
 ---
@@ -19370,3 +19548,4 @@ Pokud v kroku 20 az 35 nevis, kde dodavatel zpracovava data nebo zda pouziva vst
 - 2026-08-04: Pridana prakticka priloha Rozhodovaci briefing ze signalu bez meetingove mlhy za 45 minut vcetne sablony, prikladu privacy dotazu, 45min postupu a checklistu.
 - 2026-08-04: Pridana prakticka priloha Experiment karta po briefingu bez datoveho dluhu za 60 minut vcetne datoveho kontraktu, stop pravidel, sablony, prikladu zkraceni formulare a checklistu.
 - 2026-08-04: Pridana prakticka priloha AI funkce v SaaS bez compliance prekvapeni za 60 minut vcetne use-case filtru, datoveho kontraktu, lidske kontroly, mikrocopy a checklistu.
+- 2026-08-04: Pridana prakticka priloha AI decision log bez skladovani promptu za 60 minut vcetne minimalni auditni stopy, retence, pristupu a checklistu.
