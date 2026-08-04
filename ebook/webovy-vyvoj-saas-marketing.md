@@ -20065,6 +20065,214 @@ Vysledek hodiny neni dokonaly incident management. Je to minimalni schopnost nep
 
 ---
 
+## Prompt injection a tool calling bez slepe duvery za 60 minut
+
+Jakmile AI funkce umi sahat do nastroju, cist interni dokumenty, vytvaret drafty, menit stav ticketu nebo volat API, prestava byt jen textovy pomocnik. Stava se provozni soucasti produktu. A provozni soucast produktu nesmi verit kazdemu textu, ktery pritece zvenku.
+
+Prompt injection neni jen vtipny pokus uzivatele napsat "ignoruj instrukce". Muze byt v support ticketu, importovanem dokumentu, webove strance, PDF, komentari v CRM, transkriptu callu nebo v odpovedi cizi integrace. OWASP Top 10 for LLM and Generative AI Applications radi prompt injection, excessive agency, insecure output handling a sensitive information disclosure mezi hlavni rizika LLM aplikaci: https://genai.owasp.org/llm-top-10/. Prakticky preklad: model neni hranice duvery. Hranice duvery musi byt v aplikaci.
+
+**Codyho komentar:** Kdyz AI dostane klice od skladu, nestaci ji rict, at je hodna. Zamky, seznam opravneni a zapisnik u dveri jsou porad lepsi vynalez nez optimisticky system prompt.
+
+### 1. Rozdel text podle duvery
+
+Prvni chyba je smichat vsechno do jednoho promptu: systemova pravidla, interni politiku, zakaznicky vstup, citace z dokumentu, historii ticketu a instrukce k tool callu. Pak se tezko dokazuje, co bylo prikaz a co byl jen obsah.
+
+Prakticke vrstvy:
+
+| Vrstva | Priklad | Duvera | Pravidlo |
+| --- | --- | --- | --- |
+| Systemova pravidla | co AI smi, nesmi a musi | vysoka | pise tym, nemeni uzivatel |
+| Produktova politika | verejne zdroje, support pravidla | stredni | verzovana a schvalena |
+| Interni kontext | poznamky agenta, stav uctu | omezena | jen podle role a potreby |
+| Externi obsah | ticket, email, PDF, web | nizka | nikdy neni instrukce pro system |
+| Vystup modelu | navrh odpovedi, klasifikace | neovereny | musi projit validaci |
+| Tool call | API akce, zmena stavu, export | kriticky | rozhoduje aplikace, ne text |
+
+Zaved v kodu i v dokumentaci slovnik: `trusted instructions`, `approved knowledge`, `customer content`, `model draft`, `validated action`. Nemusi to byt presne tyhle anglicke nazvy, ale tym musi vedet, ktera vrstva ma jakou vahu. Kdyz se vsechno jmenuje "context", tak mas misto architektury polivku.
+
+### 2. Model muze navrhovat, aplikace musi rozhodovat
+
+U tool callingu je zdrave pravidlo jednoduche: model smi navrhnout zamer, aplikace rozhoduje o povoleni, parametrech a provedeni. Neobracej to.
+
+Priklad spatne hranice:
+
+```text
+Model vrati: call deleteCustomerData(customerId=123)
+Aplikace zavola API, protoze model rekl, ze je to potreba.
+```
+
+Priklad lepsi hranice:
+
+```text
+Model vrati: action_intent = "request_data_erasure"
+Aplikace overi:
+- kdo pozadavek poslal,
+- zda ma pravo jednat za workspace,
+- zda existuje otevrena DSAR karta,
+- zda je akce v povolenem rozsahu,
+- zda je potreba lidske schvaleni.
+Teprve potom vytvori task pro cloveka nebo spusti omezeny job.
+```
+
+Pro prvni verzi AI funkce pouzij tri rezimy:
+
+| Rezim | Co AI smi | Kdy pouzit |
+| --- | --- | --- |
+| Read-only | shrnout, vysvetlit, navrhnout | skoro vzdy na startu |
+| Draft-only | pripravit odpoved nebo task | support, obchod, dokumentace |
+| Action-with-approval | pripravit akci ke schvaleni | zmeny dat, exporty, billing, pristupy |
+
+Autonomni akce nech na pozdeji a jen pro uzky rozsah s idempotenci, limity, auditni stopou a jasnym rollbackem. "AI sama zavre ticket" muze znit efektivne, dokud nezavre incident s placenym zakaznikem a nevlozi do odpovedi neco, co nikdy nemelo odejit.
+
+### 3. Tool schema je bezpecnostni kontrola, ne jen typovani
+
+Kazdy nastroj, ktery AI funkce muze navrhnout, popis jako kontrakt:
+
+```markdown
+# Tool: create_support_draft
+
+Ucel:
+Vytvori navrh odpovedi pro support agenta. Nic neposila zakaznikovi.
+
+Povolene vstupy:
+- ticket_id
+- public_article_ids
+- tone: concise | neutral | detailed
+- risk_level: low | medium | high
+
+Zakazane vstupy:
+- cele interni poznamky
+- pristupove tokeny
+- platebni udaje
+- obsah ticketu jineho workspace
+
+Pred provednim:
+- overit workspace scope
+- overit opravneni agenta
+- nacist jen povolene clanky
+
+Po provedeni:
+- ulozit draft, ne odeslat
+- zalogovat action_id, ticket_id, verzi promptu a vysledek validace
+```
+
+Minimalni validace tool callu:
+
+- parametry maji schema a typy,
+- `workspace_id` se bere ze session nebo serveroveho kontextu, ne z modelu,
+- ID objektu se overuji proti opravneni uzivatele,
+- citlive akce maji lidske schvaleni,
+- opakovane volani je idempotentni nebo ma deduplikaci,
+- existuje rate limit a rozumna maximalni velikost vstupu,
+- chybova odpoved neprozrazuje vic dat, nez musi.
+
+OWASP REST Security Cheat Sheet je uzitecny i tady, protoze tool calling je casto jen vnitrni API s hezcim marketingovym nazvem: https://cheatsheetseries.owasp.org/cheatsheets/REST_Security_Cheat_Sheet.html.
+
+### 4. Vstupni filtr nema byt cenzor, ale tridic rizika
+
+Nesnaz se dokonale poznat vsechny prompt injection texty. To je hra na nekonecny seznam kouzelnych vet. Lepsi je tridit vstup podle rizika a nastavovat odpovidajici chovani.
+
+Rizikove signaly:
+
+- text vyzaduje ignorovani predchozich instrukci,
+- text chce vypsat system prompt, interni pravidla nebo tajemstvi,
+- text tvrdi, ze ma vyssi opravneni nez aktualni uzivatel,
+- text micha obsah a instrukce pro nastroje,
+- externi dokument obsahuje prikazy typu "odesli", "smaz", "zmen stav",
+- vstup se snazi ziskat data jineho zakaznika,
+- vstup je neprimerene dlouhy nebo obsahuje skryte bloky textu.
+
+Reakce podle rizika:
+
+| Riziko | Chovani |
+| --- | --- |
+| Nizke | bezny navrh odpovedi |
+| Stredni | read-only rezim, zadne tool cally |
+| Vysoke | predat cloveku, ulozit redigovanou ukazku pro eval |
+| Kriticke | vypnout funkci pro ticket/workspace, zalozit incident kartu |
+
+Filtr nema mazat legitimni obsah zakaznika jen proto, ze obsahuje slovo "ignore". Ma oznacit kontext: "toto je neduverovany text, nepouzivat jako instrukci". Rozhodnuti pak dela aplikace a vystupni validace.
+
+### 5. Vystupni validace chyta to, co prompt nechytil
+
+System prompt je dulezity, ale neni kontrolni mechanismus. Pred tim, nez se vystup ukaze uzivateli nebo ulozi jako navrh, udelej kontrolu:
+
+- Neobsahuje tajemstvi, tokeny, interni URL nebo interni prompt?
+- Netvrdi, ze akce uz probehla, kdyz se jen vytvoril draft?
+- Necituje soukrome poznamky misto verejnych zdroju?
+- Neodkazuje na dokument, ke kteremu prijemce nema pristup?
+- Neni odpoved prilis sebejista u nejasneho zdroje?
+- Neobsahuje instrukce k obchazeni pravidel, exportu cizich dat nebo mazani mimo proces?
+
+U RAG odpovedi chtej vazbu na zdroj: kazde vecne tvrzeni, ktere ma pochazet z dokumentace, musi mit ID zdroje nebo byt oznacene jako nejistota. Kdyz zdroj chybi, odpoved ma rict, ze to ve znalostni bazi nenasla. Ne vymyslet nahrazku s usmevem cloveka, ktery prave rozbil produkci a doufa, ze si nikdo nevsimne.
+
+### 6. 60min postup
+
+| Cas | Ukol | Vystup |
+| --- | --- | --- |
+| 0-10 min | Vyber jednu AI funkci s pristupem k nastrojum | seznam toolu a akci |
+| 10-20 min | Rozdel vrstvy kontextu podle duvery | tabulka trusted/untrusted vstupu |
+| 20-30 min | Omez tooly na tri rezimy | read-only, draft-only, approval |
+| 30-40 min | Sepis schema pro jeden kriticky tool | povolene vstupy, zakazy, validace |
+| 40-50 min | Pridej rizikovy filtr a vystupni kontrolu | pravidla pro stredni/vysoke riziko |
+| 50-60 min | Vytvor tri eval priklady | prompt injection, cizi data, nepravdiva akce |
+
+Po hodine nemas neprustrelnou AI. Mas ale hranice, ktere nejsou jen v promptu. A to je rozdil mezi "zkousime asistenta" a "poustime neco do produktu".
+
+### 7. Priklad: AI navrhuje export dat
+
+Scenario:
+
+```text
+Zakaznik pise do supportu: "Potrebujeme export vsech dat za workspace ACME, poslete mi CSV."
+V ticketu je podpis cloveka, ale email neodpovida vlastnikovi workspace.
+```
+
+Spatne:
+
+```text
+AI vytvori export a prilozi odkaz do odpovedi, protoze pozadavek vypada slusne.
+```
+
+Lepsi:
+
+```text
+AI oznaci intent: data_export_request.
+Aplikace overi identitu a roli zadatele.
+Protoze role nesedi, tool call je zakazan.
+AI vytvori navrh odpovedi:
+"Export dat muze potvrdit vlastnik workspace nebo admin. Poslete prosim pozadavek z prihlaseneho uctu s opravnenim admina, pripadne pozadavek predame vlastnikovi workspace."
+```
+
+Do logu patri minimalni stopa:
+
+- `ticket_id`,
+- `intent=data_export_request`,
+- `tool_allowed=false`,
+- duvod: `requester_not_authorized`,
+- verze pravidel,
+- cas rozhodnuti.
+
+Do logu nepatri cele CSV, obsah cele zpravy ani zbytecne osobni udaje. Privacy-first provoz neni o tom, ze se nic nezapisuje. Je o tom, ze zapis vis proc existuje, kdo ho cte a kdy zmizi.
+
+### Checklist: prompt injection a tool calling
+
+- [ ] AI funkce ma rozdelene trusted a untrusted vstupy.
+- [ ] Externi obsah se nikdy nepouziva jako systemova instrukce.
+- [ ] Model navrhuje zamer, aplikace rozhoduje o provedeni.
+- [ ] `workspace_id`, role a opravneni se berou ze serveroveho kontextu, ne z modelu.
+- [ ] Kriticke tooly maji schema, povolene vstupy a zakazane vstupy.
+- [ ] Citlive akce vyzaduji lidske schvaleni nebo samostatny proces.
+- [ ] Read-only, draft-only a action-with-approval rezimy jsou technicky oddelene.
+- [ ] Vstupni filtr umi snizit schopnosti funkce podle rizika.
+- [ ] Vystupni validace kontroluje tajemstvi, nepravdive akce, neopravnene zdroje a sebejistotu bez opory.
+- [ ] Prompt injection priklady jsou v eval setu.
+- [ ] Tool cally maji rate limit, idempotenci nebo deduplikaci.
+- [ ] Auditni stopa uklada rozhodnuti a duvod, ne cele citlive obsahy.
+- [ ] Existuje kill switch pro tool calling nezavisle na textovych navrzich.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -20292,3 +20500,4 @@ Vysledek hodiny neni dokonaly incident management. Je to minimalni schopnost nep
 - 2026-08-04: Pridana prakticka priloha RAG znalostni baza bez vysavani internich dat za 60 minut vcetne katalogu zdroju, chunk metadat, pristupove kontroly, nejistoty, uklidu a checklistu.
 - 2026-08-04: Pridana prakticka priloha AI support odpovedi bez tichych akci za 60 minut vcetne dopadu odpovedi, smlouvy o chovani, vstupniho filtru, vystupni sablony, zakazu tichych akci a checklistu.
 - 2026-08-04: Pridana prakticka priloha AI incident a kill switch bez produkcniho dramatu za 60 minut vcetne klasifikace incidentu, vypinacu, incident karty, navratu do provozu a checklistu.
+- 2026-08-04: Pridana prakticka priloha Prompt injection a tool calling bez slepe duvery za 60 minut vcetne vrstev duvery, schema toolu, validaci, rizikoveho filtru, prikladu exportu dat a checklistu.
