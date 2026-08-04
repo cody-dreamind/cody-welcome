@@ -18604,6 +18604,193 @@ Odstran duplicity, socialni odkazy bez primarniho zdroje a zdroje, ktere jen gen
 
 ---
 
+## Rozhodovaci briefing ze signalu bez meetingove mlhy za 45 minut
+
+Signal radar je uzitecny jen tehdy, kdyz z nej vypadne rozhodnuti. Jinak je to dalsi knihovna zajimavosti, ve ktere clovek sbira odkazy, aby mel pocit, ze pracuje. Rozhodovaci briefing je kratky dokument, ktery vezme par overenych signalu a prevede je do jedne zmeny v produktu, marketingu, provozu nebo prodeji.
+
+Cil neni sepsat analyzu pro analyzu. Cil je rict: co se zmenilo, proc na tom zalezi, co udelame ted, co zatim ignorujeme a jak pozname, ze jsme se spletli.
+
+Privacy-first tym ma jeste jednu vyhodu: kdyz ma dobre nastavene zdroje, nepotrebuje sledovat lidi napric webem ani tahat obsah ze soukromych kanalu. Staci mu primarni zdroje, zakaznicke rozhovory se souhlasem, support signaly, obchodni poznamky v minimalnim rozsahu a vlastni produktove metriky.
+
+### 1. Vstupni pravidlo: maximalne tri signaly
+
+Do briefingu nepatri vsechno, co se za tyden stalo. Patrici jednotka je rozhodnuti, ne novinka.
+
+Vyber maximalne tri signaly podle tohoto filtru:
+
+| Otazka | Proc se ptame |
+| --- | --- |
+| Muze signal zmenit prioritu v dalsich 14 dnech? | Jinak patri do archivu nebo dlouhodobeho sledovani. |
+| Je zdroj dohledatelny a dostatecne primarni? | Bez zdroje je to dojem, ne podklad. |
+| Tykal se realneho zakaznika, trhu, provozu nebo rizika? | Tim odfiltrujes obecny obsahovy sum. |
+| Umi z nej vzniknout konkretni akce? | Pokud ne, jeste neni zraly na briefing. |
+
+**Priklad dobrych vstupu:**
+
+- Tri enterprise leady se v poslednich dvou tydnech ptaly na export dat pred podpisem pilotu.
+- Konkretni konkurent zacal verejne nabizet EU-only hosting jako hlavni odliseni.
+- Support zachytil pet podobnych dotazu na to, jestli se nahravky z workshopu ukladaji u treti strany.
+
+**Priklad spatnych vstupu:**
+
+- "Vsichni ted resi AI agenty."
+- "Na LinkedInu jsem videl, ze pricing musi byt usage-based."
+- "Konkurence ma novou animaci v hero sekci."
+
+Ty spatne vstupy mohou byt zajimave, ale nejsou dost konkretni. Briefing neni misto pro pocitove meteorologicke zpravodajstvi z trhu.
+
+### 2. Sablona briefingu
+
+Jedna stranka staci. Kdyz briefing nejde napsat kratce, pravdepodobne jeste neni jasne rozhodnuti.
+
+```md
+# Rozhodovaci briefing: [tema]
+
+Datum:
+Vlastnik:
+Rozhodovaci okno: [napr. tento tyden / tento sprint / tento mesic]
+
+## Signal
+
+- Co se stalo:
+- Zdroj:
+- Jistota: nizka / stredni / vysoka
+- Koho se to tyka:
+
+## Vyklad
+
+- Fakt:
+- Codyho komentar:
+- Co zatim nevime:
+
+## Moznosti
+
+1. Neresit ted:
+   - Cena:
+   - Riziko:
+2. Mala oprava:
+   - Cena:
+   - Riziko:
+3. Vetsi zmena:
+   - Cena:
+   - Riziko:
+
+## Rozhodnuti
+
+Vybrana varianta:
+Proc:
+Co udelame do:
+Kdo:
+Jak overime dopad:
+Kdy se k tomu vratime:
+
+## Privacy kontrola
+
+- Pridava rozhodnuti nove osobni udaje?
+- Meni se dodavatel nebo region zpracovani?
+- Je potreba upravit verejny text, DPA, cookies nebo dokumentaci?
+- Lze zmenu udelat s mensim datovym rozsahem?
+```
+
+Nejdulezitejsi radek je `Co zatim nevime`. Nutnost rozhodnout neznamena predstirat jistotu. Znamena udelat primereny dalsi krok s jasnym omezenim rizika.
+
+### 3. Tri typicke vystupy
+
+Briefing by mel skoncit jednim ze tri vystupu.
+
+| Vystup | Kdy ho pouzit | Priklad |
+| --- | --- | --- |
+| Rozhodnuti | Signal je dost silny a akce je levna nebo dulezita. | Pridame trust blok o EU provozu na pricing page. |
+| Experiment | Signal je slibny, ale nejistota je porad vysoka. | Otestujeme novy lead magnet jen pres vlastni RSS, blog a prime osloveni. |
+| Watchlist | Signal je zajimavy, ale ted by rozhazel fokus. | Budeme sledovat zmenu pricingu konkurence do dalsiho mesicniho review. |
+
+Co nepatri mezi vystupy:
+
+- "Probereme priste" bez vlastnika.
+- "Meli bychom se nad tim zamyslet" bez terminu.
+- "Pridame to do backlogu" bez vazby na prioritu.
+- "Udelame analyzu" bez otazky, kterou ma analyza zodpovedet.
+
+**Codyho komentar:** Backlog je skvele misto na praci, ktera ma sanci vzniknout. Kdyz do nej hazes kazdy neurcity napad, zacne se tvarit jako produktova strategie. Neni. Je to jen sklad nerozhodnuti.
+
+### 4. Priklad: privacy dotazy v obchodnim toku
+
+Signal:
+
+> Za poslednich 14 dni se ve trech obchodnich konverzacich opakoval dotaz: "Kde budou nase data a kdo k nim ma pristup?"
+
+Fakt:
+
+- Dotaz prisel od firem s 50+ zamestnanci.
+- Ve dvou pripadech padl jeste pred demem.
+- V jednom pripade lead pozadal o DPA pred poslanim testovacich dat.
+
+Codyho komentar:
+
+> Tohle neni pravni detail na konec prodeje. Je to nakupni blocker a zaroven diferenciace. Pokud odpoved schovame do paticky, zbytecne zpomalujeme deal.
+
+Moznosti:
+
+| Varianta | Cena | Riziko |
+| --- | --- | --- |
+| Neresit ted | Zadna prace | Opakovane vysvetlovani na callech, mensi duvera. |
+| Mala oprava | 2 hodiny textu a review | Verejny slib musi byt presny. |
+| Vetsi zmena | Trust page, security FAQ, DPA proces | Vetsi koordinace a nutnost udrzby. |
+
+Rozhodnuti:
+
+- Tento tyden pridat na pricing a demo page kratky blok "Data a provoz".
+- Vytvorit interni odpovedni kartu pro obchod.
+- Neslibovat konkretni certifikace, pokud nejsou hotove.
+- Za mesic zkontrolovat, jestli se privacy dotaz porad opakuje ve stejne forme.
+
+Privacy kontrola:
+
+- Nepridavame zadne nove sledovani.
+- Nezverejnujeme interni architekturu do detailu, jen zakaznicky relevantni fakta.
+- Verejny text musi odpovidat realnym dodavatelum a datove mape.
+
+### 5. 45min postup
+
+**0-5 minut: nastav otazku**
+
+Vyber jednu otazku, kterou ma briefing zodpovedet. Napriklad: "Mame ted upravit onboarding kvuli enterprise dotazum na export?" Bez otazky se briefing rozleze.
+
+**5-15 minut: vyber signaly**
+
+Vezmi maximalne tri signaly ze signal radaru. U kazdeho zkontroluj zdroj, datum, segment a vazbu na konkretni rozhodnuti. Pokud signal obsahuje osobni udaje, anonymizuj ho nebo pouzij agregovany popis.
+
+**15-25 minut: oddel fakta od vykladu**
+
+Napis, co se opravdu stalo. Pak az pridej interpretaci. Vetou oznac, co je Codyho komentar, odhad nebo hypoteza.
+
+**25-35 minut: navrhni tri moznosti**
+
+Vzdy dej vedle sebe `neresit ted`, `mala oprava` a `vetsi zmena`. Tohle nuti tym videt cenu i riziko. Nekdy je nejlepsi rozhodnuti opravdu nic nemenit.
+
+**35-42 minut: vyber akci**
+
+Vyber jednu variantu, vlastnika, termin a overeni dopadu. Overeni muze byt jednoduche: mensi pocet support dotazu, lepsi kvalita leadu, rychlejsi aktivace, mene chyb ve formulari nebo jasnejsi odpoved v rozhovorech.
+
+**42-45 minut: zapis co ignorujes**
+
+Na konec pridej seznam veci, ktere ted vedome ignorujes. Chrani to fokus a snizuje pocit, ze kazdy signal musi byt hned roadmap item.
+
+### Checklist: rozhodovaci briefing
+
+- [ ] Briefing odpovida na jednu rozhodovaci otazku.
+- [ ] Obsahuje maximalne tri signaly.
+- [ ] U kazdeho signalu je zdroj, datum a segment.
+- [ ] Fakta jsou oddelena od Codyho komentare nebo hypotezy.
+- [ ] Vystupem je rozhodnuti, experiment nebo watchlist.
+- [ ] Existuje vlastnik, termin a zpusob overeni.
+- [ ] Varianta `neresit ted` byla zvazena stejne poctive jako aktivni zmena.
+- [ ] Briefing neobsahuje zbytecne osobni udaje ani citace ze soukromych kanalu bez duvodu.
+- [ ] Verejne sliby se pred publikaci kontroluji proti realnemu provozu.
+- [ ] Na konci je seznam veci, ktere tym vedome ignoruje.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -18819,3 +19006,4 @@ Odstran duplicity, socialni odkazy bez primarniho zdroje a zdroje, ktere jen gen
 - 2026-08-04: Pridana prakticka priloha Obsahova knihovna odpovedi bez kopirovani soukromych zprav za 60 minut vcetne vlastniku odpovedi, hranic slibu, kanalovych variant a checklistu.
 - 2026-08-04: Pridana prakticka priloha Vyzkumna knihovna z rozhovoru bez skladovani osobnich dat za 60 minut vcetne datoveho kontraktu, karet rozhovoru, insightu, retence a checklistu.
 - 2026-08-04: Pridana prakticka priloha Signal radar bez scrollovani socialnich siti za 45 minut vcetne primarnich zdroju, karet signalu, konkurencniho monitoringu, tydniho review a checklistu.
+- 2026-08-04: Pridana prakticka priloha Rozhodovaci briefing ze signalu bez meetingove mlhy za 45 minut vcetne sablony, prikladu privacy dotazu, 45min postupu a checklistu.
