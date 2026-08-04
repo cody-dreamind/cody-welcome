@@ -22134,6 +22134,125 @@ Tady je privacy-first pointa: schopnost rychle vypnout nebo omezit AI neni slabo
 - [ ] Zakazane akce jsou napsane explicitne.
 - [ ] Runbook je odkazany z alertu, release karty nebo interni dokumentace.
 
+## AI postmortem bez hledani vinika za 45 minut
+
+Incident kolem AI funkce je neprijemny hlavne proto, ze se snadno zmeni v mlhu: nekdo rekne "model se zblaznil", nekdo jiny "to byla chyba uzivatele" a treti clovek chce rychle vypnout vsechno, vcetne kafe. Postmortem ma udelat opak. Ma prevest nejasny problem na rozhodnuti, ktera zmensi dalsi riziko, aniz by firma zacala sbirat vsechny prompty, vsechny odpovedi a vsechny soukrome konverzace.
+
+NIST AI RMF pouziva funkce Govern, Map, Measure a Manage. V praxi to znamena: vedet, kdo rozhoduje, jaky kontext AI funkce ma, jak meri riziko a co udela, kdyz se riziko naplni. Zdroj: https://www.nist.gov/itl/ai-risk-management-framework
+
+OWASP Logging Cheat Sheet varuje pred logovanim citlivych dat a zaroven doporucuje logy, ktere pomahaji udalost rekonstruovat. U AI incidentu proto nechces "prompt dump". Chces cas, verzi modelu, verzi prompt sablony, typ vstupu, rozhodovaci vetev, pouzite zdroje, vysledny stav a odkaz na schvalenou incident kartu. Zdroj: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+
+### 1. Zacni casovou osou, ne vinikem
+
+Prvnich deset minut patri faktum. Ne interpretacim, ne psychologii tymu, ne honu na cloveka, ktery naposledy mergoval. Zapis:
+
+- kdy byl problem poprve videt,
+- kdo ho nahlasil,
+- ktere uzivatelske scenare byly dotcene,
+- zda slo o dostupnost, kvalitu, bezpecnost, soukromi nebo naklady,
+- jaky mitigacni krok uz probehl,
+- co jeste neni jiste.
+
+Dobry zapis pouziva vety typu: "Ve 14:08 support nahlasil tri odpovedi s neoverenym tvrzenim v modulu fakturace." Spatny zapis pouziva vety typu: "AI halucinovala, protoze prompt byl spatny." Druha veta mozna bude pravda, ale v prvnich minutach je to porad hypoteza.
+
+### 2. Rozdel incident podle dopadu na data
+
+AI incident muze byt jen produktova chyba, ale muze se dotknout i osobnich udaju. GDPR resi mimo jine integritu, duvernost, omezeni ulozeni a schopnost reagovat na poruseni zabezpeceni osobnich udaju. Pokud existuje podezreni na poruseni zabezpeceni, pouzij vlastni GDPR incident proces a pravni validaci. Primarni zdroj pro zasady zpracovani je clanek 5 GDPR: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
+
+Prakticke trideni:
+
+- **Bez dopadu na osobni data:** spatna sumarizace verejne dokumentace, chybny navrh textu, nedostupny model.
+- **Mozny dopad na osobni data:** AI zobrazila cast ciziho ticketu, retrieval vratil dokument mimo opravneni, export obsahoval vic poli nez mel.
+- **Potvrzeny dopad:** osobni data opustila spravny kontext, byla zverejnena, odeslana spatnemu prijemci nebo zustala v logu mimo retenci.
+
+Codyho komentar: nejhorsi je tvarit se, ze "AI vystup neni data". Je. Minimalne muze obsahovat odvozene informace, kusy vstupu nebo odkazy na zdroje, ktere uzivatel nemel videt. Jo, magie zase prohrala s tabulkou opravneni.
+
+### 3. Pouzij pet otazek pro root cause
+
+Postmortem nemusi byt diplomka. Staci pet otazek, ktere vedou k opravitelnemu systemu:
+
+1. Co presne uzivatel videl nebo co system udelal?
+2. Ktera kontrola tomu mela zabranit?
+3. Proc kontrola nezabrala nebo neexistovala?
+4. Jak to priste poznas driv?
+5. Jakou jednu zmenu udelas pred dalsim releasem?
+
+U AI funkci si dej pozor na pseudo-priciny. "Model selhal" neni root cause. Lepsi priciny jsou napriklad: eval set neobsahoval dlouhe fakturacni dotazy, retrieval nemel tenant filtr, prompt sablona nemela pravidlo nejistoty, UI skrylo zdroj odpovedi, alert sledoval jen HTTP chyby a ne kvalitu vystupu.
+
+### 4. Akcni polozky musi mit vlastnika a stop pravidlo
+
+Kazda akce z postmortemu ma mit vlastnika, termin, test a stop pravidlo. Bez toho je to jen firemni poezie, ktera se hezky tvari v Notionu a pak tise umre.
+
+Sablona akcni polozky:
+
+```text
+Akce: Pridat tenant filtr do retrieval dotazu pred volanim vektorove databaze.
+Vlastnik: Backend
+Termin: do dalsiho produkcniho releasu
+Overeni: test s dokumentem z jineho tenantu musi vratit prazdny kontext
+Stop pravidlo: AI odpovedi z fakturace zustanou v degradovanem rezimu, dokud test neprojde
+Data dopad: zadna nova osobni data do logu
+```
+
+Stop pravidlo je dulezite. Kdyz oprava neni hotova, produkt se nesmi tvarit, ze je vsechno normalni. Lepsi je mensi funkce, ktera rika pravdu, nez plna funkce, ktera dela sebevedomy bordel.
+
+### 5. Verejna komunikace podle dopadu
+
+Ne kazdy AI incident patri na verejny status page. Kazdy ale potrebuje konzistentni komunikacni pravidlo. Rozdel zpravy na tri vrstvy:
+
+- **Interni technicka karta:** detailni casova osa, hypotezy, log metadata, vlastnici a dalsi kroky.
+- **Support shrnuti:** co se stalo, koho se to tyka, co rict uzivateli, co neslibovat.
+- **Verejna poznamka:** pouze pokud incident ovlivnil dostupnost, duveru, data nebo smluvni zavazek.
+
+Sablona pro support:
+
+```text
+U AI navrhu odpovedi jsme zjistili problem v oblasti [oblast]. Funkci jsme do docasneho rezimu [rezim] prepnuli v [cas]. Vase ulozena data [byla/nebyla] podle aktualniho vysetreni dotcena. Pokud potrebujete konkretni kontrolu u sveho uctu, ozvete se nam na [kontakt].
+```
+
+Pokud si nejsi jisty dopadem na osobni data, nerikej "zadny dopad" jen proto, ze by to znelo klidne. Rekni, co vis, co proverujes a kdy bude dalsi update.
+
+### 6. 45min postup
+
+**0-10 minut:** sestav casovou osu z dostupnych metadat, support hlasek a deploy historie. Neexportuj hromadne prompty.
+
+**10-20 minut:** urci dopad: kvalita, dostupnost, bezpecnost, soukromi, naklady. Pokud je mozne poruseni osobnich udaju, zapni GDPR incident proces.
+
+**20-30 minut:** najdi pravdepodobnou root cause pres pet otazek. Oddel potvrzena fakta od hypotez.
+
+**30-40 minut:** napis tri akcni polozky maximalne. Kazda ma vlastnika, termin, overeni a stop pravidlo.
+
+**40-45 minut:** priprav support shrnuti a rozhodni, zda je potreba verejna komunikace, zakaznicky update nebo jen interni zaznam.
+
+### 7. Priklad: AI navrh odpovedi pouzil spatny zdroj
+
+**Situace:** AI support navrhla odpoved na fakturacni dotaz. Do navrhu se dostala informace z interniho dokumentu pro enterprise zakazniky, ktera nemela byt pouzita pro standardni tarif.
+
+**Casova osa:**
+
+- 09:12 support oznacil odpoved jako "spatny zdroj".
+- 09:18 funkce AI navrhu pro fakturaci prepnuta do rezimu "navrh s povinnou kontrolou zdroje".
+- 09:31 z log metadat potvrzeno, ze retrieval pouzil dokument se spatnym tarifnim tagem.
+- 09:44 vytvorena akcni polozka pro povinny tarifni filtr.
+
+**Root cause:** dokumenty mely tenant filtr, ale nemely tarifni filtr. Eval set obsahoval jen dotazy v ramci jednoho tarifu, takze chyba nebyla videt pred releasem.
+
+**Opravy:**
+
+- pridat tarifni filtr do retrieval dotazu,
+- doplnit eval pripady pro standard, pro a enterprise tarif,
+- zobrazit supportu zdroj a tarifni kontext pred odeslanim odpovedi,
+- neukladat cele prompty; do incident karty ulozit jen hash requestu, verzi sablony, typ zdroje a tarifni tag.
+
+### Checklist: AI postmortem
+
+- [ ] Postmortem zacina casovou osou a potvrzenymi fakty.
+- [ ] Dopad je rozdelen na kvalitu, dostupnost, bezpecnost, soukromi a naklady.
+- [ ] Mozny dopad na osobni data spousti samostatny GDPR incident proces.
+- [ ] Root cause je konkretni kontrola nebo mezera, ne veta "model selhal".
+- [ ] Akcni polozky maji vlastnika, termin, overeni a stop pravidlo.
+- [ ] Support ma kratke shrnuti, ktere nerika vic, nez tym opravdu vi.
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -22253,6 +22372,7 @@ Tady je privacy-first pointa: schopnost rychle vypnout nebo omezit AI neni slabo
 
 ## Pracovni log
 
+- 2026-08-04: Pridana prakticka priloha AI postmortem bez hledani vinika za 45 minut vcetne casove osy, datoveho dopadu, root cause otazek, akcnich polozek, komunikace a checklistu.
 - 2026-08-04: Pridana prakticka priloha AI release notes bez prozrazeni internich promptu za 45 minut vcetne verejne a interni vrstvy, sablon, bezpecnostni redakce, 45min postupu a checklistu.
 - 2026-08-04: Pridana prakticka priloha AI export a mazani dat bez rucniho lovu ve skladech za 60 minut vcetne mapy AI stop, exportniho balicku, mazaci fronty, RAG mazani, backup pravidel a checklistu.
 - 2026-08-04: Pridana prakticka priloha AI anonymizace a synteticka data bez falesneho klidu za 60 minut vcetne rozliseni surovych/pseudonymizovanych/anonymizovanych dat, redakce podle ucelu, re-identifikacniho testu, datoveho kontraktu a checklistu.
