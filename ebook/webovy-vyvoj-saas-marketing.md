@@ -18437,6 +18437,173 @@ Oznac surove zaznamy k mazani, nastav vlastnika karet a u verejne pouzitelnych f
 
 ---
 
+## Signal radar bez scrollovani socialnich siti za 45 minut
+
+Maly SaaS tym potrebuje vedet, co se meni u zakazniku, trhu, konkurence, regulatoru a technologii. Nepotrebuje kvuli tomu kazdy den mizet v socialnich feedech, reklamnim remarketingu a nahodnych "trend" vlaknech. Signal radar je jednoduchy system, ktery oddeli skutecne rozhodovaci signaly od obsahu, ktery jen vypada dulezite, protoze ma hodne reakcniho hluku.
+
+Cil neni "byt u vseho". Cil je mit jednou tydne prehled, zda se objevilo neco, co ma zmenit produkt, web, nabidku, obsah, pricing, rizikovy registr nebo provozni pravidlo. Privacy-first verze radaru stoji na primarnich zdrojich, RSS/Atom feedech, verejnych dokumentacich, changelozich, zakaznickych rozhovorech a primych odkazech. RSS 2.0 a Atom jsou otevrene syndikacni formaty, ktere prave pro takovy odber obsahu davaji smysl: https://www.rssboard.org/rss-specification a https://www.rfc-editor.org/rfc/rfc4287.
+
+### 1. Rozdel signaly podle rozhodnuti
+
+Kdyz radar zacne vetou "sledujeme konkurenci a novinky", skonci jako sklad odkazu. Kazdy zdroj musi mit duvod: jake rozhodnuti muze ovlivnit.
+
+Zakladni kose:
+
+| Kos | Co hledas | Jake rozhodnuti to muze zmenit |
+| --- | --- | --- |
+| Zakaznici | Opakovane otazky, namitky, workaroundy | Nabidka, onboarding, roadmapa, obsah |
+| Konkurence | Positioning, pricing, balicky, verejne changelogy | Diferenciace, cenik, landing page |
+| Technologie | Release notes, zranitelnosti, deprecace | Upgrade, architektura, rizika |
+| Regulace | Nove povinnosti, metodiky, vyklady | Trust page, smlouvy, procesy |
+| Distribuce | Vyhledavaci dotazy, referral zdroje, RSS odbery | Redakcni backlog, SEO, partnerstvi |
+| Provoz | Incidenty dodavatelu, status page, zmeny DPA | Vendor review, fallback, komunikace |
+
+Jedno pravidlo: signal bez navazujici akce je jen zajimavost. Zajimavosti patri do archivu, ne do tydniho rozhodovani.
+
+### 2. Preferuj primarni zdroje pred platformnim sumem
+
+Socialni sit muze upozornit na tema, ale nemela by byt mistem pravdy. U aktualnich zmen hledej primarni zdroj: dokumentaci, changelog, zakonny text, metodiku, status page, release notes, verejny cenik, blog autora nebo oficialni repozitar. U technickych a webovych pravidel se vyplati sahat po specifikacich a dokumentaci, ne po screenshotu z komentaru.
+
+Prakticky stack bez datove pasti:
+
+- RSS ctecka pro blogy, changelogy a publikacni zdroje.
+- Bookmark slozka "radar" s primarnimi URL.
+- Jednoducha tabulka nebo Markdown soubor se signaly.
+- Tydenni review, kde se rozhoduje jen o akcich.
+- Primarni odkaz v kazdem zaznamu.
+- Zadny pixel, zadny social share skript, zadne sledovani lidi kvuli tomu, ze nekdo klikl na clanek.
+
+Kdyz zdroj nema RSS, zkus email archiv na webu, changelog URL, GitHub releases, status page nebo manualni mesicni kontrolu. Ne kazdy zdroj si zaslouzi automatizaci. Nekdy je levnejsi a cistsi napsat do kalendare "jednou mesicne zkontrolovat cenik dodavatele".
+
+**Codyho komentar:** Trend, ktery nejde dohledat mimo socialni post, neni trend. Je to mozna jen dobre nasvicena nalada. Hezke na pobaveni, nebezpecne jako vstup do roadmapy.
+
+### 3. Karta signalu musi byt mala
+
+Signal radar se rozbije, kdyz se z nej stane vyzkumna diplomka. Vetsina signalu ma mit pet az osm radku. Dulezite je zachytit zdroj, dopad a dalsi krok.
+
+Sablona:
+
+```md
+## Signal: [kratky nazev]
+
+- Datum:
+- Kos: zakaznici / konkurence / technologie / regulace / distribuce / provoz
+- Primarni zdroj:
+- Co se zmenilo:
+- Proc na tom zalezi:
+- Dopad na nas:
+- Navazujici akce:
+- Vlastnik:
+- Stav: sledovat / overit / udelat / archiv
+```
+
+Priklad:
+
+```md
+## Signal: Dodavatel analytiky meni retenci eventu
+
+- Datum: 2026-08-04
+- Kos: provoz
+- Primarni zdroj: changelog nebo DPA update dodavatele
+- Co se zmenilo: Retence agregovanych eventu ma novou vychozi hodnotu.
+- Proc na tom zalezi: Verejna privacy dokumentace slibuje konkretni retencni rezim.
+- Dopad na nas: Zkontrolovat nastaveni projektu a text v trust page.
+- Navazujici akce: Vendor review + uprava interni datove mapy, pokud se potvrdi dopad.
+- Vlastnik: provoz / marketing
+- Stav: overit
+```
+
+Takovy zapis neni dlouhy, ale umi zabranit tomu, aby se zmena dodavatele ztratila mezi zalozkami.
+
+### 4. Konkurenci sleduj jako nabidku, ne jako zavod ve funkcich
+
+Konkurencni monitoring nema byt panicka reakce na kazde tlacitko, ktere pridal nekdo jiny. Sleduj hlavne, jak konkurence vysvetluje hodnotu, komu prodava, co dava do balicku, co zjednodusuje a co slibuje u dat. To jsou signaly pro positioning, ne rozkaz k okopirovani.
+
+U kazdeho konkurencniho signalu se ptej:
+
+- Zmenili segment, nebo jen text?
+- Pridali funkci, ktera resi stejny problem jako my?
+- Zmenili cenovou metriku?
+- Komunikuji bezpecnost, hosting, DPA nebo export dat jinak nez driv?
+- Je to reakce na trh, nebo jen kampanovy experiment?
+- Mame k tomu potvrzeni od zakazniku, nebo jen pocit?
+
+Neukladej screenshoty plne cizich detailu, pokud je nepotrebujes. Casto staci datum, URL, kratky popis zmeny a tvoje interpretace oddelena od faktu. Kdyz web prochazis automatizovane, respektuj verejne instrukce pro crawlery. Robots Exclusion Protocol je popsany v RFC 9309: https://www.rfc-editor.org/rfc/rfc9309. Kdyz server odpovida limitem, neni to pozvanka tlacit vic; HTTP 429 popisuje prave stav "Too Many Requests": https://datatracker.ietf.org/doc/html/rfc6585.
+
+### 5. Tydni review: tri signaly, tri rozhodnuti
+
+Jednou tydne projdi nove signaly a vyber maximalne tri. Kdyz jich vyberes deset, neudelate nic. U kazdeho rozhodni jednu z peti akci:
+
+- `udelat`: zmena je jasna a mala,
+- `overit`: chybi dukaz nebo dopad,
+- `sledovat`: muze byt dulezite, ale zatim nemeni praci,
+- `predat`: patri produktovi, provozu, obchodu nebo pravnikovi,
+- `archiv`: zajimave, ale bez rozhodnuti.
+
+Vystup review:
+
+```md
+## Radar review: [datum]
+
+- Signal 1:
+- Rozhodnuti:
+- Vlastnik:
+- Deadline:
+
+- Signal 2:
+- Rozhodnuti:
+- Vlastnik:
+- Deadline:
+
+- Signal 3:
+- Rozhodnuti:
+- Vlastnik:
+- Deadline:
+
+- Co ignorujeme:
+- Proc:
+```
+
+Radikalni cast je posledni radek. Tym musi umet vedome ignorovat veci. Jinak bude roadmapu ridit posledni hlasity post a ne zakaznicka hodnota.
+
+### 6. 45min postup
+
+**0-10 minut: vyber pet zdroju**
+
+Vyber pet zdroju, ktere mohou realne zmenit rozhodnuti: dva zakaznicke zdroje, jeden konkurencni, jeden technologicky a jeden provozni nebo regulacni. Ke kazdemu pridej primarni URL nebo RSS/Atom feed.
+
+**10-20 minut: vytvor radar tabulku**
+
+Zaloz jednoduchy Markdown nebo tabulku se sloupci datum, kos, zdroj, zmena, dopad, akce, vlastnik a stav. Nepridavej dalsi pole, dokud je opravdu nepotrebujes.
+
+**20-30 minut: zapis posledni tri signaly**
+
+Vyber tri realne zmeny z poslednich dni nebo tydnu. U kazde zapis primarni zdroj a oddel fakt od interpretace. Pokud neumis najit zdroj, signal zustava ve stavu `overit`.
+
+**30-40 minut: rozhodni akce**
+
+Kazdemu signalu dej jednu akci: udelat, overit, sledovat, predat nebo archiv. U akci `udelat` a `overit` pridej vlastnika a datum.
+
+**40-45 minut: uklid zdroje**
+
+Odstran duplicity, socialni odkazy bez primarniho zdroje a zdroje, ktere jen generuji sum. Lepsi je pet kvalitnich zdroju nez tricet notifikaci, ktere kradou pozornost jak nenapadny meeting v kalendari.
+
+### Checklist: signal radar
+
+- [ ] Kazdy sledovany zdroj ma jasny rozhodovaci duvod.
+- [ ] Primarni zdroj je ulozen u kazdeho duleziteho signalu.
+- [ ] RSS/Atom nebo prime URL maji prednost pred platformnim feedem.
+- [ ] Socialni sit je maximalne upozorneni, ne misto pravdy.
+- [ ] Karta signalu oddeluje fakt, interpretaci a navazujici akci.
+- [ ] Konkurenci sleduji kvuli nabidce a positioning, ne kvuli slepemu kopirovani funkci.
+- [ ] Automatizovane kontroly respektuji robots pravidla a limity serveru.
+- [ ] Tydni review vybira maximalne tri signaly.
+- [ ] Kazdy vybrany signal konci stavem: udelat, overit, sledovat, predat nebo archiv.
+- [ ] Radar neuklada osobni udaje, screenshoty ani identifikatory, ktere nepotrebuje.
+- [ ] Verejne sliby se meni az po overeni proti produktu, provozu a zdrojum.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -18651,3 +18818,4 @@ Oznac surove zaznamy k mazani, nastav vlastnika karet a u verejne pouzitelnych f
 - 2026-08-03: Pridana prakticka priloha Obsahove follow-upy z reakci bez recyklacniho autopilota za 60 minut vcetne vyberu reakce, bezpecneho prepisu, primarni URL, distribucni ukazky a checklistu.
 - 2026-08-04: Pridana prakticka priloha Obsahova knihovna odpovedi bez kopirovani soukromych zprav za 60 minut vcetne vlastniku odpovedi, hranic slibu, kanalovych variant a checklistu.
 - 2026-08-04: Pridana prakticka priloha Vyzkumna knihovna z rozhovoru bez skladovani osobnich dat za 60 minut vcetne datoveho kontraktu, karet rozhovoru, insightu, retence a checklistu.
+- 2026-08-04: Pridana prakticka priloha Signal radar bez scrollovani socialnich siti za 45 minut vcetne primarnich zdroju, karet signalu, konkurencniho monitoringu, tydniho review a checklistu.
