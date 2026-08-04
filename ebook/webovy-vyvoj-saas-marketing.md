@@ -18791,6 +18791,205 @@ Na konec pridej seznam veci, ktere ted vedome ignorujes. Chrani to fokus a snizu
 
 ---
 
+## Experiment karta po briefingu bez datoveho dluhu za 60 minut
+
+Rozhodovaci briefing casto skonci slovem "experiment". To zni lehce, ale prave tady vznikaji nejdrazsi male chaosy: docasny formular, docasny spreadsheet, docasny export z CRM, docasny script v hlavicce webu a docasna data, ktera zustanou navzdy. Experiment ma snizit nejistotu, ne zalozit novou vrstvu technickeho a datoveho dluhu.
+
+Experiment karta je jednostrankovy plan, ktery rika, co presne zkousime, jaky signal bude stacit pro rozhodnuti, jak mala ma byt zmena, jaka data opravdu potrebujeme a kdy experiment skoncime. Pokud to nejde napsat na jednu stranku, pravdepodobne nejde o experiment, ale o maskovanou roadmapu.
+
+**Codyho komentar:** Dobry experiment je nudne ohraniceny. Spatny experiment je "jen to zkusime" s neomezenym rozsahem, rozplizlym merenim a nulovym datem uklidu. To neni startupova rychlost. To je budoucnost, ktera si prisla pujcit tvoji energii.
+
+### 1. Zacni nejistotou, ne napadem
+
+Napad neni dost dobry vstup. "Pridame kalkulacku ceny" jeste nerika, co se mame naucit. Experiment zacina vetou:
+
+> Nejsme si jisti, jestli [segment] udela [konkretni chovani], kdyz mu nabidneme [zmenu], protoze [duvod nejistoty].
+
+Priklady:
+
+- Nejsme si jisti, jestli male B2B agentury pozadaji o audit, kdyz jim misto obecneho dema nabidneme 20min kontrolu lead formulare.
+- Nejsme si jisti, jestli enterprise leady potrebuji pred demem samostatnou trust page, nebo jim staci kratky blok na pricingu.
+- Nejsme si jisti, jestli navstevnici obsahu chteji PDF checklist, kdyz ho nedame za lead gate.
+
+Kdyz nejistotu popises takhle, prirozene se objevi i mereni. Nepotrebujes vedet vsechno o navstevnikovi. Potrebujes vedet, jestli nastalo konkretni chovani.
+
+### 2. Omez plochu zmeny
+
+Experiment pro maly SaaS by mel menit co nejmensi cast systemu. Cim mensi plocha zmeny, tim rychleji se vratis do normalu, kdyz se ukaze, ze napad nefunguje.
+
+Rozdel zmenu na tri vrstvy:
+
+| Vrstva | Priklad | Kdy staci |
+| --- | --- | --- |
+| Text | Jiny headline, CTA, FAQ odpoved, trust blok. | Kdyz overujes srozumitelnost nebo nakupni blocker. |
+| Tok | Kratky formular, manualni audit, concierge pilot. | Kdyz overujes zajem o dalsi krok. |
+| Funkce | Minimalni produktova zmena pro uz existujici zakazniky. | Kdyz uz mas dukaz problemu i ochoty jednat. |
+
+Zacni nejvyssi vrstvou, ktera jeste dokaze zodpovedet otazku. Pokud text na pricingu umi overit, zda privacy odpoved snizuje pocet opakovanych dotazu, nestav hned security portal. Pokud manualni export ukaze, ze zakaznici opravdu chteji prenositelnost dat, teprve potom automatizuj.
+
+### 3. Datovy kontrakt experimentu
+
+Kazdy experiment ma mit vlastni maly datovy kontrakt. Ne proto, ze by jeden radek v tabulce mel nosit kravatu, ale protoze bez kontraktu se data sbiraji setrvacnosti.
+
+Zapis:
+
+- jaka data sbirame,
+- proc je sbirame,
+- kde budou ulozena,
+- kdo k nim ma pristup,
+- kdy se smazou nebo slouci do agregovaneho poznatku,
+- co vyslovne nesbirame.
+
+**Priklad pro test noveho CTA:**
+
+| Otazka | Odpoved |
+| --- | --- |
+| Co sbirame | Navstevu varianty, klik na CTA, odeslani formulare, zdroj kampane. |
+| Proc | Chceme zjistit, zda konkretnejsi CTA zvysi pocet relevantnich poptavek. |
+| Kde | Privacy-first analytika a interni lead evidence. |
+| Pristup | Marketing + obchodni vlastnik experimentu. |
+| Retence | Detailni eventy 30 dni, pak agregovany vysledek v experiment karte. |
+| Nesbirame | Fingerprint, cross-site identifikator, obohaceni kontaktu z externich databazi. |
+
+Tohle je prakticka hranice. Kdyz nekdo navrhne pridat dalsi nastroj, musi ukazat, proc se bez nej neda rozhodnout. "Bylo by zajimave vedet" neni duvod. Je to zacatek skluzavky.
+
+### 4. Uspech, neuspech a stop pravidlo
+
+Experiment bez stop pravidla se umi tvarit jako vecny projekt. Pred spustenim si napis tri veci:
+
+- co povazujeme za uspech,
+- co povazujeme za neuspech,
+- kdy experiment ukoncime i bez jasneho vysledku.
+
+Priklad:
+
+> Po dobu 14 dni ukazeme na demo page blok "Data a provoz". Uspech je, kdyz aspon 3 relevantni leady kliknou na detail nebo se v demu snizi opakovany dotaz na misto ulozeni dat. Neuspech je, kdyz blok nezmeni zadne obchodni otazky a zabira misto dulezitejsimu CTA. Experiment konci 18. srpna 2026 nebo po 20 relevantnich navstevach demo page, podle toho, co nastane pozdeji.
+
+Ne kazdy experiment potrebuje statistickou ceremonii. U maleho B2B SaaS casto staci kvalitativni signal, pokud je predem popsany a neprepisujes ho podle toho, jak se ti vysledek hodi. Pozor hlavne na retroaktivni vitezstvi: "Nekoupili, ale aspon se podivali, tak to funguje." Ne, to je jen navsteva. Obed z toho neuvaris.
+
+### 5. Sablona experiment karty
+
+```md
+# Experiment: [kratky nazev]
+
+Datum startu:
+Datum konce:
+Vlastnik:
+Vazba na briefing:
+
+## Nejistota
+
+Nejsme si jisti, jestli:
+Segment:
+Pozadovane chovani:
+Proc na tom zalezi:
+
+## Zmena
+
+Co menime:
+Kde:
+Co zustava stejne:
+Co vedome nedelame:
+
+## Mereni
+
+Primarni signal:
+Sekundarni signal:
+Ochranna metrika:
+Minimalni vzorek nebo cas:
+
+## Datovy kontrakt
+
+Sbirame:
+Nesbirame:
+Ulozeni:
+Pristup:
+Retence:
+Uklid po konci:
+
+## Rozhodnuti po konci
+
+Kdyz uspech:
+Kdyz neuspech:
+Kdyz nejasne:
+Kdo rozhodne:
+Kde bude vysledek zapsany:
+```
+
+Ochranna metrika je vec, ktera rika, ze experiment nesmi vyhrat za spatnou cenu. U landing page to muze byt kvalita leadu, ne jen pocet formularu. U onboardingove zmeny to muze byt pocet support dotazu. U pricingu to muze byt pocet nejasnych dotazu na fakturaci. Privacy-first ochranna metrika muze byt treba "nepridat zadny novy osobni identifikator" nebo "nezvysit pocet dodavatelu v datove ceste".
+
+### 6. 60min postup
+
+**0-10 minut: prepis briefing na jednu nejistotu**
+
+Vezmi rozhodovaci briefing a oznac jednu vetu, kterou experiment overuje. Vse ostatni dej mimo rozsah.
+
+**10-20 minut: navrhni nejmensi zmenu**
+
+Vyber, zda staci text, tok nebo funkce. Kdyz vahas mezi dvema variantami, zvol mensi a pridej kontrolni datum. Experiment neni misto na kreativni maximalismus.
+
+**20-30 minut: napis mereni**
+
+Vyber jeden primarni signal, jeden sekundarni signal a jednu ochrannou metriku. Pokud potrebujes pet dashboardu, mereni je rozbite.
+
+**30-40 minut: nastav datovy kontrakt**
+
+Zapis, jaka data pujdou kudy. Zkontroluj formular, analytiku, CRM, support a pripadne exporty. U kazdeho noveho pole si rekni, jake rozhodnuti bez nej nejde udelat.
+
+**40-50 minut: priprav uklid**
+
+Pred spustenim rozhodni, co se stane po konci: smazani docasnych tagu, odstraneni testovaci landing page, archivace vysledku, vypnuti eventu, uklid UTM odkazu, update dokumentace.
+
+**50-60 minut: publikuj experiment kartu**
+
+Karta musi byt dostupna lidem, kteri se zmeny dotykaji: produkt, marketing, obchod, support a vyvoj. Neni potreba velky meeting. Staci, aby kazdy vedel, co se meni a co nema slibovat.
+
+### 7. Priklad: audit lead formulare bez novych trackeru
+
+Nejistota:
+
+> Nejsme si jisti, jestli firmy odkladaji odeslani poptavky, protoze formular chce moc informaci pred prvnim kontaktem.
+
+Zmena:
+
+- Na 14 dni zkratime formular z osmi poli na tri: email, typ problemu, volitelna zprava.
+- Telefon, velikost firmy a rozpocet presuneme az do rucniho follow-upu.
+- Vedle formulare pridame vetu: "Pouzijeme kontakt jen pro odpoved k teto poptavce."
+
+Mereni:
+
+- Primarni signal: pocet relevantnich odeslanych poptavek.
+- Sekundarni signal: kvalita odpovedi v poli "typ problemu".
+- Ochranna metrika: nezvysit pocet irelevantnich leadu tak, aby obchod travil vic casu tridicim odpadem nez rozhovory.
+
+Datovy kontrakt:
+
+- Nesbirame telefon, rozpocet ani velikost firmy pred prvni odpovedi.
+- Nepridavame reklamni pixel.
+- Detailni formularove udalosti drzime 30 dni, vysledek zapisem agregujeme do experiment karty.
+
+Rozhodnuti po konci:
+
+- Pokud prijde vic relevantnich poptavek bez narustu chaosu, kratky formular zustava.
+- Pokud prijde hodne nerelevantnich kontaktu, upravime volbu "typ problemu" a mikrocopy.
+- Pokud neni dost dat, pokracujeme jeste 14 dni nebo experiment zavreme jako neprokazany.
+
+### Checklist: experiment bez datoveho dluhu
+
+- [ ] Experiment overuje jednu jasnou nejistotu.
+- [ ] Ma vlastnika, datum startu a datum konce.
+- [ ] Zmena je nejmensi mozna: text, tok nebo funkce.
+- [ ] Je napsane, co se vedome nedela.
+- [ ] Primarni signal vede k rozhodnuti, ne jen k zajimavosti.
+- [ ] Existuje ochranna metrika proti spatne vyhre.
+- [ ] Datovy kontrakt rika, co sbirame, kde, proc, kdo ma pristup a kdy se uklizi.
+- [ ] Experiment nepridava novy tracker nebo dodavatele bez jasneho duvodu.
+- [ ] U docasnych eventu, landing pages, tagu a UTM odkazu je plan uklidu.
+- [ ] Vysledek bude zapsany tak, aby se z nej dalo poucit i za mesic.
+- [ ] Po konci existuji jen tri moznosti: ponechat, upravit, zahodit.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -19007,3 +19206,4 @@ Na konec pridej seznam veci, ktere ted vedome ignorujes. Chrani to fokus a snizu
 - 2026-08-04: Pridana prakticka priloha Vyzkumna knihovna z rozhovoru bez skladovani osobnich dat za 60 minut vcetne datoveho kontraktu, karet rozhovoru, insightu, retence a checklistu.
 - 2026-08-04: Pridana prakticka priloha Signal radar bez scrollovani socialnich siti za 45 minut vcetne primarnich zdroju, karet signalu, konkurencniho monitoringu, tydniho review a checklistu.
 - 2026-08-04: Pridana prakticka priloha Rozhodovaci briefing ze signalu bez meetingove mlhy za 45 minut vcetne sablony, prikladu privacy dotazu, 45min postupu a checklistu.
+- 2026-08-04: Pridana prakticka priloha Experiment karta po briefingu bez datoveho dluhu za 60 minut vcetne datoveho kontraktu, stop pravidel, sablony, prikladu zkraceni formulare a checklistu.
