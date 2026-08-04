@@ -20837,6 +20837,200 @@ Spatna reakce by byla zapnout plne logovani promptu pro vsechny support tickety.
 
 ---
 
+## AI datova klasifikace a routing bez posilani vseho vsude za 60 minut
+
+AI funkce se casto navrhne jako jedna velka trubka: vezmi vstup, pridej kontext, posli modelu, vrat odpoved. V prvni demo verzi to vypada pohodlne. V produkci je to ale drahe, tezko vysvetlitelne a privacy-first hodnota se roztece mezi prompty, logy, evaly, supportem a vendor fakturaci.
+
+Lepsi zaklad je jednoduchy routing: podle typu dat, dopadu akce a potrebne kvality rozhodnes, kam request smi jit, co se z nej odstrani, ktery model ho muze zpracovat, jak dlouho se uchova technicka stopa a kdy musi clovek potvrdit vysledek. Neni to velka enterprise architektura. Je to dopravni znaceni pro AI provoz.
+
+### 1. Rozdel data pred promptem
+
+Nejdriv si pojmenuj datove tridy. Nepotrebujes pravnickou encyklopedii. Potrebujes tridy, podle kterych umi vyvojar, support i produktak udelat stejne rozhodnuti.
+
+Prakticke tridy:
+
+| Trida | Priklad | Vychozi pravidlo |
+| --- | --- | --- |
+| Verejne | dokumentace, blog, verejny changelog | Muze jit do AI funkce, pokud neporusuje autorska a interni pravidla. |
+| Zakaznicky provozni kontext | nazev workspace, role, stav fakturace, nastaveni produktu | Posilat jen kdyz je to nutne pro vystup, idealne minimalizovane. |
+| Osobni udaje | email, jmeno, IP adresa, text ticketu s identifikatory | Redigovat, hashovat nebo posilat jen ve schvalenem rezimu. |
+| Citlive obchodni informace | smlouvy, cenove dohody, roadmapa zakaznika | Vychozi stav je neposilat mimo kontrolovane prostredi. |
+| Tajemstvi a pristupy | tokeny, API klice, hesla, podpisove secrety | Nikdy neposilat modelu ani do AI logu. |
+
+Klasifikace nemusi byt dokonala. Musi byt dostatecne viditelna, aby se citliva data nedostala do promptu jen proto, ze nekdo pouzil `JSON.stringify(customer)`.
+
+**Codyho komentar:** Nejvetsi AI privacy incident male firmy casto nevypada jako hack. Vypada jako pohodlne pridany kontext "pro lepsi odpoved". Presne tady se z uzitecne funkce stane datovy kompost.
+
+### 2. Routing karta pro kazdy AI use-case
+
+Pro kazdy AI use-case vytvor jednu kartu. Bez ni se AI funkce nechova jako produkt, ale jako improvizace v trenchcoatu.
+
+Sablona:
+
+```text
+AI use-case:
+Cil uzivatele:
+Vstupni data:
+Zakazana data:
+Povolene zdroje kontextu:
+Povolene modely nebo runtime:
+Redakce pred odeslanim:
+Lidska kontrola:
+Povolene tool akce:
+Logujeme:
+Nelogujeme:
+Retence:
+Fallback pri chybe:
+Vlastnik:
+Datum posledni revize:
+```
+
+Ukazka pro support draft:
+
+```text
+AI use-case: Navrh odpovedi na support ticket
+Cil uzivatele: Zrychlit prvni navrh odpovedi pro support specialistu
+Vstupni data: text ticketu po redakci, typ planu, jazyk, odkazy na verejnou dokumentaci
+Zakazana data: API klice, interni poznamky k zakaznikovi, platebni udaje, cele audit logy
+Povolene zdroje kontextu: verejna dokumentace, schvalene makro odpovedi, status page
+Povolene modely nebo runtime: model schvaleny ve vendor karte pro support drafty
+Redakce pred odeslanim: maskovani emailu, tokenu, URL s jednorazovymi parametry
+Lidska kontrola: povinna pred odeslanim zakaznikovi
+Povolene tool akce: zadne; jen navrh textu
+Logujeme: request_id, policy_version, model_version, validacni vysledek, cas, cost bucket
+Nelogujeme: plny text ticketu, plny prompt, plnou odpoved
+Retence: agregovane metriky 12 mesicu, debug artefakty max 7 dni po schvaleni
+Fallback pri chybe: nabidnout rucni makro odpoved podle kategorie ticketu
+Vlastnik: Head of Support
+Datum posledni revize: 2026-08-04
+```
+
+Tahle karta je mala, ale dela jednu zasadni vec: oddeluje "co by model umel" od "co mu firma dovoluje".
+
+### 3. Router rozhoduje podle dopadu, ne podle magie modelu
+
+Routing nemusi byt slozity. Pro prvni verzi staci par pravidel, ktera bezi pred volanim modelu.
+
+Priklad rozhodovaciho stromu:
+
+1. Obsahuje vstup tajemstvi nebo token? Request zastavit, uzivateli vysvetlit proc a nic neodesilat.
+2. Obsahuje vstup osobni udaje, ktere nejsou nutne? Redigovat a pokracovat.
+3. Je vystup jen navrh textu? Povolit draft-only rezim.
+4. Muze vystup zmenit data, cenu, prava nebo komunikaci se zakaznikem? Vyzhadat lidske potvrzeni.
+5. Potrebuje model interni dokumenty? Pustit jen zdroje, ke kterym ma uzivatel pravo.
+6. Je confidence nizka nebo validace selhala? Nepokracovat tool akcemi, vratit bezpecny fallback.
+
+Tohle pravidlo patri do aplikace, ne jen do system promptu. Prompt muze model upozornit, ale aplikace musi rozhodnout. Stejny princip uz se objevil u tool callingu: model muze navrhovat, ale produkt drzi hranice.
+
+### 4. Redakce ma byt konkretni a testovana
+
+"Odstranime citliva data" neni implementacni plan. Redakce musi mit seznam vzoru, testy a viditelny vystup.
+
+Minimalni redakcni pravidla:
+
+- emaily nahradit za `[EMAIL]`,
+- telefonni cisla nahradit za `[PHONE]`,
+- tokeny a API klice nahradit za `[SECRET]`,
+- URL s jednorazovymi parametry zkratit na domenu a cestu,
+- osobni jmena redigovat jen tam, kde nejsou nutna pro odpoved,
+- prilohy neposilat automaticky, nejdriv je klasifikovat.
+
+Testovaci sada pro redakci:
+
+```text
+Vstup: Muj email je jana@example.cz a token sk_live_abc123.
+Ocekavani: Muj email je [EMAIL] a token [SECRET].
+
+Vstup: Reset link je https://app.example.cz/reset?token=abc&email=jana@example.cz
+Ocekavani: Reset link je https://app.example.cz/reset?[REDACTED_QUERY]
+
+Vstup: Zakaznik ACME chce export za cerven.
+Ocekavani: Zakaznik ACME chce export za cerven.
+```
+
+Posledni priklad je dulezity. Redakce nema byt mlynek na kontext. Kdyz odstranis vse, AI zacne halucinovat nebo vracet genericke odpovedi. Privacy-first neni "neposilej nic"; je to "posilej jen to, co ma jasny ucel".
+
+### 5. Lokace zpracovani je produktova volba
+
+U evropskeho SaaS si pro AI routing zapis i provozni rezim. Nektere requesty mohou byt v poradku u schvaleneho externiho dodavatele. Jine patri do EU runtime, self-hosted inference, lokalniho modelu nebo vubec do rucniho procesu.
+
+Jednoducha matice:
+
+| Dopad | Data | Doporuceny rezim |
+| --- | --- | --- |
+| Nizky | verejna dokumentace | externi model podle vendor karty |
+| Stredni | redigovany support text | schvaleny model, draft-only, minimalni log |
+| Vyssi | interni obchodni kontext | EU runtime nebo interni zpracovani, povinna kontrola |
+| Kriticky | pristupy, tajemstvi, pravni rozhodnuti, zdravotni/financni citlivost | AI nepoustet bez specialniho posouzeni |
+
+Tohle neni univerzalni pravni odpoved. Je to operacni filtr, ktery tym donuti rict nahlas, kdy pohodli prestava byt rozumne.
+
+### 6. 60min postup
+
+Prvnich 10 minut:
+
+- Vyber jeden AI use-case, ktery uz je v produktu nebo se chysta.
+- Napis jeho cil a hlavni uzivatelsky tok.
+- Zakaz resit vsechny AI funkce naraz. Ano, i kdyz je to lakave. Hlavne kdyz je to lakave.
+
+10 az 25 minut:
+
+- Vypln datove tridy pro vstup, kontext, vystup a logy.
+- Oznac zakazana data.
+- Rozhodni, co lze redigovat a co se musi zastavit.
+
+25 az 40 minut:
+
+- Vypln routing kartu.
+- Napis rozhodovaci strom pro povolit, redigovat, zastavit, human review a fallback.
+- U tool akci nastav default "zadne", dokud nejsou explicitne potreba.
+
+40 az 50 minut:
+
+- Pridej tri redakcni testy.
+- Pridej jeden negativni test s tokenem nebo privatni URL.
+- Pridej jeden test, kde redakce nesmi znicit dulezity obchodni kontext.
+
+50 az 60 minut:
+
+- Zapis vlastnika a datum revize.
+- Napoj kartu na vendor review, eval set a observabilitu.
+- Vyber jednu opravu, kterou udelas hned: zakaz logovani promptu, redakce tokenu, human review nebo blokovani priloh.
+
+### 7. Priklad: AI shrnuti obchodniho callu
+
+SaaS tym chce, aby AI shrnula poznamky z obchodniho callu a pripravila follow-up. Riziko neni jen presnost. Riziko je, ze do modelu odejde jmeno zakaznika, interni cena, roadmapovy slib, emaily ucastniku a poznamka "konkurence ma problem s migraci". Au, produktovy olej na podlaze.
+
+Lepsi tok:
+
+1. Uzivatel vlozi poznamky do interniho formulare.
+2. Aplikace upozorni, ze nema vkladat tajemstvi, hesla ani cele smlouvy.
+3. Redakce odstrani emaily, telefony a privatni odkazy.
+4. Router povoli jen draft follow-upu, zadne automaticke odeslani.
+5. Model dostane jen cil, redigovane poznamky a schvalenou sablonu follow-upu.
+6. Vystupni validace oznaci sliby typu "garantujeme", "urcite dodame" a "sleva plati".
+7. Obchodnik musi text schvalit, upravit a odeslat sam.
+8. Log zustane technicky: verze sablony, modelu, validace a cost bucket.
+
+Vysledek: tym ma rychlejsi follow-up, ale produkt neprevezme odpovednost za obchodni sliby ani nevyrobi skryty sklad call notes v AI telemetry.
+
+### Checklist: AI datova klasifikace a routing
+
+- [ ] Kazdy AI use-case ma routing kartu.
+- [ ] Vstupy, kontext, vystupy a logy maji datovou tridu.
+- [ ] Tajemstvi a pristupove udaje jsou blokovane pred volanim modelu.
+- [ ] Osobni udaje se rediguji nebo posilaji jen v oduvodnenem rezimu.
+- [ ] Router umi rozhodnout: povolit, redigovat, zastavit, predat cloveku nebo vratit fallback.
+- [ ] Tool akce jsou vychozi zakazane a povoluji se jen pro konkretni ucel.
+- [ ] Pristupova prava k RAG zdrojum se kontroluji pred retrievalem.
+- [ ] Redakcni pravidla maji testy vcetne negativnich prikladu.
+- [ ] Runtime rezim rozlisuje verejna data, redigovany support, interni kontext a kriticka data.
+- [ ] Logy neobsahuji plne prompty, odpovedi, tokeny ani zbytecne osobni udaje.
+- [ ] Lidska kontrola je povinna u vystupu, ktere meni data, ceny, prava nebo komunikaci se zakaznikem.
+- [ ] Karta ma vlastnika, datum revize a navaznost na vendor review, eval set a observabilitu.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -20951,6 +21145,7 @@ Spatna reakce by byla zapnout plne logovani promptu pro vsechny support tickety.
 
 ## Pracovni log
 
+- 2026-08-04: Pridana prakticka priloha AI datova klasifikace a routing bez posilani vseho vsude za 60 minut vcetne datovych trid, routing karty, redakce, provozni matice a checklistu.
 - 2026-08-04: Pridana prakticka priloha AI observabilita a nakladove limity bez promptoveho skladu za 60 minut vcetne runtime eventu, metrik, limitu, alertu, debug rezimu a checklistu.
 - 2026-08-04: Pridana prakticka priloha AI model upgrade bez rozbite produkce za 60 minut vcetne upgrade karty, eval setu, canary rollout, minimalniho logovani, rollbacku a checklistu.
 - 2026-08-04: Pridana prakticka priloha AI vendor karta bez compliance prekvapeni za 60 minut vcetne use-case karty, datovych trid, vendor review, rozhodovaci matice, eval setu a checklistu.
