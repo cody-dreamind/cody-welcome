@@ -18246,6 +18246,197 @@ Kazde odpovedi dejte stav, vlastnika a datum dalsi kontroly. Odpovedi bez vlastn
 
 ---
 
+## Vyzkumna knihovna z rozhovoru bez skladovani osobnich dat za 60 minut
+
+Rozhovory se zakazniky jsou pro SaaS cennejsi nez vetsina dashboardu. Jenze kdyz se s nimi pracuje ledabyle, rychle z nich vznikne neprehledna slozka nahravek, prepisu, screenshotu, jmen firem, internich drbu a citlivych detailu. Vyzkumna knihovna ma uchovat poznani, ne sbirat souveniry z cizich problemu.
+
+Cil teto prilohy je jednoduchy: po jednom tydnu rozhovoru mit dohledatelne insighty, ktere pomahaji produktu, marketingu i obchodu, ale neobsahuji zbytecne osobni udaje. Nechceme skladovat vsechno, co clovek rekl. Chceme rozumet tomu, jaky problem mel, jak ho resi dnes, co ho stoji soucasny workaround a podle ceho se rozhodne.
+
+### 1. Oddel surovy zaznam od pouzitelneho poznatku
+
+Nejvetsi chyba je povazovat prepis callu za vyzkumny vystup. Prepis je jen surovina. Skutecny vystup je kratky, overitelny poznatek, ktery umi tym pouzit pri rozhodovani.
+
+Tri vrstvy vyzkumu:
+
+| Vrstva | Co obsahuje | Kdo k ni ma mit pristup |
+| --- | --- | --- |
+| Surovy zaznam | Nahravka, prepis, poznamky z callu | Jen lide, kteri ho realne potrebuji |
+| Ocisteny zapis | Shrnuty problem, citace se souhlasem, kontext bez identifikatoru | Produkt, obchod, marketing podle potreby |
+| Insight karta | Zobecneny vzor, dopad, dukaz, doporucena akce | Cely tym |
+
+Privacy-first pravidlo: pracuj primarne s insight kartami. Surove zaznamy maji kratkou retenci, omezeny pristup a jasny duvod existence. Kdyz nekdo v tymu potrebuje "mrknout na cely call", mel by umet rict proc.
+
+**Codyho komentar:** "Mame to nekde v prepisu" neni znalost. To je jen elegantnejsi verze "asi to bylo v nejakem emailu". Poznatek musi prezit i bez toho, aby si nekdo poustel ctyricet minut nahravky.
+
+### 2. Pred rozhovorem si nastav datovy kontrakt
+
+Pred rozhovorem rekni, co si budes zapisovat a proc. Nemusi z toho byt pravnicka prednaska. Staci kratka lidska veta, ktera nastavi ocekavani.
+
+Priklad mikrotextu pred rozhovorem:
+
+> Z callu si zapisu jen produktove poznatky: jaky problem resite, jak ho resite dnes a co by pro vas byl dobry vysledek. Osobni nebo interni detaily nebudu davat do verejnych materialu. Pokud bych chtel pouzit presnou citaci nebo nazev firmy, vyzadam si zvlastni souhlas.
+
+Pred rozhovorem si take vyber rezim zaznamu:
+
+- `bez nahravky`: nejmensi datova stopa, vhodne pro citliva temata,
+- `poznamky behem callu`: dobry vychozi rezim pro discovery,
+- `nahravka s casove omezenou retenci`: pouzij jen kdyz opravdu potrebujes presnost formulaci,
+- `schvalena citace`: samostatny rezim pro pripadovou studii, testimonial nebo verejny obsah.
+
+Kdyz si nejsi jisty, zvol mensi stopu. Lepsi je mit mene dat a jasnejsi poznatek nez hromadu zaznamu, ktere se nikdo neodvazi pouzit.
+
+### 3. Pouzij jednotnou kartu rozhovoru
+
+Kazdy rozhovor zapis stejnou strukturou. Pomaha to srovnavat signaly mezi lidmi a brani tomu, aby jeden zapis byl roman a druhy dve odrazky ve stylu "bylo to fajn".
+
+Sablona karty:
+
+```md
+## Rozhovor: [segment / role / datum]
+
+- Rezim zaznamu: bez nahravky / poznamky / nahravka do [datum smazani]
+- Ucel rozhovoru:
+- Segment:
+- Role ucastnika:
+- Souhlas s citaci: ne / ano, rozsah:
+- Co clovek resil:
+- Soucasny workaround:
+- Dopad problemu:
+- Spoustec problemu:
+- Kdo dalsi rozhoduje:
+- Nakupni nebo provozni blokery:
+- Privacy/security obavy:
+- Presna formulace k internimu pouziti:
+- Co nesmime verejne pouzit:
+- Navazujici akce:
+```
+
+Nepotrebujes zapisovat jmeno, pokud neni nutne pro follow-up. Casto staci segment, role a odkaz na obchodni zaznam v systemu, ktery uz pro vztah se zakaznikem pouzivas. Vyzkumna knihovna nema suplovat CRM.
+
+### 4. Prepisuj citace na dukazy bez identifikace
+
+Doslovna citace muze byt skvela pro copywriting, ale je to ostre naradi. Kdyz veta obsahuje firemni proces, specificky tool stack, konkretni castku, jmeno klienta nebo interni konflikt, nepatri automaticky do knihovny.
+
+Bezpecny postup:
+
+1. Zapis presnou formulaci jen do ocistene karty, pokud ji potrebujes.
+2. Oznac, zda je citace pouzitelna jen interne nebo i verejne.
+3. Pro verejne vystupy vytvor zobecnenou formulaci problemu.
+4. Pokud chces citovat doslova, ziskej samostatne schvaleni s kontextem pouziti.
+5. Po publikaci uloz odkaz na vystup ke schvaleni, ne citaci rozhazenou po dokumentech.
+
+Priklad:
+
+| Surova veta | Bezpecny poznatek |
+| --- | --- |
+| "U nas ve firme X musi kazdy export z CRM schvalit Jana z legalu, jinak nam to stopne audit." | "U vetsich B2B zakazniku muze export dat narazit na interni schvalovani, proto je potreba predem popsat format, rozsah a retenci exportu." |
+| "Pouzivame nastroj Y, ale bojime se, ze tam support vidi cele zpravy." | "Zakaznik potrebuje vedet, ktere role dodavatele maji pristup k obsahu support komunikace." |
+| "Minuly kvartal jsme kvuli tomu ztratili dva enterprise leady." | "Problem ma obchodni dopad, protoze muze brzdit enterprise schvaleni." |
+
+Takhle zachovas hodnotu a neudelas z rozhovoru verejny rentgen cizi firmy.
+
+### 5. Insight karta musi vest k rozhodnuti
+
+Vyzkumna knihovna neni galerie zajimavych vet. Kazda insight karta ma rict, co s poznatkem udelat. Pokud z ni neplyne rozhodnuti, zustane v archivu jako kontext, ale nepatri mezi hlavni signaly.
+
+Sablona insightu:
+
+```md
+## Insight: [kratky nazev]
+
+- Stav: novy / potvrzuje se / vyreseno / archiv
+- Segment:
+- Problem:
+- Dukaz:
+- Dopad:
+- Kolik rozhovoru to podporuje:
+- Protiargument nebo vyjimka:
+- Doporucena akce:
+- Vlastnik:
+- Do kdy znovu zkontrolovat:
+- Verejne pouzitelna formulace:
+```
+
+Priklad:
+
+```md
+## Insight: Enterprise zakaznici chteji exportni klid
+
+- Stav: potvrzuje se
+- Segment: B2B SaaS nad 50 zamestnancu
+- Problem: Pred nakupem se ptaji na export dat, i kdyz ho hned neplanuji pouzit.
+- Dukaz: Ve 4 z 6 rozhovoru se objevila otazka na format exportu, retenci a mazani po ukonceni.
+- Dopad: Bez jasne odpovedi se prodluzuje security/procurement kolecko.
+- Protiargument nebo vyjimka: Male tymy to neresi predem, ptaji se az pri migraci.
+- Doporucena akce: Doplnit trust page o sekci "Export a odchod".
+- Vlastnik: produkt / marketing
+- Do kdy znovu zkontrolovat: po dalsich 5 enterprise rozhovorech
+- Verejne pouzitelna formulace: "Dobry SaaS ma mit odchodovy plan driv, nez ho zakaznik potrebuje."
+```
+
+### 6. Nastav retenci a uklid
+
+Bez uklidu se z vyzkumu stane rizikovy archiv. Nejjednodussi pravidlo: surove zaznamy maz brzy, ocistene zapisy drz omezenou dobu a insighty udrzuj, dokud slouzi rozhodovani.
+
+Prakticky navrh:
+
+- Nahravky: smazat po prepisu a kontrole, typicky do nekolika tydnu podle domluveneho rezimu.
+- Surove prepisy: smazat nebo nahradit ocistenym zapisem po vytvoreni insightu.
+- Ocistene karty rozhovoru: drzet po dobu, kdy aktivne overujes problem nebo segment.
+- Insight karty: kontrolovat mesicne, archivovat kdyz jsou vyresene, zastarale nebo bez opory.
+- Verejne citace: drzet se zaznamem o schvaleni a odkazem na pouziti.
+
+Uklidovy rytmus:
+
+1. Jednou mesicne najdi karty bez vlastnika.
+2. Smaz nebo archivuj surove materialy po retencni lhute.
+3. Spoj duplicitni insighty.
+4. Oznac poznatky, ktere uz produkt vyresil.
+5. Zkontroluj, jestli verejne texty porad odpovidaji realite produktu.
+
+### 7. 60min postup
+
+**0-10 minut: vyber zdroj rozhovoru**
+
+Vyber poslednich tri az pet rozhovoru, ktere maji podobny segment nebo problem. Neber vsechny najednou. Jeden dobry shluk je lepsi nez hromada castecnych poznamek.
+
+**10-20 minut: nastav rezim a pristupy**
+
+U kazdeho zaznamu zkontroluj, jestli obsahuje nahravku, prepis nebo jen poznamky. Omez pristup na lidi, kteri s materialem realne pracuji, a zapis datum smazani suroveho materialu.
+
+**20-35 minut: vytvor ocistene karty**
+
+Prepis kazdy rozhovor do jednotne karty. Odstran jmena, firmy, konkretni castky, screenshoty a interni detaily, pokud nejsou nezbytne. Zachovej problem, workaround, dopad a blokery.
+
+**35-50 minut: vytahni tri insighty**
+
+Vyber maximalne tri vzory, ktere se opakuji nebo maji jasny obchodni dopad. U kazdeho zapis dukaz, protiargument a doporucenou akci.
+
+**50-55 minut: propoj s backlogem**
+
+Ke kazdemu insightu pridej jednu navazujici akci: upravit landing page, doplnit FAQ, zmenit onboarding, overit cenu, pripravit exportni odpoved nebo zahodit nepotrebnou funkci.
+
+**55-60 minut: uklid datove stopy**
+
+Oznac surove zaznamy k mazani, nastav vlastnika karet a u verejne pouzitelnych formulaci zapis, zda potrebuji souhlas. Hotovo. Vyzkum ma vystup, ne jen slozku.
+
+### Checklist: vyzkumna knihovna z rozhovoru
+
+- [ ] Vim, proc rozhovory ukladam a kdo je potrebuje.
+- [ ] U kazdeho rozhovoru je jasny rezim zaznamu a retence.
+- [ ] Surove nahravky nejsou vychozi zdroj pro cely tym.
+- [ ] Ocistena karta neobsahuje zbytecna jmena, firmy, screenshoty ani interni drby.
+- [ ] Vyzkumna knihovna nenahrazuje CRM ani support system.
+- [ ] Citace jsou oznacene jako interni, verejne pouzitelne, nebo nepouzitelne.
+- [ ] Verejne citace maji samostatny souhlas a kontext pouziti.
+- [ ] Kazdy insight ma problem, dukaz, dopad, protiargument a doporucenou akci.
+- [ ] Insighty jsou propojene s backlogem, obsahem nebo obchodnim follow-upem.
+- [ ] Karty bez vlastnika zustavaji mimo schvalene poznatky.
+- [ ] Surove materialy maji datum smazani.
+- [ ] Mesicni uklid archivuje zastarale insighty a maze nepotrebne zaznamy.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -18459,3 +18650,4 @@ Kazde odpovedi dejte stav, vlastnika a datum dalsi kontroly. Odpovedi bez vlastn
 - 2026-08-03: Pridana prakticka priloha Reakce po publikaci bez ztraty kontextu za 45 minut vcetne reakcnich karet, trideni signalu, prevodu odpovedi na verejnou hodnotu a checklistu.
 - 2026-08-03: Pridana prakticka priloha Obsahove follow-upy z reakci bez recyklacniho autopilota za 60 minut vcetne vyberu reakce, bezpecneho prepisu, primarni URL, distribucni ukazky a checklistu.
 - 2026-08-04: Pridana prakticka priloha Obsahova knihovna odpovedi bez kopirovani soukromych zprav za 60 minut vcetne vlastniku odpovedi, hranic slibu, kanalovych variant a checklistu.
+- 2026-08-04: Pridana prakticka priloha Vyzkumna knihovna z rozhovoru bez skladovani osobnich dat za 60 minut vcetne datoveho kontraktu, karet rozhovoru, insightu, retence a checklistu.
