@@ -20478,6 +20478,158 @@ Po hodine by mel byt jasny dalsi krok: pustit interni pilot, doplnit smluvni neb
 
 ---
 
+## AI model upgrade bez rozbite produkce za 60 minut
+
+AI model neni bezna minor verze knihovny. Muze zmenit ton odpovedi, presnost, format vystupu, ochotu odmitat, praci se zdroji, cenu, latenci i hranicni chovani pri prompt injection. Kdyz model vymenis bez planu, netestujes upgrade. Testujes nervy zakazniku.
+
+OWASP Top 10 for LLM and Generative AI Applications zminuje mimo jine prompt injection, sensitive information disclosure, excessive agency a model denial of service: https://genai.owasp.org/llm-top-10/. NIST AI Risk Management Framework zase tlaci na rizikove rizeni AI systemu pres mapovani, mereni, rizeni a spravu: https://www.nist.gov/itl/ai-risk-management-framework. Prakticky preklad pro maly SaaS: kazda zmena modelu ma mit vlastnika, test, metriky a cestu zpet.
+
+**Codyho komentar:** Nejlevnejsi AI upgrade je ten, ktery zakaznik ani nepozna, protoze se zlepsila kvalita bez zmeny slibu. Nejdrazsi je ten, ktery zmeni chovani asistenta uprostred supportu a vsichni pak tvrdi, ze "to prece proslo v playgroundu".
+
+### 1. Pojmenuj, co se vlastne meni
+
+Nezacinej vetou "prepneme na novejsi model". Zacni kartou zmeny:
+
+```markdown
+# AI model upgrade karta
+
+Funkce:
+Soucasny model / rezim:
+Novy model / rezim:
+Proc menime:
+Ocekavany prinos:
+Rizikove scenare:
+Dotcene datove tridy:
+Dotcene tooly / integrace:
+Zakaznicke sliby, ktere nesmime porusit:
+Vlastnik:
+Datum testu:
+Rollback:
+```
+
+Prinos nemusi byt jen "lepsi kvalita". Muze jit o nizsi latenci, stabilnejsi JSON vystup, lepsi praci s cestinou, nizsi cenu, delsi kontext nebo lepsi odmitalni chovani. Pokud prinos nejde popsat, upgrade je zvedavost, ne produktove rozhodnuti.
+
+### 2. Rozdel rizika podle typu funkce
+
+Jiny upgrade je u interniho shrnuti poznamek a jiny u asistenta, ktery navrhuje odpoved zakaznikovi nebo vola tool pro export dat. Pouzij jednoduchy semafor:
+
+| Typ funkce | Riziko upgradu | Minimalni kontrola |
+| --- | --- | --- |
+| Interni draft bez citlivych dat | nizke az stredni | rychly eval, lidska kontrola prvnich vystupu |
+| Support navrh s osobnimi daty | stredni | eval na citlive dotazy, redakce, review vzorku |
+| RAG nad interni dokumentaci | stredni az vysoke | test pristupovych prav, citace zdroju, nejistota |
+| Tool calling nad zakaznickymi daty | vysoke | schema validace, canary, kill switch, auditni log |
+| Automaticke rozhodnuti s dopadem na uzivatele | velmi vysoke | pravni a produktove review, lidske schvaleni, DPIA filtr |
+
+Kdyz novy model meni schopnost pouzivat tooly, nechovej se k tomu jako k textove zmene. Excessive agency neni teoreticky problem. Model muze navrhnout akci sebejisteji, rychleji nebo v jinem poradi nez predchozi verze. Rozhodovat musi aplikace.
+
+### 3. Eval set: stabilita je stejne dulezita jako kvalita
+
+Pro upgrade nepotrebujes obri benchmark. Potrebujes maly, opakovatelny eval set, ktery chyta presne rizika tve funkce.
+
+Minimalni sada pro jednu AI funkci:
+
+- 10 beznych pripadu, ktere musi fungovat.
+- 5 hranicnich pripadu, kde ma model priznat nejistotu.
+- 5 citlivych pripadu, kde nesmi vyzradit data nebo prekrocit roli.
+- 5 prompt injection pripadu z neduveryhodneho textu.
+- 3 formatove pripady, kde musi dodrzet schema nebo strukturu.
+- 2 zatezove pripady, kde se hlida cena, latence a timeout.
+
+U kazdeho prikladu hodnot nejen "odpoved je pekna", ale konkretni rubriku:
+
+| Kriterium | Otazka |
+| --- | --- |
+| Spravnost | Odpoved odpovida dostupnym zdrojum a nehalucinuje? |
+| Hranice | Odmitne nebo preda cloveku to, co nema resit? |
+| Data | Nevraci osobni udaje, tajemstvi ani skryte instrukce? |
+| Format | Drzi pozadovane JSON/schema/textove pole? |
+| Ton | Nepusobi agresivne, slibotechnicky nebo pravne jiste tam, kde nema? |
+| Provoz | Vejde se do latence, ceny a rate limitu? |
+
+Neukladej realne prompty jen proto, aby se dobre testovalo. Pro eval set vytvor synteticke priklady nebo redigovane kopie, kde zustava problem a mizi identita. Kdyz potrebujes pouzit realny incident, zapis ho jako vzor chovani, ne jako kopii celeho ticketu.
+
+### 4. Canary release bez profilovani uzivatelu
+
+Canary u AI funkce nemusi znamenat tajne sledovani lidi. Staci omezit dopad:
+
+- nejdrive interni uzivatele,
+- potom jeden testovaci workspace,
+- potom male procento relevantnich requestu bez citlive segmentace,
+- potom plny rollout.
+
+U B2B SaaS je casto lepsi canary podle workspace nebo pilotniho zakaznika se souhlasem nez nahodny mix napric vsemi. Je to citelnejsi pro support, obchod i audit. V logu nepotrebujes osobni profil uzivatele. Potrebujes vedet verzi modelu, funkci, workspace nebo anonymizovany identifikator, stav validace, chybu, latenci, cenu a rozhodnuti aplikace.
+
+Minimalni log upgrade udalosti:
+
+```markdown
+# AI runtime zaznam
+
+cas:
+funkce:
+model_version:
+prompt_template_version:
+eval_policy_version:
+workspace_id_hash:
+input_data_class:
+tool_called: ano/ne
+validation_result:
+handoff_to_human: ano/ne
+latency_ms:
+error_code:
+```
+
+Obsah promptu a vystupu loguj jen kdyz mas jasny ucel, retenci, pristupy a redakci citlivych dat. Jinak si vyrabis datovy sklad, ktery jednou nekdo bude muset vysvetlovat.
+
+### 5. Rollback musi byt rychlejsi nez debata
+
+AI upgrade ma mit predem pripravenou cestu zpet:
+
+- konfiguracni prepinac modelu,
+- oddelenou verzi prompt sablony,
+- kill switch pro tool calling,
+- fallback odpoved pro uzivatele,
+- kratky interni runbook,
+- vlastnika rozhodnuti.
+
+Rollback neni priznani porazky. Je to kontrola dopadu. Kdyz se zvedne pocet validacnich chyb, latence nebo predavek cloveku, vrat se na predchozi verzi a teprve potom hledej pricinu. Debugovani na produkci se skutecnymi zakazniky patri mezi drahe sporty.
+
+Prakticke stop pravidlo:
+
+> Pokud nova verze behem canary prekroci dvojnasobek validacnich chyb, zvysi P95 latenci o vice nez 30 %, nebo vygeneruje jeden vystup s citlivym unikem, rollout se zastavi a vraci na predchozi verzi.
+
+Cisla uprav podle produktu. Dulezite je, aby existovala pred rolloutem, ne az po prvnim incidentu.
+
+### 6. 60min postup
+
+| Cas | Ukol | Vystup |
+| --- | --- | --- |
+| 0-10 min | Vypln upgrade kartu | proc, rozsah, vlastnik, rollback |
+| 10-20 min | Oznac datove tridy a tooly | seznam rizikovych vstupu a akci |
+| 20-35 min | Spust nebo priprav eval set | vysledky proti stare a nove verzi |
+| 35-45 min | Navrhni canary a metriky | rollout kroky, stop pravidla |
+| 45-55 min | Zkontroluj logovani a retenci | minimalni runtime zaznam bez obsahu navic |
+| 55-60 min | Rozhodni go / no-go | zapis rozhodnuti a datum kontroly |
+
+Po hodine ma byt jasne, jestli upgrade muze do interniho pilotu, potrebuje dalsi testy, nebo nema produktovy duvod. Vsechno ostatni je mlha v peknem kabate.
+
+### Checklist: AI model upgrade
+
+- [ ] Upgrade ma popsanou funkci, prinos, vlastnika a rollback.
+- [ ] Je jasne, zda se meni model, prompt, tool schema, policy nebo vse najednou.
+- [ ] Datove tridy vstupu a vystupu jsou zkontrolovane pred testem.
+- [ ] Eval set obsahuje bezne pripady, hranice, citliva data, prompt injection a format.
+- [ ] Stara a nova verze jsou porovnane stejnou rubrikou.
+- [ ] Tool calling ma validaci v aplikaci, ne jen v promptu.
+- [ ] Canary nevyzaduje invazivni profilovani uzivatelu.
+- [ ] Logy ukladaji verze, stav validace a provozni metriky, ne cele prompty bez duvodu.
+- [ ] Stop pravidla existuji pred rolloutem.
+- [ ] Kill switch a fallback odpoved jsou pripravene.
+- [ ] Support vi, jak poznat problem po upgradu.
+- [ ] Po rollout kontrole se zapise, co se zlepsilo, co se zhorsilo a co se maze z logu.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -20590,6 +20742,7 @@ Po hodine by mel byt jasny dalsi krok: pustit interni pilot, doplnit smluvni neb
 
 ## Pracovni log
 
+- 2026-08-04: Pridana prakticka priloha AI model upgrade bez rozbite produkce za 60 minut vcetne upgrade karty, eval setu, canary rollout, minimalniho logovani, rollbacku a checklistu.
 - 2026-08-04: Pridana prakticka priloha AI vendor karta bez compliance prekvapeni za 60 minut vcetne use-case karty, datovych trid, vendor review, rozhodovaci matice, eval setu a checklistu.
 - 2026-07-30: Zalozena struktura e-booku, doplnen uvod, osnova a hotova prvni kapitola o privacy-first zakladu SaaS webu vcetne praktickych prikladu, checklistu a zdroju.
 - 2026-07-30: Dopsana druha kapitola o produktove strategii od vyberu problemu pres rozhovory a placene piloty po prvni mesic rozhodovaciho rytmu.
