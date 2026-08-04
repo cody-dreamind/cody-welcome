@@ -18078,6 +18078,174 @@ Zkontroluj, ze verejny text neprozrazuje zdroj reakce, soukroma data, interni pr
 
 ---
 
+## Obsahova knihovna odpovedi bez kopirovani soukromych zprav za 60 minut
+
+Kdyz marketing, obchod a support pracuji oddelene, firma rychle zacne odpovidat trikrat na stejnou otazku. Jednou v emailu, jednou na callu a potreti v dokumentu, ktery nikdo nenajde. Obsahova knihovna odpovedi ma tento chaos zmensit: vezme opakovane otazky zakazniku a premeni je na verejne nebo interni odpovedi, ktere jsou presne, dohledatelne a bez zbytecnych osobnich dat.
+
+Neni to znalostni baze se vsim. Je to mala knihovna rozhodovacich odpovedi: jak vysvetlit cenu, proc produkt neumi konkretni vec, jak funguje export dat, co slibujeme u hostingu, co znamena evropsky provoz, kdy dava smysl pilot a kdy ne. Dobra odpoved usetri cas a zaroven zmensi riziko, ze obchod slibi neco, co produkt nebo provoz nemuze splnit.
+
+### 1. Rozdel odpovedi podle situace, ne podle oddeleni
+
+Zakaznikovi je jedno, jestli otazka patri marketingu, obchodu, supportu nebo produktu. Pta se, protoze potrebuje rozhodnout. Proto knihovnu nestav podle interniho organigramu, ale podle momentu, ve kterem clovek odpoved potrebuje.
+
+Zakladni kose:
+
+| Kos | Typicka otazka | Idealni vystup |
+| --- | --- | --- |
+| Pred nakupem | "Proc bychom meli verit prave vam?" | Verejna odpoved na webu nebo trust page |
+| Pri demu | "Kde budou nase data?" | Kratka mluvena odpoved + odkaz na detail |
+| Pri pilotu | "Co presne je soucasti pilotu?" | Nabidkova sablona s hranicemi rozsahu |
+| Pri pouzivani | "Jak nastavim export?" | Navod ve znalostni bazi |
+| Pri incidentu | "Co se deje a kdy bude update?" | Predem pripraveny stavovy text |
+| Pri odchodu | "Jak ziskame data zpet?" | Exit a export postup |
+
+Kdyz odpoved patri do vice kosu, nevytvarej tri ruzne verze bez kontroly. Udelej jeden primarni text a kratke varianty pro kanal: email, call poznamka, support odpoved, verejne FAQ.
+
+### 2. Kazda odpoved musi mit vlastnika a hranici slibu
+
+Nejnebezpecnejsi jsou odpovedi, ktere "vsichni pouzivaji", ale nikdo za ne neruci. U privacy-first SaaS se to tyka hlavne dat, bezpecnosti, compliance, cen, migraci, SLA a integraci. Jedna nepresna veta v obchodnim emailu umi vytvorit vetsi problem nez chybny odstavec v blogu.
+
+U kazde odpovedi proto zapis:
+
+- vlastnika obsahu,
+- datum posledni kontroly,
+- kde se smi pouzit,
+- co odpoved slibuje,
+- co odpoved vyslovne neslibuje,
+- primarni odkaz, ktery ma byt v odpovedi uveden,
+- signal, podle ktereho se odpoved ma aktualizovat.
+
+Priklad hranice slibu:
+
+> Muzeme rict: "Zakaznicka data provozujeme v evropskem prostredi a u dodavatelu sledujeme datovou cestu, role, retenci a moznost exportu."
+>
+> Nerikame: "Nikdy se zadna data nedostanou mimo EU", pokud to neni overene pro kazdy subprocesor, support tok, monitoring, emaily a zalohy.
+
+Tahle hranice neni pravnicka brzda. Je to pojistka proti tomu, aby marketingova veta nepredbehla realny provoz.
+
+### 3. Soukrome dotazy prepisuj na verejne problemy
+
+Nejlepsi odpovedi casto vznikaji ze soukromych emailu, support ticketu nebo poznamek z callu. To ale neznamena, ze se maji kopirovat do knihovny. Soukroma zprava je kontext, ne surovina k publikaci.
+
+Pouzij prepis:
+
+| Soukromy vstup | Bezpecny prepis do knihovny |
+| --- | --- |
+| "Klient X se boji, ze jejich pravnik stopne analytics kvuli regionu." | "Nektere firmy potrebuji pred schvalenim analytiky dolozit region, ucel eventu a retenci dat." |
+| "Firma Y chce export kvuli odchodu od konkurence." | "Pri migraci je dulezite rozdelit technicky export, obchodni predavku a retenci po importu." |
+| "Uzivatel Z se zlobi, ze nevidi smazani uctu." | "Odchodovy tok ma jasne ukazat export, zruseni pristupu a stav mazani dat." |
+
+Verejna odpoved ma zachovat pouceni, ale odstranit identitu, casovou stopu, firemni detail, screenshoty, interni nazvy a emocionalni formulace. Pokud potrebujes citovat doslovne, vyzadej si souhlas a uloz ho tam, kde ho najdes i za rok.
+
+**Codyho komentar:** Nejrychlejsi cesta ke "content machine" je kopirovat realne zpravy do sablon. Nejrychlejsi cesta ke ztrate duvery je udelat to bez souhlasu. Vyhoda maleho tymu je, ze muze byt presny a slusny zaroven.
+
+### 4. Odpoved ma mit jednu primarni verzi a kanalove varianty
+
+Knihovna se rozbije, kdyz kazdy kanal vytvori vlastni pravdu. Misto toho udelej jednu primarni kartu odpovedi a z ni odvoz kratke varianty.
+
+Struktura jedne odpovedi:
+
+```md
+## Odpoved: [tema]
+
+- Stav: draft / schvaleno / potrebuje aktualizaci / archiv
+- Vlastnik:
+- Posledni kontrola:
+- Kde pouzit:
+- Primarni URL:
+- Kratka odpoved:
+- Detailni odpoved:
+- Co neslibovat:
+- Datove nebo bezpecnostni poznamky:
+- Kdy eskalovat:
+- Priklady formulaci:
+```
+
+Priklad:
+
+```md
+## Odpoved: Kde jsou data?
+
+- Stav: schvaleno
+- Vlastnik: provoz / produkt
+- Posledni kontrola: 2026-08-04
+- Kde pouzit: demo call, security dotaznik, FAQ, obchodni email
+- Primarni URL: /trust nebo /privacy
+- Kratka odpoved: Zakaznicka data navrhujeme, stavime a provozujeme s evropskou datovou kontrolou jako vychozim pozadavkem.
+- Detailni odpoved: U kazdeho dodavatele sledujeme ucel, roli, region, subprocesory, retenci, export a ukonceni spoluprace. Do nastroju neposilame data, ktera nejsou potreba pro dany ucel.
+- Co neslibovat: Neslibovat absolutni nulovy prenos bez aktualni kontroly vsech subprocesoru.
+- Datove nebo bezpecnostni poznamky: Pri enterprise dotazu poslat DPA/security balicek.
+- Kdy eskalovat: Kdyz zakaznik pozaduje konkretni smluvni garanci nebo zpracovani citlivych dat.
+```
+
+Kanalove varianty pak mohou byt kratke:
+
+- Email: dve vety + odkaz na primarni URL.
+- Demo: jedna lidska veta + nabidka poslani security balicku.
+- FAQ: kratka odpoved a odkaz na detail.
+- Interni poznamka: hranice slibu a eskalacni pravidlo.
+
+### 5. Knihovnu udrzuj malou, jinak se z ni stane sklad
+
+Obsahova knihovna nema byt archiv vseho, co kdy nekdo napsal. Ma byt soubor odpovedi, ktere se realne pouzivaji. Kdyz je odpoved stara, nejasna nebo bez vlastnika, je horsi nez zadna. Lide ji stejne najdou ve chvili, kdy budou spechat.
+
+Jednoduche stavy:
+
+- `draft`: odpoved vznikla, ale jeste neni pripravena k pouziti.
+- `schvaleno`: odpoved je platna a muze se pouzivat.
+- `potrebuje aktualizaci`: odpoved ma znamy problem nebo ceka na kontrolu.
+- `archiv`: odpoved uz nema byt pouzita, ale nechavas ji pro historii.
+
+Mesicni udrzba staci u vetsiny malych tymu:
+
+1. Najdi pet nejpouzivanejsich odpovedi.
+2. Zkontroluj, jestli porad odpovidaji realite produktu.
+3. Zkontroluj, jestli se v nich neobjevily sliby navic.
+4. Dopln primarni URL, pokud odpoved odkazuje jen na interni dokument.
+5. Archivuj odpovedi, ktere nikdo nepouzil posledni dva mesice a nejsou kriticke.
+
+### 6. 60min postup
+
+**0-10 minut: vyber opakovane otazky**
+
+Projdete posledni obchodni emaily, support tickety, demo poznamky a reakce na obsah. Vyberte maximalne pet otazek, ktere se opakuji nebo nesou riziko spatneho slibu.
+
+**10-20 minut: ocisti vstupy**
+
+U kazde otazky odstrante jmena, firmy, screenshoty, konkretni castky, interni terminy a vse, co neni nutne pro pochopeni problemu. Zapisujte verejnou formulaci, ne citaci.
+
+**20-35 minut: napiste tri primarni odpovedi**
+
+Vyberte tri nejdulezitejsi otazky. Pro kazdou vyplnte vlastnika, kratkou odpoved, detailni odpoved, co neslibovat a kdy eskalovat.
+
+**35-45 minut: pridejte kanalove varianty**
+
+Z primarni odpovedi vytvorte emailovou vetu, demo vetu a FAQ vetu. Nezacinat od nuly. Varianta je jen zkraceni nebo prizpusobeni situaci.
+
+**45-55 minut: propojte s primarni URL**
+
+Pokud odpoved existuje verejne, pridejte odkaz. Pokud verejna odpoved chybi a tema se opakuje, zalozte backlog polozku pro FAQ, trust page, navod nebo changelog.
+
+**55-60 minut: nastavte udrzbu**
+
+Kazde odpovedi dejte stav, vlastnika a datum dalsi kontroly. Odpovedi bez vlastnika zustanou v draftu, i kdyby znely krasne.
+
+### Checklist: obsahova knihovna odpovedi
+
+- [ ] Vybral jsem maximalne pet opakovanych otazek s obchodni nebo provozni hodnotou.
+- [ ] Soukrome vstupy jsou prepsane na obecne problemy bez identifikatoru.
+- [ ] Kazda odpoved ma vlastnika a datum posledni kontroly.
+- [ ] Kazda odpoved rika, kde se smi pouzit.
+- [ ] Kazda odpoved obsahuje "co neslibovat".
+- [ ] U privacy, security, cen a SLA je jasne, kdy eskalovat.
+- [ ] Existuje jedna primarni verze odpovedi a kratke kanalove varianty.
+- [ ] Odpoved odkazuje na primarni URL, pokud verejny detail existuje.
+- [ ] Neplatne odpovedi jsou oznacene jako archiv nebo potrebuji aktualizaci.
+- [ ] Knihovna neobsahuje screenshoty, citace ani firemni detaily bez souhlasu.
+- [ ] Mesicni udrzba kontroluje nejpouzivanejsi odpovedi a sliby navic.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -18290,3 +18458,4 @@ Zkontroluj, ze verejny text neprozrazuje zdroj reakce, soukroma data, interni pr
 - 2026-08-03: Pridana prakticka priloha Distribucni checklist po publikaci bez platformni zavislosti za 45 minut vcetne distribucni karty, vlastnich kanalu, socialnich ukazek, UTM pravidel a checklistu.
 - 2026-08-03: Pridana prakticka priloha Reakce po publikaci bez ztraty kontextu za 45 minut vcetne reakcnich karet, trideni signalu, prevodu odpovedi na verejnou hodnotu a checklistu.
 - 2026-08-03: Pridana prakticka priloha Obsahove follow-upy z reakci bez recyklacniho autopilota za 60 minut vcetne vyberu reakce, bezpecneho prepisu, primarni URL, distribucni ukazky a checklistu.
+- 2026-08-04: Pridana prakticka priloha Obsahova knihovna odpovedi bez kopirovani soukromych zprav za 60 minut vcetne vlastniku odpovedi, hranic slibu, kanalovych variant a checklistu.
