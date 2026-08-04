@@ -21966,6 +21966,174 @@ Pokud neco musis zamlcet kvuli bezpecnosti, neschovavej tim dopad na uzivatele. 
 
 Codyho komentar: Dobry AI changelog je jako dobre zabradli. Nikdo si ho nechodi obdivovat, dokud neuklouzne. Pak je najednou nejdulezitejsi vec v baraku.
 
+---
+
+## AI provozni runbook bez hrdinske improvizace za 60 minut
+
+AI funkce v SaaS se neprovozuje stylem "kdyz se neco rozbije, najdeme toho cloveka, co psal prompt". To je krasna metoda, pokud mas rad nocni Slack, potici se support a screenshoty bez kontextu. Provozni runbook je kratky navod, co delat, kdyz se AI funkce chova divne, zdrazuje, zpomaluje, odmita odpovedet, odpovida prilis sebevedome nebo narazi na datovy problem.
+
+Dobry runbook neni stostrankova encyklopedie. Je to sada rozhodnuti predem: kdo je vlastnik, co je normalni stav, co je incident, co se muze vypnout, co se nesmi delat nikdy a jak komunikovat se zakaznikem bez paniky. Privacy-first hodnota se tu projevi naplno: pri problemu nesbiras vic dat jen proto, ze "debug" zni technicky. Sbiras jen to, co potrebujes k rozhodnuti, a po vyreseni to uklidis.
+
+OWASP Logging Cheat Sheet pripomina, ze logovani ma pomahat odhalit a vysetrit udalosti, ale zaroven nema zbytecne ukladat citliva data. U AI funkci to preloz jednoduse: loguj rozhodovaci metadata, ne cele soukrome rozhovory. Zdroj: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+
+### 1. Zacni jednou strankou pro jednu funkci
+
+Nepis runbook pro "AI v produktu". To je moc siroke. Napis runbook pro konkretni use-case:
+
+- AI navrh odpovedi v supportu.
+- AI shrnuti obchodniho callu.
+- RAG vyhledavani ve znalostni bazi.
+- AI klasifikace leadu.
+- AI pomocnik pro generovani reportu.
+
+Kazda funkce ma jiny dopad, jina data, jine vlastniky a jinou toleranci chyb. Support draft muze mit lidske schvaleni, zatimco automaticka zmena fakturacniho stavu musi mit mnohem tvrdsi pravidla. Kdyz to smichas do jedne tabulky, vytvoris dokument, ktery je presny asi jako horoskop pro Kubernetes.
+
+Minimalni hlavicka runbooku:
+
+```text
+AI runbook
+
+Funkce: AI navrh odpovedi v supportu
+Vlastnik produktu: support lead
+Technicky vlastnik: backend/on-call
+Datovy vlastnik: DPO nebo poverena osoba
+Feature flag: ai_support_draft_enabled
+Kill switch: vypnout flag + zakazat tool generate_support_draft
+Normalni stav: p95 latence do 8 s, validace pass nad 95 %, manual review pod 20 %
+Nikdy nedelat: neposilat cele tickety vendorovi v debug rezimu, neexportovat produkcni prompty do sdileneho chatu
+```
+
+Runbook musi byt citelny i pro cloveka, ktery funkci nevyvijel. Kdyz je potreba pet historickych debat k pochopeni jedne vety, neni to runbook. Je to archeologicky vykop.
+
+### 2. Popis normalni stav, ne jen katastrofy
+
+Incident poznas jen tehdy, kdyz vis, co je normalni. U AI funkci normalni stav neni jen "API vraci 200". Model muze odpovidat rychle a pritom spatne. Nebo spravne, ale draze. Nebo levne, ale s tak velkou nejistotou, ze support stejne vsechno prepisuje.
+
+Pro jednu funkci si nastav pet signalu:
+
+| Signal | Co sleduje | Priklad prahu |
+| --- | --- | --- |
+| Dostupnost | zda funkce odpovida | error rate nad 3 % za 15 minut |
+| Latence | zda odpoved prichazi v rozumnem case | p95 nad 8 sekund |
+| Validace | zda vystup projde pravidly aplikace | pass rate pod 95 % |
+| Lidska korekce | zda lide vystup vyrazne prepisuji | manual rewrite nad 40 % vzorku |
+| Naklady | zda pouziti neutika mimo plan | denni spend nad limit nebo tokeny nad budget |
+
+Prahy nejsou zakon fyziky. Jsou dohoda, kdy se ma nekdo podivat. Zacni hrube a postupne je zpresnuj podle reality. Hlavni je, aby kazdy signal mel rozhodnuti: ignorovat, sledovat, degradovat, vypnout, eskalovat.
+
+### 3. Debug bez sbirani vseho
+
+Nejvetsi pokuzeni pri AI problemu je zapnout plne logovani promptu. Nedelat. Vetsinou nepotrebujes cely obsah. Potrebujes vedet, ktery tok selhal, jaky typ vstupu prisel, jaka pravidla se spustila, jaky model nebo routing se pouzil, jestli byl dostupny RAG zdroj a proc vystup neprosel validaci.
+
+Minimalni debug zaznam:
+
+```text
+request_id: req_7f42
+tenant_id_hash: ten_91ab
+feature: ai_support_draft
+input_category: fakturace
+data_class: zakaznicka komunikace
+model_route: eu_text_default
+rag_sources_count: 3
+tool_calls: none
+validation_result: fail
+failure_reason: missing_required_disclaimer
+latency_ms: 6400
+token_bucket: medium
+created_at: 2026-08-04T22:00:00Z
+retention: 14 dni
+```
+
+Kdyz potrebujes obsah pro vysetreni, udelej to jako omezeny debug rezim:
+
+- zapina ho jen opravneny clovek,
+- plati jen pro konkretni tenant nebo request,
+- ma casovy limit,
+- obsah je redigovany, pokud to jde,
+- pristup se loguje,
+- po vyreseni se data mazou podle predem dane retence.
+
+**Codyho komentar:** Debug rezim bez expirace je jen hezky pojmenovany datovy sklad. A datovy sklad plny promptu je vec, kterou nechces vysvetlovat v pondeli rano ani pri auditu.
+
+### 4. Degradace pred vypnutim cele funkce
+
+Ne kazdy problem musi koncit velkym cervenym tlacitkem. Casto staci funkci omezit tak, aby produkt zustal pouzitelny a riziko kleslo.
+
+Degradacni rezimy pro AI funkci:
+
+- **Read-only rezim:** AI muze shrnovat nebo navrhovat, ale nesmi volat akce.
+- **Manual-review rezim:** vsechny vystupy musi schvalit clovek.
+- **Template rezim:** misto generovani se zobrazi predpripravena sablona.
+- **RAG-only rezim:** odpoved se sklada jen ze schvalenych zdroju a citaci.
+- **No-personal-data rezim:** funkce funguje jen nad obecnymi vstupy bez osobnich dat.
+- **Off rezim:** funkce se skryje a uzivatel dostane jasne vysvetleni.
+
+Kazdy rezim musi mit text pro uzivatele. Spatne: "AI error 500". Lepsi: "Navrh odpovedi je docasne vypnuty. Ticket muzete vyridit rucne; ulozena data se nemeni." Ano, je to mene sexy. Taky to nezpusobi, ze zakaznik zacne hadat, jestli mu robot sezral faktury.
+
+### 5. Komunikacni sablony pro support
+
+Support pri incidentu nepotrebuje prednasku o transformer architekture. Potrebuje tri vety, ktere jsou pravdive, klidne a neprestreli slib.
+
+Sablona pro drobne omezeni:
+
+```text
+Aktualne omezujeme AI navrhy odpovedi, protoze u casti dotazu vyzaduji castejsi rucni kontrolu. Vase ulozena data se nemeni a zakladni support funkce bezi dal. Jakmile overime opravu, AI navrhy znovu zapneme.
+```
+
+Sablona pro datovy dotaz:
+
+```text
+AI funkce u tohoto pripadu neprovedla zadnou automatickou akci. Kontrolujeme pouze provozni metadata potrebna k vysetreni problemu, neukladame kvuli tomu nove kopie obsahu ticketu. Pokud zjistime dopad na vase data, dame vam samostatne potvrzeni s rozsahem a dalsimi kroky.
+```
+
+Sablona pro obnovu:
+
+```text
+AI navrhy odpovedi jsou znovu dostupne. Oprava zavedla prisnejsi validaci vystupu a po dobu nasledujicich 24 hodin nechavame rizikove pripady v manual-review rezimu. Nemusite nic menit ve svem nastaveni.
+```
+
+Dobry support text rika, co se deje, co to znamena pro zakaznika, co delate ted a co zakaznik nemusi delat. Nepredstira absolutni jistotu, pokud ji nemas.
+
+### 6. 60min postup
+
+Prvni verzi runbooku zvladnes za hodinu:
+
+1. **0-10 minut:** vyber jednu AI funkci s nejvyssim dopadem na zakaznika.
+2. **10-20 minut:** vypln hlavicku: vlastnik, feature flag, kill switch, normalni stav, zakazane akce.
+3. **20-35 minut:** pridej pet signalu a rozhodnuti pro kazdy prah.
+4. **35-45 minut:** popis degradacni rezimy od nejmirnejsiho po vypnuti.
+5. **45-55 minut:** napis tri support sablony: omezeni, datovy dotaz, obnova.
+6. **55-60 minut:** zkontroluj privacy: co se loguje, kdo ma pristup, kdy se debug data mazou.
+
+Vysledek uloz do interni dokumentace vedle release karty a incident runbooku. Pokud mas on-call system, pridej odkaz primo do alertu. Alert bez odkazu na runbook je jen budik, ktery umi rict "hodne stesti".
+
+### 7. Priklad: AI shrnuti obchodniho callu
+
+Mas SaaS, ktery umi ze zaznamu callu navrhnout shrnuti a dalsi kroky. Funkce ma lidske schvaleni, ale pracuje s citlivym obchodnim kontextem.
+
+Runbook rozhodnuti:
+
+- Pri nedostupnosti modelu se zobrazi sablona pro rucni poznamku.
+- Pri podezreni na spatny jazyk nebo halucinaci se vystup ulozi jako draft, ne jako finalni zapis.
+- Pri chybe redakce osobnich dat se vypina zpracovani novych zaznamu a zustava jen rucni upload poznamek.
+- Debug obsah callu se nezapina globalne; povoluje se jen pro konkretni request po schvaleni vlastnikem.
+- Zakaznik vidi, zda bylo shrnuti AI navrh, nebo rucni poznamka cloveka.
+
+Tady je privacy-first pointa: schopnost rychle vypnout nebo omezit AI neni slabost produktu. Je to duvera v praxi. Zakaznik nemusi verit v magii. Musi videt, ze mate brzdy, zrcatka a nekoho u volantu.
+
+### Checklist: AI provozni runbook
+
+- [ ] Kazda dulezita AI funkce ma vlastni jednostrankovy runbook.
+- [ ] Runbook rika vlastnika produktu, technickeho vlastnika a datoveho vlastnika.
+- [ ] Je popsany normalni stav vcetne dostupnosti, latence, validace, lidskych korekci a nakladu.
+- [ ] Debug zaznam obsahuje metadata, ne cele produkcni prompty.
+- [ ] Plny debug rezim ma rozsah, casovy limit, pristupovy log a retenci.
+- [ ] Existuji degradacni rezimy pred uplnym vypnutim funkce.
+- [ ] Kill switch je konkretni technicka akce, ne prani v dokumentu.
+- [ ] Support ma pripravene sablony pro omezeni, datovy dotaz a obnovu.
+- [ ] Zakazane akce jsou napsane explicitne.
+- [ ] Runbook je odkazany z alertu, release karty nebo interni dokumentace.
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -22211,3 +22379,4 @@ Codyho komentar: Dobry AI changelog je jako dobre zabradli. Nikdo si ho nechodi 
 - 2026-08-04: Pridana prakticka priloha Prompt injection a tool calling bez slepe duvery za 60 minut vcetne vrstev duvery, schema toolu, validaci, rizikoveho filtru, prikladu exportu dat a checklistu.
 - 2026-08-04: Pridana prakticka priloha AI opravneni a akce bez autonomniho kovboje za 60 minut vcetne dopadove klasifikace, tool karty, kratkodobych povolenek, potvrzeni cloveka, testovaci matice a checklistu.
 - 2026-08-04: Pridana prakticka priloha AI feedback loop bez sbirani promptu za 60 minut vcetne minimalniho feedback logu, prevodu chyb na eval pripady, retence, tydenniho review a checklistu.
+- 2026-08-04: Pridana prakticka priloha AI provozni runbook bez hrdinske improvizace za 60 minut vcetne normalniho stavu, debug metadat, degradacnich rezimu, support sablon a checklistu.
