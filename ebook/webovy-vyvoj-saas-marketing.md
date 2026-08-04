@@ -18990,6 +18990,168 @@ Rozhodnuti po konci:
 
 ---
 
+## AI funkce v SaaS bez compliance prekvapeni za 60 minut
+
+AI funkce se do SaaS produktu casto vplizi nenapadne. Nejdriv je to "jen shrnuti ticketu", potom "jen navrh odpovedi", potom "jen automaticka kvalifikace leadu" a najednou produkt dela rozhodnuti, ktera nikdo poradne nepopsal. U privacy-first SaaS je spravny postup opacny: nejdriv pojmenuj pouziti, data, riziko a lidskou kontrolu, teprve potom vybirej model nebo API.
+
+EU AI Act dava evropsky ramec pro AI systemy a pracuje s rizikovym pristupem. Oficialni text narizeni je na EUR-Lexu: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng. Evropska komise shrnuje AI Act a jeho cil podporovat duveryhodnou AI pri ochrane zdravi, bezpecnosti a zakladnich prav zde: https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai. Prakticky preklad pro maly SaaS: u kazde AI funkce musis vedet, co dela, komu to muze ublizit, jaka data bere a kdo nese odpovednost za vysledek.
+
+Tahle priloha neni pravni posouzeni. Je to 60min produktovy filtr, ktery zabrani tomu, aby se AI feature spustila jako hezka demo vec a pozdeji se zjistilo, ze posila zakaznicka data mimo kontrolu, vytvari neobhajitelne doporuceni nebo slibuje automatizaci, kterou tym neumi vysvetlit.
+
+**Codyho komentar:** AI funkce nema byt tajna mistnost v produktu. Kdyz ji neumim vysvetlit zakaznikovi, supportu a vlastnimu budoucimu ja, neni pripravena. Magie je fajn v pohadkach, horsi v audit logu.
+
+### 1. Pojmenuj use-case jako praci, ne technologii
+
+Spatny zacatek:
+
+> Pridame AI do CRM.
+
+Lepsi zacatek:
+
+> AI navrhne shrnuti poslednich tri support zprav u zakaznika, aby obchodnik pred callem rychle videl otevrene tema. Navrh se neodesila automaticky a obchodnik ho muze upravit nebo ignorovat.
+
+Jedna veta ma obsahovat:
+
+- kdo funkci pouziva,
+- jaka vstupni data vidi,
+- jaky vystup vytvari,
+- kdo vystup kontroluje,
+- co se s vystupem nesmi stat automaticky.
+
+Tabulka prvniho filtru:
+
+| Otazka | Dobra odpoved |
+| --- | --- |
+| Kdo je uzivatel AI funkce? | konkretni role, napriklad support nebo admin |
+| Koho se vystup tyka? | account, kontakt, kandidat, koncovy uzivatel, interni tym |
+| Je vystup informacni, nebo rozhodovaci? | informacni navrh je obvykle mensi riziko nez automaticke rozhodnuti |
+| Muze vystup ovlivnit cenu, pristup, support prioritu nebo smlouvu? | pokud ano, patri sem silnejsi review |
+| Lze vystup vysvetlit a zkontrolovat clovekem? | pokud ne, nespoustej to jako duverovou funkci |
+
+### 2. Rozdel AI funkce podle dopadu
+
+Pro maly SaaS si vystacis se ctyrmi internimi urovnemi. Nejde o oficialni pravni klasifikaci, ale o prakticky produktovy semafor.
+
+| Uroven | Priklad | Pravidlo |
+| --- | --- | --- |
+| A - interni pomoc | shrnuti vlastnich poznamek, navrh changelogu | bez zakaznickych dat nebo s anonymizaci |
+| B - asistovana prace se zakaznickym kontextem | shrnuti support ticketu, navrh odpovedi | lidska kontrola pred pouzitim |
+| C - doporuceni s obchodnim dopadem | lead priorita, churn riziko, upsell signal | vysvetlitelne vstupy, audit, pravo ignorovat |
+| D - automaticke rozhodnuti nebo citliva oblast | blokace uctu, cena, pristup, personalni nebo financni dopad | zastavit a udelat pravni, bezpecnostni a produktove posouzeni |
+
+Urovne A a B se daji casto spustit rychle, pokud je datovy kontrakt cisty. Uroven C potrebuje opatrnost, protoze "jen doporuceni" umi v realite zmenit obchodni chovani. Uroven D nespada do hodinoveho experimentu. Tam se nehraje na rychlost.
+
+### 3. Datovy kontrakt AI funkce
+
+AI kontrakt musi byt konkretnejsi nez obecne "posilame data modelu". Vypln:
+
+```text
+AI funkce:
+
+Ucel:
+
+Uzivatel funkce:
+
+Vstupni data:
+
+Vystup:
+
+Zakazana vstupni data:
+
+Dodavatel nebo model:
+
+Region zpracovani:
+
+Uklada dodavatel vstupy/vystupy:
+
+Pouziva dodavatel data k treninku:
+
+Lidska kontrola:
+
+Auditni zaznam:
+
+Retence:
+
+Vypnuti funkce:
+```
+
+Zakazana vstupni data napis natvrdo. Napriklad:
+
+- cele exporty zakaznicke databaze,
+- hesla, tokeny, API klice,
+- platebni udaje,
+- zdravotni nebo jine citlive osobni udaje, pokud pro ne neni jasny posudek,
+- soukrome zpravy mimo ucel podpory,
+- data tretich osob, ktera uzivatel nema pravo do funkce vlozit.
+
+Pokud AI funkce potrebuje obsah zakaznickych dat, zmensi vstup na minimum. Misto cele historie workspace posli posledni tri relevantni udalosti. Misto celeho support vlakna posli anonymizovane shrnuti. Misto volneho exportu posli strukturovane pole, ktere ma jasny ucel.
+
+### 4. Lidska kontrola neni dekorace
+
+"Human in the loop" neznamena, ze nekde vedle tlacitka stoji clovek a doufa. Musi byt jasne, co kontroluje a podle ceho.
+
+Prakticke vzory:
+
+| Funkce | Lidska kontrola |
+| --- | --- |
+| Navrh odpovedi supportu | odpoved se neposle bez potvrzeni clovekem |
+| Shrnuty call | obchodnik muze opravit shrnuti pred ulozenim do CRM |
+| Lead priorita | skore je jen signal, ne automaticke vyrizeni leadu |
+| Navrh changelogu | produktovy vlastnik overi fakta proti release diffu |
+| Detekce rizika churnu | customer success vidi vstupy a muze signal oznacit jako spatny |
+
+U vystupu zobrazuj primerenou nejistotu. AI navrh neni fakt jen proto, ze je napsany sebevedome. Pokud system nevi, ma rict "nenasel jsem dost kontextu", ne si domyslet realitu. V B2B SaaS je lepsi prazdne misto nez presvedciva halucinace s firemnim tonem.
+
+### 5. Verejne sliby a produktove mikrocopy
+
+Kdyz AI funkci ukazujes zakaznikovi, rekni kratce:
+
+- k cemu slouzi,
+- zda je vystup navrh nebo automaticke rozhodnuti,
+- jaka data se pouziji,
+- zda muze uzivatel funkci vypnout nebo ignorovat,
+- kde najde dalsi informace o zpracovani dat.
+
+Priklad mikrocopy:
+
+> Cody muze navrhnout shrnuti ticketu z textu, ktery uz je v tomto support vlakne. Navrh se neodesila automaticky a muzete ho pred ulozenim upravit.
+
+Priklad pro trust page:
+
+> AI asistovane funkce pouzivame jen pro jasne popsane produktove ucely. Zakaznicka data neposilame do AI nastroju bez datoveho kontraktu, kontroly dodavatele a pravidel retence.
+
+Vyhni se vetam jako "plne automaticky rozhodujeme", pokud to neni opravdu pravda a nemas vyresene dopady. A vyhni se i opacne mlze typu "AI muze zlepsit vase procesy". To rika asi tolik jako nalepka "obsahuje technologii".
+
+### 6. 60min postup
+
+| Cas | Ukol | Vystup |
+| --- | --- | --- |
+| 0-10 min | Popsat use-case jednou vetou | kdo, vstup, vystup, kontrola |
+| 10-20 min | Zaradit dopad A-D | interni semafor rizika |
+| 20-35 min | Vyplnit datovy kontrakt | data, dodavatel, region, retence |
+| 35-45 min | Navrhnout lidskou kontrolu a audit | kdo potvrzuje, co se loguje |
+| 45-55 min | Napsat mikrocopy a hranice slibu | text do UI/trust page |
+| 55-60 min | Rozhodnout: spustit pilot, upravit, nebo zastavit | dalsi krok s vlastnikem |
+
+Pokud v kroku 20 az 35 nevis, kde dodavatel zpracovava data nebo zda pouziva vstupy k treninku, experiment se nespousti se zakaznickymi daty. Muze bezet jen s anonymnim, syntetickym nebo internim testovacim vstupem. Ano, zpomali to. Mnohem mene nez vysvetlovat zakaznikovi, proc se jeho data objevila v nastroji, ktery nikdo nezkontroloval.
+
+### Checklist: AI funkce bez compliance prekvapeni
+
+- [ ] AI use-case je popsany jako konkretni prace, ne jako obecna technologie.
+- [ ] Je jasne, kdo funkci pouziva a koho vystup ovlivnuje.
+- [ ] Funkce je zarazena do interni urovne dopadu A-D.
+- [ ] Existuje datovy kontrakt vcetne vstupu, vystupu, dodavatele, regionu a retence.
+- [ ] Je napsane, jaka data se do AI funkce nesmi posilat.
+- [ ] Dodavatel je zkontrolovany podle treninku na datech, ulozeni, subdodavatelu a vypnuti.
+- [ ] Vystup, ktery muze ovlivnit zakaznika, ma lidskou kontrolu.
+- [ ] Auditni zaznam neobsahuje zbytecny obsah promptu ani citlive vstupy.
+- [ ] UI mikrocopy vysvetluje, zda jde o navrh nebo automaticke rozhodnuti.
+- [ ] Trust page nebo dokumentace odpovida realnemu pouziti AI.
+- [ ] Pilot se nespousti se zakaznickymi daty, dokud nejsou vyresene datove hranice.
+- [ ] Po pilotu existuje rozhodnuti: ponechat, omezit, prepracovat, nebo vypnout.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -19207,3 +19369,4 @@ Rozhodnuti po konci:
 - 2026-08-04: Pridana prakticka priloha Signal radar bez scrollovani socialnich siti za 45 minut vcetne primarnich zdroju, karet signalu, konkurencniho monitoringu, tydniho review a checklistu.
 - 2026-08-04: Pridana prakticka priloha Rozhodovaci briefing ze signalu bez meetingove mlhy za 45 minut vcetne sablony, prikladu privacy dotazu, 45min postupu a checklistu.
 - 2026-08-04: Pridana prakticka priloha Experiment karta po briefingu bez datoveho dluhu za 60 minut vcetne datoveho kontraktu, stop pravidel, sablony, prikladu zkraceni formulare a checklistu.
+- 2026-08-04: Pridana prakticka priloha AI funkce v SaaS bez compliance prekvapeni za 60 minut vcetne use-case filtru, datoveho kontraktu, lidske kontroly, mikrocopy a checklistu.
