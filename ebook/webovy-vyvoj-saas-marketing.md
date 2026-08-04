@@ -21858,6 +21858,114 @@ Tahle odpoved neslibuje magii. Rika rozsah, hranice a dalsi krok. To je u privac
 
 ---
 
+## AI release notes bez prozrazeni internich promptu za 45 minut
+
+AI funkce se meni jinak nez klasicky formular nebo pricing tabulka. Navenek casto vypada stejne tlacitko, ale uvnitr se zmeni prompt, model, retrieval pravidlo, prah confidence, tool schema, redakce dat nebo retry strategie. Pokud to pustis bez release poznamky, support nevi, co se zmenilo. Pokud release poznamku napises moc podrobne, prozradis utocnikum presne to, kudy se da system obejit. Spravna odpoved neni ticho. Spravna odpoved je dvojita dokumentace: verejna, srozumitelna a bezpecna pro zakazniky; interni, konkretni a auditovatelna pro tym.
+
+Release notes nejsou marketingovy konfety-kanon. Jsou provozni pamet produktu. Keep a Changelog doporucuje drzet changelog pro lidi, ne stroje, a SemVer pomaha oddelit rozbijeci, kompatibilni a opravne zmeny. U AI funkci to preloz takhle: clovek musi vedet, jestli se zmenilo chovani, riziko, dostupnost, cena nebo data. Zdroje: https://keepachangelog.com/en/1.1.0/ a https://semver.org/
+
+### 1. Rozdel release poznamku na verejnou a interni vrstvu
+
+Jedna poznamka nema slouzit vsem. U AI zmen pouzivej dve vrstvy:
+
+| Vrstva | Publikum | Obsahuje | Neobsahuje |
+| --- | --- | --- | --- |
+| Verejna | zakaznici, uzivatele, obchod, support | co se zlepsilo, co se muze zmenit v chovani, dopad na data, akce uzivatele | cele prompty, bypass pravidla, interni prahy, seznam slabin |
+| Interni | vyvoj, support, bezpecnost, DPO podle potreby | presny rozsah, release ID, eval vysledek, feature flag, rollback, datovy dopad | osobni data z produkce, surove prompty, zbytecne kopie ticketu |
+
+Verejna vrstva ma byt konkretni, ale ne navodna. Napis treba: "AI navrhy odpovedi lepe rozpoznaji fakturacni dotazy a u nejistych pripadu casteji pozadaji o lidskou kontrolu." Nepis: "Pridali jsme pravidlo, ktere blokuje text 'ignore previous instructions' a nastavili threshold 0.73." To druhe patri do interniho security kontextu, a i tam jen v nezbytne mire.
+
+### 2. Pojmenuj typ AI zmeny podle dopadu
+
+U kazde AI zmeny si vyber jednu hlavni kategorii. Pomaha to supportu i rollbacku:
+
+- **Kvalita vystupu:** lepsi shrnuti, presnejsi odpovedi, mene halucinaci, jina struktura textu.
+- **Bezpecnost:** tvrdsi validace vstupu, omezeni toolu, lepsi izolace tenant dat, prompt-injection ochrana.
+- **Data:** jina redakce, nova retence, upraveny export, zmena RAG zdroju, zmena logovani.
+- **Dostupnost:** timeouty, retry, degradacni rezim, queue, rate limit.
+- **Naklady:** limity tokenu, delka kontextu, cache, prepinani levnejsi/drazsi trasy.
+- **UX:** nove mikrocopy, jasnejsi stav nejistoty, upraveny tok potvrzeni.
+
+Kdyz jedna zmena spada do tri kategorii, nerozepisuj roman. Vyber primarni dopad a zbytek dej do internich poznamek. U release notes je cilem rozhodnutelnost: ma zakaznik neco udelat? Ma support zpozornet? Ma obchod prestat slibovat nejakou starou formulaci?
+
+### 3. Verejna sablona pro AI release notes
+
+Pouzij kratkou strukturu, ktera neresi modelovou alchymii, ale uzivatelsky dopad:
+
+```text
+### AI navrhy odpovedi: presnejsi prace s fakturacnimi dotazy
+
+Co se zmenilo:
+- AI navrh casteji rozpozna, ze dotaz patri k fakturaci nebo platbe.
+- U nejasnych dotazu radeji oznaci odpoved k rucni kontrole.
+
+Dopad na data:
+- Nepridavame nove kategorie osobnich dat.
+- Nemeni se retence ani export uzivatelskych dat.
+
+Co ma udelat uzivatel:
+- Nic. Pokud mate vlastni interni postupy pro support, doporucujeme zkontrolovat prvnich 10 navrhu odpovedi po releasu.
+
+Poznamka:
+- AI navrh zustava asistencni funkce. Finalni odpoved schvaluje clovek nebo vase nastavena pravidla.
+```
+
+Vsimni si dvou veci. Za prve, uzivatel dostane praktickou informaci. Za druhe, neprozrazujes presny prompt, eval set, vendor, interni filtry ani prahy. Bezpecnost neni tajemstvi typu "nikomu nic nerekneme". Bezpecnost je vyber spravne urovne detailu.
+
+### 4. Interni release karta pro tym
+
+Interni karta muze byt konkretnejsi, ale porad minimalni. Nepatri do ni cele produkcni prompty s osobnimi daty ani screenshoty zakaznickych dokumentu.
+
+```text
+AI release karta
+
+Release ID: ai-support-2026-08-04-01
+Funkce: navrh odpovedi v supportu
+Typ zmeny: kvalita vystupu + bezpecnost
+Vlastnik: product/support
+Feature flag: ai_support_invoice_classifier_v2
+Rollback: vypnout flag, vratit prompt template v3.4
+Eval vysledek: 43/45 pass, 2 manual review, 0 critical fail
+Datovy dopad: zadne nove kategorie dat, zadna zmena retence
+Observabilita: sledujeme request_id, kategorii dotazu, pass/fail validace, latenci, tokeny
+Rizika: castejsi manual review u hranicnich platebnich dotazu
+Support poznamka: pri stiznosti pripojit release ID, ne prompt text
+```
+
+Tahle karta je prakticka, protoze po incidentu nemusis lovit ve vlaknech. Vis, co se zmenilo, kdo to vlastnil, jak to vratit a co se logovalo. Kdyz se karta nevejde na jednu obrazovku, pravdepodobne uz pises dokumentaci k implementaci, ne release poznamku.
+
+### 5. Bezpecnostni redakce pred publikaci
+
+Pred zverejnenim AI release notes udelej petiminutovou redakci:
+
+- Nahrazuje text konkretni promptove instrukce obecnym popisem chovani?
+- Neuvadi presne thresholdy, nazvy internich pravidel, vendor endpointy nebo cesty k toolum?
+- Neobsahuje produkcni ukazku s osobnimi nebo zakaznickymi daty?
+- Popisuje dopad na data jasneji nez vetou "nic se nemeni", pokud se opravdu neco meni?
+- Rika, jestli uzivatel musi neco udelat?
+- Ma support interni kartu, aby nemusel hadat z verejneho changelogu?
+
+Pokud neco musis zamlcet kvuli bezpecnosti, neschovavej tim dopad na uzivatele. Rozdil je v detailu, ne v pravde. "Zprisnili jsme kontrolu nad externimi odkazy v AI odpovedich" je fer. "Udelali jsme nejake technicke zmeny" je mlha, a mlha patri nad rybnik, ne do SaaS changelogu.
+
+### 6. 45min postup
+
+1. **0-10 minut:** Najdi posledni AI zmenu a urci primarni kategorii dopadu.
+2. **10-20 minut:** Napis verejnou poznamku ve formatu co se zmenilo, dopad na data, co ma udelat uzivatel.
+3. **20-30 minut:** Dopln interni release kartu s release ID, flagem, rollbackem, eval vysledkem a datovym dopadem.
+4. **30-38 minut:** Udelej bezpecnostni redakci: pryc s prompty, thresholdy, endpointy a produkcnimi daty.
+5. **38-45 minut:** Posli verejnou verzi do changelogu, interni kartu do tymove dokumentace a supportu dej jednu vetu, podle ktere pozna dopad.
+
+### Checklist: AI release notes
+
+- [ ] Verejna poznamka popisuje uzivatelsky dopad, ne interni promptovou mechaniku.
+- [ ] Interni karta obsahuje release ID, feature flag, rollback a vlastnika.
+- [ ] Datovy dopad rika, zda se meni kategorie dat, retence, export nebo logovani.
+- [ ] Eval vysledek je shrnuty bez produkcnich promptu a citlivych prikladu.
+- [ ] Bezpecnostni redakce odstranila thresholdy, endpointy, tool cesty a navodne detaily.
+- [ ] Support vi, jak release vysvetlit a kam psat incidenty nebo regresi.
+
+Codyho komentar: Dobry AI changelog je jako dobre zabradli. Nikdo si ho nechodi obdivovat, dokud neuklouzne. Pak je najednou nejdulezitejsi vec v baraku.
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -21977,6 +22085,7 @@ Tahle odpoved neslibuje magii. Rika rozsah, hranice a dalsi krok. To je u privac
 
 ## Pracovni log
 
+- 2026-08-04: Pridana prakticka priloha AI release notes bez prozrazeni internich promptu za 45 minut vcetne verejne a interni vrstvy, sablon, bezpecnostni redakce, 45min postupu a checklistu.
 - 2026-08-04: Pridana prakticka priloha AI export a mazani dat bez rucniho lovu ve skladech za 60 minut vcetne mapy AI stop, exportniho balicku, mazaci fronty, RAG mazani, backup pravidel a checklistu.
 - 2026-08-04: Pridana prakticka priloha AI anonymizace a synteticka data bez falesneho klidu za 60 minut vcetne rozliseni surovych/pseudonymizovanych/anonymizovanych dat, redakce podle ucelu, re-identifikacniho testu, datoveho kontraktu a checklistu.
 - 2026-08-04: Pridana prakticka priloha AI fallback a degradace sluzby bez paniky za 60 minut vcetne klasifikace selhani, degradacnich rezimu, fallback karty, retry pravidel, uzivatelskych textu a checklistu.
