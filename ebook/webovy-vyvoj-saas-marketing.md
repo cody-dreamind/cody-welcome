@@ -19512,6 +19512,179 @@ Takovy test je cennejsi nez dalsich deset krasnych prikladu. Ne protoze je drama
 
 ---
 
+## RAG znalostni baza bez vysavani internich dat za 60 minut
+
+Retrieval augmented generation, zkracene RAG, zni jako elegantni odpoved na firemni chaos: vezmeme dokumenty, dame je modelu k dispozici a on zacne odpovidat presneji. Jenze RAG neni kouzelna knihovna. Je to novy datovy tok, nove opravneni, nova indexace, nova cache a novy zpusob, jak omylem ukazat cast interniho kontextu cloveku, ktery ho videt nema.
+
+OWASP Top 10 for LLM and Generative AI Applications radi mezi dulezita rizika mimo jine prompt injection, uniky citlivych informaci, nadmernou autonomii a spatne zachazeni s vystupy: https://genai.owasp.org/llm-top-10/. NIST AI 600-1, generative AI profile k AI RMF, doporucuje pro generativni AI pracovat se zretelnymi rolemi, testovanim, merenim a rizikovym rizenim pred nasazenim: https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence. Prakticky preklad pro maly SaaS: RAG spoustej az ve chvili, kdy vis, z ceho smi odpovidat, komu smi odpovidat a co musi udelat, kdyz odpoved ve zdrojich neni.
+
+**Codyho komentar:** RAG casto neselze proto, ze model neumi cist. Selze proto, ze mu firma nasype do knihovny vsechno od verejne dokumentace po interni poznamky z obchodu a pak se divi, ze odpovida jako clovek, ktery omylem dostal pristup na sdileny disk.
+
+### 1. Zacni katalogem zdroju, ne vektorovou databazi
+
+Pred vyberem technologie sepis, jake zdroje maji do znalostni baze vstupovat. U kazdeho zdroje potrebujes vlastnika, citlivost, aktualnost a pravidlo pro pristup. Bez toho bude index jen hezci sklad.
+
+Minimalni katalog:
+
+| Zdroj | Vlastnik | Citlivost | Kdo smi pouzit | Aktualizace | Retence |
+| --- | --- | --- | --- | --- | --- |
+| Verejna dokumentace | Product | verejne | vsichni | pri releasu | dokud je URL aktivni |
+| Help centrum | Support | verejne / zakaznicke | zakaznici podle planu | tydne | podle publikace |
+| Interni runbooky | Ops | interni | interni tym | mesicne | do nahrazeni |
+| Security odpovedi | Security | citlive | sales/support po roli | pri zmene | podle trust procesu |
+| Zakaznicke tickety | Support | osobni / zakaznicke | jen opravneny account | omezeny vyrez | kratka retence |
+
+Prvni pravidlo: nemichej verejne zdroje, interni zdroje a zakaznicka data v jednom indexu bez pristupove vrstvy. Kdyz ma AI odpovidat verejnemu navstevnikovi webu, potrebuje verejne zdroje. Kdyz pomaha supportu, muze mit interni zdroje podle role. Kdyz shrnuje data konkretniho zakaznika, musi respektovat jeho account a opravneni.
+
+### 2. Chunk neni jen technicky detail
+
+Chunk je kus textu, ktery system vyhleda a posle modelu jako kontext. Spatny chunk udela spatnou odpoved i z dobreho modelu.
+
+Prakticka pravidla:
+
+- Jeden chunk ma obsahovat jednu myslenku nebo jeden postup.
+- U kazdeho chunku ukladej zdrojovou URL nebo interni dokument ID.
+- Ukladej datum posledni aktualizace a vlastnika.
+- Neindexuj nepotrebne prilohy, paticky, podpisy emailu a duplicity.
+- Citlive dokumenty oznac stitkem jeste pred indexaci.
+- Pri odpovedi ukaz zdroje, ze kterych system cerpal.
+
+**Priklad spatneho chunku:**
+
+Do indexu se ulozi cela stranka "Security FAQ" vcetne zastarale odpovedi, internich poznamek a tri ruznych verzi informace o zalohach. Model potom vybere cast, ktera se mu hodi, ne tu, ktera je aktualni.
+
+**Lepsi varianta:**
+
+Kazda odpoved security FAQ je samostatny blok:
+
+```text
+id: security-backups-2026-08
+title: Zalohy a obnova
+visibility: sales_internal
+owner: ops
+last_reviewed: 2026-08-04
+source: /trust/security-faq#zalohy
+content: [schvalena odpoved]
+```
+
+Tohle neni jen poradek. Je to zpusob, jak dohledat, proc AI odpovedela prave takhle.
+
+### 3. Pristupova kontrola musi byt pred vyhledanim
+
+Nejbezpecnejsi je filtrovat zdroje pred retrievalem, ne az po vygenerovani odpovedi. Pokud uzivatel nema pravo videt dokument, nema se dostat ani do kandidatnich chunku pro model.
+
+Kontrola pred vyhledanim:
+
+- Jakou roli ma uzivatel?
+- Ke kteremu accountu patri?
+- Je dotaz verejny, interni, nebo zakaznicky?
+- Ktere kolekce dokumentu jsou pro nej povolene?
+- Existuje casove omezeni pristupu?
+- Je potreba auditni zaznam?
+
+Priklad:
+
+Support agent resi ticket zakaznika Alfa. RAG muze hledat ve verejne dokumentaci, internich runboocich pro support a ticketech zakaznika Alfa, pokud to pravidla dovoluji. Nesmi hledat v ticketech zakaznika Beta ani v obchodnich poznamkach, ktere nejsou pro support urcene. To plati i kdyby dotaz znel "najdi podobny problem u jinych zakazniku". Podobnost neni opravneni.
+
+### 4. Odpoved musi umet rict "ve zdrojich to neni"
+
+RAG ma svadet k sebejistym odpovedim, protoze vzdycky nejaky chunk najde. To je nebezpecne. Dobra funkce ma jasne rozlisit:
+
+- odpoved primo podlozenou zdrojem,
+- castecne podlozenou odpoved,
+- odpoved mimo dostupne zdroje,
+- dotaz, ktery vyzaduje cloveka.
+
+Mikrocopy pro nejistotu:
+
+```text
+Ve dostupnych zdrojich jsem nenasel dost informaci pro spolehlivou odpoved.
+Muzu ukazat nejblizsi relevantni zdroje, nebo predat dotaz cloveku.
+```
+
+Mikrocopy pro interni navrh:
+
+```text
+Navrh odpovedi podle interni znalostni baze. Pred odeslanim zkontroluj fakta, pristupy a pripadne zakaznicke detaily.
+```
+
+U zakaznicke komunikace nenech AI posilat odpoved automaticky, dokud nemas evaly, prava, logovani, fallback a jasne vymezeny nizky dopad. Vetsina malych SaaS tymu zacne lepe s internim navrhem pro cloveka.
+
+### 5. Aktualizace a mazani jsou soucast funkce
+
+Znalostni baza starne rychleji nez homepage po rebrandu. Ceny, limity, nazvy funkci, SLA, subprocesori, integrace a pravni texty se meni. Pokud RAG nema udrzbu, brzy bude odpovidat sebejiste a spatne.
+
+Minimalni provozni rytmus:
+
+- Pri kazdem releasu aktualizuj dokumenty, ktere popisuji zmenene funkce.
+- Jednou tydne zkontroluj top nezodpovezene dotazy a spatne zdroje.
+- Jednou mesicne projdi citlive kolekce a pristupy.
+- Pri zmene dodavatele aktualizuj trust/security odpovedi pred dalsim pouzitim.
+- Pri smazani dokumentu over, ze zmizel i z indexu a cache.
+- Pri ukonceni zakaznika oddel, co se maze, co zustava agregovane a proc.
+
+RAG bez mazani je datovy sklad s chatbotem na vrchu. To neni produktova funkce, to je budouci incident s lepsim UI.
+
+### 6. 60min postup
+
+| Cas | Ukol | Vystup |
+| --- | --- | --- |
+| 0-10 min | Vybrat jeden RAG use-case | komu pomaha a jake rozhodnuti podporuje |
+| 10-20 min | Sepsat katalog zdroju | zdroj, vlastnik, citlivost, pristup |
+| 20-30 min | Navrhnout chunk metadata | id, zdroj, viditelnost, datum, vlastnik |
+| 30-40 min | Nastavit pristupove pravidlo | co se filtruje pred vyhledanim |
+| 40-50 min | Napsat odpovedni hranice | nejistota, citace zdroju, predani cloveku |
+| 50-60 min | Dopsat testy a uklid | 10 eval dotazu, retence, reindexace |
+
+Kdyz v hodine zjistis, ze neumis rozlisit verejne, interni a zakaznicke zdroje, nespoustej RAG. Nejsi pomaly. Jen jsi prave nasel skutecny problem.
+
+### 7. Priklad: support RAG pro B2B SaaS
+
+Use-case:
+
+```text
+AI ma support agentovi navrhnout odpoved na dotaz zakaznika podle help centra a internich runbooku.
+Nevyuziva data jinych zakazniku.
+Nevytvari odpoved automaticky zakaznikovi.
+U kazde odpovedi ukaze zdroje.
+Kdyz zdroj chybi nebo si odporuje, rekne to.
+```
+
+Prvni eval dotazy:
+
+- Zakaznik se pta na verejne popsany limit.
+- Zakaznik se pta na funkci, ktera je v bete jen pro vybrane accounty.
+- Dotaz obsahuje tajemstvi vlozene omylem.
+- Interni runbook a verejna dokumentace si odporuji.
+- Zakaznik chce informaci o datech jineho zakaznika.
+- Dotaz se tyka pravniho posouzeni, ktere ma resit clovek.
+- Zdrojova dokumentace je starsi nez posledni release.
+
+Stop pravidla:
+
+- Zadna odpoved nesmi pouzit zdroj mimo povolene kolekce.
+- Zadna odpoved nesmi zobrazit plne tajemstvi.
+- Pri konfliktu zdroju musi odpoved zminit nejistotu.
+- Pri chybejicim zdroji musi odpoved odmitnout vymysleni.
+- Vystup musi obsahovat zdroj nebo vetu, ze zdroj chybi.
+
+### Checklist: RAG znalostni baza bez datoveho vysavace
+
+- [ ] RAG ma jeden jasny use-case a vlastnika.
+- [ ] Existuje katalog zdroju s citlivosti, pristupy a retenci.
+- [ ] Verejne, interni a zakaznicke zdroje nejsou smichane bez pristupove vrstvy.
+- [ ] Pristupova kontrola probiha pred vyhledanim relevantnich chunku.
+- [ ] Chunky maji zdroj, datum aktualizace, vlastnika a viditelnost.
+- [ ] Index neobsahuje podpisy emailu, nepotrebne prilohy ani historicke duplicity.
+- [ ] Odpovedi ukazuji zdroje nebo jasne rikaji, ze zdroj chybi.
+- [ ] Funkce umi priznat nejistotu a predat dotaz cloveku.
+- [ ] Eval set obsahuje konflikty zdroju, citliva data, prompt injection a chybejici zdroje.
+- [ ] Mazani dokumentu se promita do indexu i cache.
+- [ ] Pristupy k RAG administraci jsou oddelene podle role.
+- [ ] Po spusteni existuje pravidelny review rytmus pro zdroje, spatne odpovedi a retenci.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -19617,6 +19790,7 @@ Takovy test je cennejsi nez dalsich deset krasnych prikladu. Ne protoze je drama
 - CISA Known Exploited Vulnerabilities Catalog: https://www.cisa.gov/known-exploited-vulnerabilities-catalog
 - NIST SP 800-218, Secure Software Development Framework (SSDF) Version 1.1: https://csrc.nist.gov/pubs/sp/800/218/final
 - NIST AI Risk Management Framework: https://www.nist.gov/itl/ai-risk-management-framework
+- NIST AI 600-1, Artificial Intelligence Risk Management Framework: Generative Artificial Intelligence Profile: https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence
 - Bing Webmaster Tools, URL Inspection: https://www.bing.com/webmasters/help/url-inspection-55a30305
 
 ---
@@ -19735,3 +19909,4 @@ Takovy test je cennejsi nez dalsich deset krasnych prikladu. Ne protoze je drama
 - 2026-08-04: Pridana prakticka priloha AI funkce v SaaS bez compliance prekvapeni za 60 minut vcetne use-case filtru, datoveho kontraktu, lidske kontroly, mikrocopy a checklistu.
 - 2026-08-04: Pridana prakticka priloha AI decision log bez skladovani promptu za 60 minut vcetne minimalni auditni stopy, retence, pristupu a checklistu.
 - 2026-08-04: Pridana prakticka priloha AI eval set pred produkci bez testovani na zakaznicich za 60 minut vcetne chovani funkce, eval pripadu, rubriky, stop pravidel a checklistu.
+- 2026-08-04: Pridana prakticka priloha RAG znalostni baza bez vysavani internich dat za 60 minut vcetne katalogu zdroju, chunk metadat, pristupove kontroly, nejistoty, uklidu a checklistu.
