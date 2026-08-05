@@ -237,8 +237,147 @@ Pokud chceš rychlou iteraci, neřeš hned redesign. Přepiš hero sekci, přide
 
 ---
 
+# Kapitola 3: SaaS od nápadu k první platbě
+
+SaaS není aplikace s přihlašováním. SaaS je opakovatelný způsob, jak zákazníkovi pravidelně doručovat hodnotu tak jasně, že za ni platí bez neustálého přemlouvání. Technicky může první verze vypadat skromně. Obchodně ale musí umět tři věci: vyřešit konkrétní problém, dovést člověka k prvnímu výsledku a dát mu férový důvod pokračovat.
+
+První platba není konec validace. Je to začátek ostřejší otázky: „Dostává zákazník hodnotu dost často na to, aby zůstal?“ Pokud ne, máš jen hezky zabalený jednorázový projekt s měsíční fakturou. To není zločin, jen tomu neříkej zdravý SaaS. Slova mají význam, i když marketing občas dělá, že ne.
+
+## 3.1 MVP není ořezaný produkt, ale nejkratší cesta k hodnotě
+
+MVP se často pokazí ve chvíli, kdy tým začne škrtat funkce z vysněného produktu. Výsledek je pak malý, ale pořád zmatený. Lepší otázka zní:
+
+> Jaký nejmenší pracovní tok dovede zákazníka od problému k měřitelnému výsledku?
+
+U nástroje pro správu poptávek to nemusí být CRM, kalendář, automatické nabídky, integrace účetnictví a mobilní aplikace. První užitečný tok může být:
+
+1. zákazník pošle poptávku přes jednoduchý formulář,
+2. firma ji vidí v přehledu podle stavu,
+3. jedním kliknutím odešle potvrzení nebo návrh dalšího kroku,
+4. na konci týdne vidí nevyřízené poptávky.
+
+To je malé, ale má to hodnotu. Neřeší celý život firmy, ale odstraňuje konkrétní ztracené zprávy. MVP má mít ostré hrany na správných místech. Může chybět export do pěti formátů, ale nesmí chybět spolehlivost hlavního toku. Může mít jednoduchý design, ale nesmí být nejasné, co má uživatel udělat.
+
+Praktický test MVP:
+
+- Umí uživatel dokončit hlavní úkol bez školení?
+- Vznikne po použití výsledek, který jde ukázat nebo změřit?
+- Je jasné, proč je řešení lepší než tabulka, e-mail nebo ruční práce?
+- Dá se hodnota doručit bez ruční magie schované za produktem?
+- Víme, co musíme měřit, abychom poznali úspěch toku?
+
+Pokud odpověď zní „ještě ne, ale až doděláme modul X“, pozor. Možná nestavíš MVP, ale čekárnu na produkt.
+
+## 3.2 První platba má ověřit závazek, ne jen zájem
+
+Zájem je levný. Platba je dražší, proto je užitečná. Když někdo řekne „to se mi líbí“, dostal jsi kompliment. Když vytáhne kartu, objedná pilot nebo podepíše jednoduchou smlouvu, dostal jsi signál.
+
+U B2B SaaS může první platba vypadat různě:
+
+- měsíční předplatné pro malý tým,
+- placený pilot s jasným rozsahem,
+- jednorázové nastavení plus následný paušál,
+- concierge MVP, kde část práce děláš ručně, ale zákazník platí za výsledek,
+- omezený roční závazek s možností výpovědi po ověření hodnoty.
+
+Důležité je nepředstírat, že zdarma znamená validováno. Free trial je užitečný, když přesně víš, jak se člověk dostane k hodnotě a proč potom zaplatí. Pokud trial jen rozdává přístup do prázdné aplikace, měříš hlavně zvědavost. A zvědavost bývá v SaaS metrika typu „hezké, ale nájem to nezaplatí“.
+
+Před první platbou si napiš jednoduchou obchodní hypotézu:
+
+> Zákazník typu **[segment]** zaplatí **[částka / model]**, protože mu produkt pomůže **[výsledek]** do **[čas]** bez **[bolest]**.
+
+Příklad:
+
+> Menší servisní firma zaplatí měsíční paušál za přehled poptávek, protože jí pomůže odpovědět rychleji a snížit počet zapomenutých zpráv během prvního týdne používání.
+
+Když hypotéza neobsahuje segment, výsledek a čas, je příliš měkká. Měkké hypotézy vypadají bezpečně, ale špatně se vyhodnocují. Jsou jako želé v tabulce.
+
+## 3.3 Onboarding: první výsledek dřív než prohlídka funkcí
+
+Onboarding není produktová exkurze. Uživatel nechce poznat všechny záložky. Chce vyřešit důvod, kvůli kterému přišel. Proto navrhuj onboarding kolem prvního výsledku, ne kolem seznamu funkcí.
+
+Dobrý onboarding odpoví:
+
+1. Co mám udělat jako první?
+2. Proč to dělám?
+3. Kolik kroků zbývá?
+4. Kdy uvidím hodnotu?
+5. Kde získám pomoc, když se zaseknu?
+
+U B2B produktu často pomáhá ruční asistence v prvních týdnech. Není to ostuda. Je to výzkum v montérkách. Když zákazník ručně importuje data, ptá se na integrace nebo nerozumí názvům polí, dostáváš lepší zpětnou vazbu než z anonymního grafu. Jen si pohlídej, aby ruční práce nebyla trvale nezisková součást produktu.
+
+Praktická onboardingová mapa:
+
+- **Aktivace:** uživatel vytvoří účet, chápe další krok a dokončí základní nastavení.
+- **První hodnota:** udělá akci, která řeší jeho problém, třeba založí první poptávku nebo odešle první report.
+- **Návyk:** vrátí se v přirozeném rytmu práce, například další den nebo další týden.
+- **Důkaz hodnoty:** vidí výsledek, který může obhájit před sebou, týmem nebo šéfem.
+- **Rozšíření:** pozve kolegu, přidá další projekt nebo zapne placený plán.
+
+**Codyho komentář:** pokud onboarding potřebuje patnáct e-mailů, čtyři modály a video „jak začít“, možná není problém v nedostatku vysvětlování. Možná produkt ještě neumí podat ruku. Někdy je nejlepší onboarding jedno dobré tlačítko na správném místě.
+
+## 3.4 Metriky, které malý SaaS opravdu potřebuje
+
+Produktová analytika má pomáhat rozhodovat, ne vyrábět pocit kontroly. U první verze nepotřebuješ dvacet dashboardů. Potřebuješ pár metrik, které ukážou, jestli zákazník nachází hodnotu a jestli produkt funguje jako byznys.
+
+Začni těmito otázkami:
+
+- Kolik lidí dorazí na web a kolik jich udělá hlavní akci?
+- Kolik nových účtů dokončí první hodnotný krok?
+- Jak často se aktivní zákazníci vrací?
+- Kolik zákazníků přejde na placený plán nebo zaplatí pilot?
+- Proč lidé odchází, ruší nebo přestávají používat produkt?
+- Který krok hlavního toku nejčastěji selže?
+
+Privacy-first analytika k tomu nepotřebuje identitu každého návštěvníka. Potřebuje smysluplné události a datovou střídmost. GDPR mezi principy zpracování osobních údajů řadí mimo jiné minimalizaci dat: osobní údaje mají být přiměřené, relevantní a omezené na to, co je nezbytné pro daný účel. Viz oficiální text na [EUR-Lex: GDPR, článek 5](https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=CELEX%3A32016R0679). Privacy by design a by default pak řeší článek 25, tedy ochranu dat zabudovanou do návrhu a výchozího nastavení. Viz [EUR-Lex: GDPR, článek 25](https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=CELEX%3A32016R0679).
+
+Prakticky:
+
+- neposílej do analytiky e-mail, jméno, telefon ani obsah formuláře,
+- místo „user_123 koupil plán“ měř agregovaně „trial_to_paid_completed“,
+- odděl produktové logy od marketingové analytiky,
+- nastav retenci logů podle potřeby, ne podle lenosti,
+- dokumentuj účel každého eventu,
+- pravidelně maž eventy, které už nikdo nepoužívá.
+
+Méně dat znamená méně rizika, jednodušší vysvětlování zákazníkům a menší šanci, že se z analytiky stane digitální půda plná krabic s nápisem „možná se bude hodit“.
+
+## 3.5 Bezpečnostní minimum před tím, než pustíš zákazníky dovnitř
+
+Jakmile SaaS ukládá zákaznická data, bezpečnost není „až později“. Nemusíš mít hned enterprise bezpečnostní tým, ale musíš mít rozumné minimum. OWASP ASVS popisuje ověřitelné požadavky pro bezpečný vývoj webových aplikací a dá se použít jako praktický kontrolní rámec. Viz [OWASP Application Security Verification Standard](https://owasp.org/www-project-application-security-verification-standard/).
+
+Pro malý SaaS začni tímto minimem:
+
+- přihlašování má bezpečné session, ochranu proti CSRF tam, kde dává smysl, a žádné heslo v logu,
+- hesla se ukládají pouze přes vhodné hashování, nikdy jako prostý text,
+- role a oprávnění se kontrolují na serveru, ne jen schováním tlačítka v UI,
+- každý zákazník vidí jen svá data; multi-tenant izolace je testovaná, ne odhadnutá,
+- vstupy se validují na serveru a výstupy se bezpečně escapují,
+- zálohy existují a obnova je vyzkoušená,
+- chyby se logují tak, aby pomohly vývoji, ale nevyzrazovaly citlivé údaje,
+- tajné klíče nejsou v repozitáři a pravidelně se dají rotovat.
+
+Bezpečnostní checklist nepiš jako rituální dokument pro šuplík. Napoj ho na release proces. Před každým větším nasazením si projdi změny v autentizaci, oprávněních, datech, logování a integracích. Pokud přibyl nový vendor, zeptej se znovu: kde budou data, kdo k nim má přístup a jak je smažeme?
+
+## 3.6 Checklist třetí kapitoly
+
+Než budeš první SaaS verzi považovat za hotovou, projdi si:
+
+- Je hlavní pracovní tok kratší než seznam funkcí v prezentaci?
+- Dovede MVP zákazníka k měřitelnému výsledku bez ručního vysvětlování?
+- Máš obchodní hypotézu se segmentem, cenovým modelem, výsledkem a časem?
+- Ověřuje první platba závazek, ne jen sympatie ke slidu?
+- Onboarding vede k první hodnotě, ne k prohlídce celé aplikace?
+- Měříš aktivaci, návratnost, konverzi a odchod bez zbytečných osobních údajů?
+- Máš popsané bezpečnostní minimum pro účty, oprávnění, logy, zálohy a tajné klíče?
+- Umíš zákazníkovi česky vysvětlit, kde běží jeho data a proč je to bezpečné?
+
+První verze SaaS má být malá, ale dospělá. Malá v rozsahu, dospělá v odpovědnosti. Když zákazník svěří produktu data, čas a peníze, není to beta hračka. Je to slib. A sliby se v dobrém SaaS neřeší až ve verzi 2.0.
+
 ## Zdroje
 
+- EUR-Lex: [Nařízení GDPR 2016/679, článek 5 a 25](https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=CELEX%3A32016R0679)
+- OWASP Foundation: [Application Security Verification Standard](https://owasp.org/www-project-application-security-verification-standard/)
 - European Data Protection Board: [Privacy by design and by default](https://www.edpb.europa.eu/topics/ai-and-technology/privacy-by-design-and-by-default_en)
 - European Data Protection Board: [Pokyny 4/2019 k článku 25 — záměrná a standardní ochrana osobních údajů](https://www.edpb.europa.eu/documents/guideline/guidelines-42019-on-article-25-data-protection-by-design-and-by-default_cs)
 - web.dev: [Core Web Vitals](https://web.dev/articles/vitals)
@@ -247,5 +386,6 @@ Pokud chceš rychlou iteraci, neřeš hned redesign. Přepiš hero sekci, přide
 
 ## Pracovní log
 
+- 2026-08-05: Dopsána kapitola 3 o SaaS cestě k první platbě: MVP, validace platbou, onboarding, privacy-first metriky, bezpečnostní minimum a checklist.
 - 2026-08-05: Dopsána kapitola 2 o webu jako obchodníkovi: hero sekce, důvěra, struktura homepage, technická kvalita, privacy-first měření a checklist.
 - 2026-08-05: Vytvořena základní struktura e-booku, úvod, osnova a dokončená kapitola 1 o definici problému, nabídce a privacy-first zadání produktu.
