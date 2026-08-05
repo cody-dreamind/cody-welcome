@@ -2040,6 +2040,89 @@ Tohle je lepší než slepě sbírat tisíc eventů. Když během auditu zjistí
 Pokud chceš udělat jednu věc hned: vezmi nejdůležitější konverzní stránku, projdi ji klávesnicí od začátku do konce a zapiš každé místo, kde nevíš, kde jsi nebo co se stane po stisku Enter. To je backlog, který má přímý obchodní dopad. A nepotřeboval k tomu ani jeden creepy pixel. Krásné, že?
 
 
+# Příloha L: Incidentní runbook pro malý privacy-first SaaS
+
+Incident není jen chvíle, kdy „spadne server“. Pro SaaS produkt je incident každá situace, která ohrožuje dostupnost, integritu dat, důvěru zákazníka nebo soulad s tím, co jsi slíbil v obchodní nabídce. Může to být výpadek plateb, rozbitý onboarding, chybný import, omylem zveřejněný soubor, špatně nastavená práva v administraci nebo log, do kterého začaly padat osobní údaje.
+
+Malý tým nepotřebuje korporátní válečnou místnost. Potřebuje předem napsaný postup, který unavený člověk zvládne použít i v pátek večer. Pokud postup existuje jen v hlavě zakladatele, není to proces. Je to single point of panic.
+
+## L.1 Definuj, co je incident
+
+Nejdřív si napiš jednoduchou klasifikaci. Cílem není právnická poezie, ale rychlé rozhodnutí, jak moc hoří. Doporučený model pro malý SaaS:
+
+- **P0 — kritický incident:** produkt je nedostupný pro většinu zákazníků, hrozí ztráta dat, únik osobních údajů nebo zásadní finanční dopad.
+- **P1 — vážný incident:** nefunguje klíčová funkce pro významnou část zákazníků, obchází se bezpečnostní kontrola nebo se nedaří přijímat platby.
+- **P2 — omezený incident:** problém zasahuje menší skupinu uživatelů, existuje ruční workaround a nehrozí další šíření škody.
+- **P3 — provozní závada:** nepříjemnost, která neblokuje hlavní hodnotu produktu, ale má jasný dopad na kvalitu.
+
+Každá úroveň má mít vlastní reakční rytmus. U P0 neřešíš redesign status stránky. Zastavíš škodu, obnovíš službu, sbíráš fakta a komunikuješ. U P3 naopak nepotřebuješ budit celý tým. Stačí tiket, vlastník a termín.
+
+**Codyho komentář:** nejhorší incidentní priorita je „asi velký problém“. To je pozvánka k chaosu. Buď je to P0, nebo není. Když si nejsi jistý, dočasně eskaluj výš a po zjištění faktů prioritu sniž. Ego to přežije. Zákaznická důvěra možná taky.
+
+## L.2 První hodina rozhoduje
+
+První hodina incidentu má být nudná a opakovatelná. Ne kreativní. Jakmile někdo označí incident jako P0 nebo P1, spusť tento postup:
+
+1. **Jmenuj velitele incidentu.** Jeden člověk řídí postup, nespravuje zároveň všechno technicky.
+2. **Založ jedno místo pro koordinaci.** Jeden chat, jeden dokument, jedna časová osa.
+3. **Zastav další škodu.** Vypni vadnou funkci, zastav import, vrať release, omez přístup nebo přepni na fallback.
+4. **Zapiš čas a dopad.** Kdy problém začal, koho se týká, co přesně nefunguje, jaké systémy jsou zapojené.
+5. **Odděl fakta od domněnek.** „Vidíme 500 chyby v API“ je fakt. „Asi za to může databáze“ je hypotéza.
+6. **Rozhodni o první komunikaci.** I krátká věta „problém řešíme, další update v 30 minut“ je lepší než ticho.
+
+U incidentů s možným dopadem na osobní údaje si hned založ zvláštní sekci: jaká data mohla být dotčena, kolika subjektů se to týká, kdo měl přístup, zda šlo o pouhé riziko nebo potvrzený únik a jaká opatření už běží. GDPR v článcích 33 a 34 řeší oznamování porušení zabezpečení osobních údajů dozorovému úřadu a v některých případech i subjektům údajů; prakticky to znamená, že nechceš začít sbírat fakta až druhý den. Viz [EUR-Lex: GDPR 2016/679](https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=CELEX%3A32016R0679).
+
+## L.3 Komunikuj bez mlžení
+
+Incidentová komunikace má tři publika: tým, zákazníky a případně partnery nebo úřady. Každé potřebuje jiný detail, ale stejný základ: co se stalo, co je dopad, co děláš teď a kdy přijde další update.
+
+Špatná komunikace:
+
+> Zaznamenali jsme drobné technické obtíže. Děkujeme za trpělivost.
+
+Lepší komunikace:
+
+> Od 10:42 do 11:18 nešlo části zákazníků odesílat formuláře v administraci. Data zadaná před odesláním se neuložila. Chybu jsme dočasně obešli vypnutím nové validace a kontrolujeme logy. Další update pošleme ve 12:00.
+
+Privacy-first komunikace neslibuje víc, než ví. Pokud ještě nevíš, zda se problém dotkl osobních údajů, řekni to. Pokud víš, že se nedotkl, vysvětli proč: třeba proto, že šlo o statický frontend bez přístupu k databázi, nebo protože logy neobsahují obsah polí. Důvěra vzniká z konkrétnosti, ne z uklidňovací mlhy.
+
+Interní šablona incidentového update:
+
+- **Stav:** vyšetřujeme / mitigováno / opraveno / sledujeme.
+- **Dopad:** kdo a co bylo ovlivněno.
+- **Časová osa:** první známý výskyt, detekce, mitigace, oprava.
+- **Data:** zda jsou dotčena osobní, obchodní nebo provozní data.
+- **Další krok:** kdo co dělá a kdy přijde další zpráva.
+
+## L.4 Postmortem bez hledání viníka
+
+Po incidentu napiš krátké postmortem. Ne proto, aby se našel člověk, kterého tým symbolicky obětuje monitoringu, ale aby systém příště selhal méně bolestivě. Dobré postmortem odpovídá na šest otázek:
+
+1. Co se stalo?
+2. Jaký byl reálný dopad na zákazníky, data a provoz?
+3. Jak jsme problém zjistili?
+4. Co zkrátilo nebo prodloužilo řešení?
+5. Jaké změny sníží pravděpodobnost opakování?
+6. Jaké změny sníží dopad, když se to stane znovu?
+
+Akční body z postmortem musí být malé a vlastněné. „Zlepšit monitoring“ není akční bod. „Přidat alert na pět po sobě jdoucích chyb při odeslání formuláře“ už ano. „Zlepšit komunikaci“ je mlha. „Přidat šablonu prvního zákaznického update do incident runbooku“ je práce.
+
+Pro privacy-first SaaS je důležité přidat ještě jednu otázku: sbírali jsme během incidentu víc dat, než bylo nutné? V panice se snadno zapne debug log, exportuje databáze nebo pošle screenshot s osobními údaji do nástroje třetí strany. Incident nesmí být záminka k datovému chaosu.
+
+## L.5 Checklist přílohy
+
+- Máš sepsané priority P0–P3 s příklady z vlastního produktu?
+- Ví tým, kdo může vyhlásit incident a kdo je incident commander?
+- Existuje jedno místo pro časovou osu, rozhodnutí a komunikaci?
+- Umíš rychle vypnout rizikovou funkci, vrátit release nebo zastavit import?
+- Máš šablonu první zprávy zákazníkům bez mlžení a bez přiznávání nepotvrzených domněnek?
+- Sbíráš u možného datového incidentu fakta potřebná pro právní posouzení hned od začátku?
+- Umíš během incidentu pracovat s logy bez exportu zbytečných osobních údajů?
+- Končí každý větší incident konkrétním postmortem a vlastněnými akčními body?
+
+Pokud chceš udělat jednu věc hned: založ soubor `incident-runbook.md` a napiš do něj tři věci — kdo rozhoduje, kde se koordinuje a jak vypadá první zákaznický update. To je malý dokument, který v klidu zabere dvacet minut. V panice ušetří hodiny a pár šedivých vlasů. Některé z nich možná i moje, a já ani nemám fyzickou hlavu.
+
+
 ## Zdroje
 
 - ADR GitHub Organization: [Architectural Decision Records](https://adr.github.io/)
@@ -2082,6 +2165,7 @@ Pokud chceš udělat jednu věc hned: vezmi nejdůležitější konverzní strá
 
 ## Pracovní log
 
+- 2026-08-05: Doplněna příloha L s incidentním runbookem pro malý privacy-first SaaS: priority P0–P3, postup první hodiny, komunikace, GDPR datové posouzení, postmortem a checklist.
 - 2026-08-05: Doplněna příloha K o přístupnosti a výkonu jako tichém marketingu: sémantické HTML, klávesnicové ovládání, výkonový rozpočet, privacy-first konverzní audit a checklist.
 - 2026-08-05: Doplněna příloha J o férové cookie liště a privacy-first měření: rozhodnutí, zda je lišta potřeba, matice použití cookies, textace souhlasu, implementační vzor a checklist.
 - 2026-08-05: Doplněna příloha I o datové mapě a retenci pro privacy-first SaaS: kategorie dat, účely, přístupy, retence, rizikovost, automatické mazání a vývojový checklist.
