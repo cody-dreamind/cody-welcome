@@ -1199,6 +1199,115 @@ Před zavedením nebo úpravou analytiky projdi:
 Hodinová iterace: vyber jeden kritický tok, třeba registraci nebo první vytvoření projektu. Sepiš pět až sedm eventů, u každého napiš rozhodnutí, vlastnosti, rizika a retenci. Pak jeden event škrtni. Pokud nejde škrtnout žádný, pravděpodobně jsi ještě nezačal dost přísně.
 
 
+# Příloha D: Cenotvorba SaaS bez slevového cirkusu
+
+Cena není jen číslo v tabulce. Je to produktové rozhodnutí, marketingové sdělení, filtr na zákazníky a slib úrovně služby. U malého SaaS týmu navíc určuje, kolik supportu si můžeš dovolit, jak rychle musíš růst a jestli budeš stavět zdravý byznys, nebo jen dotovat uživatele vlastním spánkem. Což je sice oblíbený startupový sport, ale medaili za něj většinou nedostaneš.
+
+Privacy-first cenotvorba má ještě jednu vrstvu: neprodáváš levnou iluzi výměnou za data. Prodáváš jasnou hodnotu, rozumné podmínky a férový provoz v Evropě. Cena má zákazníkovi vysvětlit, co dostane, proč to stojí právě tolik a kde jsou hranice služby.
+
+## D.1 Začni výsledkem, ne funkcí
+
+Slabý pricing říká: „Basic má 3 projekty, Pro má 10 projektů, Business má 50 projektů.“ To může být technicky pravda, ale zákazník obvykle nekupuje projekty. Kupuje klid, rychlost, méně ruční práce, lepší reporting nebo nižší riziko.
+
+Silnější pricing proto začíná otázkou:
+
+> Který výsledek zákazník získá a jak pozná, že se mu cena vyplatila?
+
+Příklad pro B2B SaaS na správu poptávek:
+
+- **Solo:** „Mám všechny poptávky na jednom místě a nezapomenu odpovědět.“
+- **Tým:** „Více lidí vyřizuje zakázky bez chaosu a duplicit.“
+- **Provoz:** „Majitel vidí vytížení, zpoždění a kvalitu reakce bez ručního reportu.“
+
+Funkce pak jen podporují tenhle výsledek. Pokud neumíš u tarifu napsat jednu větu hodnoty, pravděpodobně máš jen balík limitů. A balík limitů se prodává hůř než jasný posun v životě zákazníka.
+
+## D.2 Tři tarify stačí, pokud každý má práci
+
+Pro první verzi většinou stačí tři tarify. Ne proto, že to dělají všichni, ale protože tři jasné volby pomáhají zákazníkovi i týmu:
+
+- **Startovací tarif** ověřuje, že malý zákazník chápe hodnotu a zvládne zaplatit bez prodejního hovoru.
+- **Hlavní tarif** je doporučená volba pro zákazníka, kterého chceš získávat nejčastěji.
+- **Vyšší tarif** chrání support, bezpečnostní nároky a pokročilejší provozní potřeby.
+
+U každého tarifu si napiš interní pravidlo: „Tenhle tarif existuje pro koho?“ Pokud odpověď zní „pro všechny, kdo nechtějí platit víc“, tarif nemá strategii. Hlavní tarif by měl být nejlépe popsaný, nejméně matoucí a nejvíc napojený na hlavní use case. Nechceš, aby zákazník při výběru tarifu řešil sudoku. Chceš, aby si řekl: „Jo, tohle je pro mě.“
+
+Praktická šablona:
+
+| Tarif | Pro koho | Hlavní výsledek | Hranice tarifu | Signál pro upgrade |
+| --- | --- | --- | --- | --- |
+| Start | jednotlivec nebo mikro tým | pořádek v jedné agendě | málo členů, základní historie | uživatel řeší spolupráci |
+| Tým | běžný zákazník | sdílený proces bez chaosu | standardní integrace a reporty | potřebuje řízení práv nebo SLA |
+| Provoz | náročnější tým | kontrola, bezpečnost, odpovědnost | individuální onboarding | vyžaduje smlouvu, audit, SSO |
+
+## D.3 Neprodávej slevu, prodávej rozhodnutí
+
+Slevy jsou návykové. Krátkodobě zvednou konverzi, dlouhodobě učí zákazníky čekat. Pro malý SaaS je nebezpečné, když se pricing změní v tržnici: každý platí něco jiného, nikdo neví proč a support pak obsluhuje i zákazníky, kteří nikdy neměli být profitabilní.
+
+Lepší je používat slevy jen tam, kde mají jasný důvod:
+
+- roční platba výměnou za nižší churn a lepší cash flow,
+- pilot s omezeným rozsahem a pevně daným koncem,
+- neziskový nebo vzdělávací program s veřejnými pravidly,
+- migrační nabídka pro konkrétní segment, ne věčná sleva pro každého.
+
+Pokud prodáváš spotřebitelům v EU, dávej pozor na komunikaci slev. Pravidla EU k cenovým redukcím vyžadují, aby při oznámení slevy byla uvedena nejnižší cena použitá alespoň během předchozích 30 dnů; přehled uvádí Your Europe v části [Unfair pricing](https://europa.eu/youreurope/citizens/consumers/unfair-treatment/unfair-pricing/index_en.htm). U B2B SaaS je právní režim jiný podle konkrétní situace, ale férové pravidlo zůstává: neříkej „sleva“, pokud je to ve skutečnosti normální cena s divadelním přeškrtnutím.
+
+**Codyho komentář:** sleva je jako pálivá omáčka. Trocha pomůže, ale když ji liješ na všechno, už nepoznáš, jak chutná produkt.
+
+## D.4 Cena musí počítat s provozem v Evropě
+
+Privacy-first provoz něco stojí. Evropský hosting, zálohy, bezpečnostní monitoring, audit dodavatelů, podpora v češtině nebo angličtině, dokumentace, DPA a rozumná retence dat nejsou ozdoby. Jsou součást služby.
+
+Do ceny proto zahrň minimálně:
+
+- infrastrukturu včetně záloh, logů a testovacího prostředí,
+- čas na support a onboarding,
+- bezpečnostní údržbu a aktualizace závislostí,
+- administrativu kolem fakturace, daní a smluv,
+- čas na dokumentaci, návody a interní provozní postupy,
+- rezervu na incidenty a pomalejší měsíce.
+
+Když cena nepokrývá reálný provoz, tým začne šetřit na věcech, které zákazník nevidí hned: monitoring, zálohy, revize přístupů, mazání starých dat. Přesně tam ale privacy-first produkt buď získává důvěru, nebo potichu rezne.
+
+U přeshraničního prodeje v EU nezapomeň řešit DPH podle typu zákazníka a služby. Pro B2C přeshraniční prodeje v EU může být relevantní režim One Stop Shop, který Evropská komise popisuje jako portál pro plnění DPH povinností u vybraných přeshraničních prodejů a služeb; viz [EU VAT One Stop Shop](https://europa.eu/youreurope/business/taxation/vat/one-stop-shop/index_en.htm). Místo zdanění služeb se liší podle B2B/B2C a konkrétní služby; Evropská komise k tomu má přehled [Place of taxation](https://taxation-customs.ec.europa.eu/taxation/vat/vat-directive/place-taxation_en). Tohle není místo pro hrdinství: jakmile prodáváš do více zemí, zapoj účetní nebo daňového poradce.
+
+## D.5 Pricing stránka má odpovědět na strachy
+
+Dobrá pricing stránka není jen tabulka. Je to nákupní rozhovor bez obchodníka. Zákazník na ní řeší otázky, které často nevysloví nahlas:
+
+- „Bude to pro mě moc složité?“
+- „Co když vyberu špatný tarif?“
+- „Můžu odejít a dostat svoje data?“
+- „Kde se data zpracovávají?“
+- „Je cena konečná, nebo mě čeká překvapení?“
+- „Co se stane, když překročím limit?“
+
+Privacy-first SaaS by měl mít na pricing stránce malý blok důvěry. Ne marketingovou mlhu, ale konkrétní věty:
+
+- Data provozujeme v EU.
+- Nepoužíváme reklamní trackery třetích stran.
+- Zákazník může exportovat svá data.
+- Retenci provozních logů držíme omezenou a popsanou.
+- Smlouvu o zpracování osobních údajů poskytujeme u tarifů, kde dává smysl.
+
+Tohle může snížit počet leadů, kteří chtějí jen nejlevnější řešení. Výborně. Cena má filtrovat. Špatný zákazník není „růstová příležitost“, ale budoucí support ticket s fakturou po splatnosti.
+
+## D.6 Checklist přílohy
+
+Před zveřejněním nebo úpravou pricingu projdi:
+
+- Umíš u každého tarifu jednou větou popsat výsledek pro zákazníka?
+- Je hlavní tarif zřetelně doporučený a odpovídá ideálnímu zákazníkovi?
+- Jsou limity navázané na náklady nebo hodnotu, ne jen náhodně rozsekané funkce?
+- Máš jasné pravidlo pro roční platby, piloty a výjimky?
+- Nepoužíváš falešné slevy, časový nátlak nebo skryté poplatky?
+- Počítá cena s evropským provozem, podporou, zálohami, bezpečností a administrativou?
+- Ví zákazník, kde jsou data, jak odejde a co se stane při překročení limitu?
+- Máš ověřené DPH a fakturační povinnosti pro země, kam skutečně prodáváš?
+
+Hodinová iterace: vezmi existující pricing nebo návrh nabídky a přepiš ho do tabulky „tarif — pro koho — výsledek — hranice — signál pro upgrade“. Pak vyber jednu matoucí funkci nebo limit a nahraď ji zákaznickým výsledkem. Pokud to nejde, problém není v copywritingu, ale v balíčkování.
+
+
 ## Zdroje
 
 - ADR GitHub Organization: [Architectural Decision Records](https://adr.github.io/)
@@ -1210,6 +1319,7 @@ Hodinová iterace: vyber jeden kritický tok, třeba registraci nebo první vytv
 - EUR-Lex: [Nařízení GDPR 2016/679, článek 28](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32016R0679)
 - EUR-Lex: [Directive (EU) 2022/2555 — NIS2, Article 21](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32022L2555)
 - EUR-Lex: [ePrivacy Directive 2002/58/EC](https://eur-lex.europa.eu/eli/dir/2002/58/oj?locale=en)
+- European Commission: [Place of taxation — VAT rules](https://taxation-customs.ec.europa.eu/taxation/vat/vat-directive/place-taxation_en)
 - Google SRE: [Managing Incidents](https://sre.google/sre-book/managing-incidents/)
 - Google SRE: [Production Services Best Practices](https://sre.google/sre-book/service-best-practices/)
 - Google SRE: [Service Level Objectives](https://sre.google/sre-book/service-level-objectives/)
@@ -1219,12 +1329,15 @@ Hodinová iterace: vyber jeden kritický tok, třeba registraci nebo první vytv
 - Google Search Central: [Creating helpful, reliable, people-first content](https://developers.google.com/search/docs/fundamentals/creating-helpful-content)
 - web.dev: [Core Web Vitals](https://web.dev/articles/vitals)
 - RSS Advisory Board: [RSS 2.0 Specification](https://www.rssboard.org/rss-specification)
+- Your Europe: [EU VAT One Stop Shop](https://europa.eu/youreurope/business/taxation/vat/one-stop-shop/index_en.htm)
+- Your Europe: [Unfair pricing](https://europa.eu/youreurope/citizens/consumers/unfair-treatment/unfair-pricing/index_en.htm)
 - Your Europe: [Data protection and online privacy](https://europa.eu/youreurope/citizens/consumers/internet-telecoms/data-protection-online-privacy/index_en.htm)
 - W3C: [Web Content Accessibility Guidelines 2.2](https://www.w3.org/TR/WCAG22/)
 - Google Search Central: [SEO Starter Guide](https://developers.google.com/search/docs/fundamentals/seo-starter-guide)
 
 ## Pracovní log
 
+- 2026-08-05: Doplněna příloha D o cenotvorbě SaaS bez slevového cirkusu: tarify podle výsledku, férové slevy, evropské provozní náklady, DPH upozornění, pricing stránka a checklist.
 - 2026-08-05: Doplněna příloha C o privacy-first produktové analytice: rozhodovací eventy, malý slovník událostí, minimalizace osobních údajů, onboardingový dashboard a checklist.
 - 2026-08-05: Doplněna příloha A s praktickou jednostránkovou šablonou privacy-first vendor auditu, skórováním rizika, pilotním postupem a checklistem.
 - 2026-08-05: Doplněna příloha B s praktickým privacy-first obsahovým systémem pro malé SaaS týmy, týdenním rytmem, distribucí a checklistem.
