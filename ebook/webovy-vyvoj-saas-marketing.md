@@ -964,6 +964,119 @@ Před zapojením nového nástroje si odškrtni:
 
 Hodinová iterace: vyber jeden nástroj, který už používáš, a doplň k němu šablonu zpětně. Pokud narazíš na nejasné zpracování dat, nezačínej právní panikou. Začni tím, že omezíš posílaná data, zkontroluješ nastavení a připravíš alternativu.
 
+---
+
+# Příloha B: Obsahový systém pro malé týmy
+
+Marketing malého SaaS týmu nesmí stát na náhodném záblesku inspirace. Inspirace je fajn, ale má pracovní morálku kočky: přijde, když se jí chce, sedne si na klávesnici a pak zmizí. Potřebuješ jednoduchý systém, který každý týden promění zákaznické otázky, produktové změny a zkušenosti z provozu v užitečný obsah.
+
+Privacy-first obsahový systém má tři cíle:
+
+1. budovat důvěru na vlastním webu,
+2. učit trh konkrétní věci, které souvisejí s produktem,
+3. distribuovat obsah bez závislosti na reklamních pixelech a sociálních algoritmech.
+
+Google ve svém doporučení k helpful content zdůrazňuje obsah psaný pro lidi, který ukazuje zkušenost, odbornost a jasnou hodnotu pro čtenáře. Viz [Google Search Central: Creating helpful, reliable, people-first content](https://developers.google.com/search/docs/fundamentals/creating-helpful-content). To je dobrý směr i mimo SEO: nejlepší marketing často jen poctivě odpovídá na otázky, které zákazník stejně řeší před nákupem.
+
+## B.1 Jedna obsahová banka
+
+Začni jedním souborem nebo tabulkou. Ne pěti nástroji. Ne „content hubem“ za víc peněz než první hosting. Jedna obsahová banka stačí, pokud je pravidelně používaná.
+
+Zapisuj do ní:
+
+- otázky ze sales callů,
+- námitky z e-mailů,
+- opakované chyby při onboardingu,
+- produktové změny a proč vznikly,
+- interní rozhodnutí, která by mohla pomoct zákazníkům,
+- malé případové studie z praxe,
+- pojmy, které zákazníci hledají, ale nerozumí jim.
+
+Ke každému nápadu přidej tři pole:
+
+| Pole | Co napsat | Příklad |
+|---|---|---|
+| Pro koho | konkrétní čtenář | zakladatel B2B SaaS do 10 lidí |
+| Problém | otázka nebo bolest | neví, jestli potřebuje cookie lištu |
+| Další krok | co má po přečtení udělat | projít datovou mapu a vyhodit zbytečné trackery |
+
+Tím se vyhneš obsahu typu „5 trendů digitální transformace“. To je věta, ze které i vyhledávač potichu zívne. Lepší je článek „Kdy malý SaaS opravdu potřebuje cookie lištu a kdy jen zbytečně sbírá data“. Ten má čtenáře, problém i akci.
+
+## B.2 Týdenní rytmus 60–90 minut
+
+Obsahový systém nemusí sežrat pátek. Stačí krátký rytmus:
+
+1. **10 minut — vyber téma.** Vezmi jednu otázku z obsahové banky.
+2. **15 minut — napiš osnovu.** Nadpis, slib, tři až pět bodů, závěrečný checklist.
+3. **30–45 minut — napiš první verzi.** Nelešti každou větu. Cody povoluje lidský text, nikoli muzeální exponát.
+4. **15 minut — doplň důkazy.** Odkazy na dokumentaci, standardy, vlastní příklady nebo screenshoty.
+5. **10 minut — připrav distribuci.** RSS, krátký příspěvek na LinkedIn, přímý odkaz do komunity, e-mail zákazníkům, pokud k tomu máš souhlas.
+
+Výsledek nemusí být pokaždé velký článek. Střídej formáty:
+
+- krátký praktický návod,
+- checklist,
+- rozhodovací strom,
+- případová studie,
+- vysvětlení pojmu,
+- „co jsme změnili a proč“.
+
+Vlastní web je základní archiv. Sociální síť je distribuční kanál, ne místo, kde tvůj obsah bydlí. Pokud platforma změní algoritmus, zpoplatní dosah nebo zítra dostane chuť na další „engagement optimalizaci“, tvůj archiv zůstává doma. Elegantní, nudné a velmi zdravé.
+
+## B.3 Privacy-first distribuce
+
+Distribuce bez šmírování není slabší. Jen je méně líná. Místo plošného sledování lidí napříč webem pracuješ s kontextem, kvalitou a přímým vztahem.
+
+Používej:
+
+- **RSS** pro lidi, kteří chtějí sledovat obsah bez algoritmů; specifikace RSS 2.0 je jednoduchá a stabilní, viz [RSS Advisory Board: RSS 2.0 Specification](https://www.rssboard.org/rss-specification),
+- **přímé odkazy** v komunitách a partnerských vztazích,
+- **newsletter jen se souhlasem** a jasným odhlášením,
+- **produktové e-maily** pouze tam, kde dávají kontext a respektují očekávání zákazníka,
+- **server-side agregované metriky** bez osobních údajů v eventech.
+
+Nepoužívej jako výchozí režim:
+
+- reklamní pixely na každé stránce,
+- social share widgety, které načítají skripty třetích stran,
+- UTM chaos bez pravidel,
+- lead magnety, které slibují hodnotu a doručí PDF plné vaty,
+- automatické enrichment nástroje, které sbírají profily lidí bez jasného důvodu.
+
+GDPR staví mimo jiné na zásadách minimalizace údajů, účelového omezení a transparentnosti. Viz [EUR-Lex: GDPR článek 5](https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=CELEX%3A32016R0679). V marketingu to přelož jednoduše: nesbírej data jen proto, že můžeš. Sbírej jen to, co umíš férově vysvětlit a použít k lepší službě.
+
+## B.4 Recyklace bez spamování
+
+Jeden dobrý článek může žít dlouho. Recyklace není ostuda, pokud nepřeposíláš stejný odstavec do všech kanálů jako robot s megafonem.
+
+Z jednoho článku udělej:
+
+- checklist do dokumentace,
+- krátký post s jedním konkrétním doporučením,
+- odpověď na častou otázku v supportu,
+- interní onboarding materiál,
+- malou sekci na landing page,
+- aktualizovaný úryvek do sales e-mailu.
+
+Příklad: článek o vendor auditu můžeš rozdělit na LinkedIn post o exit plánu, checklist do znalostní báze, šablonu pro zákazníky a sekci „Jak vybíráme dodavatele“ na webu. Pořád je to stejná expertiza, jen přeložená do různých situací.
+
+**Codyho komentář:** nejlepší obsahový marketing není továrna na články. Je to systém, který zachycuje, co se firma učí, a balí to tak, aby z toho měl zákazník užitek dřív, než musí mluvit s obchodem. Méně „brand awareness“, více „aha, tihle lidé chápou můj problém“.
+
+## B.5 Checklist přílohy
+
+Každý týden si odškrtni:
+
+- Přibyl do obsahové banky alespoň jeden reálný zákaznický dotaz?
+- Vybral jsi téma podle problému zákazníka, ne podle interní potřeby něco publikovat?
+- Má text konkrétní další krok, checklist nebo příklad?
+- Jsou faktická tvrzení podložená zdrojem nebo jasně označená jako názor?
+- Bydlí finální obsah na vlastním webu, ne jen na sociální síti?
+- Má článek čisté URL, titulek, meta description a interní odkazy?
+- Distribuuješ přes kanály, které respektují souhlas a minimum trackerů?
+- Víš, podle jaké jednoduché metriky poznáš, jestli obsah pomohl?
+
+Hodinová iterace: otevři posledních deset zákaznických e-mailů, ticketů nebo poznámek z callů. Vyber jednu opakovanou otázku a napiš na ni praktickou odpověď do 800–1200 slov. Na konec dej checklist. Publikuj na vlastním webu, do RSS a pošli přímý odkaz tam, kde se otázka opravdu řeší. Žádné růstové šamanství, jen užitečná práce.
+
 
 
 ## Zdroje
@@ -993,6 +1106,7 @@ Hodinová iterace: vyber jeden nástroj, který už používáš, a doplň k ně
 ## Pracovní log
 
 - 2026-08-05: Doplněna příloha A s praktickou jednostránkovou šablonou privacy-first vendor auditu, skórováním rizika, pilotním postupem a checklistem.
+- 2026-08-05: Doplněna příloha B s praktickým privacy-first obsahovým systémem pro malé SaaS týmy, týdenním rytmem, distribucí a checklistem.
 - 2026-08-05: Dopsána kapitola 7 o růstu bez chaosu: úzká hrdla, rozhodovací metriky, release proces, incidenty, vendor gate, bezpečnost a checklist.
 - 2026-08-05: Dopsána kapitola 6 o privacy-first provozu v Evropě: datová mapa, minimalizace údajů, vendor audit, logování, bezpečnostní minimum a checklist.
 - 2026-08-05: Dopsána kapitola 5 o produktivitě malého týmu: omezení rozdělané práce, týdenní rytmus, dokumentace, ADR, automatizace, AI asistenti a checklist.
