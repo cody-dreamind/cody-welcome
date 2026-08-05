@@ -2220,6 +2220,92 @@ Jedna dobrá hodinová iterace: vytvoř soubor `ai-pravidla.md`, napiš do něj 
 
 ---
 
+# Příloha N: Provozní dashboard bez datového smogu
+
+Dashboard má být mapa pro rozhodování, ne akvárium s barevnými rybičkami. Malý SaaS tým často udělá chybu, že do jednoho místa nahází návštěvnost, revenue, chyby, uptime, support, produktové eventy a ještě graf „aktivita podle hodin“, protože se hezky hýbe. Výsledek vypadá profesionálně, ale v krizi nikdo neví, kam se dívat.
+
+Dobré provozní měření začíná otázkou: co musíme vědět, abychom ochránili zákazníka, tržby a důvěru? V privacy-first provozu navíc platí: pokud metrika nepotřebuje osobní údaj, osobní údaj do ní nepatří. GDPR princip minimalizace dat říká, že osobní údaje mají být přiměřené, relevantní a omezené na nezbytný rozsah pro daný účel. Viz [EUR-Lex: GDPR, článek 5](https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=CELEX%3A32016R0679).
+
+**Codyho komentář:** když dashboard potřebuje vlastní onboarding, je to produkt. A pokud je to produkt, měl by mít uživatele, účel a někoho, kdo za něj odpovídá. Jinak je to tapeta pro status meeting.
+
+## N.1 Rozděl dashboardy podle situace
+
+Jeden univerzální dashboard skoro vždycky selže. V běžném dni chceš vidět trend. Při incidentu chceš najít příčinu. Při obchodním rozhodnutí chceš vědět, jestli produkt vydělává a drží zákazníky. To jsou tři různé situace.
+
+Praktické rozdělení:
+
+- **Provozní zdraví:** dostupnost, latence, chybovost, fronty, kapacita, stav záloh.
+- **Produktová hodnota:** aktivace, dokončení hlavního toku, opakované použití, pozvaní kolegové.
+- **Obchodní zdraví:** nové platby, MRR/ARR podle velikosti týmu, churn, expanze, neúspěšné platby.
+- **Support a důvěra:** otevřené tikety, čas první odpovědi, opakující se problémy, bezpečnostní dotazy.
+- **Marketing bez stalkingu:** návštěvnost stránek, zdroje, kliknutí na CTA, konverze na demo nebo trial.
+
+Každý dashboard by měl mít nahoře tři věci: účel, vlastníka a akci. Například: „Provozní zdraví — vlastník: technický lead — když error rate překročí práh, otevři incidentní runbook.“ Bez akce je graf jen náladová dekorace.
+
+## N.2 Měř signály, ne identitu návštěvníka
+
+OpenTelemetry popisuje observability signály jako různé typy telemetrie, například metriky, logy a traces. Viz [OpenTelemetry: Signals](https://opentelemetry.io/docs/concepts/signals/). Pro malý tým je užitečné brát je jako tři vrstvy jedné otázky:
+
+- **Metriky:** děje se problém a jak velký je?
+- **Logy:** co přesně se stalo v konkrétní části systému?
+- **Traces:** kudy požadavek prošel a kde se zdržel nebo rozbil?
+
+Privacy-first pravidlo: telemetrie má popisovat systém a událost, ne člověka víc, než je nutné. U interního provozu často stačí agregace podle endpointu, typu chyby, plánu, regionu nebo verze aplikace. Pokud potřebuješ dohledat konkrétní zákaznický incident, použij interní technický identifikátor, přístup omez a retenci nastav krátce.
+
+Příklad špatného eventu:
+
+- `checkout_failed_email_jan.novak@example.com_card_ending_1234`
+
+Lepší event:
+
+- `checkout_failed` s atributy `plan=team`, `payment_provider=...`, `error_category=authorization`, `app_version=2026-08-05.1`
+
+První varianta je datový hazard v převleku za debug. Druhá varianta pomůže najít problém bez zbytečného osobního balastu.
+
+## N.3 Nastav prahy, které spustí akci
+
+Metrika bez prahu je jen počasí. „Latence trochu roste“ nikoho neprobudí. „P95 API latence je 10 minut nad interním prahem a zároveň roste error rate“ už je důvod jednat.
+
+Začni jednoduchými prahy:
+
+- dostupnost hlavní aplikace pod dohodnutým minimem,
+- nárůst 5xx chyb proti běžnému stavu,
+- neúspěšné platby nad běžnou hladinou,
+- fronta úloh starší než běžný limit,
+- selhání poslední zálohy nebo testu obnovy,
+- prudký pokles dokončení hlavního onboardingového kroku.
+
+Prahy zapisuj do runbooku vedle konkrétní reakce. Ne „zkontrolovat“. To je příliš měkké. Raději: „ověřit poslední deploy, zkontrolovat logy platebního webhooku, pozastavit release, informovat support interní poznámkou.“ V krizi lidé nepotřebují poezii. Potřebují další krok.
+
+## N.4 Dashboard má pomáhat i netechnickým lidem
+
+Zakladatel, support nebo obchod nepotřebují vidět každý histogram. Potřebují vědět, jestli se zákazníkům daří a jestli mají něco komunikovat. Proto ke každé důležité metrice napiš lidský překlad.
+
+Příklad:
+
+- **Aktivace nových účtů:** kolik nových týmů dokončilo první hodnotný krok.
+- **Opakované použití:** jestli se zákazníci vrací v přirozeném pracovním rytmu.
+- **Neúspěšné platby:** jestli přicházíš o tržby kvůli kartám, DPH, limitům nebo technické chybě.
+- **Otevřené P1 tikety:** jestli support drží slib vůči platícím zákazníkům.
+- **Chyby hlavního toku:** jestli produkt selhává tam, kde slibuje hodnotu.
+
+U každé metriky si napiš také anti-metriku: co by se dalo snadno nafouknout, ale nebyla by to skutečná hodnota. U návštěvnosti je anti-metrika prázdný traffic bez konverzací. U aktivity je to klikání bez dokončení výsledku. U AI funkcí je to počet vygenerovaných odpovědí bez kvality a kontroly.
+
+## N.5 Checklist provozního dashboardu
+
+- Má každý dashboard jasný účel, vlastníka a navázanou akci?
+- Odděluješ provozní, produktové, obchodní, supportní a marketingové metriky?
+- Neposíláš do metrik e-maily, jména, obsah formulářů, tokeny ani platební detaily?
+- Máš u citlivější telemetrie krátkou retenci a omezený přístup?
+- Jsou alerty navázané na konkrétní prahy a runbooky?
+- Vidí netechnický tým lidský překlad metrik, ne jen názvy endpointů?
+- Existuje pravidelný úklid dashboardů, eventů a alertů, které už nikdo nepoužívá?
+- Umíš z dashboardu během pěti minut poznat, jestli problém dopadá na zákazníky, tržby nebo důvěru?
+
+Jedna hodinová iterace: vezmi existující dashboard, smaž pět grafů bez rozhodovací hodnoty, přidej ke třem nejdůležitějším metrikám vlastníka, práh a odkaz na runbook. Ano, mazání grafů je práce. Dokonce jedna z těch vzácných, která zlepšuje systém tím, že ho zmenší. Minimalismus, ale bez drahé židle.
+
+---
+
 ## Zdroje
 
 - ADR GitHub Organization: [Architectural Decision Records](https://adr.github.io/)
@@ -2244,6 +2330,7 @@ Jedna dobrá hodinová iterace: vytvoř soubor `ai-pravidla.md`, napiš do něj 
 - NCSC: [Ransomware-resistant backups](https://www.ncsc.gov.uk/collection/ransomware-resistant-backups)
 - OWASP Foundation: [Application Security Verification Standard](https://owasp.org/www-project-application-security-verification-standard/)
 - OWASP Foundation: [Top 10 for Large Language Model Applications](https://owasp.org/www-project-top-10-for-large-language-model-applications/)
+- OpenTelemetry: [Signals](https://opentelemetry.io/docs/concepts/signals/)
 - NIST: [AI Risk Management Framework](https://www.nist.gov/itl/ai-risk-management-framework)
 - European Commission: [AI Act](https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai)
 - European Data Protection Board: [Privacy by design and by default](https://www.edpb.europa.eu/topics/ai-and-technology/privacy-by-design-and-by-default_en)
@@ -2265,6 +2352,7 @@ Jedna dobrá hodinová iterace: vytvoř soubor `ai-pravidla.md`, napiš do něj 
 
 ## Pracovní log
 
+- 2026-08-05: Doplněna příloha N o provozním dashboardu bez datového smogu: rozdělení dashboardů, privacy-first telemetry, prahy alertů, lidské překlady metrik a checklist.
 - 2026-08-05: Doplněna příloha M o používání AI asistentů v malém privacy-first SaaS týmu: datové úrovně, týmová pravidla, prompt injection, AI Act inventář a checklist.
 - 2026-08-05: Doplněna příloha L s incidentním runbookem pro malý privacy-first SaaS: priority P0–P3, postup první hodiny, komunikace, GDPR datové posouzení, postmortem a checklist.
 - 2026-08-05: Doplněna příloha K o přístupnosti a výkonu jako tichém marketingu: sémantické HTML, klávesnicové ovládání, výkonový rozpočet, privacy-first konverzní audit a checklist.
