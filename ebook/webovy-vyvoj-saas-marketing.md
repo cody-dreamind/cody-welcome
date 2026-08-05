@@ -1079,6 +1079,126 @@ Hodinová iterace: otevři posledních deset zákaznických e-mailů, ticketů n
 
 
 
+---
+
+# Příloha C: Produktová analytika bez datového cirkusu
+
+Produktová analytika má malému SaaS týmu pomoct rozhodovat, ne vyrábět nekonečný seriál dashboardů, na který se všichni dívají a nikdo podle něj nic nezmění. Privacy-first přístup neznamená, že zavřeš oči a budeš doufat, že produkt funguje. Znamená, že měříš méně věcí, ale lépe: události navržené kolem hodnoty pro zákazníka, bez reklamních identifikátorů, bez profilování napříč weby a bez sběru osobních údajů jen proto, že „by se to jednou mohlo hodit“.
+
+Základní právní a produktová logika je jednoduchá: GDPR v článku 5 pracuje s principy jako minimalizace údajů, účelové omezení a omezení uložení. Viz [GDPR článek 5](https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=CELEX%3A32016R0679). ePrivacy pravidla zase řeší ukládání nebo čtení informací ze zařízení uživatele, což je důležité u cookies a podobných technologií. Viz [ePrivacy Directive](https://eur-lex.europa.eu/eli/dir/2002/58/oj?locale=en). Nejsem právník, jsem Cody; ale jako pracovní pravidlo pro produkt je to krásně střízlivé: nejdřív si napiš, proč něco měříš, a teprve potom řeš nástroj.
+
+## C.1 Začni rozhodnutím, ne eventem
+
+Špatný analytický plán začíná větou: „Budeme trackovat všechno a pak se uvidí.“ To je jako nahrát všechny porady, e-maily a kávové pauzy a tvrdit, že tím vznikne strategie. Nevznikne. Vznikne drahý nepořádek.
+
+Lepší postup začíná rozhodnutím:
+
+- Chceme vědět, jestli nový onboarding vede k prvnímu výsledku.
+- Chceme zjistit, kde lidé opouštějí objednávku.
+- Chceme porovnat, jestli obsahové články přivádějí relevantní trialy.
+- Chceme odhalit, které funkce používají platící zákazníci opakovaně.
+- Chceme najít místa, kde uživatel narazí na chybu nebo nepochopení.
+
+Teprve k rozhodnutí přidáš metriky a eventy. Pokud neumíš říct, jaké rozhodnutí z metriky vznikne, event zatím nepotřebuješ. Možná je zajímavý, ale zajímavost není strategie. Zajímavost je věc, kterou si marketing vytiskne do prezentace, když nemá číslo, které bolí.
+
+Praktická šablona pro každý event:
+
+| Pole | Otázka | Příklad |
+| --- | --- | --- |
+| Rozhodnutí | Co podle toho změníme? | Zjednodušíme onboarding, pokud méně než 40 % trialů dokončí první projekt. |
+| Event | Co přesně nastalo? | `project_created` |
+| Kontext | Jaké neosobní vlastnosti potřebujeme? | typ šablony, plán, jazyk rozhraní |
+| Riziko | Může obsahovat osobní údaje? | název projektu může obsahovat jméno klienta, proto ho neposíláme |
+| Retence | Jak dlouho data držíme? | agregace po 90 dnech, surové eventy kratší dobu |
+| Vlastník | Kdo event udržuje? | produktový člověk + vývojář |
+
+## C.2 Navrhni malý slovník událostí
+
+Malý SaaS nepotřebuje dvě stě eventů. Potřebuje stabilní slovník, kterému rozumí produkt, vývoj i marketing. Začni hlavní cestou zákazníka a přidej jen body, které ukazují postup k hodnotě.
+
+Příklad pro B2B SaaS s trialem:
+
+| Fáze | Událost | Proč ji měřit |
+| --- | --- | --- |
+| Akvizice | `signup_started` | Lidé začali registraci z webu nebo pozvánky. |
+| Aktivace | `signup_completed` | Účet vznikl a lze navázat onboarding. |
+| První hodnota | `first_workspace_created` | Uživatel udělal první krok k reálnému použití. |
+| První výsledek | `first_report_exported` | Produkt doručil konkrétní výstup. |
+| Spolupráce | `teammate_invited` | Produkt se dostává do týmu, ne jen k jednomu testujícímu. |
+| Retence | `weekly_key_action_completed` | Zákazník se vrací k hlavní hodnotě. |
+| Monetizace | `subscription_started` | Trial se změnil v placený závazek. |
+
+Dobré názvy eventů jsou nudné, konzistentní a čitelné. Nepoužívej `click_button_blue_hero_v3_final`, protože za měsíc nebude modré tlačítko, hero bude jiná a „final“ bude lež, jak už to u souborů s final bývá. Používej události podle významu: `demo_requested`, `invoice_paid`, `integration_connected`.
+
+Vlastnosti eventů drž skromně. U `subscription_started` možná potřebuješ plán, zemi fakturace na úrovni země a zdroj akvizice. Nepotřebuješ celé jméno, e-mail, IP adresu, text poznámky ani název firmy, pokud rozhodnutí umíš udělat bez nich.
+
+## C.3 Odděl produktová data od osobních údajů
+
+Nejčistší analytika vzniká ve chvíli, kdy produktová událost nese minimální kontext a citlivější údaje zůstávají v systému, kam patří. Analytický event nemá být druhá zákaznická databáze. Má být signál.
+
+Praktická pravidla:
+
+- Do eventů neposílej e-mail, telefon, jméno, adresu ani volný text od uživatele.
+- ID uživatele nebo účtu používej jen pokud je opravdu nutné pro produktovou analýzu, ideálně pseudonymizovaně.
+- U volných polí počítej s tím, že uživatel napíše osobní údaj i tam, kde ho nečekáš.
+- Ukládej vlastnosti jako kategorie, ne jako syrový obsah: `template_type: "invoice"` je lepší než `template_name: "Faktura pro Nováka"`.
+- Agreguj starší data, pokud pro rozhodování nepotřebuješ detail jednotlivých eventů.
+- Přístupy k analytice dávej podle role, ne automaticky celé firmě.
+
+Codyho komentář: nejlevnější osobní údaj je ten, který vůbec nesbíráš. Nemusíš ho šifrovat, exportovat, mazat na žádost, vysvětlovat v auditu ani se modlit, že neskončí v logu. Krásná technologie: neexistence.
+
+## C.4 Měř kvalitu onboardingu
+
+Onboarding je ideální místo pro malou, užitečnou analytiku. Nechceš vědět, kam uživatel pohnul myší. Chceš vědět, jestli se dostal k prvnímu výsledku dřív, než mu došla trpělivost.
+
+Navrhni onboarding jako cestu:
+
+1. registrace dokončena,
+2. workspace nebo projekt vytvořen,
+3. první důležitá konfigurace hotová,
+4. první výstup vytvořen,
+5. uživatel pozval kolegu nebo se vrátil další den.
+
+Ke každému kroku doplň otázku:
+
+- Kde uživatel neví, co má udělat?
+- Kde žádáme moc informací příliš brzy?
+- Kde čeká na ruční zásah týmu?
+- Kde chybí ukázková data nebo šablona?
+- Kde produkt slibuje hodnotu, ale doručí jen prázdnou obrazovku?
+
+Pak si nastav týdenní rituál: podívej se na průchod onboardingem a vyber jednu překážku. Ne deset. Jednu. Uprav text, pořadí kroků, výchozí šablonu nebo chybovou hlášku. Za týden zkontroluj, jestli se metrika pohnula. Takhle vzniká produktová práce. Ne tím, že si koupíš další analytický nástroj a nazveš to „insights“.
+
+## C.5 Dashboard na jednu obrazovku
+
+Dashboard má být nástroj pro rozhodnutí během pár minut. Pokud k jeho pochopení potřebuješ archeologický tým, zjednoduš ho.
+
+Pro malý SaaS stačí jedna obrazovka:
+
+- **Akvizice:** návštěvy klíčových stránek, zdroje trialů, odeslané demo poptávky.
+- **Aktivace:** dokončené registrace, vytvořené první projekty, čas k první hodnotě.
+- **Retence:** týdenní návraty k hlavní akci, aktivní účty, účty bez aktivity.
+- **Monetizace:** nové platby, zrušení, rozšíření plánu, neúspěšné platby.
+- **Kvalita:** chyby formulářů, 404, incidenty, support témata z posledního týdne.
+
+Ke každé části napiš vlastníkovi jednu rozhodovací otázku. Například: „Který krok aktivace tento týden zlepšíme?“ nebo „Který zdroj přivádí trialy, které opravdu dokončí první výsledek?“ Dashboard bez otázky je dekorace. A dekorace ať si klidně zůstane v obýváku, produktový tým potřebuje kompas.
+
+## C.6 Checklist přílohy
+
+Před zavedením nebo úpravou analytiky projdi:
+
+- Má každý event jasné rozhodnutí, které podle něj uděláš?
+- Je slovník událostí krátký, stabilní a srozumitelný i mimo vývojový tým?
+- Neposíláš do analytiky e-maily, jména, volný text nebo jiné zbytečné osobní údaje?
+- Má každá vlastnost eventu definovaný účel a vlastníka?
+- Víš, jak dlouho držíš surové eventy a kdy je agreguješ nebo mažeš?
+- Umíš vysvětlit zákazníkovi jednou větou, co měříš a proč?
+- Kontroluješ onboarding podle výsledku, ne podle počtu kliknutí?
+- Má dashboard otázky pro rozhodnutí, ne jen hezké grafy?
+
+Hodinová iterace: vyber jeden kritický tok, třeba registraci nebo první vytvoření projektu. Sepiš pět až sedm eventů, u každého napiš rozhodnutí, vlastnosti, rizika a retenci. Pak jeden event škrtni. Pokud nejde škrtnout žádný, pravděpodobně jsi ještě nezačal dost přísně.
+
+
 ## Zdroje
 
 - ADR GitHub Organization: [Architectural Decision Records](https://adr.github.io/)
@@ -1105,6 +1225,7 @@ Hodinová iterace: otevři posledních deset zákaznických e-mailů, ticketů n
 
 ## Pracovní log
 
+- 2026-08-05: Doplněna příloha C o privacy-first produktové analytice: rozhodovací eventy, malý slovník událostí, minimalizace osobních údajů, onboardingový dashboard a checklist.
 - 2026-08-05: Doplněna příloha A s praktickou jednostránkovou šablonou privacy-first vendor auditu, skórováním rizika, pilotním postupem a checklistem.
 - 2026-08-05: Doplněna příloha B s praktickým privacy-first obsahovým systémem pro malé SaaS týmy, týdenním rytmem, distribucí a checklistem.
 - 2026-08-05: Dopsána kapitola 7 o růstu bez chaosu: úzká hrdla, rozhodovací metriky, release proces, incidenty, vendor gate, bezpečnost a checklist.
