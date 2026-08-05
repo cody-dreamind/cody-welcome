@@ -374,18 +374,128 @@ Než budeš první SaaS verzi považovat za hotovou, projdi si:
 
 První verze SaaS má být malá, ale dospělá. Malá v rozsahu, dospělá v odpovědnosti. Když zákazník svěří produktu data, čas a peníze, není to beta hračka. Je to slib. A sliby se v dobrém SaaS neřeší až ve verzi 2.0.
 
+---
+
+# Kapitola 4: Marketing bez závislosti na platformách
+
+Marketing malého SaaS nebo služby často začne otázkou: „Na které síti teď musíme být?“ To je pochopitelné, ale nebezpečně krátkozraké. Platformy mění algoritmy, dosahy, pravidla i ceny. Dnes funguje vlákno, zítra krátké video, pozítří placená distribuce, a mezitím někdo v dashboardu přejmenuje tlačítko tak, aby se celý tým cítil mladší. Roztomilé. Ale byznys na tom stavět nechceš.
+
+Privacy-first marketing začíná jinde: vlastním webem, přímými odkazy, obsahem, který pomáhá rozhodnout, a databází kontaktů získanou férově. Sociální sítě můžou být distribuce, ne domov. Domov je místo, kde máš kontrolu nad obsahem, měřením, dostupností, archivem a vztahem se čtenářem.
+
+**Codyho komentář:** nejsem proti platformám. Jsem proti tomu, aby jediný plán růstu byl „snad nás algoritmus dneska pohladí“. Algoritmus je náladový domácí mazlíček. Web, RSS a dobrý obsah jsou nudnější, ale platí nájem.
+
+## 4.1 Vlastní kanál je strategická infrastruktura
+
+Vlastní kanál není jen blog. Je to kombinace stránek, článků, případových studií, dokumentace, changelogu, RSS feedu, newsletteru a přímých URL, které můžeš poslat zákazníkovi bez prostředníka. Když někdo hledá řešení problému, nechce nutně „sledovat značku“. Chce pochopit, jestli mu umíš pomoct.
+
+Proto si obsah rozděl podle práce, kterou má udělat:
+
+- **Vysvětlovací obsah:** pomáhá pojmenovat problém a ukazuje způsob přemýšlení.
+- **Rozhodovací obsah:** porovnává varianty, vysvětluje cenu, rizika, proces a limity.
+- **Důkazní obsah:** ukazuje reference, případové studie, ukázky produktu a konkrétní výsledky.
+- **Aktivační obsah:** vede na audit, demo, kalkulačku, checklist, šablonu nebo konzultaci.
+- **Retenční obsah:** vzdělává stávající zákazníky, oznamuje změny a snižuje podporu.
+
+Google ve svém oficiálním doporučení zdůrazňuje užitečný, spolehlivý obsah tvořený primárně pro lidi, ne obsah psaný jen pro vyhledávače. Viz [Google Search Central: Creating helpful, reliable, people-first content](https://developers.google.com/search/docs/fundamentals/creating-helpful-content). Prakticky to znamená: piš z vlastní zkušenosti, ukazuj příklady, odpovídej na skutečné otázky zákazníků a neslibuj odpověď tam, kde ji nemáš.
+
+## 4.2 Obsahový plán pro malý tým
+
+Malý tým nepotřebuje redakční kalendář o padesáti položkách. Potřebuje rytmus, který vydrží. Lepší je jeden dobrý článek týdně než nadšený sprint deseti textů a potom tři měsíce ticho, protože všichni zjistili, že publikování není magie, ale práce.
+
+Jednoduchý měsíční plán:
+
+1. Jeden hlubší článek k hlavnímu problému zákazníka.
+2. Jedna případová studie nebo rozbor konkrétní situace.
+3. Jeden praktický checklist nebo šablona.
+4. Jeden krátký changelog nebo produktová poznámka.
+
+Příklad pro SaaS na správu poptávek:
+
+- „Jak malé servisní firmy ztrácí poptávky a kde vznikají úniky“
+- „Před a po: z telefonu a e-mailu do jednoho přehledu poptávek“
+- „Checklist: co musí obsahovat dobrý poptávkový formulář“
+- „Novinka: týdenní přehled nevyřízených poptávek bez ručního dohledávání“
+
+Každý obsah by měl mít další krok. Ne vždy prodejní. Někdy stačí „přečti navazující článek“, „stáhni checklist“, „pošli nám svůj proces“, „objednej audit“. Důležité je, aby čtenář nezůstal stát na konci textu jako turista u rozbité cedule.
+
+## 4.3 Distribuce: jeden obsah, více férových cest
+
+Publikovat článek a čekat je strategie typu „hodil jsem rohlík do lesa, snad přijde zákazník“. Distribuce musí být součást práce. Ale privacy-first distribuce nepotřebuje sledovací skripty ani temné remarketingové publikum.
+
+U každého nového obsahu si připrav:
+
+- krátký post na sociální síť s přímým odkazem,
+- e-mail pro lidi, kteří si o něj řekli,
+- interní odkazy z relevantních starších článků,
+- zmínku v dokumentaci, changelogu nebo produktu, pokud pomáhá uživatelům,
+- osobní zprávu partnerům nebo zákazníkům, pro které je obsah opravdu relevantní,
+- RSS položku pro čtenáře, kteří chtějí sledovat web bez algoritmu.
+
+RSS je staré, ale užitečné. Specifikace RSS 2.0 popisuje kanál jako XML dokument s položkami, titulky, odkazy a popisy. Viz [RSS Advisory Board: RSS 2.0 Specification](https://www.rssboard.org/rss-specification). V praxi je RSS výborné pro changelog, blog, produktové novinky i dokumentaci. Nepotřebuje účet, pixel ani platformní rozmar. Jen stabilní URL a pravidelný obsah.
+
+## 4.4 Newsletter s respektem, ne jako past
+
+Newsletter může být skvělý kanál, pokud není převlečený spam. V Evropě musíš brát vážně souhlas, transparentnost a možnost odhlášení. ePrivacy směrnice řeší nevyžádanou komunikaci pro přímý marketing a zakazuje mimo jiné marketingové e-maily bez jasné identity odesílatele nebo bez platné adresy pro ukončení zasílání. Viz [EUR-Lex: ePrivacy Directive 2002/58/EC](https://eur-lex.europa.eu/eli/dir/2002/58/oj?locale=en). Portál Your Europe zároveň zdůrazňuje, že souhlas má být jasná aktivní volba, ne předem zaškrtnutá nebo schovaná možnost. Viz [Your Europe: Data protection and online privacy](https://europa.eu/youreurope/citizens/consumers/internet-telecoms/data-protection-online-privacy/index_en.htm).
+
+Prakticky:
+
+- formulář jasně říká, co bude člověk dostávat a jak často,
+- souhlas není podmínkou pro stažení věci, pokud to nedává férový smysl,
+- každý e-mail má jednoduché odhlášení,
+- neposíláš marketing lidem, kteří se přihlásili jen k technickým notifikacím,
+- nesbíráš víc údajů než potřebuješ,
+- databázi kontaktů pravidelně čistíš,
+- do mailingového nástroje neposíláš data, která bys neuměl zákazníkovi vysvětlit.
+
+Newsletter má mít slib. Například: „Jednou týdně praktický tip k webu, SaaS a privacy-first marketingu v Evropě.“ To je jasnější než „Novinky a zajímavosti“. Novinky koho? Zajímavosti pro koho? Mlhovina v předmětu e-mailu není brand, je to mlha s logem.
+
+## 4.5 Komunita a partnerství bez růstového divadla
+
+Komunita nevzniká založením Discordu. Vzniká opakovanou užitečností. Pokud máš malý tým, začni jednodušeji: odpovídej na otázky v článcích, pořádej malé workshopy, sdílej veřejné checklisty, spolupracuj s komplementárními firmami a dělej rozbory, které lidem reálně šetří čas.
+
+Dobrý partner pro privacy-first SaaS není ten, kdo slíbí „dosah“. Je to ten, kdo má důvěru u podobné cílové skupiny a nechce ji spálit agresivním prodejem. Partnerství může být:
+
+- společný praktický webinář bez skrytého sběru kontaktů,
+- článek s rozborem konkrétního problému,
+- doporučení nástroje v dokumentaci,
+- balíček služeb pro stejný segment,
+- vzájemný audit procesu nebo bezpečnosti,
+- otevřená šablona, kterou mohou používat i lidé mimo tvoji bublinu.
+
+Měř kvalitu partnerství podle obchodních rozhovorů, kvalifikovaných poptávek, retence a důvěry, ne podle počtu lajků. Lajk je jemné poklepání na rameno. Faktura je důkaz, že někdo vidí hodnotu.
+
+## 4.6 Checklist čtvrté kapitoly
+
+Než přidáš další platformu do marketingového mixu, projdi si:
+
+- Máš na vlastním webu jasné stránky pro problém, řešení, důkazy, cenu nebo další krok?
+- Má každý nový obsah jeden konkrétní účel a návaznou akci?
+- Umíš jeden článek rozumně distribuovat přes sociální post, e-mail, interní odkazy, RSS a osobní doporučení?
+- Má web funkční RSS pro blog, changelog nebo novinky?
+- Je newsletter postavený na jasném souhlasu, srozumitelném slibu a snadném odhlášení?
+- Neposíláš do marketingových nástrojů osobní údaje, které nepotřebuješ?
+- Máš aspoň jeden partnerský kanál založený na důvěře, ne jen na výměně log?
+- Vyhodnocuješ marketing podle kvalitních konverzací a plateb, ne jen podle impresí?
+
+Pokud chceš udělat jednu hodinovou iteraci, vyber nejlepší existující článek, přidej do něj jasné CTA, napoj ho na RSS, pošli ho ručně třem relevantním lidem a přidej interní odkazy z dalších dvou stránek. Není to sexy. Funguje to. Což je v marketingu podezřele často lepší než sexy.
+
 ## Zdroje
 
 - EUR-Lex: [Nařízení GDPR 2016/679, článek 5 a 25](https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=CELEX%3A32016R0679)
+- EUR-Lex: [ePrivacy Directive 2002/58/EC](https://eur-lex.europa.eu/eli/dir/2002/58/oj?locale=en)
 - OWASP Foundation: [Application Security Verification Standard](https://owasp.org/www-project-application-security-verification-standard/)
 - European Data Protection Board: [Privacy by design and by default](https://www.edpb.europa.eu/topics/ai-and-technology/privacy-by-design-and-by-default_en)
 - European Data Protection Board: [Pokyny 4/2019 k článku 25 — záměrná a standardní ochrana osobních údajů](https://www.edpb.europa.eu/documents/guideline/guidelines-42019-on-article-25-data-protection-by-design-and-by-default_cs)
+- Google Search Central: [Creating helpful, reliable, people-first content](https://developers.google.com/search/docs/fundamentals/creating-helpful-content)
 - web.dev: [Core Web Vitals](https://web.dev/articles/vitals)
+- RSS Advisory Board: [RSS 2.0 Specification](https://www.rssboard.org/rss-specification)
+- Your Europe: [Data protection and online privacy](https://europa.eu/youreurope/citizens/consumers/internet-telecoms/data-protection-online-privacy/index_en.htm)
 - W3C: [Web Content Accessibility Guidelines 2.2](https://www.w3.org/TR/WCAG22/)
 - Google Search Central: [SEO Starter Guide](https://developers.google.com/search/docs/fundamentals/seo-starter-guide)
 
 ## Pracovní log
 
+- 2026-08-05: Dopsána kapitola 4 o marketingu bez závislosti na platformách: vlastní kanály, obsahový rytmus, distribuce, RSS, newsletter se souhlasem, partnerství a checklist.
 - 2026-08-05: Dopsána kapitola 3 o SaaS cestě k první platbě: MVP, validace platbou, onboarding, privacy-first metriky, bezpečnostní minimum a checklist.
 - 2026-08-05: Dopsána kapitola 2 o webu jako obchodníkovi: hero sekce, důvěra, struktura homepage, technická kvalita, privacy-first měření a checklist.
 - 2026-08-05: Vytvořena základní struktura e-booku, úvod, osnova a dokončená kapitola 1 o definici problému, nabídce a privacy-first zadání produktu.
