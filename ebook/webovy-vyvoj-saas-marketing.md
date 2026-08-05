@@ -1680,6 +1680,116 @@ Před tím, než si odškrtneš „zálohy máme“, projdi:
 
 Hodinová iterace: vyber jednu kritickou databázi nebo úložiště, napiš k ní RPO/RTO, najdi poslední zálohu a ověř aspoň první krok obnovy v izolovaném prostředí. Pokud neumíš říct, kde záloha je, právě jsi našel nejlevnější bezpečnostní audit svého života.
 
+---
+
+# Příloha H: Předstartovní checklist pro privacy-first SaaS
+
+Launch není slavnostní tlačítko. Launch je okamžik, kdy se tvoje hypotézy potkají s realitou, zákazníky a občas i s tím jedním formulářem, který fungoval jen na tvém notebooku. Malý tým nepotřebuje před vydáním třicetistránkový korporátní proces. Potřebuje krátký seznam věcí, které nesmí spadnout na zem.
+
+Ber tuhle přílohu jako poslední průchod před tím, než produkt pustíš prvním platícím zákazníkům nebo širšímu publiku. Není to audit pro banku. Je to brzda proti zbytečným průšvihům, které se řeší hůř, když už někdo poslal peníze.
+
+**Codyho komentář:** dobrý launch není ten, kde je všechno dokonalé. Dobrý launch je ten, kde víš, co je nedokonalé, co je riziko, kdo ho hlídá a jak rychle to opravíš. Perfekcionismus je drahý. Nevědomost ještě dražší.
+
+## H.1 Nabídka a očekávání
+
+Než pustíš návštěvnost, zkontroluj, jestli web a produkt slibují stejnou věc. Když homepage říká „automatizujeme zákaznickou podporu“ a aplikace umí zatím jen třídit dotazy podle štítků, není to MVP. Je to slib v převleku.
+
+Praktická kontrola:
+
+- Homepage jednou větou říká, pro koho produkt je a jaký výsledek slibuje.
+- Pricing nebo objednávka jasně vysvětluje, co je zahrnuté a co ne.
+- Onboarding neukazuje funkce, které ještě nejsou připravené.
+- FAQ odpovídá na bezpečnost, data, podporu, fakturaci a zrušení.
+- Produkt nepoužívá vágní slova jako „AI magie“, pokud neumí vysvětlit konkrétní výstup.
+- V obchodní komunikaci rozlišuješ hotové funkce, pilotní režim a plánované věci.
+
+Jednoduchý test: pošli stránku člověku mimo tým a zeptej se ho, co by po zaplacení očekával. Pokud jeho odpověď neodpovídá realitě produktu, neupravuj nejdřív produkt. Uprav slib. Slib je levnější změnit než důvěru po zklamání.
+
+## H.2 Produktový tok od registrace po první hodnotu
+
+Před launchem projdi hlavní tok jako nový zákazník. Ne jako vývojář s vyplněnou databází, zapnutými feature flagy a schopností ignorovat chyby v konzoli. Jako člověk, který přišel vyřešit problém a nemá náladu luštit interní logiku.
+
+Minimální scénář:
+
+1. Otevři web z anonymního okna.
+2. Klikni na hlavní CTA.
+3. Vytvoř účet nebo objednávku.
+4. Dokonči základní nastavení.
+5. Proveď první hodnotnou akci.
+6. Ověř e-mailové potvrzení nebo další krok.
+7. Zkus se odhlásit, přihlásit a pokračovat.
+
+U každého kroku si napiš tři věci: co je jasné, co je matoucí a co se může rozbít. Z matoucích míst pak udělej malé úpravy textu, ne rovnou redesign. V prvním týdnu po launchi často vyhrávají mikrotexty: popisek pole, prázdný stav, potvrzení akce, lepší chyba.
+
+Privacy-first detail: testovací účty a demo data označ a pravidelně maž. Do screenshotů, support dokumentace ani analytiky neposílej reálné osobní údaje zákazníků. Když potřebuješ ukázat příklad, vytvoř fiktivní firmu, fiktivní e-mail a fiktivní objednávku. Nudné? Ano. Bezpečné? Taky ano. Nudná bezpečnost je podceňovaný luxus.
+
+## H.3 Platba, fakturace a zrušení bez schovávané pasti
+
+Platba je součást produktu. Pokud je rozbitá, nejasná nebo působí podezřele, zákazník neřeší, že máš hezkou architekturu. Řeší, jestli ti může věřit.
+
+Před startem ověř:
+
+- Cena na webu odpovídá ceně v checkoutu.
+- Měna, DPH a fakturační údaje jsou vysvětlené srozumitelně.
+- Potvrzení objednávky dorazí na správný e-mail.
+- Zákazník ví, kdy a za co bude účtován.
+- Zkušební období má jasný konec a pravidla.
+- Zrušení služby nevyžaduje prosit support o milost.
+- Interně víš, co se stane s daty po ukončení účtu.
+
+U evropského SaaS si dej zvlášť pozor na daňový a právní kontext podle typu zákazníků a zemí, do kterých prodáváš. V téhle knize nejde o právní poradenství, ale o provozní disciplínu: cenu, fakturaci, retenční lhůty a výmaz dat řeš dřív, než ti první zákazník pošle dotaz „a co moje data po zrušení?“
+
+## H.4 Monitoring, support a incident cesta
+
+První uživatelé nepotřebují dokonalý produkt. Potřebují vědět, že když se něco pokazí, nezmizíš do kouře jako levný hosting v pátek večer.
+
+Minimum pro start:
+
+- Dostupnost hlavní stránky a aplikace hlídá jednoduchý uptime check.
+- Chyby v aplikaci padají do místa, které někdo opravdu čte.
+- Support má jeden jasný vstup, ne pět kanálů a naději.
+- Existuje šablona odpovědi pro výpadek, chybné účtování a ztracený přístup.
+- Incident má vlastní poznámku: čas, dopad, příčina, oprava, prevence.
+- Po incidentu aktualizuješ dokumentaci nebo checklist, ne jen nervový systém.
+
+Monitoring privacy-first neznamená slepotu. Znamená, že sleduješ zdraví služby bez sběru zbytečných osobních údajů. Loguj stav, trasu, technickou chybu a anonymní korelační ID. Neloguj obsah zpráv, hesla, tokeny, osobní poznámky ani celé payloady jen proto, že je to pohodlné.
+
+## H.5 Launch rytmus: malá dávka, rychlá zpětná vazba
+
+Nedělej z prvního vydání ohňostroj, pokud ještě nevíš, jak produkt reaguje na skutečné použití. Lepší je malá dávka kvalitních uživatelů než velká vlna návštěvnosti, která ti vyrobí jen chaos a padesát protichůdných názorů.
+
+Praktický rytmus:
+
+- **Den 0:** interní průchod hlavním tokem a kontrola plateb, e-mailů, supportu a monitoringu.
+- **Den 1–3:** pozvi 3–5 vhodných zákazníků, kteří mají problém opravdu teď.
+- **Den 4–7:** oprav blokery, přepiš matoucí texty, doplň dokumentaci podle dotazů.
+- **Týden 2:** rozšiř pozvánky na další malou skupinu a sleduj opakované vzory.
+- **Týden 3+:** teprve potom zvaž širší obsahovou distribuci, partnerství nebo placenou propagaci.
+
+Každý den v prvním týdnu si polož tři otázky:
+
+1. Kde se lidé zasekli?
+2. Která otázka se opakovala?
+3. Co můžeme opravit do zítřka bez velké architektury?
+
+Takhle launch nezabije tým. Udělá z něj rytmus učení.
+
+## H.6 Checklist přílohy
+
+Před startem produktu projdi tenhle seznam bez romantiky:
+
+- Je slib na webu v souladu s tím, co produkt dnes opravdu umí?
+- Prošel někdo mimo tým hlavní tok od CTA po první hodnotu?
+- Máš připravené prázdné stavy, chyby a potvrzení hlavních akcí?
+- Funguje platba, potvrzení, fakturační komunikace a zrušení?
+- Ví zákazník, co se stane s jeho daty po ukončení služby?
+- Máš jeden support vstup a jasný interní postup pro incident?
+- Hlídáš dostupnost a chyby bez ukládání citlivých dat do logů?
+- Máš připravený malý launch rytmus místo jednorázového výstřelu do tmy?
+- Víš, které tři signály budeš po startu sledovat každý den?
+
+Pokud chceš udělat jednu věc hned: vezmi anonymní okno, projdi registraci, první hodnotnou akci, platbu nebo objednávku a zrušení. Všechno zapisuj. Produkt ti během dvaceti minut řekne víc než další strategická porada, která by stejně skončila tím, že někdo navrhne nové logo.
+
 
 ## Zdroje
 
@@ -1717,6 +1827,7 @@ Hodinová iterace: vyber jednu kritickou databázi nebo úložiště, napiš k n
 
 ## Pracovní log
 
+- 2026-08-05: Doplněna příloha H s předstartovním checklistem pro privacy-first SaaS: sladění slibu a produktu, průchod hlavním tokem, platby, support, monitoring a malý launch rytmus.
 - 2026-08-05: Doplněna příloha G o zálohách a obnově SaaS: RPO/RTO, oddělené kopie, test obnovy, provozní mapa, privacy-first incident postup a checklist.
 - 2026-08-05: Doplněna příloha F o supportu a dokumentaci jako produktové páce: jasný support slib, třídění tiketů, dokumentace u akce, privacy-first řešení požadavků a checklist.
 - 2026-08-05: Doplněna příloha E o lifecycle e-mailech bez spamování: rozdělení zpráv podle účelu, onboardingovou sekvenci, minimalizaci segmentace, preference, odhlášení a checklist.
