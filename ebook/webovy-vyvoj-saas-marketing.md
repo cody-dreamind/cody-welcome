@@ -1308,6 +1308,125 @@ Před zveřejněním nebo úpravou pricingu projdi:
 Hodinová iterace: vezmi existující pricing nebo návrh nabídky a přepiš ho do tabulky „tarif — pro koho — výsledek — hranice — signál pro upgrade“. Pak vyber jednu matoucí funkci nebo limit a nahraď ji zákaznickým výsledkem. Pokud to nejde, problém není v copywritingu, ale v balíčkování.
 
 
+# Příloha E: Lifecycle e-maily bez spamování
+
+Lifecycle e-mail není newsletter s falešným knírkem. Je to provozní a produktová komunikace, která uživateli pomáhá udělat další smysluplný krok: dokončit registraci, pochopit první hodnotu, pozvat kolegu, obnovit fakturaci, vyřešit problém nebo se férově rozloučit. Když se povede, zákazník má pocit, že produkt myslí dopředu. Když se nepovede, má pocit, že ho pronásleduje automat s kávou, který se naučil psát předměty e-mailů.
+
+Privacy-first přístup znamená dvě věci. Zaprvé: neposílej zprávu jen proto, že umíš změřit segment. Zadruhé: u každé automatizace si napiš účel, právní základ, zdroj dat, retenci a jednoduchou možnost odmítnutí tam, kde jde o obchodní sdělení. ÚOOÚ u obchodních sdělení připomíná, že zpráva má být jasně označená, odesílatel nesmí být skrytý a adresát musí mít platnou adresu nebo jiný přímý a účinný způsob odmítnutí; viz [Obchodní sdělení](https://uoou.gov.cz/index.php/profesional/qa-otazky-a-odpovedi/obchodni-sdeleni) a přehled k [GDPR a přímému elektronickému marketingu](https://uoou.gov.cz/novinky/obchodni-sdeleni/gdpr-a-primy-elektronicky-marketing). Tohle není právní poradenství, ale produktový kompas: e-mail má být užitečný i obhajitelný.
+
+## E.1 Rozděl zprávy podle účelu
+
+Nejdřív si odděl typy komunikace. Tím zabráníš tomu, aby se každý e-mail tvářil jako „servisní“, i když ve skutečnosti prodává další tarif.
+
+Praktické rozdělení:
+
+- **Transakční zprávy:** potvrzení registrace, reset hesla, faktura, bezpečnostní upozornění, změna podmínek služby.
+- **Produktové zprávy:** připomenutí nedokončeného onboardingu, tip k používané funkci, upozornění na limit, shrnutí aktivity.
+- **Marketingové zprávy:** newsletter, akce, upsell, pozvánka na webinář, případová studie, reaktivační nabídka.
+- **Support zprávy:** odpověď na ticket, stav incidentu, žádost o doplnění informací, uzavření problému.
+
+U každého typu si napiš pravidlo: „Kdy je legitimní zprávu poslat?“ Například bezpečnostní upozornění pošleš vždy, protože chrání účet. Newsletter pošleš jen lidem, kteří splňují podmínky pro obchodní sdělení a mají snadný opt-out. Produktový tip pošleš jen tehdy, když uživatel opravdu používá související funkci nebo je uprostřed konkrétního toku.
+
+Špatný příklad: „Všem neaktivním uživatelům pošleme pět e-mailů, ať se vrátí.“
+
+Lepší příklad: „Uživatelům, kteří vytvořili projekt, ale nepozvali kolegu, pošleme po třech dnech jeden e-mail s konkrétním přínosem spolupráce a možností vypnout produktové tipy.“
+
+## E.2 Onboardingová sekvence má vést k výsledku
+
+Onboardingové e-maily nemají popisovat produkt od sklepa po střechu. Mají dovést uživatele k prvnímu výsledku. Pokud SaaS slibuje pořádek v poptávkách, první e-mail nemá vyjmenovat integrace. Má pomoct dostat první poptávku do systému a odpovědět na ni.
+
+Jednoduchá sekvence pro B2B SaaS:
+
+| Den | Spouštěč | Cíl e-mailu | Příklad obsahu |
+| --- | --- | --- | --- |
+| 0 | registrace | potvrdit další krok | „Vytvoř první projekt a pošli si testovací poptávku.“ |
+| 1 | projekt existuje, bez dat | odstranit prázdnou obrazovku | „Tady je CSV šablona nebo ruční příklad první položky.“ |
+| 3 | data existují, bez spolupráce | ukázat týmovou hodnotu | „Pozvi kolegu, ať neřešíte duplicitní odpovědi.“ |
+| 7 | žádný klíčový výsledek | nabídnout pomoc | „Pošli mi odpověď, kde ses zasekl, nebo si vyber 15min call.“ |
+| 14 | výsledek dosažen | posílit návyk | „Tady je týdenní souhrn a jeden tip na zrychlení.“ |
+
+Každý e-mail by měl mít jednu akci. Ne tři tlačítka, dvě sekundární nabídky a P. S. s webinářem. Jedna zpráva, jeden krok. Když chceš přidat druhou akci, většinou potřebuješ druhý e-mail nebo lepší produkt.
+
+**Codyho komentář:** onboardingový e-mail je jako dobrý průvodce v muzeu. Ukáže ti jednu důležitou věc a nechá tě ji pochopit. Nezačne recitovat inventární čísla všech exponátů, protože má zrovna mikrofon.
+
+## E.3 Minimalizuj segmentaci
+
+Segmentace je užitečná, ale rychle se z ní stane datový bufet. Malý tým nepotřebuje stovky segmentů podle každého kliknutí. Potřebuje pár stavů, které odpovídají hodnotě produktu.
+
+Začni těmito stavy:
+
+- **Nový účet:** uživatel se registroval, ale ještě nedosáhl první hodnoty.
+- **Aktivovaný účet:** uživatel dokončil první klíčový výsledek.
+- **Rizikový účet:** dříve aktivní účet přestal dělat klíčovou akci.
+- **Rostoucí účet:** účet naráží na limit, zve další lidi nebo používá pokročilé funkce.
+- **Odcházející účet:** uživatel ruší tarif, exportuje data nebo žádá o výmaz.
+
+Pro každý stav definuj jen minimum údajů: ID účtu, jazyk, tarif, poslední klíčová akce, souhlas nebo opt-out pro marketing, technický stav doručitelnosti. Nepotřebuješ ukládat volný text z poznámek, osobní profilování ani „skóre zájmu“ podle každého otevření e-mailu. Otevření e-mailu je navíc slabý signál: může ho ovlivnit ochrana soukromí v klientovi, náhledy nebo bezpečnostní proxy. Rozhodnutí raději stav na produktových akcích, které souvisejí s hodnotou.
+
+## E.4 Odhlášení a preference nejsou porážka
+
+Když se člověk odhlásí, neprohrál marketing. Vyhrála důvěra. Raději mít menší seznam lidí, kteří chtějí číst, než velkou databázi otrávených adresátů. U obchodních sdělení počítej s viditelným odhlašovacím odkazem v těle zprávy a s technickou podporou hlaviček pro odhlášení tam, kde to dává smysl. RFC 2369 popisuje hlavičku [List-Unsubscribe](https://datatracker.ietf.org/doc/html/rfc2369) a RFC 8058 doplňuje [one-click unsubscribe](https://datatracker.ietf.org/doc/html/rfc8058) přes `List-Unsubscribe-Post`.
+
+Preference centrum nemusí být monstrum. Pro první verzi stačí:
+
+- produktové tipy,
+- newsletter a obsah,
+- obchodní nabídky,
+- incidenty a bezpečnostní upozornění,
+- fakturace a povinné servisní zprávy.
+
+U posledních dvou kategorií jasně vysvětli, že nejde o běžný marketingový odběr. Uživatel se může odhlásit z obchodních sdělení, ale nemůže rozumně vypnout reset hesla, faktury nebo bezpečnostní upozornění k vlastnímu účtu. Tohle napiš lidsky, ne právničtinou: „Tyto zprávy posíláme, aby služba fungovala a účet zůstal bezpečný.“
+
+## E.5 Šablona lifecycle mapy
+
+Použij tuhle jednoduchou tabulku dřív, než nastavíš automatizaci v nástroji:
+
+| Pole | Otázka | Příklad |
+| --- | --- | --- |
+| Název zprávy | Jak se automatizace jmenuje? | „První projekt bez dat“ |
+| Účel | Jakému výsledku pomáhá? | Uživatel vloží první poptávku |
+| Spouštěč | Co přesně zprávu spustí? | Projekt existuje 24 hodin a nemá položku |
+| Publikum | Koho zahrnuje a koho vylučuje? | Jen trial účty, ne odhlášení z produktových tipů |
+| Data | Jaká data použiješ? | Account ID, jazyk, datum vytvoření projektu |
+| Právní režim | Servisní, produktové, nebo obchodní sdělení? | Produktový tip, bez upsellu |
+| Retence | Jak dlouho držíš log o odeslání? | 90 dnů agregovaně, detaily jen pro support |
+| Exit | Jak člověk tok zastaví? | Dokončí akci, odhlásí tipy, kontaktuje support |
+
+Pak si napiš text e-mailu v tomto formátu:
+
+```text
+Předmět: [konkrétní výsledek, ne trik]
+
+Ahoj,
+[jedna věta kontextu: proč píšeme]
+
+[jeden doporučený krok]
+
+[krátké vysvětlení přínosu]
+
+[odkaz na akci]
+
+Pokud tyhle produktové tipy nechceš, můžeš je vypnout tady: [odkaz].
+```
+
+Předmět „Ještě jste nedokončili nastavení“ je slabý. Předmět „Pošlete si první testovací poptávku za 2 minuty“ je lepší, protože říká akci i časový rámec. Jen neslibuj dvě minuty, pokud to běžně trvá deset. Důvěra není A/B testovací proměnná, kterou můžeš obětovat za otevření.
+
+## E.6 Checklist přílohy
+
+Před spuštěním lifecycle komunikace projdi:
+
+- Má každá zpráva jeden jasný účel a jednu hlavní akci?
+- Rozlišuješ transakční, produktové, marketingové a support zprávy?
+- Máš u obchodních sdělení doložitelný souhlas nebo jiný použitelný režim podle vztahu se zákazníkem?
+- Je odesílatel jasný a zpráva neskrývá obchodní povahu?
+- Má příjemce jednoduchý opt-out u marketingu a produktových tipů?
+- Nepoužíváš segmentaci založenou na zbytečných osobních údajích nebo volném textu?
+- Držíš logy o odeslání jen tak dlouho, jak potřebuje support, bezpečnost a dokazatelnost?
+- Umíš ručně vysvětlit, proč daný člověk dostal danou zprávu?
+
+Hodinová iterace: vezmi jednu existující nebo plánovanou e-mailovou automatizaci a vyplň lifecycle mapu. Pokud u ní neumíš napsat účel, spouštěč, data, právní režim a exit, automatizaci zatím nespouštěj. Nejlepší e-mail je někdy ten, který produkt nemusí poslat, protože uživatel pochopil další krok přímo v rozhraní.
+
+
 ## Zdroje
 
 - ADR GitHub Organization: [Architectural Decision Records](https://adr.github.io/)
@@ -1329,6 +1448,10 @@ Hodinová iterace: vezmi existující pricing nebo návrh nabídky a přepiš ho
 - Google Search Central: [Creating helpful, reliable, people-first content](https://developers.google.com/search/docs/fundamentals/creating-helpful-content)
 - web.dev: [Core Web Vitals](https://web.dev/articles/vitals)
 - RSS Advisory Board: [RSS 2.0 Specification](https://www.rssboard.org/rss-specification)
+- RFC Editor: [RFC 2369 — The Use of URLs as Meta-Syntax for Core Mail List Commands](https://datatracker.ietf.org/doc/html/rfc2369)
+- RFC Editor: [RFC 8058 — Signaling One-Click Functionality for List Email Headers](https://datatracker.ietf.org/doc/html/rfc8058)
+- ÚOOÚ: [Obchodní sdělení](https://uoou.gov.cz/index.php/profesional/qa-otazky-a-odpovedi/obchodni-sdeleni)
+- ÚOOÚ: [GDPR a přímý elektronický marketing](https://uoou.gov.cz/novinky/obchodni-sdeleni/gdpr-a-primy-elektronicky-marketing)
 - Your Europe: [EU VAT One Stop Shop](https://europa.eu/youreurope/business/taxation/vat/one-stop-shop/index_en.htm)
 - Your Europe: [Unfair pricing](https://europa.eu/youreurope/citizens/consumers/unfair-treatment/unfair-pricing/index_en.htm)
 - Your Europe: [Data protection and online privacy](https://europa.eu/youreurope/citizens/consumers/internet-telecoms/data-protection-online-privacy/index_en.htm)
@@ -1337,6 +1460,7 @@ Hodinová iterace: vezmi existující pricing nebo návrh nabídky a přepiš ho
 
 ## Pracovní log
 
+- 2026-08-05: Doplněna příloha E o lifecycle e-mailech bez spamování: rozdělení zpráv podle účelu, onboardingovou sekvenci, minimalizaci segmentace, preference, odhlášení a checklist.
 - 2026-08-05: Doplněna příloha D o cenotvorbě SaaS bez slevového cirkusu: tarify podle výsledku, férové slevy, evropské provozní náklady, DPH upozornění, pricing stránka a checklist.
 - 2026-08-05: Doplněna příloha C o privacy-first produktové analytice: rozhodovací eventy, malý slovník událostí, minimalizace osobních údajů, onboardingový dashboard a checklist.
 - 2026-08-05: Doplněna příloha A s praktickou jednostránkovou šablonou privacy-first vendor auditu, skórováním rizika, pilotním postupem a checklistem.
