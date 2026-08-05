@@ -744,13 +744,125 @@ Pro jeden konkrétní produkt nebo web projdi:
 
 Hodinová iterace: vezmi jeden tok, třeba registraci nebo poptávkový formulář. Sepiš data, účel, úložiště, přístup a retenci. Pak smaž jedno zbytečné pole nebo jeden zbytečný event. Privacy-first se nejlépe buduje po malých odstraněních. Méně dat, méně magie, méně budoucích bolestí.
 
+---
+
+# Kapitola 7: Růst bez chaosu
+
+Růst je krásný problém, ale pořád problém. V malém týmu se často tváří jako dobrá zpráva: víc návštěv, víc trialů, víc klientů, víc integrací, víc nápadů. Jenže pokud nemáš základní provozní disciplínu, růst ti jen zvětší všechno, co už bylo křivé. Pomalý onboarding bude pomalejší, support bude hlučnější, backlog bude tlustší a každý incident dostane publikum. Gratulujeme, právě jsi škáloval chaos.
+
+Zdravý růst není jen „víc“. Je to schopnost doručovat hodnotu častěji, spolehlivěji a s menším stresem na jednotku zákazníka. DORA používá pro výkon softwarové dodávky metriky jako frekvenci nasazení, lead time změn, change fail rate a dobu zotavení po neúspěšném nasazení. Viz [DORA: software delivery performance metrics](https://dora.dev/guides/dora-metrics/). Google SRE zase doporučuje definovat cíle spolehlivosti podle toho, co vnímá uživatel, a pracovat s error budgetem místo nekonečného přetahování mezi vývojem a provozem. Viz [Google SRE: Service Level Objectives](https://sre.google/sre-book/service-level-objectives/) a [Google SRE: Production Services Best Practices](https://sre.google/sre-book/service-best-practices/).
+
+**Codyho komentář:** růst bez provozních pravidel je jako dát silnější motor do auta, kterému nefungují brzdy. Chvíli je to vzrušující. Pak už jen drahé.
+
+## 7.1 Škáluj nejdřív úzké hrdlo, ne organigram
+
+Když produkt začne růst, první reakce bývá „potřebujeme víc lidí“ nebo „potřebujeme nový nástroj“. Někdy ano. Často ale nejdřív potřebuješ zjistit, kde přesně vzniká tření. Růst není jeden problém. Je to soubor úzkých hrdel.
+
+Typická úzká hrdla:
+
+- zákazníci nechápou hodnotu před registrací,
+- uživatelé nedokončí první nastavení,
+- support odpovídá pořád na stejné otázky,
+- obchod neumí kvalifikovat leady,
+- vývoj tráví moc času ručním releasem,
+- incidenty nemají vlastníka,
+- data jsou rozházená mezi nástroji a nikdo neví, čemu věřit.
+
+Ke každému hrdlu si napiš dvě věty: jak poznáme, že existuje, a jak poznáme, že jsme ho zlepšili. Například: „Uživatelé nedokončí onboarding, protože neví, co udělat po registraci. Zlepšíme to, když se podíl účtů s první dokončenou akcí zvýší z 35 % na 55 %.“ To je konkrétní. „Zlepšit onboarding“ je jen hezké přání v tričku startupu.
+
+Privacy-first pohled: nehledej úzké hrdlo sběrem všeho. Začni agregovanými metrikami a kvalitativní zpětnou vazbou. U citlivých toků raději použij dobrovolný rozhovor, krátký formulář nebo anonymizovaný event než session replay, který zaznamenává každý pohyb myši jako malý digitální drb.
+
+## 7.2 Nastav metriky, které vedou k rozhodnutí
+
+Dobrá metrika má vlastníka, rytmus a rozhodnutí. Pokud se na ni jen koukáš, je to dekorace dashboardu. Pro malý SaaS stačí několik vrstev:
+
+| Oblast | Praktická metrika | Rozhodnutí |
+|---|---|---|
+| Akvizice | kvalifikované návštěvy a konverze na lead/trial | kam dát obsah a distribuci |
+| Aktivace | první dokončená hodnota v produktu | co zjednodušit v onboardingu |
+| Retence | aktivní účty a opakované použití klíčové funkce | co zlepšit v produktu |
+| Revenue | MRR, nové platby, expanze, churn | kde upravit cenu a nabídku |
+| Provoz | chybovost, latence, dostupnost hlavního toku | kdy zastavit feature práci |
+| Dodávka | lead time změn a change fail rate | jak zlepšit release proces |
+
+Metriku si vždy přelož do otázky. Ne „máme 2 000 návštěv“. Ale „přivádí tento kanál lidi, kteří udělají první hodnotnou akci?“ Ne „nasazujeme často“. Ale „umíme nasadit malou změnu rychle bez zbytečného rizika?“
+
+S DORA metrikami nezačínej jako s benchmarkingovou soutěží. Nepotřebuješ si dokazovat, že jsi elite performer, když máš pět zákazníků a jeden deploy týdně. Použij je jako diagnostiku toku práce: jak dlouho trvá změna, jak často nasazuješ, kolik nasazení bolí a jak rychle se zotavíš. To jsou otázky, které zlepšují produkt i spánek.
+
+## 7.3 Release proces má být nudný
+
+Čím víc zákazníků, tím méně heroismu chceš při nasazování. Ideální release je skoro nudný: malý diff, automatické kontroly, jasný rollback, viditelné metriky a krátká poznámka, co se změnilo. Drama patří do seriálů, ne do produkce.
+
+Praktické minimum release procesu:
+
+- změny jsou malé a popsané,
+- testy a lint běží před mergem,
+- migrace databáze mají plán návratu nebo bezpečný přechod,
+- konfigurace a tajné klíče nejsou v repozitáři,
+- po nasazení sleduješ chyby, latenci a hlavní business event,
+- existuje jednoduchý rollback postup,
+- zákaznicky viditelné změny mají poznámku v changelogu.
+
+Když release bolí, nezvyšuj schvalovací divadlo. Zmenši změny. Přidej automatické kontroly. Odděl rizikové migrace od UI úprav. Použij feature flag jen tam, kde skutečně snižuje riziko, ne jako temný les přepínačů, kterému rozumí jeden vývojář a jeho kávovar.
+
+Privacy-first poznámka: release checklist má obsahovat i datovou otázku. Přidává změna nové osobní údaje, nový event, nový vendor nebo delší retenci? Pokud ano, aktualizuj datovou mapu a text pro uživatele dřív, než to pustíš ven.
+
+## 7.4 Incident není ostuda, ale zkouška systému
+
+Incidenty se stanou. Rozdíl mezi zralým a nezralým týmem není v tom, že zralý tým nikdy nespadne. Rozdíl je v tom, že ví, kdo velí, kde se komunikuje, jak se chrání zákazník a co se po incidentu změní. Google SRE v kapitole o incident managementu zdůrazňuje, že bez předem promyšlené reakce se principy v reálném stresu rychle rozpadnou. Viz [Google SRE: Managing Incidents](https://sre.google/sre-book/managing-incidents/).
+
+Lehký incident postup pro malý tým:
+
+1. **Urči incident commandera:** jedna osoba koordinuje, ostatní neimprovizují bokem.
+2. **Zapiš časovou osu:** co se stalo, kdy, kdo co udělal.
+3. **Chraň zákazníka:** obnov hlavní tok, omez škodu, zastav rizikové změny.
+4. **Komunikuj stručně:** co je rozbité, koho se to týká, kdy bude další update.
+5. **Po incidentu napiš postmortem:** příčina, dopad, co fungovalo, co opravíš.
+
+Postmortem nemá hledat viníka. Má hledat podmínky, které incident umožnily. Špatná věta: „Petr zapomněl nastavit proměnnou.“ Lepší věta: „Release proces umožnil nasadit konfiguraci bez automatické kontroly povinných proměnných.“ První věta vyrobí strach. Druhá vyrobí opravu.
+
+## 7.5 Bezpečnost a privacy jako brzdy špatného růstu
+
+Růst často přinese tlak na nové integrace: CRM, chat, reklamní platforma, enrichment leadů, automatický scoring, support nástroje. Každá integrace může být užitečná. Každá také otevírá další cestu pro data. Proto potřebuješ jednoduchý vendor gate, ne nekonečný právní román.
+
+Před přidáním nástroje si polož:
+
+- Jaký konkrétní problém řeší a jak poznáme, že pomohl?
+- Jaká osobní nebo obchodně citlivá data do něj pošleme?
+- Kde se data zpracují a kdo k nim má přístup?
+- Jaká je minimální konfigurace bez zbytečných trackerů a enrichmentu?
+- Jak nástroj vypneme a jak data exportujeme nebo smažeme?
+- Existuje evropská nebo self-hosted alternativa s menším datovým dopadem?
+
+OWASP ASVS slouží jako praktický standard pro ověřování bezpečnostních kontrol webových aplikací a vývojářům dává seznam požadavků pro bezpečný vývoj. Viz [OWASP ASVS](https://owasp.org/www-project-application-security-verification-standard/). Nemusíš hned zavést celý enterprise audit. Vyber požadavky relevantní pro přihlášení, autorizaci, validaci vstupů, správu relací, logování a API. Udělej z nich opakovatelný review checklist.
+
+## 7.6 Checklist sedmé kapitoly
+
+Před dalším kolem růstu si projdi:
+
+- Víš, které úzké hrdlo teď nejvíc brzdí zákaznickou hodnotu?
+- Má každá hlavní metrika vlastníka, rytmus kontroly a navázané rozhodnutí?
+- Umíš nasadit malou změnu bez ručního rituálu a bez paniky?
+- Sleduješ po releasu uživatelský dopad, chyby a hlavní business event?
+- Existuje rollback postup, který zvládne i člověk bez magických znalostí?
+- Má tým incident roli, komunikační místo a jednoduchou šablonu postmortemu?
+- Prochází nové nástroje vendor gate se zaměřením na data a EU provoz?
+- Máš bezpečnostní checklist podle skutečných rizik produktu, ne podle módy?
+
+Hodinová iterace: vyber jedno úzké hrdlo růstu a napiš k němu metriku, vlastníka a jednu změnu na příštích sedm dní. Pokud žádné hrdlo neumíš vybrat, začni onboardingem nebo release procesem. Tam se malé týmy pálí nejčastěji a nejtišeji.
+
+
 ## Zdroje
 
 - ADR GitHub Organization: [Architectural Decision Records](https://adr.github.io/)
 - Atlassian: [Working with WIP limits for kanban](https://www.atlassian.com/agile/kanban/wip-limits)
+- DORA: [Software delivery performance metrics](https://dora.dev/guides/dora-metrics/)
 - EUR-Lex: [Nařízení GDPR 2016/679, článek 5 a 25](https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=CELEX%3A32016R0679)
 - EUR-Lex: [Directive (EU) 2022/2555 — NIS2, Article 21](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32022L2555)
 - EUR-Lex: [ePrivacy Directive 2002/58/EC](https://eur-lex.europa.eu/eli/dir/2002/58/oj?locale=en)
+- Google SRE: [Managing Incidents](https://sre.google/sre-book/managing-incidents/)
+- Google SRE: [Production Services Best Practices](https://sre.google/sre-book/service-best-practices/)
+- Google SRE: [Service Level Objectives](https://sre.google/sre-book/service-level-objectives/)
 - OWASP Foundation: [Application Security Verification Standard](https://owasp.org/www-project-application-security-verification-standard/)
 - European Data Protection Board: [Privacy by design and by default](https://www.edpb.europa.eu/topics/ai-and-technology/privacy-by-design-and-by-default_en)
 - European Data Protection Board: [Pokyny 4/2019 k článku 25 — záměrná a standardní ochrana osobních údajů](https://www.edpb.europa.eu/documents/guideline/guidelines-42019-on-article-25-data-protection-by-design-and-by-default_cs)
@@ -763,6 +875,7 @@ Hodinová iterace: vezmi jeden tok, třeba registraci nebo poptávkový formulá
 
 ## Pracovní log
 
+- 2026-08-05: Dopsána kapitola 7 o růstu bez chaosu: úzká hrdla, rozhodovací metriky, release proces, incidenty, vendor gate, bezpečnost a checklist.
 - 2026-08-05: Dopsána kapitola 6 o privacy-first provozu v Evropě: datová mapa, minimalizace údajů, vendor audit, logování, bezpečnostní minimum a checklist.
 - 2026-08-05: Dopsána kapitola 5 o produktivitě malého týmu: omezení rozdělané práce, týdenní rytmus, dokumentace, ADR, automatizace, AI asistenti a checklist.
 - 2026-08-05: Dopsána kapitola 4 o marketingu bez závislosti na platformách: vlastní kanály, obsahový rytmus, distribuce, RSS, newsletter se souhlasem, partnerství a checklist.
