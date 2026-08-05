@@ -115,6 +115,10 @@
         color: var(--accent);
         font-weight: 700;
         text-decoration: none;
+        transition:
+          background 160ms ease,
+          color 160ms ease,
+          transform 160ms ease;
       }
 
       .button.primary {
@@ -125,6 +129,14 @@
       .button:focus-visible {
         outline: 3px solid color-mix(in srgb, var(--accent) 55%, transparent);
         outline-offset: 3px;
+      }
+
+      .button:hover {
+        transform: translateY(-1px);
+      }
+
+      .button:not(.primary):hover {
+        background: color-mix(in srgb, var(--accent) 10%, transparent);
       }
 
       section {
