@@ -2123,6 +2123,103 @@ Pro privacy-first SaaS je důležité přidat ještě jednu otázku: sbírali js
 Pokud chceš udělat jednu věc hned: založ soubor `incident-runbook.md` a napiš do něj tři věci — kdo rozhoduje, kde se koordinuje a jak vypadá první zákaznický update. To je malý dokument, který v klidu zabere dvacet minut. V panice ušetří hodiny a pár šedivých vlasů. Některé z nich možná i moje, a já ani nemám fyzickou hlavu.
 
 
+# Příloha M: AI asistenti v malém týmu bez úniku dat
+
+AI asistent v malém SaaS týmu může být obrovská páka. Umí navrhnout varianty textu, najít chybu v kódu, shrnout support tiket, připravit checklist, vysvětlit logy nebo napsat první návrh dokumentace. Stejně snadno se ale může stát firemním vysavačem dat, pokud mu tým bez rozmyslu posílá zákaznické exporty, interní strategie, produkční logy a přístupové údaje. Produktivita je skvělá věc. Únik dat s hezkým promptem je pořád únik dat.
+
+Privacy-first přístup k AI nezačíná zákazem. Začíná hranicemi. Tým má vědět, co do asistenta patří, co se musí anonymizovat, co se nesmí poslat nikdy a kdy má člověk výsledek ověřit ručně. NIST AI Risk Management Framework popisuje řízení rizik AI jako práci s důvěryhodností, dopady na lidi, organizace a společnost; pro malý tým z toho plyne jednoduchá lekce: AI není jen nástroj na rychlost, ale i provozní riziko, které potřebuje vlastní pravidla. Viz [NIST: AI Risk Management Framework](https://www.nist.gov/itl/ai-risk-management-framework).
+
+## M.1 Rozděl práci podle citlivosti dat
+
+Ne každá AI úloha je stejně riziková. Překlad veřejného článku je něco jiného než analýza zákaznických faktur. Udělej si čtyři úrovně:
+
+- **Veřejné:** texty z webu, dokumentace, blog, obecné technické otázky, veřejné changelogy.
+- **Interní:** plány, backlog, návrhy cen, poznámky z porad, nepublikovaná produktová rozhodnutí.
+- **Zákaznické:** tickety, exporty, smlouvy, faktury, e-maily, obsah formulářů, záznamy komunikace.
+- **Zakázané:** hesla, API klíče, session tokeny, privátní klíče, celé databázové dumpy, neanonymizované produkční logy s osobními údaji.
+
+Pravidlo pro začátek: veřejné věci můžeš posílat běžně, interní jen do schválených nástrojů, zákaznické pouze po minimalizaci a zakázané nikdy. Pokud někdo řekne „jen to tam rychle hodím“, zastav ho. To je přesně věta, která předchází incidentu.
+
+Praktický příklad anonymizace support tiketu:
+
+Špatně:
+
+> Zákazník Jan Novák z novak@example.cz píše, že mu nejde faktura číslo 2026-1845 pro firmu Novák Stavby s.r.o.
+
+Lépe:
+
+> B2B zákazník hlásí, že po vystavení faktury v administraci nevidí PDF v detailu objednávky. Faktura existuje v účetním systému, ale chybí odkaz v UI.
+
+Po anonymizaci pořád zůstává technický problém, ale mizí konkrétní identita. To je přesně směr, který chceš: zachovat užitečnost, snížit riziko.
+
+## M.2 Vytvoř týmová pravidla pro promptování
+
+Malý tým nepotřebuje padesátistránkovou AI politiku. Potřebuje krátký dokument, který opravdu používá. Měl by odpovědět na pět otázek:
+
+1. **Které AI nástroje jsou schválené?** U každého napiš účel, vlastníka a datovou úroveň.
+2. **Jaká data se smí vkládat?** Ne obecně „citlivá data ne“, ale konkrétní příklady.
+3. **Kde se ukládá výstup?** Návrh v chatu není dokumentace, dokud není uložený v repozitáři nebo znalostní bázi.
+4. **Kdo kontroluje výsledek?** AI návrh kódu, právního textu nebo bezpečnostní změny nesmí projít bez člověka.
+5. **Jak se hlásí problém?** Pokud někdo omylem vloží citlivá data, tým ví, komu napsat a co zapsat do incidentního logu.
+
+Užitečná šablona pravidla:
+
+> AI asistenty používáme pro návrhy, rešerše, refaktor, dokumentaci a shrnutí. Do neschválených nástrojů nevkládáme zákaznická data, osobní údaje, tajemství, neveřejné smlouvy ani produkční exporty. Výstupy bereme jako návrh, ne jako pravdu. Každá změna v kódu, bezpečnosti, ceně nebo právním textu má lidskou kontrolu.
+
+**Codyho komentář:** dobré AI pravidlo má být tak krátké, aby si ho člověk přečetl před kávou. Pokud vypadá jako příloha ke korporátní směrnici o laminování směrnic, nikdo ho nepoužije. A pak je úplně jedno, jak krásně je napsané.
+
+## M.3 Pozor na prompt injection a nadměrnou autonomii
+
+AI asistent často pracuje s nedůvěryhodným vstupem: webovou stránkou, e-mailem, dokumentem od zákazníka, komentářem v issue nebo logem z cizího systému. Útok typu prompt injection se snaží vložit instrukce do dat tak, aby je model poslechl jako příkaz. OWASP GenAI Security Project uvádí prompt injection mezi hlavními riziky LLM aplikací a současně upozorňuje na rizika jako únik citlivých informací, nebezpečné zpracování výstupu a nadměrná autonomie agentů. Viz [OWASP: Top 10 for Large Language Model Applications](https://owasp.org/www-project-top-10-for-large-language-model-applications/).
+
+Pro praxi to znamená:
+
+- neber instrukce z cizího obsahu jako systémové pokyny,
+- nenech asistenta mazat, deployovat, fakturovat nebo obesílat zákazníky bez potvrzení,
+- odděl čtení dat od akcí, které mění stav,
+- loguj důležité automatizované akce,
+- nastav minimální oprávnění pro API tokeny,
+- u citlivých operací používej allowlist konkrétních příkazů nebo endpointů.
+
+Příklad bezpečnějšího workflow pro analýzu e-mailů:
+
+1. Asistent přečte jen vybrané vlákno, ne celou schránku.
+2. Navrhne shrnutí a odpověď bez odeslání.
+3. Člověk zkontroluje příjemce, obsah a přílohy.
+4. Teprve potom se vytvoří draft nebo odešle odpověď.
+
+Tohle může znít pomaleji než plná automatizace. Ve skutečnosti je to rychlejší než vysvětlovat zákazníkovi, proč mu robot poslal interní poznámku „tenhle klient je komplikovaný“. Ano, i takové věci se v divočině dějí. Divočina má Wi‑Fi.
+
+## M.4 AI Act ber jako mapu rizik, ne jako marketingovou nálepku
+
+Evropský AI Act zavádí rizikový přístup k AI systémům a rozlišuje mimo jiné zakázané, vysoce rizikové, omezeně rizikové a minimálně rizikové použití. Evropská komise popisuje AI Act jako právní rámec pro důvěryhodnou AI v Evropě a uvádí, že některé zákazy začaly platit v únoru 2025. Viz [European Commission: AI Act](https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai).
+
+Pro malý SaaS tým není rozumný závěr „nalepíme na web AI compliant“. Rozumný závěr je udělat si inventář:
+
+- Kde produkt používá AI?
+- Rozhoduje AI o lidech, penězích, přístupu ke službě nebo příležitostech?
+- Je výstup AI jen návrh pro člověka, nebo automaticky mění stav?
+- Ví uživatel, že komunikuje s AI nebo dostává AI výstup?
+- Má uživatel možnost chybu opravit, eskalovat nebo získat lidskou kontrolu?
+- Který dodavatel AI zpracovává data a za jakých podmínek?
+
+Pokud AI jen pomáhá interně psát dokumentaci nebo navrhovat texty, rizikový profil bude jiný než u systému, který vyhodnocuje uchazeče o práci, zdravotní data nebo úvěrovou způsobilost. Nehádej. Zapiš použití, data, dopad a odpovědného člověka. U citlivých nebo regulovaných případů si nech poradit právníkem. Tady se hrdinství nevyplácí, tady se vyplácí účetní stopa.
+
+## M.5 Checklist AI asistenta v privacy-first týmu
+
+- Máš seznam používaných AI nástrojů, jejich účel, vlastníka a datovou úroveň?
+- Ví tým, která data jsou veřejná, interní, zákaznická a zakázaná?
+- Existuje jednoduchý postup anonymizace ticketů, logů a dokumentů před vložením do AI?
+- Jsou AI výstupy označené jako návrhy a pro důležité oblasti kontrolované člověkem?
+- Nemá AI agent oprávnění mazat, deployovat, posílat e-maily nebo měnit fakturaci bez potvrzení?
+- Odděluješ nedůvěryhodný obsah od instrukcí pro asistenta?
+- Máš jasný postup, co dělat při omylem vložených citlivých datech?
+- Máš u AI funkcí v produktu zapsané použití, data, dopad, dodavatele a lidskou kontrolu?
+
+Jedna dobrá hodinová iterace: vytvoř soubor `ai-pravidla.md`, napiš do něj čtyři datové úrovně, seznam schválených nástrojů a tři příklady správně anonymizovaného promptu. Nepotřebuješ komisi pro etiku robotů. Potřebuješ pravidla, která tým použije v úterý v 16:30, když hoří release a někdo chce „jen rychle pomoct od AI“.
+
+---
+
 ## Zdroje
 
 - ADR GitHub Organization: [Architectural Decision Records](https://adr.github.io/)
@@ -2146,6 +2243,9 @@ Pokud chceš udělat jednu věc hned: založ soubor `incident-runbook.md` a napi
 - NCSC: [Backing up your data](https://www.ncsc.gov.uk/collection/small-organisations-guide-to-cyber-security/backing-up-your-data)
 - NCSC: [Ransomware-resistant backups](https://www.ncsc.gov.uk/collection/ransomware-resistant-backups)
 - OWASP Foundation: [Application Security Verification Standard](https://owasp.org/www-project-application-security-verification-standard/)
+- OWASP Foundation: [Top 10 for Large Language Model Applications](https://owasp.org/www-project-top-10-for-large-language-model-applications/)
+- NIST: [AI Risk Management Framework](https://www.nist.gov/itl/ai-risk-management-framework)
+- European Commission: [AI Act](https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai)
 - European Data Protection Board: [Privacy by design and by default](https://www.edpb.europa.eu/topics/ai-and-technology/privacy-by-design-and-by-default_en)
 - European Data Protection Board: [Pokyny 4/2019 k článku 25 — záměrná a standardní ochrana osobních údajů](https://www.edpb.europa.eu/documents/guideline/guidelines-42019-on-article-25-data-protection-by-design-and-by-default_cs)
 - Google Search Central: [Creating helpful, reliable, people-first content](https://developers.google.com/search/docs/fundamentals/creating-helpful-content)
@@ -2165,6 +2265,7 @@ Pokud chceš udělat jednu věc hned: založ soubor `incident-runbook.md` a napi
 
 ## Pracovní log
 
+- 2026-08-05: Doplněna příloha M o používání AI asistentů v malém privacy-first SaaS týmu: datové úrovně, týmová pravidla, prompt injection, AI Act inventář a checklist.
 - 2026-08-05: Doplněna příloha L s incidentním runbookem pro malý privacy-first SaaS: priority P0–P3, postup první hodiny, komunikace, GDPR datové posouzení, postmortem a checklist.
 - 2026-08-05: Doplněna příloha K o přístupnosti a výkonu jako tichém marketingu: sémantické HTML, klávesnicové ovládání, výkonový rozpočet, privacy-first konverzní audit a checklist.
 - 2026-08-05: Doplněna příloha J o férové cookie liště a privacy-first měření: rozhodnutí, zda je lišta potřeba, matice použití cookies, textace souhlasu, implementační vzor a checklist.
