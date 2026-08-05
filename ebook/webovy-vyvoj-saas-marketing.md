@@ -479,8 +479,145 @@ Než přidáš další platformu do marketingového mixu, projdi si:
 
 Pokud chceš udělat jednu hodinovou iteraci, vyber nejlepší existující článek, přidej do něj jasné CTA, napoj ho na RSS, pošli ho ručně třem relevantním lidem a přidej interní odkazy z dalších dvou stránek. Není to sexy. Funguje to. Což je v marketingu podezřele často lepší než sexy.
 
+---
+
+# Kapitola 5: Produktivita malého týmu
+
+Produktivita malého týmu není o tom, že všichni běží rychleji. Je o tom, že běží správným směrem, méně často se sráží a nemusí každý týden znovu objevovat vlastní rozhodnutí. U webového vývoje a SaaS je největší brzda často neviditelná: rozdělanost, nejasné priority, tiché předpoklady, chybějící vlastník a rozhodnutí ztracená v chatu.
+
+Malý tým nemá luxus složitého managementu. To je dobře. Čím menší tým, tím víc se vyplatí jednoduchý rytmus: jasný cíl týdne, omezený počet rozdělaných věcí, krátké rozhodovací zápisy, automatizovaná rutina a pravidelná revize toho, co už nefunguje.
+
+**Codyho komentář:** nejlepší produktivní systém je ten, který tým opravdu používá i ve čtvrtek odpoledne. Pokud přežije jen v pondělním nadšení, není to systém, ale dekorace do Notionu.
+
+## 5.1 Omez rozdělanou práci, jinak rozdělaná práce ovládne tebe
+
+Když má malý tým najednou otevřených patnáct úkolů, nevypadá to jako problém. Vypadá to jako aktivita. Jenže aktivita není výstup. Výstup je nasazená změna, odeslaná nabídka, vyřešený bug, publikovaný článek nebo hotový experiment.
+
+Kanban pracuje s omezením rozpracované práce pomocí WIP limitů. Atlassian ve svém průvodci popisuje WIP limity jako způsob, jak omezit počet položek v určité fázi práce a lépe odhalit úzká hrdla. Viz [Atlassian: Working with WIP limits for kanban](https://www.atlassian.com/agile/kanban/wip-limits). Nemusíš kvůli tomu zavádět ceremoniální divadlo. Stačí jednoduchá tabule:
+
+- **Nápady:** všechno, co by šlo dělat, ale ještě to není závazek.
+- **Připraveno:** úkol má jasný výsledek, vlastníka a kritérium hotovo.
+- **Děláme:** maximálně tolik položek, kolik tým zvládne dokončit.
+- **Čeká:** blokované věci, které potřebují odpověď, data nebo schválení.
+- **Hotovo:** nasazené, publikované nebo předané, ne jen „skoro“.
+
+Pro tým o dvou až čtyřech lidech často stačí limit 2–4 položky ve sloupci „Děláme“. Když je limit plný, nezačíná se další práce. Dokončuje se, odblokovává nebo se vědomě rozhodne, co se zahodí. To je nepříjemné jen prvních pár dní. Pak začne být podezřele příjemné vidět dokončené věci.
+
+## 5.2 Týdenní rytmus: jeden cíl, pár rozhodnutí, jasný konec
+
+Malý tým nepotřebuje deset meetingů. Potřebuje pravidelný rytmus, který snižuje chaos. Doporučený základ:
+
+1. **Pondělní výběr:** jedna hlavní priorita týdne a dvě vedlejší věci.
+2. **Denní krátká kontrola:** co se posunulo, co blokuje, co se má zmenšit.
+3. **Páteční uzavření:** co je hotovo, co jsme se naučili, co už nedává smysl.
+
+Hlavní priorita týdne má být formulovaná jako výsledek, ne jako aktivita. „Pracovat na onboardingu“ je mlha. „Nový uživatel zvládne vytvořit první projekt bez ruční pomoci“ je výsledek. „Zlepšit marketing“ je mlha. „Publikovat článek, přidat interní odkazy a měřit kliknutí na demo“ je výsledek.
+
+Praktická šablona týdenního plánu:
+
+- **Cíl týdne:** jedna věta s měřitelným výsledkem.
+- **Proč teď:** návaznost na zákazníka, tržbu, riziko nebo strategii.
+- **Hotovo znamená:** konkrétní stav, který jde ověřit.
+- **Neřešíme:** věci, které schválně necháváme mimo rozsah.
+- **Riziko:** co může práci zablokovat a kdo to pohlídá.
+
+Tahle šablona je nudná. To je kompliment. Produktivita má být nudná infrastruktura, ne adrenalinový sport.
+
+## 5.3 Dokumentace, která šetří čas místo aby ho požírala
+
+Dokumentace není archiv všeho. Je to nástroj pro snížení opakovaných otázek. Pokud dokument nikdo nečte, může být problém v týmu, ale často je problém v dokumentu: je moc dlouhý, moc obecný nebo není u práce, které se týká.
+
+U SaaS produktu se vyplatí držet čtyři typy dokumentů:
+
+- **README pro spuštění:** jak projekt lokálně rozběhnout, otestovat a nasadit.
+- **Produktové poznámky:** pro koho je produkt, jaký problém řeší a co zatím vědomě neumí.
+- **Runbooky:** co dělat při výpadku, chybné platbě, incidentu nebo importu dat.
+- **Rozhodovací záznamy:** proč jsme vybrali technologii, vendor, pricing nebo datový model.
+
+Pro technická rozhodnutí se hodí ADR. Web adr.github.io popisuje Architectural Decision Record jako záznam jednoho významného rozhodnutí včetně důvodů, kompromisů a důsledků. Viz [Architectural Decision Records](https://adr.github.io/). Pro malý tým může mít ADR jednoduchou podobu:
+
+```markdown
+# ADR-004: Analytiku provozujeme bez cookies třetích stran
+
+## Kontext
+Potřebujeme měřit výkon webu, ale nechceme profilovat návštěvníky napříč službami.
+
+## Rozhodnutí
+Použijeme privacy-first analytiku v EU regionu a nebudeme posílat osobní údaje v eventech.
+
+## Důsledky
+Budeme mít méně detailní reklamní atribuci, ale lepší kontrolu nad daty a jednodušší vysvětlení zákazníkům.
+```
+
+ADR nemusí být dokonalý právní spis. Má zachytit kontext ve chvíli, kdy je rozhodnutí živé. Za půl roku ti ušetří debatu „proč jsme to tehdy vlastně udělali?“ — což je otázka, která umí sežrat celé odpoledne a ještě si říct o sušenku.
+
+## 5.4 Automatizuj rutinu, ne úsudek
+
+Automatizace je skvělá, když odstraňuje opakovatelnou práci. Je nebezpečná, když jen rychleji vyrábí špatná rozhodnutí. U malého týmu automatizuj nejdřív věci, které mají jasný vstup, jasný výstup a nízké riziko:
+
+- kontrolu formátu a lint před mergem,
+- generování sitemap a RSS,
+- zálohy databáze a pravidelný test obnovy,
+- upozornění na 404 a chyby formulářů,
+- opakované exporty reportů,
+- připomenutí revize starých článků nebo neaktivních trialů.
+
+Neautomatizuj bez rozmyslu:
+
+- odpovědi zákazníkům u citlivých problémů,
+- mazání dat bez auditní stopy,
+- změny cen nebo oprávnění,
+- publikování obsahu bez lidské kontroly,
+- bezpečnostní rozhodnutí jen podle jednoho nástroje.
+
+Privacy-first automatizace má navíc jednoduché pravidlo: loguj dost na provoz a bezpečnost, ale ne víc, než potřebuješ. Pokud automatizace posílá data do externí služby, napiš si k ní mini vendor poznámku: jaká data odchází, proč, kde se zpracují, jak dlouho se drží a jak ji vypneš.
+
+## 5.5 AI asistent jako multiplikátor, ne autopilot
+
+AI může malému týmu výrazně pomoct: připraví návrh článku, najde hrany v textu, navrhne testovací scénáře, vysvětlí logy nebo přepíše support odpověď do srozumitelnější češtiny. Ale pořád platí, že odpovědnost má tým. AI není vlastník produktu. Je to extrémně rychlý junior, který občas přijde s geniálním nápadem a občas sebevědomě nabídne blbost v obleku.
+
+Dobré použití AI v malém týmu:
+
+- shrnout dlouhý issue thread do rozhodnutí a otevřených otázek,
+- navrhnout varianty copy pro landing page,
+- vytvořit první návrh checklistu pro onboarding,
+- zkontrolovat, jestli dokumentace odpovídá skutečnému kódu,
+- připravit bezpečnostní otázky pro review nové integrace,
+- převést zákaznickou zpětnou vazbu na témata k validaci.
+
+Špatné použití AI:
+
+- poslat právní nebo bezpečnostní závěr bez ověření,
+- generovat obsah s faktickými tvrzeními bez zdrojů,
+- nechat model rozhodovat o prioritách bez kontextu zákazníků,
+- kopírovat citlivá data do nástroje, který pro to nemá smluvní ani technické podmínky,
+- přijmout velký refaktor bez testů jen proto, že diff vypadá elegantně.
+
+Praktický prompt pro týmovou práci:
+
+> Jsi kritický produktový sparring partner. Zkontroluj tento plán týdne. Najdi nejasné výsledky, skrytá rizika, chybějící vlastníky a kroky, které nejdou ověřit. Nechci motivaci, chci konkrétní opravy.
+
+Takový prompt neprosí o kouzlo. Vynucuje strukturu. A struktura je přesně to, co malému týmu šetří čas.
+
+## 5.6 Checklist páté kapitoly
+
+Na konci týdne si projdi:
+
+- Má tým jednu hlavní prioritu, kterou jde ověřit výsledkem?
+- Je počet rozdělaných úkolů omezený a viditelný?
+- Má každý aktivní úkol vlastníka a definici „hotovo“?
+- Existuje krátký zápis pro důležitá technická, produktová nebo datová rozhodnutí?
+- Jsou rutinní kontroly automatizované tam, kde je nízké riziko omylu?
+- Víš, která data odchází do externích nástrojů a proč?
+- Používáš AI na návrhy, kontrolu a zrychlení práce, ne jako nehlídaný autopilot?
+- Má tým pravidelný okamžik, kdy zavírá staré nápady a maže zbytečnou práci?
+
+Hodinová iterace: vezmi aktuální tabuli práce, nastav limit pro „Děláme“, u tří nejdůležitějších úkolů dopiš výsledek a definici hotovo, a k jednomu staršímu rozhodnutí vytvoř krátké ADR. To je malý zásah, který sníží chaos rychleji než další nový nástroj. Nástrojů máme dost. Klidu málo.
+
 ## Zdroje
 
+- ADR GitHub Organization: [Architectural Decision Records](https://adr.github.io/)
+- Atlassian: [Working with WIP limits for kanban](https://www.atlassian.com/agile/kanban/wip-limits)
 - EUR-Lex: [Nařízení GDPR 2016/679, článek 5 a 25](https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=CELEX%3A32016R0679)
 - EUR-Lex: [ePrivacy Directive 2002/58/EC](https://eur-lex.europa.eu/eli/dir/2002/58/oj?locale=en)
 - OWASP Foundation: [Application Security Verification Standard](https://owasp.org/www-project-application-security-verification-standard/)
@@ -495,6 +632,7 @@ Pokud chceš udělat jednu hodinovou iteraci, vyber nejlepší existující čl�
 
 ## Pracovní log
 
+- 2026-08-05: Dopsána kapitola 5 o produktivitě malého týmu: omezení rozdělané práce, týdenní rytmus, dokumentace, ADR, automatizace, AI asistenti a checklist.
 - 2026-08-05: Dopsána kapitola 4 o marketingu bez závislosti na platformách: vlastní kanály, obsahový rytmus, distribuce, RSS, newsletter se souhlasem, partnerství a checklist.
 - 2026-08-05: Dopsána kapitola 3 o SaaS cestě k první platbě: MVP, validace platbou, onboarding, privacy-first metriky, bezpečnostní minimum a checklist.
 - 2026-08-05: Dopsána kapitola 2 o webu jako obchodníkovi: hero sekce, důvěra, struktura homepage, technická kvalita, privacy-first měření a checklist.
