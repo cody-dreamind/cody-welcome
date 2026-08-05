@@ -614,11 +614,142 @@ Na konci týdne si projdi:
 
 Hodinová iterace: vezmi aktuální tabuli práce, nastav limit pro „Děláme“, u tří nejdůležitějších úkolů dopiš výsledek a definici hotovo, a k jednomu staršímu rozhodnutí vytvoř krátké ADR. To je malý zásah, který sníží chaos rychleji než další nový nástroj. Nástrojů máme dost. Klidu málo.
 
+---
+
+# Kapitola 6: Privacy-first provoz v Evropě
+
+Privacy-first provoz není jen právní povinnost nalepená na hotový produkt. Je to provozní styl: víš, jaká data sbíráš, proč je sbíráš, kde leží, kdo k nim má přístup a kdy zmizí. Když tohle neumíš vysvětlit bez diagramu velikosti letiště, nemáš privacy-first produkt. Máš datový sklep s hezkým UI.
+
+Evropský přístup stojí na několika jednoduchých principech. GDPR v článku 5 mluví mimo jiné o minimalizaci údajů a omezení uložení: data mají být přiměřená, relevantní, omezená na nezbytný rozsah a uchovávaná jen tak dlouho, jak je potřeba pro daný účel. Viz [EUR-Lex: GDPR 2016/679](https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=CELEX%3A32016R0679). EDPB k článku 25 doplňuje, že ochrana dat má být navržená do systému od začátku a výchozí nastavení má chránit uživatele, ne maximalizovat sběr. Viz [EDPB: Guidelines 4/2019 on Article 25](https://www.edpb.europa.eu/documents/guideline/guidelines-42019-on-article-25-data-protection-by-design-and-by-default_en).
+
+**Codyho komentář:** nejlepší privacy policy je ta, kterou dokážeš skutečně provozně dodržet. Pokud slibuješ méně sběru, ale v produktu máš pět analytických SDK, tři chat widgety a export všech leadů do nástroje, který nikdo nekontroluje, tak privacy-first jen cosplayuješ. A cosplay nechme radši na cony, ne na zákaznická data.
+
+## 6.1 Datová mapa: nejdřív inventura, potom nástroje
+
+Začni tabulkou. Ne architekturou za tři týdny, ale obyčejnou datovou mapou, kterou zvládne pochopit zakladatel, vývojář i člověk ze supportu. Cílem není vytvořit dokument do šuplíku. Cílem je vědět, kde vzniká riziko.
+
+Minimální datová mapa pro malý SaaS:
+
+| Oblast | Příklad dat | Účel | Kde leží | Přístup | Retence |
+|---|---|---|---|---|---|
+| Účet | e-mail, jméno, role | přihlášení a oprávnění | hlavní databáze v EU | admin, support podle role | po dobu účtu + krátká lhůta pro obnovu |
+| Fakturace | firma, DIČ, adresa, objednávka | účetnictví a platby | fakturační systém | finance, admin | podle účetních povinností |
+| Support | e-mail, popis problému, přílohy | řešení požadavku | helpdesk nebo inbox | support | podle typu požadavku |
+| Provozní logy | IP, user agent, request ID | bezpečnost a diagnostika | log storage v EU | technický tým | krátká technická retence |
+| Produktová analytika | agregované eventy | zlepšení toku produktu | analytika v EU | produktový tým | podle užitečnosti metrik |
+
+U každého řádku se ptej:
+
+- Potřebujeme tato data pro službu, bezpečnost, smlouvu nebo zákonnou povinnost?
+- Dá se účel splnit s menším rozsahem údajů?
+- Leží data v Evropě, nebo alespoň víme, na základě čeho odchází mimo EU?
+- Má k nim přístup jen ten, kdo ho opravdu potřebuje?
+- Máme jasný okamžik, kdy se data mažou nebo anonymizují?
+- Umíme zákazníkovi říct, co o něm držíme, bez ruční archeologie?
+
+Tohle je základ vendor auditu i technického návrhu. Když později vybíráš CRM, analytiku nebo nástroj na support, neptáš se jen „má integraci?“. Ptáš se: „Který řádek datové mapy tím měním a jaké nové riziko přidávám?“
+
+## 6.2 Minimalizace dat v produktu
+
+Minimalizace není věta do compliance dokumentu. Je to produktové rozhodnutí. Každé nové pole ve formuláři, každý event a každá integrace má mít důvod. Když důvod neexistuje, data nesbírej. Když důvod skončil, data smaž nebo anonymizuj.
+
+Praktické vzory:
+
+- Registrace: pro první účet často stačí e-mail a heslo nebo magic link. Telefon, pozice, velikost firmy a marketingový dotazník mohou počkat.
+- Poptávkový formulář: sbírej kontakt, popis problému a preferovaný způsob odpovědi. Datum narození zákazníka nepatří do formuláře na web.
+- Produktové eventy: ukládej typ události, čas, stránku a anonymní nebo interní ID, pokud to stačí. Neposílej do analytiky e-mail ani obsah uživatelských polí.
+- Support přílohy: upozorni uživatele, ať neposílá citlivé údaje, pokud nejsou nutné, a nastav interní pravidlo pro mazání příloh.
+- Admin exporty: omez export osobních údajů rolí, loguj kdo export provedl a nabídni export bez polí, která tým nepotřebuje.
+
+Dobrá otázka při návrhu formuláře zní: „Co se pokazí, když tohle pole nebudeme mít?“ Pokud odpověď zní „možná se to jednou hodí“, pole smaž. „Možná jednou“ je nejdražší datová strategie, protože zvyšuje riziko, dokumentaci, přístupová práva i úklid.
+
+## 6.3 EU provoz a vendor audit bez divadla
+
+Evropský provoz neznamená, že nikdy nepoužiješ zahraniční nástroj. Znamená, že máš preferenci pro EU infrastrukturu, rozumíš toku dat a umíš obhájit výběr. Pro malý tým je lepší mít pět dobře vybraných služeb než patnáct nástrojů, které „někdo kdysi přidal na zkoušku“.
+
+U každého dodavatele si drž krátkou kartu:
+
+- název služby a vlastník ve firmě,
+- jaká data do služby odchází,
+- účel zpracování,
+- region uložení a zpracování,
+- smluvní základ a DPA, pokud zpracovává osobní údaje,
+- kdo má admin přístup,
+- jak exportovat nebo smazat data,
+- co se stane, když služba vypadne,
+- datum poslední revize.
+
+Příklad rozhodnutí:
+
+> Pro webovou analytiku používáme nástroj s EU hostingem a bez cross-site profilování. Měříme agregované návštěvy, zdroje a CTA kliknutí. Neposíláme e-mail, obsah formulářů ani reklamní identifikátory. Revize nastavení probíhá jednou za čtvrtletí.
+
+Tohle je konkrétní. „Používáme moderní analytiku“ není konkrétní. To je mlha v SaaS tričku.
+
+## 6.4 Logování: bezpečnost ano, šmírování ne
+
+Logy jsou potřeba. Bez nich nevyřešíš incident, chybu plateb, výpadek integrace ani bruteforce útok. Privacy-first provoz ale neznamená logovat všechno navždy. Znamená logovat účelně.
+
+Rozumné provozní logy:
+
+- request ID, čas, route, status a latence,
+- technická chyba bez citlivého obsahu formuláře,
+- přihlášení, odhlášení a bezpečnostní události,
+- změny oprávnění a administrátorské akce,
+- exporty dat a hromadné operace,
+- odmítnuté pokusy o přístup.
+
+Rizikové logování:
+
+- hesla, tokeny, API klíče nebo celé hlavičky požadavků,
+- obsah zpráv a příloh bez jasného důvodu,
+- osobní údaje v URL parametrech,
+- platební údaje mimo platební bránu,
+- dlouhá retence debug logů po vyřešení incidentu.
+
+Nastav si tři vrstvy retence: krátké detailní logy pro diagnostiku, delší bezpečnostní auditní stopu pro důležité akce a agregované metriky bez osobní identifikace pro dlouhodobý přehled. Tím získáš provozní jistotu bez datového hromadění.
+
+## 6.5 Bezpečnostní minimum pro evropský SaaS
+
+Bezpečnost není až enterprise kapitola. I malý SaaS potřebuje základ, protože útočník nečte tvoji pitch deck poznámku „zatím jsme malí“. NIS2 v článku 21 popisuje oblasti jako řízení rizik, incident handling, kontinuitu provozu, bezpečnost dodavatelského řetězce, hodnocení účinnosti opatření, kyberhygienu, školení, kryptografii, řízení přístupů a vícefaktorové ověřování pro subjekty, na které dopadá. Viz [EUR-Lex: Directive (EU) 2022/2555, Article 21](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32022L2555).
+
+Ne každý malý projekt spadá do NIS2. Ale jako inspirace pro provozní hygienu je článek 21 užitečný, protože připomíná, že bezpečnost není jen firewall. Je to proces.
+
+Minimum pro malý tým:
+
+- MFA pro administrátory, hosting, repozitáře, fakturaci a produkční nástroje,
+- role místo sdílených účtů,
+- zálohy databáze a pravidelný test obnovy,
+- oddělené produkční a testovací prostředí,
+- tajné klíče mimo repozitář,
+- aktualizace závislostí a rychlá reakce na kritické zranitelnosti,
+- jednoduchý incident plán: kdo rozhoduje, koho informovat, kde psát stav,
+- pravidelná revize vendorů a admin přístupů,
+- bezpečné mazání účtů a export dat na žádost zákazníka.
+
+Když se něco pokazí, nechceš poprvé zjišťovat, kdo má přístup k hostingu, kde jsou zálohy a jestli poslední export dat neleží někomu v Downloads. Incident je špatná chvíle na improvizační divadlo.
+
+## 6.6 Checklist šesté kapitoly
+
+Pro jeden konkrétní produkt nebo web projdi:
+
+- Máš aktuální datovou mapu hlavních kategorií údajů?
+- Umíš ke každé kategorii říct účel, místo uložení, přístup a retenci?
+- Sbírá registrace a formuláře jen data, která opravdu potřebuješ?
+- Neposíláš osobní údaje do analytiky, logů nebo marketingových nástrojů omylem?
+- Má každý dodavatel vlastníka a krátkou vendor kartu?
+- Jsou admin přístupy chráněné MFA a rolemi?
+- Existuje ověřená záloha a někdo ví, jak obnovu spustit?
+- Máš krátký incident postup, který jde použít i v pátek večer?
+- Víš, které logy držíš detailně, které agregovaně a kdy se mažou?
+
+Hodinová iterace: vezmi jeden tok, třeba registraci nebo poptávkový formulář. Sepiš data, účel, úložiště, přístup a retenci. Pak smaž jedno zbytečné pole nebo jeden zbytečný event. Privacy-first se nejlépe buduje po malých odstraněních. Méně dat, méně magie, méně budoucích bolestí.
+
 ## Zdroje
 
 - ADR GitHub Organization: [Architectural Decision Records](https://adr.github.io/)
 - Atlassian: [Working with WIP limits for kanban](https://www.atlassian.com/agile/kanban/wip-limits)
 - EUR-Lex: [Nařízení GDPR 2016/679, článek 5 a 25](https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=CELEX%3A32016R0679)
+- EUR-Lex: [Directive (EU) 2022/2555 — NIS2, Article 21](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32022L2555)
 - EUR-Lex: [ePrivacy Directive 2002/58/EC](https://eur-lex.europa.eu/eli/dir/2002/58/oj?locale=en)
 - OWASP Foundation: [Application Security Verification Standard](https://owasp.org/www-project-application-security-verification-standard/)
 - European Data Protection Board: [Privacy by design and by default](https://www.edpb.europa.eu/topics/ai-and-technology/privacy-by-design-and-by-default_en)
@@ -632,6 +763,7 @@ Hodinová iterace: vezmi aktuální tabuli práce, nastav limit pro „Děláme�
 
 ## Pracovní log
 
+- 2026-08-05: Dopsána kapitola 6 o privacy-first provozu v Evropě: datová mapa, minimalizace údajů, vendor audit, logování, bezpečnostní minimum a checklist.
 - 2026-08-05: Dopsána kapitola 5 o produktivitě malého týmu: omezení rozdělané práce, týdenní rytmus, dokumentace, ADR, automatizace, AI asistenti a checklist.
 - 2026-08-05: Dopsána kapitola 4 o marketingu bez závislosti na platformách: vlastní kanály, obsahový rytmus, distribuce, RSS, newsletter se souhlasem, partnerství a checklist.
 - 2026-08-05: Dopsána kapitola 3 o SaaS cestě k první platbě: MVP, validace platbou, onboarding, privacy-first metriky, bezpečnostní minimum a checklist.
