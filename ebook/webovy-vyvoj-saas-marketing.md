@@ -1427,6 +1427,151 @@ Před spuštěním lifecycle komunikace projdi:
 Hodinová iterace: vezmi jednu existující nebo plánovanou e-mailovou automatizaci a vyplň lifecycle mapu. Pokud u ní neumíš napsat účel, spouštěč, data, právní režim a exit, automatizaci zatím nespouštěj. Nejlepší e-mail je někdy ten, který produkt nemusí poslat, protože uživatel pochopil další krok přímo v rozhraní.
 
 
+# Příloha F: Support a dokumentace jako produktová páka
+
+Support není odpadní kanál pro věci, které se nepovedly v produktu. Je to jeden z nejlepších zdrojů poznání, důvěry a obsahu. Malý SaaS tým si často myslí, že support začne řešit „až bude víc zákazníků“. To je past. Když máš první zákazníky a support nemá rytmus, začnou se ti stejné otázky vracet v e-mailu, chatu, telefonu, interních poznámkách a v hlavě zakladatele. Výsledek? Zakladatel se tváří jako CRM systém s kofeinem. Neudržitelné, i když místy poetické.
+
+Dobře navržený support dělá tři věci najednou:
+
+- pomáhá konkrétnímu zákazníkovi dokončit práci,
+- ukazuje týmu, kde produkt mate nebo selhává,
+- vytváří dokumentaci, která snižuje budoucí zátěž.
+
+Privacy-first support navíc nepředpokládá, že každý tiket smí obsahovat kompletní historii uživatele, nahrávky obrazovky, IP adresy a volný export databáze. Cílem je pochopit problém s nejmenším množstvím dat, které k vyřešení opravdu potřebuješ.
+
+## F.1 Jeden vstup, jasný slib
+
+Na začátku nepotřebuješ enterprise helpdesk s pěti frontami. Potřebuješ jedno jasné místo, kde zákazník ví, jak tě kontaktovat, a jednu interní tabulku nebo jednoduchý nástroj, kde tým vidí stav. Důležité je, aby se podpora nerozpadla mezi osobní inboxy.
+
+Minimální support slib může vypadat takhle:
+
+- „Pište na support@example.com.“
+- „Odpovídáme v pracovní dny obvykle do 24 hodin.“
+- „U urgentních provozních chyb napište do předmětu `URGENT` a přiložte ID účtu nebo projektu.“
+
+Neslibuj nepřetržitou podporu, pokud ji reálně nemáš. U malého SaaS je férovější říct „pracovní dny do 24 hodin“ a držet to, než předstírat 24/7 support a doufat, že se incidenty budou chovat slušně. Nebudou. Incidenty neumí etiketu.
+
+Interně si u každého požadavku drž jen pár polí:
+
+| Pole | Proč existuje |
+| --- | --- |
+| Typ | chyba, otázka, billing, feature request, bezpečnost |
+| Dopad | blokuje práci, zpomaluje práci, kosmetika, nápad |
+| Stav | nové, čeká na tým, čeká na zákazníka, vyřešeno |
+| Vlastník | kdo má další krok |
+| Odkaz | související issue, dokumentace nebo rozhodnutí |
+
+Tohle stačí překvapivě dlouho. Kouzlo není v nástroji, ale v tom, že každý požadavek má další krok a vlastníka.
+
+## F.2 Z tiketu udělej signál
+
+Každý tiket by měl po vyřešení skončit jednou krátkou klasifikací. Ne kvůli reportingu pro reporting, ale kvůli rozhodování. Když se stejný typ dotazu opakuje, není to „uživatelé nečtou“. Často je to produkt, text nebo onboarding, který neumí vysvětlit další krok.
+
+Praktické kategorie:
+
+- **Nejasný text v rozhraní** — uživatel neví, co znamená pole, stav nebo tlačítko.
+- **Chybějící dokumentace** — odpověď existuje v hlavě týmu, ale ne veřejně.
+- **Slabý onboarding** — uživatel se zasekne před prvním výsledkem.
+- **Skutečná chyba** — produkt slíbil něco, co nefunguje.
+- **Nesladěné očekávání** — marketing nebo pricing vyvolal jiný dojem než produkt.
+
+Jednou týdně si projdi posledních 10–20 požadavků a zeptej se:
+
+1. Který dotaz se opakuje?
+2. Který dotaz blokoval platbu nebo aktivaci?
+3. Který dotaz by nemusel vzniknout, kdybychom změnili jednu větu v produktu?
+4. Která odpověď si zaslouží článek v nápovědě?
+
+Tahle retrospektiva může trvat 20 minut. Pokud trvá dvě hodiny, máš moc kategorií, moc procesů, nebo tým tajně staví ministerstvo supportu. Zpátky na zem.
+
+## F.3 Dokumentace má být blízko akce
+
+Dokumentace není knihovna pro lidi, kteří už vědí, co hledají. Nejlepší dokumentace je tam, kde člověk zrovna váhá: u formuláře, v prázdném stavu, vedle importu, v nastavení fakturace, v e-mailu po registraci.
+
+Začni čtyřmi typy článků:
+
+- **Rychlý start** — jak dosáhnout prvního výsledku za jeden krátký průchod.
+- **Jak udělat konkrétní úkol** — jeden článek, jedna akce, žádná encyklopedie.
+- **Vysvětlení pojmu** — co znamená stav, metrika, role nebo nastavení.
+- **Řešení problému** — co zkontrolovat, když něco nefunguje.
+
+Šablona krátkého článku:
+
+```text
+# Jak [udělat konkrétní věc]
+
+Kdy to použít: [situace]
+
+Než začneš: [co musí být připravené]
+
+Postup:
+1. [krok]
+2. [krok]
+3. [ověření výsledku]
+
+Časté zádrhely:
+- [problém] → [řešení]
+
+Související:
+- [odkaz]
+```
+
+Piš dokumentaci stejným jazykem, jakým mluví zákazník. Pokud zákazník říká „faktura“, neříkej všude „daňový doklad“, pokud to není nutné kvůli přesnosti. Pokud zákazník říká „člen týmu“, nemusíš mu vnucovat „subjekt spolupráce v pracovním prostoru“. Tohle není fantasy román, nepotřebuješ vlastní mytologii.
+
+## F.4 Privacy-first support v praxi
+
+Support často svádí k tomu, že si tým řekne: „Pošli nám screenshot všeho, export všeho a přístup do účtu.“ Ne. Zkus nejdřív pracovat s minimem.
+
+Dobré zásady:
+
+- Ptej se na ID projektu, objednávky nebo anonymizovaný identifikátor, ne na zbytečné osobní údaje.
+- U screenshotů požádej zákazníka, ať začerní osobní údaje, pokud nejsou nutné.
+- Nedávej support lidem sdílené účty; každý člen týmu má mít vlastní přístup.
+- U citlivých dotazů ověř, že píše oprávněná osoba.
+- Do interních poznámek nekopíruj víc osobních dat, než je potřeba pro řešení.
+- Po vyřešení incidentu odděl technické poučení od osobních detailů.
+
+Praktická odpověď na problém může znít:
+
+```text
+Ahoj,
+díky za hlášení. Abychom to našli bez zbytečného sdílení dat, pošli prosím jen ID projektu a přibližný čas, kdy se chyba stala. Screenshot pomůže, ale začerni v něm jména, e-maily nebo obsah zákazníků, pokud nejsou přímo součástí chyby.
+
+Mrkneme na to a dáme vědět další krok.
+```
+
+Tím zákazníkovi ukazuješ dvě věci: chceš problém vyřešit a zároveň respektuješ jeho data. To je silnější signál důvěry než další badge „secure“ v patičce.
+
+## F.5 Z odpovědí stav obsah
+
+Support je zlatý důl pro marketing, pokud ho nepoužiješ hloupě. Neznamená to publikovat zákaznické problémy. Znamená to vytahovat obecné vzorce a anonymizovat je do užitečného obsahu.
+
+Příklad transformace:
+
+- Tiket: „Nevím, jestli mám pozvat účetní jako admina.“
+- Dokumentace: „Role v týmu: kdy použít admina, editora a účetní přístup.“
+- Produkt: Přidat vysvětlení rolí přímo do pozvánky.
+- Marketing: Článek „Jak bezpečně sdílet SaaS účet s externí účetní“.
+- Sales: Krátká odpověď pro zákazníky, kteří se ptají na řízení přístupů.
+
+Jedna dobrá odpověď tak může zlepšit produkt, dokumentaci, SEO i obchodní komunikaci. To je produktivita, ne jen „víc obsahu“.
+
+## F.6 Checklist přílohy
+
+Před tím, než support začne růst živelně, projdi:
+
+- Má zákazník jedno jasné místo, kam napsat o pomoc?
+- Slibuješ jen takovou rychlost odpovědi, kterou umíš dlouhodobě držet?
+- Má každý požadavek typ, dopad, stav, vlastníka a další krok?
+- Děláš krátkou týdenní retrospektivu opakovaných dotazů?
+- Přepisuješ opakované odpovědi do dokumentace nebo přímo do produktu?
+- Je dokumentace blízko místům, kde uživatelé váhají?
+- Sbírá support jen data nutná k vyřešení konkrétního problému?
+- Umíš z tiketu vytvořit anonymizovaný signál pro produkt, obsah nebo sales?
+
+Hodinová iterace: vezmi posledních pět support dotazů, rozděl je do kategorií a vyber jeden, který přepíšeš do krátkého článku nápovědy nebo mikrotextu v produktu. Pokud stejnou odpověď píšeš potřetí, už to není odpověď. Je to backlog položka v převleku.
+
+
 ## Zdroje
 
 - ADR GitHub Organization: [Architectural Decision Records](https://adr.github.io/)
@@ -1460,6 +1605,7 @@ Hodinová iterace: vezmi jednu existující nebo plánovanou e-mailovou automati
 
 ## Pracovní log
 
+- 2026-08-05: Doplněna příloha F o supportu a dokumentaci jako produktové páce: jasný support slib, třídění tiketů, dokumentace u akce, privacy-first řešení požadavků a checklist.
 - 2026-08-05: Doplněna příloha E o lifecycle e-mailech bez spamování: rozdělení zpráv podle účelu, onboardingovou sekvenci, minimalizaci segmentace, preference, odhlášení a checklist.
 - 2026-08-05: Doplněna příloha D o cenotvorbě SaaS bez slevového cirkusu: tarify podle výsledku, férové slevy, evropské provozní náklady, DPH upozornění, pricing stránka a checklist.
 - 2026-08-05: Doplněna příloha C o privacy-first produktové analytice: rozhodovací eventy, malý slovník událostí, minimalizace osobních údajů, onboardingový dashboard a checklist.
