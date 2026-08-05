@@ -1572,6 +1572,115 @@ Před tím, než support začne růst živelně, projdi:
 Hodinová iterace: vezmi posledních pět support dotazů, rozděl je do kategorií a vyber jeden, který přepíšeš do krátkého článku nápovědy nebo mikrotextu v produktu. Pokud stejnou odpověď píšeš potřetí, už to není odpověď. Je to backlog položka v převleku.
 
 
+# Příloha G: Zálohy a obnova bez paniky
+
+Zálohy jsou nudné jen do chvíle, než je opravdu potřebuješ. Pak se z nich během pěti minut stane nejdůležitější feature celého SaaS. A zákazníka v tu chvíli nezajímá, jestli máš krásný dashboard. Zajímá ho, jestli se jeho data vrátí, za jak dlouho a v jakém stavu.
+
+Pro malý evropský SaaS není cílem stavět katastrofický bunkr za miliony. Cílem je mít jednoduchý, pravidelně ověřovaný systém, který zvládne tři běžné situace: omylem smazaná data, rozbitý release a bezpečnostní incident. GDPR navíc v článku 32 výslovně mluví o schopnosti obnovit dostupnost a přístup k osobním údajům včas po fyzickém nebo technickém incidentu. Zálohy tedy nejsou „hezký bonus“. Jsou součást odpovědného provozu.
+
+**Codyho komentář:** pokud plán obnovy existuje jen v hlavě jednoho vývojáře, nemáš plán obnovy. Máš single point of failure s účesem.
+
+## G.1 Nejdřív rozhodni, co se musí obnovit
+
+Začni seznamem systémů, ne nákupem backup nástroje. U každé části produktu napiš, co by se stalo, kdyby zmizela nebo byla poškozená.
+
+Praktické minimum pro SaaS:
+
+- **Databáze:** účty, projekty, fakturace, produktová data, auditní záznamy.
+- **Objektové úložiště:** nahrané soubory, exporty, obrázky, dokumenty.
+- **Konfigurace:** environment proměnné, DNS, infrastruktura jako kód, cron úlohy.
+- **Aplikační kód:** repozitář, tagy releasů, build artefakty, migrační skripty.
+- **Provozní znalost:** runbooky, kontakty, přístupové role, postup pro komunikaci se zákazníky.
+
+U každé položky si stanov dvě čísla:
+
+- **RPO:** kolik dat si můžeš dovolit ztratit, například 15 minut, 1 hodinu nebo 1 den.
+- **RTO:** za jak dlouho musí služba znovu běžet, například 2 hodiny nebo 1 pracovní den.
+
+Nemusíš hned slibovat enterprise parametry. Musíš ale vědět, co reálně umíš. Lepší je čestně říct „kritická data obnovujeme do 4 hodin“ než mít na webu neurčité „high availability“ a při incidentu hledat heslo k databázi v chatu z loňska. To je takový digitální lov pokladů, akorát poklad hoří.
+
+## G.2 Jedna záloha nestačí
+
+NCSC ve svých doporučeních k zálohám upozorňuje, že ransomware a malware mohou zasáhnout i připojená úložiště. Proto je důležité nemít všechny kopie online a dostupné stejnými přístupovými údaji. Pro malý tým je dobrý cíl jednoduchý: více kopií, oddělené přístupy, pravidelný test obnovy.
+
+Praktický model:
+
+- **Krátké databázové snapshoty:** časté zálohy pro rychlé opravy po lidské chybě.
+- **Denní šifrovaná kopie:** mimo primární produkční účet nebo projekt.
+- **Týdenní oddělená kopie:** účet s jinými přístupy, ideálně s omezeným zápisem a delší retencí.
+- **Konfigurační export:** seznam DNS, proměnných, cronů a externích závislostí.
+- **Runbook obnovy:** jeden dokument, podle kterého projde obnovou i někdo jiný než autor systému.
+
+Privacy-first provoz znamená, že zálohy mají stejnou datovou disciplínu jako produkce. Šifruj je, omez přístupy, nastav retenci a nemaž práva jen „až bude čas“. Záloha plná osobních údajů není méně citlivá jen proto, že leží v jiné složce.
+
+## G.3 Test obnovy je důležitější než zelený backup job
+
+Zelený stav „backup completed“ říká jen to, že se něco někam zapsalo. Neříká, že to umíš obnovit. Skutečná kontrola je až obnovení do izolovaného prostředí.
+
+Jednou měsíčně udělej malý restore drill:
+
+1. Vezmi poslední zálohu databáze.
+2. Obnov ji do odděleného testovacího prostředí.
+3. Spusť migrační kontrolu a základní smoke test.
+4. Ověř, že se aplikace přihlásí a načte vzorový projekt.
+5. Změř čas od začátku obnovy po první funkční obrazovku.
+6. Zapiš výsledek do logu obnovy.
+
+Ukázka logu:
+
+| Datum | Scénář | Výsledek | Čas obnovy | Poznámka |
+|---|---|---:|---:|---|
+| 2026-08-05 | Obnova databáze do stagingu | OK | 38 min | Chyběl krok pro reindex vyhledávání |
+
+Tahle tabulka je malá, ale cenná. Po třech měsících vidíš, jestli se obnova zrychluje, zpomaluje nebo stojí na ručních krocích. A pokud přijde audit, bezpečnostní dotazník nebo větší zákazník, máš konkrétní důkaz, ne jen větu „zálohujeme pravidelně“.
+
+## G.4 Obnova produktu není jen databáze
+
+Při incidentu se často ukáže, že databáze je v pořádku, ale tým neumí rychle obnovit okolní systém: DNS, proměnné, platební webhooky, e-mailové šablony, fronty, úlohy na pozadí nebo integrace. Proto si k zálohám přidej provozní mapu.
+
+Provozní mapa může být obyčejná Markdown tabulka:
+
+| Oblast | Kde je pravda | Jak obnovit | Kdo má přístup |
+|---|---|---|---|
+| DNS | EU DNS provider | Export z administrace + screenshot kritických záznamů | Owner + ops |
+| Databáze | Managed PostgreSQL v EU regionu | Denní dump + point-in-time restore | Ops |
+| Soubory | EU object storage | Replikovaná šifrovaná kopie | Ops |
+| E-maily | Transactional provider | Šablony v repozitáři | Product + ops |
+| Platby | PSP dashboard | Webhook secret v trezoru | Owner |
+
+Nejde o dokonalost. Jde o to, aby nikdo při výpadku nelovil kritické informace v pěti účtech, dvou hlavách a jednom zapomenutém dokumentu s názvem `final-final-prod-new.md`.
+
+## G.5 Privacy-first obnova po incidentu
+
+Když obnovuješ službu po incidentu, máš dvě povinnosti: dostat produkt bezpečně zpátky do provozu a nezvětšit škodu neuváženou manipulací s daty. To znamená neobnovovat produkční data do prostředí, kam mají přístup lidé nebo nástroje, které je běžně nepotřebují.
+
+Pravidla:
+
+- Obnovuj produkční osobní údaje jen do prostředí se stejnou nebo vyšší úrovní ochrany.
+- Pro vývoj a ladění preferuj anonymizovaná nebo syntetická data.
+- Po testu obnovy smaž dočasné kopie a zapiš, kdo s nimi pracoval.
+- Přístup k zálohám nedávej stejným účtům, které běžně deployují aplikaci.
+- Pokud incident mohl zasáhnout osobní údaje, odděl technickou obnovu od posouzení oznamovací povinnosti.
+
+To poslední je důležité: ne každý výpadek je porušení zabezpečení osobních údajů, ale každý podezřelý incident si zaslouží krátký záznam. Kdo ho zjistil, kdy, co bylo zasaženo, jaká data mohla být dotčena, co se udělalo a kdo rozhodl o dalším postupu.
+
+## G.6 Checklist přílohy
+
+Před tím, než si odškrtneš „zálohy máme“, projdi:
+
+- Víš, která data, soubory, konfigurace a externí závislosti musíš obnovit?
+- Má každá kritická část stanovené RPO a RTO?
+- Existuje aspoň jedna kopie oddělená od běžného produkčního přístupu?
+- Jsou zálohy šifrované a mají omezenou retenci?
+- Testoval někdo obnovu v posledních 30 dnech?
+- Umí obnovu spustit i člověk, který systém původně nestavěl?
+- Máš log testů obnovy s datem, výsledkem a časem obnovy?
+- Neobnovuješ osobní údaje do vývojového prostředí bez jasného důvodu?
+- Máš krátký incident záznam pro případy, kdy mohl být dotčen provoz nebo data?
+
+Hodinová iterace: vyber jednu kritickou databázi nebo úložiště, napiš k ní RPO/RTO, najdi poslední zálohu a ověř aspoň první krok obnovy v izolovaném prostředí. Pokud neumíš říct, kde záloha je, právě jsi našel nejlevnější bezpečnostní audit svého života.
+
+
 ## Zdroje
 
 - ADR GitHub Organization: [Architectural Decision Records](https://adr.github.io/)
@@ -1580,6 +1689,7 @@ Hodinová iterace: vezmi posledních pět support dotazů, rozděl je do kategor
 - European Commission: [NIS2 Directive: securing network and information systems](https://digital-strategy.ec.europa.eu/en/policies/nis2-directive)
 - DORA: [Software delivery performance metrics](https://dora.dev/guides/dora-metrics/)
 - EUR-Lex: [Nařízení GDPR 2016/679, článek 5 a 25](https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=CELEX%3A32016R0679)
+- EUR-Lex: [Nařízení GDPR 2016/679, článek 32](https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=CELEX%3A32016R0679)
 - EUR-Lex: [Nařízení GDPR 2016/679, článek 28](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32016R0679)
 - EUR-Lex: [Directive (EU) 2022/2555 — NIS2, Article 21](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32022L2555)
 - EUR-Lex: [ePrivacy Directive 2002/58/EC](https://eur-lex.europa.eu/eli/dir/2002/58/oj?locale=en)
@@ -1587,6 +1697,8 @@ Hodinová iterace: vezmi posledních pět support dotazů, rozděl je do kategor
 - Google SRE: [Managing Incidents](https://sre.google/sre-book/managing-incidents/)
 - Google SRE: [Production Services Best Practices](https://sre.google/sre-book/service-best-practices/)
 - Google SRE: [Service Level Objectives](https://sre.google/sre-book/service-level-objectives/)
+- NCSC: [Backing up your data](https://www.ncsc.gov.uk/collection/small-organisations-guide-to-cyber-security/backing-up-your-data)
+- NCSC: [Ransomware-resistant backups](https://www.ncsc.gov.uk/collection/ransomware-resistant-backups)
 - OWASP Foundation: [Application Security Verification Standard](https://owasp.org/www-project-application-security-verification-standard/)
 - European Data Protection Board: [Privacy by design and by default](https://www.edpb.europa.eu/topics/ai-and-technology/privacy-by-design-and-by-default_en)
 - European Data Protection Board: [Pokyny 4/2019 k článku 25 — záměrná a standardní ochrana osobních údajů](https://www.edpb.europa.eu/documents/guideline/guidelines-42019-on-article-25-data-protection-by-design-and-by-default_cs)
@@ -1605,6 +1717,7 @@ Hodinová iterace: vezmi posledních pět support dotazů, rozděl je do kategor
 
 ## Pracovní log
 
+- 2026-08-05: Doplněna příloha G o zálohách a obnově SaaS: RPO/RTO, oddělené kopie, test obnovy, provozní mapa, privacy-first incident postup a checklist.
 - 2026-08-05: Doplněna příloha F o supportu a dokumentaci jako produktové páce: jasný support slib, třídění tiketů, dokumentace u akce, privacy-first řešení požadavků a checklist.
 - 2026-08-05: Doplněna příloha E o lifecycle e-mailech bez spamování: rozdělení zpráv podle účelu, onboardingovou sekvenci, minimalizaci segmentace, preference, odhlášení a checklist.
 - 2026-08-05: Doplněna příloha D o cenotvorbě SaaS bez slevového cirkusu: tarify podle výsledku, férové slevy, evropské provozní náklady, DPH upozornění, pricing stránka a checklist.
