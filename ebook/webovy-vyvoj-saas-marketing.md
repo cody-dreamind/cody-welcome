@@ -1887,6 +1887,92 @@ Zkontroluj datovou mapu před další větší funkcí:
 
 Hodinová iterace: otevři produkt a napiš prvních deset řádků datové mapy. Neřeš dokonalost. Zaměř se na nejkritičtější data: účty, platby, logy, support, analytika, zálohy. Už po první verzi uvidíš, kde máš zbytečný sběr, nejasnou retenci nebo nástroj, který do privacy-first provozu nesedí.
 
+---
+
+# Příloha J: Cookie lišta, která neotravuje a nelže
+
+Cookie lišta není designový prvek. Je to přiznání, že web chce udělat něco, co není nezbytné pro jeho fungování. Když ji použiješ špatně, návštěvníka naštveš, právníkovi přidáš práci a marketingu stejně nedáš dobrá data. Nejlepší cookie lišta je často ta, kterou vůbec nepotřebuješ, protože web měří střídmě, bez reklamních identifikátorů a bez zbytečného ukládání do zařízení uživatele.
+
+ÚOOÚ ve svých otázkách a odpovědích ke cookies rozlišuje technické cookies, které jsou nezbytné pro provoz webu, a netechnické cookies, typicky analytické nebo marketingové, které se ukládají jen na základě souhlasu podle zákona o elektronických komunikacích. Zároveň připomíná, že odmítnutí má být stejně jednoduché jako udělení souhlasu a že technické cookies neznamenají konec informační povinnosti. Viz [ÚOOÚ: Cookies](https://uoou.gov.cz/verejnost/qa-otazky-a-odpovedi/cookies). Evropský rámec vychází z ePrivacy směrnice a požadavků GDPR na platný souhlas, viz [ePrivacy Directive](https://eur-lex.europa.eu/eli/dir/2002/58/oj?locale=en) a [EDPB Guidelines 05/2020 on consent](https://www.edpb.europa.eu/documents/guideline/guidelines-052020-on-consent-under-regulation-2016679_en).
+
+**Codyho komentář:** cookie lišta se nemá používat jako mlhomet. Když už se návštěvníka ptáš, musíš mu dát skutečnou volbu. Tlačítko „Přijmout vše“ velké jako billboard a „Odmítnout“ schované ve sklepě UX pekla není growth hacking. Je to trapné divadlo s právním rizikem.
+
+## J.1 Nejprve rozhodni, jestli lištu vůbec potřebuješ
+
+Začni jednoduchým inventářem. Otevři web v čistém profilu prohlížeče, podívej se do DevTools na cookies, localStorage, sessionStorage a síťové požadavky. Potom si ke každé položce napiš účel. Pokud neumíš účel vysvětlit jednou větou, pravděpodobně tam ta věc nemá být.
+
+Praktické rozdělení:
+
+- **Nezbytné pro službu:** session cookie, CSRF token, jazykové nastavení, košík nebo bezpečnostní ochrana. Tady typicky nepotřebuješ souhlas, ale musíš informovat.
+- **Analytika pro vlastní rozhodování:** návštěvnost, zdroje návštěv, základní funnel, kvalita obsahu. Tady záleží na konkrétní technologii, konfiguraci a národní praxi.
+- **Marketing a remarketing:** reklamní pixely, cross-site identifikátory, profilování, napojení na reklamní platformy. Tady počítej se souhlasem a vysokou nedůvěrou uživatelů.
+- **Embedded obsah třetích stran:** mapy, videa, sociální widgety, chaty a formuláře. Často přinášejí vlastní trackery, takže je nenačítej automaticky bez rozmyslu.
+
+Privacy-first postup je jednoduchý: vyhoď všechno, co nepotřebuješ pro produktové rozhodnutí nebo provoz. Jestli chceš vědět, který článek přivádí kvalitní poptávky, nepotřebuješ sledovat člověka po internetu. Potřebuješ čitelné URL, UTM parametry pod vlastní kontrolou a pár agregovaných událostí.
+
+## J.2 Matice rozhodnutí pro malé weby a SaaS
+
+Použij tuhle matici před nasazením nové analytiky, chatu, formuláře nebo embed prvku.
+
+| Potřeba | Doporučené řešení | Cookie lišta? | Poznámka |
+|---|---|---|---|
+| Měřit základní návštěvnost webu | Serverové logy nebo privacy-first analytika bez cross-site sledování | Často ne, pokud se neukládá netechnický identifikátor do zařízení | Informuj v zásadách soukromí a nastav krátkou retenci |
+| Měřit konverzi z článku na poptávku | Vlastní UTM parametry, referrer, agregované eventy | Podle implementace | Neposílej e-mail ani user ID do analytiky |
+| Spustit remarketing | Reklamní pixel a publika | Ano | Zvaž, jestli to odpovídá značce a slibu privacy-first |
+| Vložit YouTube video | Klikací náhled, načtení až po akci uživatele | Ne pro náhled, často ano pro automatický embed | Lepší je hostovat video nebo použít odlehčený režim |
+| Live chat na každé stránce | Načtení až po kliknutí nebo vlastní kontaktní formulář | Často ano při automatickém načítání třetí strany | Support není omluva pro sledovací skript všude |
+| A/B test homepage | Server-side varianta bez persistentního identifikátoru | Podle délky a metody testu | U malých webů často stačí sekvenční experiment |
+
+Francouzský CNIL připouští u měření návštěvnosti omezenou výjimku ze souhlasu, pokud je měření striktně omezené na publikum daného webu nebo aplikace, neslouží ke spojování s jinými zpracováními, neumožňuje globální sledování a respektuje další podmínky. Viz [CNIL: Use analytics on your websites and applications](https://www.cnil.fr/en/sheet-ndeg16-use-analytics-your-websites-and-applications) a aktuální přehled pro nástroje měření návštěvnosti [CNIL: Cookies — solutions pour les outils de mesure d'audience](https://www.cnil.fr/fr/cookies-solutions-pour-les-outils-de-mesure-daudience). Ber to jako užitečný praktický rámec, ne jako univerzální českou výjimku. Pro český web se dívej hlavně na ÚOOÚ a konkrétní konfiguraci.
+
+## J.3 Jak napsat férový text místo právnické mlhy
+
+Text ke cookies a měření má být kratší než pohádka o třech reklamních sítích. Návštěvník má pochopit: co se děje, proč, kdo data dostane, jak dlouho se drží a jak může změnit volbu.
+
+Špatně:
+
+> Používáme cookies za účelem zlepšení uživatelského zážitku a personalizace obsahu prostřednictvím našich partnerů.
+
+Lépe:
+
+> Měříme návštěvnost webu, abychom věděli, které články a stránky lidem pomáhají. Nepoužíváme reklamní pixely ani nesledujeme návštěvníky napříč weby. Technické cookies slouží k bezpečnosti a fungování webu. Pokud zapneme netechnické měření, požádáme o souhlas a půjde ho stejně snadno odmítnout.
+
+Když používáš netechnické cookies, první vrstva lišty má mít jasné volby. „Přijmout vše“, „Odmítnout vše“ a „Nastavit“ patří na stejnou úroveň. Žádné falešné symetrie, žádné šedé tlačítko pro odmítnutí na hranici čitelnosti, žádné předem zaškrtnuté kategorie. EDPB v pokynech k souhlasu zdůrazňuje, že souhlas musí být svobodný, konkrétní, informovaný a jednoznačný. To není výzva k designové gymnastice. To je zadání.
+
+## J.4 Implementační vzor pro privacy-first web
+
+Pro malý evropský SaaS bych začal takhle:
+
+1. **Bez reklamních pixelů při startu.** Nejdřív ověř nabídku, onboarding a obsah. Remarketing přidej jen tehdy, když má jasný obchodní důvod a férový souhlas.
+2. **Měř agregovaně.** Sleduj návštěvu stránky, referrer, konverzní akci a technický stav. Neposílej do analytiky e-maily, jména, obsah formulářů ani interní ID zákazníků.
+3. **Preferuj EU provoz.** Analytika, logy i formuláře by měly běžet v EU nebo u dodavatelů, kde přesně rozumíš zpracování a smlouvám.
+4. **Odděl marketing od produktu.** Produktové eventy v aplikaci nejsou automaticky marketingová data. Neexportuj je do reklamních nástrojů jen proto, že integrace má hezké tlačítko.
+5. **Nastav retenci.** Surová analytická data drž krátce, agregované reporty déle. Logy anonymizuj nebo maž podle provozní potřeby.
+6. **Dokumentuj změny.** Každý nový skript třetí strany musí projít vendor auditem z přílohy A a aktualizací datové mapy z přílohy I.
+
+Příklad minimálního měření pro obsahový web:
+
+- page_view: URL, referrer domain, čas, device category bez fingerprintingu,
+- outbound_click: cílová doména, zdrojová stránka,
+- lead_submit: typ formuláře, zdrojová stránka, bez obsahu zprávy,
+- rss_subscribe_click: zdrojová stránka,
+- docs_search: anonymní hledaný výraz jen pokud neobsahuje osobní údaje nebo po filtraci.
+
+Tohle stačí pro rozhodování typu: které články psát dál, odkud chodí relevantní poptávky, kde lidé padají v onboardingu a jestli RSS nebo přímé odkazy fungují. Na začátku nepotřebuješ vědět, že „uživatel 8437 se vrátil po třech dnech z reklamy, pak přešel na ceník a následně se mu zobrazil pixel“. Potřebuješ vědět, jestli tvoje nabídka dává smysl.
+
+## J.5 Checklist přílohy
+
+- Víš, které cookies, storage položky a externí skripty web skutečně používá?
+- Umíš u každé položky vysvětlit účel, dodavatele, retenci a právní režim?
+- Je odmítnutí netechnických cookies stejně jednoduché jako jejich přijetí?
+- Nenačítáš marketingové, analytické nebo embed trackery před volbou uživatele?
+- Máš v zásadách soukromí srozumitelně popsané technické cookies a měření?
+- Neposíláš do analytiky osobní údaje, obsah formulářů, tokeny ani interní identifikátory?
+- Máš nastavenou retenci surových dat a logů?
+- Prošel každý nový skript třetí strany vendor auditem a datovou mapou?
+
+Pokud chceš udělat jednu věc hned: otevři web v anonymním okně, před kliknutím na cookie lištu zkontroluj síťové požadavky a úložiště prohlížeče. Pokud už v tu chvíli běží reklamní nebo netechnické analytické skripty, máš konkrétní úkol. Ne filozofii, úkol. To je příjemně otravný rozdíl.
+
 
 ## Zdroje
 
@@ -1900,6 +1986,10 @@ Hodinová iterace: otevři produkt a napiš prvních deset řádků datové mapy
 - EUR-Lex: [Nařízení GDPR 2016/679, článek 28](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32016R0679)
 - EUR-Lex: [Directive (EU) 2022/2555 — NIS2, Article 21](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32022L2555)
 - EUR-Lex: [ePrivacy Directive 2002/58/EC](https://eur-lex.europa.eu/eli/dir/2002/58/oj?locale=en)
+- European Data Protection Board: [Guidelines 05/2020 on consent under Regulation 2016/679](https://www.edpb.europa.eu/documents/guideline/guidelines-052020-on-consent-under-regulation-2016679_en)
+- ÚOOÚ: [Cookies — otázky a odpovědi](https://uoou.gov.cz/verejnost/qa-otazky-a-odpovedi/cookies)
+- CNIL: [Use analytics on your websites and applications](https://www.cnil.fr/en/sheet-ndeg16-use-analytics-your-websites-and-applications)
+- CNIL: [Cookies — solutions pour les outils de mesure d'audience](https://www.cnil.fr/fr/cookies-solutions-pour-les-outils-de-mesure-daudience)
 - European Commission: [Place of taxation — VAT rules](https://taxation-customs.ec.europa.eu/taxation/vat/vat-directive/place-taxation_en)
 - Google SRE: [Managing Incidents](https://sre.google/sre-book/managing-incidents/)
 - Google SRE: [Production Services Best Practices](https://sre.google/sre-book/service-best-practices/)
@@ -1924,6 +2014,7 @@ Hodinová iterace: otevři produkt a napiš prvních deset řádků datové mapy
 
 ## Pracovní log
 
+- 2026-08-05: Doplněna příloha J o férové cookie liště a privacy-first měření: rozhodnutí, zda je lišta potřeba, matice použití cookies, textace souhlasu, implementační vzor a checklist.
 - 2026-08-05: Doplněna příloha I o datové mapě a retenci pro privacy-first SaaS: kategorie dat, účely, přístupy, retence, rizikovost, automatické mazání a vývojový checklist.
 - 2026-08-05: Doplněna příloha H s předstartovním checklistem pro privacy-first SaaS: sladění slibu a produktu, průchod hlavním tokem, platby, support, monitoring a malý launch rytmus.
 - 2026-08-05: Doplněna příloha G o zálohách a obnově SaaS: RPO/RTO, oddělené kopie, test obnovy, provozní mapa, privacy-first incident postup a checklist.
