@@ -22375,12 +22375,145 @@ Tohle je konkretni, ale porad bezpecne. Zakaznik vidi hranice. Ty neposilas inte
 - [ ] Security dotazy z obchodu se po kazdem pouziti prevadi na zlepseni balicku.
 - [ ] Privacy-first odpoved je konkretni, ne defenzivni mlha.
 
+## AI transparentnost v produktu bez blikajici cedule "robot uvnitr" za 60 minut
+
+Transparentnost u AI neni banner, ktery prilepis na konec releasu. Je to produktova vlastnost: uzivatel musi vcas pochopit, kdy komunikuje s AI, kdy AI jen pripravila navrh pro cloveka, kdy je vystup synteticky a kde jsou limity. Kdyz to schovas, ziskas mozna o dve kliknuti vic. Ztratis ale duveru, support cas a u evropskych zakazniku i dobry pocit v security dotazniku. Gratuluju, vyhral jsi medaili za nejdrazsi zkratku.
+
+AI Act ma v clanku 50 transparentnostni povinnosti pro urcite AI systemy, napriklad informovani lidi, ze interaguji s AI systemem, a oznacovani urcitych AI generovanych nebo manipulovanych vystupu. Evropska komise k tomu vydala pokyny k transparentnosti; uvadi, ze pravidla podle clanku 50 plati od 2. srpna 2026 a maji pomoct providerum i deployerum aplikovat povinnosti jednotne a primerene. Zdroje: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng a https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems
+
+Prakticky preklad pro maly SaaS: i kdyz nejsi high-risk AI provider, necekej na audit jako na navstevu z hororu. Udelej jasne produktove texty ted. Vetsina transparentnosti nestoji vic nez dobre pojmenovani funkce, kratka veta u vstupu, vysvetleni u vystupu a odkaz na detail pro spravce nebo zakaznicke adminy.
+
+### 1. Rozlis ctyri typy AI dotyku
+
+Nejdriv si projdi produkt a oznac mista, kde se AI realne dotyka uzivatele nebo jeho dat:
+
+| Typ dotyku | Priklad | Co ma uzivatel vedet |
+| --- | --- | --- |
+| Prime AI rozhrani | chatbot, AI asistent v aplikaci | Ze mluvi s AI, co umi, co neumi a kdy predat cloveku. |
+| AI navrh pro cloveka | draft odpovedi supportu, navrh popisku | Ze konecne rozhodnuti nebo odeslani dela clovek. |
+| AI generovany obsah | shrnuti callu, obrazek, text kampane | Ze obsah vznikl nebo byl upraven AI a kdo ho schvalil. |
+| AI rozhodovaci podpora | scoring leadu, navrh priority ticketu | Jaky ma vystup dopad a jak se da napadnout nebo opravit. |
+
+Tahle tabulka je mala, ale zachrani te pred univerzalni vetou "pouzivame AI pro zlepseni sluzeb". To je veta tak presna, jako kdyby menu v restauraci rikalo "pouzivame jidlo".
+
+### 2. Transparentnost dej pred akci, ne do paticky
+
+Informace musi prijit tam, kde meni rozhodnuti uzivatele. Ne az po tom, co vlozil citlivy text, klikl na "Odeslat" nebo predal vystup zakaznikovi.
+
+Dobry vzorec mikrocopy:
+
+```text
+Tato funkce pouziva AI k navrhu shrnuti. Do modelu posilame text vybraneho dokumentu a technicka metadata pozadavku. Vystup pred pouzitim zkontrolujte; AI muze vynechat kontext nebo udelat chybu.
+```
+
+Kratka varianta v UI:
+
+```text
+AI navrh. Zkontrolujte pred odeslanim.
+```
+
+Detail pro napovedu nebo admina:
+
+```text
+AI shrnuti pracuje jen s dokumenty, ke kterym mate pristup. Bezna provozni logika uklada request_id, cas, latenci, verzi funkce a vysledek validace; obsah dokumentu se do beznych logu neuklada. Funkci lze vypnout pro cele workspace.
+```
+
+Privacy-first pravidlo: kratka veta patri do rozhrani, delsi vysvetleni do napovedy, datovy kontrakt do admin dokumentace. Neprelejvej vsechno do modalniho okna, jinak si uzivatel vytvori svalovou pamet na "zavrit" a transparentnost jsi prave utopil v UX polivce.
+
+### 3. Oznacuj vystupy podle pouziti, ne podle ega modelu
+
+Ne kazdy AI vystup potrebuje stejnou cedulku. Interni navrh pro support potrebuje jasny stav "AI draft" a kontrolu pred odeslanim. Verejne publikovany synteticky obrazek, deepfake, hlas nebo text k verejne zajimavemu tematu muze potrebovat vyraznejsi oznaceni. Produktove pravidlo je jednoduche: cim vetsi sance, ze si clovek splete AI vystup s lidskym, autentickym nebo oficialnim obsahem, tim viditelnejsi oznaceni.
+
+Prakticke stavy vystupu:
+
+- `AI draft` - vystup jeste neni schvaleny clovekem.
+- `AI assisted` - clovek vystup upravil nebo schvalil, AI pomohla s casti prace.
+- `AI generated` - obsah byl vytvoren AI a ma byt jako takovy cten.
+- `Human verified` - odpoved byla zkontrolovana odpovednou osobou podle interniho pravidla.
+
+Nepouzivej stav `verified`, pokud nikdo nic neoveril. To neni optimismus, to je bug v duvere.
+
+### 4. Delej transparentnost pristupnou a lokalizovanou
+
+Transparentnost, kterou precte jen pravnik na 27palcovem monitoru, neni transparentnost. Texty maji byt kratke, citelne, dostupne pres klavesnici a srozumitelne v jazyce uzivatele. Pokud mas cesky produkt, ceska AI hlaska neni nice-to-have. Je to zakladni respekt k cloveku, ktery nema lustit compliance poezii v anglictine.
+
+Checklist pro UI text:
+
+- Jedna hlavni veta rika, ze funkce pouziva AI.
+- Jedna veta rika, jaka data se pouziji.
+- Jedna veta rika limit nebo riziko.
+- Odkaz "Jak to funguje" vede na detail, ne na obecnou privacy policy.
+- Stav vystupu je videt i bez barvy, napriklad textem nebo ikonou s popiskem.
+
+### 5. Transparentnost napoj na admin nastaveni
+
+B2B zakaznik nechce jen vedet, ze AI existuje. Chce ji ridit. Minimalni admin nastaveni:
+
+- zapnout/vypnout AI funkci pro workspace,
+- omezit funkci na role nebo tymy,
+- nastavit, zda se AI vystupy mohou posilat zakaznikum,
+- zobrazit datovy kontrakt funkce,
+- exportovat seznam aktivnich AI funkci pro audit,
+- videt datum posledni zmeny pravidel.
+
+Tohle neni enterprise pozlatko. Je to levny zpusob, jak snizit pocet security dotazu, pravnich kolecek a neprijemnych emailu typu "proc to videl stazista".
+
+### 6. 60min postup
+
+**0-10 minut:** Vypis vsechny AI funkce v produktu a oznac typ dotyku: prime rozhrani, navrh pro cloveka, generovany obsah, rozhodovaci podpora.
+
+**10-25 minut:** Pro jednu nejdulezitejsi funkci napis tri vrstvy textu: kratky UI stitek, vysvetleni u akce a detail do napovedy/admin dokumentace.
+
+**25-40 minut:** Doplneni stavu vystupu: `AI draft`, `AI assisted`, `AI generated`, `Human verified`. Zkontroluj, ze stav neni zavisly jen na barve.
+
+**40-50 minut:** Projdi datovy kontrakt: vstupy, vystupy, logy, retence, vendor, vypinac. Pokud neco nevis, nepis marketingovou mlhu; zaloz interni ukol.
+
+**50-60 minut:** Pridej jednu admin informaci: zda je funkce zapnuta, kdo ji muze pouzit a kde je detail k datum/datam. Hotovo. Ne dokonale, ale o rad lepsi nez "AI magic".
+
+### 7. Priklad: AI asistent v B2B aplikaci
+
+**Spatne:**
+
+```text
+Zeptejte se asistenta na cokoliv.
+```
+
+Problem: uzivatel nevi, ze jde o AI, jaka data se pouziji, zda odpoved muze byt chybna a kdo ji vidi.
+
+**Lepsi:**
+
+```text
+AI asistent odpovida z vybranych dokumentu ve vasem workspace. Nepouzivejte ho pro pravni, zdravotni ani financni rozhodnuti bez kontroly odpovedne osoby. Odpovedi mohou obsahovat chyby; zdroje najdete pod vystupem.
+```
+
+**Admin detail:**
+
+```text
+Funkce je zapnuta pro role Admin a Support lead. Do AI pozadavku se posila dotaz, relevantni casti dokumentu a technicka metadata. Bezne logy ukladaji request_id, verzi funkce, cas, latenci a vysledek bezpecnostni validace. Obsah dotazu se uchovava 7 dni jen v debug rezimu zapnutem adminem.
+```
+
+**Codyho komentar:** Nejlepsi AI transparentnost neni lekarsky pribalovy letak. Je to dobre napsany produktovy popisek, ktery uzivateli dovoli udelat lepsi rozhodnuti driv, nez system udela neco za nej.
+
+### Checklist: AI transparentnost v produktu
+
+- [ ] Kazda AI funkce ma urceny typ dotyku s uzivatelem nebo daty.
+- [ ] Uzivatel vidi, kdy komunikuje s AI nebo kdy cte AI vystup.
+- [ ] Informace je zobrazena pred relevantni akci, ne jen v patickove dokumentaci.
+- [ ] UI rozlisuje `AI draft`, `AI assisted`, `AI generated` a `Human verified`.
+- [ ] Text vysvetluje vstupni data, hlavni limit a odpovednost cloveka.
+- [ ] Detailni napoveda popisuje logy, retenci, vendor tok a vypinac.
+- [ ] Admin vidi, ktere AI funkce jsou zapnute a pro koho.
+- [ ] Oznaceni je pristupne, lokalizovane a nespoleha jen na barvu.
+- [ ] Verejne AI vystupy maji viditelne oznaceni podle rizika zameny.
+- [ ] Transparentnostni texty maji vlastnika a kontroluji se pri kazdem AI releasu.
+
 ---
 
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
 - European Commission, AI Act: https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai
+- European Commission, Guidelines on transparency obligations for providers and deployers of AI systems: https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems
 - AI Act Service Desk, Timeline for the Implementation of the EU AI Act: https://ai-act-service-desk.ec.europa.eu/en/ai-act/timeline/timeline-implementation-eu-ai-act
 - EDPB Opinion 28/2024 on certain data protection aspects related to the processing of personal data in the context of AI models: https://www.edpb.europa.eu/documents/opinion-of-the-board-art-64/opinion-282024-on-certain-data-protection-aspects-related-to_en
 - GDPR, Regulation (EU) 2016/679, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
@@ -22496,6 +22629,7 @@ Tohle je konkretni, ale porad bezpecne. Zakaznik vidi hranice. Ty neposilas inte
 
 ## Pracovni log
 
+- 2026-08-05: Pridana prakticka priloha AI transparentnost v produktu bez blikajici cedule "robot uvnitr" za 60 minut vcetne typu AI dotyku, UI mikrocopy, oznacovani vystupu, pristupnosti, admin nastaveni, prikladu asistenta a checklistu.
 - 2026-08-05: Pridana prakticka priloha AI zakaznicky audit balicek bez posilani internich promptu za 60 minut vcetne verejne/NDA vrstvy, zakladnich otazek, eval souhrnu, zakazanych priloh, prikladu odpovedi a checklistu.
 - 2026-08-04: Pridana prakticka priloha AI postmortem bez hledani vinika za 45 minut vcetne casove osy, datoveho dopadu, root cause otazek, akcnich polozek, komunikace a checklistu.
 - 2026-08-04: Pridana prakticka priloha AI release notes bez prozrazeni internich promptu za 45 minut vcetne verejne a interni vrstvy, sablon, bezpecnostni redakce, 45min postupu a checklistu.
