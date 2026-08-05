@@ -1791,6 +1791,103 @@ Před startem produktu projdi tenhle seznam bez romantiky:
 Pokud chceš udělat jednu věc hned: vezmi anonymní okno, projdi registraci, první hodnotnou akci, platbu nebo objednávku a zrušení. Všechno zapisuj. Produkt ti během dvaceti minut řekne víc než další strategická porada, která by stejně skončila tím, že někdo navrhne nové logo.
 
 
+---
+
+# Příloha I: Datová mapa a retence bez tabulkového pekla
+
+Datová mapa zní jako věc, kterou někdo vymyslel, aby zakladatelé SaaS produktů trpěli v tabulkách. Ve skutečnosti je to jedna z nejlevnějších pojistek proti chaosu. Když víš, jaká data sbíráš, proč je sbíráš, kde leží, kdo k nim má přístup a kdy je mažeš, děláš lepší produktová, bezpečnostní i obchodní rozhodnutí.
+
+GDPR v článku 5 pracuje mimo jiné se zásadami minimalizace údajů, omezení účelu a omezení uložení. V praxi to znamená: sbírej jen data, která potřebuješ pro jasný účel, nepoužívej je později na něco úplně jiného bez opory a nenechávej je ležet navždy jen proto, že disk je levný. Disk je levný. Důvěra ne.
+
+**Codyho komentář:** dobrá datová mapa není právní dekorace. Je to provozní mapa produktu. Pomáhá vývojářům vědět, co nesmí logovat, supportu co smí otevřít, marketingu co nemá exportovat a founderovi co musí umět vysvětlit zákazníkovi bez právnické mlhy.
+
+## I.1 Začni pěti otázkami
+
+Nepotřebuješ hned nástroj za měsíční poplatek, který vypadá jako kokpit vesmírné lodi. První verze datové mapy může být Markdown soubor v repozitáři nebo sdílená tabulka. Důležité je, aby byla pravdivá a pravidelně aktualizovaná.
+
+Pro každou kategorii dat si odpověz:
+
+1. **Jaká data sbíráme?** Například e-mail, fakturační údaje, IP adresa v logu, obsah nahraného souboru, produktová událost.
+2. **Proč je sbíráme?** Registrace, fakturace, bezpečnost, support, zlepšení onboardingu, zákonná povinnost.
+3. **Kde jsou uložená?** Produkční databáze, logovací služba, e-mailový nástroj, platební brána, zálohy.
+4. **Kdo k nim má přístup?** Role v týmu, externí dodavatel, automatizace, support účet.
+5. **Kdy a jak je mažeme?** Automaticky po době retence, ručně na žádost, po zrušení účtu, po vypršení zákonné povinnosti.
+
+Když na některou otázku odpovíš „nevím“, není to ostuda. Je to signál. Horší je nevědět a zároveň tvrdit na webu, že máš data „plně pod kontrolou“. To je jako říct, že máš uklizeno, zatímco jen zavřeš dveře do skladu.
+
+## I.2 Šablona datové mapy
+
+Použij jednoduchou tabulku. Přidej ji do interní dokumentace a aktualizuj při každé nové integraci, větší funkci nebo změně analytiky.
+
+| Kategorie dat | Účel | Systém | Přístup | Retence | Poznámka |
+|---|---|---|---|---|---|
+| E-mail uživatele | Přihlášení a komunikace ke službě | Produkční databáze v EU | Owner, support podle role | Po dobu účtu + krátká provozní rezerva | Neposílat do analytiky |
+| Fakturační údaje | Účetnictví a daňové povinnosti | Fakturační systém | Owner, účetní | Podle účetních povinností | Oddělit od produktové analytiky |
+| Produktové eventy | Zlepšení onboardingu | Privacy-first analytika | Produktový tým | 12 měsíců agregovaně | Bez osobních údajů v názvu eventu |
+| Aplikační logy | Bezpečnost a ladění chyb | Log storage v EU | Ops | 30–90 dní podle rizika | Nelogovat tokeny, hesla ani obsah zpráv |
+| Zálohy | Obnova služby | Oddělené šifrované úložiště | Ops | Podle RPO/RTO a citlivosti dat | Test obnovy aspoň měsíčně |
+
+Retence není soutěž v tom, kdo smaže nejrychleji. Některá data musíš držet kvůli smlouvě, bezpečnosti nebo zákonným povinnostem. Pointa je mít důvod, dobu a postup. „Pro jistotu navždy“ není strategie. Je to odložený problém s lepším marketingem.
+
+## I.3 Rozděl data podle rizika
+
+Ne všechna data jsou stejně citlivá. Rozdělení podle rizika ti pomůže nastavit přístupy, logování, testovací data i priority zabezpečení.
+
+Praktické úrovně:
+
+- **Veřejná data:** obsah webu, veřejná dokumentace, veřejný changelog.
+- **Provozní data:** technické metriky, agregovaná návštěvnost, anonymní eventy.
+- **Zákaznická data:** účty, projekty, nastavení, objednávky, support konverzace.
+- **Citlivá provozní data:** tokeny, API klíče, auditní logy, bezpečnostní události.
+- **Vysoce citlivá data:** zvláštní kategorie údajů, finanční detaily, identifikační dokumenty nebo obsah, který by při úniku vážně poškodil zákazníka.
+
+Malý SaaS by se měl vysoce citlivým datům vyhýbat, pokud nejsou přímo součástí hodnoty produktu. Pokud je nepotřebuješ, nesbírej je. Pokud je potřebuješ, navrhni produkt, infrastrukturu a podporu tak, aby s nimi pracovalo co nejméně lidí a systémů.
+
+## I.4 Retence musí být automatická, jinak se nestane
+
+Ruční mazání funguje skvěle v dokumentu a mizerně v pátek odpoledne. Kde to jde, nastav automatickou retenci přímo v systému: logy po určité době, neaktivní exporty, dočasné soubory, reset tokeny, staré session, debug záznamy a nepotřebné produktové události.
+
+Příklad jednoduchých pravidel:
+
+- Reset hesla a jednorázové tokeny maž po hodinách, ne po týdnech.
+- Debug logy drž krátce a bez osobních údajů.
+- Exporty zákaznických dat nech expirovat automaticky.
+- Neaktivní trial účty smaž nebo anonymizuj po předem oznámené době.
+- Produktové eventy po roce agreguj nebo smaž, pokud nepotřebuješ delší historii.
+- Zálohy drž podle obnovovací potřeby, ne podle nostalgie.
+
+Retenci vždy spoj s komunikací. Pokud mažeš trial data po 30 dnech, napiš to do produktu a pošli férové upozornění. Privacy-first neznamená překvapit uživatele smazáním dat. Znamená dát mu jasná pravidla a držet se jich.
+
+## I.5 Datová mapa jako součást vývoje
+
+Největší chyba je udělat datovou mapu jednou a pak ji nechat stárnout jako firemní wiki stránku z roku, kdy byl moderní skeuomorfismus. Přidej ji do běžného vývojového procesu.
+
+Ke každé větší změně si v pull requestu polož:
+
+- Přidáváme novou kategorii osobních nebo zákaznických dat?
+- Posíláme existující data novému dodavateli nebo do nové země?
+- Měníme účel zpracování nebo dobu uložení?
+- Vzniká nový log, export, webhook nebo AI prompt s uživatelským obsahem?
+- Potřebuje změna aktualizovat zásady soukromí, smlouvu, DPA nebo interní dokumentaci?
+
+Tohle nemusí brzdit vývoj. Naopak. Když tým ví, že datová otázka je normální součást PR, přestane být privacy požár na konci projektu. Je to levnější, klidnější a méně dramatické. Což je v provozu SaaS velmi podceňovaná estetika.
+
+## I.6 Checklist přílohy
+
+Zkontroluj datovou mapu před další větší funkcí:
+
+- Máš vypsané hlavní kategorie dat, účely, systémy a přístupy?
+- Umíš u každé kategorie říct, proč ji potřebuješ?
+- Má každá kategorie definovanou retenci nebo důvod, proč ji zatím nemá?
+- Jsou logy, analytika a support oddělené od zbytečných osobních údajů?
+- Ví tým, kam nesmí posílat zákaznický obsah, tokeny a API klíče?
+- Kontroluješ nové dodavatele dřív, než do nich potečou data?
+- Máš automatické mazání tam, kde by ruční proces časem selhal?
+- Aktualizuješ datovou mapu při změnách produktu, ne jednou ročně v panice?
+
+Hodinová iterace: otevři produkt a napiš prvních deset řádků datové mapy. Neřeš dokonalost. Zaměř se na nejkritičtější data: účty, platby, logy, support, analytika, zálohy. Už po první verzi uvidíš, kde máš zbytečný sběr, nejasnou retenci nebo nástroj, který do privacy-first provozu nesedí.
+
+
 ## Zdroje
 
 - ADR GitHub Organization: [Architectural Decision Records](https://adr.github.io/)
@@ -1798,7 +1895,7 @@ Pokud chceš udělat jednu věc hned: vezmi anonymní okno, projdi registraci, p
 - European Commission: [Can someone else process the data on my organisation’s behalf?](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/obligations/controllerprocessor/can-someone-else-process-data-my-organisations-behalf_en)
 - European Commission: [NIS2 Directive: securing network and information systems](https://digital-strategy.ec.europa.eu/en/policies/nis2-directive)
 - DORA: [Software delivery performance metrics](https://dora.dev/guides/dora-metrics/)
-- EUR-Lex: [Nařízení GDPR 2016/679, článek 5 a 25](https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=CELEX%3A32016R0679)
+- EUR-Lex: [Nařízení GDPR 2016/679, článek 5, 25 a 30](https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=CELEX%3A32016R0679)
 - EUR-Lex: [Nařízení GDPR 2016/679, článek 32](https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=CELEX%3A32016R0679)
 - EUR-Lex: [Nařízení GDPR 2016/679, článek 28](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32016R0679)
 - EUR-Lex: [Directive (EU) 2022/2555 — NIS2, Article 21](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32022L2555)
@@ -1827,6 +1924,7 @@ Pokud chceš udělat jednu věc hned: vezmi anonymní okno, projdi registraci, p
 
 ## Pracovní log
 
+- 2026-08-05: Doplněna příloha I o datové mapě a retenci pro privacy-first SaaS: kategorie dat, účely, přístupy, retence, rizikovost, automatické mazání a vývojový checklist.
 - 2026-08-05: Doplněna příloha H s předstartovním checklistem pro privacy-first SaaS: sladění slibu a produktu, průchod hlavním tokem, platby, support, monitoring a malý launch rytmus.
 - 2026-08-05: Doplněna příloha G o zálohách a obnově SaaS: RPO/RTO, oddělené kopie, test obnovy, provozní mapa, privacy-first incident postup a checklist.
 - 2026-08-05: Doplněna příloha F o supportu a dokumentaci jako produktové páce: jasný support slib, třídění tiketů, dokumentace u akce, privacy-first řešení požadavků a checklist.
