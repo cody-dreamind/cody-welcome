@@ -22253,6 +22253,130 @@ Pokud si nejsi jisty dopadem na osobni data, nerikej "zadny dopad" jen proto, ze
 - [ ] Akcni polozky maji vlastnika, termin, overeni a stop pravidlo.
 - [ ] Support ma kratke shrnuti, ktere nerika vic, nez tym opravdu vi.
 
+## AI zakaznicky audit balicek bez posilani internich promptu za 60 minut
+
+Jakmile zacnes prodavat AI funkce do B2B, drive nebo pozdeji prijde dotaz: "Muzete nam poslat, jak to mate osetrene?" Spatna reakce je poslat screenshot promptu, export logu a pet internich dokumentu, ktere nikdo neudrzuje. Dobra reakce je mit pripraveny audit balicek: kratky, pravdivy, aktualni a bez zbytecneho prozrazovani internich detailu.
+
+Audit balicek neni marketingovy whitepaper. Je to sada odpovedi, ktera zakaznikovi ukaze, ze AI funkci provozujes rizenym zpusobem: vis, jaka data vstupuji dovnitr, kdo ma pristup, jak testujes kvalitu, jak resis incidenty, jak vypinas rizikove chovani a co neposilas ven. NIST AI RMF popisuje praci s rizikem pres Govern, Map, Measure a Manage; pro maly SaaS to znamena: vlastnictvi, kontext, mereni a akce. Zdroj: https://www.nist.gov/itl/ai-risk-management-framework
+
+OWASP Top 10 for LLM and Generative AI Applications upozornuje na rizika jako prompt injection, citliva data, dodavatelsky retezec, nadmerna opravneni nebo prehnana zavislost na vystupu modelu. Zakaznicky balicek nema byt presny navod pro utocnika, ale ma dokazat, ze tato rizika nejsou ve firme exoticka zvirata v zoo, ktera nekdo jednou videl na konferenci. Zdroj: https://genai.owasp.org/llm-top-10/
+
+### 1. Rozdel balicek na verejnou a pod NDA vrstvu
+
+Ne vsechno patri do stejne prilohy. Zakaznik potrebuje duveru, ne pristup do tvoji strojovny. Rozdel informace na dve vrstvy:
+
+| Vrstva | Komu slouzi | Co obsahuje | Co neobsahuje |
+| --- | --- | --- | --- |
+| Verejna | obchod, security dotaznik, nakup | popis funkce, datove kategorie, role cloveka, retence, zakladni bezpecnostni principy | interni prompty, konkretni bypass pravidla, produkcni logy, seznam znamych slabin |
+| Pod NDA | security tym zakaznika, DPO, enterprise audit | detailnejsi architektura, subprocessori, model routing, incident proces, eval souhrny | osobni data jinych zakazniku, surove prompty, tajemstvi, kompletni exploit scenare |
+
+Kdyz nevis, kam informace patri, zeptej se: pomaha to zakaznikovi rozhodnout, nebo to jen zvetsuje utocnou plochu? Napriklad veta "AI vystup neprovadi automaticke financni akce bez schvaleni cloveka" je dobra verejna informace. Presny JSON tool schema pro zmenu fakturace patri maximalne do omezene technicke review, a casto ani tam ne v plnem rozsahu.
+
+### 2. Zakladni obsah audit balicku
+
+Jednostrankovy balicek by mel odpovedet na deset otazek:
+
+1. Ktera AI funkce je predmetem auditu?
+2. Jaky je jeji uzivatelsky ucel?
+3. Jake kategorie dat zpracovava?
+4. Kde data zustavaji a komu se predavaji?
+5. Kdo muze videt vstupy, vystupy a provozni metadata?
+6. Jak dlouho se uchovavaji logy, feedback a debug data?
+7. Kde je clovek v rozhodovacim toku?
+8. Jake validace brani nebezpecnemu vystupu nebo akci?
+9. Jak se testuje kvalita a bezpecnost pred releasem?
+10. Jak vypinas, degradujes nebo vysetrujes incident?
+
+Tohle neni pravni diplomka. Je to mapa duvery. Pokud na jednu z otazek nemas odpoved, audit balicek ti prave ukazal produktovy dluh. Gratuluju, nasel jsi problem levneji nez pres incident.
+
+### 3. Minimalni sablona pro zakaznika
+
+Pouzij kratky format, ktery se da poslat jako Markdown, PDF nebo prilohu k security dotazniku:
+
+```text
+AI audit balicek
+
+Funkce: AI navrh odpovedi v supportu
+Ucel: navrhnout draft odpovedi agentovi supportu, finalni odpoved schvaluje clovek
+Datove kategorie: obsah ticketu, zakladni metadata uctu, odkazy na schvalene clanky znalostni baze
+Zakazane vstupy: platebni karty, hesla, zdravotni data, tajemstvi zakaznika mimo support kontext
+Predavani dat: modelovy provider podle routing karty, bez trenovani na zakaznickych datech podle smluvniho nastaveni
+Retence: provozni metadata 30 dni, debug obsah jen pro konkretni vysetreni a s kratsi retenci
+Lidska kontrola: AI vytvari navrh, odeslani dela agent nebo nastavena pravidla zakaznika
+Validace: kontrola zdroju, tenant scope, zakaz tichych akci, povinne oznaceni nejistoty
+Incident: kill switch, manual-review rezim, support sablony, postmortem bez prompt dumpu
+Kontakt pro dotazy: security@example.com
+Datum posledni aktualizace: 2026-08-05
+```
+
+V realnem balicku dopln odkazy na verejne dokumenty: DPA, seznam subprocessoru, privacy policy, status page, release notes a kontakt pro security dotazy. Pokud neco neni verejne, napis, za jakych podminek to poskytnes. Mlzeni typu "detaily na vyzadani" bez procesu jen presouva praci na obchod.
+
+### 4. Eval souhrn bez prozrazeni testovaci sady
+
+Zakaznik casto chce vedet, jestli AI funkci testujes. Nemusi ale dostat cely eval set, zejmena pokud obsahuje interni rizikove pripady nebo synteticke varianty utoku. Posli souhrn na urovni rozhodnuti:
+
+| Oblast | Co ukazat | Co neschovavat pod koberec |
+| --- | --- | --- |
+| Kvalita | pocet scenaru, hlavni kategorie, pass/fail trend | znamy limit typu "nepouzivat pro pravni zavery" |
+| Bezpecnost | typy validaci, manual-review podminky, prompt-injection testy | ze AI vystup neni autoritativni zdroj pravdy |
+| Data | test tenant izolace, redakce, export/mazani | kde existuji zpracovatele nebo cache |
+| Provoz | latence, dostupnost, fallback rezimy | co se stane pri nedostupnosti modelu |
+
+Dobry souhrn rika: "Testujeme tyhle tridy rizik, takhle rozhodujeme o releasu, tady jsou zname limity." Spatny souhrn rika: "Mame robustni AI governance." Robustni je slovo, ktere casto znamena "nemam po ruce tabulku".
+
+### 5. Co nikdy neposilat v zakaznickem balicku
+
+I kdyz zakaznik tlaci, nektere veci neposilej jako priloha do emailu:
+
+- cele produkcni prompty s daty uzivatelu,
+- raw logy s obsahem ticketu, callu nebo dokumentu,
+- API klice, interni identifikatory a tajemstvi,
+- kompletni bypass pravidla a presne prahy detekci,
+- data nebo screenshoty jinych zakazniku,
+- interni incident hypotezy, ktere nejsou potvrzene,
+- eval pripady, ktere by sly snadno pouzit jako navod k obchazeni systemu.
+
+Mistnim kompromisem muze byt kontrolovana ukazka: redigovany priklad, synteticky scenar, agregovany vysledek nebo screen z testovaciho prostredi. Privacy-first neznamena "nic nerekneme". Znamena "rekneme to, co je uzitecne, bez zbytecneho datoveho ohnostroje".
+
+### 6. 60min postup
+
+**0-10 minut:** vyber jednu AI funkci, ktera nejcasteji pada do security dotazniku nebo enterprise obchodu.
+
+**10-20 minut:** vypln deset zakladnich otazek: ucel, data, predavani, pristupy, retence, lidska kontrola, validace, testy, incident, kontakt.
+
+**20-35 minut:** rozdel informace na verejnou a NDA vrstvu. Vyhod vse, co je jen interni zvedavost.
+
+**35-45 minut:** pridej eval souhrn bez testovacich detailu a seznam znamych limitu.
+
+**45-55 minut:** zkontroluj privacy rizika: zadna produkcni data, zadne tajemstvi, zadne cizi screenshoty, zadne plne prompty.
+
+**55-60 minut:** uloz balicek vedle release notes a vendor karty, pridej datum aktualizace a vlastnika dokumentu.
+
+### 7. Priklad: enterprise zakaznik se pta na AI support
+
+Zakaznik posle security dotaznik s vetou: "Describe how customer data is used by AI features." Neposilej obecny odstavec o inovaci. Posli strukturovanou odpoved:
+
+```text
+AI support draft pouziva obsah konkretniho ticketu a schvalene clanky znalostni baze k vytvoreni navrhu odpovedi. Navrh se neodesila automaticky; pred odeslanim ho kontroluje support agent. Funkce nepouziva data jednoho zakaznika k odpovedim pro jineho zakaznika. Provozni logovani uklada request_id, kategorii dotazu, vysledek validace, latenci a technicka metadata; obsah ticketu se do beznych logu neuklada. Pri incidentu lze funkci prepnout do manual-review nebo off rezimu.
+```
+
+Tohle je konkretni, ale porad bezpecne. Zakaznik vidi hranice. Ty neposilas interni prompt, vendor tokeny ani debug export. Vsichni vyhrali, dokonce i pravnik, coz se nestava kazdy den.
+
+### Checklist: AI zakaznicky audit balicek
+
+- [ ] Balicek je pro jednu konkretni AI funkci, ne pro cele "AI ve firme".
+- [ ] Ma verejnou a pripadne NDA vrstvu.
+- [ ] Odpovida na ucel, datove kategorie, predavani, pristupy, retenci a lidskou kontrolu.
+- [ ] Popisuje validace, eval souhrn, fallback, kill switch a incident proces.
+- [ ] Neobsahuje produkcni prompty, raw logy, tajemstvi ani data jinych zakazniku.
+- [ ] Zname limity jsou napsane jasne a obchod je umi vysvetlit.
+- [ ] Odkazuje na DPA, subprocessory, privacy policy, status page nebo release notes, pokud existuji.
+- [ ] Dokument ma vlastnika a datum posledni aktualizace.
+- [ ] Security dotazy z obchodu se po kazdem pouziti prevadi na zlepseni balicku.
+- [ ] Privacy-first odpoved je konkretni, ne defenzivni mlha.
+
+---
+
 ## Zdroje
 
 - AI Act, Regulation (EU) 2024/1689, EUR-Lex: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
@@ -22372,6 +22496,7 @@ Pokud si nejsi jisty dopadem na osobni data, nerikej "zadny dopad" jen proto, ze
 
 ## Pracovni log
 
+- 2026-08-05: Pridana prakticka priloha AI zakaznicky audit balicek bez posilani internich promptu za 60 minut vcetne verejne/NDA vrstvy, zakladnich otazek, eval souhrnu, zakazanych priloh, prikladu odpovedi a checklistu.
 - 2026-08-04: Pridana prakticka priloha AI postmortem bez hledani vinika za 45 minut vcetne casove osy, datoveho dopadu, root cause otazek, akcnich polozek, komunikace a checklistu.
 - 2026-08-04: Pridana prakticka priloha AI release notes bez prozrazeni internich promptu za 45 minut vcetne verejne a interni vrstvy, sablon, bezpecnostni redakce, 45min postupu a checklistu.
 - 2026-08-04: Pridana prakticka priloha AI export a mazani dat bez rucniho lovu ve skladech za 60 minut vcetne mapy AI stop, exportniho balicku, mazaci fronty, RAG mazani, backup pravidel a checklistu.
