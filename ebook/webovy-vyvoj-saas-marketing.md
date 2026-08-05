@@ -1974,6 +1974,72 @@ Tohle stačí pro rozhodování typu: které články psát dál, odkud chodí r
 Pokud chceš udělat jednu věc hned: otevři web v anonymním okně, před kliknutím na cookie lištu zkontroluj síťové požadavky a úložiště prohlížeče. Pokud už v tu chvíli běží reklamní nebo netechnické analytické skripty, máš konkrétní úkol. Ne filozofii, úkol. To je příjemně otravný rozdíl.
 
 
+# Příloha K: Přístupnost a výkon jako tichý marketing
+
+Přístupnost a výkon se často řeší jako technický dluh, který jednou přijde na řadu. Jenže pro malý SaaS je to spíš obchodní základ. Když se stránka načítá pomalu, nejde ovládat klávesnicí, formulář neřekne, co je špatně, nebo kontrast připomíná šedou mlhu v listopadu, uživatel nevidí „designový minimalismus“. Vidí produkt, kterému nejde věřit.
+
+Privacy-first provoz tomu pomáhá. Méně trackerů, méně externích skriptů a méně marketingového balastu obvykle znamená rychlejší web, méně chyb, jednodušší souhlas s cookies a menší plochu pro bezpečnostní problém. To není asketismus. To je dobrý obchod oblečený jako technická hygiena.
+
+## K.1 Přístupnost začíná u obyčejného HTML
+
+Nejlevnější přístupnost je ta, kterou nemusíš dodatečně opravovat. Začni tím, že používáš správné prvky pro správnou práci: odkaz je odkaz, tlačítko je tlačítko, nadpisy mají logické pořadí, formulářové pole má popisek a chybová zpráva je připojená k poli, kterého se týká. MDN k tomu má jednoduchou pointu: sémantické HTML dává prohlížeči a asistivním technologiím přirozené háčky. Česky: když z tlačítka neuděláš div s klikacím kouzlem, ušetříš si večer plný ARIA zaklínadel.
+
+Praktický minimální standard pro každou stránku:
+
+- jeden viditelný hlavní nadpis `h1`, který odpovídá účelu stránky,
+- konzistentní hierarchie `h2` a `h3`, ne nadpisy podle velikosti fontu,
+- navigace v prvku `nav`, hlavní obsah v `main`, opakující se patička ve `footer`,
+- tlačítka pro akce, odkazy pro přesun na jinou adresu,
+- textové popisky u polí, ne jen placeholder,
+- smysluplný `alt` u informačních obrázků a prázdný `alt` u dekorací.
+
+Pokud stavíš vlastní komponentu typu menu, taby, dialog nebo combobox, nejdřív se podívej do WAI-ARIA Authoring Practices Guide. Ne proto, že máš všude přidat ARIA atributy, ale proto, že zjistíš očekávané chování klávesnice, focusu a rolí. Codyho komentář: ARIA je jako pálivá omáčka. Správně použitá pomůže. Nacpaná do všeho zničí jídlo i odpoledne.
+
+## K.2 Výkon je součást nabídky
+
+Rychlost webu není jen Lighthouse skóre pro screenshot do Slacku. Je to první produktový zážitek. Uživatel ještě neví, jestli jsi chytrý, férový a bezpečný. Ví jen, jestli se mu stránka otevřela, jestli se layout nerozsypal pod rukama a jestli první kliknutí reagovalo bez pocitu, že posílá formulář holubem.
+
+Pro malé SaaS stačí jednoduchý výkonový rozpočet:
+
+- homepage bez přihlášení má fungovat i bez marketingových skriptů,
+- kritický obsah se má zobrazit bez čekání na externí widget,
+- obrázky mají mít správné rozměry, moderní formát a lazy loading tam, kde nejsou nad přehybem,
+- fonty mají být lokální nebo systémové, ideálně bez blokování renderu,
+- každá nová knihovna musí mít důvod, vlastníka a cenu v kilobajtech,
+- formuláře a checkout nesmí čekat na analytiku, chat ani heatmapu.
+
+Core Web Vitals ber jako signál, ne náboženství. LCP, INP a CLS jsou užitečné metriky, protože ukazují věci, které uživatel opravdu cítí: kdy vidí hlavní obsah, jak rychle stránka reaguje a jestli mu prvky neutíkají pod kurzorem. Pro privacy-first tým je výhoda, že tyto metriky můžeš měřit synteticky a agregovaně bez toho, abys stavěl identitní profil návštěvníka.
+
+## K.3 Konverze bez manipulace
+
+Přístupný a rychlý web konvertuje lépe i bez temných vzorců, protože méně lidí odpadne z hloupých důvodů. Není potřeba vymýšlet agresivní popup, když uživatel nerozumí ceně. Není potřeba další remarketing, když formulář nejde vyplnit na mobilu. Není potřeba nahrávat session replay, když stačí ručně projít tři hlavní scénáře a opravit rozbité stavy.
+
+Privacy-first konverzní audit může vypadat takhle:
+
+1. Otevři homepage na pomalém mobilním připojení.
+2. Najdi odpověď na tři otázky: co to dělá, pro koho to je, co mám udělat teď?
+3. Projdi hlavní CTA pouze klávesnicí.
+4. Vyplň formulář s chybou a sleduj, jestli chyba pomůže.
+5. Zkus stránku se zvětšením textu na 200 %.
+6. Vypni externí skripty a ověř, že hlavní obsah pořád funguje.
+7. Zkontroluj, že měření neposílá obsah polí, e-mail, tokeny ani interní ID.
+
+Tohle je lepší než slepě sbírat tisíc eventů. Když během auditu zjistíš, že uživatel nepochopí cenu, nedostane potvrzení po odeslání formuláře nebo ztratí focus v modalu, nepotřebuješ datový sklad. Potřebuješ opravit produkt.
+
+## K.4 Checklist přílohy
+
+- Má každá důležitá stránka jasný `h1`, logickou strukturu nadpisů a sémantické landmarky?
+- Jdou všechny hlavní akce provést klávesnicí bez pasti ve focusu?
+- Mají formuláře viditelné popisky, srozumitelné chyby a potvrzení úspěchu?
+- Používáš nativní HTML prvky dřív než vlastní JavaScript komponenty?
+- Máš výkonový rozpočet pro obrázky, fonty, JavaScript a externí skripty?
+- Funguje hlavní obsah bez analytiky, chatu, embedů a marketingových nástrojů?
+- Měříš výkon a konverzní signály agregovaně, bez osobních údajů?
+- Kontroluješ přístupnost při každém větším redesignu, ne až po stížnosti?
+
+Pokud chceš udělat jednu věc hned: vezmi nejdůležitější konverzní stránku, projdi ji klávesnicí od začátku do konce a zapiš každé místo, kde nevíš, kde jsi nebo co se stane po stisku Enter. To je backlog, který má přímý obchodní dopad. A nepotřeboval k tomu ani jeden creepy pixel. Krásné, že?
+
+
 ## Zdroje
 
 - ADR GitHub Organization: [Architectural Decision Records](https://adr.github.io/)
@@ -2010,10 +2076,13 @@ Pokud chceš udělat jednu věc hned: otevři web v anonymním okně, před klik
 - Your Europe: [Unfair pricing](https://europa.eu/youreurope/citizens/consumers/unfair-treatment/unfair-pricing/index_en.htm)
 - Your Europe: [Data protection and online privacy](https://europa.eu/youreurope/citizens/consumers/internet-telecoms/data-protection-online-privacy/index_en.htm)
 - W3C: [Web Content Accessibility Guidelines 2.2](https://www.w3.org/TR/WCAG22/)
+- W3C WAI: [ARIA Authoring Practices Guide](https://www.w3.org/WAI/ARIA/apg/)
+- MDN Web Docs: [HTML: A good basis for accessibility](https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Accessibility/HTML)
 - Google Search Central: [SEO Starter Guide](https://developers.google.com/search/docs/fundamentals/seo-starter-guide)
 
 ## Pracovní log
 
+- 2026-08-05: Doplněna příloha K o přístupnosti a výkonu jako tichém marketingu: sémantické HTML, klávesnicové ovládání, výkonový rozpočet, privacy-first konverzní audit a checklist.
 - 2026-08-05: Doplněna příloha J o férové cookie liště a privacy-first měření: rozhodnutí, zda je lišta potřeba, matice použití cookies, textace souhlasu, implementační vzor a checklist.
 - 2026-08-05: Doplněna příloha I o datové mapě a retenci pro privacy-first SaaS: kategorie dat, účely, přístupy, retence, rizikovost, automatické mazání a vývojový checklist.
 - 2026-08-05: Doplněna příloha H s předstartovním checklistem pro privacy-first SaaS: sladění slibu a produktu, průchod hlavním tokem, platby, support, monitoring a malý launch rytmus.
