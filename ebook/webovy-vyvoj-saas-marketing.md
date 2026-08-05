@@ -852,12 +852,129 @@ Před dalším kolem růstu si projdi:
 Hodinová iterace: vyber jedno úzké hrdlo růstu a napiš k němu metriku, vlastníka a jednu změnu na příštích sedm dní. Pokud žádné hrdlo neumíš vybrat, začni onboardingem nebo release procesem. Tam se malé týmy pálí nejčastěji a nejtišeji.
 
 
+---
+
+# Příloha A: Privacy-first vendor audit na jednu stránku
+
+Nový nástroj v malém týmu často nezačíná bezpečnostním rizikem. Začíná větou: „Tohle nám ušetří čas, přidejme to.“ A někdy je to pravda. Jenže každý externí nástroj je zároveň nová kopie dat, nový přístupový bod, nový účet, nová faktura a nová položka v tom mentálním šuplíku, kde jednoho dne někdo hledá: „Kam jsme vlastně posílali e-maily zákazníků?“
+
+Vendor audit nemusí být korporátní peklo se sedmnácti přílohami. Pro malý evropský SaaS stačí krátký, opakovatelný záznam. Důležité je udělat ho před integrací, ne až ve chvíli, kdy už nástroj posílá data přes půl internetu a tým se tváří, že to byl experiment. Experiment ano, ale s brzdami.
+
+## A.1 Kdy audit spustit
+
+Audit udělej pokaždé, když chceš přidat nástroj, který bude mít přístup k některé z těchto kategorií:
+
+- osobní údaje zákazníků, leadů, zaměstnanců nebo uživatelů,
+- obsah zpráv, tiketů, formulářů, dokumentů nebo nahrávek,
+- provozní logy, IP adresy, identifikátory zařízení nebo analytické eventy,
+- platební, účetní nebo smluvní metadata,
+- přístup do produkce, repozitáře, CRM, e-mailu nebo administrace.
+
+Pokud nástroj pracuje jen s veřejným obsahem a nemá žádné účty ani tracking, může stačit lehký záznam. Pokud se dotýká zákaznických dat nebo infrastruktury, potřebuje plný audit. GDPR v článku 28 řeší vztah správce a zpracovatele a vyžaduje smluvní rámec pro zpracování osobních údajů zpracovatelem. Viz [EUR-Lex: GDPR, Article 28](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32016R0679) a praktické shrnutí Evropské komise: [Can someone else process the data on my organisation’s behalf?](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/obligations/controllerprocessor/can-someone-else-process-data-my-organisations-behalf_en).
+
+**Codyho komentář:** největší riziko není, že tým udělá špatné rozhodnutí. Největší riziko je, že žádné rozhodnutí neexistuje. Jen historická náhoda, která se po roce tváří jako architektura.
+
+## A.2 Jednostránková šablona
+
+Zkopíruj si tuhle šablonu do interní dokumentace pro každý nový nástroj:
+
+```md
+# Vendor audit: [název nástroje]
+
+## 1. Proč ho chceme
+- Problém:
+- Očekávaný výsledek:
+- Vlastník nástroje:
+- Datum review:
+
+## 2. Jaká data do něj půjdou
+- Kategorie dat:
+- Osobní údaje: ano/ne
+- Citlivá nebo obchodně důvěrná data: ano/ne
+- Data dětí nebo zvláštní kategorie údajů: ano/ne
+- Minimální možné nastavení:
+
+## 3. Kde a jak se data zpracují
+- Země/region zpracování:
+- Subdodavatelé:
+- DPA / zpracovatelská smlouva:
+- Retence a mazání:
+- Export dat:
+
+## 4. Bezpečnost a přístup
+- SSO / MFA:
+- Role a oprávnění:
+- Audit log:
+- Incident reporting:
+- Záloha nebo plán ukončení:
+
+## 5. Rozhodnutí
+- Schváleno / zamítnuto / pilot:
+- Podmínky použití:
+- Co nesmíme posílat:
+- Kdy rozhodnutí znovu otevřeme:
+```
+
+Nejde o krásu dokumentu. Jde o to, aby se o nástroji dalo rozhodnout i za půl roku, kdy si už nikdo nepamatuje nadšení z demo callu. U každého pole piš konkrétně. „Data v EU“ nestačí. Lepší je „primární zpracování ve Frankfurtu, subdodavatelé uvedení zde, zálohy podle dokumentace X“. Když vendor neumí odpovědět, je to odpověď.
+
+## A.3 Rychlé skóre rizika
+
+Pro menší tým se hodí jednoduché skóre 0–2. Není to právní posudek, ale pomůže zastavit impulzivní integrace.
+
+| Otázka | 0 bodů | 1 bod | 2 body |
+|---|---|---|---|
+| Jaká data nástroj dostane? | veřejná | běžná osobní | citlivá / obchodně kritická |
+| Kde běží zpracování? | EU / EHP | kombinace regionů | nejasné nebo mimo EU bez dobrého důvodu |
+| Jak důležitý je pro provoz? | doplněk | užitečný proces | kritická část produktu |
+| Jak snadno odejdeme? | export a alternativa | ruční migrace | lock-in bez jasného exportu |
+| Jaké má přístupy? | read-only | zápis do nástroje | produkce, kód, identita nebo billing |
+
+Vyhodnocení:
+
+- **0–3 body:** lehký audit, vlastník, roční review.
+- **4–6 bodů:** pilot s omezenými daty, kontrola nastavení, review za 30 dní.
+- **7+ bodů:** schválení zakladatelem nebo vedením, bezpečnostní kontrola, jasný exit plán.
+
+NIS2 posiluje důraz na řízení kybernetických rizik a dodavatelský řetězec u relevantních subjektů. I když se na tvůj malý SaaS nemusí přímo vztahovat, princip je užitečný: dodavatel není jen „nástroj“, ale součást rizikového modelu. Viz [European Commission: NIS2 Directive](https://digital-strategy.ec.europa.eu/en/policies/nis2-directive) a [EUR-Lex: Directive (EU) 2022/2555](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32022L2555).
+
+## A.4 Pilot bez datového bordelu
+
+Nejbezpečnější integrace je ta, která nezačne plným přístupem. Když testuješ nový nástroj, nastav pilot takto:
+
+1. **Použij anonymizovaná nebo testovací data.** Demo nepotřebuje reálné zákaznické e-maily.
+2. **Omez účty.** Přístup dostanou jen lidé, kteří pilot opravdu vyhodnocují.
+3. **Vypni zbytečné funkce.** Tracking, enrichment, AI trénování na datech, veřejné sdílení a automatické importy nech vypnuté, pokud je výslovně nepotřebuješ.
+4. **Napiš podmínky úspěchu.** Například „zkrátí zpracování support tiketů o 25 % bez exportu osobních dat mimo EU“.
+5. **Naplánuj konec pilotu.** Buď nástroj schválíš, nebo smažeš účet a data. Žádné zombie SaaS účty, prosím. I zombie mají city, ale faktury taky.
+
+Privacy by design a by default podle EDPB znamená řešit ochranu dat už při návrhu a držet výchozí nastavení co nejšetrnější. To je přesně důvod, proč pilot začíná minimem dat a minimem přístupů. Viz [EDPB: Guidelines 4/2019 on Article 25](https://www.edpb.europa.eu/documents/guideline/guidelines-42019-on-article-25-data-protection-by-design-and-by-default_en).
+
+## A.5 Checklist přílohy
+
+Před zapojením nového nástroje si odškrtni:
+
+- Má nástroj jasný business důvod a vlastníka?
+- Víš přesně, jaká data do něj půjdou a co do něj posílat nesmíš?
+- Je zpracování v EU/EHP, nebo máš zdokumentovaný důvod a právní rámec pro jiný region?
+- Existuje DPA nebo jiný odpovídající smluvní rámec, pokud jde o zpracování osobních údajů?
+- Umíš nastavit minimální přístupy, MFA a rozumnou retenci?
+- Máš exit plán: export, smazání dat, vypnutí integrace?
+- Proběhl pilot s omezenými daty místo okamžitého plošného nasazení?
+- Je audit uložený tam, kde ho najde i člověk, který nástroj nevybíral?
+
+Hodinová iterace: vyber jeden nástroj, který už používáš, a doplň k němu šablonu zpětně. Pokud narazíš na nejasné zpracování dat, nezačínej právní panikou. Začni tím, že omezíš posílaná data, zkontroluješ nastavení a připravíš alternativu.
+
+
+
 ## Zdroje
 
 - ADR GitHub Organization: [Architectural Decision Records](https://adr.github.io/)
 - Atlassian: [Working with WIP limits for kanban](https://www.atlassian.com/agile/kanban/wip-limits)
+- European Commission: [Can someone else process the data on my organisation’s behalf?](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/obligations/controllerprocessor/can-someone-else-process-data-my-organisations-behalf_en)
+- European Commission: [NIS2 Directive: securing network and information systems](https://digital-strategy.ec.europa.eu/en/policies/nis2-directive)
 - DORA: [Software delivery performance metrics](https://dora.dev/guides/dora-metrics/)
 - EUR-Lex: [Nařízení GDPR 2016/679, článek 5 a 25](https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=CELEX%3A32016R0679)
+- EUR-Lex: [Nařízení GDPR 2016/679, článek 28](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32016R0679)
 - EUR-Lex: [Directive (EU) 2022/2555 — NIS2, Article 21](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32022L2555)
 - EUR-Lex: [ePrivacy Directive 2002/58/EC](https://eur-lex.europa.eu/eli/dir/2002/58/oj?locale=en)
 - Google SRE: [Managing Incidents](https://sre.google/sre-book/managing-incidents/)
@@ -875,6 +992,7 @@ Hodinová iterace: vyber jedno úzké hrdlo růstu a napiš k němu metriku, vla
 
 ## Pracovní log
 
+- 2026-08-05: Doplněna příloha A s praktickou jednostránkovou šablonou privacy-first vendor auditu, skórováním rizika, pilotním postupem a checklistem.
 - 2026-08-05: Dopsána kapitola 7 o růstu bez chaosu: úzká hrdla, rozhodovací metriky, release proces, incidenty, vendor gate, bezpečnost a checklist.
 - 2026-08-05: Dopsána kapitola 6 o privacy-first provozu v Evropě: datová mapa, minimalizace údajů, vendor audit, logování, bezpečnostní minimum a checklist.
 - 2026-08-05: Dopsána kapitola 5 o produktivitě malého týmu: omezení rozdělané práce, týdenní rytmus, dokumentace, ADR, automatizace, AI asistenti a checklist.
