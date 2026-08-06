@@ -2419,11 +2419,143 @@ První dvě odpovědi můžeš uložit agregovaně k produktu. Třetí je samost
 
 Offboarding je reputace v praxi. Zákazník, kterému pomůžeš odejít férově, se může vrátit, doporučit tě nebo aspoň nevyprávět, že tvůj produkt byl hotel California s fakturací. A to je docela slušná marketingová metrika.
 
+---
+
+# Příloha P: B2B prodej bez CRM cirkusu a sledovacích návnad
+
+Malý SaaS tým často nepotřebuje složitý obchodní stack. Potřebuje vědět, s kým mluví, proč by to toho člověka mělo zajímat, jaký je další krok a kde konverzace stojí. CRM má být pracovní paměť obchodu, ne muzeum políček, která nikdo nevyplňuje.
+
+Privacy-first B2B prodej stojí na jednoduchém principu: sbírej jen údaje, které opravdu potřebuješ pro férové obchodní jednání, podporu zákazníka a následnou smlouvu. GDPR pracuje mimo jiné s principy minimalizace údajů a omezení uložení; viz [EUR-Lex: GDPR 2016/679, článek 5](https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=CELEX%3A32016R0679). To neznamená, že nesmíš dělat prodej. Znamená to, že obchodní proces nemá být datový vysavač převlečený za „lepší personalizaci“.
+
+**Codyho komentář:** dobrý obchodník nepotřebuje vědět, že si lead třikrát otevřel stránku v úterý ve 23:14. Potřebuje vědět, jestli ten člověk má problém, rozpočet, důvod jednat a jasný další krok. Zbytek je často jen dashboardová aromaterapie.
+
+## P.1 Pipeline má popsat rozhodnutí, ne interní folklór
+
+Obchodní pipeline je užitečná jen tehdy, když každý stav odpovídá reálnému posunu v rozhodování zákazníka. Pokud máš stavy „Kontaktováno“, „Follow-up 1“, „Follow-up 2“ a „Možná“, nemáš pipeline. Máš kalendář únavy.
+
+Pro malý B2B SaaS stačí pět stavů:
+
+| Stav | Co musí být pravda | Další krok |
+| --- | --- | --- |
+| Nový kontakt | víme, kdo to je a proč by mohl mít problém | ověřit relevanci |
+| Problém potvrzen | lead popsal konkrétní bolest nebo cíl | zjistit dopad a prioritu |
+| Řešení sedí | produkt umí dodat požadovaný výsledek | domluvit demo, pilot nebo nabídku |
+| Rozhodování | zákazník řeší cenu, riziko, termín nebo schválení | odstranit konkrétní překážku |
+| Vyhráno / prohráno | existuje platba, smlouva nebo jasný důvod odmítnutí | předat onboarding nebo zapsat lekci |
+
+Každý stav musí mít vstupní podmínku. Lead nesmí postoupit jen proto, že mu někdo poslal e-mail. Postoupí, až zákazník udělá nebo řekne něco, co zmenšuje nejistotu: potvrdí problém, ukáže současný proces, pošle technický požadavek, požádá o cenu nebo domluví další schůzku.
+
+## P.2 Discovery otázky, které neprodávají mlhu
+
+Discovery není výslech a už vůbec ne prezentace převlečená za rozhovor. Cílem je pochopit situaci zákazníka tak dobře, aby bylo fér říct buď „pomůžeme“, nebo „teď pro vás nejsme správné řešení“.
+
+Použij jednoduchou mapu:
+
+1. **Situace:** „Jak to dnes řešíte?“
+2. **Dopad:** „Co vás na tom stojí čas, peníze nebo reputaci?“
+3. **Naléhavost:** „Proč to řešíte právě teď?“
+4. **Rozhodování:** „Kdo do toho bude mluvit a co musí vidět?“
+5. **Riziko:** „Čeho se u změny nejvíc bojíte?“
+6. **Další krok:** „Co musí být jasné, abychom se posunuli dál?“
+
+Příklad pro SaaS na správu poptávek: místo „Chcete automatizovat obchod?“ se zeptej „Kolik poptávek měsíčně vám propadne bez odpovědi?“ a „Co se stane, když odpovíte až druhý den?“ Tím se dostaneš z motivačního plakátu do provozní reality.
+
+Po hovoru si zapiš přesné věty zákazníka. Ne proto, abys ho později manipuloval, ale proto, aby landing page, demo a onboarding mluvily jazykem trhu. Pokud zákazník říká „ztrácíme zakázky v telefonu“, nepiš na web „omnichannel orchestrace lead flow“. Prosím. Některé fráze by měly mít vlastní karanténu.
+
+## P.3 Minimum dat v CRM
+
+CRM záznam má pomoct týmu navázat na konverzaci. Nemá obsahovat osobní profil, který by neprošel testem trapnosti, kdybys ho zákazníkovi ukázal na obrazovce.
+
+Dobré minimum:
+
+- firma a web,
+- kontaktní osoba a pracovní e-mail,
+- role v rozhodování,
+- potvrzený problém,
+- očekávaný výsledek,
+- aktuální stav pipeline,
+- další domluvený krok a datum,
+- zdroj kontaktu,
+- poznámky relevantní k nákupu, implementaci nebo supportu.
+
+Co raději neukládat:
+
+- osobní domněnky typu „vypadá nerozhodně“,
+- soukromé informace mimo obchodní kontext,
+- zbytečné behaviorální stopy z webu,
+- nahrávky hovorů bez jasného účelu, souhlasu a retence,
+- data nakoupená ze seznamů, jejichž původ neumíš vysvětlit.
+
+Pokud používáš obohacování leadů, polož si stejné vendor otázky jako v příloze A: odkud data pochází, kde se zpracují, jak se mažou a jaký máš právní základ pro použití. U evropského privacy-first týmu je často lepší mít méně kvalitních kontaktů s jasným kontextem než tisíc „obohacených“ řádků, které nikdo nechce vlastnit.
+
+## P.4 Follow-up má nést hodnotu, ne jen připomínku existence
+
+Slabý follow-up zní: „Jen se připomínám.“ Ano, všimli jsme si. Internet nezapomíná, bohužel ani na nudné e-maily.
+
+Lepší follow-up vždy přidá něco užitečného:
+
+- krátké shrnutí problému, který zákazník popsal,
+- odpověď na konkrétní pochybnost,
+- relevantní ukázku produktu,
+- checklist pro interní rozhodnutí,
+- návrh pilotu s jasným rozsahem,
+- férové ukončení vlákna, pokud není zájem.
+
+Praktická šablona:
+
+```text
+Předmět: [téma] — návrh dalšího kroku
+
+Dobrý den,
+
+navazuji na naši domluvu. Zachytil jsem, že největší problém je [konkrétní bolest]
+a že úspěch by vypadal jako [měřitelný nebo pozorovatelný výsledek].
+
+Navrhuji krátký další krok: [demo / pilot / technické ověření] v rozsahu [co přesně].
+Pomůže nám ověřit [riziko nebo otázka] bez dlouhého závazku.
+
+Pokud to teď není priorita, stačí napsat „ne teď“ a vlákno zavřu.
+
+Cody
+```
+
+Tahle poslední věta je důležitá. Dává člověku jednoduchou cestu ven a to paradoxně zvyšuje důvěru. Není to trik. Je to respekt k času.
+
+## P.5 Předání z obchodu do onboardingu
+
+Vyhraný obchod není konec. Je to nejrizikovější přechod. Pokud obchod slíbil jednu věc a onboarding řeší druhou, zákazník začne pochybovat dřív, než produkt dostane šanci.
+
+Předání má obsahovat:
+
+| Oblast | Co předat |
+| --- | --- |
+| Slíbený výsledek | co zákazník očekává jako první hodnotu |
+| Kontext | proč nakoupil právě teď |
+| Rizika | čeho se bojí, co může blokovat start |
+| Technické požadavky | integrace, role, data, bezpečnostní otázky |
+| Komunikace | hlavní kontakt, rozhodovatel, preferovaný kanál |
+| Limity | co nebylo slíbeno a nesmí se potichu předpokládat |
+
+Privacy-first detail: nepředávej do onboardingu celé obchodní poznámky, pokud obsahují věci, které onboarding nepotřebuje. Udělej krátký handoff souhrn. Minimalizace dat není jen právní formulace; je to i způsob, jak snížit interní šum.
+
+## P.6 Checklist B2B prodeje
+
+- Má pipeline stavy podle rozhodnutí zákazníka, ne podle počtu odeslaných e-mailů?
+- Umíš u každého leadu říct potvrzený problém, dopad, naléhavost a další krok?
+- Sbírá CRM jen údaje potřebné pro obchod, implementaci nebo support?
+- Má každý follow-up konkrétní hodnotu, nebo jen otravně připomíná tvoji existenci?
+- Umí zákazník snadno říct „ne teď“ bez dalšího tlaku?
+- Předává obchod onboardingu slíbený výsledek, rizika a limity bez zbytečných osobních poznámek?
+- Mažeš nebo archivuješ staré leady podle retence, místo aby CRM bobtnalo navždy?
+
+Jedna hodinová iterace: projdi posledních deset obchodních příležitostí a u každé doplň jednu větu „zákazník kupuje, protože…“ a jeden jasný další krok. Pokud to nejde napsat, příležitost není zralá — nebo jsi ji jen zapomněl pochovat s úctou.
+
 ## Zdroje
 
 - ADR GitHub Organization: [Architectural Decision Records](https://adr.github.io/)
 - Atlassian: [Working with WIP limits for kanban](https://www.atlassian.com/agile/kanban/wip-limits)
 - European Commission: [Can someone else process the data on my organisation’s behalf?](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/obligations/controllerprocessor/can-someone-else-process-data-my-organisations-behalf_en)
+- Evropská komise: [Jaké údaje lze zpracovávat a za jakých podmínek?](https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/overview-principles/what-data-can-we-process-and-under-which-conditions_cs)
 - European Commission: [NIS2 Directive: securing network and information systems](https://digital-strategy.ec.europa.eu/en/policies/nis2-directive)
 - DORA: [Software delivery performance metrics](https://dora.dev/guides/dora-metrics/)
 - EUR-Lex: [Nařízení GDPR 2016/679, článek 5, 25 a 30](https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=CELEX%3A32016R0679)
@@ -2465,6 +2597,7 @@ Offboarding je reputace v praxi. Zákazník, kterému pomůžeš odejít férov�
 
 ## Pracovní log
 
+- 2026-08-06: Doplněna příloha P o B2B prodeji bez CRM cirkusu: jednoduchá pipeline, discovery otázky, minimalizace dat v CRM, hodnotné follow-upy, předání do onboardingu a checklist.
 - 2026-08-06: Doplněna příloha O o férovém offboardingu zákazníka: export dat, zrušení účtu, retence po odchodu, exit feedback a checklist.
 - 2026-08-05: Doplněna příloha N o provozním dashboardu bez datového smogu: rozdělení dashboardů, privacy-first telemetry, prahy alertů, lidské překlady metrik a checklist.
 - 2026-08-05: Doplněna příloha M o používání AI asistentů v malém privacy-first SaaS týmu: datové úrovně, týmová pravidla, prompt injection, AI Act inventář a checklist.
