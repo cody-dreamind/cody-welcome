@@ -2951,11 +2951,148 @@ Tahle odpověď dělá tři věci: potvrzuje problém, vysvětluje rozhodnutí a
 - [ ] Umíme zákazníkovi vysvětlit odmítnutí funkce přes jeho problém, ne přes interní výmluvu.
 - [ ] Nepřidáváme funkce jen proto, že se snadno vyvíjejí.
 
+# Příloha T: SaaS podmínky a právní stránka bez právnické mlhy
+
+Právní dokumenty nejsou dekorace v patičce. Jsou součást produktu. Když zákazník neví, co kupuje, jak zruší účet, kde běží jeho data nebo kdo má přístup k obsahu účtu, nevzniká důvěra. Vzniká tiché riziko, které se ozve přesně v nejhorší chvíli: při větší zakázce, bezpečnostním dotazu, sporu o fakturu nebo žádosti o výmaz dat.
+
+Malý SaaS nepotřebuje hned právní portál s padesáti PDF. Potřebuje srozumitelný právní základ: obchodní podmínky, privacy notice, zpracovatelskou smlouvu tam, kde zpracovává data za zákazníka, a interní postup pro požadavky uživatelů. Evropská komise u spotřebitelských smluv zdůrazňuje férovost a transparentnost podmínek; ÚOOÚ zase v základní příručce připomíná práva subjektů údajů podle GDPR. Viz [Your Europe: Contracts with consumers](https://europa.eu/youreurope/business/selling-in-eu/consumer-contracts-guarantees/consumer-contracts/index_en.htm) a [ÚOOÚ: Základní příručka k ochraně údajů](https://uoou.gov.cz/verejnost/zakladni-prirucka-k-ochrane-udaju).
+
+**Codyho komentář:** nejlepší právní text je ten, který zákazník pochopí dřív, než zavolá právníkovi. Neznamená to psát lajdácky. Znamená to psát přesně, lidsky a bez kouřové clony typu „v rozsahu maximálně přípustném příslušnými právními předpisy“, když chceš říct „odpovídáme za tohle, za tamto ne“.
+
+## T.1 Rozděl dokumenty podle otázky zákazníka
+
+Neptej se nejdřív „kolik dokumentů máme mít“. Ptej se, na které otázky musí SaaS odpovědět. Praktické minimum:
+
+| Dokument / stránka | Hlavní otázka | Typický čtenář |
+| --- | --- | --- |
+| Obchodní podmínky | Co přesně kupuji, platím a můžu zrušit? | zákazník, finance, právník |
+| Privacy notice | Jaká osobní data zpracováváte a proč? | uživatel, DPO, bezpečnost |
+| Zpracovatelská smlouva / DPA | Jak zpracováváte data jménem zákazníka? | B2B zákazník, právník, procurement |
+| Bezpečnostní stránka | Jak chráníte službu a data? | IT, security, enterprise zákazník |
+| SLA nebo status politika | Co se stane při výpadku? | provoz, support, nákup |
+| Export a zrušení účtu | Jak dostanu data ven a co se smaže? | administrátor účtu |
+
+U menšího B2B SaaS může být část těchto odpovědí na jedné stránce „Trust & Privacy“. Důležité je, aby byly dohledatelné, aktuální a konzistentní s produktem. Pokud privacy notice slibuje retenci 30 dní, ale databáze drží exporty rok, dokument není ochrana. Je to past s pěknou typografií.
+
+## T.2 Obchodní podmínky piš jako provozní manuál vztahu
+
+Obchodní podmínky mají popsat pravidla spolupráce. Nejsou místo pro marketingové slogany ani schované háčky. U SaaS služby obvykle potřebuješ pokrýt:
+
+- kdo službu poskytuje a komu je určená,
+- jak vzniká účet a kdo za něj odpovídá,
+- co je součástí služby a co už je placená práce navíc,
+- jak funguje trial, placený plán, fakturace, změna tarifu a zrušení,
+- co se stane při neuhrazené faktuře,
+- jak řešíš dostupnost, plánovanou údržbu a incidenty,
+- jak zákazník získá export dat,
+- jak oznamuješ změny podmínek.
+
+U spotřebitelů si dej zvlášť pozor na jednostranné výhody, nejasné poplatky nebo nepřiměřené podmínky. Your Europe shrnuje, že nefér smluvní podmínky nejsou pro spotřebitele závazné; viz [Unfair contract terms](https://europa.eu/youreurope/citizens/consumers/unfair-treatment/unfair-contract-terms/index_en.htm). B2B smlouvy jsou volnější, ale to není licence k mlžení. Enterprise zákazník si všimne, když se snažíš schovat podstatné věci do drobného písma. A pak přijde tabulka s 87 bezpečnostními otázkami. Romantika procurementu.
+
+Praktický vzor věty:
+
+```text
+Zákazník může placený plán zrušit v administraci účtu kdykoli. Přístup ke službě zůstává aktivní do konce již uhrazeného období. Po zrušení umožníme export zákaznických dat po dobu 30 dní, pokud právní nebo bezpečnostní důvody nevyžadují kratší postup.
+```
+
+Tohle je srozumitelné. Říká co, kde, do kdy a s jakou výjimkou. Žádná schovávaná.
+
+## T.3 Privacy notice má odpovědět člověku, ne jen úřadu
+
+Privacy notice často trpí nemocí právnického karaoke: opsané GDPR fráze, žádný vztah ke skutečnému produktu. Dobrá privacy stránka má být mapa, ne zaklínadlo.
+
+Pro každou kategorii dat napiš:
+
+- jaká data sbíráš,
+- od koho je získáváš,
+- proč je zpracováváš,
+- na jakém právním základu,
+- kdo k nim má přístup,
+- kterým dodavatelům je předáváš,
+- jak dlouho je držíš,
+- jak může uživatel uplatnit svá práva.
+
+Příklad pro produktovou analytiku:
+
+| Položka | Férová odpověď |
+| --- | --- |
+| Data | anonymizované nebo pseudonymizované události typu dokončení onboardingu |
+| Účel | zlepšení první zkušenosti v produktu |
+| Nepatří sem | obsah formulářů, hesla, fakturační údaje, citlivé poznámky zákazníka |
+| Retence | agregované metriky 12 měsíců, syrové technické eventy kratší dobu podle provozní potřeby |
+| Přístup | produktový tým a omezeně vývoj kvůli diagnostice |
+
+ÚOOÚ popisuje práva subjektu údajů, včetně přístupu k informacím o zpracování, na stránce [Práva subjektu údajů](https://uoou.gov.cz/poradna/poradna-gdpr/prava-subjektu-udaju). Neber to jako odrážkový seznam pro právníka. Ber to jako UX požadavek: člověk má vědět, kam napsat, co se bude dít a za jak dlouho dostane odpověď.
+
+## T.4 DPA není příloha „někde v šuplíku“
+
+Pokud provozuješ B2B SaaS, který zpracovává osobní údaje jménem zákazníka, často budeš v roli zpracovatele. GDPR článek 28 vyžaduje, aby zpracování správcem a zpracovatelem stálo na smlouvě nebo jiném právním aktu. Evropská komise i ÚOOÚ popisují, že zpracovatel má poskytovat dostatečné záruky a smlouva má řešit předmět, dobu trvání, povahu, účel, typ údajů, kategorie subjektů a povinnosti stran. Viz [European Commission: processor obligations](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/obligations/controllerprocessor/can-someone-else-process-data-my-organisations-behalf_en) a [ÚOOÚ: Zpracovatel](https://uoou.gov.cz/poradna/poradna-gdpr/zpracovatel).
+
+DPA pro malý SaaS by měla prakticky řešit:
+
+- jaké zákaznické údaje může služba zpracovávat,
+- jaké subdodavatele používáš a kde jsou data,
+- jak zákazníka informuješ o změně subdodavatele,
+- jak pomáháš s právy subjektů údajů,
+- jak řešíš bezpečnostní incident nebo porušení zabezpečení,
+- co se stane s daty po ukončení služby,
+- jak probíhá audit nebo bezpečnostní dotazník v rozumném rozsahu.
+
+Privacy-first varianta: zveřejni aktuální seznam subdodavatelů a zemí zpracování. Nečekej, až se zákazník zeptá. Pokud používáš evropský hosting, evropskou analytiku a minimum externích služeb, řekni to nahlas. To není detail. To je prodejní argument i provozní disciplína.
+
+## T.5 Trust stránka jako zkratka pro nákupní rozhodnutí
+
+U B2B produktu často nestačí hezká homepage. Zákazník potřebuje poslat internímu IT nebo právníkovi odkaz, který odpoví na základní otázky. Vytvoř stránku typu `/trust`, `/security` nebo `/privacy`, kde shrneš:
+
+- kde je služba hostovaná,
+- jaké subdodavatele používáš,
+- jak řešíš zálohy a obnovu,
+- jestli podporuješ export dat,
+- jak se hlásí bezpečnostní problém,
+- jak oznamuješ incidenty,
+- kde jsou obchodní podmínky, privacy notice a DPA,
+- jaký je kontakt pro privacy a bezpečnostní dotazy.
+
+Nepřeháněj certifikace, které nemáš. Napiš raději pravdu: „Nemáme ISO 27001, ale používáme oddělené produkční přístupy, 2FA, šifrované zálohy, pravidelné aktualizace a incidentní runbook.“ To je důvěryhodnější než korporátní mlha ve stylu „bezpečnost je naše priorita“. Bezpečnost je priorita každého, dokud nepřijde pátek 16:50.
+
+## T.6 Změny podmínek oznamuj jako produktovou změnu
+
+Když měníš podmínky, není to jen právní úklid. Je to změna vztahu se zákazníkem. Proto si nastav postup:
+
+1. Popiš, co se mění a proč.
+2. Označ, koho se změna týká.
+3. Dej rozumný předstih u podstatných změn.
+4. Ulož starší verze dokumentů.
+5. Nepoužívej změnu podmínek jako způsob, jak potichu přidat invazivnější zpracování dat.
+
+Krátký příklad oznámení:
+
+```text
+Od 1. října aktualizujeme obchodní podmínky. Změna upřesňuje export dat po zrušení účtu a doplňuje nového evropského poskytovatele e-mailové infrastruktury. Neměníme cenu, rozsah služby ani účely zpracování osobních údajů. Přehled změn najdete na stránce s historií podmínek.
+```
+
+Takhle zákazník ví, jestli má zbystřit. A ty ukazuješ, že dokumenty nejsou schovaný teleport do horších pravidel.
+
+## T.7 Checklist právního základu SaaS
+
+- [ ] Obchodní podmínky jasně popisují službu, platby, zrušení, export dat a změny pravidel.
+- [ ] Privacy notice odpovídá skutečné datové mapě produktu, ne přání z minulého kvartálu.
+- [ ] DPA řeší role správce a zpracovatele, subdodavatele, bezpečnost, incidenty a konec služby.
+- [ ] Trust stránka dává zákazníkovi jeden odkaz pro IT, bezpečnost, privacy a právní otázky.
+- [ ] Seznam subdodavatelů je aktuální a obsahuje účel, zemi zpracování a typ dat.
+- [ ] Změny podmínek mají historii verzí a srozumitelné shrnutí dopadu.
+- [ ] Právní texty nepoužívají dark patterns: žádné skryté poplatky, zamotané zrušení ani mlžení o datech.
+- [ ] Každý právní slib je ověřený proti reálnému produktu, logům, retenci a vendorům.
+
+Jedna hodinová iterace: vytvoř stránku „Trust & Privacy“ s pěti bloky: kde běží data, co měříš, subdodavatelé, export a zrušení účtu, kontakt pro privacy/security. Pokud něco nevíš vyplnit, není to copywritingový problém. Je to provozní úkol. Gratuluju, právě jsi našel práci, která má smysl.
+
 ## Zdroje
 
 - ADR GitHub Organization: [Architectural Decision Records](https://adr.github.io/)
 - Atlassian: [Working with WIP limits for kanban](https://www.atlassian.com/agile/kanban/wip-limits)
 - European Commission: [Can someone else process the data on my organisation’s behalf?](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/obligations/controllerprocessor/can-someone-else-process-data-my-organisations-behalf_en)
+- European Union Your Europe: [Contracts with consumers](https://europa.eu/youreurope/business/selling-in-eu/consumer-contracts-guarantees/consumer-contracts/index_en.htm)
+- European Union Your Europe: [Unfair contract terms](https://europa.eu/youreurope/citizens/consumers/unfair-treatment/unfair-contract-terms/index_en.htm)
 - European Commission: [What is a data controller or a data processor?](https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/obligations/controllerprocessor/what-data-controller-or-data-processor_en)
 - Evropská komise: [Jaké údaje lze zpracovávat a za jakých podmínek?](https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/overview-principles/what-data-can-we-process-and-under-which-conditions_cs)
 - European Commission: [NIS2 Directive: securing network and information systems](https://digital-strategy.ec.europa.eu/en/policies/nis2-directive)
@@ -2969,6 +3106,9 @@ Tahle odpověď dělá tři věci: potvrzuje problém, vysvětluje rozhodnutí a
 - European Data Protection Board: [Guidelines 03/2022 on deceptive design patterns in social media platform interfaces](https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-032022-deceptive-design-patterns-social-media-platform_en)
 - European Commission: [Digital fairness fitness check](https://commission.europa.eu/law/law-topic/consumer-protection-law/digital-fairness-fitness-check_en)
 - ÚOOÚ: [Cookies — otázky a odpovědi](https://uoou.gov.cz/verejnost/qa-otazky-a-odpovedi/cookies)
+- ÚOOÚ: [Základní příručka k ochraně údajů](https://uoou.gov.cz/verejnost/zakladni-prirucka-k-ochrane-udaju)
+- ÚOOÚ: [Práva subjektu údajů](https://uoou.gov.cz/poradna/poradna-gdpr/prava-subjektu-udaju)
+- ÚOOÚ: [Zpracovatel](https://uoou.gov.cz/poradna/poradna-gdpr/zpracovatel)
 - CNIL: [Use analytics on your websites and applications](https://www.cnil.fr/en/sheet-ndeg16-use-analytics-your-websites-and-applications)
 - CNIL: [Cookies — solutions pour les outils de mesure d'audience](https://www.cnil.fr/fr/cookies-solutions-pour-les-outils-de-mesure-daudience)
 - European Commission: [Place of taxation — VAT rules](https://taxation-customs.ec.europa.eu/taxation/vat/vat-directive/place-taxation_en)
@@ -3001,6 +3141,7 @@ Tahle odpověď dělá tři věci: potvrzuje problém, vysvětluje rozhodnutí a
 
 ## Pracovní log
 
+- 2026-08-06: Doplněna příloha T o SaaS podmínkách a právní stránce bez právnické mlhy: obchodní podmínky, privacy notice, DPA, trust stránka, změny podmínek a checklist.
 - 2026-08-06: Doplněna příloha S o roadmapě bez feature factory: formulace výsledků, jednoduchá prioritizace, tři horizonty roadmapy, pravidelný review rituál, privacy gate před funkcí, odmítání požadavků a checklist.
 - 2026-08-06: Doplněna příloha R o referral programech a partnerství bez sledovacího cirkusu: typy doporučení, referral odkazy bez osobních údajů, férové odměny, partner kit, předávání leadů, metriky, ukončení spolupráce a checklist.
 - 2026-08-06: Doplněna příloha Q o férových experimentech bez dark patterns: hypotézy, minimalizace měření, ochrana uživatele, vyhodnocení, backlog a checklist.
