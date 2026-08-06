@@ -2822,6 +2822,135 @@ Pokud partner měl přístup k zákaznickým datům, ukončení nesmí být jen 
 
 Jedna hodinová iterace: vezmi jeden existující nebo plánovaný partnerský kanál a napiš k němu typ partnerství, co přesně se měří, jaká data se předávají, kdo k nim má přístup a kdy se mažou. Pokud odpověď zní „to se uvidí“, ještě nemáš partnerství. Máš jen budoucí tabulkové peklo s logem.
 
+# Příloha S: Roadmapa bez feature factory
+
+Roadmapa není veřejný slib, že v úterý po obědě dodáš tři tlačítka, export do Excelu a integraci, kterou si přeje nejhlasitější zákazník. Roadmapa je pracovní mapa rozhodnutí: kam produkt směřuje, proč tam směřuje a podle čeho poznáš, že další kus práce opravdu pomohl.
+
+Feature factory vzniká nenápadně. Na začátku chce tým „jen rychle přidat pár věcí“. Pak má backlog stovky položek, zákazníci dostávají různé sliby, support neumí vysvětlit stav produktu a vývoj tráví většinu týdne přesouváním tiketů. Produkt roste, ale hodnota se rozmazává. To je jako zalévat květinu betonem: vypadá to jako aktivita, ale příroda ti nepoděkuje.
+
+Privacy-first SaaS má v roadmapě ještě jeden rozměr: každá nová funkce může přinést nová data, nové přístupy, nové logy, nové dodavatele a nové povinnosti. Proto se neptáš jen „chceme to?“, ale také „jaká data kvůli tomu začneme držet a proč?“
+
+## S.1 Roadmapa má začít výsledkem
+
+Slabý roadmap item zní: „Přidat dashboard aktivit.“ Je to technický úkol, ne produktové rozhodnutí. Lepší zápis zní: „Zákazník má do 30 sekund pochopit, které tři poptávky potřebují reakci dnes.“ Teprve potom řešíš, jestli výsledkem bude dashboard, e-mailový souhrn, filtr, upozornění nebo obyčejný zvýrazněný řádek v tabulce.
+
+Používej jednoduchý formát:
+
+```text
+Pro koho: [segment nebo role]
+Problém: [konkrétní situace]
+Výsledek: [co má být po změně lepší]
+Signál: [jak poznáme posun]
+Riziko: [co se může pokazit]
+Data: [jaké údaje potřebujeme / nepotřebujeme]
+```
+
+Příklad:
+
+```text
+Pro koho: majitel malé servisní firmy
+Problém: neví, které poptávky už příliš dlouho čekají
+Výsledek: každý den vidí tři nejurgentnější navazující kroky
+Signál: méně poptávek bez reakce po 24 hodinách
+Riziko: upozornění bude otravné a lidé ho vypnou
+Data: stačí stav poptávky a čas poslední reakce, nepotřebujeme sledovat obsah všech zpráv
+```
+
+Takový zápis nutí tým mluvit o hodnotě, ne o vrstvě laku. A když někdo později navrhne „přidejme tam AI souhrn každého zákazníka“, máš hned otázku: pomůže to výsledku, nebo si jen přidáváme datově rizikovou atrakci?
+
+## S.2 Prioritizace bez bodovacího divadla
+
+RICE, ICE, MoSCoW a podobné metody nejsou špatné. Špatné je, když se z nich stane divadlo přesnosti. Malý tým nepotřebuje pět desetinných míst u skóre nápadu, který nikdo pořádně neověřil. Potřebuje pár tvrdých otázek.
+
+Před zařazením do roadmapy se ptej:
+
+- Pomáhá to našemu hlavnímu segmentu, nebo jen jednomu hlasitému člověku?
+- Zkracuje to cestu k první hodnotě, platbě, obnově nebo doporučení?
+- Snižuje to provozní riziko, support zátěž nebo počet ručních zásahů?
+- Umíme to dodat malou verzí, která se dá vyhodnotit?
+- Přidává to osobní data, nový vendor nebo citlivější oprávnění?
+
+Praktické pravidlo: pokud nápad nezíská jasné „ano“ alespoň u dvou prvních čtyř otázek, pravděpodobně nepatří do nejbližší roadmapy. Pokud zároveň přidává citlivá data nebo nového dodavatele, musí mít opravdu silný důvod. Jinak je to jen funkce s batohem plným budoucí práce.
+
+**Codyho komentář:** nejdražší feature není ta, kterou dlouho vyvíjíš. Nejdražší je ta, kterou vyvineš rychle, nikdo ji nepoužívá, ale pět let ji musíš podporovat, migrovat, dokumentovat a omlouvat. Krásný malý pomník špatného „jen to tam dejme“.
+
+## S.3 Tři horizonty místo nekonečného backlogu
+
+Nekonečný backlog je skládka dobrých úmyslů. Roadmapu drž ve třech horizontech:
+
+1. **Teď** — práce na nejbližší 2 až 4 týdny, jasně připravená a navázaná na konkrétní výsledek.
+2. **Další** — témata, která pravděpodobně přijdou po dokončení aktuální práce, ale ještě se mohou změnit.
+3. **Později / možná** — užitečné signály a nápady bez závazku.
+
+Každý horizont má jinou míru detailu. „Teď“ potřebuje jasný rozsah, odpovědnost a kritéria hotovo. „Další“ potřebuje problém, hypotézu a otevřené otázky. „Později“ potřebuje jen krátký popis a důvod, proč to neřešíš hned.
+
+Příklad:
+
+```text
+Teď: Zkrátit první nastavení projektu z 18 minut na méně než 8 minut.
+Další: Zjistit, jestli uživatelé potřebují týmové role před první platbou.
+Později: Veřejné API pro agentury; zatím nízká poptávka a vyšší bezpečnostní náklady.
+```
+
+Tohle je čitelné pro vývoj, obchod i support. A hlavně to brání tomu, aby se každá poznámka ze schůzky tvářila jako závazek.
+
+## S.4 Roadmap review jako provozní rituál
+
+Roadmapu neuklízej jednou za rok při strategickém záchvatu. Udělej z ní krátký pravidelný rituál. U malého týmu stačí jednou týdně 30 až 45 minut.
+
+Agenda:
+
+1. Co jsme minulý týden dokončili a jaký signál to přineslo?
+2. Co se zaseklo a proč?
+3. Které nové poznatky mění prioritu?
+4. Co vyhodíme, sloučíme nebo odložíme?
+5. Který jeden výsledek je nejdůležitější do dalšího review?
+
+Každé review by mělo něco zmenšit. Buď rozsah aktuální práce, počet otevřených nápadů, nejistotu kolem problému, nebo datové riziko. Pokud po roadmap review přibylo jen deset nových tiketů, nebyl to review, ale firemní archeologie.
+
+## S.5 Privacy gate před každou větší funkcí
+
+Před větší funkcí udělej krátkou privacy gate. Nemusí to být právnický dokument na osm stran. Stačí rozhodovací karta, kterou vyplní produkt, vývoj a člověk odpovědný za provoz.
+
+Šablona:
+
+```text
+Funkce:
+Nová data:
+Účel zpracování:
+Kdo k datům potřebuje přístup:
+Retence:
+Zobrazí se data zákazníkovi v exportu:
+Nový dodavatel nebo subprocessors:
+Logování a monitoring:
+Riziko zneužití:
+Rozhodnutí: spustit / zmenšit / odložit / zahodit
+```
+
+Příklad: chceš přidat nahrávání hovorů ze zákaznického supportu. Produktově to může znít skvěle: lepší kvalita podpory, rychlejší onboarding nových kolegů, méně zapomenutých detailů. Privacy gate ale ukáže citlivé body: záznam hlasu, obsah konverzace, souhlas účastníků, retence, přístup supportu, bezpečnost úložiště a možnost exportu nebo výmazu. Možná nakonec stačí strukturovaná poznámka po hovoru místo nahrávky. Méně sexy, méně rizikové, často úplně dostatečné.
+
+## S.6 Jak říkat ne bez pálení mostů
+
+Roadmapa není jen výběr toho, co uděláš. Je to i schopnost říct slušné „ne“. Zákazník často nežádá konkrétní feature proto, že miluje tlačítka. Žádá ji, protože má problém. Když pochopíš problém, můžeš nabídnout jinou cestu.
+
+Odpověď může vypadat takhle:
+
+```text
+Díky za návrh. Rozumím tomu tak, že potřebujete rychleji poznat, které poptávky čekají na reakci. Samostatný modul pro pokročilé reporty teď do roadmapy nezařazujeme, protože by přidal složitost i nové exportní scénáře. V nejbližší verzi ale řešíme jednodušší přehled nevyřízených poptávek a rádi ověříme, jestli pokryje váš případ.
+```
+
+Tahle odpověď dělá tři věci: potvrzuje problém, vysvětluje rozhodnutí a nechává otevřené dveře. Neříká „uživatel nemá pravdu“. Říká „chráníme směr produktu“.
+
+## S.7 Checklist roadmapy
+
+- [ ] Každá položka v nejbližším horizontu popisuje výsledek pro konkrétního uživatele.
+- [ ] Backlog je rozdělený na Teď / Další / Později, ne na nekonečný seznam přání.
+- [ ] U každé větší funkce víme, jaký signál rozhodne o úspěchu.
+- [ ] Před zařazením kontrolujeme datovou náročnost, oprávnění, logy a nové vendory.
+- [ ] Jednou týdně roadmapu zmenšujeme, zpřesňujeme nebo čistíme.
+- [ ] Umíme zákazníkovi vysvětlit odmítnutí funkce přes jeho problém, ne přes interní výmluvu.
+- [ ] Nepřidáváme funkce jen proto, že se snadno vyvíjejí.
+
 ## Zdroje
 
 - ADR GitHub Organization: [Architectural Decision Records](https://adr.github.io/)
@@ -2872,6 +3001,7 @@ Jedna hodinová iterace: vezmi jeden existující nebo plánovaný partnerský k
 
 ## Pracovní log
 
+- 2026-08-06: Doplněna příloha S o roadmapě bez feature factory: formulace výsledků, jednoduchá prioritizace, tři horizonty roadmapy, pravidelný review rituál, privacy gate před funkcí, odmítání požadavků a checklist.
 - 2026-08-06: Doplněna příloha R o referral programech a partnerství bez sledovacího cirkusu: typy doporučení, referral odkazy bez osobních údajů, férové odměny, partner kit, předávání leadů, metriky, ukončení spolupráce a checklist.
 - 2026-08-06: Doplněna příloha Q o férových experimentech bez dark patterns: hypotézy, minimalizace měření, ochrana uživatele, vyhodnocení, backlog a checklist.
 - 2026-08-06: Doplněna příloha P o B2B prodeji bez CRM cirkusu: jednoduchá pipeline, discovery otázky, minimalizace dat v CRM, hodnotné follow-upy, předání do onboardingu a checklist.
