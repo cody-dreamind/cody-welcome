@@ -700,16 +700,149 @@ Produktivita malého týmu stojí na jasném toku práce, jednom zdroji pravdy, 
 
 ---
 
+# 6. Analytika s minimem trackerů: měřit ano, šmírovat ne
+
+Analytika má pomáhat rozhodovat. Nemá být výmluvou pro to, aby se z každého návštěvníka stal pohyblivý reklamní profil. Malý web nebo SaaS produkt většinou nepotřebuje vědět, jak se konkrétní člověk jmenuje, kam chodí po internetu a kolikrát se v noci probudil s myšlenkou na ceník. Potřebuje vědět, které stránky fungují, odkud chodí relevantní návštěvy, kde lidé odpadají a jestli změny zlepšují obchodní výsledek.
+
+Privacy-first analytika začíná skromností. Místo otázky „Co všechno můžeme sbírat?“ se ptej „Jaké rozhodnutí díky tomu uděláme?“ Pokud metrika nemění žádné rozhodnutí, je to často jen dashboardová dekorace. A dashboardová dekorace je jako keramická žába na recepci: možná roztomilá, ale fakturu nezaplatí.
+
+Evropská pravidla ke cookies a trackerům nejsou jen právní folklór. Your Europe shrnuje, že cookies nutné pro službu vyžádanou uživatelem mohou být použité bez souhlasu, zatímco jiné cookies typicky souhlas vyžadují: https://europa.eu/youreurope/business/growing/digitalising/online-privacy/index_en.htm CNIL zároveň uvádí, že měření návštěvnosti může být za určitých podmínek od souhlasu osvobozené, ale většina velkých analytických nabídek do výjimky nespadá automaticky: https://www.cnil.fr/en/sheet-ndeg16-use-analytics-your-websites-and-applications
+
+## 6.1 Měř rozhodnutí, ne ego
+
+Začni seznamem rozhodnutí, která chceš dělat pravidelně. Teprve potom vybírej metriky. U malého webu nebo SaaS landing page obvykle stačí málo:
+
+- Které stránky přivádějí nejvíc relevantních návštěv?
+- Které zdroje přivádějí návštěvy, které udělají další krok?
+- Jaké dotazy a témata přivádějí lidi z vyhledávání?
+- Kde v onboardingovém nebo poptávkovém toku lidé nejčastěji končí?
+- Který obsah dlouhodobě přivádí zákazníky, ne jen náhodné čtenáře?
+
+Z toho vznikne jednoduchý měřicí plán:
+
+| Rozhodnutí | Metrika | Jak často | Co uděláme, když se změní |
+| --- | --- | --- | --- |
+| Jaký obsah dál psát | Návštěvy a konverze podle tématu | Měsíčně | Rozšíříme témata s poptávkou |
+| Jestli landing page funguje | Poměr návštěva → poptávka/demo | Týdně | Upravíme sdělení, CTA nebo důkazy |
+| Kde lidé odpadají | Dokončení formuláře/onboardingu | Týdně | Zkrátíme krok nebo vysvětlíme hodnotu |
+| Který kanál má smysl | Konverze podle refereru | Měsíčně | Posílíme kanál, který přivádí kvalitu |
+| Jestli web nezpomaluje obchod | Rychlost hlavních stránek | Po změnách | Zmenšíme obrázky, skripty a třetí strany |
+
+Metrika bez rozhodnutí je šum. Rozhodnutí bez metriky je pocit. Ideál je nudně praktický střed: víš, co sleduješ, proč to sleduješ a co uděláš, když čísla začnou mluvit.
+
+## 6.2 Nejdřív server, potom JavaScript
+
+Ne každá analytika musí začít dalším skriptem v prohlížeči. Hodně základních otázek umí zodpovědět serverové logy, agregované reporty, Search Console data, interní události v aplikaci nebo prosté počítání odeslaných formulářů. Čím blíž je měření k vlastní infrastruktuře a čím méně identifikuje jednotlivce, tím jednodušší bývá technický i právní provoz.
+
+Praktické vrstvy měření:
+
+1. **Provozní dostupnost**: běží web, odpovídá API, funguje certifikát, dorazí e-mail z formuláře.
+2. **Agregovaná návštěvnost**: stránky, referery, země, zařízení, základní trendy.
+3. **Konverzní události**: odeslaný formulář, registrace, objednané demo, dokončený onboarding.
+4. **Kvalitativní signály**: odpovědi zákazníků, support, obchodní hovory, dotazy v e-mailu.
+5. **Produktové metriky**: aktivace, opakované použití, návratnost, churn signály.
+
+Nemusíš všechno měřit jedním nástrojem. Naopak: jeden obří analytický nástroj často svádí k tomu, že se z jednoduchého webu stane datové kasino. Lepší je menší sada jasně vlastněných měření.
+
+Privacy-first pravidlo: pokud analytika běží v prohlížeči, měla by být lehká, srozumitelná a bez cross-site sledování. Pokud běží na serveru, měly by být logy omezené, chráněné a mazané podle retenční politiky. „Máme logy od roku 2019, protože se nikomu nechtělo nastavit rotaci“ není strategie, to je digitální sklep.
+
+## 6.3 Vyber nástroj podle dat, ne podle popularity
+
+Při výběru analytiky se nenech oslnit tím, že ji používá půl internetu. Půl internetu taky pořád posílá hesla v tabulkách a říká tomu proces. U privacy-first projektu se ptej hlavně na data:
+
+- Sbírá nástroj osobní údaje, IP adresy, fingerprinty nebo persistentní identifikátory?
+- Používá cookies nebo jiné úložiště v prohlížeči?
+- Sleduje návštěvníky napříč weby?
+- Kde se data zpracovávají a ukládají?
+- Kdo je provozovatel a jací jsou subprocessoři?
+- Lze data exportovat a smazat?
+- Umí nástroj fungovat bez reklamních integrací a profilování?
+
+Umami v dokumentaci uvádí, že tracking kód nepoužívá cookies, neukládá osobně identifikovatelné údaje a u Umami Cloud nabízí servery v USA i EU: https://docs.umami.is/docs/faq a https://docs.umami.is/docs/cloud/faq Plausible se prezentuje jako open-source analytika založená v EU, bez cookies a bez sběru osobních dat, s evropským provozem a infrastrukturou: https://plausible.io/about a https://plausible.io/compliance
+
+To neznamená „vyber si automaticky jeden z nich a právník může jít na ryby“. Znamená to, že u podobných nástrojů máš lepší startovní pozici než u reklamně orientované analytiky postavené na identifikaci uživatele. Pořád si ověř smlouvy, region, nastavení, retenční dobu a to, jestli konkrétní konfigurace odpovídá tvému účelu.
+
+Codyho komentář: nejlepší analytický nástroj je ten, který tým opravdu čte a podle kterého něco mění. Druhý nejlepší je ten, který aspoň nerozbije soukromí návštěvníků. Nejhorší je dashboard, který nikdo nečte, ale všichni kvůli němu musí odkliknout banner.
+
+## 6.4 Události pojmenuj obchodně
+
+Eventy v analytice mají být čitelné i pro člověka, který zrovna neviděl implementaci. `button_click_17` je informační zoufalství. `demo_requested` už říká něco užitečného. Dobré pojmenování pomáhá vývojářům, marketérům i budoucímu tobě, který se za tři měsíce bude tvářit, že si všechno pamatuje. Nebude. Nikdo si to nepamatuje.
+
+Pravidla pro eventy:
+
+- Pojmenovávej výsledek, ne technický prvek: `newsletter_subscribed`, ne `footer_form_submit`.
+- Drž slovník stabilní: jednou `trial_started`, ne střídavě `start_trial`, `signup_trial` a `trialStart`.
+- Neposílej do eventů osobní údaje: e-mail, telefon, celé jméno ani text zprávy.
+- Ukládej jen vlastnosti, které pomáhají segmentovat rozhodnutí: plán, typ stránky, jazyk, zdroj kampaně.
+- Dokumentuj eventy v jednoduché tabulce vedle produktu nebo marketingového plánu.
+
+Příklad jednoduchého eventového slovníku:
+
+| Event | Kdy vzniká | Vlastnosti | Proč existuje |
+| --- | --- | --- | --- |
+| `contact_form_sent` | Po odeslání poptávky | `page_type`, `language` | Měří výkon poptávkových stránek |
+| `demo_requested` | Po rezervaci dema | `plan_interest`, `source` | Měří kvalitu SaaS landing page |
+| `pricing_viewed` | Při zobrazení ceníku | `entry_page` | Pomáhá chápat cestu k nákupu |
+| `onboarding_completed` | Po dokončení prvního nastavení | `plan`, `role` | Sleduje aktivaci produktu |
+| `rss_clicked` | Klik na RSS odkaz | `page_type` | Podporuje distribuci bez algoritmů |
+
+Všimni si, že nikde není e-mail ani obsah zprávy. Pro měření výkonu stránky nepotřebuješ vědět, že `jana@example.com` klikla v 10:43 na třetí tlačítko. Potřebuješ vědět, že poptávková stránka pro B2B služby přivedla tento měsíc šest relevantních odeslání.
+
+## 6.5 Report má být krátký a akční
+
+Report, který má dvacet grafů, většinou neřídí firmu. Jen unavuje lidi, kteří by mohli mezitím zlepšit produkt. Pro malý tým stačí měsíční report na jednu stránku:
+
+- Co se zlepšilo?
+- Co se zhoršilo?
+- Co nás překvapilo?
+- Které tři stránky nebo kampaně přinesly největší hodnotu?
+- Jakou jednu změnu uděláme příští měsíc?
+
+Příklad závěru reportu:
+
+> „Článek o privacy-first analytice přivedl méně návštěv než obecný článek o webdesignu, ale měl třikrát vyšší poměr poptávek. Příští měsíc dopíšeme praktický checklist pro B2B firmy a přidáme jasnější CTA na konzultaci.“
+
+Tohle je užitečné. „Návštěvnost rostla o 8 %“ je hezké, ale samo o sobě nic neříká. Možná přišli správní lidé. Možná přišel bot. Možná kamarád sdílel odkaz do skupiny, kde všichni klikli a nikdo nekoupí. Bez kontextu je metrika jen číslo v obleku.
+
+## 6.6 Checklist privacy-first analytiky
+
+Před nasazením nebo úklidem analytiky si projdi:
+
+- Máme napsané, jaká rozhodnutí analytika podporuje?
+- Měříme hlavní konverze, ne jen návštěvnost?
+- Neposíláme do eventů osobní údaje ani obsah zákaznických zpráv?
+- Víme, kde se data zpracovávají, ukládají a kdo k nim má přístup?
+- Používáme nástroj bez cross-site sledování a reklamního profilování?
+- Máme nastavenou retenční dobu pro analytická data i serverové logy?
+- Umíme data exportovat a smazat, když to bude potřeba?
+- Je privacy stránka srozumitelná a odpovídá skutečnému nastavení?
+- Nepotřebuje web zbytečný cookie banner jen kvůli nástroji, který nedává dost hodnoty?
+- Čte někdo reporty a mění podle nich produkt, obsah nebo obchod?
+
+Pokud odpověď na poslední otázku zní „ne“, nezačínej novým nástrojem. Začni tím, že zrušíš polovinu metrik a necháš jen ty, které nutí k rozhodnutí.
+
+## Shrnutí kapitoly
+
+Dobrá analytika je malá, čitelná a napojená na rozhodnutí. Privacy-first přístup neznamená měřit naslepo; znamená měřit tak, aby uživatel nebyl surovina pro reklamní stroj. Pro evropský web nebo SaaS je ideál jednoduchý: minimum dat, jasný účel, evropský provoz, krátké reporty a žádné trackery navíc jen proto, že se vejdou do `<head>`.
+
+---
+
 ## Zdroje
 
 - Evropská komise: Data protection — https://commission.europa.eu/law/law-topic/data-protection_en
 - Evropská komise: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en
 - Evropská komise: What information must be given to individuals whose data is collected? — https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/what-information-must-be-given-individuals-whose-data-collected_en
 - Evropská komise: Information for individuals, consent and rights — https://commission.europa.eu/law/law-topic/data-protection/information-individuals_en
+- CNIL: Use analytics on your websites and applications — https://www.cnil.fr/en/sheet-ndeg16-use-analytics-your-websites-and-applications
 - Google Search Central: Understanding Google Page Experience — https://developers.google.com/search/docs/appearance/page-experience
 - Google Search Central: Creating helpful, reliable, people-first content — https://developers.google.com/search/docs/fundamentals/creating-helpful-content
 - Google Search Central: SEO Starter Guide — https://developers.google.com/search/docs/fundamentals/seo-starter-guide
+- Plausible Analytics: About — https://plausible.io/about
+- Plausible Analytics: Security and compliance documentation — https://plausible.io/compliance
 - RSS Advisory Board: RSS 2.0 Specification — https://www.rssboard.org/rss-specification
+- Umami: FAQ — https://docs.umami.is/docs/faq
+- Umami Cloud: FAQ — https://docs.umami.is/docs/cloud/faq
+- Your Europe: Online privacy — how to use cookies on your website — https://europa.eu/youreurope/business/growing/digitalising/online-privacy/index_en.htm
 - web.dev: Web Vitals — https://web.dev/articles/vitals?hl=en
 
 ---
@@ -721,3 +854,4 @@ Produktivita malého týmu stojí na jasném toku práce, jednom zdroji pravdy, 
 - 2026-08-06: Dopsána třetí kapitola o SaaS landing page: bolest zákazníka, CTA, formulář, důkazy hodnoty, hypotézy a checklist.
 - 2026-08-06: Dopsána čtvrtá kapitola o obsahovém marketingu bez závislosti na algoritmech, včetně publikační základny, distribuce, měření a checklistu.
 - 2026-08-06: Dopsána pátá kapitola o produktivitě malého týmu: tok práce, jeden zdroj pravdy, omezení rozpracovanosti, dokumentace rozhodnutí, meetingy a automatizace.
+- 2026-08-06: Dopsána šestá kapitola o privacy-first analytice: měřicí plán, vrstvy měření, výběr nástroje, eventový slovník, reporty a checklist.
