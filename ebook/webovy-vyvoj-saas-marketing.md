@@ -121,15 +121,139 @@ Privacy-first web je praktický obchodní přístup: sbírej méně dat, vysvět
 
 ---
 
+
+# 2. Základy webu, který vydělává: nabídka, struktura, rychlost, důvěra
+
+Web, který vydělává, nemusí být nejhezčí v oboru. Musí ale rychle vysvětlit, pro koho je, jaký problém řeší, proč mu věřit a co má návštěvník udělat dál. Design je důležitý, ale až po odpovědi na základní otázku: „Proč by tomu měl někdo věnovat další minutu života?“
+
+Google ve své dokumentaci k page experience připomíná, že dobré skóre v Core Web Vitals nebo jiných nástrojích samo o sobě negarantuje top pozice ve vyhledávání; dobrá stránka je kombinace užitečného obsahu, použitelnosti a technické kvality: https://developers.google.com/search/docs/appearance/page-experience
+
+## 2.1 Nabídka musí být jasná do pěti vteřin
+
+První obrazovka webu není místo pro korporátní poezii. Návštěvník má během pár vteřin pochopit:
+
+- co nabízíš,
+- komu to pomáhá,
+- jaký výsledek může čekat,
+- proč je to jiné nebo lepší,
+- jaký je další krok.
+
+Slabá headline:
+
+> „Inovativní digitální řešení pro moderní firmy.“
+
+Lepší headline:
+
+> „Stavíme privacy-first SaaS aplikace pro evropské B2B týmy, které potřebují rychlý vývoj bez datového cirkusu.“
+
+Ta druhá věta není dokonalá poezie, ale říká kdo, co, pro koho a jaký princip. A to je u obchodního webu podstatnější než slovní mlha s příchutí LinkedInu.
+
+Praktický vzorec pro úvodní sekci:
+
+- **Headline:** konkrétní výsledek nebo specializace.
+- **Podtitulek:** pro koho to je a jak to funguje.
+- **Důkaz:** reference, číslo, logo, případová studie nebo jasný proces.
+- **CTA:** jedna hlavní akce, ne pět tlačítek bojujících o přežití.
+- **Riziko:** krátká odpověď na největší obavu zákazníka.
+
+Příklad pro SaaS nástroj na docházku:
+
+> „Docházka pro malé týmy bez Excelu, chaosu a zbytečného sledování lidí.“
+>
+> „Zaměstnanci si píchnou příchod během pár vteřin, manažer vidí přehled a firma má data uložená v EU.“
+
+## 2.2 Struktura stránky má vést rozhodnutí
+
+Dobrá landing page není katalog sekcí. Je to argument poskládaný ve správném pořadí. Návštěvník obvykle přichází s pochybnostmi: „Je to pro mě? Vyřeší to můj problém? Kolik práce mě bude stát změna? Můžu tomu věřit?“
+
+Osvědčené pořadí pro první verzi stránky:
+
+1. Jasná nabídka a hlavní CTA.
+2. Popis problému jazykem zákazníka.
+3. Řešení ve třech až pěti konkrétních bodech.
+4. Ukázka produktu, procesu nebo výsledku.
+5. Důvěryhodnost: reference, zkušenosti, bezpečnost, provoz.
+6. Cena nebo alespoň vodítko, jak se cena tvoří.
+7. Časté otázky a námitky.
+8. Závěrečné CTA.
+
+Nejčastější chyba: stránka začne funkcemi a až úplně dole vysvětlí, proč by to někoho mělo zajímat. Funkce jsou důkaz, ne začátek příběhu. Pokud prodáváš rezervační systém, první sdělení není „REST API a exporty“. První sdělení je „méně telefonátů, méně zmatků, více obsazených termínů“. API přijde později pro lidi, kteří už chápou hodnotu.
+
+## 2.3 Rychlost je obchodní argument
+
+Rychlý web není technická parádička pro Lighthouse screenshot. Je to méně čekání, méně odchodů a lepší první dojem. Web.dev uvádí jako Core Web Vitals metriky LCP, INP a CLS a doporučuje hodnotit je na 75. percentilu návštěv zvlášť pro mobil a desktop: https://web.dev/articles/vitals?hl=en
+
+Prakticky řečeno:
+
+- **LCP** hlídá, jak rychle se zobrazí hlavní obsah stránky; dobrý výsledek je do 2,5 sekundy.
+- **INP** měří odezvu na interakce; dobrý výsledek je do 200 ms.
+- **CLS** sleduje vizuální poskakování stránky; dobrý výsledek je do 0,1.
+
+Neznamená to honit skóre 100/100 za každou cenu. Znamená to odstranit věci, které uživatele reálně brzdí: obří hero obrázky, zbytečný JavaScript, pomalé fonty, třetí strany a layout, který se při načítání rozpadá jako židle z levného e-shopu.
+
+Privacy-first přístup tu pomáhá i výkonově. Když nepoužíváš pět reklamních pixelů, tři chat widgety a externí social embed, stránka je často rychlejší už z principu. Méně šmírování, méně kilobajtů. Hezká symetrie, skoro až podezřele rozumná.
+
+Mini-checklist výkonu:
+
+- Komprimuj a zmenši hero obrázky; nepouštěj 4MB fotku do mobilu.
+- Používej systémové fonty nebo self-hostované fonty s rozumným preloadem.
+- Načítej skripty až ve chvíli, kdy jsou potřeba.
+- Nepřidávej externí nástroje bez jasného účelu a vlastníka.
+- Otestuj hlavní stránky v PageSpeed Insights a v reálném telefonu na mobilních datech.
+- Sleduj výkon po nasazení, ne jen před spuštěním.
+
+## 2.4 Důvěra musí být vidět, ne tvrzená
+
+„Jsme spolehlivý partner“ neznamená nic, pokud za tím není důkaz. Důvěra vzniká z konkrétností.
+
+Co funguje lépe než obecné sliby:
+
+- případová studie s výchozím stavem, postupem a výsledkem,
+- krátká reference s celým jménem a rolí,
+- ukázka reálného rozhraní nebo výstupu,
+- jasně popsaný proces spolupráce,
+- transparentní informace o provozu, bezpečnosti a datech,
+- odpovědi na nepříjemné otázky v FAQ.
+
+Privacy-first web má výhodu: může důvěru stavět i na tom, co nedělá. Nepoužíváme reklamní pixely. Neposíláme poptávky do nástrojů bez kontroly. Nesbíráme data „pro jistotu“. Pro některé zákazníky je to detail. Pro B2B, zdravotnictví, veřejný sektor nebo citlivější evropské projekty to může být rozhodovací faktor.
+
+Codyho komentář: největší marketingová síla privacy-first přístupu není moralizování. Je to klid. Klid pro zákazníka, že se jeho data nestanou surovinou pro další reklamní mlýnek.
+
+## 2.5 Checklist jedné obchodní stránky
+
+Před spuštěním nebo redesignem si projdi jednu klíčovou stránku a odpověz bez romantiky:
+
+- Řekne první obrazovka jasně, co nabízíme a pro koho?
+- Je na stránce jedna hlavní akce, kterou chceme po návštěvníkovi?
+- Popisujeme problém jazykem zákazníka, ne interním slovníkem firmy?
+- Máme na stránce konkrétní důkaz důvěry?
+- Je cena, rozsah nebo další krok dostatečně srozumitelný?
+- Funguje stránka dobře na mobilu a nepůsobí jako PDF přilepené na displej?
+- Načte se hlavní obsah rychle i bez ideální Wi-Fi?
+- Neodesíláme data třetím stranám bez jasného důvodu a vysvětlení?
+- Dá se stránka sdílet přímým odkazem bez závislosti na sociálních skriptech?
+- Má stránka jasný `<title>`, meta description a kanonickou URL?
+
+Pokud stránka neprodává, nezačínej změnou barvy tlačítka. Začni nabídkou, strukturou a důvěrou. Barva tlačítka je dezert, ne hlavní chod.
+
+## Shrnutí kapitoly
+
+Vydělávající web stojí na jasné nabídce, logické struktuře, rychlosti a důvěře. Privacy-first přístup není brzda marketingu; naopak pomáhá odstranit zbytečnosti, zrychlit web a vybudovat značku, která působí dospěleji než „máme pixel, protože všichni mají pixel“.
+
+---
+
 ## Zdroje
 
 - Evropská komise: Data protection — https://commission.europa.eu/law/law-topic/data-protection_en
 - Evropská komise: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en
 - Evropská komise: What information must be given to individuals whose data is collected? — https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/what-information-must-be-given-individuals-whose-data-collected_en
 - Evropská komise: Information for individuals, consent and rights — https://commission.europa.eu/law/law-topic/data-protection/information-individuals_en
+- Google Search Central: Understanding Google Page Experience — https://developers.google.com/search/docs/appearance/page-experience
+- web.dev: Web Vitals — https://web.dev/articles/vitals?hl=en
 
 ---
 
 ## Pracovní log
 
 - 2026-08-06: Založena struktura e-booku a dopsána první kapitola o privacy-first webu jako konkurenční výhodě včetně praktického checklistu a zdrojů.
+- 2026-08-06: Dopsána druhá kapitola o základech vydělávajícího webu: nabídka, struktura, rychlost, důvěra a checklist obchodní stránky.
