@@ -3355,6 +3355,163 @@ U B2B je ještě lepší spojit data s lidským kontextem. Nevolej zákazníkovi
 
 Jedna hodinová iterace: vyber jednu klíčovou akci produktu, napiš větu „zákazník se vrací každých…“, najdi první hodnotový moment a navrhni jednu užitečnou připomínku. Pokud připomínka nepomáhá zákazníkovi udělat práci, smaž ji. Ano, i když by měla hezký open rate.
 
+
+# Příloha W: Obchodní e-mail, který pomáhá místo tlačení
+
+E-mail je pořád jeden z nejlepších kanálů pro malý SaaS, protože nepotřebuje algoritmus, reklamní pixel ani tanec před platformou, která zítra změní pravidla. Právě proto s ním zacházej opatrně. Dobrý obchodní e-mail není megafon. Je to krátká služba: připomene správnou věc správnému člověku ve správný čas a nechá ho v klidu rozhodnout.
+
+Cílem není poslat víc zpráv. Cílem je poslat méně zpráv, které mají jasný důvod. Pokud zákazník po otevření e-mailu neví, proč ho dostal a co může udělat dál, problém není v předmětu. Problém je v respektu k jeho času.
+
+## W.1 Rozděl e-maily podle práce, kterou mají udělat
+
+Než začneš psát sekvenci, rozděl si e-maily podle účelu. Jeden e-mail má mít jednu hlavní práci. Když do onboardingové zprávy nacpeš produktovou novinku, slevu, případovou studii a tři odkazy na blog, vznikne informační guláš. Guláš je fajn v hospodě, ne v inboxu.
+
+Praktické typy zpráv:
+
+- **Uvítací e-mail:** potvrzuje registraci a ukazuje první nejmenší krok.
+- **Aktivační e-mail:** pomáhá dokončit první hodnotový moment.
+- **Servisní e-mail:** řeší fakturaci, bezpečnost, export, změnu hesla nebo incident.
+- **Produktový e-mail:** vysvětluje změnu, která má reálný dopad na práci zákazníka.
+- **Vzdělávací e-mail:** učí postup, který zákazník může použít i mimo tvůj produkt.
+- **Obchodní follow-up:** navazuje na konkrétní rozhovor, poptávku nebo zkušební období.
+
+Každý typ má jiné očekávání. Servisní e-mail má být přesný a klidný. Vzdělávací e-mail může mít víc osobnosti. Obchodní follow-up má být krátký a konkrétní. Když všechny zní jako stejný marketingový reproduktor, zákazník se naučí ignorovat všechno.
+
+## W.2 Předmět má slibovat obsah, ne maskovat trik
+
+Předmět e-mailu není hádanka. Má člověku říct, jestli zpráva stojí za otevření právě teď. Nepoužívej falešnou naléhavost, předstírané odpovědi ani „rychlá otázka“, když uvnitř čeká prodejní traktát na osm odstavců. Důvěra se ztrácí po kapkách, ale občas i jedním emoji v předmětu. Ano, i to je výkon.
+
+Lepší předměty:
+
+```text
+3 poptávky čekají na odpověď déle než 24 hodin
+Návrh dalšího kroku po dnešní ukázce
+Export za červenec je připravený ke kontrole
+Nové nastavení rolí pro váš tým
+```
+
+Slabší předměty:
+
+```text
+Nenechte si ujít úžasnou novinku!
+Jen dnes speciální příležitost!!!
+Rychlá otázka
+Máme pro vás překvapení
+```
+
+Dobrý test: kdyby zákazník viděl jen předmět a odesílatele, umí odhadnout hodnotu zprávy? Pokud ne, přepiš to.
+
+## W.3 Obchodní follow-up piš jako pokračování rozhovoru
+
+Follow-up po schůzce nemá dokazovat, že umíš používat CRM. Má ukázat, že jsi poslouchal. Ideální struktura je jednoduchá:
+
+1. jedna věta kontextu,
+2. shrnutí problému zákazníka,
+3. doporučený další krok,
+4. jasný termín nebo možnost odmítnout.
+
+Příklad:
+
+```text
+Díky za dnešní rozhovor o poptávkách z webu.
+
+Zachytil jsem, že největší problém není počet leadů, ale ztracené odpovědi mezi telefonem, e-mailem a formulářem. Navrhuji proto nejdřív projít jeden jednoduchý tok: příjem poptávky, potvrzení zákazníkovi a přehled nevyřízených věcí.
+
+Mám poslat krátký návrh řešení do pátku, nebo to teď necháme být?
+```
+
+Všimni si poslední věty. Dává volbu. Když zákazník nechce pokračovat, je lepší to vědět než šest týdnů posílat „jen se připomínám“. Tohle sousloví by mělo mít vlastní výstražný trojúhelník.
+
+## W.4 Automatizace nesmí předstírat osobní vztah
+
+Automatizace je skvělá, když doručuje užitečnou informaci včas. Je trapná, když se tváří jako osobní zpráva a přitom vůbec nereaguje na realitu. Pokud zákazník odpověděl, automatická sekvence se má zastavit. Pokud už aktivaci dokončil, neposílej mu návod k aktivaci. Pokud účet zrušil, neposílej „těšíme se na další společné měsíce“.
+
+Minimum dobré automatizace:
+
+- každá sekvence má jasný cíl a konec,
+- odpověď člověka zastaví obchodní automat,
+- servisní zprávy jsou oddělené od marketingu,
+- preference a odhlášení jsou snadno dostupné,
+- stav zákazníka se kontroluje před odesláním,
+- obsah zprávy odpovídá tomu, co už zákazník udělal.
+
+Privacy-first princip je prostý: nepoužívej víc dat, než potřebuješ pro užitečnou komunikaci. Není nutné vědět, kolikrát člověk pohnul myší nad ceníkem. Často stačí vědět, že nedokončil první pracovní tok, má otevřený tiket nebo mu končí zkušební období.
+
+## W.5 Měř kvalitu e-mailů bez posedlosti sledováním
+
+Otevření e-mailu je slabý signál. Může být zkreslené klientem, bezpečnostní kontrolou nebo obrázky. Mnohem důležitější je, jestli zpráva vedla k rozumné akci a jestli nepoškozuje vztah.
+
+Měř raději:
+
+- odpovědi na obchodní follow-upy,
+- dokončení konkrétního kroku po aktivačním e-mailu,
+- počet lidí, kteří upraví preference místo odhlášení,
+- počet support dotazů, které e-mail vyvolal nebo vyřešil,
+- ruční kvalitu odpovědí od zákazníků.
+
+Neměř zbytečně:
+
+- osobní profil každého otevření,
+- kombinaci e-mailového chování s reklamními identifikátory,
+- dlouhodobé sledování kontaktu napříč weby,
+- citlivé údaje v parametrech odkazů,
+- kliky, pro které nemáš rozhodovací otázku.
+
+U odkazů používej rozumné UTM parametry bez osobních údajů. Například `utm_source=newsletter&utm_campaign=onboarding_tip_01` je v pořádku. Parametr s e-mailem, interním ID kontaktu nebo názvem firmy už je zbytečný risk.
+
+## W.6 Šablona krátkého užitečného e-mailu
+
+Použij tuhle kostru, když nevíš, jak zprávu zkrátit:
+
+```text
+Předmět: [konkrétní situace nebo výsledek]
+
+Ahoj [jméno],
+
+[věta kontextu: proč píšu právě teď]
+
+[věta hodnoty: co to znamená pro zákazníka]
+
+[jedna doporučená akce]
+
+Pokud to teď není aktuální, stačí napsat „ne“ a nechám to být.
+
+Cody
+```
+
+Příklad pro trial:
+
+```text
+Předmět: První poptávka ještě neprošla celým tokem
+
+Ahoj Petro,
+
+vidím, že formulář už máte nastavený, ale první poptávka zatím nedošla do stavu „odpovězeno“.
+
+Nejrychlejší další krok je poslat testovací poptávku a zkusit potvrzení jedním klikem.
+
+Chcete krátký návod, nebo to mám projít s vámi na 15 minutách?
+```
+
+Tohle není literární soutěž. Je to jasná pomoc. Krátká, konkrétní, s únikovým východem.
+
+## W.7 Checklist e-mailové komunikace
+
+Před odesláním nebo zapnutím automatizace projdi:
+
+- Má e-mail jeden jasný účel?
+- Je z předmětu poznat, proč zpráva existuje?
+- Navazuje text na konkrétní situaci zákazníka?
+- Obsahuje jednu hlavní akci, ne katalog možností?
+- Dá se snadno odpovědět, odmítnout nebo upravit preference?
+- Zastaví se automatizace, když zákazník odpoví nebo dokončí cíl?
+- Neposíláš osobní údaje v URL parametrech nebo analytických eventech?
+- Měříš výsledek zprávy, ne jen vanity metriky?
+
+**Codyho komentář:** nejlepší e-mailová strategie pro malý tým je být užitečný tak konzistentně, že lidé nemají pocit, že se musí bránit. Méně triků, víc kontextu. Inbox není bitevní pole. I když podle některých growth playbooků to bohužel vypadá jako Normandie s CTA tlačítkem.
+
+---
+
 ## Zdroje
 
 - ADR GitHub Organization: [Architectural Decision Records](https://adr.github.io/)
@@ -3413,6 +3570,7 @@ Jedna hodinová iterace: vyber jednu klíčovou akci produktu, napiš větu „z
 
 ## Pracovní log
 
+- 2026-08-06: Doplněna příloha W o obchodním e-mailu, který pomáhá místo tlačení: typy zpráv, férové předměty, follow-upy, automatizace, privacy-first měření, šablona a checklist.
 - 2026-08-06: Doplněna příloha V o retenci bez návykového designu: návrat podle práce zákazníka, první hodnotový moment, užitečné připomínky, privacy-first retenční signály, návratové rituály, záchrana před churnem a checklist.
 - 2026-08-06: Doplněna příloha U o changelogu jako privacy-first marketingovém kanálu: uživatelské release notes, verze, RSS/Atom distribuce, privacy gate a checklist.
 - 2026-08-06: Doplněna příloha T o SaaS podmínkách a právní stránce bez právnické mlhy: obchodní podmínky, privacy notice, DPA, trust stránka, změny podmínek a checklist.
