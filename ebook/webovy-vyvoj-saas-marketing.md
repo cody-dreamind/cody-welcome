@@ -3209,6 +3209,152 @@ Když je odpověď na všechno „ne“, klidně napiš „Privacy dopad: beze z
 
 Jedna hodinová iterace: vytvoř skeleton stránky `/changelog`, doplň poslední tři změny produktu podle šablony a přidej odkaz do patičky. Pokud máš RSS, přidej feed. Pokud ne, napiš si do backlogu technický úkol. Ano, RSS je pořád dobrý nápad. Internet ještě není úplně ztracený.
 
+# Příloha V: Retence bez návykového designu
+
+Retence je často zaměňovaná za „jak dostat uživatele zpátky za každou cenu“. To je krátkozraké. Zdravá retence znamená, že se zákazník vrací, protože produkt opakovaně řeší jeho práci lépe než alternativa. Ne proto, že jsi mu poslal pátou notifikaci, schoval zrušení účtu nebo postavil workflow jako kasino pro kancelářské židle.
+
+Privacy-first SaaS má v retenci jednu výhodu: když nesází na šmírování každého pohybu, musí lépe rozumět skutečné hodnotě. To je nepohodlné pro dashboard, ale skvělé pro produkt.
+
+**Codyho komentář:** retence bez hodnoty je jen odložený churn s horším svědomím. Uživatel není ryba v akváriu. Je to člověk s prací, termíny a trpělivostí na úrovni pondělního Wi-Fi routeru.
+
+## V.1 Definuj návrat podle práce zákazníka
+
+Nejdřív si řekni, proč se má zákazník vracet. „Aby zvýšil DAU“ není důvod. To je interní modla. Dobrý důvod vychází z rytmu práce.
+
+Příklady návratových momentů:
+
+- účetní aplikace: měsíční kontrola dokladů a export pro účetní,
+- nástroj pro podporu: každý pracovní den při řešení tiketů,
+- projektové řízení: týdenní plánování a páteční uzavření práce,
+- bezpečnostní monitoring: okamžitě při incidentu, jinak pravidelný přehled rizik,
+- B2B analytika: pondělní rozhodovací dashboard pro tým.
+
+Retenční metrika má odpovídat tomuhle rytmu. Denní aktivita je nesmysl pro produkt, který má přirozeně měsíční použití. Když účetní export používá klient jednou měsíčně a spolehlivě, je to úspěch, ne „nízký engagement“.
+
+Praktická věta pro tým:
+
+```text
+Zákazník se má vracet každých [interval], aby udělal [klíčová práce] a získal [měřitelný výsledek].
+```
+
+Bez této věty bude tým snadno optimalizovat šum: kliky, otevření e-mailu, počet obrazovek v session nebo náhodné návraty po notifikaci.
+
+## V.2 Najdi hodnotový moment a zkrať cestu k němu
+
+Retenci nejvíc pomáhá první opravdový výsledek. Ne první login. Ne dokončený profil. Výsledek.
+
+U malého SaaS si napiš mapu prvního hodnotového momentu:
+
+1. Co musí zákazník nastavit?
+2. Jaká data musí dodat?
+3. Kde typicky zaváhá?
+4. Co mu ukáže, že produkt funguje?
+5. Co je nejmenší výsledek, který může získat do 10 minut?
+
+Příklad pro SaaS na správu poptávek:
+
+- Slabý první moment: uživatel vyplnil profil firmy.
+- Silný první moment: uživatel přeposlal první poptávku do systému a vidí ji ve stavu „čeká na odpověď“.
+- Ještě silnější moment: uživatel jedním klikem odešle zákazníkovi slušné potvrzení a termín dalšího kroku.
+
+Zkracuj cestu k tomu třetímu. Všechno ostatní je administrativní omáčka. Profil, logo, barvy, fakturační údaje a integrace mohou počkat, pokud nejsou nutné pro první hodnotu.
+
+## V.3 Používej připomínky jako službu, ne jako bič
+
+Připomínka má být užitečná, konkrétní a očekávaná. Pokud uživatel neví, proč mu píšeš, je to spam v drahém kabátě.
+
+Dobrá připomínka:
+
+```text
+V přehledu máte 3 poptávky bez odpovědi déle než 24 hodin. Otevřít frontu poptávek.
+```
+
+Špatná připomínka:
+
+```text
+Chybíte nám! Vraťte se do aplikace a objevte nové možnosti.
+```
+
+Rozdíl je v tom, že první zpráva chrání práci zákazníka. Druhá chrání tvoje grafy. Posílej jen zprávy, které splní alespoň jednu z těchto podmínek:
+
+- brání ztrátě hodnoty,
+- upozorňují na jasný úkol,
+- pomáhají dokončit rozdělaný proces,
+- informují o důležité změně služby,
+- reagují na pravidlo, které si zákazník sám nastavil.
+
+Každá připomínka má mít vypnutí nebo úpravu frekvence. A ne někde v katakombách nastavení. Ideálně přímo z e-mailu nebo z profilu v aplikaci.
+
+## V.4 Retence bez osobního sledování
+
+Privacy-first retence nepotřebuje kompletní záznam každé session. Potřebuje vědět, jestli zákazník dosahuje výsledku.
+
+Místo sledování všeho si vyber malé množství produktových signálů:
+
+| Oblast | Užitečný signál | Čemu se vyhnout |
+|---|---|---|
+| Aktivace | první dokončený klíčový úkol | nahrávání celé session bez jasného důvodu |
+| Opakovaná hodnota | počet dokončených pracovních cyklů | skóre „zájmu“ z každého kliknutí |
+| Riziko odchodu | dlouho nevyřízené úkoly nebo neúspěšný export | tajné profilování uživatele napříč weby |
+| Support | opakující se typ blokace | automatické tahání osobních dat do ticketu |
+
+U každého signálu si napiš účel. Pokud neumíš říct, jak podle něj změníš produkt nebo pomůžeš zákazníkovi, nemačkej ho do analytiky. Data nejsou suvenýry.
+
+Minimum pro malý tým:
+
+- agregované počty dokončených klíčových akcí,
+- počet zákazníků, kteří se dostali k první hodnotě,
+- počet zákazníků s rozbitým nebo nedokončeným pracovním cyklem,
+- ruční poznámky ze supportu a obchodních hovorů,
+- dobrovolná zpětná vazba po důležité akci.
+
+Tohle často stačí k lepším rozhodnutím než dvacet eventů pojmenovaných `button_clicked_v7_final_really_final`.
+
+## V.5 Navrhni návratový rituál
+
+Nejlepší retenční mechanismus je rituál, který zákazník chápe. Nemusí být dramatický. Stačí pravidelný okamžik, kdy produkt pomůže uzavřít práci a začít další cyklus.
+
+Příklady:
+
+- pondělní plán: „Tady jsou tři priority a dvě rizika pro tento týden,“
+- páteční uzávěrka: „Co se dokončilo, co čeká a co blokuje tým,“
+- měsíční export: „Doklady připravené pro účetní, chybí už jen 4 položky,“
+- bezpečnostní digest: „Nová rizika, vyřešené incidenty, doporučené kroky,“
+- obsahový rytmus: „Články k aktualizaci, nové nápady, výkon bez osobního trackingu.“
+
+Rituál má být předvídatelný, krátký a akční. Když pošleš týdenní e-mail, který nejde přečíst za dvě minuty a nevede k jedné konkrétní akci, není to rituál. Je to PDF převlečené za pomoc.
+
+## V.6 Zachraňuj zákazníka dřív než churn
+
+Churn se většinou nestane v den zrušení. Jen se v ten den konečně ukáže. Signály přicházejí dřív:
+
+- zákazník nedokončil onboarding,
+- opakovaně selhává stejný krok,
+- klíčová funkce nebyla použita v přirozeném intervalu,
+- support řeší stejné otázky bez změny produktu,
+- tým zákazníka má jen jednoho aktivního uživatele a žádné předání znalostí.
+
+Reakce nemusí být agresivní. Často stačí jednoduchá zpráva:
+
+```text
+Vidím, že export faktur ještě neproběhl. Chcete poslat krátký návod, nebo to projít na 15 minutách?
+```
+
+U B2B je ještě lepší spojit data s lidským kontextem. Nevolej zákazníkovi proto, že „model detekoval churn risk“. Zavolej mu proto, že nedostal výsledek, který sis slíbil dodat.
+
+## V.7 Checklist retenční smyčky
+
+- [ ] Máme napsaný přirozený interval návratu podle práce zákazníka.
+- [ ] Víme, co je první hodnotový moment, a onboarding k němu vede bez zbytečných polí.
+- [ ] Připomínky chrání konkrétní práci zákazníka, ne jen interní engagement metriky.
+- [ ] Každý e-mail nebo notifikace má jasný důvod, frekvenci a možnost vypnutí.
+- [ ] Retenční měření používá malé množství účelových signálů místo plošného sledování chování.
+- [ ] Tým pravidelně kontroluje zákazníky, kteří nedosáhli slíbeného výsledku.
+- [ ] Záchranná komunikace nabízí pomoc, návod nebo krátký call, ne manipulativní slevu.
+- [ ] Odchod zákazníka zůstává jednoduchý a férový, i když se snažíme retenci zlepšit.
+
+Jedna hodinová iterace: vyber jednu klíčovou akci produktu, napiš větu „zákazník se vrací každých…“, najdi první hodnotový moment a navrhni jednu užitečnou připomínku. Pokud připomínka nepomáhá zákazníkovi udělat práci, smaž ji. Ano, i když by měla hezký open rate.
+
 ## Zdroje
 
 - ADR GitHub Organization: [Architectural Decision Records](https://adr.github.io/)
@@ -3267,6 +3413,7 @@ Jedna hodinová iterace: vytvoř skeleton stránky `/changelog`, doplň posledn�
 
 ## Pracovní log
 
+- 2026-08-06: Doplněna příloha V o retenci bez návykového designu: návrat podle práce zákazníka, první hodnotový moment, užitečné připomínky, privacy-first retenční signály, návratové rituály, záchrana před churnem a checklist.
 - 2026-08-06: Doplněna příloha U o changelogu jako privacy-first marketingovém kanálu: uživatelské release notes, verze, RSS/Atom distribuce, privacy gate a checklist.
 - 2026-08-06: Doplněna příloha T o SaaS podmínkách a právní stránce bez právnické mlhy: obchodní podmínky, privacy notice, DPA, trust stránka, změny podmínek a checklist.
 - 2026-08-06: Doplněna příloha S o roadmapě bez feature factory: formulace výsledků, jednoduchá prioritizace, tři horizonty roadmapy, pravidelný review rituál, privacy gate před funkcí, odmítání požadavků a checklist.
