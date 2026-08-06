@@ -3086,9 +3086,136 @@ Takhle zákazník ví, jestli má zbystřit. A ty ukazuješ, že dokumenty nejso
 
 Jedna hodinová iterace: vytvoř stránku „Trust & Privacy“ s pěti bloky: kde běží data, co měříš, subdodavatelé, export a zrušení účtu, kontakt pro privacy/security. Pokud něco nevíš vyplnit, není to copywritingový problém. Je to provozní úkol. Gratuluju, právě jsi našel práci, která má smysl.
 
+# Příloha U: Changelog jako marketingový kanál bez křiku
+
+Malý SaaS často komunikuje změny až ve chvíli, kdy se někdo zeptá na supportu: „A kde se to teda změnilo?“ To je škoda. Changelog není jen technická nástěnka pro vývojáře. Je to důkaz, že produkt žije, že tým přemýšlí nad prioritami a že zákazník nemusí lovit novinky v náhodném vlákně na sociální síti.
+
+Dobře vedený changelog pomáhá třem skupinám najednou:
+
+- zákazníkům, kteří chtějí vědět, co nového mohou použít,
+- obchodníkům, kteří potřebují ukázat tempo vývoje,
+- týmu, který si díky zápisu udržuje paměť rozhodnutí.
+
+**Codyho komentář:** pokud produkt existuje jen v release branche a v hlavě seniorního vývojáře, není to produktová komunikace. Je to archeologie s klávesnicí.
+
+## U.1 Piš pro uživatele, ne pro commit historii
+
+Commit zpráva říká, co se změnilo v kódu. Changelog má říct, co to znamená pro člověka. Rozdíl je zásadní.
+
+Slabý zápis:
+
+```text
+Refactor invoice export and fix edge case in CSV serializer.
+```
+
+Užitečný zápis:
+
+```text
+Export faktur do CSV teď správně zachová českou diakritiku a oddělovače, takže soubor otevřete v účetním systému bez ručních oprav.
+```
+
+Strukturu můžeš držet jednoduše podle principů z projektu Keep a Changelog: novinky, změny, opravy, bezpečnost. Nemusíš otrocky kopírovat formát, ale drž jednu logiku dlouhodobě. Lidé si na ni zvyknou a tým nebude pokaždé vymýšlet, kam co patří.
+
+Praktická šablona jedné položky:
+
+```text
+### [název změny]
+
+Co je nové: [jedna věta]
+Pro koho: [role nebo typ zákazníka]
+Proč na tom záleží: [dopad na práci]
+Potřebujete něco udělat? [ano/ne + konkrétní krok]
+Privacy dopad: [žádný / nové zpracování / změna retence / nový subdodavatel]
+```
+
+Ten poslední řádek je malý, ale důležitý. Privacy-first značka se nebuduje tím, že jednou napíšeš „respektujeme soukromí“. Buduje se tím, že u změn průběžně říkáš, jestli se dotýkají dat.
+
+## U.2 Verze a datum mají odstranit zmatek
+
+U menšího SaaS stačí kombinace data a krátkého názvu releasu. Pokud máš veřejné API, integrace nebo self-hosted instalace, zvaž sémantické verzování podle SemVer: hlavní verze pro nekompatibilní změny, vedlejší verze pro zpětně kompatibilní funkcionalitu a patch pro opravy.
+
+Pro běžný web nebo hosted SaaS může zápis vypadat takhle:
+
+```text
+## 2026-08-06 — Lepší export faktur
+
+### Přidáno
+- Export faktur do CSV s volbou období.
+
+### Opraveno
+- Diakritika v názvech zákazníků se už v exportu nerozbíjí.
+
+### Privacy
+- Beze změny: nepřidali jsme nové eventy, cookies ani subdodavatele.
+```
+
+Tohle je čitelné pro zákazníka a zároveň použitelné interně. Když za tři měsíce řešíš dotaz „od kdy jde exportovat faktury?“, odpověď najdeš bez výpravy do Git historie.
+
+## U.3 Distribuce: přímý odkaz, RSS a e-mail jen když dává smysl
+
+Privacy-first changelog má být dostupný bez přihlášení, bez tracking pixelu a bez závislosti na algoritmu. Základní sada:
+
+1. veřejná stránka `/changelog`,
+2. RSS nebo Atom feed,
+3. odkaz v aplikaci u profilu nebo v help menu,
+4. souhrn v měsíčním e-mailu jen pro lidi, kteří ho chtějí.
+
+RSS 2.0 i Atom jsou obyčejné otevřené formáty pro odběr novinek. To je přesně ten nudný internet, který mám rád: žádná platforma mezi tebou a zákazníkem, žádné „boostni příspěvek“, žádné stínové testování pozornosti. Prostě přímý kanál.
+
+U e-mailu rozlišuj tři úrovně:
+
+- **kritická změna:** bezpečnost, dostupnost, podmínky, zpracování dat — poslat dotčeným zákazníkům,
+- **produktová změna:** nová funkce, vylepšení workflow — poslat jen lidem, kteří chtějí produktové novinky,
+- **drobná oprava:** stačí changelog a případně zmínka v aplikaci.
+
+Neposílej každou drobnost všem. Když budeš křičet kvůli každému posunutému tlačítku, zákazník tě přestane poslouchat přesně ve chvíli, kdy budeš potřebovat říct něco důležitého.
+
+## U.4 Changelog jako zdroj obsahu
+
+Z jedné dobré release poznámky může vzniknout několik férových marketingových výstupů:
+
+- krátký návod „jak novou funkci použít“,
+- mini case study z interního problému,
+- aktualizace dokumentace,
+- screenshot do produktové galerie,
+- odstavec do sales follow-upu,
+- položka do trust stránky, pokud jde o bezpečnost nebo privacy.
+
+Příklad: přidáš export faktur. Changelog popíše změnu, dokumentace ukáže postup, obchodník pošle relevantním leadům jednu větu: „Od srpna umíme export faktur do CSV pro účetní systémy — tady je ukázka.“ Žádná masová kampaň, žádné sledování přes pět domén. Jen konkrétní novinka pro lidi, kterým pomáhá.
+
+## U.5 Privacy gate před zveřejněním
+
+Před publikací každého většího releasu projdi malou kontrolu:
+
+- Sbírá změna nová osobní data?
+- Mění se účel zpracování?
+- Přibyl nový subdodavatel nebo nové místo zpracování?
+- Mění se retence nebo export dat?
+- Je potřeba aktualizovat privacy notice, DPA nebo trust stránku?
+- Je potřeba informovat jen administrátory, nebo všechny uživatele?
+
+Když je odpověď na všechno „ne“, klidně napiš „Privacy dopad: beze změny“. Není to zbytečná věta. Je to signál, že tým má změny pod kontrolou.
+
+## U.6 Checklist changelogu
+
+- [ ] Produkt má veřejnou stránku `/changelog` dostupnou bez přihlášení a bez trackerů třetích stran.
+- [ ] Každá položka říká dopad na uživatele, ne jen interní technický popis.
+- [ ] Větší změny mají sekci „Potřebujete něco udělat?“.
+- [ ] Každý release uvádí privacy dopad: žádný, nové zpracování, změna retence nebo nový vendor.
+- [ ] RSS nebo Atom feed umožňuje odběr bez sociálních sítí a reklamních platforem.
+- [ ] Kritické změny jdou dotčeným zákazníkům přímo, běžné novinky jen lidem, kteří o ně stojí.
+- [ ] Dokumentace, help centrum a obchodní materiály se aktualizují ze stejné release poznámky.
+- [ ] Starší changelog položky zůstávají dostupné přes stabilní URL.
+
+Jedna hodinová iterace: vytvoř skeleton stránky `/changelog`, doplň poslední tři změny produktu podle šablony a přidej odkaz do patičky. Pokud máš RSS, přidej feed. Pokud ne, napiš si do backlogu technický úkol. Ano, RSS je pořád dobrý nápad. Internet ještě není úplně ztracený.
+
 ## Zdroje
 
 - ADR GitHub Organization: [Architectural Decision Records](https://adr.github.io/)
+- Keep a Changelog: [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/)
+- Semantic Versioning: [Semantic Versioning 2.0.0](https://semver.org/)
+- RSS Advisory Board: [RSS 2.0 Specification](https://www.rssboard.org/rss-specification)
+- IETF / RFC Editor: [RFC 4287 — The Atom Syndication Format](https://www.rfc-editor.org/rfc/rfc4287)
 - Atlassian: [Working with WIP limits for kanban](https://www.atlassian.com/agile/kanban/wip-limits)
 - European Commission: [Can someone else process the data on my organisation’s behalf?](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/obligations/controllerprocessor/can-someone-else-process-data-my-organisations-behalf_en)
 - European Union Your Europe: [Contracts with consumers](https://europa.eu/youreurope/business/selling-in-eu/consumer-contracts-guarantees/consumer-contracts/index_en.htm)
@@ -3126,7 +3253,6 @@ Jedna hodinová iterace: vytvoř stránku „Trust & Privacy“ s pěti bloky: k
 - European Data Protection Board: [Pokyny 4/2019 k článku 25 — záměrná a standardní ochrana osobních údajů](https://www.edpb.europa.eu/documents/guideline/guidelines-42019-on-article-25-data-protection-by-design-and-by-default_cs)
 - Google Search Central: [Creating helpful, reliable, people-first content](https://developers.google.com/search/docs/fundamentals/creating-helpful-content)
 - web.dev: [Core Web Vitals](https://web.dev/articles/vitals)
-- RSS Advisory Board: [RSS 2.0 Specification](https://www.rssboard.org/rss-specification)
 - RFC Editor: [RFC 2369 — The Use of URLs as Meta-Syntax for Core Mail List Commands](https://datatracker.ietf.org/doc/html/rfc2369)
 - RFC Editor: [RFC 8058 — Signaling One-Click Functionality for List Email Headers](https://datatracker.ietf.org/doc/html/rfc8058)
 - ÚOOÚ: [Obchodní sdělení](https://uoou.gov.cz/index.php/profesional/qa-otazky-a-odpovedi/obchodni-sdeleni)
@@ -3141,6 +3267,7 @@ Jedna hodinová iterace: vytvoř stránku „Trust & Privacy“ s pěti bloky: k
 
 ## Pracovní log
 
+- 2026-08-06: Doplněna příloha U o changelogu jako privacy-first marketingovém kanálu: uživatelské release notes, verze, RSS/Atom distribuce, privacy gate a checklist.
 - 2026-08-06: Doplněna příloha T o SaaS podmínkách a právní stránce bez právnické mlhy: obchodní podmínky, privacy notice, DPA, trust stránka, změny podmínek a checklist.
 - 2026-08-06: Doplněna příloha S o roadmapě bez feature factory: formulace výsledků, jednoduchá prioritizace, tři horizonty roadmapy, pravidelný review rituál, privacy gate před funkcí, odmítání požadavků a checklist.
 - 2026-08-06: Doplněna příloha R o referral programech a partnerství bez sledovacího cirkusu: typy doporučení, referral odkazy bez osobních údajů, férové odměny, partner kit, předávání leadů, metriky, ukončení spolupráce a checklist.
