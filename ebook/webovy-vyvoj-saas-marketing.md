@@ -242,6 +242,134 @@ Vydělávající web stojí na jasné nabídce, logické struktuře, rychlosti a
 
 ---
 
+# 3. Landing page pro SaaS: od bolesti zákazníka k první konverzi
+
+SaaS landing page má jednu hlavní práci: převést člověka z nejasného zájmu do dalšího kroku. Tím krokem nemusí být hned platba. U raného produktu je často hodnotnější domluvené demo, registrace do bety, objednaný audit, stažený checklist nebo odpověď na krátký dotazník.
+
+Chyba začíná ve chvíli, kdy stránka mluví hlavně o produktu. Zákazník ale nepřichází obdivovat architekturu. Přichází s nepříjemností, kterou chce odstranit: ztrácí čas, přichází o poptávky, nemá přehled, bojí se chyb, platí moc za ruční práci, nebo musí vysvětlovat stejnou věc pořád dokola. Landing page má tuhle bolest pojmenovat dřív, než začne ukazovat funkce.
+
+## 3.1 Začni jednou konkrétní situací
+
+První verze SaaS stránky často selže, protože chce oslovit všechny. „Platforma pro efektivní správu firemních procesů“ zní bezpečně, ale nikomu v hlavě nerozsvítí lampičku. Lepší je začít jedním přesným scénářem.
+
+Příklad pro rezervační SaaS:
+
+- Slabé sdělení: „Moderní rezervační systém pro služby.“
+- Lepší sdělení: „Naplněný kalendář bez telefonátů, zmeškaných zpráv a ručního přepisování termínů.“
+
+Příklad pro interní AI nástroj:
+
+- Slabé sdělení: „AI asistent pro znalostní bázi.“
+- Lepší sdělení: „Nováček najde správný postup za minutu místo toho, aby vyrušil tři kolegy.“
+
+Příklad pro B2B reporting:
+
+- Slabé sdělení: „Dashboard pro manažerská data.“
+- Lepší sdělení: „Každé pondělí víš, kde obchod stojí, bez skládání pěti exportů v Excelu.“
+
+Princip je jednoduchý: napiš headline tak, aby si správný člověk řekl „jo, přesně tohle mě štve“. Pokud si řekne jen „to zní profesionálně“, stránka je zdvořilá, ale neprodává.
+
+## 3.2 Konverze není tlačítko, ale slib
+
+Tlačítko „Začít zdarma“ samo o sobě nic nezachrání. Konverze vzniká ve chvíli, kdy je návštěvníkovi jasné, co se stane po kliknutí a proč to stojí za jeho čas.
+
+Dobré CTA odpovídá na tři otázky:
+
+1. Co přesně udělám?
+2. Kolik mě to bude stát času, peněz nebo pozornosti?
+3. Co dostanu jako další výsledek?
+
+Místo obecného „Kontaktujte nás“ zkus konkrétnější varianty:
+
+- „Domluvit 20minutové demo“
+- „Získat návrh řešení“
+- „Vyzkoušet ukázkový účet“
+- „Poslat checklist ke spuštění“
+- „Zjistit, jestli nám to dává smysl“
+
+U privacy-first SaaS je fér říct i to, co se nestane: nepošleme e-mail do reklamní automatizace bez souhlasu, nebudeme obvolávat celou firmu a nebudeme sbírat víc údajů, než potřebujeme pro odpověď. To není suchá právničina. To je respekt, který umí být konkurenční výhoda.
+
+## 3.3 Formulář: čím méně polí, tím méně výmluv
+
+Každé pole ve formuláři je malá brzda. Některá jsou nutná, jiná jsou jen pro pohodlí obchodníka. U první konverze sbírej minimum údajů, které opravdu potřebuješ k doručení dalšího kroku.
+
+Pro první kontakt obvykle stačí:
+
+- jméno,
+- e-mail,
+- krátký popis problému nebo výběr typu poptávky,
+- volitelně firma nebo web, pokud to pomáhá připravit odpověď.
+
+Co bych na první krok většinou nedával: telefon jako povinné pole, velikost rozpočtu bez vysvětlení, počet zaměstnanců jen ze zvědavosti, souhlas s marketingem schovaný jako podmínku odeslání. Pokud data nepotřebuješ, nesbírej je. Pokud je potřebuješ, vysvětli proč.
+
+Privacy-first formulář může mít krátkou větu pod tlačítkem:
+
+> Údaje použijeme jen k odpovědi na tuhle poptávku. Žádný reklamní pixel, žádné přeprodávání kontaktů, žádný newsletter bez výslovného přihlášení.
+
+Tohle je lidsky srozumitelnější než odkaz na zásady ochrany osobních údajů jako jediná odpověď na všechny obavy. Odkaz tam samozřejmě patří taky, ale nemá suplovat normální komunikaci.
+
+## 3.4 Důkaz hodnoty před důkazem technologie
+
+Technologie má na SaaS stránce místo, ale až jako podpůrný důkaz. Nejprve ukaž hodnotu. Pak teprve vysvětli, čím je produkt spolehlivý.
+
+Praktické důkazy hodnoty:
+
+- konkrétní ukázka obrazovky s popisem, co uživatel vidí,
+- minipříběh „před a po“ pro jednu typickou firmu,
+- výpočet ušetřeného času na jednoduchém příkladu,
+- šablona reportu, exportu nebo procesu,
+- krátké video bez sledovacích embedů, ideálně hostované přímo,
+- sandbox nebo demo s testovacími daty.
+
+Praktické důkazy technologie:
+
+- kde jsou data provozovaná,
+- jak fungují zálohy,
+- kdo má přístup k administraci,
+- jak lze data exportovat,
+- co se stane při ukončení služby,
+- jaké integrace jsou opravdu potřeba.
+
+Pořadí je důležité. „Běžíme v EU a máme export dat“ je silný argument pro člověka, který už chápe hodnotu produktu. Pokud ale ještě neví, proč by měl produkt chtít, technické důkazy se odrazí od zdi jako ping pongový míček v serverovně.
+
+## 3.5 Jedna landing page, jedna hypotéza
+
+Každá první verze stránky by měla testovat jednu hlavní hypotézu. Ne deset najednou. Když změníš headline, cílovku, cenu, CTA, formulář a nabídku dema současně, nevíš, co zabralo.
+
+Příklady dobrých hypotéz:
+
+- „Malé ordinace chtějí online rezervace hlavně kvůli menšímu počtu telefonátů.“
+- „E-shopy řeší vratky víc než rychlost expedice.“
+- „B2B zákazníci raději požádají o ukázku s vlastními daty než o obecné demo.“
+- „Privacy-first provoz je pro veřejný sektor silnější argument než nižší cena.“
+
+K hypotéze patří jednoduché měření. Stačí sledovat, kolik lidí přijde na stránku, kolik klikne na hlavní CTA a kolik dokončí další krok. Nemusíš kvůli tomu rozsvítit celý reklamní lunapark. Měř události, které odpovídají rozhodnutí uživatele, a nesbírej identitu tam, kde stačí agregované číslo.
+
+Codyho komentář: nejlepší landing page není ta, která má nejvíc sekcí. Je to ta, po které víš, jestli trh trochu kývl hlavou, nebo jestli sis jen krásně přepsal vlastní domněnku do webového fontu.
+
+## 3.6 Checklist SaaS landing page
+
+Před publikací první nebo nové verze si projdi stránku jako člověk, který nemá čas a nezná interní slovník týmu:
+
+- Je do pěti vteřin jasné, pro koho produkt je?
+- Popisuje headline konkrétní problém nebo výsledek?
+- Má stránka jedno hlavní CTA a jasný další krok?
+- Ví návštěvník, co se stane po odeslání formuláře?
+- Sbírá formulář jen údaje nutné pro další krok?
+- Je privacy věta napsaná lidsky, ne jen právním odkazem?
+- Ukazuje stránka produkt, proces nebo výsledek na konkrétním příkladu?
+- Obsahuje stránka odpovědi na hlavní námitky: cena, migrace, bezpečnost, data, podpora?
+- Dá se stránka měřit bez invazivních trackerů?
+- Má každá externí služba jasný důvod, vlastníka a datovou odpověď?
+
+Pokud na polovinu odpovědí říkáš „to dopíšeme později“, později už možná budeš vyhodnocovat špatná data ze špatné stránky. Nečekej na perfektní design, ale nepublikuj mlhu.
+
+## Shrnutí kapitoly
+
+SaaS landing page má začít konkrétní bolestí zákazníka, ne seznamem funkcí. Konverze je slib srozumitelného dalšího kroku. Privacy-first přístup stránku nezpomaluje; nutí ji sbírat méně dat, lépe vysvětlovat důvěru a měřit jen to, co pomáhá rozhodování.
+
+---
+
 ## Zdroje
 
 - Evropská komise: Data protection — https://commission.europa.eu/law/law-topic/data-protection_en
@@ -257,3 +385,4 @@ Vydělávající web stojí na jasné nabídce, logické struktuře, rychlosti a
 
 - 2026-08-06: Založena struktura e-booku a dopsána první kapitola o privacy-first webu jako konkurenční výhodě včetně praktického checklistu a zdrojů.
 - 2026-08-06: Dopsána druhá kapitola o základech vydělávajícího webu: nabídka, struktura, rychlost, důvěra a checklist obchodní stránky.
+- 2026-08-06: Dopsána třetí kapitola o SaaS landing page: bolest zákazníka, CTA, formulář, důkazy hodnoty, hypotézy a checklist.
