@@ -827,13 +827,159 @@ Dobrá analytika je malá, čitelná a napojená na rozhodnutí. Privacy-first p
 
 ---
 
+# 7. Provoz v Evropě: hosting, domény, e-mail, zálohy a incidenty
+
+Web nebo SaaS není hotový ve chvíli, kdy vypadá dobře na monitoru zakladatele. Hotový začíná být až ve chvíli, kdy víš, kde běží, kdo k němu má přístup, jak se obnoví po průšvihu a co uděláš, když v pátek v 16:47 spadne databáze. Ano, přesně v tu dobu. Produkční incidenty mají kalendářní humor splašeného klauna.
+
+Privacy-first provoz v Evropě není jen „vezmeme evropský server a nalepíme na něj GDPR“. Je to soubor rozhodnutí: evropská infrastruktura, omezené přístupy, jasné smlouvy, zálohy, incident plán a minimum zbytečných třetích stran. Evropská komise připomíná, že pro předávání osobních údajů mimo EU existují samostatná pravidla, včetně adekvátních rozhodnutí a standardních smluvních doložek: https://commission.europa.eu/law/law-topic/data-protection/international-dimension-data-protection_en Pro malý tým je nejjednodušší začít tak, aby se citlivá data mimo Evropu vůbec zbytečně neposílala.
+
+## 7.1 Hosting vybírej podle odpovědnosti, ne podle screenshotu dashboardu
+
+První otázka u hostingu není „kolik stojí server“. První otázka je „co se stane, když se něco pokazí“. Levný hosting bez jasných záloh, monitoringu a supportu může být dražší než kvalitní evropský provoz, protože výpadek neplatíš jen fakturou. Platíš ho důvěrou.
+
+Při výběru hostingu si udělej krátký provozní profil:
+
+| Oblast | Otázka | Dobrý signál |
+| --- | --- | --- |
+| Region | Kde běží aplikace, databáze a zálohy? | EU/EHP region je výchozí volba, ne příplatek schovaný v nastavení |
+| Přístupy | Kdo má admin práva? | MFA, individuální účty, žádné sdílené heslo v chatu |
+| Zálohy | Jak často a kam se zálohuje? | Automatické zálohy, oddělené úložiště, test obnovy |
+| Monitoring | Jak zjistíme výpadek? | Externí uptime check a alert na člověka, ne jen graf v panelu |
+| Export | Jak odejdeme jinam? | Databáze i soubory lze rozumně exportovat |
+| Subdodavatelé | Kdo další vidí data? | Jasně popsaní subprocessoři a smluvní dokumentace |
+
+Praktický postup pro malý SaaS:
+
+- Aplikaci, databázi a objektové úložiště drž ve stejném evropském regionu, pokud nemáš silný důvod dělat opak.
+- Nepoužívej globální CDN pro citlivý obsah jen proto, že se snadno zapíná. Statické obrázky jsou něco jiného než zákaznické soubory.
+- Odděl produkci, staging a lokální vývoj. Produkční data nepatří do notebooku každého vývojáře.
+- Přístupy řeš přes osobní účty a role. Když někdo odejde, nemá se vypínat „heslo pro celý tým“.
+- Dokumentuj provozní rozhodnutí do jedné stránky: poskytovatel, region, domény, DNS, zálohy, monitoring, odpovědná osoba.
+
+Codyho komentář: evropský hosting není kouzelné brnění. Pořád můžeš špatně nastavit databázi, veřejný bucket nebo admin účet bez MFA. Ale když začneš u evropského regionu, datové minimalizace a rozumných přístupů, máš mnohem méně věcí, které později musíš složitě vysvětlovat právníkovi, zákazníkovi nebo svému budoucímu já.
+
+## 7.2 Doména a DNS jsou kritická infrastruktura
+
+Doména je často nejpodceňovanější aktivum firmy. Bez ní nefunguje web, e-mail, přihlášení, odkazy v kampaních ani důvěryhodnost značky. Přitom bývá registrovaná na osobní e-mail zakladatele z roku 2012. To je romantické asi jako záloha na flešce v šuplíku.
+
+U evropského projektu dává smysl zvážit doménu `.eu`, pokud značka cílí na více evropských trhů nebo chce jasně komunikovat evropskou identitu. EURid popisuje registraci `.eu` domény přes akreditované registrátory a vlastní pravidla způsobilosti: https://eurid.eu/en/get-your-eu/find-a-registrar/ Neznamená to, že `.cz` nebo jiná národní doména je špatně. Znamená to, že doména má být vědomé rozhodnutí, ne historická náhoda.
+
+DNS checklist:
+
+- Registrátor má MFA a přístup má aspoň jeden záložní administrátor.
+- Doména má zapnuté automatické prodloužení a aktuální platební údaje.
+- DNS záznamy jsou dokumentované: web, mail, ověřovací záznamy, subdomény.
+- Změny DNS se nedělají naslepo v produkci bez poznámky, proč vznikly.
+- TTL je rozumný: krátký při migraci, delší při stabilním provozu.
+- Kritické ověřovací záznamy pro e-mail a služby mají jasného vlastníka.
+
+Příklad jednoduché evidence:
+
+| Záznam | Účel | Vlastník | Poznámka |
+| --- | --- | --- | --- |
+| `A` / `AAAA` pro web | Produkční web | Vývoj | Mění se jen při migraci hostingu |
+| `MX` | Příjem e-mailu | Provoz | Ověřit po každé změně poskytovatele |
+| `TXT` SPF | Ochrana odesílání | Provoz/marketing | Udržovat krátké, neřetězit chaos |
+| `TXT` DKIM | Podepisování e-mailů | Provoz | Jeden záznam na odesílací službu |
+| `TXT` DMARC | Politika doručitelnosti | Provoz | Začít monitorováním, postupně zpřísnit |
+
+## 7.3 E-mail je produktový kanál, ne odpadní trubka
+
+E-mail řeší registrace, reset hesla, faktury, onboarding, podporu i obchod. Když nefunguje doručitelnost, uživatelé nevidí produkt. Když je špatně nastavená bezpečnost, může někdo posílat zprávy jménem značky. A když se marketing nalepí na stejnou doménu bez pravidel, reputace transakčních e-mailů začne kýchat.
+
+Minimum pro seriózní provoz:
+
+- Odděl transakční a marketingové odesílání aspoň subdoménou, například `mail.example.com` a `news.example.com`.
+- Nastav SPF, DKIM a DMARC. Bez toho je doručitelnost loterie v kabátu technické disciplíny.
+- Neposílej newsletter lidem, kteří čekali jen fakturu nebo odpověď na poptávku.
+- Do e-mailového nástroje neposílej víc dat, než potřebuje šablona a segmentace.
+- Preferuj RSS a přímé odkazy pro obsah, newsletter používej jako dobrovolný kanál, ne past.
+- Měj adresy typu `support@`, `billing@` a `security@` napojené na proces, ne na zapomenutou schránku.
+
+Privacy-first detail: u transakčních e-mailů často stačí e-mailová adresa, jazyk, typ zprávy a technický stav doručení. Nepotřebuješ do odesílací služby posílat celý zákaznický profil, interní poznámky ani obchodní hodnotu účtu. Čím méně dat u subdodavatele leží, tím méně dat musíš řešit při auditu, incidentu nebo ukončení služby.
+
+## 7.4 Zálohy nejsou zálohy, dokud neproběhla obnova
+
+Každý má zálohy. Až do první obnovy. Pak se ukáže, že zálohy neobsahují přílohy, šifrovací klíč je v systému, který právě shořel, a poslední použitelný dump je starý šest týdnů. To je moment, kdy se z technického dluhu stává velmi drahé divadlo.
+
+CERT-EU ve svých doporučeních zmiňuje pravidlo 3-2-1: tři kompletní kopie dat, dvě lokálně na různých typech médií a alespoň jedna mimo lokalitu: https://cert.europa.eu/publications/security-guidance/security-guidance-22-001---cybersecurity-mitigation-measures-against-critical-threats/ Pro malý web nebo SaaS z toho plyne jednoduchý provozní standard:
+
+- Zálohuj databázi, uživatelské soubory, konfiguraci infrastruktury a důležité tajné hodnoty v bezpečném správci tajemství.
+- Nastav RPO: kolik dat si můžeš dovolit ztratit. U poptávkového webu možná den, u SaaS často minuty až hodiny.
+- Nastav RTO: za jak dlouho musí služba znovu běžet. Bez čísla se obnova vždycky tváří jednodušší, než je.
+- Zálohy šifruj a drž odděleně od produkčního účtu. Útočník s admin účtem nemá dostat i tlačítko „smazat všechny zálohy“.
+- Jednou měsíčně udělej test obnovy do izolovaného prostředí a zapiš výsledek.
+
+Příklad minimálního režimu:
+
+| Systém | Frekvence | Retence | Test obnovy |
+| --- | --- | --- | --- |
+| Produkční databáze | Denně, u SaaS častěji | 30 dní + měsíční archiv | Měsíčně |
+| Uživatelské soubory | Denně nebo průběžně | 30–90 dní podle rizika | Čtvrtletně |
+| DNS a infrastruktura | Po každé změně | Historie v Gitu nebo exportu | Při změně poskytovatele |
+| E-mailové šablony | Po změně | Historie v repozitáři | Při release |
+
+## 7.5 Incident plán musí být krátký, jinak ho nikdo nepoužije
+
+Incident plán pro malý tým nemusí mít padesát stran. V krizi nikdo nečte román. Potřebuješ vědět, kdo rozhoduje, koho kontaktovat, jak zastavit škodu, jak obnovit provoz a co se musí oznámit.
+
+GDPR u porušení zabezpečení osobních údajů vyžaduje oznámení dozorovému úřadu bez zbytečného odkladu a nejpozději do 72 hodin, pokud je pravděpodobné riziko pro práva a svobody lidí: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/obligations/what-data-breach-and-what-do-we-have-do-case-data-breach_en NIS2 pro vybrané základní a důležité subjekty přidává vlastní režim hlášení významných incidentů, včetně včasného varování do 24 hodin a oznámení do 72 hodin: https://digital-strategy.ec.europa.eu/en/faqs/directive-measures-high-common-level-cybersecurity-across-union-nis2-directive-faqs Ne každý malý SaaS spadá do NIS2, ale časová disciplína z něj je dobrý provozní vzor.
+
+Minimalistický incident plán:
+
+1. **Detekce:** odkud přišel alert, co přesně nefunguje, jaký je dopad.
+2. **Zastavení škody:** vypnout kompromitovaný klíč, odstavit endpoint, zablokovat účet, přepnout režim údržby.
+3. **Ochrana důkazů:** uložit logy, časy, změny a komunikaci. Nezametat stopy jako ve špatné kriminálce.
+4. **Obnova:** použít ověřený rollback nebo zálohu, ověřit integritu dat.
+5. **Komunikace:** interně určit vlastníka, externě říct pravdu včas a srozumitelně.
+6. **Poučení:** po incidentu sepsat příčinu, dopad, opravu a preventivní kroky.
+
+Praktická šablona zápisu:
+
+| Pole | Co napsat |
+| --- | --- |
+| Začátek incidentu | Kdy jsme problém zjistili a odkud |
+| Dopad | Které služby, zákazníci a data byly zasažené |
+| Stav dat | Jestli šlo o dostupnost, ztrátu, změnu nebo únik dat |
+| Kroky | Co jsme udělali a kdy |
+| Oznámení | Zda je nutné kontaktovat zákazníky, úřad nebo dodavatele |
+| Prevence | Co změníme, aby se to neopakovalo |
+
+## 7.6 Checklist evropského provozu
+
+Před spuštěním nebo pravidelně jednou za čtvrtletí projdi:
+
+- Běží aplikace, databáze, úložiště a zálohy v očekávaném evropském regionu?
+- Víme, kteří dodavatelé a subprocessoři zpracovávají osobní údaje?
+- Má každý administrátor vlastní účet, MFA a přiměřenou roli?
+- Máme dokumentované DNS, doménu, obnovu certifikátů a odpovědné osoby?
+- Jsou SPF, DKIM a DMARC nastavené a hlídané?
+- Máme automatické zálohy i pravidelný test obnovy?
+- Jsou tajné klíče mimo repozitář a mimo chatovací historii?
+- Máme externí monitoring dostupnosti a alert na konkrétního člověka?
+- Existuje krátký incident plán a ví tým, kde ho najde?
+- Umíme vysvětlit zákazníkovi, kde jsou jeho data a jak se chrání?
+
+Pokud na některou otázku odpovíš „asi“, není to katastrofa. Je to úkol. Provozní dospělost nevzniká tím, že jednou napíšeš dokument. Vzniká tím, že se malé věci opakovaně kontrolují dřív, než se promění ve velký požár.
+
+## Shrnutí kapitoly
+
+Evropský provoz je kombinace techniky, smluv a návyků. Hosting v EU pomáhá, ale nestačí. Potřebuješ znát tok dat, chránit doménu a DNS, nastavit e-mailovou důvěryhodnost, testovat zálohy a mít incident plán, který se dá použít i ve stresu. Privacy-first provoz je nakonec velmi praktická disciplína: méně zbytečných dat, méně zbytečných dodavatelů, jasnější odpovědnost a rychlejší obnova, když se něco pokazí.
+
+---
+
 ## Zdroje
 
 - Evropská komise: Data protection — https://commission.europa.eu/law/law-topic/data-protection_en
 - Evropská komise: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en
 - Evropská komise: What information must be given to individuals whose data is collected? — https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/what-information-must-be-given-individuals-whose-data-collected_en
 - Evropská komise: Information for individuals, consent and rights — https://commission.europa.eu/law/law-topic/data-protection/information-individuals_en
+- Evropská komise: International dimension of data protection — https://commission.europa.eu/law/law-topic/data-protection/international-dimension-data-protection_en
+- Evropská komise: What is a data breach and what do we have to do in case of a data breach? — https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/obligations/what-data-breach-and-what-do-we-have-do-case-data-breach_en
 - CNIL: Use analytics on your websites and applications — https://www.cnil.fr/en/sheet-ndeg16-use-analytics-your-websites-and-applications
+- CERT-EU: Cybersecurity mitigation measures against critical threats — https://cert.europa.eu/publications/security-guidance/security-guidance-22-001---cybersecurity-mitigation-measures-against-critical-threats/
+- European Commission: NIS2 Directive FAQs — https://digital-strategy.ec.europa.eu/en/faqs/directive-measures-high-common-level-cybersecurity-across-union-nis2-directive-faqs
+- EURid: Find a registrar — https://eurid.eu/en/get-your-eu/find-a-registrar/
 - Google Search Central: Understanding Google Page Experience — https://developers.google.com/search/docs/appearance/page-experience
 - Google Search Central: Creating helpful, reliable, people-first content — https://developers.google.com/search/docs/fundamentals/creating-helpful-content
 - Google Search Central: SEO Starter Guide — https://developers.google.com/search/docs/fundamentals/seo-starter-guide
@@ -855,3 +1001,4 @@ Dobrá analytika je malá, čitelná a napojená na rozhodnutí. Privacy-first p
 - 2026-08-06: Dopsána čtvrtá kapitola o obsahovém marketingu bez závislosti na algoritmech, včetně publikační základny, distribuce, měření a checklistu.
 - 2026-08-06: Dopsána pátá kapitola o produktivitě malého týmu: tok práce, jeden zdroj pravdy, omezení rozpracovanosti, dokumentace rozhodnutí, meetingy a automatizace.
 - 2026-08-06: Dopsána šestá kapitola o privacy-first analytice: měřicí plán, vrstvy měření, výběr nástroje, eventový slovník, reporty a checklist.
+- 2026-08-06: Dopsána sedmá kapitola o evropském provozu: hosting, domény, e-mail, zálohy, incidenty a provozní checklist.
