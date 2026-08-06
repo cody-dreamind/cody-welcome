@@ -2550,6 +2550,130 @@ Privacy-first detail: nepředávej do onboardingu celé obchodní poznámky, pok
 
 Jedna hodinová iterace: projdi posledních deset obchodních příležitostí a u každé doplň jednu větu „zákazník kupuje, protože…“ a jeden jasný další krok. Pokud to nejde napsat, příležitost není zralá — nebo jsi ji jen zapomněl pochovat s úctou.
 
+# Příloha Q: Experimenty bez dark patterns a metrického divadla
+
+Růstový experiment má být malý způsob, jak se něco naučit. Nemá být záminka pro manipulaci, nátlak nebo sběr dat „kdyby se někdy hodila“. Evropská komise v rámci digitální férovosti popisuje problematické návrhové vzory jako postupy, které mohou narušovat ekonomické chování spotřebitelů, a EDPB ve svých pokynech k rozhraním sociálních médií rozebírá klamavé návrhové vzory z pohledu ochrany osobních údajů. Pro malý SaaS z toho plyne jednoduché pravidlo: experimentuj s nabídkou, vysvětlením a produktem, ne s tím, kolik tlaku uživatel ještě vydrží.
+
+**Codyho komentář:** když experiment potřebuje, aby si člověk nevšiml, co se děje, není to growth. Je to pastička na důvěru. A důvěra se blbě retargetuje, když ji jednou rozmačkáš.
+
+## Q.1 Začni otázkou, ne variantou tlačítka
+
+Špatný experiment začíná větou: „Zkusíme zelené tlačítko.“ Lepší experiment začíná otázkou: „Rozumí návštěvník do deseti sekund, komu produkt pomáhá a co má udělat dál?“
+
+Před každým experimentem napiš:
+
+| Pole | Příklad |
+| --- | --- |
+| Otázka | Pochopí freelance účetní, že produkt šetří čas při předávání dokladů? |
+| Hypotéza | Když hero sekce ukáže konkrétní pracovní situaci, víc lidí otevře demo. |
+| Změna | Přepsat nadpis, podnadpis a první CTA; nedotýkat se pricingu. |
+| Signál | Klik na demo, scroll k ukázce workflow, odpověď na krátký feedback. |
+| Stop pravidlo | Po 14 dnech nebo po dostatečném počtu relevantních návštěv vyhodnotit ručně. |
+| Riziko | Lidé mohou kliknout víc, ale čekat jiný výsledek než produkt dodá. |
+
+Tohle je nudnější než dashboard s padesáti grafy. Výborně. Nudné experimenty se lépe vyhodnocují.
+
+## Q.2 Měř rozhodnutí, ne nervózní pohyby myší
+
+Privacy-first experiment nepotřebuje heatmapu každého pohybu, záznam obrazovky a identifikaci člověka napříč webem. Většina rozhodnutí v malém SaaS se dá dělat z kombinace agregovaných eventů, kvalitativní zpětné vazby a několika obchodních výsledků.
+
+Stačí měřit například:
+
+- zobrazení klíčové stránky,
+- klik na hlavní CTA,
+- zahájení registrace,
+- dokončení první hodnotné akce v produktu,
+- žádost o demo,
+- odpověď na dobrovolnou feedback otázku.
+
+Co naopak obvykle nepotřebuješ:
+
+- session replay se skutečným obsahem formulářů,
+- fingerprinting zařízení,
+- sledování napříč cizími weby,
+- ukládání kompletních URL s tokeny nebo osobními údaji,
+- export syrových kontaktních dat do reklamních publik.
+
+Když si nejsi jistý, vrať se k principu minimalizace dat z GDPR článku 5: sbírej údaje přiměřené, relevantní a omezené na to, co je nezbytné pro daný účel. Experiment není kouzelné zaklínadlo, které zbytečný sběr dat promění v rozumný nápad.
+
+## Q.3 Férový experiment nesmí poškodit uživatele
+
+Experimenty v SaaS často sahají na pricing, onboarding, trial, formuláře nebo zrušení účtu. To jsou citlivá místa, protože člověk tam řeší peníze, čas nebo kontrolu nad vlastními daty.
+
+Nedělej experiment, který:
+
+- schová zrušení účtu hlouběji než registraci,
+- předvybere marketingový souhlas jen proto, že to zvedne číslo,
+- ukáže falešnou naléhavost typu „zbývá poslední místo“, když to není pravda,
+- zkomplikuje export dat,
+- porovnává ceny podle země bez jasného důvodu a vysvětlení,
+- záměrně mate mezi „pokračovat zdarma“ a „začít placený plán“.
+
+Lepší alternativy:
+
+- přidej srozumitelnější vysvětlení hodnoty tarifu,
+- nabídni kratší demo video místo dalšího pop-upu,
+- zjednoduš formulář o jedno nepovinné pole,
+- přidej ukázková data pro rychlejší první výsledek,
+- ukaž export dat přímo v nastavení účtu,
+- vysvětli, co se stane po skončení trialu.
+
+Férovost není jen etika. Je to produktová kvalita. Když uživatel přesně ví, do čeho jde, support má méně zbytečných dotazů a obchod nemusí žehlit očekávání, která web nafoukl jako balón na pouti.
+
+## Q.4 Vyhodnocuj jako dospělý, ne jako dashboardový básník
+
+Ne každý zelený graf znamená dobré rozhodnutí. Když zvýšíš počet registrací, ale klesne aktivace, možná jsi jen nalákal špatné lidi. Když zvýšíš kliky na CTA, ale přibude zklamaných demo callů, nadpis slibuje něco jiného než produkt dodává.
+
+Vyhodnocení napiš jako krátké rozhodnutí:
+
+```markdown
+# Experiment: Hero pro účetní kanceláře
+
+## Otázka
+Rozumí návštěvník rychleji konkrétní hodnotě produktu?
+
+## Co jsme změnili
+Přepsali jsme nadpis, podnadpis a CTA na homepage.
+
+## Co jsme viděli
+Více lidí otevřelo demo, ale část čekala fakturační funkce, které produkt nemá.
+
+## Rozhodnutí
+Ponechat konkrétnější jazyk, ale doplnit jasné vymezení: nejsme účetní systém, řešíme předávání podkladů.
+
+## Další krok
+Upravit sekci „pro koho produkt není“ a sledovat kvalitu demo poptávek.
+```
+
+Tenhle zápis je důležitější než screenshot grafu. Za měsíc budeš vědět, proč jste změnu udělali, co jste se naučili a čemu se vyhnout příště.
+
+## Q.5 Experiment backlog bez chaosu
+
+Malý tým nepotřebuje nekonečný backlog nápadů. Potřebuje pár experimentů, které navazují na aktuální obchodní problém.
+
+Použij jednoduché skóre 1–3:
+
+| Kritérium | Otázka |
+| --- | --- |
+| Dopad | Pomůže to přímo akvizici, aktivaci, retenci nebo důvěře? |
+| Jistota | Máme signál z uživatelských rozhovorů, supportu nebo obchodních callů? |
+| Náročnost | Dá se to udělat a vyhodnotit bez velkého refaktoru? |
+| Privacy riziko | Vyžaduje to nová osobní data, nového vendora nebo citlivější tracking? |
+
+Vyber experiment s dobrým dopadem, rozumnou jistotou, nízkou náročností a nízkým privacy rizikem. Pokud privacy riziko vychází vysoké, nejdřív navrhni méně invazivní variantu. Třeba místo session replaye udělej pět krátkých rozhovorů nebo přidej dobrovolnou otázku po dokončení akce.
+
+## Q.6 Checklist experimentu
+
+- Má experiment jasnou otázku, hypotézu a stop pravidlo?
+- Měříš jen signály potřebné k rozhodnutí?
+- Umíš experiment vysvětlit zákazníkovi bez trapného kašlání do rukávu?
+- Nezhoršuje varianta zrušení účtu, export dat, souhlas nebo pricingovou transparentnost?
+- Máš předem dané, co znamená ponechat, zahodit nebo upravit?
+- Zapisuješ výsledek tak, aby ho pochopil i někdo za tři měsíce?
+- Zkontroloval někdo privacy dopad před nasazením nového měření nebo vendora?
+
+Jedna hodinová iterace: vyber jeden experiment z aktuálního webu nebo onboarding flow a napiš k němu otázku, hypotézu, signál, stop pravidlo a privacy riziko. Pokud neumíš vyplnit privacy riziko, experiment ještě nespouštěj. Dashboard počká. Uživatel ne.
+
 ## Zdroje
 
 - ADR GitHub Organization: [Architectural Decision Records](https://adr.github.io/)
@@ -2564,6 +2688,8 @@ Jedna hodinová iterace: projdi posledních deset obchodních příležitostí a
 - EUR-Lex: [Directive (EU) 2022/2555 — NIS2, Article 21](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32022L2555)
 - EUR-Lex: [ePrivacy Directive 2002/58/EC](https://eur-lex.europa.eu/eli/dir/2002/58/oj?locale=en)
 - European Data Protection Board: [Guidelines 05/2020 on consent under Regulation 2016/679](https://www.edpb.europa.eu/documents/guideline/guidelines-052020-on-consent-under-regulation-2016679_en)
+- European Data Protection Board: [Guidelines 03/2022 on deceptive design patterns in social media platform interfaces](https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-032022-deceptive-design-patterns-social-media-platform_en)
+- European Commission: [Digital fairness fitness check](https://commission.europa.eu/law/law-topic/consumer-protection-law/digital-fairness-fitness-check_en)
 - ÚOOÚ: [Cookies — otázky a odpovědi](https://uoou.gov.cz/verejnost/qa-otazky-a-odpovedi/cookies)
 - CNIL: [Use analytics on your websites and applications](https://www.cnil.fr/en/sheet-ndeg16-use-analytics-your-websites-and-applications)
 - CNIL: [Cookies — solutions pour les outils de mesure d'audience](https://www.cnil.fr/fr/cookies-solutions-pour-les-outils-de-mesure-daudience)
@@ -2597,6 +2723,7 @@ Jedna hodinová iterace: projdi posledních deset obchodních příležitostí a
 
 ## Pracovní log
 
+- 2026-08-06: Doplněna příloha Q o férových experimentech bez dark patterns: hypotézy, minimalizace měření, ochrana uživatele, vyhodnocení, backlog a checklist.
 - 2026-08-06: Doplněna příloha P o B2B prodeji bez CRM cirkusu: jednoduchá pipeline, discovery otázky, minimalizace dat v CRM, hodnotné follow-upy, předání do onboardingu a checklist.
 - 2026-08-06: Doplněna příloha O o férovém offboardingu zákazníka: export dat, zrušení účtu, retence po odchodu, exit feedback a checklist.
 - 2026-08-05: Doplněna příloha N o provozním dashboardu bez datového smogu: rozdělení dashboardů, privacy-first telemetry, prahy alertů, lidské překlady metrik a checklist.
