@@ -3614,6 +3614,152 @@ Dobrá znalostní báze není nejdelší. Je to ta, která zkrátí přerušení
 
 ---
 
+# Příloha Y: Přenositelnost dat a exit plán bez paniky
+
+Privacy-first SaaS se nepozná podle toho, že zákazníka zamkne do systému a pak tomu říká „ekosystém“. Pozná se podle toho, že zákazník může kdykoliv rozumně odejít, vzít si data, ověřit jejich úplnost a pokračovat jinde. To není slabina produktu. To je důkaz, že produkt stojí na hodnotě, ne na rukojmích.
+
+Exit plán má dvě strany. První je zákaznická: jak člověk získá svá data a ukončí službu bez detektivní práce. Druhá je interní: jak se tým zbaví vlastního dodavatele, hostingu, analytiky, e-mailového nástroje nebo payment integrace, když cena, dostupnost, právní riziko nebo kvalita přestanou dávat smysl.
+
+V evropském kontextu je dobré sledovat i regulatorní směr. GDPR už dlouho řeší právo na přenositelnost osobních údajů. Evropský Data Act navíc od 12. září 2025 posiluje pravidla pro přechod mezi službami zpracování dat, typicky cloudem a podobnou infrastrukturou. Praktický závěr pro malý SaaS: navrhuj exporty, smlouvy a architekturu tak, aby změna dodavatele nebyla archeologická expedice v bahně.
+
+**Codyho komentář:** Vendor lock-in je často jen technický dluh v obleku. Má prezentaci, logo a account manažera, ale pořád je to dluh.
+
+## Y.1 Export není tlačítko, ale produktová funkce
+
+Export dat navrhuj stejně pečlivě jako onboarding. Nestačí dát uživateli ZIP a doufat, že se v něm vyzná jeho budoucí já, právník, nový dodavatel a svatý Petr.
+
+Dobrý export má mít:
+
+- **Rozsah:** jasně říká, které typy dat obsahuje a které ne.
+- **Formát:** používá čitelné a běžné formáty jako CSV, JSON, PDF nebo strukturovaný ZIP.
+- **Dokumentaci:** obsahuje `README` s popisem polí, časových zón, měn, identifikátorů a vazeb mezi soubory.
+- **Opakovatelnost:** zákazník si ho může vytvořit sám, ne jen přes support v úterý mezi 9:12 a 9:17.
+- **Integritu:** obsahuje datum vytvoření, verzi exportu a ideálně kontrolní součet souborů.
+- **Bezpečnost:** export je dostupný jen oprávněné roli, je časově omezený a jeho vytvoření se loguje.
+
+Příklad struktury exportu:
+
+```text
+export-2026-08-06/
+  README.md
+  account.json
+  users.csv
+  projects.csv
+  invoices/
+    invoice-2026-001.pdf
+  audit-log.csv
+  checksums.sha256
+```
+
+U každého citlivějšího exportu si polož otázku: „Kdyby se tenhle soubor omylem přeposlal mimo firmu, kolik škody umí napáchat?“ Podle odpovědi nastav expiraci odkazu, oprávnění, maskování polí a auditní stopu.
+
+## Y.2 Interní exit plán pro dodavatele
+
+Každý kritický dodavatel má mít předem napsané: jak odejít. Ne proto, že mu nevěříš. Protože důvěra není náhrada za plán.
+
+U každého důležitého vendoru si drž jednoduchou kartu:
+
+```text
+Dodavatel: E-mailová platforma
+Kritičnost: vysoká
+Co u něj běží: transakční e-maily, šablony, reputace domény
+Jaká data drží: e-mail, jméno, události doručení, odhlášení
+Export: kontakty CSV, suppression list CSV, šablony HTML
+Náhrada: evropský SMTP provider / vlastní relay
+Odhad migrace: 1 až 2 dny
+Riziko odchodu: ztráta reputace, špatné odhlášení, duplicitní e-maily
+Poslední test: 2026-08-06
+```
+
+Nejčastější chyba je řešit jen data a zapomenout na provozní okolí. U e-mailu potřebuješ suppression list, DKIM/SPF/DMARC nastavení, šablony a historii problémů s doručitelností. U analytiky potřebuješ definice eventů. U hostingu potřebuješ DNS, proměnné prostředí, build postup, zálohy a přístupové účty.
+
+Minimum pro každý kritický vendor:
+
+- víš, kde jsou data a jaký mají formát,
+- znáš kontaktní a smluvní cestu pro ukončení,
+- máš vybranou alespoň jednu realistickou alternativu,
+- umíš obnovit službu bez jednoho konkrétního člověka,
+- máš pravidlo, kdy se vendor stává moc rizikovým.
+
+## Y.3 Datový model bez slepých uliček
+
+Přenositelnost nezačíná na stránce „Export“. Začíná v datovém modelu. Pokud máš všechno uložené jako bezejmenný blob, export bude později připomínat lovení klíčů z kanálu magnetem.
+
+Praktická pravidla:
+
+- Používej stabilní interní ID a nemíchej je s ID externího dodavatele.
+- Ukládej čas včetně časové zóny nebo jasně dokumentuj UTC.
+- U peněz ukládej měnu, částku v nejmenší jednotce a daňový kontext.
+- Odděl zákaznický obsah od provozních logů.
+- Neexportuj tajemství jako API klíče, session tokeny nebo interní bezpečnostní poznámky.
+- U vazeb mezi entitami dokumentuj, které pole na co odkazuje.
+
+Když navrhuješ novou funkci, přidej do Definition of Done otázku: „Jak se tahle data exportují, mažou a vysvětlují?“ Pokud odpověď zní „nějak potom“, právě jsi našel budoucí incident v larválním stádiu.
+
+## Y.4 Test exportu jako malý požární poplach
+
+Export, který nikdo nikdy neotevřel, není export. Je to talisman.
+
+Jednou za kvartál udělej malý test:
+
+1. Vytvoř testovací účet s realistickými daty.
+2. Nahraj do něj několik typů obsahu, faktur, uživatelů a nastavení.
+3. Spusť export běžnou zákaznickou cestou.
+4. Otevři soubory v obyčejných nástrojích, ne jen ve vlastním importéru.
+5. Ověř, že dokumentace popisuje všechny sloupce a vazby.
+6. Zkus data importovat do jednoduché lokální tabulky nebo testovací náhrady.
+7. Zapiš chybějící pole, nejasnosti a ruční kroky.
+
+Výsledek testu nepatří do hlavy. Patří do runbooku nebo znalostní báze. Ideálně s datem, verzí exportu a seznamem oprav.
+
+## Y.5 Zákaznická komunikace při odchodu
+
+Když zákazník odchází, není to chvíle na manipulaci. Je to chvíle ukázat kulturu firmy.
+
+Dobrá offboardingová zpráva obsahuje:
+
+- potvrzení data ukončení,
+- odkaz na export a jeho expiraci,
+- informaci, co bude s daty po ukončení,
+- kontakt pro bezpečnostní nebo fakturační dotazy,
+- férovou možnost zpětné vazby,
+- žádný labyrint s tlačítkem „neopouštěj nás, prosím, jsme křehcí“.
+
+Krátká šablona:
+
+```text
+Dobrý den,
+
+potvrzujeme ukončení účtu k 30. 9. 2026.
+
+Export dat si můžete stáhnout do 14 dnů zde: [odkaz]. Součástí exportu je popis formátu a seznam zahrnutých dat. Po uplynutí retenční doby smažeme provozní data podle našich pravidel uchování.
+
+Pokud potřebujete pomoc s exportem nebo fakturací, napište nám na support@example.eu.
+
+Děkujeme, že jste službu používali.
+```
+
+Tohle možná nevyhraje cenu za agresivní růst. Zato to vyhraje něco lepšího: důvěru lidí, kteří si pamatují, že jste se nechovali jako pastička na kreditku.
+
+## Y.6 Checklist přenositelnosti a exit plánu
+
+Jednou za kvartál projdi:
+
+- Má produkt samoobslužný export hlavních zákaznických dat?
+- Je export popsaný lidsky i technicky?
+- Obsahuje export běžné formáty, které lze otevřít mimo náš systém?
+- Ví zákazník, co export obsahuje, co neobsahuje a jak dlouho je dostupný?
+- Jsou exporty chráněné oprávněním, expirací a auditní stopou?
+- Má každý kritický vendor vlastní exit kartu?
+- Máme vybranou náhradu pro hosting, e-mail, platby, analytiku a monitoring?
+- Víme, která externí ID nesmí proniknout jako základ našeho interního datového modelu?
+- Testovali jsme obnovu nebo migraci aspoň na malém vzorku dat?
+- Je proces odchodu zákazníka stejně důstojný jako proces získání zákazníka?
+
+Přenositelnost není jen právní checkbox. Je to provozní pojištění, marketing důvěry a dobrý test architektury. Když umíš odejít ty i zákazník, paradoxně je mnohem jednodušší zůstat.
+
+---
+
 ## Zdroje
 
 - ADR GitHub Organization: [Architectural Decision Records](https://adr.github.io/)
@@ -3628,6 +3774,8 @@ Dobrá znalostní báze není nejdelší. Je to ta, která zkrátí přerušení
 - European Union Your Europe: [Unfair contract terms](https://europa.eu/youreurope/citizens/consumers/unfair-treatment/unfair-contract-terms/index_en.htm)
 - European Commission: [What is a data controller or a data processor?](https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/obligations/controllerprocessor/what-data-controller-or-data-processor_en)
 - Evropská komise: [Jaké údaje lze zpracovávat a za jakých podmínek?](https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/overview-principles/what-data-can-we-process-and-under-which-conditions_cs)
+- European Commission: [Data Act](https://digital-strategy.ec.europa.eu/en/policies/data-act)
+- EUR-Lex: [Regulation (EU) 2023/2854 — Data Act](https://eur-lex.europa.eu/eli/reg/2023/2854/oj)
 - European Commission: [NIS2 Directive: securing network and information systems](https://digital-strategy.ec.europa.eu/en/policies/nis2-directive)
 - DORA: [Software delivery performance metrics](https://dora.dev/guides/dora-metrics/)
 - EUR-Lex: [Nařízení GDPR 2016/679, článek 5, 25 a 30](https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=CELEX%3A32016R0679)
@@ -3673,6 +3821,7 @@ Dobrá znalostní báze není nejdelší. Je to ta, která zkrátí přerušení
 
 ## Pracovní log
 
+- 2026-08-06: Doplněna příloha Y o přenositelnosti dat a exit plánu: zákaznické exporty, interní vendor exit karty, datový model bez slepých uliček, test exportu, komunikace při odchodu a checklist.
 - 2026-08-06: Doplněna příloha X o znalostní bázi pro malý privacy-first SaaS tým: typy dokumentace, metadata, ADR/runbooky, aktualizace v Definition of Done, hygienu vyhledávání a checklist.
 - 2026-08-06: Doplněna příloha W o obchodním e-mailu, který pomáhá místo tlačení: typy zpráv, férové předměty, follow-upy, automatizace, privacy-first měření, šablona a checklist.
 - 2026-08-06: Doplněna příloha V o retenci bez návykového designu: návrat podle práce zákazníka, první hodnotový moment, užitečné připomínky, privacy-first retenční signály, návratové rituály, záchrana před churnem a checklist.
