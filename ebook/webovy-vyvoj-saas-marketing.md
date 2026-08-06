@@ -3937,6 +3937,300 @@ Po čtvrtém týdnu:
 
 Třicet dní není magická jednotka. Je to dost dlouho na jednu smysluplnou změnu a dost krátce na to, aby se tým neutopil v teorii. Když takový rytmus zopakuješ šestkrát, máš za půl roku produkt, který se zlepšuje pravidelně, ne jen ve chvíli, kdy někdo začne panikařit před kvartálním meetingem.
 
+# Příloha AA: Bezpečnostní dotazník bez pekla a divadla
+
+První větší B2B zákazník často nepřijde s otázkou „máte pěkný produkt?“. Přijde s tabulkou. Někdy má 40 řádků, někdy 400, občas v ní někdo nechal otázku na fyzickou ostrahu datacentra, i když prodáváš jednoduchý SaaS pro plánování schůzek. Bezpečnostní dotazník může být užitečný nákupní nástroj, nebo rituál, při kterém všichni trpí a nikdo není bezpečnější. Rozdíl dělá příprava.
+
+Cíl malého privacy-first SaaS týmu není předstírat enterprise zralost. Cíl je umět rychle, pravdivě a doložitelně vysvětlit, jak chráníš data, kde máš rizika, co už funguje a co zatím vědomě neprodáváš. Bezpečnostní odpovědi nejsou marketingová poezie. Jsou provozní závazek.
+
+**Codyho komentář:** když na otázku „šifrujete data?“ odpovíš jen „ano“, zní to hezky, ale zákazník pořád neví nic. Lepší je napsat co, kde, jaký je rozsah a kdo k tomu má přístup. Nuda? Ano. Přesně ta správná.
+
+## AA.1 Připrav si bezpečnostní balíček dřív, než ho někdo chce
+
+Bezpečnostní dotazník bolí nejvíc ve chvíli, kdy odpovědi lovíš mezi vývojářem, hostingem, obchodníkem a starým vláknem v chatu. Vytvoř si malý bezpečnostní balíček, který se dá poslat zákazníkovi nebo použít jako zdroj pro odpovědi. Nemusí to být luxusní portál. Stačí stránka v dokumentaci nebo interní složka s jasným vlastníkem.
+
+Minimum balíčku:
+
+- **Přehled služby:** co produkt dělá, pro koho je a jaká data typicky zpracovává.
+- **Datová mapa:** kategorie dat, účely, umístění, retence a přístupy.
+- **Architektura:** jednoduchý diagram aplikace, databáze, úložišť, front a externích služeb.
+- **Subdodavatelé:** vendor karta, region provozu, účel zpracování a exit plán.
+- **Bezpečnostní opatření:** autentizace, role, zálohy, logování, aktualizace, incidentní postup.
+- **Privacy dokumenty:** privacy notice, DPA, pravidla retence a kontaktní cesta pro požadavky.
+- **Omezení:** co zatím neumíš, pro jaký typ zákazníka produkt není vhodný a jaké kompenzační opatření nabízíš.
+
+Ten poslední bod je důležitý. Když malý tým nemá certifikaci, nemusí lhát mezi řádky. Může říct: „ISO certifikaci zatím nemáme, ale máme zavedený risk register, měsíční review přístupů, test obnovy záloh a bezpečnostní backlog.“ Pro rozumného zákazníka je pravdivý stav často lepší než neurčitá mlha s logem zámku.
+
+## AA.2 Odpovídej podle důkazů, ne podle přání
+
+Každá odpověď v dotazníku by měla mít jeden ze tří stavů:
+
+1. **Ano, doloženo:** opatření existuje a má odkaz na dokument, konfiguraci, runbook nebo záznam kontroly.
+2. **Částečně, s plánem:** opatření existuje jen pro část systému nebo je ve vývoji; uveď rozsah a termín dalšího kroku.
+3. **Ne, vědomě:** opatření nedává smysl pro současný rozsah, nebo ho neumíš slíbit; napiš proč a jak riziko snižuješ jinak.
+
+Příklad odpovědi na otázku „Máte pravidelný test obnovy?“:
+
+```text
+Ano. Primární databázi zálohujeme automaticky, obnovu testujeme kvartálně do odděleného prostředí. Poslední test: 2026-07-18. Výsledek: obnova prošla, doplnili jsme krok pro kontrolu oprávnění servisního účtu. Runbook: /ops/runbooks/restore.md.
+```
+
+Příklad odpovědi na otázku „Máte penetrační test?“:
+
+```text
+Částečně. Externí penetrační test plánujeme před enterprise nasazením. Dnes používáme code review, dependency scanning, základní hardening hlaviček, oddělené role a backlog bezpečnostních kontrol podle OWASP ASVS. Pro pilot nabízíme omezený rozsah dat a exportní možnost po skončení testu.
+```
+
+Taková odpověď není slabá. Je dospělá. Slabé je napsat „v souladu s nejlepšími praktikami“ a doufat, že se nikdo nezeptá, které praktiky to jsou. OWASP ASVS je užitečný referenční rámec pro technické bezpečnostní kontroly webových aplikací a dá se použít i jako interní checklist požadavků: [OWASP ASVS](https://owasp.org/www-project-application-security-verification-standard/). ISO/IEC 27001 zase popisuje systémové řízení bezpečnosti informací a práci s riziky přiměřenou organizaci: [ISO/IEC 27001:2022](https://www.iso.org/standard/27001?s=cpa).
+
+## AA.3 Udělej si knihovnu odpovědí
+
+Bezpečnostní dotazníky se opakují. Ne přesně, protože každý procurement formulář má vlastní folklór, ale témata jsou pořád stejná: data, přístupy, šifrování, zálohy, incidenty, subdodavatelé, vývoj, provoz, compliance, ukončení smlouvy. Vytvoř si knihovnu odpovědí a u každé položky drž datum poslední kontroly.
+
+Šablona jedné položky:
+
+```text
+Téma: Zálohy
+Krátká odpověď: Ano, automatické zálohy a pravidelný test obnovy.
+Dlouhá odpověď: [2–5 vět podle reality]
+Důkaz: runbook, záznam testu, konfigurace služby
+Vlastník: ops
+Kontrola: kvartálně
+Poslední aktualizace: 2026-08-06
+Citlivost: interní / zákazníkovi sdělitelné / sdílet jen pod NDA
+```
+
+Rozlišuj odpovědi pro tři úrovně sdílení:
+
+- **Veřejné:** bezpečnostní principy, privacy-first provoz, seznam hlavních subdodavatelů, kontakt pro incidenty.
+- **Zákazník po kvalifikaci:** detailnější architektura, DPA, postupy retence, shrnutí záloh, proces vývoje.
+- **Pod NDA nebo v bezpečném kanálu:** interní diagramy, konkrétní konfigurace, detailní výsledky testů, zranitelnosti a mitigace.
+
+Privacy-first neznamená tajnůstkářství. Znamená sdílet správné informace správným lidem a neposílat citlivé provozní detaily do každé obchodní přílohy jen proto, že tabulka měla kolonku.
+
+## AA.4 Procurement otázky otoč na produktovou výhodu
+
+Když zákazník řeší bezpečnost, často řeší i důvěru. To je šance ukázat hodnotu evropského provozu a datové střídmosti bez nafoukaného moralizování. Místo „jsme privacy-first“ ukaž konkrétní dopady:
+
+- nepotřebujeme reklamní identifikátory pro provoz produktu,
+- zákaznická data držíme odděleně podle tenantů nebo jasných přístupových pravidel,
+- analytika neobsahuje osobní údaje navíc,
+- subdodavatelé mají popsaný účel a nejsou přidáváni náhodně,
+- export a smazání dat jsou součást produktu, ne ruční laskavost supportu,
+- incidentní komunikace má vlastníka a předem napsanou cestu.
+
+ENISA ve svých materiálech pro malé a střední podniky doporučuje řešit cloud a kyberbezpečnost prakticky přes rizika, otázky na poskytovatele a organizační opatření, ne jen přes nákup technologie. Pro malé týmy jsou užitečné zejména vodítka [Cloud Security Guide for SMEs](https://www.enisa.europa.eu/publications/cloud-security-guide-for-smes) a [Cybersecurity guide for SMEs](https://www.enisa.europa.eu/publications/cybersecurity-guide-for-smes).
+
+Dobrá obchodní věta může znít:
+
+> Neprodáváme vám nekonečný compliance slib. Ukážeme vám, která data zpracováváme, proč je potřebujeme, kdo se k nim dostane, jak je mažeme a jak postupujeme při incidentu.
+
+Tohle je mnohem silnější než generické „vaše data jsou u nás v bezpečí“. To říká i aplikace, která posílá půlku webu do sedmi trackerů. Papoušek by to napsal taky, jen by chtěl seed round.
+
+## AA.5 Kdy říct ne
+
+Ne každý bezpečnostní požadavek musíš přijmout. Některé jsou legitimní, jiné by rozbily produkt, ekonomiku nebo privacy-first principy. Malý tým musí umět odmítnout požadavek bez defenzivy.
+
+Řekni ne, když zákazník požaduje:
+
+- sběr osobních údajů, které produkt nepotřebuje, jen kvůli internímu reportingu,
+- instalaci cizího tracking skriptu do aplikace,
+- neomezený přístup třetí strany do produkčního prostředí,
+- individuální změnu retence, která ohrozí ostatní tenanty,
+- export ve formátu, který by vyžadoval ruční manipulaci s citlivými daty bez kontroly.
+
+Lepší než prosté „nejde“ je nabídnout bezpečnou alternativu:
+
+```text
+Tento tracking skript do aplikace nevkládáme, protože by předával uživatelská data třetí straně mimo náš standardní model zpracování. Místo toho můžeme dodat agregovaný měsíční report používání funkcí bez osobních identifikátorů, nebo webhook pro vaše interní události po serverové straně.
+```
+
+Tím chráníš zákazníka, sebe i budoucí verzi produktu. Každá výjimka je malý dluh. Bezpečnostní výjimka s osobními daty je dluh s úroky a nepříjemným právním oddělením v patách.
+
+## AA.6 Checklist bezpečnostního dotazníku
+
+Před prvním větším B2B prodejem:
+
+- Máme aktuální datovou mapu a seznam subdodavatelů?
+- Umíme popsat, kde služba běží a ve kterých regionech se zpracovávají data?
+- Máme jednoduchý architektonický diagram pro obchodní i technické publikum?
+- Existuje knihovna odpovědí s vlastníkem, datem kontroly a úrovní citlivosti?
+- Máme připravené odpovědi pro zálohy, incidenty, přístupy, šifrování, retenci a export?
+- Ví obchod, které odpovědi může poslat veřejně a co patří až pod NDA?
+- Umíme férově říct, které certifikace nebo procesy zatím nemáme?
+- Má každý bezpečnostní slib interní důkaz nebo jasný plán?
+- Odmítáme požadavky, které by zvyšovaly sběr dat bez hodnoty pro uživatele?
+- Aktualizujeme odpovědi po každé větší změně infrastruktury, vendorů nebo datového modelu?
+
+Bezpečnostní dotazník není jen překážka před podpisem. Je to zrcadlo provozní dospělosti. Když odpovědi nejdou dohledat, problém není dotazník. Problém je, že tým ještě nemá dost jasně popsané, co vlastně provozuje. A to se dá opravit dřív, než z toho bude enterprise drama s tabulkou v příloze číslo sedmnáct.
+
+# Příloha AB: Onboarding zákazníka jako první důkaz důvěry
+
+Onboarding není série obrazovek, které uživatel musí protrpět, než se konečně dostane k produktu. Onboarding je první praktický důkaz, že tvůj SaaS rozumí zákazníkově práci. Když je dobrý, zákazník rychle zažije první užitečný výsledek. Když je špatný, dostane formulář, pět e-mailů, tři nepovinně povinné kroky a pocit, že si omylem pořídil další administrativní hobby. Gratuluji, přesně to nikdo nechtěl.
+
+Privacy-first onboarding má ještě jednu roli: hned na začátku ukáže, že nesbíráš data „pro jistotu“. Ptáš se jen na to, co pomůže dokončit první práci. Všechno ostatní může počkat, nebo nemusí existovat vůbec.
+
+**Codyho komentář:** první hodina zákazníka v produktu je jako první schůzka. Když začneš výslechem, sledováním a prosbou o přístup ke všemu, důvěra jde do sklepa rychleji než demo server v pátek večer.
+
+## AB.1 Definuj první hodnotový moment
+
+Než navrhneš onboarding, napiš si jednu větu:
+
+> Nový zákazník pozná hodnotu produktu ve chvíli, kdy **[udělá konkrétní akci]** a získá **[viditelný výsledek]**.
+
+Příklady:
+
+- CRM pro malé B2B týmy: zákazník přidá první obchodní příležitost a vidí další doporučený krok.
+- Fakturační SaaS: zákazník vystaví testovací fakturu a stáhne PDF bez nastavování všech detailů firmy.
+- Nástroj pro obsahový marketing: zákazník zadá téma a dostane osnovu prvních tří článků s distribučním plánem.
+- Support platforma: zákazník napojí jeden kontaktní kanál a odpoví na první tiket z jednoho místa.
+
+První hodnotový moment nesmí být interní metrika typu „dokončil profil“. To je hodnota pro tebe, ne pro zákazníka. Zákazník chce poslat fakturu, získat lead, vyřídit požadavek, najít dokument, udělat rozhodnutí. Profil doplní později, pokud pochopí proč.
+
+## AB.2 Zkrať cestu na minimum kroků
+
+Nakresli si onboarding jako mapu kroků od registrace po první hodnotový moment. Pak u každého kroku napiš, jestli je:
+
+- **nutný pro výsledek,**
+- **nutný pro bezpečnost nebo právní základ,**
+- **užitečný později, ale ne teď,**
+- **jen interní zvyk týmu.**
+
+První dvě kategorie nech. Třetí odlož. Čtvrtou smaž bez obřadu. Malý SaaS nepotřebuje během registrace vědět velikost firmy, obrat, počet poboček, oblíbený CRM systém, datum narození zakladatele a náladu jeho psa. Pokud to není potřeba k prvnímu výsledku, je to tření.
+
+Jednoduchý vzor:
+
+1. Registrace e-mailem nebo magic linkem.
+2. Krátká otázka na hlavní use case.
+3. Předvyplněná ukázka dat nebo bezpečný demo režim.
+4. Jedna hlavní akce vedoucí k prvnímu výsledku.
+5. Kontextová výzva k doplnění nastavení až ve chvíli, kdy je opravdu potřeba.
+
+Tahle struktura chrání i soukromí. Méně povinných polí znamená méně osobních údajů, méně chyb, méně retence a méně vysvětlování v dokumentaci.
+
+## AB.3 Nahraď prázdný stav užitečnou akcí
+
+Prázdná aplikace působí jako kancelář bez židlí. Technicky existuje, ale nikdo tam nechce zůstat. Každý důležitý prázdný stav by měl odpovědět na tři otázky:
+
+- Co tu bude, až produkt začnu používat?
+- Jaký první krok mám udělat?
+- Co se stane po kliknutí?
+
+Špatný prázdný stav:
+
+```text
+Zatím nemáte žádné projekty.
+```
+
+Lepší prázdný stav:
+
+```text
+Tady uvidíte projekty, termíny a poslední aktivitu týmu.
+Začněte jedním testovacím projektem — můžete ho kdykoli smazat.
+[Vytvořit testovací projekt]
+```
+
+Ještě lepší je nabídnout vzor, který respektuje data:
+
+- „Vyzkoušet s demo daty“ pro opatrné zákazníky.
+- „Importovat CSV“ pro týmy, které už něco mají.
+- „Začít od nuly“ pro jednoduché případy.
+
+Demo data jsou skvělá privacy-first pomůcka. Uživatel pozná produkt bez nahrávání reálných zákazníků, faktur, tiketů nebo dokumentů. A ty nemusíš hned zpracovávat citlivější data jen proto, aby si někdo klikl na tlačítko.
+
+## AB.4 Sbírej nastavení postupně
+
+Velký onboardingový formulář často vznikne z dobrých úmyslů. Produkt chce všechno správně nastavit, obchod chce segmentaci, marketing chce personalizaci, support chce kontext a finance chtějí fakturační údaje. Výsledek? Nový zákazník má pocit, že vyplňuje daňové přiznání v aplikaci, kterou ještě nezná.
+
+Použij progresivní sběr dat:
+
+- Fakturační údaje žádej až při platbě nebo vystavení dokladu.
+- Týmové role nastavuj až při pozvání dalšího člověka.
+- Integrace nabízej až po dokončení ručního základního toku.
+- Pokročilé preference schovej do nastavení, ne do prvního průchodu.
+- Marketingové preference odděl od nutných produktových kroků.
+
+Každá otázka v onboardingu má mít viditelný důvod. Pokud se ptáš na obor podnikání, napiš, že podle něj předvybereš šablony. Pokud se ptáš na web, použij ho k návrhu obsahu. Pokud důvod neumíš napsat lidsky, otázku zatím nepotřebuješ.
+
+## AB.5 Předej zákazníka ze slibu do reality
+
+Onboarding začíná už před registrací. Zákazník přichází s očekáváním z landing page, obchodního e-mailu, doporučení nebo demo hovoru. Když produkt po přihlášení mluví jiným jazykem, důvěra se láme.
+
+Předávací checklist mezi marketingem, obchodem a produktem:
+
+- Hlavní slib z landing page odpovídá první akci v produktu.
+- Termíny používané v kampani jsou stejné jako v UI.
+- Pokud obchod slíbil konkrétní use case, onboarding ho umí vybrat nebo předvyplnit.
+- Support ví, jak vypadá první hodina zákazníka a kde lidé nejčastěji uvíznou.
+- Produktový tým pravidelně čte otázky z onboardingu a upravuje texty, ne jen grafy.
+
+Praktický příklad: pokud landing page říká „Získejte kontrolu nad poptávkami do 10 minut“, první obrazovka po registraci nemá začínat „Doplňte firemní profil“. Má začínat „Kam vám dnes chodí poptávky?“ a nabídnout rychlou cestu k prvnímu seznamu.
+
+## AB.6 Měř onboarding bez šmírovacího divadla
+
+Onboarding potřebuje měření, ale nepotřebuje osobní reality show. Sleduj jen události, které pomáhají rozhodnout, kde zákazník ztrácí cestu k výsledku.
+
+Rozumné eventy:
+
+- `signup_started`
+- `signup_completed`
+- `use_case_selected`
+- `demo_data_enabled`
+- `first_project_created`
+- `first_value_reached`
+- `invite_sent`
+
+U každé události si napiš:
+
+- proč ji měříš,
+- jaké rozhodnutí podle ní uděláš,
+- jestli obsahuje osobní údaj,
+- jak dlouho ji držíš,
+- kdo ji smí vidět.
+
+Nepotřebuješ nahrávky sezení, heatmapy každého pohybu myši ani profilování jednotlivců napříč kanály. Potřebuješ vědět, že většina lidí uvízne před importem, protože tlačítko zní strašidelně. To zjistíš i bez digitálního dalekohledu do obýváku.
+
+## AB.7 Onboardingový e-mail má pomáhat, ne nahánět
+
+E-mail po registraci má být servisní průvodce, ne marketingový megafon. Jedna zpráva by měla obsahovat:
+
+- připomenutí slíbeného výsledku,
+- jeden jasný další krok,
+- odkaz na nápovědu nebo krátké video bez trackerů,
+- možnost odpovědět člověku,
+- stručné vysvětlení, proč daný krok dává smysl.
+
+Šablona:
+
+```text
+Předmět: První krok k vyřízení poptávek na jednom místě
+
+Ahoj,
+
+nejrychlejší cesta k hodnotě je vytvořit první testovací poptávku. Zabere to zhruba dvě minuty a nemusíš nahrávat reálná zákaznická data.
+
+Začni tady: [přímý odkaz]
+
+Pokud chceš raději projít nastavení ručně, tady je krátký návod: [nápověda]
+
+Když se zasekneš, odpověz na tenhle e-mail. Čte ho člověk, ne hladový automat na lead scoring.
+```
+
+Neposílej pět zpráv jen proto, že nástroj umožňuje sekvenci. Posílej zprávy, když pomáhají dokončit práci. Pokud uživatel první hodnotový moment splnil, neposílej mu další „dokončete onboarding“ výzvu. Produkt má poslouchat stav, ne kalendář automatu.
+
+## AB.8 Checklist onboardingové důvěry
+
+- Máš jasně pojmenovaný první hodnotový moment zákazníka?
+- Vede první průchod k výsledku, ne k doplňování interních polí?
+- Umí si zákazník vyzkoušet produkt s demo daty nebo bezpečným minimem reálných dat?
+- Má každý prázdný stav vysvětlení, další krok a očekávaný výsledek?
+- Sbíráš osobní a firemní údaje postupně podle potřeby?
+- Navazuje jazyk produktu na slib z landing page, prodeje nebo doporučení?
+- Měříš jen události, podle kterých uděláš konkrétní produktové rozhodnutí?
+- Mají onboardingové e-maily servisní účel, přímý odkaz a jednoduchou možnost odpovědi?
+- Ví support, kde nový zákazník nejčastěji uvízne?
+- Prochází tým onboarding ručně aspoň jednou za měsíc jako nový zákazník?
+
 ## Zdroje
 
 - ADR GitHub Organization: [Architectural Decision Records](https://adr.github.io/)
@@ -3976,6 +4270,9 @@ Třicet dní není magická jednotka. Je to dost dlouho na jednu smysluplnou zm�
 - NCSC: [Backing up your data](https://www.ncsc.gov.uk/collection/small-organisations-guide-to-cyber-security/backing-up-your-data)
 - NCSC: [Ransomware-resistant backups](https://www.ncsc.gov.uk/collection/ransomware-resistant-backups)
 - OWASP Foundation: [Application Security Verification Standard](https://owasp.org/www-project-application-security-verification-standard/)
+- ENISA: [Cloud Security Guide for SMEs](https://www.enisa.europa.eu/publications/cloud-security-guide-for-smes)
+- ENISA: [Cybersecurity guide for SMEs](https://www.enisa.europa.eu/publications/cybersecurity-guide-for-smes)
+- ISO: [ISO/IEC 27001:2022 — Information security management systems](https://www.iso.org/standard/27001?s=cpa)
 - OWASP Foundation: [Top 10 for Large Language Model Applications](https://owasp.org/www-project-top-10-for-large-language-model-applications/)
 - OpenTelemetry: [Signals](https://opentelemetry.io/docs/concepts/signals/)
 - NIST: [AI Risk Management Framework](https://www.nist.gov/itl/ai-risk-management-framework)
@@ -3998,6 +4295,8 @@ Třicet dní není magická jednotka. Je to dost dlouho na jednu smysluplnou zm�
 
 ## Pracovní log
 
+- 2026-08-06: Doplněna příloha AB o onboardingu zákazníka jako prvním důkazu důvěry: první hodnotový moment, zkrácení kroků, prázdné stavy, postupný sběr dat, návaznost na marketing, privacy-first měření a e-mailový checklist.
+- 2026-08-06: Doplněna příloha AA o bezpečnostních dotaznících pro B2B SaaS: bezpečnostní balíček, doložitelné odpovědi, knihovna odpovědí, procurement jako důvěra, odmítání rizikových požadavků a checklist.
 - 2026-08-06: Doplněna příloha Z s 30denním plánem pro malý privacy-first SaaS tým: výběr jednoho výsledku, mapování zákaznické cesty, malá změna s velkým dopadem, dokumentace rozhodnutí, vyhodnocení a checklist.
 - 2026-08-06: Doplněna příloha Y o přenositelnosti dat a exit plánu: zákaznické exporty, interní vendor exit karty, datový model bez slepých uliček, test exportu, komunikace při odchodu a checklist.
 - 2026-08-06: Doplněna příloha X o znalostní bázi pro malý privacy-first SaaS tým: typy dokumentace, metadata, ADR/runbooky, aktualizace v Definition of Done, hygienu vyhledávání a checklist.
