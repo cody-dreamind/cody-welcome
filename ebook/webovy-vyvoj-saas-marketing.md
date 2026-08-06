@@ -3758,7 +3758,184 @@ Jednou za kvartál projdi:
 
 Přenositelnost není jen právní checkbox. Je to provozní pojištění, marketing důvěry a dobrý test architektury. Když umíš odejít ty i zákazník, paradoxně je mnohem jednodušší zůstat.
 
+
 ---
+
+# Příloha Z: 30denní plán pro malý privacy-first SaaS tým
+
+E-book je už dlouhý dost na to, aby z něj šel udělat další druh produktivního odkládání. To by byla škoda. Tahle příloha je praktický most mezi čtením a provozem: třicet dní, čtyři týdny, jedna konkrétní změna týdně a minimum divadla.
+
+Nejde o sprint, ve kterém tým hrdinsky spí pod stolem a po měsíci zjistí, že zlepšil hlavně spotřebu kávy. Cílem je vybrat jednu obchodně důležitou oblast, zlepšit ji měřitelně a přitom nevyrobit datový, právní ani procesní binec.
+
+**Codyho komentář:** dobrý 30denní plán není seznam přání. Je to dohoda, co teď neděláme. Bez toho se z plánu stane bufet nápadů a z týmu parta lidí, která statečně posouvá kartičky doprava.
+
+## Z.1 Den 1: Vyber jeden výsledek, ne deset projektů
+
+Začni jednou větou:
+
+> Za 30 dní chceme zlepšit **[výsledek]** pro **[typ zákazníka]**, protože dnes **[konkrétní bolest]**.
+
+Příklady dobrého cíle:
+
+- „Za 30 dní chceme zkrátit cestu nového B2B zákazníka k první hodnotě, protože dnes se po registraci ztratí v prázdném účtu.“
+- „Za 30 dní chceme zvýšit počet kvalifikovaných poptávek z webu, protože lidé čtou články, ale nepřejdou na nabídku.“
+- „Za 30 dní chceme snížit počet support dotazů k fakturaci, protože zákazníci nerozumí exportu a daňovým údajům.“
+
+Špatný cíl:
+
+- „Zlepšit onboarding, marketing, ceny, dokumentaci a analytiku.“
+
+To není cíl. To je únikový plán pro mozek, který nechce prioritizovat.
+
+Vyber jeden hlavní signál úspěchu a dva ochranné signály. Hlavní signál říká, jestli změna pomohla. Ochranné signály hlídají, jestli jsi něco nerozbil.
+
+Příklad pro onboarding:
+
+- hlavní signál: více účtů dokončí první smysluplnou akci,
+- ochranný signál 1: nezvýší se počet support dotazů k registraci,
+- ochranný signál 2: nepřidáme nové osobní údaje do povinného formuláře.
+
+## Z.2 Týden 1: Zmapuj realitu bez velkého auditu
+
+První týden nepatří redesignu. Patří mapě reality. Vezmi jednu zákaznickou cestu a projdi ji od začátku do konce jako člověk, který o tvém produktu neví skoro nic.
+
+U onboardingového cíle projdi:
+
+1. vstupní stránku,
+2. registraci,
+3. potvrzovací e-mail,
+4. první obrazovku v aplikaci,
+5. první hodnotovou akci,
+6. nápovědu při zaseknutí,
+7. follow-up po nedokončeném kroku.
+
+U marketingového cíle projdi:
+
+1. článek nebo vstupní kanál,
+2. interní odkaz na nabídku,
+3. landing page,
+4. formulář nebo kalendář,
+5. potvrzení poptávky,
+6. první obchodní odpověď,
+7. předání do dalšího kroku.
+
+Ke každému kroku si napiš tři věci:
+
+- co zákazník pravděpodobně chce udělat,
+- co mu v tom brání,
+- jaké minimum dat od něj opravdu potřebujeme.
+
+Výstup týdne není prezentace. Výstup je krátký seznam pěti největších třecích míst. Pokud má dokument víc než dvě stránky, někdo si zase spletl přemýšlení s výrobou kancelářského nábytku.
+
+## Z.3 Týden 2: Oprav nejmenší věc s největším dopadem
+
+Ve druhém týdnu vyber jednu změnu, kterou zvládneš dokončit, nasadit a vysvětlit zákazníkovi. Neber nejzajímavější změnu. Ber nejlevnější změnu, která odstraňuje reálný zmatek.
+
+Typické dobré zásahy:
+
+- přepsat hero sekci podle konkrétního problému zákazníka,
+- přidat ukázkový prázdný stav do aplikace,
+- zjednodušit registrační formulář o jedno zbytečné pole,
+- přidat potvrzovací e-mail s jasným dalším krokem,
+- doplnit stránku „jak to funguje“ pro nákupní rozhodnutí,
+- napsat jednu kvalitní support odpověď do znalostní báze,
+- upravit pricing tak, aby bylo jasné, co je v tarifu zahrnuté.
+
+Privacy-first pravidlo pro druhý týden: změna nesmí začít novým trackerem. Pokud potřebuješ měřit, použij agregovaný event, serverový log bez osobních údajů nebo ruční kontrolu malého vzorku. Malý tým často nepotřebuje víc dat. Potřebuje méně mlhy.
+
+Příklad malé změny:
+
+```text
+Problém: Uživatel po registraci neví, co má udělat jako první.
+Změna: Přidáme prázdný stav s jedním doporučeným krokem, jedním příkladem a odkazem na krátký návod.
+Měření: Počet účtů, které do 24 hodin dokončí první akci.
+Privacy guard: Neměříme detailní pohyb v aplikaci, jen dokončení akce na úrovni účtu.
+```
+
+Tohle je elegantně nudné. A přesně proto to funguje.
+
+## Z.4 Týden 3: Udělej zlepšení opakovatelné
+
+Třetí týden je nejméně sexy a nejdůležitější. Změna, která není zapsaná, se příště rozpadne. Pokud jsi zlepšil onboarding, napiš pravidlo pro nové prázdné stavy. Pokud jsi zlepšil poptávkový formulář, napiš pravidlo pro sběr dat. Pokud jsi zlepšil pricing, napiš rozhodnutí, podle čeho vznikají tarify.
+
+Minimum dokumentace:
+
+- **Rozhodnutí:** co jsme změnili a proč.
+- **Dopad:** jaký signál sledujeme.
+- **Privacy dopad:** která data sbíráme, nesbíráme nebo mažeme.
+- **Vlastník:** kdo změnu hlídá další měsíc.
+- **Návrat zpět:** jak poznáme, že změna nefunguje.
+
+Krátký ADR zápis může vypadat takhle:
+
+```text
+Rozhodnutí: V registračním formuláři nebudeme povinně sbírat telefon.
+Kontext: Telefon používáme jen u části enterprise poptávek, ale brzdí samoobslužnou registraci.
+Dopad: Méně tření při založení účtu, obchod si telefon vyžádá až při relevantním hovoru.
+Privacy dopad: Snižujeme množství osobních údajů u nových účtů.
+Kontrola: Za měsíc porovnáme dokončení registrace a kvalitu kvalifikovaných leadů.
+```
+
+Nejde o papírování. Jde o budoucí laskavost vůči týmu, který se za tři měsíce zeptá: „Proč jsme to vlastně udělali?“ Dokumentace je paměť firmy. Bez ní má každý meeting lehký nádech archeologie.
+
+## Z.5 Týden 4: Vyhodnoť a rozhodni další krok
+
+Čtvrtý týden není oslava dashboardu. Je to rozhodovací schůzka. Vezmi hlavní signál, ochranné signály, zpětnou vazbu od zákazníků a rozhodni jednu ze čtyř možností:
+
+1. **Nechat:** změna pomohla a nemá špatné vedlejší efekty.
+2. **Upravit:** směr je dobrý, ale detail překáží.
+3. **Vrátit:** změna nepomohla nebo zhoršila důležitý ochranný signál.
+4. **Rozšířit:** funguje to a dává smysl udělat další navazující krok.
+
+Vyhodnocení piš lidsky:
+
+```text
+Změna: Nový prázdný stav po registraci.
+Výsledek: Více týmů dokončilo první projekt bez kontaktu se supportem.
+Pozorování: Někteří uživatelé pořád nerozumí rozdílu mezi projektem a workspace.
+Rozhodnutí: Necháváme změnu, doplníme jednu větu do microcopy a článek do nápovědy.
+Další krok: Příští měsíc řešíme první import dat.
+```
+
+Pokud výsledky nejsou jasné, nepředstírej jistotu. Napiš: „Nevíme.“ Pak rozhodni, jestli potřebuješ další týden, lepší kvalitativní zpětnou vazbu nebo menší změnu. Nejasný výsledek není ostuda. Ostuda je vyrábět z mlhy strategii.
+
+## Z.6 30denní checklist
+
+Na začátku měsíce:
+
+- Máme jeden výsledek formulovaný větou, které rozumí obchod, produkt i support?
+- Víme, pro který typ zákazníka změnu děláme?
+- Máme jeden hlavní signál a dva ochranné signály?
+- Víme, která data k měření opravdu potřebujeme?
+- Umíme říct, co během těchto 30 dní vědomě neděláme?
+
+Po prvním týdnu:
+
+- Prošli jsme zákaznickou cestu očima nového člověka?
+- Máme seznam největších třecích míst bez zbytečné prezentace?
+- Použili jsme reálné formulace zákazníků nebo support dotazů?
+- Našli jsme aspoň jedno místo, kde sbíráme zbytečná data?
+
+Po druhém týdnu:
+
+- Nasadili jsme jednu dokončenou změnu?
+- Je změna pochopitelná bez interního vysvětlování?
+- Má měření jasný účel a neobsahuje osobní údaje navíc?
+- Ví support, obchod a produkt, co se změnilo?
+
+Po třetím týdnu:
+
+- Zapsali jsme rozhodnutí, dopad, privacy dopad a vlastníka?
+- Má změna jasné kritérium úspěchu i důvod k návratu zpět?
+- Aktualizovali jsme dokumentaci, nápovědu nebo interní runbook?
+
+Po čtvrtém týdnu:
+
+- Rozhodli jsme nechat, upravit, vrátit nebo rozšířit?
+- Umíme výsledek vysvětlit zákazníkovi bez dashboardového žargonu?
+- Zapsali jsme další malý krok místo nekonečného seznamu ambicí?
+
+Třicet dní není magická jednotka. Je to dost dlouho na jednu smysluplnou změnu a dost krátce na to, aby se tým neutopil v teorii. Když takový rytmus zopakuješ šestkrát, máš za půl roku produkt, který se zlepšuje pravidelně, ne jen ve chvíli, kdy někdo začne panikařit před kvartálním meetingem.
 
 ## Zdroje
 
@@ -3821,6 +3998,7 @@ Přenositelnost není jen právní checkbox. Je to provozní pojištění, marke
 
 ## Pracovní log
 
+- 2026-08-06: Doplněna příloha Z s 30denním plánem pro malý privacy-first SaaS tým: výběr jednoho výsledku, mapování zákaznické cesty, malá změna s velkým dopadem, dokumentace rozhodnutí, vyhodnocení a checklist.
 - 2026-08-06: Doplněna příloha Y o přenositelnosti dat a exit plánu: zákaznické exporty, interní vendor exit karty, datový model bez slepých uliček, test exportu, komunikace při odchodu a checklist.
 - 2026-08-06: Doplněna příloha X o znalostní bázi pro malý privacy-first SaaS tým: typy dokumentace, metadata, ADR/runbooky, aktualizace v Definition of Done, hygienu vyhledávání a checklist.
 - 2026-08-06: Doplněna příloha W o obchodním e-mailu, který pomáhá místo tlačení: typy zpráv, férové předměty, follow-upy, automatizace, privacy-first měření, šablona a checklist.
