@@ -4231,6 +4231,121 @@ Neposílej pět zpráv jen proto, že nástroj umožňuje sekvenci. Posílej zpr
 - Ví support, kde nový zákazník nejčastěji uvízne?
 - Prochází tým onboarding ručně aspoň jednou za měsíc jako nový zákazník?
 
+
+# Příloha AC: Konkurenční monitoring bez stalkingu a paniky
+
+Konkurenci je dobré sledovat. Jenže existuje tenká hranice mezi užitečným přehledem a každodenním scrollováním, po kterém tým ztratí vlastní názor. Malý SaaS nepotřebuje tajnou službu na cizí landing pages. Potřebuje jednoduchý rytmus, který pomůže rozpoznat změny trhu, jazyk zákazníků a příležitosti k lepšímu vysvětlení vlastní hodnoty.
+
+Privacy-first konkurenční monitoring má jednu výhodu: nutí tě dívat se na veřejné signály, ne na šedé sběry dat, scraping osobních profilů nebo reklamní špehování. Sleduješ to, co by stejně viděl zákazník: web, ceník, dokumentaci, changelog, newsletter, veřejné recenze, pracovní nabídky, integrační stránky a obsah.
+
+**Codyho komentář:** Cílem není kopírovat konkurenci rychleji. Cílem je pochopit, proč zákazník srovnává možnosti jinak než ty. Což bolí, protože zákazníci odmítají číst roadmapu telepaticky. Nevděčníci.
+
+## AC.1 Vyber jen tři až pět srovnávacích produktů
+
+Začni krátkým seznamem. Pokud sleduješ dvacet firem, nebudeš mít monitoring, ale úzkost v tabulce. Rozděl konkurenty podle role:
+
+- **Přímý konkurent:** řeší stejný problém pro stejný typ zákazníka.
+- **Nepřímá alternativa:** zákazník místo tebe používá tabulku, agenturu, interní nástroj nebo velkou platformu.
+- **Referenční produkt:** neprodává totéž, ale dobře vysvětluje hodnotu, onboarding, dokumentaci nebo pricing.
+
+Praktický příklad pro SaaS na správu poptávek řemeslníků:
+
+- Přímý konkurent: lokální CRM pro servisní firmy.
+- Nepřímá alternativa: sdílený Gmail, WhatsApp, Excel a diář.
+- Referenční produkt: jednoduchý evropský helpdesk s výbornou dokumentací a rychlým onboardingem.
+
+U každého produktu si napiš jednu větu: „Proč by si ho zákazník vybral místo nás?“ Pokud odpověď zní „protože má víc funkcí“, jdi hlouběji. Možná zákazník ve skutečnosti kupuje známou značku, jednodušší start, integraci s účetnictvím nebo pocit menšího rizika.
+
+## AC.2 Sleduj veřejné signály, které mění rozhodnutí zákazníka
+
+Nesbírej všechno. Sleduj jen signály, podle kterých můžeš upravit produkt, web, prodej nebo podporu. Dobrý monitoring má pět oblastí:
+
+| Oblast | Co sledovat | Jaké rozhodnutí z toho může vzniknout |
+| --- | --- | --- |
+| Nabídka | hero věta, claim, cílový segment | upravit vlastní positioning nebo FAQ |
+| Ceník | tarify, limity, trial, garance | zpřesnit pricing stránku a vysvětlení hodnoty |
+| Produkt | changelog, dokumentace, nové integrace | rozhodnout, zda jde o tržní standard nebo šum |
+| Důvěra | reference, bezpečnostní stránka, DPA, status page | doplnit vlastní důkaz důvěry |
+| Distribuce | blog, newsletter, partnerské stránky, webináře | najít kanál, kde se zákazníci opravdu učí |
+
+Naopak nesleduj věci jen proto, že jsou snadno měřitelné: počet followerů, lajky, každou drobnou změnu CSS nebo reklamní text, který možná běžel tři hodiny a nikdo ho nikdy neviděl. Dashboardový šum není strategie.
+
+## AC.3 Používej RSS, changelog a přímé odkazy
+
+Privacy-first monitoring stojí na otevřených zdrojích. U každého konkurenta zkus najít:
+
+- blog nebo newsroom,
+- changelog nebo release notes,
+- dokumentaci,
+- status page,
+- stránku integrací,
+- veřejný ceník,
+- newsletter archiv, pokud existuje,
+- RSS nebo Atom feed.
+
+Když RSS feed existuje, používej ho. Když neexistuje, ulož si přímý odkaz a kontroluj ho v pevném rytmu. Nepotřebuješ nástroj, který každý den proleze půl internetu a vytvoří z toho barevnou nervozitu. Stačí měsíční review, případně týdenní kontrola u dvou nejdůležitějších konkurentů.
+
+Jednoduchá šablona záznamu:
+
+| Datum | Produkt | Signál | Dopad | Naše reakce | Vlastník |
+| --- | --- | --- | --- | --- | --- |
+| 2026-08-06 | Produkt A | Zavedli tarif pro agentury | Může měnit očekávání B2B zákazníků | Doplnit FAQ pro agenturní použití | marketing |
+| 2026-08-06 | Produkt B | Přidali export do CSV | Potvrzuje, že přenositelnost je pro segment důležitá | Zvýraznit náš export a exit plán | produkt |
+
+Reakce nemusí být „postavit stejnou funkci“. Často stačí lépe vysvětlit, že daný problém už řešíš jinak.
+
+## AC.4 Odděl fakta od interpretace
+
+Největší nebezpečí konkurenčního monitoringu je rychlá interpretace. Tým uvidí novou funkci a okamžitě usoudí: „Musíme to mít taky.“ Jenže veřejná změna neříká, jestli funkci zákazníci chtěli, jestli funguje, kolik stála a jestli nepřidala supportu migrénu v obleku.
+
+Používej proto jednoduché štítky:
+
+- **Fakt:** „Konkurent přidal tarif Pro za 49 € měsíčně.“
+- **Hypotéza:** „Možná cílí na menší týmy, které se bojí enterprise prodeje.“
+- **Otázka:** „Ptají se naši zákazníci na jednodušší tarif?“
+- **Akce:** „Přidat otázku do pěti discovery hovorů a upravit pricing FAQ jen pokud se téma opakuje.“
+
+Tahle disciplína chrání roadmapu před reflexem kopírování. Pokud konkurent přidá integraci s velkým nástrojem, není to automaticky tvoje priorita. Možná má jiný segment, jinou distribuční strategii nebo jen hlasitého zákazníka, který uměl poslat e-mail velkými písmeny.
+
+## AC.5 Překládej monitoring do vlastního obsahu
+
+Konkurenční signály jsou dobrý vstup pro edukaci trhu. Pokud vidíš, že všichni vysvětlují stejnou věc složitě, napiš ji jednodušeji. Pokud zákazníci porovnávají nástroje podle ceny, ukaž celkové náklady: čas nastavení, migrace, support, export, retence dat a právní jistotu.
+
+Obsahové formáty, které fungují bez útočení na konkurenci:
+
+- „Jak vybrat nástroj pro [úkol] v malém týmu“
+- „Checklist před migrací z tabulky do SaaS“
+- „Co si pohlídat u exportu dat a zrušení účtu“
+- „Proč levný tarif nemusí být levný, když neumí [kritická věc]“
+- „Jak poznat, že potřebujete workflow, ne další CRM pole“
+
+Nikdy nepiš „konkurent X je špatný“. Piš „tady jsou kritéria, podle kterých se rozhodnout“. Jednak je to slušnější, jednak to vypadá mnohem sebevědoměji. Firma, která umí zákazníkovi pomoct vybrat, působí důvěryhodněji než firma, která jen hází bláto a doufá, že se část přilepí.
+
+## AC.6 Nastav měsíční rituál, ne permanentní poplach
+
+Monitoring má mít rytmus. Doporučený měsíční postup pro malý tým:
+
+1. Jeden člověk připraví krátký přehled veřejných změn.
+2. Tým vybere maximálně tři signály, které stojí za debatu.
+3. U každého signálu se oddělí fakt, hypotéza, otázka a možná akce.
+4. Do backlogu se dostanou jen akce s vlastníkem a očekávaným rozhodnutím.
+5. Všechno ostatní jde do archivu, ne do kolektivní paniky.
+
+Časový limit: 45 minut měsíčně. Pokud monitoring zabere víc, pravděpodobně neslouží rozhodování, ale uklidňování nervů. A nervy, jak známo, škálují ještě hůř než špatně navržená databáze.
+
+## AC.7 Checklist konkurenčního monitoringu
+
+- Máš vybraných maximálně pět produktů nebo alternativ, které opravdu ovlivňují rozhodnutí zákazníka?
+- Rozlišuješ přímé konkurenty, nepřímé alternativy a referenční produkty?
+- Sleduješ veřejné zdroje místo osobního profilování a šedého sběru dat?
+- Má každý sledovaný signál jasný možný dopad na produkt, web, prodej nebo support?
+- Odděluješ fakta, hypotézy, otázky a akce?
+- Nekopíruješ funkce bez ověření, že řeší stejný problém ve stejném segmentu?
+- Používáš RSS, changelog, dokumentaci a přímé odkazy tam, kde to jde?
+- Překládáš opakující se tržní otázky do užitečného obsahu?
+- Má monitoring vlastníka, časový limit a měsíční rytmus?
+- Končí každé review rozhodnutím: udělat, ověřit, ignorovat nebo archivovat?
+
 ## Zdroje
 
 - ADR GitHub Organization: [Architectural Decision Records](https://adr.github.io/)
@@ -4295,6 +4410,7 @@ Neposílej pět zpráv jen proto, že nástroj umožňuje sekvenci. Posílej zpr
 
 ## Pracovní log
 
+- 2026-08-06: Doplněna příloha AC o konkurenčním monitoringu bez stalkingu: výběr srovnávacích produktů, veřejné signály, RSS/přímé odkazy, oddělení faktů od interpretace, převod poznatků do obsahu, měsíční rituál a checklist.
 - 2026-08-06: Doplněna příloha AB o onboardingu zákazníka jako prvním důkazu důvěry: první hodnotový moment, zkrácení kroků, prázdné stavy, postupný sběr dat, návaznost na marketing, privacy-first měření a e-mailový checklist.
 - 2026-08-06: Doplněna příloha AA o bezpečnostních dotaznících pro B2B SaaS: bezpečnostní balíček, doložitelné odpovědi, knihovna odpovědí, procurement jako důvěra, odmítání rizikových požadavků a checklist.
 - 2026-08-06: Doplněna příloha Z s 30denním plánem pro malý privacy-first SaaS tým: výběr jednoho výsledku, mapování zákaznické cesty, malá změna s velkým dopadem, dokumentace rozhodnutí, vyhodnocení a checklist.
