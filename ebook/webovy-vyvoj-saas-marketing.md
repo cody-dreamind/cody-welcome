@@ -3512,9 +3512,112 @@ Před odesláním nebo zapnutím automatizace projdi:
 
 ---
 
+
+# Příloha X: Znalostní báze, která nezestárne v pátek odpoledne
+
+Malý SaaS tým nepotřebuje chrám dokumentace. Potřebuje místo, kde se dá rychle zjistit: proč něco existuje, jak se to provozuje, co se nesmí rozbít a kdo rozhodl poslední kompromis. Znalostní báze není knihovna pro perfekcionisty. Je to provozní paměť týmu, který nechce každý měsíc znovu vynalézat vlastní kolečko a pak se tvářit překvapeně, že je zase hranaté.
+
+Privacy-first přístup tady znamená jednoduchou věc: interní znalosti mají zůstat pod kontrolou týmu. Neházej citlivé provozní postupy, zákaznické příklady, incidenty a obchodní kontext do nástroje, u kterého neumíš odpovědět, kde data leží, kdo je zpracovává a jak se exportují. Pohodlné vyhledávání je fajn. Nekontrolovaná firemní paměť v cizí černé skříňce už méně.
+
+## X.1 Rozděl znalosti podle práce, ne podle oddělení
+
+Nejčastější chyba je struktura typu „Marketing“, „Vývoj“, „Obchod“, „Různé“ a „Různé final v2“. Vypadá to organizačně, ale člověk v problému nehledá oddělení. Hledá akci.
+
+Použij čtyři typy dokumentů inspirované Diátaxis rámcem: tutoriály, návody, reference a vysvětlení. Ten rámec rozlišuje dokumentaci podle potřeby čtenáře: učení, řešení konkrétního úkolu, hledání přesné informace a pochopení souvislostí.
+
+Praktické rozdělení pro SaaS tým:
+
+- **Návod:** „Jak obnovit zákazníkovi export faktur“.
+- **Reference:** „Seznam webhook eventů a jejich payloadů“.
+- **Vysvětlení:** „Proč nepoužíváme third-party remarketing pixely“.
+- **Tutoriál:** „První lokální spuštění projektu pro nového vývojáře“.
+
+Každý dokument musí začít větou, pro koho je a kdy se používá. Pokud to neumíš napsat, dokument pravděpodobně není dokument. Je to interní archeologie.
+
+## X.2 Minimum metadat, které ušetří hodiny
+
+Každá stránka ve znalostní bázi by měla mít malou hlavičku:
+
+```text
+Vlastník: tým nebo konkrétní role
+Stav: návrh / platné / zastaralé
+Poslední kontrola: YYYY-MM-DD
+Citlivost: veřejné / interní / důvěrné / osobní údaje
+Související: odkaz na ADR, ticket, runbook nebo changelog
+```
+
+Tohle není byrokracie. To je levná obrana proti dokumentům, které vypadají autoritativně jen proto, že mají tabulku a nadpis. Stav „zastaralé“ je lepší než tiché lhaní.
+
+U citlivosti buď přísný. Do běžných návodů nepatří zákaznická data, produkční tokeny, osobní údaje v ukázkách ani screenshoty administrace s reálnými e-maily. Když potřebuješ příklad, vytvoř syntetická data:
+
+```text
+Zákazník: Demo účetní s.r.o.
+E-mail: demo@example.invalid
+Tenant ID: tenant_demo_123
+```
+
+## X.3 Rozhodnutí patří do ADR, postupy do runbooků
+
+Znalostní báze začne hnít, když se v jednom dokumentu smíchá rozhodnutí, aktuální postup a historická hádka. Odděl to.
+
+- **ADR** popisuje rozhodnutí: kontext, možnosti, volbu a důsledky.
+- **Runbook** popisuje postup: signál, diagnózu, kroky, rollback a eskalaci.
+- **Changelog** popisuje změnu pro uživatele: co je nové, co se změnilo, co si má všimnout.
+- **Reference** popisuje stabilní technický fakt: endpointy, eventy, limity, role.
+
+Příklad: pokud přecházíš z externí e-mailové služby na evropského poskytovatele, ADR vysvětlí proč. Runbook popíše, co dělat při nedoručování. Changelog oznámí zákazníkům dopad. Reference uvede DNS záznamy a limity. Jeden dokument pro všechno by sice vypadal úsporně, ale jen do první soboty, kdy někdo hledá rollback pod odstavcem „strategické souvislosti“.
+
+## X.4 Aktualizace dokumentace musí být součást změny
+
+Dokumentace se nemá opravovat „až bude čas“. Čas nebude. Bude jen další release, další support ticket a další člověk, který se zeptá na totéž.
+
+Do definice hotovo přidej malé pravidlo:
+
+- Změnil se uživatelský tok? Aktualizuj návod nebo screenshot.
+- Změnil se provozní postup? Aktualizuj runbook.
+- Změnilo se rozhodnutí nebo vendor? Přidej ADR.
+- Změnil se event, API nebo export? Aktualizuj referenci.
+- Změnila se práce se zákaznickými daty? Aktualizuj datovou mapu a privacy notice, pokud je to potřeba.
+
+Nemusí to být román. Často stačí pět řádků. Ale těch pět řádků ve správný den má větší hodnotu než firemní wiki rewrite retreat, což je luxusní název pro „nikdo to nečetl dva roky“.
+
+## X.5 Vyhledávání není náhrada za strukturu
+
+Moderní nástroje rády slibují, že AI najde všechno. Možná. Ale pokud máš ve znalostní bázi tři protichůdné návody, AI ti je jen sebevědomě smíchá do jednoho krásného omylu.
+
+Nejdřív udělej hygienu:
+
+- Jeden kanonický dokument pro jeden postup.
+- Staré dokumenty archivuj, nemaž bez důvodu.
+- Na začátek dokumentu dej jasný stav.
+- V názvu používej slova, která by hledal člověk v problému.
+- Duplicitní dokumenty sluč nebo označ odkazem na platnou verzi.
+
+Privacy-first AI vyhledávání může dávat smysl, ale až po těchto základech. A i potom řeš: jestli model trénuje na obsahu, kde se inference spouští, zda jde index smazat, jak se logují dotazy a jestli se do promptů nedostávají osobní údaje zákazníků.
+
+**Codyho komentář:** AI nad chaotickou wiki je jako dát turbomotor do nákupního vozíku. Bude to rychlé, dramatické a pravděpodobně skončíš v regálu s omáčkami.
+
+## X.6 Checklist znalostní báze
+
+Jednou měsíčně projdi:
+
+- Má každý důležitý dokument vlastníka, stav a datum poslední kontroly?
+- Existuje pro každý kritický provozní scénář runbook?
+- Jsou rozhodnutí oddělená od postupů pomocí ADR nebo podobného formátu?
+- Neobsahují návody reálná zákaznická data, tokeny nebo zbytečné screenshoty?
+- Dá se nový člověk podle dokumentace dostat k prvnímu úspěšnému lokálnímu spuštění?
+- Jsou zastaralé dokumenty označené nebo archivované?
+- Má tým jasné pravidlo, kdy je aktualizace dokumentace součástí dokončení práce?
+- Má znalostní báze export a zálohu mimo jednoho dodavatele?
+
+Dobrá znalostní báze není nejdelší. Je to ta, která zkrátí přerušení, zmenší závislost na jednom člověku a pomůže udělat správnou věc i ve chvíli, kdy je produkce rozbitá a káva došla. Tedy v přirozeném prostředí SaaS provozu.
+
+---
+
 ## Zdroje
 
 - ADR GitHub Organization: [Architectural Decision Records](https://adr.github.io/)
+- Diátaxis: [Diátaxis documentation framework](https://diataxis.fr/)
 - Keep a Changelog: [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/)
 - Semantic Versioning: [Semantic Versioning 2.0.0](https://semver.org/)
 - RSS Advisory Board: [RSS 2.0 Specification](https://www.rssboard.org/rss-specification)
@@ -3570,6 +3673,7 @@ Před odesláním nebo zapnutím automatizace projdi:
 
 ## Pracovní log
 
+- 2026-08-06: Doplněna příloha X o znalostní bázi pro malý privacy-first SaaS tým: typy dokumentace, metadata, ADR/runbooky, aktualizace v Definition of Done, hygienu vyhledávání a checklist.
 - 2026-08-06: Doplněna příloha W o obchodním e-mailu, který pomáhá místo tlačení: typy zpráv, férové předměty, follow-upy, automatizace, privacy-first měření, šablona a checklist.
 - 2026-08-06: Doplněna příloha V o retenci bez návykového designu: návrat podle práce zákazníka, první hodnotový moment, užitečné připomínky, privacy-first retenční signály, návratové rituály, záchrana před churnem a checklist.
 - 2026-08-06: Doplněna příloha U o changelogu jako privacy-first marketingovém kanálu: uživatelské release notes, verze, RSS/Atom distribuce, privacy gate a checklist.
