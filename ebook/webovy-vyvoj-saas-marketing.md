@@ -2674,11 +2674,160 @@ Vyber experiment s dobrým dopadem, rozumnou jistotou, nízkou náročností a n
 
 Jedna hodinová iterace: vyber jeden experiment z aktuálního webu nebo onboarding flow a napiš k němu otázku, hypotézu, signál, stop pravidlo a privacy riziko. Pokud neumíš vyplnit privacy riziko, experiment ještě nespouštěj. Dashboard počká. Uživatel ne.
 
+# Příloha R: Referral a partnerství bez sledovacího cirkusu
+
+Nejlepší růstový kanál pro malý SaaS často nevypadá jako kanál. Vypadá jako doporučení od člověka, kterému někdo věří. Agentura doporučí nástroj klientovi, účetní poradí podnikateli, vývojář pošle odkaz kolegovi, spokojený zákazník zmíní produkt v komunitě. To je zdravý růst: méně aukcí o pozornost, více reputace.
+
+Problém nastává, když se referral program změní v malou špionážní stanici. Každý odkaz dostane agresivní tracking, návštěvník se sleduje napříč webem, partner chce export leadů „pro jistotu“ a tým najednou neví, kdo je správcem, kdo zpracovatelem a proč se některá data vlastně sdílí. GDPR rozlišuje správce a zpracovatele podle toho, kdo určuje účely a prostředky zpracování, a Evropská komise připomíná, že povinnosti zpracovatele mají být upravené smlouvou nebo jiným právním aktem. Jinými slovy: partnerství není kouzelné slovo, které vypne odpovědnost za data.
+
+**Codyho komentář:** doporučení má vonět důvěrou, ne affiliate panelem s pěti skripty a pocitem, že návštěvník prošel letištní kontrolou. Když musíš kvůli jednomu doporučení nasadit sledovací kombajn, možná nemáš growth program, ale datovou kocovinu v předstihu.
+
+## R.1 Rozliš tři typy doporučení
+
+Ne všechna partnerství potřebují stejnou techniku, smlouvu ani měření. Nejdřív si ujasni, co vlastně stavíš.
+
+| Typ | Jak funguje | Co měřit | Privacy riziko |
+| --- | --- | --- | --- |
+| Veřejné doporučení | Partner sdílí běžný odkaz na článek, landing page nebo šablonu. | Návštěvy a konverze agregovaně podle zdroje. | Nízké, pokud nepoužíváš osobní tracking. |
+| Doporučení zákazníka | Spokojený zákazník přivede konkrétní firmu nebo kontakt. | Počet předaných zájmů, kvalita příležitosti, uzavřené obchody. | Střední, protože se pracuje s kontaktními údaji. |
+| Implementační partner | Agentura nebo konzultant produkt aktivně nabízí, nastavuje a podporuje. | Aktivní klienti, stav implementací, support signály. | Vyšší, protože partner může sahat do zákaznických dat. |
+
+Praktické pravidlo: čím blíž je partner k zákaznickým datům, tím méně improvizuj. Veřejný odkaz může být jednoduchý. Implementační partner potřebuje jasné role, přístupy, odpovědnosti, bezpečnostní minimum a proces ukončení spolupráce.
+
+## R.2 Referral odkaz nemusí být osobní stopa
+
+U malého SaaS často stačí jednoduchý parametr v URL:
+
+```text
+https://example.com/?ref=ucetni-komunita
+```
+
+Tenhle parametr říká, odkud návštěva přišla. Nemusí říkat, kdo přesně návštěvník je, na kterých webech byl předtím ani jak dlouho váhal nad formulářem. Pokud chceš vyhodnotit kvalitu partnera, měř raději agregované signály:
+
+- návštěvy z konkrétního referenčního zdroje,
+- počet dobrovolně odeslaných poptávek,
+- počet registrací,
+- aktivaci v produktu,
+- uzavřené obchody,
+- retenci zákazníků z daného zdroje.
+
+Vyhni se tomu, aby `ref` obsahoval e-mail, jméno, telefon nebo identifikátor konkrétní osoby. Když už potřebuješ unikátní kód pro vyplacení odměny, drž ho jako interní kód partnera, ne jako veřejný osobní údaj zákazníka. A hlavně neukládej kompletní URL s citlivými parametry do logů, analytiky a support nástrojů. Jeden nevinný link může obsahovat token, e-mail nebo interní název firmy a najednou máš osobní údaje tam, kde je vůbec nechceš.
+
+## R.3 Odměna bez manipulace
+
+Referral program má motivovat, ne uplácet lidi k doporučování špatného produktu. Férová odměna má být srozumitelná, přiměřená a nezávislá na nátlaku na koncového zákazníka.
+
+Dobré modely:
+
+- kredit na další fakturu pro existujícího zákazníka,
+- fixní odměna za kvalifikovanou domluvenou schůzku,
+- procento z první platby za reálně uzavřeného zákazníka,
+- společný obsah nebo webinář místo finanční odměny,
+- partnerský balíček podpory pro agentury.
+
+Pozor na špatné motivace:
+
+- odměna za každý e-mail v importovaném seznamu,
+- tlak na doporučování bez jasného označení vztahu,
+- skryté slevy, které rozhodí pricing a důvěru,
+- odměna i za zákazníka, který po týdnu zjistí, že produkt nepotřebuje,
+- partner, který slibuje funkce, které produkt nemá.
+
+Do podmínek napiš jednoduše: za co odměna vzniká, kdy se vyplácí, kdy nevzniká, jak se řeší refundace a kdo komunikuje se zákazníkem. Není potřeba právnický román, ale musí být jasné, že zákazník není žeton v referral automatu.
+
+## R.4 Partner onboarding jako malý produkt
+
+Když partner produkt doporučuje opakovaně, potřebuje lepší materiály než „tady je náš web, hodně štěstí“. Dej mu balíček, který snižuje riziko špatného slibu.
+
+Partner kit může obsahovat:
+
+| Materiál | Proč existuje |
+| --- | --- |
+| Jednovětá pozice | Aby partner uměl říct, komu produkt pomáhá. |
+| Pro koho produkt není | Aby nevznikaly špatné leady a zklamaná dema. |
+| Demo scénář | Aby partner ukazoval reálnou hodnotu, ne náhodné menu. |
+| Bezpečnostní a privacy FAQ | Aby uměl odpovědět na otázky o datech bez improvizace. |
+| Předávací formulář | Aby předal jen nutné údaje a jasný kontext. |
+| Eskalační kontakt | Aby věděl, kdy nepředstírat expertízu a zavolat tým. |
+
+Privacy-first detail: partnerovi nedávej plošný přístup do účtů jen proto, že „pomáhá klientům“. Použij role, dočasné přístupy, auditní log a jasné potvrzení zákazníka. Partner má vidět jen to, co potřebuje k domluvené práci.
+
+## R.5 Předání leadu bez datového přebytku
+
+Předávací formulář má být krátký. Cílem není vytvořit detektivní složku, ale pochopit obchodní kontext.
+
+Stačí například:
+
+| Pole | Příklad |
+| --- | --- |
+| Firma | Název organizace nebo projektu. |
+| Kontakt | Jméno, e-mail, role. |
+| Souhlas s předáním | Krátké potvrzení, že kontakt očekává komunikaci. |
+| Problém | Jedna věta o situaci zákazníka. |
+| Naléhavost | Teď, tento kvartál, výhledově. |
+| Zdroj doporučení | Partner, komunita, konkrétní akce. |
+| Poznámka | Jen relevantní informace pro první kontakt. |
+
+Co do formuláře nepatří:
+
+- soukromé poznámky o osobnosti zákazníka,
+- interní drby z firmy,
+- nepotřebná čísla smluv a osobní identifikátory,
+- kompletní export komunikace s partnerem,
+- citlivé údaje, které nejsou nutné pro první obchodní krok.
+
+Když zákazník přijde přes doporučení, první e-mail může férově říct: „Ozývám se na základě doporučení od [partner], se kterým jste souhlasil/a.“ Tím se snižuje zmatení a posiluje důvěra. Žádné „náhodou jsme na vás narazili“, když všichni víme, že to není pravda. Marketingový kabátek z mlhy má krátké rukávy.
+
+## R.6 Metriky partnerství bez honu na každý pixel
+
+Referral a partnerství vyhodnocuj podle kvality, ne podle největšího čísla v tabulce. Partner, který přivede pět dobře připravených zákazníků, může být cennější než partner, který přivede stovku náhodných registrací.
+
+Sleduj jednou měsíčně:
+
+- počet doporučení podle partnera,
+- kvalifikovanost leadů,
+- čas do první odpovědi,
+- konverzi na aktivaci nebo placený plán,
+- retenci po 30/90 dnech,
+- support náročnost zákazníků z partnerství,
+- počet incidentů nebo nejasností způsobených špatným slibem.
+
+Ke každému partnerovi přidej krátký lidský komentář: „vodí malé týmy s jasným problémem“, „vodí moc enterprise poptávek mimo náš rozsah“, „potřebuje lepší demo scénář“, „skvěle komunikuje limity“. Tenhle komentář často řekne víc než graf návštěvnosti.
+
+## R.7 Ukončení partnerství bez spálené země
+
+Partnerství nemusí fungovat navždy. Produkt se změní, partner změní směr, kvalita leadů klesne nebo se objeví bezpečnostní problém. Dobré ukončení je součástí dobrého programu.
+
+Při ukončení projdi:
+
+- zrušení aktivních referral odkazů nebo jejich přesměrování,
+- vypnutí partnerských přístupů,
+- uzavření otevřených obchodních příležitostí,
+- vyrovnání domluvených odměn,
+- archivaci jen nutných účetních a smluvních údajů,
+- odstranění sdílených dokumentů, které už partner nepotřebuje,
+- krátké shrnutí, proč spolupráce končí.
+
+Pokud partner měl přístup k zákaznickým datům, ukončení nesmí být jen „díky a měj se“. Potřebuješ potvrdit, že přístupy jsou pryč, data se dál nepoužívají a zákazník ví, kdo mu dál poskytuje podporu.
+
+## R.8 Checklist referral programu
+
+- Víš, jestli jde o veřejné doporučení, zákaznický referral nebo implementační partnerství?
+- Používáš referral kódy bez osobních údajů v URL?
+- Měříš agregované obchodní signály místo sledování jednotlivců napříč webem?
+- Má partner jasný kit: pozice, limity, demo scénář, privacy FAQ a předávací postup?
+- Předávací formulář sbírá jen data nutná pro první obchodní krok?
+- Je odměna srozumitelná a nevytváří motivaci ke špatným slibům?
+- Máš proces pro odebrání přístupů a ukončení partnerství?
+
+Jedna hodinová iterace: vezmi jeden existující nebo plánovaný partnerský kanál a napiš k němu typ partnerství, co přesně se měří, jaká data se předávají, kdo k nim má přístup a kdy se mažou. Pokud odpověď zní „to se uvidí“, ještě nemáš partnerství. Máš jen budoucí tabulkové peklo s logem.
+
 ## Zdroje
 
 - ADR GitHub Organization: [Architectural Decision Records](https://adr.github.io/)
 - Atlassian: [Working with WIP limits for kanban](https://www.atlassian.com/agile/kanban/wip-limits)
 - European Commission: [Can someone else process the data on my organisation’s behalf?](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/obligations/controllerprocessor/can-someone-else-process-data-my-organisations-behalf_en)
+- European Commission: [What is a data controller or a data processor?](https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/obligations/controllerprocessor/what-data-controller-or-data-processor_en)
 - Evropská komise: [Jaké údaje lze zpracovávat a za jakých podmínek?](https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/overview-principles/what-data-can-we-process-and-under-which-conditions_cs)
 - European Commission: [NIS2 Directive: securing network and information systems](https://digital-strategy.ec.europa.eu/en/policies/nis2-directive)
 - DORA: [Software delivery performance metrics](https://dora.dev/guides/dora-metrics/)
@@ -2723,6 +2872,7 @@ Jedna hodinová iterace: vyber jeden experiment z aktuálního webu nebo onboard
 
 ## Pracovní log
 
+- 2026-08-06: Doplněna příloha R o referral programech a partnerství bez sledovacího cirkusu: typy doporučení, referral odkazy bez osobních údajů, férové odměny, partner kit, předávání leadů, metriky, ukončení spolupráce a checklist.
 - 2026-08-06: Doplněna příloha Q o férových experimentech bez dark patterns: hypotézy, minimalizace měření, ochrana uživatele, vyhodnocení, backlog a checklist.
 - 2026-08-06: Doplněna příloha P o B2B prodeji bez CRM cirkusu: jednoduchá pipeline, discovery otázky, minimalizace dat v CRM, hodnotné follow-upy, předání do onboardingu a checklist.
 - 2026-08-06: Doplněna příloha O o férovém offboardingu zákazníka: export dat, zrušení účtu, retence po odchodu, exit feedback a checklist.
