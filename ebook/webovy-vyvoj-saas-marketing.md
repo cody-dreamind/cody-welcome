@@ -370,6 +370,144 @@ SaaS landing page má začít konkrétní bolestí zákazníka, ne seznamem funk
 
 ---
 
+# 4. Obsahový marketing bez závislosti na algoritmech
+
+Obsahový marketing není soutěž o to, kdo vyrobí víc příspěvků za týden. Je to dlouhodobý systém, ve kterém firma pomáhá správným lidem udělat lepší rozhodnutí. Někdy z toho vznikne poptávka hned. Častěji vznikne důvěra, zapamatování a důvod vrátit se ve chvíli, kdy problém začne pálit víc než rozpočet na „někdy potom“.
+
+Pro malý evropský tým je nebezpečné stavět celý marketing na platformě, kterou nevlastní. Dosah na sociálních sítích se mění, pravidla reklamních systémů se mění, vyhledávače upravují řazení výsledků a účet může zmizet rychleji než sušenka u monitoru. Platformy používej, ale nepleť si je s vlastním domem. Tvůj web, archiv článků, RSS feed, přímé odkazy, produktové dokumenty a databáze dobrovolně získaných kontaktů jsou pevnější základ.
+
+Google ve svých Search Central doporučeních zdůrazňuje, že obsah má být užitečný, spolehlivý a psaný primárně pro lidi, ne pro manipulaci výsledků vyhledávání: https://developers.google.com/search/docs/fundamentals/creating-helpful-content. To je dobrá zpráva pro projekty, které nechtějí hrát hru na klíčová slova bez duše. Praktický, poctivý obsah má pořád smysl — jen musí řešit skutečné otázky zákazníků.
+
+## 4.1 Nejdřív publikační základna, potom megafon
+
+Nejčastější chyba malých firem: začnou LinkedInem, reklamou nebo newsletterem, ale nemají kam posílat lidi. Výsledkem je obsah, který po týdnu zmizí v proudu a nedá se pořádně najít. Lepší pořadí je opačné.
+
+Základní vrstva obsahu:
+
+- vlastní web s přehlednými články, případovkami a návody,
+- čitelné URL adresy, které dávají smysl i bez kontextu,
+- RSS feed pro lidi, kteří chtějí sledovat novinky bez algoritmu,
+- interní prolinkování mezi souvisejícími tématy,
+- jednoduchá stránka „Začněte tady“ pro nové návštěvníky,
+- archiv, který nezmizí jen proto, že platforma změnila rozhraní.
+
+Teprve potom řeš distribuci. Sociální sítě, komunity, partnerské weby, podcasty nebo placená propagace mají zesilovat obsah, který už žije na tvém webu. Ne ho nahrazovat.
+
+RSS stojí za zmínku, protože je nudně praktické. Specifikace RSS 2.0 popisuje jednoduchý formát pro publikování seznamu položek kanálu: https://www.rssboard.org/rss-specification. Pro firmu to znamená, že čtenář může sledovat novinky ve vlastní čtečce bez přihlášení k další platformě. Privacy-first marketing nemusí být méně pohodlný; jen odmítá vydávat sledování za péči o zákazníka.
+
+Codyho komentář: RSS není retro. Retro je spoléhat na to, že ti algoritmus cizí firmy bude navždycky zdarma doručovat zákazníky, protože jsi mu hezky poprosil v promptu.
+
+## 4.2 Obsah piš podle rozhodnutí zákazníka
+
+Dobrý obsah odpovídá na otázku, kterou si zákazník klade v určité fázi rozhodování. Ne každý článek má prodávat hned. Některý má pomoci pojmenovat problém, jiný porovnat možnosti, další odstranit obavu před nákupem.
+
+Praktická mapa obsahu:
+
+| Fáze | Otázka zákazníka | Typ obsahu | Příklad |
+| --- | --- | --- | --- |
+| Uvědomění | „Proč nám to pořád drhne?“ | vysvětlující článek | „Proč kontaktní formulář negeneruje kvalitní poptávky“ |
+| Diagnostika | „Co přesně je špatně?“ | checklist nebo auditní návod | „20 bodů před spuštěním SaaS landing page“ |
+| Výběr řešení | „Jaké máme možnosti?“ | srovnání přístupů | „Webflow, custom vývoj nebo WordPress pro B2B web“ |
+| Důvěra | „Umí to někdo bezpečně dodat?“ | případová studie | „Jak jsme zrychlili poptávkový web bez reklamních pixelů“ |
+| Nákup | „Co se stane po kontaktu?“ | procesní stránka | „Jak probíhá první workshop a co z něj dostanete“ |
+| Retence | „Jak z toho dostanu víc?“ | návody a šablony | „Jak vyhodnotit poptávky bez invazivní analytiky“ |
+
+Když nevíš, čím začít, projdi posledních deset poptávek, schůzek nebo e-mailů a vytáhni opakující se otázky. Zákazníci ti dávají obsahový plán zadarmo. Jen ho většina firem ignoruje, protože zrovna hledá „top trendy pro Q4“.
+
+## 4.3 Jeden článek má mít jeden konkrétní úkol
+
+Každý text by měl před psaním projít jednoduchým zadáním. Bez něj vzniká obsahová kaše: trochu edukace, trochu prodej, trochu nábor, trochu ego, nikde jasný další krok.
+
+Mini-brief před psaním:
+
+- **Čtenář:** pro koho přesně text je?
+- **Situace:** v jakém problému nebo rozhodnutí se nachází?
+- **Slib:** co bude po přečtení umět, chápat nebo mít připravené?
+- **Důkaz:** jaké příklady, zkušenosti, data nebo zdroje tvrzení podpoří?
+- **Další krok:** co má čtenář udělat, pokud mu text pomohl?
+- **Datová stopa:** potřebujeme něco měřit nebo sbírat, a proč?
+
+Příklad briefu:
+
+> Čtenář je zakladatel malého B2B SaaS před první placenou kampaní. Řeší, jestli má nejdřív upravit landing page. Po přečtení pozná pět hlavních slabin stránky a stáhne si checklist. Měříme jen návštěvu článku, kliknutí na checklist a odeslání formuláře.
+
+Takový brief chrání před dvěma extrémy. První je text pro nikoho. Druhý je text pro vyhledávač, který možná přivede návštěvnost, ale nepomůže reálnému zákazníkovi. Google Search Central ve svém SEO Starter Guide připomíná, že užitečný a spolehlivý obsah pro lidi patří k nejdůležitějším základům viditelnosti ve vyhledávání: https://developers.google.com/search/docs/fundamentals/seo-starter-guide.
+
+## 4.4 Distribuce bez sledovacího cirkusu
+
+Distribuce není jen „postnout odkaz“. Je to plán, jak se hotový obsah dostane k lidem, kteří ho pravděpodobně potřebují. Privacy-first distribuce se ptá: dokážeme šířit obsah bez toho, abychom z každého čtenáře udělali reklamní profil?
+
+Kanály s dobrou kontrolou:
+
+- organické vyhledávání přes kvalitní strukturu webu,
+- RSS a přímé odkazy,
+- e-mail jen pro dobrovolně přihlášené lidi,
+- partnerské odkazy z relevantních webů,
+- komunitní příspěvky s hodnotou, ne jen self-promo,
+- dokumentace, šablony a veřejné checklisty,
+- osobní follow-up po schůzce, pokud s tím člověk počítá.
+
+Kanály, kde buď opatrný:
+
+- remarketingové pixely,
+- lookalike publika z nahraných kontaktů,
+- embedded social widgety,
+- heatmapy nahrávající citlivé chování,
+- automatizace, které posílají data do několika systémů bez jasného účelu.
+
+To neznamená, že reklama je zakázané slovo. Znamená to, že každá distribuce má mít datovou rozvahu. Jaká data sbíráme? Kde končí? Jak dlouho je držíme? Umíme stejný cíl splnit méně invazivně? Pokud odpověď zní „nevíme“, není to strategie, ale konfety v kabeláži.
+
+## 4.5 Recykluj obsah, ne důvěru
+
+Jedna kvalitní kapitola, případovka nebo návod může žít v několika formátech. To je efektivní. Problém nastává, když se z recyklace stane 27 prázdných postů s jiným emoji na začátku.
+
+Smysluplná recyklace:
+
+- z velkého návodu udělej checklist,
+- z případové studie vytáhni anonymizovaný „před a po“ příklad,
+- z technického článku udělej krátký slovníček pro netechnické zakladatele,
+- z interního procesu vytvoř veřejnou šablonu,
+- z FAQ udělej sérii krátkých odpovědí,
+- z webináře napiš článek a přidej přepis.
+
+Privacy-first pravidlo: při recyklaci nemaž kontext a nezveřejňuj detaily, které zákazník nesdílel pro marketing. Anonymizace není jen smazání názvu firmy. Zkontroluj obor, velikost, kombinaci nástrojů, screenshoty, metadata souborů a citace. U menších trhů jde firmu poznat i bez loga.
+
+## 4.6 Měření obsahu: méně metrik, lepší otázky
+
+Obsahový marketing se nemá řídit jen počtem zobrazení. Návštěvnost je užitečný signál, ale sama o sobě neříká, jestli obsah pomáhá byznysu. Článek s menší návštěvností může přinést lepší poptávky než virální text, který přečtou lidé mimo cílovku.
+
+Měř raději otázky:
+
+- Přivádí článek relevantní návštěvníky z vyhledávání nebo přímých odkazů?
+- Klikají lidé na související checklist, případovku nebo službu?
+- Zmiňují zákazníci článek v poptávkách nebo na schůzkách?
+- Snižuje obsah počet opakovaných vysvětlovacích e-mailů?
+- Pomáhá obchodníkovi nebo zakladateli lépe vést rozhovor?
+- Dá se článek aktualizovat a používat dál, nebo rychle zastarává?
+
+Technicky často stačí privacy-friendly analytika s agregovanými událostmi: zobrazení stránky, kliknutí na CTA, stažení checklistu, odeslání formuláře. Nepotřebuješ vědět, že konkrétní člověk četl v 22:14 odstavec o pricingu a pak si šel udělat čaj. To je sice fascinující, ale taky trochu divné.
+
+## 4.7 Checklist obsahového systému
+
+Před tím, než začneš psát další článek, projdi si systém jako celek:
+
+- Má web jasné kategorie a stránku, odkud se nový čtenář zorientuje?
+- Existuje RSS feed a přímé odkazy na články bez přihlašovací brány?
+- Má každý článek jednoho konkrétního čtenáře, situaci a další krok?
+- Odpovídá obsah na reálné otázky zákazníků, ne jen na interní témata firmy?
+- Jsou zdroje uvedené u faktů, doporučení a citovaných pravidel?
+- Má článek interní odkazy na související služby, návody nebo případovky?
+- Dá se článek rozumně recyklovat bez ztráty kontextu?
+- Je distribuce naplánovaná bez zbytečných trackerů a platformové závislosti?
+- Měříme jen události, které pomáhají rozhodování?
+- Má někdo odpovědnost za aktualizaci starších článků?
+
+## Shrnutí kapitoly
+
+Obsahový marketing bez algoritmické závislosti začíná vlastním webem, přímými odkazy a užitečnými odpověďmi na skutečné otázky zákazníků. Platformy používej jako megafon, ne jako archiv. Privacy-first přístup pomáhá držet distribuci čistou, měření střídmé a důvěru čtenářů nedotčenou reklamním cirkusem.
+
+---
+
 ## Zdroje
 
 - Evropská komise: Data protection — https://commission.europa.eu/law/law-topic/data-protection_en
@@ -377,6 +515,9 @@ SaaS landing page má začít konkrétní bolestí zákazníka, ne seznamem funk
 - Evropská komise: What information must be given to individuals whose data is collected? — https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/what-information-must-be-given-individuals-whose-data-collected_en
 - Evropská komise: Information for individuals, consent and rights — https://commission.europa.eu/law/law-topic/data-protection/information-individuals_en
 - Google Search Central: Understanding Google Page Experience — https://developers.google.com/search/docs/appearance/page-experience
+- Google Search Central: Creating helpful, reliable, people-first content — https://developers.google.com/search/docs/fundamentals/creating-helpful-content
+- Google Search Central: SEO Starter Guide — https://developers.google.com/search/docs/fundamentals/seo-starter-guide
+- RSS Advisory Board: RSS 2.0 Specification — https://www.rssboard.org/rss-specification
 - web.dev: Web Vitals — https://web.dev/articles/vitals?hl=en
 
 ---
@@ -386,3 +527,4 @@ SaaS landing page má začít konkrétní bolestí zákazníka, ne seznamem funk
 - 2026-08-06: Založena struktura e-booku a dopsána první kapitola o privacy-first webu jako konkurenční výhodě včetně praktického checklistu a zdrojů.
 - 2026-08-06: Dopsána druhá kapitola o základech vydělávajícího webu: nabídka, struktura, rychlost, důvěra a checklist obchodní stránky.
 - 2026-08-06: Dopsána třetí kapitola o SaaS landing page: bolest zákazníka, CTA, formulář, důkazy hodnoty, hypotézy a checklist.
+- 2026-08-06: Dopsána čtvrtá kapitola o obsahovém marketingu bez závislosti na algoritmech, včetně publikační základny, distribuce, měření a checklistu.
