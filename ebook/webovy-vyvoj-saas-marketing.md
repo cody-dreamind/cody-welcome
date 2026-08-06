@@ -2306,6 +2306,119 @@ Jedna hodinová iterace: vezmi existující dashboard, smaž pět grafů bez roz
 
 ---
 
+# Příloha O: Offboarding zákazníka bez rukojmí a datového bordelu
+
+Dobrý SaaS nemá zákazníka držet zamčeného. Má mu pomáhat tak dobře, že zůstane dobrovolně. Offboarding je proto součást produktu, ne trapná zadní vrátka schovaná za support formulář. Když zákazník odchází, pořád testuje tvoji důvěryhodnost: umíš férově ukončit službu, vydat data, vysvětlit retenci a nesabotovat jeho přechod jinam?
+
+Privacy-first přístup tady dává praktický rámec. GDPR dává lidem mimo jiné právo na přístup k osobním údajům, právo na výmaz a právo na přenositelnost údajů za určitých podmínek. Viz [Your Europe: Data protection and online privacy](https://europa.eu/youreurope/citizens/consumers/internet-telecoms/data-protection-online-privacy/index_en.htm). Pro B2B SaaS to neznamená, že každý export musí být kosmická loď. Znamená to, že máš předem vědět, co umíš vydat, komu, v jakém formátu a kdy data smažeš.
+
+**Codyho komentář:** pokud je zrušení účtu těžší než registrace, není to growth hacking. Je to produktová pasivní agrese v košili s límečkem.
+
+## O.1 Navrhni konec už při návrhu začátku
+
+Offboarding se špatně lepí na hotový produkt. Když data roky ukládáš bez jasného vlastníka, účelu a vztahu k účtu, později je těžké říct, co přesně exportovat a co bezpečně smazat. Proto už při návrhu nové funkce přidej otázku:
+
+> Co se s těmito daty stane, když zákazník zruší účet?
+
+U každého typu dat si napiš:
+
+- jestli patří zákazníkovi, uživateli, systému nebo účetnictví,
+- jestli má být součástí exportu,
+- jak dlouho ho musíš držet kvůli smlouvě, bezpečnosti nebo zákonné povinnosti,
+- kdo může požádat o výmaz,
+- jak poznáš, že výmaz proběhl i v zálohách nebo odvozených systémech.
+
+Praktický příklad: projektové poznámky zákazníka patří do exportu. Interní auditní log změn může mít kratší nebo delší retenci podle bezpečnostního účelu, ale nemá se míchat do běžného zákaznického CSV. Faktury se nebudou mazat stejně jako drafty v aplikaci, protože mají jiný účel a povinnosti. Jedna věta „smažeme všechno“ zní hezky, dokud nenarazí na účetnictví, incidentní log a obnovu ze záloh.
+
+## O.2 Export má být nudný, čitelný a dokumentovaný
+
+Export dat nemusí být krásný. Musí být použitelný. Nejhorší export je ZIP plný nepojmenovaných JSON souborů, kde se zákazník cítí jako archeolog v troskách vlastního produktu.
+
+Dobré minimum:
+
+- jeden `README.md` s popisem obsahu exportu,
+- otevřené formáty jako CSV, JSON, Markdown nebo běžné přílohy,
+- stabilní názvy souborů a složek,
+- časové údaje v jednotném formátu a časové zóně,
+- informace, co export neobsahuje a proč,
+- datum vytvoření exportu a identifikátor účtu nebo workspace.
+
+Příklad struktury:
+
+```text
+export-acme-2026-08-06/
+  README.md
+  projects.csv
+  users.csv
+  tasks.json
+  files/
+  billing-summary.csv
+```
+
+Pokud má produkt složitější vztahy, přidej schéma. Stačí obyčejná tabulka: název souboru, co obsahuje, klíčové sloupce, vazby na další soubory. Cílem není udělat dokonalý datový warehouse. Cílem je, aby zákazník nemusel psát supportu: „Co je sakra `entity_payload_final_v3.json`?“
+
+## O.3 Zrušení účtu nesmí být bludiště
+
+Zrušení může být citlivý moment, protože tým přichází o revenue. To ale není omluva pro tmavé vzory. Férový proces zrušení může nabídnout pauzu, export nebo krátkou otázku na důvod, ale nesmí zákazníka trestat nekonečným potvrzováním.
+
+Dobrý tok:
+
+1. zákazník otevře fakturaci nebo nastavení účtu,
+2. vidí dopad zrušení: datum konce přístupu, co se stane s daty, co se stane s fakturací,
+3. může stáhnout export nebo požádat o něj,
+4. potvrdí zrušení jasným tlačítkem,
+5. dostane e-mailové potvrzení s termíny retence a kontaktem na support.
+
+Nedělej:
+
+- skryté zrušení jen přes e-mail supportu,
+- automatické mazání bez varování,
+- falešné překážky typu „zavolejte obchodníkovi“,
+- retention nabídky, které jsou výhodné jen pro hlasité zákazníky,
+- formulář, který sbírá víc osobních údajů než samotný produkt potřeboval.
+
+Malý tým si může pomoci jednoduchým pravidlem: zrušení má být kratší než onboarding. Pokud registrace trvá dvě minuty a zrušení vyžaduje detektivní licenci, produkt právě selhal v důvěře.
+
+## O.4 Retence po odchodu musí mít vlastníka
+
+Po zrušení účtu začíná méně viditelná část: co zůstává v systému a na jak dlouho. Tady se vyplatí navázat offboarding na datovou mapu z přílohy I. Nestačí mít text v podmínkách. Potřebuješ provozní mechanismus.
+
+Minimální retence mapa po zrušení:
+
+| Typ dat | Co se stane po zrušení | Vlastník | Poznámka |
+| --- | --- | --- | --- |
+| Uživatelský obsah | export, potom výmaz podle retence | produkt/tech | ověřit vazby na soubory |
+| Fakturační údaje | držet podle účetních povinností | finance | oddělit od produktových dat |
+| Auditní logy | krátká bezpečnostní retence | tech/security | omezit přístup |
+| Support tikety | anonymizace nebo výmaz podle účelu | support | pozor na přílohy |
+| Zálohy | přirozené vypršení zálohovací rotace | tech | popsat v dokumentaci |
+
+Důležité je, aby výjimky nebyly tajemství. Pokud data nemůžeš smazat hned kvůli fakturaci, bezpečnosti nebo zálohám, napiš to normálně. Lidé většinou snesou rozumné omezení. Hůř snáší mlhu.
+
+## O.5 Exit feedback bez nátlaku
+
+Zákazník, který odchází, ti může dát nejlepší produktovou lekci. Ale jen pokud ho nebudeš vyslýchat. Exit feedback má být dobrovolný, krátký a použitelný.
+
+Tři otázky stačí:
+
+1. „Co byl hlavní důvod zrušení?“
+2. „Co by muselo být jiné, abyste zůstali?“
+3. „Můžeme vás kontaktovat kvůli krátkému dovysvětlení?“
+
+První dvě odpovědi můžeš uložit agregovaně k produktu. Třetí je samostatný souhlas s kontaktem, ne automatická záminka pro prodejní hon. Pokud zákazník nechce odpovědět, respektuj to. Ticho je také signál: možná produkt nedoručil hodnotu dost jasně na to, aby stálo za to psát rozchodový román.
+
+## O.6 Checklist offboardingu
+
+- Máš u každého typu dat jasně napsané, jestli patří do exportu, výmazu nebo zákonné retence?
+- Umí zákazník získat export ve srozumitelném formátu s krátkým `README.md`?
+- Je zrušení účtu dostupné bez skrytého telefonátu, nátlaku nebo tmavých vzorů?
+- Vysvětluješ zákazníkovi datum konce přístupu, další fakturaci a retenci dat?
+- Má retence po zrušení vlastníka v produktu, technice, financích nebo supportu?
+- Neobsahuje exit feedback víc osobních údajů, než potřebuješ pro rozhodnutí?
+- Ví support, jak odpovědět na žádost o export, výmaz nebo obnovu omylem zrušeného účtu?
+
+Offboarding je reputace v praxi. Zákazník, kterému pomůžeš odejít férově, se může vrátit, doporučit tě nebo aspoň nevyprávět, že tvůj produkt byl hotel California s fakturací. A to je docela slušná marketingová metrika.
+
 ## Zdroje
 
 - ADR GitHub Organization: [Architectural Decision Records](https://adr.github.io/)
@@ -2352,6 +2465,7 @@ Jedna hodinová iterace: vezmi existující dashboard, smaž pět grafů bez roz
 
 ## Pracovní log
 
+- 2026-08-06: Doplněna příloha O o férovém offboardingu zákazníka: export dat, zrušení účtu, retence po odchodu, exit feedback a checklist.
 - 2026-08-05: Doplněna příloha N o provozním dashboardu bez datového smogu: rozdělení dashboardů, privacy-first telemetry, prahy alertů, lidské překlady metrik a checklist.
 - 2026-08-05: Doplněna příloha M o používání AI asistentů v malém privacy-first SaaS týmu: datové úrovně, týmová pravidla, prompt injection, AI Act inventář a checklist.
 - 2026-08-05: Doplněna příloha L s incidentním runbookem pro malý privacy-first SaaS: priority P0–P3, postup první hodiny, komunikace, GDPR datové posouzení, postmortem a checklist.
