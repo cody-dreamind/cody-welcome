@@ -3625,6 +3625,119 @@ B2B důvěryhodnost není jednorázový certifikát nálady. Je to schopnost ryc
 
 ---
 
+# Příloha R: Zálohy a obnova bez falešného pocitu bezpečí
+
+Záloha není soubor v cloudu. Záloha je schopnost vrátit službu do použitelného stavu, když se pokazí databáze, release, integrace, účet administrátora nebo lidská nálada v pátek odpoledne. Malý SaaS tým nepotřebuje hned armádu procesů. Potřebuje vědět, co se zálohuje, jak často, kam, kdo to umí obnovit a kdy se to naposledy opravdu vyzkoušelo.
+
+Privacy-first princip je tady jednoduchý: zálohuj jen data, která opravdu potřebuješ provozně chránit, drž je v evropském provozu, šifruj je a maž je podle retenční politiky. Jinak se ze záloh stane temný sklep plný historických osobních údajů. A temné sklepy jsou dobré možná pro brambory, ne pro SaaS.
+
+## R.1 Nejdřív urči, co je skutečně obnovitelné
+
+Ne všechno má stejnou hodnotu. Marketingový screenshot se dá nahradit. Fakturační data, zákaznické konfigurace a auditní záznamy už méně. Začni proto mapou obnovy, ne nástrojem na zálohování.
+
+Praktická tabulka:
+
+| Oblast | Příklad | Dopad ztráty | Cíl obnovy |
+| --- | --- | --- | --- |
+| Produkční databáze | účty, projekty, nastavení | zákazník nemůže pracovat | nejrychlejší obnova |
+| Souborové přílohy | nahrané dokumenty, exporty | ztráta zákaznické práce | obnova podle priorit |
+| Konfigurace infrastruktury | DNS, env proměnné, deploy nastavení | služba nejde spustit | verzovaná rekonstrukce |
+| Zdrojový kód | aplikace, migrace, skripty | nejde opravit ani redeploynout | git + chráněné přístupy |
+| Marketingový web | články, landing page, obrázky | obchodní výpadek | statická obnova stačí |
+
+U každé oblasti si napiš dvě čísla:
+
+- **RPO**: kolik dat si můžeš dovolit ztratit. Například posledních 15 minut, 1 hodinu nebo 1 den.
+- **RTO**: jak dlouho může trvat návrat služby. Například 30 minut pro login, 4 hodiny pro interní reporty.
+
+Nemusíš z toho dělat korporátní knihu zaklínadel. Stačí jedna stránka, kterou pochopí vývojář, zakladatel i člověk ze supportu.
+
+## R.2 Zálohy odděl od produkce i od ega administrátora
+
+Špatná záloha je ta, kterou smaže stejný problém jako produkci. Pokud má jeden admin účet přístup k aplikaci, databázi i všem zálohám, nemáš plán obnovy. Máš jeden velmi důležitý single point of facepalm.
+
+Minimum pro malý tým:
+
+- Produkční databáze a zálohy nejsou ve stejném účtu bez další ochrany.
+- Přístup k zálohám má méně lidí než přístup k aplikaci.
+- Mazání záloh vyžaduje jinou roli nebo aspoň druhý potvrzovací krok.
+- Přístupy k zálohám se logují a pravidelně kontrolují.
+- Zálohy jsou šifrované a klíče nejsou uložené vedle nich.
+- Obnova nevyžaduje jediného člověka, který je zrovna na horách bez signálu.
+
+Evropský provoz neznamená jen „server je někde v EU“. Zkontroluj i místo uložení snapshotů, replikační regiony, podporu dodavatele a právní dokumentaci. Když produkce běží v Evropě, ale zálohy omylem končí v jiném regionu, privacy-first hodnota dostává elegantní facku.
+
+## R.3 Test obnovy je důležitější než zelený dashboard
+
+Dashboard, který tvrdí „backup successful“, říká jen to, že nějaký proces doběhl. Neříká, že se z toho dá obnovit funkční služba. Skutečný test je nudný, ale zlato: vezmeš zálohu, obnovíš ji do odděleného prostředí, spustíš aplikaci a projdeš kritické cesty.
+
+Jednoduchý čtvrtletní scénář:
+
+1. Vyber poslední dostupnou zálohu produkční databáze.
+2. Obnov ji do izolovaného testovacího prostředí bez odesílání e-mailů a webhooků.
+3. Spusť aplikaci proti obnoveným datům.
+4. Ověř login testovacího účtu, otevření projektu, zobrazení fakturačního stavu a export dat.
+5. Zapiš čas obnovy, chyby a ruční kroky.
+6. Oprav dokumentaci podle toho, co se opravdu stalo.
+
+Pozor na bezpečnost testu: obnovená data nesmí omylem posílat notifikace zákazníkům, spouštět integrace, indexovat se do vyhledávání nebo se míchat s vývojářskými experimenty. Obnova má ověřit provozní připravenost, ne vytvořit druhý incident s mašličkou.
+
+## R.4 Retence záloh musí ladit s retencí produktu
+
+Když zákazník smaže účet, nestačí odstranit záznam z hlavní databáze a dál ho půl roku vozit v zálohách bez plánu. Zálohy mají vlastní retenční pravidla a musí být popsané lidsky: co v nich může zůstat, jak dlouho, proč a kdy fyzicky zmizí.
+
+Praktické pravidlo:
+
+- Krátkodobé provozní zálohy drž pro rychlou obnovu po chybě.
+- Dlouhodobé archivy drž jen tam, kde existuje jasný zákonný nebo smluvní důvod.
+- Zákazníkovi popiš, že smazaná data mohou po omezenou dobu zůstat v bezpečnostních zálohách, ale nevrací se do aktivního použití.
+- Nepoužívej staré zálohy jako tajný zdroj pro analytiku, AI trénink nebo „možná se to bude hodit“ skladiště.
+
+Tohle je přesně místo, kde se privacy-first přístup potkává s dobrým provozem. Čím méně zbytečných dat ukládáš, tím snazší je zálohování, obnova, mazání i vysvětlování zákazníkům.
+
+## R.5 Dokumentace obnovy musí být použitelná ve stresu
+
+Incident není čas na poetické poznámky typu „nějak obnovit databázi“. Dokument obnovy má být checklist, který se dá projít i ve dvě ráno. Ideálně obsahuje konkrétní odkazy, role a pořadí kroků, ale neobsahuje tajné hodnoty, tokeny ani hesla.
+
+Šablona jedné stránky:
+
+| Položka | Obsah |
+| --- | --- |
+| Vlastník obnovy | jméno nebo role, náhradník |
+| Systémy | databáze, storage, DNS, e-mail, fronta |
+| Kde jsou zálohy | dodavatel, region, typ úložiště |
+| Přístup | kdo může obnovit, kde se žádá přístup |
+| Kroky obnovy | stručné pořadí bez tajných údajů |
+| Bezpečné testování | jak vypnout e-maily, webhooky a integrace |
+| Kontrola úspěchu | kritické cesty, které musí projít |
+| Komunikace | koho informovat při překročení RTO |
+| Poslední test | datum, výsledek, otevřené úkoly |
+
+Dokument měj uložený tak, aby byl dostupný i při výpadku hlavní aplikace. Pokud je návod na obnovu jen v systému, který obnovuješ, je to digitální obdoba klíčů zabouchnutých v autě.
+
+## R.6 Checklist záloh a obnovy
+
+- Máme seznam datových oblastí a u každé RPO/RTO?
+- Víme, kde fyzicky běží zálohy a zda zůstávají v evropském provozu?
+- Jsou zálohy šifrované a jsou klíče oddělené od uložených dat?
+- Umíme obnovit službu bez jednoho konkrétního člověka?
+- Testovali jsme obnovu v posledním čtvrtletí?
+- Víme, jak při obnově vypnout e-maily, webhooky a externí integrace?
+- Sedí retence záloh s retenční politikou produktu?
+- Jsou staré zálohy automaticky mazány podle pravidel?
+- Máme dokument obnovy dostupný mimo hlavní aplikaci?
+- Umíme zákazníkovi lidsky vysvětlit, co se děje s jeho daty v zálohách po smazání účtu?
+
+## Codyho komentář
+
+Nejlepší zálohovací strategie není ta s nejdražším logem. Je to ta, kterou tým opravdu umí použít pod tlakem. Když jednou za kvartál uděláš obnovu nanečisto, možná přijdeš o hodinu času. Když ji nikdy neuděláš, můžeš jednou přijít o firmu. Veselé? Ne. Užitečné? Bohužel velmi.
+
+## Shrnutí přílohy
+
+Zálohy chrání byznys jen tehdy, když jsou obnovitelné, oddělené od produkce, pravidelně testované a sladěné s retencí dat. Privacy-first SaaS má výhodu v jednoduchosti: méně zbytečných dat znamená menší zálohy, rychlejší obnovu a méně právního mlžení. Cílem není mít krásný backup dashboard. Cílem je umět vrátit službu bezpečně zpět do života.
+
+---
+
 ## Zdroje
 
 - Evropská komise: Data protection — https://commission.europa.eu/law/law-topic/data-protection_en
@@ -3662,6 +3775,7 @@ B2B důvěryhodnost není jednorázový certifikát nálady. Je to schopnost ryc
 
 ## Pracovní log
 
+- 2026-08-07: Přidána příloha R o zálohách a obnově bez falešného pocitu bezpečí: mapa obnovy, oddělení záloh, test restore, retence, dokumentace a checklist.
 - 2026-08-07: Přidána příloha P s incidentovým playbookem pro malý SaaS tým: závažnost, prvních 30 minut, zákaznická komunikace, privacy triage, postmortem a checklist připravenosti.
 - 2026-08-07: Přidána příloha Q o B2B trust packu: datové věty pro funkce, subdodavatelé, bezpečnostní minimum, nákupní námitky, živá revize a checklist.
 - 2026-08-07: Přidána příloha O o bezpečných integracích, API klíčích a webhookách: vlastnictví, secret management, ověřování podpisů, scope dat, rotace klíčů a checklist.
