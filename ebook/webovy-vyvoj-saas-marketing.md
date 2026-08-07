@@ -3087,6 +3087,142 @@ Newsletter a RSS jsou přímé distribuční kanály bez závislosti na sociáln
 
 ---
 
+# Příloha N: Produktové signály bez šmírování
+
+Malý SaaS nepotřebuje vědět, kde se uživatel narodil, kolik má otevřených tabů a jestli čte ceník v tramvaji. Potřebuje vědět, jestli lidé dokážou dojít k hodnotě produktu, kde se zasekávají a která rozhodnutí týmu mají skutečný dopad. Rozdíl mezi produktovým signálem a šmírováním je v účelu, detailu a schopnosti data po použití zahodit.
+
+Produktové signály jsou praktická vrstva mezi analytikou a supportem: nejsou to marketingové profily, ale jednoduché odpovědi na otázky typu „našel nový účet první hodnotu do týdne?“ nebo „který krok onboardingu nejčastěji končí opuštěním?“.
+
+## N.1 Začni otázkou, ne eventem
+
+Nejhorší měřicí plán vzniká tak, že vývojář otevře dokumentaci analytiky a začne posílat všechno, co jde kliknout. Výsledek je dashboard, který vypadá důležitě, ale při rozhodování nepomáhá. Lepší začátek je seznam produktových otázek.
+
+Příklad pro B2B SaaS:
+
+| Otázka | Signál | Rozumná granularita |
+| --- | --- | --- |
+| Aktivuje se nový zákazník? | Dokončený první projekt / import / konfigurace | účet, den |
+| Kde se onboarding láme? | Nedokončený krok v toku | krok, anonymní počty |
+| Používá tým klíčovou funkci? | Počet úspěšných použití funkce | účet, týden |
+| Má zákazník riziko odchodu? | Dlouhá neaktivita po dřívějším používání | účet, týden |
+| Pomáhá nová úprava? | Změna dokončení konkrétního úkolu | varianta, období |
+
+Všimni si, že tabulka nezačíná sloupcem „jaké osobní údaje pošleme do nástroje“. To je záměr. Když jde otázka zodpovědět bez osobních údajů, není důvod je přidávat jen proto, že se v JSONu hezky vyjímají.
+
+## N.2 Eventy pojmenuj jako obchodní fakta
+
+Dobré eventy popisují dokončenou hodnotu, ne každý pohyb myší. `button_clicked` je skoro vždycky horší než `invoice_created`, `project_invited_member` nebo `backup_restored`. Kliknutí říká málo. Dokončený úkol říká, že uživatel něco zvládl.
+
+Praktická pravidla:
+
+- Event má název ve tvaru objekt + akce: `project_created`, `invite_sent`, `report_exported`.
+- Event neposílá celé texty, poznámky, názvy zákazníků ani obsah dokumentů.
+- Vlastnosti eventu jsou kategorie, ne osobní detaily: tarif, typ účtu, jazyk rozhraní, velikostní pásmo.
+- Každý event má vlastníka: člověka, který ví, proč existuje a kdy ho smažeme.
+- Pokud event nikdo nepoužil pro rozhodnutí tři měsíce, kandiduje na odstranění.
+
+Špatný event:
+
+```text
+form_field_changed: {
+  email: "eva@example.com",
+  company: "Klient s.r.o.",
+  note: "Potřebujeme migraci z konkurence...",
+  ip: "..."
+}
+```
+
+Lepší event:
+
+```text
+lead_form_submitted: {
+  source_page: "pricing",
+  company_size_bucket: "11-50",
+  requested_contact: true
+}
+```
+
+První varianta krmí analytiku osobními údaji a obchodním obsahem. Druhá stačí pro otázku, jestli cenová stránka generuje relevantní poptávky. Ano, méně dramatické. Ale taky méně právní pyrotechniky.
+
+## N.3 Vytvoř signál aktivity bez individuálního dohledu
+
+Produktový tým často chce vědět, jestli zákazník produkt používá. To je legitimní otázka. Neznamená to ale, že musí vzniknout detailní deníček každého uživatele. U malých týmů obvykle stačí agregace na úroveň účtu a období.
+
+Příklad týdenního health score:
+
+| Signál | Body | Poznámka |
+| --- | ---: | --- |
+| Přihlásil se alespoň jeden člen účtu | +1 | jen agregace na účet |
+| Dokončen klíčový úkol | +3 | např. export reportu nebo vystavení dokladu |
+| Přizván nový člen týmu | +2 | signál rozšiřování hodnoty |
+| Otevřený kritický support ticket | -3 | riziko frustrace |
+| 14 dní bez klíčové akce | -4 | kandidát na lidský follow-up |
+
+Health score není náhrada za rozhovor se zákazníkem. Je to budík. Když ukáže riziko, člověk má zkontrolovat kontext a napsat užitečný e-mail, ne spustit automatickou kampaň „Všimli jsme si, že jste tři dny nevystavili fakturu, všechno v pořádku?“ To je přesně ten moment, kdy produkt začne působit jako hororový domovník.
+
+## N.4 Odděl provozní logy, analytiku a zákaznický kontext
+
+Jedna z nejčastějších chyb: všechno skončí v jednom nástroji, protože „tam se to dobře hledá“. Provozní logy, produktová analytika a zákaznické poznámky ale mají jiné účely, jiné publikum a jiné retenční doby.
+
+Jednoduché rozdělení:
+
+- Provozní logy: slouží k bezpečnosti, dostupnosti a ladění chyb; drž je krátce a přístup omez na technický tým.
+- Produktová analytika: slouží k rozhodování o produktu; preferuj agregace, pseudonymní ID účtu a minimum vlastností.
+- CRM a support: slouží k obchodní a zákaznické komunikaci; ukládej jen relevantní kontext, ne kompletní historii chování.
+- Výzkumné poznámky: slouží k porozumění potřebám; anonymizuj citace, pokud je používáš mimo původní kontext.
+
+Když se tyto vrstvy smíchají, roste riziko i chaos. Najednou má marketér přístup k provozním detailům, support k analytickým experimentům a produktový tým k osobním poznámkám, které nepotřebuje. Privacy-first architektura není jen o nástroji. Je to o tom, kdo vidí co a proč.
+
+## N.5 Dělej rozhodnutí z malých, vysvětlitelných reportů
+
+Dashboard s dvaceti grafy vypadá jako cockpit. Malý tým ale nepotřebuje cockpit, když zatím řídí dodávku. Potřebuje jeden týdenní produktový report, který se dá přečíst za deset minut a vede ke konkrétním rozhodnutím.
+
+Šablona týdenního reportu:
+
+```text
+Týden: 2026-W32
+
+1. Aktivace
+- Nové účty: 18
+- Účty s dokončeným prvním klíčovým úkolem: 9
+- Nejčastější zaseknutí: import dat
+
+2. Retence
+- Aktivní účty z minulého týdne: 31
+- Účty bez klíčové akce 14 dní: 6
+- Ruční follow-up: 3 účty s otevřeným kontextem
+
+3. Produktové rozhodnutí
+- Tento týden zjednodušíme importní obrazovku.
+- Neměníme pricing, protože signál není v ceně, ale v onboardingové práci.
+
+4. Datový úklid
+- Odstranit nepoužívaný event `settings_tab_opened`.
+```
+
+Takový report není vědecký článek. Je to rozhodovací nástroj. Pokud z něj nevznikne žádná akce, report je moc široký, moc abstraktní, nebo jen vyrábí pocit kontroly.
+
+## N.6 Checklist produktových signálů
+
+Před přidáním nové produktové telemetrie si projdi:
+
+- Jaké rozhodnutí má signál zlepšit?
+- Dá se otázka zodpovědět agregovaně místo na úrovni člověka?
+- Posíláme do analytiky jen kategorie, ne volný text a osobní údaje?
+- Má event jasné jméno, vlastníka a očekávanou životnost?
+- Je signál oddělený od provozních logů a CRM poznámek?
+- Ví zákazník v zásadách soukromí, že produktové měření existuje?
+- Umíme event vypnout bez rozbití aplikace?
+- Kontrolujeme jednou měsíčně nepoužívané eventy?
+- Má k datům přístup jen tým, který je potřebuje?
+- Vedl poslední report ke konkrétnímu rozhodnutí?
+
+## Shrnutí přílohy
+
+Produktové signály mají pomáhat dělat lepší rozhodnutí, ne vyrábět digitální akvárium, ve kterém zákazníky pozorujeme přes sklo. Začni otázkou, měř dokončenou hodnotu, drž data agregovaná a pravidelně maž eventy, které nepomáhají. Privacy-first produkt není slepý. Jen nepotřebuje kukátko do každého detailu uživatelského života.
+
+---
+
 ## Zdroje
 
 - Evropská komise: Data protection — https://commission.europa.eu/law/law-topic/data-protection_en
@@ -3123,6 +3259,7 @@ Newsletter a RSS jsou přímé distribuční kanály bez závislosti na sociáln
 
 ## Pracovní log
 
+- 2026-08-07: Přidána příloha N o produktových signálech bez šmírování: otázky před eventy, pojmenování telemetrie, health score, oddělení logů od analytiky a checklist.
 - 2026-08-07: Přidána příloha M o newsletteru a RSS bez marketingové klece: datové minimum, přímá distribuce, střídmé měření, archiv na vlastním webu a checklist.
 - 2026-08-07: Přidána příloha L o interní znalostní bázi: typy stránek, vlastnictví, kontrola aktuálnosti, práce bez zákaznických dat, rozhodovací záznamy a bezpečné napojení AI asistenta.
 - 2026-08-07: Přidána příloha K o retenci dat a odchodu zákazníka bez rukojmí: retenční tabulka, stavy účtu, export, smazání, automatizovaný úklid a checklist.
