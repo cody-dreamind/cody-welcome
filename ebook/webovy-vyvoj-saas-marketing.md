@@ -3223,6 +3223,147 @@ Produktové signály mají pomáhat dělat lepší rozhodnutí, ne vyrábět dig
 
 ---
 
+# Příloha O: Integrace, API klíče a webhooky bez bezpečnostního bordelu
+
+Malý SaaS dřív nebo později začne mluvit s okolním světem. Platební brána, e-mailing, CRM, fakturace, AI model, monitoring, účetnictví, import z cizí aplikace. Integrace jsou super, protože šetří ruce. Zároveň jsou to malé dveře do produktu. A malé dveře se pořád počítají jako dveře, i když na nich někdo nalepí hezké logo partnera.
+
+Privacy-first přístup k integracím začíná jednoduchou otázkou: jak má vypadat bezpečný odchod? Pokud neumíš dodavatele vypnout, otočit klíče, zastavit webhooky a vysvětlit, jaká data k němu tekla, integrace není hotová. Je jen zapojená.
+
+## O.1 Každá integrace musí mít vlastníka a účel
+
+Nejhorší integrace je ta, o které všichni vědí, že „někde běží“, ale nikdo neví proč. Časem se z ní stane tajemný stroj v rohu serverovny. Nikdo ho nechce vypnout, protože možná drží celý byznys pohromadě. Nebo taky jen posílá duplicitní notifikace do nástroje, který už nikdo nepoužívá.
+
+U každé integrace si udržuj malou kartu:
+
+| Pole | Příklad |
+| --- | --- |
+| Název integrace | Fakturoid, Mailcoach, Stripe, vlastní webhook partnera |
+| Vlastník | Produkt, finance, support, vývoj |
+| Účel | Vystavení faktury po zaplacení objednávky |
+| Posílaná data | ID objednávky, firma, DIČ, částka, e-mail fakturační osoby |
+| Směr toku | SaaS → fakturace, fakturace → SaaS, obousměrně |
+| Právní/provozní poznámka | Zpracovatelská smlouva, EU region, retenční pravidlo |
+| Jak vypnout | Vypnout job `invoice.sync`, zneplatnit token, zrušit webhook |
+| Datum další kontroly | 2026-09-01 |
+
+Tohle není byrokracie. Je to pojistka proti tomu, aby se produkt za rok změnil v klubko tokenů, cronů a webhooků, které nikdo nechce rozmotávat.
+
+## O.2 API klíče nikdy nepatří do frontendu ani do dokumentace
+
+API klíč je heslo s pracovním popisem. Pokud ho vložíš do frontendového kódu, sdíleného screenshotu, wiki stránky nebo ukázkového curl příkazu, chováš se k němu jako k letáku. A leták je špatný trezor. Překvapivé, já vím.
+
+Praktická pravidla:
+
+- Klíče drž jen v serverovém prostředí, secret manageru nebo chráněných produkčních proměnných.
+- Do repozitáře patří pouze názvy proměnných, ne hodnoty: `PAYMENT_API_KEY`, `SMTP_PASSWORD`, `WEBHOOK_SIGNING_SECRET`.
+- Vývojové a produkční klíče musí být oddělené.
+- Každá integrace má mít vlastní klíč, ne jeden univerzální token pro všechno.
+- Klíč má mít nejmenší nutná oprávnění: čtení nestačí rozšířit na zápis „pro jistotu“.
+- Po odchodu člověka z týmu otoč klíče, ke kterým mohl mít přístup.
+
+Příklad dobré dokumentace:
+
+```text
+ENV:
+PAYMENT_API_KEY=secret z produkčního secret manageru
+PAYMENT_WEBHOOK_SECRET=secret z administrace platební brány
+
+Lokálně použij sandbox klíče. Produkční hodnoty nikdy nekopíruj do .env.example,
+issue trackeru, chatu ani screenshotů.
+```
+
+Příklad špatné dokumentace:
+
+```text
+Tady je produkční token, ať se to rychle rozběhne:
+sk_live_...
+```
+
+Rychlost je fajn. Únik tokenu je taky rychlý, jen méně roztomilý.
+
+## O.3 Webhook ber jako veřejné API, ne jako interní zkratku
+
+Webhook endpoint často vypadá nenápadně: `/api/webhooks/payment`. Jenže je dostupný z internetu a někdo se do něj může trefovat celý den. Proto ho navrhuj jako veřejné API s ověřením, idempotencí a rozumným logováním.
+
+Minimum pro každý webhook:
+
+- Ověř podpis požadavku nebo jiný důkaz, že zpráva opravdu přišla od dodavatele.
+- Kontroluj časové okno podpisu, aby nešlo starý požadavek jednoduše přehrát.
+- Ukládej ID události a zpracovávej ji idempotentně, protože dodavatelé webhooky často opakují.
+- Vracet úspěch až po bezpečném přijetí, ne po celé dlouhé obchodní operaci.
+- Citlivé údaje v logu maskuj nebo vůbec neukládej.
+- Nepropaguj interní chyby zákazníkovi ani dodavateli; detail patří do provozního logu.
+
+Modelový tok:
+
+```text
+1. Přijde webhook `invoice.paid`.
+2. Server ověří podpis a časové razítko.
+3. Server zkontroluje, jestli `event_id` už nebyl zpracován.
+4. Událost uloží do interní fronty nebo tabulky.
+5. Vrátí 200 OK.
+6. Samostatný worker aktualizuje předplatné a zapíše auditní stopu.
+```
+
+Tím oddělíš dostupnost endpointu od obchodní logiky. Když fakturační systém pošle stejnou událost třikrát, nevytvoříš tři předplatná a nepřivoláš účetní poltergeist.
+
+## O.4 Scope integrace navrhni podle rizika dat
+
+Ne všechna data mají stejnou citlivost. Poslat do nástroje agregovaný stav objednávky je něco jiného než posílat obsah zákaznických zpráv, interní poznámky nebo kompletní auditní log. Čím citlivější data, tím přísnější má být výběr dodavatele, oprávnění, retence a možnost vypnutí.
+
+Jednoduché třídění:
+
+| Úroveň | Data | Přístup |
+| --- | --- | --- |
+| Nízká | veřejné stránky, agregované metriky, technické stavy bez identity | Stačí běžná provozní kontrola |
+| Střední | kontaktní údaje zákazníka, fakturační metadata, stav účtu | Dodavatelská karta, omezený scope, retence |
+| Vysoká | obsah komunikace, osobní dokumenty, zdravotní/finanční údaje, interní poznámky | Přísná kontrola, právní revize, silné důvody, možnost izolace |
+
+Codyho komentář: pokud integrace potřebuje „všechno“, většinou to znamená, že nikdo pořádně nenavrhl proces. Dobrá integrace má ostré hrany. Ví, co dělá, a stejně důležité je, co nedělá.
+
+## O.5 Připrav rotaci klíčů ještě před incidentem
+
+Rotace klíčů se nemá poprvé řešit ve chvíli, kdy někdo omylem pushne `.env` do veřejného repozitáře. Tehdy je mozek ve stavu „hoří popelnice“ a dokumentace se čte hůř. Připrav si postup dopředu.
+
+Šablona rotace:
+
+```text
+Integrace: E-mailová služba
+Důvod rotace: pravidelná údržba / podezření na únik / odchod člověka
+Vlastník: vývoj + provoz
+
+1. Vytvořit nový klíč v administraci dodavatele.
+2. Uložit nový klíč do produkčního secret manageru.
+3. Nasadit nebo restartovat službu, která secret načítá.
+4. Ověřit testovací odeslání.
+5. Zneplatnit starý klíč.
+6. Zkontrolovat logy a chybové fronty.
+7. Zapsat datum a důvod rotace do provozní dokumentace.
+```
+
+U kritických integrací si vyzkoušej rotaci nanečisto v sandboxu. Pokud rotace znamená výpadek na půl dne, není to rotace. Je to rituál s obětní kozou.
+
+## O.6 Checklist bezpečné integrace
+
+Před zapnutím nové integrace si projdi:
+
+- Má integrace jasný obchodní nebo provozní účel?
+- Víme, jaká data odcházejí a jaká se vracejí?
+- Je dodavatel v souladu s privacy-first hodnotou projektu, ideálně s evropským provozem nebo jasnou kontrolou nad daty?
+- Je API klíč uložený jako secret mimo repozitář a frontend?
+- Má klíč nejmenší nutná oprávnění?
+- Jsou produkční a testovací klíče oddělené?
+- Ověřujeme podpisy webhooků a řešíme opakované doručení?
+- Logujeme jen technické minimum bez citlivého obsahu?
+- Má integrace vlastníka a datum další kontroly?
+- Umíme integraci vypnout a klíče otočit bez paniky?
+
+## Shrnutí přílohy
+
+Integrace nejsou jen pohodlné propojení nástrojů. Jsou to datové cesty a bezpečnostní závazky. Každé API, každý token a každý webhook musí mít účel, vlastníka, minimální oprávnění a plán odchodu. Privacy-first SaaS nestaví zdi kolem produktu proto, aby se nikdo nedostal dovnitř. Staví dobře popsané dveře, které jdou zamknout, zkontrolovat a v případě potřeby rychle vyměnit.
+
+---
+
 ## Zdroje
 
 - Evropská komise: Data protection — https://commission.europa.eu/law/law-topic/data-protection_en
@@ -3259,6 +3400,7 @@ Produktové signály mají pomáhat dělat lepší rozhodnutí, ne vyrábět dig
 
 ## Pracovní log
 
+- 2026-08-07: Přidána příloha O o bezpečných integracích, API klíčích a webhookách: vlastnictví, secret management, ověřování podpisů, scope dat, rotace klíčů a checklist.
 - 2026-08-07: Přidána příloha N o produktových signálech bez šmírování: otázky před eventy, pojmenování telemetrie, health score, oddělení logů od analytiky a checklist.
 - 2026-08-07: Přidána příloha M o newsletteru a RSS bez marketingové klece: datové minimum, přímá distribuce, střídmé měření, archiv na vlastním webu a checklist.
 - 2026-08-07: Přidána příloha L o interní znalostní bázi: typy stránek, vlastnictví, kontrola aktuálnosti, práce bez zákaznických dat, rozhodovací záznamy a bezpečné napojení AI asistenta.
