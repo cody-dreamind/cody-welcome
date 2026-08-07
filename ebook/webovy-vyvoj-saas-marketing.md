@@ -2053,6 +2053,137 @@ Privacy-first výběr dodavatele je hlavně disciplína v otázkách. Začni ú�
 
 ---
 
+# Příloha F: Redakční systém bez závislosti na algoritmech
+
+Obsahový marketing malého SaaS týmu nepotřebuje velkou redakci, brand studio a magický kalendář se sedmnácti barvami. Potřebuje pravidelný rytmus, jasné téma, vlastní kanál a způsob, jak z jednoho dobrého poznatku udělat několik užitečných výstupů bez toho, aby tým každý týden znovu objevoval oheň.
+
+Algoritmické kanály jsou užitečné jako distribuce, ale špatné jako základna. Když je celý obsahový systém postavený jen na sociální síti, cizím newsletterovém nástroji nebo reklamním účtu, firma ve skutečnosti nestaví publikum. Pronajímá si pozornost. Privacy-first alternativa je jednodušší: publikuj primárně na vlastním webu, nabízej RSS, posílej přímé odkazy, měř jen agregovaně a z obsahu dělej obchodní aktivum, ne krátkodobý ohňostroj.
+
+Google ve svém průvodci k užitečnému obsahu zdůrazňuje psaní pro lidi a prokazatelnou užitečnost místo tvorby primárně pro vyhledávače: https://developers.google.com/search/docs/fundamentals/creating-helpful-content. RSS 2.0 specifikace zase ukazuje, že odběr obsahu může stát na otevřeném formátu, ne na uzavřeném feedu konkrétní platformy: https://www.rssboard.org/rss-specification.
+
+## F.1 Tři obsahové pilíře stačí
+
+Začni třemi pilíři, které propojují produkt, zákazníka a hodnoty firmy. Víc pilířů vypadá strategicky, ale malý tým pak neví, o čem psát dřív. Obsahový plán se nemá tvářit jako encyklopedie. Má opakovaně pomáhat správným lidem vyřešit správný problém.
+
+Příklad pro privacy-first SaaS:
+
+| Pilíř | Otázka zákazníka | Typický výstup |
+| --- | --- | --- |
+| Problém a rozhodování | „Jak poznám, že tohle vůbec potřebujeme?“ | checklist, srovnání možností, návod na audit |
+| Implementace a provoz | „Jak to bezpečně zavést?“ | praktický postup, šablona, technická poznámka |
+| Důvěra a data | „Co se děje s daty a kdo za ně ručí?“ | vysvětlení procesu, privacy stránka, případová studie |
+
+Každý pilíř by měl mít vlastní seznam častých otázek. Ten získáš z poptávek, podpory, prodejních hovorů, interních poznámek a chyb, které se pořád opakují. Pokud se stejná otázka objeví třikrát, není to otrava. Je to zadání na článek. Gratuluji, zákazník právě udělal část redakční práce zdarma.
+
+Praktické pravidlo: nepiš téma, které neumíš spojit s konkrétní otázkou nebo rozhodnutím zákazníka. „Trendy v digitalizaci“ je mlha. „Jak vybrat analytiku bez cookie lišty pro B2B web“ je téma.
+
+## F.2 Z jednoho poznatku udělej obsahový balíček
+
+Malý tým nemá čas vyrábět každý kanál od nuly. Lepší je jeden kvalitní poznatek rozebrat do několika formátů, které odkazují zpět na vlastní web.
+
+Recept:
+
+1. Napiš hlavní článek na webu: problém, doporučení, příklad, checklist.
+2. Vytvoř krátký interní výtah: pro obchod, podporu a onboarding.
+3. Připrav e-mail nebo RSS oznámení s přímým odkazem.
+4. Vystřihni 3–5 krátkých postřehů pro sociální sítě, ale bez trackerů a závislosti na embed skriptech.
+5. Přidej článek do relevantní produktové části: FAQ, dokumentace, onboarding, nabídka.
+6. Po měsíci doplň poznámku podle reálných dotazů zákazníků.
+
+Příklad z tématu „výběr analytiky“:
+
+- Hlavní článek: „Jak měřit web bez datového cirkusu“.
+- Checklist: „10 otázek před zapnutím analytiky“.
+- Prodejní argument: „Měříme výkon, neprodáváme návštěvníky reklamním sítím.“
+- Produktový mikrotext: „Analytika je agregovaná a nepoužívá reklamní identifikátory.“
+- Interní poznámka: kdy stačí serverové logy a kdy už dává smysl eventová analytika.
+
+Tím nevzniká recyklace pro recyklaci. Vzniká opakovatelnost. Stejná myšlenka pomáhá zákazníkovi v různých momentech: při hledání, při rozhodování, při onboardingu i při kontrole dodavatelů.
+
+## F.3 Redakční kanban drž při zemi
+
+Obsahový proces se často rozbije na dvou extrémech. Buď tým nemá žádný systém a články vznikají náhodně, nebo si postaví redakční kosmickou loď, která potřebuje víc péče než samotný produkt. Pro malý SaaS stačí jednoduchý kanban.
+
+Sloupce:
+
+- **Nápady:** otázky zákazníků, poznámky z podpory, témata z roadmapy.
+- **Vybráno:** maximálně tři témata na aktuální měsíc.
+- **Koncept:** pracovní verze s hlavním slibem a strukturou.
+- **Kontrola:** faktická přesnost, privacy dopady, SEO minimum, odkazy.
+- **Publikováno:** článek je venku, má interní odkazy a RSS záznam.
+- **Aktualizovat:** článek potřebuje revizi kvůli změně produktu, práva nebo doporučení.
+
+U každého článku stačí pět polí:
+
+| Pole | Co vyplnit |
+| --- | --- |
+| Pro koho | konkrétní role nebo typ firmy |
+| Jaké rozhodnutí pomůže udělat | výběr nástroje, spuštění webu, zjednodušení procesu |
+| Hlavní doporučení | jedna věta bez omáčky |
+| Důkazy a zdroje | odkazy, vlastní zkušenost, screenshot, případová studie |
+| Další akce | demo, checklist, audit, kontakt, dokumentace |
+
+Tahle evidence je schválně nudná. Nudné systémy přežívají. Krásné tabulky s osmi statusy a dvaceti štítky většinou umřou dřív než první lednové předsevzetí.
+
+## F.4 SEO minimum bez ztráty duše
+
+SEO není rituál pro vyvolávání návštěvnosti. Je to disciplína srozumitelnosti: dobrý titulek, jasná struktura, interní odkazy, rychlé načítání, kanonická URL a obsah, který odpovídá na skutečnou otázku. Google Search Central ve startovací příručce doporučuje mimo jiné jedinečné a přesné titulky, užitečný obsah, smysluplné odkazy a technicky dostupné stránky: https://developers.google.com/search/docs/fundamentals/seo-starter-guide.
+
+Před publikací zkontroluj:
+
+- Má článek jedno hlavní téma a jednu hlavní otázku?
+- Je `<title>` konkrétní a není to jen název firmy plus buzzword?
+- Meta description říká, co čtenář získá?
+- Nadpisy tvoří logickou osnovu, ne dekoraci?
+- Odkazuje článek na související obsah na vlastním webu?
+- Má kanonickou URL a čitelný slug?
+- Jsou obrázky komprimované, s alt textem tam, kde dává smysl?
+- Nejsou v článku vložené cizí skripty jen kvůli pohodlnému embedu?
+
+Privacy-first SEO má jednu výhodu: nutí držet web lehký, čitelný a kontrolovatelný. Místo cizích widgetů používej vlastní screenshot, citaci s odkazem nebo krátké shrnutí. Místo sociálních share tlačítek s trackery dej obyčejný odkaz. Není to méně moderní. Je to méně invazivní.
+
+## F.5 Aktualizace jsou součást obsahu
+
+Obsahový marketing není „publikuj a zapomeň“. U webového vývoje, SaaS, AI, práva a provozu se mění nástroje, rozhraní, pravidla i doporučení. Starý článek může pořád přivádět lidi, ale pokud radí zastaralý postup, přivádí je rovnou do pasti. Elegantní, ale pořád past.
+
+Nastav jednoduchý rytmus revizí:
+
+- evergreen návody: kontrola každých 6 měsíců,
+- články s právními nebo bezpečnostními dopady: kontrola každé 3 měsíce,
+- produktové návody: kontrola po každé větší změně rozhraní,
+- pricing a srovnání nástrojů: kontrola před každým sdílením,
+- incidentové a provozní texty: kontrola po každém incidentu nebo cvičení.
+
+Do článku přidej krátkou poznámku „Aktualizováno“ jen tehdy, když se změnil obsah, ne když někdo opravil čárku. Čtenář nepotřebuje divadlo. Potřebuje vědět, jestli text stále platí.
+
+## F.6 Checklist redakční rutiny
+
+Týdenní kontrola:
+
+- Přibyly otázky zákazníků, které se opakují?
+- Máme vybrané jedno téma s jasným obchodním nebo produktovým dopadem?
+- Existuje k tématu konkrétní příklad, šablona nebo checklist?
+- Víme, jaký interní odkaz povede čtenáře dál?
+- Nepotřebuje téma aktuální ověření zdrojů před publikací?
+
+Publikační kontrola:
+
+- Článek je na vlastním webu jako primární zdroj.
+- RSS nebo přímý odkaz funguje bez přihlášení a bez sociální platformy.
+- Měření je agregované a odpovídá měřicímu plánu.
+- Nejsou vložené zbytečné externí skripty, pixely nebo embed trackery.
+- Vlastní názor je označený jako Codyho komentář nebo pohled týmu.
+- Zdroje jsou uvedené přímo v textu nebo v sekci zdrojů.
+- Je naplánovaná budoucí revize, pokud téma může zastarat.
+
+Codyho komentář: nejlepší obsahový systém je ten, který tým skutečně používá i ve středu odpoledne, když hoří produkt, zákazník chce odpověď a kafe došlo. Pokud redakční rutina funguje jen v ideálním týdnu, není to rutina. Je to přání s hezkým názvem.
+
+## Shrnutí přílohy
+
+Redakční systém bez závislosti na algoritmech stojí na vlastním webu, RSS, přímých odkazech, jednoduchém kanbanu a pravidelných revizích. Malý SaaS tým nemusí publikovat všude. Musí publikovat užitečně, opakovatelně a tak, aby obsah posiloval důvěru v produkt i v zacházení s daty.
+
+---
+
 ## Zdroje
 
 - Evropská komise: Data protection — https://commission.europa.eu/law/law-topic/data-protection_en
@@ -2104,3 +2235,4 @@ Privacy-first výběr dodavatele je hlavně disciplína v otázkách. Začni ú�
 - 2026-08-07: Přidána příloha C s praktickými mikrotexty pro kontaktní formuláře, odběry, cookies, onboarding, chybové stavy a incidentovou komunikaci.
 - 2026-08-07: Přidána příloha D s měsíčním provozním review webu nebo SaaS: obchodní signály, ruční kontrola kritických cest, datový úklid a rozhodovací checklist.
 - 2026-08-07: Přidána příloha E s privacy-first dotazníkem pro výběr dodavatelů: účel, datová mapa, bezpečnostní minimum, AI funkce, skóre a checklist před zapnutím.
+- 2026-08-07: Přidána příloha F o redakčním systému bez závislosti na algoritmech: obsahové pilíře, repurposing, redakční kanban, SEO minimum a revizní rutina.
