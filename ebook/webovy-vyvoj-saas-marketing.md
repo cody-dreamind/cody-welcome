@@ -24,7 +24,7 @@ Každá kapitola má být praktická: krátké vysvětlení, konkrétní doporu�
 5. Produktivita malého týmu: méně nástrojů, lepší procesy
 6. Analytika s minimem trackerů: měřit ano, šmírovat ne
 7. Provoz v Evropě: hosting, domény, e-mail, zálohy a incidenty
-8. SaaS pricing a onboarding: jak neodradit prvního platícího zákazníka
+8. MVP a roadmapa: jak nestavět SaaS jako nekonečný betlém funkcí
 9. Automatizace a AI asistenti v každodenním provozu
 10. Checklist před spuštěním webu nebo SaaS
 
@@ -1515,6 +1515,210 @@ Privacy-first se dá začít bez velkého projektu. Za 30 dní může malý tým
 
 ---
 
+# Příloha B: Šablony pro web, SaaS a privacy-first provoz
+
+Dobré procesy často neumřou na špatnou strategii, ale na prázdnou stránku. Tým ví, že by měl mít měřicí plán, rozhodovací záznam nebo kontrolu dodavatelů, jenže nikdo nechce začínat dokument od nuly. Tady jsou jednoduché šablony, které se dají zkopírovat do issue, dokumentace nebo interní wiki.
+
+Ber je jako startovací rám, ne jako korporátní náboženství. Když šablona nepomáhá rozhodnout, zkrať ji. Když chybí důležitá odpovědnost, doplň ji. Když má víc polí než reálných rozhodnutí, zase se nám tam vplížil administrativní skřítek. Vyžeň ho.
+
+## B.1 Šablona pro produktovou hypotézu
+
+Použij ji před novou funkcí, landing page sekcí, onboardingovým krokem nebo automatizací. Cíl je zastavit stavění věcí jen proto, že zněly dobře ve středu v 16:47.
+
+```md
+## Hypotéza
+
+Věříme, že [konkrétní typ uživatele] potřebuje [konkrétní výsledek], protože [pozorování, rozhovor, data nebo opakovaný problém].
+
+## Navržené řešení
+
+- Co uděláme:
+- Co záměrně neuděláme:
+- Jaké minimum stačí pro první ověření:
+
+## Úspěch
+
+- Hlavní signál:
+- Vedlejší signály:
+- Co by znamenalo, že hypotéza neplatí:
+
+## Privacy kontrola
+
+- Jaká nová data vzniknou:
+- Kde budou uložená:
+- Kdo k nim bude mít přístup:
+- Kdy je smažeme nebo anonymizujeme:
+```
+
+Příklad:
+
+- **Hypotéza:** Menší B2B týmy chtějí vidět odhad ceny dřív, než pošlou poptávku, protože se bojí zbytečného callu.
+- **Minimum:** Přidat na landing page tři orientační balíčky a krátké vysvětlení, co cenu nejvíc ovlivňuje.
+- **Úspěch:** Více kvalifikovaných poptávek s konkrétním rozpočtem nebo popisem situace.
+- **Privacy kontrola:** Není potřeba nový tracker. Stačí serverový log odeslání formuláře a anonymizovaný počet kliknutí na sekci ceny.
+
+## B.2 Šablona pro měřicí plán
+
+Měřicí plán má být krátký. Pokud se nevejde na jednu obrazovku, pravděpodobně měříš víc pocitů než rozhodnutí.
+
+```md
+## Rozhodnutí, které chceme zlepšit
+
+[Například: Má landing page jasněji vysvětlit cenu, nebo problém zákazníka?]
+
+## Metriky
+
+| Metrika | Proč ji sledujeme | Zdroj | Jak často | Co uděláme při změně |
+| --- | --- | --- | --- | --- |
+|  |  |  |  |  |
+
+## Události
+
+| Event | Kdy vzniká | Osobní data? | Retence | Poznámka |
+| --- | --- | --- | --- | --- |
+|  |  |  |  |  |
+
+## Anti-metriky
+
+- Co nechceme optimalizovat:
+- Jak poznáme, že si škodíme:
+```
+
+Dobré anti-metriky jsou třeba:
+
+- nezvyšovat počet formulářových polí jen kvůli segmentaci,
+- nezavádět remarketing kvůli jedné nejasné kampani,
+- neoptimalizovat čas na stránce u obsahu, který má rychle odpovědět na otázku,
+- neměřit osobní data tam, kde stačí agregovaný počet.
+
+## B.3 Šablona pro výběr dodavatele
+
+Každý nový nástroj je nový vztah s daty. Někdy dává smysl. Někdy je to jen další dashboard, který bude za tři měsíce posílat faktury a výčitky.
+
+```md
+## Dodavatel
+
+- Název:
+- Účel:
+- Vlastník v týmu:
+- Alternativa bez externí služby:
+
+## Data
+
+- Jaká data do nástroje posíláme:
+- Obsahují osobní údaje:
+- Region hostingu / zpracování:
+- Subdodavatelé, kteří jsou pro nás důležití:
+
+## Provoz
+
+- Jak nástroj vypneme:
+- Jak exportujeme data:
+- Jak smažeme data:
+- Jak poznáme, že nástroj pořád používáme:
+
+## Rozhodnutí
+
+- Schvalujeme / neschvalujeme:
+- Důvod:
+- Datum kontroly za 3 měsíce:
+```
+
+Praktické pravidlo: pokud nikdo neumí popsat vypnutí nástroje, tým ho ještě nepřijal vědomě. Jen ho přilepil. A přilepené věci se při růstu mění v lepidlovou archeologii.
+
+## B.4 Šablona pro rozhodovací záznam
+
+Rozhodovací záznam není zápis ze schůzky. Je to paměť týmu. Za půl roku nebude nikoho zajímat, kdo měl hezčí argument. Bude důležité vědět, proč se něco zvolilo a co by změnilo názor.
+
+```md
+## Rozhodnutí
+
+[Jedna věta: co platí od teď.]
+
+## Kontext
+
+- Jaký problém řešíme:
+- Jaké možnosti jsme zvažovali:
+- Jaká omezení máme:
+
+## Důvod volby
+
+- Proč tato varianta:
+- Co obětujeme:
+- Jaké riziko přijímáme:
+
+## Kontrola
+
+- Kdy rozhodnutí znovu otevřít:
+- Jaký signál ukáže, že bylo špatně:
+```
+
+Příklad krátkého rozhodnutí:
+
+> Pro analytiku používáme nástroj s EU hostingem a bez reklamního profilování. Nepřidáváme marketingové pixely, dokud nemáme konkrétní kampaň, právní základ a jednoduchý způsob odmítnutí.
+
+Tohle je lepší než neurčité „později vyřešíme cookies“. Později je místo, kde dobré úmysly chodí potichu zemřít.
+
+## B.5 Šablona pro incidentovou zprávu
+
+Incidentová zpráva má být užitečná, ne sebeobranná. Cílem není najít viníka, ale zmenšit šanci, že se problém zopakuje.
+
+```md
+## Co se stalo
+
+- Datum a čas:
+- Dopad na uživatele:
+- Dotčené systémy:
+- Dotčená data:
+
+## Časová osa
+
+| Čas | Událost | Kdo / systém |
+| --- | --- | --- |
+|  |  |  |
+
+## Příčina
+
+- Bezprostřední příčina:
+- Systémová příčina:
+- Co zafungovalo dobře:
+- Co selhalo:
+
+## Náprava
+
+- Okamžitý fix:
+- Preventivní opatření:
+- Vlastník:
+- Termín:
+
+## Komunikace
+
+- Koho informovat:
+- Jakou verzi sdělení poslat uživatelům:
+- Je potřeba právní nebo bezpečnostní eskalace:
+```
+
+Privacy-first pohled: u incidentu vždy samostatně napiš, zda šlo o osobní data, jaký byl rozsah a jestli existuje povinnost dalšího postupu. Když si tým není jistý, má eskalovat rychle, ne čekat na dokonalou formulaci.
+
+## B.6 Checklist zavedení šablon
+
+- Vyber jednu šablonu, kterou tým použije hned tento týden.
+- Vlož ji na místo, kde už tým pracuje: issue tracker, interní dokumentace, CRM nebo repozitář.
+- Urči vlastníka, který ji po prvních třech použitích zkrátí.
+- Zakaž povinná pole, která nikdo nepoužívá k rozhodnutí.
+- Jednou měsíčně smaž nebo sluč šablony, které se překrývají.
+- U každé šablony nech privacy otázku viditelnou, ne schovanou v patičce.
+
+## Codyho komentář
+
+Šablony nejsou záruka dobrého řízení. Jsou zábradlí. Pomáhají ve chvíli, kdy je tým unavený, spěchá nebo řeší třetí „rychlou drobnost“ dne. Nejlepší šablona je ta, kterou lidé opravdu použijí, aniž by u toho měli chuť založit nový startup jen proto, aby z ní utekli.
+
+## Shrnutí přílohy
+
+Malý tým nepotřebuje těžkou procesní metodiku. Potřebuje pár opakovatelných formulářů pro hypotézy, měření, dodavatele, rozhodnutí a incidenty. Když jsou šablony krátké a mají jasnou privacy otázku, zlepšují kvalitu produktu i provozu bez zbytečného byrokratického divadla.
+
+---
+
 ## Zdroje
 
 - Evropská komise: Data protection — https://commission.europa.eu/law/law-topic/data-protection_en
@@ -1560,3 +1764,4 @@ Privacy-first se dá začít bez velkého projektu. Za 30 dní může malý tým
 - 2026-08-07: Dopsána devátá kapitola o AI asistentech a automatizaci v provozu: procesní recepty, minimalizace dat v promptech, bezpečnost, onboarding asistenta a checklist.
 - 2026-08-07: Dopsána desátá kapitola s předspouštěcím checklistem pro web nebo SaaS: slib, kritické cesty, privacy, provoz, SEO a finální kontrola.
 - 2026-08-07: Přidána příloha A s 30denním plánem pro privacy-first web nebo SaaS: datová mapa, minimalizace, transparentní mikrotexty a provozní rutina.
+- 2026-08-07: Přidána příloha B se šablonami pro produktové hypotézy, měřicí plán, výběr dodavatele, rozhodovací záznam a incidentovou zprávu.
