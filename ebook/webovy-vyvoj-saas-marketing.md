@@ -3364,6 +3364,135 @@ Integrace nejsou jen pohodlné propojení nástrojů. Jsou to datové cesty a be
 
 ---
 
+# Příloha P: Incidentový playbook pro malý SaaS tým
+
+Incident není jen chvíle, kdy „spadl server“. Incident je každá situace, kdy produkt neplní slib zákazníkovi, data nejsou pod kontrolou, nebo tým neví, co se právě děje. U malého SaaS týmu bývá největší riziko v tom, že incident nepozná pozdě technicky, ale organizačně: někdo vidí chybu v logu, někdo jiný dostane e-mail od zákazníka, třetí člověk mezitím deployne opravu do jiné větve a všichni doufají, že se to nějak vstřebá. Spoiler: nevstřebá.
+
+Privacy-first incidentový playbook má dvě ambice: rychle obnovit službu a zároveň nepřidat další škodu zbytečným sběrem, chaotickou komunikací nebo panickým sdílením dat. Evropský rámec navíc počítá s tím, že osobní data breach se musí vyhodnotit podle rizika pro lidi; pokud breach představuje riziko pro práva a svobody osob, správce má dozorový úřad informovat bez zbytečného odkladu a typicky do 72 hodin od zjištění. EDPB k osobním data breachům shrnuje definici i oznamovací logiku zde: https://www.edpb.europa.eu/topics/security-data-breaches/personal-data-breaches_en
+
+## P.1 Incident poznáš podle dopadu, ne podle hlasitosti alarmu
+
+Některé incidenty řvou: výpadek webu, nefunkční platby, chyba 500 na loginu. Jiné jsou tiché: import posílá data do špatného účtu, webhook běží dvakrát, report obsahuje zákaznické e-maily, nebo administrátor omylem otevřel export širšímu týmu. Tiché incidenty jsou zákeřné, protože je snadné je odbýt jako „divné chování“.
+
+Používej jednoduché úrovně závažnosti:
+
+| Úroveň | Dopad | Příklad | První reakce |
+| --- | --- | --- | --- |
+| S1 | Služba je nedostupná nebo hrozí únik dat | Login nefunguje všem, veřejný bucket, kompromitovaný klíč | Zastavit škodu, svolat incident lead |
+| S2 | Kritická funkce nefunguje části zákazníků | Platby padají u nových objednávek | Omezit dopad, připravit komunikaci |
+| S3 | Chyba má workaround a nízký datový dopad | Špatný text v e-mailu, pomalý export | Zapsat, opravit plánovaně |
+| Privacy | Osobní data mohla být ztracena, zpřístupněna nebo změněna | Odeslaný report špatnému příjemci | Izolovat data, vyhodnotit oznamovací povinnost |
+
+Důležité: privacy incident může být S1 i S3 podle technického dopadu, ale vždy vyžaduje vlastní vyhodnocení. To, že aplikace běží, ještě neznamená, že je všechno v pořádku.
+
+## P.2 Prvních 30 minut: zastav krvácení a zapisuj fakta
+
+První reakce nemá být hrdinské programování ve tmě. Má být nudná, strukturovaná a rychlá. Incident není hackathon, i když se tak rád převléká.
+
+Postup pro prvních 30 minut:
+
+1. Urči incident lead: jeden člověk koordinuje, ostatní pomáhají.
+2. Založ incidentový záznam: čas zjištění, kdo hlásil, co je vidět, koho se to týká.
+3. Zastav další škodu: vypni integraci, revertni deploy, zneplatni klíč, omez přístup, zastav cron.
+4. Rozliš fakta a domněnky: „webhook poslal 327 událostí dvakrát“ je fakt; „asi za to může nový worker“ je hypotéza.
+5. Zachovej důkazy: nemaž logy jen proto, že vypadají ošklivě. Jen je nezveřejňuj a neposílej po chatu jako konfety.
+6. U privacy dopadu začni časovou osu od okamžiku, kdy se tým o možném breachi dozvěděl.
+
+Minišablona zápisu:
+
+```text
+Incident: 2026-08-07 platby webhook duplicitně aktivoval trial
+Lead: Jana
+Zjištěno: 09:18 UTC přes support ticket
+První dopad: 14 účtů mělo špatný stav předplatného
+Data: zatím bez známky úniku osobních dat
+Okamžitá akce: webhook consumer pozastaven v 09:27 UTC
+Další krok: ověřit event_id deduplikaci a ručně opravit účty
+```
+
+Takový zápis není literatura. Je to záchranné lano pro člověka, který se k incidentu připojí o hodinu později.
+
+## P.3 Komunikuj dřív, než zákazník začne hádat
+
+Uživatelé odpustí chybu častěji než mlčení. Co neodpustí: „u nás vše funguje“, když jim produkt právě hoří v prohlížeči. Dobrá incidentová komunikace je krátká, konkrétní a bez zbytečných detailů, které by zvyšovaly bezpečnostní riziko.
+
+První veřejná zpráva může vypadat takhle:
+
+```text
+Od 09:18 UTC řešíme problém s aktivací nových předplatných. Existující účty běží normálně. Příčina je v našem zpracování platebních webhooků, ne na straně zákazníků. Další aktualizaci přidáme do 30 minut.
+```
+
+Interní pravidla:
+
+- Uveď, co je ovlivněné a co naopak ovlivněné není.
+- Neházej vinu na dodavatele, dokud to nemáš potvrzené.
+- Neslibuj přesný čas opravy, pokud ho neznáš.
+- Uveď čas další aktualizace, i kdyby měla znít „stále řešíme“.
+- Pokud jde o osobní data, nekomunikuj detail veřejně dřív, než vyhodnotíš riziko a postup.
+
+Codyho komentář: status page bez aktualizací je jen dražší ticho. Klidně začni obyčejnou stránkou nebo ručně editovaným Markdownem, ale měj dopředu jasné, kdo ji smí změnit a kde leží.
+
+## P.4 Privacy triage: čtyři otázky před panikou
+
+Jakmile incident může souviset s osobními daty, zastav technické tunelové vidění a polož čtyři otázky:
+
+1. Jaká osobní data mohla být dotčena?
+2. Co se s nimi stalo: ztráta, neoprávněný přístup, změna, zničení, odeslání jinam?
+3. Kolika lidí se to týká a jaký praktický dopad na ně může nastat?
+4. Je riziko takové, že je potřeba informovat dozorový úřad nebo dotčené osoby?
+
+Příklad: špatně nastavený export faktur, který umožnil jednomu zákazníkovi stáhnout faktury jiné firmy, není jen „bug v oprávnění“. Je to potenciální osobní data breach, protože faktury mohou obsahovat jména, e-maily, adresy, DIČ nebo platební údaje. První krok není psát omluvný román. První krok je vypnout přístup, zjistit rozsah, zachovat auditní stopu a připravit faktický záznam pro právní/provozní vyhodnocení.
+
+Do incidentového záznamu přidej:
+
+- typ dotčených dat,
+- počet dotčených subjektů nebo kvalifikovaný odhad,
+- čas začátku a konce expozice,
+- systémy a dodavatele zapojené do incidentu,
+- přijatá opatření,
+- rozhodnutí, jestli a proč se incident hlásí nebo nehlásí.
+
+I incident, který nakonec nehlásíš, zdokumentuj. Paměť týmu je skvělá věc, dokud se někdo nezeptá za tři měsíce.
+
+## P.5 Po opravě udělej postmortem bez honu na viníka
+
+Postmortem nemá hledat člověka, který „to rozbil“. Má najít systém, který dovolil, aby se chyba dostala k zákazníkovi. Pokud výsledek postmortemu zní „Petr si má dávat větší pozor“, tým právě promarnil incident a Petr získal novou úzkost. Gratulace, produkt nikam nepokročil.
+
+Dobré postmortem obsahuje:
+
+| Část | Otázka |
+| --- | --- |
+| Dopad | Koho se incident dotkl a jak? |
+| Detekce | Jak jsme na problém přišli? Mohli jsme dřív? |
+| Příčina | Jaké technické a procesní podmínky incident umožnily? |
+| Reakce | Co fungovalo a co zdržovalo? |
+| Data | Jaký byl dopad na osobní nebo zákaznická data? |
+| Opatření | Jaké 1–3 změny sníží opakování? |
+| Vlastník | Kdo každé opatření dotáhne a do kdy? |
+
+Opatření drž malá. Jeden incident nemá vyrobit deset ticketů, které se budou rok tvářit důležitě. Lepší jsou tři dokončené změny: test na oprávnění exportu, alert na neobvyklý počet webhooků a jasný postup rotace klíče.
+
+## P.6 Checklist incidentové připravenosti
+
+Před dalším klidným týdnem si projdi:
+
+- Máme jeden jasný kanál pro incidenty a víme, kdo rozhoduje?
+- Umíme během minut vypnout rizikovou integraci, cron, token nebo veřejný endpoint?
+- Máme šablonu incidentového záznamu s časovou osou?
+- Víme, kde jsou logy, jak dlouho se drží a kdo k nim má přístup?
+- Máme seznam systémů, kde se musí při incidentu otočit klíče?
+- Máme připravený text pro první zákaznickou aktualizaci?
+- Umíme rozpoznat, kdy technický incident může být osobní data breach?
+- Dokumentujeme i incidenty, které se nakonec nehlásí úřadu?
+- Děláme postmortem bez hledání viníka a s konkrétními vlastníky opatření?
+- Testujeme playbook aspoň jednou za kvartál na malé simulaci?
+
+## Shrnutí přílohy
+
+Incidentový playbook je jako hasicí přístroj: když ho začneš shánět až uprostřed kouře, už to není strategie, ale improvizované divadlo s drahými rekvizitami. Malý SaaS tým nepotřebuje korporátní krizový štáb. Potřebuje jasné role, jednoduchý zápis, rychlé vypnutí škody, privacy triage, férovou komunikaci a postmortem, který zlepší systém místo toho, aby někomu nasadil ceduli „viník měsíce“.
+
+---
+
 ## Zdroje
 
 - Evropská komise: Data protection — https://commission.europa.eu/law/law-topic/data-protection_en
@@ -3381,6 +3510,7 @@ Integrace nejsou jen pohodlné propojení nástrojů. Jsou to datové cesty a be
 - CERT-EU: Cybersecurity mitigation measures against critical threats — https://cert.europa.eu/publications/security-guidance/security-guidance-22-001---cybersecurity-mitigation-measures-against-critical-threats/
 - EDPB: Guidelines 4/2019 on Article 25 Data Protection by Design and by Default — https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-42019-article-25-data-protection-design-and_en
 - EDPB: Guidelines 07/2020 on the concepts of controller and processor in the GDPR — https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-072020-concepts-controller-and-processor-gdpr_en
+- EDPB: Personal data breaches — https://www.edpb.europa.eu/topics/security-data-breaches/personal-data-breaches_en
 - European Commission: NIS2 Directive FAQs — https://digital-strategy.ec.europa.eu/en/faqs/directive-measures-high-common-level-cybersecurity-across-union-nis2-directive-faqs
 - EURid: Find a registrar — https://eurid.eu/en/get-your-eu/find-a-registrar/
 - Google Search Central: Understanding Google Page Experience — https://developers.google.com/search/docs/appearance/page-experience
@@ -3400,6 +3530,7 @@ Integrace nejsou jen pohodlné propojení nástrojů. Jsou to datové cesty a be
 
 ## Pracovní log
 
+- 2026-08-07: Přidána příloha P s incidentovým playbookem pro malý SaaS tým: závažnost, prvních 30 minut, zákaznická komunikace, privacy triage, postmortem a checklist připravenosti.
 - 2026-08-07: Přidána příloha O o bezpečných integracích, API klíčích a webhookách: vlastnictví, secret management, ověřování podpisů, scope dat, rotace klíčů a checklist.
 - 2026-08-07: Přidána příloha N o produktových signálech bez šmírování: otázky před eventy, pojmenování telemetrie, health score, oddělení logů od analytiky a checklist.
 - 2026-08-07: Přidána příloha M o newsletteru a RSS bez marketingové klece: datové minimum, přímá distribuce, střídmé měření, archiv na vlastním webu a checklist.
