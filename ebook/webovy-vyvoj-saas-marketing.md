@@ -3985,6 +3985,138 @@ GDPR dokumentace má být provozní mapa, ne papírový rituál. Když má malý
 
 ---
 
+
+# Příloha U: Produktové experimenty bez datového karnevalu
+
+Experiment není výmluva pro chaos. Malý SaaS tým často řekne „otestujeme to“ a ve skutečnosti tím myslí: přidáme tři eventy, pustíme drahý nástroj, necháme běžet varianty bez hypotézy a za měsíc si vybereme výsledek, který se nám pocitově líbí. Gratuluju, právě vznikla vědecká metoda z výprodeje.
+
+Privacy-first experiment má být opačný: jasná otázka, minimální zásah do produktu, krátké okno, předem domluvený signál a rozhodnutí, které jde vysvětlit zákazníkovi i týmu.
+
+## U.1 Hypotéza musí znít jako rozhodnutí, ne jako přání
+
+Slabá hypotéza:
+
+> „Nový onboarding bude lepší.“
+
+Silnější hypotéza:
+
+> „Když po registraci ukážeme jeden konkrétní první úkol místo prázdného dashboardu, zvýší se počet účtů, které dokončí první hodnotnou akci do 24 hodin.“
+
+Rozdíl je zásadní. Druhá věta říká, co měníme, komu to pomůže, jaký signál sledujeme a kdy experiment vyhodnotíme.
+
+Šablona:
+
+| Pole | Otázka | Příklad |
+| --- | --- | --- |
+| Problém | Co dnes nefunguje? | Noví uživatelé po registraci nevědí, co udělat jako první. |
+| Změna | Co konkrétně upravíme? | Přidáme úvodní kartu s jedním doporučeným krokem. |
+| Cílová skupina | Koho se experiment týká? | Nové trial účty bez importovaných dat. |
+| Signál | Co se má změnit? | Více dokončených prvních akcí do 24 hodin. |
+| Rozhodnutí | Co uděláme podle výsledku? | Necháme změnu, upravíme text, nebo ji odstraníme. |
+
+Codyho komentář: Pokud hypotézu neumíš napsat do jedné tabulky, pravděpodobně netestuješ produkt. Jen hledáš záminku, proč se vyhnout rozhodnutí.
+
+## U.2 Měř jen signál, který potřebuješ pro další krok
+
+Experimenty často bobtnají, protože tým začne sbírat „ještě něco pro jistotu“. Jenže jistota je v analytice drahá: platíš složitostí, právním rizikem, údržbou a horším vysvětlením uživateli.
+
+Před každým experimentem se zeptej:
+
+- Stačí agregovaná metrika bez identifikace konkrétního člověka?
+- Potřebujeme sledovat chování napříč zařízeními, nebo stačí jedna návštěva/session?
+- Můžeme výsledek ověřit ručně na malém vzorku zákazníků?
+- Je signál obchodně použitelný, nebo jen hezky vypadá v grafu?
+- Dokážeme event odstranit po konci experimentu?
+
+Příklad:
+
+| Experiment | Minimum měření | Co už je zbytečné |
+| --- | --- | --- |
+| Nový hero text na landing page | Počet kliků na hlavní CTA a počet odeslaných formulářů | Scroll heatmapy každého návštěvníka |
+| Kratší registrační formulář | Dokončení registrace a počet chyb formuláře | Detailní záznam vyplňování pole po poli |
+| Nový onboarding krok | Dokončení prvního úkolu v agregaci podle kohorty | Trvalé profilování každého uživatele podle všech kliků |
+| Nová cenová stránka | Klik na tarif, kontaktování obchodu, self-service nákup | Individuální sledování všech pohybů myši |
+
+Dobré pravidlo: měř tak málo, aby ses za to nemusel stydět na veřejné stránce „Jak pracujeme s daty“.
+
+## U.3 Malý tým nepotřebuje vždy A/B test
+
+A/B test dává smysl, když máš dost návštěvnosti, stabilní produkt a jednu dobře izolovanou změnu. Pokud má web dvacet relevantních návštěv týdně, statistická magie z toho neudělá pravdu. Udělá z toho jen graf s větší sebedůvěrou, než si zaslouží.
+
+Alternativy pro malé týmy:
+
+- **Concierge test:** ručně proveď pět zákazníků novým procesem a sleduj, kde se ptají.
+- **Smoke test:** ukaž nabídku nebo CTA, ale předem jasně nastav očekávání, pokud funkce ještě není hotová.
+- **Prototyp v obsahu:** nejdřív napiš návod, checklist nebo kalkulačku jako statickou stránku a sleduj poptávku.
+- **Feature flag pro malou skupinu:** zapni změnu jen dobrovolníkům nebo interním zákazníkům.
+- **Sales test:** zkus novou formulaci hodnoty ve třech obchodních hovorech a zaznamenej námitky.
+
+Praktický příklad pro B2B SaaS:
+
+Místo měsíčního A/B testu na nízké návštěvnosti vytvoř dvě verze nabídky jako krátké sekce v obchodním decku. Použij je v deseti relevantních konverzacích. Po každé si napiš, co zákazník zopakoval vlastními slovy, kde se zasekl a jakou námitku měl. To je často kvalitnější signál než „varianta B měla o 14 % víc kliků“ z celkem sedmi lidí. Statistika brečí do kouta, ale produkt se posune.
+
+## U.4 Experiment musí mít konec a majitele
+
+Nejhorší experiment je ten, který „zatím běží“. Po třech měsících už nikdo neví, proč vznikl, eventy dál plní databázi a noví lidé v týmu se bojí cokoli vypnout.
+
+Každý experiment proto zapisuj jako malý pracovní záznam:
+
+```text
+Název: Onboarding — první doporučený krok
+Majitel: Petra
+Start: 2026-08-07
+Konec vyhodnocení: 2026-08-21
+Hypotéza: Jeden doporučený krok zvýší dokončení první hodnotné akce.
+Dotčená data: Agregovaný event onboarding_first_action_completed.
+Retence: Event držíme 90 dní, po experimentu rozhodneme o ponechání nebo odstranění.
+Rozhodovací práh: Pokud změna zlepší dokončení alespoň viditelně a nezvýší support dotazy, necháme ji.
+Výsledek: Doplnit při vyhodnocení.
+Další krok: Doplnit při vyhodnocení.
+```
+
+Tohle není byrokracie. Je to pojistka proti tomu, aby produkt časem nevypadal jako archeologické naleziště dobrých úmyslů.
+
+## U.5 Vyhodnocuj i vedlejší škody
+
+Experiment může zlepšit jednu metriku a zhoršit produkt. Agresivnější CTA zvýší kliky, ale přivede horší leady. Kratší formulář zvýší konverzi, ale přidá práci podpoře. Automatická e-mailová sekvence zvýší odpovědi, ale část lidí ji začne vnímat jako spam.
+
+Proto si vedle hlavního signálu nastav i ochranné metriky:
+
+| Hlavní cíl | Ochranný signál |
+| --- | --- |
+| Více registrací | Nezvýší se počet neaktivních účtů bez první akce |
+| Více demo poptávek | Nezhorší se kvalita leadů podle obchodního týmu |
+| Rychlejší onboarding | Nezvýší se počet support dotazů na základní nastavení |
+| Více kliků na pricing | Nezvýší se počet lidí, kteří nerozumí rozdílu mezi tarify |
+| Více automatizovaných odpovědí | Nezvýší se počet odhlášení nebo negativních reakcí |
+
+Privacy-first pohled tady pomáhá: když nesleduješ všechno, musíš lépe přemýšlet, co je skutečně důležité. Méně dat často znamená ostřejší rozhodování.
+
+## U.6 Checklist privacy-first experimentu
+
+Před spuštěním:
+
+- Je hypotéza napsaná jako konkrétní rozhodnutí?
+- Víme, komu experiment pomáhá a koho se netýká?
+- Měříme jen signály nutné k vyhodnocení?
+- Umíme experiment vysvětlit bez právnického kouře?
+- Má experiment majitele, datum konce a plán úklidu dat?
+- Máme ochranný signál, aby jedna metrika nepřeválcovala kvalitu?
+- Víme, co uděláme při úspěchu, neúspěchu i nejasném výsledku?
+
+Po vyhodnocení:
+
+- Zapsali jsme rozhodnutí a důvod?
+- Odstranili jsme dočasné eventy, flagy a texty?
+- Aktualizovali jsme dokumentaci, onboarding nebo obchodní materiály?
+- Řekli jsme týmu, co jsme se naučili?
+- Pokud experiment pracoval s osobními daty, sedí retence a datová mapa?
+
+## Shrnutí přílohy
+
+Experimentování není kasino s dashboardem. Dobře navržený experiment má malou stopu, jasný konec a pomáhá udělat rozhodnutí. Pro privacy-first SaaS je to ideální disciplína: učíš se rychle, ale nenecháváš za sebou zbytečné datové bahno.
+
+
 ## Zdroje
 
 - Atlassian Support: Create a postmortem — https://support.atlassian.com/statuspage/docs/create-a-postmortem/
@@ -4027,6 +4159,7 @@ GDPR dokumentace má být provozní mapa, ne papírový rituál. Když má malý
 
 ## Pracovní log
 
+- 2026-08-07: Přidána příloha U o privacy-first produktových experimentech: hypotézy, minimální měření, alternativy k A/B testům, majitel experimentu, ochranné metriky a checklist.
 - 2026-08-07: Přidána příloha T o GDPR dokumentaci bez šanonového divadla: registr zpracování, právní a produktové věty, mini-DPIA, změnový checklist, subdodavatelé a kontrolní seznam.
 - 2026-08-07: Přidána příloha S o monitoringu, alertech a status komunikaci: uživatelské sliby, bezpečné logování, akční alerty, status šablony, privacy-first výběr nástroje a checklist.
 - 2026-08-07: Přidána příloha R o zálohách a obnově bez falešného pocitu bezpečí: mapa obnovy, oddělení záloh, test restore, retence, dokumentace a checklist.
