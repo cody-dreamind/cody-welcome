@@ -3493,6 +3493,138 @@ Incidentový playbook je jako hasicí přístroj: když ho začneš shánět až
 
 ---
 
+# Příloha Q: B2B důvěryhodnost bez nekonečného dotazníkového pekla
+
+B2B zákazník často nekupuje jen funkci. Kupuje jistotu, že dodavatel nezmizí, nerozbije mu proces, neudělá z dat turistický zájezd přes půl internetu a zvládne odpovědět na bezpečnostní otázky bez paniky. U větších firem, veřejného sektoru nebo regulovanějších oborů proto dřív nebo později přijde dotazník: kde běží data, kdo k nim má přístup, jak zálohujete, co používáte za subdodavatele, jak řešíte incidenty, jestli máte DPA, jestli umíte export a smazání.
+
+Nečekej, až ten dotazník přistane v pátek v 16:42 a obchod řekne „stačí to poslat dneska?“. Připrav si malý trust pack dopředu. Ne jako korporátní mauzoleum v PDF, ale jako sadu jasných odpovědí, které se dají poslat zákazníkovi, dát na web nebo použít při obchodním hovoru.
+
+## Q.1 Trust pack není chlubení, ale zkrácení nákupu
+
+Trust pack má odstranit nejistotu. Když zákazník musí každou bezpečnostní a datovou otázku dolovat z e-mailů, nákup se zpomalí. Když máš odpovědi připravené, působíš dospěleji i jako malý tým.
+
+Základní části trust packu:
+
+- stručný popis služby a typu zpracovávaných dat,
+- informace o provozu a hostingu,
+- seznam hlavních subdodavatelů,
+- bezpečnostní minimum,
+- pravidla přístupu k zákaznickým datům,
+- postup záloh, obnovy a incidentů,
+- export a ukončení služby,
+- kontakt pro bezpečnostní nebo privacy otázky.
+
+Nemusíš zveřejnit interní detaily, které by samy zvyšovaly riziko. Trust pack nemá říkat „tady přesně leží naše klíče a takhle nás obejdete“. Má říkat: „víme, co děláme, máme pravidla a umíme je vysvětlit“.
+
+## Q.2 Napiš datovou větu pro každou hlavní funkci
+
+U B2B SaaS nestačí obecné „vaše data jsou u nás v bezpečí“. To je hezká věta na hrnek, ale ne odpověď pro člověka, který má podepsat smlouvu. Lepší je popsat datový dopad podle funkce.
+
+Příklad pro rezervační systém:
+
+| Funkce | Jaká data potřebuje | Proč | Retence |
+| --- | --- | --- | --- |
+| Rezervace termínu | jméno, e-mail, termín, poznámka | vytvoření a potvrzení rezervace | po dobu zákaznického vztahu nebo podle nastavení účtu |
+| Notifikace | e-mail nebo telefon, obsah připomínky | připomenutí termínu | dokud je notifikace relevantní |
+| Administrace | uživatelský účet správce, role, auditní záznam | správa služby a bezpečnost | podle provozní a bezpečnostní potřeby |
+| Export | vybraná zákaznická data | přenositelnost a interní práce zákazníka | export se vytváří na žádost a po čase se maže |
+
+Taková tabulka pomáhá třikrát: zákazník chápe rozsah, obchod má co poslat a tým vidí, kde zbytečně sbírá data navíc. Pokud u nějaké funkce neumíš napsat „proč“, je to signál pro produktovou debatu, ne pro copywritera.
+
+## Q.3 Subdodavatele popiš lidsky a bez mlžení
+
+Subdodavatel není sprosté slovo. Sprosté je nevědět, komu data tečou. Privacy-first přístup neznamená stavět vlastní planetu od DNS po fonty. Znamená mít přehled, vybírat střízlivě a umět vysvětlit dopad.
+
+U každého důležitého dodavatele si drž jednoduchý záznam:
+
+- název dodavatele,
+- účel použití,
+- typ dat, která může zpracovávat,
+- region provozu nebo ukládání dat,
+- odkaz na smluvní/privacy dokumentaci,
+- kdo v týmu je vlastník vztahu,
+- co se stane, když dodavatel vypadne nebo zdraží.
+
+Příklad textu pro zákazníka:
+
+> Pro hosting používáme evropskou infrastrukturu. E-mailové notifikace posíláme přes samostatného poskytovatele, kterému předáváme jen údaje nutné k doručení zprávy. Reklamní pixely ani cross-site tracking v aplikaci nepoužíváme.
+
+Tohle není náhrada za smlouvu ani DPA, ale je to dobrý začátek transparentní komunikace. Zákazník většinou nechce číst detektivku. Chce vědět, kde jsou rizika a jestli je máš pod kontrolou.
+
+## Q.4 Bezpečnostní minimum řekni konkrétně
+
+Bezpečnostní sliby bývají buď příliš obecné, nebo příliš technické. Pro trust pack potřebuješ střed: konkrétní opatření bez zbytečného odhalování interních detailů.
+
+Dobré formulace:
+
+- Přístupy do administrace mají jen určení lidé podle role.
+- Produkční přístupy jsou oddělené od běžné práce a pravidelně se kontrolují.
+- Tajné klíče nejsou uložené v repozitáři ani ve veřejné dokumentaci.
+- Zálohy se pravidelně vytvářejí a obnova se testuje podle provozního plánu.
+- Kritické změny procházejí kontrolou a nasazením přes verzovaný proces.
+- Incidenty zapisujeme, vyhodnocujeme podle dopadu a zákazníky informujeme, pokud se jich týkají.
+
+Slabé formulace:
+
+- „Používáme nejmodernější zabezpečení.“
+- „Data jsou stoprocentně v bezpečí.“
+- „Máme šifrování.“ bez vysvětlení, kde a k čemu.
+- „Nikdy nemáme incidenty.“ To je podezřelé, ne uklidňující.
+
+Codyho komentář: věta „nikdy nemáme incidenty“ zní u softwaru asi jako „naše auto nikdy nepotřebuje brzdy“. Možná to myslíš dobře. Zákazník slyší, že buď neměříš, nebo se bojíš pravdy.
+
+## Q.5 Připrav odpovědi na nákupní námitky
+
+Trust pack není jen pro právní a IT oddělení. Pomáhá i obchodu. Zákazník často váhá kvůli riziku, ne kvůli funkci. Pokud riziko umíš pojmenovat, snižuješ tření nákupu.
+
+Typické námitky a praktické odpovědi:
+
+| Námitka | Co zákazník doopravdy řeší | Dobrá odpověď |
+| --- | --- | --- |
+| „Kde jsou data?“ | jurisdikce, přístup, kontrola | popiš region provozu, subdodavatele a výjimky |
+| „Co když odejdeme?“ | lock-in a kontinuita | ukaž export, ukončení účtu a retenční pravidla |
+| „Kdo vidí naše data?“ | interní přístupy | vysvětli role, support access a auditní stopu |
+| „Co když služba spadne?“ | dopad na provoz | popiš zálohy, monitoring, incidentovou komunikaci |
+| „Používáte AI?“ | únik dat do modelů | řekni, kde AI pomáhá, jaká data do ní nejdou a jak se kontroluje výstup |
+
+U AI funkcí buď zvlášť střízlivý. Pokud posíláš zákaznický obsah do externího modelu, napiš to jasně. Pokud neposíláš osobní data do tréninku nebo používáš oddělené zpracování, napiš to taky, ale bez kouzelné mlhy. „AI-powered“ není odpověď. Je to spíš začátek dalších otázek.
+
+## Q.6 Udělej z trust packu živý dokument
+
+Nejhorší trust pack je staré PDF, které někdo vytvořil před dvěma lety a od té doby se tváří jako realita. Důvěra se neudržuje tím, že dokument existuje. Udržuje se tím, že odpovídá provozu.
+
+Jednoduchá rutina:
+
+- jednou měsíčně zkontroluj seznam subdodavatelů,
+- po každé větší integraci aktualizuj datovou mapu,
+- po incidentu doplň poučení do provozní části,
+- po změně hostingu nebo e-mailového nástroje uprav zákaznické odpovědi,
+- u každé stránky trust packu drž datum poslední revize a vlastníka,
+- staré verze archivuj, ať víš, co bylo zákazníkům sděleno v minulosti.
+
+Trust pack může začít jako Markdown v repozitáři. To je úplně v pořádku. Výhoda je verzování, review a jednoduchá historie změn. Až bude potřeba, může z něj vzniknout veřejná stránka, PDF pro zákazníka nebo interní odpovědní banka pro obchod.
+
+## Q.7 Checklist B2B trust packu
+
+Před prvním větším obchodním jednáním si zkontroluj:
+
+- Umíme jednou větou popsat, jaká zákaznická data služba zpracovává?
+- Máme seznam subdodavatelů včetně účelu a datového dopadu?
+- Víme, kde data běží a kde se ukládají zálohy?
+- Máme připravenou lidskou odpověď na otázku „kdo má přístup k našim datům“?
+- Umíme popsat export a ukončení služby bez držení zákazníka jako rukojmí?
+- Máme kontakt pro bezpečnostní a privacy otázky?
+- Je jasné, jak řešíme incidenty a komu kdy komunikujeme?
+- Má trust pack vlastníka a datum poslední revize?
+- Neobsahuje dokument interní detaily, které by samy zvyšovaly riziko?
+- Odpovídá dokument tomu, co produkt opravdu dělá dnes, ne tomu, co bychom rádi dělali v ideálním vesmíru?
+
+## Shrnutí přílohy
+
+B2B důvěryhodnost není jednorázový certifikát nálady. Je to schopnost rychle, pravdivě a srozumitelně odpovědět na otázky o datech, provozu, bezpečnosti a odchodu zákazníka. Privacy-first SaaS má v tomhle výhodu: když sbírá méně dat, používá méně zbytečných služeb a drží provoz v Evropě, má méně věcí k vysvětlování. A méně vysvětlování je v nákupu často víc peněz než další animované tlačítko.
+
+---
+
 ## Zdroje
 
 - Evropská komise: Data protection — https://commission.europa.eu/law/law-topic/data-protection_en
@@ -3531,6 +3663,7 @@ Incidentový playbook je jako hasicí přístroj: když ho začneš shánět až
 ## Pracovní log
 
 - 2026-08-07: Přidána příloha P s incidentovým playbookem pro malý SaaS tým: závažnost, prvních 30 minut, zákaznická komunikace, privacy triage, postmortem a checklist připravenosti.
+- 2026-08-07: Přidána příloha Q o B2B trust packu: datové věty pro funkce, subdodavatelé, bezpečnostní minimum, nákupní námitky, živá revize a checklist.
 - 2026-08-07: Přidána příloha O o bezpečných integracích, API klíčích a webhookách: vlastnictví, secret management, ověřování podpisů, scope dat, rotace klíčů a checklist.
 - 2026-08-07: Přidána příloha N o produktových signálech bez šmírování: otázky před eventy, pojmenování telemetrie, health score, oddělení logů od analytiky a checklist.
 - 2026-08-07: Přidána příloha M o newsletteru a RSS bez marketingové klece: datové minimum, přímá distribuce, střídmé měření, archiv na vlastním webu a checklist.
