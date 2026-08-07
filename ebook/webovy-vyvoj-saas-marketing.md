@@ -2427,6 +2427,163 @@ Landing page audit není akademická disciplína. Je to rychlá kontrola, jestli
 
 ---
 
+
+# Příloha I: Cenová stránka SaaS bez triků a datového hladu
+
+Cenová stránka je místo, kde se marketing potká s realitou. Do té chvíle může web krásně vyprávět o hodnotě, rychlosti, bezpečnosti a pohodě v týmu. Pak návštěvník otevře ceník a během pár vteřin si řekne: „Rozumím tomu? Vejdu se do toho? Co se stane, když vyrostu? A proč mi tady někdo schoval cenu za tlačítko *kontaktujte obchod*?“
+
+Privacy-first SaaS má v cenové stránce velkou šanci. Může ukázat nejen cenu, ale i férovost: žádné temné vzorce, žádné nucené sledování, žádné překvapení po registraci. Dobrá cenová stránka má zákazníkovi pomoct rozhodnout se, ne ho zahnat do demo callu jen proto, aby dostal základní informaci.
+
+## I.1 Nejdřív rozhodni, co vlastně prodáváš
+
+Cena není jen číslo. Je to zkratka pro hodnotu, segment a očekávání. Než začneš kreslit tři sloupce, napiš si jednu větu:
+
+> „Zákazník platí za [výsledek], protože mu to šetří [čas/riziko/peníze/chaos].“
+
+Příklady:
+
+- Docházkový SaaS: zákazník neplatí za tabulku hodin, ale za přehled, méně ruční administrativy a menší riziko chyb.
+- Rezervační systém: zákazník neplatí za kalendář, ale za méně telefonátů a více potvrzených termínů.
+- B2B monitoring: zákazník neplatí za grafy, ale za rychlejší reakci na incidenty.
+- Interní AI nástroj: zákazník neplatí za chat, ale za zrychlení opakované práce bez posílání citlivých dat do náhodných služeb.
+
+Když tohle nemáš jasné, pricing bude působit jako seznam funkcí. A seznam funkcí obvykle prodává hlavně lidem, kteří už jsou rozhodnutí. Nerozhodnutému zákazníkovi nepomůže, že tarif Pro obsahuje „pokročilé workflow konfigurace“. Pomůže mu vědět, že ve firmě konečně přestane honit schvalování ve třech e-mailech.
+
+## I.2 Tři tarify nejsou povinnost, ale často pomůžou
+
+Klasická trojice tarifů — Start, Growth, Business — není svaté písmo. Funguje ale proto, že zákazníkům dává mentální mapu. Malý tým vidí bezpečný začátek, rostoucí tým vidí rozumný střed a větší firma vidí možnost řešit bezpečnost, podporu a smlouvy.
+
+Praktická struktura tarifů:
+
+| Tarif | Pro koho | Co má ukázat |
+| --- | --- | --- |
+| Start | jednotlivec nebo malý tým | nízké riziko vyzkoušení |
+| Growth | hlavní cílový segment | nejlepší poměr hodnoty a ceny |
+| Business | větší tým nebo citlivější provoz | kontrola, podpora, bezpečnost, smluvní jistota |
+
+Nejčastější chyba je nacpat do levného tarifu příliš mnoho. Pak se zákazníci nemají proč posouvat výš a tým začne vymýšlet umělá omezení. Lepší je oddělovat podle přirozené hodnoty: počet uživatelů, objem práce, pokročilá oprávnění, auditní logy, integrace, SLA, správa dat, více organizací nebo prioritní podpora.
+
+Codyho komentář: tarif nemá být past. Má být férová nabídka. Pokud musíš zákazníka nachytat na malý limit, který zjistí až po migraci, není to pricing. Je to komerční minové pole s hezkým gradientem.
+
+## I.3 Ukaž cenu, nebo férově vysvětli proč ne
+
+Ne každý produkt může mít veřejný fixní ceník. U enterprise řešení někdy cenu ovlivňuje počet systémů, bezpečnostní požadavky, migrace nebo úroveň podpory. Ale i tehdy může stránka dát vodítko.
+
+Místo prázdného „Kontaktujte nás“ použij:
+
+- „Individuální cena od 30 uživatelů.“
+- „Cena se odvíjí od počtu týmů, integrací a požadované podpory.“
+- „Typický pilot trvá 4–6 týdnů a zahrnuje nastavení, onboarding a vyhodnocení.“
+- „Před nabídkou si projdeme datové toky, provozní požadavky a bezpečnostní minimum.“
+
+Když cenu neukážeš, zákazník si ji domyslí. Často špatně. Malá firma se lekne, že je produkt mimo rozpočet. Větší firma si zase může říct, že produkt není dost vyspělý, když schovává i základní orientaci. Cenová stránka nemusí prozradit všechno, ale měla by snížit nejistotu.
+
+Privacy-first doplněk: pokud nabízíš vyšší tarif kvůli datům, napiš konkrétně co znamená. Například:
+
+- samostatná organizace a role,
+- kratší retenční doby logů,
+- auditní log přístupů,
+- export dat bez podpory,
+- možnost regionálního provozu v EU,
+- DPA a bezpečnostní příloha ke smlouvě.
+
+Tohle je užitečnější než neurčité „enterprise security“. Zákazník nechce kouzelnou mlhu. Chce vědět, jestli jeho právník a IT správce přestanou mračit čelo.
+
+## I.4 Funkce popisuj jazykem rozhodnutí
+
+Ceníky často vypadají jako tabulka, kterou navrhl někdo po dlouhém boji s interní roadmapou. Sloupce, fajfky, limity a názvy funkcí, kterým rozumí hlavně tým uvnitř firmy. Zákazník ale porovnává rozhodnutí, ne komponenty.
+
+Slabý řádek v ceníku:
+
+> „Webhook endpoints: 3 / 10 / unlimited“
+
+Lepší řádek:
+
+> „Napojení na další systémy: základní automatizace / více týmových workflow / individuální integrace“
+
+Technický detail může být v nápovědě nebo dokumentaci. Hlavní ceník má pomoci pochopit rozdíl mezi tarify. Dobrá otázka u každého řádku:
+
+- Pomáhá tato funkce zákazníkovi vybrat tarif?
+- Je název srozumitelný bez znalosti interního produktu?
+- Ukazuje řádek hodnotu, nebo jen existenci funkce?
+- Je omezení férové a vysvětlitelné?
+- Nevyvolává pocit, že základní tarif je schválně rozbitý?
+
+Příklad přepisu:
+
+| Interní název | Lepší ceníkový text |
+| --- | --- |
+| RBAC | Role a oprávnění pro tým |
+| Data retention settings | Nastavení doby uchování dat |
+| API access | Napojení na vlastní systémy |
+| White-label reports | Reporty s vlastní značkou |
+| SSO | Přihlášení přes firemní účet |
+
+## I.5 Trial, demo a onboarding nastav bez nátlaku
+
+Trial není jen marketingový trik. Je to slib, že zákazník může ověřit hodnotu s rozumným rizikem. U privacy-first SaaS by měl trial zároveň ukázat, že produkt nebude sbírat zbytečnosti.
+
+Dobrá trial sekce odpoví:
+
+- Potřebuji kartu?
+- Jak dlouho trial trvá?
+- Co se stane po skončení?
+- Jaká data mám zadat?
+- Dá se účet a data smazat?
+- Dostanu export, když produkt nechci?
+
+Příklad férového mikrotextu:
+
+> „Trial je bez platební karty. Po 14 dnech účet pozastavíme, nic automaticky neúčtujeme. Data můžeš kdykoli exportovat nebo smazat v nastavení.“
+
+U produktů, které vyžadují demo, je fér vysvětlit proč:
+
+> „Demo děláme u týmů nad 30 lidí, protože potřebujeme projít role, datové toky a integrace. Nejde o prodejní výslech, spíš o kontrolu, jestli produkt opravdu sedí.“
+
+Ano, taková věta je méně agresivní než „Book a call now!!!“. Taky je lidštější. A lidé kupodivu bývají lidé. Překvapivé, já vím.
+
+## I.6 FAQ má řešit námitky, ne vycpávat stránku
+
+FAQ na cenové stránce má být krátké, konkrétní a obchodně užitečné. Ne encyklopedie. Vyber otázky, které zákazník reálně řeší před rozhodnutím.
+
+Doporučené otázky pro privacy-first SaaS:
+
+- Kde jsou data uložená?
+- Kdo má k datům přístup?
+- Používáte reklamní nebo behaviorální trackery?
+- Dá se účet zrušit a data exportovat?
+- Jak funguje fakturace a změna tarifu?
+- Co se stane po skončení trialu?
+- Nabízíte DPA nebo bezpečnostní dokumentaci?
+- Jaké integrace znamenají předávání dat třetím stranám?
+
+Odpovědi piš normálně. Například:
+
+> „Nepoužíváme reklamní pixely. Pro produktovou analytiku sledujeme agregované události, které pomáhají zlepšit onboarding a stabilitu. Nepoužíváme je pro remarketing.“
+
+Tohle je zároveň marketing, podpora i důvěra. A hlavně to snižuje počet e-mailů, kde se někdo ptá na věci, které mohly být jasné už na webu.
+
+## I.7 Checklist cenové stránky
+
+Před publikací nebo revizí pricingu si projdi:
+
+- Je do 10 vteřin jasné, pro koho je který tarif?
+- Vysvětluje stránka hodnotu, ne jen seznam funkcí?
+- Je hlavní doporučený tarif označený férově, bez manipulace?
+- Jsou limity pochopitelné a navázané na reálnou hodnotu?
+- Je jasné, co se stane po trialu nebo po odeslání poptávky?
+- Nevyžadujeme platební kartu, pokud to není opravdu nutné?
+- Umí zákazník najít informace o datech, provozu a přístupech?
+- Má stránka odpovědi na nejčastější námitky obchodního a IT týmu?
+- Neschováváme cenu jen proto, že se bojíme srovnání?
+- Dá se tarif změnit, zrušit a data exportovat bez zbytečného tření?
+
+## Shrnutí přílohy
+
+Dobrá cenová stránka není katalog funkcí ani psychologická past. Je to rozhodovací pomůcka. Ukazuje hodnotu, snižuje nejistotu a vysvětluje, proč jednotlivé tarify existují. Privacy-first SaaS by měl být v pricingu stejně férový jako v práci s daty: říct, co stojí peníze, co se děje s účtem, kde jsou data a jak může zákazník odejít. Důvěra se nebuduje až po podpisu smlouvy. Začíná už u ceníku.
+
+---
+
 ## Zdroje
 
 - Evropská komise: Data protection — https://commission.europa.eu/law/law-topic/data-protection_en
@@ -2481,3 +2638,4 @@ Landing page audit není akademická disciplína. Je to rychlá kontrola, jestli
 - 2026-08-07: Přidána příloha F o redakčním systému bez závislosti na algoritmech: obsahové pilíře, repurposing, redakční kanban, SEO minimum a revizní rutina.
 - 2026-08-07: Přidána příloha G o privacy-first obchodním follow-upu a malém CRM: pipeline, datové minimum, follow-up sekvence, automatizace a měsíční úklid.
 - 2026-08-07: Přidána příloha H s hodinovým auditem landing page: primární akce, skeptické čtení, důvěra, mobilní kontrola a jeden navazující experiment.
+- 2026-08-07: Přidána příloha I o cenové stránce SaaS bez triků: hodnota tarifů, veřejnost ceny, srozumitelný popis funkcí, trial, FAQ a privacy-first checklist.
