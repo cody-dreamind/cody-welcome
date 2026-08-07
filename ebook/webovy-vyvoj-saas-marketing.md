@@ -1719,6 +1719,132 @@ Malý tým nepotřebuje těžkou procesní metodiku. Potřebuje pár opakovateln
 
 ---
 
+# Příloha C: Mikrotexty pro privacy-first web
+
+Mikrotext je krátká věta u formuláře, tlačítka, nastavení nebo prázdného stavu. Na první pohled drobnost. V praxi často rozhoduje, jestli člověk chápe další krok, věří stránce a dokončí akci bez pocitu, že právě podepisuje smlouvu s ledničkou, která má vlastní reklamní agenturu.
+
+Privacy-first web nepotřebuje uživatele strašit právními odstavci v každém rohu. Potřebuje srozumitelně říct, co se děje s daty, proč je konkrétní údaj potřeba a jaký výsledek uživatel dostane. Tohle je copywriting i provozní disciplína zároveň.
+
+## C.1 Kontaktní formulář
+
+Kontaktní formulář je typické místo, kde se dá důvěra buď získat, nebo rozbít. Pokud pod tlačítkem stojí jen „Odesláním souhlasíte se zpracováním osobních údajů“, uživatel se nic praktického nedozví. Lepší mikrotext říká účel, rozsah a očekávání.
+
+Použitelné varianty:
+
+- „Údaje použijeme jen k odpovědi na vaši zprávu. Žádný newsletter bez výslovného přihlášení.“
+- „E-mail potřebujeme, abychom mohli odpovědět. Telefon je volitelný a použijeme ho jen, pokud chcete zavolat.“
+- „Po odeslání se ozveme s návrhem dalšího kroku. Kontakt neprodáváme ani neposíláme do reklamních systémů.“
+- „Poptávku uložíme jen po dobu nutnou k vyřízení a navazující obchodní komunikaci.“
+
+Slabá varianta:
+
+> Odesláním souhlasíte se zásadami ochrany osobních údajů.
+
+Lepší varianta:
+
+> Údaje z formuláře použijeme jen k vyřízení poptávky. E-mail je nutný pro odpověď, telefon je dobrovolný. Zásady ochrany osobních údajů najdete tady.
+
+Codyho komentář: právní odkaz není špatně. Špatně je, když je to jediná lidská věta na celé stránce. To je jako dát zákazníkovi místo pozdravu šanon.
+
+## C.2 Newsletter, RSS a obsahové odběry
+
+Pokud projekt používá newsletter, musí být jasné, co člověk dostane a jak často. Ještě lepší je nabídnout RSS nebo přímý odkaz na archiv jako privacy-first alternativu pro lidi, kteří nechtějí dávat e-mail jen kvůli čtení obsahu.
+
+Použitelné varianty:
+
+- „Jednou měsíčně pošleme praktické tipy k webu, SaaS a privacy-first provozu. Žádné denní otravování, Cody má taky rád klid.“
+- „E-mail použijeme jen pro tento odběr. Odhlášení je v každém e-mailu.“
+- „Nechcete zadávat e-mail? Sledujte novinky přes RSS nebo přímý archiv článků.“
+- „Newsletter neposíláme přes reklamní publika. Měříme jen základní doručitelnost a zájem o obsah.“
+
+Mini-checklist odběru:
+
+- Je jasné téma odběru?
+- Je jasná frekvence?
+- Je odhlášení popsáno normálně?
+- Existuje alternativa bez e-mailu, ideálně RSS?
+- Nejsou marketingové souhlasy předem zaškrtnuté?
+- Nepoužívá se přihlášení k obsahu jako skrytý vstup do obchodní sekvence?
+
+## C.3 Cookies a analytika bez divadla
+
+Cookie lišta nemá být právní escape room. Pokud web používá jen technicky nutné cookies, řekni to jednoduše. Pokud měří agregovanou návštěvnost bez reklamního profilování, vysvětli účel a přidej odkaz na detail.
+
+Použitelné varianty:
+
+- „Používáme jen technicky nutné cookies pro fungování webu. Reklamní pixely nepoužíváme.“
+- „Návštěvnost měříme agregovaně, abychom věděli, které stránky pomáhají. Nesestavujeme reklamní profily.“
+- „Analytika nám říká, co zlepšit na webu, ne kdo přesně jste.“
+- „Externí nástroje přidáváme jen tehdy, když mají jasný účel a rozumíme tomu, kam data tečou.“
+
+Špatný tón:
+
+> Používáním webu souhlasíte se vším, co jsme schovali do nastavení.
+
+Lepší tón:
+
+> Web funguje bez reklamních trackerů. Základní návštěvnost měříme kvůli zlepšování obsahu a služeb.
+
+Praktické pravidlo: když mikrotext nejde napsat jednoduše, možná je problém v samotném nastavení nástroje, ne v copywritingu. Text nemá maskovat špatné rozhodnutí.
+
+## C.4 SaaS onboarding a prázdné stavy
+
+Onboarding je citlivé místo. Uživatel často vkládá první data do produktu a ještě neví, jestli mu věří. Každý krok má vysvětlit, proč je údaj potřeba a jestli jde přeskočit.
+
+Použitelné varianty:
+
+- „Název firmy použijeme jen pro nastavení pracovního prostoru. Později ho můžete změnit.“
+- „Import dat můžete přeskočit a vyzkoušet produkt na ukázkových datech.“
+- „Soubor zpracujeme jen pro vytvoření importu. Původní nahrávku po dokončení smažeme podle nastavení retence.“
+- „Pozvěte kolegy až ve chvíli, kdy máte pracovní prostor připravený. Zatím nikomu nic neposíláme.“
+- „Tady zatím nic není. Vytvořte první projekt, nebo si otevřete demo s testovacími daty.“
+
+Dobré prázdné stavy nejsou jen roztomilé ilustrace. Mají říct:
+
+- co tu bude, až bude systém používaný,
+- jaký je nejlepší další krok,
+- jestli je bezpečné začít s testovacími daty,
+- kde najít pomoc,
+- co se stane po kliknutí.
+
+Privacy-first onboarding má jednu velkou výhodu: umí nabídnout ukázková data místo okamžitého importu reálných zákazníků. To snižuje bariéru a zároveň chrání tým před situací „nahráli jsme celé CRM do nástroje, který ještě možná nebudeme používat“. Klasika. Špatná klasika.
+
+## C.5 Chybové hlášky a incidentové sdělení
+
+Chyba je moment pravdy. Text typu „Něco se pokazilo“ je někdy nevyhnutelný, ale často zbytečně mlží. Uživatel potřebuje vědět, co se stalo, co má udělat a jestli jsou jeho data v bezpečí.
+
+Použitelné varianty:
+
+- „Formulář se nepodařilo odeslat. Zkuste to prosím znovu, nebo napište přímo na e-mail.“
+- „Soubor je větší, než aktuálně podporujeme. Data jsme neuložili. Zkuste menší export nebo nás kontaktujte.“
+- „Import se zastavil na kontrole formátu. Původní soubor zůstává uložený jen pro tento pokus.“
+- „Služba je dočasně nedostupná. Pracujeme na opravě a stav aktualizujeme na této stránce.“
+- „Zaznamenali jsme problém s dostupností. Podle aktuální kontroly nevidíme známky neoprávněného přístupu k datům.“
+
+Pozor na dvě pasti:
+
+- Neslibuj, že data jsou v bezpečí, pokud to ještě nevíš.
+- Neprozrazuj v chybové hlášce interní technické detaily, které pomůžou útočníkovi.
+
+Lepší incidentový mikrotext je klidný, konkrétní a opatrný. Nehraje si na dokonalost. Říká, co tým ví teď, co ověřuje a kdy dá další update.
+
+## C.6 Checklist mikrotextů před publikací
+
+- Říká text, proč se údaj sbírá?
+- Vysvětluje, co se stane po kliknutí?
+- Je jasné, které pole je povinné a které volitelné?
+- Dá se věta pochopit bez právníka, vývojáře a šamana přes cookies?
+- Nezakrývá mikrotext invazivní měření hezkými slovy?
+- Nabízí web privacy-friendly alternativu, kde to dává smysl?
+- Jsou chybové hlášky užitečné, ale neprozrazují interní detaily?
+- Odpovídá tón značce: lidský, přesný, bez manipulace?
+
+## Shrnutí přílohy
+
+Mikrotexty jsou malé pojistky důvěry. Pomáhají uživateli pochopit další krok, snižují nejistotu a dělají privacy-first hodnotu viditelnou v každodenních detailech. Nejlepší text ale nikdy nezachrání špatné datové rozhodnutí. Nejdřív navrhni férový proces, potom ho jednoduše pojmenuj.
+
+---
+
 ## Zdroje
 
 - Evropská komise: Data protection — https://commission.europa.eu/law/law-topic/data-protection_en
@@ -1765,3 +1891,4 @@ Malý tým nepotřebuje těžkou procesní metodiku. Potřebuje pár opakovateln
 - 2026-08-07: Dopsána desátá kapitola s předspouštěcím checklistem pro web nebo SaaS: slib, kritické cesty, privacy, provoz, SEO a finální kontrola.
 - 2026-08-07: Přidána příloha A s 30denním plánem pro privacy-first web nebo SaaS: datová mapa, minimalizace, transparentní mikrotexty a provozní rutina.
 - 2026-08-07: Přidána příloha B se šablonami pro produktové hypotézy, měřicí plán, výběr dodavatele, rozhodovací záznam a incidentovou zprávu.
+- 2026-08-07: Přidána příloha C s praktickými mikrotexty pro kontaktní formuláře, odběry, cookies, onboarding, chybové stavy a incidentovou komunikaci.
