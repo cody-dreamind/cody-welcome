@@ -3738,8 +3738,138 @@ Zálohy chrání byznys jen tehdy, když jsou obnovitelné, oddělené od produk
 
 ---
 
+# Příloha S: Monitoring, alerty a status komunikace bez šmírovací sirény
+
+Monitoring má odpovědět na jednoduchou otázku: funguje služba pro zákazníka dost dobře na to, aby mohl udělat svou práci? Nemá z týmu udělat noční hlídače grafů ani z uživatelů laboratorní myši. Privacy-first monitoring proto sbírá signály o zdraví systému, ne zbytečný osobní detail o každém kliknutí.
+
+Dobré pravidlo: měř to, co pomáhá rychle opravit problém, vysvětlit dopad a zlepšit provoz. Neměř to, co je jen zvědavost s dashboardem.
+
+## S.1 Začni uživatelským slibem, ne seznamem metrik
+
+Monitoring bez slibu vede k alertům typu „CPU je nějaké divné“. To může být důležité, ale zákazníka zajímá něco jiného: jde se přihlásit, načte se projekt, odešle se formulář, přijde e-mail, proběhne platba, uloží se práce.
+
+Pro malý SaaS napiš nejdřív pět kritických slibů:
+
+| Slib | Jak ho ověřit | Kdy je problém |
+| --- | --- | --- |
+| Uživatel se přihlásí | syntetický login test | chyba nebo výrazné zpomalení |
+| Projekt se otevře | test načtení klíčové stránky | timeout, 5xx, prázdný stav |
+| Formulář odešle data | test endpointu a validace | data nedorazí do fronty/CRM |
+| E-mail se odešle | kontrola fronty a doručení do test mailboxu | fronta roste nebo provider odmítá |
+| Export jde stáhnout | test vytvoření a stažení souboru | chyba, neplatný soubor, moc dlouhé čekání |
+
+Teprve potom přidej technické metriky: dostupnost, latence, chybovost, délka fronty, využití disku, databázové spojení, expirace certifikátu a stav záloh. Technické grafy jsou mapa, ne cíl výletu.
+
+## S.2 Loguj pro opravu, ne pro zvědavost
+
+OWASP Logging Cheat Sheet doporučuje u logování přemýšlet podle účelu a zároveň neukládat zbytečně citlivá data, tokeny, hesla, klíče nebo osobní údaje: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+
+Praktické minimum pro aplikační logy:
+
+- čas události v jednotném časovém pásmu,
+- typ události: login, export, platba, webhook, změna oprávnění,
+- výsledek: úspěch, chyba, odmítnutí, timeout,
+- anonymizovaný nebo interní identifikátor účtu, pokud je nutný pro opravu,
+- korelační ID requestu, aby šla poskládat cesta chybou,
+- verze aplikace nebo deploymentu,
+- stručný technický důvod chyby bez osobních dat.
+
+Co do běžných logů nepatří:
+
+- hesla, access tokeny, session cookies a API klíče,
+- celé request/response body s uživatelským obsahem,
+- platební údaje,
+- zdravotní, citlivé nebo zbytečně detailní osobní údaje,
+- dlouhodobě uložené IP adresy bez jasného účelu,
+- debug výpisy, které byly užitečné v pátek večer a nebezpečné v pondělí ráno.
+
+Když potřebuješ detail pro vyšetření incidentu, udělej ho vědomě: dočasně, s vlastníkem, omezeným přístupem a jasným smazáním. Debug log bez expirace je jako půjčit někomu klíče od skladu a doufat, že se časem samy vypaří.
+
+## S.3 Alert má mít vlastníka, práh a akci
+
+Špatný alert říká: „Něco se stalo.“ Dobrý alert říká: „Tahle uživatelská cesta selhává, tady je dopad, tady je první krok.“
+
+U každého alertu si napiš:
+
+- **Vlastník:** kdo reaguje, když alert přijde.
+- **Dopad:** jak poznáme, že to bolí zákazníka.
+- **Práh:** kdy alert spustit, aby neřval kvůli každému zakašlání serveru.
+- **První krok:** co má člověk udělat během pěti minut.
+- **Eskalace:** koho vzbudit, když první krok nepomůže.
+- **Ticho:** kdy alert vypnout, sloučit nebo předělat.
+
+Příklad špatně:
+
+> „Disk usage > 80 %“
+
+Příklad lépe:
+
+> „Produkční disk pro uploady má méně než 15 % volného místa déle než 10 minut. Zkontroluj růst uploadů, smaž dočasné soubory podle runbooku a pokud trend pokračuje, navyš kapacitu.“
+
+Alert fatigue je reálný provozní dluh. Když systém křičí desetkrát denně kvůli nedůležitým věcem, tým přestane věřit i tomu jedenáctému alertu, který byl zrovna důležitý. Siréna, která houká pořád, je nakonec jen drahý ambient.
+
+## S.4 Status page má snižovat nejistotu
+
+Status komunikace není PR divadlo. Je to způsob, jak zákazníkovi dát rychlou odpověď: víte o problému, koho se týká, co se děje a kdy přijde další update.
+
+Základní šablona incidentového statusu:
+
+> **Identifikovali jsme problém s přihlášením.**
+>
+> Část uživatelů se nemůže přihlásit do aplikace. Data nejsou podle aktuálních informací ztracená. Problém vyšetřujeme a další update dáme do 30 minut.
+
+Po opravě:
+
+> **Přihlášení je obnoveno.**
+>
+> Problém trval od 09:12 do 09:38. Příčinou byla chybná konfigurace po deploymentu. Přidáváme automatickou kontrolu login toku před dokončením release. Detailní postmortem doplníme během dne.
+
+Atlassian ve své dokumentaci k postmortemům shrnuje tři důležité body: omluvit se, ukázat porozumění tomu, co se stalo, a vysvětlit nápravný plán: https://support.atlassian.com/statuspage/docs/create-a-postmortem/
+
+Privacy-first status komunikace má jednu extra disciplínu: neprozrazuj víc zákaznických nebo technických detailů, než je nutné. Transparentnost neznamená vyvěsit interní mapu infrastruktury na náměstí.
+
+## S.5 Monitoring provozuj stejně privacy-first jako produkt
+
+Monitoringový nástroj je další dodavatel s přístupem k provozním datům. Před zapnutím si polož stejné otázky jako u CRM nebo analytiky:
+
+- Kde se ukládají logy, metriky a incidentová data?
+- Posíláme do nástroje osobní údaje nebo zákaznický obsah?
+- Umíme data maskovat ještě před odesláním?
+- Jak dlouho nástroj data drží?
+- Kdo v týmu má přístup ke čtení logů?
+- Jde exportovat historii incidentů a odejít bez ztráty kontextu?
+- Máme monitoring i pro monitoring, tedy poznáme, že sběr dat přestal fungovat?
+
+Evropský provoz neznamená, že každý nástroj musí být asketická krabička pod stolem. Znamená to vědomě rozhodnout, co kam posíláš, proč a na jak dlouho. U citlivějších projektů dává smysl preferovat EU region, self-hostovanou variantu nebo aspoň režim, který neposílá osobní obsah mimo kontrolované prostředí.
+
+## S.6 Checklist monitoringu a status komunikace
+
+Před spuštěním nové služby nebo větší funkce si projdi:
+
+- Máme popsaných pět kritických uživatelských cest?
+- Existuje syntetický test pro login, hlavní akci a formulář nebo platbu?
+- Logy obsahují korelační ID, ale neobsahují tajemství ani zbytečné osobní údaje?
+- Každý alert má vlastníka, práh, dopad a první krok?
+- Máme runbook pro nejčastější tři incidenty?
+- Umíme rychle zjistit, jestli problém vznikl po posledním deploymentu?
+- Máme status text pro výpadek, degradaci služby a obnovu?
+- Víme, kdy zákazníkovi poslat update i bez kompletní příčiny?
+- Máme retenční dobu pro logy a incidentové záznamy?
+- Kontrolujeme přístupy k logům stejně vážně jako přístupy k databázi?
+
+## Codyho komentář
+
+Monitoring je nejlepší, když je nudný. Nuda v provozu znamená, že víš, co se děje, alerty dávají smysl a zákazník se nemusí ptát na Slacku, jestli „to padá jenom mně“. Malý tým nepotřebuje vesmírné řídicí centrum. Potřebuje pár dobrých signálů, méně hluku a odvahu říct zákazníkovi pravdu včas.
+
+## Shrnutí přílohy
+
+Privacy-first monitoring nestaví na sběru všeho pro jistotu. Staví na uživatelských slibech, bezpečných logách, akčních alertech, srozumitelné status komunikaci a retenčním úklidu. Když měříš méně, ale lépe, rychleji opravíš problém a zároveň nevytváříš další sklad osobních dat. To je přesně ten druh provozní disciplíny, který je sice méně sexy než nový dashboard, ale zákazníci ho ocení ve chvíli, kdy se něco pokazí.
+
+---
+
 ## Zdroje
 
+- Atlassian Support: Create a postmortem — https://support.atlassian.com/statuspage/docs/create-a-postmortem/
 - Evropská komise: Data protection — https://commission.europa.eu/law/law-topic/data-protection_en
 - Evropská komise: Data protection by design and by default — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/obligations/what-does-data-protection-design-and-default-mean_en
 - Evropská komise: Data protection for businesses and organisations — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations_en
@@ -3761,6 +3891,7 @@ Zálohy chrání byznys jen tehdy, když jsou obnovitelné, oddělené od produk
 - Google Search Central: Understanding Google Page Experience — https://developers.google.com/search/docs/appearance/page-experience
 - Google Search Central: Creating helpful, reliable, people-first content — https://developers.google.com/search/docs/fundamentals/creating-helpful-content
 - Google Search Central: SEO Starter Guide — https://developers.google.com/search/docs/fundamentals/seo-starter-guide
+- OWASP: Logging Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
 - OWASP: Top 10 for Large Language Model Applications — https://owasp.org/www-project-top-10-for-large-language-model-applications/
 - OWASP: Top 10 for LLM Applications 2025 — https://genai.owasp.org/resource/owasp-top-10-for-llm-applications-2025/
 - Plausible Analytics: About — https://plausible.io/about
@@ -3775,6 +3906,7 @@ Zálohy chrání byznys jen tehdy, když jsou obnovitelné, oddělené od produk
 
 ## Pracovní log
 
+- 2026-08-07: Přidána příloha S o monitoringu, alertech a status komunikaci: uživatelské sliby, bezpečné logování, akční alerty, status šablony, privacy-first výběr nástroje a checklist.
 - 2026-08-07: Přidána příloha R o zálohách a obnově bez falešného pocitu bezpečí: mapa obnovy, oddělení záloh, test restore, retence, dokumentace a checklist.
 - 2026-08-07: Přidána příloha P s incidentovým playbookem pro malý SaaS tým: závažnost, prvních 30 minut, zákaznická komunikace, privacy triage, postmortem a checklist připravenosti.
 - 2026-08-07: Přidána příloha Q o B2B trust packu: datové věty pro funkce, subdodavatelé, bezpečnostní minimum, nákupní námitky, živá revize a checklist.
