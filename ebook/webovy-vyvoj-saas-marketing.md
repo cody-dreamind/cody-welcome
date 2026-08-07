@@ -1932,10 +1932,132 @@ Měsíční review drží web a SaaS při zemi. Spojuje obchodní výsledky, ru�
 
 ---
 
+# Příloha E: Privacy-first dotazník pro výběr dodavatele
+
+Dodavatel není jen položka v nákladech. Je to kus tvého produktu, reputace a datové odpovědnosti v cizích rukou. U malého SaaS týmu stačí jeden špatně zvolený chat widget, analytický nástroj nebo „rychlá“ automatizace a najednou řešíš předávání dat, souhlasy, exporty, bezpečnostní incidenty a vysvětlování zákazníkům, proč se jejich údaje potulují po půlce internetu jako turista bez mapy.
+
+Privacy-first výběr dodavatele není o tom, že automaticky odmítneš každý nástroj mimo vlastní server. Je o tom, že víš, jaká data kam posíláš, proč to děláš, kdo k nim má přístup a jak rychle umíš odejít. GDPR navíc rozlišuje role správce a zpracovatele; Evropská komise k ochraně dat pro firmy vysvětluje, že organizace musí vědět, jak osobní údaje zpracovává a jaké povinnosti z toho plynou. Prakticky: než zapneš nástroj, musíš rozumět jeho roli v datovém toku.
+
+## E.1 Nejdřív napiš, co dodavatel skutečně řeší
+
+Špatná otázka zní: „Je ten nástroj populární?“ Lepší otázka zní: „Jaké rozhodnutí nebo proces bez něj nezvládneme?“ Pokud odpověď není jasná, výběr dodavatele se změní v nákupní výlet s firemní kartou. To málokdy končí dobře, zato faktury chodí spolehlivě.
+
+Před prvním testem si vyplň krátké zadání:
+
+| Otázka | Praktická odpověď |
+| --- | --- |
+| Jaký problém řešíme? | „Potřebujeme zjistit, kde uživatelé opouštějí onboarding.“ |
+| Jaké rozhodnutí z toho vznikne? | „Zjednodušíme první krok nebo upravíme nápovědu.“ |
+| Jaká data jsou opravdu nutná? | „Anonymní události kroků, ne e-mail uživatele.“ |
+| Jak dlouho data potřebujeme? | „90 dní pro porovnání změn.“ |
+| Co se stane, když nástroj vypneme? | „Produkt běží dál, ztratíme jen reporting.“ |
+
+Tahle tabulka je malá, ale odhalí hodně. Pokud neumíš vyplnit „jaké rozhodnutí z toho vznikne“, nástroj pravděpodobně nekupuješ kvůli práci, ale kvůli pocitu kontroly.
+
+## E.2 Datová mapa dodavatele
+
+U každého kandidáta si napiš datovou mapu. Nemusí to být právnický elaborát, stačí jedna stránka, kterou pochopí zakladatel, vývojář i člověk z podpory.
+
+Minimální mapa:
+
+- Kategorie dat: identifikátor účtu, e-mail, IP adresa, obsah zpráv, události v aplikaci, platební metadata.
+- Směr toku: z webu do nástroje, z nástroje do e-mailu, z nástroje do interní databáze.
+- Umístění dat: EU region, konkrétní datacentrum, nebo alespoň jasně popsaná jurisdikce.
+- Přístup: kdo z týmu a kdo u dodavatele může data vidět.
+- Retence: kdy se data mažou automaticky a jak se mažou ručně.
+- Export a odchod: jak získáš data ven a jak ověříš smazání.
+
+Příklad pro nástroj zákaznické podpory:
+
+| Oblast | Dobrá odpověď | Varovný signál |
+| --- | --- | --- |
+| Obsah ticketů | Ukládá se v EU, šifrovaně, s rolemi | Nejasný region a globální support přístup |
+| Přílohy | Omezená velikost, automatické mazání po retenci | Přílohy zůstávají navždy |
+| AI funkce | Vypnuté ve výchozím stavu, bez trénování na datech zákazníků | „Můžeme používat pro zlepšování služeb“ bez detailu |
+| Export | CSV/API export dostupný adminovi | Export jen přes support ticket |
+
+Codyho komentář: pokud dodavatel nedokáže jednoduše vysvětlit, kde jsou data a kdo k nim má přístup, není to „enterprise komplexita“. Je to mlha. A mlha je pěkná na Šumavě, ne ve zpracování osobních údajů.
+
+## E.3 Bezpečnostní minimum bez divadla
+
+Malý tým nepotřebuje dvacetistránkový bezpečnostní audit pro každý ikonkový nástroj. Potřebuje minimum, které zachytí největší rizika. CERT-EU ve svých doporučeních pro mitigaci kritických hrozeb dlouhodobě zdůrazňuje základní opatření jako vícefaktorové ověřování, aktualizace, zálohy a řízení přístupů. Pro SaaS dodavatele to převeď do praktických otázek:
+
+- Podporuje dodavatel SSO nebo alespoň MFA pro administrátory?
+- Umí role a oprávnění, nebo je každý uživatel skoro-admin?
+- Má audit log pro zásadní akce, jako export dat, změna oprávnění a mazání?
+- Popisuje, jak oznamuje bezpečnostní incidenty?
+- Má jasnou stránku o bezpečnosti a zpracování dat?
+- Umí oddělit produkční data od testovacích dat?
+- Dá se účet rychle deaktivovat bez ztráty exportu?
+
+Nemusíš hned vyžadovat certifikace u každého nástroje za pár eur měsíčně. Ale u služeb, které zpracovávají zákaznická data, platební metadata, interní dokumenty nebo produkční přístupy, už „věříme jim, mají hezký web“ nestačí.
+
+## E.4 AI funkce posuzuj přísněji než běžný software
+
+AI v dodavatelském nástroji může být užitečná: shrnutí ticketů, návrhy odpovědí, klasifikace poptávek, hledání v dokumentaci. Jenže často pracuje s nejcitlivějším kontextem: zákaznickou komunikací, interními poznámkami, obchodními údaji nebo produkčními incidenty.
+
+U AI funkcí si proto polož extra otázky:
+
+- Je AI funkce zapnutá opt-in, nebo běží automaticky?
+- Posílají se data třetí straně, nebo zůstávají u stejného dodavatele?
+- Používají se vstupy a výstupy pro trénování nebo zlepšování modelů?
+- Lze z AI zpracování vyloučit citlivé projekty, tickety nebo zákazníky?
+- Jak se značí AI generovaný obsah, pokud míří k uživateli?
+- Umí tým výstup před odesláním zkontrolovat člověkem?
+
+AI Act přináší mimo jiné transparentní povinnosti pro určité situace, například když lidé interagují s AI systémem nebo když je obsah generovaný či manipulovaný AI v relevantním kontextu. Neřeš to panikou. Řeš to návrhem produktu: uživatel má vědět, kdy mluví s automatem, a tým má vědět, kde AI sahá na data.
+
+Praktické pravidlo: AI dodavatel smí dostat jen takový kontext, který bys bez mrknutí poslal externímu konzultantovi s podepsanou smlouvou a jasným účelem. Pokud by ti to přišlo divné v e-mailu, nemá to potichu téct ani do promptu.
+
+## E.5 Rozhodovací skóre: rychlé ano, pilot, nebo stop
+
+Po průzkumu dej dodavateli jednoduché skóre. Ne kvůli falešné vědeckosti, ale aby rozhodnutí nebylo jen „líbí se mi UI“.
+
+| Kritérium | 0 bodů | 1 bod | 2 body |
+| --- | --- | --- | --- |
+| Účel | Nejasný | Užitečný, ale okrajový | Navázaný na konkrétní rozhodnutí nebo proces |
+| Data | Sbírá víc, než potřebujeme | Data lze částečně omezit | Sbírá jen nutné minimum |
+| EU provoz | Nejasný nebo mimo EU bez dobrého důvodu | Volitelný EU region | EU provoz jasně dostupný a popsaný |
+| Přístupy | Hrubá oprávnění | Základní role | Role, MFA, audit log |
+| Odchod | Bez exportu a retence | Export existuje, mazání ručně | Export, mazání i retence jsou jasné |
+| AI/data reuse | Nejasné použití dat | Lze částečně vypnout | Opt-in, bez trénování na zákaznických datech |
+
+Výklad:
+
+- 0–4 body: stop, hledej alternativu nebo změň požadavek.
+- 5–8 bodů: pilot jen s omezenými daty a krátkou retencí.
+- 9–12 bodů: dobrý kandidát, ještě ověř smlouvu, export a provozní dopad.
+
+Do rozhodnutí si napiš i důvod odmítnutí. Za tři měsíce se to hodí, až někdo znovu přijde s tím samým nástrojem a větou „teď už je to určitě lepší“.
+
+## E.6 Checklist před zapnutím dodavatele
+
+- Máme napsaný účel nástroje jednou větou?
+- Víme, jaké rozhodnutí nebo proces nástroj zlepší?
+- Posíláme do něj jen nutná data?
+- Je jasné, zda dodavatel vystupuje jako správce, zpracovatel, nebo obojí podle situace?
+- Máme ověřené umístění dat a případné předávání mimo EU?
+- Máme podepsané nebo akceptované potřebné smluvní podmínky ke zpracování dat?
+- Je nastavené MFA pro administrátory?
+- Mají členové týmu jen taková oprávnění, která opravdu potřebují?
+- Je definovaná retence a postup smazání dat?
+- Umíme udělat export a odejít bez provozního rukojmí?
+- Jsou AI funkce vypnuté nebo omezené, dokud jim nerozumíme?
+- Je nástroj zapsaný v interním seznamu dodavatelů?
+- Má uživatel v privacy informacích srozumitelně popsané relevantní zpracování?
+- Máme datum prvního review: za 30 nebo 60 dní?
+
+## Shrnutí přílohy
+
+Privacy-first výběr dodavatele je hlavně disciplína v otázkách. Začni účelem, zmapuj data, ověř bezpečnostní minimum, posuzuj AI funkce přísněji a vždy měj plán odchodu. Dobrý dodavatel šetří čas. Špatný dodavatel šetří pět minut dnes a vyrábí právní, provozní a reputační dluh na zítra.
+
+---
+
 ## Zdroje
 
 - Evropská komise: Data protection — https://commission.europa.eu/law/law-topic/data-protection_en
 - Evropská komise: Data protection by design and by default — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/obligations/what-does-data-protection-design-and-default-mean_en
+- Evropská komise: Data protection for businesses and organisations — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations_en
 - Evropská komise: Navigating the AI Act — https://digital-strategy.ec.europa.eu/en/faqs/navigating-ai-act
 - Evropská komise: AI Act Article 50 transparency obligations — https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-50
 - Evropská komise: Guidelines on transparency of AI-generated content — https://digital-strategy.ec.europa.eu/en/policies/guidelines-transparency-ai-generated-content
@@ -1947,6 +2069,7 @@ Měsíční review drží web a SaaS při zemi. Spojuje obchodní výsledky, ru�
 - CNIL: Use analytics on your websites and applications — https://www.cnil.fr/en/sheet-ndeg16-use-analytics-your-websites-and-applications
 - CERT-EU: Cybersecurity mitigation measures against critical threats — https://cert.europa.eu/publications/security-guidance/security-guidance-22-001---cybersecurity-mitigation-measures-against-critical-threats/
 - EDPB: Guidelines 4/2019 on Article 25 Data Protection by Design and by Default — https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-42019-article-25-data-protection-design-and_en
+- EDPB: Guidelines 07/2020 on the concepts of controller and processor in the GDPR — https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-072020-concepts-controller-and-processor-gdpr_en
 - European Commission: NIS2 Directive FAQs — https://digital-strategy.ec.europa.eu/en/faqs/directive-measures-high-common-level-cybersecurity-across-union-nis2-directive-faqs
 - EURid: Find a registrar — https://eurid.eu/en/get-your-eu/find-a-registrar/
 - Google Search Central: Understanding Google Page Experience — https://developers.google.com/search/docs/appearance/page-experience
@@ -1980,3 +2103,4 @@ Měsíční review drží web a SaaS při zemi. Spojuje obchodní výsledky, ru�
 - 2026-08-07: Přidána příloha B se šablonami pro produktové hypotézy, měřicí plán, výběr dodavatele, rozhodovací záznam a incidentovou zprávu.
 - 2026-08-07: Přidána příloha C s praktickými mikrotexty pro kontaktní formuláře, odběry, cookies, onboarding, chybové stavy a incidentovou komunikaci.
 - 2026-08-07: Přidána příloha D s měsíčním provozním review webu nebo SaaS: obchodní signály, ruční kontrola kritických cest, datový úklid a rozhodovací checklist.
+- 2026-08-07: Přidána příloha E s privacy-first dotazníkem pro výběr dodavatelů: účel, datová mapa, bezpečnostní minimum, AI funkce, skóre a checklist před zapnutím.
