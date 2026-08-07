@@ -2967,6 +2967,126 @@ Znalostní báze není povinnost pro pořádkumilovné lidi. Je to operační sy
 
 ---
 
+# Příloha M: Newsletter a RSS bez marketingové klece
+
+Obsahový marketing často skončí v pasti: firma začne psát užitečné věci, ale distribuci svěří algoritmu, reklamní platformě nebo nástroji, který si z kontaktů udělá vlastní královstvíčko. Pak přijde změna pravidel, horší doručitelnost, dražší tarif, nový consent režim nebo prostě účet, do kterého se nikdo neumí přihlásit. Výsledek: publikum existuje, ale firma ho reálně nekontroluje.
+
+Privacy-first distribuce stojí na opačném principu: přímý vztah, jasný souhlas, snadný odchod a minimum dat. Newsletter a RSS nejsou retro. Jsou to nudné, spolehlivé koleje, po kterých obsah dojede k lidem bez toho, aby musel prosit algoritmus o drobné.
+
+## M.1 Newsletter není databáze duší
+
+E-mailový seznam má obsahovat jen data, která potřebuješ pro doručení a základní správu odběru. U většiny malých firem stačí:
+
+- e-mailová adresa,
+- datum přihlášení,
+- zdroj přihlášení,
+- stav odběru,
+- technický záznam souhlasu nebo oprávněného důvodu,
+- volitelně segment, pokud podle něj opravdu posíláš jiný obsah.
+
+Nepotřebuješ datum narození, telefon, název firmy, obrat, počet zaměstnanců ani tajnou psychologickou mapu člověka, který si chtěl jen stáhnout checklist. Každé další pole zvyšuje tření při registraci a zároveň přidává datový dluh.
+
+Praktický příklad formuláře:
+
+```text
+Odebírat praktické tipy k webu, SaaS a privacy-first marketingu.
+E-mail: [__________]
+
+Posíláme maximálně 2× měsíčně. Bez reklamních pixelů v e-mailu. Odhlášení je v každém vydání.
+[Odebírat]
+```
+
+Tahle verze říká, co člověk dostane, jak často, co se nebude dít a jak z toho může pryč. Žádné „přihlášením souhlasíte se zpracováním za účelem zlepšování obchodní komunikace a personalizace digitální zkušenosti“. To není věta, to je mlha v obleku.
+
+## M.2 RSS je pojistka proti algoritmům
+
+RSS feed je jednoduchý přímý kanál: publikovaný obsah má strojově čitelný seznam položek a čtenář si ho může odebírat ve vlastní čtečce. RSS Advisory Board popisuje RSS 2.0 jako formát pro syndikaci webového obsahu: https://www.rssboard.org/rss-specification
+
+Pro malý B2B web má RSS několik výhod:
+
+- odběr nevyžaduje e-mail,
+- neřeší doručitelnost ani spam složku,
+- neobsahuje marketingové pixely,
+- funguje napříč nástroji,
+- dává čtenáři kontrolu nad tím, kde obsah sleduje,
+- vytváří trvalý archiv místo jednorázového feedu na sociální síti.
+
+RSS není náhrada newsletteru pro všechny. Je to druhý kanál pro lidi, kteří chtějí sledovat obsah bez registrace. Přesně tihle lidé často ocení privacy-first přístup nejvíc. A ano, jsou to někdy ti samí lidé, kteří mají v prohlížeči 47 tabů a tvrdí, že v tom mají systém. Respekt.
+
+## M.3 E-mailové měření drž při zemi
+
+Newsletter láká k měření všeho: otevření, kliky, zařízení, lokace, čas čtení, skóre zájmu, automatické lead scoring peklo. Jenže otevření e-mailu samo o sobě není spolehlivý obchodní signál a detailní sledování často nepřináší lepší rozhodnutí.
+
+Místo posedlosti jednotlivcem měř agregovaně:
+
+- počet nových odběrů za měsíc,
+- počet odhlášení,
+- kliky na hlavní odkazy,
+- odpovědi na e-mail,
+- počet obchodních konverzací, které newsletter pomohl otevřít,
+- témata, na která lidé reagují konkrétní odpovědí.
+
+Pokud používáš sledované odkazy, popiš to v zásadách soukromí a nedělej z toho tajnou operaci. Pokud měření nepotřebuješ, posílej čisté odkazy. U malého newsletteru je často jedna odpověď od správného člověka hodnotnější než tabulka s otevřeními na dvě desetinná místa.
+
+Codyho komentář: nejlepší metrika newsletteru není „open rate“. Nejlepší metrika je, že ti někdo odpoví: „Tohle přesně řešíme, můžeme si zavolat?“ Marketing, který vede ke konverzaci, většinou nepotřebuje špehovací dalekohled.
+
+## M.4 Archivuj obsah na vlastním webu
+
+Newsletter by neměl být jediné místo, kde text žije. Každé hodnotné vydání převeď do článku, poznámky, checklistu nebo veřejného archivu. Důvody jsou praktické:
+
+- obsah získá trvalou URL,
+- dá se najít přes vyhledávač,
+- dá se sdílet bez přeposílání e-mailu,
+- může se propsat do RSS,
+- není zamčený v e-mailingovém nástroji,
+- lze ho aktualizovat, když se změní doporučení.
+
+Jednoduchý systém:
+
+1. Newsletter pošli jako krátký praktický tip.
+2. Do 48 hodin z něj udělej webovou verzi.
+3. Přidej kanonickou URL do interního seznamu obsahu.
+4. Jednou za čtvrtletí projdi nejlepší vydání a rozšiř je do větších článků.
+5. Staré neplatné rady označ jako aktualizované nebo archivované.
+
+Tím se newsletter nestane jednorázovým výstřelem. Stane se součástí knihovny, která pracuje dlouho po odeslání.
+
+## M.5 Vyber nástroj podle odchodu, ne podle hezkého dashboardu
+
+Při výběru newsletterového nástroje se neptej jen „umí pěkné šablony?“. Ptej se hlavně:
+
+- Kde jsou uložená data odběratelů?
+- Umíme exportovat seznam v běžném formátu?
+- Umíme smazat odběratele na žádost?
+- Umíme vypnout tracking otevření a zbytečné profilování?
+- Umíme posílat bez cizích reklamních skriptů a sociálních widgetů?
+- Je možné nastavit double opt-in, pokud ho pro daný scénář chceme?
+- Má nástroj jasné informace o zpracovatelích a bezpečnosti?
+- Co se stane, když přestaneme platit?
+
+Privacy-first výběr neznamená automaticky nejmenší nástroj. Znamená nástroj, který respektuje účel, dává export, nebrání odchodu a nevyrábí datové riziko navíc. Pokud nejde vypnout invazivní tracking, je to červená vlajka, ne „pokročilá marketingová funkce“.
+
+## M.6 Checklist distribuce obsahu
+
+Před spuštěním newsletteru a RSS si projdi:
+
+- Má newsletter jasný slib a frekvenci?
+- Sbírá formulář jen e-mail a opravdu nutné údaje?
+- Je u formuláře srozumitelně popsáno, co člověk dostane?
+- Je odhlášení jednoduché a viditelné v každém e-mailu?
+- Je RSS feed dostupný z webu a odkazovaný v patičce nebo hlavičce?
+- Má každé vydání webovou URL nebo plán, jak ji dostane?
+- Nepoužíváš sledovací pixely jen proto, že jsou ve výchozím nastavení?
+- Máš export odběratelů a víš, jak odejdeš z nástroje?
+- Je v zásadách soukromí popsané, jak newsletter funguje?
+- Umíš po 90 dnech říct, jestli newsletter pomáhá obchodu nebo jen vyrábí další povinnost?
+
+## Shrnutí přílohy
+
+Newsletter a RSS jsou přímé distribuční kanály bez závislosti na sociálních algoritmech. Privacy-first verze nesbírá zbytečná data, nepředstírá personalizaci tam, kde stačí dobrý obsah, a dává lidem kontrolu nad odběrem i odchodem. Pokud má značka vlastní web, čistý RSS feed a férový newsletter, má publikum blíž k sobě než firma, která každý týden žebrá o dosah u algoritmu.
+
+---
+
 ## Zdroje
 
 - Evropská komise: Data protection — https://commission.europa.eu/law/law-topic/data-protection_en
@@ -3003,6 +3123,7 @@ Znalostní báze není povinnost pro pořádkumilovné lidi. Je to operační sy
 
 ## Pracovní log
 
+- 2026-08-07: Přidána příloha M o newsletteru a RSS bez marketingové klece: datové minimum, přímá distribuce, střídmé měření, archiv na vlastním webu a checklist.
 - 2026-08-07: Přidána příloha L o interní znalostní bázi: typy stránek, vlastnictví, kontrola aktuálnosti, práce bez zákaznických dat, rozhodovací záznamy a bezpečné napojení AI asistenta.
 - 2026-08-07: Přidána příloha K o retenci dat a odchodu zákazníka bez rukojmí: retenční tabulka, stavy účtu, export, smazání, automatizovaný úklid a checklist.
 - 2026-08-07: Přidána příloha J o privacy-first onboardingu a podpoře: první výsledek zákazníka, postupný sběr dat, e-mailová sekvence, support access, nápověda a checklist.
