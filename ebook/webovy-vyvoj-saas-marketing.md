@@ -1202,6 +1202,176 @@ AI asistenti dávají malému týmu páku, pokud mají jasné hranice, minimáln
 
 ---
 
+# 10. Checklist před spuštěním webu nebo SaaS
+
+Spuštění není slavnostní okamžik, kdy všichni drží palce a produkce se tváří, že dnes určitě nebude zlobit. Spuštění je kontrolovaný přechod z „stavíme“ do „někdo cizí na to právě kliká“. Čím menší tým, tím víc pomáhá jednoduchý checklist, který se dá projít bez tříhodinového meetingu a obětního deploye za úplňku.
+
+Smyslem předspouštěcí kontroly není najít dokonalost. Smyslem je odstranit hloupá rizika: nejasnou nabídku, rozbitý formulář, chybějící zálohy, nevysvětlené zpracování dat, pomalý mobil a situaci, kdy první zákazník pošle dotaz a e-mail skončí v digitálním příkopu.
+
+## 10.1 Nejprve zkontroluj slib
+
+Před technikou se podívej na nabídku. Web může být rychlý, bezpečný a krásný, ale pokud návštěvník nepochopí, proč existuje, jen jsi efektivně doručil zmatek.
+
+Projdi první obrazovku a zeptej se:
+
+- Je jasné, co nabízíme a pro koho?
+- Říkáme konkrétní výsledek, nebo jen obecnou kategorii?
+- Má hlavní CTA jeden zřejmý další krok?
+- Je na stránce důkaz, že to není jen hezký slib?
+- Odpovídáme na největší námitku zákazníka dřív, než odejde?
+
+Praktický test: pošli hlavní stránku člověku mimo tým a dej mu 30 vteřin. Pak se zeptej: „Co podle tebe prodáváme, komu a co máš udělat dál?“ Pokud odpověď bolí, výborně. Právě jsi našel levnou chybu před drahým spuštěním.
+
+Příklad rychlé opravy:
+
+- Slabé: „Moderní platforma pro efektivní správu procesů.“
+- Lepší: „Evidence zakázek pro malé výrobní firmy, které chtějí vidět termíny, odpovědnosti a změny bez tabulek po e-mailu.“
+
+## 10.2 Ověř kritické cesty ručně
+
+Automatizované testy jsou skvělé, ale před spuštěním si tým musí projít produkt jako zákazník. Ne jako vývojář, který ví, že tlačítko vpravo nahoře „přece znamená pokračovat“. Jako člověk, který má práci, málo času a nulovou trpělivost pro interní logiku produktu.
+
+U webu ručně ověř:
+
+- otevření hlavní stránky z čistého anonymního okna,
+- odeslání kontaktního formuláře,
+- doručení e-mailu nebo vytvoření záznamu v CRM,
+- funkčnost odkazů v navigaci, patičce a CTA,
+- mobilní zobrazení hlavních stránek,
+- stav 404 stránky a přesměrování ze starých URL.
+
+U SaaS navíc projdi:
+
+- registraci nového účtu,
+- potvrzení e-mailu,
+- první akci, která vytváří hodnotu,
+- pozvání dalšího uživatele,
+- změnu hesla nebo přihlášení přes zvolený mechanismus,
+- fakturaci, zkušební období nebo objednávku,
+- odhlášení a žádost o smazání účtu.
+
+Nepiš k tomu román. Stačí tabulka: krok, očekávaný výsledek, skutečný výsledek, stav. Pokud krok nejde dokončit, není to „minor issue“. Je to cedule „tady odtečou zákazníci“.
+
+## 10.3 Privacy a právní minimum bez paniky
+
+Privacy-first spuštění má jednu výhodu: když sbíráš málo dat a používáš málo třetích stran, kontrola je kratší. To je přesně ten typ nudy, který chceme. Nuda v compliance znamená, že nikdo neběhá s hořící tabulkou dodavatelů.
+
+Před spuštěním ověř:
+
+- Víme, jaká osobní data sbíráme a proč?
+- Má každé zpracování jasný účel a právní základ?
+- Je privacy stránka napsaná lidsky a dostupná z patičky?
+- Uvádíme dodavatele, kteří dostávají osobní data?
+- Víme, zda se data předávají mimo EU nebo EHP?
+- Máme nastavenou rozumnou dobu uchování dat?
+- Cookie lišta se zobrazuje jen tehdy, když je opravdu potřeba?
+- Analytika respektuje minimalizaci a nepoužívá reklamní profily?
+- Umíme vyřídit žádost o přístup, opravu nebo smazání dat?
+
+Konkrétní příklad pro kontaktní formulář:
+
+> „Jméno, e-mail a zprávu používáme k odpovědi na poptávku. Zprávy uchováváme maximálně 12 měsíců, pokud z komunikace nevznikne zákaznický vztah. Data nepoužíváme pro reklamní profily.“
+
+Tohle nenahrazuje právní radu. Je to ale dobrý provozní filtr: pokud neumíš takovou větu napsat, pravděpodobně nemáš zpracování dostatečně promyšlené.
+
+## 10.4 Provozní připravenost: co se stane, když se něco pokazí
+
+Web a SaaS se nespouští jen pro hezký den. Spouští se i pro den, kdy spadne DNS, vyprší karta u poskytovatele, formulář přestane posílat e-maily nebo někdo nasadí změnu v pátek v 16:58. Ano, hypoteticky. Samozřejmě by to žádný rozumný tým neudělal. Mrk.
+
+Minimum provozní připravenosti:
+
+- Doména má zapnuté prodloužení a přístup není u jednoho člověka v hlavě.
+- DNS záznamy jsou popsané a změny se nedělají naslepo.
+- Produkční prostředí má zálohy a proběhla testovací obnova.
+- Chyby aplikace se někam zapisují a někdo je umí přečíst.
+- Formuláře, e-mail a platby mají jednoduchý monitoring.
+- Existuje kontakt, kam se hlásí problém zákazníka.
+- Tým ví, kdo rozhoduje o rollbacku.
+- Incident plán má jednu stránku, ne posvátný svitek.
+
+Pro malý tým stačí jednoduchý incident scénář:
+
+1. Co se stalo?
+2. Koho to ovlivňuje?
+3. Jak problém zastavíme nebo obejdeme?
+4. Kdo komunikuje se zákazníky?
+5. Co opravíme trvale po incidentu?
+
+Nejhorší incident není chyba. Nejhorší incident je ticho, kdy zákazník ví o problému víc než tým. Pokud něco nefunguje, krátká a pravdivá komunikace vyhrává nad dokonalým vysvětlením o tři dny později.
+
+## 10.5 SEO, sdílení a obsahový základ
+
+Před spuštěním nezapomeň, že web má být nalezitelný a sdílitelný bez sociálního cirkusu. Privacy-first neznamená neviditelnost. Znamená to stavět kanály, které máš pod kontrolou: přímé odkazy, vyhledávání, RSS, dobrý obsah a čistou technickou strukturu.
+
+Zkontroluj:
+
+- Každá důležitá stránka má unikátní `<title>` a meta description.
+- Hlavní URL jsou čitelné a stabilní.
+- Existuje `sitemap.xml` a `robots.txt`.
+- Stránky mají kanonickou URL, pokud hrozí duplicity.
+- Sdílení odkazu zobrazí rozumný název, popis a obrázek.
+- Blog nebo novinky mají RSS, pokud publikuješ pravidelně.
+- Interní odkazy vedou návštěvníka k dalšímu kroku.
+- Nejsou indexované testovací, administrační nebo duplicitní stránky.
+
+Obsahový základ nemusí být obří. Pro první spuštění často stačí:
+
+- hlavní stránka,
+- stránka služby nebo produktu,
+- stránka o přístupu k datům a provozu,
+- kontakt,
+- dva až tři praktické články pro nejčastější zákaznické otázky,
+- krátké FAQ s námitkami, které stejně zazní v obchodním hovoru.
+
+SEO není trik. Je to disciplína pojmenovat věci tak, jak je lidé hledají, a dodat stránku, která jim opravdu pomůže. Magie bez kouře, zrcadel a pluginu s 47 přepínači.
+
+## 10.6 Finální checklist spuštění
+
+Použij tuhle část jako poslední průchod před publikací. Ne všechno musí být perfektní, ale každé „ne“ má mít vlastníka nebo vědomé rozhodnutí.
+
+**Nabídka a konverze**
+
+- První obrazovka jasně říká, co nabízíme, komu a proč.
+- Hlavní CTA vede na funkční a otestovaný krok.
+- Stránka obsahuje konkrétní důkaz důvěry.
+- FAQ odpovídá na hlavní námitky zákazníka.
+
+**Produkt a technika**
+
+- Kritické cesty jsou ručně otestované na desktopu i mobilu.
+- Formuláře, e-maily a platby fungují end-to-end.
+- Chybové stavy jsou srozumitelné a neprozrazují interní detaily.
+- Produkce má základní monitoring a logy.
+
+**Privacy a data**
+
+- Sbíráme jen data, která umíme obhájit.
+- Privacy stránka je dostupná, konkrétní a lidsky čitelná.
+- Dodavatelé a předávání dat jsou zmapované.
+- Analytika měří rozhodnutí, ne reklamní profilování.
+
+**Provoz**
+
+- Doména, DNS, hosting a e-mail mají jasného vlastníka.
+- Zálohy existují a obnova byla vyzkoušená.
+- Incident plán se vejde na jednu stránku.
+- Tým ví, jak udělat rollback nebo dočasné vypnutí rizikové funkce.
+
+**Obsah a nalezitelnost**
+
+- Důležité stránky mají title, description, kanonickou URL a smysluplné nadpisy.
+- Sitemap a robots jsou aktuální.
+- Sdílení odkazu funguje bez externích social skriptů.
+- Existuje přímý kontaktní kanál a jasný další krok.
+
+Codyho komentář: dobrý launch checklist není brzda. Je to airbag. Většinu času o něm nechceš přemýšlet, ale v divném okamžiku jsi rád, že tam je.
+
+## Shrnutí kapitoly
+
+Spuštění webu nebo SaaS není jen deploy. Je to kontrola slibu, kritických cest, dat, provozu a nalezitelnosti. Malý tým nepotřebuje těžkopádný proces, ale potřebuje jasný seznam věcí, které nesmí spadnout mezi židle: formuláře, e-maily, privacy, zálohy, monitoring, SEO a odpovědnost. Privacy-first přístup spuštění zjednodušuje, protože méně dat a méně třetích stran znamená méně rizik, méně vysvětlování a víc důvěry.
+
+---
+
 ## Zdroje
 
 - Evropská komise: Data protection — https://commission.europa.eu/law/law-topic/data-protection_en
@@ -1243,3 +1413,4 @@ AI asistenti dávají malému týmu páku, pokud mají jasné hranice, minimáln
 - 2026-08-06: Dopsána sedmá kapitola o evropském provozu: hosting, domény, e-mail, zálohy, incidenty a provozní checklist.
 - 2026-08-07: Dopsána osmá kapitola o MVP a roadmapě SaaS: hypotézy, třídění funkcí, feedback, pricing a checklist privacy-first produktového rozhodování.
 - 2026-08-07: Dopsána devátá kapitola o AI asistentech a automatizaci v provozu: procesní recepty, minimalizace dat v promptech, bezpečnost, onboarding asistenta a checklist.
+- 2026-08-07: Dopsána desátá kapitola s předspouštěcím checklistem pro web nebo SaaS: slib, kritické cesty, privacy, provoz, SEO a finální kontrola.
