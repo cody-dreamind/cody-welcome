@@ -1845,6 +1845,93 @@ Mikrotexty jsou malé pojistky důvěry. Pomáhají uživateli pochopit další 
 
 ---
 
+# Příloha D: Měsíční provozní review webu nebo SaaS
+
+Měsíční review není porada pro milovníky tabulek. Je to krátká údržba reality: co funguje, co se rozbilo, co se zbytečně komplikuje a kde produkt potichu ztrácí důvěru. Malý tým nepotřebuje manažerský rituál s třiceti slidy. Potřebuje jeden dokument, hodinu soustředění a ochotu říct „tohle už neslouží uživateli“.
+
+Privacy-first provoz má jednu výhodu: když sbíráš méně dat a používáš méně nástrojů, review je kratší. Nevýhoda? Výmluvy taky. Když je systém jednoduchý, je docela vidět, kdo ho nechal zarůst mechem.
+
+## D.1 Začni obchodním výsledkem, ne grafem návštěvnosti
+
+První otázka měsíce zní: pomohl web nebo SaaS lidem udělat důležitý krok? Ne „kolik bylo pageviews“, ale jestli návštěvníci našli odpověď, odeslali poptávku, dokončili registraci, pochopili cenu, aktivovali klíčovou funkci nebo se vrátili k užitečnému procesu.
+
+Praktický měsíční přehled může mít jen pět řádků:
+
+| Oblast | Otázka | Signál |
+| --- | --- | --- |
+| Nabídka | Rozumí lidé hlavnímu slibu? | Kliky na hlavní CTA, přímé dotazy, kvalita poptávek |
+| Aktivace | Dostane se nový uživatel k první hodnotě? | Dokončený onboarding, použití klíčové funkce |
+| Důvěra | Mizí námitky kolem ceny, dat a provozu? | FAQ dotazy, obchodní námitky, odpovědi podpory |
+| Provoz | Funguje služba spolehlivě? | Incidenty, chybové stavy, obnova ze záloh |
+| Obsah | Přivádí obsah správné lidi? | Přímé návštěvy, RSS odběry, poptávky z článků |
+
+Jedno dobré číslo je lepší než dvacet dekoračních metrik. Pokud neumíš říct, jaké rozhodnutí metrika zlepší, patří spíš do muzea interního neklidu než do review.
+
+## D.2 Projdi pět kritických cest ručně
+
+Automatické monitoringy jsou skvělé, ale jednou měsíčně si produkt projdi jako člověk. Ideálně na pomalejším notebooku nebo telefonu, ne na vývojářské raketě, která by rozběhla i lednici s Kubernetes.
+
+Zkontroluj hlavně:
+
+- otevření homepage z anonymního okna,
+- odeslání kontaktního formuláře nebo objednávky,
+- přihlášení, registraci a reset hesla,
+- první použití hlavní SaaS funkce,
+- odhlášení, export dat nebo žádost o smazání účtu.
+
+Ke každé cestě si napiš jednu větu: „Prošlo bez tření“, „rozbilo se“, nebo „funguje, ale člověk musí hádat“. Třetí stav je zákeřný. Technicky není chyba, prakticky je to malý únik důvěry.
+
+## D.3 Zkontroluj datový odpad
+
+Data se v produktech hromadí nenápadně. Přidá se formulářové pole, zapomene se starý export, někdo založí testovací integraci a najednou má projekt víc datových zákoutí než půda po babičce.
+
+Měsíční datový úklid:
+
+- projdi nové formuláře, eventy, logy a integrace,
+- smaž testovací data, která už nemají účel,
+- ověř, že retenční doby dávají smysl,
+- zkontroluj, kdo má přístup do administrace a analytiky,
+- odpoj nástroje, které se nepoužily poslední měsíc a nejsou kritické,
+- doplň privacy text, pokud se změnil účel zpracování.
+
+Nejde o to mít nulová data. Jde o to nemít data bez vlastníka. Každý dataset by měl mít odpověď na tři otázky: proč existuje, kdo za něj ručí a kdy zmizí.
+
+## D.4 Z provozních drobků udělej rozhodnutí
+
+Měsíční review má končit rozhodnutím, ne jen pocitem. Z každého měsíce vyber maximálně tři změny. Malý tým, který si vybere deset priorit, si ve skutečnosti vybral chaos s lepší grafikou.
+
+Dobré výstupy z review:
+
+- „Zkrátíme kontaktní formulář o telefon, protože ho nepotřebujeme pro první odpověď.“
+- „Přidáme na pricing stránku vysvětlení exportu dat, protože se na něj ptaly tři poptávky.“
+- „Zrušíme nepoužívaný chat widget, protože nepřinesl konverze a přidává třetí stranu.“
+- „Jednou za měsíc obnovíme zálohu na testovací prostředí, nebudeme jen věřit zelené fajfce.“
+- „Do onboardingového e-mailu přidáme přímý odkaz na první akci místo obecného uvítání.“
+
+Každé rozhodnutí ulož do rozhodovacího záznamu z přílohy B. Stačí krátce. Historie rozhodnutí je mapa, proč produkt vypadá tak, jak vypadá. Bez ní tým po půl roce jen archeologicky hádá, kdo a proč přidal tu zvláštní větu pod formulář.
+
+## D.5 Měsíční checklist
+
+Jednou měsíčně si projdi tento seznam a u každého bodu napiš hotovo, nehotovo nebo není relevantní:
+
+- Víme, který obchodní nebo produktový krok se minulý měsíc zlepšil?
+- Prošli jsme ručně hlavní cestu návštěvníka, leadu nebo uživatele?
+- Zkontrolovali jsme formuláře, eventy, logy a nové integrace?
+- Odstranili jsme nepoužívaný nástroj, skript nebo datové pole?
+- Ověřili jsme přístupy administrátorů a externích dodavatelů?
+- Prošli jsme poslední incidenty, chyby a opakované dotazy podpory?
+- Máme maximálně tři konkrétní úkoly na další měsíc?
+- Je u každého úkolu jasné, kdo ho vlastní a jak poznáme hotovo?
+- Zůstává web nebo SaaS v souladu s principem „navrženo, postaveno a provozováno v Evropě“?
+
+Codyho komentář: měsíční review má být trochu nudné. To je kompliment. Když je provoz klidný, data uklizená a další kroky jasné, produkt nepotřebuje dramatické meetingy. Drama si nechme pro výpadky elektřiny a pokusy vysvětlit příbuzným, co přesně dělá SaaS.
+
+## Shrnutí přílohy
+
+Měsíční review drží web a SaaS při zemi. Spojuje obchodní výsledky, ruční kontrolu kritických cest, datovou hygienu a pár konkrétních rozhodnutí. Privacy-first provoz není jednorázové nastavení; je to návyk, který se udržuje malými pravidelnými kontrolami.
+
+---
+
 ## Zdroje
 
 - Evropská komise: Data protection — https://commission.europa.eu/law/law-topic/data-protection_en
@@ -1892,3 +1979,4 @@ Mikrotexty jsou malé pojistky důvěry. Pomáhají uživateli pochopit další 
 - 2026-08-07: Přidána příloha A s 30denním plánem pro privacy-first web nebo SaaS: datová mapa, minimalizace, transparentní mikrotexty a provozní rutina.
 - 2026-08-07: Přidána příloha B se šablonami pro produktové hypotézy, měřicí plán, výběr dodavatele, rozhodovací záznam a incidentovou zprávu.
 - 2026-08-07: Přidána příloha C s praktickými mikrotexty pro kontaktní formuláře, odběry, cookies, onboarding, chybové stavy a incidentovou komunikaci.
+- 2026-08-07: Přidána příloha D s měsíčním provozním review webu nebo SaaS: obchodní signály, ruční kontrola kritických cest, datový úklid a rozhodovací checklist.
