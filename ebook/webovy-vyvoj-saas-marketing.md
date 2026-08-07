@@ -2723,6 +2723,127 @@ Onboarding a podpora nejsou provozní detail po prodeji. Jsou součást důvěry
 
 ---
 
+# Příloha K: Retence dat a odchod zákazníka bez rukojmí
+
+Privacy-first produkt se nepozná jen podle toho, jak hezky vítá nové uživatele. Pozná se i podle toho, jak se chová, když uživatel přestane platit, smaže účet, odejde ke konkurenci nebo jen potřebuje uklidit stará data. Tady se ukáže, jestli je „respekt k datům“ skutečná hodnota, nebo jen věta na landing page s ikonou zámku.
+
+Retence dat je obyčejná otázka s neobyčejně velkými následky: jak dlouho držíme konkrétní data a proč? GDPR mezi základní principy řadí mimo jiné minimalizaci dat, omezení účelu a omezení uložení: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en. Přeloženo do produktového jazyka: nesbírej věci bez důvodu, nepoužívej je k jinému účelu bez rozmyslu a nedrž je navždy jen proto, že „se to někdy může hodit“.
+
+Codyho komentář: „mohlo by se hodit“ je datová verze šuplíku s kabely. Jednou za pět let tam možná najdeš redukci na monitor z roku 2009, ale většinou jen zvyšuješ chaos.
+
+## K.1 Udělej retenční tabulku dřív, než ji budeš potřebovat
+
+Retenční politika nemusí být právnický román. Pro malý SaaS nebo webový projekt stačí praktická tabulka, kterou pochopí produkt, podpora, vývoj i obchod. Cílem je vědět, co se má stát s daty po určité době nebo události.
+
+Minimální sloupce:
+
+| Typ dat | Účel | Kde jsou uložená | Doporučená doba | Co spustí smazání |
+| --- | --- | --- | --- | --- |
+| Poptávky z formuláře | Odpověď a obchodní komunikace | E-mail, CRM | 12–24 měsíců podle vztahu | Neaktivita nebo žádost |
+| Trial účet | Ověření produktu | Produkční databáze | 30–90 dní po konci trialu | Neaktivita po upozornění |
+| Fakturační údaje | Účetnictví | Fakturační systém | Podle zákonných povinností | Po uplynutí povinné lhůty |
+| Produktové logy | Bezpečnost a diagnostika | Logovací systém | Krátká provozní doba | Automatická expirace |
+| Support konverzace | Řešení problému | Helpdesk | 12–36 měsíců podle typu služby | Uzavření vztahu nebo žádost |
+| Marketingový odběr | Zasílání obsahu | Mailing nástroj | Do odhlášení nebo neaktivity | Odhlášení, bounce, úklid |
+
+Důležité: čísla v tabulce nejsou univerzální právní rada. Jsou pracovní návrh. Každý projekt musí retenční dobu sladit s typem služby, smlouvami, účetními povinnostmi a riziky. Prakticky ale platí: když u typu dat neumíš napsat účel a dobu, zatím nad nimi nemáš kontrolu.
+
+## K.2 Rozliš aktivní účet, neaktivní účet a smazaný účet
+
+Mnoho systémů zná jen dvě polohy: účet existuje, nebo neexistuje. V praxi je lepší mít několik jasných stavů. Pomáhá to zákazníkovi, podpoře i technickému týmu.
+
+Užitečný model:
+
+- **Aktivní účet:** uživatel produkt používá a data jsou dostupná podle nastavení služby.
+- **Pozastavený účet:** po konci trialu nebo neuhrazené faktuře uživatel nemůže pokračovat v běžné práci, ale může exportovat data a vyřešit přístup.
+- **Archivovaný účet:** služba už neběží, data jsou omezeně dostupná jen pro obnovu, podporu nebo zákonný důvod.
+- **Smazaný účet:** osobní a produktová data jsou odstraněná nebo anonymizovaná, zůstávají jen údaje, které firma musí držet z právního důvodu.
+
+Tenhle rozdíl je fér vysvětlit přímo v produktu. Například:
+
+> „Po zrušení předplatného účet nejdřív pozastavíme na 30 dní, abys mohl exportovat data nebo obnovit službu. Potom produktová data smažeme nebo anonymizujeme, pokud je nemusíme držet kvůli účetnictví nebo bezpečnostním záznamům.“
+
+Je to delší než „Delete account“. Ale zákazník konečně ví, co se stane. A podpora nemusí improvizovat pokaždé, když přijde otázka „co přesně smažete?“.
+
+## K.3 Export dat je součást důvěry, ne funkce pro odcházející
+
+Některé firmy se bojí snadného exportu, protože „pak zákazník odejde“. To je krátkozraké. Pokud zákazník zůstává jen proto, že je rukojmí dat, není to retence. Je to digitální lepicí páska přes dveře.
+
+Rozumný export by měl být:
+
+- dostupný v administraci bez psaní na podporu,
+- ve strojově čitelném formátu, typicky CSV nebo JSON,
+- doplněný krátkým popisem polí,
+- oddělený podle typů dat, aby uživatel nemusel stahovat všechno,
+- bezpečný: export smí spustit jen oprávněný uživatel,
+- auditovatelný: systém ví, kdo export vytvořil a kdy,
+- časově omezený: odkaz na stažení po určité době expiruje.
+
+U citlivějších B2B produktů přidej i export na vyžádání s kontrolou identity. Ne proto, aby to bylo otravné, ale aby někdo s kompromitovaným účtem nestáhl celou firmu jedním kliknutím v pátek večer. Pátek večer je mimochodem oficiální čas, kdy se dějí nejhloupější incidenty. Ne podle normy, podle vesmírné škodolibosti.
+
+## K.4 Smazání účtu nemá být úniková hra
+
+Pokud uživatel může účet vytvořit za dvě minuty, neměl by ho mazat přes tři e-maily, PDF formulář a „kontaktujte vašeho account managera“. U B2C nebo jednoduchého B2B SaaS má být zrušení srozumitelné přímo v nastavení. U složitějších týmových účtů je v pořádku přidat potvrzení, upozornění na dopady a roli administrátora.
+
+Dobré mazání účtu odpoví:
+
+- Kdo může smazání spustit?
+- Co se smaže hned?
+- Co zůstane kvůli zákonným nebo bezpečnostním důvodům?
+- Jak dlouho trvá dokončení?
+- Dostane zákazník potvrzení?
+- Dá se smazání krátce zrušit, pokud šlo o omyl?
+
+Příklad mikrotextu:
+
+> „Smazáním účtu odstraníme projektová data, členy týmu a nastavení workspace. Fakturační doklady zůstávají uložené po dobu vyžadovanou účetními pravidly. Před smazáním si můžeš stáhnout export.“
+
+Privacy-first tón není strašení. Je to klidná přesnost. Uživatel má vědět, co se stane, bez potřeby právního archeologa.
+
+## K.5 Automatizuj úklid, ale nech si kontrolní body
+
+Retenční politika bez automatizace rychle zestárne. Někdo ji napíše, tým si zatleská, a za půl roku databáze pořád drží trialy z minulé éry produktu. Automatické mazání a anonymizace jsou proto praktická nutnost.
+
+Co automatizovat:
+
+- expiraci starých produktových logů,
+- anonymizaci neaktivních analytických událostí,
+- mazání nedokončených registrací po rozumné době,
+- čištění bounce kontaktů z e-mailingu,
+- uzavírání starých support ticketů,
+- upozornění před smazáním trial účtu,
+- pravidelný report účtů čekajících na archivaci.
+
+Co nenechat běžet naslepo:
+
+- hromadné mazání produkčních zákaznických dat,
+- změny retenční politiky bez review,
+- mazání dat s možným smluvním nebo právním dopadem,
+- anonymizaci dat, která jsou ještě potřeba pro otevřený incident.
+
+Praktický kompromis: automatizuj návrh akce, ale u rizikových dat vyžaduj potvrzení oprávněnou rolí. Třeba měsíční report řekne: „Těchto 42 trial workspace je 90 dní neaktivních, připraveno k odstranění.“ Člověk zkontroluje výjimky a akci potvrdí. Není to tak sexy jako plně autonomní robotický uklízeč, ale méně často to smaže zákazníka, který právě podepisuje smlouvu.
+
+## K.6 Checklist retenční politiky
+
+Jednou za kvartál projdi projekt tímhle seznamem:
+
+- Máme mapu hlavních typů dat a jejich účelů?
+- Víme, kde jsou data uložená, včetně podpory, logů a exportů?
+- Má každý typ dat retenční dobu nebo jasné pravidlo ukončení?
+- Umí zákazník exportovat vlastní data bez zbytečného tření?
+- Je zrušení účtu srozumitelné a dostupné správné roli?
+- Vysvětlujeme rozdíl mezi pozastavením, archivací a smazáním?
+- Mažeme nebo anonymizujeme staré trialy, testovací účty a nedokončené registrace?
+- Kontrolujeme, že data nezůstávají v nástrojích třetích stran po zrušení účtu?
+- Má podpora jasný postup pro žádosti o export, opravu a smazání?
+- Testovali jsme obnovu ze zálohy i dopad mazání na zálohované kopie?
+
+## Shrnutí přílohy
+
+Retence dat je produktové rozhodnutí, provozní hygiena i důkaz respektu k zákazníkovi. Dobrý privacy-first SaaS umí říct, proč data drží, jak dlouho, kde jsou, kdo k nim má přístup a co se stane při odchodu. Export a smazání nejsou nepřátelé růstu. Jsou signál, že produkt nepotřebuje držet zákazníka za rukáv, protože si věří hodnotou.
+
+---
+
 ## Zdroje
 
 - Evropská komise: Data protection — https://commission.europa.eu/law/law-topic/data-protection_en
@@ -2759,6 +2880,7 @@ Onboarding a podpora nejsou provozní detail po prodeji. Jsou součást důvěry
 
 ## Pracovní log
 
+- 2026-08-07: Přidána příloha K o retenci dat a odchodu zákazníka bez rukojmí: retenční tabulka, stavy účtu, export, smazání, automatizovaný úklid a checklist.
 - 2026-08-07: Přidána příloha J o privacy-first onboardingu a podpoře: první výsledek zákazníka, postupný sběr dat, e-mailová sekvence, support access, nápověda a checklist.
 - 2026-08-06: Založena struktura e-booku a dopsána první kapitola o privacy-first webu jako konkurenční výhodě včetně praktického checklistu a zdrojů.
 - 2026-08-06: Dopsána druhá kapitola o základech vydělávajícího webu: nabídka, struktura, rychlost, důvěra a checklist obchodní stránky.
