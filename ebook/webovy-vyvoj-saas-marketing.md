@@ -2306,6 +2306,127 @@ Privacy-first obchod není pomalejší obchod. Je to obchod, který ví, co sled
 
 ---
 
+# Příloha H: Rychlý audit landing page za 60 minut
+
+Landing page se dá ladit donekonečna. Vždycky jde přepsat headline, vyměnit fotku, zvětšit tlačítko, přidat animaci nebo ještě jeden odstavec o tom, jak jste „inovativní partner pro digitální transformaci“. Jenže malý tým nepotřebuje každý týden kompletní redesign. Potřebuje rychlý provozní audit, který ukáže, jestli stránka pořád pomáhá zákazníkovi udělat další krok.
+
+Tahle příloha je hodinový postup pro zakladatele, marketéra nebo vývojáře, který chce landing page zlepšit bez workshopu, bez nové agentury a bez datového safari přes patnáct trackerů. Stačí prohlížeč, analytika s agregovanými daty, pár reálných poptávek a ochota přiznat si, že některé věty na webu jsou jen hezky oblečená mlha.
+
+## H.1 Prvních 10 minut: ujasni si jednu akci
+
+Nejdřív napiš jednou větou, co má návštěvník po přečtení stránky udělat. Ne „zaujmout se o naši nabídku“. Konkrétně: objednat demo, poslat poptávku, stáhnout checklist, založit trial, zavolat, přihlásit se na konzultaci.
+
+Auditní otázky:
+
+- Je hlavní akce vidět v prvním viewportu?
+- Používá CTA sloveso, které popisuje výsledek, ne interní proces?
+- Má stránka jednu primární akci, nebo se tváří jako rozcestník v obchodním centru?
+- Je jasné, co se stane po kliknutí?
+- Umí člověk pokračovat i bez cookies, newsletteru nebo reklamního účtu?
+
+Slabé CTA: „Kontaktujte nás“.
+
+Lepší CTA: „Chci návrh SaaS architektury“ nebo „Domluvit 30min konzultaci“.
+
+Rozdíl není jen kosmetika. Dobré CTA snižuje nejistotu. Návštěvník ví, jaký typ interakce kupuje svým kliknutím. A kliknutí je měna důvěry, ne konfeta do grafu.
+
+## H.2 Dalších 15 minut: přečti stránku jako skeptický zákazník
+
+Otevři stránku v anonymním okně a předstírej, že o firmě nic nevíš. Nečti jako autor. Čti jako člověk, který má problém, má málo času a nechce se nechat chytit do formuláře jen proto, aby zjistil cenu.
+
+U každé hlavní sekce si napiš odpověď na čtyři otázky:
+
+| Otázka | Co hledáš | Varovný signál |
+| --- | --- | --- |
+| Co nabízíme? | konkrétní výsledek nebo služba | obecné fráze typu „komplexní řešení“ |
+| Pro koho to je? | jasný segment nebo situace | stránka mluví ke všem, takže k nikomu |
+| Proč věřit právě nám? | důkaz, reference, ukázka práce, proces | jen superlativy bez opory |
+| Co mám udělat dál? | další krok s nízkým třením | tlačítko až po třech obrazovkách |
+
+Praktický trik: smaž z textu název firmy a obor. Pokud věta pořád může sedět na jakoukoliv agenturu, SaaS nebo konzultanta, není to pozice. Je to generická omáčka. Internet už jí má dost, děkujeme pěkně.
+
+## H.3 Dalších 10 minut: zkontroluj důvěru a riziko
+
+Zákazník se nerozhoduje jen podle slibu. Rozhoduje se podle rizika, které v hlavě vidí. „Bude to drahé?“ „Bude migrace bolet?“ „Co se stane s daty?“ „Umí dodat v Evropě?“ „Můžu odejít?“ Landing page má tyhle otázky zmenšit dřív, než se člověk musí ptát.
+
+Důvěryhodné prvky pro privacy-first SaaS nebo webové studio:
+
+- jasné vysvětlení, kde běží infrastruktura a kdo má přístup k datům,
+- krátká věta o analytice bez reklamních trackerů,
+- konkrétní ukázka procesu spolupráce,
+- reference s problémem, řešením a výsledkem,
+- odkaz na privacy stránku psanou lidsky,
+- informace o exportu dat, zálohách nebo ukončení spolupráce,
+- rozumný kontakt na člověka, ne jen formulář do neznáma.
+
+Příklad mikrotextu pod formulář:
+
+> Údaje použijeme jen k odpovědi na poptávku. Neposíláme je do reklamních systémů a bez navázané spolupráce je po 12 měsících mažeme.
+
+Tohle není právní dokument. Je to uklidnění v místě rozhodnutí. Detailní pravidla patří do privacy stránky, ale důležitá část má být vidět přesně tam, kde uživatel data předává.
+
+## H.4 Dalších 15 minut: projdi výkon, mobil a formulář
+
+Technický audit nemusí začít nástrojem. Začni rukama. Otevři stránku na mobilu, vypni si mentální omluvy a projdi cestu jako člověk ve vlaku s horším signálem. Pokud se hrdinský headline nevejde na displej, tlačítko plave mimo obrazovku nebo formulář chce pět povinných polí, máš práci.
+
+Rychlá kontrola:
+
+- Stránka se na mobilu načte bez vizuálního cuknutí, které schová CTA.
+- Hlavní text je čitelný bez zoomování.
+- Tlačítka mají dost místa pro dotyk.
+- Formulář má jen nezbytná pole.
+- Chybové hlášky říkají, co opravit, ne jen „invalid input“.
+- Odeslání formuláře potvrdí, co se stane dál a kdy čekat odpověď.
+- Stránka funguje i bez marketingových skriptů a externích widgetů.
+
+Pokud používáš měření výkonu, sleduj hlavně uživatelsky významné signály: rychlost zobrazení hlavního obsahu, stabilitu layoutu a odezvu na interakci. Google popisuje Web Vitals jako metriky zaměřené na kvalitu uživatelského zážitku: https://web.dev/articles/vitals?hl=en. Codyho komentář: skóre v nástroji není zákazník. Ale pokud stránka působí pomalu i nástroji, zákazník nebude psát děkovný dopis.
+
+## H.5 Posledních 10 minut: vyber jednu změnu na další týden
+
+Hodinový audit nemá skončit seznamem dvaceti výčitek. To je jen sofistikovaná forma prokrastinace. Skonči jedním rozhodnutím: která změna má největší šanci zlepšit obchodní výsledek a zároveň snížit tření nebo datové riziko?
+
+Vyber jednu z těchto kategorií:
+
+- **Slib:** přepsat headline a první odstavec tak, aby popsal konkrétní výsledek.
+- **CTA:** sjednotit primární akci a vysvětlit, co se stane po kliknutí.
+- **Důvěra:** přidat důkaz, reference, ukázku procesu nebo privacy mikrotext.
+- **Formulář:** odstranit nepotřebná pole a zlepšit potvrzení po odeslání.
+- **Mobil:** opravit největší problém v prvním viewportu.
+- **Měření:** přidat jednu smysluplnou událost místo dalších plošných trackerů.
+
+Mini experiment zapisuj jednoduše:
+
+| Položka | Příklad |
+| --- | --- |
+| Hypotéza | Když CTA popíše konkrétní výsledek, víc lidí pošle relevantní poptávku. |
+| Změna | „Kontaktujte nás“ nahradíme „Chci návrh evropského SaaS provozu“. |
+| Metrika | počet relevantních poptávek za 14 dní |
+| Anti-metrika | více nerelevantních poptávek nebo zmatených odpovědí |
+| Privacy kontrola | žádné nové osobní údaje, žádný nový tracker |
+
+Takový zápis je dost malý na to, aby ho tým opravdu používal, a dost konkrétní na to, aby se z něj dalo poučit.
+
+## H.6 Checklist hodinového auditu landing page
+
+Před koncem auditu ověř:
+
+- Máme jednu jasnou primární akci stránky.
+- Headline říká konkrétní výsledek pro konkrétní typ zákazníka.
+- První viewport obsahuje slib, kontext a CTA.
+- Každá hlavní sekce odpovídá na otázku zákazníka, ne na interní potřebu firmy.
+- Stránka ukazuje důkaz důvěry: referenci, proces, ukázku nebo konkrétní výsledek.
+- Privacy informace jsou vidět u míst, kde uživatel předává data.
+- Formulář nevyžaduje data, která nejsou nutná pro první odpověď.
+- Mobilní cesta jde projít bez zoomování, hledání a nadávání do skla.
+- Měření pomáhá rozhodovat, ale nepřidává reklamní sledování bez důvodu.
+- Na konci existuje jedna změna, vlastník a datum kontroly výsledku.
+
+## Shrnutí přílohy
+
+Landing page audit není akademická disciplína. Je to rychlá kontrola, jestli stránka pořád slouží zákazníkovi i firmě: říká jasný slib, vede k jedné akci, snižuje riziko, funguje na mobilu a nesbírá data ze zvyku. Jedna dobrá změna týdně porazí velký redesign, který se plánuje tak dlouho, až mezitím zestárne i favicon.
+
+---
+
 ## Zdroje
 
 - Evropská komise: Data protection — https://commission.europa.eu/law/law-topic/data-protection_en
@@ -2359,3 +2480,4 @@ Privacy-first obchod není pomalejší obchod. Je to obchod, který ví, co sled
 - 2026-08-07: Přidána příloha E s privacy-first dotazníkem pro výběr dodavatelů: účel, datová mapa, bezpečnostní minimum, AI funkce, skóre a checklist před zapnutím.
 - 2026-08-07: Přidána příloha F o redakčním systému bez závislosti na algoritmech: obsahové pilíře, repurposing, redakční kanban, SEO minimum a revizní rutina.
 - 2026-08-07: Přidána příloha G o privacy-first obchodním follow-upu a malém CRM: pipeline, datové minimum, follow-up sekvence, automatizace a měsíční úklid.
+- 2026-08-07: Přidána příloha H s hodinovým auditem landing page: primární akce, skeptické čtení, důvěra, mobilní kontrola a jeden navazující experiment.
