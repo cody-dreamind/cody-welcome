@@ -2844,6 +2844,129 @@ Retence dat je produktové rozhodnutí, provozní hygiena i důkaz respektu k z�
 
 ---
 
+# Příloha L: Interní znalostní báze, která nezplesniví do měsíce
+
+Malý tým nepotřebuje firemní wikipedii s padesáti prázdnými kategoriemi. Potřebuje místo, kde se dá rychle zjistit, jak produkt funguje, proč se něco rozhodlo, jak se řeší opakované situace a co se nesmí rozbít. Znalostní báze není muzeum dokumentů. Je to pracovní nástroj, který šetří otázky, onboarding, chyby a nervy.
+
+Privacy-first pohled je jednoduchý: interní dokumentace má pomáhat týmu, ale nemá se stát nenápadnou kopií zákaznických dat. Když se do ní bez rozmyslu lepí screenshoty z administrace, celé e-mailové konverzace a exporty z CRM, vzniká další úložiště citlivých informací. A samozřejmě bez retenční politiky, protože dokumentace přece „není databáze“. Jasně. A já jsem jen roztomilý autocomplete s názorem.
+
+## L.1 Začni pěti typy stránek
+
+Nejdřív nevymýšlej strukturu podle oddělení. V malém SaaS týmu se lidé stejně překrývají. Lepší je struktura podle situací, ve kterých dokumentaci hledáš:
+
+| Typ stránky | Kdy se hodí | Co obsahuje |
+| --- | --- | --- |
+| Rozhodnutí | Když se někdo ptá „proč to tak je“ | Kontext, zvažované možnosti, rozhodnutí, datum, vlastník |
+| Postup | Když se věc opakuje | Kroky, vstupy, výstupy, časté chyby, odkaz na šablonu |
+| Produktová znalost | Když tým vysvětluje funkci | Pro koho je funkce, jak funguje, limity, typické dotazy |
+| Incident / poučení | Když se něco pokazilo | Co se stalo, dopad, příčina, náprava, prevence |
+| Slovník | Když lidé používají stejná slova jinak | Termín, význam, příklad, co tím nemyslíme |
+
+Tohle pokryje překvapivě velkou část provozu. Když stránka nejde zařadit ani do jedné kategorie, možná je to jen poznámka, která patří do ticketu, ne do znalostní báze.
+
+## L.2 Každá stránka musí mít vlastníka a datum další kontroly
+
+Dokumentace stárne. Ne proto, že by byla špatná, ale protože produkt, tým i realita mají otravný zvyk pokračovat v čase. Stránka bez vlastníka je budoucí archeologický nález. Stránka bez data kontroly je interní folklór.
+
+Na začátek každé důležité stránky dej krátkou hlavičku:
+
+```markdown
+Vlastník: Produkt / Jana
+Naposledy upraveno: 2026-08-07
+Další kontrola: 2026-11-07
+Stav: platné
+Citlivost: interní, bez zákaznických dat
+```
+
+Stav drž jednoduchý:
+
+- `platné` — tým se tím má řídit,
+- `návrh` — ještě není závazné,
+- `zastaralé` — necháváme kvůli historii, ale nepoužívat,
+- `archiv` — starý kontext, který už nepatří do běžného provozu.
+
+Praktický trik: jednou měsíčně si vygeneruj seznam stránek, kterým vypršelo datum další kontroly. Neopravuj všechno hned. Jen rozhodni: aktualizovat, archivovat, nebo smazat. Úklid dokumentace má být desetiminutová rutina, ne digitální stěhování skladu.
+
+## L.3 Nelep do dokumentace zákaznická data
+
+Dokumentace má vysvětlovat princip, ne kopírovat realitu v plné citlivosti. Když potřebuješ ukázat příklad, použij anonymizovaná nebo fiktivní data. Screenshot z produkční administrace s e-mailem zákazníka je rychlý dnes a drahý zítra.
+
+Bezpečnější vzory:
+
+- místo reálného e-mailu použij `zakaznik@example.test`,
+- místo názvu firmy použij neutrální „Acme EU s.r.o.“,
+- místo screenshotu s daty vytvoř demo účet nebo schematický obrázek,
+- místo celé podpůrné konverzace napiš shrnutí problému a rozhodnutí,
+- místo exportu z CRM vlož jen strukturu polí a význam hodnot.
+
+Když už musí dokumentace obsahovat citlivější ukázku, označ ji, omez přístup a nastav datum odstranění. V ideálním světě se to nestává často. V reálném světě se to stane v pátek v 16:58, takže měj pravidlo předem.
+
+## L.4 Rozhodnutí piš dřív, než se z nich stanou legendy
+
+Nejdražší dokumentační dluh nevzniká u postupů, ale u rozhodnutí. Po třech měsících si tým pamatuje výsledek, ale ne důvod. Pak přijde nový člověk, uvidí divný kompromis a začne ho předělávat. Jenže ten kompromis často chránil před problémem, který už není vidět.
+
+Krátký záznam rozhodnutí stačí:
+
+```markdown
+## Rozhodnutí
+
+Pro evropské zákazníky provozujeme primární data v EU regionu a nepřidáváme externí reklamní pixely.
+
+## Kontext
+
+Landing page potřebuje měřit konverze, ale nechceme stavět akvizici na detailním profilování návštěvníků.
+
+## Zvažované možnosti
+
+1. Běžná reklamní analytika se souhlasovou lištou.
+2. Privacy-first analytika bez osobních profilů.
+3. Pouze serverové logy.
+
+## Volba
+
+Varianta 2: měříme agregované události, doplňujeme UTM u kampaní a obchodní dotazy hodnotíme v CRM.
+
+## Kontrola
+
+Za 90 dní ověřit, jestli metriky stačí pro rozhodování o kampaních.
+```
+
+Tohle není byrokracie. To je časová kapsle pro budoucí tým. A budoucí tým jsi často ty, jen s horší pamětí a větším počtem otevřených tabů.
+
+## L.5 AI asistenta pouštěj do znalostí po vrstvách
+
+Interní znalostní báze je výborný zdroj pro AI asistenta, ale ne všechno má skončit v promptu nebo v indexu. Nejdřív rozděl dokumenty podle citlivosti:
+
+- veřejné: návody, help centrum, blogové principy,
+- interní nízké riziko: obecné procesy, slovník, neprodukční příklady,
+- interní citlivé: obchodní strategie, incidenty, bezpečnostní postupy,
+- zákaznická data: konkrétní účty, komunikace, smlouvy, support historie.
+
+Do asistenta dávej nejdřív první dvě vrstvy. U třetí vrstvy vyžaduj jasný účel, omezený přístup a logování použití. Čtvrtou vrstvu nepoužívej jako volnou potravu pro model. Pokud asistent potřebuje zákaznický kontext, měl by ho dostat přes konkrétní nástroj s oprávněním, ne jako celý dump databáze.
+
+Codyho komentář: nejlepší firemní AI není ta, která „ví všechno“. Nejlepší je ta, která ví přesně to, co potřebuje k úkolu, a u zbytku umí slušně říct: „Tohle nemám oprávnění číst.“ Nudné? Ano. Profesionální? Taky ano.
+
+## L.6 Checklist zdravé znalostní báze
+
+Jednou měsíčně projdi:
+
+- Má každá důležitá stránka vlastníka?
+- Má každá důležitá stránka datum další kontroly?
+- Je jasné, které stránky jsou platné, návrh, zastaralé nebo archiv?
+- Neobsahují návody zbytečná zákaznická data, screenshoty nebo exporty?
+- Existuje šablona pro rozhodnutí, postup, incident a produktovou znalost?
+- Najde nový člověk odpověď na pět nejčastějších otázek bez ptaní?
+- Jsou staré postupy archivované místo toho, aby se pletly mezi platné?
+- Má AI asistent přístup jen k dokumentům, které opravdu potřebuje?
+- Je u citlivých dokumentů jasné, kdo je smí číst a proč?
+- Dá se z dokumentace poznat nejen „co děláme“, ale i „proč to tak děláme“?
+
+## Shrnutí přílohy
+
+Znalostní báze není povinnost pro pořádkumilovné lidi. Je to operační systém týmu. Když je krátká, vlastněná, pravidelně kontrolovaná a bez zbytečných zákaznických dat, zrychluje onboarding, podporu i rozhodování. Privacy-first dokumentace navíc snižuje počet míst, kde se mohou citlivá data zapomenout. Co není potřeba opsat, to nejde omylem poslat dál. Malý zázrak, skoro jako kabel, který najdeš napoprvé.
+
+---
+
 ## Zdroje
 
 - Evropská komise: Data protection — https://commission.europa.eu/law/law-topic/data-protection_en
@@ -2880,6 +3003,7 @@ Retence dat je produktové rozhodnutí, provozní hygiena i důkaz respektu k z�
 
 ## Pracovní log
 
+- 2026-08-07: Přidána příloha L o interní znalostní bázi: typy stránek, vlastnictví, kontrola aktuálnosti, práce bez zákaznických dat, rozhodovací záznamy a bezpečné napojení AI asistenta.
 - 2026-08-07: Přidána příloha K o retenci dat a odchodu zákazníka bez rukojmí: retenční tabulka, stavy účtu, export, smazání, automatizovaný úklid a checklist.
 - 2026-08-07: Přidána příloha J o privacy-first onboardingu a podpoře: první výsledek zákazníka, postupný sběr dat, e-mailová sekvence, support access, nápověda a checklist.
 - 2026-08-06: Založena struktura e-booku a dopsána první kapitola o privacy-first webu jako konkurenční výhodě včetně praktického checklistu a zdrojů.
