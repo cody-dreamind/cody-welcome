@@ -3867,6 +3867,124 @@ Privacy-first monitoring nestaví na sběru všeho pro jistotu. Staví na uživa
 
 ---
 
+# Příloha T: GDPR dokumentace bez šanonového divadla
+
+GDPR dokumentace nemá být šanon, který se otevře jen při auditu a pak zase usne pod vrstvou prachu. Má být provozní mapa: co zpracováváme, proč, kde to běží, kdo k tomu má přístup, jak dlouho to držíme a co uděláme, když se něco změní.
+
+Evropská komise připomíná princip odpovědnosti: organizace má nejen dodržovat principy ochrany dat, ale umět soulad doložit. Některé nástroje mohou být povinné podle situace, například pověřenec pro ochranu osobních údajů nebo DPIA: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/obligations/how-can-i-demonstrate-my-organisation-compliant-gdpr_en
+
+Privacy-first SaaS má v téhle disciplíně výhodu. Když sbírá méně dat, používá méně dodavatelů a drží jasné účely, dokumentace je kratší, přesnější a méně připomíná fantasy román o ideálním provozu.
+
+## T.1 Vytvoř registr zpracování jako živou tabulku
+
+EDPB ve svém průvodci pro malé firmy uvádí, že organizace má vést písemný, klidně elektronický záznam o zpracování, který popisuje jednotlivé činnosti, účely, kategorie dat, příjemce a další podstatné informace: https://www.edpb.europa.eu/sme/be-compliant/be-compliant_en
+
+Prakticky začni tabulkou, ne právním dokumentem. Každý řádek je jedna činnost, kterou normální člověk pozná:
+
+| Zpracování | Účel | Data | Systém | Přístup | Retence |
+| --- | --- | --- | --- | --- | --- |
+| Kontaktní formulář | odpověď na poptávku | jméno, e-mail, zpráva | web, e-mail, CRM | obchod, jednatel | 12 měsíců bez zakázky |
+| Fakturace | účetnictví | fakturační údaje | fakturační systém | účetní, jednatel | podle zákonných povinností |
+| Support ticket | řešení problému | e-mail, popis chyby, přílohy | helpdesk | support, vývoj dle potřeby | 24 měsíců |
+| Produktová analytika | zlepšení funkcí | agregované eventy | analytika | produkt, vedení | 13 měsíců |
+| Bezpečnostní logy | ochrana služby | IP, čas, endpoint, výsledek | log systém | admin | 30 až 90 dní podle rizika |
+
+Nejde o to trefit dokonalou tabulku napoprvé. Jde o to, aby tým přestal odpovídat „někde to asi máme“ pokaždé, když se někdo zeptá na data. Jakmile máš mapu, začne být vidět bordel: staré formuláře, zbytečné exporty, zapomenuté integrace a přístupy lidí, kteří už dávno změnili roli.
+
+## T.2 Ke každému účelu napiš právní a produktovou větu
+
+Právní základ je důležitý, ale sám o sobě často neříká, jestli zpracování dává smysl. Proto ke každému zpracování napiš dvě věty:
+
+- **Právní věta:** na jakém právním základě data zpracováváme a proč.
+- **Produktová věta:** jaká hodnota pro zákazníka nebo provoz z toho vzniká.
+
+Příklad:
+
+> Právní věta: E-mail zákazníka zpracováváme pro plnění smlouvy, protože bez něj neumíme doručit provozní zprávy k účtu.
+>
+> Produktová věta: Zákazník díky tomu ví o důležitých změnách, výpadcích, fakturaci a bezpečnostních událostech.
+
+Pokud umíš napsat právní větu, ale neumíš napsat produktovou, zpracování může být jen compliance kouřová clona. Pokud umíš napsat produktovou větu, ale ne právní, zastav se a řeš základ. Data nejsou konfety. Nerozhazovat.
+
+## T.3 DPIA ber jako rozhodovací nástroj, ne trest za růst
+
+DPIA, tedy posouzení vlivu na ochranu osobních údajů, je podle Evropské komise potřeba tehdy, když zpracování pravděpodobně představuje vysoké riziko pro práva a svobody lidí; typicky například rozsáhlé zpracování citlivých dat, systematické rozsáhlé monitorování veřejných prostor nebo rozsáhlé automatizované hodnocení osob včetně profilování: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/obligations_en
+
+Malý SaaS nemusí dělat DPIA na každé tlačítko. Ale měl by mít spouštěče, kdy se tým zastaví:
+
+- začínáme zpracovávat citlivá data,
+- přidáváme AI funkci, která vyhodnocuje lidi nebo rozhoduje o jejich přístupu,
+- spojujeme data z více zdrojů do profilu zákazníka,
+- zavádíme monitoring chování na úrovni jednotlivce,
+- posíláme data novému dodavateli mimo běžný evropský provoz,
+- měníme účel dat, která už máme,
+- dáváme internímu týmu širší přístup k zákaznickému obsahu.
+
+Mini-DPIA pro produktové rozhodnutí může mít jednu stránku:
+
+1. Co chceme spustit?
+2. Jaká data k tomu opravdu potřebujeme?
+3. Koho se to týká a co se může pokazit?
+4. Jak riziko snížíme technicky, procesně a komunikačně?
+5. Jaká je privacy-first alternativa s menším rozsahem dat?
+6. Kdo rozhodnutí schválil a kdy se vrátíme k revizi?
+
+Codyho komentář: DPIA není papír pro právníka. Je to brzda před produktovou euforií. A brzdy nejsou proti rychlosti; brzdy umožňují jet rychleji, protože víš, že nezahučíš do příkopu při první zatáčce.
+
+## T.4 Změny v produktu musí aktualizovat i datovou mapu
+
+Největší problém dokumentace není její vytvoření. Její problém je rozklad. Produkt se mění, přibývají integrace, někdo zapne nový webhook, marketing přidá formulář a po půl roce už dokumentace popisuje muzeum, ne realitu.
+
+Zaveď jednoduché pravidlo: žádná změna, která se dotýká osobních dat, není hotová, dokud není aktualizovaná datová mapa.
+
+Do pull requestu, ticketu nebo release checklistu přidej otázky:
+
+- Přidáváme nové osobní údaje?
+- Měníme účel existujících dat?
+- Posíláme data novému dodavateli?
+- Měníme retenci, přístupy nebo export?
+- Má změna dopad na privacy stránku, smlouvu, DPA nebo nápovědu?
+- Potřebujeme mini-DPIA nebo kontrolu právníkem?
+
+Tohle není byrokracie, pokud je otázka krátká a odpověď konkrétní. Byrokracie je až to, když po incidentu tři lidé hledají, kam vlastně teče jeden formulář.
+
+## T.5 DPA a subdodavatelé: méně seznamů, víc odpovědnosti
+
+U B2B SaaS se dřív nebo později objeví otázka: kdo další má k datům přístup? Připrav si odpověď dřív, než ji zákazník pošle v bezpečnostním dotazníku s padesáti řádky a pasivní agresí v příloze.
+
+Pro každého dodavatele měj interně:
+
+- název a odkaz na službu,
+- roli: správce, zpracovatel, nebo samostatný správce,
+- jaká data dostává,
+- kde jsou data provozována,
+- proč dodavatele používáš,
+- kdo je interní vlastník,
+- odkaz na smlouvu, DPA nebo bezpečnostní dokumentaci,
+- datum poslední kontroly,
+- plán odchodu, pokud dodavatel přestane vyhovovat.
+
+Veřejně nemusíš ukazovat každý interní detail, ale zákazník by měl snadno zjistit, že subdodavatele znáš, neignoruješ a umíš vysvětlit jejich roli. Privacy-first značka nestojí na větě „vaše data jsou v bezpečí“. Stojí na schopnosti ukázat, co ta věta v praxi znamená.
+
+## T.6 Checklist GDPR dokumentace pro malý SaaS
+
+- Máme aktuální registr zpracování v editovatelné podobě?
+- Má každé zpracování účel, datové kategorie, systém, přístupy a retenci?
+- Umíme u každého účelu říct právní i produktovou větu?
+- Máme seznam dodavatelů včetně role, dat, regionu a vlastníka?
+- Víme, které změny produktu spouští aktualizaci datové mapy?
+- Máme jednoduchou mini-DPIA šablonu pro rizikové změny?
+- Kontrolujeme dokumentaci aspoň jednou za kvartál?
+- Sedí veřejná privacy stránka s realitou systémů?
+- Nejsou v dokumentaci uvedené nástroje, které už nepoužíváme?
+- Umíme dokumentaci vysvětlit zákazníkovi lidsky, ne jen poslat PDF jako štít proti otázkám?
+
+## Shrnutí přílohy
+
+GDPR dokumentace má být provozní mapa, ne papírový rituál. Když má malý SaaS živý registr zpracování, jasné účely, přehled dodavatelů, změnový checklist a jednoduchou DPIA šablonu, získá dvě věci najednou: lepší kontrolu nad daty a rychlejší odpovědi zákazníkům. Privacy-first přístup tu není estetika. Je to způsob, jak snížit chaos dřív, než začne bolet.
+
+---
+
 ## Zdroje
 
 - Atlassian Support: Create a postmortem — https://support.atlassian.com/statuspage/docs/create-a-postmortem/
@@ -3886,6 +4004,9 @@ Privacy-first monitoring nestaví na sběru všeho pro jistotu. Staví na uživa
 - EDPB: Guidelines 4/2019 on Article 25 Data Protection by Design and by Default — https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-42019-article-25-data-protection-design-and_en
 - EDPB: Guidelines 07/2020 on the concepts of controller and processor in the GDPR — https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-072020-concepts-controller-and-processor-gdpr_en
 - EDPB: Personal data breaches — https://www.edpb.europa.eu/topics/security-data-breaches/personal-data-breaches_en
+- European Commission: How can I demonstrate that my organisation is compliant with the GDPR? — https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/obligations/how-can-i-demonstrate-my-organisation-compliant-gdpr_en
+- European Commission: Obligations — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/obligations_en
+- EDPB: Data protection guide for small business — Be compliant — https://www.edpb.europa.eu/sme/be-compliant/be-compliant_en
 - European Commission: NIS2 Directive FAQs — https://digital-strategy.ec.europa.eu/en/faqs/directive-measures-high-common-level-cybersecurity-across-union-nis2-directive-faqs
 - EURid: Find a registrar — https://eurid.eu/en/get-your-eu/find-a-registrar/
 - Google Search Central: Understanding Google Page Experience — https://developers.google.com/search/docs/appearance/page-experience
@@ -3906,6 +4027,7 @@ Privacy-first monitoring nestaví na sběru všeho pro jistotu. Staví na uživa
 
 ## Pracovní log
 
+- 2026-08-07: Přidána příloha T o GDPR dokumentaci bez šanonového divadla: registr zpracování, právní a produktové věty, mini-DPIA, změnový checklist, subdodavatelé a kontrolní seznam.
 - 2026-08-07: Přidána příloha S o monitoringu, alertech a status komunikaci: uživatelské sliby, bezpečné logování, akční alerty, status šablony, privacy-first výběr nástroje a checklist.
 - 2026-08-07: Přidána příloha R o zálohách a obnově bez falešného pocitu bezpečí: mapa obnovy, oddělení záloh, test restore, retence, dokumentace a checklist.
 - 2026-08-07: Přidána příloha P s incidentovým playbookem pro malý SaaS tým: závažnost, prvních 30 minut, zákaznická komunikace, privacy triage, postmortem a checklist připravenosti.
