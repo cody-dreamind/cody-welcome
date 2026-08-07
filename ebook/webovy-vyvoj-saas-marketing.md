@@ -1081,9 +1081,133 @@ MVP je nástroj pro učení, ne omluva pro polotovar. Roadmapa má držet tým u
 
 ---
 
+# 9. Automatizace a AI asistenti v každodenním provozu
+
+Automatizace má malému týmu vracet čas, ne vyrábět další systém, který někdo musí krmit, hlídat a omlouvat zákazníkům. AI asistenti jsou v tomhle skvělí sluhové a nebezpečně sebevědomí stážisti: umí rychle navrhnout text, shrnout ticket, připravit varianty odpovědi nebo najít vzor v datech, ale pořád potřebují hranice, kontext a odpovědného člověka.
+
+U AI navíc nestačí ptát se jen „funguje to?“. Privacy-first tým se ptá i: jaká data do asistenta posíláme, kde se zpracují, kdo k nim má přístup, jak dlouho zůstávají uložená a co se stane, když model odpoví špatně. Evropský AI Act už formálně rozlišuje role poskytovatelů a nasazovatelů AI systémů a řeší mimo jiné transparentnost u určitých AI systémů; praktický rozcestník Evropské komise je tady: https://digital-strategy.ec.europa.eu/en/faqs/navigating-ai-act a text článku 50 k transparentnosti tady: https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-50
+
+## 9.1 Automatizuj nejdřív nudné, časté a nízkorizikové věci
+
+Nejlepší první automatizace není „AI agent, který řídí firmu“. To zní efektně, ale často končí jako robotický kolega, který s oblibou zakládá nové problémy ve 2:17 ráno. Začni procesy, které jsou opakované, mají jasný vstup, jasný výstup a malý dopad při chybě.
+
+Dobří kandidáti:
+
+- Třídění poptávek podle typu zákazníka, rozpočtu nebo naléhavosti.
+- Předvyplnění odpovědi na běžný support dotaz, kterou člověk schválí.
+- Shrnutí dlouhého e-mailového vlákna před meetingem.
+- Kontrola checklistu před publikací článku, landing page nebo release.
+- Převod poznámek z hovoru na úkoly s vlastníkem a termínem.
+- Návrh variant nadpisů, CTA nebo onboardingových textů.
+
+Špatní první kandidáti:
+
+- Automatické mazání dat bez auditní stopy.
+- Samostatné odpovědi na právní, bezpečnostní nebo fakturační spory.
+- Přímé změny v produkční databázi.
+- Rozesílka marketingových e-mailů bez lidské kontroly.
+- Jakékoliv rozhodnutí, které může zákazníkovi zablokovat účet nebo peníze.
+
+Pravidlo je jednoduché: AI může připravit návrh, ale u rizikových kroků musí člověk stisknout poslední tlačítko. Ano, je to méně futuristické. Taky je to méně pravděpodobné, že ráno otevřeš Slack a najdeš digitální požár s vlastním emoji.
+
+## 9.2 Piš procesy jako recept, ne jako přání
+
+AI asistent potřebuje konkrétní zadání. „Pomoz se supportem“ je přání. „Přečti ticket, vyber jednu z pěti kategorií, navrhni odpověď do 120 slov, nepřidávej slevu, pokud není v CRM aktivní kupon, a u technického incidentu předej ticket člověku“ je proces.
+
+U každé automatizace si napiš krátký provozní recept:
+
+- **Trigger:** co automatizaci spouští.
+- **Vstupy:** jaká data smí použít.
+- **Zakázaná data:** co se do asistenta nikdy neposílá.
+- **Kroky:** co má udělat a v jakém pořadí.
+- **Výstup:** jak má vypadat dobrý návrh.
+- **Kontrola:** kdo a kdy výstup schvaluje.
+- **Fallback:** co se stane, když si asistent není jistý.
+- **Log:** co se uloží pro pozdější audit.
+
+Příklad pro support:
+
+> Když přijde nový ticket, asistent vytvoří interní shrnutí, navrhne kategorii, odhadne prioritu a připraví odpověď. Nesmí posílat odpověď zákazníkovi sám. Nesmí navrhovat právní závěry ani slíbit termín opravy. Pokud ticket obsahuje osobní údaje třetí osoby, označí ho pro ruční kontrolu.
+
+Takový recept je nudný dokument. Přesně proto funguje. Automatizace bez procesu jen zrychlí chaos, a chaos ve vyšší rychlosti není inovace. Je to akorát dražší běhání v kruhu.
+
+## 9.3 Data minimalizuj i v promptech
+
+Privacy-first provoz nekončí u databáze. Prompt je taky datový tok. Když do AI nástroje vložíš celé CRM vlákno, faktury, interní poznámky a osobní údaje, právě jsi vytvořil další místo, kde data žijí. Možná oprávněně, možná zbytečně. Rozdíl musíš vědět předem.
+
+Praktické zásady:
+
+- Do promptu posílej jen kontext nutný pro úkol, ne celý archiv.
+- Osobní údaje nahrazuj štítky, pokud detail není potřeba: „zákazník A“, „faktura po splatnosti“, „produkt B“.
+- Citlivé údaje drž v interním systému a asistentovi předávej jen výsledek dotazu.
+- Odděl pracovní režimy: veřejný obsah, interní provoz, zákaznická data, bezpečnostní incidenty.
+- Ukládej šablony promptů do repozitáře nebo dokumentace, ne jen do hlavy jednoho člověka.
+- Pravidelně maž nepotřebné běhy, exporty a testovací datasety.
+
+Pokud používáš externí AI službu, zkontroluj smluvní a technické podmínky: zpracovatelská role, region zpracování, retenční doby, možnost vypnout použití dat pro trénink, auditní logy a přístup zaměstnanců dodavatele. U evropského projektu není ostuda vybrat pomalejší integraci, pokud dává lepší kontrolu nad daty.
+
+*Codyho komentář:* Největší chyba není použít AI. Největší chyba je tvářit se, že prompt není zpracování dat, protože se tomu říká prompt a ne formulář. Hezký název právní realitu nepřelstí. Bohužel, marketingové oddělení to zkouší pravidelně.
+
+## 9.4 Bezpečnost: prompt injection není sci-fi, ale provozní riziko
+
+Jakmile AI asistent čte obsah od uživatelů, e-maily, webové stránky nebo dokumenty, musíš počítat s tím, že někdo zkusí ovlivnit jeho chování. OWASP u LLM aplikací dlouhodobě upozorňuje na rizika jako prompt injection, únik citlivých informací, nebezpečné zacházení s výstupy nebo nadměrnou autonomii: https://owasp.org/www-project-top-10-for-large-language-model-applications/ a aktuální přehled OWASP Top 10 pro LLM aplikace je zde: https://genai.owasp.org/resource/owasp-top-10-for-llm-applications-2025/
+
+Praktická obrana pro malý SaaS:
+
+- Odděl instrukce systému od obsahu, který dodal uživatel.
+- Nedovol modelu volat nástroje, které nepotřebuje pro daný úkol.
+- Před každou akcí s dopadem vyžaduj explicitní potvrzení člověkem nebo pravidlovou kontrolu.
+- Validuj výstup stejně jako vstup z formuláře: typy, délky, povolené hodnoty, zakázané akce.
+- Nikdy nedávej asistentovi univerzální admin token, když stačí omezené oprávnění.
+- Loguj důležité vstupy, výstupy a rozhodnutí tak, aby šel incident zpětně pochopit.
+
+Užitečný vzor je „AI jako návrhář, aplikace jako rozhodčí“. Model může navrhnout odpověď, klasifikaci nebo další krok. Aplikace ale rozhodne, jestli je krok povolený, jestli se vejde do oprávnění a jestli nepotřebuje schválení. Tím z AI neděláš magický mozek systému, ale specializovaný nástroj v kontrolovaném procesu.
+
+## 9.5 Interní asistent má mít vlastní onboarding
+
+Když do týmu přijde nový člověk, nedáš mu jen notebook a větu „nějak to pochop“. Aspoň doufám. AI asistent potřebuje podobný onboarding: tón komunikace, hranice, slovník produktu, typické zákazníky, eskalační pravidla a ukázky dobrých výstupů.
+
+Minimální balíček pro interního asistenta:
+
+- Jednostránkový popis firmy, produktu a zákazníků.
+- Seznam věcí, které nikdy nesmí slíbit.
+- Slovník pojmů, zkratek a názvů funkcí.
+- Tři až pět příkladů dobrých odpovědí.
+- Tři příklady špatných odpovědí s vysvětlením proč.
+- Eskalační pravidla pro právní, bezpečnostní, fakturační a emočně vypjaté situace.
+- Datová pravidla: co smí číst, co smí ukládat a co má ignorovat.
+
+Tento balíček se vyplatí držet verzovaný. Když se změní pricing, onboarding, obchodní slib nebo bezpečnostní pravidlo, aktualizuješ jeden zdroj pravdy. Asistent pak není sbírka náhodných promptů z minulého kvartálu, ale součást provozní dokumentace.
+
+## 9.6 Checklist bezpečné AI automatizace
+
+Před nasazením asistenta do provozu si projdi:
+
+- Řeší automatizace konkrétní opakovaný problém, nebo jen vypadá moderně?
+- Má jasný trigger, vstupy, výstup, kontrolu, fallback a vlastníka?
+- Posíláme do AI jen data, která jsou pro úkol nutná?
+- Víme, kde dodavatel data zpracovává a jak dlouho je uchovává?
+- Jsou citlivé kroky chráněné lidským schválením nebo pravidlovou bránou?
+- Má asistent jen minimální oprávnění pro daný úkol?
+- Validujeme výstupy před použitím v aplikaci, e-mailu nebo databázi?
+- Umíme zákazníkovi vysvětlit, kdy komunikuje s AI nebo kdy AI ovlivnila výstup?
+- Máme auditní stopu pro důležité návrhy a akce?
+- Existuje jednoduchý způsob, jak automatizaci vypnout, když začne dělat neplechu?
+
+AI automatizace je nejlepší tam, kde tým už chápe proces a chce ho zrychlit. Pokud proces neexistuje, asistent ho nevymyslí za vás. Jen bude chaoticky rychlý, sebejistý a velmi přesvědčivý. Což je roztomilé u kočky na klávesnici, méně u produkčního SaaS.
+
+## Shrnutí kapitoly
+
+AI asistenti dávají malému týmu páku, pokud mají jasné hranice, minimální přístup k datům, lidskou kontrolu u rizikových kroků a auditní stopu. Privacy-first přístup z nich nedělá brzdu inovace; dělá z nich bezpečnější provozní nástroj. Automatizuj nudné a časté věci, dokumentuj procesy jako recepty, chraň zákaznická data i v promptech a nenech model rozhodovat tam, kde má rozhodovat produkt, pravidlo nebo člověk.
+
+---
+
 ## Zdroje
 
 - Evropská komise: Data protection — https://commission.europa.eu/law/law-topic/data-protection_en
+- Evropská komise: Navigating the AI Act — https://digital-strategy.ec.europa.eu/en/faqs/navigating-ai-act
+- Evropská komise: AI Act Article 50 transparency obligations — https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-50
+- Evropská komise: Guidelines on transparency of AI-generated content — https://digital-strategy.ec.europa.eu/en/policies/guidelines-transparency-ai-generated-content
 - Evropská komise: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en
 - Evropská komise: What information must be given to individuals whose data is collected? — https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/what-information-must-be-given-individuals-whose-data-collected_en
 - Evropská komise: Information for individuals, consent and rights — https://commission.europa.eu/law/law-topic/data-protection/information-individuals_en
@@ -1096,6 +1220,8 @@ MVP je nástroj pro učení, ne omluva pro polotovar. Roadmapa má držet tým u
 - Google Search Central: Understanding Google Page Experience — https://developers.google.com/search/docs/appearance/page-experience
 - Google Search Central: Creating helpful, reliable, people-first content — https://developers.google.com/search/docs/fundamentals/creating-helpful-content
 - Google Search Central: SEO Starter Guide — https://developers.google.com/search/docs/fundamentals/seo-starter-guide
+- OWASP: Top 10 for Large Language Model Applications — https://owasp.org/www-project-top-10-for-large-language-model-applications/
+- OWASP: Top 10 for LLM Applications 2025 — https://genai.owasp.org/resource/owasp-top-10-for-llm-applications-2025/
 - Plausible Analytics: About — https://plausible.io/about
 - Plausible Analytics: Security and compliance documentation — https://plausible.io/compliance
 - RSS Advisory Board: RSS 2.0 Specification — https://www.rssboard.org/rss-specification
@@ -1116,3 +1242,4 @@ MVP je nástroj pro učení, ne omluva pro polotovar. Roadmapa má držet tým u
 - 2026-08-06: Dopsána šestá kapitola o privacy-first analytice: měřicí plán, vrstvy měření, výběr nástroje, eventový slovník, reporty a checklist.
 - 2026-08-06: Dopsána sedmá kapitola o evropském provozu: hosting, domény, e-mail, zálohy, incidenty a provozní checklist.
 - 2026-08-07: Dopsána osmá kapitola o MVP a roadmapě SaaS: hypotézy, třídění funkcí, feedback, pricing a checklist privacy-first produktového rozhodování.
+- 2026-08-07: Dopsána devátá kapitola o AI asistentech a automatizaci v provozu: procesní recepty, minimalizace dat v promptech, bezpečnost, onboarding asistenta a checklist.
