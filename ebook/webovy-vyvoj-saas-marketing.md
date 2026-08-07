@@ -2584,6 +2584,145 @@ Dobrá cenová stránka není katalog funkcí ani psychologická past. Je to roz
 
 ---
 
+
+# Příloha J: Onboarding a podpora bez datového chaosu
+
+První konverze není konec marketingu. Je to začátek vztahu. Zákazník klikl, registroval se, poslal poptávku nebo si objednal demo — a teď čeká, jestli produkt dodá slíbenou hodnotu bez toho, aby musel číst doktorát z interní dokumentace. Onboarding a podpora rozhodují o tom, jestli se z návštěvníka stane spokojený zákazník, nebo další duch ve statistikách opuštěných účtů.
+
+Privacy-first onboarding má ještě jednu práci navíc: od začátku ukázat, že produkt bere data vážně. Ne formálně, ale prakticky. Kolik údajů opravdu potřebujeme? Kde zákazník najde nastavení? Jak smaže účet? Co se zapisuje do logů? Kdo uvidí jeho data, když napíše na podporu? GDPR principy jako minimalizace, transparentnost a data protection by design nejsou jen právní příloha ke smlouvě; jsou dobrý produktový design: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/obligations/what-does-data-protection-design-and-default-mean_en
+
+## J.1 První týden má mít jeden jasný výsledek
+
+Špatný onboarding se snaží ukázat všechno. Dobrý onboarding dovede zákazníka k prvnímu užitečnému výsledku. U SaaS tomu často říkáme aktivace, ale nemusíme kolem toho zapalovat konferenční svíčky. Prakticky jde o moment, kdy si uživatel řekne: „Aha, tohle mi fakt pomůže.“
+
+Příklady prvního výsledku:
+
+- Rezervační systém: zákazník vytvoří první službu, veřejný rezervační odkaz a testovací rezervaci.
+- Docházkový nástroj: tým přidá první tři lidi a uzavře jeden testovací den.
+- Reporting SaaS: uživatel napojí první zdroj dat a uvidí jeden smysluplný týdenní přehled.
+- Interní AI asistent: administrátor nahraje malou sadu dokumentů a ověří tři typické dotazy.
+- CRM pro malé týmy: obchodník založí první příležitost a naplánuje další krok.
+
+Onboarding proto nezačínej prohlídkou všech funkcí. Začni úkolem. Ideální první obrazovka po registraci řekne:
+
+> „Za 10 minut nastavíme první funkční scénář: přidáš tým, vybereš šablonu a odešleš testovací pozvánku.“
+
+Tohle je lepší než „Vítejte v dashboardu“, protože zákazník ví, co má dělat. Dashboard bez kontextu je jen digitální recepce bez člověka za pultem.
+
+## J.2 Sbírej data postupně, ne na uvítanou jako celník
+
+Registrační formulář často chce všechno hned: jméno, firmu, telefon, velikost týmu, obor, roční obrat, oblíbenou barvu tlačítka a možná krevní skupinu. Z pohledu týmu jsou to hezká data do CRM. Z pohledu zákazníka je to tření.
+
+Privacy-first přístup říká: nejdřív vezmi jen data nutná pro začátek a další údaje ptej až ve chvíli, kdy dávají smysl.
+
+Praktická sekvence:
+
+| Moment | Co se ptát | Proč |
+| --- | --- | --- |
+| Registrace | e-mail, heslo nebo bezpečné přihlášení | vytvoření účtu |
+| První nastavení | název organizace, hlavní use case | přizpůsobení produktu |
+| Pozvánka týmu | e-maily členů týmu | doručení pozvánky |
+| Fakturace | fakturační údaje | až při placení |
+| Podpora | detail problému, případně technický kontext | vyřešení konkrétního požadavku |
+
+Nejde jen o konverzní míru. Postupný sběr dat také lépe vysvětluje účel. Když se na fakturační údaje zeptáš při platbě, zákazník chápe proč. Když je chceš před prvním kliknutím v produktu, působí to jako hladový formulář.
+
+Codyho komentář: pokud má onboarding víc polí než daňové přiznání, problém není ve „frikci“. Problém je v tom, že produkt nutí zákazníka splácet interní nepořádek týmu.
+
+## J.3 E-maily po registraci mají pomáhat, ne pronásledovat
+
+Onboardingové e-maily jsou užitečné, když mají jasný účel. Jsou otravné, když jen připomínají existenci produktu ve stylu „Ahoj, ještě jsme tady, nezapomeň na nás, prosím prosím“. Každý e-mail by měl zákazníkovi pomoct udělat konkrétní krok.
+
+Jednoduchá sekvence pro první týden:
+
+1. **Ihned po registraci:** potvrzení účtu, odkaz zpět do produktu, jedna věta o dalším kroku.
+2. **Po 24 hodinách bez aktivace:** nabídka krátkého návodu nebo šablony pro první scénář.
+3. **Po prvním úspěchu:** vysvětlení další hodnotné funkce, ne deset odkazů najednou.
+4. **Před koncem trialu:** shrnutí, co uživatel nastavil, co se stane po konci trialu a jak exportovat nebo smazat data.
+5. **Po neaktivním trialu:** férová otázka, jestli produkt nesedl, a jednoduchá možnost účet zavřít.
+
+Privacy-first pravidla pro e-maily:
+
+- Nepřidávej člověka do marketingového newsletteru jen proto, že si vytvořil účet.
+- Odděl produktové e-maily od marketingových odběrů.
+- U každého typu e-mailu si napiš právní a produktový důvod.
+- Měř agregovaně to, co opravdu pomáhá zlepšit onboarding.
+- Neposílej osobní údaje do e-mailingového nástroje bez kontroly dodavatele a smluv.
+
+Příklad užitečného e-mailu:
+
+> Předmět: „Tvůj první rezervační odkaz je skoro hotový“
+>
+> „Chybí už jen nastavit dostupné časy. Zabere to asi 3 minuty. Tady je přímý odkaz do nastavení. Pokud produkt nechceš dál zkoušet, účet můžeš smazat v Nastavení → Organizace.“
+
+Tenhle e-mail je konkrétní, krátký a respektuje uživatele. Žádné „exkluzivní příležitosti“, žádné psychologické lepidlo.
+
+## J.4 Podpora potřebuje kontext, ale ne celý život zákazníka
+
+Když zákazník napíše na podporu, tým potřebuje kontext: účet, plán, poslední chybu, prohlížeč, čas incidentu, případně ID objednávky. Nepotřebuje ale automaticky kopii celé databáze, kompletní historii klikání a screenshoty citlivých dat.
+
+Zaveď si podporový datový minimální standard:
+
+- **Identifikace požadavku:** e-mail účtu, organizace, číslo ticketu.
+- **Technický kontext:** čas chyby, URL obrazovky, typ zařízení, prohlížeč, ID události v logu.
+- **Obsah problému:** popis od zákazníka, případně bezpečně začerněný screenshot.
+- **Přístup podpory:** kdo v týmu může ticket vidět a kdy smí otevřít zákaznická data.
+- **Retence:** kdy se ticket a přílohy mažou nebo anonymizují.
+
+U citlivějších produktů pomůže režim „support access“: podpora se k zákaznickému účtu nedívá automaticky, ale uživatel dočasně povolí přístup. Ideálně s časovým omezením a auditním logem. To je trochu víc práce na implementaci, ale hodně práce ušetří při bezpečnostních dotaznících.
+
+Příklad odpovědi podpory:
+
+> „Vidíme chybu v synchronizaci z dneška 09:42 u integrace Kalendář. Nepotřebujeme přístup k obsahu vašich událostí; stačí nám povolit diagnostiku připojení na 24 hodin.“
+
+Taková věta uklidní zákazníka a zároveň chrání tým. Méně dat znamená méně rizika. Šokující, skoro jako kdyby minimalizace měla smysl.
+
+## J.5 Nápověda má být produkt, ne skládka článků
+
+Dokumentace často roste jako půda na chalupě: všechno se tam odloží a jednou se to „uklidí“. Jenže nápověda je součást produktu. Když je špatná, zákazník píše na podporu, podpora nestíhá a produktový tým si myslí, že problém je „málo lidí v customer success“.
+
+Minimum dobré nápovědy:
+
+- stránka „Začněte tady“ pro první výsledek,
+- krátké návody podle scénářů, ne jen podle funkcí,
+- FAQ pro billing, data, bezpečnost a zrušení účtu,
+- changelog s přímým odkazem, ideálně dostupný i přes RSS,
+- kontaktní cesta na podporu bez nutnosti veřejného profilu na sociální síti,
+- datum poslední aktualizace u důležitých článků.
+
+Scénářový článek je lepší než funkční katalog. Místo „Správa webhooků“ napiš „Jak poslat novou objednávku do účetnictví“. Místo „Role administrátora“ napiš „Jak bezpečně přidat externí účetní jen k fakturám“. Jazyk nápovědy má odpovídat tomu, co chce zákazník udělat.
+
+Privacy-first doplněk: u každého článku, který popisuje integraci, přidej malý box:
+
+- Jaká data se předávají?
+- Komu se předávají?
+- Dá se integrace vypnout?
+- Co se stane s historickými daty po vypnutí?
+- Kde najdu smluvní nebo bezpečnostní informace dodavatele?
+
+Tohle není paranoia. To je servis pro evropského zákazníka, který nechce zjišťovat datové toky až při auditu.
+
+## J.6 Checklist onboardingového systému
+
+Před spuštěním nebo revizí onboardingu si projdi:
+
+- Má první týden jeden jasně definovaný výsledek pro zákazníka?
+- Ví uživatel po registraci, jaký další krok má udělat?
+- Sbíráme při registraci jen opravdu nutná data?
+- Oddělujeme produktové e-maily od marketingových odběrů?
+- Vysvětlujeme, co se stane po konci trialu?
+- Umí uživatel exportovat nebo smazat data bez psaní na podporu?
+- Má podpora jasná pravidla, kdy smí vidět zákaznická data?
+- Logujeme podpůrné zásahy do účtu, pokud existují?
+- Má nápověda články podle reálných scénářů zákazníků?
+- U integrací vysvětlujeme datové toky a možnost vypnutí?
+
+## Shrnutí přílohy
+
+Onboarding a podpora nejsou provozní detail po prodeji. Jsou součást důvěry. Dobrý onboarding vede zákazníka k prvnímu výsledku, sbírá data postupně a vysvětluje, co se děje. Dobrá podpora řeší problém s minimem nutných údajů, jasnými přístupy a srozumitelnou nápovědou. Privacy-first přístup tady není brzda růstu. Je to způsob, jak růst bez toho, aby se z produktu stala datová půda plná věcí, které nikdo nechce uklízet.
+
+---
+
 ## Zdroje
 
 - Evropská komise: Data protection — https://commission.europa.eu/law/law-topic/data-protection_en
@@ -2620,6 +2759,7 @@ Dobrá cenová stránka není katalog funkcí ani psychologická past. Je to roz
 
 ## Pracovní log
 
+- 2026-08-07: Přidána příloha J o privacy-first onboardingu a podpoře: první výsledek zákazníka, postupný sběr dat, e-mailová sekvence, support access, nápověda a checklist.
 - 2026-08-06: Založena struktura e-booku a dopsána první kapitola o privacy-first webu jako konkurenční výhodě včetně praktického checklistu a zdrojů.
 - 2026-08-06: Dopsána druhá kapitola o základech vydělávajícího webu: nabídka, struktura, rychlost, důvěra a checklist obchodní stránky.
 - 2026-08-06: Dopsána třetí kapitola o SaaS landing page: bolest zákazníka, CTA, formulář, důkazy hodnoty, hypotézy a checklist.
