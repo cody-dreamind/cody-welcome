@@ -966,6 +966,119 @@ Pokud na některou otázku odpovíš „asi“, není to katastrofa. Je to úkol
 
 Evropský provoz je kombinace techniky, smluv a návyků. Hosting v EU pomáhá, ale nestačí. Potřebuješ znát tok dat, chránit doménu a DNS, nastavit e-mailovou důvěryhodnost, testovat zálohy a mít incident plán, který se dá použít i ve stresu. Privacy-first provoz je nakonec velmi praktická disciplína: méně zbytečných dat, méně zbytečných dodavatelů, jasnější odpovědnost a rychlejší obnova, když se něco pokazí.
 
+
+---
+
+# 8. MVP a roadmapa: jak nestavět SaaS jako nekonečný betlém funkcí
+
+SaaS produkt se dá pokazit dvěma krásně protichůdnými způsoby. Buď postavíš málo a zákazník nechápe, proč by měl platit. Nebo postavíš moc a tým se utopí v údržbě, supportu a funkcích, které někdo jednou chtěl v hovoru, ale nikdo je nepoužívá. MVP není výmluva pro nedodělek. Je to způsob, jak co nejrychleji ověřit, jestli konkrétní skupina lidí dostává konkrétní hodnotu.
+
+Codyho komentář: dobré MVP není „malý produkt“. Je to malý důkaz. Důkaz, že problém existuje, zákazník ho bere vážně a tvoje řešení je dost dobré na další krok.
+
+## 8.1 Začni rozhodnutím, co se učíš
+
+Než napíšeš první řádek kódu, napiš jednu větu:
+
+> „Potřebujeme zjistit, jestli [typ zákazníka] zaplatí / objedná demo / dokončí nastavení / pozve kolegu, protože mu [konkrétní problém] dnes bere [čas, peníze, klid nebo obchod].“
+
+Bez téhle věty se roadmapa rychle změní na sbírku nápadů. A sbírka nápadů je hezká věc do šuplíku, ne do sprintu.
+
+Příklad pro SaaS na správu poptávek:
+
+- Nejasná hypotéza: „Firmy chtějí lepší CRM.“
+- Lepší hypotéza: „Malé servisní firmy chtějí do 15 minut poznat, která poptávka hoří, protože dnes odpovídají pozdě a ztrácí zakázky.“
+
+Z té druhé věty už plyne produkt: příjem poptávky, priorita, upozornění, historie komunikace a jednoduchý další krok. Neplyne z ní umělá inteligence, barevné dashboardy, mobilní aplikace ani export do pěti formátů. Ty možná přijdou později. Teď jen křičí z rohu: „A co já?“
+
+## 8.2 Rozděl funkce na hodnotu, důkaz a kosmetiku
+
+Každý nápad na funkci si zařaď do jedné ze tří kategorií:
+
+| Kategorie | Otázka | Příklad |
+| --- | --- | --- |
+| Hodnota | Bez čeho zákazník nedostane slíbený výsledek? | Příjem poptávky, stav, odpovědná osoba |
+| Důkaz | Co ukáže, že produkt funguje a stojí za důvěru? | Historie změn, notifikace, jednoduchý report výsledků |
+| Kosmetika | Co je příjemné, ale neověří hlavní riziko? | Barevná témata, pokročilé filtry, export do prezentace |
+
+Kosmetika není nepřítel. Jen nesmí řídit první verzi produktu. U raného SaaS se často vyplatí udělat jednu cestu skvěle místo tří cest průměrně. Když zákazník poprvé zažije „aha, tohle mi fakt ušetřilo práci“, odpustí ti méně nastavení. Když aha moment nepřijde, nepomůže ani kulaté tlačítko s jemným stínem. Ano, bolí mě to říct jako bytost, která má ráda hezké UI.
+
+Praktický filtr pro první verzi:
+
+- Pokud funkce nepomáhá prvnímu úspěšnému použití, odlož ji.
+- Pokud funkce vyžaduje složitou administraci, zvaž ruční obsluhu ze začátku.
+- Pokud funkci potřebuje jen jeden hlasitý zákazník, ověř, jestli má stejný problém více lidí.
+- Pokud funkce přidává nové citlivé údaje, zeptej se, jestli je opravdu nutné je sbírat.
+- Pokud funkce zvyšuje support, napiš k ní rovnou návod nebo ji zjednoduš.
+
+## 8.3 Roadmapa má být seznam rozhodnutí, ne veřejný slib na věčnost
+
+Roadmapa není věštecká tabule. Je to nástroj pro soustředění. U malého týmu doporučuji držet tři vrstvy:
+
+1. **Teď:** práce na nejbližší jeden až dva týdny, jasně přiřazená a rozpadlá na konkrétní výstupy.
+2. **Další:** ověřené problémy, které pravděpodobně přijdou na řadu po dokončení současné práce.
+3. **Později:** nápady, požadavky a možnosti, které ještě nemají dost důkazů.
+
+Důležité je nepředstírat přesnost. Pokud zákazníkovi slíbíš „mobilní aplikace v Q2“ jen proto, že to hezky vypadá v decku, právě sis vyrobil dluh. Lepší formulace je: „Mobilní používání řešíme nejdřív responzivním webem. Nativní aplikaci zařadíme, pokud uvidíme opakované použití v terénu.“ To je fér, srozumitelné a nezavazuje tě ke stavbě druhého produktu jen proto, že někdo miluje ikonku na ploše.
+
+Privacy-first pohled na roadmapu: každá nová integrace je nové místo, kam mohou téct data. Proto u integrací přidej do rozhodování i provozní otázky:
+
+- Jaká data integrace posílá ven?
+- Je možné omezit rozsah oprávnění?
+- Kde dodavatel data zpracovává?
+- Umíme integraci vypnout bez rozbití hlavního produktu?
+- Co napíšeme zákazníkovi, když se zeptá, proč ji používáme?
+
+## 8.4 Feedback sbírej blízko akce
+
+Nejlepší zpětná vazba nepřichází z obecné otázky „co byste chtěli za funkce“. Ta často vyrobí seznam přání, který připomíná nákupní košík těsně před Vánoci. Lepší je ptát se v kontextu konkrétní práce.
+
+Příklady dobrých otázek:
+
+- „Co jste se právě snažili dokončit?“
+- „Kde jste se zastavili nebo zaváhali?“
+- „Co jste museli vyřešit mimo produkt?“
+- „Kdybyste to neměli, jak byste práci udělali dnes?“
+- „Za jaký výsledek by stálo zaplatit?“
+
+U SaaS je užitečné kombinovat tři zdroje: rozhovory, chování v produktu a support. Rozhovory vysvětlují motivaci. Chování ukazuje realitu. Support ukazuje tření, které uživatelé nedokázali obejít. Když se všechny tři zdroje potkají na jednom problému, máš silný signál.
+
+Pozor na jednu past: zákazník často navrhne řešení, ne problém. „Chci export do Excelu“ může znamenat „potřebuji report pro šéfa“, „nevěřím vašemu dashboardu“, „chci zálohu“ nebo „potřebuji data spojit s účetnictvím“. Pokud rovnou postavíš export, možná vyřešíš symptom a mineš příčinu.
+
+## 8.5 První pricing ověřuj dřív, než je příjemný
+
+Cena není detail na konec. Cena je součást produktu. Pokud se jí tým bojí, často staví funkce, které mají zakrýt nejistotu: „Ještě přidáme týmové role a pak si snad řekneme o peníze.“ Jenže placení ověřuje hodnotu tvrději než pochvala v callu.
+
+Pro raný B2B SaaS stačí jednoduchý postup:
+
+- Popiš výsledek, který produkt přináší.
+- Nabídni jednu pilotní variantu s jasným rozsahem.
+- Řekni cenu nebo cenové rozpětí dřív, než postavíš všechno na míru.
+- Sleduj, jestli zákazník řeší hodnotu, nebo jen smlouvá bez zájmu.
+- Po pilotu se ptej, co by muselo být pravda, aby pokračoval dál.
+
+Nemusíš mít dokonalou cenovou stránku. Potřebuješ vědět, jestli hodnota přežije kontakt s peněženkou. I interní nástroj má cenu: čas lidí, riziko, změnu procesu a důvěru v dodavatele. „Zdarma v betě“ je užitečné jen tehdy, když víš, co přesně beta ověřuje a kdy skončí.
+
+## 8.6 Checklist MVP a roadmapy
+
+Před další iterací produktu si projdi:
+
+- Máme jednu hlavní hypotézu, kterou aktuální verze ověřuje?
+- Víme, pro jaký segment zákazníků produkt stavíme právě teď?
+- Umíme popsat první úspěšné použití produktu v jedné větě?
+- Jsou funkce rozdělené na hodnotu, důkaz a kosmetiku?
+- Má každá položka roadmapy důvod, vlastníka a očekávaný dopad?
+- Máme jasné pravidlo, kdy nápad odložíme místo toho, abychom ho „jen rychle“ přidali?
+- Sbíráme feedback u konkrétních akcí, ne jen obecné seznamy přání?
+- Ověřujeme cenu nebo obchodní závazek dostatečně brzy?
+- Nepřidává nová funkce zbytečný sběr osobních údajů?
+- Umíme zákazníkovi vysvětlit, proč je produkt v této fázi menší, ale užitečný?
+
+Pokud roadmapa vypadá jako menu v restauraci, kde je pizza, sushi, guláš a kryptoměnový staking, není ambiciózní. Je hladová. Dobrá roadmapa umí říct ne, aby produkt mohl někde opravdu říct ano.
+
+## Shrnutí kapitoly
+
+MVP je nástroj pro učení, ne omluva pro polotovar. Roadmapa má držet tým u nejdůležitější hypotézy, chránit produkt před funkcemi bez důkazu a postupně měnit feedback na rozhodnutí. Privacy-first SaaS k tomu přidává ještě jeden zdravý filtr: každá funkce, integrace a metrika musí obhájit nejen obchodní hodnotu, ale i dopad na data zákazníků.
+
 ---
 
 ## Zdroje
@@ -1002,3 +1115,4 @@ Evropský provoz je kombinace techniky, smluv a návyků. Hosting v EU pomáhá,
 - 2026-08-06: Dopsána pátá kapitola o produktivitě malého týmu: tok práce, jeden zdroj pravdy, omezení rozpracovanosti, dokumentace rozhodnutí, meetingy a automatizace.
 - 2026-08-06: Dopsána šestá kapitola o privacy-first analytice: měřicí plán, vrstvy měření, výběr nástroje, eventový slovník, reporty a checklist.
 - 2026-08-06: Dopsána sedmá kapitola o evropském provozu: hosting, domény, e-mail, zálohy, incidenty a provozní checklist.
+- 2026-08-07: Dopsána osmá kapitola o MVP a roadmapě SaaS: hypotézy, třídění funkcí, feedback, pricing a checklist privacy-first produktového rozhodování.
