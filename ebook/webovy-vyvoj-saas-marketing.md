@@ -2184,6 +2184,128 @@ Redakční systém bez závislosti na algoritmech stojí na vlastním webu, RSS,
 
 ---
 
+
+# Příloha G: Privacy-first obchodní follow-up a malé CRM
+
+Obchod bez systému rychle sklouzne do dvou extrémů. Buď tým zapomíná odpovídat, protože vše žije v hlavách a inboxech, nebo začne sbírat každý detail o každém kontaktu, protože „jednou se to může hodit“. Privacy-first přístup je třetí cesta: mít přehled o obchodních příležitostech, ale neskladovat datový šrot.
+
+Evropský rámec GDPR stojí mimo jiné na minimalizaci dat, účelovém omezení a omezení uložení. Evropská komise tyto principy popisuje v přehledu GDPR pro firmy: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en. Pro obchodní tým to znamená jednoduché pravidlo: CRM nemá být kronika lidského života, ale pracovní nástroj k vyřízení konkrétního vztahu.
+
+## G.1 Začni pipeline, ne softwarem
+
+Než vybereš CRM, napiš si obchodní proces na jednu stránku. Většina malých SaaS týmů nepotřebuje dvanáct stavů, scoring z vesmíru a automatizace, které se tváří chytřeji než jsou. Potřebuje vědět, kdo čeká na odpověď, co je další krok a kdy má smysl kontakt ukončit.
+
+Praktická pipeline pro menší B2B SaaS nebo webové studio:
+
+| Stav | Co znamená | Povinná data | Další krok |
+| --- | --- | --- | --- |
+| Nový kontakt | Člověk napsal nebo stáhl materiál | jméno nebo firma, e-mail, zdroj | odpovědět do 1 pracovního dne |
+| Kvalifikace | Ověřujeme problém a vhodnost | potřeba, velikost týmu, termín | poslat otázky nebo domluvit call |
+| Návrh | Posíláme nabídku nebo trial plán | rozsah, cena nebo plán, vlastník | follow-up po dohodnuté době |
+| Rozhodování | Zákazník porovnává možnosti | rozhodovací kritéria, blokery | odstranit největší riziko |
+| Vyhráno | Začíná spolupráce nebo platba | fakturační kontakt, smluvní údaje | předat do onboardingu |
+| Uzavřeno | Teď to nedává smysl | důvod uzavření | smazat nebo nastavit jasnou retenci |
+
+Důležité je, aby každý stav měl konkrétní rozhodnutí. Pokud karta stojí ve stavu „Kvalifikace“ tři týdny a nikdo neví proč, pipeline neřídí obchod. Jen hezky archivuje zmatek. Což je dražší forma bordelu.
+
+## G.2 Do CRM ukládej rozhodovací data, ne osobní román
+
+Dobré CRM odpovídá na otázku: „Co máme udělat dál?“ Špatné CRM odpovídá na otázku: „Kolik informací dokážeme nasbírat, než se někdo lekne?“
+
+Minimum pro B2B follow-up:
+
+- Identifikace kontaktu: jméno, pracovní e-mail, firma, role.
+- Kontext poptávky: problém, který řeší, a očekávaný výsledek.
+- Obchodní stav: fáze pipeline, vlastník, další krok, datum další akce.
+- Souhlas nebo zdroj kontaktu: odkud vztah vznikl a proč je kontaktujeme.
+- Retence: kdy kartu zkontrolovat, archivovat nebo smazat.
+
+Co do CRM typicky nepatří:
+
+- soukromé poznámky o člověku, které nejsou nutné pro obchodní vztah,
+- kopie celých e-mailových vláken bez důvodu,
+- data z osobních sociálních profilů stažená „pro jistotu“,
+- citlivé údaje, pokud nejsou nezbytné a právně ošetřené,
+- automaticky obohacené profily od dodavatelů, kterým neumíš vysvětlit původ dat.
+
+Codyho komentář: nejlepší poznámka v CRM je nudná, přesná a použitelná. „Chce snížit ruční reporting o 5 hodin týdně, rozhoduje s CFO, další krok: poslat návrh do pátku“ je zlato. „Má rád kafe a působí skepticky“ je horoskop v kravatě.
+
+## G.3 Follow-up má být služba, ne pronásledování
+
+Follow-up není o tom, že člověka umlátíš sedmým e-mailem s předmětem „jen posouvám nahoru“. Follow-up je připomenutí domluveného dalšího kroku, doplnění hodnoty nebo slušné uzavření smyčky.
+
+Jednoduchá sekvence pro poptávku:
+
+1. **Den 0:** odpověz konkrétně na dotaz, potvrď pochopení problému a navrhni další krok.
+2. **Den 2–3:** pokud není reakce, pošli krátké připomenutí s jednou užitečnou informací navíc.
+3. **Den 7:** shrň, co jste řešili, a zeptej se, jestli je téma stále aktuální.
+4. **Den 14:** slušně uzavři smyčku a napiš, že se ozveš jen pokud bude mít druhá strana zájem.
+5. **Po uzavření:** nastav retenci podle účelu a interních pravidel; nepřehazuj kontakt do newsletteru bez jasného důvodu.
+
+Šablona posledního follow-upu:
+
+> Dobrý den, uzavírám si poznámku k tématu [téma]. Pokud je to stále aktuální, rád navážu a pošlu konkrétní návrh dalšího kroku. Pokud ne, nebudu vás dál nahánět — internet už má dost lidí, kteří neumí přestat. Díky a držím palce.
+
+Tenhle e-mail dělá tři věci: respektuje čas, snižuje tlak a zároveň nechává dveře otevřené. Uživatel necítí, že se dostal do marketingového kombajnu.
+
+## G.4 Automatizace ano, ale s ruční brzdou
+
+Automatizace v obchodu dává smysl tam, kde snižuje zapomínání: připomenutí dalšího kroku, vytvoření úkolu po formuláři, upozornění na nevyřízenou poptávku, pravidelný export pro zálohu. Jakmile automatizace začne za tým psát osobní zprávy bez kontroly, přichází riziko tónu, chyb a zbytečného zpracování dat.
+
+Privacy-first pravidla pro obchodní automatizace:
+
+- Automatizuj úkoly a stav, ne vztah za každou cenu.
+- U e-mailů používej raději návrhy k revizi než plně autonomní odesílání.
+- Do AI promptů neposílej víc kontextu, než je nutné k přípravě odpovědi.
+- Zakázky s citlivým kontextem označ a vyřaď z běžných AI automatizací.
+- Každý automat musí mít vlastníka, logiku vypnutí a krátký popis účelu.
+
+Příklad bezpečné automatizace:
+
+- Poptávkový formulář vytvoří kartu v CRM.
+- CRM přidá úkol „odpovědět“ s termínem další pracovní den.
+- Asistent připraví návrh odpovědi jen z textu poptávky a veřejného popisu služby.
+- Člověk odpověď zkontroluje, upraví a odešle.
+- Po 90 dnech bez vztahu karta spadne do review ke smazání nebo anonymizaci.
+
+To je použitelné, rychlé a pořád lidské. Žádný autopilot, který si myslí, že „Ahoj {{first_name}}“ je personalizace.
+
+## G.5 Měsíční úklid CRM
+
+CRM bez úklidu se časem změní na muzeum dávno mrtvých příležitostí. Provozní hygiena je jednoduchá: jednou měsíčně projdi otevřené karty, vyřeš další kroky, zavři neaktuální vztahy a smaž data, která už nemají účel.
+
+Měsíční rutina na 45 minut:
+
+- Otevři všechny příležitosti bez dalšího kroku.
+- U každé rozhodni: pokračovat, čekat s datem, uzavřít, smazat.
+- Zkontroluj karty bez aktivity delší než 60–90 dní.
+- Vymaž poznámky, které nejsou nutné pro další obchodní krok.
+- Ověř, že exporty a integrace neposílají data mimo schválený seznam dodavatelů.
+- Sepiš jednu věc, která zlepší kvalifikaci nových poptávek.
+
+Malý tým si tím udrží dvě výhody: obchodní fokus a menší datové riziko. A jako bonus se CRM otevře bez pocitu, že člověk vstupuje do sklepa plného krabic po minulých projektech.
+
+## G.6 Checklist privacy-first CRM a follow-upu
+
+Před zapnutím nebo úpravou obchodního systému zkontroluj:
+
+- Máme popsané stavy pipeline a každý má jasný další krok.
+- Víme, jaký je účel každého pole v CRM.
+- Neukládáme soukromé nebo citlivé poznámky bez nutnosti.
+- U každého kontaktu známe zdroj vztahu nebo důvod kontaktování.
+- Follow-up sekvence má konec, není nekonečná.
+- Automatizace připravují práci, ale rizikové zprávy kontroluje člověk.
+- AI nástroje dostávají jen nezbytný kontext.
+- Máme měsíční rutinu pro zavírání a mazání starých karet.
+- Dodavatelé CRM a integrací prošli privacy-first dotazníkem z přílohy E.
+- Umíme člověku lidsky vysvětlit, jaká data o něm v obchodním procesu držíme.
+
+## Shrnutí přílohy
+
+Privacy-first obchod není pomalejší obchod. Je to obchod, který ví, co sleduje, proč to sleduje a kdy má přestat. Malé CRM má držet pipeline, další kroky a rozhodovací kontext — ne datový archiv všeho, co šlo někde stáhnout. Nejlepší follow-up pomáhá zákazníkovi rozhodnout se, ne uniknout.
+
+---
+
 ## Zdroje
 
 - Evropská komise: Data protection — https://commission.europa.eu/law/law-topic/data-protection_en
@@ -2236,3 +2358,4 @@ Redakční systém bez závislosti na algoritmech stojí na vlastním webu, RSS,
 - 2026-08-07: Přidána příloha D s měsíčním provozním review webu nebo SaaS: obchodní signály, ruční kontrola kritických cest, datový úklid a rozhodovací checklist.
 - 2026-08-07: Přidána příloha E s privacy-first dotazníkem pro výběr dodavatelů: účel, datová mapa, bezpečnostní minimum, AI funkce, skóre a checklist před zapnutím.
 - 2026-08-07: Přidána příloha F o redakčním systému bez závislosti na algoritmech: obsahové pilíře, repurposing, redakční kanban, SEO minimum a revizní rutina.
+- 2026-08-07: Přidána příloha G o privacy-first obchodním follow-upu a malém CRM: pipeline, datové minimum, follow-up sekvence, automatizace a měsíční úklid.
