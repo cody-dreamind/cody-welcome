@@ -1372,9 +1372,153 @@ Spuštění webu nebo SaaS není jen deploy. Je to kontrola slibu, kritických c
 
 ---
 
+# Příloha A: 30denní plán pro privacy-first web nebo SaaS
+
+Když má tým chuť „udělat privacy-first“, často skončí u velkého auditu, tabulky dodavatelů a pocitu, že by bylo jednodušší otevřít stánek s langošem. Tenhle plán je opak: čtyři týdny, každý týden jasný výstup, žádné divadlo.
+
+Privacy-first není jednorázová právní akce. Je to způsob práce. GDPR zná principy jako minimalizace dat, účelové omezení, transparentnost a zabezpečení zpracování; Evropská komise je shrnuje v přehledu principů GDPR. Evropský sbor pro ochranu osobních údajů zároveň vydal doporučení k ochraně dat už od návrhu a ve výchozím nastavení. Prakticky přeloženo: produkt nemá nejdřív všechno sbírat a pak se ptát právníka, jak to vysvětlit. Má od začátku sbírat méně.
+
+## Den 1–7: Zmapuj realitu bez iluzí
+
+První týden není o předělávání systému. Je o pravdivém inventáři. Vezmi web, aplikaci, marketingové kanály a interní procesy a sepiš, kde vznikají, tečou a leží data.
+
+Minimum mapy:
+
+- formuláře a údaje, které posílají,
+- analytika a měřené události,
+- e-mailing, CRM a support,
+- platební brána a fakturace,
+- serverové logy a monitoring,
+- externí skripty na webu,
+- přístupy členů týmu a dodavatelů,
+- místa, kde se data exportují ručně.
+
+U každého bodu napiš tři věty:
+
+1. Proč to sbíráme?
+2. Kdo k tomu má přístup?
+3. Kdy to mažeme?
+
+Pokud na třetí otázku odpovíš „nikdy jsme to neřešili“, právě jsi našel první úkol. Gratuluju, audit začal bez PowerPointu.
+
+Praktický příklad:
+
+| Oblast | Současný stav | Rozhodnutí |
+| --- | --- | --- |
+| Kontaktní formulář | Jméno, e-mail, telefon, zpráva, IP v CRM | IP do CRM neposílat, telefon nechat volitelný |
+| Analytika | Pageviews, referrer, kampaně, scroll depth | Scroll depth vypnout, měřit jen cíle |
+| Newsletter | E-mail, jméno, zdroj registrace | Zdroj ponechat, jméno volitelné |
+| Logy | Aplikační chyby s e-mailem uživatele | Maskovat e-mail nebo ukládat jen interní ID |
+
+Výstup týdne: jedna stránka „Datová mapa v1“. Nemusí být dokonalá. Musí být pravdivá.
+
+## Den 8–14: Odstraň balast a nastav výchozí minimum
+
+Druhý týden je úklid. Nejdřív vypni věci, které nikdo nepoužívá, nikdo jim nerozumí nebo nepomáhají rozhodování. Privacy-first často nejrychleji zlepšíš tlačítkem „remove script“.
+
+Hledej hlavně:
+
+- duplicitní analytické nástroje,
+- staré remarketingové pixely,
+- chat widgety bez jasného vlastníka,
+- formulářová pole „pro jistotu“,
+- automatické exporty do tabulek,
+- účty bývalých dodavatelů,
+- produkční data v testovacím prostředí.
+
+Potom nastav výchozí pravidlo: nová funkce nesmí sbírat osobní data, dokud neexistuje jasný účel, vlastník a retenční doba. To nezní sexy, ale je to levnější než pozdější vysvětlování, proč marketingový experiment poslal zákaznická data do pěti nástrojů.
+
+Mini šablona pro nové funkce:
+
+```text
+Funkce:
+Jaké rozhodnutí nebo hodnotu přinese:
+Jaká data potřebuje:
+Co lze udělat anonymně nebo agregovaně:
+Kde se data uloží:
+Kdo k nim má přístup:
+Kdy se smažou:
+Co se stane, když data nesbíráme:
+```
+
+Codyho komentář: nejlepší privacy rozhodnutí je často produktové rozhodnutí. Když zjednodušíš onboarding z osmi polí na tři, pomůžeš právu, konverzi i uživateli. Trojitý zásah, žádná konfeta potřeba.
+
+Výstup týdne: seznam odstraněných nástrojů a krátké pravidlo pro nové sběry dat.
+
+## Den 15–21: Zpřehledni komunikaci s uživatelem
+
+Třetí týden patří textům. Privacy stránka, cookie informace, formuláře, onboarding a transakční e-maily mají mluvit stejně: konkrétně, česky a bez právnické mlhy.
+
+U každého místa, kde uživatel předává data, doplň odpověď na otázku „co se s tím stane dál?“ Nemusí to být dlouhé. Má to být srozumitelné.
+
+Příklady mikrotextů:
+
+- Kontaktní formulář: „E-mail použijeme jen k odpovědi na zprávu. Nepřidáme vás do newsletteru bez souhlasu.“
+- Demo SaaS: „Údaje z formuláře slouží k domluvení ukázky. Pokud spolu nezačneme spolupracovat, smažeme je po 12 měsících.“
+- Analytika: „Měříme návštěvnost bez reklamního profilování, abychom věděli, které stránky pomáhají.“
+- Support: „Do zprávy neposílejte hesla ani citlivá data. Když je budeme potřebovat, řekneme si o bezpečný způsob předání.“
+
+Dobrá komunikace sníží počet dotazů a zvýší důvěru. Špatná komunikace vytvoří dojem, že firma něco schovává, i když jen opsala šablonu z internetu.
+
+Výstup týdne: upravené mikrotexty u formulářů a privacy stránka, které rozumí člověk mimo právní oddělení.
+
+## Den 22–30: Udělej z toho provozní návyk
+
+Poslední týden rozhoduje, jestli privacy-first přežije déle než jeden sprint. Potřebuješ jednoduchý rytmus, ne další nástěnku s padesáti sloupci.
+
+Měsíční rutina pro malý tým:
+
+- projít nové skripty a externí služby na webu,
+- zkontrolovat přístupy a odebrat nepotřebné účty,
+- ověřit, že zálohy existují a obnova je realistická,
+- projít nové formuláře a eventy v analytice,
+- zkontrolovat, jestli privacy stránka odpovídá realitě,
+- vybrat jeden proces, kde lze snížit množství dat.
+
+Ke každému měsíčnímu průchodu přidej tři metriky. Ne metriky pro investora, ale metriky pro hygienu:
+
+- počet externích skriptů na hlavní stránce,
+- počet lidí s administrátorským přístupem,
+- počet formulářových polí v hlavní konverzní cestě.
+
+Když některé číslo roste, musí existovat důvod. Pokud důvod není, vrať ho zpět. Produkt i privacy mají rády gravitaci směrem k jednoduchosti.
+
+## Checklist 30denního plánu
+
+**Týden 1 — mapa**
+
+- Máme seznam míst, kde vznikají a ukládají se data.
+- U každého místa víme účel, přístup a retenční pravidlo.
+- Víme, které externí služby se načítají na webu.
+
+**Týden 2 — minimalizace**
+
+- Odstranili jsme nepoužívané skripty, pole nebo exporty.
+- Nové funkce mají jednoduchou privacy šablonu.
+- Testovací prostředí neobsahuje zbytečná produkční data.
+
+**Týden 3 — transparentnost**
+
+- Formuláře mají jasný mikrotext k použití dat.
+- Privacy stránka odpovídá skutečnému provozu.
+- Uživatel chápe, kdy jde o nutná data a kdy o volbu.
+
+**Týden 4 — návyk**
+
+- Existuje měsíční privacy kontrola.
+- Přístupy mají vlastníka a pravidelný úklid.
+- Tým sleduje jednoduché hygienické metriky.
+
+## Shrnutí přílohy
+
+Privacy-first se dá začít bez velkého projektu. Za 30 dní může malý tým zmapovat data, odstranit největší balast, zpřehlednit komunikaci a nastavit měsíční rutinu. Nejde o perfektní stav. Jde o směr: méně zbytečných dat, méně externích závislostí, více důvěry a lepší kontrola nad provozem v Evropě.
+
+---
+
 ## Zdroje
 
 - Evropská komise: Data protection — https://commission.europa.eu/law/law-topic/data-protection_en
+- Evropská komise: Data protection by design and by default — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/obligations/what-does-data-protection-design-and-default-mean_en
 - Evropská komise: Navigating the AI Act — https://digital-strategy.ec.europa.eu/en/faqs/navigating-ai-act
 - Evropská komise: AI Act Article 50 transparency obligations — https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-50
 - Evropská komise: Guidelines on transparency of AI-generated content — https://digital-strategy.ec.europa.eu/en/policies/guidelines-transparency-ai-generated-content
@@ -1385,6 +1529,7 @@ Spuštění webu nebo SaaS není jen deploy. Je to kontrola slibu, kritických c
 - Evropská komise: What is a data breach and what do we have to do in case of a data breach? — https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/obligations/what-data-breach-and-what-do-we-have-do-case-data-breach_en
 - CNIL: Use analytics on your websites and applications — https://www.cnil.fr/en/sheet-ndeg16-use-analytics-your-websites-and-applications
 - CERT-EU: Cybersecurity mitigation measures against critical threats — https://cert.europa.eu/publications/security-guidance/security-guidance-22-001---cybersecurity-mitigation-measures-against-critical-threats/
+- EDPB: Guidelines 4/2019 on Article 25 Data Protection by Design and by Default — https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-42019-article-25-data-protection-design-and_en
 - European Commission: NIS2 Directive FAQs — https://digital-strategy.ec.europa.eu/en/faqs/directive-measures-high-common-level-cybersecurity-across-union-nis2-directive-faqs
 - EURid: Find a registrar — https://eurid.eu/en/get-your-eu/find-a-registrar/
 - Google Search Central: Understanding Google Page Experience — https://developers.google.com/search/docs/appearance/page-experience
@@ -1414,3 +1559,4 @@ Spuštění webu nebo SaaS není jen deploy. Je to kontrola slibu, kritických c
 - 2026-08-07: Dopsána osmá kapitola o MVP a roadmapě SaaS: hypotézy, třídění funkcí, feedback, pricing a checklist privacy-first produktového rozhodování.
 - 2026-08-07: Dopsána devátá kapitola o AI asistentech a automatizaci v provozu: procesní recepty, minimalizace dat v promptech, bezpečnost, onboarding asistenta a checklist.
 - 2026-08-07: Dopsána desátá kapitola s předspouštěcím checklistem pro web nebo SaaS: slib, kritické cesty, privacy, provoz, SEO a finální kontrola.
+- 2026-08-07: Přidána příloha A s 30denním plánem pro privacy-first web nebo SaaS: datová mapa, minimalizace, transparentní mikrotexty a provozní rutina.
