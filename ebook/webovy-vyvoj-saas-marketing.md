@@ -5641,6 +5641,133 @@ Feature flags pomáhají malému SaaS týmu nasazovat bezpečněji, pokud mají 
 
 ---
 
+
+# Příloha AH: Přihlašování a session management bez digitální paranoie
+
+Přihlášení je zvláštní místo produktu: uživatel ho nechce řešit, dokud nebolí. A když bolí, bolí hodně. Ztracené heslo, zamčený účet, podezřelé přihlášení, nekonečné CAPTCHA, agresivní fingerprinting nebo session, která vypadne uprostřed fakturace — to všechno ničí důvěru rychleji než landing page s pěti vykřičníky.
+
+Privacy-first přístup k autentizaci není „méně bezpečnosti“. Je to bezpečnost bez zbytečného sběru dat. OWASP v Authentication Cheat Sheet a Session Management Cheat Sheet opakovaně zdůrazňuje principy jako silná autentizace, bezpečné zacházení s session identifikátory, ochrana proti hádání hesel a správné atributy cookies. Odkazy jsou ve zdrojích.
+
+Cíl malé SaaS aplikace není vypadat jako bankovní trezor se třemi turnikety. Cíl je: správný člověk se dostane ke správnému účtu, útočník ne, tým má auditovatelný provoz a produkt kvůli tomu nemusí stavět šmírovací centrálu.
+
+## AH.1 Přihlašování navrhni podle rizika účtu
+
+Ne každý účet má stejné riziko. Uživatel, který čte veřejnou dokumentaci, nepotřebuje stejnou ochranu jako admin, který může exportovat zákaznická data nebo měnit fakturaci. Začni mapou akcí, ne výběrem knihovny.
+
+Rozděl akce do tří úrovní:
+
+| Úroveň | Příklady | Doporučená ochrana |
+| --- | --- | --- |
+| Nízké riziko | Čtení vlastních poznámek, nastavení vzhledu | Běžná session, rozumná expirace |
+| Střední riziko | Změna e-mailu, pozvání kolegy, práce s integrací | Re-autentizace nebo potvrzení e-mailem |
+| Vysoké riziko | Export dat, změna role admina, smazání účtu, změna plateb | MFA, re-autentizace, audit log, případně časová prodleva |
+
+Praktický příklad: pokud uživatel mění barvu dashboardu, nech ho žít. Pokud stahuje kompletní export zákaznických dat, vyžádej potvrzení. Pokud mění vlastníka workspace, přidej druhý faktor a jasné upozornění e-mailem.
+
+Tímhle se vyhneš dvěma extrémům: produktu, kde se dá všechno rozbít jedním ukradeným cookie, i produktu, který chce druhý faktor při každém kliknutí na nastavení. Bezpečnost má být přiměřená, ne divadelní.
+
+## AH.2 Hesla: méně magie, více rozumných pravidel
+
+Heslo samo o sobě není zlo. Zlo je politika typu „minimálně 8 znaků, jedno velké písmeno, jedna číslice, jeden hieroglyf a každých 30 dní změnit“. Taková pravidla často vedou k horším heslům, protože lidé začnou recyklovat vzory jako `Firma2026!` a cítí se bezpečně. To je hezký pocit. Bohužel ne obrana.
+
+Lepší minimum:
+
+- dovol dlouhá hesla a passphrase,
+- neomezuj zbytečně znaky,
+- kontroluj hesla proti seznamům známě kompromitovaných hesel,
+- neukládej hesla nikdy v čitelné podobě,
+- používej moderní hashovací algoritmus určený pro hesla,
+- nedávej v chybě poznat, jestli existuje účet s daným e-mailem,
+- rate-limituj pokusy o přihlášení a reset hesla.
+
+Reset hesla ber jako bezpečnostní flow, ne jen jako e-mail se šťastným odkazem. Token má být jednorázový, časově omezený a po použití invalidovaný. Pokud uživatel změní heslo, nabídni odhlášení ostatních sessions. U adminů a citlivých účtů ho udělej jako výchozí volbu.
+
+Codyho komentář: největší bezpečnostní upgrade malého SaaS často není „přidáme enterprise SSO“. Je to konečně přestat posílat chybové hlášky typu „účet neexistuje“ a uložit reset token tak, aby nebyl další heslo v převleku.
+
+## AH.3 MFA a passwordless přidej tam, kde snižují riziko
+
+Vícefaktorové ověření je skvělé, pokud je dobře navržené. Pokud je povinné pro každého uživatele i pro triviální produkt, může snížit adopci. Pokud není dostupné pro adminy, je to bezpečnostní dluh s cedulkou „později“.
+
+Doporučený postup pro malý B2B SaaS:
+
+1. Nejdřív nabídni MFA pro vlastní tým a admin role.
+2. Potom ho umožni zákazníkům na úrovni workspace.
+3. U citlivých akcí vyžaduj re-autentizaci, i když session stále běží.
+4. Připrav recovery proces dřív, než první člověk ztratí telefon.
+5. Do dokumentace napiš, kdo může MFA resetovat a jak se to audituje.
+
+Passwordless přihlášení magic linkem může být pohodlné, ale není automaticky bezpečnější. E-mailová schránka se stává hlavním klíčem. Magic link proto musí být krátkodobý, jednorázový a nesmí fungovat donekonečna v přeposlaném vlákně. U B2B účtů zvaž kombinaci magic linku s potvrzeným zařízením, WebAuthn/passkeys nebo druhým faktorem pro citlivé akce.
+
+Privacy-first detail: nepoužívej „bezpečnost“ jako výmluvu pro neomezený fingerprinting zařízení. Pokud chceš detekovat podezřelé přihlášení, začni méně invazivně: změna země nebo ASN v agregované podobě, nová session, neobvyklý počet neúspěšných pokusů, změna citlivého nastavení. Uživatel má vědět, co hlídáš a proč.
+
+## AH.4 Session cookie je klíč od kanceláře
+
+Session identifikátor je pro aplikaci prakticky dočasný klíč. Kdo ho získá, může často jednat jako uživatel. Proto se session management nesmí brát jako detail frameworku, který „nějak bude“.
+
+Základní pravidla:
+
+- generuj session ID serverově a s dostatečnou náhodností,
+- po přihlášení a změně oprávnění session obnov,
+- session cookie nastav jako `HttpOnly`, `Secure` a podle kontextu `SameSite`,
+- session ukládej serverově nebo jako podepsaný token s jasnou expirací,
+- rozliš krátkou neaktivitu a maximální životnost session,
+- při odhlášení session opravdu invaliduj,
+- po změně hesla nebo MFA nabídni ukončení ostatních sessions.
+
+U SaaS aplikace přidej stránku „Aktivní přihlášení“: zařízení nebo prohlížeč, přibližný čas poslední aktivity, přibližná lokalita jen pokud ji opravdu používáš, a tlačítko „Odhlásit“. Nepotřebuješ ukazovat přesný fingerprint zařízení ani skladovat detailní historii každého kliknutí. Stačí dát uživateli kontrolu.
+
+Pozor na JWT mód „všechno dáme do tokenu“. Token s rolemi, e-mailem, tarifem a zákaznickými identifikátory se snadno rozleze do logů, browser storage a podpůrných nástrojů. Pokud používáš JWT, drž payload malý, nastav krátkou expiraci a promysli revokaci. Jinak se z pohodlí stane distribuovaný problém s hezkou tečkovanou syntaxí.
+
+## AH.5 Přihlašovací logy mají chránit účet, ne mapovat člověka
+
+Bez logů se bezpečnost dělá naslepo. S příliš detailními logy se zase staví databáze chování, kterou nikdo nechtěl vlastnit. Rozumný login audit log má odpovědět na otázky:
+
+- proběhlo přihlášení úspěšně nebo ne,
+- z jakého účtu nebo identifikátoru pokus přišel,
+- kdy se to stalo,
+- jaký typ ověření byl použit,
+- jestli šlo o citlivou změnu,
+- kdo provedl admin zásah do přístupu.
+
+Naopak opatrně s ukládáním plných IP adres, user-agentů, přesných geolokací a fingerprintů. Pokud je potřebuješ pro bezpečnostní vyšetření, nastav krátkou retenci a jasný účel. Do běžné produktové analytiky tyto údaje nepatří.
+
+Užitečná notifikace uživateli:
+
+> „Zaznamenali jsme nové přihlášení k vašemu účtu. Pokud jste to byli vy, není potřeba nic dělat. Pokud ne, změňte heslo a ukončete aktivní sessions.“
+
+Špatná notifikace:
+
+> „Klikněte sem, jinak účet zablokujeme.“
+
+První věta pomáhá. Druhá trénuje lidi na phishing. A phishing nepotřebuje tvoji UX podporu, poradí si sám.
+
+## AH.6 Checklist přihlašování a sessions
+
+Před spuštěním nebo větší úpravou autentizace projdi tento checklist:
+
+- Je jasné, které akce jsou nízké, střední a vysoké riziko.
+- Citlivé akce vyžadují re-autentizaci nebo druhý faktor.
+- Hesla se neukládají v čitelné podobě a reset tokeny jsou jednorázové.
+- Přihlášení, reset hesla a magic linky mají rate limiting.
+- Chybové hlášky neprozrazují existenci účtu.
+- Session cookie používá `HttpOnly`, `Secure` a vhodný `SameSite` režim.
+- Session se obnoví po přihlášení a změně oprávnění.
+- Uživatel může ukončit ostatní aktivní sessions.
+- Admin zásahy do přístupů jsou v audit logu s důvodem.
+- Přihlašovací logy mají retenci a nekrmí marketingovou analytiku.
+- MFA recovery proces je napsaný a vyzkoušený.
+- Dokumentace říká, kdo smí resetovat MFA, role a vlastnictví účtu.
+
+## Codyho komentář
+
+Autentizace je dobrý test zralosti produktu. Ne podle toho, kolik má vrstev, ale podle toho, jestli tým umí vysvětlit každý kompromis. Když někdo řekne „sbíráme detailní fingerprint pro bezpečnost“, moje první otázka je: jaký útok tím konkrétně řešíme, jak dlouho data držíme a proč nejde začít méně invazivně? Bez odpovědi je to jen sledování v bezpečnostním kabátku. S odpovědí to může být legitimní ochrana. Rozdíl je v disciplíně.
+
+## Shrnutí přílohy
+
+Přihlašování má být bezpečné, srozumitelné a přiměřené riziku. Malý SaaS nepotřebuje šmírovací aparát, aby chránil účty: potřebuje rozumná hesla, MFA pro citlivé role, bezpečné sessions, auditovatelné admin zásahy, krátkou retenci přihlašovacích logů a jasné recovery postupy. Nejlepší autentizace je ta, která drží útočníky venku, uživatele uvnitř a data pod kontrolou.
+
+---
+
 ## Zdroje
 
 - Martin Fowler: Feature Toggles — https://martinfowler.com/articles/feature-toggles.html
@@ -5691,6 +5818,10 @@ Feature flags pomáhají malému SaaS týmu nasazovat bezpečněji, pokud mají 
 - Google Search Central: Intro to how structured data markup works — https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data
 - Google Search Central: Learn about sitemaps — https://developers.google.com/search/docs/crawling-indexing/sitemaps/overview
 - Google Search Central: What is canonicalization — https://developers.google.com/search/docs/crawling-indexing/canonicalization
+- OWASP: Authentication Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html
+- OWASP: Session Management Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html
+- OWASP: Forgot Password Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Forgot_Password_Cheat_Sheet.html
+- NIST: Digital Identity Guidelines, Authentication and Authenticator Management — https://pages.nist.gov/800-63-4/sp800-63b.html
 - OWASP: Logging Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
 - OWASP: Top 10 for Large Language Model Applications — https://owasp.org/www-project-top-10-for-large-language-model-applications/
 - OWASP: Top 10 for LLM Applications 2025 — https://genai.owasp.org/resource/owasp-top-10-for-llm-applications-2025/
@@ -5710,6 +5841,7 @@ Feature flags pomáhají malému SaaS týmu nasazovat bezpečněji, pokud mají 
 
 ## Pracovní log
 
+- 2026-08-08: Přidána příloha AH o přihlašování a session managementu bez digitální paranoie: rizikové úrovně akcí, hesla a reset, MFA/passwordless, bezpečné session cookies, přihlašovací logy a checklist.
 - 2026-08-08: Přidána příloha AG o feature flags a rolloutech bez chaosu: výběr vhodných přepínačů, vlastnictví, plán postupného zapnutí, kill switch, privacy-first segmentace a checklist úklidu.
 - 2026-08-08: Přidána příloha AF o stagingu a testovacích prostředích bez produkčních dat: účely prostředí, seed a syntetická data, ochočené integrace, oddělené secrets, release kontrola a checklist.
 - 2026-08-08: Přidána příloha AE o cookie liště a consent vrstvě bez dark patternů: inventář cookies, férová tlačítka, blokování volitelných skriptů před souhlasem, preference center, privacy-first analytika a checklist.
