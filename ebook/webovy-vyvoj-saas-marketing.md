@@ -7271,7 +7271,137 @@ Ke každé metrice přidej vlastníka a reakci. Pokud metrika nemá reakci, je t
 
 SaaS finance nejsou jen investor deck a MRR graf. Jsou to každodenní provozní rozhodnutí: co stojí zákazník, kolik bere supportu, které náklady rostou s používáním a jestli cena chrání kvalitu služby. Privacy-first provoz do toho přidává disciplínu: počítat nejen peníze, ale i riziko, kontrolu nad daty a dlouhodobou důvěru. Dobrá tabulka nemá ohromit. Má zabránit tomu, aby tým prodával produkt, který s každým novým zákazníkem tiše krvácí.
 
+# Příloha AS: Retence a churn bez sledovacího akvária
+
+Růst SaaS vypadá nejlépe ve chvíli, kdy se díváš jen na nové registrace. To je bohužel stejné jako hodnotit hospodu podle počtu lidí, kteří otevřeli dveře. Důležitější otázka zní: kdo zůstal, kdo se vrátil, kdo začal produkt používat pravidelně a kdo tiše mizí, zatímco dashboard pořád slavnostně ukazuje „nový trial“.
+
+Retence není trik, jak uživatele uvěznit. Privacy-first retence znamená pomoct zákazníkovi dosáhnout výsledku, kvůli kterému si produkt pořídil, bez toho, abys z každého kliknutí stavěl psychologický profil. Churn není jen číslo ve sloupci. Je to zpětná vazba, že produkt, onboarding, cena, očekávání nebo provozní důvěra někde nedodaly slíbenou hodnotu.
+
+## AS.1 Definuj, co znamená „zůstal“
+
+Než začneš počítat churn, napiš si, co je u tvého produktu zdravé pokračování. U jednoho SaaS je to zaplacený další měsíc. U druhého aktivní tým, který každý týden dokončí konkrétní úkol. U třetího pravidelné používání integrace, která šetří ruční práci. Samotné přihlášení do aplikace může být slabý signál: člověk se mohl přijít jen podívat, proč mu chodí faktura.
+
+Praktické definice podle typu produktu:
+
+| Typ SaaS | Slabý signál | Lepší retenční signál |
+| --- | --- | --- |
+| Rezervační systém | uživatel se přihlásil | vytvořil nebo obsloužil rezervace v posledních 30 dnech |
+| Fakturační nástroj | otevřel dashboard | vystavil fakturu nebo importoval platby |
+| Týmová znalostní báze | přečetl článek | upravil stránku, vyhledal odpověď nebo sdílel odkaz kolegovi |
+| AI asistent pro podporu | spustil chat | vyřešil ticket nebo připravil odpověď ke schválení |
+
+Jedna dobrá věta pro tým:
+
+> „Zákazník je u nás retenčně zdravý, když alespoň jednou týdně dokončí akci, kvůli které produkt platí.“
+
+Tahle věta není dokonalá pro každý produkt. Ale donutí tým mluvit o hodnotě, ne o návštěvnosti. A to je velký rozdíl.
+
+## AS.2 Churn rozděl podle příčiny, ne podle nálady
+
+Když zákazník odejde, nestačí štítek „cancelled“. Ten je účetně pravdivý a produktově skoro k ničemu. Potřebuješ rozlišit, proč odchod nastal. Ne proto, abys zákazníka naháněl jako ztracenou kozu, ale abys věděl, co zlepšit.
+
+Užitečné kategorie churnu:
+
+- **Nenašel hodnotu:** zákazník neprošel onboardingem, nepochopil první krok nebo neměl správný use case.
+- **Produkt nestačil:** chyběla klíčová funkce, integrace, workflow nebo výkon.
+- **Cena neseděla:** zákazník vnímal cenu jako vyšší než výsledek, který dostal.
+- **Důvěra praskla:** výpadek, bezpečnostní obava, nejasná práce s daty nebo špatná komunikace.
+- **Přirozený konec:** projekt skončil, firma změnila proces nebo už produkt nepotřebuje.
+- **Špatný fit:** zákazník nikdy nebyl ideální cílovka, jen se vešel do marketingového slibu až moc volně.
+
+Privacy-first doporučení: důvod odchodu se ptej krátce, dobrovolně a bez manipulace. Stačí jeden výběr a volitelné textové pole. Žádné temné vzory typu „než odejdete, projděte devět obrazovek viny“. Pokud zákazník chce odejít, odchod má být srozumitelný. Důstojný exit je taky součást značky.
+
+## AS.3 Včasné signály hledej v produktu, ne v osobním špehování
+
+Retenční signály nemusí být invazivní. Ve většině B2B SaaS stačí sledovat agregované produktové události, které přímo souvisí s hodnotou. Nepotřebuješ vědět, jak dlouho někdo váhal nad tlačítkem nebo kam přesně pohnul myší. Potřebuješ vědět, jestli produkt plní práci.
+
+Příklady bezpečných signálů:
+
+- počet dokončených klíčových akcí za účet,
+- počet aktivních týmových členů v účtu,
+- poslední úspěšné použití kritické integrace,
+- počet otevřených support ticketů podle typu problému,
+- počet neúspěšných importů, plateb nebo automatizací,
+- poměr účtů, které dokončily první hodnotový krok v trialu.
+
+Pozor na falešný klid. Nízké používání nemusí vždy znamenat nespokojenost. Některé produkty mají hodnotu právě tím, že běží tiše na pozadí. Proto si ke každému signálu napiš interpretaci. Například „žádné přihlášení“ je problém u projektového nástroje, ale nemusí být problém u monitoringu, pokud alerty chodí a zákazník dostává report.
+
+Codyho komentář: dobrá retence není snaha zvýšit počet kliků. Je to snaha snížit počet důvodů, proč zákazník musí na produkt naštvaně myslet.
+
+## AS.4 Onboarding je retenční práce, ne uvítací konfeta
+
+Největší část churnu často vznikne dávno před zrušením účtu. Zákazník odejde v hlavě ve chvíli, kdy si řekne: „Nevím, co dál“ nebo „Tohle mi nestojí za energii“. Onboarding proto nemá ukazovat všechny funkce. Má dovést zákazníka k prvnímu výsledku.
+
+Praktický onboardingový řez:
+
+1. **První hodnota:** Co má zákazník dokončit během prvních 10 minut?
+2. **První důkaz:** Jak pozná, že produkt opravdu něco zlepšil?
+3. **První návyk:** Jaký opakovaný krok má udělat příští týden?
+4. **První bezpečný kontakt:** Kde se zeptá, když se zasekne, bez posílání citlivých dat?
+5. **První úklid:** Jak odstraní testovací data, pozvané lidi nebo pokusy, které nechce držet?
+
+Příklad pro B2B nástroj:
+
+> Místo „Pozvěte celý tým a nastavte všechny integrace“ začni menším slibem: „Nahrajte jeden testovací případ, zkontrolujte výsledek a rozhodněte, jestli workflow odpovídá realitě.“
+
+Tím snížíš riziko, že zákazník pošle do nového nástroje hromadu dat dřív, než ví, jestli ho bude používat. Privacy-first onboarding je postupný: nejdřív hodnota, potom širší adopce.
+
+## AS.5 Win-back kampaně dělej lidsky a s limitem
+
+Když zákazník odejde, může dávat smysl ozvat se později. Ale win-back není povolenka k nekonečnému e-mailovému bubnování. Pokud máš důvod, napiš stručně, konkrétně a s respektem k tomu, že zákazník už jednou řekl ne.
+
+Dobrá win-back zpráva obsahuje:
+
+- proč píšeš právě teď,
+- co se změnilo od odchodu,
+- proč by to mohlo řešit původní problém,
+- jednoduchou možnost odpovědět nebo ignorovat,
+- jasné nastavení, že další podobné zprávy posílat nebudeš, pokud nechce.
+
+Příklad:
+
+> „Ahoj, naposledy jste odcházeli kvůli chybějícímu exportu pro účetní. Ten jsme teď doplnili včetně auditního logu a mazání dočasných souborů po 14 dnech. Pokud to chcete zkusit na jednom testovacím účtu, rád pošlu krátký postup. Když se neozvete, beru to jako ne a nebudu vás s tím dál otravovat.“
+
+Tohle je obchodní, ale ne vtíravé. A hlavně: pracuje s konkrétním důvodem, ne s masovým „chybíte nám“ e-mailem, který chybí asi tak upřímně jako automatická narozeninová sleva.
+
+## AS.6 Retenční review jednou měsíčně
+
+Retence se nedá řídit jen v hlavě zakladatele. Jednou měsíčně si udělej krátké review a hledej vzory. Ne drama. Ne tribunál. Jen věcnou kontrolu.
+
+Mini agenda na 45 minut:
+
+- Kolik zákazníků odešlo a v jakých kategoriích důvodu?
+- Kolik účtů je retenčně zdravých podle naší definice?
+- Kde se lidé nejčastěji zaseknou před první hodnotou?
+- Které support dotazy se opakují u nových zákazníků?
+- Která funkce slibuje hodnotu, ale má nízké dokončení?
+- Jaký jeden retenční experiment uděláme příští měsíc?
+
+Výstup nemá být „zlepšit onboarding“. To je přání. Výstup má být konkrétní:
+
+> „Do 14 dnů upravíme první obrazovku onboarding flow tak, aby zákazník importoval jen jeden testovací záznam, ne celý dataset. Úspěch: o 20 % více trial účtů dokončí první hodnotový krok.“
+
+Pokud uvádíš procentní cíl, ber ho jako interní hypotézu, ne univerzální benchmark. Každý SaaS má jinou frekvenci použití, jiný nákupní cyklus a jinou toleranci k setupu.
+
+## AS.7 Checklist retence a churnu bez slídění
+
+- [ ] Máme jednu jasnou definici retenčně zdravého zákazníka.
+- [ ] Měříme hodnotové akce, ne náhodné klikání.
+- [ ] Důvody odchodu sbíráme krátce, dobrovolně a bez nátlaku.
+- [ ] Onboarding vede k prvnímu výsledku, ne k prohlídce všech funkcí.
+- [ ] Retenční signály jsou vysvětlené a nejdou automaticky zaměnit za osobní profilování.
+- [ ] Support tagy pomáhají najít opakující se překážky.
+- [ ] Win-back komunikace má konkrétní důvod a rozumný limit.
+- [ ] Exit z produktu je srozumitelný, důstojný a neobsahuje dark patterns.
+- [ ] Jednou měsíčně proběhne retenční review s jedním konkrétním rozhodnutím.
+- [ ] Data o churnu mají vlastníka, účel a retenční dobu.
+
+## Shrnutí přílohy
+
+Retence není o tom přimět zákazníka zůstat za každou cenu. Je o tom dodat slíbenou hodnotu dřív, jasněji a s menším třením. Churn pak není ostuda, ale diagnostika. Privacy-first přístup drží retenci při zemi: měř hodnotové signály, ptej se stručně, nešpehuj chování, nedělej z odchodu únikovou místnost a používej win-back jen tehdy, když máš konkrétní důvod.
+
 ## Pracovní log
+- 2026-08-08: Přidána příloha AS o retenci a churnu bez invazivního sledování: definice zdravého zákazníka, důvody odchodu, hodnotové signály, onboarding, win-back komunikace a měsíční retenční review.
 - 2026-08-08: Přidána příloha AR o SaaS financích a unit economics bez tabulkového divadla: zákaznická jednotka, oddělení služeb od produktu, provozní náklady, cashflow, pricing, dashboard a checklist.
 - 2026-08-08: Přidána příloha AQ o referral a partnerském marketingu bez sledovací pasti: odměňovaný výsledek, referral kódy, bezpečný dashboard, pravidla programu, technické řešení a checklist.
 - 2026-08-08: Přidána příloha AP o privacy mikrocopy v produktu: rozhodovací momenty, konkrétní datové věty, férový tón, soulad s chováním systému, knihovna mikrotextů a checklist.
