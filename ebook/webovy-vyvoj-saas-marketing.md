@@ -6874,7 +6874,140 @@ Marketingový stack má být jako dobře sbalený batoh na výlet: víš, co v n
 
 Minimalistický marketingový stack začíná schopnostmi, ne nákupem nástrojů. Web, formulář, e-mail, CRM, analytika a vlastněné distribuční kanály stačí většině malých SaaS týmů překvapivě dlouho. Každý skript posuzuj jako dodavatele, CRM drž jako pracovní paměť, automatizace vybav brzdou a jednou měsíčně stack zjednoduš. Privacy-first marketing v Evropě má měřit dost na dobrá rozhodnutí, ale ne tolik, aby z každého návštěvníka vyráběl dossier.
 
+
+---
+
+# Příloha AP: Privacy mikrocopy v produktu bez právnické mlhy
+
+Privacy-first produkt se nepozná jen podle toho, že má stránku se zásadami ochrany osobních údajů. Pozná se podle drobných vět ve správných chvílích: u formuláře, exportu, integrace, pozvánky do týmu, mazání účtu, zapnutí AI funkce nebo sdílení reportu. Mikrocopy je malý text s velkým dopadem. Umí snížit nejistotu, vysvětlit datový tok a zabránit tomu, aby uživatel klikl na něco, čemu nerozumí.
+
+Právní dokumenty jsou nutné, ale uživatel je nečte při každém rozhodnutí. Evropská komise v informacích k GDPR uvádí, že lidé mají při sběru osobních údajů dostat jasné informace mimo jiné o účelu, právním základu, době uložení, příjemcích a svých právech: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/what-information-must-be-given-individuals-whose-data-collected_en. Pracovní skupina WP29, jejíž pokyny k transparentnosti převzal EDPB, zdůrazňuje, že informace mají být stručné, transparentní, srozumitelné a snadno dostupné: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/transparency-under-regulation-2016679_en.
+
+Mikrocopy není náhrada právní dokumentace. Je to most mezi produktem a právní realitou. Pokud ten most chybí, uživatel stojí před tlačítkem a přemýšlí: „Co se teď stane s mými daty?“ A když musí hádat, důvěra mizí rychleji než roadmapa po prvním enterprise callu.
+
+## AP.1 Piš privacy věty tam, kde vzniká rozhodnutí
+
+Nejhorší místo pro vysvětlení datového toku je až někde v patičce. Uživatel potřebuje kontext ve chvíli, kdy dává údaj, zapíná funkci nebo mění oprávnění. Krátká věta u správného prvku často udělá víc než dlouhý odstavec v dokumentu, který nikdo neotevřel.
+
+Místa, kde privacy mikrocopy patří:
+
+- kontaktní formulář,
+- registrace a onboarding,
+- nastavení integrací,
+- pozvánka nového člena týmu,
+- export dat,
+- smazání účtu nebo projektu,
+- zapnutí AI asistenta,
+- nahrání souboru,
+- sdílení reportu veřejným odkazem,
+- změna e-mailových preferencí.
+
+Slabé mikrocopy: „Odesláním souhlasíte se zpracováním osobních údajů.“
+
+Lepší mikrocopy: „E-mail použijeme k odpovědi na dotaz. Bez vašeho samostatného souhlasu vás nepřidáme do marketingového seznamu.“
+
+Ještě lepší je přidat odkaz na detail: „Podrobnosti najdete v zásadách ochrany soukromí.“ Krátký text řeší okamžité rozhodnutí, dlouhý dokument řeší kompletní odpovědnost. Oba mají spolupracovat, ne se nahrazovat.
+
+## AP.2 Jedna věta má odpovědět na čtyři otázky
+
+Dobrá privacy věta nemusí být dlouhá. Má ale říct to podstatné: co sbíráme, proč, kdo to uvidí a jak dlouho to bude potřeba. Ne vždy se všechno vejde do jedné věty, ale tyhle čtyři otázky jsou užitečný filtr.
+
+Šablona:
+
+> „[Údaj] použijeme k [účel]. Uvidí ho [role nebo tým]. Uchováme ho [doba nebo pravidlo].“
+
+Příklady:
+
+- „Telefon je volitelný; použijeme ho jen tehdy, když chcete rychlou domluvu hovoru.“
+- „Nahraný CSV soubor použijeme pro import kontaktů a po dokončení importu ho smažeme z dočasného úložiště.“
+- „Diagnostické logy uvidí podpora a vývojáři jen po dobu řešení incidentu.“
+- „Veřejný odkaz zpřístupní report komukoli, kdo ho má. Nesdílejte ho pro citlivá data.“
+- „AI shrnutí pracuje s textem tohoto ticketu. Nepřidávejte do něj hesla ani citlivé údaje, které nejsou nutné pro řešení.“
+
+Pozor na falešný klid. Věta „vaše data jsou u nás v bezpečí“ sama o sobě nic nevysvětluje. Bez konkrétnosti je to spíš digitální vonná svíčka. Hezky voní, ale incident nezastaví.
+
+## AP.3 Tón má být klidný, ne vyděračský
+
+Privacy texty často sklouznou do dvou extrémů. Buď jsou právnicky neproniknutelné, nebo teatrálně straší. Ani jedno nepomáhá. Uživatel potřebuje vědět, co dělá, ne být trestán za opatrnost.
+
+Nevhodné formulace:
+
+- „Bez souhlasu nemůžeme poskytovat nejlepší zážitek.“
+- „Pokud odmítnete, některé části webu nemusí fungovat správně.“ když ve skutečnosti jde jen o marketingové měření.
+- „Souhlasím se vším potřebným pro zlepšování služeb.“
+- „Beru na vědomí obchodní komunikaci.“ když jde fakticky o newsletter.
+
+Lepší formulace:
+
+- „Volitelnou analytiku používáme k pochopení, které návody lidem pomáhají. Web funguje i bez ní.“
+- „Newsletter posíláme nejvýše dvakrát měsíčně. Odhlášení je v každém e-mailu.“
+- „Tuto integraci můžete kdykoli odpojit v nastavení. Po odpojení zastavíme nové synchronizace.“
+- „Smazání projektu odstraní jeho data z aktivního systému. Zálohy doběhnou podle retenčního plánu.“
+
+EDPB v pokynech ke souhlasu připomíná, že souhlas má být svobodný, konkrétní, informovaný a jednoznačný: https://www.edpb.europa.eu/documents/guideline/guidelines-052020-on-consent-under-regulation-2016679_en. Prakticky to znamená: žádné předem zaškrtnuté pasti, žádné tlačítko „odmítnout“ schované za labyrintem a žádné věty, které předstírají souhlas tam, kde uživatel jen potřebuje dokončit službu.
+
+## AP.4 Mikrocopy musí sedět na skutečné chování systému
+
+Největší riziko privacy mikrocopy není špatná čeština. Je to nesoulad s realitou. Pokud text říká „data smažeme po 30 dnech“, ale systém je drží v logu půl roku, problém není stylistický. Problém je důvěra, provoz a možná i compliance.
+
+Před publikací privacy věty ověř:
+
+- jestli produkt opravdu dělá to, co text slibuje,
+- jestli existuje vlastník datového toku,
+- jestli retence odpovídá nastavení systému,
+- jestli podpora ví, jak text vysvětlit zákazníkovi,
+- jestli je věta stejná v produktu, dokumentaci a obchodních materiálech,
+- jestli překlady nemění význam.
+
+Mini proces pro tým:
+
+1. Produkt navrhne text u konkrétní akce.
+2. Vývoj potvrdí, že text odpovídá technickému chování.
+3. Privacy nebo právní vlastník zkontroluje přesnost.
+4. Support doplní, jestli tomu bude rozumět zákazník.
+5. Text se uloží k dané funkci, ne do zapomenutého dokumentu.
+
+Tohle zní jako hodně práce jen kvůli jedné větě. Jenže jedna nepřesná věta u mazání účtu umí vyrobit víc podpory než celý špatně pojmenovaný sprint.
+
+## AP.5 Knihovna mikrotextů šetří konzistenci
+
+Když každý tým píše privacy věty po svém, produkt začne znít jako výbor pěti osobností v jednom kabátě. Jednou „odstraníme“, podruhé „vymažeme“, potřetí „deaktivujeme“, počtvrté „anonymizujeme“. Pro uživatele jsou to různé sliby. Pro tým často jen náhodná slovíčka.
+
+Vytvoř si jednoduchou knihovnu mikrotextů:
+
+| Situace | Doporučený text | Poznámka pro tým |
+| --- | --- | --- |
+| Kontaktní formulář | „Údaje použijeme jen k odpovědi na tuto zprávu.“ | nepřidávat newsletter bez samostatného opt-inu |
+| Nahrání souboru | „Soubor použijeme pro tuto akci a nebudeme ho používat k trénování modelů.“ | pokud je to pravda i u dodavatele |
+| Export dat | „Export si může stáhnout jen uživatel s rolí administrátora.“ | ověřit role a audit log |
+| Veřejné sdílení | „Kdokoli s odkazem může tento obsah zobrazit.“ | použít i u neveřejných URL |
+| Odpojení integrace | „Po odpojení zastavíme nové synchronizace; dříve přenesená data zůstávají podle nastavení retence.“ | důležité pro očekávání zákazníka |
+
+Knihovna nemusí být složitá. Stačí Markdown dokument, tabulka ve znalostní bázi nebo komponentová dokumentace u formulářů a modalů. Hlavní je, aby texty měly vlastníka a aby změna produktu spustila i změnu textu.
+
+## AP.6 Checklist privacy mikrocopy
+
+- [ ] U každého citlivějšího kroku je krátce vysvětleno, co se stane s daty.
+- [ ] Text odpovídá skutečnému chování systému, retenci a přístupům.
+- [ ] Formulace je konkrétní: účel, příjemce, doba nebo navazující akce.
+- [ ] Souhlas není maskovaný jako povinné potvrzení služby.
+- [ ] Odmítnutí volitelného měření nebo marketingu není napsané jako trest.
+- [ ] Produkt, dokumentace, support a obchod používají stejná slova pro stejné akce.
+- [ ] AI funkce jasně říkají, jaká data zpracují a co se s nimi nestane.
+- [ ] Veřejné odkazy, exporty a mazání mají vlastní varování před nevratným nebo sdíleným dopadem.
+- [ ] Mikrocopy obsahuje odkaz na detailní privacy dokument tam, kde je to potřeba.
+- [ ] Knihovna textů má vlastníka a pravidelnou revizi.
+
+## Codyho komentář
+
+Dobré privacy mikrocopy je produktová empatie v montérkách. Neříká „věř nám, máme PDF“. Říká „tady přesně vidíš, co se stane“. A to je v evropském SaaS světě překvapivě silná výhoda. Ne proto, že by lidé milovali právní texty. Protože milují pocit, že je někdo netahá za nos. Šokující inovace, já vím.
+
+## Shrnutí přílohy
+
+Privacy mikrocopy patří přímo do rozhodovacích momentů produktu. Piš krátce, konkrétně a klidně: co sbíráš, proč, kdo to uvidí a jak dlouho. Text musí odpovídat skutečnému chování systému, jinak nevyrábí důvěru, ale budoucí problém. Knihovna mikrotextů pomáhá držet konzistenci mezi produktem, dokumentací, podporou a obchodem. Privacy-first značka se nestaví jen velkými zásadami, ale stovkou malých vět, které uživatele nenechají hádat.
+
 ## Pracovní log
+- 2026-08-08: Přidána příloha AP o privacy mikrocopy v produktu: rozhodovací momenty, konkrétní datové věty, férový tón, soulad s chováním systému, knihovna mikrotextů a checklist.
 - 2026-08-08: Přidána příloha AO o minimalistickém marketingovém stacku: schopnosti před nástroji, externí skripty jako dodavatelé, střídmé CRM, férové automatizace, měsíční stack review a checklist.
 - 2026-08-08: Přidána příloha AN o zpracovatelských smlouvách, rolích správce/zpracovatele, registru subprocesorů, vendor review, oznamování změn dodavatelů a praktickém checklistu.
 - 2026-08-08: Přidána příloha AM o žádostech subjektů údajů: jeden vstup, vlastník, ověření identity, mapa dat, bezpečné odpovědi, výmazové hranice, automatizace a checklist.
