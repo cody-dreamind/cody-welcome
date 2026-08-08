@@ -4769,6 +4769,120 @@ EDPB v přehledu pro malé firmy připomíná, že data protection by design and
 Přístupy nejsou administrativní detail. Jsou to brzdy, zámky a zpětná zrcátka privacy-first provozu. Malý tým nepotřebuje korporátní byrokracii, ale potřebuje vlastní účty, jasné role, MFA, správce tajemství, dočasné výjimky, auditní stopu a offboardingový checklist. Čím méně trvalých výjimek, tím méně dramatických večerů s titulkem „kdo ještě má přístup kam?“.
 
 
+
+# Příloha AA: Transakční e-maily, doména a doručitelnost bez marketingového cirkusu
+
+SaaS může mít krásný onboarding, vymazlenou cenovou stránku a administraci, ve které by i účetní na chvíli uvěřila v design. Jenže když se potvrzovací e-mail, reset hesla nebo faktura zatoulá do spamu, produkt vypadá rozbitě. E-mail není nudná technická příloha. Je to součást zákaznické zkušenosti, bezpečnosti i důvěry.
+
+Privacy-first přístup u e-mailu znamená dvě věci najednou: posílat méně zbytečností a posílat důležité zprávy tak, aby dorazily. Neznamená to bombardovat uživatele newslettery, otevřeními, pixely a desetidílnou sekvencí „jen připomínám“. Znamená to mít čistou doménu, jasný účel každého e-mailu, funkční odhlášení, rozumnou autentizaci a auditovatelný provoz.
+
+Google ve svých sender guidelines popisuje požadavky na ověřování odesílatelů, nízkou míru spamu, snadné odhlášení a správné DNS nastavení pro hromadné odesílatele: https://support.google.com/mail/answer/81126?hl=en Yahoo ve svých best practices podobně zdůrazňuje autentizaci, reputaci a respekt k příjemcům: https://senders.yahooinc.com/best-practices/
+
+## AA.1 Odděl transakční, produktové a marketingové e-maily
+
+První chyba je házet všechny e-maily do jednoho pytle. Reset hesla, faktura, bezpečnostní upozornění, onboardingový tip a marketingová pozvánka na webinář nejsou stejný typ komunikace. Mají jiný účel, jinou naléhavost, jiné právní zdůvodnění a jinou toleranci k selhání.
+
+Rozděl e-mailový provoz minimálně takto:
+
+| Typ e-mailu | Příklad | Priorita | Tracking | Odhlášení |
+| --- | --- | --- | --- | --- |
+| Bezpečnostní | reset hesla, nové přihlášení, změna MFA | kritická | žádný marketingový tracking | ne, ale obsah musí být věcný |
+| Transakční | faktura, potvrzení objednávky, změna tarifu | vysoká | žádný marketingový tracking | většinou ne |
+| Produktový | onboarding, upozornění na stav importu, shrnutí aktivity | střední | jen nutné doručení a chyby | podle povahy sdělení |
+| Marketingový | newsletter, pozvánka, promo nabídka | nízká až střední | střídmé měření, bez šmírovacích pixelů | ano, viditelně a funkčně |
+
+Doporučení: používej samostatné subdomény podle účelu. Například `mail.example.com` pro marketing, `notify.example.com` pro produktová upozornění a hlavní doménu chránit pro firemní komunikaci. Není to povinný rituál v kapuci, ale pomáhá řídit reputaci a řešit incidenty bez toho, aby jeden nepovedený newsletter ohrozil doručování faktur.
+
+## AA.2 Doména musí umět dokázat, že jsi to ty
+
+E-mail historicky vznikl ve světě, kde si lidé víc věřili a méně automatizovaně lhali. Dnes musí doména technicky prokazovat, kdo za zprávou stojí. Základ tvoří SPF, DKIM a DMARC.
+
+Prakticky:
+
+- **SPF** říká, které servery smějí posílat e-maily za doménu.
+- **DKIM** podepisuje zprávu kryptograficky, aby příjemce poznal, že ji cestou nikdo nepřepsal.
+- **DMARC** říká, co se má stát, když SPF nebo DKIM nesedí, a posílá reporty o zneužití.
+
+DMARC je definovaný v RFC 7489: https://www.rfc-editor.org/rfc/rfc7489 Začni politikou `p=none`, sbírej reporty a teprve potom postupně zpřísňuj na `quarantine` nebo `reject`. Přepnout novou doménu rovnou na tvrdý režim bez kontroly je jako zamknout kancelář a až pak zjišťovat, kdo má klíče. Bezpečné? Možná. Praktické? Jen pokud máš rád telefonáty.
+
+Základní DNS checklist:
+
+- SPF záznam existuje a neobsahuje deset starých dodavatelů z archeologických vrstev firmy.
+- DKIM je zapnutý pro každý nástroj, který posílá jménem domény.
+- DMARC adresa pro reporty vede do sledované schránky nebo nástroje, ne do digitálního sklepa.
+- Subdomény mají vlastní politiku nebo jasně dědí hlavní pravidla.
+- Po změně e-mailového nástroje se staré DNS záznamy uklidí.
+
+## AA.3 Odhlášení má být rychlé, ne pasivně agresivní
+
+Marketingový e-mail bez snadného odhlášení je krátkodobý trik a dlouhodobý reputační dluh. Člověk, který už nechce zprávy, má mít jednoduchou cestu ven. Když mu ji nedáš, použije tlačítko „Spam“. To je sice také zpětná vazba, ale taková, která ti kope doručitelnost do kotníků.
+
+Pro marketingové a hromadné zprávy nastav:
+
+- viditelný odkaz pro odhlášení v těle e-mailu,
+- `List-Unsubscribe` hlavičku,
+- one-click unsubscribe podle RFC 8058, kde to dává smysl: https://www.rfc-editor.org/rfc/rfc8058
+- okamžité nebo velmi rychlé propsání odhlášení do seznamu,
+- žádné přihlašování jen kvůli odhlášení,
+- žádné výčitkové formulace typu „opravdu nás opouštíte?“ — nejsme telenovela.
+
+Privacy-first varianta je jednoduchá: respektuj volbu příjemce a nesnaž se ji obejít jiným kanálem. Pokud se někdo odhlásí z newsletteru, neposílej mu stejný obsah jako „produktové upozornění“. To není segmentace. To je marketing s nalepeným knírkem.
+
+## AA.4 Obsah e-mailu má být konkrétní a úsporný
+
+Každý e-mail by měl odpovědět na tři otázky: proč mi to přišlo, co se změnilo a co mám udělat dál. Pokud e-mail neumí odpovědět, možná neměl být poslán.
+
+Šablona dobrého transakčního e-mailu:
+
+1. Jasný předmět: „Faktura za tarif Team za srpen 2026“ místo „Vaše aktualizace“.
+2. Jedna věta kontextu: „Posíláme fakturu za aktivní tarif workspace Acme.“
+3. Konkrétní akce: stáhnout fakturu, zkontrolovat platbu, obnovit heslo.
+4. Bezpečnostní poznámka, pokud jde o účet: „Pokud jste akci neprovedli, kontaktujte podporu.“
+5. Minimum osobních údajů v těle e-mailu.
+6. Přímý odkaz na vlastní doménu, ne zkracovač a ne trackingovou mašinu.
+7. Kontakt na podporu nebo odkaz na dokumentaci.
+
+Neposílej citlivý obsah v e-mailu, pokud stačí oznámení a bezpečný odkaz do aplikace. E-mail je skvělý nosič signálu, ale mizerný trezor. Reset hesla má obsahovat jednorázový odkaz s expirací, ne nové heslo. Faktura může být příloha nebo odkaz, ale produktová data zákazníka by se neměla válet v inboxu jen proto, že to bylo rychlé.
+
+## AA.5 Měř doručitelnost bez šmírování lidí
+
+Otevření e-mailu je slabý signál. Blokování obrázků, proxy servery a ochrany soukromí z něj dělají číslo, které se tváří přesněji, než je. Pro privacy-first provoz je lepší sledovat technické a obchodní signály, které nevyžadují sledovat jednotlivce přes pixel.
+
+Sleduj hlavně:
+
+- bounce rate podle typu e-mailu,
+- spam complaint rate u marketingu,
+- počet nedoručených transakčních zpráv,
+- rychlost doručení kritických e-mailů,
+- doménové reputační problémy,
+- odhlášení a důvody, pokud je lidé dobrovolně vyplní,
+- support tickety typu „nepřišel mi e-mail“.
+
+U důležitých toků přidej produktovou pojistku: když se e-mail nepovede doručit, ukaž zprávu i v aplikaci. Faktura má být dostupná v zákaznické zóně. Stav importu má být vidět v produktu. E-mail je notifikace, ne jediná kopie reality.
+
+Codyho komentář: Pokud manažerský dashboard stojí hlavně na open rate, je to trochu jako řídit auto podle toho, kolik lidí se podívalo z okna. Nějaký signál tam je, ale brzdy bych podle toho nenastavoval.
+
+## AA.6 Checklist e-mailového provozu
+
+Před spuštěním nebo větší kampaní projdi tento seznam:
+
+- Má každý typ e-mailu jasný účel a vlastníka?
+- Jsou transakční, produktové a marketingové e-maily oddělené alespoň procesně, ideálně i subdoménou?
+- Je nastavené SPF, DKIM a DMARC pro všechny odesílací nástroje?
+- Existuje plán postupného zpřísnění DMARC politiky?
+- Funguje odhlášení z marketingových zpráv bez přihlášení a bez prosebného divadla?
+- Nepoužívají transakční e-maily marketingové pixely?
+- Obsahují e-maily jen data nutná pro svůj účel?
+- Vedou odkazy na vlastní doménu a nepoužívají zkracovače?
+- Má tým dashboard nebo report pro bounces, complaints a kritická selhání doručení?
+- Existuje fallback v aplikaci pro důležité informace, které e-mail nemusí doručit?
+- Po odchodu dodavatele nebo nástroje se uklidí DNS záznamy, API klíče a šablony?
+
+## Shrnutí přílohy
+
+E-mailový provoz je důvěryhodnost v praxi. Dobře nastavená doména, oddělené typy zpráv, SPF/DKIM/DMARC, férové odhlášení a střídmé měření chrání doručitelnost i soukromí lidí. Privacy-first SaaS neposílá víc e-mailů, než musí. Posílá ty správné, s jasným účelem a bez datového konfeti.
+
+
 ## Zdroje
 
 - EDPB: Be compliant — Data protection guide for small business — https://www.edpb.europa.eu/sme/be-compliant/be-compliant_en
@@ -4797,6 +4911,10 @@ Přístupy nejsou administrativní detail. Jsou to brzdy, zámky a zpětná zrc�
 - EDPB: Data protection guide for small business — Be compliant — https://www.edpb.europa.eu/sme/be-compliant/be-compliant_en
 - European Commission: NIS2 Directive FAQs — https://digital-strategy.ec.europa.eu/en/faqs/directive-measures-high-common-level-cybersecurity-across-union-nis2-directive-faqs
 - EURid: Find a registrar — https://eurid.eu/en/get-your-eu/find-a-registrar/
+- Google Workspace Admin Help: Email sender guidelines — https://support.google.com/mail/answer/81126?hl=en
+- Yahoo Sender Hub: Best practices — https://senders.yahooinc.com/best-practices/
+- RFC Editor: RFC 7489 — Domain-based Message Authentication, Reporting, and Conformance (DMARC) — https://www.rfc-editor.org/rfc/rfc7489
+- RFC Editor: RFC 8058 — Signaling One-Click Functionality for List Email Headers — https://www.rfc-editor.org/rfc/rfc8058
 - Google Search Central: Understanding Google Page Experience — https://developers.google.com/search/docs/appearance/page-experience
 - Google Search Central: Creating helpful, reliable, people-first content — https://developers.google.com/search/docs/fundamentals/creating-helpful-content
 - Google Search Central: SEO Starter Guide — https://developers.google.com/search/docs/fundamentals/seo-starter-guide
@@ -4822,6 +4940,7 @@ Přístupy nejsou administrativní detail. Jsou to brzdy, zámky a zpětná zrc�
 
 ## Pracovní log
 
+- 2026-08-08: Přidána příloha AA o transakčních e-mailech a doručitelnosti: oddělení typů zpráv, SPF/DKIM/DMARC, férové odhlášení, úsporné šablony, privacy-first měření a checklist.
 - 2026-08-08: Přidána příloha Z o přístupech, rolích a offboardingu bez sdílených účtů: inventář systémů, role podle práce, dočasné přístupy, secrets, offboarding, měsíční access review a checklist.
 - 2026-08-08: Přidána příloha Y o platbách a fakturaci bez datového balastu: jasná cenová komunikace, postupný sběr fakturačních dat, oddělení platebních stavů, fakturační e-maily, refundace a checklist.
 - 2026-08-08: Přidána příloha X o přístupných privacy-first formulářích: datové minimum, labely, chybové hlášky, klávesnicové ovládání, antispam bez sledovacího výpalného a checklist.
