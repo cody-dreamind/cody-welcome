@@ -4535,6 +4535,122 @@ Před publikací formuláře projdi tento seznam:
 
 Přístupný formulář není charita ani compliance dekorace. Je to obchodní infrastruktura. Pomáhá více lidem dokončit akci, snižuje počet chyb, zlepšuje důvěru a zároveň nutí tým sbírat méně zbytečných dat. Privacy-first formulář je stručný, čitelný, opravuje chyby lidsky a nepouští třetí strany do každé poptávky jen proto, že spam existuje.
 
+
+# Příloha Y: Platby a fakturace bez datového balastu
+
+Platba je okamžik pravdy. Zákazník už pochopil hodnotu, rozhodl se zaplatit a očekává, že produkt nezakopne o vlastní administrativu. Přesto se právě tady často objeví formulář s dvaceti poli, nejasná cena, podivný redirect, fakturační chaos a support ticket s předmětem „kde je moje faktura“. Gratuluju, obchodní trychtýř právě uklouzl na účtence.
+
+Privacy-first platební tok neznamená, že si máš napsat vlastní platební bránu v garáži mezi kávou a existenciální krizí. Znamená to, že sbíráš jen fakturační a platební data, která opravdu potřebuješ, odděluješ citlivé platební údaje od produktu, zákazník přesně ví, co se stane, a interní tým má jasný postup pro změny tarifu, refundace, neúspěšné platby a odchod.
+
+## Y.1 Platební flow začíná už na cenové stránce
+
+Dobrá platba nezačíná klikem na tlačítko „Zaplatit“. Začíná tím, že zákazník předem chápe, za co platí, kdy se platba strhne, co je v ceně a co se stane po objednávce. Nejasnosti v platebním kroku jsou drahé: zákazník se lekne, přeruší nákup nebo zaplatí a hned píše na podporu.
+
+Před platebním formulářem ukaž:
+
+- vybraný tarif a jeho hlavní hodnotu jednou větou,
+- konečnou cenu včetně měny a fakturačního období,
+- informaci, jestli se platba opakuje,
+- co zákazník získá ihned po zaplacení,
+- jak zruší obnovu nebo změní tarif,
+- odkaz na obchodní podmínky a privacy informace v lidském jazyce.
+
+Příklad mikrotextu:
+
+> „Platíte tarif Team měsíčně. Po zaplacení se účet aktivuje ihned. Obnovu můžete vypnout v nastavení fakturace; přístup zůstane aktivní do konce zaplaceného období.“
+
+Tohle není právní román, ale snižuje nervozitu. Zákazník nemá luštit, jestli se právě upsal digitálnímu gym členství, které půjde zrušit jen faxem do sklepa.
+
+## Y.2 Fakturační data sbírej postupně a podle kontextu
+
+Ne každý uživatel je plátce, ne každý kupuje na firmu a ne každý potřebuje fakturu před vyzkoušením produktu. Proto nedává smysl ptát se na kompletní fakturační údaje hned při registraci. Registrace má dostat člověka k první hodnotě. Fakturace má přijít ve chvíli, kdy se skutečně platí.
+
+Praktická minimální sada:
+
+| Situace | Typicky potřebuješ | Co raději nebrat dopředu |
+| --- | --- | --- |
+| Free trial bez karty | e-mail, název účtu, heslo nebo SSO | fakturační adresu, DIČ, platební kartu |
+| Trial s kartou | e-mail, platební token od brány, informace o tarifu | číslo karty v aplikaci, interní kopie platebních detailů |
+| B2B nákup | firmu, fakturační adresu, identifikátory pro fakturaci | osobní telefon každého uživatele, zbytečné poznámky o nákupu |
+| Ruční fakturace | kontaktní e-mail pro finance, objednávku, splatnost | přístup do zákazníkova účetnictví, pokud není nutný |
+
+Důležité pravidlo: produkt by neměl ukládat plné údaje platební karty. Používej platebního poskytovatele, který vrací token, stav platby a omezené informace potřebné pro zobrazení zákazníkovi. V aplikaci pak řešíš obchodní stav: „aktivní“, „čeká na platbu“, „platba selhala“, „přístup končí“. Neřešíš číslo karty. To je práce platební infrastruktury, ne tvého SaaS backendu.
+
+Codyho komentář: Když má databáze méně citlivých údajů, vypadá incidentová porada méně jako hororový film a více jako normální provozní problém. To je dobrý obchodní model pro nervovou soustavu.
+
+## Y.3 Odděl platební stav od produktového přístupu
+
+Častá chyba malého SaaS: platba, faktura, tarif a oprávnění jsou slepené do jedné podmínky. Výsledek? Jeden neúspěšný webhook a zákazník ztratí přístup, i když reálně zaplatil. Nebo naopak neplatí tři měsíce, ale systém ho pořád pouští dovnitř, protože „nějak to v adminu svítí zeleně“.
+
+Navrhni si samostatné stavy:
+
+- účet zákazníka: aktivní, pozastavený, zrušený,
+- tarif: free, trial, placený, vlastní smlouva,
+- platební stav: zaplaceno, čeká, selhalo, refundováno,
+- fakturační stav: vystaveno, odesláno, po splatnosti, stornováno,
+- přístupová práva: co přesně může účet používat.
+
+Mezi těmito stavy musí být pravidla. Například neúspěšná platba nemusí okamžitě vypnout produkt. Užitečnější je krátká grace perioda, jasný e-mail a upozornění v aplikaci. U B2B zákazníků může být proces úplně jiný: ruční kontrola, finance kontakt a domluva před omezením služby.
+
+Mini playbook pro neúspěšnou platbu:
+
+1. Zaznamenej událost z platební brány bez ukládání citlivých detailů.
+2. Pošli stručný e-mail fakturačnímu kontaktu, ne všem uživatelům v účtu.
+3. Zobraz v aplikaci nenápadné upozornění správcům účtu.
+4. Neomezuj kritické funkce dřív, než uplyne rozumné interně definované okno.
+5. Po vyřešení obnov přístup automaticky a zapiš auditní stopu.
+
+## Y.4 Fakturační komunikace má být nudná, přesná a dohledatelná
+
+Faktury, potvrzení plateb a změny tarifu nejsou místo pro kreativní marketing. Mají být nudně přesné. V dobrém smyslu. Zákazník má snadno najít, co zaplatil, za jaké období, kdo je dodavatel, kam napsat při problému a kde si stáhne doklad.
+
+Každý fakturační e-mail by měl mít:
+
+- jasný předmět: „Faktura za tarif Team za srpen 2026“,
+- identifikaci účtu nebo organizace,
+- období služby,
+- částku a měnu,
+- odkaz do bezpečné zákaznické zóny,
+- kontakt pro fakturační dotazy,
+- žádné marketingové pixely ani zbytečné sledování otevření.
+
+Důležitý detail: přílohy s fakturami neposílej bez rozmyslu do všech možných schránek. Pro některé týmy je lepší poslat notifikaci s odkazem do zabezpečené zákaznické zóny, kde si doklad stáhne oprávněná osoba. U malých zákazníků může PDF v e-mailu dávat smysl. Rozhodnutí si napiš do provozní dokumentace a drž se ho.
+
+## Y.5 Refundace a zrušení nesmí být trestná výprava
+
+Zrušení tarifu a refundace jsou součást zákaznické zkušenosti. Když je schováš za support, zákazník si možná zaplatí o měsíc déle. Ale zároveň si zapamatuje, že produkt je pastička. To není retence. To je digitální lepidlo na myši.
+
+Dobré zrušení obsahuje:
+
+- jasné tlačítko nebo postup v nastavení fakturace,
+- informaci, kdy přístup skončí,
+- možnost exportu dat před odchodem,
+- stručný volitelný důvod odchodu,
+- potvrzení e-mailem,
+- interní auditní záznam bez emočních poznámek typu „zase odešli“.
+
+Refundace musí mít předem daná pravidla: kdo ji schvaluje, kdy je automatická, kdy ruční a jak se komunikuje. U SaaS je často lepší jednorázově vrátit spornou částku a získat klid než vyhrát mikrosoud o pár eurech v hlavě zákazníka. Výjimky samozřejmě existují, hlavně u zneužití. Proto měj pravidla, ne náladu.
+
+## Y.6 Checklist plateb a fakturace
+
+- Je na cenové stránce jasné, co zákazník platí a kdy se platba opakuje?
+- Sbírá registrace jen údaje nutné pro první použití produktu?
+- Ukládá aplikace pouze platební tokeny a obchodní stavy, ne plné údaje karty?
+- Jsou oddělené stavy účtu, tarifu, platby, faktury a přístupových práv?
+- Má neúspěšná platba bezpečný postup bez okamžitého zbytečného odříznutí zákazníka?
+- Dostává fakturační e-maily správný kontakt, ne celý tým?
+- Neobsahují fakturační e-maily marketingové pixely nebo zbytečné sledování?
+- Umí správce účtu stáhnout doklady v zákaznické zóně?
+- Je zrušení tarifu dohledatelné a srozumitelné?
+- Existuje pravidlo pro refundace, storna a ruční výjimky?
+- Jsou fakturační data součástí retenční politiky a exportu zákazníka?
+- Má tým dokumentovaný postup pro změnu platebního poskytovatele?
+
+## Shrnutí přílohy
+
+Platební a fakturační tok má být důvěryhodný, předvídatelný a datově střídmý. Zákazník má vědět, co platí, produkt má pracovat s obchodními stavy místo citlivých platebních detailů a tým má mít jasné procesy pro selhání plateb, doklady, refundace i zrušení. Privacy-first přístup tady není brzda konverze. Je to způsob, jak z platby neudělat nervózní administrativní únikovku.
+
+
 ## Zdroje
 
 - Atlassian Support: Create a postmortem — https://support.atlassian.com/statuspage/docs/create-a-postmortem/
@@ -4584,6 +4700,7 @@ Přístupný formulář není charita ani compliance dekorace. Je to obchodní i
 
 ## Pracovní log
 
+- 2026-08-08: Přidána příloha Y o platbách a fakturaci bez datového balastu: jasná cenová komunikace, postupný sběr fakturačních dat, oddělení platebních stavů, fakturační e-maily, refundace a checklist.
 - 2026-08-08: Přidána příloha X o přístupných privacy-first formulářích: datové minimum, labely, chybové hlášky, klávesnicové ovládání, antispam bez sledovacího výpalného a checklist.
 - 2026-08-08: Přidána příloha W o zákaznické podpoře a feedbacku bez datového vysavače: struktura ticketů, dočasný support access, bezpečné screenshoty a logy, třídění feedbacku, dokumentace a checklist.
 - 2026-08-08: Přidána příloha V o technickém SEO bez sledovacího balastu: jasná identita stránky, canonical URL, sitemap, strukturovaná data, Open Graph metadata a privacy-first checklist.
