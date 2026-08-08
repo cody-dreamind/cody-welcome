@@ -5839,7 +5839,150 @@ Přihlašování má být bezpečné, srozumitelné a přiměřené riziku. Mal�
 
 ---
 
+# Příloha AI: B2B nákupní proces bez nekonečných callů a datového ping-pongu
+
+B2B zákazník často nechce hned kupovat. Chce snížit riziko. Potřebuje vědět, jestli produkt řeší jeho problém, jestli ho zvládne zavést, jestli bezpečnostně projde interním sítem a jestli kvůli tomu nebude tři měsíce posílat e-maily s přílohami pojmenovanými `final_final_v7.xlsx`.
+
+Malý SaaS tým si může ušetřit hodiny opakovaných schůzek tím, že nákupní proces udělá čitelný dopředu: kdo je produkt pro, jak funguje pilot, co se děje s daty, jaké jsou limity, kdo rozhoduje a jak vypadá další krok. Privacy-first přístup tu není brzda prodeje. Je to zkratka přes důvěru.
+
+Cíl této přílohy: připravit jednoduchý nákupní balíček, který zákazníkovi odpoví na nejčastější otázky dřív, než je položí.
+
+## AI.1 Nákupní stránka má prodávat klid, ne jen funkce
+
+Landing page vysvětluje hodnotu. Nákupní stránka vysvětluje riziko. U B2B SaaS to může být samostatná stránka typu „Pro firmy“, „Bezpečnost a provoz“, „Jak probíhá spolupráce“ nebo kombinace v trust centru.
+
+Co na ní má být:
+
+- jasná věta, komu produkt pomáhá a s čím,
+- typické scénáře použití podle role nebo odvětví,
+- průběh pilotu nebo implementace v krocích,
+- datová mapa v lidském jazyce,
+- bezpečnostní minimum bez marketingové mlhy,
+- informace o exportu, ukončení a změně dodavatele,
+- kontaktní cesta pro technické, právní a obchodní dotazy,
+- realistická očekávání: co produkt neumí a kdy není vhodný.
+
+Příklad slabé věty:
+
+> „Náš produkt splňuje nejvyšší standardy bezpečnosti a škálovatelnosti.“
+
+Příklad použitelné věty:
+
+> „Zákaznické soubory ukládáme odděleně podle workspace, přístupy administrátorů logujeme a support přístup zapínáme jen na omezený čas po schválení zákazníkem.“
+
+První věta zní jako generátor B2B optimismu. Druhá pomáhá nákupčímu, IT i právníkovi pochopit konkrétní kontrolu.
+
+## AI.2 Připrav mini trust pack dřív, než přijde dotazník
+
+Větší zákazník se dřív nebo později zeptá na bezpečnost, subdodavatele, provoz, zálohy, přístup zaměstnanců, incidenty, export a smazání dat. Když odpovědi skládáš pokaždé znovu, vzniká chaos. Když je máš připravené, působíš dospěle i jako malý tým.
+
+Mini trust pack může být jeden interně udržovaný dokument a jedna veřejná zkrácená stránka.
+
+Doporučená struktura:
+
+| Oblast | Co zákazník potřebuje vědět | Co si držet interně |
+| --- | --- | --- |
+| Provoz | Kde služba běží a kdo má přístup | Detailní architektura, kontakty, provozní postupy |
+| Data | Jaké kategorie dat zpracováváš | Datová mapa, retenční pravidla, exportní postup |
+| Subdodavatelé | Kdo pomáhá se službou | Smlouvy, DPA, revizní datum, vlastník vztahu |
+| Bezpečnost | Jak chráníš účty a data | Threat model, incident playbook, access review |
+| Support | Jak funguje přístup podpory | Schvalovací flow, audit log, šablony komunikace |
+| Odchod | Jak zákazník exportuje a smaže data | Runbook pro ukončení účtu a kontrolu smazání |
+
+Ne všechno musí být veřejné. Veřejná stránka má ukázat principy a odpovědnost. Detailní interní verze má pomoci týmu odpovídat konzistentně bez opisování tajemství do každého e-mailu.
+
+Privacy-first detail: trust pack nemá být skladiště screenshotů z administrace, ukázek zákaznických dat a interních diagramů se secrets. Piš konkrétně, ale ne tak, aby ses sám stal bezpečnostním rizikem.
+
+## AI.3 Pilot musí mít rozhodnutí, hranice a konec
+
+Pilot není „zkuste si to a pak se uvidí“. To je spíš produktové akvárium: všichni koukají, něco plave, nikdo neví, co se má stát dál. Dobrý pilot má předem domluvené rozhodnutí.
+
+Před pilotem si se zákazníkem potvrď:
+
+- jaký problém chce ověřit,
+- kdo bude produkt reálně používat,
+- jaká data se do pilotu dostanou,
+- co se nesmí do pilotu nahrávat,
+- podle čeho se pilot vyhodnotí,
+- kdy pilot končí,
+- kdo rozhodne o pokračování,
+- co se stane s daty po pilotu.
+
+Příklad pilotního zadání:
+
+> „Během 14 dní ověříme, zda tým podpory zvládne zkrátit přípravu odpovědí na opakované dotazy bez nahrávání citlivých příloh. Úspěch znamená alespoň 20 zpracovaných případů, spokojenost dvou support specialistů a žádný požadavek na ruční kopírování zákaznických dat mimo systém.“
+
+Takhle formulovaný pilot se dá vyhodnotit. Neříká „AI nám pomůže být efektivnější“, protože to je věta, která se dá vytisknout na konferenční tašku a pořád nic neznamená.
+
+Codyho komentář: malý tým by měl mít odvahu pilot ukončit, když se ukáže, že zákazník nemá vlastníka, data nebo rozhodovací proces. Ne každý „enterprise zájem“ je obchodní příležitost. Někdy je to jen kalendářní past v obleku.
+
+## AI.4 Dotazníky odpovídej z knihovny, ne z hlavy
+
+Bezpečnostní a právní dotazníky umí sežrat celé odpoledne. Nejhorší strategie je odpovídat pokaždé ručně. Druhá nejhorší je kopírovat starou odpověď bez kontroly, jestli ještě platí.
+
+Vytvoř si odpovědní knihovnu:
+
+- otázka zákazníka v původním znění,
+- krátká standardní odpověď,
+- detailní odpověď pro technický tým,
+- odkaz na interní důkaz nebo postup,
+- vlastník odpovědi,
+- datum poslední revize,
+- značka „veřejné / pod NDA / interní“.
+
+Příklad:
+
+| Otázka | Krátká odpověď | Revize |
+| --- | --- | --- |
+| Kdo má přístup k zákaznickým datům? | Přístup je omezen na role, které ho potřebují pro provoz nebo podporu. Support přístup je časově omezený a auditovaný. | Kvartálně |
+| Lze data exportovat? | Ano, zákazník může požádat o export v dohodnutém formátu. Export chráníme stejnými pravidly jako produkční data. | Při změně exportu |
+| Co se stane po ukončení? | Domluvíme export, vypnutí přístupů a smazání podle retenčních pravidel. | Při změně retence |
+
+Tahle knihovna je produktový majetek. Pomáhá prodeji, podpoře, vývoji i právní části. A hlavně snižuje riziko, že každý člen týmu slíbí zákazníkovi trochu jiný vesmír.
+
+## AI.5 Nákupní proces nesmí nutit zákazníka posílat zbytečná data
+
+B2B obchod často sklouzne k datovému ping-pongu: pošlete seznam uživatelů, pošlete ukázková data, pošlete export, pošlete screenshot, pošlete přístupy do starého systému. Někdy je to potřeba. Často je to jen lenost v procesu.
+
+Privacy-first alternativa:
+
+- Pro demo používej syntetická nebo anonymizovaná data.
+- Pro nacenění se ptej nejdřív na rozsah, ne na kompletní databázi.
+- Pro pilot definuj zakázané typy dat, ne jen povolené kroky.
+- Pro technickou analýzu žádej vzorek struktury bez citlivého obsahu.
+- Pro migraci vytvoř bezpečný kanál, jasnou retenci a vlastníka importu.
+- Po vyhodnocení smaž dočasné soubory a zákazníkovi to potvrď.
+
+Příklad lepší otázky:
+
+> „Kolik přibližně máte aktivních uživatelů, týmů a měsíčních případů? Stačí rozsahy, nepotřebujeme seznam osob.“
+
+Příklad horší otázky:
+
+> „Pošlete nám export uživatelů, ať se na to podíváme.“
+
+Ta druhá věta je rychlá. Taky je to krásná pozvánka k tomu, aby se do obchodního inboxu dostala osobní data, která tam nikdy neměla bydlet.
+
+## AI.6 Checklist B2B nákupního procesu
+
+- Má web stránku nebo sekci, která vysvětluje průběh nákupu, pilotu a implementace?
+- Umíš jednou větou říct, pro koho produkt je a pro koho není?
+- Existuje mini trust pack s daty, provozem, bezpečností, supportem a odchodem zákazníka?
+- Má každý pilot jasný problém, vlastníka, kritéria úspěchu, datum konce a pravidla pro data?
+- Odpovídáš na bezpečnostní dotazníky z revidované knihovny, ne z paměti?
+- Máš oddělené veřejné, NDA a interní odpovědi?
+- Používáš pro demo a prodej syntetická nebo anonymizovaná data?
+- Umíš zákazníkovi říct, co se stane s daty po neúspěšném pilotu?
+- Je jasné, kdo může slíbit bezpečnostní, právní nebo integrační závazek?
+- Po uzavření obchodu se předávají závazky do onboardingu, ne mizí v obchodním vlákně?
+
+## Shrnutí přílohy
+
+B2B nákupní proces není jen obchodní rituál. Je to první test, jestli firma umí zacházet s důvěrou. Když zákazník předem vidí hodnotu, datový tok, bezpečnostní minimum, průběh pilotu a cestu ven, rozhoduje se rychleji a s menším strachem. Privacy-first prodej neznamená méně obchodu. Znamená méně mlhy, méně zbytečných dat a méně schůzek, kde se všichni tváří strategicky, ale nikdo neví, kdo má další krok.
+
+
 ## Pracovní log
+- 2026-08-08: Přidána příloha AI o B2B nákupním procesu bez nekonečných callů a datového ping-pongu: nákupní stránka, mini trust pack, pilot, odpovědní knihovna, datové minimum a checklist.
 
 - 2026-08-08: Přidána příloha AH o přihlašování a session managementu bez digitální paranoie: rizikové úrovně akcí, hesla a reset, MFA/passwordless, bezpečné session cookies, přihlašovací logy a checklist.
 - 2026-08-08: Přidána příloha AG o feature flags a rolloutech bez chaosu: výběr vhodných přepínačů, vlastnictví, plán postupného zapnutí, kill switch, privacy-first segmentace a checklist úklidu.
