@@ -4651,8 +4651,130 @@ Refundace musí mít předem daná pravidla: kdo ji schvaluje, kdy je automatick
 Platební a fakturační tok má být důvěryhodný, předvídatelný a datově střídmý. Zákazník má vědět, co platí, produkt má pracovat s obchodními stavy místo citlivých platebních detailů a tým má mít jasné procesy pro selhání plateb, doklady, refundace i zrušení. Privacy-first přístup tady není brzda konverze. Je to způsob, jak z platby neudělat nervózní administrativní únikovku.
 
 
+# Příloha Z: Přístupy, role a offboarding bez sdílených účtů
+
+Malý SaaS tým často nezačne bezpečnostní průšvihem v kryptografii, ale obyčejnou větou: „Pošli mi prosím heslo do adminu.“ Pak přijde sdílený účet, zapomenutý freelancer, token v poznámce, účet bývalého kolegy a auditní stopa ve stylu „někdo něco změnil“. Gratuluju, máme provozní sudoku, jen bez té zábavné části.
+
+Přístupy jsou součást produktu. Nejsou to jen interní nastavení v administraci. Rozhodují o tom, kdo vidí zákaznická data, kdo může měnit fakturaci, kdo má produkční klíče a kdo umí omylem smazat tabulku rychleji než stihne říct „to se nestává“. Evropská komise u bezpečnosti zpracování osobních údajů zdůrazňuje technická a organizační opatření proti neoprávněnému přístupu, ztrátě nebo poškození dat: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/obligations_en
+
+## Z.1 Začni inventářem lidí, systémů a oprávnění
+
+Nejdřív nepotřebuješ nový IAM nástroj. Potřebuješ vědět, kdo se kam dostane. Udělej jednoduchou tabulku a projdi ji jednou měsíčně. Nuda? Ano. Užitečná nuda? Velmi.
+
+Základní inventář:
+
+| Oblast | Příklad systému | Kdo má přístup | Riziko | Kontrola |
+| --- | --- | --- | --- | --- |
+| Produkce | hosting, databáze, logy | technický tým | vysoké | MFA, role, audit log |
+| Zákaznická data | admin, CRM, support | podpora, obchod | vysoké | role podle účelu, časové omezení |
+| Fakturace | platební brána, účetní systém | finance, zakladatel | střední až vysoké | oddělené role, schvalování změn |
+| Marketing | CMS, analytika, e-mailing | marketing, obsah | střední | publikace přes role, bez sdílených účtů |
+| Vývoj | Git, CI/CD, secrets | vývojáři | vysoké | chráněné větve, rotace tokenů |
+
+U každého systému si napiš tři věci: kdo je vlastník, kdo má běžný přístup a kdo má nouzový administrátorský přístup. Pokud neumíš vlastníka určit do jedné minuty, systém je provozní sirotek. Sirotci v infrastruktuře obvykle nedopadnou jako roztomilý film, ale jako páteční incident.
+
+## Z.2 Role navrhuj podle práce, ne podle ega
+
+„Admin pro všechny“ je pohodlné, dokud se něco nestane. Role mají kopírovat skutečnou práci, ne organizační politiku. Zakladatel nemusí mít denní přístup do každého zákaznického detailu. Marketér nemusí vidět fakturační údaje. Vývojář nemusí mít trvalý přístup do produkční databáze, pokud mu stačí anonymizovaný export nebo dočasné povolení pro konkrétní incident.
+
+Praktické role pro malý SaaS:
+
+- vlastník účtu: smlouva, tarif, fakturace, export a smazání dat,
+- administrátor zákazníka: uživatelé, nastavení organizace, integrace,
+- běžný uživatel: práce v produktu bez správy účtu,
+- support: dočasný přístup ke kontextu požadavku,
+- finance: faktury, platby, dobropisy, bez produktového obsahu,
+- vývoj/provoz: technické logy a infrastruktura podle incidentu.
+
+Role nestačí pojmenovat. Ke každé napiš „může“ a „nesmí“. Například support může vidět stav účtu a poslední chybu importu, ale nesmí bez souhlasu otevřít obsah zákaznických dokumentů. Finance může změnit fakturační kontakt, ale nesmí měnit uživatelská oprávnění v produktu.
+
+Codyho komentář: Nejlepší role jsou trochu nudné. Když role zní jako postava z fantasy hry — „Super Ultimate Owner God Mode“ — je to většinou bezpečnostní záporná postava.
+
+## Z.3 Dočasný přístup je lepší než trvalá výjimka
+
+Výjimky nezmizí tím, že je ignoruješ. Jen se usadí v systému jako digitální vodní kámen. Proto je lepší mít proces pro dočasný přístup než rozdávat trvalé administrátorské role pokaždé, když někdo spěchá.
+
+Dočasný přístup nastavuj takto:
+
+1. Má jasný důvod: incident, migrace, zákaznický požadavek, účetní uzávěrka.
+2. Má vlastníka: konkrétní člověk schvaluje a ví, proč existuje.
+3. Má časové omezení: hodiny nebo dny, ne „dokud si někdo vzpomene“.
+4. Má auditní stopu: kdo přístup dostal, kdy, proč a co udělal.
+5. Má automatické ukončení: systém odebere práva bez ručního lovení.
+
+U citlivých zákaznických dat preferuj model „break-glass“: nouzový přístup existuje, ale každé použití je výrazně logované, omezené a zpětně kontrolované. U supportu je často lepší, když zákazník přístup aktivně povolí přímo v aplikaci a vidí, kdy skončí. To je férovější než interní kouzelné dveře do cizího účtu.
+
+## Z.4 Secrets nejsou poznámka v chatu
+
+API klíče, tokeny, přístupové údaje, obnovovací kódy a privátní klíče patří do správce tajemství, ne do e-mailu, chatu, dokumentace nebo screenshotu v ticketu. ENISA ve své příručce pro malé a střední firmy doporučuje bezpečnostní kroky jako řízení přístupů, vícefaktorové ověření a ochranu systémů podle rizika: https://www.enisa.europa.eu/publications/cybersecurity-guide-for-smes
+
+Minimum pro malý tým:
+
+- Každý člověk má vlastní účet, žádné sdílené přihlášení.
+- Všude, kde to jde, je zapnuté MFA.
+- Produkční secrets nejsou dostupné v lokálním vývoji bez důvodu.
+- Tokeny mají omezený scope a ideálně expiraci.
+- Přístup do správce hesel se řeší přes skupiny, ne ruční kopírování.
+- Při odchodu člověka se rotují klíče, ke kterým mohl mít přístup.
+
+Pokud musíš tajemství někomu předat ručně, použij jednorázový bezpečný kanál a zapiš, proč se to stalo. Ale ber to jako výjimku, ne jako týmovou kulturu. Kultura „pošli token do Slacku“ je jen incident, který zatím neměl rozpočet na ohňostroj.
+
+## Z.5 Offboarding musí být checklist, ne vzpomínková akce
+
+Odchod člověka z týmu je normální. Nenormální je zjistit po třech měsících, že má pořád přístup do repozitáře, analytiky, e-mailingu a platební brány. Offboarding musí být rychlý, klidný a kompletní.
+
+Offboardingový checklist:
+
+- Zruš nebo pozastav účty ve všech systémech z inventáře.
+- Odeber člověka ze skupin ve správci hesel a cloudových rolích.
+- Zkontroluj Git, CI/CD, hosting, DNS, e-mail, fakturaci a podporu.
+- Převeď vlastnictví dokumentů, automatizací, kalendářů a API integrací.
+- Rotuj sdílené nebo potenciálně viděné secrets.
+- Zkontroluj osobní zařízení a přístup k firemním datům podle interní dohody.
+- Zapiš dokončení do interního logu bez zbytečných osobních detailů.
+
+Stejný princip platí pro agentury a freelancery. Externista nemá dostat „dočasný“ přístup, který přežije projekt, účetní rok a dvě redesignové vlny. Na začátku spolupráce si nastav datum revize přístupu. Když projekt skončí, přístup končí také.
+
+## Z.6 Měsíční access review za 30 minut
+
+Jednou měsíčně projdi pět nejcitlivějších systémů. Nečekej na velký audit. Malý pravidelný úklid poráží heroický bezpečnostní víkend, po kterém všichni nenávidí tabulky, IAM i sami sebe.
+
+Rychlý postup:
+
+1. Vyber pět systémů s nejvyšším dopadem: hosting, databáze, Git, fakturace, support/admin.
+2. Exportuj nebo ručně projdi seznam uživatelů a rolí.
+3. Označ účty bez jasného vlastníka, nepoužívané účty a role s příliš širokým oprávněním.
+4. Odeber zjevné přebytky hned, sporné dej vlastníkovi systému k potvrzení.
+5. Zapiš změny a jednu věc, kterou příště automatizuješ.
+
+EDPB v přehledu pro malé firmy připomíná, že data protection by design and by default znamená zabudovat ochranu dat do nástrojů, procesů a nastavení od začátku a zpracovávat ve výchozím stavu jen nezbytná data: https://www.edpb.europa.eu/sme/be-compliant/be-compliant_en Přístupy jsou přesně ten typ nastavení, kde se „výchozí hodnota“ časem mění v bezpečnostní realitu.
+
+## Z.7 Checklist přístupů a offboardingu
+
+- Má každý používaný systém vlastníka a seznam lidí s přístupem?
+- Existují samostatné role pro zákaznická data, fakturaci, podporu, vývoj a provoz?
+- Má každý člověk vlastní účet místo sdíleného přihlášení?
+- Je MFA zapnuté u Git, hostingu, e-mailu, fakturace, správce hesel a podpory?
+- Jsou produkční secrets mimo dokumentaci, chat a běžné repozitáře?
+- Mají tokeny a API klíče omezený scope?
+- Umí tým rychle udělit dočasný přístup s důvodem a expirací?
+- Je support access časově omezený a viditelný v auditní stopě?
+- Existuje checklist pro odchod zaměstnance, freelancera nebo agentury?
+- Rotují se sdílené nebo potenciálně viděné secrets po odchodu člověka?
+- Probíhá měsíční access review u nejcitlivějších systémů?
+- Ví zákazník, kdo z týmu může vidět jeho data a za jakých okolností?
+
+## Shrnutí přílohy
+
+Přístupy nejsou administrativní detail. Jsou to brzdy, zámky a zpětná zrcátka privacy-first provozu. Malý tým nepotřebuje korporátní byrokracii, ale potřebuje vlastní účty, jasné role, MFA, správce tajemství, dočasné výjimky, auditní stopu a offboardingový checklist. Čím méně trvalých výjimek, tím méně dramatických večerů s titulkem „kdo ještě má přístup kam?“.
+
+
 ## Zdroje
 
+- EDPB: Be compliant — Data protection guide for small business — https://www.edpb.europa.eu/sme/be-compliant/be-compliant_en
+- EDPB: Privacy by design and by default — https://www.edpb.europa.eu/topics/ai-and-technology/privacy-by-design-and-by-default_en
+- ENISA: Cybersecurity guide for SMEs — 12 steps to securing your business — https://www.enisa.europa.eu/publications/cybersecurity-guide-for-smes
+- Evropská komise: Obligations — security of personal data processing — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/obligations_en
 - Atlassian Support: Create a postmortem — https://support.atlassian.com/statuspage/docs/create-a-postmortem/
 - Evropská komise: Data protection — https://commission.europa.eu/law/law-topic/data-protection_en
 - Evropská komise: Data protection by design and by default — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/obligations/what-does-data-protection-design-and-default-mean_en
@@ -4700,6 +4822,7 @@ Platební a fakturační tok má být důvěryhodný, předvídatelný a datově
 
 ## Pracovní log
 
+- 2026-08-08: Přidána příloha Z o přístupech, rolích a offboardingu bez sdílených účtů: inventář systémů, role podle práce, dočasné přístupy, secrets, offboarding, měsíční access review a checklist.
 - 2026-08-08: Přidána příloha Y o platbách a fakturaci bez datového balastu: jasná cenová komunikace, postupný sběr fakturačních dat, oddělení platebních stavů, fakturační e-maily, refundace a checklist.
 - 2026-08-08: Přidána příloha X o přístupných privacy-first formulářích: datové minimum, labely, chybové hlášky, klávesnicové ovládání, antispam bez sledovacího výpalného a checklist.
 - 2026-08-08: Přidána příloha W o zákaznické podpoře a feedbacku bez datového vysavače: struktura ticketů, dočasný support access, bezpečné screenshoty a logy, třídění feedbacku, dokumentace a checklist.
