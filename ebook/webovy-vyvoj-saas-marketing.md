@@ -4406,6 +4406,135 @@ Dobrá zákaznická podpora nepotřebuje vědět všechno. Potřebuje rychle poz
 
 
 
+
+# Příloha X: Přístupnost formulářů bez bariér a zbytečného sběru dat
+
+Formulář je často nejkratší most mezi zájmem a obchodem. Poptávka, registrace, demo, onboarding, reset hesla, nastavení fakturace — všechno stojí na pár polích a jednom tlačítku. A právě proto je formulář nebezpečně podceňovaný. Když je nepřístupný, zmatený nebo příliš zvědavý, uživatel neodejde proto, že produkt nechce. Odejde proto, že ho produkt nepustil dovnitř.
+
+Přístupnost a privacy-first přístup se tu krásně potkávají. Dobře navržený formulář je krátký, srozumitelný, ovladatelný klávesnicí, čitelný pro asistivní technologie a nesbírá údaje jen proto, že se políčko vešlo do layoutu. W3C WCAG 2.2 je publikované jako W3C Recommendation standard a WAI tutorial k formulářům doporučuje používat správné labely, seskupení, instrukce, validaci a srozumitelné notifikace: https://www.w3.org/TR/WCAG22/ a https://www.w3.org/WAI/tutorials/forms/
+
+## X.1 Každé pole musí mít jasný důvod
+
+Než řešíš design políčka, zeptej se: proč tohle pole vůbec existuje? Formulář není dotazník pro zvědavou firmu. Je to nástroj k dokončení konkrétní akce.
+
+Praktická tabulka pro poptávkový formulář:
+
+| Pole | Nechat? | Proč |
+| --- | --- | --- |
+| Jméno | Ano | pomáhá lidské odpovědi |
+| E-mail | Ano | nutné pro navázání kontaktu |
+| Telefon | Volitelně | jen pokud reálně voláte a zákazník s tím počítá |
+| Firma | Volitelně | užitečné pro B2B kontext, ne vždy povinné |
+| Rozpočet | Volitelně nebo jako rozsah | citlivé pole; vysvětli, k čemu slouží |
+| Zpráva | Ano | zákazník popíše situaci vlastními slovy |
+| Souhlas s marketingem | Ne jako podmínka poptávky | poptávka není vstupenka do reklamního trychtýře |
+
+Krátký formulář není automaticky dobrý. Dobrý formulář sbírá přesně to, co je potřeba pro další krok. U jednoduché poptávky stačí často e-mail a zpráva. U B2B dema může dávat smysl firma a role. U registrace do SaaS nepotřebuješ fakturační adresu, dokud člověk neplatí. Ano, šokující: formulář nemusí sbírat data do zásoby jako křeček před zimou.
+
+## X.2 Label není placeholder v převleku
+
+Placeholder uvnitř pole vypadá čistě, ale mizí ve chvíli, kdy uživatel začne psát. Pro přístupnost i použitelnost je lepší viditelný label, který zůstává na obrazovce. WAI k labelům uvádí, že labely mají identifikovat účel ovládacích prvků a typicky se k tomu používá prvek `<label>`: https://www.w3.org/WAI/tutorials/forms/labels/
+
+Lepší vzor:
+
+```html
+<label for="email">Pracovní e-mail</label>
+<input id="email" name="email" type="email" autocomplete="email" required>
+<p id="email-help">Pošleme sem odpověď k poptávce. Nepřidáme vás do newsletteru.</p>
+```
+
+Slabší vzor:
+
+```html
+<input name="email" placeholder="E-mail">
+```
+
+Co hlídat:
+
+- Label musí být viditelný nebo alespoň programově spojený s polem.
+- Placeholder používej jako doplněk, ne jako jediný popis.
+- Povinná pole označ textově, nejen hvězdičkou bez vysvětlení.
+- Nápověda má říkat, proč údaj chceš a co se s ním stane.
+- Skupiny voleb patří do `fieldset` a `legend`, například u fakturačního typu nebo preferovaného kontaktu.
+
+Privacy-first bonus: mikrotext pod polem může rovnou snížit nejistotu. „Telefon je volitelný a použijeme ho jen pokud chcete zavolat“ je lepší než prázdné pole, u kterého zákazník hádá, jestli mu za pět minut nezavolá obchodník s energií a CRM v očích.
+
+## X.3 Chybové hlášky mají opravovat, ne trestat
+
+Chybová hláška typu „Invalid input“ je technický povzdech, ne pomoc. Uživatel potřebuje vědět, které pole je špatně, proč je špatně a jak ho opravit. WAI doporučuje u formulářů jasné notifikace po odeslání i inline zpětnou vazbu; chybové zprávy mají být stručné, srozumitelné a obsahovat jednoduchý postup opravy: https://www.w3.org/WAI/tutorials/forms/notifications/
+
+Příklady:
+
+| Špatně | Lépe |
+| --- | --- |
+| „Chyba“ | „E-mail chybí. Doplňte adresu, kam máme poslat odpověď.“ |
+| „Neplatný formát“ | „Telefon napište ve formátu +420 777 123 456, nebo pole nechte prázdné.“ |
+| „Required“ | „Vyberte prosím jednu možnost rozpočtu, ať víme, jaký rozsah řešení navrhnout.“ |
+| červený rámeček bez textu | text chyby u pole a souhrn chyb nad formulářem |
+
+Technicky pomůže spojit pole s nápovědou a chybou přes `aria-describedby`, u neplatného pole nastavit `aria-invalid="true"` a po neúspěšném odeslání dát uživateli souhrn chyb. Důležité je nespoléhat jen na barvu. Červená je dobrý signál pro část lidí, ale text je důkaz. A text také přežije čtečku obrazovky, vysoký kontrast i situaci, kdy uživatel sedí na slunci s mobilem a proklíná svůj životní výběr.
+
+## X.4 Ovládání klávesnicí není okrajový případ
+
+Formulář musí jít projít bez myši. Ne proto, že „to chce audit“, ale protože lidé používají klávesnici, asistivní technologie, mobilní přepínače, hlasové ovládání nebo prostě trackpad, který se rozhodl odejít do důchodu.
+
+Rychlý test:
+
+1. Dej kurzor na začátek stránky.
+2. Projdi formulář klávesou Tab.
+3. Sleduj, jestli je fokus vždy viditelný.
+4. Zkus vyplnit všechna pole bez myši.
+5. Odesílej formulář Enterem nebo tlačítkem, které má jasný text.
+6. Vyvolej chybu a ověř, že se dá pochopit i opravit bez myši.
+
+Časté chyby:
+
+- vlastní select, který nejde ovládat šipkami,
+- checkbox bez skutečného `<input type="checkbox">`,
+- modal s formulářem, ze kterého fokus uteče do pozadí,
+- tlačítko jako `<div>` s click handlerem,
+- neviditelný focus outline, protože „design“.
+
+Codyho komentář: Smazat focus outline je jako sundat směrovky z auta, protože kazí čistý minimalismus. Krásné, dokud někdo nechce odbočit.
+
+## X.5 Antispam řeš bez sledovacího výpalného
+
+Spam je reálný problém, ale řešení nemusí znamenat nasazení sledovacího skriptu přes půl internetu. U privacy-first webu začni méně invazivními vrstvami a teprve pak přitvrzuj.
+
+Praktické vrstvy:
+
+| Vrstva | Co dělá | Privacy dopad |
+| --- | --- | --- |
+| honeypot pole | bot vyplní skryté pole, člověk ne | minimální |
+| čas vyplnění | odmítne formulář odeslaný podezřele rychle | minimální |
+| rate limit | omezuje počet pokusů z jedné IP nebo účtu | střední, nastav krátkou retenci |
+| serverová validace | kontroluje formát a povinná pole | minimální |
+| e-mailové potvrzení | ověří kontakt až po odeslání | záleží na účelu |
+| externí CAPTCHA | posílá data třetí straně | použít jen po zvážení a vysvětlení |
+
+U B2B poptávek často stačí honeypot, rate limit a ruční kontrola. U veřejné registrace do SaaS bude potřeba silnější obrana, ale pořád platí: měř, kolik spamu reálně máš, a nepřidávej nástroj jen proto, že ho někdo viděl v tutoriálu z roku dinosaurus.
+
+## X.6 Checklist přístupného privacy-first formuláře
+
+Před publikací formuláře projdi tento seznam:
+
+- Každé pole má jasný účel a nejde o sběr „pro jistotu“.
+- Povinná pole jsou opravdu nutná pro dokončení aktuální akce.
+- Každé pole má viditelný nebo programově správně přiřazený label.
+- Placeholder není jediný popis pole.
+- Nápověda vysvětluje citlivější údaje lidsky a konkrétně.
+- Formulář jde projít a odeslat klávesnicí.
+- Fokus je viditelný a nepřeskakuje nelogicky.
+- Chyby jsou popsané textem u pole i souhrnem u delšího formuláře.
+- Validace běží na klientu pro pohodlí a na serveru pro jistotu.
+- Antispam nezačíná automaticky nejinvazivnějším externím skriptem.
+- Po úspěšném odeslání je jasné, co se stane dál a kdy čekat odpověď.
+- Data z formuláře mají vlastníka, retenční pravidlo a bezpečné místo uložení.
+
+## Shrnutí přílohy
+
+Přístupný formulář není charita ani compliance dekorace. Je to obchodní infrastruktura. Pomáhá více lidem dokončit akci, snižuje počet chyb, zlepšuje důvěru a zároveň nutí tým sbírat méně zbytečných dat. Privacy-first formulář je stručný, čitelný, opravuje chyby lidsky a nepouští třetí strany do každé poptávky jen proto, že spam existuje.
+
 ## Zdroje
 
 - Atlassian Support: Create a postmortem — https://support.atlassian.com/statuspage/docs/create-a-postmortem/
@@ -4442,6 +4571,10 @@ Dobrá zákaznická podpora nepotřebuje vědět všechno. Potřebuje rychle poz
 - Plausible Analytics: About — https://plausible.io/about
 - Plausible Analytics: Security and compliance documentation — https://plausible.io/compliance
 - RSS Advisory Board: RSS 2.0 Specification — https://www.rssboard.org/rss-specification
+- W3C: Web Content Accessibility Guidelines (WCAG) 2.2 — https://www.w3.org/TR/WCAG22/
+- W3C WAI: Forms Tutorial — https://www.w3.org/WAI/tutorials/forms/
+- W3C WAI: Labeling Controls — https://www.w3.org/WAI/tutorials/forms/labels/
+- W3C WAI: User Notification — https://www.w3.org/WAI/tutorials/forms/notifications/
 - Umami: FAQ — https://docs.umami.is/docs/faq
 - Umami Cloud: FAQ — https://docs.umami.is/docs/cloud/faq
 - Your Europe: Online privacy — how to use cookies on your website — https://europa.eu/youreurope/business/growing/digitalising/online-privacy/index_en.htm
@@ -4451,6 +4584,7 @@ Dobrá zákaznická podpora nepotřebuje vědět všechno. Potřebuje rychle poz
 
 ## Pracovní log
 
+- 2026-08-08: Přidána příloha X o přístupných privacy-first formulářích: datové minimum, labely, chybové hlášky, klávesnicové ovládání, antispam bez sledovacího výpalného a checklist.
 - 2026-08-08: Přidána příloha W o zákaznické podpoře a feedbacku bez datového vysavače: struktura ticketů, dočasný support access, bezpečné screenshoty a logy, třídění feedbacku, dokumentace a checklist.
 - 2026-08-08: Přidána příloha V o technickém SEO bez sledovacího balastu: jasná identita stránky, canonical URL, sitemap, strukturovaná data, Open Graph metadata a privacy-first checklist.
 - 2026-08-07: Přidána příloha U o privacy-first produktových experimentech: hypotézy, minimální měření, alternativy k A/B testům, majitel experimentu, ochranné metriky a checklist.
