@@ -6730,7 +6730,152 @@ DPA není papír pro právníky. Je to mapa odpovědnosti. Nejlepší privacy-fi
 
 Zpracovatelské smlouvy a seznam subprocesorů mají být živou součástí provozu SaaS, ne zapomenutý právní archiv. Ujasni role správce a zpracovatele, veď praktický registr subdodavatelů, čti DPA jako provozní checklist, oznamuj změny včas a nastav krátké vendor review, které tým nebude obcházet. Privacy-first provoz v Evropě stojí na jednoduché schopnosti: vědět, kam data tečou, a umět to vysvětlit zákazníkovi bez mlhy.
 
+---
+
+# Příloha AO: Minimalistický marketingový stack bez nástrojového blešího trhu
+
+Marketingový stack malého SaaS často roste jako šuplík s kabely: jeden nástroj na formuláře, druhý na newsletter, třetí na popup, čtvrtý na heatmapu, pátý na CRM, šestý na automatizace a sedmý na „možná se bude hodit“. Výsledek? Nikdo přesně neví, kde jsou data, zákazník vidí pět consent promptů a tým tráví víc času lepením integrací než mluvením s trhem.
+
+Minimalistický marketingový stack není asketismus. Je to disciplína: vybrat nejmenší sadu nástrojů, která umí získat poptávku, doručit obsah, změřit obchodní signály a udržet důvěru. Evropská komise u GDPR principů připomíná účelové omezení a minimalizaci dat: firma nemá sbírat data pro neurčité účely a má zpracovávat jen data nezbytná pro daný účel: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/overview-principles/what-data-can-we-process-and-under-which-conditions_en. EDPB v pokynech ke souhlasu pod GDPR zároveň zdůrazňuje, že souhlas má být svobodný, konkrétní, informovaný a jednoznačný: https://www.edpb.europa.eu/documents/guideline/guidelines-052020-on-consent-under-regulation-2016679_en.
+
+Tahle příloha není katalog konkrétních dodavatelů. Je to rozhodovací rámec. Nástroje se mění rychleji než nálada v týmu po rozbitém deployi, ale dobré otázky vydrží.
+
+## AO.1 Nejdřív schopnosti, potom nástroje
+
+Nezačínej otázkou „jaký marketing automation tool koupíme?“. Začni otázkou: jaké schopnosti opravdu potřebujeme v příštích 90 dnech? Malý tým obvykle nepotřebuje enterprise orchestraci kampaní. Potřebuje spolehlivě zachytit zájem, odpovědět, poslat užitečný obsah a pochopit, které kanály přivádějí relevantní lidi.
+
+Minimální sada schopností:
+
+| Schopnost | Praktický účel | Privacy-first hranice |
+| --- | --- | --- |
+| Web a landing pages | vysvětlit nabídku a vést k akci | vlastní doména, minimum externích skriptů |
+| Kontaktní formulář | přijmout poptávku | jen data nutná pro odpověď |
+| Transakční a obsahový e-mail | potvrdit akce, poslat slíbený obsah | oddělit od marketingových kampaní |
+| Jednoduché CRM | neztratit konverzaci | poznámky bez citlivých detailů navíc |
+| Analytika | měřit návštěvnost a konverze | agregace, krátká retence, žádný reklamní profil |
+| RSS nebo veřejný archiv | distribuovat obsah bez algoritmů | přímé odběry bez sledování jednotlivců |
+
+Pokud nástroj neobsluhuje jednu z těchto schopností, musí mít velmi dobrý důvod. „Možná to někdy využijeme“ není důvod. To je pozvánka na nástrojový bleší trh.
+
+Praktický postup:
+
+- Nakresli cestu od první návštěvy po obchodní rozhovor.
+- Ke každému kroku napiš, jaký nástroj ho obsluhuje dnes.
+- Označ duplicitní nástroje, které dělají totéž jiným logem.
+- U každého nástroje napiš, jaká osobní data přijímá a komu je předává.
+- Nejdřív vypínej zbytečné nástroje, až potom kupuj nové.
+
+## AO.2 Každý skript na webu je dodavatel, ne dekorace
+
+Marketing rád přidává skripty, protože přidat řádek do hlavičky je technicky snadné. Provoz a privacy tým pak řeší, že ten řádek posílá návštěvnické údaje třetí straně, zpomaluje web, rozbíjí CSP a vyžaduje souhlas. Skript není dekorace. Je to nový procesor dat, kus výkonového rizika a často i nový právní úkol.
+
+Před vložením externího skriptu vyplň mini kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaké rozhodnutí díky skriptu uděláme? | například vypnout slabý kanál nebo opravit chybový krok |
+| Jaká data skript sbírá? | URL, referrer, device info, e-mail, eventy, session ID |
+| Kde se data zpracují? | EU/EHP, mimo EU, nejasné |
+| Je skript nutný před souhlasem? | technický provoz ano, marketing skoro nikdy |
+| Jaká je alternativa bez třetí strany? | serverové logy, vlastní event, ruční rozhovor |
+| Kdy skript znovu vyhodnotíme? | konkrétní datum, ne „někdy“ |
+
+Dobré pravidlo: když neumíš vysvětlit, jak skript pomůže udělat konkrétní rozhodnutí do 30 dnů, nedávej ho na web. Marketing bez skriptu neumře. Web s pěti náhodnými skripty občas ano.
+
+## AO.3 CRM má být pracovní paměť, ne osobní dossier
+
+CRM pro malý B2B SaaS má odpovědět na tři otázky: s kým mluvíme, o čem jsme se domluvili a jaký je další krok. Nemá být tajný archiv všeho, co kdy člověk udělal na webu, klikl v e-mailu nebo řekl v soukromé poznámce na callu.
+
+Rozumný záznam leadu:
+
+| Pole | Proč existuje |
+| --- | --- |
+| Jméno a pracovní e-mail | kontakt a oslovení |
+| Firma a role | kontext rozhodování |
+| Zdroj poptávky | vyhodnocení kanálu na agregované úrovni |
+| Potřeba nebo problém | kvalifikace nabídky |
+| Další krok a datum | řízení follow-upu |
+| Stav pipeline | přehled obchodní práce |
+| Souhlas nebo právní základ pro marketing | oddělení obchodní komunikace od newsletteru |
+
+Co do CRM nepatří jako výchozí zvyk:
+
+- kompletní historie návštěv webu u konkrétní osoby,
+- nahrávky callů bez jasného důvodu a retence,
+- interní domněnky o osobnosti zákazníka,
+- citlivé informace, které nejsou nutné pro obchodní vztah,
+- data z podpory smíchaná s marketingovou segmentací.
+
+Privacy-first CRM má mít měsíční úklid: neaktivní leady uzavřít, zbytečné poznámky smazat, exportovat agregované poučení a osobní data nenechat hnít v pipeline jako zapomenutý jogurt.
+
+## AO.4 Automatizace musí mít brzdu a lidský tón
+
+Automatizace je skvělá, když připomene follow-up, pošle slíbený materiál nebo upozorní tým na nový lead. Je otravná, když předstírá osobní vztah, vytváří tlak a nejde zastavit. Malý SaaS nepotřebuje nurture labyrint o 27 krocích. Potřebuje několik férových sekvencí, které respektují kontext.
+
+Příklad jednoduché sekvence po stažení checklistu:
+
+| Den | Zpráva | Cíl | Data |
+| --- | --- | --- | --- |
+| 0 | doručení checklistu | splnit slib | e-mail, čas odeslání |
+| 2 | praktický příklad použití | pomoct s implementací | žádné nové údaje |
+| 7 | otázka, jestli má smysl probrat situaci | otevřít konverzaci | odpověď jen pokud ji člověk pošle |
+| 14 | poslední užitečný tip a jasné odhlášení | uzavřít sekvenci | stav odběru |
+
+Každá automatizace by měla mít:
+
+- jasný spouštěč,
+- jasný konec,
+- možnost okamžitého odhlášení nebo zastavení,
+- vlastníka, který kontroluje odpovědi,
+- text, který nezní jako robot v obleku obchodního zástupce.
+
+Pokud automatizace posílá víc zpráv, než bys poslal ručně člověku, kterého respektuješ, je přestřelená.
+
+## AO.5 Stack review dělej jednou měsíčně, jinak vyhraje entropie
+
+Marketingový stack se nerozbije najednou. Rozteče se. Někdo přidá integrační účet pro kampaň, někdo nechá starý popup, někdo zapomene webhook, někdo změní formulář a CRM začne dostávat pole „undefined“. Proto potřebuješ krátkou pravidelnou kontrolu.
+
+Měsíční review za 45 minut:
+
+1. Otevři seznam marketingových nástrojů a skriptů.
+2. Zkontroluj, jestli každý nástroj má vlastníka, účel a datum poslední revize.
+3. Projdi formuláře a ověř, že data tečou jen tam, kam mají.
+4. Zkontroluj consent režim u volitelných skriptů.
+5. Porovnej CRM pole s reálnou obchodní potřebou.
+6. Smaž nebo archivuj neaktivní kampaně, formuláře a automatizace.
+7. Vyber jednu věc ke zjednodušení před tím, než přidáš cokoliv nového.
+
+Výstup review má být krátký:
+
+| Rozhodnutí | Důvod | Vlastník | Termín |
+| --- | --- | --- | --- |
+| Vypnout starý popup | nepřináší kvalifikované leady, vyžaduje consent | marketing | pátek |
+| Sloučit dva formuláře | stejné účely, rozdílná pole | web | příští sprint |
+| Zkrátit CRM poznámky | příliš osobních detailů bez využití | obchod | dnes |
+
+## AO.6 Checklist minimalistického marketingového stacku
+
+- [ ] Umíme vyjmenovat všechny marketingové nástroje, skripty, formuláře a automatizace.
+- [ ] Každý nástroj má jasný účel, vlastníka, právní režim a datum poslední revize.
+- [ ] Web neposílá osobní data do marketingových nástrojů před odpovídajícím souhlasem.
+- [ ] Formuláře sbírají jen data nutná pro odpověď nebo slíbenou službu.
+- [ ] CRM obsahuje pracovní kontext a další kroky, ne osobní dossier zákazníka.
+- [ ] Atribuce je oddělená od zákaznického profilu, pokud není konkrétní důvod ji propojit.
+- [ ] Automatizace mají jasný konec, odhlášení a vlastníka.
+- [ ] RSS, veřejný archiv a přímé odkazy mají přednost před platformovou závislostí.
+- [ ] Každý nový nástroj projde otázkou: kde jsou data, kdo k nim má přístup a jak odejdeme?
+- [ ] Jednou měsíčně něco zjednodušíme, smažeme nebo sloučíme.
+
+## Codyho komentář
+
+Marketingový stack má být jako dobře sbalený batoh na výlet: víš, co v něm je, proč to neseš a co můžeš nechat doma. Když z něj uděláš pojízdnou kancelář s osmi sledovacími kolečky, možná budeš vypadat „data-driven“, ale zákazník bude jen další položka v panelu. Privacy-first marketing není pomalejší. Jen odmítá předstírat, že každé kliknutí je intimní obchodní tajemství.
+
+## Shrnutí přílohy
+
+Minimalistický marketingový stack začíná schopnostmi, ne nákupem nástrojů. Web, formulář, e-mail, CRM, analytika a vlastněné distribuční kanály stačí většině malých SaaS týmů překvapivě dlouho. Každý skript posuzuj jako dodavatele, CRM drž jako pracovní paměť, automatizace vybav brzdou a jednou měsíčně stack zjednoduš. Privacy-first marketing v Evropě má měřit dost na dobrá rozhodnutí, ale ne tolik, aby z každého návštěvníka vyráběl dossier.
+
 ## Pracovní log
+- 2026-08-08: Přidána příloha AO o minimalistickém marketingovém stacku: schopnosti před nástroji, externí skripty jako dodavatelé, střídmé CRM, férové automatizace, měsíční stack review a checklist.
 - 2026-08-08: Přidána příloha AN o zpracovatelských smlouvách, rolích správce/zpracovatele, registru subprocesorů, vendor review, oznamování změn dodavatelů a praktickém checklistu.
 - 2026-08-08: Přidána příloha AM o žádostech subjektů údajů: jeden vstup, vlastník, ověření identity, mapa dat, bezpečné odpovědi, výmazové hranice, automatizace a checklist.
 - 2026-08-08: Přidána příloha AL o privacy-first marketingové atribuci: rozhodovací otázky, UTM disciplína, oddělení atribučních dat, kvalita leadů, přímé dotazy a checklist.
