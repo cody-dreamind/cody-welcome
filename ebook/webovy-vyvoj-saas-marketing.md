@@ -5145,8 +5145,128 @@ Nejlepší AI funkce není ta, která v demu udělá největší „wow“. Nejl
 
 ---
 
+# Příloha AD: Export dat a interoperabilita bez zákaznického vězení
+
+Privacy-first SaaS se pozná nejen podle toho, jak data sbírá, ale i podle toho, jak je umí vrátit. Férový produkt nedrží zákazníka rukojmím v databázi, do které vidí jen přes fakturu a tlačítko „kontaktujte obchod“. Pokud zákazník odchází, chce změnit nástroj nebo si jen udělat audit, export dat má být normální součást služby, ne speciální rituál s kadidlem a třídenní odpovědí supportu.
+
+GDPR zná právo na přenositelnost údajů: člověk může za určitých podmínek získat osobní údaje, které poskytl správci, ve strukturovaném a strojově čitelném formátu, případně požádat o předání jinému správci, pokud je to technicky možné. Evropská komise to shrnuje v části o vyřizování žádostí jednotlivců: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/dealing-requests-individuals_en
+
+Pro SaaS tým je dobré nejít jen po právním minimu. Export je produktová vlastnost důvěry. Kdo umí zákazníka pustit ven bez trucování, působí jistěji než nástroj, který se tváří jako hotel California s API.
+
+## AD.1 Export navrhni dřív než první enterprise zákazník
+
+Export se špatně lepí na hotový produkt, když už jsou data rozházená mezi aplikací, fakturací, soubory, analytikou, supportem a interními poznámkami. První verze nemusí být dokonalá. Musí ale existovat mapa, co se dá vrátit a komu.
+
+Začni tabulkou:
+
+| Oblast dat | Příklad | Exportovat zákazníkovi? | Formát | Poznámka |
+| --- | --- | --- | --- | --- |
+| Účet a nastavení | název firmy, role, preference | Ano | JSON/CSV | Bez interních poznámek supportu |
+| Obsah vytvořený zákazníkem | projekty, úkoly, dokumenty | Ano | JSON + soubory | Zachovat vazby mezi objekty |
+| Fakturace | faktury, platby, DIČ | Ano, podle role | PDF/CSV | Oddělit účetní doklady od produktových dat |
+| Provozní logy | přihlášení, bezpečnostní události | Částečně | CSV | Jen relevantní výřez, ne interní debug |
+| Analytika produktu | agregované signály používání | Spíš souhrn | CSV | Ne export sledovacích detailů bez důvodu |
+| Interní poznámky | kvalifikace leadu, support tagy | Obvykle ne | — | Jsou interní, ale pořád vyžadují retenční pravidla |
+
+Důležité je pojmenovat rozdíl mezi daty, která zákazník vytvořil, daty nutnými pro smlouvu a interními provozními záznamy. Když to všechno hodíš do jednoho ZIPu, vznikne datová gulášová polévka. Vypadá sytě, ale nikdo neví, co v ní plave.
+
+## AD.2 Formát má být nudný a čitelný
+
+Dobré exportní formáty nejsou sexy. CSV, JSON, PDF pro dokumenty a původní formáty souborů většinou stačí. ICO ve své praktické části k právu na portabilitu vysvětluje, že data mají být ve strukturovaném, běžně používaném a strojově čitelném formátu, a jako příklady uvádí otevřené formáty jako CSV, XML nebo JSON: https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/individual-rights/individual-rights/right-to-data-portability/
+
+Pro produktový export používej dvě vrstvy:
+
+- **Lidská vrstva:** PDF faktury, README soubor, seznam exportovaných oblastí, datum exportu, účet, který export spustil.
+- **Strojová vrstva:** CSV pro tabulky, JSON pro objekty a vazby, původní soubory beze změny, manifest s verzí schématu.
+
+Ukázka jednoduchého manifestu:
+
+```json
+{
+  "export_version": "2026-08-08",
+  "workspace_id": "acme-demo",
+  "created_at": "2026-08-08T09:00:00Z",
+  "files": [
+    { "path": "projects.csv", "description": "Seznam projektů" },
+    { "path": "tasks.json", "description": "Úkoly včetně vazeb na projekty" },
+    { "path": "invoices/", "description": "Faktury ve formátu PDF" }
+  ]
+}
+```
+
+Neposílej zákazníkovi dump databáze. Dump databáze je pro obnovu systému, ne pro člověka. Obsahuje interní ID, technické stavy, historické sloupce, dočasné tokeny a někdy i věci, které už měly být dávno pryč. Export má být produktové rozhraní, ne otevřená lednice ve tři ráno.
+
+## AD.3 Bezpečnost exportu je stejně důležitá jako export samotný
+
+Export často obsahuje víc dat najednou než běžná obrazovka aplikace. Proto je rizikovější než obyčejné kliknutí v UI. Nestačí tlačítko „Stáhnout vše“ pro každého, kdo se omylem stal adminem v pátek odpoledne.
+
+Bezpečný postup:
+
+- Export může spustit jen role s jasným oprávněním, ideálně vlastník účtu nebo administrátor.
+- U větších exportů vyžaduj potvrzení heslem nebo druhým faktorem.
+- V audit logu ulož, kdo export spustil, kdy, jaký rozsah a odkud.
+- Odkaz ke stažení má krátkou expiraci a není veřejně hádatelný.
+- Po vypršení se balíček smaže nebo přesune do chráněné krátkodobé retence.
+- E-mail s exportem neposílej jako přílohu, ale jako upozornění do aplikace nebo odkaz s omezenou platností.
+
+Pokud export posíláš mimo aplikaci, ověř příjemce. Evropská komise připomíná, že organizace musí žádosti o práva jednotlivců vyřizovat a při odmítnutí vysvětlit důvod i možnosti stížnosti: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/dealing-citizens/how-should-requests-individuals-exercising-their-data-protection-rights-be-dealt_en Prakticky: měj proces, ne improvizovanou konverzaci v inboxu.
+
+## AD.4 Import je nejlepší test kvality exportu
+
+Export bez možnosti zpětného ověření je trochu jako záloha, kterou nikdo nikdy neobnovil. Papírově uklidňuje, prakticky může být k ničemu. Nemusíš hned stavět veřejný import ze všech konkurenčních nástrojů, ale měl bys umět otestovat, že vlastní export dává smysl.
+
+Jednoduchý test:
+
+1. Vytvoř testovací účet s realistickými daty.
+2. Udělej export.
+3. Otevři CSV v běžném tabulkovém editoru a JSON validátoru.
+4. Zkontroluj znakovou sadu, české znaky, časové zóny a desetinná čísla.
+5. Ověř, že vazby mezi objekty jsou dohledatelné.
+6. Zkus z exportu rekonstruovat základní stav účtu v čistém prostředí nebo testovacím skriptem.
+
+Nejčastější chyby: chybí názvy sloupců, datum je v lokálním formátu bez časové zóny, soubory nemají vazbu na záznamy, ID jsou interní a nedokumentovaná, export ignoruje archivované položky, nebo se v něm objeví data jiného zákazníka. Poslední bod je už incident, ne drobná nepříjemnost.
+
+## AD.5 Odchod zákazníka má být scénář, ne porážka
+
+Když zákazník ruší účet, produkt má nabídnout klidný postup:
+
+- co zůstane dostupné do konce zaplaceného období,
+- jak stáhnout data,
+- co se smaže hned a co až po retenční době,
+- jak získat faktury,
+- kdo může zrušení potvrdit,
+- jak obnovit účet, pokud šlo o omyl.
+
+Tahle komunikace je marketing. Ne ten hlučný, s konfety a třemi vykřičníky. Ten tichý, který říká: „Chováme se slušně i ve chvíli, kdy nám neplatíte.“ Zákazník se možná vrátí. Nebo tě doporučí někomu jinému, protože jsi nebyl protivný digitální špunt.
+
+Codyho komentář: dobrý SaaS nepotřebuje past na odchod. Potřebuje produkt, ke kterému se lidé chtějí vracet dobrovolně. Lock-in je často náhražka za chybějící hodnotu. Au, ale fér.
+
+## AD.6 Checklist exportu a interoperability
+
+Před spuštěním exportu si projdi:
+
+- Máme mapu exportovatelných dat podle oblastí produktu?
+- Rozlišujeme zákaznický obsah, osobní údaje, fakturaci, logy a interní poznámky?
+- Používáme běžně čitelné formáty jako CSV, JSON a PDF místo databázového dumpu?
+- Obsahuje export manifest s verzí, datem, rozsahem a popisem souborů?
+- Umíme export bezpečně autorizovat, auditovat a časově omezit odkaz ke stažení?
+- Neobsahuje export zbytečná interní metadata, tokeny, debug informace nebo data jiného zákazníka?
+- Testovali jsme export na reálném českém obsahu, diakritice, časových zónách a větším objemu?
+- Je v produktu jasně vysvětlené, co se stane při zrušení účtu?
+- Má support šablonu pro žádost o přístup, přenositelnost a smazání dat?
+- Je export součást roadmapy, ne jednorázová laskavost pro nejhlasitějšího zákazníka?
+
+## Shrnutí přílohy
+
+Export dat je test důvěry. Privacy-first produkt zákazníka nepřivazuje k židli, ale dává mu kontrolu: rozumné formáty, bezpečné stažení, jasnou dokumentaci a férový odchod. Interoperabilita není jen právní povinnost v hezkém kabátě. Je to signál, že produkt stojí na hodnotě, ne na překážkách.
+
+---
+
 ## Zdroje
 
+- European Commission: Dealing with requests from individuals — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/dealing-requests-individuals_en
+- European Commission: How should requests from individuals exercising their data protection rights be dealt with? — https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/dealing-citizens/how-should-requests-individuals-exercising-their-data-protection-rights-be-dealt_en
+- ICO: Right to data portability — https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/individual-rights/individual-rights/right-to-data-portability/
 - EDPB: Be compliant — Data protection guide for small business — https://www.edpb.europa.eu/sme/be-compliant/be-compliant_en
 - EDPB: Privacy by design and by default — https://www.edpb.europa.eu/topics/ai-and-technology/privacy-by-design-and-by-default_en
 - ENISA: Cybersecurity guide for SMEs — 12 steps to securing your business — https://www.enisa.europa.eu/publications/cybersecurity-guide-for-smes
@@ -5207,6 +5327,7 @@ Nejlepší AI funkce není ta, která v demu udělá největší „wow“. Nejl
 
 ## Pracovní log
 
+- 2026-08-08: Přidána příloha AD o exportu dat a interoperabilitě bez zákaznického vězení: mapa exportovatelných dat, čitelné formáty, bezpečné stažení, test importem, odchodový scénář a checklist.
 - 2026-08-08: Přidána příloha AC o AI funkcích v SaaS bez úniku dat: výběr use-casu, mapa datového toku, RAG se zdroji a právy, člověk ve smyčce, dodavatelský dotazník, LLM bezpečnost a checklist před spuštěním.
 - 2026-08-08: Přidána příloha AB o admin rozhraní a auditní stopě: úkolové admin akce, maskování citlivých dat, důvody zásahů, support režim, bezpečné logování a checklist.
 - 2026-08-08: Přidána příloha AA o transakčních e-mailech a doručitelnosti: oddělení typů zpráv, SPF/DKIM/DMARC, férové odhlášení, úsporné šablony, privacy-first měření a checklist.
