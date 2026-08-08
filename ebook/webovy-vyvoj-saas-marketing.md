@@ -7006,7 +7006,158 @@ Dobré privacy mikrocopy je produktová empatie v montérkách. Neříká „vě
 
 Privacy mikrocopy patří přímo do rozhodovacích momentů produktu. Piš krátce, konkrétně a klidně: co sbíráš, proč, kdo to uvidí a jak dlouho. Text musí odpovídat skutečnému chování systému, jinak nevyrábí důvěru, ale budoucí problém. Knihovna mikrotextů pomáhá držet konzistenci mezi produktem, dokumentací, podporou a obchodem. Privacy-first značka se nestaví jen velkými zásadami, ale stovkou malých vět, které uživatele nenechají hádat.
 
+# Příloha AQ: Referral a partnerský marketing bez sledovací pasti
+
+Referral, affiliate a partnerský marketing umí být skvělý růstový kanál. Doporučení od spokojeného zákazníka má často větší váhu než kampaň, která křičí z banneru jako papoušek po třetím espressu. Problém začíná ve chvíli, kdy se z jednoduchého doporučení stane síť fingerprintingu, cross-site cookie, skrytých redirectů a profilů, kterým nerozumí ani člověk, který je nastavil.
+
+Privacy-first přístup neříká „nedělej referral“. Říká: navrhni ho tak, aby byl měřitelný, férový, vysvětlitelný a datově střídmý. Evropská komise u principů GDPR připomíná účelové omezení a minimalizaci dat: organizace nemá sbírat data pro neurčité účely a má zpracovávat jen to, co je pro daný účel nezbytné: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/overview-principles/what-data-can-we-process-and-under-which-conditions_en. EDPB zároveň ve své příručce pro malé firmy zdůrazňuje, že právní základ zpracování je potřeba určit předem a že souhlas, pokud ho používáš, musí být svobodný, konkrétní, informovaný a jednoznačný: https://www.edpb.europa.eu/sme/be-compliant/process-personal-data-lawfully_en.
+
+## AQ.1 Nejdřív si řekni, co vlastně odměňuješ
+
+Špatně navržený referral program odměňuje poslední klik, nejhlasitějšího partnera nebo nejagresivnější tracking. Dobře navržený program odměňuje skutečný přínos: relevantní doporučení, kvalitní lead, aktivovaného zákazníka nebo dlouhodobou spolupráci.
+
+Začni otázkou:
+
+- Chceme odměnit registraci, kvalifikovaný lead, první platbu, nebo zákazníka po určité době používání?
+- Potřebujeme znát kompletní cestu návštěvníka, nebo stačí bezpečně spojit doporučení s výsledkem?
+- Má být odměna finanční, kreditová, službová, nebo symbolická?
+- Jak zabráníme self-referral trikům, spamování a falešným účtům?
+- Co se stane, když zákazník požádá o smazání dat?
+
+Praktický příklad pro B2B SaaS:
+
+| Událost | Odměňovat? | Proč |
+| --- | --- | --- |
+| Klik na partnerský odkaz | Ne | příliš slabý signál, snadno se nafoukne |
+| Registrace bez aktivace | Spíš ne | může motivovat ke spamovým registracím |
+| Demo poptávka s firemním e-mailem | Ano, pokud je relevantní | dobrý signál zájmu u B2B |
+| První platba | Ano | jasný obchodní výsledek |
+| Aktivní zákazník po 60 dnech | Ano, vyšší bonus | odměňuje kvalitu, ne jen rychlý klik |
+
+Když měříš méně věcí, ale správných, nepotřebuješ honit uživatele po internetu jako detektiv v levném seriálu.
+
+## AQ.2 Referral kód je lepší než tajný profil návštěvníka
+
+Nejjednodušší privacy-first model je obyčejný referral kód nebo partnerský parametr v URL. Uživatel přijde přes odkaz, aplikace si při registraci uloží informaci „doporučil partner X“ a dál pracuje jen s nezbytným obchodním stavem. Žádné sledování pohybu po deseti webech, žádné externí pixely, žádná snaha poznat člověka podle prohlížeče, rozlišení obrazovky a nálady jeho grafické karty.
+
+Rozumný minimální datový model:
+
+- `referral_code`: kód partnera nebo zákazníka,
+- `referred_account_id`: účet, který vznikl z doporučení,
+- `attribution_created_at`: čas přiřazení,
+- `reward_state`: čeká, schváleno, zamítnuto, vyplaceno,
+- `reward_reason`: stručný interní důvod změny stavu,
+- `expires_at`: datum, kdy se nepoužitá atribuce smaže.
+
+Co bych neukládal jako výchozí stav:
+
+- kompletní historii navštívených stránek před registrací,
+- fingerprint prohlížeče,
+- osobní údaje návštěvníka před tím, než je potřebuješ,
+- surové IP adresy v partnerském dashboardu,
+- marketingové segmenty přilepené k zákaznickému účtu navždy.
+
+Codyho komentář: referral má být účetní poznámka o doporučení, ne rodokmen digitálního chování. Pokud pro vyplacení odměny potřebuješ vědět, že účet přišel od partnera, nepotřebuješ vědět, že člověk předtím třikrát scrolloval ceník v 23:41.
+
+## AQ.3 Partnerský dashboard nesmí ukazovat víc, než partner potřebuje
+
+Partner chce vědět, jestli jeho doporučení fungují a jestli dostane odměnu. To neznamená, že má vidět osobní detaily každého leadu. Zvlášť u B2B stačí agregace a stav, ne kompletní zákaznický profil.
+
+Bezpečnější dashboard ukazuje:
+
+- počet kliků nebo použití kódu, pokud je měříš bez identifikace osoby,
+- počet kvalifikovaných leadů,
+- počet schválených konverzí,
+- očekávanou a vyplacenou odměnu,
+- stav jednotlivých odměn bez zbytečných osobních údajů,
+- pravidla programu a důvody zamítnutí.
+
+Rizikovější dashboard ukazuje:
+
+- jména konkrétních osob bez nutnosti,
+- e-maily všech doporučených kontaktů,
+- detailní aktivitu zákazníka v aplikaci,
+- obchodní hodnotu účtu, pokud ji partner nepotřebuje znát,
+- poznámky obchodníka nebo podpory.
+
+Lepší řádek v dashboardu:
+
+| Datum | Typ | Stav | Odměna | Poznámka |
+| --- | --- | --- | --- | --- |
+| 2026-08-08 | B2B lead | čeká na kvalifikaci | 0 Kč | rozhodnutí do 14 dnů |
+
+Horší řádek v dashboardu:
+
+| Jméno | E-mail | Firma | Aktivita | Poznámka obchodu |
+| --- | --- | --- | --- | --- |
+| konkrétní osoba | konkrétní e-mail | konkrétní firma | navštívené stránky a trial akce | interní kvalifikace |
+
+Partner není člen supportu ani obchodního týmu. Nedávej mu okno do systému jen proto, že chce hezký graf.
+
+## AQ.4 Pravidla programu napiš dřív než první spor
+
+Referral program bez pravidel je pozvánka k budoucímu hašení. Ne kvůli tomu, že by všichni partneři byli padouši v kabátu. Spíš proto, že lidé optimalizují podle pobídek. Když odměňuješ registrace, dostaneš registrace. Když odměňuješ kvalitní zákazníky, máš větší šanci dostat kvalitní zákazníky.
+
+Pravidla by měla říkat:
+
+- co se počítá jako platné doporučení,
+- kdy vzniká nárok na odměnu,
+- kdy může být odměna zamítnuta,
+- jak dlouho trvá atribuční okno,
+- jak se řeší duplicitní doporučení,
+- jak se řeší refundace, neplacení nebo zrušení účtu,
+- jaká data partner vidí a proč,
+- jak může partner požádat o ukončení programu a smazání zbytečných údajů.
+
+Příklad férové věty:
+
+> „Odměna vzniká po první uhrazené faktuře doporučeného zákazníka a po uplynutí 30 dnů bez storna. Partner v dashboardu vidí stav odměny a souhrnné počty doporučení, ne detailní aktivitu zákazníka v produktu.“
+
+Tohle není právní smlouva na olympiádu. Je to jasná dohoda, aby se obchod, partner a produkt nehádali nad stejnou tabulkou třemi různými jazyky.
+
+## AQ.5 Technické řešení drž jednoduché a auditovatelné
+
+Referral program nemusí začínat nákupem affiliate platformy s vlastním skriptem na každou stránku. U malého SaaS často stačí serverové přiřazení kódu při registraci, interní tabulka odměn a ruční schválení před výplatou. Automatizaci přidávej až ve chvíli, kdy ruční proces prokazatelně bolí.
+
+Privacy-first technický návrh:
+
+1. Partner dostane statický odkaz s kódem, například `/signup?ref=PARTNER123`.
+2. Server při registraci ověří, že kód existuje a není expirovaný.
+3. Kód se uloží k novému účtu jako obchodní metadata.
+4. Odměna vznikne až po události, kterou umíš obhájit: zaplacená faktura, kvalifikovaný lead, aktivace.
+5. Partner vidí jen agregace a stav odměn.
+6. Nepoužitá nebo expirovaná atribuční data se smažou podle retenčního pravidla.
+
+Kdy zpozornět u externího nástroje:
+
+- vyžaduje globální skript na celém webu,
+- používá fingerprinting nebo cross-device identifikaci,
+- ukládá data mimo EU bez jasného důvodu a smluvního krytí,
+- nedává kontrolu nad retencí,
+- partnerům ukazuje osobní údaje leadů jako výchozí stav,
+- neumí export a smazání dat.
+
+Pokud externí nástroj opravdu potřebuješ, ber ho jako každého jiného dodavatele: datová mapa, DPA, subprocesoři, retence, přístupy, export, incidenty. Marketingový nástroj není kouzelná výjimka z reality, jen má barevnější dashboard.
+
+## AQ.6 Checklist privacy-first referral programu
+
+- [ ] Víme, jaký obchodní výsledek program odměňuje.
+- [ ] Atribuce funguje bez cross-site sledování a fingerprintingu.
+- [ ] Referral kód ukládáme až ve chvíli, kdy je pro proces potřeba.
+- [ ] Nepoužitá atribuční data mají retenční dobu a automatický úklid.
+- [ ] Partner vidí agregace a stav odměn, ne zbytečné osobní údaje zákazníků.
+- [ ] Pravidla programu vysvětlují nárok, zamítnutí, duplicity, refundace a ukončení.
+- [ ] Dashboard neobsahuje interní obchodní poznámky ani aktivitu zákazníka v produktu.
+- [ ] Externí nástroj prošel stejným vendor review jako ostatní zpracovatelé.
+- [ ] V privacy dokumentaci je jasně popsáno, že doporučení může být přiřazeno partnerovi.
+- [ ] Support ví, jak odpovědět na otázku „proč je můj účet spojený s tímto partnerem?“
+
+## Shrnutí přílohy
+
+Referral a partnerský marketing může růst bez datového vysavače. Stačí odměňovat správný výsledek, používat jednoduché kódy místo invazivního trackingu, ukazovat partnerům jen nezbytné informace a uklízet atribuční data po skončení účelu. Privacy-first referral není méně obchodní. Je jen méně creepy. A to je v Evropě docela dobrý produktový feature.
+
 ## Pracovní log
+- 2026-08-08: Přidána příloha AQ o referral a partnerském marketingu bez sledovací pasti: odměňovaný výsledek, referral kódy, bezpečný dashboard, pravidla programu, technické řešení a checklist.
 - 2026-08-08: Přidána příloha AP o privacy mikrocopy v produktu: rozhodovací momenty, konkrétní datové věty, férový tón, soulad s chováním systému, knihovna mikrotextů a checklist.
 - 2026-08-08: Přidána příloha AO o minimalistickém marketingovém stacku: schopnosti před nástroji, externí skripty jako dodavatelé, střídmé CRM, férové automatizace, měsíční stack review a checklist.
 - 2026-08-08: Přidána příloha AN o zpracovatelských smlouvách, rolích správce/zpracovatele, registru subprocesorů, vendor review, oznamování změn dodavatelů a praktickém checklistu.
