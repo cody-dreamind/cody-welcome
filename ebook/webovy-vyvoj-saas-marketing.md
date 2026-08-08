@@ -6109,7 +6109,165 @@ Dokumentace je nejlevnější člen support týmu, ale jen pokud ji někdo krmí
 Zákaznická dokumentace má být praktická, úkolová a bezpečná. Stav ji podle reálných cest uživatele, piš krátké články s jasným výsledkem, používej syntetická data ve screenshotech, zakončuj návody dalším bezpečným krokem a drž revizní rytmus. Dobrá znalostní báze snižuje počet ticketů, zrychluje onboarding a chrání soukromí lépe než další pop-up s omluvou.
 
 
+---
+
+# Příloha AK: Changelog a release notes bez produktového ohňostroje
+
+Changelog není interní seznam commitů s lepším make-upem. Release notes nejsou slavnostní tisková zpráva pokaždé, když někdo přebarví tlačítko. Jsou to dohledatelné produktové zprávy pro zákazníky, support, obchod i vlastní tým: co se změnilo, koho se to týká, co má udělat a kde najde víc informací.
+
+Malý SaaS často komunikuje změny jedním ze dvou špatných extrémů. Buď mlčí a zákazník si novou funkci všimne až ve chvíli, kdy mu rozbije pracovní postup. Nebo posílá marketingový ohňostroj ke každé drobnosti a učí lidi, že produktové e-maily jsou šum. Privacy-first přístup volí třetí cestu: komunikovat změny přesně, úsporně, bez zbytečného sledování a bez tlačení zákazníka do cizích platforem.
+
+Cíl této přílohy: nastavit changelog a release notes tak, aby zvyšovaly důvěru, snižovaly supportní zátěž a pomáhaly zákazníkům bezpečně používat produkt.
+
+## AK.1 Rozliš changelog, release notes a incidentní komunikaci
+
+Ne každá změna potřebuje stejný kanál. Když všechno posíláš všem, zákazníci přestanou číst. Když neposíláš nic, support začne hasit překvapení. Rozliš tři typy komunikace:
+
+| Typ zprávy | Kdy ji použít | Komu patří | Příklad |
+| --- | --- | --- | --- |
+| Changelog | průběžný seznam změn | uživatelé, support, obchod | „Přidali jsme export projektů do CSV.“ |
+| Release notes | větší vydání nebo balík změn | aktivní zákazníci a decision makeři | „Nová správa rolí pro týmy.“ |
+| Incidentní zpráva | výpadek, bezpečnostní problém, datové riziko | dotčení zákazníci | „Včera mezi 9:10–9:34 nefungovalo odesílání e-mailů.“ |
+
+Changelog má být trvalý a veřejně dohledatelný. Release notes mohou být e-mail, článek nebo oznámení v aplikaci. Incidentní komunikace má mít vlastní postup a nesmí se tvářit jako běžná produktová novinka. Když do marketingového newsletteru schováš informaci o změně práv uživatelů, není to kreativní. Je to hledání miny v konfeti.
+
+## AK.2 Každý záznam piš podle dopadu na uživatele
+
+Interní jazyk svádí k větám jako „refaktorovali jsme billing flow“ nebo „nasadili jsme nový permission middleware“. Uživatel ale potřebuje vědět, co se mění pro něj. Dobrý záznam začíná dopadem, ne technickou pýchou.
+
+Šablona changelog záznamu:
+
+- **Co je nové:** jedna jasná věta.
+- **Koho se to týká:** všichni, admini, účetní, API uživatelé, konkrétní tarif.
+- **Co má uživatel udělat:** nic, zkontrolovat nastavení, změnit API volání, pozvat členy znovu.
+- **Dopad na data a soukromí:** žádný nový sběr dat, nová role, změna retence, nový subdodavatel, nový export.
+- **Odkaz na dokumentaci:** detailní postup mimo krátkou zprávu.
+
+Příklad slabého záznamu:
+
+> „Vylepšili jsme administraci uživatelů.“
+
+Příklad užitečného záznamu:
+
+> „Admini teď mohou nastavit roli `Fakturace`, která vidí faktury a tarif, ale nevidí zákaznické projekty. Stávající role se nemění. Pokud chceš oddělit účetní přístup od správy týmu, uprav role v Nastavení → Tým.“
+
+Rozdíl? První věta zní hezky. Druhá šetří support, snižuje riziko špatně nastavených oprávnění a dává zákazníkovi konkrétní další krok.
+
+## AK.3 Privacy změny zvýrazni zvlášť
+
+Změny, které se dotýkají dat, oprávnění, logování, exportu, integrací nebo subdodavatelů, nesmí zmizet mezi drobnými UX úpravami. Privacy-first produkt říká nahlas, kdy se mění práce s daty. Ne proto, že by chtěl strašit. Protože důvěra stojí na předvídatelnosti.
+
+U každého vydání si polož otázky:
+
+- Sbíráme nově nějaký údaj?
+- Posíláme data novému dodavateli nebo integraci?
+- Měníme retenci, export nebo mazání dat?
+- Měníme role, práva nebo výchozí nastavení přístupů?
+- Přidáváme AI funkci, která pracuje s obsahem zákazníka?
+- Měníme analytiku nebo měření chování?
+
+Pokud je odpověď ano, záznam musí obsahovat větu „Co to znamená pro data“. Krátce, lidsky, bez právnického dýmu.
+
+Příklad:
+
+> „Nový audit log ukládá čas, uživatele, typ akce a ID objektu. Neukládá obsah zpráv ani exportovaných souborů. Záznamy držíme 180 dní kvůli bezpečnosti účtu.“
+
+Tahle věta je malá, ale uživateli říká přesně to důležité: rozsah, účel a hranici. A hranice jsou sexy. Dobře, možná ne na billboard, ale v B2B SaaS rozhodně.
+
+## AK.4 Kanály drž pod vlastní kontrolou
+
+Changelog patří primárně na vlastní web nebo do vlastní dokumentace. Sociální sítě jsou dobrý distribuční bonus, ale špatný archiv. Algoritmus rozhodne, kdo co uvidí, vyhledávání bývá mizerné a staré zprávy se ztratí v proudu memů, launchů a kolektivního křiku do prázdna.
+
+Praktická sada kanálů:
+
+- veřejná stránka `Changelog` s přímou URL,
+- RSS feed pro změny,
+- e-mailové release notes pro důležité změny,
+- oznámení v aplikaci pro relevantní role,
+- odkaz z dokumentace u funkcí, kterých se změna týká,
+- interní poznámka pro support a obchod.
+
+RSS je podceňovaný šperk. Umožní zákazníkům i partnerům sledovat změny bez účtu na sociální síti, bez remarketingu a bez nutnosti čekat, jestli se algoritmus zrovna dobře vyspal. Přímé odkazy navíc pomáhají supportu: místo dlouhého vysvětlování pošle konkrétní záznam.
+
+## AK.5 Nepřeháněj měření čtenosti
+
+Je lákavé měřit otevření e-mailu, kliknutí, scroll, čas na stránce a mentální stav uživatele podle pohybu myši. Nedělej z changelogu další sledovací laboratoř. Potřebuješ vědět hlavně to, jestli komunikace pomáhá.
+
+Privacy-first metriky:
+
+- počet návštěv changelog stránky v agregaci,
+- počet kliknutí na dokumentaci bez profilování jednotlivců,
+- počet supportních ticketů k dané změně,
+- odpovědi zákazníků na release note,
+- počet účtů, které provedly doporučenou bezpečnou akci, pokud je to nezbytné a agregované.
+
+Nepotřebuješ vědět, že František z účtárny otevřel e-mail v 7:42 na iPhonu a pak 13 sekund váhal nad tlačítkem. Potřebuješ vědět, jestli zákazníci pochopili změnu. To jde často zjistit jednodušeji: méně dotazů na support, méně chyb v nastavení, více dokončených doporučených kroků.
+
+## AK.6 Release note před odesláním zkontroluj jako produkt
+
+Release note je malý produktový artefakt. Má uživatele provést změnou. Proto potřebuje stejnou disciplínu jako obrazovka v aplikaci: jasný účel, správné publikum, konkrétní CTA a kontrolu rizik.
+
+Mini šablona pro větší release:
+
+```markdown
+# Nová správa rolí pro týmy
+
+Od dneška můžeš oddělit technickou správu, fakturaci a běžnou práci v projektu.
+
+## Koho se změna týká
+- Workspace adminů
+- Týmů s více než jednou rolí
+
+## Co se změnilo
+- Přidali jsme roli Fakturace.
+- Admin může ukončit aktivní sessions uživatele.
+- Audit log nově ukazuje změny rolí za posledních 180 dní.
+
+## Co máš udělat
+Zkontroluj role v Nastavení → Tým, hlavně u externích spolupracovníků.
+
+## Data a soukromí
+Nové role nemění obsah dat v projektu. Audit log ukládá jen metadata bezpečnostních akcí.
+
+## Dokumentace
+Odkaz: /docs/tym-a-role
+```
+
+Před odesláním si ověř:
+
+- Je jasné, kdo má zprávu číst?
+- Je zřejmé, jestli uživatel musí něco udělat?
+- Neobsahuje text interní názvy, které zákazník nezná?
+- Je zmíněn dopad na data, oprávnění nebo integrace?
+- Vede odkaz na aktuální dokumentaci?
+- Ví support, že zpráva odešla?
+
+## AK.7 Checklist changelogu a release notes
+
+Před publikací změny projdi tento checklist:
+
+- [ ] Změna je popsána podle dopadu na uživatele, ne podle interní implementace.
+- [ ] Je jasné, koho se změna týká a koho ne.
+- [ ] Záznam říká, zda má uživatel udělat další krok.
+- [ ] Privacy dopad je explicitně uveden u dat, rolí, logů, exportů, integrací a AI funkcí.
+- [ ] Changelog má trvalý přímý odkaz na vlastním webu nebo v dokumentaci.
+- [ ] Důležité změny mají odkaz na detailní návod.
+- [ ] Support a obchod mají interní shrnutí pro odpovědi zákazníkům.
+- [ ] Měření čtenosti je agregované a nepřidává zbytečné trackery.
+- [ ] Staré záznamy zůstávají dohledatelné a nejsou schované jen v e-mailu.
+- [ ] Změna je přiřazená k vlastníkovi, který odpoví na navazující dotazy.
+
+## Codyho komentář
+
+Changelog je jeden z nejlevnějších trust nástrojů v SaaS. Neprodává sám o sobě jako hero sekce, ale v rozhodování hodně pomáhá. Když zákazník vidí pravidelné, klidné a přesné změny, produkt působí živě. Když zároveň vidí, že u privacy změn nemlžíš, produkt působí dospěle. A dospělý SaaS je vzácnější než roadmapa bez slova „AI“.
+
+## Shrnutí přílohy
+
+Changelog a release notes mají zákazníkům usnadnit změnu, ne dokazovat, že tým pracuje. Dobrý záznam popisuje dopad, publikum, další krok a privacy souvislosti. Kanály drž pod vlastní kontrolou: vlastní web, dokumentace, RSS, e-mail a relevantní oznámení v aplikaci. Měření drž střídmé a agregované. Produktová komunikace, která je přesná a dohledatelná, šetří support, zrychluje adopci a posiluje důvěru bez datového cirkusu.
+
+
 ## Pracovní log
+- 2026-08-08: Přidána příloha AK o changelogu a release notes bez produktového ohňostroje: rozlišení kanálů, psaní podle dopadu, zvýraznění privacy změn, vlastní distribuční kanály, střídmé měření a checklist.
 - 2026-08-08: Přidána příloha AJ o zákaznické produktové dokumentaci: úkolová struktura, bezpečné screenshoty, další kroky v návodech, vlastnictví, revizní rytmus a privacy-first checklist.
 - 2026-08-08: Přidána příloha AI o B2B nákupním procesu bez nekonečných callů a datového ping-pongu: nákupní stránka, mini trust pack, pilot, odpovědní knihovna, datové minimum a checklist.
 - 2026-08-08: Přidána příloha AH o přihlašování a session managementu bez digitální paranoie: rizikové úrovně akcí, hesla a reset, MFA/passwordless, bezpečné session cookies, přihlašovací logy a checklist.
