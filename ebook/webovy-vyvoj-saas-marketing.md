@@ -6601,7 +6601,137 @@ Před tím, než první žádost opravdu přijde, projdi tento checklist:
 
 Žádosti o přístup, opravu, výmaz nebo přenos dat vyžadují předem připravený proces: jeden vstup, vlastníka, přiměřené ověření identity, mapu dat, bezpečnou odpověď a jasnou evidenci. Privacy-first SaaS nesbírá nové citlivé údaje jen kvůli ověření, nelepí vše do zákaznického profilu a umí vysvětlit hranice výmazu. Nejlepší proces je nudný, dohledatelný a použitelný i v pátek odpoledne — tedy přesně tehdy, kdy realita ráda testuje dokumentaci.
 
+---
+
+# Příloha AN: Zpracovatelské smlouvy bez právního cosplaye
+
+Zpracovatelská smlouva není PDF talisman, který se nahraje do složky „GDPR“ a tím je vesmír v rovnováze. Je to provozní dohoda o tom, kdo komu svěřuje osobní údaje, za jakým účelem, s jakými bezpečnostními pravidly, kdo může zapojit další subdodavatele a co se stane při incidentu, auditu, výmazu nebo ukončení spolupráce.
+
+Malý SaaS tým často řeší DPA pozdě: až když enterprise zákazník pošle bezpečnostní dotazník, investor se zeptá na subprocesory nebo dodavatel potichu přidá nový AI modul. Lepší je mít lehký systém dopředu. Ne právní divadlo v pěti šanonech, ale živý přehled, který pomáhá rozhodovat.
+
+GDPR v článku 28 vyžaduje, aby zpracování zpracovatelem upravovala smlouva nebo jiný právní akt, který mimo jiné stanoví předmět, dobu trvání, povahu, účel, typ osobních údajů, kategorie subjektů údajů a povinnosti správce a zpracovatele: https://eur-lex.europa.eu/eli/reg/2016/679/oj. Evropská komise vydala také standardní smluvní doložky pro vztah správce–zpracovatel podle článku 28: https://eur-lex.europa.eu/eli/dec_impl/2021/915/oj. EDPB k roli správce a zpracovatele uvádí praktické rozlišení a odpovědnosti v pokynech 07/2020: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-072020-concepts-controller-and-processor-gdpr_en.
+
+Tohle není právní rada. Je to provozní mapa, aby tým nepodepisoval smlouvy naslepo a neobjevil subdodavatele až ve chvíli, kdy někdo rozsvítí sirénu.
+
+## AN.1 Nejdřív si ujasni roli: správce, zpracovatel, nebo oba
+
+První otázka nezní „máme DPA?“. První otázka zní: jakou roli v konkrétním toku dat máme? Jedna firma může být v jedné situaci správcem a v jiné zpracovatelem. SaaS, který zpracovává data zákazníkových koncových uživatelů podle pokynů zákazníka, bude často zpracovatel. U vlastního marketingu, fakturace nebo podpory je ale typicky správcem.
+
+Praktické rozlišení:
+
+| Situace | Pravděpodobná role | Co z toho plyne |
+| --- | --- | --- |
+| Provozujeme aplikaci pro zákaznická data klienta | zpracovatel | potřebujeme DPA se zákazníkem a seznam subprocesorů |
+| Posíláme vlastní newsletter zájemcům | správce | potřebujeme právní základ, informování a odhlášení |
+| Používáme hosting pro databázi aplikace | správce vůči hostingu, zpracovatel vůči zákazníkovi | hosting musí být pokrytý jako subprocesor |
+| Vystavujeme faktury zákazníkům | správce | data držíme kvůli účetním a právním povinnostem |
+| Analyzujeme anonymizované agregované metriky | záleží na vstupu | ověřit, jestli anonymizace opravdu znemožňuje identifikaci |
+
+Nejčastější chyba: tým si řekne „my jsme jen zpracovatel“, a pak do stejné databáze přimíchá vlastní marketingové segmenty, supportní poznámky a produktovou analytiku bez jasného oddělení účelů. To je jako míchat účetnictví, recepty a hesla v jednom sešitu. Jde to, ale audit bude mít den D.
+
+## AN.2 Registr subprocesorů má být produktový artefakt
+
+Seznam subprocesorů není příloha, kterou jednou vytvoří právník a pak ji sežere čas. Je to živý produktový artefakt. Pokud zákazník svěřuje data tvému SaaS, má vědět, kdo další se k nim může dostat nebo je technicky zpracovává.
+
+Minimální tabulka subprocesorů:
+
+| Pole | Příklad |
+| --- | --- |
+| Název dodavatele | EU hosting, e-mailing, error monitoring |
+| Účel | provoz databáze, odesílání transakčních e-mailů, hlášení chyb |
+| Kategorie dat | účetní e-mail, log události, obsah ticketu |
+| Region zpracování | EU / EHP / mimo EU |
+| Právní dokument | DPA, SCC, bezpečnostní příloha |
+| Vlastník v týmu | osoba, která dodavatele spravuje |
+| Datum poslední kontroly | YYYY-MM-DD |
+| Alternativa nebo exit plán | co uděláme, když dodavatel přestane vyhovovat |
+
+Privacy-first pravidlo: subprocesor bez jasného účelu je kandidát na odstranění. Subprocesor bez vlastníka je kandidát na průšvih. Subprocesor mimo Evropu není automaticky zakázaný, ale musí mít mnohem lepší vysvětlení než „měli hezký landing page“.
+
+## AN.3 DPA čti jako provozní checklist, ne jako uspávanku
+
+DPA má smysl jen tehdy, když tým rozumí jejím důsledkům. Pokud smlouva říká, že dodavatel oznámí incident „bez zbytečného odkladu“, někdo musí vědět, kam oznámení přijde. Pokud smlouva slibuje výmaz po ukončení, produkt musí umět ukončení provést. Pokud smlouva umožňuje audit, obchod by měl vědět, co zákazníkům realisticky nabídnout.
+
+Při čtení DPA si polož tyhle otázky:
+
+- Jaký přesný účel zpracování smlouva pokrývá?
+- Sedí typy dat s realitou produktu?
+- Je popsaná doba zpracování a mazání po ukončení?
+- Kdo schvaluje nové subprocesory a jak se zákazník dozví o změně?
+- Kde dodavatel data zpracovává a jak řeší předání mimo EHP?
+- Jak rychle a jakým kanálem hlásí bezpečnostní incident?
+- Umí asistovat s exportem, výmazem a žádostmi subjektů údajů?
+- Existuje bezpečnostní dokumentace, kterou lze ukázat zákazníkovi bez NDA olympiády?
+
+Praktická šablona interní poznámky po kontrole:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Dodavatel | název služby |
+| Proč ho používáme | jedna obchodní nebo technická věta |
+| Jaká data vidí | konkrétní kategorie, ne „nějaká data“ |
+| Největší riziko | region, rozsah přístupu, vendor lock-in, incidentní kanál |
+| Rozhodnutí | schválit / schválit s podmínkou / nepoužít |
+| Kontrola znovu | datum nebo spouštěč změny |
+
+## AN.4 Změny subprocesorů oznamuj dřív, než se zákazník naštve
+
+Dodavatelé se mění. Hosting přidá nový region, e-mailová služba změní infrastrukturu, support nástroj zapne novou AI funkci, monitoring začne posílat data jinam. Problém není samotná změna. Problém je, když o ní zákazník zjistí z právnického e-mailu třetí strany nebo při auditu.
+
+Dobrá rutina změn:
+
+- nového dodavatele nelze zapnout bez vyplněného mini vendor review,
+- změna subprocesora má vlastníka a datum účinnosti,
+- zákazníci mají jasný kanál pro oznámení změn, ideálně e-mail plus veřejnou stránku,
+- oznámení říká účel, typ dat, region a datum změny,
+- zákazník má popsaný způsob námitky, pokud ho smlouva umožňuje,
+- starý dodavatel má uzavírací krok: export, vypnutí, výmaz, odebrání přístupů.
+
+Příklad krátkého oznámení:
+
+> Od 2026-09-15 přidáváme nového subprocesora pro odesílání transakčních e-mailů. Zpracovávat bude e-mailovou adresu, jazyk šablony a technické doručovací logy. Data budou zpracována v EU. Seznam subprocesorů jsme aktualizovali na stránce `/subprocessors`. Pokud máte námitku podle smlouvy, napište na `privacy@firma.cz` do 30 dnů.
+
+Tohle je nudné. Nudné je dobré. V privacy provozu je nuda kompliment.
+
+## AN.5 Vendor review musí být krátké, jinak se obejde
+
+Když schválení dodavatele trvá tři týdny a vyžaduje 80 polí, tým si najde stínovou cestu. Typicky „jen to otestujeme na produkčních datech, pak to vyřešíme“. Nevyřeší. Gratuluji, právě vznikl compliance dluh s chlupama.
+
+Lehký vendor review pro malý tým:
+
+1. Jaké rozhodnutí nebo proces bez dodavatele neumíme udělat?
+2. Jaká osobní data do služby půjdou?
+3. Existuje varianta bez osobních dat nebo s anonymizovanými daty?
+4. Kde se data zpracovávají?
+5. Má dodavatel DPA a seznam subprocesorů?
+6. Jak se řeší incidenty a výmaz dat?
+7. Kdo dodavatele vlastní a kdy proběhne další kontrola?
+
+Pokud odpověď na první otázku není přesvědčivá, nepokračuj. Když nevíš, proč nástroj potřebuješ, nepotřebuješ jeho právní dokumentaci. Potřebuješ méně nástrojů.
+
+## AN.6 Checklist zpracovatelů a subdodavatelů
+
+- [ ] U každého datového toku víme, jestli jsme správce, zpracovatel nebo oboje v různých rolích.
+- [ ] Máme aktuální seznam subprocesorů s účelem, kategoriemi dat, regionem, dokumentací a vlastníkem.
+- [ ] Každý nový dodavatel prochází krátkým vendor review před zapnutím produkčních dat.
+- [ ] DPA kontrolujeme proti realitě produktu, ne jen podle toho, že existuje PDF.
+- [ ] Zákazníci mají dostupnou stránku nebo dokument se subprocesory.
+- [ ] Změny subprocesorů mají oznámení, datum účinnosti a popsaný způsob námitky, pokud ho smlouva umožňuje.
+- [ ] Dodavatelé mají jasný exit plán: export, vypnutí, výmaz a odebrání přístupů.
+- [ ] Subprocesory mimo EU/EHP schvalujeme zvlášť a jen s konkrétním důvodem.
+- [ ] AI funkce dodavatelů nejsou zapnuté automaticky pro zákaznická data.
+- [ ] Jednou za měsíc kontrolujeme, jestli seznam dodavatelů odpovídá realitě v produktu, fakturaci a infrastruktuře.
+
+## Codyho komentář
+
+DPA není papír pro právníky. Je to mapa odpovědnosti. Nejlepší privacy-first týmy nejsou ty, které mají nejdelší smlouvy. Jsou to ty, které dokážou do pěti minut říct: kdo zpracovává jaká data, proč, kde, jak dlouho a co uděláme, když dodavatel přestane dávat smysl. To je méně sexy než nový dashboard, ale výrazně užitečnější než další tracker s konfety animací.
+
+## Shrnutí přílohy
+
+Zpracovatelské smlouvy a seznam subprocesorů mají být živou součástí provozu SaaS, ne zapomenutý právní archiv. Ujasni role správce a zpracovatele, veď praktický registr subdodavatelů, čti DPA jako provozní checklist, oznamuj změny včas a nastav krátké vendor review, které tým nebude obcházet. Privacy-first provoz v Evropě stojí na jednoduché schopnosti: vědět, kam data tečou, a umět to vysvětlit zákazníkovi bez mlhy.
+
 ## Pracovní log
+- 2026-08-08: Přidána příloha AN o zpracovatelských smlouvách, rolích správce/zpracovatele, registru subprocesorů, vendor review, oznamování změn dodavatelů a praktickém checklistu.
 - 2026-08-08: Přidána příloha AM o žádostech subjektů údajů: jeden vstup, vlastník, ověření identity, mapa dat, bezpečné odpovědi, výmazové hranice, automatizace a checklist.
 - 2026-08-08: Přidána příloha AL o privacy-first marketingové atribuci: rozhodovací otázky, UTM disciplína, oddělení atribučních dat, kvalita leadů, přímé dotazy a checklist.
 - 2026-08-08: Přidána příloha AK o changelogu a release notes bez produktového ohňostroje: rozlišení kanálů, psaní podle dopadu, zvýraznění privacy změn, vlastní distribuční kanály, střídmé měření a checklist.
