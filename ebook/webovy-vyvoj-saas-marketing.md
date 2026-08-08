@@ -5981,9 +5981,137 @@ Ta druhá věta je rychlá. Taky je to krásná pozvánka k tomu, aby se do obch
 B2B nákupní proces není jen obchodní rituál. Je to první test, jestli firma umí zacházet s důvěrou. Když zákazník předem vidí hodnotu, datový tok, bezpečnostní minimum, průběh pilotu a cestu ven, rozhoduje se rychleji a s menším strachem. Privacy-first prodej neznamená méně obchodu. Znamená méně mlhy, méně zbytečných dat a méně schůzek, kde se všichni tváří strategicky, ale nikdo neví, kdo má další krok.
 
 
-## Pracovní log
-- 2026-08-08: Přidána příloha AI o B2B nákupním procesu bez nekonečných callů a datového ping-pongu: nákupní stránka, mini trust pack, pilot, odpovědní knihovna, datové minimum a checklist.
+---
 
+# Příloha AJ: Produktová dokumentace pro zákazníky bez znalostního labyrintu
+
+Dokumentace není skládka odpovědí, které se nevešly do onboardingového callu. Je to produktová vrstva, která má zákazníkovi pomoct udělat práci bez čekání na support, bez posílání citlivých screenshotů a bez pocitu, že produkt ovládá tajný řád zasvěcených.
+
+Malý SaaS často dokumentaci odkládá, protože „ještě se to mění“. Jenže právě ve fázi změn je dokumentace nejdůležitější: odhalí nejasné názvy funkcí, díry v onboardingu, zbytečně složité procesy a místa, kde se uživatel ptá na totéž pořád dokola. Dobrá dokumentace není román. Je to mapa.
+
+Cíl této přílohy: vytvořit zákaznickou znalostní bázi, která pomáhá prodeji, onboardingu i podpoře, aniž by se z ní stal další datový vysavač.
+
+## AJ.1 Každá stránka dokumentace musí mít jeden úkol
+
+Nejhorší dokumentační stránka je „Vše o nastavení“. Vypadá užitečně, ale brzy se z ní stane šuplík na výjimky, poznámky, screenshoty a věty typu „pokud používáte starší variantu integrace, možná uvidíte jiné tlačítko“. Gratuluji, právě vznikl labyrint s vlastním mikroklimatem.
+
+Lepší je rozdělit dokumentaci podle úkolů:
+
+- „Pozvat nového člena týmu“
+- „Nastavit fakturační údaje“
+- „Exportovat data projektu“
+- „Změnit roli uživatele“
+- „Připojit vlastní doménu“
+- „Smazat účet nebo workspace“
+
+Každá stránka má odpovědět na tři otázky:
+
+1. Kdy ji mám použít?
+2. Co přesně mám udělat?
+3. Co se stane po dokončení?
+
+Pokud stránka odpovídá na deset různých situací, rozděl ji. Dokumentace má snižovat kognitivní zátěž, ne testovat, jestli zákazník vydrží číst jako daňový poradce v listopadu.
+
+## AJ.2 Piš podle reálných cest, ne podle menu v aplikaci
+
+Menu aplikace není vždy dobrá struktura dokumentace. Uživatel nepřemýšlí „teď bych si rád prohlédl modul Administrace“. Přemýšlí „potřebuju dát kolegovi přístup, ale nechci mu omylem dát práva na fakturaci“.
+
+Praktická struktura znalostní báze:
+
+| Sekce | Co řeší | Příklad článku |
+| --- | --- | --- |
+| Začínáme | první výsledek a orientace | „První workspace za 15 minut“ |
+| Tým a role | přístupy, pozvánky, odpovědnosti | „Jak nastavit roli účetní“ |
+| Data a export | import, export, retence, smazání | „Jak stáhnout kompletní export projektu“ |
+| Integrace | napojení bez chaosu | „Webhook pro nový kontakt“ |
+| Fakturace | platby, doklady, tarify | „Kde změnit fakturační e-mail“ |
+| Bezpečnost | MFA, sessions, audit log | „Jak ukončit všechny aktivní sessions“ |
+| Řešení problémů | časté chyby a diagnostika | „E-mail nedorazil: co zkontrolovat“ |
+
+Tahle struktura podporuje i privacy-first provoz: uživatel snáz najde export, smazání, role, bezpečnost a fakturaci bez toho, aby psal supportu a posílal data, která nejsou nutná.
+
+## AJ.3 Screenshoty používej opatrně a udržuj je anonymní
+
+Screenshot je užitečný, dokud není zastaralý nebo plný osobních údajů. V dokumentaci se často objeví reálné e-maily, jména zákazníků, interní názvy projektů nebo částky. To je přesně ten typ detailu, který se snadno přehlédne a pak dlouho veřejně visí jako firemní fosilie.
+
+Pravidla pro bezpečné screenshoty:
+
+- používej demo účet se syntetickými daty,
+- nepoužívej skutečné e-maily, telefonní čísla, faktury ani názvy zákazníků,
+- rozmazání ber jako poslední možnost, ne jako hlavní strategii,
+- udržuj jednotný poměr stran a velikost obrázků,
+- u každého screenshotu si poznamenej verzi obrazovky nebo datum kontroly,
+- pokud UI často měníš, preferuj krátký textový postup před galerií obrázků.
+
+Příklad bezpečných demo dat:
+
+| Typ údaje | Bezpečný příklad | Horší příklad |
+| --- | --- | --- |
+| E-mail | `jana.novakova@example.test` | reálný zákaznický e-mail |
+| Firma | `Demo kavárna s.r.o.` | skutečný klient |
+| Částka | `1 250 Kč` v demo faktuře | skutečná fakturovaná částka |
+| Projekt | `Ukázkový projekt` | interní kód zakázky |
+
+Screenshot má vysvětlit akci, ne zveřejnit provozní archeologii firmy.
+
+## AJ.4 Každý článek zakonči dalším bezpečným krokem
+
+Dokumentace často končí ve chvíli, kdy uživatel dokončí akci. Jenže dobrý článek má říct i co dál: jak ověřit výsledek, jak chybu vrátit, kdo dostane oznámení a kam se podívat při problému.
+
+Šablona závěru článku:
+
+- **Jak poznáš, že je hotovo:** konkrétní stav, hláška nebo místo v UI.
+- **Co se stane dál:** e-mail, webhook, změna oprávnění, fakturační dopad.
+- **Jak akci vrátit:** pokud to jde, popiš bezpečný návrat.
+- **Kdy kontaktovat podporu:** jen pro situace, které uživatel nemůže vyřešit sám.
+- **Jaká data neposílat:** připomeň, že support nepotřebuje hesla, plné exporty ani citlivé screenshoty.
+
+Příklad závěru u změny role:
+
+> „Po uložení změny se nová role projeví při další akci uživatele. Pokud odebíráš administrátorská práva, zkontroluj audit log a případně ukonči aktivní sessions. Podpoře neposílej hesla ani screenshoty s osobními údaji; stačí e-mail účtu a čas změny.“
+
+Tohle je malý text, ale velká ochrana. Uživatel ví, co se stalo, a support dostane méně nebezpečných příloh.
+
+## AJ.5 Dokumentace musí mít vlastníka a rytmus revize
+
+Znalostní báze bez vlastníka stárne rychleji než JavaScriptový framework v memech. Nestačí „někdo to občas upraví“. Každá důležitá oblast musí mít člověka, který ví, kdy se mění produkt, a umí rozhodnout, jestli dokumentace pořád platí.
+
+Jednoduchý provozní model:
+
+- Každá dokumentační sekce má vlastníka.
+- Každý článek má datum poslední věcné kontroly.
+- Každý větší release obsahuje otázku: „Mění se tím zákaznická dokumentace?“
+- Support označuje opakované dotazy štítkem `docs-candidate`.
+- Jednou měsíčně se projdou nejčtenější články a články s největším počtem navazujících ticketů.
+- Staré články se archivují nebo přesměrují, nenechávají se potichu hnít.
+
+Měřit dokumentaci jde i bez sledování lidí. Stačí anonymní počty zobrazení, vyhledávané fráze bez identifikace uživatele, počet ticketů po přečtení konkrétního článku v agregované podobě a ruční poznámky podpory. Ne každý klik potřebuje osobní rodný list.
+
+## AJ.6 Checklist zákaznické dokumentace
+
+- Má znalostní báze jasné sekce podle zákaznických úkolů?
+- Má každý článek jeden hlavní cíl a popisuje konkrétní výsledek?
+- Jsou kroky napsané tak, aby je zvládl nový uživatel bez interního slovníku?
+- Používají screenshoty jen syntetická nebo anonymní demo data?
+- Je u citlivých akcí popsáno, kdo je může provést a jak ověřit výsledek?
+- Říká článek, jak akci vrátit nebo kde najít auditní stopu?
+- Upozorňuje dokumentace, jaká data neposílat podpoře?
+- Má každá sekce vlastníka a datum poslední kontroly?
+- Existuje štítek nebo proces pro převod opakovaných ticketů do dokumentace?
+- Měříš užitečnost dokumentace agregovaně, bez identifikace jednotlivých čtenářů?
+
+## Codyho komentář
+
+Dokumentace je nejlevnější člen support týmu, ale jen pokud ji někdo krmí realitou. Když ji necháš žít odděleně od produktu, začne lhát. A lživá dokumentace je horší než žádná: uživatel ztratí čas, support ztratí nervy a produkt ztratí důvěru. Privacy-first dokumentace má navíc jednu krásnou vlastnost — učí zákazníky neposílat zbytečná data už ve chvíli, kdy se teprve učí produkt používat.
+
+## Shrnutí přílohy
+
+Zákaznická dokumentace má být praktická, úkolová a bezpečná. Stav ji podle reálných cest uživatele, piš krátké články s jasným výsledkem, používej syntetická data ve screenshotech, zakončuj návody dalším bezpečným krokem a drž revizní rytmus. Dobrá znalostní báze snižuje počet ticketů, zrychluje onboarding a chrání soukromí lépe než další pop-up s omluvou.
+
+
+## Pracovní log
+- 2026-08-08: Přidána příloha AJ o zákaznické produktové dokumentaci: úkolová struktura, bezpečné screenshoty, další kroky v návodech, vlastnictví, revizní rytmus a privacy-first checklist.
+- 2026-08-08: Přidána příloha AI o B2B nákupním procesu bez nekonečných callů a datového ping-pongu: nákupní stránka, mini trust pack, pilot, odpovědní knihovna, datové minimum a checklist.
 - 2026-08-08: Přidána příloha AH o přihlašování a session managementu bez digitální paranoie: rizikové úrovně akcí, hesla a reset, MFA/passwordless, bezpečné session cookies, přihlašovací logy a checklist.
 - 2026-08-08: Přidána příloha AG o feature flags a rolloutech bez chaosu: výběr vhodných přepínačů, vlastnictví, plán postupného zapnutí, kill switch, privacy-first segmentace a checklist úklidu.
 - 2026-08-08: Přidána příloha AF o stagingu a testovacích prostředích bez produkčních dat: účely prostředí, seed a syntetická data, ochočené integrace, oddělené secrets, release kontrola a checklist.
