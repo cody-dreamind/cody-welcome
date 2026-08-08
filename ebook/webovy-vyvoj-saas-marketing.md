@@ -5520,8 +5520,131 @@ Staging má snižovat riziko release, ne vytvářet druhý sklad zákaznických 
 
 ---
 
+# Příloha AG: Feature flags a rollout bez chaosu v produkci
+
+Release není jen okamžik, kdy se kód dostane na server. Je to změna chování pro konkrétní lidi. A právě tam malým týmům často uteče kontrola: funkce se nasadí všem najednou, rollback znamená panický deploy, zákaznická podpora neví, kdo novinku vidí, a analytika ukazuje hromadu eventů bez odpovědi na otázku „je to bezpečné pustit dál?“
+
+Feature flags, postupný rollout a kill switch nejsou enterprise divadlo. Jsou to brzdy, které pomáhají nasazovat častěji a s menším rizikem. Martin Fowler ve svém textu o feature toggles popisuje různé typy přepínačů — například release, experiment, ops nebo permissioning toggles — a hlavně připomíná, že nejde o jednu magickou techniku, ale o nástroj s vlastním životním cyklem. Odkaz je ve zdrojích.
+
+Privacy-first pointa: přepínače mají řídit chování produktu, ne vyrábět další skrytou vrstvu profilování uživatelů.
+
+## AG.1 Ne každá změna potřebuje flag
+
+Feature flag není ozdoba ke každému pull requestu. Když ho tým používá úplně na všechno, vytvoří si druhý produktový jazyk, kterému po měsíci nerozumí ani autor. Flag dává smysl hlavně tam, kde změna splňuje alespoň jednu podmínku:
+
+- má dopad na kritickou cestu zákazníka,
+- dotýká se plateb, registrace, přístupů, exportu nebo datového toku,
+- vyžaduje postupné zapnutí pro vybranou skupinu,
+- potřebuje rychlé vypnutí bez nového deploye,
+- mění integraci s externím systémem,
+- má být dostupná jen konkrétnímu tarifu, roli nebo pilotnímu zákazníkovi.
+
+Naopak drobná úprava textu, oprava překlepu nebo interní refaktor obvykle flag nepotřebují. Pokud každé tlačítko dostane vlastní přepínač, produkt se časem promění v palubní desku jaderné elektrárny. Hezké na pohled, ale nikdo nechce zjistit, co dělá páčka `newFlow2ReallyFinal`.
+
+Praktické pravidlo: flag si zaslouží změna, u které chceš umět říct „zapneme jen někomu“, „vypneme rychle“ nebo „ověříme bezpečně“.
+
+## AG.2 Každý flag potřebuje vlastníka a datum úklidu
+
+Největší problém feature flags není jejich zapnutí. Je to jejich zapomenutí. Starý flag v kódu zvyšuje složitost, komplikuje testy a může po měsících ožít jako malý zombie incident.
+
+U každého flagu proto eviduj minimum:
+
+| Položka | Příklad |
+| --- | --- |
+| Název | `billing_export_v2` |
+| Účel | Postupné zapnutí nového exportu faktur |
+| Vlastník | Produkt + konkrétní vývojář |
+| Typ | Release flag / oprávnění / kill switch |
+| Výchozí stav | Vypnuto pro všechny nové účty |
+| Kdo smí měnit | Admin role `Release manager` |
+| Signál úspěchu | Export proběhne bez chyb a support ticketů |
+| Datum revize | 14 dní po zapnutí všem |
+| Úklid | Odstranit větev starého exportu z kódu |
+
+Dobrá disciplína je mít sekci „flags k odstranění“ v každém release review. Ne proto, že milujeme administrativu. Protože starý flag je technický dluh s vypínačem.
+
+## AG.3 Rollout plán piš jako bezpečnostní scénář
+
+Postupné zapnutí není „dáme to na 10 %, pak uvidíme“. To je spíš losování s grafem. Lepší rollout plán popisuje konkrétní kroky, podmínky postupu a brzdy:
+
+1. Interní tým: ověření hlavní cesty na vlastních testovacích účtech.
+2. Pilotní zákazník: ruční domluva, jasný kontakt a očekávání.
+3. Malá skupina podobných účtů: třeba 5–10 firem bez složitých integrací.
+4. Širší zapnutí: postup po segmentech, ne náhodné střílení do celé databáze.
+5. Výchozí stav pro nové zákazníky.
+6. Úklid staré varianty a odstranění flagu.
+
+U každého kroku si dopředu napiš stop podmínky:
+
+- chybovost nad dohodnutý limit,
+- nárůst ticketů k dané funkci,
+- opakovaný problém v kritické cestě,
+- neočekávaný dopad na fakturaci nebo přístupy,
+- zjištěný privacy problém v logování, exportu nebo oprávněních.
+
+Privacy-first rollout nevyžaduje sledovat každé kliknutí konkrétního člověka. Často stačí agregované technické signály, počet dokončených operací, chybové stavy, ruční zpětná vazba od pilotních zákazníků a kontrola support ticketů.
+
+## AG.4 Kill switch musí být jednoduchý a vyzkoušený
+
+Kill switch je přepínač, kterým umíš rychle vypnout rizikovou funkci. Nesmí existovat jen v představě vývojáře, který je zrovna na dovolené a má telefon v režimu „les“. Musí být dostupný správné roli, zdokumentovaný a otestovaný.
+
+Minimální definice dobrého kill switch:
+
+- vypnutí nevyžaduje nový deploy,
+- změna se propíše rychle a předvídatelně,
+- je jasné, jaký fallback uživatel uvidí,
+- akce se zapíše do audit logu,
+- existuje kontakt na vlastníka funkce,
+- tým ví, kdy po vypnutí informovat zákazníky.
+
+Příklad fallback textu:
+
+> „Export dočasně není dostupný. Pracujeme na opravě a vaše data zůstávají v účtu beze změny. Pokud export potřebujete urgentně, napište na podporu.“
+
+To je mnohem lepší než tichá chyba, nekonečný spinner nebo hláška „Something went wrong“. Uživatel nepotřebuje znát interní drama. Potřebuje vědět, jestli má čekat, jestli o data nepřišel a kudy vede náhradní cesta.
+
+## AG.5 Nepoužívej flagy jako tajnou segmentační databázi
+
+Feature flag systém může svádět k tomu, že se z něj stane skryté CRM: kdo je velký zákazník, kdo je problematický, kdo klikl na kampaň, kdo patří do „VIP experimentu“. Tudy privacy-first cesta nevede.
+
+Bezpečnější zásady:
+
+- Flagy ukládej podle účtu, role, tarifu nebo explicitní pilotní skupiny, ne podle behaviorálního profilu.
+- Nepřenášej do flag systému víc osobních údajů, než je nutné pro rozhodnutí.
+- Uživatelům a podpoře vysvětli, proč někdo funkci vidí a někdo ne.
+- Pilotní zapnutí domlouvej přímo, ne tichým experimentem na lidech.
+- Změny flagů loguj, ale do auditní stopy nedávej citlivý obsah požadavků.
+- Po dokončení rollout odstraň dočasné segmenty i samotný flag.
+
+Když potřebuješ oprávnění, používej systém rolí a tarifů. Když potřebuješ rollout, používej dočasný flag. Když potřebuješ produktové rozhodnutí, nepředstírej, že ho za tebe vyřeší tajný segment v administračním panelu.
+
+## AG.6 Checklist feature flags a rolloutů
+
+- Má změna skutečný důvod pro flag, nebo jen přidává zbytečnou složitost?
+- Má každý flag vlastníka, účel, typ, výchozí stav a datum revize?
+- Ví tým, kdo smí flag změnit a kde se změna audituje?
+- Existuje rollout plán s kroky, stop podmínkami a fallbackem?
+- Je kill switch vyzkoušený před zapnutím funkce zákazníkům?
+- Nevyužíváme flag systém jako nenápadnou profilovací databázi?
+- Stačí pro vyhodnocení agregované signály, technické metriky a přímý feedback?
+- Ví zákaznická podpora, kteří zákazníci novinku vidí a co jim říct při problému?
+- Je v backlogu úkol na odstranění flagu po dokončení rollout?
+- Nezůstala v kódu stará větev, která už nemá produktový důvod existovat?
+
+## Codyho komentář
+
+Můj pohled — Cody: nejlepší feature flag je ten, který má naplánovaný vlastní pohřeb. Přepínače jsou skvělé jako bezpečnostní pás při změně. Jakmile ale změna sedí v produkci, pás se nemá proměnit v provaz, o který bude tým zakopávat další dva roky.
+
+## Shrnutí přílohy
+
+Feature flags pomáhají malému SaaS týmu nasazovat bezpečněji, pokud mají jasný účel, vlastníka, audit, rollout plán, kill switch a datum úklidu. Privacy-first přístup drží přepínače jako nástroj řízení rizika, ne jako další skrytou vrstvu sledování uživatelů. Cílem není mít víc páček. Cílem je zapínat změny kontrolovaně, umět je rychle vypnout a po dokončení uklidit kód i data.
+
+---
+
 ## Zdroje
 
+- Martin Fowler: Feature Toggles — https://martinfowler.com/articles/feature-toggles.html
+- OWASP: Secrets Management Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html
 - European Commission: When is consent valid? — https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/legal-grounds-processing-data/grounds-processing/when-consent-valid_en
 - CNIL: Use analytics on your websites and applications — https://www.cnil.fr/fr/node/677
 - European Commission: Dealing with requests from individuals — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/dealing-requests-individuals_en
@@ -5587,6 +5710,7 @@ Staging má snižovat riziko release, ne vytvářet druhý sklad zákaznických 
 
 ## Pracovní log
 
+- 2026-08-08: Přidána příloha AG o feature flags a rolloutech bez chaosu: výběr vhodných přepínačů, vlastnictví, plán postupného zapnutí, kill switch, privacy-first segmentace a checklist úklidu.
 - 2026-08-08: Přidána příloha AF o stagingu a testovacích prostředích bez produkčních dat: účely prostředí, seed a syntetická data, ochočené integrace, oddělené secrets, release kontrola a checklist.
 - 2026-08-08: Přidána příloha AE o cookie liště a consent vrstvě bez dark patternů: inventář cookies, férová tlačítka, blokování volitelných skriptů před souhlasem, preference center, privacy-first analytika a checklist.
 - 2026-08-08: Přidána příloha AD o exportu dat a interoperabilitě bez zákaznického vězení: mapa exportovatelných dat, čitelné formáty, bezpečné stažení, test importem, odchodový scénář a checklist.
