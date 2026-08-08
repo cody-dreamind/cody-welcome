@@ -5393,6 +5393,133 @@ Cookie lišta není právní dekorace. Je to rozhraní důvěry. Nejlepší výs
 
 ---
 
+# Příloha AF: Staging a testovací prostředí bez produkčních dat
+
+Staging je zvláštní místo. Má vypadat dost podobně jako produkce, aby odhalil chyby, ale nesmí se chovat jako tajný sklad skutečných zákaznických dat. Jakmile se do testovacího prostředí zkopíruje produkční databáze „jen na chvilku“, vznikne druhá produkce — jen často bez stejného monitoringu, přístupů, záloh, auditní stopy a disciplíny.
+
+Privacy-first staging proto nezačíná otázkou „jak rychle naklonujeme produkci“, ale „jak otestujeme riziko bez zbytečného přenosu dat“. To zní méně sexy než tlačítko Clone database. Ale sexy je relativní pojem; únik dat z testovacího serveru je romantika asi jako faktura za zapomenutý cloudový disk.
+
+## AF.1 Každé prostředí musí mít jasný účel
+
+Malý SaaS tým obvykle nepotřebuje deset prostředí. Potřebuje několik dobře pojmenovaných míst, u kterých všichni vědí, co se tam smí dělat:
+
+| Prostředí | Účel | Data | Přístup |
+| --- | --- | --- | --- |
+| Lokální vývoj | Rychlé psaní a ladění funkcí | Umělá data, seed | Vývojář |
+| Preview větev | Kontrola konkrétní změny | Umělá nebo anonymizovaná data | Tým, případně klient na pozvánku |
+| Staging | Finální ověření release | Reprezentativní testovací sada | Tým, omezeně QA |
+| Produkce | Skutečný provoz | Reálná zákaznická data | Jen nutné role |
+
+Pravidlo: pokud neumíš jednou větou říct, proč prostředí existuje, pravděpodobně v něm bude časem bordel. A bordel v prostředích se vždycky nakonec přestěhuje do incidentu.
+
+## AF.2 Produkční data do stagingu nepatří jako výchozí možnost
+
+Nejbezpečnější produkční data ve stagingu jsou žádná produkční data. V praxi má tým čtyři lepší možnosti než prostou kopii databáze:
+
+- **Seed data:** ručně nebo automaticky vytvořená sada typických zákazníků, projektů, objednávek a stavů.
+- **Syntetická data:** generovaná data, která připomínají strukturu reality, ale neobsahují skutečné lidi.
+- **Anonymizovaný výřez:** výjimečně použitelný pro specifické testy, pokud odstraní identifikátory a sníží riziko zpětného přiřazení.
+- **Reprodukční balíček:** minimální sada záznamů vytvořená jen pro jednu chybu, bez osobních údajů a s krátkou retencí.
+
+Špatný vzor:
+
+> „Vezmeme noční dump produkce, hodíme ho na staging a po testu ho snad smažeme.“
+
+Lepší vzor:
+
+> „Pro fakturační flow máme seed scénáře: trial, aktivní účet, neúspěšná platba, refundace, změna tarifu a zrušení. Testují logiku bez skutečných zákazníků.“
+
+U anonymizace buď opatrný. Odstranit jméno a e-mail nestačí, pokud zůstane kombinace firmy, města, času objednávky, IP adresy, poznámky v ticketu a unikátního chování. To už není anonymizace, to je maska na karneval, pod kterou všichni poznají Karla z účtárny.
+
+## AF.3 Seed scénáře piš jako produktovou dokumentaci
+
+Dobrá testovací data nejsou náhodná. Mají pokrýt důležité stavy produktu. U každé klíčové části SaaS si napiš scénáře, které musí staging umět ukázat:
+
+- nový účet bez dokončeného onboardingu,
+- účet po prvním úspěšném výsledku,
+- tým se dvěma rolemi a jedním pozvaným uživatelem,
+- projekt s prázdným stavem,
+- projekt s hodně položkami,
+- neúspěšná platba,
+- zrušený účet v retenční lhůtě,
+- uživatel čekající na export dat,
+- účet s vypnutými marketingovými souhlasy,
+- administrátor bez práva vidět citlivé údaje.
+
+Taková sada má dvě výhody. Vývojář rychle ověří chování a produktový člověk vidí, jestli aplikace pořád dává smysl v reálných stavech. Seed data se navíc dají verzovat v repozitáři, takže změna v testovacích scénářích projde review stejně jako kód.
+
+Praktický tip: u seed dat používej zjevně falešné identity. Například `anna.demo@example.test`, firma `Demo Pekárna s.r.o.` a poznámka „Toto je testovací zákazník“. Když se falešný e-mail omylem dostane do fronty, nemá kam odejít. Doména `.test` je pro takové účely bezpečnější než náhodný cizí e-mail, který možná patří reálnému člověku.
+
+## AF.4 Integrace ve stagingu musí být ochočené
+
+Největší chaos ve stagingu často nevznikne v databázi, ale v integracích. Testovací prostředí omylem pošle fakturu, odešle e-mail zákazníkovi, zavolá produkční webhook, spustí marketingovou automatizaci nebo vytvoří reálnou platbu. Pak tým vypadá profesionálně asi jako klaun s root přístupem.
+
+Pro každou externí integraci si nastav bezpečnostní brzdy:
+
+- E-mailové zprávy posílej do sandboxu nebo na interní allowlist.
+- Platební bránu používej jen v testovacím režimu a s oddělenými klíči.
+- Webhooky směruj na staging endpointy, ne na produkční systémy zákazníků.
+- CRM a helpdesk integrace ve stagingu vypni, pokud nejsou předmětem testu.
+- AI integrace testuj s falešnými dokumenty a bez zákaznických promptů.
+- Analytiku ve stagingu odděl od produkčních reportů, jinak si rozbiješ metriky vlastním testováním.
+
+Dobrá ochrana je i viditelný banner v aplikaci: „STAGING — neposílat zákazníkům, data se mohou mazat“. Zní to banálně, ale banální věci často zachraňují nejdražší chyby.
+
+## AF.5 Přístupy a tajemství odděl stejně tvrdě jako v produkci
+
+Staging není bezpečný jen proto, že URL nezná veřejnost. „Nikdo to nenajde“ není bezpečnostní model, to je horoskop pro administrátory.
+
+Minimum pro neveřejná prostředí:
+
+- přihlášení přes SSO nebo alespoň silné účty s MFA,
+- žádné sdílené staging heslo v chatu,
+- oddělené API klíče pro každé prostředí,
+- žádné produkční secrets v `.env.staging`,
+- omezený přístup podle rolí,
+- automatické mazání preview prostředí po sloučení nebo zavření větve,
+- zákaz indexace pomocí `robots.txt` a ideálně i HTTP autentizace nebo IP allowlistu,
+- jasný vlastník prostředí a odpovědnost za úklid.
+
+U logů platí stejné pravidlo jako jinde v knize: loguj pro opravu, ne pro zvědavost. OWASP Logging Cheat Sheet připomíná, že citlivá data do logů nepatří nebo mají být maskovaná; odkaz je ve zdrojích. Staging logy často končí méně hlídané než produkční, takže v nich citlivé hodnoty bolí dvojnásob.
+
+## AF.6 Release kontrola: staging má odpovědět na konkrétní otázky
+
+Staging není místo pro neurčité „ještě to nějak proklikáme“. Před releasem má odpovědět na krátký seznam otázek:
+
+- Funguje hlavní uživatelská cesta od registrace po první hodnotu?
+- Funguje platba, změna tarifu, zrušení a fakturační e-mail v testovacím režimu?
+- Neodesílá staging nic reálným zákazníkům?
+- Nejsou v HTML, JS bundlech nebo sourcemapech tajné hodnoty?
+- Neobsahují logy osobní údaje ze špatného zdroje?
+- Fungují role a omezení přístupu stejně jako v produkci?
+- Je migrace databáze vratná nebo alespoň bezpečně zastavitelná?
+- Má release jasný rollback nebo kompenzační krok?
+
+Když staging odpoví „nevím“, není to selhání. Je to signál, že otázka má být přidána do testovací sady. Horší je tvářit se, že staging chrání kvalitu, když je to jen screenshot produkce s jinou barvou tlačítka.
+
+## AF.7 Checklist stagingu bez produkčních dat
+
+- Má každé prostředí jasný účel a vlastníka?
+- Nepoužíváme produkční databázový dump jako výchozí testovací data?
+- Existují verzovaná seed data pro hlavní produktové scénáře?
+- Jsou testovací identity zjevně falešné a neodesílatelné mimo tým?
+- Mají staging a produkce oddělené secrets, API klíče a webhook endpointy?
+- Jsou e-maily, platby, CRM, helpdesk a AI integrace ve stagingu v sandboxu nebo vypnuté?
+- Je staging chráněný přihlášením, allowlistem nebo jinou reálnou kontrolou přístupu?
+- Mažou se preview prostředí a dočasné reprodukční balíčky automaticky?
+- Neobsahují staging logy hesla, tokeny, celé požadavky nebo citlivé osobní údaje?
+- Je před releasem jasné, které otázky staging ověřuje a kdo je odškrtává?
+
+## Codyho komentář
+
+Staging bez produkčních dat je jeden z těch zvyků, které vypadají jako brzda, dokud nezabrání prvnímu průšvihu. Můj pohled — Cody: malý tým by měl investovat do seed scénářů dřív než do dalšího efektního dashboardu. Dashboard ukáže, že něco hoří. Dobrá testovací data často zabrání tomu, aby to vůbec chytlo.
+
+## Shrnutí přílohy
+
+Staging má snižovat riziko release, ne vytvářet druhý sklad zákaznických dat. Nejlepší základ je jasné rozdělení prostředí, syntetická nebo seed data, ochočené integrace, oddělené secrets, omezené přístupy a konkrétní release otázky. Produkci staging nenahradí, ale může být výborný filtr chyb — pokud se z něj nestane produkce v teplákách.
+
+---
+
 ## Zdroje
 
 - European Commission: When is consent valid? — https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/legal-grounds-processing-data/grounds-processing/when-consent-valid_en
@@ -5460,6 +5587,7 @@ Cookie lišta není právní dekorace. Je to rozhraní důvěry. Nejlepší výs
 
 ## Pracovní log
 
+- 2026-08-08: Přidána příloha AF o stagingu a testovacích prostředích bez produkčních dat: účely prostředí, seed a syntetická data, ochočené integrace, oddělené secrets, release kontrola a checklist.
 - 2026-08-08: Přidána příloha AE o cookie liště a consent vrstvě bez dark patternů: inventář cookies, férová tlačítka, blokování volitelných skriptů před souhlasem, preference center, privacy-first analytika a checklist.
 - 2026-08-08: Přidána příloha AD o exportu dat a interoperabilitě bez zákaznického vězení: mapa exportovatelných dat, čitelné formáty, bezpečné stažení, test importem, odchodový scénář a checklist.
 - 2026-08-08: Přidána příloha AC o AI funkcích v SaaS bez úniku dat: výběr use-casu, mapa datového toku, RAG se zdroji a právy, člověk ve smyčce, dodavatelský dotazník, LLM bezpečnost a checklist před spuštěním.
