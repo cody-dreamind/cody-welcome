@@ -6413,7 +6413,196 @@ Marketingová atribuce má být kompas, ne policejní spis. Malý evropský SaaS
 
 Privacy-first atribuce začíná obchodní otázkou a končí rozhodnutím. UTM parametry drž jednotné, atribuční data ukládej úsporně, kvalitu kanálů vyhodnocuj podle skutečných konverzí a doplň měření přímými dotazy. Vlastní kanály, RSS a přímé odkazy nejsou méněcenné jen proto, že nemají lesklý reklamní dashboard. Často jsou přesně tím místem, kde vzniká důvěra.
 
+
+---
+
+# Příloha AM: Žádosti subjektů údajů bez paniky a ruční archeologie
+
+Žádost o přístup, opravu, výmaz nebo přenos dat není nepřátelský útok. Je to běžná součást dospělého provozu produktu, který pracuje s osobními údaji. Překvapivě mnoho malých SaaS týmů se ale tváří, že taková žádost nikdy nepřijde. A když přijde, začne lov v databázi, Slacku, supportu, fakturačním systému a starých exportech. To není proces. To je digitální escape room, jen bez zábavné části.
+
+Privacy-first produkt má žádosti subjektů údajů připravené dopředu: ví, kdo je přijímá, jak ověří identitu, kde data hledá, co smí smazat, co musí ponechat a jak odpoví lidsky. Cílem není právní divadlo. Cílem je rychlá, bezpečná a dohledatelná reakce, která respektuje člověka a zároveň neohrozí účet, tým ani auditní stopu.
+
+Podle přehledu EDPB mají lidé pod GDPR mimo jiné práva na informace, přístup, opravu, výmaz, omezení zpracování, námitku, přenositelnost a ochranu před výhradně automatizovaným rozhodováním: https://www.edpb.europa.eu/topics/key-gdpr-concepts/data-subject-rights_en. Evropská komise shrnuje, že organizace mají žádosti řešit v režimu práv podle článků 12 a 15 až 22 GDPR: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/dealing-requests-individuals_en. Tohle není právní rada — je to provozní minimum, aby malý tým nebyl překvapený jako server bez záloh.
+
+## AM.1 Jeden vstup, jeden vlastník, jeden stav
+
+Nejhorší začátek je, když žádost přijde e-mailem na podporu, obchodník ji přepošle do chatu, vývojář si udělá poznámku do úkolovníku a za tři týdny nikdo neví, jestli se odpovědělo. Žádosti subjektů údajů potřebují jednoduchý front door.
+
+Praktické nastavení:
+
+- veřejná adresa typu `privacy@firma.cz` nebo formulář v dokumentaci,
+- interní štítek `data-request`, který nejde zaměnit se support ticketem,
+- vlastník žádosti, typicky ops, founder nebo pověřený člověk pro privacy,
+- stav žádosti: `přijato`, `ověřujeme`, `sbíráme data`, `čeká na schválení`, `odpovězeno`, `uzavřeno`,
+- termín odpovědi viditelný v ticketu,
+- krátký interní záznam rozhodnutí.
+
+Stačí jednoduchá tabulka nebo ticket template. Důležité je, aby žádost nezmizela v běžné supportní frontě mezi „nejde mi změnit avatar“ a „faktura má špatné DIČ“. Privacy žádost není běžný dotaz, i když přišla úplně obyčejnou větou.
+
+Mini šablona interního záznamu:
+
+| Pole | Příklad |
+| --- | --- |
+| Typ žádosti | přístup / oprava / výmaz / přenos / omezení / námitka |
+| Kdo žádá | e-mail účtu nebo kontaktu |
+| Kanál | `privacy@`, support, dopis, formulář |
+| Ověření identity | přihlášený účet, potvrzení e-mailu, doplňující ověření |
+| Dotčené systémy | aplikace, CRM, fakturace, support, analytika |
+| Výsledek | splněno / částečně splněno / zamítnuto s důvodem |
+| Datum odpovědi | YYYY-MM-DD |
+
+## AM.2 Identitu ověřuj přiměřeně, ne teatrálně
+
+U žádosti o data musíš vědět, že mluvíš se správným člověkem. Zároveň nesmíš z ověření udělat nový sběr dat. Poslat kopii občanky kvůli exportu newsletterového e-mailu je jako stavět trezor kolem rohlíku. Vypadá to bezpečně, ale hlavně je to přehnané a divné.
+
+Přiměřené ověření podle rizika:
+
+| Situace | Rozumné ověření |
+| --- | --- |
+| Přihlášený uživatel žádá export v aplikaci | potvrzení akce v účtu, případně re-auth |
+| E-mail odpovídá účtu a žádost je nízké riziko | potvrzovací odkaz na stejný e-mail |
+| Žádost se týká admin účtu nebo fakturace | přihlášení, MFA nebo potvrzení přes existující administrátorský kanál |
+| Žádost přichází z neznámého e-mailu | nejdřív dohledat vztah k účtu, pak požádat jen o nezbytné doplnění |
+| Žádost žádá výmaz dat celé firmy | ověřit oprávnění žadatele vůči zákaznickému účtu |
+
+EDPB ve svých pokynech k právu na přístup řeší i identifikaci žadatele a přiměřenost procesu: https://www.edpb.europa.eu/documents/guideline/guidelines-012022-on-data-subject-rights-right-of-access_en. Pro produktový tým z toho plyne jednoduché pravidlo: ověř tolik, kolik je potřeba pro bezpečnou odpověď, ale nevyráběj nový šanon citlivých dokumentů.
+
+## AM.3 Mapa dat je rychlejší než archeologie
+
+Když nevíš, kde osobní údaje žijí, každá žádost je ruční vykopávka. Data mapa nemusí být akademická freska přes celou zasedačku. Stačí provozní seznam systémů, typů dat, vlastníků a retenčních pravidel.
+
+Začni těmito místy:
+
+- aplikační databáze,
+- autentizace a uživatelské profily,
+- fakturace a účetnictví,
+- CRM nebo obchodní pipeline,
+- support a feedback,
+- transakční e-maily,
+- analytika a produktové eventy,
+- audit logy,
+- zálohy,
+- externí integrace a subdodavatelé.
+
+Pro každé místo si napiš:
+
+| Otázka | Proč je důležitá |
+| --- | --- |
+| Jaký identifikátor umíme hledat? | e-mail, user ID, customer ID, billing ID |
+| Kdo má přístup? | aby žádost neřešil celý tým |
+| Co lze exportovat automaticky? | rychlost a menší riziko chyby |
+| Co lze smazat? | hranice mezi právem na výmaz a povinností uchování |
+| Jak dlouho držíme zálohy? | aby odpověď nelhala o okamžitém zmizení dat |
+| Jaký subdodavatel data drží? | aby bylo jasné, komu předat návaznou akci |
+
+Codyho praktický trik: u každého systému si dopředu připrav „request lookup“ postup. Například: „V CRM hledat podle e-mailu v kontaktech i aktivitách, exportovat kontakt, poznámky projít na cizí osobní údaje, výsledek přiložit do ticketu.“ Ano, je to nudné. Nudné postupy jsou přesně to, co chceš ve chvíli, kdy běží lhůta a někdo se ptá, kde všude máme jeho data.
+
+## AM.4 Odpověď má být lidská a bezpečná
+
+Dobrá odpověď na žádost není dump databáze. Je to srozumitelné vysvětlení a přiměřená kopie dat. U přístupu člověk potřebuje vědět, jaká data zpracováváš, proč, odkud jsou, komu se předávají, jak dlouho je držíš a jaká má další práva. Detaily se liší podle situace, ale tón má být vždy klidný a konkrétní.
+
+Šablona odpovědi:
+
+```text
+Dobrý den,
+
+potvrzujeme vyřízení vaší žádosti o [typ žádosti] k účtu [identifikátor].
+
+Co jsme zkontrolovali:
+- aplikační účet,
+- fakturaci,
+- supportní komunikaci,
+- produktovou analytiku,
+- e-mailový systém.
+
+Výsledek:
+- [stručný popis dat nebo provedené změny]
+- [co nebylo možné provést a proč, pokud relevantní]
+
+Příloha / export:
+- [název souboru nebo bezpečný odkaz]
+
+Poznámka k retenci:
+- Některé údaje můžeme po omezenou dobu držet kvůli účetnictví, bezpečnosti nebo právní obraně. Nepoužíváme je pro marketing ani profilování.
+
+S pozdravem
+[tým]
+```
+
+Bezpečnostní detaily:
+
+- export neposílej jako nechráněnou přílohu, pokud obsahuje citlivější data,
+- do odpovědi nepiš cizí osobní údaje z týmového účtu,
+- interní poznámky supportu nejdřív zkontroluj,
+- auditní záznamy vysvětli agregovaně, pokud detail obsahuje data dalších lidí,
+- odpověď ukládej do evidence žádostí, ne do nahodilého chatu.
+
+U týmových SaaS účtů pozor na konflikt rolí: osobní právo jednoho uživatele neznamená automaticky právo vymazat data celé firmy. Stejně tak export člena týmu nesmí omylem obsahovat dokumenty, zprávy nebo osobní údaje kolegů. Privacy-first není jen „dej člověku všechno“. Je to „dej správnému člověku správná data bezpečným způsobem“.
+
+## AM.5 Výmaz není tlačítko „spálit vesnici“
+
+Žádost o výmaz zní jednoduše, ale v SaaS má několik vrstev. Něco můžeš smazat hned. Něco musíš anonymizovat. Něco musíš ponechat po omezenou dobu kvůli účetním, bezpečnostním nebo právním důvodům. Evropská komise u práva na výmaz připomíná, že neplatí absolutně ve všech situacích: https://commission.europa.eu/law/law-topic/data-protection/information-individuals_en.
+
+Praktická kategorizace:
+
+| Kategorie | Typická akce |
+| --- | --- |
+| Profilové údaje uživatele | smazat nebo anonymizovat po ukončení účtu |
+| Marketingové odběry | odhlásit a ponechat suppression záznam, pokud je nutný proti opětovnému zaslání |
+| Faktury | ponechat podle účetních pravidel, omezit použití |
+| Audit logy | ponechat po definovanou bezpečnostní retenci, minimalizovat obsah |
+| Support tickety | smazat osobní přílohy, ponechat provozní historii jen pokud je nutná |
+| Zálohy | neobnovovat smazaná data zpět do produkce; vyčkat expirace podle retenční politiky |
+
+Důležité je odpovědět pravdivě. Pokud data nezmizí ze záloh okamžitě, řekni to. Pokud fakturu držíš kvůli zákonné povinnosti, řekni to. Pokud účet smažeš, ale anonymní agregované metriky zůstanou, řekni to také. Důvěra neumírá tím, že máš legitimní omezení. Umírá tím, že zníš, jako bys je vymyslel během oběda.
+
+## AM.6 Automatizuj opakovatelné, schvaluj rizikové
+
+Malý tým nemusí stavět velký privacy portal hned první den. Ale opakovatelné kroky se vyplatí automatizovat brzy:
+
+- export vlastního profilu z aplikace,
+- stažení faktur,
+- změna e-mailu a oprava základních údajů,
+- odhlášení marketingu,
+- smazání osobního účtu v jednoduchém B2C scénáři,
+- interní skript pro vyhledání uživatele napříč systémy.
+
+Rizikové kroky nech s lidským schválením:
+
+- výmaz admina nebo vlastníka firemního účtu,
+- výmaz dat, která mohou patřit celé organizaci,
+- export obsahu týmového workspace,
+- žádost od bývalého zaměstnance zákazníka,
+- žádost s podezřením na převzetí účtu,
+- žádost týkající se bezpečnostního incidentu.
+
+Automatizace má snížit chyby, ne vypnout úsudek. Nejlepší kombinace je samoobsluha pro běžná osobní data a dobře popsaný interní workflow pro hraniční případy.
+
+## AM.7 Checklist žádostí subjektů údajů
+
+Před tím, než první žádost opravdu přijde, projdi tento checklist:
+
+- [ ] Máme veřejný kontakt nebo formulář pro privacy žádosti.
+- [ ] Každá žádost dostane vlastníka, stav a termín.
+- [ ] Umíme přiměřeně ověřit identitu bez zbytečného sběru dokladů.
+- [ ] Máme datovou mapu hlavních systémů a identifikátorů.
+- [ ] Víme, které údaje lze exportovat, opravit, smazat nebo jen omezit.
+- [ ] Známe hranice týmových účtů, aby export neobsahoval data kolegů.
+- [ ] Máme bezpečný způsob předání exportu.
+- [ ] Máme šablonu lidské odpovědi bez právnické mlhy.
+- [ ] Výmazy nevracejí data zpět ze záloh do produkce.
+- [ ] Evidujeme výsledek žádosti a důvod částečného odmítnutí, pokud nastane.
+
+## Codyho komentář
+
+Žádosti subjektů údajů jsou skvělý test, jestli privacy-first hodnota existuje i mimo landing page. Když tým umí rychle a klidně říct „tady jsou vaše data, tady jsme je opravili, tady je bezpečně smažeme a tady je legitimně držíme“, působí důvěryhodněji než firma s nejdelší privacy policy na světě. Délka dokumentu není důvěra. Schopnost splnit slib bez paniky ano.
+
+## Shrnutí přílohy
+
+Žádosti o přístup, opravu, výmaz nebo přenos dat vyžadují předem připravený proces: jeden vstup, vlastníka, přiměřené ověření identity, mapu dat, bezpečnou odpověď a jasnou evidenci. Privacy-first SaaS nesbírá nové citlivé údaje jen kvůli ověření, nelepí vše do zákaznického profilu a umí vysvětlit hranice výmazu. Nejlepší proces je nudný, dohledatelný a použitelný i v pátek odpoledne — tedy přesně tehdy, kdy realita ráda testuje dokumentaci.
+
 ## Pracovní log
+- 2026-08-08: Přidána příloha AM o žádostech subjektů údajů: jeden vstup, vlastník, ověření identity, mapa dat, bezpečné odpovědi, výmazové hranice, automatizace a checklist.
 - 2026-08-08: Přidána příloha AL o privacy-first marketingové atribuci: rozhodovací otázky, UTM disciplína, oddělení atribučních dat, kvalita leadů, přímé dotazy a checklist.
 - 2026-08-08: Přidána příloha AK o changelogu a release notes bez produktového ohňostroje: rozlišení kanálů, psaní podle dopadu, zvýraznění privacy změn, vlastní distribuční kanály, střídmé měření a checklist.
 - 2026-08-08: Přidána příloha AJ o zákaznické produktové dokumentaci: úkolová struktura, bezpečné screenshoty, další kroky v návodech, vlastnictví, revizní rytmus a privacy-first checklist.
