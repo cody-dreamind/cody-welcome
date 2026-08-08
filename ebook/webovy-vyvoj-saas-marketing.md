@@ -4274,6 +4274,136 @@ Před publikací nové stránky:
 
 Technické SEO není sbírka triků. Je to disciplína čistých URL, jasných signálů, dobré navigace a pravdivého popisu obsahu. Privacy-first přístup tomu pomáhá: méně skriptů, méně parametrů, méně cizích služeb a víc kontroly nad tím, co web skutečně říká.
 
+# Příloha W: Zákaznická podpora a feedback bez datového vysavače
+
+Podpora je jedno z nejlepších míst, kde může malý SaaS tým poznat realitu produktu. Zákazníci tam neříkají, co by možná chtěli v ideálním workshopu. Říkají, co je právě teď bolí, brzdí nebo mate. Jenže podpora se snadno změní v datový vysavač: kompletní historie účtu v každém ticketu, automatické nahrávání obrazovek, chat widget s hromadou třetích stran, interní kopírování osobních údajů do náhodných poznámek a screenshoty, ve kterých svítí víc citlivých dat než na špatně zamčené nástěnce.
+
+Privacy-first podpora neznamená pomalou podporu. Znamená podporu, která sbírá jen kontext potřebný k vyřešení problému, chrání zákazníka i tým a umí z opakovaných dotazů udělat produktové zlepšení. Prostě méně „pošlete nám všechno“ a víc „pošlete nám přesně tohle“.
+
+## W.1 Ticket musí mít účel, ne románovou trilogii
+
+Každý kontakt se zákazníkem rozděl na tři vrstvy: identifikace, problém, řešení. Pokud si tyto vrstvy pleteš, ticket začne bobtnat.
+
+Praktická struktura ticketu:
+
+| Vrstva | Co patří dovnitř | Co tam obvykle nepatří |
+| --- | --- | --- |
+| Identifikace | zákazník, organizace, plán, kontaktní e-mail | rodné číslo, soukromý telefon bez důvodu, plné exporty účtu |
+| Problém | popis kroku, chybová hláška, čas výskytu, dotčená funkce | hesla, celé databázové dumpy, screenshoty s údaji jiných lidí |
+| Řešení | navržený postup, změna konfigurace, odkaz na dokumentaci | interní spekulace, osobní soudy, zbytečné kopie komunikace |
+
+Příklad dobré žádosti o doplnění:
+
+> „Pošlete prosím URL obrazovky, čas chyby a text chybové hlášky. Pokud přikládáte screenshot, začerněte e-maily zákazníků a tokeny. Hesla ani API klíče neposílejte.“
+
+Tohle je drobnost, ale šetří nervy. Zákazník ví, co dodat, a tým nedostane data, která pak musí chránit, mazat a modlit se, že neskončí v interním vlákně s názvem „wtf bug“.
+
+## W.2 Support access zapínej jen na čas a s důvodem
+
+Někdy se bez pohledu do účtu neobejdeš. Ale přístup podpory do zákaznického účtu má být řízená výjimka, ne permanentní supermoc. Nejhorší model je univerzální administrátorský přístup pro každého v týmu, protože „jinak by support nestíhal“. Takhle vznikají incidenty, ne produktivita.
+
+Bezpečnější pravidla:
+
+- Přístup do účtu vyžaduje důvod navázaný na ticket.
+- Přístup je časově omezený, například na 30 nebo 60 minut.
+- Každé otevření zákaznického účtu se loguje jako bezpečnostní událost.
+- Support vidí jen data potřebná pro řešení problému.
+- Akce s větším dopadem, třeba změna fakturace nebo smazání dat, vyžadují potvrzení nebo druhý pár očí.
+
+Mini proces:
+
+1. Zákazník popíše problém nebo výslovně požádá o pomoc.
+2. Support v ticketu zapíše důvod přístupu.
+3. Systém vygeneruje dočasný support access.
+4. Po vyřešení se přístup automaticky vypne.
+5. Ticket obsahuje, co bylo zkontrolováno a co bylo změněno.
+
+Codyho komentář: Trvalý admin přístup je jako univerzální klíč od všech bytů v domě. Ano, údržbář se dostane rychleji k prasklé trubce. Ale taky z toho všichni spí trochu hůř.
+
+## W.3 Screenshoty a logy mají být ořezané, ne dramaticky kompletní
+
+„Pošlete screenshot celé obrazovky“ je pohodlná věta, ale často špatný požadavek. Celá obrazovka může obsahovat e-maily, faktury, osobní poznámky, API klíče, interní názvy projektů nebo data jiných zákazníků. Totéž platí pro logy. Kompletní log je lákavý pro debug, ale obvykle obsahuje víc než jednu užitečnou informaci.
+
+Lepší šablona pro sběr důkazů:
+
+- Screenshot jen oblasti s chybou.
+- Citlivé údaje začernit před odesláním.
+- Log poslat pouze z konkrétního časového okna.
+- Tokeny, session ID, e-mailové adresy a obsah zpráv odstranit nebo nahradit zástupným textem.
+- Pokud jde o opakovaný problém, raději vytvořit interní diagnostický export s předem povolenými poli než ručně tahat data z produkce.
+
+Příklad interního diagnostického balíčku:
+
+| Pole | Ponechat? | Poznámka |
+| --- | --- | --- |
+| čas požadavku | Ano | nutné pro dohledání chyby |
+| typ chyby | Ano | pomáhá prioritizovat opravu |
+| ID organizace | Ano, pseudonymizované | stačí interní ID bez názvu firmy |
+| e-mail uživatele | Ne, pokud není nutný | nahradit interním user ID |
+| request payload | Jen whitelist polí | nikdy neposílat celé tělo požadavku naslepo |
+| API token | Ne | ukládat jen informaci, že token existoval nebo expiroval |
+
+Tímhle se z podpory stane použitelný debug kanál, ne skládka náhodných dat.
+
+## W.4 Feedback tříděj podle rozhodnutí, které pomůže udělat
+
+Zákaznický feedback není hlasování o tom, co se má postavit. Je to vstup do rozhodování. Když všechno házíš do jednoho sloupce „nápady“, skončíš s dlouhým seznamem přání, který nikdo nechce číst. Lepší je každý feedback přiřadit k rozhodnutí.
+
+Praktické kategorie:
+
+| Kategorie | Otázka | Typická akce |
+| --- | --- | --- |
+| Chyba | Nefunguje slíbená věc? | opravit nebo obejít |
+| Nejasnost | Uživatel nechápe, co má udělat? | zlepšit text, onboarding nebo dokumentaci |
+| Chybějící schopnost | Brání to dokončení hlavního workflow? | ověřit u více zákazníků |
+| Obchodní námitka | Blokuje to nákup nebo rozšíření? | doplnit trust pack, pricing nebo bezpečnostní odpověď |
+| Ruční práce | Opakuje se úkon, který produkt může odstranit? | zvážit automatizaci |
+
+K jednomu feedbacku si zapisuj minimum:
+
+- segment zákazníka,
+- dotčené workflow,
+- dopad na práci zákazníka,
+- frekvenci nebo počet podobných případů,
+- navazující rozhodnutí: opravit, sledovat, odmítnout, převést do experimentu.
+
+Nepotřebuješ vědět všechno o zákazníkovi. Potřebuješ vědět, co mu brání dostat slíbený výsledek.
+
+## W.5 Z podpory vyráběj dokumentaci, ne jen zavřené tickety
+
+Každý opakovaný dotaz je kandidát na lepší produkt, lepší onboarding nebo lepší dokumentaci. Pokud support jen zavírá tickety, firma se učí pomalu. Pokud z podpory pravidelně vznikají články nápovědy, mikrotexty a produktové úpravy, zákazníci posílají méně dotazů a tým má méně práce. Krásná věc: méně ticketů, méně dat, méně chaosu. Skoro podezřele rozumné.
+
+Týdenní support review pro malý tým:
+
+1. Vyber 5 nejčastějších nebo nejdražších dotazů týdne.
+2. U každého určete, jestli je problém v produktu, textu, dokumentaci, očekávání nebo procesu.
+3. Vyber jednu opravu s největším poměrem dopad / náročnost.
+4. Doplněnou dokumentaci propoj přímo z místa v aplikaci, kde problém vzniká.
+5. Staré interní odpovědi smaž nebo aktualizuj, aby tým neposílal zastaralé návody.
+
+Příklad převodu ticketu na zlepšení:
+
+| Opakovaný dotaz | Skutečná příčina | Lepší řešení |
+| --- | --- | --- |
+| „Kde najdu faktury?“ | navigace schovaná pod profilem | přidat odkaz do nastavení organizace a nápovědy |
+| „Proč export nejde stáhnout?“ | export běží asynchronně bez vysvětlení | ukázat stav exportu a poslat notifikaci po dokončení |
+| „Můžu pozvat účetní?“ | role nejsou srozumitelně popsané | doplnit popis rolí před odesláním pozvánky |
+
+## W.6 Checklist privacy-first podpory
+
+- Má každý support kanál jasně napsané, jaká data má zákazník poslat a jaká nikdy neposílat?
+- Umí tým vyřešit běžný ticket bez přístupu do celého zákaznického účtu?
+- Je support access časově omezený, logovaný a navázaný na konkrétní důvod?
+- Existuje šablona pro bezpečné screenshoty, logy a diagnostické exporty?
+- Třídí se feedback podle rozhodnutí, ne podle hlasitosti zákazníka?
+- Vzniká z opakovaných ticketů dokumentace, onboardingové texty nebo produktové opravy?
+- Mažou se staré tickety, přílohy a interní poznámky podle retenční politiky?
+- Umí zákazník snadno požádat o export nebo smazání dat bez supportového ping-pongu?
+
+## Shrnutí přílohy
+
+Dobrá zákaznická podpora nepotřebuje vědět všechno. Potřebuje rychle poznat problém, bezpečně získat nezbytný kontext, pomoct zákazníkovi a proměnit opakované signály ve zlepšení produktu. Privacy-first přístup tady není brzda. Je to provozní disciplína, která snižuje riziko, zrychluje řešení a brání tomu, aby se z ticketů stal archiv citlivých dat s vyhledáváním.
+
 
 
 ## Zdroje
@@ -4321,6 +4451,7 @@ Technické SEO není sbírka triků. Je to disciplína čistých URL, jasných s
 
 ## Pracovní log
 
+- 2026-08-08: Přidána příloha W o zákaznické podpoře a feedbacku bez datového vysavače: struktura ticketů, dočasný support access, bezpečné screenshoty a logy, třídění feedbacku, dokumentace a checklist.
 - 2026-08-08: Přidána příloha V o technickém SEO bez sledovacího balastu: jasná identita stránky, canonical URL, sitemap, strukturovaná data, Open Graph metadata a privacy-first checklist.
 - 2026-08-07: Přidána příloha U o privacy-first produktových experimentech: hypotézy, minimální měření, alternativy k A/B testům, majitel experimentu, ochranné metriky a checklist.
 - 2026-08-07: Přidána příloha T o GDPR dokumentaci bez šanonového divadla: registr zpracování, právní a produktové věty, mini-DPIA, změnový checklist, subdodavatelé a kontrolní seznam.
