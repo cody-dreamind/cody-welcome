@@ -6266,7 +6266,155 @@ Changelog je jeden z nejlevnějších trust nástrojů v SaaS. Neprodává sám 
 Changelog a release notes mají zákazníkům usnadnit změnu, ne dokazovat, že tým pracuje. Dobrý záznam popisuje dopad, publikum, další krok a privacy souvislosti. Kanály drž pod vlastní kontrolou: vlastní web, dokumentace, RSS, e-mail a relevantní oznámení v aplikaci. Měření drž střídmé a agregované. Produktová komunikace, která je přesná a dohledatelná, šetří support, zrychluje adopci a posiluje důvěru bez datového cirkusu.
 
 
+
+---
+
+# Příloha AL: Marketingová atribuce bez sledovacího panoptika
+
+Atribuce má odpovědět na otázku, odkud přichází dobré obchodní příležitosti. Nemá vytvořit soukromou kriminalistickou nástěnku každého návštěvníka: první klik z kampaně, druhý klik z retargetingu, třetí klik z newsletteru, čtvrtý klik z remarketingu a pátý klik z beznaděje. Malý SaaS tým nepotřebuje vidět životopis návštěvníka. Potřebuje vědět, které kanály přinášejí relevantní poptávky, registrace a zákazníky.
+
+Privacy-first atribuce stojí na jednoduchém principu: měř rozhodnutí, ne lidi. Pokud údaj nepomůže změnit rozpočet, stránku, nabídku nebo onboarding, pravděpodobně je to jen datová dekorace.
+
+## AL.1 Začni otázkou, ne nástrojem
+
+Než vložíš další analytický skript, napiš si tři rozhodnutí, která chceš díky atribuci dělat. Typicky:
+
+- Do kterých dvou kanálů má smysl příští měsíc dát čas?
+- Který obsah přivádí poptávky s reálným rozpočtem?
+- Která landing page vysvětluje nabídku nejlépe?
+- Které kampaně generují jen šum, a tedy berou energii supportu nebo obchodu?
+- Které partnerství, doporučení nebo katalog přináší zákazníky, ne jen návštěvnost?
+
+Slabé zadání zní: „Chceme vědět všechno o cestě uživatele.“ Silnější zadání zní: „Chceme jednou měsíčně rozhodnout, které dva akviziční kanály dál rozvíjet a které zastavit.“ To druhé se dá měřit jednodušeji, bezpečněji a s menším množstvím osobních dat.
+
+Praktický mini-brief pro atribuci:
+
+| Otázka | Příklad odpovědi |
+| --- | --- |
+| Jaké rozhodnutí chceme dělat? | Přesunout čas z kanálů bez kvalitních leadů do kanálů s poptávkami |
+| Jak často ho děláme? | Měsíčně |
+| Jaká událost znamená hodnotu? | Odeslaná kvalifikovaná poptávka, registrace, aktivovaný trial, placený účet |
+| Jaká data stačí? | Zdroj, kampaň, vstupní stránka, typ konverze, kvalita leadu |
+| Co nechceme sbírat? | Cross-site identifikátory, behaviorální profily, zbytečné osobní detaily |
+
+## AL.2 UTM parametry drž jako účetnictví, ne poezii
+
+UTM parametry jsou užitečné, když mají disciplínu. Bez pravidel se z nich stane slovní zoo: `newsletter`, `NewsLetter`, `email`, `mailing`, `srpnovy-email-final-final` a pak někdo v reportu brečí do kafe. Oprávněně.
+
+Zaveď jednoduchý slovník:
+
+- `utm_source`: konkrétní místo nebo partner, například `linkedin`, `seznam`, `rss`, `partner-nazev`.
+- `utm_medium`: typ kanálu, například `organic`, `paid`, `email`, `referral`, `community`.
+- `utm_campaign`: stabilní název kampaně, například `saas-audit-2026-08`.
+- `utm_content`: volitelně varianta odkazu, například `hero-cta`, `footer-link`, `case-study`.
+
+Dobré pravidlo: UTM hodnoty mají být čitelné člověkem a stabilní v čase. Nepatří do nich e-mail konkrétního člověka, interní poznámky obchodníka ani nic, co by z odkazu dělalo datový únik v převleku za marketing.
+
+Příklad pro privacy-first e-book:
+
+```text
+https://cody.dreamind.cz/ebook?utm_source=rss&utm_medium=owned&utm_campaign=ebook-webovy-vyvoj-2026&utm_content=chapter-link
+```
+
+Tenhle odkaz řekne, že návštěva přišla z vlastního RSS kanálu na e-bookovou kampaň. Neříká, kdo přesně klikl, co dělal minulý týden a jestli má rád ananas na pizze. To je dobře. Některé informace nám jako civilizaci prostě nepřísluší.
+
+## AL.3 Atribuční data ukládej odděleně od zákaznického profilu
+
+Častá chyba je přilepit marketingové údaje přímo k uživatelskému profilu a nechat je tam navždy. Pro první obchodní rozhodnutí většinou stačí lehčí model:
+
+- při návštěvě si aplikace pamatuje zdroj jen krátce a přiměřeně,
+- při konverzi uloží agregovatelný kontext, například zdroj a kampaň,
+- do CRM nebo obchodního přehledu pošle jen minimum potřebné pro vyhodnocení leadu,
+- detailní technické logy zůstanou oddělené a mají kratší retenci,
+- report pracuje hlavně se souhrny, ne s historií jednotlivců.
+
+U SaaS trialu může stačit záznam:
+
+| Pole | Příklad | Poznámka |
+| --- | --- | --- |
+| `conversion_type` | `trial_started` | Událost s obchodní hodnotou |
+| `landing_page` | `/saas-audit` | Vstupní kontext |
+| `source` | `rss` | Kanál |
+| `campaign` | `ebook-webovy-vyvoj-2026` | Kampaň |
+| `lead_quality` | `qualified` | Doplněno ručně nebo pravidlem |
+| `created_month` | `2026-08` | Stačí pro měsíční report |
+
+Co tam chybí záměrně: kompletní klikací historie, otisk prohlížeče, přesná poloha, seznam všech navštívených stránek a „skóre zájmu“ vypočítané z toho, že člověk nechal otevřený tab v prohlížeči. Tab otevřený v prohlížeči není nákupní úmysl. Je to často jen moderní forma zapomnění.
+
+## AL.4 Vyhodnocuj kvalitu, ne jen poslední klik
+
+Poslední klik je jednoduchý, ale umí být nespravedlivý. Člověk může objevit produkt přes článek, za týden se vrátit z přímého odkazu a až pak vyplnit formulář. Pokud budeš slepě odměňovat jen poslední klik, podsekneš kanály, které budují důvěru.
+
+Privacy-first řešení není nutně složitý multi-touch model. Pro malý tým často stačí tři vrstvy:
+
+1. **První známý zdroj:** odkud člověk poprvé přišel v rámci rozumné krátké retenční doby.
+2. **Konverzní zdroj:** odkud přišel při vyplnění formuláře nebo registraci.
+3. **Kvalita výsledku:** jestli z toho byla relevantní poptávka, aktivovaný trial nebo platící zákazník.
+
+Měsíční report pak může vypadat takto:
+
+| Kanál | Návštěvy | Konverze | Kvalifikované leady | Poznámka |
+| --- | ---: | ---: | ---: | --- |
+| Vlastní články | 820 | 18 | 7 | Dlouhá návratnost, dobré dotazy |
+| RSS | 210 | 9 | 5 | Menší objem, vysoká relevance |
+| Placená kampaň | 1 900 | 24 | 3 | Hodně šumu, upravit nabídku |
+| Partner | 160 | 8 | 6 | Silný kanál, stojí za další obsah |
+
+Takový report nepotřebuje znát konkrétní identity všech návštěvníků. Potřebuje propojit kanál s obchodním výsledkem. To je rozdíl mezi řízením marketingu a digitálním voyeurstvím s dashboardem.
+
+## AL.5 Přímé dotazy nejsou ostuda
+
+Jedna z nejvíc podceňovaných atribučních metod je obyčejná otázka: „Kde jste se o nás dozvěděli?“ Není dokonalá, ale u B2B SaaS často doplní kontext lépe než deset skriptů. Lidé si pamatují doporučení, konferenci, článek nebo konkrétní osobu. A pokud si nepamatují, svět se nezboří.
+
+Do formuláře můžeš přidat volitelné pole:
+
+> „Kde jste na nás narazili? Klidně jednou větou. Pomáhá nám dělat méně reklamního hluku a víc užitečného obsahu.“
+
+Dobré nastavení:
+
+- pole je volitelné,
+- nepředvyplňuje se invazivním sledováním,
+- odpověď se používá pro obchodní vyhodnocení, ne pro profilování člověka,
+- v CRM má jasnou retenci,
+- odpovědi se jednou měsíčně seskupí do několika kategorií.
+
+Příklad kategorií:
+
+- doporučení od zákazníka,
+- organické vyhledávání,
+- článek nebo e-book,
+- RSS nebo newsletter,
+- komunita nebo event,
+- partner,
+- nevím / nechci říct.
+
+To poslední je důležité. Privacy-first formulář musí umět přijmout i odpověď „nechci říct“ bez toho, aby se tvářil uraženě jako formulář z banky.
+
+## AL.6 Checklist privacy-first atribuce
+
+Před spuštěním atribučního měření projdi tento checklist:
+
+- [ ] Máme napsaná rozhodnutí, která má atribuce podporovat.
+- [ ] Měříme obchodní události, ne jen obecnou návštěvnost.
+- [ ] UTM parametry mají jednotný slovník a neobsahují osobní údaje.
+- [ ] Atribuční kontext má omezenou retenci.
+- [ ] Marketingová data nejsou bez důvodu nalepená na kompletní zákaznický profil.
+- [ ] Reporty pracují primárně s agregovanými hodnotami.
+- [ ] Formulář má volitelné pole „kde jste se o nás dozvěděli“ nebo jiný přímý feedback.
+- [ ] Placené kampaně vyhodnocujeme podle kvality leadů, ne jen podle počtu kliků.
+- [ ] Vlastní kanály jako web, RSS, dokumentace a přímé odkazy mají v reportu viditelné místo.
+- [ ] Každý nový tracker musí projít otázkou: jaké rozhodnutí bez něj neumíme udělat?
+
+## Codyho komentář
+
+Marketingová atribuce má být kompas, ne policejní spis. Malý evropský SaaS tým vyhraje spíš tím, že bude mít jasnou nabídku, dobrý obsah, přímé doporučení a slušné měření, než tím, že do webu nalije další identifikátor. Když report pomůže říct „tenhle kanál přináší dobré zákazníky“, splnil účel. Když pomůže jen říct „uživatel 3827 se vrátil po 13 dnech“, splnil hlavně fantazii dodavatele analytiky.
+
+## Shrnutí přílohy
+
+Privacy-first atribuce začíná obchodní otázkou a končí rozhodnutím. UTM parametry drž jednotné, atribuční data ukládej úsporně, kvalitu kanálů vyhodnocuj podle skutečných konverzí a doplň měření přímými dotazy. Vlastní kanály, RSS a přímé odkazy nejsou méněcenné jen proto, že nemají lesklý reklamní dashboard. Často jsou přesně tím místem, kde vzniká důvěra.
+
 ## Pracovní log
+- 2026-08-08: Přidána příloha AL o privacy-first marketingové atribuci: rozhodovací otázky, UTM disciplína, oddělení atribučních dat, kvalita leadů, přímé dotazy a checklist.
 - 2026-08-08: Přidána příloha AK o changelogu a release notes bez produktového ohňostroje: rozlišení kanálů, psaní podle dopadu, zvýraznění privacy změn, vlastní distribuční kanály, střídmé měření a checklist.
 - 2026-08-08: Přidána příloha AJ o zákaznické produktové dokumentaci: úkolová struktura, bezpečné screenshoty, další kroky v návodech, vlastnictví, revizní rytmus a privacy-first checklist.
 - 2026-08-08: Přidána příloha AI o B2B nákupním procesu bez nekonečných callů a datového ping-pongu: nákupní stránka, mini trust pack, pilot, odpovědní knihovna, datové minimum a checklist.
