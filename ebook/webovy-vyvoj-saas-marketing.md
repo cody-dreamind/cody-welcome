@@ -5260,10 +5260,143 @@ Před spuštěním exportu si projdi:
 
 Export dat je test důvěry. Privacy-first produkt zákazníka nepřivazuje k židli, ale dává mu kontrolu: rozumné formáty, bezpečné stažení, jasnou dokumentaci a férový odchod. Interoperabilita není jen právní povinnost v hezkém kabátě. Je to signál, že produkt stojí na hodnotě, ne na překážkách.
 
+
+# Příloha AE: Cookie lišta a consent bez dark patternů
+
+Cookie lišta je často první věc, kterou člověk na webu uvidí. To je trochu smutné, protože většina firem by raději ukázala hodnotu, produkt nebo aspoň hezký headline. Jenže když už banner existuje, může buď budovat důvěru, nebo působit jako digitální celník, který blokuje dveře a šeptá: „Klikni na všechno, ať už máme klid.“
+
+Privacy-first přístup začíná jednoduchou otázkou: opravdu potřebujeme souhlas, nebo můžeme produkt navrhnout tak, aby žádné zbytečné sledování nepotřeboval? Evropská komise uvádí, že souhlas podle GDPR má být svobodný, konkrétní, informovaný a jednoznačný a že odmítnutí nebo odvolání souhlasu nemá člověka znevýhodnit: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/legal-grounds-processing-data/grounds-processing/when-consent-valid_en CNIL k analytice připomíná, že měření návštěvnosti typicky podléhá pravidlům pro cookies a výjimka dává smysl jen při opravdu omezeném audience measurementu: https://www.cnil.fr/fr/node/677
+
+*Codyho komentář:* Nejlepší cookie banner je ten, který nemusíš ukazovat, protože web funguje bez marketingové špionážní výbavy. Druhý nejlepší je ten, který se nechová jako casino automat v právnickém obleku.
+
+## AE.1 Nejdřív rozděl cookies podle účelu
+
+Neřeš design banneru dřív než inventář. Banner bez inventáře je dekorace na chaosu. Sepiš všechny cookies, localStorage položky, sessionStorage položky, fingerprintingové skripty, měřicí pixely a embedované služby, které mohou ukládat nebo číst informace v zařízení návštěvníka.
+
+Praktické rozdělení:
+
+| Kategorie | Příklad | Souhlas typicky potřeba? | Privacy-first poznámka |
+| --- | --- | --- | --- |
+| Nezbytné | Session cookie, CSRF token, volba jazyka | Ne, pokud jsou opravdu nutné | Nevkládej sem analytiku jen proto, že je to pohodlné |
+| Preference | Téma, region, uložené nastavení UI | Záleží na účelu a rozsahu | Ukládej lokálně a stručně vysvětli proč |
+| Analytika | Počty návštěv, zdroje návštěv, události | Často ano, u omezené privacy-friendly analytiky může být výjimka | Preferuj agregaci, bez cross-site identifikace |
+| Marketing | Retargeting, reklamní pixely, lookalike publika | Ano | Zvaž, jestli to vůbec patří na B2B SaaS web |
+| Externí obsah | Mapy, videa, chat widgety, sociální embed | Často ano nebo vyžaduje jasný kontext | Nabídni kliknutím aktivovaný placeholder |
+
+U každé položky napiš: název, poskytovatele, účel, dobu uložení, jestli jde o první nebo třetí stranu, komu data odchází a kde se dá vypnout. Pokud tu větu neumíš napsat, zatím to na web nepatří. Ano, i když marketing „to potřebuje do kampaně“. Marketing potřebuje hlavně důvěru, ne další pixel do sbírky motýlů.
+
+## AE.2 Výchozí stav má být klid, ne předem zapnutý vysavač
+
+Privacy-first banner má jednoduché pravidlo: dokud člověk nedal platný souhlas, neběží nic, co souhlas potřebuje. Žádné „nejdřív nahrajeme všechno a pak to podle volby vypneme“. To není respekt, to je zpětná brzda u auta, které už projelo zdí.
+
+Technický vzor pro web:
+
+1. Kritické skripty aplikace běží hned, ale jen ty nezbytné.
+2. Analytické a marketingové skripty jsou blokované serverově nebo přes bezpečný consent loader.
+3. Volba se uloží s verzí textu souhlasu, časem a kategoriemi.
+4. Při změně účelů nebo dodavatelů se souhlas neprodlouží magicky, ale znovu vysvětlí.
+5. Odvolání souhlasu zastaví budoucí měření a spustí úklid tam, kde to produkt umí.
+
+Příklad rozhodovacího pravidla:
+
+```text
+if consent.analytics == true:
+  load privacy_friendly_analytics()
+else:
+  keep site fully usable without analytics
+```
+
+Tohle není jen právní hygiena. Je to i provozní jistota. Když máš skripty pod kontrolou, rychleji řešíš výkon, chyby, bezpečnost a vendor lock-in. Cookie chaos totiž skoro vždycky znamená i frontend chaos. A frontend chaos je moderní umění, za které zákazník platit nechce.
+
+## AE.3 Tlačítka musí být férová a stejně snadná
+
+Dark pattern poznáš jednoduše: uživatel technicky může odmítnout, ale prakticky musí projít menším escape roomem. „Přijmout vše“ je zelené, velké a hned. „Odmítnout“ je šedý text v rohu, pak další obrazovka, pak seznam 43 partnerů a nakonec tlačítko „uložit mé svobodné rozhodnutí po krátkém utrpení“.
+
+Férový banner má:
+
+- stejně viditelné možnosti přijmout i odmítnout volitelné účely,
+- jasné kategorie bez právnické mlhy,
+- odkaz na detailní nastavení,
+- žádná předem zaškrtnutá volitelná políčka,
+- možnost pokračovat bez marketingových cookies,
+- snadné pozdější odvolání souhlasu v patičce nebo nastavení.
+
+Mikrotext, který neuráží inteligenci:
+
+> Používáme nezbytné cookies, aby web fungoval. Analytiku zapneme jen s vaším souhlasem a používáme ji v agregované podobě ke zlepšování webu. Marketingové trackery na tomto webu nepoužíváme.
+
+Tlačítka:
+
+- „Pouze nezbytné“
+- „Povolit analytiku“
+- „Nastavit podrobně“
+
+Pokud používáš marketingové cookies, pojmenuj je přímo. Ne „zlepšení zážitku“, když jde o retargeting. Zlepšení zážitku je rychlá stránka, dobrý obsah a tlačítko, které funguje. Ne pixel, který pronásleduje člověka po internetu jako levný detektiv.
+
+## AE.4 Analytika bez banneru je možná jen s disciplínou
+
+Některé weby mohou fungovat s velmi omezenou analytikou, která se obejde bez souhlasu podle místní interpretace dozorových úřadů. To ale není bianko šek. Znamená to minimalizaci: žádné cross-site sledování, žádné reklamní propojení, krátká retence, agregované reporty, IP anonymizace nebo ekvivalentní omezení, žádné sdílení pro jiné účely a možnost opt-out, pokud je relevantní.
+
+Rozumný privacy-first měřicí plán pro malý B2B web:
+
+- počet návštěv důležitých stránek,
+- zdroj návštěvy na úrovni kampaně bez osobního profilu,
+- kliknutí na hlavní CTA,
+- odeslání formuláře jako agregovaný konverzní signál,
+- technické chyby a rychlost stránky,
+- žádné session replaye a žádné nahrávání vstupů do formulářů.
+
+U SaaS aplikace odděl webovou analytiku od produktové telemetrie. Landing page potřebuje vědět, jestli lidé pochopili nabídku. Produkt potřebuje vědět, jestli zákazník dosáhl hodnoty. Ani jedno nepotřebuje vědět, že Franta v 22:13 třikrát zaváhal nad cenou a pak si otevřel lednici. Aspoň doufám.
+
+## AE.5 Consent preference center nesmí být skladiště viny
+
+Nastavení souhlasu má být krátké, srozumitelné a použitelné. Ne dokumentární film o 812 partnerech. Pokud máš tolik dodavatelů, že je neumíš vysvětlit, problém není UI. Problém je architektura marketingu.
+
+Dobré preference center obsahuje:
+
+- stav aktuální volby,
+- kategorie účelů a jejich krátké vysvětlení,
+- seznam klíčových dodavatelů,
+- dobu uložení preference,
+- možnost uložit změny,
+- možnost vrátit se k „pouze nezbytné“,
+- odkaz na zásady ochrany osobních údajů a cookie policy.
+
+Praktická věta do detailu analytiky:
+
+> Analytiku používáme k pochopení, které stránky a funkce lidem pomáhají. Nepoužíváme ji pro reklamní profilování, nespojujeme ji s daty třetích stran a reporty čteme agregovaně.
+
+Praktická věta do detailu externího obsahu:
+
+> Některá videa nebo mapy načítáme až po kliknutí, protože externí služba může zpracovávat vaše technické údaje. Bez kliknutí se služba nenačte.
+
+Tohle je poctivé a zároveň normálně lidské. Cílem není vyvolat paniku, ale dát kontrolu. Privacy-first komunikace nemá znít jako soudní obsílka ani jako wellness reklama na „bezpečný digitální zážitek“. Stačí říct pravdu.
+
+## AE.6 Checklist cookie a consent vrstvy
+
+Před publikací webu si projdi:
+
+- Máme aktuální inventář cookies, úložišť v prohlížeči, pixelů, embedů a skriptů třetích stran?
+- Víme u každé položky účel, dodavatele, retenci, kategorii a datový tok?
+- Běží před souhlasem jen opravdu nezbytné prvky?
+- Je odmítnutí volitelných cookies stejně snadné jako přijetí?
+- Nejsou volitelné souhlasy předem zaškrtnuté?
+- Umí uživatel souhlas později změnit nebo odvolat?
+- Ukládáme verzi souhlasového textu, čas a zvolené kategorie?
+- Umíme web provozovat bez marketingových trackerů a bez rozbití základní funkčnosti?
+- Máme fallback pro externí obsah, který se načte až po kliknutí?
+- Kontrolujeme po deployi, že žádný nový skript nespouští tracking před souhlasem?
+
+## Shrnutí přílohy
+
+Cookie lišta není právní dekorace. Je to rozhraní důvěry. Nejlepší výsledek je web, který potřebuje minimum souhlasů, měří agregovaně, nespouští třetí strany bez jasného důvodu a dává lidem skutečnou volbu. Když banner musí existovat, má být krátký, férový a technicky pravdivý. Jinak je to jen tmavý vzor s kulatými rohy.
+
 ---
 
 ## Zdroje
 
+- European Commission: When is consent valid? — https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/legal-grounds-processing-data/grounds-processing/when-consent-valid_en
+- CNIL: Use analytics on your websites and applications — https://www.cnil.fr/fr/node/677
 - European Commission: Dealing with requests from individuals — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/dealing-requests-individuals_en
 - European Commission: How should requests from individuals exercising their data protection rights be dealt with? — https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/dealing-citizens/how-should-requests-individuals-exercising-their-data-protection-rights-be-dealt_en
 - ICO: Right to data portability — https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/individual-rights/individual-rights/right-to-data-portability/
@@ -5327,6 +5460,7 @@ Export dat je test důvěry. Privacy-first produkt zákazníka nepřivazuje k ž
 
 ## Pracovní log
 
+- 2026-08-08: Přidána příloha AE o cookie liště a consent vrstvě bez dark patternů: inventář cookies, férová tlačítka, blokování volitelných skriptů před souhlasem, preference center, privacy-first analytika a checklist.
 - 2026-08-08: Přidána příloha AD o exportu dat a interoperabilitě bez zákaznického vězení: mapa exportovatelných dat, čitelné formáty, bezpečné stažení, test importem, odchodový scénář a checklist.
 - 2026-08-08: Přidána příloha AC o AI funkcích v SaaS bez úniku dat: výběr use-casu, mapa datového toku, RAG se zdroji a právy, člověk ve smyčce, dodavatelský dotazník, LLM bezpečnost a checklist před spuštěním.
 - 2026-08-08: Přidána příloha AB o admin rozhraní a auditní stopě: úkolové admin akce, maskování citlivých dat, důvody zásahů, support režim, bezpečné logování a checklist.
