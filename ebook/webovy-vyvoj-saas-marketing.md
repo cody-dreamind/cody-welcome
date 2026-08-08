@@ -4117,6 +4117,165 @@ Po vyhodnocení:
 Experimentování není kasino s dashboardem. Dobře navržený experiment má malou stopu, jasný konec a pomáhá udělat rozhodnutí. Pro privacy-first SaaS je to ideální disciplína: učíš se rychle, ale nenecháváš za sebou zbytečné datové bahno.
 
 
+# Příloha V: Technické SEO bez sledovacího balastu
+
+Technické SEO je často popisované jako tajemná směs sitemap, canonical tagů, strukturovaných dat a rituálního obětování pluginu pro WordPress. Ve skutečnosti jde hlavně o to, aby vyhledávač i člověk rychle pochopili, co stránka je, proč existuje a která její verze je ta správná.
+
+Privacy-first web má v technickém SEO jednu příjemnou výhodu: když nepřilepíš na každou stránku hromadu externích skriptů, reklamních pixelů a sociálních widgetů, bývá rychlejší, stabilnější a čitelnější. Technické SEO pak není maskování nepořádku, ale údržba dobré informační architektury.
+
+## V.1 Každá stránka potřebuje jednu jasnou identitu
+
+Začni tím, že každé důležité URL přiřadíš jednu roli. Domovská stránka prodává hlavní slib. Landing page řeší konkrétní nabídku. Blogový článek odpovídá na konkrétní otázku. Dokumentace pomáhá použít produkt. Pokud stránka neumí říct, proč existuje, nepomůže jí ani nejlepší meta description.
+
+Minimum pro jednu stránku:
+
+| Prvek | Praktická otázka | Příklad |
+| --- | --- | --- |
+| URL | Dá se přečíst a zapamatovat? | `/blog/privacy-first-analytika` |
+| `<title>` | Říká téma i značku bez vycpávání? | `Privacy-first analytika pro SaaS | Cody` |
+| Meta description | Vysvětluje užitek a láká ke kliknutí? | `Jak měřit web nebo SaaS bez reklamních pixelů, zbytečných cookies a datového chaosu.` |
+| H1 | Odpovídá skutečnému obsahu stránky? | `Privacy-first analytika: měřit ano, šmírovat ne` |
+| Primární CTA | Ví návštěvník, co má udělat dál? | `Stáhnout checklist` nebo `Domluvit konzultaci` |
+
+Google ve svém SEO Starter Guide zdůrazňuje srozumitelný obsah, dobrou organizaci webu a jasné titulky stránky: https://developers.google.com/search/docs/fundamentals/seo-starter-guide. Nečti to jako návod na trikování algoritmu. Čti to jako připomínku, že chaos v obsahu se nedá vyřešit tagem.
+
+Codyho komentář: SEO title není billboard na D1. Nemusí křičet všechna klíčová slova najednou. Má člověku potvrdit: „Ano, tohle je stránka, kterou jsem hledal.“
+
+## V.2 Canonical URL je pojistka proti duplicitám
+
+Duplicitní obsah vzniká rychle: parametr kampaně, trailing slash, HTTP/HTTPS varianta, filtrovaný výpis, tisková verze, stará landing page po redesignu. Google popisuje canonicalizaci jako výběr reprezentativní URL pro skupinu duplicitních nebo velmi podobných stránek a upozorňuje, že `rel="canonical"` je signál, ne absolutní rozkaz: https://developers.google.com/search/docs/crawling-indexing/canonicalization.
+
+Praktický postup pro malý web:
+
+- U každé veřejné stránky nastav canonical na čistou produkční URL.
+- Parametry pro kampaně nikdy nepoužívej jako samostatné indexovatelné stránky.
+- Staré URL po redesignu přesměruj 301 na nejbližší relevantní novou stránku.
+- Nepouštěj do indexu interní vyhledávání, testovací stránky a náhodné varianty filtrů.
+- Sitemap, interní odkazy i canonical drž konzistentní; tři různé signály dělají z vyhledávače detektiva, a ten má lepší věci na práci.
+
+Příklad rozhodnutí:
+
+| Situace | Co udělat | Proč |
+| --- | --- | --- |
+| `/pricing?utm_source=newsletter` | canonical na `/pricing` | Kampaňový parametr není nová stránka |
+| `/sluzby/web` a `/webovy-vyvoj` mají stejný obsah | jednu URL nechat, druhou přesměrovat | Neštěpit signály ani reporting |
+| stará beta landing page zůstala online | noindex nebo přesměrování | Neukazovat zastaralý slib produktu |
+| filtrovaný seznam s desítkami kombinací | indexovat jen vybrané přehledové stránky | Neplnit index nízkohodnotnými variantami |
+
+Privacy-first poznámka: čisté URL bez nadbytečných identifikátorů jsou lepší pro SEO i pro soukromí. Pokud do odkazů lepíš osobní identifikátory, není to „lepší atribuce“. Je to malý datový průšvih s hezkým dashboardem.
+
+## V.3 Sitemap pomáhá objevit důležité stránky, ne zachránit špatnou navigaci
+
+Sitemap je seznam URL, které považuješ za důležité. Google uvádí, že sitemap pomáhá vyhledávačům efektivněji procházet web a může obsahovat informace jako datum poslední aktualizace nebo jazykové varianty: https://developers.google.com/search/docs/crawling-indexing/sitemaps/overview. Zároveň ale sitemap negarantuje indexaci. Pokud stránka není užitečná, osamocená nebo je v rozporu s canonical signály, XML soubor ji magicky nepovýší.
+
+Dobrá sitemap pro menší SaaS web obsahuje:
+
+- hlavní obchodní stránky,
+- klíčové landing pages,
+- blogové články a návody,
+- dokumentaci, pokud má být veřejně indexovaná,
+- stránku o soukromí, podmínky a bezpečnostní informace, pokud pomáhají důvěře.
+
+Do sitemap naopak obvykle nepatří:
+
+- interní administrace,
+- výsledky vyhledávání,
+- thank-you stránky po formuláři,
+- dočasné experimentální varianty,
+- URL s osobními nebo kampaňovými parametry.
+
+Mini rutina po publikaci obsahu:
+
+1. Nová stránka má alespoň jeden interní odkaz z relevantního místa.
+2. Je v sitemap, pokud má být indexovaná.
+3. Má správný canonical.
+4. Není omylem blokovaná v `robots.txt` nebo přes `noindex`.
+5. Je dostupná bez přihlášení a bez souhlasu s marketingovými cookies.
+
+To poslední je důležité. Pokud se hlavní obsah zobrazí až po naložení pěti externích skriptů a cookie banner se tváří jako strážce hradu, web sám sobě hází klacky pod nohy.
+
+## V.4 Strukturovaná data používej jako popis, ne jako kostým
+
+Strukturovaná data pomáhají vyhledávačům lépe porozumět obsahu stránky. Google doporučuje používat strukturovaná data pro podporované typy obsahu a držet se pravidel pro daný typ výsledku: https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data. Prakticky: značkuj to, co na stránce skutečně je. Nevymýšlej si recenze, ceny, autora ani dostupnost.
+
+Pro malý SaaS nebo odborný web se často hodí:
+
+| Typ obsahu | Vhodné strukturované údaje | Pozor na |
+| --- | --- | --- |
+| Blogový článek | titulek, autor, datum publikace, datum aktualizace | falešné datum aktualizace kvůli SEO kosmetice |
+| FAQ sekce | otázky a odpovědi, které jsou viditelné na stránce | přidání skrytých otázek jen pro vyhledávač |
+| Produkt nebo služba | název, popis, případně cena, pokud je jasná | neaktuální ceny a sliby |
+| Organizace | název firmy, URL, logo, kontaktní údaje | nekonzistentní údaje napříč webem |
+| Breadcrumbs | hierarchie stránky | drobečková navigace, která neodpovídá skutečné struktuře |
+
+Příklad jednoduchého JSON-LD pro článek:
+
+```html
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Privacy-first analytika pro SaaS",
+  "author": {
+    "@type": "Organization",
+    "name": "Dreamind"
+  },
+  "datePublished": "2026-08-08",
+  "dateModified": "2026-08-08"
+}
+</script>
+```
+
+Checklist před nasazením strukturovaných dat:
+
+- Odpovídá značení viditelnému obsahu stránky?
+- Neobsahuje neaktuální cenu, rating nebo dostupnost?
+- Je JSON validní a testovatelný?
+- Nemění se datum aktualizace bez skutečné úpravy obsahu?
+- Je autor nebo organizace uvedená konzistentně napříč webem?
+
+## V.5 Open Graph a sdílení bez sociálních skriptů
+
+Sdílení obsahu nepotřebuje sledovací tlačítka. Stačí dobré URL, titulek, popis a obrázek. Open Graph a základní meta tagy zajistí, že odkaz v chatu, e-mailu nebo interním nástroji vypadá důvěryhodně. Sociální embed widgety často přidávají JavaScript, cookies a cizí požadavky, které pro samotné sdílení nejsou nutné.
+
+Privacy-first varianta:
+
+```html
+<meta property="og:title" content="Privacy-first analytika pro SaaS">
+<meta property="og:description" content="Jak měřit produkt bez reklamních pixelů a datového chaosu.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://example.cz/blog/privacy-first-analytika">
+<meta property="og:image" content="https://example.cz/og/privacy-first-analytika.png">
+```
+
+Doporučení:
+
+- Generuj OG obrázky lokálně nebo v důvěryhodném vlastním procesu.
+- Nepřidávej externí share tlačítka, pokud stačí obyčejný odkaz.
+- U článků nabídni RSS a přímé URL; algoritmy jsou distribuce, ne archiv.
+- Kontroluj, že OG popis odpovídá aktuálnímu obsahu, ne staré verzi slibu.
+
+## V.6 Checklist technického SEO pro privacy-first web
+
+Před publikací nové stránky:
+
+- Má stránka jasnou roli, jednu hlavní akci a srozumitelný H1?
+- Sedí `<title>` a meta description bez přecpání klíčovými slovy?
+- Je canonical nastavený na čistou produkční URL?
+- Vede na stránku interní odkaz z relevantního místa?
+- Je stránka v sitemap, pokud má být indexovaná?
+- Není omylem blokovaná přes `robots.txt`, `noindex` nebo přihlášení?
+- Strukturovaná data popisují skutečný viditelný obsah?
+- Open Graph metadata dávají smysl při sdílení odkazu?
+- Stránka funguje bez marketingových cookies a bez zbytečných třetích stran?
+- Po publikaci je jasné, kdo stránku udržuje a kdy se má znovu zkontrolovat?
+
+## Shrnutí přílohy
+
+Technické SEO není sbírka triků. Je to disciplína čistých URL, jasných signálů, dobré navigace a pravdivého popisu obsahu. Privacy-first přístup tomu pomáhá: méně skriptů, méně parametrů, méně cizích služeb a víc kontroly nad tím, co web skutečně říká.
+
+
+
 ## Zdroje
 
 - Atlassian Support: Create a postmortem — https://support.atlassian.com/statuspage/docs/create-a-postmortem/
@@ -4144,6 +4303,9 @@ Experimentování není kasino s dashboardem. Dobře navržený experiment má m
 - Google Search Central: Understanding Google Page Experience — https://developers.google.com/search/docs/appearance/page-experience
 - Google Search Central: Creating helpful, reliable, people-first content — https://developers.google.com/search/docs/fundamentals/creating-helpful-content
 - Google Search Central: SEO Starter Guide — https://developers.google.com/search/docs/fundamentals/seo-starter-guide
+- Google Search Central: Intro to how structured data markup works — https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data
+- Google Search Central: Learn about sitemaps — https://developers.google.com/search/docs/crawling-indexing/sitemaps/overview
+- Google Search Central: What is canonicalization — https://developers.google.com/search/docs/crawling-indexing/canonicalization
 - OWASP: Logging Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
 - OWASP: Top 10 for Large Language Model Applications — https://owasp.org/www-project-top-10-for-large-language-model-applications/
 - OWASP: Top 10 for LLM Applications 2025 — https://genai.owasp.org/resource/owasp-top-10-for-llm-applications-2025/
@@ -4159,6 +4321,7 @@ Experimentování není kasino s dashboardem. Dobře navržený experiment má m
 
 ## Pracovní log
 
+- 2026-08-08: Přidána příloha V o technickém SEO bez sledovacího balastu: jasná identita stránky, canonical URL, sitemap, strukturovaná data, Open Graph metadata a privacy-first checklist.
 - 2026-08-07: Přidána příloha U o privacy-first produktových experimentech: hypotézy, minimální měření, alternativy k A/B testům, majitel experimentu, ochranné metriky a checklist.
 - 2026-08-07: Přidána příloha T o GDPR dokumentaci bez šanonového divadla: registr zpracování, právní a produktové věty, mini-DPIA, změnový checklist, subdodavatelé a kontrolní seznam.
 - 2026-08-07: Přidána příloha S o monitoringu, alertech a status komunikaci: uživatelské sliby, bezpečné logování, akční alerty, status šablony, privacy-first výběr nástroje a checklist.
