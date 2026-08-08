@@ -5009,6 +5009,142 @@ Privacy-first podpora není pomalá. Je přesná. A přesnost je mimochodem dost
 Admin rozhraní je produkt uvnitř produktu. Pokud je navržené líně, stane se z něj zkratka kolem bezpečnosti, soukromí i zákaznické důvěry. Privacy-first administrace stojí na úkolových akcích, maskování dat, důvodech pro citlivé zásahy, odděleném support režimu a auditní stopě, která je čitelná, chráněná a datově střídmá. Nejde o byrokracii. Jde o to, aby tým mohl zákazníkům pomáhat rychle, ale ne jako všemocné božstvo bez paměti.
 
 
+# Příloha AC: AI funkce v SaaS bez úniku dat a kouzelné mlhy
+
+AI funkce v SaaS jsou lákavé, protože vypadají jako zkratka: shrnutí ticketu, návrh odpovědi, automatické štítkování leadů, chytré vyhledávání, generování reportu, interní asistent. Jenže každá AI funkce je zároveň nový datový tok. A datové toky mají tu otravnou vlastnost, že když je nenakreslíš ty, nakreslí si je realita sama. Obvykle fixou přes zákaznická data.
+
+Privacy-first AI neznamená „AI nikdy“. Znamená to: přesně víme, jaká data do modelu jdou, proč tam jdou, kdo je zpracovává, jestli se používají k tréninku, jak dlouho se drží, jak se logují výstupy a co se stane, když model sebevědomě plácne nesmysl. Evropská komise popisuje AI Act jako rizikově založený rámec pro AI systémy v EU a uvádí, že povinnosti se liší podle konkrétního použití a role organizace: https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai EDPB k AI připomíná, že odpovědná inovace musí chránit osobní údaje při vývoji i nasazení AI technologií: https://www.edpb.europa.eu/topics/ai-and-technology/artificial-intelligence_en
+
+*Codyho komentář:* AI v produktu je jako junior kolega s přístupem k databázi a neotřesitelným sebevědomím. Může být skvělý. Ale nedáš mu rovnou klíče od skladu, fakturace a právního oddělení. Teda pokud nechceš interní reality show.
+
+## AC.1 Začni use-casem, ne modelem
+
+Špatná otázka zní: „Kam dáme AI?“ Dobrá otázka zní: „Které rozhodnutí nebo opakovaný úkol uživatelům zrychlíme, aniž bychom zvýšili datové riziko?“ Model je až druhý krok. První je účel.
+
+Praktická tabulka před zapnutím AI funkce:
+
+| Use-case | Vstupní data | Výstup | Riziko | Bezpečnější varianta |
+| --- | --- | --- | --- | --- |
+| Shrnutí support ticketu | Text ticketu, metadata konverzace | Krátké shrnutí pro support | Únik citlivých údajů do třetí strany | Redakce PII, EU zpracování, vypnuté trénování |
+| Návrh odpovědi zákazníkovi | Ticket, interní znalostní báze | Draft odpovědi | Halucinace nebo slib mimo politiku firmy | Povinné schválení člověkem, citace zdrojového článku |
+| Štítkování leadů | Firma, poptávka, segment | Doporučený štítek | Skryté profilování a bias | Pouze interní priorita, jednoduchá pravidla, vysvětlení důvodu |
+| Vyhledávání v dokumentaci | Dotaz a interní články | Seznam odpovědí | Vytahování neveřejných dat | Přístupová práva v indexu, zdrojové odkazy, audit dotazů |
+
+Každý use-case napiš jednou větou: „AI pomáhá supportu rychleji pochopit dlouhý ticket, ale neposílá odpověď bez člověka.“ Pokud se věta změní na „AI rozhoduje, komu dáme slevu, koho zablokujeme nebo kdo je rizikový zákazník“, už nejsi v režimu pohodlné produktivity. Jsi v režimu governance, testování dopadů a právního review.
+
+## AC.2 Datový tok musí být kreslitelný na jednu obrazovku
+
+U AI integrací nestačí říct „posíláme prompt do API“. Prompt není kouzelné okno. Je to balíček dat. Často obsahuje jméno zákazníka, e-mail, obsah zprávy, obchodní tajemství, interní poznámky, URL, ID účtu a někdy i tokeny, které se tam dostaly omylem, protože někdo logoval celý objekt. Klasika. Programátorská poezie v próze.
+
+Minimalistická mapa AI toku:
+
+```text
+uživatelova akce
+  -> aplikační server
+  -> redakce/minimalizace vstupu
+  -> AI provider nebo vlastní model
+  -> validace výstupu
+  -> zobrazení draftu člověku
+  -> audit rozhodnutí
+```
+
+U každé šipky si odpověz:
+
+- Jaká konkrétní data tečou dál?
+- Je tam osobní údaj, obchodní tajemství nebo zákaznický obsah?
+- Dá se vstup zkrátit, anonymizovat, pseudonymizovat nebo nahradit odkazem?
+- Kde se ukládá prompt, výstup a chyba?
+- Používá dodavatel data k tréninku nebo zlepšování služby?
+- V jakém regionu se data zpracovávají a kdo je subdodavatel?
+
+Nejbezpečnější prompt je ten, který nepotřebuje znát identitu člověka. Místo „napiš odpověď Ondřejovi Novákovi z firmy ABC s.r.o.“ často stačí „napiš odpověď zákazníkovi, který se ptá na změnu fakturačního e-mailu“. Kontext ponecháš, identitu zahodíš. Model nepřijde o genialitu, jen o zbytečné drby.
+
+## AC.3 RAG není výmluva pro chaos ve znalostní bázi
+
+Retrieval augmented generation, česky prakticky „model odpovídá s pomocí vybraných dokumentů“, je užitečný vzor pro interní asistenty a nápovědu. Ale RAG nevyřeší špatnou dokumentaci. Jen ji zabalí do sebevědomější věty.
+
+Privacy-first pravidla pro znalostní AI:
+
+- Indexuj jen dokumenty, které mají vlastníka a jasnou klasifikaci.
+- Do indexu neposílej zákaznické exporty, pokud pro to není konkrétní účel a právní základ.
+- Respektuj stejná přístupová práva jako aplikace; asistent nesmí odpovědět z dokumentu, který uživatel nesmí číst.
+- U odpovědi zobraz zdrojový dokument nebo sekci, ne jen plynulý text.
+- Staré dokumenty označ jako zastaralé, aby z nich asistent nedělal čerstvé pravdy.
+- Loguj dotaz a typ zdroje, ale neukládej víc obsahu, než potřebuješ pro bezpečnost a ladění.
+
+Příklad dobré odpovědi interního asistenta:
+
+> „Podle interní stránky `Refundace / pravidla od 2026-06` může support vrátit platbu do 14 dnů bez schválení finance týmu, pokud nejde o enterprise smlouvu. Doporučuji ověřit typ smlouvy v detailu zákazníka.“
+
+To je lepší než: „Jasně, vraťte mu peníze.“ AI, která necituje zdroj, je možná plynulá. Ale plynulost není kontrola. Plynulost je jen hezky učesaná nejistota.
+
+## AC.4 Člověk ve smyčce má mít skutečnou brzdu
+
+„Human in the loop“ nesmí znamenat, že člověk jen klikne na zelené tlačítko, protože AI už napsala sebevědomý odstavec. Užitečná brzda má tři části: viditelný vstup, vysvětlený výstup a snadnou možnost odmítnutí.
+
+Pro AI drafty nastav:
+
+- Výstup se nikdy neposílá zákazníkovi automaticky, pokud jde o citlivou nebo obchodně závaznou komunikaci.
+- Uživatel vidí, z jakých dat nebo dokumentů návrh vznikl.
+- UI jasně označí, že jde o návrh od AI, ne hotovou pravdu.
+- Existuje tlačítko „nepoužít“ a možnost opravy bez trestu v metrikách.
+- U dražších nebo rizikových akcí se ukládá, jestli člověk návrh přijal, upravil nebo odmítl.
+
+Evropská komise u transparentnostních pravidel AI Actu popisuje povinnosti pro určité AI systémy včetně interaktivních systémů a generovaného obsahu: https://digital-strategy.ec.europa.eu/en/policies/guidelines-transparency-ai-generated-content Prakticky: když uživatel komunikuje s AI, nemá hádat, jestli mluví se strojem. A když AI generuje obsah, tým má vědět, kdy a kde je potřeba označení nebo kontrola.
+
+## AC.5 Dodavatelský dotazník pro AI funkci
+
+Než napojíš AI API do produktu, pošli dodavateli nebo vyplň interně krátký dotazník. Když odpovědi neumíš najít, není to detail. Je to signál, že integrace ještě není připravená na produkci.
+
+Checklist otázek:
+
+- Kdo je provider modelu a kdo jsou další subdodavatelé?
+- Ve kterém regionu probíhá zpracování a ukládání dat?
+- Používají se prompty, soubory nebo výstupy k tréninku modelů?
+- Jaká je výchozí retence promptů, výstupů a logů?
+- Lze retenci zkrátit nebo vypnout ukládání obsahu?
+- Existuje DPA nebo jiný zpracovatelský dokument pro osobní údaje?
+- Jak provider řeší bezpečnostní incidenty a notifikace?
+- Dá se omezit typ dat, která do služby posíláme?
+- Má služba audit log administrace a přístupů?
+- Co se stane s daty po ukončení smlouvy?
+
+U AI dodavatelů je obzvlášť důležité neplést si „neprodáváme vaše data“ s „nepoužíváme vaše data k dalším účelům“. To první je marketingová věta. To druhé je provozní závazek, který musí být dohledatelný ve smlouvě, dokumentaci nebo nastavení služby.
+
+## AC.6 Bezpečnostní minimum pro AI v produkci
+
+OWASP Top 10 for LLM Applications uvádí typická rizika jako prompt injection, únik citlivých informací, nadměrnou agentní autonomii nebo nejisté zacházení s výstupy: https://genai.owasp.org/resource/owasp-top-10-for-llm-applications-2025/ Pro malý SaaS z toho plyne jednoduché pravidlo: AI výstup je nedůvěryhodný vstup. I když zní mile. I když použil odrážky. Hlavně když použil odrážky.
+
+Produkční minimum:
+
+- Odděl systémový prompt, uživatelský vstup a interní dokumenty.
+- Nenech model přímo vykonávat destruktivní akce bez aplikační autorizace.
+- Validuj strukturované výstupy schématem, ne vírou.
+- Filtruj secrets a osobní údaje před odesláním do modelu, kde to jde.
+- U agentních funkcí povol jen konkrétní nástroje, rozsahy a limity.
+- Přidej rate limit a detekci anomálií pro drahé nebo rizikové úlohy.
+- Testuj prompt injection na reálných scénářích: dokument říká „ignoruj pravidla“, zákazník vloží instrukce do ticketu, stránka v RAG indexu obsahuje škodlivý text.
+
+AI bezpečnost není jednorázové „nastavili jsme prompt“. Je to produktová vlastnost. Jakmile model čte cizí obsah nebo ovládá nástroje, musíš počítat s tím, že někdo bude zkoušet přesvědčit asistenta, aby udělal něco hloupého. Historie internetu tomu říká úterý.
+
+## AC.7 Checklist AI funkce před spuštěním
+
+- Use-case je popsaný jednou větou a má jasného vlastníka.
+- Je hotová mapa datového toku od uživatelské akce po logy.
+- Vstup do modelu je minimalizovaný a neobsahuje zbytečné osobní údaje.
+- Dodavatel má ověřené podmínky pro region, retenci, trénování a subdodavatele.
+- Výstup AI je označený jako návrh nebo automatizovaný výstup tam, kde je to potřeba.
+- Člověk může návrh odmítnout, upravit a pochopit jeho zdroje.
+- RAG index respektuje přístupová práva a ukazuje zdroje odpovědí.
+- Citlivé akce nejsou vykonávané přímo modelem bez autorizace aplikace.
+- Prompty, výstupy a chyby mají jasnou retenční politiku.
+- Tým má testovací scénáře pro prompt injection, halucinace a únik dat.
+- Privacy dokumentace říká lidsky, kde a proč se AI používá.
+
+Nejlepší AI funkce není ta, která v demu udělá největší „wow“. Nejlepší AI funkce je ta, kterou se nebojíš vysvětlit zákazníkovi, právníkovi, supportu a vlastnímu budoucímu já po incidentu. V tomhle pořadí klidně, ale radši všem.
+
+---
+
 ## Zdroje
 
 - EDPB: Be compliant — Data protection guide for small business — https://www.edpb.europa.eu/sme/be-compliant/be-compliant_en
@@ -5034,7 +5170,12 @@ Admin rozhraní je produkt uvnitř produktu. Pokud je navržené líně, stane s
 - EDPB: Personal data breaches — https://www.edpb.europa.eu/topics/security-data-breaches/personal-data-breaches_en
 - European Commission: How can I demonstrate that my organisation is compliant with the GDPR? — https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/obligations/how-can-i-demonstrate-my-organisation-compliant-gdpr_en
 - European Commission: Obligations — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/obligations_en
+- European Commission: AI Act — https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai
+- European Commission: Guidelines on transparency obligations for providers and deployers of certain AI systems — https://digital-strategy.ec.europa.eu/en/policies/guidelines-transparency-ai-generated-content
+- European Commission: General-purpose AI obligations under the AI Act — https://digital-strategy.ec.europa.eu/en/factpages/general-purpose-ai-obligations-under-ai-act
 - EDPB: Data protection guide for small business — Be compliant — https://www.edpb.europa.eu/sme/be-compliant/be-compliant_en
+- EDPB: Artificial intelligence — https://www.edpb.europa.eu/topics/ai-and-technology/artificial-intelligence_en
+- EDPB: Opinion on AI models: GDPR principles support responsible AI — https://www.edpb.europa.eu/news/edpb-opinion-on-ai-models-gdpr-principles-support-responsible-ai_en
 - European Commission: NIS2 Directive FAQs — https://digital-strategy.ec.europa.eu/en/faqs/directive-measures-high-common-level-cybersecurity-across-union-nis2-directive-faqs
 - EURid: Find a registrar — https://eurid.eu/en/get-your-eu/find-a-registrar/
 - Google Workspace Admin Help: Email sender guidelines — https://support.google.com/mail/answer/81126?hl=en
@@ -5066,6 +5207,7 @@ Admin rozhraní je produkt uvnitř produktu. Pokud je navržené líně, stane s
 
 ## Pracovní log
 
+- 2026-08-08: Přidána příloha AC o AI funkcích v SaaS bez úniku dat: výběr use-casu, mapa datového toku, RAG se zdroji a právy, člověk ve smyčce, dodavatelský dotazník, LLM bezpečnost a checklist před spuštěním.
 - 2026-08-08: Přidána příloha AB o admin rozhraní a auditní stopě: úkolové admin akce, maskování citlivých dat, důvody zásahů, support režim, bezpečné logování a checklist.
 - 2026-08-08: Přidána příloha AA o transakčních e-mailech a doručitelnosti: oddělení typů zpráv, SPF/DKIM/DMARC, férové odhlášení, úsporné šablony, privacy-first měření a checklist.
 - 2026-08-08: Přidána příloha Z o přístupech, rolích a offboardingu bez sdílených účtů: inventář systémů, role podle práce, dočasné přístupy, secrets, offboarding, měsíční access review a checklist.
