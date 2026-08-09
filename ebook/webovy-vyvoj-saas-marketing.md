@@ -7761,160 +7761,154 @@ Lokalizace je víc než překlad. Je to slib, že zákazník v jiném jazyce dos
 
 ---
 
-# Příloha AW: Platby a fakturace v SaaS bez provozního stresu
+# Příloha AW: Zákaznické rozhovory bez výslechu a datového nepořádku
 
-Platba je zvláštní místo v produktu. Zákazník už možná věří hodnotě, ale teď začíná řešit peníze, doklady, interní schvalování, kartu, DPH, bezpečnost a otázku, jestli půjde službu později normálně zrušit. Pokud tenhle moment pokazíš, není to jen drobná UX chyba. Je to malý finanční minipožár s vůní podpory.
+Zákaznický rozhovor není chvíle, kdy máš zákazníka přesvědčit, že tvůj nápad je skvělý. Je to chvíle, kdy máš zjistit, jak jeho svět opravdu funguje. Co ho štve, co už zkoušel, za co platí, čeho se bojí, kdo rozhoduje a proč se některé problémy tváří jako priorita, ale ve skutečnosti spí pod kobercem vedle starého backlogu.
 
-Dobrá platební a fakturační část SaaS produktu má být nudně spolehlivá. Žádné temné vzory, žádné schované obnovování, žádný ceník jako luštění daňového sudoku. Cílem je, aby zákazník před platbou rozuměl, za co platí, kdy platí, jak dostane doklad, co se stane při neúspěšné platbě a jak může službu změnit nebo ukončit.
+Malý SaaS tým často nepotřebuje drahou výzkumnou mašinerii. Potřebuje pravidelný rytmus krátkých rozhovorů, dobré otázky, bezpečné poznámky a disciplínu neplést si jeden hlasitý názor s tržním signálem. Discovery má snižovat riziko produktu, ne vyrábět další tabulku s citlivými údaji.
 
-Privacy-first přístup tady neznamená stavět vlastní platební bránu v garáži vedle kávovaru. Znamená sbírat minimum platebních a fakturačních údajů, jasně oddělit provozní data od marketingu, vybrat dodavatele vědomě a neschovávat obchodní pravidla do patičky napsané velikostí pro mravence s lupou.
+Privacy-first přístup tady znamená jednoduchou věc: ptej se na problém a rozhodování, ne na všechno, co jde vytáhnout z člověka. Zákazník není datový důl. Je to člověk, který ti na pár minut půjčil kontext. Chovej se podle toho.
 
-## AW.1 Platební slib napiš dřív než platební obrazovku
+## AW.1 Rozhovor musí mít jednu hypotézu
 
-Než zapojíš platební bránu, napiš si platební slib jednou stránkou. Ne technickou specifikaci. Slib vůči zákazníkovi.
+Než někomu napíšeš, napiš si hypotézu. Bez ní se rozhovor snadno změní v příjemné povídání, po kterém má tým pocit, že „něco zjistil“, ale neumí říct co.
 
-Měl by odpovědět na tyhle otázky:
+Dobrá hypotéza vypadá takhle:
 
-- Co přesně zákazník kupuje?
-- Kdy začíná placené období?
-- Jak často se platba opakuje?
-- Jak funguje trial nebo pilot, pokud existuje?
-- Kdy a jak přijde faktura nebo doklad?
-- Co se stane při selhání platby?
-- Jak zákazník změní tarif?
-- Jak službu zruší?
-- Jak dlouho po zrušení zůstávají data dostupná pro export?
+> Malé B2B agentury ztrácí čas ručním skládáním měsíčních reportů a byly by ochotné platit za nástroj, který jim do 15 minut připraví klientský přehled bez kopírování dat mezi systémy.
 
-Příklad slabého textu:
+Slabá hypotéza:
 
-> „Předplatné se automaticky obnovuje dle podmínek služby.“
+> Lidé chtějí lepší reporting.
 
-Lepší text:
+První hypotéza říká cílovku, situaci, bolest, výsledek a náznak hodnoty. Druhá říká jen to, že svět není dokonalý. Děkujeme, vesmíre, poznamenáno.
 
-> „Tarif se obnovuje každý měsíc v den aktivace. Před každou změnou ceny dáme vědět předem. Službu můžete zrušit v administraci; po zrušení poběží do konce zaplaceného období a data půjde 30 dní exportovat.“
+Před každým kolem rozhovorů si vyber jednu oblast:
 
-Druhý text není delší kvůli právničině. Je delší, protože odstraňuje nejistotu. Nejistota je konverzní brzda a současně továrna na support tickety.
+- validace problému,
+- pochopení současného procesu,
+- nákupní rozhodování,
+- námitky k ceně,
+- důvěra a bezpečnost,
+- onboarding a první hodnota,
+- důvody odchodu nebo neaktivity.
 
-## AW.2 Odděl účet, fakturaci a produktová oprávnění
+Když chceš v jednom třicetiminutovém hovoru ověřit všechno, neověříš nic. Jen zákazník odejde s pocitem, že byl v dotazníku, který se převlékl za konverzaci.
 
-V malém SaaS týmu je lákavé mít všechno jako jeden záznam: uživatel, firma, tarif, karta, fakturační e-mail, role, sleva, stav účtu, historie plateb. Vypadá to jednoduše, dokud první zákazník nechce změnit fakturační kontakt, ale ne správce účtu. Nebo dokud účetní potřebuje faktury, ale nemá mít přístup k produktovým datům.
+## AW.2 Ptej se na minulost, ne na fantazii
 
-Rozumný model přemýšlení:
+Nejhorší otázka pro discovery je: „Používal byste naši aplikaci?“ Lidé jsou zdvořilí, optimističtí a často netuší, co budou dělat, dokud nepřijde reálný účet, deadline nebo šéf s požadavkem na páteční report.
 
-- **Uživatel:** člověk, který se přihlašuje.
-- **Organizace:** firma nebo tým, který službu používá.
-- **Role:** co člověk smí dělat v produktu.
-- **Fakturační profil:** údaje potřebné pro doklady a platby.
-- **Předplatné:** tarif, období, stav a historie změn.
-- **Platební metoda:** uložená u platebního poskytovatele, ne v tvé aplikaci.
+Lepší otázky míří na konkrétní minulost:
 
-Tohle oddělení pomáhá i privacy-first provozu. Ne každý, kdo řeší produkt, má vidět fakturační údaje. Ne každý, kdo řeší faktury, má vidět produktová data. Interní administrace by měla umět ukázat jen to, co člověk potřebuje pro svou práci.
+- Kdy jste tenhle problém řešili naposledy?
+- Co přesně se stalo?
+- Kdo u toho byl?
+- Kolik času to zabralo?
+- Jak jste to vyřešili dnes?
+- Co jste už zkoušeli a proč to nestačilo?
+- Co se stane, když se problém nevyřeší?
+- Kdo by musel schválit nákup řešení?
 
-Praktický příklad: support řeší, že zákazníkovi nejde přidat uživatel. Support vidí stav předplatného a limit uživatelů, ale ne kompletní platební metodu ani historii interních poznámek obchodníka. Účetní vidí faktury a fakturační profil, ale ne obsah zákaznických projektů. Ano, je to méně pohodlné pro zvědavost. Přesně o to jde.
+Příklad rozdílu:
 
-## AW.3 Fakturační údaje sbírej postupně
+- Slabé: „Chtěli byste automatizovaný onboarding?“
+- Lepší: „Popište posledního nového zákazníka. Kde se onboarding zasekl a kdo to musel ručně zachraňovat?“
 
-Než zákazník zaplatí, nepotřebuješ o něm vědět všechno. U samoobslužného SaaS často stačí e-mail a základní účet. Fakturační údaje sbírej ve chvíli, kdy vzniká placený vztah nebo kdy je zákazník potřebuje doplnit pro doklad.
+Minulost není dokonalá předpověď budoucnosti, ale je pevnější než přání. Pokud zákazník za problém nikdy neplatil časem, penězi, rizikem nebo reputací, možná to není problém. Možná je to jen nepříjemnost, která dobře zní na workshopu.
 
-Typická minimální sada pro firmu:
+## AW.3 Nesbírej víc dat, než potřebuješ pro rozhodnutí
 
-- název firmy,
-- fakturační e-mail,
-- adresa podle daňových potřeb,
-- IČO nebo DIČ, pokud je relevantní,
-- země kvůli daňovému režimu,
-- volitelná objednávka nebo interní reference zákazníka.
+Discovery poznámky mají být použitelné, ale střídmé. Nepotřebuješ archivovat celý život zákazníka. Potřebuješ zachytit signály, které pomáhají rozhodnout, jestli stavět, měnit, prodat nebo zahodit konkrétní nápad.
 
-Co do fakturace nepatří bez jasného důvodu: osobní telefon nákupčího jako povinné pole, datum narození, interní poznámky z obchodu, dlouhé volné pole s citlivými informacemi, screenshoty platebních metod nebo ručně opsané údaje z karty. Platební údaje patří platebnímu poskytovateli. Do vlastního systému si ukládej jen bezpečný stav: aktivní metoda existuje, platba proběhla, platba selhala, faktura vystavena.
+Bezpečná struktura poznámky:
 
-Krátká privacy věta u fakturace může znít:
-
-> Fakturační údaje používáme jen pro platby, účetnictví a zákonné povinnosti. Platební kartu nezpracováváme v naší aplikaci; platbu obsluhuje platební poskytovatel.
-
-Není to marketingový ohňostroj. Je to jasná odpověď na otázku „kam jdou moje peníze a data?“
-
-## AW.4 Neúspěšná platba není důvod k panice ani vydírání
-
-Selhání platby je běžná provozní situace. Karta expiruje, banka platbu zamítne, firemní limit se změní, účetní je na dovolené, nebo někdo v pátek odpoledne klikne na špatné tlačítko, protože vesmír má smysl pro humor.
-
-Dobrý dunning proces, tedy proces řešení neúspěšných plateb, má být klidný a předvídatelný:
-
-1. První upozornění: platba se nepovedla, tady je bezpečný odkaz na aktualizaci platební metody.
-2. Krátké připomenutí: služba stále běží, ale potřebujeme platbu vyřešit do konkrétního data.
-3. Poslední upozornění: pokud platba neproběhne, účet přejde do omezeného režimu.
-4. Omezený režim: zákazník může exportovat data a opravit platbu, ale nemusí mít plný provoz.
-5. Uzavření: po jasně oznámené době se účet zruší podle retenčních pravidel.
-
-Vyhnul bych se větám typu „Vaše data budou okamžitě smazána“ jako první reakci na neúspěšnou platbu. To není tlak, to je únos s fakturou. Lepší je dát zákazníkovi férovou lhůtu, bezpečný odkaz a jasný dopad.
-
-Privacy-first detail: odkazy v platebních e-mailech by neměly obsahovat zbytečné osobní údaje ani dlouhodobě platné tokeny. Krátkodobý bezpečný odkaz je lepší než URL, která půjde přeposlat, uložit do ticketu a oživit za půl roku jako malý zombie přístup.
-
-## AW.5 Změna tarifu musí být pochopitelná před kliknutím
-
-Upgrade, downgrade a zrušení jsou místa, kde se ukáže charakter produktu. Pokud upgrade trvá jedno kliknutí a zrušení vyžaduje tři e-maily, kalendářový slot a rituální tanec s obchodníkem, zákazník si toho všimne. A bude mít pravdu.
-
-Před potvrzením změny tarifu ukaž:
-
-- nový tarif,
-- od kdy změna platí,
-- kolik se naúčtuje teď,
-- co se stane s limity,
-- jestli se něco dopočítává poměrně,
-- co se stane s funkcemi, které nový tarif nemá,
-- kde najde doklad.
-
-Příklad dobrého potvrzení:
-
-> Přecházíte z tarifu Start na Team. Změna začne platit hned. Dnes doplatíte poměrnou část za zbytek období. Nový měsíční tarif se obnoví 15. září. Všechny faktury najdete v Nastavení → Fakturace.
-
-U downgradu přidej ochranu před ztrátou práce. Pokud nižší tarif má méně projektů, méně uživatelů nebo menší úložiště, neřež data potichu. Ukaž, co se stane, a dej možnost exportu nebo úklidu. Produkt, který při downgradu potichu rozbije data, není chytrý. Je jen levnější způsob, jak vyrábět naštvané e-maily.
-
-## AW.6 Interní kontrola: kdo smí sáhnout na peníze
-
-Fakturace není jen frontend. Je to citlivá interní oblast. Malý tým by měl mít jednoduchá pravidla pro zásahy do plateb a předplatného.
-
-Základní pravidla:
-
-- Ruční sleva má mít důvod a vlastníka.
-- Refund má mít záznam: kdo, kdy, proč, částka, vazba na zákazníka.
-- Změna tarifu mimo samoobsluhu má být potvrzená zákazníkem.
-- Přístup k fakturační administraci má jen omezený počet lidí.
-- Export fakturačních dat se ukládá bezpečně a nesdílí se přes náhodné přílohy v chatu.
-- Testovací platby a produkční platby se nesmí míchat.
-
-Užitečný interní záznam pro ruční zásah:
-
-| Pole | Příklad |
+| Pole | Co zapisovat |
 | --- | --- |
-| Zákazník | Firma ABC |
-| Zásah | Refund poslední měsíční platby |
-| Důvod | Dvojí platba po migraci platební metody |
-| Schválil | Vlastník zákaznického úspěchu |
-| Provedl | Finanční administrátor |
-| Datum kontroly | Další měsíční billing review |
+| Segment | Typ firmy nebo role, ne nutně jméno člověka |
+| Kontext | V jaké situaci problém vzniká |
+| Současné řešení | Jak to dělají dnes |
+| Dopad | Čas, peníze, riziko, frustrace |
+| Citace | Krátká anonymizovaná věta, pokud vystihuje problém |
+| Námitka | Co by bránilo změně |
+| Signál | Silný / střední / slabý a proč |
+| Navazující krok | Co tým udělá dál |
 
-Codyho komentář: ruční zásahy do fakturace bez záznamu jsou jako oprava serveru přes SSH v pátek večer bez poznámky. Možná to dopadne dobře. Ale jestli ne, budoucí já si zaslouží aspoň mapu k místu činu.
+Co do poznámek raději nedávat:
 
-## AW.7 Checklist plateb a fakturace
+- osobní údaje, které nejsou nutné,
+- jména koncových zákazníků respondenta,
+- interní konflikty ve firmě,
+- přístupové údaje, screenshoty s reálnými daty,
+- citlivé obchodní informace bez jasného souhlasu,
+- kompletní nahrávky uložené „pro jistotu“.
 
-- [ ] Zákazník před platbou ví, co kupuje, kdy platí a jak dostane doklad.
-- [ ] Trial, pilot, automatická obnova a zrušení jsou vysvětlené lidsky.
-- [ ] Produktový účet, role, fakturační profil a předplatné jsou logicky oddělené.
-- [ ] Fakturační údaje se sbírají až ve chvíli, kdy jsou potřeba.
-- [ ] Platební karta se nezpracovává přímo ve vlastní aplikaci.
-- [ ] Neúspěšná platba má klidný proces s bezpečnými odkazy a jasnými lhůtami.
-- [ ] Upgrade, downgrade a zrušení ukazují dopad před potvrzením.
-- [ ] Downgrade nevede k tiché ztrátě dat nebo přístupu bez varování.
-- [ ] Refundy, slevy a ruční změny mají záznam a vlastníka.
-- [ ] Přístup k fakturační administraci je omezený a pravidelně kontrolovaný.
+Pokud nahráváš hovor, řekni proč, kde bude nahrávka uložená, kdo k ní bude mít přístup a kdy ji smažeš. Ještě lepší: u běžného discovery si často vystačíš s poznámkami. Nahrávka je pohodlná pro tým, ale je to další citlivý objekt, který musíš chránit.
+
+## AW.4 Odděl citaci od identity
+
+Silné zákaznické věty jsou zlato. Ale zlato nemusí být přilepené k občance. Pro produktové rozhodování často stačí anonymizovaná citace s typem zákazníka.
+
+Příklad:
+
+> „Každý měsíc skládáme report ručně z pěti exportů. Nejhorší není práce samotná, ale kontrola, jestli jsme nepřepsali číslo.“ — menší B2B agentura
+
+Tohle je užitečné pro tým i bezpečné pro zákazníka. Nepotřebuješ psát jméno firmy, konkrétní klienty, rozpočty ani interní názvy systémů, pokud nejsou nutné pro rozhodnutí.
+
+Pro veřejné použití citace platí přísnější pravidlo: bez výslovného schválení nepoužívej jméno, logo, screenshot ani rozpoznatelný příběh. „Řekl nám to zákazník“ není totéž jako „můžeme to dát na web“. Ano, marketing by rád reference hned. Marketing také někdy rád slíbí newsletter každému, kdo dýchá. Proto máme pravidla.
+
+## AW.5 Vyhodnocuj vzory, ne jednotlivé výroky
+
+Jeden rozhovor může změnit otázku. Neměl by sám změnit roadmapu. Hledej opakující se vzory napříč segmenty a situacemi.
+
+Po pěti až osmi rozhovorech si udělej jednoduché shrnutí:
+
+- Který problém se opakoval?
+- Kdo ho má nejsilnější?
+- Jak ho řeší dnes?
+- Jaký je dopad, když se neřeší?
+- Co by zákazník musel změnit, aby nové řešení používal?
+- Které námitky se opakovaly?
+- Co jsme slyšeli jen jednou a zatím z toho neděláme závěr?
+
+Dobrá syntéza neříká „zákazníci chtějí dashboard“. Říká třeba:
+
+> Tři ze šesti agentur řeší měsíční reporting ručně a bojí se hlavně chyb v přepisu. Neptají se na grafy, ale na kontrolu správnosti a snadné vysvětlení klientovi.
+
+Tohle už je produktový signál. Možná první verze nemá být krásný dashboard. Možná má být bezpečný import, kontrola rozdílů a export komentovaného reportu. Méně wow, více hodnoty. Strašné, jak často to funguje.
+
+## AW.6 Vrať se k lidem s výsledkem
+
+Rozhovor není jednosměrné vytěžení kontextu. Pokud ti někdo dal čas, je dobré se vrátit s krátkým shrnutím nebo dalším krokem. Nemusí to být dlouhá prezentace. Stačí férová věta.
+
+Příklady follow-upu:
+
+> Díky za rozhovor. Odnesli jsme si, že největší bolest není tvorba grafů, ale kontrola správnosti dat před odesláním klientovi. V další iteraci proto otestujeme import a kontrolní přehled.
+
+> Díky, váš případ nám pomohl pochopit námitky kolem přístupu k datům. Než budeme funkci nabízet veřejně, doplníme jasnější popis rolí a exportu.
+
+Tím buduješ důvěru a zároveň kontroluješ, jestli jsi pochopil správně. Když zákazník odpoví „ne, myslel jsem to jinak“, je to levný dar. Lepší opravit poznámku teď než za tři sprinty zjistit, že tým stavěl řešení pro špatně pochopenou větu.
+
+## AW.7 Checklist zákaznického rozhovoru
+
+- [ ] Rozhovor má jednu hlavní hypotézu nebo oblast učení.
+- [ ] Otázky míří na konkrétní minulost, ne na hypotetické sliby.
+- [ ] Respondent ví, proč rozhovor probíhá a jak budou poznámky použité.
+- [ ] Poznámky zachycují segment, kontext, dopad, námitky a signál.
+- [ ] Citlivé údaje, jména zákazníků a screenshoty se nezapisují bez důvodu.
+- [ ] Nahrávky se pořizují jen s jasným souhlasem, účelem a dobou uložení.
+- [ ] Citace pro interní použití jsou anonymizované.
+- [ ] Veřejné reference se používají jen po výslovném schválení.
+- [ ] Po sérii rozhovorů vznikne syntéza vzorů, ne seznam izolovaných výroků.
+- [ ] Respondent dostane stručný follow-up nebo poděkování s dalším krokem.
 
 ## Shrnutí přílohy
 
-Platby a fakturace nejsou jen účetní roh SaaS produktu. Jsou to důvěrový moment, zákaznická zkušenost a provozní riziko v jednom. Dobré řešení je srozumitelné, nudně spolehlivé a datově střídmé: jasný platební slib, minimum fakturačních údajů, bezpečný poskytovatel plateb, férový proces při selhání platby a kontrolované interní zásahy. Privacy-first billing není pomalejší billing. Je to billing, po kterém se zákazník nemusí ptát, jestli se právě upsal něčemu, co bude zrušit těžší než členství ve fitness centru.
+Zákaznické rozhovory jsou nejlevnější způsob, jak snížit produktové riziko, pokud se z nich nestane výslech, prodejní demo nebo datový vysavač. Ptej se na skutečné situace, zapisuj jen to, co pomáhá rozhodnout, anonymizuj citace a hledej vzory napříč rozhovory. Privacy-first discovery neznamená méně učení. Znamená učení s respektem, pořádkem a menší šancí, že si tým do poznámek uloží víc citlivostí než skutečných insightů.
 
 
 ## Pracovní log
-- 2026-08-09: Přidána příloha AW o platbách a fakturaci v SaaS bez provozního stresu: platební slib, oddělení účtu od fakturace, postupný sběr údajů, neúspěšné platby, změny tarifů, interní kontrola a checklist.
+- 2026-08-09: Přidána příloha AW o zákaznických rozhovorech bez výslechu a datového nepořádku: hypotézy, otázky na minulost, střídmé poznámky, anonymizované citace, syntéza vzorů, follow-up a checklist.
 - 2026-08-09: Přidána příloha AV o lokalizaci SaaS a webu bez překladového chaosu: výběr jazyků podle obchodního smyslu, překlad slibů, privacy texty, technická struktura, bezpečné AI překlady, workflow a checklist.
 - 2026-08-09: Přidána příloha AU o demo účtech a sandboxu bez úniku dat: syntetická demo data, omezené sandbox účty, resetovací rutina, bezpečné integrace, trust věta a checklist.
 - 2026-08-09: Přidána příloha AT o offboardingu zákazníka bez rukojmí: zrušení účtu, export dat, retence, vypnutí integrací, závěrečná komunikace, churn feedback a checklist.
