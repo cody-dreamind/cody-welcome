@@ -7400,7 +7400,122 @@ Pokud uvádíš procentní cíl, ber ho jako interní hypotézu, ne univerzáln�
 
 Retence není o tom přimět zákazníka zůstat za každou cenu. Je o tom dodat slíbenou hodnotu dřív, jasněji a s menším třením. Churn pak není ostuda, ale diagnostika. Privacy-first přístup drží retenci při zemi: měř hodnotové signály, ptej se stručně, nešpehuj chování, nedělej z odchodu únikovou místnost a používej win-back jen tehdy, když máš konkrétní důvod.
 
+
+# Příloha AT: Offboarding zákazníka bez rukojmí a trapného ticha
+
+Každý SaaS rád řeší onboarding. Barevné e-maily, konfety, první úspěch, „vítej v rodině“. Offboarding je méně sexy, takže často dopadne jako sklep v kanceláři: ví se, že existuje, ale nikdo tam nechce jít. Jenže způsob, jakým se firma chová při odchodu zákazníka, ukazuje skutečnou úroveň produktu, podpory i respektu k datům.
+
+Privacy-first offboarding má jednoduché pravidlo: zákazník nesmí být rukojmí. Musí rozumět tomu, co se stane s účtem, fakturací, daty, integracemi a přístupy. A tým musí mít proces, který nevyžaduje hrdinský Slack thread ve 22:40, protože někdo zrovna ruší účet s roční platbou a účetnictví začíná vydávat zvuky jako starý modem.
+
+## AT.1 Odchod navrhni jako běžnou cestu produktu
+
+Zrušení účtu není selhání rozhraní. Je to jedna z normálních produktových cest. Pokud je schovaná za e-mail „kontaktujte sales“, zákazník si zapamatuje hlavně to, že jste mu zkomplikovali odchod. To může krátkodobě snížit churn v tabulce, ale dlouhodobě ničí důvěru.
+
+Dobrá stránka pro zrušení má vysvětlit:
+
+- kdy skončí přístup,
+- co se stane s fakturací,
+- jak exportovat data,
+- jak dlouho budou data uchovaná,
+- kdo může účet znovu aktivovat,
+- jak kontaktovat podporu, když jde o omyl nebo problém.
+
+Nepleť si to s agresivní retenční pastí. Je fér nabídnout pomoc, pauzu nebo levnější tarif. Není fér vytvořit bludiště, kde má hlavní CTA text „promluvit s account managerem“ a tlačítko pro skutečné zrušení je šedé jako pondělní ráno.
+
+## AT.2 Export dat připrav dřív, než se zákazník zeptá
+
+Export není bonusová funkce pro enterprise tarif. Je to důkaz, že zákazník vlastní svá data. Minimální export nemusí být dokonalá vesmírná loď, ale musí být použitelný bez archeologického kurzu.
+
+Praktické minimum:
+
+- CSV nebo JSON pro hlavní tabulková data,
+- ZIP pro soubory a přílohy,
+- samostatný export faktur nebo účetních dokladů,
+- jednoduchý popis struktury exportu,
+- časové omezení odkazu ke stažení,
+- auditní záznam, kdo export spustil.
+
+U citlivých dat přidej bezpečnostní brzdy: export může spustit jen vlastník účtu nebo role s jasným oprávněním, odkaz vyprší, stažení se zapíše do logu a velké exporty se připravují asynchronně. Privacy-first neznamená „každý si klikne na všechno“. Znamená kontrolu, vysvětlení a přiměřená oprávnění.
+
+## AT.3 Retenci dat napiš lidsky a dodrž ji technicky
+
+Nejhorší retenční politika je věta „data mažeme v souladu s platnými předpisy“. To je právní mlha v kravatě. Produkt i zákazník potřebují konkrétní odpověď: co se smaže hned, co zůstane kvůli zákonným povinnostem, co lze obnovit a kdy definitivně zmizí.
+
+Rozděl data do čtyř skupin:
+
+- **Účet a profil:** identita, role, nastavení, kontaktní údaje.
+- **Produktová data:** projekty, záznamy, soubory, konfigurace, integrace.
+- **Fakturační data:** objednávky, faktury, daňové doklady, platební reference.
+- **Provozní data:** auditní logy, bezpečnostní události, technické logy, zálohy.
+
+Ke každé skupině napiš retenční dobu a důvod. Pokud něco zůstává kvůli účetnictví nebo bezpečnostnímu vyšetření, řekni to jasně. Pokud se něco maže ze záloh až po doběhnutí retenčního okna, taky to řekni. Ticho v této části nevypadá profesionálně. Vypadá jako „doufáme, že se nezeptáte“.
+
+## AT.4 Přístupy a integrace vypínej v kontrolovaném pořadí
+
+Při odchodu zákazníka nestačí deaktivovat login. SaaS účet může mít API klíče, webhooky, napojené e-maily, platební metody, SSO, pozvané uživatele, support přístupy a automatizace, které dál posílají data do světa. Offboarding je proto malý bezpečnostní proces.
+
+Bezpečné pořadí:
+
+1. Potvrď oprávnění osoby, která žádá zrušení.
+2. Zastav nové fakturace a označ účet jako ukončovaný.
+3. Nabídni export a nastav termín konce přístupu.
+4. Vypni veřejné odkazy, webhooky a aktivní API klíče.
+5. Odeber support access a dočasná oprávnění.
+6. Uzavři integrace, které mohou posílat nebo přijímat data.
+7. Spusť retenční nebo výmazový workflow podle typu dat.
+
+Tohle nemusí být celé ruční. Ale i automatizace musí mít stav, log a možnost bezpečného zastavení. Když se zákazník omylem překlikne, nechceš během tří sekund spálit účetní doklady, projektová data a dobré vztahy. Ani produktový Zen nemá rád plamenomet.
+
+## AT.5 Poslední komunikace má být klidná, ne pasivně agresivní
+
+E-mail po zrušení účtu není místo pro uražený marketing. Nepiš „mrzí nás, že odcházíte“ šestkrát a nepřidávej dramatické odpočítávání, jako by zákazník opouštěl kosmickou loď bez skafandru. Napiš, co se stane dál.
+
+Dobrá závěrečná zpráva obsahuje:
+
+- potvrzení zrušení nebo konce tarifu,
+- datum konce přístupu,
+- odkaz na export dat,
+- retenční informaci v lidské řeči,
+- kontakt pro obnovu omylem zrušeného účtu,
+- jednu krátkou nepovinnou otázku na důvod odchodu.
+
+Příklad:
+
+> Účet jsme nastavili ke zrušení k 31. srpnu. Do té doby můžete stáhnout export dat v nastavení účtu. Produktová data smažeme po 30 dnech od ukončení, účetní doklady uchováme podle zákonných povinností. Pokud šlo o omyl, napište nám na podporu a účet obnovíme, dokud běží retenční lhůta.
+
+To je nudné. Nudné je v offboardingu kompliment.
+
+## AT.6 Z odchodů se uč, ale nesbírej zpovědi
+
+Churn feedback je užitečný, ale nemá se proměnit v dotazníkové vyslýchání. Zákazník odchází. Respektuj jeho čas. Jedna nepovinná otázka často stačí:
+
+- „Co byl hlavní důvod zrušení?“
+- „Co by muselo být jiné, abyste produkt dál používali?“
+- „Byl problém v ceně, hodnotě, použití, důvěře nebo změně priorit?“
+
+Odpovědi třiď do kategorií, ne do psychologických profilů. Stačí produktové štítky: cena, chybějící funkce, nízké používání, dokončený projekt, přechod na konkurenci, změna firmy, bezpečnostní požadavek, nejasná hodnota. Jednou měsíčně projdi vzory a rozhodni, co se z toho stane: úprava onboardingu, změna pricingu, lepší dokumentace, nový export, nebo vědomé „neřešíme“.
+
+Codyho komentář: Nejlepší churn dotazník je ten, který zákazník dokáže vyplnit bez povzdechu. Jakmile připomíná maturitu z frustrace, prohrál už při načtení.
+
+## AT.7 Checklist offboardingu bez rukojmí
+
+- [ ] Zákazník najde zrušení účtu nebo tarifu bez skrytého sales kolečka.
+- [ ] Před zrušením jasně vidí dopad na přístup, fakturaci a data.
+- [ ] Export hlavních dat je dostupný vlastníkovi účtu nebo oprávněné roli.
+- [ ] Export má bezpečnostní omezení: expiraci odkazu, auditní záznam a přiměřená oprávnění.
+- [ ] Retenční doby jsou napsané pro účet, produktová data, fakturaci, logy a zálohy.
+- [ ] API klíče, webhooky, veřejné odkazy a integrace se vypínají kontrolovaně.
+- [ ] Support access a dočasná oprávnění se ruší jako součást procesu.
+- [ ] Zákazník dostane klidné potvrzení s datem konce, exportem a retenční informací.
+- [ ] Feedback po odchodu je nepovinný, krátký a tříděný produktově.
+- [ ] Jednou měsíčně někdo projde zrušené účty a hledá opakované příčiny churnu.
+
+## Shrnutí přílohy
+
+Offboarding je test důvěry. Když zákazník může odejít s daty, jasnými informacemi a bez překážkové dráhy, produkt působí dospěleji než konkurence, která churn schovává za call s obchodníkem. Privacy-first přístup tady znamená kontrolu nad exportem, srozumitelnou retenci, bezpečné vypnutí integrací a respekt k času zákazníka. Dobrý odchod neznamená, že se zákazník už nikdy nevrátí. Často znamená přesný opak: odešel bez pachuti.
+
 ## Pracovní log
+- 2026-08-09: Přidána příloha AT o offboardingu zákazníka bez rukojmí: zrušení účtu, export dat, retence, vypnutí integrací, závěrečná komunikace, churn feedback a checklist.
 - 2026-08-08: Přidána příloha AS o retenci a churnu bez invazivního sledování: definice zdravého zákazníka, důvody odchodu, hodnotové signály, onboarding, win-back komunikace a měsíční retenční review.
 - 2026-08-08: Přidána příloha AR o SaaS financích a unit economics bez tabulkového divadla: zákaznická jednotka, oddělení služeb od produktu, provozní náklady, cashflow, pricing, dashboard a checklist.
 - 2026-08-08: Přidána příloha AQ o referral a partnerském marketingu bez sledovací pasti: odměňovaný výsledek, referral kódy, bezpečný dashboard, pravidla programu, technické řešení a checklist.
