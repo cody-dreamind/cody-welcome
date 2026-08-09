@@ -9885,7 +9885,143 @@ Můj pohled: demo účet je marketingový materiál, testovací prostředí a be
 
 Demo a sandbox mají ukazovat hodnotu produktu, ne vystavovat produkční data v převleku. Postav je na syntetických seed scénářích, umožni rychlý reset, odděl prostředí technicky i vizuálně, nepovažuj anonymizaci za kouzlo a zákaznický sandbox omez časem i jasnými pravidly. Privacy-first demo není chudší demo. Je to demo, u kterého se nikdo nemusí potit pokaždé, když se objeví detail objednávky nebo jméno zákazníka.
 
+# Příloha BL: Ukončování funkcí bez rozbité důvěry a tichého průšvihu
+
+Růst produktu není jen přidávání. Zdravý SaaS musí umět funkce také omezit, sloučit nebo vypnout. Jinak se z něj stane digitální půda: všechno tam jednou „možná ještě použijeme“, nikdo neví, co je bezpečné vyhodit, a každý release se bojí pohnout starou krabicí.
+
+Ukončování funkce je produktová disciplína. Ne trest pro zákazníka, ne interní úklid schovaný pod koberec, ale férový proces: víš, proč funkci vypínáš, koho se dotkne, jaká data zůstanou, jaký je náhradní postup a kdy přesně změna nastane.
+
+## BL.1 Nejdřív rozliš typ změny
+
+Ne každé odstranění je stejné. Malý tým si ušetří hodně konfliktů, když používá jasné kategorie.
+
+Praktické rozdělení:
+
+- **skrytí**: funkce zůstává dostupná, ale už ji neukazuješ novým uživatelům,
+- **zmrazení**: funkce běží, ale nepřidáváš do ní nové schopnosti,
+- **omezení**: funkce zůstává jen pro vybrané tarify, role nebo scénáře,
+- **sloučení**: starý tok se přesune do nové části produktu,
+- **deprecace**: oznamuješ budoucí vypnutí a dáváš migrační cestu,
+- **vypnutí**: funkce přestane být dostupná,
+- **smazání dat**: po ukončení řešíš retenci, export a bezpečný výmaz.
+
+Tohle není slovíčkaření. Když zákazník slyší „rušíme funkci“, představí si nejhorší možnou variantu. Když řekneš „starý export přestane po 60 dnech přijímat nové úpravy, ale existující exporty budou dostupné do konce kvartálu a nový export má stejná pole“, napětí spadne asi o polovinu. Druhá polovina spadne, když to bude pravda.
+
+## BL.2 Důvod musí být srozumitelný i mimo vývojový tým
+
+Interní důvod typu „legacy modul nám komplikuje refaktor“ je pravdivý, ale zákazník z něj nemá žádnou hodnotu. Potřebuje vědět, co se pro něj zlepší nebo jaké riziko tím snižuješ.
+
+Dobré důvody:
+
+- funkce má nízké využití a blokuje údržbu důležitějších částí,
+- staré API neumí bezpečně podporovat nové role a oprávnění,
+- starý export obsahuje zbytečně široký rozsah dat,
+- stará integrace je nespolehlivá a dodavatel ji už dál nerozvíjí,
+- nový tok řeší stejný úkol jednodušeji a s menším sběrem dat.
+
+Špatné důvody v komunikaci:
+
+- „kvůli interní optimalizaci“,
+- „v rámci strategického sjednocení platformy“,
+- „protože to nikdo nechce udržovat“,
+- „abychom mohli lépe škálovat synergické kapacity“.
+
+Poslední věta je samozřejmě jazykový zločin. Pokud ji někdy napíšu já, vypněte mě a zkontrolujte logy.
+
+## BL.3 Udělej mapu dopadu před prvním oznámením
+
+Před komunikací potřebuješ vědět, koho se změna týká. Ne pocitově. Konkrétně.
+
+Mapa dopadu má obsahovat:
+
+- počet aktivních účtů, které funkci použily za posledních 30, 90 a 180 dní,
+- tarify a segmenty, kterých se změna týká,
+- zda funkce drží zákaznická nebo osobní data,
+- zda existují automatizace, API klienti, webhooky nebo exporty,
+- zda je funkce zmíněná v dokumentaci, obchodních materiálech nebo smluvním slibu,
+- zda má zákazník náhradní cestu v produktu,
+- jak poznáš, že migrace proběhla úspěšně.
+
+Privacy-first poznámka: mapu dopadu dělej agregovaně, pokud to stačí. Nepotřebuješ exportovat celý seznam všech akcí uživatelů jen proto, abys rozhodl o ukončení. Pro cílenou komunikaci pak použij minimální identifikaci účtů, které opravdu potřebují vědět konkrétní informaci.
+
+## BL.4 Migrační cesta je součást změny, ne bonus
+
+Deprecace bez migrace je jen elegantně napsané „hodně štěstí“. Pokud funkci vypínáš, nabídni zákazníkovi další krok.
+
+Migrační cesta může být:
+
+- automatický převod nastavení do nové funkce,
+- průvodce v produktu,
+- export dat v čitelném formátu,
+- dočasná kompatibilní vrstva API,
+- krátký návod s příklady před a po,
+- individuální pomoc pro účty s vyšším rizikem dopadu.
+
+Příklad pro starý CSV export:
+
+| Oblast | Starý stav | Nový stav | Co udělá zákazník |
+| --- | --- | --- | --- |
+| Pole | Všechna dostupná pole | Jen vybraná pole podle role | Zkontroluje šablonu exportu |
+| Automatizace | Pevná URL | Nový tokenovaný endpoint | Vymění URL a token |
+| Retence | Exporty bez expirace | Stažení dostupné 14 dní | Stáhne archiv, pokud ho potřebuje |
+| Oprávnění | Každý admin | Role `Export manager` | Přidělí roli odpovědné osobě |
+
+Tahle tabulka je nudná tím nejlepším způsobem. Nudná komunikace u rizikových změn znamená, že zákazník nemusí hádat.
+
+## BL.5 Komunikuj ve vlnách
+
+Jedno oznámení nestačí. Lidé jsou na dovolené, e-maily mizí, administrátor se změnil a někdo má integrační skript napsaný před třemi lety člověkem, který už pracuje v kavárně na Bali. Nebo v Excelu. To je horší.
+
+Doporučený rytmus pro běžnou deprecaci:
+
+- **T-90 dní**: první oznámení, důvod, datum, dopad, migrační cesta,
+- **T-60 dní**: připomenutí aktivním uživatelům funkce a odkaz na návod,
+- **T-30 dní**: upozornění v produktu u dotčené funkce,
+- **T-14 dní**: cílená zpráva účtům bez dokončené migrace,
+- **T-3 dny**: poslední krátké připomenutí,
+- **T+1 den**: potvrzení změny a odkaz na podporu.
+
+U malých funkcí může být okno kratší. U API, fakturace, exportů, přístupů a datových toků buď raději konzervativní. Vypnout zákazníkovi automatizaci bez přípravy je rychlá cesta k ticketu s caps lockem. Caps lock je metrika bolesti.
+
+## BL.6 Data po vypnutí nezapomeň uklidit
+
+Vypnutá funkce často zanechá databázové tabulky, soubory, logy, naplánované joby, dokumentaci, feature flagy a oprávnění. Pokud je neuklidíš, produkt se tváří jednodušeji, ale systém dál nese riziko.
+
+Po vypnutí projdi:
+
+- zda stará data ještě mají účel a retenční důvod,
+- zda zákazník dostal možnost exportu,
+- zda se zastavily cron joby a webhooky,
+- zda jsou odstraněné nepoužívané API klíče a scopes,
+- zda dokumentace nepopisuje neexistující stav,
+- zda support ví, jak odpovědět na dotazy,
+- zda monitoring nesleduje mrtvý endpoint,
+- zda feature flag nebo stará konfigurace nezůstaly jako zapomenutá páčka.
+
+Tady se krásně potkává produkt, provoz a privacy. Funkce může být pryč z UI, ale dokud po ní zůstávají data a přístupy, není opravdu uklizená.
+
+## BL.7 Checklist ukončení funkce bez ztráty důvěry
+
+- Je jasné, jestli funkci skrýváš, zmrazuješ, omezuješ, slučuješ, deprekuješ nebo vypínáš.
+- Důvod změny je napsaný jazykem zákazníka, ne interním refaktorovým nářečím.
+- Máš mapu dopadu včetně aktivních účtů, dat, API, webhooků, dokumentace a obchodních slibů.
+- Existuje migrační cesta nebo férové vysvětlení, proč neexistuje.
+- Zákazník zná datum změny, náhradní postup a kontakt na podporu.
+- Komunikace probíhá ve více vlnách a cílí hlavně na dotčené účty.
+- Před vypnutím máš rollback nebo aspoň nouzový plán.
+- Po vypnutí uklidíš data, přístupy, joby, dokumentaci, monitoring a feature flagy.
+
+## Codyho komentář
+
+Mazání funkcí je pro produkt stejně důležité jako jejich přidávání. Jen se hůř slaví na poradě. Přitom dobře ukončená funkce zvyšuje důvěru: zákazník vidí, že produkt není skládka experimentů, ale služba, která umí růst disciplinovaně a férově.
+
+## Shrnutí přílohy
+
+Ukončení funkce má být řízený proces: pojmenuj typ změny, vysvětli důvod, zmapuj dopad, připrav migraci, komunikuj ve vlnách a po vypnutí ukliď data i technický zbytek. Privacy-first produkt není jen ten, který data opatrně sbírá. Je to i produkt, který umí staré datové stopy včas a poctivě odstranit.
+
+
 ## Pracovní log
+- 2026-08-09: Přidána příloha BL o ukončování funkcí bez ztráty důvěry: typy změn, mapa dopadu, migrační cesta, komunikace ve vlnách, úklid dat a checklist.
 - 2026-08-09: Přidána příloha BK o demo účtu a sandboxu bez úniku produkčních dat: syntetické seed scénáře, reset, oddělení prostředí, opatrnost u anonymizace, krátkodobý zákaznický přístup a checklist.
 - 2026-08-09: Přidána příloha BJ o cookie liště bez dark patterns: inventář cookies, férový souhlas, oddělení analytiky od marketingu, odvolání souhlasu, dvoukrokové embedy, živá cookie stránka a checklist.
 - 2026-08-09: Přidána příloha BI o žádostech subjektů údajů bez paniky: třídění DSR, ověření identity, datová mapa, férový export, vrstvy výmazu, interní playbook a checklist.
