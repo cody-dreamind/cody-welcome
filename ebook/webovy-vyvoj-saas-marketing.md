@@ -10576,7 +10576,148 @@ Datová klasifikace není o tom, aby tým pracoval pomaleji. Je o tom, aby nemus
 Datová klasifikace dává malému SaaS týmu společný jazyk pro práci s informacemi. Stačí čtyři třídy, jasná pravidla pro chaty, tickety, AI nástroje, exporty a dodavatele, syntetická data pro vývoj a jednoduché šablony, které nutí přemýšlet o účelu a dopadu. Nejde o nálepky. Jde o to, aby se data nepohybovala firmou jako konfety po večírku.
 
 
+# Příloha BQ: Přístupnost webu bez overlay magie a poslední paniky před auditem
+
+Přístupnost není speciální režim pro „někoho jiného“. Je to kvalita produktu. Stejně jako rychlost, čitelnost, bezpečnost nebo srozumitelná cena. Když web nejde ovládat klávesnicí, formulář neřekne čtečce, kde je chyba, nebo kontrast vypadá jako šedá mlha na šedé mlze, nepřicházíš jen o abstraktní body v auditu. Přicházíš o lidi, objednávky, důvěru a často i o klid právního oddělení.
+
+V EU je téma přístupnosti výrazně praktičtější od chvíle, kdy se od 28. června 2025 začal uplatňovat European Accessibility Act pro vybrané produkty a služby pro spotřebitele. Evropská komise k tomu uvádí, že akt se týká mimo jiné počítačů, chytrých telefonů, platebních terminálů, bankomatů, e-commerce, bankovních služeb, e-knih a některých dopravních a mediálních služeb: https://digital-strategy.ec.europa.eu/en/news/eu-becomes-more-accessible-all
+
+Pro webové týmy je praktickým technickým jazykem hlavně WCAG. W3C vydalo WCAG 2.2 jako doporučení 5. října 2023 a WCAG pracuje s principy vnímatelnosti, ovladatelnosti, srozumitelnosti a robustnosti: https://www.w3.org/WAI/standards-guidelines/wcag/new-in-22/ a https://www.w3.org/TR/WCAG22/
+
+## BQ.1 Nezačínej overlay widgetem, začni základní použitelností
+
+Nejhorší přístupnostní zkratka je tlačítko v rohu, které slibuje „AI accessibility fix“. Přístupnost nejde nalepit na hotový chaos jako nálepka na rozbitý kufr. Pokud HTML nemá smysluplnou strukturu, tlačítka nejsou tlačítka, formuláře nemají labely a chybové hlášky nejsou napojené na pole, žádný widget z toho neudělá kvalitní produkt.
+
+Začni u věcí, které jsou levné a mění nejvíc:
+
+- používej skutečné HTML prvky místo klikacích `div` s ambicemi na kariéru tlačítka,
+- každý formulářový prvek spoj s viditelným a programovým labelem,
+- stránku rozděl nadpisy ve správném pořadí,
+- hlavní akce dělej jako jasná tlačítka nebo odkazy podle skutečné funkce,
+- navigaci, modály a menu otestuj jen klávesnicí,
+- chybové stavy napiš konkrétně a propoj s polem, kterého se týkají.
+
+Praktický test: odpoj myš a projdi hlavní konverzní cestu. Pokud se zasekneš, není to edge case. Je to produktová chyba v pyžamu.
+
+## BQ.2 Přístupnost patří do design systému, ne do finálního úklidu
+
+Když se přístupnost řeší až před spuštěním, tým obvykle zjistí, že má problém ve všech komponentách najednou. Špatný kontrast tlačítka, nečitelný focus stav, ikonové tlačítko bez názvu a toast bez oznámení pro asistivní technologie se pak opakují ve dvaceti obrazovkách. Gratuluji, máme multiplikátor bolesti.
+
+V design systému nastav minimálně:
+
+- barevné tokeny s ověřeným kontrastem pro text, odkazy, pozadí, stavy a chybové zprávy,
+- viditelný focus ring pro všechny interaktivní prvky,
+- komponenty formulářů s `label`, nápovědou, chybou a stavem povinnosti,
+- ikonová tlačítka s přístupným názvem,
+- modály s návratem fokusu na původní prvek,
+- tabulky s hlavičkami a rozumným čtením na mobilu.
+
+Příklad pravidla pro komponentu tlačítka:
+
+> „Každé tlačítko musí mít textový název. Pokud je vizuálně jen ikona, musí mít přístupný název. Focus stav je vždy viditelný a nesmí být odstraněn kvůli estetice.“
+
+Tohle není brzda kreativity. To je způsob, jak nedělat stejnou chybu každý sprint znovu, jen v jiném odstínu fialové.
+
+## BQ.3 Formuláře jsou místo, kde se přístupnost mění v peníze
+
+Landing page může být nádherná, ale pokud formulář selže, obchodní hodnota spadne do kanálu. Přístupný formulář je srozumitelný, odpouští chyby a nevyžaduje detektivní schopnosti.
+
+Dobrá pravidla:
+
+- pole pojmenuj viditelně, ne jen placeholderem,
+- u povinných polí vysvětli povinnost před odesláním,
+- chybu ukaž u konkrétního pole a napiš, jak ji opravit,
+- zachovej už vyplněná data po chybě,
+- nepoužívej CAPTCHA jako první obrannou linii, pokud existuje méně otravná ochrana,
+- potvrď úspěšné odeslání jasnou zprávou a dalším krokem.
+
+Slabá chyba:
+
+> „Neplatný vstup.“
+
+Lepší chyba:
+
+> „E-mail musí obsahovat zavináč, například jana@firma.cz.“
+
+Privacy-first poznámka: méně polí znamená méně překážek, méně osobních údajů a často i lepší konverzi. Přístupnost a minimalizace dat se tady krásně potkávají. Skoro až podezřelé, jak dobré věci spolu někdy kamarádí.
+
+## BQ.4 Testuj ručně, automaticky a s reálnými lidmi
+
+Automatické testy jsou užitečné, ale nechytí všechno. Umí najít chybějící label, některé kontrasty nebo špatnou strukturu. Neřeknou ti ale spolehlivě, jestli text dává smysl, jestli je proces pochopitelný, nebo jestli se uživatel v modálu cítí jako v escape roomu bez nápovědy.
+
+Rozumná kombinace pro malý tým:
+
+- automatická kontrola v CI nebo aspoň při pull requestu pro základní chyby,
+- ruční klávesnicový průchod kritických cest,
+- kontrola se čtečkou obrazovky u formulářů, navigace a modálů,
+- test na mobilu se zvětšeným písmem,
+- obsahová revize chybových hlášek a instrukcí,
+- občasný test s člověkem, který nepoužívá produkt každý den.
+
+Mini-protokol po testu:
+
+| Oblast | Otázka | Výsledek |
+| --- | --- | --- |
+| Klávesnice | Projdu hlavní cestu bez myši? | ano/ne + poznámka |
+| Fokus | Vidím vždy, kde jsem? | ano/ne + screenshot |
+| Formulář | Chyby říkají, co opravit? | ano/ne + příklad |
+| Čtečka | Mají prvky smysluplné názvy? | ano/ne + problém |
+| Mobil | Funguje zvětšené písmo bez rozbití layoutu? | ano/ne + šířka |
+| Obsah | Je instrukce lidská a konkrétní? | ano/ne + návrh textu |
+
+## BQ.5 Přístupnostní prohlášení piš jako závazek, ne jako alibi
+
+Veřejný sektor má v EU samostatná pravidla pro webovou přístupnost a standardizaci, technicky navázaná na EN 301 549; Evropská komise popisuje souvislost Web Accessibility Directive a harmonizovaného standardu zde: https://digital-strategy.ec.europa.eu/en/policies/web-accessibility-directive-standards-and-harmonisation
+
+Soukromé SaaS nemusí vždy zveřejňovat stejný typ prohlášení jako veřejná instituce, ale přístupnostní stránka je dobrý obchodní i provozní návyk. Nemusí předstírat dokonalost. Má říkat:
+
+- jaký standard tým sleduje,
+- které části produktu jsou známě problematické,
+- jak může uživatel nahlásit bariéru,
+- jak rychle tým odpovídá,
+- kdy proběhla poslední revize,
+- kdo je interní vlastník přístupnosti.
+
+Příklad lidské formulace:
+
+> „Snažíme se držet web a aplikaci v souladu s WCAG 2.2 na úrovni AA. Víme, že některé starší grafy nejsou ideální pro čtečky obrazovky; pracujeme na textových souhrnech a exportu tabulek. Bariéry nám prosím pošlete na accessibility@example.com, odpovíme do pěti pracovních dnů.“
+
+Tohle je lepší než mlčet a doufat, že nikdo nic nenajde. Internet má jednu nepříjemnou vlastnost: vždycky někdo něco najde.
+
+## BQ.6 Checklist přístupnosti pro web nebo SaaS
+
+- Hlavní navigace, formulář, checkout nebo registrace jdou projít jen klávesnicí.
+- Focus stav je viditelný na všech odkazech, tlačítkách, polích, kartách a modálech.
+- Nadpisy mají logické pořadí a stránka dává smysl i bez vizuálního skenování.
+- Každé pole má label, nápovědu a konkrétní chybovou zprávu.
+- Barvy textu, odkazů, stavů a chyb mají ověřený kontrast.
+- Ikonová tlačítka mají přístupný název a nejsou závislá jen na barvě.
+- Modály správně pracují s fokusem a dají se zavřít klávesnicí.
+- Obrázky mají smysluplný alternativní text, nebo jsou označené jako dekorativní.
+- Automatické kontroly běží aspoň na kritických šablonách a nových komponentách.
+- Přístupnostní problémy mají vlastníka, prioritu a termín, ne jen štítek „někdy“.
+- Externí widgety a embedy se kontrolují i z pohledu přístupnosti a privacy dopadu.
+- Přístupnostní kontakt nebo formulář pro bariéry je snadno dohledatelný.
+
+## Codyho komentář
+
+Přístupnost je jedna z nejlepších zkoušek kvality produktu. Když web funguje s klávesnicí, srozumitelnými texty, jasným fokusem a bez vizuálních triků, bude lepší i pro lidi bez trvalého handicapu: na mobilu, ve stresu, s rozbitým touchpadem, v hlučné tramvaji nebo po třetí kávě, kdy už mozek renderuje na nízký výkon.
+
+## Zdroje k příloze
+
+- Evropská komise: European Accessibility Act se začal uplatňovat 28. června 2025 a pokrývá vybrané produkty a služby: https://digital-strategy.ec.europa.eu/en/news/eu-becomes-more-accessible-all
+- EUR-Lex: souhrn směrnice (EU) 2019/882, European Accessibility Act: https://eur-lex.europa.eu/legal-content/en/LSU/?uri=CELEX%3A32019L0882
+- W3C: WCAG 2.2 jako doporučení publikované 5. října 2023: https://www.w3.org/WAI/standards-guidelines/wcag/new-in-22/
+- W3C: Web Content Accessibility Guidelines 2.2: https://www.w3.org/TR/WCAG22/
+- Evropská komise: Web Accessibility Directive, EN 301 549 a harmonizace standardů: https://digital-strategy.ec.europa.eu/en/policies/web-accessibility-directive-standards-and-harmonisation
+
+## Shrnutí přílohy
+
+Přístupnost není widget, auditní razítko ani charita. Je to produktová disciplína: správné HTML, čitelný obsah, klávesnicové ovládání, formuláře bez pastí, kontrast, focus, smysluplné chyby a pravidelné testování. Privacy-first týmu navíc pomáhá tím, že omezuje zbytečné externí skripty a vede k jednodušším, srozumitelnějším cestám.
+
+
 ## Pracovní log
+- 2026-08-09: Přidána příloha BQ o přístupnosti webu a SaaS: WCAG, European Accessibility Act, design systém, formuláře, ruční i automatické testování, přístupnostní prohlášení a checklist.
 - 2026-08-09: Přidána příloha BP o datové klasifikaci pro malý SaaS: čtyři třídy dat, pravidla pro chaty, tickety, AI prompty, exporty a dodavatele, pseudonymizace, šablony a checklist.
 - 2026-08-09: Přidána příloha BO o doménové a DNS hygieně: vlastnictví domén, transfer lock, DNSSEC, bezpečný postup DNS změn, úklid subdomén, dokumentace kritických záznamů a checklist.
 - 2026-08-09: Přidána příloha BN o bezpečnostním kontaktu a CVD: `security.txt`, CVD politika, scope testování, ochrana dat v hlášeních, interní triage, komunikace s nálezcem a checklist.
