@@ -8343,7 +8343,145 @@ Kvartální review je pro malý tým skvělá prevence zakladatelské hypnózy. 
 Kvartální strategické review převádí provozní zkušenost do jasných sázek: co posilujeme, co ověřujeme a co rušíme. Malý SaaS tým by měl pracovat s vrstvami trhu, produktu, go-to-market a provozu, přidat privacy-first kontrolu datových stop a skončit stop-listem. Strategie není velký dokument. Je to disciplína říct několika důležitým věcem ano a spoustě lákavých rozptýlení ne.
 
 
+# Příloha BA: Roční produktový a datový úklid bez nostalgického skladiště
+
+Kvartální review rozhoduje, kam produkt směřuje. Roční úklid rozhoduje, co už s sebou dál netáhne. Každý web a SaaS produkt postupně nabírá staré formuláře, zapomenuté exporty, historické tarify, testovací skripty, integrační výjimky, dokumentaci „dočasně napsanou narychlo“ a přístupy lidí, kteří už mezitím změnili práci, obor i oblíbenou kávu.
+
+Roční úklid není trest za to, že tým během roku něco improvizoval. Improvizace je normální. Problém začne ve chvíli, kdy se z improvizace stane neviditelná infrastruktura. Privacy-first provoz potřebuje jednou ročně vědomě zavřít smyčku: co pořád slouží, co se má archivovat, co se má smazat a co se musí přepsat, protože už neodpovídá realitě.
+
+## BA.1 Udělej inventář podle oblastí, ne podle nástrojů
+
+Když začneš úklid seznamem nástrojů, rychle skončíš u otázky, jestli někdo ještě platí ten jeden doplněk v prohlížeči. Začni raději oblastmi produktu a provozu. Nástroje se potom ukážou samy.
+
+Projdi šest oblastí:
+
+1. **Produkt:** aktivní funkce, skryté funkce, experimenty, feature flags, staré onboarding kroky.
+2. **Web a marketing:** landing pages, formuláře, lead magnety, kampaně, UTM pravidla, staré redirecty.
+3. **Data:** zákaznická data, analytické eventy, exporty, logy, screenshoty, support přílohy.
+4. **Přístupy:** uživatelé v administraci, externisté, servisní účty, API klíče, sdílené schránky.
+5. **Dodavatelé:** hosting, e-mail, analytika, CRM, platební služby, AI služby, monitoring.
+6. **Dokumentace:** privacy texty, obchodní podmínky, help centrum, interní návody, incidentní playbooky.
+
+Pro každou oblast napiš tři sloupce: „necháváme“, „měníme“, „rušíme“. Není potřeba dokonalý audit na první pokus. Potřebuješ mapu, podle které se dá uklízet.
+
+Příklad:
+
+| Oblast | Necháváme | Měníme | Rušíme |
+| --- | --- | --- | --- |
+| Produkt | Aktivní onboarding pro nové týmy | Text u importu dat | Starý onboarding krok pro zrušený tarif |
+| Marketing | Blog, RSS, dvě klíčové landing pages | Zastaralou případovku | Neaktivní PDF lead magnet s formulářem |
+| Data | Bezpečnostní logy s retenční lhůtou | Event `trial_started` na jasnější definici | Exporty kampaně z minulého roku |
+| Přístupy | Role supportu a admina | Dočasné přístupy převést na expirační | Staré účty externistů |
+
+## BA.2 Každé „necháváme“ musí mít současný důvod
+
+Nejnebezpečnější věta v produktu je: „To tam radši necháme.“ Občas je správná. Často ale znamená jen to, že nikdo nechce být ten člověk, který vypne věc bez majitele.
+
+U každé položky, kterou necháváš, napiš současný důvod:
+
+- komu slouží,
+- jakou práci pomáhá dokončit,
+- kdo ji vlastní,
+- jak poznáš, že funguje,
+- jaké datové riziko s sebou nese.
+
+Pokud neumíš odpovědět, položka nejde automaticky do koše. Jde do krátkého ověření. Rozdíl je důležitý: úklid nemá být destruktivní sprint, kde smažeš půl produktu a pak se tváříš minimalisticky. Má být proces, který oddělí hodnotu od zvyku.
+
+Mini šablona ověření:
+
+```markdown
+## Položka k ověření
+Název:
+Kde žije:
+Původní účel:
+Současný známý vlastník:
+Kdo by si všiml vypnutí:
+Datové stopy:
+Rozhodnutí do:
+```
+
+Když se k položce ani po dvou týdnech nikdo nehlásí a žádná zákaznická cesta na ní nestojí, pravděpodobně to není kritická funkce. Je to digitální prach.
+
+## BA.3 Datový úklid dělej jako produktovou práci
+
+Datový úklid se často nechává právníkům nebo administrátorům. Jenže skutečná rozhodnutí vznikají v produktu: které pole ve formuláři sbíráme, který event posíláme, jak dlouho držíme export, co ukládá support a co se propisuje do CRM.
+
+Roční datový úklid má mít konkrétní výstupy:
+
+- seznam datových kategorií, které už nesbíráš,
+- seznam míst, kde se zkrátila retence,
+- vypnuté nebo přepsané eventy bez rozhodovací hodnoty,
+- smazané staré exporty a support přílohy,
+- aktualizované privacy texty podle skutečného chování produktu,
+- potvrzené vlastníky pro logy, zálohy a zákaznické přílohy.
+
+Praktická otázka pro tým:
+
+> „Kdyby se nás zákazník zeptal, proč tuto datovou stopu pořád máme, dokážeme odpovědět bez červenání a bez hledání v historii Slacku?“
+
+Pokud odpověď zní „ehm“, máš kandidáta na smazání, zkrácení retence nebo lepší vysvětlení. Ideálně všechny tři věci, ale nejsme barbaři, začni tou nejbezpečnější.
+
+## BA.4 Archiv není smetiště s hezčím názvem
+
+Archivace je užitečná jen tehdy, když má pravidla. Jinak je to jen pomalejší mazání, které se nikdy nestane. U webu a SaaS produktu má archiv řešit hlavně znalost, rozhodnutí a historický kontext. Nemá donekonečna držet osobní údaje, staré CSV exporty a screenshoty zákaznických obrazovek.
+
+Rozlišuj tři režimy:
+
+| Režim | Co tam patří | Co tam nepatří |
+| --- | --- | --- |
+| Živý provoz | aktuální produkt, aktivní procesy, potřebné logy | staré experimenty bez vlastníka |
+| Archiv znalostí | rozhodnutí, anonymizované lessons learned, uzavřené postmortemy | osobní data „pro jistotu“ |
+| Smazání | duplicitní exporty, staré přílohy, mrtvé eventy, testovací účty | dokumenty s právní retenční povinností |
+
+Archivuj raději závěr než surovinu. Místo deseti nahrávek zákaznických rozhovorů často stačí anonymizovaná syntéza: vzory, citace bez identity, rozhodnutí a navazující úkoly. Produktový tým tím získá znalost a firma si nenese zbytečnou datovou zátěž.
+
+## BA.5 Roční úklid musí končit změnou v systému
+
+Workshop, po kterém zůstane jen poznámka „měli bychom uklidit data“, je hezký teambuilding pro pocit viny. Roční úklid má končit konkrétními změnami v systému.
+
+Minimální výstup:
+
+- vypnuté věci: seznam funkcí, skriptů, formulářů, eventů a přístupů, které už neběží,
+- změněné věci: formuláře, texty, retence, role, dokumentace, automatizace,
+- odložené věci: položky, které vyžadují rizikové ověření, vlastníka a termín,
+- zákaznická komunikace: co je potřeba oznámit, pokud se mění chování produktu,
+- další kontrola: datum, kdy se ověří, že úklid nezpůsobil regresi.
+
+Příklad závěrečného záznamu:
+
+```markdown
+## Roční úklid 2026
+Vypnuto: starý lead magnet formulář, 4 nepoužívané analytické eventy, 2 účty externistů.
+Změněno: retence support příloh z neurčito na 90 dní, privacy mikrocopy u importu dat.
+Odloženo: audit jedné účetní integrace, vlastník: CTO, termín: 31. 1.
+Komunikace: žádná změna pro zákazníky, pouze interní úklid datových stop.
+Kontrola regresí: 14 dní po vypnutí formuláře.
+```
+
+## BA.6 Checklist ročního produktového a datového úklidu
+
+- [ ] Úklid je naplánovaný jako produktová práce, ne jako „až bude čas“.
+- [ ] Inventář pokrývá produkt, web, marketing, data, přístupy, dodavatele a dokumentaci.
+- [ ] Každá ponechaná položka má současný účel, vlastníka a datové riziko.
+- [ ] Položky bez jasného vlastníka jdou do krátkého ověření, ne do věčného odkladu.
+- [ ] Staré exporty, support přílohy, testovací účty a mrtvé eventy mají rozhodnutí: ponechat, archivovat, nebo smazat.
+- [ ] Archiv obsahuje hlavně znalost a rozhodnutí, ne surová osobní data pro nostalgii.
+- [ ] Privacy texty a interní dokumentace odpovídají skutečnému chování produktu.
+- [ ] Vypnuté funkce, skripty, formuláře a přístupy jsou opravdu vypnuté technicky, ne jen zapsané v poznámce.
+- [ ] Úklid má kontrolu regresí a vlastníka navazujících kroků.
+- [ ] Codyho pravidlo: pokud systém po ročním úklidu není jednodušší, pravděpodobně jste jen přerovnali šuplík.
+
+## Codyho komentář
+
+Roční úklid je produktová dospělost v montérkách. Není sexy, nikdo kvůli němu neudělá virální příspěvek a demo na konferenci vypadá pořád stejně. Ale zákazníkům se lépe důvěřuje firmě, která ví, co provozuje, proč to provozuje a kdy staré věci vypíná. Produkt, který nikdy nic nemaže, časem nepůsobí bohatě. Působí zapomenutě.
+
+## Shrnutí přílohy
+
+Roční produktový a datový úklid brání tomu, aby se z webu nebo SaaS stal sklad starých funkcí, exportů a přístupů. Tým má projít produkt, marketing, data, dodavatele i dokumentaci, každé ponechané položce dát současný důvod a zbytek bezpečně vypnout, archivovat nebo smazat. Privacy-first provoz není jen opatrný start. Je to schopnost průběžně uklízet po vlastním růstu.
+
+
 ## Pracovní log
+- 2026-08-09: Přidána příloha BA o ročním produktovém a datovém úklidu: inventář oblastí, ověření ponechaných položek, datový úklid, pravidla archivu, technické vypnutí a checklist.
 - 2026-08-09: Přidána příloha AZ o kvartálním strategickém review SaaS týmu: rozhodovací otázky, čtyři vrstvy review, privacy kontrola, strategické sázky, rozpočet pozornosti, stop-list a checklist.
 - 2026-08-09: Přidána příloha AY o týdenním provozním rytmu SaaS týmu: pondělní plánování, krátký denní sync, středeční kontrola rizik, páteční review, jedno místo pravdy, privacy úklid a checklist.
 - 2026-08-09: Zpřesněn checklist zakladatelského dashboardu o vlastníka klíčové metriky, aby čísla nezůstala bez odpovědnosti.
