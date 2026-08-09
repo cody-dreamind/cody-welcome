@@ -8480,7 +8480,122 @@ Roční úklid je produktová dospělost v montérkách. Není sexy, nikdo kvůl
 Roční produktový a datový úklid brání tomu, aby se z webu nebo SaaS stal sklad starých funkcí, exportů a přístupů. Tým má projít produkt, marketing, data, dodavatele i dokumentaci, každé ponechané položce dát současný důvod a zbytek bezpečně vypnout, archivovat nebo smazat. Privacy-first provoz není jen opatrný start. Je to schopnost průběžně uklízet po vlastním růstu.
 
 
+# Příloha BB: Release QA bez produkčních dat a hrdinského klikání
+
+Když malý tým vydává novou verzi webu nebo SaaS, často spoléhá na dvě věci: „vývojář to přece zkusil“ a „kdyby něco, zákazníci napíšou“. To je sice levný monitoring, ale trochu připomíná testování padáku metodou překvapení. Release QA nemusí být korporátní ceremoniál s padesáti tabulkami. Má být krátká, opakovatelná kontrola nejdůležitějších cest, datových stop a provozních rizik před tím, než změna dopadne na skutečné lidi.
+
+Privacy-first QA má ještě jednu podmínku: netestuj pohodlí týmu na úkor dat zákazníků. Produkční data nejsou univerzální testovací stavebnice. Pokud potřebuješ ověřit onboarding, fakturaci, import nebo support scénář, vytvoř syntetická data, anonymizovaný vzorek nebo staging scénář. GDPR staví ochranu dat návrhem a výchozím nastavením do jádra zpracování; EDPB k článku 25 zdůrazňuje, že technická a organizační opatření mají být součástí návrhu a provozu, ne dekorace nalepená až po releasu: https://www.edpb.europa.eu/documents/guideline/guidelines-42019-on-article-25-data-protection-by-design-and-by-default_en
+
+## BB.1 Definuj release podle rizika, ne podle velikosti commitu
+
+Velký diff nemusí být rizikový a malá změna může rozbít platby. Release QA začni krátkou klasifikací. Cílem není zdržovat každý deployment, ale vědět, kdy stačí rychlá kontrola a kdy je potřeba přidat člověka navíc.
+
+Rozlišuj čtyři typy změn:
+
+| Typ změny | Příklad | Minimální QA |
+| --- | --- | --- |
+| Obsahová | text landing page, FAQ, obrázek | kontrola významu, odkazů, mobilu a metadata |
+| Produktová | nový onboarding krok, změna dashboardu | kritická cesta, prázdné stavy, oprávnění, eventy |
+| Datová | nový formulář, import, export, integrace | datové minimum, retence, logy, privacy text |
+| Provozní | DNS, e-mail, platby, auth, migrace | rollback plán, monitoring, záloha, incident kontakt |
+
+Praktické pravidlo: jakmile změna sahá na přihlášení, platby, fakturaci, export dat, integrace, role, mazání nebo e-mailové doručování, není to „jen malý release“. Je to změna s dopadem na důvěru.
+
+## BB.2 Udržuj malý seznam kritických cest
+
+QA často selhává proto, že tým neví, co přesně má před vydáním projít. Pak někdo deset minut náhodně kliká aplikací, tváří se soustředěně a doufá, že na něj chyba sama vyskočí z křoví.
+
+Místo toho měj stálý seznam kritických cest. Pro běžný B2B SaaS může vypadat takhle:
+
+1. Nový návštěvník pochopí nabídku a odešle kontakt nebo založí trial.
+2. Nový uživatel dokončí první hodnotový krok bez pomoci supportu.
+3. Aktivní zákazník provede hlavní akci produktu.
+4. Admin pozve kolegu, nastaví roli a případně odebere přístup.
+5. Zákazník najde fakturaci, tarif, export a zrušení účtu.
+6. Support bezpečně najde potřebný kontext bez zbytečného otevření osobních dat.
+
+Každá cesta má mít vlastní testovací účet a vlastní syntetická data. Pokud test vyžaduje reálného zákazníka, test není dobře připravený. Výjimkou je produkční smoke test po releasu, ale i tam používej interní účet, ne zákaznický profil „jen na minutku“.
+
+## BB.3 Testovací data navrhni jako produktový asset
+
+Syntetická data nejsou trapná náhražka reality. Jsou to bezpečné kulisy, které ti dovolí opakovaně ověřovat chování systému. Dobrá testovací data mají pokrýt běžné i nepříjemné scénáře: prázdný účet, účet s historií, uživatele bez oprávnění, neúspěšnou platbu, import s chybou, dlouhé názvy, diakritiku, více jazyků a pomalé externí API.
+
+Vytvoř si seed scénáře:
+
+```markdown
+## Seed scénář
+Název: Tým po trialu se třemi rolemi
+Účel: ověřit pozvání, oprávnění, billing a hlavní akci
+Obsahuje: owner, admin, viewer, 12 projektů, 3 faktury, 1 neúspěšnou platbu
+Neobsahuje: reálné e-maily zákazníků, produkční dokumenty, support přílohy
+Reset: automaticky po každém testovacím běhu
+Vlastník: produkt / QA
+```
+
+Privacy-first detail: nepoužívej v testech skutečné e-mailové adresy lidí, skutečné fakturační údaje ani screenshoty z produkce. I „anonymní“ export se může stát problémem, když v něm zůstane poznámka, název firmy, URL souboru nebo identifikátor účtu. Bezpečnější je syntetická realita než rozmazaná produkce.
+
+## BB.4 Logy a chyby kontroluj před releasem, ne až při požáru
+
+Release QA není jen klikání obrazovek. Ověř také, co systém zapíše do logů, co ukáže uživateli a co pošle do monitoringu. OWASP Logging Cheat Sheet doporučuje u logování řešit mimo jiné maskování, sanitizaci, omezení přístupu, bezpečný přenos, retenci a mazání logů: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+
+Před releasem zkontroluj:
+
+- zda chyby neukazují stack trace, interní cesty, tokeny nebo SQL dotazy,
+- zda logy neobsahují hesla, API klíče, session tokeny, reset odkazy, celé payloady formulářů nebo zbytečné osobní údaje,
+- zda uživatelská chybová hláška říká, co má člověk udělat dál,
+- zda interní alert obsahuje dost kontextu pro opravu, ale ne celé zákaznické tajemství,
+- zda debug režim není zapnutý v produkci,
+- zda nový event v analytice odpovídá měřicímu plánu a má jasný účel.
+
+Příklad dobrého rozdílu:
+
+| Místo | Špatně | Lépe |
+| --- | --- | --- |
+| Uživatel | `Payment provider error 402_card_declined_payload...` | „Platba se nepovedla. Zkuste jinou kartu nebo nám napište.“ |
+| Log | celý platební payload | interní ID pokusu, stav, provider request ID, bez citlivých polí |
+| Alert | „Billing failed“ | „Billing: 12 neúspěšných plateb za 10 minut, nový release 2026.08.09, runbook odkaz“ |
+
+## BB.5 Release checklist má být krátký a povinný
+
+Checklist, který má čtyři stránky, tým brzy obejde. Checklist, který má osm dobrých bodů, se dá používat roky. Neřeš v něm všechno. Řeš věci, které se při spěchu nejčastěji rozbijí.
+
+Minimalistický release checklist:
+
+- [ ] Změna je zařazená podle rizika: obsahová, produktová, datová nebo provozní.
+- [ ] Kritická cesta dotčená změnou je ručně ověřená na testovacím účtu.
+- [ ] Test proběhl se syntetickými nebo bezpečně anonymizovanými daty.
+- [ ] Nová pole, eventy, logy a exporty mají jasný účel a vlastníka.
+- [ ] Chybové stavy mají lidský text a interní diagnostiku bez úniku citlivých dat.
+- [ ] Rollback nebo vypnutí funkce je popsané jednou větou a někdo ho umí provést.
+- [ ] Monitoring po releasu sleduje skutečné riziko, ne jen obecné „něco spadlo“.
+- [ ] Dokumentace, help nebo privacy text jsou aktualizované, pokud se změnilo chování produktu.
+
+## BB.6 Po releasu udělej krátký smoke test a zavři smyčku
+
+Předprodukční QA snižuje riziko. Nevidí ale všechno: DNS, CDN cache, e-mailové doručování, reálné integrační limity nebo produkční oprávnění se umí tvářit jako hodné děti přesně do chvíle, kdy vypneš kameru.
+
+Po releasu proto udělej desetiminutový smoke test:
+
+1. Otevři hlavní URL a jednu klíčovou landing page.
+2. Přihlas se interním testovacím účtem.
+3. Projdi jednu hlavní produktovou akci.
+4. Ověř jeden e-mail, jeden log a jeden monitoring signál.
+5. Zkontroluj, že nové chování odpovídá tomu, co je napsané v dokumentaci nebo mikrocopy.
+6. Zapiš výsledek do release poznámky.
+
+Když se něco rozbije, nepiš jen „opraveno“. Přidej malou lekci: který bod checklistu chyběl, který seed scénář neexistoval nebo který alert přišel pozdě. Release QA se má zlepšovat po malých jizvách, ne po jedné velké katastrofě.
+
+## Codyho komentář
+
+QA není brána, kde sedí mrzutý člověk s razítkem „zamítnuto“. Dobrá QA je bezpečnostní síť pro tým, který chce vydávat často a pořád spát. Privacy-first verze téhle sítě říká: testuj tvrdě, ale netahej do toho zákaznická data jen proto, že se ti nechce vyrobit pár syntetických účtů. Produkce není pískoviště. Je to obchod, kde si lidi nechávají věci, kterým věří.
+
+## Shrnutí přílohy
+
+Release QA pro malý SaaS tým má být krátká, opakovatelná a řízená rizikem. Začni klasifikací změny, udržuj seznam kritických cest, používej syntetická testovací data, kontroluj logy i chybové stavy a po releasu udělej smoke test. Privacy-first provoz neznamená vydávat pomalu. Znamená vydávat tak, aby rychlost nebyla zaplacená zákaznickými daty a improvizovaným požárem v pátek večer.
+
+
 ## Pracovní log
+- 2026-08-09: Přidána příloha BB o release QA bez produkčních dat: riziková klasifikace změn, kritické cesty, syntetická testovací data, kontrola logů a chyb, release checklist a post-release smoke test.
 - 2026-08-09: Přidána příloha BA o ročním produktovém a datovém úklidu: inventář oblastí, ověření ponechaných položek, datový úklid, pravidla archivu, technické vypnutí a checklist.
 - 2026-08-09: Přidána příloha AZ o kvartálním strategickém review SaaS týmu: rozhodovací otázky, čtyři vrstvy review, privacy kontrola, strategické sázky, rozpočet pozornosti, stop-list a checklist.
 - 2026-08-09: Přidána příloha AY o týdenním provozním rytmu SaaS týmu: pondělní plánování, krátký denní sync, středeční kontrola rizik, páteční review, jedno místo pravdy, privacy úklid a checklist.
