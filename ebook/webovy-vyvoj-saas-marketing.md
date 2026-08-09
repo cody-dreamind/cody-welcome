@@ -8162,7 +8162,189 @@ Malé týmy často odmítají proces, protože si představí korporátní divad
 Týdenní provozní rytmus drží malý SaaS tým v realitě: pondělí vybírá výsledky, denní sync odblokovává práci, středa kontroluje rizika a pátek uklízí rozhodnutí i datové stopy. Privacy-first provoz není jen volba nástrojů. Je to opakovaný návyk nenechávat citlivá data, výjimky a polorozhodnutí ležet všude kolem jako kabely pod stolem.
 
 
+# Příloha AZ: Kvartální strategické review bez manažerského kouře
+
+Týdenní rytmus drží tým v chodu. Kvartální review hlídá, jestli běží správným směrem. Malý SaaS tým nepotřebuje třídenní offsite, dvacetistránkový deck a tabulku, která vypadá jako ovládání jaderné elektrárny. Potřebuje jednou za čtvrtletí zastavit, podívat se na realitu a rozhodnout, co dál nedělat.
+
+Dobré kvartální review má jednoduchý cíl: převést poslední tři měsíce provozu, zákaznických signálů, financí a produktových lekcí do několika jasných rozhodnutí. Ne do pocitu, že „jsme si to hezky prošli“. Pocit je fajn. Rozhodnutí platí faktury.
+
+## AZ.1 Začni otázkami, ne prezentací
+
+Pokud review začne slide deckem, často skončí debatou o barvě grafu. Začni otázkami, které tým donutí myslet v rozhodnutích:
+
+- Co jsme chtěli v tomto kvartálu dokázat?
+- Co se opravdu stalo?
+- Který zákaznický segment reagoval nejlépe?
+- Které aktivity vytvářely hodnotu a které jen zaměstnávaly tým?
+- Co nám říkají finance, support, prodej a produkt dohromady?
+- Co musíme přestat dělat, aby další kvartál nebyl jen větší hromada stejného chaosu?
+
+Teprve potom vytáhni čísla, rozhovory, incidenty, churn důvody, support témata a marketingové výsledky. Data mají odpovídat na otázky, ne zavalit místnost jako lavina exportů z nástrojů, které si nikdo nepamatuje zapnout.
+
+Praktický formát úvodu:
+
+```markdown
+## Kvartální otázky
+1. Největší potvrzená hypotéza:
+2. Největší vyvrácená hypotéza:
+3. Nejlepší zákaznický segment:
+4. Největší provozní brzda:
+5. Jedna věc, kterou příští kvartál rušíme:
+```
+
+Ten poslední bod je povinný. Strategie není seznam přání. Strategie je i seznam věcí, kterým říkáš ne, i když by na roadmapě vypadaly sexy.
+
+## AZ.2 Rozděl review na čtyři vrstvy
+
+Kvartální review se často rozbije, protože tým míchá všechno dohromady: revenue, bugy, značku, vývoj, nábor, hosting, SEO, zákaznické stížnosti a pocit zakladatele, že konkurence má hezčí animaci tlačítka. Potřebuješ vrstvy.
+
+Použij čtyři jednoduché bloky:
+
+1. **Trh a zákazník:** kdo kupuje, kdo odchází, kdo se ptá, kdo ignoruje.
+2. **Produkt a hodnota:** které funkce vedou k výsledku zákazníka, kde lidé ztrácí čas, co nikdo nepoužívá.
+3. **Go-to-market:** odkud přichází kvalitní poptávky, co pomáhá důvěře, co je jen marketingový hluk.
+4. **Provoz a data:** dostupnost, support, incidenty, náklady, subdodavatelé, datový úklid.
+
+Každá vrstva má dodat nejvýš tři poznatky a jedno doporučené rozhodnutí. Když jich je víc, nejde o strategii, ale o skládku. Skládka může být autentická, ale špatně se podle ní řídí firma.
+
+Příklad výstupu:
+
+| Vrstva | Poznatek | Rozhodnutí |
+| --- | --- | --- |
+| Trh | Nejlépe konvertují malé B2B týmy s 10–50 lidmi | Příští kvartál psát landing page a případovky primárně pro tento segment |
+| Produkt | Import dat šetří zákazníkům nejvíc času, ale onboarding ho schovává | Přesunout import do prvního setup kroku |
+| Marketing | Nejlepší leady chodí z přímých doporučení a odborných článků | Posílit RSS/blog a partnerské reference, ne honit další sociální síť |
+| Provoz | Support často řeší nejasné role uživatelů | Upravit oprávnění, nápovědu a demo scénář |
+
+## AZ.3 Privacy-first review není jen právní kolonka
+
+Soukromí se v kvartálním review nesmí objevit jen jako „GDPR OK“. To je věta, která v reálném světě často znamená „nikdo se na to dnes nechce dívat“. Privacy-first provoz je obchodní, produktová i technická disciplína.
+
+Jednou za kvartál projdi:
+
+- nové nástroje a integrace zapnuté od posledního review,
+- nové typy dat v produktu, supportu, analytice a prodeji,
+- změny v exportech, logování a retenci,
+- přístupy lidí, externistů a dodavatelů,
+- subdodavatele, kteří se objevili kvůli nové funkci,
+- staré experimenty, které pořád měří, i když už nikdo neví proč.
+
+Privacy otázka pro každé rozhodnutí:
+
+> „Umíme zákazníkovi jednou lidskou větou vysvětlit, proč toto data zpracování existuje?“
+
+Pokud ne, rozhodnutí není připravené. Možná je správné, možná ne. Ale určitě ještě není dostatečně jasné. A nejasná práce s daty je jako drát pod kobercem: chvíli to vypadá uklizeně, pak o to někdo zakopne.
+
+## AZ.4 Rozhodnutí zapisuj jako sázky
+
+Kvartální plán nemá být seznam úkolů. Má být soubor sázek. Sázka říká: věříme, že když uděláme X pro Y segment, zlepší se Z, a poznáme to podle těchto signálů.
+
+Šablona strategické sázky:
+
+```markdown
+## Sázka: [název]
+
+Věříme, že:
+Pro segment:
+Uděláme:
+Protože jsme viděli:
+Úspěch poznáme podle:
+Ochranná metrika:
+Co nebudeme dělat:
+Vlastník:
+Datum kontroly:
+```
+
+Příklad:
+
+```markdown
+## Sázka: Rychlejší aktivace malých týmů
+
+Věříme, že: kratší setup zvýší počet týmů, které dokončí první hodnotný výsledek.
+Pro segment: B2B týmy s 10–50 lidmi bez interního IT.
+Uděláme: nový onboarding s importem dat v prvním kroku a jedním demo scénářem.
+Protože jsme viděli: support často vysvětluje import až po prvním selhání setupu.
+Úspěch poznáme podle: více dokončených setupů a méně support dotazů k prvnímu týdnu.
+Ochranná metrika: nesmí růst počet žádostí o ruční zásah do zákaznických dat.
+Co nebudeme dělat: nepřidáme další obecný dashboard před opravou aktivace.
+Vlastník: produkt.
+Datum kontroly: konec šestého týdne kvartálu.
+```
+
+Ochranná metrika je důležitá. Chrání tým před vítězstvím, které vypadá dobře v jednom grafu a rozbije provoz jinde. Rychlejší onboarding je skvělý, dokud nezačne znamenat víc chyb, víc ruční práce nebo víc zbytečně sbíraných dat.
+
+## AZ.5 Rozpočet řeš podle energie týmu, ne jen podle peněz
+
+Malý SaaS tým má tři hlavní rozpočty: peníze, čas a pozornost. Peníze jsou vidět v účetnictví. Čas v kalendáři. Pozornost mizí potichu v notifikacích, rozpracovaných iniciativách a „jen rychlých“ schůzkách.
+
+Na kvartálním review si ke každé větší iniciativě napiš:
+
+- kolik vývojové kapacity spolkne,
+- koho bude tahat do rozhodnutí,
+- jaké provozní břemeno přidá po spuštění,
+- jaká data bude potřebovat,
+- co kvůli ní neuděláš.
+
+Příklad špatně napsané iniciativy:
+
+> „Přidat integraci s účetním systémem.“
+
+Lepší verze:
+
+> „Ověřit jednu účetní integraci pro segment malých agentur. Nejprve ruční export a tři rozhovory, potom teprve API. Limit: žádné ukládání přístupových tokenů bez návrhu rotace a odpovědnosti.“
+
+Tohle je méně efektní věta do roadmapy, ale lepší rozhodnutí pro produkt. Ne každá integrace je funkce. Některé integrace jsou malé domácí zvíře: vypadá roztomile, ale musíš ho krmit, hlídat a uklízet po něm.
+
+## AZ.6 Z review musí vypadnout stop-list
+
+Nejcennější část kvartálního review je často seznam věcí, které končí. Bez stop-listu se tým jen učí přidávat další vrstvy práce. To je cesta k produktu, který má pět navigací, tři cenové strategie a tým, který už neví, proč něco existuje.
+
+Stop-list může obsahovat:
+
+- marketingový kanál bez kvalitních leadů,
+- funkci, kterou držíte jen kvůli jednomu neurčitému slibu,
+- metriku, podle které nikdo nerozhoduje,
+- interní meeting bez jasného výstupu,
+- dočasnou integraci, která se stala trvalým rizikem,
+- zákaznický segment, který dlouhodobě neodpovídá produktu.
+
+Stop-list zapisuj konkrétně:
+
+```markdown
+## Stop-list Q4
+- Rušíme: měsíční obecný newsletter bez jasného tématu.
+  Proč: nízká kvalita odpovědí, vysoká příprava, žádná návaznost na produktové sázky.
+  Náhrada: dva hlubší články měsíčně + RSS + přímé odkazy v obchodním follow-upu.
+  Vlastník ukončení: marketing.
+  Hotovo do: 15. 10.
+```
+
+Privacy-first bonus: stop-list je výborný moment na vypnutí starých trackerů, formulářů, exportů a přístupů. Ne všechno, co se kdysi hodilo k experimentu, má právo žít v produkci navždy.
+
+## AZ.7 Checklist kvartálního strategického review
+
+- [ ] Review začíná rozhodovacími otázkami, ne slidovou přehlídkou.
+- [ ] Tým porovnal plán kvartálu s realitou, ne jen s dobrými úmysly.
+- [ ] Poznatky jsou rozdělené na trh, produkt, go-to-market a provoz.
+- [ ] Každá vrstva má nejvýš tři poznatky a jedno doporučené rozhodnutí.
+- [ ] Privacy-first kontrola pokrývá nové nástroje, data, logy, exporty, přístupy a subdodavatele.
+- [ ] Každá strategická sázka má segment, důkaz, úspěch, ochrannou metriku, vlastníka a datum kontroly.
+- [ ] Plán bere v úvahu peníze, čas i pozornost týmu.
+- [ ] Review končí stop-listem: co rušíme, proč, kdo to ukončí a do kdy.
+- [ ] Výsledky jsou zapsané v jednom místě pravdy a navazují na týdenní rytmus.
+- [ ] Codyho pravidlo: pokud po review nepřibylo žádné „ne“, nebyla to strategie, ale nákupní seznam.
+
+## Codyho komentář
+
+Kvartální review je pro malý tým skvělá prevence zakladatelské hypnózy. Když na produktu pracuješ každý den, začneš považovat vlastní chaos za kontext. Jednou za tři měsíce je zdravé podívat se na produkt očima zákazníka, účetnictví, supportu a privacy člověka najednou. Ano, je to trochu nepohodlné. Ale pořád méně nepohodlné než za rok zjistit, že jste půl firmy postavili kolem segmentu, který nikdy nechtěl platit.
+
+## Shrnutí přílohy
+
+Kvartální strategické review převádí provozní zkušenost do jasných sázek: co posilujeme, co ověřujeme a co rušíme. Malý SaaS tým by měl pracovat s vrstvami trhu, produktu, go-to-market a provozu, přidat privacy-first kontrolu datových stop a skončit stop-listem. Strategie není velký dokument. Je to disciplína říct několika důležitým věcem ano a spoustě lákavých rozptýlení ne.
+
+
 ## Pracovní log
+- 2026-08-09: Přidána příloha AZ o kvartálním strategickém review SaaS týmu: rozhodovací otázky, čtyři vrstvy review, privacy kontrola, strategické sázky, rozpočet pozornosti, stop-list a checklist.
 - 2026-08-09: Přidána příloha AY o týdenním provozním rytmu SaaS týmu: pondělní plánování, krátký denní sync, středeční kontrola rizik, páteční review, jedno místo pravdy, privacy úklid a checklist.
 - 2026-08-09: Zpřesněn checklist zakladatelského dashboardu o vlastníka klíčové metriky, aby čísla nezůstala bez odpovědnosti.
 - 2026-08-09: Přidána příloha AX o zakladatelském dashboardu bez metrik pro ego a sledovacích zkratek: rozhodovací otázky, pět vrstev zdraví produktu, agregované eventy, leading/lagging metriky, reakční hranice, týdenní review a checklist.
