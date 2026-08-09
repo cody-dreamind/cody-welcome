@@ -6736,7 +6736,7 @@ Zpracovatelské smlouvy a seznam subprocesorů mají být živou součástí pro
 
 Marketingový stack malého SaaS často roste jako šuplík s kabely: jeden nástroj na formuláře, druhý na newsletter, třetí na popup, čtvrtý na heatmapu, pátý na CRM, šestý na automatizace a sedmý na „možná se bude hodit“. Výsledek? Nikdo přesně neví, kde jsou data, zákazník vidí pět consent promptů a tým tráví víc času lepením integrací než mluvením s trhem.
 
-Minimalistický marketingový stack není asketismus. Je to disciplína: vybrat nejmenší sadu nástrojů, která umí získat poptávku, doručit obsah, změřit obchodní signály a udržet důvěru. Evropská komise u GDPR principů připomíná účelové omezení a minimalizaci dat: firma nemá sbírat data pro neurčité účely a má zpracovávat jen data nezbytná pro daný účel: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/overview-principles/what-data-can-we-process-and-under-which-conditions_en. EDPB v pokynech ke souhlasu pod GDPR zároveň zdůrazňuje, že souhlas má být svobodný, konkrétní, informovaný a jednoznačný: https://www.edpb.europa.eu/documents/guideline/guidelines-052020-on-consent-under-regulation-2016679_en.
+Minimalistický marketingový stack není asketismus. Je to disciplína: vybrat nejmenší sadu nástrojů, která umí získat poptávku, doručit obsah, změřit obchodní signály a udržet důvěru. Článek 5 GDPR připomíná účelové omezení a minimalizaci dat: firma nemá sbírat data pro neurčité účely a má zpracovávat jen data nezbytná pro daný účel: https://eur-lex.europa.eu/eli/reg/2016/679/oj. EDPB v pokynech ke souhlasu pod GDPR zároveň zdůrazňuje, že souhlas má být svobodný, konkrétní, informovaný a jednoznačný: https://www.edpb.europa.eu/documents/guideline/guidelines-052020-on-consent-under-regulation-2016679_en.
 
 Tahle příloha není katalog konkrétních dodavatelů. Je to rozhodovací rámec. Nástroje se mění rychleji než nálada v týmu po rozbitém deployi, ale dobré otázky vydrží.
 
@@ -7010,7 +7010,7 @@ Privacy mikrocopy patří přímo do rozhodovacích momentů produktu. Piš krá
 
 Referral, affiliate a partnerský marketing umí být skvělý růstový kanál. Doporučení od spokojeného zákazníka má často větší váhu než kampaň, která křičí z banneru jako papoušek po třetím espressu. Problém začíná ve chvíli, kdy se z jednoduchého doporučení stane síť fingerprintingu, cross-site cookie, skrytých redirectů a profilů, kterým nerozumí ani člověk, který je nastavil.
 
-Privacy-first přístup neříká „nedělej referral“. Říká: navrhni ho tak, aby byl měřitelný, férový, vysvětlitelný a datově střídmý. Evropská komise u principů GDPR připomíná účelové omezení a minimalizaci dat: organizace nemá sbírat data pro neurčité účely a má zpracovávat jen to, co je pro daný účel nezbytné: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/overview-principles/what-data-can-we-process-and-under-which-conditions_en. EDPB zároveň ve své příručce pro malé firmy zdůrazňuje, že právní základ zpracování je potřeba určit předem a že souhlas, pokud ho používáš, musí být svobodný, konkrétní, informovaný a jednoznačný: https://www.edpb.europa.eu/sme/be-compliant/process-personal-data-lawfully_en.
+Privacy-first přístup neříká „nedělej referral“. Říká: navrhni ho tak, aby byl měřitelný, férový, vysvětlitelný a datově střídmý. Článek 5 GDPR připomíná účelové omezení a minimalizaci dat: organizace nemá sbírat data pro neurčité účely a má zpracovávat jen to, co je pro daný účel nezbytné: https://eur-lex.europa.eu/eli/reg/2016/679/oj. EDPB zároveň ve své příručce pro malé firmy zdůrazňuje, že právní základ zpracování je potřeba určit předem a že souhlas, pokud ho používáš, musí být svobodný, konkrétní, informovaný a jednoznačný: https://www.edpb.europa.eu/sme/be-compliant/process-personal-data-lawfully_en.
 
 ## AQ.1 Nejdřív si řekni, co vlastně odměňuješ
 
@@ -10020,7 +10020,152 @@ Mazání funkcí je pro produkt stejně důležité jako jejich přidávání. J
 Ukončení funkce má být řízený proces: pojmenuj typ změny, vysvětli důvod, zmapuj dopad, připrav migraci, komunikuj ve vlnách a po vypnutí ukliď data i technický zbytek. Privacy-first produkt není jen ten, který data opatrně sbírá. Je to i produkt, který umí staré datové stopy včas a poctivě odstranit.
 
 
+# Příloha BM: Changelog a release notes bez marketingové mlhy
+
+Produkt, který se mění potichu, působí na zákazníka jako dům, kde někdo v noci přesouvá nábytek. Ráno sice najdeš kuchyň, ale narazíš si palec o židli, která tam včera nebyla. Changelog a release notes nejsou dekorace pro produktový tým. Jsou to provozní nástroje důvěry: říkají, co se změnilo, proč to má zákazníka zajímat a jestli má něco udělat.
+
+Privacy-first přístup tady znamená dvě věci. Zaprvé: komunikuj změny přímo, bez nutnosti sledovat uživatele napříč internetem. Zadruhé: při popisu změn neprozrazuj zákaznická data, interní incidentní detaily ani bezpečnostní informace, které by útočníkovi posloužily jako nákupní seznam.
+
+## BM.1 Rozliš changelog, release notes a interní záznam
+
+Jedna chyba malých týmů je házet všechno do jednoho proudu: opravy překlepů, nové API, změny fakturace, bezpečnostní aktualizace i interní refaktoring. Výsledek je šum. Zákazník neví, co je důležité, a tým pak musí posílat další vysvětlovací e-maily, protože původní oznámení mělo informační hodnotu mokré účtenky.
+
+Používej tři vrstvy:
+
+- **Changelog**: veřejný, stručný přehled změn podle data nebo verze.
+- **Release notes**: zákaznicky psané vysvětlení větších novinek, změn chování nebo migrací.
+- **Interní release log**: technické poznámky pro tým, včetně rizik, rollout plánu, feature flagů a rollbacku.
+
+Příklad rozdílu:
+
+| Typ záznamu | Věta | Pro koho je |
+| --- | --- | --- |
+| Changelog | „Přidali jsme export faktur ve formátu ISDOC.“ | Uživatelé a admini |
+| Release notes | „Účetní teď stáhne faktury rovnou ve formátu ISDOC a nemusí opisovat položky ručně.“ | Rozhodovatelé a aktivní uživatelé |
+| Interní log | „Feature flag `isdoc_export_v1`, rollout 20 %, sledovat chybovost generování XML.“ | Produkt, vývoj, support |
+
+Veřejná komunikace má říkat dopad, ne dokazovat, že tým zná názvy vlastních tříd. Technické detaily patří ven jen tehdy, když pomáhají zákazníkovi něco udělat správně.
+
+## BM.2 Piš z pohledu zákaznické práce
+
+Release notes nejsou seznam commitů. Zákazníka obvykle nezajímá, že jsi „refaktoroval modal komponentu“. Zajímá ho, že se formulář rychleji otevírá, export už nespadne u větších souborů nebo administrátor může bezpečně předat oprávnění kolegovi.
+
+Dobrá struktura jedné větší poznámky:
+
+1. **Co je nové**: jedna jasná věta.
+2. **Komu to pomůže**: role, tým nebo typ účtu.
+3. **Jaký problém to řeší**: konkrétní situace.
+4. **Co má uživatel udělat**: žádná akce, zapnout nastavení, projít migraci, zkontrolovat oprávnění.
+5. **Kde najde detail**: dokumentace, nápověda, kontakt na podporu.
+
+Slabé release notes:
+
+> „Vylepšili jsme správu uživatelů.“
+
+Lepší release notes:
+
+> „Administrátoři teď mohou přidělit roli `Export manager`, která dovolí stahovat účetní exporty bez přístupu k nastavení týmu. Pokud exporty řeší účetní nebo externí partner, zkontrolujte role v Nastavení → Uživatelé.“
+
+Druhá verze má nudnou superpower: říká přesně, kdo má co udělat. Žádný ohňostroj. Jen méně ticketů.
+
+## BM.3 U každé změny označ typ dopadu
+
+Zákazník se při čtení changelogu ptá hlavně: „Týká se mě to?“ Pomoz mu. Každou větší položku označ jedním nebo dvěma štítky.
+
+Praktické štítky:
+
+- **Novinka**: přidává možnost, kterou lze začít používat.
+- **Změna chování**: něco funguje jinak než dřív.
+- **Akce nutná**: zákazník musí něco zkontrolovat, zapnout nebo migrovat.
+- **API**: změna se týká integrací, webhooků, tokenů nebo exportů.
+- **Bezpečnost**: zlepšení ochrany účtu, oprávnění nebo provozu.
+- **Oprava**: řeší konkrétní chybu bez větší změny workflow.
+- **Deprecace**: funkce se omezuje nebo bude vypnutá.
+
+Příklad:
+
+> **Akce nutná / API**: Od 1. října 2026 bude endpoint `/v1/reports/export` vyžadovat scope `reports:export`. Stávající tokeny bez tohoto scope budou fungovat do 30. listopadu 2026. Nový token vytvoříte v Nastavení → API klíče.
+
+Tohle je typ oznámení, které šetří vztahy. Datum, dopad, náhradní cesta, konkrétní místo v produktu. Když musí zákazník lovit důležitou změnu z poetického blogpostu, není to storytelling. Je to UX s lopatou.
+
+## BM.4 Bezpečnostní změny komunikuj opatrně, ale ne mlžením
+
+Bezpečnostní oprava potřebuje jiný tón než nová barva tlačítka. Neznamená to mlčet. Znamená to oddělit užitečné informace pro zákazníka od detailů, které zbytečně zvyšují riziko.
+
+Veřejně můžeš říct:
+
+- jaký typ oblasti se zlepšil: přihlašování, session, oprávnění, audit log,
+- jestli musí zákazník něco udělat: odhlásit relace, otočit tokeny, zapnout MFA,
+- zda se změna týká všech účtů nebo jen vybraných rolí,
+- kde najde bezpečnostní doporučení.
+
+Veřejně typicky nepiš:
+
+- přesný exploit postup,
+- interní názvy služeb, tabulek a síťových cest,
+- podrobnosti o zákaznickém dopadu před dokončením triage,
+- jména zákazníků nebo ukázky reálných dat,
+- informace, které usnadní zneužití starší verze.
+
+Příklad bezpečnější formulace:
+
+> „Zpřísnili jsme kontrolu oprávnění u exportů. Administrátorům doporučujeme projít role uživatelů, kteří pracují s účetními exporty. Změna nevyžaduje reset hesel.“
+
+To je mnohem lepší než „opravili jsme chybu, kdy role X přes endpoint Y obešla kontrolu Z“. Detailní technický popis může jít do neveřejného advisory pro dotčené zákazníky nebo do bezpečnostní dokumentace, pokud je to vhodné.
+
+## BM.5 Distribuce: RSS, přímý odkaz a produktová nápověda
+
+Privacy-first changelog nemusí stát na marketingové automatizaci, která měří každý otevřený e-mail, každý klik a pomalu i teplotu kafe. Základní distribuční sada může být jednoduchá:
+
+- veřejná stránka `/changelog` s trvalými odkazy na položky,
+- RSS nebo Atom feed pro lidi, kteří chtějí sledovat změny bez účtu,
+- nenápadná notifikace v aplikaci pro relevantní role,
+- e-mail jen pro změny s dopadem nebo nutnou akcí,
+- odkaz z dokumentace a help centra,
+- interní shrnutí pro support a sales.
+
+U notifikací v produktu nepoužívej princip „všichni musí vidět všechno“. Účetní nepotřebuje popup o CSS úpravě dashboardu. Vývojář nepotřebuje marketingový konfety modal, že se změnila patička faktury. Role-based komunikace je slušnost i minimalizace datového šumu.
+
+## BM.6 Měř úspěch bez sledovacího divadla
+
+U release notes se dá měřit i bez invazivního trackingu. Místo individuálního sledování každého člověka si polož praktičtější otázky:
+
+- Snížil se počet support ticketů k dané změně?
+- Dokončili dotčení administrátoři nutnou migraci?
+- Klesla chybovost nového workflow?
+- Klikají uživatelé z dokumentace na správný návod agregovaně?
+- Vrací se v rozhovorech stejná námitka nebo nepochopení?
+
+U změn s nutnou akcí je důležitější stav migrace než open rate e-mailu. Pokud víš, že účet ještě používá starý API token, nepotřebuješ vědět, jestli někdo otevřel newsletter v 8:42. Potřebuješ mu férově říct: „Tahle integrace se rozbije, pokud token nevyměníte.“
+
+GDPR principy minimalizace dat a omezení uložení připomínají, že osobní data mají být přiměřená účelu a uložená jen po potřebnou dobu. Článek 5 GDPR je uvádí mezi principy zpracování: https://eur-lex.europa.eu/eli/reg/2016/679/oj
+
+## BM.7 Checklist release komunikace
+
+- Každá položka říká dopad na zákazníka, ne jen interní technický fakt.
+- Větší změny mají typ dopadu: novinka, změna chování, akce nutná, API, bezpečnost, oprava nebo deprecace.
+- U změn s nutnou akcí je uvedené datum, konkrétní krok a odkaz na návod.
+- Bezpečnostní poznámky neprozrazují exploit detaily, zákaznická data ani interní infrastrukturu.
+- Changelog má trvalé URL a ideálně RSS/Atom feed.
+- E-mail se používá hlavně pro dopadové změny, ne jako konfety kanón pro každý deploy.
+- Support a sales mají interní vysvětlení dřív, než změnu uvidí zákazník.
+- Měření úspěchu stojí hlavně na agregovaných signálech, dokončení migrace a poklesu nejasností.
+
+## Codyho komentář
+
+Changelog je produktový ekvivalent dobrého souseda: dá vědět, že se bude vrtat, řekne kdy, proč a jak dlouho. Špatný changelog je soused s příklepovou vrtačkou v neděli ráno a cedulkou „vylepšujeme vaše bydlení“. Technicky možná pravda. Emočně zločin.
+
+## Zdroje k příloze
+
+- EUR-Lex: GDPR, článek 5 k principům zpracování včetně minimalizace dat a omezení uložení: https://eur-lex.europa.eu/eli/reg/2016/679/oj
+
+## Shrnutí přílohy
+
+Changelog a release notes mají snižovat nejistotu. Odděl veřejný changelog, zákaznické release notes a interní release log, piš podle dopadu na práci zákazníka, označuj typ změny, bezpečnost komunikuj opatrně a distribuuj novinky přes přímé odkazy, RSS a relevantní produktové notifikace. Dobrá release komunikace není reklama na deploy. Je to součást důvěry.
+
+
 ## Pracovní log
+- 2026-08-09: Přidána příloha BM o changelogu a release notes bez marketingové mlhy: vrstvy komunikace, dopadové štítky, bezpečnostní formulace, RSS/přímé odkazy, měření bez sledování a checklist.
 - 2026-08-09: Přidána příloha BL o ukončování funkcí bez ztráty důvěry: typy změn, mapa dopadu, migrační cesta, komunikace ve vlnách, úklid dat a checklist.
 - 2026-08-09: Přidána příloha BK o demo účtu a sandboxu bez úniku produkčních dat: syntetické seed scénáře, reset, oddělení prostředí, opatrnost u anonymizace, krátkodobý zákaznický přístup a checklist.
 - 2026-08-09: Přidána příloha BJ o cookie liště bez dark patterns: inventář cookies, férový souhlas, oddělení analytiky od marketingu, odvolání souhlasu, dvoukrokové embedy, živá cookie stránka a checklist.
