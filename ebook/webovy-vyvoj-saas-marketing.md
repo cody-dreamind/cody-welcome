@@ -10456,7 +10456,128 @@ Doména je malý řádek v registru, který drží velkou část firmy za límec
 Doménová a DNS hygiena chrání web, e-mail, SaaS aplikaci i důvěru zákazníků. Měj jasného vlastníka domény, zamčené převody, ověřený DNSSEC, dokumentované kritické záznamy, plánované DNS změny a pravidelný úklid subdomén. Není to sexy práce. Což je přesně důvod, proč ji dobré týmy dělají dřív, než začne hořet.
 
 
+# Příloha BP: Datová klasifikace bez korporátních nálepek a bezpečnostního folklóru
+
+Datová klasifikace zní jako věc, kterou vymyslel někdo, kdo miluje tabulky, schvalovací kolečka a šanony s názvem „směrnice“. Ve skutečnosti je to jednoduchý produktový nástroj: pomáhá týmu poznat, s jakými daty právě pracuje, co s nimi smí dělat a kdy má raději zabrzdit.
+
+Privacy-first SaaS nepotřebuje deset úrovní tajnosti a barevné certifikáty na každou složku. Potřebuje, aby vývojář, support, marketing i zakladatel rychle poznali rozdíl mezi veřejným textem z webu, interní poznámkou, zákaznickým exportem, fakturačním údajem a citlivým bezpečnostním incidentem. Když ten rozdíl není jasný, data cestují do promptů, screenshotů, ticketů, tabulek a externích nástrojů jako turisté bez mapy. A většinou bez cestovního pojištění.
+
+Evropská komise u GDPR principů připomíná minimalizaci dat, omezení uložení, účelové omezení a integritu a důvěrnost zpracování: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en?prefLang=en EDPB k ochraně osobních údajů již od návrhu a ve výchozím nastavení popisuje, že ochrana dat má být zabudovaná do prostředků i samotného zpracování, ne přilepená až po spuštění: https://www.edpb.europa.eu/documents/guideline/guidelines-42019-on-article-25-data-protection-by-design-and-by-default_en
+
+## BP.1 Začni čtyřmi třídami, ne bezpečnostní diplomacií
+
+Malý tým často nepotřebuje dokonalou klasifikační normu. Potřebuje společný jazyk. Doporučené minimum:
+
+| Třída | Co sem patří | Praktické pravidlo |
+| --- | --- | --- |
+| Veřejné | Web, veřejná dokumentace, blog, changelog | Může ven, ale pořád musí být správné |
+| Interní | Roadmapa, interní poznámky, provozní postupy | Sdílet jen v týmu nebo s ověřenými partnery |
+| Důvěrné | Zákaznické konfigurace, obchodní komunikace, fakturační kontext | Neposílat do nástrojů bez schváleného účelu a smluvního vztahu |
+| Citlivé | Přístupové údaje, bezpečnostní incidenty, speciální kategorie osobních údajů, produkční exporty | Minimalizovat, šifrovat, časově omezit, auditovat přístup |
+
+Tahle tabulka má být na očích. V interní wiki, v onboarding checklistu, v šabloně ticketu a u AI pravidel. Ne jako dekorace. Jako brzda před tím, než někdo vloží produkční CSV do náhodného online převodníku, protože „jen potřeboval rychle udělat sloupeček“.
+
+## BP.2 Klasifikuj podle dopadu, ne podle toho, jak moc se data tváří technicky
+
+Největší chyba je označovat data podle formátu. JSON není automaticky citlivý. PDF není automaticky nudné. Screenshot může být horší než databázový export, když ukazuje jména zákazníků, tokeny, interní poznámky a URL s parametry.
+
+Při klasifikaci se ptej:
+
+- Komu by únik ublížil: zákazníkovi, firmě, partnerovi, uživateli, nebo reputaci produktu?
+- Dá se osoba nebo firma podle dat přímo nebo nepřímo identifikovat?
+- Obsahují data přístup, tajemství, token, klíč, webhook URL nebo interní infrastrukturu?
+- Jsou data potřebná pro konkrétní úkol, nebo jen pohodlná?
+- Jak dlouho je opravdu potřebujeme držet?
+- Lze použít syntetická, anonymní nebo agregovaná data?
+
+Příklad: tabulka „počet aktivací podle týdne“ může být interní metrika. Stejná tabulka doplněná o e-maily, IP adresy a poznámky supportu je důvěrný nebo citlivý materiál. Rozdíl není ve formátu. Rozdíl je v dopadu.
+
+## BP.3 Udělej pravidla pro pět nejčastějších míst úniku
+
+Klasifikace nefunguje, pokud končí v dokumentu. Musí se propsat do míst, kde tým reálně pracuje.
+
+Nejčastější místa:
+
+1. **Tickety a issue trackery** — zákaznická data vkládej jen v minimálním rozsahu; dlouhé logy anonymizuj nebo odkazuj na interní bezpečné úložiště.
+2. **Screenshoty a nahrávky obrazovky** — před sdílením zakryj e-maily, tokeny, objednávky, osobní poznámky a neveřejné názvy zákazníků.
+3. **AI prompty** — vkládej problém, strukturu a syntetický příklad, ne produkční data; pokud potřebuješ reálný kontext, použij schválený režim a zdokumentuj účel.
+4. **Sdílené tabulky** — nastav vlastníka, retenční datum a přístup jen pro lidi, kteří tabulku potřebují.
+5. **Logy a exporty** — drž je mimo chatovací nástroje; používej krátkou retenci, omezený přístup a jasný postup mazání.
+
+Codyho komentář: nejnebezpečnější věta v týmu je „pošlu ti to rychle do chatu“. Chat je skvělý na domluvu. Je mizerný archiv citlivých dat převlečený za pohodlí.
+
+## BP.4 Pseudonymizace není kouzelný plášť neviditelnosti
+
+ENISA ve své práci k pseudonymizaci opakovaně zdůrazňuje, že neexistuje jedna univerzální technika vhodná pro všechny situace a že volba závisí na kontextu, riziku a potřebné užitečnosti dat: https://www.enisa.europa.eu/publications/pseudonymisation-techniques-and-best-practices a https://www.enisa.europa.eu/publications/data-pseudonymisation-advanced-techniques-and-use-cases
+
+Pro malý SaaS z toho plyne praktické pravidlo: pseudonymizace může snížit riziko, ale nesmí sloužit jako výmluva pro nekonečné kopírování dat. Pokud máš dataset s nahrazenými e-maily, ale zachovanými unikátními kombinacemi firmy, regionu, času, poznámek a chování, pořád může být znovu identifikovatelný.
+
+Bezpečnější postup pro vývoj a analýzu:
+
+- Pro vývoj používej syntetická seed data.
+- Pro produktové trendy používej agregace, ne řádky po uživatelích.
+- Pro debug používej krátkodobý, schválený a auditovaný přístup k minimálnímu výřezu dat.
+- Pro AI asistenta připrav modelové příklady, ne kopie zákaznických tiketů.
+- Pro sdílení s dodavatelem používej datový výřez s jasným účelem, časem a smluvním pokrytím.
+
+## BP.5 Ke každé třídě napiš povolené a zakázané akce
+
+Tým nepotřebuje znát právní teorii pokaždé, když řeší bug. Potřebuje rozhodovací tabulku.
+
+| Akce | Veřejné | Interní | Důvěrné | Citlivé |
+| --- | --- | --- | --- | --- |
+| Poslat v týmovém chatu | Ano | Ano, v interním prostoru | Jen výjimečně a minimalizovaně | Ne |
+| Vložit do AI nástroje | Ano | Jen podle pravidel firmy | Ne bez schváleného režimu | Ne |
+| Sdílet s dodavatelem | Ano | Pokud potřebuje kontext | Jen se smlouvou a účelem | Jen po schválení a minimálně |
+| Uložit do ticketu | Ano | Ano | Jen nezbytný výřez | Odkaz na bezpečné úložiště, ne kopie |
+| Držet bez data revize | Ano | Ne ideálně navždy | Ne | Rozhodně ne |
+
+Tahle tabulka má být jednoduchá a trochu nudná. To je pochvala. Bezpečnostní pravidlo, které člověk pochopí za deset sekund, má větší šanci přežít pondělní provoz než perfektní politika, kterou nikdo nečte.
+
+## BP.6 Přidej klasifikaci do běžných šablon
+
+Nečekej, že si lidé vzpomenou na klasifikaci ve stresu. Přidej ji do šablon:
+
+- bug report: „Obsahuje ukázka produkční nebo osobní data? Ano/ne. Pokud ano, kde jsou bezpečně uložená?“
+- support ticket: „Jaká data zákazníka jsou nutná pro vyřešení?“
+- produktový experiment: „Jakou nejmenší metriku potřebujeme?“
+- export dat: „Účel, vlastník, příjemce, datum smazání.“
+- AI prompt: „Použil jsem syntetická/anonymizovaná/reálná data? Proč?“
+- dodavatelský úkol: „Jakou třídu dat dodavatel uvidí?“
+
+Klasifikace tím přestane být školení jednou za rok a stane se malým rozhodnutím ve workflow. Přesně tam má být.
+
+## BP.7 Checklist datové klasifikace pro malý SaaS
+
+- Máme čtyři srozumitelné třídy dat: veřejné, interní, důvěrné a citlivé.
+- Každá třída má příklady z našeho produktu, ne obecné právní fráze.
+- Pravidla říkají, co se smí poslat do chatu, AI nástroje, ticketu, tabulky a dodavateli.
+- Produkční exporty mají vlastníka, účel, místo uložení a datum smazání.
+- Screenshoty a nahrávky se před sdílením kontrolují na osobní data, tokeny a neveřejné informace.
+- Vývoj a demo používají syntetická data, ne kopie produkce.
+- Pseudonymizovaná data bereme jako snížení rizika, ne jako anonymitu automaticky.
+- AI prompty mají zvláštní pravidlo pro zákaznická a citlivá data.
+- Nový nástroj nebo dodavatel dostane jen data, která opravdu potřebuje.
+- Klasifikace je součástí onboardingu, šablon a měsíční provozní revize.
+
+## Codyho komentář
+
+Datová klasifikace není o tom, aby tým pracoval pomaleji. Je o tom, aby nemusel pokaždé vymýšlet bezpečnost od nuly. Dobrá pravidla jsou jako zábradlí na schodech: většinu času si jich nevšímáš, ale když uklouzneš, najednou vypadají jako nejlepší vynález civilizace.
+
+## Zdroje k příloze
+
+- Evropská komise: principy GDPR včetně minimalizace dat, omezení uložení, účelového omezení a integrity a důvěrnosti: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en?prefLang=en
+- EDPB: Guidelines 4/2019 k ochraně osobních údajů již od návrhu a ve výchozím nastavení podle článku 25 GDPR: https://www.edpb.europa.eu/documents/guideline/guidelines-42019-on-article-25-data-protection-by-design-and-by-default_en
+- ENISA: Pseudonymisation techniques and best practices: https://www.enisa.europa.eu/publications/pseudonymisation-techniques-and-best-practices
+- ENISA: Data Pseudonymisation — Advanced Techniques and Use Cases: https://www.enisa.europa.eu/publications/data-pseudonymisation-advanced-techniques-and-use-cases
+
+## Shrnutí přílohy
+
+Datová klasifikace dává malému SaaS týmu společný jazyk pro práci s informacemi. Stačí čtyři třídy, jasná pravidla pro chaty, tickety, AI nástroje, exporty a dodavatele, syntetická data pro vývoj a jednoduché šablony, které nutí přemýšlet o účelu a dopadu. Nejde o nálepky. Jde o to, aby se data nepohybovala firmou jako konfety po večírku.
+
+
 ## Pracovní log
+- 2026-08-09: Přidána příloha BP o datové klasifikaci pro malý SaaS: čtyři třídy dat, pravidla pro chaty, tickety, AI prompty, exporty a dodavatele, pseudonymizace, šablony a checklist.
 - 2026-08-09: Přidána příloha BO o doménové a DNS hygieně: vlastnictví domén, transfer lock, DNSSEC, bezpečný postup DNS změn, úklid subdomén, dokumentace kritických záznamů a checklist.
 - 2026-08-09: Přidána příloha BN o bezpečnostním kontaktu a CVD: `security.txt`, CVD politika, scope testování, ochrana dat v hlášeních, interní triage, komunikace s nálezcem a checklist.
 - 2026-08-09: Přidána příloha BM o changelogu a release notes bez marketingové mlhy: vrstvy komunikace, dopadové štítky, bezpečnostní formulace, RSS/přímé odkazy, měření bez sledování a checklist.
