@@ -9268,7 +9268,175 @@ Codyho komentář: nejlepší consent banner je ten, který nemusíš zobrazit, 
 Referral a partnerský marketing nemusí stát na sledovacích cookies, fingerprintingu ani tajném profilování. Stačí jasně definovat odměňovanou událost, preferovat kódy a serverové přiřazení, držet krátké atribuční okno, oddělit referral data od produktové analytiky a napsat pravidla programu lidsky. Privacy-first referral není méně měřitelný. Je jen méně slizký, což je v marketingu osvěžující změna.
 
 
+# Příloha BH: Interní přístupy k produkci bez superadmin kultu
+
+Produkční přístup je jako klíče od dílny, skladu i pokladny najednou. V malém SaaS týmu se často rozdá rychle: „Ať to můžeš opravit.“ Pak se po půl roce zjistí, že produkční databázi vidí skoro každý, staré účty pořád fungují, logy obsahují osobní údaje a administrátorský účet má heslo uložené v prohlížeči člověka, který už pracuje na jiné planetě. Tedy aspoň organizačně.
+
+Privacy-first provoz neznamená, že nikdo nesmí nic opravit. Znamená to, že přístup k produkci je vědomá výjimka, má vlastníka, má časový limit, zanechá stopu a jde vypnout bez detektivní práce. Cílem není vytvořit bezpečnostní divadlo, kde všichni klikají na žádanky a stejně sdílí jeden účet. Cílem je, aby tým dokázal rychle pomáhat zákazníkům, aniž by z produkčních dat udělal společnou kancelářskou nástěnku.
+
+## BH.1 Rozděl přístupy podle práce, ne podle důvěry
+
+Nejhorší role v systému je „admin, protože mu věříme“. Důvěra je dobrá věc pro spolupráci, ale špatný přístupový model. Přístup má vycházet z práce, kterou člověk opravdu potřebuje udělat: support řeší konkrétní ticket, vývojář debugguje incident, finance kontrolují fakturaci, zakladatel schvaluje změnu plánu. Každá z těchto situací potřebuje jiný rozsah dat.
+
+Praktické role:
+
+- **Support reader:** vidí základní stav účtu, historii ticketů a technické signály, ale nevidí citlivý obsah zákaznických dat.
+- **Billing operator:** vidí fakturační údaje, platby a daňové doklady, ale nepotřebuje produktový obsah.
+- **Incident engineer:** dostane dočasný technický přístup k logům, metrikám nebo konzoli pro konkrétní incident.
+- **Data export operator:** může spustit export nebo smazání podle procesu, ale nemůže si libovolně procházet účty.
+- **Owner approver:** schvaluje výjimky a pravidelně kontroluje, kdo má jaký přístup.
+
+Příklad zásady do interní dokumentace:
+
+> „Produkční přístup přidělujeme podle konkrétní práce, ne podle seniority. Pokud člověk potřebuje data jen jednorázově, dostane časově omezený přístup nebo bezpečný výstup, ne trvalou roli.“
+
+Tohle není nedůvěra k týmu. To je úcta k zákazníkům. A taky k budoucímu já, které nebude v neděli večer hádat, proč má bývalý externista pořád přístup do adminu.
+
+## BH.2 Používej just-in-time přístup místo trvalého pohodlí
+
+Trvalý produkční přístup je pohodlný přesně do chvíle, než se stane problémem. Privacy-first varianta je just-in-time přístup: člověk požádá o přístup pro konkrétní důvod, někdo ho schválí nebo systém ověří pravidlo, přístup se automaticky vypne a akce zůstanou v auditu.
+
+Jednoduchý model pro malý tým:
+
+| Situace | Přístup | Limit | Schválení |
+| --- | --- | --- | --- |
+| Běžný support dotaz | náhled na metadata účtu | bez obsahu zákaznických dat | role supportu |
+| Incident P1 | logy a infrastruktura | 4 hodiny | incident lead |
+| Debug konkrétního účtu | omezený impersonation nebo snapshot | 1 hodina | vlastník zákazníka nebo technický lead |
+| Export/smazání dat | operace přes admin workflow | jednorázově | ticket + druhý pár očí |
+| Finanční kontrola | fakturace a platby | podle účetní role | finance owner |
+
+Když ještě nemáš nástroj na dočasné role, začni procesem: žádost v ticketu, ruční přidělení, připomínka na odebrání a měsíční audit. Není to dokonalé, ale je to lepší než „všichni máme admin, protože startup“.
+
+## BH.3 Support access navrhni jako produktovou funkci
+
+Pokud support potřebuje pomáhat zákazníkům, dej mu bezpečný nástroj. Bezpečný support access je lepší než tajné dotazy do databáze. Ideální flow v adminu:
+
+1. Support otevře zákaznický účet přes ticket.
+2. Systém zobrazí jen data potřebná k řešení problému.
+3. Citlivé hodnoty jsou maskované nebo dostupné jen po dalším potvrzení.
+4. Každé zobrazení se zapíše do auditního logu.
+5. Pokud support potřebuje impersonation, zákazník o tom ví nebo je to omezené na bezpečný režim bez destruktivních akcí.
+6. Po uzavření ticketu se přístup uzamkne.
+
+Mikrotext pro interní admin:
+
+> „Otevíráš produkční účet zákazníka. Použij jen data nutná k vyřešení ticketu. Akce bude zapsána do auditního logu.“
+
+Mikrotext pro zákaznické podmínky nebo trust stránku:
+
+> „Přístup podpory k zákaznickému účtu používáme pouze pro řešení konkrétních požadavků nebo incidentů. Přístupy jsou omezené, auditované a pravidelně kontrolované.“
+
+Důležité: support access není volná jízdenka. Pokud tým často potřebuje koukat do zákaznického obsahu, produkt nejspíš nemá dost dobré diagnostické signály, chybové hlášky nebo samoobslužné nástroje.
+
+## BH.4 Audit log má odpovídat na otázky, ne sbírat romány
+
+Audit log není místo, kam hodíš všechno, co se dá zapsat, a pak doufáš, že z toho jednou bezpečnostní archeolog vykope pravdu. Dobrý audit log odpovídá na pár praktických otázek: kdo, kdy, co, proč, na jakém účtu a s jakým výsledkem.
+
+Minimální položky:
+
+- **actor_id:** interní uživatel nebo servisní účet, který akci provedl.
+- **action:** typ akce, například `support_account_viewed`, `billing_email_changed`, `data_export_started`.
+- **target:** účet, organizace nebo zdroj, kterého se akce týkala.
+- **reason:** ticket, incident ID nebo krátká povinná poznámka.
+- **timestamp:** přesný čas akce.
+- **result:** úspěch, zamítnutí, chyba nebo automatické vypršení.
+- **request_context:** bezpečné technické metadata, ne plný obsah požadavku.
+
+Co do audit logu nepatří:
+
+- celé zákaznické dokumenty,
+- hesla, tokeny, API klíče,
+- plné texty zpráv, pokud stačí ID ticketu,
+- citlivé payloady webhooků,
+- debug dumpy „pro jistotu“.
+
+Audit log musí být chráněný před úpravou běžnými administrátory. Jinak je to deníček, ne důkazní stopa.
+
+## BH.5 Servisní účty a API klíče nejsou společný batoh
+
+Lidé nejsou jediný problém. Produkční přístup často protéká přes servisní účty, API klíče, CI/CD tokeny a integrační tajemství. Když má jeden token práva na všechno a žije tři roky, není to automatizace. Je to spící drak s názvem `PROD_SUPER_TOKEN_DO_NOT_DELETE`.
+
+Praktická pravidla:
+
+- Každý servisní účet má vlastníka a popis účelu.
+- Token má minimální scope, ne univerzální oprávnění.
+- Tajemství nejsou v repozitáři, ticketu ani chatu.
+- Rotace má plán a je testovaná, ne improvizovaná při incidentu.
+- Nepoužívané klíče se pravidelně ruší.
+- CI/CD má oddělené přístupy pro staging a produkci.
+
+Checklist pro každý nový token:
+
+- K čemu přesně slouží?
+- Kdo je vlastník?
+- Jaká data nebo akce umožňuje?
+- Kde je uložený?
+- Kdy expiruje nebo kdy se bude rotovat?
+- Jak poznáme, že ho někdo použil nečekaně?
+
+Pokud na některou otázku neumíš odpovědět, token ještě nevytvářej. Ano, bolí to. Méně než pozdější vysvětlování incidentu.
+
+## BH.6 Revizi přístupů dělej jako provozní hygienu
+
+Access review nemá být roční festival tabulek, které nikdo nechce otevřít. U malého SaaS stačí pravidelný krátký rituál: jednou měsíčně projít produkční role, servisní účty, externisty, výjimky a účty lidí, kteří změnili práci. Výsledek musí být změna v systému, ne jen poznámka „vypadá OK“.
+
+Měsíční otázky:
+
+- Kdo má trvalý produkční přístup a proč?
+- Které dočasné přístupy nevypršely?
+- Kteří lidé změnili roli, odešli nebo už přístup nepotřebují?
+- Které servisní účty nemají jasného vlastníka?
+- Které API klíče nebyly dlouho použité?
+- Které audit logy ukazují neobvyklé vzory?
+- Kde support opakovaně potřebuje víc dat, než by měl?
+
+Výstup review může být malý:
+
+```text
+Access review 2026-08
+Odebráno: 2 bývalé účty, 1 nepoužívaný API klíč
+Změněno: support role už nevidí fakturační adresu bez ticketu
+Riziko: ruční exporty dat nemají druhý pár očí
+Další krok: přidat schválení exportu do admin workflow
+Owner: Petra
+Termín: 2026-08-20
+```
+
+Tohle je nudný provoz. Nudný provoz je dobrý provoz. Drama necháme seriálům.
+
+## BH.7 Checklist interních přístupů bez superadmin kultu
+
+Před tím, než někomu dáš nebo necháš produkční přístup, projdi:
+
+- Je přístup navázaný na konkrétní práci, ticket, incident nebo roli?
+- Existuje menší rozsah oprávnění, který stačí?
+- Má přístup vlastníka a časový limit?
+- Je akce auditovaná tak, aby šlo zjistit kdo, co, kdy a proč?
+- Nezobrazuje support citlivý obsah, pokud stačí metadata nebo diagnostika?
+- Jsou servisní účty oddělené podle účelu a prostředí?
+- Jsou API klíče uložené v bezpečném secret manageru, ne v repozitáři nebo chatu?
+- Má tým postup pro okamžité odebrání přístupu při odchodu člověka nebo incidentu?
+- Proběhlo v posledním měsíci access review?
+- Má zákazník srozumitelně vysvětlené, kdy a proč může podpora přistupovat k jeho účtu?
+
+## Codyho komentář
+
+Můj pohled: malý tým nepotřebuje korporátní přístupovou byrokracii, ale rozhodně potřebuje brzdy. Nejlepší bezpečnostní pravidlo je takové, které se dá použít v pátek v 16:47 při incidentu a zároveň z něj v pondělí ráno pochopíš, co se stalo. Pokud pravidlo funguje jen v prezentaci, je to dekorace. Hezká, ale pořád dekorace.
+
+## Zdroje k příloze
+
+- GDPR, článek 32 o zabezpečení zpracování: https://eur-lex.europa.eu/eli/reg/2016/679/oj
+- EDPB, Guidelines 4/2019 on Article 25 Data Protection by Design and by Default: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-42019-article-25-data-protection-design-and_en
+- ENISA, Cloud Security Guide for SMEs: https://www.enisa.europa.eu/publications/cloud-security-guide-for-smes
+- ENISA, Privacy and data protection by design: https://www.enisa.europa.eu/publications/privacy-and-data-protection-by-design
+
+## Shrnutí přílohy
+
+Interní produkční přístup má být role s účelem, limitem a stopou, ne klubová kartička pro důvěryhodné lidi. Privacy-first tým rozděluje oprávnění podle práce, používá dočasné přístupy, navrhuje support access jako bezpečnou produktovou funkci, drží stručné audit logy, hlídá servisní účty a pravidelně uklízí přístupy. Superadmin kultura je rychlá. A přesně proto je nebezpečná.
+
 ## Pracovní log
+- 2026-08-09: Přidána příloha BH o interních přístupech k produkci bez superadmin kultu: role podle práce, just-in-time přístup, support access, audit logy, servisní účty, měsíční access review a checklist.
 - 2026-08-09: Přidána příloha BG o referral a partnerském marketingu bez sledovacího pekla: definice odměny, kódy a serverové přiřazení, krátké atribuční okno, oddělení dat, lidské podmínky, souhlas a checklist.
 - 2026-08-09: Přidána příloha BF o platbách a fakturaci bez datového kombajnu: checkout, datové minimum, platební brána jako subdodavatel, oddělení fakturačních a produktových dat, DPH/OSS, selhané platby a checklist.
 - 2026-08-09: Přidána příloha BE o e-mailové doručitelnosti bez špehovacích pixelů: oddělení typů zpráv, SPF/DKIM/DMARC, střídmé měření, bounce a complaint proces, transakční šablony, vendor dotazník a checklist.
