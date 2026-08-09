@@ -10311,7 +10311,153 @@ Bezpečnostní kontakt je jako zvonek u dveří. Když není, slušný člověk 
 Bezpečnostní kontakt a CVD politika zkracují cestu od nálezu k opravě. Zveřejni `security.txt`, napiš jasný scope, chraň zákaznická data, připrav triage proces, komunikuj s nálezcem věcně a rozhoduj o zveřejnění podle dopadu, ne podle paniky. Dobrý proces nepřidává byrokracii. Ubírá chaos.
 
 
+# Příloha BO: Doménová a DNS hygiena bez jediného záznamu, který drží firmu jako rukojmí
+
+Doména je nudná přesně do chvíle, kdy přestane být nudná. Pak najednou nejde web, e-mail padá do propasti, zákazníci vidí cizí stránku, faktury neodcházejí a někdo v týmu hledá přístup k registrátorovi v heslech bývalého kolegy. Elegantní katastrofa, jen bez elegance.
+
+Privacy-first SaaS může mít krásné formuláře, evropský hosting a minimalistickou analytiku, ale pokud nemá pod kontrolou doménu a DNS, stojí celý provoz na vratké židli. Doména není jen marketingová adresa. Je to kořen důvěry pro web, e-mail, API, přihlášení, zákaznické odkazy i bezpečnostní komunikaci.
+
+## BO.1 Doména musí mít jasného vlastníka, ne historickou náhodu
+
+První audit domény není technický. Je organizační. Zjisti, kdo je držitel domény, kdo má přístup k registrátorovi, kdo platí prodloužení, kdo dostává notifikace a kdo smí měnit DNS. Pokud odpověď zní „asi agentura“ nebo „to kdysi zakládal Petr“, máš riziko, ne správu.
+
+Praktické minimum:
+
+- Držitel domény má být firma nebo odpovědná právnická osoba, ne osobní účet náhodného zakladatele.
+- Fakturační kontakt má být schránka, kterou někdo opravdu čte.
+- Technický kontakt má mít přístup k DNS, ale ne nutně k fakturaci a vlastnictví.
+- Přístupy k registrátorovi mají být v týmovém password manageru s MFA, ne v prohlížeči jednoho člověka.
+- Prodloužení domény má mít kalendářovou kontrolu minimálně 60 a 14 dní před expirací.
+
+Příklad malého registru domén:
+
+| Doména | Účel | Registrátor | Vlastník | DNS správce | Expirace | Kritičnost |
+| --- | --- | --- | --- | --- | --- | --- |
+| `example.cz` | Hlavní web a e-mail | EU registrátor | Firma | Interní tým | 2027-05-12 | Kritická |
+| `example.app` | SaaS aplikace | EU registrátor | Firma | DevOps | 2027-09-03 | Kritická |
+| `example.eu` | Ochranná doména | EU registrátor | Firma | Interní tým | 2027-02-18 | Střední |
+
+Tahle tabulka není byrokracie. Je to seznam věcí, které nesmí zmizet jen proto, že někdo změnil kartu, odešel z firmy nebo si „uklidil“ e-mail.
+
+## BO.2 Zamkni doménu proti nechtěným převodům a změnám
+
+ICANN vysvětluje, že zámek domény, často označovaný jako `Registrar lock` nebo `Client Transfer Prohibited`, může chránit doménové jméno před neautorizovanými změnami: https://www.icann.org/resources/pages/locked-2013-05-03-en
+
+Pro malý SaaS to znamená jednoduché pravidlo: kritická doména nemá být odemčená „pro jistotu“. Odemknutí má být vědomá operace s důvodem, časem a člověkem, který ví, co dělá.
+
+Checklist zámku:
+
+- Zapni transfer lock u hlavních domén.
+- Ověř, jestli registrátor nabízí další úroveň ochrany proti změně držitele nebo nameserverů.
+- Ulož postup odemčení do interní dokumentace, aby migrace nebyla improvizace ve dvě ráno.
+- Po převodu nebo změně registrátora zámek znovu zkontroluj.
+- Notifikace o převodu posílej na skupinovou bezpečnostní nebo provozní schránku.
+
+Codyho komentář: doménový zámek není paranoia. Je to bezpečnostní pás. Většinu dní o něm nevíš. V jeden špatný den jsi rád, že existuje.
+
+## BO.3 DNSSEC ber jako integritu cesty, ne jako ozdobný štítek
+
+CZ.NIC popisuje DNSSEC jako rozšíření DNS, které zvyšuje bezpečnost tím, že pomáhá ověřit správný zdroj, úplnost a integritu DNS informací: https://www.nic.cz/page/513/about-dnssec/ IETF v RFC 9364 označuje DNSSEC pro autentizaci původu DNS dat jako Best Current Practice: https://www.rfc-editor.org/rfc/rfc9364.html
+
+U českých `.cz` domén je dobré ověřit, zda registrátor DNSSEC podporuje a ideálně ho umí nastavit automaticky. CZ.NIC uvádí, že nejjednodušší cestou je registrace u registrátora, který DNSSEC nabízí automaticky, případně kontaktování registrátora nebo hostingu kvůli zavedení: https://www.nic.cz/dnssec/ a https://www.nic.cz/page/565/jak-zprovoznit-dnssec/
+
+Praktický postup:
+
+1. Ověř, jestli je hlavní doména DNSSEC podepsaná.
+2. Zjisti, kdo spravuje DNSSEC klíče: registrátor, DNS poskytovatel, nebo interní tým.
+3. Při změně nameserverů připrav DNSSEC přechod předem, ne až po výpadku.
+4. Po migraci ověř validaci domény z více resolverů.
+5. Zapiš do dokumentace, kdo řeší rotaci klíčů a incident typu „doména validuje špatně“.
+
+DNSSEC neřeší všechno. Nezachrání špatné heslo k registrátorovi, rozbitý deployment ani omylem smazaný `MX` záznam. Řeší ale důležitou část důvěry: aby DNS odpověď nebyla podvržená po cestě.
+
+## BO.4 DNS změny dělej jako release, ne jako klikací ruletu
+
+DNS je infrastruktura, která má nepříjemnou vlastnost: chyba se často projeví později, různě po světě a podle cache. Proto změna DNS nemá být „rychle kliknu a uvidíme“. Má mít plán.
+
+Před změnou si napiš:
+
+- jaký záznam měním,
+- proč ho měním,
+- jaký je původní stav,
+- jaký má být nový stav,
+- jaké služby změna ovlivní,
+- jak ověřím výsledek,
+- jak se vrátím zpět.
+
+Příklad bezpečné změny pro přesun webu:
+
+1. Den předem sniž TTL u dotčených záznamů na rozumně krátkou hodnotu.
+2. Připrav nový hosting a otestuj ho přes dočasnou adresu nebo lokální hosts override.
+3. Zapiš původní DNS stav do ticketu nebo changelogu.
+4. Proveď změnu v méně rizikovém čase.
+5. Ověř web, TLS certifikát, přesměrování, formuláře, e-mailové odkazy a API callbacky.
+6. Po stabilizaci vrať TTL na běžnou hodnotu.
+
+Nejhorší DNS změna je ta, která nemá návrat. Druhá nejhorší je ta, kterou nikdo neumí vysvětlit, protože „to asi přidal nějaký plugin“.
+
+## BO.5 Subdomény uklízej dřív, než se stanou pozvánkou k průšvihu
+
+Staré subdomény jsou digitální půdy. Leží tam testovací aplikace, zapomenuté CNAME na zrušené služby, staging bez hesla, starý blog, krátkodobá kampaň a jednou za čas i překvapení velikosti menšího právního oddělení.
+
+Měsíční subdoménová hygiena:
+
+- Vypiš aktivní záznamy pro hlavní domény.
+- Označ vlastníka každé subdomény.
+- Odstraň záznamy na služby, které už nepoužíváš.
+- Zkontroluj, jestli staging a preview prostředí nejsou indexovaná nebo veřejně přístupná bez důvodu.
+- Ověř, že CNAME záznamy nemíří na zrušené projekty u třetích stran.
+- U marketingových microsites nastav datum konce už při spuštění kampaně.
+
+Privacy-first pohled: zapomenutá subdoména může pořád obsahovat formulář, starý tracker, starý export nebo logiku, která už neodpovídá aktuálním pravidlům zpracování dat. Úklid DNS je proto i úklid datových slibů.
+
+## BO.6 Kritické záznamy měj popsané lidsky
+
+DNS záznamy bývají pro netechnický tým kryptická poezie. `A`, `AAAA`, `CNAME`, `MX`, `TXT`, `CAA`, `DKIM`, `DMARC`, `SPF`. Krásný slovník, když chceš vypadat chytře na poradě. Horší, když potřebuješ rychle zjistit, co se rozbije po smazání jednoho řádku.
+
+U kritických záznamů drž jednoduchý popis:
+
+| Záznam | Účel | Vlastník | Poznámka |
+| --- | --- | --- | --- |
+| `@ A/AAAA` | Hlavní web | Web tým | Změna ovlivní landing page |
+| `app CNAME` | SaaS aplikace | Produkt/DevOps | Kritická cesta zákazníků |
+| `MX` | Příjem e-mailu | Provoz | Nemazat bez e-mail migrace |
+| `TXT SPF/DKIM/DMARC` | Doručitelnost a ověření e-mailu | Provoz/marketing | Navazuje na transakční i obchodní poštu |
+| `CAA` | Omezení certifikačních autorit | DevOps | Ověřit před změnou TLS dodavatele |
+
+Smyslem není psát román ke každému TXT záznamu. Smyslem je, aby člověk v incidentu poznal rozdíl mezi „tohle je stará kampaň“ a „tohle drží produkční přihlášení“.
+
+## BO.7 Checklist doménové a DNS hygieny
+
+- Hlavní domény mají správného firemního držitele a skupinové kontakty.
+- Registrátor má zapnuté MFA a přístupy jsou v týmovém password manageru.
+- Kritické domény mají zapnutý transfer lock nebo obdobnou ochranu.
+- Expirace domén se hlídá mimo samotný registrátorský e-mail.
+- DNSSEC je ověřený nebo existuje rozhodnutí, proč zatím není nasazený.
+- Kritické DNS záznamy mají popsaný účel a vlastníka.
+- DNS změny mají plán, původní stav, ověření a rollback.
+- Staré subdomény a CNAME záznamy se kontrolují alespoň měsíčně.
+- Staging a preview prostředí nejsou veřejná bez jasného důvodu.
+- Doménové a DNS změny se zapisují do provozního changelogu.
+
+## Codyho komentář
+
+Doména je malý řádek v registru, který drží velkou část firmy za límec. Když funguje, nikdo jí netleská. Když selže, všichni najednou vědí, že existuje. Proto je dobré chovat se k ní jako k produkční databázi důvěry, ne jako k administrativnímu detailu, který „nějak dopadne“.
+
+## Zdroje k příloze
+
+- ICANN: vysvětlení zámku domény, `Registrar lock` a `Client Transfer Prohibited`: https://www.icann.org/resources/pages/locked-2013-05-03-en
+- CZ.NIC: popis DNSSEC jako rozšíření DNS pro ověření zdroje, úplnosti a integrity DNS informací: https://www.nic.cz/page/513/about-dnssec/
+- RFC Editor: RFC 9364, DNSSEC jako Best Current Practice pro autentizaci původu DNS dat: https://www.rfc-editor.org/rfc/rfc9364.html
+- CZ.NIC: praktické informace k ověření a zavedení DNSSEC u `.cz` domény: https://www.nic.cz/dnssec/ a https://www.nic.cz/page/565/jak-zprovoznit-dnssec/
+
+## Shrnutí přílohy
+
+Doménová a DNS hygiena chrání web, e-mail, SaaS aplikaci i důvěru zákazníků. Měj jasného vlastníka domény, zamčené převody, ověřený DNSSEC, dokumentované kritické záznamy, plánované DNS změny a pravidelný úklid subdomén. Není to sexy práce. Což je přesně důvod, proč ji dobré týmy dělají dřív, než začne hořet.
+
+
 ## Pracovní log
+- 2026-08-09: Přidána příloha BO o doménové a DNS hygieně: vlastnictví domén, transfer lock, DNSSEC, bezpečný postup DNS změn, úklid subdomén, dokumentace kritických záznamů a checklist.
 - 2026-08-09: Přidána příloha BN o bezpečnostním kontaktu a CVD: `security.txt`, CVD politika, scope testování, ochrana dat v hlášeních, interní triage, komunikace s nálezcem a checklist.
 - 2026-08-09: Přidána příloha BM o changelogu a release notes bez marketingové mlhy: vrstvy komunikace, dopadové štítky, bezpečnostní formulace, RSS/přímé odkazy, měření bez sledování a checklist.
 - 2026-08-09: Přidána příloha BL o ukončování funkcí bez ztráty důvěry: typy změn, mapa dopadu, migrační cesta, komunikace ve vlnách, úklid dat a checklist.
