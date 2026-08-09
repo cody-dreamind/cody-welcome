@@ -9601,7 +9601,150 @@ Můj pohled: nejlepší žádost subjektu údajů je ta, kterou zvládneš bez p
 
 Žádosti subjektů údajů nejsou jednorázová právní krizovka, ale běžný provozní proces. Malý SaaS tým potřebuje rozlišit typ žádosti, ověřit identitu, mít mapu dat, navrhnout export jako férovou produktovou funkci, řešit výmaz po vrstvách a držet krátký playbook. Privacy-first firma neodpovídá „nějak to vyexportujeme“. Odpovídá klidně, přesně a tak, aby se z každé žádosti zlepšil produkt i provoz.
 
+# Příloha BJ: Cookie lišta bez dark patterns, nervů a zbytečných trackerů
+
+Cookie lišta není dekorace, kterou přilepíš na web večer před spuštěním. Je to rozhodovací místo, kde návštěvník pozná, jestli firma bere soukromí vážně, nebo jestli jen doufá, že unavený člověk klikne na největší barevné tlačítko a půjde dál.
+
+Privacy-first přístup začíná ještě před návrhem banneru: nejdřív se zeptej, jestli banner vůbec potřebuješ. Pokud web používá jen technicky nezbytné cookies pro fungování služby, často nepotřebuješ velké souhlasové divadlo. Pokud ale ukládáš nebo čteš marketingové, analytické nebo personalizační identifikátory, musíš řešit souhlas a transparentnost. EDPB ve svých FAQ připomíná, že ukládání cookies nebo přístup k nim je obecně možné až po informování uživatele a získání souhlasu, pokud nejde o výjimku podle pravidel ePrivacy: https://www.edpb.europa.eu/contact/frequently-asked-questions_ga
+
+## BJ.1 Nejdřív inventář, potom banner
+
+Nejhorší cookie lišta je ta, která se snaží právně obalit technický chaos. Než začneš kreslit modal, udělej inventář všeho, co stránka načítá.
+
+Minimální tabulka:
+
+| Kategorie | Příklad | Potřebuje souhlas? | Co udělat |
+| --- | --- | --- | --- |
+| Nezbytné | session cookie, CSRF token, jazyk webu | obvykle ne | vysvětlit v privacy/cookie stránce |
+| Bezpečnostní | rate limit, detekce zneužití | podle nastavení | minimalizovat a držet krátkou retenci |
+| Analytické | agregované návštěvy, eventy | často ano, záleží na řešení a národní úpravě | preferovat privacy-first měření |
+| Marketingové | remarketing, reklamní pixely | ano | bez souhlasu nespouštět |
+| Embedované třetí strany | video, mapa, sociální feed | často ano | načítat až po akci uživatele |
+
+Prakticky: projdi HTML, tag manager, analytics nastavení, vložené skripty, fonty, chat widget, platební prvky a marketingové landing pages. Pokud neumíš říct, proč konkrétní skript existuje, vypni ho dřív, než pro něj začneš vymýšlet právní pohádku.
+
+Codyho komentář: tag manager bez vlastníka je datový sklep. Občas v něm najdeš užitečný nástroj, častěji starý pixel z kampaně, kterou si nikdo nepamatuje. Strašidelně produktivní archeologie.
+
+## BJ.2 Souhlas musí být volba, ne optický trik
+
+EDPB ve shrnutí pro malé firmy uvádí, že souhlas má být svobodný, konkrétní, informovaný a jednoznačný, s možností odmítnutí i odvolání bez negativních důsledků: https://www.edpb.europa.eu/sme/be-compliant/process-personal-data-lawfully_en
+
+To v praxi znamená:
+
+- žádná předzaškrtnutá políčka,
+- žádné tlačítko „Přijmout vše“ obřím písmem a „nastavení“ jako šedá past,
+- žádné spojování marketingového souhlasu s podmínkou používání služby, pokud to není opravdu nezbytné,
+- oddělené účely: analytika, personalizace a marketing nejsou jeden kouzelný pytel,
+- možnost souhlas později jednoduše změnit nebo odvolat.
+
+EDPB Cookie Banner Taskforce ve své zprávě řešila mimo jiné praktiky kolem bannerů, například předvolené volby nebo chybějící rovnocenné odmítnutí v situacích, kde se souhlas žádá: https://www.edpb.europa.eu/documents/task-force-report/report-of-the-work-undertaken-by-the-cookie-banner-taskforce_en
+
+Dobrá první vrstva banneru může vypadat takhle:
+
+> „Používáme nezbytné cookies pro fungování webu. Volitelně nám můžete povolit anonymnější analytiku, abychom věděli, co zlepšit. Marketingové pixely nepoužíváme. Souhlas můžete kdykoliv změnit.“
+
+Tlačítka:
+
+- „Povolit volitelnou analytiku“
+- „Odmítnout volitelné cookies“
+- „Nastavit podrobně“
+
+Není to tak agresivní jako klasické „všechno přijmout, jinak najdi tajná dvířka“. Ale přesně o to jde. Důvěra není optimalizace na omyl.
+
+## BJ.3 Volitelnou analytiku odděl od marketingu
+
+Velká chyba malých webů je házet analytiku a marketing do jedné kategorie „lepší zážitek“. To je mlha. Analytika může sloužit k opravě webu, zatímco marketingový pixel slouží k cílení reklamy. Pro uživatele je to zásadní rozdíl.
+
+Lepší rozdělení účelů:
+
+| Účel | Lidský popis | Příklad nastavení |
+| --- | --- | --- |
+| Nezbytné | Web bez toho nefunguje bezpečně nebo správně. | vždy aktivní |
+| Analytika | Pomáhá nám poznat, které stránky fungují a kde lidé narážejí. | volitelné |
+| Personalizace | Pamatuje si preferenci, kterou uživatel výslovně chce. | volitelné nebo lokální nastavení |
+| Marketing | Slouží k reklamě nebo remarketingu. | vypnuté, pokud ho vůbec používáš |
+
+Privacy-first SaaS často zjistí, že marketingové cookies nepotřebuje vůbec. Pro první fázi produktu stačí agregované návštěvy, kliky na CTA, odeslané formuláře, registrace, aktivace a ručně vyhodnocené zákaznické rozhovory. Ne každá odpověď na otázku „co se děje?“ vyžaduje sledovat člověka přes půl internetu.
+
+## BJ.4 Odvolání souhlasu nesmí být úniková hra
+
+Souhlas není jednorázový úlovek. Pokud ho člověk může dát jedním klikem, měl by ho umět podobně jednoduše změnit. Prakticky to znamená mít odkaz v patičce: „Nastavení soukromí“ nebo „Nastavení cookies“.
+
+Ten odkaz má otevřít stejné volby jako banner:
+
+- vidím aktuální stav souhlasů,
+- rozumím účelům,
+- mohu jednotlivé volby zapnout nebo vypnout,
+- změna se projeví bez reloadového pekla,
+- po odvolání se volitelné skripty dál nespouštějí.
+
+Technický detail, který se často podcení: odvolání souhlasu musí zastavit budoucí zpracování. Nestačí přepsat UI na „vypnuto“, zatímco skript dál posílá eventy, protože se načetl před bannerem. Načítání volitelných skriptů dělej až po souhlasu a drž jeden centrální stav, který respektují všechny části webu.
+
+## BJ.5 Embed řeš přes dvoukrokové načtení
+
+Videa, mapy, sociální posty a kalendářové widgety často tahají třetí strany dřív, než uživatel cokoliv chce. Privacy-first varianta je jednoduchá: nejdřív zobraz vlastní náhled a teprve po kliknutí načti externí obsah.
+
+Příklad textu pro vložené video:
+
+> „Video je hostované u externí služby. Po kliknutí se načte obsah od poskytovatele a může dojít k předání technických údajů. Alternativně si můžete přečíst textový souhrn níže.“
+
+Ještě lepší: pokud to dává smysl, hostuj video, obrázky a dokumenty přímo v evropském provozu pod vlastní kontrolou. Ne vždy je to nejpohodlnější, ale pohodlí není strategie. Je to jen velmi přesvědčivý lenoch v mikině.
+
+## BJ.6 Cookie stránka má být živý technický dokument
+
+Banner je krátký. Cookie stránka může být konkrétní. Nemá obsahovat generický seznam všech cookies na planetě, ale skutečný stav tvého webu.
+
+Dobrá cookie stránka obsahuje:
+
+- kdo web provozuje,
+- jaké kategorie cookies nebo podobných technologií používáš,
+- konkrétní názvy důležitých cookies, pokud je to užitečné,
+- účel každé kategorie,
+- dobu uložení,
+- zda data předáváš třetím stranám,
+- jak změnit souhlas,
+- datum poslední kontroly.
+
+Příklad řádku:
+
+| Název | Účel | Typ | Doba uložení | Poskytovatel |
+| --- | --- | --- | --- | --- |
+| `session` | Přihlášení a bezpečnost účtu | nezbytné | do konce relace / podle nastavení aplikace | vlastní provoz |
+
+Důležité: stránku aktualizuj při každé změně nástroje. Nový chat widget, analytics event nebo embed není jen technický úkol. Je to i změna datové mapy a uživatelského slibu.
+
+## BJ.7 Checklist cookie lišty bez dark patterns
+
+Před spuštěním si projdi:
+
+- Máme inventář všech cookies, skriptů, embedů a třetích stran?
+- Víme, které technologie jsou nezbytné a které volitelné?
+- Nespouštíme volitelné skripty před souhlasem?
+- Je odmítnutí stejně snadné jako přijetí?
+- Nejsou volby předem zaškrtnuté?
+- Jsou účely oddělené a popsané lidsky?
+- Dá se souhlas později snadno změnit nebo odvolat?
+- Po odvolání se volitelné skripty opravdu zastaví?
+- Má cookie/privacy stránka skutečný seznam používaných technologií?
+- Existuje vlastník, který cookie inventář kontroluje po změnách webu?
+
+## Codyho komentář
+
+Můj pohled: nejlepší cookie banner je ten, který je malý, pravdivý a nudný. Pokud potřebuješ psychologické triky, aby uživatel „souhlasil“, není problém v tlačítku. Problém je v tom, co po souhlasu děláš. Privacy-first web se nemá bát tlačítka „Odmítnout“. Má být navržený tak, aby i po odmítnutí fungoval důstojně.
+
+## Zdroje k příloze
+
+- EDPB, FAQ ke cookies a ePrivacy/GDPR: https://www.edpb.europa.eu/contact/frequently-asked-questions_ga
+- EDPB, Process personal data lawfully: https://www.edpb.europa.eu/sme/be-compliant/process-personal-data-lawfully_en
+- EDPB, Guidelines 05/2020 on consent under Regulation 2016/679: https://www.edpb.europa.eu/documents/guideline/guidelines-052020-on-consent-under-regulation-2016679_en
+- EDPB, Report of the Cookie Banner Taskforce: https://www.edpb.europa.eu/documents/task-force-report/report-of-the-work-undertaken-by-the-cookie-banner-taskforce_en
+
+## Shrnutí přílohy
+
+Cookie lišta má chránit volbu uživatele, ne maximalizovat omyly. Začni inventářem technologií, odděl nezbytné účely od volitelných, nepouštěj skripty před souhlasem, nabídni férové odmítnutí, umožni jednoduché odvolání a udržuj cookie stránku jako živý dokument. Privacy-first web nepotřebuje dark patterns. Potřebuje méně skriptů, jasnější sliby a technické nastavení, které skutečně respektuje rozhodnutí člověka.
+
 ## Pracovní log
+- 2026-08-09: Přidána příloha BJ o cookie liště bez dark patterns: inventář cookies, férový souhlas, oddělení analytiky od marketingu, odvolání souhlasu, dvoukrokové embedy, živá cookie stránka a checklist.
 - 2026-08-09: Přidána příloha BI o žádostech subjektů údajů bez paniky: třídění DSR, ověření identity, datová mapa, férový export, vrstvy výmazu, interní playbook a checklist.
 - 2026-08-09: Přidána příloha BH o interních přístupech k produkci bez superadmin kultu: role podle práce, just-in-time přístup, support access, audit logy, servisní účty, měsíční access review a checklist.
 - 2026-08-09: Přidána příloha BG o referral a partnerském marketingu bez sledovacího pekla: definice odměny, kódy a serverové přiřazení, krátké atribuční okno, oddělení dat, lidské podmínky, souhlas a checklist.
