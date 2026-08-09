@@ -7627,7 +7627,139 @@ Demo prostředí je výkladní skříň provozní kultury. Když je uvnitř chao
 
 Demo a sandbox nemají být produkce v kostýmu. Mají ukázat hodnotu produktu na syntetických datech, s omezenými účty, testovacími integracemi a automatickou obnovou. Privacy-first přístup z dema dělá obchodní výhodu: zákazník vidí, že tým umí oddělit ukázku od skutečného provozu, chránit data a vysvětlit technické hranice lidsky.
 
+
+# Příloha AV: Lokalizace SaaS a webu bez překladového chaosu
+
+Evropský web nebo SaaS produkt málokdy žije jen v jednom jazyce navždy. Nejdřív vznikne česká landing page, pak anglická verze pro investory, potom německý pilot, slovenská podpora a najednou někdo překládá chybové hlášky v pátek večer do tabulky s názvem `final_final_2.xlsx`. Gratuluju, právě vznikl překladový hydra-systém. Usekneš jeden řádek, narostou tři neaktuální varianty.
+
+Lokalizace není jen překlad slov. Je to produktová disciplína: stejný slib, stejná úroveň důvěry, stejné datové hranice a podobně dobrý pocit z používání v každém jazyce. Privacy-first přístup navíc říká: nepřekládej texty tak, že je bez rozmyslu pošleš do náhodné externí služby i s interními zákaznickými ukázkami, ticketem nebo screenshotem plným osobních údajů.
+
+## AV.1 Nejdřív rozhodni, které jazyky mají obchodní smysl
+
+Jazyková verze není dekorace. Je to závazek. Jakmile na web dáš němčinu, zákazník oprávněně čeká, že aspoň základní cesta produktu, obchodní informace, privacy texty a podpora nebudou vypadat jako poloautomatický výkřik do prázdna.
+
+Před přidáním jazyka si odpověz:
+
+- Který segment zákazníků tím reálně obsloužíme?
+- Umíme v tom jazyce odpovědět na obchodní dotaz?
+- Umíme vysvětlit bezpečnost, zpracování dat a fakturaci?
+- Budou přeložené i e-maily, onboarding a kritické chybové stavy?
+- Kdo bude hlídat aktuálnost textů při změně produktu?
+
+Malý tým často nepotřebuje deset jazyků. Potřebuje dva dobré: mateřský jazyk pro domácí důvěru a angličtinu pro širší B2B komunikaci. Další jazyk přidej až ve chvíli, kdy existuje konkrétní obchodní důvod: pilot, partner, regionální kampaň nebo opakované poptávky.
+
+Codyho komentář: Vícejazyčný web bez vícejazyčné podpory je jako restaurace s francouzským menu a kuchařem, který umí jen „bageta“. Vypadá to světově, dokud někdo opravdu objedná.
+
+## AV.2 Překládej sliby, ne jen věty
+
+Největší problém lokalizace není gramatika. Je to význam. Česká věta „Ozveme se co nejdřív“ může být v angličtině příliš vágní, v němčině příliš ležérní a v B2B nákupním procesu úplně k ničemu. Proto překládej celé rozhodovací momenty, ne jednotlivé řádky izolovaně.
+
+U každého důležitého textu drž kontext:
+
+| Text | Co zákazník rozhoduje | Co musí překlad zachovat |
+| --- | --- | --- |
+| Nadpis landing page | „Je to pro mě?“ | Konkrétní problém a cílovku |
+| CTA tlačítko | „Kliknu?“ | Akci bez manipulace |
+| Privacy mikrocopy | „Můžu tomu věřit?“ | Účel, data, klidný tón |
+| Chybová hláška | „Co mám udělat?“ | Řešení, ne obviňování |
+| Fakturační text | „Kolik a za co platím?“ | Přesnost, datum, podmínky |
+
+Dobrá překladová poznámka vypadá třeba takhle:
+
+> Kontext: Text je u kontaktního formuláře pro B2B poptávku. Cílem je uklidnit uživatele, že e-mail použijeme jen pro odpověď. Nepřidávej marketingové sliby ani právnický tón.
+
+Tohle je mnohem užitečnější než samotný řetězec `form_privacy_note`. Překladatel, copywriter i AI asistent pak vědí, co má text udělat.
+
+## AV.3 Privacy texty lokalizuj zvlášť pečlivě
+
+Privacy stránka, cookie vysvětlení, formulářové mikrocopy, informace o subdodavatelích a texty k exportu nebo výmazu dat nesmí být vedlejší překladová fronta. Jsou to důvěrové texty. Když jsou nepřesné, zákazník nezíská jistotu. Když jsou přehnané, tým si slíbí něco, co neumí splnit.
+
+Praktický postup:
+
+- Udržuj jeden zdroj pravdy pro privacy texty a jejich jazykové varianty.
+- Každý překlad kontroluj proti skutečnému chování produktu, ne proti přání marketingu.
+- Nepřekládej právní a privacy texty bez kontextu účelu zpracování.
+- U citlivých textů používej revizi člověkem, který rozumí produktu i odpovědnosti vůči zákazníkovi.
+- Když se změní dodavatel, retence nebo datový tok, aktualizuj všechny jazykové verze současně.
+
+Příklad špatné lokalizace:
+
+> „We never share your data.“
+
+To zní hezky, ale často to není pravda. Pokud používáš e-mailového poskytovatele, hosting, platební bránu nebo support systém, data se v nějaké formě zpracovávají u dodavatelů. Férovější text:
+
+> „Vaše data používáme jen pro provoz služby a podporu. Neposíláme je do reklamních systémů. Seznam provozních dodavatelů najdete na stránce o zpracování dat.“
+
+Takový text je méně sexy než absolutní slib, ale mnohem bezpečnější. A bezpečnější bývá dlouhodobě sexy. Jen s menším ohňostrojem.
+
+## AV.4 Technická struktura má pomáhat lidem i vyhledávačům
+
+Vícejazyčný web potřebuje pořádek v URL, metadatech a obsahu. Jinak vznikne situace, kdy český zákazník dostane anglickou cenu, německý vyhledávač indexuje starou stránku a support řeší dotaz, proč „free trial“ v jedné verzi znamená něco jiného než „zkušební režim“ v druhé.
+
+Jednoduchá struktura pro malý tým:
+
+- `/cs/` pro češtinu,
+- `/en/` pro angličtinu,
+- později `/de/` nebo jiný jazyk jen se skutečným plánem podpory,
+- každá stránka má vlastní title, meta description a Open Graph text ve stejném jazyce,
+- interní odkazy vedou na stejnou jazykovou verzi, ne náhodně na výchozí homepage,
+- chybové stránky a potvrzovací e-maily používají jazyk uživatele.
+
+U landing page drž stejnou informační architekturu, ale nepřekládej otrocky. Pokud česká stránka začíná přímočaře „Postavíme vám privacy-first SaaS v Evropě“, anglická verze může potřebovat víc kontextu o evropském provozu, důvěře a compliance. Stejný produkt, jiný vstupní rámec.
+
+## AV.5 AI překlad používej jako asistenta, ne autopilota
+
+AI umí výrazně zrychlit první návrh překladu, sjednocení tónu nebo kontrolu konzistence. Neumí ale sama ručit za to, že text odpovídá produktu, právnímu nastavení, brandu a lokálním očekáváním. Proto jí nedávej víc dat, než potřebuje.
+
+Privacy-first pravidla pro AI lokalizaci:
+
+- Neposílej do překladového promptu reálné zákaznické zprávy, interní smlouvy ani screenshoty s osobními údaji.
+- Používej anonymizované příklady nebo syntetické scénáře.
+- Do promptu přidej slovník značky, zakázané fráze a cílový tón.
+- U privacy, pricingu, fakturace a bezpečnostních textů vyžaduj lidskou revizi.
+- Výstup ukládej do verzovaného zdroje, ne jen do chatu.
+
+Příklad zadání pro AI asistenta:
+
+> Přelož následující onboardingové texty z češtiny do angličtiny. Tón: profesionální, přímý, klidný, ne hype. Produkt je B2B SaaS provozovaný v Evropě. Zachovej význam privacy mikrotextů, nepřidávej nové sliby. Pokud si nejsi jistý, označ řádek poznámkou.
+
+Tím z AI uděláš pracovní nástroj, ne generátor krásných omylů.
+
+## AV.6 Překladový workflow bez chaosu
+
+Lokalizace musí mít rytmus. Jinak se každá změna produktu změní v lov starých textů po repozitáři, CMS, e-mailovém nástroji a help centru.
+
+Minimální workflow:
+
+1. Nový text vzniká nejdřív v primárním jazyce.
+2. Autor doplní kontext: kde se text zobrazuje, co má uživatel pochopit, jaký je rizikový význam.
+3. Překlad vznikne v překladovém souboru nebo CMS se stavem `draft`.
+4. Druhý člověk nebo odpovědný vlastník provede revizi kritických textů.
+5. Před vydáním se zkontroluje UI: zalomení, tlačítka, e-maily, mobil, prázdné stavy.
+6. Po změně produktu se vytvoří úkol na aktualizaci všech jazyků, ne jen výchozí verze.
+
+Pro malý SaaS tým stačí jednoduchá tabulka nebo soubory v repozitáři. Důležité je, aby každý text měl vlastníka, stav a kontext. Bez toho lokalizace vždycky sklouzne k archeologii: „Kde se tahle věta vlastně používá?“
+
+## AV.7 Checklist lokalizace bez ztráty důvěry
+
+- [ ] Každý podporovaný jazyk má jasný obchodní důvod a vlastníka.
+- [ ] Kritické cesty produktu jsou přeložené celé: web, onboarding, e-maily, chyby, fakturace, podpora.
+- [ ] Privacy mikrocopy a právně citlivé texty mají samostatnou revizi.
+- [ ] Překladové řetězce obsahují kontext, ne jen izolované věty.
+- [ ] URL struktura, metadata a interní odkazy drží jazykovou konzistenci.
+- [ ] AI překlad nepoužívá reálná zákaznická data ani citlivé interní materiály.
+- [ ] Terminologie produktu je uložená ve slovníku značky.
+- [ ] Každá změna produktu obsahuje kontrolu dopadu na všechny jazykové verze.
+- [ ] Delší překlady jsou otestované v UI na mobilu i desktopu.
+- [ ] Zákaznická podpora ví, které jazyky firma opravdu obsluhuje.
+
+## Shrnutí přílohy
+
+Lokalizace je víc než překlad. Je to slib, že zákazník v jiném jazyce dostane stejně jasnou hodnotu, stejně férové privacy informace a stejně použitelný produkt. Malý tým má začít s málem jazyků, ale udělat je pořádně: obchodní důvod, technická struktura, kontext pro překlady, revize citlivých textů a bezpečné používání AI. Privacy-first lokalizace neznamená pomalejší růst. Znamená růst bez překladového chaosu a bez toho, aby se zákaznická data stala palivem pro pohodlnou zkratku.
+
+
 ## Pracovní log
+- 2026-08-09: Přidána příloha AV o lokalizaci SaaS a webu bez překladového chaosu: výběr jazyků podle obchodního smyslu, překlad slibů, privacy texty, technická struktura, bezpečné AI překlady, workflow a checklist.
 - 2026-08-09: Přidána příloha AU o demo účtech a sandboxu bez úniku dat: syntetická demo data, omezené sandbox účty, resetovací rutina, bezpečné integrace, trust věta a checklist.
 - 2026-08-09: Přidána příloha AT o offboardingu zákazníka bez rukojmí: zrušení účtu, export dat, retence, vypnutí integrací, závěrečná komunikace, churn feedback a checklist.
 - 2026-08-08: Přidána příloha AS o retenci a churnu bez invazivního sledování: definice zdravého zákazníka, důvody odchodu, hodnotové signály, onboarding, win-back komunikace a měsíční retenční review.
