@@ -10164,7 +10164,155 @@ Changelog je produktový ekvivalent dobrého souseda: dá vědět, že se bude v
 Changelog a release notes mají snižovat nejistotu. Odděl veřejný changelog, zákaznické release notes a interní release log, piš podle dopadu na práci zákazníka, označuj typ změny, bezpečnost komunikuj opatrně a distribuuj novinky přes přímé odkazy, RSS a relevantní produktové notifikace. Dobrá release komunikace není reklama na deploy. Je to součást důvěry.
 
 
+# Příloha BN: Bezpečnostní kontakt a CVD bez paniky, lovu v patičce a právního bubáka
+
+Když někdo najde bezpečnostní problém, první otázka nemá být „kam to mám poslat?“. Má být jasné, kdo hlášení přijímá, co se smí testovat, jak rychle tým reaguje a jak se zachází s citlivými informacemi. Bezpečnostní kontakt není jen věta na stránce „Kontaktujte nás“. Je to malý provozní systém, který může rozhodnout, jestli se chyba dostane k týmu včas, nebo skončí ve veřejném vlákně s titulkem „firma nereaguje“ a s popcornem pro celé internetové náměstí.
+
+Privacy-first SaaS tady má výhodu: nemusí předstírat, že bezpečnost je marketingová dekorace. Může ji ukázat jako praktický závazek. Jasný kontakt, přiměřená politika koordinovaného zveřejňování zranitelností a minimum zbytečných dat v hlášení dávají výzkumníkům, zákazníkům i internímu týmu lepší šanci udělat správnou věc v klidu.
+
+## BN.1 Zveřejni bezpečnostní kontakt tam, kde ho lidé i stroje najdou
+
+Bezpečnostní e-mail v patičce nestačí. Lidé ho často přehlédnou a automatizované nástroje ho vůbec neuvidí. Pro webové služby existuje formát `security.txt`, který podle RFC 9116 slouží k popisu postupů pro hlášení zranitelností ve strojově čitelné podobě. Standard počítá s umístěním pod `/.well-known/security.txt`: https://www.rfc-editor.org/rfc/rfc9116.html
+
+Praktické minimum:
+
+- Vytvoř `https://example.com/.well-known/security.txt`.
+- Uveď `Contact` jako e-mail nebo bezpečný formulář, který někdo opravdu čte.
+- Přidej `Policy` s odkazem na lidsky čitelnou CVD politiku.
+- Nastav `Expires`, aby bylo jasné, že kontakt není zapomenutá fosilie.
+- Přidej `Preferred-Languages`, pokud zvládáš češtinu a angličtinu.
+- Zvaž `Encryption`, pokud umíš přijímat šifrovaná hlášení bez toho, aby to skončilo jako muzeální ukázka PGP bolesti.
+
+Jednoduchý příklad:
+
+```txt
+Contact: mailto:security@example.com
+Policy: https://example.com/security
+Preferred-Languages: cs, en
+Expires: 2027-08-09T00:00:00Z
+Canonical: https://example.com/.well-known/security.txt
+```
+
+Nejdůležitější detail: uvedený kontakt musí fungovat provozně. Pokud `security@example.com` padá do sdílené schránky, kterou někdo otevře jednou za půl roku mezi fakturami a newsletterem o firemních hrníčcích, nemáš bezpečnostní kontakt. Máš dekoraci.
+
+## BN.2 CVD politika má říkat pravidla hry předem
+
+Koordinované zveřejňování zranitelností, zkráceně CVD, je proces, ve kterém nálezce, vlastník systému a případně koordinátor spolupracují na bezpečném nahlášení, opravě a zveřejnění zranitelnosti. ENISA CVD popisuje jako důležitý proces pro ochranu uživatelů a posilování kybernetické bezpečnosti v EU: https://www.enisa.europa.eu/topics/vulnerability-disclosure
+
+Dobrá CVD politika odpovídá na otázky:
+
+- Jaké systémy jsou v rozsahu testování?
+- Jaké typy zranitelností tým vítá?
+- Jaké testy jsou mimo rozsah, protože by mohly poškodit službu nebo data?
+- Jak má nálezce hlášení poslat?
+- Do kdy tým potvrdí přijetí?
+- Jak probíhá oprava, koordinace a případné zveřejnění?
+- Co tým považuje za odpovědné chování nálezce?
+
+NÚKIB v českém prostředí publikoval Národní politiku CVD a vlastní CVD politiku pro web `nukib.gov.cz`; v jejím popisu mimo jiné vysvětluje bezpečný přístav pro objevitele, pokud dodržují podmínky politiky: https://nukib.gov.cz/cs/kontakty/cvd-politika/ a https://nukib.gov.cz/cs/infoservis/aktuality/2355-nukib-predstavuje-narodni-politiku-cvd-pro-bezpecne-hlaseni-zranitelnosti/
+
+To neznamená, že každý malý SaaS musí mít právní dokument o délce stavebního zákona. Znamená to, že pravidla nemají vznikat až ve chvíli, kdy přijde první hlášení a tým se začne ptát „a je tohle útok, pomoc, nebo obojí?“
+
+## BN.3 Scope napiš konkrétně, jinak si ho někdo domyslí za tebe
+
+„Můžete testovat náš web“ je moc široké. Výzkumník neví, jestli smí zkoušet API, demo účet, produkční formuláře, subdomény, mobilní aplikaci, integrace nebo zákaznické tenanty. Tým zase neví, jestli hlášení odmítnout, poděkovat, nebo volat hasiče. Ne ty s vodou. Ty právní.
+
+Rozděl scope do tří částí:
+
+| Oblast | Příklad | Poznámka |
+| --- | --- | --- |
+| V rozsahu | `app.example.com`, veřejné API, demo tenant | Testovat šetrně a bez přístupu k cizím datům |
+| Mimo rozsah | produkční zákaznické účty bez svolení, DoS, fyzická bezpečnost | Jasně zakázat rušivé a invazivní testy |
+| Nejasné | partnerské integrace, staré subdomény, marketingové microsites | Raději požádat o potvrzení před testem |
+
+Ke scope přidej i datová pravidla:
+
+- Nálezce nemá stahovat, kopírovat ani zveřejňovat cizí data.
+- Pokud se k datům omylem dostane, má test zastavit a popsat minimální důkaz.
+- Hlášení nemá obsahovat osobní údaje jiných uživatelů, pokud to není nezbytné pro pochopení rizika.
+- Screenshots mají být začerněné nebo vytvořené na vlastním testovacím účtu.
+
+Privacy-first přístup tady není fráze. Je to konkrétní ochrana: i dobrý úmysl může nadělat škodu, když politika mlčí o datech.
+
+## BN.4 Interní triage musí být rychlejší než interní chaos
+
+Bezpečnostní hlášení není běžný support ticket. Potřebuje vlastní cestu, vlastní prioritu a jasného majitele. Pokud ho necháš v jedné frontě vedle otázky „kde najdu fakturu“, riskuješ, že kritická chyba dostane odpověď „děkujeme za podnět, předáme produktovému týmu“. To je věta, která by měla mít vlastní požární signalizaci.
+
+Minimální triage proces:
+
+1. **Příjem**: automatické potvrzení a interní notifikace bezpečnostnímu vlastníkovi.
+2. **První čtení**: ověřit, jestli hlášení popisuje potenciální zranitelnost.
+3. **Klasifikace**: odhad závažnosti podle dopadu, zneužitelnosti a rozsahu dat.
+4. **Reprodukce**: potvrdit problém na testovacím prostředí nebo bezpečně omezeném účtu.
+5. **Mitigace**: rychlé omezení rizika, i kdyby finální oprava trvala déle.
+6. **Komunikace**: průběžně informovat nálezce i dotčené interní role.
+7. **Uzavření**: oprava, ověření, poučení a rozhodnutí o zveřejnění.
+
+Pro malý tým stačí jednoduchá tabulka nebo issue tracker, ale nesmí chybět vlastník, stav, závažnost, termín dalšího kroku a odkaz na důkazy. Bez toho se z CVD stane „někdo to měl řešit“. Nejslavnější procesní vrah v historii malých firem.
+
+## BN.5 Odpověď nálezci piš lidsky a bez slibů, které neumíš splnit
+
+První odpověď má udělat tři věci: poděkovat, potvrdit přijetí a nastavit očekávání. Nemusí obsahovat diagnózu za deset minut. Musí ale ukázat, že hlášení nezmizelo v kancelářském bermudském trojúhelníku.
+
+Šablona první odpovědi:
+
+> Dobrý den, děkujeme za nahlášení. Hlášení jsme přijali pod interním označením `SEC-123` a do 3 pracovních dnů potvrdíme, zda problém dokážeme reprodukovat. Prosíme, neposílejte další osobní údaje ani neveřejné zákaznické informace; pokud budou potřeba další detaily, ozveme se. Cody by dodal: díky, že jste nezvolili variantu „rovnou to hodím na internet“.
+
+Další komunikace má být stručná:
+
+- co je potvrzené,
+- co ještě ověřujete,
+- jestli nálezce může dodat bezpečný důkaz,
+- kdy dáte další update,
+- zda a jak plánujete koordinovat zveřejnění.
+
+Neslibuj odměnu, pokud nemáš bug bounty program. Neslibuj právní ochranu, pokud ji nemáš právně zkontrolovanou. Neslibuj datum opravy, pokud jsi problém ještě nepochopil. Slibuj jen další konkrétní krok.
+
+## BN.6 Připrav si rozhodnutí o zveřejnění dřív, než začne tlak
+
+Zveřejnění zranitelnosti může být užitečné: pomáhá uživatelům pochopit riziko, dává kredit nálezci a ukazuje, že tým umí reagovat. Může být ale i škodlivé, pokud přijde před opravou, obsahuje exploit detail nebo odhalí zákaznická data. Proto se o zveřejnění nemá rozhodovat ve stresu.
+
+Předem si napiš interní pravidla:
+
+- Kdy zveřejňujeme krátké bezpečnostní oznámení?
+- Kdy informujeme jen dotčené zákazníky?
+- Jak dáváme kredit nálezci, pokud o něj stojí?
+- Které technické detaily nepublikujeme?
+- Kdo schvaluje text: produkt, vývoj, bezpečnost, právní část, support?
+- Jaké kanály použijeme: changelog, security stránka, e-mail dotčeným zákazníkům, status page?
+
+Privacy-first varianta zveřejnění nehoní drama. Řekne dopad, stav opravy, nutné kroky a rozsah. Neukazuje reálná data, nepíše zbytečný návod ke zneužití a nepoužívá incident jako marketingovou selfíčkovou příležitost. Bezpečnost není LinkedIn karaoke.
+
+## BN.7 Checklist bezpečnostního kontaktu a CVD
+
+- Existuje `/.well-known/security.txt` s funkčním kontaktem, politikou, jazykem a expirací.
+- Bezpečnostní e-mail nebo formulář někdo pravidelně sleduje a má jasného vlastníka.
+- CVD politika popisuje scope, zakázané testy, datová pravidla a očekávaný postup.
+- Produkční zákaznická data jsou v pravidlech chráněná před kopírováním, zveřejněním i zbytečným posíláním.
+- Triage proces má stavy, závažnost, vlastníka, termín dalšího kroku a bezpečné místo pro důkazy.
+- První odpověď nálezci potvrzuje přijetí a nastavuje realistické očekávání.
+- Tým má předem připravené varianty komunikace pro kritický, střední a nízký dopad.
+- Zveřejnění zranitelnosti neobsahuje exploit návod, interní infrastrukturu ani zákaznická data.
+- Po uzavření se aktualizuje dokumentace, testy, alerty nebo checklist, aby se stejná chyba nevrátila v jiném kostýmu.
+
+## Codyho komentář
+
+Bezpečnostní kontakt je jako zvonek u dveří. Když není, slušný člověk neví, kam zaklepat, a méně slušný vleze oknem. CVD politika není pozvánka k chaosu. Je to způsob, jak říct: „Když najdeš problém, pojďme ho opravit dospěle.“ Což je v technologii pořád překvapivě punkové.
+
+## Zdroje k příloze
+
+- RFC Editor: RFC 9116, `security.txt`, umístění pod `/.well-known/security.txt` a pole jako `Contact`, `Policy`, `Expires`, `Preferred-Languages`: https://www.rfc-editor.org/rfc/rfc9116.html
+- ENISA: téma Vulnerability Disclosure a význam CVD pro ochranu uživatelů a kybernetickou bezpečnost v EU: https://www.enisa.europa.eu/topics/vulnerability-disclosure
+- NÚKIB: CVD politika pro `nukib.gov.cz` a popis bezpečného přístavu při dodržení podmínek politiky: https://nukib.gov.cz/cs/kontakty/cvd-politika/
+- NÚKIB: představení Národní politiky koordinovaného zveřejňování zranitelností: https://nukib.gov.cz/cs/infoservis/aktuality/2355-nukib-predstavuje-narodni-politiku-cvd-pro-bezpecne-hlaseni-zranitelnosti/
+
+## Shrnutí přílohy
+
+Bezpečnostní kontakt a CVD politika zkracují cestu od nálezu k opravě. Zveřejni `security.txt`, napiš jasný scope, chraň zákaznická data, připrav triage proces, komunikuj s nálezcem věcně a rozhoduj o zveřejnění podle dopadu, ne podle paniky. Dobrý proces nepřidává byrokracii. Ubírá chaos.
+
+
 ## Pracovní log
+- 2026-08-09: Přidána příloha BN o bezpečnostním kontaktu a CVD: `security.txt`, CVD politika, scope testování, ochrana dat v hlášeních, interní triage, komunikace s nálezcem a checklist.
 - 2026-08-09: Přidána příloha BM o changelogu a release notes bez marketingové mlhy: vrstvy komunikace, dopadové štítky, bezpečnostní formulace, RSS/přímé odkazy, měření bez sledování a checklist.
 - 2026-08-09: Přidána příloha BL o ukončování funkcí bez ztráty důvěry: typy změn, mapa dopadu, migrační cesta, komunikace ve vlnách, úklid dat a checklist.
 - 2026-08-09: Přidána příloha BK o demo účtu a sandboxu bez úniku produkčních dat: syntetické seed scénáře, reset, oddělení prostředí, opatrnost u anonymizace, krátkodobý zákaznický přístup a checklist.
