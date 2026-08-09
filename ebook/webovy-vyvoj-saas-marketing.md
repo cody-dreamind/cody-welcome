@@ -9129,8 +9129,147 @@ Platby jsou skvělé místo, kde se ukáže, jestli firma myslí privacy-first v
 
 Privacy-first platby stojí na jasném checkoutu, datové minimalizaci, auditovatelném platebním dodavateli, oddělení produktových a fakturačních dat a klidném procesu při selhání platby. Fakturace nemá být datový kombajn. Má být důvěryhodná provozní vrstva, která zákazníkovi usnadní platit a týmu usnadní neudělat nepořádek.
 
+# Příloha BG: Referral a partnerský marketing bez sledovacího pekla
+
+Referral program je krásně jednoduchá věc: spokojený zákazník doporučí produkt někomu dalšímu a firma mu za to poděkuje, odmění ho nebo mu aspoň pošle virtuální high-five. Pak přijde realita: affiliate platforma, třicetidenní cookie, fingerprinting, cross-device tracking, automatické profily, exporty do reklamních systémů a dashboard, který ví o návštěvníkovi víc než jeho praktický lékař. Gratuluju, z doporučení se stal datový lunapark.
+
+Privacy-first referral neznamená, že nemůžeš měřit doporučení. Znamená to, že měříš jen to, co potřebuješ k férovému vyhodnocení programu, vyplacení odměny a ochraně proti zneužití. Žádné skryté sledování lidí po internetu. Žádné „když už máme cookie, tak ji použijeme i pro remarketing“. Doporučení má být vztahová mechanika, ne tajná sledovací infrastruktura v kabátku růstového hacku.
+
+## BG.1 Nejdřív rozhodni, co vlastně odměňuješ
+
+Než začneš řešit linky a tracking, napiš si jednu větu: za co přesně partner nebo zákazník dostane odměnu? Bez toho vznikne program, který odměňuje hluk místo hodnoty. Jinak řečeno: budeš platit za kliky, registrace, aktivované účty, první platbu, roční smlouvu, nebo skutečně udrženého zákazníka?
+
+Praktické varianty:
+
+- **Doporučení zákazníka:** stávající zákazník pozve známého a dostane kredit po první zaplacené faktuře.
+- **Partnerský prodej:** konzultant nebo agentura přivede firmu a dostane provizi z prvních měsíců.
+- **Komunitní kód:** veřejný kód pro konkrétní komunitu, newsletter nebo podcast.
+- **Interní ambassador:** zákazník dodá případovou studii, reference nebo úvod do jiné firmy.
+
+Každá varianta potřebuje jiné měření. U zákaznického doporučení často stačí pozvánkový odkaz nebo kód. U partnerského prodeje může být lepší ruční evidence dealu v CRM. U komunitního kódu nepotřebuješ vědět, kdo klikl před třemi týdny ve dvě ráno; stačí vědět, že zákazník použil kód při nákupu.
+
+Příklad rozhodovací věty:
+
+> „Odměna vzniká až po první úspěšné platbě nového zákazníka, který při registraci použil referral kód nebo byl ručně přiřazen k partnerovi před podpisem smlouvy.“
+
+Tahle věta je nudná. To je dobře. Nudné podmínky šetří právníka, support i partnerské vztahy.
+
+## BG.2 Preferuj kódy a serverové přiřazení před sledovacími cookies
+
+Nejčistší referral identifikátor je ten, který uživatel vědomě použije: kód, pozvánka, partnerský odkaz s krátkým parametrem nebo ruční výběr partnera při registraci. Není potřeba sledovat člověka přes půl internetu, když ti může sám říct: „přišel jsem od Jany“.
+
+Privacy-first pořadí metod:
+
+1. **Referral kód zadaný uživatelem** při registraci nebo checkoutu.
+2. **Pozvánkový odkaz** s krátkým tokenem, který se uloží serverově jen pro dokončení registrace.
+3. **Ruční přiřazení partnera** u B2B prodeje, když doporučení vzniká v osobní komunikaci.
+4. **Krátkodobá first-party cookie** pouze pro dokončení stejné návštěvy nebo krátkého rozhodovacího okna.
+5. **Fingerprinting, third-party tracking a cross-device profilování:** ne. Tady není co poeticky rozebírat.
+
+Serverové přiřazení může být jednoduché: když návštěvník přijde přes `?ref=jana`, zobrazíš v registračním formuláři informaci „Doporučení: Jana / Partner X“ a po registraci uložíš k účtu `referral_source_id`. Pokud se člověk neregistruje, identifikátor po krátké době smažeš. Neposíláš ho do reklamní sítě, nepáruješ ho s chováním na blogu, neděláš z něj tajnou složku.
+
+## BG.3 Atribuční okno drž krátké a vysvětlené
+
+Marketing miluje dlouhá atribuční okna, protože pak skoro všechno vypadá jako úspěch kampaně. Privacy-first provoz miluje krátká a srozumitelná okna, protože minimalizují data a spory. U referral programu se ptej: jak dlouho je férové tvrdit, že doporučení ovlivnilo nákup?
+
+Příklad tabulky:
+
+| Typ doporučení | Atribuce | Proč |
+| --- | --- | --- |
+| Pozvánka do SaaS | 14 dní od kliknutí nebo do registrace | Krátký produktový rozhodovací cyklus. |
+| Partnerský B2B deal | ruční přiřazení před nabídkou | Rozhodování běží přes obchodní vztah, ne cookie. |
+| Komunitní kód | použití kódu při nákupu | Uživatel vědomě uplatní výhodu. |
+| Obsahový partner | jen přímé použití odkazu/kódu | Bez sledování čtenářů napříč webem. |
+
+Mikrotext pro podmínky programu:
+
+> „Doporučení vyhodnocujeme podle použitého kódu, pozvánkového odkazu nebo ručního přiřazení v obchodním procesu. Nepoužíváme fingerprinting ani sledování napříč weby. Krátkodobý referral token používáme jen k přiřazení nové registrace a po vyhodnocení ho mažeme podle retenčního pravidla.“
+
+Tohle je mnohem lepší než „vyhrazujeme si právo používat analytické a marketingové technologie za účelem optimalizace partner programu“, což je firemní čeština pro „ani my už nevíme, co všechno tam běží“.
+
+## BG.4 Odděl referral data od produktové analytiky
+
+Referral program potřebuje pár faktů: kdo doporučil, kdo přišel, kdy vznikla odměna, jaký je stav vyplacení, jestli nedošlo ke zneužití. Produktová analytika potřebuje agregované informace o aktivaci, retenci a hodnotě zákazníků. Tyhle světy spolu mohou mluvit, ale nemají se slít do jednoho osobního profilu.
+
+Minimální datový model:
+
+| Entita | Ukládané údaje | Retence |
+| --- | --- | --- |
+| Partner | název, kontaktní e-mail, smluvní stav, výplatní údaje | po dobu vztahu a zákonných povinností |
+| Referral token | token, partner ID, datum vytvoření, expirace | do expirace nebo registrace |
+| Doporučený účet | zákaznické ID, partner ID, stav odměny | po dobu programu a účetní evidence |
+| Odměna | částka/kredit, důvod, fakturační stav, auditní stopa | podle účetních a smluvních pravidel |
+| Anti-abuse signál | agregované počty, podezřelé vzory | krátce a s jasným účelem |
+
+Co naopak neukládat bez dobrého důvodu:
+
+- kompletní historii navštívených stránek doporučeného člověka,
+- otisky zařízení,
+- přesnou geolokaci,
+- data z osobních sociálních profilů,
+- automatické propojení referral zdroje s marketingovým remarketingem,
+- poznámky typu „vypadá jako malá firma, asi slabý budget“.
+
+Principy GDPR stojí mimo jiné na účelovém omezení, minimalizaci dat a omezení uložení. Evropská komise je shrnuje v přehledu principů zpracování osobních údajů: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en. V referral programu to prakticky znamená: data pro provizi nejsou automaticky data pro produktový profiling.
+
+## BG.5 Podmínky programu napiš pro lidi, ne pro archeology
+
+Referral program selže, když partner nerozumí pravidlům. A čím víc je program automatizovaný, tím důležitější je jasná komunikace. Partner musí vědět, kdy vzniká nárok na odměnu, co se stane při refundaci, jak dlouho trvá schválení, jak se řeší vlastní nákupy, spam, kupónové katalogy a veřejné slevové weby.
+
+Krátká struktura pravidel:
+
+- **Kdo se může zapojit:** zákazníci, partneři, agentury, komunita.
+- **Co se počítá:** první platba, aktivace, roční smlouva nebo jiná jasná událost.
+- **Co se nepočítá:** vlastní účty, spam, falešné registrace, porušení značky, kupónové farmy.
+- **Jak měříme:** kód, pozvánka, ruční přiřazení, krátké atribuční okno.
+- **Jak chráníme soukromí:** žádný fingerprinting, žádné third-party profily, oddělená data.
+- **Jak se vyplácí:** kredit, sleva, faktura, minimální částka, splatnost.
+- **Jak se řeší spory:** kontakt, lhůta, ruční kontrola, auditní stopa.
+
+Evropská komise u informačních povinností zdůrazňuje, že informace pro lidi mají být stručné, transparentní, srozumitelné, snadno dostupné a v jasném jazyce: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/what-information-must-be-given-individuals-whose-data-collected_en. To je dobré pravidlo i mimo čistě právní texty. Pokud partner musí číst podmínky s lupou a kávou číslo pět, něco je špatně.
+
+## BG.6 Souhlas nepoužívej jako univerzální kouzelnou propustku
+
+Některé referral scénáře běží na smlouvě, některé na oprávněném zájmu, některé mohou vyžadovat souhlas, zejména pokud se dostáváš ke sledování, profilování nebo marketingovým cookies. Tohle není právní poradenství, ale produktová brzda: neptej se „jaký checkbox to zachrání“, ptej se „můžeme program navrhnout tak, aby invazivní sledování vůbec nepotřeboval?“
+
+EDPB v materiálech ke consentu zdůrazňuje, že platný souhlas má být svobodný, konkrétní, informovaný a jednoznačný; lidé mají mít skutečnou volbu a kontrolu. Přehled EDPB k souhlasu je zde: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-052020-consent-under-regulation-2016679_en. V referral programu to znamená: pokud už potřebuješ souhlas, nesmí být schovaný v podmínkách, spojený s nesouvisejícími účely nebo prakticky nevypnutelný.
+
+Lepší design často vypadá takhle:
+
+- Uživatel vidí, že používá referral kód.
+- Program jasně říká, co se kvůli tomu uloží.
+- Token expiruje a nepoužívá se pro jiné účely.
+- Partner vidí jen obchodně nutné údaje, ne osobní chování doporučeného zákazníka.
+- Zákazník může podporu požádat o opravu špatného přiřazení.
+
+Codyho komentář: nejlepší consent banner je ten, který nemusíš zobrazit, protože jsi produkt navrhl střídmě. Ano, není to tak sexy jako „growth stack“. Ale růst, který stojí na důvěře, nemá po třech měsících kocovinu z datového bordelu.
+
+## BG.7 Checklist referral programu bez sledovacího pekla
+
+- Je jasně napsané, za jakou událost vzniká odměna?
+- Umí program fungovat přes kód, pozvánku nebo ruční přiřazení bez cross-site trackingu?
+- Je atribuční okno krátké, obhajitelné a srozumitelně popsané?
+- Ukládá se referral token jen po dobu nutnou k vyhodnocení?
+- Jsou referral data oddělená od produktové analytiky a remarketingu?
+- Vidí partner jen údaje nutné pro vyúčtování a kontrolu programu?
+- Existuje anti-abuse proces bez plošného sledování všech návštěvníků?
+- Jsou pravidla programu napsaná lidsky a veřejně dostupná?
+- Je jasné, jak se řeší refundace, vlastní nákupy a spory o přiřazení?
+- Má tým retenční pravidla pro tokeny, odměny, auditní stopu a výplatní údaje?
+
+## Zdroje k příloze
+
+- Evropská komise, principy GDPR: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en
+- Evropská komise, informace poskytované lidem při sběru údajů: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/what-information-must-be-given-individuals-whose-data-collected_en
+- European Data Protection Board, Consent under GDPR — summary: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-052020-consent-under-regulation-2016679_en
+
+## Shrnutí přílohy
+
+Referral a partnerský marketing nemusí stát na sledovacích cookies, fingerprintingu ani tajném profilování. Stačí jasně definovat odměňovanou událost, preferovat kódy a serverové přiřazení, držet krátké atribuční okno, oddělit referral data od produktové analytiky a napsat pravidla programu lidsky. Privacy-first referral není méně měřitelný. Je jen méně slizký, což je v marketingu osvěžující změna.
+
 
 ## Pracovní log
+- 2026-08-09: Přidána příloha BG o referral a partnerském marketingu bez sledovacího pekla: definice odměny, kódy a serverové přiřazení, krátké atribuční okno, oddělení dat, lidské podmínky, souhlas a checklist.
 - 2026-08-09: Přidána příloha BF o platbách a fakturaci bez datového kombajnu: checkout, datové minimum, platební brána jako subdodavatel, oddělení fakturačních a produktových dat, DPH/OSS, selhané platby a checklist.
 - 2026-08-09: Přidána příloha BE o e-mailové doručitelnosti bez špehovacích pixelů: oddělení typů zpráv, SPF/DKIM/DMARC, střídmé měření, bounce a complaint proces, transakční šablony, vendor dotazník a checklist.
 - 2026-08-09: Přidána příloha BD o vendor lock-inu a přenositelnosti: mapa lock-inu, použitelné exporty, dokumentace schématu, import, API/webhooky, offboarding a checklist férového SaaS bez zákaznické klece.
