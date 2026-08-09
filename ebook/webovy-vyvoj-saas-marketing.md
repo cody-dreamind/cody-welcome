@@ -8871,7 +8871,134 @@ Nejlepší lock-in je hodnota. Zákazník zůstává, protože produkt šetří 
 Přenositelnost je součást důvěryhodného SaaS produktu. Zákazník potřebuje použitelný export, dokumentované schéma, férový offboarding a stabilní integrace, ne jen formální tlačítko „stáhnout data“. Privacy-first produkt nestaví klec. Staví hodnotu, která obstojí i ve chvíli, kdy má zákazník otevřené dveře.
 
 
+# Příloha BE: E-mailová doručitelnost bez špehovacích pixelů a reputační loterie
+
+E-mail je nudná infrastruktura přesně do chvíle, než přestane fungovat. Pak je najednou důležitější než nový hero obrázek, sedmý pricing experiment i kreativní slogan „revoluce v produktivitě“. Bez e-mailu se zákazník nepřihlásí, nedostane fakturu, nepotvrdí účet, neobnoví heslo a často ani nezjistí, že se něco pokazilo.
+
+Privacy-first přístup k e-mailu má dvě části. První je technická důvěryhodnost: doména musí být ověřená, podepsaná a chráněná proti zneužití. Druhá je respekt k příjemci: neposílat zbytečné zprávy, nesbírat neviditelné signály jen proto, že to nástroj umí, a oddělit transakční komunikaci od marketingu. Doručitelnost totiž není trik. Je to reputace v praxi.
+
+## BE.1 Odděl typy e-mailů dřív, než začneš řešit šablony
+
+Malý SaaS často začne jednou službou na všechno: registrace, faktury, newsletter, onboarding, obchodní follow-up, support i systémové alerty. Funguje to rychle, ale jen do prvního problému. Když marketingová rozesílka zhorší reputaci domény, trpí i reset hesla. A když support omylem dostane marketingový tag, už máš datový guláš s příchutí „kdo tohle povolil?“.
+
+Rozděl e-maily minimálně do čtyř kategorií:
+
+| Kategorie | Příklad | Doporučení |
+| --- | --- | --- |
+| Transakční | registrace, reset hesla, faktura | Nejvyšší priorita, minimum obsahu, samostatná reputace. |
+| Produktové | onboarding, upozornění na stav účtu | Posílat jen k jasnému účelu a s rozumnou frekvencí. |
+| Obchodní | odpověď na poptávku, domluvený follow-up | Vázat na konkrétní vztah, ne automaticky na newsletter. |
+| Marketingové | newsletter, novinky, kampaně | Pouze pro dobrovolně přihlášené lidi, snadné odhlášení. |
+
+Praktická architektura pro malý tým: transakční e-maily posílej ze subdomény typu `mail.example.com` nebo `notify.example.com`, marketing z jiné subdomény typu `news.example.com`. Hlavní doménu nenechávej všem experimentům napospas. Doména je reputační majetek, ne společný ručník v kancelářské kuchyňce.
+
+## BE.2 SPF, DKIM a DMARC nejsou ozdoba DNS
+
+SPF říká, které servery smí posílat e-mail za doménu. DKIM zprávu kryptograficky podepisuje. DMARC říká příjemcům, co mají dělat, když SPF nebo DKIM nesedí, a umožňuje reportování zneužití. Tyhle tři zkratky nejsou pro radost adminů. Jsou základní bezpečnostní minimum pro značku, zákazníky i doručitelnost.
+
+Postup zavedení:
+
+1. Sepiš všechny služby, které posílají e-mail za doménu: produkt, fakturace, helpdesk, newsletter, CRM, monitoring.
+2. U každé služby ověř, jestli opravdu musí posílat z firemní domény.
+3. Nastav SPF co nejkratší a bez nekonečného řetězení `include` záznamů.
+4. Zapni DKIM pro každou odesílací službu a ulož vlastníka záznamu.
+5. Nastav DMARC nejdřív v monitorovacím režimu `p=none`, vyhodnoť reporty a teprve potom zpřísňuj na `quarantine` nebo `reject`.
+6. Změny DNS zapisuj do provozního logu, protože za tři měsíce nikdo nebude vědět, proč tam ten divný TXT záznam bydlí.
+
+Google ve svých požadavcích pro odesílatele uvádí autentizaci SPF nebo DKIM, DMARC pro odesílací domény a další pravidla pro hromadné odesílatele: https://support.google.com/a/answer/81126. Technické pozadí DMARCu popisuje RFC 7489: https://www.rfc-editor.org/rfc/rfc7489. Produktově z toho plyne jednoduché pravidlo: e-mailová důvěryhodnost patří do launch checklistu, ne do panického pátrání po tom, proč lidem nechodí reset hesla.
+
+## BE.3 Trackovací pixel není jediný způsob, jak poznat zájem
+
+Marketingové nástroje rády měří otevření e-mailu přes neviditelný obrázek. Jenže open rate je čím dál méně spolehlivý signál a z privacy pohledu je to často zbytečně invazivní. Člověk si neotevřel vztah se značkou. Otevřel zprávu. Není potřeba z toho dělat mikroskopickou reality show.
+
+Privacy-first alternativa:
+
+- měř hlavně doručení, bounces, odhlášení a odpovědi,
+- u newsletteru sleduj agregovaný zájem o témata, ne chování konkrétní osoby,
+- odkazy znač parametry jen tam, kde to pomáhá vyhodnotit kanál, ne individuální profil,
+- důležité reakce získávej odpovědí na e-mail nebo krátkou anketou,
+- u transakčních e-mailů neměř otevření vůbec, pokud k tomu nemáš jasný provozní důvod.
+
+Příklad dobrého měření newsletteru: „Téma o retenci přineslo 12 odpovědí a 4 poptávky během týdne.“ Příklad zbytečného slídění: „Jana otevřela e-mail třikrát, klikla na druhý odkaz a pravděpodobně čte v tramvaji.“ Jedno pomáhá rozhodovat. Druhé dělá z marketingu šmírovací sport.
+
+## BE.4 Bounce a complaint proces chraň reputaci domény
+
+Doručitelnost se nekazí jen technickým nastavením. Kazí se i tím, že posíláš na staré adresy, ignoruješ stížnosti, přidáváš lidi do kampaní bez kontextu a tváříš se, že odhlášení je osobní urážka. Není. Je to signál, že člověk nechce další e-mail. Produktivní reakce je respekt, ne další automatizace.
+
+Minimální provozní pravidla:
+
+- hard bounce vyřaď hned,
+- opakovaný soft bounce dej do dočasného pozastavení,
+- complaint nebo spam report ber jako okamžitý stop signál,
+- odhlášení potvrď bez dalšího přesvědčování,
+- neimportuj staré kontakty bez jasného původu a účelu,
+- jednou měsíčně projdi segmenty, které dlouho nereagují nebo nemají aktuální účel.
+
+Privacy-first detail: stav doručení nemusí znamenat, že si navždy ukládáš historii každého e-mailu. Pro provoz často stačí poslední stav, důvod blokace, čas změny a zdroj souhlasu nebo vztahu. E-mailový systém nemá být archiv osobních dějin zákazníka.
+
+## BE.5 Transakční e-mail piš jako součást produktu
+
+Reset hesla, potvrzení účtu nebo faktura nejsou marketingový billboard. Jsou to produktové kroky. Mají být krátké, jasné a bezpečné.
+
+Dobrá transakční zpráva obsahuje:
+
+- jasný předmět bez reklamního balastu,
+- název služby a důvod odeslání,
+- jednu hlavní akci,
+- časovou platnost odkazu, pokud jde o bezpečnostní operaci,
+- kontakt na podporu nebo stránku nápovědy,
+- minimum osobních údajů v těle zprávy.
+
+Špatně: „Máme pro vás skvělou novinku! Klikněte pro obnovu hesla a mimochodem vyzkoušejte náš nový tarif Pro.“ Dobře: „Obnova hesla pro účet Cody Welcome. Odkaz platí 30 minut. Pokud jste o obnovu nežádali, zprávu ignorujte nebo nám napište.“ Nuda? Ano. U bezpečnostního e-mailu je nuda kompliment.
+
+## BE.6 E-mailový dodavatel je subdodavatel, ne kouzelná trubka
+
+Před zapnutím e-mailové služby se zeptej stejně jako u analytiky nebo hostingu: jaká data odcházejí, kde se zpracovávají, jak dlouho se drží logy, kdo má přístup k obsahu zpráv a jak službu vypneš. U evropského privacy-first provozu preferuj dodavatele s jasnými smluvními podmínkami, dobrou dokumentací zpracování dat a možností omezit uložená metadata.
+
+Krátký vendor dotazník:
+
+- Kde se zpracovává obsah e-mailů a metadata doručení?
+- Jak dlouho se drží logy, bounces a eventy?
+- Lze vypnout open tracking a click tracking?
+- Umí služba oddělit transakční a marketingové streamy?
+- Jak se exportují nebo mažou kontakty při odchodu?
+- Jak probíhá rotace API klíčů a omezení oprávnění?
+- Existuje dokumentace incidentů, dostupnosti a podpory?
+
+Nejde o to najít dokonalého dodavatele. Jde o to vědět, jaké riziko kupuješ společně s pohodlím. Každá „jednoduchá integrace za pět minut“ je pořád tok dat. Jen má hezčí onboarding.
+
+## BE.7 Checklist e-mailové doručitelnosti bez slídění
+
+Projdi si před spuštěním a potom jednou měsíčně:
+
+- Transakční, produktové, obchodní a marketingové e-maily jsou oddělené účelem i nastavením.
+- SPF, DKIM a DMARC jsou nastavené, zdokumentované a mají vlastníka.
+- DMARC reporty někdo kontroluje a politika se zpřísňuje až po vyhodnocení.
+- Hlavní doména není používána pro riskantní marketingové experimenty.
+- Newsletter má jasný souhlas, snadné odhlášení a alternativu přes RSS nebo archiv.
+- Open tracking je vypnutý nebo má opravdu obhajitelný účel.
+- Bounce, complaint a unsubscribe signály automaticky zastavují další posílání.
+- Transakční e-maily neobsahují reklamní vsuvky ani zbytečné osobní údaje.
+- API klíče e-mailové služby mají omezený scope a lze je rychle rotovat.
+- Retence e-mailových logů odpovídá provoznímu účelu, ne sběratelské vášni.
+
+## Codyho komentář
+
+E-mail je skvělý kanál, protože je přímý, otevřený a pořád funguje bez toho, aby člověk musel prosit algoritmus o pozornost. Právě proto si zaslouží respekt. Když se k inboxu zákazníka chováš jako k místu pro vztah, ne jako k reklamní skládce, doručitelnost se řeší líp a marketing zní míň jako robotický pošťák v panice. Dreamindí minimum: ověřená doména, jasný účel, málo dat, snadný odchod a žádné neviditelné kukátko do každé zprávy.
+
+## Zdroje k příloze
+
+- Google Workspace Admin Help, Email sender guidelines: https://support.google.com/a/answer/81126
+- RFC 7489, Domain-based Message Authentication, Reporting, and Conformance (DMARC): https://www.rfc-editor.org/rfc/rfc7489
+- RFC 6376, DomainKeys Identified Mail (DKIM) Signatures: https://www.rfc-editor.org/rfc/rfc6376
+
+## Shrnutí přílohy
+
+E-mailová doručitelnost je kombinace technické autentizace, čistého provozu a respektu k příjemci. SPF, DKIM a DMARC chrání doménu, oddělené streamy chrání transakční zprávy a střídmé měření chrání důvěru. Privacy-first e-mail neposílá méně hodnoty. Jen posílá méně balastu a méně dat do cizích systémů.
+
+
 ## Pracovní log
+- 2026-08-09: Přidána příloha BE o e-mailové doručitelnosti bez špehovacích pixelů: oddělení typů zpráv, SPF/DKIM/DMARC, střídmé měření, bounce a complaint proces, transakční šablony, vendor dotazník a checklist.
 - 2026-08-09: Přidána příloha BD o vendor lock-inu a přenositelnosti: mapa lock-inu, použitelné exporty, dokumentace schématu, import, API/webhooky, offboarding a checklist férového SaaS bez zákaznické klece.
 - 2026-08-09: Přidána příloha BC o privacy-first AI funkcích v SaaS: AI karta funkce, role podle AI Actu, minimalizace promptů, transparentní mikrocopy, human-in-the-loop, auditní logy a checklist.
 - 2026-08-09: Přidána příloha BB o release QA bez produkčních dat: riziková klasifikace změn, kritické cesty, syntetická testovací data, kontrola logů a chyb, release checklist a post-release smoke test.
