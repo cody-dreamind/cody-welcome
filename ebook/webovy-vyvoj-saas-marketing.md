@@ -8040,7 +8040,130 @@ Nejlepší dashboard pro malý SaaS tým často vypadá podezřele jednoduše. P
 Zakladatelský dashboard má být rozhodovací nástroj, ne vitrína metrik. Začni otázkami, pokryj pět vrstev zdraví produktu, odděl analytiku od osobních operativních dat a nastav hranice pro reakci. Privacy-first dashboard neznamená slepý dashboard. Znamená měření, které respektuje zákazníka, chrání tým před datovým nepořádkem a ukazuje signály dost brzy na to, aby šlo něco opravit.
 
 
+# Příloha AY: Týdenní provozní rytmus SaaS týmu bez meetingového divadla
+
+Malý SaaS tým nepotřebuje pět porad denně, tři status tabulky a Slack kanál, který zní jako letištní rozhlas. Potřebuje rytmus, ve kterém se opakovaně dívá na správné signály, dělá rozhodnutí a nenechá provozní drobnosti vyrůst do dospělých příšer s vlastním rozpočtem.
+
+Týdenní rytmus je most mezi strategií a každodenní prací. Když chybí, tým buď jen hasí, nebo donekonečna plánuje. Když je přecpaný, všichni tráví víc času vysvětlováním práce než prací samotnou. Privacy-first provoz do toho přidává jednu důležitou zásadu: rozhoduj z dostatečných signálů, ale netahej do každé porady osobní data zákazníků, screenshoty obrazovek a detaily, které nikdo nepotřebuje vidět.
+
+## AY.1 Pondělí: rozhodni, co bude tento týden opravdu hotovo
+
+Pondělní plánování nemá být aukce přání. Má odpovědět na otázku: „Které tři až pět výsledků musí do pátku existovat, aby týden dával smysl?“ Výsledek je důležitější než aktivita. „Pracovat na onboardingu“ je mlha. „Zkrátit první import ze šesti kroků na čtyři a ověřit to na třech nových účtech“ už je práce.
+
+Praktický formát pondělí:
+
+- 10 minut: rychlé přečtení dashboardu a incidentů z minulého týdne.
+- 15 minut: výběr nejdůležitějších výsledků týdne.
+- 10 minut: kapacitní kontrola, kdo má dovolenou, support službu nebo rozdělaný dluh.
+- 10 minut: pojmenování rizik a rozhodnutí, co se tento týden vědomě nedělá.
+- 5 minut: zápis do jednoho pracovního dokumentu.
+
+Dobrá týdenní priorita má vlastníka, výsledek a test dokončení. Například:
+
+| Priorita | Vlastník | Hotovo znamená | Privacy poznámka |
+| --- | --- | --- | --- |
+| Zlepšit trial onboarding | produkt | nový prázdný stav je nasazený a má jeden měřený event | event bez e-mailu a obsahu projektu |
+| Připravit trust pack pro enterprise leady | obchod | PDF/stránka odpovídá na bezpečnostní otázky | bez interních screenshotů a tajných detailů |
+| Opravit doručování pozvánek | vývoj | bounce rate se vrátí do normálu a chyba je popsaná | logy bez obsahu e-mailů |
+
+Pondělí má chránit tým před rozptýlením. Když během týdne přijde nový „urgentní“ nápad, nesmí automaticky vyhodit plán z okna. Buď je to incident, obchodní šance s jasnou hodnotou, nebo položka do backlogu. Všechno ostatní je jen notifikace v převleku za strategii.
+
+## AY.2 Denní sync drž pod patnáct minut
+
+Denní sync má odblokovat práci, ne vytvořit audioverzi projektového nástroje. Každý člověk odpoví stručně:
+
+- Co posune tento týdenní výsledek?
+- Co mě blokuje?
+- Potřebuji rozhodnutí, kontrolu nebo pomoc?
+
+Zakázaná věta: „Včera jsem řešil různé věci.“ To je sice poetické, ale produkt z toho nezbohatne. Lepší je: „Import padá na validaci CSV s prázdným sloupcem, do oběda navrhnu opravu a potřebuji rozhodnout, jestli chybné řádky přeskočíme nebo zastavíme celý import.“
+
+Privacy-first pravidlo pro denní sync: nečti nahlas osobní data zákazníků, interní API klíče, citlivé části ticketů ani konkrétní obsah databáze. Pokud je potřeba detail, odkaž na ticket s omezeným přístupem. Porada není místo, kam se mají nekontrolovaně kopírovat zákaznické informace jen proto, že sdílení obrazovky svádí k digitálnímu exhibicionismu.
+
+## AY.3 Středa: krátká kontrola rizik místo páteční paniky
+
+Uprostřed týdne udělej patnáctiminutovou kontrolu rizik. Ne proto, aby se plán přepsal, ale aby se včas zachytilo, že se blíží problém.
+
+Zeptej se:
+
+- Je některý týdenní výsledek objektivně ohrožený?
+- Vznikl incident, bezpečnostní úkol nebo zákaznická eskalace?
+- Přibylo něco, co vyžaduje rozhodnutí zakladatele?
+- Děláme práci, která už ztratila smysl?
+- Zvyšuje se support zátěž tak, že ohrožuje plán?
+
+Když je problém, napiš reakci v jedné větě: „Snižujeme rozsah importu na CSV bez mapování sloupců, aby šla v pátek ven stabilní verze.“ To je lepší než hrdinské „nějak to dáme“. Hrdinství je fajn v pohádkách. V SaaS provozu je často jen špatně maskovaná absence řízení rozsahu.
+
+## AY.4 Pátek: review výsledků, rozhodnutí a úklid stop
+
+Páteční review není soudní tribunál. Je to krátká zpětná vazba systému. Tým se podívá, co bylo hotovo, co se naučil a co musí přejít do dalšího týdne.
+
+Dobrý páteční zápis obsahuje:
+
+- dokončené výsledky,
+- nedokončené výsledky a skutečný důvod,
+- nové poznatky ze zákazníků, supportu a metrik,
+- rozhodnutí, která padla,
+- jeden úklidový krok: smazat starý export, zavřít dočasný přístup, aktualizovat dokumentaci, odstranit mrtvý feature flag.
+
+Právě poslední bod je pro privacy-first provoz zlato. Data a výjimky se nehromadí dramatickým rozhodnutím. Hromadí se po malých „necháme to zatím tak“. Páteční úklid je levná brzda proti chaosu.
+
+## AY.5 Jedno místo pravdy, ne pět polopravd
+
+Týdenní rytmus se rozpadne, pokud je plán v chatu, rozhodnutí v hlavě, checklist v tabulce, incident v e-mailu a finální stav v něčím kalendáři. Vyber jedno pracovní místo pro týdenní zápisy. Může to být Markdown v repozitáři, jednoduchá wiki, issue board nebo dokument. Důležité je, aby tým věděl, kde je aktuální pravda.
+
+Šablona týdenního zápisu:
+
+```markdown
+# Týden 2026-W32
+
+## Výsledky týdne
+- [ ] Výsledek 1 — vlastník — test dokončení
+- [ ] Výsledek 2 — vlastník — test dokončení
+- [ ] Výsledek 3 — vlastník — test dokončení
+
+## Rizika
+- Riziko — reakce — vlastník
+
+## Rozhodnutí
+- Datum: rozhodnutí, proč, dopad
+
+## Privacy úklid
+- [ ] Dočasné přístupy
+- [ ] Staré exporty
+- [ ] Logy a screenshoty v ticketech
+- [ ] Mrtvé eventy nebo metriky
+
+## Poznámky pro příští týden
+- Co nepřenášet automaticky
+- Co ověřit u zákazníků
+```
+
+Tahle šablona je záměrně nudná. Nudné provozní šablony jsou podceňovaná technologie. Čím méně fantazie vyžaduje zápis, tím větší šance, že ho tým bude používat i ve středu odpoledne, kdy už nikdo nemá náladu hrát si na procesního architekta.
+
+## AY.6 Checklist týdenního provozního rytmu
+
+- [ ] Pondělní plán má nejvýš pět výsledků týdne.
+- [ ] Každý výsledek má vlastníka a jasný test dokončení.
+- [ ] Denní sync řeší blokery a rozhodnutí, ne kompletní status román.
+- [ ] Citlivá zákaznická data se nečtou nahlas ani nekopírují do obecných zápisů.
+- [ ] Středeční kontrola rizik umí snížit rozsah dřív, než vznikne páteční požár.
+- [ ] Páteční review obsahuje dokončené výsledky, poznatky, rozhodnutí a jeden úklidový krok.
+- [ ] Tým používá jedno místo pravdy pro plán, rozhodnutí a privacy úklid.
+- [ ] Staré dočasné přístupy, exporty, screenshoty a mrtvé metriky se pravidelně mažou nebo uzavírají.
+- [ ] Codyho pravidlo: když porada nemění rozhodnutí ani neodblokuje práci, měla by být poznámka, ne událost v kalendáři.
+
+## Codyho komentář
+
+Malé týmy často odmítají proces, protože si představí korporátní divadlo s razítkem a třemi schvalovateli. Jenže dobrý rytmus není byrokracie. Je to zábradlí. Pomáhá běžet rychleji, protože nemusíš každý týden znovu vymýšlet, kde je plán, kdo rozhoduje a proč se v pátek tváříme překvapeně, že středeční riziko pořád existuje.
+
+## Shrnutí přílohy
+
+Týdenní provozní rytmus drží malý SaaS tým v realitě: pondělí vybírá výsledky, denní sync odblokovává práci, středa kontroluje rizika a pátek uklízí rozhodnutí i datové stopy. Privacy-first provoz není jen volba nástrojů. Je to opakovaný návyk nenechávat citlivá data, výjimky a polorozhodnutí ležet všude kolem jako kabely pod stolem.
+
+
 ## Pracovní log
+- 2026-08-09: Přidána příloha AY o týdenním provozním rytmu SaaS týmu: pondělní plánování, krátký denní sync, středeční kontrola rizik, páteční review, jedno místo pravdy, privacy úklid a checklist.
 - 2026-08-09: Zpřesněn checklist zakladatelského dashboardu o vlastníka klíčové metriky, aby čísla nezůstala bez odpovědnosti.
 - 2026-08-09: Přidána příloha AX o zakladatelském dashboardu bez metrik pro ego a sledovacích zkratek: rozhodovací otázky, pět vrstev zdraví produktu, agregované eventy, leading/lagging metriky, reakční hranice, týdenní review a checklist.
 - 2026-08-09: Přidána příloha AW o zákaznických rozhovorech bez výslechu a datového nepořádku: hypotézy, otázky na minulost, střídmé poznámky, anonymizované citace, syntéza vzorů, follow-up a checklist.
