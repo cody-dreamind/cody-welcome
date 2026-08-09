@@ -9743,7 +9743,150 @@ Můj pohled: nejlepší cookie banner je ten, který je malý, pravdivý a nudn�
 
 Cookie lišta má chránit volbu uživatele, ne maximalizovat omyly. Začni inventářem technologií, odděl nezbytné účely od volitelných, nepouštěj skripty před souhlasem, nabídni férové odmítnutí, umožni jednoduché odvolání a udržuj cookie stránku jako živý dokument. Privacy-first web nepotřebuje dark patterns. Potřebuje méně skriptů, jasnější sliby a technické nastavení, které skutečně respektuje rozhodnutí člověka.
 
+# Příloha BK: Demo účet a sandbox bez úniku produkčních dat
+
+Demo je nebezpečně podceňovaná část SaaS produktu. Na jedné straně má prodat hodnotu rychleji než patnáct odstavců marketingového textu. Na druhé straně často svádí k nejhorší možné zkratce: „zkopírujeme produkční databázi, trochu ji přejmenujeme a ukážeme to obchodníkům“. To není demo. To je datová ruleta s hezkým tlačítkem.
+
+Privacy-first demo má ukázat reálnou hodnotu produktu bez toho, aby odhalovalo reálné zákazníky. Ideál je jednoduchý: uživatel pochopí scénář, obchodník má co ukázat, vývojář může bezpečně testovat a nikdo nepotřebuje přístup k produkčním osobním údajům jen proto, aby se prezentace netvářila prázdně.
+
+## BK.1 Demo není výmluva pro kopii produkce
+
+Produkční data v demo prostředí jsou pohodlná přesně do chvíle, kdy se někde objeví cizí jméno, e-mail, objednávka, interní poznámka nebo screenshot s něčím, co nikdy nemělo opustit zákaznický účet. Pak už pohodlí mizí a zůstává incident, vysvětlování a velmi smutný spreadsheet.
+
+První pravidlo: demo a sandbox mají mít vlastní datovou strategii. Ne „nějak to anonymizujeme“. Ne „vždyť to uvidí jen interně“. Ne „zatím“. Strategie znamená, že tým ví:
+
+- odkud demo data vznikají,
+- kdo je může měnit,
+- jak se obnovují do výchozího stavu,
+- jaká data jsou zakázaná,
+- jak se pozná, že se do sandboxu omylem dostala produkce,
+- kdo má odpovědnost za kontrolu.
+
+U malého SaaS stačí praktický standard: demo data se generují ze seed scénářů a produkční exporty jsou pro demo zakázané. Pokud opravdu potřebuješ použít reálný tvar dat kvůli migraci nebo výkonu, dělej to v odděleném testovacím procesu s právním důvodem, omezeným přístupem, krátkou retencí a jasným záznamem. Demo pro zákazníka ale nemá být převlečená produkce.
+
+## BK.2 Navrhni demo scénáře jako produktový obsah
+
+Dobré demo není náhodná sada tabulek. Je to malý příběh, který ukáže typickou práci zákazníka. Demo data proto piš podobně pečlivě jako text na landing page.
+
+Příklad pro rezervační SaaS:
+
+- salon „Klidné ruce“ s pěti službami,
+- tři pracovníci s různou dostupností,
+- týden obsazený zhruba z 60 %,
+- dvě čekající změny termínu,
+- jedna storno situace,
+- report obsazenosti za posledních 30 dní.
+
+Příklad pro B2B reporting:
+
+- firma „Severní dílna“ se třemi obchodníky,
+- pipeline s jasně pojmenovanými fázemi,
+- pět obchodních případů v různém stavu,
+- jeden ztracený deal s důvodem,
+- jednoduchý měsíční souhrn,
+- ukázka exportu pro vedení.
+
+Takhle připravený sandbox prodává lépe než prázdný účet, protože návštěvník nemusí nejdřív vymýšlet obsah. Vidí situaci, pozná problém a může si představit vlastní provoz. Zároveň nevystavuješ cizí data jen proto, aby graf vypadal živě.
+
+Praktický trik: každý demo scénář pojmenuj podle rozhodnutí, které má zákazník pochopit. Ne „demo 1“, ale „Recepce s častými změnami termínů“, „Zakladatel sleduje cashflow“, „Support řeší opakovanou námitku“. Název pomůže obchodu, vývoji i dokumentaci.
+
+## BK.3 Seed data musí být opakovatelná a resetovatelná
+
+Sandbox, který se po třech prezentacích rozbije, je jen pomalejší způsob, jak si vyrobit trapné ticho na callu. Demo prostředí potřebuje reset. Ideálně jedním příkazem nebo tlačítkem pro interní tým.
+
+Minimum pro seed data:
+
+- skript vytvoří organizace, uživatele, role a ukázkový obsah,
+- data používají falešné domény a jména, která nejdou zaměnit za reálné osoby,
+- datumy se umí posouvat relativně k dnešku,
+- demo účet má jasné přístupové údaje uložené v interním správci hesel,
+- reset smaže změny z prezentací a obnoví scénář,
+- seed skript běží v CI nebo aspoň v pravidelné kontrole.
+
+Pozor na falešná data, která vypadají až moc reálně. Pokud používáš jména, e-maily a adresy, drž se rezervovaných domén typu `example.com`, interních testovacích identit a zjevně fiktivních názvů firem. U citlivějších oblastí, třeba zdraví, financí nebo HR, raději používej syntetické hodnoty bez realistických kombinací, které by mohly někoho identifikovat nebo působit jako skutečný záznam.
+
+Seed data mají být verzovaná spolu s produktem. Když přidáš novou funkci, přidej i ukázkový scénář. Jinak demo postupně zestárne a obchod bude ukazovat produkt jako archeologický nález: „tady by teoreticky něco bylo, kdyby to někdo vyplnil“.
+
+## BK.4 Sandbox odděl technicky, vizuálně i oprávněními
+
+Demo prostředí má být oddělené tak, aby chyba v konfiguraci nebyla okamžitě průšvih. Nestačí, že běží na jiné URL. Potřebuje vlastní databázi, vlastní storage, vlastní e-mailový režim a jasné označení v rozhraní.
+
+Praktické oddělení:
+
+- samostatná databáze bez přístupu k produkčním datům,
+- samostatné API klíče a tajemství,
+- vypnuté nebo přesměrované skutečné odesílání e-mailů,
+- jasný banner „Demo prostředí“ v administraci,
+- zákaz používání produkčních webhooků,
+- oddělené role pro interní demo správce,
+- omezená retence logů a žádné ukládání citlivých vstupů z prezentací.
+
+U e-mailů je dobré použít zachytávací schránku nebo interní mail sink, aby sandbox neposílal pozvánky skutečným lidem. U plateb používej testovací režim brány a viditelně označené testovací údaje. U integrací raději ukazuj simulovaný výsledek než napojení na cizí produkční účet, pokud to není pro demo nezbytné.
+
+Vizuální odlišení je podceňované. Barevný pruh, jiné favicon, štítek v hlavičce a varování u nebezpečných akcí stojí pár minut. Zachrání ale situace, kdy má člověk otevřených pět tabů a v pátek odpoledne klikne v tom špatném. Ano, přesně ten pátek. Produkční bohové mají smysl pro drama.
+
+## BK.5 Anonymizace není kouzelná mlha
+
+Někdy tým řekne: „Použijeme produkční data, ale anonymizujeme je.“ To může být legitimní pro některé testy, ale je potřeba rozumět rozdílu mezi anonymizací, pseudonymizací a maskováním. Pokud lze data s dalšími informacemi znovu přiřadit ke konkrétní osobě, pořád jde o osobní údaje a pořád vyžadují ochranu.
+
+ENISA ve svých materiálech opakovaně zdůrazňuje, že pseudonymizace je užitečná bezpečnostní technika, ale musí být navržena podle scénáře a hrozeb; není to univerzální tlačítko „bezpečné“: https://www.enisa.europa.eu/publications/pseudonymisation-techniques-and-best-practices
+
+Pro demo prostředí z toho plyne praktické pravidlo: pokud můžeš použít syntetická data, použij syntetická data. Pokud musíš použít data odvozená z produkce, sepiš důvod, rozsah, metodu úpravy, přístupová práva, retenční dobu a kontrolu rizika zpětné identifikace. A hlavně: nepoužívej takový dataset pro obchodní demo, kde není nutný.
+
+Jednoduché maskování typu „změníme jméno, e-mail necháme“ nestačí. Stejně nebezpečné jsou kombinace: datum narození, PSČ, malá firma, unikátní objednávka, poznámka supportu nebo interní komentář. Identita často neleží v jednom poli. Leží ve vzoru.
+
+## BK.6 Demo přístup pro zákazníka nastav jako krátký pronájem, ne trvalý klíč
+
+Když zákazník dostane sandbox na vyzkoušení, nastav mu jasné hranice. Demo účet nemá žít věčně, nemá sbírat citlivá data a nemá se stát neplacenou produkcí bokem.
+
+Dobrá pravidla pro zákaznický sandbox:
+
+- platnost přístupu 7 až 30 dní podle délky nákupního procesu,
+- jasná věta, že do dema nemají vkládat skutečná osobní nebo citlivá data,
+- možnost resetu dat na požádání,
+- omezené exporty, pokud by mohly odnést interní demo obsah,
+- oddělená analytika dema od produkční analytiky,
+- automatické vypnutí nebo připomenutí před koncem přístupu,
+- jednoduchá cesta k navazujícímu hovoru nebo migraci do produkčního účtu.
+
+Mikrotext při vstupu do sandboxu:
+
+> Toto je demo prostředí s fiktivními daty. Nevkládejte sem reálné osobní údaje zákazníků, zaměstnanců ani pacientů. Pokud chcete ověřit vlastní scénář, napište nám a připravíme bezpečný postup.
+
+Tahle věta není alibismus. Je to praktická brzda. Uživatelé často testují nástroj tak, že do něj vloží kus reality. Když jim předem řekneš, co do sandboxu nepatří, chráníš je i sebe.
+
+## BK.7 Checklist demo účtu a sandboxu
+
+Před tím, než demo ukážeš zákazníkovi nebo ho dáš na web, projdi si:
+
+- Nepoužíváme v demu produkční osobní údaje?
+- Má demo vlastní databázi, storage, API klíče a e-mailový režim?
+- Existuje seed skript nebo postup pro spolehlivý reset?
+- Jsou demo scénáře pojmenované podle reálných zákaznických situací?
+- Jsou všechna jména, e-maily, firmy a poznámky zjevně fiktivní?
+- Je rozhraní viditelně označené jako demo nebo sandbox?
+- Nemůže sandbox poslat skutečný e-mail, webhook, fakturu nebo platbu?
+- Má zákazník jasně napsáno, že do dema nemá vkládat reálná citlivá data?
+- Má demo přístup omezenou platnost a vlastníka?
+- Kontroluje někdo demo po změnách produktu stejně jako produkční funkcionalitu?
+
+## Codyho komentář
+
+Můj pohled: demo účet je marketingový materiál, testovací prostředí a bezpečnostní hranice v jednom. Když ho tým bere jako „vedlejší databázi“, dřív nebo později se z něj stane datové smetiště. Když ho bere jako produktovou funkci, pomáhá prodávat, testovat i vysvětlovat hodnotu bez toho, aby zákaznická data dělala komparz.
+
+## Zdroje k příloze
+
+- EDPB, Guidelines 4/2019 on Article 25 Data Protection by Design and by Default: https://www.edpb.europa.eu/documents/guideline/guidelines-42019-on-article-25-data-protection-by-design-and-by-default_en
+- ENISA, Pseudonymisation techniques and best practices: https://www.enisa.europa.eu/publications/pseudonymisation-techniques-and-best-practices
+- ENISA, Deploying Pseudonymisation Techniques: https://www.enisa.europa.eu/publications/deploying-pseudonymisation-techniques
+- OWASP Application Security Verification Standard: https://owasp.org/www-project-application-security-verification-standard/
+
+## Shrnutí přílohy
+
+Demo a sandbox mají ukazovat hodnotu produktu, ne vystavovat produkční data v převleku. Postav je na syntetických seed scénářích, umožni rychlý reset, odděl prostředí technicky i vizuálně, nepovažuj anonymizaci za kouzlo a zákaznický sandbox omez časem i jasnými pravidly. Privacy-first demo není chudší demo. Je to demo, u kterého se nikdo nemusí potit pokaždé, když se objeví detail objednávky nebo jméno zákazníka.
+
 ## Pracovní log
+- 2026-08-09: Přidána příloha BK o demo účtu a sandboxu bez úniku produkčních dat: syntetické seed scénáře, reset, oddělení prostředí, opatrnost u anonymizace, krátkodobý zákaznický přístup a checklist.
 - 2026-08-09: Přidána příloha BJ o cookie liště bez dark patterns: inventář cookies, férový souhlas, oddělení analytiky od marketingu, odvolání souhlasu, dvoukrokové embedy, živá cookie stránka a checklist.
 - 2026-08-09: Přidána příloha BI o žádostech subjektů údajů bez paniky: třídění DSR, ověření identity, datová mapa, férový export, vrstvy výmazu, interní playbook a checklist.
 - 2026-08-09: Přidána příloha BH o interních přístupech k produkci bez superadmin kultu: role podle práce, just-in-time přístup, support access, audit logy, servisní účty, měsíční access review a checklist.
