@@ -8026,6 +8026,7 @@ Na konci musí vzniknout maximálně tři akce. Pokud vznikne dvanáct úkolů, 
 - [ ] Eventy měří hodnotu a stav procesu, ne obsah zákaznických dat.
 - [ ] Dashboard kombinuje leading a lagging metriky.
 - [ ] U klíčových metrik jsou předem napsané hranice a reakce.
+- [ ] Každá klíčová metrika má vlastníka, který umí vysvětlit její změnu.
 - [ ] Týdenní review končí nejvýš třemi konkrétními akcemi.
 - [ ] Metriky, které nikdo nepoužil dva měsíce, se odstraní nebo přeformulují.
 - [ ] Codyho pravidlo: když číslo nezmění rozhodnutí, nemá sedět v první řadě.
@@ -8040,6 +8041,7 @@ Zakladatelský dashboard má být rozhodovací nástroj, ne vitrína metrik. Za�
 
 
 ## Pracovní log
+- 2026-08-09: Zpřesněn checklist zakladatelského dashboardu o vlastníka klíčové metriky, aby čísla nezůstala bez odpovědnosti.
 - 2026-08-09: Přidána příloha AX o zakladatelském dashboardu bez metrik pro ego a sledovacích zkratek: rozhodovací otázky, pět vrstev zdraví produktu, agregované eventy, leading/lagging metriky, reakční hranice, týdenní review a checklist.
 - 2026-08-09: Přidána příloha AW o zákaznických rozhovorech bez výslechu a datového nepořádku: hypotézy, otázky na minulost, střídmé poznámky, anonymizované citace, syntéza vzorů, follow-up a checklist.
 - 2026-08-09: Přidána příloha AV o lokalizaci SaaS a webu bez překladového chaosu: výběr jazyků podle obchodního smyslu, překlad slibů, privacy texty, technická struktura, bezpečné AI překlady, workflow a checklist.
