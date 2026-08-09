@@ -8997,7 +8997,141 @@ E-mail je skvělý kanál, protože je přímý, otevřený a pořád funguje be
 E-mailová doručitelnost je kombinace technické autentizace, čistého provozu a respektu k příjemci. SPF, DKIM a DMARC chrání doménu, oddělené streamy chrání transakční zprávy a střídmé měření chrání důvěru. Privacy-first e-mail neposílá méně hodnoty. Jen posílá méně balastu a méně dat do cizích systémů.
 
 
+# Příloha BF: Platby a fakturace bez datového kombajnu
+
+Platba je jeden z nejcitlivějších momentů SaaS produktu. Zákazník už nečte jen slib na landing page. Dává ti peníze, fakturační údaje a implicitně i důvěru, že z toho neuděláš datový bleší trh. Špatně navržený checkout umí pokazit konverzi, účetnictví, podporu i soukromí najednou. To je docela slušný multitasking, bohužel z té temné strany síly.
+
+Privacy-first fakturace neznamená, že produkt má být účetní skanzen. Znamená to, že jasně oddělíš platební údaje, fakturační povinnosti, produktový přístup a marketing. Každý údaj má mít účel, vlastníka, retenční pravidlo a bezpečný tok. Ideální stav: zákazník zaplatí bez překvapení, účetní má doklady, support vyřeší problém a marketing nedostane z checkoutu nepozvaný osobní profil.
+
+## BF.1 Checkout je produktový proces, ne jen formulář na kartu
+
+Checkout začíná dřív než platební brána. Začíná cenovou stránkou, jasným popisem tarifu, informací o DPH, měně, obnovování předplatného, zrušení a fakturaci. Pokud zákazník až po zadání karty zjistí, že cena byla bez daně, roční obnova je schovaná v poznámce a faktura přijde „někdy“, důvěra dostane pěstí.
+
+Praktický checkout pro B2B SaaS má odpovědět na tyhle otázky:
+
+- Co přesně kupuji a od kdy to platí?
+- Jaká je cena, měna, fakturační období a případná daň?
+- Kdo bude mít administrátorský přístup po zaplacení?
+- Jak dostanu fakturu a kde ji najdu později?
+- Jak předplatné zruším nebo změním tarif?
+- Co se stane, když platba selže?
+
+Příklad mikrotextu u tlačítka:
+
+> „Po potvrzení budete přesměrováni na bezpečnou platební bránu. Údaje o kartě neukládáme v našem produktu. Fakturu pošleme na zadaný fakturační e-mail a najdete ji také v administraci.“
+
+Tohle je krátké, ale řeší strach. Zákazník ví, co se stane. Support dostane méně dotazů. A právník si možná na chvíli sedne bez tikání v oku.
+
+## BF.2 Sbírej jen údaje, které potřebuje platba, faktura nebo podpora
+
+Fakturační formulář není příležitost vyptat se na velikost firmy, obor, počet zaměstnanců, narozeniny zakladatele a oblíbenou barvu účetní. Pokud údaj nepotřebuješ k platbě, daňovému dokladu, smluvnímu vztahu nebo podpoře, nepatří do checkoutu.
+
+Minimální datový model pro B2B předplatné:
+
+| Údaj | Typický účel | Poznámka |
+| --- | --- | --- |
+| Název firmy | fakturace | Jen pokud zákazník nakupuje jako firma. |
+| IČO / DIČ | fakturace a DPH | Ověřuj jen tam, kde to dává smysl. |
+| Fakturační adresa | účetní a daňové doklady | Nepoužívej ji automaticky pro marketingovou segmentaci. |
+| Fakturační e-mail | doručení dokladu | Může být jiný než uživatelský login. |
+| ID zákazníka v platební bráně | párování plateb | Ukládej interní identifikátor, ne plná platební data. |
+| Poslední čtyři číslice karty | zákaznická orientace | Pokud je poskytuje brána; nikdy neukládej celé číslo karty. |
+
+Princip minimalizace dat je jedním ze základních principů GDPR: osobní údaje mají být přiměřené, relevantní a omezené na to, co je nezbytné pro daný účel. Evropská komise principy GDPR shrnuje zde: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en. V checkoutu to znamená jednoduché pravidlo: každé pole musí projít větou „bez tohoto údaje nedokážeme splnit konkrétní povinnost nebo službu“.
+
+## BF.3 Platební brána je subdodavatel, ne černá díra
+
+Platební brána má často přístup k citlivějším údajům než většina marketingových nástrojů. Proto ji nevybírej jen podle toho, jak rychle jde vložit tlačítko. Ptej se, kde běží zpracování, jaké údaje ukládá, jak řeší chargebacky, exporty, webhooks, auditní logy, přístupy administrátorů a podporu při incidentu.
+
+Krátký vendor dotazník pro platby:
+
+- Které fakturační a platební údaje zpracováváte a v jaké roli?
+- Kde jsou data uložena a kdo k nim má administrátorský přístup?
+- Jaké subdodavatele používáte pro platby, antifraud, e-mail a podporu?
+- Umíte export zákazníků, plateb, refundací a faktur v použitelném formátu?
+- Jak dlouho držíte události, logy a webhook payloady?
+- Jak se řeší incident, únik, reklamace nebo sporná platba?
+
+Codyho komentář: u plateb někdy nejde mít všechno stoprocentně evropské, protože kartové sítě, banky a antifraud ekosystém jsou globální realita. Privacy-first rozhodnutí ale pořád existuje: neposílat do platebního stacku víc dat, než je nutné; oddělit platební identitu od produktové analytiky; a vybrat dodavatele, kterého umíš auditovat, ne jen obdivovat v integrační dokumentaci.
+
+## BF.4 Fakturační a produktová data drž odděleně
+
+Častá chyba: fakturační systém se stane vedlejším CRM, produktová databáze začne držet účetní historii a support vidí víc, než potřebuje. Výsledek je chaos. Když zákazník požádá o export, výmaz, změnu e-mailu nebo převod účtu, tým najednou netuší, kde končí produktová data a kde začínají účetní povinnosti.
+
+Navrhni oddělení takhle:
+
+- Produktový účet drží přístup, role, nastavení a produktová data.
+- Fakturační profil drží údaje nutné k dokladům, předplatnému a platbám.
+- Platební brána drží platební instrumenty a transakční stav.
+- Účetnictví drží doklady podle zákonných povinností.
+- Marketing drží pouze dobrovolně získané kontakty a preference komunikace.
+
+Mezi systémy používej interní ID, ne e-mail jako univerzální klíč. E-mail se mění, člověk může odejít z firmy a fakturační kontakt nemusí být uživatel produktu. Univerzální e-mailový klíč je pohodlný asi jako jedna společná kartáčová hlavice pro celou firmu: technicky možné, společensky znepokojivé.
+
+## BF.5 DPH a přeshraniční prodej nehádej podle nálady
+
+U SaaS v Evropě rychle narazíš na rozdíl mezi B2B a B2C, domácím a přeshraničním prodejem, plátcem a neplátcem DPH, reverse charge a režimy typu One Stop Shop. Tohle není místo pro kreativní improvizaci. Produkt má připravit čistá data a jasný tok, účetní nebo daňový poradce má potvrdit pravidla.
+
+Produktové minimum:
+
+- rozliš zemi zákazníka a typ zákazníka podle fakturačních údajů,
+- ukládej, jaké daňové rozhodnutí bylo použito u konkrétní faktury,
+- neměň historické doklady při změně profilu zákazníka,
+- umožni ruční opravu s auditní stopou,
+- zobraz cenu a daň srozumitelně před platbou,
+- dokumentuj výjimky, místo aby žily jen v hlavě účetní.
+
+Evropská komise popisuje One Stop Shop jako režim, který firmám umožňuje přiznávat a platit DPH z vybraných přeshraničních B2C prodejů v EU přes jeden členský stát: https://taxation-customs.ec.europa.eu/one-stop-shop_en. Náležitosti českého daňového dokladu se řeší v zákoně o DPH, zejména v § 29: https://www.zakonyprolidi.cz/cs/2004-235#p29. Neber tuhle kapitolu jako daňové poradenství; ber ji jako produktový checklist, který účetnímu usnadní říct „ano, takhle to dává smysl“ místo „kdo to proboha navrhoval“.
+
+## BF.6 Selhaná platba má být zákaznická pomoc, ne trest
+
+Karta expiruje, limit selže, banka platbu zamítne, fakturační kontakt je na dovolené. To není morální selhání zákazníka. Je to běžný provozní stav. Dobrý SaaS ho řeší klidně, předvídatelně a bez vyděračského tónu.
+
+Proces pro selhanou platbu:
+
+1. Hned po selhání zobraz bezpečnou informaci v administraci.
+2. Pošli krátký e-mail fakturačnímu kontaktu, ne celému týmu.
+3. Dej rozumnou ochrannou lhůtu před omezením služby.
+4. Jasně vysvětli, co se stane po vypršení lhůty.
+5. Nezobrazuj platební detaily lidem bez fakturační role.
+6. Po vyřešení platby pošli potvrzení a ukonči upomínkovou sekvenci.
+
+Příklad e-mailu:
+
+> „Platba za tarif Team se dnes nepovedla. Služba běží dál do 20. 8. 2026, aby měl tým čas údaje opravit. Platební metodu může upravit fakturační správce v sekci Fakturace. Údaje o kartě v našem produktu neukládáme.“
+
+Dobrá upomínka je konkrétní, klidná a bezpečná. Špatná upomínka zní jako robotický exekutor s newsletterovým certifikátem.
+
+## BF.7 Checklist plateb a fakturace bez datového kombajnu
+
+- Je na cenové stránce jasné, co zákazník kupuje, v jaké měně, s jakým obdobím a jak se řeší DPH?
+- Sbírá checkout jen údaje nutné pro platbu, fakturu, smlouvu nebo podporu?
+- Má fakturační e-mail samostatné pole a není automaticky marketingovým souhlasem?
+- Jsou platební údaje uložené u brány, ne v produktové databázi?
+- Je platební brána vedená jako subdodavatel v interním registru?
+- Má tým popsané, kde končí produktová data a kde začínají účetní doklady?
+- Ukládá systém daňové rozhodnutí použité u konkrétní faktury?
+- Mají refundace, chargebacky a ruční opravy auditní stopu?
+- Vidí platební a fakturační údaje jen lidé s potřebnou rolí?
+- Existuje lidský proces pro selhané platby, ochrannou lhůtu a obnovu přístupu?
+
+## Codyho komentář
+
+Platby jsou skvělé místo, kde se ukáže, jestli firma myslí privacy-first vážně. Na blogu se o soukromí píše snadno. V checkoutu se ale láme chleba: dokážeš říct zákazníkovi, co sbíráš, proč to sbíráš, kdo to zpracuje a jak dlouho to zůstane? Pokud ano, důvěra není slogan. Je to provozní vlastnost produktu.
+
+## Zdroje k příloze
+
+- Evropská komise, principy GDPR: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en
+- Evropská komise, One Stop Shop pro DPH v EU: https://taxation-customs.ec.europa.eu/one-stop-shop_en
+- Zákon č. 235/2004 Sb., o dani z přidané hodnoty, § 29 náležitosti daňového dokladu: https://www.zakonyprolidi.cz/cs/2004-235#p29
+
+## Shrnutí přílohy
+
+Privacy-first platby stojí na jasném checkoutu, datové minimalizaci, auditovatelném platebním dodavateli, oddělení produktových a fakturačních dat a klidném procesu při selhání platby. Fakturace nemá být datový kombajn. Má být důvěryhodná provozní vrstva, která zákazníkovi usnadní platit a týmu usnadní neudělat nepořádek.
+
+
 ## Pracovní log
+- 2026-08-09: Přidána příloha BF o platbách a fakturaci bez datového kombajnu: checkout, datové minimum, platební brána jako subdodavatel, oddělení fakturačních a produktových dat, DPH/OSS, selhané platby a checklist.
 - 2026-08-09: Přidána příloha BE o e-mailové doručitelnosti bez špehovacích pixelů: oddělení typů zpráv, SPF/DKIM/DMARC, střídmé měření, bounce a complaint proces, transakční šablony, vendor dotazník a checklist.
 - 2026-08-09: Přidána příloha BD o vendor lock-inu a přenositelnosti: mapa lock-inu, použitelné exporty, dokumentace schématu, import, API/webhooky, offboarding a checklist férového SaaS bez zákaznické klece.
 - 2026-08-09: Přidána příloha BC o privacy-first AI funkcích v SaaS: AI karta funkce, role podle AI Actu, minimalizace promptů, transparentní mikrocopy, human-in-the-loop, auditní logy a checklist.
