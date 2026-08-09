@@ -7758,7 +7758,163 @@ Pro malý SaaS tým stačí jednoduchá tabulka nebo soubory v repozitáři. Dů
 Lokalizace je víc než překlad. Je to slib, že zákazník v jiném jazyce dostane stejně jasnou hodnotu, stejně férové privacy informace a stejně použitelný produkt. Malý tým má začít s málem jazyků, ale udělat je pořádně: obchodní důvod, technická struktura, kontext pro překlady, revize citlivých textů a bezpečné používání AI. Privacy-first lokalizace neznamená pomalejší růst. Znamená růst bez překladového chaosu a bez toho, aby se zákaznická data stala palivem pro pohodlnou zkratku.
 
 
+
+---
+
+# Příloha AW: Platby a fakturace v SaaS bez provozního stresu
+
+Platba je zvláštní místo v produktu. Zákazník už možná věří hodnotě, ale teď začíná řešit peníze, doklady, interní schvalování, kartu, DPH, bezpečnost a otázku, jestli půjde službu později normálně zrušit. Pokud tenhle moment pokazíš, není to jen drobná UX chyba. Je to malý finanční minipožár s vůní podpory.
+
+Dobrá platební a fakturační část SaaS produktu má být nudně spolehlivá. Žádné temné vzory, žádné schované obnovování, žádný ceník jako luštění daňového sudoku. Cílem je, aby zákazník před platbou rozuměl, za co platí, kdy platí, jak dostane doklad, co se stane při neúspěšné platbě a jak může službu změnit nebo ukončit.
+
+Privacy-first přístup tady neznamená stavět vlastní platební bránu v garáži vedle kávovaru. Znamená sbírat minimum platebních a fakturačních údajů, jasně oddělit provozní data od marketingu, vybrat dodavatele vědomě a neschovávat obchodní pravidla do patičky napsané velikostí pro mravence s lupou.
+
+## AW.1 Platební slib napiš dřív než platební obrazovku
+
+Než zapojíš platební bránu, napiš si platební slib jednou stránkou. Ne technickou specifikaci. Slib vůči zákazníkovi.
+
+Měl by odpovědět na tyhle otázky:
+
+- Co přesně zákazník kupuje?
+- Kdy začíná placené období?
+- Jak často se platba opakuje?
+- Jak funguje trial nebo pilot, pokud existuje?
+- Kdy a jak přijde faktura nebo doklad?
+- Co se stane při selhání platby?
+- Jak zákazník změní tarif?
+- Jak službu zruší?
+- Jak dlouho po zrušení zůstávají data dostupná pro export?
+
+Příklad slabého textu:
+
+> „Předplatné se automaticky obnovuje dle podmínek služby.“
+
+Lepší text:
+
+> „Tarif se obnovuje každý měsíc v den aktivace. Před každou změnou ceny dáme vědět předem. Službu můžete zrušit v administraci; po zrušení poběží do konce zaplaceného období a data půjde 30 dní exportovat.“
+
+Druhý text není delší kvůli právničině. Je delší, protože odstraňuje nejistotu. Nejistota je konverzní brzda a současně továrna na support tickety.
+
+## AW.2 Odděl účet, fakturaci a produktová oprávnění
+
+V malém SaaS týmu je lákavé mít všechno jako jeden záznam: uživatel, firma, tarif, karta, fakturační e-mail, role, sleva, stav účtu, historie plateb. Vypadá to jednoduše, dokud první zákazník nechce změnit fakturační kontakt, ale ne správce účtu. Nebo dokud účetní potřebuje faktury, ale nemá mít přístup k produktovým datům.
+
+Rozumný model přemýšlení:
+
+- **Uživatel:** člověk, který se přihlašuje.
+- **Organizace:** firma nebo tým, který službu používá.
+- **Role:** co člověk smí dělat v produktu.
+- **Fakturační profil:** údaje potřebné pro doklady a platby.
+- **Předplatné:** tarif, období, stav a historie změn.
+- **Platební metoda:** uložená u platebního poskytovatele, ne v tvé aplikaci.
+
+Tohle oddělení pomáhá i privacy-first provozu. Ne každý, kdo řeší produkt, má vidět fakturační údaje. Ne každý, kdo řeší faktury, má vidět produktová data. Interní administrace by měla umět ukázat jen to, co člověk potřebuje pro svou práci.
+
+Praktický příklad: support řeší, že zákazníkovi nejde přidat uživatel. Support vidí stav předplatného a limit uživatelů, ale ne kompletní platební metodu ani historii interních poznámek obchodníka. Účetní vidí faktury a fakturační profil, ale ne obsah zákaznických projektů. Ano, je to méně pohodlné pro zvědavost. Přesně o to jde.
+
+## AW.3 Fakturační údaje sbírej postupně
+
+Než zákazník zaplatí, nepotřebuješ o něm vědět všechno. U samoobslužného SaaS často stačí e-mail a základní účet. Fakturační údaje sbírej ve chvíli, kdy vzniká placený vztah nebo kdy je zákazník potřebuje doplnit pro doklad.
+
+Typická minimální sada pro firmu:
+
+- název firmy,
+- fakturační e-mail,
+- adresa podle daňových potřeb,
+- IČO nebo DIČ, pokud je relevantní,
+- země kvůli daňovému režimu,
+- volitelná objednávka nebo interní reference zákazníka.
+
+Co do fakturace nepatří bez jasného důvodu: osobní telefon nákupčího jako povinné pole, datum narození, interní poznámky z obchodu, dlouhé volné pole s citlivými informacemi, screenshoty platebních metod nebo ručně opsané údaje z karty. Platební údaje patří platebnímu poskytovateli. Do vlastního systému si ukládej jen bezpečný stav: aktivní metoda existuje, platba proběhla, platba selhala, faktura vystavena.
+
+Krátká privacy věta u fakturace může znít:
+
+> Fakturační údaje používáme jen pro platby, účetnictví a zákonné povinnosti. Platební kartu nezpracováváme v naší aplikaci; platbu obsluhuje platební poskytovatel.
+
+Není to marketingový ohňostroj. Je to jasná odpověď na otázku „kam jdou moje peníze a data?“
+
+## AW.4 Neúspěšná platba není důvod k panice ani vydírání
+
+Selhání platby je běžná provozní situace. Karta expiruje, banka platbu zamítne, firemní limit se změní, účetní je na dovolené, nebo někdo v pátek odpoledne klikne na špatné tlačítko, protože vesmír má smysl pro humor.
+
+Dobrý dunning proces, tedy proces řešení neúspěšných plateb, má být klidný a předvídatelný:
+
+1. První upozornění: platba se nepovedla, tady je bezpečný odkaz na aktualizaci platební metody.
+2. Krátké připomenutí: služba stále běží, ale potřebujeme platbu vyřešit do konkrétního data.
+3. Poslední upozornění: pokud platba neproběhne, účet přejde do omezeného režimu.
+4. Omezený režim: zákazník může exportovat data a opravit platbu, ale nemusí mít plný provoz.
+5. Uzavření: po jasně oznámené době se účet zruší podle retenčních pravidel.
+
+Vyhnul bych se větám typu „Vaše data budou okamžitě smazána“ jako první reakci na neúspěšnou platbu. To není tlak, to je únos s fakturou. Lepší je dát zákazníkovi férovou lhůtu, bezpečný odkaz a jasný dopad.
+
+Privacy-first detail: odkazy v platebních e-mailech by neměly obsahovat zbytečné osobní údaje ani dlouhodobě platné tokeny. Krátkodobý bezpečný odkaz je lepší než URL, která půjde přeposlat, uložit do ticketu a oživit za půl roku jako malý zombie přístup.
+
+## AW.5 Změna tarifu musí být pochopitelná před kliknutím
+
+Upgrade, downgrade a zrušení jsou místa, kde se ukáže charakter produktu. Pokud upgrade trvá jedno kliknutí a zrušení vyžaduje tři e-maily, kalendářový slot a rituální tanec s obchodníkem, zákazník si toho všimne. A bude mít pravdu.
+
+Před potvrzením změny tarifu ukaž:
+
+- nový tarif,
+- od kdy změna platí,
+- kolik se naúčtuje teď,
+- co se stane s limity,
+- jestli se něco dopočítává poměrně,
+- co se stane s funkcemi, které nový tarif nemá,
+- kde najde doklad.
+
+Příklad dobrého potvrzení:
+
+> Přecházíte z tarifu Start na Team. Změna začne platit hned. Dnes doplatíte poměrnou část za zbytek období. Nový měsíční tarif se obnoví 15. září. Všechny faktury najdete v Nastavení → Fakturace.
+
+U downgradu přidej ochranu před ztrátou práce. Pokud nižší tarif má méně projektů, méně uživatelů nebo menší úložiště, neřež data potichu. Ukaž, co se stane, a dej možnost exportu nebo úklidu. Produkt, který při downgradu potichu rozbije data, není chytrý. Je jen levnější způsob, jak vyrábět naštvané e-maily.
+
+## AW.6 Interní kontrola: kdo smí sáhnout na peníze
+
+Fakturace není jen frontend. Je to citlivá interní oblast. Malý tým by měl mít jednoduchá pravidla pro zásahy do plateb a předplatného.
+
+Základní pravidla:
+
+- Ruční sleva má mít důvod a vlastníka.
+- Refund má mít záznam: kdo, kdy, proč, částka, vazba na zákazníka.
+- Změna tarifu mimo samoobsluhu má být potvrzená zákazníkem.
+- Přístup k fakturační administraci má jen omezený počet lidí.
+- Export fakturačních dat se ukládá bezpečně a nesdílí se přes náhodné přílohy v chatu.
+- Testovací platby a produkční platby se nesmí míchat.
+
+Užitečný interní záznam pro ruční zásah:
+
+| Pole | Příklad |
+| --- | --- |
+| Zákazník | Firma ABC |
+| Zásah | Refund poslední měsíční platby |
+| Důvod | Dvojí platba po migraci platební metody |
+| Schválil | Vlastník zákaznického úspěchu |
+| Provedl | Finanční administrátor |
+| Datum kontroly | Další měsíční billing review |
+
+Codyho komentář: ruční zásahy do fakturace bez záznamu jsou jako oprava serveru přes SSH v pátek večer bez poznámky. Možná to dopadne dobře. Ale jestli ne, budoucí já si zaslouží aspoň mapu k místu činu.
+
+## AW.7 Checklist plateb a fakturace
+
+- [ ] Zákazník před platbou ví, co kupuje, kdy platí a jak dostane doklad.
+- [ ] Trial, pilot, automatická obnova a zrušení jsou vysvětlené lidsky.
+- [ ] Produktový účet, role, fakturační profil a předplatné jsou logicky oddělené.
+- [ ] Fakturační údaje se sbírají až ve chvíli, kdy jsou potřeba.
+- [ ] Platební karta se nezpracovává přímo ve vlastní aplikaci.
+- [ ] Neúspěšná platba má klidný proces s bezpečnými odkazy a jasnými lhůtami.
+- [ ] Upgrade, downgrade a zrušení ukazují dopad před potvrzením.
+- [ ] Downgrade nevede k tiché ztrátě dat nebo přístupu bez varování.
+- [ ] Refundy, slevy a ruční změny mají záznam a vlastníka.
+- [ ] Přístup k fakturační administraci je omezený a pravidelně kontrolovaný.
+
+## Shrnutí přílohy
+
+Platby a fakturace nejsou jen účetní roh SaaS produktu. Jsou to důvěrový moment, zákaznická zkušenost a provozní riziko v jednom. Dobré řešení je srozumitelné, nudně spolehlivé a datově střídmé: jasný platební slib, minimum fakturačních údajů, bezpečný poskytovatel plateb, férový proces při selhání platby a kontrolované interní zásahy. Privacy-first billing není pomalejší billing. Je to billing, po kterém se zákazník nemusí ptát, jestli se právě upsal něčemu, co bude zrušit těžší než členství ve fitness centru.
+
+
 ## Pracovní log
+- 2026-08-09: Přidána příloha AW o platbách a fakturaci v SaaS bez provozního stresu: platební slib, oddělení účtu od fakturace, postupný sběr údajů, neúspěšné platby, změny tarifů, interní kontrola a checklist.
 - 2026-08-09: Přidána příloha AV o lokalizaci SaaS a webu bez překladového chaosu: výběr jazyků podle obchodního smyslu, překlad slibů, privacy texty, technická struktura, bezpečné AI překlady, workflow a checklist.
 - 2026-08-09: Přidána příloha AU o demo účtech a sandboxu bez úniku dat: syntetická demo data, omezené sandbox účty, resetovací rutina, bezpečné integrace, trust věta a checklist.
 - 2026-08-09: Přidána příloha AT o offboardingu zákazníka bez rukojmí: zrušení účtu, export dat, retence, vypnutí integrací, závěrečná komunikace, churn feedback a checklist.
