@@ -8730,7 +8730,149 @@ AI funkce je dobrý sluha a mizerný maskot. Když ji přidáš jen proto, aby l
 Privacy-first AI v SaaS začíná konkrétním use casem, jasnými rolemi a střídmým datovým vstupem. Prompt není skládka zákaznických dat, transparentnost má být vidět v produktu a lidská kontrola musí mít reálnou brzdu. Když tým loguje verze rozhodnutí místo osobních románů a drží retenci pod kontrolou, může AI používat prakticky, evropsky a bez zbytečného datového hazardu.
 
 
+# Příloha BD: Vendor lock-in a přenositelnost bez zákaznické klece
+
+Vendor lock-in není automaticky zlo. Každý produkt má nějaké náklady na změnu: data, integrace, návyky týmu, procesy, školení, fakturace. Problém začíná ve chvíli, kdy zákazník zůstává ne proto, že produkt vytváří hodnotu, ale proto, že odchod bolí víc než používání. To není retence. To je digitální lepidlo na prsty.
+
+Privacy-first SaaS má k přenositelnosti přistupovat jako k důvěryhodnosti produktu. Když zákazník ví, že může odejít, paradoxně se mu často lépe zůstává. Nemusí se bát, že podpis smlouvy znamená dobrovolný vstup do datového akvária bez dvířek.
+
+Právní poznámka: GDPR obsahuje právo na přenositelnost údajů v článku 20, pokud jsou splněné jeho podmínky. Oficiální znění na EUR-Lexu mluví o právu získat osobní údaje ve strukturovaném, běžně používaném a strojově čitelném formátu a předat je jinému správci: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng#art_20. Produktově je ale dobré jít dál než zákonné minimum: umožnit rozumný export i tam, kde nejde čistě o osobní údaje, ale o provozní hodnotu zákazníka.
+
+## BD.1 Pojmenuj, kde může lock-in vznikat
+
+Lock-in nebývá jen jedna věc. V malém SaaS se často schová do detailů, které vypadají nevinně, dokud zákazník nepotřebuje změnu.
+
+Typická místa lock-inu:
+
+- **Data:** zákazník nemá export, nebo je export nečitelný zip plný náhodných ID.
+- **Integrace:** webhooky, API a propojení jsou nastavené tak ručně, že je nikdo nechce znovu dělat.
+- **Workflow:** tým si zvykl na proces, který produkt podporuje, ale neumí ho popsat mimo aplikaci.
+- **Dokumentace:** nastavení existuje jen v hlavě jednoho člověka nebo v dávno zapomenutém chatu.
+- **Smlouva:** výpovědní podmínky jsou napsané tak, že zákazník musí plánovat odchod jako menší stěhování firmy.
+- **Identita:** uživatelské účty, role a oprávnění nejdou snadno předat nebo uzavřít.
+
+První krok není všechno hned opravit. První krok je udělat mapu. U každé oblasti napiš: co zákazník potřebuje k odchodu, kolik času by mu to trvalo a co by ztratil. Pokud odpověď zní „netušíme“, máš riziko, ne tajemství.
+
+## BD.2 Export navrhni pro člověka i stroj
+
+Export dat nemá být alibi tlačítko. Má být použitelný. Zákazník by měl rozumět, co dostane, v jakém formátu, jak často a co v exportu není.
+
+Dobré minimum pro B2B SaaS:
+
+| Typ dat | Doporučený export | Poznámka |
+| --- | --- | --- |
+| Zákaznické záznamy | CSV nebo XLSX | Vhodné pro rychlou kontrolu a import do jiného nástroje. |
+| Relace a vazby | JSON | Lepší pro hierarchie, role, stavy a historii. |
+| Dokumenty a přílohy | ZIP se strukturou složek | Přidej manifest se seznamem souborů. |
+| Auditní stopa | CSV/JSON s omezením rozsahu | Pozor na osobní údaje a bezpečnostní citlivost. |
+| Nastavení účtu | JSON nebo čitelný Markdown přehled | Pomůže migraci i internímu auditu. |
+
+Export by měl mít manifest: datum vytvoření, rozsah, verzi schématu, časové pásmo, kódování, seznam souborů a krátké vysvětlení polí. Bez manifestu je export jako mapa bez legendy: technicky existuje, prakticky tě štve.
+
+## BD.3 Dokumentuj schéma, ne jen tlačítko
+
+Když export obsahuje sloupec `status`, zákazník potřebuje vědět, co hodnoty znamenají. `1`, `2`, `3` možná dávají smysl databázi, ale člověku po třech měsících připomínají šifru z účtenky.
+
+Ke každému exportu udržuj malou dokumentaci:
+
+- název souboru a účel,
+- seznam polí s lidským popisem,
+- povolené hodnoty enumů,
+- vztahy mezi soubory,
+- příklad jednoho řádku nebo objektu,
+- co je záměrně vynechané kvůli bezpečnosti nebo minimalizaci dat.
+
+Praktický příklad:
+
+```text
+subscriptions.csv
+- customer_id: interní ID zákazníka v exportu, ne původní databázové ID
+- plan_code: tarif v době exportu, hodnoty starter/pro/business
+- status: active, paused, cancelled
+- started_at: datum začátku v ISO 8601
+- cancelled_at: prázdné, pokud tarif nebyl zrušen
+```
+
+Tahle dokumentace nemusí být krásná. Musí být aktuální. Pokud se mění schéma exportu, změna patří do release checklistu stejně jako změna API.
+
+## BD.4 Import mysli jako budoucí důkaz férovosti
+
+Přenositelnost není jen „umíme data vydat ven“. U některých produktů dává smysl umět data také přijmout. Ne proto, aby ses stal univerzálním migračním centrem pro celý internet, ale protože dobrý import snižuje strach z přechodu k tobě.
+
+U importu nastav hranice:
+
+- podporuj pár běžných formátů místo deseti polofunkčních,
+- validuj data před uložením a ukaž srozumitelné chyby,
+- dovol testovací import bez dopadu na produkci,
+- ukládej technický import log s minimem osobních údajů,
+- dej zákazníkovi souhrn: kolik záznamů prošlo, co se přeskočilo a proč.
+
+Import je obchodní funkce maskovaná jako technická. Když zákazník vidí, že přechod nebude ruční peklo, sníží se nákupní riziko. A když jednou bude odcházet, stejná filozofie mu řekne: nejsme klec, jsme služba.
+
+## BD.5 API a webhooky drž stabilní, ale ne věčné
+
+Integrace jsou silný zdroj hodnoty i lock-inu. Když zákazník postaví proces na tvém API, nechce každé dva měsíce hádat, proč se změnil payload. Stabilita je součást důvěry.
+
+Rozumné zásady:
+
+- verziuj API i webhook eventy,
+- oznamuj breaking changes dopředu,
+- udržuj migrační návod s příkladem starého a nového payloadu,
+- nepřidávej do webhooků osobní údaje, které příjemce nepotřebuje,
+- umožni vypnout nebo rotovat integrační tokeny bez podpory,
+- ukazuj historii posledních doručení webhooku bez zbytečných citlivých dat.
+
+Privacy-first verze API dokumentace má odpovídat i na otázku: která data odcházejí z našeho systému a proč. Vývojář chce endpoint. DPO nebo bezpečnostní člověk chce datový tok. Dobrá dokumentace zvládne obojí bez toho, aby se tvářila jako román o kabeláži.
+
+## BD.6 Odchod musí být proces, ne trest
+
+Když zákazník ruší účet, často je to nepříjemné. Produkt ale nemá mstít zraněné city. Dobře navržený odchod obsahuje jasný postup: export, potvrzení, vypnutí obnovování fakturace, retence, smazání a kontakt pro otázky.
+
+Krátká odchodová stránka může říct:
+
+> „Před zrušením účtu si stáhněte export dat. Data účtu budeme držet 30 dní pro obnovu a vyřízení účetních nebo bezpečnostních požadavků, potom je smažeme podle retenčních pravidel. Fakturace se po zrušení už neobnoví.“
+
+Pokud má produkt komplexnější data, přidej stav migrace:
+
+- export připraven,
+- export stažen,
+- integrace vypnuté,
+- uživatelé deaktivovaní,
+- účet v retenční lhůtě,
+- účet smazaný nebo anonymizovaný.
+
+Tohle není jen UX. Je to prevence supportu, sporů a nedůvěry. Odchod, který je klidný, je poslední dobrý dojem. A poslední dobrý dojem někdy rozhodne, jestli se zákazník za rok vrátí.
+
+## BD.7 Checklist přenositelnosti bez klece
+
+Projdi produkt a odpověz:
+
+- Má zákazník jasné místo, kde si stáhne export klíčových dat.
+- Export má čitelný formát, manifest a popis polí.
+- Zákazník ví, co export obsahuje a co záměrně neobsahuje.
+- Schéma exportu je verzované nebo alespoň dokumentované při změnách.
+- Import umí bezpečně validovat data a vysvětlit chyby.
+- API a webhooky mají verze, migrační pravidla a jasný datový rozsah.
+- Integrační tokeny lze rotovat a vypnout bez lovu v supportu.
+- Offboarding obsahuje export, retenci, vypnutí fakturace a smazání/anonymizaci.
+- Smluvní a produktové texty neslibují víc, než umí technická realita.
+- Tým jednou za čtvrtletí projde, kde nově vznikl lock-in bez vědomého rozhodnutí.
+
+## Codyho komentář
+
+Nejlepší lock-in je hodnota. Zákazník zůstává, protože produkt šetří čas, vydělává peníze, snižuje riziko nebo přináší klid. Jakmile začneš spoléhat na datovou klec, už neoptimalizuješ produkt, ale únikovou trasu. Dreamindí přístup je jednoduchý: postav službu tak, aby šlo odejít, a pak každý měsíc dodej dost hodnoty, aby to zákazník nechtěl udělat. Elegantní, férové a nevyžaduje to ani jeden temný pattern v plášti.
+
+## Zdroje k příloze
+
+- GDPR, článek 20: právo na přenositelnost údajů v oficiálním znění EUR-Lex: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng#art_20
+
+## Shrnutí přílohy
+
+Přenositelnost je součást důvěryhodného SaaS produktu. Zákazník potřebuje použitelný export, dokumentované schéma, férový offboarding a stabilní integrace, ne jen formální tlačítko „stáhnout data“. Privacy-first produkt nestaví klec. Staví hodnotu, která obstojí i ve chvíli, kdy má zákazník otevřené dveře.
+
+
 ## Pracovní log
+- 2026-08-09: Přidána příloha BD o vendor lock-inu a přenositelnosti: mapa lock-inu, použitelné exporty, dokumentace schématu, import, API/webhooky, offboarding a checklist férového SaaS bez zákaznické klece.
 - 2026-08-09: Přidána příloha BC o privacy-first AI funkcích v SaaS: AI karta funkce, role podle AI Actu, minimalizace promptů, transparentní mikrocopy, human-in-the-loop, auditní logy a checklist.
 - 2026-08-09: Přidána příloha BB o release QA bez produkčních dat: riziková klasifikace změn, kritické cesty, syntetická testovací data, kontrola logů a chyb, release checklist a post-release smoke test.
 - 2026-08-09: Přidána příloha BA o ročním produktovém a datovém úklidu: inventář oblastí, ověření ponechaných položek, datový úklid, pravidla archivu, technické vypnutí a checklist.
