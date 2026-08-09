@@ -8594,7 +8594,144 @@ QA není brána, kde sedí mrzutý člověk s razítkem „zamítnuto“. Dobrá
 Release QA pro malý SaaS tým má být krátká, opakovatelná a řízená rizikem. Začni klasifikací změny, udržuj seznam kritických cest, používej syntetická testovací data, kontroluj logy i chybové stavy a po releasu udělej smoke test. Privacy-first provoz neznamená vydávat pomalu. Znamená vydávat tak, aby rychlost nebyla zaplacená zákaznickými daty a improvizovaným požárem v pátek večer.
 
 
+# Příloha BC: AI funkce v SaaS bez černé skříňky a datového hazardu
+
+AI v SaaS produktu není magický posyp na všechno. Je to nová produktová schopnost, která umí zrychlit práci zákazníka, ale taky velmi rychle vyrobit chaos v datech, očekáváních a odpovědnosti. Privacy-first přístup proto nezačíná otázkou „který model je nejchytřejší“, ale „jaké rozhodnutí nebo výstup má AI zlepšit, jaká data k tomu opravdu potřebuje a kdo ručí za výsledek“.
+
+Aktuální poznámka k regulaci: AI Act vstoupil v EU v platnost 1. srpna 2024 a pravidla nabíhají postupně. Evropská komise uvádí, že některé hlavní milníky včetně transparentních povinností podle článku 50 se vztahují k 2. srpnu 2026, další povinnosti mají pozdější termíny podle typu systému. Pro malý SaaS tým to neznamená paniku, ale znamená to, že AI funkci je potřeba navrhovat dokumentovaně, srozumitelně a s jasným rozdělením rolí. Oficiální přehled časové osy je tady: https://ai-act-service-desk.ec.europa.eu/en/ai-act/eu-ai-act-implementation-timeline
+
+## BC.1 Začni use casem, ne modelem
+
+Špatné zadání zní: „Přidáme AI asistenta do aplikace.“ Dobré zadání zní: „Zkrátíme přípravu odpovědi na support ticket z deseti minut na tři a agent výstup před odesláním schválí.“ Rozdíl je brutální. V prvním případě tým hledá místo, kam nalepit chat. Ve druhém řeší konkrétní workflow, riziko a měřitelný výsledek.
+
+Před implementací napiš AI kartu funkce:
+
+| Otázka | Příklad odpovědi |
+| --- | --- |
+| Jaký úkol AI pomáhá splnit? | Navrhne odpověď na support ticket podle interní znalostní báze. |
+| Kdo je uživatel funkce? | Support specialista, ne koncový zákazník. |
+| Jaká data vstupují do promptu? | Text ticketu, vybrané články nápovědy, typ tarifu. |
+| Co do promptu nesmí? | Platební údaje, hesla, celé exporty účtu, interní poznámky bez potřeby. |
+| Kdo výstup schvaluje? | Člověk před odesláním zákazníkovi. |
+| Jak poznáme úspěch? | Kratší čas první odpovědi a stejná nebo lepší kvalita řešení. |
+
+Tahle karta je nudná jen na první pohled. Ve skutečnosti šetří týdny debat, protože oddělí produktovou hodnotu od modelového fetiše. Ano, modely jsou sexy. Ale zákazník neplatí za „používáme nejnovější transformery“, platí za méně práce a méně nervů.
+
+## BC.2 Rozlišuj poskytovatele, nasazovatele a vlastní odpovědnost
+
+Když SaaS tým používá cizí AI API, typicky není autorem základního modelu. Přesto má odpovědnost za to, jak funkci zapojí do produktu, jak informuje uživatele, jak chrání data a jak nastaví lidskou kontrolu. Evropská komise v přehledech k AI Actu pracuje s rozdílnými rolemi a povinnostmi pro vývojáře, poskytovatele a nasazovatele AI systémů: https://commission.europa.eu/news-and-media/news/ai-act-enters-force-2024-08-01_en
+
+Prakticky si u každé AI funkce napiš:
+
+- **Model provider:** kdo provozuje model nebo API.
+- **Aplikační vlastník:** kdo ve tvém týmu ručí za produktové chování funkce.
+- **Datový vlastník:** kdo schvaluje, jaká data se do AI posílají.
+- **Procesní vlastník:** kdo řeší chyby, eskalace a zákaznické dotazy.
+- **Schvalovatel výstupu:** člověk, automatické pravidlo nebo kombinace obojího.
+
+Nejhorší stav je „AI to udělala“. AI není kolega s pracovním poměrem, který přijde na postmortem a řekne: „Moje chyba, příště si dám pozor.“ Produktový tým musí vědět, kdo drží volant.
+
+## BC.3 Prompt není odpadkový koš pro zákaznická data
+
+Privacy-first AI integrace posílá do modelu nejmenší užitečný kontext. Ne celý účet. Ne všechny ticketové historie. Ne export CRM, protože „model si to nějak přebere“. Čím větší a osobnější vstup, tím větší právní, bezpečnostní i reputační riziko.
+
+Dobrá prompt pipeline má tři filtry:
+
+1. **Výběr kontextu:** do promptu jde jen část dat nutná pro konkrétní úkol.
+2. **Redakce citlivých údajů:** systém odstraní nebo nahradí údaje, které nejsou potřeba.
+3. **Účelová šablona:** prompt jasně říká, co má model dělat a co dělat nesmí.
+
+Příklad pro shrnutí support ticketu:
+
+```text
+Úkol: Shrň problém zákazníka pro interní support.
+Nepřidávej doporučení, která nejsou v podkladech.
+Neopakuj osobní údaje, pokud nejsou nutné pro řešení.
+Výstup: 3 odrážky: problém, dosavadní kroky, doporučený další krok.
+Kontext: [očištěný text ticketu]
+Relevantní nápověda: [2 vybrané články]
+```
+
+Pseudonymizace může riziko snížit, ale není kouzelný neviditelný plášť. EDPB ve svých Guidelines 01/2025 k pseudonymizaci připomíná, že pseudonymizovaná data mohou zůstat osobními údaji, pokud existují dodatečné informace umožňující opětovné přiřazení: https://www.edpb.europa.eu/public-consultations/guidelines-012025-on-pseudonymisation_pl
+
+## BC.4 Uživatel má poznat, kdy mluví s AI nebo vidí AI výstup
+
+Transparentnost není patička v obchodních podmínkách. Pokud AI generuje odpověď, doporučení, shrnutí, skóre nebo obsah, který ovlivňuje rozhodnutí uživatele, řekni to přímo v místě použití. Ne dramaticky. Ne výstražnou cedulí „pozor robot“. Prostě jasně.
+
+Příklady mikrocopy:
+
+- „Návrh odpovědi vytvořila AI podle vybraných článků nápovědy. Před odesláním ho zkontrolujte.“
+- „Toto shrnutí je automaticky vytvořené a může vynechat detail. Originální zpráva zůstává dostupná.“
+- „AI doporučení používáme jen jako pomocný signál. Finální rozhodnutí dělá člověk.“
+- „Soubor analyzujeme pouze pro tento výstup a nepoužíváme ho k marketingovému profilování.“
+
+Transparentnost podle článku 50 AI Actu se zaměřuje mimo jiné na informování lidí při interakci s AI systémy a na označování určitých AI výstupů. Evropská komise k tomu zveřejňuje průběžné vysvětlení a FAQ: https://digital-strategy.ec.europa.eu/en/faqs/navigating-ai-act
+
+## BC.5 Human-in-the-loop není alibi, ale konkrétní brzda
+
+„Člověk to zkontroluje“ není kontrolní mechanismus, pokud člověk nemá čas, kontext ani pravomoc výstup zastavit. Lidská kontrola musí být navržená jako součást UX a provozu.
+
+U nízkorizikových funkcí může stačit možnost výstup upravit nebo zahodit. U funkcí, které ovlivňují zákaznickou komunikaci, cenu, přístup k účtu, bezpečnost nebo právní pozici, nastav tvrdší brzdy:
+
+- výstup se nikdy neodesílá automaticky bez schválení,
+- rozhraní ukazuje zdroje, ze kterých AI čerpala,
+- systém umí říct „nevím“ místo sebevědomé halucinace,
+- uživatel má jednoduchou možnost nahlásit chybu,
+- rizikové případy padají do ruční fronty.
+
+Příklad: AI navrhne odpověď na reklamaci. Pokud obsahuje slib refundace, změnu smlouvy nebo právní formulaci, systém ji označí jako „vyžaduje kontrolu seniora“. Ne proto, že nevěříme lidem. Protože věříme procesům víc než pátečnímu optimismu.
+
+## BC.6 Loguj rozhodnutí, ne osobní romány
+
+AI funkce potřebuje auditní stopu. Ne kvůli šmírování, ale kvůli provozu: když zákazník nahlásí chybu, musíš vědět, která verze promptu, modelu a kontextu výstup vytvořila. Zároveň není potřeba ukládat celé prompty s osobními údaji navždy.
+
+Dobrý AI log pro SaaS:
+
+| Položka | Ukládat? | Poznámka |
+| --- | --- | --- |
+| ID AI funkce | Ano | Např. `support_reply_draft`. |
+| Verze promptu | Ano | Bez toho nejde debugovat změny. |
+| Verze modelu nebo provider nastavení | Ano | Stačí technický identifikátor. |
+| Čas a interní ID požadavku | Ano | Pro dohledání incidentu. |
+| Celý prompt | Jen krátce nebo vůbec | Pokud obsahuje osobní data, nastav retenci a přístup. |
+| Celý výstup | Podle účelu | U supportu může být součástí ticketu, u interní pomoci často ne. |
+| Zákaznická identita | Minimalizovat | Ideálně oddělit od technického logu. |
+
+Retence AI logů má být napsaná v datové mapě. Pokud logy držíš „pro jistotu“, přelož si to do češtiny: „Nemáme rozhodnutí a doufáme, že se nikdo nezeptá.“ To je strategie asi jako schovat účtenky do toustovače.
+
+## BC.7 Checklist privacy-first AI funkce
+
+Před zapnutím AI funkce si projdi:
+
+- Je jasně popsaný konkrétní úkol, který AI řeší.
+- Existuje AI karta funkce s vlastníkem, vstupy, výstupy, riziky a metrikou úspěchu.
+- Tým ví, jestli v daném použití vystupuje jako poskytovatel, nasazovatel nebo obojí.
+- Prompt pipeline vybírá jen nezbytný kontext a odstraňuje nepotřebné citlivé údaje.
+- Uživatel v rozhraní pozná, kdy vidí AI výstup nebo interaguje s AI.
+- Rizikové výstupy nejdou ven bez lidské kontroly.
+- Logy obsahují verzi promptu/modelu a minimum osobních údajů.
+- Retence promptů, výstupů a AI logů je popsaná v datové mapě.
+- Dodavatel AI služby je zapsaný ve vendor review a subprocesorském seznamu, pokud zpracovává osobní údaje.
+- Existuje jednoduchý postup pro nahlášení chyby, halucinace nebo nevhodného výstupu.
+
+## Codyho komentář
+
+AI funkce je dobrý sluha a mizerný maskot. Když ji přidáš jen proto, aby landing page měla větší wow, vyrobíš drahý support problém. Když ji navrhneš jako konkrétní zkratku v dobře popsaném procesu, může být skvělá. Dreamindí varianta zní: méně kouzelné mlhy, víc odpovědnosti, datové střídmosti a lidské kontroly. Robot může psát návrh. Volant drží tým.
+
+## Zdroje k příloze
+
+- Evropská komise: přehled vstupu AI Actu v platnost a rolí vývojářů/nasazovatelů: https://commission.europa.eu/news-and-media/news/ai-act-enters-force-2024-08-01_en
+- AI Act Service Desk: časová osa postupné účinnosti AI Actu: https://ai-act-service-desk.ec.europa.eu/en/ai-act/eu-ai-act-implementation-timeline
+- Evropská komise: navigace a FAQ k AI Actu včetně transparentních povinností: https://digital-strategy.ec.europa.eu/en/faqs/navigating-ai-act
+- EDPB: Guidelines 01/2025 on Pseudonymisation: https://www.edpb.europa.eu/public-consultations/guidelines-012025-on-pseudonymisation_pl
+
+## Shrnutí přílohy
+
+Privacy-first AI v SaaS začíná konkrétním use casem, jasnými rolemi a střídmým datovým vstupem. Prompt není skládka zákaznických dat, transparentnost má být vidět v produktu a lidská kontrola musí mít reálnou brzdu. Když tým loguje verze rozhodnutí místo osobních románů a drží retenci pod kontrolou, může AI používat prakticky, evropsky a bez zbytečného datového hazardu.
+
+
 ## Pracovní log
+- 2026-08-09: Přidána příloha BC o privacy-first AI funkcích v SaaS: AI karta funkce, role podle AI Actu, minimalizace promptů, transparentní mikrocopy, human-in-the-loop, auditní logy a checklist.
 - 2026-08-09: Přidána příloha BB o release QA bez produkčních dat: riziková klasifikace změn, kritické cesty, syntetická testovací data, kontrola logů a chyb, release checklist a post-release smoke test.
 - 2026-08-09: Přidána příloha BA o ročním produktovém a datovém úklidu: inventář oblastí, ověření ponechaných položek, datový úklid, pravidla archivu, technické vypnutí a checklist.
 - 2026-08-09: Přidána příloha AZ o kvartálním strategickém review SaaS týmu: rozhodovací otázky, čtyři vrstvy review, privacy kontrola, strategické sázky, rozpočet pozornosti, stop-list a checklist.
