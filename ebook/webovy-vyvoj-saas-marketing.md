@@ -9435,7 +9435,174 @@ Můj pohled: malý tým nepotřebuje korporátní přístupovou byrokracii, ale 
 
 Interní produkční přístup má být role s účelem, limitem a stopou, ne klubová kartička pro důvěryhodné lidi. Privacy-first tým rozděluje oprávnění podle práce, používá dočasné přístupy, navrhuje support access jako bezpečnou produktovou funkci, drží stručné audit logy, hlídá servisní účty a pravidelně uklízí přístupy. Superadmin kultura je rychlá. A přesně proto je nebezpečná.
 
+
+---
+
+# Příloha BI: Žádosti subjektů údajů bez paniky, exportního chaosu a právního divadla
+
+Každý SaaS, e-shop nebo B2B web, který pracuje s osobními údaji, dřív nebo později dostane žádost typu: „Jaká data o mně máte?“, „Smažte můj účet“, „Opravte fakturační údaje“ nebo „Pošlete mi export.“ V malém týmu to často spadne mezi support, vývoj a někoho, kdo zrovna ví, kde je databáze. To je přesně okamžik, kdy privacy-first provoz nesmí být jen pěkná věta v patičce.
+
+GDPR dává lidem sadu práv včetně práva na informace, přístup, opravu, výmaz, omezení zpracování, námitku, přenositelnost a ochranu před výhradně automatizovaným rozhodováním. EDPB je shrnuje v přehledu práv subjektů údajů: https://www.edpb.europa.eu/topics/key-gdpr-concepts/data-subject-rights_en Evropská komise zároveň popisuje, jak mají firmy a organizace s žádostmi jednotlivců pracovat: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/dealing-individuals-requests_en
+
+Tahle příloha není právní rada. Je to provozní návod, jak si v malém týmu připravit proces, aby žádost nebyla detektivka s SQL konzolí, screenshoty v chatu a tichou modlitbou k bohům Excelu.
+
+## BI.1 Rozliš žádost od běžného supportu
+
+Ne každá zpráva se slovem „data“ je formální GDPR žádost. Když zákazník napíše „změňte mi e-mail v účtu“, může to být běžná podpora. Když napíše „chci kopii všech osobních údajů, které o mně zpracováváte“, už jsi v režimu práva na přístup. Rozdíl je důležitý, protože formální žádost potřebuje evidenci, ověření identity, lhůtu, odpovědného člověka a stopu rozhodnutí.
+
+Praktické třídění:
+
+| Typ zprávy | Příklad | Reakce |
+| --- | --- | --- |
+| Běžná oprava | „Změňte fakturační e-mail.“ | Vyřešit v support workflow, zapsat do ticketu. |
+| Přístup k údajům | „Jaká data o mně máte?“ | Zahájit DSR proces a připravit odpověď. |
+| Přenositelnost | „Pošlete export mých dat ve strojově čitelném formátu.“ | Ověřit rozsah, exportovat data poskytnutá zákazníkem a relevantní historii. |
+| Výmaz | „Smažte můj účet a moje údaje.“ | Ověřit, co lze smazat hned a co musí zůstat kvůli právním povinnostem. |
+| Námitka | „Nechci, abyste moje data používali pro marketing.“ | Zastavit daný účel, ne nutně celý účet. |
+
+V support nástroji se hodí mít štítek `data-subject-request`. Ne proto, aby se ticket tvářil důležitěji. Proto, aby se neschoval mezi „nejde mi reset hesla“ a „kde najdu fakturu“.
+
+## BI.2 Ověření identity dělej přiměřeně, ne paranoidně
+
+U žádosti musíš vědět, že komunikuješ se správným člověkem. Zároveň nesmíš kvůli ověření nasbírat víc dat, než je potřeba. Privacy-first přístup není „pošlete občanku do e-mailu“. To je spíš privacy-first hororový spin-off.
+
+Rozumné ověření podle kanálu:
+
+- Přihlášený uživatel v aplikaci: potvrzení přes aktivní session a případně e-mailový odkaz.
+- E-mail shodný s účtem: odpověď na stejný ověřený e-mail, u citlivých akcí doplněná potvrzovacím odkazem.
+- Neznámý e-mail: nejdřív najít účet podle bezpečných indicií, pak ověřit přes kontakt vedený u účtu.
+- Firemní B2B účet: ověřit roli žadatele vůči organizaci, protože běžný člen týmu nemá automaticky právo žádat export celé firmy.
+
+Příklad mikrotextu:
+
+> „Abychom neposlali osobní údaje nesprávné osobě, pošleme potvrzovací odkaz na e-mail vedený u účtu. Nepotřebujeme kopii dokladů, pokud nebude důvod řešit spornou identitu.“
+
+## BI.3 Měj mapu dat dřív, než přijde první žádost
+
+Žádost o přístup se špatně vyřizuje, když nikdo neví, kde data jsou. Datová mapa nemusí být enterprise katalog s dvanácti barevnými legendami. Stačí živý dokument, který odpoví na otázky: jaké údaje máme, proč, kde leží, kdo k nim má přístup, jak dlouho je držíme a jak se dají exportovat nebo smazat.
+
+Minimální datová mapa pro SaaS:
+
+| Oblast | Typická data | Export | Výmaz |
+| --- | --- | --- | --- |
+| Účet | jméno, e-mail, role, nastavení | JSON/CSV | anonymizace nebo smazání účtu |
+| Fakturace | adresa, DIČ, faktury, platby | PDF/CSV | omezeně kvůli účetním povinnostem |
+| Produktová data | projekty, záznamy, dokumenty | JSON/CSV + soubory | podle stavu účtu a role žadatele |
+| Support | tickety, zprávy, přílohy | PDF/JSON | po retenční době nebo při odůvodněném výmazu |
+| Logy | bezpečnostní události, IP v logu | obvykle výpis relevantních záznamů | retence podle bezpečnostního účelu |
+| Marketing | odběry, preference, odhlášení | CSV | odhlášení a úklid po retenční době |
+
+Tahle tabulka je most mezi právní povinností a technickou realitou. Bez ní bude každý export unikát. A unikáty v compliance procesech jsou roztomilé asi jako ruční deploy v pátek večer.
+
+## BI.4 Export navrhni jako produktovou funkci, ne jako admin hack
+
+Právo na přenositelnost neznamená, že musíš exportovat úplně všechno ve vesmíru. Evropská komise vysvětluje, že lidé mohou získat osobní údaje ve strukturovaném strojově čitelném formátu a nechat je předat jiné organizaci, pokud jsou splněné podmínky pro přenositelnost: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/dealing-individuals-requests_en
+
+Produktově je ale dobré jít o kousek dál: export zákaznických dat není jen právní minimum, je to důkaz férového SaaS. Pokud zákazník ví, že může odejít s daty, paradoxně se méně bojí zůstat.
+
+Dobrý export:
+
+- používá běžné formáty: CSV pro tabulky, JSON pro strukturu, ZIP pro balík souborů,
+- obsahuje `README.txt` s vysvětlením polí a časových zón,
+- rozlišuje osobní údaje uživatele od týmových nebo firemních dat,
+- neobsahuje interní poznámky supportu, tajné tokeny, hash hesla nebo data jiných lidí,
+- má časově omezený odkaz ke stažení,
+- vytvoří auditní záznam kdo, kdy, proč a jaký export vytvořil.
+
+Příklad struktury exportu:
+
+```text
+export-ucet-2026-08-09.zip
+├── README.txt
+├── account/profile.json
+├── account/preferences.json
+├── billing/invoices.csv
+├── projects/projects.json
+├── support/tickets.json
+└── metadata/export-log.json
+```
+
+## BI.5 Výmaz není tlačítko „DROP DATABASE“
+
+Právo na výmaz je silné, ale není absolutní. Evropská komise výslovně uvádí, že organizace mají povinnost osobní údaje smazat v relevantních případech, ale existují výjimky, například když je zpracování potřebné pro splnění právní povinnosti nebo pro určení, výkon či obhajobu právních nároků: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/dealing-requests-individuals/do-we-always-have-delete-personal-data-if-person-asks_en
+
+Pro SaaS to znamená rozdělit výmaz na vrstvy:
+
+1. **Okamžitě smazatelné**: marketingové preference, nepovinný profil, nepoužívané přílohy.
+2. **Anonymizovatelné**: produktová aktivita, která má zůstat ve statistikách bez identifikace člověka.
+3. **Dočasně blokované**: údaje, které se nesmí dál aktivně používat, ale čekají na retenční dobu.
+4. **Ponechané kvůli povinnosti**: faktury, účetní doklady, bezpečnostní logy v přiměřené retenci.
+
+Komunikace musí být konkrétní. Nepiš: „Vaše data byla smazána“, pokud část údajů zůstává kvůli fakturaci. Piš raději:
+
+> „Účet a produktová data jsme smazali. Faktury a související účetní údaje uchováváme po dobu vyžadovanou právními předpisy. Tyto údaje už nepoužíváme pro marketing ani produktovou analytiku.“
+
+Tohle je méně sexy než velké zelené tlačítko „Delete forever“, ale mnohem pravdivější. Pravda je v privacy provozu celkem užitečná věc. Překvapivé, já vím.
+
+## BI.6 Vytvoř malý DSR playbook
+
+DSR znamená data subject request, tedy žádost subjektu údajů. Playbook má být tak krátký, aby ho support použil i během náročného dne. Ideálně jedna stránka v interní znalostní bázi.
+
+Šablona playbooku:
+
+```text
+DSR playbook
+
+1. Označ ticket štítkem data-subject-request.
+2. Zapiš datum přijetí a typ žádosti.
+3. Ověř identitu přiměřeným způsobem.
+4. Urči vlastníka odpovědi.
+5. Zkontroluj datovou mapu a relevantní systémy.
+6. Připrav odpověď nebo export.
+7. Nech zkontrolovat citlivé nebo sporné případy druhým člověkem.
+8. Odešli odpověď bezpečným kanálem.
+9. Zapiš výsledek a retenční datum ticketu.
+```
+
+U složitých žádostí přidej rozhodovací poznámku:
+
+```text
+Žádost: výmaz účtu
+Ověření: potvrzeno přes e-mail účtu
+Smazáno: profil, projekty, marketingové preference
+Ponecháno: faktury a účetní záznamy
+Důvod ponechání: právní povinnost
+Kontrola: Jana, 2026-08-09
+Odpověď odeslána: 2026-08-09
+```
+
+## BI.7 Checklist žádostí subjektů údajů
+
+Než žádost uzavřeš, projdi:
+
+- Je jasné, o jaký typ žádosti jde?
+- Je ověřená identita žadatele přiměřeně k riziku?
+- Má ticket vlastníka a datum přijetí?
+- Zkontrolovali jsme všechny relevantní systémy podle datové mapy?
+- Neobsahuje export data jiných lidí, interní poznámky nebo technické tajnosti?
+- Je u výmazu jasně rozlišeno, co bylo smazáno, anonymizováno, omezeno a ponecháno?
+- Je odpověď napsaná lidsky, konkrétně a bez právnické mlhy?
+- Je výsledek zaznamenaný v interním logu žádostí?
+- Má ticket nastavenou retenční dobu?
+- Vznikl z žádosti produktový úkol, například lepší export, automatické mazání nebo úprava privacy stránky?
+
+## Codyho komentář
+
+Můj pohled: nejlepší žádost subjektu údajů je ta, kterou zvládneš bez paniky, protože systém byl navržen férově už předem. Pokud máš exporty, retenci, role a support proces připravené, GDPR žádost není útok na firmu. Je to jen test, jestli privacy-first hodnoty žijí i mimo marketingový text. Takový malý požární poplach bez kouře. Ideální.
+
+## Zdroje k příloze
+
+- EDPB, Data subject rights: https://www.edpb.europa.eu/topics/key-gdpr-concepts/data-subject-rights_en
+- EDPB, Guidelines 01/2022 on data subject rights — Right of access: https://www.edpb.europa.eu/documents/guideline/guidelines-012022-on-data-subject-rights-right-of-access_en
+- Evropská komise, Dealing with individuals' requests: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/dealing-individuals-requests_en
+- Evropská komise, právo na výmaz a jeho výjimky: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/dealing-requests-individuals/do-we-always-have-delete-personal-data-if-person-asks_en
+
+## Shrnutí přílohy
+
+Žádosti subjektů údajů nejsou jednorázová právní krizovka, ale běžný provozní proces. Malý SaaS tým potřebuje rozlišit typ žádosti, ověřit identitu, mít mapu dat, navrhnout export jako férovou produktovou funkci, řešit výmaz po vrstvách a držet krátký playbook. Privacy-first firma neodpovídá „nějak to vyexportujeme“. Odpovídá klidně, přesně a tak, aby se z každé žádosti zlepšil produkt i provoz.
+
 ## Pracovní log
+- 2026-08-09: Přidána příloha BI o žádostech subjektů údajů bez paniky: třídění DSR, ověření identity, datová mapa, férový export, vrstvy výmazu, interní playbook a checklist.
 - 2026-08-09: Přidána příloha BH o interních přístupech k produkci bez superadmin kultu: role podle práce, just-in-time přístup, support access, audit logy, servisní účty, měsíční access review a checklist.
 - 2026-08-09: Přidána příloha BG o referral a partnerském marketingu bez sledovacího pekla: definice odměny, kódy a serverové přiřazení, krátké atribuční okno, oddělení dat, lidské podmínky, souhlas a checklist.
 - 2026-08-09: Přidána příloha BF o platbách a fakturaci bez datového kombajnu: checkout, datové minimum, platební brána jako subdodavatel, oddělení fakturačních a produktových dat, DPH/OSS, selhané platby a checklist.
