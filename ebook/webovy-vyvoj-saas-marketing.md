@@ -7907,7 +7907,140 @@ Tím buduješ důvěru a zároveň kontroluješ, jestli jsi pochopil správně. 
 Zákaznické rozhovory jsou nejlevnější způsob, jak snížit produktové riziko, pokud se z nich nestane výslech, prodejní demo nebo datový vysavač. Ptej se na skutečné situace, zapisuj jen to, co pomáhá rozhodnout, anonymizuj citace a hledej vzory napříč rozhovory. Privacy-first discovery neznamená méně učení. Znamená učení s respektem, pořádkem a menší šancí, že si tým do poznámek uloží víc citlivostí než skutečných insightů.
 
 
+---
+
+# Příloha AX: Zakladatelský dashboard bez metrik pro ego a sledovacích zkratek
+
+Dashboard pro zakladatele nemá být akvárium, ve kterém se koukáš na barevné rybičky čísel a tváříš se strategicky. Má být pracovní nástroj pro rozhodování: kde rosteme, kde unikají peníze, kde zákazníci narážejí, co je riziko a co máme udělat tento týden.
+
+Malý SaaS tým si často postaví dvě špatné verze dashboardu. První je prázdná: „nemáme data, takže jedeme pocitem“. Druhá je přecpaná: třicet grafů, z toho dvacet nikdo nepoužívá a deset se tváří důležitě jen proto, že šly snadno napojit. Obě varianty jsou drahé. První vede k slepotě, druhá k falešné jistotě.
+
+Privacy-first dashboard má jednoduchou ambici: ukázat stav byznysu a produktu bez toho, aby firma začala profilovat každého návštěvníka jako podezřelého z budoucí konverze. Nepotřebuješ vědět, že konkrétní člověk v úterý v 9:42 třikrát přejel myší přes tlačítko. Často potřebuješ vědět, že noví zákazníci nedokončí import dat, že trialy bez onboardingového hovoru končí častěji, nebo že support tikety na jednu funkci rostou rychleji než její používání.
+
+## AX.1 Začni rozhodnutími, ne grafy
+
+Než přidáš metriku, napiš si, jaké rozhodnutí má podporovat. Pokud odpověď zní „je dobré to vědět“, je to slabé. Dobrá metrika má vlastníka, rytmus a navazující akci.
+
+Příklady dobrých rozhodovacích otázek:
+
+- Máme příští měsíc zrychlit akvizici, nebo opravit onboarding?
+- Který segment má nejlepší poměr tržeb, podpory a retence?
+- Která část produktu brání první hodnotě?
+- Je nový pricing zdravější, nebo jen posunul problémy do supportu?
+- Zvyšuje se riziko odchodů u konkrétního typu zákazníků?
+- Máme kapacitu spustit další kampaň, aniž se rozpadne doručování hodnoty?
+
+Špatný dashboard začíná větou „pojďme zobrazit všechno, co máme“. Dobrý dashboard začíná větou „co potřebujeme každý týden rozhodnout“. Graf bez rozhodnutí je tapeta. Někdy hezká, často drahá, občas hypnotická. Ale pořád tapeta.
+
+## AX.2 Drž pět vrstev zdraví produktu
+
+Zakladatelský dashboard nemusí být složitý. Stačí pět vrstev, které společně ukazují, jestli produkt dává smysl obchodně i provozně.
+
+| Vrstva | Co sledovat | Proč |
+| --- | --- | --- |
+| Akvizice | zdroje poptávek, konverze na další krok, kvalita leadů | jestli umíš přivést správné lidi |
+| Aktivace | první hodnota, dokončený onboarding, import, první výsledek | jestli noví zákazníci pochopí a použijí produkt |
+| Retence | návrat k hodnotě, obnovy, churn důvody, zdraví účtů | jestli produkt řeší opakovaný problém |
+| Revenue | MRR, nové tržby, expanze, refundace, rizikové platby | jestli byznys dýchá a neklame účetnictvím |
+| Provoz | support zátěž, incidenty, výkon, bezpečnostní úkoly | jestli růst nerozbíjí tým ani důvěru |
+
+Každá vrstva má mít několik čísel a jednu lidskou interpretaci. Samotné „aktivace 42 %“ nestačí. Lepší je věta: „Aktivace klesla u týmů, které začínají bez importu šablony; příští týden testujeme kratší průvodce a lepší prázdný stav.“
+
+Dashboard má pomáhat mluvit. Ne nahrazovat přemýšlení tabulkou, která nosí kravatu.
+
+## AX.3 Nepotřebuješ osobní profil pro každé produktové rozhodnutí
+
+Mnoho produktových otázek jde zodpovědět agregovaně nebo pseudonymizovaně. U malého SaaS týmu je nejbezpečnější výchozí pravidlo: osobní detail zobrazuj jen tam, kde je nutný pro podporu zákazníka, bezpečnost, fakturaci nebo konkrétní obchodní vztah. Pro strategický dashboard většinou stačí segment, účet, tarif, stav a anonymizované události.
+
+Příklad privacy-first eventu:
+
+| Event | Vlastnosti | Poznámka |
+| --- | --- | --- |
+| `onboarding_completed` | tarif, segment, počet členů týmu, zdroj registrace | bez jména, e-mailu a obsahu zákaznických dat |
+| `first_report_exported` | typ exportu, délka onboardingu, šablona ano/ne | měří hodnotu, ne obsah reportu |
+| `integration_connected` | typ integrace, výsledek, chybová kategorie | bez tokenů, názvů účtů a payloadů |
+| `support_ticket_created` | kategorie, tarif, stáří účtu, priorita | bez textu ticketu v produktové analytice |
+
+Odděl analytiku od operativních systémů. Support nástroj může potřebovat e-mail zákazníka, protože jinak mu neodpovíš. Produktový dashboard ho většinou nepotřebuje. Fakturační systém musí znát identitu odběratele. Graf aktivace ne.
+
+Privacy-first design tady není překážka. Nutí tě pojmenovat, co vlastně měříš. A když to neumíš pojmenovat bez osobních údajů, možná neměříš produktový signál, ale sbíráš pohodlný nepořádek.
+
+## AX.4 Vyvažuj leading a lagging metriky
+
+Lagging metriky říkají, co se už stalo: MRR, churn, počet zákazníků, refundace. Jsou důležité, ale mají zpoždění. Když čekáš jen na churn, dozvíš se o problému ve chvíli, kdy už zákazník stojí ve dveřích a drží export dat.
+
+Leading metriky ukazují pravděpodobný budoucí vývoj:
+
+- podíl nových účtů, které dokončily první hodnotu,
+- počet zákazníků s nedokončeným nastavením po sedmi dnech,
+- opakované používání klíčové funkce,
+- narůstající support u jedné části produktu,
+- pokles doručitelnosti transakčních e-mailů,
+- nárůst ručních zásahů týmu při onboardingu.
+
+Dobrá kombinace pro týdenní review:
+
+- jedna metrika růstu,
+- jedna metrika aktivace,
+- jedna metrika retence,
+- jedna metrika provozního tření,
+- jedna kvalitativní poznámka ze supportu nebo rozhovorů.
+
+Když rostou registrace, ale klesá aktivace, nemáš jen marketingový úspěch. Máš frontu lidí, kteří se přišli zklamat rychleji. To je taky druh škálování, jen takový ten méně slavnostní.
+
+## AX.5 Každá metrika má mít hranici a reakci
+
+Číslo bez hranice je dekorace. Předem si napiš, co znamená dobrý stav, varování a problém. Nemusí to být vědecky dokonalé. Stačí, aby tým věděl, kdy má přestat diskutovat a začít jednat.
+
+Příklad jednoduché tabulky:
+
+| Metrika | Zelená | Varování | Akce |
+| --- | --- | --- | --- |
+| Dokončení onboardingu do 7 dnů | nad 70 % | pod 55 % | projít drop-off, zavolat 3 novým zákazníkům |
+| Support tikety na 10 aktivních účtů | pod 2 týdně | nad 4 týdně | zjistit top kategorii, upravit nápovědu nebo UI |
+| Měsíční churn důvod „nevidíme hodnotu“ | 0–1 případ | 2+ případy | review aktivace a očekávání z prodeje |
+| Ruční zásahy při fakturaci | 0–1 týdně | 3+ týdně | opravit proces nebo integraci |
+
+Tahle tabulka je schválně obyčejná. Zakladatelský dashboard nemá dokazovat, že umíš BI. Má způsobit, že tým včas zvedne hlavu.
+
+## AX.6 Dashboard review dělej jako provozní rituál
+
+Dashboard bez pravidelného review je jako hasicí přístroj za skříní: dobrý pocit, malá použitelnost. Jednou týdně si dej 30 minut a projdi jen to, co podporuje rozhodnutí.
+
+Struktura review:
+
+1. Co se změnilo proti minulému týdnu?
+2. Která změna je dobrá zpráva a proč?
+3. Která změna je riziko a kdo ji vlastní?
+4. Co uděláme do dalšího review?
+5. Jak poznáme, že zásah pomohl?
+
+Na konci musí vzniknout maximálně tři akce. Pokud vznikne dvanáct úkolů, dashboard se proměnil v backlogový ohňostroj. Ten sice krásně prská, ale druhý den po něm zůstane jen kouř a pár zapomenutých ticketů.
+
+## AX.7 Checklist zakladatelského dashboardu
+
+- [ ] Každá metrika podporuje konkrétní rozhodnutí.
+- [ ] Dashboard pokrývá akvizici, aktivaci, retenci, revenue a provoz.
+- [ ] Produktové metriky neobsahují osobní údaje bez jasného důvodu.
+- [ ] Support, fakturace a produktová analytika mají oddělené účely a přístupy.
+- [ ] Eventy měří hodnotu a stav procesu, ne obsah zákaznických dat.
+- [ ] Dashboard kombinuje leading a lagging metriky.
+- [ ] U klíčových metrik jsou předem napsané hranice a reakce.
+- [ ] Týdenní review končí nejvýš třemi konkrétními akcemi.
+- [ ] Metriky, které nikdo nepoužil dva měsíce, se odstraní nebo přeformulují.
+- [ ] Codyho pravidlo: když číslo nezmění rozhodnutí, nemá sedět v první řadě.
+
+## Codyho komentář
+
+Nejlepší dashboard pro malý SaaS tým často vypadá podezřele jednoduše. Pět sekcí, pár čísel, krátké poznámky, jasné akce. Žádná datová katedrála, žádné osobní profily pro každý klik, žádné „ještě jeden grafík“. Produkt se neřídí tím, že vidíš všechno. Řídí se tím, že včas vidíš to důležité a máš odvahu podle toho jednat.
+
+## Shrnutí přílohy
+
+Zakladatelský dashboard má být rozhodovací nástroj, ne vitrína metrik. Začni otázkami, pokryj pět vrstev zdraví produktu, odděl analytiku od osobních operativních dat a nastav hranice pro reakci. Privacy-first dashboard neznamená slepý dashboard. Znamená měření, které respektuje zákazníka, chrání tým před datovým nepořádkem a ukazuje signály dost brzy na to, aby šlo něco opravit.
+
+
 ## Pracovní log
+- 2026-08-09: Přidána příloha AX o zakladatelském dashboardu bez metrik pro ego a sledovacích zkratek: rozhodovací otázky, pět vrstev zdraví produktu, agregované eventy, leading/lagging metriky, reakční hranice, týdenní review a checklist.
 - 2026-08-09: Přidána příloha AW o zákaznických rozhovorech bez výslechu a datového nepořádku: hypotézy, otázky na minulost, střídmé poznámky, anonymizované citace, syntéza vzorů, follow-up a checklist.
 - 2026-08-09: Přidána příloha AV o lokalizaci SaaS a webu bez překladového chaosu: výběr jazyků podle obchodního smyslu, překlad slibů, privacy texty, technická struktura, bezpečné AI překlady, workflow a checklist.
 - 2026-08-09: Přidána příloha AU o demo účtech a sandboxu bez úniku dat: syntetická demo data, omezené sandbox účty, resetovací rutina, bezpečné integrace, trust věta a checklist.
