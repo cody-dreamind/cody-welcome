@@ -7514,7 +7514,121 @@ Codyho komentář: Nejlepší churn dotazník je ten, který zákazník dokáže
 
 Offboarding je test důvěry. Když zákazník může odejít s daty, jasnými informacemi a bez překážkové dráhy, produkt působí dospěleji než konkurence, která churn schovává za call s obchodníkem. Privacy-first přístup tady znamená kontrolu nad exportem, srozumitelnou retenci, bezpečné vypnutí integrací a respekt k času zákazníka. Dobrý odchod neznamená, že se zákazník už nikdy nevrátí. Často znamená přesný opak: odešel bez pachuti.
 
+
+# Příloha AU: Demo účty a sandbox bez úniku reálných dat
+
+Demo prostředí je obchodní zbraň. Zákazník si může produkt osahat, tým nemusí vysvětlovat každé tlačítko přes call a sales nemusí posílat screenshoty, které vypadají jako výstřižky z muzeální výstavy. Jenže demo je taky častý zdroj datového bordelu: kopie produkce, zapomenuté účty, falešná čísla namíchaná s reálnými jmény a sandbox, který má práva jako produkční admin po třetí kávě.
+
+Privacy-first demo má jiný princip: ukazuje hodnotu produktu bez toho, aby ukazovalo cizí životy. Demo data jsou syntetická, účty mají limitovaný dosah, integrace jsou ochočené a obnova prostředí je automatická. Demo pak není riziko schované za hezkým designem, ale důvěryhodná součást nákupního procesu.
+
+## AU.1 Demo není produkce v převleku
+
+Nejrychlejší cesta k demo prostředí bývá „zkopírujeme produkci a promažeme pár věcí“. To je přesně ten typ zkratky, který se tváří prakticky, dokud někdo neukáže zákazníkovi cizí fakturu, e-mail, interní poznámku nebo název projektu. Pak už to není demo. To je improvizované compliance divadlo s potem na čele.
+
+Základní pravidlo:
+
+- demo nesmí obsahovat reálná zákaznická data,
+- demo nesmí používat produkční API klíče,
+- demo nesmí posílat skutečné e-maily externím lidem,
+- demo nesmí měnit produkční stav,
+- demo nesmí mít trvalé admin účty bez vlastníka.
+
+Když potřebuješ ukázat realistický scénář, vytvoř syntetická data podle šablon. Názvy firem, lidí, faktur, objednávek, ticketů a projektů mají vypadat uvěřitelně, ale nesmí být převzaté z reálného zákaznického světa. Ideální demo dataset je jako kulisa ve filmu: dost přesvědčivý pro příběh, ale nikdo v něm doopravdy nebydlí.
+
+## AU.2 Demo scénář piš podle rozhodnutí zákazníka
+
+Demo prostředí často selže ne kvůli technologii, ale kvůli dramaturgii. Produkt je plný funkcí, ale zákazník neví, co má udělat první. Proto demo navrhuj podle rozhodnutí, které má zákazník po vyzkoušení udělat.
+
+Příklad pro B2B SaaS:
+
+| Rozhodnutí zákazníka | Demo scénář | Data v demu |
+| --- | --- | --- |
+| „Umí to vyřešit náš hlavní proces?“ | Vytvořit projekt, pozvat kolegu, dokončit první workflow | Syntetický projekt, role, úkoly |
+| „Bude to bezpečné pro naše data?“ | Ukázat role, audit log, export a retenci | Falešní uživatelé, ukázkové logy |
+| „Kolik práce dá migrace?“ | Import ukázkového CSV a kontrola výsledku | Vzorový soubor bez reálných osob |
+| „Co uvidí management?“ | Dashboard s agregovanými metrikami | Umělé trendy a jasně označené příklady |
+
+Nesnaž se v demu ukázat všechno. Demo má být cesta k „aha“, ne produktová inventura. Když zákazník po deseti minutách chápe hlavní hodnotu, vyhrál jsi. Když po deseti minutách ví, že máte 47 nastavení notifikací, gratuluji: úspěšně jsi prodal únavu.
+
+## AU.3 Sandbox účty musí mít hranice
+
+Sandbox je dobrý sluha a výborný chaos generátor. Pokud zákazník dostane účet bez jasných pravidel, začne testovat věci, které produktový tým nečekal: pozvánky na reálné e-maily, webhooky na vlastní systémy, import produkčních dat, export cizích ukázek, nebo kombinaci všeho, protože pátek.
+
+Nastav hranice technicky i textově:
+
+- sandbox účet má časovou platnost,
+- počet pozvaných uživatelů je omezený,
+- e-maily se posílají jen na ověřené nebo interně povolené adresy,
+- webhooky míří do testovacího endpointu nebo jsou jasně označené,
+- platební funkce používají testovací režim,
+- exporty obsahují jen sandbox data,
+- po vypršení se účet archivuje nebo resetuje.
+
+Do rozhraní přidej viditelný štítek: „Sandbox — nepoužívejte reálná osobní data.“ Nestačí to schovat do podmínek. Upozornění má být tam, kde uživatel data skutečně vkládá: import, pozvánky, poznámky, soubory, integrace a formuláře.
+
+## AU.4 Demo data obnovuj automaticky
+
+Demo, které se postupně rozpadá, je tichý sabotér prodeje. Jeden obchodník smaže ukázkový projekt, druhý přejmenuje firmu na „test test“, třetí nahraje soubor z reálného výběrového řízení a čtvrtý se diví, proč dashboard vypadá jako po výbuchu kancelářské tiskárny.
+
+Zaveď resetovací rutinu:
+
+1. Demo dataset drž jako kód nebo verzovanou seed definici.
+2. Každý ukázkový účet má známý výchozí stav.
+3. Reset probíhá automaticky podle plánu nebo jedním admin tlačítkem.
+4. Uploady, testovací e-maily a importy se po resetu mažou.
+5. Každá ruční úprava dema se buď promítne do seedu, nebo zmizí.
+6. Demo má kontrolu zdraví: přihlášení, hlavní workflow, dashboard, export.
+
+Praktický detail: vytvoř „demo smoke test“. Jednou denně nebo před obchodní schůzkou ověří, že jde vytvořit záznam, dokončit hlavní scénář, zobrazit report a provést export. Není potřeba testovat celý produkt. Stačí ověřit, že demo neumře v první minutě schůzky. To je nízká laťka, ale překvapivě mnoho dem ji bere jako osobní výzvu.
+
+## AU.5 Integrace v demu nesmí pálit ostrými
+
+Integrace jsou v demu lákavé, protože ukazují skutečnou hodnotu produktu. Zároveň jsou rizikové, protože mohou poslat data ven, vytvořit externí objekt, spustit notifikaci nebo zanechat stopu v systému, kde už demo tým nemá kontrolu.
+
+Bezpečné varianty:
+
+- použij testovací režim dodavatele,
+- simuluj odpověď integrace lokálně,
+- použij vlastní demo endpoint, který jen loguje požadavek,
+- maskuj citlivé části payloadu,
+- jasně označ, co je živá integrace a co simulace,
+- nastav zvláštní sandbox API klíče s minimálními právy.
+
+Ukaž zákazníkovi datový tok jednoduše: „Tady by se odeslal webhook do vašeho systému. V demu ho neposíláme ven; payload vidíte tady.“ To působí profesionálněji než tajit, že integrace je slepá. Zákazník nekupuje kouzelnické vystoupení. Kupuje kontrolu nad procesem.
+
+## AU.6 Demo jako privacy-first prodejní argument
+
+Dobře navržené demo není jen interní bezpečnostní opatření. Je to důkaz hodnot. Když během ukázky řekneš „tady používáme syntetická data, sandbox se pravidelně resetuje a žádné testovací importy neposíláme do produkčních integrací“, nezní to jako právní brzda. Zní to jako dospělý provoz.
+
+Krátká věta pro obchodní stránku nebo trust pack:
+
+> „Demo a sandbox prostředí používají syntetická data, oddělené přístupy a testovací integrace. Reálná zákaznická data do ukázek nekopírujeme.“
+
+Tohle je malá věta s velkým efektem. Technický kupující slyší bezpečnost. Právník slyší menší riziko. Management slyší, že tým ví, co dělá. A Cody slyší krásný zvuk toho, jak jeden odstavec ušetřil tři nervózní e-maily.
+
+## AU.7 Checklist demo účtů a sandboxu
+
+- [ ] Demo prostředí neobsahuje reálná zákaznická data ani kopii produkce.
+- [ ] Demo dataset je syntetický, verzovaný a obnovitelný.
+- [ ] Sandbox účty mají časovou platnost, vlastníka a omezené role.
+- [ ] Uživatel vidí upozornění, že do sandboxu nemá vkládat reálná osobní data.
+- [ ] Testovací e-maily, webhooky a integrace nepoužívají produkční klíče.
+- [ ] Platební, e-mailové a externí integrace běží v testovacím nebo simulovaném režimu.
+- [ ] Demo lze resetovat do známého stavu bez ruční archeologie.
+- [ ] Před obchodní ukázkou existuje rychlý smoke test hlavní demo cesty.
+- [ ] Exporty a reporty v demu pracují jen se sandbox daty.
+- [ ] Trust pack nebo obchodní stránka stručně vysvětluje, jak demo chrání data.
+
+## Codyho komentář
+
+Demo prostředí je výkladní skříň provozní kultury. Když je uvnitř chaos, zákazník si právem domyslí, že za oponou to nebude švýcarská klinika. Když je demo čisté, resetovatelné a bez reálných dat, prodáváš nejen funkce, ale i klid. A klid je v B2B prodeji podceňovaná superpower.
+
+## Shrnutí přílohy
+
+Demo a sandbox nemají být produkce v kostýmu. Mají ukázat hodnotu produktu na syntetických datech, s omezenými účty, testovacími integracemi a automatickou obnovou. Privacy-first přístup z dema dělá obchodní výhodu: zákazník vidí, že tým umí oddělit ukázku od skutečného provozu, chránit data a vysvětlit technické hranice lidsky.
+
 ## Pracovní log
+- 2026-08-09: Přidána příloha AU o demo účtech a sandboxu bez úniku dat: syntetická demo data, omezené sandbox účty, resetovací rutina, bezpečné integrace, trust věta a checklist.
 - 2026-08-09: Přidána příloha AT o offboardingu zákazníka bez rukojmí: zrušení účtu, export dat, retence, vypnutí integrací, závěrečná komunikace, churn feedback a checklist.
 - 2026-08-08: Přidána příloha AS o retenci a churnu bez invazivního sledování: definice zdravého zákazníka, důvody odchodu, hodnotové signály, onboarding, win-back komunikace a měsíční retenční review.
 - 2026-08-08: Přidána příloha AR o SaaS financích a unit economics bez tabulkového divadla: zákaznická jednotka, oddělení služeb od produktu, provozní náklady, cashflow, pricing, dashboard a checklist.
