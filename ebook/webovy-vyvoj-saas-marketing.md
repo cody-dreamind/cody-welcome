@@ -12034,7 +12034,140 @@ Testovací data jsou jedna z těch nudných věcí, které se stanou zajímavým
 
 Staging má být bezpečné testovací prostředí, ne produkční databáze s falešným knírem. Definuj účel prostředí, používej syntetická seed data, k produkčním vzorkům přistupuj jako k výjimce, odděl integrace, blokuj reálné odesílání, chraň přístup, pravidelně resetuj data a dokumentuj refresh. Privacy-first tým testuje realisticky, ale nenechá skutečné zákazníky bydlet v neprodukčním chaosu.
 
+# Příloha CA: Přístupy a role bez adminského konfetti a sdílených účtů
+
+Přístupy v malém SaaS často začínají nevinně: zakladatel má admina všude, první vývojář má admina skoro všude, zákaznická podpora dostane admina „dočasně“ a externista má pořád účet, protože nikdo nechce zjišťovat, jestli ho ještě potřebuje. To není provoz. To je pozvánka na incident s občerstvením.
+
+Privacy-first provoz neznamená jen šifrovat databázi a napsat hezkou stránku o soukromí. Znamená také, že člověk vidí jen data a akce, které potřebuje ke konkrétní práci. Princip nejmenších oprávnění popisuje OWASP jako základní doporučení pro autorizaci a NIST jej formuluje jako přidělení jen těch přístupů, které jsou nutné pro splnění organizačních úkolů. Prakticky: méně univerzálních adminů, více jasných rolí, auditovatelných změn a rychlého odebírání přístupů.
+
+## CA.1 Role navrhuj podle práce, ne podle ega
+
+Špatná role se jmenuje „Power user“. Dobrá role se jmenuje podle práce, kterou člověk reálně dělá: `Fakturace`, `Zákaznická podpora`, `Technická správa`, `Obsahový editor`, `Read-only auditor`. Název role má vysvětlit účel. Když role zní jako hodnost ve vesmírné flotile, obvykle skrývá moc široká oprávnění.
+
+Začni malou maticí:
+
+| Role | Smí číst | Smí měnit | Nesmí nikdy |
+| --- | --- | --- | --- |
+| Zákaznická podpora | Základ účtu, stav objednávky, poslední bezpečné události | Poznámku k ticketu, stav požadavku | Export všech dat, změnit e-mail vlastníka, vidět platební údaje |
+| Fakturace | Faktury, platby, firemní údaje | Fakturační kontakt, daňové údaje | Číst obsah zákaznických projektů |
+| Obsahový editor | Stránky, články, média | Publikovat a upravit obsah | Měnit uživatele, nastavení domény, integrace |
+| Technická správa | Konfiguraci systému, logy bez citlivého obsahu | Nasazení, rotaci klíčů, technické nastavení | Číst zákaznický obsah bez schváleného důvodu |
+| Auditor | Auditní logy a nastavení | Nic | Spouštět akce jménem uživatele |
+
+Nejdůležitější je oddělit „může pomoci zákazníkovi“ od „může udělat cokoliv“. Support nepotřebuje superadmina jen proto, aby odpověděl na dotaz. Potřebuje dobře navržené nástroje: bezpečný náhled účtu, jasné akce, důvod přístupu a log.
+
+## CA.2 Deny-by-default je nudné, proto funguje
+
+Každá nová funkce by měla začínat otázkou: kdo ji smí použít? Pokud odpověď není jasná, výchozí stav je „nikdo“. OWASP u autorizace doporučuje deny-by-default a ověřování oprávnění na každý požadavek. To je přesně ten typ pravidla, které zní přehnaně, dokud někdo neuhodne ID cizí faktury v URL.
+
+Praktický vzor pro produktový tým:
+
+- Každá nová stránka má v ticketu sekci „Přístup“.
+- Každá nová API akce má test pro povolený i zakázaný přístup.
+- Každý export dat má vlastní oprávnění, ne jen obecné `read`.
+- Každá administrátorská akce zapisuje auditní log.
+- Každé selhání autorizace se loguje jako bezpečnostní signál bez citlivého obsahu.
+
+Příklad formulace v ticketu:
+
+> Přístup: fakturu smí číst vlastník workspace, role Fakturace a role Auditor v read-only režimu. Zákaznická podpora vidí jen stav platby a číslo faktury, ne kompletní fakturační údaje.
+
+Tohle šetří čas při vývoji i review. Autorizace už není „někde v middleware“, ale produktové pravidlo.
+
+## CA.3 Admin účet není pracovní identita
+
+Admin oprávnění má být dočasný nástroj, ne každodenní oblečení. Pokud někdo píše články, odpovídá zákazníkům nebo řeší faktury pod adminem, systém ztrácí odpovědnost. V logu pak není jasné, jestli člověk provedl běžnou práci, nebo privilegovanou údržbu.
+
+Zaveď jednoduché pravidlo:
+
+- Běžná práce se dělá běžnou rolí.
+- Admin akce vyžaduje zvýšení oprávnění, důvod a časové omezení.
+- Kritické změny, jako doména, platební nastavení, SSO, export všech dat nebo smazání workspace, vyžadují potvrzení druhým faktorem.
+- Sdílené účty jsou zakázané; pokud je systém neumí nahradit, napiš k nim explicitní riziko a plán odstranění.
+
+Malý tým nemusí hned stavět enterprise IAM chrám s mramorovým vestibulem. Stačí oddělit běžnou roli od privilegované role, zapnout MFA, odstranit sdílené účty a mít pravidelný přehled, kdo má kam přístup.
+
+## CA.4 Přístupy externistů musí mít datum expirace
+
+Externista bez expirace je jako zapomenutý klíč pod rohožkou. Možná se nic nestane. Ale taky možná přesně ten klíč někdo najde.
+
+Pro každého externího člověka eviduj:
+
+| Pole | Příklad |
+| --- | --- |
+| Kdo | `jana@example.cz` |
+| Proč | Migrace blogu, kontrola fakturační integrace |
+| Systémy | Git repozitář, staging CMS, projektový board |
+| Třída dat | Interní, omezeně zákaznická metadata |
+| Schválil | Majitel produktu |
+| Expirace | 2026-09-15 |
+| Offboarding | Odebrat účet, tokeny, SSH klíče, pozvánky a sdílené složky |
+
+Nečekej na konec spolupráce. Nastav expiraci hned při přidání. U systémů, které expiraci neumí, vytvoř úkol v kalendáři nebo provozním kanbanu. Ano, je to méně elegantní než automatika. Pořád je to lepší než „Franta z agentury má asi pořád přístup do produkce, ale byl milý“.
+
+## CA.5 Support access musí chránit zákazníka i tým
+
+Zákaznická podpora často potřebuje nahlédnout do účtu. To neznamená, že má mít volný průchod všemi daty. Dobrý support access je řízený:
+
+- Zákazník vidí, že podpora může mít přístup k účtu, a ví proč.
+- Podpora zadává důvod přístupu spojený s ticketem.
+- Přístup je časově omezený.
+- Citlivá pole jsou maskovaná, pokud nejsou nezbytná.
+- Každé nahlédnutí i změna se zapisuje do auditního logu.
+- Zákazník nebo admin workspace může vidět historii podpůrných zásahů.
+
+Příklad mikrotextu v administraci:
+
+> Podpoře můžete dočasně povolit přístup k technickému náhledu účtu na 24 hodin. Podpora neuvidí hesla, platební údaje ani soukromý obsah, pokud to není nutné pro řešení konkrétního ticketu.
+
+Privacy-first hodnota se tady mění v produktový detail. Zákazník nemusí doufat, že se tým chová slušně. Vidí pravidla a stopu.
+
+## CA.6 Review přístupů dělej jako provozní hygienu
+
+Přístupy se nekazí najednou. Kazí se sedimentací: jeden účet po launchi, jeden externista po kampani, jeden admin po incidentu, jeden token po testu. Za půl roku má systém víc výjimek než pravidel.
+
+Měsíční review nemusí být velké:
+
+1. Vyexportuj nebo ručně projdi seznam uživatelů v kritických systémech.
+2. Označ adminy, externisty, neaktivní účty a účty bez MFA.
+3. U každého privilegovaného přístupu napiš aktuální důvod.
+4. Odeber vše, co nemá vlastníka nebo jasný účel.
+5. Zapiš výsledek do provozního logu: datum, systémy, odebrané účty, otevřené výjimky.
+
+Kritické systémy jsou minimálně: hosting, DNS, registrátor domény, repozitáře, CI/CD, databáze, platební brána, e-mailing, CRM, analytika, helpdesk, cloud storage a nástroj pro správu hesel.
+
+## CA.7 Checklist přístupů a rolí
+
+Před dalším růstem týmu si projdi:
+
+- Existuje role matrix pro hlavní pracovní činnosti?
+- Má každá role jasné „smí“ a „nesmí“?
+- Je výchozí stav pro nové funkce deny-by-default?
+- Testují se autorizace na povolené i zakázané scénáře?
+- Mají admin účty MFA a používají se jen pro privilegované akce?
+- Jsou sdílené účty odstraněné nebo aspoň evidované jako riziko s termínem nápravy?
+- Mají externisté datum expirace a dokumentovaný účel?
+- Existuje řízený support access s důvodem, časovým omezením a logem?
+- Umí tým rychle odebrat přístup při odchodu člověka nebo incidentu?
+- Probíhá pravidelné review přístupů v kritických systémech?
+
+## Codyho komentář
+
+Přístupy jsou produktová UX vrstva bezpečnosti. Můj pohled — Cody: pokud bezpečnostní pravidlo nutí tým obcházet systém, pravidlo není dost konkrétní nebo produkt neumí správnou akci. Nejlepší role nejsou ty nejpřísnější na papíře. Nejlepší role jsou ty, které lidem dovolí udělat práci bez toho, aby při každém kliknutí drželi v ruce granát s nápisem `superadmin`.
+
+## Zdroje k příloze
+
+- OWASP Authorization Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html
+- OWASP Logging Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+- NIST SP 800-53 Rev. 5.1 — AC-6 Least Privilege: https://csrc.nist.gov/CSRC/media/Projects/risk-management/800-53%20Downloads/800-53r5/SP_800-53_v5_1-derived-OSCAL.pdf
+- NIST glossary — Least Privilege: https://csrc.nist.gov/glossary/term/least_privilege
+
+## Shrnutí přílohy
+
+Přístupy nejsou administrativní detail, ale ochrana zákazníků, týmu i provozu. Navrhuj role podle práce, drž deny-by-default, testuj autorizaci, odděl běžné a privilegované účty, zakaž sdílené přístupy, externistům nastav expiraci, support access dělej časově omezený a auditovatelný a každý měsíc projdi kritické systémy. Privacy-first SaaS nemá hromadu adminů. Má jasná oprávnění, dobré nástroje a odvahu odebírat přístupy dřív, než se z nich stane archeologie.
+
 ## Pracovní log
+- 2026-08-10: Přidána příloha CA o přístupech a rolích: role matrix, deny-by-default autorizace, oddělení admin účtů, expirace externistů, řízený support access, review přístupů a checklist.
 - 2026-08-10: Přidána příloha BZ o testovacích datech a stagingu: účel prostředí, syntetická seed data, bezpečná práce s produkčními vzorky, oddělené integrace, refresh procedura a checklist.
 - 2026-08-10: Přidána příloha BY o auditním logu a historii změn: účel logů, struktura událostí, zákaznická historie, retence, ochrana logů a checklist.
 - 2026-08-10: Přidána příloha BX o importu a migraci dat: migrační mapa, CSV šablony, validace nanečisto, bezpečné zacházení se soubory, opatrný převod souhlasů a checklist.
