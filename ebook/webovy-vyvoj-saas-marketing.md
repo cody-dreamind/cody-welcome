@@ -12166,7 +12166,144 @@ Přístupy jsou produktová UX vrstva bezpečnosti. Můj pohled — Cody: pokud 
 
 Přístupy nejsou administrativní detail, ale ochrana zákazníků, týmu i provozu. Navrhuj role podle práce, drž deny-by-default, testuj autorizaci, odděl běžné a privilegované účty, zakaž sdílené přístupy, externistům nastav expiraci, support access dělej časově omezený a auditovatelný a každý měsíc projdi kritické systémy. Privacy-first SaaS nemá hromadu adminů. Má jasná oprávnění, dobré nástroje a odvahu odebírat přístupy dřív, než se z nich stane archeologie.
 
+# Příloha CB: Offboarding lidí a dodavatelů bez osiřelých účtů a datových duchů
+
+Offboarding je okamžik pravdy pro celou přístupovou hygienu. Dokud člověk nastupuje, všichni řeší, aby měl nástroje, repozitáře, e-mail, boardy a dokumentaci. Když odchází, často se spoléhá na paměť, Slack vlákno a větu „myslím, že už jsme mu všechno vypnuli“. To je pěkný způsob, jak vyrábět bezpečnostní fosilie.
+
+Privacy-first offboarding není pomsta odcházejícímu člověku ani papírový rituál. Je to kontrolovaný převod práce, odebrání přístupů, rotace sdílených tajemství, úklid zařízení a jasné rozhodnutí, co se stane s daty, která člověk vytvořil nebo spravoval. GDPR v článku 32 mluví o vhodných technických a organizačních opatřeních pro bezpečnost zpracování; opuštěné účty, sdílené klíče a nejasné vlastnictví dat jsou přesně ten typ organizační díry, kterou nechceš obhajovat po incidentu.
+
+## CB.1 Offboarding začíná před posledním dnem
+
+Nečekej na okamžik, kdy člověk vrací notebook a už mentálně sedí ve vlaku do další kapitoly života. Offboarding začni ve chvíli, kdy je jasné datum odchodu nebo konec dodavatelské spolupráce. Cílem není jen vypnout účet. Cílem je zachovat provoz bez toho, aby data a odpovědnost visely ve vzduchu.
+
+První checklist vytvoř hned:
+
+| Oblast | Co zkontrolovat | Vlastník |
+| --- | --- | --- |
+| Identita | Firemní e-mail, SSO, MFA zařízení, recovery e-mail | Ops / zakladatel |
+| Kód | Git přístupy, deploy klíče, package registry, CI proměnné | Tech lead |
+| Produkt | Admin role, support access, testovací účty, sandboxy | Product owner |
+| Data | Exporty, lokální kopie, sdílené disky, CRM segmenty | Data owner |
+| Komunikace | E-mail aliasy, helpdesk, kalendáře, externí kontakty | Operations |
+| Finance | Fakturace, bankovní náhledy, platební brány, účetní nástroje | Finance owner |
+
+U dodavatelů přidej ještě smluvní konec: kdy musí odstranit kopie dat, jak potvrdí výmaz, kdo přebírá dokumentaci a jak dlouho zůstane dostupný pro přechodové otázky. Ano, zní to nudně. Přesně proto to funguje.
+
+## CB.2 Jeden seznam systémů je lepší než hrdinská paměť
+
+Offboarding bez inventáře systémů je detektivka. A detektivky jsou fajn v knihkupectví, ne v produkčním provozu.
+
+Udržuj jednoduchý přístupový registr:
+
+- kdo má přístup,
+- do jakého systému,
+- s jakou rolí,
+- proč ho má,
+- kdo přístup schválil,
+- kdy se má zkontrolovat nebo ukončit.
+
+Nemusí to být drahý IAM nástroj. Pro malý tým stačí tabulka, repozitářový soubor nebo interní wiki stránka, pokud má vlastníka a pravidelnou revizi. Důležité je, aby v okamžiku odchodu nepadla otázka „kde všude vlastně byl?“. To je otázka, kterou chceš mít zodpovězenou ještě předtím, než ji někdo položí.
+
+Praktický trik: každý nový nástroj musí mít v interní dokumentaci sekci „jak odebrat přístup“. Pokud ji nemá, nástroj není plně zavedený. Instalace bez deinstalace je jen digitální lepidlo na budoucí problém.
+
+## CB.3 Přístupy vypínej podle rizika, ne podle abecedy
+
+Ne všechny účty jsou stejné. E-mail a SSO jsou páteř identity. Git a CI mohou změnit produkt. Produkční administrace může vidět zákaznická data. Fakturace může pracovat s obchodními a platebními údaji. Newsletter nebo CRM může poslat zprávu tisícům lidí. Vypínat je „až se k tomu dostaneme“ je pozvánka pro Murphyho zákon, který má bohužel vždycky volno.
+
+Priorita odebrání:
+
+1. SSO, e-mail a primární identita.
+2. Produkční administrace, support access a databázové přístupy.
+3. Git repozitáře, CI/CD, hosting, DNS a package registry.
+4. Secret store, API klíče, webhook podpisy a deploy tokeny.
+5. CRM, helpdesk, e-mailing, analytika a dokumenty se zákaznickými daty.
+6. Projektové nástroje, interní wiki, kalendáře a komunikační kanály.
+
+U běžného plánovaného odchodu stačí přesný časový plán. U rizikového odchodu nebo incidentu máš mít krizový režim: okamžité zablokování identity, revokace aktivních sessions, rotace citlivých klíčů a audit posledních akcí. GDPR článek 33 řeší oznamování porušení zabezpečení osobních údajů dozorovému úřadu; dobře vedený offboarding snižuje šanci, že se k takové povinnosti vůbec proklikáš.
+
+## CB.4 Rotuj tajemství, která mohla odejít s člověkem
+
+Největší offboardingová past nejsou účty, ale tajemství: API klíče, SSH klíče, recovery kódy, deploy tokeny, webhook secrety, sdílené heslo k historickému nástroji a lokální `.env`, který přežil tři refaktory a dvě firemní etapy.
+
+Zaveď jednoduché pravidlo:
+
+- osobní klíče se ruší,
+- týmové klíče se rotují, pokud k nim odcházející člověk měl přístup,
+- produkční klíče se nikdy neposílají e-mailem ani chatem,
+- sdílené účty mají plán zániku,
+- rotace se zapisuje do provozního logu.
+
+Příklad mini-runbooku pro rotaci:
+
+| Tajemství | Kde je | Jak rotovat | Jak ověřit |
+| --- | --- | --- | --- |
+| `PAYMENT_WEBHOOK_SECRET` | Secret store + platební brána | Vygenerovat nový podpis, nasadit, ponechat krátké překryvné okno | Test webhooku na stagingu i produkci |
+| Deploy token | Hosting provider | Vytvořit nový token, změnit CI secret, smazat starý | Úspěšný deploy z CI |
+| SMTP API key | E-mail provider | Nový klíč pro aplikaci, starý deaktivovat | Testovací transakční e-mail |
+| SSH klíč | Server / Git | Odebrat veřejný klíč, ověřit login audit | Přihlášení jen povolených účtů |
+
+Privacy-first detail: při rotaci neloguj hodnoty tajemství. Loguj jen typ, vlastnictví, čas, výsledek a odkaz na ticket. Bezpečnostní log není album s fotkami klíčů od domu.
+
+## CB.5 Předej vlastnictví práce, ne jen soubory
+
+Odcházející člověk často drží víc než přístup: kontext. Ví, proč je cron nastavený divně, proč fakturační export obsahuje historický sloupec, proč se jedna integrace nesmí vypnout v pátek a kde je zákaznická dohoda, která nikdy nedoputovala do CRM. Offboarding má tenhle kontext přenést.
+
+Před odchodem udělej krátký převod:
+
+- které projekty člověk vlastní,
+- jaké rozhodnutí čeká na další krok,
+- kde jsou rozpracované změny,
+- jaké účty nebo dodavatelé měli jeho kontakt jako vlastníka,
+- které automatizace běží pod jeho identitou,
+- jaké dokumenty, incidenty nebo zákaznické dohody vyžadují další péči.
+
+Pozor na automatizace běžící pod osobním účtem. Pokud build, reporting, e-mailová sekvence nebo fakturační export stojí na uživateli `petr@firma.cz`, odchod Petra není HR událost. Je to budoucí výpadek s kalendářním zpožděním. Kritické automatizace mají běžet pod servisní identitou s vlastníkem a auditní stopou.
+
+## CB.6 Zařízení a lokální data nejsou vedlejší detail
+
+Notebook, telefon, externí disk a lokální backup mohou obsahovat víc citlivých dat než produkční administrace. Zejména u malých týmů, kde se exporty, screenshoty, databázové dumpy a zákaznické CSV občas povalují jako digitální drobky po stole.
+
+Minimální postup:
+
+- potvrď vrácení firemních zařízení,
+- odpoj zařízení z MDM nebo firemní správy až po ověření dat,
+- zruš přístup k e-mailu, kalendáři a cloudovým diskům,
+- vyžádej potvrzení smazání lokálních kopií zákaznických dat,
+- u dodavatelů požaduj písemné potvrzení výmazu nebo návratu dat,
+- u kritických rolí zkontroluj poslední exporty a stažení souborů.
+
+U externistů je dobré mít tuto povinnost už ve smlouvě nebo DPA: po ukončení spolupráce vrátit nebo smazat osobní údaje podle pokynu správce. Prakticky to znamená, že „já už to nepoužívám“ nestačí. Chceš konkrétní potvrzení a ideálně i proces, který nenechá zákaznická data bydlet na soukromém disku někde mezi fakturami a fotkami kočky.
+
+## CB.7 Checklist offboardingu
+
+- Existuje datum odchodu a vlastník offboardingu?
+- Máš seznam všech systémů, rolí a datových oblastí, kde měl člověk nebo dodavatel přístup?
+- Jsou primární identita, SSO, e-mail a aktivní sessions vypnuté ve správný čas?
+- Jsou odebrané produkční, Git, CI/CD, hosting, DNS a administrátorské přístupy?
+- Jsou zrušené osobní klíče a rotovaná týmová tajemství, ke kterým měl přístup?
+- Jsou kritické automatizace převedené z osobního účtu na servisní identitu?
+- Je předané vlastnictví projektů, dokumentace, zákaznických dohod a rozpracovaných úkolů?
+- Jsou vrácená zařízení a potvrzené smazání lokálních kopií zákaznických dat?
+- Existuje auditní záznam, kdo co vypnul, kdy a s jakým výsledkem?
+- Proběhla po týdnu krátká kontrola, jestli se neobjevil zapomenutý účet nebo rozbitá automatizace?
+
+## Codyho komentář
+
+Můj pohled — Cody: dobrý offboarding se pozná podle toho, že je trapně nudný. Nikdo nehledá heslo v chatu, nikdo nevolá bývalému externistovi kvůli deployi a nikdo nepřemýšlí, jestli někde neleží export zákazníků. Když odchod člověka rozbije produkt, nebyl problém v člověku. Byl problém v tom, že firma spletla identitu člověka s provozní architekturou.
+
+## Zdroje k příloze
+
+- GDPR, článek 32 — zabezpečení zpracování: https://eur-lex.europa.eu/legal-content/CS/TXT/HTML/?uri=CELEX:32016R0679#d1e2884-1-1
+- GDPR, článek 33 — ohlašování porušení zabezpečení osobních údajů dozorovému úřadu: https://eur-lex.europa.eu/legal-content/CS/TXT/HTML/?uri=CELEX:32016R0679#d1e2951-1-1
+- EDPB: Guidelines 9/2022 on personal data breach notification under GDPR: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-92022-personal-data-breach-notification-under_en
+- ENISA: Cybersecurity guide for SMEs — 12 steps to securing your business: https://www.enisa.europa.eu/publications/cybersecurity-guide-for-smes
+
+## Shrnutí přílohy
+
+Offboarding chrání produkt před osiřelými účty, zapomenutými klíči a daty bez vlastníka. Začni před posledním dnem, pracuj podle registru systémů, vypínej přístupy podle rizika, rotuj tajemství, převáděj vlastnictví práce, kontroluj zařízení a lokální kopie a vše zapisuj do auditní stopy. Privacy-first tým nečeká, až odchod člověka odhalí, kde všude firma používala lidskou paměť místo procesu.
+
 ## Pracovní log
+- 2026-08-10: Přidána příloha CB o offboardingu lidí a dodavatelů: seznam systémů, rizikové pořadí odebrání přístupů, rotace tajemství, převod vlastnictví, zařízení, lokální data a checklist.
 - 2026-08-10: Přidána příloha CA o přístupech a rolích: role matrix, deny-by-default autorizace, oddělení admin účtů, expirace externistů, řízený support access, review přístupů a checklist.
 - 2026-08-10: Přidána příloha BZ o testovacích datech a stagingu: účel prostředí, syntetická seed data, bezpečná práce s produkčními vzorky, oddělené integrace, refresh procedura a checklist.
 - 2026-08-10: Přidána příloha BY o auditním logu a historii změn: účel logů, struktura událostí, zákaznická historie, retence, ochrana logů a checklist.
