@@ -12761,7 +12761,160 @@ Toto je můj pohled — Cody: žádosti o data nejsou jen compliance cvičení. 
 
 ---
 
+# Příloha CF: Datová rezidence a regiony bez kouzelné věty „hostováno v EU“
+
+„Máme EU region“ je dobrý začátek, ale není to celé privacy-first řešení. Data se mohou ukládat v jednom regionu, zálohovat v druhém, logovat ve třetím, analyzovat ve čtvrtém a číst supportem z pátého kontinentu. A pak přijde zákazník z regulovanějšího odvětví a zeptá se: „Kde přesně jsou moje data?“ Pokud odpověď zní „asi ve Frankfurtu, protože to psali v ceníku“, máme krásný příklad provozního optimismu. Ten je levný do první due diligence.
+
+Datová rezidence znamená praktickou kontrolu nad tím, kde data fyzicky nebo logicky bydlí. Transfer mimo EHP je širší téma: nejde jen o primární databázi, ale i o přístup, podporu, subdodavatele, zálohy, telemetrii a diagnostiku. Evropská komise vysvětluje, že předávání osobních údajů mimo EU/EHP může probíhat například na základě rozhodnutí o odpovídající ochraně, vhodných záruk nebo specifických výjimek: https://commission.europa.eu/law/law-topic/data-protection/international-dimension-data-protection/international-data-transfers_en
+
+## CF.1 Region je produktové rozhodnutí, ne technický default
+
+U malého SaaS bývá výběr regionu často vedlejší krok při zakládání databáze: vybere se nejbližší datacentrum, protože má nízkou latenci, nebo default, protože tlačítko už svítí. Jenže region ovlivňuje právní dokumentaci, obchodní argumenty, incidenty, support a možnost prodávat firmám, které mají vlastní požadavky na data.
+
+Praktický postup pro nový projekt:
+
+- Primární produkční data drž v EU/EHP, pokud nemáš jasný důvod dělat opak.
+- Pro každou hlavní datovou doménu napiš region: účty, fakturace, obsah zákazníka, soubory, logy, analytika, support tickety, e-maily.
+- Rozliš „data at rest“ od přístupu lidí a systémů. Úložiště v EU neznamená, že k němu nikdo mimo EU nemůže mít přístup.
+- Zkontroluj, jestli vybraný region platí i pro zálohy, read replica, vyhledávací index, objektové úložiště a CDN.
+- Nedělej z „EU-only“ slib, pokud ho neumíš provozně doložit.
+
+Příklad jednoduché interní tabulky:
+
+| Datová oblast | Služba | Primární region | Zálohy | Přístup supportu | Poznámka |
+| --- | --- | --- | --- | --- | --- |
+| Uživatelské účty | Aplikační DB | EU | EU | Jen admin role v týmu | Bez produkčního dumpu do lokálu |
+| Fakturace | Fakturační nástroj | EU/EHP preferováno | Podle dodavatele | Finance tým | Prověřit DPA a subdodavatele |
+| Support | Ticket systém | EU region | Podle dodavatele | Support tým | Bez citlivých screenshotů v ticketech |
+| Analytika | Privacy-first nástroj | EU | EU | Produktový tým | Jen agregované eventy |
+
+Tahle tabulka nemusí být krásná. Musí být pravdivá. Krásné tabulky s nepravdivými regiony jsou jen compliance cosplay.
+
+## CF.2 „EU region“ neznamená automaticky „žádný transfer“
+
+Dodavatel může mít datacentrum v EU, ale podporu, monitoring, bezpečnostní tým nebo mateřskou firmu mimo EHP. To nemusí automaticky znamenat zákaz použití. Znamená to, že musíš vědět, co se děje, mít správné smluvní a technické záruky a umět vysvětlit zbytkové riziko.
+
+Při kontrole dodavatele se ptej konkrétně:
+
+- Kde se ukládají produkční data zákazníků?
+- Kde jsou zálohy a jak dlouho se drží?
+- Jaké subdodavatele dodavatel používá pro hosting, support, monitoring a bezpečnost?
+- Může k datům přistupovat personál mimo EU/EHP?
+- Jsou přístupy logované, schvalované a časově omezené?
+- Jaké transferové mechanismy dodavatel používá, pokud data nebo přístup míří mimo EHP?
+
+Evropská komise spravuje modernizované standardní smluvní doložky pro mezinárodní transfery, které se používají jako jeden z nástrojů vhodných záruk podle GDPR: https://commission.europa.eu/law/law-topic/data-protection/international-dimension-data-protection/standard-contractual-clauses-scc_en
+
+Codyho komentář: SCC nejsou magická nálepka „vyřešeno“. Jsou právní konstrukce, která musí sedět na reálný provoz. Když systém posílá plné databázové exporty do globálního supportu bez omezení, žádný PDF podpis z toho neudělá privacy-first architekturu.
+
+## CF.3 Mapuj i diagnostiku, logy a AI funkce
+
+Největší překvapení nebývá hlavní databáze. Ta je vidět. Překvapení bývá v okrajových systémech: error tracking, session replay, transakční e-mail, cloudové logy, fulltextové indexy, AI asistenti v supportu nebo nástroj, kam obchodník nahraje export kontaktů, protože „jen na chvilku“.
+
+Pro každou novou integraci použij mini-review:
+
+1. Jaká data do nástroje posíláme?
+2. Posíláme osobní údaje, obsah zákazníka, metadata, nebo jen agregované metriky?
+3. Kde jsou data uložená a zpracovávaná?
+4. Kdo k nim má přístup a za jakých podmínek?
+5. Dá se region nastavit na EU/EHP?
+6. Dá se sběr omezit, maskovat nebo pseudonymizovat?
+7. Jak dlouho data zůstávají v nástroji?
+8. Má nástroj export a smazání dat?
+
+Typické privacy-first úpravy:
+
+- V error trackingu neposílej celé request body, tokeny, e-maily ani texty zpráv.
+- V analytice používej agregované eventy místo uživatelských profilů přes půl internetu.
+- V supportu zakaz vkládání citlivých screenshotů bez redakce.
+- V AI asistentech nastav pravidlo: žádná produkční osobní data do promptu, pokud není schválený účel, dodavatel a režim zpracování.
+- V logování nastav retenci podle účelu: bezpečnostní logy nejsou marketingová kronika.
+
+Tohle je přesně místo, kde privacy-first ušetří budoucí nervy. Když se incident stane v hlavní databázi, všichni ví, že je to vážné. Když se citlivé údaje rozlezou do pěti pomocných nástrojů, incident se hledá jako ponožka po víkendu v prádelně.
+
+## CF.4 Udělej zákaznickou odpověď jednou a udržuj ji živou
+
+B2B zákazníci se budou ptát na regiony, subdodavatele a transfery. Nepiš pokaždé odpověď od nuly v panice mezi dvěma meetingy. Připrav si krátký trust text, který obchod i support používají konzistentně.
+
+Vzor odpovědi:
+
+> Produkční zákaznická data ukládáme primárně v EU/EHP. U každé podpůrné služby sledujeme účel zpracování, region, subdodavatele, retenci a přístupy. Pokud služba zahrnuje transfer mimo EHP nebo vzdálený přístup mimo EHP, posuzujeme používané záruky, datové minimum a technická opatření. Nepoužíváme reklamní pixely ani social tracking pro zákaznické chování v aplikaci.
+
+Tohle není právní dokument. Je to čitelný obchodní základ. K němu patří interní detailní tabulka a oficiální privacy dokumentace. Hlavně neslibuj absolutna typu „všechna data vždy jen v EU“, pokud do support ticketu chodí e-maily přes globální službu nebo fakturace běží u dodavatele se subprocesory mimo EHP.
+
+Dobrá veřejná stránka může obsahovat:
+
+- kde běží primární aplikace a databáze,
+- jaké kategorie subdodavatelů používáš,
+- jak řešíš analytiku a marketingové trackery,
+- jaké typy dat zpracováváš,
+- kde si zákazník vyžádá detailní DPA nebo bezpečnostní informace,
+- kdy byl dokument naposledy aktualizovaný.
+
+## CF.5 Transfer impact assessment ber jako provozní otázky, ne akademii
+
+U transferů mimo EHP nestačí jen vědět, že existují. Potřebuješ posoudit, jaké údaje se předávají, komu, proč, jak často, jaké záruky platí a jaké doplňkové technické nebo organizační kroky snižují riziko. EDPB ve svých doporučeních k doplňkovým opatřením po Schrems II popisuje postup pro mapování transferů, ověření transferového nástroje a posouzení účinnosti opatření v praxi: https://www.edpb.europa.eu/our-work-tools/our-documents/recommendations/recommendations-012020-measures-supplement-transfer_en
+
+Pro malý SaaS si z toho udělej jednoduchou šablonu:
+
+| Otázka | Praktická odpověď |
+| --- | --- |
+| Jaká data odcházejí mimo EHP? | Například support ticket bez příloh, nebo diagnostický event bez obsahu zprávy |
+| Proč je transfer potřeba? | Například bezpečnostní monitoring nebo zpracování platby |
+| Existuje EU alternativa? | Ano/ne, včetně důvodu výběru |
+| Jaký je právní mechanismus? | Adekvátní země, SCC, nebo jiný režim |
+| Jaká technická opatření pomáhají? | Šifrování, pseudonymizace, maskování polí, minimální scope |
+| Jak se transfer kontroluje? | Roční vendor review, alert při změně subdodavatele |
+
+Nejde o to vytvořit šanon, který nikdo neotevře. Jde o rozhodnutí, které tým pochopí i za půl roku. Když se změní dodavatel, region nebo typ dat, posouzení aktualizuj. Privacy-first provoz není jednorázová svátost, ale rutina.
+
+## CF.6 Nastav guardrails v produktu i infrastruktuře
+
+Dokumentace je užitečná, ale nejlepší pravidlo je to, které systém vynutí. Pokud má produkt slib EU provozu, nesmí být snadné omylem zapnout globální region, exportovat produkční data do lokálního notebooku nebo poslat celé payloady do externí diagnostiky.
+
+Praktické guardrails:
+
+- Infrastructure-as-code šablony mají region jako výslovnou proměnnou s povolenými hodnotami.
+- Produkční přístupy k databázi jsou přes auditovanou cestu, ne přes sdílený connection string v chatu.
+- Exporty produkčních dat vyžadují důvod, časové omezení a bezpečné úložiště.
+- Logovací knihovna maskuje citlivá pole centrálně.
+- CI kontroluje, že nové endpointy neposílají osobní údaje do analytiky bez schváleného eventu.
+- Vendor review je součástí definition of done pro nové integrace.
+
+Malý tým nepotřebuje korporátní GRC kosmodrom. Potřebuje několik tvrdých zábradlí tam, kde by chyba bolela nejvíc. Nejlepší compliance je ta, která vývojáře neotravuje každý den, ale v rozhodující chvíli mu nedovolí udělat hloupost.
+
+## CF.7 Checklist datové rezidence a regionů
+
+- Máme mapu datových oblastí a regionů pro produkci, zálohy, logy, analytiku, support a fakturaci?
+- Umíme oddělit primární uložení dat od vzdáleného přístupu podpory nebo subdodavatelů?
+- Víme, které služby mohou znamenat transfer mimo EHP?
+- Máme u těchto transferů zapsaný účel, typ dat, mechanismus a doplňková opatření?
+- Umíme zákazníkovi lidsky vysvětlit, kde jeho data bydlí a kdo k nim může mít přístup?
+- Neposíláme osobní údaje do diagnostiky, analytiky nebo AI nástrojů jen proto, že to knihovna umí?
+- Máme regiony nastavené v infrastruktuře jako kontrolovanou konfiguraci, ne ruční klikání?
+- Kontrolujeme změny subdodavatelů aspoň při vendor review?
+- Máme retenci pomocných systémů stejně promyšlenou jako retenci hlavní databáze?
+- Neslibujeme veřejně víc, než umíme technicky a smluvně doložit?
+
+## Codyho komentář
+
+Toto je můj pohled — Cody: „EU hosting“ je dnes minimum, ne finální odpověď. Skutečná konkurenční výhoda vzniká až ve chvíli, kdy firma umí říct: tady data vznikají, tady se ukládají, tady se zálohují, tady končí a tady k nim člověk nesmí. To není paranoia. To je provozní dospělost s evropským přízvukem.
+
+## Zdroje k příloze
+
+- Evropská komise: přehled mezinárodních transferů osobních údajů mimo EU/EHP, včetně rozhodnutí o odpovídající ochraně a vhodných záruk — https://commission.europa.eu/law/law-topic/data-protection/international-dimension-data-protection/international-data-transfers_en
+- Evropská komise: standardní smluvní doložky pro mezinárodní transfery osobních údajů — https://commission.europa.eu/law/law-topic/data-protection/international-dimension-data-protection/standard-contractual-clauses-scc_en
+- EDPB: Recommendations 01/2020 on measures that supplement transfer tools, finální verze přijatá 18. června 2021 — https://www.edpb.europa.eu/our-work-tools/our-documents/recommendations/recommendations-012020-measures-supplement-transfer_en
+- EUR-Lex: GDPR, kapitola V o předávání osobních údajů do třetích zemí nebo mezinárodním organizacím — https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679
+
+## Shrnutí přílohy
+
+Datová rezidence není jen výběr EU regionu v administraci cloudu. Privacy-first SaaS musí mapovat primární data, zálohy, logy, diagnostiku, support, fakturaci, AI funkce a přístupy lidí. Pokud existuje transfer mimo EHP, tým má vědět proč, jaká data se týkají, jaký mechanismus používá a jaká technická opatření snižují riziko. Nejlepší výsledek není nejdelší právní text, ale provoz, který umí zákazníkovi pravdivě a jednoduše říct, kde data jsou, kdo se jich může dotknout a kdy zmizí.
+
+---
+
 ## Pracovní log
+- 2026-08-10: Přidána příloha CF o datové rezidenci a regionech: EU regiony, transfery mimo EHP, diagnostika, zákaznická komunikace, transfer impact šablona, infrastrukturní guardrails a checklist.
 - 2026-08-10: Přidána příloha CE o žádostech lidí o data: příjem a evidence DSR, přiměřené ověření identity, datová mapa, bezpečný výmaz, čitelný export, interní runbook a checklist.
 - 2026-08-10: Přidána příloha CD o chybových stavech a prázdných obrazovkách: bezpečné chybové texty, prázdné stavy jako onboarding, typy stavů, formulářová ochrana práce, interní chybový kontrakt a checklist.
 - 2026-08-10: Přidána příloha CC o zpracovatelských smlouvách a subdodavatelích: role správce/zpracovatele, DPA jako provozní návod, živý seznam subdodavatelů, transfery mimo EHP, mini-review nových nástrojů a checklist.
