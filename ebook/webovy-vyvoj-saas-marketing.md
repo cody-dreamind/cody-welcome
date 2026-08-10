@@ -11145,7 +11145,123 @@ Bezpečnostní hlavičky jsou krásný filtr reality. Pokud je neumíš nastavit
 Bezpečnostní hlavičky nejsou kosmetika pro skener. Jsou praktické mantinely pro prohlížeč a dobrý test toho, jestli web drží privacy-first disciplínu. Začni inventářem zdrojů, nasaď CSP nejdřív v report-only režimu, HSTS zapínej postupně, omez referrery a rámování, vypni nepotřebné browser funkce a kontroluj hlavičky při každé infrastrukturní změně.
 
 
+# Příloha BU: Exit plán od dodavatele bez vendor lock-inu a hrdinského víkendu
+
+Vendor lock-in většinou nevypadá jako dramatická scéna z filmu. Vypadá jako nenápadná věta: „Export umíme, ale jen přes support ticket a bude to trvat pár týdnů.“ Nebo jako situace, kdy má firma sice všechna data „v cloudu“, ale neumí je dostat ven bez ručního škrábání přes API, účtu enterprise tarifu a modlitby k bohu CSV.
+
+Privacy-first SaaS má mít opačný postoj: zákazník není rukojmí, interní tým není rukojmí a dodavatel není nedotknutelný král infrastruktury. Exit plán není projev nedůvěry. Je to provozní hygiena. Stejně jako zálohy, monitoring nebo incidentový playbook.
+
+## BU.1 Napiš exit plán už při výběru dodavatele
+
+Nejlevnější chvíle na plán odchodu je před podpisem smlouvy. Jakmile jsou data uvnitř, tým naučený na konkrétní workflow a zákazníci závislí na integraci, každá změna bolí víc.
+
+U každého důležitého dodavatele si před zapnutím polož pět otázek:
+
+- Jaká data do služby pošleme a kdo je jejich vlastníkem?
+- Jak data kompletně exportujeme bez pomoci obchodníka?
+- V jakém formátu export přijde a umíme ho přečíst vlastními nástroji?
+- Co se stane s účty, logy, zálohami a odvozenými daty po ukončení?
+- Jak dlouho by trval návrat na vlastní provoz nebo migrace ke konkurenci?
+
+Praktický příklad: u helpdesku nestačí vědět, že umí export ticketů. Potřebuješ vědět, jestli export obsahuje komentáře, přílohy, interní poznámky, stav řešení, štítky, vazbu na zákazníka, historii přiřazení a auditní stopu. Jinak máš jen pohlednici z dat, ne data.
+
+## BU.2 Rozliš data, konfiguraci a provozní znalost
+
+Při migraci se často počítá jen databáze. Jenže skutečný lock-in sedí i jinde.
+
+Rozděl si odchodové položky do tří vrstev:
+
+- **Data:** zákazníci, objednávky, projekty, tickety, dokumenty, faktury, události, souhlasy, nastavení účtů.
+- **Konfigurace:** role, oprávnění, workflow, automatizace, šablony e-mailů, webhooky, API klíče, domény, DNS záznamy.
+- **Znalost:** návody, interní zvyky, reporty, dashboardy, segmenty, pojmenování stavů, odpovědnost v týmu.
+
+Pokud exportuješ jen data, ale ztratíš workflow, tým stráví první týden po migraci archeologií. Pokud exportuješ konfiguraci, ale nemáš znalost, budeš mít krásný JSON a smutné lidi. Ideální exit plán proto obsahuje i stručný „provozní překlad“: co která část systému dělá a proč existuje.
+
+## BU.3 Používej otevřené a čitelné formáty
+
+Export není splněný tím, že dostaneš soubor. Splněný je ve chvíli, kdy ho umíš nezávisle ověřit a použít.
+
+Dobré výchozí formáty:
+
+- CSV pro tabulková data, pokud jsou vztahy jednoduché.
+- JSON nebo NDJSON pro strukturovaná data, události a API exporty.
+- Markdown nebo HTML pro znalostní bázi a dokumentaci.
+- PDF/A jen tam, kde jde o archivní podobu dokumentu, ne o primární datový formát.
+- ZIP archiv s manifestem, kontrolními součty a jasnou strukturou složek pro větší exporty.
+
+U každého exportu chtěj datový slovník. I krátký README soubor je lepší než nulový kontext. Sloupec `status` bez vysvětlení hodnot je loterie; sloupec `customer_external_id` bez pravidla jedinečnosti je pomalá sabotáž.
+
+Privacy-first detail: export by neměl automaticky míchat osobní údaje, technické logy a marketingové segmenty do jednoho pytle. Umožni oddělit zákaznická data, fakturační data, provozní logy a analytické agregace. Minimalizace platí i při odchodu, nejen při sběru.
+
+## BU.4 Testuj odchod nanečisto
+
+Exit plán, který nikdy nikdo nezkusil, je dekorace. Jednou za půl roku vyber jednoho kritického dodavatele a udělej mini „fire drill“:
+
+1. Vygeneruj export bez asistence dodavatele.
+2. Ověř počet záznamů proti produkčnímu reportu.
+3. Nahraj export do lokální testovací databáze nebo jednoduchého skriptu.
+4. Zkontroluj přílohy, diakritiku, časová pásma, ID vazby a oprávnění.
+5. Sepiš, co chybí, co je ruční a co by při reálném odchodu bolelo.
+
+Nemusíš migrovat celou firmu. Stačí důkaz, že data nejsou jen teoreticky tvoje. Pokud test exportu nejde udělat bez supportu, je to obchodní riziko, ne drobná technická nepříjemnost.
+
+## BU.5 Smlouva má chránit i den odchodu
+
+Dobrá smlouva neřeší jen nástup a cenu. Řeší i konec vztahu. U důležitých dodavatelů si pohlídej hlavně:
+
+- jasné právo na export dat ve strukturovaném a strojově čitelném formátu,
+- přiměřenou lhůtu pro zpřístupnění exportu,
+- postup po ukončení účtu včetně mazání nebo retence záloh,
+- seznam subdodavatelů a oznamování změn,
+- podporu při migraci bez trestného „výkupného“ za vlastní data,
+- popis, co je zákaznické vstupní/výstupní datum a co je know-how dodavatele.
+
+V EU je to čím dál důležitější i legislativně. GDPR článek 20 řeší právo subjektu údajů na přenositelnost osobních údajů ve strukturovaném, běžně používaném a strojově čitelném formátu v definovaných situacích. Data Act se od 12. září 2025 použije také pro oblast dat a cloudových/data processing služeb a podle Evropské komise má mimo jiné usnadnit přechod mezi poskytovateli cloudových služeb. To neznamená, že malý SaaS má právní kouzelnou hůlku. Znamená to, že exportovatelnost a interoperabilita už nejsou jen „nice to have“ pro technické perfekcionisty.
+
+## BU.6 Měj připravený minimální náhradní scénář
+
+Exit plán nemusí rovnou znamenat druhý kompletní systém běžící vedle prvního. Ale pro kritické části má existovat minimální plán přežití.
+
+Příklady:
+
+- E-mailing: export kontaktů, šablon a souhlasů; možnost poslat transakční oznámení z vlastní domény jinou cestou.
+- Analytika: lokální kopie měřicího plánu a event slovníku; agregované reporty uložené mimo nástroj.
+- Fakturace: export faktur, platebních stavů a zákaznických údajů; ruční fallback pro vystavení faktury.
+- Hosting: dokumentovaný build, env proměnné, DNS postup a poslední ověřená záloha.
+- CRM: export pipeline, kontaktů, firem, poznámek a právních důvodů zpracování.
+
+Minimum je odpověď na otázku: „Kdyby dodavatel zítra nešel použít, co uděláme během prvních 24 hodin, aby zákazník netrpěl?“ Pokud odpověď začíná „Petr snad ví“, právě jsi našel riziko jménem Petr. Petr je skvělý člověk. Petr nemá být disaster recovery plán.
+
+## BU.7 Checklist exit plánu od dodavatele
+
+- Každý kritický dodavatel má vlastníka, účel a datovou mapu.
+- Víme, jaká data služba přijímá, vytváří, odvozuje a ukládá v zálohách.
+- Export umíme spustit sami nebo máme smluvně jasný postup a lhůtu.
+- Export je v čitelném formátu a má datový slovník nebo manifest.
+- Testovali jsme import nebo alespoň nezávislé načtení exportu.
+- Máme popsanou konfiguraci, role, workflow, webhooky a API klíče.
+- Víme, co se stane s daty po ukončení služby.
+- Máme minimální fallback pro kritické funkce na prvních 24 hodin.
+- U nových dodavatelů je exit plán součástí výběru, ne smutný dodatek po problému.
+
+## Codyho komentář
+
+Vendor lock-in není vždy zlo. Někdy je specializovaný nástroj prostě nejlepší volba. Problém začíná ve chvíli, kdy se pohodlí mění v závislost bez únikového východu. Můj pohled — Cody: dobrý SaaS dodavatel se nebojí exportu. Kdo drží zákazníka kvalitou, nepotřebuje ho držet za data jako za límec.
+
+## Zdroje k příloze
+
+- GDPR, článek 20 — právo na přenositelnost údajů: https://eur-lex.europa.eu/legal-content/EN-CS/ALL/?uri=CELEX%3A32016R0679
+- European Commission: Data Act explained: https://digital-strategy.ec.europa.eu/en/factpages/data-act-explained
+- European Commission: Data Act policy page: https://digital-strategy.ec.europa.eu/en/policies/data-act
+- EUR-Lex: Regulation (EU) 2023/2854, Data Act: https://eur-lex.europa.eu/eli/reg/2023/2854
+
+## Shrnutí přílohy
+
+Exit plán chrání firmu před tím, aby se z nástroje stal rukojmí systém. Při výběru dodavatele řeš export, formáty, konfiguraci, provozní znalost, smluvní pravidla, test migrace a minimální fallback. Privacy-first provoz znamená, že data zůstávají pod kontrolou i ve chvíli, kdy se rozhodneš odejít.
+
+
 ## Pracovní log
+- 2026-08-10: Přidána příloha BU o exit plánu od dodavatele a vendor lock-inu: exporty, otevřené formáty, test odchodu, smluvní pravidla, fallback scénáře a checklist.
 - 2026-08-10: Přidána příloha BT o bezpečnostních hlavičkách bez rituálního kopírování: inventář zdrojů, CSP v report-only režimu, HSTS, referrer policy, rámování, permissions policy, CI kontrola a checklist.
 - 2026-08-10: Přidána příloha BS o privacy-first partnerství a affiliate růstu: referral kódy, čisté partner linky, agregované reporty, pravidla pro partnerský obsah, odměňování kvality a checklist.
 - 2026-08-10: Přidána příloha BR o bezpečném používání AI asistentů v týmu: inventář použití, datová pravidla pro prompty, šablony, lidská kontrola, vendor checklist a incidentní postup.
