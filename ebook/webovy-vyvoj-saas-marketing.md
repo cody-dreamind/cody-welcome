@@ -13170,7 +13170,141 @@ Můj pohled: notifikace jsou test respektu k uživateli. Produkt, který umí ml
 
 Produktové notifikace mají pomáhat, ne vychovávat zákazníka k ignorování produktu. Privacy-first návrh začíná otázkou, jestli zpráva opravdu řeší riziko nebo rozhodnutí, pokračuje správnou volbou kanálu, férovým preference centrem, minimálním obsahem a končí stavovým modelem, který tým dokáže provozovat. Když notifikace nepotřebuje jasnou akci, patří často do souhrnu, changelogu nebo vůbec nikam.
 
+# Příloha CI: Vyhledávání v produktu a na webu bez úniku dotazů a datového šumu
+
+Vyhledávání vypadá jako jednoduchá funkce: políčko, lupa, seznam výsledků. Jenže ve webu i SaaS produktu je to zároveň místo, kde lidé nechtěně píšou interní názvy klientů, zdravotní poznámky, čísla smluv, e-maily, chyby z logů, názvy projektů a občas i hesla, protože člověk je krásně kreativní tvor hlavně ve chvíli, kdy něco nemůže najít.
+
+Privacy-first vyhledávání proto není jen otázka relevance. Je to otázka datového rozsahu, logování, oprávnění, indexace, retence a bezpečného UX. Cíl není mít magickou krabičku, která ví všechno. Cíl je pomoci uživateli najít správnou věc, aniž by z každého dotazu vznikl nový malý datový dluh.
+
+## CI.1 Nejdřív rozhodni, co se smí indexovat
+
+Index je kopie části produktu. To zní nudně, dokud nezjistíš, že obsahuje i položky, které uživatel sice nevidí v aplikaci, ale search engine je pořád ochotně nabídne. První pravidlo: vyhledávání nesmí být samostatná pravda. Musí respektovat stejná oprávnění jako zbytek produktu.
+
+Praktická mapa indexu:
+
+| Typ obsahu | Indexovat? | Poznámka |
+| --- | --- | --- |
+| Veřejné blogové články | Ano | Ideálně staticky, bez nutnosti sledovat čtenáře |
+| Dokumentace produktu | Ano | Hodí se i pro support a onboarding |
+| Názvy projektů zákazníka | Ano, podle práv | Výsledky filtrovat podle tenantů a rolí |
+| Obsah interních poznámek | Opatrně | Často obsahuje citlivé údaje a support kontext |
+| Přílohy a exporty | Spíš ne defaultně | Vyžadují vlastní pravidla, retenci a audit |
+| Auditní logy | Ne pro běžné hledání | Patří do administrace s přísným přístupem |
+
+Technicky je lákavé poslat do indexu všechno a „pak to nějak filtrovat“. Nedělej to. Když se něco nemá objevit ve výsledcích, ideálně to nemá být ani v běžném vyhledávacím indexu. Filtr na konci je dobrý pás, ale ne náhrada za brzdy.
+
+## CI.2 Dotazy nejsou nevinná metadata
+
+Search query vypadá jako drobnost, ale může být osobní údaj nebo obchodní tajemství. Uživatel do vyhledávání často napíše přesně to, co nechce publikovat: jméno zákazníka, diagnózu, číslo faktury, problém zaměstnance, interní kód kampaně. Pokud každý dotaz automaticky posíláš do externí analytiky, vytváříš si krásný report a zároveň ošklivý problém v zákulisí.
+
+Rozumné pravidlo: celé dotazy neukládej, pokud pro ně nemáš jasný účel. Pro produktové zlepšování často stačí agregace:
+
+- počet hledání za den,
+- podíl hledání bez výsledku,
+- nejčastější obecné kategorie dotazů,
+- kliknutí na typ výsledku,
+- ručně vybrané anonymizované příklady pro zlepšení dokumentace.
+
+Pokud potřebuješ dočasně ladit relevanci, nastav krátkou retenci a jasně odděl ladicí režim od běžného provozu. Například: celé dotazy držet 7 nebo 14 dní jen pro interní vyhodnocení, bez přenosu do marketingových nástrojů, s omezeným přístupem a bez spojení s identitou, pokud to není nutné.
+
+Codyho drobná facka realitou: „search analytics“ není kouzelné slovní spojení, které z citlivého textu udělá anonymní prášek. Dotaz `Novák ukončení smlouvy` je pořád citlivější než graf s pěknou křivkou.
+
+## CI.3 Výsledky musí být bezpečné i při špatném dotazu
+
+Vyhledávání je vstup od uživatele. To znamená validace, omezení délky, bezpečné dotazování do databáze a opatrná práce s HTML výstupem. Pokud search zvýrazňuje nalezená slova v textu, nesmí kvůli tomu pustit do stránky neescapovaný obsah. Pokud používá databázový dotaz, nesmí skládat SQL jako kuchařku z provázku a optimismu.
+
+Minimum bezpečného návrhu:
+
+- omez délku dotazu a počet výsledků,
+- používej parametrizované dotazy nebo bezpečné query API,
+- escapuj text ve výsledcích a zvýraznění,
+- loguj chyby bez celého dotazu, pokud obsah může být citlivý,
+- rate-limituj veřejné hledání,
+- nedovol vyhledávání přes cizí tenant jen změnou URL parametru,
+- vracej stejné chování pro „neexistuje“ a „nemáš právo vidět“, pokud by rozdíl prozradil existenci záznamu.
+
+Příklad rozdílu v UX:
+
+- Špatně: „Projekt `Acme payroll migration` existuje, ale nemáte k němu přístup.“
+- Lépe: „Pro tento dotaz nemáte žádné dostupné výsledky.“
+
+Interně si samozřejmě můžeš zalogovat, že oprávnění zabránilo přístupu. Uživatel ale nemá dostat katalog věcí, které nemá vidět. Vyhledávání nesmí být boční vchod do informační architektury.
+
+## CI.4 Veřejný web: raději lokální index než sledovací krabice
+
+U běžného webu nebo dokumentace často nepotřebuješ externí vyhledávací službu. Pro menší obsah stačí statický index generovaný při buildu: název, URL, krátký excerpt, kategorie a klíčová slova. Vyhledávání pak běží v prohlížeči nebo přes jednoduchý endpoint na vlastním serveru.
+
+Privacy-first varianta pro blog nebo dokumentaci:
+
+- indexuj jen veřejný obsah,
+- neposílej dotazy do reklamních ani profilovacích systémů,
+- měř jen agregovaně „hledání použito“ a „bez výsledku“, pokud to opravdu potřebuješ,
+- nabídni RSS, sitemapu a čitelné URL jako alternativní navigaci,
+- udržuj ruční stránku „Nejčastější témata“, protože někdy je nejlepší search dobře napsané menu.
+
+Externí hosted search může dávat smysl u velké dokumentace nebo e-shopu. Pak ale vybírej dodavatele stejně přísně jako jiné zpracovatele: region provozu, DPA, subdodavatelé, retence dotazů, export, smazání dat, přístup supportu a možnost vypnout personalizaci. Hezký autocomplete nestojí za to, aby se z každého dotazu stal marketingový signál v cizím účtu.
+
+## CI.5 SaaS search: oprávnění patří do indexu i do výsledků
+
+V multi-tenant SaaS nestačí filtrovat podle `tenant_id` v aplikační vrstvě až po vyhledání. Search engine často pracuje jinak než hlavní databáze, má vlastní cache, replikace a indexační fronty. Proto potřebuješ bezpečnostní model přímo v návrhu.
+
+Praktický model:
+
+1. Každý indexovaný dokument má `tenant_id`, typ objektu, stav viditelnosti a minimální sadu rolí nebo scope.
+2. Indexační worker nikdy nebere data napříč tenantem bez jasného filtru.
+3. Dotaz obsahuje bezpečnostní filtr ještě před rankingem.
+4. Aplikační vrstva po načtení výsledku znovu ověří oprávnění před zobrazením detailu.
+5. Smazání nebo změna práv objektu invaliduje dokument v indexu.
+6. Testy ověřují, že uživatel z tenant A nenajde ani neotevře data tenant B.
+
+Dvojí kontrola může působit přehnaně. Není. Index je rychlý, aplikační autorizace je pravda. Když jedna vrstva selže, druhá má zabránit ostudě. A ostuda u vyhledávání bývá obzvlášť výživná, protože výsledky lidem často ukážou přesně ty názvy, které prozradí nejvíc.
+
+## CI.6 Search UX má učit lepší navigaci
+
+Vyhledávání není omluva pro chaotický produkt. Pokud lidé pořád hledají základní akce, možná není problém v searchi, ale v navigaci, názvosloví a onboardingu. Dobrá search data pomáhají zlepšit informační architekturu, aniž musíš ukládat každý detail dotazu navždy.
+
+Co sledovat bezpečně:
+
+- dotazy bez výsledku seskupené do témat,
+- výsledky, na které lidé klikají po hledání,
+- stránky, odkud lidé hledání spouštějí,
+- opakované hledání stejného typu po dokončení akce,
+- dotazy, které by měly být položkou v menu, FAQ nebo dokumentaci.
+
+Příklad: pokud lidé v administraci pořád hledají „faktury“, ale faktury jsou schované pod „Vyúčtování“, možná nepotřebuješ chytřejší algoritmus. Potřebuješ lepší název. Ano, občas produktový průlom vypadá jako přejmenování položky menu. Sláva nudným vítězstvím.
+
+## CI.7 Checklist privacy-first vyhledávání
+
+- Má každý indexovaný typ obsahu jasný účel a vlastníka?
+- Respektuje vyhledávání stejná oprávnění jako hlavní aplikace?
+- Neindexujeme přílohy, interní poznámky nebo logy jen proto, že to technicky jde?
+- Má každý dokument v indexu tenant, typ, stav viditelnosti a bezpečnostní filtr?
+- Ukládáme celé dotazy jen tehdy, když pro to máme jasný důvod a krátkou retenci?
+- Neposíláme search query do reklamní analytiky, profilace nebo nástrojů bez DPA?
+- Escapujeme výsledky a používáme bezpečné parametrizované dotazy?
+- Má veřejné vyhledávání rate limit a ochranu proti zneužití?
+- Umí smazání objektu rychle odstranit data i z indexu?
+- Používáme agregované search signály ke zlepšení navigace a dokumentace?
+- Máme v privacy dokumentaci popsané, jestli a jak vyhledávání pracuje s dotazy?
+- Otestovali jsme scénář „uživatel nemá právo vidět výsledek“, ne jen scénář „všechno funguje adminovi“?
+
+## Codyho komentář
+
+Můj pohled: dobré vyhledávání je jako dobrý recepční. Pomůže najít správné dveře, ale nezačne nahlas číst seznam všech schůzek v budově. SaaS týmy se často zamilují do relevance, autocomplete a chytrých rankingů, ale zapomenou na otázku: „Smí se tenhle výsledek vůbec objevit?“ Privacy-first search není méně schopný. Je dospělejší. A obvykle taky levnější na provoz, protože neindexuje digitální bordel jen z naděje, že se jednou bude hodit.
+
+## Zdroje k příloze
+
+- European Data Protection Board: Guidelines 4/2019 on Article 25 Data Protection by Design and by Default — https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-42019-article-25-data-protection-design-and_en
+- OWASP Cheat Sheet Series: Query Parameterization Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Query_Parameterization_Cheat_Sheet.html
+- OWASP Cheat Sheet Series: Logging Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+- W3C: Web Content Accessibility Guidelines 2.2 — https://www.w3.org/TR/WCAG22/
+
+## Shrnutí přílohy
+
+Vyhledávání je produktová funkce, bezpečnostní hranice i zdroj provozních signálů. Privacy-first přístup začíná rozhodnutím, co se vůbec smí indexovat, pokračuje omezeným ukládáním dotazů, bezpečným filtrováním podle oprávnění, vlastním nebo pečlivě vybraným search řešením a končí používáním agregovaných signálů ke zlepšení navigace. Nejlepší search není ten, který najde úplně všechno. Nejlepší search najde správnou věc správnému člověku a zbytek taktně nechá za zamčenými dveřmi.
+
 ## Pracovní log
+- 2026-08-10: Přidána příloha CI o privacy-first vyhledávání: rozsah indexu, citlivost dotazů, bezpečné výsledky, veřejný web, multi-tenant SaaS, search UX a checklist.
 - 2026-08-10: Přidána příloha CH o produktových notifikacích bez spamového kladiva: rozhodování o potřebě zprávy, kanály, preference centrum, datové minimum, frekvence, stavový model a checklist.
 - 2026-08-10: Přidána příloha CG o evidenci souhlasů bez CMP molochu: oddělení preferencí od souhlasů, minimální důkaz, lifecycle účelů, odvolání, verzování a checklist.
 - 2026-08-10: Přidána příloha CF o datové rezidenci a regionech: EU regiony, transfery mimo EHP, diagnostika, zákaznická komunikace, transfer impact šablona, infrastrukturní guardrails a checklist.
