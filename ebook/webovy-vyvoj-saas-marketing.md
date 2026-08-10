@@ -11717,7 +11717,177 @@ Codyho komentář: přenositelnost není „ať si zákazník odnese dump datab�
 
 Import dat je důvěrový proces, ne jednorázový upload. Připrav migrační mapu, přesné šablony, validaci nanečisto, bezpečné zacházení se soubory, jasný report a opatrný převod souhlasů. Privacy-first SaaS zákazníkovi pomáhá přijít i odejít — bez rukojmí, bez špinavých CSV a bez toho, aby import potichu proměnil starý chaos v nový chaos s hezčím UI.
 
+# Příloha BY: Auditní log a historie změn bez detektivního románu a datového smetiště
+
+Auditní log je paměť produktu. Když se něco rozbije, někdo změní oprávnění, zákazník se ptá na export nebo support řeší incident, dobrý log řekne: co se stalo, kdo to spustil, čeho se to týkalo a kdy. Špatný log řekne buď nic, nebo úplně všechno včetně tokenů, textu zpráv a půlky zákaznické databáze. První varianta je slepota. Druhá varianta je datový karneval s právním bolehlavem.
+
+Privacy-first auditní log má být přesný, omezený a použitelný. Nepíše se proto, aby firma mohla šmírovat uživatele. Píše se proto, aby šlo férově vysvětlit důležité změny, vyšetřit problém, doložit odpovědnost a zlepšit provoz bez ukládání obsahu, který do logu nepatří.
+
+OWASP Logging Cheat Sheet připomíná, že aplikační logování je důležité pro bezpečnostní i provozní účely, ale zároveň varuje před ukládáním citlivých údajů, tokenů, hesel, connection stringů a dalších tajemství do logů: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+
+## BY.1 Nejdřív definuj účel logu
+
+Neexistuje jeden log pro všechno. Chyba malého SaaS týmu bývá v tom, že do jedné hromady hází debug výpisy, bezpečnostní události, produktovou analytiku, support poznámky a audit změn. Pak se v tom nedá hledat, špatně se nastavuje retence a každý přístup k logům je citlivější, než musel být.
+
+Rozliš minimálně čtyři typy záznamů:
+
+| Typ záznamu | Účel | Příklad |
+| --- | --- | --- |
+| Auditní log | Doložit důležitou změnu | změna role, export dat, smazání účtu |
+| Bezpečnostní log | Odhalit útok nebo zneužití | opakované neúspěšné přihlášení, změna MFA |
+| Provozní log | Najít technickou chybu | timeout integrace, selhané zpracování jobu |
+| Produktový event | Zlepšit produkt agregovaně | dokončení onboardingu, použití šablony |
+
+Jedna událost může patřit do víc oblastí, ale každý záznam má mít jasný účel. Například vytvoření exportu zákaznických dat je auditní událost i bezpečnostně zajímavý signál. Nemusíš kvůli tomu ukládat celý export. Stačí vědět, kdo export spustil, jaký rozsah obsahoval, kdy vznikl, kdy expiruje a zda byl stažen.
+
+Praktická otázka před přidáním nového logu:
+
+> „Kdo tenhle záznam za tři měsíce použije a jaké rozhodnutí podle něj udělá?“
+
+Pokud odpověď zní „možná se to bude hodit“, log ještě není navržený. To je jen digitální syslení. A syslení je roztomilé u veverek, ne v produkční databázi.
+
+## BY.2 Loguj událost, ne celý obsah
+
+Auditní log má zachytit význam změny, ne kopii zákaznických dat. Když uživatel upraví fakturační adresu, nepotřebuješ do logu uložit starou i novou adresu v plném znění. Často stačí metadata: změněné pole, autor, čas, objekt a bezpečný identifikátor.
+
+Příklad rozumného záznamu:
+
+```json
+{
+  "event": "billing_address.updated",
+  "actor_id": "usr_123",
+  "account_id": "acc_456",
+  "object_type": "billing_profile",
+  "object_id": "bp_789",
+  "changed_fields": ["street", "city", "vat_id"],
+  "source": "web_app",
+  "created_at": "2026-08-10T07:00:00Z"
+}
+```
+
+Co do auditního logu typicky nepatří:
+
+- hesla, tokeny, API klíče a session identifikátory,
+- celé texty zákaznických zpráv, komentářů a dokumentů,
+- plné platební údaje,
+- celé HTTP requesty a response body,
+- neveřejné přílohy,
+- zbytečně přesné osobní údaje, když stačí interní ID.
+
+Když potřebuješ doložit změnu hodnoty, zvaž bezpečnější varianty: hash hodnoty, částečné maskování, samostatnou chráněnou historii jen pro vybrané role nebo doménový diff bez citlivého obsahu. Například „změněno pole `billing_email`“ je pro běžný audit často dostatečné; plný e-mail v logu potřebuje silnější důvod.
+
+## BY.3 Každý důležitý záznam potřebuje pět polí
+
+Auditní log nemá být literární dílo. Má být čitelný strojově i lidsky. U důležitých událostí drž konzistentní strukturu:
+
+1. **Kdo**: uživatel, systémový proces nebo integrace, která akci spustila.
+2. **Co**: typ události jako stabilní název, třeba `team_member.role_changed`.
+3. **Čeho se to týká**: účet, projekt, faktura, soubor, integrace nebo jiný objekt.
+4. **Kdy**: čas v jednotném formátu a časové zóně.
+5. **Odkud/proč**: zdroj akce, korelační ID, volitelně důvod nebo ticket.
+
+Dobré názvy událostí jsou nudné a stabilní:
+
+- `user.login_failed`
+- `team_member.invited`
+- `team_member.role_changed`
+- `api_key.created`
+- `api_key.revoked`
+- `data_export.created`
+- `data_export.downloaded`
+- `account.deletion_requested`
+- `integration.webhook_failed`
+
+Nepoužívej názvy typu `Something happened` nebo `Update user`. Za půl roku z toho nebude moudrý nikdo, ani budoucí ty s kávou a zoufalstvím v očích.
+
+## BY.4 Ukaž zákazníkovi historii, která mu pomůže
+
+Ne každý auditní záznam musí být vidět zákazníkovi. Ale některé změny by měl zákazník umět najít sám bez support ticketu. Tím snižuješ nejistotu, šetříš podporu a posiluješ důvěru.
+
+Do zákaznické historie se hodí:
+
+- pozvánky a odebrání členů týmu,
+- změny rolí a oprávnění,
+- vytvoření a stažení exportu,
+- změny fakturačních údajů,
+- zapnutí nebo vypnutí integrace,
+- změny bezpečnostních nastavení,
+- požadavky na smazání účtu,
+- důležité importy a migrace.
+
+Ukázka lidského zobrazení:
+
+| Čas | Událost | Kdo |
+| --- | --- | --- |
+| 10. 8. 2026 09:12 | Petra změnila roli uživatele Martin z `viewer` na `admin` | Petra N. |
+| 10. 8. 2026 09:20 | Vytvořen export kontaktů, expiruje za 48 hodin | Martin K. |
+| 10. 8. 2026 09:31 | Integrace účetnictví byla odpojena | systém podle požadavku Petry N. |
+
+Důležitý detail: zákaznická historie není místo pro interní support poznámky. Pokud support napíše „zákazník je zmatený“, nemá se to omylem objevit v exportu nebo auditní historii účtu. Interní poznámky drž odděleně, s vlastní retencí a jasným účelem.
+
+## BY.5 Retence logů není „navždy, protože disk je levný“
+
+Logy mají často osobní údaje, obchodní citlivost a bezpečnostní hodnotu. Proto potřebují retenční pravidla stejně jako zákaznická data. Krátká retence může zničit schopnost řešit incident. Nekonečná retence zase vytváří zbytečné riziko.
+
+Navrhni retenční tabulku podle účelu:
+
+| Kategorie | Doporučený přístup |
+| --- | --- |
+| Debug logy | krátká retence, často dny až týdny |
+| Bezpečnostní události | delší retence podle rizika a smluv |
+| Audit změn účtu | po dobu vztahu a rozumné období po něm |
+| Exporty a importní soubory | krátká expirace, odděleně od auditního záznamu |
+| Agregované produktové statistiky | držet bez osobní vrstvy, pokud jde |
+
+EDPB v pokynech k data protection by design and by default zdůrazňuje, že ochrana dat má být zabudovaná do návrhu a výchozího nastavení zpracování, ne lepená až po nasazení: https://www.edpb.europa.eu/documents/guideline/guidelines-42019-on-article-25-data-protection-by-design-and-by-default_en
+
+Prakticky: retence logů se nemá řešit až při incidentu. Patří do návrhu funkce. Když přidáš export dat, rovnou přidej i záznam do auditního logu, expiraci exportního souboru a pravidlo, kdo smí vidět detail.
+
+## BY.6 Logy chraň před zvědavostí i úpravou
+
+Auditní log má smysl jen tehdy, když mu můžeš věřit. Pokud ho může administrátor libovolně mazat, přepisovat nebo číst bez stopy, není to auditní log. Je to zápisník na stole v průvanu.
+
+Základní pravidla ochrany:
+
+- přístup k logům omez podle role a účelu,
+- čtení citlivých logů samo loguj,
+- odděl právo číst logy od práva měnit produkční data,
+- technicky zabraň běžným uživatelům logy upravovat,
+- u kritických záznamů zvaž append-only úložiště nebo tamper-evident řetězení,
+- maskuj citlivé hodnoty už při zápisu, ne až při zobrazení,
+- nepouštěj logy do externího nástroje bez vendor review,
+- nastav alert, když logování přestane fungovat.
+
+Privacy-first evropský provoz tu znamená i výběr logovací infrastruktury. Pokud posíláš logy do cizí služby, ptej se stejně jako u analytiky: kde jsou data, kdo k nim má přístup, jaká je retence, umí služba EU region, jak se řeší subdodavatelé a export. Logy nejsou odpadní trubka produktu. Často jsou nejcitlivější mapa toho, co se ve firmě děje.
+
+## BY.7 Checklist auditního logu
+
+- Má každý typ logu jasný účel a vlastníka?
+- Oddělujeme auditní, bezpečnostní, provozní a produktové záznamy?
+- Má důležitá událost pole kdo, co, čeho se týká, kdy a odkud/proč?
+- Nepíšeme do logů hesla, tokeny, celé requesty, zákaznický obsah nebo zbytečné osobní údaje?
+- Umíme zákazníkovi ukázat bezpečnou historii důležitých změn?
+- Mají logy retenční pravidla podle účelu?
+- Je čtení citlivých logů omezené a samo auditované?
+- Jsou kritické záznamy chráněné před úpravou nebo smazáním?
+- Víme, co se stane, když logovací systém vypadne?
+- Prošli jsme logovací nástroj stejným vendor review jako analytiku nebo CRM?
+
+## Codyho komentář
+
+Auditní log je jedna z těch funkcí, které nikdo neoslavuje na landing page, ale všichni ji chtějí ve chvíli, kdy začne hořet. Dobrý log není víc dat. Dobrý log je méně dohadování. A to je v malém SaaS týmu skoro luxusní zboží.
+
+## Zdroje k příloze
+
+- OWASP Cheat Sheet Series: Logging Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+- European Data Protection Board: Guidelines 4/2019 on Article 25 Data Protection by Design and by Default: https://www.edpb.europa.eu/documents/guideline/guidelines-42019-on-article-25-data-protection-by-design-and-by-default_en
+
+## Shrnutí přílohy
+
+Auditní log má být přesný, omezený a chráněný. Definuj účel záznamů, loguj události místo obsahu, drž stabilní názvy, ukaž zákazníkovi bezpečnou historii důležitých změn, nastav retenci a chraň logy před neoprávněným čtením i úpravou. Privacy-first produkt se nepozná podle toho, že loguje všechno. Pozná se podle toho, že umí vysvětlit správné věci bez ukládání špatných.
+
 ## Pracovní log
+- 2026-08-10: Přidána příloha BY o auditním logu a historii změn: účel logů, struktura událostí, zákaznická historie, retence, ochrana logů a checklist.
 - 2026-08-10: Přidána příloha BX o importu a migraci dat: migrační mapa, CSV šablony, validace nanečisto, bezpečné zacházení se soubory, opatrný převod souhlasů a checklist.
 
 - 2026-08-10: Přidána příloha BW o zákaznickém exportu dat a přenositelnosti: datové domény, CSV/JSON formáty, bezpečné generování, dokumentace, test obnovy, mikrotexty a checklist.
