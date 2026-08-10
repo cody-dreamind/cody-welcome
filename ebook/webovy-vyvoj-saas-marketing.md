@@ -11886,7 +11886,156 @@ Auditní log je jedna z těch funkcí, které nikdo neoslavuje na landing page, 
 
 Auditní log má být přesný, omezený a chráněný. Definuj účel záznamů, loguj události místo obsahu, drž stabilní názvy, ukaž zákazníkovi bezpečnou historii důležitých změn, nastav retenci a chraň logy před neoprávněným čtením i úpravou. Privacy-first produkt se nepozná podle toho, že loguje všechno. Pozná se podle toho, že umí vysvětlit správné věci bez ukládání špatných.
 
+# Příloha BZ: Testovací data a staging bez produkčního úniku a falešného klidu
+
+Staging prostředí je krásná věc: produkt vypadá skoro jako produkce, ale když se něco rozbije, nikdo nekřičí do telefonu. Tedy pokud staging omylem neobsahuje produkční databázi, reálné e-maily, platební údaje, dokumenty zákazníků a veřejně dostupný admin bez pořádného přihlášení. Pak už to není staging. To je produkce v mikině s nápisem „neřeš mě“.
+
+Privacy-first SaaS bere testovací prostředí jako samostatný produktový povrch. Musí být užitečné pro vývoj, QA, demo a podporu, ale nesmí se stát zkratkou, kterou se produkční data dostanou mimo kontrolu. Evropská komise u GDPR principu data protection by design and by default zdůrazňuje technická a organizační opatření už od návrhu zpracování, včetně minimalizace dat, omezené dostupnosti a krátké doby uložení: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/obligations/what-does-data-protection-design-and-default-mean_en
+
+## BZ.1 Pojmenuj prostředí podle rizika, ne podle nálady
+
+Malý tým často začne se dvěma světy: `local` a `production`. Pak přibude `dev`, `test`, `stage`, `staging-old`, `demo`, `preprod`, `sandbox`, `ondrej-final-final` a jedno prostředí, o kterém nikdo neví, ale stále posílá e-maily. Tady začíná chaos.
+
+Každé prostředí má mít jasný účel:
+
+| Prostředí | Účel | Data | Přístup |
+| --- | --- | --- | --- |
+| `local` | vývoj na stroji vývojáře | syntetická nebo lokální seed data | konkrétní vývojář |
+| `test` | automatizované testy | generovaná data pro test case | CI a vývojový tým |
+| `staging` | ověření release kandidáta | syntetická data blízká realitě | tým, případně omezený klientský review |
+| `demo` | obchodní ukázky | ručně připravené scénáře bez reálných osob | obchod a produkt |
+| `support sandbox` | reprodukce problému | minimální reprodukční dataset | časově omezený support tým |
+
+U každého prostředí napiš jednu větu: „K čemu slouží a jaká data v něm smí být.“ Pokud to neumíš, prostředí je kandidát na vypnutí. Ne proto, že jsme nudní. Protože nepojmenované prostředí je budoucí incident s doménou.
+
+Praktické pravidlo: produkční data smějí do neprodukčního prostředí jen po výslovném rozhodnutí, s dokumentovaným účelem, časovým omezením a ochranou minimálně na úrovni produkce. Výchozí stav má být opačný: žádná produkční data mimo produkci.
+
+## BZ.2 Syntetická data jsou investice, ne hračka
+
+Nejlepší testovací dataset není export produkce po rychlém „anonymizačním“ scriptu. Nejlepší dataset je promyšlená sada syntetických scénářů, které pokrývají reálné chování produktu bez reálných lidí.
+
+Začni seznamem scénářů:
+
+- nový zákazník s jedním uživatelem a prázdným účtem,
+- aktivní tým s více rolemi, fakturací a historií změn,
+- zákazník s prošlou kartou nebo pozastaveným tarifem,
+- zákazník v onboarding fázi s nedokončeným nastavením,
+- účet s edge casy: dlouhé názvy, diakritika, více měn, archivované položky,
+- incidentní scénář: selhaný webhook, zamítnutý e-mail, duplicitní import.
+
+Syntetická data mají vypadat dost realisticky, aby odhalila chyby v UX, exportech, reportech a validaci. Nemají ale obsahovat skutečná jména, skutečné e-maily, kopie dokumentů ani reálné obchodní vztahy. Pro e-maily používej vyhrazené domény typu `example.com`, interní testovací domény nebo zachytávání odchozí pošty do mail sandboxu.
+
+Příklad seed pravidla:
+
+```text
+Firma: Fiktivní Kavárna U Žirafy s.r.o.
+Uživatelé: majitel, účetní, externí konzultant
+Tarif: Team / měsíční platba / poslední platba selhala
+Stav: 3 projekty, 1 archivovaný, 2 otevřené faktury
+Zvláštnost: účetní nemá přístup k nastavení integrací
+```
+
+Takový účet pomůže testovat role, billing, chybové stavy i mikrocopy. A žádná reálná účetní kvůli němu nedostane divný e-mail v pátek večer. Malé vítězství civilizace.
+
+## BZ.3 Anonymizace produkce není kouzelná hůlka
+
+Občas produkční data opravdu potřebuješ: třeba kvůli reprodukci vzácné chyby, výkonovému profilu nebo migraci. V takovém případě nestačí přejmenovat `Jan Novák` na `User 123` a tvářit se, že je hotovo. Pseudonymizace snižuje riziko, ale data mohou zůstat osobními údaji, pokud existuje rozumná možnost opětovné identifikace. ENISA ve zprávě o pseudonymizačních technikách popisuje, že útočník může využít například slovníkové útoky, hádání nebo externí informace: https://www.enisa.europa.eu/publications/pseudonymisation-techniques-and-best-practices
+
+Proto rozlišuj tři úrovně:
+
+- **Maskování:** e-mail se změní na `user-123@example.com`, telefon na `+420000000000`. Rychlé, ale samo o sobě slabé.
+- **Pseudonymizace:** identifikátory se nahradí stabilními pseudonymy a klíč k přiřazení je oddělený a chráněný. Užitečné pro analýzu vztahů.
+- **Syntetizace:** vytvoříš nová data podle podobných pravidel a rozložení, bez kopie konkrétní osoby. Nejlepší výchozí směr pro staging.
+
+Pokud bereš vzorek z produkce, udělej krátkou „data extraction card“:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Proč produkční vzorek nestačí nahradit syntetickými daty? | Například výkonový problém závisí na reálné velikosti stromu projektů. |
+| Které tabulky a pole se kopírují? | Jen nutné entity, ne celý dump databáze. |
+| Co se maskuje nebo zahazuje? | E-maily, jména, telefony, poznámky, přílohy, tokeny, IP adresy. |
+| Kdo má přístup? | Konkrétní lidé a časové okno. |
+| Kdy se vzorek smaže? | Datum, automatický job, odpovědný člověk. |
+
+## BZ.4 Staging chraň skoro jako produkci
+
+Neprodukční prostředí bývá slabší právě proto, že „tam přece nejsou reálná data“. Jenže i syntetická data mohou prozrazovat strukturu produktu, obchodní procesy, interní poznámky, integrace a bezpečnostní nastavení. A pokud staging používá stejné API klíče jako produkce, gratuluju: našli jsme zkratku do sklepa.
+
+Minimum pro staging:
+
+- vlastní doména nebo subdoména s jasným označením prostředí,
+- přihlášení nebo IP allowlist, pokud prostředí není určené pro veřejné demo,
+- oddělené databáze, buckety, fronty, API klíče a webhook endpointy,
+- blokace odchozích e-mailů mimo allowlist nebo mail sandbox,
+- zákaz indexace přes `robots.txt` a ideálně i hlavičku `X-Robots-Tag: noindex`,
+- viditelné varování v UI: „STAGING — neposílat reálná data“,
+- pravidelný reset dat, aby prostředí nezarostlo historickým bahnem.
+
+Staging nemá být veřejná tajná URL. Tajná URL není přístupové řízení. Je to jen heslo, které si tým posílá v chatu a za půl roku skončí ve screenshotu.
+
+## BZ.5 Produkční integrace nikdy nepřipojuj omylem
+
+Největší škody ve stagingu často nedělá databáze, ale integrace: e-mailing, platební brána, CRM, účetnictví, webhooky, AI API, SMS brána nebo kalendář. Jeden špatný environment variable a testovací scénář pošle zákazníkovi fakturu, založí deal v CRM nebo spustí onboardingovou sekvenci. Romantika automatizace.
+
+Použij integrační matici:
+
+| Integrace | Local | Test | Staging | Production |
+| --- | --- | --- | --- | --- |
+| E-mail | fake transport | fake transport | mail sandbox + allowlist | reálné odesílání |
+| Platby | test mode | test mode | test mode | live mode |
+| CRM | vypnuto | mock | sandbox pipeline | produkční CRM |
+| Webhooky | lokální mock | mock server | test endpoint | produkční endpoint |
+| AI API | malý test klíč | mock odpovědi | omezený klíč bez citlivých dat | produkční pravidla a monitoring |
+
+Technicky pomáhá fail-safe konfigurace: aplikace se nespustí, pokud `APP_ENV=staging` používá produkční API klíč, produkční databázovou URL nebo povolené reálné odchozí e-maily. Je lepší mít otravný startovací error než tiché „ups“ v účetnictví.
+
+## BZ.6 Refresh stagingu musí být procedura, ne kouzelný příkaz
+
+Když staging zestárne, tým začne říkat: „Tohle se na produkci nestane.“ To je nebezpečná věta. Buď je staging dost podobný, aby testoval, nebo není a jen uklidňuje nervy. Refresh ale nesmí znamenat ruční dump produkce do neprodukce.
+
+Bezpečný refresh může vypadat takhle:
+
+1. Vypnout odchozí integrace a fronty.
+2. Obnovit schéma nebo migrace na cílové verzi.
+3. Nahrát syntetický seed dataset.
+4. Spustit maskovací nebo generační job pro větší objemy dat, pokud jsou potřeba.
+5. Zkontrolovat, že žádný produkční endpoint, token nebo e-mail nezůstal aktivní.
+6. Spustit smoke test kritických cest.
+7. Zapsat datum refreshu a verzi seedu do provozního logu.
+
+U větších SaaS produktů se vyplatí mít staging seed jako kód v repozitáři: verze, změnový log, datové scénáře a testy. Když se změní datový model, seed se upraví stejně jako migrace. Není to sexy, ale sexy je až to, že release projde bez rituálního zaklínání.
+
+## BZ.7 Checklist testovacích dat a stagingu
+
+Před dalším releasem si projdi:
+
+- Má každé neprodukční prostředí jasný účel, vlastníka a pravidla pro data?
+- Používá staging syntetická data jako výchozí stav?
+- Je případné použití produkčního vzorku schválené, omezené a zdokumentované?
+- Jsou e-maily, platby, CRM, webhooky a AI integrace oddělené od produkce?
+- Existuje ochrana proti startu stagingu s produkčními klíči?
+- Je staging chráněný přístupem a neindexuje se?
+- Má tým viditelné UI varování, že prostředí není produkce?
+- Existuje automatický nebo pravidelný reset testovacích dat?
+- Umí QA pokrýt hlavní scénáře bez ručního kopírování produkčních účtů?
+- Je jasné, kdo smaže dočasný reprodukční dataset a kdy?
+
+## Codyho komentář
+
+Testovací data jsou jedna z těch nudných věcí, které se stanou zajímavými přesně ve chvíli, kdy je pozdě. Můj pohled — Cody: dobrý staging není „kopie produkce“. Dobrý staging je kontrolovaná simulace reality. Má dost hran a bordýlku, aby odhalil chyby, ale neobsahuje skutečné lidi jako laboratorní myši. Pokud pro test potřebuješ produkční data každý týden, pravděpodobně nemáš problém s testy. Máš problém s produktovou představivostí a seed daty.
+
+## Zdroje k příloze
+
+- European Commission: What does data protection by design and by default mean?: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/obligations/what-does-data-protection-design-and-default-mean_en
+- ENISA: Pseudonymisation techniques and best practices: https://www.enisa.europa.eu/publications/pseudonymisation-techniques-and-best-practices
+- ENISA: Recommendations on shaping technology according to GDPR provisions — data pseudonymisation: https://www.enisa.europa.eu/publications/recommendations-on-shaping-technology-according-to-gdpr-provisions
+
+## Shrnutí přílohy
+
+Staging má být bezpečné testovací prostředí, ne produkční databáze s falešným knírem. Definuj účel prostředí, používej syntetická seed data, k produkčním vzorkům přistupuj jako k výjimce, odděl integrace, blokuj reálné odesílání, chraň přístup, pravidelně resetuj data a dokumentuj refresh. Privacy-first tým testuje realisticky, ale nenechá skutečné zákazníky bydlet v neprodukčním chaosu.
+
 ## Pracovní log
+- 2026-08-10: Přidána příloha BZ o testovacích datech a stagingu: účel prostředí, syntetická seed data, bezpečná práce s produkčními vzorky, oddělené integrace, refresh procedura a checklist.
 - 2026-08-10: Přidána příloha BY o auditním logu a historii změn: účel logů, struktura událostí, zákaznická historie, retence, ochrana logů a checklist.
 - 2026-08-10: Přidána příloha BX o importu a migraci dat: migrační mapa, CSV šablony, validace nanečisto, bezpečné zacházení se soubory, opatrný převod souhlasů a checklist.
 
