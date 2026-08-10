@@ -10862,7 +10862,160 @@ Aby AI nezůstala jen v rovině přání, nastav provozní rytmus:
 AI asistenti dávají malému týmu páku, ale jen pokud mají mantinely: inventář použití, datová pravidla, prompt šablony, lidskou kontrolu, vendor checklist a jasný incidentní postup. Privacy-first přístup neznamená AI nepoužívat. Znamená používat ji tak, aby zákaznická data nebyla palivo pro cizí experimenty a aby tým věděl, kdo za výsledek odpovídá.
 
 
+# Příloha BS: Partnerství a affiliate růst bez sledovacího kabaretu
+
+Partnerství, doporučení a affiliate programy umí malému SaaS přinést zákazníky rychleji než čekání, až algoritmus jednou vstane pravou nohou. Jenže klasická affiliate mašina často stojí na dlouhých sledovacích cookies, redirectech přes cizí domény, fingerprintingu, e-mailových pixelech a reportech, které z partnera i zákazníka dělají pohybující se datový objekt.
+
+Privacy-first přístup neříká: „nedělej partnerství“. Říká: „dělej partnerství tak, aby člověk nemusel být sledovaný po půlce internetu jen proto, že klikl na doporučení.“
+
+## BS.1 Nejdřív definuj vztah, ne tracking
+
+Affiliate program není jen technická atribuce. Je to obchodní dohoda: kdo koho doporučuje, za co vzniká odměna, jak se řeší zrušení objednávky, jak se chrání značka a jak se zabrání tomu, aby partner slíbil věci, které produkt neumí.
+
+Začni jednoduchou tabulkou:
+
+| Otázka | Praktická odpověď |
+| --- | --- |
+| Kdo může doporučovat? | zákazníci, konzultanti, agentury, integrátoři |
+| Co je odměněná akce? | zaplacená objednávka, kvalifikované demo, roční kontrakt |
+| Jak dlouho platí nárok? | konkrétní okno podle obchodního cyklu, ne „navždy“ |
+| Jak ověříme původ? | referral kód, partner link, ruční potvrzení u B2B dealu |
+| Jak chráníme zákazníka? | žádné skryté přidávání do newsletterů, žádné reklamní pixely bez účelu |
+| Jak chráníme značku? | pravidla pro claimy, zakázané biddingové dotazy, schválené texty |
+
+Bez téhle dohody je tracking jen drahý způsob, jak automatizovat budoucí hádku. A to je přesně ten typ SaaS funkce, který se tváří jako růst, ale voní jako tabulka plná výjimek.
+
+## BS.2 Referral kód často stačí
+
+Nejjednodušší privacy-first varianta je referral kód: člověk přijde přes přímý odkaz, partnerův článek, podcast, workshop nebo osobní doporučení a při registraci zadá kód. U B2B SaaS může kód vyplnit i obchodník po domluveném demu.
+
+Výhody:
+
+- není potřeba dlouhodobě sledovat návštěvníka napříč zařízeními,
+- zákazník vidí, že jde o doporučení,
+- partner má jasný identifikátor,
+- implementace je jednoduchá a auditovatelná,
+- atribuce se dá vysvětlit lidsky i účetně.
+
+Příklad mikrotextu v objednávce:
+
+> „Máte doporučující kód? Použijeme ho jen k přiřazení odměny partnerovi. Nemění cenu služby a neposílá vás do reklamního profilu.“
+
+Kód nemusí být dokonalý. Někdo ho zapomene. Někdo přijde z jiného zařízení. U dražších B2B služeb je ale často lepší ruční dočištění než tiché sledování všech pro případ, že se jednou někdo možná stane leadem.
+
+## BS.3 Partner link bez datového vysavače
+
+Partner link může být čistý: například `https://example.com/?ref=partner123`. Server si při první návštěvě může uložit informaci jen v rozsahu nutném pro atribuci a s krátkou retenční dobou. Ještě střídmější varianta je landing page pro partnera: `https://example.com/partner/novak-consulting`, kde se původ pozná z URL bez individuálního sledování návštěvníka.
+
+Co nedělat jako výchozí nastavení:
+
+- přesměrování přes více reklamních domén,
+- fingerprinting zařízení kvůli „lepší atribuci“,
+- sdílení e-mailu návštěvníka s partnerem bez jasného důvodu,
+- automatické posílání návštěvníka do remarketingových publik,
+- dlouhé cookies jen proto, že marketingový dashboard vypadá plnější,
+- e-mailové tracking pixely v partnerských kampaních bez transparentního vysvětlení.
+
+Když už používáš cookies nebo podobné technologie pro atribuci, popiš účel, rozsah a dobu uložení. Evropská komise u GDPR principů připomíná minimalizaci dat, transparentnost a účelové omezení zpracování: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en. EDPB zároveň vede samostatné materiály k ePrivacy a technickému rozsahu pravidel pro ukládání nebo čtení informací v zařízení uživatele: https://www.edpb.europa.eu/our-work-tools/our-documents/topic/e-privacy_mt
+
+Codyho praktický překlad: čím víc atribuce připomíná sledování člověka, tím víc musíš umět obhájit, proč je to nezbytné a férové.
+
+## BS.4 Report partnerovi piš jako obchodní výkaz, ne jako špionážní deník
+
+Partner většinou nepotřebuje vědět, kdo přesně si četl pricing stránku ve 23:41, jaký měl prohlížeč a z jakého města přišel. Potřebuje vědět, jestli doporučení fungují a co se vyplatilo opakovat.
+
+Dobrý partnerský report může mít třeba:
+
+- počet návštěv partnerské landing page,
+- počet registrací nebo poptávek,
+- počet kvalifikovaných obchodních příležitostí,
+- počet placených zákazníků,
+- stav provize,
+- anonymizované poznámky typu „nejčastější námitka byla cena pro malé týmy“,
+- doporučení pro další obsah nebo webinář.
+
+Co do reportu nepatří bez zvláštního důvodu:
+
+- osobní údaje leadů,
+- kompletní e-mailové adresy neregistrovaných návštěvníků,
+- IP adresy,
+- detailní clickstream jednotlivců,
+- interní poznámky obchodníka,
+- support tickety zákazníka.
+
+Pokud partner potřebuje kontakt na lead, udělej z toho viditelný proces: zákazník zaškrtne, že chce propojit s partnerem, nebo se partner účastní obchodu od začátku jako implementátor. Transparentní předání je lepší než export kontaktů pod stolem, protože pod stolem bývá kromě právních rizik i dost drobků.
+
+## BS.5 Pravidla pro partnerský obsah
+
+Partnerství často selže ne kvůli měření, ale kvůli tomu, že partner komunikuje produkt jinak než tým. Slíbí neexistující funkci, naznačí garantovaný výsledek, použije zastaralý screenshot nebo vloží agresivní slevový banner, který rozbije důvěru.
+
+Připrav partnerům jednoduchý balíček:
+
+- krátký popis produktu ve třech délkách: 1 věta, 1 odstavec, 1 delší anotace,
+- schválené screenshoty bez reálných zákaznických dat,
+- seznam tvrzení, která se smějí používat,
+- seznam tvrzení, která se používat nesmějí,
+- pravidla pro označení placeného partnerství nebo provize,
+- doporučené URL s referral parametrem nebo partnerskou landing page,
+- kontakt pro kontrolu článku před publikací.
+
+Ukázka zakázaného claimu:
+
+> „Nástroj vám garantovaně zvýší tržby o 40 % za měsíc.“
+
+Lepší claim:
+
+> „Nástroj pomáhá malým týmům rychleji odbavit poptávky a zkrátit ruční administrativu. Konkrétní dopad závisí na procesu, objemu práce a kvalitě nasazení.“
+
+Ano, druhá věta je méně sexy. Taky je méně pravděpodobné, že ti za tři měsíce přistane na stole rozladěný zákazník s kalkulačkou a výrazem „tak si to pojďme spočítat“.
+
+## BS.6 Odměna má podporovat kvalitu, ne spam
+
+Když odměňuješ každý klik nebo každou nekvalifikovanou registraci, vyrobíš si špatné chování. Partneři budou optimalizovat na objem, ne na vhodnost zákazníka. Privacy-first program by měl odměňovat akce, které mají reálnou hodnotu a nevytvářejí tlak na špinavé metody.
+
+Lepší modely:
+
+- fixní odměna za kvalifikované demo,
+- procento z první platby po uplynutí refund okna,
+- opakovaná provize jen po dobu aktivní správy zákazníka partnerem,
+- bonus za implementační úspěch nebo aktivaci zákazníka,
+- ruční odměna za strategické doporučení u velkého B2B obchodu.
+
+Do pravidel dej i stopky:
+
+- zákaz vlastního brand bidding bez schválení,
+- zákaz zavádějících slevových kupónů,
+- zákaz automatizovaného spamu,
+- zákaz sběru kontaktů bez souhlasu a účelu,
+- možnost zadržet provizi při podvodném nebo zavádějícím leadu.
+
+Partnerství má přivádět správné zákazníky, ne generovat pocit, že někde v internetu běží malý provizní kombajn bez dozoru.
+
+## BS.7 Checklist privacy-first partnerství
+
+- Máme jasně napsané, kdo se může stát partnerem a za co vzniká odměna.
+- Odměněná akce je navázaná na obchodní hodnotu, ne jen na prázdný klik.
+- Umíme atribuci vysvětlit bez slov jako „fingerprinting“ a „cross-device graph“.
+- Preferujeme referral kód nebo partnerskou landing page před plošným sledováním.
+- Pokud používáme cookies nebo podobné technologie, máme popsaný účel, dobu uložení a transparentní informaci pro uživatele.
+- Partner nedostává osobní údaje leadů bez jasného důvodu a viditelného procesu.
+- Report partnerovi obsahuje agregované obchodní metriky, ne detailní chování jednotlivců.
+- Partnerský obsah má schválené texty, screenshoty a zakázané claimy.
+- Pravidla programu zakazují spam, klamavé slevy a agresivní reklamní taktiky.
+- Jednou měsíčně kontrolujeme kvalitu leadů, reklamace, zrušení a podezřelé vzory.
+
+## Zdroje k příloze
+
+- Evropská komise: Principles of the GDPR, zejména transparentnost, účelové omezení a minimalizace dat: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en
+- European Data Protection Board: e-Privacy dokumenty a Guidelines 2/2023 k technickému rozsahu čl. 5(3) ePrivacy Directive: https://www.edpb.europa.eu/our-work-tools/our-documents/topic/e-privacy_mt
+
+## Shrnutí přílohy
+
+Partnerství a affiliate růst nemusí stát na sledování lidí napříč webem. Malému evropskému SaaS často stačí referral kód, partnerská landing page, férová pravidla, agregovaný report a odměna navázaná na kvalitu. Privacy-first affiliate není pomalejší obchod. Je to obchod, který si neřeže větev důvěry pod vlastní landing page.
+
+
 ## Pracovní log
+- 2026-08-10: Přidána příloha BS o privacy-first partnerství a affiliate růstu: referral kódy, čisté partner linky, agregované reporty, pravidla pro partnerský obsah, odměňování kvality a checklist.
 - 2026-08-10: Přidána příloha BR o bezpečném používání AI asistentů v týmu: inventář použití, datová pravidla pro prompty, šablony, lidská kontrola, vendor checklist a incidentní postup.
 - 2026-08-09: Přidána příloha BQ o přístupnosti webu a SaaS: WCAG, European Accessibility Act, design systém, formuláře, ruční i automatické testování, přístupnostní prohlášení a checklist.
 - 2026-08-09: Přidána příloha BP o datové klasifikaci pro malý SaaS: čtyři třídy dat, pravidla pro chaty, tickety, AI prompty, exporty a dodavatele, pseudonymizace, šablony a checklist.
