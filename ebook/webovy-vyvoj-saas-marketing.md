@@ -13868,7 +13868,134 @@ Můj pohled: rate limiting je nejlepší, když si ho skoro nikdo nevšimne. Út
 
 Rate limiting má chránit produkt, zákazníky i infrastrukturu, ale nesmí se změnit v nečitelnou past nebo výmluvu pro sledování lidí. Rozděl limity podle rizika akce, dokumentuj kvóty, vracej srozumitelné 429 odpovědi, nepoužívej limity místo autorizace, kombinuj serverové signály s minimem osobních dat a drahé operace posílej do fronty. Dobré limity jsou férové, vysvětlitelné a měřené tak, aby pomáhaly bezpečnosti i produktu.
 
+
+# Příloha CN: Auditní stopa bez interního dozoru a forenzní amnézie
+
+Auditní stopa je paměť produktu pro chvíle, kdy se něco pokazí: kdo změnil nastavení, kdo pozval nového uživatele, kdo exportoval data, kdo přepnul integraci, kdo si otevřel support access a kdo smazal projekt. Bez ní tým při incidentu hádá z kávové sedliny. S ní umí rychle vysvětlit, co se stalo, omezit dopad a mluvit se zákazníkem konkrétně.
+
+Privacy-first audit ale není vševidoucí kamera v produktu. Nemá sledovat každý pohyb myši, každé přečtení stránky a každý nádech uživatele před tlačítkem. Má zaznamenat bezpečnostně, právně a provozně důležité události v minimálním rozsahu, s jasnou retencí a přístupem jen pro lidi, kteří ho opravdu potřebují.
+
+## CN.1 Auditní log není analytika ani aplikační log
+
+Nejdřív si odděl tři podobné, ale odlišné světy:
+
+- produktová analytika říká, jestli funkce pomáhá zákazníkům;
+- aplikační log pomáhá ladit provozní chyby a výkon;
+- auditní stopa dokládá důležité změny, přístupy a rozhodnutí.
+
+Když to smícháš do jedné databáze, skončíš s logovací polévkou, kde se těžko hledá incident a ještě hůř vysvětluje retence. Auditní log má být stabilní, čitelný a chráněný proti dodatečné úpravě. Produktová analytika může být agregovaná a krátkodobá. Debug logy mohou být detailnější, ale s kratší životností a tvrdou redakcí citlivých polí.
+
+Praktický test: pokud událost potřebuješ hlavně pro funnel nebo UX experiment, nepatří do auditu. Pokud ji potřebuješ vysvětlit zákazníkovi, auditorovi, bezpečnostnímu týmu nebo sobě po incidentu v pátek večer, pravděpodobně do auditu patří.
+
+## CN.2 Loguj rozhodující akce, ne šum
+
+Auditní stopa má začít seznamem událostí, které mění riziko, data nebo odpovědnost. Nezačínej implementací tabulky `audit_events`. Začni otázkou: „Které akce budeme muset jednou doložit?“
+
+Typické události pro malý SaaS:
+
+- přihlášení s vyšším rizikem: nové zařízení, reset hesla, změna MFA;
+- správa účtu: pozvání uživatele, změna role, odebrání přístupu;
+- data: export, import, hromadné smazání, změna retenční politiky;
+- fakturace: změna tarifu, platební metody, fakturačních údajů;
+- integrace: vytvoření API klíče, rotace secretu, zapnutí webhooku;
+- administrace: support access, impersonace, ruční zásah do zákaznického účtu;
+- bezpečnost: zamítnutý pokus o citlivou akci, podezřelá série chyb oprávnění.
+
+Neloguju „uživatel otevřel stránku nastavení“, pokud z toho nevznikla změna. Loguju „uživatel změnil nastavení sdílení projektu z interního na veřejné“. To je rozdíl mezi auditní stopou a interním reality show kanálem.
+
+## CN.3 Každá událost má mít minimum polí, ale správná pole
+
+Auditní event musí být dost bohatý na vyšetření, ale ne tak bohatý, aby se z něj stala kopie produkční databáze. Dobré minimum:
+
+| Pole | Proč existuje |
+| --- | --- |
+| `event_id` | Jednoznačná reference při incidentu a podpoře |
+| `occurred_at` | Přesný čas události v UTC |
+| `actor_type` a `actor_id` | Kdo akci provedl: uživatel, systém, admin, API klíč |
+| `tenant_id` | Oddělení zákaznického kontextu |
+| `action` | Stabilní název akce, třeba `user.role_changed` |
+| `target_type` a `target_id` | Čeho se akce týkala |
+| `result` | Úspěch, zamítnutí, chyba, částečné dokončení |
+| `reason` | Volitelný bezpečný důvod nebo kód pravidla |
+| `request_id` | Napojení na aplikační log bez kopírování payloadu |
+| `metadata` | Malé schéma pro ne-citlivé detaily |
+
+Do auditního logu nepatří celé jméno zákazníka, obsah zprávy, fakturační adresa, celý JSON požadavku, access token, session cookie ani stará a nová hodnota citlivého pole. U změny role stačí „z `member` na `admin`“. U změny e-mailu může stačit hash nebo maskovaný tvar, pokud plná hodnota není nutná pro účel auditu.
+
+## CN.4 Neměnnost je důležitější než efektní dashboard
+
+Auditní stopa, kterou může administrátor potichu přepsat, je jen dražší poznámkový blok. Nemusíš hned stavět bankovní archiv s razítkem času od tří notářů a jedné sovy. Ale potřebuješ rozumné záruky:
+
+- auditní záznamy se jen přidávají, běžná aplikace je nepřepisuje;
+- mazání je řízené retenční úlohou, ne ručním kliknutím v adminu;
+- přístup k auditům je samostatné oprávnění;
+- export auditů je auditovaná akce;
+- změny konfigurace auditu se samy zapisují do auditu;
+- produkční support nemá přímý SQL přístup jako běžnou pracovní pomůcku.
+
+Pro menší tým často stačí samostatná tabulka nebo úložiště s append-only chováním, omezenými právy a denní zálohou. Důležité je, aby se auditní stopa neztratila přesně ve chvíli, kdy ji potřebuješ.
+
+## CN.5 Uživatel má vidět relevantní historii svého účtu
+
+Auditní log není jen interní bezpečnostní nástroj. Část historie může být přímo produktová funkce: „Poslední přihlášení“, „Změny členů týmu“, „Exporty dat“, „Aktivní API klíče“, „Kdo změnil fakturační údaje“. Tím snížíš počet support dotazů a zvýšíš důvěru.
+
+Ukazuj ale jen to, na co má uživatel oprávnění. Běžný člen týmu nemusí vidět celou bezpečnostní historii tenantu. Owner nebo security role ano. Pokud zákazník stáhne auditní export, měl by export obsahovat jen data jeho organizace a měl by být časově omezený.
+
+Příklad obrazovky pro B2B SaaS:
+
+- filtr podle období, osoby a typu akce;
+- lidsky čitelné věty: „Jana změnila roli Petra z Member na Admin“;
+- technický detail až po rozkliknutí;
+- možnost stáhnout CSV/JSON pro vlastní archiv;
+- upozornění, že citlivá data jsou maskovaná záměrně.
+
+## CN.6 Retence auditů musí ladit s rizikem a smlouvou
+
+Auditní stopa nemá žít navždy jen proto, že se jednou může hodit. GDPR stojí mimo jiné na principech minimalizace a omezení uložení, takže si u každé kategorie napiš účel a dobu uchování. Zároveň bezpečnostní opatření podle GDPR čl. 32 zahrnují schopnost zajistit důvěrnost, integritu, dostupnost a odolnost systémů — auditní stopa je jeden z praktických způsobů, jak tyto schopnosti provozně podpořit.
+
+Rozumný start pro malý SaaS:
+
+| Kategorie | Příklad | Typická retence |
+| --- | --- | --- |
+| běžné účetní akce | změna profilu, preference | 6–12 měsíců |
+| týmové a role změny | pozvání, odebrání, role | 12–24 měsíců |
+| bezpečnostní události | MFA, reset, zamítnuté citlivé akce | 12–24 měsíců |
+| exporty a hromadné operace | export dat, bulk delete | 24 měsíců nebo dle smlouvy |
+| admin/support zásahy | impersonace, support access | 24 měsíců nebo dle rizika |
+
+Tohle není univerzální právní rada. Je to provozní šablona. U regulovaných zákazníků, enterprise smluv nebo veřejné správy může být požadavek jiný. Důležité je mít rozhodnutí napsané, ne ho lovit z paměti až po otázce od zákazníka.
+
+## CN.7 Checklist auditní stopy
+
+- Máme oddělenou auditní stopu od produktové analytiky a debug logů.
+- Máme seznam auditovaných událostí podle rizika: role, data, integrace, fakturace, admin zásahy.
+- Každý event má stabilní název, čas v UTC, aktora, tenant, cíl, výsledek a `request_id`.
+- Do auditu neukládáme celé payloady, tokeny, session cookies ani zbytečná osobní data.
+- Auditní záznamy běžná aplikace nepřepisuje a mazání řídí retenční pravidlo.
+- Přístup k auditům má vlastní oprávnění a export auditů se sám audituje.
+- Zákazník vidí relevantní historii svého účtu bez úniku dat jiných lidí nebo tenantů.
+- Retence auditů je napsaná v datové mapě, smlouvách nebo bezpečnostním dokumentu.
+- Support tým má šablonu, jak z auditní stopy odpovědět zákazníkovi lidsky a konkrétně.
+
+## Codyho komentář
+
+Auditní stopa je jako černá skříňka v letadle: nechceš ji číst každý den, ale když se něco stane, nechceš zjistit, že nahrávala jen počasí a playlist pilota. Privacy-first varianta neznamená méně bezpečnosti. Znamená lepší výběr toho, co je opravdu důkaz, a co je jen datový balast s falešným pocitem kontroly.
+
+## Zdroje k příloze
+
+- GDPR, zejména principy v článku 5 a bezpečnost zpracování v článku 32 — https://eur-lex.europa.eu/eli/reg/2016/679/oj
+- European Data Protection Board: Guidelines 4/2019 on Article 25 Data Protection by Design and by Default — https://www.edpb.europa.eu/documents/guideline/guidelines-42019-on-article-25-data-protection-by-design-and-by-default_en
+- OWASP Cheat Sheet Series: Logging Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+- OWASP Cheat Sheet Series: Logging Vocabulary Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Logging_Vocabulary_Cheat_Sheet.html
+- NIST Cybersecurity Framework 2.0, funkce Detect a Protect jako rámec pro monitoring a auditovatelnost bezpečnostních událostí — https://www.nist.gov/cyberframework
+
+## Shrnutí přílohy
+
+Auditní stopa má pomoct vysvětlit důležité změny, přístupy a bezpečnostní události, ne špehovat běžné používání produktu. Odděl ji od analytiky a debug logů, loguj jen rozhodující akce, používej minimální a stabilní schéma, chraň neměnnost záznamů, ukaž zákazníkovi relevantní historii a nastav retenci podle rizika. Když audit navrhneš dobře, při incidentu nepůsobíš jako někdo, kdo hledá účtenku v pračce.
+
 ## Pracovní log
+
+- 2026-08-10: Přidána příloha CN o auditní stopě bez interního dozoru: rozdíl mezi auditem, analytikou a debug logy, minimální schéma eventů, neměnnost, zákaznická historie, retence a checklist.
 - 2026-08-10: Přidána příloha CM o rate limitingu a kvótách: limity podle rizika akcí, dokumentace kvót, bezpečné 429 odpovědi, oddělení od autorizace, fronty pro drahé operace, monitoring a checklist.
 - 2026-08-10: Přidána příloha CL o aplikačních logách bez datové skládky: účel logů, zákaz tajemství a payloadů, strukturované eventy, redakce, retence, přístupy a checklist.
 - 2026-08-10: Přidána příloha CK o interních admin nástrojích: role podle práce, minimální zobrazení zákaznických dat, bezpečné rizikové akce, admin search, release proces, break-glass přístup a checklist.
