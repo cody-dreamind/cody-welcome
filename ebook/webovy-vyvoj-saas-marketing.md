@@ -11413,8 +11413,140 @@ Doporučení pro malý SaaS: zdroj pravdy pro preference drž v aplikaci nebo v 
 
 Preference centrum není právní odkladiště, ale produktová funkce důvěry. Rozliš typy zpráv, veď střídmý souhlasový deník, udělej odhlášení jednoduché, respektuj odmítnutí přímého marketingu jako tvrdý stop signál a drž jeden zdroj pravdy pro všechny nástroje. Nejlepší marketingový kontakt je ten, který ví, proč tě čte — a může kdykoli bez dramatu odejít.
 
+---
+
+# Příloha BW: Zákaznický export dat bez rukojmí, paniky a ručního zipování v pátek večer
+
+Export dat je jedna z těch funkcí, kterou spousta týmů odkládá, protože „to zatím nikdo nechce“. Pak přijde první větší zákazník, bezpečnostní dotazník, žádost o ukončení smlouvy nebo audit a najednou někdo ručně skládá CSV, screenshoty a omluvný e-mail. To není produktová zralost. To je improvizované divadlo s vyšším krevním tlakem.
+
+Privacy-first SaaS má umět zákazníkovi říct: vaše data nejsou naše rukojmí. Umíme je vysvětlit, vyexportovat, předat a po skončení vztahu uklidit. Ne proto, že milujeme administrativu, ale protože důvěra se pozná hlavně ve chvíli, kdy zákazník odchází nebo potřebuje kontrolu.
+
+Právní minimum: GDPR dává lidem za určitých podmínek právo získat osobní údaje ve strukturovaném, běžně používaném a strojově čitelném formátu a předat je jinému správci. Evropská komise popisuje právo na přenositelnost dat v přehledu práv jednotlivců: https://commission.europa.eu/law/law-topic/data-protection/information-individuals_en a samotný článek 20 GDPR je v EUR-Lexu zde: https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32016R0679
+
+## BW.1 Export navrhuj jako běžnou funkci, ne jako nouzový servis
+
+Export není jen tlačítko „stáhnout všechno“. Je to součást datového modelu a zákaznické zkušenosti. Dobrý export odpovídá na tři otázky:
+
+- Co přesně zákazník dostane?
+- V jakém formátu to dostane?
+- Co s tím může prakticky udělat?
+
+Začni tabulkou datových domén. Pro jednoduchý B2B SaaS může vypadat třeba takhle:
+
+| Doména | Příklad dat | Exportovat? | Formát |
+| --- | --- | --- | --- |
+| Účet a organizace | název firmy, fakturační údaje, role uživatelů | Ano | CSV nebo JSON |
+| Produktová data | projekty, úkoly, rezervace, objednávky | Ano | CSV pro tabulky, JSON pro vazby |
+| Přílohy | nahrané soubory, smlouvy, obrázky | Ano | původní soubory + manifest |
+| Auditní log | přihlášení, změny oprávnění, důležité akce | Částečně | CSV nebo JSON podle účelu |
+| Interní support poznámky | interní hodnocení, triage, citlivé poznámky týmu | Opatrně | oddělit, posoudit případ od případu |
+| Bezpečnostní logy | IP adresy, rate limit, detekce útoků | Ne vždy | spíš interní retence a řízená žádost |
+
+Hlavní pravidlo: zákazník má dostat svoje provozní a obsahová data, ne interní chaos tvého týmu. Export má být užitečný, ale nemá zbytečně odhalovat bezpečnostní logiku, interní poznámky nebo data jiných zákazníků.
+
+## BW.2 CSV je pro lidi, JSON pro vztahy mezi daty
+
+Neexistuje jeden dokonalý exportní formát. Existuje vhodný formát pro konkrétní typ dat.
+
+CSV je skvělé pro tabulková data: kontakty, objednávky, faktury, rezervace, seznamy položek. Otevře ho účetní, obchodník i zákazník, který nechce řešit API. Jen pozor na znakovou sadu, oddělovače, časové zóny a escape hodnot, jinak z exportu vznikne loterie.
+
+JSON se hodí pro strukturovaná data s vazbami: projekt obsahuje úkoly, úkol má komentáře, komentář má autora a přílohu. JSON není tak přátelský pro běžného člověka, ale je lepší pro migraci do jiného systému nebo vlastní integraci.
+
+Praktické doporučení:
+
+- Pro každou tabulku nabídni CSV s hlavičkami v lidském jazyce.
+- Pro kompletní export nabídni JSON s dokumentovaným schématem.
+- Pro soubory přidej manifest `files.csv` nebo `files.json` s názvem, velikostí, typem, datem nahrání a vazbou na záznam.
+- Časy ukládej v ISO 8601 a vždy uveď časovou zónu.
+- Identifikátory nech stabilní, aby šlo data znovu spojit.
+- Export zabal do ZIPu jen jako obal, ne jako omluvu za nepopsaný obsah.
+
+Codyho komentář: CSV je jako rohlík. Není luxusní, ale když je čerstvý a správně nakrájený, vyřeší překvapivě hodně situací. JSON je kuchařka. Bez ní migrace dopadne jako vaření podle vzpomínky na obrázek.
+
+## BW.3 Export musí být bezpečný i nudný
+
+Export často obsahuje citlivější balík dat než běžná obrazovka aplikace. Proto by jeho vytvoření nemělo být kliknutí bez kontextu.
+
+Bezpečnostní minimum:
+
+- Export může spustit jen role, která má oprávnění spravovat účet nebo data dané organizace.
+- U větších exportů vyžaduj potvrzení, případně opětovné ověření uživatele.
+- Vytváření exportu zapisuj do auditního logu: kdo, kdy, jaký rozsah, jaký výsledek.
+- Hotový soubor zpřístupni jen omezenou dobu, například několik hodin nebo jednotky dnů podle citlivosti.
+- Odkaz na export nedělej veřejný bez autentizace.
+- Po expiraci export bezpečně smaž a ponech jen auditní stopu, ne samotná data.
+
+Pokud export posíláš e-mailem, neposílej přílohu s kompletními daty jen tak. Lepší je oznámit, že export je připravený, a uživatele vrátit do zabezpečené aplikace. E-mail je dobrý poslíček, ale špatný trezor.
+
+## BW.4 Nezapomeň na importní čitelnost
+
+Export, který nejde použít jinde, je jen drahý suvenýr. U každého exportu přidej krátký soubor `README.md` nebo `schema.json`, který vysvětlí:
+
+- co jednotlivé soubory obsahují,
+- jak spolu souvisí identifikátory,
+- jaké hodnoty může mít stav nebo typ záznamu,
+- v jakém časovém pásmu jsou časové údaje,
+- co v exportu záměrně není a proč,
+- na koho se obrátit při nejasnosti.
+
+Tohle není detail pro enterprise týmy. I malý zákazník ocení, že nemusí hádat, jestli `status=3` znamená zaplaceno, zrušeno nebo „Petr to kdysi vymyslel a odešel“. Dokumentace exportu je poslední služba zákazníkovi před migrací. Může být krátká, ale musí být přesná.
+
+## BW.5 Exporty testuj na obnově, ne na existenci tlačítka
+
+Tlačítko exportu může fungovat a export může být přesto k ničemu. Test není „stáhl se ZIP“. Test je „umíme z dat pochopit historii účtu a obnovit základní práci jinde“.
+
+Jednou za kvartál si vyber testovací organizaci a projdi cvičení:
+
+1. Vytvoř několik realistických záznamů včetně příloh a komentářů.
+2. Spusť export běžnou zákaznickou rolí.
+3. Otevři CSV v tabulkovém editoru a zkontroluj diakritiku, data a oddělovače.
+4. Validuj JSON proti schématu.
+5. Ověř, že soubory v manifestu opravdu existují.
+6. Zkus podle dokumentace vysvětlit datové vazby člověku mimo vývojový tým.
+7. Zapiš zjištěné chyby jako produktový dluh, ne jako „někdy se k tomu vrátíme“.
+
+Privacy-first bonus: testuj export na syntetických nebo anonymizovaných datech. Produkční data zákazníků nepatří do cvičného zipu jen proto, že se to zrovna hodí.
+
+## BW.6 Komunikace exportu má snižovat strach
+
+Export dat může být pro zákazníka běžná administrativa, ale také signál odchodu. Nepiš proto texty uraženě. Žádné „opravdu nás chcete opustit?“ s dramatickou animací. Dospělý SaaS pomůže i při odchodu.
+
+Příklad mikrotextu:
+
+> „Export obsahuje projekty, úkoly, komentáře a přílohy vaší organizace. Připravíme ho jako ZIP s CSV, JSON a krátkou dokumentací. Hotový export bude dostupný 48 hodin jen přihlášeným správcům účtu.“
+
+Příklad potvrzení:
+
+> „Export jsme začali připravovat. Až bude hotový, pošleme správcům účtu upozornění. Soubor nebude poslán e-mailem jako příloha.“
+
+Tón je důležitý. Uživatel má cítit kontrolu, ne podezření, že právě otevřel skryté dveře, které produktový tým tajně obložil ostnatým drátem.
+
+## BW.7 Checklist zákaznického exportu dat
+
+- Máme datovou mapu toho, co se exportuje a co záměrně ne.
+- Export pokrývá účetní, produktová a obsahová data v použitelném formátu.
+- CSV má srozumitelné hlavičky, správnou diakritiku a stabilní sloupce.
+- JSON má dokumentované schéma a zachovává vazby mezi záznamy.
+- Přílohy mají manifest a nejdou se ztratit mimo kontext.
+- Export může spustit jen oprávněná role.
+- Vytvoření exportu se zapisuje do auditního logu.
+- Hotové exporty mají krátkou expiraci a nejsou veřejně dostupné bez autentizace.
+- Uživatel vidí, co export obsahuje, jak dlouho bude dostupný a co v něm není.
+- Export pravidelně testujeme na obnově nebo alespoň na čitelnosti mimo aplikaci.
+
+## Zdroje k příloze
+
+- Evropská komise: Information for individuals, právo získat a přenášet osobní údaje: https://commission.europa.eu/law/law-topic/data-protection/information-individuals_en
+- GDPR, nařízení (EU) 2016/679, článek 20 o přenositelnosti údajů: https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32016R0679
+- European Data Protection Board: Guidelines on the right to data portability: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-right-data-portability-under-regulation-2016679_en
+
+## Shrnutí přílohy
+
+Zákaznický export dat je funkce důvěry. Navrhni ho podle datových domén, používej čitelné formáty, dokumentuj schéma, hlídej oprávnění, nastav expiraci a testuj skutečnou použitelnost. Privacy-first produkt se pozná i podle toho, že zákazník může odejít s vlastními daty bez proseb, ruční magie a pátečního zipového šamanismu.
+
 ## Pracovní log
 
+- 2026-08-10: Přidána příloha BW o zákaznickém exportu dat a přenositelnosti: datové domény, CSV/JSON formáty, bezpečné generování, dokumentace, test obnovy, mikrotexty a checklist.
 - 2026-08-10: Přidána příloha BV o preference centru bez marketingového labyrintu: typy komunikace, souhlasový deník, jednoduché odhlášení, odmítnutí přímého marketingu, synchronizace preferencí a checklist.
 - 2026-08-10: Přidána příloha BU o exit plánu od dodavatele a vendor lock-inu: exporty, otevřené formáty, test odchodu, smluvní pravidla, fallback scénáře a checklist.
 - 2026-08-10: Přidána příloha BT o bezpečnostních hlavičkách bez rituálního kopírování: inventář zdrojů, CSP v report-only režimu, HSTS, referrer policy, rámování, permissions policy, CI kontrola a checklist.
