@@ -11544,7 +11544,181 @@ Tón je důležitý. Uživatel má cítit kontrolu, ne podezření, že právě 
 
 Zákaznický export dat je funkce důvěry. Navrhni ho podle datových domén, používej čitelné formáty, dokumentuj schéma, hlídej oprávnění, nastav expiraci a testuj skutečnou použitelnost. Privacy-first produkt se pozná i podle toho, že zákazník může odejít s vlastními daty bez proseb, ruční magie a pátečního zipového šamanismu.
 
+
+# Příloha BX: Import a migrace dat bez rozbité historie, špinavých CSV a zákaznické paniky
+
+Export dat je slib, že zákazník není rukojmí. Import je druhá půlka stejné důvěry: zákazník může přijít, přenést si práci a pokračovat bez toho, aby tři týdny opisoval staré tabulky do nového systému jako kancelářský mnich.
+
+Privacy-first migrace neznamená „nahrajte nám všechno a my se v tom nějak pohrabeme“. Znamená řízený proces: víme, jaká data přijímáme, proč je potřebujeme, jak je validujeme, kdo je vidí, kdy je smažeme a jak zákazník pozná, že migrace dopadla správně.
+
+## BX.1 Import není jen tlačítko „Upload CSV“
+
+Nejhorší importní funkce vypadá jednoduše jen na povrchu. Uživatel nahraje soubor, systém spadne na pátém řádku, chybová hláška řekne „invalid input“ a někde v logu zůstane celý zákaznický soubor. Technicky vzato se něco stalo. Produktově vzato se zákazník právě seznámil s peklem, jen bez uvítací cedule.
+
+Navrhni import jako proces:
+
+1. **Příprava**: uživatel vidí šablonu, povinné sloupce, příklady hodnot a limit velikosti.
+2. **Nahrání**: soubor se přijme přes bezpečnou cestu, ne jako příloha v e-mailu.
+3. **Předvalidace**: systém zkontroluje strukturu bez zápisu do produkčních dat.
+4. **Mapování**: uživatel potvrdí, který sloupec znamená co.
+5. **Náhled dopadu**: kolik záznamů vznikne, co se aktualizuje, co se přeskočí.
+6. **Import**: zápis proběhne dávkově, auditovatelně a ideálně vratně.
+7. **Výsledek**: uživatel dostane report, chyby a další krok.
+
+Příklad produktové věty:
+
+> „Import nejdřív zkontrolujeme nanečisto. Data zapíšeme až po vašem potvrzení náhledu.“
+
+Tohle je malá věta, ale velký rozdíl. Zákazník ví, že nahráním souboru nespustil produkční ruletu.
+
+## BX.2 Vytvoř migrační mapu místo univerzálního vysavače
+
+Každý import začíná otázkou: co se vlastně převádí? U SaaS produktu bývají nejčastější domény:
+
+| Doména | Typické položky | Migrační riziko |
+| --- | --- | --- |
+| Kontakty | jméno, e-mail, firma, štítky | duplicity, staré souhlasy, neplatné adresy |
+| Účty a role | uživatelé, týmy, oprávnění | příliš široké přístupy po importu |
+| Obchodní data | dealy, faktury, objednávky | špatná měna, daňové údaje, vazby na účetnictví |
+| Produktová data | projekty, úkoly, komentáře | ztracená historie, rozbité vazby |
+| Obsah | články, dokumenty, soubory | přílohy bez kontextu, nebezpečné formáty |
+| Nastavení | automatizace, šablony, integrace | import tajných klíčů, nechtěné spuštění workflow |
+
+Neimportuj všechno jen proto, že to existuje ve starém systému. U každé domény si napiš:
+
+- zda ji zákazník potřebuje pro pokračování práce,
+- zda obsahuje osobní nebo citlivá data,
+- kdo smí import spustit,
+- jak dlouho se drží původní soubor,
+- jak se řeší duplicity,
+- zda se import dá vrátit nebo alespoň opravit.
+
+Codyho praktické pravidlo: pokud neumíš doménu vysvětlit v jedné větě zákazníkovi, ještě ji neimportuj automaticky. Ruční mapování jedné důležité domény je lepší než kouzelný import všeho, který vyrobí digitální guláš.
+
+## BX.3 CSV šablona má být smlouva, ne hádanka
+
+CSV je pořád nejpraktičtější vstup pro malé týmy, ale jen když je šablona nudně přesná. Importní šablona má obsahovat:
+
+- stabilní názvy sloupců,
+- příkladový řádek,
+- označení povinných polí,
+- podporované formáty datumu,
+- pravidla pro prázdné hodnoty,
+- podporované kódování,
+- maximální počet řádků,
+- seznam hodnot pro enum pole.
+
+Příklad části šablony pro import kontaktů:
+
+| Sloupec | Povinný | Příklad | Poznámka |
+| --- | --- | --- | --- |
+| `external_id` | Ne | `oldcrm-123` | Pomáhá párovat opakovaný import |
+| `email` | Ano | `jana@example.cz` | Používá se pro detekci duplicit |
+| `full_name` | Ne | `Jana Nováková` | Pokud chybí, kontakt vznikne bez jména |
+| `company` | Ne | `Firma s.r.o.` | Text, ne odkaz do obchodního rejstříku |
+| `marketing_consent` | Ne | `yes/no/unknown` | `unknown` neznamená souhlas |
+| `note` | Ne | `Volala 3. 5.` | Pozor na osobní údaje mimo účel |
+
+Důležitá drobnost: opakovaný import musí mít strategii. Bez `external_id` nebo jasného párování podle e-mailu vzniknou duplicity rychleji než interní Slack vlákno o tom, kdo to pokazil. A to nechceš. Ani Slack, ani duplicity.
+
+## BX.4 Validace musí uživateli říct, co má opravit
+
+Chyba importu nesmí být technický rozsudek. Má být opravný návod. Místo:
+
+> „Row 42 invalid.“
+
+napiš:
+
+> „Řádek 42: hodnota `maybe` ve sloupci `marketing_consent` není podporovaná. Použijte `yes`, `no` nebo `unknown`. Řádek jsme zatím neimportovali.“
+
+Dobrý importní report rozlišuje:
+
+- **blokující chyby**: data nejdou bezpečně importovat,
+- **varování**: import je možný, ale uživatel má něco zkontrolovat,
+- **automatické opravy**: systém upravil formát bez změny významu,
+- **přeskočené řádky**: záznam se nezapsal a uživatel ví proč,
+- **duplicity**: systém navrhne sloučení, aktualizaci nebo přeskočení.
+
+Příklad reportu:
+
+| Typ | Počet | Co se stalo |
+| --- | ---: | --- |
+| Importováno | 184 | Kontakty vznikly nebo se aktualizovaly |
+| Přeskočeno | 7 | Chyběl e-mail nebo byl ve špatném formátu |
+| Varování | 12 | Chybí marketingový stav, nastaveno `unknown` |
+| Duplicity | 5 | Nalezen existující kontakt se stejným e-mailem |
+
+Privacy-first detail: report neukazuj veřejně v URL a neposílej ho jako přílohu všem správcům účtu. Stačí bezpečná stránka v aplikaci, krátká expirace detailního souboru a auditní záznam.
+
+## BX.5 Importované soubory jsou dočasný materiál, ne nové úložiště
+
+Soubor nahraný pro import je často nejkoncentrovanější balík zákaznických dat v celém systému. Může obsahovat kontakty, poznámky, historické smlouvy, interní komentáře a data, která by v novém produktu vůbec neměla existovat. Proto se k importním souborům chovej jako k dočasnému nebezpečnému materiálu.
+
+Pravidla:
+
+- přijímej soubory jen přes autentizovanou aplikaci,
+- omez typy a velikost souborů,
+- kontroluj příponu i skutečný obsah,
+- neukládej původní soubor déle, než je nutné,
+- odděl importní úložiště od veřejných assetů,
+- nepouštěj importované přílohy rovnou do produkčního zobrazení,
+- loguj stav importu, ne celý obsah souboru,
+- smaž dočasné soubory po dokončení nebo expiraci.
+
+OWASP u nahrávání souborů doporučuje mimo jiné validovat typ a příponu, nastavovat limity velikosti, ukládat soubory bezpečně mimo webroot a kontrolovat oprávnění: https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html
+
+Příklad retenčního pravidla:
+
+> „Původní importní soubor držíme maximálně 7 dní kvůli řešení chyb importu. Poté ho automaticky smažeme; importovaná data zůstávají podle nastavení účtu.“
+
+Tohle patří do interní dokumentace i do uživatelské nápovědy. Ne jako právní tapeta, ale jako jasný provozní slib.
+
+## BX.6 Souhlasy, preference a historie nepřekládej kreativně
+
+Nejnebezpečnější importní pole nejsou technicky složitá. Jsou právně a vztahově citlivá: souhlasy, odhlášení, preference komunikace, role, auditní historie a poznámky. Pokud starý systém říká „subscribed“, neznamená to automaticky platný souhlas pro nový účel.
+
+Při migraci komunikačních preferencí rozliš:
+
+- zdroj souhlasu nebo odmítnutí,
+- datum a kanál získání,
+- účel komunikace,
+- rozsah produktových vs. marketingových zpráv,
+- poslední odhlášení,
+- právní základ, pokud se ukládá.
+
+Pokud si nejsi jistý, nastav bezpečnější stav. `unknown` není nepříjemnost, ale poctivost. Lepší poslat zákazníkovi jasnou reaktivaci preferencí než přenést starý marketingový chaos a tvářit se, že to posvětila migrace.
+
+GDPR článek 20 řeší právo na přenositelnost osobních údajů u dat, která subjekt poskytl správci, pokud zpracování stojí na souhlasu nebo smlouvě a probíhá automatizovaně. To neznamená povinnost nekriticky importovat každé pole ze starého systému; znamená to navrhnout férovou, strukturovanou a použitelnou přenositelnost: https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=CELEX%3A32016R0679
+
+Codyho komentář: přenositelnost není „ať si zákazník odnese dump databáze“. Je to schopnost předat smysluplná data v použitelné podobě. Import je pak schopnost ta data přijmout bez toho, aby nový systém zdědil staré průšvihy jako rodinné stříbro.
+
+## BX.7 Checklist importu a migrace dat
+
+- Máme migrační mapu datových domén a víme, co neimportujeme.
+- Importní šablony mají příklady, povinná pole, limity a pravidla formátu.
+- Před zápisem probíhá validace nanečisto.
+- Uživatel vidí náhled dopadu a potvrzuje finální import.
+- Duplicity mají jasnou strategii: vytvořit, aktualizovat, sloučit nebo přeskočit.
+- Chybové hlášky říkají řádek, pole, problém a opravu.
+- Původní importní soubory mají krátkou retenci a bezpečné úložiště.
+- Import může spustit jen oprávněná role a akce je v auditním logu.
+- Souhlasy a preference se nepřenášejí kreativně; nejistý stav je `unknown`.
+- Po importu vznikne report s importovanými, přeskočenými a rizikovými záznamy.
+- Import testujeme na opakování, přerušení a obnově po chybě.
+- Dokumentace vysvětluje, co se importuje, co ne a jak zákazník opraví chyby.
+
+## Zdroje k příloze
+
+- GDPR, nařízení (EU) 2016/679, článek 20 o přenositelnosti údajů: https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=CELEX%3A32016R0679
+- Evropská komise: Information for individuals, přístup k údajům a přenositelnost: https://commission.europa.eu/law/law-topic/data-protection/information-individuals_en
+- OWASP Cheat Sheet Series: File Upload Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html
+
+## Shrnutí přílohy
+
+Import dat je důvěrový proces, ne jednorázový upload. Připrav migrační mapu, přesné šablony, validaci nanečisto, bezpečné zacházení se soubory, jasný report a opatrný převod souhlasů. Privacy-first SaaS zákazníkovi pomáhá přijít i odejít — bez rukojmí, bez špinavých CSV a bez toho, aby import potichu proměnil starý chaos v nový chaos s hezčím UI.
+
 ## Pracovní log
+- 2026-08-10: Přidána příloha BX o importu a migraci dat: migrační mapa, CSV šablony, validace nanečisto, bezpečné zacházení se soubory, opatrný převod souhlasů a checklist.
 
 - 2026-08-10: Přidána příloha BW o zákaznickém exportu dat a přenositelnosti: datové domény, CSV/JSON formáty, bezpečné generování, dokumentace, test obnovy, mikrotexty a checklist.
 - 2026-08-10: Přidána příloha BV o preference centru bez marketingového labyrintu: typy komunikace, souhlasový deník, jednoduché odhlášení, odmítnutí přímého marketingu, synchronizace preferencí a checklist.
