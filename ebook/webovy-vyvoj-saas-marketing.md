@@ -10716,7 +10716,154 @@ Přístupnost je jedna z nejlepších zkoušek kvality produktu. Když web fungu
 Přístupnost není widget, auditní razítko ani charita. Je to produktová disciplína: správné HTML, čitelný obsah, klávesnicové ovládání, formuláře bez pastí, kontrast, focus, smysluplné chyby a pravidelné testování. Privacy-first týmu navíc pomáhá tím, že omezuje zbytečné externí skripty a vede k jednodušším, srozumitelnějším cestám.
 
 
+
+# Příloha BR: AI asistenti v týmu bez promptového divočáku a úniku dat
+
+AI asistent v malém týmu je skvělý sluha a velmi kreativní zdroj chaosu. Umí zrychlit rešerše, návrhy textů, kontrolu kódu, přípravu odpovědí i interní dokumentaci. Jenže pokud tým nemá pravidla, začne se do promptů kopírovat všechno: zákaznické smlouvy, logy, exporty z CRM, screenshoty administrace, osobní údaje a občas i token, protože „vždyť to je jen jednou“. Slavná poslední slova před auditem.
+
+Evropský kontext je u AI důležitý. AI Act se v EU uplatňuje postupně; Evropská komise uvádí, že pravidla pro poskytovatele general-purpose AI modelů se začala používat od 2. srpna 2025 a starší modely mají zvláštní přechodné lhůty: https://digital-strategy.ec.europa.eu/en/policies/guidelines-gpai-providers. Pro malý SaaS tým z toho neplyne, že musí zítra založit oddělení pro papírové draky. Plyne z toho hlavně potřeba mít přehled: kde AI používáme, jaká data do ní posíláme, kdo nese odpovědnost a jak člověk kontroluje výstup.
+
+## BR.1 Nejdřív inventář použití AI, ne nákup dalších kouzelných tlačítek
+
+První chyba je řešit „jaký AI nástroj koupíme“ dřív než „kde nám AI smí pomáhat“. Nástroj bez pravidel se rychle změní na stínový provoz. Jeden člověk používá chat pro support odpovědi, druhý generuje SQL dotazy, třetí nechává AI číst zákaznické PDF a čtvrtý připojí rozšíření do prohlížeče, které vidí půlku interních systémů.
+
+Začni jednoduchým inventářem:
+
+| Použití | Povolená data | Zakázaná data | Kontrola člověkem | Vlastník |
+| --- | --- | --- | --- | --- |
+| Návrh blogového článku | veřejné poznámky, odkazy, anonymní příklady | neveřejné klientské informace | editor před publikací | marketing |
+| Shrnutí ticketu | anonymizovaný problém, verze produktu | celé vlákno se jménem a e-mailem bez důvodu | support lead | podpora |
+| Pomoc s kódem | fragment bez produkčních secretů | `.env`, tokeny, privátní klíče, dump DB | vývojář v review | engineering |
+| Analýza feedbacku | štítky, anonymní citace | export CRM s identifikátory | product owner | produkt |
+
+Inventář nemusí být právnický román. Stačí živá stránka v interní znalostní bázi. Důležité je, aby lidé věděli, že AI není zakázaná magie, ale ani univerzální popelnice na citlivá data.
+
+## BR.2 Datová pravidla pro prompty
+
+Prompt je vstup do systému. Chovej se k němu stejně jako k formuláři, API requestu nebo e-mailu dodavateli. To znamená: minimalizace, účel, přístup a kontrola.
+
+Praktické vrstvy:
+
+- **Veřejná data:** texty z webu, dokumentace, veřejné ceníky, obecné ukázky. Většinou bezpečné pro běžné AI použití.
+- **Interní neosobní data:** procesní poznámky, roadmapa bez citlivých obchodních detailů, anonymní metriky. Používat opatrně a podle nastavení nástroje.
+- **Zákaznická nebo osobní data:** jména, e-maily, smlouvy, tickety, fakturační údaje, chování v produktu. Do AI jen s jasným účelem, právním posouzením a nejlépe po anonymizaci.
+- **Tajemství a bezpečnostní data:** hesla, tokeny, privátní klíče, produkční logy s identifikátory, bezpečnostní nálezy před opravou. Do běžných AI nástrojů nepatří.
+
+Místo kopírování celého ticketu napiš AI vlastní, očištěné zadání:
+
+> „Zákazník malého B2B SaaS má problém s importem CSV. Po nahrání souboru se mu zobrazí obecná chyba. Navrhni srozumitelnou odpověď podpory a checklist informací, které si máme vyžádat. Nepředstírej, že znáš příčinu.“
+
+Tohle je bezpečnější než vložit celé vlákno včetně podpisu, telefonu, ID účtu a screenshotu administrace. AI nepotřebuje znát babiččino rodné příjmení zákazníka, aby napsala slušnou odpověď. Překvapivé, já vím.
+
+## BR.3 Prompt šablony šetří čas i nervy
+
+Bez šablon lidé pokaždé vymýšlí prompt znovu. Výsledek: nestejná kvalita, náhodné úniky kontextu a odpovědi, které zní jako leták z konference o digitální transformaci.
+
+Připrav malé šablony pro opakované úkoly:
+
+**Support odpověď**
+
+```text
+Role: Pomáháš připravit odpověď zákaznické podpory pro B2B SaaS.
+Data: Použij jen anonymizovaný popis problému níže.
+Úkol: Napiš stručnou, empatickou a konkrétní odpověď.
+Omezení: Neuváděj právní sliby, nehádej příčinu, nevyžaduj zbytečná osobní data.
+Výstup: 1) odpověď zákazníkovi, 2) interní checklist dalších kroků.
+Popis problému: ...
+```
+
+**Kontrola landing page**
+
+```text
+Role: Jsi kritický editor privacy-first SaaS landing page.
+Úkol: Najdi nejasná tvrzení, slabé CTA, chybějící důkazy a privacy rizika.
+Omezení: Nenavrhuj reklamní pixely, pop-up pasti ani dark patterns.
+Výstup: Prioritizovaný seznam 10 úprav s dopadem a náročností.
+Text stránky: ...
+```
+
+**Technická konzultace bez secretů**
+
+```text
+Role: Jsi seniorní reviewer architektury.
+Data: Kód je zkrácený a neobsahuje secrety ani zákaznická data.
+Úkol: Najdi rizika, chybějící validace a jednodušší návrh.
+Omezení: Pokud chybí kontext, ptej se; nevymýšlej neexistující soubory.
+Kód / popis: ...
+```
+
+Dobrá šablona neřeší jen kvalitu výstupu. Připomíná hranice. A hranice jsou u AI stejně důležité jako u externích dodavatelů, stáží a firemního kávovaru.
+
+## BR.4 Výstup AI není rozhodnutí, ale návrh
+
+AI může navrhnout text, shrnout dlouhý dokument nebo upozornit na riziko. Nemá ale sama schvalovat změnu obchodních podmínek, posílat zákazníkům odpověď, měnit produkční konfiguraci nebo rozhodovat o zákaznickém nároku. Člověk má zůstat v místě, kde vzniká dopad.
+
+Nastav jednoduchá pravidla:
+
+- AI výstup pro veřejný web vždy prochází editací a kontrolou zdrojů.
+- AI výstup pro zákazníka kontroluje člověk, který rozumí kontextu účtu.
+- AI návrh kódu prochází stejným review jako lidský kód.
+- AI nesmí sama spouštět destruktivní akce bez potvrzení a auditní stopy.
+- AI odpověď nesmí předstírat jistotu, pokud pracuje s neúplným kontextem.
+
+Codyho komentář: nejlepší AI workflow není „necháme model rozhodnout“. Nejlepší workflow je „model zlevní první návrh a člověk si nechá odpovědnost“. To je méně sexy než autonomní agenti v marketingovém videu, ale obvykle to nerozbije produkci.
+
+## BR.5 Vendor checklist pro AI nástroje
+
+Před zavedením AI nástroje se ptej stejně tvrdě jako u analytiky, podpory nebo hostingu. Ne proto, že AI je zlá. Protože AI nástroje často dostávají extrémně koncentrovaný kontext: interní dokumenty, zákaznické problémy, kód, obchodní plány a rozhodovací logiku.
+
+Minimum otázek:
+
+- Kde se zpracovávají a ukládají data?
+- Používají se naše vstupy nebo výstupy k tréninku modelů?
+- Lze trénink na zákaznických datech smluvně vypnout?
+- Jak dlouho se uchovávají prompty, soubory, logy a metadata?
+- Umí nástroj oddělit pracovní prostory, role a auditní logy?
+- Existuje DPA nebo jiné ujednání pro zpracování osobních údajů?
+- Lze data exportovat a smazat při ukončení služby?
+- Jsou dostupné evropské regiony nebo evropský provozní partner?
+- Co se stane, když zaměstnanec odejde nebo ztratí zařízení?
+- Umí nástroj pracovat bez prohlížečového rozšíření, které vidí zbytečně moc?
+
+Pokud vendor neumí odpovědět jednoduše, není to automaticky stopka. Je to ale signál pro omezený pilot: jen veřejná nebo anonymizovaná data, žádné plošné napojení na interní systémy a jasný termín vyhodnocení.
+
+## BR.6 Provozní pravidla pro AI v malém týmu
+
+Aby AI nezůstala jen v rovině přání, nastav provozní rytmus:
+
+- Jednou měsíčně projdi inventář AI použití a odstraň nástroje bez vlastníka.
+- U každého nového AI workflow napiš účel, datové kategorie a kontrolu člověkem.
+- V repozitáři drž šablony promptů pro opakované úkoly vedle dokumentace procesu.
+- Zakázaná data napiš konkrétně: tokeny, smlouvy, produkční exporty, osobní údaje bez anonymizace.
+- U citlivých úkolů preferuj nástroje s kontrolou dat, firemním nastavením a auditní stopou.
+- Incident typu „poslal jsem špatná data do AI“ řeš jako bezpečnostní událost, ne jako trapas pod koberec.
+
+## BR.7 Checklist: AI asistent bez datového průšvihu
+
+- Máme seznam míst, kde tým používá AI.
+- Každé AI použití má vlastníka a účel.
+- Víme, jaká data se do nástroje smějí a nesmějí vkládat.
+- Pro support, marketing, kód a produkt existují bezpečné prompt šablony.
+- Výstupy pro zákazníky, veřejný web a kód kontroluje člověk.
+- Do běžných AI nástrojů se neposílají secrety, tokeny, privátní klíče ani celé databázové exporty.
+- Zákaznická data se před použitím anonymizují nebo se použije syntetický příklad.
+- U AI dodavatelů máme ověřené ukládání, trénink, retenci, export, mazání a přístupy.
+- Prohlížečová rozšíření a automatické konektory mají zvláštní schválení.
+- Incidenty s nesprávným AI použitím mají jasný postup a nejsou trestané mlčením.
+
+## Zdroje k příloze
+
+- Evropská komise: Guidelines for providers of general-purpose AI models a informace o použitelnosti povinností od 2. srpna 2025: https://digital-strategy.ec.europa.eu/en/policies/guidelines-gpai-providers
+- European AI Act Service Desk: implementační timeline AI Actu s postupným náběhem pravidel do roku 2028: https://ai-act-service-desk.ec.europa.eu/en/ai-act/eu-ai-act-implementation-timeline
+- Evropská komise: pravidla pro general-purpose AI modely, transparentnost, bezpečnost, odpovědnost a lhůta pro modely uvedené na trh před 2. srpnem 2025: https://digital-strategy.ec.europa.eu/en/news/eu-rules-general-purpose-ai-models-start-apply-bringing-more-transparency-safety-and-accountability
+
+## Shrnutí přílohy
+
+AI asistenti dávají malému týmu páku, ale jen pokud mají mantinely: inventář použití, datová pravidla, prompt šablony, lidskou kontrolu, vendor checklist a jasný incidentní postup. Privacy-first přístup neznamená AI nepoužívat. Znamená používat ji tak, aby zákaznická data nebyla palivo pro cizí experimenty a aby tým věděl, kdo za výsledek odpovídá.
+
+
 ## Pracovní log
+- 2026-08-10: Přidána příloha BR o bezpečném používání AI asistentů v týmu: inventář použití, datová pravidla pro prompty, šablony, lidská kontrola, vendor checklist a incidentní postup.
 - 2026-08-09: Přidána příloha BQ o přístupnosti webu a SaaS: WCAG, European Accessibility Act, design systém, formuláře, ruční i automatické testování, přístupnostní prohlášení a checklist.
 - 2026-08-09: Přidána příloha BP o datové klasifikaci pro malý SaaS: čtyři třídy dat, pravidla pro chaty, tickety, AI prompty, exporty a dodavatele, pseudonymizace, šablony a checklist.
 - 2026-08-09: Přidána příloha BO o doménové a DNS hygieně: vlastnictví domén, transfer lock, DNSSEC, bezpečný postup DNS změn, úklid subdomén, dokumentace kritických záznamů a checklist.
