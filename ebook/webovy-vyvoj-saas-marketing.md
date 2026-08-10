@@ -13749,7 +13749,127 @@ Můj pohled: dobré logy nejsou ty nejukecanější. Dobré logy jsou ty, které
 
 Aplikační logy mají pomáhat provozu, bezpečnosti a debuggingu, ne tiše kopírovat zákaznická data do druhé méně chráněné databáze. Začni účelem logování, zakaž tajemství a celé payloady, používej strukturované eventy, rediguj citlivá pole automaticky, nastav retenci podle rizika a chraň přístup k logům stejně vážně jako přístup k produkci. Privacy-first logování není slepé. Je dostatečně ostré na incidenty a dostatečně zdrženlivé na běžný provoz.
 
+# Příloha CM: Rate limiting a kvóty bez trestání dobrých zákazníků a sběru zbytečných otisků
+
+Rate limiting je jedna z těch věcí, které si malý SaaS tým často nechá „na potom“. Potom přijde bot, drahá integrace, přetížené vyhledávání, credential stuffing, nebo zákazník, který si omylem pustí import v nekonečné smyčce. A najednou se místo produktu ladí požár. Dobře navržené limity nejsou nepřátelské. Jsou bezpečnostní pás, férové rozdělení kapacity a ochrana účtu zákazníka.
+
+Privacy-first pohled je důležitý: limity nemají být výmluva pro fingerprinting, agresivní profilování zařízení nebo nákup anti-bot krabice, která z každého návštěvníka udělá podezřelý objekt. Začni u serverových pravidel, uživatelských účtů, API klíčů, tenantů a konkrétních akcí. Teprve když to nestačí, přidej další signály — a vždycky si napiš proč.
+
+## CM.1 Limituj podle rizika akce, ne podle jedné magické hodnoty
+
+Jedno globální pravidlo typu „100 requestů za minutu“ vypadá čistě, ale rychle se rozbije. Login, reset hesla, vyhledávání, export dat, generování PDF, webhook endpoint a obyčejné načtení veřejné stránky mají úplně jiné riziko i cenu. Rate limiting proto rozděl podle typu akce.
+
+Praktické vrstvy:
+
+- veřejné stránky: chránit infrastrukturu, ale neblokovat normální čtení;
+- přihlášení a reset hesla: brzdit hádání hesel a spam, neprozradit existenci účtu;
+- API zápisy: chránit integritu dat a vedlejší efekty;
+- drahé operace: exporty, importy, reporty, AI úlohy, obrázky, vyhledávání;
+- administrace: menší objem, vyšší citlivost, důraz na audit a schvalování.
+
+Příklad: endpoint `POST /login` může mít limit pro účet, IP rozsah a tenant. Endpoint `GET /articles` bude mít spíš cache a mírnější IP limit. Endpoint `POST /exports` má mít frontu, denní kvótu a jasný stav úlohy, protože deset exportů za minutu není „aktivní uživatel“, ale skoro jistě chyba nebo útok.
+
+## CM.2 Kvóty vysvětluj jako produktové pravidlo
+
+Zákazník nemá hádat, jestli narazil na bezpečnostní blokaci, chybu serveru nebo skryté obchodní omezení. U placených funkcí piš kvóty dopředu: počet exportů za den, počet API volání, počet importovaných řádků, počet automatizací. Ne jako past v patičce ceníku, ale přímo u funkce.
+
+Dobrá hláška po dosažení limitu:
+
+> Exporty jsou dnes vyčerpané. Další export bude dostupný zítra v 00:00. Pokud jde o urgentní obnovu dat, napište podpoře.
+
+Špatná hláška:
+
+> Error 429.
+
+Technicky je 429 správný HTTP stav pro „Too Many Requests“, ale produktově nestačí. API klient potřebuje hlavičku `Retry-After`, dokumentaci limitu a stabilní kód chyby. Člověk v UI potřebuje vědět, co se stalo, kdy to může zkusit znovu a jestli má alternativu.
+
+## CM.3 Nepleť rate limiting s autorizací
+
+Limit říká „moc často“. Autorizace říká „nesmíš“. Pokud někdo nemá právo vidět faktury jiného tenantu, odpověď nemá být 429 po desátém pokusu. Má být konzistentní odmítnutí přístupu a auditní událost. Rate limiting je doplněk, ne náhradní zámek na dveřích.
+
+Tohle je důležité u víceuživatelských SaaS aplikací. Útočník může zkoušet cizí ID zdrojů pomalu, pod limitem. Když autorizace spoléhá na „stejně ho brzy zastaví limit“, je to bezpečnostní placebo. Ano, placebo může uklidnit management. Databázi ale moc ne.
+
+Bezpečný vzor:
+
+- každý dotaz filtruj podle `tenant_id` a práv uživatele;
+- každou změnu kontroluj na serveru, ne jen ve frontendu;
+- podezřelé opakované odmítnutí loguj jako bezpečnostní signál;
+- limituj sériové pokusy, ale nikdy tím nenahrazuj kontrolu oprávnění.
+
+## CM.4 Použij více klíčů, ale sbírej minimum signálů
+
+Rate limit podle IP adresy je jednoduchý, ale nepřesný. Mobilní sítě, kanceláře, VPN a sdílené Wi-Fi umí schovat stovky lidí za jednu adresu. Naopak útočník umí IP adresy střídat. Proto kombinuj klíče podle kontextu: uživatel, tenant, API klíč, endpoint, akce, případně přibližný IP prefix.
+
+Privacy-first pravidlo: nezačínej invazivním fingerprintingem prohlížeče. Ve většině B2B SaaS případů stačí serverové signály, které už oprávněně zpracováváš pro bezpečnost a provoz. Pokud potřebuješ posílit obranu veřejného formuláře, zvaž nejdřív levnější a méně sledovací možnosti: honeypot pole, čas vyplnění, jednorázový nonce, serverovou reputaci konkrétního formuláře, potvrzovací e-mail u rizikových akcí.
+
+Příklad klíče pro reset hesla:
+
+- `account_identifier_hash`: normalizovaný a zahashovaný e-mail;
+- `ip_prefix`: zkrácený prefix, ne plná dlouhodobá historie;
+- `action`: `password_reset_request`;
+- `window`: krátké okno pro rychlé opakování a delší okno pro denní zneužití.
+
+## CM.5 Drahé operace dej do fronty a vrať stav, ne timeout
+
+Exporty, importy, generování reportů a AI úlohy netlač přes nekonečný HTTP request. Dělej je jako job: přijmi požadavek, ověř oprávnění a kvótu, založ úlohu, vrať ID a průběžný stav. Uživatel pak vidí „čeká“, „běží“, „hotovo“, „selhalo“, „vypršelo“. Produkt je klidnější a infrastruktura méně hysterická.
+
+Fronta zároveň zjednoduší férovost. Jeden tenant nemá sežrat všechny workery jen proto, že importoval stoletou historii faktur a CSV mělo čárky, středníky a zjevně i osobní trauma. Nastav per-tenant concurrency: třeba jeden velký import najednou, tři malé exporty ve frontě, žádné paralelní generování stejného reportu.
+
+Do výsledků jobů nedávej data navždy. Exportní soubor má mít expiraci, přístup přes oprávnění a ideálně krátkodobý odkaz. Pokud export obsahuje osobní údaje, loguj stažení jako auditní událost.
+
+## CM.6 Monitoruj limity jako produktový signál
+
+Když dobří zákazníci často narážejí na limit, není to jen bezpečnostní metrika. Může to znamenat špatně navržený import, chybějící bulk API, nejasné retry chování nebo tarif, který neodpovídá realitě. Sleduj proto limity ve dvou režimech: bezpečnost a produkt.
+
+Bezpečnostní pohled:
+
+- mnoho pokusů o login pro jeden účet;
+- mnoho různých účtů z jednoho zdroje;
+- opakované požadavky na citlivé endpointy;
+- náhlý růst drahých operací;
+- webhooky s neplatným podpisem.
+
+Produktový pohled:
+
+- zákazníci narážejí na limit při legitimní práci;
+- integrace dělají zbytečné polling smyčky;
+- UI opakuje requesty po chybě;
+- dokumentace API neříká, jak čekat;
+- některé limity jsou příliš nízké pro větší zákazníky.
+
+Privacy-first metrika nemusí znát detail každého člověka. Často stačí agregace podle tenantu, typu endpointu, dne a kategorie limitu. Detailní bezpečnostní log drž kratší dobu a s omezeným přístupem.
+
+## CM.7 Checklist rate limitingu a kvót
+
+- Má každý citlivý endpoint vlastní limit podle rizika a ceny operace?
+- Rozlišuje systém veřejné čtení, login, reset hesla, API zápisy, exporty a administraci?
+- Vrací API při limitu stav 429, stabilní chybový kód a `Retry-After`?
+- Vysvětluje UI člověku, co se stalo a kdy může pokračovat?
+- Jsou limity navázané na uživatele, tenant, API klíč nebo akci, ne jen na IP adresu?
+- Je autorizace nezávislá na rate limitingu?
+- Mají drahé operace frontu, stav úlohy, concurrency pravidla a expiraci výsledků?
+- Umí tým rozlišit útok od legitimního zákazníka, kterému limit brání v práci?
+- Jsou bezpečnostní signály ukládané s omezenou retencí a bez zbytečného fingerprintingu?
+- Existuje postup pro dočasné zvýšení kvóty u zákazníka bez ručního hacku v databázi?
+
+## Codyho komentář
+
+Můj pohled: rate limiting je nejlepší, když si ho skoro nikdo nevšimne. Útočník narazí na zeď, dobrý zákazník dostane srozumitelnou brzdu a tým má v datech signál, ne paranoiu. Nejhorší varianta je tajný limit bez dokumentace, který rozbije integraci v pátek večer. To není ochrana. To je escape room pro support.
+
+## Zdroje k příloze
+
+- OWASP API Security Top 10 2023: API4 Unrestricted Resource Consumption — https://owasp.org/API-Security/editions/2023/en/0xa4-unrestricted-resource-consumption/
+- OWASP Cheat Sheet Series: Credential Stuffing Prevention Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Credential_Stuffing_Prevention_Cheat_Sheet.html
+- MDN Web Docs: 429 Too Many Requests — https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/429
+- RFC 6585: Additional HTTP Status Codes, section 4 — 429 Too Many Requests — https://www.rfc-editor.org/rfc/rfc6585#section-4
+- IETF: RFC 9110, Retry-After header field — https://www.rfc-editor.org/rfc/rfc9110.html#name-retry-after
+
+## Shrnutí přílohy
+
+Rate limiting má chránit produkt, zákazníky i infrastrukturu, ale nesmí se změnit v nečitelnou past nebo výmluvu pro sledování lidí. Rozděl limity podle rizika akce, dokumentuj kvóty, vracej srozumitelné 429 odpovědi, nepoužívej limity místo autorizace, kombinuj serverové signály s minimem osobních dat a drahé operace posílej do fronty. Dobré limity jsou férové, vysvětlitelné a měřené tak, aby pomáhaly bezpečnosti i produktu.
+
 ## Pracovní log
+- 2026-08-10: Přidána příloha CM o rate limitingu a kvótách: limity podle rizika akcí, dokumentace kvót, bezpečné 429 odpovědi, oddělení od autorizace, fronty pro drahé operace, monitoring a checklist.
 - 2026-08-10: Přidána příloha CL o aplikačních logách bez datové skládky: účel logů, zákaz tajemství a payloadů, strukturované eventy, redakce, retence, přístupy a checklist.
 - 2026-08-10: Přidána příloha CK o interních admin nástrojích: role podle práce, minimální zobrazení zákaznických dat, bezpečné rizikové akce, admin search, release proces, break-glass přístup a checklist.
 - 2026-08-10: Přidána příloha CJ o feature flags a postupech rolloutů: typy přepínačů, vlastnictví, rizikový rollout, datové minimum, autorizace, audit změn a checklist.
