@@ -13601,7 +13601,156 @@ Můj pohled: interní admin je lakmusový papírek kultury firmy. Když je navr�
 
 Interní admin nástroje jsou produkt s vyšším rizikem, ne vedlejší skript s hezčí tabulkou. Potřebují role podle práce, deny-by-default autorizaci, minimální zobrazení zákaznických dat, bezpečné potvrzení rizikových akcí, omezené vyhledávání, release proces a emergency přístup s jasnou stopou. Nejlepší admin panel pomáhá týmu řešit problémy rychle, ale zároveň aktivně brání zvědavosti, omylům a pohodlnému obcházení produktu. Superpanel zkázy je možná rychlý. Důvěryhodný SaaS je rychlý až potom, co je bezpečný.
 
+
+---
+
+# Příloha CL: Aplikační logy bez skládky osobních údajů, tokenů a výmluv
+
+Logy jsou zvláštní věc. Když chybí, tým při incidentu hádá z kávové sedliny. Když jsou přehnané, vznikne druhá databáze zákaznických dat, jen méně hlídaná, hůř dokumentovaná a obvykle s přístupem pro půlku vývojářského týmu. Privacy-first logování stojí uprostřed: ukládá dost informací pro provoz, bezpečnost a debugging, ale odmítá dělat z každé chyby malý datový výsyp.
+
+GDPR staví zpracování osobních údajů mimo jiné na minimalizaci, omezení účelu, integritě, důvěrnosti a odpovědnosti správce; článek 32 pak mluví o přiměřených technických a organizačních opatřeních pro bezpečnost zpracování. Prakticky řečeno: logy nejsou výjimka z pravidel jen proto, že se jmenují „technické“. Pokud obsahují osobní údaje, tajemství nebo chování uživatele, musí mít účel, rozsah, ochranu a retenci.
+
+## CL.1 Nejdřív si napiš, k čemu logy slouží
+
+Začni účelem, ne knihovnou. Malý SaaS většinou potřebuje čtyři druhy aplikačních logů:
+
+- provozní logy pro chyby, latenci, fronty, timeouty a neúspěšné integrace,
+- bezpečnostní logy pro přihlášení, změny oprávnění, podezřelé požadavky a rate limit,
+- auditní logy pro akce, které mění stav zákaznického účtu nebo dat,
+- produktové technické signály pro zdraví funkcí, ne pro reklamní profilování.
+
+Každý typ má jiného čtenáře. Vývojář potřebuje stack trace a korelační ID. Support potřebuje bezpečné shrnutí: „import selhal kvůli formátu data“. Bezpečnostní člověk potřebuje čas, aktéra, objekt, akci a výsledek. Zakladatel nepotřebuje vidět payload zákaznického formuláře v log agregátoru jen proto, že „se to jednou hodilo“.
+
+Mini pravidlo: pokud se log nedá přiřadit k žádnému rozhodnutí nebo reakci týmu, pravděpodobně sbíráš šum. Šum není observabilita. Šum je sklad, kde se incident převléká za normální provoz.
+
+## CL.2 Nikdy neloguj tajemství a celé payloady jako default
+
+Nejčastější logovací hřích je jednoduchý: při chybě se uloží celý request, celý response, celé tělo webhooku nebo celý objekt uživatele. Vypadá to prakticky. Pak zjistíš, že v logách leží session tokeny, API klíče, osobní zprávy, fakturační údaje, reset linky, autorizační hlavičky a někdy i heslo, protože někdo debugoval formulář ve špatném roce. Gratuluju, vznikla databáze, ke které se nikdo nechoval jako k databázi.
+
+Bezpečný výchozí seznam zákazů:
+
+- neloguj hesla, tokeny, API klíče, refresh tokeny ani celé autorizační hlavičky,
+- neloguj celé cookies, reset linky, magic linky ani jednorázové kódy,
+- neloguj celé request/response body u produkčních zákaznických dat,
+- neloguj osobní obsah zákazníka, dokumenty, poznámky, zprávy nebo nahrané soubory,
+- neloguj platební údaje mimo bezpečné reference od platební brány,
+- neloguj query stringy bez sanitizace, protože často nesou e-maily, tokeny nebo interní hledání.
+
+Místo toho loguj bezpečné identifikátory a kontext: `request_id`, `workspace_id`, `user_id` jako interní ID, typ akce, typ chyby, status, délku zpracování, název integrace, bezpečně zkrácenou doménu, hash externího identifikátoru, počet položek a korelační ID. Když potřebuješ detailní payload pro konkrétní incident, udělej dočasný diagnostický režim s časovým omezením, schválením a jasnou retencí. Ne permanentní vysavač všeho.
+
+## CL.3 Strukturovaný log je lepší než román v jedné větě
+
+Text „něco se pokazilo“ nepomůže. Text „Stripe webhook failed“ je lepší, ale pořád musí člověk hádat. Strukturovaný log umožní filtrovat, počítat, alertovat a korelovat události bez ruční archeologie.
+
+Příklad dobrého provozního logu:
+
+```json
+{
+  "event": "integration.webhook.failed",
+  "severity": "warning",
+  "request_id": "req_7f3a",
+  "workspace_id": "ws_123",
+  "integration": "billing_provider",
+  "provider_event_type": "invoice.paid",
+  "status_code": 422,
+  "reason_code": "unknown_customer_reference",
+  "duration_ms": 318,
+  "contains_customer_payload": false
+}
+```
+
+Všimni si, co tam není: e-mail zákazníka, celé tělo webhooku, podpis, token ani fakturační adresa. Tým ví, co se stalo, kde hledat a jak to spojit s requestem. Zároveň log není datová časovaná bomba.
+
+Pro malý tým stačí jednoduchá konvence:
+
+- `event`: stabilní strojový název, například `auth.login.failed`,
+- `severity`: `debug`, `info`, `warning`, `error`, `critical`,
+- `actor_type`: `user`, `system`, `admin`, `integration`,
+- `actor_id`: interní identifikátor, ne veřejný e-mail,
+- `object_type` a `object_id`: čeho se akce týkala,
+- `result`: `success`, `failed`, `denied`, `rate_limited`,
+- `request_id` nebo `trace_id`: spojení napříč službami.
+
+Když se názvy eventů mění podle nálady vývojáře, monitoring začne připomínat kuchařku psanou pěti jazyky. Standardizace není akademická posedlost. Je to služba budoucímu unavenému člověku ve 2:17 ráno.
+
+## CL.4 Redakce logů musí být v kódu, ne v dobrém úmyslu
+
+„Budeme si dávat pozor“ není kontrola. Je to přání. Logovací vrstva má umět citlivé hodnoty maskovat automaticky a testovatelně.
+
+Praktické ochrany:
+
+- centralizuj logování přes jednu knihovnu nebo wrapper,
+- vytvoř seznam citlivých klíčů: `password`, `token`, `secret`, `authorization`, `cookie`, `set-cookie`, `api_key`, `email`, `phone`,
+- maskuj hodnoty podle typu, ne jen podle názvu pole,
+- validuj a escapuj logované hodnoty, aby útočník nemohl vkládat falešné řádky,
+- přidej test, který ověří, že tajné hodnoty v logu skončí jako `[REDACTED]`,
+- ve vývoji používej stejnou redakční vrstvu jako v produkci.
+
+Příklad pravidla: `Authorization: Bearer abc.def.ghi` se nikdy nesmí dostat do logu ani v debug režimu. Pokud potřebuješ vědět, jestli hlavička existovala, loguj `authorization_present: true`. Pokud potřebuješ ladit typ tokenu, loguj `authorization_scheme: "Bearer"`. Hodnota tokenu patří do trezoru, ne do textového proudu, který skončí v agregátoru, záloze a možná i v screenshotu v ticketu.
+
+## CL.5 Retence logů má být kratší než paměť slona
+
+Logy mají sklony žít navždy. Ne proto, že by to někdo navrhl, ale protože nikdo nenastavil mazání. Jenže retence je produktové a bezpečnostní rozhodnutí. Pro různé logy potřebuješ různé doby:
+
+| Typ logu | Typická hodnota | Příklad retence |
+| --- | --- | --- |
+| Debug log | krátkodobé ladění | hodiny až jednotky dnů |
+| Provozní error log | řešení chyb a trendů | 14 až 30 dnů |
+| Bezpečnostní log | detekce útoků a incidenty | 90 až 180 dnů podle rizika |
+| Auditní log změn | odpovědnost a spor o akci | déle podle smlouvy, rizika a právního základu |
+| Diagnostický payload | konkrétní incident | co nejkratší, ručně schválené okno |
+
+Tohle nejsou univerzální právní lhůty, ale praktický start pro interní rozhodnutí. Důležité je mít tabulku, vlastníka a automatické mazání. „Někdy to promažeme“ je jen pomalejší varianta „nikdy“.
+
+## CL.6 Přístup k logům je přístup k zákaznickému stínu
+
+I dobře redigované logy mohou prozradit hodně: kdo se kdy přihlásil, jaké funkce používá, jaké integrace má, kde mu selhává proces, kdy má provozní špičku. Proto se k logům nechovej jako k neškodným technickým drobkům.
+
+Nastav minimum:
+
+- přístup podle rolí a prostředí,
+- oddělení produkčních logů od vývojových,
+- MFA pro logovací a observability nástroje,
+- audit přístupů k logům,
+- zákaz sdílení log výpisů do veřejných chatů bez redakce,
+- export logů jen přes schválený postup,
+- EU region nebo evropský provoz tam, kde to dává smysl pro zákaznický slib.
+
+Privacy-first hodnota Dreamindu tu zní jednoduše: logovací nástroj je subdodavatel práce s daty, ne neutrální technická krabička. Před zapnutím se ptej: kde logy fyzicky leží, kdo k nim má přístup, jak dlouho se drží, jak se mažou, jak se šifrují, jak se řeší support přístup dodavatele a jestli umíme zákazníkovi odpovědět bez mlžení.
+
+## CL.7 Checklist aplikačních logů
+
+- Má každý typ logu jasný účel a vlastníka?
+- Existuje seznam polí, která se nikdy nesmí logovat?
+- Prochází všechny produkční logy jednou redakční vrstvou?
+- Jsou eventy strukturované a pojmenované stabilní konvencí?
+- Umí tým spojit chybu přes `request_id` nebo `trace_id` bez osobních údajů?
+- Neukládají se celé requesty, response, cookies, tokeny nebo zákaznické soubory?
+- Je retence nastavena automaticky podle typu logu?
+- Mají produkční logy omezený přístup, MFA a audit přístupů?
+- Jsou bezpečnostní události napojené na incidentní postup?
+- Testuje se, že redakce tajemství opravdu funguje?
+- Je logovací dodavatel zapsaný v přehledu subdodavatelů a datových toků?
+- Ví tým, kam smí posílat log výřezy při supportu a co musí před sdílením odstranit?
+
+## Codyho komentář
+
+Můj pohled: dobré logy nejsou ty nejukecanější. Dobré logy jsou ty, které pomohou najít problém bez toho, aby tým omylem vyrobil paralelní šmírovací systém. Vývojářská zvědavost je skvělá vlastnost. V produkčních logách ale potřebuje bezpečnostní zábradlí, jinak začne sbírat všechno, co se hýbe, a ještě tomu říkat observabilita.
+
+## Zdroje k příloze
+
+- GDPR, článek 5 a článek 32 v nařízení Evropského parlamentu a Rady (EU) 2016/679 — https://eur-lex.europa.eu/eli/reg/2016/679/oj
+- European Data Protection Board: Guidelines 4/2019 on Article 25 Data Protection by Design and by Default — https://www.edpb.europa.eu/documents/guideline/guidelines-42019-on-article-25-data-protection-by-design-and-by-default_en
+- OWASP Cheat Sheet Series: Logging Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+- OWASP Cheat Sheet Series: Logging Vocabulary Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Logging_Vocabulary_Cheat_Sheet.html
+- ENISA: Guidelines for SMEs on the security of personal data processing — https://www.enisa.europa.eu/publications/guidelines-for-smes-on-the-security-of-personal-data-processing
+
+## Shrnutí přílohy
+
+Aplikační logy mají pomáhat provozu, bezpečnosti a debuggingu, ne tiše kopírovat zákaznická data do druhé méně chráněné databáze. Začni účelem logování, zakaž tajemství a celé payloady, používej strukturované eventy, rediguj citlivá pole automaticky, nastav retenci podle rizika a chraň přístup k logům stejně vážně jako přístup k produkci. Privacy-first logování není slepé. Je dostatečně ostré na incidenty a dostatečně zdrženlivé na běžný provoz.
+
 ## Pracovní log
+- 2026-08-10: Přidána příloha CL o aplikačních logách bez datové skládky: účel logů, zákaz tajemství a payloadů, strukturované eventy, redakce, retence, přístupy a checklist.
 - 2026-08-10: Přidána příloha CK o interních admin nástrojích: role podle práce, minimální zobrazení zákaznických dat, bezpečné rizikové akce, admin search, release proces, break-glass přístup a checklist.
 - 2026-08-10: Přidána příloha CJ o feature flags a postupech rolloutů: typy přepínačů, vlastnictví, rizikový rollout, datové minimum, autorizace, audit změn a checklist.
 - 2026-08-10: Přidána příloha CI o privacy-first vyhledávání: rozsah indexu, citlivost dotazů, bezpečné výsledky, veřejný web, multi-tenant SaaS, search UX a checklist.
