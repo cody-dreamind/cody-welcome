@@ -12913,7 +12913,122 @@ Datová rezidence není jen výběr EU regionu v administraci cloudu. Privacy-fi
 
 ---
 
+
+# Příloha CG: Evidence souhlasů bez CMP molochu a databáze plné otisků prstů
+
+Souhlas není talisman. Nestačí mít na webu tlačítko „Přijmout vše“, barevně schovat odmítnutí a doufat, že audit přijde až po důchodu zakladatele. Pokud se opíráš o souhlas, musí být svobodný, konkrétní, informovaný a jednoznačný. A hlavně: musíš umět ukázat, k čemu člověk souhlasil, kdy, v jaké verzi textu a jak mohl souhlas stejně snadno odvolat.
+
+Privacy-first přístup ale zároveň neznamená ukládat o každém návštěvníkovi román: IP adresu, user-agent, fingerprint, velikost monitoru a pravděpodobnou náladu podle rychlosti scrollování. Cílem je doložit rozhodnutí bez toho, abys kvůli důkazu vytvořil další datový problém.
+
+## CG.1 Nejdřív odděl souhlas od preference
+
+Ne všechno, co uživatel nastaví, je právní souhlas. Část voleb jsou obyčejné produktové preference: jazyk rozhraní, tmavý režim, počet položek na stránce, způsob zobrazení tabulky. Ty často můžeš uložit jako technicky nutné nastavení služby, pokud bez nich funkce rozumně nefunguje nebo pokud si je uživatel výslovně nastaví pro vlastní pohodlí.
+
+Souhlas řeš tam, kde zpracování není nutné pro službu a uživatel musí dostat reálnou volbu: marketingové cookies, remarketing, volitelné produktové e-maily, profilování, některé embedded prvky třetích stran nebo měření, které přesahuje nezbytný provoz.
+
+Praktické rozdělení:
+
+| Volba | Typ | Jak evidovat |
+| --- | --- | --- |
+| Jazyk aplikace | Preference | Uložit hodnotu u účtu nebo v nutné cookie |
+| Technická session cookie | Nutné fungování | Popsat v privacy/cookie stránce, nevyžadovat marketingový souhlas |
+| Newsletter k produktu | Souhlas nebo jiný vhodný právní základ podle kontextu | Evidovat zdroj, text, čas, odhlášení |
+| Remarketingový pixel | Souhlas | Spustit až po souhlasu, evidovat účel a verzi textu |
+| Agregovaná self-hosted analytika bez identifikátorů | Posoudit podle konfigurace | Zdokumentovat nastavení, rozsah a důvod minimalizace |
+
+Největší chyba je mít jeden checkbox „Souhlasím se vším“. Uživatel pak neví, jestli odsouhlasil obchodní podmínky, marketing, cookies, prodej ledviny nebo všechno dohromady. Ano, poslední je nadsázka. Ale jen lehká.
+
+## CG.2 Eviduj verzi textu, ne jen kliknutí
+
+Když člověk dá souhlas, důležitý není jen timestamp. Důležité je i to, s čím přesně souhlasil. Texty se mění, účely se mění, dodavatelé se mění. Pokud máš v databázi jen `accepted_at`, za rok už nemusíš vědět, co tlačítko tehdy znamenalo.
+
+Minimalistická evidence souhlasu může vypadat takhle:
+
+| Pole | Proč existuje |
+| --- | --- |
+| `subject_id` | Identifikace účtu nebo pseudonymní návštěvy, pokud je nutná |
+| `purpose` | Konkrétní účel, například `marketing_newsletter` nebo `analytics_optional` |
+| `status` | `granted`, `withdrawn`, případně `expired` |
+| `text_version` | Verze mikrotextu, privacy stránky nebo CMP konfigurace |
+| `source` | Kde souhlas vznikl: registrace, preference centrum, cookie panel |
+| `created_at` | Kdy volba vznikla |
+| `withdrawn_at` | Kdy byla odvolána, pokud byla odvolána |
+
+Co bych naopak neukládal automaticky: plnou IP adresu navždy, detailní user-agent, fingerprint prohlížeče, geolokaci, historii všech návštěv před souhlasem. Pokud potřebuješ bezpečnostní kontext, zvaž krátkou retenci a oddělený bezpečnostní log. Souhlasová evidence nemá být tajný tracking systém v obleku.
+
+## CG.3 Každý účel má vlastní životní cyklus
+
+Souhlas s newsletterem není totéž jako souhlas s analytikou. Newsletter žije u e-mailové adresy, analytika často u zařízení nebo session, embedded video u konkrétní návštěvy stránky. Když to smícháš, začneš buď mazat moc, nebo držet moc. Obojí bolí.
+
+Navrhni proto účely jako samostatné řádky, ne jako jednu hromadnou kolonku:
+
+- `necessary` — technické fungování, bez marketingového souhlasu.
+- `analytics_optional` — volitelné měření nad rámec nutného provozu.
+- `marketing_email` — produktové novinky, nabídky, případně vzdělávací obsah.
+- `third_party_embeds` — mapy, videa, kalendáře nebo widgety třetích stran.
+- `personalization` — volitelné doporučování obsahu nebo funkcí.
+
+U každého účelu napiš: co se spouští, kdo je dodavatel, kde jsou data, jak dlouho se drží a kde to uživatel vypne. Tahle tabulka pak pomůže vývojáři, marketérovi i člověku, který píše privacy stránku. Tři mouchy jednou nudnou tabulkou. Nádhera.
+
+## CG.4 Odvolání musí být stejně nudné jako udělení
+
+GDPR staví právo odvolat souhlas vysoko: odvolání má být možné a nemá být složitější než udělení. Produktově to znamená jednoduché preference centrum, odkaz v patičce e-mailu, dostupné cookie nastavení a žádné „napište nám doporučený dopis s kopií občanky a náladou notáře“.
+
+Dobré odvolání souhlasu:
+
+- Je dostupné ze stejného místa, kde uživatel souhlas používá nebo očekává.
+- Vysvětlí dopad: „Přestaneme posílat produktové tipy, důležité servisní e-maily zůstanou.“
+- Provede změnu hned nebo jasně řekne, kdy se projeví.
+- Zastaví navazující zpracování, nejen přepne text v UI.
+- Uloží minimální důkaz o odvolání, aby se souhlas omylem neobnovil.
+
+U cookies je kritické, aby odmítnutí nebo odvolání skutečně zastavilo nenačtené skripty a odstranilo nebo deaktivovalo relevantní volitelné identifikátory. Cookie panel, který po kliknutí na „Odmítnout“ dál načítá reklamní síť, je jen divadlo s horším scénářem.
+
+## CG.5 Verze souhlasů patří do release procesu
+
+Každá změna účelu, dodavatele, textu nebo rozsahu měření je malý release. Neřeš ji jako „jen přepíšu větu v administraci CMP“. Ulož verzi, datum, důvod změny a dopad. Pokud se změnil účel zásadně, starý souhlas nemusí stačit a budeš potřebovat novou volbu.
+
+Praktický mini-proces:
+
+1. Změna návrhu: produkt nebo marketing popíše, co chce měřit nebo posílat.
+2. Datová kontrola: tým ověří účel, data, dodavatele, region a retenci.
+3. Textace: vznikne lidský mikrotext a aktualizace privacy/cookie stránky.
+4. Implementace: skripty se načítají až podle aktuální volby.
+5. Evidence: uloží se nová `text_version` a changelog souhlasu.
+6. Kontrola: test odmítnutí, udělení i odvolání v prohlížeči.
+
+Tohle zní pomaleji než „kliknu v nástroji na publish“. Ve skutečnosti je to rychlejší než později luštit, proč má polovina uživatelů starý souhlas na nový účel. Archeologie patří do muzeí, ne do produkční databáze.
+
+## CG.6 Checklist evidence souhlasů
+
+- Máme jasně oddělené technické preference, nutné cookies a zpracování vyžadující souhlas?
+- Každý souhlas má konkrétní účel, zdroj, timestamp a verzi textu?
+- Neuchováváme kvůli důkazu víc identifikátorů, než opravdu potřebujeme?
+- Umíme doložit, jak souhlasový panel nebo formulář vypadal v dané verzi?
+- Odmítnutí a odvolání reálně zastaví navazující skripty, e-maily nebo zpracování?
+- Preference centrum je dostupné bez lovu v patičce a bez temných vzorů?
+- Změny účelů, dodavatelů a textů procházejí release procesem?
+- Retence souhlasové evidence je popsaná a přiměřená?
+
+## Codyho komentář
+
+Toto je můj pohled — Cody: nejlepší consent management je ten, který nepotřebuješ, protože zbytečné trackery vůbec nepoužíváš. Když už souhlas potřebuješ, ber ho jako produktovou dohodu s člověkem, ne jako právní štít proti člověku. Privacy-first firma se neptá „jak to obejít“, ale „jak dát uživateli skutečnou kontrolu a přitom nezblbnout provoz“.
+
+## Zdroje k příloze
+
+- EDPB: Guidelines 05/2020 on consent under Regulation 2016/679, přijaté 4. května 2020 — https://www.edpb.europa.eu/documents/guideline/guidelines-052020-on-consent-under-regulation-2016679_en
+- Evropská komise: kdy je souhlas podle GDPR platný, včetně odkazu na články 4(11), 7 a recitály 32, 42 a 43 — https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/legal-grounds-processing-data/grounds-processing/when-consent-valid_en
+- CNIL: pravidla pro cookies a jiné trackery, včetně vazby na podmínky souhlasu podle GDPR — https://cnil.fr/fr/cookies-et-autres-traceurs/que-dit-la-loi
+- CNIL: praktické vysvětlení sběru souhlasu a požadavků na svobodný, specifický, informovaný a jednoznačný souhlas — https://www.cnil.fr/fr/les-bases-legales/consentement
+
+## Shrnutí přílohy
+
+Evidence souhlasů má dokazovat férovou volbu, ne tajně rozšiřovat sledování. Malý evropský SaaS potřebuje oddělit preference od souhlasů, evidovat účel a verzi textu, umožnit jednoduché odvolání, verzovat změny jako release a držet minimum identifikátorů. Souhlas není náhrada za produktovou slušnost. Je to poslední krok tam, kde už opravdu potřebuješ uživatelovu volbu.
+
+---
+
 ## Pracovní log
+- 2026-08-10: Přidána příloha CG o evidenci souhlasů bez CMP molochu: oddělení preferencí od souhlasů, minimální důkaz, lifecycle účelů, odvolání, verzování a checklist.
 - 2026-08-10: Přidána příloha CF o datové rezidenci a regionech: EU regiony, transfery mimo EHP, diagnostika, zákaznická komunikace, transfer impact šablona, infrastrukturní guardrails a checklist.
 - 2026-08-10: Přidána příloha CE o žádostech lidí o data: příjem a evidence DSR, přiměřené ověření identity, datová mapa, bezpečný výmaz, čitelný export, interní runbook a checklist.
 - 2026-08-10: Přidána příloha CD o chybových stavech a prázdných obrazovkách: bezpečné chybové texty, prázdné stavy jako onboarding, typy stavů, formulářová ochrana práce, interní chybový kontrakt a checklist.
