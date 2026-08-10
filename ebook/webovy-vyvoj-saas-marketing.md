@@ -13463,7 +13463,146 @@ Můj pohled: feature flags jsou výborný sluha a příšerný náhradní produk
 
 Feature flags pomáhají oddělit deploy od spuštění, řídit betu a rychle vypnout rizikovou funkci. Aby z nich nevznikl chaos, potřebují klasifikaci, vlastníka, datum úklidu, bezpečný default, audit změn a minimální datový kontext. Privacy-first rollout neprofiluje uživatele z pohodlnosti, nepoužívá flag jako náhradu autorizace a měří dopad podle rizika i rozsahu dat. Dobře spravovaný flag je dočasný nástroj řízení změny. Špatně spravovaný flag je produkční duch, který jednou zaklepe na incident kanál.
 
+# Příloha CK: Interní admin nástroje bez superpanelu zkázy a zákaznického voyeurismu
+
+Každý SaaS dřív nebo později potřebuje interní administraci. Support potřebuje najít účet, finance ověřit fakturu, produkt zkontrolovat konfiguraci a provozní tým občas zachránit zaseknutý import. Problém začíná ve chvíli, kdy interní nástroj vyroste jako tajná druhá aplikace: rychle, bez UX, bez testů, bez pořádného oprávnění a s tlačítky, která umí smazat půlku světa.
+
+Admin rozhraní není méně důležité jen proto, že ho nevidí zákazník. Naopak. Často má vyšší oprávnění, širší přístup k datům a menší pozornost při vývoji. OWASP ve svých materiálech opakovaně zdůrazňuje least privilege, deny-by-default, kontrolu oprávnění na každém požadavku a zvláštní ochranu administrativních rozhraní. To není bezpečnostní poezie. To je návod, jak si nevyrobit nejdražší shortcut ve firmě.
+
+## CK.1 Admin není jeden člověk v kapuci, ale sada konkrétních úloh
+
+Nezačínej rolí `admin`. Začni větou: „Kdo potřebuje udělat jakou práci a proč?“ Interní administrace má být rozdělená podle úloh, ne podle toho, kdo zrovna nejhlasitěji napsal do chatu, že „potřebuje všechno“.
+
+Praktické role:
+
+| Role | Typická práce | Co nepotřebuje |
+| --- | --- | --- |
+| Support read-only | najít zákazníka, zobrazit stav účtu, ověřit poslední chybu | měnit billing, exportovat všechna data, mazat účet |
+| Support operator | spustit bezpečnou opravu typu resend pozvánky nebo reset zaseknutého jobu | číst obsah citlivých dokumentů, měnit právní nastavení |
+| Finance | faktury, platby, tarif, DIČ, dobropisy | produktová data, zprávy uživatelů, interní poznámky supportu mimo billing |
+| Produkt/CSM | licence, limity, konfigurace workspace, beta přístup | tajemství, systémové klíče, plošné exporty |
+| Security/admin | role, auditní stopa, incidentní zásahy | každodenní support akce bez důvodu |
+
+Dobré pravidlo: když neumíš roli popsat bez slova „všechno“, ještě není navržená. „Všechno“ není role. Je to budoucí postmortem v embryu.
+
+## CK.2 Čtení zákaznických dat musí být výjimka, ne výchozí obrazovka
+
+Nejhorší admin panel je ten, kde po otevření profilu zákazníka vidíš kompletní osobní údaje, obsah práce, historii zpráv, faktury, technické logy a interní poznámky na jedné stránce. Je to pohodlné asi stejně jako nechat klíče od skladu pod rohožkou: rychlé, dokud se něco nestane.
+
+Privacy-first admin dělá tři věci:
+
+- defaultně zobrazuje stav, metadata a bezpečné souhrny místo obsahu,
+- citlivá data odkrývá až po jasném důvodu a jen lidem s oprávněním,
+- ukládá auditní záznam, kdo co otevřel, kdy a proč.
+
+Příklad: support většinou nepotřebuje vidět celý text dokumentu zákazníka. Potřebuje vědět, že import selhal na řádku 42 kvůli nevalidnímu datu, že workspace má tarif `Team`, že poslední synchronizace doběhla před 11 minutami a že zákazník má povolenou integraci s účetním systémem. Obsah dokumentu je až další krok, ideálně se step-up potvrzením a důvodem.
+
+Mikrotext u citlivého odemčení:
+
+> „Otevíráš zákaznický obsah. Uveď důvod, který bude uložen do auditní historie. Použij jen pokud je to nutné pro řešení konkrétního požadavku.“
+
+Tohle není byrokracie. Je to brzda proti zvědavosti, omylům a pozdějšímu „já myslel, že to bylo normálně dostupné“.
+
+## CK.3 Nebezpečné akce navrhuj jako procedury, ne jako tlačítka na steroidech
+
+Interní nástroj často obsahuje akce, které běžný produkt nikdy nedovolí: změna vlastníka workspace, ruční úprava tarifu, refundace, reaktivace účtu, smazání dat, přenos domény, reset integrace, spuštění migrace. Každá taková akce potřebuje bezpečnostní obal.
+
+Pro rizikové akce nastav:
+
+- jasný popis dopadu před potvrzením,
+- náhled konkrétních objektů, kterých se akce dotkne,
+- kontrolu oprávnění na serveru, ne jen skryté tlačítko v UI,
+- idempotentní provedení nebo možnost bezpečného opakování,
+- auditní záznam s důvodem a výsledkem,
+- u velmi rizikových akcí pravidlo čtyř očí nebo časové zpoždění.
+
+Příklad špatného potvrzení:
+
+> „Opravdu chcete pokračovat?“
+
+Příklad lepšího potvrzení:
+
+> „Změníš vlastníka workspace `Acme EU` z `jana@example.eu` na `petr@example.eu`. Nový vlastník získá fakturační a administrátorská práva. Akce bude uložena do auditního logu a nelze ji vrátit jedním kliknutím.“
+
+Rozdíl je jednoduchý: první dialog chrání hlavně svědomí vývojáře. Druhý chrání zákazníka.
+
+## CK.4 Admin vyhledávání nesmí být interní šmírovací Google
+
+Vyhledávání v adminu je lákavé: jeden box, do kterého napíšeš e-mail, firmu, ID, doménu, fakturu, token, poznámku, možná i kus obsahu. Jenže každý takový index rozšiřuje datový radius. Pokud interní search prohledává všechno, máš další místo, které musí správně řešit oprávnění, retenci, audit, masking i incidenty.
+
+Rozumný admin search:
+
+- indexuje jen identifikátory a bezpečná metadata,
+- neindexuje obsah zákaznické práce, pokud to není nezbytné,
+- odděluje vyhledávání podle rolí,
+- maskuje výsledky, které uživatel smí jen částečně vidět,
+- loguje citlivé dotazy přiměřeně, ale neukládá tajemství v plném znění,
+- má rate limit a detekci hromadného vytěžování.
+
+Praktický kompromis: dovol hledat podle e-mailu, domény, workspace ID, invoice ID a externího customer ID. Nedovol fulltext přes dokumenty zákazníka jen proto, že se to „může hodit supportu“. Pokud je obsahové hledání opravdu nutné, udělej z něj oddělenou funkci s vyšším oprávněním, důvodem použití a kratší retencí logů.
+
+## CK.5 Interní nástroj patří do release procesu stejně jako produkt
+
+Admin panel bývá místo, kde se „jen rychle přidá tlačítko“. Rychle přidané tlačítko pak pět let obchází standardní produktovou logiku, protože ho používají tři lidé a jeden z nich je zakladatel. Takhle vzniká technický dluh s přístupem k osobním údajům. Gratuluju, vyhráli jste tombolu rizika.
+
+Interní nástroj má mít stejné minimum jako zákaznický produkt:
+
+- code review u změn oprávnění a destruktivních akcí,
+- testy autorizace pro různé role,
+- changelog pro support a provoz,
+- staging scénáře s anonymními nebo syntetickými daty,
+- monitoring chyb a auditních událostí,
+- pravidelný úklid nepoužívaných akcí.
+
+Při každé nové admin funkci si polož otázku: „Kdyby se tahle funkce objevila ve veřejném produktu, prošla by review?“ Pokud ne, nemá co dělat ani v interním nástroji. Interní neznamená neviditelné pro riziko.
+
+## CK.6 Emergency přístup musí být rozbitné sklo, ne trvale otevřené okno
+
+Někdy opravdu potřebuješ nouzový přístup: incident, zablokovaný vlastník, selhaná migrace, právní požadavek, bezpečnostní analýza. Problém není existence emergency režimu. Problém je, když emergency režim běží každý den, protože role nebyly dobře navržené.
+
+Nastav „break-glass“ pravidla:
+
+- přístup je časově omezený,
+- vyžaduje silnější ověření nebo druhé schválení,
+- vyžaduje důvod a ticket/incident ID,
+- posílá upozornění odpovědné osobě,
+- loguje všechny provedené akce detailněji než běžný režim,
+- po použití se kontroluje v post-incident nebo weekly review.
+
+Malý tým nepotřebuje korporátní ceremonii. Stačí jednoduchý proces: kdo aktivoval, proč, na jak dlouho, co udělal, kdo to zkontroloval. Když to neumíš zpětně přečíst, nebyl to emergency přístup. Byla to improvizace s hezkým názvem.
+
+## CK.7 Checklist interních admin nástrojů
+
+- Má každá interní role popsaný účel a konkrétní povolené akce?
+- Je default `deny`, ne „když už je člověk přihlášený, nějak to dopadne“?
+- Kontroluje backend oprávnění při každém požadavku?
+- Jsou citlivá zákaznická data defaultně skrytá nebo shrnutá?
+- Vyžaduje odemčení citlivých dat důvod a auditní stopu?
+- Mají destruktivní a právně citlivé akce detailní potvrzení dopadu?
+- Existuje pravidlo čtyř očí pro nejrizikovější zásahy?
+- Umí admin search hledat bez indexace zbytečného obsahu?
+- Jsou interní změny součástí release procesu, review a testů?
+- Existuje časově omezený break-glass režim s následnou kontrolou?
+- Kontrolují se interní role a nepoužívané admin funkce aspoň jednou měsíčně?
+- Ví support, kdy smí použít admin nástroj a kdy musí požádat zákazníka o akci v produktu?
+
+## Codyho komentář
+
+Můj pohled: interní admin je lakmusový papírek kultury firmy. Když je navržený pečlivě, tým řeší problémy rychle a zákazník nemusí doufat, že se k jeho datům nikdo „jen nekoukne“. Když je to tajný superpanel, firma si plete důvěru s pohodlím. Privacy-first admin není pomalý. Jen odmítá předstírat, že interní uživatel automaticky znamená bezpečný uživatel.
+
+## Zdroje k příloze
+
+- OWASP Cheat Sheet Series: Authorization Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html
+- OWASP Application Security Verification Standard: Access Control — https://github.com/OWASP/ASVS/blob/master/4.0/en/0x12-V4-Access-Control.md
+- OWASP Web Security Testing Guide: Enumerate Infrastructure and Application Admin Interfaces — https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/02-Configuration_and_Deployment_Management_Testing/05-Enumerate_Infrastructure_and_Application_Admin_Interfaces
+- European Data Protection Board: Guidelines 4/2019 on Article 25 Data Protection by Design and by Default — https://www.edpb.europa.eu/documents/guideline/guidelines-42019-on-article-25-data-protection-by-design-and-by-default_en
+
+## Shrnutí přílohy
+
+Interní admin nástroje jsou produkt s vyšším rizikem, ne vedlejší skript s hezčí tabulkou. Potřebují role podle práce, deny-by-default autorizaci, minimální zobrazení zákaznických dat, bezpečné potvrzení rizikových akcí, omezené vyhledávání, release proces a emergency přístup s jasnou stopou. Nejlepší admin panel pomáhá týmu řešit problémy rychle, ale zároveň aktivně brání zvědavosti, omylům a pohodlnému obcházení produktu. Superpanel zkázy je možná rychlý. Důvěryhodný SaaS je rychlý až potom, co je bezpečný.
+
 ## Pracovní log
+- 2026-08-10: Přidána příloha CK o interních admin nástrojích: role podle práce, minimální zobrazení zákaznických dat, bezpečné rizikové akce, admin search, release proces, break-glass přístup a checklist.
 - 2026-08-10: Přidána příloha CJ o feature flags a postupech rolloutů: typy přepínačů, vlastnictví, rizikový rollout, datové minimum, autorizace, audit změn a checklist.
 - 2026-08-10: Přidána příloha CI o privacy-first vyhledávání: rozsah indexu, citlivost dotazů, bezpečné výsledky, veřejný web, multi-tenant SaaS, search UX a checklist.
 - 2026-08-10: Přidána příloha CH o produktových notifikacích bez spamového kladiva: rozhodování o potřebě zprávy, kanály, preference centrum, datové minimum, frekvence, stavový model a checklist.
