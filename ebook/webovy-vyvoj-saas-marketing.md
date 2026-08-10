@@ -13303,7 +13303,168 @@ Můj pohled: dobré vyhledávání je jako dobrý recepční. Pomůže najít sp
 
 Vyhledávání je produktová funkce, bezpečnostní hranice i zdroj provozních signálů. Privacy-first přístup začíná rozhodnutím, co se vůbec smí indexovat, pokračuje omezeným ukládáním dotazů, bezpečným filtrováním podle oprávnění, vlastním nebo pečlivě vybraným search řešením a končí používáním agregovaných signálů ke zlepšení navigace. Nejlepší search není ten, který najde úplně všechno. Nejlepší search najde správnou věc správnému člověku a zbytek taktně nechá za zamčenými dveřmi.
 
+# Příloha CJ: Feature flags a postupné rollouty bez chaosu, skrytého profilování a věčných přepínačů
+
+Feature flag je malý přepínač s velkou mocí. Umí pustit novou funkci jen internímu týmu, zapnout ji beta zákazníkům, rychle vypnout rozbitou změnu nebo postupně zvyšovat rollout bez nočního deploye. To je skvělé. A přesně proto se z feature flags snadno stane druhý produkční systém, jen bez názvů, vlastníků, dokumentace a uklízení. Takový malý technický kompostér, akorát bez užitečného hnojiva.
+
+Privacy-first přístup neříká „nepoužívej feature flags“. Říká: přepínače mají mít účel, vlastníka, auditní stopu, krátký život a co nejméně dat o uživateli. Rollout je provozní proces, ne losování tomboly.
+
+## CJ.1 Rozliš typy přepínačů dřív, než se ti slijí do jedné bažiny
+
+Ne každý flag je stejný. Když je házíš do jedné tabulky, začneš je spravovat stejným způsobem — a to je problém. Nouzový kill switch potřebuje jiné řízení než beta flag pro tři zákazníky. Experimentální varianta textu má jiné privacy riziko než serverová konfigurace limitu.
+
+Použij jednoduchou klasifikaci:
+
+| Typ flagu | Účel | Typická životnost | Příklad | Riziko |
+| --- | --- | --- | --- | --- |
+| Release flag | Oddělit deploy od spuštění funkce | Dny až týdny | Nový onboarding je v produkci, ale vypnutý | Zapomenutý mrtvý kód |
+| Permission flag | Zapnout funkci konkrétním plánům nebo rolím | Dlouhodobě, ale dokumentovaně | Export dat jen pro tarif Pro | Obcházení autorizace |
+| Operational flag | Rychle změnit provozní chování | Dlouhodobě s review | Vypnout náročný import při incidentu | Neviditelná produkční konfigurace |
+| Experiment flag | Porovnat varianty produktu nebo komunikace | Krátce | Jiný text CTA pro malý vzorek | Profilování a nejasný souhlas |
+| Kill switch | Bezpečně vypnout rizikovou část | Trvale připravený, pravidelně testovaný | Vypnout webhooky při zneužití | Falešný pocit bezpečí |
+
+Praktické pravidlo: každý flag musí mít pole `type`. Pokud neumíš typ určit, flag nejspíš není dost promyšlený. A pokud má typ „temporary“ už třetí kvartál, gratuluju, adoptoval sis konfiguračního ježka v kódu.
+
+## CJ.2 Každý flag musí mít vlastníka a datum úklidu
+
+Největší problém feature flags není jejich vytvoření. Jejich největší problém je, že nikdo neví, kdy je smazat. Flag bez vlastníka se časem stane posvátným artefaktem: všichni se ho bojí vypnout, protože „možná něco drží“. To je technický dluh s cedulkou „nešahat“.
+
+Minimální metadata flagu:
+
+- název ve formátu `oblast_ucel_varianta`, například `billing_new_invoice_pdf`,
+- typ flagu,
+- vlastník v týmu,
+- důvod existence jednou větou,
+- bezpečný default při chybě,
+- datum revize nebo plánovaného odstranění,
+- prostředí, kde smí existovat,
+- odkaz na ticket, rozhodovací záznam nebo release poznámku.
+
+Příklad dobrého popisu:
+
+> `onboarding_checklist_v2` — release flag pro nový checklist v onboardingu. Vlastník: product. Default: vypnuto. Pilot: interní tým + 5 beta zákazníků. Revize: 2026-09-15. Po stabilizaci smazat starý onboardingový tok.
+
+Tohle není byrokracie. To je ochrana před situací, kdy nováčci v týmu najdou v kódu šest přepínačů s názvem `newFlow`, `newFlow2`, `newFlowFinal`, `newFlowFinalReally` a jeden tajemný `dontTouchThis`.
+
+## CJ.3 Rollout navrhuj podle rizika, ne podle procenta v nástroji
+
+Postupné spuštění není jen „1 %, 10 %, 50 %, 100 %“. Procenta vypadají profesionálně, ale sama o sobě neříkají skoro nic. Jedno procento uživatelů může být jeden enterprise zákazník s kritickým use casem. Deset procent může být všichni lidé z jedné země, protože hash náhodou není tak náhodný, jak si tým myslí.
+
+Lepší rollout sekvence:
+
+1. **Interní smoke test:** funkce běží jen týmu a testovacím účtům.
+2. **Dogfooding:** používá ji Dreamind nebo interní provozní účet na reálné, ale ne zákaznické kritické práci.
+3. **Dobrovolná beta:** zákazník ví, že používá novou funkci, a má jasnou cestu zpět.
+4. **Rizikově omezený rollout:** vybíráš podle produktu, tarifu, objemu dat nebo typu workflow, ne jen podle náhody.
+5. **Plné spuštění:** starý kód má plán odstranění, dokumentace a support tým ví, co se změnilo.
+
+U privacy-first SaaS je dobré mít vedle rollout procenta i „datový radius“. To znamená: kolika tenantů se změna dotkne, jaké typy dat projdou novou cestou, jestli se mění subdodavatel, logování, export, notifikace nebo oprávnění. Změna UI barvy nepotřebuje stejný proces jako nový AI sumarizátor zákaznických ticketů. Překvapivé, já vím.
+
+## CJ.4 Nepoužívej osobní data jako pohodlný segmentovací lepidlo
+
+Feature flag nástroje svádí k tomu, aby se do nich posílal celý uživatelský kontext: e-mail, firma, role, země, tarif, velikost účtu, obrat, jazyk, poslední aktivita, oblíbená barva ponožek. Technicky pohodlné. Privacy-first podezřelé.
+
+Segmentace má být minimální:
+
+- preferuj anonymní nebo interní stabilní identifikátor místo e-mailu,
+- neposílej do flag systému jméno, telefon, obsah práce ani zákaznická data,
+- odděl produktové oprávnění od marketingového profilu,
+- používej skupiny jako `beta_import_v2`, ne seznam osobních detailů,
+- u externího nástroje ověř region zpracování, DPA, subdodavatele, logy a retenci,
+- pro citlivé funkce vyhodnocuj flag server-side, ne v prohlížeči s kompletní konfigurací.
+
+Špatně:
+
+```text
+user.email = jana@zakaznik.cz
+companyName = VelmiTajnáFirma s.r.o.
+plan = enterprise
+feature = ai_ticket_summary
+```
+
+Lépe:
+
+```text
+subjectKey = tenant_8f31
+cohort = beta_ai_summary_2026_08
+planCapability = ai_summary_allowed
+feature = ai_ticket_summary
+```
+
+Codyho komentář: když flag systém potřebuje znát víc o zákazníkovi než support člověk, něco se utrhlo ze řetězu.
+
+## CJ.5 Flagy nesmí nahrazovat autorizaci
+
+Tohle je důležité: feature flag není bezpečnostní kontrola sama o sobě. Když v UI skryješ tlačítko „Exportovat vše“, ale API endpoint pořád dovolí export bez serverové autorizace, nemáš řízení přístupu. Máš divadelní oponu před otevřeným trezorem.
+
+Pravidla:
+
+- klientský flag smí měnit rozhraní, ne garantovat oprávnění,
+- server musí vždy ověřit roli, tenant, tarif a stav účtu,
+- permission flag musí být součástí autorizace na backendu,
+- default při nedostupnosti flag systému musí být bezpečný,
+- změna flagu pro citlivou funkci musí být auditovaná,
+- test musí pokrýt i scénář „UI tlačítko neexistuje, ale API požadavek přijde“.
+
+Příklad: funkce „hromadný export osobních dat“ je dostupná jen adminům. Frontend může tlačítko ukázat podle flagu `bulk_export_enabled`. Backend ale musí ověřit, že uživatel je admin správného tenanta, že tarif export dovoluje, že nebyl překročen limit a že export zapadá do retenčních pravidel. Flag je brána pro rollout. Autorizace je zámek.
+
+## CJ.6 Loguj změny flagů, ale ne citlivý kontext
+
+U flagů chceš vědět, kdo co změnil a kdy. Bez auditní stopy je incidentové vyšetřování horor: „Včera to fungovalo, dnes ne, někdo asi něco přepnul.“ To je méně proces a více spiritistická seance.
+
+Auditní záznam změny flagu má obsahovat:
+
+- název flagu,
+- původní a novou hodnotu,
+- prostředí,
+- autora změny,
+- čas změny,
+- důvod nebo odkaz na ticket,
+- rozsah dopadu v technických kategoriích, například `internal`, `beta`, `all_tenants`,
+- informaci, jestli šlo o nouzový zásah.
+
+Nemá obsahovat:
+
+- seznam e-mailů v segmentu,
+- obsah zákaznických dat,
+- session tokeny,
+- celé request payloady,
+- komentáře typu „zapínám to Pepovi, protože si stěžoval v telefonu“.
+
+OWASP u logování dlouhodobě doporučuje myslet na citlivost logovaných údajů a sanitizaci vstupů; dobrý flag audit proto není výjimka, ale další citlivý provozní log. Odkaz: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+
+## CJ.7 Checklist feature flags a rolloutů
+
+- Má každý flag typ, vlastníka, důvod a datum revize?
+- Je u dočasných flagů naplánované odstranění kódu i konfigurace?
+- Má flag bezpečný default při výpadku konfigurační služby?
+- Je rollout plánovaný podle rizika a datového radiusu, ne jen podle procent?
+- Neposíláme do flag systému e-maily, jména, obsah práce nebo zbytečný zákaznický kontext?
+- Vyhodnocují se citlivé flagy server-side?
+- Nenahrazuje žádný UI flag backendovou autorizaci?
+- Má změna citlivého flagu auditní záznam s důvodem?
+- Existuje kill switch pro rizikové integrace, importy, exporty a notifikace?
+- Testovali jsme chování při nedostupnosti flag systému?
+- Ví support, kteří zákazníci jsou v beta režimu a jak je vrátit zpět?
+- Probíhá pravidelný úklid flagů, ideálně jako součást release review?
+
+## Codyho komentář
+
+Můj pohled: feature flags jsou výborný sluha a příšerný náhradní produktový management. Když se používají dobře, zmenšují riziko releasu a chrání zákazníky před velkým třeskem. Když se používají líně, vyrobí paralelní realitu, kde každý zákazník vidí trochu jiný produkt a nikdo netuší proč. Privacy-first rollout není pomalejší. Je jen poctivější: ví, komu co zapíná, proč, na jak dlouho a s jakými daty.
+
+## Zdroje k příloze
+
+- European Data Protection Board: Guidelines 4/2019 on Article 25 Data Protection by Design and by Default — https://www.edpb.europa.eu/documents/guideline/guidelines-42019-on-article-25-data-protection-by-design-and-by-default_en
+- OWASP Cheat Sheet Series: Logging Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+- OWASP Secure Coding Practices Quick Reference Guide: Logging controls and sensitive information in logs — https://owasp.org/www-project-secure-coding-practices-quick-reference-guide/stable-en/02-checklist/05-checklist
+- Pete Hodgson: Feature Toggles — https://martinfowler.com/articles/feature-toggles.html
+
+## Shrnutí přílohy
+
+Feature flags pomáhají oddělit deploy od spuštění, řídit betu a rychle vypnout rizikovou funkci. Aby z nich nevznikl chaos, potřebují klasifikaci, vlastníka, datum úklidu, bezpečný default, audit změn a minimální datový kontext. Privacy-first rollout neprofiluje uživatele z pohodlnosti, nepoužívá flag jako náhradu autorizace a měří dopad podle rizika i rozsahu dat. Dobře spravovaný flag je dočasný nástroj řízení změny. Špatně spravovaný flag je produkční duch, který jednou zaklepe na incident kanál.
+
 ## Pracovní log
+- 2026-08-10: Přidána příloha CJ o feature flags a postupech rolloutů: typy přepínačů, vlastnictví, rizikový rollout, datové minimum, autorizace, audit změn a checklist.
 - 2026-08-10: Přidána příloha CI o privacy-first vyhledávání: rozsah indexu, citlivost dotazů, bezpečné výsledky, veřejný web, multi-tenant SaaS, search UX a checklist.
 - 2026-08-10: Přidána příloha CH o produktových notifikacích bez spamového kladiva: rozhodování o potřebě zprávy, kanály, preference centrum, datové minimum, frekvence, stavový model a checklist.
 - 2026-08-10: Přidána příloha CG o evidenci souhlasů bez CMP molochu: oddělení preferencí od souhlasů, minimální důkaz, lifecycle účelů, odvolání, verzování a checklist.
