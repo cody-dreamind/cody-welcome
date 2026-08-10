@@ -12440,7 +12440,161 @@ Zpracovatelské smlouvy nejsou šanon pro klid duše. Jsou provozní mapa toho, 
 
 ---
 
+
+# Příloha CD: Chybové stavy a prázdné obrazovky bez technického mumlání a ztráty důvěry
+
+Chybová hláška je často první místo, kde se ukáže, jestli produkt myslí na člověka, nebo jen na stack trace. Když se něco nepovede, uživatel nechce vědět, že „request failed with status 500“. Chce vědět, co se stalo, jestli přišel o data, co může udělat teď a jestli se problém řeší.
+
+Prázdná obrazovka je druhá strana stejné mince. Nový účet bez dat, prázdný report, nulový výsledek vyhledávání nebo čekající import nejsou „nic“. Jsou to okamžiky, kdy produkt učí uživatele další krok. Pokud je necháš prázdné, říkáš: „Hodně štěstí, kamaráde.“ To je sice stručné, ale obchodně poněkud sebevražedné.
+
+Privacy-first přístup tady znamená dvě věci: neprozrazovat interní detaily, které by pomohly útočníkovi, a zároveň nezakrývat uživateli praktickou informaci, která mu pomůže pokračovat.
+
+## CD.1 Chyba musí odpovědět na čtyři otázky
+
+Dobrá chybová zpráva nemusí být dlouhá. Musí být užitečná. Většinou stačí odpovědět na čtyři otázky:
+
+- Co se nepovedlo?
+- Je to problém uživatele, systému, nebo dočasného spojení?
+- Co může uživatel bezpečně zkusit?
+- Kde získá pomoc, pokud to nepřejde?
+
+Špatně:
+
+> „Unexpected error.“
+
+Lépe:
+
+> „Fakturu se nepodařilo uložit. Zadaná data zůstala ve formuláři. Zkuste to prosím znovu za chvíli; pokud problém trvá, napište nám s kódem události `INV-8K2`.“
+
+Všimni si detailu: text říká, že data zůstala ve formuláři. To snižuje paniku. Kód události pomůže podpoře najít log, ale neukazuje interní chybu, SQL dotaz, cestu na serveru ani osobní údaje. Uživatel dostane jistotu, tým dostane diagnostiku a útočník nedostane dárek zabalený v JSONu.
+
+## CD.2 Neprozrazuj interní detaily, ale nelži
+
+Bezpečná chybová zpráva není mlčení. „Něco se pokazilo“ je někdy nutné, ale když se opakuje všude, produkt působí jako lednice, která umí jen pípat. Rozlišuj, co můžeš říct uživateli a co patří do interního logu.
+
+Do uživatelského textu patří:
+
+- lidské shrnutí problému,
+- bezpečný další krok,
+- informace o zachování nebo ztrátě rozpracovaných dat,
+- obecný důvod, pokud pomůže: „platba nebyla potvrzena“, „soubor je moc velký“, „odkaz už vypršel“,
+- krátký referenční kód bez osobních údajů.
+
+Do uživatelského textu nepatří:
+
+- stack trace,
+- názvy interních služeb a databázových tabulek,
+- celé ID zákazníka, e-mail nebo token,
+- přesný popis bezpečnostního pravidla, které lze obejít,
+- výmluva na dodavatele, pokud to uživateli nepomůže.
+
+Příklad pro přihlášení:
+
+- Slabé: „E-mail neexistuje.“
+- Bezpečnější: „Přihlášení se nepodařilo. Zkontrolujte e-mail a heslo, případně si nechte poslat odkaz pro obnovení přístupu.“
+
+Příklad pro soubor:
+
+- Slabé: „Upload failed.“
+- Lepší: „Soubor se nepodařilo nahrát. Zkuste PDF nebo obrázek do 10 MB. Pokud obsahuje citlivá data, neposílejte ho e-mailem; napište podpoře a pošleme bezpečný postup.“
+
+Codyho komentář: nejhorší chyba je ta, která je zároveň děsivá pro zákazníka a nudná pro vývojáře. Uživatel panikaří, tým nic nezjistí a všichni společně koukají na spinner jako do akvária.
+
+## CD.3 Prázdný stav je onboarding v převleku
+
+Prázdný stav není dekorace. Je to nejlevnější onboardingová lekce v produktu. Když zákazník poprvé otevře projekty, faktury, kontakty, report nebo automatizace, obrazovka má vysvětlit, co sem patří a jak začít.
+
+Dobrá prázdná obrazovka obsahuje:
+
+- jednu větu k hodnotě: proč tahle část existuje,
+- jeden doporučený další krok,
+- ukázku nebo šablonu, pokud se hodí,
+- odkaz na krátkou nápovědu,
+- uklidnění ohledně dat, pokud uživatel má něco importovat.
+
+Příklad pro prázdné projekty:
+
+> „Tady uvidíte projekty, jejich termíny a odpovědné osoby. Začněte vytvořením prvního projektu, nebo nahrajte CSV podle šablony. Importovaný soubor použijeme jen pro vytvoření projektů a po zpracování ho smažeme podle retenčních pravidel.“
+
+Příklad pro prázdnou analytiku:
+
+> „Zatím nemáme dost návštěv k zobrazení trendu. Můžete zkontrolovat měřicí plán, otevřít živý náhled událostí nebo počkat na první agregovaná data.“
+
+Příklad pro nulový výsledek hledání:
+
+> „Nic jsme nenašli. Zkuste kratší výraz, zkontrolujte filtr období, nebo vytvořte nový kontakt.“
+
+Prázdný stav nemá tlačit pět akcí najednou. Jestli uživatel neví, co udělat, produkt má vybrat nejpravděpodobnější další krok. Ne hodit na něj ovládací panel jaderné elektrárny.
+
+## CD.4 Rozlišuj chybu, varování a informaci
+
+Když všechno svítí červeně, uživatel přestane vnímat prioritu. Produkt by měl mít jednoduchý jazyk pro typy stavů.
+
+| Typ stavu | Kdy použít | Příklad textu |
+| --- | --- | --- |
+| Informace | Něco se děje nebo čeká | „Import běží. Můžete odejít, pošleme výsledek e-mailem.“ |
+| Úspěch | Akce dopadla dobře | „Export je připravený ke stažení. Odkaz platí 24 hodin.“ |
+| Varování | Akce je možná, ale má důsledek | „Změna tarifu se projeví od dalšího období.“ |
+| Chyba uživatele | Uživatel může něco opravit | „E-mail nemá platný formát.“ |
+| Chyba systému | Uživatel to sám nespraví | „Data se nepodařilo načíst. Zkuste stránku obnovit, nebo kontaktujte podporu s kódem události.“ |
+| Bezpečnostní blokace | Akce je odmítnutá kvůli ochraně | „Platnost odkazu vypršela. Nechte si poslat nový odkaz.“ |
+
+U každého typu si v design systému drž stejné vzory: barvu, ikonu, tón, strukturu věty a CTA. Ne proto, aby se designér nenudil, ale aby uživatel nemusel pokaždé luštit, jestli modrý box znamená „v pohodě“, „utíkej“ nebo „marketing měl kreativní úterý“.
+
+## CD.5 Formuláře musí chránit práci uživatele
+
+Formulář je místo, kde chyby bolí nejvíc. Člověk věnoval produktu čas, napsal text, vybral hodnoty, nahrál soubor — a produkt mu za odměnu řekne „zkuste to znovu“. To je přesně ten moment, kdy zákazník začne přemýšlet, jestli by papír a propiska nebyly modernější.
+
+Pravidla pro formulářové chyby:
+
+- Validuj co nejblíž poli, ne až po odeslání celé stránky.
+- Nevymazávej zadaná data po chybě.
+- U složitých formulářů průběžně ukládej koncept, pokud to dává smysl.
+- U nahrávání souborů řekni povolený typ, velikost a bezpečný alternativní postup.
+- U chyb plateb jasně odděl „zkusit znovu“, „změnit kartu“ a „kontaktovat podporu“.
+- U právních souhlasů nikdy neschovávej marketingový souhlas jako technickou podmínku služby.
+
+Privacy-first detail: pokud ukládáš koncepty, napiš, jak dlouho žijí a kde je uživatel smaže. Automatické ukládání je skvělá funkce, dokud do ní někdo nenapíše citlivý údaj a produkt ho drží navždy jako digitální sysel.
+
+## CD.6 Provozní stránka chyb: co musí vidět tým
+
+Uživatel má dostat bezpečný text. Tým ale potřebuje diagnostiku. Proto si u chyb navrhni interní „chybový kontrakt“: co aplikace ukáže, co zaloguje a jak se chyba propojí se supportem.
+
+Minimum pro interní práci:
+
+- referenční kód události zobrazený uživateli,
+- čas a prostředí,
+- typ chyby a postižená funkce,
+- anonymizovaný nebo pseudonymizovaný kontext,
+- informace, jestli byla akce bezpečně dokončena, částečně dokončena, nebo vrácena,
+- odkaz na interní runbook,
+- vlastník dalšího kroku.
+
+Support odpověď pak nemusí začínat trapným „pošlete screenshot celé obrazovky včetně osobních dat“. Stačí požádat o kód události a popis situace. Pokud screenshot potřebuješ, řekni, co má uživatel začernit. Ano, i screenshot je datový export, jen se tváří jako obrázek.
+
+## CD.7 Checklist chybových a prázdných stavů
+
+Pro každý důležitý tok v produktu si projdi následující kontrolu:
+
+- Má každá chyba lidské shrnutí a další krok?
+- Říká text, jestli uživatel přišel o rozpracovaná data?
+- Nezobrazuje chyba interní detaily, tokeny, cesty, tabulky ani osobní údaje?
+- Má uživatel bezpečný referenční kód pro podporu?
+- Rozlišuje design systém informaci, úspěch, varování, chybu a bezpečnostní blokaci?
+- Nevymaže formulář práci uživatele po validační nebo serverové chybě?
+- Mají prázdné obrazovky jeden doporučený další krok?
+- Umí nulový výsledek hledání poradit s filtrem, překlepem nebo vytvořením položky?
+- Jsou importní a exportní chyby napsané tak, aby uživatel věděl, co opravit?
+- Má tým interní runbook pro nejčastější chyby a bezpečný support postup?
+
+## Shrnutí přílohy
+
+Chybové stavy a prázdné obrazovky jsou drobné texty s velkým dopadem na důvěru. Dobrá chyba řekne, co se stalo, co má uživatel udělat, jestli jsou data v bezpečí a jak získat pomoc. Dobrý prázdný stav vysvětlí hodnotu obrazovky a nabídne jeden další krok. Privacy-first produkt neukazuje interní chaos, ale ani neschovává praktickou pomoc za „něco se pokazilo“.
+
+---
+
 ## Pracovní log
+- 2026-08-10: Přidána příloha CD o chybových stavech a prázdných obrazovkách: bezpečné chybové texty, prázdné stavy jako onboarding, typy stavů, formulářová ochrana práce, interní chybový kontrakt a checklist.
 - 2026-08-10: Přidána příloha CC o zpracovatelských smlouvách a subdodavatelích: role správce/zpracovatele, DPA jako provozní návod, živý seznam subdodavatelů, transfery mimo EHP, mini-review nových nástrojů a checklist.
 - 2026-08-10: Přidána příloha CB o offboardingu lidí a dodavatelů: seznam systémů, rizikové pořadí odebrání přístupů, rotace tajemství, převod vlastnictví, zařízení, lokální data a checklist.
 - 2026-08-10: Přidána příloha CA o přístupech a rolích: role matrix, deny-by-default autorizace, oddělení admin účtů, expirace externistů, řízený support access, review přístupů a checklist.
