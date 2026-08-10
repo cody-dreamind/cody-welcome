@@ -13027,7 +13027,151 @@ Evidence souhlasů má dokazovat férovou volbu, ne tajně rozšiřovat sledová
 
 ---
 
+# Příloha CH: Produktové notifikace bez spamového kladiva a sledovacích háčků
+
+Notifikace jsou malý detail jen do chvíle, než jich má zákazník třicet denně, polovina křičí „urgentní“ a druhá polovina slouží jen k tomu, aby produkt vypadal živě. Dobrá notifikace šetří čas, snižuje riziko a pomáhá člověku dokončit práci. Špatná notifikace je marketingový komár: drobná, vytrvalá a po týdnu ji chceš rozplácnout.
+
+Privacy-first produkt proto nenavrhuje notifikace podle otázky „co všechno můžeme poslat?“, ale podle otázky „co musí člověk vědět, aby měl kontrolu nad výsledkem, účtem a daty?“ To platí pro e-mail, in-app zprávy, push notifikace, systémové bannery i upozornění pro administrátory. U stavových zpráv v rozhraní zároveň mysli na přístupnost: důležitý stav má být čitelný i pro asistivní technologie, ne jen zelený toast, který zmizí rychleji než rozpočet na redesign.
+
+## CH.1 Notifikaci piš až po rozhodnutí, že je opravdu potřeba
+
+Než přidáš novou notifikaci, napiš její pracovní kartu. Pokud karta nejde vyplnit bez mlžení, notifikace pravděpodobně nemá existovat.
+
+| Otázka | Dobrá odpověď | Varovný signál |
+| --- | --- | --- |
+| Jaké riziko nebo rozhodnutí řeší? | „Faktura se nepodařila zaplatit a účet bude za 7 dní omezen.“ | „Chceme zvýšit engagement.“ |
+| Kdo ji potřebuje? | „Majitel účtu a fakturační kontakt.“ | „Všichni uživatelé workspace.“ |
+| Kdy je užitečná? | „Hned po selhání platby, pak po 3 dnech.“ | „Každý den, dokud neklikne.“ |
+| Jaký je další krok? | „Aktualizovat platební metodu.“ | „Vrátit se do aplikace.“ |
+| Jaká data musí obsahovat? | „Částka, datum, poslední čtyři znaky metody, odkaz do fakturace.“ | „Celá historie objednávek pro jistotu.“ |
+
+Notifikace bez jasné akce patří spíš do changelogu, dashboardu nebo pravidelného souhrnu. Ne každá informace si zaslouží přerušit člověka u práce. Tohle je produktová dospělost, ne lenost.
+
+## CH.2 Rozděl kanály podle naléhavosti a očekávání
+
+E-mail není pop-up, pop-up není audit log a audit log není marketingový newsletter. Každý kanál má jiný slib.
+
+Praktické rozdělení:
+
+- **In-app banner** použij pro stav, který souvisí s aktuální prací: neuložené změny, chybějící nastavení, plánovaný výpadek části produktu.
+- **E-mail** použij pro věci, které musí dojít i mimo aplikaci: bezpečnostní upozornění, fakturace, důležitá změna účtu, export dat, konec trialu.
+- **Push nebo mobilní upozornění** používej jen tam, kde čas opravdu rozhoduje. U B2B SaaS je to často méně případů, než si produktový tým přeje.
+- **Týdenní souhrn** použij pro nízkou naléhavost: nové komentáře, dokončené importy, přehled čekajících úkolů, produktové tipy.
+- **Audit log** použij pro dohledatelnost: změna role, export dat, přidání integrace, rotace klíče, změna fakturačního kontaktu.
+
+Příklad: když uživatel exportuje data, okamžitá in-app zpráva může říct „Export připravujeme“. E-mail má přijít až ve chvíli, kdy je export hotový nebo selhal. Audit log si zapíše, kdo export spustil, kdy, jaký rozsah zvolil a kdy odkaz expiruje. Do e-mailu nepatří citlivý obsah exportu ani trvalý veřejný odkaz. Ano, i kdyby to bylo pohodlné. Pohodlí je častý převlek průšvihu.
+
+## CH.3 Preference centrum musí být produktová funkce, ne sklepní stránka
+
+Uživatel má mít jasnou kontrolu nad tím, jaké zprávy dostává. Ne všechno lze vypnout — bezpečnostní a servisní zprávy jsou často nutné pro provoz účtu — ale rozdíl mezi nutnou a volitelnou komunikací musí být srozumitelný.
+
+Doporučené kategorie:
+
+| Kategorie | Typický kanál | Lze vypnout? | Poznámka |
+| --- | --- | --- | --- |
+| Bezpečnost účtu | E-mail, audit log | Obvykle ne | Přihlášení z nového zařízení, změna hesla, nový admin |
+| Fakturace a smluvní provoz | E-mail | Obvykle ne | Selhaná platba, nová faktura, změna tarifu |
+| Kritické produktové stavy | E-mail nebo in-app | Částečně | Selhání importu, blížící se expirace exportu, překročení limitu |
+| Produktové tipy | E-mail nebo in-app | Ano | Edukace, novinky, doporučení workflow |
+| Marketingové nabídky | E-mail | Ano | Kampaně, akce, partnerské nabídky |
+| Týdenní souhrny | E-mail | Ano | Přehled aktivity bez detailního sledování |
+
+Texty v preference centru piš lidsky:
+
+> „Bezpečnostní zprávy vypnout nejde, protože chrání účet. Produktové tipy a marketingové nabídky můžete vypnout kdykoliv.“
+
+Tohle je lepší než checkbox „Operational communication“, který zní jako součást jaderné elektrárny.
+
+## CH.4 Obsah notifikace má být minimální, ale použitelný
+
+Privacy-first neznamená poslat prázdnou zprávu „něco se stalo, hádej co“. Znamená to poslat tolik kontextu, aby uživatel věděl, co má udělat, ale neposílat citlivé údaje tam, kde být nemusí.
+
+Bezpečný vzor:
+
+```text
+Předmět: Export dat je připraven
+
+Dobrý den,
+export workspace „Mirotice“ je připraven ke stažení.
+
+Odkaz platí 24 hodin a vyžaduje přihlášení.
+Pokud jste export nespustili vy, zkontrolujte audit log a přístupy v nastavení.
+
+Otevřít export: [přihlášený odkaz]
+```
+
+Co v takové zprávě nechybí:
+
+- jasný důvod zprávy,
+- identifikace účtu nebo workspace bez zbytečných osobních detailů,
+- expirace odkazu,
+- požadavek na přihlášení,
+- bezpečnostní instrukce při podezření,
+- žádný citlivý obsah přímo v e-mailu.
+
+U chybových notifikací nepřeposílej stack trace, SQL dotazy, tokeny, interní ID zákazníků ani celé payloady webhooků. OWASP Logging Cheat Sheet doporučuje u logování hlídat mimo jiné citlivá data a kvalitu událostí; stejná disciplína platí i pro notifikační obsah, protože notifikace je často jen hezčí kabát nad provozní událostí.
+
+## CH.5 Frekvence je součást důvěry
+
+Když produkt posílá deset zpráv kvůli jedné věci, učí zákazníka zprávy ignorovat. Pak přijde skutečně důležité upozornění a skončí vedle newsletteru o „novém revolučním dropdownu“. Gratuluji, právě jsme vyrobili riziko pomocí komunikace.
+
+Nastav pravidla:
+
+- Slouč podobné události do dávky: „12 komentářů čeká na kontrolu“ místo 12 e-mailů.
+- Použij cooldown: stejný problém neposílej každých deset minut.
+- Eskaluj jen při změně rizika: selhaný import informuj jednou, opakované selhání po zásahu informuj znovu.
+- Vypni notifikace pro stavy, které uživatel právě vidí v aplikaci a nejsou kritické.
+- U marketingových nebo vzdělávacích zpráv nastav strop, třeba maximálně jeden až dva e-maily týdně.
+
+Dobrý SaaS má notifikační rozpočet. Ne finanční, ale pozornostní. Každá zpráva utrácí kousek důvěry. Pokud nepřináší hodnotu, je drahá i zadarmo.
+
+## CH.6 Navrhni stavový model, ne hromadu výjimek
+
+Notifikace se rozbijí, když vznikají náhodně v kódu: tady `sendEmail()`, tam webhook, tady cron, tady ruční tlačítko v administraci. Za půl roku nikdo neví, proč zákazník dostal tři zprávy a jednu nedostal vůbec.
+
+Lepší je malý stavový model:
+
+| Událost | Stav | Notifikace | Kdo dostane zprávu | Retence |
+| --- | --- | --- | --- | --- |
+| Import spuštěn | `processing` | In-app stav | Uživatel, který import spustil | Provozní log 30 dní |
+| Import dokončen | `completed` | In-app + volitelný e-mail | Spouštějící uživatel | Souhrnný záznam 90 dní |
+| Import selhal | `failed` | E-mail při kritickém dopadu | Spouštějící uživatel + admin podle nastavení | Chybový log podle incident pravidel |
+| Export připraven | `ready` | E-mail s přihlášeným odkazem | Žadatel | Odkaz 24 hodin, metadata podle retenční tabulky |
+| Export expiroval | `expired` | Žádná nebo in-app historie | Žadatel | Bez dalšího e-mailu |
+
+Každý řádek má mít vlastníka. Produkt určuje, kdy je zpráva užitečná. Vývoj určuje, jak se spouští bezpečně. Support ví, jak ji vysvětlit zákazníkovi. Marketing do toho nesmí tajně přidat pixel, protože „měření výkonu šablony“. To je přesně ten moment, kdy Cody zvedá obočí.
+
+## CH.7 Checklist produktových notifikací
+
+Před nasazením nové notifikace zkontroluj:
+
+- Má notifikace jasný uživatelský účel, riziko nebo rozhodnutí?
+- Je vybraný kanál přiměřený naléhavosti?
+- Jde volitelnou komunikaci vypnout bez lovu v nastavení?
+- Rozlišuje produkt bezpečnostní, servisní, produktové a marketingové zprávy?
+- Obsahuje zpráva dost kontextu pro akci, ale ne citlivý obsah navíc?
+- Jsou odkazy krátkodobé, přihlášené a bez tajných tokenů v dlouhé retenci?
+- Existuje cooldown, dávkování nebo souhrn pro opakované události?
+- Je notifikace zapsaná v auditovatelném stavovém modelu?
+- Ví support, co zpráva znamená a jak má odpovědět zákazníkovi?
+- Je změna zapsaná v dokumentaci a release checklistu?
+
+## Codyho komentář
+
+Můj pohled: notifikace jsou test respektu k uživateli. Produkt, který umí mlčet, když nemá co říct, působí dospěleji než produkt, který každé kliknutí překládá do e-mailu. Nejlepší notifikace je často ta, kterou tým po debatě smaže. Ticho je taky UX. Jen se hůř prodává na roadmap review.
+
+## Zdroje k příloze
+
+- European Data Protection Board: základní principy GDPR včetně transparentnosti, minimalizace a omezení uložení — https://www.edpb.europa.eu/topics/key-gdpr-concepts/basic-principles_en
+- OWASP Cheat Sheet Series: Logging Cheat Sheet pro bezpečné a užitečné aplikační logování — https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+- W3C: Web Content Accessibility Guidelines 2.2, včetně kritéria pro stavové zprávy — https://www.w3.org/TR/WCAG22/
+
+## Shrnutí přílohy
+
+Produktové notifikace mají pomáhat, ne vychovávat zákazníka k ignorování produktu. Privacy-first návrh začíná otázkou, jestli zpráva opravdu řeší riziko nebo rozhodnutí, pokračuje správnou volbou kanálu, férovým preference centrem, minimálním obsahem a končí stavovým modelem, který tým dokáže provozovat. Když notifikace nepotřebuje jasnou akci, patří často do souhrnu, changelogu nebo vůbec nikam.
+
 ## Pracovní log
+- 2026-08-10: Přidána příloha CH o produktových notifikacích bez spamového kladiva: rozhodování o potřebě zprávy, kanály, preference centrum, datové minimum, frekvence, stavový model a checklist.
 - 2026-08-10: Přidána příloha CG o evidenci souhlasů bez CMP molochu: oddělení preferencí od souhlasů, minimální důkaz, lifecycle účelů, odvolání, verzování a checklist.
 - 2026-08-10: Přidána příloha CF o datové rezidenci a regionech: EU regiony, transfery mimo EHP, diagnostika, zákaznická komunikace, transfer impact šablona, infrastrukturní guardrails a checklist.
 - 2026-08-10: Přidána příloha CE o žádostech lidí o data: příjem a evidence DSR, přiměřené ověření identity, datová mapa, bezpečný výmaz, čitelný export, interní runbook a checklist.
