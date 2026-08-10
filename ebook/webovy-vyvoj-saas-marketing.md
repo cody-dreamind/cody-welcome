@@ -11260,7 +11260,162 @@ Vendor lock-in není vždy zlo. Někdy je specializovaný nástroj prostě nejle
 Exit plán chrání firmu před tím, aby se z nástroje stal rukojmí systém. Při výběru dodavatele řeš export, formáty, konfiguraci, provozní znalost, smluvní pravidla, test migrace a minimální fallback. Privacy-first provoz znamená, že data zůstávají pod kontrolou i ve chvíli, kdy se rozhodneš odejít.
 
 
+
+# Příloha BV: Preference centrum bez marketingového labyrintu a falešného souhlasu
+
+Preference centrum je místo, kde se ukáže, jestli firma bere souhlas vážně, nebo ho používá jako dekoraci. Špatná verze vypadá jako past: tlačítko „odhlásit“ je schované, změna preferencí vyžaduje login, formulář se ptá na důvod odchodu a po odhlášení člověk stejně dostane další tři kampaně, protože „synchronizace trvá až 10 pracovních dnů“. To není vztah se zákazníkem. To je marketingový escape room.
+
+Dobré preference centrum má opačnou filozofii: člověk rychle pochopí, co dostává, proč to dostává, jak často to dostává a jak to vypne. Evropský privacy-first provoz tím neztrácí marketingovou sílu. Získává důvěru, čistší data a menší riziko, že si firma plete publikum s rukojmími.
+
+## BV.1 Preference nejsou jen newsletter checkbox
+
+Začni inventářem komunikačních typů. Ne podle interních týmů, ale podle toho, jak je vnímá příjemce.
+
+Typické vrstvy:
+
+- **Transakční zprávy:** potvrzení objednávky, reset hesla, faktura, bezpečnostní upozornění.
+- **Produktové zprávy:** onboarding, důležitá změna funkce, oznámení výpadku, změna podmínek.
+- **Vzdělávací obsah:** návody, webináře, případové studie, e-booky.
+- **Marketingové kampaně:** nabídky, akce, cross-sell, partnerský obsah.
+- **Výzkum a feedback:** rozhovory, dotazníky, beta pozvánky.
+
+Preference centrum nemá všechny tyto vrstvy slepit do jedné věty „Souhlasím se zasíláním novinek“. Když člověk chce bezpečnostní upozornění, neznamená to, že chce slevový ohňostroj. A když nechce kampaně, neznamená to, že mu nesmí přijít faktura. To by bylo trochu nepraktické, skoro jako poslat účet holubem.
+
+Praktický model:
+
+| Typ zprávy | Vypnutí uživatelem | Doporučený text |
+|---|---:|---|
+| Bezpečnostní a účtové zprávy | ne vždy | „Nutné zprávy k provozu účtu a bezpečnosti.“ |
+| Produktové změny | částečně | „Důležité změny produktu a provozu.“ |
+| Vzdělávací obsah | ano | „Praktické návody a materiály.“ |
+| Marketingové nabídky | ano | „Nabídky a obchodní novinky.“ |
+| Výzkum a beta testy | ano | „Pozvánky k rozhovorům a testování.“ |
+
+## BV.2 Souhlasový deník má být auditní stopa, ne datová skládka
+
+Pokud zpracování stojí na souhlasu, musí být možné doložit, kdy a s čím člověk souhlasil. Evropská komise shrnuje právní základy zpracování a připomíná, že souhlas má být odvolatelný stejně snadno, jako byl udělen: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/legal-grounds-processing-data_en
+
+Do souhlasového deníku ukládej jen to, co je potřeba pro dokazatelnost a provoz:
+
+- identifikátor kontaktu,
+- účel souhlasu,
+- verzi textu, který člověk viděl,
+- čas udělení nebo odvolání,
+- zdroj události, například formulář, import, API nebo preference centrum,
+- technické minimum pro audit, například interní request ID.
+
+Co tam typicky nepatří:
+
+- kompletní uživatelský agent jako sběratelský artefakt,
+- zbytečně přesná IP adresa uložená navždy,
+- obsah celé stránky, pokud máš verzovaný text souhlasu,
+- marketingové segmenty, skóre leadu a poznámky obchodníka,
+- „pro jistotu“ kopie všech polí formuláře.
+
+Privacy-first detail: souhlasový deník nemá být alternativní CRM. Je to důkazní a provozní záznam. Pokud v něm začneš dělat segmentaci kampaní, právě sis z hygienické pomůcky vyrobil další šuplík s osobními údaji.
+
+## BV.3 Odhlášení musí být kratší než přihlášení
+
+EDPB ve svém průvodci pro malé firmy uvádí, že odvolání souhlasu má být pro člověka snadné a dostupné kdykoli: https://www.edpb.europa.eu/sme/be-compliant/process-personal-data-lawfully_en
+
+Prakticky:
+
+- Každý marketingový e-mail má přímý odhlašovací odkaz.
+- Odkaz vede na jednoduchou stránku, ne na login stěnu.
+- Základní odhlášení jde dokončit jedním potvrzením.
+- Volitelná otázka „proč odcházíte“ nesmí blokovat odhlášení.
+- Po změně preferencí přijde stručné potvrzení bez nové marketingové řeči.
+
+Dobrá mikrocopy:
+
+> „Odhlášeno. Marketingové e-maily už posílat nebudeme. Nutné zprávy k účtu a bezpečnosti tím nejsou dotčené.“
+
+Špatná mikrocopy:
+
+> „Je nám líto, že odcházíte. Vyplňte prosím tento krátký dotazník, potvrďte e-mail, přihlaste se a vyberte důvod, jinak se změna neuloží.“
+
+Codyho komentář: jestli je snazší zrušit hypotéku než newsletter, není to growth hacking. Je to UX s cedulkou „právník pláče v koutě“.
+
+## BV.4 Právo odmítnout přímý marketing ber jako tvrdý stop signál
+
+U přímého marketingu nestačí tvářit se, že jde jen o nastavení frekvence. Evropská komise ve vysvětlení práv jednotlivců uvádí, že pokud člověk namítne zpracování pro přímý marketing, organizace musí přestat jeho osobní údaje pro tento účel používat: https://commission.europa.eu/law/law-topic/data-protection/information-individuals_en
+
+Proto odděl tři stavy:
+
+- **Aktivní preference:** člověk chce konkrétní typ komunikace.
+- **Tiché neaktivní nastavení:** člověk nic nevybral nebo historicky nevíš.
+- **Explicitní odmítnutí marketingu:** člověk řekl „neposílat“.
+
+Třetí stav neobcházej přes nový seznam, jiný nástroj ani „podobnou nabídku“. Pokud importuješ kontakty do nového systému, odmítnutí marketingu migruj jako první. Ne až po segmentech, ne až po šablonách, ne až po kampani „ještě jednou naposledy“. Naposledy je oblíbené slovo systémů, které už měly být vypnuté.
+
+Technické pravidlo: marketingový send pipeline musí před odesláním kontrolovat suppression list nebo ekvivalentní stop tabulku centrálně. Nespoléhej jen na to, že každý tým ručně vybere správný segment.
+
+## BV.5 Preference centrum navrhni jako produkt, ne jako právní přílohu
+
+Dobrá stránka preferencí má být čitelná i bez znalosti GDPR.
+
+Minimální struktura:
+
+1. Krátké vysvětlení, pro jaký e-mail nebo účet se preference mění.
+2. Přehled typů komunikace v lidských názvech.
+3. U každé volby frekvence nebo jednoduchý přepínač.
+4. Jasné oddělení nutných provozních zpráv.
+5. Tlačítko pro uložení změn.
+6. Přímé „odhlásit vše marketingové“.
+7. Odkaz na privacy stránku a kontakt pro žádosti k osobním údajům.
+
+Příklad textu u vzdělávacího obsahu:
+
+> „Praktické návody k webu, SaaS a privacy-first provozu. Obvykle 1–2× měsíčně. Žádné reklamní pixely v e-mailu.“
+
+Příklad textu u marketingových nabídek:
+
+> „Obchodní novinky, nové služby a pozvánky. Můžete vypnout kdykoli jedním odkazem v e-mailu.“
+
+Privacy-first bonus: pokud opravdu nepotřebuješ personalizovat každou větu, nepersonalizuj. Segment „zajímá se o SaaS“ často stačí. Segment „klikl v úterý ve 22:13 na třetí odstavec z mobilu“ je obvykle jen marketingová poezie maskovaná jako přesnost.
+
+## BV.6 Synchronizace mezi nástroji musí mít vlastníka
+
+Preference centrum často selže ne na textu, ale na integracích. Web uloží odhlášení, CRM o něm neví. E-mailový nástroj ho ví, ale produktový onboarding ne. Support si ručně přidá kontakt do kampaně, protože „to přece není newsletter, jen užitečný tip“. A najednou máš právní i reputační guláš.
+
+Udělej jednoduchou mapu toku:
+
+- Kde vzniká kontakt?
+- Kde vzniká souhlas nebo odmítnutí?
+- Který systém je zdroj pravdy?
+- Jak rychle se změna projeví v ostatních nástrojích?
+- Co se stane, když synchronizace selže?
+- Kdo kontroluje chybovou frontu?
+
+Doporučení pro malý SaaS: zdroj pravdy pro preference drž v aplikaci nebo v jednom jasně určeném CRM, ne ve třech marketingových nástrojích. Odesílací nástroje mají preference číst, ne si je vymýšlet. A každé selhání synchronizace preferencí ber jako provozní incident malé závažnosti, protože dopad na důvěru může být větší než samotná chyba.
+
+## BV.7 Checklist preference centra
+
+- Máme inventář typů komunikace podle vnímání příjemce.
+- Nutné provozní zprávy jsou oddělené od marketingu.
+- Souhlasový deník ukládá účel, verzi textu, čas a zdroj události.
+- Odhlášení z marketingu funguje bez loginu a zbytečných otázek.
+- Explicitní odmítnutí marketingu je centrální stop signál.
+- Preference mají jeden zdroj pravdy a jasného technického vlastníka.
+- Importy kontaktů migrují suppression list dřív než segmenty.
+- Stránka preferencí používá lidské názvy, frekvenci a jasné vysvětlení.
+- E-maily nepoužívají sledovací pixely, pokud pro ně není opravdu silný a vysvětlený důvod.
+- Jednou měsíčně kontrolujeme, jestli se preference propsaly do všech nástrojů.
+
+## Zdroje k příloze
+
+- Evropská komise: Legal grounds for processing data: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/legal-grounds-processing-data_en
+- European Data Protection Board: Process personal data lawfully, guide for small business: https://www.edpb.europa.eu/sme/be-compliant/process-personal-data-lawfully_en
+- Evropská komise: Information for individuals, right to object to direct marketing: https://commission.europa.eu/law/law-topic/data-protection/information-individuals_en
+- GDPR, nařízení (EU) 2016/679, články 5, 7 a 21: https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32016R0679
+
+## Shrnutí přílohy
+
+Preference centrum není právní odkladiště, ale produktová funkce důvěry. Rozliš typy zpráv, veď střídmý souhlasový deník, udělej odhlášení jednoduché, respektuj odmítnutí přímého marketingu jako tvrdý stop signál a drž jeden zdroj pravdy pro všechny nástroje. Nejlepší marketingový kontakt je ten, který ví, proč tě čte — a může kdykoli bez dramatu odejít.
+
 ## Pracovní log
+
+- 2026-08-10: Přidána příloha BV o preference centru bez marketingového labyrintu: typy komunikace, souhlasový deník, jednoduché odhlášení, odmítnutí přímého marketingu, synchronizace preferencí a checklist.
 - 2026-08-10: Přidána příloha BU o exit plánu od dodavatele a vendor lock-inu: exporty, otevřené formáty, test odchodu, smluvní pravidla, fallback scénáře a checklist.
 - 2026-08-10: Přidána příloha BT o bezpečnostních hlavičkách bez rituálního kopírování: inventář zdrojů, CSP v report-only režimu, HSTS, referrer policy, rámování, permissions policy, CI kontrola a checklist.
 - 2026-08-10: Přidána příloha BS o privacy-first partnerství a affiliate růstu: referral kódy, čisté partner linky, agregované reporty, pravidla pro partnerský obsah, odměňování kvality a checklist.
