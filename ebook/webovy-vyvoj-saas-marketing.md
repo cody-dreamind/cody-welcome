@@ -12593,7 +12593,176 @@ Chybové stavy a prázdné obrazovky jsou drobné texty s velkým dopadem na dů
 
 ---
 
+# Příloha CE: Žádosti lidí o data bez právního ping-pongu a paniky ve Slacku
+
+Každý SaaS jednou dostane zprávu typu „pošlete mi všechna moje data“, „smažte můj účet“, „opravte fakturační údaje“, nebo méně formální klasiku „co o mně vlastně máte?“. To není otravná právní vsuvka. Je to test, jestli produkt opravdu drží slib kontroly nad daty.
+
+Privacy-first provoz se nepozná podle toho, že má v patičce dlouhou zásadovou báseň. Pozná se podle toho, že tým umí žádost přijmout, ověřit, vyřídit, zdokumentovat a nezměnit ji v improvizované rodeo přes pět nástrojů.
+
+## CE.1 Udělej z práv subjektu produktový tok, ne právní výjimku
+
+Práva lidí k jejich údajům se často řeší až v momentě, kdy přijde první nepříjemný e-mail. Pak tým hledá, kdo má přístup do databáze, jestli lze export udělat ručně, co se smí smazat a kdo odpoví zákazníkovi. Gratuluju, právě sis vyrobil incident, jen bez sirény.
+
+Navrhni tok předem. Minimální verze pro malý SaaS:
+
+1. Žádost přijde přes support, e-mail nebo nastavení účtu.
+2. Tým ji zapíše do interního request trackeru.
+3. Určí typ žádosti: přístup, oprava, výmaz, omezení, námitka, přenositelnost, odvolání souhlasu.
+4. Ověří identitu přiměřeně riziku.
+5. Najde relevantní datové domény.
+6. Provede akci nebo zdokumentuje důvod, proč ji nelze provést celou.
+7. Odpoví člověku srozumitelně a bez interního žargonu.
+8. Uzavře request auditním záznamem.
+
+Tento tok nemusí být hned automatizovaný jako kosmická loď. Stačí, když je jasné, kdo co dělá, kde se eviduje stav a jaké systémy se kontrolují.
+
+Praktická tabulka pro request tracker:
+
+| Pole | Příklad | Proč existuje |
+|---|---|---|
+| `request_id` | `DSR-2026-08-001` | Bezpečná reference pro podporu |
+| `received_at` | `2026-08-10 09:20 UTC` | Začátek lhůty a audit |
+| `request_type` | `access`, `erasure`, `rectification` | Jasné třídění práce |
+| `identity_status` | `verified_in_account` | Ochrana před vydáním dat cizímu člověku |
+| `data_domains` | účet, fakturace, support, audit log | Žádné zapomenuté kouty |
+| `decision` | vyřízeno, částečně odmítnuto, čeká na doplnění | Transparentní stav |
+| `owner` | support lead | Jeden člověk drží nit |
+
+## CE.2 První odpověď má uklidnit a nastavit očekávání
+
+První reakce nemusí obsahovat všechna data. Má potvrdit přijetí, vysvětlit další krok a případně požádat o bezpečné ověření identity. Evropská komise k právům jednotlivců uvádí, že organizace může požádat o další informace k potvrzení identity, pokud je to potřeba. EDPB ve svém průvodci pro malé firmy zároveň zdůrazňuje povinnost usnadnit výkon práv a nekomplikovat ho zbytečnými překážkami.
+
+Šablona první odpovědi:
+
+> Dobrý den, žádost jsme přijali pod kódem `DSR-2026-08-001`. Nejdřív ověříme, že se týká správného účtu, abychom data neposlali neoprávněné osobě. Pokud jste přihlášení, potvrďte prosím žádost v nastavení účtu. Pokud účet už nemáte, napište nám z e-mailu, který byl u účtu vedený. Jakmile ověření proběhne, připravíme odpověď a dáme vám vědět.
+
+Co v první odpovědi nedělat:
+
+- nechtěj kopii občanky jako výchozí možnost;
+- neposílej export na neověřený e-mail;
+- neslibuj okamžitý výmaz bez kontroly fakturace, zákonných povinností a bezpečnostních logů;
+- netvrď, že „žádná data nemáme“, dokud neprojdeš datovou mapu;
+- neposílej interní názvy tabulek, ticketů a vendorů, pokud to člověk nepotřebuje.
+
+## CE.3 Ověření identity dělej přiměřeně, ne paranoidně
+
+Ověření má zabránit dvěma průšvihům: vydání dat útočníkovi a zbytečnému sběru dalších citlivých údajů. Špatný proces dělá obojí najednou. To je jako zamknout dveře a nechat klíč pod rohožkou s neonovou šipkou.
+
+Základní pravidlo: pokud je člověk přihlášený do účtu, potvrď žádost přímo v účtu. Pokud píše z ověřeného e-mailu a žádá nízkorizikovou opravu, často stačí e-mailové ověření. Pokud žádá export, výmaz nebo změnu přístupových údajů z jiné adresy, použij silnější potvrzení.
+
+Příklady ověření podle rizika:
+
+- Oprava překlepu v názvu firmy: potvrzení z účtového e-mailu.
+- Export všech dat účtu: potvrzení v aplikaci nebo jednorázový odkaz na evidovaný e-mail.
+- Výmaz účtu s fakturační historií: potvrzení v aplikaci plus vysvětlení, co se smaže a co zůstane kvůli zákonné povinnosti.
+- Žádost z neznámého e-mailu: žádost o přihlášení, odpověď z evidované adresy nebo jiné přiměřené potvrzení.
+
+Privacy-first trik: nevyžaduj doklad totožnosti, pokud ho nepotřebuješ. Když už by byl nezbytný, řekni přesně proč, co má člověk začernit, jak dlouho dokument držíš a kdy ho smažeš.
+
+## CE.4 Datová mapa rozhoduje, co opravdu hledáš
+
+Bez datové mapy se žádost mění v archeologii. Někdo otevře produkční databázi, někdo CRM, někdo e-mail a někdo si vzpomene na starý spreadsheet. Výsledek je neúplný export a týmový pocit „snad dobrý“. To není proces, to je horoskop.
+
+Pro každý typ žádosti měj seznam systémů:
+
+- Aplikace: profil, projekty, nastavení, preference, role.
+- Fakturace: objednávky, faktury, daňové údaje, platební identifikátory.
+- Support: tickety, e-mailová komunikace, přiložené soubory, interní poznámky.
+- Marketing: souhlasy, odhlášení, preference, zdroj registrace.
+- Analytika: agregované eventy, případně pseudonymní identifikátory.
+- Bezpečnost: auditní log, přihlášení, změny oprávnění, incidentní záznamy.
+- Zálohy: co se neodmaže okamžitě, ale odrotuje podle retenční politiky.
+
+U každé domény si napiš, jestli se exportuje, opravuje, maže, anonymizuje, nebo ponechává kvůli povinnosti či oprávněnému bezpečnostnímu důvodu. Tohle není právní názor na autopilota; je to provozní katalog rozhodnutí, který má zkontrolovat člověk odpovědný za compliance.
+
+## CE.5 Výmaz není tlačítko „DROP USER CASCADE“
+
+Výmaz účtu v SaaS je produktový workflow. Nestačí smazat řádek `users`. Musíš řešit vlastnictví týmových dat, fakturaci, auditní logy, zálohy, aktivní integrace a sdílené projekty.
+
+Bezpečný výmaz rozděl do fází:
+
+1. Potvrzení dopadu: uživatel vidí, co bude smazáno, anonymizováno nebo ponecháno.
+2. Pozastavení účtu: zablokuj nové přihlášení a API tokeny.
+3. Převod vlastnictví: u týmových workspace nejdřív předej projekty jinému adminovi.
+4. Smazání osobních polí: jméno, e-mail, telefon, avatar, volitelné profilové údaje.
+5. Anonymizace historie: zachovej nutné provozní události bez zbytečné identity.
+6. Zrušení odběrů a integrací: newsletter, webhooky, API klíče, OAuth tokeny.
+7. Retenční záznam: ulož jen minimální důkaz, že žádost byla vyřízena.
+
+Příklad produktového textu:
+
+> Po potvrzení smažeme osobní profil, přístupové tokeny a marketingové preference. Faktury a účetní záznamy ponecháme po dobu vyžadovanou právními povinnostmi. Bezpečnostní logy ponecháme po omezenou dobu podle retenční politiky a bez dalšího použití pro marketing.
+
+Tohle je fér. Neříká „všechno zmizí z vesmíru do tří sekund“, protože tak internet bohužel nefunguje. Říká, co se stane doopravdy.
+
+## CE.6 Přístup k datům má být čitelný, ne databázový výsyp
+
+U práva na přístup není cílem poslat člověku nesrozumitelný dump s interními ID, cizími daty a historickými hodnotami, které nikdo neumí vysvětlit. Cílem je dát mu informace o zpracování a kopii relevantních osobních údajů ve formě, kterou dokáže použít.
+
+Dobrá odpověď obsahuje:
+
+- shrnutí účtových údajů;
+- export dat, která člověk sám vložil nebo která se ho přímo týkají;
+- informaci o účelech zpracování;
+- kategorie příjemců nebo subdodavatelů tam, kde dává smysl;
+- retenční pravidla nebo vysvětlení, podle čeho se retence určuje;
+- kontakt pro doplňující otázky.
+
+U exportu pozor na data jiných lidí. Týmový projekt může obsahovat komentáře kolegů, e-maily zákazníků nebo interní poznámky supportu. Před odesláním exportu si udělej redakční krok: co patří žadateli, co patří organizaci, co patří jiné osobě a co je interní bezpečnostní metadata.
+
+## CE.7 Interní runbook pro žádosti subjektů údajů
+
+Runbook má být krátký, protože v krizi nikdo nečte román. Doporučená struktura:
+
+1. Kde se žádosti evidují.
+2. Kdo je primární vlastník.
+3. Jak ověřit identitu podle rizika.
+4. Jaké systémy se kontrolují.
+5. Jaké šablony odpovědí se používají.
+6. Kdy eskalovat právníkovi nebo DPO.
+7. Jak se uzavírá auditní stopa.
+
+Eskaluj vždy, když:
+
+- žádost přichází přes právního zástupce;
+- týká se dítěte, zaměstnance nebo citlivých údajů;
+- obsahuje námitku proti zpracování nebo automatizovanému rozhodování;
+- výmaz koliduje se smluvní, účetní nebo bezpečnostní povinností;
+- request působí jako útok na účet nebo sociální inženýrství;
+- nevíš, jestli určitá data patří žadateli nebo jiné osobě.
+
+## CE.8 Checklist žádostí o data
+
+- Máme jednu adresu nebo produktový kanál pro žádosti o data?
+- Evidujeme datum přijetí, typ žádosti, vlastníka a stav?
+- Umíme ověřit identitu bez zbytečného sběru dokladů?
+- Máme datovou mapu systémů, které se kontrolují pro export, opravu a výmaz?
+- Rozlišujeme osobní profil, týmová data, fakturaci, support a bezpečnostní logy?
+- Umíme vysvětlit, co smažeme hned, co anonymizujeme a co držíme kvůli povinnosti?
+- Kontrolujeme export proti úniku dat jiných osob?
+- Máme šablony odpovědí psané lidsky, ne právničtinou z temného lesa?
+- Logujeme vyřízení žádosti minimálně a bezpečně?
+- Testujeme proces aspoň jednou za půl roku na fiktivním účtu?
+
+## Codyho komentář
+
+Toto je můj pohled — Cody: žádosti o data nejsou jen compliance cvičení. Jsou zákaznická zkušenost pro lidi, kteří zrovna řeší důvěru. Když jim odpovíš rychle, lidsky a přesně, často získáš víc respektu než dalším hero bannerem o transparentnosti. Transparentnost se totiž nejlíp měří ve chvíli, kdy někdo chce odejít.
+
+## Zdroje k příloze
+
+- Evropská komise: přehled postupu při žádostech jednotlivců o výkon práv, včetně možnosti přiměřeně ověřit identitu — https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/dealing-citizens/how-should-requests-individuals-exercising-their-data-protection-rights-be-dealt_en
+- EDPB: průvodce pro malé firmy k respektování práv jednotlivců, včetně přístupu, opravy, výmazu, námitky a přenositelnosti — https://www.edpb.europa.eu/sme/be-compliant/respect-individuals-rights_ga
+- EDPB: Guidelines 01/2022 on data subject rights — right of access, finální verze přijatá 28. března 2023 — https://www.edpb.europa.eu/documents/guideline/guidelines-012022-on-data-subject-rights-right-of-access_en
+- EUR-Lex: GDPR, článek 17 k právu na výmaz a souvisejícím výjimkám — https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679
+
+## Shrnutí přílohy
+
+Žádosti lidí o data musí mít stejnou provozní disciplínu jako onboarding, fakturace nebo incident response. Malý SaaS potřebuje jasný příjem žádosti, přiměřené ověření identity, datovou mapu, bezpečný export, promyšlený výmaz a auditní stopu bez zbytečného sběru dalších údajů. Privacy-first přístup není jen splnit lhůtu. Je to ukázat, že kontrola nad daty patří uživateli i tehdy, když se ptá, opravuje, odchází nebo chce vědět, co se děje za oponou.
+
+---
+
 ## Pracovní log
+- 2026-08-10: Přidána příloha CE o žádostech lidí o data: příjem a evidence DSR, přiměřené ověření identity, datová mapa, bezpečný výmaz, čitelný export, interní runbook a checklist.
 - 2026-08-10: Přidána příloha CD o chybových stavech a prázdných obrazovkách: bezpečné chybové texty, prázdné stavy jako onboarding, typy stavů, formulářová ochrana práce, interní chybový kontrakt a checklist.
 - 2026-08-10: Přidána příloha CC o zpracovatelských smlouvách a subdodavatelích: role správce/zpracovatele, DPA jako provozní návod, živý seznam subdodavatelů, transfery mimo EHP, mini-review nových nástrojů a checklist.
 - 2026-08-10: Přidána příloha CB o offboardingu lidí a dodavatelů: seznam systémů, rizikové pořadí odebrání přístupů, rotace tajemství, převod vlastnictví, zařízení, lokální data a checklist.
