@@ -12302,7 +12302,146 @@ Můj pohled — Cody: dobrý offboarding se pozná podle toho, že je trapně nu
 
 Offboarding chrání produkt před osiřelými účty, zapomenutými klíči a daty bez vlastníka. Začni před posledním dnem, pracuj podle registru systémů, vypínej přístupy podle rizika, rotuj tajemství, převáděj vlastnictví práce, kontroluj zařízení a lokální kopie a vše zapisuj do auditní stopy. Privacy-first tým nečeká, až odchod člověka odhalí, kde všude firma používala lidskou paměť místo procesu.
 
+# Příloha CC: Zpracovatelské smlouvy a subdodavatelé bez slepé víry v hezké logo
+
+Dodavatel může mít krásný web, ISO badge, fotku serverovny a obchodníka, který používá slovo „enterprise“ častěji než interpunkci. To ale ještě neznamená, že víš, co se děje se zákaznickými daty. Privacy-first SaaS potřebuje jednoduchý, opakovatelný proces pro zpracovatelské smlouvy, subdodavatele a změny v dodavatelském řetězci.
+
+Nejde o právnické sběratelství PDFek. Jde o to, aby tým uměl odpovědět na tři otázky: kdo zpracovává osobní údaje, za jakým účelem a co se stane, když se dodavatel změní, selže nebo odejde.
+
+## CC.1 Nejdřív urči roli: správce, zpracovatel, nebo samostatný správce
+
+Než někomu pošleš DPA, zastav se u role. Stejný dodavatel může být v jedné části služby zpracovatel a v jiné samostatný správce. Platební brána například zpracovává data pro platbu, ale část povinností může plnit vlastním jménem kvůli regulaci, prevenci podvodů nebo účetnictví. E-mailový nástroj může být zpracovatel pro transakční zprávy, ale u vlastního marketplace obohacování kontaktů už se hra mění.
+
+Praktická otázka zní:
+
+- Kdo určuje účel zpracování?
+- Kdo rozhoduje, jaká data se sbírají?
+- Může dodavatel data použít pro vlastní produkt, reklamu, trénink nebo benchmarking?
+- Má zákazník přímý vztah s dodavatelem, nebo jen s námi?
+- Umíme roli vysvětlit jednou větou v interní datové mapě?
+
+Pokud odpověď zní „asi zpracovatel, protože nám poslal DPA“, nestačí to. DPA není kouzelná nálepka. Je to smluvní režim pro konkrétní vztah.
+
+## CC.2 DPA není formalita, ale provozní návod
+
+GDPR v článku 28 stanovuje požadavky na vztah správce a zpracovatele: zpracování má probíhat na základě smlouvy nebo jiného právního aktu, zpracovatel jedná podle doložených pokynů, řeší důvěrnost, bezpečnost, subdodavatele, asistenci správci, mazání nebo vrácení dat a dostupnost informací pro audit. Oficiální znění GDPR je na EUR-Lexu: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
+
+Malý tým nepotřebuje z každé DPA dělat třídenní právní festival. Potřebuje z ní vytáhnout provozní odpovědi:
+
+| Otázka | Co hledat v DPA |
+| --- | --- |
+| Jaký je účel zpracování? | Popis služby a typy zpracování |
+| Jaká data dodavatel dostává? | Kategorie osobních údajů a subjektů údajů |
+| Kde data leží? | Lokace hostingu a případné transfery mimo EHP |
+| Kdo další má přístup? | Seznam subdodavatelů a mechanismus změn |
+| Co se děje při incidentu? | Lhůta a kanál oznámení bezpečnostní události |
+| Jak probíhá konec služby? | Export, vrácení, smazání a potvrzení výmazu |
+| Jak ověříme bezpečnost? | Auditní zprávy, certifikace, bezpečnostní dokumentace |
+
+DPA, která jen opisuje GDPR a neříká nic konkrétního o službě, je jako návod k hasicímu přístroji vytištěný na kouři. Hezké, ale v praxi dost otravné.
+
+## CC.3 Subdodavatelé musí být živý seznam, ne odkaz do sklepa
+
+Subdodavatel není detail. Pokud CRM používá americký e-mailový relay, analytickou knihovnu a podporu přes třetí ticketing, zákaznická data už necestují jen do CRM. Cestují řetězem, který musíš znát.
+
+Pro každý kritický nástroj si veď jednoduchý záznam:
+
+- název dodavatele,
+- účel použití,
+- typ dat,
+- role podle GDPR,
+- země zpracování,
+- hlavní subdodavatelé,
+- odkaz na DPA a seznam subdodavatelů,
+- datum poslední kontroly,
+- vlastník v týmu.
+
+Důležitý je i mechanismus změny. Někteří dodavatelé dávají obecný souhlas se subdodavateli a změny oznamují e-mailem nebo aktualizací stránky. To může být přijatelné, pokud máš reálnou možnost změnu sledovat, vyhodnotit a případně se ozvat nebo službu vypnout. Pokud je oznámení schované v newsletteru mezi novým gradientem tlačítek a „AI-powered insights“, není to proces. Je to lov pokladů.
+
+## CC.4 Transfery mimo EHP řeš před zapnutím služby
+
+Privacy-first evropský provoz neznamená, že nikdy nepoužiješ nástroj mimo EU. Znamená to, že si transfer umíš obhájit, minimalizovat a dokumentovat. Pokud osobní údaje odchází mimo EHP, řešíš nejen obchodní pohodlí, ale i právní mechanismus, riziko přístupu třetích stran a praktickou možnost zákazníkovi vysvětlit, co se děje.
+
+Evropská komise má oficiální informace ke standardním smluvním doložkám pro mezinárodní předávání osobních údajů: https://commission.europa.eu/law/law-topic/data-protection/international-dimension-data-protection/standard-contractual-clauses-scc_en
+
+Praktický minimální postup:
+
+- preferuj EU region a EU právní entitu, pokud existuje,
+- ověř, jestli se data reálně ukládají v EU, nebo jen fakturační kontakt sedí v EU,
+- zjisti, zda dodavatel používá další subdodavatele mimo EHP,
+- zapiš právní mechanismus transferu,
+- minimalizuj rozsah dat, která do nástroje posíláš,
+- u citlivějších dat zvaž pseudonymizaci, šifrování nebo lokální alternativu,
+- připrav zákaznicky srozumitelnou větu do trust packu.
+
+Příklad věty do interního rozhodnutí:
+
+> „Nástroj používáme pouze pro transakční e-maily, posíláme e-mailovou adresu, jazyk a ID šablony. Obsah zpráv neobsahuje zákaznická tajemství. Preferujeme EU region, subdodavatele kontrolujeme kvartálně a při změně dopadu rozhodnutí znovu otevřeme.“
+
+## CC.5 Změna dodavatele je produktová změna, ne účetní detail
+
+Když vývojář přidá novou knihovnu, většinou projde review. Když marketing přidá nový nástroj na formuláře, často projde jen nadšení. Přitom z pohledu dat může být druhá změna mnohem rizikovější.
+
+Zaveď jednoduché pravidlo: každý nový nástroj, který pracuje se zákaznickými nebo uživatelskými daty, má mini-review před zapnutím. Nemusí to být komise v oblecích. Stačí krátká šablona:
+
+- Co nástroj řeší?
+- Jaká data dostane?
+- Je nutný, nebo existuje jednodušší varianta?
+- Kde jsou data zpracována?
+- Máme DPA a seznam subdodavatelů?
+- Jak data smažeme při odchodu?
+- Kdo je vlastník nástroje?
+- Kdy proběhne první review po nasazení?
+
+Tím se z dodavatelů nestane strašák. Stanou se řízenou součástí produktu.
+
+## CC.6 DPA audit dělej podle rizika, ne podle abecedy
+
+Jednou za čas je dobré projít dodavatele. Špatný postup: otevřít tabulku, vyděsit se, zavřít tabulku, uvařit kafe, zapomenout. Lepší postup: seřadit dodavatele podle dopadu.
+
+Začni těmi, kteří mají:
+
+- přístup k produkční databázi,
+- zákaznický obsah nebo soubory,
+- autentizační nebo platební data,
+- logy s identifikátory,
+- support přístup do účtů,
+- možnost posílat zprávy jménem produktu,
+- subdodavatele mimo EHP.
+
+U nízkorizikových nástrojů stačí lehčí kontrola. U kritických chceš aktuální DPA, bezpečnostní dokumentaci, jasný export a ověřený proces odchodu. Ne proto, že máš rád papíry. Protože nechceš při incidentu zjišťovat, že účet vlastní bývalý kolega a DPA leží v jeho starém inboxu.
+
+## CC.7 Checklist zpracovatelských smluv a subdodavatelů
+
+- [ ] Máme seznam všech nástrojů, které pracují s osobními nebo zákaznickými daty.
+- [ ] U každého nástroje je určená role: správce, zpracovatel, samostatný správce nebo kombinace.
+- [ ] Kritičtí zpracovatelé mají uloženou DPA a odkaz na seznam subdodavatelů.
+- [ ] Víme, kde se data zpracovávají a zda dochází k transferům mimo EHP.
+- [ ] U transferů mimo EHP máme zapsaný právní mechanismus a praktické omezení dat.
+- [ ] Každý nástroj má vlastníka v týmu a datum další kontroly.
+- [ ] Nové nástroje s daty procházejí mini-review před zapnutím.
+- [ ] Máme postup, co dělat při změně subdodavatele nebo regionu zpracování.
+- [ ] Umíme zákazníkovi lidsky vysvětlit, proč dodavatele používáme.
+- [ ] Při odchodu od dodavatele víme, jak exportovat a smazat data.
+
+## Codyho komentář
+
+Můj pohled — Cody: nejlepší DPA proces je ten, který marketér, vývojář i zakladatel zvládnou použít v pondělí mezi dvěma cally. Jakmile je kontrola dodavatelů závislá na jednom právníkovi, jedné tabulce a dobré náladě Merkuru, rozbije se přesně ve chvíli, kdy přidáš třetí nástroj a první zákazník se zeptá na security dotazník.
+
+## Zdroje k příloze
+
+- GDPR, článek 28 a související pravidla pro zpracovatele: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
+- Evropská komise: standardní smluvní doložky pro mezinárodní předávání dat: https://commission.europa.eu/law/law-topic/data-protection/international-dimension-data-protection/standard-contractual-clauses-scc_en
+- EDPB: pokyny ke konceptům správce a zpracovatele podle GDPR: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-072020-concepts-controller-and-processor-gdpr_en
+
+## Shrnutí přílohy
+
+Zpracovatelské smlouvy nejsou šanon pro klid duše. Jsou provozní mapa toho, komu svěřuješ data, proč, za jakých podmínek a jak z toho vztahu bezpečně odejdeš. Malý SaaS tým nepotřebuje nekonečný legal ops aparát, ale potřebuje živý seznam dodavatelů, jasné role, kontrolu subdodavatelů, pozornost k transferům mimo EHP a mini-review před zapnutím nového nástroje.
+
+---
+
 ## Pracovní log
+- 2026-08-10: Přidána příloha CC o zpracovatelských smlouvách a subdodavatelích: role správce/zpracovatele, DPA jako provozní návod, živý seznam subdodavatelů, transfery mimo EHP, mini-review nových nástrojů a checklist.
 - 2026-08-10: Přidána příloha CB o offboardingu lidí a dodavatelů: seznam systémů, rizikové pořadí odebrání přístupů, rotace tajemství, převod vlastnictví, zařízení, lokální data a checklist.
 - 2026-08-10: Přidána příloha CA o přístupech a rolích: role matrix, deny-by-default autorizace, oddělení admin účtů, expirace externistů, řízený support access, review přístupů a checklist.
 - 2026-08-10: Přidána příloha BZ o testovacích datech a stagingu: účel prostředí, syntetická seed data, bezpečná práce s produkčními vzorky, oddělené integrace, refresh procedura a checklist.
