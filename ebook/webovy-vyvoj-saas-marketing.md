@@ -13993,8 +13993,135 @@ Auditní stopa je jako černá skříňka v letadle: nechceš ji číst každý 
 
 Auditní stopa má pomoct vysvětlit důležité změny, přístupy a bezpečnostní události, ne špehovat běžné používání produktu. Odděl ji od analytiky a debug logů, loguj jen rozhodující akce, používej minimální a stabilní schéma, chraň neměnnost záznamů, ukaž zákazníkovi relevantní historii a nastav retenci podle rizika. Když audit navrhneš dobře, při incidentu nepůsobíš jako někdo, kdo hledá účtenku v pračce.
 
+---
+
+# Příloha CO: Fronty, retry a backpressure bez požáru v produkci a nekonečného klikání na „zkusit znovu“
+
+Každý SaaS dřív nebo později narazí na práci, která nejde udělat pohodlně v jednom HTTP requestu. Export dat, import CSV, synchronizace s účetnictvím, generování PDF, hromadný e-mail, AI analýza dokumentů, přepočet statistik nebo mazání velkého účtu. Když tyhle věci nacpeš do běžné odpovědi serveru, uživatel čeká, infrastruktura funí a první výpadek integrace promění aplikaci v nervózní kasino.
+
+Fronta není jen technický detail pro backendáře. Je to produktový slib: „Přijali jsme práci, víme v jakém je stavu, umíme ji bezpečně dokončit nebo férově selhat.“ Privacy-first verze k tomu přidává ještě jednu větu: „A kvůli tomu nemusíme posílat celý obsah zákaznických dat do pěti cizích služeb jen proto, že se to dobře debugguje.“
+
+## CO.1 Nejdřív rozhodni, co patří do fronty
+
+Do fronty patří práce, která je pomalá, drahá, nespolehlivá, hromadná nebo závislá na cizí službě. Nepatří tam každá drobnost jen proto, že „máme worker, tak ho použijeme“. Fronta má snižovat riziko, ne vyrábět distribuovaný chaos s více místy, kde se dá něco rozbít.
+
+Typičtí kandidáti:
+
+- export zákaznických dat a příprava bezpečného odkazu ke stažení,
+- import nebo validace většího souboru,
+- synchronizace faktur, kontaktů nebo skladů s externím systémem,
+- generování reportů, PDF, náhledů nebo přepisů,
+- odesílání notifikací, kde má smysl dávkování,
+- AI úlohy, které jsou drahé, pomalé nebo potřebují lidskou kontrolu,
+- úklid dat podle retenčních pravidel.
+
+Dobré pravidlo: pokud uživatel nemusí dostat výsledek okamžitě, ale musí dostat jistotu, že se věc neztratila, dej práci do fronty a vrať mu srozumitelný stav.
+
+## CO.2 Každá úloha potřebuje stavový model
+
+Bez stavového modelu fronta rychle skončí jako černá díra: request odešel, worker něco dělal, někde možná spadl a support pak čte logy jako horoskop. Stavový model nemusí být složitý, ale musí být explicitní.
+
+Minimální sada stavů:
+
+| Stav | Co znamená | Co vidí uživatel |
+|---|---|---|
+| `queued` | práci jsme přijali | „Čeká na zpracování“ |
+| `running` | worker úlohu převzal | „Zpracovává se“ |
+| `waiting_retry` | dočasná chyba, zkusíme znovu | „Zkusíme znovu za chvíli“ |
+| `completed` | výsledek je hotový | „Hotovo“ + další krok |
+| `failed` | úloha selhala definitivně | důvod, co dělat dál |
+| `cancelled` | uživatel nebo systém úlohu zrušil | jasné potvrzení zrušení |
+
+Uživatel nepotřebuje stack trace. Potřebuje vědět, jestli má čekat, obnovit stránku, opravit vstup, kontaktovat podporu, nebo se jít smířit s tím, že CSV z účetnictví bylo opět kreativní umění.
+
+## CO.3 Retry navrhuj podle typu chyby
+
+Retry je dobrý sluha a výborný generátor incidentů. Pokud opakuješ každou chybu stejně, snadno vytvoříš bouři požadavků: služba nestíhá, tvoje aplikace ji začne bombardovat a za minutu už nestíháte oba. HTTP stav `429 Too Many Requests` se používá pro situaci, kdy uživatel nebo klient poslal příliš mnoho požadavků; odpověď může obsahovat hlavičku `Retry-After`, která říká, kdy to zkusit znovu: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/429 a https://www.rfc-editor.org/rfc/rfc6585#section-4
+
+Praktické rozdělení:
+
+- **Dočasná chyba**: timeout, `429`, `503`, dočasně nedostupná integrace. Použij exponenciální backoff, jitter a limit pokusů.
+- **Opravitelná chyba vstupu**: špatný formát CSV, chybějící pole, neplatný e-mail. Retry nepomůže; vrať jasný report chyb.
+- **Autorizační chyba**: chybí oprávnění, expirovaný token, odebraná integrace. Zastav úlohu a požádej o akci.
+- **Programová chyba**: výjimka v kódu, nečekaný stav, migrace schématu. Neposílej to do nekonečna; eskaluj interně.
+
+U každé úlohy si napiš `max_attempts`, další čas pokusu, poslední bezpečnou chybu pro uživatele a interní `request_id`. Bez toho bude retry připomínat křečka v kolečku. Roztomilé, ale účet za cloud už méně.
+
+## CO.4 Idempotence je pojistka proti dvojité práci
+
+Jakmile existuje retry, existuje riziko duplicit. Uživatel dvakrát klikne. Mobilní síť spadne po odeslání. Worker zpracuje úlohu, ale nestihne uložit stav. Externí API přijme požadavek a odpověď se ztratí. Pokud operace není idempotentní, můžeš vytvořit dvě faktury, dva e-maily, dva importy nebo dva výmazy. To je přesně ten typ dobrodružství, který v B2B SaaS nepotřebuješ.
+
+Co pomáhá:
+
+- používej idempotency key pro vytváření důležitých akcí,
+- ukládej vazbu mezi vstupem, tenantem a výsledkem,
+- rozliš `job_id` pro zpracování a obchodní identifikátor akce,
+- u externích API preferuj jejich idempotency mechanismus, pokud existuje,
+- před opakováním ověř, jestli akce už nevznikla,
+- pro hromadné operace ukládej stav po položkách, ne jen jeden velký verdikt.
+
+Privacy-first detail: idempotency key nemá být hash celého dokumentu nebo e-mail uživatele v prostém textu. Stačí náhodný identifikátor nebo bezpečně odvozený klíč, který neprozrazuje obsah akce.
+
+## CO.5 Backpressure je férové přiznání kapacity
+
+Backpressure znamená, že systém umí říct: „teď ne tolik“. Není to slabost. Slabost je tvářit se, že všechno zvládneš, přijmout tisíc těžkých úloh a pak potichu nechat zákazníky čekat do příštího kvartálu.
+
+Použitelné techniky:
+
+- omez počet paralelních workerů podle typu úlohy,
+- nastav samostatné fronty pro kritické, běžné a dávkové úlohy,
+- vrať `429` nebo produktovou hlášku, pokud uživatel překročí rozumný limit,
+- zobraz odhad čekání, pokud ho umíš spočítat bez věštění z kávové sedliny,
+- pro velké exporty nabídni dokončení e-mailem nebo notifikací v produktu,
+- u drahých AI úloh nastav kvóty a frontu podle tarifu, ale transparentně.
+
+Nejde jen o výkon. Backpressure chrání i zákaznickou zkušenost. Lepší je říct „export připravujeme, upozorníme vás“ než nechat prohlížeč dvě minuty točit kolečko a pak spadnout na obecné „něco se pokazilo“.
+
+## CO.6 Do fronty neposílej víc dat, než worker potřebuje
+
+Častá chyba: do job payloadu se uloží celý formulář, celé CSV, celý dokument nebo kompletní zákaznický objekt „ať to worker má po ruce“. Pohodlné? Ano. Bezpečné? Spíš taková datová svačina pro budoucí incident.
+
+Lepší vzor:
+
+- job obsahuje `job_id`, `tenant_id`, typ úlohy, odkaz na vstup a minimální parametry,
+- citlivý vstup je v řízeném úložišti s expirací a přístupem jen pro worker,
+- výstup má vlastní expiraci, například exportní soubor dostupný jen omezenou dobu,
+- logy obsahují stav, počty a technické identifikátory, ne obsah zákaznických dat,
+- fronta a worker používají oddělená oprávnění, ne univerzální produkční klíč.
+
+OWASP Logging Cheat Sheet doporučuje do logů neukládat citlivá data, tajemství a informace, které nejsou nezbytné pro účel logování: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html Stejný princip platí i pro fronty. Fronta není bezpečné úložiště jen proto, že se tváří technicky.
+
+## CO.7 Checklist front, retry a backpressure
+
+- Máme jasně určené typy úloh, které patří do fronty, a které mají zůstat synchronní.
+- Každá úloha má stavový model viditelný pro produkt, support a provoz.
+- Retry pravidla rozlišují dočasné chyby, chyby vstupu, autorizační chyby a chyby v kódu.
+- Používáme exponenciální backoff, jitter a maximální počet pokusů.
+- Důležité akce mají idempotency key a ochranu proti duplicitám.
+- Backpressure umí férově odmítnout nebo odložit práci místo tichého zahlcení.
+- Velké úlohy mají bezpečný průběžný stav a uživatel nemusí držet otevřený tab.
+- Job payload neobsahuje celé zákaznické objekty, tokeny, dokumenty ani zbytečná osobní data.
+- Vstupní a výstupní soubory mají expiraci, řízený přístup a audit důležitých stažení.
+- Support má jasnou větu, co zákazníkovi říct při zpoždění, retry nebo definitivním selhání.
+
+## Codyho komentář
+
+Fronta je dobrý test dospělosti produktu. Začátečnický systém se ptá: „Jak to uděláme hned?“ Dospělejší systém se ptá: „Co se stane, když to nepůjde hned, půjde to dvakrát, nebo to půjde až za hodinu?“ Privacy-first varianta k tomu dodá: „A kolik dat kvůli tomu fakt musíme tahat přes půl infrastruktury?“ Nudné otázky. Přesně proto zachraňují víkendy.
+
+## Zdroje k příloze
+
+- MDN Web Docs: HTTP `429 Too Many Requests` — https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/429
+- RFC 6585, sekce 4: status `429 Too Many Requests` a hlavička `Retry-After` — https://www.rfc-editor.org/rfc/rfc6585#section-4
+- MDN Web Docs: hlavička `Retry-After` — https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Retry-After
+- OWASP Cheat Sheet Series: Logging Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+
+## Shrnutí přílohy
+
+Fronty, retry a backpressure mají chránit uživatele i infrastrukturu před prací, která je pomalá, drahá nebo nespolehlivá. Navrhni jasný stavový model, rozlišuj typy chyb, používej omezený retry s backoffem, chraň akce idempotencí, přiznej kapacitu pomocí backpressure a do payloadů neposílej víc dat, než worker opravdu potřebuje. Dobře navržená fronta není technická skrýš. Je to férový produktový tok.
+
 ## Pracovní log
 
+- 2026-08-10: Přidána příloha CO o frontách, retry a backpressure: stavový model úloh, retry podle typu chyby, idempotence, férové omezení kapacity, datové minimum ve frontách a checklist.
 - 2026-08-10: Přidána příloha CN o auditní stopě bez interního dozoru: rozdíl mezi auditem, analytikou a debug logy, minimální schéma eventů, neměnnost, zákaznická historie, retence a checklist.
 - 2026-08-10: Přidána příloha CM o rate limitingu a kvótách: limity podle rizika akcí, dokumentace kvót, bezpečné 429 odpovědi, oddělení od autorizace, fronty pro drahé operace, monitoring a checklist.
 - 2026-08-10: Přidána příloha CL o aplikačních logách bez datové skládky: účel logů, zákaz tajemství a payloadů, strukturované eventy, redakce, retence, přístupy a checklist.
