@@ -16573,7 +16573,187 @@ Rate limiting je jako dobrý vyhazovač v klubu: má poznat problém, ne vyhodit
 Rate limiting chrání dostupnost, bezpečnost i férové využití produktu, ale nesmí se změnit v trest pro dobré zákazníky ani v omluvu pro plošné sledování. Stavěj limity podle účelu, identity a nákladnosti operace, vracej srozumitelné `429`, drahé úlohy přesouvej do fronty, loguj jen nezbytná metadata a každou externí anti-abuse službu posuzuj podle datového dopadu.
 
 
+# Příloha DG: Role a oprávnění v SaaS bez admin guláše, sdílených účtů a tajného datového průvanu
+
+Role v SaaS nejsou jen tabulka `users.role`. Jsou to hranice důvěry: kdo smí vidět zákaznická data, měnit nastavení, zvát lidi, exportovat obsah, mazat účet, zapínat integrace a rozhodovat o penězích. Když jsou role navržené ledabyle, produkt funguje hezky až do prvního většího zákazníka. Pak přijde otázka „může účetní vidět jen faktury?“ a aplikace odpoví pokrčením ramen v JavaScriptu.
+
+OWASP ASVS u přístupových práv zdůrazňuje vynucení pravidel na důvěryhodné serverové vrstvě a princip nejmenších oprávnění: uživatel má mít přístup jen k funkcím, datům a zdrojům, pro které má konkrétní autorizaci. Viz OWASP ASVS Access Control: https://cornucopia.owasp.org/taxonomy/asvs-4.0.3/04-access-control/01-general-access-control-design
+
+NIST u zero trust popisuje posun od implicitní důvěry v síť nebo lokaci k rozhodování podle identity, zdroje a kontextu. Pro malé SaaS to neznamená kupovat armádu enterprise nástrojů. Znamená to jednoduché pravidlo: každá citlivá akce se ověřuje v okamžiku použití, ne jen při přihlášení. Oficiální publikace NIST SP 800-207 je tady: https://csrc.nist.gov/pubs/sp/800/207/final
+
+## DG.1 Nejdřív napiš akce, až potom role
+
+Začínat otázkou „kolik rolí budeme mít?“ je lákavé, ale špatně. Role jsou zkratka pro sadu akcí. Nejdřív si vypiš, co se v produktu skutečně děje.
+
+Příklad pro B2B SaaS:
+
+| Oblast | Akce | Dopad |
+| --- | --- | --- |
+| Tým | pozvat člena, změnit roli, odebrat člena | bezpečnost, přístup k datům |
+| Billing | změnit tarif, stáhnout fakturu, upravit fakturační údaje | peníze, účetnictví |
+| Data | exportovat zákazníky, smazat projekt, obnovit ze zálohy | privacy, provoz |
+| Integrace | připojit účetní systém, vytvořit API token, nastavit webhook | únik dat, automatizace |
+| Obsah | publikovat změnu, upravit šablonu, mazat příspěvky | reputace, provoz |
+| Support | zobrazit diagnostiku, dočasně nahlédnout do účtu | důvěra, audit |
+
+Až potom seskupuj akce do rolí. Typické minimum:
+
+- **Owner:** správa workspace, billing, role, export a smazání účtu.
+- **Admin:** provozní nastavení bez převodu vlastnictví a bez rušení účtu.
+- **Member:** běžná práce s produktem.
+- **Billing:** faktury, tarif, platební údaje, ale ne obsah zákaznických dat.
+- **Read-only:** čtení vybraných dat bez změn a exportů.
+- **Support:** dočasný, auditovaný přístup pro pomoc zákazníkovi.
+
+Nepřidávej roli jen proto, že ji má konkurence. Přidej ji, když chrání konkrétní hranici nebo zjednodušuje konkrétní práci. Role „Manager“, která někde něco může a někde možná ne, je bezpečnostní mlha s visačkou.
+
+## DG.2 Oprávnění vynucuj serverem, UI je jen navigace
+
+Skrytí tlačítka není autorizace. Je to slušné UX. Útočník, interní tester nebo omylem napsaná integrace může zavolat endpoint přímo. Každý request, který mění nebo čte chráněná data, musí na serveru ověřit:
+
+- kdo volá,
+- ve kterém workspacu pracuje,
+- jakou akci chce provést,
+- nad jakým objektem,
+- zda má aktuální oprávnění,
+- zda akce nevyžaduje další krok: reautentizaci, schválení nebo potvrzení vlastníka.
+
+Praktický pseudomodel:
+
+```text
+can(user, "project.export", { workspace_id, project_id })
+can(user, "billing.change_plan", { workspace_id })
+can(user, "member.invite", { workspace_id, target_role })
+can(user, "api_token.create", { workspace_id, scopes })
+```
+
+Kontrola má být blízko business logiky, ne rozhozená v route handlerech jako konfety po firemním večírku. Ideálně existuje jedna autorizační vrstva, kterou používá web, API, background joby i interní admin.
+
+Privacy-first detail: autorizace musí rozlišovat čtení, změnu, export a sdílení. Uživatel, který smí vidět seznam zákazníků v UI, automaticky nemusí smět stáhnout kompletní CSV. Export je jiný dopad než zobrazení jedné stránky výsledků.
+
+## DG.3 Vlastnictví účtu navrhni jako krizový proces
+
+Každý workspace potřebuje vlastníka, ale vlastník nesmí být magická bytost, kterou systém nikdy nezpochybní. Řeš hned na začátku:
+
+- co se stane, když vlastník odejde z firmy,
+- zda může být více vlastníků,
+- kdo smí převést vlastnictví,
+- zda převod vyžaduje reautentizaci nebo schválení druhou osobou,
+- jak support ověří legitimní žádost o obnovu přístupu,
+- co se zapíše do audit logu.
+
+U malého SaaS často stačí jednoduchý model: každý workspace má alespoň jednoho ownera, převod vlastnictví vyžaduje aktuální heslo nebo MFA/passkey potvrzení, odebrání posledního ownera není možné a support nemůže potichu udělat ownerem kohokoliv bez auditované procedury.
+
+Příklad mikrotextu:
+
+> „Převod vlastnictví dává novému vlastníkovi právo měnit členy týmu, billing, exportovat data a zrušit workspace. Pro potvrzení se znovu přihlaste.“
+
+Tohle není strašení. To je popis dopadu. U rizikových akcí je přesnost laskavost.
+
+## DG.4 Sdílené účty jsou dluh s lidskou tváří
+
+„Máme jeden firemní login pro účetní“ zní neškodně, dokud se něco nestane. Pak nevíš, kdo stáhl export, kdo změnil tarif, kdo smazal integraci a komu odebrat přístup po odchodu z firmy. Sdílený účet ničí audit, onboarding i offboarding.
+
+Lepší produktové řešení:
+
+- umožni levnou nebo bezplatnou roli pro billing a read-only přístup,
+- nepočítej každého pasivního uživatele jako plnou drahou licenci,
+- nabídni pozvánku s jasným rozsahem práv,
+- zobraz v nastavení „poslední aktivitu“ bez zbytečného sledování detailů,
+- připomeň ownerovi účty, které dlouho nebyly použité,
+- udělej offboarding jedním bezpečným tokem.
+
+Pokud pricing trestá správné oddělení rolí, zákazníci začnou sdílet přístupy. A pak bezpečnostní tým moralizuje nad chováním, které sám produkt ekonomicky vyrobil. Malá ironie, velká faktura.
+
+## DG.5 Dočasná oprávnění musí sama umírat
+
+Dočasný admin přístup, support access, výjimka pro export nebo jednorázové schválení integrace mají mít expiraci. Bez expirace se z dočasného oprávnění stane archeologický nález.
+
+Minimální pravidla:
+
+- každé dočasné oprávnění má důvod,
+- má vlastníka, který ho udělil,
+- má přesný rozsah akcí,
+- má expiraci,
+- jde ho ručně zrušit,
+- je vidět v audit logu,
+- po expiraci se opravdu přestane uplatňovat i v background jobech.
+
+Příklad pro support:
+
+> „Support přístup k diagnostice projektu `Acme / Fakturace` je aktivní do 14:30. Cody Support vidí technická metadata a poslední chyby, ne obsah zákaznických dokumentů.“
+
+Takový text chrání obě strany. Zákazník ví, co se děje. Support ví, co smí. Produkt má důkaz, že přístup nebyl „někdy nějak zapnutý“.
+
+## DG.6 API tokeny nejsou lidé
+
+API token patří integraci nebo automatizaci, ne konkrétnímu zaměstnanci v roli „Franta, co to kdysi nastavil“. Token musí mít vlastní jméno, scope, vlastníka, poslední použití a rotaci.
+
+Dobré scope nejsou „read“ a „write“ pro celý vesmír. Lepší:
+
+- `invoices:read`,
+- `customers:read`,
+- `customers:write`,
+- `webhooks:manage`,
+- `exports:create`,
+- `billing:read`.
+
+U každého tokenu ukaž lidský popis dopadu:
+
+> „Token `Účetní export` může číst faktury a zákaznické identifikátory. Nemůže měnit tarif, zvát členy ani mazat data.“
+
+Token nikdy nezobrazuj znovu po vytvoření. Umožni rotaci, rychlé zneplatnění a audit posledního použití. Pokud token patří externí integraci, napiš to do datové mapy a dokumentace subdodavatelů. Privacy-first provoz není jen o lidech; automatizace umí data vynášet stejně rychle, jen bez špatného svědomí.
+
+## DG.7 Review oprávnění dělej jako úklid, ne jako rituál
+
+Jednou za měsíc nebo kvartál projdi aktivní role a výjimky. Ne jako compliance divadlo, ale jako normální provozní hygienu.
+
+Review otázky:
+
+- Má každý workspace alespoň jednoho aktuálního ownera?
+- Neexistují bývalí zaměstnanci s aktivním přístupem?
+- Kolik lidí má admin nebo owner roli?
+- Jsou dočasná oprávnění opravdu expirovaná?
+- Existují API tokeny bez posledního použití nebo bez vlastníka?
+- Mají billing lidé přístup jen k billing oblasti?
+- Dokáže support vysvětlit každý svůj přístup do zákaznického účtu?
+
+U větších zákazníků přidej export „kdo má k čemu přístup“. Nemusí to být ISO portál z kosmické lodi. Stačí přehled členů, rolí, dočasných oprávnění, API tokenů, poslední aktivity a odkaz na audit log.
+
+## DG.8 Checklist rolí a oprávnění
+
+- Máme seznam citlivých akcí dřív než seznam rolí.
+- Každá role odpovídá reálné práci a konkrétnímu dopadu.
+- Autorizace se vynucuje na serveru u každého chráněného requestu.
+- UI skrývá nepovolené akce, ale není jedinou kontrolou.
+- Export, mazání, billing, role a integrace jsou oddělené oprávnění.
+- Workspace nemůže zůstat bez vlastníka.
+- Převod vlastnictví a rizikové změny vyžadují reautentizaci nebo schválení.
+- Sdílené účty produkt ekonomicky netlačí jako „nejlevnější cestu“.
+- Dočasná oprávnění mají důvod, rozsah, vlastníka, expiraci a audit log.
+- API tokeny mají scope, jméno, vlastníka, rotaci a poslední použití.
+- Support přístup je omezený, časově svázaný a srozumitelný zákazníkovi.
+- Pravidelný review přístupů má vlastníka a konkrétní výstup.
+
+## Codyho komentář
+
+Role jsou nudné jen do chvíle, než špatný člověk stáhne správný export. Můj pohled: nejlepší oprávnění jsou ta, která zákazník pochopí bez školení a vývojář bez lovení v pěti middlewarech. Pokud role vysvětluješ diagramem větším než landing page, něco se ti v produktu potichu rozlezlo.
+
+## Zdroje k příloze
+
+- OWASP ASVS Access Control — https://cornucopia.owasp.org/taxonomy/asvs-4.0.3/04-access-control/01-general-access-control-design
+- OWASP Access Control — https://owasp.org/www-community/Access_Control
+- OWASP Cornucopia Authorization — https://cornucopia.owasp.org/cards/AZA
+- NIST SP 800-207: Zero Trust Architecture — https://csrc.nist.gov/pubs/sp/800/207/final
+- NIST SP 800-207A: Access Control in Cloud-Native Applications — https://csrc.nist.gov/pubs/sp/800/207/a/final
+
+## Shrnutí přílohy
+
+Role a oprávnění jsou produktový, bezpečnostní i privacy problém najednou. Začni citlivými akcemi, ne názvy rolí. Vynucuj oprávnění serverem, odděl vlastnictví, billing, exporty, integrace a support, zabraň sdíleným účtům rozumným pricingem a každý dočasný přístup nech automaticky expirovat. Dobré role nevypadají efektně v prezentaci, ale brání průšvihům v úterý odpoledne.
+
+
 ## Pracovní log
+- 2026-08-11: Přidána příloha DG o rolích a oprávněních v SaaS: mapování citlivých akcí, serverová autorizace, vlastnictví účtu, omezení sdílených účtů, dočasná oprávnění, API tokeny, review přístupů a checklist.
 - 2026-08-11: Přidána příloha DF o rate limitingu a ochraně API: férové jednotky limitů, oddělení bezpečnostních a produktových brzd, odpovědi `429`, fronty pro drahé operace, privacy-first anti-abuse a checklist.
 
 - 2026-08-11: Přidána příloha DE o přihlášení, session a passkeys: datový model identity, rozumná heslová politika, postupné zavádění passkeys, MFA recovery, session management, bezpečná obnova účtu a privacy-first checklist.
