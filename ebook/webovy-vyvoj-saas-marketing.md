@@ -17114,8 +17114,139 @@ Můj pohled — Cody: nejlepší privacy-first vývojové prostředí je trochu 
 
 Vývojová a testovací prostředí nejsou bezriziková jen proto, že v nich nejsou zákazníci přihlášení každý den. Privacy-first tým používá syntetická data jako výchozí stav, produkční výřezy povoluje jen výjimečně, staging chrání před omylem stejně jako před útokem a testovací data uklízí dřív, než se z nich stane druhá produkce v teplákách.
 
+
+# Příloha DJ: Uploady souborů bez malware bufetu, GDPR skládky a veřejného kýblu hanby
+
+Upload souborů vypadá jako malá funkce: tlačítko, drag-and-drop, progress bar a hotovo. Ve skutečnosti je to jeden z nejrychlejších způsobů, jak si do SaaS pustit cizí obsah, citlivé údaje, škodlivé soubory, nekonečné ZIPy, EXIF metadata a provozní náklady, které rostou potichu jako plíseň za skříní.
+
+Privacy-first otázka zní: „Proč soubor vůbec potřebujeme, kdo ho uvidí, jak dlouho ho držíme a co uděláme, když je nebezpečný?“ Teprve potom řeš design dropzóny.
+
+## DJ.1 Nejdřív definuj účel souboru
+
+Každý upload musí mít obchodní nebo produktový důvod. Bez něj se z úložiště rychle stane archiv všeho, co se kdy někomu povedlo přetáhnout do prohlížeče.
+
+Začni jednoduchou tabulkou:
+
+| Typ souboru | Účel | Kdo má přístup | Retence | Riziko |
+| --- | --- | --- | --- | --- |
+| Faktura od zákazníka | zpracování účetního požadavku | účetní role, vlastník účtu | podle účetních pravidel a smlouvy | osobní a finanční údaje |
+| Avatar uživatele | zobrazení profilu | veřejně v rámci workspace | dokud existuje účet | EXIF metadata, nevhodný obsah |
+| CSV import kontaktů | jednorázový import | admin účtu | smazat po zpracování nebo chybě | hromadné osobní údaje |
+| PDF příloha v supportu | vyřešení tiketu | support s oprávněním | 12 měsíců po uzavření, pokud není důvod déle | citlivé screenshoty a dokumenty |
+
+Když neumíš doplnit účel a retenci, upload ještě nenavrhuj. Jen bys vyráběl digitální půdu, kam se jednou bude někdo bát vlézt.
+
+## DJ.2 Přijímej jen to, co opravdu umíš zpracovat
+
+Bezpečný upload není „povolíme všechno a potom se uvidí“. OWASP ve File Upload Cheat Sheet doporučuje kombinovat allowlist přípon, kontrolu typu obsahu, ověření signatury souboru, limity velikosti, přejmenování souboru a ukládání mimo webroot, pokud to jde: https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html
+
+Praktická pravidla:
+
+- Povoluj konkrétní formáty podle účelu, ne obecné „documents“.
+- Nekontroluj jen příponu ani jen `Content-Type`; obojí může lhát jako landing page bez ceny.
+- Nastav maximální velikost souboru i maximální počet souborů na akci.
+- Normalizuj názvy souborů; původní název zobrazuj jen jako metadata, ne jako cestu v úložišti.
+- U obrázků zvaž převod na bezpečný výstupní formát a odstranění EXIF metadat.
+- U archivů buď extrémně opatrný: hlídej počet souborů, kompresní poměr i výslednou velikost po rozbalení.
+
+Příklad: pokud uživatel nahrává logo firmy, nepotřebuješ přijímat `.zip`, `.docx` ani `.svg` s potenciálním skriptem. Často stačí PNG, JPEG nebo WebP, převod na interní varianty a uložení původního souboru jen tehdy, když k tomu máš důvod.
+
+## DJ.3 Upload není hotový, dokud neprojde karanténou
+
+Soubor po nahrání nepatří hned do veřejného světa. Patří do dočasného stavu: přijatý, neověřený, bez možnosti veřejného stažení. Teprve po validaci může být dostupný aplikaci.
+
+Minimální pipeline:
+
+1. Uživatel požádá o upload a server vytvoří záznam se stavem `pending`.
+2. Soubor se uloží do neveřejného bucketu nebo storage prostoru.
+3. Worker zkontroluje velikost, typ, signaturu a bezpečnostní pravidla.
+4. Antimalware nebo sandbox provede kontrolu, pokud jde o rizikový typ souboru.
+5. Aplikace nastaví stav `ready`, `rejected` nebo `needs_review`.
+6. Uživatel dostane srozumitelnou zprávu, co se stalo a co má udělat dál.
+
+Chybová hláška nemá prozradit interní pravidla typu „náš scanner našel pattern X ve streamu Y“. Stačí: „Soubor jsme nemohli přijmout, protože neprošel bezpečnostní kontrolou. Zkuste export bez maker nebo kontaktujte podporu.“
+
+## DJ.4 Úložiště navrhuj jako trezor, ne veřejnou složku
+
+Nejhorší varianta je uložit upload do veřejné cesty a doufat, že URL nikdo neuhodne. Lepší je oddělit souborové úložiště od aplikační domény, používat interní identifikátory, kontrolovat oprávnění při každém stažení a veřejné odkazy časově omezovat.
+
+Privacy-first architektura pro SaaS:
+
+- soubory leží v evropském regionu nebo u evropského poskytovatele, pokud to požadavky produktu dovolují,
+- každý soubor má vlastníka: uživatel, workspace, ticket, projekt nebo faktura,
+- přístup se kontroluje serverem podle aktuálních práv, ne podle toho, že někdo zná URL,
+- veřejné sdílení je explicitní akce s expirací a audit logem,
+- citlivé dokumenty mají přísnější retenci a zákaz indexace,
+- mazání účtu řeší i fyzické odstranění souborů nebo jasně popsanou anonymizaci/metadatovou stopu.
+
+U stažení nepoužívej přímý permanentní odkaz do storage, pokud soubor není skutečně veřejný. Vygeneruj krátkodobý odkaz až po kontrole oprávnění. Ano, je to o pár řádků navíc. Levnější než vysvětlovat zákazníkovi, proč jeho PDF žije na internetu jako bezdomovec s UUID kabátem.
+
+## DJ.5 Metadata jsou data, i když se tváří nevinně
+
+Obrázek může obsahovat GPS souřadnice, model telefonu, datum pořízení nebo náhledy. Dokument může mít autora, historii úprav, komentáře nebo interní názvy cest. CSV může obsahovat sloupce, které produkt vůbec nepotřebuje.
+
+GDPR principy minimalizace a omezení uložení říkají, že organizace má zpracovávat jen nezbytná osobní data a držet je jen po dobu nutnou pro daný účel; Evropská komise je shrnuje v části o podmínkách zpracování dat: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/overview-principles/what-data-can-we-process-and-under-which-conditions_en
+
+Přeloženo do uploadů:
+
+- Z obrázků stripuj EXIF, pokud metadata nejsou nutná pro funkci.
+- U dokumentů zobraz uživateli varování, pokud mohou obsahovat skrytá metadata.
+- U importů validuj jen očekávané sloupce a přebytečné ignoruj nebo odmítni.
+- Do logů neukládej celé názvy citlivých souborů, pokud nejsou potřeba.
+- Náhledy generuj tak, aby neunikl víc obsahu než má daná role vidět.
+
+Příklad mikrotextu u uploadu support přílohy:
+
+> „Nahrajte jen soubory potřebné k vyřešení požadavku. Přílohy vidí náš support tým a po uzavření tiketu je držíme podle retenčních pravidel podpory. Pokud soubor obsahuje citlivé údaje, zvažte jejich začernění.“
+
+## DJ.6 Retence souborů musí být automat, ne přání v dokumentaci
+
+Retenční pravidlo, které nikdo nevynucuje, je jen hezká věta. Uploady se musí uklízet technicky: jobem, lifecycle pravidlem storage, stavovým modelem nebo alespoň pravidelným reportem výjimek.
+
+Praktický model stavů:
+
+| Stav | Co znamená | Co se děje dál |
+| --- | --- | --- |
+| `pending` | soubor čeká na validaci | smazat po 24 hodinách, pokud validace nedoběhne |
+| `rejected` | soubor neprošel pravidly | smazat po krátké době, neuchovávat obsah zbytečně |
+| `ready` | soubor je aktivní | držet podle účelu a smlouvy |
+| `archived` | soubor už není běžně potřeba | omezit přístup, naplánovat smazání |
+| `delete_scheduled` | běží ochranná lhůta | po expiraci fyzicky smazat a zalogovat |
+
+Do administrace přidej jednoduchý přehled: kolik souborů je ve kterém stavu, kolik zabírají místa, kolik čeká na smazání a kdo vlastní výjimky. Tohle není jen compliance. Je to i kontrola nákladů.
+
+## DJ.7 Checklist bezpečných uploadů
+
+- Každý typ uploadu má účel, vlastníka, přístupová pravidla a retenci.
+- Formáty jsou povolené allowlistem podle konkrétní funkce.
+- Server ověřuje příponu, deklarovaný typ, skutečnou signaturu a velikost.
+- Soubory se ukládají mimo veřejný webroot nebo do neveřejného bucketu.
+- Původní názvy souborů nejsou používány jako storage cesta.
+- Rizikové soubory procházejí karanténou, antivirovou kontrolou nebo ručním review.
+- Stažení vždy kontroluje aktuální oprávnění uživatele.
+- Veřejné odkazy jsou explicitní, časově omezené a auditované.
+- Obrázky a dokumenty řeší metadata, náhledy a citlivý obsah.
+- Do logů se neukládají zbytečná osobní data ani celé citlivé přílohy.
+- Retence je vynucená automaticky, ne jen napsaná v policy.
+- Mazání účtu nebo projektu zahrnuje i související soubory a náhledy.
+
+## Codyho komentář
+
+Můj pohled — Cody: uploady jsou jako dveře do skladu. Můžeš je udělat pohodlné, ale nemáš je nechat dokořán s cedulí „hoďte sem cokoli“. Privacy-first SaaS se pozná podle toho, že soubor bere jako citlivý objekt od první vteřiny, ne až ve chvíli, kdy se někde objeví screenshot faktury s rodným číslem. To už je pozdě a kafe chutná po incidentu.
+
+## Zdroje k příloze
+
+- OWASP Cheat Sheet Series — File Upload Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html
+- OWASP — Unrestricted File Upload: https://owasp.org/www-community/vulnerabilities/Unrestricted_File_Upload
+- European Commission — What data can we process and under which conditions?: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/overview-principles/what-data-can-we-process-and-under-which-conditions_en
+
+## Shrnutí přílohy
+
+Upload souborů není okrajová UX drobnost. Je to bezpečnostní, provozní i privacy funkce. Rozumný SaaS přijímá jen potřebné formáty, drží soubory v karanténě, ukládá je neveřejně, kontroluje oprávnění při každém přístupu, čistí metadata a vynucuje retenci automaticky. Jinak se z užitečné přílohy rychle stane drahý a citlivý bordel-box.
+
 ## Pracovní log
 
+- 2026-08-11: Přidána příloha DJ o bezpečných uploadech souborů v SaaS: účel a retence, allowlist formátů, karanténa, neveřejné úložiště, metadata, download oprávnění a privacy-first checklist.
 - 2026-08-11: Přidána příloha DI o vývojových a testovacích prostředích bez produkčních dat: syntetické datasety, pseudonymizace, staging brzdy, oddělené secrets, incidentní výřezy, úklid a checklist.
 - 2026-08-11: Přidána příloha DH o audit logu v SaaS: oddělení od debug logů a analytiky, bezpečná struktura událostí, zákaznické UI, retence, alerty a privacy-first checklist.
 - 2026-08-11: Přidána příloha DG o rolích a oprávněních v SaaS: mapování citlivých akcí, serverová autorizace, vlastnictví účtu, omezení sdílených účtů, dočasná oprávnění, API tokeny, review přístupů a checklist.
