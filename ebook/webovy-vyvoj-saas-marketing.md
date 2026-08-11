@@ -15946,8 +15946,146 @@ Můj pohled: bezpečnostní hlavičky jsou jako kvalitní zámky na dveřích. N
 Bezpečnostní hlavičky dávají prohlížeči jasné mantinely. Nejdřív si napiš politiku zdrojů, potom ji převeď do CSP a zaváděj ji přes report-only režim. Omez referery, vypni nepotřebné browser schopnosti, HSTS zapínej postupně a embedding řeš odděleně podle typu obrazovky. Privacy-first SaaS nepoužívá hlavičky jako dekoraci; používá je jako provozní pravidla, která chrání lidi, data i produkt před zbytečným rizikem.
 
 
+# Příloha DC: Cache, CDN a edge bez cizích dat v mezipaměti a falešné rychlosti
+
+Cache je skvělý sluha a výborný sabotér. Umí zrychlit web, snížit náklady, přežít špičku po kampani a ušetřit backendu zbytečnou práci. Stejně tak ale umí ukázat zákazníkovi cizí fakturu, držet starý právní text, obejít čerstvě odebrané oprávnění nebo poslat osobní data do sdílené infrastruktury, kde vůbec neměla bydlet. Rychlost je fajn. Rychlost s únikem dat je jen sprint do problému.
+
+Privacy-first caching nezačíná otázkou „jak to dostat na CDN“. Začíná otázkou „co přesně smí být znovu použito, pro koho a jak dlouho“. MDN dobře shrnuje rozdíl mezi privátní a sdílenou cache a praktické chování hlaviček `Cache-Control`: https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Caching. Formální pravidla HTTP cache popisuje RFC 9111: https://www.rfc-editor.org/rfc/rfc9111. OWASP u citlivých odpovědí doporučuje používat hlavičky, které zabrání ukládání citlivých informací do browserů a proxy cache: https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Headers_Cheat_Sheet.html.
+
+## DC.1 Nejdřív rozděl obsah podle rizika
+
+Jedna cache politika pro celý web je pohodlná, ale málokdy správná. Marketingová stránka, obrázek v blogu, veřejný ceník, dashboard zákazníka, export dat a admin endpoint mají úplně jiný profil rizika. Když je hodíš do jednoho pytle, buď bude všechno pomalé, nebo nebezpečně sdílené.
+
+Praktická mapa:
+
+| Typ odpovědi | Příklad | Cache politika | Poznámka |
+|---|---|---|---|
+| Verzované statické assety | `/assets/app.a1b2.css` | dlouhá veřejná cache | Jen když název obsahuje hash obsahu. |
+| Veřejný obsah | blog, dokumentace, pricing | krátká až střední veřejná cache | Pozor na právní a cenové změny. |
+| Personalizovaná stránka | dashboard, profil, objednávky | privátní cache nebo žádné ukládání | Nikdy do sdílené cache bez tvrdého cache klíče. |
+| Citlivý export | CSV, faktura, záloha | `no-store` | Generuj krátkodobě a audituj stažení. |
+| Admin a support | interní nástroje | `no-store` | Tady se nehraje na výkonové ego. |
+| API pro veřejná data | katalog, články | cílená cache podle endpointu | Musí sedět invalidace. |
+
+Když tým neumí určit kategorii odpovědi, výchozí nastavení má být bezpečné: necachovat sdíleně a přidat cache až po explicitním rozhodnutí. Ano, backend si možná povzdechne. Backend přežije víc než reputace po úniku dat.
+
+## DC.2 Verzované assety cachuj agresivně, HTML opatrně
+
+Nejbezpečnější výkonový zisk bývá u statických souborů s hashem v názvu. Pokud build vytvoří `app.7f3a9d.js`, obsah se při změně projeví novým názvem. Starý soubor může zůstat v cache dlouho, protože už na něj nový HTML dokument nebude ukazovat.
+
+Typické pravidlo pro verzované assety:
+
+```text
+Cache-Control: public, max-age=31536000, immutable
+```
+
+HTML dokument je jiná liga. Je to navigační mapa k assetům, často obsahuje metadata, stav aplikace, odkazy na formuláře a někdy i personalizaci. U veřejného webu může mít krátkou cache s revalidací. U aplikace po přihlášení buď velmi opatrný.
+
+Rozumný start:
+
+```text
+# veřejný HTML obsah
+Cache-Control: public, max-age=300, stale-while-revalidate=60
+
+# personalizované HTML
+Cache-Control: private, no-cache
+
+# citlivé odpovědi a exporty
+Cache-Control: no-store
+```
+
+Neber to jako univerzální copy-paste. Ber to jako start debaty nad konkrétními cestami. Nejlepší cache pravidlo je takové, které umíš vysvětlit u každého endpointu.
+
+## DC.3 Sdílená cache nesmí hádat identitu uživatele
+
+CDN, reverse proxy a edge cache jsou sdílené vrstvy. Pokud jim dáš personalizovanou odpověď a neřekneš přesně, podle čeho se liší, mohou ji znovu použít špatně. To není „edge case“. To je přesně ten typ chyby, který se objeví až ve chvíli, kdy máš víc než jednoho zákazníka. Drzost internetu, já vím.
+
+Pravidla pro odpovědi za přihlášením:
+
+- Nepoužívej `public` pro odpovědi obsahující účetní, osobní nebo tenant-specific data.
+- Nepočítej s tím, že `Authorization` nebo cookie samy o sobě vytvoří bezpečný cache klíč v každé vrstvě.
+- Pokud caching personalizovaného API opravdu potřebuješ, navrhni cache klíč explicitně a testuj oddělení tenantů.
+- U endpointů měnících oprávnění, session, role nebo billing stav cache raději vypni.
+- Po odebrání přístupu musí produkt přestat ukazovat data hned, ne až po „příští invalidaci“.
+
+Praktický test: přihlas se jako zákazník A, načti citlivou stránku, pak jako zákazník B na jiné síti a v čistém profilu. Pokud existuje byť teoretická cesta, jak B uvidí obsah A, cache politika není hotová.
+
+## DC.4 Invalidace je proces, ne naděje
+
+Cache není jen o uložení. Je hlavně o tom, kdy se uložená odpověď smí použít a jak ji dostaneš pryč. Bez invalidace se z rychlosti stane lepidlo na staré chyby.
+
+Rozděl invalidace podle typu změny:
+
+| Změna | Dopad | Doporučený postup |
+|---|---|---|
+| Nový release assetů | nový JS/CSS | hashované názvy, žádný ruční purge |
+| Úprava článku | veřejný obsah | krátké TTL nebo cílený purge URL |
+| Změna ceny | obchodní riziko | purge pricing URL a kontrola kanonické stránky |
+| Změna právních textů | důvěra a compliance | krátké TTL, verze dokumentu, kontrola cache |
+| Odebrání přístupu | bezpečnost | žádná sdílená cache, okamžitá změna autorizace |
+| Stažení dokumentu | citlivý soubor | krátkodobý podepsaný odkaz, `no-store` |
+
+U každé cache vrstvy si napiš, kdo ji umí vyčistit: framework, reverse proxy, objektové úložiště, CDN, service worker, browser. Když nevíš, kde odpověď leží, neumíš ji spolehlivě odstranit. A „počkejte hodinu“ není incidentní plán, to je modlitba s TTL.
+
+## DC.5 Service worker je aplikace, ne kouzelný offline prášek
+
+Service worker umí offline režim, rychlé načtení a jemnou kontrolu nad síťovou strategií. Taky umí držet starou aplikaci, cachovat citlivá data v prohlížeči a udělat z odhlášení kosmetickou událost. Proto ho zaváděj jen tam, kde má produktový důvod.
+
+Dobrá pravidla:
+
+- Offline cache používej hlavně pro shell aplikace, veřejné assety a dokumentaci.
+- Necachuj citlivé API odpovědi do Cache API jen proto, že je to technicky snadné.
+- Při odhlášení smaž aplikační cache, fronty na pozadí a lokální pracovní data.
+- Verzi service workeru propoj s release procesem a otestuj upgrade ze starší verze.
+- U PWA jasně vysvětli, která data mohou zůstat v zařízení.
+
+Privacy-first UX detail: pokud aplikace nabízí offline režim pro zákaznická data, dej uživateli ovládání. „Vymazat lokální data z tohoto zařízení“ má být normální produktová funkce, ne lov v devtools.
+
+## DC.6 Edge logy jsou taky data
+
+CDN a edge vrstva často vidí IP adresy, URL, user agenty, cookies, hlavičky, geolokaci podle IP, bot signály a někdy i části requestů. To jsou provozní data, ne bezvýznamný šum. Pokud je posíláš mimo Evropu nebo do nástroje, který z nich dělá marketingový profil, rozbil jsi privacy-first hodnotu ještě před aplikací.
+
+Při výběru CDN nebo edge řešení se ptej:
+
+- Kde se zpracovávají logy a diagnostika?
+- Jak dlouho se drží request logy?
+- Dá se vypnout ukládání query stringů, cookie a citlivých hlaviček?
+- Umí produkt EU region nejen pro origin, ale i pro logy, support a zálohy konfigurace?
+- Kdo má přístup k dashboardu a purge právům?
+- Je možné exportovat konfiguraci do kódu nebo aspoň pravidelně auditovat změny?
+
+Codyho praktické pravidlo: CDN má zrychlovat veřejný obsah. Nemá být tichý datový vysavač před každou obrazovkou produktu.
+
+## DC.7 Checklist cache, CDN a edge provozu
+
+- Máme mapu typů odpovědí a u každého víme, zda smí do veřejné, sdílené, privátní nebo žádné cache.
+- Verzované assety používají dlouhou cache a hash v názvu.
+- HTML a personalizované odpovědi mají vlastní politiku, nejsou schované pod globálním pravidlem.
+- Citlivé exporty, admin stránky, faktury a tokenové odkazy používají `no-store`.
+- Sdílená cache nikdy neukládá tenant-specific obsah bez explicitního a otestovaného cache klíče.
+- Invalidace má vlastníka, postup a test po změně cen, právních textů, oprávnění a release.
+- Service worker neukládá zákaznická data bez jasného produktového důvodu a ovládání pro výmaz lokálních dat.
+- Edge/CDN logy mají retenční pravidla, omezený přístup a zapadají do evropské datové mapy.
+- Po změně cache pravidel testujeme minimálně anonymní návštěvu, přihlášeného uživatele, jiný tenant, odhlášení a citlivý export.
+
+## Codyho komentář
+
+Cache je místo, kde se potkává výkonová touha vývojáře s právem zákazníka nebýt překvapen. Můj pohled: nejlepší privacy-first optimalizace je cachovat tvrdě to, co je veřejné a neměnné, a být konzervativní u všeho, co má identitu, oprávnění nebo obchodní dopad. Rychlý web je super. Rychlý web, který si pamatuje cizí věci, je horor s lepším TTFB.
+
+## Zdroje k příloze
+
+- MDN: HTTP caching — https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Caching
+- RFC 9111: HTTP Caching — https://www.rfc-editor.org/rfc/rfc9111
+- OWASP HTTP Headers Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Headers_Cheat_Sheet.html
+- OWASP Transport Layer Security Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Transport_Layer_Security_Cheat_Sheet.html
+
+## Shrnutí přílohy
+
+Cache a CDN patří do privacy-first architektury, ale jen s jasnou mapou rizika. Veřejné hashované assety cachuj agresivně, personalizované a citlivé odpovědi opatrně nebo vůbec, invalidaci ber jako provozní proces a edge logy považuj za data se stejnou disciplínou jako aplikační logy.
+
 ## Pracovní log
 
+- 2026-08-11: Přidána příloha DC o cache, CDN a edge provozu: kategorizace odpovědí, bezpečné cache hlavičky, sdílená cache, invalidace, service worker, edge logy a privacy-first checklist.
 - 2026-08-11: Přidána příloha DB o bezpečnostních HTTP hlavičkách: mapa povolených zdrojů, CSP rollout, Referrer-Policy, Permissions-Policy, HSTS, ochrana proti clickjackingu, reporty a checklist.
 - 2026-08-11: Přidána příloha DA o závislostech, aktualizacích a SBOM: inventář komponent, lockfile, update boty, SCA triage, SBOM jako release artefakt, pravidla pro nové knihovny a checklist.
 - 2026-08-11: Přidána příloha CZ o chybových stavech bez úniku dat: typy chyb podle dalšího kroku, bezpečné veřejné zprávy, korelační ID, formulářové chyby, jednoznačný stav kritických akcí, support kontext a checklist.
