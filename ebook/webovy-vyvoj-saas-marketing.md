@@ -16083,8 +16083,178 @@ Cache je místo, kde se potkává výkonová touha vývojáře s právem zákazn
 
 Cache a CDN patří do privacy-first architektury, ale jen s jasnou mapou rizika. Veřejné hashované assety cachuj agresivně, personalizované a citlivé odpovědi opatrně nebo vůbec, invalidaci ber jako provozní proces a edge logy považuj za data se stejnou disciplínou jako aplikační logy.
 
+# Příloha DD: Transakční e-maily bez doručovací loterie, pixelového divadla a podpůrného požáru
+
+Transakční e-mail je součást produktu. Není to „nějaká zpráva z backendu“. Je to potvrzení registrace, reset hesla, faktura, upozornění na incident, pozvánka do týmu, export dat nebo informace o změně tarifu. Když nedorazí, uživatel neřeší SPF záznam. Řeší, že produkt nefunguje.
+
+Privacy-first přístup tady znamená dvě věci najednou: e-mail musí být doručitelný a zároveň nesmí být malý datový špión v HTML kabátku. Doručitelnost není omluva pro tracking každého otevření. A soukromí není omluva pro rozbitou doménu bez DKIMu. Krásná rovnováha, skoro jako žonglovat s DNS záznamy v rukavicích.
+
+## DD.1 Rozděl e-maily podle účelu dřív než podle šablony
+
+Nejdřív si napiš inventář zpráv. Ne design šablon. Ne barvy tlačítek. Inventář účelů.
+
+Praktické kategorie:
+
+| Kategorie | Příklady | Riziko | Doporučení |
+|---|---|---|---|
+| Identita | reset hesla, magic link, ověření e-mailu | bezpečnost účtu | krátká platnost odkazů, žádné marketingové bloky |
+| Produktový stav | pozvánka, změna role, dokončený export | oprávnění a data | jasný důvod, minimální kontext, auditovatelný event |
+| Billing | faktura, neúspěšná platba, změna tarifu | obchod a právní doklady | stabilní odesílatel, archiv v aplikaci, žádné promo příměsi |
+| Provoz | incident, údržba, bezpečnostní upozornění | důvěra | rychlost, přesnost, status stránka, korelační ID podle potřeby |
+| Marketing | newsletter, novinky, vzdělávací obsah | souhlas a reputace | oddělená doména/subdoména, preference, jednoduché odhlášení |
+
+Pro každou kategorii urči vlastníka, systém odesílání, adresu odesílatele, retenční dobu logů a pravidla odhlášení. Nejhorší anti-vzor je jeden univerzální „noreply@“ kanál, který posílá reset hesla, newsletter, faktury i pozvánku na webinar. To není produktová jednoduchost. To je reputační mixér.
+
+## DD.2 Autentizace domény je základní hygiena
+
+Gmail ve svých sender guidelines uvádí požadavky na SPF nebo DKIM pro všechny odesílatele a pro větší objemy navíc SPF, DKIM i DMARC; zmiňuje také TLS, validní forward/reverse DNS a u marketingových či odběrových zpráv one-click unsubscribe: https://support.google.com/a/answer/81126?hl=en
+
+Praktický minimální balíček:
+
+- `SPF`: říká, které servery smějí posílat za doménu; standard popisuje RFC 7208: https://www.rfc-editor.org/rfc/rfc7208
+- `DKIM`: podepisuje zprávu kryptograficky a váže ji na doménu; standard popisuje RFC 6376: https://www.rfc-editor.org/rfc/rfc6376
+- `DMARC`: nastavuje politiku pro zprávy, které neprojdou ověřením, a umožňuje reporty; standard popisuje RFC 7489: https://www.rfc-editor.org/rfc/rfc7489
+- `MX`, `A/AAAA`, `PTR`: doručovací infrastruktura má sedět dohromady, ne vypadat jako archeologický nález po třech migracích.
+- `TLS`: přenos mezi servery má být šifrovaný, pokud ho druhá strana podporuje.
+
+Začni konzervativně: DMARC často dává smysl spustit s reportovací politikou, zkontrolovat legitimní zdroje a teprve pak zpřísňovat. Pokud rovnou nastavíš tvrdou politiku bez inventáře, můžeš si slavnostně odstřelit faktury. Produktový ohňostroj, jen zákazník netleská.
+
+## DD.3 Odděl transakční a marketingovou reputaci
+
+Transakční e-maily mají být chráněné jako kritická cesta produktu. Marketing může mít vyšší objem, experimenty se subjecty, sezónní výkyvy a přirozeně víc odhlášení. Když to smícháš, špatná newsletterová kampaň může zhoršit doručování resetu hesla.
+
+Doporučené rozdělení:
+
+- `app.example.com` a `login@example.com` pro identitu a účetní zprávy,
+- `billing@example.com` pro fakturaci,
+- `status@example.com` pro incidenty a provoz,
+- `news@example.com` nebo samostatná subdoména pro newsletter,
+- samostatné šablony, fronty a limity podle kategorie.
+
+Neznamená to mít pět dodavatelů. Znamená to mít pět jasných pravidel. Jeden poskytovatel může být v pořádku, pokud umí oddělit streamy, domény, bounce handling, suppression listy a logy.
+
+Privacy-first detail: nepředávej marketingovému nástroji všechny uživatele jen proto, že umí hezké e-maily. Kdo potřebuje fakturu, nemusí skončit v publiku pro „engagement journey“. Ano, zní to nudně. Nuda je v compliance často kompliment.
+
+## DD.4 Odkazy a tokeny navrhuj jako bezpečnostní funkci
+
+E-mail je nechráněný vstupní kanál. Lidé ho přeposílají, klienti načítají náhledy, bezpečnostní brány skenují odkazy a uživatelé klikají pozdě v noci s mobilem v ruce. Token v e-mailu proto není detail.
+
+Pravidla pro odkazy:
+
+- Magic link a reset hesla mají krátkou platnost a jednorázové použití.
+- Citlivé akce po kliknutí jen připraví stav; finální změna může vyžadovat přihlášení nebo reautentizaci.
+- Odkaz nesmí obsahovat osobní údaje v query stringu.
+- Po expiraci ukaž lidské vysvětlení a bezpečný způsob vyžádání nového odkazu.
+- Skenování odkazů bezpečnostními bránami nesmí omylem spotřebovat jednorázový token.
+- Přihlášení přes e-mail loguj jako bezpečnostní event, ale bez ukládání celého tokenu.
+
+Příklad špatného odkazu:
+
+```text
+https://app.example.com/reset?email=eva@example.com&token=dlouhy-token
+```
+
+Lepší směr:
+
+```text
+https://app.example.com/reset/t/nahodny-jednorazovy-token
+```
+
+A ještě lepší produktově: po kliknutí zobrazit, co se děje, pro jaký účet přibližně, kdy odkaz expiruje a jak pokračovat, pokud už není platný.
+
+## DD.5 Měř doručení, ne špehování čtení
+
+U transakčních e-mailů potřebuješ vědět hlavně: zpráva byla vytvořená, zařazená do fronty, odeslaná, doručená nebo odmítnutá, případně se vrátila jako bounce. To je provozní telemetrie. Otevření e-mailu přes tracking pixel je jiná hra: méně spolehlivá, často blokovaná klienty a z privacy pohledu citlivější.
+
+Co měřit bez zbytečného sledování:
+
+- `message_created`: aplikace vytvořila zprávu s účelem a kategorií,
+- `queued`: zpráva čeká ve frontě,
+- `sent`: poskytovatel ji převzal,
+- `delivered`: přijímající server ji přijal, pokud provider nabízí informaci,
+- `bounced`: adresa nebo doména odmítla doručení,
+- `complaint`: příjemce označil zprávu jako spam,
+- `suppressed`: systém další zprávu neposlal kvůli bouncu, odhlášení nebo pravidlu.
+
+U supportu pak stačí říct: „Reset hesla jsme odeslali dnes v 10:14, přijímající server ho odmítl kvůli neexistující schránce.“ Není potřeba vědět, že uživatel otevřel e-mail na telefonu v tramvaji. Produktivní informace ano, voyeurismus ne.
+
+## DD.6 Odhlášení a preference nejsou jen pro newsletter
+
+Marketingové a odběrové zprávy musí jít snadno vypnout. RFC 8058 popisuje signalizaci one-click unsubscribe v hlavičkách seznamových e-mailů: https://www.rfc-editor.org/info/rfc8058
+
+Preference centrum ale využiješ i mimo newsletter:
+
+- produktové novinky: zapnuto/vypnuto,
+- týdenní souhrny: frekvence nebo vypnutí,
+- upozornění týmu: podle role a projektu,
+- bezpečnostní zprávy: nevypínat, ale jasně vysvětlit proč,
+- billing: nevypínat pro vlastníky účtu, ale neposílat všem administrátorům bez důvodu.
+
+Nepiš „odhlásit ze všeho“, pokud tím člověk může přijít o bezpečnostní upozornění nebo fakturu. Piš konkrétně: „Odhlásit produktové tipy“, „Změnit frekvenci souhrnu“, „Bezpečnostní upozornění posíláme vždy vlastníkům účtu.“
+
+## DD.7 E-mailové šablony piš jako produktové obrazovky
+
+Dobrý transakční e-mail má být krátký, čitelný a samostatný. Ne každý ho otevře v krásném klientu. Někdo ho uvidí v plain textu, někdo v mobilní notifikaci, někdo přes bezpečnostní bránu, která přepíše odkazy.
+
+Šablona by měla obsahovat:
+
+- jasný předmět bez falešného „Re:“ a dramatického caps locku,
+- první větu s důvodem zprávy,
+- jednu hlavní akci,
+- informaci, co se stane po kliknutí,
+- platnost odkazu u citlivých akcí,
+- kontakt nebo bezpečný další krok,
+- minimum osobních údajů,
+- plain text variantu.
+
+Příklad pro reset hesla:
+
+```text
+Předmět: Obnova hesla k účtu Dreamind
+
+Někdo požádal o obnovu hesla k vašemu účtu.
+
+Pokračovat můžete tímto odkazem:
+https://app.example.com/reset/t/...
+
+Odkaz platí 20 minut a jde použít jen jednou. Pokud jste o obnovu nežádali, zprávu ignorujte; heslo se nezmění.
+```
+
+Žádné „Ahoj Evo, všimli jsme si, že máš ráda automatizaci, tady je ještě sleva“. Reset hesla není cross-sell. Je to hasicí přístroj.
+
+## DD.8 Checklist transakčních e-mailů a privacy
+
+- Máme inventář všech e-mailů podle účelu, vlastníka a kritičnosti.
+- Transakční, billing, provozní a marketingové zprávy mají oddělená pravidla odesílání.
+- Domény a subdomény mají nastavené SPF, DKIM a DMARC podle ověřeného inventáře odesílatelů.
+- DMARC reporty někdo čte a změny v odesílání prochází review.
+- Reset hesla, magic linky a pozvánky používají krátkodobé jednorázové tokeny bez osobních údajů v URL.
+- Citlivé akce po e-mailovém kliknutí řeší reautentizaci nebo potvrzení v aplikaci.
+- Odesílací logy obsahují stav doručení a korelační ID, ne celé payloady a tajemství.
+- Tracking pixely nejsou zapnuté u transakčních e-mailů; u marketingu mají jasný účel, právní základ a alternativu.
+- Newsletter a odběrové zprávy podporují jasné odhlášení a preference.
+- Každá šablona má plain text variantu, bezpečný předmět a jednu hlavní akci.
+- Support umí dohledat stav zprávy bez přístupu k citlivému obsahu účtu.
+
+## Codyho komentář
+
+E-mail je stará technologie, která drží moderní SaaS pohromadě izolepou a DNS záznamy. Můj pohled: transakční e-maily se mají navrhovat stejně vážně jako přihlášení nebo billing obrazovka. Když doručení funguje, nikdo netleská. Když nefunguje, shoří důvěra rychleji než reputace domény po koupeném seznamu kontaktů.
+
+## Zdroje k příloze
+
+- Gmail Help: Email sender guidelines — https://support.google.com/a/answer/81126?hl=en
+- RFC 7208: Sender Policy Framework (SPF) — https://www.rfc-editor.org/rfc/rfc7208
+- RFC 6376: DomainKeys Identified Mail (DKIM) Signatures — https://www.rfc-editor.org/rfc/rfc6376
+- RFC 7489: Domain-based Message Authentication, Reporting, and Conformance (DMARC) — https://www.rfc-editor.org/rfc/rfc7489
+- RFC 8058: Signaling One-Click Functionality for List Email Headers — https://www.rfc-editor.org/info/rfc8058
+
+## Shrnutí přílohy
+
+Transakční e-maily jsou produktová infrastruktura, ne vedlejší marketingový kanál. Rozděl zprávy podle účelu, nastav doménovou autentizaci, chraň reputaci kritických zpráv, navrhuj tokeny bezpečně, měř doručení místo špehování otevření a dej lidem srozumitelné preference tam, kde zprávy nejsou nezbytné.
+
 ## Pracovní log
 
+- 2026-08-11: Přidána příloha DD o transakčních e-mailech: inventář zpráv, SPF/DKIM/DMARC, oddělení reputace, bezpečné tokeny, doručovací telemetrie, preference, šablony a privacy-first checklist.
 - 2026-08-11: Přidána příloha DC o cache, CDN a edge provozu: kategorizace odpovědí, bezpečné cache hlavičky, sdílená cache, invalidace, service worker, edge logy a privacy-first checklist.
 - 2026-08-11: Přidána příloha DB o bezpečnostních HTTP hlavičkách: mapa povolených zdrojů, CSP rollout, Referrer-Policy, Permissions-Policy, HSTS, ochrana proti clickjackingu, reporty a checklist.
 - 2026-08-11: Přidána příloha DA o závislostech, aktualizacích a SBOM: inventář komponent, lockfile, update boty, SCA triage, SBOM jako release artefakt, pravidla pro nové knihovny a checklist.
