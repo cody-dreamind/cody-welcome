@@ -14119,7 +14119,144 @@ Fronta je dobrý test dospělosti produktu. Začátečnický systém se ptá: �
 
 Fronty, retry a backpressure mají chránit uživatele i infrastrukturu před prací, která je pomalá, drahá nebo nespolehlivá. Navrhni jasný stavový model, rozlišuj typy chyb, používej omezený retry s backoffem, chraň akce idempotencí, přiznej kapacitu pomocí backpressure a do payloadů neposílej víc dat, než worker opravdu potřebuje. Dobře navržená fronta není technická skrýš. Je to férový produktový tok.
 
+
+# Příloha CP: E-mailová reputace bez šmírovacích pixelů a doménového chaosu
+
+E-mail je pro SaaS pořád jeden z nejlepších kanálů: přihlašování, onboarding, fakturace, produktové notifikace, support i newsletter. Právě proto si zaslouží technickou disciplínu. Když doména posílá všechno přes jeden účet, nemá nastavené ověřování a měří každý otevřený e-mail neviditelným obrázkem, není to marketing. Je to doručovací ruleta s lehkým nádechem datového cirkusu.
+
+Privacy-first reputace stojí na jednoduché myšlence: adresát i přijímající server mají vědět, že zpráva opravdu patří k doméně, že obsahuje jen nutná data a že odhlášení nebo změna preferencí není escape room.
+
+## CP.1 Rozděl typy e-mailů podle účelu
+
+Nejdřív si napiš mapu e-mailů. Ne podle nástroje, ale podle toho, proč zpráva existuje. Malý SaaS typicky posílá pět kategorií:
+
+| Kategorie | Příklad | Primární riziko | Doporučené minimum |
+| --- | --- | --- | --- |
+| Transakční | potvrzení registrace, reset hesla, faktura | nedoručení kritické zprávy | samostatná subdoména, vysoká spolehlivost, žádné promo příměsi |
+| Produktové | pozvánka do workspace, dokončený export, limit kvóty | moc časté rušení | preference centrum a jasná priorita |
+| Bezpečnostní | nové přihlášení, změna hesla, změna fakturace | únik citlivého detailu | stručný obsah, odkaz do účtu, ne celé osobní údaje |
+| Marketingové | newsletter, kampaň, pozvánka na webinar | souhlas, odhlášení, reputace | samostatný seznam, snadný unsubscribe, střídmé měření |
+| Support | odpověď na ticket, shrnutí incidentu | příliš mnoho kontextu v e-mailu | číslo ticketu, minimum interních poznámek, bezpečné přílohy |
+
+Praktické pravidlo: transakční e-mail nikdy nepoužívej jako maskovaný newsletter. Pokud faktura dole šeptá „mimochodem, kupte si vyšší tarif“, můžeš si krátkodobě pomoct s konverzí, ale dlouhodobě učíš zákazníka, že i důležité zprávy obsahují reklamu. To je reputační sebevraždička v kravatě.
+
+## CP.2 Domény a subdomény drž oddělené
+
+Neposílej všechno z jedné identity. Když marketingová kampaň narazí na vyšší počet stížností nebo odhlášení, nechceš tím ohrozit doručitelnost resetu hesla. Oddělení nemusí být složité:
+
+- `app.example.com` pro aplikaci a odkazy po přihlášení.
+- `mail.example.com` nebo `notify.example.com` pro produktové a transakční zprávy.
+- `newsletter.example.com` pro obsahové kampaně, pokud máš větší objem rozesílek.
+- `support.example.com` nebo jasné `support@example.com` pro komunikaci s člověkem.
+
+U každé domény si udržuj vlastníka. Někdo musí vědět, kdo mění DNS, kdo má přístup k e-mailovému nástroji, jak se rotují klíče a kde se kontrolují reporty. Bez vlastníka se z e-mailové infrastruktury stane skříň, kam všichni hází kabely a nikdo nechce otevřít dveře.
+
+## CP.3 SPF, DKIM a DMARC nejsou dekorace v DNS
+
+E-mailová autentizace je základní bezpečnostní hygiena. SPF říká, které servery smějí posílat za doménu. DKIM podepisuje zprávu kryptografickým podpisem. DMARC dává přijímajícím serverům politiku, co dělat, když kontrola selže, a zároveň umožňuje reporty.
+
+Začni bezpečně:
+
+1. Sepiš všechny služby, které posílají e-maily za tvoji doménu: produkt, fakturační systém, helpdesk, newsletter, CRM.
+2. Nastav SPF tak, aby obsahoval jen skutečné odesílatele. Nepřidávej služby „pro jistotu“.
+3. Zapni DKIM pro každou službu, která ho podporuje, a ulož si, kde se klíče spravují.
+4. Nastav DMARC nejdřív v monitorovacím režimu `p=none`, sbírej reporty a oprav legitimní zdroje.
+5. Teprve potom postupně přejdi na přísnější politiku `quarantine` nebo `reject`.
+
+Codyho komentář: Největší chyba není chybějící DMARC. Největší chyba je DMARC nastavený „nějak“ bez toho, aby někdo četl reporty. To je jako nainstalovat kouřový detektor, vyndat baterku a říct, že budova má požární strategii.
+
+## CP.4 Měř méně, ale použitelné věci
+
+Otevírací pixel v newsletteru vypadá lákavě, protože dá marketérovi hezké procento. Jenže otevření je čím dál horší signál: e-mailové klienty obrázky blokují, přednačítají nebo maskují. Navíc je to další sledovací bod, který musíš vysvětlit uživateli.
+
+Privacy-first metriky pro e-mail:
+
+- doručeno versus odmítnuto,
+- hard bounce a soft bounce,
+- kliknutí na jasně označený odkaz, pokud ho opravdu potřebuješ měřit,
+- odhlášení a stížnosti,
+- odpovědi od reálných lidí,
+- následná produktová akce měřená až v aplikaci, ne přes sledovací špagát v inboxu.
+
+Pokud sleduješ kliknutí, nedělej z každého odkazu unikátní špionážní token s nekonečnou životností. Stačí krátkodobý kampaňový parametr nebo agregovaná statistika. U citlivých zpráv, jako je bezpečnostní upozornění nebo faktura, tracking odkazů raději vypni úplně.
+
+## CP.5 Preference centrum má být rychlejší než stížnost
+
+Odhlášení nesmí být test trpělivosti. Když uživatel musí zadat heslo, potvrdit šest dialogů a vybrat důvod, proč nechce další „neodolatelnou“ kampaň, pravděpodobně klikne na spam. A spam report bolí víc než slušné odhlášení.
+
+Dobré preference centrum obsahuje:
+
+- jeden jasný přepínač pro marketingové e-maily,
+- oddělené volby pro produktové tipy, bezpečnostní zprávy a fakturaci,
+- informaci, které zprávy jsou nezbytné pro službu,
+- okamžité potvrzení změny,
+- odkaz na privacy stránku,
+- možnost změnit e-mailovou adresu po přihlášení v účtu.
+
+Příklad mikrotextu:
+
+> „Marketingové e-maily můžete kdykoliv vypnout. Bezpečnostní a fakturační zprávy posíláme dál, protože jsou nutné pro provoz účtu.“
+
+Tohle je krátké, srozumitelné a férové. Žádné emoční vydírání typu „opravdu nás opouštíte?“ Inbox není romantický vztah, prosím pěkně.
+
+## CP.6 Chraň obsah zprávy stejně jako databázi
+
+E-mail není trezor. Jakmile zpráva odejde, může skončit v přeposlaném vlákně, v mobilní notifikaci na zamčené obrazovce nebo v nástroji třetí strany. Proto do e-mailu neposílej víc, než adresát potřebuje právě teď.
+
+Bezpečnější vzory:
+
+- Místo celého exportu pošli informaci „export je připraven“ a odkaz do přihlášené aplikace.
+- Místo celé fakturační historie pošli číslo faktury, částku a odkaz na detail.
+- Místo osobních údajů v support vlákně používej interní ID ticketu a kontext drž v helpdesku.
+- Místo tokenu v prostém textu používej jednorázový odkaz s krátkou platností.
+- Místo příloh s daty používej bezpečné úložiště s expirací a auditní stopou.
+
+U bezpečnostních notifikací piš věcně: co se změnilo, kdy, zhruba odkud, co má uživatel udělat, pokud to nebyl on. Nepřidávej zbytečně přesnou IP adresu, celý user-agent nebo interní diagnostiku. I metadata umí být osobní údaj, když se spojí s účtem.
+
+## CP.7 Doručitelnost je provozní rutina
+
+E-mail není „nastav a zapomeň“. Jednou měsíčně udělej krátké review:
+
+- Zkontroluj DMARC reporty a nové neznámé zdroje odesílání.
+- Projdi bounce rate, spam complaints a odhlášení.
+- Ověř, že SPF záznam není nafouknutý historickými službami.
+- Zkontroluj DKIM klíče u aktivních dodavatelů.
+- Projdi šablony kritických zpráv: reset hesla, faktura, pozvánka, incident.
+- Ověř, že unsubscribe a preference centrum skutečně fungují.
+- Smaž staré seznamy kontaktů, které už nemají účel.
+
+Pro projekty, kde je e-mail kritický kanál, dává smysl zvážit i MTA-STS a TLS reporting. MTA-STS umožňuje doméně deklarovat, že příjem pošty má probíhat přes validní TLS, a TLS reporting pomáhá sledovat problémy s doručováním přes TLS. Nezapínej to jako půlnoční experiment bez plánu návratu; špatná politika umí poštu rozbít elegantněji než junior s právy do DNS.
+
+## CP.8 Checklist e-mailové reputace a privacy
+
+- Máš mapu všech typů e-mailů a jejich účelů.
+- Transakční, marketingové a support e-maily nejsou bezmyšlenkovitě smíchané.
+- Každá odesílací služba má vlastníka a je uvedená v interním seznamu.
+- SPF obsahuje jen aktuální odesílatele.
+- DKIM je zapnutý pro všechny hlavní zdroje pošty.
+- DMARC běží minimálně v monitorovacím režimu a někdo čte reporty.
+- Marketingové odhlášení je dostupné jedním kliknutím nebo velmi krátkou cestou.
+- Bezpečnostní a fakturační e-maily neobsahují zbytečná osobní data.
+- Tracking pixel je vypnutý tam, kde nepřináší jasnou hodnotu.
+- Staré seznamy kontaktů a historické segmenty mají retenční pravidlo.
+- Kritické šablony prošly testem na mobilu i v desktopovém klientu.
+- Existuje měsíční rutina pro doručitelnost a DNS hygienu.
+
+## Zdroje k příloze
+
+- RFC 7208 — Sender Policy Framework (SPF): https://www.rfc-editor.org/info/rfc7208/
+- RFC 6376 — DomainKeys Identified Mail (DKIM): https://www.rfc-editor.org/info/rfc6376/
+- RFC 7489 — Domain-based Message Authentication, Reporting, and Conformance (DMARC): https://www.rfc-editor.org/info/rfc7489/
+- RFC 8461 — SMTP MTA Strict Transport Security (MTA-STS): https://www.rfc-editor.org/info/rfc8461/
+- RFC 8460 — SMTP TLS Reporting: https://www.rfc-editor.org/info/rfc8460/
+
+## Shrnutí přílohy
+
+Dobrá e-mailová reputace není trik na obcházení spam filtrů. Je to kombinace jasných účelů, správně nastavené domény, střídmého měření, bezpečného obsahu zpráv a pravidelné provozní hygieny. Privacy-first přístup tady nepřekáží marketingu; pomáhá mu, protože lidé víc důvěřují zprávám, které se chovají jako služba, ne jako sledovací leták.
+
+
 ## Pracovní log
+- 2026-08-11: Přidána příloha CP o e-mailové reputaci bez šmírovacích pixelů: rozdělení typů zpráv, domény a subdomény, SPF/DKIM/DMARC, střídmé měření, preference centrum, bezpečný obsah e-mailů, doručitelnost a checklist.
 
 - 2026-08-10: Přidána příloha CO o frontách, retry a backpressure: stavový model úloh, retry podle typu chyby, idempotence, férové omezení kapacity, datové minimum ve frontách a checklist.
 - 2026-08-10: Přidána příloha CN o auditní stopě bez interního dozoru: rozdíl mezi auditem, analytikou a debug logy, minimální schéma eventů, neměnnost, zákaznická historie, retence a checklist.
