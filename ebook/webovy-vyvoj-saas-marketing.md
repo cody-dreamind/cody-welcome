@@ -14989,8 +14989,150 @@ Billing je nudná část produktu jen do chvíle, než se pokazí. Pak se z něj
 
 Privacy-first billing chrání víc než čísla karet. Chrání důvěru zákazníka v to, že produkt s penězi a doklady zachází předvídatelně. Malý SaaS tým by měl používat platebního poskytovatele místo vlastního ukládání karetních dat, modelovat billing stavy jako produktové stavy, sbírat jen potřebné fakturační údaje, jasně vysvětlovat změny tarifu, posílat dunning zprávy jen správným lidem, zpřístupnit faktury samoobslužně a dokumentovat výjimky. Není to sexy. Právě proto je to dobré.
 
+
+---
+
+# Příloha CV: Multi-tenant izolace bez „věříme si v WHERE podmínce“ a zákaznického průvanu
+
+Multi-tenant SaaS je krásný obchodní model a zároveň bezpečnostní pastička s úsměvem. Jedna aplikace, jedna databáze, desítky nebo tisíce zákaznických účtů. Produktově efektivní. Provozně příjemné. A pokud se izolace tenantů udělá ledabyle, stačí jeden chybějící filtr a data jednoho zákazníka se objeví u druhého. To není bug. To je reputační granát s odjištěnou pojistkou.
+
+Privacy-first přístup neříká, že každý zákazník musí mít vlastní server v betonovém bunkru pod Alpami. Říká, že hranice mezi zákazníky musí být navržená, vynucená, testovaná a auditovatelná. Ne jen doufaná.
+
+OWASP v API Security Top 10 2023 řadí rozbitou autorizaci na úrovni objektů mezi hlavní rizika API: endpointy často pracují s identifikátory objektů a každá funkce, která načítá záznam podle ID od uživatele, má kontrolovat oprávnění k danému objektu. Zdroj: https://owasp.org/API-Security/editions/2023/en/0xa1-broken-object-level-authorization/
+
+## CV.1 Tenant není jen sloupec, je bezpečnostní hranice
+
+Nejčastější začátek je sloupec `tenant_id` na tabulkách. To je dobré minimum, ale samo o sobě nestačí. Sloupec bez disciplíny je jen dekorace v databázi. Skutečná otázka zní: kdo a kde garantuje, že se nikdy nevrátí cizí řádek?
+
+Praktická pravidla:
+
+- Každá zákaznická entita má jasný vlastnický kontext: `tenant_id`, `workspace_id`, `organization_id` nebo jiný jednotný model.
+- Veřejné API nikdy nepřijímá `tenant_id` jako volnou pravdu od klienta, pokud se dá odvodit ze session, tokenu nebo vybraného účtu.
+- Query helpery a repository vrstvy mají tenant filtr jako povinný parametr, ne volitelný doplněk.
+- Admin a support režim musí být explicitní, auditovaný a oddělený od běžných zákaznických dotazů.
+- Importy, exporty, webhooks, fronty a background joby používají stejný tenant kontext jako interaktivní aplikace.
+
+Špatný vzor:
+
+```sql
+SELECT * FROM invoices WHERE id = $1;
+```
+
+Lepší vzor:
+
+```sql
+SELECT * FROM invoices WHERE id = $1 AND tenant_id = $2;
+```
+
+Ještě lepší je, když aplikace nemůže první dotaz pohodlně napsat. Například přes sdílenou datovou vrstvu, policy objekt nebo databázové omezení. Bezpečnost založená na tom, že si každý vývojář pokaždé vzpomene, je takový ten procesní padák z ubrousku.
+
+## CV.2 Izolace musí fungovat i mimo hlavní request
+
+Mnoho úniků nevznikne v hlavním detailu záznamu. Vznikne v okrajích: autocomplete, export, search index, notifikace, billing skript, support panel, webhook retry, interní report nebo background job po migraci. Útočník nemusí být génius; často mu stačí změnit ID v URL a sledovat, co aplikace vrátí.
+
+Pro každý nový typ práce s daty si polož otázky:
+
+- Z jakého místa bereme tenant kontext?
+- Je tenant kontext povinný, nebo může být `null`?
+- Co se stane, když job běží později a původní uživatel už nemá oprávnění?
+- Filtrujeme i agregace, počty, vyhledávání a exporty?
+- Neuniká cizí informace v chybové hlášce, názvu souboru nebo notifikaci?
+
+Příklad problému:
+
+```text
+GET /api/projects/123/export
+```
+
+Pokud API kontroluje jen přihlášení, ale ne to, zda projekt `123` patří aktuálnímu tenantovi, vzniká přesně ten typ problému, před kterým OWASP varuje. Náhodné UUID pomůže proti hádání ID, ale nenahrazuje autorizaci. UUID je neprůhledná cedulka, ne zámek.
+
+## CV.3 Row-level security jako druhá brzda, ne omluvenka pro chaos
+
+Pokud používáš PostgreSQL, zvaž Row-Level Security pro tabulky, kde chyba tenant filtru znamená únik zákaznických dat. Dokumentace PostgreSQL popisuje, že po zapnutí row security musí být běžný přístup k řádkům povolen politikou; bez politiky platí default deny. Zdroj: https://www.postgresql.org/docs/17/ddl-rowsecurity.html
+
+Jednoduchý mentální model:
+
+- Aplikace nastaví tenant kontext pro request nebo transakci.
+- Databázová politika dovolí číst a měnit jen řádky odpovídající tomu kontextu.
+- Testy ověří, že bez kontextu nebo s cizím kontextem dotaz nic nevrátí.
+- Privilegované role, migrace a servisní skripty mají samostatná pravidla a nejsou používány pro běžný provoz.
+
+Pozor na falešný pocit bezpečí. RLS není kouzlo, které opraví špatný datový model, netestované role a SQL skládané provázkem. Je to další vrstva obrany. Výborná, když je navržená vědomě. Nebezpečná, když se zapne a všichni přestanou přemýšlet.
+
+Praktický kompromis pro malý tým:
+
+- Začni konzistentním `tenant_id` a datovou vrstvou, která bez tenant kontextu neumožní číst zákaznické entity.
+- Přidej integrační testy na nejrizikovější endpointy: detail, update, delete, export, search, billing, admin.
+- U nejcitlivějších tabulek doplň databázovou ochranu, pokud ji tým umí provozovat.
+- Dokumentuj výjimky: systémové tabulky, veřejné katalogy, šablony, globální nastavení.
+
+## CV.4 Autorizace má být pozitivní seznam, ne detektivka
+
+OWASP Authorization Cheat Sheet doporučuje princip nejmenších oprávnění, deny-by-default a kontrolu oprávnění při každém requestu. Zdroj: https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html
+
+V SaaS praxi to znamená: neptat se „proč by to nemohl vidět?“, ale „kde je explicitně řečeno, že to vidět smí?“.
+
+Dobrá autorizační funkce je nudná:
+
+```text
+can(user, "invoice.read", invoice)
+```
+
+A uvnitř odpovídá na konkrétní otázky:
+
+- Je uživatel přihlášený?
+- Patří uživatel do stejného tenantu jako objekt?
+- Má roli nebo vztah potřebný pro danou akci?
+- Není účet pozastavený, archivovaný nebo v režimu offboardingu?
+- Nejde o citlivou akci vyžadující reautentizaci nebo vyšší oprávnění?
+
+Vyhni se autorizačním zkratkám typu `isAdmin`, které po půl roce znamenají všechno a nic. Lepší je pojmenovat akce podle produktu: `invoice.export`, `member.invite`, `api_key.rotate`, `project.delete`, `billing.view`. Role pak dávají oprávnění k akcím, ne magickou supermoc.
+
+## CV.5 Testuj cizí dveře jako součást vývoje
+
+Tenant izolace bez testů je slib. Hezký, ale pořád jen slib. Minimální testovací sada má ověřovat, že uživatel z tenantu A nedokáže číst, upravit, smazat, exportovat ani vyhledat data tenantu B.
+
+Praktický testovací scénář:
+
+1. Vytvoř tenant A a tenant B.
+2. V každém vytvoř uživatele, projekt, fakturu, API klíč a exportovatelný záznam.
+3. Přihlas uživatele z tenantu A.
+4. Zkus detail, update, delete a export objektů z tenantu B.
+5. Ověř, že odpověď je bezpečná: typicky `404` nebo neutrální `403`, bez názvu cizího objektu.
+6. Zkus totéž přes search, autocomplete, webhook detail, audit log a admin-like endpointy.
+
+Uživatelský rozdíl mezi `403` a `404` řeš podle produktu, ale neprozrazuj zbytečně existenci cizích objektů. „Nemáte přístup k faktuře ACME-2026-014“ je horší než „Záznam nebyl nalezen nebo k němu nemáte přístup.“ Ano, méně dramatické. Přesně o to jde.
+
+## CV.6 Checklist tenant izolace
+
+- [ ] Všechny zákaznické entity mají jasný tenant nebo vlastnický kontext.
+- [ ] Veřejné API nebere `tenant_id` od klienta jako zdroj pravdy, pokud ho umí odvodit ze session nebo tokenu.
+- [ ] Datová vrstva nedovolí načíst zákaznický objekt bez tenant kontextu.
+- [ ] Každý endpoint s ID objektu kontroluje oprávnění k danému objektu, nejen přihlášení.
+- [ ] Search, autocomplete, exporty, webhooky, fronty a notifikace používají stejná autorizační pravidla jako hlavní UI.
+- [ ] Admin a support přístup je explicitní, omezený, auditovaný a oddělený od běžných zákaznických requestů.
+- [ ] Chybové hlášky neprozrazují názvy, e-maily, faktury ani existenci cizích objektů.
+- [ ] Integrační testy pokrývají pokusy uživatele z tenantu A o přístup k datům tenantu B.
+- [ ] Citlivé tabulky mají zváženou databázovou pojistku, například PostgreSQL Row-Level Security.
+- [ ] Servisní skripty a migrace mají vlastní bezpečný režim, logování a zákaznický rozsah.
+
+## Codyho komentář
+
+Multi-tenant izolace je jedna z těch věcí, které zákazník neocení, dokud neselžou. Můj pohled: malý SaaS tým by měl tenant hranici brát stejně vážně jako platby. Ne proto, že je to elegantní architektura, ale protože důvěra v evropský privacy-first produkt stojí na jednoduché větě: moje data nejsou omylem někoho jiného.
+
+## Zdroje k příloze
+
+- OWASP API Security Top 10 2023 — Broken Object Level Authorization: https://owasp.org/API-Security/editions/2023/en/0xa1-broken-object-level-authorization/
+- OWASP Cheat Sheet Series — Authorization Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html
+- PostgreSQL dokumentace — Row Security Policies: https://www.postgresql.org/docs/17/ddl-rowsecurity.html
+
+## Shrnutí přílohy
+
+Tenant izolace není jen `tenant_id` v databázi. Je to produktová a bezpečnostní hranice, která musí fungovat v API, UI, exportech, vyhledávání, frontách, webhookách, supportu i interních skriptech. Privacy-first SaaS má používat explicitní autorizaci, deny-by-default přístup, testy proti přístupu k cizím objektům a podle citlivosti i databázovou pojistku typu Row-Level Security. Cílem není paranoidní architektura. Cílem je nudná jistota, že zákaznická data zůstanou tam, kam patří.
+
 ## Pracovní log
 
+- 2026-08-11: Přidána příloha CV o multi-tenant izolaci bez zákaznického průvanu: tenant kontext, autorizace objektů, izolace mimo hlavní request, PostgreSQL RLS jako druhá brzda, testování cizích dveří a checklist.
 - 2026-08-11: Přidána příloha CU o platbách, fakturaci a billing procesu bez zbytečného sběru dat: platební poskytovatel, billing stavy, fakturační minimum, změny tarifu, dunning, faktury, slevové výjimky a checklist.
 - 2026-08-11: Přidána příloha CT o API kontraktu a exportu dat bez vendor lock-inu: OpenAPI dokumentace, exportní manifest, verze schématu, oprávnění, API scope, offboarding a checklist.
 - 2026-08-11: Přidána příloha CS o webhookách a integračním doručování: asynchronní smlouva, idempotence, rychlé potvrzení, podpisy nad raw body, minimální payload, redelivery obrazovka a checklist.
