@@ -14255,7 +14255,138 @@ Pro projekty, kde je e-mail kritický kanál, dává smysl zvážit i MTA-STS a 
 Dobrá e-mailová reputace není trik na obcházení spam filtrů. Je to kombinace jasných účelů, správně nastavené domény, střídmého měření, bezpečného obsahu zpráv a pravidelné provozní hygieny. Privacy-first přístup tady nepřekáží marketingu; pomáhá mu, protože lidé víc důvěřují zprávám, které se chovají jako služba, ne jako sledovací leták.
 
 
+
+# Příloha CQ: DNS hygiena bez ruční magie v panelu registrátora a půlnočních výpadků
+
+DNS je nudná část webu přesně do chvíle, kdy nudná být přestane. Jeden špatný záznam umí shodit web, rozbít e-mail, zneplatnit certifikát nebo poslat zákazníky na starý server, kde už běží jen nostalgie a 502. Pro malý SaaS je DNS provozní infrastruktura, ne tajemná tabulka, do které se sahá jednou za rok při migraci.
+
+Privacy-first DNS hygiena znamená: víš, kdo doménu vlastní, kdo může měnit zónu, kam provoz teče, jak rychle umíš změnu vrátit a které záznamy jsou bezpečnostní závazek. Žádná heroická magie, žádné screenshoty z administrace v chatu, žádné „to nastavoval bývalý dodavatel, snad“.
+
+## CQ.1 Doména musí mít vlastníka, ne jen plátce faktury
+
+Začni u evidence. U každé domény a subdomény napiš:
+
+| Oblast | Co evidovat | Proč |
+| --- | --- | --- |
+| Registrátor | název účtu, vlastník, 2FA, expirace | doména je kořen identity produktu |
+| DNS provider | kdo spravuje zónu, záložní kontakt | výpadek DNS není vidět v aplikaci, ale bolí všude |
+| Nameservery | aktuální autoritativní servery | při migraci se snadno zapomene stará delegace |
+| Kritické záznamy | web, app, API, mail, ověřovací tokeny | víš, co se nesmí smazat omylem |
+| Změnový proces | kdo schvaluje a kdo kontroluje | DNS změny mají zpoždění a špatně se debugují |
+
+Praktické pravidlo: doména nesmí být v osobním účtu freelancera, bývalého zaměstnance ani zakladatele, který má 2FA jen na telefonu z roku 2019. Firemní doména je firemní aktivum. Přístupy patří do správce hesel, vlastníci do interní dokumentace a expirace do kalendáře s připomínkou minimálně měsíc dopředu.
+
+Codyho komentář: Když firma ztratí přístup k doméně, není to „IT problém“. Je to digitální obdoba toho, že někdo zamkne obchod a klíče si odnese na Bali.
+
+## CQ.2 Zóna má být čitelná i pro člověka po dovolené
+
+DNS záznamy nejsou odpadkový koš pro historické ověřovací tokeny. Udržuj zónu tak, aby šlo rychle poznat, co je aktivní, co je dočasné a co patří k bezpečnosti.
+
+Doporučené značení v dokumentaci:
+
+- `www` a apex doména: veřejný web.
+- `app`: přihlášená aplikace.
+- `api`: veřejné nebo interní API.
+- `status`: status page mimo hlavní hosting, pokud dává smysl.
+- `mail`, `notify`, `newsletter`: odesílání e-mailů podle účelu.
+- `_dmarc`, DKIM selektory, CAA: bezpečnostní a e-mailová politika.
+- `_acme-challenge`: automatizace certifikátů; po migraci zkontrolovat.
+
+U každého netriviálního záznamu si napiš krátkou poznámku mimo DNS panel: účel, vlastník, dodavatel, datum poslední kontroly. Ne každý DNS provider má kvalitní komentáře a nechceš, aby celá provozní paměť bydlela v jednom webovém formuláři.
+
+## CQ.3 TTL není dekorace, ale brzda i pojistka
+
+TTL říká resolverům, jak dlouho mohou výsledek držet v cache. Nízké TTL pomáhá při migraci, vysoké TTL snižuje počet dotazů a stabilizuje běžný provoz. Problém vzniká, když tým mění záznam s TTL 24 hodin a pak se diví, že půl internetu pořád vidí starou adresu.
+
+Jednoduchý provozní vzor:
+
+1. Týden před migrací sniž TTL kritických záznamů třeba na 300 sekund.
+2. Ověř, že se změna TTL opravdu propsala na autoritativní DNS.
+3. Proveď migraci v okně, kdy umíš reagovat.
+4. Sleduj web, API, e-mail a certifikáty.
+5. Po stabilizaci vrať TTL na rozumnější hodnotu, například hodiny místo minut.
+
+Nízké TTL nenechávej navždy jen proto, že „co kdyby“. Pokud máš stabilní infrastrukturu, extrémně krátké TTL často jen maskuje chaos v provozním plánování. DNS má být předvídatelné, ne permanentní nouzový režim.
+
+## CQ.4 CAA záznamy omezují, kdo smí vydat certifikát
+
+CAA je DNS záznam, kterým držitel domény říká certifikačním autoritám, kdo smí vydávat certifikáty pro danou doménu. Podle RFC 8659 slouží CAA k určení autorizovaných certifikačních autorit pro doménu. V praxi tím snižuješ riziko chybného nebo nečekaného vydání certifikátu.
+
+Malý SaaS nepotřebuje komplikovanou politiku hned první den, ale měl by vědět:
+
+- Která autorita vydává produkční certifikáty.
+- Kdo má oprávnění měnit CAA záznamy.
+- Jestli staging nebo preview prostředí používá stejnou autoritu.
+- Jak se bude postupovat při změně certifikační autority.
+- Kde se kontroluje, že automatická obnova certifikátu CAA nerozbila.
+
+Příklad rozhodnutí do interní dokumentace:
+
+> „Produkční certifikáty pro `example.com` a `*.example.com` vydává jedna schválená CA. CAA změny schvaluje provozní vlastník domény. Po změně CAA vždy testujeme obnovu certifikátu v bezpečném okně.“
+
+Největší past CAA není samotný záznam. Největší past je zapomenout, že certifikáty obnovuje automat a automat neumí ocenit poetiku změny v DNS panelu. On prostě spadne.
+
+## CQ.5 DNSSEC zapínej s plánem, ne jako odznak bezpečnosti
+
+DNSSEC přidává ověřování původu DNS dat a chrání proti části útoků na integritu odpovědí. RFC 9364 shrnuje DNS Security Extensions jako sadu specifikací postavených mimo jiné na RFC 4033, RFC 4034 a RFC 4035. To je užitečné, ale zároveň to přidává provozní zodpovědnost: klíče, delegaci, DS záznamy a kontrolu expirací.
+
+Před zapnutím DNSSEC si odpověz:
+
+- Podporuje ho registrátor i DNS provider spolehlivě?
+- Kdo ví, jak se mění nameservery bez rozbití DS záznamu?
+- Máš monitoring DNSSEC validace?
+- Je jasné, jak vypadá rollback?
+- Ví tým, že špatná DNSSEC konfigurace může způsobit, že doména pro validující resolvery zmizí?
+
+Pro malý projekt je lepší DNSSEC nezapnout hned než ho zapnout bez vlastníka a pak při migraci domény zažít bezpečnostní kabaret. Pokud ho zapneš, přidej ho do provozního review stejně jako certifikáty a zálohy.
+
+## CQ.6 Ověřovací TXT tokeny mají mít úklidový den
+
+Moderní SaaS provoz plodí TXT záznamy jako králík: ověření domény v e-mailovém nástroji, search konzole, monitoring, hosting, certifikáty, helpdesk, CRM, newsletter. Každý token může být legitimní. Dohromady ale vytvoří zónu, která připomíná archeologické naleziště.
+
+Úklidový postup jednou za kvartál:
+
+- Exportuj aktuální DNS zónu.
+- Označ všechny TXT záznamy podle účelu.
+- Smaž ověření služeb, které už nepoužíváš.
+- U aktivních služeb ověř, že token stále patří správnému účtu.
+- Zkontroluj, že DKIM, DMARC, SPF a CAA nejsou omylem mezi „asi staré“.
+- Výsledek ulož do provozní dokumentace.
+
+Privacy-first důvod je jednoduchý: starý ověřovací token může prozrazovat používané služby, historické dodavatele nebo napojení, které už nikdo nespravuje. Není to největší bezpečnostní riziko na světě, ale je to typ nepořádku, ze kterého později rostou drahé incidenty.
+
+## CQ.7 Checklist DNS hygieny
+
+- Doména je registrovaná na firemní účet s 2FA, ne na osobní e-mail jednotlivce.
+- Expirace domény má kalendářovou připomínku a záložního vlastníka.
+- DNS provider, registrátor a nameservery jsou uvedené v provozní dokumentaci.
+- Kritické záznamy mají popsaný účel, vlastníka a datum poslední kontroly.
+- Před migrací se plánovaně snižuje TTL a po stabilizaci se vrací zpět.
+- CAA záznamy odpovídají skutečné certifikační autoritě.
+- Automatická obnova certifikátu se testuje po změnách CAA nebo DNS provideru.
+- DNSSEC má vlastníka, monitoring a rollback plán, pokud je zapnutý.
+- TXT ověřovací tokeny se kvartálně uklízí.
+- SPF, DKIM a DMARC nejsou měněné bez kontroly dopadu na e-mail.
+- Změny DNS pro kritické služby kontroluje druhý člověk nebo aspoň druhý nástroj.
+- Existuje stručný „DNS incident“ postup: co zkontrolovat, kde rollbackovat, komu psát.
+
+## Codyho komentář
+
+DNS hygiena je přesně ten typ práce, za kterou ti nikdo nezatleská, dokud ji neděláš. Pak ti zatleská účet za incident. Dobře vedená zóna je tichá konkurenční výhoda: migrace nejsou drama, certifikáty se obnovují, e-mail doručuje a zákazník nepozná, že někde v pozadí existuje tabulka záznamů starší než některé startupové pivoty.
+
+## Zdroje k příloze
+
+- RFC 1035 — Domain Names: Implementation and Specification: https://www.rfc-editor.org/info/rfc1035/
+- RFC 8659 — DNS Certification Authority Authorization (CAA) Resource Record: https://www.rfc-editor.org/rfc/rfc8659.html
+- RFC 9364 — DNS Security Extensions (DNSSEC): https://www.rfc-editor.org/rfc/rfc9364.html
+
+## Shrnutí přílohy
+
+DNS není jen technický detail pod webem. Je to kořen důvěry pro web, e-mail, certifikáty i zákaznickou identitu. Privacy-first SaaS potřebuje doménu pod kontrolou, čitelnou zónu, plán pro TTL, rozumně nastavené CAA, opatrný přístup k DNSSEC a pravidelný úklid ověřovacích tokenů.
+
+
 ## Pracovní log
+- 2026-08-11: Přidána příloha CQ o DNS hygieně pro privacy-first SaaS: vlastnictví domény, čitelná zóna, TTL při migracích, CAA, DNSSEC, úklid TXT tokenů a provozní checklist.
 - 2026-08-11: Přidána příloha CP o e-mailové reputaci bez šmírovacích pixelů: rozdělení typů zpráv, domény a subdomény, SPF/DKIM/DMARC, střídmé měření, preference centrum, bezpečný obsah e-mailů, doručitelnost a checklist.
 
 - 2026-08-10: Přidána příloha CO o frontách, retry a backpressure: stavový model úloh, retry podle typu chyby, idempotence, férové omezení kapacity, datové minimum ve frontách a checklist.
