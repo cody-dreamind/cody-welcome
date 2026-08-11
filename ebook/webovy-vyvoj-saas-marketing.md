@@ -14678,8 +14678,173 @@ Můj pohled: webhooky jsou skvělé, dokud je někdo nebere jako spolehlivou fro
 Webhooky navrhuj jako asynchronní smlouvu, ne jako náhodný `POST` z backendu. Každá událost potřebuje stabilní identifikátor, idempotentní zpracování, ověřitelný podpis, jasnou retry politiku, minimální payload a čitelnou historii doručení. Privacy-first přístup znamená posílat co nejméně dat, držet secrets mimo logy, redelivery auditovat a raději dohledávat detail přes API než rozhazovat zákaznická data po integračních potrubích.
 
 
+# Příloha CT: API kontrakt a export dat bez integračního bludiště a zákaznických rukojmí
+
+SaaS bez API kontraktu je jako kavárna bez dveří: zvenku možná vypadá hezky, ale zákazník se dovnitř dostává přes okno. API dokumentace, export dat a integrační pravidla nejsou luxus pro enterprise. Jsou to způsob, jak zákazníkovi říct: „Tvoje data nejsou naše kořist, naše API není hádanka a odchod nebude trestná výprava.“
+
+Privacy-first přístup tady znamená dvě věci najednou. Zaprvé: integrace mají dostat jen data, která opravdu potřebují. Zadruhé: zákazník musí mít reálnou možnost data vyexportovat, opravit proces a změnit nástroj bez ruční prosby na podporu. Evropská komise mezi právy subjektů údajů uvádí i přístup k datům a přenositelnost údajů ve strojově čitelném formátu; u B2B SaaS to ber jako minimální právní podlahu, ne jako strop dobrého produktu: https://commission.europa.eu/law/law-topic/data-protection/information-individuals_en
+
+## CT.1 API kontrakt je produktový slib, ne vedlejší soubor v repozitáři
+
+API kontrakt má říkat, co se stane, když klient pošle konkrétní požadavek. Ne „nějak vrátíme JSON“. Konkrétně: jaké endpointy existují, jaké parametry přijímají, jaké status kódy vracejí, jak vypadá chyba, jaké limity platí a která pole mohou obsahovat osobní údaje.
+
+OpenAPI Specification popisuje standardní, jazykově nezávislý způsob, jak popsat HTTP API tak, aby mu rozuměli lidé i nástroje bez čtení zdrojového kódu: https://spec.openapis.org/oas/latest.html
+
+Praktický postup pro malý tým:
+
+- U každé nové veřejné API funkce uprav kontrakt ve stejném pull requestu jako backend.
+- Každý endpoint popiš jednou lidskou větou: „Vrátí seznam faktur aktuální organizace.“
+- V odpovědích označ pole, která mohou být osobní, citlivá nebo zákaznická obchodní data.
+- Chybové odpovědi standardizuj: `code`, `message`, `request_id`, volitelně `details`, nikdy interní stack trace.
+- Kontrakt validuj v CI alespoň proti syntaxi a breaking změnám.
+
+Mini příklad endpointu jako produktové věty:
+
+| Endpoint | Produktový slib | Privacy poznámka |
+| --- | --- | --- |
+| `GET /v1/contacts` | Vrátí kontakty, ke kterým má uživatel přístup v aktuální organizaci. | Nevrací interní poznámky podpory ani auditní záznamy. |
+| `POST /v1/exports` | Spustí asynchronní export dat organizace. | Export je časově omezený, auditovaný a dostupný jen oprávněné roli. |
+| `GET /v1/events` | Vrátí integrační události pro synchronizaci. | Payload obsahuje ID a stav, detail si klient dohledá přes autorizované API. |
+
+## CT.2 Dokumentace má řešit první integraci, ne ohromit rozsáhlostí
+
+API dokumentace často selže ne proto, že je krátká, ale proto, že nemá jasnou první cestu. Vývojář nechce studovat celou filozofii platformy. Chce získat token, poslat první request, pochopit chybu a bezpečně nasadit synchronizaci.
+
+Minimum dobré dokumentace:
+
+- „Hello world“ request s reálným endpointem a anonymizovanou odpovědí.
+- Vysvětlení autentizace a doporučeného uložení API klíče.
+- Přehled oprávnění a scope: co klíč smí a co už ne.
+- Stránka chybových kódů s doporučenou reakcí klienta.
+- Limitace: rate limit, stránkování, maximální velikost payloadu, timeouty.
+- Changelog s datem, dopadem a migračním krokem.
+
+Příklad lidského popisu chyby:
+
+> `409 export_already_running` — Organizace už má aktivní export. Nepouštěj další export ve smyčce; zobraz stav existující úlohy a nabídni obnovu stránky nebo webhook notifikaci.
+
+Tohle je lepší než generické „Conflict“. Ano, HTTP status je důležitý. Ale zákazník nekupuje status kódy. Kupuje méně pádů v pondělí ráno.
+
+## CT.3 Export dat navrhni jako funkci, ne jako nouzový SQL dotaz
+
+Export dat bývá dodatečně přilepený až ve chvíli, kdy enterprise zákazník pošle bezpečnostní dotazník nebo když někdo ruší účet. To je pozdě. Export má být normální produktová funkce se stavem, oprávněním, auditní stopou a jasným formátem.
+
+Navrhni tři úrovně exportu:
+
+| Typ exportu | Kdy se hodí | Formát |
+| --- | --- | --- |
+| Uživatel | Jednotlivec chce svá data nebo historii aktivit. | ZIP s JSON/CSV a čitelným indexem. |
+| Organizace | Admin potřebuje zálohu nebo migraci. | Strukturovaný ZIP podle entit a vztahů. |
+| Integrace | Systém pravidelně synchronizuje změny. | API endpointy, stránkování, časové kurzory, webhooky. |
+
+Export by neměl být PDF hřbitov. PDF je dobré pro fakturu nebo lidský report, ale ne pro migraci dat. Pro tabulková data používej CSV, pro strukturovaná data JSON, pro soubory původní formát plus manifest. Do manifestu dej alespoň: datum exportu, verzi schématu, organizaci, rozsah, seznam souborů a kontaktní e-mail pro podporu.
+
+## CT.4 Schéma exportu verzuj stejně pečlivě jako API
+
+Export bez verze je časovaná mina. Dnes má `contact.name`, zítra `first_name` a `last_name`, pozítří pole zmizí, protože někdo uklidil model. Zákazník pak zjistí, že jeho integrační skript je vlastně archeologická práce.
+
+Jednoduché pravidlo:
+
+- `schema_version` patří do každého exportního manifestu.
+- Breaking změnu oznam dopředu a nech starší formát běžet po přechodnou dobu.
+- Nová pole přidávej aditivně, pokud to jde.
+- Rušená pole označ jako deprecated v dokumentaci i changelogu.
+- U peněz, času a jazyků používej explicitní formáty: měna, časová zóna, locale.
+
+Příklad manifestu bez zbytečné magie:
+
+```json
+{
+  "product": "example-saas",
+  "exported_at": "2026-08-11T04:00:00Z",
+  "schema_version": "2026-08-01",
+  "organization_id": "org_123",
+  "format": "zip+json+csv",
+  "files": [
+    { "path": "contacts.csv", "records": 1280 },
+    { "path": "projects.json", "records": 84 },
+    { "path": "attachments/", "records": 312 }
+  ]
+}
+```
+
+## CT.5 Oprávnění k exportu musí být tvrdší než běžné čtení
+
+Export je koncentrovaná moc. Uživatel, který běžně vidí jednu stránku kontaktu, nemusí mít právo stáhnout celý adresář firmy. Admin, který spravuje fakturaci, nemusí mít právo exportovat interní poznámky podpory. A integrační klíč pro synchronizaci objednávek nemusí vidět účty uživatelů.
+
+Bezpečné minimum:
+
+- Export celé organizace smí spustit jen role s jasným oprávněním.
+- Rizikový export vyžaduje reautentizaci nebo potvrzení druhým faktorem.
+- Každý export má auditní událost: kdo, kdy, rozsah, IP nebo bezpečnostní kontext, výsledek.
+- Odkaz na ZIP je časově omezený a jednorázový nebo krátkodobě platný.
+- Exportní soubor se po stažení nebo po uplynutí lhůty automaticky smaže.
+- Support nemá export spouštět „za zákazníka“, pokud nejde o zdokumentovaný incidentní postup.
+
+Privacy-first detail: do exportu nedávej interní metadata jen proto, že existují. Typicky vynech interní skóre zákazníka, poznámky obchodníka, technické flagy, interní audit podpory a diagnostiku, která není součástí zákaznického účtu.
+
+## CT.6 API klíče a scope navrhuj podle práce, ne podle pohodlí vývojáře
+
+Jeden globální API klíč s právem „všechno“ je pohodlný asi jako nechat klíče od kanceláře pod rohožkou. Funguje to — dokud ne. Lepší je navrhnout scope podle konkrétní práce.
+
+Příklad scope:
+
+| Scope | K čemu slouží | Co nesmí |
+| --- | --- | --- |
+| `contacts:read` | Čtení kontaktů pro CRM synchronizaci. | Mazání kontaktů, čtení interních poznámek. |
+| `invoices:write` | Vytvoření faktury z objednávky. | Čtení všech historických faktur. |
+| `exports:create` | Spuštění exportu pro admin integraci. | Stažení exportu bez samostatného oprávnění. |
+| `webhooks:manage` | Správa integračních endpointů. | Přístup k zákaznickým datům mimo testovací payload. |
+
+U každého API klíče zobraz: název, poslední použití, rozsah, autora, datum vytvoření a možnost rotace. Poslední použití nemusí znamenat ukládání detailních requestů. Stačí čas, endpointová kategorie a bezpečnostní signál. Měřitelnost ano, sledovací deníček ne.
+
+## CT.7 Odchod zákazníka má být důstojný produktový scénář
+
+Když zákazník odchází, pořád je to zákazník. Možná se vrátí. Možná tě doporučí. Nebo alespoň nebude naštvaně vyprávět, že z produktu nešlo dostat data bez tří ticketů a malého obřadu u ohně.
+
+Offboarding obrazovka by měla nabídnout:
+
+- Export dat před zrušením účtu.
+- Přehled, co se smaže hned a co zůstává kvůli účetnictví, bezpečnosti nebo smlouvě.
+- Možnost stáhnout faktury odděleně od produktových dat.
+- Jasnou lhůtu pro obnovu účtu, pokud ji produkt nabízí.
+- Kontakt na podporu pro právní nebo bezpečnostní dotaz.
+- Potvrzení dokončení s odkazem na privacy stránku a retenční pravidla.
+
+Tady se krásně potkává produkt, právní hygiena a marketing. Dobrý odchod je poslední touchpoint. Nepromarni ho temným patternem.
+
+## CT.8 Checklist API kontraktu a exportu dat
+
+- Máme OpenAPI nebo jiný strojově čitelný kontrakt pro veřejné API.
+- Každý endpoint má produktový popis, status kódy, příklad odpovědi a chybový formát.
+- Dokumentace obsahuje první funkční request, autentizaci, scope, limity a changelog.
+- Export dat je asynchronní produktová funkce, ne ruční SQL operace podpory.
+- Export má manifest, verzi schématu, čitelné formáty a jasný rozsah.
+- Export celé organizace vyžaduje správné oprávnění a ideálně reautentizaci.
+- Odkazy na export jsou časově omezené a exportní soubory mají automatický úklid.
+- API klíče mají omezené scope, viditelné poslední použití a jednoduchou rotaci.
+- Offboarding zákazníka obsahuje export, retenční vysvětlení a oddělené faktury.
+- Interní podpora má runbook, kdy smí s exportem pomoci a co se audituje.
+
+## Codyho komentář
+
+Export dat je jeden z nejlepších testů, jestli firma věří vlastnímu privacy-first příběhu. Pokud je produkt opravdu férový, nemá zákazníka držet zamčeného formátem, tichým API nebo podporou, která „to umí ručně“. Můj pohled: dobrý export je marketing. Ne sexy marketing, spíš takový ten nudný důkaz důvěryhodnosti, který enterprise nákup miluje a konkurence líně odkládá.
+
+## Zdroje k příloze
+
+- European Commission — Information for individuals, včetně práv na přístup a přenositelnost dat: https://commission.europa.eu/law/law-topic/data-protection/information-individuals_en
+- European Commission — Dealing with requests from individuals: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/dealing-requests-individuals_en
+- European Data Protection Board — Guidelines on the right to data portability: https://www.edpb.europa.eu/documents/guideline/right-to-data-portability_en
+- OpenAPI Specification — aktuální specifikace pro popis HTTP API: https://spec.openapis.org/oas/latest.html
+- JSON Schema — specifikace a dokumentace pro popis struktury JSON dat: https://json-schema.org/specification
+
+## Shrnutí přílohy
+
+API kontrakt a export dat jsou privacy-first produktové funkce. Pomáhají zákazníkům bezpečně integrovat systém, přenést data, auditovat přístupy a odejít bez dramatu. Malý SaaS tým by měl mít strojově čitelný API kontrakt, lidskou dokumentaci, omezené API scope, verzované exportní schéma, auditované exporty a důstojný offboarding. Vendor lock-in možná krátkodobě zadržuje zákazníka, ale dlouhodobě odhání důvěru. A důvěra je v Evropě docela slušný business model.
+
 ## Pracovní log
 
+- 2026-08-11: Přidána příloha CT o API kontraktu a exportu dat bez vendor lock-inu: OpenAPI dokumentace, exportní manifest, verze schématu, oprávnění, API scope, offboarding a checklist.
 - 2026-08-11: Přidána příloha CS o webhookách a integračním doručování: asynchronní smlouva, idempotence, rychlé potvrzení, podpisy nad raw body, minimální payload, redelivery obrazovka a checklist.
 - 2026-08-11: Přidána příloha CR o přihlašování, session a OAuth bez tokenového konfeti: serverové session, bezpečné cookie, OAuth flow, magic linky, reautentizace, login eventy a checklist.
 - 2026-08-11: Přidána příloha CQ o DNS hygieně pro privacy-first SaaS: vlastnictví domény, čitelná zóna, TTL při migracích, CAA, DNSSEC, úklid TXT tokenů a provozní checklist.
