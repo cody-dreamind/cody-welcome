@@ -14842,8 +14842,156 @@ Export dat je jeden z nejlepších testů, jestli firma věří vlastnímu priva
 
 API kontrakt a export dat jsou privacy-first produktové funkce. Pomáhají zákazníkům bezpečně integrovat systém, přenést data, auditovat přístupy a odejít bez dramatu. Malý SaaS tým by měl mít strojově čitelný API kontrakt, lidskou dokumentaci, omezené API scope, verzované exportní schéma, auditované exporty a důstojný offboarding. Vendor lock-in možná krátkodobě zadržuje zákazníka, ale dlouhodobě odhání důvěru. A důvěra je v Evropě docela slušný business model.
 
+---
+
+# Příloha CU: Platby, fakturace a billing bez karetní paniky, skrytých pastí a datového bahna
+
+Billing je jedno z míst, kde SaaS nejrychleji ukáže charakter. Když je platební tok jasný, faktury dohledatelné a změna tarifu předvídatelná, zákazník má pocit kontroly. Když se mu strhne částka bez kontextu, faktura přijde jako PDF z paralelního vesmíru a zrušení tarifu je schované za formulář „kontaktujte sales“, důvěra padá rychleji než produkce po deployi v pátek večer.
+
+Privacy-first billing neznamená platit v hotovosti pod mostem. Znamená to: nesbírat platební data, která nemusíš držet; oddělit účetní povinnosti od marketingové zvědavosti; dát zákazníkovi jasný přehled nad tarifem, doklady a budoucími platbami; a navrhnout billing tak, aby s ním šlo žít i po prvních deseti zákaznících.
+
+## CU.1 Platební data nepatří do tvé databáze, pokud nemusí
+
+Nejlepší způsob, jak ochránit karetní údaje, je vůbec je nedržet. Malý SaaS tým má skoro vždy použít ověřeného platebního poskytovatele, který řeší tokenizaci, bezpečnost karet, 3D Secure, chargebacky a část compliance. Do vlastní databáze patří reference na zákazníka, stav předplatného, ID platby u poskytovatele a účetní metadata. Ne celé číslo karty, ne CVV, ne screenshot platební stránky a už vůbec ne „dočasně v logu, než to opravíme“. Slavná poslední slova vývojářského hororu.
+
+Praktické pravidlo:
+
+- Ukládej `payment_provider_customer_id`, ne kartu.
+- Ukládej poslední čtyři číslice a značku karty jen tehdy, když to zlepšuje podporu a zákaznický přehled.
+- CVV nikdy neukládej ani nepropaguj přes vlastní backend.
+- Platební webhooky loguj bez plného payloadu; stačí ID události, typ, stav, částka, měna a `request_id`.
+- Přístup do platebního panelu dávej podle role, ne podle toho, kdo „to zrovna potřebuje“.
+
+PCI Security Standards Council popisuje PCI DSS jako sadu technických a provozních požadavků na ochranu platebních dat a výslovně řeší organizace, které platební data ukládají, zpracovávají nebo přenášejí: https://www.pcisecuritystandards.org/standards/pci-dss/
+
+## CU.2 Billing stav je produktový stav, ne vedlejší efekt účetnictví
+
+Zákazník má vědět, v jakém stavu je jeho účet. Ne až když mu přestane fungovat export, protože platební metoda expirovala před třemi týdny. Billing stav navrhni jako normální stavový model:
+
+| Stav | Co znamená | Produktová reakce |
+| --- | --- | --- |
+| `trialing` | Zákazník zkouší produkt bez aktivní placené fakturace. | Ukaž zbývající dny a co se stane po konci trialu. |
+| `active` | Předplatné je zaplacené nebo v řádném období. | Ukaž tarif, obnovu, limity a odkaz na faktury. |
+| `past_due` | Platba selhala nebo čeká na doplacení. | Upozorni adminy, zachovej rozumnou grace period. |
+| `paused` | Služba je pozastavená podle dohody nebo procesu. | Zobraz důvod, datum a možnosti obnovy. |
+| `canceled` | Zákazník ukončil placení. | Nabídni export dat, konec přístupu a retenční informaci. |
+
+Stavy nesmí být jen interní enum. Musí se propsat do UI, podpory, e-mailů, auditní stopy i zákaznické dokumentace. Když podpora vidí „platba selhala“, ale zákazník vidí „něco se pokazilo“, vzniká zbytečný ping-pong. A ping-pong je fajn sport, ne support strategie.
+
+## CU.3 Fakturační údaje sbírej podle potřeby, ne podle fantazie CRM
+
+Fakturační formulář často bobtná, protože „se to někdy může hodit“. Jenže billing data bývají citlivá: jméno, firma, adresa, DIČ, e-mail pro faktury, někdy interní referenční čísla nebo poznámky. Sbírej je kvůli fakturaci, ne kvůli obohacení marketingového profilu.
+
+Rozděl data do tří vrstev:
+
+- **Účetní minimum:** název firmy nebo osoby, fakturační adresa, daňové údaje, měna, fakturační e-mail.
+- **Provozní billing data:** tarif, limity, stav předplatného, období, historie faktur, platební metoda jako token nebo reference.
+- **Obchodní kontext:** interní poznámky sales týmu, sleva, smluvní výjimka, nákupní proces zákazníka.
+
+První dvě vrstvy patří do billing systému a zákaznického účtu. Třetí vrstva patří do CRM nebo interní dokumentace s omezeným přístupem. Nemíchej je do jednoho „customer notes“ pole, které se pak exportuje všude. Jedno univerzální poznámkové pole je datový kompost: něco v něm roste, ale nikdo neví co.
+
+Evropská komise u principů GDPR připomíná minimalizaci a omezení uložení: zpracovávat jen data potřebná pro daný účel a nedržet je déle, než je nutné: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
+
+## CU.4 Změny tarifu musí být předvídatelné
+
+Upgrade je radost. Downgrade je realita. Zrušení je taky realita. Produkt, který umí jen upgrade, není produktový růst; je to hotel California v SaaS tričku.
+
+U každé změny tarifu napiš zákazníkovi před potvrzením:
+
+- co se změní okamžitě,
+- co se změní až od dalšího období,
+- kolik bude stát dnešní změna,
+- jestli vznikne kredit nebo poměrné doúčtování,
+- které funkce nebo limity se vypnou,
+- co se stane s daty nad novým limitem,
+- kde najde fakturu nebo potvrzení.
+
+Příklad mikrotextu:
+
+> Přecházíte z tarifu Team na Starter. Změna začne 1. září 2026. Do té doby zůstávají funkce Team aktivní. Od nového období bude limit projektů 5. Data nad limit nesmažeme automaticky, ale nové projekty nepůjde vytvořit, dokud účet neupravíte.
+
+Tahle věta je nudná. Výborně. Billing má být nudný. Emoce patří do brand kampaně, ne do nečekaného doúčtování.
+
+## CU.5 Dunning má pomáhat obnovit platbu, ne vyhrožovat
+
+Selhaná platba není vždy churn. Karta expirovala, banka odmítla transakci, účetní je na dovolené, firma změnila adresu. Dunning komunikace má být jasná, věcná a bez trapného nátlaku.
+
+Dobrá sekvence:
+
+1. **Den 0:** „Platba se nepodařila, služba běží dál, prosím aktualizujte platební metodu.“
+2. **Den 3:** „Platba stále čeká, tady je odkaz pro admina a fakturační e-mail.“
+3. **Den 7:** „Pokud platbu nevyřešíme, účet přejde do omezeného režimu.“
+4. **Den 14:** „Účet je omezený, data zůstávají dostupná pro export podle retenčních pravidel.“
+
+Neposílej tyto zprávy všem uživatelům v organizaci. Billing zprávy patří vlastníkovi účtu, fakturačnímu kontaktu a případně adminům. Běžný uživatel nepotřebuje vědět, že firma nezaplatila kartu. To není transparentnost, to je interní účetní karaoke.
+
+## CU.6 Faktury a doklady musí jít najít bez podpory
+
+Každý SaaS dřív nebo později dostane e-mail: „Pošlete mi prosím fakturu za březen.“ Když se to děje často, není problém v zákaznících. Je problém v produktu.
+
+Billing obrazovka má obsahovat:
+
+- aktuální tarif a období,
+- budoucí datum obnovy nebo konce období,
+- fakturační údaje a kdo je smí měnit,
+- seznam faktur a dobropisů s datem, částkou, měnou a stavem,
+- bezpečný odkaz na stažení dokladu,
+- historii změn tarifu,
+- informaci, kam psát kvůli účetnímu dotazu.
+
+Doklad stahuj přes autorizovaný endpoint, ne přes věčný veřejný odkaz. Pokud používáš dočasný odkaz, nastav krátkou platnost. Faktury mohou obsahovat osobní a obchodní data; chovej se k nim jako k dokumentům, ne jako k obrázku loga.
+
+## CU.7 Slevy a výjimky dokumentuj, jinak se promění v účetní folklór
+
+První zákazníci často dostanou zakladatelskou cenu, pilotní dohodu, ruční slevu nebo roční fakturaci mimo běžný ceník. To je v pořádku. Ne v pořádku je, když po roce nikdo neví, proč sleva existuje, kdo ji slíbil a jestli platí navždy.
+
+Každá výjimka má mít:
+
+- důvod,
+- vlastníka,
+- datum začátku,
+- datum revize,
+- dopad na MRR nebo fakturaci,
+- veřejně neviditelnou interní poznámku,
+- zákaznickou formulaci, kterou může použít support.
+
+Příklad:
+
+| Výjimka | Důvod | Revize | Poznámka pro support |
+| --- | --- | --- | --- |
+| 30% sleva na roční tarif | Zakladatelský zákazník a reference | 2027-01-15 | Sleva platí do další obnovy, další prodloužení schvaluje founder. |
+| Ruční fakturace | Zákazník vyžaduje nákupní objednávku | Každý rok | Před obnovou ověřit PO číslo a fakturační e-mail. |
+
+## CU.8 Checklist plateb a fakturace
+
+- [ ] Karetní údaje zpracovává platební poskytovatel, ne vlastní databáze.
+- [ ] Aplikační logy neobsahují celé platební payloady, tokeny ani citlivé autentizační údaje.
+- [ ] Billing má jasný stavový model a každý stav má zákaznický text.
+- [ ] Fakturační formulář sbírá jen data potřebná pro fakturaci a provoz účtu.
+- [ ] Zákazník před změnou tarifu vidí cenu, datum účinnosti, dopad na limity a data.
+- [ ] Dunning zprávy chodí jen relevantním billing kontaktům a adminům.
+- [ ] Faktury jsou dostupné v účtu přes autorizované nebo časově omezené odkazy.
+- [ ] Slevy, ruční fakturace a výjimky mají vlastníka, datum revize a interní důvod.
+- [ ] Billing přístupy se revidují stejně jako admin a support přístupy.
+- [ ] Offboarding po zrušení tarifu nabízí export dat a jasně popisuje retenční pravidla.
+
+## Codyho komentář
+
+Billing je nudná část produktu jen do chvíle, než se pokazí. Pak se z něj stane reputační megafon. Můj pohled: malý SaaS má mít billing méně „growth hackerský“ a víc účetně důstojný. Jasný tarif, férová změna, dohledatelné doklady, žádné skryté pasti. Když zákazník rozumí penězům i datům, mnohem snáz věří i zbytku produktu.
+
+## Zdroje k příloze
+
+- PCI Security Standards Council — PCI DSS: https://www.pcisecuritystandards.org/standards/pci-dss/
+- PCI Security Standards Council — FAQ k ukládání citlivých autentizačních dat po autorizaci: https://www.pcisecuritystandards.org/faqs/1533/
+- Evropská komise — GDPR principy minimalizace a omezení uložení: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
+
+## Shrnutí přílohy
+
+Privacy-first billing chrání víc než čísla karet. Chrání důvěru zákazníka v to, že produkt s penězi a doklady zachází předvídatelně. Malý SaaS tým by měl používat platebního poskytovatele místo vlastního ukládání karetních dat, modelovat billing stavy jako produktové stavy, sbírat jen potřebné fakturační údaje, jasně vysvětlovat změny tarifu, posílat dunning zprávy jen správným lidem, zpřístupnit faktury samoobslužně a dokumentovat výjimky. Není to sexy. Právě proto je to dobré.
+
 ## Pracovní log
 
+- 2026-08-11: Přidána příloha CU o platbách, fakturaci a billing procesu bez zbytečného sběru dat: platební poskytovatel, billing stavy, fakturační minimum, změny tarifu, dunning, faktury, slevové výjimky a checklist.
 - 2026-08-11: Přidána příloha CT o API kontraktu a exportu dat bez vendor lock-inu: OpenAPI dokumentace, exportní manifest, verze schématu, oprávnění, API scope, offboarding a checklist.
 - 2026-08-11: Přidána příloha CS o webhookách a integračním doručování: asynchronní smlouva, idempotence, rychlé potvrzení, podpisy nad raw body, minimální payload, redelivery obrazovka a checklist.
 - 2026-08-11: Přidána příloha CR o přihlašování, session a OAuth bez tokenového konfeti: serverové session, bezpečné cookie, OAuth flow, magic linky, reautentizace, login eventy a checklist.
