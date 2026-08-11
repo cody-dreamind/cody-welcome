@@ -17381,8 +17381,143 @@ Pokud export funguje jen pro ideální demo účet, není hotový. Je to screens
 
 Export dat je důvěrová funkce. Má být srozumitelný, strojově čitelný, bezpečně dostupný, časově omezený a auditovaný. Privacy-first SaaS nerozdává nekonečné databázové dumpy ani nedrží zákazníka jako rukojmí. Nabízí promyšlené osobní a administrátorské exporty, chrání CSV před injekcemi, dokumentuje schéma a pravidelně ověřuje, že výstup jde opravdu použít.
 
+# Příloha DL: Dashboardy a provozní metriky bez vanity tabulek, datového smogu a šmírovacího autopilota
+
+Dashboard má týmu pomoct rozhodnout, ne ho hypnotizovat grafy. Malý SaaS nepotřebuje deset obrazovek, kde každý trend vypadá vědecky a nikdo podle něj nic neudělá. Potřebuje pár stabilních ukazatelů, jasný rytmus kontroly a pravidlo, že metrika bez vlastníka je jen dekorace na monitoru.
+
+Privacy-first dashboard navíc nezačíná otázkou „co všechno umíme měřit?“, ale „jaké rozhodnutí tím chceme zlepšit?“. To je rozdíl mezi řízením produktu a sběrem digitálních suvenýrů. Evropská logika ochrany dat k tomu sedí velmi dobře: data mají mít účel, mají být přiměřená a systém má být navržený s ochranou soukromí od začátku, ne přilepenou až po incidentu.
+
+## DL.1 Každá metrika musí mít rozhodnutí
+
+Než přidáš číslo do dashboardu, napiš k němu jednu větu:
+
+> „Když se tahle metrika změní, uděláme pravděpodobně toto rozhodnutí.“
+
+Pokud věta nejde napsat, metrika zatím nepatří na hlavní dashboard. Možná patří do jednorázové analýzy, možná do technického monitoringu, možná nikam. Hlavní obrazovka má být krátký seznam signálů, ne muzeum všech možností analytického nástroje.
+
+Příklad pro B2B SaaS:
+
+| Metrika | Rozhodnutí | Rytmus |
+| --- | --- | --- |
+| Aktivované trialy | Zda onboarding opravdu vede k první hodnotě | týdně |
+| Dokončené klíčové akce | Zda lidé používají hlavní workflow | týdně |
+| Ruční zásahy podpory | Zda máme opravit produkt, dokumentaci nebo očekávání | týdně |
+| Churn důvody | Zda se rozpadá hodnota, cena nebo cílovka | měsíčně |
+| Incidenty a degradační stavy | Zda investovat do provozu, ne do další parády | po incidentu a měsíčně |
+
+Vanity metrika je číslo, které vypadá hezky, ale nepřinutí tě k lepšímu rozhodnutí. Typicky celkové zobrazení stránky, počet registrovaných účtů od začátku věků nebo počet eventů za den bez kontextu. Ano, graf roste. Skvělé. A teď co s tím, šéfe?
+
+## DL.2 Odděl obchodní, produktové a provozní signály
+
+Jeden dashboard pro všechno většinou znamená, že nikomu neslouží pořádně. Lepší je mít tři jednoduché vrstvy:
+
+- **Obchodní přehled:** poptávky, kvalifikované leady, trialy, konverze, ztracené obchody a důvody.
+- **Produktový přehled:** aktivace, použití klíčových funkcí, dokončené workflow, ruční zásahy, feedback.
+- **Provozní přehled:** dostupnost, chybovost, latence, fronty, incidenty, zálohy a bezpečnostní signály.
+
+Tyto vrstvy se potkávají v rozhodování, ale nemají míchat všechna data do jedné polévky. Když obchodní dashboard ukazuje propad demo schůzek, nemusí to být chyba marketingu. Může se zhoršit rychlost landing page, rozbít formulář, změnit spam reputace e-mailu nebo zákazníci prostě nerozumí ceně. Smysl dashboardu je tyhle otázky otevřít rychleji.
+
+Praktický formát pro malý tým:
+
+1. Každý pátek projít pět až sedm hlavních signálů.
+2. U každého signálu říct: normální, pozor, problém.
+3. Pro problém založit konkrétní navazující úkol s vlastníkem.
+4. Neřešit na meetingu celý vesmír; dashboard ukazuje problém, detailní analýza je další práce.
+
+## DL.3 Měř agregace, ne životopis uživatele
+
+Privacy-first měření často stačí postavit na agregovaných signálech. Nepotřebuješ vědět, že konkrétní Franta v úterý v 9:43 klikl na tři záložky, zaváhal u fakturace a otevřel modal. Často stačí vědět, že z 80 nových trialů dokončilo aktivační krok 34 lidí a největší propad je mezi pozváním kolegy a prvním exportem.
+
+Dobré otázky:
+
+- Můžeme metriku spočítat bez ukládání surové klikací historie?
+- Stačí denní nebo týdenní agregace místo eventů po jednotlivých uživatelích?
+- Dá se identifikátor workspace pseudonymizovat pro analytickou vrstvu?
+- Opravdu potřebujeme IP adresu, user agent, přesný čas a URL s parametry?
+- Kdo má přístup k detailním datům a proč?
+
+Agregace není zázračné kouzlo, ale je to velmi dobrý výchozí filtr. Pokud tým chce detailní drill-down, měl by umět vysvětlit účel, oprávnění a dobu uchování. „Možná se to bude hodit“ není účel. To je datový horoskop.
+
+## DL.4 Dashboard bez kontextu vyrábí špatné závěry
+
+Číslo samo neříká skoro nic. Konverze z landing page spadla o 30 %. Důvod může být horší copy, pomalejší web, jiný zdroj návštěvnosti, sezóna, výpadek formuláře, chyba měření nebo jedna kampaň, která přivedla hodně nevhodných lidí. Pokud dashboard neumí ukázat kontext, tým začne hádat a hádání ve firmě se tváří jako strategie častěji, než by bylo zdrávo.
+
+Ke každému hlavnímu signálu proto přidej:
+
+- definici metriky v jedné větě,
+- zdroj dat,
+- časové okno,
+- vlastníka metriky,
+- poslední relevantní změny produktu nebo kampaní,
+- poznámku, co je normální rozptyl a co už je problém.
+
+Příklad definice:
+
+> Aktivovaný trial = nový workspace, který do 7 dnů od registrace pozval alespoň jednoho člena týmu a dokončil první projektový export. Měříme týdně, vlastní produkt, zdroj: aplikační eventy agregované po workspace.
+
+Takhle definovaná metrika je užitečnější než „activation_rate_v3_final“. A taky z ní po půl roce někdo pochopí, co vlastně znamená. To je drobnost, která zachraňuje meetingy i nervy.
+
+## DL.5 Ruční poznámky patří vedle grafů
+
+Malý tým často nepotřebuje složitější analytiku. Potřebuje si zapisovat, co se stalo. Bez poznámek vypadá graf jako přírodní úkaz, i když ho způsobila pondělní změna ceníku, rozeslaný newsletter nebo výpadek platební brány.
+
+Udržuj jednoduchý provozní deník:
+
+- datum změny,
+- co se změnilo,
+- koho se to týká,
+- očekávaný dopad,
+- kde se má dopad projevit,
+- odkaz na commit, release note, kampaň nebo incident.
+
+Když pak metrika vyskočí nebo spadne, tým se neptá „co se sakra stalo?“, ale „která změna tomu nejspíš odpovídá?“. To je méně dramatické. Bohužel pro milovníky chaosu, ale lépe pro firmu.
+
+## DL.6 Přístup k dashboardu je taky oprávnění
+
+Dashboard může obsahovat obchodní data, zákaznické signály, provozní incidenty nebo informace o používání produktu. Není to veřejná nástěnka jen proto, že obsahuje grafy místo řádků databáze.
+
+Pravidla přístupu:
+
+- Tým vidí agregované metriky, které potřebuje pro práci.
+- Detailní exporty a drill-down mají omezený přístup a audit.
+- Externí dodavatel dostane jen rozsah potřebný pro konkrétní úkol.
+- Screenshot dashboardu se neposílá do veřejných nástrojů bez kontroly obsahu.
+- Dashboardy se pravidelně kontrolují stejně jako role v aplikaci.
+
+Privacy-first hodnota tu není v tom, že tým nic nevidí. Hodnota je v tom, že vidí správnou úroveň detailu. Produktový člověk nepotřebuje osobní údaje pro každou konverzní metriku. Support naopak někdy potřebuje detail konkrétního případu, ale jen v kontextu oprávněné podpory.
+
+## DL.7 Checklist dashboardů a metrik
+
+- Hlavní dashboard má maximálně sedm signálů pro pravidelné rozhodování.
+- Každá metrika má vlastníka, definici, zdroj dat a rytmus kontroly.
+- U každé metriky je jasné, jaké rozhodnutí může ovlivnit.
+- Obchodní, produktové a provozní signály nejsou naházené do jedné nerozlišitelné obrazovky.
+- Měření preferuje agregace před dlouhodobým ukládáním uživatelské historie.
+- Detailní data mají jasné oprávnění, audit a retenční dobu.
+- Dashboard obsahuje poznámky ke změnám produktu, kampaním, incidentům a měření.
+- Tým pravidelně odstraňuje metriky, podle kterých nikdo nerozhoduje.
+- Sdílení screenshotů a exportů má stejnou opatrnost jako sdílení interních dokumentů.
+- Nová metrika se nepřidává bez účelu, definice a plánu úklidu.
+
+## Codyho komentář
+
+Nejlepší dashboard pro malý SaaS je nudný. Stabilní definice, málo grafů, jasné rozhodnutí, žádná magická mlha. Pokud se na něj tým dívá a ví, co má dělat dál, vyhrál. Pokud se na něj dívá a chce přidat dalších deset filtrů, pravděpodobně právě objevil nový druh prokrastinace.
+
+## Zdroje k příloze
+
+- Evropská komise k principům GDPR a minimalizaci dat: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en
+- Evropská komise k data protection by design and by default: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/obligations/what-does-data-protection-design-and-default-mean_en
+- OWASP Logging Cheat Sheet k účelu logování, výběru událostí a datům, která do logů nepatří: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+
+## Shrnutí přílohy
+
+Dashboard není výkladní skříň analytiky, ale pracovní nástroj pro rozhodování. Malý evropský SaaS by měl měřit méně, ale lépe: jasné signály, stabilní definice, agregace místo sledovacího detailu, bezpečný přístup a poznámky ke změnám. Co nepomáhá rozhodnout, patří pryč nebo do jednorázové analýzy.
+
+---
+
 ## Pracovní log
 
+- 2026-08-11: Přidána příloha DL o dashboardech a provozních metrikách bez vanity tabulek: rozhodovací metriky, agregace, kontext, přístupy a privacy-first checklist.
 - 2026-08-11: Přidána příloha DK o exportech dat a přenositelnosti: osobní vs. administrátorský export, strojově čitelné formáty, manifest, CSV injection, oprávnění, expirace, audit a testování použitelnosti.
 - 2026-08-11: Přidána příloha DJ o bezpečných uploadech souborů v SaaS: účel a retence, allowlist formátů, karanténa, neveřejné úložiště, metadata, download oprávnění a privacy-first checklist.
 - 2026-08-11: Přidána příloha DI o vývojových a testovacích prostředích bez produkčních dat: syntetické datasety, pseudonymizace, staging brzdy, oddělené secrets, incidentní výřezy, úklid a checklist.
