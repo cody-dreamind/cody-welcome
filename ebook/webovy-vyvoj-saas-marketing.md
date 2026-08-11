@@ -15644,8 +15644,152 @@ Můj pohled: dobrá chybová hláška je jako slušný recepční při výpadku 
 Chybové stavy jsou součást produktu, bezpečnosti i důvěry. Piš je podle dalšího kroku uživatele, ne podle interní výjimky. Ven posílej srozumitelnou zprávu a korelační ID, dovnitř ukládej bezpečně redigovaný kontext. Formuláře mají říkat, co opravit; kritické akce mají po chybě ukázat jednoznačný stav. Privacy-first SaaS neřeší chyby tak, že uživateli ukáže strojovnu. Ukáže mu dveře ven a týmu nechá mapu, kde bezpečně opravovat.
 
 
+# Příloha DA: Závislosti, aktualizace a SBOM bez panického patchování a supply-chain mlhy
+
+Moderní webová aplikace je málokdy jen tvůj kód. Je to tvůj kód, framework, balíčky, build nástroje, kontejnery, knihovny pro PDF, ikonky, SDK platební brány, e-mailový klient, analytika, možná AI klient a k tomu pár transitive dependencies, které nikdo z týmu nikdy vědomě nevybral. Gratuluji, vlastníš digitální činžák. Nestačí zamknout vlastní byt; musíš vědět, kdo má klíče od sklepa.
+
+Privacy-first přístup tady neznamená „nepoužívej open source“. Naopak. Znamená mít přehled, co v produktu běží, jak rychle umíš reagovat na bezpečnostní problém a jak zabráníš tomu, aby malý balíček z internetu potichu získal cestu k zákaznickým datům.
+
+OWASP popisuje Software Composition Analysis jako způsob, jak zjišťovat rizika v použitých komponentách a jejich známých zranitelnostech. OWASP Dependency-Check například analyzuje závislosti a hledá vazby na veřejně známé CVE záznamy: https://owasp.org/www-project-dependency-check/. CISA dlouhodobě vede zdroje k SBOM, tedy strojově čitelnému seznamu softwarových komponent: https://www.cisa.gov/topics/cyber-threats-and-advisories/sbom/sbomresourceslibrary.
+
+## DA.1 Inventář závislostí je provozní dokument, ne screenshot z `package.json`
+
+Začni jednoduchou otázkou: „Když zítra vyjde kritická zranitelnost v knihovně X, zjistíme do hodiny, jestli ji používáme?“ Pokud odpověď zní „asi by se někdo podíval do repozitáře“, nemáš proces. Máš naději v mikině.
+
+Minimální inventář pro malý SaaS:
+
+- repozitář a aplikace, kterých se závislost týká,
+- typ závislosti: runtime, dev/build, test, kontejner, externí služba,
+- správce nebo tým, který rozhoduje o aktualizaci,
+- způsob aktualizace: automatický PR, ruční upgrade, vendor release,
+- kritičnost komponenty podle dopadu na data a dostupnost,
+- odkaz na lockfile, SBOM artefakt nebo výstup SCA nástroje.
+
+Prakticky: pro první iteraci stačí tabulka v repozitáři nebo interní knowledge base. Důležité je, aby vznikala z reality buildu, ne z ručně opsaného seznamu. Ručně psaný seznam závislostí stárne rychleji než marketingový claim „AI-powered“.
+
+## DA.2 Lockfile je smlouva o reprodukovatelnosti
+
+Lockfile (`package-lock.json`, `pnpm-lock.yaml`, `yarn.lock`, `composer.lock`, `poetry.lock`, `Cargo.lock`) není šum v diffu. Je to záznam, co se skutečně instaluje. Bez něj může stejné `npm install` dnes a za měsíc stáhnout jiné transitive verze. To je pro bezpečnost, debugging i incident response krásně nepříjemná loterie.
+
+Pravidla:
+
+- Lockfile commituj u aplikací a služeb, které nasazuješ.
+- V CI používej instalační režim, který lockfile respektuje (`npm ci`, `pnpm install --frozen-lockfile`, podobné ekvivalenty podle ekosystému).
+- Nepovoluj „opravné“ commity, které mění lockfile bez popisu proč.
+- Při upgradu závislosti kontroluj, jestli se nezměnil i velký kus transitive stromu.
+- U produkčních buildů ukládej verzi commitu a ideálně i artefakt nebo SBOM.
+
+Privacy-first detail: reprodukovatelný build pomáhá i při datovém incidentu. Když víš, co přesně běželo v produkci, nemusíš hádat, jestli se zranitelnost týkala zákaznických dat. Hádání je levné jen do chvíle, než se ho ptá právník nebo enterprise zákazník.
+
+## DA.3 Automatické aktualizace ano, automatické sloučení ne vždy
+
+Nástroje typu Dependabot, Renovate nebo jiné update boty jsou užitečné, protože připomínají dluh dřív, než začne hořet. Ale nejsou náhrada za úsudek. Automaticky otevřený pull request ještě neznamená automaticky bezpečný release.
+
+Rozděl aktualizace podle rizika:
+
+| Typ změny | Příklad | Doporučený postup |
+|---|---|---|
+| Patch dev nástroje | formatter, test helper | automatický PR, testy, rychlé sloučení |
+| Patch runtime knihovny | HTTP klient, parser | testy kritických cest, kontrola changelogu |
+| Minor frameworku | Next, Laravel, Rails | staging, smoke test, rollback plán |
+| Major verze | databázový klient, auth knihovna | samostatný úkol, migrační poznámky, product impact |
+| Kritická zranitelnost | RCE, auth bypass, únik dat | incidentní priorita, triage dopadu, cílený hotfix |
+
+Dobrá rutina pro malý tým:
+
+1. Jednou týdně projdi běžné update PR.
+2. Jednou měsíčně udělej větší úklid minor verzí.
+3. Kritické bezpečnostní aktualizace řeš mimo běžný cyklus.
+4. Každý update, který mění auth, platby, uploady, exporty nebo práci s osobními daty, dostane ruční review.
+
+## DA.4 SCA výstup není rozsudek, ale fronta rozhodnutí
+
+Software Composition Analysis nástroj ti často ukáže dlouhý seznam nálezů. Některé jsou kritické, některé se týkají nepoužité části knihovny, některé jsou false positive a některé jsou přesně ten problém, který budeš rád řešit dřív než internetový skener.
+
+Proto si nastav triage pravidla:
+
+- **Dosažitelnost:** používáme zranitelnou funkci, nebo je knihovna jen v dev závislostech?
+- **Expozice:** je komponenta dostupná z internetu, nebo jen v interním buildu?
+- **Dopad na data:** může problém vést k úniku, změně nebo smazání zákaznických dat?
+- **Mitigace:** máme konfigurační workaround, firewall pravidlo, vypnutí funkce nebo rychlý upgrade?
+- **SLA:** do kdy musí být rozhodnuto a do kdy opraveno?
+
+Příklad interního záznamu:
+
+```text
+Nález: CVE v knihovně pro zpracování obrázků
+Aplikace: customer-portal
+Použití: upload avataru a příloh v supportu
+Expozice: veřejný upload po přihlášení
+Dopad: možné DoS / zpracování škodlivého souboru
+Rozhodnutí: upgrade dnes, dočasně snížit limit velikosti souboru
+Majitel: Petr
+Deadline: 2026-08-12 16:00
+```
+
+Bez triage se z bezpečnostního nástroje stane generátor studu. S triage je to fronta práce.
+
+## DA.5 SBOM má být artefakt buildu, ne PDF pro šuplík
+
+SBOM dává největší smysl, když vzniká automaticky při buildu nebo release. Ručně vyrobený SBOM pro jedno výběrové řízení je lepší než nic, ale pro provoz je to asi jako hasicí přístroj vytištěný na papíře.
+
+Praktický start:
+
+- Generuj SBOM pro produkční aplikace při release.
+- Ukládej ho k verzi artefaktu, commitu nebo tagu.
+- Používej strojově čitelný formát, typicky CycloneDX nebo SPDX podle ekosystému a požadavků zákazníků.
+- SBOM nepovažuj za veřejný dokument automaticky; může prozrazovat interní technologický detail.
+- Když enterprise zákazník požádá o SBOM, měj proces schválení a bezpečného předání.
+
+OWASP Software Component Verification Standard staví práci se softwarovými komponentami právě kolem inventáře, SBOM a ověřování komponent: https://owasp.org/www-project-software-component-verification-standard/. Pro malý SaaS to nemusí znamenat korporátní aparát. Znamená to, že víš, co nasazuješ, a umíš to doložit.
+
+## DA.6 Závislosti omezuj podle hodnoty, ne podle asketismu
+
+Nulové závislosti nejsou realistický cíl. Cíl je rozumný poměr hodnoty a rizika. Knihovna, která řeší složitou kryptografii, může být bezpečnější než vlastní geniální implementace napsaná v pátek večer po třetí kávě. Knihovna, která kvůli jedné ikoně přidá třicet balíčků a telemetrii, je jiný příběh.
+
+Před přidáním nové závislosti se ptej:
+
+- Řeší problém, který opravdu máme?
+- Je používaná a udržovaná, nebo poslední release pamatuje modemové připojení?
+- Má jasnou licenci kompatibilní s produktem?
+- Běží v runtime s přístupem k zákaznickým datům?
+- Posílá něco ven, načítá externí skripty nebo obsahuje telemetrii?
+- Umíme ji odstranit, když začne být riziková?
+
+Privacy-first bonus: preferuj knihovny, které běží lokálně v aplikaci a neposílají data třetím stranám. SDK dodavatele je pohodlné, ale někdy je čistší volat jednoduché API server-side a uložit jen nutné minimum.
+
+## DA.7 Checklist závislostí a aktualizací
+
+- [ ] Produkční aplikace mají commitnutý lockfile a CI ho respektuje.
+- [ ] Existuje přehled runtime, build a externích závislostí podle aplikace.
+- [ ] Update bot otevírá PR, ale rizikové změny vyžadují ruční review.
+- [ ] SCA nálezy mají triage podle dosažitelnosti, expozice, dopadu a mitigace.
+- [ ] Kritické zranitelnosti mají rychlý postup mimo běžný backlog.
+- [ ] SBOM vzniká při release nebo je jasně naplánované, jak ho zavést.
+- [ ] Nová závislost prochází otázkami hodnoty, licence, údržby a datových toků.
+- [ ] Knihovny s přístupem k osobním datům mají vyšší laťku než build-time nástroje.
+- [ ] U velkých upgradů existuje staging test a rollback plán.
+- [ ] Tým jednou měsíčně maže nepoužívané balíčky místo rituálního přidávání dalších.
+
+## Codyho komentář
+
+Můj pohled: dependency hygiene je digitální úklid lednice. Nikdo se na něj netěší, ale když ho ignoruješ půl roku, najdeš vzadu věci, které mají vlastní mikroklima a možná i právní subjektivitu. Malý tým nepotřebuje paranoiu. Potřebuje pravidelný rytmus, lockfile, automatické upozornění a odvahu smazat balíček, který už jen straší v `node_modules`.
+
+## Zdroje k příloze
+
+- OWASP Dependency-Check: https://owasp.org/www-project-dependency-check/
+- OWASP Software Component Verification Standard: https://owasp.org/www-project-software-component-verification-standard/
+- OWASP Component Analysis: https://owasp.org/www-community/Component_Analysis
+- CISA SBOM Resources Library: https://www.cisa.gov/topics/cyber-threats-and-advisories/sbom/sbomresourceslibrary
+
+## Shrnutí přílohy
+
+Závislosti jsou součást produktu a musí mít provozní péči. Commituj lockfile, generuj nebo plánuj SBOM, používej SCA jako zdroj rozhodnutí a aktualizace třiď podle rizika. Nové knihovny přidávej podle hodnoty, licence, údržby a datových toků. Privacy-first SaaS neznamená psát všechno od nuly; znamená vědět, co běží, co má přístup k datům a jak rychle umíš bezpečně reagovat.
+
+
 ## Pracovní log
 
+- 2026-08-11: Přidána příloha DA o závislostech, aktualizacích a SBOM: inventář komponent, lockfile, update boty, SCA triage, SBOM jako release artefakt, pravidla pro nové knihovny a checklist.
 - 2026-08-11: Přidána příloha CZ o chybových stavech bez úniku dat: typy chyb podle dalšího kroku, bezpečné veřejné zprávy, korelační ID, formulářové chyby, jednoznačný stav kritických akcí, support kontext a checklist.
 - 2026-08-11: Přidána příloha CY o schvalování rizikových akcí: seznam dopadů, úrovně kontroly, povinný důvod, reautentizace, časově omezené schválení, bezpečné UX a checklist.
 - 2026-08-11: Přidána příloha CX o uploadech a zákaznických souborech bez datového skladiště: účel, validace, bezpečné názvy, oddělené úložiště, skenování, retence a checklist.
