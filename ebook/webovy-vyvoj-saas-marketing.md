@@ -15787,8 +15787,168 @@ Můj pohled: dependency hygiene je digitální úklid lednice. Nikdo se na něj 
 Závislosti jsou součást produktu a musí mít provozní péči. Commituj lockfile, generuj nebo plánuj SBOM, používej SCA jako zdroj rozhodnutí a aktualizace třiď podle rizika. Nové knihovny přidávej podle hodnoty, licence, údržby a datových toků. Privacy-first SaaS neznamená psát všechno od nuly; znamená vědět, co běží, co má přístup k datům a jak rychle umíš bezpečně reagovat.
 
 
+# Příloha DB: Bezpečnostní hlavičky bez cargo cultu, rozbitého frontendu a marketingových úniků
+
+Bezpečnostní HTTP hlavičky jsou jedna z těch věcí, které vypadají nudně, dokud nechybí. Pak najednou řešíš, proč se stránka dá vložit do cizího iframe, proč prohlížeč poslal referer s citlivým parametrem do externího nástroje, proč se všude povolil inline JavaScript a proč reporty z CSP nikdo nečte. Klasika: malý text v odpovědi serveru, velký potenciál pro „aha, tohle jsme měli udělat už dávno“.
+
+Privacy-first přístup neznamená přidat náhodný balík hlaviček z blogpostu a tvářit se jako pevnost. Znamená vědět, co každá hlavička chrání, kde může rozbít produkt a jak ji zavést tak, aby pomáhala bezpečnosti i soukromí. OWASP Secure Headers Project průběžně popisuje bezpečnostní hlavičky pro webové aplikace: https://owasp.org/www-project-secure-headers/. MDN má praktické průvodce pro Content Security Policy, Referrer-Policy a Permissions-Policy: https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CSP, https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Referrer-Policy a https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Permissions-Policy.
+
+## DB.1 Nejdřív si napiš politiku, až pak hlavičku
+
+Bezpečnostní hlavička je technická formulace produktového rozhodnutí. Když nevíš, odkud smí aplikace načítat skripty, obrázky, fonty, API a iframy, žádná CSP tě nespasí. Jen zabetonuje chaos do konfiguračního souboru.
+
+Začni jednoduchou tabulkou:
+
+| Oblast | Povolené zdroje | Důvod | Data | Majitel |
+|---|---|---|---|---|
+| Skripty | vlastní doména, build artefakty | běh aplikace | žádná třetí strana | frontend |
+| API | `api.example.cz` | produktové funkce | účetní a uživatelská data | backend |
+| Obrázky | vlastní CDN, uživatelské uploady | obsah aplikace | možné osobní údaje | produkt |
+| Fonty | self-hosted | výkon a soukromí | bez volání ven | design |
+| Iframy | jen vybrané platební nebo dokumentové flow | jasný účel | podle integrace | security |
+
+Praktický trik: ke každé externí doméně napiš větu „proč tu je“. Pokud věta zní „nějaký skript z šablony“, doména nemá v produkci co dělat. Internet už má dost tajemných hostů, nepotřebuje další.
+
+## DB.2 CSP zaváděj v report-only režimu, ne granátem do produkce
+
+Content Security Policy umí výrazně omezit dopad XSS a nechtěného načítání zdrojů. Umí ale také rozbít checkout, editor, mapu, upload náhledů nebo embedded demo. Proto ji zaváděj ve dvou krocích.
+
+Nejdřív nastav `Content-Security-Policy-Report-Only`. Sbírej porušení, odstraň legitimní problémy a teprve potom přepni na vynucenou politiku. Report-only není alibi na věčnost; je to diagnostická fáze.
+
+Rozumný start pro běžný marketingový web:
+
+```text
+default-src 'self';
+script-src 'self';
+style-src 'self';
+img-src 'self' data:;
+font-src 'self';
+connect-src 'self';
+frame-ancestors 'none';
+base-uri 'self';
+form-action 'self';
+upgrade-insecure-requests
+```
+
+Pro SaaS aplikaci bude politika často širší, protože má API, uploady, platby nebo dokumenty. I tak platí: povoluj konkrétní zdroje, ne vesmír. `*` je bezpečnostní obdoba věty „všichni jsme tu kámoši“.
+
+## DB.3 Referrer-Policy chrání víc než SEO náladu
+
+Referer může prozradit, odkud uživatel přišel. Někdy je to nevinná URL článku. Jindy je v URL e-mail, token, ID objednávky, interní název projektu nebo parametr kampaně, který o uživateli říká víc, než je zdrávo.
+
+Pro privacy-first web nastav výchozí pravidlo, které neposílá zbytečný detail dál. Dobrá praktická volba pro mnoho webů je:
+
+```text
+Referrer-Policy: strict-origin-when-cross-origin
+```
+
+Tím obvykle zachováš základní informaci o původu pro běžné webové fungování, ale neposíláš celou cestu URL při přechodu na jinou doménu. U citlivých částí aplikace, jako je administrace, fakturace, onboarding s osobními údaji nebo zákaznický portál, zvaž přísnější variantu:
+
+```text
+Referrer-Policy: no-referrer
+```
+
+Pravidlo pro tým: citlivé údaje nepatří do URL. Referrer-Policy je bezpečnostní síť, ne omluvenka pro token v query stringu.
+
+## DB.4 Permissions-Policy vypíná funkce, které produkt nepotřebuje
+
+Permissions-Policy dovoluje říct prohlížeči, které schopnosti stránky nebo vložených iframe prvků smí používat. Kamera, mikrofon, geolokace, fullscreen, clipboard, payment a další schopnosti nemají být zapnuté „pro jistotu“. Pro jistotu se v bezpečnosti vypíná, ne povoluje.
+
+Marketingový web většinou nepotřebuje skoro nic:
+
+```text
+Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()
+```
+
+Produktová aplikace může některé schopnosti potřebovat. Pak je povol konkrétně pro obrazovku nebo origin, kde dávají smysl. Například aplikace pro videohovory bude potřebovat kameru a mikrofon, ale blog, pricing stránka a dokumentace opravdu ne.
+
+Privacy-first UX detail: když produkt používá citlivou schopnost prohlížeče, vysvětli ji v rozhraní před systémovým dotazem. „Potřebujeme mikrofon pro nahrání hlasové poznámky“ je lepší než tiché kliknutí, po kterém prohlížeč vyskočí jako úředník ze skříně.
+
+## DB.5 HSTS zapínej až po kontrole HTTPS reality
+
+HTTP Strict Transport Security říká prohlížeči, že má s doménou komunikovat jen přes HTTPS. To je správně, ale není to tlačítko pro adrenalinové sporty. Nejdřív ověř, že HTTPS funguje na hlavní doméně, subdoménách, redirectech, API i starších odkazech.
+
+Doporučený postup:
+
+1. Ověř, že všechny produkční endpointy mají platný certifikát.
+2. Nastav krátký `max-age`, například pro první rollout.
+3. Sleduj chyby, redirect smyčky a staré integrace.
+4. Postupně prodlužuj `max-age`.
+5. `includeSubDomains` použij až ve chvíli, kdy máš pod kontrolou subdomény.
+6. HSTS preload ber jako samostatné rozhodnutí, ne defaultní checkbox.
+
+Příklad po odladění:
+
+```text
+Strict-Transport-Security: max-age=31536000; includeSubDomains
+```
+
+Pokud máš historické subdomény, interní nástroje nebo klientské whitelabel domény, nespěchej. Bezpečnostní hlavička má snížit riziko, ne vytvořit provozní escape room.
+
+## DB.6 Clickjacking a vložení do iframe řeš explicitně
+
+U SaaS administrace, fakturace, formulářů a zákaznických dat nechceš, aby někdo vložil stránku do cizího iframe a překryl ji vlastním UI. Moderní cesta je CSP direktiva:
+
+```text
+Content-Security-Policy: frame-ancestors 'none'
+```
+
+Pokud produkt embedding potřebuje, například veřejný widget nebo partnerský portál, odděl ho od hlavní aplikace. Jedna politika pro všechno vede buď k moc volnému adminu, nebo rozbitému widgetu.
+
+Praktický model:
+
+- admin a zákaznický portál: `frame-ancestors 'none'`,
+- veřejný widget: samostatná subdoména a přesný seznam povolených parent originů,
+- dokumentace: obvykle žádný embedding,
+- checkout: podle požadavků platební integrace a po testu v reálném flow.
+
+## DB.7 Reporty musí končit v procesu, ne v černé díře
+
+CSP reporty, security scanner nálezy a hlavičkové testy jsou užitečné jen tehdy, když mají majitele. Jinak je to další metrika, která se tváří důležitě a tiše hnije v dashboardu.
+
+Nastav jednoduchý rytmus:
+
+- při změně externích skriptů zkontroluj CSP,
+- při novém iframe nebo integraci aktualizuj zdrojovou tabulku,
+- jednou měsíčně spusť kontrolu hlaviček pro hlavní domény,
+- po incidentu nebo větší změně auth projdi `frame-ancestors`, `form-action` a cookies,
+- u reportů ukládej jen nutné technické údaje, ne celé URL s citlivými parametry.
+
+Privacy-first detail: reportovací endpoint pro CSP nesmí být datový vysavač. Redakce URL, omezená retence a přístup jen pro lidi, kteří nálezy řeší. Bezpečnostní monitoring nemá být vedlejší analytika uživatelů v kostýmu.
+
+## DB.8 Checklist bezpečnostních hlaviček
+
+- [ ] Máš tabulku povolených zdrojů pro skripty, styly, obrázky, fonty, API a iframy.
+- [ ] CSP je nejdřív testovaná v `Report-Only` režimu a teprve potom vynucená.
+- [ ] `script-src` a `connect-src` nepovolují divoké `*` bez jasného důvodu.
+- [ ] `Referrer-Policy` omezuje únik detailních URL na cizí domény.
+- [ ] Citlivé části produktu nepoužívají osobní údaje, tokeny ani tajemství v URL.
+- [ ] `Permissions-Policy` vypíná kameru, mikrofon, geolokaci a další schopnosti tam, kde nejsou potřeba.
+- [ ] HSTS je zapnuté až po kontrole HTTPS na doménách a subdoménách.
+- [ ] Admin, billing a zákaznický portál nejdou vložit do cizího iframe.
+- [ ] Veřejné embedy jsou oddělené od hlavní aplikace a mají vlastní pravidla.
+- [ ] Reporty z CSP a scannerů mají majitele, retenci a pravidelný review rytmus.
+
+## Codyho komentář
+
+Můj pohled: bezpečnostní hlavičky jsou jako kvalitní zámky na dveřích. Nevyřeší špatný návrh domu, ale když chybí, zveš dovnitř i lidi, kteří jen hledali zkratku na Wi-Fi. Největší chyba není nemít perfektní CSP první den. Největší chyba je nemít žádnou mapu zdrojů a pak se divit, že marketingový skript má víc svobody než interní účetní.
+
+## Zdroje k příloze
+
+- OWASP Secure Headers Project: https://owasp.org/www-project-secure-headers/
+- MDN Content Security Policy guide: https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CSP
+- MDN Referrer-Policy header: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Referrer-Policy
+- MDN Permissions-Policy header: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Permissions-Policy
+- MDN Strict-Transport-Security header: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Strict-Transport-Security
+
+## Shrnutí přílohy
+
+Bezpečnostní hlavičky dávají prohlížeči jasné mantinely. Nejdřív si napiš politiku zdrojů, potom ji převeď do CSP a zaváděj ji přes report-only režim. Omez referery, vypni nepotřebné browser schopnosti, HSTS zapínej postupně a embedding řeš odděleně podle typu obrazovky. Privacy-first SaaS nepoužívá hlavičky jako dekoraci; používá je jako provozní pravidla, která chrání lidi, data i produkt před zbytečným rizikem.
+
+
 ## Pracovní log
 
+- 2026-08-11: Přidána příloha DB o bezpečnostních HTTP hlavičkách: mapa povolených zdrojů, CSP rollout, Referrer-Policy, Permissions-Policy, HSTS, ochrana proti clickjackingu, reporty a checklist.
 - 2026-08-11: Přidána příloha DA o závislostech, aktualizacích a SBOM: inventář komponent, lockfile, update boty, SCA triage, SBOM jako release artefakt, pravidla pro nové knihovny a checklist.
 - 2026-08-11: Přidána příloha CZ o chybových stavech bez úniku dat: typy chyb podle dalšího kroku, bezpečné veřejné zprávy, korelační ID, formulářové chyby, jednoznačný stav kritických akcí, support kontext a checklist.
 - 2026-08-11: Přidána příloha CY o schvalování rizikových akcí: seznam dopadů, úrovně kontroly, povinný důvod, reautentizace, časově omezené schválení, bezpečné UX a checklist.
