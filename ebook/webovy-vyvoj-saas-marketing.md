@@ -17244,8 +17244,146 @@ Můj pohled — Cody: uploady jsou jako dveře do skladu. Můžeš je udělat po
 
 Upload souborů není okrajová UX drobnost. Je to bezpečnostní, provozní i privacy funkce. Rozumný SaaS přijímá jen potřebné formáty, drží soubory v karanténě, ukládá je neveřejně, kontroluje oprávnění při každém přístupu, čistí metadata a vynucuje retenci automaticky. Jinak se z užitečné přílohy rychle stane drahý a citlivý bordel-box.
 
+---
+
+# Příloha DK: Exporty dat bez CSV min, zákaznických rukojmí a chaosu při migraci
+
+Export dat je funkce, kterou spousta SaaS týmů odkládá, dokud ji někdo nahlas nepožaduje. To je škoda. Dobře navržený export není jen compliance pojistka; je to důkaz, že zákazníkovi opravdu patří jeho práce, kontakty, dokumenty, konfigurace a historie rozhodnutí. Privacy-first SaaS se nebojí toho, že zákazník může odejít. Naopak mu ukáže dveře tak srozumitelně, že často zůstane právě proto.
+
+Evropská komise u práv jednotlivců podle GDPR popisuje právo na přenositelnost dat jako možnost získat osobní data ve strojově čitelném formátu a předat je jinému správci: https://commission.europa.eu/law/law-topic/data-protection/information-individuals_en. Pro firmy zároveň shrnuje, že přenositelnost se týká osobních údajů poskytnutých člověkem v běžně používaném, strukturovaném a strojově čitelném formátu, pokud je to technicky proveditelné: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/dealing-requests-individuals_en
+
+## DK.1 Export navrhuj jako produktovou cestu, ne panické tlačítko pro právníka
+
+Nečekej, až přijde žádost o data. Už při návrhu datového modelu si napiš, co půjde exportovat, v jakém formátu, kdo smí export spustit a jak dlouho bude výstup dostupný. Export není jeden velký ZIP všeho. Je to sada konkrétních balíčků podle účelu.
+
+Praktické vrstvy exportu:
+
+| Export | Pro koho | Obsah | Formát | Riziko |
+| --- | --- | --- | --- | --- |
+| Uživatelský profil | jednotlivec | účet, nastavení, souhlasy, aktivita účtu | JSON nebo CSV | osobní údaje |
+| Workspace data | vlastník účtu | projekty, položky, konfigurace, role | ZIP s JSON/CSV | data více lidí |
+| Fakturace | finance/admin | faktury, platby, daňové údaje | PDF + CSV | finanční údaje |
+| Audit log | security/admin | bezpečnostní události a změny | CSV/JSONL | citlivý kontext |
+| Přílohy | vlastník dat | soubory a metadata | ZIP + manifest | dokumenty a metadata |
+
+U každé vrstvy si napiš i opačnou větu: co v exportu záměrně není. Například interní spam skóre, debug payloady, bezpečnostní detaily scanneru, interní poznámky podpory nebo data jiných zákazníků. Export má být použitelný, ne nebezpečně upřímná pitva celé databáze.
+
+## DK.2 Strojově čitelné neznamená „hodíme tam Excel a popřejeme hodně štěstí“
+
+CSV je užitečné, ale není univerzální spása. Hodí se pro tabulky, faktury, kontakty nebo přehled událostí. Pro hierarchická data, nastavení produktu, vztahy mezi projekty a metadata souborů je často lepší JSON. Pro auditní proudy se hodí JSONL, protože každá řádka je samostatná událost.
+
+Dobrá exportní sada má:
+
+- `manifest.json` s verzí exportního schématu, časem vytvoření, účtem, rozsahem a seznamem souborů,
+- stabilní názvy polí, které se nemění podle nálady posledního refaktoru,
+- čitelné datové typy: ISO datumy, desetinná čísla bez lokálních překvapení, jasné měny,
+- dokumentaci schématu v produktu nebo veřejných docs,
+- ukázkový export bez reálných dat pro vývojáře a integrátory,
+- verzi schématu, aby migrace neprobíhala metodou „otevři ZIP a modli se“.
+
+Příklad minimálního manifestu:
+
+```json
+{
+  "exportVersion": "2026-08-11.1",
+  "createdAt": "2026-08-11T21:00:00Z",
+  "scope": "workspace",
+  "workspaceId": "w_123",
+  "files": [
+    { "path": "projects.json", "type": "application/json" },
+    { "path": "members.csv", "type": "text/csv" },
+    { "path": "attachments/manifest.json", "type": "application/json" }
+  ]
+}
+```
+
+Privacy-first detail: pokud export obsahuje data více lidí ve workspace, uživatelské UI musí jasně říct, že nejde jen o osobní export přihlášeného člověka. Jiná věc je „stáhnu si svoje údaje“ a jiná „stáhnu celý účet včetně práce kolegů“. To druhé patří vlastníkovi nebo roli s výslovným oprávněním.
+
+## DK.3 CSV export může být injekční minové pole
+
+CSV vypadá neškodně, dokud ho někdo neotevře v tabulkovém editoru. OWASP popisuje CSV Injection neboli Formula Injection jako situaci, kdy aplikace vloží nedůvěryhodný vstup do CSV a tabulkový program ho následně vyhodnotí jako vzorec: https://owasp.org/www-community/attacks/CSV_Injection
+
+Praktická ochrana:
+
+- Buňky začínající znaky jako `=`, `+`, `-`, `@`, tabulátor nebo carriage return escapuj podle zvolené politiky.
+- Export generuj serverově z datového modelu, ne skládáním řetězců z formuláře.
+- U každého CSV používej hlavičku, stabilní pořadí sloupců a správné uvozování hodnot.
+- Do CSV nedávej HTML, interní ID bez kontextu ani celé poznámky podpory, pokud nejsou pro účel exportu nutné.
+- U citlivých exportů přidej upozornění: soubor obsahuje osobní data, ukládejte a sdílejte ho opatrně.
+
+Nejlepší obrana není jen technické escapování. Je to rozhodnutí, že CSV dostane jen tabulková data, která tam patří. Jakmile do jedné buňky cpeme půlku zákaznické historie, spreadsheet se stává dokumentovou skládkou s filtrem.
+
+## DK.4 Export musí mít oprávnění, audit a expiraci
+
+Export je často citlivější než běžné zobrazení v aplikaci, protože najednou zabalí hodně dat najednou. Proto ho navrhuj jako rizikovou akci.
+
+Minimální pravidla:
+
+1. Uživatel vidí, jaký rozsah dat export spustí.
+2. Aplikace před spuštěním zkontroluje aktuální oprávnění, ne jen viditelnost tlačítka.
+3. U větších exportů se vyžádá reautentizace nebo potvrzení druhým faktorem podle rizika.
+4. Export běží asynchronně a má stav: `requested`, `processing`, `ready`, `expired`, `failed`.
+5. Hotový soubor je dostupný jen přes krátkodobý odkaz po ověření identity.
+6. Akce se zapíše do audit logu: kdo, kdy, rozsah, výsledek, ne celý obsah exportu.
+7. Export se automaticky smaže po krátké době, typicky po hodinách nebo jednotkách dnů podle rizika.
+
+Do e-mailu neposílej samotný export jako přílohu, pokud k tomu není velmi dobrý důvod. Pošli oznámení, že export je připravený, a odkaz vyžadující přihlášení. E-mailové schránky jsou skvělé na komunikaci, ne na nekontrolované skladování ZIPů s osobními daty.
+
+## DK.5 Přenositelnost není totéž co kompletní záloha účtu
+
+Právo na přenositelnost má právní hranice a netýká se automaticky úplně všeho, co o člověku systém ví. Praktický produktový standard ale může být širší než právní minimum. Pro férový SaaS dává smysl nabídnout dva režimy:
+
+- **Osobní export:** data konkrétního uživatele, jeho nastavení, souhlasy, vlastní obsah a relevantní historie účtu.
+- **Administrátorský export:** data organizace nebo workspace v rozsahu oprávnění, včetně projektů, členů, konfigurace a příloh.
+
+U administrátorského exportu pozor na práva ostatních lidí. Pokud exportuješ komentáře, úkoly, audit log nebo zákaznické zprávy, nejde jen o data admina. UI má říct, co export obsahuje, a dokumentace má vysvětlit, kdo je za další zacházení se souborem odpovědný.
+
+Codyho komentář: právní minimum je podlaha, ne strop. Dobrá SaaS firma dá zákazníkovi export, kterému rozumí normální člověk i vývojář. Špatná firma pošle dump databáze s názvy sloupců jako `usr_meta_v2_tmp_final`. Ano, i to je forma pasivní agrese.
+
+## DK.6 Export testuj importem, jinak je to jen pocit bezpečí
+
+Export, který nejde přečíst, je dekorace. Export, který nejde znovu použít, je drahá iluze přenositelnosti. Minimální test je jednoduchý: vezmi syntetický účet, vygeneruj export, ověř schéma, otevři CSV, načti JSON a zkontroluj přílohy podle manifestu.
+
+Ještě lepší test: připrav interní importní script pro základní validaci exportu. Nemusí být veřejná funkce, ale pomůže odhalit rozbité vazby, chybějící soubory, špatné kódování nebo změnu schématu bez dokumentace.
+
+Testovací scénáře:
+
+- malý účet s jedním uživatelem a nulou příloh,
+- běžný tým s rolemi, projekty, komentáři a fakturací,
+- účet s diakritikou, emoji, dlouhými názvy a více měnami,
+- export s odstraněným uživatelem a anonymizovanými položkami,
+- export po změně schématu z předchozí verze produktu.
+
+Pokud export funguje jen pro ideální demo účet, není hotový. Je to screenshot funkce.
+
+## DK.7 Checklist exportů a přenositelnosti
+
+- Každý export má jasný účel, rozsah, vlastníka a oprávnění.
+- Produkt rozlišuje osobní export a administrátorský export workspace.
+- Exportní balíček obsahuje `manifest.json` s verzí schématu a seznamem souborů.
+- CSV exporty jsou chráněné proti formula injection a mají stabilní hlavičky.
+- JSON/JSONL exporty používají dokumentované názvy polí a datové typy.
+- UI před spuštěním vysvětluje, jaká data se exportují a koho se týkají.
+- Velké nebo citlivé exporty vyžadují potvrzení, případně reautentizaci.
+- Stažení exportu je chráněné přihlášením, krátkodobým odkazem a audit logem.
+- Exporty se automaticky mažou po definované době.
+- E-mail neobsahuje citlivý ZIP jako přílohu, ale pouze oznámení a bezpečný odkaz.
+- Dokumentace uvádí formáty, limity, retenci a verze exportního schématu.
+- Export se pravidelně testuje na syntetických účtech včetně importní validace.
+
+## Zdroje k příloze
+
+- European Commission — Information for individuals: https://commission.europa.eu/law/law-topic/data-protection/information-individuals_en
+- European Commission — Dealing with requests from individuals: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/dealing-requests-individuals_en
+- OWASP — CSV Injection: https://owasp.org/www-community/attacks/CSV_Injection
+
+## Shrnutí přílohy
+
+Export dat je důvěrová funkce. Má být srozumitelný, strojově čitelný, bezpečně dostupný, časově omezený a auditovaný. Privacy-first SaaS nerozdává nekonečné databázové dumpy ani nedrží zákazníka jako rukojmí. Nabízí promyšlené osobní a administrátorské exporty, chrání CSV před injekcemi, dokumentuje schéma a pravidelně ověřuje, že výstup jde opravdu použít.
+
 ## Pracovní log
 
+- 2026-08-11: Přidána příloha DK o exportech dat a přenositelnosti: osobní vs. administrátorský export, strojově čitelné formáty, manifest, CSV injection, oprávnění, expirace, audit a testování použitelnosti.
 - 2026-08-11: Přidána příloha DJ o bezpečných uploadech souborů v SaaS: účel a retence, allowlist formátů, karanténa, neveřejné úložiště, metadata, download oprávnění a privacy-first checklist.
 - 2026-08-11: Přidána příloha DI o vývojových a testovacích prostředích bez produkčních dat: syntetické datasety, pseudonymizace, staging brzdy, oddělené secrets, incidentní výřezy, úklid a checklist.
 - 2026-08-11: Přidána příloha DH o audit logu v SaaS: oddělení od debug logů a analytiky, bezpečná struktura událostí, zákaznické UI, retence, alerty a privacy-first checklist.
