@@ -15130,7 +15130,132 @@ Multi-tenant izolace je jedna z těch věcí, které zákazník neocení, dokud 
 
 Tenant izolace není jen `tenant_id` v databázi. Je to produktová a bezpečnostní hranice, která musí fungovat v API, UI, exportech, vyhledávání, frontách, webhookách, supportu i interních skriptech. Privacy-first SaaS má používat explicitní autorizaci, deny-by-default přístup, testy proti přístupu k cizím objektům a podle citlivosti i databázovou pojistku typu Row-Level Security. Cílem není paranoidní architektura. Cílem je nudná jistota, že zákaznická data zůstanou tam, kam patří.
 
+---
+
+# Příloha CW: Audit logy bez šmírovací kroniky a forenzního divadla
+
+Audit log je paměť produktu. Má pomoct odpovědět na otázky „kdo změnil fakturační údaje?“, „kdy byl export stažen?“, „proč zmizel člen týmu?“ nebo „co se dělo těsně před incidentem?“. Nemá být odpadkový koš na celý request, osobní data, payloady formulářů a tajné tokeny. To není bezpečnostní pozorování, to je datový kompost s přístupem pro půlku firmy.
+
+Privacy-first SaaS loguje dost na provoz, bezpečnost a odpovědnost, ale ne tolik, aby z logů vznikla druhá databáze zákaznického života. GDPR principy minimalizace, omezení účelu a omezení uložení platí i pro technická data, pokud jsou osobní nebo se dají spojit s člověkem. Evropská komise shrnuje, že osobní data mají být přiměřená, relevantní, omezená na nezbytný rozsah a uložená jen po dobu nutnou k účelu: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/overview-principles/what-data-can-we-process-and-under-which-conditions_en
+
+## CW.1 Nejdřív rozděl logy podle účelu
+
+Jedna tabulka `logs` pro všechno je pohodlná jen do chvíle, než potřebuješ nastavit retenci, přístupová práva nebo zákaznický export. Rozděl si minimálně čtyři typy záznamů:
+
+- **Aplikační logy:** chyby, výjimky, výkonnostní signály a ladění provozu.
+- **Bezpečnostní logy:** přihlášení, selhané pokusy, změny rolí, rotace klíčů, podezřelé akce.
+- **Audit logy pro zákazníka:** změny v účtu, týmu, fakturaci, exportech a kritických nastaveních.
+- **Systémové provozní logy:** deploye, migrace, background joby, integrace a retry fronty.
+
+Každý typ má jiný účel, jiného čtenáře a jinou dobu uložení. Vývojář potřebuje stack trace pár dní až týdnů. Zákazník může chtít historii bezpečnostně důležitých změn za měsíce. Účetní záznamy se řídí jinými pravidly než debug výpis. Když to smícháš, skončíš s nejdelší retencí pro všechno a nejširším přístupem pro všechny. Gratuluji, právě sis postavil datový sklad omylem.
+
+## CW.2 Audit event má být věta, ne skládka objektu
+
+Dobrý audit event odpovídá na konkrétní otázku bez ukládání zbytečného obsahu. Místo dumpu celého uživatele, celé faktury nebo celého webhook payloadu zapisuj strukturovanou událost.
+
+Příklad:
+
+```text
+actor_id: user_123
+tenant_id: org_456
+action: billing_email.changed
+target_type: billing_profile
+target_id: bp_789
+metadata: { previous_domain: "old.example", new_domain: "new.example" }
+outcome: success
+request_id: req_abc
+created_at: 2026-08-11T07:00:00Z
+```
+
+Všimni si dvou věcí. Neukládáme celý e-mail, pokud stačí doména nebo maskovaná hodnota. A máme `request_id`, takže se v případě incidentu dá přejít do technických logů bez toho, aby audit log obsahoval všechno. OWASP Logging Cheat Sheet doporučuje logovat bezpečnostně relevantní události strukturovaně a zároveň výslovně řešit ochranu logů před neoprávněným přístupem, mazáním a manipulací: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+
+## CW.3 Neloguj tajemství, payloady a cizí data pro pohodlí
+
+Nejčastější úniky v logování nejsou filmové hackerské scény. Jsou to nudné řádky typu „debug: request body“. V nich se pak objeví heslo, magic link, bearer token, API klíč, cookies, fakturační adresa, zdravotní poznámka, obsah zprávy zákazníka nebo osobní identifikátor, který nikdy neměl opustit primární systém.
+
+Zakázaný materiál pro běžné logy:
+
+- hesla, jednorázové kódy, magic link tokeny a session cookies,
+- celé API klíče, OAuth tokeny, refresh tokeny a webhook secrety,
+- čísla platebních karet a citlivé platební údaje,
+- celé request/response body u formulářů, ticketů, chatu a importů,
+- celé dokumenty, přílohy, screenshoty a zákaznické soubory,
+- osobní údaje, které nepotřebuješ pro účel logu.
+
+Bezpečnější vzor je maskování, hashování nebo reference. U API klíče loguj prefix a interní ID klíče, ne klíč samotný. U e-mailu zvaž interní `user_id`, případně doménu, pokud řešíš doručitelnost. U webhooku loguj typ události, podpisový výsledek, ID události a velikost payloadu, ne celý obsah.
+
+## CW.4 Přístup k logům je oprávnění, ne firemní počasí
+
+Logy často vidí víc lidí než produkční databázi. To je absurdní, protože logy umí obsahovat skoro stejné riziko, jen v horší struktuře. Nastav přístupy podle účelu:
+
+- Vývojář vidí aplikační chyby a request ID, ne zákaznické soubory.
+- Support vidí zákaznický audit log pro konkrétní účet, ne globální provozní logy.
+- Security/ops role vidí bezpečnostní události, ale jen s potřebným rozsahem.
+- Zákazník vidí vlastní audit log: členové, role, exporty, API klíče, fakturace.
+- Přístup do centrálního log nástroje je auditovaný a pravidelně revidovaný.
+
+U malého týmu stačí začít jednoduše: samostatný projekt nebo index pro citlivější logy, role jen pro lidi, kteří je opravdu potřebují, a měsíční kontrola přístupů. Nečekej na enterprise SIEM, aby ses choval dospěle. Dospělost je levnější než incident.
+
+## CW.5 Retence musí být napsaná před incidentem
+
+Retence logů má být rozhodnutí, ne vedlejší efekt ceny úložiště. Zapiš si pro každý typ logu: účel, typická data, kdo má přístup, retenční dobu, důvod retence a způsob mazání.
+
+Praktický příklad pro malý B2B SaaS:
+
+| Typ logu | Typická retence | Poznámka |
+| --- | --- | --- |
+| Debug logy | 7–30 dní | Krátce, bez osobních payloadů |
+| Aplikační chyby | 30–90 dní | S `request_id`, maskované hodnoty |
+| Bezpečnostní události | 6–12 měsíců | Přihlášení, role, tokeny, exporty |
+| Zákaznický audit log | 12–24 měsíců | Viditelné zákazníkovi podle tarifu a účelu |
+| Billing audit | podle účetních a smluvních potřeb | Oddělit od debug logů |
+
+Tohle nejsou univerzální právní lhůty. Jsou to startovní produktová pravidla, která musíš sladit s právníkem, typem služby a rizikem. Důležité je, aby existovala před tím, než někdo napíše „radši ukládejme všechno navždy“.
+
+## CW.6 Audit log musí být užitečný i pro zákazníka
+
+Zákaznický audit log není jen obrana firmy. Je to produktová funkce důvěry. Uživatel s administrátorskou rolí by měl vidět:
+
+- kdo pozval nebo odebral člena týmu,
+- kdo změnil roli, oprávnění nebo SSO nastavení,
+- kdo vytvořil, zobrazil nebo stáhl export,
+- kdo vytvořil, použil nebo zrušil API klíč,
+- kdo změnil fakturační e-mail, tarif nebo platební metodu,
+- kdo zapnul integraci a jaký rozsah dat dostala.
+
+Text události piš lidsky, ale ukládej ji strojově. UI může říct „Jana změnila fakturační e-mail“, ale pod tím má být stabilní `action` kód `billing_email.changed`. Díky tomu můžeš později filtrovat, exportovat a napojit alerty bez přepisování historie.
+
+## CW.7 Checklist audit logů a privacy
+
+- [ ] Máme oddělené aplikační, bezpečnostní, zákaznické auditní a systémové provozní logy.
+- [ ] Každý typ logu má popsaný účel, přístupová práva a retenční dobu.
+- [ ] Audit eventy jsou strukturované a obsahují `actor`, `action`, `target`, `outcome`, `tenant_id`, čas a korelační ID.
+- [ ] Do běžných logů neukládáme hesla, tokeny, celé request body, přílohy ani citlivé zákaznické payloady.
+- [ ] Maskování a redakce probíhá před zápisem do logovacího nástroje, ne až v UI.
+- [ ] Přístup k centrálním logům je omezený, auditovaný a pravidelně revidovaný.
+- [ ] Zákazník vidí vlastní audit log pro kritické změny v účtu, exportech, API a fakturaci.
+- [ ] Retence logů je automatizovaná; mazání není ruční dobré předsevzetí.
+- [ ] Incident playbook počítá s tím, kde logy jsou, kdo je může číst a jak se exportují.
+- [ ] Testy nebo statické kontroly hlídají, že se do logů nedostávají známé tajné hodnoty.
+
+## Codyho komentář
+
+Audit logy jsou jako černá skříňka letadla. Chceš, aby po nehodě pomohly pochopit realitu. Nechceš, aby během každého letu nahrávaly soukromý deník všech cestujících, čísla jejich karet a heslo k Wi-Fi. Méně dramatu, více struktury.
+
+## Zdroje k příloze
+
+- European Commission — GDPR principles, data minimisation and storage limitation: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/overview-principles/what-data-can-we-process-and-under-which-conditions_en
+- European Data Protection Board — Basic principles of GDPR: https://www.edpb.europa.eu/topics/key-gdpr-concepts/basic-principles_en
+- OWASP Logging Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+- OWASP Developer Guide — Security Logging and Monitoring: https://devguide.owasp.org/en/04-design/02-web-app-checklist/09-logging-monitoring/
+
+## Shrnutí přílohy
+
+Audit logy mají pomáhat s bezpečností, provozem a důvěrou zákazníka, ne nenápadně vytvářet druhou databázi osobních údajů. Privacy-first přístup znamená rozdělit logy podle účelu, zapisovat strukturované události, nelogovat tajemství ani celé payloady, omezit přístup, nastavit retenci a nabídnout zákazníkům srozumitelný audit důležitých změn. Dobré logování je nudné, přesné a použitelné právě ve chvíli, kdy se něco pokazí.
+
 ## Pracovní log
+
+- 2026-08-11: Přidána příloha CW o audit logách bez šmírovací kroniky: oddělení typů logů, strukturované audit eventy, zákaz logování tajemství, přístupová práva, retence, zákaznický audit log a checklist.
 
 - 2026-08-11: Přidána příloha CV o multi-tenant izolaci bez zákaznického průvanu: tenant kontext, autorizace objektů, izolace mimo hlavní request, PostgreSQL RLS jako druhá brzda, testování cizích dveří a checklist.
 - 2026-08-11: Přidána příloha CU o platbách, fakturaci a billing procesu bez zbytečného sběru dat: platební poskytovatel, billing stavy, fakturační minimum, změny tarifu, dunning, faktury, slevové výjimky a checklist.
