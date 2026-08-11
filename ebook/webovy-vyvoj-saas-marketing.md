@@ -15490,8 +15490,163 @@ Můj pohled: nejlepší admin nástroj je ten, ve kterém se nudně těžko děl
 Schvalování rizikových akcí chrání zákaznická data, peníze, provoz i nervy týmu. Začni seznamem akcí podle dopadu, nastav úrovně kontroly, vyžaduj krátký důvod, používej reautentizaci pro citlivé změny a dělej schválení konkrétní, časově omezené a auditovatelné. Privacy-first SaaS nepouští adminy do všeho jen proto, že jsou „interní“. Dává lidem přesně tolik moci, kolik potřebují pro práci, a u rizikových kliků přidá zábradlí. Nudné? Ano. A přesně proto dobré.
 
 
+# Příloha CZ: Chybové stavy bez úniku dat, paniky a „něco se pokazilo“ jako životní filozofie
+
+Chyba v aplikaci není jen technický detail. Je to okamžik, kdy uživatel ztrácí jistotu, jestli se jeho práce uložila, jestli zaplatil dvakrát, jestli právě poslal osobní data do černé díry, nebo jestli má zavolat podporu a obětovat odpoledne. Dobře navržený chybový stav snižuje stres, chrání data a pomáhá týmu problém opravit bez toho, aby uživateli ukazoval stack trace jako moderní poezii.
+
+Privacy-first chyba má dvě tváře: ven říká jen to, co uživatel potřebuje vědět pro další krok; dovnitř ukládá dost kontextu pro opravu, ale neukládá tajemství, celé payloady a osobní data pro pohodlí debugování.
+
+## CZ.1 Rozděl chyby podle toho, co má uživatel udělat
+
+Nejdřív si nepiš seznam HTTP statusů. Napiš si seznam uživatelských situací:
+
+| Situace | Co uživatel potřebuje vědět | Dobrý další krok |
+| --- | --- | --- |
+| Dočasný výpadek | služba teď nedokončila akci | zkusit znovu nebo uložit koncept |
+| Chybný vstup | které pole je problém a proč | opravit konkrétní pole |
+| Chybějící oprávnění | akce není pro jeho roli dostupná | požádat vlastníka účtu |
+| Konflikt dat | někdo změnil stejný záznam | obnovit data a porovnat změny |
+| Riziková akce | akce potřebuje ověření nebo schválení | projít bezpečným potvrzením |
+| Incident | služba má širší problém | sledovat status stránku nebo počkat na zprávu |
+
+„Něco se pokazilo“ je použitelné jen jako nouzová věta, ne jako návrhový systém. Uživatel nepotřebuje znát interní výjimku, ale potřebuje vědět, jestli má opakovat akci, kontaktovat podporu, počkat, nebo opravit vlastní vstup.
+
+## CZ.2 Veřejná chyba nesmí prozrazovat internosti
+
+Chybová hláška nemá ukazovat názvy tabulek, ID interních služeb, cesty na serveru, SQL dotazy, tokeny, e-mailové adresy jiných uživatelů ani rozdíl mezi „účet neexistuje“ a „heslo je špatně“. OWASP v doporučeních k ošetření chyb popisuje, že aplikace má vracet obecné chybové zprávy a detailní technické informace držet mimo uživatelský výstup: https://cheatsheetseries.owasp.org/cheatsheets/Error_Handling_Cheat_Sheet.html
+
+Špatně:
+
+```text
+Query failed: relation tenant_8492.customer_exports does not exist at /srv/app/billing/export.ts:184
+```
+
+Lépe:
+
+```text
+Export se nepodařilo připravit. Zkuste to prosím znovu za chvíli. Pokud problém trvá, pošlete podpoře kód chyby: ERR-20260811-4F2A.
+```
+
+Interní tým má podle kódu chyby dohledat korelační ID, čas, službu, verzi aplikace a bezpečně redigovaný kontext. Uživatel nemá nést technické detaily na zádech jako batoh plný šroubků.
+
+## CZ.3 Korelační ID je most mezi podporou a logy
+
+Každá neočekávaná chyba, kterou uživatel vidí, má dostat krátký referenční kód. Nemusí to být databázové ID ani výpis interního requestu. Stačí náhodný nebo odvozený identifikátor, který umí podpora zadat do logovacího systému.
+
+Příklad bezpečného interního záznamu:
+
+```text
+event: "checkout_invoice_generation_failed"
+correlation_id: "ERR-20260811-4F2A"
+tenant_id: "org_456"
+actor_id: "user_123"
+route: "POST /billing/invoices"
+error_class: "upstream_timeout"
+safe_context: {
+  invoice_count: 1,
+  payment_provider: "configured_provider",
+  retryable: true
+}
+created_at: "2026-08-11T10:00:00Z"
+```
+
+Co do takového záznamu nepatří: celé jméno zákazníka, fakturační adresa, číslo karty, přístupový token, obsah zprávy, nahrané soubory, celé JSON payloady a „dočasně“ uložené heslo. Dočasně je v softwaru často jiné slovo pro „najde to někdo při auditu“.
+
+OWASP Logging Cheat Sheet doporučuje u logování ukládat užitečné bezpečnostní události, ale zároveň chránit citlivá data a nelogovat tajemství jako session identifikátory, přístupové tokeny nebo hesla: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+
+## CZ.4 Formulářové chyby piš konkrétně a lidsky
+
+Formulář je místo, kde chybové texty přímo ovlivňují konverzi. Špatná hláška říká „Invalid input“. Dobrá hláška říká, co přesně opravit.
+
+Praktická pravidla:
+
+- Chybu zobraz u pole, kterého se týká, ne jen nahoře v červeném boxu.
+- Zachovej vyplněná data, pokud to není bezpečnostní riziko.
+- Vysvětli formát na příkladu: „Zadejte DIČ ve tvaru CZ12345678.“
+- Neobviňuj uživatele: místo „Zadali jste neplatný údaj“ raději „E-mail nevypadá správně.“
+- U citlivých údajů neprozrazuj víc, než je nutné.
+- Validuj na klientu pro pohodlí, ale rozhodnutí dělej na serveru.
+
+Příklad u přihlášení:
+
+```text
+E-mail nebo heslo nesedí. Zkuste to znovu, nebo si pošlete odkaz pro obnovení přístupu.
+```
+
+Tahle věta je méně konkrétní záměrně. Neříká, jestli e-mail existuje. U kontaktního formuláře ale konkrétnost nevadí: „Telefon je volitelný, ale pokud ho vyplníte, použijte prosím předvolbu.“ Kontext rozhoduje.
+
+## CZ.5 Stav po chybě musí být jednoznačný
+
+Nejhorší chyba je ta, po které uživatel neví, jestli se akce provedla. Typicky platba, objednávka, export, změna tarifu, pozvánka uživatele nebo odeslání formuláře.
+
+U každé akce si napiš odpověď na tři otázky:
+
+- Může uživatel akci bezpečně zopakovat?
+- Umíme ukázat aktuální stav po obnovení stránky?
+- Existuje idempotency klíč nebo jiná pojistka proti dvojímu provedení?
+
+Pro platby, objednávky, exporty a hromadné operace nestačí tlačítko „Zkusit znovu“. Pokud nevíš, jestli první pokus uspěl, druhý pokus může vytvořit dvojí fakturu, dvojí notifikaci nebo dvojí export. Produkt má ukázat stav: „Platbu ověřujeme“, „Export se připravuje“, „Pozvánka už byla odeslána“ nebo „Akce čeká na dokončení“.
+
+Privacy-first přístup tu znamená i datovou zdrženlivost: pro obnovení stavu nepotřebuješ ukládat celý payload navždy. Potřebuješ identifikátor akce, stavový model, auditní události a bezpečný detail pro vlastníka účtu.
+
+## CZ.6 Podpora má dostat kontext, ne zákaznická tajemství
+
+Když uživatel klikne na „Kontaktovat podporu“, aplikace může připravit zprávu s bezpečným kontextem:
+
+```text
+Potřebuji pomoc s chybou ERR-20260811-4F2A.
+Stalo se to při přípravě faktury v účtu ACME, 11. 8. 2026 v 10:00 UTC.
+```
+
+Nepřidávej automaticky obsah formuláře, celé objednávky, nahrané soubory ani osobní data dalších lidí. Dej uživateli možnost text zkontrolovat před odesláním. Pokud support potřebuje víc, požádá konkrétně a ideálně přes bezpečný kanál uvnitř produktu.
+
+U B2B SaaS je dobré mít interní support panel, který podle korelačního ID ukáže jen bezpečně redigované informace a respektuje role podpory. Chyba není pozvánka k tomu, aby každý support agent viděl celý účet zákazníka jako výlohu.
+
+## CZ.7 Chyby zahrň do produktového review
+
+Chybové stavy nejsou jen práce pro backend. Patří do produktového review stejně jako onboarding nebo cenová stránka.
+
+Jednou měsíčně si projdi:
+
+- nejčastější chyby podle počtu uživatelů, ne podle počtu stack trace řádků,
+- chyby v kritických cestách: registrace, platba, formulář, export, pozvánky,
+- chyby, po kterých uživatel odešel a nevrátil se,
+- chybové texty, které generují nejvíc support ticketů,
+- opakované chyby u jednoho tenantu nebo jedné integrace,
+- místa, kde se do logů dostává víc dat, než je nutné.
+
+Výstupem nemá být dashboard pro radost. Výstupem má být jedna oprava: lepší validace, přesnější text, idempotence, status stránka, retry mechanismus, úklid logů nebo změna produktu, aby k chybě docházelo méně často.
+
+## CZ.8 Checklist chybových stavů a privacy
+
+- [ ] Máme rozdělené chyby podle toho, co má uživatel udělat dál.
+- [ ] Veřejné chybové zprávy neprozrazují interní architekturu, tabulky, cesty ani tajemství.
+- [ ] Neočekávané chyby mají korelační ID použitelné pro podporu.
+- [ ] Interní log obsahuje bezpečný kontext, ne celé payloady a citlivá data.
+- [ ] Formulářové chyby jsou konkrétní, umístěné u polí a zachovávají bezpečně vyplněná data.
+- [ ] Přihlašovací chyby neprozrazují, zda účet existuje.
+- [ ] Kritické akce mají jednoznačný stav po chybě a nejdou omylem provést dvakrát.
+- [ ] Support zpráva připravená aplikací je před odesláním viditelná uživateli.
+- [ ] Chybové stavy jsou součástí měsíčního produktového a provozního review.
+- [ ] Retence error logů je omezená a odpovídá účelu opravy a bezpečnosti.
+
+## Codyho komentář
+
+Můj pohled: dobrá chybová hláška je jako slušný recepční při výpadku proudu. Neřekne „interní výjimka v modulu recepce“, ale vysvětlí, co se děje, kam si sednout a kdy se někdo ozve. A hlavně u toho nerozdá seznam hostů cizím lidem.
+
+## Zdroje k příloze
+
+- OWASP Error Handling Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Error_Handling_Cheat_Sheet.html
+- OWASP Logging Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+
+## Shrnutí přílohy
+
+Chybové stavy jsou součást produktu, bezpečnosti i důvěry. Piš je podle dalšího kroku uživatele, ne podle interní výjimky. Ven posílej srozumitelnou zprávu a korelační ID, dovnitř ukládej bezpečně redigovaný kontext. Formuláře mají říkat, co opravit; kritické akce mají po chybě ukázat jednoznačný stav. Privacy-first SaaS neřeší chyby tak, že uživateli ukáže strojovnu. Ukáže mu dveře ven a týmu nechá mapu, kde bezpečně opravovat.
+
+
 ## Pracovní log
 
+- 2026-08-11: Přidána příloha CZ o chybových stavech bez úniku dat: typy chyb podle dalšího kroku, bezpečné veřejné zprávy, korelační ID, formulářové chyby, jednoznačný stav kritických akcí, support kontext a checklist.
 - 2026-08-11: Přidána příloha CY o schvalování rizikových akcí: seznam dopadů, úrovně kontroly, povinný důvod, reautentizace, časově omezené schválení, bezpečné UX a checklist.
 - 2026-08-11: Přidána příloha CX o uploadech a zákaznických souborech bez datového skladiště: účel, validace, bezpečné názvy, oddělené úložiště, skenování, retence a checklist.
 - 2026-08-11: Přidána příloha CW o audit logách bez šmírovací kroniky: oddělení typů logů, strukturované audit eventy, zákaz logování tajemství, přístupová práva, retence, zákaznický audit log a checklist.
