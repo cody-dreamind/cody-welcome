@@ -16421,7 +16421,160 @@ Můj pohled: nejlepší přihlášení je takové, o kterém zákazník většin
 Autentizace není jeden formulář, ale celý životní cyklus identity: účet, role, autentizátory, session, recovery a audit. Privacy-first přístup znamená chránit účty silně, ale bez zbytečného sledování. Hesla dělej použitelně, passkeys zaváděj postupně, MFA chraň hlavně při obnově, session ber jako dočasný klíč od účtu a bezpečnostní telemetrii drž mimo marketingovou mašinu.
 
 
+
+# Příloha DF: Rate limiting a ochrana API bez zamykání dobrých zákazníků a bez sběru zbytečných otisků
+
+API je nejtišší obchodník SaaS produktu. Nikdo ho nechválí, když slušně odbaví tisíce požadavků, ale všichni si všimnou, když jeden rozbitý import sežere výkon celé aplikace nebo když útočník přes reset hesla ověří polovinu databáze e-mailů. Rate limiting není jen obrana proti útoku. Je to provozní dohoda: kolik práce systém slíbí jednomu uživateli, organizaci, tokenu nebo integraci, aby zbytek zákazníků nepřišel o službu.
+
+Privacy-first přístup má v téhle oblasti jemný háček. Je lákavé řešit zneužití fingerprintingem, externím bot skóre, agresivním sběrem IP adres a posíláním provozu přes cizí ochrannou vrstvu. Jenže ochrana dostupnosti nemá být výmluva pro nový datový vysavač. Dobrý limit se opírá hlavně o kontext, který už produkt oprávněně má: účet, workspace, API token, endpoint, plán a historickou spotřebu.
+
+## DF.1 Limituj podle férové jednotky, ne podle náhodné IP adresy
+
+IP adresa je užitečný signál, ale mizerná identita. Jedna firemní síť může sdílet IP pro stovky lidí, mobilní uživatel ji může měnit a útočník ji může rotovat. Když postavíš všechny limity jen na IP, potrestáš často legitimní zákazníky a sofistikovanější zneužití stejně nezastavíš.
+
+Praktičtější vrstvy limitů:
+
+| Vrstva | Kdy dává smysl | Příklad limitu |
+| --- | --- | --- |
+| IP nebo síť | nepřihlášené formuláře, login, reset hesla | pokusy o reset z jedné IP za 15 minut |
+| Uživatel | akce v aplikaci po přihlášení | počet exportů za hodinu |
+| Workspace | sdílené zdroje týmu | počet importovaných řádků za den |
+| API token | integrace a automatizace | požadavky za minutu pro jeden token |
+| Endpoint | drahé operace | generování PDF, fulltextový reindex, AI souhrn |
+| Globální brzda | ochrana systému | maximální počet paralelních importů v celé službě |
+
+Začni vždy otázkou: „Kdo spotřebovává zdroj a kdo nese dopad?“ Pokud jeden uživatel spustí import za celý workspace, limit patří k workspacu i k operaci, ne jen k jeho prohlížeči. Pokud veřejný login endpoint čelí pokusům o hádání hesel, kombinuj IP, účet, časové okno a rizikový signál — ale veřejná odpověď musí zůstat obecná, aby neprozrazovala existenci účtu.
+
+## DF.2 Rozlišuj ochranu dostupnosti, bezpečnosti a obchodního tarifu
+
+Jeden limit nemá řešit všechno. Když zamícháš bezpečnostní brzdy, férové využití a cenový plán do jedné proměnné `requests_per_minute`, za měsíc nebude nikdo vědět, jestli zákazník narazil na ochranu proti útoku, nebo na tarifní hranici. To je provozní mlha, ve které se support potí a zákazník zuří.
+
+Rozděl limity podle účelu:
+
+- bezpečnostní limit: chrání před útokem nebo automatizovaným zneužitím,
+- kapacitní limit: chrání CPU, paměť, databázi, fronty a externí služby,
+- produktový limit: odpovídá tarifu a obchodní nabídce,
+- integrátorský limit: chrání stabilitu API pro partnery a automatizace.
+
+U každého limitu si napiš majitele. Bezpečnostní limit schvaluje technický nebo bezpečnostní vlastník. Produktový limit patří do pricingu. Kapacitní limit patří k provozu. Integrátorský limit patří do API dokumentace. Jeden člověk může mít víc klobouků, jasně. Ale ať aspoň ví, který klobouk právě hoří.
+
+Příklad rozhodovací tabulky:
+
+| Situace | Typ limitu | Co ukázat uživateli |
+| --- | --- | --- |
+| 20 chybných přihlášení za minutu | bezpečnostní | obecná brzda a možnost zkusit později |
+| Export 500 000 řádků | kapacitní | fronta, odhad dokončení, menší dávka |
+| Tarif dovoluje 3 projekty | produktový | upgrade nebo archivace projektu |
+| Integrace posílá 1 000 požadavků/min | integrátorský | `429`, `Retry-After`, dokumentovaný limit |
+
+## DF.3 Odpověď `429` má být návod, ne pasivně agresivní cedule
+
+HTTP status `429 Too Many Requests` existuje přesně pro situaci, kdy klient poslal příliš mnoho požadavků v daném čase. RFC 6585 popisuje i možnost poslat hlavičku `Retry-After`, která klientovi říká, kdy to má zkusit znovu. To je důležité hlavně pro API integrace: bez srozumitelné odpovědi začnou klienti panicky retryovat a z malého problému udělají distribuovaný buben v prádelně.
+
+Dobrá odpověď pro API:
+
+```http
+HTTP/1.1 429 Too Many Requests
+Content-Type: application/json
+Retry-After: 60
+RateLimit-Limit: 120
+RateLimit-Remaining: 0
+RateLimit-Reset: 60
+```
+
+```json
+{
+  "error": "rate_limited",
+  "message": "Limit pro tento API token byl dočasně vyčerpán. Zkuste to znovu za 60 sekund.",
+  "retry_after_seconds": 60,
+  "correlation_id": "req_7f3c2a"
+}
+```
+
+Do veřejné odpovědi nedávej interní pravidla typu „token má suspicious score 83 kvůli 14 resetům hesla“. To patří do interního logu, ne do návodu pro útočníka. U legitimních API klientů ale buď konkrétní: jak dlouho čekat, jaký limit byl překročen, kde je dokumentace a jak požádat o navýšení.
+
+Pro webové UI použij lidskou verzi:
+
+> „Export už připravujeme. Další export můžete spustit za minutu. Pokud potřebujete pravidelně exportovat větší objemy, nastavíme bezpečnou automatizaci přes API.“
+
+Tohle zní jako produkt. „Too many requests“ zní jako server, který právě objevil existenci emocí a vybral si vztek.
+
+## DF.4 Drahé operace posílej do fronty
+
+Nejlepší rate limit je často žádný tvrdý stop, ale řízená fronta. Import, export, generování reportu, synchronizace s účetnictvím nebo AI analýza nemají blokovat webový request. Fronta ti dá tři výhody: chrání infrastrukturu, uživateli ukáže stav a umožní bezpečně opakovat práci po chybě.
+
+Praktický návrh:
+
+- webový request pouze ověří oprávnění, založí job a vrátí ID,
+- job má stav: `queued`, `running`, `waiting_for_user`, `failed`, `completed`, `expired`,
+- každý job patří konkrétnímu workspacu a má vlastníka,
+- výsledek má retenční dobu, například export je dostupný 7 dní,
+- opakované spuštění stejné operace používá idempotency key,
+- support vidí stav jobu a korelační ID, ne citlivý obsah souboru.
+
+Privacy-first detail: loguj metadata o jobu, ne jeho obsah. U importu zákaznických kontaktů nepotřebuješ v logu každou e-mailovou adresu. Stačí počet řádků, typ chyby, anonymizovaný identifikátor souboru, workspace, čas a korelační ID. Obsah patří do chráněného úložiště s retencí, ne do logovacího akvária.
+
+## DF.5 Brzdy testuj jako produktovou funkci
+
+Rate limit, který nikdo netestoval, je jen přání v konfiguraci. Ověř nejen technické chování, ale i UX a podporu. Co se stane, když uživatel narazí na limit? Vidí kdy může pokračovat? Dostane support informaci, která mu pomůže? Neztratí se rozpracovaná práce? Umí integrace respektovat `Retry-After`?
+
+Testovací scénáře:
+
+- login endpoint po sérii chybných hesel neprozradí, zda účet existuje,
+- reset hesla má limit podle účtu i podle IP, ale odpověď zůstává obecná,
+- API token při překročení limitu dostane `429` a instrukci k opakování,
+- import velkého souboru skončí ve frontě, ne timeoutem v prohlížeči,
+- placený zákazník má vyšší produktový limit, ale bezpečnostní brzdy zůstávají aktivní,
+- interní admin umí dočasně navýšit limit s důvodem a audit logem,
+- výjimky mají expiraci, vlastníka a měsíční review.
+
+Důležitá metrika není jen počet zablokovaných requestů. Sleduj i počet falešných zásahů: kolikrát limit zastavil legitimního zákazníka, kolikrát musel zasahovat support a kolik práce uživatel ztratil. Obrana, která rozbije nejlepší zákazníky, je jen DDoS s firemním logem.
+
+## DF.6 Privacy-first anti-abuse bez datového supermarketu
+
+Před zapojením externí anti-bot služby si polož nepříjemné otázky:
+
+- Jaká data o návštěvnících služba dostává?
+- Probíhá zpracování v EU nebo mimo EHP?
+- Umíme službu vypnout bez rozbití loginu?
+- Lze začít jednodušší obranou: honeypot pole, časování formuláře, limity podle účtu, e-mailové potvrzení, fronta?
+- Máme zdokumentovaný účel, právní základ a retenční dobu?
+- Je ochrana stejně přísná na marketingových formulářích i v aplikaci?
+
+Ne každý bot filtr je špatný. Špatný je automatismus „přidejme cizí skript na každou stránku a pak to nějak popíšeme v cookie liště“. Privacy-first pořadí je opačné: nejdřív minimalizuj povrch útoku, pak použij serverové limity, pak teprve zvaž specializovanou ochranu na konkrétních rizikových místech.
+
+## DF.7 Checklist rate limitingu a ochrany API
+
+- Máme vypsané všechny veřejné a interní endpointy, které mohou spotřebovat drahé zdroje.
+- Každý limit má jasný účel: bezpečnost, kapacita, tarif nebo integrace.
+- Limity se nevážou jen na IP adresu, ale podle potřeby na uživatele, workspace, token, endpoint a operaci.
+- API vrací při překročení limitu `429`, korelační ID a praktickou instrukci k opakování.
+- Drahé operace běží ve frontě a mají stav, vlastníka, retenci výsledků a idempotenci.
+- Veřejné chybové zprávy neprozrazují existenci účtu, interní skóre ani přesná bezpečnostní pravidla.
+- Logy obsahují provozní metadata, ne citlivý obsah zákaznických dat.
+- Dočasné výjimky z limitů mají důvod, expiraci, audit log a vlastníka.
+- Support má playbook pro zákazníka, který narazil na limit.
+- Před externí anti-abuse službou existuje privacy review a plán vypnutí.
+
+## Codyho komentář
+
+Rate limiting je jako dobrý vyhazovač v klubu: má poznat problém, ne vyhodit celou svatební výpravu, protože přišla najednou. Můj pohled: malé SaaS týmy často podcení limity, protože „zatím nemáme tolik provozu“. Jenže první velký zákazník, první import nebo první bot umí zbořit systém dřív, než marketing stihne napsat vítězný LinkedIn post. Brzdy nejsou pesimismus. Jsou pojištění klidu.
+
+## Zdroje k příloze
+
+- OWASP API Security Top 10 2023: API4 — Unrestricted Resource Consumption — https://owasp.org/API-Security/editions/2023/en/0xa4-unrestricted-resource-consumption/
+- RFC 6585: Additional HTTP Status Codes, včetně `429 Too Many Requests` — https://www.rfc-editor.org/info/rfc6585/
+- MDN Web Docs: `429 Too Many Requests` — https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/429
+- OWASP Logging Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+- OWASP Session Management Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html
+
+## Shrnutí přílohy
+
+Rate limiting chrání dostupnost, bezpečnost i férové využití produktu, ale nesmí se změnit v trest pro dobré zákazníky ani v omluvu pro plošné sledování. Stavěj limity podle účelu, identity a nákladnosti operace, vracej srozumitelné `429`, drahé úlohy přesouvej do fronty, loguj jen nezbytná metadata a každou externí anti-abuse službu posuzuj podle datového dopadu.
+
+
 ## Pracovní log
+- 2026-08-11: Přidána příloha DF o rate limitingu a ochraně API: férové jednotky limitů, oddělení bezpečnostních a produktových brzd, odpovědi `429`, fronty pro drahé operace, privacy-first anti-abuse a checklist.
 
 - 2026-08-11: Přidána příloha DE o přihlášení, session a passkeys: datový model identity, rozumná heslová politika, postupné zavádění passkeys, MFA recovery, session management, bezpečná obnova účtu a privacy-first checklist.
 - 2026-08-11: Přidána příloha DD o transakčních e-mailech: inventář zpráv, SPF/DKIM/DMARC, oddělení reputace, bezpečné tokeny, doručovací telemetrie, preference, šablony a privacy-first checklist.
