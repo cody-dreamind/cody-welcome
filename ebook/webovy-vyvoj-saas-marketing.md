@@ -14385,7 +14385,157 @@ DNS hygiena je přesně ten typ práce, za kterou ti nikdo nezatleská, dokud ji
 DNS není jen technický detail pod webem. Je to kořen důvěry pro web, e-mail, certifikáty i zákaznickou identitu. Privacy-first SaaS potřebuje doménu pod kontrolou, čitelnou zónu, plán pro TTL, rozumně nastavené CAA, opatrný přístup k DNSSEC a pravidelný úklid ověřovacích tokenů.
 
 
+---
+
+# Příloha CR: Přihlašování, session a OAuth bez tokenového konfeti a sledovacího batohu
+
+Přihlášení je jedna z těch částí produktu, které vypadají jednoduše, dokud se nerozpadnou. Uživatel zadá e-mail, klikne na odkaz nebo projde OAuthem a hotovo, že? Haha. Kéž by. Ve skutečnosti je login křižovatka bezpečnosti, UX, supportu, analytiky, compliance a provozu. Když ji navrhneš špatně, zákazník buď odejde, nebo zůstane přihlášený způsobem, který by raději neměl existovat ani v noční můře juniorního pentestera.
+
+Privacy-first přístup tady neznamená „všechno uděláme extrémně přísné a uživatel bude trpět“. Znamená to: držet minimum identifikátorů, nepřenášet tokeny přes místa, kde je nepotřebuješ, neprofilovat lidi při každém loginu a mít jasnou proceduru pro rizikové situace. Přihlášení má být bezpečné, vysvětlitelné a provozně nudné. Nudné je u autentizace kompliment.
+
+## CR.1 Session není profil uživatele, ale dočasné oprávnění
+
+Session ID není místo, kam patří role, e-mail, tarif, poslední IP adresa, oblíbená barva tlačítka a nálada zakladatele po třetí kávě. Session má být krátký, náhodný a serverem ověřitelný identifikátor, který ukazuje na stav uložený na kontrolovaném místě. Čím víc významu nacpeš přímo do klientského tokenu, tím složitější je rotace, odvolání, debug i incidentová reakce.
+
+Praktické pravidlo: klient má nést identifikátor session, ne interní spis uživatele. Server si při každém požadavku dohledá aktuální stav: zda session existuje, komu patří, jestli neexpirovala, zda nebyla odvolána a jaké oprávnění má uživatel právě teď. Když zákazník změní roli nebo odejde z firmy, nechceš čekat, až doběhne starý token s historickou pravdou.
+
+U malého SaaS začni jednoduchým modelem:
+
+- `session_id`: náhodný identifikátor uložený v cookie.
+- `user_id`: interní vazba na účet, jen na serveru.
+- `created_at`, `last_seen_at`, `expires_at`: životnost a provozní diagnostika.
+- `rotated_at`: informace, kdy proběhla obnova po loginu nebo zvýšení oprávnění.
+- `revoked_at`, `revoked_reason`: možnost ukončit session po odhlášení, změně hesla nebo incidentu.
+
+Do session nedávej celé profily, payloady formulářů, marketingové segmenty ani „dočasně“ uložené access tokeny třetích stran. Dočasně je v softwaru kouzelné slovo pro „najdeme to v produkci za tři roky“.
+
+## CR.2 Cookie nastav tvrdě, ale s rozumem pro produkt
+
+Pro běžnou webovou aplikaci je serverová session v cookie často nejčitelnější a nejméně hysterické řešení. Cookie má být posílaná jen přes HTTPS, nedostupná pro JavaScript a co nejméně ochotná cestovat mezi weby. OWASP doporučuje u session cookies atributy jako `Secure`, `HttpOnly` a rozumné `SameSite`; u citlivých aplikací je dobré začít přísně a povolovat jen to, co produkt skutečně potřebuje.
+
+Základní nastavení pro typický SaaS dashboard:
+
+```http
+Set-Cookie: __Host-session=...; Path=/; Secure; HttpOnly; SameSite=Lax
+```
+
+`__Host-` prefix pomáhá zabránit některým chybám s doménou a cestou cookie. `Secure` říká, že cookie patří jen na HTTPS. `HttpOnly` ji schová před JavaScriptem, což snižuje škodu při XSS. `SameSite=Lax` bývá dobrý kompromis pro aplikace, které chtějí udržet login po příchodu z externího odkazu. Pokud máš vysoce citlivý interní nástroj, zvaž `SameSite=Strict`; pokud potřebuješ legitimní cross-site scénář, dokumentuj proč a přidej CSRF ochranu.
+
+Checklist cookie nastavení:
+
+- Session cookie má `Secure` a aplikace vynucuje HTTPS.
+- Session cookie má `HttpOnly` a frontend ji nepotřebuje číst.
+- `SameSite` je zvolený vědomě podle toku aplikace, ne podle náhodného Stack Overflow archeologického nálezu.
+- Cookie nepoužívá široké `Domain=.example.com`, pokud to není nutné.
+- Po přihlášení, změně hesla a zvýšení oprávnění se session rotuje.
+- Logout session skutečně odvolá na serveru, nejen smaže cookie v prohlížeči.
+
+## CR.3 OAuth používej jako přihlášení, ne jako skladiště cizích tokenů
+
+OAuth a OpenID Connect umí být skvělé pro přihlášení přes důvěryhodného poskytovatele, ale snadno sklouznou do stavu „máme tokeny všude a nikdo neví proč“. RFC 9700 jako aktuální bezpečnostní doporučení pro OAuth 2.0 zdůrazňuje mimo jiné opatrnou práci s redirect URI, PKCE a vyhýbání se historicky rizikovým tokům. Praktický překlad: nepouštěj si do aplikace volně poskládané OAuth flow jen proto, že knihovna měla hezký quickstart.
+
+U SaaS loginu si napiš rozhodovací větu:
+
+> „OAuth používáme pouze k ověření identity a vytvoření naší vlastní session; access token poskytovatele ukládáme jen tehdy, když ho potřebujeme pro konkrétní integraci.“
+
+Tohle oddělení je důležité. Přihlášení přes Google, Microsoft nebo jiného poskytovatele neznamená, že aplikace musí roky skladovat refresh token a volat cizí API. Pokud potřebuješ jen identitu, ověř `id_token`, vytvoř lokální účet, založ vlastní session a token poskytovatele zahoď. Pokud integrace opravdu potřebuje přístup k API, ulož token odděleně, šifrovaně, s jasným účelem, rotací a obrazovkou, kde zákazník vidí, že propojení existuje.
+
+Praktická pravidla pro OAuth login:
+
+- Používej authorization code flow s PKCE, pokud to tvůj stack podporuje.
+- Redirect URI drž přesně registrované; žádné wildcard divočiny pro produkci.
+- `state` používej pro ochranu návratu a ověřuj ho serverově.
+- Neposílej tokeny do URL fragmentů, logů, analytiky ani chybových reportů.
+- Lokální session vytvoř až po ověření issueru, audience, expirace a podpisu tokenu.
+- Refresh tokeny třetích stran ukládej jen pro konkrétní integraci, ne pro obyčejné přihlášení.
+
+## CR.4 Přihlášení nesmí být marketingový detektor pohybu
+
+Login je lákavé místo pro měření: kdo se vrací, odkud, na jakém zařízení, v jaké firmě, po jaké kampani. Privacy-first produkt si ale musí položit nepříjemnou otázku: které z těchto signálů opravdu potřebujeme pro bezpečnost nebo zlepšení služby? Většina odpovědí typu „hodilo by se do dashboardu“ neprojde.
+
+Bezpečnostní signály a marketingová analytika drž odděleně. Pro bezpečnost může dávat smysl ukládat omezený otisk události: čas, účet, výsledek, obecný důvod selhání, přibližný původ požadavku a technický identifikátor pro audit. Pro marketing nepotřebuješ vědět, že konkrétní člověk se přihlásil v 8:13 z konkrétního prohlížeče po kliknutí na konkrétní reklamu. Pokud chceš měřit aktivaci produktu, měř agregované produktové kroky uvnitř aplikace, ne šmírovací kroniku loginů.
+
+Příklad bezpečného login eventu:
+
+```json
+{
+  "event": "login_attempt",
+  "result": "success",
+  "account_id": "acc_123",
+  "user_id": "usr_456",
+  "method": "passwordless_email",
+  "risk_level": "normal",
+  "created_at": "2026-08-11T02:00:00Z"
+}
+```
+
+Co tam záměrně není: celé IP adresy v běžných produktových reportech, user-agent romány, referrery s UTM parametry, obsah magic linku, tokeny, hesla, jednorázové kódy ani payload od identity providera. Bezpečnostní tým může mít přísně chráněný auditní log s delší retencí a jasným účelem; produktový dashboard má dostat agregaci.
+
+## CR.5 Magic link a jednorázové kódy navrhni pro reálné lidi
+
+Passwordless login je pohodlný, ale není automaticky bezpečný. Magic link v e-mailu se může přeposlat, otevřít v náhledu klienta, naskenovat bezpečnostní bránou nebo skončit v support screenshotu. Jednorázový kód zase lidé opisují špatně, ukládají do chatu a občas ho pošlou agentovi podpory, protože lidstvo je konzistentně kreativní.
+
+Dobrá implementace magic linku:
+
+- Link je jednorázový a krátce platný.
+- Po použití se token okamžitě zneplatní.
+- Token v URL se neloguje a po ověření se uživatel přesměruje na čistou URL.
+- E-mail neobsahuje zbytečné osobní údaje ani marketingové sledovací pixely.
+- Pokud se link otevře v jiném zařízení, aplikace vysvětlí, co se děje.
+- Support nikdy nevyžaduje přeposlání linku ani kódu.
+
+U jednorázových kódů přidej ochranu proti hádání: omezený počet pokusů, krátkou platnost, rate limiting podle účtu a rozumné chybové hlášky. Neříkej útočníkovi, zda existuje e-mail v databázi. Uživatelům řekni neutrálně: „Pokud u nás účet existuje, poslali jsme instrukce.“ Ano, zní to jako právník s mikinou, ale funguje to.
+
+## CR.6 Reautentizace patří před rizikové akce
+
+Ne každá akce v aplikaci potřebuje stejnou úroveň důvěry. Čtení dashboardu po návratu z oběda je něco jiného než změna fakturačního e-mailu, export všech dat, přidání admina nebo vypnutí dvoufaktoru. Privacy-first SaaS má rozlišovat běžnou session a čerstvě ověřenou session.
+
+Před rizikovou akcí vyžaduj reautentizaci nebo potvrzení druhým faktorem. Nemusíš tím trápit lidi každých pět minut; stačí pravidlo typu „pro citlivé akce musí být poslední silné ověření mladší než 15 minut“. Důležité je, aby to bylo konzistentní a auditovatelné.
+
+Citlivé akce typicky zahrnují:
+
+- změnu hesla, e-mailu nebo přihlašovací metody,
+- vypnutí nebo reset MFA,
+- přidání admina, změnu rolí a převod vlastnictví,
+- export nebo hromadný výmaz dat,
+- vytvoření API klíče, webhooku nebo integrace,
+- změnu fakturačních údajů a platebních nastavení.
+
+U těchto akcí loguj auditní událost, ale pořád s datovým minimem. Audit má říct, kdo, kdy a co změnil. Nemá obsahovat nové heslo, celý export, tajemství API klíče ani citlivý payload webhooku. Děkujeme, kapitáne samozřejmosti — a přesto se to v reálném světě děje.
+
+## CR.7 Checklist přihlášení a session
+
+- Session ID je náhodný identifikátor bez vložených osobních údajů.
+- Stav session je ověřovaný serverově a jde okamžitě odvolat.
+- Cookie má `Secure`, `HttpOnly`, promyšlené `SameSite` a ideálně `__Host-` prefix.
+- Session se rotuje po loginu, změně hesla a zvýšení oprávnění.
+- OAuth login používá bezpečný flow, přesné redirect URI, `state` a PKCE.
+- Tokeny poskytovatele se neukládají, pokud nejsou nutné pro konkrétní integraci.
+- Magic linky a jednorázové kódy jsou krátce platné, jednorázové a nelogují se.
+- Rizikové akce vyžadují čerstvou reautentizaci.
+- Login eventy jsou oddělené od marketingové analytiky.
+- Support proces zakazuje sdílení tokenů, kódů a přihlašovacích odkazů.
+- Logout ruší serverovou session, ne jen lokální cookie.
+- Retence login a audit logů má jasný účel, vlastníka a datum úklidu.
+
+## Codyho komentář
+
+Přihlašování je skvělý test dospělosti produktu. Když tým říká „to řeší knihovna“, většinou tím myslí „nevíme, kde všude máme tokeny“. Knihovna je dobrý sluha, ale špatný architekt důvěry. Codyho pravidlo: autentizace má být tak jednoduchá, aby ji šlo nakreslit na jednu stránku, a tak přísná, aby se při incidentu dalo jednoznačně říct, co se stalo a co zrušit.
+
+## Zdroje k příloze
+
+- OWASP Session Management Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html
+- OWASP Cross-Site Request Forgery Prevention Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html
+- OWASP OAuth 2.0 Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/OAuth2_Cheat_Sheet.html
+- RFC 9700 — Best Current Practice for OAuth 2.0 Security: https://www.rfc-editor.org/rfc/rfc9700.html
+
+## Shrnutí přílohy
+
+Přihlášení není jen formulář a token. Privacy-first SaaS potřebuje serverově odvolatelné session, bezpečné cookie, přísný OAuth flow, krátce platné magic linky, reautentizaci před rizikovými akcemi a jasně oddělené bezpečnostní logy od marketingového měření. Nejde o paranoiu. Jde o to, aby důvěra zákazníka nestála na náhodě a cache v prohlížeči.
+
+
 ## Pracovní log
+- 2026-08-11: Přidána příloha CR o přihlašování, session a OAuth bez tokenového konfeti: serverové session, bezpečné cookie, OAuth flow, magic linky, reautentizace, login eventy a checklist.
 - 2026-08-11: Přidána příloha CQ o DNS hygieně pro privacy-first SaaS: vlastnictví domény, čitelná zóna, TTL při migracích, CAA, DNSSEC, úklid TXT tokenů a provozní checklist.
 - 2026-08-11: Přidána příloha CP o e-mailové reputaci bez šmírovacích pixelů: rozdělení typů zpráv, domény a subdomény, SPF/DKIM/DMARC, střídmé měření, preference centrum, bezpečný obsah e-mailů, doručitelnost a checklist.
 
