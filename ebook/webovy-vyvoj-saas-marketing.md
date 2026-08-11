@@ -14534,7 +14534,153 @@ Přihlašování je skvělý test dospělosti produktu. Když tým říká „to
 Přihlášení není jen formulář a token. Privacy-first SaaS potřebuje serverově odvolatelné session, bezpečné cookie, přísný OAuth flow, krátce platné magic linky, reautentizaci před rizikovými akcemi a jasně oddělené bezpečnostní logy od marketingového měření. Nejde o paranoiu. Jde o to, aby důvěra zákazníka nestála na náhodě a cache v prohlížeči.
 
 
+# Příloha CS: Webhooky a integrační doručování bez ztracených událostí a datového konfeti
+
+Webhook je malý slib mezi dvěma systémy: „až se něco stane, dám ti vědět“. Vypadá jednoduše, protože je to často jen HTTP `POST` s JSONem. Jenže v produkci do toho vstoupí timeouty, duplicitní doručení, výpadky, retry smyčky, změny schématu, špatné podpisy, ruční redelivery, firewall a účetní, která čeká, proč se faktura pořád nepřepnula na zaplacenou.
+
+Privacy-first webhook není datový výsyp „pro jistotu“. Je to úsporná, ověřená a opakovatelně zpracovatelná zpráva, která obsahuje jen to, co příjemce potřebuje k bezpečnému rozhodnutí. Dobré webhooky se navrhují jako integrační produkt, ne jako vedlejší efekt databázového triggeru. Ano, databázový trigger by byl rychlejší napsat. Taky by rychleji poslal do světa věci, které tam nemají co dělat. To je taková ta produktivita s následným forenzním večírkem.
+
+## CS.1 Webhook není API response, ale asynchronní smlouva
+
+U běžného API volání má klient okamžitou odpověď. U webhooku posíláš zprávu do cizího prostředí, které může být pomalé, dočasně nedostupné nebo špatně nakonfigurované. Proto musí smlouva obsahovat víc než jen payload.
+
+Napiš si pro každý webhook krátkou integrační kartu:
+
+- **Událost:** co přesně se stalo, například `invoice.paid` nebo `project.deleted`.
+- **Význam:** jaký stav má příjemce po zpracování považovat za pravdivý.
+- **Doručení:** zda posíláš alespoň jednou, kolik retry pokusů děláš a kdy končíš.
+- **Idempotence:** podle čeho příjemce pozná, že už událost zpracoval.
+- **Bezpečnost:** jak se ověřuje podpis, čas a zdroj zprávy.
+- **Schéma:** kde je dokumentace polí a jak se oznamují změny.
+- **Podpora:** jak příjemce uvidí historii doručení a spustí redelivery.
+
+Bez téhle karty se z webhooku stane tajemná poštovní sova. Občas přiletí, občas ne, občas nese stejný dopis dvakrát a občas ji sežere firewall. Kouzelné, ale pro fakturaci dost nepraktické.
+
+## CS.2 Doručuj alespoň jednou a počítej s duplicitami
+
+Většina praktických webhook systémů neumí garantovat „přesně jednou“ bez nepřiměřené složitosti. Rozumný slib je „alespoň jednou“: událost se pokusíš doručit, při chybě zkusíš znovu a příjemce musí umět duplicitní zprávu bezpečně ignorovat.
+
+To znamená, že každá událost potřebuje stabilní identifikátor. Ne identifikátor pokusu o doručení, ale identifikátor původní události. Pokud pošleš `evt_123` pětkrát, příjemce si v tabulce `processed_webhook_events` uloží `evt_123` a další kopie už neprovedou stejnou akci znovu.
+
+Praktický model:
+
+```text
+event_id: evt_01J8...
+event_type: invoice.paid
+occurred_at: 2026-08-11T03:00:00Z
+delivery_attempt_id: del_01J8...
+tenant_id: ten_123
+resource_type: invoice
+resource_id: inv_456
+schema_version: 2026-08-11
+```
+
+Příjemce by měl idempotenci držet databázově, ideálně unikátním indexem nad `event_id` a zdrojem. Kontrola typu „nejdřív se podívám a pak vložím“ bez transakce je závodní podmínka v kostýmu bezpečnostního opatření. Dva paralelní retry pokusy ji rozbijí dřív, než dopiješ kafe.
+
+## CS.3 Rychle potvrď příjem, těžkou práci dej do fronty
+
+Webhook endpoint nemá dělat celý účetní workflow synchronně. Má ověřit podpis, zkontrolovat schéma, uložit událost, rozhodnout o idempotenci a rychle vrátit úspěšný stav. Těžší zpracování patří do fronty nebo jobu.
+
+Stripe ve své dokumentaci doporučuje rychle vrátit úspěšný `2xx` status před složitou logikou, která může způsobit timeout, a zároveň upozorňuje, že v live režimu zkouší nedoručené události doručovat až tři dny s exponenciálním backoffem: https://docs.stripe.com/webhooks?lang=node
+
+GitHub má jiný provozní model: failed deliveries automaticky znovu neposílá, ale umožňuje ruční nebo skriptovanou redelivery posledních doručení; v dokumentaci uvádí, že při selhání je vhodné problém vyšetřit a případně si automatické redelivery doprogramovat: https://docs.github.com/en/webhooks/using-webhooks/handling-failed-webhook-deliveries
+
+Poučení není „Stripe dobrý, GitHub špatný“. Poučení je: nikdy nepředpokládej retry politiku poskytovatele. Přečti dokumentaci, napiš ji do integrační karty a otestuj ji ve stagingu.
+
+## CS.4 Podpis ověřuj nad raw body, ne nad přepočítaným JSONem
+
+Webhook podpis má dokázat, že zprávu poslal správný systém a že payload nebyl cestou změněn. Častá chyba: aplikace nejdřív JSON naparsuje, pak ho znovu serializuje a nad tím ověřuje podpis. Jenže mezery, pořadí polí nebo escaping se mohou změnit. Ověřuj podpis nad přesným raw body, které přišlo po síti.
+
+Standard Webhooks specifikace popisuje obecný vzor, kde se podepisuje kombinace identifikátoru zprávy, timestampu a těla zprávy; identifikátor může sloužit jako idempotency key a timestamp pomáhá proti replay útokům: https://github.com/standard-webhooks/standard-webhooks/blob/main/spec/standard-webhooks.md
+
+Minimální pravidla příjmu:
+
+- přijímej pouze `HTTPS`, žádné produkční webhooky přes obyčejné HTTP;
+- ověř podpis před zpracováním payloadu;
+- kontroluj časovou toleranci timestampu, pokud ji provider podporuje;
+- rozliš test a produkční secrets;
+- secrets rotuj a podporuj krátké období, kdy platí starý i nový klíč;
+- neukládej podpisový secret do logů, ticketů ani zákaznické dokumentace;
+- při neplatném podpisu vrať chybu a neloguj celý payload.
+
+Privacy-first detail: podpis neznamená, že payload smíš poslat do všech interních nástrojů. Znamená jen, že mu můžeš technicky věřit jako zprávě od daného zdroje. Minimalizace dat a přístupová pravidla platí dál.
+
+## CS.5 Payload posílej malý, stav dohledávej přes API
+
+Pokušení je jasné: když už posíláš webhook, pošli rovnou všechno. Celou fakturu, celý kontakt, celý projekt, poslední komentáře, metadata a pro jistotu i IP adresu psa. Ne. Webhook má často stačit jako signál, že se něco změnilo.
+
+Bezpečnější vzor:
+
+```json
+{
+  "id": "evt_01J8EXAMPLE",
+  "type": "invoice.paid",
+  "occurred_at": "2026-08-11T03:00:00Z",
+  "data": {
+    "invoice_id": "inv_456",
+    "account_id": "acc_123"
+  }
+}
+```
+
+Příjemce si detail faktury stáhne přes API s vlastním oprávněním. Výhoda: webhook neobsahuje zbytečné osobní údaje, příjemce dostane aktuální stav a ty můžeš lépe řídit scopes API klíče. Nevýhoda: přibude API call. To je fér cena za menší datové konfeti.
+
+U citlivých produktů rozlišuj typy payloadu:
+
+- **Thin event:** jen typ události a ID zdroje; detail se dohledává přes API.
+- **Snapshot event:** omezený stav objektu v době události; vhodné pro účetní nebo auditní integrace.
+- **Notification event:** jen informace, že má příjemce zkontrolovat změny.
+
+Výchozí volba pro privacy-first SaaS má být thin event. Snapshot používej tam, kde je jasný integrační důvod a dokumentovaná retence.
+
+## CS.6 Redelivery je produktová obrazovka, ne ruční SQL rituál
+
+Když se webhook nepovede doručit, zákazník nechce slyšet „pošlete nám delivery ID a my se podíváme“. Chce vidět, co se stalo, kdy to systém zkusil, jaký byl status a jestli může doručení zopakovat.
+
+Dobrá obrazovka pro integrační doručení ukazuje:
+
+- seznam posledních událostí a doručovacích pokusů;
+- endpoint, event type, čas, stav a HTTP status;
+- krátkou chybovou zprávu bez citlivého payloadu;
+- tlačítko pro bezpečné redelivery vybrané události;
+- varování, že příjemce musí zpracování dělat idempotentně;
+- odkaz na dokumentaci podpisů, retry pravidel a příkladů.
+
+Neukazuj celé payloady všem adminům. Zvaž maskovaný payload, samostatné oprávnění „zobrazit integrační data“ a auditní stopu pro každé redelivery. Pokud zákazník klikne na redelivery desetkrát, systém nemá desetkrát poslat e-mail jeho koncovému uživateli. Má desetkrát bezpečně doručit stejnou událost a příjemce ji má zpracovat jednou.
+
+## CS.7 Checklist webhooků a integračního doručování
+
+- Má každý webhook jasně popsaný event type, význam a verzi schématu?
+- Obsahuje událost stabilní `event_id`, který přežije retry a redelivery?
+- Umí příjemce zpracovat duplicitní doručení bez dvojího účtování, e-mailu nebo změny stavu?
+- Ověřuje endpoint podpis nad raw body a kontroluje timestamp, pokud ho provider posílá?
+- Vrací endpoint rychlý `2xx` po bezpečném uložení události a těžkou práci posílá do fronty?
+- Je retry politika zdokumentovaná a otestovaná pro výpadek, timeout i chybný podpis?
+- Posíláš v payloadu jen data nutná pro rozhodnutí, ne celý zákaznický profil?
+- Existuje obrazovka nebo API pro historii doručení a bezpečné redelivery?
+- Jsou secrets oddělené pro test a produkci, rotovatelné a chráněné před logováním?
+- Má tým runbook pro situaci, kdy provider retry vyčerpá nebo automatické retry vůbec nedělá?
+
+## Codyho komentář
+
+Můj pohled: webhooky jsou skvělé, dokud je někdo nebere jako spolehlivou frontu zadarmo. Nejsou fronta. Jsou integrační hranice přes internet, tedy místo, kde se realita směje tvým diagramům. Když je navrhneš s idempotencí, podpisy, redelivery a minimálním payloadem, budou nudné. A nudné webhooky jsou přesně to, co chceš, když jde o platby, přístupy a zákaznická data.
+
+## Zdroje k příloze
+
+- Stripe Docs: Receive Stripe events in your webhook endpoint — https://docs.stripe.com/webhooks?lang=node
+- Stripe Docs: Process undelivered webhook events — https://docs.stripe.com/webhooks/process-undelivered-events?locale=en-GB
+- GitHub Docs: Handling failed webhook deliveries — https://docs.github.com/en/webhooks/using-webhooks/handling-failed-webhook-deliveries
+- GitHub Docs: Redelivering webhooks — https://docs.github.com/en/webhooks/testing-and-troubleshooting-webhooks/redelivering-webhooks
+- Standard Webhooks specification — https://github.com/standard-webhooks/standard-webhooks/blob/main/spec/standard-webhooks.md
+
+## Shrnutí přílohy
+
+Webhooky navrhuj jako asynchronní smlouvu, ne jako náhodný `POST` z backendu. Každá událost potřebuje stabilní identifikátor, idempotentní zpracování, ověřitelný podpis, jasnou retry politiku, minimální payload a čitelnou historii doručení. Privacy-first přístup znamená posílat co nejméně dat, držet secrets mimo logy, redelivery auditovat a raději dohledávat detail přes API než rozhazovat zákaznická data po integračních potrubích.
+
+
 ## Pracovní log
+
+- 2026-08-11: Přidána příloha CS o webhookách a integračním doručování: asynchronní smlouva, idempotence, rychlé potvrzení, podpisy nad raw body, minimální payload, redelivery obrazovka a checklist.
 - 2026-08-11: Přidána příloha CR o přihlašování, session a OAuth bez tokenového konfeti: serverové session, bezpečné cookie, OAuth flow, magic linky, reautentizace, login eventy a checklist.
 - 2026-08-11: Přidána příloha CQ o DNS hygieně pro privacy-first SaaS: vlastnictví domény, čitelná zóna, TTL při migracích, CAA, DNSSEC, úklid TXT tokenů a provozní checklist.
 - 2026-08-11: Přidána příloha CP o e-mailové reputaci bez šmírovacích pixelů: rozdělení typů zpráv, domény a subdomény, SPF/DKIM/DMARC, střídmé měření, preference centrum, bezpečný obsah e-mailů, doručitelnost a checklist.
