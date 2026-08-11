@@ -15253,8 +15253,133 @@ Audit logy jsou jako černá skříňka letadla. Chceš, aby po nehodě pomohly 
 
 Audit logy mají pomáhat s bezpečností, provozem a důvěrou zákazníka, ne nenápadně vytvářet druhou databázi osobních údajů. Privacy-first přístup znamená rozdělit logy podle účelu, zapisovat strukturované události, nelogovat tajemství ani celé payloady, omezit přístup, nastavit retenci a nabídnout zákazníkům srozumitelný audit důležitých změn. Dobré logování je nudné, přesné a použitelné právě ve chvíli, kdy se něco pokazí.
 
+
+---
+
+# Příloha CX: Uploady a zákaznické soubory bez malware tomboly, veřejného kýble a datového skladiště
+
+Upload souborů je produktová funkce, která se tváří obyčejně: přiložit fakturu, nahrát logo, importovat CSV, přidat screenshot k ticketu. Jenže z pohledu bezpečnosti a privacy je to malé letiště pro cizí obsah. Uživatelé mohou nahrát citlivá data, omylem přiložit víc, než chtěli, nebo poslat soubor, který se aplikaci pokusí rozkousat zevnitř. A útočník? Ten miluje každé tlačítko „Vybrat soubor“ jako dítě prolézačku.
+
+Privacy-first přístup neznamená uploady zakázat. Znamená to navrhnout jasný účel, povolené typy, limity, kontrolu obsahu, oddělené úložiště, oprávnění, retenci a bezpečné stahování. Soubor není jen blob. Je to zákaznické aktivum, potenciální osobní údaj a někdy i bezpečnostní riziko s příponou `.pdf` a ambicemi stát se incidentem.
+
+OWASP File Upload Cheat Sheet doporučuje mimo jiné povolovat jen očekávané přípony, ověřovat typ souboru na serveru, měnit názvy souborů, nastavovat limity velikosti, ukládat soubory mimo webroot a kontrolovat oprávnění ke stažení: https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html
+
+## CX.1 Každý upload musí mít účel a vlastníka
+
+Nejhorší upload je univerzální pole „nahrajte cokoliv“. Produktově pohodlné, provozně nebezpečné. Před přidáním uploadu si napiš odpovědi na jednoduché otázky:
+
+- Proč soubor potřebujeme?
+- Kdo ho smí nahrát, zobrazit, stáhnout a smazat?
+- Jaké typy souborů jsou opravdu nutné?
+- Jak dlouho soubor potřebujeme držet?
+- Je soubor součástí zákaznických dat, účetnictví, podpory, nebo technického importu?
+- Co se stane při odchodu zákazníka nebo smazání účtu?
+
+Příklad: screenshot u support ticketu má jiný režim než fakturační příloha nebo import zákazníků z CSV. Screenshot podpory může obsahovat osobní údaje a měl by mít krátkou retenci. Fakturační doklad může mít účetní režim. CSV import má být po zpracování ideálně smazán nebo nahrazen bezpečným importním reportem. Když všechny soubory skončí ve stejné složce se stejnými právy a stejnou retencí, není to jednoduchost. Je to budoucí archeologie průšvihu.
+
+## CX.2 Validace patří na server, ne do optimismu prohlížeče
+
+HTML atribut `accept` je užitečná nápověda pro uživatele, ale není bezpečnostní kontrola. Útočník ho obejde rychleji, než support napíše „zkuste to prosím znovu“. Validuj na serveru:
+
+- povolenou příponu podle allowlistu,
+- MIME typ a skutečný obsah souboru,
+- maximální velikost souboru,
+- počet souborů na akci a na účet,
+- strukturu u importů, například sloupce CSV,
+- rozměry a formát u obrázků,
+- zákaz dvojitých a podezřelých přípon typu `invoice.pdf.exe`.
+
+Bezpečný upload neříká „všechno přijmu a pak uvidíme“. Bezpečný upload říká „přijmu jen to, co tahle funkce potřebuje“. Pokud produkt potřebuje logo, nepotřebuje ZIP archiv. Pokud potřebuje CSV import kontaktů, nepotřebuje makro-enabled Excel. Pokud potřebuje PDF fakturu, nepotřebuje spustitelný soubor s brýlemi a falešným knírkem.
+
+## CX.3 Název souboru je uživatelský vstup
+
+Originální název souboru je užitečný pro člověka, ale nepatří do cesty na disku ani do veřejné URL bez ošetření. Název může obsahovat mezery, diakritiku, podivné znaky, pokusy o path traversal, HTML nebo informace, které nemají být vidět dalším lidem.
+
+Praktický vzor:
+
+```text
+stored_file_id: file_01JABC...
+original_filename: "smlouva-klient-acme.pdf"
+storage_key: "org_456/2026/08/file_01JABC.pdf"
+content_type: "application/pdf"
+size_bytes: 284120
+uploaded_by: "user_123"
+tenant_id: "org_456"
+scan_status: "clean"
+retention_until: "2026-11-11"
+```
+
+Veřejný nebo interní storage key má být generovaný. Původní název ukládej jako metadata a zobrazuj ho jen lidem, kteří soubor smí vidět. Při stahování nastav bezpečný `Content-Disposition`, správný `Content-Type` a zvaž, jestli se má soubor zobrazit v prohlížeči, nebo vždy stáhnout. U neznámých typů je bezpečnější download než inline vykreslení.
+
+## CX.4 Úložiště odděl od aplikace a od veřejného internetu
+
+Soubory nepatří do adresáře, odkud je web server náhodou servíruje jako statiku. Ukládej je do objektového úložiště nebo oddělené vrstvy, kde stahování vždy projde přes autorizační kontrolu. Ideální tok:
+
+1. Uživatel požádá o upload.
+2. Backend ověří oprávnění, typ a limit.
+3. Aplikace vydá krátkodobý upload URL nebo přijme soubor přes kontrolovaný endpoint.
+4. Soubor dostane interní ID, tenant kontext a stav kontroly.
+5. Stahování probíhá přes krátkodobý podepsaný odkaz nebo endpoint, který znovu ověří oprávnění.
+
+Veřejný bucket s hádatelnými URL je digitální obdoba „necháme šanon na recepci, snad si ho vezme jen správný člověk“. Ne. Podepsané odkazy mají být krátkodobé, omezené na konkrétní soubor a ideálně auditované u citlivých dat.
+
+## CX.5 Antivir a skenování nejsou dekorace
+
+U souborů, které budou někdo stahovat, otevírat, zpracovávat nebo posílat dál, potřebuješ kontrolu. Minimální režim:
+
+- Soubor po uploadu nejdřív uložit jako `pending`.
+- Spustit antivirovou nebo obsahovou kontrolu podle typu souboru.
+- Do dokončení kontroly neumožnit běžné stažení ani zpracování.
+- Při nálezu uložit bezpečný důvod a nabídnout uživateli srozumitelnou chybu.
+- U importů validovat i obsah, nejen bezpečnost souboru.
+
+Není nutné dělat z malého SaaS forenzní laboratoř. Ale pokud zákazníci nahrávají přílohy, které bude otevírat support nebo další uživatelé, „věříme lidem“ není bezpečnostní strategie. Lidé jsou skvělí. Lidé také otevírají soubory `final_final_2.xlsm`.
+
+## CX.6 Retence souborů musí být vidět v produktu
+
+Evropská komise u GDPR principů zdůrazňuje minimalizaci a omezení uložení osobních údajů: zpracovávat jen potřebná data a nedržet je déle, než je nutné pro účel: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/overview-principles/what-data-can-we-process-and-under-which-conditions_en
+
+U souborů to znamená:
+
+- Support přílohy mazat po vyřešení a uplynutí rozumné lhůty.
+- Dočasné importní soubory mazat po zpracování.
+- Exporty dat zpřístupnit jen omezenou dobu.
+- Fakturační dokumenty oddělit od běžných produktových příloh.
+- Smazání účtu promítnout i do souborů, náhledů, indexů a záloh podle pravidel.
+
+Retence nemá být schovaná jen v interním dokumentu. Uživatel by měl u citlivých souborů vědět, co se s nimi stane: „Přílohy podpory mažeme 90 dní po uzavření ticketu“ je mnohem lepší než ticho a nekonečný blob storage.
+
+## CX.7 Checklist uploadů a zákaznických souborů
+
+- [ ] Každý upload má popsaný účel, vlastníka, oprávnění a retenci.
+- [ ] Povolené typy souborů jsou allowlist, ne volná soutěž přípon.
+- [ ] Validace běží na serveru a kontroluje příponu, MIME, obsah, velikost a strukturu.
+- [ ] Originální název souboru se nepoužívá jako storage key ani veřejná URL.
+- [ ] Soubor nese `tenant_id`, vlastníka, typ, stav kontroly, velikost a retenční metadata.
+- [ ] Úložiště není veřejný webroot ani bucket s trvalými hádatelnými odkazy.
+- [ ] Stahování ověřuje oprávnění a používá krátkodobé odkazy nebo kontrolovaný endpoint.
+- [ ] Soubory určené ke sdílení nebo zpracování mají skenovací stav a bezpečný fallback.
+- [ ] Dočasné importy, exporty a support přílohy mají automatický úklid.
+- [ ] Incident playbook řeší, jak najít, zablokovat a odstranit problematický soubor.
+
+## Codyho komentář
+
+Upload souborů je přesně ta funkce, kterou všichni podcení, protože „vždyť je to jen příloha“. Můj pohled: příloha je cizí obsah v tvém systému. Chovej se k ní slušně, ale s nedůvěrou. Jako k hostovi, který může být zákazník, ale taky může mít v batohu motorovou pilu. Prostě normální pátek v SaaS.
+
+## Zdroje k příloze
+
+- OWASP File Upload Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html
+- OWASP — Unrestricted File Upload: https://owasp.org/www-community/vulnerabilities/Unrestricted_File_Upload
+- European Commission — GDPR data minimisation and storage limitation: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/overview-principles/what-data-can-we-process-and-under-which-conditions_en
+
+## Shrnutí přílohy
+
+Uploady a zákaznické soubory potřebují stejnou disciplínu jako databáze. Malý SaaS tým má vědět, proč soubor sbírá, kdo ho smí vidět, jaké typy povoluje, kde ho ukládá, jak ověřuje obsah, jak řeší stahování a kdy soubor maže. Privacy-first upload není jen antimalware. Je to kombinace datového minima, tenant izolace, bezpečného úložiště, krátkodobých odkazů, auditovatelnosti a srozumitelné retence. Cílem není uživateli bránit v práci. Cílem je, aby příloha nepřerostla v incident s vlastním soundtrackem.
+
+
 ## Pracovní log
 
+- 2026-08-11: Přidána příloha CX o uploadech a zákaznických souborech bez datového skladiště: účel, validace, bezpečné názvy, oddělené úložiště, skenování, retence a checklist.
 - 2026-08-11: Přidána příloha CW o audit logách bez šmírovací kroniky: oddělení typů logů, strukturované audit eventy, zákaz logování tajemství, přístupová práva, retence, zákaznický audit log a checklist.
 
 - 2026-08-11: Přidána příloha CV o multi-tenant izolaci bez zákaznického průvanu: tenant kontext, autorizace objektů, izolace mimo hlavní request, PostgreSQL RLS jako druhá brzda, testování cizích dveří a checklist.
