@@ -16951,7 +16951,172 @@ Audit log není šmírovací nástroj. Je to paměť produktu pro momenty, kdy n
 Audit log má být oddělený od debug logů a analytiky, zaměřený na citlivé akce, čitelný pro zákazníka a bezpečný pro provoz. Loguj dopad, ne tajemství. Chraň log před běžnou úpravou, nastav rozumnou retenci, postav nad ním alerty a drž se pravidla: dost informací pro vyšetření, minimum dat pro zbytečné riziko.
 
 
+# Příloha DI: Vývojová a testovací prostředí bez produkčních dat, tajných dumpů a GDPR ruletky
+
+Vývojářské prostředí má jednu zvláštní vlastnost: všichni se k němu chovají jako k pískovišti, dokud v něm neleží produkční databáze. Pak už to není pískoviště. Je to kopie firmy s horšími zámky, více notebooky, méně audit logy a obvykle jedním souborem `dump-final-final.sql` někde v cloudu. Privacy-first SaaS proto bere dev, staging a test data jako samostatný provozní problém, ne jako vedlejší efekt vývoje.
+
+Evropská komise připomíná, že de-identifikovaná, šifrovaná nebo pseudonymizovaná data zůstávají osobními údaji, pokud je lze použít k opětovné identifikaci osoby; skutečně anonymní data musí být anonymizovaná nevratně: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/application-gdpr_en. EDPB podobně rozlišuje pseudonymizaci jako ochranné opatření s omezením linkovatelnosti a anonymizaci jako stav, kdy data už nelze spojit s jednotlivcem: https://www.edpb.europa.eu/topics/ai-and-technology/anonymisationpseudonymisation_en. Prakticky: „přepsali jsme e-mail na hash“ ještě neznamená „můžeme to poslat kamkoli“. To je jako dát si na čelo brýle a říkat, že jsem v anonymním režimu.
+
+## DI.1 Produkční dump není výchozí testovací fixture
+
+Nejrychlejší cesta k reálnému bugu bývá vzít produkční data. Nejrychlejší cesta k reálnému průšvihu taky. Produkční dump do lokálu by měl být poslední možnost, ne standardní onboarding nového vývojáře.
+
+Nejdřív si rozděl testovací data podle účelu:
+
+- **Lokální vývoj:** malé syntetické datasety, které pokrývají běžné scénáře, edge cases a chybové stavy.
+- **Automatizované testy:** deterministická data generovaná testem nebo seedem, aby test nepadal podle nálady databáze.
+- **Staging:** realistická struktura účtů, tarifů, oprávnění a integrací, ale bez skutečných zákaznických obsahů.
+- **Incidentní reprodukce:** úzký, časově omezený výřez dat, ideálně po minimalizaci a s jasným vlastníkem.
+
+Praktický postup pro malý tým:
+
+1. Sepiš pět až deset scénářů, které produkt musí umět předvést: nový účet, týmový workspace, trial po expiraci, neúspěšná platba, export dat, smazání projektu.
+2. Vytvoř seed skript, který tyto scénáře založí bez produkčních osobních údajů.
+3. U každé nové funkce doplň seed o reprezentativní příklad, ne o kopii zákazníka.
+4. Produkční dump dovol jen přes schválený incidentní proces, s datovou minimalizací, expirací a záznamem v audit logu.
+
+Dobrá otázka do code review: „Potřebuje tenhle test skutečného zákazníka, nebo jen objekt se stejným tvarem?“ Ve většině případů potřebuješ tvar. Ne duši zákazníka uloženou v JSONu.
+
+## DI.2 Syntetická data musí být produktová, ne lorem ipsum skládka
+
+Syntetická data nejsou jen `john@example.com` a `Test Company s.r.o.` nakopírované třicetkrát. Mají pomoci vývojářům, testerům i obchodu pochopit produktové situace.
+
+Lepší seed sada může obsahovat:
+
+- workspace „Kavárna U Datového Minimalisty“ s jedním ownerem a dvěma členy,
+- účet v trialu s onboardingem dokončeným na 60 %,
+- účet po nezaplacené faktuře s omezeným přístupem,
+- projekt s prázdným stavem, protože prázdné stavy jsou produkt, ne díra ve stránce,
+- projekt s velkým množstvím položek pro test výkonu,
+- uživatele bez MFA, s MFA a s pending pozvánkou,
+- webhook s posledním neúspěšným doručením,
+- export dat čekající na vypršení odkazu.
+
+Syntetická data piš lidsky. Když staging vypadá jako reálný produkt, tým dřív odhalí rozbitý text, nejasný stav a špatnou prázdnou obrazovku. Jen u toho nesmíš používat reálné e-maily, jména zákazníků, faktury ani obsah dokumentů.
+
+Malý trik: prefixuj testovací entity viditelně, třeba `DEMO`, `STAGING` nebo `TEST`. Když omylem uteče screenshot, každý hned vidí, že nejde o zákaznické údaje. A když se testovací e-mail zatoulá do produkční fronty, máš šanci ho chytit dřív, než se z něj stane divadlo s omluvou.
+
+## DI.3 Pseudonymizace není kouzelná neviditelnost
+
+Pseudonymizace pomáhá snížit riziko, ale pořád může jít o osobní údaje. ENISA ve své práci k pseudonymizaci zdůrazňuje, že volba techniky závisí na hrozbách, kontextu a možnosti zpětného propojení dat: https://www.enisa.europa.eu/publications/pseudonymisation-techniques-and-best-practices. Pro SaaS tým to znamená: nestačí náhodně zahashovat e-mail a jít na oběd.
+
+Příklady rizik:
+
+- Hash e-mailu bez soli lze často hádat slovníkovým útokem.
+- Kombinace města, firmy, role a časové stopy může člověka znovu identifikovat.
+- „Anonymizovaný“ popis ticketu často obsahuje jméno, telefon nebo interní URL přímo v textu.
+- Stabilní pseudonym napříč tabulkami umožní poskládat chování uživatele i bez jména.
+
+Praktická pravidla:
+
+- Pokud data nepotřebuješ, smaž je, ne pseudonymizuj.
+- Pokud potřebuješ vztahy mezi objekty, nahraď identifikátory konzistentně jen v rámci jednoho datasetu.
+- Pokud nepotřebuješ časovou přesnost, zaokrouhli datum nebo použij relativní stáří.
+- Pokud textová pole mohou obsahovat osobní údaje, buď je vynech, nebo je nahraď syntetickým textem podle typu scénáře.
+- Odděl mapovací klíč od datasetu a dej mu kratší retenci než samotnému výřezu.
+
+Pseudonymizovaný dataset označ jako citlivý. Ne proto, že jsme paranoici. Protože paranoik je jen člověk, který už jednou viděl export z CRM v kanálu `#random`.
+
+## DI.4 Staging nesmí umět omylem mluvit se zákazníkem
+
+Testovací prostředí má mít bezpečnostní brzdy, které chrání reálné lidi před testovacím chaosem. Nejčastější průšvih není hacker v mikině. Je to staging napojený na produkční e-mailing, platební bránu nebo webhooky.
+
+Nastav oddělení prostředí takto:
+
+- **E-mail:** staging posílá jen na allowlist domén nebo do lokální schránky typu Mailpit.
+- **SMS:** testovací prostředí používá sandbox poskytovatele nebo úplně vypnutý transport.
+- **Platby:** používá testovací klíče a viditelný test mód v UI.
+- **Webhooky:** nikdy neposílají do produkčních URL zákazníků, pokud nejde o explicitně označený integrační test.
+- **Analytika:** staging eventy nejdou do produkčních dashboardů.
+- **AI nástroje:** staging neodesílá zákaznická data do externích modelů jen proto, že někdo testuje prompt.
+
+OWASP Secrets Management Cheat Sheet doporučuje oddělovat tajemství pro produkční a vývojová prostředí a pravidelně dokumentovat očekávané postupy práce se secrets: https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html. V praxi to znamená, že `.env.staging` nemá být menší bratranec produkčního `.env`, ale samostatná sada klíčů s menším oprávněním.
+
+Přidej do aplikace bezpečnostní pojistky:
+
+```txt
+ENVIRONMENT=staging
+ALLOW_OUTBOUND_EMAILS_TO=team@example.eu
+PAYMENTS_MODE=test
+WEBHOOK_DELIVERY_MODE=disabled_by_default
+ANALYTICS_DATASET=staging
+```
+
+Konfiguraci validuj při startu. Pokud staging najde produkční platební klíč, má spadnout hned, ne po prvním falešném charge zákazníkovi.
+
+## DI.5 Přístup k testovacím datům má mít stejný respekt jako přístup k produkci
+
+„Je to jen staging“ je věta, která by měla v týmu spouštět tiché blikání. Staging často obsahuje stejné role, integrační tokeny, exportní mechanismy a někdy i příliš realistická data. Proto potřebuje vlastní přístupová pravidla.
+
+Minimum:
+
+- Přístup do staging adminu mají jen lidé, kteří ho opravdu používají.
+- Každý účet je osobní, žádné sdílené `demo/demo123`.
+- Testovací admin role se pravidelně revidují.
+- Staging databáze není veřejně dostupná z internetu.
+- Exporty ze stagingu expirují stejně jako produkční exporty.
+- Screenshoty ze stagingu se neposílají mimo tým, pokud obsahují zákaznický kontext.
+
+Pokud používáš produkční výřez kvůli incidentu, napiš krátký záznam:
+
+| Pole | Příklad |
+| --- | --- |
+| Důvod | Reprodukce chybného výpočtu fakturace u tarifu Team |
+| Rozsah | 1 workspace, fakturační stavy, bez obsahu projektů |
+| Schválil | product owner + technický lead |
+| Kde leží | izolovaná staging databáze `incident-2026-08` |
+| Retence | smazat do 7 dnů po uzavření incidentu |
+| Audit | odkaz na incident ticket a audit event |
+
+Takový zápis není byrokracie. Je to pojistka proti situaci, kdy za půl roku nikdo neví, proč existuje databáze s názvem `tmp-old-prod-copy-really-delete-later`.
+
+## DI.6 Testovací data pravidelně uklízej
+
+Testovací prostředí se samo nezlepší. Jen bobtná. Staré seed účty, staré exporty, staré soubory a staré access tokeny časem vytvoří druhou produkci, jen bez zákazníků a bez disciplíny.
+
+Měsíční úklid může být jednoduchý:
+
+- smaž staging účty starší než domluvená doba,
+- zneplatni nepoužívané testovací API tokeny,
+- odstraň staré exporty a uploady,
+- obnov seed databázi z aktuálních migrací,
+- zkontroluj, že staging nemá produkční credentials,
+- projdi allowlist e-mailů a lidí s admin přístupem,
+- ověř, že testovací analytika není napojená na produkční report.
+
+Automatizuj nudnou část. Jednou týdně může běžet job, který smaže staré exporty a napíše souhrn do interního kanálu. Ruční část nech na rozhodnutí: jestli nějaký incidentní dataset ještě opravdu potřebuješ.
+
+## DI.7 Checklist vývojových a testovacích prostředí
+
+- Máme syntetický seed dataset pro běžný lokální vývoj.
+- Produkční dump není běžná cesta pro testování nové funkce.
+- Každý produkční výřez má důvod, vlastníka, schválení, rozsah a datum smazání.
+- Pseudonymizovaná data pořád považujeme za citlivá, pokud existuje realistická možnost reidentifikace.
+- Staging nepoužívá produkční e-mailové, platební, webhookové ani analytické cíle.
+- Secrets jsou oddělené podle prostředí a mají minimální oprávnění.
+- Testovací exporty, uploady a tokeny mají retenci.
+- Přístup do stagingu se pravidelně reviduje.
+- Screenshoty a bug reporty neobsahují reálná zákaznická data bez důvodu.
+- Obnova seed dat je součást vývojářského workflow, ne rituál pro jednoho člověka v týmu.
+
+## Codyho komentář
+
+Můj pohled — Cody: nejlepší privacy-first vývojové prostředí je trochu nudné. Má syntetická data, oddělené klíče, jasné brzdy a žádný romantický příběh o tom, jak někdo poslal staging reset hesla skutečnému zákazníkovi v pátek večer. Nudná infrastruktura je podceňovaný luxus. Drama nechme na seriály, ne na databázové dumpy.
+
+## Zdroje k příloze
+
+- European Commission — Application of the GDPR: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/application-gdpr_en
+- European Data Protection Board — Anonymisation/pseudonymisation: https://www.edpb.europa.eu/topics/ai-and-technology/anonymisationpseudonymisation_en
+- ENISA — Pseudonymisation techniques and best practices: https://www.enisa.europa.eu/publications/pseudonymisation-techniques-and-best-practices
+- OWASP Cheat Sheet Series — Secrets Management: https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html
+
+## Shrnutí přílohy
+
+Vývojová a testovací prostředí nejsou bezriziková jen proto, že v nich nejsou zákazníci přihlášení každý den. Privacy-first tým používá syntetická data jako výchozí stav, produkční výřezy povoluje jen výjimečně, staging chrání před omylem stejně jako před útokem a testovací data uklízí dřív, než se z nich stane druhá produkce v teplákách.
+
 ## Pracovní log
+
+- 2026-08-11: Přidána příloha DI o vývojových a testovacích prostředích bez produkčních dat: syntetické datasety, pseudonymizace, staging brzdy, oddělené secrets, incidentní výřezy, úklid a checklist.
 - 2026-08-11: Přidána příloha DH o audit logu v SaaS: oddělení od debug logů a analytiky, bezpečná struktura událostí, zákaznické UI, retence, alerty a privacy-first checklist.
 - 2026-08-11: Přidána příloha DG o rolích a oprávněních v SaaS: mapování citlivých akcí, serverová autorizace, vlastnictví účtu, omezení sdílených účtů, dočasná oprávnění, API tokeny, review přístupů a checklist.
 - 2026-08-11: Přidána příloha DF o rate limitingu a ochraně API: férové jednotky limitů, oddělení bezpečnostních a produktových brzd, odpovědi `429`, fronty pro drahé operace, privacy-first anti-abuse a checklist.
