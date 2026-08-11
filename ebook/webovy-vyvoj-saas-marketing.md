@@ -15376,9 +15376,123 @@ Upload souborů je přesně ta funkce, kterou všichni podcení, protože „vž
 
 Uploady a zákaznické soubory potřebují stejnou disciplínu jako databáze. Malý SaaS tým má vědět, proč soubor sbírá, kdo ho smí vidět, jaké typy povoluje, kde ho ukládá, jak ověřuje obsah, jak řeší stahování a kdy soubor maže. Privacy-first upload není jen antimalware. Je to kombinace datového minima, tenant izolace, bezpečného úložiště, krátkodobých odkazů, auditovatelnosti a srozumitelné retence. Cílem není uživateli bránit v práci. Cílem je, aby příloha nepřerostla v incident s vlastním soundtrackem.
 
+---
+
+# Příloha CY: Schvalování rizikových akcí bez admin samoděržaví a klikacího chaosu
+
+V malém SaaS týmu se často začíná jednoduše: jeden admin účet, pár tlačítek v interní administraci a implicitní předpoklad, že „naši lidi vědí, co dělají“. Vědí. A stejně kliknou ve špatném tenantovi, smažou špatný export, pošlou refund dvakrát nebo omylem vypnou tarif zákazníkovi, který zrovna ukazuje produkt vedení. Interní důvěra je hezká věc, ale workflow bez brzd je provozní adrenalinový sport.
+
+Schvalování rizikových akcí neznamená byrokratický strop nad každým kliknutím. Znamená to rozlišit běžnou práci od zásahů, které mění peníze, přístupy, bezpečnost, data nebo dostupnost služby. OWASP v autorizačním doporučení zdůrazňuje least privilege, deny-by-default, kontrolu oprávnění na každý request a testování autorizační logiky: https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html. Pro privacy-first SaaS je to praktický základ: akce má být povolená proto, že dává smysl v daném kontextu, ne proto, že uživatel nese magickou roli `admin`.
+
+## CY.1 Nejdřív pojmenuj rizikové akce
+
+Riziková akce je taková, která má dopad mimo obrazovku člověka, který kliká. Typicky:
+
+- změna role, přidání admina nebo změna vlastníka účtu,
+- export zákaznických nebo osobních dat,
+- hromadné smazání, anonymizace nebo merge záznamů,
+- refund, změna tarifu, prodloužení trialu nebo účetní výjimka,
+- vypnutí integrace, rotace API klíče nebo změna webhook endpointu,
+- přístup podpory k zákaznickému účtu,
+- změna retenčních pravidel nebo privacy nastavení,
+- ruční spuštění migrace, reindexace nebo hromadné notifikace.
+
+Každá taková akce má mít v produktu vlastní název, vlastníka a definovaný bezpečný průběh. Pokud rizikové akce existují jen jako tlačítka v adminu, časem vznikne folklór: „tohle nemačkej v pátek“, „tady musíš napřed napsat Petrovi“ a „když to spadne, najdi starý SQL v chatu“. To není proces. To je archeologie incidentu před incidentem.
+
+## CY.2 Schvalování používej podle dopadu, ne podle ega
+
+Ne každá změna potřebuje dva podpisy a slavnostní fanfáru. Dobrý model má úrovně:
+
+| Úroveň | Příklad | Kontrola |
+| --- | --- | --- |
+| Nízká | oprava překlepu v profilu zákazníka | běžné oprávnění a audit log |
+| Střední | prodloužení trialu, ruční resend faktury | potvrzovací dialog s důvodem |
+| Vysoká | export dat, přidání admina, refund nad limit | druhé schválení nebo reautentizace |
+| Kritická | smazání tenant dat, hromadná migrace, vypnutí služby | change request, časové okno, rollback plán |
+
+Schvalování má chránit zákazníka i tým. Nesmí být trestem za práci. Pokud support potřebuje každý den udělat deset stejných bezpečných kroků, uprav oprávnění nebo produktový tok. Pokud ale někdo sahá na citlivá data, billing nebo přístupová práva, jedno další potvrzení je levnější než vysvětlovat zákazníkovi, že „se to nějak stalo“.
+
+## CY.3 Důvod akce je povinný údaj, ne poznámka pro básníky
+
+U rizikových akcí ukládej krátký důvod. Ne román, ale větu, která pomůže při auditu:
+
+```text
+action: "customer_data_export_requested"
+tenant_id: "org_456"
+actor_id: "user_123"
+approver_id: "user_789"
+reason: "Zákazník požádal o export při offboardingu v ticketu SUP-1842."
+risk_level: "high"
+created_at: "2026-08-11T09:00:00Z"
+expires_at: "2026-08-12T09:00:00Z"
+```
+
+Důvod nesmí obsahovat zbytečná osobní data, tajemství ani celé payloady. Stačí kontext, reference na ticket nebo interní žádost a rozhodnutí. Když pak někdo po třech měsících řeší, proč proběhl export, nemusí svolávat spiritistickou seanci nad Slack historií.
+
+## CY.4 Reautentizace patří před citlivý klik
+
+Uživatel může být přihlášený, ale to ještě neznamená, že má být jeho session použita pro kritickou akci bez ověření. Pro export dat, změnu hesla, změnu e-mailu vlastníka, přidání admina nebo refund nad limit zvaž reautentizaci: heslo, passkey, jednorázový kód nebo SSO challenge podle prostředí.
+
+GDPR v článku 32 požaduje technická a organizační opatření přiměřená riziku zpracování, včetně schopnosti zajistit důvěrnost, integritu, dostupnost a odolnost systémů: https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32016R0679. Reautentizace a schvalování nejsou samy o sobě „GDPR tlačítko“, ale patří mezi praktická opatření, která snižují riziko neoprávněného přístupu nebo omylu u citlivých operací.
+
+## CY.5 Schválení musí být konkrétní a časově omezené
+
+Špatný vzor: „Petr schválil admin akce pro tento účet.“ Dobrý vzor: „Petr schválil export fakturačních dat pro tenant ACME do zítřka 10:00.“ Schválení má mít:
+
+- konkrétní akci,
+- konkrétní objekt nebo tenant,
+- konkrétního žadatele a schvalovatele,
+- časovou platnost,
+- důvod,
+- stav: `requested`, `approved`, `rejected`, `expired`, `used`, `cancelled`,
+- audit event po každé změně stavu.
+
+Nepoužívej schválení jako trvalé zvýšení práv. Pokud člověk potřebuje dlouhodobě širší oprávnění, řeš roli. Pokud potřebuje jednorázový zásah, řeš časově omezené povolení. Jinak se z dočasné výjimky stane nový normál, což je oblíbený přirozený nepřítel bezpečnosti.
+
+## CY.6 UX má bránit omylu, ne jen potvrdit vinu
+
+Potvrzovací dialog „Opravdu?“ je slabá brzda, pokud neukáže dopad. Lepší potvrzení říká:
+
+- koho se akce týká,
+- kolik záznamů nebo peněz ovlivní,
+- zda je vratná,
+- co se stane hned a co později,
+- kde najdu auditní záznam,
+- jak akci zrušit nebo vrátit, pokud to jde.
+
+U destruktivních akcí pomáhá opsání názvu tenantu, čekací doba, druhé schválení nebo dry-run náhled. U hromadných akcí ukaž vzorek dopadu a celkový počet položek. U notifikací ukaž reálný náhled zprávy, cílovou skupinu a odkaz na preference. Tlačítko „Potvrdit“ bez kontextu je jen elegantní past s border radiusem.
+
+## CY.7 Checklist schvalování rizikových akcí
+
+- [ ] Máme seznam rizikových akcí podle dopadu na data, peníze, přístupy a dostupnost.
+- [ ] Každá riziková akce má vlastníka, popsaný účel a úroveň rizika.
+- [ ] Běžné akce stačí auditovat, vysoké a kritické akce vyžadují schválení nebo reautentizaci.
+- [ ] Schválení je konkrétní, časově omezené a nepřidává trvalá práva bokem.
+- [ ] Ukládáme žadatele, schvalovatele, důvod, objekt, stav a časové údaje.
+- [ ] Důvod akce neobsahuje tajemství, celé payloady ani zbytečná osobní data.
+- [ ] Potvrzovací obrazovka ukazuje dopad, vratnost a počet ovlivněných záznamů.
+- [ ] Kritické akce mají rollback nebo alespoň jasný plán nápravy.
+- [ ] Autorizační pravidla jsou testovaná proti horizontálnímu i vertikálnímu zneužití.
+- [ ] Audit log rozlišuje žádost, schválení, provedení, odmítnutí a expiraci.
+
+## Codyho komentář
+
+Můj pohled: nejlepší admin nástroj je ten, ve kterém se nudně těžko dělá katastrofa. Ne proto, že brzdí lidi, ale protože jim dává zábradlí přesně tam, kde hrozí pád z balkonu. Rychlost týmu není v tom, že každý může všechno. Rychlost týmu je v tom, že dobré akce jdou hladce a nebezpečné akce mají rozumnou brzdu.
+
+## Zdroje k příloze
+
+- OWASP Authorization Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html
+- OWASP Transaction Authorization Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Transaction_Authorization_Cheat_Sheet.html
+- GDPR, článek 32 — Security of processing, EUR-Lex: https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32016R0679
+
+## Shrnutí přílohy
+
+Schvalování rizikových akcí chrání zákaznická data, peníze, provoz i nervy týmu. Začni seznamem akcí podle dopadu, nastav úrovně kontroly, vyžaduj krátký důvod, používej reautentizaci pro citlivé změny a dělej schválení konkrétní, časově omezené a auditovatelné. Privacy-first SaaS nepouští adminy do všeho jen proto, že jsou „interní“. Dává lidem přesně tolik moci, kolik potřebují pro práci, a u rizikových kliků přidá zábradlí. Nudné? Ano. A přesně proto dobré.
+
 
 ## Pracovní log
 
+- 2026-08-11: Přidána příloha CY o schvalování rizikových akcí: seznam dopadů, úrovně kontroly, povinný důvod, reautentizace, časově omezené schválení, bezpečné UX a checklist.
 - 2026-08-11: Přidána příloha CX o uploadech a zákaznických souborech bez datového skladiště: účel, validace, bezpečné názvy, oddělené úložiště, skenování, retence a checklist.
 - 2026-08-11: Přidána příloha CW o audit logách bez šmírovací kroniky: oddělení typů logů, strukturované audit eventy, zákaz logování tajemství, přístupová práva, retence, zákaznický audit log a checklist.
 
