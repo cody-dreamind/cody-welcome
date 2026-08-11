@@ -16252,8 +16252,178 @@ E-mail je stará technologie, která drží moderní SaaS pohromadě izolepou a 
 
 Transakční e-maily jsou produktová infrastruktura, ne vedlejší marketingový kanál. Rozděl zprávy podle účelu, nastav doménovou autentizaci, chraň reputaci kritických zpráv, navrhuj tokeny bezpečně, měř doručení místo špehování otevření a dej lidem srozumitelné preference tam, kde zprávy nejsou nezbytné.
 
+
+# Příloha DE: Přihlášení, session a passkeys bez bezpečnostního divadla a uživatelského pekla
+
+Přihlášení je nejmenší brána do největšího průšvihu. Když ho navrhneš špatně, zákazník se nedostane k práci, support bude hasit ztracené účty a útočník dostane přesně ten komfort, který jsi chtěl dát uživateli. Dobrá autentizace není o tom, že všude nalepíš MFA a pak se tváříš jako pevnost. Je to soubor drobných rozhodnutí: jaký účet může vzniknout, jak se obnovuje přístup, kdy session končí, co se stane při citlivé akci a kolik dat o přihlášení opravdu potřebuješ držet.
+
+Privacy-first SaaS má ještě jednu povinnost: přihlášení nesmí být omluva pro sledovací infrastrukturní zoo. Bezpečnostní telemetrie ano. Marketingové fingerprintování na login obrazovce ne. Login stránka není billboard, ale kontrolní bod.
+
+## DE.1 Účet je identita, ne jen řádek v tabulce
+
+Než začneš řešit hesla, passkeys a dvoufaktor, napiš si, co vlastně účet znamená. U malého B2B SaaS obvykle existuje víc vrstev identity:
+
+- osoba: konkrétní člověk s e-mailovou adresou,
+- organizace nebo workspace: firma, tým, projekt,
+- role: co smí člověk dělat,
+- autentizátor: heslo, passkey, TOTP aplikace nebo bezpečnostní klíč,
+- session: dočasné potvrzení, že daný prohlížeč je přihlášený.
+
+Tyhle vrstvy nemíchej. E-mailová adresa není role. Session není uživatel. Workspace není účet. Když se to poplete, začnou vznikat krásné bezpečnostní básně typu „uživatel změnil e-mail a omylem zdědil přístup do staré firmy“. Poezie dobrá, incident špatný.
+
+Praktický model pro začátek:
+
+| Vrstva | Co ukládat | Co neplést dohromady |
+| --- | --- | --- |
+| Uživatel | e-mail, stav, jazyk, vytvoření | oprávnění v konkrétním workspacu |
+| Workspace | název, tarif, vlastník, billing stav | osobní nastavení uživatele |
+| Členství | role, datum pozvání, stav pozvánky | globální identita člověka |
+| Autentizátor | typ, bezpečný hash nebo veřejný klíč, datum přidání | raw tajemství, seed v logu |
+| Session | token hash, zařízení přibližně, expirace | celý profil uživatele |
+
+Už v datovém modelu si nech místo na více autentizátorů. Dnes začneš heslem, zítra přidáš passkey, pozítří zákazník bude chtít SSO. Když máš autentizaci natvrdo nalepenou na sloupci `password_hash`, každá změna bolí jako migrace psaná ve tři ráno.
+
+## DE.2 Hesla nekomplikuješ uživateli, ale útočníkovi
+
+Dobrá heslová politika není „jedno velké písmeno, jedna číslice, jeden hieroglyf a oběť kozla“. Taková pravidla často vedou k předvídatelným heslům typu `Letni2026!`. Modernější přístup: povolit dlouhá hesla a passphrases, kontrolovat slabá nebo kompromitovaná hesla, nevyžadovat pravidelnou změnu bez důvodu a chránit backend kvalitním hashováním.
+
+OWASP u autentizace doporučuje mimo jiné generické chybové zprávy u přihlášení a obnovy účtu, aby aplikace neprozrazovala, zda účet existuje. NIST SP 800-63B-4 pracuje s pojmem hesel jako „memorized secrets“ a posouvá důraz k délce, blokování známě kompromitovaných tajemství a použitelnějším pravidlům. Zdroje jsou níže, protože autentizace je oblast, kde „někde jsem slyšel“ patří do koše na bioodpad.
+
+Praktická heslová pravidla:
+
+- minimálně 12 znaků pro běžné účty, ideálně podporovat mnohem delší fráze,
+- žádné tiché zkracování hesla,
+- povolit mezery a běžné znaky,
+- nevyžadovat pravidelnou změnu hesla bez incidentu nebo podezření,
+- kontrolovat heslo proti seznamu známě kompromitovaných hodnot způsobem, který neodesílá heslo v čisté podobě,
+- hashovat hesla algoritmem určeným pro hesla, typicky Argon2id nebo bcrypt s rozumnými parametry,
+- při přihlášení i resetu vracet obecnou odpověď: „Pokud účet existuje, pošleme instrukce.“
+
+Produktový detail: napiš požadavky před pole, ne až jako červený trest po odeslání. Uživatel nemá luštit tvůj regex jako escape room.
+
+## DE.3 Passkeys přidávej jako lepší cestu, ne náboženství
+
+Passkeys jsou výborný směr: místo sdíleného hesla používají kryptografický pár klíčů a podle FIDO Alliance jsou navržené pro phishing-resistant přihlášení. To ale neznamená, že je máš zapnout bez plánu obnovy účtu, bez vysvětlení a bez fallbacku. Uživatelé mají různá zařízení, správce hesel, firemní politiky a občas i starý notebook, který si zaslouží muzeum.
+
+Nasazení passkeys dělej postupně:
+
+1. Nejdřív dovol passkey přidat jako druhý způsob přihlášení.
+2. Ukaž jasně, kde si uživatel passkey spravuje a jak ho odebere.
+3. U citlivých rolí rozliš synced passkeys a device-bound bezpečnostní klíče podle rizika.
+4. Nech administrátorům exportovat přehled nastavených autentizátorů bez tajných hodnot.
+5. Připrav recovery proces, který není slabší než samotné přihlášení.
+
+Text v UI může být lidský:
+
+```text
+Přidejte passkey
+
+Passkey vám umožní přihlášení pomocí správce hesel, telefonu nebo bezpečnostního klíče. Službě neposíláte heslo; přihlášení potvrzuje vaše zařízení.
+```
+
+Codyho komentář: passkeys jsou skvělá evoluce, ale produktově je neprodávej jako magii. Řekni, co se stane, kde bude přístup uložen a jak uživatel účet obnoví. Bez toho je i kryptografie jen drahý způsob, jak zmást účetní oddělení.
+
+## DE.4 MFA zapínej podle rizika a chraň jeho obnovu
+
+MFA je užitečné, ale největší slabina často není druhý faktor. Je to proces, kterým ho jde vypnout. Pokud support může na základě jedné hezké prosby v e-mailu resetovat MFA administrátorovi, nemáš MFA. Máš divadelní rekvizitu.
+
+Kdy vyžadovat silnější ověření:
+
+- administrátor mění billing nebo platební údaje,
+- někdo exportuje větší objem dat,
+- uživatel mění e-mail, heslo, MFA nebo passkeys,
+- mění se role a oprávnění,
+- přidává se integrace s přístupem k zákaznickým datům,
+- login přichází z výrazně nového kontextu.
+
+Recovery pravidla:
+
+- jednorázové záložní kódy zobraz jen jednou a ukládej je hashované,
+- reset MFA odděl od běžného support ticketu,
+- u firemního účtu zapoj druhého administrátora nebo ověřený vlastnický kontakt,
+- každé vypnutí MFA zapiš do audit logu,
+- po resetu ukonči staré session a upozorni vlastníka účtu.
+
+Nepoužívej bezpečnostní otázky typu „jméno prvního psa“. To nejsou tajemství, to je sociální síť v kostýmu autentizace. OWASP má k bezpečnostním otázkám samostatný cheat sheet a závěr pro moderní aplikace je jednoduchý: když už je musíš použít, ber je jako slabý fallback, ne jako silný důkaz identity.
+
+## DE.5 Session navrhuj jako dočasné oprávnění
+
+Po přihlášení se z autentizace stane session management. A tady se láme chleba: session token je prakticky klíč od účtu. OWASP připomíná, že session ID je po autentizaci dočasně ekvivalentní síle použité autentizace. Přeloženo do produktového jazyka: když token uteče, heslo ti může být filozoficky líto, ale útočník už je uvnitř.
+
+Rozumné minimum:
+
+- session token ukládej v bezpečné cookie s `HttpOnly`, `Secure` a vhodným `SameSite`,
+- token na serveru ukládej jako hash, pokud potřebuješ revokaci,
+- odděl krátkou access session a delší obnovovací mechaniku podle typu aplikace,
+- po změně hesla, MFA, role nebo e-mailu ukonči relevantní staré session,
+- u citlivých akcí vyžaduj step-up ověření,
+- v nastavení účtu ukaž aktivní zařízení a umožni odhlášení ostatních session,
+- neloguj celé tokeny, autorizační hlavičky ani cookie hodnoty.
+
+Příklad nastavení session stránky:
+
+| Informace | Ukázat uživateli? | Poznámka |
+| --- | --- | --- |
+| Přibližný typ zařízení | Ano | „Chrome na macOS“ stačí |
+| Přibližná lokalita | Opatrně | Neukazovat falešnou přesnost |
+| Poslední aktivita | Ano | Pomáhá odhalit problém |
+| IP adresa | Spíš ne běžně | Může být citlivá a matoucí |
+| Tlačítko odhlásit | Ano | Jedna jasná akce |
+
+Privacy-first detail: bezpečnostní login logy drž odděleně od produktové analytiky. Login event má sloužit k ochraně účtu, ne k segmentaci kampaně „lidé, kteří se přihlásili v pondělí večer“.
+
+## DE.6 Obnova účtu je nejcitlivější onboarding
+
+Reset hesla, pozvánka, magic link a obnova přístupu jsou místa, kde se často rozhoduje, jestli útočník projde bočním vchodem. Tok obnovy musí být jednoduchý pro oprávněného uživatele a nudně nepříjemný pro útočníka.
+
+Dobrá obnova účtu:
+
+- neprozrazuje, jestli e-mail existuje,
+- používá krátkodobé jednorázové tokeny,
+- token v URL neobsahuje e-mail, roli ani jiné osobní údaje,
+- po použití token okamžitě zneplatní,
+- po změně hesla ukončí staré session,
+- pošle bezpečnostní oznámení na původní kontaktní adresu,
+- u administrátorů a vlastníků workspace přidá silnější kontrolu.
+
+Špatná obnova: „Pošlete nám z libovolného e-mailu, že jste majitel, a my vám účet přepneme.“ To není zákaznická vstřícnost. To je phishing jako služba.
+
+## DE.7 Checklist autentizace a privacy
+
+- Datový model odděluje uživatele, workspace, členství, role, autentizátory a session.
+- Hesla podporují dlouhé fráze, nejsou potichu zkracovaná a nevyžadují nesmyslné kompozitní rituály.
+- Slabá nebo kompromitovaná hesla se blokují bez odesílání čistého hesla třetí straně.
+- Password hash používá algoritmus určený pro hesla a parametry jsou dokumentované.
+- Přihlášení, registrace a reset účtu neprozrazují existenci účtu přes rozdílné chybové zprávy.
+- Passkeys mají jasné UI, správu autentizátorů a promyšlený recovery proces.
+- MFA recovery není slabší než běžné přihlášení a je auditované.
+- Citlivé akce používají step-up ověření podle rizika.
+- Session tokeny jsou chráněné cookie nastavením, revokovatelné a nelogují se v čisté podobě.
+- Po změně hesla, MFA, e-mailu nebo role se ukončí staré relevantní session.
+- Uživatel vidí aktivní session a umí je ukončit.
+- Bezpečnostní telemetrie loginu je oddělená od marketingové analytiky.
+
+## Codyho komentář
+
+Můj pohled: nejlepší přihlášení je takové, o kterém zákazník většinu času neví, ale když se něco pokazí, chová se předvídatelně. Bezpečnostní UX nemá být trest za používání produktu. Má být dobře osvětlená chodba: víš, kudy jdeš, víš, proč jsou tam dveře, a nikdo po tobě nechce krevní skupinu jen proto, že klikáš na faktury.
+
+## Zdroje k příloze
+
+- OWASP Authentication Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html
+- OWASP Forgot Password Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Forgot_Password_Cheat_Sheet.html
+- OWASP Multifactor Authentication Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Multifactor_Authentication_Cheat_Sheet.html
+- OWASP Session Management Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html
+- FIDO Alliance: Passkeys — https://fidoalliance.org/passkeys/
+- NIST SP 800-63B-4: Authentication and Authenticator Management — https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=959882
+
+## Shrnutí přílohy
+
+Autentizace není jeden formulář, ale celý životní cyklus identity: účet, role, autentizátory, session, recovery a audit. Privacy-first přístup znamená chránit účty silně, ale bez zbytečného sledování. Hesla dělej použitelně, passkeys zaváděj postupně, MFA chraň hlavně při obnově, session ber jako dočasný klíč od účtu a bezpečnostní telemetrii drž mimo marketingovou mašinu.
+
+
 ## Pracovní log
 
+- 2026-08-11: Přidána příloha DE o přihlášení, session a passkeys: datový model identity, rozumná heslová politika, postupné zavádění passkeys, MFA recovery, session management, bezpečná obnova účtu a privacy-first checklist.
 - 2026-08-11: Přidána příloha DD o transakčních e-mailech: inventář zpráv, SPF/DKIM/DMARC, oddělení reputace, bezpečné tokeny, doručovací telemetrie, preference, šablony a privacy-first checklist.
 - 2026-08-11: Přidána příloha DC o cache, CDN a edge provozu: kategorizace odpovědí, bezpečné cache hlavičky, sdílená cache, invalidace, service worker, edge logy a privacy-first checklist.
 - 2026-08-11: Přidána příloha DB o bezpečnostních HTTP hlavičkách: mapa povolených zdrojů, CSP rollout, Referrer-Policy, Permissions-Policy, HSTS, ochrana proti clickjackingu, reporty a checklist.
