@@ -17808,10 +17808,185 @@ Vyhledávání je jedna z těch funkcí, kde se dá krásně poznat vyspělost p
 
 Vyhledávání a filtry nejsou jen pohodlnost v UI. Jsou to místa, kde se rozhoduje o oprávnění, výkonu, logování a důvěře. Privacy-first SaaS hledá jen v povoleném rozsahu, chrání dotazy před injekcemi, ukládá spíš agregované signály než raw lidské vstupy a navrhuje prázdné stavy tak, aby pomáhaly bez prozrazování cizích dat.
 
+# Příloha DO: Produktové notifikace bez spamového kulometu, skrytých trackerů a podpůrného pekla
+
+Notifikace jsou zvláštní druh produktové moci. Umí zachránit fakturu před splatností, upozornit na incident, připomenout rozpracovanou akci nebo vrátit člověka k hodnotě produktu. Stejně snadno ale umí zničit důvěru: pípají v nevhodný čas, posílají osobní údaje do e-mailu, tlačí uživatele do aplikace jako hladový prodejce matrací a ještě se tváří jako „engagement“.
+
+Privacy-first notifikace neznamenají, že produkt mlčí jako server bez monitoringu. Znamenají, že každá zpráva má jasný účel, správný kanál, minimální obsah, férové preference a měřitelný přínos bez sledovacích triků. Pokud notifikace nepotřebuje uživatel, ale jen metrika aktivace, pravděpodobně to není notifikace. Je to marketing v reflexní vestě.
+
+## DO.1 Každá notifikace musí mít vlastní důvod existence
+
+Než začneš řešit šablonu, zvuk, ikonku nebo barvu badge, napiš jednu větu: „Posíláme tuto notifikaci, protože uživatel potřebuje udělat X, aby se nestalo Y.“ Když věta nejde napsat bez mlhy, notifikaci nemačkej do produktu.
+
+Rozděl notifikace podle hodnoty:
+
+| Typ | Příklad | Kdy poslat | Kdy neposílat |
+| --- | --- | --- | --- |
+| Bezpečnostní | nové přihlášení, změna hesla | vždy při rizikové změně | jako marketingový háček |
+| Provozní | výpadek integrace, selhaný import | když uživatel může něco udělat | při interní chybě bez dopadu |
+| Transakční | faktura, potvrzení objednávky | po konkrétní akci nebo smluvní události | s reklamním balastem navíc |
+| Produktová | čeká schválení, blíží se deadline | když brání ztrátě práce nebo času | jen kvůli návratu do aplikace |
+| Edukační | nový checklist po onboardingu | v kontextu cíle uživatele | jako nekonečná akademie v inboxu |
+
+Praktická otázka pro každou zprávu: „Co se zhorší, když tuto notifikaci nepošleme?“ Pokud odpověď zní „klesne nám otevřenost“, problém není uživatel. Problém je tvoje potřeba pálit signály do tmy.
+
+## DO.2 Kanál vybírej podle naléhavosti, ne podle pohodlí týmu
+
+E-mail je dobrý pro auditovatelnou stopu a méně urgentní věci. In-app notifikace jsou dobré pro kontext v produktu. Push je dobrý pro opravdu časově citlivé události. SMS je nouzový kanál, ne univerzální palička. Slack nebo Teams integrace dává smysl u týmových provozních signálů, ale jen pokud zákazník vědomě zapojí konkrétní workspace.
+
+Jednoduché pravidlo:
+
+- **Okamžitě:** bezpečnostní riziko, selhání kritické platby, produkční incident, akce s krátkým termínem.
+- **V pracovním rytmu:** schválení, komentáře, úkoly, týdenní souhrn, import hotový.
+- **Jen v aplikaci:** tipy, onboardingové kroky, návrhy zlepšení, nízká urgence.
+- **Nikdy automaticky:** obchodní upsell zabalený jako systémové upozornění.
+
+Příklad špatně:
+
+```text
+Push 22:43: „Dokončete nastavení profilu a získejte víc z aplikace!“
+```
+
+Příklad lépe:
+
+```text
+In-app při příštím přihlášení: „Chybí fakturační e-mail. Bez něj nedoručíme daňové doklady. Doplnit trvá 20 sekund.“
+```
+
+Kanál je součást slibu. Pokud uživatel povolí bezpečnostní e-maily, neznamená to, že chce newsletter. Pokud povolí push pro incidenty, neznamená to, že mu máš posílat oslavné konfety pokaždé, když někdo klikne na tlačítko.
+
+## DO.3 Obsah notifikace piš jako bezpečný náhled, ne jako datový vývoz
+
+Notifikace často končí mimo bezpečný kontext aplikace: v e-mailové schránce, na zamčené obrazovce telefonu, v týmovém chatu nebo v přeposlaném vlákně. Proto do nich nepatří plný obsah citlivého záznamu, interní poznámky, osobní údaje navíc ani tajné tokeny s dlouhou životností.
+
+Bezpečný vzor:
+
+```text
+Předmět: Čeká vás schválení nabídky
+Text: V projektu „Web klienta A“ čeká nová nabídka ke kontrole. Otevřít schválení: [přihlášení do aplikace]
+```
+
+Rizikový vzor:
+
+```text
+Předmět: Jan Novák odmítl nabídku 248 000 Kč kvůli interní poznámce „dražší než konkurence“
+Text: celé vlákno komentářů + neveřejný odkaz bez expirace
+```
+
+Minimum pro obsah:
+
+- Uveď typ události, ne celý citlivý obsah.
+- Zobraz jen tolik detailu, aby uživatel poznal další krok.
+- Citlivé akce směruj do aplikace za přihlášením.
+- Odkazy s tokenem dělej krátkodobé, jednorázové a auditované.
+- Do předmětu e-mailu nedávej osobní nebo obchodně citlivá data, pokud to není nezbytné.
+
+U GDPR platí pořád stejný nudný, ale užitečný refrén: zpracování má být přiměřené účelu a omezené na potřebná data. Evropská komise shrnuje principy GDPR včetně minimalizace, účelového omezení a transparentnosti tady: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en
+
+## DO.4 Preference centrum je produktová funkce, ne právní sklep
+
+Dobré preference centrum neříká jen „souhlasím / nesouhlasím“. Umožní člověku rozumně řídit, co dostává, kam a jak často. Hlavně odděl systémové zprávy, bezpečnostní zprávy, produktové notifikace a marketing. Smíchat všechno do jednoho checkboxu je pohodlné pro vývojáře, ale mizerné pro důvěru.
+
+Příklad kategorií:
+
+| Kategorie | Kanály | Výchozí stav | Poznámka |
+| --- | --- | --- | --- |
+| Bezpečnost účtu | e-mail | zapnuto | vypnutí jen velmi opatrně, často vůbec |
+| Fakturace | e-mail | zapnuto | nutné pro smluvní vztah |
+| Týmové akce | e-mail, in-app, souhrn | podle role | uživatel volí frekvenci |
+| Produktové tipy | in-app, e-mail | volitelné | žádné maskování jako systémová zpráva |
+| Marketing | e-mail | opt-in | oddělené od produktu |
+
+Preference musí být stejně snadné změnit jako zapnout. U e-mailů přidej přímý odkaz na preference nebo odhlášení tam, kde dává smysl. U in-app notifikací umožni vypnout konkrétní typy, ne jen „vypnout všechno a pak se divit, že uživatel neví o deadlinech“.
+
+## DO.5 Frekvenci řeš digestem, prioritou a tichým časem
+
+Spam často nevznikne ze zlé vůle. Vznikne tak, že deset malých funkcí pošle každá „jen jednu drobnou zprávu“. Výsledek: uživatel dostane dvacet e-mailů, vypne všechno a podpora pak řeší, proč neviděl důležité upozornění.
+
+Použij tři brzdy:
+
+1. **Digest:** méně urgentní události spoj do denního nebo týdenního souhrnu.
+2. **Priorita:** kritické zprávy posílej hned, běžné jen v pracovním rytmu.
+3. **Quiet hours:** respektuj časové pásmo a firemní režim, pokud ho znáš.
+
+Příklad pravidla:
+
+```text
+Komentáře v projektu:
+- zmínka @uživatel: hned in-app + volitelně e-mail
+- běžný komentář ve sledovaném vlákně: digest za 30 minut
+- nízká aktivita v projektu: týdenní souhrn
+```
+
+Důležité: digest není odpadkový koš. Má mít jasnou strukturu, odkazy na konkrétní akce a možnost upravit frekvenci.
+
+## DO.6 Měření notifikací nedělej přes pixelovou špionáž
+
+U notifikací chceš vědět, jestli pomáhají. Nepotřebuješ kvůli tomu sledovat každý otevřený e-mail přes neviditelný pixel a kombinovat to s fingerprintem zařízení. U e-mailů navíc technické měření otevření bývá nepřesné kvůli blokování obrázků, proxy a ochranným funkcím klientů. A privacy-first produkt nemá stavět rozhodování na metrice, která je zároveň otravná, nepřesná a právně citlivá. To je hezký hattrick, ale ne ten dobrý.
+
+Měř raději akci po notifikaci:
+
+- doručení / bounce pro technickou spolehlivost,
+- klik na bezpečný odkaz nebo otevření relevantní obrazovky,
+- dokončení cílové akce,
+- počet vypnutí konkrétního typu notifikace,
+- počet support ticketů typu „nevěděl jsem o tom“.
+
+Pokud notifikace používá web push, lokální úložiště, identifikátory zařízení nebo podobné techniky, mysli na ePrivacy pravidla. EDPB v pokynech k technickému rozsahu čl. 5 odst. 3 ePrivacy směrnice řeší ukládání informací nebo přístup k informacím v koncovém zařízení uživatele, včetně modernějších technických scénářů: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-22023-technical-scope-art-53-eprivacy-directive_en
+
+Prakticky: nepotřebuješ maximalizovat sledování. Potřebuješ vědět, jestli zpráva vedla k užitečnému kroku. To jde často měřit serverově, agregovaně a s kratší retencí.
+
+## DO.7 Stavový model chrání před duplicitami a trapasy
+
+Notifikace by neměla být vedlejší efekt rozesetý po kódu jako konfety po firemním večírku. Měj stavový model: co se stalo, kdo má být informován, jaký kanál se použil, jestli už zpráva odešla, jestli se má znovu zkusit a kdy už je pozdě.
+
+Minimální schéma:
+
+| Pole | Proč existuje |
+| --- | --- |
+| `event_type` | rozlišuje typ události |
+| `tenant_id` | izolace zákazníka |
+| `recipient_id` | příjemce podle oprávnění |
+| `channel` | e-mail, in-app, push, webhook |
+| `template_version` | audit změn textu |
+| `dedupe_key` | ochrana proti duplicitám |
+| `status` | pending, sent, failed, suppressed |
+| `expires_at` | staré notifikace se neposílají |
+
+Stavy `suppressed` a `expired` jsou důležité. Když uživatel vypnul daný typ zprávy, když role ztratila oprávnění nebo když událost přestala být relevantní, zprávu neposílej. Není nic krásnějšího než e-mail „čeká vás schválení“, které už někdo před dvěma dny zamítl. Krásnější ve smyslu „prosím už ne“.
+
+## DO.8 Checklist produktových notifikací
+
+- Má každá notifikace jasný účel, příjemce a očekávaný další krok?
+- Jsou systémové, bezpečnostní, produktové a marketingové zprávy oddělené?
+- Je kanál zvolený podle naléhavosti a očekávání uživatele?
+- Neobsahuje předmět nebo náhled citlivá data, která patří až za přihlášení?
+- Má uživatel preference podle typu zprávy, kanálu a frekvence?
+- Spojují se méně urgentní události do digestu místo e-mailové brokovnice?
+- Měří se úspěch přes relevantní akce, ne přes skryté trackery?
+- Má rozesílání deduplikaci, expiraci, retry pravidla a auditovatelný stav?
+- Respektují notifikace role, tenant izolaci a dočasná oprávnění?
+- Existuje měsíční review typů zpráv, vypnutí, stížností a support signálů?
+
+## Codyho komentář
+
+Notifikace jsou produktová konverzace, ne siréna. Když je navrhneš s respektem, uživatel má pocit, že produkt drží hlídku. Když je navrhneš pro metriky, uživatel má pocit, že ho někdo tahá za rukáv v tramvaji. A víš co? V tramvaji nikdo nechce SaaS onboarding.
+
+## Zdroje k příloze
+
+- Evropská komise — principy GDPR a podmínky zpracování osobních údajů: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en
+- Evropská komise — právní důvody pro zpracování dat: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/legal-grounds-processing-data_en
+- EDPB — Guidelines 2/2023 on Technical Scope of Art. 5(3) of ePrivacy Directive: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-22023-technical-scope-art-53-eprivacy-directive_en
+
+## Shrnutí přílohy
+
+Produktové notifikace mají pomáhat člověku udělat správný krok ve správný čas. Proto potřebují jasný účel, rozumný kanál, bezpečný obsah, preference, frekvenční brzdy, měření bez skrytých trackerů a stavový model s deduplikací. Privacy-first přístup tu není brzda růstu. Je to filtr proti tomu, aby se z užitečného produktu stal ukecaný automat na rušení klidu.
+
 ---
 
 ## Pracovní log
 
+- 2026-08-12: Přidána příloha DO o produktových notifikacích: účel zpráv, volba kanálu, bezpečný obsah, preference centrum, digesty, měření bez pixelů, stavový model a privacy-first checklist.
 - 2026-08-12: Přidána příloha DN o vyhledávání a filtrování v SaaS: rozsah hledání, serverová oprávnění, bezpečné dotazy, search logy, prázdné výsledky, filtry, výkon a checklist.
 - 2026-08-11: Přidána příloha DM o platbách, fakturaci a předplatném: jasná cena, DPH/OSS, karetní data mimo vlastní databázi, SCA, faktury, férové rušení a checklist.
 - 2026-08-11: Přidána příloha DL o dashboardech a provozních metrikách bez vanity tabulek: rozhodovací metriky, agregace, kontext, přístupy a privacy-first checklist.
