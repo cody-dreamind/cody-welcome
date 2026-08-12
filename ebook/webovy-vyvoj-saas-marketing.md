@@ -20921,7 +20921,200 @@ Interní admin je místo, kde se pozná skutečná kultura firmy. Veřejný web 
 - Impersonace má být časově omezená výjimka, ne běžný pracovní režim supportu.
 - Dobré admin UX chrání zákazníky i interní tým před unaveným kliknutím vedle.
 
+
+# Příloha EI: Importy a migrace dat bez CSV hororu, duplicit a tichého rozbití důvěry
+
+Import dat vypadá jako nudná technická funkce, dokud zákazník nepřinese tabulku z minulého systému, export z účetnictví, seznam kontaktů z CRM a větu „ono to nějak napárujte“. V tu chvíli už nejde jen o parser. Jde o důvěru: zákazník ti dává svoje pracovní dějiny v souboru, který často obsahuje víc citlivých údajů, než by kdokoli chtěl přiznat u pondělní kávy.
+
+Privacy-first import proto nezačíná tlačítkem „Nahrát CSV“. Začíná slibem: co přesně přijímáme, co odmítneme, co uložíme, co zahodíme a jak zákazník pozná, že migrace proběhla správně. Bez toho je import jen elegantní cesta, jak si do aplikace přinést cizí bordel a tvářit se, že je to onboarding.
+
+## EI.1 Import musí mít smlouvu se zákazníkem i se systémem
+
+Každý import potřebuje jasný kontrakt. Ne právnický traktát, ale obyčejnou dohodu mezi uživatelem, produktem a databází.
+
+Kontrakt říká:
+
+- jaké formáty souborů podporuješ,
+- jaké sloupce jsou povinné,
+- jaké hodnoty systém umí převést,
+- co se stane s neznámými poli,
+- jak řešíš duplicity,
+- jak dlouho držíš původní soubor,
+- jestli import jde vrátit zpět.
+
+Praktický příklad: pokud SaaS importuje zákazníky, nestačí napsat „Nahrajte CSV“. Lepší je nabídnout šablonu:
+
+```text
+company_name,email,phone,vat_id,owner_email,notes
+Dreamind,sales@example.cz,+420...,CZ12345678,ondrej@example.cz,"Volitelná poznámka"
+```
+
+A hned vedle vysvětlit:
+
+- `company_name` je povinné,
+- `email` musí být unikátní v rámci workspace,
+- `notes` jsou volitelné a nedoporučuje se do nich dávat rodná čísla, hesla ani interní tajemství,
+- neznámé sloupce se před importem zobrazí a defaultně se neuloží.
+
+Tahle malá tabulka ušetří víc supportu než třístránková nápověda. A ano, zároveň zabrání tomu, aby někdo do poznámky vložil „heslo k serveru je…“. Lidé jsou kreativní. Bohužel i v CSV.
+
+## EI.2 Udělej tříkrokový import: nahrát, zkontrolovat, potvrdit
+
+Nejhorší import je ten, který po nahrání rovnou zapisuje do produkce. Uživatel si spletl soubor? Špatně nastavené kódování? Sloupec „firma“ se spároval na „poznámka“? Gratuluji, právě sis vyrobil archeologickou práci na odpoledne.
+
+Bezpečnější vzor je:
+
+1. **Nahrát soubor** — systém ho uloží do dočasného bezpečného prostoru a spustí validaci.
+2. **Zkontrolovat náhled** — uživatel vidí počet řádků, chyby, duplicitní záznamy a mapování polí.
+3. **Potvrdit import** — teprve potom se data zapíšou do produkčních tabulek.
+
+V náhledu ukaž hlavně rozhodovací informace:
+
+- „Celkem 1 240 řádků“
+- „1 198 připraveno k importu“
+- „31 duplicit podle e-mailu“
+- „11 řádků chybí povinný název firmy“
+- „Sloupec `private_note` nebude importován“
+
+Nepotřebuješ ukázat celý soubor. Stačí vzorek a agregace. Privacy-first detail: náhled by neměl zbytečně zobrazovat citlivá pole všem adminům jen proto, že je importní obrazovka technicky umí přečíst.
+
+## EI.3 Validace má být přátelská, ale tvrdá
+
+Importní validace není místo pro „nějak to projde“. Když data nejsou jednoznačná, systém má import zastavit nebo dát uživateli jasnou volbu.
+
+Dobré validační chyby vypadají takto:
+
+- „Řádek 42: e-mail `info@firma` nemá platný formát.“
+- „Řádek 88: měna `Kč` není podporovaná. Použijte `CZK`.“
+- „Řádek 103: firma `Novák s.r.o.` už existuje. Vyberte sloučit / přeskočit / vytvořit jako nový záznam.“
+
+Špatné chyby vypadají takto:
+
+- „Import failed.“
+- „Invalid row.“
+- „Něco se pokazilo.“
+
+To třetí je mimochodem český národní sport v aplikacích. Ale u importu je to supportový granát bez pojistky.
+
+Praktický trik: připrav soubor s chybami ke stažení. Uživatel dostane původní řádky plus sloupec `import_error`. Může opravit jen problematické části, nemusí luštit abstraktní log. Pozor ale: tento chybový export je také datový export, takže musí mít stejná pravidla přístupu a expirace jako původní import.
+
+## EI.4 Duplicity řeš pravidlem, ne náladou
+
+Duplicity jsou u migrací normální. Chyba není duplicita. Chyba je, když systém tajně rozhodne, co je „asi stejný zákazník“.
+
+Před importem si napiš pravidlo identity:
+
+| Objekt | Primární shoda | Sekundární shoda | Výchozí akce |
+|---|---|---|---|
+| Uživatel | e-mail v rámci workspace | externí ID | přeskočit a nahlásit |
+| Firma | IČO / VAT ID | normalizovaný název + země | nabídnout sloučení |
+| Faktura | externí ID + dodavatel | číslo faktury + datum | zastavit řádek |
+| Produkt | SKU | název + varianta | vytvořit nový návrh |
+
+U každého pravidla si řekni, co je horší:
+
+- vytvořit duplicitní záznam,
+- omylem sloučit dvě různé věci,
+- import zastavit a nechat rozhodnout člověka.
+
+U citlivých nebo účetních dat je skoro vždy lepší zastavit řádek než hádat. U marketingových tagů můžeš být tolerantnější. Ale i tam platí: zákazník má vědět, co se stalo.
+
+## EI.5 Původní soubor nedrž navždy
+
+Importní soubor často obsahuje všechno: zákazníky, interní poznámky, historii obchodů, telefonní čísla, adresy, někdy i sloupce, které do nového systému vůbec nepatří. Pokud ho uložíš „pro jistotu“ bez retence, vytvořil jsi datovou skládku s hezkým názvem `uploads/imports/`.
+
+Doporučený privacy-first režim:
+
+- původní soubor drž jen po dobu validace a krátké reklamační lhůty,
+- po úspěšném importu ho automaticky smaž nebo anonymizuj,
+- do audit logu ulož metadata, ne celý soubor,
+- do dlouhodobé historie ukládej jen souhrn: kdo import spustil, kdy, kolik řádků, výsledek, verze mapování,
+- chybové exporty nech expirovat stejně jako importní soubor.
+
+Příklad metadat:
+
+```text
+import_id: imp_2026_08_12_001
+workspace_id: ws_123
+actor_id: usr_456
+source_filename_hash: 8f4c...
+rows_total: 1240
+rows_created: 1170
+rows_updated: 28
+rows_skipped: 42
+mapping_version: customers_csv_v3
+original_file_deleted_at: 2026-08-19T10:15:00Z
+```
+
+Hash názvu souboru většinou stačí. Plný název typu `VIP klienti dluhy a interní poznámky FINAL opravdu final.csv` si do logu ukládat nechceš. Jednak je to trapné, jednak to může být citlivé.
+
+## EI.6 Migraci spusť jako job, ne jako dlouhý request
+
+Malý import může projít v HTTP requestu. Větší import patří do background jobu. Ne kvůli módní architektuře, ale kvůli kontrole.
+
+Job ti umožní:
+
+- ukázat průběh,
+- bezpečně opakovat nezapsané části,
+- zastavit import při chybě,
+- oddělit validaci od zápisu,
+- logovat souhrn bez ukládání celého obsahu,
+- zabránit timeoutům a polovičním stavům.
+
+Každý importní job by měl mít stavy:
+
+```text
+uploaded -> validating -> waiting_for_confirmation -> importing -> completed
+uploaded -> validating -> failed
+importing -> partially_completed
+importing -> rolled_back
+```
+
+Pokud podporuješ rollback, napiš přesně co vracíš zpět. Smazat nově vytvořené řádky je jednodušší než vrátit sloučené záznamy do původního stavu. U složitých migrací proto raději používej „dry run“ a potvrzení než slib „všechno jde vrátit“. Sliby bez mechaniky jsou jen marketing v montérkách.
+
+## EI.7 Importní oprávnění odděl od běžné editace
+
+Kdo může editovat jeden kontakt, nemusí mít právo nahrát tisíc kontaktů. Import je hromadná změna a zaslouží si vlastní oprávnění.
+
+Minimum:
+
+- `can_import_customers`,
+- `can_confirm_import`,
+- `can_download_import_errors`,
+- `can_view_import_history`,
+- `can_delete_import_file`.
+
+U menší aplikace to nemusí být pět viditelných checkboxů. Stačí role „Owner“ a „Admin“. Ale v kódu i auditu musí být jasné, že import není obyčejná editace.
+
+Příklad rozumné brzdy: uživatel s právem importovat nahraje soubor, ale import nad 10 000 řádků musí potvrdit druhý admin. Ne proto, že milujeme byrokracii. Protože hromadná chyba je pořád hromadná chyba, i když má krásný progress bar.
+
+## EI.8 Checklist privacy-first importu a migrace
+
+Před spuštěním importu:
+
+- [ ] Máme šablonu souboru a popis podporovaných sloupců.
+- [ ] Uživatel vidí, které sloupce se uloží a které se zahodí.
+- [ ] Import má náhled, validaci a potvrzení před zápisem.
+- [ ] Chybové zprávy jsou konkrétní a opravitelné.
+- [ ] Duplicity mají předem popsané pravidlo.
+- [ ] Původní soubor má retenční dobu a automatické smazání.
+- [ ] Chybové exporty mají expiraci a oprávnění.
+- [ ] Import běží jako job, pokud může trvat déle nebo měnit hodně dat.
+- [ ] Audit log ukládá metadata, ne celý obsah souboru.
+- [ ] Hromadné importy mají samostatné oprávnění nebo dodatečné potvrzení.
+- [ ] Existuje „dry run“ nebo aspoň bezpečný náhled výsledku.
+- [ ] Support ví, jak zákazníkovi vysvětlit stav importu bez posílání dat přes chat.
+
+## Codyho komentář
+
+Import je jedna z těch funkcí, které se v roadmapě tváří jako „jen parser“. Ve skutečnosti je to přestěhování zákazníkovy firmy do tvého produktu. Když to pokazíš, neztratíš jen řádky v databázi. Ztratíš pocit, že se na tebe dá spolehnout. A ten se obnovuje hůř než špatně naimportované CSV.
+
+## Shrnutí přílohy
+
+Privacy-first import má jasný kontrakt, náhled před zápisem, tvrdou validaci, pravidla pro duplicity, krátkou retenci původních souborů, bezpečný background job a samostatná oprávnění. Cílem není podporovat každý divoký formát z internetu. Cílem je převést zákaznická data tak, aby zákazník věděl, co se stalo, systém zůstal konzistentní a importní soubory se nestaly trvalým datovým skladištěm.
+
 ## Pracovní log
+- 2026-08-12: Přidána příloha EI o importech a migracích dat: importní kontrakt, náhled před zápisem, validace, duplicity, retence souborů, background joby, oprávnění a checklist.
 - 2026-08-12: Přidána příloha EH o interních nástrojích a admin rozhraní: úkolová mapa, role podle rizika, citlivé akce, exporty, impersonace, bezpečné admin UX a checklist.
 - 2026-08-12: Přidána příloha EG o privacy-first zákaznickém výzkumu: výzkumné otázky, rozhovory, dotazníky, anonymizace poznámek, převod insightů do rozhodnutí a checklist.
 - 2026-08-12: Přidána příloha EF o produktových rozhodnutích bez HIPPO diktátu: rozhodovací karta, roadmapa včetně odmítnutých nápadů, datový náklad funkcí, meetingový rytmus a checklist.
