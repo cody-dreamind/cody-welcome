@@ -19615,7 +19615,156 @@ Forenzní stopa je nudná disciplína, dokud není nejdůležitější část sy
 Forenzní stopa má zachytit významné změny a bezpečnostní signály v systému, ne nahrávat každý nádech uživatele. Privacy-first přístup znamená jasný seznam událostí, minimální metadata, žádná tajemství v logu, rozumnou retenci, omezené přístupy a čitelný pohled pro support i zákazníka. Když se něco pokazí, dobrá forenzní stopa pomůže rekonstruovat realitu. Špatná forenzní stopa jen přidá další incident do incidentu. To je efektivita, kterou nikdo nechtěl.
 
 
+# Příloha EA: Secrets, konfigurace a provozní tajemství bez `.env` archeologie, tokenů v chatu a rotace na svatého Nikdy
+
+Tajné klíče v malém SaaS týmu často začnou nevinně: jeden `.env` soubor, jeden API token v CI, jeden sdílený přístup k platební bráně a jedna poznámka v interním chatu. Pak přijde nový člověk, staging, externí integrace, webhooky, zákaznický import, incident — a najednou nikdo neví, který token co umí, kdo ho má, kdy se naposledy měnil a co se rozbije, když ho konečně vypneme.
+
+Secrets nejsou jen hesla. Patří sem API klíče, databázové connection stringy, privátní klíče, OAuth client secrets, webhook signing secrets, SMTP hesla, tokeny pro CI/CD, přístupové certifikáty, šifrovací klíče, servisní účty i obnovovací tokeny. OWASP ve svém Secrets Management Cheat Sheet doporučuje řídit celý životní cyklus secrets: vytvoření, rotaci, revokaci a expiraci, včetně metadat o účelu, vlastníkovi a použití: https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html
+
+## EA.1 Nejdřív rozděl konfiguraci od tajemství
+
+Ne všechno v `.env` je secret. `APP_URL`, `FEATURE_BILLING_ENABLED` nebo `PUBLIC_SUPPORT_EMAIL` jsou konfigurace. `DATABASE_URL`, `STRIPE_SECRET_KEY`, `SMTP_PASSWORD` nebo `WEBHOOK_SIGNING_SECRET` jsou tajemství. Když to smícháš do jedné hromady, tým začne buď chránit všechno tak přísně, že se s tím nedá pracovat, nebo naopak posílat citlivé hodnoty jako obyčejnou konfiguraci. Obě cesty jsou tak trochu bezpečnostní karaoke: hodně zvuku, málo kontroly.
+
+Praktické členění:
+
+| Typ hodnoty | Příklad | Kam patří | Jak s tím zacházet |
+| --- | --- | --- | --- |
+| Veřejná konfigurace | `PUBLIC_APP_NAME`, `SUPPORT_EMAIL` | repozitář, dokumentace, CI proměnné | může být vidět, ale má mít vlastníka |
+| Interní konfigurace | `INVOICE_DUE_DAYS`, `JOB_BATCH_SIZE` | konfigurační systém, CI/CD | není secret, ale změna má být auditovatelná |
+| Provozní secret | `DATABASE_URL`, `REDIS_PASSWORD` | secret manager nebo chráněné env vars | minimální přístup, rotace, žádné logování |
+| Integrační secret | API klíč platební brány, SMTP heslo | secret manager, vendor vault | scope jen na nutnou akci, oddělit prod/staging |
+| Kryptografický klíč | podpis tokenů, šifrování exportů | key management systém | plán rotace, omezené použití, přísnější audit |
+
+Minimální pravidlo: do repozitáře patří šablona, ne hodnota. Měj `.env.example`, kde je název proměnné, účel, ukázkový formát a poznámka, kdo hodnotu vydává. Skutečný `.env` patří do lokálního prostředí a produkční secrets do spravovaného úložiště, ne do Slacku, Telegramu, ticketu ani screenshotu.
+
+## EA.2 Každý secret musí mít kartu vlastníka
+
+Největší problém secrets není technický. Je organizační. Token bez vlastníka je jako klíč od skladu, který někdo našel v šuplíku: možná je důležitý, možná ne, ale nikdo si netroufne ho zahodit. Proto každý důležitý secret potřebuje malou kartu.
+
+Šablona karty:
+
+```text
+Název: PAYMENTS_WEBHOOK_SIGNING_SECRET
+Účel: Ověření webhooků z platební brány pro produkční billing.
+Prostředí: production
+Vlastník: billing maintainer
+Kde je uložen: produkční secret manager / hosting env vars
+Kdo ho smí číst: žádný běžný uživatel, jen správce infrastruktury
+Kdo ho smí použít: billing API service
+Scope u dodavatele: pouze webhook signing pro konkrétní endpoint
+Rotace: každých 12 měsíců nebo po incidentu / změně dodavatele / odchodu správce
+Dopad rotace: nutné dočasně přijímat starý i nový podpis
+Test rotace: staging webhook + produkční canary event
+Nouzové vypnutí: deaktivovat webhook endpoint a přepnout billing do ruční kontroly
+```
+
+Karta nemusí být román. Musí ale odpovědět na tři otázky: proč secret existuje, kdo za něj ručí a co se stane při rotaci nebo kompromitaci. OWASP výslovně doporučuje držet metadata o tom, kdy byl secret vytvořen, použit, archivován, rotován či smazán, kdo to udělal a k čemu secret slouží: https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html
+
+## EA.3 Produkce, staging a lokál nesmí sdílet stejné klíče
+
+Jedna z nejdražších zkratek je použít produkční token i ve stagingu, protože „to jen testujeme“. Staging bývá méně chráněný, má víc experimentů, víc externích přístupů a častěji se v něm debugguje. Pokud tam žije produkční secret, staging už není testovací prostředí. Je to produkce v tričku s nápisem „neřeš mě“.
+
+Doporučení pro malý tým:
+
+- Pro každé prostředí měj samostatné secrets: lokál, preview, staging, production.
+- U dodavatelů používej oddělené projekty nebo alespoň oddělené API klíče podle prostředí.
+- Produkční klíče nikdy nepoužívej v lokálním vývoji, ani „na pět minut“.
+- Preview prostředí pro pull requesty dostávají jen dočasné a omezené hodnoty.
+- Pokud integrace neumí sandbox, napiš to do vendor rizika a obal ji ručním testovacím postupem.
+
+Příklad: pro e-mailovou službu vytvoř `SMTP_USERNAME_STAGING` s doménou `staging.example.eu`, nízkým limitem odesílání a zakázanými skutečnými zákaznickými segmenty. Produkční SMTP klíč má posílat jen produkční aplikace. Ne CI skript, ne vývojářův notebook, ne importovací pokus z pátečního večera.
+
+## EA.4 Rotace musí být nacvičený postup, ne heroický incident
+
+Secret bez rotace časem zkamení. Čím déle existuje, tím víc míst ho mohlo vidět: staré logy, shell historie, CI výstupy, lokální notebooky, screenshoty, support tickety. NIST SP 800-57 se věnuje řízení kryptografických klíčů jako životnímu cyklu a zdůrazňuje, že klíčový materiál potřebuje pravidla pro použití, ochranu a správu v čase: https://csrc.nist.gov/pubs/sp/800/57/pt1/r5/final
+
+Rotace má mít čtyři kroky:
+
+1. **Připrav nový secret** — vytvoř ho s minimálním oprávněním a správným prostředím.
+2. **Podporuj překryv** — aplikace dočasně přijímá starý i nový podpis nebo umí přepnout bez výpadku.
+3. **Přepni producenta** — CI, aplikace nebo dodavatel začne používat novou hodnotu.
+4. **Revokuj starý secret** — nearchivuj ho jako nostalgickou památku, skutečně ho vypni.
+
+Rotaci testuj na stagingu stejně jako migraci databáze. Pokud tým neumí secret vyměnit v klidu, neumí ho vyměnit ani pod tlakem. A pod tlakem se rodí přesně ty kompromisy, které pak žijí roky.
+
+## EA.5 Secret se nesmí objevit v logu, chatu ani chybové hlášce
+
+Nejčastější únik není hackerská hudba na pozadí. Je to `console.log(config)`, debug výpis CI jobu nebo screenshot nastavení poslaný do chatu. OWASP Logging Cheat Sheet upozorňuje, že logy mohou obsahovat citlivé informace a mají se maskovat, sanitizovat, chránit a řídit přístupy: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+
+Praktická obrana:
+
+- Zaveď maskování hodnot podle názvů proměnných: `TOKEN`, `SECRET`, `PASSWORD`, `PRIVATE_KEY`, `DATABASE_URL`.
+- V CI zapni secret masking a zakaž debug režim u jobů, které pracují s produkčními hodnotami.
+- Nikdy nevypisuj celý request header `Authorization`, cookie ani webhook signature.
+- V error reportingu posílej typ chyby a korelační ID, ne konfiguraci procesu.
+- Screenshoty z administrací před sdílením ořízni nebo rozmaž; ideálně používej textový výpis bez hodnot.
+
+Dobrá chybová hláška pro tým: „Billing webhook signature validation failed, correlation_id=abc123, provider=payments, environment=production.“ Špatná hláška: „Expected signature `whsec_live_...`, got header `...`.“ První pomáhá řešit incident. Druhá ho vyrábí.
+
+## EA.6 CI/CD secrets nejsou osobní peněženka vývojáře
+
+CI/CD bývá největší koncentrace oprávnění v malém týmu. Umí deployovat, číst registry, nahrávat buildy, mazat preview prostředí a někdy sahat do produkce. Proto se secrets v CI nesmí spravovat stylem „přidal jsem svůj osobní token, protože to prošlo“.
+
+Bezpečnější pravidla:
+
+- Používej servisní účty, ne osobní tokeny jednotlivců.
+- Tokeny scopeuj na konkrétní repozitář, prostředí a akci.
+- Produkční deploy vyžaduje oddělené production environment secrets a schvalovací pravidla podle rizika.
+- CI joby pro pull requesty zvenku nesmí dostat produkční secrets.
+- Deploy token nemá umět číst zákaznickou databázi, pokud jen nahrává build.
+- Po odchodu člověka rotuj hodnoty, ke kterým měl přístup, ne jen jeho login.
+
+Codyho mini-pravidlo: když secret používá robot, vlastník má být tým nebo servisní účet. Když secret používá člověk, má mít auditovatelný osobní přístup a ideálně krátkou platnost. Sdílený „admin token pro všechny“ je pohodlí s úrokem. Úrok se platí při incidentu.
+
+## EA.7 Privacy-first pohled: méně secrets, menší výbuch
+
+Privacy-first provoz není jen o datech zákazníků. Je i o tom, kolik technických klíčů může zákaznická data otevřít. Každý další vendor, pixel, webhook, exportní integrace nebo AI služba přidává nový secret a nové místo selhání. Minimalizace secrets je tedy sestra minimalizace dat.
+
+Před přidáním nové integrace se ptej:
+
+- Jaká data integrace skutečně potřebuje?
+- Umí omezený API klíč jen pro konkrétní operace?
+- Umí oddělit EU region a evropské zpracování?
+- Umí rotaci bez výpadku?
+- Umí audit použití klíče?
+- Co se stane, když secret unikne?
+- Jak rychle umíme secret revokovat?
+
+Pokud nástroj vyžaduje globální admin token, neumí audit a při rotaci rozbije půlku produktu, není to jen technický detail. Je to produktové a obchodní riziko. Do Dreamindího stacku patří nástroje, které umožňují kontrolu nad daty a přístupy, ne černá skříňka s hezkým onboardingem.
+
+## EA.8 Checklist secrets a konfigurace
+
+- [ ] Máme `.env.example` bez skutečných hodnot a s popisem účelu proměnných.
+- [ ] Víme, které proměnné jsou veřejná konfigurace, interní konfigurace, provozní secrets a kryptografické klíče.
+- [ ] Produkce, staging, preview a lokál nesdílí stejné secrets.
+- [ ] Každý důležitý secret má vlastníka, účel, scope, místo uložení a plán rotace.
+- [ ] Produkční secrets nejsou v repozitáři, chatu, ticketu, screenshotu ani dokumentaci s otevřeným přístupem.
+- [ ] CI/CD používá servisní účty a omezené tokeny, ne osobní dlouhodobé klíče.
+- [ ] Pull requesty z nedůvěryhodného zdroje nedostávají produkční secrets.
+- [ ] Logy, error reporting a CI výstupy maskují tokeny, hesla, connection stringy a podpisové klíče.
+- [ ] Rotaci umíme provést na stagingu bez paniky a máme postup pro produkční překryv.
+- [ ] Po incidentu, odchodu správce nebo změně dodavatele máme jasné pravidlo, které secrets rotovat.
+- [ ] Staré secrets po migraci skutečně revokujeme, ne jen „už je nepoužíváme“.
+- [ ] U nových vendorů hodnotíme scope klíčů, audit použití, EU provoz, export a exit plán.
+
+## Codyho komentář
+
+Tajné klíče jsou zvláštní druh nepořádku: dokud fungují, nikdo se jich nechce dotýkat. Jenže přesně proto se z nich stává provozní mina. Můj pohled — Cody: malý tým nepotřebuje hned armádu enterprise nástrojů, ale potřebuje disciplínu. Karta vlastníka, oddělené prostředí, žádné secrets v chatu, testovaná rotace. To je nudné. A bezpečnost má být často nudná. Když je bezpečnost dramatická, obvykle už čteš incident report.
+
+## Zdroje k příloze
+
+- OWASP Secrets Management Cheat Sheet: životní cyklus secrets, metadata, rotace, CI/CD a doporučení pro správu tajemství: https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html
+- OWASP Logging Cheat Sheet: ochrana logů, maskování/sanitizace citlivých dat, řízení přístupů a bezpečnostní logování: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+- NIST SP 800-57 Part 1 Revision 5: obecná doporučení pro key management a správu kryptografického klíčového materiálu: https://csrc.nist.gov/pubs/sp/800/57/pt1/r5/final
+- European Commission: GDPR principy minimalizace údajů, omezení účelu a omezení uložení jako obecný rámec pro privacy-first provoz: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en
+
+## Shrnutí přílohy
+
+Secrets management není luxus pro korporát. Je to základní provozní hygiena každého SaaS, který nechce svá data, zákazníky a reputaci svěřit náhodě. Praktický základ tvoří jasné rozlišení konfigurace a tajemství, oddělené hodnoty pro každé prostředí, vlastníci secrets, omezený scope, bezpečné CI/CD, maskování logů a nacvičená rotace. Privacy-first tým se neptá jen „kam klíč uložíme“, ale hlavně „proč vůbec existuje, kdo ho může použít a co se stane, když unikne“.
+
+
 ## Pracovní log
+- 2026-08-12: Přidána příloha EA o secrets a konfiguraci: rozdělení konfigurace a tajemství, karty vlastníků, oddělená prostředí, rotace, ochrana logů, CI/CD tokeny, privacy-first minimalizace secrets a checklist.
 - 2026-08-12: Přidána příloha DZ o forenzní stopě při incidentech: incidentní časová osa, propojení auditních a provozních logů, minimalizace metadat, čitelný pohled pro support, retence, přístupy a checklist.
 - 2026-08-12: Přidána příloha DY o feature flagech a rolloutech: typy flagů, privacy-first rollout kritéria, bezpečné fallbacky, úklid starých flagů, oddělení experimentů, výběr nástroje a checklist.
 - 2026-08-12: Přidána příloha DX o přihlášení, session a rolích: bezpečné tokeny, timeouty, aktivní session, autorizační matice, citlivé akce, auditní log a checklist.
