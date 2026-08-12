@@ -5209,7 +5209,7 @@ Bezpečný postup:
 - Po vypršení se balíček smaže nebo přesune do chráněné krátkodobé retence.
 - E-mail s exportem neposílej jako přílohu, ale jako upozornění do aplikace nebo odkaz s omezenou platností.
 
-Pokud export posíláš mimo aplikaci, ověř příjemce. Evropská komise připomíná, že organizace musí žádosti o práva jednotlivců vyřizovat a při odmítnutí vysvětlit důvod i možnosti stížnosti: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/dealing-citizens/how-should-requests-individuals-exercising-their-data-protection-rights-be-dealt_en Prakticky: měj proces, ne improvizovanou konverzaci v inboxu.
+Pokud export posíláš mimo aplikaci, ověř příjemce. Evropská komise připomíná, že organizace musí žádosti o práva jednotlivců vyřizovat a při odmítnutí vysvětlit důvod i možnosti stížnosti: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/dealing-requests-individuals_en Prakticky: měj proces, ne improvizovanou konverzaci v inboxu.
 
 ## AD.4 Import je nejlepší test kvality exportu
 
@@ -5775,7 +5775,7 @@ Přihlašování má být bezpečné, srozumitelné a přiměřené riziku. Mal�
 - European Commission: When is consent valid? — https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/legal-grounds-processing-data/grounds-processing/when-consent-valid_en
 - CNIL: Use analytics on your websites and applications — https://www.cnil.fr/fr/node/677
 - European Commission: Dealing with requests from individuals — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/dealing-requests-individuals_en
-- European Commission: How should requests from individuals exercising their data protection rights be dealt with? — https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/dealing-citizens/how-should-requests-individuals-exercising-their-data-protection-rights-be-dealt_en
+- European Commission: How should requests from individuals exercising their data protection rights be dealt with? — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/dealing-requests-individuals_en
 - ICO: Right to data portability — https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/individual-rights/individual-rights/right-to-data-portability/
 - EDPB: Be compliant — Data protection guide for small business — https://www.edpb.europa.eu/sme/be-compliant/be-compliant_en
 - EDPB: Privacy by design and by default — https://www.edpb.europa.eu/topics/ai-and-technology/privacy-by-design-and-by-default_en
@@ -12750,7 +12750,7 @@ Toto je můj pohled — Cody: žádosti o data nejsou jen compliance cvičení. 
 
 ## Zdroje k příloze
 
-- Evropská komise: přehled postupu při žádostech jednotlivců o výkon práv, včetně možnosti přiměřeně ověřit identitu — https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/dealing-citizens/how-should-requests-individuals-exercising-their-data-protection-rights-be-dealt_en
+- Evropská komise: přehled postupu při žádostech jednotlivců o výkon práv, včetně možnosti přiměřeně ověřit identitu — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/dealing-requests-individuals_en
 - EDPB: průvodce pro malé firmy k respektování práv jednotlivců, včetně přístupu, opravy, výmazu, námitky a přenositelnosti — https://www.edpb.europa.eu/sme/be-compliant/respect-individuals-rights_ga
 - EDPB: Guidelines 01/2022 on data subject rights — right of access, finální verze přijatá 28. března 2023 — https://www.edpb.europa.eu/documents/guideline/guidelines-012022-on-data-subject-rights-right-of-access_en
 - EUR-Lex: GDPR, článek 17 k právu na výmaz a souvisejícím výjimkám — https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679
@@ -18463,8 +18463,162 @@ Před zveřejněním SLA nebo provozní stránky si projdi:
 
 Dostupnost není marketingová fráze, ale provozní disciplína. Nejdřív měř kritické uživatelské cesty, potom nastav realistická SLO a až nakonec slibuj SLA. Privacy-first přístup znamená měřit dostupnost bez zbytečných osobních dat, komunikovat incidenty bez mlžení a neslibovat zákazníkům kouzla, která drží pohromadě jen do prvního pondělního deploye.
 
+---
+
+# Příloha DS: Mazání účtů a žádosti subjektů údajů bez ruční archeologie, paniky a falešného „smazáno“
+
+Mazání účtu v SaaS není jedno tlačítko s dramatickým nápisem „Delete everything“. Je to proces. Musí rozlišit osobní data, účetní doklady, bezpečnostní logy, sdílený obsah ve workspace, zálohy, integrace a auditní stopu. Když se to navrhne až ve chvíli, kdy přijde první žádost, tým obvykle skončí v databázi s ručním SQL a potem na klávesnici. To není privacy-first. To je archeologie s právním dopadem.
+
+GDPR dává lidem mimo jiné právo na výmaz podle článku 17, ale zároveň počítá s výjimkami, například když je zpracování potřebné pro splnění právní povinnosti nebo pro určení, výkon či obhajobu právních nároků: https://eur-lex.europa.eu/eli/reg/2016/679/art_17/oj/eng Evropská komise prakticky shrnuje, že organizace nemusí vždy smazat úplně všechno, pokud existuje platný důvod pro další uchování: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/dealing-requests-individuals/do-we-always-have-delete-personal-data-if-person-asks_en
+
+Privacy-first produkt proto neslibuje magické „všechno hned zmizí“. Slibuje srozumitelný proces, minimální data, jasné výjimky a schopnost doložit, co se stalo. Falešná jednoduchost je tu horší než poctivá nuance.
+
+## DS.1 Nejdřív rozliš účet, osobu, workspace a doklady
+
+Největší chaos vzniká, když produkt používá slovo „účet“ pro všechno. U SaaS bývá potřeba rozlišit alespoň čtyři vrstvy:
+
+- **Uživatel:** konkrétní osoba, e-mail, jméno, přihlášení, nastavení, MFA, souhlasy.
+- **Workspace nebo organizace:** firemní prostor, projekty, členové, role, nastavení účtu.
+- **Obsah:** dokumenty, komentáře, záznamy, exporty, soubory, úkoly, integrace.
+- **Obchodní a právní záznamy:** faktury, smlouvy, objednávky, daňové doklady, bezpečnostní audit.
+
+Když chce uživatel smazat svůj osobní účet, nemusí to automaticky znamenat smazání celého firemního workspace. Když chce firma zrušit workspace, nemusí to automaticky znamenat smazání účetních dokladů. Když chce administrátor odstranit člena týmu, produkt musí vědět, co udělat s jeho vlastnictvím obsahu.
+
+Praktický model stavů:
+
+| Akce | Co se stane hned | Co zůstává dočasně | Co zůstává déle |
+| --- | --- | --- | --- |
+| Deaktivace uživatele | znemožní přihlášení, zruší session | auditní stopa a vlastnictví obsahu | právní a bezpečnostní záznamy podle retence |
+| Výmaz osobního profilu | odstraní nebo anonymizuje profilová data | podpůrná komunikace do konce retenční lhůty | fakturační záznamy, pokud je vyžaduje právo |
+| Zrušení workspace | zastaví službu, uzamkne nové změny | exportní okno a backup retence | účetní a smluvní dokumenty |
+| Odstranění obsahu | smaže aktivní kopii nebo ji označí k výmazu | zálohy do dalšího retenčního cyklu | minimální auditní záznam o provedení akce |
+
+Nepiš do produktu „data smažeme okamžitě“, pokud ve skutečnosti žijí ještě v zálohách, logách nebo fakturačním systému. Lepší věta je: „Aktivní data smažeme do 30 dnů, zálohy se přepíšou podle retenčního cyklu do 90 dnů, účetní doklady uchováváme podle zákonných povinností.“ Nudné? Ano. Užitečné? Taky ano. Nudná přesnost vyhrává nad dramatickou lží.
+
+## DS.2 Žádost musí mít vlastní frontu a vlastníka
+
+Žádosti subjektů údajů nejsou běžné support tickety typu „nejde mi změnit avatar“. Mají lhůty, právní kontext a často vyžadují koordinaci napříč systémy. Evropská komise připomíná, že požadavky jednotlivců podle GDPR se mají řešit bez zbytečného odkladu a typicky do jednoho měsíce: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/dealing-requests-individuals_en EDPB stejný princip uvádí i ve svém průvodci pro malé firmy: https://www.edpb.europa.eu/sme/be-compliant/respect-individuals-rights_ga
+
+Malý tým nepotřebuje korporátní portál za cenu menšího kombajnu. Potřebuje jednoduchý proces:
+
+1. Příjem žádosti přes privacy e-mail, formulář nebo support.
+2. Ověření identity přiměřené riziku.
+3. Klasifikace žádosti: přístup, oprava, výmaz, omezení, přenositelnost, námitka.
+4. Seznam systémů, kterých se žádost týká.
+5. Vlastník případu a termín odpovědi.
+6. Provedení akce v produktu i v navazujících nástrojích.
+7. Odpověď člověku s vysvětlením, co bylo provedeno a co případně zůstává z právních důvodů.
+8. Interní záznam o vyřízení bez ukládání zbytečného obsahu žádosti navždy.
+
+Ověření identity nedělej jako šikanu. Pokud je uživatel přihlášený a žádá o export vlastních dat v aplikaci, nepotřebuje posílat scan občanky. Pokud někdo z anonymního e-mailu žádá výmaz firemního workspace za pět milionů ročně, ověření musí být silnější. Přiměřenost není slabost. Je to dospělý bezpečnostní design.
+
+## DS.3 Mazání navrhni jako workflow, ne jako ruční checklist v hlavě seniora
+
+Dobré mazání má být opakovatelné. Ne nutně plně automatické od prvního dne, ale popsané tak, aby ho zvládl i tým bez původního autora systému. Ruční magie v databázi je přijatelná jako nouzový most, ne jako dlouhodobá strategie.
+
+Minimální workflow pro výmaz osobního účtu:
+
+- Zablokuj nové přihlášení a zruš aktivní session.
+- Odpoj externí integrace a API tokeny patřící uživateli.
+- Převeď vlastnictví sdíleného obsahu na workspace nebo správce.
+- Smaž nebo anonymizuj profilová data, která už nejsou potřeba.
+- Odstraň marketingové a produktové identifikátory spojené s osobou.
+- Označ podpůrné tickety a komunikaci pro retenční úklid.
+- Zapiš minimální auditní záznam: kdo, kdy, jaký typ žádosti, výsledek.
+- Naplánuj odstranění ze záloh podle retenčního cyklu.
+
+Největší zrada bývá v odvozených datech. Uživatel zmizí z tabulky `users`, ale jeho e-mail zůstane v názvu exportu, support ticketu, eventech, webhook payloadu, názvu souboru, screenshotu, logu chyby nebo komentáři. Proto se vyplatí mít datovou mapu se sloupcem „obsahuje osobní data“ a „mazací strategie“.
+
+Příklad mazací strategie:
+
+| Typ dat | Strategie | Poznámka |
+| --- | --- | --- |
+| Profilové údaje | výmaz nebo anonymizace | jméno, avatar, telefon, nastavení |
+| Login identita | deaktivace a výmaz tokenů | pozor na session, OAuth a passkeys |
+| Produktový obsah | podle vlastnictví | osobní poznámka vs. firemní dokument |
+| Auditní záznam | minimalizované uchování | bez payloadů, tokenů a citlivých detailů |
+| Faktury | zákonná retence | vysvětlit v odpovědi a privacy dokumentaci |
+| Zálohy | přepsání retenčním cyklem | nemají se používat k běžnému vyhledávání |
+
+OWASP v Logging Cheat Sheet upozorňuje, že do logů nepatří citlivé údaje jako hesla, přístupové tokeny, session identifikátory nebo zbytečná osobní data: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html Čím čistší logy máš, tím méně pekla řešíš při výmazu. Překvapivě elegantní rovnice.
+
+## DS.4 Export dat musí být pochopitelný, ne jen legální hromádka JSONu
+
+Právo na přístup a přenositelnost není jen technický export. Uživatel nebo zákazník má dostat data ve formě, které rozumí a se kterou umí pracovat. EDPB ve svých pokynech k právu na přístup zdůrazňuje, že právo na přístup pomáhá lidem ověřit zákonnost zpracování a mít nad osobními daty kontrolu: https://www.edpb.europa.eu/documents/guideline/guidelines-012022-on-data-subjects-rights-right-of-access_en
+
+Praktický export pro SaaS by měl obsahovat:
+
+- jasný README soubor s popisem obsahu exportu,
+- seznam zahrnutých systémů a období,
+- strojově čitelná data ve formátu CSV nebo JSON,
+- vysvětlení vztahu mezi tabulkami nebo soubory,
+- oddělení osobních dat uživatele od dat workspace,
+- informaci, co v exportu není a proč,
+- datum vytvoření exportu a dobu dostupnosti odkazu,
+- bezpečné doručení bez veřejného odkazu bez expirace.
+
+Nedělej export jako „stáhni si ZIP a hodně štěstí“. To je možná formálně splněno, ale produktově mizerné. Pokud zákazník odchází, dobrý export je poslední šance ukázat, že firma není datový žalář. A někdy právě férový odchod zvýší šanci, že se zákazník později vrátí.
+
+## DS.5 Zálohy nejsou výmluva pro věčné uchování
+
+Zálohy mají chránit dostupnost a obnovu, ne sloužit jako tajný archiv všeho navždy. Při žádosti o výmaz je běžné, že data v zálohách zmizí až podle retenčního cyklu. Musí to ale být popsané, kontrolované a časově omezené.
+
+Rozumný postup:
+
+- Zálohy šifruj a omez přístup jen na provozní roli.
+- Nepoužívej zálohy k běžnému hledání osobních dat.
+- Měj jasnou retenční dobu podle typu služby a rizika.
+- Při obnově ze staré zálohy znovu aplikuj seznam výmazů nebo anonymizační skript.
+- Dokumentuj, kdy se daný typ dat definitivně přepíše.
+- Netvrď uživateli, že zálohy neexistují. To je kreativní fikce, ne compliance.
+
+U citlivých produktů si připrav „deletion ledger“: minimální interní seznam provedených výmazů, který se po restore použije k opětovnému odstranění dat. Nemá obsahovat celý profil ani payloady. Stačí stabilní interní identifikátor, typ akce, datum a stav. Cílem je zabránit zombie datům, ne vytvořit druhou databázi osobních údajů.
+
+## DS.6 Odpověď člověku má být lidská a přesná
+
+Špatná odpověď:
+
+> Vaše žádost byla vyřízena v souladu s platnou legislativou.
+
+Lepší odpověď:
+
+> Váš osobní účet jsme deaktivovali a profilové údaje odstranili z aktivní aplikace. Fakturační doklady k objednávkám uchováváme po dobu vyžadovanou právními předpisy. Data v zálohách budou přepsána podle retenčního cyklu nejpozději do 90 dnů. Pokud chcete doplnit nebo opravit rozsah žádosti, odpovězte na tento e-mail.
+
+Uživatel nepotřebuje právnickou mlhu. Potřebuje vědět, co se stalo, co se nestalo a proč. Pokud žádosti nevyhovíš celé, vysvětli důvod konkrétně. Pokud potřebuješ prodloužit lhůtu, řekni proč a kdy přijde odpověď. Ticho je nejdražší komunikační strategie, protože si ho člověk vyloží po svém. Obvykle ne ve tvůj prospěch.
+
+## DS.7 Checklist mazání a žádostí subjektů údajů
+
+Před tím, než produkt označíš za připravený na výmazy a exporty, projdi:
+
+- Máme datovou mapu osobních údajů v aplikaci, logách, supportu, analytice, e-mailingu a fakturaci?
+- Rozlišujeme uživatele, workspace, produktový obsah a právní doklady?
+- Máme popsané stavy deaktivace, anonymizace, výmazu a zrušení workspace?
+- Víme, kdo vlastní žádosti subjektů údajů a jak hlídá lhůtu jednoho měsíce?
+- Umíme přiměřeně ověřit identitu bez zbytečného sběru dokladů?
+- Existuje opakovatelný workflow pro výmaz účtu, včetně tokenů, session a integrací?
+- Jsou logy nastavené tak, aby neobsahovaly hesla, tokeny, payloady a zbytečná osobní data?
+- Má export dat README, datový slovník a bezpečný expirační odkaz?
+- Je jasně popsané, co zůstává kvůli právním povinnostem nebo obhajobě nároků?
+- Máme retenční cyklus záloh a postup pro re-aplikaci výmazů po restore?
+- Umíme zákazníkovi poslat lidskou odpověď bez právnického kouře?
+- Testujeme mazací workflow aspoň při větších změnách datového modelu?
+
+## Zdroje k příloze
+
+- GDPR článek 17 — právo na výmaz: https://eur-lex.europa.eu/eli/reg/2016/679/art_17/oj/eng
+- Evropská komise — kdy není nutné vždy smazat osobní data: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/dealing-requests-individuals/do-we-always-have-delete-personal-data-if-person-asks_en
+- Evropská komise — vyřizování žádostí jednotlivců podle GDPR: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/dealing-requests-individuals_en
+- EDPB — práva jednotlivců pro malé firmy: https://www.edpb.europa.eu/sme/be-compliant/respect-individuals-rights_ga
+- EDPB Guidelines 01/2022 — právo na přístup: https://www.edpb.europa.eu/documents/guideline/guidelines-012022-on-data-subjects-rights-right-of-access_en
+- OWASP Logging Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+
+## Shrnutí přílohy
+
+Mazání účtů a žádosti subjektů údajů nejsou právní okrajovka. Jsou test architektury, datové hygieny a důvěryhodnosti firmy. Privacy-first SaaS má vědět, kde data jsou, proč tam jsou, jak dlouho tam budou a co se stane, když člověk požádá o výmaz nebo export. Nejlepší proces je ten, který je nudně opakovatelný. Nudný proces totiž při incidentu nekřičí.
+
 
 ## Pracovní log
+- 2026-08-12: Přidána příloha DS o mazání účtů a žádostech subjektů údajů: rozdíl mezi uživatelem, workspace, obsahem a doklady, workflow výmazu, export dat, zálohy, odpovědi uživatelům a privacy-first checklist.
 - 2026-08-12: Přidána příloha DR o SLA, SLO a dostupnosti: rozdíl mezi SLI/SLO/SLA, měření kritických cest, error budget, údržba, incident komunikace a privacy-first checklist.
 - 2026-08-12: Přidána příloha DQ o API dokumentaci a developer experience: OpenAPI kontrakt, bezpečné příklady, RFC 9457 chyby, autentizace, verzování, střídmá analytika dokumentace, SDK a checklist.
 
