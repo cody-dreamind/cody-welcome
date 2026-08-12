@@ -17984,8 +17984,362 @@ Produktové notifikace mají pomáhat člověku udělat správný krok ve správ
 
 ---
 
-## Pracovní log
 
+# Příloha DP: Zpracovatelské smlouvy a subdodavatelé bez právního divadla, slepé důvěry a vendor lock-inu
+
+Malý SaaS tým často řeší dodavatele až ve chvíli, kdy se zákazník zeptá: „Kde přesně končí naše data?“ To je pozdě. Zpracovatelský řetězec není příloha do šuplíku; je to část produktu. Pokud web, aplikace, support, analytika, e-mailing, monitoring nebo AI pomocník pracují s osobními údaji zákazníků, musíš vědět, kdo je správce, kdo zpracovatel, kdo další zpracovatel a co se s daty děje.
+
+GDPR v čl. 28 říká, že pokud zpracování provádí zpracovatel, správce má použít jen takového zpracovatele, který poskytuje dostatečné záruky, a zpracování má být upravené smlouvou nebo jiným právním aktem: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng#d1e2793-1-1
+
+Praktický překlad: nestačí „mají hezký dashboard a všichni je používají“. Potřebuješ důkaz, že dodavatel umí data chránit, popsat, omezit a na konci vztahu vrátit nebo smazat. Jo, je to méně sexy než nový gradient v hero sekci. Ale když přijde bezpečnostní dotazník od většího B2B zákazníka, gradient ho nezachrání.
+
+## DP.1 Nejdřív rozliš roli: správce, zpracovatel, nebo samostatný správce
+
+Ne každý dodavatel je automaticky zpracovatel. Role závisí na tom, kdo určuje účely a prostředky zpracování. EDPB v pokynech ke konceptům správce a zpracovatele vysvětluje, že rozhodující je faktický vliv na účely a podstatné prostředky zpracování, ne jen nálepka ve smlouvě: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-072020-concepts-controller-and-processor-gdpr_en
+
+Mini mapa rolí:
+
+| Situace | Typická role | Co zkontrolovat |
+| --- | --- | --- |
+| Hosting aplikace | zpracovatel | region, zálohy, logy, subdodavatelé |
+| E-mailový nástroj pro transakční e-maily | zpracovatel | obsah zpráv, retence, bounce logy |
+| Platební brána | často samostatný správce pro část plateb | role v podmínkách, DPA, daňové údaje |
+| Analytika návštěvnosti | zpracovatel nebo samostatný správce podle nastavení | IP adresy, cookies, sdílení dat |
+| AI nástroj pro interní support | zpracovatel, nebo riziková směs rolí | trénování modelů, logy promptů, region |
+
+Když si rolí nejsi jistý, napiš si větu: „Dodavatel zpracovává data proto, aby pro nás udělal X.“ Pokud si s daty určuje vlastní účely, nejspíš není jen poslušný zpracovatel. A pokud neumíš vysvětlit ani X, nemáš dodavatele; máš černou skříňku s fakturou.
+
+## DP.2 DPA není PDF amulet
+
+Zpracovatelská smlouva (DPA) má mít konkrétní obsah. Článek 28 GDPR vyžaduje mimo jiné popis předmětu a doby zpracování, povahy a účelu zpracování, typu osobních údajů, kategorií subjektů údajů a povinností správce. Dále řeší mlčenlivost, bezpečnost, zapojení dalších zpracovatelů, pomoc se žádostmi subjektů údajů, smazání nebo vrácení dat a auditovatelnost.
+
+Při kontrole DPA si vyznač:
+
+- jaká data dodavatel dostává,
+- proč je dostává,
+- kde se ukládají a zpracovávají,
+- jak dlouho zůstávají v produkci, zálohách a logách,
+- kteří subdodavatelé se mohou zapojit,
+- jak dostaneš informaci o incidentu,
+- co se stane po ukončení služby,
+- jestli máš praktickou cestu k exportu nebo smazání.
+
+Špatný signál: DPA popisuje bezpečnost jako „industry standard“ a k subdodavatelům vede jen obecná věta „můžeme používat partnery“. To není transparentnost. To je právní kouřostroj.
+
+## DP.3 Subdodavatele drž v registru, ne v hlavě zakladatele
+
+Subdodavatelé jsou místa, kde privacy-first provoz často potichu vyteče mimo plán. Vybereš evropský nástroj, ale ten používá podporu, logování, CDN, e-mailing nebo AI funkci mimo region, který jsi zákazníkovi slíbil. Někdy je to v pořádku, pokud to víš, umíš vysvětlit a máš právní i technické krytí. Problém je, když to zjistíš až při incidentu.
+
+Vytvoř jednoduchý registr:
+
+| Dodavatel | Účel | Data | Region | Subdodavatelé | Retence | Vlastník |
+| --- | --- | --- | --- | --- | --- | --- |
+| EU hosting | běh aplikace | zákaznická data, logy | EU | viz odkaz | logy 30 dní | CTO |
+| Transakční e-mail | pozvánky a účty | e-mail, obsah zpráv | EU / podle smlouvy | viz odkaz | bounce 90 dní | Produkt |
+| Monitoring | dostupnost a chyby | technické logy | EU | viz odkaz | 30 dní | DevOps |
+
+Registr nemusí být složitý. Musí být aktuální. Minimálně jednou měsíčně zkontroluj změny u klíčových dodavatelů a při každém novém nástroji přidej řádek ještě před integrací. Ne po integraci, ne „až bude čas“, ne během budoucího auditu, který přijde jako účet za elektřinu po zimě.
+
+## DP.4 Vendor onboarding má mít stopku
+
+Každý nový nástroj projdi krátkou bránou. Cílem není zabít rychlost týmu. Cílem je zabránit tomu, aby si někdo kvůli jedné hezké funkci otevřel trvalý datový tunel do neznámého SaaSu.
+
+Otázky před zapnutím:
+
+1. Jaký konkrétní problém nástroj řeší?
+2. Jaká data do něj pošleme v první verzi?
+3. Může fungovat s anonymizovanými, agregovanými nebo syntetickými daty?
+4. Kde jsou data uložena a kdo k nim má přístup?
+5. Má dodavatel DPA, seznam subdodavatelů a postup pro incidenty?
+6. Dá se služba vypnout bez rozbití produktu?
+7. Jak data exportujeme nebo smažeme při odchodu?
+8. Kdo v týmu je vlastníkem nástroje?
+
+Privacy-first pravidlo: pokud nástroj nemá vlastníka, nemá v produkci co dělat. Opuštěné integrace jsou jako kabely pod stolem. Nikdo neví, odkud vedou, ale všichni se bojí je vytáhnout.
+
+## DP.5 Změny dodavatelů komunikuj jako produktovou změnu
+
+Když přidáš nového subdodavatele, změníš region, zapneš AI funkci nebo rozšíříš typ zpracovávaných dat, není to jen interní technická změna. Může to ovlivnit důvěru zákazníka, smluvní závazky, bezpečnostní dokumentaci a privacy stránku.
+
+Praktický postup:
+
+- vytvoř interní rozhodovací záznam: co se mění, proč, jaká data, jaké riziko,
+- aktualizuj registr zpracování a seznam subdodavatelů,
+- zkontroluj privacy policy, DPA a zákaznickou dokumentaci,
+- u B2B zákazníků dodrž smluvní mechanismus pro oznámení změn,
+- nastav datum review po 30 až 90 dnech provozu,
+- měj plán návratu, pokud se dodavatel ukáže jako problém.
+
+Dobrá komunikace nemusí být dramatická. Stačí věcně: „Přidáváme poskytovatele X pro transakční e-maily. Bude zpracovávat e-mailovou adresu a obsah systémových zpráv. Data zůstávají v EU podle smluvního nastavení. Seznam subdodavatelů je zde.“ To je dospělý SaaS tón. Žádné mlžení, žádné „vylepšujeme služby“ jako kouzelná mlha.
+
+## DP.6 Odchod od dodavatele testuj dřív, než ho potřebuješ
+
+Vendor lock-in není jen cena. Je to situace, kdy neumíš odejít bez ztráty dat, výpadku provozu nebo paniky v týmu. U privacy-first produktu je odchod důležitý i proto, že musíš umět splnit mazání, export a změnu zpracovatele.
+
+U klíčových nástrojů si napiš exit plán:
+
+- jak exportovat data,
+- jak dlouho export trvá,
+- v jakém formátu data dostaneš,
+- co se stane se zálohami u dodavatele,
+- jak ověříš smazání,
+- jaké endpointy, DNS záznamy, webhooky a e-maily musíš přepnout,
+- kdo rozhoduje o vypnutí,
+- jaký je minimální testovací scénář migrace.
+
+Nemusíš každý měsíc migrovat celý systém pro sport. Ale u kritických služeb si aspoň jednou ročně ověř, že export existuje a někdo ho umí použít. „Máme tlačítko export“ není plán. Plán je „máme export, ověřený import a člověka, který nezpanikaří“.
+
+## DP.7 Checklist zpracovatelů a subdodavatelů
+
+- Má každý dodavatel jasně určenou roli: správce, zpracovatel, společný správce nebo samostatný správce?
+- Existuje DPA pro dodavatele, kteří zpracovávají osobní údaje za nás?
+- Víme u každého nástroje účel, typ dat, region, retenci a vlastníka v týmu?
+- Máme seznam subdodavatelů a proces pro sledování jejich změn?
+- Posíláme do nástrojů jen data, která jsou nutná pro konkrétní účel?
+- Je možné nástroj vypnout bez ztráty kontroly nad zákaznickými daty?
+- Umíme vysvětlit zákazníkovi, proč daný dodavatel existuje?
+- Jsou privacy policy, DPA, interní registr a produktová realita sladěné?
+- Má každý klíčový dodavatel exit plán včetně exportu, smazání a technického přepnutí?
+- Probíhá pravidelné review dodavatelů, ne jen náhodné pátrání před auditem?
+
+## Codyho komentář
+
+Privacy-first SaaS se nepozná podle toho, že nepoužívá žádné dodavatele. To by bylo romantické, drahé a občas technicky hloupé. Pozná se podle toho, že ví, komu data svěřuje, proč, na jak dlouho a jak z toho vztahu odejde. Dodavatel má být nástroj, ne černá díra s měsíční fakturou.
+
+## Zdroje k příloze
+
+- GDPR, článek 28 — zpracovatel: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng#d1e2793-1-1
+- EDPB — Guidelines 07/2020 on the concepts of controller and processor in the GDPR: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-072020-concepts-controller-and-processor-gdpr_en
+- Evropská komise — pravidla pro podniky a organizace podle GDPR: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations_en
+
+## Shrnutí přílohy
+
+Zpracovatelské smlouvy a subdodavatelé nejsou právní dekorace. Jsou součástí architektury důvěry. Malý SaaS tým potřebuje znát role, účely, data, regiony, retenci, subdodavatele, změnový proces a exit plán. Když tohle zvládneš, bezpečnostní dotazník od zákazníka přestane být horor a začne být jen trochu nudná administrativa. Což je pořád výhra.
+
+---
+
+
+# Příloha DQ: API dokumentace a developer experience bez datového úniku, chaosu verzí a supportu na autopilota
+
+API dokumentace je produktová obrazovka pro vývojáře. Jen nemá hero sekci, usměvavý stock obrázek a tlačítko „Začněte zdarma“. Když je dobrá, partner nebo zákazník se integruje bez deseti e-mailů, tří callů a hádání, co znamená `status: false`. Když je špatná, vznikne support peklo a API se začne používat způsobem, který nikdo nečekal.
+
+Privacy-first dokumentace má ještě jeden rozměr: neukazuje víc, než musí. Neobsahuje reálná zákaznická data, nevystavuje interní identifikátory, neprozrazuje bezpečnostní slabiny a nepředstírá, že „příkladový token“ je roztomilý detail. API dokumentace je často veřejnější než samotná aplikace. Chovej se k ní podle toho.
+
+## DQ.1 Dokumentace začíná kontraktem, ne wiki stránkou
+
+U veřejného nebo partnerského API potřebuješ strojově čitelný kontrakt. Ne proto, že OpenAPI je módní razítko, ale proto, že kontrakt umožní generovat klienty, testovat kompatibilitu, psát konzistentní příklady a odhalit rozdíl mezi „dokumentace říká“ a „server skutečně vrací“.
+
+OpenAPI Specification popisuje standardní formát pro HTTP API kontrakty; oficiální specifikace 3.1.1 je dostupná tady: https://spec.openapis.org/oas/v3.1.1.html. OpenAPI Initiative zároveň uvádí, že 3.1.1 byla vydána 24. října 2024 a v době ověření této přílohy je doporučenou verzí řady 3.1: https://www.openapis.org/faq
+
+Praktické minimum kontraktu:
+
+- každá cesta má metodu, účel a stabilní popis,
+- request i response mají schéma,
+- povinná pole jsou opravdu povinná,
+- chybové odpovědi nejsou vynechané,
+- autentizace je popsaná přímo u endpointu,
+- příklady neobsahují reálná data,
+- verze API je dohledatelná v dokumentaci i provozu.
+
+Kontrakt nemá být ručně leštěná vitrína, která po prvním sprintu lže. Ideální je generovat ho z kódu, testovat proti němu, nebo aspoň zahrnout jeho validaci do review. Jakmile OpenAPI soubor žije bokem a nikdo ho nekontroluje, stává se z něj marketingová pohádka pro vývojáře. A ti pohádky nečtou, ti posílají requesty.
+
+## DQ.2 Každý endpoint musí mít bezpečný příklad
+
+Příklad je nejsilnější část dokumentace. Vývojář ho zkopíruje, upraví token a pustí. Proto příklady nesmí učit špatné návyky.
+
+Špatný příklad:
+
+```bash
+curl -X POST https://api.example.com/v1/customers \
+  -H "Authorization: Bearer sk_live_123_REAL_TOKEN" \
+  -d '{"email":"jana@skutecnafirma.cz","note":"má problém s fakturou za právní služby"}'
+```
+
+Lepší příklad:
+
+```bash
+curl -X POST https://api.example.com/v1/customers \
+  -H "Authorization: Bearer $API_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"email":"zakaznik@example.test","external_id":"cust_demo_001"}'
+```
+
+Pravidla pro bezpečné příklady:
+
+- používej domény `example.com`, `example.test` nebo jasně fiktivní hodnoty,
+- tokeny piš jako proměnné prostředí, ne jako text,
+- neukazuj osobní poznámky, zdravotní údaje, interní komentáře ani názvy reálných zákazníků,
+- u destruktivních akcí používej sandbox endpoint nebo explicitní varování,
+- u webhooků nikdy neukazuj skutečný signing secret,
+- u exportů dat ukazuj malý vzorek, ne kompletní dump.
+
+Dobrý příklad má být spustitelný, ale ne nebezpečný. To je jemný rozdíl. Jako rozdíl mezi „ukážu ti, kde je hasicí přístroj“ a „zapálím serverovnu, ať je školení realistické“.
+
+## DQ.3 Chyby dokumentuj jako produktové rozhraní
+
+API bez popsaných chyb je jako navigace, která umí říct jen „něco se nepovedlo“. Vývojář pak neví, jestli má request zopakovat, opravit vstup, požádat uživatele o akci, nebo zavolat podporu. Výsledkem jsou křehké integrace a zbytečný provozní hluk.
+
+Pro HTTP API dává smysl používat standardizovaný formát chyb. RFC 9457 definuje „Problem Details for HTTP APIs“, tedy společný strojově čitelný způsob, jak předávat detaily chyb v HTTP odpovědích: https://www.rfc-editor.org/rfc/rfc9457.html
+
+Praktická chybová odpověď:
+
+```json
+{
+  "type": "https://docs.example.com/problems/validation-error",
+  "title": "Validation error",
+  "status": 400,
+  "detail": "One or more fields are invalid.",
+  "instance": "/v1/customers/requests/req_demo_123",
+  "errors": [
+    {
+      "field": "email",
+      "code": "invalid_format",
+      "message": "Use a valid e-mail address."
+    }
+  ]
+}
+```
+
+Co do chyb patří:
+
+- stabilní kód chyby,
+- lidsky čitelné vysvětlení,
+- informace, jestli má klient request opakovat,
+- odkaz na dokumentaci problému,
+- bezpečný identifikátor requestu pro podporu.
+
+Co do chyb nepatří:
+
+- stack trace,
+- SQL dotaz,
+- interní název tabulky,
+- osobní data jiného uživatele,
+- přesný důvod bezpečnostního zamítnutí, který pomůže útočníkovi.
+
+Chybové stavy piš do dokumentace stejně poctivě jako úspěšné odpovědi. Reálný svět není `200 OK` demo. Reálný svět je expirovaný token, limit tarifu, duplicitní `external_id`, chybějící oprávnění a webhook endpoint, který zrovna spadl, protože někdo „jen rychle“ aktualizoval závislosti.
+
+## DQ.4 Autentizaci vysvětli bez bezpečnostního návodu pro útočníka
+
+API dokumentace musí vývojáře naučit bezpečně používat tokeny, klíče a podpisy. Zároveň nesmí prozrazovat interní obranné detaily víc, než je nutné.
+
+Popiš jasně:
+
+| Oblast | Co má dokumentace říct |
+| --- | --- |
+| Vytvoření tokenu | kde ho vytvořit, kdo k tomu potřebuje oprávnění |
+| Scope | jaká oprávnění token má a proč volit nejmenší rozsah |
+| Uložení | token patří do secret manageru nebo env proměnné, ne do repozitáře |
+| Rotace | jak token vyměnit bez výpadku integrace |
+| Revokace | jak rychle vypnout kompromitovaný token |
+| Audit | kde zákazník uvidí poslední použití a podezřelé aktivity |
+
+U webhooků přidej podpisy payloadu a ochranu proti replay útokům. Dokumentuj algoritmus, hlavičky, toleranci času a ukázku ověření. Nezveřejňuj interní detaily typu „po třetím špatném podpisu blokujeme IP na přesně 17 minut“. To není transparentnost, to je nápověda.
+
+Příklad bezpečné formulace:
+
+> „Každý webhook obsahuje časovou značku a podpis v hlavičce. Příjemce má ověřit podpis nad surovým tělem requestu a odmítnout zprávy mimo krátké časové okno. Konkrétní implementace se může lišit podle jazyka; níže je ukázka pro Node.js.“
+
+## DQ.5 Verze API plánuj jako smlouvu, ne jako překvapení
+
+Změny API bolí víc než změny UI. Uživatel si na nové tlačítko zanadává. Integrace na změněném poli prostě spadne ve dvě ráno a někdo dostane „veselou“ notifikaci.
+
+Rozliš:
+
+- **Non-breaking změna:** nové volitelné pole, nový endpoint, rozšíření enumu jen pokud klienti správně ignorují neznámé hodnoty.
+- **Breaking změna:** přejmenování pole, změna typu, odstranění hodnoty, změna významu statusu, povinné nové pole, změna autentizace.
+- **Behaviorální změna:** stejný kontrakt, ale jiné limity, jiné řazení, jiná deduplikace nebo jiné retry chování.
+
+Verzovací pravidla:
+
+1. Breaking změny nedělej potichu.
+2. Deprecated endpoint označ v dokumentaci i odpovědích.
+3. Uveď datum ukončení podpory a migrační návod.
+4. Měř používání staré verze agregovaně podle zákazníka, ne podle jednotlivých osob.
+5. Nabídni testovací prostředí pro migraci.
+
+Praktický mikrotext:
+
+> „Endpoint `/v1/invoices/search` bude podporovaný do 30. června 2027. Nový endpoint `/v2/invoices` vrací stránkování podle kurzoru a odděluje stav platby od stavu dokladu. Migrační rozdíly jsou popsané v tabulce níže.“
+
+Codyho komentář: API verze není místo pro kreativní šoky. Kreativní šoky patří do reklamní kampaně, ne do účetní integrace zákazníka.
+
+## DQ.6 Dokumentace nesmí být další analytický vysavač
+
+Developer portál svádí k tomu přidat heatmapu, session replay, marketingový pixel a „chytrý“ chat. Jenže dokumentace často obsahuje technické dotazy, názvy endpointů, chybové kódy a někdy i zákaznický kontext v URL. To jsou citlivé signály.
+
+Privacy-first dokumentace měří střídmě:
+
+- návštěvnost stránek agregovaně,
+- vyhledávané dotazy bez vazby na konkrétní osobu,
+- neúspěšná hledání jako signál chybějící dokumentace,
+- kliky na kopírování příkladů jen pokud to má jasný účel,
+- feedback „pomohlo / nepomohlo“ bez volného textu, nebo s jasným varováním.
+
+Neukládej do analytiky:
+
+- API tokeny v query stringu,
+- celé chybové payloady,
+- osobní údaje z demo requestů,
+- IP adresy déle, než je nutné pro bezpečnost,
+- session replay z dokumentace, kde lidé lepí vlastní kód.
+
+Pokud máš vyhledávání v dokumentaci, loguj dotazy opatrně. Dotaz „jak smazat pacienta“ nebo „export mzdy“ může prozradit víc, než se zdá. Agregace, krátká retence a odstranění podezřelých tokenů před uložením jsou levnější než vysvětlování, proč máš v analytice cizí secrets.
+
+## DQ.7 SDK a ukázkové aplikace musí mít stejnou disciplínu jako produkce
+
+SDK je prodloužená ruka API. Když v něm schováš špatnou práci s chybami, nekonečné retry, logování tokenů nebo ignorování timeoutů, rozšíříš problém do všech integrací. Gratuluji, právě jsi vynalezl distribuovaný průšvih.
+
+Minimální standard SDK:
+
+- výchozí timeouty,
+- exponenciální backoff u dočasných chyb,
+- respektování `429` a `Retry-After`,
+- žádné logování secrets,
+- jasné typy chyb,
+- možnost nastavit region nebo base URL,
+- kompatibilita s aktuální i předchozí podporovanou verzí API,
+- changelog s migračními poznámkami.
+
+Ukázkové aplikace drž malé. Jedna aplikace má ukázat jednu cestu: vytvoření zákazníka, příjem webhooku, stažení faktury, synchronizaci položek. Pokud demo aplikace potřebuje dvě hodiny konfigurace, databázi, frontu, cache a lokální certifikát, není to demo. Je to escape room pro backendáře.
+
+## DQ.8 Checklist API dokumentace a developer experience
+
+Před zveřejněním nebo větší změnou API projdi:
+
+- Má API aktuální OpenAPI kontrakt a je součástí review?
+- Jsou popsané requesty, response, chyby, limity a autentizace?
+- Jsou všechny příklady bezpečné, fiktivní a bez reálných dat?
+- Používají příklady tokeny přes proměnné prostředí?
+- Jsou chyby strojově čitelné a bez interních detailů?
+- Je u endpointů jasné, jaká oprávnění potřebují?
+- Je popsané verzování, deprecace a migrační postup?
+- Má dokumentace privacy-first analytiku s krátkou retencí?
+- Jsou SDK a ukázky testované proti aktuálnímu kontraktu?
+- Existuje sandbox, který neodesílá reálné e-maily, platby ani webhooky mimo testovací režim?
+- Je u každého endpointu jasné, jaká data zpracovává a proč?
+- Má support bezpečný request ID, ne pokyn „pošlete nám celý payload“?
+
+## Codyho komentář
+
+API dokumentace je skvělé místo, kde se pozná dospělost produktu. Ne podle toho, jestli má tmavý režim a animovanou ikonku, ale podle toho, jestli vývojář po patnácti minutách ví, co má poslat, co dostane zpátky, co se stane při chybě a jak to celé udělat bez porušení důvěry zákazníka. Tmavý režim klidně přidej taky. Jen ať nesvítí nad prázdnou specifikací.
+
+## Zdroje k příloze
+
+- OpenAPI Specification 3.1.1: https://spec.openapis.org/oas/v3.1.1.html
+- OpenAPI Initiative FAQ k aktuální verzi specifikace: https://www.openapis.org/faq
+- RFC 9457 — Problem Details for HTTP APIs: https://www.rfc-editor.org/rfc/rfc9457.html
+- OWASP API Security Top 10 2023: https://owasp.org/API-Security/editions/2023/en/0x03-introduction/
+- OWASP k trendům v API bezpečnosti a autorizaci: https://owasp.org/blog/2023/07/03/owasp-api-top10-2023
+
+## Shrnutí přílohy
+
+Dobrá API dokumentace není jen seznam endpointů. Je to kontrakt, bezpečnostní průvodce, migrační mapa a support prevence v jednom. Privacy-first přístup znamená bezpečné příklady, minimální analytiku, jasné chyby, promyšlené verzování a SDK, které nešíří špatné návyky rychlostí package manageru.
+
+
+## Pracovní log
+- 2026-08-12: Přidána příloha DQ o API dokumentaci a developer experience: OpenAPI kontrakt, bezpečné příklady, RFC 9457 chyby, autentizace, verzování, střídmá analytika dokumentace, SDK a checklist.
+
+- 2026-08-12: Přidána příloha DP o zpracovatelských smlouvách a subdodavatelích: role správce/zpracovatele, DPA, registr dodavatelů, vendor onboarding, komunikace změn, exit plán a checklist.
 - 2026-08-12: Přidána příloha DO o produktových notifikacích: účel zpráv, volba kanálu, bezpečný obsah, preference centrum, digesty, měření bez pixelů, stavový model a privacy-first checklist.
 - 2026-08-12: Přidána příloha DN o vyhledávání a filtrování v SaaS: rozsah hledání, serverová oprávnění, bezpečné dotazy, search logy, prázdné výsledky, filtry, výkon a checklist.
 - 2026-08-11: Přidána příloha DM o platbách, fakturaci a předplatném: jasná cena, DPH/OSS, karetní data mimo vlastní databázi, SCA, faktury, férové rušení a checklist.
