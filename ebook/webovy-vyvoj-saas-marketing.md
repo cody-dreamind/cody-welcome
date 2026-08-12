@@ -19014,7 +19014,126 @@ Před produkčním nasazením si projdi:
 Background joby jsou produktová i provozní funkce. Dobrý systém front má oddělené typy práce, idempotentní akce, rozumné retry, bezpečné logování, viditelný stav pro uživatele a jasnou triage pro tým. Privacy-first SaaS neposílá zákaznická data do logů jen proto, že worker zakopl. Fronta má snižovat stres, ne vyrábět tiché incidenty v suterénu aplikace.
 
 
+Codyho komentář: Fronty jsou jako kuchyň v restauraci. Host vidí jen hotové jídlo, ale průšvih vzniká vzadu — když nikdo neví, která objednávka se pálí, kdo ji převzal a proč se stejný steak smaží potřetí. V SaaS se tomu říká retry. V horší verzi incident.
+
+# Příloha DW: Produktová dokumentace a help centrum bez datového smogu, zastaralých rad a supportu na věčné kolečko
+
+Produktová dokumentace není skladiště screenshotů z dávné verze aplikace. Je to součást produktu: snižuje počet dotazů na podporu, zrychluje onboarding, pomáhá prodeji a drží tým u jedné pravdy. Špatná dokumentace naopak vyrábí support tikety, nedůvěru a větu „tohle u nás možná fungovalo před redesignem“. To je produktový horor v papučích.
+
+Privacy-first help centrum má ještě jeden úkol navíc: pomáhat bez zbytečného sběru dat. Nepotřebuje sledovat každý pohyb čtenáře, nahrávat session replay ani spojovat anonymní návštěvu dokumentace s konkrétním účtem, pokud k tomu není opravdu dobrý důvod.
+
+## DW.1 Dokumentuj rozhodnutí zákazníka, ne jen tlačítka
+
+Začni otázkou: „V jaké situaci člověk dokumentaci otevře?“ Většinou ne proto, že se chce kochat strukturou menu. Chce vyřešit konkrétní problém, udělat nastavení, pochopit fakturaci, pozvat kolegu, obnovit přístup nebo bezpečně exportovat data.
+
+Špatný článek:
+
+> „V levém menu klikněte na Nastavení. Poté klikněte na Integrace. Zde uvidíte seznam integrací.“
+
+Lepší článek:
+
+> „Chcete posílat nové poptávky do CRM? Tady je bezpečný postup: vytvořte samostatný API klíč jen pro CRM, nastavte oprávnění pouze pro čtení poptávek, otestujte přenos na jednom záznamu a zapište vlastníka integrace.“
+
+Praktická struktura článku:
+
+- **Kdy to použít:** jedna věta s reálnou situací.
+- **Co budete potřebovat:** role, oprávnění, data, externí účet.
+- **Postup:** kroky podle výsledku, ne podle interní architektury.
+- **Bezpečnost a data:** co se ukládá, co se posílá ven, jak vypnout přístup.
+- **Když se nedaří:** nejčastější chyby a bezpečný postup eskalace.
+- **Související články:** maximálně tři odkazy, ne vánoční stromeček.
+
+## DW.2 Každý článek musí mít vlastníka a datum revize
+
+Dokumentace stárne rychleji než roadmapa po prvním enterprise callu. Proto nestačí článek napsat. Každá stránka potřebuje vlastníka, datum poslední kontroly a spouštěč revize.
+
+Minimální metadata u článku:
+
+| Pole | Příklad | Proč existuje |
+| --- | --- | --- |
+| Vlastník | Produkt / Support / Security | Někdo odpovídá za pravdivost |
+| Poslední revize | 2026-08-12 | Čtenář i tým vidí stáří obsahu |
+| Revizní spouštěč | změna UI, nová role, nový dodavatel | Článek se opraví při změně produktu |
+| Riziko | nízké / střední / vysoké | Bezpečnostní články mají kratší toleranci |
+| Související proces | onboarding, billing, export, incident | Pomáhá najít dopady změn |
+
+Pravidlo pro malý tým: když měníš obrazovku, flow, API nebo e-mailovou šablonu, ticket není hotový, dokud nevíš, jestli se musí změnit dokumentace. Ne „někdy potom“. Potom je tajemná země, kde umírají návody.
+
+## DW.3 Screenshoty používej střídmě a bez citlivých dat
+
+Screenshot je dobrý sluha a mizerný zdroj pravdy. Jakmile se změní UI, obrázek začne lhát. Navíc screenshoty často omylem obsahují zákaznická jména, e-maily, interní ID, fakturační údaje nebo názvy projektů.
+
+Bezpečný postup pro screenshoty:
+
+- Používej demo účet s realistickými, ale fiktivními daty.
+- Rozmaž nebo vynech části, které nejsou podstatné pro krok.
+- Nezobrazuj tokeny, API klíče, e-maily, adresy ani interní identifikátory.
+- Preferuj krátké popisky a zvýraznění prvku před celou obrazovkou.
+- U bezpečnostních a datových témat doplň textový postup, aby článek fungoval i bez obrázku.
+- Screenshoty kontroluj při každé větší změně design systému.
+
+Codyho komentář: Pokud návod bez screenshotu nedává smysl, možná není problém v dokumentaci, ale v produktu. Au. Ale lepší au teď než třicet ticketů později.
+
+## DW.4 Vyhledávání v dokumentaci nesmí být datový vysavač
+
+Vyhledávání v help centru je užitečné, protože ukazuje, co lidé nedokážou najít. Jenže dotazy mohou obsahovat citlivé údaje: e-mail zákazníka, číslo faktury, název firmy, token, doménu nebo popis bezpečnostního incidentu. Proto s nimi zacházej jako s potenciálně osobními daty.
+
+Privacy-first pravidla pro hledání:
+
+- Loguj agregované dotazy, ne detailní historii konkrétního uživatele.
+- Před ukládáním dotazů odstraň e-maily, tokeny, čísla faktur a dlouhé identifikátory.
+- Nepropojuj hledání v dokumentaci s marketingovým profilem návštěvníka.
+- Uchovávej dotazy krátce, například jen pro měsíční review obsahu.
+- U interní dokumentace odděl produktové hledání od zákaznických dat.
+- Sleduj hlavně „nenalezeno“ a opakované dotazy, ne každé kliknutí.
+
+Měsíční report vyhledávání může být jednoduchý:
+
+| Signál | Co znamená | Akce |
+| --- | --- | --- |
+| 20× hledáno „export faktur“ | Článek není vidět nebo neexistuje | vytvořit / přejmenovat článek |
+| 12× hledáno „smazat účet“ | Kritická privacy otázka | zkontrolovat flow a viditelnost |
+| 9× hledáno „API limit“ | Chybí technický detail | doplnit limity a příklady |
+| 7× hledáno bez výsledku po releasu | Dokumentace nestíhá produkt | přidat revizní krok do release checklistu |
+
+## DW.5 Dokumentace má být napojená na support, ne na výmluvy
+
+Help centrum nesmí být věta „přečtěte si dokumentaci“ převlečená za podporu. Správné napojení vypadá tak, že support používá články jako opakovatelnou odpověď, ale zároveň sbírá signály, kde článek selhal.
+
+Praktický support loop:
+
+1. Support odpoví člověku konkrétně, ne jen odkazem.
+2. Přidá odkaz na článek jako doplnění nebo prevenci příště.
+3. Označí tiket štítkem `docs-gap`, pokud článek chybí nebo mate.
+4. Jednou týdně projde 5 nejčastějších docs-gap témat.
+5. Produkt nebo support opraví článek, flow nebo mikrotext v aplikaci.
+
+Šablona interní poznámky:
+
+> „Zákazník se zasekl u pozvání účetní. Článek existuje, ale neříká, jaká role stačí pro faktury. Doplnit tabulku rolí a přidat odkaz z obrazovky Fakturace.“
+
+Tohle je lepší než další meeting o „edukačním obsahu“. Dokumentace má řešit tření. Ne vyrábět obsahový koberec, pod který se zamete špatný UX.
+
+## DW.6 Checklist produktové dokumentace
+
+- Má každý důležitý článek jasnou situaci, pro kterou existuje?
+- Je postup psaný podle výsledku zákazníka, ne podle interního menu?
+- Má článek vlastníka, datum revize a spouštěč aktualizace?
+- Jsou screenshoty z demo dat a bez e-mailů, tokenů, faktur a interních ID?
+- Je u datových funkcí napsáno, co se ukládá, kam se posílá a jak to vypnout?
+- Ukládá vyhledávání v dokumentaci jen minimum dat a ideálně agregovaně?
+- Existuje štítek nebo proces pro support tikety typu `docs-gap`?
+- Kontroluje se dokumentace při releasu, redesignu, změně rolí a změně integrací?
+- Umí nový člen týmu podle dokumentace vyřešit běžný zákaznický scénář bez ptaní?
+- Je v dokumentaci méně marketingové mlhy než praktických kroků? Pokud ne, škrtat. Nemilosrdně, ale s úsměvem.
+
+## Shrnutí přílohy
+
+Produktová dokumentace je provozní systém důvěry. Pomáhá zákazníkům dokončit práci, supportu odpovídat konzistentně a týmu neztrácet pravdu mezi tickety, starými screenshoty a dobrými úmysly. Privacy-first dokumentace navíc nesbírá víc dat, než potřebuje: vyhledávání drží agregovaně, screenshoty používá z demo účtů, datové funkce vysvětluje lidsky a každý článek má vlastníka. Dobrá dokumentace není knihovna. Je to tichý člen týmu, který pracuje i ve tři ráno a nechce za to Slack notifikace.
+
+
 ## Pracovní log
+- 2026-08-12: Přidána příloha DW o produktové dokumentaci a help centru: vlastník článků, revize, bezpečné screenshoty, privacy-first vyhledávání, support loop a checklist.
 - 2026-08-12: Přidána příloha DV o background jobech a frontách: typy úloh, idempotence, retry strategie, bezpečné logování, UX asynchronních akcí, priority a checklist.
 - 2026-08-12: Přidána příloha DU o datové rezidenci a cloud regionech: rozdíl mezi regionem a celým provozem, otázky na dodavatele, SCC bez magie, rozhodovací strom, evropský baseline stack a checklist.
 - 2026-08-12: Přidána příloha DT o changelogu a release notes: typy změn, interní release checklist, datový odstavec, breaking changes, distribuce přes vlastní web/RSS a privacy-first checklist.
