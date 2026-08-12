@@ -19132,7 +19132,150 @@ Tohle je lepší než další meeting o „edukačním obsahu“. Dokumentace m�
 Produktová dokumentace je provozní systém důvěry. Pomáhá zákazníkům dokončit práci, supportu odpovídat konzistentně a týmu neztrácet pravdu mezi tickety, starými screenshoty a dobrými úmysly. Privacy-first dokumentace navíc nesbírá víc dat, než potřebuje: vyhledávání drží agregovaně, screenshoty používá z demo účtů, datové funkce vysvětluje lidsky a každý článek má vlastníka. Dobrá dokumentace není knihovna. Je to tichý člen týmu, který pracuje i ve tři ráno a nechce za to Slack notifikace.
 
 
+# Příloha DX: Přihlášení, session a role bez věčných tokenů, falešných adminů a bezpečnostního divadla
+
+Přihlášení je jedna z těch částí SaaS produktu, která vypadá hotově ve chvíli, kdy funguje formulář. Jenže skutečné riziko nezačíná u tlačítka „Přihlásit“. Začíná u toho, co se děje potom: jak dlouho session žije, kde je token uložený, co se stane při změně role, jestli jde ukončit cizí zařízení a jestli administrátor opravdu smí dělat jen to, co má.
+
+OWASP v Session Management Cheat Sheet připomíná, že session ID po přihlášení dočasně zastupuje sílu autentizace a jeho kompromitace může vést k převzetí účtu: https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html. Privacy-first produkt proto neřeší session jen jako technický detail frameworku. Řeší ji jako součást důvěry: držet účet bezpečně, sbírat minimum dat a dát člověku kontrolu.
+
+## DX.1 Session token není vizitka uživatele
+
+Token nebo session ID má být nudný, náhodný a bez významu. Nemá obsahovat e-mail, roli, plán, workspace, interní poznámku ani cokoliv, co by po úniku pomohlo útočníkovi nebo zbytečně rozšířilo osobní data v logách. OWASP doporučuje, aby session ID bylo náhodné, nepředvídatelné a neobsahovalo citlivé informace ani PII: https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html
+
+Praktické pravidlo:
+
+- V klientovi drž jen identifikátor session, ne obchodní logiku.
+- Stav session, role a oprávnění vyhodnocuj na serveru.
+- Neposílej session ID v URL, protože skončí v historii, referrerech, logách a screenshotech.
+- Pro webové aplikace preferuj bezpečné cookies s `HttpOnly`, `Secure` a vhodným `SameSite`.
+- Tokeny, refresh tokeny a session ID neukládej do `localStorage`, pokud nechceš z XSS udělat all-inclusive dovolenou pro útočníka.
+- Při zvýšení oprávnění nebo přihlášení po resetu hesla session obnov nebo zneplatni starší rizikové session.
+
+Příklad špatného nápadu:
+
+> „Do JWT dáme e-mail, roli, firmu, tarif a datum konce trialu. Aspoň to nemusíme načítat z databáze.“
+
+Příklad lepšího nápadu:
+
+> „Cookie obsahuje jen náhodný identifikátor. Server u každého požadavku ověří session, workspace, roli a aktuální stav účtu.“
+
+Ano, druhá varianta je méně „chytrá“. Přesně proto je bezpečnější.
+
+## DX.2 Timeouty nastav podle rizika, ne podle nálady frameworku
+
+NIST Digital Identity Guidelines rozlišují celkový timeout session a timeout neaktivity; při vypršení má být session ukončena a aktivita resetuje jen neaktivní timeout: https://pages.nist.gov/800-63-4/sp800-63b.html. Pro malý SaaS to neznamená slepě kopírovat federální standardy. Znamená to mít jasné rozhodnutí.
+
+Rozumný model:
+
+| Typ prostředí | Neaktivita | Celková délka | Poznámka |
+| --- | --- | --- | --- |
+| Běžný B2B účet | 30–120 minut | 7–30 dní | podle citlivosti produktu |
+| Admin / billing | 15–30 minut | 8–24 hodin | vyžaduj reautentizaci pro citlivé akce |
+| Veřejný kiosk / sdílené zařízení | 5–15 minut | krátká session | explicitní varování před ukončením |
+| Interní support access | co nejkratší | časově omezené okno | auditovat a automaticky vypnout |
+
+Timeout není trest pro uživatele. Je to pojistka proti opuštěnému notebooku, ukradené cookie a sdílenému zařízení. Dobrý UX detail je varování před vypršením: „Za 2 minuty vás odhlásíme kvůli neaktivitě.“ Tohle je bezpečnost, která se nechová jako zákeřná kancelářská židle.
+
+## DX.3 Aktivní session ukaž uživateli
+
+Privacy-first účet má dát člověku kontrolu nad tím, kde je přihlášený. Ne kvůli hezkému panelu v nastavení, ale protože uživatel často pozná problém dřív než monitoring: divné zařízení, starý prohlížeč, přihlášení z cizího města, opuštěný firemní notebook.
+
+Stránka „Aktivní přihlášení“ může ukazovat:
+
+- typ zařízení a prohlížeč,
+- přibližný čas poslední aktivity,
+- přibližnou lokalitu jen pokud ji opravdu potřebuješ a umíš ji vysvětlit,
+- zda jde o aktuální session,
+- tlačítko „Odhlásit toto zařízení“ nebo „Odhlásit všude“.
+
+Minimalistická tabulka:
+
+| Zařízení | Poslední aktivita | Stav | Akce |
+| --- | --- | --- | --- |
+| Chrome na macOS | dnes 10:42 | aktuální | — |
+| Safari na iPhonu | včera 18:10 | aktivní | Odhlásit |
+| Firefox na Linuxu | před 19 dny | neaktivní | Odstranit |
+
+Nesnaž se z toho udělat špionážní dashboard. Uživatel nepotřebuje přesnou GPS stopu. Potřebuje poznat, jestli účet není otevřený někde, kde nemá být.
+
+## DX.4 Role testuj jako bezpečnostní matici
+
+„Máme role“ není odpověď. Otázka zní: kdo může udělat jakou akci nad kterým objektem a za jakých podmínek? OWASP Authorization Cheat Sheet doporučuje mimo jiné princip nejmenších oprávnění, výchozí zamítnutí a validaci oprávnění u každého požadavku: https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html
+
+Pro SaaS s workspaces si vytvoř jednoduchou autorizační matici:
+
+| Akce | Owner | Admin | Member | Accountant | Support |
+| --- | --- | --- | --- | --- | --- |
+| Změnit tarif | ano | ne / volitelně | ne | ne | ne |
+| Pozvat uživatele | ano | ano | ne | ne | ne |
+| Zobrazit faktury | ano | ano | ne | ano | ne |
+| Exportovat všechna data | ano | ne | ne | ne | ne |
+| Dočasně vstoupit do účtu | ne | ne | ne | ne | jen se schválením |
+
+Důležité: matici nestačí mít v Notionu a poplácat ji po zádech. Oprávnění musí být ověřená na serveru a pokrytá testy. Frontendové schování tlačítka je UX, ne bezpečnost. Pokud endpoint dovolí akci po ruční změně requestu, role jsou jen divadelní kulisa.
+
+## DX.5 Citlivé akce chtějí druhé potvrzení
+
+Ne každá akce v aplikaci má stejné riziko. Změna názvu projektu nepotřebuje stejnou ochranu jako změna e-mailu vlastníka, vypnutí MFA, export celé databáze kontaktů nebo smazání workspace. U citlivých akcí vyžaduj reautentizaci, potvrzení druhým faktorem nebo alespoň bezpečný potvrzovací krok.
+
+Citlivé akce typicky jsou:
+
+- změna hesla, e-mailu, MFA a recovery metod,
+- změna vlastníka workspace,
+- přidání nebo odebrání administrátora,
+- export velkého množství dat,
+- smazání účtu, workspace nebo fakturačních dat,
+- vytvoření API klíče s vyšším oprávněním,
+- zapnutí integrace, která posílá data mimo vlastní systém.
+
+Potvrzovací obrazovka má říct konkrétně, co se stane:
+
+> „Export stáhne všechny kontakty z workspace Acme Demo včetně jmen, e-mailů a poznámek. Soubor bude dostupný 24 hodin. Pokračujte jen pokud máte oprávnění tato data zpracovat.“
+
+Tohle není právní strašení. To je produktová brzda před chybou, která by jinak měla dlouhý ocas a nepříjemnou vůni.
+
+## DX.6 Loguj bezpečnostní události, ne zbytečné osobní detaily
+
+Bez auditní stopy se špatně vyšetřuje incident. S příliš detailní auditní stopou si zase vyrábíš další databázi citlivých údajů. Správná cesta je logovat událost, aktéra, čas, objekt a výsledek, ale neobsahovat samotná zákaznická data víc, než je nutné.
+
+Příklad bezpečnostních událostí:
+
+| Událost | Co logovat | Co nelogovat |
+| --- | --- | --- |
+| Přihlášení selhalo | uživatel / účet, čas, důvod typu, IP hash | zadané heslo |
+| Role změněna | kdo, komu, stará role, nová role | interní poznámky zákazníka |
+| Export spuštěn | kdo, workspace, typ exportu, čas | obsah exportu |
+| API klíč vytvořen | kdo, scope, poslední 4 znaky identifikátoru | celý secret |
+| Session ukončena | kdo, která session, důvod | přesná poloha zařízení |
+
+Auditní log má mít vlastní retenci, omezený přístup a jasný účel. Pokud ho napojíš do marketingové analytiky, právě jsi z bezpečnostního prvku udělal datový kompost. Gratuluji, ale raději to vrať.
+
+## DX.7 Checklist přihlášení, session a rolí
+
+- Jsou session ID náhodná, bez významu a bez osobních údajů?
+- Nepředávají se tokeny v URL, referrerech, analytice nebo support screenshotech?
+- Používáš bezpečné cookies s `HttpOnly`, `Secure` a vhodným `SameSite`?
+- Máš nastavený timeout neaktivity i celkovou životnost session podle rizika?
+- Vidí uživatel aktivní session a může ukončit cizí zařízení?
+- Ověřuje server oprávnění u každého citlivého požadavku?
+- Existuje autorizační matice pro role, workspace a datové objekty?
+- Jsou role pokryté testy, nejen schovanými tlačítky ve frontendu?
+- Vyžadují citlivé akce reautentizaci nebo druhé potvrzení?
+- Loguje auditní stopa bezpečnostní události bez zbytečného obsahu zákaznických dat?
+
+## Zdroje k příloze
+
+- OWASP Session Management Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html
+- OWASP Authorization Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html
+- NIST SP 800-63B Digital Identity Guidelines, část k session a reautentizaci: https://pages.nist.gov/800-63-4/sp800-63b.html
+
+## Shrnutí přílohy
+
+Bezpečné přihlášení nekončí úspěšným loginem. Pokračuje náhodnou a bezvýznamovou session, rozumnými timeouty, přehledem aktivních zařízení, serverově vynucenými rolemi, potvrzením citlivých akcí a auditní stopou, která pomáhá při incidentu bez zbytečného sběru dat. Privacy-first přístup tu není brzda použitelnosti. Je to rozdíl mezi produktem, který umí držet důvěru, a produktem, který doufá, že se nikdo nepodívá pod koberec.
+
+
 ## Pracovní log
+- 2026-08-12: Přidána příloha DX o přihlášení, session a rolích: bezpečné tokeny, timeouty, aktivní session, autorizační matice, citlivé akce, auditní log a checklist.
 - 2026-08-12: Přidána příloha DW o produktové dokumentaci a help centru: vlastník článků, revize, bezpečné screenshoty, privacy-first vyhledávání, support loop a checklist.
 - 2026-08-12: Přidána příloha DV o background jobech a frontách: typy úloh, idempotence, retry strategie, bezpečné logování, UX asynchronních akcí, priority a checklist.
 - 2026-08-12: Přidána příloha DU o datové rezidenci a cloud regionech: rozdíl mezi regionem a celým provozem, otázky na dodavatele, SCC bez magie, rozhodovací strom, evropský baseline stack a checklist.
