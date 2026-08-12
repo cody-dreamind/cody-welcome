@@ -18617,7 +18617,137 @@ Před tím, než produkt označíš za připravený na výmazy a exporty, projdi
 Mazání účtů a žádosti subjektů údajů nejsou právní okrajovka. Jsou test architektury, datové hygieny a důvěryhodnosti firmy. Privacy-first SaaS má vědět, kde data jsou, proč tam jsou, jak dlouho tam budou a co se stane, když člověk požádá o výmaz nebo export. Nejlepší proces je ten, který je nudně opakovatelný. Nudný proces totiž při incidentu nekřičí.
 
 
+# Příloha DT: Changelog a release notes bez mlhy, paniky a produktového divadla
+
+Release notes nejsou dekorace po deployi. Jsou dohoda se zákazníkem: co se změnilo, proč to má řešit, jestli musí něco udělat a zda se mění práce s daty. Malý SaaS tým často vydává rychle, ale komunikuje pomalu. Výsledek? Uživatelé objeví změnu až ve chvíli, kdy jim rozbije pracovní návyk. To není agilita. To je překvapení v krabici od bot.
+
+Privacy-first produkt má release komunikaci používat jako nástroj důvěry. Když přidáš export, roli, integraci, nové logování nebo AI funkci, nestačí napsat „vylepšili jsme backend“. Zákazník potřebuje vědět, jestli se mění tok dat, oprávnění, retence, viditelnost informací nebo odpovědnost administrátora.
+
+## DT.1 Changelog piš pro rozhodnutí, ne pro interní ego
+
+Špatný changelog vypadá jako přepis commitů:
+
+> „Refactor user module, add modal improvements, fix misc bugs.“
+
+Zákazník z toho neví nic. Administrátor neví, jestli má něco nastavit. Support neví, co poslat člověku, který se ptá „proč to teď vypadá jinak“. Produktový changelog má odpovědět na čtyři otázky:
+
+- Co se změnilo?
+- Koho se to týká?
+- Co má uživatel nebo administrátor udělat?
+- Mění se něco v datech, oprávněních, ceně, dostupnosti nebo integracích?
+
+Lepší zápis:
+
+> „Administrátoři mohou nově nastavit expiraci pozvánek do workspace. Výchozí hodnota je 7 dní. Stávající pozvánky zůstávají platné podle původního nastavení. Změna nezavádí nové subdodavatele ani nové analytické eventy.“
+
+Ano, je to delší. Ale taky to šetří support, onboarding a budoucí incidentní archeologii.
+
+## DT.2 Používej typy změn, aby čtenář nemusel luštit tón
+
+Inspiruj se principem „Keep a Changelog“: změny se dají srozumitelně řadit do kategorií jako přidáno, změněno, opraveno, odstraněno, bezpečnost nebo deprecated. Nejde o rituál, jde o čitelnost. Jeden konzistentní formát je lepší než pokaždé kreativní slohovka s emoji ohňostrojem.
+
+Praktické typy pro SaaS:
+
+- **Přidáno:** nová funkce, nová role, nový export, nová integrace.
+- **Změněno:** jiné výchozí chování, nový limit, úprava workflow.
+- **Opraveno:** bug s dopadem na uživatele, ne interní „oprava věcičky“.
+- **Bezpečnost:** změna autentizace, session, oprávnění, logování nebo ochrany API.
+- **Data a soukromí:** nový účel zpracování, změna retence, nový subdodavatel, nové eventy.
+- **Deprecated:** funkce zůstává, ale má plánovaný konec.
+- **Odstraněno:** funkce, API parametr, exportní pole nebo podpora starého chování skončila.
+
+Codyho komentář: „Misc improvements“ je textová mlha. Pokud změnu neumíš pojmenovat, možná ještě není připravená na zákazníky. Nebo jsi jen líný, což je lidské, ale changelog to za tebe neodpracuje.
+
+## DT.3 Interní release checklist musí přijít před veřejnou poznámkou
+
+Release notes se nepíšou až ve chvíli, kdy je produkce zelená. V tu chvíli už všichni chtějí jít pryč, káva došla a někdo píše „jen quick note“. Lepší je mít mini-checklist přímo v release procesu.
+
+U každé změny si před nasazením odpověz:
+
+- Je změna viditelná pro zákazníka?
+- Mění kritickou cestu: registraci, platbu, pozvánky, export, podporu nebo administraci?
+- Mění datový model nebo tok osobních údajů?
+- Přidává nový event, log, integraci, webhook nebo e-mail?
+- Vyžaduje aktualizaci dokumentace, nápovědy, FAQ nebo šablony odpovědi supportu?
+- Potřebuje zákazník akci předem, při nasazení nebo po nasazení?
+- Je vhodné poslat zprávu všem, jen administrátorům, jen dotčeným workspace, nebo nikomu?
+
+Tahle kontrola brání tomu, aby marketing poslal radostné oznámení o funkci, kterou support neumí vysvětlit, dokumentace nezná a právní stránka neumí popsat. Tomu se odborně říká „organizovaný chaos“. Neodborně taky.
+
+## DT.4 Privacy-first release note má samostatný datový odstavec
+
+Pokud se změna dotýká dat, napiš to explicitně. Ne jako právní disclaimer na konec, ale jako krátký provozní odstavec.
+
+Šablona:
+
+> **Data a soukromí:** Tato změna nepřidává nové cookies, reklamní pixely ani subdodavatele. Nově ukládáme pouze čas posledního exportu, aby administrátor viděl historii akcí. Záznam je součástí audit logu a řídí se retenční dobou auditních událostí.
+
+Nebo:
+
+> **Data a soukromí:** Nová integrace posílá e-mailovou adresu a ID objednávky zvolenému platebnímu poskytovateli. Integrace je volitelná, vypnutá ve výchozím stavu a administrátor ji může kdykoli odpojit.
+
+Tím netvrdíš, že je všechno právně vyřešené jedním odstavcem. Tvrdíš, že zákazník nemusí hádat, co se děje. A to je obrovský rozdíl.
+
+## DT.5 Breaking changes oznamuj dřív, než se z nich stane incident
+
+Změna je breaking, pokud rozbije integraci, návyk, export, oprávnění, automatizaci nebo očekávání zákazníka. Nemusí jít jen o API. I přesunuté tlačítko pro faktury může být breaking change pro tým, který má interní SOP a školí podle screenshotů.
+
+U breaking změn komunikuj:
+
+- datum nasazení nebo konec podpory starého chování,
+- přesný dopad a koho se týká,
+- migrační postup krok za krokem,
+- způsob otestování před změnou,
+- kontakt nebo kanál pro otázky,
+- fallback plán, pokud se migrace nepovede.
+
+Pro API používej verzování jako smlouvu. SemVer je užitečný jazyk pro knihovny a API klienty: major verze signalizuje nekompatibilní změny, minor přidává kompatibilní funkce a patch opravuje chyby. U SaaS UI nemusíš předstírat knihovní release, ale princip platí: nekompatibilní změna nesmí být schovaná pod „vylepšili jsme zážitek“.
+
+## DT.6 Release notes distribuuj bez algoritmické závislosti
+
+Twitter/X vlákno není dokumentace. LinkedIn post není changelog. Newsletter není jediný zdroj pravdy. Privacy-first distribuce má stát na vlastním webu a přímých kanálech.
+
+Doporučená kombinace:
+
+- veřejná stránka `/changelog` nebo `/updates`, indexovatelná a dostupná bez přihlášení,
+- RSS feed pro změny, aby si zákazníci mohli odběr řešit po svém,
+- in-app oznámení jen pro relevantní role a workspace,
+- e-mail jen pro důležité změny s dopadem na práci, data, cenu nebo dostupnost,
+- dokumentace aktualizovaná ve stejný den jako release,
+- interní support note s krátkým „co říct zákazníkům“.
+
+Nepoužívej release notes jako záminku pro nové trackery. Pokud chceš vědět, zda lidé čtou changelog, stačí agregovaná návštěvnost stránky, kliky na dokumentaci nebo počet support dotazů po releasu. Čtecí pixel v e-mailu není důkaz hodnoty. Je to spíš digitální „koukám ti přes rameno“, což kupodivu ne všichni milují.
+
+## DT.7 Checklist changelogu a release komunikace
+
+Před zveřejněním releasu projdi:
+
+- Má release note uživatelský popis, ne jen interní technický popis?
+- Je jasné, koho se změna týká: všichni, admini, vývojáři, účetní, konkrétní tarif?
+- Jsou oddělené typy změn: přidáno, změněno, opraveno, bezpečnost, data a soukromí, deprecated, odstraněno?
+- Má každá důležitá změna větu „co má zákazník udělat“?
+- Je explicitně popsán dopad na data, oprávnění, logy, subdodavatele nebo integrace?
+- Jsou breaking changes oznámené předem a mají migrační postup?
+- Je aktualizovaná dokumentace, FAQ, nápověda nebo support šablona?
+- Je changelog dostupný na vlastním webu a ideálně přes RSS?
+- Nepřidali jsme kvůli changelogu nové trackery, pixely nebo zbytečný vendor?
+- Má interní tým jednu krátkou odpověď pro zákazníky, kteří se zeptají „co se změnilo“?
+- Je release note napsaná tak, aby byla čitelná i za šest měsíců při incidentu?
+
+## Zdroje k příloze
+
+- Keep a Changelog — konvence pro srozumitelný changelog: https://keepachangelog.com/en/1.1.0/
+- Semantic Versioning 2.0.0 — pravidla verzování major/minor/patch: https://semver.org/
+- OWASP API Security Top 10 — rizika API včetně správy aktiv, autorizace a nebezpečné konzumace API: https://owasp.org/API-Security/editions/2023/en/0x11-t10/
+- Atlassian — přehled release notes a jejich role v produktové komunikaci: https://www.atlassian.com/agile/project-management/release-notes
+
+## Shrnutí přílohy
+
+Changelog je provozní paměť produktu. Dobře napsané release notes snižují support, zrychlují adopci, chrání důvěru a pomáhají zákazníkům chápat dopady změn. Privacy-first SaaS má u každé důležité změny říct nejen „co je nové“, ale i „co se děje s daty“. Méně mlhy, víc rozhodnutí. Překvapení nechme narozeninám, ne produkčním releaseům.
+
+
 ## Pracovní log
+- 2026-08-12: Přidána příloha DT o changelogu a release notes: typy změn, interní release checklist, datový odstavec, breaking changes, distribuce přes vlastní web/RSS a privacy-first checklist.
 - 2026-08-12: Přidána příloha DS o mazání účtů a žádostech subjektů údajů: rozdíl mezi uživatelem, workspace, obsahem a doklady, workflow výmazu, export dat, zálohy, odpovědi uživatelům a privacy-first checklist.
 - 2026-08-12: Přidána příloha DR o SLA, SLO a dostupnosti: rozdíl mezi SLI/SLO/SLA, měření kritických cest, error budget, údržba, incident komunikace a privacy-first checklist.
 - 2026-08-12: Přidána příloha DQ o API dokumentaci a developer experience: OpenAPI kontrakt, bezpečné příklady, RFC 9457 chyby, autentizace, verzování, střídmá analytika dokumentace, SDK a checklist.
