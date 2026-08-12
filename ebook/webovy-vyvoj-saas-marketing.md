@@ -19441,7 +19441,182 @@ Codyho poznámka: u malého B2B SaaS často stačí jednodušší systém než v
 
 Feature flagy jsou skvělé, když jsou malé, dočasné a dobře popsané. Pomáhají bezpečně vydávat změny, řídit rollout, vypnout rozbitou funkci a ověřit hypotézu bez velkého deploy dramatu. Privacy-first přístup ale drží brzdu: rollout nemá být záminka ke sběru osobních profilů, experimenty mají měřit jen nezbytné signály a staré flagy musí pravidelně mizet. Dobrý flag systém není kasino. Je to provozní ovladač s auditní stopou, bezpečnou výchozí hodnotou a plánem úklidu.
 
+
+---
+
+# Příloha DZ: Forenzní stopa při incidentech bez paniky, slepých míst a datového přelivu
+
+Základní auditní log už říká, kdo změnil důležitý stav systému. Forenzní stopa jde o krok dál: propojuje auditní události, provozní logy, bezpečnostní signály a incidentovou časovou osu tak, aby šlo při problému rychle zjistit, co se stalo, koho se to týká a co je potřeba opravit. Ne pro všechno. Když se povede dobře, pomůže dohledat, kdo změnil nastavení fakturace, kdo přidal nového admina, kdo exportoval data a proč zákazník tvrdí, že „se to samo rozbilo“. Když se povede špatně, stane se z něj buď prázdný dekorativní soubor, nebo detailní deník zákaznického života. Obojí je problém. Jeden při incidentu mlčí, druhý při auditu křičí.
+
+Privacy-first forenzní stopa má jednoduchou ambici: zaznamenat bezpečnostně a provozně důležité signály tak, aby tým dokázal vysvětlit incident, ale zároveň zbytečně nekopíroval osobní data, obsah dokumentů, zprávy, API payloady nebo interní tajemství. OWASP Logging Cheat Sheet doporučuje logovat bezpečnostně významné události a zároveň varuje před ukládáním citlivých dat, jako jsou hesla, session identifikátory, přístupové tokeny nebo zbytečné osobní údaje: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+
+## DZ.1 Nejdřív rozhodni, co patří do incidentní časové osy
+
+Incidentní časová osa není totéž co aplikační log. Aplikační log pomáhá vývojáři pochopit, proč job spadl. Incidentní časová osa pomáhá firmě rozhodnout, kdy problém začal, co ho spustilo, koho zasáhl a kdy byl bezpečně ukončen. Míchat je dohromady je jako sypat faktury, stack trace a poznámky ze supportu do jedné krabice s nápisem „důležité“. Technicky možné, mentálně trestuhodné.
+
+Do incidentní časové osy typicky patří:
+
+- změna rolí a oprávnění,
+- přidání nebo odebrání uživatele z workspace,
+- zapnutí integrace nebo změna jejího scope,
+- export dat,
+- změna fakturačních údajů nebo tarifu,
+- změna bezpečnostního nastavení,
+- přihlášení z nového zařízení u admin účtu,
+- vytvoření nebo rotace API klíče,
+- smazání projektu, workspace nebo důležitého obsahu,
+- změna retenčních pravidel.
+
+Naopak incidentní signál obvykle není každé kliknutí, každé zobrazení stránky, pohyb myši, text hledání nebo celý obsah formuláře. To patří buď do agregované produktové analytiky, provozních logů, nebo vůbec nikam. Ticho je někdy nejlepší databázová tabulka.
+
+## DZ.2 Propoj auditní událost s provozním kontextem
+
+Dobrý forenzní záznam je stručný a opakovatelný. Nemá být literární report. Má dát odpověď na základní otázky: kdo, co, na čem, kdy, odkud v rozumné míře, s jakým výsledkem a pod jakým korelačním ID.
+
+Praktické schéma:
+
+| Pole | Příklad | Poznámka |
+| --- | --- | --- |
+| `timestamp` | `2026-08-12T12:30:00Z` | UTC čas bez hádání |
+| `actor_type` | `user`, `system`, `api_key` | kdo akci spustil |
+| `actor_id` | interní stabilní ID | ne e-mail, pokud není nutný |
+| `workspace_id` | interní ID tenantu | lepší než název firmy |
+| `event` | `role.updated` | slovník událostí |
+| `target_type` | `user_role` | typ objektu |
+| `target_id` | interní ID objektu | bez kopírování obsahu |
+| `result` | `success`, `denied`, `failed` | důležité pro bezpečnost |
+| `request_id` | korelační ID | spojení s provozními logy |
+| `metadata` | minimální diff | jen nezbytné hodnoty |
+
+Příklad dobrého záznamu:
+
+```json
+{
+  "timestamp": "2026-08-12T12:30:00Z",
+  "actor_type": "user",
+  "actor_id": "usr_123",
+  "workspace_id": "wrk_456",
+  "event": "role.updated",
+  "target_type": "workspace_member",
+  "target_id": "mem_789",
+  "result": "success",
+  "metadata": { "from": "editor", "to": "admin" },
+  "request_id": "req_abc"
+}
+```
+
+Příklad špatného záznamu:
+
+```json
+{
+  "event": "user did stuff",
+  "email": "zakaznik@example.com",
+  "old_password": "...",
+  "new_token": "...",
+  "full_request_body": "..."
+}
+```
+
+Ten druhý záznam je jako bezpečnostní kamera v koupelně. Možná něco zachytí, ale hlavně vysvětluješ, proč vůbec existuje.
+
+## DZ.3 Metadata omez na změnu, ne na celý obsah
+
+U auditních logů bývá největší pokušení uložit „pro jistotu“ celý původní a nový objekt. Uživatel změnil profil? Uložíme celý profil. Admin upravil integraci? Uložíme celý config včetně tokenů. Zákazník exportoval data? Uložíme parametry exportu i filtr s citlivým textem. Gratuluji, z auditního logu je sekundární databáze bez produktového UI a často s horší retencí.
+
+Bezpečnější pravidla:
+
+- Ukládej typ změny a minimální diff, ne celý objekt.
+- Tajné hodnoty nikdy neloguj; loguj jen informaci, že byly nastavené nebo rotované.
+- U citlivých polí ukládej kategorii změny, ne hodnotu.
+- E-mail, jméno nebo IP adresu použij jen tam, kde nestačí stabilní interní ID.
+- U exportů loguj rozsah a formát, ne vyexportovaný obsah.
+- U integrací loguj dodavatele a scope, ne token nebo payload.
+
+Příklad:
+
+> „API klíč `key_123` byl rotován uživatelem `usr_456`. Starý klíč byl deaktivován. Hodnota klíče nebyla uložená do auditního logu.“
+
+Tohle je užitečné. Uložit celý klíč do logu je bezpečnostní verze toho, když si někdo napíše PIN na platební kartu a řekne tomu dokumentace.
+
+## DZ.4 Incidentní stopa musí být čitelná pro support i zákazníka
+
+Forenzní stopa není jen pro bezpečnostního specialistu po incidentu. V B2B SaaS často pomáhá supportu odpovědět na otázky typu „kdo nám vypnul integraci?“ nebo „proč kolega nevidí projekt?“ Pokud má support číst raw JSON z produkční databáze, není to proces. Je to iniciační rituál.
+
+Udělej dvě vrstvy:
+
+- interní auditní záznam se stabilním schématem,
+- uživatelsky čitelný pohled v administraci nebo support nástroji.
+
+Čitelná věta:
+
+> „12. 8. 2026 v 12:30 uživatel `usr_123` změnil roli člena `mem_789` z Editor na Admin. Akce proběhla úspěšně.“
+
+Pro zákaznický pohled zvaž, které události mají vidět vlastníci workspace. Často dává smysl ukázat bezpečnostní a administrativní změny: přístupy, role, exporty, integrace, billing a smazání. Nemusí vidět interní retry jobu ani detail request ID, pokud to není relevantní. Transparentnost neznamená vylít na zákazníka celý serverový sklep.
+
+## DZ.5 Retence incidentních stop je bezpečnostní a právní rozhodnutí
+
+GDPR principy zahrnují minimalizaci údajů a omezení uložení; Evropská komise je shrnuje v přehledu principů zpracování osobních údajů: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en. Incidentní stopy proto nemají žít navždy jen proto, že „by se to jednou mohlo hodit“. Musí mít účel, přístupová práva a dobu uložení.
+
+Praktická retence:
+
+| Typ události | Příklad retence | Poznámka |
+| --- | --- | --- |
+| běžné administrativní změny | 12–24 měsíců | podle zákaznických smluv a rizika |
+| bezpečnostní události | 24 měsíců nebo déle | podle threat modelu a povinností |
+| debug metadata | dny až týdny | často stačí krátce |
+| billing audit | podle účetních a smluvních pravidel | oddělit od produktových logů |
+| smazání a export dat | podle DSAR procesu | aby šlo doložit splnění žádosti |
+
+Tohle není právní rada, ale produktový rámec. Konkrétní doby ověř s právníkem a účetními povinnostmi. Codyho komentář: když tým neumí vysvětlit, proč log drží tři roky, pravděpodobně ho drží ze strachu. Strach je špatný architekt databází.
+
+## DZ.6 Přístup k incidentním stopám chraň stejně jako produkční data
+
+Incidentní stopa často odhalí organizační mapu firmy: kdo je admin, kdo exportuje data, kdo mění billing, kdy se dějí incidenty a jaké integrace existují. To je citlivé i bez toho, aby v logu byl obsah zákaznických dokumentů.
+
+Kontrolní opatření:
+
+- Incidentní stopy čtou jen role, které je opravdu potřebují.
+- Přístup supportu je omezený podle tenantu nebo konkrétního ticketu.
+- Export incidentní stopy má vlastní oprávnění a vlastní auditní záznam.
+- Mazání incidentních záznamů není běžná admin funkce.
+- Změna retenční politiky se také audituje.
+- Přístupy do logovacího nástroje se pravidelně revidují.
+- Testovací a vývojová prostředí nepoužívají produkční auditní data bez anonymizace.
+
+Pokud používáš externí logovací službu, polož stejné otázky jako u každého privacy-first dodavatele: kde jsou data, kdo k nim má přístup, jaká je retence, umí EU provoz, umí export a smazání, co se stane při ukončení smlouvy. Auditní log, který odteče do nástroje bez jasné kontroly, je trochu ironie. Taková ta drahá, enterprise ironie.
+
+## DZ.7 Checklist forenzní stopy při incidentech
+
+- Má tým jasný seznam událostí, které patří do incidentní časové osy?
+- Je incidentní pohled oddělený od běžných aplikačních a debug logů?
+- Má každá událost stabilní název, aktéra, objekt, výsledek a čas?
+- Neposílají se do logu hesla, tokeny, session ID, celé request body ani zbytečné osobní údaje?
+- Používají se interní stabilní ID místo e-mailů a jmen tam, kde to stačí?
+- Loguje se minimální diff změny, ne celý objekt?
+- Existuje čitelný pohled pro support nebo vlastníka workspace?
+- Má každý typ logu retenční dobu a vlastníka?
+- Jsou přístupy k incidentním stopám omezené a pravidelně revidované?
+- Je export incidentních stop sám auditovaný?
+- Umí tým při incidentu spojit auditní záznam s request ID a provozními logy?
+- Je v dokumentaci napsané, co se loguje a proč?
+
+## Codyho komentář
+
+Forenzní stopa je nudná disciplína, dokud není nejdůležitější část systému. Pak je pozdě zjišťovat, že `updated_at` je jediný svědek. Dobrá incidentní stopa není šmírování. Je to férová paměť produktu: stručná, chráněná, účelová a použitelná ve stresu.
+
+## Zdroje k příloze
+
+- OWASP Logging Cheat Sheet: doporučení pro bezpečné logování a seznam dat, která do logů nepatří: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+- European Commission: GDPR principy včetně minimalizace údajů a omezení uložení: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en
+- EDPB Guidelines 01/2021 on Examples regarding Data Breach Notification: praktické příklady posuzování incidentů a oznamování porušení zabezpečení: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-012021-examples-regarding-data-breach-notification_en
+
+## Shrnutí přílohy
+
+Forenzní stopa má zachytit významné změny a bezpečnostní signály v systému, ne nahrávat každý nádech uživatele. Privacy-first přístup znamená jasný seznam událostí, minimální metadata, žádná tajemství v logu, rozumnou retenci, omezené přístupy a čitelný pohled pro support i zákazníka. Když se něco pokazí, dobrá forenzní stopa pomůže rekonstruovat realitu. Špatná forenzní stopa jen přidá další incident do incidentu. To je efektivita, kterou nikdo nechtěl.
+
+
 ## Pracovní log
+- 2026-08-12: Přidána příloha DZ o forenzní stopě při incidentech: incidentní časová osa, propojení auditních a provozních logů, minimalizace metadat, čitelný pohled pro support, retence, přístupy a checklist.
 - 2026-08-12: Přidána příloha DY o feature flagech a rolloutech: typy flagů, privacy-first rollout kritéria, bezpečné fallbacky, úklid starých flagů, oddělení experimentů, výběr nástroje a checklist.
 - 2026-08-12: Přidána příloha DX o přihlášení, session a rolích: bezpečné tokeny, timeouty, aktivní session, autorizační matice, citlivé akce, auditní log a checklist.
 - 2026-08-12: Přidána příloha DW o produktové dokumentaci a help centru: vlastník článků, revize, bezpečné screenshoty, privacy-first vyhledávání, support loop a checklist.
