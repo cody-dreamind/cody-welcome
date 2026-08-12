@@ -19957,7 +19957,138 @@ Event marketing je silný, protože je lidský. Právě proto se nehodí chovat 
 
 Webináře a workshopy jsou výborný B2B kanál, pokud z nich neuděláš registrační vysavač. Privacy-first event začíná správným formátem, jednoduchým formulářem, jasným vysvětlením nahrávání, prověřeným event nástrojem, opatrnou prací s chatem a slíbeným follow-upem. Po akci má zůstat užitečný obsah, kvalifikované poznatky a několik dobrých rozhodnutí — ne věčný export účastníků, nahrávka s citlivými dotazy a spamová sekvence na autopilota.
 
+---
+
+# Příloha EC: Retence analytiky a reportingu bez datového skladu na věčné časy, falešné přesnosti a grafů pro grafy
+
+Analytika má pomáhat rozhodovat. Ne vyrábět muzeum kliků, heatmap, IP adres, user agentů, UTM parametrů, interních poznámek a exportů, které nikdo neotevřel od doby, kdy měly kalhoty s nízkým pasem druhou renesanci. Malý SaaS tým nepotřebuje vědět všechno navždy. Potřebuje vědět dost na to, aby zlepšil produkt, marketing a provoz — a aby po cestě nevytvořil datový dluh, který jednou bouchne jako špatně pojmenovaný cron.
+
+Privacy-first reporting stojí na třech otázkách: co měříme, proč to měříme a kdy to mažeme nebo agregujeme. GDPR mezi základní principy řadí účelové omezení, minimalizaci údajů a omezení uložení; Evropská komise je shrnuje v přehledu principů GDPR pro firmy a organizace: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en
+
+## EC.1 Retence není technické nastavení, ale produktové rozhodnutí
+
+Když analytický nástroj umožňuje uchovávat data dva roky, neznamená to, že je máš držet dva roky. Retence má vycházet z rozhodnutí, která reálně děláš. Pokud každý měsíc hodnotíš konverze landing page, nepotřebuješ detailní události konkrétního návštěvníka za poslední tři roky. Pokud řešíš roční sezónnost B2B poptávek, může stačit dlouhodobá agregace bez identifikátorů.
+
+Praktická retenční mapa:
+
+| Typ dat | Příklad | Doporučený přístup |
+| --- | --- | --- |
+| Surové návštěvní události | pageview, referrer, zařízení | krátká retence, poté smazat nebo agregovat |
+| Produktové eventy | vytvoření projektu, export, pozvánka člena | držet jen rozsah nutný pro produktové rozhodnutí |
+| Obchodní agregace | konverze podle kanálu, MRR cohorty | dlouhodobě jako agregované reporty |
+| Bezpečnostní logy | podezřelé přihlášení, rate limit | oddělená retence podle bezpečnostního účelu |
+| Support exporty | CSV pro analýzu problému | krátká expirace a ruční vlastník |
+
+Dobré pravidlo: čím víc se data blíží konkrétnímu člověku, tím kratší a přísnější retence. Čím víc jsou agregovaná, tím lépe se hodí pro dlouhodobé trendy.
+
+## EC.2 Rozděl operativní dashboardy od dlouhodobých trendů
+
+Jeden dashboard pro všechno je obvykle dashboard pro nikoho. Ranní kontrola potřebuje jiné údaje než kvartální strategické rozhodnutí. Operativní dashboard má ukazovat, jestli něco hoří. Strategický report má ukazovat, jestli firma jde správným směrem. Když je smícháš, dostaneš tabulku s padesáti metrikami a tým, který se tváří analyticky, ale rozhoduje podle pocitu.
+
+Rozdělení podle účelu:
+
+- Denní provoz: dostupnost, chyby, dokončení kritických cest, nové poptávky, selhané platby.
+- Týdenní produkt: aktivace, používání klíčových funkcí, drop-off ve funnelu, support témata.
+- Měsíční marketing: návštěvnost vlastních kanálů, konverze, kvalita leadů, výkon obsahu.
+- Kvartální strategie: retenční cohorty, expanze zákazníků, ekonomika kanálů, produktové sázky.
+
+Každý report by měl mít majitele, rytmus a rozhodnutí, které z něj typicky vzniká. Pokud report nemá navazující rozhodnutí, je to pravděpodobně dekorace. A dekorace v analytice stojí peníze, pozornost a někdy i soukromí uživatelů.
+
+## EC.3 Surová data drž krátce, agregace plánuj dopředu
+
+Největší chyba je ukládat všechno detailně a doufat, že „jednou se to bude hodit“. Jednou se to hodí málokdy. Častěji se to stane problémem při migraci, bezpečnostní kontrole, žádosti zákazníka nebo interním auditu.
+
+Lepší postup:
+
+1. Definuj metriky, které chceš mít dlouhodobě.
+2. Rozhodni, jaká granularita stačí: den, týden, měsíc, zákaznický segment, tarif.
+3. Vytvoř agregační tabulky nebo pravidelné exporty bez zbytečných identifikátorů.
+4. Surové eventy maž po předem určené době.
+5. Každý kvartál ověř, že agregace pořád odpovídají aktuálním otázkám.
+
+Příklad: místo věčného ukládání všech návštěv landing page si nech měsíční tabulku s počtem návštěv, zdrojem, konverzí na formulář a počtem kvalifikovaných poptávek. Pro většinu malých B2B týmů je to užitečnější než detailní clickstream jednoho anonymního návštěvníka z úterý před čtrnácti měsíci.
+
+## EC.4 Exporty z analytiky jsou samostatné riziko
+
+Data často neutíkají z produkční databáze. Utíkají z CSV souboru na ploše, sdíleného Google Sheet dokumentu, Slack přílohy nebo staré složky „report_final_v3_opravdu_final“. Export je kopie dat, a tedy nový problém. Má mít účel, vlastníka, přístupová práva a datum smazání.
+
+Bezpečný režim pro exporty:
+
+- Exportuj jen sloupce, které jsou nutné pro konkrétní analýzu.
+- Před sdílením odstraň e-maily, jména a volné texty, pokud nejsou nezbytné.
+- Sdílej přes řízený přístup, ne přes veřejný odkaz.
+- Nastav expiraci nebo termín ručního smazání.
+- Do názvu souboru dej účel a datum, ne zákaznická jména.
+- Po dokončení analýzy smaž pracovní kopie.
+
+Mini šablona názvu:
+
+`2026-08-mesicni-konverze-landing-page-agregovane.csv`
+
+Špatný název:
+
+`leads_all_with_notes_FINAL.csv`
+
+Ten druhý název křičí: „Prosím, audituj mě.“
+
+## EC.5 Metriky bez identifikátorů jsou často lepší produktový nástroj
+
+Marketing rád chce detail. Produkt rád chce detail. Obchod rád chce detail. Jenže detail není totéž co vhled. Pro mnoho rozhodnutí stačí trend a segment, ne identita jednotlivce. Pokud řešíš, jestli onboarding funguje, často nepotřebuješ vědět, že konkrétní uživatel klikl v 9:41 na třetí tooltip. Potřebuješ vědět, kolik nových účtů dokončilo první hodnotnou akci do 24 hodin.
+
+Privacy-first metriky:
+
+- poměr dokončených onboardingů podle týdne registrace,
+- počet aktivních workspace podle tarifu,
+- median času od registrace k první hodnotě,
+- počet support dotazů k jedné funkci za týden,
+- konverze z článku na poptávku bez sledování jednotlivce napříč webem,
+- retence podle cohorty bez veřejných exportů seznamu uživatelů.
+
+Když se někdo ptá na novou metriku, zeptej se: „Jaké rozhodnutí podle ní uděláme?“ Pokud odpověď zní „budeme to sledovat“, ještě nemáš metriku. Máš akvárium s čísly.
+
+## EC.6 Přístup k reportům omez podle rolí
+
+Reporty často vypadají nevinně, protože jsou barevné. Ale i agregovaný dashboard může prozradit citlivé obchodní informace, jména zákazníků, interní výkonnost nebo chování malého segmentu, kde už agregace vlastně anonymní není. Přístup k analytice proto nastav stejně pečlivě jako přístup k produkční administraci.
+
+Základní role:
+
+- Vedení: agregované obchodní a produktové trendy.
+- Produkt: funnel, aktivace, používání funkcí, anonymizovaný feedback.
+- Marketing: vlastní kanály, kampaně, obsah, konverze bez zbytečných osobních detailů.
+- Support: jen údaje nutné k řešení konkrétního případu.
+- Vývoj: provozní metriky a chyby bez obsahu zákaznických dat.
+
+U každé role si napiš, co nesmí vidět. Tahle negativní definice je často užitečnější než nekonečný seznam povolených grafů. Například marketing nemusí vidět interní poznámky supportu a vývoj nepotřebuje export všech leadů.
+
+## EC.7 Checklist retence analytiky a reportingu
+
+Před zapnutím nové metriky:
+
+- [ ] Umíme jednou větou říct, jaké rozhodnutí metrika podporuje.
+- [ ] Víme, jestli pracujeme se surovými daty, agregací, nebo bezpečnostním logem.
+- [ ] Máme nastavenou retenční dobu pro surová data.
+- [ ] Dlouhodobé trendy ukládáme jako agregace bez zbytečných identifikátorů.
+- [ ] Exporty mají vlastníka, účel, řízený přístup a datum smazání.
+- [ ] Dashboardy jsou rozdělené podle rytmu: denní, týdenní, měsíční, kvartální.
+- [ ] Přístupy k reportům odpovídají rolím v týmu.
+- [ ] Každý kvartál mažeme metriky, reporty a exporty, které už nepodporují rozhodnutí.
+
+## Codyho komentář
+
+Moje oblíbené analytické pravidlo: když data neumíš použít k rozhodnutí, nepoužívej člověka jako úložné médium pro budoucí neurčito. Malý tým vyhrává tím, že má pár dobrých metrik, krátkou paměť pro detail a dlouhou paměť pro poučení. Všechno ostatní je spreadsheetové bonsajování.
+
+## Zdroje k příloze
+
+- European Commission: GDPR principles — principy účelového omezení, minimalizace dat a omezení uložení jako základ pro návrh retence analytiky: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en
+- European Commission: Information to individuals when collecting data — přehled informací, které mají lidé dostat při sběru údajů včetně účelu, právního základu, příjemců a doby uložení: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/what-information-must-be-given-individuals-whose-data-collected_en
+- European Data Protection Board: Guidelines, recommendations and best practices — rozcestník k metodikám EDPB pro ochranu osobních údajů a praktický výklad principů: https://www.edpb.europa.eu/our-work-tools/general-guidance/guidelines-recommendations-best-practices_en
+
+## Shrnutí přílohy
+
+Retence analytiky je produktové, právní i provozní rozhodnutí. Privacy-first tým drží surová data krátce, dlouhodobé trendy ukládá jako agregace, odděluje provozní dashboardy od strategických reportů, hlídá exporty a nastavuje přístupy podle rolí. Cílem není slepota. Cílem je měřit dost přesně pro rozhodnutí a zároveň dost střídmě, aby z analytiky nevznikl datový sklad na věčné časy.
+
 ## Pracovní log
+- 2026-08-12: Přidána příloha EC o retenci analytiky a reportingu: retenční mapa, oddělení dashboardů od trendů, agregace, bezpečné exporty, metriky bez identifikátorů, role a checklist.
 - 2026-08-12: Přidána příloha EB o privacy-first webinářích a workshopech: formát podle účelu, minimální registrace, nahrávky, event nástroje, chat, follow-up, review a checklist.
 - 2026-08-12: Přidána příloha EA o secrets a konfiguraci: rozdělení konfigurace a tajemství, karty vlastníků, oddělená prostředí, rotace, ochrana logů, CI/CD tokeny, privacy-first minimalizace secrets a checklist.
 - 2026-08-12: Přidána příloha DZ o forenzní stopě při incidentech: incidentní časová osa, propojení auditních a provozních logů, minimalizace metadat, čitelný pohled pro support, retence, přístupy a checklist.
