@@ -20239,7 +20239,189 @@ Incidentní komunikace je jako hasicí přístroj: vypadá nudně, dokud ho nepo
 
 Zákaznická incidentní komunikace má potvrdit problém, vysvětlit dopad, nastavit rytmus aktualizací a chránit data. Odděl technickou triage od komunikační linky, používej různé texty pro status stránku, e-mail a support, nepleť provozní incident s právním oznámením a po vyřešení napiš konkrétní shrnutí. Privacy-first transparentnost neznamená říct všechno. Znamená říct správné věci správným lidem ve správný čas.
 
+---
+
+# Příloha EE: Offboarding zákazníka a uživatele bez rukojmí, ztracených dat a supportového chaosu
+
+Offboarding je moment pravdy. Zákazník odchází, uživatel mění roli, zaměstnanec opouští firmu, účet se ruší, tým přechází jinam. Slabý produkt v tu chvíli začne panikařit: schová export, nechá aktivní tokeny, pošle uživatele na support a doufá, že si nikdo nevšimne. Privacy-first produkt udělá opak. Odchod navrhne jako normální, bezpečný a důstojný proces.
+
+Dobře udělaný offboarding neznamená „usnadni zákazníkovi odchod, ať uteče rychleji“. Znamená: ukaž, že data nejsou rukojmí. Paradoxně tím zvyšuješ důvěru i u lidí, kteří zůstávají. Nikdo nechce kupovat SaaS, ze kterého se dá odejít jen přes tři e-maily, export v divném ZIPu a rituální tanec kolem administrátora.
+
+## EE.1 Rozliš typ odchodu, jinak smažeš špatnou věc
+
+Offboarding není jedna akce. V B2B SaaS existuje několik odlišných situací a každá má jiné riziko:
+
+- uživatel opouští workspace, ale zákaznický účet pokračuje,
+- administrátor ruší celé předplatné,
+- firma žádá export všech dat,
+- konkrétní člověk žádá výmaz osobních údajů,
+- interní člen týmu nebo dodavatel ztrácí přístup k produkčním nástrojům,
+- trial končí bez konverze,
+- účet je ukončen kvůli porušení podmínek nebo bezpečnostnímu riziku.
+
+Když tyto scénáře smícháš do jednoho tlačítka „Delete account“, koleduješ si o chaos. Uživatel si může myslet, že maže svůj profil, ale systém smaže data celé firmy. Nebo naopak odejde člověk, ale jeho API token zůstane dál běhat jako digitální zombie.
+
+Praktická tabulka pro produktový návrh:
+
+| Scénář | Kdo smí spustit | Co se stane hned | Co čeká na retenční lhůtu |
+| --- | --- | --- | --- |
+| Odchod uživatele z workspace | Admin nebo uživatel podle politiky týmu | Odebere se přístup, zneplatní session a osobní tokeny | Auditní stopa, účetní souvislosti, historické autorství |
+| Zrušení předplatného | Owner nebo fakturační admin | Zastaví se další platba, účet přejde do omezeného režimu | Faktury, smluvní záznamy, zálohy podle politiky |
+| Export dat | Owner nebo oprávněný admin | Vytvoří se export s expirací a auditem stažení | Záznam o žádosti a provedení exportu |
+| Výmaz osobních údajů | Dotčená osoba nebo oprávněný zástupce | Spustí se ověření identity a scope žádosti | Data, která musí zůstat kvůli právním povinnostem |
+| Ukončení interního přístupu | Manažer, security owner nebo automat HR procesu | Odebrání účtů, klíčů, VPN, support accessu | Audit a retenční záznam o přístupech |
+
+Zlaté pravidlo: nejdřív definuj objekt offboardingu. Mažeš člověka, tým, firmu, předplatné, token, nebo data? Pokud odpověď zní „tak nějak všechno“, zastav deploy a dej si kafe. Nebo vodu. Hlavně ne mačkání tlačítek.
+
+## EE.2 Odchod uživatele musí zavřít všechny dveře, ne jen UI účet
+
+Když uživateli odebereš přístup v aplikaci, práce nekončí. Uživatel mohl mít aktivní session v mobilu, API token, OAuth grant, pozvánku v e-mailu, dočasný support access, webhook podpis, SSH klíč v interním nástroji nebo členství ve sdílené složce. UI účet je často jen hezká cedulka na hlavních dveřích. Skutečné dveře jsou všude okolo.
+
+Checklist systémových kroků při odchodu uživatele:
+
+- zneplatnit aktivní session a refresh tokeny,
+- zrušit osobní API tokeny a aplikační hesla,
+- odebrat OAuth autorizace napojené na jeho účet,
+- vypnout dočasná oprávnění a support impersonation,
+- převést vlastnictví důležitých objektů na tým nebo nového vlastníka,
+- zachovat auditní stopu bez zbytečného obsahu zákaznických dat,
+- poslat adminovi shrnutí, co bylo odebráno a co vyžaduje ruční kontrolu.
+
+Příklad bezpečné produktové hlášky pro admina:
+
+> „Uživatel Jana Nováková byl odebrán z workspace. Zneplatnili jsme její aktivní session, osobní API tokeny a pozvánky. Tři reporty bez vlastníka byly převedeny na workspace ownera. Auditní záznam zůstává dostupný administrátorům podle retenční politiky.“
+
+Tohle je užitečnější než „User deleted successfully“. Gratuluju, tlačítko bliklo zeleně. Ale co se opravdu stalo? To má vědět člověk i systém.
+
+## EE.3 Export před odchodem navrhni jako produkt, ne jako laskavost supportu
+
+Zákazník, který odchází, často potřebuje data pro archiv, migraci nebo kontrolu. Pokud export vzniká ručně přes support, vzniká riziko: někdo vyexportuje moc dat, pošle je špatným kanálem, zapomene expiraci nebo vytvoří soubor, který nejde použít.
+
+Privacy-first export má mít jasná pravidla:
+
+- kdo ho smí vytvořit,
+- jaký rozsah dat obsahuje,
+- v jakém formátu je použitelný,
+- jak dlouho je odkaz platný,
+- kdo export stáhl,
+- jak se export smaže,
+- co export záměrně neobsahuje.
+
+Praktický standard pro malý SaaS:
+
+| Typ dat | Doporučený export | Poznámka |
+| --- | --- | --- |
+| Záznamy a entity | CSV nebo JSON | CSV pro běžné tabulky, JSON pro strukturované vazby |
+| Soubory | ZIP s manifestem | Manifest uvádí názvy, velikosti, typy a vztahy k záznamům |
+| Faktury | PDF plus CSV přehled | Účetní doklady mají vlastní retenční pravidla |
+| Auditní log | CSV s omezeným rozsahem | Bez citlivého payloadu a interních tajemství |
+| Nastavení účtu | JSON nebo Markdown souhrn | Pomáhá při migraci i interní kontrole |
+
+Export by měl být dostupný před finálním smazáním nebo uzamčením účtu. Když zákazník klikne na „zrušit účet“ a teprve pak zjistí, že export šel vytvořit jen předtím, produkt právě vyrobil vlastní pastičku. Roztomilé jako medvědí služba s právním ocáskem.
+
+## EE.4 Retence po ukončení musí být viditelná předem
+
+Odchod neznamená okamžité zmizení všeho. Některá data musí zůstat kvůli účetnictví, smlouvám, bezpečnosti nebo obraně právních nároků. Jiná data naopak nemají zůstat jen proto, že se kdysi hodila do databáze. Rozdíl musí být popsaný už před zrušením, ne až v odpovědi supportu.
+
+Dobrá obrazovka pro zrušení účtu odpoví:
+
+- co se smaže hned,
+- co zůstane po omezenou dobu,
+- proč to zůstane,
+- kdo k tomu bude mít přístup,
+- kdy proběhne definitivní odstranění,
+- jak zákazník získá export,
+- jak může zrušení zvrátit během ochranné lhůty.
+
+Příklad mikrotextu:
+
+> „Po zrušení účtu bude workspace 30 dní v režimu obnovy. Během této doby si můžete stáhnout export nebo účet obnovit. Po 30 dnech smažeme pracovní data z produkčních systémů. Faktury a minimální auditní záznamy uchováme podle právních a bezpečnostních povinností.“
+
+Tahle věta není náhrada právní dokumentace. Je to produktový překlad toho, co uživatel potřebuje vědět v rozhodovacím momentu.
+
+## EE.5 Interní offboarding je stejně důležitý jako zákaznický
+
+Privacy-first provoz se nerozbije jen špatným cookie bannerem. Často se rozbije tím, že bývalý dodavatel má pořád přístup do helpdesku, bývalý vývojář má token v CI, někdo zapomněl účet v analytice a sdílený password manager vypadá jako archeologická vrstva startupu.
+
+Interní offboarding musí být navázaný na zdroje přístupů, ne na paměť jednoho člověka. Minimální seznam:
+
+- repozitáře a CI/CD,
+- produkční a staging infrastruktura,
+- databáze a zálohy,
+- e-mail, domény a DNS,
+- analytika a monitoring,
+- helpdesk a CRM,
+- platební brána a fakturace,
+- password manager,
+- Figma, dokumentace a interní znalostní báze,
+- externí AI a automatizační nástroje.
+
+Každý systém má mít vlastníka. Každý vlastník má vědět, jak odebrat přístup. Každé odebrání má mít záznam. Ne proto, že milujeme tabulky. Tabulky miluje málokdo, kromě účetních a pár podezřele klidných projektových manažerů. Ale audit přístupů po incidentu bez tabulky je horor s nízkým rozpočtem.
+
+## EE.6 Win-back nesmí porušit důvěru
+
+Marketing při odchodu rád panikaří. „Pošleme jim sérii e-mailů, slevu, dotazník, poslední poslední poslední nabídku.“ Klid. Člověk, který ruší účet, není automaticky terč pro emocionální paintball.
+
+Férový win-back může existovat, pokud splňuje tři pravidla:
+
+- uživatel rozumí, proč zprávu dostává,
+- komunikace souvisí s ukončeným vztahem,
+- existuje jednoduché odhlášení nebo volba „už mi nepište“.
+
+Lepší offboarding otázka než dlouhý dotazník:
+
+> „Co byl hlavní důvod zrušení? Vyberte jednu možnost. Odpověď je dobrovolná a použijeme ji jen pro zlepšení produktu.“
+
+Možnosti:
+
+- Cena neodpovídá hodnotě.
+- Chybí nám konkrétní funkce.
+- Produkt je příliš složitý.
+- Přecházíme na jiné řešení.
+- Projekt skončil.
+- Nechci uvádět důvod.
+
+To stačí. Nepotřebuješ po odcházejícím zákazníkovi esej, rodné číslo nálady a svolení ke sledování příštích tří nákupních rozhodnutí.
+
+## EE.7 Checklist offboardingu
+
+Před spuštěním offboardingu:
+
+- [ ] Máme rozlišené scénáře: uživatel, workspace, předplatné, export, výmaz, interní přístup.
+- [ ] U každého scénáře je jasné, kdo ho smí spustit.
+- [ ] UI vysvětluje dopad před potvrzením akce.
+- [ ] Kritické akce vyžadují reautentizaci nebo druhé potvrzení.
+- [ ] Export je dostupný před finálním smazáním nebo uzamčením účtu.
+- [ ] Retenční pravidla jsou popsaná lidsky i interně.
+
+Při technickém provedení:
+
+- [ ] Zneplatní se session, refresh tokeny a osobní API klíče.
+- [ ] Odeberou se OAuth granty, dočasné role a support access.
+- [ ] Vlastnictví objektů se převede, ne ztratí.
+- [ ] Auditní log zachytí změnu bez citlivého payloadu.
+- [ ] Exporty mají expiraci, oprávnění a záznam o stažení.
+- [ ] Zálohy respektují retenční a obnovovací pravidla.
+
+Po odchodu:
+
+- [ ] Zákazník dostane shrnutí stavu účtu a dostupných exportů.
+- [ ] Interní přístupy bývalých členů týmu jsou odebrané ve všech systémech.
+- [ ] Win-back komunikace je dobrovolná, střídmá a snadno odhlasitelná.
+- [ ] Důvody odchodu se ukládají agregovaně, ne jako psychologický spis.
+- [ ] Jednou měsíčně se kontrolují účty v ochranné lhůtě a staré exporty.
+- [ ] Jednou kvartálně se testuje celý offboarding na testovacím workspace.
+
+## Codyho komentář
+
+Offboarding je podceňovaný growth nástroj. Ne proto, že lidé hromadně ruší účet a pak se dojatě vrací. Ale proto, že férový odchod snižuje strach z nákupu. Když zákazník ví, že data dostane ven a účet půjde zavřít bez rukojmí, snáz řekne ano na začátku. Důvěra se často prodává právě tím, že neblokuješ dveře.
+
+## Shrnutí přílohy
+
+Offboarding musí rozlišit odchod uživatele, zrušení workspace, export, výmaz a interní odebrání přístupů. Bezpečný proces zavírá session, tokeny, OAuth granty a dočasné role, převádí vlastnictví objektů, vysvětluje retenci a dává zákazníkovi použitelný export. Privacy-first přístup z odchodu nedělá past. Dělá z něj důkaz, že produkt respektuje data i zákazníka, i když se zrovna loučí.
+
 ## Pracovní log
+- 2026-08-12: Přidána příloha EE o offboardingu zákazníků a uživatelů: scénáře odchodu, zavírání session a tokenů, exporty, retence, interní přístupy, férový win-back a checklist.
 - 2026-08-12: Přidána příloha ED o zákaznické incidentní komunikaci: první zpráva, kanály, vztah k právnímu oznámení, omluva, FAQ, privacy-first hranice a checklist.
 - 2026-08-12: Přidána příloha EC o retenci analytiky a reportingu: retenční mapa, oddělení dashboardů od trendů, agregace, bezpečné exporty, metriky bez identifikátorů, role a checklist.
 - 2026-08-12: Přidána příloha EB o privacy-first webinářích a workshopech: formát podle účelu, minimální registrace, nahrávky, event nástroje, chat, follow-up, review a checklist.
