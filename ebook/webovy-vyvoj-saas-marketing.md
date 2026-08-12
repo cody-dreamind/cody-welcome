@@ -20087,7 +20087,160 @@ Moje oblíbené analytické pravidlo: když data neumíš použít k rozhodnutí
 
 Retence analytiky je produktové, právní i provozní rozhodnutí. Privacy-first tým drží surová data krátce, dlouhodobé trendy ukládá jako agregace, odděluje provozní dashboardy od strategických reportů, hlídá exporty a nastavuje přístupy podle rolí. Cílem není slepota. Cílem je měřit dost přesně pro rozhodnutí a zároveň dost střídmě, aby z analytiky nevznikl datový sklad na věčné časy.
 
+
+# Příloha ED: Zákaznická incidentní komunikace bez mlžení, paniky a úniku dalších dat
+
+Incident není jen technická událost. Je to test důvěry. Zákazník většinou nečeká, že se nikdy nic nepokazí. Čeká, že firma pozná problém, řekne pravdu včas, vysvětlí dopad a nebude z něj dělat komparz v mlze typu „někteří uživatelé mohli zaznamenat drobné nepohodlí“. To je věta, která by měla mít vlastní karanténu.
+
+Privacy-first incidentní komunikace má dvě práce najednou: být užitečná a nezvětšit škodu. Neprozrazovat víc dat, než je nutné. Neházet do e-mailu citlivé detaily. Nezveřejnit interní architekturu jen proto, že někdo chtěl působit transparentně. Transparentnost není livestream z operačního sálu. Transparentnost je přesná, ověřená a srozumitelná informace.
+
+## ED.1 Nejdřív odděl technickou triage od zákaznické zprávy
+
+V prvních minutách incidentu tým často nemá úplnou jistotu. To je normální. Špatné je čekat na dokonalou jistotu tak dlouho, až zákazník zjistí problém dřív než ty a support začne improvizovat. Proto potřebuješ dvě paralelní linky práce, i když je tým malý:
+
+- technická linka zjišťuje příčinu, rozsah, mitigaci a obnovu,
+- komunikační linka hlídá, kdo potřebuje vědět co, kdy a jakým kanálem.
+
+Komunikační linka nemusí být samostatný člověk v korporátním war roomu s dramatickým názvem. V malém SaaS týmu stačí jasně určený vlastník komunikace. Ten netlačí vývojáře do slohovek, ale vytahuje z nich ověřená fakta: co je rozbité, koho se to týká, jestli existuje workaround, kdy bude další update a co zatím nemáme potvrzené.
+
+Mini šablona pro interní incidentní brief:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Co se děje? | Jedna věta bez hypotéz |
+| Od kdy? | Čas první detekce nebo první známý dopad |
+| Koho se to týká? | Segment, region, funkce nebo všichni zákazníci |
+| Co uživatel vidí? | Konkrétní symptom v produktu |
+| Co jsme udělali? | Mitigace, rollback, vypnutí funkce, monitoring |
+| Co zatím nevíme? | Jasně označené neověřené části |
+| Kdy dáme další update? | Konkrétní čas nebo interval |
+
+Tohle není byrokracie. Je to ochrana před tím, aby každý v týmu říkal trochu jinou verzi reality.
+
+## ED.2 První zpráva má potvrdit problém a nastavit rytmus
+
+První zákaznická zpráva nemusí znát kořenovou příčinu. Má ale potvrdit, že o problému víš a že na něm pracuješ. Tím snižuješ počet duplicitních ticketů, uklidňuješ zákazníky a dáváš supportu jednu konzistentní odpověď.
+
+Dobrá první zpráva obsahuje:
+
+- jasné označení ovlivněné služby nebo funkce,
+- stručný popis dopadu uživatelským jazykem,
+- informaci, jestli zákazník musí něco dělat,
+- čas další aktualizace,
+- odkaz na status stránku nebo centrum podpory,
+- kontakt pro urgentní případy.
+
+Příklad:
+
+> „Dnes od 09:40 řešíme problém s exportem faktur. Vytvoření nové faktury funguje, ale export do PDF může končit chybou. Data zákazníků nejsou podle aktuálních zjištění ztracená. Pracujeme na opravě a další aktualizaci zveřejníme do 10:30.“
+
+Slabá zpráva:
+
+> „Zaznamenáváme technické potíže. Děkujeme za trpělivost.“
+
+To druhé je informační hodnota mokrého ubrousku. Neříká co, koho, dopad ani další krok.
+
+## ED.3 Nepleť incidentní komunikaci s právním oznámením
+
+Ne každý provozní incident je bezpečnostní incident. Ne každý bezpečnostní incident je porušení zabezpečení osobních údajů. A ne každé podezření patří okamžitě do veřejného e-mailu se všemi detaily. Zákaznická komunikace má být věcná, ale nesmí předbíhat interní vyhodnocení dopadu na data.
+
+Praktický postup:
+
+1. V první zprávě popiš ověřený provozní dopad.
+2. Pokud existuje možné riziko pro data, napiš, že ho vyhodnocuješ.
+3. Neuváděj konkrétní osobní údaje, interní identifikátory ani detailní technické cesty útoku.
+4. Právní oznámení řeš zvlášť podle závažnosti, smluv a povinností.
+5. Všechny formulace nech schválit vlastníkem incidentu nebo člověkem odpovědným za privacy.
+
+Bezpečná věta:
+
+> „Současně ověřujeme, zda měl incident dopad na zákaznická data. Pokud se takový dopad potvrdí, dotčené zákazníky budeme informovat přímo.“
+
+Nebezpečná věta:
+
+> „Pravděpodobně unikly e-maily z tabulky leads_2025_backup, ale ještě nevíme komu.“
+
+Ta druhá věta je přesně ten moment, kdy incident dostane sequel.
+
+## ED.4 Piš jinak pro status page, e-mail a support
+
+Jeden text pro všechny kanály zní efektivně, ale často selže. Veřejná status stránka má být stručná a bezpečná. E-mail dotčeným zákazníkům může být konkrétnější. Support potřebuje detailnější interní odpovědi, ale jen v rozsahu nutném pro komunikaci se zákazníkem.
+
+Rozdělení kanálů:
+
+- **Status stránka:** veřejné potvrzení problému, dopad, stav, další update.
+- **E-mail dotčeným zákazníkům:** konkrétní dopad na jejich používání, doporučený postup, omluva, kontakt.
+- **Support makro:** konzistentní odpověď pro dotazy, interní hranice toho, co nesdělovat.
+- **Admin banner:** krátká zpráva přímo v produktu, pokud incident ovlivňuje aktuální práci.
+- **Postmortem:** po stabilizaci vysvětlení příčiny, opatření a prevence.
+
+Privacy-first pravidlo: veřejný kanál nikdy nesmí obsahovat informace, které pomáhají útočníkovi, identifikují konkrétního zákazníka nebo zbytečně odhalují obchodní citlivost. Transparentnost ano. Návod na průnik ne.
+
+## ED.5 Omluva má být konkrétní, ne divadelní
+
+Dobrá omluva nevyžaduje dramatický tón. Stačí uznat dopad, převzít odpovědnost za svoji část a říct, co se mění. Vyhni se pasivním formulacím typu „došlo k výpadku“. Samo od sebe obvykle dochází maximálně pečivo v kuchyňce.
+
+Lepší struktura omluvy:
+
+- Co se stalo.
+- Jaký to mělo dopad.
+- Co jsme udělali pro obnovu.
+- Co děláme, aby se problém neopakoval.
+- Kde se zákazník může zeptat.
+
+Příklad po vyřešení:
+
+> „Mezi 09:40 a 10:18 dnes nefungoval export faktur do PDF. Příčinou byla chyba v nové verzi renderovací služby, kterou jsme vrátili zpět a doplnili o kontrolu před nasazením. Faktury vytvořené během incidentu zůstaly uložené a lze je znovu exportovat. Omlouváme se za zdržení, zejména týmům, které dnes uzavíraly měsíční fakturaci.“
+
+Tohle je lepší než pět odstavců korporátní lítosti bez informace, co se vlastně stalo.
+
+## ED.6 Incidentní FAQ šetří support i zákazníky
+
+U většího incidentu si připrav krátké FAQ. Ne jako právní obranný štít, ale jako praktickou mapu odpovědí. FAQ aktualizuj spolu se stavem incidentu, jinak se z něj stane muzeum prvních dohadů.
+
+Typické otázky:
+
+- Musím něco udělat já?
+- Jsou moje data v pořádku?
+- Můžu službu dál používat?
+- Existuje workaround?
+- Kdy očekáváte další update?
+- Dostanu individuální potvrzení dopadu?
+- Bude k dispozici postmortem?
+
+U privacy-first provozu přidej i větu o rozsahu dat, ale jen pokud ji umíš ověřit. Například: „Incident se týkal doručování notifikací, ne ukládání zákaznických dokumentů.“ Pokud to ještě nevíš, řekni, že to ověřuješ. Přiznaná nejistota je lepší než sebevědomá pohádka.
+
+## ED.7 Checklist zákaznické incidentní komunikace
+
+Před první zprávou:
+
+- [ ] Máme vlastníka komunikace a vlastníka technického řešení.
+- [ ] Umíme jednou větou popsat uživatelský dopad.
+- [ ] Víme, koho se incident pravděpodobně týká.
+- [ ] Máme bezpečnou formulaci pro stav dat: potvrzeno, nepotvrzeno, vyhodnocujeme.
+- [ ] Určili jsme čas další aktualizace.
+- [ ] Support má stejnou verzi informací jako status stránka.
+- [ ] Veřejný text neobsahuje osobní údaje, interní identifikátory ani citlivé technické detaily.
+
+Po vyřešení:
+
+- [ ] Zveřejnili jsme stručné shrnutí příčiny a dopadu.
+- [ ] Dotčeným zákazníkům jsme poslali konkrétnější informaci, pokud ji potřebují.
+- [ ] Popsali jsme preventivní opatření bez bezpečnostního divadla.
+- [ ] Uzavřeli jsme support makra a odkázali na finální shrnutí.
+- [ ] Doplnili jsme incidentní časovou osu pro interní poučení.
+- [ ] Zkontrolovali jsme, zda komunikace sama nevytvořila zbytečný datový export.
+
+## Codyho komentář
+
+Incidentní komunikace je jako hasicí přístroj: vypadá nudně, dokud ho nepotřebuješ. Malý SaaS tým nemusí mít tiskové oddělení. Musí mít připravené věty, role a disciplínu říkat pravdu včas. Nejhorší kombinace je mlčet, mlžit a pak poslat román, který zákazník čte až ve chvíli, kdy už dávno ztratil nervy.
+
+## Shrnutí přílohy
+
+Zákaznická incidentní komunikace má potvrdit problém, vysvětlit dopad, nastavit rytmus aktualizací a chránit data. Odděl technickou triage od komunikační linky, používej různé texty pro status stránku, e-mail a support, nepleť provozní incident s právním oznámením a po vyřešení napiš konkrétní shrnutí. Privacy-first transparentnost neznamená říct všechno. Znamená říct správné věci správným lidem ve správný čas.
+
 ## Pracovní log
+- 2026-08-12: Přidána příloha ED o zákaznické incidentní komunikaci: první zpráva, kanály, vztah k právnímu oznámení, omluva, FAQ, privacy-first hranice a checklist.
 - 2026-08-12: Přidána příloha EC o retenci analytiky a reportingu: retenční mapa, oddělení dashboardů od trendů, agregace, bezpečné exporty, metriky bez identifikátorů, role a checklist.
 - 2026-08-12: Přidána příloha EB o privacy-first webinářích a workshopech: formát podle účelu, minimální registrace, nahrávky, event nástroje, chat, follow-up, review a checklist.
 - 2026-08-12: Přidána příloha EA o secrets a konfiguraci: rozdělení konfigurace a tajemství, karty vlastníků, oddělená prostředí, rotace, ochrana logů, CI/CD tokeny, privacy-first minimalizace secrets a checklist.
