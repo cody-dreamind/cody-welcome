@@ -20571,7 +20571,184 @@ Můj pohled — Cody: nejlepší produktová rozhodnutí často vypadají nudně
 - Roadmapa má obsahovat i vědomě odmítnuté nápady, aby se tým netočil ve stejných debatách.
 - Privacy-first rozhodování nebrzdí růst; chrání produkt před zbytečnou složitostí a ztrátou důvěry.
 
+---
+
+# Příloha EG: Zákaznický výzkum bez šmírování, dotazníkového pekla a CRM hřbitova
+
+Zákaznický výzkum má firmě pomoct rozhodovat, ne vyrábět další tabulku plnou osobních údajů, kterou už nikdy nikdo neotevře. Malý SaaS tým nepotřebuje sbírat všechno. Potřebuje pravidelně slyšet konkrétní situace zákazníků, přepsat je do rozhodnutí a přitom nenechat citlivá data válet po nástrojích jako drobky po stole.
+
+Privacy-first výzkum stojí na jednoduché zásadě: sbírej co nejvíc kontextu k problému a co nejmíň identifikátorů k člověku. Jméno, e-mail, firma, role, nahrávka, přepis, screenshot, interní poznámka a tag v CRM nejsou automaticky „výzkumná data“. Jsou to samostatné vrstvy rizika.
+
+## EG.1 Nejdřív napiš výzkumnou otázku
+
+Špatný začátek:
+
+> „Pojďme se zeptat zákazníků, co chtějí.“
+
+To je sympatické, ale široké jako dálnice bez sjezdů. Výsledkem bývá seznam přání, která nejde seřadit, ověřit ani použít. Lepší je začít jednou výzkumnou otázkou:
+
+> „Proč týmy po registraci nedokončí první nastavení projektu?“
+
+Nebo:
+
+> „Jak dnes zákazníci ručně řeší měsíční report, který chceme automatizovat?“
+
+Dobrá výzkumná otázka má tři vlastnosti:
+
+- míří na konkrétní rozhodnutí v produktu, marketingu nebo onboardingu,
+- dá se zodpovědět rozhovorem, pozorováním nebo krátkým dotazníkem,
+- nevyžaduje sběr citlivých dat, pokud stačí popis situace.
+
+Příklad výzkumného zadání:
+
+| Oblast | Slabé zadání | Lepší zadání |
+| --- | --- | --- |
+| Onboarding | Co se lidem nelíbí? | Kde přesně noví uživatelé váhají před prvním výsledkem? |
+| Pricing | Kolik by za to zaplatili? | Podle čeho zákazník pozná, že se mu nástroj vyplatí? |
+| Funkce | Chcete integraci s CRM? | Jak dnes předáváte leady z webu do obchodního procesu? |
+| Marketing | Jaký obsah chcete? | Jakou otázku řešíte těsně před tím, než hledáte dodavatele? |
+
+Codyho komentář: zákazník často neumí navrhnout produkt. Ale umí skvěle popsat, kde ho bota tlačí. Nespleť si tyhle dvě věci, jinak postavíš botník místo bot.
+
+## EG.2 Rozhovor není výslech ani demo
+
+Zákaznický rozhovor má být krátký, konkrétní a bezpečný. Ideální délka pro malý tým je 25 až 40 minut. Delší rozhovory často sklouznou do konzultace zdarma, kde zákazník popisuje interní procesy, které produkt ani nemusí řešit.
+
+Praktická struktura rozhovoru:
+
+1. Kontext: „Jakou roli máte v procesu a jak často to řešíte?“
+2. Poslední reálná situace: „Kdy jste to naposledy dělali?“
+3. Současný postup: „Jaké kroky jste museli projít?“
+4. Tření: „Co bylo nejpomalejší, nejrizikovější nebo nejotravnější?“
+5. Důsledek: „Co se stane, když se to nepovede nebo zdrží?“
+6. Rozhodování: „Kdo musí schválit změnu nástroje nebo procesu?“
+7. Souhlas s použitím poznatků: „Můžeme anonymizovaně použít závěry pro produktové rozhodnutí?“
+
+Čemu se vyhnout:
+
+- neukazuj řešení moc brzy, protože zákazník začne být zdvořilý,
+- neptej se „líbí se vám to?“, protože lidé neradi říkají ne,
+- nechtěj interní screenshoty, pokud stačí slovní popis,
+- nenahrávej automaticky bez jasného souhlasu,
+- neposílej přepis do AI nástroje bez kontroly dat a účelu.
+
+Minišablona souhlasu před nahráváním:
+
+> „Rád bych si rozhovor nahrál jen pro interní poznámky k produktu. Nahrávku nebudeme sdílet mimo tým a po zpracování ji smažeme do 30 dnů. Pokud nechcete nahrávat, je to úplně v pohodě — budu si jen dělat ruční poznámky.“
+
+Tahle věta není náhrada právního textu pro každý kontext, ale ukazuje tón: jasně, lidsky, bez nátlaku.
+
+## EG.3 Dotazník má být krátký a rozhodovací
+
+Dotazník není skládka zvědavosti. Každá otázka musí mít vlastníka a předem jasné použití. Pokud nevíš, jak odpověď změní rozhodnutí, otázku smaž.
+
+Dobrá pravidla:
+
+- drž dotazník na 5 až 8 otázek,
+- začni otázkami na reálné chování, ne názory,
+- neptej se na citlivé údaje, pokud nejsou nezbytné,
+- identifikaci respondenta nech volitelnou,
+- otevřené otázky používej střídmě, ale nech místo pro konkrétní příklad,
+- po vyhodnocení smaž exporty, které už nejsou potřeba.
+
+Příklad krátkého dotazníku pro SaaS onboarding:
+
+1. Jaký výsledek jste chtěli po registraci dosáhnout jako první?
+2. Který krok byl nejméně jasný?
+3. Co jste museli hledat mimo produkt?
+4. Co by vám pomohlo dokončit nastavení rychleji?
+5. Používáte podobný nástroj dnes? Pokud ano, jakou část procesu řeší nejlépe?
+6. Můžeme vás kontaktovat pro krátký follow-up? E-mail je volitelný.
+
+Privacy-first poznámka: pokud dotazník běží přes externí službu, zkontroluj, kde jsou data uložená, kdo k nim má přístup, jak se vypíná zbytečné sledování a jak rychle umíš export smazat. Pohodlný formulář je fajn. Formulář, který kvůli třem otázkám spustí marketingový cirkus, už méně.
+
+## EG.4 Poznámky anonymizuj dřív, než se rozlezou
+
+Největší riziko výzkumu často není samotný rozhovor. Je to to, co se stane potom: nahrávka v cloudu, přepis v dalším nástroji, citace v prezentaci, screenshot v ticketu, shrnutí v chatu a export v osobní složce. Gratuluju, právě vznikla datová hydra.
+
+Použij jednoduchý model vrstev:
+
+| Vrstva | Co obsahuje | Kdo ji potřebuje | Retence |
+| --- | --- | --- | --- |
+| Kontakt | jméno, e-mail, firma, souhlas s follow-upem | výzkumník nebo obchod | podle účelu kontaktu |
+| Surový záznam | nahrávka, přepis, původní formulář | jen vlastník výzkumu | krátce, typicky do zpracování |
+| Pracovní poznámky | anonymizované situace, citace bez identifikátorů | produktový tým | po dobu rozhodnutí |
+| Závěr | insight, dopad, doporučení, odkaz na rozhodnutí | celý tým | dlouhodobě v knowledge base |
+
+Při anonymizaci se neptej jen „je tam jméno?“. Identifikovat může i kombinace oboru, velikosti firmy, role, konkrétního incidentu a screenshotu. U B2B zákazníků často stačí jedna věta typu „největší účetní firma v Brně“ a anonymita odchází na kávu.
+
+Praktický postup po rozhovoru:
+
+- do 24 hodin napiš krátké anonymizované shrnutí,
+- označ přímé citace, které se smí používat interně,
+- odstraň jména lidí, názvy klientů a unikátní interní detaily,
+- přesuň rozhodovací závěry do produktového logu,
+- smaž nebo nastav expiraci surového záznamu,
+- zkontroluj, že AI shrnutí neobsahuje zákaznická tajemství.
+
+## EG.5 Insight musí skončit v rozhodnutí
+
+Výzkum bez rozhodnutí je intelektuální turistika. Pěkný výlet, fotky v prezentaci, žádná změna v produktu. Každý výzkumný běh proto ukonči jednou ze čtyř akcí:
+
+- upravit text, onboarding nebo dokumentaci,
+- změnit prioritu funkce,
+- založit experiment s jasným signálem úspěchu,
+- vědomě nic neměnit a zapsat proč.
+
+Šablona závěru:
+
+| Pole | Příklad |
+| --- | --- |
+| Výzkumná otázka | Proč uživatelé nedokončí první nastavení projektu? |
+| Vzorek | 6 rozhovorů se správci malých týmů, anonymizováno |
+| Hlavní insight | Lidé nerozumí rozdílu mezi projektem, týmem a klientem |
+| Důkaz | 5 z 6 respondentů popsalo obcházení přes Excel nebo e-mail |
+| Doporučení | Přejmenovat první krok a přidat příklad vyplněného projektu |
+| Rozhodnutí | Upravit onboarding v další iteraci, měřit dokončení prvního projektu |
+| Datový úklid | Nahrávky smazat po schválení shrnutí, kontakt ponechat jen u follow-up souhlasů |
+
+Takový závěr je krátký, ale použitelný. Když se za dva měsíce někdo zeptá, proč jste změnili onboarding, odpověď nebude „protože jsme měli pocit“. Bude existovat stopa.
+
+## EG.6 Checklist privacy-first zákaznického výzkumu
+
+Před výzkumem:
+
+- [ ] Máme jednu jasnou výzkumnou otázku navázanou na rozhodnutí.
+- [ ] Víme, jaká data opravdu potřebujeme a jaká nesbíráme.
+- [ ] Účastník ví, proč výzkum děláme a co se stane s jeho daty.
+- [ ] Nahrávání je volitelné a má jasnou retenční dobu.
+- [ ] Použitý nástroj odpovídá privacy-first hodnotám týmu.
+
+Během výzkumu:
+
+- [ ] Ptáme se na poslední reálnou situaci, ne na hypotetické sny.
+- [ ] Nevedeme respondenta k našemu oblíbenému řešení.
+- [ ] Nepřebíráme citlivé screenshoty nebo dokumenty, pokud stačí popis.
+- [ ] Poznámky oddělují fakta, interpretace a Codyho komentář.
+- [ ] Follow-up kontakt je samostatný souhlas, ne automatický marketingový lístek.
+
+Po výzkumu:
+
+- [ ] Surové poznámky jsou zpracované do anonymizovaného shrnutí.
+- [ ] Citace neobsahují identifikátory ani unikátní zákaznické detaily.
+- [ ] Insight je napojený na rozhodnutí, experiment nebo úpravu backlogu.
+- [ ] Exporty a nahrávky mají expiraci nebo jsou smazané.
+- [ ] Závěr je uložený v jednom zdroji pravdy, ne rozstřelený po chatech.
+
+## Codyho komentář
+
+Můj pohled — Cody: dobrý výzkum není o tom, že se tváříš jako vědecký ústav s pěti metodologiemi a tabulkou barevných štítků. Je o pravidelném kontaktu s realitou. Když každý měsíc uděláš pár poctivých rozhovorů, bezpečně zpracuješ poznámky a proměníš je v rozhodnutí, budeš před většinou týmů, které mají víc dashboardů než zákaznických vět.
+
+## Shrnutí přílohy
+
+- Zákaznický výzkum začíná konkrétní otázkou, která má změnit rozhodnutí.
+- Rozhovory mají mapovat reálné situace, ne sbírat zdvořilé názory na demo.
+- Dotazníky mají být krátké, rozhodovací a bez zbytečných identifikátorů.
+- Surové záznamy, přepisy a exporty potřebují jasnou retenci a rychlou anonymizaci.
+- Insight má skončit v produktu, marketingu, dokumentaci nebo vědomém rozhodnutí nic neměnit.
+
 ## Pracovní log
+- 2026-08-12: Přidána příloha EG o privacy-first zákaznickém výzkumu: výzkumné otázky, rozhovory, dotazníky, anonymizace poznámek, převod insightů do rozhodnutí a checklist.
 - 2026-08-12: Přidána příloha EF o produktových rozhodnutích bez HIPPO diktátu: rozhodovací karta, roadmapa včetně odmítnutých nápadů, datový náklad funkcí, meetingový rytmus a checklist.
 - 2026-08-12: Přidána příloha EE o offboardingu zákazníků a uživatelů: scénáře odchodu, zavírání session a tokenů, exporty, retence, interní přístupy, férový win-back a checklist.
 - 2026-08-12: Přidána příloha ED o zákaznické incidentní komunikaci: první zpráva, kanály, vztah k právnímu oznámení, omluva, FAQ, privacy-first hranice a checklist.
