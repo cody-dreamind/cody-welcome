@@ -21113,7 +21113,160 @@ Import je jedna z těch funkcí, které se v roadmapě tváří jako „jen pars
 
 Privacy-first import má jasný kontrakt, náhled před zápisem, tvrdou validaci, pravidla pro duplicity, krátkou retenci původních souborů, bezpečný background job a samostatná oprávnění. Cílem není podporovat každý divoký formát z internetu. Cílem je převést zákaznická data tak, aby zákazník věděl, co se stalo, systém zůstal konzistentní a importní soubory se nestaly trvalým datovým skladištěm.
 
+# Příloha EJ: Preference centrum bez manipulačních togglů, cookie divadla a odhlašovacího labyrintu
+
+Preference centrum je malé místo s velkým dopadem. V ideálním světě je to stránka, kde si člověk jednoduše nastaví, jak s ním produkt komunikuje, co měří, jaké notifikace chce a jaká data si přeje stáhnout nebo smazat. V horším světě je to šedivý panel se čtyřiceti přepínači, třemi tmavými vzory a tlačítkem „uložit vše kromě toho, co jsme mezitím schovali do oprávněného zájmu“. Takové UX možná krátkodobě zvedne opt-in. Dlouhodobě zvedne hlavně nedůvěru.
+
+Privacy-first preference centrum má opačný cíl: dát uživateli kontrolu bez toho, aby musel studovat právní archeologii. Nejde jen o cookies. Jde o vztah. Pokud SaaS říká „máme respekt k datům“, preference centrum je jedno z míst, kde se to pozná nejrychleji.
+
+## EJ.1 Preference centrum není cookie banner v převleku
+
+Cookie banner řeší okamžik návštěvy. Preference centrum řeší dlouhodobý vztah. Proto by nemělo být schované jen v patičce webu nebo za odkazem „nastavení soukromí“ psaným světle šedou na ještě světlejší šedé. Uživateli ho nabídni tam, kde dává smysl:
+
+- v nastavení účtu,
+- v patičce e-mailů,
+- v onboardingovém kroku pro notifikace,
+- v centru nápovědy,
+- při změně podmínek nebo účelu zpracování,
+- v administraci workspace pro firemní účty.
+
+Praktický vzor struktury:
+
+| Oblast | Co uživatel nastavuje | Dobré výchozí chování |
+|---|---|---|
+| E-mailová komunikace | produktové novinky, bezpečnostní zprávy, marketing | bezpečnostní zprávy povinné, marketing vypnutelný |
+| Produktové notifikace | upozornění v aplikaci, týdenní souhrn, zmínky | jen skutečně akční upozornění |
+| Analytika | měření návštěvnosti a používání funkcí | agregované, bez zbytečných identifikátorů |
+| Data účtu | export, oprava, smazání, retence | jasné kroky a termíny |
+| Integrace | propojené nástroje a rozsah oprávnění | viditelný vlastník a možnost odpojení |
+
+Důležitý detail: preference centrum nemá být jen seznam souhlasů. U mnoha provozních věcí nejde o souhlas, ale o smlouvu, oprávněný zájem, bezpečnost nebo zákonnou povinnost. Uživateli ale pořád můžeš vysvětlit účel a dát mu kontrolu tam, kde je to možné.
+
+## EJ.2 Každý přepínač musí říct důsledek
+
+Přepínač bez vysvětlení je UX loterie. Uživatel neví, jestli vypnutím „produktových e-mailů“ přijde o marketingové básně, bezpečnostní upozornění, faktury nebo obnovu hesla. A když neví, raději nechá všechno zapnuté. To není informované rozhodnutí. To je digitální verze cedule „pozor, možná spadne strop“.
+
+U každé volby napiš tři věci:
+
+- co přesně se zapne nebo vypne,
+- proč to produkt používá,
+- co se stane po změně.
+
+Příklad dobrého mikrotextu:
+
+> Týdenní souhrn aktivity: pošleme vám jednou týdně stručný přehled změn ve vašem workspace. Neobsahuje citlivý obsah projektů, jen počty změn a odkazy do aplikace. Vypnutí neovlivní bezpečnostní ani fakturační e-maily.
+
+Příklad špatného mikrotextu:
+
+> Personalizovaná zkušenost.
+
+To je fráze, která může znamenat užitečný filtr i marketingový vysavač. V privacy-first produktu si takovou mlhu nech pro horoskopy, ne pro nastavení dat.
+
+## EJ.3 Odhlašování musí být stejně snadné jako přihlášení
+
+Pokud se uživatel přihlásí k newsletteru jedním kliknutím, neměl by se odhlašovat přes tři obrazovky, přihlášení do účtu a potvrzení e-mailem, že si opravdu přeje nebýt otravován. To není retence. To je únos inboxu s hezkým logem.
+
+Dobré pravidlo:
+
+- marketingový e-mail má mít viditelný odhlašovací odkaz,
+- odhlášení nepotřebuje heslo,
+- po kliknutí ukaž potvrzení a možnost změnit detailní preference,
+- nikdy nevyžaduj důvod odchodu,
+- pokud důvod sbíráš, nech ho volitelný a anonymizovaný.
+
+U B2B SaaS pozor na rozdíl mezi individuální preferencí a firemním nastavením. Jeden uživatel se může odhlásit z produktových tipů, ale bezpečnostní oznámení pro vlastníka workspace musí dorazit někomu oprávněnému. Preference centrum by proto mělo umět říct: „Tuto komunikaci nelze vypnout, protože se týká bezpečnosti účtu. Můžete změnit příjemce.“
+
+## EJ.4 Firemní workspace potřebuje auditovatelná nastavení
+
+U osobního účtu často stačí jednoduché „moje preference“. U firemního SaaS potřebuješ i správu na úrovni workspace. Jinak skončíš v situaci, kdy nikdo neví, kdo zapnul integraci, proč chodí exporty do cizího nástroje a kdo má právo měnit retenční pravidla.
+
+Workspace preference rozděl podle rizika:
+
+- **Nízké riziko:** jazyk, vzhled, běžné notifikace.
+- **Střední riziko:** produktová analytika, týdenní reporty, pozvánky hostů.
+- **Vysoké riziko:** exporty, integrace, retence, sdílení dat, support access.
+
+U vysokého rizika přidej:
+
+- jasnou roli, která změnu smí provést,
+- potvrzovací dialog s konkrétním dopadem,
+- audit log bez citlivého obsahu,
+- možnost vrátit nastavení zpět,
+- interní alert při podezřelé změně.
+
+Příklad auditního záznamu:
+
+```text
+2026-08-12 09:14 UTC
+Akce: změna retence exportů z 30 dní na 7 dní
+Provedl: owner@example.cz
+Workspace: Dreamind Demo
+Důvod: měsíční privacy review
+```
+
+Nevkládej do audit logu obsah exportu, seznam všech zákazníků ani tokeny integrace. Audit log má říct, co se stalo, ne vytvořit druhý datový únik se seriózním názvem.
+
+## EJ.5 Preference musí fungovat napříč kanály
+
+Uživatel neřeší, jestli e-mail posílá CRM, produktový backend, billing systém nebo náhodný skript, který někdo napsal v pátek večer. Pokud se odhlásil z marketingu, očekává, že marketing přestane. Všude.
+
+Proto potřebuješ jeden zdroj pravdy pro preference. Nemusí to být obří platforma. Pro malý SaaS často stačí tabulka nebo služba s jasným API:
+
+| Preference | Úroveň | Používá | Poznámka |
+|---|---|---|---|
+| `marketing_email_opt_in` | uživatel | kampaně, novinky | defaultně false, pokud není souhlas |
+| `weekly_digest_enabled` | uživatel | produktový backend | vypnutí neovlivní bezpečnost |
+| `security_contact_email` | workspace | security/billing | povinný kontakt |
+| `analytics_minimal_mode` | workspace | produktová analytika | omezuje identifikátory |
+| `support_access_allowed` | workspace | support tooling | časově omezené |
+
+Při každém novém kanálu se ptej: odkud bere preference? Pokud odpověď zní „má vlastní seznam“, zastav se. Právě vzniká budoucí chaos.
+
+## EJ.6 Privacy-first preference centrum je i produktový marketing
+
+Dobře udělané preference centrum prodává důvěru líp než odstavec „bereme soukromí vážně“. Uživatel vidí, že kontrola nad daty není jen dokument v právní sekci, ale běžná součást produktu.
+
+Ukazuj konkrétně:
+
+- jaká data se používají pro daný účel,
+- jak dlouho se drží,
+- kdo má přístup,
+- jaké integrace jsou zapojené,
+- kde běží zpracování,
+- jak uživatel změnu provede.
+
+Tady se krásně hodí evropský provoz jako výhoda. Ne jako nacionalistická vlaječka v patičce, ale jako praktická odpověď na otázku „kde jsou moje data a kdo je může vidět“. Dreamindí tón: klidný, přesný, bez strašení a bez amerického growth-hack kabaretu.
+
+## EJ.7 Checklist preference centra
+
+Před vydáním nebo revizí preference centra projdi tento checklist:
+
+- Uživatel najde preference z nastavení účtu, e-mailu a nápovědy.
+- Každý přepínač má jasný účel a popsaný důsledek vypnutí.
+- Marketingové odhlášení je dostupné bez přihlášení a bez povinného dotazníku.
+- Bezpečnostní a fakturační zprávy jsou oddělené od marketingu.
+- Firemní workspace má vlastní nastavení pro rizikové oblasti.
+- Rizikové změny mají role, potvrzení a audit log.
+- Preference se používají napříč všemi komunikačními kanály.
+- Exporty, integrace a support access jsou vidět ve stejném kontrolním prostoru.
+- Texty nepoužívají manipulativní formulace typu „zhoršit zážitek“.
+- Existuje měsíční kontrola, že preference odpovídají skutečnému chování systému.
+
+## Codyho komentář
+
+Preference centrum je test charakteru produktu. Když je férové, jednoduché a srozumitelné, říká uživateli: „Nemusíš nám slepě věřit, tady máš volant.“ Když je schované, matoucí a plné manipulativních přepínačů, říká něco taky — jen to není věta, kterou by marketing chtěl dát na homepage. Privacy-first SaaS si nemá hrát na kouzelníka s kloboukem plným dat. Má být dobrý správce. Méně triků, víc kontroly.
+
+## Shrnutí přílohy
+
+- Preference centrum řeší dlouhodobou kontrolu nad daty, ne jen první cookie banner.
+- Každá preference potřebuje jasný účel, dopad a rozumné výchozí chování.
+- Odhlášení z marketingu musí být snadné a nesmí ovlivnit bezpečnostní komunikaci.
+- Firemní SaaS potřebuje auditovatelná workspace nastavení pro rizikové akce.
+- Jeden zdroj pravdy pro preference chrání uživatele, support i doručitelnost.
+
 ## Pracovní log
+
+- 2026-08-12: Přidána příloha EJ o preference centru: jasné přepínače, férové odhlašování, workspace nastavení, audit log, jednotný zdroj pravdy a privacy-first checklist.
 - 2026-08-12: Přidána příloha EI o importech a migracích dat: importní kontrakt, náhled před zápisem, validace, duplicity, retence souborů, background joby, oprávnění a checklist.
 - 2026-08-12: Přidána příloha EH o interních nástrojích a admin rozhraní: úkolová mapa, role podle rizika, citlivé akce, exporty, impersonace, bezpečné admin UX a checklist.
 - 2026-08-12: Přidána příloha EG o privacy-first zákaznickém výzkumu: výzkumné otázky, rozhovory, dotazníky, anonymizace poznámek, převod insightů do rozhodnutí a checklist.
