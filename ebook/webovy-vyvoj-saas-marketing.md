@@ -20747,7 +20747,182 @@ Můj pohled — Cody: dobrý výzkum není o tom, že se tváříš jako vědeck
 - Surové záznamy, přepisy a exporty potřebují jasnou retenci a rychlou anonymizaci.
 - Insight má skončit v produktu, marketingu, dokumentaci nebo vědomém rozhodnutí nic neměnit.
 
+
+---
+
+# Příloha EH: Interní nástroje a admin rozhraní bez superadmin chaosu, skrytých exportů a datového bufetu
+
+Interní administrace je často nejnebezpečnější část malého SaaS produktu. Ne proto, že by měla krásnější tlačítka než veřejná aplikace. Právě naopak: bývá rychle slepená, schovaná za `/admin`, přístup má „jen tým“ a každý předpokládá, že se tam přece nikdo špatný nedostane. To je bezpečnostní strategie asi jako nechat klíče pod rohožkou a napsat na ni „prosím nekrást“.
+
+Privacy-first admin rozhraní má jednoduchý cíl: pomoct týmu řešit zákaznické situace, aniž by interní nástroj otevíral víc dat, než je nutné. Admin není datový bufet. Je to servisní pult s jasnými oprávněními, auditní stopou a bezpečnými výchozími hodnotami.
+
+## EH.1 Admin začíná mapou úkolů, ne seznamem databázových tabulek
+
+Špatný admin vzniká tak, že se vezme databáze a nad každou tabulkou se udělá CRUD. Výsledek vypadá efektivně, dokud někdo omylem neupraví fakturační stav, nesmaže workspace nebo neotevře osobní data zákazníka, která k danému úkolu vůbec nepotřeboval.
+
+Začni opačně: sepiš interní úkoly, které tým opravdu dělá.
+
+Příklad:
+
+| Interní úkol | Kdo ho dělá | Data nutná k úkolu | Co není potřeba ukazovat |
+| --- | --- | --- | --- |
+| Ověřit platbu zákazníka | finance / support | firma, tarif, stav platby, fakturační e-mail | obsah projektu, interní poznámky uživatelů |
+| Pomoci s onboardingem | support | workspace, stav nastavení, poslední bezpečné kroky | celé logy, osobní obsah importů |
+| Vyřešit problém s e-mailem | support / technik | stav odeslání, chybový kód, čas pokusu | plné tělo zprávy, pokud stačí metadata |
+| Zablokovat zneužívající účet | admin | účet, důvod blokace, auditní události | marketingové profily, nepotřebné exporty |
+
+Praktické pravidlo: pokud interní obrazovka nemá jasnou větu „tahle obrazovka pomáhá udělat X“, pravděpodobně je moc široká.
+
+## EH.2 Role navrhni podle rizika, ne podle organizační nálady
+
+Malý tým často začne jednou rolí: `admin`. Pak přibude `superadmin`, `owner`, `support`, `manager`, `operator`, `god_mode` a nikdo neví, kdo co smí. Tohle není škálování. To je role guláš.
+
+Lepší je rozdělit oprávnění podle rizikových schopností:
+
+- čtení zákaznického profilu,
+- změna fakturačních údajů,
+- reset bezpečnostních nastavení,
+- impersonace nebo dočasný support access,
+- export dat,
+- mazání nebo blokace účtu,
+- správa interních uživatelů,
+- přístup k auditním záznamům.
+
+Role pak skládej z těchto schopností. Support nemusí umět měnit tarif. Finance nemusí vidět obsah workspace. Vývojář nemusí mít trvalý přístup k produkčnímu adminu jen proto, že umí opravit bug.
+
+Mini matice:
+
+| Schopnost | Support | Finance | Technik | Owner |
+| --- | --- | --- | --- | --- |
+| Vidět základní účet | Ano | Ano | Jen při incidentu | Ano |
+| Měnit tarif | Ne | Ano | Ne | Ano |
+| Spustit export dat | Ne | Ne | Ne | Ano / schválený proces |
+| Dočasný support access | Ano, časově omezeně | Ne | Ano, při incidentu | Ano |
+| Spravovat interní role | Ne | Ne | Ne | Ano |
+
+Codyho komentář: role pojmenovaná „manager“ je skoro vždycky podezřelá. Manažer čeho? Kávovaru? Exportů? Mazání dat? Pojmenuj schopnosti, ne firemní hierarchii.
+
+## EH.3 Citlivé akce chtějí brzdy, ne jen červené tlačítko
+
+Nebezpečné admin akce nesmí být stejně snadné jako změna štítku. Zvlášť u malého týmu, kde lidé často přepínají mezi supportem, vývojem a obchodem. Únava a multitasking jsou reálné riziko.
+
+Pro citlivé akce nastav minimálně tři vrstvy ochrany:
+
+1. jasné shrnutí dopadu před potvrzením,
+2. druhé potvrzení nebo re-authentication,
+3. auditní záznam s důvodem a identitou interního uživatele.
+
+Příklad potvrzení pro smazání workspace:
+
+> „Chystáš se zahájit mazání workspace `Acme EU`. Akce zablokuje přístup uživatelům, naplánuje smazání provozních dat podle retenční politiky a zachová zákonné účetní doklady. Napiš důvod a potvrď akci.“
+
+Co patří mezi citlivé akce:
+
+- mazání účtu, workspace nebo projektu,
+- změna vlastníka účtu,
+- reset MFA nebo bezpečnostních prvků,
+- export zákaznických dat,
+- změna fakturačního tarifu,
+- ruční úprava stavu platby,
+- vypnutí bezpečnostního omezení,
+- dlouhodobé odemčení support access.
+
+Nejde o to tým brzdit. Jde o to, aby chyba nebyla rychlejší než rozum.
+
+## EH.4 Exporty jsou nejrychlejší cesta k datovému úniku
+
+Tlačítko „Export CSV“ v adminu vypadá nevinně. Jenže export je okamžik, kdy data opustí kontrolované prostředí produktu a začnou žít vlastním životem: v Downloads, v e-mailu, v tabulce, v chatu, v příloze ticketu a nakonec v zapomenutém archivu.
+
+Privacy-first pravidla pro exporty:
+
+- exportuj jen sloupce nutné pro konkrétní účel,
+- nastav expiraci odkazu nebo souboru,
+- označ export interním účelem a vlastníkem,
+- loguj, kdo export vytvořil a proč,
+- zakaž hromadné exporty pro běžný support,
+- preferuj agregovaný report před řádkovým exportem,
+- po dokončení úkolu export smaž.
+
+Příklad bezpečnějšího exportu:
+
+| Export | Problém | Lepší varianta |
+| --- | --- | --- |
+| Všichni uživatelé včetně e-mailů a aktivit | příliš široký dopad | počty aktivních účtů podle tarifu bez identifikátorů |
+| Kompletní logy za měsíc | citlivý obsah a velký objem | filtrované události k jednomu incidentu |
+| CSV zákazníků pro marketing | nejasný účel a souhlas | segment bez osobních údajů nebo opt-in seznam z e-mailingu |
+| Přepis support ticketů | osobní data a interní poznámky | anonymizované vzory problémů |
+
+Pokud někdo žádá export „pro jistotu“, odpověď má být: „Jaké rozhodnutí tím exportem uděláme?“ Když rozhodnutí neexistuje, export taky ne.
+
+## EH.5 Impersonace má být výjimka, ne pohodlný režim práce
+
+Možnost „přihlásit se jako zákazník“ je silná a nebezpečná. Někdy je opravdu užitečná: například když support potřebuje přesně ověřit, proč zákazník nevidí konkrétní nastavení. Ale bez pravidel se z impersonace stane zkratka, kterou tým používá místo lepší diagnostiky.
+
+Bezpečnější model:
+
+- preferuj read-only náhled před plnou impersonací,
+- vyžaduj konkrétní support ticket nebo důvod,
+- omez přístup časově, třeba na 15 nebo 30 minut,
+- viditelně označ režim „jednáš za zákazníka“,
+- blokuj citlivé akce při impersonaci,
+- zapiš auditní událost,
+- umožni zákazníkovi vidět historii support access, pokud to dává smysl pro produkt.
+
+Důležité: impersonace nemá obcházet autorizaci. Pokud interní uživatel nemá právo vidět účet, nemá se k němu dostat ani „přihlášením za zákazníka“. Jinak sis právě postavil zadní dveře a jen jim říkáš support feature.
+
+## EH.6 Admin UX musí chránit i interní lidi
+
+Interní nástroje se často designově odfláknou, protože „to používáme jen my“. Jenže špatné UI zvyšuje riziko chyby. Když jsou vedle sebe dvě podobná tlačítka, tabulka má sto sloupců a nebezpečná akce není jasně odlišená, dřív nebo později někdo klikne špatně.
+
+Praktické UX zásady:
+
+- u každé stránky ukaž název zákazníka, prostředí a rizikový kontext,
+- produkci vizuálně odliš od stagingu,
+- nebezpečné akce odděl do samostatné sekce,
+- před destruktivní akcí ukaž konkrétní dopad,
+- dlouhé seznamy filtruj podle úkolu, ne podle všech možných polí,
+- osobní údaje maskuj, dokud je interní uživatel nepotřebuje odkrýt,
+- u odkrytí citlivého údaje vyžaduj důvod nebo aspoň auditní stopu.
+
+Příklad maskování:
+
+| Údaj | Výchozí zobrazení | Odkrytí |
+| --- | --- | --- |
+| E-mail | `j***@firma.cz` | při řešení ticketu |
+| Telefon | skrytý | jen pokud je telefonický kontakt slíbený |
+| API klíč | nikdy celý | jen poslední 4 znaky a akce rotace |
+| Fakturační údaje | základní stav | detail jen pro finance |
+
+Admin má být rychlý, ale ne slepý. Rychlost bez kontextu je jen efektivnější průšvih.
+
+## EH.7 Checklist interní administrace
+
+- Má každá admin obrazovka jasný interní úkol a vlastníka?
+- Nezobrazuje admin zákaznická data jen proto, že jsou snadno dostupná v databázi?
+- Jsou role složené z konkrétních schopností, ne z vágních titulů?
+- Mají citlivé akce potvrzení, důvod a auditní stopu?
+- Jsou hromadné exporty omezené, expirované a zdůvodněné?
+- Je impersonace časově omezená, auditovaná a blokuje citlivé akce?
+- Umí interní uživatel vyřešit běžný support případ bez přístupu k obsahu zákazníka?
+- Je produkční admin vizuálně odlišený od testovacího prostředí?
+- Maskují se citlivé údaje, dokud je člověk opravdu nepotřebuje?
+- Existuje pravidelný review interních účtů, rolí a nepoužívaných oprávnění?
+
+## Codyho komentář
+
+Interní admin je místo, kde se pozná skutečná kultura firmy. Veřejný web může mít nádhernou privacy stránku, ale pokud support vidí všechno, exporty létají přes chat a superadmin účet sdílí tři lidé, je to jen divadlo s hezkou kulisou. Dobrý admin je nudný správným způsobem: málo dat, jasné akce, stopa po rozhodnutí a žádné kouzelné tlačítko „dej mi všechno“.
+
+## Shrnutí přílohy
+
+- Interní administrace má vycházet z konkrétních úkolů, ne z databázových tabulek.
+- Role navrhuj podle rizikových schopností: export, mazání, billing, impersonace, audit a správa uživatelů.
+- Citlivé akce potřebují dopadové shrnutí, druhé potvrzení a auditní stopu.
+- Exporty musí být účelové, omezené, expirované a po použití smazané.
+- Impersonace má být časově omezená výjimka, ne běžný pracovní režim supportu.
+- Dobré admin UX chrání zákazníky i interní tým před unaveným kliknutím vedle.
+
 ## Pracovní log
+- 2026-08-12: Přidána příloha EH o interních nástrojích a admin rozhraní: úkolová mapa, role podle rizika, citlivé akce, exporty, impersonace, bezpečné admin UX a checklist.
 - 2026-08-12: Přidána příloha EG o privacy-first zákaznickém výzkumu: výzkumné otázky, rozhovory, dotazníky, anonymizace poznámek, převod insightů do rozhodnutí a checklist.
 - 2026-08-12: Přidána příloha EF o produktových rozhodnutích bez HIPPO diktátu: rozhodovací karta, roadmapa včetně odmítnutých nápadů, datový náklad funkcí, meetingový rytmus a checklist.
 - 2026-08-12: Přidána příloha EE o offboardingu zákazníků a uživatelů: scénáře odchodu, zavírání session a tokenů, exporty, retence, interní přístupy, férový win-back a checklist.
