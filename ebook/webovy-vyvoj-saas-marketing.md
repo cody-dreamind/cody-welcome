@@ -18746,7 +18746,124 @@ Před zveřejněním releasu projdi:
 Changelog je provozní paměť produktu. Dobře napsané release notes snižují support, zrychlují adopci, chrání důvěru a pomáhají zákazníkům chápat dopady změn. Privacy-first SaaS má u každé důležité změny říct nejen „co je nové“, ale i „co se děje s daty“. Méně mlhy, víc rozhodnutí. Překvapení nechme narozeninám, ne produkčním releaseům.
 
 
+# Příloha DU: Datová rezidence a cloud regiony bez mapového marketingu, slepé víry a compliance cosplay
+
+„Máme EU region“ zní hezky. Je to ale jen začátek rozhovoru, ne odpověď. Datová rezidence znamená, kde jsou data uložená nebo zpracovávaná. Privacy-first provoz řeší i to, kdo k nim může mít přístup, odkud běží support, kam tečou logy, kde končí zálohy, jak funguje monitoring, jaké subdodavatele používá poskytovatel a co se stane při incidentu nebo právním požadavku.
+
+Evropská komise připomíná, že pokud osobní údaje putují mimo EHP, ochrana podle GDPR má „cestovat s daty“ a přenos musí stát na odpovídajícím mechanismu: rozhodnutí o odpovídající ochraně, vhodných zárukách typu standardních smluvních doložek, závazných podnikových pravidlech nebo výjimkách pro specifické situace. Praktický přehled pravidel je tady: https://commission.europa.eu/law/law-topic/data-protection/international-dimension-data-protection/rules-international-data-transfers_en
+
+## DU.1 Region není jurisdikce, jurisdikce není celý provoz
+
+Když dodavatel řekne „Frankfurt“, ptej se: co přesně je ve Frankfurtu? Primární databáze? Objektové úložiště? Cache? Search index? Logy? Backupy? Supportní náhledy? Telemetrie? Billing metadata? AI trénovací pipeline? A kdo to může číst?
+
+Pro malý SaaS tým stačí jednoduchá datová mapa:
+
+| Vrstva | Kde fyzicky běží | Jaká data obsahuje | Kdo má přístup | Poznámka |
+| --- | --- | --- | --- | --- |
+| Aplikační databáze | EU region | zákaznické účty, workspace, obsah | produkční tým podle rolí | nejcitlivější vrstva |
+| Objektové soubory | EU region | nahrané přílohy | aplikace, omezený support | neveřejné URL, expirace odkazů |
+| Logy | EU/EHP | technické události, minimální identifikátory | provozní tým | žádné celé request body |
+| Monitoring | EU pokud jde | agregované metriky | vývoj a provoz | bez zákaznického obsahu |
+| Backupy | EU region nebo druhý EU region | šifrovaná kopie databáze | velmi omezený přístup | test obnovy, retence |
+| Support nástroje | EU/EHP preferovaně | ticket, e-mail, kontext případu | support | masking citlivých hodnot |
+
+Nejde o perfektní právní tabulku. Jde o to, aby tým věděl, kde data skutečně žijí. Bez toho se „EU hosting“ mění na dekorativní nálepku.
+
+## DU.2 Ptej se na přístup, ne jen na umístění serveru
+
+Data uložená v EU mohou být pořád spravovaná službou s globálním supportem, globálním incidentním týmem nebo subdodavatelem mimo EHP. To nemusí automaticky znamenat zákaz používání, ale znamená to otázky, dokumentaci a rozhodnutí. ENISA ve svém cloud security guide pro malé a střední firmy doporučuje při pořizování cloudu pracovat se sadou bezpečnostních otázek na poskytovatele, ne jen s cenou a marketingovou brožurou: https://www.enisa.europa.eu/publications/cloud-security-guide-for-smes
+
+Praktické otázky pro dodavatele:
+
+- Kde jsou primární data, zálohy, logy, metadata a supportní kopie?
+- Máte možnost pevně zvolit EU/EHP region a zakázat replikaci mimo něj?
+- Kdo z vašich zaměstnanců může k datům přistoupit a za jakých podmínek?
+- Existuje just-in-time support access, audit přístupů a časové omezení?
+- Jsou data v klidu a při přenosu šifrovaná?
+- Kdo spravuje klíče: zákazník, dodavatel, nebo jejich kombinace?
+- Jaké subdodavatele používáte a jak oznamujete jejich změny?
+- Co přesně exportujete do monitoringu, error trackingu a analytiky?
+- Jak rychle umíte data smazat po ukončení služby?
+
+Codyho komentář: Pokud dodavatel umí odpovědět jen „trust us“, není to trust. Je to prosebný rituál. V produkci chci méně víry a víc důkazů.
+
+## DU.3 Standardní smluvní doložky nejsou magická deka
+
+Standardní smluvní doložky jsou užitečný nástroj pro přenosy osobních údajů mimo EHP. Evropská komise uvádí, že modernizované SCC pro mezinárodní přenosy přijala 4. června 2021 a slouží jako předem schválené smluvní doložky pro různé scénáře přenosu: https://commission.europa.eu/law/law-topic/data-protection/international-dimension-data-protection/standard-contractual-clauses-scc_uk
+
+Jenže SCC samy o sobě neodpovídají na produktové otázky:
+
+- Jaká data tam vůbec posíláme?
+- Dá se tok dat vypnout nebo omezit?
+- Umíme daný účel splnit evropskou alternativou?
+- Potřebujeme posílat osobní údaje, nebo stačí agregace či pseudonym?
+- Máme technická opatření, která dávají smysl i při selhání dodavatele?
+- Ví o tom zákazník v DPA, privacy stránce nebo trust packu?
+
+Pro privacy-first SaaS je dobré pravidlo: nejdřív minimalizace a architektura, potom smlouva. Ne obráceně. Smluvní mechanismus má krýt zbytkový, odůvodněný přenos. Nemá legalizovat líné posílání všeho všude, protože „nám to knihovna udělala sama“.
+
+## DU.4 Rozhodovací strom pro nový cloudový nástroj
+
+Když chce tým zapnout nový nástroj, použij jednoduchý strom:
+
+1. **Je nástroj nutný pro hodnotu produktu?** Pokud ne, odlož ho.
+2. **Zpracovává osobní údaje?** Pokud ne, zdokumentuj to a drž exporty pod kontrolou.
+3. **Existuje EU/EHP provoz bez přenosu mimo EHP?** Pokud ano, preferuj ho i za cenu menší pohodlnosti.
+4. **Jde posílat méně dat?** Odstraň jména, e-maily, obsah zpráv, IP adresy, celé payloady.
+5. **Je mimo EHP?** Ověř transfer mechanismus, SCC, subdodavatele, doplňková opatření a komunikaci zákazníkům.
+6. **Umíme odchod?** Export, vypnutí, smazání, nahrazení alternativou, změna dokumentace.
+7. **Je rozhodnutí zapsané?** Krátký vendor decision record stačí. Důležité je, aby existoval.
+
+Příklad rozhodnutí:
+
+> Potřebujeme error tracking pro produkční chyby. Do nástroje neposíláme request body, zákaznické dokumenty ani celé e-maily. User ID hashujeme, IP neukládáme, sample rate držíme nízko. Primární volba je EU-hosted/self-hosted varianta. Pokud zvolíme službu mimo EHP, musí mít SCC, seznam subdodavatelů, audit přístupů, nastavitelnou retenci a jasný export/smazání.
+
+Takhle z compliance uděláš provozní design. Nudné? Trochu. Užitečné? Hodně. A nudná infrastruktura je přesně ta, kterou chceš ve dvě ráno.
+
+## DU.5 Navrhni evropský baseline stack
+
+Privacy-first baseline není dogma, ale výchozí nastavení. Pro nový evropský projekt bych začal takhle:
+
+- **Hosting:** EU poskytovatel nebo cloud s pevně zvoleným EU/EHP regionem, oddělené produkční a staging prostředí.
+- **Databáze:** EU region, šifrování v klidu, omezené přístupy, pravidelný restore test.
+- **Objektové úložiště:** neveřejné buckety, krátkodobé podepsané URL, oddělená retence pro přílohy.
+- **E-mail:** evropský nebo dobře zdokumentovaný poskytovatel, oddělení transakční a marketingové pošty.
+- **Analytika:** cookieless nebo minimální měření, bez reklamních pixelů, s jasným eventovým slovníkem.
+- **Monitoring:** technické metriky bez zákaznického obsahu, masking citlivých parametrů, rozumná retence.
+- **Dokumentace:** registr zpracování, subdodavatelé, datová mapa, incident playbook, export/smazání účtu.
+
+Neříkám, že nikdy nesmíš použít globální službu. Říkám, že default má být evropská kontrola nad daty. Výjimka musí být vědomá, popsaná a obhajitelná. Ne „nainstalovali jsme SDK v pátek večer a ono to někam teče“.
+
+## DU.6 Checklist datové rezidence a cloud regionů
+
+Před zapnutím služby projdi:
+
+- Víme, jaká data služba zpracovává: obsah, metadata, logy, identifikátory, billing?
+- Máme zmapované primární úložiště, zálohy, logy, monitoring, support a subdodavatele?
+- Je zvolen EU/EHP region a je technicky vynucený?
+- Je zakázaná nebo zdokumentovaná replikace mimo EHP?
+- Máme odpovědi na přístup zaměstnanců dodavatele, support access a audit přístupů?
+- Jsou data minimalizovaná před odesláním do nástroje?
+- Máme nastavenou retenci a mazání po ukončení služby?
+- Máme DPA, seznam subdodavatelů a mechanismus pro mezinárodní přenosy, pokud existují?
+- Ví zákazník v privacy stránce, trust packu nebo smlouvě, kdo data zpracovává?
+- Umíme službu vypnout bez ztráty provozní paměti nebo vendor lock-in paniky?
+- Je rozhodnutí zapsané v jednoduchém vendor decision recordu?
+
+## Zdroje k příloze
+
+- Evropská komise — pravidla pro mezinárodní přenosy osobních údajů: https://commission.europa.eu/law/law-topic/data-protection/international-dimension-data-protection/rules-international-data-transfers_en
+- Evropská komise — praktický přehled pravidel při přenosu dat mimo EU: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/obligations/what-rules-apply-if-my-organisation-transfers-data-outside-eu_en
+- Evropská komise — standardní smluvní doložky pro přenosy dat: https://commission.europa.eu/law/law-topic/data-protection/international-dimension-data-protection/standard-contractual-clauses-scc_uk
+- ENISA — Cloud Security Guide for SMEs: https://www.enisa.europa.eu/publications/cloud-security-guide-for-smes
+
+## Shrnutí přílohy
+
+Datová rezidence není věta „EU region“ v ceníku. Je to provozní mapa: kde jsou data, kdo k nim může, kam tečou kopie, jak se mažou, jak se auditují a jak se služba opouští. Privacy-first evropský SaaS má preferovat EU/EHP provoz, minimalizovat data před odesláním a dokumentovat každou výjimku. Nejlepší cloudové rozhodnutí je takové, které umíš vysvětlit zákazníkovi bez kouře, latiny a nervózního přešlapování.
+
+
 ## Pracovní log
+- 2026-08-12: Přidána příloha DU o datové rezidenci a cloud regionech: rozdíl mezi regionem a celým provozem, otázky na dodavatele, SCC bez magie, rozhodovací strom, evropský baseline stack a checklist.
 - 2026-08-12: Přidána příloha DT o changelogu a release notes: typy změn, interní release checklist, datový odstavec, breaking changes, distribuce přes vlastní web/RSS a privacy-first checklist.
 - 2026-08-12: Přidána příloha DS o mazání účtů a žádostech subjektů údajů: rozdíl mezi uživatelem, workspace, obsahem a doklady, workflow výmazu, export dat, zálohy, odpovědi uživatelům a privacy-first checklist.
 - 2026-08-12: Přidána příloha DR o SLA, SLO a dostupnosti: rozdíl mezi SLI/SLO/SLA, měření kritických cest, error budget, údržba, incident komunikace a privacy-first checklist.
