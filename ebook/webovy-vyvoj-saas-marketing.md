@@ -18862,7 +18862,160 @@ Před zapnutím služby projdi:
 Datová rezidence není věta „EU region“ v ceníku. Je to provozní mapa: kde jsou data, kdo k nim může, kam tečou kopie, jak se mažou, jak se auditují a jak se služba opouští. Privacy-first evropský SaaS má preferovat EU/EHP provoz, minimalizovat data před odesláním a dokumentovat každou výjimku. Nejlepší cloudové rozhodnutí je takové, které umíš vysvětlit zákazníkovi bez kouře, latiny a nervózního přešlapování.
 
 
+# Příloha DV: Background joby a fronty bez duplicit, tichých selhání a datových výletů
+
+Každý SaaS dřív nebo později zjistí, že ne všechno patří do jednoho HTTP requestu. Poslat transakční e-mail, vygenerovat export, přepočítat report, stáhnout webhook, synchronizovat fakturu, zpracovat upload, importovat CSV, doručit notifikaci, vyčistit stará data — to všechno jsou věci, které často dávají větší smysl jako background job než jako „uživateli chvíli zatočíme kolečkem a budeme doufat“.
+
+Jenže fronta není kouzelný odpadkový koš na složitost. Špatně navržené joby umí poslat zákazníkovi tři faktury, dvakrát smazat data, donekonečna retryovat rozbitý webhook, nacpat osobní údaje do logů a tvářit se přitom jako profesionální architektura. Fronty jsou výborný sluha a docela kreativní výrobce incidentů. Takový malý tovární skřítek s motorovou pilou.
+
+Twelve-Factor App u principu disposability doporučuje procesy, které rychle startují, umí se elegantně vypnout a u workerů vrací rozpracovaný job zpět do fronty; zároveň připomíná, že joby mají být reentrantní, typicky přes transakci nebo idempotenci: https://12factor.net/disposability
+
+## DV.1 Nejprve odděl druh práce od místa zpracování
+
+Než vybereš queue systém, rozděl joby podle rizika. Jinak skončíš s jednou frontou `default`, kde vedle sebe čeká „pošli uvítací e-mail“ a „smaž zákaznický workspace“. To je stejné jako mít v kuchyni jeden šuplík na lžičky, účtenky, šroubovák a živého hada.
+
+Praktické členění:
+
+| Typ jobu | Příklad | Riziko | Doporučené zacházení |
+| --- | --- | --- | --- |
+| Krátký uživatelský job | přepočet náhledu, menší import | střední | rychlé retry, dobrá UX hláška |
+| Externí integrace | webhook, CRM sync, fakturační systém | střední až vysoké | idempotence, deduplikace, rate limit |
+| Datově citlivý job | export, výmaz, supportní balíček | vysoké | samostatná fronta, audit, expirace výstupu |
+| Notifikace | e-mail, digest, produktová zpráva | střední | preference, deduplikace, bezpečný obsah |
+| Údržba | retence, cleanup, agregace metrik | vysoké při chybě | dry-run, limit, postupné dávky |
+
+Každý typ má mít vlastní očekávání: maximální dobu čekání, počet retry pokusů, vlastníka, alert a pravidlo pro ruční zásah. Job bez vlastníka je jen časovaná bomba s názvem metody.
+
+## DV.2 Idempotence není luxus, ale bezpečnostní pás
+
+Idempotentní job můžeš spustit opakovaně a výsledek zůstane správný. Ne nutně stejný v každém detailu, ale bez duplicitní faktury, dvojitého e-mailu, dvou účtů nebo opakovaného smazání.
+
+Stripe ve své API dokumentaci popisuje idempotency keys jako způsob, jak bezpečně opakovat požadavky po chybě spojení bez rizika dvojího provedení; ukládá výsledek prvního požadavku pro daný klíč a další požadavky se stejným klíčem vrací stejný výsledek: https://docs.stripe.com/api/idempotent_requests
+
+Vlastní SaaS může použít podobnou disciplínu:
+
+- Každý job dostane stabilní business klíč: `invoice:123:send`, `workspace:456:export:2026-08`, `webhook:provider:event_id`.
+- Před provedením se zkontroluje, jestli už výsledek existuje nebo je job ve stavu `done`.
+- Externí volání mají vlastní idempotency key, pokud ho dodavatel podporuje.
+- V databázi existuje unikátní constraint tam, kde duplicita nesmí projít ani při závodu workerů.
+- Stav jobu se zapisuje transakčně spolu s dopadem, ne až „někdy potom“.
+
+Příklad: posílání faktury.
+
+Špatně: `sendInvoiceEmail(invoiceId)` pokaždé vytvoří PDF, uloží přílohu a pošle e-mail.
+
+Lépe: `invoice_delivery` má unikátní záznam pro fakturu a kanál. Pokud je stav `sent`, job skončí bez akce. Pokud je stav `processing` příliš dlouho, job ho umí bezpečně převzít podle lock timeoutu. E-mail se posílá s jedním jasným delivery ID a v audit logu je jen výsledek, ne celé PDF.
+
+## DV.3 Retry má mít strategii, ne vztek
+
+Retry je užitečný pro dočasné chyby: síť, timeout, přetížené API, krátký výpadek dodavatele. Retry je nebezpečný pro trvalé chyby: špatný token, neexistující zákazník, validační chyba, chybějící oprávnění. Pokud tyto světy nerozlišíš, worker bude každou minutu statečně mlátit hlavou do zdi a ještě ti zaplní logy.
+
+Rozumná pravidla:
+
+- `4xx` validační chyby většinou nezkoušej donekonečna; pošli je do stavu `failed_needs_action`.
+- Timeouty a `5xx` chyby retryuj s exponenciálním backoffem a jitterem.
+- Po konečném počtu pokusů dej job do dead-letter fronty nebo přehledu pro ruční triage.
+- U zákaznicky viditelných akcí ukaž stav: „Export se připravuje“, „Zpracování selhalo, zkusíme to znovu“, „Potřebujeme zásah podpory“.
+- U dávkových úloh nastav limit na počet položek v jednom běhu, aby chyba nezničila celou databázi v jednom dramatickém oblouku.
+
+Mini šablona stavů:
+
+| Stav | Význam | Co má vidět tým |
+| --- | --- | --- |
+| `queued` | čeká ve frontě | čas vytvoření, priorita |
+| `processing` | worker pracuje | worker ID, začátek, timeout |
+| `retry_scheduled` | dočasná chyba | počet pokusů, další pokus |
+| `failed_needs_action` | vyžaduje člověka | důvod, vlastník, bezpečný detail |
+| `done` | dokončeno | čas dokončení, výsledek, audit ID |
+| `cancelled` | vědomě zastaveno | kdo a proč zastavil |
+
+## DV.4 Loguj provozní signály, ne obsah zákazníka
+
+Background joby svádí k logování všeho, protože „to pak pomůže debugovat“. Pomůže — ale i útočníkovi, supportnímu chaosu a budoucímu GDPR dotazu. OWASP Logging Cheat Sheet doporučuje logovat bezpečnostně relevantní události, chránit logy, sanitizovat vstupy a z logů odstraňovat nebo maskovat citlivá data jako session identifikátory, access tokeny, hesla, klíče, platební údaje a citlivé osobní údaje: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+
+U jobů typicky stačí:
+
+- `job_id`, typ jobu, tenant/workspace ID nebo pseudonymizovaný identifikátor.
+- stav, počet pokusů, trvání, fronta, worker, bezpečná chyba.
+- odkaz na interní auditní událost, ne celé vstupní payloady.
+- u externích API request ID dodavatele, ne token ani celé tělo požadavku.
+- agregované metriky: délka fronty, stáří nejstaršího jobu, chybovost podle typu.
+
+Neloguju:
+
+- celé e-maily, zprávy, PDF, CSV exporty a nahrané soubory,
+- access tokeny, refresh tokeny, API klíče a podepsané URL,
+- kompletní webhook payloady s osobními údaji,
+- raw SQL s hodnotami zákazníka,
+- debug dumpy „jen na chvíli“, které pak přežijí tři roky v archivu.
+
+Codyho komentář: Pokud potřebuješ pro debug celý zákaznický payload v logu, většinou nepotřebuješ lepší log. Potřebuješ lepší diagnostický nástroj, syntetický test a trochu méně víry v „dočasné“ hacky.
+
+## DV.5 Fronty jsou součást UX, ne jen infrastruktura
+
+Uživatel neřeší, jestli pod kapotou běží Redis, RabbitMQ, PostgreSQL, SQS nebo něco, co se jmenuje `worker-final-final-v2`. Uživatel řeší: stane se moje akce? kdy? můžu zavřít okno? dostanu výsledek? co když to selže?
+
+Proto navrhni UX pro asynchronní práci:
+
+- U delších akcí hned potvrď přijetí: „Export jsme zařadili ke zpracování.“
+- Dej odhad nebo aspoň očekávání: „Obvykle hotovo do několika minut.“
+- Nabídni bezpečnou cestu k výsledku: e-mail bez citlivé přílohy, notifikace v aplikaci, expirovaný odkaz.
+- Ukaž historii důležitých jobů: exporty, importy, fakturace, hromadné změny.
+- Umožni zrušení tam, kde dává smysl: import před potvrzením, plánovaný digest, generování reportu.
+- U selhání neukazuj interní stack trace, ale lidský stav a další krok.
+
+Příklad mikrotextů:
+
+- „Import běží na pozadí. Můžeš odejít, výsledek najdeš v historii importů.“
+- „Zpracovali jsme 1 248 z 1 380 řádků. 12 řádků čeká na kontrolu.“
+- „Export jsme připravili. Odkaz platí 24 hodin a je dostupný jen přihlášeným uživatelům.“
+- „Synchronizace selhala kvůli oprávnění v napojeném účtu. Znovu připoj integraci.“
+
+## DV.6 Priorita nesmí vytvořit kastovní systém
+
+Fronty často potřebují priority. Login e-mail má přednost před nočním přepočtem statistik. Export pro zákazníka nemá čekat za milionem retry rozbitých webhooků. Ale priority se nesmí změnit v systém, kde jeden velký zákazník vyhladoví všechny ostatní.
+
+Praktická pravidla:
+
+- Kritické fronty drž oddělené od pomalých dávkových úloh.
+- Retry fronta nemá blokovat nové uživatelské akce.
+- Tenant nebo zákazník má mít rozumný limit souběžných jobů.
+- Hromadné akce dávkuj a ukládej průběžný stav.
+- Noční údržba má mít stop podmínku, aby nezabrala ranní špičku.
+- Sleduj stáří nejstaršího jobu podle fronty, ne jen průměrnou dobu zpracování.
+
+Metrika „průměrný job doběhne za 4 sekundy“ je krásná, dokud jeden zákazník nečeká na export 47 minut. Průměr je v provozu často make-up na monokl.
+
+## DV.7 Checklist background jobů a front
+
+Před produkčním nasazením si projdi:
+
+- Má každý typ jobu vlastníka, riziko, prioritu a maximální očekávanou dobu zpracování?
+- Jsou citlivé joby oddělené od běžné fronty?
+- Je každý destruktivní nebo externě viditelný job idempotentní?
+- Existují unikátní constraints nebo deduplikační klíče tam, kde duplicita bolí?
+- Retry pravidla rozlišují dočasné a trvalé chyby?
+- Máme dead-letter/frontu pro ruční zásah a jasného vlastníka triage?
+- Worker umí graceful shutdown a nepřijde o rozpracovanou práci?
+- Logy neobsahují tokeny, zákaznický obsah, celé payloady ani citlivé exporty?
+- Uživatel vidí stav dlouhé akce a ví, kde najde výsledek?
+- Exporty, reporty a přílohy mají expiraci a kontrolu oprávnění při stažení?
+- Sledujeme délku fronty, stáří nejstaršího jobu, chybovost a počet retry pokusů?
+- Umíme jeden typ jobu pozastavit bez vypnutí celé aplikace?
+
+## Zdroje k příloze
+
+- The Twelve-Factor App — Disposability, graceful shutdown a reentrantní joby: https://12factor.net/disposability
+- Stripe API Reference — idempotent requests a bezpečné opakování požadavků: https://docs.stripe.com/api/idempotent_requests
+- OWASP Logging Cheat Sheet — co logovat, co nelogovat, ochrana a sanitizace logů: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+
+## Shrnutí přílohy
+
+Background joby jsou produktová i provozní funkce. Dobrý systém front má oddělené typy práce, idempotentní akce, rozumné retry, bezpečné logování, viditelný stav pro uživatele a jasnou triage pro tým. Privacy-first SaaS neposílá zákaznická data do logů jen proto, že worker zakopl. Fronta má snižovat stres, ne vyrábět tiché incidenty v suterénu aplikace.
+
+
 ## Pracovní log
+- 2026-08-12: Přidána příloha DV o background jobech a frontách: typy úloh, idempotence, retry strategie, bezpečné logování, UX asynchronních akcí, priority a checklist.
 - 2026-08-12: Přidána příloha DU o datové rezidenci a cloud regionech: rozdíl mezi regionem a celým provozem, otázky na dodavatele, SCC bez magie, rozhodovací strom, evropský baseline stack a checklist.
 - 2026-08-12: Přidána příloha DT o changelogu a release notes: typy změn, interní release checklist, datový odstavec, breaking changes, distribuce přes vlastní web/RSS a privacy-first checklist.
 - 2026-08-12: Přidána příloha DS o mazání účtů a žádostech subjektů údajů: rozdíl mezi uživatelem, workspace, obsahem a doklady, workflow výmazu, export dat, zálohy, odpovědi uživatelům a privacy-first checklist.
