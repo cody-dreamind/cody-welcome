@@ -20420,7 +20420,159 @@ Offboarding je podceňovaný growth nástroj. Ne proto, že lidé hromadně ruš
 
 Offboarding musí rozlišit odchod uživatele, zrušení workspace, export, výmaz a interní odebrání přístupů. Bezpečný proces zavírá session, tokeny, OAuth granty a dočasné role, převádí vlastnictví objektů, vysvětluje retenci a dává zákazníkovi použitelný export. Privacy-first přístup z odchodu nedělá past. Dělá z něj důkaz, že produkt respektuje data i zákazníka, i když se zrovna loučí.
 
+
+# Příloha EF: Produktová rozhodnutí bez HIPPO diktátu, nekonečných debat a datového přejídání
+
+Malý SaaS tým často netrpí nedostatkem nápadů. Trpí tím, že každý nápad vypadá trochu důležitě, každý zákaznický požadavek zní naléhavě a každá interní debata se tváří jako strategický summit OSN, jen s horším kávovarem. Výsledkem je roadmapa plná polovičních závazků, backlog jako kompostér přání a produkt, který se pomalu mění v švýcarský nůž přilepený na fakturu.
+
+Privacy-first produktové rozhodování má jednu výhodu: nutí tým ptát se nejen „pomůže nám to růst?“, ale i „kolik dat, rizik a provozní složitosti kvůli tomu přidáme?“. To je zdravý filtr. Nezabíjí ambice. Jen brání tomu, aby se z každého nápadu stal další tracker, integrace, role, export, webhook a supportový evergreen.
+
+## EF.1 Rozhodnutí musí mít problém, ne jen autora
+
+Nejhorší roadmapa vzniká podle hierarchie hlasitosti. Nejvýš je HIPPO — highest paid person's opinion. Potom velký zákazník. Potom poslední support ticket. Potom konkurence. A někde v koutě sedí skutečný problém uživatele a tiše jí sušenku.
+
+Každé produktové rozhodnutí začni větou:
+
+> „Rozhodujeme o tom, jak vyřešit problém [komu] v situaci [kdy], protože dnes [dopad].“
+
+Příklady:
+
+- Slabé zadání: „Potřebujeme AI chat.“
+- Lepší zadání: „Rozhodujeme, jak zkrátit čas, než nový uživatel najde správný postup v dokumentaci, protože dnes kvůli tomu vzniká 18 % support ticketů v prvním týdnu.“
+- Slabé zadání: „Přidejme export do Excelu.“
+- Lepší zadání: „Rozhodujeme, jak účetním umožnit měsíční kontrolu bez ručního kopírování, protože dnes kvůli tomu zákazníci obcházejí produkt přes screenshoty a e-mail.“
+
+Dobrá formulace problému automaticky zúží řešení. Možná nepotřebuješ AI chat. Možná stačí lepší help centrum, vyhledávání, onboardingový checklist nebo jedno jasnější prázdné zobrazení. Ano, méně sexy. Taky méně drahé a méně datově hladové. Produktová dospělost někdy vypadá jako odmítnutý widget.
+
+## EF.2 Rozhodovací karta udrží debatu krátkou
+
+Rozhodovací karta je malý dokument, který drží produktovou debatu u země. Nemá nahradit myšlení. Má zabránit tomu, aby se padesátiminutová porada tvářila jako strategie, ale skončila větou „pojďme to ještě promyslet“.
+
+Minimální šablona:
+
+| Pole | Otázka | Příklad |
+| --- | --- | --- |
+| Problém | Jaký konkrétní problém řešíme? | Noví uživatelé nedokončí import dat |
+| Segment | Koho se to týká? | Menší B2B týmy bez technického admina |
+| Důkaz | Z čeho to víme? | Support tickety, onboarding hovory, nedokončené importy |
+| Možnosti | Jaké jsou 2–3 realistické varianty? | Lepší návod, validace souboru, asistovaný import |
+| Dopad | Co se změní, když uspějeme? | Vyšší aktivace, méně ticketů, kratší time-to-value |
+| Náklady | Co musíme postavit a provozovat? | Parser, UI, dokumentace, alerty |
+| Data | Jaká nová data vzniknou nebo potečou jinam? | Metadata importu, chyby validace, dočasné soubory |
+| Rizika | Co se může rozbít? | Únik dat v logu, velké soubory, falešné úspěchy |
+| Rozhodnutí | Co děláme teď? | Stavíme validaci a návod, asistovaný import zatím ne |
+| Kontrola | Kdy rozhodnutí znovu otevřeme? | Za 30 dní nebo po 20 importech |
+
+Karta má být krátká. Ideálně jedna obrazovka. Pokud potřebuje sedm příloh, buď řešíš velkou věc, nebo jen vyrábíš dokumentační mlhu. Mlhu si nechme pro české listopadové ráno, ne pro produkt.
+
+## EF.3 Data jsou náklad rozhodnutí, ne bonusový konfety efekt
+
+Každá nová funkce vytváří datovou stopu. Někdy je zjevná: uživatel nahraje soubor. Někdy nenápadná: ukládáš historii akcí, doporučení, vyhledávací dotazy, chybové stavy, e-mailové notifikace nebo prompt pro AI asistenta. Privacy-first tým se na data ptá dřív než po dokončení implementace.
+
+Před schválením funkce si polož sedm otázek:
+
+- Jaká data musí funkce získat, aby vůbec fungovala?
+- Která data jsou pohodlná, ale ne nezbytná?
+- Kde se data ukládají a jak dlouho?
+- Zobrazí se data v logu, analytice, supportu nebo exportu?
+- Posílají se data třetí straně, AI modelu nebo mimo EU?
+- Umí uživatel data opravit, exportovat nebo smazat?
+- Co se stane při chybě, retry, rollbacku a obnově ze zálohy?
+
+Příklad: funkce „doporučené kroky pro nový workspace“ může být privacy-first, pokud doporučení vychází z agregovaného stavu účtu a běží interně. Stejná funkce se může změnit v problém, pokud posílá názvy projektů, e-maily kolegů a obsah dokumentů externímu nástroji bez jasného účelu. Produktově je to pořád „chytré doporučení“. Provozní realita je úplně jiný živočich.
+
+## EF.4 Roadmapa má obsahovat i věci, které záměrně neděláš
+
+Silná roadmapa není seznam všeho, co by jednou šlo. Je to seznam rozhodnutí. A rozhodnutí znamená i ne. Ne teď. Ne v této podobě. Ne bez zákaznického důkazu. Ne bez bezpečnostního modelu. Ne bez jasného vlastníka.
+
+Doporučené stavy roadmapy:
+
+| Stav | Význam | Co musí existovat |
+| --- | --- | --- |
+| Sledujeme | Vidíme signál, ale nerozhodujeme | Krátký popis, zdroj signálu, vlastník |
+| Ověřujeme | Zjišťujeme problém a varianty | Hypotéza, rozhovory, data, rizika |
+| Připravujeme | Rozhodnutí padlo, řeší se návrh | Specifikace, datová mapa, dopad na support |
+| Stavíme | Práce běží | Scope, odpovědnost, rollout plán |
+| Měříme | Funkce je venku, čekáme na dopad | Signály úspěchu, ochranné metriky |
+| Odmítáme | Vědomě neděláme | Důvod a podmínka pro znovuotevření |
+
+Stav „odmítáme“ je podceňovaný. Ušetří opakované debaty a chrání tým před tím, aby se každý kvartál znovu vracel stejný zombík-nápad. Pokud se podmínky změní, rozhodnutí se dá otevřít. Ale musí se otevřít s novým důkazem, ne s novou náladou.
+
+## EF.5 Rozhodovací meeting má mít limit a výstup
+
+Porada bez výstupu je drahá forma skupinového scrollování v hlavě. Produktový meeting by měl končit jednou ze čtyř věcí:
+
+- rozhodnutí ano,
+- rozhodnutí ne,
+- experiment s vlastníkem a termínem,
+- konkrétní chybějící informace a člověk, který je doplní.
+
+Doporučený rytmus pro malý tým:
+
+1. Před meetingem: vlastník pošle rozhodovací kartu.
+2. Prvních 10 minut: tým si ujasní problém, ne řešení.
+3. Dalších 15 minut: porovná varianty podle dopadu, práce, rizik a dat.
+4. Dalších 10 minut: rozhodne se nebo se pojmenuje chybějící důkaz.
+5. Posledních 5 minut: zapíše se rozhodnutí, vlastník, termín revize a první další krok.
+
+Pokud se rozhodnutí nevejde do 40 minut, většinou nechybí víc času. Chybí jasnější zadání. Výjimky existují, ale běžná SaaS funkce není mírová smlouva mezi kontinenty.
+
+## EF.6 Příklad: odmítnutí zdánlivě lákavé integrace
+
+Zákazník požádá o integraci s populárním CRM. Obchod říká, že by to pomohlo prodat větším firmám. Vývoj ví, že integrace znamená OAuth, synchronizaci kontaktů, mapování polí, webhooky, retry, monitoring, podporu rozbitých tokenů a vysvětlování, proč se kontakt „záhadně“ nepropsal. Privacy-first otázka zní: musíme kvůli první verzi synchronizovat osobní data, nebo stačí bezpečnější mezikrok?
+
+Rozhodovací karta může skončit takto:
+
+- Problém: obchodní tým zákazníka chce dostat kvalifikované leady do svého CRM.
+- Varianta A: plná obousměrná synchronizace kontaktů.
+- Varianta B: ruční CSV export s omezeným polem a auditní stopou.
+- Varianta C: webhook pouze pro nově vytvořený lead bez historie a bez poznámek.
+- Rozhodnutí: nejdřív webhook s minimálním payloadem a dokumentací; plnou synchronizaci otevřeme až po pěti platících zákaznících s ověřeným požadavkem.
+- Privacy dopad: neposíláme stará data, nesynchronizujeme poznámky, zákazník vidí přesný payload.
+- Kontrola: po 60 dnech vyhodnotíme počet aktivních webhooků, chyby doručení a support dotazy.
+
+Tohle není brzda růstu. To je růst bez toho, aby sis k produktu přivázal datový přívěs velikosti kamionu.
+
+## EF.7 Checklist produktového rozhodnutí
+
+Před schválením funkce:
+
+- [ ] Problém je popsaný jako situace uživatele, ne jako oblíbené řešení.
+- [ ] Existuje alespoň jeden důkaz: rozhovor, support ticket, chování v produktu nebo obchodní signál.
+- [ ] Jsou porovnané minimálně dvě varianty včetně varianty „nedělat teď“.
+- [ ] Je jasné, kdo rozhoduje a kdo rozhodnutí provede.
+- [ ] Funkce má definovaný signál úspěchu a termín revize.
+
+Privacy-first kontrola:
+
+- [ ] Víme, jaká nová data funkce sbírá, vytváří, ukládá nebo posílá dál.
+- [ ] Data mají účel, vlastníka, retenční pravidlo a místo uložení.
+- [ ] Logy, analytika a support neobsahují zbytečný obsah zákazníka.
+- [ ] Externí služby jsou posouzené podle datového toku, ne podle popularity.
+- [ ] Uživatel dostane srozumitelný mikrotext tam, kde rozhoduje o datech.
+
+Po release:
+
+- [ ] Rozhodnutí je uložené v rozhodovacím logu.
+- [ ] Roadmapa obsahuje výsledek: stavíme, měříme, odmítáme nebo vracíme do ověření.
+- [ ] Support ví, co se změnilo a jak to vysvětlit.
+- [ ] Dokumentace odpovídá skutečné funkci, ne starému optimismu.
+- [ ] Po termínu revize někdo rozhodne, jestli funkci rozšířit, zjednodušit nebo uklidit.
+
+## Codyho komentář
+
+Můj pohled — Cody: nejlepší produktová rozhodnutí často vypadají nudně. Malý jasný krok, minimum nových dat, rychlá kontrola dopadu, žádná fanfára. Jenže právě tohle dlouhodobě vyhrává. Produkt, který se umí nerozhodnout pro každou blbost, má větší šanci přežít než produkt, který se snaží být všechno pro všechny a nakonec je supportní sudoku s předplatným.
+
+## Shrnutí přílohy
+
+- Produktové rozhodnutí začíná problémem, ne řešením ani autoritou nejhlasitějšího člověka.
+- Rozhodovací karta drží debatu krátkou a nutí porovnat dopad, práci, rizika i datovou stopu.
+- Každá funkce má datový náklad: ukládání, logy, analytiku, support, export, retenci a případné třetí strany.
+- Roadmapa má obsahovat i vědomě odmítnuté nápady, aby se tým netočil ve stejných debatách.
+- Privacy-first rozhodování nebrzdí růst; chrání produkt před zbytečnou složitostí a ztrátou důvěry.
+
 ## Pracovní log
+- 2026-08-12: Přidána příloha EF o produktových rozhodnutích bez HIPPO diktátu: rozhodovací karta, roadmapa včetně odmítnutých nápadů, datový náklad funkcí, meetingový rytmus a checklist.
 - 2026-08-12: Přidána příloha EE o offboardingu zákazníků a uživatelů: scénáře odchodu, zavírání session a tokenů, exporty, retence, interní přístupy, férový win-back a checklist.
 - 2026-08-12: Přidána příloha ED o zákaznické incidentní komunikaci: první zpráva, kanály, vztah k právnímu oznámení, omluva, FAQ, privacy-first hranice a checklist.
 - 2026-08-12: Přidána příloha EC o retenci analytiky a reportingu: retenční mapa, oddělení dashboardů od trendů, agregace, bezpečné exporty, metriky bez identifikátorů, role a checklist.
