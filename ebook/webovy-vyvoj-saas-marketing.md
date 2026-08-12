@@ -19274,7 +19274,175 @@ Auditní log má mít vlastní retenci, omezený přístup a jasný účel. Poku
 Bezpečné přihlášení nekončí úspěšným loginem. Pokračuje náhodnou a bezvýznamovou session, rozumnými timeouty, přehledem aktivních zařízení, serverově vynucenými rolemi, potvrzením citlivých akcí a auditní stopou, která pomáhá při incidentu bez zbytečného sběru dat. Privacy-first přístup tu není brzda použitelnosti. Je to rozdíl mezi produktem, který umí držet důvěru, a produktem, který doufá, že se nikdo nepodívá pod koberec.
 
 
+
+# Příloha DY: Feature flagy a rollouty bez náhodného chaosu, zákaznických pokusů a telemetrické horečky
+
+Feature flag je malý přepínač s velkým egem. Umí zachránit release, omezit riziko, pustit funkci jen konkrétním zákazníkům a rychle vypnout problém bez nového deploye. Umí ale taky vytvořit druhý, horší konfigurační systém, ve kterém nikdo neví, proč je starý flag pořád zapnutý, kdo ho vlastní a jestli se přes něj náhodou nepouští citlivá data do cizí služby.
+
+OpenFeature popisuje feature flagging jako možnost měnit chování aplikace bez změny zdrojového kódu a standardizuje vendor-agnostic API, aby tým nebyl uvězněný v jednom nástroji: https://openfeature.dev/docs/reference/intro/. Pro privacy-first SaaS je to důležité ze dvou důvodů: rollout má být řízený a přenositelný, ale zároveň nesmí vyžadovat zbytečné profilování uživatelů.
+
+## DY.1 Flag není plán, je dočasná bezpečnostní brzda
+
+Feature flag má mít jasný účel. Pokud ho neumíš popsat jednou větou, pravděpodobně není připravený. Nejčastější typy:
+
+| Typ flagu | K čemu slouží | Kdy má zmizet |
+| --- | --- | --- |
+| Release flag | skrytí rozpracované funkce | po plném vydání a ověření |
+| Kill switch | rychlé vypnutí rizikové části | zůstává jen u kritických integrací |
+| Permission flag | zpřístupnění funkce zákazníkovi/tarifu | často se změní na běžné oprávnění |
+| Experiment flag | ověření hypotézy | po rozhodnutí o experimentu |
+| Ops flag | provozní omezení, degradace služby | po incidentu nebo stabilizaci |
+
+Každý flag potřebuje metadata:
+
+- vlastník,
+- důvod existence,
+- datum vytvoření,
+- očekávané datum odstranění,
+- výchozí hodnota při chybě,
+- dopad na data a zákazníka.
+
+Praktická věta do ticketu:
+
+> „Flag `invoice_pdf_v2` pouští nový generátor faktur jen interně a pro dva pilotní workspacy. Pokud export selže, systém použije starý generátor. Flag odstraníme po 14 dnech bez kritických chyb.“
+
+Tohle je plán. „Přidáme flag, kdyby něco“ je digitální lepicí páska.
+
+## DY.2 Rollout nedělej podle osobních dat, pokud stačí bezpečnější klíč
+
+Nejjednodušší rollout je „zapnuto pro všechny“. Druhý nejjednodušší je „zapnuto pro konkrétní workspace“. Teprve potom řeš segmenty podle vlastností uživatele. GDPR princip minimalizace dat říká, že organizace má zpracovávat jen osobní data nezbytná pro daný účel: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/overview-principles/what-data-can-we-process-and-under-which-conditions_en
+
+Privacy-first pořadí rollout kritérií:
+
+1. prostředí: `dev`, `staging`, `production`,
+2. interní pracovní prostor,
+3. konkrétní workspace nebo tenant,
+4. tarif nebo smluvní oprávnění,
+5. procento stabilního anonymního klíče,
+6. osobní atribut uživatele až tehdy, když bez něj účel nejde splnit.
+
+Příklad špatně:
+
+> „Zapneme funkci všem ženám 25–35 z Prahy, protože to umí nástroj.“
+
+Příklad lépe:
+
+> „Zapneme funkci 10 % workspace IDs v tarifu Pro. Do flag systému neposíláme jména, e-maily ani demografii.“
+
+Rollout nepotřebuje znát člověka. Potřebuje stabilně a férově rozhodnout, zda má konkrétní kontext dostat variantu.
+
+## DY.3 Výchozí hodnota při výpadku je produktové rozhodnutí
+
+Flag systém někdy spadne, zpomalí se, ztratí spojení nebo vrátí chybu. Otázka není jestli. Otázka je, co udělá aplikace. OpenFeature specifikace pracuje s poskytovateli, vyhodnocením flagů, evaluation contextem a detaily vyhodnocení jako s oddělenými částmi rozhraní: https://openfeature.dev/specification/. To pomáhá oddělit aplikaci od konkrétního vendoru, ale odpovědnost za bezpečnou výchozí hodnotu pořád zůstává na týmu.
+
+Rozhodovací pravidla:
+
+- Pokud flag řídí bezpečnostní omezení, výpadek má skončit bezpečněji, ne pohodlněji.
+- Pokud flag řídí novou UI funkci, výpadek může vrátit staré stabilní chování.
+- Pokud flag řídí placený tarif, neuděluj vyšší oprávnění jen proto, že konfigurace neodpověděla.
+- Pokud flag řídí integraci třetí strany, výpadek nesmí poslat data jinam „pro jistotu“.
+- Pokud flag řídí kritickou cestu, měj lokální cache s krátkou životností a jasnou invalidací.
+
+Mini tabulka:
+
+| Flag | Bezpečná výchozí hodnota | Proč |
+| --- | --- | --- |
+| `new_checkout` | vypnuto | starý checkout je ověřený |
+| `require_mfa_for_admin` | zapnuto | bezpečnost nesmí měknout při výpadku |
+| `send_to_new_crm` | vypnuto | nový předavatel dat nesmí být fallback |
+| `beta_export` | vypnuto | export může obsahovat citlivá data |
+
+Když je výchozí hodnota náhodná, incident už má předplacené parkování.
+
+## DY.4 Flagy musí mít úklid, jinak se z nich stane bahno
+
+Starý flag je dluh. Starý experiment flag je dluh s falešným vědeckým pláštěm. Po pár měsících už nikdo neví, jestli `use_new_flow_temp_final_2` drží kritickou obchodní logiku, nebo je to archeologický nález z pátečního deploye.
+
+Proces úklidu:
+
+- Každý release flag má datum odstranění.
+- Pull request s flagem obsahuje i ticket na jeho smazání.
+- Dashboard flagů řadí položky podle stáří a vlastníka.
+- Starší než 30–60 dní se reviewují při provozním review.
+- Před smazáním flagu se ověří metriky, support tickety a auditní dopady.
+- Po smazání se odstraní mrtvé větve kódu, testovací výjimky i dokumentace.
+
+Příklad úklidové definice hotovo:
+
+> „Flag je odstraněný z konfigurace, kódu, testů, dokumentace, provozního runbooku a případných zákaznických poznámek. Monitoring po odstranění neukazuje nárůst chyb.“
+
+Ano, je to nudné. Nudné je u provozu často synonymum pro „zákazníci dnes nebudou psát caps lockem“.
+
+## DY.5 Experimenty odděl od release managementu
+
+Experimentální flag a release flag nejsou totéž. Release flag odpovídá na otázku: „Je funkce bezpečně připravená pro širší skupinu?“ Experimentální flag odpovídá: „Která varianta lépe podporuje konkrétní hypotézu?“ Jakmile je mícháš dohromady, skončíš s produktem, kde nikdo neví, jestli je změna zapnutá kvůli bezpečnému rollout plánu, nebo kvůli marketingovému testu tlačítka.
+
+Privacy-first experiment:
+
+- má písemnou hypotézu,
+- má minimální sadu metrik,
+- nepoužívá osobní profilování, pokud není nezbytné,
+- má datum ukončení,
+- má pravidlo pro rozhodnutí,
+- má možnost rychle vrátit stabilní variantu.
+
+Příklad:
+
+> Hypotéza: „Když v onboarding checklistu ukážeme první doporučený krok podle typu firmy, více workspace dokončí nastavení projektu.“
+
+Minimální měření:
+
+- počet vytvořených workspace,
+- dokončení prvního nastavení,
+- počet support dotazů k onboardingu,
+- agregovaný rozdíl mezi variantami.
+
+Nepotřebuješ jméno zakladatele, detailní historii kliků ani cross-site identifikátor. Potřebuješ vědět, jestli změna pomohla dokončit práci.
+
+## DY.6 Feature flag systém vybírej podle kontroly, ne podle konfetek v UI
+
+Při výběru nástroje se neptej jen „umí procentuální rollout?“ Ptej se: kde běží vyhodnocení, jaká data odcházejí, kdo vidí kontext, co se loguje a jak snadno odejdeš pryč.
+
+Kontrolní otázky na dodavatele:
+
+- Umí server-side vyhodnocení bez posílání osobních atributů do cizího cloudu?
+- Lze používat anonymní nebo interní stabilní klíče místo e-mailů?
+- Kde jsou uložena pravidla, audit logy a evaluation eventy?
+- Jaká je retence dat a lze ji nastavit?
+- Umí export konfigurace flagů?
+- Existuje otevřený standard nebo SDK abstrakce, například OpenFeature?
+- Lze provozovat řešení v EU nebo self-hosted?
+- Dá se tracking úplně vypnout nebo omezit na agregované provozní signály?
+
+Codyho poznámka: u malého B2B SaaS často stačí jednodušší systém než velká feature management platforma. YAML/DB konfigurace, auditovaný admin panel a dobrý proces mohou být lepší než drahý nástroj, který do každého rozhodnutí tahá osobní kontext. Překvapivě často vyhrává obyčejnost. Produktový glamour pláče, provozní spánek tleská.
+
+## DY.7 Checklist feature flagů a rolloutů
+
+- Má každý flag vlastníka, účel a plán odstranění?
+- Je typ flagu jasný: release, kill switch, permission, experiment, nebo ops?
+- Je výchozí hodnota při výpadku bezpečná?
+- Neposílá evaluation context do nástroje e-mail, jméno, IP adresu nebo zbytečnou demografii?
+- Je rollout možný podle workspace/tenant ID místo osobních údajů?
+- Jsou bezpečnostní a billing flagy vynucené na serveru, ne jen v UI?
+- Má experiment hypotézu, metriky, datum ukončení a pravidlo rozhodnutí?
+- Existuje audit změn konfigurace flagů?
+- Vidí support, proč zákazník funkci má nebo nemá dostupnou?
+- Probíhá pravidelný úklid starých flagů?
+- Umí tým vypnout rizikovou funkci bez deploye a bez paniky?
+- Je vendor nebo interní systém nahraditelný bez přepisování půl aplikace?
+
+## Zdroje k příloze
+
+- OpenFeature: úvod do feature flagů a vendor-agnostic API: https://openfeature.dev/docs/reference/intro/
+- OpenFeature Specification: standardizované části pro vyhodnocení flagů, providery, evaluation context a tracking: https://openfeature.dev/specification/
+- European Commission: GDPR principy včetně účelového omezení a minimalizace dat: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/overview-principles/what-data-can-we-process-and-under-which-conditions_en
+
+## Shrnutí přílohy
+
+Feature flagy jsou skvělé, když jsou malé, dočasné a dobře popsané. Pomáhají bezpečně vydávat změny, řídit rollout, vypnout rozbitou funkci a ověřit hypotézu bez velkého deploy dramatu. Privacy-first přístup ale drží brzdu: rollout nemá být záminka ke sběru osobních profilů, experimenty mají měřit jen nezbytné signály a staré flagy musí pravidelně mizet. Dobrý flag systém není kasino. Je to provozní ovladač s auditní stopou, bezpečnou výchozí hodnotou a plánem úklidu.
+
 ## Pracovní log
+- 2026-08-12: Přidána příloha DY o feature flagech a rolloutech: typy flagů, privacy-first rollout kritéria, bezpečné fallbacky, úklid starých flagů, oddělení experimentů, výběr nástroje a checklist.
 - 2026-08-12: Přidána příloha DX o přihlášení, session a rolích: bezpečné tokeny, timeouty, aktivní session, autorizační matice, citlivé akce, auditní log a checklist.
 - 2026-08-12: Přidána příloha DW o produktové dokumentaci a help centru: vlastník článků, revize, bezpečné screenshoty, privacy-first vyhledávání, support loop a checklist.
 - 2026-08-12: Přidána příloha DV o background jobech a frontách: typy úloh, idempotence, retry strategie, bezpečné logování, UX asynchronních akcí, priority a checklist.
