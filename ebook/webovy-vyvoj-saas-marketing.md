@@ -19763,7 +19763,202 @@ Tajné klíče jsou zvláštní druh nepořádku: dokud fungují, nikdo se jich 
 Secrets management není luxus pro korporát. Je to základní provozní hygiena každého SaaS, který nechce svá data, zákazníky a reputaci svěřit náhodě. Praktický základ tvoří jasné rozlišení konfigurace a tajemství, oddělené hodnoty pro každé prostředí, vlastníci secrets, omezený scope, bezpečné CI/CD, maskování logů a nacvičená rotace. Privacy-first tým se neptá jen „kam klíč uložíme“, ale hlavně „proč vůbec existuje, kdo ho může použít a co se stane, když unikne“.
 
 
+
+
+---
+
+# Příloha EB: Webináře, workshopy a eventy bez registračního vysavače, nahrávkového chaosu a follow-up spamu
+
+Webinář nebo malý workshop je pro SaaS a B2B marketing často lepší než další reklamní kampaň. Ukáže odbornost, přivede relevantní lidi a vytvoří důvod k rozhovoru. Jenže eventy mají jednu záludnost: registrační formuláře rychle bobtnají, záznamy se ukládají navždy, chat obsahuje osobní dotazy, účastníci končí v nekonečné follow-up sekvenci a nikdo si nepamatuje, co přesně bylo slíbeno při registraci. Gratuluji, z edukace je datová sběrna s mikrofonem.
+
+Privacy-first event má jasný účel, minimum registračních dat, srozumitelnou komunikaci, bezpečné zacházení se záznamem a střídmý follow-up. GDPR stojí mimo jiné na principech účelového omezení, minimalizace dat a omezení uložení; Evropská komise je shrnuje v přehledu GDPR principů pro firmy a organizace: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en
+
+## EB.1 Formát zvol podle důvěry, ne podle marketingového hluku
+
+Ne každý obsah musí být živý webinář s registrací. Někdy je lepší článek, video bez registrace, checklist, otevřený livestream, krátká konzultace nebo interní workshop pro jednoho zákazníka. Registrační brána dává smysl, když potřebuješ kapacitu, komunikaci před akcí, interakci během akce nebo obchodní návaznost. Nedává smysl jako automatická překážka před každým PDF.
+
+Rozhodovací tabulka:
+
+| Cíl | Lepší formát | Proč |
+| --- | --- | --- |
+| Široká edukace trhu | otevřený článek + RSS | bez bariéry, dlouhá životnost |
+| Praktický návod | video / checklist bez registrace | rychlá spotřeba, snadné sdílení |
+| Kvalifikace B2B zájmu | webinář s jednoduchou registrací | možnost dotazů a follow-upu |
+| Citlivé téma zákazníka | uzavřený workshop | kontrola účastníků a kontextu |
+| Produktové oznámení | veřejný changelog + krátké demo | méně dat, lepší dohledatelnost |
+
+Codyho komentář: gated content je jako dveře v obchodě. Někdy chrání kapacitu. Často jen brání lidem vejít. Pokud je obsah užitečný i bez obchodního rozhovoru, nech ho dýchat na webu.
+
+## EB.2 Registrace má sbírat jen to, co opravdu použiješ
+
+Typický registrační formulář chce jméno, e-mail, firmu, pozici, telefon, velikost firmy, rozpočet, obor, souhlas s newsletterem, souhlas s obchodním kontaktováním, souhlas s nahrávkou, souhlas s tím, že člověk ještě vůbec existuje. Výsledek: méně registrací, víc právních textů a data, která nikdo po akci nepoužije.
+
+Minimum pro běžný B2B webinář:
+
+- e-mail pro potvrzení a odkaz na akci,
+- jméno nebo přezdívka jen pokud se bude používat při interakci,
+- volitelná firma pro lepší kontext dotazů,
+- volitelné předběžné otázky k tématu,
+- samostatná volba pro další obchodní nebo newsletter komunikaci.
+
+Co často škrtám:
+
+- povinný telefon,
+- povinný rozpočet,
+- přesná pozice, pokud podle ní nic nepersonalizuješ,
+- povinný souhlas s marketingem jako podmínku účasti,
+- skrytý zápis do všech budoucích kampaní,
+- předávání dat partnerům bez jasného vysvětlení.
+
+Dobrá registrační věta:
+
+> „E-mail použijeme k poslání odkazu na webinář a jedné zprávy se záznamem a materiály. Pokud chcete dostávat další praktické tipy od Codyho, zaškrtněte samostatný odběr.“
+
+Špatná věta:
+
+> „Registrací souhlasíte se zpracováním údajů pro marketingové účely našimi partnery a dalšími subjekty.“
+
+Ta druhá věta je právní mlha s gumáky. Možná projde kolem očí. Důvěru ale nepostaví.
+
+## EB.3 Nahrávka není vedlejší produkt, ale samostatné datové rozhodnutí
+
+Záznam webináře může obsahovat jména účastníků, hlas, chat, otázky, obrazovku lektora, interní data v notifikacích nebo zákaznické příklady. Nahrávat automaticky všechno a řešit to později je skvělý plán, pokud chceš později řešit všechno.
+
+Před akcí rozhodni:
+
+- Bude se nahrávat celé setkání, nebo jen prezentace bez účastnické části?
+- Uvidí se na záznamu jména, chat nebo účastníci?
+- Kdo dostane záznam: jen registrovaní, zákazníci, nebo veřejnost?
+- Jak dlouho bude záznam dostupný?
+- Kde bude uložený a kdo k němu má přístup?
+- Jak odstraníš část záznamu, pokud někdo řekne citlivou informaci?
+
+Praktické nastavení:
+
+- Na začátku jasně řekni, zda se nahrává a co bude v záznamu.
+- Q&A s citlivými dotazy dělej po vypnutí nahrávání nebo anonymizovaně.
+- Sdílej jen okno prezentace, ne celou plochu s notifikacemi.
+- Chat exportuj jen tehdy, pokud máš jasný důvod; jinak z něj vytvoř anonymizované FAQ.
+- Záznam po skončení projdi a teprve potom publikuj.
+- Nastav datum smazání nebo revize záznamu.
+
+U nahrávek je dobré myslet i na informační povinnost. Evropská komise v přehledu informací při sběru dat připomíná, že lidé mají vědět mimo jiné účel, právní základ, příjemce a dobu uložení osobních údajů: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/what-information-must-be-given-individuals-whose-data-collected_en
+
+## EB.4 Nástroj pro event vybírej podle datového toku
+
+Event platforma není jen video okno. Často zpracovává registrační údaje, chat, otázky, nahrávky, metriky účasti, IP adresy, zařízení, e-mailové notifikace a integrace do CRM. Privacy-first výběr proto nezačíná šablonou pozvánky, ale datovým tokem.
+
+Vendor checklist:
+
+- Umí EU region nebo evropského poskytovatele provozu?
+- Má DPA a jasný seznam subdodavatelů?
+- Lze vypnout zbytečné tracking funkce, reklamní integrace a pixelové měření?
+- Lze nastavit retenci registrací, chatu a nahrávek?
+- Umí export a smazání dat účastníka?
+- Umí role pro organizátory, hosty a externí lektory?
+- Lze posílat pozvánky přes vlastní e-mailový systém?
+- Má bezpečné nastavení čekárny, hesla, odkazu a sdílení obrazovky?
+- Co se stane, když od nástroje odejdeme?
+
+Evropský provoz neznamená automaticky dokonalé soukromí, ale je to dobrý start. Pořád se ptej: jaká data, kdo je vidí, jak dlouho, proč a jak ven.
+
+## EB.5 Chat, otázky a ankety navrhni jako citlivý prostor
+
+Účastníci se v chatu často ptají konkrétněji než ve formuláři. Mohou zmínit zákazníka, interní problém, rozpočet, bezpečnostní incident, zdravotní informaci nebo jméno kolegy. Proto chat není bezcenný marketingový materiál. Je to obsah od lidí v kontextu důvěry.
+
+Bezpečnější pravidla:
+
+- Předem řekni, jestli chat bude uložený a kdo ho uvidí.
+- Veřejné otázky moderuj a citlivé dotazy přesuň do soukromé odpovědi.
+- Do záznamu nedávej celý chat, pokud to není nutné.
+- Při tvorbě následného FAQ parafrázuj a anonymizuj dotazy.
+- Anketní otázky formuluj tak, aby nesbíraly zbytečně citlivé odpovědi.
+- Externím partnerům neposílej celý export účastníků ani chat bez jasného souhlasu a účelu.
+
+Příklad bezpečné moderátorské věty:
+
+> „Pokud dotaz obsahuje citlivé údaje o vaší firmě nebo zákaznících, napište ho obecně nebo nám ho pošlete po akci individuálně.“
+
+Tohle není strašení. Je to služba účastníkům. Lidé často chtějí být konkrétní, ale nemusí přemýšlet o tom, že webinář se nahrává a chat čte víc lidí.
+
+## EB.6 Follow-up má být krátký, relevantní a slíbený
+
+Po eventu přichází největší pokušení: všem poslat pět e-mailů, přidat je do newsletteru, založit lead v CRM, synchronizovat do reklamy a pak se divit, že se odhlašují. Privacy-first follow-up drží slib z registrace.
+
+Dobrý follow-up balíček:
+
+1. Poděkování a odkaz na slíbené materiály.
+2. Krátké shrnutí hlavních bodů.
+3. Jedna relevantní další akce: článek, checklist, konzultace nebo odpověď na dotaz.
+4. Jasná informace, jestli člověk dostane ještě další zprávy.
+5. Snadné odhlášení nebo odpověď.
+
+Co neposílat automaticky:
+
+- dlouhou sekvenci bez samostatného souhlasu,
+- nabídku nesouvisející s tématem eventu,
+- „viděli jsme, že jste se nezúčastnil“ v divném tónu,
+- partnerům kompletní seznam lidí,
+- e-mail s tracking pixelem jako hlavní metrikou úspěchu.
+
+Měř raději odpovědi, poptávky, návštěvu materiálů a kvalitu navazujících rozhovorů. Open rate je u eventů šum s make-upem.
+
+## EB.7 Event uzavři interním review, ne jen složkou se záznamem
+
+Dobrý event končí rozhodnutím: opakovat, změnit téma, napsat článek, vytvořit produktovou funkci, poslat konkrétní odpovědi, upravit dokumentaci. Bez review je webinář jen drahý meeting s veřejným pozadím.
+
+Šablona review:
+
+```text
+Event: Privacy-first SaaS checklist
+Datum: 2026-08-12
+Cíl: získat kvalitní B2B poptávky a ověřit zájem o konzultaci
+Registrace: 84
+Účast: 41
+Kvalifikované dotazy: 9
+Poptávky do 7 dnů: 4
+Nejčastější problém: zákazníci nevědí, jak popsat datovou rezidenci
+Materiál k dopracování: šablona vendor dotazníku
+Privacy poznámka: příště neukazovat jména účastníků ve sdíleném seznamu
+Rozhodnutí: za měsíc navázat workshopem o subdodavatelích
+```
+
+Review ukládej do znalostní báze, ne do osobního chatu organizátora. A odděl obsahové poznatky od osobních dat účastníků. Věta „lidé se často ptali na DPA“ je užitečná. Export všech dotazů s e-maily je datová krabice, která bude jednou překážet.
+
+## EB.8 Checklist privacy-first webináře nebo workshopu
+
+- [ ] Víme, proč event děláme a jaké rozhodnutí má po akci vzniknout.
+- [ ] Zvolili jsme formát podle účelu; ne všechno je gated webinář.
+- [ ] Registrační formulář sbírá jen e-mail a opravdu potřebná volitelná pole.
+- [ ] Marketingový odběr není podmínkou účasti a má samostatnou volbu.
+- [ ] Pozvánka říká, jak použijeme registrační data, zda bude záznam a jak dlouho bude dostupný.
+- [ ] Event nástroj má prověřený datový tok, DPA, subdodavatele, retenci a nastavení přístupů.
+- [ ] Sdílení obrazovky je připravené bez notifikací, zákaznických dat a interních panelů.
+- [ ] Chat, otázky a ankety mají moderátorská pravidla pro citlivý obsah.
+- [ ] Záznam před publikací kontrolujeme a neukazujeme zbytečně jména, chat nebo účastníky.
+- [ ] Follow-up odpovídá tomu, co bylo slíbeno při registraci.
+- [ ] Účastníky nepředáváme partnerům bez jasného účelu a samostatného vysvětlení.
+- [ ] Měříme agregované signály, odpovědi a kvalitu poptávek, ne skryté sledování lidí.
+- [ ] Po akci uklidíme exporty, chaty, nahrávky a dočasné seznamy podle retenčního plánu.
+- [ ] Interní review obsahuje poznatky a rozhodnutí, ne zbytečný osobní dump účastníků.
+
+## Codyho komentář
+
+Event marketing je silný, protože je lidský. Právě proto se nehodí chovat se k účastníkům jako k řádkům v reklamním exportu. Můj pohled — Cody: dobrý privacy-first webinář má být jako dobře vedená konzultace ve větším měřítku. Jasný slib, málo formulářových překážek, respekt k otázkám, rozumný follow-up a materiály, které žijí dál na vlastním webu nebo v RSS. Žádné registrační labyrinty. Žádné „omylem jste teď v sedmi kampaních“. Takový ten drobný luxus slušnosti.
+
+## Zdroje k příloze
+
+- European Commission: GDPR principles — principy účelového omezení, minimalizace dat, transparentnosti a omezení uložení jako základ pro registrační formuláře, event data a retenci: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en
+- European Commission: Information to individuals when collecting data — přehled informací, které mají lidé dostat při sběru osobních údajů včetně účelu, právního základu, příjemců a doby uložení: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/what-information-must-be-given-individuals-whose-data-collected_en
+- CNIL: Recommendation on tracking pixels in emails — doporučení k e-mailovým tracking pixelům a souhlasu, užitečné pro eventový follow-up a newsletterové měření: https://www.cnil.fr/sites/default/files/2026-05/recommandation_tracking_pixels_emails.pdf
+- European Data Protection Board: Guidelines, recommendations and best practices — rozcestník k metodikám EDPB pro ochranu osobních údajů a související výkladové dokumenty: https://www.edpb.europa.eu/our-work-tools/general-guidance/guidelines-recommendations-best-practices_en
+
+## Shrnutí přílohy
+
+Webináře a workshopy jsou výborný B2B kanál, pokud z nich neuděláš registrační vysavač. Privacy-first event začíná správným formátem, jednoduchým formulářem, jasným vysvětlením nahrávání, prověřeným event nástrojem, opatrnou prací s chatem a slíbeným follow-upem. Po akci má zůstat užitečný obsah, kvalifikované poznatky a několik dobrých rozhodnutí — ne věčný export účastníků, nahrávka s citlivými dotazy a spamová sekvence na autopilota.
+
 ## Pracovní log
+- 2026-08-12: Přidána příloha EB o privacy-first webinářích a workshopech: formát podle účelu, minimální registrace, nahrávky, event nástroje, chat, follow-up, review a checklist.
 - 2026-08-12: Přidána příloha EA o secrets a konfiguraci: rozdělení konfigurace a tajemství, karty vlastníků, oddělená prostředí, rotace, ochrana logů, CI/CD tokeny, privacy-first minimalizace secrets a checklist.
 - 2026-08-12: Přidána příloha DZ o forenzní stopě při incidentech: incidentní časová osa, propojení auditních a provozních logů, minimalizace metadat, čitelný pohled pro support, retence, přístupy a checklist.
 - 2026-08-12: Přidána příloha DY o feature flagech a rolloutech: typy flagů, privacy-first rollout kritéria, bezpečné fallbacky, úklid starých flagů, oddělení experimentů, výběr nástroje a checklist.
