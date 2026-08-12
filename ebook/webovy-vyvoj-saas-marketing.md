@@ -18336,7 +18336,136 @@ API dokumentace je skvělé místo, kde se pozná dospělost produktu. Ne podle 
 Dobrá API dokumentace není jen seznam endpointů. Je to kontrakt, bezpečnostní průvodce, migrační mapa a support prevence v jednom. Privacy-first přístup znamená bezpečné příklady, minimální analytiku, jasné chyby, promyšlené verzování a SDK, které nešíří špatné návyky rychlostí package manageru.
 
 
+---
+
+# Příloha DR: SLA, SLO a dostupnost bez falešných slibů, právní pasti a pagerového divadla
+
+Dostupnost produktu není číslo, které se napíše do obchodní prezentace, aby vypadala dražší. Je to dohoda mezi produktem, provozem, podporou a zákazníkem: co má fungovat, jak dobře, jak to měříme, co se stane při výpadku a jak rychle o tom umíme mluvit lidsky.
+
+Pro malý SaaS tým je největší past slibovat enterprise dostupnost dřív, než existuje enterprise provozní disciplína. „99,99 % uptime“ zní hezky, ale bez měření, incidentního procesu, záloh, testů obnovy a jasné komunikace je to jen čtyři devítky nalepené na lednici. Google SRE kniha popisuje SLO jako cílovou hodnotu nebo rozsah služby měřený pomocí SLI a error budget jako praktický nástroj pro vyvažování spolehlivosti a rychlosti změn: https://sre.google/sre-book/service-level-objectives/
+
+## DR.1 Nepleť si SLA, SLO a SLI
+
+Tyhle tři zkratky vypadají jako tajný jazyk lidí, kteří si rádi komplikují kalendář. Ve skutečnosti pomáhají oddělit právní slib, interní cíl a konkrétní měření.
+
+- **SLI** je měřený indikátor: procento úspěšných requestů, latence checkoutu, dostupnost přihlášení, doručení webhooku.
+- **SLO** je interní nebo zákaznický cíl: například „99,5 % úspěšných přihlášení za 30 dní“.
+- **SLA** je smluvní závazek s důsledkem: kredit, kompenzace, možnost ukončení smlouvy nebo eskalace.
+
+Začni SLI a SLO. SLA přidávej až ve chvíli, kdy víš, co opravdu umíš měřit a držet. Pro raný SaaS je lepší poctivé „cílová dostupnost služby je 99,5 %, incidenty komunikujeme na status stránce“ než přestřelené SLA, které právně slíbí víc, než technicky existuje.
+
+Příklad pro B2B SaaS:
+
+| Oblast | SLI | SLO | Poznámka |
+| --- | --- | --- | --- |
+| Přihlášení | úspěšná přihlášení bez serverové chyby | 99,5 % za 30 dní | měřeno serverově, bez osobních payloadů |
+| API | odpovědi `2xx/3xx/4xx` mimo chyby serveru | 99,7 % za 30 dní | `4xx` od klienta není výpadek služby |
+| Webhooky | doručení nebo bezpečné zařazení do retry fronty | 99,9 % za 30 dní | důležité je neztratit událost |
+| Export dat | dokončený export do 24 hodin | 99 % za měsíc | vhodnější než měřit jen HTTP endpoint |
+
+## DR.2 Měř uživatelské cesty, ne jen zelenou kontrolku serveru
+
+„Server běží“ je slabý signál. Uživatel neplatí za to, že proces existuje v paměti. Platí za to, že se přihlásí, vytvoří fakturu, odešle formulář, zobrazí dashboard nebo dostane export.
+
+Praktický postup:
+
+1. Vyber tři až pět kritických cest produktu.
+2. U každé napiš, co znamená úspěch z pohledu zákazníka.
+3. Rozhodni, kde se úspěch měří: backend, databáze, fronta, syntetický test, monitoring transakce.
+4. Odděl chyby systému od chyb uživatele: špatné heslo není výpadek, `500` při správném hesle ano.
+5. Nastav měsíční review: jestli metrika nevede k rozhodnutí, je to dekorace.
+
+Privacy-first detail: dostupnost měř agregovaně. Není potřeba ukládat kompletní URL s osobními parametry, request body, e-mail zákazníka ani obsah formuláře. Pro provoz obvykle stačí endpoint, typ akce, status, délka trvání, tenant ID v bezpečně pseudonymizované nebo interně kontrolované podobě a request ID pro dohledání incidentu.
+
+## DR.3 Error budget není účetní trik, ale brzda chaosu
+
+Error budget říká, kolik nespolehlivosti si služba může v daném období dovolit, aniž poruší svůj cíl. Když je rozpočet vyčerpaný, tým nemá pokračovat v riskantních změnách jako by nic. Má zpomalit, opravit příčiny a obnovit důvěru. Google SRE workbook uvádí error budget policy jako způsob, jak při překročení rozpočtu zastavit běžné změny a povolit jen kritické opravy nebo bezpečnostní fixy: https://sre.google/workbook/error-budget-policy/
+
+Malý tým nepotřebuje dokonalý SRE aparát. Stačí jednoduché pravidlo:
+
+- Pokud jsme v zelené zóně, pokračujeme v plánovaných releasích.
+- Pokud jsme ve žluté zóně, nové rizikové změny jdou přes opatrnější review.
+- Pokud jsme v červené zóně, prioritou jsou stabilita, rollbacky, testy a odstranění příčin.
+
+Codyho komentář: error budget je společenská smlouva mezi „rychle přidávejme funkce“ a „prosím, ať to v pondělí ráno nespadne“. Bez ní vyhrává ten, kdo hlasitěji bouchne do stolu. Což je sice tradiční metoda řízení, ale také tradiční metoda výroby incidentů.
+
+## DR.4 SLA piš jako produktový závazek, ne jako právnický kouř
+
+SLA má být konkrétní. Ne proto, že zákazník miluje tabulky, ale protože neurčité sliby dělají při incidentu peklo oběma stranám.
+
+Dobré SLA nebo provozní podmínky mají říct:
+
+- které části služby jsou zahrnuté a které ne,
+- jak se dostupnost měří,
+- jaké období se vyhodnocuje,
+- co se nepočítá jako výpadek,
+- jak se hlásí incident a žádá kompenzace,
+- jaké jsou limity odpovědnosti,
+- kde běží status komunikace,
+- jak se plánuje údržba.
+
+Dávej pozor na závislosti. Pokud produkt stojí na platební bráně, e-mailové službě, mapách nebo externím AI API, neslibuj absolutní dostupnost cesty, kterou nekontroluješ. Můžeš slíbit vlastní reakci, fallback, opakování požadavku nebo jasnou komunikaci. Neměl bys slibovat magii nad cizím systémem. Magie je skvělá v pohádkách, horší v obchodních podmínkách.
+
+## DR.5 Údržba má být plán, ne překvapení ve 14:03
+
+Plánovaná údržba je normální. Podezřelé je, když zákazník zjistí údržbu až podle toho, že mu nejde uložit práce. U malého SaaS stačí jednoduchá politika:
+
+- údržbu oznamuj dopředu podle dopadu,
+- vybírej časy podle hlavních zákaznických regionů,
+- uveď očekávané trvání a dotčené funkce,
+- po dokončení potvrď výsledek,
+- pokud se údržba protáhne, komunikuj dřív, než zákazník začne hádat.
+
+Privacy-first provozní poznámka: status stránka nemá být další tracker. Nepotřebuje marketingové pixely, fingerprinting ani sdílení dat do reklamních sítí. Má rychle říct, co funguje, co ne, koho se to týká a kdy přijde další update. Atlassian ve svých doporučeních k incident komunikaci zdůrazňuje konzistentní a relevantní aktualizace napříč používanými kanály: https://support.atlassian.com/statuspage/docs/incident-communication-tips/
+
+## DR.6 Komunikace dostupnosti musí být použitelná i při stresu
+
+Při incidentu není čas vymýšlet literaturu. Připrav si šablony dopředu:
+
+**První zpráva:**
+
+> Evidujeme problém s přihlášením části uživatelů. Dopad ověřujeme. Další update pošleme do 30 minut nebo dříve, pokud budeme mít potvrzenou příčinu.
+
+**Průběžný update:**
+
+> Příčina je v databázové vrstvě po dnešním nasazení. Nové přihlášení může selhávat, existující session zůstávají funkční. Připravujeme rollback. Další update do 20 minut.
+
+**Vyřešení:**
+
+> Problém s přihlášením byl vyřešen rollbackem v 10:42. Sledujeme stabilitu a připravíme krátké shrnutí příčiny a prevence.
+
+Neuváděj víc, než víš. Nepiš „vše je v pořádku“, když jen přestaly padat alerty. Neposílej zákazníkům interní stack trace. A hlavně: nezamlčuj dopad jen proto, že se špatně čte. Důvěra se často neztratí výpadkem. Ztratí se mlžením.
+
+## DR.7 Checklist SLA, SLO a dostupnosti
+
+Před zveřejněním SLA nebo provozní stránky si projdi:
+
+- Máme vybrané kritické uživatelské cesty, ne jen server uptime?
+- Má každá cesta jasný SLI a realistický SLO?
+- Víme, co se počítá jako chyba systému a co jako chyba vstupu uživatele?
+- Nezahrnuje měření osobní data, payloady nebo citlivé parametry z URL?
+- Máme jednoduché pravidlo, co dělat při spalování error budgetu?
+- Slibuje SLA jen to, co umíme ovlivnit a doložit?
+- Jsou plánované údržby popsané předem a komunikačně jasné?
+- Existuje status stránka nebo veřejný kanál bez marketingových trackerů?
+- Má support připravené šablony pro první zprávu, průběžný update a vyřešení?
+- Umíme po incidentu říct příčinu, dopad, časovou osu a preventivní kroky?
+- Jsou závislosti na třetích stranách vysvětlené bez schovávání odpovědnosti?
+- Probíhá měsíční review dostupnosti a incidentů?
+
+## Zdroje k příloze
+
+- Google SRE Book — Service Level Objectives: https://sre.google/sre-book/service-level-objectives/
+- Google SRE Workbook — Error Budget Policy: https://sre.google/workbook/error-budget-policy/
+- Atlassian Statuspage — Incident communication tips: https://support.atlassian.com/statuspage/docs/incident-communication-tips/
+
+## Shrnutí přílohy
+
+Dostupnost není marketingová fráze, ale provozní disciplína. Nejdřív měř kritické uživatelské cesty, potom nastav realistická SLO a až nakonec slibuj SLA. Privacy-first přístup znamená měřit dostupnost bez zbytečných osobních dat, komunikovat incidenty bez mlžení a neslibovat zákazníkům kouzla, která drží pohromadě jen do prvního pondělního deploye.
+
+
 ## Pracovní log
+- 2026-08-12: Přidána příloha DR o SLA, SLO a dostupnosti: rozdíl mezi SLI/SLO/SLA, měření kritických cest, error budget, údržba, incident komunikace a privacy-first checklist.
 - 2026-08-12: Přidána příloha DQ o API dokumentaci a developer experience: OpenAPI kontrakt, bezpečné příklady, RFC 9457 chyby, autentizace, verzování, střídmá analytika dokumentace, SDK a checklist.
 
 - 2026-08-12: Přidána příloha DP o zpracovatelských smlouvách a subdodavatelích: role správce/zpracovatele, DPA, registr dodavatelů, vendor onboarding, komunikace změn, exit plán a checklist.
