@@ -17648,8 +17648,171 @@ Platby a fakturace nejsou nudný backendový přívěsek. Jsou součást důvěr
 
 ---
 
+# Příloha DN: Vyhledávání a filtrování bez SQL ohňostroje, datového slídění a pomalé frustrace
+
+Vyhledávání v SaaS často vypadá jako malá funkce: políčko, tlačítko, seznam výsledků. Ve skutečnosti je to průsečík bezpečnosti, výkonu, UX, podpory a privacy. Uživatelé do vyhledávání píšou jména klientů, čísla smluv, interní poznámky, e-maily, chyby z výroby a občas i věci, které by radši neměly opustit jejich hlavu. Gratuluju, právě jsi postavil mini zpovědnici s databázovým backendem.
+
+Privacy-first vyhledávání neznamená „nemáme search, použijte Ctrl+F a modlitbu“. Znamená to, že vyhledávání pomáhá najít práci rychleji, ale neschraňuje zbytečné dotazy, neprozrazuje cizí data, neobchází oprávnění a nerozbije databázi pokaždé, když někdo hledá `%%`.
+
+## DN.1 Nejdřív určuj rozsah, až potom technologii
+
+Než začneš vybírat fulltext engine, napiš si, co se má vlastně hledat. V malém SaaS často stačí kombinace přesných filtrů, prefixového hledání a dobře navržených detailů. Velký vyhledávací cluster je fajn, ale pokud tým neumí vysvětlit, kdo vidí jaký výsledek, je to jen rychlejší cesta k průšvihu.
+
+Rozděl hledání na typy:
+
+| Typ hledání | Příklad | Doporučený přístup | Privacy poznámka |
+| --- | --- | --- | --- |
+| Přesný identifikátor | číslo faktury, ID ticketu | exact match, normalizace vstupu | neukazuj existenci cizího záznamu |
+| Zákaznický seznam | firma, kontakt, projekt | prefix/contains podle oprávnění | výsledky filtruj serverem |
+| Obsah dokumentu | poznámky, popisy, znalostní báze | index jen pro povolené tenanty | neindexuj citlivé přílohy automaticky |
+| Admin audit | uživatel, akce, datum | strukturované filtry | audit není globální vyhledávač drbů |
+| Support hledání | účet zákazníka, incident | dočasný přístup, audit | support nesmí mít božské oko bez stopy |
+
+Praktické pravidlo: jestli neumíš říct „tento uživatel smí vidět tento výsledek, protože…“, search ještě není hotový.
+
+## DN.2 Oprávnění aplikuj před výsledkem, ne až v detailu
+
+Častý anti-pattern: seznam výsledků ukáže název záznamu, počet komentářů nebo snippet textu, ale detail pak řekne „nemáte oprávnění“. To není bezpečnost. To je únik dat s omluvným dialogem.
+
+Bezpečný tok:
+
+1. Uživatel pošle dotaz a filtry.
+2. Server určí tenant, roli, scoped oprávnění a případný support režim.
+3. Dotaz do databáze nebo indexu obsahuje oprávnění jako podmínku.
+4. Snippety, počty a facet hodnoty vznikají jen z povolených výsledků.
+5. Detail záznamu znovu ověří oprávnění, protože UI není bezpečnostní hranice.
+
+Příklad problému:
+
+```text
+Uživatel hledá „Novák“.
+Výsledek ukáže: „Jan Novák — právní spor — 3 neveřejné přílohy“.
+Po kliknutí: „Nemáte oprávnění.“
+```
+
+Špatně. Už samotný název a kontext jsou data. Správně je, že záznam ve výsledcích vůbec není, případně se ukáže jen agregovaná informace, která neprozrazuje identitu ani obsah.
+
+## DN.3 Dotaz je vstup, ne kus SQL poezie
+
+Vyhledávací pole je vstup od uživatele. Tedy nepřítel v hezkém kabátě. Pro SQL dotazy používej parametrizované dotazy, query builder nebo ORM tak, aby uživatelský vstup nikdy neskládal SQL řetězec. OWASP v materiálech k prevenci SQL injection doporučuje mimo jiné připravené a parametrizované dotazy: https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html
+
+Bezpečnější vzor:
+
+```text
+search = normalize(input)
+query = "where tenant_id = ? and name ilike ?"
+params = [tenantId, search + "%"]
+```
+
+Nebezpečný vzor:
+
+```text
+query = "where tenant_id = " + tenantId + " and name like '%" + input + "%'"
+```
+
+U fulltextu platí podobný princip: uživatelský vstup parsuj do povolené malé syntaxe, escapuj operátory, limituj délku a měj fallback pro divné znaky. Uživatel nemá dostat možnost napsat mini program pro tvůj index.
+
+Minimum pro vstup:
+
+- Ořízni extrémní délku dotazu, třeba na rozumný produktový limit.
+- Normalizuj mezery, diakritiku a velikost písmen podle jazyka produktu.
+- Nepouštěj raw operátory vyhledávače, pokud je vědomě nenavrhuješ jako pokročilou funkci.
+- Vždy používej parametrizaci nebo bezpečné API vyhledávací knihovny.
+- Testuj speciální znaky: `%`, `_`, `*`, `"`, `'`, `\`, emoji, více mezer, prázdný dotaz.
+
+## DN.4 Loguj signály, ne deník lidských dotazů
+
+Search logy jsou lákavé: „Zjistíme, co lidé chtějí!“ Ano. A taky zjistíš jména jejich klientů, čísla smluv a interní názvy problémů. OWASP u logování zdůrazňuje, že rozsah bezpečnostních logů má vycházet z rizik a jasného účelu, ne z náhodného „loguj všechno“ reflexu: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+
+Privacy-first varianta měření hledání:
+
+- Počítej agregace: počet hledání za den, podíl hledání bez výsledků, medián času odpovědi.
+- Ukládej kategorii dotazu, ne celý dotaz: „faktura“, „kontakt“, „projekt“, „neznámé“.
+- Pokud potřebuješ ukázky pro zlepšení produktu, vzorkuj ručně a anonymizuj před sdílením.
+- Krátce drž technické logy pro debug, dlouhodobě drž jen agregace.
+- Odděl bezpečnostní logy od produktové analytiky.
+
+Příklad metrik bez šmírování:
+
+| Metrika | K čemu je | Co neukládat |
+| --- | --- | --- |
+| `search_count_daily` | zatížení a adopce funkce | konkrétní dotazy |
+| `zero_result_rate` | chybějící obsah nebo špatná synonymizace | osobní údaje z dotazu |
+| `p95_search_latency` | výkon backendu | identitu hledaného člověka |
+| `filter_usage_by_type` | prioritizace filtrů | hodnoty citlivých filtrů |
+
+## DN.5 Prázdné výsledky jsou produktový moment
+
+„Nic nenalezeno“ je technicky pravda, ale produktově je to pokrčení ramen. Dobrá prázdná stránka pomůže uživateli upravit dotaz, zkontrolovat filtry a pochopit rozsah hledání.
+
+Mikrotexty:
+
+- „Nenašli jsme žádný projekt s tímto názvem ve vašem pracovním prostoru.“
+- „Zkuste zkrátit dotaz nebo vypnout filtr Stav: Archivováno.“
+- „Hledáme jen v projektech, ke kterým máte přístup.“
+- „Potřebujete vidět archiv? Požádejte administrátora o oprávnění.“
+
+Pozor na bezpečnostní formulace. U citlivých identifikátorů nepíš: „Faktura F-2026-001 existuje, ale nemáte přístup.“ Piš radši: „Pro tento dotaz nemáme výsledek, který můžete zobrazit.“ Ano, je to méně dramatické. Přesně o to jde.
+
+## DN.6 Filtry navrhuj jako rozhodnutí, ne jako muzeum polí
+
+Každý filtr má stát za konkrétní otázkou. Pokud uživatelé pravidelně kombinují deset filtrů, možná nevyhledávají — možná se snaží přežít špatný informační model.
+
+Dobré filtry:
+
+- odpovídají běžným pracovním otázkám: „co hoří“, „co čeká na mě“, „co končí tento měsíc“;
+- mají srozumitelné názvy a výchozí hodnoty;
+- nezobrazují hodnoty, které uživatel nemá právo vidět;
+- dají se uložit jako pohled bez ukládání citlivého dotazu;
+- fungují stejně v UI, exportu i API.
+
+Špatný filtr je ten, který se jmenuje podle databázového sloupce a tváří se, že uživatel má rád interní enumy. Nemá. Nikdo nemá rád interní enumy, kromě tří backendářů a jednoho smutného integračního testu.
+
+## DN.7 Výkon řeš limity, indexy a očekáváním
+
+Vyhledávání má být rychlé, ale ne za cenu bezpečnosti nebo nekonečné infrastruktury. Začni jednoduchým výkonovým kontraktem:
+
+- běžný dotaz do 300–500 ms pro typické seznamy;
+- jasná hláška při příliš širokém dotazu;
+- stránkování nebo cursor, žádné „vrať celý vesmír“;
+- indexy podle skutečných filtrů, ne podle fantazie z roadmapy;
+- rate limit pro opakované drahé dotazy.
+
+U větších dat odděl okamžité vyhledávání od exportu. Uživatel často nepotřebuje najít všech 80 000 záznamů. Potřebuje prvních 20 relevantních a možnost zpřesnit dotaz. Export je jiná operace: autorizovaná, auditovaná, asynchronní a s expirací výsledného souboru.
+
+## DN.8 Checklist vyhledávání a filtrů
+
+- Je jasné, v jakých entitách a polích se hledá.
+- Výsledky, snippety, počty i facety respektují serverová oprávnění.
+- SQL a fulltext dotazy používají bezpečnou parametrizaci nebo schválené API.
+- Dotazy mají limity délky, timeouty, stránkování a ochranu proti drahým vzorům.
+- Search logy neukládají dlouhodobě raw osobní nebo zákaznické dotazy.
+- Produktové metriky jsou agregované a oddělené od bezpečnostních logů.
+- Prázdné výsledky pomáhají, ale neprozrazují existenci cizích dat.
+- Filtry odpovídají pracovním otázkám, ne interním názvům sloupců.
+- Export výsledků má vlastní oprávnění, audit a expiraci.
+- Support režim vyhledávání je dočasný, auditovaný a omezený na účel.
+
+## Codyho komentář
+
+Vyhledávání je jedna z těch funkcí, kde se dá krásně poznat vyspělost produktu. Juniorní verze „něco najde“. Dospělá verze najde správné věci správným lidem, nezrychlí únik dat a ještě pomůže týmu pochopit, kde produkt lidem drhne. Search box není dekorace. Je to bezpečnostní a produktové rozhraní v jednom kabátku.
+
+## Zdroje k příloze
+
+- OWASP: SQL Injection Prevention Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html
+- OWASP: Query Parameterization Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Query_Parameterization_Cheat_Sheet.html
+- OWASP: Logging Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+- European Commission: Data protection by design and by default — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/obligations/what-does-data-protection-design-and-default-mean_en
+
+## Shrnutí přílohy
+
+Vyhledávání a filtry nejsou jen pohodlnost v UI. Jsou to místa, kde se rozhoduje o oprávnění, výkonu, logování a důvěře. Privacy-first SaaS hledá jen v povoleném rozsahu, chrání dotazy před injekcemi, ukládá spíš agregované signály než raw lidské vstupy a navrhuje prázdné stavy tak, aby pomáhaly bez prozrazování cizích dat.
+
+---
+
 ## Pracovní log
 
+- 2026-08-12: Přidána příloha DN o vyhledávání a filtrování v SaaS: rozsah hledání, serverová oprávnění, bezpečné dotazy, search logy, prázdné výsledky, filtry, výkon a checklist.
 - 2026-08-11: Přidána příloha DM o platbách, fakturaci a předplatném: jasná cena, DPH/OSS, karetní data mimo vlastní databázi, SCA, faktury, férové rušení a checklist.
 - 2026-08-11: Přidána příloha DL o dashboardech a provozních metrikách bez vanity tabulek: rozhodovací metriky, agregace, kontext, přístupy a privacy-first checklist.
 - 2026-08-11: Přidána příloha DK o exportech dat a přenositelnosti: osobní vs. administrátorský export, strojově čitelné formáty, manifest, CSV injection, oprávnění, expirace, audit a testování použitelnosti.
