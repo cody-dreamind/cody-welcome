@@ -24767,8 +24767,142 @@ Import je moment pravdy. Zákazník ti na chvíli svěří kus svého provozníh
 
 Privacy-first import dat není jen upload CSV. Je to řízený proces, který začíná jasným účelem, pokračuje mapováním a validací, dává uživateli náhled dopadu, bezpečně řeší duplicity, krátce drží původní soubory a vytváří střídmý auditní záznam. Když import respektuje data, zákazník rychleji zažije hodnotu a tým se vyhne zbytečným opravám, které bolí víc než špatně pojmenovaný sloupec `final_final_v3`.
 
+---
+
+# Příloha FG: Sdílení reportů a dashboardů bez veřejných tajemství, screenshotové archeologie a datového ohňostroje
+
+Report je často první místo, kde se produktová data potkají s lidmi mimo každodenní provoz: vedením firmy, klientem, investorem, účetní, konzultantem, agenturou nebo externím vývojářem. A přesně proto je nebezpečný. Ne protože by graf sám o sobě kousal. Ale protože reporty se rády posílají dál, ukládají do prezentací, kopírují do e-mailů a přežívají mnohem déle než původní kontext.
+
+Privacy-first sdílení reportů znamená, že tým chápe rozdíl mezi „potřebuje vidět trend“ a „potřebuje stáhnout kompletní seznam lidí“. V praxi to znamená dobré role, agregaci, expiraci odkazů, jasné popisky metrik a žádné magické veřejné URL, které se tváří jako produktivita, dokud neskončí v cizím Slacku. Ano, i dashboard může být datový únik v hezkém kabátku.
+
+## FG.1 Nejdřív si napiš publikum reportu
+
+Report bez publika je skládka metrik. Než začneš navrhovat dashboard, napiš si, kdo ho bude používat a jaké rozhodnutí má po přečtení udělat.
+
+Praktické rozdělení:
+
+| Publikum | Potřebuje vidět | Nemusí vidět |
+| --- | --- | --- |
+| Zakladatel | Trend příjmů, aktivace, churn, rizika | Syrové osobní údaje jednotlivých uživatelů |
+| Customer success | Zdraví účtu, blokery, poslední významné akce | Interní technické logy a citlivé systémové detaily |
+| Marketing | Návštěvnost, konverze, zdroje poptávek | Kompletní formulářové zprávy a osobní poznámky sales týmu |
+| Klientský administrátor | Aktivitu svého workspace, exporty, členy týmu | Data jiných workspace nebo interní scoring produktu |
+| Externí poradce | Agregovaný přehled k řešenému tématu | Plný přístup do produktu „pro jistotu“ |
+
+Když publikum neumíš popsat jednou větou, report ještě není připravený. Pravděpodobně se snažíš vytvořit univerzální dashboard, který ukáže všechno všem. To zní efektivně, ale většinou vznikne obrazovka, kde je deset grafů, tři tabulky a jeden tichý bezpečnostní problém.
+
+## FG.2 Agregace je výchozí stav, detail je výjimka
+
+Většina rozhodnutí nepotřebuje seznam konkrétních lidí. Potřebuje trend, porovnání, počet, poměr, stav nebo změnu. Pokud report ukazuje osobní údaje, musí existovat jasný důvod.
+
+Příklady bezpečnějšího návrhu:
+
+- Místo seznamu všech neaktivních uživatelů ukaž počet neaktivních účtů podle workspace a akci „zobrazit detail“ jen lidem s oprávněním.
+- Místo kompletních odpovědí z formuláře ukaž počet poptávek podle typu problému a citlivý obsah nech v CRM nebo ticketu.
+- Místo screenshotu zákaznického dashboardu do prezentace použij syntetický příklad se stejnou strukturou.
+- Místo veřejného „live dashboardu“ pro klienta vytvoř omezený pohled jen pro jeho organizaci.
+
+Detail má být auditovatelný krok, ne výchozí dekorace. U citlivějších reportů se ptej: „Kdyby se tento PDF soubor přeposlal mimo firmu, co přesně by uniklo?“ Pokud odpověď zní „asi všechno“, report není hotový. Je jen elegantně exportovaný průšvih.
+
+## FG.3 Sdílený odkaz není oprávnění
+
+Sdílení přes odkaz je pohodlné. A právě proto je zrádné. Odkaz se dá přeposlat, uložit do historie prohlížeče, vložit do ticketu, otevřít na cizím počítači nebo omylem přidat do dokumentace. Pokud report obsahuje neveřejná nebo osobní data, samotné „kdo má odkaz, vidí“ nestačí.
+
+Bezpečnější varianty:
+
+- přístup jen po přihlášení,
+- kontrola workspace nebo role na serveru,
+- samostatné oprávnění pro reporty a exporty,
+- expirační datum sdíleného pohledu,
+- možnost sdílení okamžitě zrušit,
+- audit log otevření a stažení u citlivých reportů,
+- vodoznak nebo identifikace příjemce u PDF, kde to dává smysl.
+
+Veřejný link může být v pořádku pro marketingový report bez osobních dat, veřejnou statistiku dostupnosti nebo anonymizovanou ukázku. Není v pořádku pro seznam leadů, billing, detail používání zákazníka, incidentní poznámky nebo export support konverzací. Pohodlí není právní základ. Škoda, protože by se to krásně vyjímalo v ceníku.
+
+## FG.4 PDF, CSV a screenshoty potřebují vlastní pravidla
+
+Dashboard v produktu může mít oprávnění. Soubor po stažení už často žádná oprávnění nemá. Proto je export reportu jiný režim než zobrazení reportu.
+
+Pravidla pro stažitelné reporty:
+
+- Před exportem ukaž, co soubor obsahuje a pro koho je určený.
+- U citlivých reportů vyžaduj potvrzení rozsahu.
+- Do názvu souboru nedávej citlivé údaje typu jméno klienta, rodné číslo nebo interní označení incidentu.
+- CSV chraň proti vzorcům a nečekanému spuštění hodnot v tabulkových nástrojích.
+- PDF negeneruj jako screenshot celého produktu, pokud stačí agregovaná tabulka.
+- Stažené soubory loguj střídmě: kdo, kdy, jaký typ reportu, jaký workspace, ne celý obsah.
+
+Screenshoty jsou zvláštní druh chaosu. Lidé je milují, protože jsou rychlé. Bezpečnost je nemiluje, protože často obsahují jména, e-maily, interní poznámky, URL s tokeny, notifikace v rohu a otevřené záložky prohlížeče. Pokud tým posílá screenshoty do supportu nebo prezentací, vytvoř jednoduché pravidlo: citlivé údaje rozmazat, používat demo data a neposílat obrazovky s produkčními tokeny. Ano, zní to banálně. Přesně takové věci pak končí v postmortemu.
+
+## FG.5 Metriky popiš tak, aby jim šlo věřit
+
+Privacy-first report není jen bezpečný. Musí být i pochopitelný. Metrika bez definice svádí k panice, oslavě nebo špatnému rozhodnutí.
+
+U každé důležité metriky uveď:
+
+- co přesně počítá,
+- jaké období používá,
+- jestli je agregovaná nebo obsahuje individuální data,
+- jak často se aktualizuje,
+- kdo je vlastníkem definice,
+- kdy byla naposledy změněna.
+
+Příklad popisku:
+
+> „Aktivní workspace = workspace, ve kterém alespoň jeden člen provedl produktovou akci za posledních 30 dní. Nezahrnuje interní testovací účty. Aktualizace jednou denně.“
+
+Tohle je mnohem užitečnější než velké číslo bez kontextu. Velké číslo bez definice je produktový horoskop: každý si v něm najde, co chce, a nikdo podle něj nemá řídit firmu.
+
+## FG.6 Reporty uklízej stejně jako data
+
+Reporty mají životní cyklus. Vzniknou, používají se, zestárnou, přestanou odpovídat produktu a jednou je někdo otevře s otázkou: „Počítá se to ještě správně?“ Pokud neexistuje vlastník, odpověď bývá ticho.
+
+Zaveď jednoduchou evidenci:
+
+| Pole | Příklad |
+| --- | --- |
+| Název reportu | „Měsíční health report zákazníků“ |
+| Publikum | Customer success lead, zakladatel |
+| Účel | Najít rizikové účty pro měsíční review |
+| Datové zdroje | Produktové eventy, billing stav, support tagy |
+| Citlivost | Interní, obsahuje agregace po workspace |
+| Vlastník | Customer success |
+| Revize | Každé čtvrtletí |
+| Retence exportů | 90 dní v interním úložišti |
+
+Jednou měsíčně nebo čtvrtletně projdi reporty, které mají široké sdílení, export do souborů nebo přístup externistů. Zruš ty, které nikdo nepoužívá. Oprav ty, které počítají zastaralou metriku. Omez ty, které ukazují víc detailu, než publikum potřebuje.
+
+## FG.7 Checklist sdílení reportů a dashboardů
+
+Před releasem reportu si projdi:
+
+- Má report jasně popsané publikum a rozhodnutí, které podporuje?
+- Ukazuje výchozí pohled agregace místo osobních detailů?
+- Je detail dostupný jen lidem s konkrétním oprávněním?
+- Nepoužívá report veřejné odkazy pro neveřejná nebo osobní data?
+- Umí administrátor sdílení zrušit nebo omezit?
+- Mají stažitelné PDF a CSV vlastní pravidla, expiraci nebo audit podle rizika?
+- Neobsahují názvy souborů citlivé údaje?
+- Jsou metriky jasně definované a mají vlastníka?
+- Je u reportu zřejmé období, aktualizace a zdroj dat?
+- Existuje plán revize a úklidu starých reportů?
+- Umí tým vytvořit bezpečnou ukázku se syntetickými daty?
+- Je jasné, co se stane, když se report pošle mimo původní kontext?
+
+## Codyho komentář
+
+Reporty jsou nenápadná místa, kde firmy ztrácí kontrolu nad daty. Ne přes hackerský film s kapucí a zeleným terminálem, ale přes „pošlu ti rychle PDF“, „tady je veřejný link“ a „vezmu screenshot do prezentace“. Můj pohled — Cody: dobrý dashboard má být jako okno, ne jako díra ve zdi. Ukáže přesně to, co příjemce potřebuje, ale nedovolí mu odnést celý dům i s náhradními klíči.
+
+Privacy-first reportování není méně užitečné. Je přesnější. Nutí tým říct, kdo co potřebuje vědět, proč to potřebuje a jak dlouho to má existovat. A to je velmi zdravé cvičení i bez compliance oddělení v saku.
+
+## Shrnutí přílohy
+
+Sdílení reportů a dashboardů vyžaduje stejnou disciplínu jako práce s produkčními daty. Začni publikem a rozhodnutím, používej agregace jako výchozí stav, detail chraň oprávněním, opatrně zacházej se sdílenými odkazy, PDF, CSV a screenshoty, jasně definuj metriky a pravidelně uklízej staré reporty. Privacy-first report nebrání rozhodování — brání tomu, aby se rozhodování změnilo v distribuovaný únik dat.
+
 ## Pracovní log
 
+- 2026-08-13: Přidána příloha FG o sdílení reportů a dashboardů: publikum reportu, agregace, bezpečné odkazy, PDF/CSV/screenshoty, definice metrik, úklid reportů a privacy-first checklist.
 - 2026-08-13: Přidána příloha FF o privacy-first importu dat: účel importu, bezpečné kroky, validace, duplicity, retence uploadů, import reporty, auditní stopa a checklist.
 - 2026-08-13: Přidána příloha FE o produktovém nastavení bez bezpečnostní rulety: bezpečné výchozí hodnoty, členění podle rozhodnutí, potvrzování citlivých změn, historie změn, preference, testovací scénáře a checklist.
 - 2026-08-13: Přidána příloha FD o webových formulářích bez frikce a zbytečného sběru dat: účel polí, povinné údaje, mikrotexty, chyby, antispam, přístupnost a privacy-first checklist.
