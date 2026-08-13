@@ -23733,7 +23733,208 @@ Privacy-first bonus: dobré demo snižuje potřebu sales calls, zbytečných exp
 Demo a trial nejsou jen akviziční nástroje. Jsou to první provozní testy důvěry. Malý SaaS tým má ukázat hodnotu rychle, sbírat minimum dat, používat syntetické ukázky, férově vysvětlit retenci a oddělit pomocný follow-up od marketingového lovu. Privacy-first onboarding není brzda růstu; je to způsob, jak zákazníkovi už od prvního kliknutí ukázat, že produkt bere jeho data vážně.
 
 
+
+# Příloha EZ: Zákaznické rozhovory bez nahrávacího reflexu, datového přebytku a falešné empatie
+
+Zákaznický rozhovor je jeden z nejlevnějších způsobů, jak zjistit, jestli stavíš něco užitečného. Zároveň je to nenápadná datová past. Stačí zapnout nahrávání „pro jistotu“, nechat zákazníka sdílet obrazovku, opsat do poznámek jména jeho klientů, přilepit výstup do AI nástroje a najednou máš výzkum, CRM, support log, obchodní záznam a compliance bolehlav v jednom krásném klubíčku.
+
+Privacy-first rozhovor neznamená nudný rozhovor. Znamená, že víš, proč se ptáš, co si zapisuješ, kde to skončí a kdy to smažeš. Výzkum má zlepšit produkt, ne vytvořit paralelní databázi zákaznických tajemství. Data nejsou suvenýry z dovolené.
+
+## EZ.1 Rozhovor začni rozhodnutím, které má změnit
+
+Než někomu pošleš pozvánku, napiš si jednu větu:
+
+> „Po těchto rozhovorech rozhodneme, jestli…“
+
+Příklady dobrých rozhodnutí:
+
+- jestli má onboarding začínat importem dat, nebo ruční ukázkou,
+- jestli má placený tarif obsahovat týmové role už od začátku,
+- jestli zákazníci rozumí hlavní hodnotě produktu bez sales vysvětlování,
+- jestli je největší překážka cena, migrace, důvěra, nebo čas,
+- jestli má nová funkce řešit denní rutinu, nebo jen hezký demo moment.
+
+Špatné zadání je „chceme poznat zákazníky“. To je lidsky milé, ale produktově široké jako evropská směrnice po třetím kafi. Bez rozhodnutí budeš sbírat zajímavosti, ne důkazy.
+
+Mini-brief před rozhovory:
+
+| Otázka | Dobrá odpověď |
+| --- | --- |
+| Co rozhodujeme? | Jedna produktová nebo obchodní volba. |
+| Koho potřebujeme slyšet? | Segment, role a situace, ne „někoho z trhu“. |
+| Co nepotřebujeme vědět? | Osobní údaje, interní detaily, klientské seznamy. |
+| Jaký výstup vznikne? | Syntéza vzorců, ne archiv nahrávek. |
+| Kdy data smažeme? | Konkrétní datum nebo retenční pravidlo. |
+
+## EZ.2 Nábor respondentů dělej střídmě a transparentně
+
+Nábor na rozhovory se často zvrhne v malý lead mining. Stáhne se seznam kontaktů, obohatí se přes tři nástroje, pošle se sekvence a pak se tomu říká „research operations“. Ne. Pokud chceš mluvit se zákazníky, začni u lidí, kde máš jasný vztah a rozumný důvod je oslovit.
+
+Praktické pravidlo: pro jednu výzkumnou otázku obvykle nepotřebuješ desítky lidí. Potřebuješ několik relevantních rozhovorů, po kterých se začnou opakovat stejné motivy. U malého SaaS týmu je lepší pět dobře vybraných hovorů než padesát dotazníků s odpovědí „záleží“.
+
+Do pozvánky dej:
+
+- proč se ozýváš,
+- jak dlouho rozhovor potrvá,
+- co se bude probírat,
+- jestli budeš dělat poznámky nebo nahrávku,
+- kdo uvidí výstup,
+- jak může člověk odmítnout nebo se doptat.
+
+Příklad krátké pozvánky:
+
+> „Ahoj, zlepšujeme onboarding pro menší B2B týmy a rád bych pochopil, kde se dnes lidé zasekávají. Šlo by o 30 minut, bez nutnosti sdílet citlivá data. Udělám si jen interní poznámky pro produktový tým. Pokud se ti to nehodí, úplně v pohodě.“
+
+Tohle je méně agresivní než „vyberte si slot v mém kalendáři, protože automatizace rozhodla“. Překvapivě to taky působí víc jako člověk.
+
+## EZ.3 Nahrávka není výchozí nastavení
+
+Nahrávání je pohodlné, ale pohodlí není právní ani produktová strategie. Nahrávka zachytí víc, než potřebuješ: jména, obrazovku, hlas, obchodní informace, někdy i osobní údaje třetích stran. Pokud ji nepotřebuješ, nenahrávej.
+
+Rozumné varianty podle citlivosti:
+
+| Situace | Doporučený záznam |
+| --- | --- |
+| Rychlá validace copy nebo onboarding kroku | Ruční poznámky bez nahrávky. |
+| Hloubkový výzkum použitelnosti | Nahrávka jen se souhlasem a omezenou retencí. |
+| Enterprise discovery s interními procesy | Poznámky v šabloně, zákaz konkrétních klientských dat. |
+| Test s obrazovkou produktu | Nahrávka jen produktu, ne okolních aplikací. |
+| Citlivé odvětví | Preferuj anonymizované scénáře a syntetická data. |
+
+Pokud nahráváš, řekni to lidsky:
+
+> „Rád bych hovor nahrál jen proto, abych nemusel během rozhovoru zuřivě psát. Nahrávku uvidí jen produktový tým, nepůjde do marketingu a smažeme ji do 30 dnů. Je v pohodě říct ne.“
+
+A pak to dodrž. Ano, i tu část „smažeme“. Dokumentovaná retence, která nekončí skutečným mazáním, je jen compliance cosplay v hezkém kabátku.
+
+## EZ.4 Otázky mají hledat chování, ne lichotky
+
+Špatný rozhovor se ptá: „Líbila by se vám funkce?“ Dobře vychovaný člověk řekne ano, protože nechce rozbít náladu. Produktový tým pak postaví funkci, kterou nikdo nepoužije, ale všichni ji v rozhovoru „určitě chtěli“. Klasika. SaaS verze pohádky o císařových nových features.
+
+Lepší otázky:
+
+- „Kdy jste ten problém řešili naposledy?“
+- „Co jste udělali jako první?“
+- „Kdo další do toho musel mluvit?“
+- „Co se stalo, když se to nepovedlo?“
+- „Kolik času nebo peněz vás to stálo?“
+- „Jak to řešíte dnes, i když je to otravné?“
+- „Co by vás zastavilo při přechodu na nový nástroj?“
+
+Privacy-first bonus: otázky na chování často nepotřebují citlivé detaily. Neptej se „ukažte mi seznam klientů, kterých se to týká“. Zeptej se „jaký typ klienta to typicky řeší“ nebo „kolik podobných případů máte za měsíc“. Hledáš vzorec, ne cizí databázi.
+
+## EZ.5 Poznámky strukturuj tak, aby šly bezpečně sdílet
+
+Poznámky z rozhovorů mají být použitelné i za měsíc, ale nemají obsahovat každou osobní drobnost. Ideální je šablona, která odděluje identitu respondenta od produktových poznatků.
+
+Jednoduchá šablona:
+
+| Pole | Co zapisovat |
+| --- | --- |
+| Segment | Například „malý B2B SaaS, 5–20 lidí“. |
+| Role | Zakladatel, ops, marketing, vývojář, zákaznická podpora. |
+| Situace | Kontext problému bez jmen klientů a interních názvů. |
+| Spouštěč | Co problém odstartovalo. |
+| Současné řešení | Nástroj, workaround nebo ruční proces. |
+| Dopad | Čas, riziko, ztracené peníze, frustrace. |
+| Citace | Krátká anonymizovaná věta, pokud je opravdu výstižná. |
+| Důvěra | Co by muselo být jasné, aby produkt použili. |
+| Follow-up | Jedna konkrétní další akce, pokud existuje. |
+
+Co do poznámek nepatří:
+
+- osobní údaje zákazníků respondenta,
+- přístupové údaje, tokeny nebo interní URL,
+- kopie obrazovek s reálnými daty,
+- drby o konkrétních zaměstnancích,
+- „vtipné“ poznámky, které by v exportu vypadaly jako důkaz, že tým potřebuje dospět.
+
+Když potřebuješ citaci, anonymizuj ji hned. Nečekej na „někdy před publikací“. Někdy je kalendářní jednotka, která v produktových týmech často znamená nikdy.
+
+## EZ.6 AI syntéza rozhovorů potřebuje datovou dietu
+
+AI umí z rozhovorů rychle vytáhnout vzorce, otázky a protiargumenty. Umí taky velmi rychle roznést citlivá data tam, kam nepatří, pokud jí pošleš celé přepisy bez rozmyslu. AI není kouzelný interní mozek. Je to zpracování dat a podle toho se k němu chovej.
+
+Bezpečnější postup:
+
+1. Nejdřív udělej ruční očištění poznámek.
+2. Odstraň jména, e-maily, názvy klientů, interní URL a konkrétní čísla, která identifikují firmu.
+3. Nahraď citlivé detaily kategoriemi: „enterprise zákazník“, „účetní systém“, „regionální pobočka“.
+4. Do AI pošli jen data nutná pro syntézu konkrétní otázky.
+5. Výstup ověř proti původním poznámkám, ne proti pocitu, že AI zní sebevědomě.
+6. Nesdílej přepisy do nástroje, který nemáš pokrytý ve vendor seznamu a pravidlech pro data.
+
+Dobrý prompt pro syntézu:
+
+> „Z těchto anonymizovaných poznámek najdi opakující se překážky v onboardingu. Nevyvozuj závěry mimo data. U každého vzorce uveď, které rozhovory ho podporují podle anonymních ID.“
+
+Špatný prompt:
+
+> „Tady jsou všechny přepisy, udělej mi strategii.“
+
+To druhé je jako vysypat šanon na chodník a doufat, že kolemjdoucí právník ocení tvou agilitu.
+
+## EZ.7 Závěry převáděj na rozhodnutí, ne na sbírku citátů
+
+Po rozhovorech nevzniká svatá pravda. Vzniká lepší mapa rizik, motivací a slovníku zákazníků. Největší chyba je skončit u pěkného dokumentu se zvýrazněnými citacemi a nulovou změnou produktu.
+
+Syntéza by měla odpovědět:
+
+- Jaké tři vzorce se opakovaly?
+- Který předpoklad se potvrdil?
+- Který předpoklad se rozbil?
+- Co je pořád nejisté?
+- Jakou jednu věc změníme v produktu, webu, onboardingu nebo sales procesu?
+- Jak poznáme, že změna pomohla?
+- Jaká data z rozhovorů můžeme smazat hned?
+
+Příklad výstupu:
+
+| Zjištění | Rozhodnutí | Kontrola |
+| --- | --- | --- |
+| Lidé nerozumí importu dat před registrací. | Přidáme ukázkový dataset a vysvětlení před importem. | Méně support dotazů k importu v prvním týdnu. |
+| Trial končí bez jasného dalšího kroku. | Přidáme e-mail s exportem, prodloužením a smazáním. | Více odpovědí, méně neaktivních expirovaných účtů. |
+| Bezpečnostní otázky padají až v procurementu. | Přidáme trust stránku a stručný vendor pack. | Méně opakovaných dotazů v obchodní fázi. |
+
+## EZ.8 Checklist privacy-first zákaznického rozhovoru
+
+Před rozhovorem:
+
+- Máš jednu jasnou výzkumnou otázku a rozhodnutí, které chceš zlepšit.
+- Víš, proč oslovuješ právě tento segment.
+- Pozvánka říká délku, účel, záznam a možnost odmítnout.
+- Nepožaduješ produkční data, klientské seznamy ani citlivé exporty.
+- Máš připravenou šablonu poznámek s datovým minimem.
+
+Během rozhovoru:
+
+- Ptáš se na minulé chování, ne na hypotetické komplimenty.
+- Zastavíš sdílení obrazovky, pokud se objeví citlivá data.
+- Nahráváš jen se souhlasem a jen když to opravdu potřebuješ.
+- Neopisuješ osobní detaily, které nejsou relevantní pro rozhodnutí.
+- Na konci shrneš, co sis odnesl, a dáš prostor k opravě.
+
+Po rozhovoru:
+
+- Poznámky anonymizuješ co nejdřív.
+- Nahrávku smažeš podle domluvené retence.
+- Výstup sdílíš jako vzorce a rozhodnutí, ne jako syrové přepisy.
+- AI nástroje používáš jen na očištěná a nutná data.
+- Z každé série rozhovorů vznikne jedna konkrétní produktová nebo obchodní akce.
+
+## Codyho komentář
+
+Zákaznický rozhovor není terapeutické sezení pro produktový tým. Je to pracovní nástroj. Můj pohled — Cody: nejlepší výzkumník není ten, kdo má nejvíc nahrávek, ale ten, kdo dokáže po pěti hovorech říct „tuhle věc změňme, tuhle nechte být a tahle domněnka smrdí“. Bonusové body, když u toho nevytvoří datové muzeum plné osobních údajů.
+
+Privacy-first přístup tady není brzda empatie. Je to její podmínka. Když lidem řekneš, že nechceš jejich citlivá data, často se uvolní víc než při korporátním „hovor může být nahráván pro zkvalitnění služeb“. To je věta, která v překladu znamená všechno a nic. A „všechno a nic“ je přesně kategorie, kterou nechceš mít v datové mapě.
+
+## Shrnutí přílohy
+
+Zákaznické rozhovory mají zlepšit rozhodování, ne vyrábět archiv citlivých přepisů. Malý SaaS tým má začít jasnou výzkumnou otázkou, nabírat respondenty transparentně, nahrávat jen výjimečně, ptát se na skutečné chování, strukturovat anonymizované poznámky a převádět závěry na konkrétní změny. Privacy-first výzkum chrání zákazníka, tým i produktové soustředění.
+
+
 ## Pracovní log
+- 2026-08-13: Přidána příloha EZ o privacy-first zákaznických rozhovorech: výzkumné rozhodnutí, transparentní nábor, střídmé nahrávání, bezpečné poznámky, AI syntéza a checklist.
 - 2026-08-13: Přidána příloha EY o privacy-first demu a trial onboardingu: jasný cíl dema, krátké lead formuláře, syntetická data, retenční stavy trialu, férový follow-up, sales mantinely a checklist.
 - 2026-08-13: Přidána příloha EX o feature flags bez produktového chaosu: účel flagu, datově střídmá segmentace, typy přepínačů, bezpečné vyhodnocení, měření, admin UI, úklid a checklist.
 
