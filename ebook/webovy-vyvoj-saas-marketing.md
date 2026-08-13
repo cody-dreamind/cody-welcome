@@ -22812,8 +22812,153 @@ Text má vysvětlit důvod frikce. Uživatelé snesou další krok, když rozum�
 
 ---
 
+# Příloha EU: Role a oprávnění bez superuživatelského zmatku, sdílených účtů a datových průšvihů
+
+Přihlášení říká, kdo uživatel je. Oprávnění říkají, co smí udělat. Tohle rozlišení zní nudně, dokud první zákazník nezjistí, že juniorní kolega může stáhnout celý export faktur, smazat projekt nebo vidět osobní údaje jiného workspace. Pak už to nudné není. Pak je to požární cvičení s právní dohrou a kávou, která chutná jako incident report.
+
+OWASP Authorization Cheat Sheet doporučuje mimo jiné kontrolovat oprávnění na každém požadavku, používat princip nejmenších oprávnění a nastavovat výchozí zamítnutí přístupu: https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html
+
+Privacy-first produkt neřeší role jen kvůli bezpečnosti. Řeší je i kvůli důvěře: zákazník musí vědět, kdo v jeho týmu má přístup k datům, co může změnit a jak se to dá dohledat.
+
+## EU.1 Role nezačínej názvy lidí, ale úkoly
+
+Špatný začátek je tabulka „admin, manager, user“. Tyhle názvy vypadají čistě, ale často schovávají bordel. Admin postupně získá všechno, manager polovinu všeho a user je zbytek světa. Výsledek: nikdo neví, jestli člověk v roli manager může měnit billing, zvát kolegy, exportovat data nebo jen upravit logo.
+
+Lepší začátek je seznam úkolů:
+
+| Úkol | Riziko | Typické oprávnění |
+| --- | --- | --- |
+| Zobrazit vlastní projekty | Nízké až střední | `project.read` |
+| Upravit obsah webu | Střední | `content.write` |
+| Pozvat člena workspace | Střední | `members.invite` |
+| Změnit role ostatních | Vysoké | `members.manage_roles` |
+| Stáhnout export osobních dat | Vysoké | `data.export` |
+| Změnit fakturační údaje | Vysoké | `billing.manage` |
+| Smazat workspace | Kritické | `workspace.delete` |
+
+Teprve potom z oprávnění slož role. Role není identita člověka. Role je balíček schopností, který má odpovídat práci. Když se práce změní, role se má dát upravit bez toho, aby vývojář přepisoval půl aplikace a šeptal databázi uklidňující věty.
+
+## EU.2 Výchozí odpověď má být „ne“, ne „snad jo“
+
+Autorizace musí být explicitní. Pokud systém neví, jestli uživatel akci smí, odpověď je ne. Ne „radši pustíme, ať zákazník neotravuje“. Ne „frontend to tlačítko stejně neschová“. Ne „ten endpoint používá jen naše UI“. Endpointy nemají paměť, kdo jim slíbil hezké chování.
+
+Praktické pravidlo:
+
+- každá serverová akce má kontrolu oprávnění;
+- kontrola je blízko business akce, ne jen v menu;
+- chybějící role nebo neznámé oprávnění znamená zamítnutí;
+- testy ověřují i negativní scénáře;
+- frontend schovává nepovolené akce kvůli UX, ale bezpečnost drží server;
+- API nikdy nespoléhá na `workspaceId`, `userId` nebo `role` poslané klientem bez ověření.
+
+Příklad nebezpečného patternu:
+
+```text
+DELETE /api/workspaces/123/members/456
+```
+
+Pokud endpoint jen zkontroluje, že je uživatel přihlášený, je to pozvánka na průšvih. Správně musí ověřit minimálně: uživatel patří do workspace `123`, má oprávnění spravovat členy, nesnaží se odstranit posledního ownera a akce je auditovaná.
+
+## EU.3 Workspace oprávnění nejsou totéž co globální oprávnění
+
+SaaS pro firmy často pracuje s více workspace, týmy nebo organizacemi. Uživatel může být owner v jedné firmě, účetní v druhé a obyčejný čtenář ve třetí. Pokud role uložíš jen jako vlastnost uživatele, začneš dřív nebo později vyrábět bezpečnostní díry.
+
+Lepší model:
+
+```text
+user -> membership -> workspace -> role -> permissions
+```
+
+Členství je vztah. Role patří k tomuto vztahu, ne nutně k uživateli globálně. Díky tomu může stejný člověk bezpečně existovat ve více kontextech. Privacy-first bonus: když zákazník opustí workspace, můžeš odstranit nebo anonymizovat konkrétní členství, aniž bys rozbil jeho účet jinde.
+
+U B2B produktů si pohlídej hlavně tyhle hrany:
+
+- poslední owner nesmí omylem odejít bez předání vlastnictví;
+- pozvánka do workspace musí expirovat a být vázaná na e-mail nebo doménové pravidlo;
+- změna role u citlivých oprávnění patří do audit logu;
+- externí hosté mají mít omezené role a jasné označení v UI;
+- billing role nemusí automaticky vidět produktová data;
+- support role nesmí být tichý superadmin mimo audit.
+
+## EU.4 Exporty, integrace a billing dej do samostatných oprávnění
+
+Největší chyba malých SaaS týmů: role „admin“ umí všechno, protože je to rychlé. Jenže tři typy akcí si zaslouží zvláštní zacházení: exporty dat, integrace a platby. Ne proto, že jsou hezčí než ostatní tlačítka. Protože mají vysoký dopad mimo obrazovku.
+
+Rozděl je například takto:
+
+- `data.export`: stáhne osobní, obchodní nebo provozní data;
+- `integrations.manage`: propojí systém s externí službou;
+- `billing.manage`: mění tarify, fakturační údaje a platební metody;
+- `security.manage`: nastavuje MFA, SSO, domény a bezpečnostní pravidla;
+- `members.manage_roles`: mění přístup ostatním lidem.
+
+Každé z těchto oprávnění může vyžadovat čerstvé přihlášení, MFA krok, potvrzení ownerem nebo alespoň auditní záznam. To není paranoia. To je rozdíl mezi „máme SaaS“ a „máme veřejnou samoobsluhu na průšvihy“.
+
+## EU.5 UI má vysvětlit, proč něco nejde
+
+Dobrá autorizace není jen backend. Je to i produktová komunikace. Pokud uživatel klikne na akci a dostane „403 Forbidden“, technicky máš pravdu, lidsky jsi mu právě podal cihlu. Lepší je říct, co chybí a koho požádat.
+
+Příklady mikrotextů:
+
+- „Export dat může spustit jen owner nebo role s oprávněním Exporty.“
+- „Fakturační údaje spravuje účetní role. Požádejte ownera workspace o přístup.“
+- „Tuto integraci nemůžeme zapnout, protože posílá data mimo EU bez schváleného dodavatele.“
+- „Jste poslední owner. Nejdřív přidejte dalšího ownera nebo předejte vlastnictví.“
+- „Tahle akce vyžaduje znovu potvrdit přihlášení, protože mění přístup k datům týmu.“
+
+Privacy-first detail: uživateli bez oprávnění neukazuj víc, než potřebuje. Někdy je správné říct „nemáte přístup“. Jindy je lepší neprozradit ani existenci zdroje. Třeba u veřejně hádatelných URL, neveřejných projektů nebo citlivých dokumentů.
+
+## EU.6 Testuj oprávnění jako produktovou funkci
+
+Oprávnění nejsou jednorázová bezpečnostní položka. Každá nová funkce se ptá: kdo ji smí použít, nad jakými daty, v jakém workspace, s jakým dopadem a jak se to projeví v audit logu?
+
+Minimální testovací matice pro novou citlivou funkci:
+
+| Scénář | Očekávání |
+| --- | --- |
+| Owner spustí akci ve vlastním workspace | Povoleno |
+| Člen bez oprávnění spustí akci | Zamítnuto |
+| Uživatel z jiného workspace hádá ID zdroje | Zamítnuto bez úniku dat |
+| Externí host otevře administrační URL | Zamítnuto |
+| Poslední owner se pokusí odejít | Zastaveno s vysvětlením |
+| Akce po změně role běží se starou session | Vyžaduje refresh oprávnění nebo nové ověření |
+
+Testy piš na business pravidla, ne jen na technický status kód. „Vrací 403“ je začátek. Důležitější je „člověk z cizího workspace nikdy neuvidí cizí faktury, ani když zná ID“.
+
+## EU.7 Checklist rolí a oprávnění
+
+- Máme sepsané citlivé úkoly a z nich odvozená oprávnění.
+- Role nejsou globální nálepka na uživateli, ale vztah ke konkrétnímu workspace nebo organizaci.
+- Výchozí stav autorizace je zamítnout, pokud není přístup explicitně povolen.
+- Server kontroluje oprávnění u každé citlivé akce a nespoléhá na schované tlačítko ve frontendu.
+- Exporty, integrace, billing, bezpečnost a správa rolí mají samostatná oprávnění.
+- Změny rolí, exporty a support přístup se zapisují do audit logu.
+- Poslední owner nejde odstranit bez bezpečného předání vlastnictví.
+- Pozvánky do workspace expirují a nejdou donekonečna znovu používat.
+- UI vysvětluje zamítnutí lidsky, ale neprozrazuje citlivé informace.
+- Testy obsahují pozitivní i negativní scénáře včetně cizího workspace a hádaných ID.
+- Pravidelně kontrolujeme neaktivní členy, externí hosty a příliš široké role.
+
+## Codyho komentář
+
+Role a oprávnění jsou místo, kde se láme slib B2B SaaS. Zákazník ti nedává data jen proto, že máš pěkný onboarding. Dává ti je, protože věří, že je nepustíš prvnímu člověku, který uhádne ID v URL nebo dostane omylem roli „admin, protože spěcháme“. Nejlepší oprávnění jsou nudná: předvídatelná, auditovatelná a trochu přísnější, než by si přál obchod. Obchod to přežije. Incident hůř.
+
+## Zdroje k příloze
+
+- OWASP Authorization Cheat Sheet: princip nejmenších oprávnění, výchozí zamítnutí, server-side kontroly a testování autorizace: https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html
+
+## Shrnutí přílohy
+
+- Role navrhuj z reálných úkolů a rizik, ne z organizačních titulů.
+- Oprávnění musí být explicitní, kontrolovaná na serveru a bezpečně zamítnutá při nejistotě.
+- B2B workspace model potřebuje členství, kontext a audit, ne jednu globální roli na uživateli.
+- Exporty, integrace, billing a správa členů patří mezi citlivé schopnosti se samostatným oprávněním.
+- UI má zamítnuté akce vysvětlit lidsky, ale bez úniku citlivých detailů.
+- Autorizaci testuj jako produktovou funkci včetně cizích workspace, hádaných ID a negativních scénářů.
+
 ## Pracovní log
 
+- 2026-08-13: Přidána příloha EU o rolích a oprávněních: úkolové mapování, default deny, workspace členství, citlivá oprávnění, mikrotexty, testovací matice a checklist.
 - 2026-08-13: Přidána příloha ET o bezpečném přihlašování: mapa autentizačních rizik, heslová politika, rate limiting, MFA, recovery procesy, session management, mikrotexty a privacy-first checklist.
 - 2026-08-13: Přidána příloha ES o audit logu: oddělení typů logů, rizikové události, minimální schéma záznamu, ochrana proti přepisování, zákaznické UI, support access a checklist.
 - 2026-08-13: Přidána příloha ER o privacy-first AI funkcích v SaaS: pracovní smlouva AI funkce, datové minimum v promptech, rizikové režimy, transparentnost, dodavatelská kontrola, testování a checklist.
