@@ -21955,7 +21955,162 @@ Můj pohled — Cody: nejlepší chybová hláška je malý uklidňující suppo
 - UX texty, logování a support postupy se musí navrhovat společně.
 
 
+# Příloha EO: QA a akceptace před releasem bez produkčních dat, checklistového divadla a testování na zákaznících
+
+Release není hotový ve chvíli, kdy projdou testy. Release je hotový ve chvíli, kdy tým ví, co se mění, kdo to ověřil, jak pozná problém a jak změnu bezpečně vrátí nebo vypne. U malého SaaS týmu to často zní jako luxus, ale opak je pravda: čím menší tým, tím méně prostoru máš na improvizaci v pátek večer. Pátek večer je mimochodem výborný čas na pizzu, ne na migraci účtování.
+
+Privacy-first QA má ještě jednu vrstvu navíc: netestovat pohodlně na produkčních datech jen proto, že „tam jsou nejlepší příklady“. Produkční data patří zákazníkům. Testovací proces má ověřit funkčnost bez toho, aby se z reálných údajů stal univerzální materiál pro vývojáře, designéry a support.
+
+## EO.1 QA začíná rizikem změny, ne délkou checklistu
+
+Každá změna nepotřebuje stejnou váhu kontroly. Oprava překlepu v nápovědě nemá mít stejný proces jako nová platební logika, import zákazníků nebo změna oprávnění. Dobrý QA proces proto začíná klasifikací rizika.
+
+Jednoduché rozdělení pro malý tým:
+
+- **Nízké riziko:** texty, drobný layout, interní kosmetika bez dopadu na data.
+- **Střední riziko:** nová obrazovka, změna workflow, nové notifikace, menší změny API.
+- **Vysoké riziko:** platby, oprávnění, exporty, importy, mazání dat, migrace, onboarding, integrace.
+
+Ke každé třídě patří jiná hloubka ověření. Nízké riziko může stačit projít vizuálně a rychle otestovat na mobilu. Vysoké riziko chce testovací scénáře, rollback plán, kontrolu logování, audit oprávnění a ideálně feature flag.
+
+Praktická otázka před releasem:
+
+```text
+Kdyby tahle změna selhala, co nejhoršího se stane zákazníkovi, datům nebo fakturaci?
+```
+
+Pokud odpověď obsahuje slova „smaže“, „zpřístupní“, „naúčtuje“, „odešle všem“ nebo „nejde vrátit“, nejsi v režimu drobné změny. Gratuluju, našel jsi věc, která si zaslouží dospělý QA proces.
+
+## EO.2 Akceptační scénáře piš jazykem uživatele
+
+Testovací scénář nemá být přepsaná implementace. Má popsat, co má uživatel udělat a jaký bezpečný výsledek čeká. To pomáhá vývojáři, testerovi, produktovému člověku i budoucímu Codymu, který se k tomu vrátí za tři měsíce a bude se tvářit, že si všechno pamatuje.
+
+Slabý scénář:
+
+```text
+Otestovat import.
+```
+
+Lepší scénář:
+
+```text
+Jako administrátor workspace nahraju CSV se 120 kontakty.
+Systém zobrazí náhled změn, označí 8 duplicit, odmítne 3 nevalidní e-maily a nezapíše nic, dokud import nepotvrdím.
+Po potvrzení smaže původní CSV soubor podle retenčního pravidla.
+```
+
+U privacy-first funkcí přidej ke scénářům i datovou větu:
+
+- Jaká data se při scénáři zpracují?
+- Kde se uloží?
+- Co se zaloguje?
+- Kdy se dočasná data smažou?
+- Kdo uvidí výsledek?
+
+Akceptační scénáře nejsou byrokracie. Jsou pojistka proti tomu, aby „hotovo“ znamenalo „funguje na mém notebooku s jedním ideálním účtem“. Tenhle standard je levnější než supportní archeologie po nasazení.
+
+## EO.3 Testovací data mají být syntetická, ale věrohodná
+
+Syntetická data nejsou tři uživatelé jménem Test Test a faktura na 123 Kč. Pokud mají odhalit chyby, musí připomínat reálný provoz strukturou, hranami a nepořádkem — ne konkrétními osobními údaji zákazníků.
+
+Dobrá testovací sada obsahuje:
+
+- běžné případy, které se dějí každý den,
+- prázdné hodnoty a volitelná pole,
+- dlouhé názvy firem, diakritiku, pomlčky a speciální znaky,
+- duplicitní záznamy,
+- různé role a oprávnění,
+- malé i větší objemy dat,
+- archivované, deaktivované nebo expirované položky,
+- chybové a hraniční stavy.
+
+Příklad pro B2B SaaS:
+
+```text
+Workspace: „Kavárna U Tří Fazolí s.r.o.“
+Role: majitel, účetní, brigádník, externí poradce
+Objekty: 14 faktur, 3 koncepty, 2 stornované položky, 1 import s chybou, 1 uživatel čekající na pozvánku
+```
+
+Tohle dá produktu mnohem víc než anonymizovaná kopie produkce, která často stejně není bezpečně anonymizovaná. Užitečný kompromis: generátor seed dat podle scénářů. Když se objeví bug, přidej nový syntetický případ do seed sady místo toho, abys si stáhl zákaznický export „jen na chvíli“.
+
+## EO.4 Staging nesmí být tajná produkce bez dozoru
+
+Staging bývá největší privacy slabina malých týmů. Má horší hesla, volnější přístupy, zapomenuté integrace, staré databáze a občas i produkční e-maily. Tedy takový malý datový sklep, kam nikdo nechodí, dokud nezačne smrdět.
+
+Privacy-first staging pravidla:
+
+- Nepoužívej produkční databázi jako výchozí testovací materiál.
+- Pokud je produkční vzorek výjimečně nutný, schval ho, minimalizuj, pseudonymizuj a smaž po pevné době.
+- Vypni nebo přesměruj externí odesílání e-mailů, SMS a webhooků.
+- Odděl API klíče, OAuth aplikace, platební test režimy a storage buckety.
+- Nastav kratší retenci logů než v produkci, pokud staging nepotřebuje dlouhou historii.
+- Omez přístup podle role, ne podle věty „vždyť je to jen staging“.
+
+Staging má sloužit k ověření releasu, ne jako druhá produkce s horšími dveřmi. Pokud tam vývojář vidí reálné zákaznické poznámky, faktury nebo dokumenty bez jasného důvodu, proces je rozbitý.
+
+## EO.5 Release checklist musí mít vlastníka a důkaz
+
+Checklist funguje jen tehdy, když každá položka má jasného vlastníka a ověřitelný výsledek. Jinak se z něj stane divadelní rekvizita: všichni ji viděli, nikdo podle ní nehrál.
+
+Mini release checklist pro SaaS změnu:
+
+| Oblast | Otázka | Důkaz |
+| --- | --- | --- |
+| Hodnota | Je jasné, jaký problém změna řeší? | Odkaz na ticket, rozhodnutí nebo zákaznický insight |
+| Funkčnost | Prošly hlavní akceptační scénáře? | Seznam scénářů se stavem |
+| Data | Zpracovává změna nová nebo citlivější data? | Krátká datová věta nebo aktualizovaná datová mapa |
+| Oprávnění | Vidí data jen správné role? | Kontrola role matrix nebo testovací účty |
+| Komunikace | Potřebuje změna release notes, nápovědu nebo e-mail? | Odkaz na připravený text |
+| Provoz | Víme, jak změnu monitorovat? | Metrika, log event nebo alert |
+| Návrat | Dá se změna vypnout, vrátit nebo opravit? | Rollback plán, feature flag nebo migrační postup |
+
+U malého týmu stačí jednoduchý Markdown v pull requestu nebo release ticketu. Důležité je, aby zůstala stopa, co se kontrolovalo a proč. Až se zákazník za měsíc zeptá, proč se něco změnilo, nebudeš lovit odpověď v paměti a v pěti chatech.
+
+## EO.6 UAT má ověřit rozhodnutí, ne sbírat náhodné nápady
+
+User Acceptance Testing často sklouzne do volného proklikávání: „zkus si to a řekni, co si myslíš“. To může být užitečné ve výzkumu, ale před releasem potřebuješ hlavně potvrdit, že konkrétní změna splňuje konkrétní scénáře.
+
+Dobrá UAT instrukce:
+
+```text
+Prosím projdi jen tyto tři scénáře: vytvoření pravidla, úprava pravidla, vypnutí pravidla.
+U každého napiš: prošlo/neprošlo, co tě zastavilo, jestli texty odpovídají tomu, jak bys to vysvětlil zákazníkovi.
+Nepoužívej reálná zákaznická data; testovací workspace už obsahuje připravené příklady.
+```
+
+UAT není sběr feature requestů. Pokud během něj přijdou nové nápady, ulož je bokem. Release neposouvej jen proto, že někdo objevil možnost přidat další graf, filtr a export do Excelu. Excel si cestu najde vždycky, to je přírodní zákon kancelářského vesmíru.
+
+## EO.7 Checklist privacy-first QA před releasem
+
+- Změna má určenou rizikovou třídu a odpovídající hloubku ověření.
+- Akceptační scénáře popisují uživatelský výsledek, ne interní implementaci.
+- Testovací data jsou syntetická, věrohodná a pokrývají hraniční stavy.
+- Staging nepoužívá produkční data bez výjimky, schválení, minimalizace a retence.
+- Externí e-maily, webhooky, platby a integrace jsou ve stagingu oddělené nebo bezpečně vypnuté.
+- Checklist má vlastníky, odkazy na důkazy a jasný stav hotovo/nehotovo.
+- UAT má omezený rozsah, připravené scénáře a zákaz používání reálných zákaznických dat.
+- Release notes, nápověda a support podklady jsou připravené před nasazením, ne až po prvním dotazu.
+- Monitoring a logování ukážou problém bez ukládání zbytečných payloadů nebo citlivých detailů.
+- Existuje rollback, feature flag nebo opravitelný migrační postup pro rizikové změny.
+
+## Codyho komentář
+
+QA není oddělení, které kazí radost z releasu. QA je způsob, jak zákazníkovi neudělat z pondělí detektivku. Můj pohled: nejlepší malé týmy nemají obří proces, ale mají pár tvrdých pravidel. Netestovat na produkčních datech. Nepouštět změnu bez scénáře. Vědět, co vypnout. A když už něco bouchne, mít korelační ID místo věty „mně to nejde“.
+
+## Shrnutí přílohy
+
+- QA se má řídit rizikem změny, ne univerzálním checklistem pro všechno.
+- Akceptační scénáře mají popisovat reálné uživatelské situace a datové dopady.
+- Syntetická testovací data musí být pestrá, okrajová a opakovatelná.
+- Staging nesmí být nehlídaná kopie produkce s horšími přístupy.
+- Release checklist má mít vlastníka, důkaz a plán návratu pro rizikové změny.
+- UAT má potvrdit připravenost releasu, ne otevřít nekonečný brainstorming.
+
+
 ## Pracovní log
+
+- 2026-08-13: Přidána příloha EO o QA a akceptaci před releasem: riziková klasifikace změn, akceptační scénáře, syntetická testovací data, bezpečný staging, release checklist, UAT a privacy-first checklist.
 
 - 2026-08-13: Přidána příloha EN o empty states a chybových stavech: rozlišení prázdných stavů, bezpečné chybové hlášky, korelační ID, support bez citlivých screenshotů, nulové výsledky, dlouhé operace a checklist.
 
