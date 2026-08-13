@@ -23933,7 +23933,135 @@ Privacy-first přístup tady není brzda empatie. Je to její podmínka. Když l
 Zákaznické rozhovory mají zlepšit rozhodování, ne vyrábět archiv citlivých přepisů. Malý SaaS tým má začít jasnou výzkumnou otázkou, nabírat respondenty transparentně, nahrávat jen výjimečně, ptát se na skutečné chování, strukturovat anonymizované poznámky a převádět závěry na konkrétní změny. Privacy-first výzkum chrání zákazníka, tým i produktové soustředění.
 
 
+
+# Příloha FA: Produktové mikrotexty bez právní mlhy, robotického tónu a datových pastí
+
+Mikrotext je malý text s velkým dopadem: popisek tlačítka, věta pod formulářem, potvrzení akce, prázdný stav, onboardingový hint, varování před smazáním nebo drobná nápověda u citlivého pole. U SaaS produktu často rozhoduje o tom, jestli člověk akci dokončí s jistotou, nebo jestli odejde psát supportu zprávu začínající slovy „asi jsem něco pokazil“.
+
+Privacy-first produktové texty mají ještě jednu práci navíc: vysvětlit datové dopady lidsky. Ne schovat všechno do zásad ochrany osobních údajů, ale dát uživateli správnou informaci ve správný okamžik.
+
+## FA.1 Každý mikrotext má jednu práci
+
+Než napíšeš větu do rozhraní, řekni si, jakou práci má udělat. Mikrotext není dekorace. Pokud jen vyplňuje místo, pravděpodobně má zmizet.
+
+Typické práce mikrotextu:
+
+- vysvětlit, co se stane po kliknutí,
+- snížit nejistotu u citlivé akce,
+- ukázat další krok,
+- říct, proč produkt potřebuje určitý údaj,
+- zabránit chybě dřív, než vznikne,
+- potvrdit, že akce dopadla dobře,
+- přiznat limit produktu bez výmluv.
+
+Slabé: „Odeslat“.
+
+Lepší: „Poslat žádost o demo“.
+
+Ještě lepší tam, kde to pomůže rozhodnutí: „Poslat žádost o 20minutové demo“.
+
+Tlačítko nemusí být román. Ale pokud uživatel neví, co se po kliknutí stane, krátké tlačítko je jen elegantně zabalená nejistota.
+
+## FA.2 Datový mikrotext piš u místa sběru
+
+Největší chyba privacy komunikace je přesunout vše do jedné dlouhé stránky a doufat, že ji někdo přečte. Privacy stránka je důležitá, ale uživatel potřebuje kontext hlavně ve chvíli, kdy zadává údaj nebo zapíná funkci.
+
+Příklady dobrého mikrotextu:
+
+- U telefonu: „Telefon je volitelný. Použijeme ho jen, pokud chcete rychlejší domluvu.“
+- U importu kontaktů: „Kontakty použijeme pouze k vytvoření pozvánek v tomto workspace. Neodesíláme jim marketing.“
+- U AI shrnutí: „Text se použije pro vytvoření shrnutí. Do promptu neposílejte hesla, rodná čísla ani jiná citlivá data.“
+- U exportu: „Export bude dostupný 24 hodin jen pro administrátory tohoto workspace.“
+- U support access: „Dočasný přístup podpory vyprší za 2 hodiny a zapíše se do audit logu.“
+
+Dobrá věta odpovídá na tři otázky: proč údaj chceš, kdo ho uvidí a co se s ním nestane. To třetí je často nejdůležitější, protože uživatelé už viděli dost formulářů, které se tvářily nevinně a skončily v marketingovém mixéru.
+
+## FA.3 Chybové hlášky nesmí trestat uživatele za systém
+
+Špatná chyba říká „neplatná hodnota“. Dobrá chyba říká, co je špatně a jak to opravit. Výborná chyba navíc pozná, jestli problém způsobil uživatel, systém, oprávnění, síť nebo časový limit.
+
+Přepis do lidského jazyka:
+
+| Stav | Slabý text | Lepší text |
+| --- | --- | --- |
+| Povinné pole | „Required“ | „Zadejte e-mail, ať vám můžeme odpovědět.“ |
+| Špatný formát | „Invalid input“ | „E-mail vypadá neúplně. Zkontrolujte prosím zavináč a doménu.“ |
+| Oprávnění | „403“ | „Nemáte oprávnění měnit fakturaci. Požádejte administrátora workspace.“ |
+| Timeout | „Request failed“ | „Import trvá déle než obvykle. Zkusíme ho dokončit na pozadí a dáme vám vědět.“ |
+| Konflikt dat | „Conflict“ | „Někdo mezitím upravil stejný záznam. Obnovte stránku a porovnejte změny.“ |
+
+Privacy-first pravidlo: chyba nemá prozradit víc, než je nutné. U přihlášení typicky neříkej „e-mail existuje, heslo je špatně“, pokud tím pomáháš hádat účty. U podpůrných ID používej korelační identifikátor, ne výpis interních detailů nebo část tokenu. Uživatel potřebuje cestu ven, ne forenzní román.
+
+## FA.4 Potvrzení musí dát jistotu, ne jen zelenou fajfku
+
+Po důležité akci chce uživatel vědět, že se stalo správné něco, správnému objektu a s očekávaným dopadem. „Uloženo“ je někdy dost. U citlivých akcí je to málo.
+
+Lepší potvrzení:
+
+- „Fakturační e-mail změněn na finance@example.cz.“
+- „Export jsme připravili. Odkaz vyprší dnes ve 14:30.“
+- „Uživatel Petra Nováková má nově roli Čtenář. Nemůže exportovat data ani měnit billing.“
+- „Newsletter je odhlášený. Transakční e-maily k účtu budeme posílat dál.“
+- „Integraci jsme vypnuli. Nové události už neodesíláme, historické logy smažeme podle retence.“
+
+Tady se vyplatí konkrétnost. Zelený toast „Hotovo“ je hezký, ale často nic nedokazuje. Uživatel pak musí kontrolovat nastavení, reloadovat stránku nebo psát kolegovi „vidíš to taky?“. Mikrotext má šetřit práci, ne vytvářet malé detektivní úkoly.
+
+## FA.5 Neboj se říct, že něco nejde
+
+Produkt, který se tváří všemocně, ztrácí důvěru ve chvíli, kdy narazí na realitu. Dobrý mikrotext umí férově vysvětlit limit, nabídnout alternativu a nesvádět všechno na uživatele.
+
+Příklady:
+
+- „Tenhle export může spustit jen vlastník workspace. Je v něm kompletní historie fakturace.“
+- „Soubor je příliš velký pro import v prohlížeči. Nahrajte ho přes SFTP nebo ho rozdělte na menší části.“
+- „AI shrnutí není dostupné pro dokumenty označené jako vysoce citlivé.“
+- „Tuto integraci nemůžeme zapnout, dokud správce nepotvrdí zpracovatelskou smlouvu.“
+- „Smazání workspace nejde vrátit. Nejdřív si stáhněte export dat.“
+
+Férové „nejde“ je lepší než optimistické „něco se pokazilo“. U B2B SaaS zákazník často nečeká kouzlo. Čeká, že systém bude předvídatelný a nebude ho nutit hádat pravidla.
+
+## FA.6 Mikrotexty udržuj jako produktový systém
+
+Když každý tým píše texty jinak, produkt začne znít jako autobus plný lidí, kteří jedou každý jinam. Marketing slibuje „rychle a bez starostí“, aplikace hlásí „Error 500“ a právní stránka zní jako zaklínadlo z veřejné zakázky. Výsledek: menší důvěra.
+
+Zaveď jednoduchý textový systém:
+
+- slovník hlavních pojmů: workspace, účet, organizace, člen, role, export, integrace,
+- tón komunikace: věcný, klidný, bez strašení a bez falešné roztomilosti,
+- vzory pro potvrzení, varování, chyby, prázdné stavy a citlivé akce,
+- pravidlo pro datové věty: účel, rozsah, retence nebo odkaz na detail,
+- vlastnictví textů: kdo schvaluje produktové, právní a bezpečnostní formulace,
+- pravidelný úklid textů při změnách funkcí.
+
+Pro malý tým stačí Markdown soubor v repozitáři. Není potřeba hned pořizovat nástroj za cenu menšího traktoru. Důležité je, aby vývojář, designér i obchodník používali stejná slova pro stejné věci.
+
+## FA.7 Checklist produktových mikrotextů
+
+Před releasem nové obrazovky nebo flow projdi krátkou kontrolu:
+
+- Má hlavní CTA jasný slovesný popis akce?
+- Ví uživatel před kliknutím, co se stane dál?
+- Vysvětlují citlivá pole, proč data sbíráme a jak je použijeme?
+- Nejsou souhlasy, odběry nebo marketingové preference schované v nejasném textu?
+- Říkají chyby konkrétně, co opravit, bez úniku interních detailů?
+- Potvrzení důležitých akcí obsahují objekt, výsledek a případný časový limit?
+- Umí rozhraní férově vysvětlit, proč akce nejde provést?
+- Používá produkt stejné pojmy v aplikaci, e-mailech, dokumentaci a obchodních materiálech?
+- Je právní text lidsky čitelný a zároveň napojený na přesnou privacy dokumentaci?
+- Prošel mikrotext někdo, kdo nezná interní slovník týmu?
+
+## Codyho komentář
+
+Mikrotext je nejlevnější UX upgrade, který tým pořád podceňuje. Jedna dobrá věta může ušetřit support ticket, zabránit špatnému nastavení, zvýšit konverzi a snížit datové riziko. Což je docela slušný výkon na pár slov. Skoro jako kouzlo, jen bez kouře a vendor lock-inu.
+
+## Shrnutí přílohy
+
+Produktové mikrotexty pomáhají lidem bezpečně dokončit akce, pochopit datové dopady a důvěřovat produktu. Privacy-first přístup z nich dělá praktickou disciplínu: říkat pravdu ve správný okamžik, nesbírat zbytečné údaje, neukrývat rizika do právních dokumentů a držet jednotný jazyk napříč produktem, podporou i marketingem.
+
+---
+
 ## Pracovní log
+- 2026-08-13: Přidána příloha FA o produktových mikrotextech: jasná CTA, datové věty u sběru údajů, bezpečné chybové hlášky, potvrzení citlivých akcí, férové limity a checklist.
 - 2026-08-13: Přidána příloha EZ o privacy-first zákaznických rozhovorech: výzkumné rozhodnutí, transparentní nábor, střídmé nahrávání, bezpečné poznámky, AI syntéza a checklist.
 - 2026-08-13: Přidána příloha EY o privacy-first demu a trial onboardingu: jasný cíl dema, krátké lead formuláře, syntetická data, retenční stavy trialu, férový follow-up, sales mantinely a checklist.
 - 2026-08-13: Přidána příloha EX o feature flags bez produktového chaosu: účel flagu, datově střídmá segmentace, typy přepínačů, bezpečné vyhodnocení, měření, admin UI, úklid a checklist.
