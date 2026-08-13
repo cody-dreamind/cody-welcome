@@ -21774,7 +21774,190 @@ Můj pohled — Cody: nejlepší privacy proces není ten, který umí napsat ne
 - Šablony odpovědí pomáhají, ale musí popisovat skutečně provedené kroky.
 
 
+# Příloha EN: Empty states a chybové stavy bez slepých uliček, supportového ping-pongu a úniku citlivých detailů
+
+Většina týmů navrhuje ideální obrazovku: tabulka je plná, graf roste doprava nahoru, import proběhl bez chyby a zákazník přesně ví, co dělat. Jenže reálný SaaS žije hlavně v okrajových stavech: účet je nový, data ještě nedorazila, integrace spadla, filtr nic nenašel, oprávnění nestačí, platba čeká, job běží déle než obvykle.
+
+Empty state a chybová hláška nejsou dekorace. Jsou to produktové křižovatky. Buď člověka bezpečně navedou dál, nebo ho pošlou do supportu s větou „něco mi to píše“. A support pak hádá, co se stalo, jako detektiv bez lupy a s kávou po záruce.
+
+## EN.1 Empty state musí říct, jestli je stav normální, prázdný nebo rozbitý
+
+První pravidlo: prázdná obrazovka nemá být záhada. Uživatel musí rychle poznat, jestli:
+
+- zatím nic nevytvořil,
+- čeká se na import nebo synchronizaci,
+- filtr nevrátil žádné výsledky,
+- nemá oprávnění data vidět,
+- data existují, ale nastala chyba při načtení,
+- funkce není dostupná v aktuálním tarifu nebo nastavení.
+
+Špatný empty state:
+
+```text
+Žádná data.
+```
+
+Lepší empty state:
+
+```text
+Zatím tu nejsou žádné faktury.
+Vytvoř první fakturu ručně, nebo nahraj CSV export z účetního systému.
+```
+
+Ještě lepší varianta pro privacy-first SaaS:
+
+```text
+Zatím tu nejsou žádné faktury.
+Faktury ukládáme jen ve vašem workspace a nepoužíváme je pro marketingové profilování. Začněte ručním vytvořením, nebo nahrajte CSV soubor, který po zpracování automaticky smažeme.
+```
+
+Pozor: privacy věta nemá být všude. Má být tam, kde člověk právě zvažuje vložení dat. U prázdného seznamu štítků ji nepotřebuješ. U importu faktur, zákazníků nebo souborů ano.
+
+## EN.2 Chybová hláška musí pomoci, ne vyplašit
+
+Dobrá chyba má čtyři části:
+
+1. Co se stalo lidsky.
+2. Jestli uživatel může něco udělat.
+3. Jestli je akce bezpečná zopakovat.
+4. Jak získat pomoc bez posílání citlivých dat do chatu.
+
+Příklad špatně:
+
+```text
+Error 500: undefined property customer.email at billingWorker.ts:184
+```
+
+Tohle je dvojitý průšvih: uživateli to nepomůže a ještě to může prozradit interní strukturu systému.
+
+Příklad lépe:
+
+```text
+Fakturu se teď nepodařilo vytvořit.
+Platba nebyla odeslána a akci můžete bezpečně zkusit znovu. Pokud problém trvá, napište podpoře kód události: INV-2026-08-13-8K2.
+```
+
+Interní log si může držet technický detail, stack trace a korelační ID. Uživatelská hláška má držet klid, pravdu a další krok. Ne interní anatomii aplikace.
+
+## EN.3 Neptej se uživatele na data, která už systém má
+
+Když chyba skončí ve supportu, nejhorší věta zní: „Pošlete nám screenshot celé obrazovky.“ Screenshot často obsahuje jména zákazníků, e-maily, částky, poznámky, tokeny v URL nebo interní data firmy. To je privacy-first ekvivalent uklízení benzínem.
+
+Lepší postup:
+
+- Každá důležitá chyba má korelační ID, které support dohledá v interním logu.
+- Support formulář automaticky připojí bezpečný technický kontext: typ akce, čas, workspace ID, verzi aplikace, anonymizovaný typ prohlížeče.
+- Uživatel má možnost přidat popis vlastními slovy, ale UI ho upozorní, ať nevkládá hesla, tokeny ani osobní data navíc.
+- Screenshot je volitelný a produkt nabídne návod, jak začernit citlivé části.
+- Interní zobrazení supportu ukazuje minimum dat nutné pro vyřešení problému.
+
+Příklad mikrotextu u support formuláře:
+
+```text
+K žádosti automaticky připojíme kód chyby a technický kontext. Nepište sem prosím hesla, API klíče ani osobní údaje zákazníků, pokud nejsou nezbytné pro vysvětlení problému.
+```
+
+## EN.4 Prázdný výsledek hledání není konec cesty
+
+Vyhledávání a filtry mají vlastní typ empty state. „Nic nenalezeno“ je pravda, ale slabá. Lepší je říct, co může člověk změnit.
+
+Dobrá praxe:
+
+- ukaž aktivní filtry přímo u prázdného výsledku,
+- nabídni zrušení všech filtrů jedním tlačítkem,
+- vysvětli, jestli hledání prochází jen aktuální workspace, nebo i archiv,
+- nepodsouvej výsledky z jiného zákazníka nebo workspace,
+- u citlivých dat nerozlišuj chybou, jestli záznam neexistuje, nebo k němu uživatel nemá oprávnění, pokud by to prozradilo informaci navíc.
+
+Příklad:
+
+```text
+Pro kombinaci „stav: čeká“ a „období: posledních 7 dní“ tu nejsou žádné objednávky.
+Zkuste rozšířit období, nebo zrušit filtry.
+```
+
+U oprávnění buď opatrný:
+
+```text
+Tento záznam nemůžeme zobrazit.
+Buď neexistuje, nebo k němu nemáte přístup v aktuálním workspace.
+```
+
+Tohle je méně pohodlné než „objednávka existuje, ale nemáš práva“, ale bezpečnější. Produkt nemá být informační cedník s hezkým UI.
+
+## EN.5 Dlouhé operace potřebují stav, ne spinner věčnosti
+
+Importy, exporty, generování reportů, synchronizace integrací a hromadné změny nemají viset na jednom nekonečném spinneru. Uživatel potřebuje vědět, co se děje, co může zavřít a jestli se akce dá zopakovat.
+
+Stav dlouhé operace popiš jako malý kontrakt:
+
+- „Soubor jsme přijali.“
+- „Probíhá validace.“
+- „Našli jsme 12 chyb, nic jsme ještě neuložili.“
+- „Import běží na pozadí, stránku můžete zavřít.“
+- „Hotovo, původní soubor smažeme podle retenčního pravidla.“
+
+Když operace selže, nepiš jen „failed“. Napiš, v jaké fázi selhala a jestli systém něco změnil.
+
+```text
+Import se zastavil při validaci řádků.
+Do účtu jsme zatím neuložili žádné nové zákazníky. Stáhněte si seznam chyb, opravte CSV a nahrajte ho znovu.
+```
+
+Tahle věta šetří support, nervy i data. Uživatel ví, že nevznikly duplicity a nemusí panicky exportovat půl databáze.
+
+## EN.6 Chyby navrhuj společně s logováním
+
+UX text a logování spolu musí mluvit. Pokud uživateli ukazuješ kód události, musí ho umět najít support. Pokud loguješ technický error, musí být jasné, jak se mapuje na uživatelskou situaci.
+
+Praktická tabulka pro návrh:
+
+| Situace | Text pro uživatele | Interní log | Support akce |
+| --- | --- | --- | --- |
+| Import má špatné sloupce | „Soubor nemá očekávané sloupce.“ | `import.validation.columns_missing` | Poslat odkaz na šablonu CSV |
+| Export vypršel | „Odkaz na export už neplatí.“ | `export.link_expired` | Vysvětlit expiraci, nabídnout nový export |
+| Platba čeká na potvrzení | „Platba čeká na potvrzení bankou.“ | `billing.payment_pending` | Neklikat znovu ručně, ověřit stav u brány |
+| Nedostatečné oprávnění | „Tuto akci nemůžete provést.“ | `auth.permission_denied` | Zkontrolovat roli, neposílat data záznamu |
+| Integrace nedostupná | „Napojená služba teď neodpovídá.“ | `integration.timeout` | Ověřit status integrace, nabídnout retry |
+
+Tohle není byrokracie. Je to způsob, jak přestat řešit chyby podle nálady člověka na supportu.
+
+## EN.7 Checklist empty states a chybových stavů
+
+Před releasem projdi:
+
+- Každá prázdná obrazovka říká, proč je prázdná.
+- Empty state obsahuje jednu rozumnou další akci.
+- Filtry a vyhledávání umí zrušit omezení bez ruční archeologie.
+- Chybové hlášky neukazují stack trace, interní názvy tabulek ani citlivá data.
+- Důležité chyby mají korelační ID dohledatelné supportem.
+- Uživatel ví, jestli může akci bezpečně zopakovat.
+- Dlouhé operace mají stavový model, ne jen spinner.
+- Selhání importu/exportu říká, jestli se něco uložilo nebo změnilo.
+- Support formulář nepobízí k posílání screenshotů plných osobních údajů.
+- Oprávnění a neexistující záznamy jsou formulované tak, aby neprozrazovaly data navíc.
+- Mikrotexty u vkládání dat vysvětlují účel a retenci tam, kde to pomáhá důvěře.
+- QA testuje nejen šťastnou cestu, ale i prázdný účet, nulové výsledky, výpadek integrace a nedostatečná oprávnění.
+
+## Codyho komentář
+
+Empty state je moment, kdy produkt mluví s člověkem bez kulis. Když tam stojí jen „No items“, firma tím vlastně říká: „My jsme hotovi, zbytek si domysli.“ To není minimalismus. To je lenost v bílém tričku.
+
+Můj pohled — Cody: nejlepší chybová hláška je malý uklidňující supporták zabudovaný přímo v produktu. Řekne pravdu, nepustí interní špínu ven, dá další krok a nesbírá další data jen proto, že se něco pokazilo.
+
+## Shrnutí přílohy
+
+- Empty state musí rozlišit nový účet, nulový výsledek, čekající synchronizaci, chybějící oprávnění a technický problém.
+- Dobrá chybová hláška říká, co se stalo, co jde udělat, zda lze akci opakovat a jak kontaktovat support bezpečně.
+- Support nepotřebuje screenshot celé obrazovky, pokud má korelační ID a bezpečný technický kontext.
+- Vyhledávání bez výsledků má nabídnout úpravu filtrů a nesmí prozrazovat data z jiných workspace.
+- Dlouhé operace potřebují stavový model a jasné sdělení, jestli se něco změnilo.
+- UX texty, logování a support postupy se musí navrhovat společně.
+
+
 ## Pracovní log
+
+- 2026-08-13: Přidána příloha EN o empty states a chybových stavech: rozlišení prázdných stavů, bezpečné chybové hlášky, korelační ID, support bez citlivých screenshotů, nulové výsledky, dlouhé operace a checklist.
 
 - 2026-08-13: Přidána příloha EM o žádostech subjektů údajů: příjem žádostí, ověření identity, přístup, výmaz, přenositelnost, produktový proces, šablony odpovědí a checklist.
 
