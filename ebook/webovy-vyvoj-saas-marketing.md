@@ -24335,7 +24335,152 @@ Privacy-first notifikace začínají jasným účelem a končí kontrolou uživa
 
 ---
 
+# Příloha FD: Webové formuláře bez frikce, zbytečných polí a nenápadného datového vysavače
+
+Formulář je v mnoha SaaS produktech nejmenší kus rozhraní s největším obchodním dopadem. Přihlášení do dema, poptávka, registrace, pozvánka kolegy, export, žádost o podporu, změna tarifu — všude je krátký moment, kdy uživatel musí věřit, že systém rozumí jeho záměru a nevezme si víc dat, než potřebuje.
+
+Špatný formulář nevypadá vždy dramaticky. Někdy jen přidá povinný telefon, nutí uživatele vybrat kategorii, které nerozumí, schová souhlas do malého textu a po chybě vymaže rozepsanou zprávu. Výsledek? Méně konverzí, víc supportu a víc datového odpadu. To je krásná kombinace, pokud tajně provozuješ muzeum zbytečných polí. My radši ne.
+
+## FD.1 Každé pole musí mít práci
+
+Než pole přidáš, napiš si vedle něj účel. Ne obecný účel typu „lepší segmentace“, ale konkrétní rozhodnutí nebo akce, kterou díky poli uděláš.
+
+Příklad u poptávkového formuláře:
+
+| Pole | Rozumný účel | Lepší alternativa, pokud účel chybí |
+| --- | --- | --- |
+| Jméno | Lidské oslovení v odpovědi | Pokud řešíš čistě technický request, může být volitelné |
+| E-mail | Doručení odpovědi | Bez něj poptávka nedává smysl |
+| Telefon | Domluva hovoru, když si ji člověk přeje | Volitelný checkbox „Chci zavolat“ |
+| Firma / web | Rychlý kontext B2B poptávky | Volitelné pole s vysvětlením |
+| Rozpočet | Kvalifikace rozsahu projektu | Rozsahy místo přesné částky, nebo dotaz až ve druhém kroku |
+| Marketingový souhlas | Odběr novinek | Samostatný nepovinný opt-in, nikdy podmínka poptávky |
+
+Privacy-first pravidlo: pokud bys neuměl uživateli během pěti sekund vysvětlit, proč pole potřebuješ, pole zatím nepatří do formuláře. Interní pohodlí není automaticky dost dobrý důvod.
+
+## FD.2 Povinná pole drž jako nouzový režim
+
+Povinné pole je závazek: bez něj systém neumí pokračovat. Všechno ostatní má být volitelné, odložené nebo vyřešené později v konverzaci.
+
+U první konverze často stačí:
+
+- e-mail,
+- krátká zpráva nebo výběr hlavního problému,
+- případně jméno, pokud navazuje osobní komunikace.
+
+U trial registrace často stačí:
+
+- e-mail,
+- heslo nebo magic link,
+- souhlas s podmínkami služby,
+- až po vstupu do produktu doplnění workspace názvu, role a prvního cíle.
+
+Neptej se na fakturační údaje dřív, než člověk vybírá placený tarif. Neptej se na velikost týmu, pokud podle ní hned neměníš onboarding. Neptej se na telefon jen proto, že obchodní oddělení má rádo telefon. Obchodní oddělení má rádo ledacos, třeba i tabulky s třiceti sloupci. To neznamená, že je má vyplňovat uživatel.
+
+## FD.3 Vysvětluj sběr dat přímo u místa sběru
+
+Zásady ochrany osobních údajů jsou nutné, ale ve formuláři nestačí. Uživatel potřebuje mikrovysvětlení ve chvíli, kdy se rozhoduje.
+
+Dobré mikrotexty:
+
+- „E-mail použijeme jen pro odpověď na poptávku.“
+- „Telefon je volitelný. Vyplň ho jen tehdy, pokud chceš zavolat.“
+- „Web firmy nám pomůže připravit konkrétnější návrh.“
+- „Newsletter posíláme maximálně párkrát měsíčně a odhlášení je jedním klikem.“
+
+Špatné mikrotexty:
+
+- „Vyplněním souhlasíte se zpracováním osobních údajů.“
+- „Povinné pro lepší služby.“
+- „Pro interní účely.“
+- „Souhlasím s obchodními sděleními a zpracováním údajů“ jako jeden slepený checkbox.
+
+Mikrotext nemá být právní mlha. Má uživateli dát jistotu, co se stane. Právní detail může být v odkazu, ale lidské vysvětlení patří na místo akce.
+
+## FD.4 Chyby mají zachránit rozpracovanou práci
+
+Formulářová chyba nesmí být trest. Když uživatel udělá překlep, systém má pomoct, ne ho poslat zpátky na start.
+
+Praktická pravidla:
+
+- Validuj co nejdřív, ale neruš při psaní každého znaku.
+- Ukaž chybu u konkrétního pole, ne jen nahoře jako „formulář obsahuje chyby“.
+- Zachovej vyplněná data po neúspěšném odeslání.
+- Rozliš chybu uživatele, chybu serveru a dočasný výpadek.
+- U kritických akcí dej jasně vědět, jestli se akce provedla, neprovedla, nebo čeká.
+
+Bezpečný příklad:
+
+> E-mail nevypadá správně. Zkontroluj prosím překlep, třeba chybějící zavináč.
+
+Nevhodný příklad:
+
+> Neplatný vstup.
+
+Ještě horší příklad:
+
+> Uživatel s tímto e-mailem u zákazníka Novák s.r.o. existuje, ale nemá oprávnění.
+
+Chybová hláška nesmí prozrazovat informace, které by útočník mohl zneužít. U přihlášení, obnovy hesla nebo pozvánek do workspace je lepší neutrální text: „Pokud účet existuje, poslali jsme další instrukce.“
+
+## FD.5 Antispam řeš bez šmírovacího poplatku
+
+Formuláře potřebují ochranu proti spamu, ale výchozí odpověď nemusí být invazivní widget třetí strany. Začni méně agresivními vrstvami a přidávej obranu podle skutečného rizika.
+
+Privacy-first vrstvy ochrany:
+
+- honeypot pole skryté pro lidi, ale viditelné pro jednoduché boty,
+- časové pravidlo pro podezřele rychlé odeslání,
+- rate limiting podle kombinace IP, formuláře a časového okna,
+- serverová validace povinných polí a délky textu,
+- ruční moderace u nízkého objemu,
+- dočasné zpřísnění jen při útoku.
+
+Pokud nasazuješ externí ochranu, polož stejné otázky jako u analytiky: jaká data odcházejí, kam, na jak dlouho, pod jakou smlouvou a jestli existuje evropská nebo self-hostovaná alternativa. Bezpečnost není výmluva pro nekonečné předávání dat.
+
+## FD.6 Formulář musí být přístupný i bez myši a magie
+
+Přístupnost není dekorace. Dobře navržený formulář funguje rychleji pro všechny: na mobilu, s klávesnicí, se čtečkou obrazovky, při špatném připojení i v momentě, kdy má uživatel za sebou dvanáctý meeting a mozková kapacita připomíná vybitý router.
+
+Základ:
+
+- Každé pole má viditelný label, ne jen placeholder.
+- Tab pořadí odpovídá vizuálnímu pořadí.
+- Chyby jsou čitelné textem, ne jen červenou barvou.
+- Tlačítko říká akci: „Odeslat poptávku“, „Vytvořit workspace“, „Uložit změny“.
+- Po odeslání se fokus přesune na potvrzení nebo první chybu.
+- Formulář funguje i bez marketingových skriptů a externích embedů.
+
+Placeholder má ukazovat příklad, ne nahrazovat popisek. Jakmile uživatel začne psát, placeholder zmizí — a s ním často i kontext. To je UX verze toho, když někdo schová návod do šuplíku a řekne „vždyť to bylo jasné“.
+
+## FD.7 Checklist privacy-first formuláře
+
+Před spuštěním projdi formulář jako produktovou i datovou funkci:
+
+- Má formulář jeden jasný účel?
+- Má každé pole konkrétní práci?
+- Jsou povinná jen opravdu nutná pole?
+- Vysvětluje mikrotext, proč se citlivější údaj sbírá?
+- Je marketingový souhlas samostatný a nepovinný?
+- Zůstávají vyplněné hodnoty zachované po chybě?
+- Jsou chybové hlášky užitečné, ale neprozrazují citlivé informace?
+- Funguje formulář klávesnicí a na mobilu?
+- Je antispam přiměřený riziku a neposílá data třetím stranám zbytečně?
+- Víš, kde skončí odeslaná data, kdo k nim má přístup a kdy se mažou?
+
+## Codyho komentář
+
+Formulář je malá zkouška firemní kultury. Když už při prvním kontaktu nutíš člověka vyplnit zbytečný telefon, schovat se za univerzální souhlas a bojovat s nejasnou chybou, říkáš mu něco o budoucí spolupráci. Bohužel ne to, co chceš. Dobrý privacy-first formulář je krátký, poctivý a klidný. Přesně tak má vypadat první podání ruky na webu.
+
+## Shrnutí přílohy
+
+Webové formuláře nejsou jen UI detail. Rozhodují o konverzi, důvěře, kvalitě dat i právní hygieně. Malý tým má začít u účelu každého pole, minimalizovat povinné údaje, vysvětlovat sběr dat lidsky, chránit rozpracovanou práci při chybách, řešit antispam přiměřeně a testovat přístupnost jako součást kritické cesty.
+
+---
+
 ## Pracovní log
+
+- 2026-08-13: Přidána příloha FD o webových formulářích bez frikce a zbytečného sběru dat: účel polí, povinné údaje, mikrotexty, chyby, antispam, přístupnost a privacy-first checklist.
 - 2026-08-13: Přidána příloha FC o privacy-first notifikacích v SaaS: účel zpráv, typy komunikace, volba kanálu, preference centrum, digesty, bezpečné šablony, střídmé měření a checklist.
 - 2026-08-13: Přidána příloha FB o prázdných stavech v SaaS: první použití, filtry, oprávnění, bezpečné ukázkové datasety, jednoduché CTA, testování prázdných účtů a privacy-first checklist.
 - 2026-08-13: Přidána příloha FA o produktových mikrotextech: jasná CTA, datové věty u sběru údajů, bezpečné chybové hlášky, potvrzení citlivých akcí, férové limity a checklist.
