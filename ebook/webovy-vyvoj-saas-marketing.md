@@ -22108,7 +22108,139 @@ QA není oddělení, které kazí radost z releasu. QA je způsob, jak zákazní
 - UAT má potvrdit připravenost releasu, ne otevřít nekonečný brainstorming.
 
 
+---
+
+# Příloha EP: Obnova účtu a podpora přístupu bez identity divadla, sociálního inženýrství a úniku dat
+
+Ztracený přístup je jeden z nejcitlivějších momentů SaaS produktu. Uživatel je nervózní, support chce pomoct rychle a útočník doufá, že někdo ve stresu obejde pravidla. Obnova účtu proto nesmí být improvizace typu „pošlete nám prosím e-mail a my to nějak přepneme“. To je hezké až do chvíle, kdy někdo přesvědčivě zahraje majitele firmy a odnese si workspace jako konferenční propisku.
+
+Privacy-first obnova přístupu má dvě roviny: pomáhá oprávněnému člověku zpět do práce a zároveň chrání ostatní uživatele, zákaznická data, fakturaci i auditní stopu. Nejde o to dělat z každého zapomenutého hesla kriminalistickou rekonstrukci. Jde o to mít jasné kroky podle rizika.
+
+## EP.1 Rozliš běžnou obnovu, citlivou obnovu a převzetí workspace
+
+Ne každá žádost o přístup má stejné riziko. Reset hesla pro běžného uživatele je něco jiného než změna vlastníka účtu, vypnutí vícefaktorového ověření nebo přidání nového administrátora do firemního workspace. Pokud všechny situace řeší stejný formulář, support dřív nebo později udělá drahou laskavost špatnému člověku.
+
+Praktické rozdělení:
+
+| Situace | Riziko | Doporučený postup |
+| --- | --- | --- |
+| Uživatel zapomněl heslo | Nízké až střední | Samoobslužný reset přes ověřený e-mail, krátká platnost odkazu |
+| Ztracený přístup k e-mailu | Střední | Ověření přes přihlášenou session, existujícího admina nebo fakturační kontakt |
+| Vypnutí MFA | Vysoké | Čekací lhůta, potvrzení přes druhý kanál, auditní záznam |
+| Přidání admina | Vysoké | Schválení existujícím vlastníkem nebo předem definovaný proces |
+| Převod vlastnictví workspace | Kritické | Vícekrokové ověření, interní schválení, zákaznické potvrzení, časová stopa |
+
+Nejlepší obnova účtu je samoobslužná tam, kde riziko dovolí, a ručně schvalovaná tam, kde by chyba znamenala převzetí dat. Rychlost je důležitá, ale ne tak důležitá jako fakt, že účet zůstane správnému člověku.
+
+## EP.2 Reset hesla navrhni jako krátkou jednorázovou cestu
+
+Reset hesla má být jednoduchý: uživatel zadá e-mail, dostane odkaz, nastaví nové heslo a staré reset tokeny přestanou platit. Žádné bezpečnostní otázky typu „jméno prvního psa“, protože odpověď je často veřejná, uhodnutelná nebo zapomenutá i samotným uživatelem. Pes se omlouvá, ale není identity provider.
+
+Dobrá pravidla pro reset:
+
+- Odpověď formuláře neprozrazuje, jestli e-mail v systému existuje.
+- Reset odkaz má krátkou platnost a je použitelný jen jednou.
+- Po úspěšném resetu se zneplatní ostatní reset odkazy.
+- U citlivějších účtů se po resetu ukončí aktivní session nebo se aspoň nabídne jejich kontrola.
+- Uživatel dostane transakční e-mail o změně hesla s informací, co dělat, pokud změnu neprovedl.
+- Reset token se nikdy neloguje v plné podobě a neukládá jako čitelný text.
+
+Text ve formuláři drž neutrální:
+
+```text
+Pokud u nás účet s tímto e-mailem existuje, pošleme odkaz pro nastavení nového hesla. Odkaz má omezenou platnost a funguje jen jednou.
+```
+
+Tohle chrání před enumerací účtů a zároveň uživatele zbytečně neděsí.
+
+## EP.3 MFA recovery není tlačítko „support obejde bezpečnost“
+
+Vícefaktorové ověření chrání účet právě tehdy, když heslo nestačí. Pokud ho support umí vypnout po jednom prosebném e-mailu, MFA je spíš dekorace než ochrana. U malého SaaS týmu musí být postup pro ztracený druhý faktor napsaný dopředu.
+
+Doporučený baseline:
+
+- Při zapnutí MFA nabídni recovery kódy a jasně vysvětli, že je má uživatel uložit mimo produkt.
+- Pokud uživatel recovery kód použije, označ ho jako spotřebovaný a doporuč vygenerovat nové kódy.
+- Vypnutí MFA přes support dovol jen po ověření rizika a s auditním záznamem.
+- U adminů přidej čekací lhůtu nebo potvrzení přes existujícího vlastníka workspace.
+- Po vypnutí MFA pošli upozornění vlastníkovi účtu nebo workspace.
+
+Příklad support pravidla:
+
+```text
+Support nesmí vypnout MFA jen na základě volného e-mailu. U běžného uživatele musí existovat potvrzení z ověřeného kanálu nebo schválení adminem workspace. U vlastníka workspace je potřeba interní schválení a záznam důvodu.
+```
+
+Ano, občas to zpomalí pomoc. Ale pokud někdo přes support obejde MFA a stáhne export zákaznických dat, budeš si přát, aby proces byl pomalejší už včera.
+
+## EP.4 Support nesmí vidět víc dat jen proto, že řeší přístup
+
+Při obnově účtu support často potřebuje kontext: kdo píše, ke kterému workspace patří, jaká je role, kdy proběhl poslední pokus o přihlášení. Nepotřebuje vidět celé zákaznické dokumenty, faktury, zprávy nebo produkční obsah. Přístupová podpora má mít vlastní, omezený pohled.
+
+Support panel pro přístup by měl ukázat:
+
+- ID uživatele, e-mail a stav účtu,
+- role ve workspace a vlastníka workspace,
+- stav MFA a dostupnost recovery kódů bez jejich zobrazení,
+- poslední bezpečnostní události v agregované podobě,
+- jestli je účet blokovaný, deaktivovaný nebo pozvaný,
+- bezpečné akce typu „poslat reset odkaz“ nebo „označit k ručnímu ověření“.
+
+Neměl by ukázat:
+
+- celé reset tokeny, session tokeny nebo recovery kódy,
+- zákaznický obsah nesouvisející s přístupem,
+- plné platební údaje,
+- skryté poznámky supportu jiných zákazníků,
+- interní debug hodnoty, které by šly použít k obejití kontroly.
+
+Privacy-first pravidlo: support má dostat minimum dat pro bezpečné rozhodnutí, ne mikroskop do cizí kanceláře.
+
+## EP.5 Převod vlastnictví workspace řeš jako právně-provozní akci
+
+Největší průšvih není zapomenuté heslo. Největší průšvih je převést workspace na někoho, kdo na něj nemá nárok. Typické situace: majitel odešel z firmy, firma změnila doménu, účetní potřebuje faktury, externista založil workspace na svůj e-mail, nebo se rozpadlo partnerství. Zní to jako support ticket. Ve skutečnosti je to správa oprávnění a někdy i právní otázka.
+
+Bezpečný postup:
+
+1. Zjisti, kdo je aktuální vlastník a kdo jsou existující admini.
+2. Preferuj schválení od existujícího vlastníka nebo admina.
+3. Pokud to nejde, vyžádej si doklad oprávnění k organizaci jen v nezbytném rozsahu.
+4. Než převod provedeš, pošli upozornění na původní kontakty, pokud to neohrozí bezpečnost.
+5. Nastav čekací lhůtu u sporných nebo vysoce rizikových případů.
+6. Zapiš důvod, ověřovací kroky, schvalovatele a čas změny.
+7. Po převodu pošli potvrzení a doporuč kontrolu uživatelů, API klíčů a aktivních session.
+
+Neukládej kopie dokladů déle, než je nutné. Pokud stačí záznam „ověřeno podle veřejného obchodního rejstříku a fakturačního kontaktu“, není důvod držet citlivé přílohy v support nástroji navždy.
+
+## EP.6 Checklist obnovy účtu a podpory přístupu
+
+- Reset hesla neprozrazuje existenci účtu a používá krátkodobé jednorázové tokeny.
+- Reset tokeny, session tokeny a recovery kódy se nelogují v čitelné podobě.
+- Po citlivé změně jde uživateli bezpečnostní upozornění.
+- MFA recovery má jasný proces, recovery kódy a pravidla pro ruční výjimky.
+- Support nemůže vypnout MFA nebo převést vlastnictví jen na základě volného e-mailu.
+- Support panel ukazuje jen data potřebná k řešení přístupu.
+- Převod workspace má vícekrokové ověření, auditní stopu a možnost interního schválení.
+- U sporných převodů existuje čekací lhůta nebo eskalace.
+- Dočasné doklady a přílohy k ověření mají jasnou retenci a mazání.
+- Po obnově přístupu uživatel vidí nebo dostane doporučení zkontrolovat session, zařízení, API klíče a členy workspace.
+
+## Codyho komentář
+
+Obnova účtu je místo, kde se láme rozdíl mezi „jsme uživatelsky příjemní“ a „jsme příjemní i pro útočníka“. Můj pohled: dobrý support není ten, který obejde pravidla nejrychleji. Dobrý support je ten, který má pravidla tak jasná, že může pomoct rychle tam, kde je to bezpečné, a říct „tady potřebujeme ověření“ tam, kde by laskavost otevřela dveře do cizích dat.
+
+## Shrnutí přílohy
+
+- Obnova přístupu musí rozlišovat riziko běžného resetu, MFA recovery a převodu workspace.
+- Reset hesla má být jednorázový, krátký, neutrální a bez prozrazování existence účtu.
+- MFA recovery nesmí být support zkratka, která ruší hlavní bezpečnostní pojistku.
+- Support potřebuje omezený přístupový pohled, ne plný vhled do zákaznických dat.
+- Převod vlastnictví workspace je citlivá provozní akce s ověřením, stopou a retencí dokladů.
+
+
 ## Pracovní log
+
+- 2026-08-13: Přidána příloha EP o obnově účtu a podpoře přístupu: rizikové scénáře, bezpečný reset hesla, MFA recovery, omezený support pohled, převod vlastnictví workspace a privacy-first checklist.
 
 - 2026-08-13: Přidána příloha EO o QA a akceptaci před releasem: riziková klasifikace změn, akceptační scénáře, syntetická testovací data, bezpečný staging, release checklist, UAT a privacy-first checklist.
 
