@@ -23572,7 +23572,169 @@ Feature flagy jsou skvělý sluha a strašně kreativní původce bordelu. Můj 
 Feature flags pomáhají vydávat bezpečněji, pokud mají jasný účel, vlastníka, audit a plán odstranění. Segmentace má být srozumitelná a datově střídmá. Experimenty, release flagy a oprávnění nepatří do jednoho pytle. A každý dočasný flag by měl mít svůj malý náhrobek už v den narození.
 
 
+
+# Příloha EY: Demo a trial onboarding bez leadového vysavače, falešných slibů a datového dluhu
+
+Demo a trial jsou často první chvíle, kdy zákazník přestane číst marketing a začne zkoušet realitu. Tady se láme důvěra. Pokud ho hned přivítá formulář na deset polí, povinný telefon, automatické přihlášení do pěti mailing sekvencí a produkt, který bez ukázkových dat vypadá jako prázdná garáž, máš problém. Ne technický. Vztahový.
+
+Privacy-first demo neznamená schovat produkt za plot a doufat, že si lidé napíšou o prezentaci. Znamená ukázat hodnotu rychle, sbírat jen data nutná pro další krok a nepředstírat, že každé kliknutí v trialu je pozvánka k obchodnímu pronásledování. Trial má být bezpečná ochutnávka produktu, ne neviditelný konkurz na to, kolik dat o sobě zákazník vydá.
+
+## EY.1 Nejdřív rozhodni, co má demo dokázat
+
+Demo bez cíle se snadno změní v produktovou prohlídku: „Tady máme dashboard, tady nastavení, tady export, tady modul, který nikdo nepoužívá, ale je hezké ho ukázat.“ Jenže zákazník nechce absolvovat muzeum funkcí. Chce zjistit, jestli mu produkt vyřeší konkrétní problém.
+
+Před tvorbou dema si napiš jednu větu:
+
+> „Po pěti minutách má návštěvník pochopit, že umíme vyřešit ____ bez ____.“
+
+Příklady:
+
+- „Po pěti minutách má majitel agentury pochopit, že umíme sledovat projektové rozpočty bez ručního přepisování tabulek.“
+- „Po pěti minutách má provozní manažer pochopit, že umíme hlídat incidenty bez posílání zákaznických dat do podpory.“
+- „Po pěti minutách má zakladatel SaaS pochopit, že umíme publikovat changelog bez závislosti na sociálních sítích.“
+
+Z té věty pak odvodíš scénář dema:
+
+| Krok | Otázka | Výstup |
+| --- | --- | --- |
+| Kontext | Jaký problém ukazujeme? | Jedna situace zákazníka. |
+| Akce | Co uživatel udělá sám? | Jeden jasný úkol, ne tour po menu. |
+| Výsledek | Co má být vidět? | Měřitelný nebo hmatatelný přínos. |
+| Další krok | Co má následovat? | Trial, konzultace, objednávka nebo dokumentace. |
+
+Codyho pravidlo: demo má být jako dobrý trailer. Ukáže konflikt, řešení a chuť pokračovat. Nemá převyprávět celý film i titulky.
+
+## EY.2 Lead formulář drž krátký a poctivý
+
+Nejhorší demo formuláře chtějí všechno hned: jméno, firmu, telefon, velikost týmu, obrat, rozpočet, počet zaměstnanců, oblíbenou barvu CRM a duši prvorozeného zákazníka. Prakticky to často znamená nižší důvěru a hromadu dat, která nikdo neudržuje aktuální.
+
+Pro první demo obvykle stačí:
+
+- pracovní e-mail,
+- jméno nebo oslovení,
+- volitelně firma,
+- volitelně krátká otázka „Co chcete vyřešit?“.
+
+Telefon nech volitelný, pokud není opravdu nutný pro domluvenou konzultaci. Rozpočet ptej až ve chvíli, kdy dává smysl řešit fit. Velikost firmy může být užitečná, ale často ji zjistíš z domény nebo z konverzace — a někdy ji nepotřebuješ vůbec.
+
+Dobrá mikrocopy:
+
+> „E-mail použijeme jen k poslání odkazu na demo a navazující odpovědi. Nepřidáme vás automaticky do newsletteru.“
+
+Ještě lepší je oddělit obchodní follow-up od marketingového odběru. Pokud chceš newsletter, dej samostatný nepředvyplněný souhlas. Ano, je to méně agresivní. Přesně o to jde.
+
+## EY.3 Ukázková data mají být realistická, ne osobní
+
+Trial bez dat je smutný. Uživatel se přihlásí, vidí prázdnou obrazovku a produkt se tváří: „Tak si mě nějak představ.“ To je pohodlné pro vývojáře a kruté pro zákazníka.
+
+Řešení je ukázkový workspace se syntetickými daty:
+
+- fiktivní firmy a kontakty,
+- realistické projekty, faktury, incidenty nebo kampaně,
+- předem připravené stavy, které ukazují hodnotu produktu,
+- jasné označení, že jde o demo data,
+- rychlé tlačítko „Vymazat ukázková data“ nebo „Začít s čistým účtem“.
+
+Nepoužívej anonymizované kopie produkce jako zkratku. U malého týmu to vypadá lákavě, protože „stačí přepsat jména“. Jenže osobní a obchodně citlivé informace se často schovávají v poznámkách, názvech souborů, URL, volném textu, metadatech nebo kombinaci hodnot. Syntetický dataset je nudnější na přípravu, ale bezpečnější na život.
+
+Mini scénář pro B2B SaaS trial:
+
+1. Po registraci nabídni dvě cesty: „Prohlédnout ukázkový workspace“ a „Nastavit vlastní workspace“.
+2. V ukázkovém workspace ukaž tři hotové případy použití.
+3. U každého případu přidej krátký text: problém, akce, výsledek.
+4. Když uživatel začne zadávat vlastní data, jasně odděl demo od reálného účtu.
+5. Po skončení trialu nabídni export nebo smazání dat bez supportového ping-pongu.
+
+## EY.4 Trial nemá být past na data
+
+Trial často začne férově a skončí jako retenční bažina. Zákazník nahraje data, pozve kolegy, propojí integraci — a při odchodu zjistí, že export je „na vyžádání“, smazání „řeší podpora“ a účet se „pozastaví“, což v překladu znamená „data si necháme, kdyby se někdy vrátil“.
+
+Privacy-first trial má mít jasné stavy:
+
+| Stav | Co se děje s daty | Co vidí uživatel |
+| --- | --- | --- |
+| Aktivní trial | Data slouží k vyzkoušení produktu. | Datum konce trialu a možnosti exportu. |
+| Trial končí | Produkt upozorní na další kroky. | Upgrade, export, prodloužení nebo smazání. |
+| Trial vypršel | Přístup může být omezený, data dočasně uložená. | Jasná retenční lhůta a akce. |
+| Účet smazán | Data jsou odstraněná podle pravidel služby. | Potvrzení a co případně zůstává v účetních/logovacích systémech. |
+
+Důležité je říct to normálně. Ne „Vaše data mohou být uchována v souladu s interními procesy“. Raději:
+
+> „Po skončení trialu uchováme workspace 30 dní, abyste se mohli vrátit nebo exportovat data. Potom ho smažeme. Technické logy držíme odděleně po omezenou dobu kvůli bezpečnosti.“
+
+Pokud máš jinou lhůtu, napiš jinou. Hlavně ji měj skutečně zavedenou v systému, ne jen v dokumentu, který nikdo nečetl od doby, kdy se ještě říkalo „growth hacking“ bez ironie.
+
+## EY.5 Obchodní follow-up musí respektovat kontext
+
+Když si někdo otevře trial, neznamená to automaticky, že chce pět e-mailů, tři telefonáty a LinkedIn pozvánku od člověka, kterého nikdy neviděl. Follow-up může být užitečný, když pomáhá. Je otravný, když simuluje naléhavost.
+
+Dobrá follow-up sekvence pro trial:
+
+| Čas | Zpráva | Účel |
+| --- | --- | --- |
+| Ihned | Odkaz do účtu + první doporučený krok | Pomoci začít. |
+| Den 2 | Jeden praktický tip podle zvolené cesty | Ukázat hodnotu bez tlaku. |
+| Den 5 | Nabídka konzultace nebo odpovědi na otázku | Odstranit překážku. |
+| Před koncem | Připomenutí konce trialu, exportu a možností | Férově informovat. |
+| Po konci | Stručné uzavření a volba dalšího kroku | Respektovat rozhodnutí. |
+
+Co do e-mailu nepatří:
+
+- tajné sledovací pixely,
+- „viděli jsme, že jste klikli na…“ formulované strašidelně,
+- nátlakové odpočty bez reálného důvodu,
+- automatické přihlášení k marketingu,
+- sdílení trial aktivity s nástroji, které k tomu nejsou nutné.
+
+Měřit můžeš i střídmě: doručitelnost, odpovědi, aktivace klíčového kroku, přechod na placený tarif. Nepotřebuješ psychoanalýzu každého hoveru myší.
+
+## EY.6 Sales demo má mít datové mantinely
+
+U větších B2B zákazníků často probíhá živé demo nebo konzultace. Tam vzniká jiný typ rizika: zákazník nasdílí obrazovku s reálnými daty, pošle export, popíše interní procesy nebo nahraje dokumenty „jen pro ukázku“. Pokud nemáš mantinely, obchodní fáze se stane neformálním sběrem citlivých informací.
+
+Praktická pravidla:
+
+- Před schůzkou napiš, že zákazník nemá posílat produkční osobní data, pokud to není nutné.
+- Pro analýzu používej šablonu s anonymizovaným příkladem.
+- Nahrávky schůzek zapínej jen s jasným souhlasem a účelem.
+- Interní poznámky piš tak, aby neobsahovaly zbytečné osobní detaily.
+- Pokud zákazník pošle soubor, nastav mu vlastníka, účel a datum smazání.
+- Po uzavření obchodní příležitosti smaž materiály, které už nemají důvod zůstat.
+
+Krátká věta do pozvánky:
+
+> „Kvůli ochraně dat prosím na schůzce nesdílejte osobní údaje zákazníků ani interní exporty, pokud jsme se na tom předem nedomluvili. Stačí anonymizovaný příklad.“
+
+Tohle nepůsobí méně profesionálně. Naopak. Říká to: víme, že data nejsou konfety.
+
+## EY.7 Checklist privacy-first dema a trialu
+
+Před spuštěním dema nebo trialu zkontroluj:
+
+- Demo má jednu jasnou větu, co má zákazník pochopit.
+- První formulář sbírá jen data nutná pro doručení dema nebo založení účtu.
+- Newsletter nebo marketingový odběr je oddělený a nepředvyplněný.
+- Trial obsahuje syntetická ukázková data, ne kopii produkce.
+- Uživatel ví, kdy trial končí a co se stane s jeho daty.
+- Existuje jednoduchý export nebo žádost o smazání bez supportového bludiště.
+- Follow-up e-maily pomáhají s aktivací, nevyhrožují a nešmírují.
+- Sales tým má pravidla pro nahrávky, sdílené soubory a poznámky.
+- Demo workspace jde pravidelně resetovat a neobsahuje reálné zákaznické údaje.
+- Po vypršení trialu běží skutečný úklid dat podle nastavené retence.
+
+## Codyho komentář
+
+Trial je slib v praxi. Marketing říká „jsme jednoduchý, bezpečný a férový produkt“ — trial pak ukáže, jestli je to pravda, nebo jen hezká věta na hero sekci. Můj pohled — Cody: nejlepší trial není ten, který vytěží nejvíc lead dat. Nejlepší trial je ten, po kterém i člověk, který nekoupí, řekne: „Tohle bylo srozumitelné a fér.“ Takový člověk se může vrátit. Člověk, kterého nahání automatizace jako hladový vysavač, se vrátí maximálně v hororovém snu.
+
+Privacy-first bonus: dobré demo snižuje potřebu sales calls, zbytečných exportů, nahrávek a ručního posílání dat. Když produkt vysvětlí hodnotu sám a bezpečně, obchod má méně citlivého materiálu rozházeného po inboxech. A inbox jako datové skladiště je přesně ten druh pekla, kde compliance pláče do kafe.
+
+## Shrnutí přílohy
+
+Demo a trial nejsou jen akviziční nástroje. Jsou to první provozní testy důvěry. Malý SaaS tým má ukázat hodnotu rychle, sbírat minimum dat, používat syntetické ukázky, férově vysvětlit retenci a oddělit pomocný follow-up od marketingového lovu. Privacy-first onboarding není brzda růstu; je to způsob, jak zákazníkovi už od prvního kliknutí ukázat, že produkt bere jeho data vážně.
+
+
 ## Pracovní log
+- 2026-08-13: Přidána příloha EY o privacy-first demu a trial onboardingu: jasný cíl dema, krátké lead formuláře, syntetická data, retenční stavy trialu, férový follow-up, sales mantinely a checklist.
 - 2026-08-13: Přidána příloha EX o feature flags bez produktového chaosu: účel flagu, datově střídmá segmentace, typy přepínačů, bezpečné vyhodnocení, měření, admin UI, úklid a checklist.
 
 - 2026-08-13: Obnovena poškozená aktuální verze e-booku z posledního zdravého commitu a přidána příloha EW o secrets a provozní konfiguraci: kategorizace hodnot, `.env.example`, validační start, vlastníci tajemství, rotace, CI/CD, lokální vývoj, logování a privacy-first checklist.
