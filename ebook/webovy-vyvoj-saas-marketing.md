@@ -23359,7 +23359,221 @@ Privacy-first bonus: dobrá správa tajemství snižuje počet lidí a systémů
 
 Secrets nejsou jen technický detail pro deploy. Jsou to klíče k datům, účtům, integracím a důvěře zákazníků. Malý SaaS tým potřebuje jednoduchý systém: kategorizovat konfiguraci, nedávat tajemství do repozitáře, validovat runtime hodnoty, omezit CI přístupy, mít vlastníky a umět rotovat bez paniky. Privacy-first provoz znamená, že tajemství jsou spravovaná stejně pečlivě jako osobní data, protože často rozhodují o tom, kdo se k nim dostane.
 
+
+# Příloha EX: Feature flags bez produktového chaosu, tajných experimentů a datových překvapení
+
+Feature flag je obyčejný přepínač. V praxi ale často rozhoduje o tom, kdo uvidí novou funkci, kdo dostane jiný onboarding, komu se zapne integrace a kdo potichu spadne do experimentální větve. To už není jen technická drobnost v konfiguraci. To je produktové, bezpečnostní a privacy rozhodnutí v jednom malém vypínači. Takový vypínač si zaslouží víc respektu než náhodné `if (enabled)` schované v kódu jako ponožka za pračkou.
+
+Privacy-first přístup k feature flags neznamená nepoužívat je. Naopak: dobré flagy pomáhají vydávat menší změny, rychle vypnout rizikovou funkci a postupně ověřovat hodnotu bez velkého třesku. Jen musí být navržené tak, aby nepřidávaly skryté profilování, nesbíraly zbytečná data a nezůstávaly v produktu navždy.
+
+## EX.1 Nejdřív si napiš účel flagu
+
+Každý flag má mít jasný důvod. Pokud ho neumíš vysvětlit jednou větou, pravděpodobně zakrývá nerozhodnost, ne riziko.
+
+Dobré účely:
+
+- postupné spuštění nové funkce pro omezenou skupinu zákazníků,
+- rychlé vypnutí rizikové integrace bez redeploye,
+- oddělení placených funkcí od technického releasu,
+- interní dogfooding před veřejným spuštěním,
+- řízený přechod mezi starou a novou implementací.
+
+Slabé účely:
+
+- „Možná se to bude hodit.“
+- „Necháme to tam, kdyby něco.“
+- „Marketing chce zkusit jiný text pro každého uživatele, ale nevíme proč.“
+- „Nemáme čas uklidit starý kód.“
+
+Praktická šablona:
+
+| Pole | Příklad |
+| --- | --- |
+| Název flagu | `billing_v2_invoice_export` |
+| Účel | Zapnout nový export faktur pro první B2B zákazníky. |
+| Vlastník | Produkt + backend maintainer. |
+| Cílová skupina | Konkrétní workspace ID, ne náhodné behaviorální segmenty. |
+| Datum revize | 30 dní po spuštění. |
+| Plán odstranění | Po stabilním nasazení převést na výchozí chování a smazat starou větev. |
+
+Codyho pravidlo: flag bez vlastníka je budoucí archeologická památka. Hezká pro muzeum, horší pro produkci.
+
+## EX.2 Segmentace nesmí být tajné profilování
+
+Feature flags často svádí k segmentům typu „uživatelé, kteří klikli na tři věci, mají vysokou aktivitu a jsou z Německa“. Někdy to dává produktový smysl, ale privacy-first tým začne jednodušší otázkou: opravdu potřebujeme rozhodovat podle chování jednotlivce?
+
+Preferuj segmentaci podle nízkorizikových a vysvětlitelných kritérií:
+
+- konkrétní testovací workspace,
+- interní účty,
+- zákazníci, kteří o preview výslovně požádali,
+- tarif nebo zakoupený modul,
+- technická kompatibilita, například zapnutá integrace.
+
+Buď opatrný u kritérií jako:
+
+- přesná poloha,
+- detailní historie kliků,
+- scoring „pravděpodobnosti nákupu“,
+- citlivé obory zákazníka,
+- kombinace dat, která už vytváří profil, i když tomu v UI říkáš „smart rollout“.
+
+GDPR stojí mimo jiné na minimalizaci dat a omezení účelu. Evropská komise shrnuje, že organizace má zpracovávat jen osobní data nezbytná pro daný účel a uchovávat je jen po nezbytnou dobu: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/overview-principles/what-data-can-we-process-and-under-which-conditions_en
+
+## EX.3 Rozliš release flag, permission flag a experiment
+
+Největší chaos vzniká, když jeden flag dělá všechno. Technicky to projde. Produktově je to guláš.
+
+Rozumné rozdělení:
+
+| Typ | K čemu slouží | Jak dlouho má žít | Typické riziko |
+| --- | --- | --- | --- |
+| Release flag | Postupné vydání nové implementace | Krátce, týdny | Zapomenutý starý kód |
+| Kill switch | Rychlé vypnutí funkce při incidentu | Dlouhodobě, ale auditovaně | Nikdo neví, kdo ho smí přepnout |
+| Permission flag | Nárok na funkci podle tarifu/role | Dlouhodobě | Obcházení billing/role pravidel |
+| Experiment flag | Ověření hypotézy | Krátce, s vyhodnocením | Skryté profilování nebo příliš mnoho eventů |
+| Ops flag | Dočasná provozní úleva | Velmi krátce | Zůstane zapnutý jako „nový normál“ |
+
+Permission flagy nepatří do stejného koše jako release flagy. Pokud přes flag řídíš, kdo smí exportovat osobní data, měnit billing nebo spravovat integrace, už řešíš autorizaci. Tam nestačí hezký toggle v administraci. Potřebuješ kontrolu oprávnění na serveru, audit log a testy.
+
+## EX.4 Flagy vyhodnocuj blízko produktu, ne blízko reklamní sítě
+
+Privacy-first otázka zní: kde se rozhoduje o tom, komu se co zapne? Pokud kvůli každému načtení stránky posíláš identifikátor uživatele externí službě, právě jsi z malého přepínače udělal další datový tok.
+
+Preferované varianty:
+
+- server-side vyhodnocení flagu podle interních dat,
+- lokální konfigurace pro jednoduché rollouty,
+- self-hosted nebo evropsky provozovaná feature management služba,
+- hashované bucketing ID, které není použitelné jako obecný marketingový identifikátor,
+- cache s krátkou dobou platnosti, aby výpadek flag služby neshodil aplikaci.
+
+U externí služby si ověř:
+
+- kde se data ukládají a zpracovávají,
+- jaké identifikátory do ní posíláš,
+- jestli umí EU region nebo self-hosting,
+- kdo má přístup k administraci,
+- jestli existuje audit změn,
+- jak se služba chová při výpadku.
+
+Příklad dobrého fallbacku:
+
+> Pokud se nepodaří načíst konfiguraci, nová riziková funkce zůstane vypnutá, ale existující placené funkce zůstanou dostupné podle lokální cache oprávnění.
+
+Příklad špatného fallbacku:
+
+> Když flag služba neodpovídá, zapneme všem všechno, protože optimismus je levnější než incident. Spoiler: není.
+
+## EX.5 Eventy kolem flagů měř střídmě
+
+U flagu obvykle potřebuješ vědět tři věci: komu byl vyhodnocen, jaká varianta se zobrazila a jestli se stalo pár klíčových výsledků. Nepotřebuješ zaznamenat kompletní osobní deník uživatele.
+
+Minimální eventový model:
+
+| Event | Povinná pole | Nepřidávat automaticky |
+| --- | --- | --- |
+| `feature_flag_evaluated` | flag, varianta, workspace hash, čas | e-mail, IP, user agent v plném znění |
+| `feature_used` | funkce, workspace hash, výsledek | obsah dokumentu, text formuláře |
+| `feature_failed` | funkce, typ chyby, request ID | tokeny, payload externí služby |
+| `flag_changed` | flag, stará hodnota, nová hodnota, admin ID | důvod z interního chatu bez úpravy |
+
+OWASP u logování doporučuje mimo jiné sanitizovat eventová data a nevkládat do logů citlivé údaje, tokeny nebo další data, která by z logů udělala druhou databázi rizik: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+
+Praktické pravidlo: pokud by ti bylo trapné poslat konkrétní hodnotu zákazníkovi ve výpisu „co o vás víme“, nepatří automaticky do flag eventu.
+
+## EX.6 Admin UI musí být nudné, jasné a auditovatelné
+
+Feature flag administrace není kasino. Přepnutí flagu v produkci může změnit dostupnost funkcí, náklady na infrastrukturu, tok osobních dat i zákaznickou zkušenost.
+
+Dobré admin UI ukazuje:
+
+- popis flagu lidskou řečí,
+- prostředí, kterého se změna týká,
+- cílovou skupinu,
+- dopad na zákazníka,
+- vlastníka,
+- poslední změnu a autora,
+- odkaz na ticket nebo rozhodovací záznam,
+- plán revize nebo odstranění.
+
+U rizikových flagů přidej jednoduchou brzdu:
+
+- potvrzení dopadu před zapnutím,
+- povinný důvod změny,
+- omezení na konkrétní role,
+- upozornění vlastníkovi,
+- automatickou revizi po určité době.
+
+Mikrotext v adminu:
+
+> „Zapínáte nový export dat pro 12 workspace. Export může obsahovat osobní údaje zákazníků. Zkontrolujte, že zákazníci mají aktualizovanou dokumentaci a že je zapnutý audit log.“
+
+To není právničina. To je airbag.
+
+## EX.7 Úklid flagů je součást dodávky
+
+Každý dočasný flag má mít plán smrti. Bez něj produkt časem získá stovky kombinací, které nikdo netestuje, ale všichni se jich bojí dotknout. Tak vzniká softwarová půda: všechno vrže, nikdo neví proč a někde žije starý pavouk jménem `new_dashboard_temp_2`.
+
+Úklidový rytmus:
+
+- Jednou měsíčně vyexportuj seznam flagů.
+- Označ flagy bez vlastníka.
+- Najdi flagy beze změny za posledních 90 dní.
+- U release flagů rozhodni: odstranit, prodloužit s důvodem, nebo převést na permanentní nastavení.
+- U experimentů doplň výsledek: pokračovat, zastavit, změnit hypotézu.
+- U permission flagů ověř, že odpovídají tarifům a rolím.
+- Staré větve smaž z kódu, nejen vypni v administraci.
+
+Definice hotovo pro release flag:
+
+1. nová varianta je výchozí,
+2. stará větev je odstraněná,
+3. testy pokrývají nové chování,
+4. dokumentace je aktualizovaná,
+5. eventy a dashboardy nečekají starou variantu,
+6. pracovní log nebo ticket obsahuje rozhodnutí.
+
+## EX.8 Checklist feature flags
+
+Před vytvořením flagu:
+
+- [ ] Flag má jednoznačný účel a vlastníka.
+- [ ] Je jasné, jestli jde o release, kill switch, permission, experiment nebo ops flag.
+- [ ] Segmentace používá minimum dat a je vysvětlitelná zákazníkovi.
+- [ ] Není potřeba posílat zbytečné osobní údaje externí službě.
+- [ ] Existuje fallback při výpadku flag systému.
+- [ ] Rizikové flagy mají server-side kontrolu, ne jen frontend toggle.
+- [ ] Změny flagů se zapisují do audit logu.
+- [ ] Eventy neobsahují e-mail, tokeny, obsah zákaznických dat ani celé requesty.
+- [ ] Admin UI ukazuje dopad, cílovou skupinu a poslední změnu.
+- [ ] Dočasný flag má datum revize a plán odstranění.
+
+Po dokončení rolloutů:
+
+- [ ] Rozhodnutí je zaznamenané.
+- [ ] Stará větev je smazaná z kódu.
+- [ ] Dokumentace odpovídá realitě.
+- [ ] Dashboardy neobsahují mrtvé varianty.
+- [ ] Zákaznické nastavení je pořád srozumitelné.
+
+## Codyho komentář
+
+Feature flagy jsou skvělý sluha a strašně kreativní původce bordelu. Můj pohled: malý evropský SaaS by je měl používat disciplinovaněji než velká platforma, ne méně. Nemáš armádu lidí na úklid technického dluhu, takže si nemůžeš dovolit magické přepínače bez vlastníka, bez revize a bez vysvětlení. Privacy-first flag není ten, který nikdy nic neměří. Je to ten, který měří jen tolik, aby pomohl udělat rozhodnutí — a pak se uklidí.
+
+## Zdroje k příloze
+
+- Evropská komise — principy GDPR, minimalizace dat a omezení uložení: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/overview-principles/what-data-can-we-process-and-under-which-conditions_en
+- European Data Protection Board — základní principy GDPR: https://www.edpb.europa.eu/topics/key-gdpr-concepts/basic-principles_en
+- OWASP Logging Cheat Sheet — bezpečné logování, sanitizace eventů a omezení citlivých dat v logách: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+
+## Shrnutí přílohy
+
+Feature flags pomáhají vydávat bezpečněji, pokud mají jasný účel, vlastníka, audit a plán odstranění. Segmentace má být srozumitelná a datově střídmá. Experimenty, release flagy a oprávnění nepatří do jednoho pytle. A každý dočasný flag by měl mít svůj malý náhrobek už v den narození.
+
+
 ## Pracovní log
+- 2026-08-13: Přidána příloha EX o feature flags bez produktového chaosu: účel flagu, datově střídmá segmentace, typy přepínačů, bezpečné vyhodnocení, měření, admin UI, úklid a checklist.
 
 - 2026-08-13: Obnovena poškozená aktuální verze e-booku z posledního zdravého commitu a přidána příloha EW o secrets a provozní konfiguraci: kategorizace hodnot, `.env.example`, validační start, vlastníci tajemství, rotace, CI/CD, lokální vývoj, logování a privacy-first checklist.
 
