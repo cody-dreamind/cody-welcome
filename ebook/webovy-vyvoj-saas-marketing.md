@@ -24900,8 +24900,184 @@ Privacy-first reportování není méně užitečné. Je přesnější. Nutí t�
 
 Sdílení reportů a dashboardů vyžaduje stejnou disciplínu jako práce s produkčními daty. Začni publikem a rozhodnutím, používej agregace jako výchozí stav, detail chraň oprávněním, opatrně zacházej se sdílenými odkazy, PDF, CSV a screenshoty, jasně definuj metriky a pravidelně uklízej staré reporty. Privacy-first report nebrání rozhodování — brání tomu, aby se rozhodování změnilo v distribuovaný únik dat.
 
+# Příloha FH: Export dat bez rukojmí, úniku a supportového dobrodružství
+
+Export dat je jeden z nejlepších testů férovosti SaaS produktu. Když zákazník dokáže svá data bezpečně stáhnout, předat, archivovat nebo opustit službu bez proseb na support, produkt působí dospěle. Když export neexistuje, je rozbitý nebo funguje jen přes „napište nám“, začíná digitální rukojmí. A rukojmí, překvapivě, nejsou dobrý retention model. Kdo by to byl řekl.
+
+Privacy-first export má dvě povinnosti najednou: dát zákazníkovi kontrolu nad daty a zároveň zabránit tomu, aby se z tlačítka „Exportovat vše“ stal pohodlný mechanismus úniku. Cílem není export schovat. Cílem je navrhnout ho tak, aby byl srozumitelný, oprávněný, auditovatelný a prakticky použitelný.
+
+## FH.1 Export začni účelem, ne tlačítkem
+
+Nejdřív si napiš, proč zákazník export potřebuje. Různé účely mají různé požadavky na rozsah, formát, zabezpečení i retenci.
+
+Typické účely:
+
+- pravidelná interní archivace,
+- účetnictví nebo compliance,
+- migrace do jiného nástroje,
+- offline analýza,
+- předání dat klientovi zákazníka,
+- ukončení účtu,
+- kontrola toho, co o zákazníkovi systém uchovává.
+
+Jeden univerzální export často dopadne špatně: buď je příliš chudý a nikomu nepomůže, nebo je příliš široký a bere s sebou data, která příjemce vůbec nemá vidět. Lepší je mít několik jasných exportů podle scénáře.
+
+Příklad pro B2B SaaS:
+
+| Účel | Rozsah | Formát | Kdo smí spustit |
+| --- | --- | --- | --- |
+| Přehled faktur | faktury, platby, daňové údaje | CSV/PDF | vlastník účtu, finance role |
+| Migrace projektů | projekty, úkoly, komentáře, přílohy | ZIP + JSON/CSV | vlastník účtu |
+| Audit aktivity | vybrané audit logy za období | CSV | vlastník, security/admin role |
+| Osobní data uživatele | profil, nastavení, vlastní aktivita | JSON/CSV | konkrétní uživatel nebo správce podle procesu |
+
+Produktově důležité: název exportu má říkat, co opravdu obsahuje. „Export dat“ je mlha. „Export faktur za období“ je rozhodnutí.
+
+## FH.2 Formát má být přenosný, ne proprietární hádanka
+
+Export není dekorace pro checklist. Zákazník ho má otevřít, zpracovat nebo importovat jinam.
+
+Praktická pravidla:
+
+- CSV používej pro tabulková data, ale popiš oddělovač, kódování a datumové formáty.
+- JSON používej pro strukturovaná data, vazby a migrace mezi systémy.
+- PDF používej pro lidsky čitelné dokumenty, ne jako jediný zdroj dat.
+- ZIP používej pro balíčky s více soubory, přílohami a manifestem.
+- Ke složitějším exportům přidej `README.txt` nebo `manifest.json` s popisem obsahu.
+
+Ukázka jednoduchého manifestu:
+
+```json
+{
+  "export_type": "projects_migration",
+  "workspace": "demo-workspace",
+  "created_at": "2026-08-13T23:00:00Z",
+  "period": {
+    "from": "2026-01-01",
+    "to": "2026-08-13"
+  },
+  "files": [
+    { "name": "projects.csv", "description": "Seznam projektů" },
+    { "name": "tasks.csv", "description": "Úkoly navázané na projekty" },
+    { "name": "attachments/", "description": "Přílohy úkolů" }
+  ]
+}
+```
+
+Neukládej citlivé informace do názvů souborů. `export_acme_2026.zip` je v pořádku. `export_jan_novak_zdravotni_poznamky.zip` je únik ještě před otevřením archivu.
+
+## FH.3 Oprávnění k exportu mají být přísnější než čtení obrazovky
+
+To, že uživatel vidí část dat v UI, neznamená, že smí stáhnout celý workspace do souboru. Export mění riziko: data opustí produktové rozhraní, přijdou o kontext oprávnění a mohou skončit v e-mailu, cloudu, prezentaci nebo zapomenuté složce `Downloads`.
+
+Rozumné bezpečnostní minimum:
+
+- široké exporty povol jen vlastníkovi účtu nebo jasně určené admin roli,
+- export osobních nebo citlivých dat potvrď druhým krokem,
+- u velmi rizikových exportů vyžaduj nedávné přihlášení nebo MFA,
+- export loguj jako auditní událost,
+- po dokončení informuj relevantního vlastníka účtu,
+- zákaznickému adminovi ukaž historii exportů.
+
+Audit záznam nemusí obsahovat obsah exportu. Stačí metadata:
+
+| Pole | Příklad |
+| --- | --- |
+| Kdo export spustil | uživatel, role, workspace |
+| Co exportoval | typ exportu, období, rozsah |
+| Kdy | čas spuštění a dokončení |
+| Kam | ruční stažení, interní job, integrační endpoint |
+| Výsledek | dokončeno, selhalo, expirace odkazu |
+
+Pozor na support. Support účet by neměl běžně spouštět export zákaznických dat. Pokud to někdy potřebuje, použij dočasný support access, jasný důvod, audit a ideálně potvrzení zákaznického admina.
+
+## FH.4 Stažení exportu musí mít expiraci a rozumnou ochranu
+
+Generovaný export není nový archiv na věčné časy. Je to dočasný výstup pro konkrétní účel.
+
+Doporučený návrh:
+
+- export se generuje asynchronně, pokud může trvat déle než pár sekund,
+- odkaz ke stažení vyžaduje přihlášení,
+- odkaz má krátkou expiraci, například 24 až 72 hodin podle rizika,
+- soubor se po expiraci smaže z dočasného úložiště,
+- uživatel vidí, kdy export vznikl a kdy zmizí,
+- opakované stažení je omezené podle rizika a role.
+
+Nejhorší kombinace je veřejný dlouhodobý odkaz bez autentizace a bez auditní stopy. To není pohodlí. To je datová časovaná bomba s hezkým URL.
+
+Mikrotext u hotového exportu:
+
+> „Export je připravený ke stažení. Odkaz je dostupný jen přihlášeným administrátorům a vyprší za 48 hodin. Po expiraci soubor smažeme z dočasného úložiště.“
+
+Taková věta je jednoduchá, ale dělá hodně práce: vysvětluje přístup, čas i retenci.
+
+## FH.5 Export nesmí potichu porušit datovou minimálnost
+
+Exporty často vznikají jako technická zkratka: vezme se databázová tabulka, přejmenují se sloupce a hotovo. Jenže databáze obsahuje interní ID, stavové příznaky, debug data, historické hodnoty, tokeny, komentáře, IP adresy nebo jiné věci, které do zákaznického exportu nepatří.
+
+Před každým exportem si polož tyhle otázky:
+
+- Patří každý sloupec k deklarovanému účelu exportu?
+- Neobsahuje export interní identifikátory, které zákazník nepotřebuje?
+- Neunikají v datech poznámky supportu nebo interní komentáře?
+- Neobsahuje export bezpečnostní tokeny, webhook secrets nebo API klíče?
+- Neobsahuje export data uživatelů, kteří do vybraného rozsahu nepatří?
+- Neobsahuje export smazané nebo anonymizované záznamy v původní podobě?
+
+Datovou minimálnost je dobré držet jako schválený seznam polí, ne jako improvizovaný `SELECT *`. Pokud export potřebuje nová pole, projdi je stejně jako novou produktovou funkci: účel, oprávnění, retence, test.
+
+## FH.6 Export má mít testovací scénáře, ne jen šťastnou cestu
+
+Export se často testuje jen na malém demo účtu. V produkci pak narazí na velká data, zvláštní znaky, chybějící vazby, staré záznamy, smazané uživatele, časová pásma a realitu. Realita je výborný chaos monkey, jen nemá milé UI.
+
+Testuj minimálně:
+
+- prázdný účet,
+- malý běžný účet,
+- velký účet s tisíci záznamy,
+- účet s přílohami,
+- účet s více rolemi a omezenými oprávněními,
+- účet po částečném smazání dat,
+- export s diakritikou, emoji a dlouhými texty,
+- export přes více časových pásem,
+- opakované spuštění stejného exportu,
+- selhání uprostřed generování.
+
+U selhání neříkej jen „něco se pokazilo“. Uživatel má vědět, jestli může export zkusit znovu, zmenšit období, kontaktovat podporu nebo počkat. Interní log může mít technický detail, ale uživatelská hláška má být praktická.
+
+## FH.7 Checklist privacy-first exportu
+
+Před nasazením exportní funkce si projdi:
+
+- Je jasně pojmenovaný účel exportu?
+- Má export omezený a zdokumentovaný rozsah polí?
+- Je formát použitelný mimo náš produkt?
+- Obsahuje složitější export manifest nebo popis souborů?
+- Neobsahují názvy souborů citlivé údaje?
+- Smí export spustit jen správná role?
+- Vyžaduje rizikový export dodatečné ověření?
+- Je spuštění exportu v audit logu?
+- Má odkaz ke stažení autentizaci a expiraci?
+- Maže se dočasný soubor po jasné době?
+- Vidí zákaznický admin historii exportů?
+- Je support access k exportům omezený a auditovaný?
+- Existují testy pro velké účty, prázdné účty, přílohy a selhání?
+- Je mikrotext u exportu srozumitelný a pravdivý?
+
+## Codyho komentář
+
+Export dat je produktová slušnost. Pokud zákazník zůstává jen proto, že odchod bolí, není to loajalita, ale lepidlo na botě. Můj pohled — Cody: nejlepší SaaS produkty se exportu nebojí. Vědí, že zákazníka udrží hodnotou, podporou a důvěrou, ne tím, že mu schovají klíče od vlastních dat.
+
+Privacy-first export paradoxně pomáhá i byznysu. Snižuje strach z adopce, zjednodušuje nákupní rozhodnutí a ukazuje, že produkt bere evropskou kontrolu nad daty vážně. A když jednou přijde migrace, audit nebo ukončení smlouvy, tým nemusí v pátek večer lovit SQL dotazy jako archeologové pod časovým tlakem.
+
+## Shrnutí přílohy
+
+Bezpečný export dat začíná účelem, pokračuje přenosným formátem a stojí na silných oprávněních, auditní stopě, expirovaných odkazech, datové minimálnosti a testování reálných scénářů. Privacy-first export dává zákazníkovi kontrolu, aniž by z produktu udělal automat na nekontrolované úniky.
+
 ## Pracovní log
 
+- 2026-08-13: Přidána příloha FH o privacy-first exportu dat: účel exportu, přenosné formáty, oprávnění, expirované odkazy, minimálnost polí, testovací scénáře a checklist.
 - 2026-08-13: Přidána příloha FG o sdílení reportů a dashboardů: publikum reportu, agregace, bezpečné odkazy, PDF/CSV/screenshoty, definice metrik, úklid reportů a privacy-first checklist.
 - 2026-08-13: Přidána příloha FF o privacy-first importu dat: účel importu, bezpečné kroky, validace, duplicity, retence uploadů, import reporty, auditní stopa a checklist.
 - 2026-08-13: Přidána příloha FE o produktovém nastavení bez bezpečnostní rulety: bezpečné výchozí hodnoty, členění podle rozhodnutí, potvrzování citlivých změn, historie změn, preference, testovací scénáře a checklist.
