@@ -21587,7 +21587,196 @@ Můj pohled — Cody: privacy-first firma nepotřebuje znát méně o svém prod
 - Vlastnictví dat má produktovou i technickou rovinu.
 - Katalog musí být součást změnového procesu, jinak rychle zestárne na dekorativní dokument.
 
+# Příloha EM: Žádosti lidí o data bez paniky, ruční archeologie a odpovědí na půl plynu
+
+Žádost o přístup, opravu, výmaz nebo export dat není právní meteorit. Je to běžná servisní situace, která jen odhalí, jestli firma ví, kde má data a proč. Pokud první reakce týmu zní „kdo to má v databázi najít?“, problém nezačal žádostí. Začal tím, že produkt nikdy nedostal proces pro práva lidí.
+
+Evropský sbor pro ochranu osobních údajů shrnuje práva subjektů údajů pod GDPR jako právo být informován, získat přístup, požádat o opravu, výmaz, omezení zpracování, vznést námitku, získat přenositelnost a nebýt předmětem čistě automatizovaného rozhodování: https://www.edpb.europa.eu/topics/key-gdpr-concepts/data-subject-rights_en. Evropská komise zároveň popisuje, že organizace musí umět s požadavky jednotlivců pracovat a při odmítnutí vysvětlit důvody i možnost stížnosti u dozorového úřadu: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/dealing-individuals-requests_en
+
+## EM.1 Žádost není ticket „někdy se podíváme“
+
+První pravidlo: žádost musí mít vlastní typ procesu. Ne proto, že by byla posvátná, ale protože má jiné riziko než běžný support. Když zákazník napíše „pošlete mi všechna data, která o mně máte“, nejde jen o export z UI. Jde o identitu žadatele, rozsah žádosti, systémy, kopie, odpověď a auditní stopu.
+
+Malý tým nepotřebuje těžkopádný portál. Potřebuje jasný postup:
+
+1. Přijmout žádost do jednoho kanálu, například `privacy@firma.cz` nebo vyhrazeného typu ticketu.
+2. Ověřit identitu přiměřeně riziku. Jinak u newsletteru, jinak u účtu s fakturami.
+3. Rozlišit typ práva: přístup, oprava, výmaz, omezení, námitka, přenositelnost.
+4. Najít dotčené systémy podle datového katalogu, ne podle paměti nejstaršího vývojáře.
+5. Připravit odpověď s tím, co bylo provedeno, co nešlo provést a proč.
+6. Zapsat rozhodnutí a datum do interní evidence.
+
+Privacy-first produkt má výhodu: když sbírá méně dat a má katalog, žádost je kratší. Ne magicky jednoduchá, ale výrazně méně detektivní.
+
+## EM.2 Ověření identity má chránit žadatele, ne ho šikanovat
+
+Ověření identity je citlivá rovnováha. Když ověřuješ málo, riskuješ únik dat cizí osobě. Když ověřuješ moc, sbíráš další osobní údaje a děláš z práva překážkovou dráhu. Cílem není „vyhrát nad žadatelem“. Cílem je poslat správná data správnému člověku.
+
+Praktické pravidlo:
+
+- Pro newsletter stačí potvrzení přes stejný e-mail nebo odhlašovací odkaz.
+- Pro běžný SaaS účet použij přihlášený stav, potvrzení přes e-mail účtu nebo bezpečnou zprávu v aplikaci.
+- Pro firemní workspace ověř roli žadatele: uživatel, administrátor, fakturační kontakt, vlastník organizace.
+- Pro citlivé údaje nepřijímej screenshot občanky „jen tak do ticketu“. Pokud opravdu potřebuješ silnější ověření, definuj bezpečný kanál, retenci a kdo k ověřovacím údajům smí.
+- Nežádostivá ironie supportu typu „pošlete nám rodný list a krevní skupinu“ patří do koše. Humor ano, datové excesy ne.
+
+Příklad odpovědi pro ověření:
+
+```text
+Díky za zprávu. Než vám pošleme export údajů, potřebujeme ověřit, že žádost posílá vlastník účtu. Prosím přihlaste se do aplikace a potvrďte žádost v Nastavení → Soukromí, nebo odpovězte z e-mailu, který je u účtu vedený jako primární. Nechceme po vás žádné další doklady, pokud to nebude nezbytné.
+```
+
+## EM.3 Přístup k datům není screenshot databáze
+
+Právo na přístup má člověku vysvětlit, jaké osobní údaje se zpracovávají a v jakém kontextu. EDPB má k právu na přístup samostatné Guidelines 01/2022, které řeší rozsah, formu a způsob naplnění tohoto práva: https://www.edpb.europa.eu/documents/guideline/guidelines-012022-on-data-subject-rights-right-of-access_en
+
+Pro produktový tým z toho plyne jednoduchá věc: export pro člověka má být srozumitelný. Ne interní JSON skládka plná cizích ID, ne screenshot adminu, ne ZIP s náhodnými CSV bez vysvětlení.
+
+Dobrá odpověď obsahuje:
+
+- základní identifikační údaje účtu,
+- profilová a fakturační data, pokud existují,
+- hlavní uživatelský obsah,
+- důležité preference a souhlasy,
+- informaci o kategoriích příjemců nebo dodavatelů,
+- vysvětlení účelu a retence,
+- poznámku, co v exportu není a proč, například bezpečnostní logy v agregované podobě.
+
+U SaaS produktu je praktické mít dva výstupy: lidsky čitelný přehled v PDF nebo HTML a strojově použitelný export tam, kde dává smysl. Pokud export obsahuje interní ID, přidej slovník polí. Bez slovníku je to jako poslat někomu mapu pokladu v elfštině.
+
+## EM.4 Výmaz musí řešit i kopie, logy a integrace
+
+Evropská komise k právu na výmaz uvádí, že organizace obvykle musí data smazat, pokud už nejsou potřebná nebo se zpracovávají nezákonně, ale existují výjimky, například zákonná povinnost, veřejný zájem nebo obhajoba právních nároků: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/dealing-requests-individuals/do-we-always-have-delete-personal-data-if-person-asks_en
+
+Produktově to znamená: tlačítko „Delete user“ nestačí. Výmaz musí mít plán pro:
+
+- hlavní databázi,
+- soubory a přílohy,
+- analytické kopie,
+- CRM a support nástroje,
+- e-mailing,
+- fakturaci a účetní doklady,
+- auditní a bezpečnostní logy,
+- zálohy,
+- integrace a webhooky.
+
+Některá data se smažou hned, jiná anonymizují, jiná se drží po zákonnou dobu. Důležité je říct to jasně. „Smazali jsme účet“ nesmí znamenat „v UI ho nevidíte, ale v šesti exportech pořád bydlí jako nájemník bez smlouvy“.
+
+Příklad interní tabulky pro výmaz:
+
+| Místo | Akce | Poznámka |
+| --- | --- | --- |
+| Aplikační databáze | Smazat nebo anonymizovat účet | Zachovat jen nutné referenční vazby |
+| Fakturace | Zachovat zákonně nutné doklady | Nezahrnovat do marketingových exportů |
+| Support | Uzavřít tickety, odstranit zbytečné přílohy | Citlivé screenshoty mazat dříve |
+| Analytika | Odstranit identifikátor, držet agregace | Produktový trend nepotřebuje jméno |
+| Zálohy | Neobnovovat smazaná data do produkce | Mít proces při restore |
+| Integrace | Poslat revoke/delete tam, kde je to možné | Vést seznam dodavatelů |
+
+## EM.5 Přenositelnost není totéž co úplný export světa
+
+Přenositelnost je praktická hlavně tam, kde uživatel dodal data nebo je vytvořil používáním služby a chce je přenést jinam. Neznamená to, že musíš vydat interní scoring, bezpečnostní signály, obchodní poznámky nebo data jiných lidí. Znamená to navrhnout export tak, aby byl použitelný, dokumentovaný a bezpečný.
+
+Pro malý SaaS dává smysl:
+
+- exportovat uživatelský obsah v CSV, JSON nebo otevřeném formátu,
+- přidat README se strukturou polí,
+- oddělit osobní profil, fakturaci a pracovní data,
+- neexportovat tajné tokeny, hesla, interní poznámky a údaje cizích osob,
+- dát exportu expiraci a chráněný odkaz,
+- zaznamenat, kdo export vytvořil a stáhl.
+
+Privacy-first přístup tady pomáhá obchodně: zákazník, který ví, že může odejít s daty, se méně bojí začít. Lock-in přes rukojmí dat je krátkodobě pohodlný, dlouhodobě smrdí sklepem.
+
+## EM.6 Žádosti patří do produktu, ne jen do právní složky
+
+Nejlepší proces je ten, který se dá opakovat bez krizového meetingu. Proto má mít produkt jednoduché interní funkce:
+
+- stránku v adminu „Privacy requests“,
+- stav žádosti: přijatá, ověřená, zpracovává se, čeká na třetí stranu, dokončená, odmítnutá,
+- seznam systémů, které se mají zkontrolovat,
+- šablony odpovědí,
+- auditní log akcí,
+- upozornění na blížící se interní termín,
+- možnost přiložit výsledek exportu bez veřejného odkazu navždy.
+
+Nemusíš to stavět jako velký modul hned první měsíc. Začni tabulkou a checklistem, ale navrhni je tak, aby se daly později převést do aplikace. Pokud privacy proces stojí na tom, že jedna konkrétní kolegyně ví, kam kliknout, firma nemá proces. Má talisman.
+
+## EM.7 Šablony odpovědí šetří nervy i riziko
+
+Šablona nemá být robotická. Má zajistit, že tým nezapomene důležité informace.
+
+Přijetí žádosti:
+
+```text
+Dobrý den,
+
+děkujeme za zprávu. Vaši žádost k osobním údajům jsme přijali a vedeme ji pod interním číslem [ID]. Nejdříve ověříme, že žádost souvisí s vaším účtem nebo údaji. Pokud budeme potřebovat doplnění, ozveme se stejným kanálem.
+
+Codyho poznámka pro tým: nepřidávat do odpovědi zbytečná data, dokud není ověřená identita.
+```
+
+Dokončení výmazu:
+
+```text
+Dobrý den,
+
+vaši žádost o výmaz jsme zpracovali. Účet a údaje, které už nepotřebujeme pro poskytování služby, jsme smazali nebo anonymizovali. Některé záznamy můžeme po omezenou dobu dál uchovávat, pokud je to nutné kvůli zákonným povinnostem, bezpečnosti nebo obhajobě právních nároků. Tyto údaje nepoužíváme pro marketing.
+
+Pokud chcete upřesnit konkrétní kategorii dat, napište nám prosím odpovědí na tento e-mail.
+```
+
+Odmítnutí nebo částečné odmítnutí:
+
+```text
+Dobrý den,
+
+část žádosti nemůžeme zpracovat v požadovaném rozsahu, protože [konkrétní důvod]. Zpracovali jsme ale ty části, u kterých důvod k omezení není: [stručně]. Pokud s postupem nesouhlasíte, můžete se obrátit na příslušný dozorový úřad.
+```
+
+Každou šablonu musí před použitím člověk upravit podle reality. Automatická odpověď, která tvrdí víc než systém udělal, je právní karaoke. Vypadá to jako text, ale melodie je úplně mimo.
+
+## EM.8 Checklist žádostí subjektů údajů
+
+Před tím, než prohlásíš proces za hotový, projdi:
+
+- Existuje jeden jasný kanál pro žádosti o data.
+- Support pozná rozdíl mezi běžným dotazem a žádostí podle GDPR.
+- Identita žadatele se ověřuje přiměřeně riziku.
+- Datový katalog ukazuje, které systémy je nutné zkontrolovat.
+- Export je srozumitelný člověku a bezpečně doručený.
+- Výmaz řeší hlavní databázi, soubory, integrace, analytiku, support i zálohy.
+- U každého odmítnutí nebo omezení je zapsaný konkrétní důvod.
+- Odpovědi neobsahují zbytečná osobní data navíc.
+- Existuje interní evidence žádostí, akcí, termínů a výsledku.
+- Proces se testuje alespoň jednou kvartálně na cvičné žádosti.
+
+## Codyho komentář
+
+Žádosti o data jsou lakmusový papírek firemní dospělosti. Privacy-first firma se jich nebojí, protože data nejsou rozházená po nástrojích jako konfety po vánočním večírku. Ví, co sbírá, proč to sbírá a jak to člověku vysvětlit.
+
+Můj pohled — Cody: nejlepší privacy proces není ten, který umí napsat nejdelší právní odpověď. Je to ten, který dokáže v klidu splnit férovou žádost bez toho, aby se půl firmy tvářilo, že GDPR právě spadlo z Marsu.
+
+## Zdroje k příloze
+
+- EDPB: Data subject rights — https://www.edpb.europa.eu/topics/key-gdpr-concepts/data-subject-rights_en
+- Evropská komise: Dealing with individuals' requests — https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/dealing-individuals-requests_en
+- EDPB: Guidelines 01/2022 on data subject rights — Right of access — https://www.edpb.europa.eu/documents/guideline/guidelines-012022-on-data-subject-rights-right-of-access_en
+- Evropská komise: Do we always have to delete personal data if a person asks? — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/dealing-requests-individuals/do-we-always-have-delete-personal-data-if-person-asks_en
+
+## Shrnutí přílohy
+
+- Žádosti o data musí mít samostatný proces, ne improvizovaný support ticket.
+- Ověření identity má být přiměřené riziku a nesmí samo zbytečně sbírat citlivá data.
+- Přístup k datům má být srozumitelný a vysvětlený, ne interní export bez kontextu.
+- Výmaz musí pokrýt kopie, integrace, logy, zálohy i výjimky dané zákonnými nebo bezpečnostními důvody.
+- Přenositelnost je obchodní výhoda: zákazník se méně bojí začít, když ví, že data nejsou rukojmí.
+- Šablony odpovědí pomáhají, ale musí popisovat skutečně provedené kroky.
+
+
 ## Pracovní log
+
+- 2026-08-13: Přidána příloha EM o žádostech subjektů údajů: příjem žádostí, ověření identity, přístup, výmaz, přenositelnost, produktový proces, šablony odpovědí a checklist.
 
 - 2026-08-13: Přidána příloha EL o datovém katalogu a lineage: účel datových objektů, cesta dat mezi systémy, vlastnictví, změnový proces, praktická šablona a checklist.
 
