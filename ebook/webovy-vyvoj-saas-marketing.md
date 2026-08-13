@@ -24060,7 +24060,138 @@ Produktové mikrotexty pomáhají lidem bezpečně dokončit akce, pochopit dato
 
 ---
 
+# Příloha FB: Prázdné stavy v SaaS bez slepých uliček, trapného ticha a zbytečného sběru dat
+
+Prázdný stav je obrazovka, která se objeví, když v produktu zatím nic není: žádné projekty, žádné faktury, žádné kontakty, žádné reporty, žádné výsledky hledání. Zní to jako detail. Ve skutečnosti je to často první skutečný rozhovor produktu s uživatelem po registraci. A první rozhovor nechceš začít větou „No data available“.
+
+Dobře napsaný prázdný stav vysvětlí, co chybí, proč na tom záleží a jaký je nejbližší bezpečný krok. Špatný prázdný stav jen ukáže prázdnou tabulku a nechá člověka hádat, jestli je produkt rozbitý, účet špatně nastavený, nebo jestli má jít radši vařit kávu a předstírat produktivitu.
+
+## FB.1 Rozliš první použití, filtr a oprávnění
+
+Ne každý prázdný stav znamená totéž. Pokud je všechny napíšeš stejně, uživatel ztratí orientaci.
+
+Tři základní typy:
+
+- **První použití:** v účtu ještě nic není a uživatel potřebuje vytvořit první objekt.
+- **Prázdný výsledek:** data existují, ale aktuální filtr nebo hledání nic nenašlo.
+- **Omezený přístup:** data možná existují, ale uživatel nemá oprávnění je vidět.
+
+Příklad u projektů:
+
+| Situace | Slabý text | Lepší text |
+| --- | --- | --- |
+| První použití | „Žádné projekty“ | „Zatím tu není žádný projekt. Vytvoř první projekt a pozvi tým, až bude potřeba.“ |
+| Filtr | „Žádné výsledky“ | „Filtr nenašel žádný aktivní projekt. Zkus zobrazit i archivované projekty.“ |
+| Oprávnění | „Žádná data“ | „Nemáš přístup k projektům v tomto workspace. Požádej administrátora o roli Projektový manažer.“ |
+
+Privacy-first detail: u omezeného přístupu neprozrazuj víc, než je nutné. „Existuje 12 projektů, ale nevidíš je“ může být samo o sobě únik informací. V některých produktech stačí říct, že aktuální role přístup neumožňuje.
+
+## FB.2 První krok má být menší než konfigurace vesmíru
+
+Prázdný stav často selže tím, že po uživateli chce rovnou všechno: importovat databázi, nastavit integrace, pozvat tým, vyplnit profil, přečíst dokumentaci a ideálně ještě poslat logo ve vektoru. To není onboarding. To je malý výběrový řízení na trpělivost.
+
+První krok má být nejmenší akce, která přiblíží první hodnotu:
+
+- vytvořit první projekt,
+- nahrát jeden testovací soubor,
+- přidat jednu poptávku,
+- poslat první transakční e-mail do sandboxu,
+- založit první ceníkový plán,
+- zkusit demo s ukázkovými daty.
+
+Když je potřeba víc kroků, rozděl je:
+
+1. „Vytvoř první projekt.“
+2. „Přidej jeden úkol nebo importuj ukázková data.“
+3. „Pozvi tým až ve chvíli, kdy dává projekt smysl.“
+
+Takový postup chrání i data. Není nutné hned žádat seznam kolegů, zákazníků nebo integrace do účetnictví, pokud uživatel teprve zjišťuje, jestli produkt chápe jeho problém.
+
+## FB.3 Ukázková data jsou lepší než tlak na reálná data
+
+U složitějších SaaS produktů je prázdný účet matoucí. Dashboard bez dat nevysvětlí hodnotu. Import reálných dat zase může být příliš brzy, právně i psychologicky. Řešením jsou ukázková data.
+
+Dobrá ukázková data:
+
+- jsou jasně označená jako ukázka,
+- vypadají realisticky, ale neobsahují skutečné osoby,
+- dají se jedním kliknutím odstranit,
+- nepřenášejí se do produkčních reportů zákazníka,
+- nepletou se s ostrými záznamy,
+- ukazují typický pracovní scénář, ne náhodný lorem ipsum karneval.
+
+Příklad textu:
+
+> „Chceš si produkt projít bez importu vlastních dat? Zapni ukázkový workspace. Ukázková data jsou syntetická a můžeš je kdykoliv smazat.“
+
+Tohle je férovější než nátlakové „nahrajte svůj CSV soubor pro pokračování“. Reálná data si produkt musí zasloužit. Ano, zní to dramaticky, ale databáze není sbírka samolepek.
+
+## FB.4 Prázdný stav nemá být marketingový billboard
+
+Prázdné obrazovky svádějí k tomu, nacpat do nich všechno: tři ilustrace, video, pět benefitů, testimonial, upgrade na vyšší tarif a odkaz na webinář. Jenže uživatel je v produktu kvůli práci. Potřebuje další krok, ne konferenci v modalu.
+
+Dobrá struktura prázdného stavu:
+
+- krátký nadpis: co tu zatím není,
+- jedna věta: proč to dává smysl,
+- primární akce: co udělat teď,
+- sekundární pomoc: dokumentace, ukázková data nebo kontakt na podporu,
+- případně malý privacy mikrotext, pokud akce sbírá data.
+
+Příklad:
+
+> **Zatím nemáš žádné reporty**
+>
+> Report vznikne po prvním importu agregovaných objednávek. Pro vyzkoušení můžeš zapnout ukázková data bez nahrávání vlastních souborů.
+>
+> [Zapnout ukázková data] [Přečíst importní návod]
+
+Všimni si, že text neříká „nahraj zákaznická data hned teď“. Nabízí bezpečnou cestu k pochopení hodnoty.
+
+## FB.5 Prázdné stavy testuj jako kritickou cestu
+
+Týmy často testují plné účty, protože vývojářská databáze je napěchovaná testovacími záznamy. Jenže nový zákazník začíná prázdný. Pokud prázdný stav nikdo nezkontroluje, první dojem může být horší než bug v pokročilém filtru.
+
+Otestuj minimálně:
+
+- nový osobní účet bez dat,
+- nový workspace bez členů,
+- účet s omezenou rolí,
+- prázdné výsledky hledání,
+- prázdný filtr po odstranění poslední položky,
+- stav po smazání ukázkových dat,
+- mobilní zobrazení prázdných stavů,
+- lokalizaci textů, pokud produkt běží ve více jazycích.
+
+Praktická otázka pro QA: „Ví uživatel z téhle obrazovky, jestli má něco vytvořit, změnit filtr, požádat o přístup, nebo čekat?“ Pokud ne, text i design potřebují opravu.
+
+## FB.6 Checklist privacy-first prázdných stavů
+
+Před releasem projdi každou prázdnou obrazovku:
+
+- Rozlišuje text první použití, filtr, chybu a omezené oprávnění?
+- Nabízí obrazovka jednu jasnou primární akci?
+- Dá se produkt vyzkoušet bez okamžitého importu reálných osobních dat?
+- Jsou ukázková data syntetická, označená a snadno odstranitelná?
+- Neprozrazuje prázdný stav existenci dat, která uživatel nemá vidět?
+- Vysvětluje text, proč se případná data sbírají?
+- Neobsahuje obrazovka zbytečný marketingový hluk místo dalšího kroku?
+- Funguje prázdný stav na mobilu a s klávesnicí?
+- Je sekundární pomoc konkrétní: návod, demo data, kontakt nebo žádost o roli?
+- Má tým testovací scénáře pro prázdné účty a omezené role?
+
+## Codyho komentář
+
+Prázdný stav je jako recepční v novém produktu. Může říct „vítej, tady začni“ — nebo mlčet za sklem a ukazovat na rozbitý formulář. Když ho napíšeš dobře, zlepšíš onboarding, snížíš support a ještě nesbíráš data dřív, než je opravdu potřebuješ. To je docela hodně práce na obrazovku, kde údajně „nic není“.
+
+## Shrnutí přílohy
+
+Prázdné stavy nejsou výplň. Jsou součást onboardingové, bezpečnostní i privacy zkušenosti produktu. Rozlišuj typ prázdnoty, nabídni jeden bezpečný další krok, používej syntetická ukázková data a netlač uživatele do importu reálných údajů dřív, než pochopí hodnotu produktu.
+
+---
+
 ## Pracovní log
+- 2026-08-13: Přidána příloha FB o prázdných stavech v SaaS: první použití, filtry, oprávnění, bezpečné ukázkové datasety, jednoduché CTA, testování prázdných účtů a privacy-first checklist.
 - 2026-08-13: Přidána příloha FA o produktových mikrotextech: jasná CTA, datové věty u sběru údajů, bezpečné chybové hlášky, potvrzení citlivých akcí, férové limity a checklist.
 - 2026-08-13: Přidána příloha EZ o privacy-first zákaznických rozhovorech: výzkumné rozhodnutí, transparentní nábor, střídmé nahrávání, bezpečné poznámky, AI syntéza a checklist.
 - 2026-08-13: Přidána příloha EY o privacy-first demu a trial onboardingu: jasný cíl dema, krátké lead formuláře, syntetická data, retenční stavy trialu, férový follow-up, sales mantinely a checklist.
