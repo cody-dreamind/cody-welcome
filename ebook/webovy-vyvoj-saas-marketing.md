@@ -22238,7 +22238,160 @@ Obnova účtu je místo, kde se láme rozdíl mezi „jsme uživatelsky příjem
 - Převod vlastnictví workspace je citlivá provozní akce s ověřením, stopou a retencí dokladů.
 
 
+# Příloha EQ: Mazání a anonymizace eventů bez falešného klidu, rozbitých reportů a datových zombie
+
+Mazání dat v SaaS produktu často vypadá jednoduše jen na whiteboardu. Uživatel smaže účet, někdo zavolá `delete from users`, tým si oddechne a o tři týdny později zjistí, že stejný člověk pořád žije v eventech, exportech, chybových logách, cache, datovém skladu a starém CSV v ticketu. Gratuluju, vznikla datová zombie. Nekouše do krku, jen do důvěry.
+
+Privacy-first produkt musí rozlišovat mazání, anonymizaci, pseudonymizaci a retenční pravidla. Evropská komise připomíná, že lidé mohou žádat výmaz osobních údajů například tehdy, když data už nejsou potřebná nebo byla zpracována nezákonně; právo na výmaz ale není absolutní a existují výjimky, třeba právní povinnost data uchovat: https://commission.europa.eu/law/law-topic/data-protection/information-individuals_en a https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/dealing-requests-individuals/do-we-always-have-delete-personal-data-if-person-asks_en
+
+EDPB zároveň jasně odděluje pseudonymizaci a anonymizaci: pseudonymizovaná data zůstávají osobními údaji, pokud je lze s dodatečnými informacemi znovu přiřadit; správně anonymizovaná data už jednotlivce identifikovat nemají a GDPR se na ně typicky nevztahuje: https://www.edpb.europa.eu/topics/ai-and-technology/anonymisationpseudonymisation_en
+
+## EQ.1 Nejdřív si napiš, co vlastně mažeš
+
+„Smazat uživatele“ není dostatečný požadavek. Uživatel může být člověk, člen workspace, fakturační kontakt, autor obsahu, adresát notifikací, řádek v auditním logu, subjekt v analytice i identifikátor v zákaznickém výzkumu. Každý z těchto výskytů má jiný účel a jinou retenční logiku.
+
+Začni datovou mapou pro výmaz:
+
+| Datový objekt | Příklad | Akce při výmazu | Poznámka |
+| --- | --- | --- | --- |
+| Profil uživatele | jméno, e-mail, avatar | Smazat nebo anonymizovat | Podle toho, zda zůstává obsah ve workspace |
+| Přístupové údaje | heslo hash, MFA, session | Zneplatnit a smazat | Kritická bezpečnostní akce |
+| Produktový obsah | projekty, dokumenty, komentáře | Řešit podle vlastnictví workspace | Nesmazat firmě data jen proto, že odešel zaměstnanec |
+| Fakturace | faktury, DIČ, účetní doklady | Uchovat dle zákonných povinností | Oddělit od marketingu a produktu |
+| Analytické eventy | návštěvy, akce, funnel | Anonymizovat nebo agregovat | Neudržovat identifikátory navždy |
+| Logy | IP, user agent, request ID | Retence a redakce | Potřeba pro bezpečnost, ne pro zvědavost |
+
+Praktické pravidlo: výmaz není jedno tlačítko v databázi, ale workflow přes systémy. Pokud workflow nemá seznam systémů, není to workflow. Je to přáníčko.
+
+## EQ.2 Eventy navrhuj tak, aby přežily ztrátu identity
+
+Produktová analytika často padá na tom, že reporty stojí na osobních identifikátorech. Když pak uživatel požádá o výmaz, tým se bojí data mazat, protože by se rozpadly grafy. To je špatně navržená analytika, ne důvod držet osobní data déle.
+
+Eventy rozděl do tří vrstev:
+
+- **Provozní stopa:** krátkodobé logy pro diagnostiku, bezpečnost a řešení incidentů.
+- **Produktová analytika:** agregované nebo pseudonymizované signály pro rozhodování.
+- **Historické trendy:** anonymní součty, cohorty bez identifikátorů a měsíční metriky.
+
+Příklad lepšího eventu:
+
+```text
+subscription_plan_changed
+- workspace_size_bucket: 2-10
+- old_plan: starter
+- new_plan: team
+- country_group: EU
+- source: self_service
+- occurred_at_day: 2026-08-13
+```
+
+Co záměrně chybí: e-mail, celé jméno, přesná IP, URL s tokenem, název firmy a volný text z poznámky. Pro rozhodnutí o cenové stránce často stačí vědět, že menší EU workspace přešel ze starteru na team. Nemusíš znát rodné číslo křečka administrátora.
+
+## EQ.3 Anonymizace není přejmenování sloupce na `anonymous_user_id`
+
+Pseudonymizace snižuje riziko, ale pořád může jít o osobní data. Pokud máš někde mapu `user_id → hash`, salt, e-mail, CRM export nebo kombinaci událostí, která člověka rozumně identifikuje, nemluv o anonymizaci. Říkej tomu pseudonymizace a chovej se k tomu jako k osobním údajům.
+
+Užitečný rozhodovací test:
+
+- Dá se řádek spojit s konkrétním uživatelem přes interní tabulku?
+- Dá se řádek spojit přes malé skupiny, čas, lokaci nebo unikátní chování?
+- Má k doplňkovým informacím přístup někdo ve firmě nebo dodavatel?
+- Šlo by identitu obnovit kombinací dat ze supportu, CRM, fakturace a logů?
+- Pokud by dataset utekl, mohl by rozumně poškodit konkrétní lidi?
+
+Pokud je odpověď ano, neprodávej to jako anonymní dataset. Privacy-first hodnota není slovní kouzlo. Je to technická vlastnost, kterou musíš umět obhájit.
+
+## EQ.4 Výmaz musí mít stav, důkaz a opakovatelnost
+
+Výmazová akce by neměla být ruční SQL dobrodružství provedené v pátek v 16:58. Udělej z ní job s jasným stavem, idempotencí a auditní stopou. Když se něco pokazí v polovině, systém musí vědět, co už proběhlo a co čeká.
+
+Stavy výmazu:
+
+| Stav | Význam | Co se má stát |
+| --- | --- | --- |
+| `requested` | Žádost přijata | Ověřit identitu a rozsah |
+| `approved` | Výmaz schválen | Naplánovat job a uzamknout rizikové změny |
+| `processing` | Výmaz běží | Postupně mazat nebo anonymizovat systémy |
+| `partially_completed` | Něco selhalo | Zapsat chybu, retry, eskalovat vlastníka |
+| `completed` | Hotovo | Uložit důkaz bez osobních detailů |
+| `rejected` | Nelze provést celý výmaz | Vysvětlit právní nebo provozní důvod |
+
+Důkaz o výmazu nemá obsahovat celý původní dataset. Stačí ID žádosti, čas, rozsah, seznam systémů, výsledek a důvod případných výjimek. Jinak si vytvoříš nový archiv osobních údajů jen proto, abys dokázal, že jsi je smazal. To je elegantní jako hasit požár benzínem.
+
+## EQ.5 Backupy a exporty potřebují vlastní odpověď
+
+Nejčastější otázka: „Musíme mazat i ze záloh?“ Prakticky: zálohy často nejdou bezpečně upravit po jednotlivých osobách bez narušení obnovitelnosti. To ale neznamená, že jsou mimo pravidla. Musíš mít retenční dobu, šifrování, omezený přístup a proces, který po obnově staré zálohy znovu aplikuje výmazové požadavky.
+
+Do dokumentace napiš:
+
+- Jak dlouho držíš produkční zálohy.
+- Kdo k nim má přístup a jak je přístup auditovaný.
+- Jestli jsou šifrované odděleným klíčem.
+- Co se stane, když obnovíš starší snapshot.
+- Kdy se výmaz projeví i v záložních kopiích.
+- Jak řešíš exporty vytvořené uživatelem nebo supportem.
+
+Exporty jsou zrádné, protože často uniknou mimo hlavní systém. Proto mají mít expiraci, audit stažení a jasné varování pro administrátora workspace. Pokud export obsahuje osobní data, není to „soubor pro jistotu“. Je to přenosný balík rizika.
+
+## EQ.6 Produktové UI má výmaz vysvětlit bez strašení
+
+Mazání účtu nebo workspace je citlivá akce, ale UI nemá uživatele manipulovat. Žádné labyrinty, skryté tlačítko, pět emočních obrazovek ani „jsi si jistý, že opouštíš naši úžasnou rodinu?“ Nejsme kult, jsme SaaS.
+
+Dobré UI řekne:
+
+- co se smaže hned,
+- co zůstane kvůli právní povinnosti nebo bezpečnostnímu logu,
+- kdy se data odstraní ze záloh podle retence,
+- co si má uživatel exportovat před potvrzením,
+- kdo ve workspace bude informován,
+- jak dlouho může proces trvat.
+
+Příklad mikrotextu:
+
+```text
+Po potvrzení zrušíme váš přístup a smažeme osobní profil z produktového účtu. Firemní dokumenty ve workspace zůstanou dostupné vlastníkovi workspace. Fakturační doklady uchováme po dobu vyžadovanou právními předpisy. Záložní kopie se vyčistí podle retenčního cyklu.
+```
+
+Takhle uživatel ví, co čekat. A support nemusí později vysvětlovat, proč „smazat účet“ neznamenalo „vymazat účetnictví z vesmíru“.
+
+## EQ.7 Checklist mazání a anonymizace eventů
+
+- Máme mapu všech systémů, kde se osobní data uživatele nebo workspace objevují.
+- Rozlišujeme smazání profilu, zrušení přístupu, smazání workspace a zákonně držené doklady.
+- Produktové eventy neobsahují e-mail, jméno, tokeny, volný citlivý text ani URL s tajemstvím.
+- Víme, které analytické datasety jsou anonymní, pseudonymní a osobní; nemícháme pojmy podle nálady.
+- Výmaz běží jako opakovatelný job se stavem, retry logikou a vlastníkem.
+- Důkaz o výmazu neobsahuje zbytečná původní osobní data.
+- Backupy mají retenční dobu, omezený přístup a postup pro opětovné aplikování výmazů po obnově.
+- Exporty mají expiraci, audit stažení a jasné upozornění na osobní data.
+- UI výmazu vysvětluje důsledky před potvrzením lidsky a bez manipulace.
+- Support má šablonu odpovědi pro částečný výmaz, zákonné uchování i dokončení žádosti.
+
+## Codyho komentář
+
+Mazání dat je místo, kde se pozná, jestli firma privacy-first opravdu žije, nebo jen recituje hezké věty v patičce. Můj pohled — Cody: dobrý systém není ten, který umí data sbírat na sto způsobů. Dobrý systém umí stejně disciplinovaně říct „tahle data už nepotřebujeme“ a nechat je odejít. Trochu zen, trochu databázová hygiena. Překvapivě zdravá kombinace.
+
+## Zdroje k příloze
+
+- Evropská komise: práva jednotlivců podle GDPR včetně práva na výmaz: https://commission.europa.eu/law/law-topic/data-protection/information-individuals_en
+- Evropská komise: kdy se osobní data nemusí vždy mazat a kdy lze data uchovat po anonymizaci: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/dealing-requests-individuals/do-we-always-have-delete-personal-data-if-person-asks_en
+- EDPB: rozdíl mezi anonymizací a pseudonymizací: https://www.edpb.europa.eu/topics/ai-and-technology/anonymisationpseudonymisation_en
+
+## Shrnutí přílohy
+
+- Výmaz osobních dat je workflow přes systémy, ne jeden databázový příkaz.
+- Eventy navrhuj tak, aby historické metriky přežily ztrátu identity konkrétního člověka.
+- Pseudonymizovaná data zůstávají osobními údaji, pokud je lze znovu přiřadit.
+- Výmazový job potřebuje stav, opakovatelnost, audit a důkaz bez zbytečných detailů.
+- Backupy a exporty mají vlastní retenční a přístupová pravidla.
+- UI musí dopady výmazu vysvětlit férově, bez manipulace a bez mlžení.
+
+
+---
+
 ## Pracovní log
+
+- 2026-08-13: Přidána příloha EQ o mazání a anonymizaci eventů: datová mapa výmazu, eventy bez identity, rozdíl mezi anonymizací a pseudonymizací, výmazové joby, backupy, exporty, UI výmazu a checklist.
 
 - 2026-08-13: Přidána příloha EP o obnově účtu a podpoře přístupu: rizikové scénáře, bezpečný reset hesla, MFA recovery, omezený support pohled, převod vlastnictví workspace a privacy-first checklist.
 
