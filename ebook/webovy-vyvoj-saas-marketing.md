@@ -22956,8 +22956,150 @@ Role a oprávnění jsou místo, kde se láme slib B2B SaaS. Zákazník ti nedá
 - UI má zamítnuté akce vysvětlit lidsky, ale bez úniku citlivých detailů.
 - Autorizaci testuj jako produktovou funkci včetně cizích workspace, hádaných ID a negativních scénářů.
 
+
+---
+
+# Příloha EV: Pravidelné review přístupů bez tabulkového pekla, falešného klidu a zapomenutých účtů
+
+Role a oprávnění nejsou hotová ve chvíli, kdy je nasadíš. V malém SaaS týmu se lidé přesouvají mezi projekty, zákazníci mění účetní, externisté dokončí práci, support dostane dočasný přístup a někdo samozřejmě zapomene, že testovací účet z roku dinosaurů má pořád právo exportovat data. Přístupové review je provozní brzda proti pomalému bobtnání oprávnění.
+
+Dobré review nemá být měsíční rituál utrpení v tabulce se 400 řádky. Má odpovědět na jednoduchou otázku: kdo má dnes přístup k čemu, proč ho má a jestli ho pořád potřebuje.
+
+## EV.1 Review plánuj podle rizika, ne podle kalendářové poezie
+
+Ne každý přístup potřebuje stejnou frekvenci kontroly. Čtenář blogu není totéž co interní admin s možností impersonace zákazníka. Když budeš kontrolovat všechno stejně často, skončíš buď přehnanou byrokracií, nebo únavou z klikání „vypadá OK“.
+
+Rozděl přístupy do vrstev:
+
+| Vrstva | Příklad | Doporučený rytmus |
+| --- | --- | --- |
+| Kritická interní oprávnění | produkční admin, billing, exporty, support impersonace | měsíčně nebo po každé větší změně týmu |
+| Zákaznické owner role | vlastníci workspace, správci členů, SSO správci | kvartálně nebo při obnově smlouvy |
+| Běžné členství | běžní uživatelé workspace bez citlivých práv | pololetně až ročně podle segmentu |
+| Dočasné přístupy | externista, audit, migrace, support zásah | automatická expirace a kontrola po akci |
+
+Cílem není vyrobit bezpečnostní divadlo. Cílem je dát nejvíc pozornosti místům, kde chyba nejvíc bolí.
+
+## EV.2 Každý přístup musí mít vlastníka a důvod
+
+Přístup bez vlastníka je budoucí incident s odloženým startem. U interních účtů má být jasné, kdo přístup schválil. U zákaznických workspace má být jasné, kdo je owner nebo administrátor. U integrací má být jasné, který tým nebo zákazník je používá.
+
+Minimální evidence pro review:
+
+- kdo má přístup;
+- do kterého workspace, systému nebo integrace;
+- jakou má roli nebo oprávnění;
+- proč přístup existuje;
+- kdo ho schválil nebo vlastní;
+- kdy byl naposledy použit;
+- kdy má expirovat, pokud je dočasný.
+
+Pokud nedokážeš u přístupu vyplnit „proč“, nemáš přístup. Máš historickou sedimentaci. A ta patří do geologie, ne do produkčního SaaS.
+
+## EV.3 Nepoužité účty jsou bezpečnostní dluh
+
+Neaktivní účet není neškodný. Je to klíč, který někde leží v šuplíku. Možná ho nikdo nepoužije. Možná ho najde někdo, kdo nemá. Proto review nemá kontrolovat jen názvy rolí, ale i poslední aktivitu.
+
+Praktický postup:
+
+1. Vyber účty bez aktivity za posledních 60, 90 nebo 180 dní podle rizika.
+2. Odděl systémové účty, integrace a běžné uživatele.
+3. U interních účtů ověř, jestli člověk pořád pracuje na dané oblasti.
+4. U zákaznických účtů nabídni ownerovi jednoduché potvrzení nebo odebrání.
+5. U dočasných účtů neptej se donekonečna. Nastav expiraci dopředu.
+
+Privacy-first detail: e-mail „Potvrďte všechny aktivní členy“ neposílej s úplným seznamem citlivých rolí do běžné marketingové šablony. Přístupové review je bezpečnostní komunikace, ne kampaň do newsletterového nástroje.
+
+## EV.4 Review musí končit akcí, ne pocitem
+
+Špatné review vypadá takhle: někdo vyexportuje seznam uživatelů, pošle ho do tabulky, tři lidé napíšou „OK“, tabulka se uloží do složky a nic se nezmění. Gratuluju, vyrobili jsme auditní artefakt. Bezpečnost se mezitím šla projít.
+
+Dobré review má jasné výstupy:
+
+- odebrané účty;
+- snížené role;
+- potvrzené výjimky s datem další kontroly;
+- otevřené otázky s vlastníkem;
+- auditní záznam o tom, kdo review provedl a kdy;
+- úpravy procesu, aby stejná chyba nevznikla znovu.
+
+Příklad výsledku:
+
+| Zjištění | Akce | Vlastník |
+| --- | --- | --- |
+| Externista má stále export dat po migraci | Role změněna na čtení, expirace za 7 dní | Product ops |
+| Bývalý interní účet je neaktivní 120 dní | Účet deaktivován, tokeny rotovány | Security owner |
+| Customer success má impersonaci u enterprise zákazníka | Ponecháno, doplněn důvod a měsíční review | Head of CS |
+
+## EV.5 Zákazníkovi dej review do produktu, ne do supportového bludiště
+
+U B2B SaaS je přístupové review skvělá produktová funkce. Owner workspace by měl snadno vidět členy, role, poslední aktivitu, otevřené pozvánky, aktivní integrace a citlivé přístupy. Nemusí kvůli tomu psát supportu „pošlete mi seznam všech uživatelů“. To je signál, že produkt dělá z bezpečnosti ruční administrativu.
+
+Užitečné prvky v UI:
+
+- filtr „neaktivní déle než 90 dní“;
+- samostatný přehled otevřených pozvánek;
+- štítek u externích hostů;
+- upozornění na posledního ownera;
+- export členů bez zbytečných osobních dat;
+- tlačítko „zahájit review“ s možností potvrdit nebo upravit role;
+- auditní stopa změn rolí a odebrání přístupu.
+
+Codyho komentář: dobré B2B UI se neptá jen „co chce uživatel kliknout“. Ptá se i „jak zákazník prokáže, že nad přístupy drží kontrolu, až se ho na to zeptá vlastní klient, auditor nebo nervózní právník s kávou v ruce“.
+
+## EV.6 Dočasný přístup má zemřít sám
+
+Dočasné přístupy jsou nejčastější lež v IT. „Dáme mu to jen na chvíli“ často znamená „najdeme to při incidentu za dva roky“. Proto dočasný přístup nesmí spoléhat na paměť člověka.
+
+Pravidla:
+
+- každý dočasný přístup má expiraci už při vytvoření;
+- prodloužení vyžaduje nový důvod;
+- po expiraci se oprávnění odebere automaticky;
+- citlivý dočasný přístup se zapisuje do audit logu;
+- u support přístupu vidí zákazník, kdo přístup měl a kdy skončil.
+
+Praktický mikrotext v produktu:
+
+> „Dočasný přístup expiruje 18. 8. 2026 v 17:00. Po expiraci se role automaticky odebere. Prodloužení vyžaduje potvrzení ownera workspace.“
+
+Tohle je nudné. A přesně proto je to dobré.
+
+## EV.7 Checklist přístupového review
+
+- Máme rozdělené přístupy podle rizika a nastavený rytmus kontroly.
+- Kritické interní role se kontrolují častěji než běžné členství.
+- Každý přístup má vlastníka, důvod, rozsah a ideálně datum expirace.
+- Dočasné přístupy expirují automaticky a nejdou zapomenout v systému.
+- Review pracuje s poslední aktivitou účtu, otevřenými pozvánkami a aktivními integracemi.
+- Výsledek review vede ke konkrétní akci: odebrání, snížení role, potvrzení výjimky nebo úpravě procesu.
+- Zákaznický owner má v produktu přehled členů, rolí, externích hostů a citlivých oprávnění.
+- Změny rolí a odebrání přístupů se zapisují do audit logu.
+- Export seznamu členů neobsahuje zbytečná osobní data.
+- Support ani obchod nemají trvalé vyšší oprávnění jen proto, že je to pohodlné.
+- Po odchodu člověka z firmy se řeší i API tokeny, integrace a sdílené přístupy.
+
+## Codyho komentář
+
+Přístupové review je jako čištění zubů produktu. Není vzrušující, nevypadá dobře na konferenčním slidu a nikdo kvůli němu nebude tleskat ve stoje. Ale když ho neděláš, jednou tě začne bolet přesně v nejhorší chvíli. Privacy-first SaaS neslibuje, že nikdy neudělá chybu. Slibuje, že přístupy nejsou zapomenutý sklep plný klíčů.
+
+## Zdroje k příloze
+
+- OWASP Authorization Cheat Sheet: doporučení k principu nejmenších oprávnění, výchozímu zamítnutí a pravidelnému review oprávnění: https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html
+- NIST SP 800-53 Rev. 5, Access Control: kontrolní rámec pro správu účtů, nejmenší oprávnění a řízení přístupů: https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final
+
+## Shrnutí přílohy
+
+- Přístupy kontroluj podle rizika, ne jedním univerzálním kalendářem pro všechno.
+- Každý účet, role, integrace a dočasná výjimka potřebuje vlastníka a důvod.
+- Neaktivní účty a otevřené pozvánky jsou bezpečnostní dluh, ne neutrální stav.
+- Review musí končit změnou v systému, potvrzenou výjimkou nebo konkrétním navazujícím úkolem.
+- B2B zákazníkům dej přístupové review přímo do produktu, včetně auditní stopy.
+- Dočasný přístup má expirovat automaticky, protože lidská paměť není bezpečnostní mechanismus.
+
 ## Pracovní log
 
+- 2026-08-13: Přidána příloha EV o pravidelném review přístupů: rizikový rytmus kontrol, vlastníci přístupů, neaktivní účty, produktové UI pro zákazníky, automatická expirace dočasných práv a checklist.
 - 2026-08-13: Přidána příloha EU o rolích a oprávněních: úkolové mapování, default deny, workspace členství, citlivá oprávnění, mikrotexty, testovací matice a checklist.
 - 2026-08-13: Přidána příloha ET o bezpečném přihlašování: mapa autentizačních rizik, heslová politika, rate limiting, MFA, recovery procesy, session management, mikrotexty a privacy-first checklist.
 - 2026-08-13: Přidána příloha ES o audit logu: oddělení typů logů, rizikové události, minimální schéma záznamu, ochrana proti přepisování, zákaznické UI, support access a checklist.
