@@ -24478,8 +24478,149 @@ Webové formuláře nejsou jen UI detail. Rozhodují o konverzi, důvěře, kval
 
 ---
 
+# Příloha FE: Produktové nastavení bez bezpečnostní rulety, temných vzorců a datového autopilota
+
+Nastavení v SaaS produktu vypadá nenápadně. Není to hero sekce, není to nový dashboard a málokdo o něm napíše nadšený tweet. Jenže právě nastavení často rozhoduje, jestli zákazník produkt ovládá, nebo se ho bojí. Je to místo, kde se mění fakturace, role, notifikace, exporty, viditelnost dat, integrace a bezpečnostní volby. Jinými slovy: malý panel s velkou schopností rozbít den.
+
+Privacy-first produkt má mít nastavení navržené tak, aby bezpečná a střídmá volba byla výchozí. Ne schovaná. Ne prémiová. Ne dostupná jen člověku, který umí rozluštit tři záložky, dva modaly a jedno tlačítko „pokročilé“. Výchozí nastavení je tiché doporučení produktu. Pokud produkt ve výchozím stavu sdílí moc dat, posílá moc e-mailů nebo dává moc práv, říká tím zákazníkovi: „Hlavně ať nám to roste, bezpečnost nějak dopadne.“ To není strategie. To je compliance verze skoku do bazénu bez vody.
+
+## FE.1 Výchozí hodnota je produktové stanovisko
+
+Každý přepínač má tři vrstvy: technickou, uživatelskou a hodnotovou. Technicky zapíná funkci. Uživatelsky mění chování produktu. Hodnotově říká, co považuješ za normální.
+
+Příklady špatných výchozích hodnot:
+
+- všichni noví uživatelé dostanou administrátorskou roli,
+- produkt posílá týdenní marketingové e-maily bez samostatného souhlasu,
+- veřejné sdílení reportu je zapnuté automaticky,
+- export obsahuje všechna pole včetně interních poznámek,
+- integrace má přístup ke všem workspace datům, i když potřebuje jen jeden seznam,
+- auditní log se uchovává navždy bez jasného účelu a retenčního pravidla.
+
+Bezpečnější výchozí nastavení:
+
+- nový uživatel začíná s nejnižší rolí, která mu umožní první užitečný krok,
+- marketingová komunikace je oddělená od transakčních zpráv,
+- sdílení mimo workspace je vypnuté, dokud ho někdo vědomě nezapne,
+- export nabízí rozsah dat a vysvětluje, co obsahuje,
+- integrace žádá jen o konkrétní oprávnění,
+- logy mají retenční dobu a jasný provozní účel.
+
+Praktická věta pro rozhodování: „Kdyby zákazník nastavení nikdy neotevřel, choval by se produkt férově?“ Pokud odpověď zní ne, problém není v uživateli, ale v návrhu.
+
+## FE.2 Rozděl nastavení podle rozhodnutí, ne podle databázových tabulek
+
+Interní struktura produktu se nesmí bezmyšlenkovitě propsat do UI. Uživatel nechce přemýšlet, jestli „notification_preferences“, „workspace_policy“ a „billing_profile“ patří do tří různých sekcí. Chce změnit, kdo dostává upozornění, kdo vidí faktury a co se stane s daty.
+
+Rozumné členění pro menší B2B SaaS:
+
+- **Účet:** jméno, e-mail, heslo, passkeys, aktivní relace.
+- **Workspace:** název firmy, členové, role, pozvánky, vlastnictví.
+- **Soukromí a data:** export, retence, mazání, zpracovatelské informace, AI funkce.
+- **Notifikace:** transakční zprávy, produktové digesty, marketingové odběry.
+- **Integrace:** napojené služby, API klíče, webhooky, scopes, poslední použití.
+- **Fakturace:** tarif, fakturační údaje, platební metoda, historie faktur.
+- **Bezpečnost:** dvoufaktorové ověření, session politika, auditní log, přístup podpory.
+
+Není nutné mít všechno hned. U MVP stačí menší počet sekcí, ale každá musí odpovídat mentálnímu modelu zákazníka. Když zákazník hledá „kdo má přístup“, nemá lovit odpověď mezi profilem, týmem, billingem a tajnou sekcí admin panelu.
+
+## FE.3 Citlivé změny potvrzuj podle rizika
+
+Ne každé nastavení potřebuje potvrzovací modal. Když uživatel mění barvu štítku, nevolej bezpečnostní orchestr. Když ale mění vlastnictví workspace, vypíná dvoufaktorové ověření, odstraňuje platební metodu, generuje API klíč nebo povoluje veřejný odkaz, produkt má zpomalit a vysvětlit dopad.
+
+Rizikové akce rozděl do vrstev:
+
+| Typ akce | Příklad | Ochrana |
+| --- | --- | --- |
+| Nízké riziko | změna jazyka rozhraní | okamžité uložení a možnost vrátit |
+| Střední riziko | zapnutí digest e-mailu | jasný popis a potvrzení volby |
+| Vysoké riziko | změna role člena týmu | shrnutí dopadu a auditní stopa |
+| Kritické riziko | smazání workspace nebo převod vlastnictví | re-autentizace, čekací lhůta nebo dvojí potvrzení |
+
+Potvrzení má být konkrétní. Špatně: „Opravdu chcete pokračovat?“ Lépe: „Petr Novák získá roli Admin a bude moci spravovat členy, fakturaci a integrace.“ Uživatel má potvrzovat dopad, ne hádat význam tlačítka.
+
+## FE.4 Ukaž poslední změny a dej cestu zpět
+
+Nastavení bez historie je zdroj firemních legend. „Kdo vypnul notifikace?“ „Proč odešel webhook?“ „Kdy se změnila fakturační adresa?“ Pokud produkt neumí odpovědět, support začne archeologii v logách a tým ztratí čas.
+
+U důležitých nastavení stačí jednoduchá historie:
+
+- kdo změnu provedl,
+- kdy se stala,
+- jaké pole se změnilo,
+- z čeho na co,
+- odkud přibližně akce přišla, pokud je to bezpečně užitečné,
+- jestli šla změna automaticky vrátit.
+
+Pozor na privacy paradox: auditní historie nemá být nová šmírovací databáze. Ukládej provozní fakta, ne osobní román. Nepotřebuješ vědět, jak dlouho se uživatel díval na přepínač. Potřebuješ vědět, že 13. srpna v 10:42 změnil roli člena z Editor na Admin a změna byla potvrzená.
+
+Tam, kde to jde, přidej možnost vrátit změnu. Undo je lepší než varování. Varování říká „dej si pozor“. Undo říká „když se spleteš, nezničíme ti odpoledne“.
+
+## FE.5 Preference nejsou past na odběr
+
+Preference centrum má uživateli dát kontrolu, ne ho unavit. Nejhorší verze nastavení notifikací je stránka, kde se dá přihlásit ke všemu jedním klikem, ale odhlášení vyžaduje lov konkrétní kategorie. To je temný vzorec v obleku.
+
+Dobrá pravidla:
+
+- Odděl transakční, bezpečnostní, produktové a marketingové zprávy.
+- U každé kategorie vysvětli příklad zprávy.
+- Dej možnost vypnout marketing bez dopadu na používání produktu.
+- Nepředvyplňuj souhlas k marketingu jen proto, že uživatel dokončuje registraci.
+- Ulož změnu okamžitě a potvrď ji bez nutnosti dalších kroků.
+- U firemních účtů rozliš osobní preference a workspace povinná oznámení.
+
+Příklad mikrotextu:
+
+> Bezpečnostní upozornění posíláme vždy, protože chrání účet. Produktové tipy a marketingové novinky můžeš kdykoli vypnout; používání služby to neomezí.
+
+Tahle věta je krátká, ale dělá hodně práce. Vysvětluje rozdíl mezi nutností a volbou. Přesně to má nastavení dělat.
+
+## FE.6 Nastavení testuj jako kritickou cestu
+
+Týmy často testují registraci, platbu a hlavní funkci. Nastavení zůstane na konec, protože „to je jen pár formulářů“. Pak zákazník nemůže změnit e-mail, najít fakturu, vypnout integraci nebo pochopit, proč se mu posílají zprávy. Gratuluju, produkt právě schoval důvěru do sklepa.
+
+Testovací scénáře pro každé větší vydání:
+
+1. Nový člen přijde do workspace a změní jen své osobní preference.
+2. Admin pozve kolegu, nastaví roli a ověří, co kolega opravdu vidí.
+3. Uživatel vypne marketingové zprávy a dál dostane bezpečnostní oznámení.
+4. Admin vytvoří API klíč, zkopíruje ho, ztratí ho a musí ho bezpečně nahradit.
+5. Zákazník exportuje data a rozumí rozsahu exportu.
+6. Vlastník workspace chce smazat účet a vidí dopad, retenci a další krok.
+7. Support řeší problém bez toho, aby získal zbytečný trvalý přístup.
+
+Každý scénář projdi na desktopu i mobilu. B2B nastavení se sice často dělá u počítače, ale krizové změny se překvapivě rády dějí z vlaku, mobilu a poloviční baterky. Produkty mají smysl pro drama.
+
+## FE.7 Checklist privacy-first nastavení
+
+Před releasem nastavení si odškrtni:
+
+- Jsou bezpečné a datově střídmé hodnoty výchozí?
+- Je nastavení rozdělené podle rozhodnutí uživatele, ne interní databáze?
+- Vidí uživatel dopad citlivých změn před potvrzením?
+- Vyžadují kritické akce re-autentizaci nebo silnější potvrzení?
+- Existuje auditní stopa pro role, integrace, billing a datové operace?
+- Ukládá auditní stopa jen provozně nutná fakta?
+- Dá se u vybraných změn bezpečně vrátit zpět?
+- Jsou marketingové preference oddělené od nutných transakčních zpráv?
+- Má každá integrace jasný scope a možnost odpojení?
+- Je jasné, kde se řeší export, smazání a retence dat?
+- Funguje nastavení na mobilu a klávesnicí?
+- Má support dokumentovaný postup pro nejčastější změny bez ruční improvizace?
+
+## Codyho komentář
+
+Nastavení je místo, kde se pozná dospělost produktu. Hezká landing page slibuje důvěru. Nastavení ji buď potvrdí, nebo rozbije. Můj pohled: pokud má malý SaaS tým investovat jeden nenápadný sprint do kvality, ať ho dá do nastavení rolí, notifikací, exportů a bezpečnostních voleb. Není to sexy. Ale zákazník si právě u těchto obrazovek řekne: „Jo, tihle lidi vědí, co dělají.“ A to je lepší než další gradient v dashboardu. I když gradienty taky nejsou zločin, jen občas vypovídají pod nátlakem.
+
+## Shrnutí přílohy
+
+Produktové nastavení není administrativní skládka. Je to kontrolní centrum důvěry. Privacy-first SaaS má používat bezpečné výchozí hodnoty, členit volby podle rozhodnutí zákazníka, potvrzovat citlivé změny podle rizika, držet střídmou auditní stopu, umožnit návrat zpět a jasně oddělit nutnou komunikaci od marketingu. Když nastavení funguje klidně, zákazník má pocit kontroly — a tým má méně support požárů.
+
+---
+
 ## Pracovní log
 
+- 2026-08-13: Přidána příloha FE o produktovém nastavení bez bezpečnostní rulety: bezpečné výchozí hodnoty, členění podle rozhodnutí, potvrzování citlivých změn, historie změn, preference, testovací scénáře a checklist.
 - 2026-08-13: Přidána příloha FD o webových formulářích bez frikce a zbytečného sběru dat: účel polí, povinné údaje, mikrotexty, chyby, antispam, přístupnost a privacy-first checklist.
 - 2026-08-13: Přidána příloha FC o privacy-first notifikacích v SaaS: účel zpráv, typy komunikace, volba kanálu, preference centrum, digesty, bezpečné šablony, střídmé měření a checklist.
 - 2026-08-13: Přidána příloha FB o prázdných stavech v SaaS: první použití, filtry, oprávnění, bezpečné ukázkové datasety, jednoduché CTA, testování prázdných účtů a privacy-first checklist.
