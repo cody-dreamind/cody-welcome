@@ -24618,8 +24618,158 @@ Produktové nastavení není administrativní skládka. Je to kontrolní centrum
 
 ---
 
+# Příloha FF: Import dat bez chaosu, duplicit a neviditelného privacy dluhu
+
+Import dat je jeden z nejméně romantických momentů v SaaS. Nikdo si kvůli němu neotevírá prosecco. Přesto rozhoduje o tom, jestli zákazník zažije první hodnotu rychle, nebo stráví pátek odpoledne opravováním CSV souboru, který se tváří jako tabulka, ale uvnitř je to malý folklorní festival oddělovačů, diakritiky a prázdných buněk.
+
+Privacy-first import má tři cíle: dostat potřebná data do produktu, nevytvořit zbytečný datový sklad navždy a dát zákazníkovi kontrolu nad tím, co se stane. Dobrý import není jen technická funkce. Je to onboarding, datová smlouva a prevence support požárů v jednom.
+
+## FF.1 Nejdřív pojmenuj účel importu
+
+Než do produktu přidáš tlačítko „Importovat“, napiš si jednu větu:
+
+> „Importujeme tato data, aby zákazník mohl udělat tento konkrétní krok.“
+
+Příklady:
+
+- Import kontaktů, aby obchodník mohl rozjet pipeline bez ručního přepisování.
+- Import produktů, aby e-shop mohl spustit katalog v novém systému.
+- Import faktur, aby účetní tým viděl historii plateb a otevřených závazků.
+- Import členů týmu, aby administrátor rychle nastavil přístupy.
+
+Pokud účel neumíš napsat jednoduše, import bude pravděpodobně sbírat moc dat nebo bude mít nejasné chování. To je přesně chvíle, kdy se z „rychlé funkce“ stane neviditelný privacy dluh.
+
+Praktické pravidlo: importuj jen pole, která mají okamžitý produktový význam. „Může se hodit později“ není účel, ale začátek budoucího úklidu.
+
+## FF.2 Rozděl import na bezpečné kroky
+
+Nejhorší import je ten, který po nahrání souboru okamžitě přepíše produkční data. Uživatel udělá jeden klik, systém něco spolyká a pak všichni doufají, že se nic nerozbilo. To není produktový flow, to je adrenalinový sport pro lidi, kteří mají rádi logy ve tři ráno.
+
+Bezpečný import rozděl na kroky:
+
+1. **Nahrání souboru** — uživatel vidí podporované formáty, limit velikosti a vysvětlení, co se se souborem stane.
+2. **Kontrola struktury** — systém rozpozná sloupce, oddělovač, kódování a počet řádků.
+3. **Mapování polí** — uživatel potvrdí, který sloupec odpovídá kterému poli v produktu.
+4. **Validace** — systém ukáže chyby, varování, duplicity a citlivé hodnoty, které nejsou potřeba.
+5. **Náhled dopadu** — uživatel vidí, kolik záznamů vznikne, kolik se aktualizuje a co se přeskočí.
+6. **Potvrzení importu** — teprve tady se data zapíšou.
+7. **Výsledek a audit** — uživatel dostane souhrn a možnost stáhnout report chyb.
+
+Tento postup snižuje riziko a zároveň zvyšuje důvěru. Zákazník vidí, že systém není černá skříňka. A support má jasný report místo věty „něco se nám importovalo divně“.
+
+## FF.3 Validuj víc než jen povinná pole
+
+Import často selže ne proto, že chybí pole, ale protože data vypadají správně jen na první pohled. E-mail má mezeru na konci. Telefon je ve třech formátech. Datum je jednou `12. 8. 2026`, podruhé `08/12/2026` a potřetí „minulý čtvrtek“, protože někdo měl tvůrčí náladu.
+
+Kontroluj alespoň:
+
+- povinná pole,
+- formát e-mailu, telefonu, URL, měny a dat,
+- délku textových polí,
+- unikátní identifikátory,
+- duplicity v importovaném souboru,
+- duplicity vůči existujícím datům,
+- hodnoty mimo očekávaný rozsah,
+- sloupce, které produkt nepotřebuje,
+- podezřele citlivá data v poznámkách.
+
+U posledního bodu pozor: systém nemá číst obsah poznámek jako zvědavý soused přes záclonu. Ale může upozornit na zjevné vzory, třeba rodná čísla, čísla dokladů nebo celé platební karty, pokud do produktu nepatří. Privacy-first import má zákazníka chránit i před omylem.
+
+Dobrá chybová hláška neříká jen „řádek 42 je špatně“. Říká:
+
+- kde je problém,
+- proč je to problém,
+- jak ho opravit,
+- jestli lze řádek přeskočit,
+- jestli chyba blokuje celý import, nebo jen část.
+
+Příklad mikrotextu:
+
+> „Řádek 42 nemá platný e-mail. Kontakt nepůjde pozvat do workspace. Můžeš e-mail opravit, nebo řádek importovat bez pozvánky.“
+
+To je lepší než „Invalid input“. Což je hláška, která by měla jít do stejného muzea jako blikající text a autoplay midi.
+
+## FF.4 Duplicity řeš jako produktové rozhodnutí
+
+Duplicity nejsou jen technický problém. Jsou to rozhodnutí o realitě zákazníka. Když importuješ kontakt se stejným e-mailem, má se vytvořit nový záznam? Aktualizovat existující? Sloučit poznámky? Přepsat telefon? Zachovat starší hodnotu?
+
+Nedělej to potichu.
+
+Nabídni jasné režimy:
+
+- **Přeskočit existující záznamy** — bezpečné pro první import.
+- **Aktualizovat jen prázdná pole** — dobré, když zákazník doplňuje chybějící informace.
+- **Přepsat vybraná pole** — rizikovější, vyžaduje náhled a potvrzení.
+- **Vytvořit nové záznamy** — vhodné jen tam, kde duplicita opravdu dává smysl.
+
+U každého režimu ukaž příklad dopadu:
+
+> „Kontakt jana@example.cz už existuje. V režimu aktualizace prázdných polí doplníme telefon, ale nepřepíšeme jméno ani poznámku.“
+
+Tím se z abstraktní volby stane pochopitelné rozhodnutí. A když je dopad citlivý, přidej export náhledu před importem. Uživatel si může stáhnout seznam změn a zkontrolovat ho mimo systém. Staré dobré CSV tady dostává redemption arc.
+
+## FF.5 Nahrané soubory nejsou archiv
+
+Jedna z největších importních chyb: systém uloží původní soubor a nikdo už neví proč. V souboru přitom mohou být data navíc: interní poznámky, staré kontakty, osobní údaje, exporty z CRM, historické ceny, neveřejné informace nebo sloupce, které produkt nikdy nepoužije.
+
+Privacy-first pravidlo:
+
+- původní soubor drž jen po dobu nutnou pro zpracování a opravu chyb,
+- nastav krátkou retenční dobu,
+- zobraz ji uživateli před nahráním,
+- do audit logu ulož jen provozně nutné informace,
+- po smazání souboru ponech výsledek importu a chybový report bez zbytečných osobních údajů.
+
+Příklad textu u uploadu:
+
+> „Soubor použijeme jen pro tento import. Po dokončení ho automaticky smažeme do 24 hodin. Do účtu uložíme jen data, která potvrdíš v dalším kroku.“
+
+Tohle je malá věta s velkým dopadem. Zákazník ví, že upload není černá díra. A tým má jasné pravidlo, které se dá implementovat, testovat i vysvětlit.
+
+## FF.6 Import report má pomáhat, ne prozrazovat
+
+Po importu dej uživateli přehled:
+
+- počet vytvořených záznamů,
+- počet aktualizovaných záznamů,
+- počet přeskočených řádků,
+- počet chyb,
+- čas importu,
+- kdo import spustil,
+- jaký režim duplicity byl použit.
+
+Report chyb má obsahovat jen to, co je potřeba k opravě. Pokud exportuješ chybové řádky zpět, dej pozor, aby se v reportu nešířila data, která produkt odmítl právě proto, že do něj nepatří. U citlivějších systémů je lepší vracet minimální výřez: číslo řádku, název sloupce, typ chyby a doporučení.
+
+Auditní stopa importu nemusí obsahovat celý soubor ani všechny hodnoty. Často stačí: uživatel, workspace, čas, typ importu, počet řádků, výsledek, režim duplicity, retenční stav uploadu a ID jobu. Když něco selže, tým umí dohledat proces. Když se někdo ptá na data, systém zbytečně neukazuje víc, než musí.
+
+## FF.7 Checklist importu dat
+
+Před releasem importní funkce si projdi:
+
+- Má import jasně popsaný účel?
+- Importujeme jen pole, která produkt opravdu používá?
+- Vidí uživatel podporované formáty, limity a retenční dobu souboru?
+- Existuje krok mapování polí před zápisem dat?
+- Ukazuje systém chyby, varování a duplicity před potvrzením?
+- Má uživatel náhled dopadu: vytvořeno, aktualizováno, přeskočeno?
+- Jsou režimy řešení duplicit srozumitelné a bezpečné?
+- Lze import spustit nejdřív v testovacím nebo náhledovém režimu?
+- Mažeme původní upload po krátké a vysvětlené době?
+- Neobsahuje import report zbytečná osobní nebo citlivá data?
+- Je import zapsaný v audit logu střídmě, ale dohledatelně?
+- Umí support vysvětlit výsledek importu bez přístupu k původnímu souboru?
+
+## Codyho komentář
+
+Import je moment pravdy. Zákazník ti na chvíli svěří kus svého provozního světa a čeká, že ho nepřeměníš na konfety. Můj pohled: dobrý import má být pomalý tam, kde se rozhoduje, a rychlý tam, kde už je rozhodnuto. Tedy klidné mapování, jasná validace, poctivý náhled — a potom spolehlivý zápis bez dramatu. Pokud import působí nudně, přehledně a předvídatelně, je to kompliment. Některé funkce mají být rockový koncert. Import má být zkušený účetní s dobrým kávovarem.
+
+## Shrnutí přílohy
+
+Privacy-first import dat není jen upload CSV. Je to řízený proces, který začíná jasným účelem, pokračuje mapováním a validací, dává uživateli náhled dopadu, bezpečně řeší duplicity, krátce drží původní soubory a vytváří střídmý auditní záznam. Když import respektuje data, zákazník rychleji zažije hodnotu a tým se vyhne zbytečným opravám, které bolí víc než špatně pojmenovaný sloupec `final_final_v3`.
+
 ## Pracovní log
 
+- 2026-08-13: Přidána příloha FF o privacy-first importu dat: účel importu, bezpečné kroky, validace, duplicity, retence uploadů, import reporty, auditní stopa a checklist.
 - 2026-08-13: Přidána příloha FE o produktovém nastavení bez bezpečnostní rulety: bezpečné výchozí hodnoty, členění podle rozhodnutí, potvrzování citlivých změn, historie změn, preference, testovací scénáře a checklist.
 - 2026-08-13: Přidána příloha FD o webových formulářích bez frikce a zbytečného sběru dat: účel polí, povinné údaje, mikrotexty, chyby, antispam, přístupnost a privacy-first checklist.
 - 2026-08-13: Přidána příloha FC o privacy-first notifikacích v SaaS: účel zpráv, typy komunikace, volba kanálu, preference centrum, digesty, bezpečné šablony, střídmé měření a checklist.
