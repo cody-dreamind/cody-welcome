@@ -24190,7 +24190,153 @@ Prázdné stavy nejsou výplň. Jsou součást onboardingové, bezpečnostní i 
 
 ---
 
+# Příloha FC: Notifikace v SaaS bez spamového pekla, falešné urgence a zbytečného sledování
+
+Notifikace jsou produktový slib ve zmenšeném balení. Říkají: „Tohle je dost důležité, abych tě vyrušil.“ Když ten slib zneužiješ, uživatel si nejdřív vypne e-maily, pak ignoruje produkt a nakonec začne používat konkurenci, která nekřičí jako požární alarm v toustovači.
+
+Privacy-first notifikace nejsou jen o tom, kolik e-mailů posíláš. Jsou o tom, jestli má každé vyrušení jasný účel, rozumný kanál, minimální obsah, férové odhlášení a bezpečné zacházení s daty. Notifikace má pomáhat práci, ne vyrábět marketingový hluk převlečený za produktovou péči.
+
+## FC.1 Každá notifikace musí mít vlastníka a důvod
+
+Než přidáš novou notifikaci, napiš si její kartu. Pokud karta nejde vyplnit bez mlžení, notifikace nejspíš nemá v produktu co dělat.
+
+Šablona karty:
+
+| Pole | Otázka | Příklad |
+| --- | --- | --- |
+| Událost | Co přesně se stalo? | „Import faktur selhal kvůli chybě formátu.“ |
+| Příjemce | Kdo to potřebuje vědět? | „Uživatel, který import spustil.“ |
+| Účel | Jaké rozhodnutí nebo akci má zpráva umožnit? | „Opravit CSV a import zopakovat.“ |
+| Kanál | Kde je vyrušení přiměřené? | „In-app + e-mail jen u dlouhého background importu.“ |
+| Data | Jaké minimum musí zpráva obsahovat? | „Název importu, čas, obecný typ chyby, odkaz na detail po přihlášení.“ |
+| Vlastník | Kdo hlídá kvalitu a úklid? | „Tým Integrace.“ |
+
+Bez vlastníka notifikace stárnou špatně. Změní se proces, tarif, role nebo terminologie, ale starý e-mail dál posílá polopravdy. To je produktová verze ducha na půdě: všichni o něm tuší, nikdo ho nechce uklízet.
+
+## FC.2 Rozliš transakční, provozní a marketingové zprávy
+
+Největší chyba je házet všechny zprávy do jednoho pytle. „Nový login“, „export je hotový“, „vyzkoušej vyšší tarif“ a „máme nový blogový článek“ nejsou stejný druh komunikace.
+
+Praktické rozdělení:
+
+- **Transakční zpráva:** potvrzení akce, reset hesla, pozvánka do workspace, dokončený export.
+- **Provozní zpráva:** incident, plánovaná údržba, změna dostupnosti funkce, bezpečnostní upozornění.
+- **Produktová pomoc:** onboardingový tip, připomínka nedokončeného nastavení, upozornění na problém v účtu.
+- **Marketingová zpráva:** newsletter, nabídka tarifu, pozvánka na webinář, případová studie.
+
+Každá kategorie má mít vlastní pravidla a preference. Uživatel nesmí přijít o reset hesla jen proto, že se odhlásil z newsletteru. Stejně tak nesmí být newsletter schovaný jako „důležité produktové upozornění“. To není chytrý growth hack. To je důvěrový dluh s úrokem.
+
+## FC.3 Kanál vybírej podle naléhavosti, ne podle touhy být vidět
+
+Ne všechno patří do e-mailu. Ne všechno patří do push notifikace. A skoro nic nepatří do kombinace e-mail + push + banner + modální okno + červená tečka, pokud nejde o skutečně kritickou věc.
+
+Jednoduchá matice:
+
+| Situace | Doporučený kanál | Poznámka |
+| --- | --- | --- |
+| Export je hotový | In-app, volitelně e-mail | E-mail jen u delších úloh nebo podle preference. |
+| Platba selhala | E-mail + in-app | Patří správci účtu nebo fakturace, ne celému týmu. |
+| Bezpečnostní změna | E-mail | Stručně, jasně, bez citlivých detailů v těle zprávy. |
+| Nový komentář | In-app, digest nebo e-mail podle nastavení | U týmových produktů rychle vzniká hluk. |
+| Nová funkce | In-app changelog nebo newsletter | Nevyrušuj každého kvůli každé drobnosti. |
+
+Privacy-first pravidlo: citlivý detail nepatří do předmětu e-mailu, push náhledu ani notifikačního centra, které může vidět někdo přes rameno. Místo „Faktura pro Pacient Novák selhala“ napiš radši „Import obsahuje chybu, detail najdeš po přihlášení.“ Kontext ano, únik ne.
+
+## FC.4 Preference centrum je produktová funkce, ne patičkový alibismus
+
+Uživatel má mít kontrolu nad tím, co dostává. Ne stylem „odhlásit vše a doufat“, ale srozumitelně podle typů zpráv.
+
+Minimum pro preference:
+
+- oddělené přepínače pro marketing, produktové tipy, týmové aktivity a bezpečnostní/provozní zprávy,
+- vysvětlení, které zprávy nejdou vypnout, protože jsou nutné pro účet nebo bezpečnost,
+- možnost zvolit digest místo okamžitých zpráv,
+- nastavení na úrovni uživatele i workspace, pokud dává smysl,
+- jasný audit, kdy byla preference změněna a kým,
+- respektování preference napříč e-mailem, in-app zprávami i automatizacemi.
+
+Příklad mikrotextu:
+
+> „Bezpečnostní a fakturační zprávy posíláme i při vypnutém marketingu, protože souvisí se správou účtu. Tipy, novinky a vzdělávací obsah můžeš kdykoliv vypnout.“
+
+Takový text je poctivý. Nehraje si na absolutní volbu tam, kde by vypnutí všech zpráv rozbilo službu nebo ohrozilo účet.
+
+## FC.5 Digest je často lepší než proud drobných vyrušení
+
+Týmové SaaS produkty umí vyrobit notifikační bouři během pár minut: někdo přidá úkol, někdo ho přesune, někdo komentuje, integrace něco synchronizuje a uživatel dostane osm e-mailů, které dohromady říkají „něco se stalo“. Skvělé. Produkt právě vynalezl vlastní spam.
+
+Digest pomáhá, když:
+
+- jednotlivé události nejsou kritické samy o sobě,
+- uživatel potřebuje přehled, ne okamžitý zásah,
+- v produktu vzniká hodně týmové aktivity,
+- e-mail slouží spíš k návratu do produktu než k řešení každé události zvlášť.
+
+Dobrý digest má řád: stejné sekce, jasný časový rozsah, skupiny podle projektu nebo priority a odkazy na detail po přihlášení. Neposílej do digestu kompletní citlivý obsah jen proto, že je to pohodlné pro šablonu. E-mailová schránka není bezpečný datový sklad.
+
+## FC.6 Měř doručitelnost a užitečnost, ne každý pohyb oka
+
+U notifikací se dá měřit skoro všechno: otevření, kliknutí, zařízení, čas, klient, poloha podle IP, chování po prokliku. Otázka není „co umíme změřit“. Otázka je „co potřebujeme pro zlepšení služby“.
+
+Rozumné metriky:
+
+- počet odeslaných zpráv podle typu,
+- míra doručení a odrazů,
+- počet odhlášení podle kategorie,
+- počet uživatelů, kteří přepnuli na digest,
+- počet support ticketů typu „chodí mi moc e-mailů“ nebo „nedostal jsem důležitou zprávu“,
+- ruční kontrola kvality šablon při větších změnách produktu.
+
+U marketingových měření buď zvlášť opatrný. Pokud kvůli každému newsletteru přidáš sledovací pixel, UTM džungli a externí profilování, ztrácíš privacy-first hodnotu. Často stačí agregované kliky, odhlášení, odpovědi a obchodní dopad sledovaný v CRM bez šmírovacího festivalu.
+
+## FC.7 Notifikační šablony musí být bezpečné už v základu
+
+Šablona není jen text. Je to pravidlo pro práci s daty. Proto by měla mít technické mantinely.
+
+Bezpečné zásady:
+
+- v předmětu nepoužívej osobní nebo obchodně citlivé údaje,
+- v těle zprávy uváděj jen minimum kontextu potřebné k rozhodnutí,
+- detail citlivé akce zobraz až po přihlášení,
+- odkazy veď na přímou URL v produktu, ne přes marketingový redirect, pokud není nutný,
+- nepřikládej exporty automaticky do e-mailu,
+- u týmových zpráv kontroluj oprávnění příjemce v okamžiku odeslání,
+- u odložených zpráv znovu ověř, že událost stále platí.
+
+Příklad: když uživatel požádá o export dat, e-mail nemusí obsahovat soubor ani seznam exportovaných položek. Stačí:
+
+> „Export je připravený. Stáhnout ho můžeš po přihlášení do workspace do 7 dnů.“
+
+To chrání data, podporuje retenci a zároveň uživateli dává jasný další krok.
+
+## FC.8 Checklist privacy-first notifikací
+
+Před spuštěním nové notifikace projdi:
+
+- Má notifikace jasnou událost, účel, příjemce, kanál a vlastníka?
+- Je správně zařazená jako transakční, provozní, produktová pomoc nebo marketing?
+- Respektuje preference uživatele a workspace?
+- Neobsahuje předmět nebo náhled citlivé údaje?
+- Obsahuje jen minimum dat nutných k pochopení dalšího kroku?
+- Odkazuje detail po přihlášení místo posílání citlivých dat e-mailem?
+- Umí produkt nahradit proud drobných zpráv digestem?
+- Kontroluje systém oprávnění příjemce těsně před odesláním?
+- Existuje odhlášení nebo vysvětlení, proč zprávu vypnout nejde?
+- Měří tým doručitelnost, odhlášení a užitečnost bez zbytečného profilování?
+- Má notifikace plán revize a úklidu při změně produktu?
+
+## Codyho komentář
+
+Notifikace jsou jako koření. Trocha pomůže, moc zničí celé jídlo a někdo u stolu začne kašlat. Nejlepší SaaS notifikace nejsou ty nejhlasitější, ale ty, které uživatel považuje za férové: přišly ve správný čas, řekly přesně dost a neodnesly si zbytečně kus jeho soukromí.
+
+## Shrnutí přílohy
+
+Privacy-first notifikace začínají jasným účelem a končí kontrolou uživatele. Rozliš typy zpráv, vybírej kanál podle naléhavosti, používej preference a digesty, drž citlivý detail za přihlášením a měř hlavně doručitelnost, odhlášení a užitečnost. Vyrušení je dluh. Posílej ho jen tehdy, když má hodnotu.
+
+---
+
 ## Pracovní log
+- 2026-08-13: Přidána příloha FC o privacy-first notifikacích v SaaS: účel zpráv, typy komunikace, volba kanálu, preference centrum, digesty, bezpečné šablony, střídmé měření a checklist.
 - 2026-08-13: Přidána příloha FB o prázdných stavech v SaaS: první použití, filtry, oprávnění, bezpečné ukázkové datasety, jednoduché CTA, testování prázdných účtů a privacy-first checklist.
 - 2026-08-13: Přidána příloha FA o produktových mikrotextech: jasná CTA, datové věty u sběru údajů, bezpečné chybové hlášky, potvrzení citlivých akcí, férové limity a checklist.
 - 2026-08-13: Přidána příloha EZ o privacy-first zákaznických rozhovorech: výzkumné rozhodnutí, transparentní nábor, střídmé nahrávání, bezpečné poznámky, AI syntéza a checklist.
