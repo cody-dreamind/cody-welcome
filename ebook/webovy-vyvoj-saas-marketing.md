@@ -22387,10 +22387,152 @@ Mazání dat je místo, kde se pozná, jestli firma privacy-first opravdu žije,
 - UI musí dopady výmazu vysvětlit férově, bez manipulace a bez mlžení.
 
 
+
+---
+
+# Příloha ER: AI funkce v SaaS bez magického slibu, právní mlhy a datového hladomoru
+
+AI funkce v SaaS dnes často vznikají takhle: někdo vidí demo, tým přidá tlačítko „Generate“, marketing napíše „powered by AI“ a právní dokumentace se tváří, že se nic zvláštního nestalo. To je rychlé. A taky trochu jako dát do kanceláře robota s přístupem ke všem šanonům a doufat, že má dobré vychování.
+
+Privacy-first AI funkce nezačíná modelem. Začíná otázkou: jaké rozhodnutí nebo práci má uživateli zjednodušit, jaká data k tomu opravdu potřebuje a co se nesmí stát, i kdyby výstup vypadal sebevědomě.
+
+## ER.1 AI tlačítko musí mít pracovní smlouvu
+
+Každá AI funkce potřebuje krátkou produktovou definici. Ne „AI asistent pro všechno“, ale konkrétní práci, hranici a odpovědnost.
+
+Mini brief pro AI funkci:
+
+| Otázka | Dobrá odpověď | Varovná odpověď |
+| --- | --- | --- |
+| Co funkce dělá? | Shrne posledních 20 support ticketů do témat pro produktový tým. | Pomáhá s produktivitou. |
+| Kdo ji používá? | Customer success manager a produktový manažer. | Všichni uživatelé. |
+| Jaká data potřebuje? | Text ticketu, štítek produktu, datum, bez e-mailu zákazníka. | Všechno z workspace, pro jistotu. |
+| Co nesmí dělat? | Nesmí rozhodovat o refundaci ani posílat odpověď zákazníkovi bez člověka. | Model si poradí. |
+| Jak se ověřuje kvalita? | Člověk schvaluje shrnutí a označí nepřesnost. | Když to vypadá dobře, je to dobré. |
+
+Pracovní smlouva AI funkce chrání produkt před dvěma extrémy: buď se AI používá na všechno a nikdo jí nevěří, nebo se schová do interního procesu tak hluboko, že nikdo neví, co vlastně ovlivňuje.
+
+## ER.2 Data do promptu ber jako export, ne jako interní detail
+
+Prompt není jen textové pole. Je to datový tok. Pokud do něj vložíš zákaznický e-mail, smlouvu, zdravotní poznámku, interní strategii nebo API token, právě jsi vytvořil zpracování dat, které musí mít účel, právní základ, dodavatele, přístupová pravidla a retenční logiku.
+
+Privacy-first prompt pipeline:
+
+1. **Vyber minimum kontextu** — místo celé historie účtu pošli jen úryvky nutné pro úkol.
+2. **Odstraň identifikátory** — e-mail, telefon, jméno, IP a interní ID nahraď dočasnými značkami, pokud nejsou nutné.
+3. **Odděl instrukce od dat** — systémový prompt, uživatelský vstup a interní kontext drž odděleně; nelep vše do jedné polévky.
+4. **Zakazuj tajemství** — prompt nesmí obsahovat API klíče, session tokeny, resetovací odkazy ani neveřejné credentials.
+5. **Loguj bezpečně** — ukládej ID úlohy, typ funkce, velikost vstupu, stav a chybu; ne celý citlivý prompt, pokud to není nezbytné.
+6. **Nastav expiraci** — dočasné kontexty a mezivýstupy maž podle krátké retenční doby.
+
+Příklad: místo toho, aby funkce „navrhni odpověď zákazníkovi“ poslala do modelu celý profil zákazníka, stačí poslat poslední zprávu, typ tarifu, veřejný název produktu a interní pravidla podpory. Fakturační historie, IP logy a poznámky obchodníka tam většinou nemají co dělat.
+
+## ER.3 Rozliš asistenci, automatizaci a rozhodování
+
+Ne každá AI funkce má stejné riziko. Shrnutí textu je jiné než automatické odmítnutí žádosti, změna ceny nebo doporučení právního kroku. Evropský AI Act pracuje s rizikovým přístupem a Evropská komise popisuje různé povinnosti pro zakázané, vysoce rizikové a další AI systémy: https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai
+
+Praktická klasifikace pro malý SaaS:
+
+| Typ použití | Příklad | Doporučený režim |
+| --- | --- | --- |
+| Asistence | Návrh textu, shrnutí ticketu, návrh štítků | Člověk kontroluje před použitím |
+| Automatizace nízkého rizika | Předvyplnění popisu úkolu, řazení nápovědy | Uživatel vidí zdroj a může změnit výsledek |
+| Doporučení s dopadem | Priorita leadu, riziko churnu, skóre incidentu | Vysvětlení signálů, audit, možnost nesouhlasu |
+| Rozhodnutí s právním nebo významným dopadem | Přístup ke službě, kredit, zaměstnání, vzdělání | Bez odborného posouzení a právní kontroly do toho nelez |
+
+Codyho jednoduché pravidlo: čím víc AI výstup mění práva, peníze, přístup nebo důvěru člověka, tím méně smí být „magický“ a tím víc potřebuje vysvětlení, stopu a lidskou kontrolu.
+
+## ER.4 Uživatel má poznat, kdy mluví s AI
+
+Transparentnost není jen právní povinnost. Je to UX slušnost. Uživatel by měl vědět, jestli čte lidskou odpověď, AI návrh schválený člověkem, nebo automaticky generovaný text.
+
+Dobré mikrotexty:
+
+```text
+Tento návrh vytvořila AI z poslední zprávy zákazníka a interní šablony podpory. Před odesláním ho zkontrolujte.
+```
+
+```text
+Shrnutí je orientační. Neobsahuje všechny detaily ticketů a nemá nahrazovat právní ani bezpečnostní posouzení.
+```
+
+```text
+AI nepoužíváme k automatickému rozhodnutí o vašem účtu. Návrhy vždy kontroluje člověk z týmu.
+```
+
+Naopak špatné mikrotexty jsou „náš chytrý systém rozhodl“, „automaticky optimalizováno“ nebo „AI ví nejlépe“. To není produktová komunikace. To je kouřostroj.
+
+## ER.5 Dodavatel modelu je subdodavatel, ne kouzelná zásuvka
+
+Když SaaS posílá data do externího AI API, nejde jen o technickou integraci. Je to dodavatelský vztah. Potřebuješ vědět, kde se data zpracovávají, jak dlouho se drží, zda se používají k tréninku, kdo má přístup k logům, jak funguje smazání a jaké smluvní podmínky platí.
+
+Kontrolní otázky pro AI dodavatele:
+
+- Kde se zpracovávají vstupy, výstupy, logy a metadata?
+- Lze zvolit evropský region nebo evropského poskytovatele?
+- Používají se zákaznická data k tréninku modelů, evaluacím nebo ladění služby?
+- Jaká je retence promptů, výstupů a diagnostických logů?
+- Existuje DPA, seznam subprocesorů a proces oznamování změn?
+- Umí dodavatel smazat konkrétní data podle žádosti?
+- Jak se řeší incidenty, dostupnost a audit?
+- Lze funkci vypnout pro konkrétní workspace nebo datovou kategorii?
+
+Privacy-first varianta není vždy „nepoužívej AI“. Často je to „použij AI jen tam, kde má jasný přínos, pošli minimum dat, vyber dodavatele s rozumnou smlouvou a nastav vypínač“. Méně magie, víc provozní dospělosti.
+
+## ER.6 AI výstup potřebuje testování, ne obdivný potlesk
+
+AI chyby často nejsou pád aplikace. Jsou to věrohodně znějící nesmysly, zkreslené shrnutí, špatně pochopená výjimka nebo příliš sebevědomý tón. Proto testuj nejen technickou dostupnost, ale i kvalitu a riziko výstupu.
+
+Testovací sada pro AI funkci:
+
+- **Běžný případ** — typický vstup, očekávaná forma výstupu, žádné citlivé údaje.
+- **Krátký vstup** — model nesmí doplňovat fakta, která neexistují.
+- **Dlouhý vstup** — model má zachovat klíčové body a označit nejistoty.
+- **Citlivý vstup** — funkce má odmítnout nebo redigovat data podle pravidel.
+- **Prompt injection** — uživatelský text nesmí přepsat interní instrukce.
+- **Jazyk a tón** — výstup má odpovídat značce, trhu a situaci.
+- **Regresní sada** — ukládej anonymizované testovací příklady a pouštěj je před změnou promptu nebo modelu.
+
+Měř kvalitu prakticky: kolik návrhů člověk použil bez úprav, kolik vyžadovalo zásadní zásah, kolik bylo odmítnuto a proč. Nepotřebuješ sledovat každé kliknutí uživatele. Potřebuješ vědět, jestli funkce šetří práci bez vytváření nového rizika.
+
+## ER.7 Checklist privacy-first AI funkce
+
+- AI funkce má jasně popsaný úkol, uživatele, hranice a zakázané chování.
+- Do promptu posíláme jen data nutná pro konkrétní úkol.
+- Identifikátory, tajemství a zbytečný kontext redigujeme před voláním modelu.
+- Máme rozlišené, jestli jde o asistenci, automatizaci, doporučení nebo rozhodnutí s dopadem.
+- Uživatel pozná, kdy výstup vytvořila AI a kdy ho schválil člověk.
+- Dodavatel AI má zkontrolované místo zpracování, retenci, tréninkové použití dat, DPA a subprocesory.
+- Prompt a výstupy mají bezpečné logování, omezenou retenci a vypínač pro rizikové workspace.
+- Testujeme běžné případy, hraniční vstupy, citlivá data, prompt injection a regresní příklady.
+- Změny promptu nebo modelu procházejí review stejně jako změny kódu.
+- Marketing AI funkce slibuje konkrétní užitek, ne magické „autonomní“ schopnosti bez důkazu.
+
+## Codyho komentář
+
+Můj pohled — Cody: nejlepší AI funkce není ta, která na landing page bliká nejhlasitěji. Nejlepší je ta, u které uživatel řekne: „Jo, tohle mi ušetřilo dvacet minut a pořád tomu rozumím.“ Privacy-first AI není brzda inovace. Je to pojistka, že inovace neskončí jako drahý screenshot do krizového postmortemu.
+
+## Zdroje k příloze
+
+- Evropská komise: AI Act a rizikový rámec pro AI systémy: https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai
+- Evropská komise: obecný přehled evropského aktu o umělé inteligenci: https://commission.europa.eu/news/ai-act-enters-force-2024-08-01_en
+- Evropská komise: otázky a odpovědi k AI Actu včetně rolí poskytovatelů a nasazovatelů: https://digital-strategy.ec.europa.eu/en/faqs/artificial-intelligence-act
+- EDPB: AI, anonymizace a pseudonymizace v kontextu ochrany dat: https://www.edpb.europa.eu/topics/ai-and-technology_en
+
+## Shrnutí přílohy
+
+- AI funkce potřebuje jasný úkol, hranice a pravidla odpovědnosti.
+- Prompt je datový tok; posílej minimum kontextu a citlivé údaje rediguj před voláním modelu.
+- Rozliš asistenci, automatizaci, doporučení a rozhodnutí s významným dopadem.
+- Uživatel má poznat, kdy pracuje s AI výstupem a co může nebo nemůže čekat.
+- Dodavatel modelu musí projít privacy-first kontrolou stejně jako každý jiný subdodavatel.
+- AI výstup testuj na kvalitě, bezpečnosti, prompt injection i regresních příkladech.
+
 ---
 
 ## Pracovní log
 
+- 2026-08-13: Přidána příloha ER o privacy-first AI funkcích v SaaS: pracovní smlouva AI funkce, datové minimum v promptech, rizikové režimy, transparentnost, dodavatelská kontrola, testování a checklist.
 - 2026-08-13: Přidána příloha EQ o mazání a anonymizaci eventů: datová mapa výmazu, eventy bez identity, rozdíl mezi anonymizací a pseudonymizací, výmazové joby, backupy, exporty, UI výmazu a checklist.
 
 - 2026-08-13: Přidána příloha EP o obnově účtu a podpoře přístupu: rizikové scénáře, bezpečný reset hesla, MFA recovery, omezený support pohled, převod vlastnictví workspace a privacy-first checklist.
