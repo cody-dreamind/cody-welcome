@@ -21264,8 +21264,334 @@ Preference centrum je test charakteru produktu. Když je férové, jednoduché a
 - Firemní SaaS potřebuje auditovatelná workspace nastavení pro rizikové akce.
 - Jeden zdroj pravdy pro preference chrání uživatele, support i doručitelnost.
 
+---
+
+# Příloha EK: Datové pipeline bez nočního vysavače, tichých chyb a analytické skládky
+
+Datová pipeline zní jako věc pro velké firmy s vlastní datovou divizí, kávovarem dražším než firemní auto a tabulkou zkratek, která by vyděsila i účetní. Ve skutečnosti ji má skoro každý SaaS. Jen se často jmenuje méně vznešeně: export objednávek do účetnictví, synchronizace kontaktů do CRM, denní report pro tým, import událostí do analytiky, nebo pravidelný úklid starých záznamů.
+
+Privacy-first pohled říká jednoduchou věc: pipeline není omluva pro neomezené kopírování dat. Je to řízený pohyb konkrétních údajů za konkrétním účelem. Když to neuhlídáš, vznikne datová kanalizace s poetickým názvem „warehouse“ a nikdo už neví, proč v ní plavou e-maily zákazníků z roku 2019.
+
+## EK.1 Začni mapou toku, ne nástrojem
+
+Nejdřív si nakresli, odkud data tečou, kam jdou a proč. Nástroj přijde až potom. Jinak skončíš u situace „máme moderní stack“, ale nikdo neumí odpovědět, jestli se do reportingu posílá fakturační adresa, IP adresa nebo obsah zákaznické poznámky.
+
+Minimální mapa pipeline:
+
+| Tok | Zdroj | Cíl | Účel | Data | Frekvence | Vlastník |
+|---|---|---|---|---|---|---|
+| Denní obchodní report | produkční DB | interní dashboard | trend tržeb | agregace objednávek | denně | founder |
+| Synchronizace leadů | formulář | CRM | obchodní follow-up | jméno, e-mail, zpráva | po odeslání | sales |
+| Fakturační export | billing | účetnictví | zákonná evidence | fakturační údaje | denně | finance |
+| Produktové metriky | aplikace | analytika | zlepšení onboarding flow | anonymizované eventy | průběžně | product |
+
+U každého toku si polož tři otázky:
+
+- Umíme vysvětlit účel jednou normální větou?
+- Posíláme jen data nutná pro tenhle účel?
+- Má tok vlastníka, který pozná, že se rozbil nebo přestal dávat smysl?
+
+Pokud odpověď chybí, pipeline není připravená. Je to jen hadice připojená k produkci. A hadice připojená k produkci je přesně ten typ architektury, který jednou v noci pošle interní poznámky do nástroje, kam vůbec nepatří.
+
+## EK.2 Odděl provozní data od analytických kopií
+
+Produkční databáze má sloužit produktu. Analytická kopie má sloužit rozhodování. Když se tyhle světy smíchají, vzniká bezpečnostní i produktový problém: analytické dotazy zpomalují aplikaci, reporty pracují s příliš citlivými daty a každý export se tváří jako „jen dočasný“.
+
+Praktický vzor pro malý SaaS:
+
+1. Produkční DB je zdroj pravdy a přístup má jen aplikace a omezený provozní tým.
+2. Pipeline bere jen vybraná pole nebo agregace, ne celé tabulky „pro jistotu“.
+3. Identifikátory se pseudonymizují tam, kde není potřeba znát konkrétní osobu.
+4. Analytické prostředí má vlastní role, retenci a logování přístupů.
+5. Exporty z analytiky jsou dočasné artefakty, ne nový stínový systém.
+
+Příklad: pro měsíční report nepotřebuješ seznam všech zákaznických e-mailů. Potřebuješ počet nových účtů, aktivních workspace, churn, tržby podle tarifu a možná segment typu „malý tým / agentura / enterprise“. Pokud report obsahuje osobní údaje, mělo by být jasné proč. „Protože to jde“ není důvod, to je produktový reflex ještěrky.
+
+## EK.3 Každý krok musí být idempotentní nebo bezpečně opakovatelný
+
+Pipeline se rozbije. Ne jestli, ale kdy. Spadne API, vyprší token, přijde duplicitní webhook, job se restartuje uprostřed zápisu, nebo někdo změní CSV hlavičku, protože „to byla jen drobnost“. Dobrá pipeline proto počítá s opakováním.
+
+Co znamená bezpečné opakování:
+
+- Import používá stabilní externí ID, ne jen pořadí řádků.
+- Zápis kontroluje, jestli záznam už existuje.
+- Každý běh má `run_id`, stav, začátek, konec a souhrn výsledku.
+- Chyby se ukládají po položkách, ne jen jako obecné „failed“.
+- Částečný úspěch má jasný plán: retry, přeskočit, ručně vyřešit, nebo rollback.
+
+Jednoduchý model stavů:
+
+| Stav | Význam | Co se smí stát dál |
+|---|---|---|
+| `queued` | běh čeká | start |
+| `running` | běh pracuje | dokončení, retry dílčích kroků |
+| `completed` | vše hotovo | archivace souhrnu |
+| `completed_with_warnings` | část dat vyžaduje pozornost | ruční review |
+| `failed` | běh nedokončil kritickou část | retry nebo incident |
+| `canceled` | běh zastavil člověk nebo systém | bezpečné ukončení |
+
+Nikdy nestav pipeline tak, že jediná evidence je poslední řádek v logu. Log je lupa, ne účetní kniha. Potřebuješ strukturovaný stav, aby support i vývoj věděli, co se opravdu stalo.
+
+## EK.4 Minimalizuj data už na vstupu
+
+Nejlepší způsob, jak chránit data v pipeline, je neposílat je do ní. Maskování na konci pomáhá, ale je to poslední brzda. Privacy-first návrh řeší rozsah hned u zdroje.
+
+Praktické techniky:
+
+- **Allowlist polí:** pipeline smí číst jen výslovně povolená pole.
+- **Agregace před exportem:** report dostane součty a trendy, ne řádková data.
+- **Pseudonymní klíče:** analytika používá interní stabilní ID bez e-mailu.
+- **Krátká retence raw dat:** surové importní soubory žijí dny, ne roky.
+- **Oddělené citlivé údaje:** fakturační, zdravotní nebo právní údaje netečou do obecných produktových metrik.
+
+Příklad allowlistu pro produktové eventy:
+
+```text
+Povoleno:
+- event_name
+- occurred_at
+- workspace_id_hash
+- plan_type
+- onboarding_step
+- source_screen
+
+Zakázáno:
+- user_email
+- user_name
+- free_text_note
+- uploaded_file_name
+- message_body
+- raw_ip_address
+```
+
+Pozor na volná textová pole. Jsou datový divočák. Uživatel do nich může napsat osobní údaje, obchodní tajemství, zdravotní informace nebo heslo, protože lidstvo je kreativní hlavně tam, kde by nemělo. Do analytických pipeline je neposílej, pokud pro to nemáš opravdu silný důvod a ochranná pravidla.
+
+## EK.5 Monitoruj kvalitu, nejen běh jobu
+
+Pipeline může „běžet zeleně“ a přitom posílat nesmysly. Technicky dokončený job není totéž co správná data. Proto sleduj kvalitu výstupu, nejen exit code.
+
+Užitečné kontroly:
+
+- počet zpracovaných záznamů proti obvyklému rozsahu,
+- počet chyb a varování podle typu,
+- náhlý nárůst prázdných nebo neznámých hodnot,
+- změna schématu vstupu,
+- duplicitní záznamy,
+- zpoždění mezi vznikem dat a doručením do cíle,
+- výskyt zakázaných polí v payloadu.
+
+Příklad alertu, který dává smysl:
+
+```text
+Pipeline: billing_daily_export
+Stav: completed_with_warnings
+Zpracováno: 1 248 faktur
+Varování: 37 řádků bez DIČ, běžný rozsah 0–5
+Dopad: účetní export vyžaduje kontrolu před odesláním
+Další krok: finance owner zkontroluje vzorek a rozhodne do 10:00
+```
+
+Tohle je lepší než „ETL warning“. Výborně, robote, a teď co s tím má člověk dělat? Alert má říct dopad a další krok, jinak je to jen hluk s notifikací.
+
+## EK.6 Přístup k pipeline je produkční oprávnění
+
+Kdo může měnit pipeline, často může nepřímo měnit data v mnoha systémech. To není drobná administrace. Je to produkční oprávnění s bezpečnostním dopadem.
+
+Nastav minimum:
+
+- změny pipeline jdou přes review, ne přes přímé klikání v produkci,
+- secrets jsou ve správci tajemství, ne v YAML souboru v repozitáři,
+- přístupy do cílových systémů mají minimální scope,
+- každý běh zapisuje, kdo změnil konfiguraci a kdy,
+- ruční spuštění velkého exportu vyžaduje potvrzení,
+- dočasné debug logy se vypínají automaticky.
+
+U malého týmu stačí jednoduchá disciplína: jedna stránka dokumentace, jasný vlastník, review změn a pravidelný úklid tokenů. Není nutné budovat datovou pevnost Mordor Enterprise Edition. Je nutné vědět, kdo drží klíče a co otevřou.
+
+## EK.7 Checklist privacy-first pipeline
+
+Před spuštěním nové pipeline projdi tento checklist:
+
+- Tok má popsaný zdroj, cíl, účel, frekvenci a vlastníka.
+- Pipeline používá allowlist polí místo kopírování celých tabulek.
+- Osobní údaje se neposílají tam, kde stačí agregace nebo pseudonym.
+- Raw soubory a dočasné exporty mají krátkou retenci.
+- Každý běh má strukturovaný stav, souhrn a dohledatelné chyby.
+- Opakovaný běh nevytvoří duplicity ani tiché přepsání dat.
+- Alerty popisují dopad a další krok, ne jen technický stav.
+- Secrets jsou mimo kód a mají vlastníka rotace.
+- Přístupy do zdrojů i cílů mají minimální oprávnění.
+- Jednou měsíčně někdo zkontroluje, jestli pipeline pořád slouží původnímu účelu.
+
+## Codyho komentář
+
+Datová pipeline je jako stěhování firemního archivu. Když máš seznam krabic, odpovědnou osobu a víš, kam co patří, je to nuda — krásná, bezpečná nuda. Když jen otevřeš dveře dodávky a začneš házet složky dovnitř, možná budeš rychlý, ale později najdeš smlouvy vedle marketingových statistik a budeš tvrdit, že „data-driven“ znamená „někam jsme to odvezli“.
+
+Privacy-first pipeline není pomalejší. Je přesnější. Posílá méně dat, s jasnějším účelem a menším rizikem. To je přesně typ nudné profesionality, která v SaaS vydělává peníze a šetří nervy.
+
+## Shrnutí přílohy
+
+- Každá pipeline potřebuje mapu toku, účel, vlastníka a frekvenci.
+- Produkční data a analytické kopie mají být oddělené technicky i oprávněními.
+- Bezpečné opakování, stabilní ID a strukturovaný stav chrání před duplicitami.
+- Minimalizace na vstupu je lepší než maskování až na konci.
+- Monitoring má hlídat kvalitu dat, dopad a další krok, ne jen zelený běh jobu.
+
+# Příloha EL: Datový katalog a lineage bez archeologie v tabulkách, tajných exportů a „někdo to kdysi napojil“
+
+Datový katalog zní jako věc pro enterprise firmu, kde má každý tým vlastní zkratku, budget a interní portál, který nikdo dobrovolně neotevře. Jenže malý SaaS potřebuje katalog ještě víc, protože má méně lidí, méně času a často víc kontextu schovaného v hlavách zakladatelů.
+
+Privacy-first katalog není muzeum všech sloupců. Je to praktická mapa: jaká data máme, proč je máme, odkud tečou, kdo za ně odpovídá, kam se kopírují a kdy mají zmizet. Když tahle mapa chybí, každá nová integrace, export nebo incident začíná větou: „Počkej, odkud se tohle vlastně bere?“ To je věta, která umí spálit celé odpoledne a občas i důvěru zákazníka.
+
+## EL.1 Katalog začni otázkami, ne nástrojem
+
+První verze datového katalogu může být Markdown soubor, tabulka v repozitáři nebo stránka ve znalostní bázi. Důležitější než nástroj je sada otázek, na které umí tým rychle odpovědět.
+
+Minimum pro každý datový objekt:
+
+| Pole katalogu | Co má říct | Příklad |
+| --- | --- | --- |
+| Název | Jak objekt nazývá produkt i tým | `customer_contact` |
+| Účel | Proč data existují | Odpověď na poptávku a navazující obchodní komunikace |
+| Zdroj | Kde data vznikají | Kontaktní formulář na webu |
+| Vlastník | Kdo rozhoduje o změnách | Obchodní owner + technický owner |
+| Citlivost | Jaké riziko data nesou | Osobní údaj, obchodní kontext |
+| Retence | Kdy se mažou nebo anonymizují | 12 měsíců bez obchodního vztahu |
+| Příjemci | Kam data odcházejí | Interní e-mail, CRM, zálohy |
+| Poznámka pro support | Co smí support vidět a říct | Zobrazit zprávu, nesdílet interní poznámky |
+
+Nezačínej katalog tím, že importuješ celé schéma databáze. To je sice efektní, ale málokdy užitečné. Sloupec `created_at` je méně důležitý než odpověď na otázku, jestli data posíláš do externího nástroje a proč.
+
+## EL.2 Lineage popisuje cestu dat, ne jen jejich adresu
+
+Lineage je stopa, kudy data prošla. Pro privacy-first provoz je klíčová, protože data málokdy zůstávají na jednom místě. Uživatel vyplní formulář, aplikace zapíše záznam do databáze, notifikace odejde e-mailem, část se dostane do CRM, denní job vytvoří report a záloha si vše uloží bokem. Gratuluji, právě vznikla malá datová turistika.
+
+Praktická lineage karta může vypadat takto:
+
+```text
+Objekt: customer_contact
+Vznik: webový formulář /kontakt
+Primární uložení: produkční databáze, tabulka inquiries
+Odvozené kopie: notifikační e-mail, CRM lead, denní obchodní report
+Dočasné kopie: fronta pro odeslání e-mailu, aplikační log bez obsahu zprávy
+Zálohy: denní šifrovaná záloha databáze
+Výmaz: CRM lead a databázový záznam po retenci; zálohy podle backup politiky
+Riziko: zpráva může obsahovat citlivý obsah vložený uživatelem
+```
+
+Tohle nemusí být perfektní diagram. Stačí, když pomůže odpovědět na tři otázky: kde data vznikla, kam se dostala a kde je musíme řešit při změně, incidentu nebo žádosti o výmaz.
+
+## EL.3 Kataloguj hlavně rozhodovací data
+
+Není realistické ručně popsat každý technický detail. Malý tým by se měl soustředit na data, která ovlivňují zákazníka, práva, finance, bezpečnost nebo produktová rozhodnutí.
+
+Prioritní oblasti:
+
+- osobní údaje zákazníků, uživatelů a leadů,
+- fakturační a smluvní údaje,
+- role, oprávnění a auditní události,
+- produktové eventy a analytické agregace,
+- exporty, importy a integrační payloady,
+- support tickety, screenshoty a přílohy,
+- AI vstupy, výstupy a případné uložené konverzace.
+
+Příklad rozhodnutí: pokud katalog ukáže, že marketingový report používá e-mail zákazníka jen jako identifikátor řádku, je to signál k úpravě. Možná stačí stabilní interní ID, hash nebo agregace podle segmentu. Katalog tím přímo šetří riziko, ne jen plní dokumentační kolonku.
+
+## EL.4 Vlastník dat není ten, kdo poslední upravil SQL
+
+Každý důležitý datový objekt potřebuje dva typy vlastnictví. Produktový vlastník říká, proč data existují a jaký mají dopad na zákazníka. Technický vlastník ví, kde jsou uložená, jak se mění a jak se opravují.
+
+Bez vlastníka vzniká klasický SaaS folklór: report nikdo nechce vypnout, protože „ho možná někdo používá“; export nikdo neumí vysvětlit, protože ho psal bývalý kolega; tabulka se nesmí změnit, protože se jí bojí i databáze.
+
+Dobrá vlastnická karta:
+
+```text
+Datový objekt: subscription_status
+Produktový vlastník: revenue owner
+Technický vlastník: backend owner
+Zákaznický dopad: ovlivňuje přístup k placeným funkcím
+Zdroje pravdy: billing provider webhooky + interní subscription tabulka
+Zakázané použití: marketingové segmenty bez samostatného účelu
+Revize: každé čtvrtletí nebo při změně billing flow
+```
+
+Vlastnictví nemusí znamenat byrokracii. Znamená to, že když něco pípne, někdo ví, jestli je to požár, nebo jen toaster v kanceláři.
+
+## EL.5 Katalog musí žít ve změnovém procesu
+
+Datový katalog zastará přesně ve chvíli, kdy ho oddělíš od běžné práce. Proto ho napoj na změny produktu, integrací a analytiky.
+
+Při každém pull requestu nebo produktovém rozhodnutí se ptej:
+
+- Přidáváme nové osobní údaje?
+- Měníme účel existujících dat?
+- Vzniká nová kopie v integraci, exportu, logu nebo reportu?
+- Potřebujeme upravit retenci nebo informační text pro uživatele?
+- Mění se vlastník nebo oprávnění?
+- Umíme data exportovat, opravit a smazat?
+
+Když je odpověď „ano“, aktualizace katalogu je součást změny. Ne až někdy potom, ne po auditu, ne v pátek v 17:58. Součást změny znamená, že bez toho změna není hotová.
+
+## EL.6 Praktická forma pro malý tým
+
+Začni jedním souborem `data-catalog.md` nebo stránkou „Datové objekty“ ve znalostní bázi. Pro každý objekt použij stejnou šablonu a nedělej z toho encyklopedii.
+
+Šablona:
+
+```text
+Název:
+Krátký popis:
+Účel:
+Zdroj:
+Systémy, kde se ukládá:
+Odvozené kopie:
+Vlastník produktu:
+Technický vlastník:
+Citlivost:
+Retence:
+Kdo má přístup:
+Jak se exportuje:
+Jak se opravuje:
+Jak se maže nebo anonymizuje:
+Poslední revize:
+```
+
+Jednou měsíčně vyber tři nejrizikovější objekty a zkontroluj, jestli popis pořád sedí. Nečekej, až katalog popíše úplně všechno. Lepší je mít přesný katalog pro 20 důležitých toků než automaticky vygenerovaný hřbitov 900 tabulek, kterému nikdo nevěří.
+
+## EL.7 Checklist datového katalogu a lineage
+
+Před dalším větším release projdi tento checklist:
+
+- Důležité datové objekty mají popsaný účel, zdroj, vlastníka a retenci.
+- U osobních údajů je jasné, v jakých systémech a kopiích se objevují.
+- Lineage umí vysvětlit cestu dat od vzniku po export, report nebo smazání.
+- Každý nový export nebo integrace aktualizuje katalog.
+- Support ví, co smí vidět, upravit a sdílet se zákazníkem.
+- Analytické kopie mají vlastní pravidla retence a přístupu.
+- AI funkce mají popsané vstupy, výstupy, ukládání a mazání.
+- Katalog je součástí review procesu, ne samostatný dokument pro auditní folklór.
+- Vlastníci jsou konkrétní role nebo lidé, ne „tým obecně“.
+- Nejrizikovější objekty se revidují pravidelně, ideálně měsíčně nebo kvartálně.
+
+## Codyho komentář
+
+Datový katalog není sexy. Nikdo si kvůli němu nekoupí tričko s nápisem „Ask me about lineage“. Ale když přijde incident, žádost o výmaz, změna integrace nebo otázka zákazníka z enterprise nákupu, katalog je rozdíl mezi klidnou odpovědí a digitálním hledáním ponožek ve sklepě.
+
+Můj pohled — Cody: privacy-first firma nepotřebuje znát méně o svém produktu. Potřebuje vědět přesněji, která data jsou opravdu důležitá. Katalog je způsob, jak se z „máme někde data“ stane „víme, proč je máme a co s nimi děláme“.
+
+## Shrnutí přílohy
+
+- Datový katalog má odpovídat na praktické otázky o účelu, zdroji, vlastníkovi, retenci a příjemcích dat.
+- Lineage popisuje cestu dat mezi formuláři, databázemi, logy, integracemi, reporty a zálohami.
+- Malý tým má katalogovat hlavně data s dopadem na zákazníka, práva, finance, bezpečnost a produktová rozhodnutí.
+- Vlastnictví dat má produktovou i technickou rovinu.
+- Katalog musí být součást změnového procesu, jinak rychle zestárne na dekorativní dokument.
+
 ## Pracovní log
 
+- 2026-08-13: Přidána příloha EL o datovém katalogu a lineage: účel datových objektů, cesta dat mezi systémy, vlastnictví, změnový proces, praktická šablona a checklist.
+
+- 2026-08-12: Přidána příloha EK o privacy-first datových pipelinech: mapa toků, oddělení provozních a analytických dat, idempotence, minimalizace polí, monitoring kvality, oprávnění a checklist.
 - 2026-08-12: Přidána příloha EJ o preference centru: jasné přepínače, férové odhlašování, workspace nastavení, audit log, jednotný zdroj pravdy a privacy-first checklist.
 - 2026-08-12: Přidána příloha EI o importech a migracích dat: importní kontrakt, náhled před zápisem, validace, duplicity, retence souborů, background joby, oprávnění a checklist.
 - 2026-08-12: Přidána příloha EH o interních nástrojích a admin rozhraní: úkolová mapa, role podle rizika, citlivé akce, exporty, impersonace, bezpečné admin UX a checklist.
