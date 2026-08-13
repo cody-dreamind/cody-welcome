@@ -22528,10 +22528,294 @@ Můj pohled — Cody: nejlepší AI funkce není ta, která na landing page blik
 - Dodavatel modelu musí projít privacy-first kontrolou stejně jako každý jiný subdodavatel.
 - AI výstup testuj na kvalitě, bezpečnosti, prompt injection i regresních příkladech.
 
+
+# Příloha ES: Audit log bez šmírovací kroniky, forenzní mlhy a CSV detektivky
+
+Audit log je paměť systému pro důležité změny: kdo něco udělal, kdy, v jakém kontextu a s jakým výsledkem. Není to náhrada analytiky, supportového CRM ani tajná kamera na uživatele. Když ho navrhneš dobře, pomůže při incidentech, zákaznických sporech, bezpečnostním review i interním provozu. Když ho navrhneš špatně, vznikne nekonečná tabulka osobních údajů, kterou se každý bojí otevřít a nikdo neumí číst. Takový excelový Mordor, jen s horší retencí.
+
+OWASP ve svých doporučeních k logování zdůrazňuje, že bezpečnostní logy mají obsahovat dost informací pro následné monitorování a analýzu, typicky „kdy, kde, kdo a co“: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html. Privacy-first audit log k tomu přidává ještě pátou otázku: „kolik detailu je opravdu nutné?“
+
+## ES.1 Nejdřív odděl audit log od běžných technických logů
+
+Technický log říká, že endpoint spadl, job doběhl nebo cache zlobí jako tiskárna před deadline. Audit log říká, že uživatel změnil oprávnění, exportoval data, smazal projekt nebo vypnul fakturaci. Míchat tyhle světy dohromady je lákavé, protože „log jako log“. Jenže mají jiný účel, přístup, retenci i čtenáře.
+
+Praktické rozdělení:
+
+| Typ záznamu | Účel | Typický čtenář | Retence |
+| --- | --- | --- | --- |
+| Technický log | Debug, dostupnost, výkon | Vývojář, SRE | Krátká, podle provozní potřeby |
+| Bezpečnostní log | Detekce útoku, podezřelé chování | Security, admin | Delší, podle rizika |
+| Audit log | Důkaz důležité akce a odpovědnosti | Admin workspace, support, compliance | Jasně daná a zdokumentovaná |
+| Produktová analytika | Zlepšování produktu | Produkt, marketing | Agregovaná nebo pseudonymizovaná |
+
+Audit log nemá obsahovat stack trace, celé request body ani náhodné debug hlášky. Má být čitelný i za tři měsíce, kdy už si nikdo nepamatuje, proč se daná změna dělala.
+
+## ES.2 Loguj události podle rizika, ne podle technické pohodlnosti
+
+Nejčastější chyba: tým loguje to, co se snadno zachytí v kódu, ne to, co bude později potřeba vysvětlit. Výsledek je detailní kronika kliknutí, ale žádná odpověď na otázku „kdo přidal externího uživatele do workspace?“
+
+Události vhodné pro audit log:
+
+- přihlášení, odhlášení a změna MFA u administrátorských účtů;
+- změna rolí, oprávnění, vlastníka workspace nebo fakturačního kontaktu;
+- vytvoření, stažení nebo smazání exportu dat;
+- změna retenčního pravidla, integrace, webhooku nebo API klíče;
+- přístup supportu do zákaznického workspace;
+- smazání účtu, projektu, datového zdroje nebo důležité konfigurace;
+- změna nastavení, které ovlivňuje soukromí, bezpečnost nebo komunikaci se zákazníky.
+
+Naopak běžné čtení obrazovky, hover nad tlačítkem nebo každé otevření menu do audit logu nepatří. Pokud chceš vědět, jestli lidé rozumí UI, použij agregovanou produktovou metriku. Audit log není behaviorální analytika v obleku.
+
+## ES.3 Každý záznam má mít minimální, ale použitelnou strukturu
+
+Audit log musí být strojem zpracovatelný a člověkem čitelný. Bez struktury se z něj stane detektivka, kde hlavní postava je `payload_old_final2.json`.
+
+Minimální schéma:
+
+| Pole | Příklad | Poznámka |
+| --- | --- | --- |
+| `event_id` | `evt_01H...` | Jedinečný identifikátor záznamu |
+| `occurred_at` | `2026-08-13T07:20:00Z` | Čas události v UTC |
+| `actor_type` | `user`, `support`, `system`, `api_key` | Kdo akci spustil |
+| `actor_id` | interní ID uživatele | Ne e-mail, pokud není nutný |
+| `workspace_id` | interní ID workspace | Pomáhá filtrovat zákaznický kontext |
+| `action` | `member.role_changed` | Stabilní název události |
+| `target_type` | `member`, `api_key`, `export` | Čeho se akce týkala |
+| `target_id` | interní ID objektu | Bez zbytečných osobních detailů |
+| `outcome` | `success`, `denied`, `failed` | Výsledek akce |
+| `reason` | `user_request`, `policy_denied` | Krátký důvod, pokud existuje |
+| `request_id` | korelační ID | Spojení s technickými logy |
+
+U změn rolí často stačí `from_role` a `to_role`. U exportu stačí typ exportu, velikost a stav. Do audit logu nepatří celý export, obsah zprávy, dokument, faktura ani osobní poznámka supportu. Pokud potřebuješ forenzní detail, ulož ho do odděleného bezpečnostního procesu s omezeným přístupem a jasnou retencí.
+
+## ES.4 Audit log musí být odolný proti přepisování
+
+Audit log, který může běžný admin upravit nebo smazat bez stopy, je spíš ozdobná kronika než důkaz. Nemusíš hned stavět bankovní trezor s blockchainovou fanfárou, ale záznamy důležitých akcí mají být append-only nebo aspoň chráněné proti tichému přepsání.
+
+Praktická pravidla:
+
+- aplikace záznamy přidává, ale běžné UI je neumí editovat;
+- smazání audit logu není dostupné běžným uživatelům ani supportu;
+- přístup k logům se také loguje;
+- export audit logu je samostatná auditovaná událost;
+- retence se mění jen přes oprávněnou roli a změna se zaznamená;
+- u kritických systémů ukládej kopii do odděleného úložiště nebo služby.
+
+Malý SaaS nemusí mít všechno od prvního dne. Ale už MVP by mělo umět odpovědět na otázky: kdo změnil oprávnění, kdo spustil export a kdo měl support přístup k workspace. Bez toho se incident řeší stylem „projdi logy a modli se“, což je metoda, kterou bych nedoporučil ani nepříteli. Možná jen tiskárně.
+
+## ES.5 Zákazník má vidět to, co mu pomůže řídit vlastní riziko
+
+Audit log není jen interní nástroj. U B2B SaaS je to součást důvěry a často i nákupní argument. Administrátor zákazníka chce vědět, kdo přidal nového člena, kdo změnil integraci, kdo stáhl export a kdy se support podíval do účtu.
+
+Zákaznický audit log v UI by měl nabídnout:
+
+- filtr podle období, aktéra, typu akce a výsledku;
+- lidský popis akce: „Jana změnila roli uživatele Petr z Editor na Admin“;
+- technický detail po rozkliknutí: ID, request ID, zdroj akce, výsledek;
+- export jen pro oprávněné role;
+- vysvětlení retence přímo v nastavení;
+- možnost napojení na SIEM nebo webhook až ve chvíli, kdy cílový zákazník opravdu potřebuje enterprise provoz.
+
+Pozor na privacy detail: pokud uživatel odejde z firmy nebo požádá o výmaz, audit log nemusí vždy zmizet celý, protože může existovat oprávněný bezpečnostní nebo právní důvod záznam držet. Ale UI by nemělo zbytečně zobrazovat osobní údaje bývalého uživatele, pokud stačí interní ID, role nebo anonymizovaný popis. To je přesně místo, kde se potkává retence, bezpečnost a slušnost.
+
+## ES.6 Support přístup bez audit logu je pozvánka k průšvihu
+
+Když support vstupuje do zákaznického workspace, musí být jasné proč, kdo, na jak dlouho a co udělal. Ne proto, že supportu nevěříme. Protože dobrý systém chrání i poctivé lidi před podezřením a zákazníka před pocitem, že mu někdo chodí po bytě v botách.
+
+Minimum pro support access:
+
+- důvod přístupu navázaný na ticket nebo incident;
+- časově omezené oprávnění;
+- zobrazení jen nutných dat;
+- výrazný štítek v interním UI, že jde o zákaznický prostor;
+- audit událostí `support.access_started`, `support.action_performed`, `support.access_ended`;
+- zákaz exportů a citlivých akcí bez dalšího schválení;
+- zákazník vidí alespoň souhrn support přístupu, pokud to odpovídá produktu a smlouvě.
+
+Tahle disciplína často ušetří víc důvěry než nejhezčí bezpečnostní stránka. Trust pack říká „máme proces“. Audit log ukazuje „proces opravdu běží“.
+
+## ES.7 Checklist audit logu
+
+- Máme jasně oddělené technické logy, bezpečnostní logy, audit log a produktovou analytiku.
+- Audit log obsahuje důležité změny oprávnění, exportů, integrací, mazání, support přístupu a privacy nastavení.
+- Každý záznam má čas, aktéra, workspace, akci, cíl, výsledek a korelační ID.
+- Do audit logu neukládáme celé request body, dokumenty, zprávy, exporty ani tajemství.
+- Záznamy nejdou běžně upravovat a smazání nebo export logu je samo auditovanou akcí.
+- Přístup k audit logu je omezený podle rolí a pravidelně kontrolovaný.
+- Retence audit logu je zdokumentovaná, vysvětlená v produktu a sladěná s právním i bezpečnostním rizikem.
+- Zákaznický admin vidí srozumitelný audit důležitých akcí ve svém workspace.
+- Support přístup je časově omezený, zdůvodněný, auditovaný a datově minimální.
+- Před incidentem máme připravený postup, jak z audit logu rychle získat časovou osu bez zbytečného exportu osobních dat.
+
+## Codyho komentář
+
+Můj pohled — Cody: audit log je jedna z těch věcí, které nikdo nechce řešit, dokud ji zoufale nepotřebuje. Pak se najednou ukáže, že „něco bude v logách“ není strategie, ale zaklínadlo. Dobrý audit log je nudný, strukturovaný a omezený. Přesně proto je užitečný.
+
+## Zdroje k příloze
+
+- OWASP Logging Cheat Sheet: doporučení ke struktuře a obsahu bezpečnostních logů: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+- OWASP Developer Guide: bezpečnostní logování a monitoring v návrhu webových aplikací: https://devguide.owasp.org/en/04-design/02-web-app-checklist/09-logging-monitoring/
+- OWASP Session Management Cheat Sheet: doporučení logovat životní cyklus session a citlivé změny oprávnění: https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html
+- Evropská komise: principy GDPR, zejména minimalizace, transparentnost a omezení uložení: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en
+
+## Shrnutí přílohy
+
+- Audit log je důkaz důležitých akcí, ne produktová analytika ani debug skládka.
+- Loguj události podle rizika: role, exporty, integrace, mazání, support přístup a privacy nastavení.
+- Struktura má odpovědět na otázky kdy, kde, kdo, co, s jakým výsledkem a s jakým korelačním ID.
+- Minimalizuj obsah záznamu: ukládej identifikátory a metadata, ne citlivý obsah a celé payloady.
+- Záznamy chraň proti tichému přepsání a audituj i přístup k audit logu.
+- Zákaznický audit log zvyšuje důvěru, pokud je čitelný, filtrovatelný a přístupný jen oprávněným rolím.
+- Support access bez auditní stopy je zbytečné riziko pro zákazníka i tým.
+
+---
+
+# Příloha ET: Přihlašování bez bezpečnostního divadla, frikce pro poctivé lidi a dárků pro útočníky
+
+Přihlašování je zvláštní kout SaaS produktu. Když funguje dobře, nikdo ho nechválí. Když je špatně, uživatelé nadávají, support hoří a útočníci mají den otevřených dveří. Cílem není vyrobit nejpřísnější bránu v Evropě, kde se i administrátor bojí kliknout na vlastní profil. Cílem je rozumně chránit účet, data a kritické akce bez toho, aby se z běžného použití stal test trpělivosti.
+
+OWASP Authentication Cheat Sheet doporučuje mimo jiné bezpečné session management postupy, ochranu proti hádání hesel a zavedení MFA tam, kde to dává smysl: https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html. NIST SP 800-63B-4 navíc zdůrazňuje phishing-resistant autentizaci a uvádí WebAuthn/FIDO2 jako příklad přístupu vázaného na doménu služby: https://pages.nist.gov/800-63-4/sp800-63b.html
+
+## ET.1 Začni mapou rizik, ne seznamem funkcí
+
+Malý SaaS často přidá „login přes e-mail a heslo“ a zbytek řeší až ve chvíli, kdy přijde první podezřelý incident. Lepší je sepsat si autentizační mapu hned na začátku.
+
+Minimální mapa přihlášení:
+
+| Oblast | Co si ujasnit | Praktický výstup |
+| --- | --- | --- |
+| Typ účtů | individuální účet, workspace, agentura, admin | role a oprávnění |
+| Kritické akce | změna e-mailu, export dat, změna role, billing, API klíče | re-auth nebo MFA krok |
+| Rizikové účty | owner, admin, finance, support, integrace | povinné MFA a alerty |
+| Recovery | zapomenuté heslo, ztracené MFA, převod vlastnictví | bezpečný proces bez zkratek |
+| Logování | úspěšné a neúspěšné pokusy, změny faktorů, reset | auditní stopa bez citlivých dat |
+
+Tahle mapa je důležitější než výběr knihovny. Knihovna řeší mechaniku. Mapa říká, které dveře vedou do skladu s daty a které jen na chodbu.
+
+## ET.2 Hesla: méně pravidel, víc rozumu
+
+Heslová politika má uživatele chránit, ne nutit vymýšlet `LetniDovolena2026!` a lepit ho do poznámek. V praxi se vyplatí:
+
+- požadovat rozumnou délku hesla místo absurdních kombinací znaků;
+- neomezovat zbytečně maximální délku, pokud to backend zvládá;
+- kontrolovat hesla proti seznamům známě kompromitovaných hesel;
+- nepoužívat bezpečnostní otázky typu „jméno prvního psa“, protože sociální sítě už bohužel existují;
+- nikdy hesla neposílat e-mailem, neukládat v plaintextu a nezobrazovat supportu;
+- nevynucovat pravidelnou změnu hesla bez důvodu, protože to často vede k horším heslům.
+
+Praktický kompromis pro B2B SaaS: dlouhé heslo nebo passphrase, kontrola proti kompromitovaným heslům, bezpečné hashování, MFA pro správce a re-auth pro citlivé změny. Není to sexy. Funguje to. Což je u přihlašování podezřele žádoucí vlastnost.
+
+## ET.3 Rate limiting nesmí zamknout firmu kvůli jednomu útočníkovi
+
+Ochrana proti brute-force útokům je nutná, ale přímé zamknutí účtu po pěti pokusech může být dárek pro útočníka: stačí opakovaně zkoušet cizí e-mail a legitimní uživatel je venku. OWASP zmiňuje login throttling jako ochranu proti hádání hesel; prakticky je dobré kombinovat víc signálů, ne jen tupé počítadlo.
+
+Rozumné vrstvy:
+
+- zpomalování dalších pokusů pro konkrétní účet, IP, subnet nebo zařízení;
+- detekce podezřelého vzoru napříč více účty;
+- univerzální odpověď typu „pokud údaje sedí, pokračujte podle instrukcí“ bez potvrzování existence účtu;
+- bezpečný audit `login.failed`, `login.throttled`, `login.suspicious_pattern_detected`;
+- alert pro správce workspace jen při reálně rizikovém vzoru, ne při každém překlepu;
+- možnost uživatele rychle obnovit bez obcházení bezpečnosti.
+
+Codyho komentář: agresivní lockout je jako zamknout celé coworkingové centrum, protože někdo tahal za kliku. Chápu motivaci, ale recepce vás nebude mít ráda.
+
+## ET.4 MFA tam, kde chrání hodnotu
+
+MFA není nálepka „enterprise ready“. Je to ochrana proti tomu, že heslo uteče, uživatel ho použije jinde nebo klikne na špatný odkaz. Nemusí být povinné pro každý účet od první minuty, ale u rolí s přístupem k datům, billingem a oprávněními by mělo být standard.
+
+Priority zavedení MFA:
+
+1. Interní admin účty a support účty.
+2. Owner a admin role zákaznických workspace.
+3. Účty s exportem dat, billingem, integracemi a API klíči.
+4. Běžní uživatelé formou doporučení a jednoduchého zapnutí.
+
+Preferuj metody s dobrým poměrem bezpečnost/použitelnost: passkeys/WebAuthn, bezpečnostní klíče, autentizační aplikace. SMS kódy ber spíš jako nouzový kompromis, ne jako vrchol bezpečnosti. U citlivých účtů dává smysl podporovat phishing-resistant metody, protože ručně přepisované OTP kódy lze v některých útocích přeposlat na falešnou stránku.
+
+## ET.5 Recovery je součást autentizace, ne zadní vrátka
+
+Zapomenuté heslo a ztracené MFA bývají nejslabší článek. OWASP Forgot Password Cheat Sheet doporučuje, aby resetovací tokeny byly náhodné, dostatečně dlouhé, bezpečně uložené, jednorázové a časově omezené; zároveň doporučuje chránit reset před brute-force a neprozrazovat existenci účtu: https://cheatsheetseries.owasp.org/cheatsheets/Forgot_Password_Cheat_Sheet.html
+
+Bezpečný reset hesla:
+
+- odpověď formuláře je stejná pro existující i neexistující e-mail;
+- reset token je jednorázový, krátce platný a uložený jen jako hash;
+- reset stránka neposílá token do třetích stran přes referrer, analytiku ani logy;
+- po změně hesla se invalidují staré session podle rizika;
+- uživatel dostane upozornění na změnu hesla;
+- akce je v audit logu bez uložení tokenu nebo nového hesla.
+
+MFA recovery je citlivější než běžný reset hesla. Pokud útočník obejde druhý faktor přes support, MFA je jen divadlo s QR kódem. Pro B2B účty se vyplatí kombinovat recovery kódy, ověřený druhý admin účet, čekací dobu u rizikových změn a auditní stopu viditelnou ownerovi.
+
+## ET.6 Session management: tichá práce, velký dopad
+
+Session je důkaz, že uživatel už prošel bránou. Proto si zaslouží víc pozornosti než „nějaký JWT a hotovo“. OWASP Session Management Cheat Sheet řeší životní cyklus session, obnovu identifikátorů a vazbu na citlivé akce: https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html
+
+Praktická pravidla:
+
+- po přihlášení rotuj session ID;
+- cookie nastav jako `HttpOnly`, `Secure` a se správným `SameSite`;
+- pro citlivé akce vyžaduj čerstvou autentizaci nebo MFA krok;
+- umožni uživateli zobrazit aktivní session a odhlásit ostatní zařízení;
+- při změně hesla, e-mailu nebo MFA invaliduj relevantní session;
+- tokeny a session identifikátory nikdy neloguj;
+- dlouhodobé refresh tokeny skladuj a rotuj opatrně, ne jako věčné VIP pásky.
+
+Privacy-first pohled: obrazovka „aktivní přihlášení“ nemusí ukazovat přesnou IP adresu a detailní fingerprint zařízení. Často stačí město nebo země v hrubém rozlišení, typ zařízení, čas poslední aktivity a tlačítko odhlásit. Bezpečnost ano, zbytečný profil uživatele ne.
+
+## ET.7 Přihlašování jako produktový text
+
+Bezpečnost selhává i kvůli textům. Pokud chybová hláška řekne „e-mail neexistuje“, pomáhá enumeraci účtů. Pokud recovery e-mail zní jako phishing, uživatel klikne na všechno nebo na nic. Pokud MFA setup vysvětluje jen „naskenujte QR“, méně technický uživatel skončí u supportu.
+
+Lepší mikrotexty:
+
+- „Pokud účet s tímto e-mailem existuje, poslali jsme instrukce pro obnovu.“
+- „Tento odkaz funguje jen krátce a jen jednou. Pokud jste o reset nežádali, zprávu ignorujte.“
+- „Pro změnu role potvrďte přihlášení. Chráníme tím data celého workspace.“
+- „Uložte si recovery kódy na bezpečné místo. Ukážeme je jen jednou.“
+- „Toto zařízení bylo odhlášeno. Pokud to nebyla vaše akce, změňte heslo a zkontrolujte MFA.“
+
+Text má vysvětlit důvod frikce. Uživatelé snesou další krok, když rozumí, proč chrání jejich účet. Nesnesou tajemné překážky a chybové hlášky, které zní jako výpis z ledničky po zásahu JavaScriptu.
+
+## ET.8 Checklist bezpečného přihlašování
+
+- Máme mapu autentizačních rizik podle rolí, workspace a kritických akcí.
+- Hesla ukládáme bezpečně, nekontrolujeme je supportem a nevyžadujeme divné rituály bez důvodu.
+- Reset hesla používá jednorázové, krátce platné a bezpečně uložené tokeny.
+- Reset a login neprozrazují existenci účtu přes texty, časování ani odlišné odpovědi.
+- MFA je povinné pro interní adminy a vysoce oprávněné zákaznické role.
+- Recovery MFA není zadní vrátko přes support, ale auditovaný proces s jasnými kroky.
+- Session ID se rotuje po přihlášení a citlivé změny vyžadují čerstvé ověření.
+- Uživatel vidí aktivní session a umí odhlásit ostatní zařízení.
+- Přihlašovací a recovery tokeny se nikdy nelogují ani neposílají do analytiky.
+- Audit log obsahuje přihlášení, neúspěšné pokusy, reset, změny MFA, změny e-mailu a rizikové změny oprávnění.
+- Mikrotexty vysvětlují bezpečnostní kroky bez strašení a bez úniku informací.
+
+## Zdroje k příloze
+
+- OWASP Authentication Cheat Sheet: autentizace, MFA, throttling a bezpečné změny účtu: https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html
+- OWASP Forgot Password Cheat Sheet: bezpečný reset hesla, tokeny, neprozrazování účtů a ochrana proti brute-force: https://cheatsheetseries.owasp.org/cheatsheets/Forgot_Password_Cheat_Sheet.html
+- OWASP Session Management Cheat Sheet: životní cyklus session, rotace identifikátorů a ochrana session tokenů: https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html
+- NIST SP 800-63B-4: digitální autentizace, phishing resistance a příklady WebAuthn/FIDO2: https://pages.nist.gov/800-63-4/sp800-63b.html
+- OWASP Multifactor Authentication Cheat Sheet: praktické zavádění MFA, změny faktorů a recovery procesy: https://cheatsheetseries.owasp.org/cheatsheets/Multifactor_Authentication_Cheat_Sheet.html
+
+## Shrnutí přílohy
+
+- Přihlašování má vycházet z mapy rizik, ne z módního seznamu autentizačních funkcí.
+- Dobrá heslová politika podporuje delší bezpečná hesla a kontrolu kompromitovaných hodnot místo nesmyslných pravidel.
+- Rate limiting chrání před hádáním hesel, ale nesmí se stát jednoduchým nástrojem pro DoS legitimních účtů.
+- MFA patří nejdřív na interní adminy, vlastníky workspace a účty s exporty, billingem a integracemi.
+- Recovery proces musí být stejně bezpečný jako běžné přihlášení, jinak je to zadní vchod s hezčím názvem.
+- Session management rozhoduje o tom, jestli po přihlášení zůstává účet chráněný i při citlivých změnách.
+- Privacy-first autentizace sbírá jen potřebná bezpečnostní metadata a neproměňuje login v nenápadný fingerprintingový projekt.
+
 ---
 
 ## Pracovní log
 
+- 2026-08-13: Přidána příloha ET o bezpečném přihlašování: mapa autentizačních rizik, heslová politika, rate limiting, MFA, recovery procesy, session management, mikrotexty a privacy-first checklist.
+- 2026-08-13: Přidána příloha ES o audit logu: oddělení typů logů, rizikové události, minimální schéma záznamu, ochrana proti přepisování, zákaznické UI, support access a checklist.
 - 2026-08-13: Přidána příloha ER o privacy-first AI funkcích v SaaS: pracovní smlouva AI funkce, datové minimum v promptech, rizikové režimy, transparentnost, dodavatelská kontrola, testování a checklist.
 - 2026-08-13: Přidána příloha EQ o mazání a anonymizaci eventů: datová mapa výmazu, eventy bez identity, rozdíl mezi anonymizací a pseudonymizací, výmazové joby, backupy, exporty, UI výmazu a checklist.
 
