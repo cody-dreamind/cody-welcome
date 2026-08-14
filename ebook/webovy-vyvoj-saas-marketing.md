@@ -27965,7 +27965,187 @@ Veřejný changelog a roadmapa nejsou dekorace pro produktový marketing. Jsou t
 
 ---
 
+# Příloha GB: Feedback portál bez hlasovacího cirkusu, datového výprodeje a produktového autopilota
+
+Feedback portál vypadá jako nevinná věc: zákazníci napíšou nápad, ostatní hlasují, produktový tým má přehled a všichni jsou šťastní. V praxi se z toho často stane veřejná skládka přání, interní pressure cooker a krásný seznam osobních údajů, obchodních záměrů, screenshotů a citlivých provozních detailů. Tedy přesně to, co privacy-first SaaS nechce pěstovat na vlastním dvorku.
+
+Dobře navržený feedback systém není demokracie podle počtu palců nahoru. Je to filtr pro učení: sbírá signály, chrání zákazníky, vede tým ke konkrétním rozhodnutím a neprodává produktovou strategii nejhlasitějšímu účtu. Hlasování může pomoct, ale jen jako jeden signál. Pokud z něj uděláš řídicí systém produktu, dostaneš roadmapu navrženou davem, který nevidí technický dluh, bezpečnostní rizika ani dlouhodobou strategii. Což je produktová verze vaření podle komentářů pod receptem.
+
+## GB.1 Nejdřív rozhodni, co feedback portál řeší
+
+Než zapneš nástroj na nápady, napiš jednu větu, proč vůbec existuje. Bez toho bude portál sbírat všechno: bugy, roadmap dotazy, support problémy, sales námitky, výkřiky do tmy i „mohli byste přidat AI?“ bez dalšího kontextu. To není feedback. To je šum s hezkým UI.
+
+Praktické účely mohou být různé:
+
+- **Produktové objevy:** hledáš opakující se problémy a workaroundy.
+- **Prioritizace známých témat:** ověřuješ, koho bolí už pojmenovaný problém.
+- **Komunikace stavu:** ukazuješ, co se zvažuje, plánuje nebo dodalo.
+- **Sběr use casů:** chceš pochopit kontext práce zákazníků.
+- **Snížení supportu:** dáváš zákazníkům jedno místo pro sledování existujících návrhů.
+
+Každý účel potřebuje jiný formulář. Pokud chceš prioritizovat známá témata, nepotřebuješ dlouhý volný text. Pokud chceš objevit nový problém, samotné hlasování nestačí. Pokud chceš snížit support, portál musí umět propojit nápad s dokumentací, changelogem a odpovědí, ne jen ukazovat veřejný hřbitov „under review“ položek.
+
+Minimum pro první verzi:
+
+- veřejná stránka s vybranými tématy,
+- interní evidence všech signálů,
+- jasné stavy návrhů,
+- formulář s datovým minimem,
+- pravidlo, kdo feedback čte a kdy.
+
+## GB.2 Formulář nesmí být nenápadný CRM import
+
+Feedback formulář svádí k tomu ptát se na jméno, e-mail, firmu, roli, velikost týmu, tarif, telefon, rozpočet a rodné znamení firmy. Většina z toho není potřeba pro pochopení návrhu. GDPR mezi základními principy zpracování uvádí i minimalizaci údajů: osobní údaje mají být přiměřené, relevantní a omezené na nezbytný rozsah vzhledem k účelu zpracování: https://eur-lex.europa.eu/eli/reg/2016/679/oj
+
+Prakticky:
+
+- pokud je uživatel přihlášený, neptej se znovu na e-mail,
+- pokud chceš kontext tarifu, dopočítej ho serverově a do veřejného výpisu ho nedávej,
+- pokud chceš možnost doptat se, udělej volitelný souhlas s kontaktováním,
+- pokud zákazník vkládá screenshot, předem ho upozorni, ať začerní osobní údaje,
+- pokud sbíráš veřejné komentáře, vysvětli, co bude veřejné a co zůstane interní.
+
+Bezpečný mikrotext u formuláře:
+
+> „Popište problém vlastními slovy. Nevkládejte prosím hesla, API klíče, osobní údaje zákazníků ani interní dokumenty. Návrh nejdřív projde moderací; veřejně zobrazíme jen zkrácenou verzi bez citlivých detailů.“
+
+Tohle není právní poezie. Je to zábradlí pro normální lidi, kteří v dobré víře přiloží screenshot produkční databáze. Ano, děje se to. Ne, nepotřebujeme tomu tleskat.
+
+## GB.3 Veřejný a interní text drž odděleně
+
+Jeden feedback item má mít dvě vrstvy:
+
+- **Veřejná vrstva:** bezpečný popis problému, stav, obecný dopad, možnost sledovat změny.
+- **Interní vrstva:** zákaznický kontext, odkazy na tickety, obchodní dopad, rizika, technické poznámky.
+
+Příklad veřejného textu:
+
+> „Administrátoři chtějí jednodušší hromadnou správu členů týmu, hlavně při nástupu nové pobočky nebo sezónních pracovníků.“
+
+Příklad interní poznámky:
+
+> „Týká se tří B2B zákazníků z provozních týmů. Jeden onboarding zdržel ruční import 86 lidí. Riziko: CSV s osobními údaji, špatně zadané e-maily, nutná expirace uploadu a preview před odesláním pozvánek.“
+
+Veřejná vrstva pomáhá ostatním poznat vlastní problém. Interní vrstva pomáhá rozhodovat. Když je sloučíš, buď prozradíš moc, nebo nebudeš mít dost detailů pro produktovou práci. Ani jedno není příjemné. První bolí compliance, druhé bolí roadmapu.
+
+## GB.4 Hlasování ber jako signál, ne jako verdikt
+
+Počet hlasů říká, že lidé klikli. Neříká, jestli funkce přinese tržby, sníží churn, sníží support, zapadne do strategie nebo nevytvoří datové peklo. Hlasování navíc zvýhodňuje viditelné a snadno pochopitelné nápady. „Tmavý režim“ dostane víc palců než „deterministická anonymizace exportů pro enterprise audit“. Přitom druhé může být obchodně důležitější.
+
+U každého návrhu proto drž skóre ve více osách:
+
+- **Frekvence:** kolikrát se problém opakuje.
+- **Intenzita bolesti:** co zákazník dělá dnes jako workaround.
+- **Segment:** koho se to týká a jak důležitý segment to je.
+- **Strategický směr:** jestli to podporuje produktovou vizi.
+- **Datové riziko:** jaká nová data, oprávnění nebo exporty funkce zavádí.
+- **Náročnost:** technická, provozní, supportová a dokumentační.
+
+Jednoduchá prioritizační věta:
+
+> „Neřešíme návrhy podle počtu hlasů. Hlasování používáme jako jeden ze signálů vedle zákaznických rozhovorů, support ticketů, obchodního dopadu, bezpečnostních rizik a strategického směru produktu.“
+
+Taková věta by měla být přímo ve feedback portálu. Ušetří ti pozdější vysvětlování, proč položka s 47 hlasy pořád není hotová.
+
+## GB.5 Moderace chrání zákazníky i tým
+
+Feedback portál bez moderace je veřejný support inbox s lepším CSS. Moderace nemá cenzurovat nepohodlnou kritiku. Má chránit lidi před únikem dat, duplicitami, urážkami, spamem a nechtěnými obchodními informacemi.
+
+Moderuj hlavně:
+
+- osobní údaje třetích osob,
+- tajné hodnoty, tokeny a interní URL,
+- jména zákazníků bez souhlasu,
+- screenshoty s reálnými daty,
+- bezpečnostní zranitelnosti,
+- duplicitní návrhy,
+- agresivní nebo mimochodem právně dobrodružný obsah.
+
+Bezpečnostní zranitelnosti neposílej do veřejného hlasování. Přesměruj je na bezpečnostní kontakt nebo vulnerability disclosure proces. U běžného nápadu může moderátor text zkrátit, zobecnit a doplnit interní vazbu na původní ticket. Veřejně se pak objeví problém, ne surový zákaznický výkřik.
+
+Moderátorský postup:
+
+1. Zkontroluj citlivá data a přílohy.
+2. Spoj duplicity do existujícího tématu.
+3. Přepiš veřejný popis do neutrální řeči.
+4. Interně zachovej původní text s přístupem jen pro produkt/support.
+5. Označ typ signálu: bug, nápad, friction, integrace, compliance, výkon.
+6. Pošli autorovi krátké potvrzení, co se stane dál.
+
+## GB.6 Stav návrhu musí něco znamenat
+
+Nejhorší stav ve feedback portálu je „planned“, který tam visí dva roky jako muzeální exponát optimismu. Stavy musí být málo, musí mít význam a tým je musí umět udržovat.
+
+Použitelné stavy:
+
+- **Nové:** přijato, čeká na triáž.
+- **Zkoumáme:** problém ověřujeme, řešení není slíbené.
+- **Na roadmapě:** rozhodli jsme se řešit, bez garance přesného data.
+- **Ve vývoji:** aktivně stavíme nebo testujeme.
+- **Dodáno:** změna je venku a odkazuje na changelog.
+- **Neplánujeme:** rozhodli jsme se neřešit; vysvětli proč.
+
+Každý stav potřebuje krátký veřejný popis. U „neplánujeme“ buď obzvlášť normální člověk. Napiš důvod bez arogance:
+
+> „Teď tuto integraci neplánujeme, protože by vyžadovala předávání citlivých zákaznických dat do systému mimo náš evropský provozní rámec. Pokud najdeme bezpečnější variantu s menším datovým rozsahem, téma znovu otevřeme.“
+
+Tohle je mnohem lepší než tiché zavření návrhu. Zákazník nemusí souhlasit, ale vidí princip.
+
+## GB.7 Notifikace dělej střídmě a bez sledovacích triků
+
+Feedback portál často láká k e-mailovým notifikacím: někdo hlasoval, někdo komentoval, něco změnilo stav. Jenže každá notifikace je další zpracování, další preference, další doručovací stopa a další šance vytvořit spamový minomet. EDPB ve svém průvodci pro malé firmy připomíná, že zpracování osobních údajů potřebuje vhodný právní základ a u souhlasu musí být volba svobodná, konkrétní, informovaná a jednoznačná: https://www.edpb.europa.eu/sme/be-compliant/process-personal-data-lawfully_en
+
+Privacy-first varianta:
+
+- přihlášený uživatel může sledovat jen vybraná témata,
+- e-mailové notifikace jsou volitelné a snadno vypnutelné,
+- souhrnný digest je výchozí lepší než okamžitý ping ke každému komentáři,
+- veřejné změny mají RSS feed,
+- e-maily neobsahují sledovací pixely,
+- odkazy neobsahují marketingové identifikátory, pokud nejsou opravdu nutné.
+
+Dobrá notifikace říká jen to důležité:
+
+> „Návrh ‚Hromadné pozvánky členů týmu‘ jsme přesunuli do stavu Zkoumáme. Zjišťujeme hlavně bezpečný import CSV a prevenci chybných pozvánek. Detail: [přímý odkaz]“
+
+Bez pixelu, bez „we missed you“, bez marketingové omáčky. Civilizace stále žije.
+
+## GB.8 Checklist privacy-first feedback portálu
+
+- Má feedback portál jasně napsaný účel a publikum?
+- Odděluje veřejný popis od interního zákaznického kontextu?
+- Ptá se formulář jen na údaje, které jsou nutné pro daný účel?
+- Varuje uživatele před vkládáním osobních údajů, tajemství a interních dokumentů?
+- Procházejí nové návrhy moderací před zveřejněním?
+- Existuje samostatná cesta pro bezpečnostní zranitelnosti?
+- Jsou duplicity slučované, ne rozbíjené do deseti podobných položek?
+- Je hlasování jen jeden signál vedle obchodního dopadu, supportu a rizik?
+- Mají stavy jasný význam a vlastníka aktualizace?
+- Umí portál vysvětlit i rozhodnutí „neplánujeme“?
+- Jsou notifikace volitelné, střídmé a bez sledovacích pixelů?
+- Existuje RSS nebo jiný přímý odběr změn bez účtu?
+- Má tým retenční pravidlo pro staré návrhy, komentáře a přílohy?
+- Kontroluje někdo pravidelně, jestli portál není jen veřejný archiv slibů?
+
+## Codyho komentář
+
+Feedback portál má být lupa, ne volant. Pomáhá vidět opakující se bolest zákazníků, ale produkt musí pořád řídit tým, který chápe strategii, architekturu, bezpečnost a data. Pokud se z portálu stane veřejná aukce funkcí, vyhraje nejhlasitější nápad. Pokud se z něj stane strukturovaný systém učení, vyhraje produkt. A to je o dost méně hlučné, což je často dobré znamení.
+
+## Zdroje k příloze
+
+- GDPR, článek 5 — principy zpracování včetně minimalizace osobních údajů: https://eur-lex.europa.eu/eli/reg/2016/679/oj
+- EDPB Data Protection Guide for Small Business — právní základ zpracování a podmínky souhlasu: https://www.edpb.europa.eu/sme/be-compliant/process-personal-data-lawfully_en
+- EDPB Guidelines 05/2020 on consent under Regulation 2016/679 — detailní vodítka k souhlasu: https://www.edpb.europa.eu/documents/guideline/guidelines-052020-on-consent-under-regulation-2016679_en
+- RSS Advisory Board — specifikace RSS 2.0 pro přímý odběr bez závislosti na sociálních platformách: https://www.rssboard.org/rss-specification
+
+## Shrnutí přílohy
+
+Feedback portál nemá být hlasovací automat na roadmapu ani veřejný sklad citlivých detailů. Privacy-first verze začíná jasným účelem, drží formulář na datovém minimu, odděluje veřejné a interní informace, moderuje rizikový obsah, bere hlasy jen jako jeden signál, používá srozumitelné stavy a nabízí střídmé notifikace včetně RSS. Díky tomu zákazníci vidí, že jsou slyšet, a tým si zároveň chrání produktovou strategii i data.
+
+---
+
 ## Pracovní log
+- 2026-08-14: Přidána příloha GB o privacy-first feedback portálu: účel sběru, datové minimum formulářů, veřejná vs. interní vrstva, hlasování jako signál, moderace, stavy návrhů, notifikace a checklist.
 - 2026-08-14: Přidána příloha GA o veřejném changelogu a roadmapě: rozdíl mezi release notes a plány, bezpečný jazyk změn, úrovně jistoty roadmapy, feedback karty, RSS, support briefy a checklist.
 - 2026-08-14: Přidána příloha FZ o exportech, přenositelnosti a odchodu zákazníka: Data Act kontext, kategorie dat, otevřené formáty, timeline ukončení účtu, cloud switching, exit plán a checklist.
 - 2026-08-14: Přidána příloha FY o mazání dat a retenčním úklidu: typy mazání, retenční pravidla, soft delete, zálohy, potvrzení výmazu, opakovatelný runbook a checklist.
