@@ -26209,7 +26209,172 @@ Service účty jsou takové firemní domácí spotřebiče: dokud fungují, nikd
 
 Ne-lidské identity nejsou technická drobnost, ale provozní a bezpečnostní závazek. Každý service účet, token, webhook secret nebo CI identita má mít účel, vlastníka, omezený scope, bezpečnou rotaci, auditní stopu a offboarding. Privacy-first SaaS nedává robotům nekonečné klíče od sklepa jen proto, že nemají kalendář a neumí si stěžovat na Slacku.
 
+
+# Příloha FP: Audit logy bez šmírovací kroniky, slepých míst a forenzního chaosu
+
+Audit log není skládka všeho, co aplikace viděla. Je to důvěryhodná stopa důležitých změn: kdo něco udělal, kdy, odkud zhruba, nad čím a s jakým výsledkem. Když je dobře navržený, pomůže zákazníkovi pochopit změny v účtu, supportu rychleji najít příčinu problému a bezpečnostnímu týmu reagovat na incident. Když je špatně navržený, stane se buď prázdným alibi, nebo nekonečným deníčkem uživatelského života. Ani jedno nechceme, protože nejsme reality show s databází.
+
+OWASP Logging Cheat Sheet připomíná, že logování má podporovat bezpečnostní monitoring, incident response, audit i detekci zneužití, ale zároveň nemá ukládat citlivá data, pokud to není nutné: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+
+## FP.1 Nejdřív rozhodni, komu log slouží
+
+Jeden „audit log“ často ve skutečnosti znamená tři různé věci:
+
+- zákaznický audit log ve workspace,
+- interní bezpečnostní log pro provozní tým,
+- technický aplikační log pro debugging.
+
+Míchání těchto vrstev je rychlá cesta k bordelu. Zákazník nepotřebuje stack trace, support nepotřebuje vidět tajný token a vývojář nepotřebuje kompletní obsah zákaznického dokumentu. Každý log má mít vlastní publikum, účel, retenci a oprávnění.
+
+Praktické rozdělení:
+
+| Vrstva | Publikum | Příklady událostí | Co tam nepatří |
+| --- | --- | --- | --- |
+| Zákaznický audit log | Admin workspace | změna role, vytvoření tokenu, export dat, změna fakturačního e-mailu | celé tokeny, obsah zpráv, raw payloady |
+| Bezpečnostní log | Interní provoz a security | neúspěšné přihlášení, podezřelý export, změna SSO, rate limit | marketingové eventy, detailní chování uživatele |
+| Debug log | Vývoj a support | chyba API, timeout integrace, validace importu | hesla, session ID, osobní data bez důvodu |
+
+Codyho pravidlo: pokud u logu neumíš říct, kdo ho bude číst a jaké rozhodnutí díky němu udělá, pravděpodobně ukládáš šum s právním ocáskem.
+
+## FP.2 Události loguj jako produktový jazyk, ne databázové kouzlo
+
+Auditní událost má být srozumitelná člověku. Ne `user.updated`, když nikdo neví, jestli se změnilo jméno, role, fakturační e-mail nebo přístup k exportům. Dobrá událost popisuje skutečný dopad.
+
+Lepší model události:
+
+```json
+{
+  "event": "workspace.member_role_changed",
+  "actor": "admin@example.com",
+  "target": "jana@example.com",
+  "workspace": "Dreamind Demo",
+  "change": "role: editor -> admin",
+  "result": "success",
+  "created_at": "2026-08-14T07:00:00Z"
+}
+```
+
+Do zákaznického UI z toho neukazuj surový JSON. Ukaž lidskou větu:
+
+```text
+Admin admin@example.com změnil roli uživatelky jana@example.com z Editor na Admin.
+```
+
+U citlivých událostí přidej kontext, který pomáhá rozhodnout, ne šmírovat:
+
+- přibližná země nebo region místo přesné polohy,
+- typ zařízení místo fingerprintu,
+- ID požadavku pro support místo celého payloadu,
+- výsledek akce a důvod selhání bez úniku tajemství.
+
+## FP.3 Citlivá data do logu nepatří ani „dočasně“
+
+Nejnebezpečnější věta v logování je: „Dáme to tam jen na debug a pak to smažeme.“ Historie ukazuje, že „pak“ často znamená „až po incidentu, kdy všichni pláčou do kafe“. Logy se kopírují do agregátorů, exportů, incidentních tiketů a záloh. Co jednou nateče do log pipeline, to se čistí mnohem hůř než formulářové pole.
+
+Do logů nikdy nepiš:
+
+- hesla, passkey recovery materiál, TOTP secrety ani recovery codes,
+- session tokeny, API klíče, OAuth kódy, magic linky nebo webhook secrety,
+- celé platební údaje,
+- celé dokumenty, zprávy, poznámky a importované soubory,
+- nadbytečná osobní data typu telefon, adresa nebo obsah profilu,
+- přesné GPS souřadnice, pokud nejsou produktem skutečně nutné.
+
+Bezpečnější alternativy:
+
+- hash nebo stabilní interní ID místo hodnoty tokenu,
+- poslední čtyři znaky identifikátoru místo celé hodnoty,
+- počet zpracovaných řádků místo obsahu souboru,
+- kategorie chyby místo raw odpovědi třetí strany,
+- request ID, podle kterého může oprávněný člověk dohledat detail v omezeném režimu.
+
+NIST SP 800-92 popisuje log management jako proces sběru, přenosu, ukládání, analýzy a likvidace log dat a zdůrazňuje potřebu plánování retence, ochrany logů a pravidelné revize: https://csrc.nist.gov/pubs/sp/800/92/final
+
+## FP.4 Retence logů musí odpovídat riziku, ne velikosti disku
+
+Logy nejsou zadarmo jen proto, že objektové úložiště stojí pár korun. Mají bezpečnostní hodnotu, provozní hodnotu a privacy riziko. Retence proto nemá být náhodná konstanta v konfiguraci.
+
+Příklad retence pro malý B2B SaaS:
+
+| Typ logu | Doporučená logika retence | Poznámka |
+| --- | --- | --- |
+| Zákaznický audit log | 12–24 měsíců podle tarifu a smlouvy | Ukaž zákazníkovi pravidla v adminu |
+| Bezpečnostní události | podle rizika a incidentních potřeb | Chraň přístup a integritu |
+| Debug logy | dny až týdny | Krátká retence, žádná citlivá data |
+| Exportní odkazy | hodiny až dny | Expirace a audit stažení |
+| Incidentní evidence | podle právních a smluvních potřeb | Odděl od běžných aplikačních logů |
+
+Pokud potřebuješ delší historii, agreguj. Zákazníkovi často stačí vědět, že za poslední rok proběhlo 18 exportů, ne mít navždy uložený každý detail každého kliknutí.
+
+## FP.5 Audit log má být chráněný proti přepisování i zvědavosti
+
+Audit log, který může admin potichu upravit, je jen hezčí poznámkový blok. Ne každý projekt potřebuje bankovní úroveň neměnnosti, ale každý seriózní SaaS potřebuje základní ochranu integrity.
+
+Minimum:
+
+- běžní uživatelé audit log nevidí,
+- admini vidí jen logy svého workspace,
+- interní support vidí zákaznický audit jen přes oprávněný support režim,
+- mazání nebo export audit logu je samo auditovaná událost,
+- logy mají oddělená práva od produkční databáze,
+- změna retenční politiky je schvalovaná a logovaná,
+- čas v logu používá konzistentní UTC a v UI se překládá lidsky.
+
+Praktický UI detail: dovol filtrovat podle typu události, aktéra a období. Nedělej z audit logu nekonečný feed, ve kterém admin loví jednu kritickou změnu jako ponožku v serverovně.
+
+## FP.6 Incident bez audit logu je hádání s lepším monitorem
+
+Při incidentu chceš rychle odpovědět na čtyři otázky:
+
+- Co se stalo?
+- Koho se to týká?
+- Kdy to začalo a skončilo?
+- Jaká data nebo funkce mohly být zasažené?
+
+Dobře navržený audit log na tyto otázky nepřímo odpovídá už během běžného provozu. EDPB ve svých pokynech k oznamování porušení zabezpečení osobních údajů pracuje s praktickými příklady incidentů a upozorňuje na význam posouzení rizika pro dotčené osoby: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-012021-examples-regarding-data-breach-notification_en
+
+Pro incidentní použitelnost přidej:
+
+- korelační ID mezi audit logem, aplikačním logem a support tiketem,
+- jasné typy citlivých akcí: export, změna role, změna SSO, vytvoření tokenu, změna billing údajů,
+- možnost rychle vypsat události jednoho workspace za konkrétní období,
+- bezpečný export pro zákazníka bez interních detailů,
+- runbook: kdo smí logy číst, exportovat a sdílet.
+
+Audit log není náhrada incident response plánu. Je to jeho palivo. Bez něj se incidentní tým mění v archeology s pagerem.
+
+## FP.7 Checklist privacy-first audit logů
+
+- Má každý typ logu jasné publikum, účel a vlastníka?
+- Jsou zákaznické audit logy oddělené od debug a bezpečnostních logů?
+- Popisují události reálný produktový dopad, ne jen názvy databázových operací?
+- Neobsahují logy hesla, tokeny, magic linky, raw payloady ani nadbytečná osobní data?
+- Existuje retence podle typu logu a rizika?
+- Umí zákazník zjistit důležité změny ve svém workspace bez kontaktování supportu?
+- Je přístup interního supportu k audit logům omezený, zdůvodněný a sám auditovaný?
+- Lze při incidentu filtrovat podle workspace, období, typu události a aktéra?
+- Jsou logy chráněné proti tiché úpravě nebo smazání?
+- Mají exporty audit logu expiraci a neobsahují interní debug detaily?
+- Je změna retenční politiky schvalovaná a dohledatelná?
+- Testuje tým audit log v reálných scénářích: odchod admina, podezřelý export, vytvoření API tokenu, změna SSO?
+
+## Codyho komentář
+
+Audit log je produktová funkce pro chvíle, kdy někdo začne větu „my si myslíme, že…“. Můj pohled: dobrý log zkracuje hádky, incidenty i support vlákna. Špatný log jen dokazuje, že server něco viděl, ale zapomněl si vzít brýle.
+
+## Zdroje k příloze
+
+- OWASP Logging Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+- NIST SP 800-92, Guide to Computer Security Log Management: https://csrc.nist.gov/pubs/sp/800/92/final
+- EDPB Guidelines 01/2021 on Examples regarding Data Breach Notification: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-012021-examples-regarding-data-breach-notification_en
+
+## Shrnutí přílohy
+
+Audit logy mají ukazovat důležité změny, ne vyrábět šmírovací kroniku. Rozděl zákaznický audit, bezpečnostní logy a debug logy, pojmenuj události lidsky, neukládej tajemství, nastav retenci podle rizika a chraň přístup i integritu. Privacy-first SaaS má umět vysvětlit, co se stalo, aniž by kvůli tomu musel navždy archivovat všechno, co uživatel kdy udělal.
+
 ## Pracovní log
+
+- 2026-08-14: Přidána příloha FP o privacy-first audit logách: publikum logů, produktový jazyk událostí, zákaz citlivých dat v logách, retence, ochrana integrity, incidentní použitelnost a checklist.
 
 - 2026-08-14: Přidána příloha FO o service účtech a ne-lidských identitách: typy identit, vlastníci, minimální scope, rotace, zákaz lidského používání robotů, offboarding, zákaznické API tokeny a checklist.
 
