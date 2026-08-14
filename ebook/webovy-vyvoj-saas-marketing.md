@@ -27239,7 +27239,166 @@ Malý SaaS nemusí mít veřejnou síň slávy. Ale jednoduché „Děkujeme bez
 
 Vulnerability disclosure je provozní proces, ne právní strašák ani marketingová show. Malý SaaS potřebuje jasný bezpečnostní kontakt, jednoduchý `security.txt`, bezpečná pravidla testování, rychlé potvrzení reportu, triáž bez ega, ochranu dat uvnitř reportu a férové koordinované zveřejnění. Dobře nastavený proces zvyšuje šanci, že ti někdo chybu řekne včas a bezpečně — místo aby ji nechal zrát ve tmě jako velmi drahý sýr.
 
+# Příloha FW: AI funkce v SaaS bez právní mlhy, datového vysavače a magického tlačítka „udělej to za mě“
+
+AI funkce umí malému SaaS produktu přidat hodně hodnoty: rychlejší odpovědi, lepší vyhledávání, návrhy textů, třídění požadavků, shrnutí ticketů nebo chytré kontroly dat. Umí ale taky vyrobit přesně ten typ průšvihu, který bolí technicky, právně i reputačně: zákaznická data skončí v cizím modelu, výstup se tváří jako jistota, tým neví, kdo za rozhodnutí odpovídá, a privacy stránka najednou připomíná archeologii vlastních zkratek.
+
+Privacy-first AI neznamená „AI nikdy“. Znamená „AI jen tam, kde máme jasný účel, datové minimum, kontrolu nad tokem dat, lidskou odpovědnost a férové vysvětlení zákazníkovi“.
+
+## FW.1 Nejdřív popiš konkrétní práci, ne „přidáme AI“
+
+„Přidáme AI“ není produktová specifikace. Je to mlha s fakturou. Začni konkrétní prací, kterou má funkce dělat:
+
+- shrnout dlouhý support ticket pro operátora,
+- navrhnout odpověď, kterou člověk před odesláním schválí,
+- zařadit příchozí poptávku do kategorie,
+- najít relevantní článek v dokumentaci,
+- upozornit na rizikový text ve veřejné kampani,
+- navrhnout další krok v onboarding checklistu.
+
+Ke každé práci dopiš tři věty:
+
+1. Jaký problém zákazníkovi nebo týmu řešíme.
+2. Jaká data funkce opravdu potřebuje.
+3. Co se nesmí stát, i kdyby model zrovna „kreativně improvizoval“.
+
+Příklad:
+
+> AI shrnutí ticketu má operátorovi zkrátit čas čtení dlouhé konverzace. Potřebuje text konkrétního ticketu a interní typ problému, nepotřebuje fakturační údaje, kompletní profil zákazníka ani historii všech objednávek. Výstup nesmí automaticky měnit stav účtu, posílat zprávu zákazníkovi ani rozhodovat o refundu.
+
+Tahle specifikace je nudnější než demo na konferenci. Což je dobře. Nuda v bezpečnostní specifikaci je drahá forma krásy.
+
+## FW.2 Udělej AI datovou mapu
+
+AI integrace má vlastní datovou mapu, protože se často dotýká více vrstev najednou: aplikace, promptu, modelového providera, logů, cache, analytiky, supportu a někdy i trénovacích nebo evaluačních datasetů. Pokud tu mapu nemáš, nevíš, co zákazníkovi slíbit.
+
+Minimální tabulka:
+
+| Otázka | Praktická odpověď |
+| --- | --- |
+| Jaká data jdou do promptu? | Jen text aktuálního ticketu a veřejná dokumentace, bez fakturačních údajů. |
+| Kdo model provozuje? | Vlastní inference / evropský poskytovatel / externí API s ověřenými podmínkami. |
+| Kde se data zpracují? | EU region, pokud je dostupný; výjimka musí být popsaná a schválená. |
+| Ukládá provider vstupy nebo výstupy? | Zkontrolovat smluvní podmínky, nastavení retention a možnost opt-out z tréninku. |
+| Logujeme prompty? | Jen technické metadata nebo redigované ukázky, ne celé zákaznické texty. |
+| Kdo vidí výstupy? | Uživatel v daném workspace nebo interní operátor s rolí supportu. |
+| Jak dlouho data držíme? | Výstup stejně dlouho jako původní objekt, debug logy kratší a bez citlivých údajů. |
+
+Privacy-first pravidlo: prompt je zpracování dat. Není to magická mezivrstva mimo realitu jen proto, že vypadá jako textové políčko.
+
+## FW.3 Rozliš asistenci, doporučení a rozhodnutí
+
+Ne každá AI funkce má stejnou rizikovost. Nejmenší riziko má funkce, která pomáhá člověku rychleji číst nebo psát. Vyšší riziko má doporučení, které může ovlivnit obchodní nebo právní výsledek. Nejvyšší riziko má automatické rozhodnutí bez člověka.
+
+Rozděl funkce do tří pater:
+
+- **Asistence:** shrnutí, návrh odpovědi, hledání v dokumentaci, transformace textu.
+- **Doporučení:** priorita leadu, návrh upsellu, rizikovost zákazníka, detekce možného porušení pravidel.
+- **Rozhodnutí:** automatické zamítnutí účtu, blokace služby, změna ceny, odmítnutí reklamace, automatický refund.
+
+U asistence často stačí jasné označení, lidská kontrola a kvalitní logika oprávnění. U doporučení potřebuješ vysvětlitelnost, možnost nesouhlasit a ochranu proti slepému přejímání výstupu. U rozhodnutí se zastav a ptej se, jestli AI vůbec má rozhodovat. U malého SaaS je velmi často lepší, aby model připravil podklad a člověk rozhodl.
+
+Codyho komentář: nejrychlejší cesta k průšvihu je dát modelu tlačítko „proveď“ dřív než tlačítko „ukaž, proč si to myslíš“.
+
+## FW.4 Transparentnost napiš do produktu, ne jen do policy
+
+Uživatel má poznat, kdy mluví s AI funkcí, kdy dostává návrh a kdy výsledek prošel člověkem. Nestačí schovat jednu větu do privacy policy. Mikrotext v produktu je často důležitější než právní odstavec, protože ho člověk vidí ve správný moment.
+
+Dobré mikrotexty:
+
+- „AI navrhne odpověď. Před odesláním ji vždy zkontrolujte.“
+- „Shrnutí může vynechat detail. Pro závazné rozhodnutí otevřete celý ticket.“
+- „Do návrhu nevkládejte hesla, platební údaje ani citlivé osobní údaje.“
+- „Tento výsledek vznikl z vaší dokumentace a aktuálního dotazu.“
+- „Automatické doporučení můžete ignorovat; finální rozhodnutí je na správci účtu.“
+
+U interních funkcí piš podobně jasně. Interní uživatel není kouzelník s nekonečným kontextem. Když support vidí AI shrnutí, musí vědět, jestli se opírá o celý ticket, posledních deset zpráv, znalostní bázi nebo halucinaci oblečenou do hezké věty.
+
+## FW.5 AI Act ber jako produktový design input
+
+Evropský AI Act vstoupil v platnost 1. srpna 2024 a jeho pravidla se zavádějí postupně. Evropská komise uvádí, že zákaz nepřijatelných praktik a povinnosti AI gramotnosti začaly platit po šesti měsících, pravidla pro obecné AI modely po dvanácti měsících a většina pravidel po dvou letech od účinnosti; některé povinnosti pro vysoce rizikové systémy navázané na regulované produkty mají delší náběh. Oficiální přehled je tady: https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai a text nařízení tady: https://eur-lex.europa.eu/eli/reg/2024/1689/oj
+
+Pro malý běžný SaaS to prakticky znamená:
+
+- nepředpokládej, že „jsme jen malí“ je compliance strategie,
+- u každé AI funkce si napiš, jestli jsi provider, deployer nebo jen integruješ externí službu,
+- zkontroluj, jestli funkce nespadá do citlivější oblasti typu zaměstnávání, vzdělávání, úvěry, biometrie, zdravotnictví nebo přístup k zásadním službám,
+- označ AI interakce, kde uživatel může rozumně čekat člověka,
+- u generovaného obsahu nastav pravidla kontroly a odpovědnosti,
+- uchovávej produktovou dokumentaci tak, aby šla vysvětlit auditně i lidsky.
+
+Tahle příloha není právní rada. Je to Codyho provozní filtr: pokud neumíš během deseti minut popsat účel, datový tok, roli, riziko a lidskou kontrolu AI funkce, ještě ji nepouštěj do produkce.
+
+## FW.6 Vyber model podle dat, ne podle hype grafu
+
+Výběr AI dodavatele nezačínej benchmarkem na Twitteru. Začni otázkou: jak citlivá data posíláme a co potřebujeme garantovat?
+
+Praktické možnosti:
+
+- **Lokální nebo vlastní model:** dobré pro citlivější interní úlohy, klasifikaci, embeddingy a vyhledávání; víc provozní práce.
+- **Evropský poskytovatel:** dobrý kompromis pro týmy, které chtějí managed službu a lepší kontrolu nad regionem zpracování.
+- **Globální API:** použitelné, pokud smluvně sedí účel, retence, bezpečnost, transfery a zákazníkům to umíš transparentně vysvětlit.
+- **Hybrid:** citlivé části zpracuj lokálně nebo rediguj, méně citlivé úlohy pošli ven.
+
+Nedělej z toho náboženství. Dělej z toho rozhodovací záznam. Uveď:
+
+- proč tento model,
+- jaká data dostává,
+- jaké jsou alternativy,
+- proč nestačí jednodušší pravidlová logika,
+- jak vypnout funkci při incidentu,
+- jak migrovat, když dodavatel změní podmínky.
+
+Privacy-first SaaS nepotřebuje největší model na každé tlačítko. Někdy stačí dobrý fulltext, pár pravidel a lidský proces. Ano, méně sexy. Také méně drahé a méně právně výbušné. Divné, jak často spolu ty věci souvisí.
+
+## FW.7 Testuj výstupy jako produkt, ne jako kouzlo
+
+AI funkce se netestuje jen otázkou „odpovědělo to hezky?“. Testuj konkrétní rizika:
+
+- výstup nesmí doporučit akci mimo oprávnění uživatele,
+- model nesmí vytáhnout data z jiného workspace,
+- prompt injection v dokumentaci nesmí změnit systémové instrukce,
+- citlivé údaje se nesmí propisovat do debug logů,
+- odpověď musí umět říct „nevím“ místo falešné jistoty,
+- UI musí dát člověku čas výstup zkontrolovat,
+- ruční oprava musí být snadnější než slepé přijetí.
+
+Přidej malou eval sadu:
+
+- 10 běžných dotazů,
+- 10 hraničních dotazů,
+- 10 pokusů o prompt injection,
+- 10 případů s chybějícím kontextem,
+- 10 případů s citlivými údaji, které se nemají opakovat.
+
+Výsledky ukládej jako produktovou kvalitu, ne jako zákaznický datový archiv. Pokud eval obsahuje reálná data, anonymizuj je nebo vytvoř syntetickou sadu. Testovací dataset s osobními údaji je pořád dataset s osobními údaji. Překvapivé jen pro lidi, kteří rádi pojmenovávají průšvih „dočasný export“.
+
+## FW.8 Checklist privacy-first AI funkce
+
+- [ ] Funkce má popsanou konkrétní práci, účel a očekávaný užitek.
+- [ ] Víme, jaká data vstupují do promptu, embeddingu, logu, cache a výstupu.
+- [ ] Máme rozhodnuté, jestli jde o asistenci, doporučení nebo rozhodnutí.
+- [ ] Uživatel v produktu vidí, kdy pracuje s AI výstupem.
+- [ ] Citlivá data neposíláme do modelu, pokud to není nutné a schválené.
+- [ ] Dodavatel, region, retence, trénování na datech a subdodavatelé jsou ověřené.
+- [ ] AI funkce má vlastníka, vypínač a incidentní postup.
+- [ ] Výstupy nepřepisují data ani neposílají zprávy bez vhodné lidské kontroly.
+- [ ] Testujeme prompt injection, tenant izolaci, falešnou jistotu a únik citlivých údajů.
+- [ ] Máme mikrotexty pro omezení, odpovědnost a bezpečné použití.
+- [ ] Produktová dokumentace obsahuje účel, datový tok, role, rizika a opatření.
+- [ ] Zákazník může pochopit, co funkce dělá, bez čtení právního fantasy románu.
+
+## Zdroje k příloze
+
+- Evropská komise: AI Act a regulační rámec pro umělou inteligenci: https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai
+- Nařízení Evropského parlamentu a Rady (EU) 2024/1689, oficiální text AI Actu: https://eur-lex.europa.eu/eli/reg/2024/1689/oj
+
+## Shrnutí přílohy
+
+AI funkce v SaaS má začínat konkrétní prací, datovou mapou a jasnou mírou lidské odpovědnosti. Malý tým potřebuje rozlišit asistenci, doporučení a rozhodnutí, psát transparentní mikrotexty přímo do produktu, vybrat model podle citlivosti dat, ověřit dodavatele a testovat výstupy proti reálným selháním. Privacy-first AI není brzda inovace. Je to způsob, jak přidat chytré funkce bez toho, aby se z produktu stal datový vysavač s hezkým gradientem.
+
 ## Pracovní log
+- 2026-08-14: Přidána příloha FW o privacy-first AI funkcích v SaaS: konkrétní práce, AI datová mapa, asistence vs. rozhodnutí, transparentní mikrotexty, AI Act filtr, výběr modelu, testování rizik a checklist.
 - 2026-08-14: Přidána příloha FV o vulnerability disclosure a bezpečnostním kontaktu: oficiální kanál, `security.txt`, pravidla testování, SLA příjmu reportů, triáž, ochrana dat, koordinované zveřejnění a checklist.
 
 
