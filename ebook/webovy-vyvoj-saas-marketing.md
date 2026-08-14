@@ -25075,8 +25075,154 @@ Privacy-first export paradoxně pomáhá i byznysu. Snižuje strach z adopce, zj
 
 Bezpečný export dat začíná účelem, pokračuje přenosným formátem a stojí na silných oprávněních, auditní stopě, expirovaných odkazech, datové minimálnosti a testování reálných scénářů. Privacy-first export dává zákazníkovi kontrolu, aniž by z produktu udělal automat na nekontrolované úniky.
 
+# Příloha FI: Sdílení souborů a příloh bez odkazového bordelu, nekonečné platnosti a datového blešího trhu
+
+Soubory jsou v SaaS produktech nenápadný zdroj chaosu. Vypadají jako drobnost: faktura, screenshot, export, příloha u ticketu, CSV pro import, smlouva, nahrávka workshopu, obrázek v komentáři. Jenže jakmile soubor opustí původní obrazovku, začne žít vlastním životem. Kopíruje se do e-mailů, posílá přes chat, leží ve složce `Downloads`, někdo ho nahraje do dalšího nástroje a za rok nikdo neví, kdo k němu měl přístup. Gratuluju, máme datový kompost. Ne ekologický, spíš takový ten, co podezřele kouří.
+
+Privacy-first přístup neznamená, že soubory nesmíš sdílet. Znamená, že každý sdílený soubor má jasný účel, vlastníka, omezenou platnost, rozumné oprávnění a životní cyklus. Soubor není jen blob v úložišti. Je to produktová funkce s bezpečnostními a důvěrovými dopady.
+
+## FI.1 Nejdřív rozděl soubory podle rizika
+
+Ne každý soubor potřebuje stejný režim. Logo v knihovně značky není totéž co export zákaznických dat nebo screenshot z produkční administrace. Pokud všechno házíš do jednoho bucketu se stejnými pravidly, dřív nebo později začneš buď zbytečně brzdit běžnou práci, nebo necháš citlivé věci ležet moc volně.
+
+Praktické rozdělení:
+
+| Typ souboru | Příklad | Výchozí pravidlo |
+| --- | --- | --- |
+| Veřejný asset | logo, veřejný obrázek blogu, tiskový balíček | veřejná URL je v pořádku |
+| Interní provozní soubor | interní checklist, screenshot bez osobních dat | přístup jen pro tým |
+| Zákaznická příloha | soubor u ticketu, dokument v projektu | přístup podle workspace rolí |
+| Export dat | ZIP, CSV, JSON export | krátká expirace a audit |
+| Citlivý dokument | smlouva, bezpečnostní dotazník, incidentní materiál | omezený přístup, potvrzení, revize |
+| Dočasný upload | importní CSV, onboardingový soubor | automatické smazání po zpracování |
+
+Rozdělení si napiš přímo do produktové dokumentace. Vývojář pak nemusí při každé nové příloze hádat, jestli má být veřejná, interní, zákaznická nebo dočasná.
+
+## FI.2 Sdílený odkaz není bezpečnostní strategie
+
+„Kdo má odkaz, může zobrazit“ je pohodlné. Taky je to často přesně ta věta, kterou nechceš slyšet při incidentu. Ne každý odkaz je špatně, ale musíš vědět, kdy je vhodný a kdy už nahrazuje oprávnění způsobem, který produkt nemá omluvitelný.
+
+Bezpečnější model:
+
+- Veřejné odkazy používej jen pro soubory, které opravdu mohou být veřejné.
+- Zákaznické soubory servíruj přes autentizovanou aplikaci, ne přes trvalou veřejnou URL.
+- Dočasné odkazy generuj až ve chvíli stažení a nech je rychle expirovat.
+- Odkaz svazuj s konkrétním souborem, účelem a případně uživatelem.
+- U citlivých souborů loguj vytvoření odkazu i stažení.
+- Nikdy neposílej trvalé neveřejné odkazy do e-mailu jen proto, že je to jednoduché.
+
+Rozumný kompromis pro běžný SaaS: v UI může být tlačítko „Stáhnout“, které na backendu ověří roli, vytvoří krátkodobý podepsaný odkaz a po několika minutách ho nechá zemřít. Uživatel dostane pohodlí, systém si nechá kontrolu. Win-win, bez konfety z osobních údajů.
+
+## FI.3 Metadata souboru mohou prozradit víc než obsah
+
+Když tým řeší soubory, často kouká jen na samotný obsah. Jenže únik může být i v názvu, cestě, náhledu, EXIF metadatech, autorovi dokumentu nebo automatickém indexu pro vyhledávání.
+
+Typické pasti:
+
+- název souboru obsahuje jméno, diagnózu, obchodní příležitost nebo interní kód incidentu,
+- cesta v úložišti prozrazuje zákazníka a typ dokumentu,
+- náhled obrázku ukazuje víc než oříznutý originál,
+- dokument nese autora, historii revizí nebo komentáře,
+- vyhledávání indexuje přílohy, které uživatel nemá vidět,
+- logy ukládají celé URL s tokenem pro stažení.
+
+Při uploadu proto normalizuj názvy pro interní uložení a původní název zobrazuj jen tam, kde dává smysl. U obrázků a dokumentů zvaž odstranění zbytečných metadat. U náhledů drž stejná oprávnění jako u originálu. Náhled není „menší bezpečnostní problém“. Je to často stejný problém v roztomilejším rozlišení.
+
+## FI.4 Retence příloh má být viditelná už v produktu
+
+Soubory rády přežívají všechno: projekt, zákaznický vztah, původní účel i člověka, který je nahrál. Pokud nemáš retenční pravidla, úložiště se postupně změní v muzeum dávno zapomenutých rozhodnutí. A muzea jsou fajn, pokud v nich neleží osobní data zákazníků.
+
+U každého typu souboru nastav:
+
+- kdo je vlastník,
+- proč se soubor ukládá,
+- kde fyzicky a logicky leží,
+- kdo k němu má přístup,
+- jak dlouho má existovat,
+- co se stane po smazání účtu, projektu nebo ticketu,
+- jestli je v zálohách a jak dlouho,
+- jestli se může objevit v exportu.
+
+Příklad retenční tabulky:
+
+| Soubor | Retence | Po ukončení účtu | Poznámka pro UI |
+| --- | --- | --- | --- |
+| Importní CSV | 7 dní po zpracování | smazat při ukončení | „Soubor slouží jen ke zpracování importu.“ |
+| Příloha u ticketu | po dobu existence ticketu + interní retenční lhůta | podle support procesu | „Neposílejte hesla ani tajné klíče.“ |
+| Export ZIP | 24 hodin od vytvoření | okamžitě zneplatnit | „Odkaz automaticky vyprší.“ |
+| Faktura PDF | podle účetních pravidel | ponechat dle zákonné povinnosti | „Doklady uchováváme kvůli účetnictví.“ |
+
+Retence nemá být schovaná jen v interním dokumentu. U citlivých uploadů napiš krátký mikrotext přímo do produktu. Uživatel má vědět, co se se souborem stane, ještě před tím, než ho nahraje.
+
+## FI.5 Support přílohy potřebují zvláštní disciplínu
+
+Support je místo, kde lidé posílají všechno, co zrovna hoří. Screenshoty s osobními údaji, CSV s produkčními daty, smlouvy, tokeny, občas i heslo, protože peklo má Wi-Fi. Produkt i tým musí počítat s tím, že uživatelé pošlou víc, než by měli.
+
+Nastav support proces takto:
+
+- U uploadu napiš, co neposílat: hesla, API klíče, celé databáze, zbytečná osobní data.
+- Nabídni bezpečnější alternativu: anonymizovaný screenshot, krátký výřez, testovací dataset.
+- Přílohy u ticketů zpřístupni jen lidem, kteří ticket opravdu řeší.
+- Do interních notifikací neposílej obsah přílohy, jen bezpečný odkaz do systému.
+- Support access k přílohám loguj a pravidelně reviduj.
+- Po uzavření ticketu spusť retenční pravidlo místo nekonečného skladování.
+
+Dobrý mikrotext u support uploadu:
+
+> Nahrajte jen soubor, který potřebujeme k vyřešení problému. Neposílejte hesla, API klíče ani celé exporty dat. Přílohy jsou dostupné jen oprávněným členům podpory a mažeme je podle retenčních pravidel.
+
+Tohle není právní román. Je to praktická brzda, která uživatele zastaví dřív, než z dobré vůle pošle půlku firmy v jednom ZIPu.
+
+## FI.6 Úložiště vybírej podle kontroly, ne jen podle CDN rychlosti
+
+U souborů se často řeší výkon a cena. To je fér. Ale privacy-first SaaS musí řešit i jurisdikci, přístup administrátorů, logování, šifrování, zálohy, mazání, regiony a to, jestli jde data rozumně přesunout pryč.
+
+Otázky na dodavatele nebo vlastní infrastrukturu:
+
+- V jakém regionu jsou soubory uložené?
+- Replikují se mimo Evropu?
+- Kdo má administrátorský přístup k bucketům?
+- Jsou soubory šifrované při přenosu i v klidu?
+- Umíme nastavit lifecycle pravidla podle typu souboru?
+- Umíme auditovat čtení citlivých objektů?
+- Co přesně obsahují access logy?
+- Jak funguje mazání a obnova ze záloh?
+- Umíme jednoduše migrovat soubory k jinému poskytovateli?
+
+Codyho provozní pravidlo: pokud neumíš vysvětlit, kde soubor leží a kdy zmizí, nemáš file storage. Máš kouzelnou krabici. A kouzelné krabice jsou super v pohádkách, méně super v evropském B2B SaaS.
+
+## FI.7 Checklist privacy-first sdílení souborů
+
+Před nasazením uploadů, příloh nebo sdílených souborů si projdi:
+
+- Má každý typ souboru jasnou kategorii rizika?
+- Je známý účel uložení a vlastník dat?
+- Nejsou zákaznické soubory dostupné přes trvalé veřejné URL?
+- Mají dočasné odkazy krátkou expiraci?
+- Ověřuje backend oprávnění při každém stažení?
+- Neobsahují názvy souborů, cesty ani logy citlivé údaje?
+- Odstraňují se zbytečná metadata z obrázků a dokumentů?
+- Mají náhledy stejná oprávnění jako originály?
+- Existuje retenční pravidlo pro každý typ souboru?
+- Ví uživatel před uploadem, co nemá posílat?
+- Jsou support přílohy omezené jen na řešitele ticketu?
+- Je přístup k citlivým souborům auditovaný?
+- Umí tým zneplatnit odkaz nebo soubor rychle odebrat?
+- Je úložiště provozně i smluvně kompatibilní s evropskou privacy-first strategií?
+
+## Codyho komentář
+
+Soubory jsou místo, kde se hezké privacy sliby často potkají s realitou a realita jim rozlije kafe na košili. Můj pohled — Cody: nejlepší file handling je nudný. Uživatel ví, co nahrává. Produkt ví, proč to drží. Odkaz vyprší. Přístup je ověřený. Staré věci se uklidí. Nikdo nemusí po nocích přemýšlet, jestli veřejný link z roku 2024 pořád někde neukazuje zákaznický export.
+
+Privacy-first přístup k souborům není brzda spolupráce. Je to způsob, jak sdílet bez toho, aby se z každé přílohy stal malý neřízený satelit na orbitě internetu.
+
+## Shrnutí přílohy
+
+Bezpečné sdílení souborů stojí na rozdělení podle rizika, autentizovaných nebo krátkodobých odkazech, ochraně metadat, jasné retenci, disciplinovaném support procesu a výběru úložiště podle kontroly nad daty. Privacy-first SaaS nesmí brát soubor jako obyčejný blob — je to datový objekt s účelem, oprávněním a koncem životnosti.
+
 ## Pracovní log
 
+- 2026-08-14: Přidána příloha FI o privacy-first sdílení souborů a příloh: rizikové kategorie, bezpečné odkazy, metadata, retence, support uploady, výběr úložiště a checklist.
 - 2026-08-13: Přidána příloha FH o privacy-first exportu dat: účel exportu, přenosné formáty, oprávnění, expirované odkazy, minimálnost polí, testovací scénáře a checklist.
 - 2026-08-13: Přidána příloha FG o sdílení reportů a dashboardů: publikum reportu, agregace, bezpečné odkazy, PDF/CSV/screenshoty, definice metrik, úklid reportů a privacy-first checklist.
 - 2026-08-13: Přidána příloha FF o privacy-first importu dat: účel importu, bezpečné kroky, validace, duplicity, retence uploadů, import reporty, auditní stopa a checklist.
