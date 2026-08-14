@@ -25709,7 +25709,176 @@ Můj pohled — Cody: dobrý SaaS neřeší přístupy jen kvůli bezpečnosti. 
 
 Týmové pozvánky a správa členů mají být řízený životní cyklus, ne seznam e-mailů s rolemi. Privacy-first SaaS ukazuje účel pozvánky, navrhuje role podle práce, omezuje externí přístupy expirací, řeší offboarding jako produktový průvodce, zvýrazňuje rizikové signály, nabízí alternativu ke sdíleným účtům a zapisuje citlivé změny do srozumitelného audit logu.
 
+# Příloha FM: Interní poznámky a komentáře bez datového močálu, pasivní agrese a budoucího incidentu
+
+Interní poznámky v SaaS vypadají nevinně. Pole `internal_note`, komentář u zákazníka, stručná poznámka k faktuře, status u ticketu, komentář v adminu. Jenže přesně tam se často usadí věci, které do produktu nikdy neměly přijít: hesla poslaná zákazníkem, zdravotní detail, kopie občanky, drb o rozhodovateli, plná chybová hláška s tokenem, nebo „dočasně“ vložený export. Dočasně je v softwaru oblíbený výraz pro „najde to audit za dva roky“.
+
+Privacy-first provoz bere interní poznámky jako samostatný datový povrch. Ne jako odpadkový koš pro všechno, co se nevešlo do strukturovaných polí. Dobrá poznámka pomáhá týmu rozhodnout další krok, ale nezvyšuje zbytečně riziko pro zákazníka, člověka ani firmu.
+
+## FM.1 Každá poznámka musí mít účel a publikum
+
+Než do produktu přidáš komentáře, rozhodni dvě věci: proč existují a kdo je uvidí. Poznámky pro support mají jiný účel než poznámky pro finance, product discovery nebo bezpečnostní incident. Pokud to smícháš do jednoho nekonečného proudu, brzy nikdo neví, jestli může poznámku sdílet se zákazníkem, exportovat ji, použít v reportu nebo nechat v účtu po ukončení smlouvy.
+
+Praktické členění:
+
+- support poznámka: pomáhá vyřešit ticket nebo navazující komunikaci,
+- obchodní poznámka: pomáhá řídit vztah a další krok v pipeline,
+- fakturační poznámka: vysvětluje stav platby, refundu nebo účetního požadavku,
+- technická poznámka: popisuje provozní workaround nebo diagnostiku,
+- bezpečnostní poznámka: patří k incidentu, access review nebo rizikové změně.
+
+U každého typu napiš krátkou produktovou větu:
+
+```text
+Interní support poznámka slouží jen k vyřešení požadavku zákazníka.
+Neukládej sem hesla, celé dokumenty, platební údaje ani citlivé osobní informace.
+```
+
+Tahle věta není právní ornament. Je to brzda pro unaveného člověka v pátek odpoledne, kdy se „jen rychle poznamená“ přesně ta věc, kterou pak nikdo nechce mít v databázi.
+
+## FM.2 Volný text potřebuje zábradlí
+
+Volný text je silný, protože se do něj vejde realita. Zároveň je rizikový, protože se do něj vejde úplně všechno. Proto interní poznámky potřebují zábradlí přímo v UI, ne jen odstavec v interní směrnici, kterou nikdo nečetl od onboardingového úterý.
+
+Dobrá zábradlí:
+
+- placeholder říká, co sem patří,
+- nápověda říká, co sem nepatří,
+- limit délky nutí psát stručně,
+- přílohy nejsou výchozí součástí poznámky,
+- citlivé typy údajů mají vlastní strukturovaný proces,
+- varování se objeví při podezřelých vzorech, ale nezapisuje obsah do dalšího logu,
+- editace a smazání mají auditní stopu podle rizika.
+
+Příklad placeholderu:
+
+```text
+Shrň další krok, domluvený termín nebo provozní kontext. Bez hesel, tokenů, platebních údajů a kopií dokumentů.
+```
+
+Příklad špatného placeholderu:
+
+```text
+Poznámka
+```
+
+Jedno slovo bez kontextu je pozvánka na datový bleší trh. Lidé neporušují pravidla vždy ze zlé vůle. Často jen neví, co systém očekává.
+
+## FM.3 Citlivé informace přesměruj do správné cesty
+
+Když zákazník pošle citlivou informaci, produkt nemá předstírat, že se nic nestalo. Musí dát týmu bezpečný postup. Interní poznámka není trezor na hesla, úložiště smluv, místo pro osobní doklady ani náhradní ticket systém pro incidenty.
+
+Přesměrování může vypadat takhle:
+
+| Situace | Kam patří | Co poznamenat |
+| --- | --- | --- |
+| Zákazník poslal heslo | bezpečnostní postup, rotace hesla | „Zákazník poslal tajemství, požádán o rotaci.“ |
+| Zákazník poslal doklad | ověřovací proces s retencí | „Proběhlo ověření přes určený proces.“ |
+| Bug obsahuje token v logu | incidentní triage | „Podezření na únik tokenu, založen incident.“ |
+| Účetní poslala bankovní detail | fakturační evidence | „Doplněn fakturační údaj přes billing formulář.“ |
+| Sales získal osobní preferenci | CRM pole s účelem | „Preferuje e-mail před telefonem.“ |
+
+Cílem není mazat realitu. Cílem je uložit správnou informaci na správném místě s přiměřenou retencí, přístupem a auditem. GDPR principy účelového omezení, minimalizace, integrity a důvěrnosti nejsou jen právní řeč; jsou dobrý produktový design. EDPB je shrnuje tady: https://www.edpb.europa.eu/topics/key-gdpr-concepts/basic-principles_en
+
+## FM.4 Poznámky musí mít retenci a úklid
+
+Interní komentáře často přežijí zákazníka, zaměstnance i původní produktový důvod. To je špatně. Poznámka, která pomohla vyřešit ticket před třemi lety, nemusí navždy zůstávat u zákaznického účtu jen proto, že databáze má dost místa. Levné úložiště není právní ani provozní strategie.
+
+Nastav minimálně:
+
+- výchozí retenční dobu podle typu poznámky,
+- odlišný režim pro incidentní a účetní poznámky,
+- automatické označení poznámek po expiraci,
+- možnost anonymizace autora tam, kde už není potřebná identita,
+- zákaz kopírování poznámek do analytických exportů,
+- jasné chování při odchodu zákazníka,
+- log úklidu bez ukládání smazaného obsahu.
+
+Praktický příklad:
+
+```text
+Support poznámky: 18 měsíců po uzavření ticketu.
+Fakturační poznámky: podle účetní a daňové evidence, odděleně od supportu.
+Incidentní poznámky: podle incidentního playbooku a právního posouzení.
+Produktové insighty: anonymizovat po převedení do backlogu nebo rozhodovacího záznamu.
+```
+
+Nejhorší varianta je „uvidíme později“. Později bude mít tým tisíce poznámek, nulovou jistotu a chuť exportovat všechno do CSV, protože ruční čtení je utrpení. Ano, přesně tak vznikají datové bažiny. Ne romantické, spíš s komáry.
+
+## FM.5 Přístupy k poznámkám odděl od přístupu k účtu
+
+To, že člověk vidí zákaznický účet, neznamená, že má vidět všechny interní poznámky. Support může potřebovat poslední kontext komunikace, ale nemusí vidět obchodní vyjednávání. Finance potřebují fakturační kontext, ale nemusí číst technické bugy. Externí implementátor možná potřebuje projektové poznámky, ale ne bezpečnostní historii.
+
+Rozumný model:
+
+- poznámka má typ a citlivost,
+- role určuje čtení i zápis pro každý typ,
+- změna citlivosti je auditovaná,
+- export poznámek je zvláštní oprávnění,
+- fulltext přes poznámky je omezený podle role,
+- support impersonace nezobrazuje poznámky automaticky,
+- zákaznický export neobsahuje interní poznámky bez právního a produktového rozhodnutí.
+
+Pozor na detail: vyhledávání přes poznámky je často boční dveře. Když role nevidí bezpečnostní poznámku v UI, nesmí ji najít přes globální search, API, CSV export ani reporting. Autorizace není dekorace na frontendu. Je to kontrakt napříč produktem.
+
+## FM.6 AI shrnutí poznámek dělej s datovou dietou
+
+AI shrnutí interních poznámek může ušetřit čas. Také může krásně zabalit datový chaos do sebevědomého odstavce, který pak všichni citují jako pravdu. Pokud poznámky obsahují citlivé údaje, AI funkce z nich udělá rychle škálovatelný problém.
+
+Bezpečnější postup:
+
+1. Nejdřív vyčisti vstup: žádná tajemství, tokeny, dokumenty ani celé payloady.
+2. Shrň jen poznámky, které role uživatele smí číst.
+3. Do promptu posílej minimální kontext, ne celý životopis zákazníka.
+4. Výstup označ jako návrh, ne jako auditní fakt.
+5. Ukaž odkazy na zdrojové poznámky, pokud to role dovoluje.
+6. Nezapisuj AI shrnutí zpět jako neměnnou pravdu bez člověka.
+7. Měř užitečnost agregovaně, ne sledováním každého čtenáře.
+
+Příklad bezpečného mikrotextu:
+
+```text
+AI návrh shrnutí vychází z poznámek, které máš oprávnění číst. Před použitím v komunikaci se zákazníkem ověř zdrojové poznámky.
+```
+
+Codyho pravidlo: AI má být lupa, ne razítko. Když je vstup chaotický, výstup bude jen uhlazený chaos v saku.
+
+## FM.7 Checklist interních poznámek a komentářů
+
+Před spuštěním nebo úklidem interních poznámek si projdi:
+
+- Má každý typ poznámky jasný účel a publikum?
+- Říká UI přímo u pole, co do poznámky nepatří?
+- Existují zvláštní procesy pro hesla, doklady, tokeny a incidenty?
+- Mají poznámky retenční pravidla podle účelu?
+- Umí produkt poznámky anonymizovat nebo smazat bez rozbití historie?
+- Nelezou interní poznámky do analytiky, reportů a zákaznických exportů omylem?
+- Jsou práva ke čtení, psaní, vyhledávání a exportu oddělená podle typu poznámky?
+- Je globální search stejně přísný jako detail účtu?
+- Zapisují se citlivé změny poznámek do audit logu bez kopírování obsahu?
+- Má AI shrnutí stejná oprávnění jako uživatel, který ho spouští?
+- Je AI výstup označený jako návrh a navázaný na ověřitelné zdroje?
+- Ví support, co dělat, když zákazník pošle citlivý údaj špatným kanálem?
+
+## Codyho komentář
+
+Interní poznámky jsou takový produktový půdní prostor. Všichni tam něco odloží, nikdo to nechce uklízet a jednou tam najdeš krabici s nápisem „hesla 2024“. Přitom řešení není dramatické: účel, zábradlí, retence, role a úklid.
+
+Můj pohled — Cody: dobrý SaaS poznámky nezakazuje. Jen je nenechá stát se druhou databází bez pravidel. Když tým ví, co napsat, kam poslat citlivé údaje a kdy se starý kontext uklidí, produkt je bezpečnější i použitelnější. A support má míň archeologie. Všichni vyhrávají, kromě chaosu. Ten si pobrečí do CSV.
+
+## Zdroje k příloze
+
+- EDPB — Basic principles, včetně účelového omezení, minimalizace, integrity a důvěrnosti: https://www.edpb.europa.eu/topics/key-gdpr-concepts/basic-principles_en
+- NCSC — Asset management guidance pro přehled nad daty, systémy a odpovědnostmi: https://www.ncsc.gov.uk/collection/10-steps/asset-management
+
+## Shrnutí přílohy
+
+Interní poznámky a komentáře jsou samostatný datový povrch. Privacy-first SaaS jim dává jasný účel, UI zábradlí, bezpečné přesměrování citlivých údajů, retenční pravidla, oddělená oprávnění, kontrolované vyhledávání a opatrné AI shrnutí. Cílem není omezit tým, ale zabránit tomu, aby se z poznámek stala neřízená druhá databáze plná rizik.
+
+
 ## Pracovní log
+
+- 2026-08-14: Přidána příloha FM o interních poznámkách a komentářích: účel a publikum poznámek, UI zábradlí pro volný text, bezpečné přesměrování citlivých údajů, retence, oddělená oprávnění, AI shrnutí a checklist.
 
 - 2026-08-14: Přidána příloha FL o týmových pozvánkách a správě členů: bezpečné pozvánky, role podle práce, externí přístupy s expirací, offboarding, rizikové signály, sdílené účty, audit log a checklist.
 
