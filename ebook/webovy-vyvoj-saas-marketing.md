@@ -27523,7 +27523,135 @@ Codyho komentář: AI je dobrý junior dokumentarista. Rychle napíše osnovu, o
 
 Zákaznická dokumentace má být živá součást produktu: vede uživatele k výsledku, snižuje podporu, vysvětluje datové chování a drží krok s releasy. Privacy-first přístup znamená syntetická data ve screenshotech, krátké datové věty u funkcí, střídmé používání support konverzací a lidskou kontrolu AI návrhů. Dobrá dokumentace není odkladiště textů. Je to tichý člen týmu, který odpovídá dřív, než musí někdo otevřít ticket.
 
+
+# Příloha FY: Mazání dat a retenční úklid bez rukojmí, paniky a „tohle radši necháme navždy“
+
+Mazání dat je produktová funkce, ne právní dodatek schovaný někde mezi fakturami, logy a optimismem. U privacy-first SaaS musí zákazník vědět, co se smaže, kdy se to smaže, co zůstane kvůli zákonné povinnosti a jak bude vypadat export nebo ukončení účtu. Pokud to tým nemá promyšlené předem, první žádost o výmaz se změní v improvizovanou archeologii databáze. A archeologie je fajn u hrnců, ne u osobních údajů.
+
+Evropská komise ve vysvětlení práv jednotlivců uvádí, že lidé mohou žádat o výmaz osobních údajů například tehdy, když už nejsou potřeba nebo bylo zpracování nezákonné: https://commission.europa.eu/law/law-topic/data-protection/information-individuals_en. Zároveň Komise připomíná, že výmaz není absolutní kouzelné tlačítko: organizace nemusí data mazat například tam, kde existuje zákonná povinnost data uchovat nebo jsou potřeba pro právní nároky: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/dealing-requests-individuals/do-we-always-have-delete-personal-data-if-person-asks_en
+
+## FY.1 Nejdřív rozliš typy mazání
+
+Jedno slovo „smazat“ nestačí. V produktu se pod ním často schovávají čtyři různé situace:
+
+- uživatel smaže jednu položku v aplikaci,
+- administrátor odebere člena týmu,
+- zákazník ukončí celý účet,
+- subjekt údajů požádá o výmaz svých osobních údajů.
+
+Každá situace má jiné dopady. Smazání položky v aplikaci je běžná produktová akce. Odebrání člena týmu je kombinace bezpečnosti, oprávnění a auditní historie. Ukončení účtu řeší export, fakturaci, integrace, zálohy a retenční lhůty. Žádost o výmaz je proces podle práv subjektu údajů a musí mít jasného vlastníka.
+
+Praktické doporučení: do interní dokumentace napiš tabulku „typ akce → co se stane“. Ne právnickou mlhu, ale technicko-produktovou mapu.
+
+| Situace | Co zákazník čeká | Co musí systém udělat |
+| --- | --- | --- |
+| Smazání položky | Položka zmizí z rozhraní | Označit/smazat z primární databáze, odstranit z vyhledávacího indexu, propsat audit událost |
+| Odebrání uživatele | Člověk ztratí přístup | Zrušit session, tokeny, pozvánky a budoucí notifikace |
+| Ukončení účtu | Firma odejde bez rukojmí | Nabídnout export, zastavit billing, naplánovat výmaz provozních dat |
+| Žádost o výmaz | Osobní údaje budou řešené podle pravidel | Ověřit identitu, projít systémy, zdokumentovat výsledek a výjimky |
+
+## FY.2 Retence musí být vidět už v návrhu funkce
+
+Retenční pravidla nepatří až do policy. Patří do návrhu každé funkce, která vytváří data. Když přidáváš komentáře, exporty, pozvánky, API tokeny, notifikace nebo nahrané soubory, rovnou odpověz:
+
+- Proč data vznikají?
+- Kdo je používá?
+- Jak dlouho jsou užitečná?
+- Kdy začínají být rizikem?
+- Kdo smí změnit retenční dobu?
+- Jak poznáme, že výmaz opravdu proběhl?
+
+Příklad: export faktur do CSV nemusí ležet v aplikaci navždy. Uživatel si ho stáhne, systém ho může po 7 nebo 30 dnech odstranit a v audit logu nechat jen informaci, že export proběhl. Samotný soubor s daty není trofej. Je to dočasný pracovní výstup.
+
+Privacy-first pravidlo: čím víc dat export obsahuje, tím kratší má být jeho životnost a tím jasnější má být jeho vlastník.
+
+## FY.3 Soft delete není retenční strategie
+
+Soft delete je užitečný technický stav: záznam se schová z aplikace, ale zůstane v databázi kvůli obnově, synchronizaci nebo prevenci omylů. Problém nastane, když se soft delete stane hřbitovem dat bez data pohřbu.
+
+Dobré schéma má obvykle víc stavů:
+
+- `active`: data se normálně používají,
+- `deleted_by_user`: uživatel požádal o smazání konkrétní položky,
+- `pending_purge`: běží ochranná lhůta nebo technické zpracování,
+- `purged`: data jsou odstraněná z primárních systémů,
+- `retained_legal`: zůstává omezená část kvůli zákonné povinnosti nebo právnímu nároku.
+
+Tahle slova nemusí být přesně názvy sloupců. Důležité je, aby tým rozlišil produktové skrytí, skutečný výmaz a legitimní uchování. Jinak se po roce nikdo nevyzná v tom, jestli je „deleted = true“ splněný slib, odložená práce, nebo jen pohodlná lež.
+
+## FY.4 Zálohy řeš předem, ne při první žádosti
+
+Zálohy jsou zvláštní kapitola. Není rozumné přepisovat každou historickou zálohu kvůli jedné produktové akci. Zároveň ale nejde říct „v zálohách to máme navždy, smůla“. Privacy-first proces má mít jasnou odpověď:
+
+- jak dlouho zálohy existují,
+- kdo k nim má přístup,
+- kdy se přirozeně přepisují,
+- co se stane, když se obnoví starší záloha,
+- jak se po obnově znovu aplikuje seznam výmazů.
+
+Praktický vzor: primární systém provede výmaz, retenční dokumentace vysvětlí životní cyklus záloh a restore proces obsahuje krok „replay deletion ledger“. To znamená, že po obnově starší databáze systém znovu aplikuje potvrzené výmazy, aby se odstraněná data nevrátila jako zombie z pátečního deploye.
+
+## FY.5 Výmaz musí mít potvrzení, ale ne divadlo
+
+Zákazník potřebuje vědět, že akce proběhla. Nepotřebuje desetistránkový certifikát pro každé smazané tlačítko. Rozlišuj běžnou produktovou akci a formální žádost.
+
+U běžného smazání stačí jasná produktová zpětná vazba:
+
+> „Projekt byl odstraněn. Do 30 dnů ho smažeme i z dočasných obnovovacích vrstev. Fakturační údaje uchováváme podle zákonných povinností.“
+
+U žádosti subjektu údajů je lepší mít procesní odpověď:
+
+> „Žádost jsme přijali 14. srpna 2026. Ověřili jsme identitu účtu, prošli primární aplikaci, CRM a support systém. Data potřebná pro účetnictví zůstávají omezeně uchována kvůli zákonné povinnosti. Ostatní osobní údaje jsme odstranili nebo naplánovali k výmazu podle retenčního plánu.“
+
+Jazyk má být klidný a konkrétní. Ne „vaše data byla kompletně anihilována ve všech známých dimenzích“, pokud to není pravda. Hezká věta nevymaže špatný proces.
+
+## FY.6 Udělej z výmazu opakovatelný runbook
+
+Runbook je jednoduchý pracovní návod pro tým. Nemá dokazovat, že firma má ráda procesy. Má zabránit tomu, aby každý support člověk řešil výmaz jinak.
+
+Minimální runbook:
+
+1. Přijmi žádost a založ interní ticket.
+2. Urči typ žádosti: produktové smazání, odchod zákazníka, žádost subjektu údajů.
+3. Ověř identitu přiměřeně riziku.
+4. Najdi dotčené systémy podle datové mapy.
+5. Proveď nebo naplánuj výmaz v primárních systémech.
+6. Zkontroluj integrace, exporty, pozvánky, tokeny a support přílohy.
+7. Zapiš výjimky: účetnictví, právní nároky, bezpečnostní logy, zálohy.
+8. Pošli srozumitelné potvrzení.
+9. Ulož procesní záznam bez zbytečných osobních detailů.
+
+Pokud bod 4 nejde splnit, problém není v žádosti. Problém je v datové mapě.
+
+## FY.7 Checklist retenčního úklidu
+
+- Má každá kategorie dat vlastníka a účel?
+- Existuje retenční tabulka pro databázi, soubory, logy, CRM, support a analytiku?
+- Rozlišujeme produktové smazání, výmaz účtu a žádost subjektu údajů?
+- Víme, co se nemaže hned kvůli zákonné povinnosti nebo právním nárokům?
+- Umí systém zrušit session, API tokeny, pozvánky a notifikace odebraného uživatele?
+- Mají exporty, reporty a dočasné soubory automatickou expiraci?
+- Je restore proces připravený znovu aplikovat potvrzené výmazy?
+- Dostane zákazník pravdivé potvrzení bez přehánění?
+- Kontrolujeme pravidelně staré účty, zapomenuté přílohy a mrtvé integrace?
+- Má support jednoduchý runbook a ví, kdy zapojit právní nebo bezpečnostní roli?
+
+## Codyho komentář
+
+Mazání dat je jeden z nejlepších testů dospělosti SaaS produktu. Přidat nové pole do databáze umí každý hrdina s migrací. Umět říct, proč pole existuje, kdy zmizí a co se stane při odchodu zákazníka, to už je dospělý provoz. Privacy-first není o tom, že data nemáš. Je o tom, že je nedržíš jako digitální suvenýry z každého kliknutí.
+
+## Zdroje k příloze
+
+- European Commission — Information for individuals, práva subjektů údajů včetně práva na výmaz: https://commission.europa.eu/law/law-topic/data-protection/information-individuals_en
+- European Commission — Do we always have to delete personal data if a person asks?, výjimky z povinnosti výmazu: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/dealing-requests-individuals/do-we-always-have-delete-personal-data-if-person-asks_en
+- EUR-Lex — GDPR článek 17, právo na výmaz: https://eur-lex.europa.eu/eli/reg/2016/679/art_17/oj/eng
+
+## Shrnutí přílohy
+
+Retenční úklid není jednorázová právní akce, ale opakovatelný produktový a provozní proces. Malý SaaS tým potřebuje rozlišit typy mazání, popsat retenční pravidla u každé funkce, hlídat dočasné exporty, řešit zálohy a supportu dát jednoduchý runbook. Dobrý výmaz zákazníka nebere jako rukojmí a týmu nebere víkend.
+
 ## Pracovní log
+- 2026-08-14: Přidána příloha FY o mazání dat a retenčním úklidu: typy mazání, retenční pravidla, soft delete, zálohy, potvrzení výmazu, opakovatelný runbook a checklist.
 - 2026-08-14: Přidána příloha FX o zákaznické dokumentaci pro privacy-first SaaS: úkolová struktura, bezpečné návody, screenshoty se syntetickými daty, datové věty, verzování, support smyčka, AI asistence a checklist.
 - 2026-08-14: Přidána příloha FW o privacy-first AI funkcích v SaaS: konkrétní práce, AI datová mapa, asistence vs. rozhodnutí, transparentní mikrotexty, AI Act filtr, výběr modelu, testování rizik a checklist.
 - 2026-08-14: Přidána příloha FV o vulnerability disclosure a bezpečnostním kontaktu: oficiální kanál, `security.txt`, pravidla testování, SLA příjmu reportů, triáž, ochrana dat, koordinované zveřejnění a checklist.
