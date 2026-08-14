@@ -26372,7 +26372,149 @@ Audit log je produktová funkce pro chvíle, kdy někdo začne větu „my si my
 
 Audit logy mají ukazovat důležité změny, ne vyrábět šmírovací kroniku. Rozděl zákaznický audit, bezpečnostní logy a debug logy, pojmenuj události lidsky, neukládej tajemství, nastav retenci podle rizika a chraň přístup i integritu. Privacy-first SaaS má umět vysvětlit, co se stalo, aniž by kvůli tomu musel navždy archivovat všechno, co uživatel kdy udělal.
 
+# Příloha FQ: Žádosti subjektů údajů bez paniky, ruční archeologie a mazacího tlačítka smrti
+
+Žádost o přístup, opravu, export nebo výmaz dat není právní meteorit, který spadl do support inboxu. Je to běžná produktová cesta, kterou má SaaS umět zvládnout klidně, dohledatelně a bez toho, aby vývojář v pátek večer lovil zákaznické údaje přes pět databází, tři tabulky a jednu zapomenutou integraci. Privacy-first provoz znamená, že práva lidí nejsou přilepená právním textem na webu, ale promítnutá do datového modelu, administrace, support procesu a retence.
+
+Evropská komise popisuje, že lidé mohou podle GDPR vůči firmám a organizacím uplatňovat práva jako přístup, opravu, výmaz nebo přenositelnost dat: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/dealing-individuals-requests_en. EDPB k právu na přístup vydal samostatné pokyny, které zdůrazňují, že odpověď má člověku umožnit porozumět zpracování a ověřit jeho zákonnost: https://www.edpb.europa.eu/documents/guideline/guidelines-012022-on-data-subject-rights-right-of-access_en
+
+## FQ.1 Nejdřív rozliš typ žádosti
+
+Ne každá zpráva „smažte mě“ znamená totéž. Někdo chce zrušit newsletter, někdo účet, někdo obchodní komunikaci, někdo uplatňuje právo na výmaz osobních údajů a někdo jen nechce další notifikace. Pokud tým reaguje na všechny tyhle situace jedním tlačítkem „delete user“, vyrobí si buď právní problém, nebo supportový kráter.
+
+Praktické rozlišení:
+
+- **Přístup:** člověk chce vědět, jaká data o něm držíš a proč.
+- **Oprava:** data jsou nepřesná nebo neaktuální.
+- **Výmaz:** data už nejsou potřeba, zpracování je sporné nebo člověk odvolal souhlas tam, kde byl souhlas právní základ.
+- **Omezení zpracování:** data zatím nemaž, ale přestaň je používat pro běžné účely.
+- **Přenositelnost:** člověk chce data v použitelném formátu pro sebe nebo jiného správce.
+- **Námitka:** člověk nesouhlasí s konkrétním zpracováním, typicky u oprávněného zájmu nebo marketingu.
+
+Produktová rada: v interním adminu nedělej jedno políčko „GDPR request“. Udělej typ žádosti, stav, termín, vlastníka, vazbu na zákazníka, poznámku bez citlivých údajů a auditní stopu. Nudné? Ano. Užitečné? Taky ano. Taková je dospělost, bohužel bez fanfár.
+
+## FQ.2 Identitu ověř přiměřeně, ne absurdně
+
+Před posláním dat nebo výmazem účtu musíš vědět, že jednáš se správnou osobou. To ale neznamená, že máš po každém chtít sken občanky, rodný list a krev jednorožce. Ověření má odpovídat riziku a kontextu.
+
+Příklady:
+
+- U přihlášeného uživatele může stačit potvrzení v účtu a opětovné zadání hesla nebo MFA.
+- U e-mailové žádosti můžeš odpovědět jen na e-mail vedený u účtu a neprozrazovat, zda účet existuje, dokud identitu neověříš.
+- U administrátora B2B workspace ověř, zda žádá za sebe, za člena týmu, nebo za celou organizaci.
+- U citlivých dat použij silnější ověření a dvoukrokové potvrzení.
+
+Špatný postup: „Pošlete nám kopii občanského průkazu pro smazání odběru newsletteru.“ To není bezpečnost, to je sběr dat převlečený za opatrnost. Lepší postup: potvrzovací odkaz na evidovaný e-mail, jednoduchá identifikace žádosti a jasná informace, co se stane dál.
+
+## FQ.3 Data musíš umět najít dřív, než přijde žádost
+
+Žádosti subjektů údajů testují pravdivost datové mapy. Pokud tým neví, kde všude se osobní údaje nacházejí, odpověď bude improvizace. A improvizace je v privacy-first provozu fajn asi jako hasit serverovnu vonnou svíčkou.
+
+Minimální mapa pro vyřízení žádosti:
+
+| Oblast | Co hledat | Poznámka |
+| --- | --- | --- |
+| Produktová databáze | účet, profil, workspace, role, nastavení | Hlavní zdroj pravdy |
+| Billing | fakturační údaje, předplatné, daňové doklady | Často má jinou retenci než účet |
+| Support | tickety, přílohy, interní poznámky | Pozor na volný text a screenshoty |
+| Marketing | newsletter, formuláře, kampaně | Odhlášení není vždy výmaz historie |
+| Logy | bezpečnostní události, audit logy | Ne vždy se mažou stejně jako profil |
+| Integrace | CRM, e-mailing, účetnictví, AI služby | Potřebuješ seznam subdodavatelů |
+| Zálohy | snapshoty, archivy, disaster recovery | Výmaz se často projeví při obnově a expiraci záloh |
+
+U každé oblasti si napiš: vlastník systému, typ dat, právní důvod, retenční pravidlo, exportní cestu, mazací cestu a místo, kde je popsáno, co se po žádosti skutečně děje.
+
+## FQ.4 Výmaz není vždy fyzické smazání všeho hned teď
+
+Evropská komise k právu na výmaz uvádí, že organizace nemusí vždy osobní data smazat; výjimky mohou existovat například kvůli právní povinnosti, veřejnému zájmu nebo uplatnění právních nároků: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/dealing-requests-individuals/do-we-always-have-delete-personal-data-if-person-asks_en. Prakticky to znamená, že produkt musí rozlišit, co lze smazat, co anonymizovat, co blokovat pro další používání a co musí zůstat po omezenou dobu.
+
+Příklad u B2B SaaS:
+
+- Profil uživatele se může deaktivovat a osobní údaje nahradit neutrální hodnotou.
+- Faktury mohou zůstat kvůli účetním a daňovým povinnostem, ale nemají být používány pro marketing.
+- Audit log může zůstat pro bezpečnost a odpovědnost, ale měl by obsahovat minimum osobních údajů.
+- Support přílohy se smažou podle retenčního pravidla, pokud nejsou potřeba pro otevřený incident.
+- Newsletter preference se musí zachovat aspoň tak, aby systém člověka omylem znovu nepřihlásil.
+
+Produktově je lepší mluvit o „vyřízení výmazu“ než o magickém „delete all“. Magie v databázích bývá drahá. A většinou má stack trace.
+
+## FQ.5 Přístup a export nejsou totéž
+
+Právo na přístup má člověku vysvětlit, jaká osobní data se zpracovávají, za jakým účelem, komu se předávají a jak dlouho se drží. Přenositelnost je užší praktický export dat v použitelném formátu. V produktu se tyhle dvě věci často pletou, takže uživatel dostane buď právní román místo dat, nebo CSV bez kontextu.
+
+Dobrá odpověď na přístupovou žádost má obsahovat:
+
+- stručné shrnutí účtů, workspace a rolí,
+- kategorie zpracovávaných osobních údajů,
+- účely zpracování a právní důvody,
+- příjemce nebo kategorie příjemců,
+- retenční pravidla,
+- informaci o právech člověka,
+- export konkrétních dat tam, kde to dává smysl.
+
+Dobrá přenositelnost má být strojově použitelná a dokumentovaná: CSV nebo JSON, jasné názvy polí, časové zóny, jednotky, vazby mezi tabulkami a README soubor. Pokud export vypadá jako hádanka pro archeology z roku 2130, není to uživatelská služba, ale escape room.
+
+## FQ.6 Proces musí mít termín, vlastníka a auditní stopu
+
+Žádost nesmí zmizet v support inboxu pod štítkem „mrkneme na to“. Nastav jednoduchý workflow:
+
+1. Přijetí žádosti a přiřazení typu.
+2. Ověření identity podle rizika.
+3. Kontrola rozsahu: kterých systémů a účtů se týká.
+4. Rozhodnutí, co lze splnit automaticky a co vyžaduje ruční kontrolu.
+5. Provedení exportu, opravy, omezení nebo výmazu.
+6. Kontrola dopadu na integrace a subdodavatele.
+7. Odpověď člověku s lidským vysvětlením.
+8. Interní uzavření žádosti v audit logu.
+
+Každý krok má mít vlastníka. Ne „tým“. Konkrétní člověk nebo role. U malého SaaS to může být support owner a technický owner. U citlivějších produktů přidej právní review. Vždy ale drž pravidlo: do interních poznámek nepiš víc osobních údajů, než je nutné pro vyřízení žádosti.
+
+## FQ.7 Automatizuj opatrně, ne slepě
+
+Automatický export nebo smazání účtu je skvělé, pokud má dobré mantinely. Je nebezpečné, pokud spustí kaskádu nevratných změn bez ověření a bez možnosti vysvětlit výjimky.
+
+Bezpečný design:
+
+- Uživatel vidí, jaké datové oblasti budou dotčené.
+- Produkt rozlišuje deaktivaci, anonymizaci, výmaz a retenční blokaci.
+- Citlivé akce vyžadují opětovné ověření.
+- Admin má preview dopadu před potvrzením.
+- Systém zapíše auditní událost bez citlivého obsahu.
+- Integrace dostanou úkol nebo webhook jen v rozsahu, který opravdu potřebují.
+- Obnova ze zálohy má pravidlo, jak se znovu neuvedou do života už vymazaná data.
+
+Automatizace není cíl. Cíl je předvídatelný proces. Ruční krok je v pořádku, pokud je jasně popsaný, opakovatelný a kontrolovatelný. Ruční archeologie v databázi není proces, to je adrenalinový sport pro lidi, kteří si neváží soboty.
+
+## FQ.8 Checklist žádostí subjektů údajů
+
+- Máme v produktu nebo interním adminu typy žádostí: přístup, oprava, výmaz, omezení, přenositelnost a námitka?
+- Umíme ověřit identitu přiměřeně podle rizika bez zbytečného sběru dokladů?
+- Existuje aktuální mapa systémů, kde mohou být osobní údaje?
+- Víme, která data lze smazat, anonymizovat, blokovat nebo ponechat kvůli právní povinnosti?
+- Umíme připravit srozumitelnou odpověď na přístupovou žádost, ne jen náhodný export databáze?
+- Má export dat dokumentovaný formát, časové zóny a význam polí?
+- Má každá žádost vlastníka, termín, stav a auditní stopu?
+- Jsou support poznámky k žádosti datově střídmé?
+- Umíme informovat nebo obsloužit subdodavatele a integrace dotčené žádostí?
+- Je v procesu popsáno, co se děje se zálohami a obnovou po výmazu?
+
+## Codyho komentář
+
+Můj pohled: žádosti subjektů údajů jsou nejlepší reality check pro privacy-first tvrzení. Pokud firma říká „máme data pod kontrolou“, ale neumí během pár minut říct, kde všude jsou data konkrétního účtu, nemá kontrolu. Má jen optimismus v admin panelu. A optimismus se špatně exportuje do CSV.
+
+## Zdroje k příloze
+
+- Evropská komise — Dealing with individuals' requests: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/dealing-individuals-requests_en
+- Evropská komise — Do we always have to delete personal data if a person asks?: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/dealing-requests-individuals/do-we-always-have-delete-personal-data-if-person-asks_en
+- EDPB Guidelines 01/2022 on data subject rights — Right of access: https://www.edpb.europa.eu/documents/guideline/guidelines-012022-on-data-subject-rights-right-of-access_en
+
+## Shrnutí přílohy
+
+Žádosti subjektů údajů nejsou jednorázový právní úkol, ale produktový a provozní proces. Rozliš typ žádosti, ověř identitu přiměřeně, udržuj mapu systémů, nepleť přístup s přenositelností, výmaz řeš podle retenčních a právních pravidel a každou žádost veď přes vlastníka, stav a auditní stopu. Privacy-first SaaS má umět data najít, vysvětlit, exportovat, opravit nebo bezpečně odstranit bez paniky a bez databázové magie.
+
 ## Pracovní log
+
+- 2026-08-14: Přidána příloha FQ o žádostech subjektů údajů: typy žádostí, přiměřené ověření identity, mapa systémů, výmaz vs. retence, přístup vs. přenositelnost, procesní workflow, opatrná automatizace a checklist.
 
 - 2026-08-14: Přidána příloha FP o privacy-first audit logách: publikum logů, produktový jazyk událostí, zákaz citlivých dat v logách, retence, ochrana integrity, incidentní použitelnost a checklist.
 
