@@ -27650,7 +27650,148 @@ Mazání dat je jeden z nejlepších testů dospělosti SaaS produktu. Přidat n
 
 Retenční úklid není jednorázová právní akce, ale opakovatelný produktový a provozní proces. Malý SaaS tým potřebuje rozlišit typy mazání, popsat retenční pravidla u každé funkce, hlídat dočasné exporty, řešit zálohy a supportu dát jednoduchý runbook. Dobrý výmaz zákazníka nebere jako rukojmí a týmu nebere víkend.
 
+---
+
+# Příloha FZ: Export dat, přenositelnost a odchod zákazníka bez vendor lock-inu, chaosu a uraženého SaaS ega
+
+Zákazník, který chce odejít, není zrádce. Je to člověk nebo firma, která ti svěřila data a teď potřebuje kontrolu zpátky. Privacy-first SaaS se pozná i podle toho, jak se chová ve chvíli, kdy zákazník přestává platit. Pokud export dat schováváš za ticket, ruční zásah podpory a „ozveme se vám do 14 dnů“, nevypadá to jako retence. Vypadá to jako digitální rukojmí s fakturačním oddělením.
+
+EU Data Act se podle Evropské komise použije od 12. září 2025 a mimo jiné řeší přístup k datům, férovější smluvní podmínky a snazší přechod mezi poskytovateli cloudových a datových služeb: https://digital-strategy.ec.europa.eu/en/factpages/data-act-explained. Pro SaaS týmy je to dobrý produktový impuls i tam, kde konkrétní povinnost nemusí dopadnout na každou funkci stejně: zákazník má vědět, jaká data má, jak je dostane ven a co se stane při ukončení služby.
+
+## FZ.1 Export navrhuj jako běžnou funkci, ne jako výjimku
+
+Export dat nemá být nouzová operace pro support. Má být součást produktu stejně jako přihlášení, fakturace nebo nastavení týmu. Když uživatel umí data vytvořit, měl by rozumně pochopit, jak je dostane ven.
+
+Praktické minimum pro malý SaaS:
+
+- export účtu nebo workspace je dostupný administrátorovi,
+- formát je popsaný lidsky i technicky,
+- velké exporty běží na pozadí a mají stav,
+- hotový export má expiraci,
+- citlivé exporty vyžadují znovu ověřenou session nebo MFA,
+- audit log zaznamená, kdo export spustil a kdy,
+- zákazník dostane informaci, co export neobsahuje a proč.
+
+Nejhorší varianta je tlačítko „Exportovat vše“, které ve skutečnosti exportuje jen část tabulek, bez příloh, bez metadat a bez vysvětlení. To není export. To je hádanka s příponou `.csv`.
+
+## FZ.2 Rozliš data zákazníka, provozní metadata a interní poznámky
+
+Před návrhem exportu si rozděl data do kategorií. Jinak vznikne buď příliš chudý export, který zákazníkovi nepomůže, nebo příliš široký export, který vypustí interní poznámky, bezpečnostní signály a provozní bordýlek, co měl zůstat v zákulisí.
+
+Užitečná mapa:
+
+| Kategorie | Příklad | Exportovat? | Poznámka |
+| --- | --- | --- | --- |
+| Zákaznický obsah | projekty, úkoly, komentáře, soubory | Ano | Jádro hodnoty zákazníka |
+| Konfigurace | role, workflow, šablony, integrace | Ano, podle scope | Pomáhá při migraci |
+| Fakturační data | faktury, tarif, platební historie | Ano nebo samostatně | Pozor na účetní retenci |
+| Provozní metadata | timestamps, technické ID, stav jobů | Částečně | Jen pokud pomáhá interpretaci dat |
+| Bezpečnostní logy | IP, device signály, rate limit | Omezeně | Spíš auditní výpis než syrový log |
+| Interní poznámky | support komentáře, sales poznámky | Obvykle ne | Řešit přes zvláštní proces |
+
+Privacy-first pravidlo: export má zákazníkovi vracet kontrolu nad jeho daty, ne otevřít trezor se vším, co se v systému kdy mihlo.
+
+## FZ.3 Formát má být nudný, čitelný a migrovatelný
+
+Dobré exportní formáty nejsou sexy. A právě proto fungují. CSV, JSON, ZIP s jasnou strukturou, případně otevřené standardy podle domény. Proprietární binární balíček bez dokumentace je jen vendor lock-in v kabátě „pokročilé funkcionality“.
+
+Praktický vzor exportního balíčku:
+
+```text
+workspace-export-2026-08-14.zip
+├── manifest.json
+├── README.md
+├── users.csv
+├── projects.csv
+├── tasks.csv
+├── comments.jsonl
+├── files/
+└── checksums.sha256
+```
+
+`manifest.json` by měl obsahovat alespoň:
+
+- identifikaci workspace,
+- čas vytvoření exportu,
+- verzi exportního schématu,
+- seznam souborů,
+- počet záznamů v hlavních tabulkách,
+- časovou zónu a jazykové předpoklady,
+- kontakt nebo odkaz na dokumentaci exportu.
+
+Verzuj exportní schéma stejně vážně jako API. Pokud jednou zákazník postaví migraci nad `v1`, tiché přejmenování sloupce je malý datový atentát. Takové drobnosti dělají z integrací nedobrovolný escape room.
+
+## FZ.4 Přenositelnost není totéž jako kompletní kopie produkce
+
+Zákazník často řekne „chci všechna data“. Produktový tým musí přeložit, co tím myslí: obsah, který vytvořil; konfiguraci, kterou nastavil; historii potřebnou pro audit; nebo technickou kopii celé databáze. Tyhle věci nejsou stejné.
+
+U SaaS je rozumné nabídnout vrstvy:
+
+1. **Rychlý export** pro běžné použití: tabulky, seznamy, dokumenty.
+2. **Migrační export** pro přechod jinam: strukturované vazby, stabilní ID, přílohy, metadata.
+3. **Auditní výpis** pro kontrolu: důležité události, změny rolí, přístupy, fakturace.
+4. **Právní proces** pro žádosti subjektů údajů: přístup, výmaz, omezení, námitky.
+
+Evropská komise u Data Actu uvádí, že poskytovatelé cloudových a edge služeb mají odstraňovat překážky přechodu a podporovat export dat v běžně používaném a strojově čitelném formátu, zejména u služeb typu PaaS a SaaS: https://digital-strategy.ec.europa.eu/en/factpages/data-act-explained. I když nejsi právní oddělení s kávovarem velikosti traktoru, produktový závěr je jednoduchý: přechod pryč nesmí být trestná výprava.
+
+## FZ.5 Odchod zákazníka musí mít timeline
+
+Ukončení účtu bez jasné časové osy vytváří stres na obou stranách. Zákazník neví, kdy data zmizí. Support neví, co slíbit. Vývojář neví, jestli má obnovovat účet z backupu nebo si vzít dovolenou a předstírat, že e-mail neviděl.
+
+Použitelná timeline:
+
+- **Den 0:** zákazník zruší tarif nebo požádá o ukončení.
+- **Den 0–7:** účet je aktivní pro export, ale nové placené akce jsou omezené.
+- **Den 7–30:** účet je v ochranné lhůtě; data nejsou běžně dostupná, ale lze obnovit přístup přes ověřený proces.
+- **Po 30 dnech:** začne plánovaný výmaz primárních dat podle retenční politiky.
+- **Podle retenční lhůty záloh:** data mizí i ze záložních sad přirozenou rotací; restore proces znovu aplikuje potvrzené výmazy.
+
+Konkrétní počty dní se liší podle produktu, smluv a právních povinností. Důležité je, aby nebyly vymyšlené až v momentě, kdy zákazník odchází.
+
+## FZ.6 Cloud switching ber jako strategii, ne jen právní kolonku
+
+Data Act podle Komise míří i na snazší změnu cloudových poskytovatelů a odstranění překážek včetně poplatků za switching a data egress od 12. ledna 2027; do té doby běží přechodné období pro účtování vzniklých nákladů: https://digital-strategy.ec.europa.eu/en/factpages/data-act-explained. Pro malý evropský SaaS je to připomínka, že vendor lock-in není jen problém zákazníků. Je to i tvůj provozní risk.
+
+Prakticky:
+
+- dokumentuj, které služby jsou kritické pro běh produktu,
+- u každé kritické služby měj exit poznámku: export, náhrada, čas migrace,
+- ukládej data ve formátech, které nejsou přilepené k jednomu vendorovi,
+- odděl business logiku od proprietárních managed služeb tam, kde to dává smysl,
+- testuj obnovu a migraci aspoň na malé kopii dat,
+- smluvně kontroluj egress, retenci, subdodavatele a region provozu.
+
+Privacy-first evropský provoz neznamená, že nikdy nepoužiješ velkého dodavatele. Znamená, že víš, kde jsou data, jak odejít a kolik by tě odchod bolel. Jinak nejsi provozovatel SaaS. Jsi nájemník v pěkném cizím datacentru s optimistickou smlouvou.
+
+## FZ.7 Checklist exportů a odchodu zákazníka
+
+- Má administrátor jasně dostupný export workspace nebo účtu?
+- Je popsané, co export obsahuje a co záměrně neobsahuje?
+- Používáme otevřené, běžně čitelné a verzované formáty?
+- Mají exporty expiraci a omezený přístup?
+- Vyžaduje citlivý export čerstvé ověření identity?
+- Umíme exportovat přílohy, komentáře a vazby mezi objekty?
+- Existuje `manifest.json` nebo podobný soubor s verzí schématu a počty záznamů?
+- Má ukončení účtu jasnou timeline pro export, ochrannou lhůtu a výmaz?
+- Rozlišujeme zákaznický obsah, interní poznámky, bezpečnostní logy a fakturační data?
+- Máme vlastní exit plán pro kritické cloudové a datové služby?
+
+## Codyho komentář
+
+Nejférovější retenční strategie je paradoxně ta, která zákazníkovi umožní odejít bez dramatu. Když lidé vědí, že nejsou zamčení, mají menší strach přijít. Vendor lock-in je krátkodobě pohodlný, ale dlouhodobě smrdí nejistotou. A nejistota je v B2B prodeji dražší než pár hodin navíc nad pořádným exportem.
+
+## Zdroje k příloze
+
+- European Commission — Data Act explained, přehled účinnosti, cloud switchingu, exportu a egress poplatků: https://digital-strategy.ec.europa.eu/en/factpages/data-act-explained
+- European Commission — EU Data Act gives users control over data from connected devices, tisková zpráva k použití pravidel od 12. září 2025: https://digital-strategy.ec.europa.eu/en/news/eu-data-act-gives-users-control-over-data-connected-devices
+- EUR-Lex — Regulation (EU) 2023/2854, úplné znění Data Actu: https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32023R2854
+
+## Shrnutí přílohy
+
+Export dat a odchod zákazníka nejsou nepříjemná podpora, ale součást důvěryhodného SaaS produktu. Malý tým má mít mapu exportovaných dat, otevřené formáty, verzované schéma, expiraci exportů, jasnou timeline ukončení účtu a vlastní exit plán pro kritické dodavatele. Privacy-first produkt zákazníka nedrží silou. Drží ho tím, že se mu dá věřit i u dveří.
+
 ## Pracovní log
+- 2026-08-14: Přidána příloha FZ o exportech, přenositelnosti a odchodu zákazníka: Data Act kontext, kategorie dat, otevřené formáty, timeline ukončení účtu, cloud switching, exit plán a checklist.
 - 2026-08-14: Přidána příloha FY o mazání dat a retenčním úklidu: typy mazání, retenční pravidla, soft delete, zálohy, potvrzení výmazu, opakovatelný runbook a checklist.
 - 2026-08-14: Přidána příloha FX o zákaznické dokumentaci pro privacy-first SaaS: úkolová struktura, bezpečné návody, screenshoty se syntetickými daty, datové věty, verzování, support smyčka, AI asistence a checklist.
 - 2026-08-14: Přidána příloha FW o privacy-first AI funkcích v SaaS: konkrétní práce, AI datová mapa, asistence vs. rozhodnutí, transparentní mikrotexty, AI Act filtr, výběr modelu, testování rizik a checklist.
