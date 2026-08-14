@@ -25876,7 +25876,169 @@ Můj pohled — Cody: dobrý SaaS poznámky nezakazuje. Jen je nenechá stát se
 Interní poznámky a komentáře jsou samostatný datový povrch. Privacy-first SaaS jim dává jasný účel, UI zábradlí, bezpečné přesměrování citlivých údajů, retenční pravidla, oddělená oprávnění, kontrolované vyhledávání a opatrné AI shrnutí. Cílem není omezit tým, ale zabránit tomu, aby se z poznámek stala neřízená druhá databáze plná rizik.
 
 
+# Příloha FN: Přihlášení, SSO a passkeys bez bezpečnostního divadla, login pekla a zbytečného profilování
+
+Přihlášení je jedna z těch částí SaaS, kterou uživatel vnímá hlavně ve chvíli, kdy nefunguje. Produktový tým ji naopak často podcení, protože „auth už přece vyřeší knihovna“. Jenže autentizace není jen formulář se dvěma poli. Je to hranice mezi zákaznickými daty a světem, který má občas až podezřele kreativní vztah k cizím účtům.
+
+Privacy-first přístup k přihlášení znamená tři věci najednou: uživatel se dostane dovnitř bez zbytečného tření, útočník se nedostane dovnitř levným trikem a produkt nesbírá identitní data jen proto, že je umí vytáhnout z identity providera. Bezpečnost není omluva pro datový bufet.
+
+## FN.1 Začni mapou rizik, ne výběrem módní auth služby
+
+Nejdřív si napiš, kdo se do produktu přihlašuje a co se stane, když se mu někdo dostane do účtu. Jiné riziko má veřejný newsletter archiv, jiné účetní SaaS, jiné interní admin rozhraní a jiné B2B workspace s pozvánkami externistů. Stejný login pro všechno je pohodlný hlavně pro útočníka.
+
+Praktická mapa:
+
+| Účet / role | Riziko při převzetí | Minimální ochrana | Kdy zpřísnit |
+| --- | --- | --- | --- |
+| běžný člen workspace | čtení a změny pracovních dat | silné heslo nebo passkey, bezpečná session | exporty, mazání, změna e-mailu |
+| admin workspace | změna členů, fakturace, integrace | MFA nebo passkey, step-up pro citlivé akce | nové API klíče, SSO změny, billing |
+| support operátor | přístup k zákaznickému kontextu | firemní SSO, MFA, audit access | dočasný vstup do účtu zákazníka |
+| interní superadmin | široký provozní dopad | phishing-resistant MFA, oddělený přístup | každá produkční změna |
+
+Tahle tabulka není bezpečnostní román. Je to minimum, aby tým věděl, kde má být přihlášení pohodlné, kde opatrné a kde nemilosrdně nudné.
+
+## FN.2 Hesla drž civilizovaně, ne sadisticky
+
+Dobrá heslová politika nemá uživatele trestat za to, že nechce pamatovat hieroglyf s vykřičníkem. Zakazuj slabá a uniklá hesla, podporuj správce hesel, nevyžaduj pravidelnou změnu bez důvodu a neomezuj zbytečně délku. OWASP Authentication Cheat Sheet doporučuje mimo jiné silnou validaci, ochranu proti credential stuffing útokům a vyhýbání se povinným periodickým změnám hesel bez jasného důvodu: https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html
+
+Rozumné minimum:
+
+- povol dlouhá hesla a správce hesel,
+- kontroluj hesla proti seznamům známě kompromitovaných hesel,
+- neukládej hesla v plaintextu ani v reverzibilní podobě,
+- používej moderní hashing s vhodnými parametry,
+- rate limituj pokusy o přihlášení podle rizika,
+- neprozrazuj, jestli existuje účet s daným e-mailem,
+- posílej bezpečnostní upozornění bez dramatického tónu.
+
+Příklad mikrotextu:
+
+```text
+Použijte dlouhé heslo nebo správce hesel. Heslo nikdy neposíláme e-mailem a nepoužíváme ho pro marketingové účely.
+```
+
+Codyho komentář: pokud login formulář zakáže vložení hesla ze správce hesel, produkt právě vyhlásil válku bezpečnosti. Gratuluju, útočníci nosí konfety.
+
+## FN.3 MFA a passkeys používej podle rizika, ne jako překážkovou dráhu
+
+Vícefaktorové ověření je skvělé, když chrání reálné riziko. Je otravné, když ho produkt vyžaduje při každém kýchnutí a pak stejně dovolí vypnout MFA přes kompromitovanou session bez potvrzení. OWASP MFA Cheat Sheet doporučuje MFA hlavně při přihlášení a citlivých akcích, například změně hesla, změně e-mailu, vypnutí MFA nebo povýšení na admin session: https://cheatsheetseries.owasp.org/cheatsheets/Multifactor_Authentication_Cheat_Sheet.html
+
+NIST SP 800-63B-4 popisuje phishing-resistant autentizaci a uvádí, že OTP kódy ručně opisované uživatelem se za phishing-resistant nepovažují, protože je útočník může vylákat a přeposlat. Passkeys/WebAuthn naopak umí navázat ověření na konkrétní doménu, pokud jsou správně implementované: https://pages.nist.gov/800-63-4/sp800-63b/authenticators/
+
+Praktický model:
+
+- passkey nabídni jako pohodlnou a silnou výchozí cestu,
+- TOTP ponech jako kompatibilní druhou možnost,
+- SMS používej jen jako nouzovější variantu, pokud vůbec,
+- pro adminy vyžaduj phishing-resistant metodu tam, kde to dává smysl,
+- recovery codes ukaž jednou, nech stáhnout bezpečně a nikdy je neposílej e-mailem,
+- změnu MFA chraň step-up ověřením,
+- ztrátu faktoru řeš support procesem, ne rychlým odkazem „věříme vám“.
+
+Nejlepší MFA je takové, které chrání kritické dveře a nenučí uživatele slepě potvrzovat každou výzvu. Únava z bezpečnosti je taky zranitelnost, jen má horší PR.
+
+## FN.4 SSO je vztah s identity providerem, ne jen tlačítko
+
+SSO v B2B SaaS zjednodušuje onboarding, offboarding a správu přístupů. Zároveň přináší nové otázky: jaké atributy z identity providera ukládáš, kdo smí propojení nastavit, co se stane při změně domény, jak řešíš odchod zaměstnance a jak se zachová produkt, když IdP dočasně neodpovídá.
+
+Datově střídmé SSO:
+
+- ulož jen stabilní identifikátor, e-mail a atributy, které produkt opravdu potřebuje,
+- nepřebírej všechno z profilu jen proto, že to OIDC/SAML umí poslat,
+- mapování rolí dokumentuj a ukazuj adminovi srozumitelně,
+- změny SSO konfigurace loguj a vyžaduj step-up ověření,
+- podporuj testovací režim před vynucením SSO,
+- nech alespoň jeden bezpečně řízený break-glass účet,
+- při chybě IdP ukaž jasný stav, ne generickou hlášku „něco se pokazilo“.
+
+Příklad administrátorského textu:
+
+```text
+Z identity providera ukládáme jen stabilní ID uživatele, e-mail, jméno pro zobrazení a skupiny použité pro mapování rolí. Profilové fotky, telefonní čísla ani další atributy nepřebíráme.
+```
+
+Tohle je dobrá produktová věta i dobrý prodejní argument. Enterprise zákazník nechce jen SSO. Chce vědět, že mu produktem neprosakuje firemní adresář do dalšího datového jezera.
+
+## FN.5 Session management je bezpečnostní pás, ne cookie náhoda
+
+Po přihlášení začíná druhá půlka práce: session. OWASP Session Management Cheat Sheet připomíná, že session ID po autentizaci dočasně reprezentuje sílu použitého ověření a musí být chráněné jako citlivý údaj: https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html
+
+Praktická pravidla:
+
+- session tokeny drž v bezpečných cookies s `HttpOnly`, `Secure` a rozumným `SameSite`,
+- po přihlášení a změně oprávnění regeneruj session,
+- citlivé akce chraň step-up ověřením,
+- nastav idle timeout a maximální délku session podle rizika,
+- umožni uživateli zobrazit aktivní sessions a odhlásit ostatní zařízení,
+- při podezřelé aktivitě zneplatni tokeny a oznam to srozumitelně,
+- do logů nikdy nepiš celé tokeny, magic linky ani autorizační kódy.
+
+Příklad UI:
+
+```text
+Aktivní přihlášení
+• MacBook, Praha, poslední aktivita před 12 minutami
+• iPhone, Brno, poslední aktivita včera
+
+Neznáte některé zařízení? Odhlaste ho a změňte způsob přihlášení.
+```
+
+Pozor na přesnost lokace. Ukaž ji jako orientační bezpečnostní signál, ne jako sledovací kroniku pohybu. Uživatel potřebuje poznat divný přístup, ne dostat mapu vlastního života.
+
+## FN.6 Recovery proces rozhoduje o skutečné bezpečnosti
+
+Každý tým rád navrhuje login. Méně týmů rádo navrhuje obnovu účtu. Přitom právě recovery je místo, kde se bezpečnost často rozpadne: útočník nemusí prolomit heslo, když support přesvědčí, že je „pan ředitel na letišti“.
+
+Recovery proces má mít:
+
+- jasné scénáře: zapomenuté heslo, ztracený faktor, ztracený admin, odchod správce,
+- rozdílné postupy pro běžného člena a workspace admina,
+- krátce platné odkazy a jednorázové tokeny,
+- zákaz posílání tajemství e-mailem,
+- auditní stopu bez ukládání citlivého obsahu,
+- čekací dobu nebo dodatečné ověření u vysoce rizikových změn,
+- interní playbook pro support.
+
+Dobrá věta pro support:
+
+```text
+Nemůžeme vám ručně změnit MFA bez ověření podle bezpečnostního procesu. Pomůžeme vám obnovit přístup, ale neobejdeme ochrany účtu.
+```
+
+Tohle může znít tvrdě. Ve skutečnosti je to služba zákazníkovi. Nejhorší customer success je ten, který z dobré vůle otevře dveře útočníkovi.
+
+## FN.7 Checklist privacy-first přihlášení, SSO a passkeys
+
+- Máme mapu rolí, rizik a citlivých akcí.
+- Hesla podporují správce hesel, dlouhé hodnoty a kontrolu proti známě kompromitovaným heslům.
+- MFA/passkeys chrání přihlášení a citlivé změny podle rizika.
+- Vypnutí nebo změna MFA vyžaduje step-up ověření a auditní záznam.
+- SSO ukládá jen nezbytné atributy a má jasné mapování rolí.
+- SSO konfiguraci může měnit jen oprávněný admin po silném ověření.
+- Session tokeny jsou chráněné, rotované a nejsou v logách.
+- Uživatel vidí aktivní sessions a umí odhlásit cizí zařízení.
+- Recovery proces je napsaný, testovaný a odlišný podle rizika účtu.
+- Break-glass účet existuje, je omezený, auditovaný a pravidelně kontrolovaný.
+
+## Codyho komentář
+
+Přihlášení je jako recepce v hotelu. Když je nepříjemná, hosté nadávají. Když je moc důvěřivá, někdo si odnese cizí kufr. Dobrý SaaS login má být zdvořilý, předvídatelný a paranoidní jen tam, kde za dveřmi leží opravdu cenné věci. A hlavně: nemá z identity dělat sběratelské album.
+
+## Zdroje k příloze
+
+- OWASP — Authentication Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html
+- OWASP — Multifactor Authentication Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Multifactor_Authentication_Cheat_Sheet.html
+- OWASP — Session Management Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html
+- NIST — SP 800-63B-4, Authentication and Authenticator Management: https://pages.nist.gov/800-63-4/sp800-63b/authenticators/
+
+## Shrnutí přílohy
+
+Přihlášení není izolovaná auth obrazovka, ale celý bezpečnostní a produktový systém: hesla, passkeys, MFA, SSO, sessions, recovery a support procesy. Privacy-first SaaS chrání účty podle rizika, sbírá jen nezbytné identitní atributy, nepíše tokeny do logů a dává uživatelům i adminům jasné bezpečnostní kontroly bez zbytečného tření.
+
+
 ## Pracovní log
+
+- 2026-08-14: Přidána příloha FN o přihlášení, SSO a passkeys: mapa rizik, civilizovaná hesla, MFA podle rizika, datově střídmé SSO, session management, recovery proces a privacy-first checklist.
 
 - 2026-08-14: Přidána příloha FM o interních poznámkách a komentářích: účel a publikum poznámek, UI zábradlí pro volný text, bezpečné přesměrování citlivých údajů, retence, oddělená oprávnění, AI shrnutí a checklist.
 
