@@ -26787,7 +26787,143 @@ Můj pohled — Cody: DPIA je nejlepší dělat jako produktový rozhovor, ne ja
 
 DPIA není brzda vývoje, ale včasný radar rizik. Malý SaaS tým by měl mít jasné triggery, lidský popis funkce, scénářově popsaná rizika, konkrétní opatření a napojení na release proces. Privacy-first přístup znamená, že riziko řešíš v návrhu produktu, ne až ve chvíli, kdy už data leží u dodavatele a všichni se tváří překvapeně jako kočka u rozbité vázy.
 
+# Příloha FT: Incidentní cvičení bez divadla, paniky a tabulky, kterou nikdo v krizi neotevře
+
+Incidentní plán, který nikdo nikdy nezkusil, je podobný hasicímu přístroji zazděnému za skříní. Vypadá odpovědně, dokud něco nezačne hořet. Malý SaaS tým nepotřebuje válečnou místnost s patnácti rolemi a krizovým gongem. Potřebuje pravidelně ověřit, že umí poznat problém, rozhodnout o závažnosti, chránit zákazníky, komunikovat a po incidentu se zlepšit.
+
+U osobních údajů nejde jen o technickou dostupnost. EDPB připomíná, že porušení zabezpečení osobních údajů zahrnuje náhodné nebo protiprávní zničení, ztrátu, změnu, neoprávněné zpřístupnění nebo přístup k osobním údajům, a že některé případy je nutné oznámit dozorovému úřadu do 72 hodin: https://www.edpb.europa.eu/topics/security-data-breaches/personal-data-breaches_en. Český ÚOOÚ k tomu uvádí praktické informace včetně toho, že správce ohlašuje případ bez zbytečného odkladu a pokud možno do 72 hodin od okamžiku, kdy se o něm dozvěděl: https://uoou.gov.cz/profesional/poruseni-zabezpeceni-osobnich-udaju. ENISA zároveň dlouhodobě doporučuje cvičení plánovat, provádět a vyhodnocovat jako celý cyklus, ne jako jednorázový workshop pro odškrtnutí: https://www.enisa.europa.eu/publications/the-enisa-cybersecurity-exercise-methodology
+
+## FT.1 Cvič scénáře, které by tě opravdu bolely
+
+Nejhorší incidentní cvičení začíná větou „představme si obecný kybernetický útok“. To je jako trénovat požár tím, že někdo řekne „teď je teplo“. Scénář musí být konkrétní, napojený na produkt a dost nepříjemný, aby odhalil slepá místa.
+
+Pro malý evropský SaaS dávají smysl hlavně tyto scénáře:
+
+- Výpadek přihlášení: zákazníci se nemohou dostat do aplikace, ale databáze běží.
+- Chybný deploy: nová verze omylem ukazuje část dat jiného workspace.
+- Ztracený notebook nebo token: člen týmu přijde o zařízení s přístupem do produkce.
+- Únik exportu: administrátor zákazníka stáhne CSV a pošle ho na špatný e-mail.
+- Kompromitovaná integrace: API klíč třetí služby začne číst víc dat, než měl.
+- AI funkce odešle do externího zpracování citlivý obsah, který tam podle pravidel neměl jít.
+
+Dobrý scénář má jasný začátek: alert, e-mail od zákazníka, support ticket, podezřelý log nebo zprávu od dodavatele. Cvičení nesmí začínat tím, že tým už ví, co se stalo. V realitě většinou první hodina není řešení, ale mlha. A mlha je přesně to, co potřebuješ bezpečně nacvičit.
+
+## FT.2 Role rozděl předem, ne během chaosu
+
+V incidentu se nemá hlasovat, kdo napíše zákazníkům a kdo vypne integraci. Role musí být předem popsané a dost malé, aby je zvládl reálný tým. Jedna osoba může držet víc rolí, ale nesmí být zároveň všechno. To pak není incident response, ale one-person cirkus s pagerem.
+
+Minimální role:
+
+| Role | Odpovědnost | Co nedělá |
+| --- | --- | --- |
+| Incident lead | Drží časovou osu, svolává lidi, rozhoduje o prioritě | Nehrabe se hluboko v kódu, pokud nemusí |
+| Technický lead | Izoluje příčinu, navrhuje rollback, sbírá důkazy | Nepíše veřejnou komunikaci bez schválení |
+| Privacy lead | Posuzuje dopad na osobní údaje a oznamovací povinnosti | Nedělá právní poezii místo faktů |
+| Komunikace | Připravuje zprávy pro zákazníky, status page a support | Neslibuje termíny, které technický tým nepotvrdil |
+| Zapisovatel | Vede časovou osu, rozhodnutí, odkazy a nejasnosti | Nehodnotí viníky během zásahu |
+
+Praktický detail: role napiš přímo do incident šablony. Pokud tým používá Slack, Matrix, e-mail nebo issue tracker, první zpráva incidentu má automaticky vytvořit prostor pro časovou osu, rozhodnutí a úkoly. V krizi nechceš hledat správný dokument podle názvu „IR_final_v7_really_final“.
+
+## FT.3 První hodina rozhoduje o důvěře
+
+První hodina incidentu není o dokonalé analýze. Je o zastavení škody, zajištění důkazů a srozumitelné koordinaci. Kdo se snaží během první hodiny napsat kompletní postmortem, pravděpodobně jen vyrábí drahou literaturu.
+
+Rytmus první hodiny:
+
+1. Potvrď incident: co vidíme, odkud to víme, koho se to může týkat.
+2. Zastav šíření: vypni integraci, zablokuj token, rollbackni deploy, omez exporty.
+3. Zachovej důkazy: logy, časy, request ID, verze, konfigurace, rozhodnutí.
+4. Urči předběžnou závažnost: dostupnost, integrita, důvěrnost, osobní údaje, počet zákazníků.
+5. Rozhodni o komunikaci: interně hned, zákazníkům podle dopadu, veřejně bez mlžení.
+6. Nastav další checkpoint: například za 30 minut, ne „až něco zjistíme“.
+
+Privacy-first pravidlo: v incidentním kanálu nesmí přistát kopie celé databáze, screenshoty s osobními údaji ani exporty „pro jistotu“. I vyšetřování incidentu je zpracování dat. Krize není povolenka k datovému bufetu.
+
+## FT.4 Oznamovací povinnosti neřeš až po víkendu
+
+Pokud incident zahrnuje osobní údaje, tým musí rychle posoudit, jestli jde o porušení zabezpečení osobních údajů a jestli vzniká riziko pro práva a svobody lidí. EDPB ve stručném přehledu pro malé firmy uvádí, že správce má porušení oznámit příslušnému dozorovému úřadu do 72 hodin, pokud nelze vyloučit riziko pro jednotlivce; zpracovatel má správce informovat bez zbytečného odkladu: https://www.edpb.europa.eu/sme/assess-the-risks/data-breaches_en
+
+Praktické otázky pro privacy triage:
+
+- Jaké osobní údaje byly dotčené: kontakty, obsah, fakturace, přístupové údaje, citlivé poznámky?
+- Kolik lidí a kolik zákaznických workspace může být zasaženo?
+- Byla data jen nedostupná, nebo došlo k neoprávněnému přístupu či zpřístupnění?
+- Jsou data šifrovaná a zůstaly klíče bezpečné?
+- Může incident vést k finanční škodě, diskriminaci, ztrátě důvěrnosti nebo převzetí účtu?
+- Jsme správce, zpracovatel, nebo obojí podle konkrétní služby?
+- Máme dost informací pro úvodní oznámení, nebo musíme oznámení doplnit později?
+
+Nečekej na absolutní jistotu. Pokud se tým bojí napsat „zatím nevíme“, je to signál, že komunikace není připravená. Úřady i zákazníci většinou nepotřebují divadelní sebevědomí. Potřebují věcný stav, přijatá opatření, další kroky a kontaktní osobu.
+
+## FT.5 Tabletop cvičení má mít injecty, ne přednášku
+
+Tabletop cvičení není školení, kde jeden člověk předčítá playbook a ostatní předstírají, že neposílají zprávy bokem. Cvičení má tým dostat do rozhodování. Proto používej injecty: nové informace, které v průběhu mění situaci.
+
+Příklad 45minutového cvičení:
+
+- 0. minuta: monitoring hlásí nárůst 500 chyb na endpointu exportu.
+- 8. minuta: zákazník píše, že v exportu vidí řádky jiné firmy.
+- 15. minuta: vývojář potvrzuje, že problém začal po ranním deployi.
+- 23. minuta: support našel tři další podobné tickety.
+- 30. minuta: obchodník se ptá, jestli může uklidnit velkého zákazníka telefonem.
+- 38. minuta: technický tým má hotfix, ale není jisté, jestli jsou všechny chybné exporty dohledané.
+
+Po každém injectu se ptej:
+
+- Kdo rozhoduje o dalším kroku?
+- Jaké informace chybí?
+- Co vypínáme nebo omezujeme?
+- Co zaznamenáváme do časové osy?
+- Co říkáme zákazníkům teď a co až později?
+
+Výsledek cvičení není známka. Výsledek jsou konkrétní úkoly: doplnit log, upravit oprávnění, zlepšit rollback, připravit šablonu zprávy, změnit alert. Pokud cvičení skončí jen větou „dobrá diskuze“, právě jste si zahráli firemní pantomimu.
+
+## FT.6 Postmortem piš bez honu na viníka
+
+Postmortem má zlepšit systém, ne vyrobit obětního beránka. Lidé dělají chyby. Systém má být navržený tak, aby jedna chyba neotevřela celý sklad dat. Privacy-first postmortem se proto ptá nejen „proč to spadlo“, ale i „proč byla dotčená právě tahle data“.
+
+Struktura postmortemu:
+
+- Dopad: koho incident zasáhl, jak dlouho, jaký typ dat nebo funkce byl dotčen.
+- Časová osa: detekce, první reakce, mitigace, komunikace, obnovení, uzavření.
+- Kořenové příčiny: technické, procesní, produktové a dodavatelské.
+- Co fungovalo: alert, rollback, komunikace, audit log, vlastnictví.
+- Co nefungovalo: chybějící metriky, nejasné role, pomalé rozhodování, ruční kroky.
+- Opatření: konkrétní úkol, vlastník, termín a způsob ověření.
+
+Důležitý detail: postmortem nesmí obsahovat zbytečné osobní údaje. Pokud potřebuješ příklady, používej interní ID, agregace nebo redakci. Dokument, který vznikl kvůli incidentu, se nesmí stát dalším incidentem. To by bylo krásně absurdní, ale raději ne.
+
+## FT.7 Checklist incidentního cvičení
+
+- [ ] Máme vybraný konkrétní scénář napojený na reálnou funkci, dodavatele nebo datový tok.
+- [ ] Cvičení má incident lead, technického leada, privacy roli, komunikaci a zapisovatele.
+- [ ] Všichni znají místo, kde se vede časová osa, rozhodnutí a odkazy na důkazy.
+- [ ] Scénář obsahuje injecty, které nutí tým rozhodovat pod neúplnými informacemi.
+- [ ] Tým umí během první hodiny zastavit šíření, chránit důkazy a určit předběžnou závažnost.
+- [ ] Privacy triage řeší riziko pro lidi, roli správce/zpracovatele a případnou 72hodinovou lhůtu.
+- [ ] Komunikační šablony jsou krátké, faktické a neobsahují spekulace ani zbytečné detaily.
+- [ ] Incidentní kanál neobsahuje celé exporty, databázové dumpy ani screenshoty s osobními údaji.
+- [ ] Po cvičení vzniknou konkrétní úkoly s vlastníkem, termínem a ověřením.
+- [ ] Další cvičení je naplánované dřív, než všichni zapomenou, kde playbook bydlí.
+
+## Codyho komentář
+
+Můj pohled — Cody: nejlepší incidentní cvičení je trochu nepříjemné, ale bezpečné. Když se během něj ukáže, že nikdo neví, kdo má přístup do DNS, je to dobrá zpráva. Zjistili jste to ve čtvrtek dopoledne u kafe, ne v sobotu ve dvě ráno s velkým zákazníkem na telefonu. To je přesně ten druh trapnosti, který chci v provozu kupovat levně.
+
+## Zdroje k příloze
+
+- EDPB: Personal data breaches: https://www.edpb.europa.eu/topics/security-data-breaches/personal-data-breaches_en
+- EDPB: Data breaches — Data protection guide for small business: https://www.edpb.europa.eu/sme/assess-the-risks/data-breaches_en
+- ÚOOÚ: Porušení zabezpečení osobních údajů: https://uoou.gov.cz/profesional/poruseni-zabezpeceni-osobnich-udaju
+- ENISA: Cybersecurity Exercise Methodology: https://www.enisa.europa.eu/publications/the-enisa-cybersecurity-exercise-methodology
+
+## Shrnutí přílohy
+
+Incidentní cvičení má ověřit, že tým umí reagovat dřív, než se z problému stane důvěrový požár. Vyber bolestivý scénář, rozděl role, nacvič první hodinu, posuď privacy dopad, komunikuj věcně a po cvičení převeď poznatky do backlogu. Privacy-first provoz není o tom, že se nikdy nic nepokazí. Je o tom, že i když se něco pokazí, tým nepanikaří, nesbírá další zbytečná data a chrání zákazníky rychleji než vlastní ego.
+
 ## Pracovní log
+
+- 2026-08-14: Přidána příloha FT o incidentním cvičení pro privacy-first SaaS: scénáře, role, první hodina, oznamovací povinnosti, tabletop injecty, postmortem a checklist.
 
 - 2026-08-14: Přidána příloha FS o DPIA a produktovém posouzení rizik pro malé SaaS týmy: triggery, popis funkce, scénáře rizik, produktová/technická/provozní opatření, release proces a checklist.
 
