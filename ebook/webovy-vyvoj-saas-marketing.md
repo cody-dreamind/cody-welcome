@@ -28144,7 +28144,209 @@ Feedback portál nemá být hlasovací automat na roadmapu ani veřejný sklad c
 
 ---
 
+# Příloha GC: Zákaznická komunita bez platformového rukojmí, moderátorského pekla a datového večírku
+
+Komunita okolo SaaS produktu zní krásně: zákazníci si pomáhají navzájem, tým získává vhledy, noví uživatelé vidí živý ekosystém a marketing má „engagement“. Pak přijde realita: poloprázdný Discord, firemní Slack plný neveřejných detailů, Facebook skupina mimo kontrolu, otázky místo support ticketů, citlivé screenshoty, hádky o roadmapu a jeden člověk v týmu, který to celé moderuje večer u večeře. Romantika jako z brožury, jen brožura hoří.
+
+Privacy-first komunita není zákaznická past. Je to bezpečný prostor pro učení, sdílení zkušeností a opakované odpovědi, který respektuje data, čas i hranice podpory. Nemusí být obří. U malého SaaS je často lepší menší, dobře moderovaná komunita s přímými odkazy a jasnými pravidly než hlučná platforma, kde algoritmus rozhoduje, kdo co uvidí.
+
+## GC.1 Nejdřív rozhodni, jestli komunita opravdu řeší problém
+
+Komunita není levnější support. Pokud ji spustíš jen proto, abys odklonil tickety, zákazníci to poznají během týdne. Komunita má smysl, když lidé řeší opakující se praktické otázky, mohou si bezpečně vyměnit postupy a produkt má dost kontextu, aby diskuze nebyla jen „nejde mi login“ v jiném kabátě.
+
+Před spuštěním napiš odpovědi na čtyři otázky:
+
+- Jakou práci si tu zákazníci pomohou dělat lépe?
+- Co patří do komunity a co musí zůstat v supportu?
+- Kdo z týmu bude odpovídat, moderovat a uzavírat témata?
+- Jak poznáme za tři měsíce, že komunita má smysl?
+
+Dobré účely:
+
+- sdílení šablon, postupů a integračních receptů,
+- vysvětlení best practices okolo produktu,
+- rychlá orientace nových administrátorů,
+- sběr opakujících se otázek pro dokumentaci,
+- pozvánky na webináře, changelog a roadmap Q&A.
+
+Špatné účely:
+
+- „Ať si zákazníci odpovídají sami, support má moc práce.“
+- „Potřebujeme engagement metriky do investor decku.“
+- „Konkurence má komunitu, tak my taky.“
+- „Dáme tam všechno, co se nevejde do dokumentace.“
+
+Komunita bez účelu se rychle změní ve sklad nevyřízených očekávání. A sklad očekávání je horší než sklad nepopsaných kabelů: obojí jednou spadne na něčí hlavu.
+
+## GC.2 Vyber kanál podle kontroly nad daty, ne podle návyku týmu
+
+Nejjednodušší volba bývá založit skupinu tam, kde tým už sedí. To ale neznamená, že je to dobrá volba pro zákazníky. Platforma určuje, kdo drží data, jak se dá exportovat historie, jak funguje vyhledávání, co se indexuje, jaké notifikace lidé dostávají a jak snadno se komunita opouští.
+
+Privacy-first filtr pro výběr kanálu:
+
+- **Vlastnictví dat:** umíš exportovat příspěvky, členy, přílohy a rozhodnutí?
+- **Evropský provoz:** víš, kde jsou data uložená a kdo je subdodavatel?
+- **Přístup:** jde oddělit zákazníky, partnery, trial uživatele a bývalé zákazníky?
+- **Vyhledatelnost:** najde nový zákazník starší odpověď bez lovení v chatu?
+- **Notifikace:** jsou volitelné, srozumitelné a bez nátlaku?
+- **Přímé odkazy:** lze poslat stabilní URL na konkrétní odpověď nebo návod?
+
+Pro malý evropský SaaS často dává smysl začít jednoduše:
+
+- veřejná znalostní báze pro opakovatelné odpovědi,
+- neveřejné fórum pro zákazníky a administrátory,
+- e-mail nebo RSS pro oznámení novinek,
+- pravidelné kancelářské hodiny pro živé dotazy.
+
+Chat je skvělý na rychlou energii, ale mizerný na dlouhodobé znalosti. Fórum nebo znalostní báze je pomalejší, ale lépe se z něj staví paměť produktu. Codyho pravidlo: co má mít hodnotu i za měsíc, nepatří jen do chatu.
+
+## GC.3 Onboarding do komunity musí vysvětlit hranice
+
+Zákazník při vstupu potřebuje vědět, co se tu děje. Ne právní román. Stačí jasné uvítání, pravidla a pár odkazů. Pokud hranice nevysvětlíš, lidé si je domyslí. A lidé jsou kreativní. Občas až moc.
+
+Uvítací zpráva může vypadat takto:
+
+> „Vítejte v komunitě pro zákazníky. Sdílíme tu postupy, šablony a obecné otázky k produktu. Neposílejte sem prosím osobní údaje svých zákazníků, hesla, API klíče, neveřejné smlouvy ani produkční screenshoty bez začernění. Pro konkrétní problém s účtem použijte support, protože tam umíme bezpečně ověřit identitu a pracovat s detaily.“
+
+Minimum pravidel:
+
+- do komunity nepatří hesla, tokeny, osobní údaje třetích osob a interní dokumenty,
+- support případy s účtem se řeší přes oficiální podporu,
+- veřejné odpovědi se mohou později převést do dokumentace,
+- moderátor může upravit název tématu, sloučit duplicity nebo odstranit citlivý obsah,
+- bývalí zákazníci ztrácí přístup podle jasného offboarding pravidla.
+
+GDPR stojí mimo jiné na minimalizaci a účelovém omezení zpracování osobních údajů. Komunitní prostor proto nesmí být místo, kam se bez kontroly sypou data, která produkt nepotřebuje zpracovávat: https://eur-lex.europa.eu/eli/reg/2016/679/oj
+
+## GC.4 Moderace je produktová funkce, ne vedlejší brigáda
+
+Moderace není mazání sprostých slov. V B2B SaaS chrání důvěru, data, bezpečnost a použitelnost komunity. Bez moderace se dobré odpovědi ztrácí, citlivé informace zůstávají viset a noví uživatelé neví, čemu věřit.
+
+Praktický moderátorský model:
+
+- **Denně:** rychlá kontrola nových témat, citlivých příloh a nezodpovězených dotazů.
+- **Týdně:** sloučení duplicit, označení vyřešených témat, výběr odpovědí pro dokumentaci.
+- **Měsíčně:** revize pravidel, top problémů, neaktivních kategorií a uživatelů bez platného vztahu.
+
+Moderátor má mít pravomoc:
+
+- skrýt příspěvek s citlivými údaji,
+- kontaktovat autora soukromě s vysvětlením,
+- převést support problém do ticketu,
+- označit oficiální odpověď týmu,
+- zamknout téma, které sklouzlo mimo účel.
+
+Důležitá drobnost: interní tým by měl odpovídat pod jasně označenými účty. Když zákazník neví, co je oficiální odpověď a co jen osobní tip, vzniká chaos. A chaos je levný jen do chvíle, než podle něj někdo udělá produkční změnu.
+
+## GC.5 Komunita má krmit dokumentaci, ne ji nahrazovat
+
+Každá dobrá otázka je kandidát na dokumentaci. Pokud tým odpoví třikrát na stejný dotaz v komunitě, nemá lepší komunitu. Má děravou dokumentaci.
+
+Jednoduchá smyčka:
+
+1. Zákazník položí otázku.
+2. Tým odpoví bezpečně a konkrétně.
+3. Moderátor označí téma jako vyřešené.
+4. Pokud se dotaz opakuje, vznikne článek v dokumentaci.
+5. Původní vlákno dostane odkaz na článek.
+6. Changelog nebo RSS oznámí důležitou novinku.
+
+Příklad převodu otázky do dokumentace:
+
+> Komunitní otázka: „Jak nastavím role pro externí účetní, aby neviděla všechno?“
+
+> Dokumentační článek: „Jak nastavit dočasný přístup pro externí účetní“ — obsahuje bezpečné role, expiraci přístupu, audit log, co účetní neuvidí, a checklist po skončení spolupráce.
+
+Tím se komunita postupně mění z nekonečného chatu na výrobník užitečných návodů. Což je přesně ten druh továrny, který nepotřebuje komín ani cookie banner.
+
+## GC.6 Přístup a odchod řeš stejně pečlivě jako v produktu
+
+Komunitní účet je pořád přístup k informacím. Může obsahovat roadmap kontext, odpovědi týmu, návody, neveřejné tipy, odkazy na webináře a historii dotazů. Proto potřebuje lifecycle.
+
+Stavy člena komunity:
+
+- **Pozván:** dostal pozvánku, ale ještě nepřijal pravidla.
+- **Aktivní zákazník:** má přístup k běžným kategoriím.
+- **Partner:** vidí partnerské materiály, ale ne zákaznické interní dotazy.
+- **Trial:** omezený přístup s jasnou expirací.
+- **Bývalý zákazník:** přístup se ukončí nebo zúží na veřejné materiály.
+- **Blokovaný:** porušil pravidla nebo vzniklo bezpečnostní riziko.
+
+Offboarding pravidlo napiš před prvním konfliktem. Například:
+
+> „Po ukončení zákaznické smlouvy ponecháme přístup do komunitního účtu 30 dní pro stažení vlastních příspěvků a dokončení otevřených vláken. Poté přístup deaktivujeme. Veřejné nebo anonymizované odpovědi, které neobsahují osobní údaje ani obchodní tajemství, mohou zůstat v komunitní znalostní bázi.“
+
+Tohle musí ladit s obchodními podmínkami, privacy policy a reálným technickým nastavením. Pokud policy říká „smažeme“, ale komunita drží staré přílohy ve třech CDN kopiích, není to policy. Je to přáníčko.
+
+## GC.7 Měř zdraví komunity bez sledovacího cirkusu
+
+Komunita nepotřebuje pixelovou zoo. Potřebuje pár signálů, které ukazují, jestli pomáhá zákazníkům a týmu.
+
+Užitečné metriky:
+
+- počet nových kvalitních témat za měsíc,
+- podíl otázek vyřešených oficiální odpovědí,
+- počet komunitních odpovědí převedených do dokumentace,
+- nejčastější kategorie problémů,
+- čas do první odpovědi u praktických dotazů,
+- počet skrytých příspěvků kvůli citlivým datům,
+- počet členů bez platného zákaznického vztahu.
+
+Méně užitečné metriky:
+
+- počet reakcí jako hlavní KPI,
+- denní aktivní uživatelé bez kontextu,
+- čas strávený v komunitě,
+- žebříčky nejaktivnějších členů,
+- sledování otevření každé notifikace.
+
+Privacy-first report pro tým může být agregovaný:
+
+| Signál | Co znamená | Akce |
+| --- | --- | --- |
+| 12 dotazů k exportu za měsíc | Dokumentace nebo UI je nejasné | Přepsat návod a přidat onboarding hint |
+| 5 skrytých screenshotů s osobními údaji | Lidé nevědí, co nesdílet | Upravit pravidla a upload mikrotext |
+| 8 nezodpovězených témat starších než týden | Tým nestíhá moderovat | Nastavit rotační službu |
+| 3 opakované workaroundy | Produkt má chybějící funkci | Vytvořit discovery ticket |
+
+Měř komunitu tak, aby ses zlepšoval, ne aby ses mohl chlubit grafem. Grafy jsou hezké. Užitečné odpovědi jsou hezčí.
+
+## GC.8 Checklist privacy-first zákaznické komunity
+
+- Má komunita jasný účel jednou větou?
+- Je zřejmé, co patří do komunity a co do supportu?
+- Víš, kde jsou komunitní data uložená a kdo je zpracovává?
+- Lze exportovat obsah, členy a důležité rozhodovací informace?
+- Jsou pravidla napsaná lidsky už při onboardingu?
+- Varuje formulář nebo editor před vkládáním citlivých údajů?
+- Existuje moderátor, náhradník a pravidelný rytmus kontroly?
+- Jsou oficiální odpovědi týmu jasně označené?
+- Převádí se opakované otázky do dokumentace?
+- Má komunita přístupové stavy pro trial, zákazníky, partnery a bývalé zákazníky?
+- Existuje offboarding pravidlo pro ukončené zákazníky?
+- Jsou notifikace volitelné a bez sledovacích pixelů?
+- Má komunita RSS nebo přímé odkazy na důležité aktuality?
+- Reportuje tým agregované signály místo profilování jednotlivců?
+- Kontroluje někdo staré přílohy, citlivé údaje a neaktivní kategorie?
+
+## Codyho komentář
+
+Komunita je produktová zahrada, ne skládka. Když ji zasadíš na cizí platformě, necháš ji bez plotu a místo péče jen jednou za čas hodíš motivační post, vyroste plevel a jeden pasivně agresivní thread o roadmapě. Když ji navrhneš jako bezpečný prostor s jasným účelem, přístupem, moderací a napojením na dokumentaci, může být menší — a mnohem užitečnější. V SaaS totiž často nevyhrává největší komunita. Vyhrává ta, která zákazníkům šetří čas a týmu zlepšuje produkt.
+
+## Zdroje k příloze
+
+- GDPR, článek 5 — principy zpracování včetně účelového omezení a minimalizace osobních údajů: https://eur-lex.europa.eu/eli/reg/2016/679/oj
+- EDPB Data Protection Guide for Small Business — vysvětlení zákonného zpracování osobních údajů pro menší organizace: https://www.edpb.europa.eu/sme/be-compliant/process-personal-data-lawfully_en
+- RSS Advisory Board — specifikace RSS 2.0 pro přímý odběr aktualit a komunitních novinek bez sociální platformy: https://www.rssboard.org/rss-specification
+
+## Shrnutí přílohy
+
+Zákaznická komunita má pomáhat zákazníkům a produktu, ne nahrazovat support nebo sbírat data pro engagement grafy. Privacy-first přístup začíná jasným účelem, volbou kanálu podle kontroly nad daty, lidským onboardingem, aktivní moderací, napojením na dokumentaci, řízeným přístupem a agregovaným měřením zdraví komunity. Dobrá komunita není nejhlasitější místnost v SaaS. Je to bezpečné místo, kde se opakované otázky mění v lepší produkt.
+
+---
+
 ## Pracovní log
+- 2026-08-14: Přidána příloha GC o privacy-first zákaznické komunitě: účel komunity, výběr kanálu podle kontroly nad daty, onboardingová pravidla, moderace, propojení s dokumentací, přístupové stavy, měření zdraví a checklist.
 - 2026-08-14: Přidána příloha GB o privacy-first feedback portálu: účel sběru, datové minimum formulářů, veřejná vs. interní vrstva, hlasování jako signál, moderace, stavy návrhů, notifikace a checklist.
 - 2026-08-14: Přidána příloha GA o veřejném changelogu a roadmapě: rozdíl mezi release notes a plány, bezpečný jazyk změn, úrovně jistoty roadmapy, feedback karty, RSS, support briefy a checklist.
 - 2026-08-14: Přidána příloha FZ o exportech, přenositelnosti a odchodu zákazníka: Data Act kontext, kategorie dat, otevřené formáty, timeline ukončení účtu, cloud switching, exit plán a checklist.
