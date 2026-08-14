@@ -28667,8 +28667,177 @@ Můj pohled: nejlepší in-app marketing působí jako dobrý produktový kolega
 
 In-app marketing má pomáhat uživateli v konkrétním produktovém momentu, ne ho sledovat, tlačit a unavovat. Privacy-first přístup stojí na srozumitelném důvodu výzvy, férových upgrade momentech, jasném trialu, odmítnutí dark patterns, hrubé vysvětlitelné segmentaci, střídmém měření a preference centru. Produkt, který respektuje pozornost a data uživatele, nemusí být méně obchodní. Jen není otravný. Což je v SaaS docela příjemná konkurenční výhoda.
 
+
+---
+
+# Příloha GF: Bug reporting a produktová triáž bez chaosu, screenshotů s tajemstvím a supportového ping-pongu
+
+Bug report není jen technický lístek v trackeru. Je to okamžik, kdy zákazník říká: „Něco mi brání v práci a věřím, že to zvládnete opravit.“ Když z toho tým udělá výslech, nekonečné přeposílání screenshotů a tři týdny ticha, důvěra mizí rychleji než motivace po meetingu bez agendy.
+
+Privacy-first bug reporting má dvě pravidla. Za prvé: sbírej jen tolik informací, kolik potřebuješ k reprodukci a prioritizaci. Za druhé: citlivá data zákazníka nejsou ladicí materiál. Každý report, log, screenshot a export musí mít jasný účel, omezený přístup a cestu k odstranění.
+
+## GF.1 Report musí vést zákazníka ke konkrétnosti
+
+Špatný formulář na chyby se ptá: „Popište problém.“ To je jako poslat zákazníka do lesa s mapou supermarketu. Dobrý formulář pomůže popsat kontext bez toho, aby z člověka tahal zbytečnosti.
+
+Základní pole pro B2B SaaS:
+
+| Pole | Proč ho chceš | Privacy-first poznámka |
+| --- | --- | --- |
+| Co se mělo stát | Očekávaný výsledek | Neptej se na interní proces, pokud není nutný. |
+| Co se stalo | Skutečný výsledek | Veď uživatele k popisu, ne k posílání celé databáze. |
+| Kde v aplikaci | Modul, URL bez tokenů, název obrazovky | Automaticky odstraň session tokeny a citlivé parametry. |
+| Kdy se to stalo | Časové okno | Stačí přibližný čas, pokud máš korelační ID. |
+| Dopad | Kolik lidí a jaká práce stojí | Priorita se má řídit dopadem, ne počtem vykřičníků. |
+| Příloha | Screenshot nebo soubor | Přidej instrukci k rozmazání osobních údajů. |
+
+Mikrotext k příloze:
+
+> „Pokud přikládáte screenshot, prosím zakryjte osobní údaje, zákaznická jména, tokeny a finanční hodnoty, které nejsou nutné pro pochopení chyby. Když si nejste jistí, pošlete raději popis a my si vyžádáme konkrétní detail.“
+
+Tohle není právní alibismus. Je to ochrana zákazníka i týmu. Čím méně citlivostí v reportech, tím menší problém při sdílení s vývojáři, dodavatelem nebo interním AI pomocníkem.
+
+## GF.2 Chyba potřebuje korelační ID, ne zákaznický detektivní román
+
+Největší rozdíl mezi amatérským a dospělým provozem je schopnost spojit zákaznické hlášení s konkrétní událostí v systému. Ne přes „pošlete nám prosím všechno, co jste klikali“, ale přes bezpečné korelační ID.
+
+Praktický vzor:
+
+- Každý request nebo důležitá akce má interní `request_id` nebo `event_id`.
+- Chybová obrazovka ukáže uživateli krátké ID, třeba `ERR-20260814-8F3K`.
+- Support může podle ID najít relevantní logy bez přístupu k celé relaci.
+- Logy obsahují technický stav, ne zbytečný obsah formulářů.
+- ID neobsahuje e-mail, zákaznické číslo ani jiný osobní údaj.
+
+Špatná chybová hláška:
+
+> „Něco se pokazilo. Kontaktujte podporu.“
+
+Lepší chybová hláška:
+
+> „Export se nepodařilo dokončit. Zkuste to prosím znovu za pár minut. Pokud problém trvá, napište podpoře a přiložte kód chyby `ERR-8F3K`. Vaše rozpracovaná data zůstala uložená.“
+
+Ten poslední dodatek je důležitý. Uživatel nechce jen vědět, že se něco rozbilo. Chce vědět, jestli právě přišel o práci.
+
+## GF.3 Logování navrhuj podle incidentů, ne podle zvědavosti
+
+OWASP ve své Logging Cheat Sheet zdůrazňuje, že logování má podporovat bezpečnostní monitoring, vyšetřování incidentů a audit, ale současně se má vyhnout zbytečnému zachytávání citlivých dat. Přeloženo do Codyštiny: log není odpadkový koš pro všechno, co aplikace cestou potká.
+
+Co do aplikačních logů obvykle patří:
+
+- čas události,
+- anonymní nebo interní identifikátor účtu,
+- typ akce,
+- výsledek akce,
+- technická chyba,
+- korelační ID,
+- verze aplikace,
+- bezpečnostně relevantní změny, například změna role nebo API klíče.
+
+Co do běžných logů nepatří:
+
+- hesla, tokeny, API klíče a reset odkazy,
+- celé požadavky s osobními údaji,
+- obsah zpráv, dokumentů nebo promptů,
+- platební údaje,
+- přesná geolokace bez nutného důvodu,
+- screenshoty produkčního rozhraní,
+- data třetích osob, která uživatel nahrál do produktu.
+
+Praktické pravidlo: když bys nechtěl daný údaj číst nahlas na incident review před zákazníkem, pravděpodobně nemá být v běžném logu. Ano, trochu teatrální test. Ale funguje.
+
+## GF.4 Priorita chyby se počítá z dopadu, obchodu a bezpečnosti
+
+Triage není soutěž o nejhlasitější ticket. Potřebuje jasnou matici, aby support, vývoj a obchod netahali za tři různé konce lana.
+
+Jednoduchá matice priority:
+
+| Priorita | Dopad | Příklad | Reakce |
+| --- | --- | --- | --- |
+| P0 | Služba stojí nebo hrozí únik dat | Přihlášení nefunguje všem, veřejný přístup k cizím datům | Incident režim, vlastník okamžitě, status komunikace |
+| P1 | Kritická práce je blokovaná pro významnou část zákazníků | Nejde fakturace, export nebo pozvánky týmu | Oprava před běžným vývojem, průběžné update |
+| P2 | Důležitá funkce zlobí, existuje workaround | Filtr vrací špatné řazení, import padá u části souborů | Naplánovat do blízkého release |
+| P3 | Nepříjemnost bez zásadního dopadu | Překlep, drobný layout problém | Batch oprava, backlog |
+
+K tomu přidej bezpečnostní a privacy eskalátor: pokud report naznačuje únik dat, neoprávněný přístup, slabinu v autentizaci, ztrátu auditu nebo problém s výmazem, priorita se zvedá. Ne proto, že panika dobře vypadá v kalendáři. Protože dopad na důvěru je větší než samotný bug.
+
+## GF.5 Reprodukce musí být bezpečná a opakovatelná
+
+„Pošlete nám produkční export a my se na to podíváme“ je pohodlné. Taky je to přesně ten typ věty, po které privacy-first andělovi opadá peří.
+
+Bezpečnější postup reprodukce:
+
+1. Zkus chybu zopakovat na syntetických datech.
+2. Pokud to nejde, vyžádej si minimální výřez dat nutný pro ověření.
+3. Před sdílením s vývojem odstraň osobní údaje, tokeny a interní poznámky zákazníka.
+4. Ulož přílohu jen do systému s omezeným přístupem a retenční dobou.
+5. Po opravě přílohy smaž nebo anonymizuj podle runbooku.
+
+Pro složitější B2B produkty se vyplatí mít „debug sandbox“: prostředí, kde lze nahrát anonymizovaný scénář, spustit import nebo ověřit workflow bez přímého zásahu do produkce. Sandbox není skládka zákaznických databází. Je to kontrolované místo pro reprodukci s pravidly.
+
+## GF.6 Bug report se má vracet do produktu, ne jen zavřít ticket
+
+Opravený bug je minimum. Dobrý tým se ještě zeptá: co nám report říká o produktu?
+
+Po každé významnější chybě projdi:
+
+- Šlo chybě zabránit validací vstupu?
+- Měla být chybová hláška srozumitelnější?
+- Chyběl v produktu bezpečný fallback?
+- Potřebuje dokumentace doplnit známé limity?
+- Má monitoring poznat stejný problém příště dřív než zákazník?
+- Měla by se změnit testovací sada nebo release checklist?
+- Zachytili jsme při řešení víc dat, než bylo nutné?
+
+Tím se z podpory stává učící mechanismus. Bez toho se jen hasí stejné požáry s jiným předmětem e-mailu.
+
+## GF.7 Komunikace po opravě má být konkrétní a klidná
+
+Zákazník nepotřebuje interní stack trace ani román o tom, jak se tým statečně probojoval přes tři cache vrstvy. Potřebuje vědět, co se stalo, co se opravilo, jestli má něco udělat a jestli se jeho dat něco týkalo.
+
+Šablona odpovědi po opravě:
+
+> „Díky za nahlášení. Chybu jsme opravili ve verzi 2026.08.14-2. Problém se týkal exportu faktur s více než 500 řádky; data nebyla ztracena ani zpřístupněna jiným účtům. Pokud export spustíte znovu, měl by proběhnout správně. Přidali jsme také kontrolu do release testů, aby se stejný případ zachytil dřív.“
+
+Když nevíš, jestli se problém týkal dat, nepiš „vše je v pořádku“. Napiš pravdu:
+
+> „Zatím nemáme indicii, že by došlo k přístupu k cizím datům. Ještě kontrolujeme auditní logy za období 13.–14. 8. 2026 a dáme vám finální potvrzení do 16:00.“
+
+Klidná konkrétnost poráží marketingové mlžení. Vždycky.
+
+## GF.8 Checklist bug reportingu a triáže
+
+- Má formulář pro chyby strukturovaná pole pro očekávání, skutečnost, místo, čas a dopad?
+- Varuje formulář před posíláním citlivých dat ve screenshotech a přílohách?
+- Ukazuje aplikace u chyb bezpečné korelační ID?
+- Umí support najít relevantní logy bez plného přístupu k zákaznickému obsahu?
+- Neobsahují běžné logy tokeny, hesla, celé formuláře, prompty nebo dokumenty?
+- Existuje priorizační matice podle dopadu, ne podle hlasitosti zákazníka?
+- Zvedá se priorita automaticky při podezření na bezpečnostní nebo privacy dopad?
+- Umíte reprodukovat chyby na syntetických datech nebo minimálním výřezu?
+- Mají přílohy z bug reportů vlastníka, omezený přístup a retenční dobu?
+- Vrací se významné chyby do dokumentace, testů, monitoringu nebo release checklistu?
+- Dostane zákazník po opravě konkrétní informaci o dopadu a dalším kroku?
+- Má tým pravidlo, kdy bug přepnout do incidentního režimu?
+
+## Codyho komentář
+
+Můj pohled: dobrý bug reporting je skoro neviditelná disciplína. Když funguje, zákazník má pocit, že tým ví, co dělá. Když nefunguje, vznikne supportový escape room, kde každý hledá správný screenshot, log a člověka, který „to možná kdysi nastavoval“. Privacy-first přístup tu není brzda. Je to pořádek: méně citlivých příloh, lepší korelace, jasnější odpovědnost a rychlejší opravy.
+
+## Zdroje k příloze
+
+- OWASP — Logging Cheat Sheet; doporučení pro bezpečnostní logování, výběr událostí a omezení citlivých dat v logách: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+- OWASP — Vulnerability Disclosure Cheat Sheet; užitečné principy pro příjem, triáž a komunikaci bezpečnostně relevantních hlášení: https://cheatsheetseries.owasp.org/cheatsheets/Vulnerability_Disclosure_Cheat_Sheet.html
+- NCSC — Vulnerability management; praktický pohled na prioritizaci, opravování a řízení zranitelností podle rizika: https://www.ncsc.gov.uk/guidance/vulnerability-management
+
+## Shrnutí přílohy
+
+Bug reporting je součást důvěry v SaaS, ne jen fronta nepříjemností pro vývoj. Privacy-first triáž vede zákazníka ke konkrétnosti, používá bezpečná korelační ID, loguje podle účelu, chrání citlivé přílohy, prioritizuje podle dopadu a vrací poznatky zpět do produktu. Výsledkem je méně ping-pongu, rychlejší opravy a menší riziko, že se ladění chyby samo stane privacy incidentem. Což by byla opravdu zbytečně kreativní forma sebepoškození.
+
+
 ## Pracovní log
 
+- 2026-08-14: Přidána příloha GF o bug reportingu a produktové triáži: strukturované hlášení, korelační ID, bezpečné logování, priorizace podle dopadu, reprodukce bez produkčních dat, komunikace po opravě a checklist.
 - 2026-08-14: Přidána příloha GE o in-app marketingu bez dark patterns: uživatelský důvod výzev, férové upgrade momenty, trialová očekávání, hrubá segmentace, střídmé měření, preference centrum a checklist.
 - 2026-08-14: Přidána příloha GD o SLA a podmínkách podpory: definice služby, reakční doby, priority ticketů, support access, status komunikace, export/odchod zákazníka a privacy-first checklist.
 - 2026-08-14: Přidána příloha GC o privacy-first zákaznické komunitě: účel komunity, výběr kanálu podle kontroly nad daty, onboardingová pravidla, moderace, propojení s dokumentací, přístupové stavy, měření zdraví a checklist.
