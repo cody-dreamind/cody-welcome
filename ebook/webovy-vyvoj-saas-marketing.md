@@ -26036,7 +26036,182 @@ Přihlášení je jako recepce v hotelu. Když je nepříjemná, hosté nadávaj
 Přihlášení není izolovaná auth obrazovka, ale celý bezpečnostní a produktový systém: hesla, passkeys, MFA, SSO, sessions, recovery a support procesy. Privacy-first SaaS chrání účty podle rizika, sbírá jen nezbytné identitní atributy, nepíše tokeny do logů a dává uživatelům i adminům jasné bezpečnostní kontroly bez zbytečného tření.
 
 
+# Příloha FO: Service účty a ne-lidské identity bez tokenového hřbitova, sdílených robotů a tichých úniků
+
+Moderní SaaS už dávno nepoužívají jen lidé. Přihlašují se do nich cron joby, integrace, CI/CD pipeline, analytické exporty, webhook konzumenti, AI asistenti, migrační skripty a malé nenápadné procesy, které „jen jednou denně něco synchronizují“. Právě tyhle ne-lidské identity bývají nebezpečné ne proto, že jsou zákeřné, ale proto, že je nikdo nemá rád dost na to, aby jim dal vlastníka.
+
+OWASP Non-Human Identities Top 10 pro rok 2025 řadí mezi klíčová rizika mimo jiné špatný offboarding, únik secretů, přehnaná oprávnění, dlouho žijící tajemství, opakované používání jedné identity a lidské používání ne-lidských identit: https://owasp.org/www-project-non-human-identities-top-10/2025/
+
+Privacy-first přístup k service účtům znamená: každá strojová identita má jasný účel, vlastníka, minimální rozsah, expiraci nebo review rytmus a auditní stopu. Robot bez občanky do produkce nepatří. Ano, zní to byrokraticky. Ale méně byrokraticky než hledat v pátek večer, který token právě stáhl všechny faktury do špatného nástroje.
+
+## FO.1 Nejdřív pojmenuj typ identity, ne jen „API klíč“
+
+„API klíč“ je často líný název pro pět různých věcí. Jednou jde o token zákaznické integrace, podruhé o interní service účet, potřetí o CI secret, počtvrté o webhook podpis a popáté o dočasný exportní odkaz. Pokud se všechno jmenuje stejně, tým začne všechno chránit stejně. Což typicky znamená: nijak zvlášť.
+
+Praktické rozdělení:
+
+| Typ identity | Kdo ji používá | Typické riziko | Základní pravidlo |
+| --- | --- | --- | --- |
+| service účet | backend job, worker, integrace | přístup běží i po zániku účelu | vlastník, scope, review |
+| zákaznický API token | zákazníkova automatizace | únik přes skript nebo repozitář | omezený rozsah a snadná rotace |
+| CI/CD identita | pipeline a deployment | široký dopad při kompromitaci | oddělené prostředí a krátká platnost |
+| webhook secret | ověření příchozí zprávy | podvržené události | podpis, rotace, replay ochrana |
+| exportní odkaz | člověk nebo systém stahující soubor | sdílení mimo oprávnění | expirace a jednorázovost |
+
+U každé identity si napiš jednu větu: „Tahle identita existuje proto, aby…“ Pokud větu neumíš dokončit bez slov „pro jistotu“, identita je kandidát na smazání nebo aspoň na bolestivý pohovor.
+
+## FO.2 Service účet musí mít lidského vlastníka
+
+Ne-lidská identita nesmí být bezprizorní. Musí existovat člověk nebo role, která odpovídá za její účel, oprávnění, rotaci a vypnutí. Vlastník nemusí token znát ani ho mít v poznámkách. Naopak, raději ne. Musí ale vědět, proč identita existuje a co se rozbije, když ji vypne.
+
+Minimální karta service účtu:
+
+```text
+Název: invoice-sync-worker-prod
+Účel: Synchronizuje zaplacené faktury z billing systému do interního účetního queue.
+Vlastník: Finance Ops / Petra
+Prostředí: production
+Scope: billing:invoices.read, queue:invoice-events.write
+Data: ID faktury, stav platby, částka, měna, zákaznické ID
+Secret uložen v: produkční secret store
+Rotace / review: každé 3 měsíce nebo při změně integrace
+Nouzové vypnutí: disable service account + pauza workeru invoice-sync
+```
+
+Tohle není dokumentace pro auditora do vitríny. Je to mapa pro člověka, který bude řešit incident, migraci nebo odchod dodavatele. Bez ní se service účty mění v digitální sklep: všichni tuší, že tam něco je, nikdo nechce rozsvítit.
+
+## FO.3 Oprávnění nastav podle akce, ne podle pohodlí vývoje
+
+Nejčastější zkratka je dát service účtu admin práva, protože první integrace pak funguje rychleji. Druhá zkratka je nikdy se k tomu nevrátit. Třetí zkratka je tvářit se překvapeně, když uniklý token uměl dělat věci, které neměl umět ani v kreativním sprintu.
+
+Rozumný model scope:
+
+- `read` odděl od `write`, protože export dat a změna dat nejsou stejný risk,
+- destruktivní akce jako `delete`, `refund`, `invite`, `role.update` dej do samostatných oprávnění,
+- produkční a testovací scope nikdy nemíchej,
+- zákaznický token omez na konkrétní workspace nebo projekt,
+- interní token omez na konkrétní službu, ne na celou databázi,
+- výjimky s širším oprávněním dej do časově omezeného režimu,
+- změny scope loguj a zobrazuj vlastníkovi.
+
+Příklad lepšího pojmenování:
+
+```text
+Špatně: admin_api_key
+Lépe: billing_invoice_reader_prod
+Ještě lépe: billing.invoice.read:prod:finance-export
+```
+
+Názvy samy o sobě bezpečnost nevyřeší, ale hodně pomáhají tomu, aby tým při review okamžitě viděl podezřelé nesmysly. Token `temporary_full_access_2023` v roce 2026 je bezpečnostní báseň, jen v žánru horor.
+
+## FO.4 Krátká platnost a rotace musí být produktová funkce
+
+Rotace tokenů často selže ne proto, že tým nechce bezpečnost, ale proto, že produkt rotaci neumí bez výpadku. Pokud nový token nejde vytvořit vedle starého, ověřit, přepnout a teprve potom starý zneplatnit, lidé budou rotaci odkládat. A dlouho žijící tokeny jsou přesně jeden z problémů, na které OWASP u ne-lidských identit upozorňuje: https://owasp.org/www-project-non-human-identities-top-10/2025/table-of-contents/
+
+Navrhni rotaci jako cestu:
+
+1. Vlastník vytvoří nový token se stejným nebo menším scope.
+2. Produkt ukáže poslední použití starého i nového tokenu.
+3. Integrace se přepne na nový token.
+4. Starý token dostane krátké překryvné okno.
+5. Po expiraci se starý token automaticky zneplatní.
+6. Audit log uloží kdo, kdy a proč rotaci spustil.
+
+U interních service účtů preferuj krátkodobé credentials vydávané prostředím, kde to dává smysl. Pokud musí existovat dlouhodobý secret, chovej se k němu jako k výjimce: vlastník, scope, rotace, alert na nepoužitý nebo neobvykle použitý token.
+
+## FO.5 Lidé nesmí používat roboty jako masku
+
+Ne-lidská identita má dělat strojovou práci. Nemá sloužit jako sdílený účet pro tým, nouzový admin účet bez MFA nebo pohodlná cesta, jak obejít osobní oprávnění. OWASP mezi riziky uvádí i lidské používání ne-lidských identit, protože tím mizí odpovědnost a auditní stopa: https://owasp.org/www-project-non-human-identities-top-10/2025/
+
+Praktické hranice:
+
+- service účet se nepřihlašuje do běžného UI jako člověk,
+- člověk nespouští produkční akce pod anonymním robotem,
+- break-glass účet má samostatný režim, ne masku „service-admin“,
+- interní skripty logují původní lidský požadavek nebo schválení,
+- zákaznické UI ukazuje, že akci provedla integrace, ne konkrétní kolega,
+- podezřelé ruční použití strojového tokenu spouští alert.
+
+Příklad auditní věty:
+
+```text
+Integrace „Fakturoid sync“ stáhla export faktur. Akci spustil plánovaný job, token vlastní Finance Ops, scope: invoices.read.
+```
+
+To je mnohem užitečnější než „API key used“. Díky, systéme, poetické a naprosto k ničemu.
+
+## FO.6 Offboarding robotů dělej stejně vážně jako offboarding lidí
+
+Když odejde zaměstnanec, většina týmů aspoň tuší, že má vypnout účet. Když skončí integrace, starý worker, dodavatel nebo experimentální AI agent, token často zůstane žít dál. Tiše. Dlouho. S přístupem. OWASP uvádí špatný offboarding jako první riziko NHI Top 10 pro rok 2025: https://owasp.org/www-project-non-human-identities-top-10/2025/
+
+Offboarding trigger není jen „někdo odešel z firmy“. Patří sem:
+
+- vypnutí nebo výměna dodavatele,
+- migrace billing systému,
+- zrušený zákaznický workspace,
+- odstraněná integrace,
+- smazaný background job,
+- konec pilotu s AI nástrojem,
+- změna účelu zpracování dat,
+- podezření na únik secretu.
+
+Každý trigger má mít jednoduchou akci: najít související identity, zneplatnit je, ověřit poslední použití, uložit výsledek do logu a odstranit dokumentaci, která už navádí k mrtvé integraci. Ano, úklid je nudný. Bezpečnost je často jen dobře pojmenovaná nuda.
+
+## FO.7 Zákazníkům dej kontrolu nad jejich tokeny
+
+Pokud SaaS nabízí API nebo integrace, zákazník musí vidět, jaké tokeny v jeho workspace existují, kdo je vytvořil, kdy byly naposledy použité a jaký mají scope. Jinak support dřív nebo později skončí u věty „pošlete nám prosím klíč, my se podíváme“. Ne. Tudy vede cesta do pekla, a ještě je tam špatná dokumentace.
+
+Dobrá obrazovka API tokenů obsahuje:
+
+- název tokenu a účel napsaný zákazníkem,
+- datum vytvoření a posledního použití,
+- scope v lidském jazyce,
+- prostředí nebo projekt, pro který platí,
+- možnost rotace bez výpadku,
+- možnost okamžitého zneplatnění,
+- upozornění na dlouho nepoužitý token,
+- auditní záznam změn.
+
+Mikrotext u vytvoření tokenu:
+
+```text
+Token ukážeme jen jednou. Uložte ho do správce tajemství, ne do chatu ani do repozitáře. Doporučujeme nastavit datum další kontroly.
+```
+
+Privacy-first produkt nevyrábí závislost na supportu. Dává zákazníkovi bezpečné páky a supportu nechává jen výjimky.
+
+## FO.8 Checklist service účtů a ne-lidských identit
+
+- Má každá ne-lidská identita jasný typ: service účet, API token, CI identita, webhook secret nebo exportní odkaz?
+- Má každá identita lidského vlastníka nebo vlastnickou roli?
+- Je u každé identity popsaný účel jednou konkrétní větou?
+- Jsou oprávnění oddělená podle akcí a prostředí?
+- Existuje bezpečná rotace bez výpadku?
+- Umí produkt ukázat poslední použití tokenu bez zbytečného odhalování detailů?
+- Mají zákazníci přehled o svých API tokenech a možnost je zneplatnit?
+- Jsou dlouho nepoužité identity automaticky označené k review?
+- Je lidské použití service účtu zakázané nebo aspoň detekované?
+- Existuje offboarding checklist pro integrace, dodavatele, workery a pilotní AI agenty?
+- Nekončí tokeny v issue trackerech, chatech, e-mailech, logách nebo README souborech?
+- Umí incidentní tým rychle zjistit, co se stane při vypnutí konkrétní identity?
+
+## Codyho komentář
+
+Service účty jsou takové firemní domácí spotřebiče: dokud fungují, nikdo je neřeší; když začnou hořet, najednou všichni chtějí vědět, kdo je koupil, kam vedou kabely a proč jsou zapojené přes prodlužku z roku 2019. Můj pohled: ne-lidské identity si zaslouží produktový design stejně jako onboarding lidí. Jinak se z nich stane bezpečnostní temná hmota.
+
+## Zdroje k příloze
+
+- OWASP Non-Human Identities Top 10 2025: https://owasp.org/www-project-non-human-identities-top-10/2025/
+- OWASP NHI Top 10 — tabulka rizik včetně offboardingu, secret leakage, overprivileged NHI, long-lived secrets a human use of NHI: https://owasp.org/www-project-non-human-identities-top-10/2025/table-of-contents/
+- NIST SP 800-63 Digital Identity Guidelines jako kontext pro řízení digitálních identit a autentizace: https://pages.nist.gov/800-63-4/sp800-63.html
+
+## Shrnutí přílohy
+
+Ne-lidské identity nejsou technická drobnost, ale provozní a bezpečnostní závazek. Každý service účet, token, webhook secret nebo CI identita má mít účel, vlastníka, omezený scope, bezpečnou rotaci, auditní stopu a offboarding. Privacy-first SaaS nedává robotům nekonečné klíče od sklepa jen proto, že nemají kalendář a neumí si stěžovat na Slacku.
+
 ## Pracovní log
+
+- 2026-08-14: Přidána příloha FO o service účtech a ne-lidských identitách: typy identit, vlastníci, minimální scope, rotace, zákaz lidského používání robotů, offboarding, zákaznické API tokeny a checklist.
 
 - 2026-08-14: Přidána příloha FN o přihlášení, SSO a passkeys: mapa rizik, civilizovaná hesla, MFA podle rizika, datově střídmé SSO, session management, recovery proces a privacy-first checklist.
 
