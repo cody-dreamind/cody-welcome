@@ -27790,7 +27790,183 @@ Nejférovější retenční strategie je paradoxně ta, která zákazníkovi umo
 
 Export dat a odchod zákazníka nejsou nepříjemná podpora, ale součást důvěryhodného SaaS produktu. Malý tým má mít mapu exportovaných dat, otevřené formáty, verzované schéma, expiraci exportů, jasnou timeline ukončení účtu a vlastní exit plán pro kritické dodavatele. Privacy-first produkt zákazníka nedrží silou. Drží ho tím, že se mu dá věřit i u dveří.
 
+
+# Příloha GA: Veřejný changelog a roadmapa bez slibotechny, úniků dat a produktového divadla
+
+Changelog a roadmapa jsou dvě různé věci. Changelog říká, co se skutečně změnilo. Roadmapa říká, jakým směrem produkt pravděpodobně půjde. Když je smícháš dohromady, vznikne marketingový guláš: zákazník neví, co už funguje, obchod slibuje věci, které vývoj ještě ani neviděl, a support pak hasí otázky typu „kde je ta funkce, kterou jste naznačili v Q2?“
+
+Privacy-first produkt má k veřejné produktové komunikaci ještě jeden důvod: méně tajností, méně podpůrných dotazů a méně potřeby tahat zákazníky do sledovaných komunit, newsletterových trychtýřů nebo reklamních publik. Přímá stránka s changelogem, RSS feedem a opatrnou roadmapou je nudná. A přesně proto funguje.
+
+## GA.1 Changelog piš pro uživatele, ne pro git
+
+Commit zpráva není changelog. „Refactor billing service“ může být technicky pravda, ale zákazník z toho nezjistí nic. Dobrý changelog překládá změny do dopadu:
+
+- co je nové,
+- co se zlepšilo,
+- co bylo opraveno,
+- koho se změna týká,
+- jestli musí uživatel něco udělat.
+
+Špatně:
+
+> „Updated dependencies and fixed dashboard bug.“
+
+Lépe:
+
+> „Opravili jsme chybu, kvůli které se u některých týmů nezobrazoval filtr podle projektu v přehledu docházky. Není potřeba nic nastavovat; oprava platí automaticky pro všechny workspace.“
+
+Ještě lepší je držet jednotnou strukturu. Projekt Keep a Changelog doporučuje, aby changelog byl čitelný pro lidi a aby změny byly seskupené podle typu, například přidáno, změněno, opraveno nebo odstraněno: https://keepachangelog.com/en/1.1.0/
+
+Pro malý SaaS stačí jednoduchý formát:
+
+```markdown
+## 2026-08-14
+
+### Přidáno
+- Správci workspace teď mohou exportovat seznam aktivních členů do CSV.
+
+### Opraveno
+- Opravili jsme chybné řazení faktur podle data splatnosti.
+
+### Poznámka k soukromí
+- Export obsahuje jen jméno, e-mail, roli a stav účtu; neobsahuje historii přihlášení ani interní poznámky supportu.
+```
+
+Ta poslední sekce je zlatá. Ne proto, že by ji každý četl, ale protože tým nutí přemýšlet nad datovým dopadem změny.
+
+## GA.2 Veřejná roadmapa není smlouva psaná krví
+
+Roadmapa má ukazovat směr, ne vytvářet právně-neprávní sliby. Pokud napíšeš „v září dodáme kompletní SSO pro všechny enterprise identity providery“, právě sis vyrobil očekávání, které bude někdo citovat v sales callu, support ticketu i obnově smlouvy. Gratuluju, pastička cvakla.
+
+Bezpečnější veřejná roadmapa používá úrovně jistoty:
+
+- **Teď řešíme:** práce, která je aktivně ve vývoji nebo validaci.
+- **Zvažujeme:** problém je důležitý, ale řešení ještě není potvrzené.
+- **Později:** téma je na radaru, bez slibu termínu.
+- **Neplánujeme:** vědomé rozhodnutí, ideálně s krátkým důvodem.
+
+Příklad:
+
+> „Zvažujeme lepší export audit logů pro administrátory. Nechceme zatím slíbit konkrétní formát, protože nejdřív ověřujeme, jaké logy zákazníci skutečně potřebují pro compliance a co by už bylo zbytečné riziko pro osobní údaje.“
+
+Tohle je poctivější než falešně přesné datum. Zákazník dostane směr a tým si nenasadí okovy.
+
+Codyho komentář: roadmapa bez nejistoty je většinou fanfikce. Hezká, barevná, a za tři měsíce lehce trapná.
+
+## GA.3 Neprozrazuj zákazníky, incidenty ani interní architekturu
+
+Changelog má být transparentní, ne upovídaný jak log v debug módu. Některé detaily patří do interní dokumentace, ne na veřejný web.
+
+Do veřejného changelogu nepiš:
+
+- jména zákazníků bez výslovného souhlasu,
+- konkrétní počty zasažených účtů u bezpečnostních oprav,
+- interní názvy služeb, bucketů, databází nebo front,
+- přesné zranitelné endpointy před dokončenou nápravou,
+- screenshoty s reálnými daty,
+- „vtipné“ poznámky z interní komunikace.
+
+Místo toho piš dopad v bezpečném jazyce:
+
+> „Zpřesnili jsme kontrolu oprávnění u exportu reportů. Změna se týká administrátorských rolí a nevyžaduje akci ze strany běžných uživatelů.“
+
+Interně si klidně uchovej technický detail: pull request, ticket, rizikovou klasifikaci, testy a odkaz na incidentní záznam. Veřejně stačí sdělit, co uživatel potřebuje vědět.
+
+## GA.4 Roadmapu napoj na feedback, ne na hlasitost největšího zákazníka
+
+Když veřejná roadmapa vzniká z posledních tří sales callů, začne produkt připomínat švýcarský nůž přilepený na lednici. Každý chce něco, ale nikdo neví proč. Lepší je u každého roadmap itemu držet malou kartu rozhodnutí:
+
+- **Problém:** co zákazník neumí udělat.
+- **Typ zákazníka:** koho se to týká.
+- **Důkaz:** rozhovor, support ticket, ruční workaround, ztracený obchod.
+- **Riziko pro data:** jaká nová data by funkce sbírala nebo zobrazovala.
+- **Nejmenší užitečná verze:** co stačí dodat jako první.
+- **Stav:** teď řešíme / zvažujeme / později / neplánujeme.
+
+Příklad pro „hromadné pozvánky uživatelů“:
+
+- Problém: admin ručně zve desítky zaměstnanců.
+- Důkaz: tři support tickety a jeden ztracený onboarding kvůli ruční práci.
+- Riziko pro data: CSV může obsahovat osobní údaje a špatně zadané e-maily.
+- Nejmenší verze: import e-mailů s náhledem, validací a expirací importního souboru po 24 hodinách.
+
+Taková karta chrání produkt před chaosem i před privacy dluhem. Funkce se nehodnotí jen podle „kolik lidí to chce“, ale podle dopadu, rizika a minimálního rozumného řešení.
+
+## GA.5 Přidej RSS a přímé odkazy, ne komunikační klec
+
+Changelog má být dostupný bez přihlášení, bez sledovacího pixelu a bez nutnosti sledovat firmu na sociálních sítích. Ideální sada:
+
+- veřejná stránka `/changelog`,
+- RSS nebo Atom feed,
+- přímý odkaz na konkrétní záznam,
+- krátký odkaz z aplikace,
+- volitelný e-mail jen pro důležité změny,
+- interní štítek, které změny musí vidět support.
+
+RSS je v privacy-first světě podceňovaný klenot: uživatel si sám vybere čtečku, firma nemusí posílat každý update přes marketingový nástroj a nikdo nemusí měřit otevření e-mailu jako kdyby šlo o přistání na Měsíci.
+
+Pokud changelog posíláš i e-mailem, drž datové minimum:
+
+- posílej jen relevantní typy změn,
+- nepoužívej tracking pixel jako výchozí nastavení,
+- odhlášení dej do jedné klikatelné cesty,
+- u zákaznických workspace respektuj preferenční centrum,
+- bezpečnostní a provozní zprávy odděl od marketingu.
+
+## GA.6 Verze, release notes a support musí mluvit stejnou řečí
+
+Verzování je interní nástroj, ale zákazníkům pomáhá, když se dá změna dohledat. Pokud používáš veřejné verze, drž je srozumitelně. Semantic Versioning popisuje běžný model `MAJOR.MINOR.PATCH`, kde hlavní verze znamená nekompatibilní změny, minor přidává funkce kompatibilně a patch řeší kompatibilní opravy: https://semver.org/
+
+U webového SaaS ale často zákazník neinstaluje balíček. Proto nemusíš dělat z každé změny verzi jako knihovna. Důležitější je dohledatelnost:
+
+- release ID nebo datum,
+- interní odkaz na ticket/release,
+- veřejný changelog záznam,
+- support brief pro dotazy,
+- poznámka, jestli změna ovlivňuje oprávnění, exporty, integrace nebo účtování.
+
+Praktický support brief:
+
+```markdown
+Změna: Nový export členů workspace
+Koho se týká: Správci workspace v tarifu Team a výše
+Co říct zákazníkovi: Export je dostupný v Nastavení → Členové → Export CSV
+Privacy poznámka: Soubor neobsahuje historii aktivit; odkaz ke stažení expiruje po 30 minutách
+Známé limity: Export je omezený na 10 000 řádků
+Interní kontakt: Product owner billing/admin
+```
+
+Když support brief chybí, zákazník dostane tři různé odpovědi. A to je přesně ten typ chaosu, který nevypadá jako technický dluh, ale zákazník ho cítí během dvou minut.
+
+## GA.7 Checklist veřejného changelogu a roadmapy
+
+Před zveřejněním změny projdi rychlou kontrolu:
+
+- Je záznam napsaný jazykem uživatele, ne interního ticketu?
+- Je jasné, koho se změna týká a jestli musí něco udělat?
+- Neobsahuje text zákaznická jména, interní architekturu nebo citlivé detaily?
+- Je u datově relevantních změn krátká privacy poznámka?
+- Má záznam přímou URL a je dostupný bez přihlášení, pokud nejde o interní produkt?
+- Je changelog dostupný přes RSS nebo jiný přímý odběr?
+- Je roadmap item označený podle jistoty, ne falešného data?
+- Má roadmap item kartu problému, důkazu, rizika pro data a nejmenší užitečné verze?
+- Ví support, co se změnilo a jak odpovědět zákazníkům?
+- Existuje interní vazba na release, ticket nebo rozhodovací záznam?
+
+## Zdroje k příloze
+
+- Keep a Changelog — principy lidsky čitelného changelogu a doporučené kategorie změn: https://keepachangelog.com/en/1.1.0/
+- Semantic Versioning — specifikace `MAJOR.MINOR.PATCH` a význam jednotlivých částí verze: https://semver.org/
+- RSS Advisory Board — specifikace RSS 2.0 pro přímý odběr aktualit bez závislosti na sociálních sítích: https://www.rssboard.org/rss-specification
+
+## Shrnutí přílohy
+
+Veřejný changelog a roadmapa nejsou dekorace pro produktový marketing. Jsou to nástroje důvěry: říkají, co se změnilo, kam produkt míří, co ještě není slíbené a jak tým přemýšlí o datech. Privacy-first verze používá jasný jazyk, opatrné sliby, RSS, přímé odkazy, support briefy a žádné zbytečné úniky zákaznického nebo interního kontextu.
+
+---
+
 ## Pracovní log
+- 2026-08-14: Přidána příloha GA o veřejném changelogu a roadmapě: rozdíl mezi release notes a plány, bezpečný jazyk změn, úrovně jistoty roadmapy, feedback karty, RSS, support briefy a checklist.
 - 2026-08-14: Přidána příloha FZ o exportech, přenositelnosti a odchodu zákazníka: Data Act kontext, kategorie dat, otevřené formáty, timeline ukončení účtu, cloud switching, exit plán a checklist.
 - 2026-08-14: Přidána příloha FY o mazání dat a retenčním úklidu: typy mazání, retenční pravidla, soft delete, zálohy, potvrzení výmazu, opakovatelný runbook a checklist.
 - 2026-08-14: Přidána příloha FX o zákaznické dokumentaci pro privacy-first SaaS: úkolová struktura, bezpečné návody, screenshoty se syntetickými daty, datové věty, verzování, support smyčka, AI asistence a checklist.
