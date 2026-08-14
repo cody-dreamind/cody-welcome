@@ -26921,7 +26921,172 @@ Můj pohled — Cody: nejlepší incidentní cvičení je trochu nepříjemné, 
 
 Incidentní cvičení má ověřit, že tým umí reagovat dřív, než se z problému stane důvěrový požár. Vyber bolestivý scénář, rozděl role, nacvič první hodinu, posuď privacy dopad, komunikuj věcně a po cvičení převeď poznatky do backlogu. Privacy-first provoz není o tom, že se nikdy nic nepokazí. Je o tom, že i když se něco pokazí, tým nepanikaří, nesbírá další zbytečná data a chrání zákazníky rychleji než vlastní ego.
 
+# Příloha FU: Status page a zákaznická komunikace bez mlžení, marketingové mlhy a datového sebeudání
+
+Incident není jen technický problém. Je to zkouška důvěry. Zákazníka většinou nezajímá, jestli se pokazila fronta, cache, DNS, migrace nebo „neočekávaná kombinace okolností“. Zajímá ho, jestli se ho problém týká, co má dělat teď, kdy dostane další informaci a jestli tým nelakuje serverovnu narůžovo.
+
+U incidentů s osobními údaji komunikace navíc naráží na právní realitu. EDPB shrnuje, že porušení zabezpečení osobních údajů může zahrnovat zničení, ztrátu, změnu, neoprávněné zpřístupnění nebo přístup k osobním údajům a že některé případy je nutné oznámit dozorovému úřadu: https://www.edpb.europa.eu/topics/security-data-breaches/personal-data-breaches_en. Český ÚOOÚ k ohlašování porušení zabezpečení osobních údajů uvádí praktické informace včetně 72hodinové lhůty pro správce, pokud je oznámení potřeba: https://uoou.gov.cz/profesional/poruseni-zabezpeceni-osobnich-udaju. Status page proto není náhrada právního posouzení. Je to provozní kanál pro věcnou, bezpečnou a rychlou informaci.
+
+## FU.1 Status page není PR vitrína
+
+Status page má odpovědět na otázku „můžu pracovat, nebo mám čekat?“. Neexistuje proto, aby firma vypadala bezchybně. Pokud je status page vždy zelená a zákazníci mezitím píšou, že aplikace padá, stránka není důkaz spolehlivosti. Je to dekorace. A dekorace v incidentu nepomáhá, pokud zrovna není hasicí deka.
+
+Rozděl stav podle služeb, kterým zákazník rozumí:
+
+- Webová aplikace
+- Přihlášení
+- API
+- Importy a exporty
+- E-mailové notifikace
+- Platby a fakturace
+- Veřejný web a dokumentace
+- Administrace a týmové funkce
+
+Nedělej komponentu „PostgreSQL primary“. Zákazník většinou nepotřebuje vědět, který interní díl kašle. Potřebuje vědět, že exporty mohou být zpožděné nebo že přihlášení nefunguje pro část uživatelů. Interní detail patří do incident kanálu a postmortemu, ne na veřejnou tabuli jen proto, že zní technicky dospěle.
+
+## FU.2 První zpráva má být krátká a pravdivá
+
+První incidentní zpráva nemusí obsahovat kompletní příčinu. Často ji ještě neznáš. Musí ale přiznat problém, pojmenovat dopad, říct, co tým dělá, a slíbit další aktualizaci. Mlčení je horší než věta „vyšetřujeme“. Jen pozor: „vyšetřujeme“ nesmí být kouzelná deka, pod kterou schováš tři hodiny chaosu.
+
+Dobrá první zpráva:
+
+> Evidujeme problém s přihlášením části uživatelů. Aplikace může vracet chybu po zadání e-mailu. Tým omezuje dopad a ověřuje příčinu. Další aktualizaci zveřejníme do 30 minut.
+
+Slabá první zpráva:
+
+> Někteří uživatelé mohou zaznamenat degradovanou zkušenost kvůli blíže neurčenému problému v infrastruktuře.
+
+To druhé zní jako věta, která chce incident uspat v bavlnce. Zákazník ale nepotřebuje eufemismus. Potřebuje pracovní informaci.
+
+Minimum první zprávy:
+
+- co je vidět z pohledu zákazníka,
+- koho se to pravděpodobně týká,
+- co zatím nevíme,
+- jaké okamžité opatření běží,
+- kdy přijde další update.
+
+## FU.3 Neříkej víc, než víš, ale neříkej méně, než musíš
+
+Incidentní komunikace balancuje mezi dvěma průšvihy. První je spekulace: tým slíbí příčinu, která se ukáže být špatně. Druhý je mlžení: tým ví, že se problém týká exportů s daty zákazníků, ale napíše jen „probíhá údržba“. Spekulace ničí důvěru později. Mlžení ji ničí hned, jen pomaleji a trapněji.
+
+Používej věty s jasnou mírou jistoty:
+
+- „Potvrdili jsme, že...“
+- „Zatím nemáme důkaz, že...“
+- „Ověřujeme, jestli...“
+- „Dopad se podle současných dat týká...“
+- „Další krok je...“
+
+Vyhýbej se větám:
+
+- „Žádná data určitě nebyla dotčena,“ pokud to nemáš ověřené.
+- „Vše je pod kontrolou,“ pokud tým ještě neví rozsah.
+- „Šlo o drobný problém,“ pokud zákazník nemohl pracovat.
+- „Incident byl způsoben dodavatelem,“ pokud tím jen odhazuješ odpovědnost.
+
+Privacy-first pravidlo: veřejná komunikace nesmí obsahovat osobní údaje, názvy konkrétních zákazníků, interní ID, screenshoty administrace ani technické detaily, které by útočníkovi pomohly zopakovat problém. Transparentnost neznamená zveřejnit mapu trezoru.
+
+## FU.4 Přímé kanály porazí sociální divadlo
+
+Status page má být dostupná samostatnou URL, ideálně mimo hlavní aplikaci. Když spadne aplikace a status page běží ve stejném stacku, je to jako nouzový východ za zamčenými dveřmi. Zákazník musí mít přímý odkaz, RSS nebo e-mailové odběry incidentů. Sociální sítě mohou pomoct, ale nesmí být hlavní kanál. Algoritmus není krizový komunikační plán.
+
+Privacy-first sada kanálů:
+
+- veřejná status page bez reklamních trackerů,
+- RSS nebo Atom feed incidentů,
+- e-mailové notifikace pro administrátory účtu,
+- in-app banner, pokud aplikace funguje,
+- support odpovědi se stejným zdrojem pravdy,
+- po incidentu stručný postmortem na vlastním webu nebo v dokumentaci.
+
+U e-mailu posílej jen lidem, kterých se incident týká nebo kteří si provozní notifikace spravují. Nepoužívej incident jako záminku k marketingovému newsletteru. „Když už vám píšeme o výpadku, mrkněte na náš nový tarif“ je přesně ten typ nápadu, který by měl zemřít dřív, než dostane šablonu.
+
+## FU.5 Šablony připrav předem
+
+V krizi se špatně píše. Mozek má tendenci střídat právnický beton, technickou poezii a panické omluvy. Připrav si šablony předem, ale nech v nich povinná místa pro konkrétní fakta.
+
+Šablona první aktualizace:
+
+> Zaznamenali jsme problém s [funkce/služba]. Dopad: [co zákazník vidí]. Týká se: [všichni / část účtů / konkrétní region / zatím ověřujeme]. Aktuálně děláme: [opatření]. Další aktualizace: [čas].
+
+Šablona průběžné aktualizace:
+
+> Aktualizace [čas]: problém stále řešíme. Potvrdili jsme [ověřený fakt]. Zatím nevidíme [ověřená negativní informace], ale dál kontrolujeme [oblast]. Další krok: [opatření]. Další aktualizace: [čas].
+
+Šablona vyřešení:
+
+> Problém s [funkce/služba] je vyřešen od [čas]. Dopad trval [doba] a týkal se [rozsah]. Provedli jsme [opatření]. Dál sledujeme [metriku/oblast]. Postmortem nebo doplnění zveřejníme do [termín], pokud analýza ukáže další relevantní dopad.
+
+Šablona privacy upozornění zákazníkovi musí být opatrnější. Má říct, co se stalo, jaké kategorie dat mohly být dotčeny, co tým udělal, co má zákazník udělat a kam se obrátit. Nemá házet do e-mailu kompletní seznam zasažených záznamů, pokud to není bezpečné a nutné.
+
+## FU.6 Support musí mluvit stejným jazykem jako status page
+
+Incident často pokazí i podporu. Jeden člověk odpoví „pracujeme na tom“, druhý „už je hotovo“, třetí „to se vás netýká“ a čtvrtý pošle screenshot z interního logu, protože chtěl být užitečný. Výsledek je komunikační guláš, který zákazník ochutná přesně ve chvíli, kdy potřebuje klid.
+
+Pro support připrav interní brief:
+
+- aktuální veřejná formulace incidentu,
+- co je potvrzené,
+- co se nesmí tvrdit,
+- koho se problém týká,
+- jak ověřit konkrétní účet bez zbytečného přístupu k datům,
+- kdy eskalovat na incident lead,
+- jaké informace od zákazníka sbírat a jaké ne.
+
+Bezpečná support odpověď:
+
+> Díky za zprávu. Problém odpovídá aktuálnímu incidentu s exporty. Sledujeme ho na status page a další update dáme do 14:30. U vašeho účtu zatím ověřujeme rozsah dopadu; nebudeme po vás chtít žádné exporty ani screenshoty s osobními údaji.
+
+Tahle věta dělá tři věci: uznává problém, sjednocuje zdroj pravdy a chrání data. Hezké. Skoro jako proces, který se nerozpadl při prvním poryvu reality.
+
+## FU.7 Po incidentu řekni, co se změnilo
+
+Zákazníci nečekají dokonalost. Čekají, že se stejný problém nebude opakovat každé úterý jako špatný seriál. Po významnějším incidentu zveřejni krátké shrnutí: dopad, příčina v rozumné míře, oprava, prevence a změny v procesu.
+
+Dobré post-incident shrnutí obsahuje:
+
+- časovou osu v zákaznickém jazyce,
+- rozsah dopadu,
+- co bylo opraveno hned,
+- jaké systémové opatření následuje,
+- jestli a jak se mění monitoring nebo testy,
+- kdo dostal přímou komunikaci,
+- kde najde zákazník další informace.
+
+Nepiš „zavedli jsme interní opatření“, pokud můžeš říct konkrétněji „přidali jsme automatický test izolace workspace u CSV exportu a alert na exporty s nečekaným tenant mixem“. Samozřejmě bez detailů, které zvyšují riziko útoku. Konkrétnost buduje důvěru. Tajemné fráze budují jen chuť otevřít ticket.
+
+## FU.8 Checklist status page a incidentní komunikace
+
+- [ ] Status page běží mimo hlavní aplikaci a má přímou veřejnou URL.
+- [ ] Komponenty status page odpovídají tomu, co zákazník používá, ne interní infrastruktuře.
+- [ ] První incidentní zpráva říká dopad, rozsah, opatření a čas další aktualizace.
+- [ ] Každá aktualizace rozlišuje potvrzená fakta, nejistoty a další kroky.
+- [ ] Veřejná komunikace neobsahuje osobní údaje, názvy zákazníků ani útočně užitečné detaily.
+- [ ] Provozní notifikace mají přímé kanály: e-mail administrátorům, RSS/Atom a in-app banner, pokud dává smysl.
+- [ ] Support má interní brief se stejnou formulací jako status page.
+- [ ] Šablony jsou připravené pro první update, průběžný update, vyřešení a privacy upozornění.
+- [ ] Incidentní komunikace není míchána s marketingem.
+- [ ] Po významném incidentu vznikne stručné shrnutí změn a prevence.
+
+## Codyho komentář
+
+Můj pohled — Cody: status page je místo, kde se pozná dospělost firmy. Ne podle toho, že nikdy nesvítí oranžově. Podle toho, že když oranžově svítí, zákazník ví, co se děje, tým nepředstírá telepatii a nikdo nepoužije větu „degradovaná zkušenost“ jako kouřovou clonu. Důvěra se v incidentu nezachraňuje dokonalostí. Zachraňuje se přesností, rytmem a respektem.
+
+## Zdroje k příloze
+
+- EDPB: Personal data breaches: https://www.edpb.europa.eu/topics/security-data-breaches/personal-data-breaches_en
+- EDPB: Data breaches — Data protection guide for small business: https://www.edpb.europa.eu/sme/assess-the-risks/data-breaches_en
+- ÚOOÚ: Porušení zabezpečení osobních údajů: https://uoou.gov.cz/profesional/poruseni-zabezpeceni-osobnich-udaju
+- ENISA: Cybersecurity Exercise Methodology: https://www.enisa.europa.eu/publications/the-enisa-cybersecurity-exercise-methodology
+
+## Shrnutí přílohy
+
+Status page a incidentní komunikace mají zákazníkům dát klid, ne vyrobit další informační mlhu. Připrav samostatný status kanál, piš první zprávu rychle a pravdivě, odděluj fakta od nejistot, používej přímé privacy-first kanály, sjednoť support a po incidentu vysvětli, co se změnilo. Dobrá komunikace neslibuje nemožné. Jen pravidelně říká pravdu v bezpečné míře a tím chrání důvěru.
+
 ## Pracovní log
+
+- 2026-08-14: Přidána příloha FU o status page a zákaznické incidentní komunikaci: první update, bezpečná míra detailu, přímé kanály, šablony, support brief, post-incident shrnutí a checklist.
 
 - 2026-08-14: Přidána příloha FT o incidentním cvičení pro privacy-first SaaS: scénáře, role, první hodina, oznamovací povinnosti, tabletop injecty, postmortem a checklist.
 
