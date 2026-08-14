@@ -26642,7 +26642,154 @@ Dodavatelská dokumentace je místo, kde se často potká právní poezie s tech
 
 Zpracovatelské smlouvy dávají smysl jen tehdy, když jsou propojené s reálnou datovou mapou, subdodavateli, transfery, bezpečnostním nastavením a exit plánem. Privacy-first SaaS nevybírá dodavatele podle nejhezčího loga na pricing stránce, ale podle toho, jestli umí jasně říct, jaká data zpracovává, kde, proč, s kým, jak dlouho a jak se jich bezpečně zbaví při ukončení služby.
 
+# Příloha FS: DPIA a produktové posouzení rizik bez papírového pekla, falešného klidu a pozdního brzdění vývoje
+
+Posouzení vlivu na ochranu osobních údajů, zkráceně DPIA, zní jako věc, kterou by měl někdo vyplnit v pátek odpoledne do šablony a pak uložit do složky „compliance“. To je přesně okamžik, kdy se z dobrého nástroje stane právní origami. Správně použité DPIA je produktový radar: pomáhá zjistit, jestli nová funkce zbytečně neohrožuje lidi, zákaznickou důvěru nebo provozní stabilitu.
+
+GDPR vyžaduje DPIA hlavně tehdy, když zpracování pravděpodobně povede k vysokému riziku pro práva a svobody lidí. Evropský sbor pro ochranu osobních údajů k tomu dlouhodobě používá vodítka navazující na pracovní skupinu WP29 a v roce 2026 publikoval i praktickou šablonu pro DPIA: https://www.edpb.europa.eu/our-work-tools/documents/public-consultations/2026/edpb-dpia-template_en a tematická stránka EDPB k DPIA shrnuje, že DPIA pomáhá organizacím identifikovat a řídit rizika pro osobní údaje lidí: https://www.edpb.europa.eu/topics/accountability-and-compliance-tools/data-protection-impact-assessment_en
+
+Pro český kontext je užitečné sledovat také ÚOOÚ, který zveřejňuje seznam typů zpracování, u nichž se posouzení vlivu typicky vyžaduje: https://uoou.gov.cz/verejnost/posouzeni-vlivu-na-ochranu-osobnich-udaju
+
+## FS.1 DPIA nespouštěj podle nálady, ale podle triggerů
+
+Malý SaaS tým nepotřebuje dělat DPIA ke každé úpravě tlačítka. Potřebuje ale jasně vědět, kdy se má zastavit a posoudit riziko dřív, než se funkce napojí na produkční data. Největší průšvihy nevznikají tím, že někdo zapomněl doplnit název kapitoly v dokumentu. Vznikají tím, že se riziková funkce tváří jako běžný ticket.
+
+Praktické triggery:
+
+- Nově začínáš zpracovávat zvláštní kategorie dat, zdravotní údaje, biometriku nebo citlivé obchodní informace zákazníků.
+- Funkce dělá profilování, skórování, automatické rozhodování nebo výrazně ovlivňuje, co uživatel smí dělat.
+- Přidáváš AI funkci, která čte zákaznický obsah, interní poznámky, support tickety nebo dokumenty.
+- Zavádíš monitoring chování jednotlivců, detailní audit produktové aktivity nebo kombinaci dat z více zdrojů.
+- Připojuješ nového dodavatele, který dostane větší rozsah dat nebo přístup mimo evropský provozní model.
+- Měníš účel dat: data nasbíraná pro support najednou chceš použít pro marketing, scoring nebo trénink modelu.
+
+Mini pravidlo pro roadmapu: pokud funkce mění odpověď na otázku „co o člověku víme a co s tím děláme“, má dostat alespoň lehké rizikové posouzení. Ne proto, že milujeme formuláře. Protože formuláře jsou levnější než incidenty.
+
+## FS.2 Začni popisem funkce lidskou řečí
+
+První stránka DPIA má být srozumitelná i člověku, který nebyl na každém technickém standupu. Když dokument začíná větou „zpracování probíhá v rámci optimalizace zákaznické zkušenosti“, je to mlha. Když začíná větou „AI návrh odpovědi čte posledních pět zpráv v ticketu a navrhne agentovi text, který člověk musí před odesláním upravit nebo potvrdit“, dá se o riziku mluvit konkrétně.
+
+Šablona popisu:
+
+- Název funkce: „AI návrhy odpovědí v supportu“.
+- Kdo funkci používá: support tým zákazníka, ne koncoví uživatelé.
+- Jaká data vstupují: text ticketu, metadata účtu, předchozí interní poznámky pouze pokud jsou označené jako bezpečné pro AI.
+- Co funkce vrací: návrh odpovědi, stručné shrnutí problému a odkazy na dokumentaci.
+- Kdo rozhoduje: lidský support agent, AI nesmí zprávu odeslat sama.
+- Kde běží zpracování: evropský region nebo dodavatel se smluvně ověřenými zárukami.
+- Jak dlouho se data drží: prompt a výstup se neukládají mimo auditní metadata, pokud není zapnuté debug okno s krátkou expirací.
+
+Tohle není jen pro právníka. Vývojář díky tomu ví, co nemá posílat do promptu. Product manager ví, kde dát mikrocopy. Support lead ví, co říct zákazníkovi. A founder ví, jestli je funkce pořád v souladu se slibem privacy-first.
+
+## FS.3 Riziko piš jako scénář, ne jako abstraktní číslo
+
+Tabulka s pravděpodobností 3 a dopadem 4 může být užitečná, ale jen když před ní existuje konkrétní scénář. „Únik dat“ je příliš obecné. „Interní poznámka se zdravotním údajem zákazníka se omylem pošle do AI dodavatele a objeví se v debug logu“ už je riziko, se kterým se dá pracovat.
+
+Dobrá riziková věta má čtyři části:
+
+1. Co se může stát.
+2. Komu to uškodí.
+3. Jak se to může stát.
+4. Jaký dopad to bude mít.
+
+Příklad:
+
+> „Support agent vloží do interní poznámky rodné číslo, AI shrnutí poznámku zahrne do promptu a citlivý údaj se uloží v externím debug logu. Dopad: zákazník ztrácí kontrolu nad citlivým identifikátorem, tým musí řešit incident a firma poruší vlastní privacy-first slib.“
+
+U každého scénáře doplň opatření:
+
+| Riziko | Preventivní opatření | Detekce | Zbytkové riziko |
+| --- | --- | --- | --- |
+| Citlivý údaj v promptu | Datová klasifikace polí, blokace vybraných typů dat, varování v UI | Náhodný audit prompt metadat, bezpečnostní test | Nízké až střední podle kvality vstupních dat |
+| AI odešle chybnou radu | Human-in-the-loop, jasné označení návrhu, zdrojové odkazy | Review sporných odpovědí, feedback tlačítko | Střední, protože jazykový model není účetní svědomí lidstva |
+| Dodavatel změní subprocesora | Vendor monitoring, smluvní oznamování změn, exit plán | Kvartální vendor review | Nízké, pokud existuje reálná migrační cesta |
+
+## FS.4 Opatření musí být produktová, technická i provozní
+
+Slabé DPIA končí u věty „riziko bude ošetřeno interní směrnicí“. Směrnice je fajn, ale neumí zastavit request, který už letí do API. Privacy-first řešení kombinuje produkt, kód a proces.
+
+Tři vrstvy opatření:
+
+- Produktová: mikrocopy vysvětluje, co se děje; uživatel může funkci vypnout; výchozí stav je střídmý; citlivá pole jsou jasně označená.
+- Technická: data se filtrují před odesláním; přístupy jsou oddělené podle rolí; logy nepíšou obsah; exporty expirují; integrace mají minimální scope.
+- Provozní: existuje vlastník funkce; support ví, co nesmí kopírovat; incident playbook počítá s daným typem zpracování; vendor review má kalendář.
+
+Příklad pro AI analýzu zákaznických dokumentů:
+
+- Produktově: zákazník vidí, že dokument bude analyzován AI, a může zvolit ruční režim.
+- Technicky: systém před odesláním odstraní metadata souboru, omezí velikost vstupu a nepředává billing údaje.
+- Provozně: tým má testovací dokumenty bez reálných osobních údajů a ví, jak řešit omylem nahraný citlivý soubor.
+
+Jestli opatření existuje jen jako věta v dokumentu a nemá stopu v backlogu, konfiguraci nebo provozní rutině, je to spíš přání než kontrola.
+
+## FS.5 DPIA napoj na release proces
+
+DPIA nesmí být brána, která se objeví den před releasem a všem zkazí sprint. Má být součást objevu, návrhu a finální kontroly. Ideální rytmus pro malý tým je lehký, ale důsledný.
+
+Jednoduchý proces:
+
+1. Discovery: product owner vyplní krátký rizikový dotazník při vzniku epiku.
+2. Design: tým popíše datový tok a rozhodne, jestli stačí mini posouzení, nebo plné DPIA.
+3. Implementace: riziková opatření se rozdělí na normální backlog položky.
+4. Před release: kontrola, že opatření nejsou jen v dokumentu, ale skutečně v produktu.
+5. Po release: první provozní review po 14 až 30 dnech, zejména u AI, integrací a nového měření.
+
+Mini dotazník do issue šablony:
+
+- Přidává funkce nový typ osobních údajů?
+- Mění účel existujících dat?
+- Posílá data novému dodavateli nebo mimo EU?
+- Dělá profilování, scoring nebo automatické doporučení?
+- Zpracovává data lidí, kteří nejsou přihlášení zákazníci?
+- Umíme funkci vypnout pro konkrétního zákazníka?
+- Umíme data z funkce exportovat, opravit nebo smazat podle retenčních pravidel?
+
+Pokud jsou dvě a více odpovědí „ano“, zastav se a udělej minimálně krátké posouzení. Pokud je jedno „ano“, nepřeháněj drama, ale pojmenuj riziko. Pokud je všechno „ne“, dej si kafe a pokračuj — i compliance občas zaslouží normální den.
+
+## FS.6 Když zbytkové riziko zůstává vysoké, nezametat
+
+Někdy po všech opatřeních pořád zůstane vysoké riziko. To není selhání dokumentu. To je informace pro rozhodnutí. V takové chvíli nestačí napsat „akceptováno managementem“ a doufat, že PDF uklidní vesmír.
+
+Rozhodovací možnosti:
+
+- Funkci přepracovat tak, aby zpracovávala méně dat nebo běžela lokálněji.
+- Rozdělit release: nejdřív pilot s dobrovolnými zákazníky a omezeným rozsahem.
+- Přidat ruční kontrolu, opt-in, bezpečnější výchozí stav nebo silnější audit.
+- Vybrat jiného dodavatele s lepší kontrolou nad daty.
+- Funkci nespustit, pokud hodnota neodpovídá riziku.
+
+Pro privacy-first evropský SaaS je někdy nejlepší produktové rozhodnutí říct „tohle zatím neděláme“. Ne proto, že jsme ustrašení. Protože důvěra zákazníků je kapitál a kapitál se nepálí kvůli jedné hezké demo funkci.
+
+## FS.7 Checklist DPIA pro malý SaaS tým
+
+- [ ] Funkce má lidsky popsaný účel, uživatele, vstupy, výstupy a rozhodovací logiku.
+- [ ] Tým ví, zda jde o běžné posouzení rizika, mini-DPIA nebo plné DPIA.
+- [ ] Datový tok ukazuje systémy, dodavatele, regiony, logy, exporty a retenční místa.
+- [ ] Rizika jsou napsaná jako konkrétní scénáře dopadu na lidi, ne jako obecné fráze.
+- [ ] Opatření mají vlastníka v backlogu, konfiguraci nebo provozní rutině.
+- [ ] AI, analytika a integrace posílají jen data nezbytná pro konkrétní účel.
+- [ ] Zákazník dostane srozumitelnou informaci tam, kde funkce reálně pracuje s daty.
+- [ ] Funkce má vypnutí, omezení rozsahu nebo bezpečný fallback pro citlivé zákazníky.
+- [ ] Release checklist ověřuje, že dokument odpovídá skutečné implementaci.
+- [ ] Po spuštění je naplánované review zbytkových rizik a incidentních signálů.
+
+## Codyho komentář
+
+Můj pohled — Cody: DPIA je nejlepší dělat jako produktový rozhovor, ne jako právní solo. Když u stolu sedí vývoj, produkt, support a někdo s privacy odpovědností, najednou se ukáže, že většina rizik není filozofie, ale konkrétní otázka: „Musíme tohle pole opravdu posílat ven?“ To je přesně typ nudné otázky, která šetří peníze, reputaci i nervy. Nuda je někdy underrated feature.
+
+## Zdroje k příloze
+
+- EDPB: Template for Data Protection Impact Assessment: https://www.edpb.europa.eu/our-work-tools/documents/public-consultations/2026/edpb-dpia-template_en
+- EDPB/WP29: Guidelines on Data Protection Impact Assessment and determining whether processing is likely to result in a high risk: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/data-protection-impact-assessment-dpia_en
+- ÚOOÚ: Posouzení vlivu na ochranu osobních údajů: https://uoou.gov.cz/verejnost/posouzeni-vlivu-na-ochranu-osobnich-udaju
+
+## Shrnutí přílohy
+
+DPIA není brzda vývoje, ale včasný radar rizik. Malý SaaS tým by měl mít jasné triggery, lidský popis funkce, scénářově popsaná rizika, konkrétní opatření a napojení na release proces. Privacy-first přístup znamená, že riziko řešíš v návrhu produktu, ne až ve chvíli, kdy už data leží u dodavatele a všichni se tváří překvapeně jako kočka u rozbité vázy.
+
 ## Pracovní log
+
+- 2026-08-14: Přidána příloha FS o DPIA a produktovém posouzení rizik pro malé SaaS týmy: triggery, popis funkce, scénáře rizik, produktová/technická/provozní opatření, release proces a checklist.
 
 - 2026-08-14: Přidána příloha FR o zpracovatelských smlouvách a subdodavatelích: určení role dodavatele, propojení DPA s datovou mapou, změny subdodavatelů, transfery mimo EU, bezpečnostní kontrola, exit plán a checklist.
 
