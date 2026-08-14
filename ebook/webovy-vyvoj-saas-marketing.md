@@ -27084,7 +27084,164 @@ Můj pohled — Cody: status page je místo, kde se pozná dospělost firmy. Ne 
 
 Status page a incidentní komunikace mají zákazníkům dát klid, ne vyrobit další informační mlhu. Připrav samostatný status kanál, piš první zprávu rychle a pravdivě, odděluj fakta od nejistot, používej přímé privacy-first kanály, sjednoť support a po incidentu vysvětli, co se změnilo. Dobrá komunikace neslibuje nemožné. Jen pravidelně říká pravdu v bezpečné míře a tím chrání důvěru.
 
+
+# Příloha FV: Vulnerability disclosure a bezpečnostní kontakt bez paniky, bounty divadla a ztracených reportů
+
+Bezpečnostní report je zvláštní typ zákaznické komunikace. Nepřichází od běžného zákazníka, často je technický, někdy nepříjemný a skoro vždy dorazí ve chvíli, kdy má tým v plánu něco úplně jiného. Právě proto má mít malý SaaS připravenou jednoduchou cestu, jak zranitelnost přijmout, ověřit, opravit a uzavřít bez toho, aby se z reportéra stal nepřítel a z interního týmu improvizační kroužek.
+
+Vulnerability disclosure není totéž co veřejný bug bounty program. Nemusíš hned slibovat odměny, mít portál s triáží za milion a tiskovou strategii jako banka. Potřebuješ ale jasně říct: kam bezpečnostní nález poslat, co má report obsahovat, co výzkumník smí a nesmí testovat, jak rychle odpovíš a jak chráníš data, která se v reportu objeví.
+
+Privacy-first princip je jednoduchý: bezpečnostní komunikace má být dostupná, ale nesmí podporovat zbytečné sdílení osobních údajů, zákaznických dat ani citlivých screenshotů. Oprava zranitelnosti nemá vyrábět nový datový únik. To by byla bezpečnostní verze hašení ohně benzínem, jen s lepší terminologií.
+
+## FV.1 Nejdřív vytvoř jednu oficiální cestu
+
+Nejhorší stav je, když bezpečnostní report dorazí na náhodný LinkedIn profil, do kontaktního formuláře, support chatu, fakturačního e-mailu a ještě do komentáře pod článkem. Tým pak neví, kdo odpovídá, co je pravda a kde jsou citlivé detaily. Výzkumník mezitím čeká a zvyšuje tlak, protože z jeho pohledu firma mlčí.
+
+Minimum pro malý SaaS:
+
+- e-mail typu `security@example.com` nebo `bezpecnost@example.cz`,
+- interní alias na konkrétní lidi, ne na opuštěnou schránku,
+- pravidlo, kdo report přebírá mimo pracovní dobu,
+- ticket nebo incidentní záznam pro každý relevantní report,
+- krátká veřejná stránka s pravidly reportování,
+- záložní cesta pro případ, že e-mail nefunguje.
+
+Bezpečnostní schránka nesmí být marketingový newsletter převlečený za support. Nepřidávej reportéry do CRM kampaní, neposílej jim automatické sales follow-upy a nenuť je vyplnit osm polí, aby ti mohli říct, že máš otevřené dveře do sklepa.
+
+## FV.2 `security.txt` je malý soubor s velkým efektem
+
+Pro weby existuje strojově čitelný formát `security.txt`, popsaný v RFC 9116. Jeho smyslem je usnadnit bezpečnostním výzkumníkům nalezení správného kontaktu a pravidel disclosure procesu. Oficiální RFC popisuje `security.txt` jako formát pro zveřejnění postupů při hlášení zranitelností: https://www.rfc-editor.org/rfc/rfc9116.html
+
+Praktické minimum:
+
+```text
+Contact: mailto:security@example.com
+Policy: https://example.com/security
+Preferred-Languages: cs, en
+Expires: 2027-02-14T00:00:00Z
+```
+
+Soubor umísti primárně na `https://example.com/.well-known/security.txt`. Datum `Expires` není dekorace. Je to připomínka, že bezpečnostní kontakt má někdo udržovat živý. Pokud soubor expiruje a nikdo si toho nevšimne, je to elegantní test provozní reality. Bohužel test, který právě nevyšel.
+
+Co do `security.txt` nedávat:
+
+- osobní telefon konkrétního vývojáře,
+- adresu interního Slacku nebo neveřejného systému,
+- slib odměny, pokud žádný bounty proces nemáš,
+- právní výhrůžky psané tónem „děkujeme, žaloba už jede“,
+- marketingové prohlášení o neprůstřelnosti systému.
+
+## FV.3 Pravidla testování musí chránit zákazníky
+
+Výzkumník potřebuje vědět, jak testovat bezpečně. Firma potřebuje zabránit tomu, aby reportování zranitelnosti poškodilo reálné zákazníky. Dobrá policy proto popisuje povolený rozsah a zakázané akce lidsky, ne jen právnicky.
+
+Příklad formulace:
+
+> „Prosíme, netestujte na účtech, které nevlastníte, nepřistupujte k datům třetích stran a nepoužívejte destruktivní techniky. Pokud při ověření nálezu narazíte na cizí osobní údaje, další přístup zastavte a pošlete nám jen minimální důkaz problému.“
+
+Do pravidel napiš:
+
+- které domény a aplikace jsou v rozsahu,
+- zda je povolené testovat API,
+- jak založit testovací účet,
+- co se považuje za zakázané destruktivní testování,
+- jak minimalizovat důkaz, pokud se objeví cizí data,
+- jaký komunikační jazyk zvládáš.
+
+Privacy-first detail: nabídni testovací prostředí nebo bezpečný způsob založení demo účtu. Když výzkumník nemá legální hřiště, bude testovat tam, kde může. A to je často produkce. Produkce je skvělá na provoz, horší na improvizovaný kybernetický parkour.
+
+## FV.4 Příjem reportu musí mít SLA a vlastníka
+
+První odpověď nemusí obsahovat řešení. Musí potvrdit, že report dorazil a že ho někdo kompetentní čte. Ticho je nejdražší reakce: zvyšuje frustraci, motivuje k veřejnému tlaku a komplikuje koordinované zveřejnění.
+
+Jednoduchý proces:
+
+1. Do 1 pracovního dne potvrď přijetí.
+2. Do 3 pracovních dnů rozhodni, jestli report vypadá relevantně.
+3. Při relevantním nálezu přiřaď vlastníka opravy a komunikačního vlastníka.
+4. Udržuj výzkumníka informovaného, i když zatím nemáš opravu.
+5. Po opravě požádej o ověření, pokud je to bezpečné a přiměřené.
+6. Uzavři report krátkým shrnutím a poděkováním.
+
+Šablona první odpovědi:
+
+```text
+Díky za report. Přijali jsme ho a předali bezpečnostnímu vlastníkovi. Prosíme, neposílejte další zákaznická data ani veřejné detaily, dokud nález neověříme. Ozveme se nejpozději do tří pracovních dnů s dalším stavem.
+```
+
+Tahle odpověď dělá tři věci najednou: potvrzuje příjem, nastavuje bezpečný datový rámec a slibuje konkrétní další krok. Žádná poezie, žádná panika, žádné „váš požadavek je pro nás důležitý“ z automatu, který by prohrál Turingův test s toastovačem.
+
+## FV.5 Triáž odděl od ega
+
+Bezpečnostní reporty se někdy čtou špatně. Mohou ukazovat chybu v architektuře, kterou tým roky považoval za rozumnou. Mohou být napsané nepříjemně. Mohou obsahovat zbytečné drama. Přesto je potřeba hodnotit nález, ne tón.
+
+Triáž si zjednoduš tabulkou:
+
+| Otázka | Proč se ptáme |
+| --- | --- |
+| Je nález reprodukovatelný? | Bez reprodukce nevíme, co opravujeme. |
+| Dotýká se osobních nebo zákaznických dat? | Privacy dopad zvyšuje prioritu. |
+| Vyžaduje přihlášení nebo speciální roli? | Pomáhá určit rozsah zneužití. |
+| Lze problém zneužít hromadně? | Hromadnost mění urgentnost. |
+| Existuje dočasné omezení rizika? | Někdy jde nejdřív vypnout funkci nebo zúžit přístup. |
+| Je potřeba zákaznická komunikace? | Důvěra se řeší dřív než tisková panika. |
+
+Ne každý report je kritický. Některé jsou šum, automatizovaný scanner nebo pokus o fakturu za „AI pentest“, který našel veřejný login formulář. I tak odpověz slušně a stručně. Profesionalita není odměna za kvalitu reportu. Je to tvoje provozní norma.
+
+## FV.6 Chraň data uvnitř reportu
+
+Bezpečnostní report může obsahovat screenshoty, tokeny, URL s parametry, části databázových odpovědí nebo osobní údaje zákazníků. Od chvíle přijetí je to citlivý materiál. Nestačí ho přeposlat do společného chatu s komentářem „koukněte na to“. Tím se incident jen rozšíří do dalších systémů.
+
+Nastav pravidla:
+
+- Reporty ukládej do omezeného systému, ne do veřejného projektového boardu.
+- Citlivé přílohy nahrazuj redigovanou verzí, pokud je potřebuje širší tým.
+- Tokeny a tajemství okamžitě rotuj, pokud se v reportu objeví.
+- Osobní údaje nepoužívej jako testovací data pro reprodukci.
+- Přístupy k reportům pravidelně kontroluj.
+- Po uzavření reportu nastav retenci podle rizika a právních potřeb.
+
+Codyho komentář: bezpečnostní report je jeden z mála dokumentů, kde „pošli to všem, ať jsme transparentní“ může být přesný opak transparentnosti. Transparentnost vůči zákazníkům neznamená vnitřní datový ohňostroj.
+
+## FV.7 Zveřejnění koordinuj, ne blokuj
+
+Koordinované zveřejnění má chránit uživatele a dát firmě čas na opravu. Nemá být trik, jak výzkumníka umlčet navždy. Pokud chceš, aby lidé reportovali zodpovědně, musíš se taky zodpovědně chovat.
+
+Domluv:
+
+- zda a kdy může výzkumník nález zveřejnit,
+- jestli uvede název firmy nebo anonymizovaný popis,
+- jaké technické detaily je bezpečné publikovat,
+- jestli poděkuješ veřejně v acknowledgments stránce,
+- co se stane, když oprava trvá déle, než bylo slíbeno.
+
+Malý SaaS nemusí mít veřejnou síň slávy. Ale jednoduché „Děkujeme bezpečnostním výzkumníkům, kteří nám zodpovědně reportují nálezy“ na security stránce je levný trust signál. Pokud uvádíš jména, vyžádej si souhlas. Privacy-first platí i pro lidi, kteří ti pomohli najít problém.
+
+## FV.8 Checklist vulnerability disclosure procesu
+
+- Máme funkční bezpečnostní kontakt a někdo ho pravidelně čte.
+- Máme veřejnou stránku s pravidly reportování zranitelností.
+- Máme `/.well-known/security.txt` s kontaktem, policy URL, jazykem a platným `Expires`.
+- Víme, které domény, API a prostředí jsou v rozsahu testování.
+- Umíme rychle potvrdit přijetí reportu a přiřadit vlastníka.
+- Máme triážní otázky pro dopad na data, zákazníky a zneužitelnost.
+- Citlivé přílohy z reportů nešíříme do běžných chatů a boardů.
+- Umíme rotovat tajemství, která se v reportu objeví.
+- Máme domluvený postup pro koordinované zveřejnění.
+- Po uzavření reportu aktualizujeme bezpečnostní stránku, runbook nebo produktové opatření.
+
+## Zdroje k příloze
+
+- RFC 9116: A File Format to Aid in Security Vulnerability Disclosure: https://www.rfc-editor.org/rfc/rfc9116.html
+- IANA registr polí pro `security.txt`: https://www.iana.org/assignments/security-txt-fields/security-txt-fields.xhtml
+
+## Shrnutí přílohy
+
+Vulnerability disclosure je provozní proces, ne právní strašák ani marketingová show. Malý SaaS potřebuje jasný bezpečnostní kontakt, jednoduchý `security.txt`, bezpečná pravidla testování, rychlé potvrzení reportu, triáž bez ega, ochranu dat uvnitř reportu a férové koordinované zveřejnění. Dobře nastavený proces zvyšuje šanci, že ti někdo chybu řekne včas a bezpečně — místo aby ji nechal zrát ve tmě jako velmi drahý sýr.
+
 ## Pracovní log
+- 2026-08-14: Přidána příloha FV o vulnerability disclosure a bezpečnostním kontaktu: oficiální kanál, `security.txt`, pravidla testování, SLA příjmu reportů, triáž, ochrana dat, koordinované zveřejnění a checklist.
+
 
 - 2026-08-14: Přidána příloha FU o status page a zákaznické incidentní komunikaci: první update, bezpečná míra detailu, přímé kanály, šablony, support brief, post-incident shrnutí a checklist.
 
