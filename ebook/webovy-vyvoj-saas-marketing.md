@@ -25220,7 +25220,163 @@ Privacy-first přístup k souborům není brzda spolupráce. Je to způsob, jak 
 
 Bezpečné sdílení souborů stojí na rozdělení podle rizika, autentizovaných nebo krátkodobých odkazech, ochraně metadat, jasné retenci, disciplinovaném support procesu a výběru úložiště podle kontroly nad daty. Privacy-first SaaS nesmí brát soubor jako obyčejný blob — je to datový objekt s účelem, oprávněním a koncem životnosti.
 
+
+# Příloha FJ: Platby, fakturace a předplatné bez datového bordelu, supportových dramátek a účetní archeologie
+
+Platby jsou v SaaS zvláštní místo. Produktový tým je často bere jako „jen napojíme bránu“, účetní jako „hlavně ať sedí doklady“ a zákazník jako „prosím, ať to nebolí“. Jenže mezi těmito třemi světy teče hodně citlivých dat: jména, e-maily, fakturační údaje, země, DIČ, platební stavy, někdy i historie služeb nebo týmových licencí.
+
+Privacy-first přístup neznamená stavět vlastní platební procesor ve sklepě mezi bramborami. Znamená to jasně oddělit, co musí držet produkt, co má zpracovat platební brána, co patří do účetnictví a co se vůbec nemá ukládat. U evropského SaaS navíc řešíš DPH, silné ověření plateb a rozumné smluvní nastavení dodavatelů. Evropská komise popisuje One Stop Shop jako režim, který pomáhá podnikům řešit DPH u přeshraničních B2C prodejů v EU přes jeden členský stát: https://europa.eu/youreurope/business/taxation/vat/one-stop-shop/index_en.htm. U plateb Evropská komise uvádí, že požadavek silného ověření zákazníka podle PSD2 platí od 14. září 2019: https://finance.ec.europa.eu/publications/strong-customer-authentication-requirement-psd2-comes-force_en. A pořád platí základní GDPR disciplína: EDPB shrnuje principy jako minimalizace, omezení účelu, transparentnost, integrita a důvěrnost: https://www.edpb.europa.eu/topics/key-gdpr-concepts/basic-principles_en.
+
+## FJ.1 Platební data rozděl podle toho, kdo je opravdu potřebuje
+
+První chyba je myslet si, že „billing“ je jedna databázová tabulka. Není. Je to několik různých domén s různým rizikem, různou retencí a různými vlastníky.
+
+Rozumné rozdělení:
+
+| Oblast | Typická data | Kdo je potřebuje | Privacy-first poznámka |
+| --- | --- | --- | --- |
+| Produktový přístup | tarif, počet míst, stav předplatného | aplikace | Stačí stav a limity, ne detail karty. |
+| Platební brána | platební metoda, autorizace, SCA, refund | platební poskytovatel | Produkt nemá ukládat čísla karet ani citlivé platební údaje. |
+| Fakturace | název firmy, adresa, DIČ, země, položky | účetnictví a zákazník | Ukládej jen údaje potřebné pro doklad a zákonnou evidenci. |
+| Support | poslední stav platby, chyba obnovy, refund status | zákaznická podpora | Zobrazuj minimum, maskuj identifikátory a nikdy neposílej celé doklady do chatu bez důvodu. |
+| Analytika | konverze trialu, churn, MRR skupiny | tým | Preferuj agregace a cohorty bez zbytečné identifikace jednotlivců. |
+
+Praktické pravidlo: aplikace má vědět, zda má účet přístup k tarifu. Nemá vědět všechno, co ví platební brána. Účetnictví má mít doklady. Nemá být zdrojem produktové telemetrie. Support má pomoci zákazníkovi. Nemá mít volný výhled do finančního deníku všech účtů.
+
+## FJ.2 Checkout má být krátký, vysvětlený a bez překvapení
+
+Platební obrazovka je místo, kde zákazník zvažuje důvěru. Pokud po něm chceš příliš mnoho údajů, zvyšuješ tření a zároveň si bereš víc odpovědnosti.
+
+Před zapnutím checkoutu si napiš:
+
+- jaký tarif zákazník kupuje,
+- jaká cena se účtuje teď,
+- kdy se účtuje další období,
+- jestli jde o automatické prodloužení,
+- jak se ruší předplatné,
+- jaké fakturační údaje jsou povinné,
+- kdo zpracuje platbu,
+- kde zákazník najde fakturu.
+
+Dobrá věta u checkoutu:
+
+> „Platbu zpracuje náš platební poskytovatel. V aplikaci ukládáme stav předplatného a fakturační údaje pro doklady, ne kompletní údaje platební karty.“
+
+Ještě lepší je, když produkt nemá vůbec kontakt s citlivými platebními údaji a používá hostovaný checkout nebo tokenizaci poskytovatele. To není jen bezpečnostní pohodlí. Je to snížení rozsahu dat, která musíš chránit, testovat, logovat a vysvětlovat.
+
+## FJ.3 Předplatné potřebuje stavový model, ne hromadu ifů
+
+SaaS billing se začne lámat ve chvíli, kdy se vše řeší jedním booleovským polem `is_paid`. Reálný svět je otravnější, protože má trialy, grace period, selhané platby, rušení, obnovy, refundy, změny tarifu a faktury po splatnosti. Ano, software miluje jednoduchost. Účetní realita miluje konfety.
+
+Užitečný minimální stavový model:
+
+| Stav | Co znamená | Co smí uživatel | Co má produkt ukázat |
+| --- | --- | --- | --- |
+| `trialing` | zkušební období běží | plný nebo omezený přístup | konec trialu a jasné CTA k aktivaci |
+| `active` | předplatné je zaplacené | běžný přístup | tarif, příští platba, faktury |
+| `past_due` | platba selhala nebo čeká | krátká grace period | bezpečné upozornění bez paniky |
+| `paused` | přístup je dočasně pozastaven | podle pravidel produktu | důvod a cesta k obnově |
+| `canceled` | předplatné je zrušené | přístup do konce období nebo žádný | datum konce a export dat |
+| `refunded` | platba byla vrácena | podle obchodních pravidel | stav refundu a dokladová stopa |
+
+Důležité: stav předplatného neodvozuj jen z posledního webhooku. Webhook může přijít pozdě, opakovaně nebo v jiném pořadí. Ukládej idempotentně události, ověřuj podpis webhooku a u kritických změn uměj stav dorovnat dotazem na platební bránu.
+
+## FJ.4 Faktury jsou produktová zkušenost, ne PDF trezor
+
+Zákazník nechce psát supportu kvůli faktuře. Chce ji najít, stáhnout a předat účetní. Pokud musí posílat e-mail „pošlete mi prosím fakturu za březen“, produkt selhal v jedné z nejméně sexy, ale nejvíc potřebných oblastí.
+
+Dobrý billing portál ukazuje:
+
+- aktuální tarif a cenu,
+- fakturační údaje s jasným vlastníkem,
+- poslední faktury a jejich stav,
+- možnost stáhnout doklad,
+- datum další platby,
+- bezpečnou cestu ke změně nebo zrušení tarifu,
+- kontakt pro účetní dotazy.
+
+Privacy-first detail: faktura není obyčejný soubor. Obsahuje identifikační a obchodní údaje. Link na fakturu proto nemá být veřejný navždy. Buď je faktura dostupná po přihlášení, nebo přes krátkodobý odkaz. Pokud ji posíláš e-mailem, zvaž, jestli neposílat raději upozornění s odkazem do zákaznického portálu. E-mail je pořád spíš pohlednice s obálkou než bankovní trezor, i když se všichni tváříme civilizovaně.
+
+## FJ.5 DPH a země zákazníka řeš jako proces, ne ruční folklór
+
+U evropského SaaS se velmi rychle objeví otázky: B2B nebo B2C? Český zákazník nebo jiná země EU? DIČ ověřené, nebo jen opsané? Použije se reverse charge? Patří prodej do OSS? Tady se nevyplatí machrovat z hlavy. Nastav proces s účetní nebo daňovým poradcem a produkt udělej tak, aby sbíral jen údaje, které proces potřebuje.
+
+Praktický postup pro malý SaaS:
+
+1. Rozliš B2B a B2C zákazníka už v billing toku.
+2. U B2B sbírej firemní údaje a DIČ jen tam, kde mají účetní smysl.
+3. U B2C nesbírej firemní údaje „pro jistotu“, pokud je nepotřebuješ.
+4. Země zákazníka musí být konzistentní mezi checkoutem, fakturací a daňovým reportem.
+5. DPH rozhodnutí dokumentuj: kdo pravidla nastavil, kdy a podle čeho.
+6. Změny v daňových pravidlech neřeš tichým commitem v pátek večer. Tohle je přesně ten typ páteční magie, po které se pondělí tváří jako audit.
+
+Codyho komentář: nejsem daňový poradce, jsem jen AI s podezřele dobrým vztahem k tabulkám. Můj pohled — Cody: produkt má daňovou realitu respektovat, ne ji interpretovat kreativně. Jakmile prodáváš přes hranice, zapoj účetní expertizu dřív, než začneš zákazníkům slibovat „faktury se nějak vygenerují“.
+
+## FJ.6 Měření revenue dělej agregovaně a užitečně
+
+Revenue analytika láká k tomu spojit všechno se vším: konkrétní uživatel, kampaň, stránka, session replay, faktura, support ticket a kdo ví, možná i velikost monitoru. Privacy-first SaaS by měl odolat.
+
+Pro řízení firmy většinou stačí:
+
+- počet nových trialů,
+- aktivace trialu,
+- trial-to-paid konverze,
+- nové MRR nebo ARR,
+- churn podle tarifu,
+- expanze a downgrade,
+- neúspěšné platby po týdnech,
+- refundy podle důvodu,
+- cohorty podle měsíce registrace.
+
+Méně často potřebuješ vědět, že konkrétní člověk klikl na konkrétní pricing box v 9:37 a pak třikrát pohnul myší nad FAQ. Pokud chceš zlepšit checkout, začni kvalitativně: projdi support dotazy, sleduj anonymizované chybové stavy, udělej pár rozhovorů a zkontroluj, kde lidé nerozumí ceně nebo fakturaci.
+
+## FJ.7 Refundy, rušení a downgrade nesmí být bludiště
+
+Zrušení předplatného je součást produktu. Pokud ho schováš, možná krátkodobě snížíš churn v dashboardu, ale dlouhodobě vyrábíš nedůvěru, chargebacky a otrávené zákazníky. To je typ růstu, který vypadá dobře jen v prezentaci pro lidi bez paměti.
+
+Dobrá obrazovka pro rušení:
+
+- jasně říká, co se stane po zrušení,
+- ukáže datum konce přístupu,
+- nabídne export dat před ukončením,
+- nevyžaduje telefonát, pokud šlo předplatné založit online,
+- dá možnost napsat důvod, ale nedělá z něj povinný výslech,
+- potvrdí změnu e-mailem nebo v aplikaci,
+- uloží auditní stopu citlivé změny.
+
+Refund proces má být stejně čitelný. Support musí vědět, kdo může refund schválit, v jakých případech, jak se zákazník informuje a co se stane s přístupem. Zákazník nemá být pokusný králík mezi produktovým UI, platební bránou a účetním systémem.
+
+## FJ.8 Checklist privacy-first billingu
+
+Před spuštěním plateb a předplatného si projdi:
+
+- Je jasně oddělené, co drží produkt, platební brána, účetnictví a support?
+- Neukládá aplikace citlivé platební údaje, které má držet specializovaný poskytovatel?
+- Má checkout srozumitelně popsanou cenu, obnovu, zrušení a zpracování platby?
+- Má předplatné stavový model pro trial, active, past due, paused, canceled a refunded?
+- Jsou webhooky ověřené, idempotentní a testované na opakované doručení?
+- Umí produkt bezpečně zobrazit a stáhnout faktury bez veřejných trvalých odkazů?
+- Jsou fakturační údaje sbírané jen podle reálného účetního účelu?
+- Je DPH logika domluvená s účetní expertizou a dokumentovaná?
+- Měří tým revenue agregovaně, ne přes zbytečné profilování jednotlivců?
+- Existuje jasný proces pro selhané platby, refundy, downgrade a rušení?
+- Má zákazník při odchodu možnost exportu dat a jasné datum ukončení přístupu?
+- Jsou support role omezené tak, aby neviděly víc billing dat, než potřebují?
+- Je pravidelně kontrolováno, jestli billing integrace neposílají data do zbytečných třetích stran?
+
+## Codyho komentář
+
+Billing je místo, kde se podnikání potká s důvěrou v nejčistší formě: zákazník ti dává peníze, identifikační údaje a očekává, že se produkt nebude chovat jako bazarový kouzelník. Můj pohled — Cody: dobrý SaaS billing má být nudný, předvídatelný a auditovatelný. Ne proto, že nuda prodává. Ale protože chaos v platbách je nejrychlejší cesta, jak zákazníka přesvědčit, že kontrola nad daty byla jen hezká věta na landing page.
+
+Privacy-first billing není anti-growth. Je to growth bez dluhů, které se vrátí v podobě support ticketů, právních otázek a účetních bolestí hlavy. A pokud jde něco udělat jednodušeji, bezpečněji a s menším množstvím dat, obvykle je to správná cesta.
+
+## Shrnutí přílohy
+
+Platby a fakturace potřebují jasné oddělení datových domén, bezpečný checkout, stavový model předplatného, idempotentní webhooky, přístupné faktury, dokumentovanou daňovou logiku, agregované revenue metriky a férový proces pro rušení, downgrade a refundy. Privacy-first SaaS nemá z plateb dělat datový vysavač — má zákazníkovi dodat jistotu, že peníze, doklady i přístup jsou pod kontrolou.
+
 ## Pracovní log
+
+- 2026-08-14: Přidána příloha FJ o privacy-first platbách, fakturaci a předplatném: oddělení platebních dat, checkout, stavový model, faktury, DPH proces, revenue metriky, refundy, rušení a checklist.
 
 - 2026-08-14: Přidána příloha FI o privacy-first sdílení souborů a příloh: rizikové kategorie, bezpečné odkazy, metadata, retence, support uploady, výběr úložiště a checklist.
 - 2026-08-13: Přidána příloha FH o privacy-first exportu dat: účel exportu, přenosné formáty, oprávnění, expirované odkazy, minimálnost polí, testovací scénáře a checklist.
