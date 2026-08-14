@@ -25536,7 +25536,182 @@ Nejlepší finanční provoz je nudný: správná data na správném místě, ž
 
 Účetní exporty a finanční reporty mají být řízené výstupy, ne univerzální datové skládky. Privacy-first SaaS odděluje exporty podle účelu, omezuje sloupce na nutné minimum, chrání CSV proti formula injection, nastavuje expiraci exportních souborů, audit loguje stažení, drží manažerské reporty agregované a dává supportu úzké akce místo plošného finančního přístupu.
 
+
+# Příloha FL: Týmové pozvánky a správa členů bez osiřelých účtů, přístupového guláše a datového průvanu
+
+SaaS pro firmy se často láme ve chvíli, kdy do něj vstoupí druhý člověk. Jeden uživatel je jednoduchý příběh: registrace, přihlášení, nastavení, hotovo. Tým je už provozní realita: pozvánky, role, odchody lidí, změny e-mailů, externisté, účetní, agentury, dočasné přístupy a administrátor, který má pocit, že „owner“ znamená „klikám na všechno, co svítí“.
+
+Privacy-first týmová správa neznamená, že všechno zamkneš do trezoru a zákazník musí psát supportu kvůli každé drobnosti. Znamená to, že členství ve workspace je řízený životní cyklus: pozvánka má účel, role má hranice, změna má stopu, odchod má konec a produkt uživatele netlačí do sdílení účtů. Sdílený login je totiž takový malý požár v papírové krabici. Vypadá úsporně, dokud nezačne hořet.
+
+## FL.1 Pozvánka není jen e-mail s kouzelným odkazem
+
+Pozvánka do týmu je bezpečnostní a produktová akce. Přidává člověka k firemním datům, fakturám, zákazníkům, projektům nebo interním poznámkám. Proto nemá být navržená jako newsletterové CTA s textem „Klikni a bav se“. Má odpovědět na základní otázky: kdo zve, do jakého workspace, s jakou rolí, na jak dlouho a co se stane po přijetí.
+
+Dobrá pozvánka obsahuje:
+
+- název workspace nebo organizace,
+- jméno nebo e-mail osoby, která zve,
+- roli nebo rozsah přístupu,
+- jasné tlačítko pro přijetí,
+- expiraci odkazu,
+- upozornění, pokud pozvánka míří na jiný e-mail než aktuálně přihlášený účet,
+- cestu k odmítnutí nebo ignorování bez dalšího spamování.
+
+Příklad mikrotextu:
+
+```text
+Ondřej tě zve do workspace Dreamind jako Editor.
+Editor může upravovat obsah a projekty, ale nevidí fakturaci ani bezpečnostní nastavení.
+Pozvánka platí 7 dní.
+```
+
+Tahle krátká věta udělá víc bezpečnostní práce než tajemný odkaz `accept?token=...` schovaný v e-mailu. Uživatel ví, co přijímá. Administrátor ví, co poslal. Support nemusí luštit, proč má copywriter najednou přístup k fakturám.
+
+## FL.2 Role navrhuj podle práce, ne podle ega
+
+Nejčastější role v malém SaaS bývají `Owner`, `Admin`, `Member` a někdy `Viewer`. To je lepší než nic, ale často málo. Problém není počet rolí. Problém je, když role neodpovídají skutečným činnostem. Pak se z `Admin` stane univerzální kladivo a z bezpečnosti dekorace.
+
+Začni mapou prací:
+
+| Práce | Potřebuje číst | Potřebuje měnit | Riziko |
+| --- | --- | --- | --- |
+| Správa fakturace | faktury, tarif, platební stav | fakturační údaje, tarif | vysoké finanční a osobní údaje |
+| Tvorba obsahu | projekty, texty, média | obsah a publikace | střední, podle dat v obsahu |
+| Zákaznická podpora | vybrané účty, ticket kontext | stav ticketu, interní poznámku | vysoké, pokud vidí osobní data |
+| Externí audit | nastavení, logy, exporty | ideálně nic | vysoké, časově omezené |
+| Běžný člen týmu | vlastní úkoly a sdílené projekty | svůj pracovní obsah | nízké až střední |
+
+Z téhle mapy teprve udělej role. Ne naopak. Role nejsou odměna za senioritu. Jsou nástroj, jak člověk bezpečně udělá práci. Pokud někdo potřebuje jednu citlivou akci jednou měsíčně, nedávej mu trvalého admina. Udělej delegovanou akci, dočasné oprávnění nebo schvalovací flow.
+
+## FL.3 Externisté potřebují časový plot
+
+Agentura, freelancer, účetní, konzultant nebo implementační partner často potřebují přístup jen na omezenou dobu. Pokud produkt neumí dočasné členství, zákazník si vytvoří vlastní workaround: sdílený účet, přeposlané exporty, screenshoty v chatu nebo starý admin účet, který přežije projekt i firmu. Gratuluju, právě vznikl malý datový dinosaurus.
+
+Praktický model pro externí přístupy:
+
+- při pozvání zvol typ člena: interní, externí, technický účet,
+- externí člen má výchozí expiraci, například 14 nebo 30 dní,
+- před expirací dostane admin upozornění s možností prodloužit,
+- prodloužení vyžaduje důvod nebo alespoň potvrzení vlastníka,
+- externí člen je v seznamu členů vizuálně označený,
+- externí člen nemá automaticky přístup k fakturaci, exportům ani audit logům,
+- po expiraci se session a tokeny ukončí.
+
+Důležité: expirace nemá být jen datum v databázi. Musí se promítnout do přihlášení, API tokenů, integrací, aktivních session a případných background jobů. Jinak je to cedulka „zamčeno“ na otevřených dveřích.
+
+## FL.4 Odchod člena musí být produktová cesta, ne support rituál
+
+Offboarding je nudný, dokud není pozdě. Když člověk odejde z firmy, zákazník potřebuje rychle odebrat přístup a zároveň zachovat pracovní kontinuitu. Produkty to často pokazí dvěma extrémy: buď smazání uživatele rozbije historii, nebo odebrání přístupu nechá aktivní tokeny a vlastnictví objektů viset ve vzduchu.
+
+Bezpečný offboarding řeš jako průvodce:
+
+1. Vyber člena.
+2. Ukaž, k čemu má přístup.
+3. Ukaž objekty, které vlastní nebo spravuje.
+4. Nabídni převod vlastnictví.
+5. Ukonči aktivní session.
+6. Zneplatni osobní API tokeny.
+7. Odeber z týmových notifikací a digestů.
+8. Zapiš akci do audit logu.
+
+Příklad obrazovky:
+
+```text
+Odebíráš Janu Novákovou z workspace Dreamind.
+Před odebráním vyber nového vlastníka pro 3 projekty a 2 automatizace.
+Její aktivní session budou ukončeny a osobní API tokeny zneplatněny.
+Historie úprav zůstane zachovaná jako auditní stopa.
+```
+
+Tohle je přesně místo, kde privacy-first přístup pomáhá i byznysu. Firma nepřijde o práci, ale zavře přístup. Historie zůstane auditovatelná, ale člověk už nemá cestu zpět do dat.
+
+## FL.5 Admin obrazovka má ukazovat riziko, ne jen seznam e-mailů
+
+Seznam členů typu „avatar, jméno, role“ je hezký, ale pro správu přístupů slabý. Admin potřebuje vidět rizikové signály: kdo má vysoká práva, kdo je externí, kdo se dlouho nepřihlásil, kdo má aktivní tokeny, kdo má přístup k fakturaci a kdo vlastní automatizace nebo integrace.
+
+Užitečný seznam členů může mít sloupce:
+
+- role,
+- typ člena,
+- poslední aktivita,
+- aktivní session,
+- osobní API tokeny,
+- přístup k fakturaci,
+- počet vlastněných projektů nebo automatizací,
+- datum expirace přístupu,
+- poslední změna oprávnění.
+
+Nepotřebuješ z toho dělat datové letiště. Stačí zvýraznit věci, které vyžadují rozhodnutí. Například: „externí admin bez expirace“, „uživatel se nepřihlásil 180 dní“, „člen má token, ale už není v aktivním týmu“, „owner je jediný člověk ve workspace“. To jsou signály pro správu, ne vanity metriky.
+
+## FL.6 Sdílené účty řeš produktem, ne moralizováním
+
+Uživatelé nesdílí účty proto, že rádi porušují pravidla. Často to dělají, protože produkt má špatný pricing, neumí hosty, neumí role, neumí agenturní přístup nebo dělá přidání dalšího člověka zbytečně složité. Ano, někdy šetří. Ale často jen obcházejí špatný návrh.
+
+Místo moralizování nabídni:
+
+- jednoduché přidání člena bez kontaktování sales,
+- guest roli s omezeným přístupem,
+- externí členství s expirací,
+- jasné ceny za další členy,
+- přehled aktivních session,
+- upozornění na podezřelé paralelní používání bez sledovací hysterie,
+- možnost převést účet na týmový workspace.
+
+Privacy-first poznámka: detekce sdílených účtů nesmí být výmluva pro agresivní fingerprinting. Ve většině malých SaaS stačí střídmé signály: počet aktivních session, neobvyklé množství souběžné práce, změny bezpečnostních údajů a ruční review. Nepotřebuješ tajně měřit každý pohyb myši. Myš je pracovní nástroj, ne korunní svědek.
+
+## FL.7 Audit log má být srozumitelný zákazníkovi
+
+Správa členů bez audit logu je jako účetnictví na ubrousku. Možná chvíli funguje, ale nechceš to vysvětlovat při incidentu. Audit log nemusí ukládat obsah všeho. Má zachytit důležité změny přístupů: pozvánka odeslána, pozvánka přijata, role změněna, přístup expiroval, člen odebrán, vlastnictví převedeno, token zneplatněn.
+
+Dobrá auditní věta:
+
+```text
+2026-08-14 09:12 — Petra Svobodová změnila roli uživatele jan@example.com z Editor na Billing Admin.
+Důvod: měsíční kontrola fakturace.
+```
+
+Slabá auditní věta:
+
+```text
+User updated.
+```
+
+Audit log piš tak, aby ho pochopil zákaznický admin bez vývojáře za zády. U citlivých změn přidej důvod, pokud ho produkt sbírá. U osobních údajů drž minimalizaci: audit log má popsat akci, ne kopírovat celé objekty a staré hodnoty všech polí. Evropský privacy-first provoz stojí na účelovém omezení, minimalizaci a přiměřené bezpečnosti; EDPB tyto základní principy shrnuje tady: https://www.edpb.europa.eu/topics/key-gdpr-concepts/basic-principles_en
+
+## FL.8 Checklist týmových pozvánek a správy členů
+
+Před spuštěním nebo revizí týmové správy si projdi:
+
+- Říká pozvánka jasně, kdo zve, kam zve a s jakou rolí?
+- Má pozvánka expiraci a bezpečné chování pro špatně přihlášený účet?
+- Jsou role navržené podle reálných prací, ne podle organizačního ega?
+- Existuje rozdíl mezi interním členem, externistou a technickým účtem?
+- Mají externí přístupy výchozí expiraci a viditelné označení?
+- Umí admin převést vlastnictví objektů před odebráním člena?
+- Ukončí offboarding session, tokeny, digesty a integrační přístupy?
+- Ukazuje seznam členů rizikové signály, ne jen hezké avatary?
+- Má produkt bezpečnou alternativu ke sdíleným účtům?
+- Nepoužívá detekce sdílení účtů agresivní fingerprinting bez dobrého důvodu?
+- Zapisují se změny rolí, pozvánek a odebrání do srozumitelného audit logu?
+- Umí zákazník spravovat běžné přístupy bez psaní supportu?
+
+## Codyho komentář
+
+Týmová správa je typická „uděláme později“ funkce. Jenže později obvykle znamená ve chvíli, kdy někdo odejde z firmy, agentura pořád vidí data, admin neví, kdo má tokeny, a support dostane větu „prosím rychle odeberte všechny přístupy“. Paráda. Provozní escape room, ale bez zábavy.
+
+Můj pohled — Cody: dobrý SaaS neřeší přístupy jen kvůli bezpečnosti. Řeší je proto, aby zákazník nemusel vymýšlet vlastní obcházení. Když produkt umožní bezpečně pozvat, omezit, prodloužit, převést a odebrat lidi, snižuje riziko i support. A jako bonus přestane být sdílený login firemní folklór.
+
+## Zdroje k příloze
+
+- EDPB — Basic principles, včetně účelového omezení, minimalizace, integrity a důvěrnosti: https://www.edpb.europa.eu/topics/key-gdpr-concepts/basic-principles_en
+
+## Shrnutí přílohy
+
+Týmové pozvánky a správa členů mají být řízený životní cyklus, ne seznam e-mailů s rolemi. Privacy-first SaaS ukazuje účel pozvánky, navrhuje role podle práce, omezuje externí přístupy expirací, řeší offboarding jako produktový průvodce, zvýrazňuje rizikové signály, nabízí alternativu ke sdíleným účtům a zapisuje citlivé změny do srozumitelného audit logu.
+
 ## Pracovní log
+
+- 2026-08-14: Přidána příloha FL o týmových pozvánkách a správě členů: bezpečné pozvánky, role podle práce, externí přístupy s expirací, offboarding, rizikové signály, sdílené účty, audit log a checklist.
 
 - 2026-08-14: Přidána příloha FK o účetních exportech a finančních reportech: účel exportů, datové minimum, bezpečné CSV, expirace souborů, účetní integrace, support role, agregované finance a checklist.
 
