@@ -26512,7 +26512,139 @@ Můj pohled: žádosti subjektů údajů jsou nejlepší reality check pro priva
 
 Žádosti subjektů údajů nejsou jednorázový právní úkol, ale produktový a provozní proces. Rozliš typ žádosti, ověř identitu přiměřeně, udržuj mapu systémů, nepleť přístup s přenositelností, výmaz řeš podle retenčních a právních pravidel a každou žádost veď přes vlastníka, stav a auditní stopu. Privacy-first SaaS má umět data najít, vysvětlit, exportovat, opravit nebo bezpečně odstranit bez paniky a bez databázové magie.
 
+# Příloha FR: Zpracovatelské smlouvy a subdodavatelé bez právního divadla, slepé důvěry a datových výletů
+
+Zpracovatelská smlouva není PDF amulet, který po podpisu magicky ochrání produkt, zákazníka i tvůj spánek. Je to provozní dohoda o tom, kdo s daty co dělá, podle čích pokynů, s jakým zabezpečením, přes které subdodavatele, v jakých zemích a co se stane při incidentu, ukončení služby nebo žádosti subjektu údajů. Pokud ji tým bere jen jako přílohu k onboarding checklistu dodavatele, vzniká klasický SaaS folklór: právně něco máme, technicky nikdo neví co.
+
+GDPR v článku 28 požaduje, aby zpracování správcem pověřeným zpracovatelem stálo na smlouvě nebo jiném právním aktu, který mimo jiné řeší předmět, dobu trvání, povahu a účel zpracování, typ osobních údajů, kategorie subjektů údajů, povinnosti a práva správce, důvěrnost, bezpečnost, zapojení dalších zpracovatelů, pomoc se žádostmi lidí, incidenty, ukončení zpracování a audity: https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=CELEX%3A02016R0679-20160504. EDPB ve svých pokynech ke konceptům správce a zpracovatele zdůrazňuje, že role se neurčují podle titulku ve smlouvě, ale podle skutečné kontroly nad účely a prostředky zpracování: https://www.edpb.europa.eu/documents/guideline/guidelines-072020-on-the-concepts-of-controller-and-processor-in-the-gdpr_en
+
+## FR.1 Nejdřív rozhodni, jestli je dodavatel zpracovatel
+
+Ne každý nástroj, který vidí data, je automaticky zpracovatel. A ne každý dodavatel, který v dokumentaci napíše „processor“, se tak opravdu chová. Rozhoduje praktická otázka: kdo určuje účel a podstatné prostředky zpracování?
+
+Praktické rozlišení:
+
+- **Zpracovatel:** posíláš mu data, aby pro tebe vykonal konkrétní službu podle tvých pokynů, například e-mailové rozesílky pro tvůj newsletter, cloudový hosting nebo helpdesk.
+- **Samostatný správce:** dodavatel používá data pro vlastní účely, například vlastní antifraud, vlastní účetní povinnosti nebo vlastní zákaznický vztah.
+- **Společní správci:** dvě strany společně určují účel a podstatné prostředky zpracování, typicky u některých společných kampaní nebo platforem.
+- **Žádný přístup k osobním údajům:** nástroj zpracovává jen anonymní, agregovaná nebo technická data, která už nejdou vztáhnout ke konkrétnímu člověku.
+
+Příklad: poskytovatel hostingu pro tvůj SaaS je typicky zpracovatel, protože provozuje infrastrukturu podle tvého účelu. Platební brána může být u části platebních údajů samostatný správce, protože plní vlastní právní a regulatorní povinnosti. Analytický nástroj může být zpracovatel, ale pokud data používá pro vlastní reklamní ekosystém, červená kontrolka bliká jak vánoční řetěz v serverovně.
+
+## FR.2 Smlouvu propojuj s datovou mapou, ne s šuplíkem
+
+DPA má být napojená na reálnou datovou mapu. Když v produktu přidáš nový formulář, event, export nebo integraci, smluvní a provozní evidence se musí změnit taky. Jinak máš dokumentaci, která popisuje produkt z minulého života.
+
+Minimální karta dodavatele:
+
+| Pole | Co vyplnit | Proč |
+| --- | --- | --- |
+| Název služby | konkrétní produkt a účet | Aby bylo jasné, co se hodnotí |
+| Role | zpracovatel, správce, společní správce | Určuje právní a provozní režim |
+| Účel | jedna věta bez právničtiny | Kontrola nezbytnosti |
+| Kategorie dat | e-mail, jméno, billing, logy, obsah | Datové minimum |
+| Kategorie lidí | zákazníci, uživatelé, leady, tým | Rozsah rizika |
+| Země provozu | EU/EHP, třetí země, nejasné | Transfer risk |
+| Subdodavatelé | odkaz na seznam a notifikace změn | Řetězec odpovědnosti |
+| Retence | kdy a jak se data mažou | Ukončení a úklid |
+| Vlastník | člověk v týmu | Nikdo nevlastněné = nikdo neřešené |
+
+Tohle není náhrada právní kontroly. Je to produktový most mezi právem, vývojem a provozem. Bez něj podepíšeš hezké věty, ale nikdo je nepřeloží do nastavení služby.
+
+## FR.3 Subdodavatelé jsou změnový proces, ne drobný tisk
+
+Dodavatel často používá další služby: cloud, e-mailovou infrastrukturu, monitoring, support, AI komponenty, CDN. Pokud se o nich dozvíš až při incidentu, není to „transparentní supply chain“, ale úniková hra pro dospělé.
+
+U každého zpracovatele si ověř:
+
+- kde je veřejný seznam subdodavatelů,
+- zda dodavatel oznamuje změny předem,
+- jak můžeš vznést námitku,
+- zda subdodavatelé zpracovávají stejný nebo menší rozsah dat,
+- zda jsou země zpracování kompatibilní s tvým slibem zákazníkům,
+- zda se AI, support nebo telemetry subdodavatelé nepřidávají „jen interně“ bez jasného režimu.
+
+Privacy-first pravidlo: pokud subdodavatelský seznam nejde najít, nejde exportovat, nemá datum aktualizace a nikdo neumí říct, co se změnilo, dodavatel ještě není připravený pro kritická zákaznická data.
+
+## FR.4 Transfer mimo EU není automatické zlo, ale nesmí být mlha
+
+Dreamindí preference je jednoduchá: evropský provoz, evropské datové regiony a minimum zbytečných předávání. Ne proto, že mapa světa končí u hranic EU, ale protože kontrola nad daty je produktová hodnota. Pokud data putují mimo EU/EHP, potřebuješ vědět proč, kam, na jakém právním mechanismu a s jakými doplňkovými opatřeními.
+
+Evropská komise uvádí, že pro předávání osobních údajů mimo EU lze použít mimo jiné rozhodnutí o odpovídající ochraně nebo vhodné záruky, například standardní smluvní doložky: https://commission.europa.eu/law/law-topic/data-protection/international-dimension-data-protection/standard-contractual-clauses-scc_en. Přehled pravidel pro transfery mimo EU shrnuje také stránka Komise k předávání dat do třetích zemí: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/obligations/what-rules-apply-if-my-organisation-transfers-data-outside-eu_en
+
+Prakticky si u každého transferu napiš:
+
+- jaká data odcházejí,
+- do jaké země nebo regionu,
+- kdo je příjemce a v jaké roli,
+- jaký mechanismus transferu používáš,
+- zda existuje EU datový region a jestli je opravdu zapnutý,
+- co se stane při support přístupu ze země mimo EU,
+- jak transfer popisuješ zákazníkům.
+
+Nejhorší odpověď je „mělo by to být v EU“. „Mělo by“ patří do roadmapy, ne do privacy dokumentace.
+
+## FR.5 Bezpečnostní přílohu čti jako provozní checklist
+
+Dodavatelská bezpečnost není jen certifikát v patičce webu. Certifikace může pomoct, ale malý tým potřebuje hlavně vědět, jak služba chrání konkrétní data v konkrétním provozu.
+
+Otázky, které mají praktickou hodnotu:
+
+- Podporuje služba SSO, MFA a role podle oprávnění?
+- Umí oddělit produkční a testovací prostředí?
+- Jak se šifrují data při přenosu a v klidu?
+- Kdo u dodavatele může přistoupit k zákaznickým datům a jak se to loguje?
+- Jak rychle dodavatel oznamuje bezpečnostní incidenty?
+- Jak probíhá export a smazání dat po ukončení smlouvy?
+- Lze vypnout trénování AI modelů nebo sekundární použití dat?
+
+Pokud dodavatel odpovídá jen marketingovou brožurou, ptej se znovu. Pokud neodpovídá vůbec, přesuň ho mimo kritickou cestu nebo hledej alternativu. Ano, někdy je to opruz. Ale levný nástroj bez odpovědí se umí prodražit rychleji než „malá úprava scope“ v pátek odpoledne.
+
+## FR.6 Ukončení služby plánuj už při zapnutí
+
+Vendor lock-in není jen technický problém. Je to i datový problém: jak dostaneš data ven, jak ověříš jejich smazání, co zůstane v zálohách a kdo v týmu má právo službu odpojit?
+
+Exit plán pro dodavatele:
+
+1. Exportuj data ve strojově čitelném formátu.
+2. Přepni integrace, webhooky a API klíče na novou službu.
+3. Zastav nové zápisy do starého nástroje.
+4. Zkontroluj, že zákaznické cesty stále fungují.
+5. Požádej o smazání nebo ukonči účet podle DPA.
+6. Ulož potvrzení, datum a rozsah ukončení.
+7. Aktualizuj datovou mapu, privacy stránku a interní dokumentaci.
+
+Dobrá otázka při výběru dodavatele zní: „Jak tě jednou opustíme?“ Romantika nulová, provozní hodnota obrovská.
+
+## FR.7 Checklist zpracovatelských smluv a subdodavatelů
+
+- Má každý dodavatel určenou roli: zpracovatel, správce, společní správce nebo žádný přístup k osobním údajům?
+- Je DPA propojená s konkrétní datovou mapou a účelem zpracování?
+- Máš evidované kategorie dat, kategorie lidí, země zpracování a retenční pravidla?
+- Víš, kde je seznam subdodavatelů a jak se dozvíš o změnách?
+- Jsou transfery mimo EU/EHP popsané konkrétně, ne stylem „asi cloud“?
+- Má kritický dodavatel ověřené SSO/MFA, role, logování přístupů, incidentní oznamování a export dat?
+- Je v produktu nebo provozním runbooku popsáno, jak dodavatele bezpečně vypnout?
+- Aktualizuje se privacy stránka a zákaznický trust pack při změně dodavatele?
+
+## Codyho komentář
+
+Dodavatelská dokumentace je místo, kde se často potká právní poezie s technickou realitou a oba dělají, že se neznají. Moje pravidlo: co nejde vysvětlit produktovému manažerovi, nejde spolehlivě provozovat. DPA má být čitelná pro právníka, ale její důsledky musí chápat i člověk, který zapíná integraci v adminu. Jinak je to jen drahá tapeta.
+
+## Zdroje k příloze
+
+- GDPR, článek 28 a související ustanovení o zpracovatelích: https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=CELEX%3A02016R0679-20160504
+- EDPB Guidelines 07/2020 on the concepts of controller and processor in the GDPR: https://www.edpb.europa.eu/documents/guideline/guidelines-072020-on-the-concepts-of-controller-and-processor-in-the-gdpr_en
+- Evropská komise ke standardním smluvním doložkám pro mezinárodní transfery: https://commission.europa.eu/law/law-topic/data-protection/international-dimension-data-protection/standard-contractual-clauses-scc_en
+- Evropská komise k pravidlům pro předávání dat mimo EU: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/obligations/what-rules-apply-if-my-organisation-transfers-data-outside-eu_en
+
+## Shrnutí přílohy
+
+Zpracovatelské smlouvy dávají smysl jen tehdy, když jsou propojené s reálnou datovou mapou, subdodavateli, transfery, bezpečnostním nastavením a exit plánem. Privacy-first SaaS nevybírá dodavatele podle nejhezčího loga na pricing stránce, ale podle toho, jestli umí jasně říct, jaká data zpracovává, kde, proč, s kým, jak dlouho a jak se jich bezpečně zbaví při ukončení služby.
+
 ## Pracovní log
+
+- 2026-08-14: Přidána příloha FR o zpracovatelských smlouvách a subdodavatelích: určení role dodavatele, propojení DPA s datovou mapou, změny subdodavatelů, transfery mimo EU, bezpečnostní kontrola, exit plán a checklist.
 
 - 2026-08-14: Přidána příloha FQ o žádostech subjektů údajů: typy žádostí, přiměřené ověření identity, mapa systémů, výmaz vs. retence, přístup vs. přenositelnost, procesní workflow, opatrná automatizace a checklist.
 
