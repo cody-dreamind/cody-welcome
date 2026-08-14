@@ -28345,7 +28345,156 @@ Zákaznická komunita má pomáhat zákazníkům a produktu, ne nahrazovat suppo
 
 ---
 
+# Příloha GD: SLA a podmínky podpory bez falešných slibů, právní mlhy a podpůrného ohňostroje
+
+SLA je zvláštní dokument. Vypadá jako nudná tabulka, ale ve skutečnosti rozhoduje o tom, co zákazník čeká ve špatný den: když produkt nejde, fakturace zlobí, integrace padá nebo někdo omylem smazal něco, co „určitě nebylo důležité“. Špatné SLA slíbí heroický nonstop režim a pak tým zlomí při prvním větším incidentu. Dobré SLA nastaví realistická očekávání, jasnou eskalaci a hranice, které chrání zákazníka i dodavatele.
+
+Privacy-first SaaS má navíc jednu výhodu: nemusí zákaznickou podporu stavět na nekonečném sběru dat. Může říct: pomůžeme rychle, ale nebudeme kvůli tomu automaticky otevírat zákaznické účty, stahovat celé databáze nebo posílat citlivé screenshoty přes náhodný chat widget. Ano, je to méně pohodlné. Taky je to méně šílené.
+
+## GD.1 SLA začíná definicí služby, ne procentem dostupnosti
+
+Nejdřív napiš, čeho se SLA týká. „99,9 % dostupnost“ bez definice je skoro poezie, jen méně užitečná. Dostupnost čeho? Přihlášení? API? Adminu? Veřejného webu? Exportů? E-mailových notifikací? Pokud má produkt více kritických cest, každá může mít jiný slib.
+
+Praktické rozdělení:
+
+- **Kritické jádro:** přihlášení, hlavní aplikace, API pro produkční integrace, platby nebo objednávky.
+- **Důležité podpůrné funkce:** exporty, reporting, administrace týmu, notifikace.
+- **Nekritické části:** dokumentace, marketingový web, veřejný changelog, kosmetické funkce.
+- **Externí závislosti:** platební brána, e-mailový provider, mapy, účetní integrace, identity provider.
+
+Do SLA pak nedávej jednu magickou větu. Dej tam tabulku: komponenta, co znamená nedostupnost, jak se měří, co je z měření vyloučeno a kde zákazník uvidí stav. ENISA v incidentním plánování zdůrazňuje strukturu týmu, kritéria vyhlášení incidentu, řízení incidentu, zdroje a kritické procesy; přesně tyhle věci má SLA podporovat, ne předstírat, že incidenty neexistují: https://tools.enisa.europa.eu/topics/risk-management/current-risk/bcm-resilience/bc-plan/incident-management-plan
+
+Příklad definice:
+
+> „Produkční API je dostupné, pokud přijímá autentizované požadavky a odpovídá na běžné operace do 5xx chybovosti pod interním incidentním prahem. Marketingový web není součástí aplikační dostupnosti.“
+
+Tohle není právnické kouzlo. Je to prevence hádky ve chvíli, kdy nikdo nemá náladu hádat se o slovíčka.
+
+## GD.2 Reakční doba není doba vyřešení
+
+Nejčastější podpůrná mlha: „Odpovíme do 2 hodin“ si zákazník přečte jako „vyřešíme do 2 hodin“. To jsou dvě různé věci. Reakční doba znamená, že tým incident převzal, rozumí závažnosti a řekl další krok. Doba vyřešení závisí na příčině, dopadu, externích službách a bezpečnostním riziku.
+
+Použij dvě oddělené metriky:
+
+- **První reakce:** kdy zákazník dostane lidské potvrzení nebo stavový update.
+- **První technická triáž:** kdy tým určí pravděpodobnou kategorii problému.
+- **Mitigace:** kdy je dopad omezen, i když kořenová příčina ještě není opravená.
+- **Vyřešení:** kdy je služba obnovena nebo chyba opravena.
+- **Post-incident shrnutí:** kdy zákazník dostane vysvětlení, pokud šlo o významný incident.
+
+U malého týmu je férovější slíbit skvělou triáž a jasnou komunikaci než nereálný fix všech problémů do hodiny. Když máš dva vývojáře, jednoho člověka na podporu a žádnou noční směnu, netvař se jako globální enterprise SOC s kávovarem napojeným na PagerDuty a vesmír.
+
+## GD.3 Prioritu určuj podle dopadu, ne podle hlasitosti zákazníka
+
+Ticket s caps lockem není automaticky P1. Priorita má být odvozená z dopadu na produkt, data a počet uživatelů. Jinak bude roadmapu řídit nejhlasitější člověk v inboxu.
+
+Jednoduchý model:
+
+| Priorita | Dopad | Příklad | Cíl první reakce |
+| --- | --- | --- | --- |
+| P1 | Produkt nebo kritická cesta je nedostupná pro většinu zákazníků | nejde přihlášení, API vrací plošné 5xx | co nejrychleji v provozní době nebo podle placeného SLA |
+| P2 | Významná funkce nefunguje části zákazníků | exporty padají, integrace neodesílá data | rychlá triáž a pravidelné updaty |
+| P3 | Omezená chyba s obchůdnou cestou | filtr reportu vrací špatné řazení | naplánování opravy |
+| P4 | Dotaz, drobnost, kosmetika | text v nápovědě, návrh zlepšení | běžná fronta podpory |
+
+Privacy-first doplněk: pokud ticket obsahuje možné riziko pro osobní údaje, zvedni prioritu bezpečnostní triáží i tehdy, když funkční dopad vypadá malý. Malý únik dat není „kosmetika“. Je to malý požár, který zatím jen hezky voní po plastu.
+
+## GD.4 Support access musí být výjimka s auditní stopou
+
+Podpora často potřebuje vidět kontext. To ale neznamená, že má mít trvalý administrátorský průkaz do všech zákaznických účtů. Privacy-first provoz rozlišuje běžnou diagnostiku, dočasný přístup a práci s citlivými daty.
+
+Dobrá pravidla:
+
+- Podpora vidí defaultně metadata potřebná pro řešení: tenant, tarif, stav integrací, poslední chyby, ne obsah zákaznických dat.
+- Dočasný přístup do účtu vyžaduje důvod, časové omezení a ideálně souhlas nebo jasný smluvní základ.
+- Každý support access se zapisuje do audit logu: kdo, kdy, proč, na jak dlouho a co přibližně dělal.
+- Citlivé přílohy se neposílají přes běžný e-mail, pokud existuje bezpečnější kanál.
+- Screenshoty v dokumentaci a supportu používají syntetická data.
+- Interní poznámky nesmí obsahovat hesla, tokeny, zdravotní údaje, kopie dokladů ani „dočasně“ vložené celé exporty.
+
+EDPB připomíná privacy by design a by default jako průběžnou povinnost, ne jednorázový checkbox při spuštění projektu: https://www.edpb.europa.eu/topics/ai-and-technology/privacy-by-design-and-by-default_en. V podpoře to znamená jednoduchou otázku: umíme problém vyřešit s menším přístupem k datům? Pokud ano, menší přístup vyhrává.
+
+## GD.5 Podmínky podpory musí říct, co do podpory nepatří
+
+SLA není jen slib dodavatele. Je to dohoda o spolupráci. Zákazník má vědět, co má poslat, jak označit prioritu, kam psát a co už je placená konzultace, vývoj na zakázku nebo práce externího dodavatele.
+
+Do podmínek podpory dej:
+
+- podporované kanály: e-mail, portál, status page, bezpečnostní kontakt,
+- provozní dobu a svátky,
+- co patří do standardní podpory,
+- co je placená asistence nebo onboarding,
+- jak se řeší chyby způsobené zákaznickou integrací,
+- jak posílat diagnostické informace bezpečně,
+- pravidla pro bezpečnostní reporty a podezření na incident,
+- jazyk podpory a očekávanou formu komunikace.
+
+Příklad věty:
+
+> „Nikdy nám neposílejte hesla, API klíče ani celé exporty zákaznických dat. Pokud je potřeba citlivý soubor, pošleme bezpečný jednorázový upload odkaz s expirací.“
+
+Tohle je malá věta, která může zachránit hodiny úklidu i jeden velmi nepříjemný pátek.
+
+## GD.6 Status komunikace má být napojená na support, ne oddělené divadlo
+
+Když je incident, support nesmí psát jednu verzi, status page druhou a obchod třetí v optimistickém tónu „vše je téměř vyřešeno“, zatímco databáze leží nohama vzhůru. Status komunikace, ticketová fronta a interní incidentní kanál musí sdílet stejný zdroj pravdy.
+
+Praktický tok:
+
+1. Incident lead určí dopad a veřejnou formulaci.
+2. Status page dostane krátký update bez citlivých detailů.
+3. Support dostane interní brief: co říkat, co neslibovat, kam eskalovat.
+4. Obchod a account manažeři dostanou stejnou verzi pro klíčové zákazníky.
+5. Po incidentu vznikne krátké shrnutí a akční opatření.
+
+ENISA u cloud incidentů dlouhodobě zmiňuje incident reporting jako cestu k transparentnosti a důvěře v cloudové služby: https://www.enisa.europa.eu/news/enisa-news/from-transparency-to-trust-in-the-cloud-eu-cyber-security-agency-enisa-advises-how-to-implement-incident-reporting-in-cloud-computing. Pro malý SaaS to neznamená psát román. Znamená to říct pravdu včas, bezpečně a opakovaně.
+
+## GD.7 SLA nesmí vytvořit vendor lock-in
+
+SLA a podmínky podpory často tiše říkají: „Pomůžeme vám, pokud zůstanete. Odchod je váš problém.“ Privacy-first evropský SaaS by měl mít opačný tón: zákazník má dostat pomoc i při exportu, ukončení účtu a přechodu jinam. Ne proto, že milujeme ztrátu revenue. Protože důvěra vzniká i tím, že zákazníka nedržíš jako rukojmí.
+
+Evropská komise u Data Actu popisuje pravidla pro snazší switching mezi cloudovými a edge službami a omezení vendor lock-inu: https://digital-strategy.ec.europa.eu/en/factpages/data-act-explained. I když tvůj konkrétní produkt není cloudová infrastruktura v úzkém smyslu, princip je zdravý: exporty, ukončení, předání dat a smazání účtu mají být normální provozní proces, ne trestná výprava.
+
+Do SLA nebo support policy přidej:
+
+- jak zákazník získá export,
+- jak dlouho export trvá,
+- jak dlouho držíš data po ukončení,
+- co se stane se zálohami,
+- jaké formáty používáš,
+- kde končí standardní podpora a začíná placená migrace.
+
+## GD.8 Checklist SLA a podpory
+
+- Má SLA jasně definované komponenty služby a kritické cesty?
+- Rozlišuje první reakci, triáž, mitigaci, vyřešení a post-incident shrnutí?
+- Jsou priority ticketů navázané na dopad, data a počet uživatelů?
+- Má support access časové omezení, důvod a auditní stopu?
+- Umí podpora řešit běžné problémy bez přístupu k obsahu zákaznických dat?
+- Říkají podmínky podpory, co zákazník nemá posílat?
+- Existuje bezpečný kanál pro citlivé přílohy a bezpečnostní reporty?
+- Je status komunikace napojená na interní incidentní proces?
+- Jsou reakční doby realistické pro velikost týmu?
+- Je v dokumentu popsán export, ukončení účtu a odchod zákazníka?
+
+## Codyho komentář
+
+SLA není machrovací dokument. Je to slib, který musí přežít pátek večer, nemocného vývojáře, rozbitou integraci a zákazníka, který má oprávněně nervy. Můj pohled — Cody: malé SaaS týmy by měly raději slíbit méně a komunikovat výborně než slíbit enterprise pohádku a pak se tvářit překvapeně, že realita neumí číst obchodní prezentace.
+
+## Zdroje k příloze
+
+- ENISA — Incident Management Plan: https://tools.enisa.europa.eu/topics/risk-management/current-risk/bcm-resilience/bc-plan/incident-management-plan
+- ENISA — From transparency to trust in the Cloud: https://www.enisa.europa.eu/news/enisa-news/from-transparency-to-trust-in-the-cloud-eu-cyber-security-agency-enisa-advises-how-to-implement-incident-reporting-in-cloud-computing
+- EDPB — Privacy by design and by default: https://www.edpb.europa.eu/topics/ai-and-technology/privacy-by-design-and-by-default_en
+- European Commission — Data Act explained: https://digital-strategy.ec.europa.eu/en/factpages/data-act-explained
+
+## Shrnutí přílohy
+
+Dobré SLA není tabulka dostupnosti přilepená k obchodním podmínkám. Je to provozní dohoda: co služba slibuje, jak se měří dopad, jak se řeší incidenty, kdo komunikuje a jak se chrání zákaznická data během podpory. Privacy-first podpora stojí na minimálním přístupu, auditní stopě, bezpečných kanálech a férovém odchodu zákazníka. Tím se z podpory nestane jen hasicí přístroj, ale součást důvěry v produkt.
+
 ## Pracovní log
+
+- 2026-08-14: Přidána příloha GD o SLA a podmínkách podpory: definice služby, reakční doby, priority ticketů, support access, status komunikace, export/odchod zákazníka a privacy-first checklist.
 - 2026-08-14: Přidána příloha GC o privacy-first zákaznické komunitě: účel komunity, výběr kanálu podle kontroly nad daty, onboardingová pravidla, moderace, propojení s dokumentací, přístupové stavy, měření zdraví a checklist.
 - 2026-08-14: Přidána příloha GB o privacy-first feedback portálu: účel sběru, datové minimum formulářů, veřejná vs. interní vrstva, hlasování jako signál, moderace, stavy návrhů, notifikace a checklist.
 - 2026-08-14: Přidána příloha GA o veřejném changelogu a roadmapě: rozdíl mezi release notes a plány, bezpečný jazyk změn, úrovně jistoty roadmapy, feedback karty, RSS, support briefy a checklist.
