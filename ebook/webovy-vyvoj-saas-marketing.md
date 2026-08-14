@@ -27397,7 +27397,134 @@ Výsledky ukládej jako produktovou kvalitu, ne jako zákaznický datový archiv
 
 AI funkce v SaaS má začínat konkrétní prací, datovou mapou a jasnou mírou lidské odpovědnosti. Malý tým potřebuje rozlišit asistenci, doporučení a rozhodnutí, psát transparentní mikrotexty přímo do produktu, vybrat model podle citlivosti dat, ověřit dodavatele a testovat výstupy proti reálným selháním. Privacy-first AI není brzda inovace. Je to způsob, jak přidat chytré funkce bez toho, aby se z produktu stal datový vysavač s hezkým gradientem.
 
+# Příloha FX: Zákaznická dokumentace bez prachu, screenshotů s tajemstvím a podpory v nekonečné smyčce
+
+Dobrá dokumentace není knihovna pro lidi, kteří rádi čtou manuály. Je to součást produktu. Pomáhá zákazníkovi udělat další krok, snižuje počet dotazů na podporu, zpřesňuje očekávání a chrání tým před tím, aby stejnou odpověď psal po dvacáté jako smutný copywriter v helpdesku.
+
+Privacy-first dokumentace má ještě jednu roli: vysvětluje, jak produkt pracuje s daty, bez toho, aby z každé stránky udělala právní seminář. Zákazník nemá lovit odpověď na otázku „kde jsou moje data?“ mezi třemi PDF, ceníkem a screenshotem z roku, kdy se ještě říkalo „web 2.0“.
+
+## FX.1 Piš dokumentaci podle úkolů, ne podle interní architektury
+
+Zákazník nehledá modul `Settings > Integrations > Advanced`. Hledá odpověď na otázku: „Jak propojím fakturaci?“, „Jak pozvu kolegu?“, „Jak smažu účet?“, „Co se stane s daty po zrušení?“ Dokumentace má sledovat jeho práci, ne tvoji databázovou strukturu.
+
+Začni pěti typy stránek:
+
+- **Rychlý start:** první úspěšný výsledek do 10–20 minut.
+- **Návody podle úkolu:** konkrétní postup od začátku do hotového stavu.
+- **Referenční stránky:** přesné vysvětlení polí, stavů, limitů a oprávnění.
+- **Troubleshooting:** co zkontrolovat, když něco nefunguje.
+- **Trust a data:** kde data běží, co se ukládá, kdo má přístup a jak funguje export nebo výmaz.
+
+Špatná struktura dokumentace kopíruje menu aplikace. Dobrá struktura kopíruje otázky, které zákazník opravdu má. Menu aplikace se navíc bude měnit. Zákaznické úkoly bývají stabilnější.
+
+## FX.2 Každý návod musí mít výsledek, vstupy a bezpečné hranice
+
+Návod bez jasného výsledku je jen procházka produktem. U každého návodu napiš hned na začátku:
+
+- co bude po dokončení fungovat,
+- co k tomu zákazník potřebuje,
+- jaká oprávnění jsou nutná,
+- jaká data se budou zpracovávat,
+- co se nestane automaticky.
+
+Příklad pro pozvánku člena týmu:
+
+> V tomhle návodu pozvete nového člena do pracovního prostoru a nastavíte mu roli. Potřebujete oprávnění správce. Pozvaný uživatel uvidí jen data odpovídající přiřazené roli. Pozvánka sama nezpřístupní fakturaci, exporty ani administraci integrací.
+
+Tahle krátká úvodní informace šetří podporu i bezpečnostní nervy. Zákazník ví, co dělá. Interní tým má menší šanci, že bude později vysvětlovat, proč někdo omylem přidal externistu jako superadmina. Ano, stává se to. Ne, není to hezká historka na firemní večírek.
+
+## FX.3 Screenshoty nesmí být únik dat v hezkém rámečku
+
+Screenshot v dokumentaci je užitečný, ale snadno se z něj stane výkladní skříň citlivých údajů. Jména zákazníků, e-maily, interní ID, fakturační částky, tokeny, URL s parametry, support poznámky, názvy projektů nebo reálné chybové hlášky s osobními údaji do veřejné dokumentace nepatří.
+
+Pravidla pro screenshoty:
+
+- používej syntetická data, ne anonymizovaná „skoro reálná“ data,
+- ukazuj jen část obrazovky, která je pro návod nutná,
+- před publikací zkontroluj URL, stavový řádek, tooltipy i pozadí,
+- neukazuj tajné hodnoty ani zkrácené tokeny, pokud to není bezpečně maskované,
+- pravidelně screenshoty obnovuj, aby nevedly zákazníka starým rozhraním.
+
+Dobrá testovací firma se může jmenovat „Městská pekárna Demo s.r.o.“. Špatná testovací firma je reálný klient s rozmazaným e-mailem, který jde přečíst při přiblížení. Rozmazání není bezpečnostní strategie. Je to vizuální placebo.
+
+## FX.4 Dokumentuj datové chování přímo u funkcí
+
+Privacy informace nepatří jen na jednu právní stránku. U důležitých funkcí má zákazník vidět stručné vysvětlení přímo v nápovědě:
+
+- jaká data funkce používá,
+- jestli se data posílají externímu dodavateli,
+- jak dlouho se uchovávají,
+- kdo v týmu je může vidět,
+- jak je lze exportovat nebo smazat,
+- co se loguje kvůli bezpečnosti.
+
+Příklad u importu kontaktů:
+
+> Importovaný soubor používáme jen pro vytvoření kontaktů v tomto pracovním prostoru. Po dokončení importu dočasný upload smažeme podle retenčního pravidla. Do import reportu ukládáme počty zpracovaných řádků a chyby validace, ne celý původní soubor.
+
+Tohle není právní detail navíc. Je to produktová informace. Člověk, který spravuje zákaznická data, potřebuje vědět, co se stane před kliknutím na tlačítko. Překvapení patří do narozeninového dortu, ne do datového toku.
+
+## FX.5 Nápověda má být verzovaná stejně jako produkt
+
+Dokumentace zastarává rychleji než dobré předsevzetí po dovolené. Když se mění UI, role, limity, exporty, integrace nebo datové chování, musí se měnit i nápověda. Jinak produkt říká jedno a dokumentace druhé. Zákazník pak nevěří ani jednomu.
+
+Praktický proces:
+
+1. Každá změna funkce má v ticketu otázku: „Je potřeba upravit dokumentaci?“
+2. Pull request nebo release poznámka odkazuje na dotčené návody.
+3. U citlivých funkcí kontroluje text někdo, kdo rozumí bezpečnosti nebo privacy dopadu.
+4. Dokumentace má vlastníka a datum poslední věcné revize.
+5. Staré návody se buď přesměrují, nebo jasně označí jako archiv.
+
+U SaaS je dobré mít malou tabulku „funkce → dokumentace → datová věta“. Když se změní funkce, hned vidíš, které stránky a mikrotexty musí projít revizí.
+
+## FX.6 Support a dokumentace musí tvořit jednu smyčku
+
+Support dotazy jsou redakční výzkum zdarma. Pokud se stejná otázka objeví třikrát, dokumentace buď chybí, je špatně pojmenovaná, nebo ji produkt neumí nabídnout ve správný moment.
+
+Nastav jednoduchou smyčku:
+
+- support označí opakovaný dotaz štítkem „docs-needed“,
+- jednou týdně se vyberou 1–3 nejčastější témata,
+- vznikne nebo se upraví krátký návod,
+- odpověď podpory začne odkazovat na novou stránku,
+- po měsíci se zkontroluje, jestli dotazů ubylo.
+
+Privacy-first detail: do dokumentačních úkolů nekopíruj celé zákaznické konverzace. Stačí zobecněný problém, anonymní příklad a odkaz do support systému pro oprávněné lidi. Dokumentační backlog nemá být druhý support archiv bez pravidel retence.
+
+## FX.7 AI může pomoci, ale nesmí sežrat realitu
+
+AI asistent umí z návrhů support odpovědí udělat první verzi návodu, najít duplicitní články, navrhnout lepší nadpis nebo převést dlouhý postup na checklist. Skvělé. Ale dokumentace je závazná produktová komunikace, takže ji musí zkontrolovat člověk.
+
+Bezpečné použití AI v dokumentaci:
+
+- používej syntetické příklady místo reálných zákaznických zpráv,
+- nenechávej model vymýšlet limity, ceny, právní sliby ani technické parametry,
+- označ články, které vznikly z AI návrhu a čekají na věcnou kontrolu,
+- porovnej každý postup s aktuálním produktem,
+- nedávej do promptu tajné URL, tokeny, interní incidenty ani zákaznická data.
+
+Codyho komentář: AI je dobrý junior dokumentarista. Rychle napíše osnovu, občas elegantně lže a potřebuje review. Prostě jako nadšený stážista, jen bez firemního hrnku.
+
+## FX.8 Checklist zákaznické dokumentace
+
+- [ ] Dokumentace je členěná podle zákaznických úkolů, ne interních modulů.
+- [ ] Každý návod má jasný výsledek, předpoklady, oprávnění a bezpečné hranice.
+- [ ] Screenshoty používají syntetická data a neobsahují tokeny, e-maily ani reálné klienty.
+- [ ] U datově citlivých funkcí je přímo v nápovědě krátká datová věta.
+- [ ] Změny funkcí mají kontrolu dopadu na dokumentaci.
+- [ ] Dokumentace má vlastníka a datum poslední věcné revize.
+- [ ] Support dotazy pravidelně krmí backlog dokumentace.
+- [ ] Interní poznámky a zákaznické konverzace se nekopírují do dokumentace bez anonymizace.
+- [ ] AI návrhy procházejí lidskou kontrolou a nevymýšlejí závazné parametry.
+- [ ] Staré návody jsou přesměrované, aktualizované nebo označené jako archiv.
+
+## Shrnutí přílohy
+
+Zákaznická dokumentace má být živá součást produktu: vede uživatele k výsledku, snižuje podporu, vysvětluje datové chování a drží krok s releasy. Privacy-first přístup znamená syntetická data ve screenshotech, krátké datové věty u funkcí, střídmé používání support konverzací a lidskou kontrolu AI návrhů. Dobrá dokumentace není odkladiště textů. Je to tichý člen týmu, který odpovídá dřív, než musí někdo otevřít ticket.
+
 ## Pracovní log
+- 2026-08-14: Přidána příloha FX o zákaznické dokumentaci pro privacy-first SaaS: úkolová struktura, bezpečné návody, screenshoty se syntetickými daty, datové věty, verzování, support smyčka, AI asistence a checklist.
 - 2026-08-14: Přidána příloha FW o privacy-first AI funkcích v SaaS: konkrétní práce, AI datová mapa, asistence vs. rozhodnutí, transparentní mikrotexty, AI Act filtr, výběr modelu, testování rizik a checklist.
 - 2026-08-14: Přidána příloha FV o vulnerability disclosure a bezpečnostním kontaktu: oficiální kanál, `security.txt`, pravidla testování, SLA příjmu reportů, triáž, ochrana dat, koordinované zveřejnění a checklist.
 
