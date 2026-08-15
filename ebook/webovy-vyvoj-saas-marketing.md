@@ -29139,7 +29139,147 @@ Rollback není tlačítko pro návrat času, ale připravený provozní postup. 
 
 
 
+# Příloha GI: Post-release observabilita bez datového rybníka, paniky a dashboardů pro dashboardy
+
+Release nekončí mergem, deployem ani tím, že někdo do chatu napíše „vypadá to ok“. Release končí až ve chvíli, kdy tým ví, že nová verze dělá to, co měla dělat, nerozbila kritické cesty a nevytváří datový problém, který se za tři týdny promění v incident s vlastním hrnkem na kávu.
+
+Privacy-first observabilita není zákaz měření. Je to disciplína: měřit provozní realitu dostatečně dobře, ale nesbírat osobní data jen proto, že se vejdou do logu. OpenTelemetry popisuje observabilitu přes signály jako traces, metrics a logs a zdůrazňuje vendor-neutral přístup k instrumentaci a exportu telemetrie: https://opentelemetry.io/docs/ To je dobrý technický základ. Produktově ale pořád platí: nejdřív rozhodnutí, potom signál.
+
+## GI.1 Každý release musí mít otázku, kterou po nasazení ověříš
+
+Špatné post-release ověření zní: „Koukneme na dashboardy.“ To je stejné jako říct „otevřeme lednici a uvidíme, co večeře“. Možná něco najdeš, ale plán to není.
+
+Lepší postup je napsat před releasem jednu až tři konkrétní otázky:
+
+- Dokáže nový uživatel dokončit onboarding bez nárůstu chyb?
+- Nezpomalil se export faktur u účtů s větším objemem dat?
+- Neodesíláme po změně notifikací více e-mailů, než odpovídá pravidlům?
+- Nezvedl se počet autorizovaných zamítnutí u nové role?
+- Nemění nová integrace datový tok mimo schválené systémy?
+
+Každá otázka má mít vlastníka, časové okno a signál. Pokud otázka nemá signál, není připravená na release. Pokud signál existuje jen jako osobní data v logu, není privacy-first.
+
+Praktická release věta:
+
+> „Po nasazení nové role `billing_viewer` během 30 minut ověříme počet úspěšných zobrazení faktur, počet odmítnutých přístupů a support reporty s korelačním ID. Nebudeme logovat obsah faktur ani osobní údaje zákazníků.“
+
+Tohle je nudné. Výborně. Nudné release věty zachraňují víkendy.
+
+## GI.2 Rozliš metriky, logy a traces podle práce, kterou mají dělat
+
+Ne všechno patří do logu. Ne všechno je metrika. A trace není skládka pro všechno, co se nevešlo do JSONu.
+
+Používej jednoduché rozdělení:
+
+- **Metriky** říkají kolik, jak často a jak rychle: počet požadavků, chybovost, latence, délka fronty, počet neodeslaných e-mailů.
+- **Logy** vysvětlují diskrétní události: export selhal kvůli validaci, webhook byl odmítnut, uživatel změnil nastavení retence.
+- **Traces** ukazují cestu požadavku přes služby: API, databáze, fronta, externí integrace.
+
+OpenTelemetry rozlišuje signály jako metrics, logs, traces a events v dokumentaci ke konceptům signálů: https://opentelemetry.io/docs/concepts/signals/ Pro malý SaaS tým z toho plyne jednoduché pravidlo: nezačínej nástrojem, začni otázkou. Když chceš vědět, jestli exporty zpomalily, potřebuješ metriku latence a počtu selhání. Když chceš zjistit, kde se export zasekl, pomůže trace. Když potřebuješ auditní stopu změny nastavení, patří tam bezpečný aplikační log.
+
+Privacy-first hranice:
+
+- do metrik patří agregace, ne e-mail konkrétního člověka,
+- do traces patří technické atributy, ne obsah dokumentů,
+- do logů patří důvod a korelační ID, ne celé payloady,
+- do alertů patří dopad a runbook, ne screenshot produkčních dat.
+
+## GI.3 Udělej z citlivých dat explicitní stopku
+
+Nejrychlejší cesta k datovému rybníku je logovat „dočasně pro debug“. Dočasné debug logy mají zvláštní fyzikální vlastnost: samy od sebe nemizí. Usadí se v observability nástroji, exportu, záloze a možná i ve screenshotu v chatu.
+
+OWASP Logging Cheat Sheet upozorňuje, že logy mohou obsahovat osobní i jiné citlivé informace a má samostatnou část k datům, která se mají z logování vyloučit: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html V praxi si proto napiš zakázaný seznam přímo pro produkt.
+
+Do aplikačních logů, traces ani alertů běžně nepatří:
+
+- hesla, tokeny, API klíče a session identifikátory,
+- celé requesty a response payloady,
+- obsah zpráv, dokumentů, faktur, poznámek a příloh,
+- platební údaje a bankovní identifikátory mimo nezbytné reference,
+- zdravotní, právní, personální nebo jiné citlivé informace,
+- přesné osobní identifikátory, pokud stačí interní korelační ID.
+
+Když vývojář potřebuje debugovat konkrétní problém, lepší je dočasný, schválený a časově omezený diagnostický režim než trvalé „loguj všechno“. Diagnostický režim má mít vlastníka, expiraci, auditní stopu a jasné pravidlo, co se nesmí sbírat ani během problému.
+
+## GI.4 Alert bez vlastníka je jen hlasitý šum
+
+Alert má existovat jen tehdy, když někdo ví, co s ním udělat. Jinak je to firemní budík bez tlačítka vypnout. Po pár týdnech ho tým začne ignorovat, což je přesně chvíle, kdy se ozve ten jeden alert, který byl důležitý. Samozřejmě ve tři ráno, protože produkce má smysl pro humor.
+
+Každý alert popiš takhle:
+
+- **Co se stalo:** konkrétní signál a práh.
+- **Proč to vadí:** dopad na uživatele, data nebo provoz.
+- **Kdo reaguje:** role nebo člověk, ne „někdo“.
+- **Co udělat první:** odkaz na runbook nebo tři první kroky.
+- **Kdy eskalovat:** časový limit nebo typ dopadu.
+- **Co neposílat do chatu:** zákaznická data, tajemství, celé logy.
+
+NIST Cybersecurity Framework 2.0 popisuje funkce Govern, Identify, Protect, Detect, Respond a Recover a bere detekci i reakci jako součást průběžného řízení rizik: https://www.nist.gov/cyberframework Privacy-first tým si z toho nemusí dělat certifikační divadlo. Stačí praktická lekce: detekce bez reakce je polovina procesu. Reakce bez datové disciplíny je riziko.
+
+## GI.5 Post-release review má být krátké a pravidelné
+
+Po větším releasu udělej do 24 až 72 hodin krátké review. Ne meeting pro dvacet lidí. Spíš provozní zápis, který odpoví na pár otázek.
+
+Šablona:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Co jsme nasadili? | Název změny, odkaz na release nebo ticket |
+| Jaké signály jsme sledovali? | Metriky, logy, traces, support reporty |
+| Co se zlepšilo? | Konkrétní výsledek nebo potvrzená hypotéza |
+| Co se zhoršilo? | Chyby, latence, zmatek v UI, support dotazy |
+| Byl datový dopad? | Nové toky, nečekané logy, exporty, přístupy |
+| Co uklidíme? | Debug logy, dočasné flagy, dokumentace, alerty |
+| Co měníme příště? | Jedno rozhodnutí pro další release |
+
+Největší hodnota review není v tom, že někdo napíše „vše ok“. Hodnota je v zachycení malých signálů dřív, než se z nich stane provozní folklór. Pokud se po každém releasu objeví tři support dotazy ke stejné věci, není to support problém. Je to produktový signál s čepicí.
+
+## GI.6 Checklist privacy-first observability po releasu
+
+Před releasem:
+
+- Má změna jednu až tři ověřovací otázky?
+- Víme, které metriky, logy nebo traces odpoví na každou otázku?
+- Je jasné, jaká data se nesmí logovat ani dočasně?
+- Existuje korelační ID pro podporu bez kopírování osobních údajů?
+- Mají alerty vlastníka, dopad a první krok?
+- Je u rizikové změny připravená stopka nebo rollback cesta?
+
+Po nasazení:
+
+- Ověřili jsme kritické cesty v reálném prostředí?
+- Sledujeme chybovost, latenci a support signály v definovaném okně?
+- Nevznikly nové debug logy s citlivými údaji?
+- Nevytvořily se dočasné exporty, screenshoty nebo payloady bez expirace?
+- Ví support, co se změnilo a jak popsat dopad zákazníkovi?
+
+Do 72 hodin:
+
+- Proběhlo krátké post-release review?
+- Smazali jsme dočasné diagnostické zapnutí?
+- Upravili jsme alerty, které byly příliš hlučné nebo slepé?
+- Doplnili jsme dokumentaci, runbook nebo test?
+- Má další release jedno konkrétní zlepšení z této zkušenosti?
+
+## Codyho komentář
+
+Observabilita není sbírání všeho, co se hýbe. To je jen digitální křečkování s dražším účtem. Dobrá observabilita pomáhá týmu rychle pochopit dopad změny, aniž by z uživatelů dělala surovinu pro nekonečné debugování. Méně dat, lepší otázky, klidnější provoz. Takové malé evropské kouzlo bez kouře a pixelů.
+
+## Zdroje k příloze
+
+- OpenTelemetry — Documentation; vendor-neutral observability framework pro práci se signály jako traces, metrics a logs: https://opentelemetry.io/docs/
+- OpenTelemetry — Signals; přehled kategorií telemetrie včetně metrics, logs, traces a events: https://opentelemetry.io/docs/concepts/signals/
+- OWASP — Logging Cheat Sheet; bezpečnostní doporučení pro aplikační logování a zacházení s citlivými daty v logách: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+- NIST — Cybersecurity Framework; rámec pro řízení kybernetických rizik včetně detekce, reakce a obnovy: https://www.nist.gov/cyberframework
+
+## Shrnutí přílohy
+
+Post-release observabilita má odpovídat na konkrétní otázky, ne vyrábět další dashboardový hluk. Privacy-first tým předem ví, které signály potřebuje, chrání logy před citlivými daty, rozlišuje metriky, logy a traces, dává alertům vlastníka a po releasu uklízí dočasné diagnostické stopy. Cílem není vidět všechno. Cílem je včas pochopit důležité věci bez zbytečného sběru dat.
+
+
+
 ## Pracovní log
+- 2026-08-15: Přidána příloha GI o post-release observabilitě: ověřovací otázky po releasu, rozlišení metrik/logů/traces, zákaz citlivých dat v telemetrii, alerty s vlastníkem, post-release review a checklist.
 
 - 2026-08-15: Přidána příloha GH o rollbacku a obnově po špatném nasazení: rollback plán před releasem, vrstvy návratu, feature flagy, databázové migrace, canary signály, komunikace, úklid a checklist.
 - 2026-08-15: Přidána příloha GG o hotfix procesu: rozhodnutí, kdy je oprava opravdu urgentní, vlastnictví, úzký rozsah, ověření bez produkčních dat, reverzibilní nasazení, zákaznická komunikace, úklid po hotfixi a checklist.
