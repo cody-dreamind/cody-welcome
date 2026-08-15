@@ -29993,7 +29993,185 @@ Browser storage je provozní plocha, ne odpadkový koš na tokeny, preference, e
 
 
 
+# Příloha GN: Rate limiting a anti-abuse bez sledovacího průmyslu, CAPTCHA pekla a blokování vlastních zákazníků
+
+Bot není vždy nepřítel. Vyhledávač, monitoring, integrační partner nebo zákaznický skript můžou být legitimní automatizace. Problém je automatizace, která vyčerpává zdroje, zkouší hesla, zakládá falešné účty, scrapeuje data, testuje kupony, zahlcuje formuláře nebo kazí produktové metriky. Malý SaaS na to často reaguje dvěma špatnými extrémy: buď nedělá nic, nebo zapne velkou anti-bot krabici, která sbírá víc signálů než aplikace samotná. Gratuluju, místo obrany máš datovou chobotnici s logem dodavatele.
+
+Privacy-first anti-abuse přístup je civilizovanější: nejdřív pojmenuj rizikové toky, potom nastav přiměřené limity, potom přidej postupné reakce a až nakonec uvažuj o tvrdších výzvách. Cílem není dokázat, že každý návštěvník je člověk. Cílem je udržet službu dostupnou, férovou a bezpečnou bez toho, aby ses z každého uživatele snažil vyrobit otisk prstu.
+
+## GN.1 Nejdřív mapuj zneužitelné cesty, ne IP adresy
+
+Rate limiting podle IP je užitečný základ, ale mizerná produktová mapa. Útočník může použít proxy síť, firemní zákazníci můžou sdílet jednu veřejnou IP a mobilní sítě dokážou udělat provozní origami, ze kterého se adminovi protočí oči. Začni proto otázkou: kde by automatizace způsobila reálnou škodu?
+
+Typická mapa pro malý SaaS:
+
+| Tok | Riziko | Primární klíč limitu | Sekundární signál | Férová reakce |
+|---|---|---|---|---|
+| Přihlášení | credential stuffing, password spraying | účet + IP + e-mail hash | počet neúspěchů, rychlost | zpomalení, MFA, dočasná pauza |
+| Registrace | falešné účty, spam workspaces | e-mail doména + IP + zařízení session | disposable domény, velocity | ověření e-mailu, review fronta |
+| Kontaktní formulář | spam, phishing odkazy | IP + session + formulář | honeypot, čas vyplnění | tiché odmítnutí, moderace |
+| API endpoint | scraping, vyčerpání kvóty | API token + organizace | endpoint, metoda, objem | `429`, quota hlavičky, support cesta |
+| Export dat | exfiltrace, nákladná práce | uživatel + workspace | velikost, frekvence | fronta, potvrzení, audit log |
+| Vyhledávání | scraping a nákladné dotazy | session + workspace | dotazová složitost | limit, cache, zjednodušení dotazu |
+
+Tahle tabulka má být v repozitáři nebo knowledge bázi, ne v hlavě jednoho backendového kouzelníka. Každý řádek potřebuje vlastníka, protože „někdo by měl nastavit limit“ je jen zdvořilý způsob, jak říct „nikdo to neudělá“.
+
+## GN.2 Limituj podle více klíčů a odpovídej předvídatelně
+
+Dobré limity nejsou jeden globální firewallový knoflík. Potřebuješ kombinovat vrstvy:
+
+- **IP limit** jako hrubé síto pro extrémní provoz.
+- **Session limit** pro anonymní formuláře a onboarding.
+- **Uživatelský limit** pro akce po přihlášení.
+- **Workspace limit** pro týmové účty, kde více lidí sdílí jednu organizaci.
+- **Endpoint limit** pro citlivé nebo drahé operace.
+- **Business limit** pro reálné škody, například počet exportů, pozvánek nebo pokusů o platbu.
+
+Praktický výchozí návrh pro API:
+
+```text
+GET /api/projects
+- klíč: api_token + workspace_id
+- limit: běžný provoz + rozumná rezerva
+- odpověď při překročení: 429 Too Many Requests
+- hlavičky: RateLimit-Limit, RateLimit-Remaining, RateLimit-Reset
+- log: endpoint, workspace_id, limit_rule_id, correlation_id, bez payloadu
+```
+
+Limity dělej čitelné. Pokud zákazník provozuje legitimní integraci, musí vědět, co se stalo a kdy to může zkusit znovu. `429` bez vysvětlení je jen pasivně agresivní support ticket.
+
+## GN.3 Přihlašování chraň zpomalením, ne zákaznickou pastí
+
+Přihlášení je citlivý tok, protože špatná obrana může pomoct útočníkovi i naštvat uživatele. Tvrdý account lockout po pár pokusech vypadá statečně, dokud někdo nezačne zamykat účty cizím lidem. Lepší je kombinace jemnějších opatření:
+
+- počítej neúspěšné pokusy pro účet i pro zdroj provozu,
+- používej postupné zpoždění nebo krátkou pauzu místo okamžitého zamčení,
+- po rizikovém vzoru vyžádej MFA nebo re-authentication,
+- neprozrazuj, jestli existuje účet pro daný e-mail,
+- používej jednotné chybové hlášky,
+- loguj bezpečnostní událost, ale ne celé přihlašovací údaje,
+- po skutečně podezřelé aktivitě pošli uživateli klidné upozornění.
+
+Příklad mikrotextu:
+
+```text
+Přihlášení se teď na chvíli zpomalilo kvůli většímu počtu neúspěšných pokusů. Zkus to prosím za pár minut, nebo použij obnovu přístupu.
+```
+
+To je lepší než „Invalid credentials“ třicetkrát za sebou a potom digitální dveře zabouchnuté bez kliky.
+
+## GN.4 CAPTCHA ber jako poslední brzdu, ne výchozí UX
+
+CAPTCHA je lákavá, protože vypadá jako hotová obrana. Jenže často trestá legitimní uživatele, rozbíjí přístupnost, zhoršuje konverzi a někdy přesouvá problém k dodavateli, který sbírá vlastní signály. Privacy-first otázka nezní „kterou CAPTCHA knihovnu zapneme?“, ale „jde riziko snížit bez viditelné výzvy?“
+
+Pořadí obrany:
+
+1. Levná serverová validace a rate limit.
+2. Honeypot pole pro jednoduchý spam.
+3. Časové a behaviorální signály bez trvalého fingerprintingu.
+4. Ověření e-mailu u registrace.
+5. Dočasná fronta nebo moderace u rizikového obsahu.
+6. Viditelná výzva jen u podezřelého provozu.
+
+Pokud výzvu použiješ, musí mít alternativu. Ne každý člověk snadno opisuje obrázky, kliká na autobusy nebo skládá puzzle jako smutný brigádník pro algoritmus. Přístupnost není bonus, je to součást obrany, která nezamyká dveře vlastním uživatelům.
+
+## GN.5 Loguj rozhodnutí, ne životopis návštěvníka
+
+Anti-abuse bez logů nejde ladit. Anti-abuse s příliš detailními logy zase vyrábí nové riziko. Potřebuješ záznam, který odpoví na provozní otázky, ale nesbírá zbytečné osobní údaje.
+
+Dobrá anti-abuse událost:
+
+```json
+{
+  "event": "rate_limit_triggered",
+  "rule_id": "login_failed_account_ip_v1",
+  "endpoint": "/login",
+  "actor_type": "anonymous_or_user",
+  "workspace_id": "pokud_existuje",
+  "correlation_id": "req_...",
+  "decision": "delay",
+  "retry_after_seconds": 120
+}
+```
+
+Co do ní nepatří:
+
+- hesla, tokeny, recovery kódy a celé cookies,
+- kompletní request/response payloady,
+- přesné dlouhodobé fingerprinty bez jasného účelu,
+- obsah formulářů, pokud stačí typ chyby,
+- osobní poznámky typu „tenhle zákazník zase něco rozbil“.
+
+Log má pomoct odpovědět: která pravidla pálí moc často, koho omylem omezujeme, kde roste útok a co má udělat support. Nemá být archeologické naleziště citlivých dat.
+
+## GN.6 Přidej support cestu pro legitimní výjimky
+
+Každý limit je odhad. Někdy zákazník oprávněně potřebuje importovat historická data, spustit nový reporting, napojit integraci nebo poslat větší dávku pozvánek. Pokud nemáš proces pro výjimky, zákazník začne limit obcházet. A když zákazník začne obcházet limit, produkt právě prohrál s vlastním UX.
+
+Šablona interní výjimky:
+
+| Pole | Příklad |
+|---|---|
+| Zákazník / workspace | `acme-eu` |
+| Tok | import faktur přes API |
+| Důvod | jednorázová migrace ze starého systému |
+| Rozsah | 48 hodin, endpoint `/api/invoices/import` |
+| Navýšení | 5× běžný limit, jen pro konkrétní token |
+| Rizika | vyšší zátěž DB, citlivá finanční data |
+| Kontrola | monitoring fronty, audit log, po expiraci návrat |
+| Schválil | vlastník produktu + technický vlastník |
+
+Výjimka musí mít expiraci. Trvalá výjimka je jen nová produkční konfigurace, která zapomněla projít review.
+
+## GN.7 Anti-abuse review dělej po incidentech i před kampaněmi
+
+Limity se nemají ladit jen po útoku. Ladí se i před tím, než marketing pošle větší kampaň, obchod rozjede outbound, produkt spustí veřejnou betu nebo zákazník začne migraci. Jinak si vlastní růst spleteš s útokem a vlastní obranu s výpadkem. To je krásně absurdní, ale fakt drahé.
+
+Krátké review před větší akcí:
+
+1. Které endpointy dostanou víc provozu?
+2. Jak poznáme legitimní nárůst od zneužití?
+3. Který limit může pálit falešně pozitivně?
+4. Kdo sleduje dashboard a support během první hodiny?
+5. Jaký mikrotext uvidí uživatel při omezení?
+6. Jak rychle umíme bezpečně navýšit limit?
+7. Kdy se dočasná změna vrací zpět?
+
+Privacy-first provoz není „nikdy nic neměř“. Je to „měř přesně to, co potřebuješ k ochraně služby, a smaž zbytek dřív, než se z něj stane problém s vlastní kanceláří“.
+
+## GN.8 Checklist rate limitingu a anti-abuse
+
+- [ ] Máme mapu rizikových toků: login, registrace, formuláře, API, exporty, vyhledávání a drahé operace.
+- [ ] Každý limit má vlastníka, účel, klíč, reakci a support postup.
+- [ ] Nepoužíváme jen IP limit; kombinujeme IP, session, účet, workspace, endpoint a business pravidla.
+- [ ] Přihlášení chráníme postupným zpomalením, MFA/re-authentication a neutrálními chybami, ne slepým zamykáním účtů.
+- [ ] API vrací srozumitelný `429` a quota informace, aby legitimní integrace mohly reagovat.
+- [ ] CAPTCHA nebo podobná výzva je až pozdější vrstva a má přístupnou alternativu.
+- [ ] Anti-abuse logy neobsahují hesla, tokeny, celé payloady, trvalé fingerprinty ani zbytečné osobní údaje.
+- [ ] Výjimky mají důvod, rozsah, vlastníka, expiraci a návrat do normálu.
+- [ ] Před kampaní, betou nebo migrací kontrolujeme limity stejně jako výkon a support kapacitu.
+- [ ] Retence anti-abuse signálů je krátká a popsaná v datové mapě nebo interní dokumentaci.
+
+## Codyho komentář
+
+Rate limiting není trest pro uživatele. Je to dopravní značení pro systém, který se jinak nechá přesvědčit, že tisíc pokusů o login za minutu je jen hodně motivovaný zákazník. Nejlepší anti-abuse ochrana je nudná, vrstvená a vysvětlitelná. Když kvůli ní potřebuješ sbírat víc dat než kvůli samotné službě, tak už nechráníš produkt. Stavíš malou špionážní agenturu s tlačítkem „submit“.
+
+## Zdroje k příloze
+
+- OWASP Cheat Sheet Series — Bot Management and Anti-Automation; hrozby automatizace, vrstvená obrana, rate limiting, CAPTCHA alternativy a privacy-aware přístup: https://cheatsheetseries.owasp.org/cheatsheets/Bot_Management_and_Anti-Automation_Cheat_Sheet.html
+- OWASP Cheat Sheet Series — Authentication; ochrana proti automatizovaným útokům, login throttling, chybové hlášky a logging/monitoring u autentizace: https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html
+- OWASP Cheat Sheet Series — Credential Stuffing Prevention; obrana proti credential stuffingu a password sprayingu: https://cheatsheetseries.owasp.org/cheatsheets/Credential_Stuffing_Prevention_Cheat_Sheet.html
+- OWASP Cheat Sheet Series — Denial of Service; principy odolnosti proti DoS, analýza ploch útoku a rate limiting jako jedna z vrstev: https://cheatsheetseries.owasp.org/cheatsheets/Denial_of_Service_Cheat_Sheet.html
+- OWASP Cheat Sheet Series — Logging; bezpečnostní logování, návrh událostí a zacházení s citlivými daty v logách: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+
+## Shrnutí přílohy
+
+Rate limiting a anti-abuse ochrana mají chránit dostupnost, účty, data a obchodní logiku bez toho, aby se z produktu stal sledovací stroj. Privacy-first tým mapuje rizikové toky, kombinuje více klíčů limitů, používá postupné reakce, chrání přihlášení bez slepého zamykání, drží CAPTCHA jako pozdější možnost, loguje rozhodnutí místo citlivých payloadů a má proces pro legitimní výjimky. Dobrá obrana je jako dobrý vrátný: všimne si problému, pustí správné lidi dovnitř a nepíše si jejich rodokmen na ubrousek.
+
+
+
 ## Pracovní log
+- 2026-08-15: Přidána příloha GN o rate limitingu a anti-abuse: mapa zneužitelných toků, limity podle více klíčů, bezpečné přihlašování, CAPTCHA jako pozdější vrstva, střídmé logování, support výjimky, review před kampaněmi a privacy-first checklist.
 - 2026-08-15: Přidána příloha GM o cookie a browser storage hygieně: inventura cookies a Web Storage, bezpečné atributy session cookie, rizika `localStorage`, consent jako produktové nastavení, kategorie účelů, retence, testovací scénáře a privacy-first checklist.
 - 2026-08-15: Přidána příloha GL o doménové a DNS hygieně pro privacy-first SaaS: vlastnictví domén, inventura záznamů, TTL změny, SPF/DKIM/DMARC, subdomény, release proces pro DNS, evropský provoz a checklist.
 - 2026-08-15: Přidána příloha GK o transakčních e-mailech v privacy-first SaaS: kategorie zpráv, minimalizace dat v šablonách, SPF/DKIM/DMARC, bezpečné logy, preference centrum, přílohy, incidentní e-maily a checklist.
