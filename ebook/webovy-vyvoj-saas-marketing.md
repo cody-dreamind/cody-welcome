@@ -31205,7 +31205,172 @@ Import dat je onboarding v montérkách. Není lesklý jako hero sekce, ale rozh
 
 Bezpečný import dat není tlačítko pro nahrání CSV, ale řízený proces od účelu přes validaci, mapování, preview, potvrzení, zápis, report a retenci. Privacy-first SaaS přijímá jen nutná data, zachází se soubory jako s nedůvěryhodným vstupem, chrání volné texty, řeší duplicity předem, loguje souhrny místo kopií dat a maže importní artefakty v jasném čase. Dobrý import šetří zákazníkovi práci. Špatný import vyrábí nové problémy v dávkách.
 
+# Příloha GU: Export dat a odchod zákazníka bez rukojmí, zip chaosu a falešné portability
+
+Export dat je okamžik pravdy. Dokud zákazník jen kliká v aplikaci, může produkt působit krásně. Jakmile ale chce data stáhnout, předat auditorovi, přesunout do jiného systému nebo odejít, ukáže se, jestli SaaS respektuje zákazníka, nebo ho drží za kotník v datovém sklepě.
+
+Privacy-first produkt nebere export jako hrozbu. Bere ho jako důkaz důvěry: „Data jsou vaše, my vám pomáháme s prací.“ Ano, dobrý export může zákazníkovi usnadnit odchod. To je v pořádku. Když jediná obrana proti odchodu spočívá v tom, že data nejdou dostat ven, není to produktová strategie. Je to digitální lepidlo z devadesátek.
+
+## GU.1 Nejdřív rozděl export podle účelu
+
+Neexistuje jeden univerzální export. Jiný účel má osobní export pro uživatele, jiný účetní export pro firmu, jiný záloha administrátora a jiný migrační balík při ukončení služby.
+
+Praktická mapa exportů:
+
+| Typ exportu | Kdo ho potřebuje | Co má obsahovat | Co do něj nepatří |
+| --- | --- | --- | --- |
+| Osobní export | Konkrétní uživatel | Údaje, které se ho týkají, jeho nastavení, vlastní obsah | Data jiných uživatelů, interní poznámky podpory, bezpečnostní logy bez důvodu |
+| Firemní export | Vlastník workspace | Projekty, záznamy, nastavení týmu, fakturační doklady podle oprávnění | Soukromé údaje členů týmu mimo nezbytný rozsah |
+| Migrační export | Admin nebo vlastník | Strukturovaná data pro přenos do jiného systému | Tajemství, API klíče, hashovaná hesla, interní identifikátory bez významu |
+| Auditní export | Compliance, účetní, právní účel | Vybrané záznamy, časové období, auditní stopa relevantních akcí | Kompletní databázová skládka „pro jistotu“ |
+| Support export | Podpora při řešení problému | Omezený výřez dat k ticketu | Celý účet, pokud problém souvisí s jedním záznamem |
+
+Pravidlo: tlačítko „Exportovat vše“ bývá pohodlné pro vývojáře, ale nebezpečné pro produkt. Lepší je nabídnout několik jasných exportů podle práce, kterou zákazník řeší.
+
+## GU.2 Portabilita není jen ZIP soubor
+
+GDPR u práva na přenositelnost dat mluví o tom, že člověk může získat osobní údaje, které se ho týkají a které poskytl, ve strukturovaném, běžně používaném a strojově čitelném formátu; Evropská komise zároveň připomíná, že se toto právo typicky týká zpracování založeného na smlouvě nebo souhlasu a automatizovaného zpracování: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/dealing-individuals-requests_en
+
+EDPB k právu na přenositelnost vydal samostatné pokyny WP242, které zdůrazňují praktickou použitelnost a interoperabilitu exportu: https://www.edpb.europa.eu/documents/guideline/guidelines-on-the-right-to-data-portability-under-regulation-2016679-wp242_en
+
+Pro SaaS tým z toho plyne produktová lekce: export má být použitelný bez archeologického výzkumu. Nejen „tady máte zip, hodně štěstí a pozdravujte v Excelu“.
+
+Dobrý export proto obsahuje:
+
+- strukturovaný formát pro data, typicky CSV nebo JSON podle typu objektu;
+- čitelný popis polí, ideálně `README.md` přímo v exportním balíku;
+- stabilní identifikátory objektů tam, kde jsou potřebné pro vazby;
+- čas vytvoření exportu, rozsah a verzi schématu;
+- oddělené přílohy a metadata, ne všechno nacpané do jednoho obřího souboru;
+- jasný seznam toho, co export neobsahuje a proč.
+
+Příklad struktury migračního balíku:
+
+```text
+export-2026-08-15/
+  README.md
+  manifest.json
+  users.csv
+  projects.csv
+  tasks.csv
+  comments.csv
+  attachments/
+    2026/
+      invoice-1234.pdf
+```
+
+`manifest.json` může nést technické souhrny: verzi exportu, datum, počet záznamů, kontrolní součty souborů a informaci, kdo export spustil. `README.md` má být pro člověka: co v balíku je, jaké jsou formáty, jak se čtou vazby a na koho se obrátit při problému.
+
+## GU.3 Oprávnění k exportu řeš přísněji než běžné čtení
+
+Export je hromadná operace. To znamená větší dopad než běžné zobrazení jednoho záznamu. Uživatel, který smí vidět projekt v aplikaci, nemusí automaticky smět stáhnout kompletní historii workspace.
+
+Bezpečný model:
+
+- Osobní export může spustit uživatel pro svá data.
+- Firemní export může spustit jen vlastník nebo admin s jasnou rolí.
+- Export obsahující osobní údaje členů týmu vyžaduje zobrazení dopadu před potvrzením.
+- Velké exporty posílej přes dočasný odkaz s expirací, ne jako veřejně uhádnutelné URL.
+- Každý export zapiš do auditní stopy: kdo, kdy, jaký rozsah, kolik záznamů, bez kopie obsahu.
+- U citlivých exportů zvaž druhý krok: potvrzení heslem, passkey, nebo schválení vlastníkem workspace.
+
+Praktický mikrotext před exportem:
+
+> „Export bude obsahovat projekty, úkoly, komentáře a přílohy za období 1. 1. 2026 až 15. 8. 2026. Soubor bude dostupný 48 hodin. Akce se zapíše do auditního logu workspace.“
+
+Tohle je férové. Uživatel ví, co dělá. Firma má stopu. Produkt nevyrábí tajný vývoz dat jen proto, že někdo našel tlačítko v menu.
+
+## GU.4 Minimalizuj obsah exportu stejně tvrdě jako sběr dat
+
+Export není výmluva pro zabalení celé databáze. Pokud data nemají jasný účel, do exportu nepatří. Typická chyba je přibalit interní ID, debug sloupce, soft-delete záznamy, poznámky podpory, technické tokeny nebo systémové metadata, která zákazník neumí použít a která zvyšují riziko úniku.
+
+Praktická pravidla minimalizace:
+
+- Neexportuj hesla, API klíče, session tokeny, refresh tokeny ani interní secrets. Nikdy. Ani „jen hash“ pro jistotu.
+- Interní identifikátory nahraď stabilními exportními ID, pokud nejsou pro zákazníka smysluplné.
+- Soft-deleted data exportuj jen tehdy, pokud to dává právní nebo produktový smysl a zákazník tomu rozumí.
+- Volné texty ber jako rizikové: mohou obsahovat osobní údaje, obchodní tajemství i hesla vložená omylem.
+- Přílohy exportuj odděleně a zachovej původní název jen tam, kde není bezpečnostní problém.
+- U auditních stop exportuj relevantní akce, ne kompletní interní logování aplikace.
+
+Codyho komentář: Export dat má být jako dobře zabalený kufr, ne vyklopený šuplík. Když zákazník po otevření exportu najde `debug_payload_old_final_2`, někde cestou umřelo produktové sebevědomí.
+
+## GU.5 Udělej export opakovatelný, verzovaný a testovaný
+
+Exporty se často rozbijí tiše. Přidá se nový sloupec, přejmenuje se stav, změní se vazba mezi tabulkami a nikdo si nevšimne, že migrační balík už nejde načíst. Zákazník to zjistí až ve chvíli, kdy odchází, audituje nebo řeší incident. Skvělý timing, pokud sbíráš noční můry.
+
+Minimum provozní kvality:
+
+- Každé exportní schéma verzuj: například `export_schema_version: 2026-08-15`.
+- Drž ukázkový export v testech bez produkčních dat.
+- Testuj, že export jde znovu importovat do testovacího prostředí nebo alespoň validovat proti schématu.
+- U CSV kontroluj kódování, oddělovače, escapování nových řádků a prázdné hodnoty.
+- U JSON exportu zveřejni nebo přibal JSON Schema, pokud data mají používat integrace.
+- Při změně schématu napiš migrační poznámku pro zákazníky i support.
+
+Jednoduchý testovací scénář:
+
+1. Vytvoř testovací workspace se dvěma uživateli, dvěma projekty, komentářem, přílohou a archivovaným záznamem.
+2. Spusť firemní export.
+3. Ověř počty objektů v manifestu.
+4. Otevři CSV v běžném tabulkovém nástroji i parserem v testu.
+5. Ověř, že export neobsahuje session tokeny, interní poznámky podpory ani skrytá pole.
+6. Zkus data nahrát do importního sandboxu nebo validačního skriptu.
+
+## GU.6 Odchod zákazníka napiš jako proces, ne jako rozchodovou scénu
+
+Ukončení služby je součást produktu. Pokud zákazník odchází, pořád si zaslouží jasné kroky: export, zrušení předplatného, retenční období, smazání dat, potvrzení a kontakt na podporu. Čím víc to schováš, tím víc ticketů vyrobíš. A ticket s předmětem „kde jsou moje data“ není přesně ten vibe, který chceš v pátek odpoledne.
+
+Šablona odchodového procesu:
+
+| Krok | Co má produkt říct |
+| --- | --- |
+| Před zrušením | Co se stane s přístupem, fakturací a daty |
+| Export | Jaký export je dostupný, jak dlouho trvá a kdo ho může spustit |
+| Retence | Jak dlouho data zůstanou kvůli obnově, účetnictví nebo právním důvodům |
+| Smazání | Co se smaže, co se anonymizuje a co musí zůstat podle zákona |
+| Potvrzení | Kdy zákazník dostane potvrzení a kde najde historii žádostí |
+| Návrat | Jestli a jak lze účet obnovit v retenčním okně |
+
+Praktický mikrotext:
+
+> „Po zrušení předplatného bude workspace dostupný ke čtení 14 dní. Během této doby můžete stáhnout firemní export. Po 30 dnech smažeme pracovní data, pokud nám právní povinnost neukládá uchovat vybrané doklady déle.“
+
+Tuhle větu musí samozřejmě zkontrolovat konkrétní právní a účetní realita firmy. Ale produktově je správná: říká čas, rozsah a výjimku.
+
+## GU.7 Checklist exportu a odchodu zákazníka
+
+Před spuštěním exportů a offboardingu projdi tenhle checklist:
+
+- Je jasné, jaké typy exportů produkt nabízí a pro koho jsou určené?
+- Má každý export definovaný účel, rozsah, formát a vlastníka?
+- Obsahuje export `README.md` nebo jiný lidsky čitelný popis polí?
+- Je export strojově čitelný a použitelný bez ručního kopírování z PDF?
+- Neobsahuje export secrets, session tokeny, interní support poznámky ani zbytečné debug sloupce?
+- Kontroluje produkt oprávnění k hromadnému exportu přísněji než běžné čtení?
+- Má odkaz ke stažení expiraci a není veřejně uhádnutelný?
+- Zapisuje se export do auditní stopy bez kopírování obsahu?
+- Je exportní schéma verzované a testované na ukázkových datech?
+- Má zákazník před ukončením jasný proces: export, retence, smazání, potvrzení?
+- Umí support vysvětlit rozdíl mezi osobním exportem, firemním exportem a právní žádostí subjektu údajů?
+- Existuje pravidelná kontrola, že exporty stále odpovídají aktuálnímu datovému modelu?
+
+## Codyho komentář
+
+Nejlepší SaaS produkty se nebojí tlačítka „Exportovat“. Vědí, že loajalita nevzniká tím, že uživateli zamkneš data. Vzniká tím, že mu šetříš čas, mluvíš férově a když chce odejít, nechováš se jako smutný upír s obchodními podmínkami. Privacy-first export je produktová slušnost v technické podobě.
+
+## Zdroje k příloze
+
+- European Commission — Dealing with individuals' requests, data portability requests: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/dealing-individuals-requests_en
+- European Data Protection Board — Guidelines on the right to data portability under Regulation 2016/679, WP242 rev.01: https://www.edpb.europa.eu/documents/guideline/guidelines-on-the-right-to-data-portability-under-regulation-2016679-wp242_en
+
+## Shrnutí přílohy
+
+Export dat a odchod zákazníka jsou testem důvěryhodnosti SaaS. Privacy-first produkt rozlišuje osobní, firemní, migrační, auditní a support exporty, používá strojově čitelné formáty, přidává lidský popis polí, omezuje obsah na nutný rozsah, chrání hromadné exporty oprávněním a expirací, zapisuje auditní stopu bez úniku obsahu a dělá z ukončení služby jasný proces. Data zákazníka nejsou rukojmí. Jsou to data zákazníka. Překvapivé, já vím.
+
 ## Pracovní log
+
+- 2026-08-15: Přidána příloha GU o exportu dat a odchodu zákazníka: typy exportů, portabilita, oprávnění, minimalizace obsahu, verzované schéma, testování, offboardingový proces a privacy-first checklist.
 
 - 2026-08-15: Přidána příloha GT o bezpečném importu dat: účel importu, nedůvěryhodné soubory, CSV realita, doménová validace, preview před zápisem, duplicity, rollback, chybové reporty a privacy-first checklist.
 - 2026-08-15: Přidána příloha GS o konfiguraci a feature flagech v privacy-first SaaS: členění konfigurace podle rizika, secrets, životní cyklus flagů, střídmá segmentace, oddělení prostředí, audit změn a checklist.
