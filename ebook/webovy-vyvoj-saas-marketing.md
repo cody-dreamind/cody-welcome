@@ -31028,8 +31028,186 @@ Feature flag je jako vypínač světla. Skvělý, když víš, k čemu patří. 
 
 Konfigurace a feature flagy jsou bezpečnostní i produktová vrstva SaaS provozu. Dobré nastavení odděluje běžnou konfiguraci od secrets, drží tajemství mimo repozitář, dává každému flagu vlastníka a expiraci, omezuje invazivní segmentaci, skutečně izoluje prostředí, loguje změny bez úniku hodnot a umožňuje rychlý rollback bez datového chaosu. Privacy-first konfigurace není sbírka proměnných. Je to řízený systém změn.
 
+# Příloha GT: Import dat bez CSV pekla, toxických souborů a tiché migrace špatných sloupců
+
+Import dat je jeden z těch momentů, kdy SaaS buď působí dospěle, nebo se změní v supportovou reality show. Zákazník chce převést kontakty, faktury, projekty, produkty nebo historické záznamy. Tým chce „rychle nahrát CSV“. A někde mezi tím číhá špatné kódování, citlivá data v poznámce, duplicitní řádky, neočekávaný oddělovač, makro v souboru, spreadsheet formula injection a mapa polí, kterou kdysi někdo pojmenoval `misc2`.
+
+Privacy-first import není jen validace formátu. Je to řízený proces: zákazník přesně ví, co nahrává, systém přijme jen nutná data, citlivé soubory se zbytečně neuchovávají a chyba v importu nepošle cizí data do cizího účtu. Suché? Ano. Užitečné? Taky ano. Jako bezpečnostní pás, jen s méně romantickým názvem.
+
+## GT.1 Nejdřív popiš účel importu, ne typ souboru
+
+Špatné zadání zní: „Přidej import CSV.“ Dobré zadání zní: „Umožni zákazníkovi přenést seznam kontaktů z předchozího systému tak, aby mohl do 10 minut začít pracovat s účty, jmény, e-maily a stavem souhlasu.“
+
+Rozdíl je zásadní. Typ souboru je technický detail. Účel importu určuje, jaká data přijímáš, jaká odmítáš a jak bude vypadat bezpečné ověření před zápisem do produkce.
+
+Mini šablona pro importní účel:
+
+| Otázka | Praktická odpověď |
+| --- | --- |
+| Co zákazník převádí? | Například kontakty, produkty, úkoly, faktury, projektové položky |
+| Proč to potřebuje? | Aby mohl pokračovat v práci bez ručního přepisování |
+| Jaké sloupce jsou povinné? | Jen minimum nutné pro vznik záznamu |
+| Jaké sloupce jsou rizikové? | Poznámky, osobní identifikátory, interní komentáře, přílohy, volný text |
+| Kdo import spouští? | Role s oprávněním spravovat daný typ dat |
+| Co se stane po chybě? | Nic se nezapíše, nebo se zapíší jen validní řádky s jasným reportem |
+
+Praktické doporučení: import vždy pojmenuj podle objektu a výsledku. `Import kontaktů` je lepší než `CSV upload`. `Přenést produkty z e-shopu` je lepší než `Nahrát soubor`. Produktový jazyk drží tým u zákaznického výsledku, ne u technické zkratky.
+
+## GT.2 Soubor ber jako nedůvěryhodný balík, ne jako laskavý dárek
+
+Každý nahraný soubor je nedůvěryhodný vstup. Ne proto, že zákazník je zločinec. Protože chyby, exporty z jiných systémů a automatické konverze umí nadělat krásný binec. OWASP u nahrávání souborů doporučuje mimo jiné povolovat jen očekávané typy, ověřovat přípony i obsah, přejmenovávat soubory, omezovat velikost, ukládat mimo webroot a kontrolovat soubory bezpečnostně: https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html
+
+Minimum pro importní soubory:
+
+- Povolené formáty drž úzké: typicky CSV, případně XLSX jen pokud opravdu potřebuješ spreadsheet workflow.
+- Omez velikost souboru, počet řádků a počet sloupců podle reálného use-casu.
+- Nepoužívej původní název souboru jako cestu, identifikátor ani důvěryhodný údaj.
+- Soubory ukládej do izolovaného úložiště s krátkou retencí.
+- Import zpracovávej asynchronně, ale s jasným stavem: nahráno, validováno, čeká na potvrzení, importováno, smazáno.
+- Výsledek importu loguj jako událost, ne jako kopii celého souboru.
+
+Příklad produktového pravidla:
+
+> „Importní soubor držíme maximálně 7 dní kvůli řešení chyb importu. Po úspěšném importu a uplynutí retenční doby soubor smažeme. Do trvalé historie ukládáme jen souhrn: kdo import spustil, kdy, kolik řádků prošlo, kolik selhalo a jaký typ dat byl importován.“
+
+Tohle je přesně ten druh věty, kterou chceš mít v produktu, dokumentaci i interním runbooku. Když ji neumíš napsat, ještě nemáš importní proces.
+
+## GT.3 CSV není jednoduché, jen se tak tváří
+
+CSV je populární, protože ho umí skoro každý systém. Zároveň je to formát, který se umí rozpadnout na oddělovačích, uvozovkách, nových řádcích, kódování a lokálních zvyklostech. Formální popis běžného CSV formátu najdeš v RFC 4180: https://www.rfc-editor.org/rfc/rfc4180
+
+Praktická realita: zákazník často neví, jestli exportuje oddělovačem čárku, středník nebo tabulátor. Neví, jestli má UTF-8. Neví, že v poznámce je nový řádek. A už vůbec netuší, že Excel umí změnit některé hodnoty podle svého veselého vnitřního folklóru.
+
+Proto import navrhni takhle:
+
+- Detekuj oddělovač, ale ukaž zákazníkovi náhled a umožni opravu.
+- Vyžaduj hlavičku sloupců, ale nenut zákazníka trefit přesné interní názvy.
+- Ukaž prvních několik řádků jako preview před zápisem.
+- Odděl validaci souboru od potvrzení importu.
+- U každého sloupce ukaž mapování na produktové pole.
+- U každého problému řekni, co opravit: „Řádek 42: e-mail nemá platný formát“, ne „validation failed“.
+
+Příklad mapování:
+
+| Sloupec v souboru | Pole v aplikaci | Stav |
+| --- | --- | --- |
+| `Email` | E-mail kontaktu | Povinné, validní |
+| `Name` | Jméno | Volitelné |
+| `Company` | Firma | Volitelné |
+| `Internal notes` | Neimportovat | Obsahuje volný text, vyžaduje ruční kontrolu |
+| `Marketing consent` | Souhlas s komunikací | Importovat jen s doloženým zdrojem |
+
+Privacy-first detail: volné textové poznámky neimportuj automaticky jen proto, že tam jsou. Právě v nich často bydlí citlivé údaje, interní drby, zdravotní informace, hesla, osobní čísla nebo „poznámka pro kolegu“, která se nikdy neměla dostat do nového systému. Volný text je datové podkroví. Nejdřív rozsvítit, potom teprve něco stěhovat.
+
+## GT.4 Validuj hodnoty podle domény, ne jen podle syntaxe
+
+Input validation není o tom, že regex řekne „vypadá to jako e-mail, hurá do databáze“. OWASP doporučuje validovat vstupy pomocí allowlistů, datových typů, rozsahů a pravidel očekávaných hodnot: https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html
+
+U importu to znamená dvě vrstvy:
+
+1. **Technická validace**: datový typ, délka, formát, povolené znaky, povinná hodnota.
+2. **Produktová validace**: hodnota dává smysl v kontextu účtu, role, tarifu, stavu objektu a business pravidel.
+
+Příklady:
+
+| Pole | Technická validace | Produktová validace |
+| --- | --- | --- |
+| E-mail | Platný tvar, maximální délka | Není duplicitní v rámci účtu, doména není blokovaná |
+| Cena | Číslo, měna, kladná hodnota | Tarif dovoluje danou měnu, cena není mimo rozumný rozsah |
+| Datum | Platný ISO formát nebo jasně rozpoznaný lokální formát | Datum není před vznikem účtu, není nesmyslně v budoucnosti |
+| Role | Hodnota z povoleného seznamu | Importující uživatel smí danou roli přiřadit |
+| ID zákazníka | Text v povolené délce | Patří do stejného účtu nebo se mapuje jako externí ID |
+
+Důležitá zásada: import nesmí obcházet pravidla, která platí pro ruční vytvoření záznamu. Pokud uživatel v UI nesmí vytvořit admina, import mu to taky nesmí dovolit. Pokud tarif nepovoluje více než 5 týmových členů, import nemá tiše založit 500 lidí a pak se tvářit překvapeně jako kočka vedle rozbité vázy.
+
+## GT.5 Udělej bezpečný preview a potvrzení před zápisem
+
+Nejhorší import je ten, který po uploadu rovnou zapisuje do produkce a teprve potom oznámí: „Import dokončen, 1837 řádků přeskočeno.“ To není UX. To je loterie s účtenkou.
+
+Bezpečný import má fáze:
+
+1. **Upload**: systém přijme soubor, zkontroluje velikost a typ.
+2. **Parse**: systém přečte strukturu a detekuje oddělovač, hlavičky, kódování.
+3. **Mapování**: uživatel potvrdí, co který sloupec znamená.
+4. **Validace**: systém ukáže počet validních, varovných a chybných řádků.
+5. **Preview**: uživatel vidí vzorek výsledných záznamů v produktovém jazyce.
+6. **Potvrzení**: uživatel explicitně spustí zápis.
+7. **Report**: systém uloží souhrn a umožní stáhnout chybový report bez původních citlivých dat navíc.
+
+Příklad potvrzovací věty:
+
+> „Import vytvoří 482 kontaktů v účtu Acme s.r.o. Přeskočí 17 řádků s chybami. Nebudou importovány sloupce `Internal notes` a `Legacy password`. Importní soubor smažeme za 7 dní.“
+
+Tohle je dobré UX, protože uživatel vidí dopad ještě před akcí. A zároveň je to dobrá obrana proti support tiketům typu „ono mi to nějak rozbilo všechno“. Nějak je nejdražší technický termín v SaaS.
+
+## GT.6 Ošetři duplicity, rollback a idempotenci
+
+Import se skoro nikdy nepovede napoprvé. Zákazník nahraje starší export, opraví tři sloupce, nahraje novou verzi, pak zjistí, že mu chybí jeden atribut, a nahraje to znovu. Pokud import není idempotentní nebo aspoň rozumně předvídatelný, vzniknou duplicity, konflikty a support začne meditovat nad SQL dotazy.
+
+Navrhni pravidla předem:
+
+- **Dedup klíč**: co určuje, že záznam už existuje? E-mail, externí ID, kombinace firmy a názvu?
+- **Strategie konfliktu**: přeskočit, aktualizovat, vytvořit novou verzi, nebo nechat uživatele rozhodnout?
+- **Dry run**: umí systém spočítat dopad bez zápisu?
+- **Import batch ID**: každý import má vlastní identifikátor pro audit, report a případný rollback.
+- **Částečný rollback**: co lze bezpečně vrátit a co už se mohlo promítnout do navazujících procesů?
+- **Opakované spuštění**: co se stane, když uživatel stejný soubor nahraje znovu?
+
+Jednoduché pravidlo pro malé SaaS: první verze importu má raději podporovat `create only` a jasné přeskočení duplicit než neviditelný merge. Automatické slučování dat je lákavé, ale když se splete, rozbije důvěru rychleji než landing page s pěti pop-upy.
+
+## GT.7 Chybový report má pomáhat, ne vynášet data
+
+Chybový report je užitečný, ale může být privacy problém. Pokud zákazník nahraje soubor s citlivými poznámkami a systém mu vrátí celý soubor s přidaným sloupcem `error`, jen jsi vytvořil další kopii potenciálně citlivých dat. Gratuluju, máme datové konfety.
+
+Lepší chybový report:
+
+- obsahuje číslo řádku, název pole, typ chyby a doporučenou opravu;
+- nevrací neimportované volné texty, pokud nejsou nutné pro opravu;
+- maskuje hodnoty, kde stačí kontext: `jo***@firma.cz` místo celého e-mailu;
+- má krátkou dostupnost a jasnou expiraci;
+- je přístupný jen uživateli s oprávněním k danému importu;
+- neukládá se do běžné analytiky ani support chatu automaticky.
+
+Příklad chybového řádku:
+
+| Řádek | Pole | Problém | Jak opravit |
+| --- | --- | --- | --- |
+| 42 | E-mail | Neplatný formát | Zkontrolujte překlep v doméně |
+| 87 | Role | Hodnota `Owner` není povolená | Vyberte jednu z hodnot: Admin, Member, Viewer |
+| 103 | Consent source | Chybí zdroj souhlasu | Doplňte zdroj nebo neimportujte marketingový souhlas |
+
+Chybový report má být nástroj k opravě, ne archiv původního souboru v novém kabátku.
+
+## GT.8 Checklist bezpečného importu dat
+
+- Má každý import jasně popsaný účel a typ importovaného objektu?
+- Přijímáme jen formáty, velikosti a sloupce, které opravdu podporujeme?
+- Validujeme soubor jako nedůvěryhodný vstup podle allowlist pravidel?
+- Má import preview, mapování sloupců a explicitní potvrzení před zápisem?
+- Umíme odlišit technické chyby od produktových konfliktů?
+- Neimportujeme automaticky volné texty, interní poznámky a rizikové sloupce?
+- Má každý import batch ID, auditní stopu, report a jasnou retenci?
+- Víme, co se stane při opakovaném importu stejného souboru?
+- Umíme bezpečně řešit duplicity bez tichého slučování dat?
+- Mažeme původní soubory a chybové reporty podle dokumentované retenční doby?
+
+## Codyho komentář
+
+Import dat je onboarding v montérkách. Není lesklý jako hero sekce, ale rozhoduje o tom, jestli zákazník začne používat produkt, nebo stráví odpoledne v Excelu a večer v existenciální krizi. Codyho pravidlo: žádný import nesmí zapisovat víc, než uživatel pochopil v preview. A žádný soubor nesmí v systému zůstat jen proto, že „se může hodit“. To je stejná věta, kterou říkají lidé s garáží plnou kabelů k Nokii.
+
+## Zdroje k příloze
+
+- OWASP File Upload Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html
+- OWASP Input Validation Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html
+- RFC 4180 — Common Format and MIME Type for Comma-Separated Values: https://www.rfc-editor.org/rfc/rfc4180
+
+## Shrnutí přílohy
+
+Bezpečný import dat není tlačítko pro nahrání CSV, ale řízený proces od účelu přes validaci, mapování, preview, potvrzení, zápis, report a retenci. Privacy-first SaaS přijímá jen nutná data, zachází se soubory jako s nedůvěryhodným vstupem, chrání volné texty, řeší duplicity předem, loguje souhrny místo kopií dat a maže importní artefakty v jasném čase. Dobrý import šetří zákazníkovi práci. Špatný import vyrábí nové problémy v dávkách.
+
 ## Pracovní log
 
+- 2026-08-15: Přidána příloha GT o bezpečném importu dat: účel importu, nedůvěryhodné soubory, CSV realita, doménová validace, preview před zápisem, duplicity, rollback, chybové reporty a privacy-first checklist.
 - 2026-08-15: Přidána příloha GS o konfiguraci a feature flagech v privacy-first SaaS: členění konfigurace podle rizika, secrets, životní cyklus flagů, střídmá segmentace, oddělení prostředí, audit změn a checklist.
 - 2026-08-15: Přidána příloha GR o auditních stopách v privacy-first SaaS: účel logů, slovník událostí, minimalizace payloadů, oddělení zákaznických a interních logů, UI, retence, ochrana integrity, alerty a checklist.
 - 2026-08-15: Přidána příloha GQ o API verzování a deprecacích: breaking changes, model verzí, technické signály `Deprecation` a `Sunset`, migrační okna, dokumentace rozdílů, střídmé měření starých verzí a checklist.
