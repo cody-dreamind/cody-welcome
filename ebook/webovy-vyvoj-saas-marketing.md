@@ -31687,7 +31687,184 @@ Můj pohled — Cody: dobrá klasifikace dat není o strachu, ale o dospělosti.
 
 Klasifikace dat je provozní mapa privacy-first SaaS: pomáhá rozhodnout, co sbírat, kam to ukládat, kdo k tomu smí, jak se to loguje, jak dlouho to zůstává v systému a jaký dopad má incident. Malý tým nepotřebuje složitý katalog, ale jednoduché úrovně, živou datovou mapu, technická pravidla pro každou kategorii, krátké review nových funkcí a promítnutí klasifikace do UI, exportů, supportu i incidentů. Když data nemají účel, vlastníka a retenci, nejsou aktivum. Jsou nevybuchlá provozní munice.
 
+---
+
+# Příloha GX: Klientské SDK a veřejné integrační ukázky bez úniku tokenů, špatných defaultů a supportového požáru
+
+Klientské SDK je zvláštní kus produktu. Není to jen knihovna. Je to názor na to, jak mají zákazníci tvůj SaaS používat. Když SDK ukazuje špatný vzor, zákazníci ho zkopírují. Když quickstart ukládá API klíč do frontendu, někdo to nasadí. Když příklad loguje celý payload, někdo to pošle do produkčních logů a bude tvrdit, že „to bylo v dokumentaci“. A bude mít nepříjemně trochu pravdu.
+
+Privacy-first SaaS proto bere SDK, ukázkové repozitáře a integrační návody jako bezpečnostní rozhraní. Cílem není jen hezký developer experience, ale bezpečný developer experience: zákazník má začít rychle, ale ne za cenu tokenů v prohlížeči, osobních údajů v testovacím logu a webhook endpointu, který přijímá cokoliv s výrazem důvěřivého štěněte.
+
+OWASP API Security Top 10 2023 upozorňuje mimo jiné na rizika rozbité autorizace objektů, nedostatečně omezeného přístupu k citlivým obchodním tokům a nebezpečné spotřeby API. Pro SDK to znamená jednoduchou věc: ukázky nesmí obcházet autorizaci, schovávat limity ani zákazníky učit, že API je nekonečný bufet bez pravidel: https://owasp.org/API-Security/editions/2023/en/0x11-t10/
+
+## GX.1 Quickstart je bezpečnostní školení v převleku
+
+První příklad v dokumentaci má větší vliv než tři stránky bezpečnostních doporučení. Vývojář ho zkopíruje, upraví URL a jde dál. Proto musí být první příklad nudně správný.
+
+Špatný quickstart:
+
+```js
+const client = new CodyApi({
+  apiKey: "ck_live_123",
+  debug: true,
+});
+
+await client.customers.create({
+  name: "Jan Novák",
+  email: "jan@example.cz",
+  note: "citlivá interní poznámka",
+});
+```
+
+Lepší quickstart:
+
+```js
+const client = new CodyApi({
+  apiKey: process.env.CODY_API_KEY,
+  region: "eu",
+  logLevel: "warn",
+});
+
+await client.customers.create({
+  externalId: "customer_123",
+  email: "jan@example.cz",
+});
+```
+
+Rozdíl není kosmetika. Druhá ukázka učí tři důležité návyky: tajemství patří do prostředí, region je explicitní a logování není defaultně upovídané. Pokud chceš být opravdu laskavý, přidej do quickstartu i větu:
+
+> „API klíč nikdy nevkládejte do frontendového kódu, mobilní aplikace ani veřejného repozitáře. Pro klientské aplikace používejte krátkodobé tokeny vydané vaším backendem.“
+
+Tohle není právní alibismus. To je hasicí přístroj připevněný u dveří, ne schovaný ve sklepě za vánočními ozdobami.
+
+## GX.2 SDK má mít bezpečné výchozí hodnoty
+
+Dobré SDK chrání zákazníka i ve chvíli, kdy čte dokumentaci ve spěchu. Výchozí hodnoty mají být konzervativní:
+
+- timeout je nastavený, aby se requesty nevěšely donekonečna,
+- retry používá exponenciální backoff a neopakuje destruktivní akce bez idempotency klíče,
+- debug logy jsou vypnuté nebo redigované,
+- klient neposílá automaticky informace o zařízení, uživateli nebo prostředí, pokud nejsou nutné,
+- region nebo endpoint je explicitní a nemění se potichu podle geolokace,
+- SDK jasně rozlišuje server-side a client-side použití.
+
+Praktický příklad konfigurace:
+
+```ts
+const client = new CodyApi({
+  apiKey: process.env.CODY_API_KEY,
+  baseUrl: "https://api.example.eu",
+  timeoutMs: 8000,
+  retries: 2,
+  redactLogs: true,
+});
+```
+
+Nedělej z bezpečného režimu volitelný doplněk pro lidi, kteří „vědí, co dělají“. Většina incidentů nezačíná tím, že někdo neví nic. Začíná tím, že někdo ví dost na to, aby byl nebezpečně produktivní.
+
+## GX.3 Odděl veřejný klient, serverový klient a admin klient
+
+Jedno SDK pro všechno vypadá jednoduše, dokud ho někdo nepoužije ve špatném místě. Veřejný frontend, serverová integrace a interní admin skript mají úplně jiné riziko.
+
+Rozumné členění:
+
+| Typ klienta | Kde běží | Co smí | Co nesmí |
+| --- | --- | --- | --- |
+| Public/browser klient | prohlížeč, mobilní UI | číst veřejná data, poslat omezený formulář, pracovat s krátkodobým tokenem | držet master API klíč, exportovat data, měnit billing |
+| Serverový klient | backend zákazníka | volat API podle scope, vytvářet objekty, zpracovat webhooky | obcházet tenant nebo role, logovat payloady |
+| Admin klient | interní nástroje a migrace | řízené provozní akce s auditní stopou | běžet bez schválení, používat sdílený token |
+
+Pokud SDK podporuje browser, napiš to jasně. Pokud browser nepodporuje, napiš to ještě jasněji. Mlčení tady není minimalismus. Je to budoucí tiket s předmětem „urgentní: unikl nám klíč“.
+
+## GX.4 Ukázková data nesmí vypadat jako produkční tajemství
+
+Ukázkové repozitáře mají používat syntetická data. Ne export z vlastního CRM, ne „anonymizovanou“ tabulku, kde zůstaly domény zákazníků, ne screenshot s reálným tokenem rozmazaným tak slabě, že by ho přečetla i lednice.
+
+Pravidla pro ukázky:
+
+- používej domény jako `example.com`, `example.org` nebo vlastní rezervované demo názvy,
+- API klíče piš jako `ck_test_xxx`, nikdy jako realistický token se skutečným prefixem a délkou,
+- osobní údaje v příkladech drž generické a zjevně fiktivní,
+- screenshoty dělej ze sandbox účtu se seed daty,
+- `.env.example` obsahuje názvy proměnných, ne hodnoty,
+- testovací webhook payloady neobsahují skutečné e-maily, adresy ani fakturační údaje.
+
+Příklad `.env.example`:
+
+```bash
+CODY_API_KEY=ck_test_replace_me
+CODY_API_BASE_URL=https://api.example.eu
+CODY_WEBHOOK_SECRET=whsec_replace_me
+```
+
+Ukázkový repozitář má být tak nudný, že ani omylem nejde použít jako zdroj incidentu. Ano, nudné je tady kompliment. V bezpečnosti je nuda často luxusní stav.
+
+## GX.5 Chyby a logy mají učit, ne vyzrazovat
+
+SDK má pomáhat s laděním, ale nesmí z ladění udělat datový vysavač. Chybová hláška má obsahovat dost informací pro opravu, ne celé tělo požadavku.
+
+Dobrá chyba obsahuje:
+
+- stabilní kód chyby,
+- krátký lidský popis,
+- `request_id` pro support,
+- informaci, jestli je akce opakovatelná,
+- odkaz na dokumentaci,
+- redigovaná metadata bez tajemství.
+
+Špatná chyba:
+
+```json
+{
+  "error": "Validation failed for jan@example.cz, token ck_live_abc123, payload: ..."
+}
+```
+
+Lepší chyba:
+
+```json
+{
+  "code": "customer.email_invalid",
+  "message": "E-mail zákazníka nemá platný formát.",
+  "request_id": "req_7f3a",
+  "retryable": false,
+  "docs_url": "https://docs.example.eu/errors/customer.email_invalid"
+}
+```
+
+Support pak může dohledat `request_id`, vývojář ví, co opravit, a nikdo neposlal osobní data do chatu jen proto, že SDK chtělo být „nápomocné“ jako kancelářský kolega, který přeposílá úplně všechno všem.
+
+## GX.6 Připrav integrační checklist před publikací SDK
+
+Před vydáním SDK nebo ukázkového repozitáře si projdi jeden suchý běh: nový vývojář podle dokumentace vytvoří integraci bez interní pomoci. Sleduj, kde musí hádat, kde kopíruje rizikový vzor a kde dokumentace mlčí.
+
+Kontrolní otázky:
+
+- Je hned na začátku jasné, jestli SDK patří na backend, frontend nebo oboje?
+- Neobsahuje žádná ukázka skutečný token, zákaznický e-mail, produkční URL s neveřejnou cestou nebo reálný payload?
+- Používá quickstart proměnné prostředí a bezpečné logování?
+- Jsou API klíče rozdělené podle scope a prostředí, ne jeden univerzální klíč na všechno?
+- Vysvětluje SDK idempotency u opakovatelných zápisů, importů, platebních akcí a webhooků?
+- Jsou chyby strukturované přes kód a `request_id`, ne přes citlivý obsah?
+- Umí zákazník bezpečně otestovat webhook bez produkčního endpointu a reálných dat?
+- Má dokumentace jasnou sekci „co nikdy nedělat“?
+- Je v ukázkovém repozitáři `.gitignore`, `.env.example` a kontrola chybějících proměnných při startu?
+- Má každá veřejná ukázka vlastníka a datum poslední revize?
+
+## Codyho komentář
+
+Můj pohled — Cody: SDK je onboarding, bezpečnostní dokumentace a produktový marketing v jednom balíčku. Když je dobré, zákazník má pocit, že integrace je klidná práce. Když je špatné, začne kopírováním tokenu do frontendu a skončí u supportu, který hasí věc, kterou dokumentace sama zapálila. Malý evropský SaaS má v SDK ukazovat stejnou disciplínu jako v produktu: minimum dat, jasné účely, bezpečné defaulty a žádné tajné tanečky s tokeny.
+
+## Zdroje k příloze
+
+- OWASP — API Security Top 10 2023: https://owasp.org/API-Security/editions/2023/en/0x11-t10/
+
+## Shrnutí přílohy
+
+Klientské SDK a veřejné integrační ukázky jsou součást bezpečnostního modelu SaaS. Quickstart má ukazovat bezpečné návyky, SDK má mít konzervativní defaulty, dokumentace má oddělit browser/server/admin použití a ukázková data nesmí připomínat produkční realitu. Privacy-first developer experience znamená, že zákazník dokáže integraci spustit rychle, ale nepřinese si přitom do produkce uniklé tokeny, přehnané logování, špatně scoped klíče ani webhook endpoint, který věří každému kolemjdoucímu JSONu.
+
 ## Pracovní log
+- 2026-08-15: Přidána příloha GX o klientských SDK a veřejných integračních ukázkách: bezpečný quickstart, konzervativní defaulty, rozlišení browser/server/admin klienta, syntetická ukázková data, bezpečné chyby a logy, integrační checklist a privacy-first developer experience.
 - 2026-08-15: Přidána příloha GW o klasifikaci dat v privacy-first SaaS: úrovně citlivosti, datová mapa, rozlišení obsahu/metadat/logů, technická pravidla, data protection by design, datové review, UI/support dopady a checklist.
 
 - 2026-08-15: Přidána příloha GV o obnovitelnosti SaaS a disaster recovery: RTO/RPO, priorita kritických částí, šifrované a oddělené zálohy, restore drilly, obnova konfigurace, privacy-first pravidla incidentního prostředí a checklist.
