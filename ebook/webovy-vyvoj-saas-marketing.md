@@ -31520,7 +31520,175 @@ Můj pohled — Cody: nejlepší záloha je nudná. Proběhne, dá se obnovit, n
 
 Obnovitelnost SaaS není jen automatická záloha, ale schopnost vrátit zákazníkům práci bezpečně, předvídatelně a bez nového úniku dat. Privacy-first tým definuje RTO a RPO podle dopadu na zákazníka, chrání zálohy před smazáním i kompromitací, pravidelně testuje restore z běžných záloh, obnovuje i konfiguraci, přílohy, secrets, DNS a fronty, izoluje obnovovací prostředí a po každém testu opravuje konkrétní slabiny. Záloha bez restore testu je přání. Restore runbook je provoz.
 
+
+# Příloha GW: Klasifikace dat bez barevných nálepek, interního folklóru a zbytečně tajemného SaaS provozu
+
+Klasifikace dat není excelová tabulka pro auditora, která se jednou vytvoří a pak tiše stárne v koutě jako firemní fikus. Je to provozní mapa: říká, která data produkt zpracovává, proč je má, kdo k nim smí, jak dlouho zůstávají v systému a co se stane, když uniknou, změní se nebo zmizí.
+
+Privacy-first SaaS tým nepotřebuje deset úrovní tajnosti a interní ceremonii s razítkem. Potřebuje jednoduchý jazyk, který pochopí vývojář, support, obchod i zakladatel v pondělí ráno před kávou. Bez klasifikace totiž rozhoduje náhoda: někde se loguje celé tělo požadavku, někde se zákaznický export posílá do chatu, někde se demo data tváří jako anonymní, protože „vždyť je tam jen e-mail“. To je přesně ta věta, po které bezpečnostní člověk zestárne o tři sprinty.
+
+## GW.1 Začni otázkou: komu by vadilo, kdyby data utekla?
+
+Nejrychlejší klasifikace začíná dopadem. Neřeš nejdřív název štítku. Řeš, co se stane, když data uvidí někdo, kdo je vidět nemá.
+
+Praktické úrovně pro malý evropský SaaS:
+
+| Úroveň | Příklad | Dopad úniku | Výchozí pravidlo |
+| --- | --- | --- | --- |
+| Veřejné | marketingový web, veřejná dokumentace, ceník | reputační trapas při chybě, ale ne únik tajemství | může být indexováno a cachováno |
+| Interní | roadmapa, interní poznámky, provozní checklisty | konkurenční nebo organizační škoda | dostupné jen týmu podle role |
+| Zákaznické | projekty, objednávky, zprávy, nahrané soubory | přímý dopad na zákazníka a jeho klienty | tenant izolace, audit přístupu, minimální zobrazení |
+| Osobní údaje | jméno, e-mail, telefon, IP, cookie ID | GDPR dopad, práva subjektu údajů | účel, právní základ, retence, transparentnost |
+| Citlivé / vysoce rizikové | zdravotní údaje, doklady, platební identifikátory, secrets | vysoké právní, bezpečnostní i obchodní riziko | explicitní vlastník, silnější kontrola, kratší retence |
+
+Evropská komise připomíná, že GDPR zahrnuje i údaje jako e-mail, IP adresa nebo cookie ID, pokud identifikují nebo mohou identifikovat člověka: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/application-gdpr_en
+
+Codyho komentář: největší chyba je třídit data podle toho, jak „technicky“ vypadají. UUID v databázi může být neškodný identifikátor, nebo klíč k celému zákaznickému účtu. Kontext je král. A občas i zákeřný skřítek.
+
+## GW.2 Každé pole musí mít účel, vlastníka a retenční pravidlo
+
+Datová mapa nemusí být nástroj za statisíce. Na začátek stačí tabulka, která nutí tým odpovědět na nepohodlné otázky.
+
+Minimální sloupce:
+
+| Sloupec | Co znamená | Příklad |
+| --- | --- | --- |
+| Datový prvek | konkrétní pole nebo typ souboru | `customer_email` |
+| Účel | proč existuje | doručení transakční zprávy |
+| Kategorie | veřejné / interní / zákaznické / osobní / citlivé | osobní údaj |
+| Systém | kde vzniká a kde se kopíruje | aplikace, e-mail provider, support nástroj |
+| Vlastník | kdo rozhoduje o pravidlech | produkt / support / finance |
+| Právní základ | pokud jde o osobní údaje | smlouva, oprávněný zájem, souhlas |
+| Retence | kdy se maže nebo reviduje | účet + 12 měsíců podle support potřeby |
+| Přístup | kdo může číst nebo měnit | uživatel, admin, dočasný support |
+| Export / výmaz | jde bezpečně exportovat a smazat? | ano, v zákaznickém exportu |
+
+Evropská komise shrnuje principy GDPR tak, že data mají mít konkrétní účel, mají být omezená na to, co je nutné, a nemají se držet déle, než je potřeba: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/overview-principles/what-data-can-we-process-and-under-which-conditions_en
+
+Tohle není papírování navíc. Je to návrhový nástroj. Když nové pole nemá účel, vlastníka a retenci, nemá jít do produkce. Když systém neumí říct, kde se data kopírují, neumí garantovat ani export, ani výmaz, ani incidentní dopad.
+
+## GW.3 Rozlišuj zákaznický obsah, metadata a provozní stopy
+
+V SaaS se často míchají tři různé světy:
+
+- **Zákaznický obsah:** dokumenty, zprávy, objednávky, poznámky, přílohy.
+- **Produktová metadata:** ID projektu, stav úkolu, čas vytvoření, role uživatele.
+- **Provozní stopy:** logy, trace ID, auditní události, metriky, rate-limit rozhodnutí.
+
+Každá skupina má jiné pravidlo. Zákaznický obsah má být nejvíc pod kontrolou zákazníka. Metadata jsou často nutná pro fungování produktu, ale pořád mohou být osobní nebo obchodně citlivá. Provozní stopy mají pomáhat bezpečnosti a spolehlivosti, ne vytvářet paralelní archiv zákaznického života.
+
+Příklad špatného návrhu:
+
+- chyba validace formuláře zapíše do logu celé tělo požadavku,
+- trace se pošle do externího nástroje mimo EU bez zpracovatelské kontroly,
+- support dostane screenshot s osobními údaji třetích osob,
+- analytický event obsahuje e-mail, protože se podle něj „dobře hledá“.
+
+Příklad lepšího návrhu:
+
+- log obsahuje `request_id`, typ chyby, tenant ID v bezpečné podobě a interní kód,
+- zákaznický obsah se do logů nedostává,
+- support má dočasný přístup jen po schválení zákazníkem nebo jasném interním důvodu,
+- analytika pracuje s agregovanými eventy bez identifikace konkrétního člověka, pokud to není nutné.
+
+## GW.4 Pro každou úroveň napiš konkrétní technické pravidlo
+
+Klasifikace bez technického dopadu je jen barevná legenda. Pokud štítek nic nemění, lidé ho přestanou brát vážně.
+
+Příklad pravidel:
+
+| Kategorie | Přístup | Logování | Export | Retence |
+| --- | --- | --- | --- | --- |
+| Veřejné | všichni | běžné webové logy bez zbytečných identifikátorů | není problém | podle publikačního plánu |
+| Interní | tým podle role | změny dokumentů a důležité akce | interní záloha | revize každých 12 měsíců |
+| Zákaznické | tenant + oprávněné role | audit přístupu, ne obsah | zákaznický export | podle smlouvy a offboardingu |
+| Osobní údaje | need-to-know | bez payloadů a tajemství | DSR / portabilita podle typu dat | podle účelu a právního základu |
+| Citlivé / vysoce rizikové | explicitní schválení, MFA, audit | minimální metadata, žádný obsah | jen silně kontrolovaná cesta | co nejkratší, pravidelná revize |
+
+NIST FIPS 199 sice vznikl pro americké federální systémy, ale užitečně připomíná tři dopady bezpečnosti: důvěrnost, integritu a dostupnost. Pro SaaS je to praktická kontrola: co se stane, když data uniknou, změní se nebo nebudou dostupná: https://nvlpubs.nist.gov/nistpubs/fips/nist.fips.199.pdf
+
+Evropský privacy-first pohled k tomu přidává ještě čtvrtou otázku: je vůbec nutné tahle data mít?
+
+## GW.5 Data protection by design znamená rozhodovat dřív než po releasu
+
+EDPB ve finálních Guidelines 4/2019 k článku 25 GDPR popisuje data protection by design and by default jako povinnost promítat principy ochrany dat do návrhu zpracování a výchozích nastavení, ne až do dodatečné právní kosmetiky: https://www.edpb.europa.eu/documents/guideline/guidelines-42019-on-article-25-data-protection-by-design-and-by-default_en
+
+V praxi to znamená, že klasifikace patří do běžného vývoje:
+
+- návrh nové funkce obsahuje datové prvky a účel,
+- pull request s novým eventem popisuje, proč event neobsahuje osobní identifikátor,
+- migrace databáze řeší retenci a výmaz,
+- integrace s dodavatelem uvádí region, roli správce/zpracovatele a subdodavatele,
+- support flow má pravidla pro dočasný přístup,
+- export a smazání dat se testují stejně jako šťastná cesta v UI.
+
+Tohle je nudné jen do chvíle, než přijde incident, zákaznický security dotazník nebo žádost o výmaz. Pak se z nudné tabulky stane mapa pokladu. Jen místo zlata najdeš méně paniky, což je v SaaS skoro totéž.
+
+## GW.6 Zaveď datové review pro nové funkce
+
+Malý tým nepotřebuje privacy komisi s osmi kalendářními pozvánkami. Potřebuje krátkou brzdu před tím, než se do produktu přidá nové sbírání, ukládání nebo posílání dat.
+
+Datové review pro jeden ticket:
+
+1. Jaká nová data vznikají nebo se čtou?
+2. Jsou osobní, zákaznická, interní nebo citlivá?
+3. Který účel bez nich nejde splnit?
+4. Kde se ukládají a kam se posílají?
+5. Kdo k nim má přístup v aplikaci, administraci a supportu?
+6. Jak dlouho zůstávají v systému?
+7. Objeví se v logu, analytice, exportu nebo AI promptu?
+8. Co se stane při výmazu účtu, ukončení smlouvy nebo incidentu?
+
+Pokud odpověď na otázku 3 zní „možná se bude hodit“, ticket se vrací zpět. Produkt není půda po babičce, kam se ukládá všechno, co by jednou mohlo přijít vhod.
+
+## GW.7 Klasifikaci promítni do UI a podpory
+
+Klasifikace nesmí žít jen v interní dokumentaci. Má být vidět i v produktu a provozu.
+
+Praktické příklady:
+
+- U importu napiš, jaké sloupce budou uloženy a které se po validaci zahodí.
+- U exportu ukaž, co export obsahuje a kdy odkaz vyprší.
+- U support přístupu zobraz zákazníkovi, kdo přístup získal a na jak dlouho.
+- U polí s osobními údaji vysvětli účel jednou krátkou větou přímo ve formuláři.
+- V administraci maskuj citlivé hodnoty a zobraz je celé jen po reautentizaci.
+- V interních playboocích zakazuj posílání zákaznických exportů do obecných chatů.
+
+Evropská komise uvádí, že lidé mají při sběru dat dostat jasné informace mimo jiné o účelu, právním základu, době uložení, příjemcích a případných transferech mimo EU: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/what-information-must-be-given-individuals-whose-data-collected_en
+
+Dobré UI tak není jen hezké. Je i vysvětlující. Uživatel má chápat, co se děje, aniž by četl právní PDF při svíčce.
+
+## GW.8 Checklist klasifikace dat
+
+- Má produkt jednoduché úrovně dat, kterým rozumí vývoj, support i obchod?
+- Je u každého nového datového prvku napsaný účel, vlastník a retence?
+- Rozlišujeme zákaznický obsah, metadata, auditní logy, technické logy a analytiku?
+- Existuje pravidlo, která data se nikdy nesmí dostat do logů, promptů a chatů?
+- Mají citlivá a vysoce riziková data silnější přístup, MFA nebo reautentizaci?
+- Jsou osobní údaje mapované na právní základ, informační povinnost a retenční dobu?
+- Umí tým vysvětlit, kam data odchází mimo vlastní infrastrukturu a zda zůstávají v EU/EHP?
+- Promítá se klasifikace do exportu, výmazu, support přístupu a incidentního dopadu?
+- Probíhá krátké datové review u funkcí, které sbírají, ukládají nebo posílají nová data?
+- Je datová mapa živý dokument, který se aktualizuje při releasech, ne roční archeologické cvičení?
+
+## Codyho komentář
+
+Můj pohled — Cody: dobrá klasifikace dat není o strachu, ale o dospělosti. Když víš, co máš v systému, můžeš rychleji stavět, lépe odpovídat zákazníkům a klidněji spát. Když to nevíš, každá nová integrace je dobrodružství. A dobrodružství je fajn v knize, ne v produkční databázi ve 2:17 ráno.
+
+## Zdroje k příloze
+
+- European Commission — Application of the GDPR, příklady osobních údajů včetně IP adres a cookie ID: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/application-gdpr_en
+- European Commission — What data can we process and under which conditions?, principy účelu, minimalizace, retence a bezpečnosti: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/overview-principles/what-data-can-we-process-and-under-which-conditions_en
+- European Commission — What information must be given to individuals whose data is collected?: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/what-information-must-be-given-individuals-whose-data-collected_en
+- European Data Protection Board — Guidelines 4/2019 on Article 25 Data Protection by Design and by Default: https://www.edpb.europa.eu/documents/guideline/guidelines-42019-on-article-25-data-protection-by-design-and-by-default_en
+- NIST — FIPS PUB 199, Standards for Security Categorization of Federal Information and Information Systems: https://nvlpubs.nist.gov/nistpubs/fips/nist.fips.199.pdf
+
+## Shrnutí přílohy
+
+Klasifikace dat je provozní mapa privacy-first SaaS: pomáhá rozhodnout, co sbírat, kam to ukládat, kdo k tomu smí, jak se to loguje, jak dlouho to zůstává v systému a jaký dopad má incident. Malý tým nepotřebuje složitý katalog, ale jednoduché úrovně, živou datovou mapu, technická pravidla pro každou kategorii, krátké review nových funkcí a promítnutí klasifikace do UI, exportů, supportu i incidentů. Když data nemají účel, vlastníka a retenci, nejsou aktivum. Jsou nevybuchlá provozní munice.
+
 ## Pracovní log
+- 2026-08-15: Přidána příloha GW o klasifikaci dat v privacy-first SaaS: úrovně citlivosti, datová mapa, rozlišení obsahu/metadat/logů, technická pravidla, data protection by design, datové review, UI/support dopady a checklist.
 
 - 2026-08-15: Přidána příloha GV o obnovitelnosti SaaS a disaster recovery: RTO/RPO, priorita kritických částí, šifrované a oddělené zálohy, restore drilly, obnova konfigurace, privacy-first pravidla incidentního prostředí a checklist.
 - 2026-08-15: Přidána příloha GU o exportu dat a odchodu zákazníka: typy exportů, portabilita, oprávnění, minimalizace obsahu, verzované schéma, testování, offboardingový proces a privacy-first checklist.
