@@ -30169,8 +30169,185 @@ Rate limiting není trest pro uživatele. Je to dopravní značení pro systém,
 Rate limiting a anti-abuse ochrana mají chránit dostupnost, účty, data a obchodní logiku bez toho, aby se z produktu stal sledovací stroj. Privacy-first tým mapuje rizikové toky, kombinuje více klíčů limitů, používá postupné reakce, chrání přihlášení bez slepého zamykání, drží CAPTCHA jako pozdější možnost, loguje rozhodnutí místo citlivých payloadů a má proces pro legitimní výjimky. Dobrá obrana je jako dobrý vrátný: všimne si problému, pustí správné lidi dovnitř a nepíše si jejich rodokmen na ubrousek.
 
 
+# Příloha GO: Přístupová oprávnění bez admin chaosu, sdílených účtů a datového výprodeje
+
+Oprávnění v SaaS nejsou jen bezpečnostní tabulka pro vývojáře. Jsou to hranice důvěry: kdo může vidět zákaznická data, kdo může měnit nastavení, kdo může zvát další lidi, kdo může exportovat, kdo může mazat a kdo může jen dělat svou práci bez toho, aby omylem odpálil účet jako silvestrovskou rachejtli.
+
+Privacy-first produkt bere přístupy jako produktovou funkci, ne jako interní detail. Uživatel má rozumět tomu, co role znamená. Administrátor má umět přístup bezpečně přidat i odebrat. Support má mít jen dočasné a auditované oprávnění. A systém má předpokládat, že „všichni jsou admini“ je spíš nouzový prototyp než dospělý provoz.
+
+OWASP řadí selhání řízení přístupu mezi nejkritičtější webová rizika v Top 10 a doporučuje mimo jiné deny-by-default, kontrolu oprávnění na serveru, omezení přístupu podle vlastnictví záznamů a logování selhání přístupu: https://owasp.org/Top10/A01_2021-Broken_Access_Control/  OWASP Authorization Cheat Sheet zároveň zdůrazňuje princip nejmenších oprávnění, kontrolu na každém požadavku a opatrnost u hádatelných identifikátorů objektů: https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html
+
+## GO.1 Role pojmenuj podle práce, ne podle ega
+
+Špatný model rolí vzniká tak, že se vezmou tři technická slova: `admin`, `user`, `superadmin`. Pak se do nich postupně přidává všechno, co někdo zrovna potřeboval. Výsledek: role neříkají nic, zákazník jim nerozumí a vývojáři se bojí sáhnout na jednu podmínku, protože by mohli otevřít účetnictví celému obchodnímu týmu.
+
+Lepší je začít prací, kterou lidé v produktu dělají:
+
+- **Vlastník účtu** spravuje fakturaci, právní nastavení, exporty, smazání účtu a převod vlastnictví.
+- **Správce týmu** zve členy, mění role, nastavuje pracovní prostor a řeší běžný provoz.
+- **Editor** vytváří a upravuje obsah, projekty nebo záznamy, ale nemění bezpečnostní a fakturační nastavení.
+- **Čtenář** vidí vybrané informace, ale nemění produkční data.
+- **Externí host** má omezený přístup jen k jednomu projektu, složce nebo klientskému portálu.
+- **Support přístup** je dočasný režim pro řešení ticketu, ne běžná role v týmu.
+
+Příklad pro B2B reporting SaaS:
+
+| Role | Smí | Nesmí |
+| --- | --- | --- |
+| Vlastník | fakturace, export všech dat, smazání účtu, převod vlastnictví | obejít audit log |
+| Správce | zvát členy, měnit role pod vlastní úrovní, nastavovat reporty | měnit platební metodu bez vlastníka |
+| Analytik | vytvářet dashboardy, spouštět agregované exporty | vidět fakturaci a bezpečnostní nastavení |
+| Čtenář | prohlížet schválené dashboardy | exportovat detailní osobní data |
+| Host | vidět sdílený projekt | listovat ostatními zákazníky nebo týmy |
+
+Codyho komentář: role má být věta v hlavě zákazníka, ne hádanka z dokumentace. Pokud si administrátor musí otevřít support chat, aby pochopil rozdíl mezi dvěma rolemi, model je zralý na redesign.
+
+## GO.2 Deny-by-default není paranoia, ale účetní pořádek
+
+Výchozí stav má být „nemáš přístup, dokud ho nedostaneš“. Ne proto, že uživatelům nevěříme, ale proto, že produkt musí umět přesně říct, proč se data zobrazila konkrétní osobě.
+
+Praktické pravidlo:
+
+1. Každá akce má explicitní oprávnění: `project.read`, `project.update`, `invoice.read`, `member.invite`, `data.export`, `account.delete`.
+2. Každý serverový endpoint kontroluje oprávnění znovu, i když UI tlačítko schovalo akci.
+3. Každý dotaz na objekt kontroluje vztah uživatele k objektu: členství v týmu, vlastnictví projektu, sdílení odkazu, pozvánka.
+4. Chybějící pravidlo znamená zamítnout, ne pustit.
+5. Nová funkce nejdřív dostane bezpečný default a teprve potom produktově promyšlené zpřístupnění.
+
+Nejčastější průšvih není zlý hacker s kapucí. Je to endpoint typu `/api/reports/123/export`, který ověří, že je člověk přihlášený, ale už neověří, jestli report `123` patří jeho organizaci. Náhodný nebo hádatelný identifikátor pak stačí k horizontálnímu úniku dat. A to je přesně ten druh problému, který privacy-first firma nechce vysvětlovat zákazníkům v pátek večer.
+
+## GO.3 RBAC stačí na začátek, ale vztahy rozhodují v praxi
+
+RBAC, tedy role-based access control, je dobrý začátek: role dostane sadu oprávnění. Jenže SaaS svět je plný vztahů, které čistá role neumí pěkně vyjádřit.
+
+Příklady:
+
+- Uživatel je editor v jednom workspace, ale jen čtenář v jiném.
+- Externí konzultant smí vidět jeden projekt, ale ne celý účet.
+- Účetní smí číst faktury, ale nesmí spravovat členy týmu.
+- Support agent smí na 30 minut nahlédnout do konkrétního účtu po schválení zákazníkem.
+- Automatizační token smí zapisovat jen do jednoho API endpointu.
+
+Proto se vyplatí kombinovat role s kontextem. Prakticky to může vypadat takhle:
+
+- `role` říká obecnou úroveň práce v organizaci.
+- `scope` říká, kde oprávnění platí: účet, workspace, projekt, složka, report.
+- `relationship` říká vztah k objektu: vlastník, člen, host, sdílený příjemce.
+- `condition` říká omezení: dočasnost, IP allowlist pro interní admin, schválení zákazníkem, čerstvá reautentizace.
+
+Nemusíš hned stavět akademický access-control engine, který bude citovat standardy u večeře. Stačí, aby model odpovídal reálnému produktu a šel testovat. Jakmile začneš do jedné role přidávat výjimku za výjimkou, je čas oddělit oprávnění od názvu role.
+
+## GO.4 Citlivé akce potřebují druhý krok
+
+Ne všechny akce jsou stejně rizikové. Upravit název projektu není totéž jako exportovat všechna data, změnit fakturační e-mail, převést vlastnictví účtu nebo smazat organizaci.
+
+Rizikové akce označ jako samostatnou kategorii:
+
+- export detailních dat,
+- změna role na správce nebo vlastníka,
+- pozvání externího uživatele,
+- změna fakturačních a právních údajů,
+- vypnutí MFA nebo změna SSO nastavení,
+- vytvoření API tokenu s širokým rozsahem,
+- hromadné smazání nebo anonymizace dat,
+- propojení nové integrace, která získá přístup k zákaznickým datům.
+
+U těchto akcí přidej ochranný krok. Může to být reautentizace, potvrzení konkrétního dopadu, časový odklad, schválení druhým správcem nebo explicitní auditní důvod. Důležité je, aby kontrola nebyla jen dekorace. Dialog „Opravdu?“ s tlačítkem „Ano“ není bezpečnostní opatření, to je jen UX výdech.
+
+Lepší potvrzení:
+
+> „Chystáš se pozvat externího uživatele do projektu Alfa. Uvidí 18 reportů a 4 sdílené soubory. Přístup bude aktivní 14 dní. Zadej důvod pozvánky.“
+
+Tohle pomáhá administrátorovi rozhodnout se, ne jen mechanicky odkliknout výstrahu.
+
+## GO.5 Support přístup musí být dočasný, viditelný a auditovaný
+
+Support často potřebuje kontext. To ale neznamená, že má mít trvalý neomezený přístup do všech zákaznických účtů. Privacy-first provoz odděluje běžný support, technickou diagnostiku a skutečný vstup do zákaznického prostoru.
+
+Bezpečný support access:
+
+- zákazník ho zapne pro konkrétní ticket nebo ho pracovník vyžádá s důvodem,
+- přístup je omezený časem, například 30 minut nebo 24 hodin podle typu problému,
+- support vidí jen nezbytné části účtu,
+- systém viditelně ukáže, že support přístup je aktivní,
+- každá akce se zapíše do audit logu,
+- po vypršení se přístup automaticky vypne,
+- citlivá pole jsou maskovaná, pokud nejsou nutná pro řešení problému.
+
+Příklad: zákazník hlásí, že se mu nenačítá export reportu. Support nepotřebuje číst celé osobní záznamy v exportu. Potřebuje stav jobu, chybu, velikost exportu, typ filtru, identifikátor organizace a korelační ID. Pokud potřebuje vidět konkrétní výsledek, měl by požádat o sdílení ukázky nebo pracovat se syntetickými daty.
+
+## GO.6 Pozvánky a odchody jsou největší zkouška modelu
+
+Přístupový model se pozná podle dvou momentů: když někoho zveš a když někdo odchází. V pozvánce se často rozdají zbytečně široká práva. Při odchodu se zase zapomene na tokeny, sdílené odkazy, exporty a automatizace.
+
+Pozvánka má obsahovat:
+
+- koho zveme a do jaké organizace nebo projektu,
+- jakou roli dostane,
+- k jakým datům tím získá přístup,
+- kdo pozvánku vytvořil,
+- kdy pozvánka expiruje,
+- jestli jde o interního člena nebo externího hosta.
+
+Offboarding má řešit víc než tlačítko „deaktivovat uživatele“:
+
+- převod vlastnictví projektů, reportů, API tokenů a automatizací,
+- zrušení nebo rotaci osobních tokenů,
+- zrušení aktivních session,
+- revizi sdílených odkazů vytvořených uživatelem,
+- zachování audit logu bez zbytečného držení osobních detailů,
+- informaci ostatním správcům, co bylo převedeno a co vypnuto.
+
+Privacy-first detail: historická odpovědnost v audit logu může zůstat, ale uživatelský profil nemusí viset v systému navždy v plné podobě. Po odchodu řeš, co je právně a provozně nutné uchovat, co anonymizovat a co smazat podle retenčních pravidel.
+
+## GO.7 Testuj oprávnění jako kritickou funkci, ne jako vedlejší efekt
+
+Přístupová pravidla se nesmí testovat jen ručně přes UI. UI může akci skrýt, ale skutečná ochrana je serverová. Každé důležité oprávnění si zaslouží testy, které ověří povolené i zakázané scénáře.
+
+Minimum testů pro SaaS tým:
+
+- uživatel nevidí objekt z jiné organizace ani při znalosti ID,
+- čtenář nemůže spustit zápis přes API,
+- editor nemůže změnit role členů,
+- host nevidí projekty mimo explicitní sdílení,
+- bývalý člen po deaktivaci nemá aktivní session ani tokeny,
+- support access po expiraci přestane fungovat,
+- exporty a sdílené odkazy kontrolují oprávnění i po vytvoření,
+- riskantní akce vyžadují reautentizaci nebo schválení podle pravidel.
+
+Dobrá praxe je mít jednoduchou matici oprávnění v dokumentaci i v testech. Když se změní produktové pravidlo, změní se matice, testy a mikrotexty v UI. Ne jen jedna podmínka zakopaná v controlleru.
+
+## GO.8 Checklist přístupových oprávnění
+
+- [ ] Má každá role lidsky srozumitelný popis práce?
+- [ ] Existuje samostatná role vlastníka účtu a nejde ji omylem ztratit bez náhrady?
+- [ ] Jsou citlivé akce oddělené od běžných editací?
+- [ ] Kontroluje server oprávnění na každém endpointu a objektu?
+- [ ] Platí deny-by-default pro nové funkce, endpointy a typy dat?
+- [ ] Rozlišujeme organizaci, workspace, projekt, složku a sdílený objekt?
+- [ ] Umí systém dočasný support access s důvodem, expirací a audit logem?
+- [ ] Expirují pozvánky a ukazují dopad role před přijetím?
+- [ ] Offboarding ruší session, tokeny, sdílení a převádí vlastnictví?
+- [ ] Jsou exporty, API tokeny a integrace omezené vlastním rozsahem?
+- [ ] Testujeme horizontální i vertikální eskalaci oprávnění?
+- [ ] Umí zákazník zjistit, kdo měl přístup k citlivým datům?
+- [ ] Máme retenční pravidlo pro bývalé členy a historické auditní záznamy?
+- [ ] Kontrolujeme oprávnění při každém větším release nebo změně rolí?
+
+## Zdroje k příloze
+
+- OWASP Top 10 — Broken Access Control: https://owasp.org/Top10/A01_2021-Broken_Access_Control/
+- OWASP Authorization Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html
+- EDPB Guidelines 4/2019 on Article 25 Data Protection by Design and by Default: https://www.edpb.europa.eu/documents/guideline/guidelines-42019-on-article-25-data-protection-by-design-and-by-default_en
+
+## Shrnutí přílohy
+
+Přístupová oprávnění jsou produktová i bezpečnostní funkce. Dobrý model začíná rolí podle práce, pokračuje kontrolou každého objektu a končí disciplinovaným offboardingem. Privacy-first SaaS nepouští data podle optimismu, ale podle jasného účelu, vztahu, rozsahu a času. Méně univerzálních adminů, více přesných oprávnění. Ano, je to méně pohodlné než „dej mu full access“. Taky je to podstatně méně výbušné.
+
+
 
 ## Pracovní log
+- 2026-08-15: Přidána příloha GO o přístupových oprávněních: role podle práce, deny-by-default, kombinace rolí se vztahem k objektům, ochrana citlivých akcí, dočasný support access, pozvánky, offboarding, testy oprávnění a privacy-first checklist.
 - 2026-08-15: Přidána příloha GN o rate limitingu a anti-abuse: mapa zneužitelných toků, limity podle více klíčů, bezpečné přihlašování, CAPTCHA jako pozdější vrstva, střídmé logování, support výjimky, review před kampaněmi a privacy-first checklist.
 - 2026-08-15: Přidána příloha GM o cookie a browser storage hygieně: inventura cookies a Web Storage, bezpečné atributy session cookie, rizika `localStorage`, consent jako produktové nastavení, kategorie účelů, retence, testovací scénáře a privacy-first checklist.
 - 2026-08-15: Přidána příloha GL o doménové a DNS hygieně pro privacy-first SaaS: vlastnictví domén, inventura záznamů, TTL změny, SPF/DKIM/DMARC, subdomény, release proces pro DNS, evropský provoz a checklist.
