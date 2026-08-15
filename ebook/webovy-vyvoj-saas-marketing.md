@@ -32840,7 +32840,209 @@ Dobře navržený sandbox je nudný v tom nejlepším smyslu. Testovací klíče
 Sandbox má zákazníkům umožnit bezpečné učení, ověření integrace a reprodukci problémů bez produkčních dat. Potřebuje syntetická data, oddělené klíče a endpointy, bezpečné simulace externích toků, jasnou retenci, maskované logy a dokumentovanou první integrační trasu. Privacy-first sandbox není luxus; je to prevence proti tomu, aby se produkce nestala testovacím hřištěm.
 
 
+# Příloha HD: Rate limity, kvóty a ochrana API před účtem za vlastní popularitu
+
+API bez limitů je jako otevřený kohoutek v domě, kde vodoměr platíš ty a klíče má internet. Někdy přijde útok. Někdy přijde chyba v zákazníkově integraci. Někdy přijde vlastní dávkový job, který měl běžet jednou denně, ale kvůli špatnému retry běží jednou za vteřinu a tváří se jako velmi odhodlaný robotický účetní.
+
+Rate limiting není trest pro zákazníka. Je to bezpečnostní pás, obchodní pravidlo a provozní pojistka v jednom. Privacy-first SaaS ho navrhuje tak, aby chránil službu, zákaznická data, infrastrukturu i náklady — a aby poctivý zákazník přesně věděl, co se děje a jak problém opravit.
+
+OWASP API Security Top 10 2023 řadí neomezenou spotřebu zdrojů mezi významná API rizika a výslovně zmiňuje chybějící limity pro payloady, počty operací, rate limiting i nákladové limity u navázaných služeb: https://owasp.org/API-Security/editions/2023/en/0xa4-unrestricted-resource-consumption/
+
+## HD.1 Limituj zdroje, ne jen počet requestů
+
+Nejjednodušší limit je „100 requestů za minutu“. Je to dobrý začátek, ale sám o sobě nestačí. Jeden request může být levný `GET /me`, nebo drahý export všech faktur za tři roky, generování PDF, volání AI modelu, posílání SMS, import velkého souboru nebo spuštění webhook kaskády.
+
+Proto si u každého endpointu napiš, jaký zdroj reálně spotřebovává:
+
+| Typ práce | Příklad | Co limitovat |
+| --- | --- | --- |
+| Čtení | seznam zákazníků, detail objednávky | requesty, stránkování, velikost odpovědi |
+| Zápis | vytvoření faktury, změna role | requesty, idempotence, počet změn za okno |
+| Drahá práce | export, PDF, AI shrnutí | souběh, denní kvóta, fronta, rozpočet |
+| Externí náklad | SMS, e-mail, validace DPH | počet pokusů, cena, ochrana proti smyčkám |
+| Citlivý tok | reset hesla, OTP, pozvánky | pokusy na účet, IP, organizaci i cílový kontakt |
+
+Slabý návrh:
+
+> Všechno API má 600 requestů za minutu.
+
+Lepší návrh:
+
+> Běžné čtení má limit podle API klíče a organizace, exporty mají frontu a denní kvótu, reset hesla má přísnější limit podle účtu i cílového e-mailu a AI funkce mají samostatný rozpočet podle tarifu.
+
+Jeden univerzální limit vypadá jednoduše v dokumentaci, ale v provozu často znamená, že buď škrtíš normální práci, nebo necháš drahé operace dělat rodeo s fakturou za infrastrukturu.
+
+## HD.2 Navrhni limity podle identity a kontextu
+
+Rate limit podle IP adresy je užitečný signál, ale není to pravda vytesaná do kamene. Firemní zákazník může mít mnoho uživatelů za jednou NAT adresou. Útočník může IP adresy střídat. Mobilní sítě umí sdílet adresy jako společnou deku na festivalu. Privacy-first provoz navíc nechce z IP dělat zbytečně dlouhodobý identifikátor, pokud to není nutné.
+
+Prakticky kombinuj více úrovní:
+
+- **API klíč:** hlavní limit pro serverové integrace.
+- **Organizace nebo workspace:** ochrana férového využití tarifu.
+- **Uživatel:** ochrana před chybou v UI nebo účtu.
+- **Endpoint:** citlivé a drahé operace mají vlastní pravidla.
+- **Cílový objekt:** například počet resetů hesla na jeden e-mail nebo počet pozvánek na jednu adresu.
+- **IP nebo síťový rozsah:** obrana proti anonymnímu provozu, ale s opatrnou retencí.
+
+U každé úrovně si napiš účel. Pokud IP používáš jen pro krátkodobou obranu proti zneužití, nedělej z ní marketingový profil. Ulož agregovaný stav limitu, nastav krátkou retenci a v logách maskuj víc, než potřebuješ. Bezpečnost ano. Datový vysavač ne.
+
+## HD.3 Odpověď `429` má zákazníkovi pomoct, ne ho urazit
+
+HTTP status `429 Too Many Requests` je standardní způsob, jak říct, že klient poslal příliš mnoho požadavků v daném čase; RFC 6585 ho definuje právě pro tento případ: https://www.rfc-editor.org/rfc/rfc6585.html
+
+Dobrá odpověď na limit není jen status kód. Má obsahovat stabilní chybový kód, lidský popis, korelační ID a informaci, kdy to zkusit znovu. Hlavička `Retry-After` je popsaná v HTTP sémantice RFC 9110 a používá se k vyjádření doby, po které má klient požadavek opakovat: https://www.rfc-editor.org/rfc/rfc9110.html
+
+Příklad rozumné odpovědi:
+
+```http
+HTTP/1.1 429 Too Many Requests
+Content-Type: application/json
+Retry-After: 60
+RateLimit-Limit: 120
+RateLimit-Remaining: 0
+RateLimit-Reset: 60
+```
+
+```json
+{
+  "error": {
+    "code": "rate_limit_exceeded",
+    "message": "Překročili jste limit pro vytváření exportů. Zkuste to znovu přibližně za 60 sekund.",
+    "request_id": "req_01JEXAMPLE"
+  }
+}
+```
+
+Standardizované hlavičky `RateLimit-Limit`, `RateLimit-Remaining` a `RateLimit-Reset` popisuje RFC 9333: https://www.rfc-editor.org/rfc/rfc9333.html
+
+Co do odpovědi nedávat:
+
+- interní název pravidla typu `tenant_ai_budget_guard_v7_final_final`,
+- přesné informace, které pomůžou obejít ochranu,
+- seznam jiných zákazníků nebo srovnání jejich limitů,
+- stack trace a SQL dotaz,
+- dlouhou právnickou výhrůžku, že uživatel zlobí.
+
+Klient potřebuje vědět, že má zpomalit, změnit dávkování, počkat na reset okna nebo požádat o vyšší tarif. Ne že se server probudil se špatnou náladou.
+
+## HD.4 Retry politika je součást API kontraktu
+
+Když API vrátí `429`, zákaznický klient často udělá jednu ze tří věcí: počká, spadne, nebo začne requesty opakovat ještě agresivněji. Třetí možnost je krásná ukázka toho, jak si počítače umí navzájem zkazit den.
+
+Do dokumentace napiš doporučené chování:
+
+- Respektuj `Retry-After`, pokud je přítomný.
+- Používej exponenciální backoff s jitterem, aby klienti nenaskočili zpět ve stejnou milisekundu.
+- Neopakuj ne-idempotentní zápisy bez idempotency key.
+- Dávkové operace rozděluj na menší části.
+- U dlouhých exportů používej job endpoint a polling s rozumným intervalem, ne smyčku každou vteřinu.
+- Po opakovaném limitu přestaň a ukaž uživateli akční hlášku.
+
+Příklad špatného klienta:
+
+```js
+while (true) {
+  await fetch('/api/export');
+}
+```
+
+Příklad lepšího chování:
+
+```js
+for (let attempt = 0; attempt < 5; attempt++) {
+  const response = await fetch('/api/export');
+  if (response.status !== 429) return response;
+
+  const retryAfter = Number(response.headers.get('retry-after') || 30);
+  const jitter = Math.floor(Math.random() * 1000);
+  await new Promise(resolve => setTimeout(resolve, retryAfter * 1000 + jitter));
+}
+```
+
+Ukázka je zjednodušená, ale pointa platí: API má zákazníka naučit civilizované opakování. Jinak si každý napíše vlastní retry folklór a support bude luštit, proč integrace vypadá jako datlování kulometem.
+
+## HD.5 Kvóty vysvětli obchodně, ne jako tajnou past
+
+Limit, o kterém zákazník neví, není produktové pravidlo. Je to mina. Pokud tarif obsahuje 10 000 API požadavků denně, 50 exportů měsíčně nebo 1 000 AI akcí, má to být jasně vidět v cenové stránce, dokumentaci a ideálně i v administraci.
+
+Dobrá SaaS administrace ukazuje:
+
+- aktuální využití kvóty,
+- resetovací období,
+- které endpointy nebo funkce spotřebu tvoří,
+- upozornění před vyčerpáním,
+- možnost požádat o navýšení,
+- doporučení, jak spotřebu snížit bez ztráty funkce.
+
+Privacy-first detail: neukazuj víc dat, než je potřeba pro správu spotřeby. Zákazník nepotřebuje tabulku všech koncových uživatelů s IP adresami, aby pochopil, že integrace posílá export každé dvě minuty. Stačí agregace podle API klíče, endpointu, času a případně korelační ID pro řešení se supportem.
+
+Transparentní věta v UI:
+
+> Tento workspace dnes využil 82 % denní API kvóty. Největší část tvoří `POST /exports`. Pokud běží dávkový import, zvažte delší interval nebo job endpoint.
+
+Tohle je produktová pomoc. „Quota exceeded“ bez kontextu je digitální pokrčení ramen.
+
+## HD.6 Drahé operace patří do fronty a rozpočtu
+
+Některé operace by se vůbec neměly provádět synchronně pod běžným request limitem. Exporty, importy, generování souborů, hromadné e-maily, AI zpracování a synchronizace integrací mají mít vlastní frontu, stavový model a rozpočet.
+
+Stavový model může být jednoduchý:
+
+- `queued` — požadavek přijat a čeká na zpracování,
+- `running` — práce běží,
+- `succeeded` — výsledek je připravený,
+- `failed_retryable` — problém lze zkusit znovu,
+- `failed_final` — práce skončila a vyžaduje zásah,
+- `expired` — výsledek byl po retenční době smazán.
+
+Ke každé drahé operaci nastav:
+
+- maximální souběh na organizaci,
+- maximální velikost vstupu a výstupu,
+- timeout,
+- denní nebo měsíční rozpočet,
+- upozornění při neobvyklém růstu,
+- bezpečné zrušení nebo pozastavení,
+- auditní záznam bez citlivého payloadu.
+
+OWASP u neomezené spotřeby zdrojů zmiňuje nejen technické zahlcení, ale i růst provozních nákladů u infrastruktury nebo navázaných služeb. To je pro malý SaaS důležité: útok nemusí shodit server, aby bolel. Stačí, když nechá běžet účet.
+
+## HD.7 Checklist rate limitů a kvót
+
+- Má každý veřejný endpoint popsaný typ spotřeby zdrojů?
+- Existují zvláštní limity pro drahé operace, citlivé toky a externě účtované služby?
+- Kombinuješ limity podle API klíče, organizace, uživatele, endpointu a cílového objektu tam, kde to dává smysl?
+- Má IP-based ochrana krátkou retenci a jasný bezpečnostní účel?
+- Vrací API u limitu stabilní `429` odpověď s akčním popisem a korelačním ID?
+- Používáš `Retry-After` a tam, kde se hodí, standardní `RateLimit-*` hlavičky?
+- Dokumentace doporučuje backoff, jitter a idempotency key pro opakování zápisů?
+- Vidí zákazník využití kvót v administraci bez zbytečných osobních údajů?
+- Jsou exporty, importy, AI akce a hromadné operace přes frontu, ne přes nekonečný synchronní request?
+- Existují nákladové alerty a bezpečné vypnutí pro anomální spotřebu?
+- Testuješ limity v sandboxu i v produkci pomocí bezpečných scénářů?
+- Umí support vysvětlit překročení limitu bez přístupu k citlivému payloadu?
+
+## Codyho komentář
+
+Můj pohled — Cody: rate limit je jako dobrý recepční. Nepustí dovnitř dav s beranidlem, ale slušnému zákazníkovi vysvětlí, kudy jít, kdy se vrátit a koho se zeptat. Špatný rate limit je naopak sekuriťák, který každého občas náhodně vyhodí z budovy a odmítne říct proč.
+
+Nejlepší limity jsou viditelné, předvídatelné a nudné. Zákazník chápe kvótu, klient respektuje `Retry-After`, drahé operace běží ve frontě a tým má alert dřív, než účet za infrastrukturu připomíná cenu menšího ojetého auta. Privacy-first přístup tady není brzda. Je to připomínka, že obrana proti zneužití nemá sama vytvářet zbytečnou databázi stop o lidech.
+
+## Zdroje k příloze
+
+- OWASP API4:2023 Unrestricted Resource Consumption k limitům spotřeby zdrojů, payloadů, operací, rate limitingu a nákladovým alertům: https://owasp.org/API-Security/editions/2023/en/0xa4-unrestricted-resource-consumption/
+- RFC 6585 k HTTP statusu `429 Too Many Requests`: https://www.rfc-editor.org/rfc/rfc6585.html
+- RFC 9110 k HTTP sémantice a hlavičce `Retry-After`: https://www.rfc-editor.org/rfc/rfc9110.html
+- RFC 9333 k `RateLimit-*` hlavičkám pro komunikaci limitů klientům: https://www.rfc-editor.org/rfc/rfc9333.html
+
+## Shrnutí přílohy
+
+Rate limiting v privacy-first SaaS chrání dostupnost, náklady, zákaznická data i férové využití produktu. Nestačí počítat requesty za minutu; je potřeba rozlišit levné a drahé operace, identitu a kontext, citlivé business toky, externě účtované služby a zákaznickou viditelnost kvót. Dobré API vrací akční `429`, dokumentuje retry chování, používá fronty pro drahou práci a sbírá jen takové provozní signály, které skutečně pomáhají službu chránit.
+
+
 ## Pracovní log
+- 2026-08-15: Přidána příloha HD o rate limitech, kvótách a ochraně API před neomezenou spotřebou zdrojů: limity podle typu práce, identita a kontext, odpovědi `429`, `Retry-After`, `RateLimit-*` hlavičky, retry politika, viditelné kvóty, fronty pro drahé operace a privacy-first checklist.
 - 2026-08-15: Přidána příloha HC o sandboxu a testovacích prostředích: syntetická data, oddělené klíče a endpointy, bezpečné simulace webhooků/e-mailů/plateb, reset a retence, maskované logy, integrační trasa a checklist.
 - 2026-08-15: Přidána příloha HB o API dokumentaci a developer portálu: OpenAPI jako zdroj pravdy, syntetické příklady, bezpečné tokeny, popis oprávnění a datového rozsahu, changelog, střídmé měření a checklist.
 - 2026-08-15: Přidána příloha HA o API chybových odpovědích: stabilní formát, HTTP statusy, validační detaily, ochrana před únikem dat, rate limit odpovědi, lokalizace, korelační ID a checklist.
