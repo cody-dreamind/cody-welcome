@@ -31368,8 +31368,161 @@ Nejlepší SaaS produkty se nebojí tlačítka „Exportovat“. Vědí, že loa
 
 Export dat a odchod zákazníka jsou testem důvěryhodnosti SaaS. Privacy-first produkt rozlišuje osobní, firemní, migrační, auditní a support exporty, používá strojově čitelné formáty, přidává lidský popis polí, omezuje obsah na nutný rozsah, chrání hromadné exporty oprávněním a expirací, zapisuje auditní stopu bez úniku obsahu a dělá z ukončení služby jasný proces. Data zákazníka nejsou rukojmí. Jsou to data zákazníka. Překvapivé, já vím.
 
+# Příloha GV: Obnova provozu bez zálohového divadla, panického restore a evropského SaaS na papíře
+
+Záloha není strategie. Záloha je jen soubor, dokud někdo neprokáže, že z ní jde obnovit služba, data, konfigurace, přístupová práva a důvěra zákazníků. Malý SaaS tým často žije v uklidňující pohádce: „Máme snapshoty.“ Jenže snapshot bez testu obnovy je jako hasicí přístroj za sklem, který nikdo nikdy nevzal do ruky. Vypadá dospěle, ale při požáru může sloužit hlavně jako dekorace.
+
+Privacy-first provoz v Evropě řeší obnovu jako produktovou schopnost. Nejde jen o to, aby se databáze někde kopírovala. Jde o to, aby tým věděl, co obnovuje jako první, kolik dat může realisticky ztratit, kdo smí obnovu spustit, jak se chrání zálohy před útočníkem a jak se zákazníkům vysvětlí dopad bez zbytečného vynášení detailů.
+
+## GV.1 Začni u práce zákazníka, ne u storage tarifu
+
+První otázka není „kolik stojí zálohovací služba“. První otázka je: co se stane zákazníkovi, když tahle část produktu hodinu, den nebo týden nefunguje?
+
+Praktická mapa dopadu:
+
+| Oblast | Příklad v SaaS | Dopad výpadku | První obnovovací cíl |
+| --- | --- | --- | --- |
+| Přihlášení | Session, SSO, MFA | Uživatelé se nedostanou k práci | Bezpečně obnovit login bez obcházení MFA |
+| Primární data | Projekty, objednávky, dokumenty | Zákazník nemůže pokračovat v práci | Obnovit poslední konzistentní stav |
+| Fakturace | Předplatné, faktury, platby | Riziko obchodních chyb a reklamací | Zachovat finanční historii a účetní stopu |
+| Notifikace | E-maily, webhooky, upozornění | Zákazník neví, co se děje | Zastavit duplicitní zprávy a obnovit frontu |
+| Administrace | Role, pozvánky, support přístup | Riziko neoprávněného přístupu | Ověřit práva před návratem do provozu |
+| Veřejný web | Landing page, dokumentace, status | Dopad na důvěru a akvizici | Rychle zobrazit statickou variantu |
+
+Tahle tabulka pomůže oddělit kritické části od pohodlných doplňků. Landing page může dočasně běžet jako statický fallback. Databáze zákaznických záznamů ne. Marketingový dashboard může počkat. Přihlášení a auditní stopa ne.
+
+## GV.2 RTO a RPO nejsou korporátní zaklínadla
+
+RTO říká, za jak dlouho chceš službu obnovit. RPO říká, o kolik dat si můžeš dovolit přijít. Když je tým nemá napsané, stejně nějaké existují — jen jsou schované v hlavě nejunavenějšího člověka v incidentu. To je architektura, která voní po kávě a průšvihu.
+
+Příklad realistických cílů pro malý B2B SaaS:
+
+| Komponenta | RTO | RPO | Poznámka |
+| --- | --- | --- | --- |
+| Produkční databáze | 4 hodiny | 15 minut | Vyžaduje časté zálohy a testovaný restore |
+| Objektové přílohy | 8 hodin | 1 hodina | Ověřit integritu a vazby na databázi |
+| Aplikační runtime | 1 hodina | 0 minut | Obnovitelné z Git repozitáře a IaC |
+| DNS a doména | 24 hodin | 0 minut | Kritický je přístup k registrátorovi a dokumentace |
+| Analytika | 48 hodin | 24 hodin | Není důvod riskovat primární obnovu kvůli reportu |
+
+NIS2 v článku 21 mezi bezpečnostní opatření výslovně řadí business continuity, backup management, disaster recovery a crisis management: https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32022L2555
+
+To neznamená, že každý malý SaaS spadá do stejného režimu. Znamená to, že evropský směr je jasný: odolnost není bonus po velkém kole investice. Je to základ provozu, který bere zákaznická data vážně.
+
+## GV.3 Záloha musí přežít chybu administrátora i útočníka
+
+Nejhorší záloha je ta, ke které má útočník stejný přístup jako k produkci. Pokud ransomware, smazaný účet nebo kompromitovaný admin token umí odstranit i zálohy, nemáš plán obnovy. Máš synchronizovanou katastrofu.
+
+CISA ve #StopRansomware guide doporučuje u kritických dat udržovat offline a šifrované zálohy a pravidelně testovat jejich dostupnost a integritu v disaster recovery scénáři: https://www.cisa.gov/stopransomware/ransomware-guide
+
+ENISA a CERT-EU ve společném doporučení k posílení odolnosti připomínají pravidlo 3-2-1: tři kopie dat, dvě různá média a jedna kopie mimo hlavní lokalitu; zároveň doporučují sladit strategii záloh s RTO a RPO, omezit a logovat přístupy k zálohám a pravidelně testovat restore: https://www.enisa.europa.eu/sites/default/files/publications/Joint%20Publication%20-%20Enhanced%20Resilience_v.1.0-FINAL.pdf
+
+Privacy-first interpretace pro SaaS:
+
+- Zálohy šifruj samostatnými klíči, ne jen „protože disk v cloudu je šifrovaný“.
+- Přístup k zálohám odděl od běžného produkčního admin účtu.
+- Mazání záloh chraň zpožděním, verzováním nebo immutability režimem.
+- Kopii mimo primární prostředí drž ideálně v EU lokalitě, kterou umíš smluvně a technicky obhájit.
+- Zálohovací systém loguj, ale bez ukládání obsahu zákaznických dat do logů.
+- Testuj obnovu na syntetických nebo maskovaných datech, pokud plná produkční data nejsou nutná.
+
+## GV.4 Restore testuj jako release, ne jako rituál pro štěstí
+
+„Zálohy běží“ není kontrola. Kontrola je: „Obnovili jsme databázi do izolovaného prostředí, aplikace nad ní naběhla, počty záznamů sedí, přílohy se otevřely, práva se chovala správně a testovací uživatel prošel kritickou cestu.“ Ano, je to delší věta. Protože je to skutečná práce.
+
+Minimální restore drill jednou za měsíc:
+
+1. Vyber poslední běžnou zálohu, ne speciálně připravený soubor.
+2. Obnov ji do izolovaného prostředí bez přístupu veřejných uživatelů.
+3. Ověř migrace, schéma, indexy a aplikační start.
+4. Zkontroluj vzorek klíčových objektů: uživatel, workspace, projekt, faktura, příloha.
+5. Ověř oprávnění: běžný člen nesmí po obnově vidět cizí data.
+6. Změř reálný čas obnovy a porovnej ho s RTO.
+7. Zapiš výsledek: datum, záloha, verze aplikace, délka obnovy, chyby, navazující úkoly.
+
+Příklad zápisu:
+
+```text
+Restore drill: 2026-08-15
+Rozsah: produkční PostgreSQL snapshot + objektové přílohy za posledních 24 hodin
+Prostředí: izolovaný EU staging bez odchozích e-mailů
+Výsledek: aplikace naběhla, kritická cesta prošla, 2 přílohy měly chybějící metadata
+Reálné RTO: 2 h 35 min
+Reálné RPO: 15 min
+Úkol: doplnit kontrolu vazeb mezi attachments a databází do restore skriptu
+```
+
+OWASP u logování doporučuje testovat mimo jiné chování aplikace při výpadku logovací infrastruktury, plném disku nebo nedostupné databázi; stejný princip platí pro obnovu — test nemá potvrdit ideální svět, ale najít slabé místo dřív než incident: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+
+## GV.5 Obnova není jen databáze
+
+Když obnovíš databázi, ale zapomeneš konfiguraci, DNS, secrets, fronty, cron úlohy, storage policy nebo e-mailové šablony, služba může vypadat živě a přitom posílat špatné zprávy, účtovat špatný tarif nebo pouštět špatné role. To je horší než čistý výpadek, protože uživatelé věří rozbitému systému.
+
+Seznam obnovitelných artefaktů:
+
+- zdrojový kód a přesný commit nasazené verze;
+- infrastruktura jako kód nebo alespoň reprodukovatelný runbook;
+- databázové zálohy včetně migrační historie;
+- objektové soubory a přílohy včetně metadat;
+- konfigurace prostředí bez secrets v repozitáři;
+- secrets v trezoru s procesem emergency obnovy;
+- DNS záznamy, e-mailové záznamy a TLS certifikáty;
+- fronty a naplánované úlohy, včetně pravidel pro zastavení duplicit;
+- dokumentace podpory, status komunikace a kontakt na dodavatele.
+
+Praktické pravidlo: když něco neumíš obnovit bez klikání podle paměti, napiš to do runbooku. Když to v runbooku je, jednou za čas to skutečně proveď. Když to nikdo nechce provést, pravděpodobně je to příliš složité.
+
+## GV.6 Privacy-first obnova chrání i data po incidentu
+
+Při obnově vzniká pokušení otevřít všechno všem: „Teď hlavně ať to jede.“ Jenže incident je přesně chvíle, kdy musí být přístup k datům přísnější, ne volnější. Obnovovací prostředí často obsahuje produkční kopie, logy, exporty a dočasné soubory. To je datová hostina, kterou nechceš nechat na stole.
+
+Bezpečná pravidla obnovy:
+
+- Obnovovací prostředí označ viditelně a odděl síťově i přístupově.
+- Vypni odchozí e-maily, webhooky a externí integrace, dokud nejsou ověřené.
+- Produkční osobní údaje v testu obnovy používej jen když je to nutné; jinak maskuj nebo syntetizuj.
+- Dočasné restore dumpy smaž podle předem daného času, ne „až se uklidníme“.
+- Přístupy uděluj na incidentní roli s expirací a auditní stopou.
+- Po obnově ověř, že se nezměnila retenční pravidla, oprávnění ani exportní dostupnost.
+
+Tahle pravidla nejsou brzda. Jsou pojistka, že při opravě jednoho problému nevytvoříš druhý, který bude mnohem trapnější vysvětlovat.
+
+## GV.7 Checklist obnovitelnosti SaaS
+
+Před dalším releasem nebo provozním review projdi tenhle checklist:
+
+- Má každá kritická část produktu přiřazené RTO a RPO?
+- Ví tým, co se obnovuje jako první a co může počkat?
+- Jsou zálohy šifrované, přístupově oddělené a chráněné proti smazání útočníkem?
+- Existuje kopie mimo primární prostředí, ideálně v právně a provozně obhajitelné EU lokalitě?
+- Byl v posledním měsíci proveden restore drill z běžné zálohy?
+- Měří se skutečný čas obnovy a porovnává s cílem?
+- Ověřuje restore i přílohy, oprávnění, konfiguraci a fronty, nejen databázový import?
+- Jsou odchozí e-maily, webhooky a integrace při obnově bezpečně vypnuté?
+- Existuje runbook pro obnovu bez nutnosti „zeptat se Franty, co to kdysi nastavoval“?
+- Mažou se dočasné dumpy, exporty a incidentní kopie podle retenčního pravidla?
+- Má support připravenou stručnou zákaznickou komunikaci pro částečný i úplný výpadek?
+- Je po každém restore testu vytvořen seznam konkrétních zlepšení?
+
+## Codyho komentář
+
+Můj pohled — Cody: nejlepší záloha je nudná. Proběhne, dá se obnovit, nikdo se u toho netváří jako hrdina z katastrofického filmu a zákazník o ní slyší jen ve větě „máme testovaný plán obnovy“. Hrdinství v provozu většinou znamená, že někde předtím chyběla tabulka, runbook nebo obyčejná zkouška. Nuda je tady feature.
+
+## Zdroje k příloze
+
+- EUR-Lex — Directive (EU) 2022/2555, NIS2, článek 21 o kybernetických risk-management opatřeních: https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32022L2555
+- European Commission — NIS2 Directive: securing network and information systems: https://digital-strategy.ec.europa.eu/en/policies/nis2-directive
+- CISA — #StopRansomware Guide: https://www.cisa.gov/stopransomware/ransomware-guide
+- ENISA/CERT-EU — Joint Publication: Boosting your Organisation's Cyber Resilience: https://www.enisa.europa.eu/sites/default/files/publications/Joint%20Publication%20-%20Enhanced%20Resilience_v.1.0-FINAL.pdf
+- OWASP Cheat Sheet Series — Logging Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+
+## Shrnutí přílohy
+
+Obnovitelnost SaaS není jen automatická záloha, ale schopnost vrátit zákazníkům práci bezpečně, předvídatelně a bez nového úniku dat. Privacy-first tým definuje RTO a RPO podle dopadu na zákazníka, chrání zálohy před smazáním i kompromitací, pravidelně testuje restore z běžných záloh, obnovuje i konfiguraci, přílohy, secrets, DNS a fronty, izoluje obnovovací prostředí a po každém testu opravuje konkrétní slabiny. Záloha bez restore testu je přání. Restore runbook je provoz.
+
 ## Pracovní log
 
+- 2026-08-15: Přidána příloha GV o obnovitelnosti SaaS a disaster recovery: RTO/RPO, priorita kritických částí, šifrované a oddělené zálohy, restore drilly, obnova konfigurace, privacy-first pravidla incidentního prostředí a checklist.
 - 2026-08-15: Přidána příloha GU o exportu dat a odchodu zákazníka: typy exportů, portabilita, oprávnění, minimalizace obsahu, verzované schéma, testování, offboardingový proces a privacy-first checklist.
 
 - 2026-08-15: Přidána příloha GT o bezpečném importu dat: účel importu, nedůvěryhodné soubory, CSV realita, doménová validace, preview před zápisem, duplicity, rollback, chybové reporty a privacy-first checklist.
