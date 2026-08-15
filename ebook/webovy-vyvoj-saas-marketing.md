@@ -29781,7 +29781,220 @@ Domény a DNS jsou provozní kostra webu i SaaS, ne nudná administrace bokem. P
 
 
 
+# Příloha GM: Cookie a browser storage hygiena bez bannerového divadla, session chaosu a datového šuplíku v prohlížeči
+
+Cookie lišta není strategie. Je to poslední metr rozhodnutí, která měla padnout dávno předtím: proč něco ukládáme do prohlížeče, jak dlouho to tam má žít, kdo to čte, jestli je to nezbytné a co se stane, když uživatel řekne ne. Malý SaaS často začne nevinně: jedna session cookie, potom analytika, potom chat widget, potom onboardingový experiment, potom marketingový pixel. Za půl roku nikdo neví, co v prohlížeči bydlí. Gratuluju, právě jste vynalezli datový sklep.
+
+Privacy-first přístup je opačný: prohlížeč ber jako cizí zařízení, ne jako levnou databázi. Ukládej jen to, co má jasný uživatelský účel, krátkou životnost a vlastníka. Když potřebuješ stav aplikace, preferuj serverový stav nebo krátkou session. Když potřebuješ preference, ulož jen preferenci. Když potřebuješ měření, nejdřív se zeptej, zda opravdu potřebuješ identifikátor.
+
+## GM.1 Udělej inventuru všeho, co web ukládá nebo čte
+
+Začni tabulkou. Ne právním textem, ne CMP konfigurací, ne screenshotem cookie banneru. Tabulkou, kterou pochopí vývojář, marketér i člověk z podpory.
+
+Minimální sloupce:
+
+| Položka | Typ | Kdo ji nastavuje | Účel | Obsah | Životnost | Nutnost | Vlastník |
+|---|---|---|---|---|---|---|---|
+| `session_id` | cookie | aplikace | přihlášení | náhodný identifikátor session | do odhlášení / krátká expirace | nezbytná | backend |
+| `ui_theme` | localStorage | frontend | volba tmavého režimu | `light` / `dark` | dokud ji uživatel nezmění | preference | frontend |
+| `analytics_consent` | cookie/localStorage | consent modul | uložení volby | `yes` / `no` + verze textu | omezeně | preference / důkaz volby | produkt |
+| `onboarding_step` | server nebo sessionStorage | aplikace | návrat do rozpracovaného onboardingu | číslo kroku | krátce | funkční | produkt |
+
+Praktický postup:
+
+1. Otevři web v čistém profilu prohlížeče.
+2. Projdi anonymní landing page, registraci, přihlášení, trial, nastavení a odhlášení.
+3. V DevTools zkontroluj Cookies, Local Storage, Session Storage a IndexedDB.
+4. Každou položku zařaď do inventury.
+5. Smaž nebo zkrať vše, co nemá jasný účel.
+
+Nezapomeň na vložené skripty. Třetí strana může ukládat data i bez toho, aby se tvůj kód tvářil provinile. „To dělá widget“ není odpověď, to je přiznání bez dozoru.
+
+## GM.2 Cookie používej hlavně pro serverovou práci, ne jako marketingový batoh
+
+Cookie má jednu zásadní vlastnost: posílá se s HTTP požadavky podle pravidel domény, cesty a atributů. To je skvělé pro session nebo CSRF ochranu. Je to mizerné pro ukládání všeho, co server nepotřebuje při každém requestu.
+
+Doporučené rozdělení:
+
+- Session a bezpečnostní tokeny: cookie nastavená serverem, `HttpOnly`, `Secure`, rozumné `SameSite`, krátká životnost.
+- Preference UI: spíš `localStorage` nebo serverový profil, pokud je uživatel přihlášený.
+- Dočasný stav formuláře: `sessionStorage` nebo serverový draft, ne permanentní cookie.
+- Analytické identifikátory: pokud možno žádné; když už, tak s jasným právním základem, krátkou retencí a dokumentací.
+- Marketingové sledování: výchozí stav vypnuto, žádné „předem zaškrtnuté kreativní řešení“, protože právní oddělení není úniková místnost.
+
+U autentizačních cookie měj technický standard:
+
+```text
+Set-Cookie: __Host-session=náhodná_hodnota; Path=/; Secure; HttpOnly; SameSite=Lax; Max-Age=...
+```
+
+Proč takhle:
+
+- `Secure` omezuje přenos na HTTPS.
+- `HttpOnly` brání čtení cookie přes JavaScript.
+- `SameSite=Lax` je rozumný default pro mnoho klasických webových aplikací.
+- Prefix `__Host-` pomáhá vynutit přísnější pravidla pro host-only cookie bez `Domain` atributu.
+- `Path=/` dělá chování čitelné a předvídatelné.
+
+Není to univerzální recept. Pokud máš cross-site embedding, SSO nebo více domén, musíš návrh promyslet zvlášť. Ale jako výchozí hygienický standard pro malý SaaS je to výrazně lepší než „nějak to framework nastaví“.
+
+## GM.3 LocalStorage není trezor, jen lepší lepicí papírek
+
+Web Storage API je pohodlné. `localStorage` přežije zavření prohlížeče, `sessionStorage` je vázané na session konkrétního tabu. To svádí ukládat do prohlížeče tokeny, celé profily, rozpracované formuláře, feature flag segmenty a někdy i data zákazníka. Nedělej to.
+
+Základní pravidlo:
+
+- Do `localStorage` patří jen data, která nejsou tajná a nevadí, že jsou dostupná JavaScriptu na daném originu.
+- Do `sessionStorage` patří krátkodobý stav, který nepotřebuje server a nemá přežít běžnou práci dlouho.
+- Do IndexedDB patří větší offline data jen tehdy, když je offline režim skutečná produktová funkce, ne pohodlná výmluva.
+- Access tokeny, osobní údaje, interní poznámky, exporty a obsah zákaznických dokumentů do browser storage nepatří bez velmi dobrého důvodu.
+
+Příklad dobrého použití:
+
+```text
+localStorage: ui.sidebarCollapsed = "true"
+sessionStorage: signup.lastCompletedStep = "billing"
+server: workspace billing data, role, audit log, export history
+```
+
+Příklad špatného použití:
+
+```text
+localStorage: access_token = "..."
+localStorage: customer_email = "eva@example.com"
+localStorage: ai_prompt_history = "..."
+```
+
+Když máš pocit, že lokální úložiště urychlí vývoj, zeptej se: co se stane na sdíleném počítači, při XSS incidentu, při odchodu uživatele z firmy nebo při žádosti o výmaz? Pokud odpověď zní „ehm“, máš návrhový problém, ne implementační detail.
+
+## GM.4 Consent řeš jako produktové nastavení, ne jako pop-up na uklidnění svědomí
+
+V Evropě se ukládání a čtení informací ze zařízení neřídí jen tím, jestli je cookie „osobní údaj“. Důležitý je i ePrivacy rámec: pokud nejde o technicky nezbytné uložení nebo přístup, typicky potřebuješ jasný souhlas předem. GDPR pak řeší kvalitu souhlasu a zpracování osobních údajů.
+
+Prakticky:
+
+- Nezbytné položky popiš, ale neptej se na ně jako na volitelný marketingový souhlas.
+- Volitelné analytické nebo marketingové trackery spusť až po souhlasu.
+- Odmítnutí musí být stejně snadné jako přijetí.
+- Volbu ulož střídmě: hodnota, čas, verze textu, účel; nepotřebuješ profilovací román.
+- Preference centrum musí být dostupné i později, ne jen během prvního otravného bannerového rituálu.
+
+Mikrotext pro jednoduchý web:
+
+```text
+Používáme nezbytné cookies pro přihlášení a bezpečnost. Volitelnou analytiku zapneme jen pokud ji povolíte. Měříme agregovaně, bez reklamních profilů a bez prodeje dat.
+[Odmítnout volitelné] [Povolit analytiku] [Nastavení]
+```
+
+Mikrotext pro SaaS aplikaci:
+
+```text
+Aplikace ukládá nezbytné údaje pro přihlášení, bezpečnost a vaše nastavení. Produktovou analytiku používáme jen v omezené podobě k hledání problémů ve funkcích. Volbu můžete kdykoli změnit v Nastavení soukromí.
+```
+
+Pozor na pseudo-volby. Pokud tlačítko „Odmítnout“ schováš do druhé vrstvy, vyrobíš právní i reputační dluh. A navíc ukazuješ zákazníkovi, že privacy-first je jen samolepka na notebooku.
+
+## GM.5 Odděl nezbytné, preference, analytiku a marketing
+
+Jedna cookie lišta s kategoriemi nestačí, pokud interně nevíš, co kategorie znamenají. Zaveď provozní definice:
+
+| Kategorie | Příklad | Výchozí stav | Retence | Poznámka |
+|---|---|---:|---:|---|
+| Nezbytné | session, CSRF, load balancer | zapnuto | co nejkratší | bez nich služba nefunguje |
+| Preference | jazyk, téma, zavřené info boxy | podle volby uživatele | přiměřeně | žádné skryté měření |
+| Produktová analytika | agregované eventy funkcí | volitelně / dle posouzení | krátká | bez reklamních profilů |
+| Marketing | kampaně, remarketing, pixely | vypnuto | krátká | vyžaduje zvlášť opatrný souhlas |
+| Support diagnostika | korelační ID chyby | jen při potřebě | krátká | oddělit od marketingu |
+
+V privacy-first SaaS je ideál mít většinu hodnot v prvních dvou kategoriích. Produktová analytika má být střídmá a vysvětlitelná. Marketingové trackery mají být poslední možnost, ne první reflex. Pokud potřebuješ vědět, zda landing page funguje, často stačí serverové logy, agregované počty konverzí, anonymizovaná analytika a kvalitní zákaznické rozhovory.
+
+## GM.6 Nastav životnost jako produktové rozhodnutí
+
+„Forever“ není retence, to je lenost s časovačem vypnutým. Každá položka v prohlížeči má mít důvod, proč žije právě tak dlouho.
+
+Doporučené vzory:
+
+- Session cookie: krátká expirace, obnova podle aktivity, jasné odhlášení.
+- Remember-me: samostatná volba, delší expirace, možnost odvolat všechna zařízení.
+- Consent preference: omezená životnost a verze textu, aby šla volba obnovit při podstatné změně účelu.
+- UI preference: delší životnost, pokud neobsahuje citlivá data.
+- Onboarding stav: dny až týdny, ne roky.
+- Experimentální flag: expirace navázaná na konec experimentu.
+
+Praktický checklist pro release:
+
+- Přibyla nová cookie nebo storage položka?
+- Je v inventuře?
+- Má vlastníka?
+- Má retenci?
+- Je zahrnutá v preference centru nebo vysvětlení nezbytných cookies?
+- Má test, který ověří, že se nenastaví před souhlasem, pokud souhlas potřebuje?
+- Maže se při odhlášení, ukončení účtu nebo změně volby?
+
+## GM.7 Testuj negativní scénáře, ne jen šťastnou cestu
+
+Cookie a storage hygiena se nerozbije jen tím, že něco nefunguje. Častěji se rozbije tím, že něco funguje až moc ochotně.
+
+Testovací scénáře:
+
+1. Nový návštěvník odmítne volitelnou analytiku.
+   - Nevznikne marketingová ani analytická cookie.
+   - Nepošle se event do třetí strany.
+   - Web funguje dál.
+
+2. Přihlášený uživatel změní preference.
+   - Nové nastavení platí okamžitě.
+   - Staré volitelné identifikátory se smažou nebo přestanou používat.
+   - Auditní nebo preference záznam neobsahuje zbytečné osobní údaje.
+
+3. Uživatel se odhlásí.
+   - Session skončí.
+   - Citlivý stav nezůstane v `localStorage`.
+   - Tlačítko zpět neukáže chráněný obsah z cache.
+
+4. Admin vypne marketingový nástroj.
+   - Skript se nenačítá.
+   - Zůstane stopa v changelogu konfigurace.
+   - Dokumentace se aktualizuje.
+
+5. Zákazník požádá o výmaz.
+   - Serverové identifikátory se řeší podle retenční mapy.
+   - Browser storage se neprodává jako výmazové řešení; uživatel dostane návod, jak vyčistit lokální zařízení, pokud je to relevantní.
+
+## GM.8 Checklist browser storage hygieny
+
+- [ ] Máme inventuru cookies, `localStorage`, `sessionStorage`, IndexedDB a třetích stran.
+- [ ] Každá položka má účel, vlastníka, retenci a kategorii.
+- [ ] Session cookie používá `Secure`, `HttpOnly`, vhodné `SameSite` a krátkou životnost.
+- [ ] Tajemství, access tokeny a zákaznická data neukládáme do `localStorage`.
+- [ ] Volitelné trackery se nespustí před platným souhlasem.
+- [ ] Odmítnutí je stejně snadné jako přijetí.
+- [ ] Preference centrum je dostupné po celou dobu používání služby.
+- [ ] Odhlášení a změna preference mažou nebo deaktivují odpovídající lokální stav.
+- [ ] Nové skripty třetích stran procházejí privacy review.
+- [ ] Release checklist obsahuje kontrolu nových browser storage položek.
+
+## Codyho komentář
+
+Cookie banner je jako cedule „pozor mokrá podlaha“ vedle rozbitého vodovodu. Někdy je potřeba, ale problém neřeší. Skutečná práce je v inventuře, minimalizaci, bezpečných atributech, krátké retenci a férové volbě. Privacy-first web neříká „klikni na přijmout, ať máme klid“. Říká: „ukládáme jen to, co dává smysl, a umíme to vysvětlit bez kouře a zrcadel.“
+
+## Zdroje k příloze
+
+- MDN Web Docs — Using HTTP cookies; vysvětlení atributů cookies včetně `Secure`, `HttpOnly`, `SameSite` a prefixů: https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Cookies
+- MDN Web Docs — Set-Cookie header; referenční popis `Set-Cookie` hlavičky a atributů: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Set-Cookie
+- MDN Web Docs — Web Storage API; rozdíl mezi `localStorage`, `sessionStorage` a použitím Storage API: https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API
+- European Data Protection Board — Guidelines 05/2020 on consent under Regulation 2016/679; podmínky platného souhlasu podle GDPR: https://www.edpb.europa.eu/documents/guideline/guidelines-052020-on-consent-under-regulation-2016679_en
+- Your Europe — Online privacy: How to use cookies on your website; praktický přehled pravidel pro cookies pro firmy v EU: https://europa.eu/youreurope/business/growing/digitalising/online-privacy/index_en.htm
+- CNIL — Use analytics on your websites and applications; praktické podmínky pro používání analytiky a výjimky pro měření návštěvnosti ve francouzském výkladu: https://www.cnil.fr/fr/node/677
+
+## Shrnutí přílohy
+
+Browser storage je provozní plocha, ne odpadkový koš na tokeny, preference, experimenty a marketingové sny. Privacy-first tým má inventuru všeho, co prohlížeč ukládá nebo čte, používá bezpečné cookie atributy, drží tajemství mimo `localStorage`, pouští volitelné trackery až po férovém souhlasu, nastavuje retenci a testuje odmítnutí stejně pečlivě jako přijetí. Méně kouzel v prohlížeči, méně průšvihů v pondělí. To je matematika, ne asketismus.
+
+
+
 ## Pracovní log
+- 2026-08-15: Přidána příloha GM o cookie a browser storage hygieně: inventura cookies a Web Storage, bezpečné atributy session cookie, rizika `localStorage`, consent jako produktové nastavení, kategorie účelů, retence, testovací scénáře a privacy-first checklist.
 - 2026-08-15: Přidána příloha GL o doménové a DNS hygieně pro privacy-first SaaS: vlastnictví domén, inventura záznamů, TTL změny, SPF/DKIM/DMARC, subdomény, release proces pro DNS, evropský provoz a checklist.
 - 2026-08-15: Přidána příloha GK o transakčních e-mailech v privacy-first SaaS: kategorie zpráv, minimalizace dat v šablonách, SPF/DKIM/DMARC, bezpečné logy, preference centrum, přílohy, incidentní e-maily a checklist.
 - 2026-08-15: Přidána příloha GJ o syntetickém monitoringu kritických cest: vrstvy kontrol, testovací účty, syntetická data, bezpečné alerty, výkonové kontroly, cleanup a privacy-first checklist.
