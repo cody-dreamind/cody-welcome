@@ -30849,8 +30849,188 @@ Audit log je produktová funkce, ne jen bezpečnostní přílepek. Když ho navr
 
 Auditní stopy pomáhají malému SaaS týmu dohledat významné akce bez sběru zbytečných zákaznických dat. Dobrý audit log má jasný účel, stabilní slovník událostí, oddělenou zákaznickou a interní vrstvu, minimální kontext místo payloadů, použitelný UI pohled, definovanou retenci, chráněnou integritu a alerty jen na skutečně rizikové změny. Privacy-first audit log není šmírovací archiv. Je to přesná, střídmá a chráněná paměť produktu.
 
+---
+
+# Příloha GS: Konfigurace a feature flagy bez tajemství v kódu, chaosu v prostředích a produktové rulety
+
+Konfigurace je všechno, co se mezi prostředími mění: URL služby, limity, přepínače funkcí, veřejné klíče, regiony, integrační endpointy, retenční doby, e-mailové šablony, provozní režimy a někdy bohužel i věci, které tam být nemají. Feature flag je speciální druh konfigurace: říká, jestli je konkrétní chování zapnuté, pro koho, v jakém rozsahu a s jakým plánem úklidu.
+
+Špatná konfigurace umí z malého SaaS udělat večerní detektivku. Staging používá produkční API klíč. Testovací tenant pošle e-mail skutečným zákazníkům. Nová funkce je „dočasně“ schovaná za flagem, který žije tři roky. A někdo má v repozitáři soubor `config-prod-final-really-final.json`, což je digitální forma volání o pomoc.
+
+The Twelve-Factor App doporučuje striktně oddělit konfiguraci od kódu a ukládat ji v prostředí, protože kód se mezi deployi měnit nemá, zatímco konfigurace ano: https://www.12factor.net/config. OWASP Secrets Management Cheat Sheet zase zdůrazňuje centralizaci ukládání, rotaci, audit a kontrolu přístupu k tajemstvím: https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html
+
+Privacy-first pravidlo: konfigurace má být přehledná, auditovatelná a datově střídmá. Feature flag nemá být tajný sledovací systém ani způsob, jak obejít produktové rozhodnutí. Má být bezpečný vypínač a řízený mechanismus změny.
+
+## GS.1 Rozděl konfiguraci podle rizika, ne podle nálady
+
+První chyba je házet všechno do jedné hromady. `APP_NAME`, `DATABASE_URL`, `ENABLE_NEW_BILLING`, `ADMIN_EMAIL`, `RETENTION_DAYS` a `STRIPE_SECRET_KEY` nejsou stejný typ věci. Mají jiný dopad, jiný vlastník a jiný proces změny.
+
+Praktické členění:
+
+| Typ konfigurace | Příklad | Riziko | Jak s tím zacházet |
+| --- | --- | --- | --- |
+| Veřejná provozní hodnota | kanonická URL, název aplikace, support e-mail | nízké | Může být v běžné konfiguraci, ale pořád s vlastníkem. |
+| Citlivý secret | databázové heslo, API token, privátní klíč | vysoké | Nikdy do repozitáře, jen secret store nebo chráněné runtime prostředí. |
+| Produktový flag | nový onboarding, beta funkce, tarifní logika | střední až vysoké | Má vlastníka, popis, cílovku, expiraci a plán odstranění. |
+| Bezpečnostní přepínač | vynucení MFA, vypnutí exportů, blokace integrace | vysoké | Změna vyžaduje audit, rollback plán a jasnou komunikaci. |
+| Datová politika | retence logů, region zpracování, anonymizace | vysoké | Musí sedět s dokumentací, smlouvami a privacy stránkou. |
+
+U každé položky si napiš čtyři věty:
+
+- Co tahle hodnota mění?
+- Kdo ji smí změnit?
+- Jak poznáme špatné nastavení?
+- Jak ji bezpečně vrátíme zpět?
+
+Pokud odpověď neexistuje, konfigurace není řízená. Je to jen přání uložené v proměnné.
+
+## GS.2 Secret není konfigurace pro každého
+
+Secret má zvláštní režim. Nesmí být v kódu, v README, v ukázkovém screenshotu, v build logu, v chatu ani v ticketu „jen dočasně“. Dočasně je slovo, které v IT často znamená „najde to auditor v listopadu“.
+
+Základní pravidla pro secrets:
+
+- Každý secret má vlastníka a účel.
+- Každý secret má co nejmenší oprávnění.
+- Každý secret je možné zneplatnit a nahradit.
+- Produkční secrets nejsou dostupné lokálnímu vývoji bez jasného důvodu.
+- CI/CD má jen secrets nutné pro konkrétní job, ne univerzální klíč od království.
+- Logy a chyby maskují hodnoty secrets i jejich běžné varianty.
+- Rotace je popsaný proces, ne hrdinský rituál jednou za incident.
+
+Praktický zápis inventáře:
+
+```text
+name: EMAIL_PROVIDER_API_KEY
+purpose: Odesílání transakčních e-mailů z produkce.
+owner: Platform owner
+scope: production email sending only
+stored_in: production secret store
+used_by: web app, worker queue
+rotation: každých 90 dní nebo ihned při podezření na únik
+blast_radius: odchozí transakční e-maily
+incident_contact: security@firma.example
+```
+
+Tohle není byrokracie. Je to rozdíl mezi „unikl nám nějaký klíč, snad nic moc“ a „víme, co vypnout, koho informovat a co zkontrolovat“.
+
+## GS.3 Feature flag má životní cyklus, ne věčný pobyt
+
+Feature flag je užitečný, když umožní bezpečně doručit změnu po menších krocích. Je nebezpečný, když se z něj stane trvalá druhá realita produktu. Každý flag zvyšuje počet kombinací, které může produkt mít. A každá kombinace je potenciální místo pro bug, bezpečnostní díru nebo překvapení v supportu.
+
+Každý flag proto zakládej s metadaty:
+
+```text
+flag: new_checkout_flow
+purpose: Postupné spuštění nového checkoutu pro placené tarify.
+owner: Product lead
+created: 2026-08-15
+target_group: interní test, beta zákazníci, 10 % nových registrací
+default: off
+privacy_impact: žádná nová data, stejné billing eventy
+success_signal: dokončený checkout bez nárůstu support ticketů
+rollback: vypnout flag globálně
+expires: 2026-09-15
+cleanup_issue: odstranit starý checkout po stabilizaci
+```
+
+Bez expirace je flag technický dluh s pěkným UI. Bez vlastníka je to opuštěný vypínač. Bez popisu dopadu je to loterie.
+
+## GS.4 Nesegmentuj víc, než potřebuješ
+
+Feature flag systémy často svádějí k jemnému cílení: role, země, zařízení, historie chování, tarif, zdroj kampaně, poslední kliknutí, počet návštěv, oblíbená barva ponožek. Technicky to jde. Produktově to často nedává smysl. Privacy-first otázka zní: potřebujeme k zapnutí funkce opravdu profil uživatele, nebo stačí méně citlivý signál?
+
+Preferuj jednoduché cílení:
+
+- interní účty,
+- konkrétní beta workspace,
+- tarif nebo plán,
+- explicitně přihlášený early access,
+- náhodný rollout podle stabilního anonymního bucketu,
+- region provozu, pokud souvisí s dostupností služby nebo právním požadavkem.
+
+Buď opatrný u cílení podle detailního chování, marketingového zdroje nebo importovaných seznamů kontaktů. Pokud flag používá osobní údaje, zapiš účel, datový zdroj, retenci a viditelnost pro zákazníka. Flag není zadní vrátka pro segmentaci, kterou bys nechtěl vysvětlovat na privacy stránce.
+
+## GS.5 Odděl prostředí opravdu, ne jen názvem
+
+`staging` není staging, pokud posílá produkční e-maily, sahá na produkční zákaznická data a používá stejné integrační klíče. To je produkce v převleku a s horší ochranou.
+
+Minimální pravidla pro prostředí:
+
+- Lokální vývoj používá syntetická nebo anonymizovaná data.
+- Staging má vlastní databázi, vlastní e-mailový režim a vlastní integrační credentials.
+- Produkční secrets nejsou kopírované do vývojářských strojů.
+- Testovací e-maily jdou do sandboxu nebo na whitelist adres.
+- Webhooky ve stagingu nevolají produkční zákaznické endpointy.
+- Každé prostředí má jasně označené UI, aby člověk poznal, kde je.
+- Mazací a billing akce jsou ve stagingu bezpečně simulované.
+
+Příklad bezpečnostního mikrotextu v adminu:
+
+> Staging prostředí. Nepoužívej skutečná zákaznická data. E-maily jsou přesměrované do sandboxu.
+
+Ano, i interní texty pomáhají. Lidé dělají chyby. Dobré rozhraní jim aspoň nenastaví banánovou slupku pod nohy.
+
+## GS.6 Loguj změny konfigurace, ale ne hodnoty secrets
+
+Změna konfigurace je významná událost. Měla by mít auditní stopu: kdo změnil co, kdy, v jakém prostředí a s jakým výsledkem. To ale neznamená ukládat tajnou hodnotu do audit logu. U secretu stačí zapsat, že byl vytvořen, aktualizován, rotován nebo zneplatněn.
+
+Dobrá auditní událost:
+
+```json
+{
+  "event_name": "config.secret_rotated",
+  "environment": "production",
+  "key": "EMAIL_PROVIDER_API_KEY",
+  "actor_id": "usr_123",
+  "result": "success",
+  "request_id": "req_456"
+}
+```
+
+Špatná auditní událost:
+
+```json
+{
+  "event_name": "config.updated",
+  "key": "EMAIL_PROVIDER_API_KEY",
+  "new_value": "sk_live_tohle_tady_vazne_nema_byt"
+}
+```
+
+U feature flagů loguj hlavně změnu pravidel: zapnutí, vypnutí, cílovou skupinu, procento rollout, vlastníka změny a důvod. Pokud se po změně zvedne chybovost, chceš rychle vědět, který přepínač se pohnul.
+
+## GS.7 Checklist konfigurace a feature flagů
+
+- Má každá konfigurační položka účel, vlastníka a jasné prostředí?
+- Jsou secrets oddělené od běžné konfigurace a mimo repozitář?
+- Má každý secret scope, rotační postup, incident kontakt a omezený přístup?
+- Neunikají secrets do CI logů, screenshotů, ticketů nebo chybových hlášek?
+- Má každý feature flag popis, vlastníka, default, cílovku, rollback a expiraci?
+- Existuje pravidelný úklid starých flagů a mrtvé konfigurační logiky?
+- Nepoužíváme flagy k invazivní segmentaci bez jasného účelu a dokumentace?
+- Jsou lokální, staging a produkční prostředí skutečně oddělená?
+- Jsou testovací e-maily, webhooky a billing akce bezpečně izolované?
+- Logujeme změny konfigurace bez ukládání hodnot secrets?
+- Umíme rychle vypnout rizikovou funkci bez deploye?
+- Ví support, které flagy mohou vysvětlit rozdílné chování zákazníků?
+
+## Codyho komentář
+
+Feature flag je jako vypínač světla. Skvělý, když víš, k čemu patří. Horší, když je v rozvaděči padesát neoznačených páček a jedna z nich vypne fakturaci. Codyho pravidlo: každý flag musí mít plán vlastního pohřbu. Každý secret musí mít plán útěku z průšvihu. A žádná konfigurace nesmí být tajná jen proto, že ji nikdo nechce dokumentovat.
+
+## Zdroje k příloze
+
+- The Twelve-Factor App — Config: https://www.12factor.net/config
+- OWASP Secrets Management Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html
+
+## Shrnutí přílohy
+
+Konfigurace a feature flagy jsou bezpečnostní i produktová vrstva SaaS provozu. Dobré nastavení odděluje běžnou konfiguraci od secrets, drží tajemství mimo repozitář, dává každému flagu vlastníka a expiraci, omezuje invazivní segmentaci, skutečně izoluje prostředí, loguje změny bez úniku hodnot a umožňuje rychlý rollback bez datového chaosu. Privacy-first konfigurace není sbírka proměnných. Je to řízený systém změn.
+
 ## Pracovní log
 
+- 2026-08-15: Přidána příloha GS o konfiguraci a feature flagech v privacy-first SaaS: členění konfigurace podle rizika, secrets, životní cyklus flagů, střídmá segmentace, oddělení prostředí, audit změn a checklist.
 - 2026-08-15: Přidána příloha GR o auditních stopách v privacy-first SaaS: účel logů, slovník událostí, minimalizace payloadů, oddělení zákaznických a interních logů, UI, retence, ochrana integrity, alerty a checklist.
 - 2026-08-15: Přidána příloha GQ o API verzování a deprecacích: breaking changes, model verzí, technické signály `Deprecation` a `Sunset`, migrační okna, dokumentace rozdílů, střídmé měření starých verzí a checklist.
 - 2026-08-15: Přidána příloha GP o privacy-first billingu a fakturačním provozu: oddělení produktových a billing rolí, datové minimum fakturačních údajů, evropská DPH/OSS, dunning, refundy, billing metriky a checklist.
