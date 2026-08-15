@@ -30346,7 +30346,151 @@ Přístupová oprávnění jsou produktová i bezpečnostní funkce. Dobrý mode
 
 
 
+
+# Příloha GP: Billing a fakturační provoz bez datového účetnictví navíc, refund pekla a platebního autopilota
+
+Billing je část SaaS, kde se produkt, účetnictví, support a důvěra potkají u jednoho stolu. A někdy si tam všichni sednou na stejnou židli, protože „to přece vyřeší platební brána“. Nevyřeší. Platební brána umí stáhnout peníze, ale neumí za tebe vysvětlit zákazníkovi, co platí, proč platí, kde najde fakturu, jak ukončí tarif a co se stane s jeho daty po odchodu.
+
+Privacy-first billing má jednoduchý cíl: vybrat peníze férově, vystavit správné doklady, neukládat víc platebních a fakturačních dat, než je nutné, a nedělat z odchodu zákazníka psychologickou únikovou místnost. U evropského SaaS k tomu přidej ještě disciplínu kolem DPH, dokladů a přeshraničního prodeje.
+
+## GP.1 Nejdřív odděl obchodní účet od produktového účtu
+
+Produktový účet odpovídá na otázku: kdo používá službu a k jakým datům má přístup. Billing účet odpovídá na otázku: kdo platí, komu patří faktury a kdo smí měnit tarif. Tyhle dvě věci se překrývají, ale nejsou stejné.
+
+Praktický model pro B2B SaaS:
+
+- **Workspace owner** spravuje členy, role a produktová data.
+- **Billing admin** mění tarif, platební metodu, fakturační údaje a stahuje doklady.
+- **Finance contact** dostává faktury a upomínky, ale nemusí vidět produktová data.
+- **Technical contact** dostává zprávy o limitech, webhookách a provozních změnách.
+
+U malého produktu může být všechno jedna osoba. Systém by ale neměl předpokládat, že to tak zůstane navždy. Jakmile prodáváš firmám, často narazíš na situaci: produkt používá tým, platí účetní, smlouvu řeší jednatel a technické limity chce vědět vývojář. Když to nacpeš do jednoho e-mailu „majitele účtu“, začne support ručně přeposílat faktury. A ruční přeposílání faktur je přesně ten druh lepidla, které drží systém pohromadě jen do prvního auditu.
+
+Checklist oddělení rolí:
+
+- Umí billing admin změnit tarif bez přístupu k zákaznickým datům?
+- Umí finance contact stáhnout fakturu bez administrace uživatelů?
+- Je vidět, kdo změnil platební údaje nebo fakturační profil?
+- Posíláš faktury na kontaktní adresu pro fakturaci, ne na náhodného zakladatele z trialu?
+- Má zákazník jasně popsané, kdo v jeho organizaci spravuje platby?
+
+## GP.2 Fakturační data sbírej podle dokladu, ne podle zvědavosti
+
+Billing formulář svádí k tomu, aby se stal malým CRM. „Když už máme firmu, přidejme obor, počet zaměstnanců, telefon, velikost rozpočtu a ideálně datum narození křečka.“ Ne. Fakturační data mají primárně splnit platební, daňový a účetní účel.
+
+Typické minimum pro B2B fakturaci:
+
+| Data | Účel | Poznámka |
+| --- | --- | --- |
+| Název firmy nebo jméno | Identifikace odběratele | U B2C podle typu dokladu a lokálních pravidel |
+| Fakturační adresa | Doklad a daňový kontext | Nesbírej doručovací adresu, pokud neposíláš fyzické zboží |
+| DIČ / VAT ID | Ověření daňového režimu | Validuj, ale neukládej zbytečné odpovědi z validace |
+| Fakturační e-mail | Doručení dokladu | Odděl od login e-mailu |
+| Země zákazníka | Daňová sazba a režim | Zacházej s ní jako s billing údajem, ne marketingovým profilem |
+| Platební metoda | Úhrada předplatného | Tokenizuj přes poskytovatele, neukládej čísla karet |
+
+Evropská komise v přehledu GDPR principů připomíná minimalizaci: zpracovávat se mají jen osobní údaje nezbytné pro daný účel: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en. U billing dat je účel často jasný, ale právě proto musí být hranice ostrá. Účetní potřeba není volná vstupenka pro marketingové obohacování profilu.
+
+Praktické pravidlo: co potřebuje účetní doklad, účetní audit, platba nebo zákonná retence, patří do billing domény. Co potřebuje obchodní segmentace, patří jinam a má mít vlastní účel, právní základ, retenční dobu a viditelnost pro zákazníka.
+
+## GP.3 DPH a přeshraniční prodej řeš dřív než první evropskou kampaň
+
+SaaS se rád tváří bezhraničně. Daňové povinnosti bohužel neumí číst motivační citáty o globálním trhu. Pokud prodáváš digitální služby zákazníkům v EU, musíš včas pochopit, kdy řešíš lokální DPH, reverse charge, B2B vs. B2C režim a případně One Stop Shop.
+
+Evropský portál Your Europe popisuje One Stop Shop jako režim, který pomáhá firmám řešit DPH u přeshraničních prodejů v EU přes jeden členský stát a podávat OSS přiznání čtvrtletně: https://europa.eu/youreurope/business/finance-and-tax/vat/one-stop-shop/index_en.htm. Evropská komise zároveň uvádí, že firma využívající OSS se registruje v jednom členském státě identifikace: https://vat-one-stop-shop.ec.europa.eu/one-stop-shop/register-oss_en.
+
+Tohle není výzva k tomu, aby vývojář přes noc předstíral daňového poradce. Je to výzva, aby produktový tým nedělal billing naslepo. Minimálně si připrav:
+
+- rozlišení B2B a B2C zákazníka,
+- ověření DIČ / VAT ID tam, kde dává smysl,
+- uložení země a daňového režimu použitého při vystavení dokladu,
+- auditní stopu změny fakturačních údajů,
+- možnost opravy údajů před vystavením další faktury,
+- interní poznámku, kdo odpovídá za daňovou logiku a kdo ji reviduje.
+
+Codyho komentář: billing není místo pro „nějak to dopočítáme později“. Později většinou znamená ruční opravy, omluvné e-maily a účetní, která se na tebe dívá jako na legacy systém v lidské podobě.
+
+## GP.4 Platební selhání komunikuj jako službu, ne jako trest
+
+Neúspěšná platba není vždycky úmyslné neplacení. Může jít o expirovanou kartu, limit banky, interní schvalování, účetní změnu nebo technický problém. Pokud první e-mail zní jako právní výhrůžka, pálíš důvěru rychleji než marketingový rozpočet na špatně cílené reklamy.
+
+Dobrý dunning proces má tři vrstvy:
+
+1. **Produktová informace:** v aplikaci jasně řekni, že platba selhala, do kdy je potřeba akce a co se stane potom.
+2. **Fakturační e-mail:** pošli ho finance kontaktu, stručně, s odkazem na bezpečnou aktualizaci platby.
+3. **Grace period:** dej rozumné okno, než omezíš službu; u B2B zákazníků počítej s interním procesem.
+
+Privacy-first detail: do e-mailu neposílej zbytečné informace o používání produktu, konkrétní interní data ani citlivý obsah účtu. E-mail má říct: platba neproběhla, jak ji opravit, kde je faktura, jak kontaktovat podporu. Ne má reprodukovat půl administrace.
+
+Příklad mikrotextu:
+
+> Platbu za tarif Team se nepodařilo zpracovat. Služba zůstává aktivní do 24. září 2026. Platební metodu může aktualizovat billing admin v nastavení fakturace. Pokud platbu řeší vaše účetní oddělení, přepošlete mu tento odkaz na fakturační portál.
+
+Co nedělat:
+
+- neukazuj agresivní modály každému uživateli workspace,
+- neposílej opakované upomínky lidem bez billing role,
+- nemaž data hned po prvním selhání platby,
+- neblokuj export faktur a dat jako vyjednávací páku,
+- neskrývej datum omezení služby do patičky e-mailu.
+
+## GP.5 Refundy a zrušení předplatného napiš lidsky a dopředu
+
+Zrušení tarifu je součást produktu. Pokud ho navrhneš jako labyrint, možná krátkodobě snížíš churn v tabulce. Dlouhodobě zvýšíš počet naštvaných lidí, chargebacků, support ticketů a screenshotů na sociálních sítích. Gratuluju, právě sis koupil retenci na splátky důvěrou.
+
+Pravidla pro férový odchod:
+
+- Zákazník vidí, kdy skončí aktuální období a co se stane s přístupem.
+- Je jasné, jestli zrušení znamená okamžité ukončení, nebo doběh zaplaceného období.
+- Export dat je dostupný před odchodem a není schovaný za support.
+- Retenční doba po ukončení je popsaná lidsky.
+- Refund pravidla jsou napsaná před nákupem, ne až po hádce.
+- Win-back otázka je volitelná, krátká a bez nátlaku.
+
+Refund proces má být stejně auditovatelný jako platba. Ulož kdo refund schválil, jaký byl důvod, jaký doklad nebo dobropis vznikl a jak se změnil stav subscription. Nezapisuj do poznámky citlivé detaily zákaznického sporu. Pokud support potřebuje kontext, stačí kategorie: technický problém, omyl v tarifu, duplicitní platba, obchodní výjimka.
+
+## GP.6 Billing metriky měř bez profilování zákazníků
+
+Billing tým potřebuje vědět, co se děje: MRR, churn, trial konverze, selhání plateb, průměrná doba úhrady, refund rate, počet ručních zásahů. To neznamená, že každý analytický event musí nést osobní identifikátor, přesné platební údaje a celý produktový profil.
+
+Bezpečnější eventový slovník:
+
+| Event | Užitečná pole | Pole, která raději vynech |
+| --- | --- | --- |
+| `subscription_started` | tarif, země režimu, B2B/B2C, měsíc | jméno, e-mail, číslo faktury |
+| `payment_failed` | důvodová kategorie, pokus, tarif | číslo karty, banka, obsah interní poznámky |
+| `invoice_paid` | částka v pásmu, měna, stáří faktury | adresa, DIČ, fakturační e-mail |
+| `subscription_cancelled` | důvodová kategorie, tarif, stáří účtu | volná textová odpověď bez anonymizace |
+| `refund_issued` | typ refundu, procento, tarif | osobní spor v poznámce supportu |
+
+Pro agregované reporty často nepotřebuješ osobní údaje vůbec. Potřebuješ trend. Pokud finance potřebují dohledat konkrétní fakturu, patří to do účetního systému s řízeným přístupem, ne do produktové analytiky pro celý tým.
+
+## GP.7 Checklist privacy-first billingu
+
+- Máme oddělené role pro produktovou administraci, billing a finance kontakt?
+- Sbíráme fakturační údaje podle daňového a účetního účelu, ne podle marketingové zvědavosti?
+- Neuchováváme čísla karet ani citlivé platební údaje mimo specializovaného poskytovatele?
+- Umíme vysvětlit zákazníkovi, kdo dostává faktury, upomínky a billing notifikace?
+- Je daňová logika pro B2B/B2C a přeshraniční EU prodej zdokumentovaná a revidovaná odborníkem?
+- Má zákazník jasnou cestu ke změně tarifu, aktualizaci platby, stažení faktur a zrušení předplatného?
+- Máme grace period a klidnou komunikaci pro selhání platby?
+- Je export dat dostupný i při ukončení služby podle předem popsaných pravidel?
+- Měříme billing metriky agregovaně a bez zbytečných osobních údajů?
+- Má refund proces auditní stopu bez citlivých support poznámek?
+
+## Zdroje k příloze
+
+- European Commission — Principles of the GDPR: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en
+- Your Europe — VAT One Stop Shop: https://europa.eu/youreurope/business/finance-and-tax/vat/one-stop-shop/index_en.htm
+- European Commission — Register to OSS: https://vat-one-stop-shop.ec.europa.eu/one-stop-shop/register-oss_en
+
+## Shrnutí přílohy
+
+Billing je důvěrová infrastruktura, ne jen napojení na platební bránu. Malý SaaS tým má oddělit billing role od produktových rolí, sbírat jen nezbytná fakturační data, řešit evropskou DPH dřív než po první kampani, komunikovat selhání plateb klidně a měřit finance bez zbytečného profilování zákazníků. Férová fakturace je marketing, support i compliance v jednom — jen bez konfety kanónu a datového vysavače.
+
 ## Pracovní log
+
+- 2026-08-15: Přidána příloha GP o privacy-first billingu a fakturačním provozu: oddělení produktových a billing rolí, datové minimum fakturačních údajů, evropská DPH/OSS, dunning, refundy, billing metriky a checklist.
 - 2026-08-15: Přidána příloha GO o přístupových oprávněních: role podle práce, deny-by-default, kombinace rolí se vztahem k objektům, ochrana citlivých akcí, dočasný support access, pozvánky, offboarding, testy oprávnění a privacy-first checklist.
 - 2026-08-15: Přidána příloha GN o rate limitingu a anti-abuse: mapa zneužitelných toků, limity podle více klíčů, bezpečné přihlašování, CAPTCHA jako pozdější vrstva, střídmé logování, support výjimky, review před kampaněmi a privacy-first checklist.
 - 2026-08-15: Přidána příloha GM o cookie a browser storage hygieně: inventura cookies a Web Storage, bezpečné atributy session cookie, rizika `localStorage`, consent jako produktové nastavení, kategorie účelů, retence, testovací scénáře a privacy-first checklist.
