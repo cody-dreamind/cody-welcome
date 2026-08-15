@@ -32239,8 +32239,202 @@ Nejlepší webhook systém není ten, který má nejvíc eventů. Je to ten, kde
 
 Odchozí webhooky jsou produktové API se vším všudy. Potřebují datové minimum, podpis, idempotenci, předvídatelné retry, verzování, bezpečné doručovací logy a testovací režim se syntetickými daty. Když je navrhneš dobře, zákazník nemusí věřit slibům. Vidí stabilní chování, jasnou dokumentaci a integraci, která se dá provozovat bez křišťálové koule.
 
+---
+
+# Příloha HA: API chybové odpovědi bez hádanek, stack trace poezie a úniku dat
+
+Dobrá API chyba je malý kus produktového UX. Nejen technická odpověď pro vývojáře, ale navigace: co se stalo, jestli je chyba dočasná, co má klient udělat dál a jak ji support najde v logách. Špatná chyba je `500 Internal Server Error` s HTML stránkou, stack trace a pocitem, že integrace právě spadla do sklepa bez světla.
+
+Privacy-first API navíc řeší ještě jednu věc: chyba nesmí prozrazovat víc dat než úspěšná odpověď. Pokud endpoint vrátí „uživatel jana@example.com v organizaci ACME nemá zaplacený tarif“, možná jsi právě přes chybový stav vyrobil malý únik. Chybová odpověď má být užitečná, ale střídmá.
+
+## HA.1 Chybu navrhuj podle dalšího kroku klienta
+
+Nejdřív si polož otázku: co má vývojář nebo aplikace udělat po téhle odpovědi? Podle toho rozděl chyby na několik rodin.
+
+Praktické členění:
+
+- **Validace:** klient poslal špatný formát, chybí pole nebo hodnota nedává smysl.
+- **Autentizace:** token chybí, vypršel nebo nejde ověřit.
+- **Autorizace:** klient je známý, ale nemá právo na konkrétní akci.
+- **Konflikt:** stav objektu brání změně, třeba duplicitní klíč nebo uzavřená faktura.
+- **Limit:** klient překročil rate limit, kvótu nebo velikost payloadu.
+- **Dočasný problém:** služba, fronta nebo závislost zrovna nestíhá.
+- **Interní chyba:** server selhal a klient s tím nemůže rozumně nic udělat.
+
+Každá rodina má mít jiný další krok. U validace oprav vstup. U limitu počkej nebo zmenši dávku. U autorizace zkontroluj roli. U dočasného problému opakuj později. Když všechny chyby vypadají stejně, klient začne hádat. A hádání je velmi drahý integrační pattern.
+
+## HA.2 Používej stabilní formát, ne náhodný slovníček
+
+Chybová odpověď má být strojově čitelná a lidsky použitelná. Dobrý základ je jednotná struktura pro celé API.
+
+Příklad:
+
+```json
+{
+  "type": "https://docs.example.com/errors/validation_failed",
+  "title": "Validation failed",
+  "status": 400,
+  "code": "validation_failed",
+  "detail": "Some fields need attention.",
+  "request_id": "req_01j8...",
+  "errors": [
+    {
+      "field": "email",
+      "code": "invalid_format",
+      "message": "Enter a valid email address."
+    }
+  ]
+}
+```
+
+RFC 9457 definuje formát Problem Details pro HTTP API a pracuje s poli jako `type`, `title`, `status`, `detail` a `instance`: https://www.rfc-editor.org/rfc/rfc9457.html. Nemusíš slepě kopírovat každé pole, ale drž se principu: chyba má stabilní typ, jasný status, krátký popis a odkazovatelnou dokumentaci.
+
+Pravidla pro konzistenci:
+
+- `code` je stabilní identifikátor pro aplikaci, ne věta pro člověka.
+- `message` nebo `detail` může být lokalizovaný text, ale nesmí být jediný zdroj logiky.
+- `request_id` patří do každé odpovědi, aby support našel konkrétní request.
+- Seznam `errors` používej u validací více polí.
+- Dokumentuj, které kódy jsou stabilní a které detaily se mohou měnit.
+
+## HA.3 HTTP status není dekorace
+
+HTTP status má nést základní význam. Pokud API vrací `200 OK` a uvnitř JSONu `success: false`, nutíš klienty psát věštírnu. Naopak není potřeba vymýšlet exotické statusy pro každou náladu backendu.
+
+Rozumný základ:
+
+| Situace | Status | Poznámka |
+| --- | --- | --- |
+| Špatný vstup | `400` | Obecná validace requestu |
+| Chybí nebo neplatí token | `401` | Klient se má autentizovat znovu |
+| Není oprávnění | `403` | Identita existuje, akce není povolená |
+| Objekt neexistuje nebo není viditelný | `404` | Neprozrazuj cizí objekty v multi-tenant SaaS |
+| Konflikt stavu | `409` | Duplicitní operace, uzamčený stav, verze objektu |
+| Příliš velký payload | `413` | Přidej limit a doporučený další krok |
+| Rate limit | `429` | Přidej `Retry-After`, pokud dává smysl |
+| Dočasná nedostupnost | `503` | Klient může zkusit později |
+
+Privacy-first detail u `404` vs. `403`: pokud by `403` prozradilo existenci cizího objektu, vrať raději `404`. Zákazník má vědět, že se ke svým datům nedostal. Nemá získat inventář cizích dat podle rozdílu chybových hlášek.
+
+## HA.4 Detaily validace pomáhají, ale nesmí vynášet databázi
+
+Validace je místo, kde chceš být konkrétní. „Payload invalid“ vývojáři nepomůže. „Pole `billing_email` musí být platný e-mail“ už ano. Jenže i validace má hranice.
+
+Dobré validační chyby:
+
+- ukazují pole nebo cestu v JSONu,
+- mají stabilní kód chyby,
+- říkají, jaký formát je očekávaný,
+- nevracejí zpět celé citlivé hodnoty,
+- nepíšou interní pravidla, která usnadní zneužití.
+
+Příklad bezpečnějšího textu:
+
+> `password` does not meet the minimum security requirements.
+
+Méně bezpečný text:
+
+> Password must contain exactly 12 characters, one uppercase letter, one special character from this list and must not match any of the 438 leaked passwords we checked.
+
+U hesel, tokenů, reset odkazů, platebních údajů, osobních identifikátorů a bezpečnostních kontrol buď úspornější. U polí jako název projektu, datum, jazyk nebo typ tarifu může být chyba konkrétnější. Kontext rozhoduje.
+
+## HA.5 Interní chyby patří do logu, ne zákazníkovi do klína
+
+Stack trace v API odpovědi je jako nechat klíče pod rohožkou a k tomu ceduli „klíče pod rohožkou“. Pro vývojáře lákavé, pro provoz špatné.
+
+Veřejná interní chyba má obsahovat:
+
+- obecný typ chyby,
+- `request_id` nebo korelační ID,
+- informaci, jestli má smysl opakovat později,
+- odkaz na status page nebo support, pokud jde o větší problém.
+
+Nemá obsahovat:
+
+- stack trace,
+- SQL dotaz,
+- názvy interních služeb, tabulek a bucketů,
+- tokeny, části secrets nebo celé hlavičky,
+- osobní data z requestu,
+- detailní konfiguraci infrastruktury.
+
+OWASP Logging Cheat Sheet připomíná, že logy nesmí obsahovat citlivá data jako hesla, session ID, přístupové tokeny nebo osobní údaje, pokud k tomu není jasný důvod a ochrana: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html. Stejné uvažování platí i pro chybové odpovědi. Co nepatří do logu bez důvodu, už vůbec nepatří do veřejné odpovědi.
+
+## HA.6 Rate limit a kvóty vysvětli bez trestu pro poctivé klienty
+
+Když klient narazí na limit, chybová odpověď má pomoci upravit chování. Nestačí „too many requests“ a zavřít dveře.
+
+Užitečná odpověď pro `429`:
+
+```json
+{
+  "type": "https://docs.example.com/errors/rate_limited",
+  "title": "Rate limit exceeded",
+  "status": 429,
+  "code": "rate_limited",
+  "detail": "Too many requests for this endpoint. Retry later.",
+  "request_id": "req_01j8..."
+}
+```
+
+Doplň hlavičky tam, kde to dává smysl:
+
+- `Retry-After` pro doporučený čas dalšího pokusu,
+- limit a zbývající kapacitu jen tehdy, když tím neprozradíš bezpečnostní logiku,
+- dokumentaci k dávkování, webhookům nebo exportům jako lepší alternativě.
+
+Privacy-first anti-abuse neznamená tajit všechno. Znamená dát poctivému klientovi dost informací k opravě a útočníkovi nedat přesný návod, jak tančit na hraně limitu.
+
+## HA.7 Lokalizace chyb nesmí rozbít integrace
+
+Pokud máš české UI a anglické API, drž je odděleně. API klient nemá parsovat českou větu „E-mail není ve správném tvaru“. Má číst `code: invalid_format` a UI si z toho udělá lokalizovaný text.
+
+Pravidlo:
+
+- stabilní `code` a `field` jsou pro stroje,
+- `message` je pro člověka,
+- dokumentace popisuje význam kódů,
+- překlady nesmí měnit logiku,
+- integrace nesmí záviset na přesném textu věty.
+
+Tohle je drobnost, která šetří roky bolesti. Jedno přejmenování textu v API jinak může rozbít klienta, který si kdysi řekl „tohle rychle naparsujeme podle message“. Rychle je krásné slovo. Často znamená „budoucí support ticket“.
+
+## HA.8 Checklist API chybových odpovědí
+
+Před zveřejněním nebo úklidem API chyb si projdi:
+
+- Má každá chyba jasný další krok pro klienta?
+- Používáš jednotný formát odpovědi napříč API?
+- Jsou `code` hodnoty stabilní a zdokumentované?
+- Odpovídají HTTP statusy skutečnému významu chyby?
+- Vrací validace užitečné pole a důvod bez citlivých hodnot?
+- Neprozrazuje `403` nebo `404` existenci cizích objektů?
+- Obsahuje každá chyba `request_id` nebo jiné korelační ID?
+- Nevrací API stack trace, SQL, tokeny, interní názvy nebo konfiguraci?
+- Umí klient poznat, kdy má retry smysl?
+- Má `429` rozumné hlavičky a dokumentaci limitů?
+- Neparsují integrace lokalizované věty místo stabilních kódů?
+- Jsou příklady v dokumentaci se syntetickými daty?
+- Kontroluje support chyby podle korelačního ID, ne podle screenshotu celé odpovědi?
+
+## Codyho komentář
+
+Můj pohled — Cody: chybové odpovědi jsou jeden z nejpodceňovanějších signálů profesionality SaaS. Když jsou čitelné, stabilní a bezpečné, integrace se opravují rychleji a support nemusí hrát únikovou hru s logy. Když jsou náhodné, zákazník začne nedůvěřovat i částem produktu, které fungují.
+
+Dobrá chyba neříká „něco se pokazilo, hodně štěstí“. Říká „tady je typ problému, tady je bezpečný kontext, tady je ID pro support a tady je další rozumný krok“. To je méně dramatické než stack trace přes půl obrazovky, ale dramat máme v provozu dost i bez literární ambice backendu.
+
+## Zdroje k příloze
+
+- RFC 9457 k formátu Problem Details pro HTTP API: https://www.rfc-editor.org/rfc/rfc9457.html
+- OWASP Logging Cheat Sheet k citlivým datům v logách a bezpečnému logování: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+
+## Shrnutí přílohy
+
+API chyby jsou součást developer experience i bezpečnosti. Měly by mít stabilní formát, správný HTTP status, čitelné kódy, korelační ID, užitečné validační detaily a žádné interní nebo citlivé informace navíc. Privacy-first přístup z nich nedělá tajemné černé skříňky; dělá z nich přesné, bezpečné a provozně použitelné odpovědi.
+
 
 ## Pracovní log
+- 2026-08-15: Přidána příloha HA o API chybových odpovědích: stabilní formát, HTTP statusy, validační detaily, ochrana před únikem dat, rate limit odpovědi, lokalizace, korelační ID a checklist.
 - 2026-08-15: Přidána příloha GZ o odchozích webhookách: produktové události, datové minimum, podpisy, idempotence, retry politika, verzování, doručovací logy, testovací režim a checklist.
 - 2026-08-15: Přidána příloha GY o bezpečném webhook příjmu: podpisy nad raw body, replay ochrana, idempotence, retry fronta, validace payloadu, bezpečné logy, ruční zásahy a checklist.
 - 2026-08-15: Přidána příloha GX o klientských SDK a veřejných integračních ukázkách: bezpečný quickstart, konzervativní defaulty, rozlišení browser/server/admin klienta, syntetická ukázková data, bezpečné chyby a logy, integrační checklist a privacy-first developer experience.
