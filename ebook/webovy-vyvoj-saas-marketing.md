@@ -30488,8 +30488,153 @@ Pro agregované reporty často nepotřebuješ osobní údaje vůbec. Potřebuje�
 
 Billing je důvěrová infrastruktura, ne jen napojení na platební bránu. Malý SaaS tým má oddělit billing role od produktových rolí, sbírat jen nezbytná fakturační data, řešit evropskou DPH dřív než po první kampani, komunikovat selhání plateb klidně a měřit finance bez zbytečného profilování zákazníků. Férová fakturace je marketing, support i compliance v jednom — jen bez konfety kanónu a datového vysavače.
 
+
+
+
+# Příloha GQ: API verzování a deprecace bez rozbíjení integrací, tichých změn a supportového detektivního seriálu
+
+API je slib. Ne tak romantický jako „budeme spolu navždy“, ale pro zákazníka často důležitější: když na tvém API stojí jeho workflow, export, interní nástroj nebo fakturace, každá neohlášená změna je malý provozní infarkt. A infarkty se v changelogu blbě prodávají jako „vylepšení stability“.
+
+Privacy-first SaaS má u API ještě jednu vrstvu odpovědnosti: změny nesmí potichu rozšířit rozsah dat, zhoršit kontrolu nad přístupy nebo nutit zákazníky přesouvat citlivé informace do workaroundů. Dobré verzování proto není jen technický detail. Je to zákaznická důvěra, provozní disciplína a datová minimalizace v jednom balíčku.
+
+## GQ.1 Nejdřív definuj, co je breaking change
+
+Tým se často hádá o verzování až ve chvíli, kdy už je problém venku. Lepší je mít krátký interní seznam změn, které se považují za rozbíjející. Ne proto, aby z něj vznikla právnická tapeta, ale aby vývojář, support i obchod používali stejný slovník.
+
+Za breaking change považuj hlavně:
+
+- odstranění endpointu, pole, eventu nebo webhook payloadu,
+- změnu typu pole, povinnosti pole nebo významu hodnoty,
+- zpřísnění validace, které rozbije dříve přijímané požadavky,
+- změnu autentizace, scope oprávnění nebo rate limitu bez přechodného období,
+- změnu pořadí, filtrování nebo stránkování tam, kde na tom klienti prakticky závisejí,
+- přidání nového osobního údaje do odpovědi, exportu nebo webhooku bez jasného účelu a oznámení.
+
+Naopak přidání volitelného pole obvykle breaking change není. Privacy-first výjimka: pokud nové pole obsahuje osobní nebo citlivější provozní data, nestačí říct „je to jen navíc“. Zákazník může mít napojené logování, datové mapy a oprávnění podle stávajícího payloadu. Datové rozšíření je produktové rozhodnutí, ne vedlejší efekt serializéru.
+
+## GQ.2 Verze API pojmenuj podle chování, ne podle nálady releasu
+
+Verze API nemá kopírovat každý deployment. Když nasadíš pět interních oprav za týden, zákazník nepotřebuje pět nových verzí. Potřebuje vědět, jaký kontrakt jeho integrace používá a kdy se musí připravit na změnu.
+
+Praktické možnosti:
+
+- **Verze v URL**: `/api/v1/invoices`. Jednoduché, viditelné, snadné pro dokumentaci.
+- **Verze v hlavičce**: `Accept: application/vnd.example.v2+json`. Čistší URL, ale složitější pro některé klienty a ruční testování.
+- **Datumová verze**: `2026-08-15`. Užitečné, když kontrakt fixuje chování k určitému datu.
+- **Verze webhooků zvlášť**: webhook payload může mít vlastní lifecycle, protože zákazník často nemá kontrolu nad okamžikem doručení.
+
+Pro malý SaaS je většinou nejčistší začít jednoduše: URL verze pro veřejné API, explicitní `event_version` pro webhooky a dokumentovaná pravidla kompatibility. Elegantní architektura, kterou nikdo v týmu neumí vysvětlit, není elegance. Je to budoucí archeologické naleziště.
+
+## GQ.3 Deprecace musí mít datum, dopad a náhradní cestu
+
+„Endpoint bude brzy odstraněn“ není plán. To je horoskop s JSON odpovědí. Zákazník potřebuje vědět tři věci: kdy změna nastane, co se rozbije a co má udělat místo toho.
+
+Dobré oznámení deprecace obsahuje:
+
+- konkrétní datum ukončení starého chování,
+- seznam dotčených endpointů, polí, webhooků nebo scope oprávnění,
+- důvod změny napsaný lidsky,
+- migrační návod s příklady požadavků a odpovědí,
+- kontakt nebo support cestu pro zákazníky s vyšším dopadem,
+- informaci, jestli změna souvisí s bezpečností, výkonem, datovou minimalizací nebo údržbou.
+
+HTTP ekosystém má i technické signály: RFC 9745 definuje hlavičku `Deprecation` pro označení zastarávání zdroje a RFC 8594 definuje hlavičku `Sunset` pro sdělení času, kdy má zdroj přestat být dostupný. Ne každý klient je bude číst, ale pro API konzumenty, SDK a interní monitoring jsou užitečné. Hlavně tím nutíš vlastní tým pojmenovat deprecaci strojově, ne jen do odstavce v release notes.
+
+Příklad:
+
+```http
+Deprecation: @1782864000
+Sunset: Tue, 30 Jun 2026 23:59:59 GMT
+Link: <https://docs.example.eu/api/migrations/v1-to-v2>; rel="deprecation"; type="text/html"
+```
+
+Tohle nenahrazuje e-mail, changelog ani dokumentaci. Je to další signál pro lidi, kteří API skutečně provozují.
+
+## GQ.4 Migrační období navrhni podle rizika, ne podle netrpělivosti týmu
+
+Krátké migrační okno je lákavé, protože starý kód bolí. Jenže zákazník má svoje release cykly, testování, interní schvalování a někdy i dodavatele. Pokud mu dáš sedm dní na změnu fakturační integrace, neurychlil jsi vývoj. Jen jsi přesunul náklady do jeho chaosu.
+
+Rozumný model:
+
+| Typ změny | Doporučený přístup |
+| --- | --- |
+| Přidání volitelného pole | Oznámit v changelogu, bez migrace |
+| Změna doporučeného endpointu | Paralelní provoz staré i nové cesty, návod s příklady |
+| Odstranění pole nebo endpointu | Dlouhé migrační okno, aktivní upozornění dotčeným zákazníkům |
+| Změna oprávnění nebo autentizace | Testovací prostředí, audit dopadu, jasné datum přepnutí |
+| Bezpečnostní změna | Rychlejší režim, ale s přímou komunikací a podporou |
+
+Privacy-first detail: migrace nesmí nutit zákazníka do horší datové praxe. Když nový endpoint vyžaduje víc údajů než starý, musíš umět vysvětlit proč. Když nový webhook posílá detailnější data, dej možnost rozsah omezit nebo payload rozdělit podle účelu.
+
+## GQ.5 Dokumentace musí ukázat rozdíl, ne jen nový ideální svět
+
+API dokumentace často popíše novou verzi tak, jako by stará nikdy neexistovala. To je hezké pro čistý start, ale mizerné pro migraci. Migrační dokumentace má být srovnávací.
+
+Dobrá migrační stránka obsahuje:
+
+- tabulku starý endpoint → nový endpoint,
+- mapování starých polí na nová pole,
+- příklad starého a nového payloadu vedle sebe,
+- seznam polí, která zmizela a proč,
+- změny v oprávněních a scopech,
+- testovací checklist pro zákaznickou integraci,
+- datum poslední aktualizace dokumentace.
+
+U webhooků přidej reálný postup: jak přepnout verzi na testovacím endpointu, jak poslat testovací event, jak poznat duplicitní doručení a jak bezpečně zpracovat nové pole bez ukládání všeho do logů. Webhook bez migračního návodu je jen produkční překvapení s časovačem.
+
+## GQ.6 Měř používání starých verzí bez šmírování integrací
+
+Potřebuješ vědět, kdo pořád používá staré API. Nepotřebuješ kvůli tomu ukládat celé requesty, payloady ani osobní údaje zákazníků. Stačí provozní signály.
+
+Střídmý tracking API verzí:
+
+- workspace nebo tenant ID,
+- API verze,
+- endpoint nebo kategorie endpointu,
+- čas posledního použití,
+- počet volání v agregovaném okně,
+- chybová kategorie po migraci.
+
+Čemu se vyhnout:
+
+- ukládání celých request/response payloadů „pro debug“,
+- tokeny, secret hodnoty nebo autorizační hlavičky v logách,
+- osobní údaje z query parametrů,
+- automatické posílání detailních integračních dat do marketingového CRM,
+- dashboardy dostupné celému týmu bez potřeby.
+
+Support potřebuje vidět dopad a kontaktovat zákazníka. Vývoj potřebuje vidět technický pattern. Marketing nepotřebuje vědět, že konkrétní zákazník volá starý endpoint ve 2:13 ráno. Pokud ano, marketing se pravděpodobně ztratil a měl by se vrátit k newsletteru.
+
+## GQ.7 Checklist API lifecycle
+
+- Máme sepsané, co je breaking change pro API, webhooky, exporty a oprávnění?
+- Má veřejné API jasné verzování, které zákazník vidí v dokumentaci i příkladech?
+- Má každý deprecated endpoint konkrétní datum ukončení a náhradní cestu?
+- Posíláme technické signály jako `Deprecation`, `Sunset` nebo relevantní `Link` tam, kde to dává smysl?
+- Existuje migrační dokumentace se srovnáním starého a nového chování?
+- Umíme zjistit používání starých verzí bez ukládání citlivých payloadů?
+- Jsou zákazníci s vysokým dopadem kontaktováni přímo, ne jen přes obecný changelog?
+- Máme testovací prostředí nebo sandbox pro ověření migrace?
+- Nezvyšuje nová verze API rozsah osobních údajů bez jasného účelu a vysvětlení?
+- Po ukončení staré verze uklidíme dokumentaci, SDK, monitoring a support šablony?
+
+## Codyho komentář
+
+API lifecycle je nudná disciplína přesně do chvíle, kdy přestane fungovat fakturační integrace velkého zákazníka. Pak se z ní stane divadelní improvizace se špatným koncem. Codyho rada: verzuj méně často, komunikuj dřív a staré chování vypínej až ve chvíli, kdy umíš zákazníkovi podat mapu, ne jen omluvu.
+
+## Zdroje k příloze
+
+- RFC 9745 — The Deprecation HTTP Header Field: https://www.rfc-editor.org/rfc/rfc9745.html
+- RFC 8594 — The Sunset HTTP Header Field: https://www.rfc-editor.org/rfc/rfc8594.html
+- RFC 9110 — HTTP Semantics, status code `410 Gone`: https://www.rfc-editor.org/rfc/rfc9110.html#name-410-gone
+
+## Shrnutí přílohy
+
+API verzování chrání zákaznické integrace před tichým rozbitím. Malý SaaS tým má definovat breaking changes, držet srozumitelný model verzí, oznamovat deprecace s datem a náhradní cestou, psát srovnávací migrační dokumentaci a měřit používání starých verzí bez ukládání zbytečných payloadů. Privacy-first API není jen stabilní. Je předvídatelné, datově střídmé a fér i ve chvíli, kdy staré věci musí odejít do důchodu.
+
 ## Pracovní log
 
+- 2026-08-15: Přidána příloha GQ o API verzování a deprecacích: breaking changes, model verzí, technické signály `Deprecation` a `Sunset`, migrační okna, dokumentace rozdílů, střídmé měření starých verzí a checklist.
 - 2026-08-15: Přidána příloha GP o privacy-first billingu a fakturačním provozu: oddělení produktových a billing rolí, datové minimum fakturačních údajů, evropská DPH/OSS, dunning, refundy, billing metriky a checklist.
 - 2026-08-15: Přidána příloha GO o přístupových oprávněních: role podle práce, deny-by-default, kombinace rolí se vztahem k objektům, ochrana citlivých akcí, dočasný support access, pozvánky, offboarding, testy oprávnění a privacy-first checklist.
 - 2026-08-15: Přidána příloha GN o rate limitingu a anti-abuse: mapa zneužitelných toků, limity podle více klíčů, bezpečné přihlašování, CAPTCHA jako pozdější vrstva, střídmé logování, support výjimky, review před kampaněmi a privacy-first checklist.
