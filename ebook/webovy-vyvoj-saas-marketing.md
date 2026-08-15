@@ -28977,8 +28977,171 @@ Výstup nemá být román. Stačí krátký záznam v rozhodovacím systému neb
 Hotfix má být rychlá, úzká a ověřitelná oprava akutního problému. Privacy-first přístup drží hranice i pod tlakem: nepracuje s produkčními daty jako s ladicím pískovištěm, neexpanduje rozsah, komunikuje zákazníkům prakticky a po nasazení uklízí technické i datové stopy. Dobře vedený hotfix neukazuje jen schopnost hasit. Ukazuje, že tým umí hasit tak, aby si přitom nezapálil serverovnu, důvěru a ještě k tomu vlastní reputaci.
 
 
+# Příloha GH: Rollback a obnova po špatném nasazení bez datové loterie, hrdinství a tichého chaosu
+
+Rollback je jako bezpečnostní pás. Doufáš, že ho dneska nebudeš potřebovat, ale pokud ho nemáš připravený před jízdou, jeho dodatečná instalace během smyku je už docela odvážná disciplína. U SaaS produktu to platí dvojnásob: špatné nasazení nemusí jen rozbít UI. Může pokazit data, rozjet špatné e-maily, otevřít špatná oprávnění nebo spustit integrace, které pak zákazníkům udělají v účtech malou digitální bramboračku.
+
+Google SRE materiály opakovaně zdůrazňují význam release engineeringu, canary rolloutů a schopnosti vracet problematické změny zpět; SRE Workbook u canary releasů popisuje, že canary umožňuje zachytit problém s menším dopadem než plošné nasazení: https://sre.google/workbook/canarying-releases/ A Google SRE kniha řadí rollbacky a canary strategie mezi běžnou práci release engineeringu: https://sre.google/sre-book/release-engineering/
+
+Privacy-first rollback má jeden nepříjemně praktický princip: nevracíš jen kód, vracíš důvěru. Proto musíš vědět, co se změnilo v aplikaci, datech, konfiguraci, integracích i komunikaci. „Vrátíme poslední commit“ je někdy správná odpověď. Jindy je to jen efektní způsob, jak zakrýt, že migrace databáze už mezitím udělala nevratný salát.
+
+## GH.1 Rollback plán vzniká před releasem, ne po explozi
+
+Každý větší release by měl mít krátkou rollback větu. Ne dvacetistránkový román, ale konkrétní odpověď na otázku: „Když se to pokazí, co přesně uděláme?“ Pokud ji tým neumí napsat před nasazením, pravděpodobně ještě nerozumí riziku změny.
+
+Rollback věta může vypadat takhle:
+
+> „Kód lze vrátit na verzi `2026-08-15.1` během 10 minut. Databázová migrace jen přidává nullable sloupec, rollback aplikace je bezpečný. Feature flag `new_invoice_export` lze vypnout bez deploye. Integrace na účetní systém se spouští až po ručním potvrzení.“
+
+Nebo varovněji:
+
+> „Migrace mění strukturu fakturačních řádků a nelze ji bezpečně vrátit automaticky. Release musí běžet za feature flagem, nejdřív pro interní testovací organizaci, potom pro tři pilotní účty. Při problému vypínáme flag a zastavujeme background job; databázový rollback se nedělá bez incident lead schválení.“
+
+Druhá varianta není ostuda. Ostuda je zjistit nevratnost až ve chvíli, kdy zákazník právě vystavil 400 faktur v novém formátu.
+
+## GH.2 Rozlišuj rollback kódu, konfigurace, dat a procesů
+
+Slovo rollback svádí k představě jednoho tlačítka. Ve skutečnosti existuje několik druhů návratu a každý má jiné riziko.
+
+| Vrstva | Co se vrací | Typické riziko | Bezpečnější pojistka |
+| --- | --- | --- | --- |
+| Kód | Aplikační build nebo container image | Starý kód nerozumí novému schématu | kompatibilní migrace, feature flag |
+| Konfigurace | env proměnné, limity, routing, oprávnění | tajné hodnoty v chatu, špatný region | verzovaná konfigurace, auditní stopa |
+| Databáze | migrace, opravy záznamů, importy | nevratná změna nebo ztráta historie | záloha, dry-run, idempotentní skript |
+| Fronty a joby | naplánované úlohy, e-maily, webhooky | opakované odeslání nebo duplicitní akce | idempotence, pauza fronty, korelační ID |
+| Komunikace | status, release notes, support odpovědi | zákazník dostane jinou pravdu než produkt | jedna komunikační karta, vlastník textu |
+
+Praktický důsledek: rollback checklist nesmí být jen „redeploy previous version“. Musí říct, co se děje s databází, background joby, integracemi a zprávami zákazníkům. Jinak vrátíš aplikaci, ale necháš běžet proces, který dál vyrábí škodu v pozadí. To je jako vypnout požární alarm a nechat hořet kuchyň. Tiché, ale blbé.
+
+## GH.3 Feature flag je brzda, ne alibi pro chaos
+
+Feature flag dokáže zachránit den. Ale jen pokud je navržený jako provozní brzda, ne jako skrýš pro nedodělané funkce. Flag musí mít vlastníka, popis, rozsah, výchozí stav a plán odstranění. Jinak se z něj stane technická půda, kde žijí staré větve logiky, zapomenuté výjimky a produktové mumie.
+
+Dobrý flag odpovídá na otázky:
+
+- Co přesně zapíná a vypíná?
+- Je bezpečné ho vypnout během provozu?
+- Platí globálně, nebo pro organizaci, roli či region?
+- Jak ověříme, že vypnutí opravdu zastavilo dopad?
+- Kdo ho smí měnit a kde se změna loguje?
+- Kdy flag smažeme z kódu?
+
+Privacy-first detail: flagy nesmí vytvářet tajnou segmentaci, které nerozumí ani uživatel, ani support. Pokud novou funkci testuješ jen na pilotních zákaznících, mělo by to být smluvně nebo komunikačně jasné. Tiché experimentování na citlivých procesech není produktová chytrost. Je to jen A/B test převlečený za past.
+
+## GH.4 Databázový rollback je poslední možnost, ne reflex
+
+Databáze má horší smysl pro humor než frontend. Starý CSS soubor se dá vrátit snadno. Ale smazaný sloupec, přepsaná historie nebo špatně provedený import umí bolet ještě dlouho po tom, co je aplikace zase zelená.
+
+Bezpečnější strategie je psát migrace kompatibilně:
+
+1. Nejdřív přidej nové pole nebo tabulku bez odstranění staré struktury.
+2. Nasazuj kód, který zvládne starý i nový stav.
+3. Proveď backfill opatrně, dávkově a s měřením.
+4. Přepni čtení nebo zápis přes flag.
+5. Teprve po stabilizaci odstraň starou strukturu.
+
+U malého týmu to zní jako procesní luxus. Ve skutečnosti je to levnější než sobotní obnova zálohy s potem na čele a otevřeným incident dokumentem. Pokud změna pracuje s osobními nebo obchodně citlivými daty, přidej ještě bezpečnostní brzdy: dry-run režim, limit počtu upravených řádků, auditní výpis bez osobních údajů a možnost zastavit job mezi dávkami.
+
+Codyho komentář: pokud rollback plán začíná větou „snad máme zálohu“, není to rollback plán. Je to modlitba s logem databázového klienta.
+
+## GH.5 Canary a postupné nasazení snižují cenu chyby
+
+Canary release není jen hračka pro velké platformy. I malý SaaS může nasazovat postupně: nejdřív interní účet, potom jeden pilotní zákazník, potom 5 % organizací, potom všichni. Důležité je, aby postupné nasazení mělo jasné signály pro stopku.
+
+Sleduj hlavně:
+
+- chybovost konkrétní nové cesty,
+- latenci kritických akcí,
+- počet support reportů s korelačním ID,
+- selhání background jobů,
+- neočekávané změny v počtu odeslaných e-mailů nebo webhooků,
+- bezpečnostní signály: odmítnuté autorizace, neobvyklý přístup k datům, pokusy o práci mimo scope.
+
+Nesleduj canary přes marketingovou mlhu typu „engagement trochu klesl“. Pro rollback potřebuješ provozní signály, ne produktovou astrologii. Pokud nová fakturační funkce zvedne počet chyb exportu z nuly na desítky, nepotřebuješ debatu o interpretaci. Potřebuješ stopku.
+
+## GH.6 Komunikace po rollbacku má být konkrétní a klidná
+
+Rollback není selhání, pokud zabránil většímu dopadu. Selhání je mlčet, tvářit se, že se nic nestalo, a nechat support hádat, proč zákazník viděl funkci ráno a odpoledne už ne.
+
+Interní zpráva po rollbacku má obsahovat:
+
+- co bylo nasazeno,
+- proč se rollback spustil,
+- koho se dopad týkal,
+- co se stalo s daty,
+- co má říkat support,
+- jaké je další rozhodnutí.
+
+Externí zpráva má být kratší a bez zákulisních detailů:
+
+> „Dnes jsme dočasně stáhli novou verzi exportu faktur, protože u části účtů selhávalo vytvoření CSV souboru. Data zákazníků nebyla ztracena ani zpřístupněna neoprávněně. Původní export je znovu aktivní a opravenou verzi nasadíme po dodatečné kontrole.“
+
+Tohle je dost konkrétní, aby zákazník věděl, co se stalo, ale neprozrazuje interní architekturu ani nepřidává dramatický román. Statuspage dokumentace Atlassianu připomíná, že po vyřešení incidentu dává smysl napsat postmortem hlavně u větších výpadků: https://support.atlassian.com/statuspage/docs/create-a-postmortem/ U menších rollbacků stačí interní mini-záznam, ale princip je stejný: popsat dopad, příčinu a další opatření bez lovu viníka.
+
+## GH.7 Po rollbacku ukliď, jinak sis jen půjčil problém
+
+Rollback vrátí službu do bezpečnějšího stavu. Neznamená to, že práce skončila. Pokud tým po rollbacku jen zavře notebook, stejný problém se vrátí v příštím releasu, akorát bude mít lepší načasování a horší náladu.
+
+Po rollbacku udělej krátký úklid:
+
+- ověř, že se zastavily související joby, webhooky a e-mailové sekvence,
+- zkontroluj, zda nevznikla data v mezistavu,
+- smaž dočasné přístupy, exporty a debug artefakty,
+- založ navazující opravu s jasným vlastníkem,
+- aktualizuj testy, rollout plán nebo feature flag pravidla,
+- doplň zákaznickou dokumentaci, pokud změna ovlivnila očekávání.
+
+OWASP CI/CD Security Cheat Sheet bere CI/CD prostředí jako bezpečnostně citlivou plochu, kde jsou rizikem repozitáře, automatizační servery, deployment postupy i cílové nody: https://cheatsheetseries.owasp.org/cheatsheets/CI_CD_Security_Cheat_Sheet.html To je dobrá připomínka: rollback není jen produktová operace. Je to bezpečnostní operace. Kdo může vracet verze, měnit konfiguraci a zastavovat joby, má v ruce hodně silnou páku.
+
+## GH.8 Checklist rollback připravenosti
+
+Před releasem:
+
+- Má release jasnou rollback větu?
+- Je jasné, jestli jde vrátit kód bez databázového rollbacku?
+- Jsou migrace kompatibilní se starou i novou verzí aplikace?
+- Existuje feature flag nebo jiná provozní brzda pro rizikovou změnu?
+- Ví support, co se mění a jak pozná problém?
+- Jsou definované stop signály pro canary nebo postupné nasazení?
+- Jsou přístupy k deployi, konfiguraci a flagům omezené a auditované?
+
+Při rollbacku:
+
+- Kdo je technický vlastník a kdo komunikuje?
+- Co přesně vracíme: kód, konfiguraci, joby, integrace nebo data?
+- Jak ověříme, že dopad skončil?
+- Nepracujeme zbytečně s produkčními osobními daty?
+- Neposíláme tajemství, exporty nebo screenshoty do chatu?
+- Dostane support jednu pravdivou verzi situace?
+
+Po rollbacku:
+
+- Existují data v mezistavu, která potřebují opravu?
+- Jsou zastavené nebo dočištěné duplicitní joby a webhooky?
+- Je založený navazující úkol pro root cause?
+- Je aktualizovaný test, runbook nebo rollout postup?
+- Je jasné, kdy se změna zkusí znovu a za jakých podmínek?
+
+## Codyho komentář
+
+Nejlepší rollback je ten, který nikdo dramaticky neoslavuje, protože proběhl nudně. Nudný rollback znamená, že tým měl plán, signály, přístupy, komunikaci a dost pokory před databází. V provozu je nuda podceňovaná ctnost. Hlavně když alternativou je improvizovaný rituál kolem produkční konzole.
+
+## Zdroje k příloze
+
+- Google SRE Workbook — Canarying Releases; vysvětluje postupné nasazování a snížení dopadu chybných releasů pomocí canary procesu: https://sre.google/workbook/canarying-releases/
+- Google SRE Book — Release Engineering; popisuje release engineering, canary strategie a rollback problematických změn jako součást spolehlivého provozu: https://sre.google/sre-book/release-engineering/
+- OWASP — CI/CD Security Cheat Sheet; praktický bezpečnostní kontext pro CI/CD prostředí, deployment postupy, integritu závislostí a ochranu pipeline: https://cheatsheetseries.owasp.org/cheatsheets/CI_CD_Security_Cheat_Sheet.html
+- Atlassian Statuspage — Create a postmortem; stručný provozní kontext pro postmortem po vyřešeném incidentu: https://support.atlassian.com/statuspage/docs/create-a-postmortem/
+
+## Shrnutí přílohy
+
+Rollback není tlačítko pro návrat času, ale připravený provozní postup. Privacy-first tým plánuje návrat před releasem, rozlišuje kód, konfiguraci, data a procesy, používá feature flagy jako brzdu, chrání databázi před reflexivním couváním, nasazuje postupně a po rollbacku uklízí technické i datové stopy. Dobře zvládnutý rollback není ostuda. Je to důkaz, že tým umí rychle couvnout bez toho, aby přejel zákaznickou důvěru.
+
+
+
 ## Pracovní log
 
+- 2026-08-15: Přidána příloha GH o rollbacku a obnově po špatném nasazení: rollback plán před releasem, vrstvy návratu, feature flagy, databázové migrace, canary signály, komunikace, úklid a checklist.
 - 2026-08-15: Přidána příloha GG o hotfix procesu: rozhodnutí, kdy je oprava opravdu urgentní, vlastnictví, úzký rozsah, ověření bez produkčních dat, reverzibilní nasazení, zákaznická komunikace, úklid po hotfixi a checklist.
 - 2026-08-14: Přidána příloha GF o bug reportingu a produktové triáži: strukturované hlášení, korelační ID, bezpečné logování, priorizace podle dopadu, reprodukce bez produkčních dat, komunikace po opravě a checklist.
 - 2026-08-14: Přidána příloha GE o in-app marketingu bez dark patterns: uživatelský důvod výzev, férové upgrade momenty, trialová očekávání, hrubá segmentace, střídmé měření, preference centrum a checklist.
