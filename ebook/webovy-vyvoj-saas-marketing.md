@@ -28835,8 +28835,151 @@ Můj pohled: dobrý bug reporting je skoro neviditelná disciplína. Když fungu
 Bug reporting je součást důvěry v SaaS, ne jen fronta nepříjemností pro vývoj. Privacy-first triáž vede zákazníka ke konkrétnosti, používá bezpečná korelační ID, loguje podle účelu, chrání citlivé přílohy, prioritizuje podle dopadu a vrací poznatky zpět do produktu. Výsledkem je méně ping-pongu, rychlejší opravy a menší riziko, že se ladění chyby samo stane privacy incidentem. Což by byla opravdu zbytečně kreativní forma sebepoškození.
 
 
+# Příloha GG: Hotfix proces bez cowboy deployů, paniky a skrytého privacy dluhu
+
+Hotfix je zvláštní zvíře. Vzniká ve chvíli, kdy něco hoří, zákazník čeká, obchod nervózně kouká do Slacku a vývojář má pokušení udělat „jen malou změnu rovnou v produkci“. Přesně tady se pozná rozdíl mezi týmem, který má provoz pod kontrolou, a týmem, který doufá, že mu Git odpustí hříchy. Neodpustí. Git si pamatuje všechno. Pasivně agresivně, ale pamatuje.
+
+Privacy-first hotfix proces má jednoduchý cíl: opravit akutní problém rychle, ale bez toho, aby oprava vytvořila nový bezpečnostní, datový nebo provozní dluh. Rychlost je důležitá. Jenže rychlost bez mantinelů je jen elegantně pojmenovaná panika.
+
+## GG.1 Nejdřív rozhodni, jestli je to opravdu hotfix
+
+Ne každá naléhavá zpráva je hotfix. Někdy je to incident, někdy běžná chyba, někdy produktová frustrace a někdy jen zákazník s velmi přesvědčivým caps lockem. Hotfix má být výjimka, ne každodenní styl života.
+
+Použij krátký rozhodovací filtr:
+
+| Otázka | Pokud ano | Pokud ne |
+| --- | --- | --- |
+| Blokuje chyba kritickou práci zákazníka? | Kandidát na hotfix | Naplánuj do běžného release |
+| Hrozí únik dat nebo neoprávněný přístup? | Incidentní režim, hotfix může být součástí | Neeskaluj jen kvůli nervozitě |
+| Existuje bezpečný workaround? | Zvaž komunikaci a opravu v blízkém release | Hotfix dává větší smysl |
+| Je riziko opravy menší než riziko čekání? | Pokračuj | Zastav se a připrav menší zásah |
+| Umíš změnu ověřit bez produkčních dat? | Pokračuj | Nejdřív vytvoř bezpečný testovací scénář |
+
+Praktické pravidlo: hotfix je pro chyby, kde čekání vytváří větší škodu než řízená rychlá oprava. Pokud tým používá hotfix na každý překlep, brzy nebude mít hotfix proces. Bude mít jen permanentní poplach s hezčím názvem.
+
+## GG.2 Hotfix musí mít vlastníka, rozsah a stopku
+
+V krizi škodí neurčitost. „Někdo se na to dívá“ není vlastnictví. „Asi to opravíme dneska“ není plán. A „ještě přidáme jednu drobnost“ je věta, po které se obvykle rodí druhý incident.
+
+Každý hotfix ticket by měl mít:
+
+- jednoho technického vlastníka,
+- jednoho člověka odpovědného za komunikaci,
+- jasný popis dopadu,
+- korelační ID nebo odkazy na relevantní reporty,
+- přesně vymezený rozsah opravy,
+- plán ověření,
+- rozhodnutí, co se záměrně neopravuje teď,
+- časovou stopku pro přehodnocení postupu.
+
+Ukázka dobrého rozsahu:
+
+> „Hotfix opraví pád CSV exportu u účtů s prázdnou hodnotou v poli `company_vat_id`. Neřeší redesign exportu, nový formát ani přejmenování sloupců. Ověření: syntetický účet se třemi fakturami, jedna bez DIČ, export v CSV i XLSX, kontrola logu bez osobních údajů.“
+
+Tohle zní méně hrdinsky než „jdu to rychle celé předělat“. A právě proto je to lepší.
+
+## GG.3 Nejmenší bezpečná změna vyhrává
+
+Hotfix není správný okamžik na refaktor celé vrstvy, migraci knihovny nebo přepsání billing modulu, protože „už v tom stejně jsme“. Pokud akutní problém řeší jeden guard clause, hotfix má být jeden guard clause plus test. Ne otevřená archeologická expedice do útrob aplikace.
+
+Postup pro nejmenší bezpečnou změnu:
+
+1. Reprodukuj chybu na syntetických nebo anonymizovaných datech.
+2. Najdi nejbližší příčinu, která způsobuje uživatelský dopad.
+3. Navrhni minimální opravu, která dopad zastaví.
+4. Přidej test pro konkrétní scénář.
+5. Zapiš, jaký širší problém zůstává na pozdější technický dluh.
+6. Po nasazení vytvoř navazující úkol pro čistší řešení, pokud je potřeba.
+
+Příklad: export padá, protože chybí volitelná adresa. Hotfix nemá přepisovat celý exportní systém. Má bezpečně ošetřit chybějící adresu, doplnit test a zajistit, že se do logu nevypíše celý zákaznický záznam. Větší práce patří do běžného plánování.
+
+## GG.4 Ověření nesmí potřebovat produkční data jako rukojmí
+
+Nejnebezpečnější věta při hotfixi je: „Pošli mi produkční export, ať to zkusím lokálně.“ Ne proto, že by vývojář byl zloduch. Protože panika snižuje kvalitu rozhodování a citlivá data se pak množí po laptopech, chatech a přílohách jako houby po dešti.
+
+Bezpečné ověření hotfixe stojí na třech vrstvách:
+
+- **Syntetický scénář:** ručně připravená data, která napodobují problém, ale neobsahují zákaznické údaje.
+- **Regresní test:** automatizovaný test pro konkrétní chybu, aby se nevrátila příští úterý v převleku.
+- **Produkční signál:** po nasazení sleduješ jen technické indikátory, například pokles chyb daného typu, úspěšnost jobu nebo počet selhání podle korelačního ID.
+
+Pokud opravdu potřebuješ nahlédnout do produkčního kontextu, drž se těchto mantinelů:
+
+- použij dočasný, auditovaný support access,
+- omez přístup na konkrétní účet a časové okno,
+- nikdy nekopíruj celé databázové řádky do chatu,
+- maskuj hodnoty, které nejsou nutné pro diagnózu,
+- po vyřešení přístup odeber a zapiš důvod.
+
+Codyho komentář: hotfix bez bezpečného testovacího scénáře není agilita. Je to improvizované divadlo s produkční databází v první řadě. Publikum netleská.
+
+## GG.5 Nasazení musí být reverzibilní nebo aspoň zastavitelné
+
+Rychlá oprava má mít plán návratu. Ne nutně složitý rollback orchestru o čtyřiceti krocích, ale aspoň vědomé rozhodnutí: co uděláme, když se oprava chová hůř než původní chyba?
+
+Před nasazením si odpověz:
+
+- Dá se změna vypnout feature flagem?
+- Dá se vrátit předchozí verze bez migrace dat?
+- Pokud obsahuje migraci, je dopředná a bezpečně opakovatelná?
+- Ví support, co se může po nasazení změnit?
+- Máme metriky nebo logy, podle kterých poznáme zlepšení?
+- Kdo sleduje produkci prvních třicet minut?
+
+U datových změn buď obzvlášť nudný. Nudnost je v provozu kompliment. Pokud hotfix mění schéma, přepočítává data nebo upravuje oprávnění, rozděl ho na malé kroky: nejdřív kompatibilní změna, potom nasazení aplikace, potom řízený job, potom úklid. Žádné „ono se to nějak zmigruje při startu“. To je věta, která voní po sobotním večeru u logů.
+
+## GG.6 Komunikuj stav, ne zákulisní chaos
+
+Zákazník nepotřebuje číst interní detektivku. Potřebuje vědět, zda se problém uznal, co je dopad, jestli existuje workaround, kdy bude další update a jestli má něco udělat.
+
+Krátká šablona pro podporu:
+
+> „Díky za report. Problém jsme potvrdili u exportu faktur, kde některé záznamy nemají vyplněnou volitelnou fakturační hodnotu. Připravujeme úzkou opravu a další update pošleme do 60 minut. Do té doby prosím nepoužívejte opakovaný export stejného období; data v účtu zůstávají uložená.“
+
+Po nasazení:
+
+> „Oprava je nasazená. Export jsme ověřili na bezpečném testovacím scénáři a sledujeme produkční chybovost. Prosím zkuste export znovu. Pokud se problém vrátí, pošlete nám kód chyby z obrazovky, ne celý export.“
+
+Všimni si poslední věty. Komunikace může sama chránit data. Když zákazníkům neřekneš, co mají poslat, pošlou všechno. Lidé jsou ochotní pomoci. Bohužel někdy až moc.
+
+## GG.7 Po hotfixi ukliď stopu a vrať se k příčině
+
+Hotfix nekončí mergem. Končí až tehdy, když tým ví, proč se chyba dostala ven, co se zlepšilo a co se nebude opakovat. Jinak jen posíláš stejný problém do budoucnosti s mašlí.
+
+Mini post-hotfix review na 20 minut:
+
+- Co byl uživatelský dopad?
+- Co byla technická příčina?
+- Proč to nezachytily testy, monitoring nebo review?
+- Jaká data jsme při řešení viděli a byla všechna nutná?
+- Musíme něco odstranit z dočasných logů, exportů nebo support přístupů?
+- Jaký test, alert nebo produktový guard přidáme?
+- Jaký větší refaktor nebo procesní úkol vzniká mimo hotfix?
+
+Výstup nemá být román. Stačí krátký záznam v rozhodovacím systému nebo incident logu. Důležité je, aby příští člověk nemusel znovu luštit archeologii v chatu.
+
+## Checklist: Hotfix bez zbytečného rizika
+
+- [ ] Je jasné, proč jde o hotfix, ne běžný release.
+- [ ] Existuje vlastník opravy a vlastník komunikace.
+- [ ] Rozsah je úzký a výslovně říká, co se teď neřeší.
+- [ ] Chyba je reprodukovaná na syntetických nebo anonymizovaných datech.
+- [ ] Oprava obsahuje test pro konkrétní scénář.
+- [ ] Logy neobsahují tokeny, celé payloady, osobní údaje ani zákaznický obsah.
+- [ ] Je známý rollback, feature flag nebo jiný bezpečný únikový plán.
+- [ ] Support má krátkou zákaznickou formulaci před i po nasazení.
+- [ ] Po nasazení někdo sleduje produkční signály.
+- [ ] Dočasné přístupy, exporty a ladicí logy jsou po řešení uklizené.
+- [ ] Vznikl navazující úkol pro širší příčinu, pokud hotfix řešil jen symptom.
+
+## Shrnutí přílohy
+
+Hotfix má být rychlá, úzká a ověřitelná oprava akutního problému. Privacy-first přístup drží hranice i pod tlakem: nepracuje s produkčními daty jako s ladicím pískovištěm, neexpanduje rozsah, komunikuje zákazníkům prakticky a po nasazení uklízí technické i datové stopy. Dobře vedený hotfix neukazuje jen schopnost hasit. Ukazuje, že tým umí hasit tak, aby si přitom nezapálil serverovnu, důvěru a ještě k tomu vlastní reputaci.
+
+
 ## Pracovní log
 
+- 2026-08-15: Přidána příloha GG o hotfix procesu: rozhodnutí, kdy je oprava opravdu urgentní, vlastnictví, úzký rozsah, ověření bez produkčních dat, reverzibilní nasazení, zákaznická komunikace, úklid po hotfixi a checklist.
 - 2026-08-14: Přidána příloha GF o bug reportingu a produktové triáži: strukturované hlášení, korelační ID, bezpečné logování, priorizace podle dopadu, reprodukce bez produkčních dat, komunikace po opravě a checklist.
 - 2026-08-14: Přidána příloha GE o in-app marketingu bez dark patterns: uživatelský důvod výzev, férové upgrade momenty, trialová očekávání, hrubá segmentace, střídmé měření, preference centrum a checklist.
 - 2026-08-14: Přidána příloha GD o SLA a podmínkách podpory: definice služby, reakční doby, priority ticketů, support access, status komunikace, export/odchod zákazníka a privacy-first checklist.
