@@ -32649,7 +32649,199 @@ Nejlepší dokumentace není nejdelší. Je ta, která vede zákazníka k bezpe�
 API dokumentace je součást produktu, bezpečnosti i zákaznické podpory. Má vycházet ze strojově čitelné specifikace, používat syntetické příklady, jasně popisovat autentizaci a oprávnění, držet changelog změn a provozovat developer portál bez zbytečných trackerů. Privacy-first dokumentace nekomplikuje integrace; chrání zákazníka před špatnými návyky a tým před supportovým požárem.
 
 
+---
+
+# Příloha HC: Sandbox a testovací prostředí bez produkčních dat, falešné jistoty a integračního hazardu
+
+Sandbox je místo, kde si zákazník smí rozbít hračku, aniž by tím rozbil fakturaci, objednávky, notifikace nebo nervy supportu. U SaaS produktu s API je to jeden z nejdůležitějších prvků developer experience. Když sandbox chybí, zákazníci testují proti produkci. Když je sandbox špatný, zákazníci získají falešnou jistotu a první reálná integrace pak připomíná zkoušku hasičského sboru v datacentru.
+
+Privacy-first sandbox má jasné pravidlo: testovací prostředí nesmí být odkladiště produkčních dat. Ani „jen dočasně“, ani „jen pro demo“, ani „jen než připravíme syntetická data“. Produkční kopie v testu bývá pohodlná přesně do chvíle, kdy se objeví screenshot v ticketu, export v e-mailu nebo log s osobními údaji na místě, kde ho nikdo nehledal.
+
+## HC.1 Sandbox má mít vlastní produktový slib
+
+Nejdřív si napiš, k čemu sandbox slouží. Není to jen druhá databáze s jiným názvem. Může mít různé účely:
+
+- **Integrační učení:** zákazník si vyzkouší API, SDK, webhooky a chyby bez rizika.
+- **Předprodukční ověření:** tým ověří změnu integrace před zapnutím v produkci.
+- **Demo pro obchod:** ukázka produktu na syntetických datech bez přístupu k reálným zákazníkům.
+- **Support reprodukce:** bezpečné zopakování problému bez kopírování produkčních záznamů.
+- **Školení týmu:** interní nácvik procesů, incidentů a zákaznických scénářů.
+
+Každý účel má jiné požadavky. Demo sandbox má být čitelný a hezký. Integrační sandbox má být věrný chováním API. Support sandbox má umožnit reprodukovat chybu, ale ne nahrát cizí zákaznický obsah. Pokud se to všechno smíchá dohromady, vznikne prostředí, kterému nikdo nevěří a všichni se ho bojí restartovat.
+
+Praktická věta do dokumentace:
+
+> Sandbox je určený pro testování integrací se syntetickými daty. Neodesílejte do něj osobní údaje, produkční zákaznický obsah ani tajné klíče z produkce. Testovací data můžeme pravidelně mazat.
+
+Tahle věta není právní kouzlo. Je to jasné nastavení očekávání. A očekávání jsou v integracích levnější než pozdější omluvy.
+
+## HC.2 Testovací data vytvoř, nekopíruj
+
+Nejhorší sandbox je „produkční dump, ale přejmenovali jsme databázi“. I když se data anonymizují, často zůstanou kombinace polí, poznámky, logy, soubory nebo metadata, která prozradí víc, než tým čekal. Navíc se tím učí špatný návyk: že testování vyžaduje reálná data.
+
+Lepší přístup je syntetická datová sada:
+
+- několik typických organizací,
+- několik rolí a oprávnění,
+- běžné i hraniční stavy,
+- faktury, objednávky nebo záznamy s jasně testovacími identifikátory,
+- časové scénáře: dnes, minulý měsíc, expirované, čekající na potvrzení,
+- chybové scénáře: neplatný stav, nedostatečný scope, limit, duplicita.
+
+Příklad bezpečných testovacích identifikátorů:
+
+```text
+org_demo_cafe
+user_test_owner@example.test
+inv_test_overdue_001
+wh_delivery_failed_signature
+```
+
+Doména `example.test` je pro ukázky čitelnější než smyšlené reálné domény. Důležité je, aby nikdo nemohl omylem poslat testovací e-mail skutečnému člověku. U telefonů, adres a jmen platí totéž: používej zjevně demo hodnoty a v UI je klidně označ štítkem „syntetická data“.
+
+Codyho malý trik: do každého demo záznamu přidej nenápadný, ale jasný textový vzor, třeba `DEMO_DATA_DO_NOT_USE_FOR_PRODUCTION`. Když se potom objeví v exportu, logu nebo screenshotu, hned víš, že jde o testovací svět. Je to takový fluorescenční prášek pro datovou hygienu, jen bez laboratoře a podezřelých brýlí.
+
+## HC.3 Odděl klíče, účty a endpointy
+
+Sandbox musí být bezpečně oddělený od produkce. Ne jen vizuálně. Opravdu.
+
+Minimální oddělení:
+
+- jiné API klíče,
+- jiné webhook signing secrets,
+- jiné OAuth klienty,
+- jiné callback URL,
+- jiné databáze a fronty,
+- jiné e-mailové a platební režimy,
+- jasně odlišné domény nebo cesty.
+
+Příklad dobrého rozlišení:
+
+```text
+https://api.example.cz/v1
+https://sandbox-api.example.cz/v1
+
+sk_live_...
+sk_test_...
+```
+
+U API klíčů pomáhá prefix. Člověk i logovací systém rychle pozná, že `sk_test_` nepatří do produkčního volání. Pokud produkce přijme testovací klíč, je to chyba. Pokud sandbox přijme live klíč, je to také chyba. Ano, dvě chyby za cenu jedné kontroly. Výhodné, pokud máš rád prevenci víc než incidentní meetingy.
+
+Oddělení se týká i uživatelských účtů. Interní admin v produkci nemá automaticky znamenat admin v sandboxu. Demo obchodník nemá mít přístup k testovacím datům zákazníka, který řeší integraci. A zákazník by neměl vidět cizí sandbox jen proto, že oba používají stejný „testovací tenant“.
+
+## HC.4 Sandbox má simulovat chování, ne právní realitu světa
+
+Sandbox nemusí posílat skutečné peníze, e-maily ani SMS. Musí ale věrně ukázat, co se stane produktově.
+
+U platebního nebo billingového toku například nepotřebuješ reálnou platbu. Potřebuješ testovací scénáře:
+
+- platba schválena,
+- platba odmítnuta,
+- karta vyžaduje další krok,
+- refund čeká na zpracování,
+- faktura po splatnosti,
+- subscription obnovena,
+- subscription zrušena.
+
+U e-mailů nepotřebuješ doručovat skutečným lidem. Potřebuješ bezpečný e-mail sink, náhled šablony a stav „zpráva by byla odeslána“. U webhooků nepotřebuješ volat produkční URL zákazníka, pokud testuje v sandboxu. Potřebuješ doručení na testovací endpoint, ruční retry a ukázku podpisu.
+
+Dobré pravidlo: sandbox má umět vyvolat všechny důležité stavy, které zákazník musí ošetřit. Ne jen šťastnou cestu. Integrace, která prošla jen scénářem „všechno funguje“, neprošla testem. Jen si hezky zamávala před zrcadlem.
+
+## HC.5 Reset a retence musí být očekávané
+
+Testovací prostředí se časem zašpiní. Zákazníci zkouší, support reprodukuje, obchod předvádí, vývoj mění schémata. Bez pravidel se sandbox stane archeologickým nalezištěm starých bugů, falešných účtů a objektů jménem `asdf final final test`.
+
+Nastav proto:
+
+- pravidelný úklid testovacích dat,
+- možnost ručního resetu sandbox tenantu,
+- jasné upozornění před smazáním,
+- oddělení seed dat od uživatelsky vytvořených testů,
+- retenci logů kratší než v produkci, pokud není důvod jinak,
+- jednoduchý export testovací konfigurace, ne testovacích osobních údajů.
+
+Příklad pravidla:
+
+> Sandbox data se mažou po 90 dnech neaktivity. Testovací doručovací logy držíme 30 dní. Demo seed data lze obnovit kdykoliv z administrace.
+
+Nejde o univerzální čísla. Jde o to, aby zákazník věděl, co čekat. Nejasná retence v sandboxu vede ke dvěma špatným extrémům: někdo do něj začne ukládat poloprodukční data, nebo se ho bojí používat, protože „tam stejně všechno mizí“.
+
+## HC.6 Logy a support v sandboxu nejsou volná zóna
+
+Sandbox není místo, kde privacy pravidla dostanou dovolenou. I testovací prostředí může obsahovat osobní údaje, protože uživatel je tam omylem vloží. Produkt s tím musí počítat.
+
+Support a observabilita v sandboxu by měly dodržet stejné principy jako produkce:
+
+- loguj korelační ID, stav a rozhodnutí, ne celé payloady,
+- maskuj tokeny, podpisy, e-maily a dlouhé texty,
+- odděl zákaznické sandbox logy od interních vývojových logů,
+- ukaž zákazníkovi bezpečný doručovací nebo API log, ale ne interní stack trace,
+- umožni smazání testovacích dat bez prosby přes support,
+- označ sandbox události tak, aby se nemíchaly do produkčních metrik.
+
+OWASP API Security Project upozorňuje mimo jiné na rizika rozbitých oprávnění, nadměrného vystavování dat a bezpečnostních chyb v API: https://owasp.org/www-project-api-security/. Sandbox není výjimka z těchto rizik. Je to místo, kde se často testuje víc, rychleji a s menší opatrností. Přesně proto má mít zábradlí.
+
+## HC.7 Sandbox dokumentuj jako první integrační trasu
+
+Dokumentace by neměla říkat „nejdřív si založte účet“ a pak zákazníka hodit do produkčního API. Lepší je vést ho bezpečnou trasou:
+
+1. Vytvoř sandbox účet nebo tenant.
+2. Vygeneruj testovací API klíč.
+3. Zavolej první read-only endpoint.
+4. Vytvoř testovací objekt.
+5. Vyvolej testovací webhook.
+6. Zkus jednu chybovou odpověď.
+7. Ověř idempotenci nebo retry.
+8. Teprve potom přejdi na produkční checklist.
+
+Do quickstartu přidej i větu, co se mezi sandboxem a produkcí liší:
+
+- jiné klíče,
+- jiné limity,
+- žádné skutečné platby,
+- e-maily zachycené v testovacím inboxu,
+- pravidelný reset dat,
+- syntetické seed záznamy,
+- případně nižší dostupnost než produkce.
+
+Tohle zákazník potřebuje vědět předem. Sandbox, který se tváří jako produkce, ale v důležitých detailech se chová jinak, je integrační past s hezkým názvem.
+
+## HC.8 Checklist sandboxu a testovacího prostředí
+
+Před otevřením sandboxu zákazníkům nebo týmu projdi:
+
+- Má sandbox jasný účel a popsané hranice použití?
+- Jsou všechna výchozí data syntetická, ne kopie produkce?
+- Jsou API klíče, podpisové secrets, OAuth klienti a endpointy oddělené od produkce?
+- Odmítá produkce testovací klíče a sandbox live klíče?
+- Jsou webhooky, e-maily, platby a externí integrace v bezpečném testovacím režimu?
+- Umí sandbox vyvolat chybové a hraniční scénáře, ne jen šťastnou cestu?
+- Je jasně popsaný reset, retence a mazání testovacích dat?
+- Jsou logy maskované a oddělené od produkčních metrik?
+- Může zákazník bezpečně sdílet korelační ID se supportem bez posílání payloadu?
+- Obsahuje dokumentace první integrační trasu přes sandbox?
+- Je v UI vidět, že uživatel pracuje v testovacím prostředí?
+- Existuje postup, jak zákazník přejde ze sandboxu do produkce bez kopírování secrets a dat?
+
+## Codyho komentář
+
+Můj pohled — Cody: sandbox je zkoušková místnost. Když do ní přineseš reálné zákaznické složky, už to není zkouška, ale hodně odvážný způsob, jak si přivolat průšvih. Když v ní naopak chybí důležité stavy, zákazník složí test z pohádky a propadne až v produkci.
+
+Dobře navržený sandbox je nudný v tom nejlepším smyslu. Testovací klíče vypadají jako testovací, data křičí „demo“, webhooky se dají opakovat, chyby se dají vyvolat a nikdo nemusí tajně kopírovat produkci, protože „jinak to nejde“. Jde to. Jen to chce navrhnout dřív, než první velký zákazník začne integrovat v pátek odpoledne. Což je mimochodem přirozený nepřítel civilizace.
+
+## Zdroje k příloze
+
+- OWASP API Security Project a API Security Top 10 2023: https://owasp.org/www-project-api-security/
+- OpenAPI Specification 3.1.1 pro popis rozhraní, schémat, příkladů a bezpečnostních požadavků API: https://spec.openapis.org/oas/v3.1.1.html
+- RFC 9110 k HTTP sémantice, stavovým kódům a významu požadavků a odpovědí: https://www.ietf.org/rfc/rfc9110.html
+
+## Shrnutí přílohy
+
+Sandbox má zákazníkům umožnit bezpečné učení, ověření integrace a reprodukci problémů bez produkčních dat. Potřebuje syntetická data, oddělené klíče a endpointy, bezpečné simulace externích toků, jasnou retenci, maskované logy a dokumentovanou první integrační trasu. Privacy-first sandbox není luxus; je to prevence proti tomu, aby se produkce nestala testovacím hřištěm.
+
+
 ## Pracovní log
+- 2026-08-15: Přidána příloha HC o sandboxu a testovacích prostředích: syntetická data, oddělené klíče a endpointy, bezpečné simulace webhooků/e-mailů/plateb, reset a retence, maskované logy, integrační trasa a checklist.
 - 2026-08-15: Přidána příloha HB o API dokumentaci a developer portálu: OpenAPI jako zdroj pravdy, syntetické příklady, bezpečné tokeny, popis oprávnění a datového rozsahu, changelog, střídmé měření a checklist.
 - 2026-08-15: Přidána příloha HA o API chybových odpovědích: stabilní formát, HTTP statusy, validační detaily, ochrana před únikem dat, rate limit odpovědi, lokalizace, korelační ID a checklist.
 - 2026-08-15: Přidána příloha GZ o odchozích webhookách: produktové události, datové minimum, podpisy, idempotence, retry politika, verzování, doručovací logy, testovací režim a checklist.
