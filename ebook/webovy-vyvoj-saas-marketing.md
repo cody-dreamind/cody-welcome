@@ -32433,7 +32433,224 @@ Dobrá chyba neříká „něco se pokazilo, hodně štěstí“. Říká „tad
 API chyby jsou součást developer experience i bezpečnosti. Měly by mít stabilní formát, správný HTTP status, čitelné kódy, korelační ID, užitečné validační detaily a žádné interní nebo citlivé informace navíc. Privacy-first přístup z nich nedělá tajemné černé skříňky; dělá z nich přesné, bezpečné a provozně použitelné odpovědi.
 
 
+# Příloha HB: API dokumentace bez tajných příkladů, produkčních screenshotů a podpory přes křišťálovou kouli
+
+Dobrá API dokumentace není ozdobný portál, který se ukáže investorovi a pak ho nikdo neaktualizuje. Je to provozní součást produktu. Když je přesná, zákazník integruje rychleji, support dostává méně zbytečných dotazů a vývojový tým méně často vysvětluje, proč se endpoint chová jinak než v ukázce z roku dinosaurus.
+
+Privacy-first API dokumentace má ještě jednu vrstvu: nesmí učit zákazníky špatným bezpečnostním návykům. Pokud quickstart obsahuje produkční token vložený do frontendu, ukázkovou odpověď s reálným e-mailem zákazníka nebo screenshot administrace s citlivými daty, dokumentace není pomoc. Je to únik v kostýmu návodu.
+
+## HB.1 Dokumentace je produktová plocha, ne vedlejší artefakt
+
+API dokumentaci piš jako součást zákaznické cesty. Vývojář, který ji čte, nechce obdivovat interní architekturu. Chce bezpečně vyřešit konkrétní práci: vytvořit záznam, získat stav, nastavit webhook, exportovat data, obnovit token nebo zjistit, proč požadavek spadl.
+
+Každá hlavní část dokumentace by měla odpovědět na čtyři otázky:
+
+- **Kdy to použít:** typický scénář a hranice použití.
+- **Co poslat:** povinná a volitelná pole včetně datových typů.
+- **Co se vrátí:** úspěšné odpovědi, chyby, limity a idempotence.
+- **Na co si dát pozor:** oprávnění, citlivá data, retence, testovací režim a bezpečné logování.
+
+Slabý popis endpointu:
+
+> `POST /customers` vytvoří zákazníka.
+
+Lepší popis:
+
+> `POST /customers` vytvoří zákaznický profil pro fakturaci a podporu. Neposílej sem poznámky z komunikace, zdravotní údaje ani interní obchodní komentáře; pro ty má produkt oddělené typy záznamů a kratší retenci.
+
+Ten druhý text je delší, ale šetří budoucí incident. A incident je nejdražší forma dokumentační poznámky.
+
+## HB.2 OpenAPI specifikace musí být zdroj pravdy, ne ručně malovaný plakát
+
+OpenAPI specifikace popisuje HTTP API tak, aby mu rozuměli lidé i nástroje bez čtení zdrojového kódu nebo odposlechu provozu. Oficiální specifikace OpenAPI 3.1.1 ji definuje jako standardní, jazykově nezávislý popis API: https://spec.openapis.org/oas/v3.1.1.html
+
+Prakticky: pokud má tým API, měl by mít i strojově čitelnou smlouvu. Ne proto, že je hezké generovat barevné stránky, ale proto, že stejný zdroj může napájet dokumentaci, SDK, kontraktové testy, validaci schémat a review breaking changes.
+
+Minimum pro malý SaaS tým:
+
+- Udržuj `openapi.yaml` nebo `openapi.json` ve stejném repozitáři jako API nebo v jasně vlastněném dokumentačním repozitáři.
+- Každý endpoint musí mít účel, autentizaci, oprávnění, request, response, chyby a příklady.
+- Každé pole s osobními nebo citlivějšími údaji označ popisem účelu.
+- Každý breaking change projdi přes diff specifikace, ne přes pocit z pull requestu.
+- Generovanou dokumentaci ber jako výstup, ne jako místo, kde ručně opravuješ pravdu.
+
+Příklad dobrého popisu pole:
+
+```yaml
+email:
+  type: string
+  format: email
+  description: Kontaktní e-mail zákazníka používaný pro servisní komunikaci a fakturační upozornění.
+```
+
+Příklad špatného popisu pole:
+
+```yaml
+email:
+  type: string
+  description: Email.
+```
+
+Ano, technicky je to pravda. Stejně jako je „auto má kola“ technická pravda, ale do návodu k brzdám bych s tím nešel.
+
+## HB.3 Příklady musí být syntetické a bezpečné
+
+Ukázkové requesty a response jsou nejrychlejší způsob, jak zákazník pochopí API. Zároveň jsou nejrychlejší způsob, jak tým omylem zveřejní něco, co nikdy nemělo opustit interní prostředí.
+
+Bezpečná pravidla pro příklady:
+
+- Používej syntetická jména, e-maily, domény, adresy a identifikátory.
+- Nikdy nekopíruj produkční JSON do dokumentace, ani když „jen smažeš pár polí“.
+- Tokeny piš jako jasné placeholdery: `sk_test_xxx`, `whsec_example`, `YOUR_API_KEY`.
+- Ukaž minimální příklad a potom rozšířený příklad; nezačínej monstrem s padesáti poli.
+- U každého citlivějšího pole napiš, kdy ho neposílat.
+- Screenshoty administrace dělej na demo účtu se syntetickými daty.
+
+Ukázkový zákazník v dokumentaci:
+
+```json
+{
+  "id": "cus_demo_01J7EXAMPLE",
+  "name": "Demo Kavárna s.r.o.",
+  "email": "fakturace@example.test",
+  "billing_country": "CZ"
+}
+```
+
+Neukazuj:
+
+```json
+{
+  "id": "cus_live_...",
+  "email": "jana.novakova@realna-firma.cz",
+  "notes": "Volat po 18:00, řeší interní problém..."
+}
+```
+
+Dokumentace má zákazníkovi ukázat tvar dat, ne historii života náhodného člověka z CRM. To je nízká laťka, ale internet ji bohužel pořád občas podlézá s rozběhem.
+
+## HB.4 Autentizaci vysvětli podle prostředí a rizika
+
+API klíč v dokumentaci není jen technický detail. Je to moment, kdy zákazník rozhoduje, jestli tajemství skončí na backendu, ve frontendu, v mobilní aplikaci, v CI logu nebo v ticketu supportu. Dokumentace musí bezpečnou cestu říct nahlas.
+
+Rozděl návody podle typu klienta:
+
+- **Serverový klient:** smí držet tajné API klíče, ale musí je mít v secrets manageru nebo bezpečném prostředí, ne v repozitáři.
+- **Browser klient:** nesmí používat tajný klíč; používej veřejné tokeny s omezeným scope nebo serverový proxy endpoint.
+- **Mobilní klient:** počítej s tím, že aplikace jde rozbalit; dlouhodobá tajemství do ní nepatří.
+- **CI/CD integrace:** token má být oddělený, minimálně oprávněný a rotovatelný bez výpadku.
+- **Support nástroje:** přístup má být dočasný, auditovaný a omezený na konkrétní případ.
+
+Do dokumentace přidej bezpečnostní větu přímo k prvnímu použití klíče:
+
+> Tajný API klíč používej pouze na serveru. Nikdy ho nevkládej do HTML, JavaScriptu v prohlížeči, mobilní aplikace ani veřejného repozitáře.
+
+To není moralizování. To je hasicí přístroj připevněný vedle plotny.
+
+## HB.5 Dokumentuj oprávnění a datový rozsah u každého endpointu
+
+OWASP API Security Top 10 2023 dlouhodobě zdůrazňuje rizika kolem rozbité autorizace objektů, rozbité autentizace, přehnaného přístupu k vlastnostem a neomezené spotřeby zdrojů: https://owasp.org/www-project-api-security/
+
+V dokumentaci proto nestačí napsat „vyžaduje autentizaci“. Vývojář potřebuje vědět, jaké oprávnění endpoint vyžaduje a jaký datový rozsah vrací.
+
+U každého endpointu uveď:
+
+- požadovaný typ tokenu nebo session,
+- minimální scope nebo roli,
+- vztah k objektu: vlastní účet, organizace, projekt, tým, veřejný zdroj,
+- zda endpoint vrací osobní údaje, metadata, agregace nebo auditní stopu,
+- zda podporuje stránkování, filtrování a omezení polí,
+- co se stane při nedostatečném oprávnění.
+
+Příklad:
+
+| Endpoint | Scope | Datový rozsah | Poznámka |
+| --- | --- | --- | --- |
+| `GET /v1/projects/{id}` | `projects:read` | metadata projektu | Vrací jen projekty v organizaci tokenu. |
+| `GET /v1/projects/{id}/members` | `members:read` | jména, e-maily, role | Používej jen pro administraci týmu. |
+| `GET /v1/audit-events` | `audit:read` | provozní události | Neobsahuje původní hodnoty secrets. |
+
+Privacy-first dokumentace má uživatele vést k menšímu rozsahu. Pokud zákazník potřebuje jen počet objednávek, nemá stahovat celý seznam lidí, adres a poznámek.
+
+## HB.6 Changelog a migrační průvodce jsou důležitější než blogová fanfára
+
+Release notes typu „vylepšili jsme API“ jsou hezké asi jako cedule „jídlo obsahuje ingredience“. Integrační zákazník potřebuje konkrétně vědět, co se změnilo, koho se to týká, od kdy, jak to otestovat a co se stane, když neudělá nic.
+
+Dobrá změnová položka obsahuje:
+
+- datum vydání,
+- dotčené endpointy,
+- zda jde o breaking, non-breaking nebo bezpečnostní změnu,
+- příklad před a po,
+- migrační kroky,
+- testovací scénář,
+- datum konce starého chování, pokud existuje,
+- kontakt pro podporu.
+
+Příklad zápisu:
+
+> Od 2026-09-30 endpoint `GET /v1/invoices` nebude ve výchozí odpovědi vracet pole `customer.email`. Pokud ho potřebujete, použijte `include=customer_contact` a scope `customers:read`. Změna snižuje zbytečné šíření kontaktních údajů v exportech a integracích.
+
+Tohle je lepší než tiché zmizení pole. Tiché breaking changes jsou spolehlivý způsob, jak z API udělat vztahovou terapii.
+
+## HB.7 Developer portál nemá být další tracker v kabátě dokumentace
+
+Dokumentační web často láká k měření všeho: scroll depth, kliky, heatmapy, nahrávky session, marketingové pixely, retargeting. U developer portálu je to obzvlášť absurdní. Vývojář při debugování integrace nepotřebuje, aby mu přes rameno koukal reklamní cirkus.
+
+Měř střídmě:
+
+- počet zobrazení klíčových stránek,
+- vyhledávané fráze bez identifikace jednotlivců,
+- 404 stránky a rozbité odkazy,
+- neúspěšné „try it“ requesty v testovacím režimu,
+- support dotazy navázané na konkrétní dokumentační části.
+
+Neměř bez velmi dobrého důvodu:
+
+- session replay,
+- individuální čtení dokumentace konkrétním vývojářem,
+- marketingové publikum z API docs,
+- clipboard obsah,
+- produkční request payloady z interaktivního konzolového nástroje.
+
+Privacy-first developer portál má být rychlý, indexovatelný, dostupný přes přímé odkazy, použitelný bez přihlášení tam, kde to neohrožuje bezpečnost, a bez zbytečných třetích stran. RSS nebo changelog feed je pro API změny často užitečnější než další newsletter s pixelovou omáčkou.
+
+## HB.8 Checklist API dokumentace
+
+Před publikací nebo větší revizí API dokumentace projdi:
+
+- Existuje strojově čitelná OpenAPI specifikace a má jasného vlastníka?
+- Odpovídá dokumentace skutečnému chování API, nebo žije vlastním fantasy životem?
+- Jsou všechny příklady syntetické a bez produkčních osobních údajů?
+- Je u každého endpointu popsán účel, autentizace, scope a datový rozsah?
+- Jsou u citlivějších polí vysvětlené účely a situace, kdy je neposílat?
+- Jsou chyby, rate limity, stránkování, idempotence a retry chování zdokumentované prakticky?
+- Má každá breaking změna changelog, příklad před/po a migrační okno?
+- Jsou screenshoty a ukázky z demo prostředí, ne z produkce?
+- Neobsahuje developer portál zbytečné trackery, session replay nebo reklamní skripty?
+- Má dokumentace přímé URL, dobrou interní navigaci a použitelný vyhledávač?
+- Umí support odkázat na konkrétní sekci místo psaní stejné odpovědi podesáté?
+- Testuje někdo quickstart od nuly na čistém účtu?
+
+## Codyho komentář
+
+Můj pohled — Cody: API dokumentace je veřejná paměť produktu. Když je nepřesná, tým si půjčuje čas od budoucího supportu. Když je bezpečnostně líná, půjčuje si čas od budoucího incidentu. Ani jedna půjčka nemá hezký úrok.
+
+Nejlepší dokumentace není nejdelší. Je ta, která vede zákazníka k bezpečnému výsledku nejkratší cestou: tady je účel, tady je minimální scope, tady je syntetický příklad, tady je chyba, tady je migrační postup. Žádné tanečky, žádný datový vysavač v patičce.
+
+## Zdroje k příloze
+
+- OpenAPI Specification 3.1.1 k popisu HTTP API pro lidi i nástroje: https://spec.openapis.org/oas/v3.1.1.html
+- OWASP API Security Project a API Security Top 10 2023: https://owasp.org/www-project-api-security/
+- RFC 9110 k sémantice HTTP metod, stavových kódů a zpráv: https://www.ietf.org/rfc/rfc9110.html
+
+## Shrnutí přílohy
+
+API dokumentace je součást produktu, bezpečnosti i zákaznické podpory. Má vycházet ze strojově čitelné specifikace, používat syntetické příklady, jasně popisovat autentizaci a oprávnění, držet changelog změn a provozovat developer portál bez zbytečných trackerů. Privacy-first dokumentace nekomplikuje integrace; chrání zákazníka před špatnými návyky a tým před supportovým požárem.
+
+
 ## Pracovní log
+- 2026-08-15: Přidána příloha HB o API dokumentaci a developer portálu: OpenAPI jako zdroj pravdy, syntetické příklady, bezpečné tokeny, popis oprávnění a datového rozsahu, changelog, střídmé měření a checklist.
 - 2026-08-15: Přidána příloha HA o API chybových odpovědích: stabilní formát, HTTP statusy, validační detaily, ochrana před únikem dat, rate limit odpovědi, lokalizace, korelační ID a checklist.
 - 2026-08-15: Přidána příloha GZ o odchozích webhookách: produktové události, datové minimum, podpisy, idempotence, retry politika, verzování, doručovací logy, testovací režim a checklist.
 - 2026-08-15: Přidána příloha GY o bezpečném webhook příjmu: podpisy nad raw body, replay ochrana, idempotence, retry fronta, validace payloadu, bezpečné logy, ruční zásahy a checklist.
