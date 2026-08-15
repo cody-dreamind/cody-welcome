@@ -29441,7 +29441,176 @@ Syntetický monitoring ověřuje, jestli zákazník projde kritickou cestou, ne 
 
 
 
+# Příloha GK: Transakční e-maily bez doručovací magie, datového vysavače a supportového požáru
+
+Transakční e-mail je provozní součást produktu. Potvrzení registrace, reset hesla, faktura, pozvánka do týmu, export dat, bezpečnostní upozornění nebo oznámení o incidentu nejsou „nějaké maily“. Jsou to kritické produktové cesty v textové podobě. Když nedorazí, zákazník často neví, jestli je problém v produktu, v jeho inboxu, v platbě, nebo v tom, že internet zase předstírá civilizaci.
+
+Privacy-first SaaS má u e-mailu dvě povinnosti najednou: zprávy musí být doručitelné a zároveň nesmí posílat zbytečná data do šablon, logů, analytiky ani externích systémů. Doručitelnost bez soukromí je jen efektivnější rozesílání rizika. Soukromí bez doručitelnosti je zase krásná zásada, kterou nikdo neuvidí, protože reset hesla skončil ve spamu.
+
+## GK.1 Nejdřív rozděl e-maily podle práce, kterou dělají
+
+Všechno, co opustí produkt jako e-mail, si rozděl do kategorií. Ne kvůli tabulkové gymnastice, ale kvůli vlastnictví, prioritě a datům.
+
+Praktické kategorie:
+
+- **Bezpečnostní**: reset hesla, přihlášení z nového zařízení, změna e-mailu, MFA, export dat.
+- **Účetní a smluvní**: faktura, platba, změna tarifu, ukončení předplatného.
+- **Produktové provozní**: pozvánka do týmu, dokončený import, dokončený export, chyba integrace.
+- **Support a incidenty**: potvrzení ticketu, změna stavu incidentu, plánovaná odstávka.
+- **Marketingové**: newsletter, reaktivace, upgrade nabídka, produktové novinky.
+
+První čtyři kategorie jsou typicky transakční nebo servisní komunikace. Nemají být závislé na marketingovém souhlasu, marketingových preferencích ani sledovacích pixelech. Marketing je jiná hra a patří do jiné vrstvy. Když uživatel vypne newsletter, nesmí tím vypnout fakturu nebo bezpečnostní upozornění. To není preference centrum, to je minové pole s hezkým toggle switchem.
+
+## GK.2 Šablona má nést minimum dat
+
+E-mailová šablona často působí nevinně, protože „je to jen text“. Jenže text se ukládá u poskytovatele e-mailu, v logách, v inboxu příjemce, v přeposlaných zprávách, někdy i ve vyhledávání a zálohách. Proto do e-mailu neposílej víc, než příjemce potřebuje k rozhodnutí nebo akci.
+
+Bezpečnější pattern:
+
+- Do e-mailu dej stručný popis události.
+- Citlivý detail nech za přihlášením v aplikaci.
+- Použij krátký expirovaný odkaz tam, kde je nutná akce.
+- Do předmětu nedávej osobní údaje, názvy citlivých projektů ani částky, pokud to není nutné.
+- Do šablony neposílej interní ID, tokeny, stack trace ani celé payloady integrací.
+
+Příklad resetu hesla:
+
+```text
+Předmět: Obnova přístupu k účtu
+
+Ahoj,
+někdo požádal o obnovu přístupu k účtu v aplikaci. Pokud jsi to byl ty, pokračuj přes odkaz níže. Odkaz platí omezenou dobu.
+
+Obnovit přístup: https://app.example.com/reset/...
+
+Pokud jsi o obnovu nežádal, zprávu ignoruj. Heslo se bez potvrzení nezmění.
+```
+
+Co tam záměrně není: staré heslo, nové heslo, IP adresa jako strašení, celý profil účtu, seznam týmů, interní technické detaily ani dramatický text „někdo se tě snaží hacknout“. Bezpečnostní e-mail má uklidnit a navést, ne udělat z inboxu detektivku.
+
+## GK.3 Doručitelnost začíná doménou a autentizací
+
+Pokud e-maily posíláš z vlastní domény, musí být technicky ověřitelné. SPF, DKIM a DMARC nejsou marketingový luxus. Jsou základní vrstva, díky které příjemce pozná, že zpráva opravdu smí tvrdit, že je od tebe.
+
+V praxi:
+
+- Použij samostatnou subdoménu pro transakční e-mail, například `mail.example.com` nebo `notify.example.com`.
+- Nastav SPF jen pro služby, které opravdu posílají poštu za danou doménu.
+- Podepisuj zprávy přes DKIM a drž klíče mimo repozitář.
+- Zapni DMARC nejdřív opatrně s reportovacím režimem a potom přitvrzuj podle výsledků.
+- Odděl transakční poštu od marketingových rozesílek, aby reputaci kritických zpráv netahala dolů kreativní kampaň s předmětem „POSLEDNÍ ŠANCE!!!“.
+- Dokumentuj, kdo smí měnit DNS záznamy pro poštu a jak se změna ověřuje.
+
+Codyho komentář: DNS záznamy pro e-mail jsou místo, kde i rozumní lidé občas začnou obětovat kafe bohům TXT syntaxe. Proto změny piš do checklistu, ne do Slacku mezi dvěma memy.
+
+## GK.4 Logy a metriky nesmí být kopie inboxu
+
+E-mailový systém potřebuje provozní přehled: co se odeslalo, co spadlo, co bylo odmítnuto, kde se vrací bouncy. Nepotřebuje ale ukládat celé znění každé zprávy navždy. To je častý privacy dluh: kvůli debugování se z logů stane paralelní archiv komunikace.
+
+Minimalistický log pro transakční e-mail může obsahovat:
+
+- typ zprávy,
+- čas odeslání,
+- stav doručení nebo chyby,
+- technický kód chyby,
+- ID zákaznického účtu nebo organizace,
+- hash nebo interní referenci příjemce,
+- korelační ID pro support.
+
+Co do běžných logů nepatří:
+
+- celé tělo e-mailu,
+- resetovací odkazy a tokeny,
+- plné fakturační údaje,
+- obsah zákaznických zpráv,
+- přílohy,
+- přeposlané hlavičky s osobními údaji bez jasného důvodu.
+
+Když potřebuješ preview šablony pro debug, generuj ho se syntetickými daty. Když potřebuješ dohledat konkrétní problém zákazníka, dej supportu bezpečný nástroj s oprávněním, audit logem a retencí. Neotvírej databázi e-mailů jako sklad náhradních dílů.
+
+## GK.5 Preference centrum nesmí rozbít servisní zprávy
+
+Uživatel má mít kontrolu nad komunikací, ale kontrola neznamená jedno tlačítko „vypnout všechno“. Rozumné preference centrum odděluje marketing, produktové tipy, digesty, notifikace týmové spolupráce a povinné servisní zprávy.
+
+Příklad nastavení:
+
+| Typ zprávy | Uživatel může vypnout? | Poznámka |
+| --- | --- | --- |
+| Faktury a platby | Ne | Smluvní a účetní komunikace |
+| Bezpečnostní upozornění | Ne nebo jen částečně | Například reset hesla a změna e-mailu musí dorazit |
+| Pozvánky do týmu | Ano podle role | Uživatel může omezit týmové notifikace |
+| Produktový digest | Ano | Shrnutí aktivit a novinek |
+| Newsletter | Ano | Marketingová komunikace oddělená od produktu |
+
+Mikrotext u servisní komunikace může znít:
+
+> „Tyto zprávy posíláme kvůli bezpečnosti účtu, platbám nebo důležitým změnám služby. Marketingové e-maily můžeš vypnout samostatně.“
+
+Takhle uživatel chápe, proč nejde vypnout úplně všechno, a zároveň má reálnou volbu tam, kde nejde o provozní nutnost.
+
+## GK.6 Přílohy posílej jen když musíš
+
+Příloha v e-mailu je pohodlná pro příjemce a nepříjemná pro bezpečnost. Faktura v PDF dává smysl. Export zákaznických dat jako příloha už často ne. Velké soubory, citlivá data a reporty je lepší předat přes aplikaci za přihlášením, s expirací odkazu a auditní stopou.
+
+Rozhodovací pravidlo:
+
+- Faktura nebo daňový doklad: příloha může být legitimní, ale neposílej víc údajů, než musí být na dokladu.
+- Export dat: raději bezpečný odkaz do aplikace s expirací a oprávněním.
+- Report s osobními údaji: neposílej jako běžnou přílohu, pokud existuje bezpečnější cesta.
+- Screenshot z podpory: používej syntetická nebo začerněná data.
+- Log soubor: nikdy jako příloha zákazníkovi bez ruční kontroly obsahu.
+
+Pokud přílohu posíláš, nastav jasnou retenci u poskytovatele, omez přístup v supportu a do logů ukládej jen metadata. Příloha nemá být nenápadný export všeho, co se nevešlo do UI.
+
+## GK.7 Incidentní a bezpečnostní e-maily piš bez paniky
+
+Bezpečnostní nebo incidentní zpráva má být přesná, klidná a užitečná. Ne PR mlha. Ne technický román. Ne „vážíme si vašeho soukromí“ jako automatická kadidelnice nad požárem.
+
+Dobrá struktura:
+
+1. Co se stalo nebo co jsme zjistili.
+2. Koho se to týká.
+3. Jaký je dopad.
+4. Co jsme udělali.
+5. Co má udělat zákazník.
+6. Kde bude další update.
+7. Kontakt na podporu nebo bezpečnostní tým.
+
+U privacy-first provozu je důležité nepřestřelit detail. Zákazník potřebuje dopad a další krok, ne interní mapu infrastruktury. Pokud je situace právně citlivá, e-mail musí projít připraveným incidentním procesem. Ale první verze šablony má existovat dřív než incident. Psát ji ve stresu je jako skládat padák po výskoku.
+
+## GK.8 Checklist transakčních e-mailů
+
+Před spuštěním nebo auditem transakční pošty si projdi:
+
+- Máme seznam všech e-mailů, které produkt posílá?
+- Je u každé šablony jasný účel, vlastník a kategorie?
+- Oddělujeme transakční, bezpečnostní, účetní a marketingové zprávy?
+- Neobsahují předměty a těla zpráv zbytečné osobní nebo citlivé údaje?
+- Jsou akční odkazy expirované a bezpečně generované?
+- Máme SPF, DKIM a DMARC nastavené pro posílací domény?
+- Nejsou resetovací tokeny, payloady a celé šablony v běžných logách?
+- Umí support dohledat problém přes korelační ID bez čtení všeho?
+- Má preference centrum jasně oddělené volitelné a povinné zprávy?
+- Posíláme přílohy jen tam, kde je to skutečně potřeba?
+- Máme šablony pro bezpečnostní a incidentní komunikaci připravené předem?
+- Testujeme doručení kritických zpráv po každé větší změně e-mailové konfigurace?
+
+## Zdroje k příloze
+
+- RFC 5322 — Internet Message Format; základní formát internetových e-mailových zpráv: https://www.rfc-editor.org/rfc/rfc5322
+- RFC 7208 — Sender Policy Framework; standard pro SPF autorizaci odesílajících serverů: https://www.rfc-editor.org/rfc/rfc7208
+- RFC 6376 — DomainKeys Identified Mail; standard pro DKIM podpisy e-mailových zpráv: https://www.rfc-editor.org/rfc/rfc6376
+- RFC 7489 — Domain-based Message Authentication, Reporting, and Conformance; původní standard DMARC pro politiku a reportování ověřování domén: https://www.rfc-editor.org/rfc/rfc7489
+- OWASP — Forgot Password Cheat Sheet; doporučení pro bezpečnou obnovu hesla a resetovací procesy: https://cheatsheetseries.owasp.org/cheatsheets/Forgot_Password_Cheat_Sheet.html
+
+## Shrnutí přílohy
+
+Transakční e-mail je produktová infrastruktura, ne dekorace kolem aplikace. Privacy-first tým rozlišuje typy zpráv, minimalizuje data v šablonách, chrání resetovací odkazy, nastavuje autentizaci domény, loguje jen provozní minimum, odděluje marketing od servisních zpráv a připravuje incidentní komunikaci předem. Cíl je jednoduchý: důležité zprávy dorazí, ale z e-mailového systému se nestane druhý CRM, archiv citlivých dat ani kouzelná černá díra supportu.
+
+
+
 ## Pracovní log
+- 2026-08-15: Přidána příloha GK o transakčních e-mailech v privacy-first SaaS: kategorie zpráv, minimalizace dat v šablonách, SPF/DKIM/DMARC, bezpečné logy, preference centrum, přílohy, incidentní e-maily a checklist.
 - 2026-08-15: Přidána příloha GJ o syntetickém monitoringu kritických cest: vrstvy kontrol, testovací účty, syntetická data, bezpečné alerty, výkonové kontroly, cleanup a privacy-first checklist.
 - 2026-08-15: Přidána příloha GI o post-release observabilitě: ověřovací otázky po releasu, rozlišení metrik/logů/traces, zákaz citlivých dat v telemetrii, alerty s vlastníkem, post-release review a checklist.
 
