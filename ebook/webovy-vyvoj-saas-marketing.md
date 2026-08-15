@@ -29609,7 +29609,180 @@ Transakční e-mail je produktová infrastruktura, ne dekorace kolem aplikace. P
 
 
 
+# Příloha GL: Domény a DNS bez heroických zásahů, vendor lock-inu a nočního pálení TXT záznamů
+
+Doména je jedna z nejmenších věcí v produktu, která umí udělat největší škodu. Vypadá jako řádek v registraci, ale ve skutečnosti drží web, e-mail, přihlášení, fakturaci, support, reputaci značky a často i důvěru zákazníků. Když se rozbije DNS, nerozbije se „technická drobnost“. Rozbije se cesta zákazníka k produktu.
+
+Privacy-first SaaS proto nespravuje domény stylem „někdo to někdy nastavil a snad to žije“. Domény a DNS patří do provozní dokumentace stejně jako zálohy, incidenty a přístupy. Cíl není mít nejkomplikovanější zónu na světě. Cíl je vědět, co každý záznam dělá, kdo ho smí měnit, jak se změna ověřuje a jak rychle se umíš vrátit zpět, když se internet rozhodne být internetem.
+
+## GL.1 Doména je aktivum, ne položka v košíku
+
+První chyba malých týmů je brát doménu jako jednorázový nákup. Jenže doména má vlastníka, expiraci, fakturační kontakt, registrar lock, DNSSEC, nameservery, e-mailovou reputaci a historii změn. Když je vedená na osobní účet bývalého freelancera, máš v produktu tichou časovanou bombu. Elegantní, minimalistickou, ale pořád bombu.
+
+Minimum pro každou důležitou doménu:
+
+- Vlastníkem je firma nebo dlouhodobě kontrolovaný účet, ne náhodný osobní login.
+- Přístup má MFA a recovery postup uložený mimo inbox jednoho člověka.
+- Doména má zapnutý transfer lock, pokud ho registrar nabízí.
+- Expirace je hlídaná minimálně dvěma lidmi nebo automatizovaným alertem.
+- Fakturační e-mail není na stejné doméně jako doména sama, pokud by výpadek e-mailu znemožnil obnovu.
+- Existuje dokument, kde je napsané, kdo rozhoduje o změnách domény.
+
+Praktický příklad: pokud provozuješ `example.com`, neměj jediný recovery kontakt `admin@example.com`. Když doména nebo pošta spadne, recovery e-mail se stane krásným důkazem, že kruhové závislosti nejsou jen akademický problém.
+
+## GL.2 DNS zóna má mít mapu významu, ne jen seznam záznamů
+
+DNS podle RFC 1035 pracuje s distribuovanou databází záznamů pro doménová jména. Pro produktový tým z toho plyne jednoduchá věc: DNS je sdílená provozní mapa, ne kouzelná tabulka pro DevOps mnicha.
+
+U každého záznamu si udržuj stručný popis:
+
+- k čemu slouží,
+- kdo ho vlastní,
+- jaký systém na něm závisí,
+- kdy byl naposledy ověřen,
+- jaký je plán návratu zpět,
+- jestli obsahuje odkaz na externího dodavatele.
+
+Příklad malé DNS inventury:
+
+```text
+example.com        A/AAAA   web aplikace, vlastník: platform team
+www.example.com    CNAME    veřejný web, vlastník: marketing + platform
+app.example.com    CNAME    SaaS aplikace, vlastník: product engineering
+_dmarc.example.com TXT      DMARC politika, vlastník: security/ops
+support.example.com CNAME   helpdesk portál, vlastník: support ops
+```
+
+U každého externího `CNAME` si polož nepříjemnou otázku: co se stane, když službu zrušíme, dodavatel změní infrastrukturu nebo nám účet někdo vypne? Vendor lock-in u DNS není dramatický screenshot z prezentace. Je to často jeden zapomenutý záznam, který po roce pořád posílá provoz tam, kam už nikdo nekouká.
+
+## GL.3 TTL je brzda i plyn zároveň
+
+TTL říká resolverům, jak dlouho si mají odpověď pamatovat. Nízké TTL pomáhá při změnách, vysoké TTL snižuje dotazy a stabilizuje běžný provoz. Problém není konkrétní číslo. Problém je měnit DNS bez plánu a pak se divit, že svět nereaguje ve stejnou sekundu, protože bohužel nepoužívá tvoje nervy jako synchronizační protokol.
+
+Praktický postup před velkou změnou:
+
+- Týden nebo den předem sniž TTL u záznamu, který budeš měnit.
+- Zapiš původní hodnotu, novou hodnotu a čas změny.
+- Připrav ověřovací příkazy pro více resolverů.
+- Po změně sleduj web, e-mail, API a kritické cesty.
+- Po stabilizaci vrať TTL na rozumnou provozní hodnotu.
+
+Mini-runbook:
+
+```bash
+dig example.com A
+dig @1.1.1.1 example.com A
+dig @9.9.9.9 example.com A
+dig _dmarc.example.com TXT
+```
+
+Nejde o to vyznávat konkrétní resolver. Jde o to neověřovat změnu jen z jednoho místa a neplést si lokální cache s realitou.
+
+## GL.4 E-mailové DNS odděl od webového nadšení
+
+Předchozí příloha řešila transakční e-maily. DNS je místo, kde se ta dobrá vůle buď projeví, nebo zkolabuje. SPF, DKIM a DMARC mají být dokumentované stejně pečlivě jako platební integrace. SPF podle RFC 7208 autorizuje, kdo smí za doménu posílat poštu. DKIM podle RFC 6376 přidává kryptografický podpis zpráv. DMARC podle RFC 7489 určuje politiku a reportování, když SPF nebo DKIM nesedí.
+
+Praktická pravidla:
+
+- Nepřidávej do SPF každou službu „pro jistotu“.
+- Nenechávej staré DKIM selektory aktivní po migraci dodavatele.
+- DMARC zaváděj postupně: nejdřív pozorování, potom přísnější politika.
+- Reportovací adresy pro DMARC drž pod kontrolou týmu, který je umí číst.
+- Marketingové nástroje neposílej přes stejnou reputační vrstvu jako reset hesla.
+- DNS změnu pro e-mail testuj na reálné doručovací cestě, ne jen pohledem do administrace.
+
+Privacy-first poznámka: DMARC reporty mohou obsahovat provozní metadata. Neber je jako odpadní kanál bez pravidel. Patří do stejné datové mapy jako logy a supportní záznamy.
+
+## GL.5 Subdomény jsou hranice odpovědnosti
+
+Subdoména není jen estetika URL. Je to praktická hranice pro provoz, bezpečnost, cookies, reputaci i migrace. Když všechno narveš pod jednu doménu bez struktury, bude se později těžko oddělovat aplikace, dokumentace, marketing, support, status stránka a experimenty.
+
+Rozumné rozdělení pro malý SaaS:
+
+- `www.example.com` pro marketingový web,
+- `app.example.com` pro aplikaci,
+- `docs.example.com` pro dokumentaci,
+- `status.example.com` pro stav služby,
+- `support.example.com` pro podporu,
+- `mail.example.com` nebo `notify.example.com` pro transakční e-maily,
+- `assets.example.com` jen pokud opravdu potřebuješ samostatné statické assety.
+
+Tohle dělení pomáhá i privacy-first provozu. Můžeš jasněji popsat, kde se zpracovávají jaká data, které subdomény používají cookies, kde běží analytika a kde nemá být žádný tracking vůbec. Ano, je to méně „všechno v jednom hezkém bucketu“. Ale hezký bucket je pořád bucket. A bucket umí téct.
+
+## GL.6 Změny DNS dělej jako release, ne jako rychlý klik
+
+DNS změna má mít stejnou disciplínu jako malý release. Ne proto, že by každý `TXT` záznam potřeboval ceremoniál, ale protože dopad chyby je často okamžitý a špatně viditelný.
+
+Lehký proces:
+
+1. Napiš důvod změny jednou větou.
+2. Přidej původní a novou hodnotu.
+3. Urči vlastníka ověření.
+4. Ověř dopad na web, e-mail, API nebo login.
+5. Zapiš čas změny a výsledek kontroly.
+6. Po pár dnech ukliď dočasné záznamy.
+
+Příklad záznamu změny:
+
+```text
+Datum: 2026-08-15
+Změna: app.example.com CNAME z old-host.example.net na new-host.example.eu
+Důvod: migrace aplikace do EU regionu
+Vlastník: platform team
+Ověření: login, reset hesla, API health, syntetický monitoring
+Rollback: vrátit CNAME na old-host.example.net do 30 minut
+```
+
+Codyho komentář: „Rychle změním DNS“ je věta, kterou by produktové týmy měly tisknout na červené samolepky. Ne proto, že DNS nejde měnit rychle. Ale protože rychle bez zápisu je budoucí archeologie.
+
+## GL.7 Evropský provoz začíná už u domény
+
+Privacy-first hodnota Dreamindu není jen výběr hostingu. Je to i výběr registrara, DNS poskytovatele, e-mailové infrastruktury, status stránky, podpory a monitoringu. U každého z nich se ptej: kde jsou data, kdo má přístup, jak se exportují, jak se mažou a co se stane při odchodu.
+
+U DNS a domén sleduj hlavně:
+
+- zda máš smluvní a fakturační kontrolu nad účtem,
+- zda poskytovatel nabízí MFA a auditní historii změn,
+- kde se zpracovávají provozní logy administrace,
+- zda jde zónu exportovat v čitelném formátu,
+- zda umíš rychle změnit nameservery bez vendor pasti,
+- zda není DNS svázané s další službou tak těsně, že migrace bude operace na otevřeném srdci.
+
+Ne každý evropský projekt musí mít všechno od jednoho evropského dodavatele za každou cenu. Ale každý privacy-first projekt má vědět, proč dodavatele zvolil a jak od něj odejde. To je rozdíl mezi suverenitou a optimismem v administraci.
+
+## GL.8 Checklist doménové a DNS hygieny
+
+Jednou měsíčně nebo před větší změnou si projdi:
+
+- Víme, kdo vlastní každou produkční doménu?
+- Má registrar účet MFA, recovery plán a správné kontakty?
+- Hlídáme expiraci domén mimo jeden inbox?
+- Má každá důležitá DNS položka účel, vlastníka a rollback poznámku?
+- Nejsou v DNS záznamy pro služby, které už nepoužíváme?
+- Jsou web, aplikace, dokumentace, support, status a e-mail rozumně oddělené subdoménami?
+- Máme SPF, DKIM a DMARC nastavené a zdokumentované?
+- Čteme DMARC reporty jen tam, kde máme jasný účel a retenci?
+- Testujeme DNS změny přes více resolverů a kritické cesty?
+- Umíme exportovat DNS zónu a obnovit ji u jiného poskytovatele?
+- Víme, které DNS služby zpracovávají provozní nebo administrativní metadata?
+- Po změnách uklízíme dočasné TXT, CNAME a ověřovací záznamy?
+
+## Zdroje k příloze
+
+- RFC 1035 — Domain Names: Implementation and Specification; základní popis DNS záznamů, resolverů a distribuované databáze jmenného systému: https://www.rfc-editor.org/rfc/rfc1035
+- RFC 7208 — Sender Policy Framework; standard pro SPF autorizaci odesílajících serverů: https://www.rfc-editor.org/rfc/rfc7208
+- RFC 6376 — DomainKeys Identified Mail; standard pro DKIM podpisy e-mailových zpráv: https://www.rfc-editor.org/rfc/rfc6376
+- RFC 7489 — Domain-based Message Authentication, Reporting, and Conformance; standard pro DMARC politiku a reportování ověřování domén: https://www.rfc-editor.org/rfc/rfc7489
+- RFC 8461 — SMTP MTA Strict Transport Security; standard pro MTA-STS ochranu doručování e-mailů přes TLS politiku domény: https://www.rfc-editor.org/rfc/rfc8461
+
+## Shrnutí přílohy
+
+Domény a DNS jsou provozní kostra webu i SaaS, ne nudná administrace bokem. Privacy-first tým má jasné vlastnictví domén, recovery plán, dokumentované DNS záznamy, rozumné TTL, bezpečně nastavený e-mailový DNS základ, oddělené subdomény, ověřovací postupy a plán odchodu od dodavatele. Dobrá DNS hygiena není sexy. Což je dobře — infrastruktura má být nudná, protože nudná infrastruktura obvykle nepíše v noci na Telegram.
+
+
+
 ## Pracovní log
+- 2026-08-15: Přidána příloha GL o doménové a DNS hygieně pro privacy-first SaaS: vlastnictví domén, inventura záznamů, TTL změny, SPF/DKIM/DMARC, subdomény, release proces pro DNS, evropský provoz a checklist.
 - 2026-08-15: Přidána příloha GK o transakčních e-mailech v privacy-first SaaS: kategorie zpráv, minimalizace dat v šablonách, SPF/DKIM/DMARC, bezpečné logy, preference centrum, přílohy, incidentní e-maily a checklist.
 - 2026-08-15: Přidána příloha GJ o syntetickém monitoringu kritických cest: vrstvy kontrol, testovací účty, syntetická data, bezpečné alerty, výkonové kontroly, cleanup a privacy-first checklist.
 - 2026-08-15: Přidána příloha GI o post-release observabilitě: ověřovací otázky po releasu, rozlišení metrik/logů/traces, zákaz citlivých dat v telemetrii, alerty s vlastníkem, post-release review a checklist.
