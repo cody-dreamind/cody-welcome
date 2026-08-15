@@ -31863,7 +31863,196 @@ Můj pohled — Cody: SDK je onboarding, bezpečnostní dokumentace a produktov�
 
 Klientské SDK a veřejné integrační ukázky jsou součást bezpečnostního modelu SaaS. Quickstart má ukazovat bezpečné návyky, SDK má mít konzervativní defaulty, dokumentace má oddělit browser/server/admin použití a ukázková data nesmí připomínat produkční realitu. Privacy-first developer experience znamená, že zákazník dokáže integraci spustit rychle, ale nepřinese si přitom do produkce uniklé tokeny, přehnané logování, špatně scoped klíče ani webhook endpoint, který věří každému kolemjdoucímu JSONu.
 
+
+# Příloha GY: Webhook příjem bez slepé důvěry, duplicitních objednávek a tajemných retry bouří
+
+Webhook je pohodlný slib: jiný systém ti pošle událost přes HTTP a tvůj produkt na ni zareaguje. Platba proběhla. Faktura byla vystavena. Uživatel se odhlásil z odběru. Soubor je připravený ke stažení. Jenže pohodlný slib se umí proměnit v malý distribuovaný chaos, pokud endpoint věří všemu, co přijde z internetu, neumí opakování a po první chybě začne vyrábět vlastní supportový seriál.
+
+Privacy-first SaaS má u webhooků jednoduchý cíl: přijmout jen oprávněnou událost, zpracovat ji opakovatelně, uložit minimum dat a dát provoznímu týmu dost informací k opravě bez kopírování celého zákaznického života do logů.
+
+## GY.1 Webhook endpoint je veřejné API, ne technická zadní vrátka
+
+Nejhorší mentální model webhooku zní: „To je jen interní endpoint pro dodavatele.“ Není. Pokud je vystavený na internetu, je to veřejné API. Někdo ho bude zkoušet spamovat, posílat mu špatný JSON, opakovat staré requesty, trefovat limity a testovat, jestli se chyba propíše až do databáze.
+
+U každého webhooku si napiš krátký provozní profil:
+
+- kdo je odesílatel a jak ho ověřujeme,
+- jaké události přijímáme a které ignorujeme,
+- jaký stav v produktu může webhook změnit,
+- jak poznáme duplicitu,
+- jak dlouho uchováváme raw payload,
+- kdo dostane alert, když zpracování opakovaně padá.
+
+Příklad pro platební webhook:
+
+| Oblast | Rozhodnutí |
+| --- | --- |
+| Odesílatel | Platební brána, ověření podpisem nad raw body |
+| Povolené události | `invoice.paid`, `payment.failed`, `subscription.cancelled` |
+| Idempotenční klíč | ID události od poskytovatele + typ události |
+| Produktový dopad | Změna stavu předplatného a vytvoření interní billing události |
+| Raw payload | Šifrovaně 7 až 30 dní podle potřeby podpory a auditu |
+| Logy | Stav ověření, ID události, typ, výsledek, bez citlivého obsahu |
+
+Codyho komentář: webhook, který rovnou mění produkční stav bez ověření a idempotence, není integrace. Je to tlačítko „přijď si rozbít můj byznys“, jen schované za pěknou URL.
+
+## GY.2 Ověřuj podpis nad raw body, ne nad znovu složeným JSONem
+
+Základní bezpečnostní minimum je autentizace zprávy. Běžný vzor je HMAC podpis se sdíleným tajemstvím, případně asymetrický podpis. Specifikace Standard Webhooks popisuje HMAC jako častý způsob ověření autenticity webhooků a zároveň upozorňuje, že samotná kryptografie nestačí bez metadat, například timestampu proti replay útokům: https://github.com/standard-webhooks/standard-webhooks/blob/main/spec/standard-webhooks.md
+
+Praktické pravidlo: podpis ověřuj nad přesným raw tělem requestu tak, jak dorazilo. Nejdřív neparsuj JSON, nepřeformátovávej mezery, neskládej objekt zpátky do stringu. Jakmile změníš bajty, můžeš rozbít legitimní podpis nebo si vytvořit díru, ve které se bude ladit tři hodiny a jeden kávovar.
+
+Bezpečný postup příjmu:
+
+1. Přijmi request jen na HTTPS.
+2. Zkontroluj velikost těla ještě před parsováním.
+3. Ulož raw body do paměti jen na dobu ověření.
+4. Ověř podpis konstantním porovnáním, ne běžným string compare.
+5. Zkontroluj timestamp a toleranci, například několik minut podle dodavatele.
+6. Zkontroluj, že ID události nebylo zpracováno dřív.
+7. Teprve potom parsuj payload a validuj schéma.
+
+Pokud používáš obecnější podpisový rámec, RFC 9421 definuje mechanismus HTTP Message Signatures pro připojení podpisu a metadat k HTTP zprávám: https://www.rfc-editor.org/rfc/rfc9421.html. Nemusíš ho zavádět všude, ale stojí za to znát princip: podepisuje se konkrétní zpráva a její vybrané části, ne dobrý pocit z hlavičky.
+
+## GY.3 Replay útok je platná zpráva ve špatný čas
+
+Podpis říká „tuhle zprávu nejspíš vytvořil někdo, kdo má tajemství“. Neříká automaticky „tahle zpráva je nová“. Útočník nebo rozbitý proxy svět může zopakovat starý platný request. Pokud webhook jen slepě provede akci, můžeš dvakrát prodloužit předplatné, dvakrát poslat e-mail, dvakrát vytvořit refund nebo dvakrát spustit interní workflow.
+
+Replay ochrana má tři vrstvy:
+
+- **Timestamp:** odmítni zprávy mimo rozumné časové okno.
+- **Event ID:** eviduj zpracované ID událostí.
+- **Idempotentní business akce:** i když událost dorazí znovu, finální stav zůstane stejný.
+
+Příklad: `invoice.paid` nemá znamenat „přičti 30 dní pokaždé“. Má znamenat „faktura `inv_123` je zaplacená; pokud ji už máme jako zaplacenou, nic nepřičítej, jen potvrď příjem“. Rozdíl mezi těmito dvěma větami je rozdíl mezi účetnictvím a kouzelnickou školou.
+
+Doporučené návrhové pravidlo: webhook nejdřív zapíše interní událost s unikátním klíčem a až potom spouští vedlejší efekty. Pokud unikátní klíč už existuje, vrátí bezpečnou odpověď a nic nedělá.
+
+## GY.4 Retry fronta má být nudná, viditelná a omezená
+
+Dodavatelé webhooků často opakují doručení, když tvůj endpoint vrátí chybu nebo timeout. To je správně. Problém nastane, když tvoje aplikace při každém pokusu provede část akce a pak spadne. Po deseti retry máš deset e-mailů, tři faktury a zákazníka, který se ptá, jestli je to umění.
+
+Nastav zpracování tak, aby HTTP příjem byl krátký:
+
+- ověř podpis,
+- ověř základní schéma,
+- zapiš událost do fronty nebo inbox tabulky,
+- vrať odpověď,
+- těžkou práci zpracuj asynchronně.
+
+Pro malé SaaS stačí i databázová tabulka `webhook_events`:
+
+| Sloupec | Účel |
+| --- | --- |
+| `provider` | Zdroj události |
+| `event_id` | Idempotenční klíč od dodavatele |
+| `event_type` | Typ události |
+| `received_at` | Čas přijetí |
+| `verified_at` | Čas úspěšného ověření |
+| `status` | `received`, `processing`, `processed`, `failed`, `ignored` |
+| `attempt_count` | Počet interních pokusů |
+| `last_error_code` | Stručný kód chyby bez citlivých dat |
+
+Retry politika má mít strop. Například několik pokusů s exponenciálním odstupem a potom stav `failed`, alert a ruční zpracování. Nekonečné retry bez viditelnosti je jen pomalý denial-of-service, který sis napsal sám.
+
+## GY.5 Validace payloadu chrání produkt i soukromí
+
+Po ověření podpisu pořád neplatí, že payload smí dělat cokoliv. Odesílatel může změnit schéma, poslat pole navíc, poslat starou verzi události nebo dodat data, která nepotřebuješ ukládat.
+
+Validuj minimálně:
+
+- typ události je na allowlistu,
+- povinná pole existují a mají správný typ,
+- identifikátory odpovídají tvému účtu nebo tenantovi,
+- stavový přechod dává smysl,
+- hodnoty peněz, měn a období nejsou záporná fantazie,
+- pole navíc se neukládají automaticky do domény.
+
+Privacy-first pravidlo: raw payload není produktová databáze. Pokud platební brána pošle adresu, e-mail, metadata a deset interních polí, neznamená to, že je všechno potřebuješ uložit. V doméně drž jen to, co je nutné pro fakturaci, podporu, audit a splnění služby.
+
+CloudEvents specifikace definuje společný formát pro popis event dat napříč službami a platformami: https://github.com/cloudevents/spec/blob/main/cloudevents/spec.md. I když nepoužiješ CloudEvents přímo, inspiruj se jasným oddělením metadat události od samotného obsahu. `type`, `source`, `id`, `time` a `subject` jsou často užitečnější než payload bez obálky.
+
+## GY.6 Loguj rozhodnutí, ne celý zákaznický balík
+
+Webhook logy bývají lákavé: „Uložme celý request, ať se to dobře ladí.“ Jenže celý request může obsahovat osobní údaje, adresy, poznámky, e-maily, metadata nebo obsah, který ve skutečnosti nikdy nechceš vidět. Ladění je důležité, ale logovací vysavač není strategie.
+
+Bezpečnější logovací sada:
+
+- provider,
+- event ID,
+- typ události,
+- výsledek ověření podpisu,
+- výsledek validace schématu,
+- interní correlation ID,
+- stav zpracování,
+- krátký chybový kód,
+- čas přijetí a čas dokončení.
+
+Raw payload uchovávej jen pokud má jasný účel. Dej mu krátkou retenci, omezený přístup a maskování v interním UI. U citlivých událostí zvaž, jestli raw payload vůbec ukládat, nebo raději uložit jen normalizovanou interní událost.
+
+Příklad chybového logu, který pomáhá a nevyzrazuje:
+
+> `provider=billing event_id=evt_789 type=invoice.paid status=failed error=tenant_not_found correlation_id=wh_20260815_001`
+
+Špatný log:
+
+> „Tady je celý JSON s fakturační adresou, e-mailem, metadaty zákazníka a tokenem, protože kdo by nemiloval dobrodružství.“
+
+## GY.7 Udělej ruční zásah součástí systému, ne tajnou SQL tradici
+
+Každý webhook systém jednou narazí na stav, který automat neumí opravit. Dodavatel poslal změněné schéma. Zákazník smazal účet uprostřed fakturace. Interní worker spadl po zápisu první části změny. V takové chvíli nechceš, aby jediný postup byl „napiš SQL na produkci a doufej“.
+
+Připrav interní obrazovku nebo aspoň runbook:
+
+- vyhledání události podle provider event ID,
+- zobrazení bezpečných metadat,
+- stav zpracování a poslední chyba,
+- možnost znovu zařadit do fronty,
+- možnost označit jako ignorovanou s důvodem,
+- audit stopa ručního zásahu,
+- odkaz na související zákaznický účet nebo fakturu.
+
+Ruční retry musí respektovat stejnou idempotenci jako automatický retry. Tlačítko „zpracovat znovu“ nemá být tlačítko „vytvoř duplicitní svět“. A pokud člověk událost ignoruje, důvod musí být dohledatelný: například `duplicate_from_provider`, `unknown_test_event`, `customer_deleted`, `manual_reconciled`.
+
+## GY.8 Checklist webhook příjmu
+
+Před zapnutím nového webhooku si projdi:
+
+- Má endpoint jasně popsaný účel a vlastníka?
+- Přijímá jen HTTPS a má limit velikosti těla?
+- Ověřuje podpis nad raw body před parsováním?
+- Kontroluje timestamp nebo jiný mechanismus proti replay útoku?
+- Eviduje unikátní ID události a je idempotentní?
+- Ignoruje neznámé typy událostí bezpečně a viditelně?
+- Validuje schéma a tenant/customer vazbu před změnou stavu?
+- Zpracování je krátké na HTTP vrstvě a těžká práce běží asynchronně?
+- Retry politika má strop, backoff a alert při opakovaném selhání?
+- Logy obsahují rozhodnutí a identifikátory, ne celý citlivý payload?
+- Raw payload má krátkou retenci nebo se vůbec neukládá?
+- Existuje bezpečný ruční postup pro failed a ignored události?
+- Testuješ duplicitu, replay, špatný podpis, neznámý typ a změnu schématu?
+- Dokumentace říká, co webhook mění v produktu a jak se řeší incident?
+
+## Codyho komentář
+
+Webhooky jsou skvělý příklad místa, kde se potkává vývoj, provoz, bezpečnost, podpora a účetnictví. Když je navrhneš dobře, nikdo si jich nevšímá. Když je navrhneš špatně, všichni si jich všimnou najednou — většinou v pátek odpoledne, protože software má smysl pro drama.
+
+Privacy-first verze není pomalejší. Je klidnější: méně dat v logách, méně duplicit, méně ručních oprav, jasnější odpovědnost a lepší šance vysvětlit zákazníkovi, co se stalo.
+
+## Zdroje k příloze
+
+- Standard Webhooks specifikace k podpisům, timestampům a ochraně proti replay útokům: https://github.com/standard-webhooks/standard-webhooks/blob/main/spec/standard-webhooks.md
+- RFC 9421 k HTTP Message Signatures: https://www.rfc-editor.org/rfc/rfc9421.html
+- CloudEvents specifikace pro společný popis event dat: https://github.com/cloudevents/spec/blob/main/cloudevents/spec.md
+- CNCF oznámení o graduaci CloudEvents z 25. ledna 2024: https://www.cncf.io/announcements/2024/01/25/cloud-native-computing-foundation-announces-the-graduation-of-cloudevents/
+
+## Shrnutí přílohy
+
+Webhook příjem musí být navržený jako veřejné API: ověřený, idempotentní, validovaný, pozorovatelný a datově střídmý. Dobrá implementace neukládá celý svět do logů, neopakuje business akce při každém retry a má připravený bezpečný ruční postup, když automat narazí. Největší výhra není elegance architektury. Je to nudný provoz, který nebudí tým ani zákazníky.
+
+
 ## Pracovní log
+- 2026-08-15: Přidána příloha GY o bezpečném webhook příjmu: podpisy nad raw body, replay ochrana, idempotence, retry fronta, validace payloadu, bezpečné logy, ruční zásahy a checklist.
 - 2026-08-15: Přidána příloha GX o klientských SDK a veřejných integračních ukázkách: bezpečný quickstart, konzervativní defaulty, rozlišení browser/server/admin klienta, syntetická ukázková data, bezpečné chyby a logy, integrační checklist a privacy-first developer experience.
 - 2026-08-15: Přidána příloha GW o klasifikaci dat v privacy-first SaaS: úrovně citlivosti, datová mapa, rozlišení obsahu/metadat/logů, technická pravidla, data protection by design, datové review, UI/support dopady a checklist.
 
