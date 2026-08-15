@@ -29278,7 +29278,171 @@ Post-release observabilita má odpovídat na konkrétní otázky, ne vyrábět d
 
 
 
+# Příloha GJ: Syntetický monitoring kritických cest bez falešného klidu, trackerů a robotického divadla
+
+Post-release observabilita říká, co se děje po nasazení. Syntetický monitoring jde o krok dřív: pravidelně simuluje důležité uživatelské cesty a ověřuje, jestli produkt opravdu funguje zvenku. Nečeká na prvního naštvaného zákazníka. Nečeká na support ticket. Prostě se každých pár minut zeptá: „Dokáže se člověk přihlásit, zaplatit, exportovat fakturu nebo odeslat formulář?“
+
+To zní banálně, dokud nezažiješ incident, kdy servery běží, databáze se tváří zdravě, dashboard svítí zeleně, ale zákazník nemůže dokončit objednávku, protože se rozbila jedna nenápadná validace v prohlížeči. Monitoring infrastruktury ti řekne, že stroj dýchá. Syntetický monitoring ti řekne, jestli uživatel dojde do cíle.
+
+Privacy-first verze syntetického monitoringu má jednoduchou zásadu: testuj cestu, ne člověka. Používej technické testovací účty, syntetická data, izolované prostředí nebo jasně označené produkční smoke testy. Nelez do reálných zákaznických účtů jen proto, že je to zrovna po ruce. To není monitoring, to je provozní adrenalin s GDPR příchutí.
+
+## GJ.1 Monitoruj výsledky, ne jen dostupnost URL
+
+Kontrola `GET /health` je užitečná, ale sama o sobě nestačí. Říká, že aplikace odpověděla. Neříká, že se dá přihlásit, že funguje CSRF token, že platební návratová URL není rozbitá, že formulář neposílá chybu 500 nebo že se zákazník po onboardingovém kroku nezasekne v prázdném stavu.
+
+Rozděl kontroly do vrstev:
+
+- **Technická dostupnost:** DNS, TLS, HTTP status, základní health endpoint.
+- **Aplikační dostupnost:** načtení hlavní stránky, přihlášení testovacího účtu, načtení dashboardu.
+- **Obchodní cesta:** poptávka, registrace, trial, platba v test režimu, export, pozvánka člena týmu.
+- **Komunikační cesta:** odeslání e-mailu, webhook, notifikace, status callback.
+- **Datová cesta:** vytvoření, čtení, export a smazání testovacího záznamu.
+
+Ne každá cesta musí běžet každou minutu. Kritická přihlašovací cesta může běžet často. Export faktur stačí kontrolovat méně často, pokud není součástí hlavního denního provozu. Důležité je vědět, co výpadek znamená pro zákazníka.
+
+Příklad pro malý B2B SaaS:
+
+| Cesta | Co ověřit | Frekvence | Stopka pro citlivá data |
+| --- | --- | --- | --- |
+| Login | Testovací účet se přihlásí a vidí dashboard | 5 minut | Nepoužívat reálného uživatele |
+| Poptávkový formulář | Formulář přijme syntetickou zprávu a zobrazí potvrzení | 15 minut | Neodesílat do ostrého CRM bez štítku |
+| Fakturační export | Testovací faktura jde stáhnout jako CSV/PDF | 1 hodina | Jen sandbox účet a syntetické údaje |
+| Webhook | Testovací událost dorazí a má validní podpis | 30 minut | Neobsahuje zákaznický payload |
+| Odhlášení | Session se ukončí a stránka neukáže chráněný obsah | 15 minut | Bez logování tokenů |
+
+## GJ.2 Testovací účet je provozní identita, ne sdílený bordel účet
+
+Syntetické testy často používají testovací účty. To je v pořádku, pokud se s nimi zachází jako s ne-lidskou identitou: mají vlastníka, minimální oprávnění, jasný účel, rotaci tajemství a zákaz ručního používání pro běžnou práci.
+
+Špatně:
+
+> `monitoring@firma.cz` má admin práva, heslo zná půl týmu a občas se přes něj testuje zákaznický problém.
+
+Lépe:
+
+> `synthetic-login@firma.cz` má jen roli běžného uživatele v izolovaném testovacím workspace, používá passkey nebo bezpečně uložený secret, je označený jako technický účet a jeho aktivity jsou odfiltrované z produktové analytiky.
+
+Praktická pravidla:
+
+- Vytvoř zvláštní workspace nebo tenant pro syntetické testy.
+- V názvu účtu jasně uveď, že jde o monitoring.
+- Dej účtu jen oprávnění potřebná pro testovanou cestu.
+- Nepoužívej stejný účet pro support, demo a monitoring.
+- Zajisti, aby syntetické eventy nezkreslovaly obchodní metriky.
+- Dokumentuj, kdo účet vlastní a kdy se má přezkoumat.
+
+OWASP Logging Cheat Sheet připomíná, že aplikace má často nejlepší kontext k událostem, ale logovaná data mají být volená podle účelu a je potřeba hlídat i data, která do logů nepatří: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html U syntetických účtů to platí dvojnásob. Test má vytvořit důvěryhodný signál, ne novou hromadu provozního smetí.
+
+## GJ.3 Syntetická data musí být realistická, ale ne skutečná
+
+Testovací data mají připomínat realitu natolik, aby odhalila chyby. Nemají být kopií produkce. Pokud potřebuješ testovat fakturační export, vytvoř syntetickou firmu, syntetickou adresu, syntetické IČO pro ukázku a jasně neplatné e-maily v interní doméně. Pokud potřebuješ testovat upload, použij bezpečný ukázkový soubor bez osobních údajů.
+
+Dobrá syntetická data:
+
+- pokrývají běžné i hraniční stavy,
+- mají jednoznačný prefix, třeba `SYNTHETIC_` nebo `Monitoring Test`,
+- dají se automaticky smazat,
+- neobsahují osobní údaje reálných lidí,
+- neodcházejí do marketingových nebo obchodních automatizací jako skutečný lead,
+- jsou popsaná v dokumentaci, aby je support omylem neřešil jako zákazníka.
+
+Příklad testovací poptávky:
+
+> Jméno: `Monitoring Test`  
+> E-mail: `synthetic-monitoring@example.invalid`  
+> Zpráva: `Automatická kontrola poptávkového formuláře. Ignorovat a nemazat pravidlo bez aktualizace runbooku.`
+
+Doména `.invalid` je vyhrazená pro neplatné doménové jméno podle RFC 2606, takže se hodí pro příklady a testovací adresy, které nemají omylem doručovat poštu na cizí doménu: https://www.rfc-editor.org/rfc/rfc2606
+
+## GJ.4 Alert má říct dopad a další krok, ne jen křičet
+
+Syntetický monitoring bez dobrého alertingu je digitální budík hozený do šuplíku. Když test selže, zpráva musí člověku rychle říct:
+
+- která cesta selhala,
+- odkud se test spouštěl,
+- kdy selhal naposledy a kolikrát za sebou,
+- jaký je dopad pro zákazníka,
+- kde je runbook,
+- kdo je vlastník.
+
+Špatný alert:
+
+> `Synthetic check failed.`
+
+Lepší alert:
+
+> `Poptávkový formulář selhal 3× za sebou z EU monitoringu. Dopad: noví zákazníci nemusí odeslat poptávku. Zkontroluj endpoint /api/contact, antispam a e-mailovou frontu. Runbook: /ops/contact-form-monitoring.`
+
+Alert by neměl obsahovat celý formulářový payload, screenshot s osobními údaji ani session token. Stačí korelační ID, technické detaily a odkaz na bezpečný runbook. OpenTelemetry pracuje se signály jako metrics, logs a traces, které mají různé role v pochopení systému: https://opentelemetry.io/docs/concepts/signals/ Alert je výstupní rozhodovací věta nad těmito signály, ne odpadkový koš pro všechno.
+
+## GJ.5 Výkon testuj tak, aby nepoškodil uživatele ani metriky
+
+Syntetické testy umí odhalit i zpomalení. Jenže pokud se spouštějí příliš agresivně, mohou samy vytvářet hluk, náklady a falešné trendy. Web.dev u Core Web Vitals popisuje metriky LCP, INP a CLS jako klíčové signály uživatelské zkušenosti: https://web.dev/articles/vitals Pro syntetický monitoring jsou užitečné jako orientační technická kontrola, ale nenahrazují reálnou zkušenost lidí na různých zařízeních a sítích.
+
+Prakticky:
+
+- Měř načtení hlavních stránek bez reklamních a social skriptů, které tam privacy-first web ani nemá mít.
+- Odděl syntetický provoz od reálné produktové analytiky.
+- Nastav rozumnou frekvenci, aby monitoring nezatěžoval aplikaci.
+- Testuj z geograficky relevantních míst, ideálně z Evropy, pokud obsluhuješ evropské zákazníky.
+- Ukládej jen technické výsledky: čas načtení, status, typ chyby, korelační ID.
+- Screenshoty ukládej jen u bezpečných testovacích stránek nebo je automaticky expiruj.
+
+Codyho komentář: syntetický monitoring není soutěž o nejvíc zelených fajfek. Je to pojistka proti tomu, aby se firma dozvěděla o rozbitém checkoutu od zákazníka, který mezitím stihl odejít, uvařit kafe a koupit u konkurence. Romantika provozu, fakt.
+
+## GJ.6 Cleanup je součást testu
+
+Každý syntetický test, který něco vytvoří, musí vědět, jak po sobě uklidí. Jinak se z monitoringu stane generátor falešných leadů, prázdných účtů, testovacích faktur a support šumu.
+
+U každé cesty si napiš:
+
+- co test vytvoří,
+- kde to vznikne,
+- jak poznáš, že jde o syntetický záznam,
+- kdy a jak se záznam smaže,
+- co se stane, když cleanup selže,
+- kdo dostane alert, pokud testovací data začnou růst.
+
+Bezpečný pattern:
+
+1. Test vytvoří záznam s prefixem `SYNTHETIC_`.
+2. Záznam uloží korelační ID.
+3. Test ověří očekávaný výsledek.
+4. Test záznam smaže nebo označí k automatickému úklidu.
+5. Denní kontrola hlídá, že počet syntetických záznamů nepřekročil limit.
+
+Pokud cleanup nemůže být součástí testu, nastav krátkou retenci na úrovni aplikace. Testovací data nemají v produkci zůstávat jako archeologická vrstva budoucího trapasu.
+
+## GJ.7 Checklist syntetického monitoringu
+
+Před zapnutím syntetických kontrol si projdi:
+
+- Máme vybrané kritické cesty podle dopadu na zákazníka, ne podle toho, co se snadno testuje?
+- Má každá kontrola vlastníka, frekvenci, dopad a runbook?
+- Používáme testovací účty s minimálním oprávněním?
+- Jsou syntetická data jasně označená a bezpečná?
+- Nezkreslují testy produktovou analytiku, konverze, CRM nebo revenue reporty?
+- Neobsahují alerty payloady, tokeny, osobní údaje nebo citlivé screenshoty?
+- Má každý test cleanup nebo retenční pravidlo?
+- Testujeme z relevantního evropského regionu, pokud obsluhujeme evropské zákazníky?
+- Ví support, jak poznat syntetickou poptávku, účet nebo notifikaci?
+- Je jasné, kdy selhání syntetické kontroly spouští incidentní proces?
+
+## Zdroje k příloze
+
+- OWASP — Logging Cheat Sheet; doporučení pro účelové aplikační logování, ochranu citlivých dat a provozní použití logů: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+- OpenTelemetry — Signals; přehled signálů jako metrics, logs a traces pro pochopení provozu aplikací: https://opentelemetry.io/docs/concepts/signals/
+- Web.dev — Web Vitals; přehled metrik uživatelské zkušenosti včetně LCP, INP a CLS: https://web.dev/articles/vitals
+- RFC 2606 — Reserved Top Level DNS Names; definuje mimo jiné `.invalid` pro neplatná doménová jména vhodná do příkladů a testů: https://www.rfc-editor.org/rfc/rfc2606
+
+## Shrnutí přílohy
+
+Syntetický monitoring ověřuje, jestli zákazník projde kritickou cestou, ne jen jestli server odpověděl zelenou ikonou. Privacy-first tým používá technické účty, syntetická data, minimální oprávnění, bezpečné alerty, oddělení od obchodních metrik a cleanup po každém testu. Cílem není roboticky klikat na všechno. Cílem je včas zjistit, že se rozbila cesta s reálným dopadem, aniž by monitoring sám vytvářel datový nepořádek.
+
+
+
 ## Pracovní log
+- 2026-08-15: Přidána příloha GJ o syntetickém monitoringu kritických cest: vrstvy kontrol, testovací účty, syntetická data, bezpečné alerty, výkonové kontroly, cleanup a privacy-first checklist.
 - 2026-08-15: Přidána příloha GI o post-release observabilitě: ověřovací otázky po releasu, rozlišení metrik/logů/traces, zákaz citlivých dat v telemetrii, alerty s vlastníkem, post-release review a checklist.
 
 - 2026-08-15: Přidána příloha GH o rollbacku a obnově po špatném nasazení: rollback plán před releasem, vrstvy návratu, feature flagy, databázové migrace, canary signály, komunikace, úklid a checklist.
