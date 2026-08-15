@@ -30632,8 +30632,226 @@ API lifecycle je nudná disciplína přesně do chvíle, kdy přestane fungovat 
 
 API verzování chrání zákaznické integrace před tichým rozbitím. Malý SaaS tým má definovat breaking changes, držet srozumitelný model verzí, oznamovat deprecace s datem a náhradní cestou, psát srovnávací migrační dokumentaci a měřit používání starých verzí bez ukládání zbytečných payloadů. Privacy-first API není jen stabilní. Je předvídatelné, datově střídmé a fér i ve chvíli, kdy staré věci musí odejít do důchodu.
 
+---
+
+# Příloha GR: Auditní stopy v SaaS bez šmírovacího archivu, chaotických logů a forenzní improvizace po půlnoci
+
+Auditní stopa je odpověď na jednoduchou otázku: kdo udělal co, kdy, odkud, s jakým výsledkem a nad jakým objektem. V SaaS produktu je to rozdíl mezi „něco se stalo, hodně štěstí“ a „už víme, že administrátor změnil roli uživatele v pátek ve 14:03, změna prošla, dotčený workspace byl X a navazující export nespustil nikdo“.
+
+Privacy-first audit log ale není sběr všeho, co jde zapsat. Není to ani druhá analytika, ani tajná kamerka v aplikaci. Je to úzký, účelový a chráněný záznam bezpečnostně, provozně nebo zákaznicky významných událostí. OWASP Logging Cheat Sheet zdůrazňuje, že aplikační logování má mít jasný účel, konzistentní strukturu a nemá logovat příliš málo ani příliš mnoho: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+
+## GR.1 Nejdřív rozhodni, komu audit log slouží
+
+Jedna častá chyba: tým začne technicky. Přidá tabulku `audit_logs`, pár middleware hooků a po třech měsících zjistí, že záznamy jsou nepoužitelné. Chybí kontext, názvy akcí jsou náhodné, payload obsahuje citlivá data a zákaznická podpora stejně musí psát vývojářům.
+
+Začni účelem. Auditní stopa může sloužit čtyřem různým skupinám:
+
+- **Zákazníkovi:** chce vědět, kdo v jeho účtu změnil nastavení, pozval uživatele, exportoval data nebo upravil billing.
+- **Supportu:** potřebuje ověřit, co se stalo, aniž by se díval do databáze nebo žádal vývojáře o ruční grep.
+- **Bezpečnosti:** potřebuje vidět podezřelé přihlášení, změny oprávnění, rotaci klíčů, neúspěšné pokusy o citlivé akce a hromadné exporty.
+- **Provozu:** potřebuje dohledat změny konfigurace, integrací, webhooků, domén, API klíčů a feature flagů.
+
+Každá skupina potřebuje jinou úroveň detailu. Zákazník nepotřebuje stack trace. Support nepotřebuje vidět obsah exportovaného souboru. Bezpečnostní tým nepotřebuje marketingové eventy typu `clicked_upgrade_banner`. A provoz nepotřebuje znát text zákaznické poznámky, pokud řeší jen to, že se změnilo nastavení integrace.
+
+Praktický první krok:
+
+| Otázka | Dobrá odpověď |
+| --- | --- |
+| Kdo bude audit log číst? | Zákaznický admin, support, vývojář ve službě, bezpečnostní owner. |
+| Jaké rozhodnutí podle něj udělá? | Vrátí změnu, kontaktuje uživatele, zablokuje klíč, vysvětlí zákazníkovi incident. |
+| Jaké minimum polí k tomu potřebuje? | Čas, aktér, akce, objekt, výsledek, workspace, korelační ID. |
+| Co do logu nepatří? | Hesla, tokeny, celé requesty, obsah zpráv, platební údaje, zbytečné IP historie. |
+| Jak dlouho má záznam žít? | Podle rizika, smluv a interní politiky; ne „navždy, protože tabulka roste pomalu“. |
+
+## GR.2 Definuj slovník událostí, ne jen volný text
+
+Audit log musí být čitelný pro lidi a filtrovatelný pro systém. Volný text typu „User did thing“ je hezký asi jako hláška „někde je problém“. Používej stabilní názvy akcí a objektů.
+
+Příklad pojmenování:
+
+| Kategorie | Akce | Objekt |
+| --- | --- | --- |
+| Účet | `user.invited`, `user.removed`, `user.role_changed` | uživatel, workspace |
+| Přístup | `login.succeeded`, `login.failed`, `mfa.enabled`, `session.revoked` | účet, session |
+| Data | `data.export_requested`, `data.export_completed`, `data.deletion_requested` | export, dataset |
+| Integrace | `api_key.created`, `api_key.rotated`, `webhook.updated` | API klíč, webhook |
+| Billing | `billing_plan.changed`, `invoice.generated`, `payment_method.updated` | tarif, faktura |
+| Nastavení | `domain.verified`, `sso.enabled`, `retention_policy.updated` | doména, SSO, politika |
+
+U každé události napiš krátkou definici:
+
+```text
+event_name: user.role_changed
+meaning: Aktér změnil roli jiného uživatele ve workspace.
+actor_required: ano
+target_required: ano
+customer_visible: ano
+sensitive: střední
+retention: 18 měsíců
+alert: pouze při změně na Owner/Admin nebo u support access účtu
+```
+
+Tohle vypadá nudně. Což je dobře. Bezpečnostní a provozní věci mají být nudné před incidentem, ne kreativní během něj.
+
+## GR.3 Zapisuj kontext, ne obsah zákaznických dat
+
+OWASP u logů doporučuje pracovat s tím, kdy, kde, kdo a co, a zároveň výslovně řešit data, která se mají vyloučit. Pro privacy-first SaaS je zásadní oddělit kontext od obsahu. Kontext říká, že došlo k exportu. Obsah exportu do audit logu nepatří.
+
+Dobrá auditní událost může vypadat takto:
+
+```json
+{
+  "time": "2026-08-15T11:00:00Z",
+  "event_name": "data.export_requested",
+  "actor_id": "usr_123",
+  "actor_type": "customer_user",
+  "workspace_id": "wsp_456",
+  "target_type": "customer_export",
+  "target_id": "exp_789",
+  "result": "success",
+  "ip_country": "CZ",
+  "request_id": "req_abc",
+  "risk_level": "medium"
+}
+```
+
+Co tam záměrně není:
+
+- celý exportovaný dataset,
+- e-mailové adresy všech lidí v exportu,
+- plné IP adresy, pokud pro účel stačí kratší bezpečnostní signál,
+- request body,
+- session token,
+- obsah poznámek, zpráv nebo dokumentů.
+
+NIST SP 800-92 popisuje log management jako životní cyklus, který zahrnuje generování, přenos, ukládání, analýzu a likvidaci logů. Pro malý SaaS z toho plyne praktická věc: audit log není jen řádek v databázi. Je to proces od návrhu události až po bezpečné smazání po skončení retenční doby: https://csrc.nist.gov/pubs/sp/800/92/final
+
+## GR.4 Odděl zákaznický audit log od interních technických logů
+
+Zákazník má dostat srozumitelný audit log svého prostoru. Ne debug dump aplikace. Interní technické logy mohou obsahovat jiné signály, ale i tam platí minimalizace a přístupová kontrola.
+
+Rozumné vrstvy:
+
+- **Zákaznický audit log:** viditelný administrátorům workspace, filtrování podle uživatele, akce, období a objektu.
+- **Support audit view:** omezený pohled pro podporu, bez citlivých payloadů, s důvodem přístupu a vlastním logováním support akcí.
+- **Security event log:** přihlášení, změny práv, klíče, neúspěšné citlivé akce, podezřelé vzory.
+- **Technické aplikační logy:** chyby, performance, request ID, integrace, queue joby, ale bez zákaznického obsahu.
+- **Admin change log:** změny konfigurace produktu, feature flagů, infrastruktury a retenčních pravidel.
+
+Příklad: zákazník vidí „Jana Nováková změnila roli Petra ze Čtenář na Admin“. Support vidí totéž plus interní ID workspace a request ID. Vývojář při incidentu vidí request ID, service name, výsledek a chybu oprávnění. Nikdo nepotřebuje vidět Petrovu poslední poznámku v CRM, aby pochopil změnu role.
+
+## GR.5 Udělej audit log použitelný v UI
+
+Audit log schovaný jen pro vývojáře je poloviční řešení. U B2B SaaS je zákaznický audit log často trust feature. Pomáhá adminům, bezpečnostním týmům i nákupčím, kteří se ptají: „Budeme schopni dohledat, kdo změnil kritické nastavení?“
+
+Minimální UI:
+
+- filtr podle období,
+- filtr podle aktéra,
+- filtr podle typu akce,
+- filtr podle výsledku,
+- detail události s lidským popisem,
+- export audit logu pro zákaznického admina,
+- vysvětlení retenční doby.
+
+Lidský popis může znít:
+
+> „Jana Nováková změnila roli uživatele petr@example.cz z Editor na Admin ve workspace Acme CZ. Změna proběhla úspěšně.“
+
+Strojová vrstva zůstává za tím:
+
+```text
+event_name=user.role_changed
+actor_id=usr_123
+target_id=usr_987
+old_role=editor
+new_role=admin
+result=success
+request_id=req_abc
+```
+
+Pozor na export audit logu. I auditní stopa může být osobní údaj, protože obsahuje identifikátory uživatelů, časy a aktivitu. Export proto patří jen administrátorům s oprávněním, má mít svůj vlastní audit event a ideálně krátkou životnost odkazu ke stažení.
+
+## GR.6 Retence: krátká tam, kde to jde; delší tam, kde to dává smysl
+
+„Držíme logy navždy“ je špatná odpověď. „Mažeme vše po sedmi dnech“ může být taky špatná odpověď, pokud pak nedohledáš bezpečnostní incident nebo zákaznický spor. Retence má být vědomé rozhodnutí podle účelu.
+
+Příklad retenční tabulky:
+
+| Typ záznamu | Doporučený princip |
+| --- | --- |
+| Debug logy aplikace | Krátká retence, typicky dny až týdny, bez citlivých payloadů. |
+| Bezpečnostní události | Delší retence podle rizika, smluv a incident response potřeb. |
+| Zákaznický audit log | Transparentně uvedená doba, často měsíce až nižší jednotky let podle produktu. |
+| Billing audit | Podle účetních a daňových potřeb, odděleně od produktové telemetrie. |
+| Support access log | Delší než běžný support ticket, protože chrání zákazníka i tým. |
+
+Privacy-first rozhodnutí není vždy „smazat co nejdřív“. Je to „držet jen to, co má jasný účel, chránit to a po skončení účelu to odstranit“. U auditních stop je důvěra často v tom, že záznam existuje právě tehdy, když se něco pokazí. Jen nesmí vyrůst v černou díru na osobní data.
+
+## GR.7 Chraň audit log před úpravami a zvědavostí
+
+Audit log, který může administrátor potichu přepsat, není audit log. Je to deníček s gumou. Nemusíš hned stavět bankovní forenzní trezor, ale potřebuješ základní ochranu integrity a přístupu.
+
+Minimum pro malý tým:
+
+- auditní záznamy jsou append-only z pohledu aplikace,
+- mazání běží jen retenčním procesem, ne ručním kliknutím supportu,
+- přístup do interního audit view má úzká role,
+- každý interní přístup k zákaznickému audit logu se také loguje,
+- exporty audit logů mají krátkou platnost a oprávnění,
+- produkční databáze nemá být běžné místo pro ruční čtení auditních stop,
+- změny slovníku událostí procházejí review.
+
+U citlivějších produktů přidej hash chaining, WORM úložiště nebo externí bezpečnostní log sink v evropském provozu. Ne proto, že to zní cool v sales decku, ale protože potřebuješ vědět, že někdo auditní stopu nezměnil poté, co se něco stalo.
+
+## GR.8 Alerty jen na akce, které si zaslouží člověka
+
+Audit log není totéž co alerting. Každá událost nemusí budit člověka. Pokud alertuješ všechno, tým se naučí ignorovat všechno. Tomu se odborně říká „monitoring, který předstírá práci“.
+
+Alerty dávají smysl například u:
+
+- změny vlastníka workspace,
+- vypnutí MFA u administrátora,
+- vytvoření nebo rotace API klíče s vysokým oprávněním,
+- hromadného exportu dat mimo obvyklý vzor,
+- opakovaných selhání citlivé akce,
+- zapnutí nové integrace s přístupem k osobním údajům,
+- přístupu supportu do zákaznického účtu,
+- změny retenční politiky nebo SSO nastavení.
+
+Každý alert musí mít vlastníka a první krok. „Podívej se na to“ nestačí. Lepší je: „Security owner zkontroluje aktéra, workspace, předchozí události za 30 minut a při podezření revokuje session a kontaktuje zákaznického admina.“
+
+## GR.9 Checklist auditních stop
+
+- Máme sepsané účely audit logu pro zákazníka, support, bezpečnost a provoz?
+- Existuje stabilní slovník názvů událostí a objektů?
+- Zapisujeme čas, aktéra, akci, objekt, výsledek, workspace a korelační ID?
+- Nezapisujeme hesla, tokeny, celé request body, obsah zpráv ani zbytečné osobní údaje?
+- Je zákaznický audit log oddělený od interních technických logů?
+- Vidí zákazník auditní stopu v použitelném UI s filtry a srozumitelnými popisy?
+- Má export audit logu vlastní oprávnění, expiraci a auditní událost?
+- Má každý typ logu definovanou retenční dobu a proces smazání?
+- Je audit log chráněný proti ručním úpravám a nadměrnému internímu přístupu?
+- Loguje se support access a interní čtení citlivých auditních dat?
+- Máme alerty jen na skutečně rizikové akce a každý alert má vlastníka?
+- Umíme audit log použít při incidentu bez ručního čtení produkčních dat?
+
+## Codyho komentář
+
+Audit log je produktová funkce, ne jen bezpečnostní přílepek. Když ho navrhneš dobře, zákazník ti víc věří, support méně hádá a vývojáři méně loví duchy v logovacím močálu. Codyho pravidlo: loguj rozhodnutí a dopady, ne soukromý život uživatele. A pokud někdo navrhne „uložme celý payload, třeba se bude hodit“, dej mu čaj, židli a krátkou přednášku o minimalizaci dat.
+
+## Zdroje k příloze
+
+- OWASP Logging Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+- NIST SP 800-92 — Guide to Computer Security Log Management: https://csrc.nist.gov/pubs/sp/800/92/final
+
+## Shrnutí přílohy
+
+Auditní stopy pomáhají malému SaaS týmu dohledat významné akce bez sběru zbytečných zákaznických dat. Dobrý audit log má jasný účel, stabilní slovník událostí, oddělenou zákaznickou a interní vrstvu, minimální kontext místo payloadů, použitelný UI pohled, definovanou retenci, chráněnou integritu a alerty jen na skutečně rizikové změny. Privacy-first audit log není šmírovací archiv. Je to přesná, střídmá a chráněná paměť produktu.
+
 ## Pracovní log
 
+- 2026-08-15: Přidána příloha GR o auditních stopách v privacy-first SaaS: účel logů, slovník událostí, minimalizace payloadů, oddělení zákaznických a interních logů, UI, retence, ochrana integrity, alerty a checklist.
 - 2026-08-15: Přidána příloha GQ o API verzování a deprecacích: breaking changes, model verzí, technické signály `Deprecation` a `Sunset`, migrační okna, dokumentace rozdílů, střídmé měření starých verzí a checklist.
 - 2026-08-15: Přidána příloha GP o privacy-first billingu a fakturačním provozu: oddělení produktových a billing rolí, datové minimum fakturačních údajů, evropská DPH/OSS, dunning, refundy, billing metriky a checklist.
 - 2026-08-15: Přidána příloha GO o přístupových oprávněních: role podle práce, deny-by-default, kombinace rolí se vztahem k objektům, ochrana citlivých akcí, dočasný support access, pozvánky, offboarding, testy oprávnění a privacy-first checklist.
