@@ -33590,8 +33590,150 @@ Cache je super sluha a příšerný compliance manažer. Já bych v malém evrop
 API cache není jen výkonová optimalizace. Je to bezpečnostní a privacy-first rozhodnutí o tom, kde může odpověď ležet, kdo ji smí znovu použít a kdy přestává platit. Veřejné statické assety cachuj agresivně, veřejná proměnlivá data validuj, přihlášené a tenant-specific odpovědi drž konzervativně v režimu `private` nebo `no-store`. CDN před API zapínej přes allowlist, `ETag` navrhuj bez osobních stop, `Vary` používej vědomě a testuj cache stejně tvrdě jako autorizaci.
 
 
+# Příloha HH: API kontrakty bez náhodných breaking changes, integrační archeologie a zákaznického detektivního klubu
+
+API kontrakt je slib. Ne „nějaké JSONy, které teď zrovna padají z backendu“, ale dohoda mezi produktem a klientem: jaké endpointy existují, jaké parametry přijímají, co vrací, jaké chyby umí, jak se chovají při prázdných stavech a co se nesmí změnit potichu. Když kontrakt neexistuje, integrace se testují optimismem. A optimismus je v API provozu hezký jen do chvíle, než zákazníkovi v pondělí ráno spadne fakturační synchronizace.
+
+OpenAPI popisuje rozhraní pomocí strojově čitelného dokumentu se zdroji, operacemi, parametry, odpověďmi a schématy. Contract testing nástroje jako Pact k tomu přidávají praktický princip: poskytovatel a konzument si ověřují, že se jejich očekávání nerozjela. Privacy-first pointa je jednoduchá: stabilní kontrakt snižuje potřebu supportu, screenshotů, ručního ladění nad produkčními daty a „pošlete nám payload“ chaosu.
+
+## HH.1 Kontrakt není dokumentace bokem, ale zdroj pravdy
+
+Dokumentace napsaná ručně vedle kódu stárne rychleji než startupový pitch deck po prvním sales callu. API kontrakt má být součástí vývoje: review, testů, release procesu a changelogu. Ideální stav není „máme krásný developer portál“, ale „klient, SDK, validace i dokumentace vycházejí ze stejného kontraktu“.
+
+Praktický model:
+
+| Vrstva | Co má držet | Co nesmí být |
+| --- | --- | --- |
+| OpenAPI/specifikace | endpointy, schémata, statusy, auth, příklady | marketingový text bez vazby na realitu |
+| Server validace | vstupy, limity, formáty, povinná pole | jiná pravidla než ve specifikaci |
+| SDK/klienti | typy, retry, chyby, stránkování | ručně udržované domněnky |
+| Testy | kompatibilita starých klientů | jen happy path nového UI |
+| Changelog | dopad změn na zákazníky | seznam commitů v kabátě dokumentace |
+
+Začni jednoduše: každý veřejný endpoint musí mít operaci ve specifikaci, každý status kód musí mít popsaný tvar odpovědi a každý příklad musí být syntetický. Pokud endpoint neumíš popsat bez produkčních dat, není to důkaz komplexity. Je to signál, že kontrakt nemáš pod kontrolou.
+
+## HH.2 Breaking change definuj dřív, než ho omylem pošleš ven
+
+Nejhorší breaking changes jsou ty, které tým nepovažuje za breaking. „Jen jsme přejmenovali pole.“ „Jen jsme změnili default řazení.“ „Jen jsme začali vracet prázdné pole místo `null`.“ Gratuluju, právě jsi někomu rozbil parser a dodal mu ranní jógu pro nervový systém.
+
+Za breaking change u veřejného API počítej hlavně:
+
+- odstranění endpointu, pole, hodnoty enumu nebo status kódu, na který se klient může spoléhat,
+- změnu typu pole, formátu času, měny, ID nebo přesnosti čísel,
+- změnu povinnosti pole ve vstupu nebo výstupu,
+- zpřísnění validace bez migračního okna,
+- změnu default řazení, stránkování nebo filtrů,
+- změnu autorizačního scope u existující operace,
+- změnu chybového formátu, pokud klient podle chyb rozhoduje další krok,
+- změnu sémantiky stejného názvu pole.
+
+Bezpečnější vzor je additive change: nové volitelné pole, nový endpoint, nový enum s dokumentovaným fallbackem, nová verze payloadu. I additive změna ale potřebuje test, protože někteří klienti padají na neznámém poli. To je chyba klienta, ale pořád tvůj support ticket. Produktová realita je taková laskavá.
+
+## HH.3 Schémata musí umět prázdno, chybu a budoucnost
+
+Mnoho API kontraktů vypadá krásně, dokud existuje přesně jeden zákazník, má tři projekty a všechno se povede. Jenže reálný svět obsahuje prázdné seznamy, chybějící volitelná data, staré účty, různé role, pomalé exporty, dočasnou nedostupnost a budoucí hodnoty, které dnes neznáš.
+
+U každého endpointu si zapiš minimálně tyhle scénáře:
+
+- prázdný výsledek: `items: []` není chyba, pokud je to očekávaný stav,
+- neexistující objekt: `404` nesmí prozradit existenci dat, ke kterým uživatel nemá přístup,
+- nedostatečné oprávnění: `403` má vysvětlit další krok bez interních detailů,
+- validační chyba: odpověď má ukázat opravitelné pole, ne dump celého vstupu,
+- dočasný stav: `202 Accepted` nebo job status pro operace, které nejdou dokončit hned,
+- budoucí enum: klient má mít fallback pro neznámou hodnotu,
+- volitelné pole: absence pole a `null` mají mít jasný rozdíl, nebo se tomu rozdílu vyhni.
+
+Privacy-first detail: ve schématu výslovně označ pole, která nesmí do logů, analytiky, screenshotů dokumentace ani veřejných příkladů. Typicky tokeny, e-maily, adresy, poznámky zákazníků, interní ID, osobní identifikátory a vše, co by se špatně vysvětlovalo ve větě „tohle je jen ukázka“.
+
+## HH.4 Contract testy chraň před rozbitím i před přehnanou zvědavostí
+
+Contract test není jen „test, že endpoint vrací 200“. Ověřuje, že poskytovatel dodržuje očekávání konzumenta a konzument nečeká něco, co poskytovatel neslibuje. U malého SaaS nemusíš začínat obřím testovacím aparátem. Stačí vybrat kritické integrace a napsat testy na jejich skutečné potřeby.
+
+Praktický start:
+
+1. Vyber tři nejdůležitější integrační trasy: třeba vytvoření zákazníka, synchronizace faktury, export událostí.
+2. Pro každou trasu napiš očekávaný request, minimální odpověď, chybové stavy a autorizaci.
+3. Testuj vůči syntetickým datům, ne proti produkčnímu účtu zákazníka.
+4. Spouštěj testy při změně API i při release SDK.
+5. Výsledek testu ulož jako signál kompatibility v pull requestu nebo release checklistu.
+
+Dobrý contract test má úzký scope. Neověřuje celý svět, ale konkrétní slib: „Když klient pošle validní požadavek s tímto scope, dostane odpověď s těmito poli a žádnými citlivými navíc.“ Přesně tahle poslední část je privacy-first zlato. Test může chytit nejen rozbití klienta, ale i nechtěné přidání pole, které do daného kontextu nepatří.
+
+## HH.5 Ukázkové payloady musí být syntetické a realistické zároveň
+
+Špatný příklad v dokumentaci je tichý sabotér. Když ukážeš token ve špatném místě, zákazník ho tam zkopíruje. Když ukážeš produkčně vypadající e-mail, někdo ho použije v testu. Když ukážeš payload bez chybových stavů, integrace bude naštvaná při prvním `429`.
+
+Pravidla pro příklady:
+
+- používej domény jako `example.com`, ne skutečné zákaznické adresy,
+- ID dělej syntetická, ale formátově podobná produkci,
+- ukazuj prázdný stav, běžný stav, validační chybu a rate limit,
+- nepoužívej reálné názvy firem, fakturační údaje ani osobní poznámky,
+- tokeny piš jako `sk_test_...redacted`, ne jako hodnotu, která vypadá použitelně,
+- u webhooků ukaž podpis, timestamp a replay ochranu,
+- u exportů ukaž minimální dataset, ne maximalistickou přehlídku všeho, co databáze umí.
+
+Realistický syntetický příklad je investice do méně supportu. Zákazník rychle pochopí tvar dat, ale ty nemusíš vysvětlovat, proč se v dokumentaci omylem objevil e-mail někoho, kdo si jen objednal demo. Což je rozhovor, který si každý privacy-first tým rád odpustí.
+
+## HH.6 Release API změny potřebuje kompatibilitní bránu
+
+Každá změna API by měla projít krátkou bránou kompatibility. Ne jako korporátní ceremoniál s razítkem, ale jako praktická ochrana před náhodným rozbitím klientů.
+
+Otázky před releasem:
+
+- Mění se tvar requestu, response, chyba, status kód, řazení nebo default?
+- Je změna additive, nebo breaking?
+- Pokud je breaking, existuje nová verze, migrační návod a datum vypnutí starého chování?
+- Prošly contract testy kritických konzumentů?
+- Je changelog napsaný podle dopadu na integrátora, ne podle interní implementace?
+- Dostanou zákazníci varování dřív než produkční výpadek?
+- Nevrací nová odpověď více osobních nebo tenant-specific dat než původní kontrakt?
+
+Mini šablona changelogu:
+
+```md
+### API změna: `GET /v1/invoices`
+
+Typ: additive
+Dopad: klienti mohou nově číst pole `due_status`; existující pole se nemění.
+Migrace: není nutná, neznámá pole ignorujte.
+Privacy: pole neobsahuje osobní údaje, vychází ze stavu faktury v rámci stejného tenantu.
+Testy: prošly contract testy pro billing synchronizaci a export faktur.
+```
+
+## HH.7 Checklist API kontraktů
+
+- [ ] Každý veřejný endpoint je popsaný ve strojově čitelné specifikaci.
+- [ ] Specifikace, dokumentace, SDK a serverová validace nevycházejí ze čtyř různých pravd.
+- [ ] Tým má napsanou definici breaking change včetně změn řazení, enumů, chyb a oprávnění.
+- [ ] Schémata pokrývají prázdné stavy, chyby, asynchronní operace a budoucí hodnoty.
+- [ ] Ukázkové payloady jsou syntetické, realistické a neobsahují produkční osobní údaje.
+- [ ] Contract testy existují alespoň pro nejdůležitější integrační trasy.
+- [ ] Testy ověřují nejen přítomnost polí, ale i to, že se nevrací citlivá data navíc.
+- [ ] Changelog popisuje dopad na integrátora a jasně označuje migrační kroky.
+- [ ] Breaking změny mají verzi, migrační okno a plán komunikace.
+- [ ] Release checklist obsahuje kompatibilitní review pro API, SDK i webhooky.
+
+## Codyho komentář
+
+API kontrakt je trochu jako dobrá domluva v týmu: nejvíc ho oceníš ve chvíli, kdy by bez něj všichni křičeli. Já bych v evropském SaaS radši obětoval jednu „rychlou“ změnu a napsal schéma, test a changelog, než pak přes support sbíral produkční payloady od zákazníků. Stabilita není brzda produktu. Stabilita je důvod, proč si zákazník dovolí na tvém produktu postavit vlastní proces.
+
+## Zdroje k příloze
+
+- OpenAPI Specification jako standardní způsob popisu HTTP API kontraktů, operací, parametrů, odpovědí a schémat: https://spec.openapis.org/oas/latest.html
+- Pact dokumentace ke consumer-driven contract testingu a ověřování očekávání mezi konzumentem a poskytovatelem: https://docs.pact.io/
+- Semantic Versioning k rozlišování kompatibilních a nekompatibilních změn veřejného API: https://semver.org/
+- OWASP API Security Project k rizikům nadměrného vystavení vlastností objektů a nedostatečné autorizace na úrovni objektů: https://owasp.org/www-project-api-security/
+- RFC 9110 k HTTP sémantice, status kódům a významu metod, které jsou základem stabilního API kontraktu: https://www.rfc-editor.org/rfc/rfc9110.html
+
+## Shrnutí přílohy
+
+API kontrakt je provozní pojistka proti náhodným breaking changes, supportové archeologii a zbytečnému sdílení produkčních dat při ladění integrací. Drž specifikaci jako zdroj pravdy, definuj breaking change předem, testuj kritické konzumenty, ukázky dělej syntetické a release změny pouštěj přes kompatibilitní bránu. Privacy-first API není jen bezpečnější. Je i nudněji předvídatelné, což je v integracích kompliment, ne urážka.
+
+
 ## Pracovní log
 
+- 2026-08-16: Přidána příloha HH o API kontraktech: OpenAPI jako zdroj pravdy, definice breaking changes, schémata pro prázdné a chybové stavy, contract testy, syntetické payloady, release kompatibilitní brána a privacy-first checklist.
 - 2026-08-16: Přidána příloha HG o API cache hlavičkách: rozlišení veřejných a přihlášených odpovědí, `Cache-Control`, `Vary`, `ETag`, CDN allowlist, invalidace, bezpečnostní testy a privacy-first checklist.
 - 2026-08-16: Přidána příloha HF o idempotenci v API: rizikové mutace, idempotency keys, atomické uložení, stabilní odpovědi při retry, vazba na autorizaci a limity, SDK chování a privacy-first checklist.
 - 2026-08-16: Přidána příloha HE o stránkování, filtrování a řazení API: produktový účel seznamů, cursor vs. offset, stabilní sort, filtry jako oprávnění, bezpečné hledání, omezené `include`/`fields`, testovací matice a privacy-first checklist.
