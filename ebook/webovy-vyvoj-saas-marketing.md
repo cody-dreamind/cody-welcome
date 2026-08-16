@@ -35390,7 +35390,200 @@ Audit log je skvělý sluha a výborný detektor produktového chaosu. Když neu
 Zákaznický audit log má ukazovat významné změny, přístupy a bezpečnostní události bez toho, aby se stal skrytou kopií zákaznických dat. Dobrý návrh definuje účel událostí, stabilní schéma, typ aktéra, bezpečné metadata, oprávnění pro čtení a export, retenční pravidla, použitelné filtry a negativní testy. Privacy-first audit log pomáhá zákazníkovi získat kontrolu nad provozem, ne provozovat detailní kroniku každého kliknutí.
 
 
+# Příloha HR: Tenantová izolace v API bez IDOR loterie, sdílených tabulek na dobré slovo a evropského datového chaosu
+
+Multi-tenant SaaS zní elegantně: jedna aplikace, více zákazníků, sdílená infrastruktura, nižší náklady. Realita je méně poetická. Jeden zapomenutý filtr `tenant_id`, jeden moc odvážný admin endpoint nebo jeden export bez autorizační kontroly a máš z „efektivního provozu“ festival cizích faktur. A to je přesně ten typ festivalu, na který nechceš tisknout plakáty.
+
+Tenantová izolace znamená, že zákazník vidí a ovlivňuje jen data, akce, integrace, fakturaci a konfiguraci, které patří do jeho prostoru. Nestačí, že UI schová cizí položky. API, worker, vyhledávání, exporty, webhooky, audit logy, cache, background joby a support nástroje musí držet stejnou hranici. Privacy-first SaaS v Evropě bere tenantovou hranici jako produktový slib, ne jako „snad jsme to všude přidali do query“.
+
+## HR.1 Tenant není jen sloupec v databázi
+
+Sloupec `tenant_id` je začátek, ne strategie. Tenant je bezpečnostní, produktová a provozní hranice. V každém požadavku musí být jasné:
+
+- kdo žádá o akci,
+- v jakém tenantu jedná,
+- nad jakým objektem jedná,
+- jaké má oprávnění,
+- jaký datový rozsah může použít,
+- jak se rozhodnutí zaloguje bez úniku obsahu.
+
+Špatný vzor:
+
+```sql
+SELECT * FROM invoices WHERE id = $1;
+```
+
+Lepší vzor:
+
+```sql
+SELECT *
+FROM invoices
+WHERE id = $1
+  AND tenant_id = $2;
+```
+
+Ještě lepší je nedovolit, aby aplikační kód musel na tenant podmínku myslet ručně pokaždé. Použij sdílené repository metody, query builder s povinným tenant kontextem, row-level security tam, kde dává smysl, a testy, které záměrně zkouší cizí ID. Lidská disciplína je hezká věc, ale bezpečnost postavená jen na disciplíně je vlastně víra s deployment pipeline.
+
+## HR.2 Vyřeš tenant kontext hned na hraně requestu
+
+Tenant kontext určuj na začátku requestu a dál ho předávej jako explicitní hodnotu. Neodvozuj tenant později z náhodného objektu, route parametru nebo e-mailu uživatele. U B2B SaaS typicky existuje několik vstupů:
+
+| Vstup | Příklad | Riziko |
+| --- | --- | --- |
+| Subdoména | `firma.example.com` | změna názvu, převzetí aliasu, cache záměna |
+| Header | `X-Tenant-Id` | klient může poslat cizí hodnotu |
+| Path | `/tenants/{id}/invoices` | IDOR, pokud chybí membership check |
+| Token claim | `tenant_id` nebo `workspace_ids` | stale oprávnění po změně role |
+| Session | aktivní workspace v UI | záměna při více tabech |
+
+Doporučení:
+
+- Token nebo session říká, kdo je aktér a jaké tenanty smí použít.
+- Route nebo header říká, v jakém tenantu chce aktér jednat.
+- Autorizační vrstva ověřuje, že kombinace aktér + tenant + akce + objekt je povolená.
+- Datová vrstva vždy dostane tenant kontext explicitně.
+- Logy uloží rozhodnutí a bezpečné ID, ne celý token nebo payload.
+
+Příklad rozhodnutí:
+
+```json
+{
+  "request_id": "req_01k2example",
+  "actor_type": "user",
+  "actor_id": "usr_123",
+  "tenant_id": "ten_456",
+  "action": "invoice.read",
+  "target_type": "invoice",
+  "target_id": "inv_789",
+  "decision": "allow",
+  "reason": "member_role:finance"
+}
+```
+
+Když je rozhodnutí `deny`, odpověď nemá prozradit, jestli cizí objekt existuje. V mnoha situacích je bezpečnější `404 Not Found` než upovídané „tahle faktura patří jinému zákazníkovi“. API není reality show pro objektová ID.
+
+## HR.3 IDOR se loví negativními testy, ne přáním
+
+IDOR a porušená objektová autorizace patří mezi klasické API průšvihy. OWASP API Security Top 10 2023 řadí Broken Object Level Authorization jako API1:2023: https://owasp.org/API-Security/editions/2023/en/0xa1-broken-object-level-authorization/
+
+Praktický testovací balík pro každý citlivý endpoint:
+
+- Uživatel z tenantu A čte objekt z tenantu B.
+- Uživatel z tenantu A aktualizuje objekt z tenantu B.
+- Uživatel bez role finance čte fakturační endpoint svého tenantu.
+- API token s read-only scope volá write endpoint.
+- Běžný člen volá admin endpoint s platným vlastním tokenem.
+- Export endpoint dostane filtr na cizí objekt.
+- Background job spustí operaci nad objektem po změně vlastnictví.
+- Webhook event od integrace odkazuje na objekt jiného tenantu.
+
+Test musí selhat bezpečně: žádná cizí data, žádný rozdíl v chybě, který prozradí existenci objektu, žádný vedlejší efekt. Nestačí testovat jen `GET /invoices/:id`. Stejné riziko mají `PATCH`, `DELETE`, exporty, hromadné akce, vyhledávání, filtr `ids[]=`, cursor stránkování a „nevinné“ endpointy typu počet položek.
+
+OWASP samostatně upozorňuje i na Broken Object Property Level Authorization, tedy případy, kdy endpoint vrací nebo přijímá pole, která aktér nemá vidět nebo měnit: https://owasp.org/API-Security/editions/2023/en/0xa3-broken-object-property-level-authorization/ To je tenantová izolace v jemnějším balení. Člen může vidět fakturu, ale nemusí vidět interní poznámku, risk score nebo osobní údaje jiného uživatele.
+
+## HR.4 Izolace se musí propsat do exportů, vyhledávání a front
+
+Nejvíc tenantových úniků nevzniká v nudném detailu objektu. Vzniká v místech, kde tým přidá „užitečnou zkratku“:
+
+- globální vyhledávání,
+- CSV export,
+- admin filtr,
+- report přes více tabulek,
+- background job,
+- cache výsledků,
+- webhook dispatcher,
+- datová migrace,
+- fulltext index.
+
+U každé takové funkce si polož otázku: kde přesně je tenant hranice? Například export faktur musí tenant filtr použít už při výběru řádků, ne až při renderování CSV. Fulltext index musí obsahovat tenant ID jako součást přístupového filtru. Cache key musí zahrnovat tenant, roli a relevantní scope. Frontová zpráva musí nést tenant kontext a worker ho znovu ověřit, ne mu slepě věřit.
+
+Příklad špatné cache:
+
+```text
+cache:get:/api/v1/invoices?page=1
+```
+
+Příklad lepší cache:
+
+```text
+cache:tenant=ten_456:role=finance:api=v1:route=invoices:page=1
+```
+
+Cache není místo pro kreativní minimalismus. Když sdílíš výsledek mezi tenanty omylem, uživatel neřekne „hezká optimalizace“. Řekne něco, co se do changelogu nehodí.
+
+## HR.5 Support a interní admin musí mít tvrdší pravidla než zákaznické UI
+
+Interní nástroje bývají největší pokušení: „je to jen pro nás“. Jenže support, billing, migrace a admin panely často vidí víc než běžný zákazník. Proto musí být tenantová izolace v interních nástrojích ještě přísnější:
+
+- Support vybírá konkrétní tenant a konkrétní důvod přístupu.
+- Citlivé hodnoty jsou maskované ve výchozím stavu.
+- Přístup je časově omezený a auditovaný.
+- Hromadné akce mají preview a potvrzení rozsahu.
+- Export interních dat vyžaduje vyšší oprávnění.
+- Admin endpointy používají stejnou autorizační vrstvu jako veřejné API.
+
+Bezpečná support věta v ticketu:
+
+> „Zkontroloval jsem request `req_01k2example`; autorizace správně odmítla přístup tokenu `Skladová integrace` k fakturačnímu endpointu. Token má jen `orders:read` scope.“
+
+Nebezpečná support věta:
+
+> „Vidím v databázi, že zákazník XY má fakturu 123 a token ABC...“
+
+Support má pomáhat řešit problém, ne opisovat produkci do konverzace. Privacy-first provoz znamená, že i interní lidé vidí jen tolik, kolik potřebují k práci.
+
+## HR.6 Evropský provoz potřebuje mapu tenantových dat
+
+„Máme EU region“ není totéž jako „víme, kde jsou data každého tenantu“. Data protection by design and by default podle GDPR čl. 25 vyžaduje přiměřená technická a organizační opatření už při návrhu zpracování: https://eur-lex.europa.eu/eli/reg/2016/679/oj#d1e2803-1-1 Evropský výbor pro ochranu osobních údajů k tomu vydal vodítka k data protection by design and by default: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-42019-article-25-data-protection-design-and_en
+
+Pro malý SaaS to neznamená psát román v právničtině. Znamená držet praktickou mapu:
+
+| Oblast | Co evidovat |
+| --- | --- |
+| Primární databáze | region, typ izolace, retenční pravidla |
+| Objektové úložiště | bucket, tenant prefix, šifrování, expirace odkazů |
+| Search index | jak se filtruje tenant a role |
+| Analytika | agregace, identifikátory, retence |
+| Logy a traces | pole, maskování, přístup, retence |
+| Backupy | region, obnova, mazací hranice |
+| Subdodavatelé | role, datový rozsah, země provozu |
+
+Když velký zákazník položí otázku „kde jsou naše data a kdo je může vidět?“, nechceš odpovídat básní. Chceš ukázat mapu, pravidla a auditovatelný proces. To je mnohem méně sexy než nový gradient v hero sekci, ale výrazně užitečnější při due diligence.
+
+## HR.7 Checklist tenantové izolace API
+
+Před další větší verzí API si projdi:
+
+- Má každý request explicitní tenant kontext odvozený z ověřené identity?
+- Ověřuje autorizační vrstva kombinaci aktér, tenant, akce, objekt a scope?
+- Vynucuje datová vrstva tenant filtr centrálně, ne ručně v každé query?
+- Mají všechny citlivé endpointy negativní testy s cizím tenantem?
+- Neprozrazují chyby existenci cizích objektů?
+- Zahrnují cache klíče tenant, roli a relevantní scope?
+- Filtruje fulltext, export a reporting tenant hranici před vytvořením výsledku?
+- Nesou background joby tenant kontext a znovu ho ověřují při zpracování?
+- Mají support a admin nástroje časově omezený, auditovaný a maskovaný přístup?
+- Existuje mapa tenantových dat v databázi, souborech, logách, indexech, zálohách a subdodavatelích?
+
+## Codyho komentář
+
+Tenantová izolace je nudná jen do chvíle, než se rozbije. Pak je z ní nejdražší funkce v produktu, protože ji najednou řeší vývoj, support, právník, obchod i zákazník. Můj pohled: pokud SaaS prodává důvěru, tenantová hranice je součást produktu stejně jako login, fakturace nebo tlačítko „Uložit“. Jen má horší marketingové fotky.
+
+## Zdroje k příloze
+
+- OWASP API Security Top 10 2023 — API1:2023 Broken Object Level Authorization: https://owasp.org/API-Security/editions/2023/en/0xa1-broken-object-level-authorization/
+- OWASP API Security Top 10 2023 — API3:2023 Broken Object Property Level Authorization: https://owasp.org/API-Security/editions/2023/en/0xa3-broken-object-property-level-authorization/
+- GDPR, článek 25 — Data protection by design and by default: https://eur-lex.europa.eu/eli/reg/2016/679/oj#d1e2803-1-1
+- EDPB Guidelines 4/2019 on Article 25 Data Protection by Design and by Default: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-42019-article-25-data-protection-design-and_en
+
+## Shrnutí přílohy
+
+Tenantová izolace v API je kombinace ověřené identity, explicitního tenant kontextu, objektové a property-level autorizace, centrálně vynucených datových filtrů, negativních testů, bezpečné cache, izolovaných exportů, kontrolovaných background jobů a přísných interních nástrojů. Privacy-first evropský SaaS k tomu přidává mapu dat napříč databázemi, soubory, logy, indexy, backupy a subdodavateli. Cílem není jen zabránit úniku dat, ale umět zákazníkovi srozumitelně dokázat, že jeho prostor je opravdu jeho.
+
+
 ## Pracovní log
+
+- 2026-08-16: Přidána příloha HR o tenantové izolaci v API: tenant kontext, objektová a property-level autorizace, IDOR negativní testy, cache, exporty, fronty, support přístup, evropská datová mapa a checklist.
 
 - 2026-08-16: Přidána příloha HQ o zákaznickém audit logu: účel událostí, schéma aktéra, bezpečná metadata, retence, oprávnění, filtrování, export, negativní testy a privacy-first checklist.
 
