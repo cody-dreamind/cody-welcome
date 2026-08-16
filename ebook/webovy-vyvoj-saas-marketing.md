@@ -35010,7 +35010,197 @@ Codyho komentář: největší souborové riziko často není hacker v kapuci. J
 Souborové API potřebuje víc než endpoint a bucket. Potřebuje účel, vrstvenou validaci, soukromé úložiště, krátkodobé upload a download odkazy, objektovou autorizaci, bezpečné hlavičky, malware sken, střídmé chybové reporty a retenční úklid. Privacy-first upload není „vezmi cokoliv a ulož to navždy“. Je to kontrolovaný vstup do systému, který neudělá ze souborů skládku dat ani loterii oprávnění.
 
 
+
+# Příloha HP: Rate limity a kvóty API bez zákaznických pastí, tichého škrcení a drahých botích mejdanů
+
+Rate limit není trest pro zákazníka. Je to bezpečnostní a provozní brzda, která má chránit dostupnost služby, rozpočet, férové používání a někdy i zákaznická data. Špatně navržený limit ale umí napáchat vlastní škodu: integrace náhodně padají, UI se tváří jako rozbitý produkt, support loví chyby bez kontextu a zákazník netuší, jestli má počkat, zaplatit vyšší tarif, nebo začít nadávat do monitoru. Což je sice lidské, ale produktově drahé.
+
+Privacy-first přístup k limitům říká: omezuj podle účelu a rizika, vysvětluj stav bez zbytečných identifikátorů a neproměň každé odmítnutí requestu v analytický portrét uživatele.
+
+## HP.1 Limituj zdroj rizika, ne jen počet requestů
+
+Nejjednodušší limit je „100 requestů za minutu na IP“. Někdy stačí. U SaaS API ale bývá příliš hrubý: jedna firma může mít víc legitimních integrací za NATem, zatímco útočník může IP adresy střídat jako ponožky. Lepší je vrstvit limity podle toho, co chráníš.
+
+Praktické vrstvy:
+
+- Globální limit chrání celou platformu před náhlým provozním výbuchem.
+- Tenantový limit brání tomu, aby jeden zákazník vyjedl kapacitu ostatním.
+- Uživatelský nebo tokenový limit řeší konkrétní integraci, API klíč nebo session.
+- Endpointový limit chrání drahé operace: exporty, vyhledávání, AI zpracování, importy, generování reportů.
+- Akční limit chrání citlivé změny: pozvánky uživatelů, reset hesla, odesílání e-mailů, vytváření plateb.
+
+Příklad:
+
+| Operace | Doporučená jednotka limitu | Proč |
+| --- | --- | --- |
+| `GET /projects` | tenant + token | Běžný provoz, hlavně férovost mezi integracemi |
+| `POST /exports` | tenant + endpoint + denní kvóta | Drahé na CPU, storage i privacy riziko |
+| `POST /password-reset` | e-mail hash + IP + časové okno | Ochrana proti obtěžování a enumeraci účtů |
+| `POST /ai/summarize` | tenant + tarif + velikost vstupu | Nákladová kontrola a prevence přelivu dat |
+| `POST /webhooks/test` | tenant + uživatel | Ochrana před odesílacím chaosem |
+
+Codyho pravidlo: nejdřív napiš větu „tenhle limit chrání…“. Když ji neumíš dokončit, nastavuješ číslo pro hezký pocit, ne pro reálný systém.
+
+## HP.2 `429 Too Many Requests` má být instrukce, ne facka
+
+Když klient narazí na limit, API by mělo vrátit stav `429 Too Many Requests`. MDN u tohoto statusu popisuje, že odpověď může obsahovat hlavičku `Retry-After`, která říká, jak dlouho má klient čekat před dalším pokusem: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/429 a https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Retry-After
+
+Dobrá odpověď neříká jen „ne“. Říká:
+
+- co bylo omezeno,
+- kdy se dá zkusit znovu,
+- jestli jde o minutový limit, denní kvótu nebo drahou akci,
+- jaký identifikátor má zákazník poslat supportu,
+- co má klient udělat dál.
+
+Příklad těla odpovědi:
+
+```json
+{
+  "error": {
+    "code": "rate_limit_exceeded",
+    "message": "Exporty jsou dočasně omezené. Zkuste to znovu za 120 sekund.",
+    "retry_after_seconds": 120,
+    "limit_scope": "tenant_exports",
+    "request_id": "req_01J..."
+  }
+}
+```
+
+Nevracej interní detaily typu shard, přesná pravidla detekce botů nebo osobní údaje jiných uživatelů v tenantu. Vývojář potřebuje opravitelnost, ne mapu tvého hradu včetně tajné chodby.
+
+## HP.3 Kvóty jsou produktový slib, rate limit je provozní brzda
+
+Rate limit a kvóta nejsou totéž. Rate limit řeší tempo: kolik akcí za krátké okno. Kvóta řeší objem: kolik operací, dat nebo kreditů je v tarifu za den, měsíc nebo billing období. Když tyto pojmy smícháš, vznikne produktový guláš.
+
+Rozděl pravidla do dvou dokumentovaných vrstev:
+
+- Rate limit: „maximálně 60 požadavků za minutu na API token“.
+- Kvóta: „tarif Team obsahuje 20 exportů měsíčně“.
+
+U kvót zákazník očekává viditelnost předem: dashboard, e-mailové upozornění, bezpečný stav API a možnost koupit vyšší limit nebo počkat na obnovu. U rate limitu stačí často dobrá hlavička, backoff a jasná chyba.
+
+U privacy-first SaaS je důležité, aby kvótový dashboard neukazoval zbytečné osobní detaily. Místo „Petr Novák poslal 4 821 requestů na endpoint X“ obvykle stačí „API token `crm-sync-prod` využil 82 % denní kvóty“. Pokud potřebuješ audit na osobu, drž ho v chráněném admin logu s retencí a oprávněním.
+
+## HP.4 Klienty uč exponenciální backoff a jitter
+
+Když limit odmítne request, špatný klient ho pošle hned znovu. Horší klient ho pošle hned znovu ve dvaceti paralelních vláknech. Nejhorší klient to nazve „retry strategy“. Gratuluju, vyrobil sis vlastní DDoS s logem zákazníka.
+
+Doporučení pro dokumentaci SDK:
+
+- Respektuj `Retry-After`, pokud je v odpovědi.
+- Pokud není, použij exponenciální backoff s náhodným jitterem.
+- Retryuj jen bezpečné nebo idempotentní operace.
+- U mutací vyžaduj idempotency key.
+- Po několika pokusech ukaž uživateli opravitelnou chybu.
+- Nikdy neopakuj automaticky akci, která může poslat e-mail, vytvořit platbu nebo změnit data, pokud nemáš idempotenci.
+
+Mini příklad pro dokumentaci:
+
+```text
+1. request selže s 429
+2. klient přečte Retry-After: 30
+3. počká 30 sekund plus malý jitter
+4. zkusí stejný idempotentní request znovu
+5. po třetím selhání zobrazí hlášku a request_id
+```
+
+Tahle část patří do integrační příručky, ne jen do interního runbooku. Když zákazníka nenaučíš správně čekat, bude čekat support. A support bude čekat na kávu. A káva taky není nekonečná.
+
+## HP.5 Limity musí chránit před resource consumption útoky
+
+OWASP API Security Top 10 pro rok 2023 uvádí „Unrestricted Resource Consumption“ jako riziko, kde API spotřebovává CPU, paměť, disk, síť nebo externí zdroje bez dostatečných omezení: https://owasp.org/API-Security/editions/2023/en/0xa4-unrestricted-resource-consumption/
+
+V malém SaaS se to netýká jen hackerů. Stačí zákazník, který omylem spustí importní smyčku, export přes celou historii nebo integraci, která při chybě otevře nové spojení pro každý retry. Výsledek je stejný: účet za infrastrukturu letí nahoru a ostatním uživatelům web zpomalí.
+
+Praktické ochrany:
+
+- Maximalizuj velikost request body podle endpointu, ne plošně.
+- Limituj počet položek v bulk operaci.
+- U exportů a reportů používej frontu a stav jobu.
+- U vyhledávání nastav limity na rozsah, stránkování a složitost filtru.
+- U AI funkcí počítej tokeny nebo jednotky práce před spuštěním drahé operace.
+- U webhooků nastav počet retry pokusů a dead-letter stav.
+
+Privacy-first bonus: limity snižují i objem dat, který se omylem kopíruje do logů, chybových reportů, cache a podpory. Méně přelitých dat, méně právního adrenalinu.
+
+## HP.6 Neprozrazuj limity způsobem, který pomáhá útočníkům
+
+Transparentnost je dobrá, ale bezpečnostní pravidla nejsou adventní kalendář. Ve veřejné dokumentaci popiš běžné limity pro férové integrace. U citlivých anti-abuse pravidel buď obecnější.
+
+Bezpečný kompromis:
+
+- Veřejně ukaž standardní rate limit pro API tokeny a běžné endpointy.
+- V odpovědi vrať dost informací pro korektní backoff.
+- Citlivé detekční signály nech interně.
+- Supportu ukaž důvod v interním nástroji, ale bez zbytečných payloadů.
+- Zákazníkovi umožni požádat o vyšší limit přes jasný proces.
+
+Příklad dobré věty v dokumentaci:
+
+> „API má standardní limity podle tarifu a typu endpointu. Pokud narazíte na `429`, respektujte `Retry-After`. Pro vyšší objemy nám napište s popisem integrace a očekávaným provozem.“
+
+Příklad špatné věty:
+
+> „Blokujeme přesně po 17 pokusech z jedné IP, pokud user agent obsahuje X a request přijde mezi 3:00 a 3:05.“
+
+Útočník děkuje, posílá pohled.
+
+## HP.7 Interní dashboard má vést k rozhodnutí
+
+Rate limit dashboard není vitrína čísel. Má odpovědět na otázky:
+
+- Kdo právě naráží na limit?
+- Je to legitimní růst, chyba integrace, útok nebo náš špatně nastavený limit?
+- Jaký endpoint je úzké hrdlo?
+- Kolik odmítnutí se překlápí do zákaznických chyb?
+- Má zákazník bezpečnou cestu k vyšší kapacitě?
+
+Dashboard drž agregovaný. Pro operativní detail používej `request_id`, tenant, token alias, endpoint, časové okno a typ limitu. Nezobrazuj celé URL s osobními údaji v query stringu, request payloady ani e-mailové adresy, pokud k tomu není konkrétní důvod a přístup.
+
+Dobrý alert:
+
+> „Tenant `acme` překročil limit exportů 5× za 15 minut. Endpoint `POST /exports`. Dopad: 23 odmítnutých requestů. Další krok: zkontrolovat frontu exportů a kontaktovat vlastníka účtu.“
+
+Špatný alert:
+
+> „API má hodně 429.“
+
+To není alert. To je náladová věta serveru.
+
+## HP.8 Checklist rate limitů a kvót
+
+Před spuštěním nebo revizí API si projdi:
+
+- Má každý limit jasně napsaný chráněný účel?
+- Jsou oddělené krátkodobé rate limity a tarifní/měsíční kvóty?
+- Vrací API `429`, `Retry-After`, bezpečný kód chyby a `request_id`?
+- Umí SDK nebo dokumentace doporučit backoff, jitter a idempotenci?
+- Jsou drahé operace omezené podle velikosti, počtu položek nebo jednotek práce?
+- Vidí zákazník využití kvóty bez zbytečných osobních detailů?
+- Umí support rozlišit legitimní růst, chybu integrace a zneužití?
+- Mají limity testy pro tenanty, tokeny, endpointy a citlivé akce?
+- Je retence rate-limit logů krátká a popsaná v datové mapě?
+- Existuje proces pro dočasné nebo trvalé navýšení limitu?
+
+## Codyho komentář
+
+Rate limit je jeden z těch detailů, které nikdo neocení, dokud chybí. Pak ho ocení účetní, support, zákazník i server — každý bohužel jiným typem pláče. Dobře udělané limity nejsou brzda růstu. Jsou to svodidla, aby růst nesletěl do příkopu.
+
+## Zdroje k příloze
+
+- MDN Web Docs — `429 Too Many Requests`: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/429
+- MDN Web Docs — `Retry-After`: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Retry-After
+- OWASP API Security Top 10 2023 — API4:2023 Unrestricted Resource Consumption: https://owasp.org/API-Security/editions/2023/en/0xa4-unrestricted-resource-consumption/
+
+## Shrnutí přílohy
+
+Rate limity chrání dostupnost, férovost, náklady a bezpečnost API. Dobrý návrh odděluje tempo od kvót, vrací opravitelné chyby, učí klienty bezpečný retry, omezuje drahé operace a drží observability střídmou. Privacy-first varianta navíc neukazuje víc identit a payloadů, než je nutné pro provozní rozhodnutí.
+
+
 ## Pracovní log
+
+- 2026-08-16: Přidána příloha HP o rate limitech a kvótách API: vrstvy limitů, `429` a `Retry-After`, rozdíl mezi kvótou a tempem, backoff, ochrana před resource consumption útoky, bezpečná observability a checklist.
 - 2026-08-16: Přidána příloha HO o souborovém API: účel souborů, vrstvená validace uploadů, krátkodobé upload/download odkazy, autorizace stahování, minimalizované importní reporty, bezpečné logování, retence a checklist.
 - 2026-08-16: Přidána příloha HN o asynchronních API jobech: rozhodnutí sync/async, `202 Accepted`, stavový model, idempotentní spouštění, bezpečné výsledky, problem details, monitoring, retence a privacy-first checklist.
 - 2026-08-16: Přidána příloha HM o bezpečných webhookách: event kontrakt, ověření podpisu nad raw body, replay ochrana, rychlý příjem přes frontu, idempotentní zpracování, minimální ukládání payloadů, odchozí webhooky a checklist.
