@@ -34282,7 +34282,259 @@ SDK je místo, kde se produkt potká s realitou zákazníkova kódu. Tam už nep
 
 SDK a integrační ukázky nejsou dekorace k API, ale onboarding do bezpečného provozu. Dobré SDK používá bezpečné výchozí nastavení, čitelné chyby, timeouty, retry pravidla a idempotenci. Ukázky mají být spustitelné, testované, sandboxované a datově úsporné. OpenAPI kontrakt pomáhá držet konzistenci, ale ergonomii nejčastějších zákaznických úloh musí někdo navrhnout ručně. Privacy-first přístup znamená, že dokumentace zákazníka nenápadně učí posílat méně dat, ukládat méně kopií a chránit tajemství už v prvním copy-paste příkladu.
 
+# Příloha HL: Korelační ID a trasování API bez detektivky v supportu, úniku payloadů a observability chaosu
+
+Když zákazník napíše „API nám občas padá“, špatný tým začne hádat. Lepší tým se zeptá na čas, endpoint a request ID. Skvělý tým umí podle jednoho bezpečného identifikátoru spojit zákazníkův problém s logem, metrikou, trace, retry historií, SDK verzí a support odpovědí — aniž by do ticketu tahal celé payloady, osobní údaje nebo screenshoty produkční databáze.
+
+Korelační ID není kosmetická hlavička. Je to provozní pojistka. U malého SaaS často rozhoduje o tom, jestli incident vyřešíš za deset minut, nebo strávíš dvě hodiny hledáním v logách podle „někdy kolem oběda“. Privacy-first přístup k trasování má jednoduchý cíl: vidět dost na opravu problému, ale nesbírat víc, než je nutné. To zní nudně. Přesně proto to funguje.
+
+## HL.1 Každý request musí mít jeden veřejný bezpečný identifikátor
+
+První pravidlo: každý API request dostane identifikátor, který můžeš bezpečně ukázat zákazníkovi. Nepoužívej k tomu e-mail, tenant slug, interní databázové ID, session token ani hash payloadu. Request ID má být náhodný, krátkodobě užitečný a samo o sobě nevypovídat nic citlivého.
+
+Praktický tvar:
+
+```http
+X-Request-Id: req_01k2example7m9t4b6q8p0
+```
+
+V odpovědi ho vrať vždy:
+
+```http
+HTTP/1.1 422 Unprocessable Content
+Content-Type: application/problem+json
+X-Request-Id: req_01k2example7m9t4b6q8p0
+
+{
+  "type": "https://developer.example.com/errors/validation_failed",
+  "title": "Validation failed",
+  "status": 422,
+  "code": "validation_failed",
+  "request_id": "req_01k2example7m9t4b6q8p0",
+  "errors": [
+    { "field": "invoice.due_date", "message": "Must be a future date." }
+  ]
+}
+```
+
+Dobré request ID splňuje:
+
+- je unikátní pro jeden příchozí request,
+- neobsahuje zákaznická data,
+- dá se bezpečně poslat supportu,
+- je v HTTP hlavičce i v chybovém těle,
+- propíše se do aplikačních logů, auditních stop a alertů,
+- má rozumnou retenci podle provozní potřeby.
+
+Pokud klient pošle vlastní `X-Request-Id`, můžeš ho uložit jako `client_request_id`, ale interní `request_id` si vytvoř sám. Jinak ti někdo pošle hodnotu `please-log-my-secret-token` a ty ji poslušně rozšíříš do celého systému. Gratuluju, vyrobil sis distribuovaný kopírovací stroj na průšvih.
+
+## HL.2 Trace ID propojuje systémy, request ID pomáhá zákazníkovi
+
+Request ID a trace ID nejsou totéž, i když se v malém projektu často slévají. Request ID je lidsky použitelný odkaz pro support a zákazníka. Trace ID je technický kontext, který propojuje služby, fronty, databázové dotazy a odchozí volání.
+
+Pokud provozuješ jednoduchý monolit, možná ti zatím stačí request ID. Jakmile ale request prochází přes API gateway, worker, billing službu a webhook dispatcher, potřebuješ distribuované trasování. W3C Trace Context definuje hlavičky `traceparent` a `tracestate`, které slouží k předávání trasovacího kontextu mezi systémy: https://www.w3.org/TR/trace-context/
+
+Příklad příchozího requestu:
+
+```http
+POST /api/v1/invoices HTTP/1.1
+Authorization: Bearer sk_live_...
+X-Request-Id: req_01k2example7m9t4b6q8p0
+traceparent: 00-4bf92f3577b34da6a3ce929d0e0e4736-00f067aa0ba902b7-01
+```
+
+Privacy-first pravidlo: trace kontext přenášej, ale nepřibaluj do něj zákaznické údaje. `tracestate` není místo pro e-mail uživatele, název firmy, cenu objednávky ani interní poznámku supportu. Trace má odpovědět „kudy request prošel a kde se zpomalil“, ne „co všechno zákazník poslal“.
+
+Mapuj si vztah:
+
+| Vrstva | Identifikátor | K čemu slouží | Co do něj nepatří |
+| --- | --- | --- | --- |
+| zákaznická odpověď | `X-Request-Id` | support, ticket, dokumentace chyby | osobní údaje, tenant slug |
+| interní trace | `trace_id` | propojení služeb a latence | payload, tokeny, obchodní tajemství |
+| span | `span_id` | konkrétní krok v requestu | SQL s hodnotami, celé tělo odpovědi |
+| dávková úloha | `job_id` | import, export, retry, webhook | původní soubor, raw event |
+| obchodní objekt | `invoice_id`, `user_id` | doménové rozhodnutí | volné spojování napříč účely |
+
+## HL.3 Loguj rozhodnutí a metadata, ne celé zprávy
+
+Nejčastější chyba v observabilitě API je „pro jistotu logujeme všechno“. To je stejné jako „pro jistotu necháváme klíče od kanceláře pod rohožkou“. Chvilku je to pohodlné, potom to bolí.
+
+U každého API requestu typicky stačí:
+
+```json
+{
+  "timestamp": "2026-08-16T10:15:42Z",
+  "request_id": "req_01k2example7m9t4b6q8p0",
+  "trace_id": "4bf92f3577b34da6a3ce929d0e0e4736",
+  "method": "POST",
+  "route": "/api/v1/invoices",
+  "status": 422,
+  "duration_ms": 84,
+  "tenant_id": "ten_01k2example",
+  "auth_subject_type": "service_account",
+  "client_id": "cli_01k2example",
+  "api_version": "v1",
+  "sdk": "example-node/2.4.1",
+  "error_code": "validation_failed"
+}
+```
+
+Pozor na `tenant_id`: i interní identifikátor může být osobní nebo obchodně citlivý, pokud se dá snadno spojit se zákazníkem. Proto ho drž jen v systémech, které ho opravdu potřebují, a v exportech do externí observability vrstvy používej pseudonymizovaný nebo omezený kontext.
+
+Co do běžných request logů nepatří:
+
+- raw request body,
+- celé response body,
+- access tokeny a API klíče,
+- autorizační hlavičky,
+- cookies,
+- celé SQL dotazy s hodnotami,
+- osobní údaje z formulářů,
+- soubory, přílohy a importní řádky.
+
+Když potřebuješ detail pro ladění, udělej explicitní debug režim s krátkou expirací, jasným vlastníkem a maskováním citlivých hodnot. Debug režim nemá být default. Default má být bezpečný.
+
+## HL.4 SDK má request ID ukázat vývojáři bez lovu v síti
+
+Pokud máš vlastní SDK, udělej z korelačního ID součást developer experience. Vývojář by neměl otevírat proxy, browser devtools a tři dashboardy jen proto, aby zjistil, co poslat supportu.
+
+Příklad chyby v SDK:
+
+```ts
+try {
+  await client.invoices.create({ customerId, dueDate })
+} catch (error) {
+  if (error instanceof ApiError) {
+    console.error(error.code)
+    console.error(error.requestId)
+  }
+}
+```
+
+Výstup:
+
+```text
+validation_failed
+req_01k2example7m9t4b6q8p0
+```
+
+SDK by mělo:
+
+- číst `X-Request-Id` z každé odpovědi,
+- přidat ho do výjimky nebo výsledku,
+- umět ho zobrazit v debug logu bez payloadu,
+- nepřepisovat ho citlivým klientským identifikátorem,
+- uvádět SDK název a verzi ve střídmém `User-Agent`,
+- respektovat retry a idempotency pravidla z dokumentace.
+
+Dobrá support instrukce potom zní:
+
+> Pošlete nám `request_id`, čas volání, endpoint a název prostředí. Neposílejte API klíč ani celé tělo requestu.
+
+Tohle je drobnost, která šetří hodiny a snižuje pravděpodobnost, že zákazník omylem pošle tajemství do e-mailu. Ano, e-mail je stále oblíbené místo, kam lidé s radostí kopírují věci, které tam nemají být. Lidstvo je úžasné.
+
+## HL.5 Observability data mají mít vlastní datovou mapu a retenci
+
+Logy, metriky a traces nejsou „technická data mimo GDPR realitu“. Mohou obsahovat osobní údaje, obchodní metadata, identifikátory účtů, IP adresy nebo informace o chování uživatelů. Privacy-first SaaS proto potřebuje datovou mapu i pro observability vrstvu.
+
+Minimální tabulka:
+
+| Kategorie | Příklad | Účel | Retence | Přístup |
+| --- | --- | --- | --- | --- |
+| request log | route, status, latency, request ID | provoz a debugging | krátká až střední | engineering, SRE |
+| error log | stack bez payloadu, error code | oprava chyb | podle release cyklu | engineering |
+| audit log | změna oprávnění, export, smazání | bezpečnost a odpovědnost | delší podle smlouvy | omezené role |
+| trace | span, duration, service | výkon a incidenty | krátká | engineering |
+| metrika | počty requestů, p95 latence | kapacita a SLA | agregovaně delší | týmově širší |
+| support odkaz | request ID v ticketu | zákaznická pomoc | podle ticket policy | support |
+
+Retenci neřeš stylem „až do konce vesmíru, protože disk je levný“. Disk je levný. Důvěra ne. Nastav si výchozí expirace a výjimky piš vědomě.
+
+Praktický model:
+
+- detailní traces: dny až nízké týdny,
+- běžné request logy: týdny podle provozní potřeby,
+- agregované metriky: měsíce až roky bez zákaznické identifikace,
+- auditní stopy: podle bezpečnostního a smluvního účelu,
+- debug záznamy: hodiny až pár dní, vždy s expirací.
+
+Codyho komentář: přesné lhůty nejsou univerzální rada. Nastav je podle rizika, smluv, právního posouzení a reálné potřeby týmu. Ale pokud neumíš říct, proč konkrétní log držíš rok, pravděpodobně ho rok držet nemáš.
+
+## HL.6 Alert má ukázat vlastníka a další krok, ne jen červený ohňostroj
+
+Korelační ID pomáhá řešit jednotlivý request. Alerty pomáhají zjistit, že problém není jednotlivý. Ale alert bez vlastníka je jen drahá notifikace do týmového akvária.
+
+U každého API alertu definuj:
+
+- co přesně měří,
+- pro koho je důležitý,
+- kdo ho vlastní,
+- jaký je první krok,
+- kdy se eskaluje,
+- jaké identifikátory přiložit,
+- jaké údaje se z alertu nesmí posílat ven.
+
+Příklad dobrého alertu:
+
+```yaml
+name: api_v1_invoice_create_validation_spike
+condition: error_code=validation_failed route=/api/v1/invoices exceeds baseline
+owner: payments-api
+first_step: Check latest release, schema changes, SDK version distribution.
+include:
+  - route
+  - status
+  - error_code
+  - api_version
+  - sdk_family
+  - sample_request_ids
+exclude:
+  - request_body
+  - response_body
+  - authorization_header
+  - customer_email
+```
+
+Vzorky request ID jsou užitečné, ale drž je v rozumném počtu. Alert nepotřebuje sto identifikátorů. Potřebuje tři až pět příkladů, které vedou k trace a logu. Zbytek patří do dashboardu, ne do chatové místnosti.
+
+## HL.7 Checklist korelačních ID a trasování API
+
+Předtím než API pustíš zákazníkům nebo partnerům, projdi si:
+
+- Má každý request interní `request_id` bez citlivých údajů?
+- Vrací API `X-Request-Id` i u chybových odpovědí?
+- Obsahují chybová těla bezpečné `request_id`?
+- Umí support podle request ID najít relevantní log bez přístupu k payloadům?
+- Odděluješ zákaznické request ID od interního trace ID?
+- Nepřenáší `traceparent` ani `tracestate` osobní nebo obchodní údaje?
+- Loguješ route šablonu, status, latenci, verzi API a error code místo raw dat?
+- Maskuješ tokeny, cookies, autorizační hlavičky a citlivá pole?
+- Má observability vrstva vlastní datovou mapu, vlastníky a retenci?
+- Umí SDK zobrazit request ID v chybě?
+- Má dokumentace krátkou instrukci „co poslat supportu“?
+- Obsahují alerty vlastníka, první krok a zakázaná pole?
+- Testuješ, že request ID vzniká i při timeoutu, validaci, rate limitu a interní chybě?
+- Umíš bezpečně spojit request, retry, webhook, job a auditní stopu?
+- Existuje postup pro dočasný debug režim s expirací?
+
+## Codyho komentář
+
+Korelační ID je jedna z těch věcí, které působí jako technická formalita, dokud nemáš první větší incident. Pak se z ní stane rozdíl mezi „máme to pod kontrolou“ a „hledáme v seníku, jestli tam náhodou není jehla s JSONem“. Za mě je to levný luxus: malé API si ho může dovolit hned od začátku a později za něj bude vděčné.
+
+## Zdroje k příloze
+
+- W3C Trace Context — standard pro předávání distribuovaného trasovacího kontextu pomocí `traceparent` a `tracestate`: https://www.w3.org/TR/trace-context/
+- OpenTelemetry Semantic Conventions — doporučení pro konzistentní atributy telemetrie napříč protokoly a službami: https://opentelemetry.io/docs/specs/semconv/
+- RFC 9457 — Problem Details for HTTP APIs, strukturovaný formát chybových odpovědí `application/problem+json`: https://www.rfc-editor.org/rfc/rfc9457.html
+- OWASP API Security Top 10 2023 — užitečný rámec pro přemýšlení o úniku dat, autorizaci, nadměrném sběru a bezpečnosti API: https://owasp.org/API-Security/editions/2023/en/0x11-t10/
+
+## Shrnutí přílohy
+
+Dobré API vrací bezpečné request ID, propojuje ho s interním trace kontextem, loguje rozhodnutí místo payloadů, učí SDK ukázat identifikátor vývojáři, drží observability data v datové mapě a staví alerty tak, aby vedly k akci. Privacy-first trasování neznamená slepotu. Znamená vidět přesně to, co potřebuješ k opravě, a nenechat si v logách vyrůst skládku dat, kterou jednou budeš vysvětlovat s výrazem člověka, který právě objevil starý debug dump v produkci.
+
 ## Pracovní log
+- 2026-08-16: Přidána příloha HL o korelačních ID a trasování API: bezpečné request ID, W3C trace context, logování metadat místo payloadů, SDK chyby, datová mapa observability, alerty a privacy-first checklist.
+
 - 2026-08-16: Přidána příloha HK o SDK a integračních ukázkách: bezpečné nastavení tokenů, spustitelné examples, OpenAPI kontrakt, ergonomická SDK vrstva, typované chyby, SemVer, datové minimum a checklist.
 
 - 2026-08-16: Přidána příloha HJ o API verzování a deprecaci: breaking changes, strategie verzí, hlavičky Deprecation/Sunset, migrační průvodce, dokumentace, agregované měření a checklist.
