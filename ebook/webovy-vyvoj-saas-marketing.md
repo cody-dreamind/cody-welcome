@@ -36250,9 +36250,191 @@ API SLO má převádět technickou spolehlivost do zákaznického slibu. Začni 
 
 ---
 
+# Příloha HW: Retry politika API bez retry bouře, dvojích plateb a supportového věštění z timeoutů
+
+Každé API občas řekne „teď ne“. Síť škytne, databáze zpomalí, fronta nestíhá, závislá služba vrátí dočasnou chybu nebo klient zavře spojení dřív, než server stihne odpovědět. Problém není samotný timeout. Problém je, když klienti začnou panicky opakovat požadavky bez pravidel a z malé poruchy udělají distribuovaný beranidlový festival.
+
+Retry politika je dohoda mezi API a klientem: které chyby se smí zkusit znovu, kdy počkat, jak zabránit duplicitám a jak zákazník pozná, jestli akce proběhla. Pro privacy-first SaaS je to i datové téma. Když retry mechanismus ukládá celé payloady, dumpuje requesty do logů a posílá je přes support, řešíš spolehlivost tak, že vyrábíš nové riziko. To je jako hasit serverovnu benzínem, jen s lepším dashboardem.
+
+RFC 9110 definuje HTTP sémantiku včetně stavových kódů a hlavičky `Retry-After`, která může u dočasných odpovědí klientovi říct, kdy to zkusit znovu: https://datatracker.ietf.org/doc/rfc9110/. API by tuhle možnost nemělo ignorovat, protože klient bez vodítka hádá. A klient, který hádá, většinou hádá moc agresivně.
+
+## HW.1 Rozliš chybu, kterou má klient opravit, od chyby, kterou má přežít
+
+Ne každá chyba je kandidát na retry. Když klient pošle špatné schema, chybějící oprávnění nebo neexistující objekt, opakování stejného požadavku nic nespraví. Jen zatíží API a prodlouží supportové zmatení.
+
+Praktické rozdělení:
+
+| Situace | Typická odpověď | Retry? | Co má klient udělat |
+| --- | --- | --- | --- |
+| Nevalidní vstup | `400` / `422` | Ne | opravit data nebo mapování |
+| Chybí autentizace | `401` | Jen po obnově tokenu | obnovit token, pak zkusit jednou |
+| Není oprávnění | `403` | Ne | ukázat chybu oprávnění |
+| Objekt nenalezen | `404` | Většinou ne | zkontrolovat ID nebo synchronizaci |
+| Konflikt stavu | `409` | Podle akce | načíst aktuální stav a rozhodnout |
+| Rate limit | `429` | Ano, podle `Retry-After` | počkat, zpomalit, případně ukázat limit |
+| Dočasná nedostupnost | `503` | Ano, s backoffem | počkat a zkusit znovu |
+| Timeout bez odpovědi | žádná odpověď | Jen u idempotentní akce | ověřit stav nebo použít idempotency key |
+
+Klientská knihovna má mít tyhle rozdíly zabudované. Pokud každý integrátor píše vlastní retry podle nálady, dřív nebo později někdo spustí smyčku `while true`. A ta smyčka bude samozřejmě běžet v pátek večer, protože software má smysl pro drama.
+
+## HW.2 Retry bez backoffu je DDoS s dobrým úmyslem
+
+Když API vrátí `503` a tisíc klientů okamžitě zopakuje požadavek, službě tím nepomůžeš. Jen přidáš další tlak ve chvíli, kdy už má problém. Retry musí mít zpomalování.
+
+Základní pravidla:
+
+- Používej exponenciální backoff: například 1 s, 2 s, 4 s, 8 s.
+- Přidej jitter, tedy náhodné rozhození čekání, aby všichni klienti netrefili stejnou sekundu.
+- Nastav maximální počet pokusů, typicky 3–5 podle kritičnosti akce.
+- Respektuj `Retry-After`, pokud ho API vrací.
+- Po vyčerpání pokusů vrať čitelný stav a korelační ID, ne nekonečný spinner.
+- U background jobů preferuj frontu a stavový endpoint před blokujícím čekáním klienta.
+
+Příklad klientské politiky pro čtení dat:
+
+```text
+1. pokus: okamžitě
+2. pokus: po 1–2 s
+3. pokus: po 2–4 s
+4. pokus: po 4–8 s
+potom: zobrazit dočasnou chybu a request_id
+```
+
+Příklad pro zápis peněžně nebo právně významné akce má být přísnější: nejdřív idempotence, potom retry. Bez toho riskuješ dvojí objednávku, dvojí fakturu nebo dvojí e-mail zákazníkovi. To už není technická chyba. To je zákaznický zážitek s příchutí účtárny v plamenech.
+
+## HW.3 Idempotency key je bezpečnostní pás pro zápisy
+
+U `POST` operací klient často neví, jestli server akci provedl, když spojení spadlo uprostřed. Třeba vytvoření objednávky může proběhnout, ale odpověď se ztratí. Když klient pošle stejný požadavek znovu bez ochrany, může vzniknout duplicita.
+
+Řešení je idempotency key: klient pošle unikátní klíč pro jednu zamýšlenou akci a server si po omezenou dobu pamatuje výsledek. Když přijde stejný klíč znovu, server neprovede akci podruhé, ale vrátí původní výsledek nebo jasný stav.
+
+Praktický kontrakt:
+
+- Klient posílá `Idempotency-Key` u rizikových zápisů.
+- Klíč je unikátní pro jednu obchodní akci, ne pro celý účet.
+- Server váže klíč na tenant, endpoint, metodu a hash normalizovaného requestu.
+- Retence klíče je omezená, například 24 hodin podle typu akce.
+- Pokud stejný klíč přijde s jiným obsahem, API vrátí konflikt.
+- Logy ukládají klíč a výsledek, ne celý payload.
+
+Bezpečný konflikt může vypadat takhle:
+
+```json
+{
+  "type": "https://api.example.com/problems/idempotency-conflict",
+  "title": "Idempotency key was reused with a different request",
+  "status": 409,
+  "request_id": "req_abc123"
+}
+```
+
+RFC 9457 popisuje standardní formát `application/problem+json` pro chybové odpovědi HTTP API: https://datatracker.ietf.org/doc/rfc9457/. Používej ho tak, aby integrátor dostal strojově zpracovatelný typ chyby a člověk dostal srozumitelný popis bez úniku interních detailů.
+
+## HW.4 Stavový endpoint je lepší než slepé opakování
+
+U dlouhých operací, jako jsou exporty, importy, generování reportu nebo zpracování souboru, není dobrý nápad držet HTTP request otevřený a doufat, že všechno doběhne včas. Lepší model je asynchronní práce:
+
+1. Klient založí job.
+2. API vrátí `202 Accepted`, `job_id` a URL pro kontrolu stavu.
+3. Klient stav kontroluje s rozumným intervalem a backoffem.
+4. Po dokončení získá odkaz na výsledek s krátkou platností.
+5. Po expiraci se výsledek smaže nebo archivuje podle retenční politiky.
+
+Stavy drž jednoduché:
+
+| Stav | Význam | Akce klienta |
+| --- | --- | --- |
+| `queued` | úloha čeká | zkontrolovat později |
+| `running` | úloha běží | zkontrolovat později |
+| `succeeded` | výsledek je připraven | stáhnout nebo zobrazit výsledek |
+| `failed_retryable` | dočasná chyba | nabídnout opakování nebo počkat |
+| `failed_final` | trvalá chyba | ukázat problém a request ID |
+| `expired` | výsledek už není dostupný | založit novou úlohu |
+
+Privacy-first detail: stavový endpoint nemá vracet celé vstupní soubory, osobní údaje ani interní stack trace. Má vracet stav, bezpečné shrnutí, odkazy na výsledek a korelační ID. Payload patří do systému, který ho opravdu potřebuje, ne do každé diagnostické odpovědi.
+
+## HW.5 Retry politika patří do dokumentace i SDK
+
+Nestačí mít retry pravidla v hlavě backend týmu. Integrátor je potřebuje vidět v dokumentaci, SDK a chybových odpovědích. Jinak se bude rozhodovat podle pokusů, omylů a Stack Overflow archeologie.
+
+Do developer portálu napiš:
+
+- které status kódy jsou retryable,
+- jak API používá `Retry-After`,
+- doporučený backoff a maximální počet pokusů,
+- které endpointy vyžadují idempotency key,
+- jak dlouho se idempotency key drží,
+- jak ověřit stav dlouhé operace,
+- jaké chyby jsou trvalé a nemají se opakovat,
+- jaké korelační ID má zákazník poslat supportu.
+
+SDK by mělo bezpečné chování nabízet jako default. Výjimky ať jsou vědomé. Pokud integrátor musí pokaždé ručně nastavovat backoff, jitter, retry limity a idempotency key, pravděpodobně to někde vynechá. A jakmile to vynechá v platebním toku, máš místo developer experience účetní escape room.
+
+## HW.6 Observability retry provozu bez payloadového skladiště
+
+Retry mechanismus musí být měřitelný, jinak nepoznáš, jestli pomáhá, nebo jen maskuje problém. Měř ale metadata, ne obsah zákaznických dat.
+
+Užitečné metriky:
+
+- počet retry pokusů podle endpointu a status kódu,
+- podíl úspěšných požadavků po retry,
+- počet vyčerpaných retry pokusů,
+- využití `Retry-After`,
+- konflikty idempotency key,
+- duplicity zachycené idempotencí,
+- průměrný a p95 čas dokončení asynchronních jobů,
+- počet klientů s podezřele agresivním retry chováním.
+
+Bezpečný log může vypadat takhle:
+
+```text
+timestamp=2026-08-16T18:00:00Z
+route=POST /invoices
+status=503
+retryable=true
+retry_after_s=30
+attempt=1
+tenant_region=eu
+request_id=req_abc123
+idempotency_key_hash=idem_7f3a
+```
+
+Všimni si: žádné fakturační položky, žádný e-mail zákazníka, žádný bearer token. Diagnostika má odpovědět „co se stalo se systémem“, ne „co přesně zákazník poslal“.
+
+## HW.7 Checklist retry politiky API
+
+- Máme jasně rozdělené retryable a neretryable chyby.
+- API vrací `Retry-After` u `429` a vhodných dočasných stavů.
+- Klientské SDK používá exponenciální backoff, jitter a maximální počet pokusů.
+- Rizikové zápisy podporují `Idempotency-Key` a server brání duplicitám.
+- Stejný idempotency key s jiným obsahem vrací bezpečný konflikt.
+- Dlouhé operace používají `202 Accepted`, `job_id` a stavový endpoint.
+- Chybové odpovědi používají stabilní typy, například podle `application/problem+json`.
+- Dokumentace říká, co má integrátor dělat po timeoutu, `429`, `503` a konfliktu.
+- Observability retry provozu ukládá metadata, ne payloady, tokeny nebo osobní údaje.
+- Support pracuje s `request_id`, `job_id` a hashem idempotency key, ne s kopiemi citlivých requestů.
+
+## Codyho komentář
+
+Můj pohled — Cody: retry politika je jedna z těch věcí, které nejsou sexy, dokud nechybí. Pak je najednou hlavní postavou incidentu. Dobré API není to, které nikdy nespadne. Dobré API je to, které klientům řekne, jak se chovat, když se svět na chvíli zachová jako levný router po bouřce.
+
+## Zdroje k příloze
+
+- RFC 9110 — HTTP Semantics: https://datatracker.ietf.org/doc/rfc9110/
+- RFC 9457 — Problem Details for HTTP APIs: https://datatracker.ietf.org/doc/rfc9457/
+- Google SRE Workbook — Handling Overload: https://sre.google/workbook/handling-overload/
+- Google SRE Workbook — Addressing Cascading Failures: https://sre.google/sre-book/addressing-cascading-failures/
+
+## Shrnutí přílohy
+
+Retry politika chrání API i zákazníky před tím, aby se dočasná chyba změnila v retry bouři nebo duplicitní obchodní akci. Rozlišuj trvalé a dočasné chyby, respektuj `Retry-After`, používej backoff s jitterem, chraň zápisy idempotency key, dlouhé operace řeš stavovým endpointem, retry pravidla dokumentuj v SDK a měř provoz bezpečnými metadaty bez payloadového skladiště.
+
+---
+
 
 ## Pracovní log
 
+- 2026-08-16: Přidána příloha HW o retry politice API: retryable chyby, `Retry-After`, backoff s jitterem, idempotency key pro zápisy, stavové endpointy pro dlouhé operace, dokumentace SDK, bezpečná observability a checklist.
 - 2026-08-16: Přidána příloha HV o API SLO a error budgetu: kritické zákaznické cesty, SLI/SLO tabulka, error budget jako rozhodovací nástroj, alerty podle burn rate, privacy-first observability data a checklist.
 - 2026-08-16: Přidána příloha HU o status API a komunikaci výpadků: oddělený provoz status stránky, komponenty podle dopadu, strojově čitelný stav, šablony incidentů, plánovaná údržba, retence a privacy-first checklist.
 - 2026-08-16: Přidána příloha HT o API dokumentaci a developer portálu: OpenAPI kontrakt, první tutorial, bezpečné ukázky, chybové odpovědi, datová mapa portálu, changelog a checklist.
