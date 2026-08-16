@@ -33274,7 +33274,146 @@ Největší rozdíl mezi hobby API a profesionálním SaaS API není v tom, jest
 Stránkování, filtrování a řazení nejsou jen pohodlí pro klienty. Jsou součástí bezpečnosti, výkonu a privacy-first kontraktu API. Dobré seznamové endpointy mají jasný účel, limitovaný rozsah, stabilní řazení, cursor pagination tam, kde dává smysl, whitelistované filtry a přísnou kontrolu objektů i polí. Velké exporty patří do samostatných jobů, hledání nesmí sloužit jako boční kanál a logy query parametrů nemají být skladiště osobních údajů.
 
 
+# Příloha HF: Idempotence v API bez dvojích objednávek, panických refreshů a zákaznického déjà vu
+
+Idempotence je nudné slovo pro velmi praktickou věc: když se klient zeptá znovu na stejnou mutační akci, systém nemá omylem udělat druhou objednávku, druhou platbu, druhý export nebo druhé pozvání do týmu. Uživatel klikne dvakrát, mobilní síť spadne, load balancer zavře spojení, worker doběhne později, klient retryne request. To není exotika. To je úterý.
+
+HTTP už samo rozlišuje metody, u kterých má opakování stejný zamýšlený efekt: RFC 9110 popisuje `PUT`, `DELETE` a bezpečné metody jako idempotentní v tom smyslu, že více stejných požadavků má mít na serveru stejný zamýšlený dopad jako jeden požadavek. To ale neřeší typické SaaS akce přes `POST`: vytvoření platby, odeslání pozvánky, spuštění importu, založení objednávky nebo potvrzení rezervace.
+
+Tam potřebuješ vlastní produktový kontrakt: co přesně znamená „stejná akce“, jak dlouho si ji pamatuješ, jakou odpověď vrátíš při opakování a co se stane, když klient použije stejný klíč pro jiný payload. Bez toho je retry jen elegantní způsob, jak vyrobit bordel rychleji.
+
+## HF.1 Nejdřív označ akce, které nesmí proběhnout dvakrát
+
+Idempotence není potřeba všude stejně. Začni mapou rizikových mutací, ne knihovnou middleware. Každý endpoint si polož jednoduchou otázku: „Co se stane, když se tenhle request provede dvakrát během pěti sekund?“
+
+Typické kandidáty:
+
+- vytvoření objednávky, platby, refundu nebo faktury,
+- rezervace termínu nebo čerpání omezené kapacity,
+- odeslání e-mailu, SMS, webhooku nebo právně významného potvrzení,
+- spuštění importu, exportu, migrace nebo AI zpracování,
+- vytvoření API klíče, pozvánky, přístupu nebo support tokenu,
+- změna tarifu, aktivace trialu nebo připsání kreditu.
+
+Naopak prosté čtení dat řeš hlavně cache, autorizací a limity. Idempotency key na `GET /invoices` je kosmetika. Idempotency key na `POST /payments` je rozdíl mezi profesionálním SaaS a účetní detektivkou.
+
+Mini-matice:
+
+| Akce | Riziko duplicity | Doporučení |
+| --- | --- | --- |
+| `POST /orders` | Dvě objednávky za jedno kliknutí | Vyžaduj idempotency key |
+| `POST /exports` | Dva drahé joby a dva balíky dat | Vyžaduj idempotency key nebo business deduplikaci |
+| `POST /invites` | Více pozvánek a zmatek v audit logu | Dedup podle e-mailu, týmu a časového okna |
+| `PATCH /profile` | Poslední zápis vyhraje | Řeš optimistic locking, ne nutně idempotency key |
+| `DELETE /session` | Opakované odhlášení nevadí | Přirozeně idempotentní odpověď |
+
+## HF.2 Klíč má identifikovat záměr, ne uživatele navždy
+
+Idempotency key je dočasný otisk jedné operace. Nemá to být e-mail, rodné číslo, číslo faktury ani jiný osobní údaj převlečený za technický identifikátor. Stripe ve své dokumentaci doporučuje unikátní náhodný klíč s dostatečnou entropií a uvádí limit 255 znaků; klíče po určité době automaticky čistí a při opakování porovnává parametry původního požadavku.
+
+Praktický návrh:
+
+- Klient vygeneruje náhodné UUID nebo podobně silný token pro jednu konkrétní akci.
+- Server ukládá klíč spolu s identitou účtu, endpointem, hashovaným payloadem, stavem zpracování, výsledkem a expirací.
+- Stejný klíč v rámci stejného účtu a endpointu vrací stejný výsledek nebo jasnou chybu, pokud payload nesedí.
+- Klíč má retenční dobu podle rizika akce: často 24 až 72 hodin, u dražších operací déle podle produktu.
+- Klíč nikdy nepoužívej jako veřejné ID objektu a neukazuj ho v UI jako zákaznický identifikátor.
+
+Privacy-first detail: idempotency tabulka má být technická pomůcka, ne další historie chování zákazníka. Ukládej hash payloadu, ne celý payload, pokud celý obsah nepotřebuješ pro bezpečné přehrání odpovědi. Pokud odpověď obsahuje citlivá data, ukládej jen referenci na vytvořený objekt a odpověď slož znovu přes běžnou autorizovanou cestu.
+
+## HF.3 Atomická rezervace klíče je důležitější než hezký diagram
+
+Nejčastější chyba je kontrola stylem: „Podívám se, jestli klíč existuje. Neexistuje. Tak vytvořím záznam.“ Ve dvou paralelních requestech to samozřejmě zvládnou oba. Gratuluji, právě jsi vynalezl závodní podmínku s marketingovým názvem.
+
+Bezpečnější vzor:
+
+1. V databázi nastav unikátní index nad kombinací `tenant_id`, `endpoint_scope` a `idempotency_key`.
+2. Při prvním requestu atomicky vlož záznam ve stavu `processing`.
+3. Pokud vložení selže kvůli existujícímu klíči, načti původní záznam a rozhodni podle stavu.
+4. Pokud payload hash nesedí, vrať chybu typu `409 Conflict` nebo `422 Unprocessable Content` s vysvětlením, že klíč už patří jiné operaci.
+5. Po úspěšném dokončení ulož výsledek, referenci na objekt a stav `completed`.
+6. Pokud zpracování spadne, nastav stav podle toho, jestli je bezpečné retry opakovat, nebo jestli je potřeba manuální kontrola.
+
+U drahých operací je lepší vrátit `202 Accepted` a stavový endpoint než držet HTTP spojení při životě jako křečka na přístrojích. Klient pak může opakovat stejný request nebo dotazovat stav jobu. Důležité je, aby opakování nevyrobilo další job.
+
+## HF.4 Odpověď na opakovaný request má být předvídatelná
+
+Když klient zopakuje stejný request se stejným klíčem, nemá dostat pokaždé jinou básničku. Potřebuje jasný kontrakt.
+
+Možné stavy:
+
+| Stav původní operace | Odpověď při opakování |
+| --- | --- |
+| `completed` | Vrať stejný výsledek nebo aktuální reprezentaci vytvořeného objektu |
+| `processing` | Vrať `202 Accepted` se stavovým URL nebo `409 Conflict` s instrukcí k opakování později |
+| `failed_retryable` | Dovol bezpečný retry se stejným klíčem |
+| `failed_final` | Vrať původní chybu a další krok pro klienta |
+| `expired` | Vrať chybu, že klíč už nelze použít, nebo založ novou operaci jen pokud je to dokumentovaný kontrakt |
+
+Stripe popisuje model, ve kterém uloží status code a body prvního výsledku a vrací je i při dalších požadavcích se stejným klíčem. To je velmi srozumitelné pro klienty, ale musíš zvážit citlivost odpovědi a retenční pravidla. V evropském privacy-first SaaS často dává smysl ukládat stabilní referenci na výsledek a odpověď skládat z aktuálních oprávnění. Pokud mezitím uživatel ztratil právo objekt číst, idempotence nesmí obejít autorizaci.
+
+## HF.5 Idempotence není náhrada za autorizaci, limity ani validaci
+
+Idempotency key neříká „tenhle request je povolený“. Říká jen „tenhle request jsme už možná viděli“. Pořád musíš validovat payload, ověřit roli, zkontrolovat objektová oprávnění, hlídat kvóty a řešit abuse.
+
+Pozor na tři pasti:
+
+- Útočník posílá milion unikátních klíčů a plní ti idempotency storage. Tady potřebuješ rate limit a kvótu na počet aktivních klíčů.
+- Klient používá stejný klíč pro různé payloady. Tady potřebuješ hash a jasnou chybu.
+- Idempotentní vrácení staré odpovědi obejde nová oprávnění. Tady musíš znovu ověřit právo číst výsledek.
+
+OWASP API Security Top 10 2023 řadí neomezenou spotřebu zdrojů mezi hlavní API rizika. Idempotence sice pomáhá proti duplicitám, ale sama může vytvořit nový zdroj spotřeby: tabulku klíčů, stavové záznamy, uložené odpovědi a cleanup joby. Proto musí mít limity, expiraci a monitoring.
+
+## HF.6 UI a klientské SDK mají retry vysvětlit, ne schovat magii
+
+Dobré API se pozná i podle toho, jak se používá v klientovi. Pokud SDK automaticky retryuje mutační požadavky, musí dokumentovat, kdy generuje idempotency key a kdy ho má dodat vývojář. Pokud UI dovolí dvojklik na tlačítko „Zaplatit“, nemá spoléhat jen na disabled stav tlačítka. Disabled tlačítko je UX pohodlí, ne bezpečnostní hranice.
+
+Praktické klientské chování:
+
+- Po prvním odeslání ulož idempotency key do lokálního stavu konkrétní operace.
+- Při timeoutu nebo obnově stránky pokračuj se stejným klíčem, dokud neznáš výsledek.
+- Uživatelům ukaž stav: „Objednávku zpracováváme, neodesílejte ji znovu.“
+- U dlouhých operací nabídni stavovou stránku nebo historii jobů.
+- V dokumentaci ukaž příklad retry po timeoutu, ne jen šťastnou cestu.
+
+Privacy-first poznámka: pokud ukládáš idempotency key v browseru, nepřidávej k němu citlivý payload. Klíč má být náhodný technický token, který sám o sobě nic neříká.
+
+## HF.7 Checklist idempotence v API
+
+- Máš seznam mutačních endpointů, kde duplicita škodí zákazníkovi, penězům, kapacitě nebo právní stopě?
+- Vyžaduješ idempotency key u rizikových `POST` operací?
+- Je klíč náhodný technický token bez osobních údajů?
+- Je klíč scopeovaný minimálně podle tenantu/účtu a typu operace?
+- Má idempotency storage unikátní index a atomické vytvoření záznamu?
+- Porovnáváš při opakování hash payloadu a odmítáš změněný payload?
+- Vracíš při opakování stabilní a dokumentovanou odpověď?
+- Neobchází uložený výsledek aktuální autorizaci uživatele?
+- Máš expiraci klíčů, cleanup job a limity proti zahlcení?
+- Testuješ paralelní requesty se stejným klíčem, retry po timeoutu a opakování po pádu workeru?
+- Dokumentuje SDK, kdy generuje klíč automaticky a kdy ho má dodat klient?
+- Neukládáš v idempotency tabulce citlivý payload, pokud stačí hash a reference?
+
+## Codyho komentář
+
+Můj pohled — Cody: idempotence je jedna z těch věcí, které nikdo nechce navrhovat při první verzi produktu, protože „to se přece nestane“. Pak se to stane v pátek v 16:52 u zákazníka, který zrovna platí roční tarif. Najednou je z nudného detailu hlavní funkce.
+
+Dobře udělaná idempotence je tichá. Uživatel ji nevidí, zákaznická podpora o ní nemluví a účetnictví neposílá zprávy s předmětem „máme tu drobnou nesrovnalost“. Přesně tak má infrastruktura působit: žádné ovace, jen klid.
+
+## Zdroje k příloze
+
+- RFC 9110, část 9.2.2, definuje idempotentní HTTP metody a důvod, proč je lze bezpečně opakovat po komunikační chybě: https://www.ietf.org/rfc/rfc9110.html#name-idempotent-methods
+- Stripe API dokumentace k idempotentním requestům popisuje použití `Idempotency-Key`, ukládání výsledku prvního požadavku, porovnání parametrů a čištění klíčů: https://docs.stripe.com/api/idempotent_requests
+- Stripe Engineering článek „Designing robust and predictable APIs with idempotency“ ukazuje praktický návrh idempotency keys pro mutační API operace: https://stripe.com/blog/idempotency
+- Shopify dokumentace k idempotentním requestům uvádí příklady operací, u kterých idempotency keys pomáhají u platebních a billing scénářů: https://shopify.dev/docs/api/usage/idempotent-requests
+- OWASP API Security Top 10 2023 zahrnuje API4:2023 Unrestricted Resource Consumption a připomíná, že API musí omezovat spotřebu CPU, paměti, úložiště i placených externích služeb: https://owasp.org/API-Security/editions/2023/en/0x11-t10/
+
+## Shrnutí přílohy
+
+Idempotence chrání mutační API před duplicitami způsobenými retry, dvojklikem, timeoutem nebo paralelním zpracováním. Nejdřív označ rizikové akce, pak navrhni idempotency key jako dočasný technický token bez osobních údajů, ulož ho atomicky s unikátním indexem, porovnávej hash payloadu a vracej stabilní dokumentované odpovědi. Idempotence nenahrazuje autorizaci, validaci ani limity; v privacy-first SaaS navíc nesmí z idempotency tabulky vzniknout další datové skladiště.
+
+
 ## Pracovní log
+- 2026-08-16: Přidána příloha HF o idempotenci v API: rizikové mutace, idempotency keys, atomické uložení, stabilní odpovědi při retry, vazba na autorizaci a limity, SDK chování a privacy-first checklist.
 - 2026-08-16: Přidána příloha HE o stránkování, filtrování a řazení API: produktový účel seznamů, cursor vs. offset, stabilní sort, filtry jako oprávnění, bezpečné hledání, omezené `include`/`fields`, testovací matice a privacy-first checklist.
 - 2026-08-15: Přidána příloha HD o rate limitech, kvótách a ochraně API před neomezenou spotřebou zdrojů: limity podle typu práce, identita a kontext, odpovědi `429`, `Retry-After`, `RateLimit-*` hlavičky, retry politika, viditelné kvóty, fronty pro drahé operace a privacy-first checklist.
 - 2026-08-15: Přidána příloha HC o sandboxu a testovacích prostředích: syntetická data, oddělené klíče a endpointy, bezpečné simulace webhooků/e-mailů/plateb, reset a retence, maskované logy, integrační trasa a checklist.
