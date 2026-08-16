@@ -36079,11 +36079,181 @@ Můj pohled — Cody: status stránka je místo, kde se pozná rozdíl mezi „m
 
 Status API a incidentová komunikace jsou součástí produktu, ne bokovka pro horší den. Privacy-first SaaS má mít oddělenou status stránku, komponenty podle zákaznického dopadu, strojově čitelný stav, připravené šablony, jasnou kadenci aktualizací, střídmé veřejné informace, bezpečné zacházení s odběry notifikací a historii incidentů bez citlivých detailů. Dobrý status neřeší jen výpadek; chrání důvěru.
 
+# Příloha HV: API SLO a error budget bez metrikového divadla, alertového ohňostroje a sledování zákazníků pod mikroskopem
+
+SaaS API nepotřebuje stovky grafů, aby bylo spolehlivé. Potřebuje pár dobře zvolených slibů, které odpovídají tomu, co zákazník skutečně zažívá: jestli se požadavek povedl, jak dlouho trval, jestli se fronta nezasekla a jestli support umí vysvětlit dopad bez archeologie v logovacím močálu.
+
+Google SRE Workbook popisuje SLO jako cíl spolehlivosti služby a error budget jako praktický nástroj pro vyvažování rychlosti vývoje a spolehlivosti: https://sre.google/workbook/error-budget-policy/. Pro malý evropský SaaS tým je pointa jednoduchá: nedefinuj spolehlivost podle nálady v incident kanálu. Definuj ji předem, měř ji střídmě a rozhoduj podle ní.
+
+## HV.1 SLO začíná zákaznickou cestou, ne dashboardem
+
+Nejdřív si napiš, které API akce jsou pro zákazníka kritické. Ne podle toho, co je technicky zajímavé, ale podle toho, kde vzniká hodnota nebo škoda.
+
+Typické kritické cesty:
+
+- přihlášení a získání tokenu,
+- čtení hlavních dat,
+- vytvoření objednávky, exportu nebo jiné obchodní akce,
+- doručení webhooku,
+- import souboru,
+- potvrzení platby nebo změna tarifu.
+
+Ke každé cestě napiš zákaznickou větu:
+
+> „Zákazník může přes API vytvořit export a do 30 sekund získat stav jobu bez duplicitního spuštění.“
+
+Teprve pak z toho udělej metriku. Když začneš opačně, skončíš s grafem CPU, který sice vypadá vážně, ale zákazníkovi nevysvětlí, proč mu stojí fakturace.
+
+## HV.2 SLI měř tak, aby šel obhájit i před zákazníkem
+
+SLI je konkrétní měření kvality služby. Pro API většinou stačí několik typů:
+
+- **dostupnost:** podíl úspěšných odpovědí na validní requesty,
+- **latence:** například p95 nebo p99 doba odpovědi pro konkrétní endpoint,
+- **správnost:** odpověď odpovídá kontraktu a nevrací tichou chybu,
+- **čerstvost:** data nebo stav jobu nejsou starší než domluvený limit,
+- **doručení:** webhook nebo e-mail odejde a projde retry politikou.
+
+Pozor na falešně uklidňující průměry. Průměrná latence 120 ms může vypadat krásně, zatímco p99 dělá z API čekárnu na úřadě. Pro zákazníka je důležité, co zažije reálný request v horší části distribuce, ne jak hezky vyjde matematický wellness graf.
+
+Praktický příklad:
+
+| Cesta | SLI | SLO |
+| --- | --- | --- |
+| `GET /customers/{id}` | validní request skončí `2xx` nebo dokumentovanou `4xx` odpovědí | 99,9 % za 30 dní |
+| `POST /exports` | request založí job nebo vrátí bezpečnou validační chybu | 99,5 % za 30 dní |
+| Export job | hotový export vznikne do 10 minut u souborů do definovaného limitu | 99 % za 30 dní |
+| Webhook delivery | událost je doručena nebo zapsána jako retryable failure | 99,5 % za 30 dní |
+
+Do SLI nezapočítávej všechno bez přemýšlení. Chybně podepsaný request, překročený rate limit nebo vědomě blokovaný tenant není stejný typ selhání jako tvoje interní `500`. Metrika má odrážet spolehlivost služby, ne trestat systém za to, že správně odmítl špatný vstup.
+
+## HV.3 Error budget je brzda pro chaos, ne bič na vývojáře
+
+Error budget říká, kolik nespolehlivosti si můžeš dovolit v daném období. Když máš SLO 99,9 % za 30 dní, zbylých 0,1 % je prostor pro chyby, incidenty a plánované riziko. Google SRE popisuje error budget jako mechanismus, který pomáhá rozhodovat, kdy tlačit nové změny a kdy investovat do spolehlivosti: https://sre.google/workbook/error-budget-policy/.
+
+Malý tým si z toho může vzít jednoduché pravidlo:
+
+- error budget je v pořádku → můžeš dál deployovat normálním tempem,
+- error budget rychle mizí → omez rizikové změny a oprav zdroj nestability,
+- error budget je vyčerpaný → nové funkce počkají, spolehlivost jde první.
+
+Tohle nemusí být korporátní proces s komisí a třemi kalendáři. Stačí týdenní produktově-technický rituál:
+
+1. Které SLO hoří?
+2. Jaký zákaznický dopad za tím byl?
+3. Co z toho je opakující se vzor?
+4. Kterou jednu věc opravíme před další větší funkcí?
+
+Codyho komentář: error budget je skvělý test dospělosti týmu. Pokud po incidentu vždycky „jen rychle doděláte jednu feature“, error budget nemáte. Máte přáníčko Santovi s grafem.
+
+## HV.4 Alerty mají budit člověka jen kvůli akci
+
+Alert není notifikace, že existuje graf. Alert je žádost o lidský zásah. Google SRE Workbook má samostatnou kapitolu o alertování nad SLO a burn rate: https://sre.google/workbook/alerting-on-slos/. Praktická myšlenka: upozorňuj na rychlé spalování error budgetu, ne na každý osamělý výkyv.
+
+Dobré alerty:
+
+- mají vlastníka,
+- mají runbook,
+- popisují zákaznický dopad,
+- říkají, co zkontrolovat jako první,
+- neobsahují payloady ani osobní údaje,
+- mají jasné prahy pro urgentní a neurgentní reakci.
+
+Špatný alert:
+
+> „CPU high on worker-prod-7.“
+
+Lepší alert:
+
+> „Export API pálí 15 % měsíčního error budgetu za poslední hodinu. Nové exporty se zpožďují pro EU region. Zkontroluj frontu `exports`, storage latency a poslední deploy.“
+
+Privacy-first alert navíc nesmí posílat citlivé detaily do nástroje, který nemá být další kopií produkční databáze. Do pageru patří metadata, korelační ID a dopad. Payload zákazníka tam nepatří, i kdyby se tvářil jako „užitečný kontext“.
+
+## HV.5 Observability data jsou taky data
+
+OpenTelemetry popisuje observability signály jako metriky, logy a traces pro pochopení distribuovaných systémů: https://opentelemetry.io/docs/concepts/signals/. To je užitečné, ale privacy-first tým musí přidat druhou polovinu věty: observability data mohou obsahovat osobní údaje, obchodní tajemství i bezpečnostní stopy.
+
+Proto nastav pravidla:
+
+- request body se do logů neposílá automaticky,
+- query parametry s tokeny nebo e-maily se redigují,
+- `trace_id` a `request_id` nahrazují kopírování payloadů,
+- tenant ID se ukládá jen tam, kde je nutné pro diagnostiku a oprávnění,
+- metriky jsou agregované a bez zbytečné segmentace na malé skupiny,
+- retence logů a traces je kratší než retence zákaznických dat,
+- export observability dat mimo EHP je vědomé rozhodnutí, ne default wizardu.
+
+Dobré minimum pro API endpoint:
+
+```text
+timestamp=2026-08-16T17:00:00Z
+service=public-api
+route=POST /exports
+status=202
+duration_ms=184
+tenant_region=eu
+request_id=req_abc123
+trace_id=4bf92f3577b34da6a3ce929d0e0e4736
+```
+
+Špatné minimum:
+
+```text
+body={"email":"zakaznik@example.com","file_url":"...","notes":"..."}
+authorization=Bearer eyJ...
+```
+
+Jestli log obsahuje token, soubor, e-mail nebo interní poznámku zákazníka, není to log. Je to únik, který si zatím říká diagnostika.
+
+## HV.6 SLO musí mít produktovou interpretaci
+
+SLO bez rozhodnutí je jen barevný teploměr. Ke každému SLO napiš, co se stane při zhoršení.
+
+Příklad rozhodovací tabulky:
+
+| Stav | Co to znamená | Akce |
+| --- | --- | --- |
+| Budget zdravý | Běžné chyby pod kontrolou | normální deploy režim |
+| Rychlé spalování | zákazníkům se zhoršuje kritická cesta | incident triage, zmrazit rizikové deploye |
+| Budget pod 25 % | opakovaný problém nebo dlouhý incident | reliability úkol do aktuálního sprintu |
+| Budget vyčerpán | slib spolehlivosti není splněn | zastavit větší feature práci pro danou oblast |
+
+U SaaS produktu je fér propsat SLO i do obchodní komunikace, ale opatrně. Interní SLO není automaticky SLA. SLA je smluvní závazek, často s kredity nebo sankcemi. SLO je provozní cíl. Nemíchej je v ceníku jen proto, že „99,99 %“ vypadá draze a enterprise. Spolehlivost se neprodává počtem devítek, ale tím, že víš, co umíš udržet.
+
+## HV.7 Checklist API SLO a bezpečných metrik
+
+- Máme vypsané kritické zákaznické API cesty, ne jen technické služby.
+- Každá kritická cesta má SLI, které odpovídá reálnému zákaznickému dopadu.
+- SLO má období, práh a jasně popsané výjimky.
+- Error budget ovlivňuje plánování práce, nejen barvu dashboardu.
+- Alerty vznikají z dopadu nebo burn rate, ne z každého šumu v infrastruktuře.
+- Každý urgentní alert má vlastníka, runbook a bezpečný obsah bez payloadů.
+- Observability data mají datovou mapu, retenci a pravidla redakce citlivých údajů.
+- `request_id` a `trace_id` používáme pro diagnostiku místo kopírování osobních dat.
+- Dashboard ukazuje produktové cesty: auth, čtení, zápis, exporty, webhooky, billing.
+- SLO review probíhá pravidelně a vede k jedné konkrétní opravě, pokud se slib rozpadá.
+
+## Codyho komentář
+
+Můj pohled — Cody: nejlepší SLO pro malý SaaS není nejambicióznější. Je to takové, které tým opravdu používá při rozhodování. Pokud SLO nikdo neotevře při plánování sprintu, incidentu ani support escalaci, je to jen tapeta pro technické sebevědomí.
+
+## Zdroje k příloze
+
+- Google SRE Workbook — Error Budget Policy: https://sre.google/workbook/error-budget-policy/
+- Google SRE Workbook — Alerting on SLOs: https://sre.google/workbook/alerting-on-slos/
+- OpenTelemetry — Signals: https://opentelemetry.io/docs/concepts/signals/
+- OpenTelemetry — Logs data model a vazba na trace/span identifikátory: https://opentelemetry.io/docs/specs/otel/logs/
+
+## Shrnutí přílohy
+
+API SLO má převádět technickou spolehlivost do zákaznického slibu. Začni kritickými cestami, měř pár obhajitelných SLI, error budget používej jako rozhodovací brzdu, alerty stav na dopadu a observability data ber jako citlivý provozní materiál, ne jako bezedný sklad pro všechno, co request potkal cestou.
+
 ---
 
 
 ## Pracovní log
 
+- 2026-08-16: Přidána příloha HV o API SLO a error budgetu: kritické zákaznické cesty, SLI/SLO tabulka, error budget jako rozhodovací nástroj, alerty podle burn rate, privacy-first observability data a checklist.
 - 2026-08-16: Přidána příloha HU o status API a komunikaci výpadků: oddělený provoz status stránky, komponenty podle dopadu, strojově čitelný stav, šablony incidentů, plánovaná údržba, retence a privacy-first checklist.
 - 2026-08-16: Přidána příloha HT o API dokumentaci a developer portálu: OpenAPI kontrakt, první tutorial, bezpečné ukázky, chybové odpovědi, datová mapa portálu, changelog a checklist.
 - 2026-08-16: Přidána příloha HS o regionálním provozu API v Evropě: datové toky, EU regiony, transfery mimo EHP, bezpečné logování, support přístup, failover scénáře, subdodavatelé a privacy-first checklist.
