@@ -35750,7 +35750,164 @@ Můj pohled — Cody: evropský provoz není o tom, že si na web dáš vlaječk
 
 Regionální provoz API začíná přesnou mapou datových toků, ne hostingovou nálepkou. Privacy-first SaaS musí vědět, kde běží API, databáze, logy, zálohy, fronty, support a AI funkce; transfery mimo EHP má držet jako pojmenované výjimky; logy a observability musí minimalizovat obsah; support přístup má být omezený a auditovaný; failover a změny dodavatelů nesmí potichu rozbít evropský datový slib. Evropský provoz je produktová důvěra vyjádřená architekturou.
 
+# Příloha HT: API dokumentace a developer portál bez zastaralých ukázek, datových pastí a integračního luštění z křišťálové koule
+
+Dobrá API dokumentace není „hezký Swagger na konci sprintu“. Je to produktová vrstva, která rozhoduje, jestli se zákazník integruje za odpoledne, nebo po třech týdnech posílá supportu screenshot terminálu a větu „nějak to nejde“. U privacy-first SaaS má dokumentace ještě jednu roli: musí vývojáře naučit bezpečný a datově střídmý způsob integrace dřív, než si stihnou vytvořit špatné návyky.
+
+OpenAPI Initiative popisuje OpenAPI jako otevřený standard pro popis HTTP API v JSON nebo YAML dokumentu, který není svázaný s konkrétním programovacím jazykem: https://www.openapis.org/what-is-openapi. To je skvělý základ, ale samotný kontrakt nestačí. Kontrakt říká, co API umí. Developer portál musí vysvětlit, jak se API používá v reálném provozu, jak se chová při chybách, jaká data opravdu posílat a co nikdy neposílat.
+
+## HT.1 Dokumentuj první úspěšnou integraci, ne celý vesmír endpointů
+
+První návštěva dokumentace má vést k jednomu malému vítězství. Ne k encyklopedii. Pokud vývojář otevírá portál poprvé, potřebuje vědět:
+
+- k čemu API slouží,
+- jak získat testovací přístup,
+- jak poslat první bezpečný request,
+- jak poznat úspěch,
+- kde najde limity, chyby a další kroky.
+
+Špatný start:
+
+> „V levém menu najdete 147 endpointů řazených podle interních modulů.“
+
+Lepší start:
+
+> „Za 10 minut vytvoříte testovací zákaznický záznam, ověříte stav jobu a stáhnete výsledek bez ukládání citlivých dat mimo svůj účet.“
+
+První tutorial má být úzký. Klidně použij jen tři endpointy. Hlavní je, aby ukázal bezpečný tok: autentizace, idempotentní operace, korelační ID, očekávaná odpověď a uklizení testovacích dat.
+
+## HT.2 Kontrakt drž jako zdroj pravdy, průvodce jako překlad do lidské práce
+
+OpenAPI specifikace je výborná pro generování referenční dokumentace, SDK, validačních testů a klientských typů. Oficiální výuková dokumentace OpenAPI zdůrazňuje přínos strojově čitelného popisu API pro formalizaci HTTP API: https://learn.openapis.org/introduction.html. Jenže v praxi vznikají dvě časté chyby:
+
+1. Specifikace existuje, ale nikdo podle ní neověřuje skutečné chování API.
+2. Specifikace se publikuje jako dokumentace, ale chybí vysvětlení rozhodnutí, scénáře a hranice použití.
+
+Udělej z kontraktu technickou pravdu a z portálu produktový překlad. Kontrakt má přesně popsat schémata, status kódy, autentizaci, hlavičky, idempotency key, stránkování, rate limit hlavičky a příklady odpovědí. Průvodce má vysvětlit, kdy použít který endpoint, jaké pole je opravdu nutné, jak minimalizovat data a jak se chovat při chybě.
+
+Praktický model:
+
+- **Reference:** generovaná z OpenAPI, verzovaná s API.
+- **Guides:** ručně psané scénáře podle úloh zákazníka.
+- **Recipes:** krátké copy-paste příklady pro běžné integrace.
+- **Policies:** autentizace, limity, retence, regiony, webhooky, incidenty.
+- **Changelog:** změny, migrace, deprecace a termíny.
+
+## HT.3 Každý příklad musí být bezpečný i po copy-paste
+
+Ukázkový kód je školení. Pokud v něm ukážeš token v URL, ukládání celého payloadu do logu nebo odesílání zbytečných osobních údajů, část zákazníků to zkopíruje do produkce. Pak se všichni tváří překvapeně, jako by dokumentace nebyla návod, ale moderní poezie.
+
+Bezpečné ukázky mají pravidla:
+
+- Token patří do hlavičky, ne do URL.
+- Tajemství čti z proměnné prostředí, ne ze stringu v kódu.
+- Payload používej minimální a syntetický.
+- Příklady logování nesmí vypisovat osobní údaje, tokeny ani celé requesty.
+- Retry příklady musí obsahovat backoff a respekt k `Retry-After`.
+- Ukázky webhooků musí ověřovat podpis před zpracováním.
+
+Příklad špatného mikrotextu:
+
+> „Pošlete nám kompletní profil uživatele, ať máme všechno.“
+
+Lepší mikrotext:
+
+> „Pošlete jen identifikátor, e-mail pro doručení a pole, která potřebujete zpracovat v tomto konkrétním kroku. Neposílejte poznámky, interní komentáře ani údaje mimo účel integrace.“
+
+Tohle není přecitlivělost. OWASP API Security Top 10 dlouhodobě upozorňuje na rizika kolem autorizace objektů, vlastností objektů, nadměrné spotřeby zdrojů a dalších API chyb: https://owasp.org/www-project-api-security/. Dokumentace má těmto chybám aktivně předcházet, ne je omylem učit.
+
+## HT.4 Chyby dokumentuj jako rozhodovací strom
+
+Chybová odpověď není jen `400 Bad Request`. Je to okamžik, kdy integrace buď pokračuje správně, nebo začne panika. RFC 9457 definuje formát Problem Details pro HTTP API jako běžný způsob, jak přenášet strojově čitelné detaily chyb: https://www.rfc-editor.org/rfc/rfc9457.html. Pokud ho používáš, dokumentace má ukázat nejen tvar objektu, ale i doporučenou reakci klienta.
+
+U každé běžné chyby napiš:
+
+- co znamená,
+- jestli je bezpečné request zopakovat,
+- jestli má klient čekat, upravit vstup, nebo kontaktovat support,
+- jaký identifikátor poslat supportu,
+- jaké informace do support ticketu neposílat.
+
+Příklad:
+
+| Status | Situace | Co má klient udělat |
+| --- | --- | --- |
+| `400` | Neplatný vstup | Opravit pole podle `errors`, neopakovat stejný request naslepo |
+| `401` | Chybí nebo expiroval token | Obnovit token, nelogovat jeho hodnotu |
+| `403` | Token nemá oprávnění | Zkontrolovat scope a tenant kontext |
+| `404` | Objekt neexistuje nebo není dostupný | Nepředpokládat rozdíl mezi neexistencí a chybějícím oprávněním |
+| `409` | Konflikt stavu nebo idempotence | Načíst aktuální stav a rozhodnout další krok |
+| `429` | Rate limit | Respektovat `Retry-After`, použít backoff |
+| `5xx` | Chyba služby | Opakovat opatrně, poslat supportu request ID |
+
+Privacy-first detail: chybové příklady nesmí obsahovat skutečné e-maily, jména, adresy, poznámky zákazníků ani části dokumentů. Používej syntetická data a jasně řekni proč.
+
+## HT.5 Developer portál musí mít stejnou retenci a regionální logiku jako produkt
+
+Dokumentace často působí nevinně, ale developer portál může sbírat hodně dat: vyhledávání, přihlášení, generované tokeny, testovací requesty, replay konzole, feedback, support formuláře, analytics, CDN logy a záznamy chyb. Pokud produkt slibuje evropský provoz, portál nesmí být americká datová odbočka s veselým bannerem „powered by pohodlí“.
+
+Udělej pro portál vlastní mini datovou mapu:
+
+- Jaká data vznikají při návštěvě dokumentace?
+- Kde běží vyhledávání a analytics?
+- Ukládají se dotazy ve vyhledávání?
+- Obsahuje API konzole reálné payloady?
+- Jak dlouho držíš testovací requesty?
+- Kdo vidí feedback a chybové reporty?
+- Má portál stejný regionální slib jako produkční API?
+
+Nejbezpečnější varianta pro menší tým: statická dokumentace, self-hostované vyhledávání bez uživatelského profilování, přímé odkazy na changelog, RSS pro změny a oddělené testovací prostředí. Interaktivní API konzoli přidej až ve chvíli, kdy máš jasně vyřešené tokeny, logování, retenci a syntetická data.
+
+## HT.6 Changelog piš pro migraci, ne pro interní pocit výkonu
+
+Changelog není výpis commitů. Vývojáře nezajímá, že „refaktorována serializační vrstva“. Zajímá ho, jestli se mu integrace rozbije, co má změnit a dokdy.
+
+Každá změna API v changelogu má mít:
+
+- typ změny: přidáno, změněno, deprekováno, odstraněno, bezpečnostní upozornění,
+- dotčené endpointy nebo webhook eventy,
+- dopad na klienta,
+- příklad starého a nového chování,
+- datum dostupnosti,
+- datum konce podpory, pokud jde o deprecaci,
+- odkaz na migrační návod.
+
+Privacy-first poznámka: pokud měníš pole, které obsahuje osobní údaje, vysvětli i datový dopad. Například „nové pole je volitelné a nemá se posílat, pokud není potřeba pro konkrétní účel“. Tím zabráníš tomu, aby zákazník začal sbírat víc dat jen proto, že se pole objevilo ve schématu.
+
+## HT.7 Checklist API dokumentace a developer portálu
+
+- Má dokumentace první tutorial, který vede k jedné bezpečné úspěšné integraci?
+- Je OpenAPI kontrakt verzovaný a ověřovaný proti reálnému chování API?
+- Jsou ruční průvodce psané podle úloh zákazníka, ne podle interních modulů?
+- Používají všechny příklady syntetická data a bezpečné nakládání s tokeny?
+- Dokumentují chyby doporučenou reakci klienta, včetně retry pravidel?
+- Je jasně popsáno, které údaje neposílat a proč?
+- Má portál vlastní datovou mapu, retenci a regionální provozní slib?
+- Je changelog použitelný pro migraci, ne jen jako seznam interních aktivit?
+- Existuje RSS nebo přímý odběr změn API bez marketingového trackeru?
+- Testuje někdo pravidelně copy-paste ukázky v čistém prostředí?
+
+## Codyho komentář
+
+Dokumentace je často první skutečný produktový zážitek vývojáře. Pokud je zmatená, zastaralá nebo učí špatné bezpečnostní návyky, API může být technicky krásné a obchodně stejně prohrát. Můj pohled — Cody: nejlepší developer portál není nejinteraktivnější. Je ten, který zákazníkovi rychle ukáže správnou cestu, varuje před nebezpečnými zkratkami a neudělá z dokumentace další datový vysavač.
+
+## Zdroje k příloze
+
+- OpenAPI Initiative — What is OpenAPI: https://www.openapis.org/what-is-openapi
+- OpenAPI Learn — Introduction: https://learn.openapis.org/introduction.html
+- RFC 9457 — Problem Details for HTTP APIs: https://www.rfc-editor.org/rfc/rfc9457.html
+- OWASP API Security Project: https://owasp.org/www-project-api-security/
+
+## Shrnutí přílohy
+
+API dokumentace má být produktový onboarding, ne automaticky vygenerovaný plot z endpointů. Drž kontrakt jako technický zdroj pravdy, průvodce piš podle reálných zákaznických scénářů, všechny příklady dělej bezpečné po copy-paste a portál provozuj se stejnou privacy-first disciplínou jako samotné API.
+
+---
+
+
 ## Pracovní log
+
+- 2026-08-16: Přidána příloha HT o API dokumentaci a developer portálu: OpenAPI kontrakt, první tutorial, bezpečné ukázky, chybové odpovědi, datová mapa portálu, changelog a checklist.
 - 2026-08-16: Přidána příloha HS o regionálním provozu API v Evropě: datové toky, EU regiony, transfery mimo EHP, bezpečné logování, support přístup, failover scénáře, subdodavatelé a privacy-first checklist.
 
 - 2026-08-16: Přidána příloha HR o tenantové izolaci v API: tenant kontext, objektová a property-level autorizace, IDOR negativní testy, cache, exporty, fronty, support přístup, evropská datová mapa a checklist.
