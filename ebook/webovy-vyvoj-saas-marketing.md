@@ -35902,11 +35902,189 @@ Dokumentace je často první skutečný produktový zážitek vývojáře. Pokud
 
 API dokumentace má být produktový onboarding, ne automaticky vygenerovaný plot z endpointů. Drž kontrakt jako technický zdroj pravdy, průvodce piš podle reálných zákaznických scénářů, všechny příklady dělej bezpečné po copy-paste a portál provozuj se stejnou privacy-first disciplínou jako samotné API.
 
+# Příloha HU: Status API a komunikace výpadků bez ticha, paniky a datového exhibicionismu
+
+Výpadek API není jen technická událost. Je to okamžik, kdy zákazník zjišťuje, jestli jsi spolehlivý partner, nebo černá skříňka s hezkou landing page. Malý SaaS tým nemusí mít armádu incident manažerů, ale potřebuje jednu věc: připravený způsob, jak rychle říct, co se děje, koho se to týká, co má zákazník udělat a kdy přijde další update.
+
+Status stránka, status API a incidentové zprávy nejsou marketing. Jsou provozní slib. Atlassian ve své dokumentaci ke Statuspage popisuje incidenty jako způsob, jak udržet zákazníky informované během výpadku, včetně průběžných aktualizací a post-incident reportu: https://support.atlassian.com/statuspage/docs/read-the-statuspage-user-guide/. To je dobrý princip i tehdy, když si status stránku postavíš sám v Evropě a bez zbytečných trackerů.
+
+## HU.1 Status stránka musí běžet mimo hlavní problém
+
+Status stránka, která spadne společně s produkční aplikací, je jako hasicí přístroj zamčený v hořící místnosti. Pro malý privacy-first SaaS stačí jednoduchá statická stránka nebo samostatná služba, ale musí být oddělená od hlavního aplikačního stacku.
+
+Praktické pravidlo:
+
+- produkční appka může běžet na jedné infrastruktuře,
+- status stránka má mít samostatný deploy nebo alespoň oddělený hosting,
+- DNS a doménové nastavení musí být zdokumentované,
+- status stránka nesmí načítat reklamní skripty, sociální widgety ani externí analytiku,
+- incidentové aktualizace musí jít publikovat i tehdy, když hlavní administrace SaaS nefunguje.
+
+U evropského provozu je dobré přidat i datovou odpověď: kdo status stránku hostuje, kde se ukládají odběry notifikací, kdo má právo incident publikovat a jak dlouho se drží historie. Status komunikace vypadá nevinně, ale e-mailové odběry, webhook subscribers a interní komentáře umí rychle vytvořit další databázi osobních údajů. Překvapení? Samozřejmě že ne. Data se množí, když se nikdo nedívá.
+
+## HU.2 Rozděl komponenty podle zákaznického dopadu
+
+Status stránka nemá kopírovat interní architekturu. Zákazník nepotřebuje vědět, že `worker-eu-2` má zvýšenou latenci fronty `billing-retry-v3`, pokud neví, co to znamená pro jeho provoz. Komponenty pojmenuj podle funkcí, které zákazník používá.
+
+Lepší komponenty:
+
+- veřejné API,
+- dashboard a administrace,
+- přihlášení a správa účtů,
+- webhook doručování,
+- importy a exporty,
+- transakční e-maily,
+- developer portál a dokumentace.
+
+Horší komponenty:
+
+- Kubernetes cluster,
+- primární databáze,
+- Redis,
+- queue worker,
+- vendor X,
+- `api-prod-1`.
+
+Interní názvy si nech pro incident kanál. Veřejná komunikace má vysvětlit dopad: „nové exporty se zpožďují“, „webhooky se doručují opakovaně“, „přihlášení přes SSO selhává části zákazníků“. Když zákazník pochopí dopad, nemusí hádat, jestli má zastavit vlastní proces.
+
+## HU.3 Status API je pro zákazníkovu automatizaci, ne pro dekoraci
+
+Pokud máš technické zákazníky, dej jim strojově čitelný status. Může to být jednoduché JSON API, RSS feed nebo obojí. Atlassian Status API například zveřejňuje souhrn stavu, komponenty, incidenty a plánované údržby přes veřejné endpointy: https://status.atlassian.com/api. Nemusíš kopírovat celý model, ale princip je užitečný: člověk čte stránku, systém čte API.
+
+Minimální status endpoint může vracet:
+
+```json
+{
+  "status": "degraded",
+  "updated_at": "2026-08-16T16:30:00Z",
+  "components": [
+    {
+      "name": "Public API",
+      "status": "degraded",
+      "impact": "Requests creating exports may be delayed."
+    }
+  ],
+  "incidents": [
+    {
+      "id": "inc_2026_08_16_exports",
+      "state": "investigating",
+      "next_update_at": "2026-08-16T17:00:00Z"
+    }
+  ]
+}
+```
+
+Privacy-first detail: status API nesmí prozrazovat citlivé interní informace, tenanty, počty postižených zákazníků v malých segmentech ani názvy dodavatelů, které by zbytečně pomohly útočníkovi. Říkej dost pro rozhodnutí zákazníka, ne dost pro mapování infrastruktury.
+
+## HU.4 První zpráva nemusí znát příčinu, ale musí znát dopad
+
+Nejhorší incidentová komunikace čeká na dokonalou jistotu. Jenže zákazník mezitím vidí chyby a support dostává dotazy. Atlassian v tipech pro incidentovou komunikaci doporučuje komunikovat brzy, často a přesně, včetně shrnutí známého dopadu a dalšího očekávaného updatu: https://support.atlassian.com/statuspage/docs/incident-communication-tips/.
+
+První zpráva nemusí obsahovat root cause. Má obsahovat:
+
+- co je ovlivněné,
+- koho se to pravděpodobně týká,
+- co funguje dál,
+- jestli hrozí ztráta dat nebo bezpečnostní riziko,
+- kdy přijde další update,
+- kam nemají zákazníci posílat citlivá data.
+
+Špatně:
+
+> „Zaznamenali jsme technické potíže. Pracujeme na opravě.“
+
+Lépe:
+
+> „Od 16:12 UTC evidujeme zvýšenou chybovost při vytváření exportů přes veřejné API. Čtení dat a dashboard fungují. Zatím nemáme známku ztráty dat ani bezpečnostního incidentu. Další update dáme do 30 minut.“
+
+Tohle není slabost. To je dospělost. Přiznáváš nejistotu, ale dáváš rámec.
+
+## HU.5 Incidentové šablony šetří hlavu, když hlava hoří
+
+Během incidentu se špatně vymýšlí krásná čeština, angličtina a ještě právně opatrné věty. Připrav si šablony dopředu. Ne proto, aby komunikace zněla roboticky, ale aby nevynechala důležité body.
+
+Šablona prvního updatu:
+
+> Od `[čas UTC]` řešíme problém s `[komponenta]`. Dopad: `[konkrétní zákaznický dopad]`. Funkční zůstává `[co funguje]`. Aktuálně `[vyšetřujeme / opravujeme / sledujeme obnovu]`. Nemáme potvrzenou ztrátu dat ani neoprávněný přístup; pokud se to změní, uvedeme to explicitně. Další update: `[čas]`.
+
+Šablona vyřešení:
+
+> Problém s `[komponenta]` je od `[čas UTC]` vyřešený. Dopad trval `[doba]` a týkal se `[rozsah bez zbytečné identifikace]`. Následuje kontrola front, logů a zákaznických dopadů. Pokud potřebujete ověřit konkrétní operaci, pošlete nám korelační ID, ne payload ani osobní údaje.
+
+Šablona postmortemu:
+
+- co se stalo,
+- jaký byl dopad,
+- kdy incident začal, kdy byl detekován a kdy skončil,
+- co fungovalo při reakci,
+- co se změní,
+- jak se ověří, že se změna opravdu stala.
+
+## HU.6 Plánovaná údržba musí být nudná a předvídatelná
+
+Plánovaná údržba není incident, pokud ji zákazník ví dopředu, chápe dopad a má možnost se připravit. U API produktů je dobré zveřejnit údržbu ve status stránce, přes RSS/status API a případně e-mailem správcům účtu. Ne přes reklamní newsletter. Tohle není kampaň na letní slevu na downtime.
+
+Dobré oznámení údržby obsahuje:
+
+- přesný čas v UTC a lokálním čase hlavní cílovky,
+- očekávanou délku,
+- dotčené komponenty,
+- dopad na čtení, zápis, webhooky, fronty a exporty,
+- doporučené kroky pro zákazníky,
+- rollback plán na úrovni slibu, ne interního detailu,
+- kontakt pro kritické integrace.
+
+Pokud jde o evropský provoz, přidej i větu, zda údržba mění region, dodavatele, retenci logů nebo datové toky. Většinou odpověď zní „ne“. Právě proto je dobré ji říct: zákazník nemusí hádat.
+
+## HU.7 Retence incidentů je produktová paměť, ne skládka
+
+Historie incidentů pomáhá důvěře, supportu i internímu učení. Zároveň v ní nemají bydlet citlivé detaily navždy. Veřejná historie má držet dopad, časovou osu, komponenty a opatření. Interní incident dokumentace může být detailnější, ale musí mít vlastní přístupová práva a retenci.
+
+Rozumné rozdělení:
+
+- **Veřejný status:** stručný dopad, časová osa, komponenty, vyřešení, postmortem pro významné incidenty.
+- **Zákaznická komunikace:** konkrétní dopady pro daný účet, bez veřejného odhalení jiných tenantů.
+- **Interní postmortem:** technické detaily, log odkazy, rozhodnutí, úkoly a vlastníci.
+- **Bezpečnostní evidence:** odděleně, pokud vznikne podezření na bezpečnostní nebo datový incident.
+
+HTTP status kódy samy incident nevysvětlí, ale musí být konzistentní. RFC 9110 definuje sémantiku HTTP včetně status kódů a je dobrý základ pro to, aby API rozlišovalo chyby klienta, serveru a dočasnou nedostupnost: https://datatracker.ietf.org/doc/rfc9110/. Status stránka pak překládá technickou signalizaci do lidského dopadu.
+
+## HU.8 Checklist status API a komunikace výpadků
+
+Před dalším incidentem, ne až během něj, si projdi:
+
+- Má status stránka oddělený provoz od hlavní aplikace?
+- Existuje veřejný nebo zákaznický status endpoint, RSS feed nebo jiný strojově čitelný kanál?
+- Jsou komponenty pojmenované podle zákaznického dopadu?
+- Umíš publikovat incident i při výpadku hlavní administrace?
+- Máš připravené šablony pro první update, průběžný update, vyřešení a postmortem?
+- Obsahuje první update dopad, rozsah, bezpečnostní/datovou větu a čas další aktualizace?
+- Neprozrazuje status komunikace interní infrastrukturu, tenanty nebo citlivé počty?
+- Mají odběry status notifikací vlastní privacy text, právní základ a retenci?
+- Umí support zákazníkovi říct, jaké korelační ID poslat místo payloadu?
+- Je plánovaná údržba publikovaná s dopadem na API, webhooky, fronty a exporty?
+
+## Codyho komentář
+
+Můj pohled — Cody: status stránka je místo, kde se pozná rozdíl mezi „máme monitoring“ a „umíme se chovat k zákazníkům“. Monitoring křičí dovnitř. Status komunikace mluví ven. Když venku mlčíš, zákazník si příběh dopíše sám — a jeho verze bývá výrazně horší než realita. Internet má v tomhle fantazii jako scenárista katastrofického filmu.
+
+## Zdroje k příloze
+
+- Atlassian Support — Statuspage user guide: https://support.atlassian.com/statuspage/docs/read-the-statuspage-user-guide/
+- Atlassian Support — Incident communication tips: https://support.atlassian.com/statuspage/docs/incident-communication-tips/
+- Atlassian Status API documentation: https://status.atlassian.com/api
+- RFC 9110 — HTTP Semantics: https://datatracker.ietf.org/doc/rfc9110/
+
+## Shrnutí přílohy
+
+Status API a incidentová komunikace jsou součástí produktu, ne bokovka pro horší den. Privacy-first SaaS má mít oddělenou status stránku, komponenty podle zákaznického dopadu, strojově čitelný stav, připravené šablony, jasnou kadenci aktualizací, střídmé veřejné informace, bezpečné zacházení s odběry notifikací a historii incidentů bez citlivých detailů. Dobrý status neřeší jen výpadek; chrání důvěru.
+
 ---
 
 
 ## Pracovní log
 
+- 2026-08-16: Přidána příloha HU o status API a komunikaci výpadků: oddělený provoz status stránky, komponenty podle dopadu, strojově čitelný stav, šablony incidentů, plánovaná údržba, retence a privacy-first checklist.
 - 2026-08-16: Přidána příloha HT o API dokumentaci a developer portálu: OpenAPI kontrakt, první tutorial, bezpečné ukázky, chybové odpovědi, datová mapa portálu, changelog a checklist.
 - 2026-08-16: Přidána příloha HS o regionálním provozu API v Evropě: datové toky, EU regiony, transfery mimo EHP, bezpečné logování, support přístup, failover scénáře, subdodavatelé a privacy-first checklist.
 
