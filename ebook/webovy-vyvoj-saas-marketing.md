@@ -34850,7 +34850,168 @@ Asynchronní API joby jsou správná odpověď na dlouhé, drahé nebo nejisté 
 ---
 
 
+# Příloha HO: Nahrávání a stahování souborů v API bez malware bufetu, datového přelivu a nekonečných příloh
+
+Souborové API vypadá jednoduše: uživatel něco nahraje, aplikace to uloží, někdo jiný si to stáhne. V praxi je to jedna z nejrychlejších cest, jak si do SaaS přinést malware, osobní údaje navíc, drahé úložiště, pomalé requesty a support otázky typu „proč si účetní stáhla soubor, který neměla vidět“. Veselé jak pondělní deploy bez rollbacku.
+
+Privacy-first přístup neříká „zakážeme soubory“. Říká: každý upload má účel, limit, vlastníka, bezpečnou cestu zpracování, oprávnění ke stažení a retenční pravidlo. Soubor není neutrální blob. Je to krabice s neznámým obsahem, kterou ti někdo právě podal přes internet.
+
+## HO.1 Nejprve urči účel souboru, ne bucket
+
+Než navrhneš endpoint, pojmenuj typ souborové práce. Fakturační příloha, avatar, importní CSV, smlouva, support screenshot, export dat a interní auditní dokument mají úplně jiný rizikový profil. Pokud všechny skončí v jednom bucketu s jedním pravidlem, nemáš architekturu. Máš digitální sklep.
+
+Praktická mapa souborů:
+
+| Typ souboru | Typický účel | Riziko | Retence |
+| --- | --- | --- | --- |
+| Avatar nebo logo | vizuální identita účtu | nízké až střední | dokud existuje účet nebo značka |
+| Importní CSV | jednorázový vstup do zpracování | vysoké | smazat po validaci nebo krátké lhůtě |
+| Export dat | přenositelnost a reporting | vysoké | expirovat v řádu dnů podle účelu |
+| Support příloha | diagnostika problému | střední až vysoké | navázat na tiket a retenční politiku supportu |
+| Smlouva nebo faktura | právní a účetní doklad | vysoké | podle právní a účetní povinnosti |
+
+Tahle tabulka má být součást datové mapy. U každé kategorie napiš: kdo může nahrát, kdo může stáhnout, kde se soubor ukládá, zda se skenuje, kdy se maže a zda se smí použít v testech nebo AI zpracování. Správná odpověď na poslední dvě části bývá často „ne, Cody, nebuď datový křeček“.
+
+## HO.2 Validuj soubor ve více vrstvách
+
+Nespoléhej na název souboru ani na `Content-Type` od klienta. Klient může tvrdit, že posílá `image/png`, ale realita může být ZIP bomba, skript, dvojitá přípona nebo soubor, který se tváří jako něco jiného. OWASP File Upload Cheat Sheet doporučuje kombinovat allowlist přípon, kontrolu typu obsahu, validaci podpisu souboru, přejmenování, limity velikosti a ukládání mimo webroot: https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html
+
+Bezpečný upload pipeline:
+
+1. Ověř oprávnění k uploadu ještě před čtením velkého těla requestu.
+2. Zkontroluj maximální velikost podle typu souboru a tarifu.
+3. Použij allowlist přípon a očekávaných MIME typů.
+4. Ověř skutečný typ podle signatury souboru, pokud to formát umožňuje.
+5. Přejmenuj soubor na interní ID, nepoužívej původní název jako cestu.
+6. Ulož soubor do karantény nebo privátního úložiště.
+7. Spusť skenování a doménovou validaci před zpřístupněním.
+8. Zapiš auditní metadata bez ukládání citlivého obsahu do logů.
+
+Původní název souboru může zůstat jako zobrazovaný údaj, ale ber ho jako uživatelský text: escapovat, nezapisovat do cesty, nepoužívat jako unikátní klíč a neposílat do logů bez důvodu.
+
+## HO.3 Přímý upload do úložiště odděl od produktového rozhodnutí
+
+U větších souborů je často lepší nepřenášet data přes aplikační server. API může vydat krátkodobý upload URL a klient nahraje soubor přímo do privátního objektového úložiště. To šetří výkon, ale nesmí to obejít pravidla produktu.
+
+Dobrý flow:
+
+```http
+POST /v1/files/upload-intents
+```
+
+```json
+{
+  "upload_id": "upl_01JSAFE",
+  "upload_url": "https://storage.example/upload/...",
+  "expires_at": "2026-08-16T10:15:00Z",
+  "max_bytes": 10485760,
+  "allowed_content_types": ["text/csv"],
+  "purpose": "contacts_import"
+}
+```
+
+Po nahrání klient zavolá potvrzení:
+
+```http
+POST /v1/files/upl_01JSAFE/complete
+```
+
+Teprve tam server ověří, že soubor opravdu existuje, sedí velikost, typ, vlastník, účel a stav skenu. Upload URL je jen dopravní lístek. Ne souhlas, že se soubor stane součástí produktu.
+
+Privacy-first detail: URL pro upload a download mají být krátkodobé, vázané na konkrétní objekt a účel, nepředvídatelné a nepoužívané jako trvalý odkaz v zákaznické komunikaci. Pokud zákazník potřebuje trvalý přístup, dej mu produktovou stránku s autentizací, ne nesmrtelný podepsaný odkaz.
+
+## HO.4 Download je autorizovaná akce, ne statický odkaz
+
+Stahování souboru musí projít stejnou autorizační logikou jako čtení objektu, ke kterému soubor patří. Nestačí, že uživatel zná URL. To platí hlavně pro exporty, faktury, smlouvy, přílohy ticketů a reporty.
+
+Kontroly před stažením:
+
+- uživatel patří do správného tenanta,
+- má roli nebo vztah k objektu,
+- soubor není v karanténě, expirovaný nebo označený ke smazání,
+- účel stažení odpovídá produktu,
+- akce se zapíše do auditní stopy, pokud jde o citlivý dokument,
+- odpověď nenutí prohlížeč soubor inline zobrazit, pokud je bezpečnější stažení.
+
+Hlavička `Content-Disposition` umožňuje řídit, zda se obsah zobrazí inline nebo stáhne jako příloha; MDN dokumentuje i použití parametru `filename` pro navržený název souboru: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Disposition. U neznámých nebo citlivých souborů preferuj `attachment` a bezpečně generovaný název.
+
+Příklad:
+
+```http
+Content-Type: application/pdf
+Content-Disposition: attachment; filename="invoice-2026-08.pdf"
+Cache-Control: private, no-store
+```
+
+`Cache-Control` nepřidávej podle nálady, ale podle citlivosti. Export zákaznických dat nechce skončit ve sdílené cache. Obrázek veřejného loga může mít úplně jiný režim.
+
+## HO.5 Importní chybové reporty nesmí znovu vyexportovat osobní údaje
+
+Importy lákají k pohodlnému chybovému reportu: vezmeme původní CSV, přidáme sloupec `error` a vrátíme ho zákazníkovi. Někdy je to užitečné. Jindy tím znovu vystavíš kompletní osobní údaje, které se systém snažil zpracovat jen jednorázově.
+
+Bezpečnější varianty:
+
+- vracej číslo řádku, název sloupce a kód chyby,
+- zobraz krátký náhled jen pro oprávněného uživatele,
+- maskuj hodnoty, které nejsou potřeba pro opravu,
+- nastav expiraci reportu,
+- odděl validační chyby od interních chyb,
+- umožni stáhnout report jen tomu, kdo má právo vidět původní data.
+
+Příklad chybového řádku:
+
+```json
+{
+  "row": 42,
+  "field": "email",
+  "code": "invalid_format",
+  "message": "E-mail nemá platný formát.",
+  "sample": "jo***@example.cz"
+}
+```
+
+Cílem není dělat zákazníkovi hádanku. Cílem je dát mu dost informací k opravě bez toho, aby každý chybový report byl novým exportem celé databáze.
+
+## HO.6 Soubory netahej do logů, promptů ani testovacích prostředí
+
+Soubor často obsahuje víc citlivých dat než běžný formulář. Screenshot může ukázat celé CRM. CSV import může obsahovat zákazníky, zaměstnance nebo zdravotní poznámky. PDF smlouva může mít podpisy a osobní adresy. Proto se k souborům chovej jako k vysokému riziku už ve výchozím nastavení.
+
+Pravidla pro provoz:
+
+- do logů zapisuj `file_id`, velikost, typ, účel, stav a vlastníka, ne obsah,
+- v testech používej syntetické soubory,
+- support přílohy otevírej přes auditovaný přístup,
+- AI zpracování zapínej jen po jasném účelu a s minimalizovaným obsahem,
+- skeny malware a validace spouštěj v izolovaném prostředí,
+- raw uploady maž podle retenčního pravidla, ne podle toho, kdy si někdo vzpomene.
+
+Codyho komentář: největší souborové riziko často není hacker v kapuci. Je to dobře míněný interní návyk „pošli mi ten export do Slacku, mrknu na to“. Privacy-first tým má pro soubory bezpečnou cestu právě proto, aby lidé nemuseli improvizovat.
+
+## HO.7 Checklist souborového API
+
+- Má každá kategorie souboru jasný účel, vlastníka, riziko a retenční dobu?
+- Ověřuje upload oprávnění, velikost, allowlist typů, signaturu a bezpečný interní název?
+- Ukládají se soubory do privátního úložiště nebo karantény, ne jako veřejný webroot bufet?
+- Má přímý upload krátkodobý intent a následné serverové potvrzení?
+- Prochází download objektovou autorizací podle tenanta, role a vztahu k souboru?
+- Používáš bezpečné `Content-Disposition`, `Content-Type` a cache hlavičky podle citlivosti?
+- Jsou importní chybové reporty minimalizované, maskované a expirované?
+- Neobsahují logy, testy, support kanály ani AI prompty raw soubory bez jasného účelu?
+- Existuje pravidelný úklid nedokončených uploadů, expirovaných exportů a starých support příloh?
+
+## Zdroje k příloze
+
+- OWASP File Upload Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html
+- MDN — `Content-Disposition` header: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Disposition
+- RFC 9110 — HTTP Semantics, `Content-Type`: https://www.rfc-editor.org/rfc/rfc9110.html#name-content-type
+
+## Shrnutí přílohy
+
+Souborové API potřebuje víc než endpoint a bucket. Potřebuje účel, vrstvenou validaci, soukromé úložiště, krátkodobé upload a download odkazy, objektovou autorizaci, bezpečné hlavičky, malware sken, střídmé chybové reporty a retenční úklid. Privacy-first upload není „vezmi cokoliv a ulož to navždy“. Je to kontrolovaný vstup do systému, který neudělá ze souborů skládku dat ani loterii oprávnění.
+
+
 ## Pracovní log
+- 2026-08-16: Přidána příloha HO o souborovém API: účel souborů, vrstvená validace uploadů, krátkodobé upload/download odkazy, autorizace stahování, minimalizované importní reporty, bezpečné logování, retence a checklist.
 - 2026-08-16: Přidána příloha HN o asynchronních API jobech: rozhodnutí sync/async, `202 Accepted`, stavový model, idempotentní spouštění, bezpečné výsledky, problem details, monitoring, retence a privacy-first checklist.
 - 2026-08-16: Přidána příloha HM o bezpečných webhookách: event kontrakt, ověření podpisu nad raw body, replay ochrana, rychlý příjem přes frontu, idempotentní zpracování, minimální ukládání payloadů, odchozí webhooky a checklist.
 
