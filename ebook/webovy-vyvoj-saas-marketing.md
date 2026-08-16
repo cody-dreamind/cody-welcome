@@ -35198,7 +35198,201 @@ Rate limit je jeden z těch detailů, které nikdo neocení, dokud chybí. Pak h
 Rate limity chrání dostupnost, férovost, náklady a bezpečnost API. Dobrý návrh odděluje tempo od kvót, vrací opravitelné chyby, učí klienty bezpečný retry, omezuje drahé operace a drží observability střídmou. Privacy-first varianta navíc neukazuje víc identit a payloadů, než je nutné pro provozní rozhodnutí.
 
 
+# Příloha HQ: Zákaznický audit log bez šmírovací kroniky, forenzního šumu a právního bolehlavu
+
+Audit log je časová osa důležitých akcí v produktu. Pomáhá zákazníkovi zjistit, kdo změnil nastavení, kdo pozval nového uživatele, kdy proběhl export, proč zmizel projekt nebo odkud přišel podezřelý přístup. Není to ale univerzální skládka všeho, co systém viděl. Když do audit logu bez rozmyslu nasypeš každý request, payload a IP adresu, vyrobíš privacy problém s pěkným filtrem nahoře. Gratuluju, máš tabulku „možná důkaz, možná minové pole“.
+
+Privacy-first audit log říká: zaznamenávej rozhodnutí a dopady, ne celé zákaznické obsahy. Ukaž zákazníkovi dost kontextu pro kontrolu a bezpečnost, ale nesbírej víc, než umíš obhájit účelem, retencí a přístupovými pravidly.
+
+## HQ.1 Nejdřív napiš, komu audit log slouží
+
+Audit log může sloužit několika skupinám, ale každá potřebuje jiný detail:
+
+- Administrátor zákazníka chce vědět, kdo v tenantu udělal důležitou změnu.
+- Support potřebuje ověřit průběh incidentu bez čtení zákaznického obsahu.
+- Bezpečnostní tým hledá podezřelé vzorce přístupů a změn oprávnění.
+- Produktový tým chce méně ticketů typu „něco se samo změnilo“.
+- Právní nebo compliance role chce doložit, že existuje kontrolní stopa.
+
+Z toho plyne základní pravidlo: audit log není analytika chování. Když chceš vědět, jak často lidé klikají na tlačítko, patří to do produktové analytiky s vlastním měřicím plánem. Audit log řeší významné události, které mění stav, bezpečnost, přístup, data nebo peníze.
+
+Příklad rozdělení:
+
+| Událost | Patří do audit logu? | Proč |
+| --- | --- | --- |
+| Uživatel změnil fakturační e-mail | Ano | Důležitá změna účtu a komunikace |
+| Admin pozval nového člena | Ano | Změna přístupu k datům |
+| Uživatel otevřel dashboard | Spíš ne | Běžné používání, často analytika |
+| Někdo exportoval seznam zákazníků | Ano | Citlivá datová operace |
+| Uživatel posunul kurzor v editoru | Ne | Šum a zbytečný sběr |
+| API token selhal na autorizaci | Ano, agregovaně nebo bezpečně | Bezpečnostní signál bez payloadu |
+
+Codyho pravidlo: do audit logu patří akce, kterou by zákazník chtěl vysvětlit u kávy, incidentu nebo faktury. Ne každý klik, který se zatřpytil v JavaScriptu.
+
+## HQ.2 Událost popisuj jako větu, ne jako databázový vývržek
+
+Dobrá auditní událost má stabilní strukturu a zároveň čitelný význam. Nepotřebuje raw SQL, celý JSON request ani snapshot objektu před a po změně. Potřebuje odpovědět na šest otázek: kdo, co, kde, kdy, nad čím a s jakým výsledkem.
+
+Doporučené minimum:
+
+```json
+{
+  "id": "evt_01K...",
+  "occurred_at": "2026-08-16T12:30:00Z",
+  "actor": {
+    "type": "user",
+    "id": "usr_123",
+    "display": "jana@example.test"
+  },
+  "tenant_id": "ten_456",
+  "action": "member.invited",
+  "target": {
+    "type": "member",
+    "id": "mem_789"
+  },
+  "result": "success",
+  "request_id": "req_01K...",
+  "metadata": {
+    "role": "editor"
+  }
+}
+```
+
+V UI z toho udělej lidskou větu:
+
+> „Jana pozvala člena s rolí Editor. 16. 8. 2026, 12:30 UTC.“
+
+Do metadata dávej jen hodnoty, které pomáhají pochopit rozhodnutí. U změny role stačí stará a nová role. U exportu stačí typ exportu, počet řádků v rozmezí nebo kategorie dat. Nepřidávej celý export, seznam e-mailů ani text dokumentu. Audit log má být lupa na změnu, ne kopie trezoru nalepená na dveřích.
+
+## HQ.3 Actor není vždycky člověk
+
+V malém SaaS brzy zjistíš, že akce nedělají jen lidé. Dělají je API tokeny, systémové joby, webhooky, importy, support role, automatizace a někdy i migrace. Když všechno uložíš jako `user_id`, budeš za půl roku vysvětlovat „uživatel null provedl 14 000 změn“. To je mysteriózní seriál, ne audit.
+
+Rozlišuj typ aktéra:
+
+- `user`: přihlášený člověk v zákaznickém účtu.
+- `api_token`: integrační token, ideálně s aliasem a vlastníkem.
+- `system`: plánovaný job, migrace nebo interní automatizace.
+- `support`: dočasný support access s důvodem a schválením.
+- `webhook`: externí událost přijatá přes ověřený webhook.
+
+Příklad:
+
+| Actor type | Bezpečný popis v UI | Co neukazovat |
+| --- | --- | --- |
+| `user` | „Jana Nováková“ nebo pracovní e-mail | Session token, celé zařízení, raw IP bez důvodu |
+| `api_token` | „Token: Skladová integrace“ | Secret, poslední celé znaky tokenu |
+| `system` | „Automatický úklid expirovaných exportů“ | Interní hostname a stack trace |
+| `support` | „Support access: ticket #8421“ | Soukromé poznámky supportu |
+| `webhook` | „Webhook od platební brány, ověřený podpis“ | Celý payload platby |
+
+Důležité je, aby zákazník poznal původ změny. Zároveň nesmí audit log sám vytvářet nový kanál pro únik tajemství.
+
+## HQ.4 Retence je součást produktu, ne úklid po požáru
+
+Audit logy často přežijí všechno: staré databáze, staré zaměstnance i staré produktové názvy. Jenže i auditní záznam může obsahovat osobní údaje nebo bezpečnostně citlivé informace. Proto potřebuje retenční pravidlo stejně jako kontaktní formulář, faktura nebo support ticket.
+
+Praktický model pro malý B2B SaaS:
+
+| Kategorie události | Příklad | Retence |
+| --- | --- | --- |
+| Bezpečnostní přístup | přihlášení, MFA změna, API token vytvořen | 12–24 měsíců podle rizika a smluv |
+| Administrace účtu | člen přidán/odebrán, role změněna | po dobu vztahu + omezené období |
+| Datové operace | export, import, hromadné smazání | 12–36 měsíců podle citlivosti |
+| Fakturace | změna fakturačních údajů | sladit s účetními povinnostmi mimo audit log |
+| Provozní šum | neúspěšné validace, běžné čtení | krátce, agregovaně nebo vůbec |
+
+Pokud zákazník účet ruší, audit log nevyhazuj ani nedrž navždy automaticky. Napiš pravidlo: co je součást exportu zákazníka, co zůstává kvůli bezpečnosti nebo právnímu nároku a kdy se anonymizuje nebo smaže. Evropská privacy-first cesta není „smažeme všechno okamžitě“ ani „necháme všechno navždy“. Je to popsaný, odůvodněný a proveditelný proces.
+
+## HQ.5 Přístup k audit logu má být produktová funkce s oprávněním
+
+Audit log často obsahuje citlivé stopy: kdo je admin, kdy někdo exportoval data, které integrace existují, kdy proběhly změny oprávnění. Proto ho neukazuj každému uživateli jen proto, že je „v týmu“.
+
+Nastav samostatné oprávnění, například `audit_log.read`. U vyšší citlivosti přidej:
+
+- omezení na role Owner, Admin nebo Security;
+- filtrování podle organizační jednotky, pokud produkt podporuje více týmů v jednom tenantu;
+- ochranu exportu audit logu samostatným oprávněním;
+- zaznamenání samotného exportu audit logu jako auditní událost;
+- krátkodobé odkazy pro stažení exportu;
+- maskování osobních údajů podle role.
+
+Příklad policy věty:
+
+> „Audit log může číst pouze Owner a uživatelé s oprávněním Security review. Export audit logu vyžaduje druhé potvrzení a vytvoří vlastní auditní záznam.“
+
+Tohle zní přísně, ale dává to smysl. Audit log je mapa kontrolních bodů systému. Mapu trezoru nedáváš každému, kdo umí otevřít recepci.
+
+## HQ.6 Vyhledávání a export drž užitečné, ale střídmé
+
+Zákazník bude chtít audit log filtrovat. Bez filtrů je to nekonečná nudle událostí, která vypadá důležitě a používá se zoufale. Nabídni filtry, které odpovídají reálným incidentům:
+
+- časové období,
+- actor type a actor,
+- akce nebo kategorie akcí,
+- cílový objekt,
+- výsledek `success` / `failed` / `denied`,
+- request ID nebo correlation ID,
+- integrace nebo API token alias.
+
+Privacy-first omezení:
+
+- Fulltext přes payloady nedělej, pokud payloady vůbec neukládáš. Což je správně.
+- Export omez rozsahem a expirací odkazu.
+- CSV generuj s jasnými sloupci, ne s volným blobem metadat.
+- U API pro audit log stránkuj cursor-based a nastav maximální velikost stránky.
+- U citlivých filtrů loguj, kdo audit log četl nebo exportoval.
+
+Dobrý export audit logu je důkazní pomůcka, ne druhá databáze zákazníka v CSV kabátku.
+
+## HQ.7 Audit log testuj negativně
+
+Audit log se často testuje jen tak, že někdo klikne na změnu role a zkontroluje, že „něco přibylo“. To nestačí. Testuj hlavně hranice:
+
+- Uživatel bez oprávnění audit log nevidí.
+- Uživatel z jiného tenantu nevidí cizí události ani přes přímé ID.
+- Export audit logu respektuje stejné filtry a oprávnění jako UI.
+- Citlivé hodnoty jsou maskované i v API odpovědi, nejen v komponentě.
+- Neúspěšné autorizační pokusy nevypisují existenci cizích objektů.
+- Support access vytváří auditní stopu s důvodem a časem.
+- Retenční job maže nebo anonymizuje staré události podle pravidel.
+- Změna schématu události nerozbije staré záznamy v UI.
+
+Přidej i test na „příliš upovídané metadata“. Jednoduchý allowlist klíčů pro každou akci je často lepší než volné `metadata: any`. Volné metadata jsou jako firemní lednice: někdo do nich vždycky dá něco, co tam rozhodně nemělo být.
+
+## HQ.8 Checklist zákaznického audit logu
+
+Před spuštěním audit logu si projdi:
+
+- Má každá auditní událost jasný účel a zákaznický význam?
+- Rozlišuje schéma aktéra: člověk, token, systém, support a webhook?
+- Ukládáš rozhodnutí, metadata a výsledek místo raw payloadů a zákaznického obsahu?
+- Má audit log samostatné oprávnění pro čtení a export?
+- Zaznamenává se čtení nebo export audit logu u citlivých tenantů?
+- Má každá kategorie událostí retenční dobu a plán mazání/anonymizace?
+- Jsou filtry praktické pro incidenty, ne pro šmírování běžného používání?
+- Je export omezený rozsahem, expirační dobou a bezpečným formátem?
+- Existují negativní testy tenantové izolace, maskování a oprávnění?
+- Umí support použít `request_id` bez přístupu k zákaznickému obsahu?
+
+## Codyho komentář
+
+Audit log je skvělý sluha a výborný detektor produktového chaosu. Když neumíš auditní událost pojmenovat krátkou větou, možná nemáš problém s logováním, ale s návrhem funkce. A jestli do logu ukládáš celý payload „pro jistotu“, právě jsi si koupil budoucí incident na splátky.
+
+## Zdroje k příloze
+
+- OWASP Logging Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+- OWASP API Security Top 10 2023 — Broken Object Property Level Authorization: https://owasp.org/API-Security/editions/2023/en/0xa3-broken-object-property-level-authorization/
+- NIST SP 800-92 — Guide to Computer Security Log Management: https://csrc.nist.gov/pubs/sp/800/92/final
+
+## Shrnutí přílohy
+
+Zákaznický audit log má ukazovat významné změny, přístupy a bezpečnostní události bez toho, aby se stal skrytou kopií zákaznických dat. Dobrý návrh definuje účel událostí, stabilní schéma, typ aktéra, bezpečné metadata, oprávnění pro čtení a export, retenční pravidla, použitelné filtry a negativní testy. Privacy-first audit log pomáhá zákazníkovi získat kontrolu nad provozem, ne provozovat detailní kroniku každého kliknutí.
+
+
 ## Pracovní log
+
+- 2026-08-16: Přidána příloha HQ o zákaznickém audit logu: účel událostí, schéma aktéra, bezpečná metadata, retence, oprávnění, filtrování, export, negativní testy a privacy-first checklist.
 
 - 2026-08-16: Přidána příloha HP o rate limitech a kvótách API: vrstvy limitů, `429` a `Retry-After`, rozdíl mezi kvótou a tempem, backoff, ochrana před resource consumption útoky, bezpečná observability a checklist.
 - 2026-08-16: Přidána příloha HO o souborovém API: účel souborů, vrstvená validace uploadů, krátkodobé upload/download odkazy, autorizace stahování, minimalizované importní reporty, bezpečné logování, retence a checklist.
