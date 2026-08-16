@@ -33909,7 +33909,179 @@ Nejlepší API autorizace je nudná ve dvou směrech: vývojář přesně ví, k
 API autorizace musí rozhodovat podle identity, akce, objektu, tenanta a aktuálního stavu. Role jsou jen začátek; skutečná ochrana vzniká až v objektové kontrole, tenantově omezených dotazech, jemných scopes, tvrdší bráně pro citlivé akce, negativních testech a bezpečných autorizačních logách. Privacy-first SaaS nechrání data tím, že doufá ve slušnost klienta. Chrání je tím, že každé API volání musí projít jasným, opakovatelným a auditovatelným rozhodnutím.
 
 
+
+# Příloha HJ: Verzování a deprekování API bez rozbitých integrací, tichých deadlineů a zákaznického archeologického klubu
+
+API verze není šuplík na technický nepořádek. Je to veřejný slib: „Takhle se s námi dá integrovat a víme, co se stane, když se produkt změní.“ Malý SaaS často verzování odkládá, protože první zákazníci sedí blízko týmu a každý problém se vyřeší přes Slack, e-mail nebo rychlý patch. Jenže ve chvíli, kdy API používá víc týmů, partnerů nebo automatizací, už změna pole není drobnost. Je to potenciální výpadek cizího procesu.
+
+Privacy-first verzování řeší dvě věci najednou: kompatibilitu a datovou odpovědnost. Když starou verzi držíš příliš dlouho, držíš často i staré datové tvary, staré scope, staré exporty a staré chyby v minimalizaci dat. Když ji vypneš bez plánu, přehodíš náklady na zákazníka. Správný cíl je nudnější: změny dělat předvídatelně, migrační cestu ukázat včas a neměnit data potichu jen proto, že se to zrovna hodí backlogu.
+
+## HJ.1 Verziuj veřejný slib, ne každý interní nápad
+
+Ne všechno potřebuje novou major verzi. Pokud přidáš volitelné pole, nový endpoint nebo nový enum s fallbackem, často stačí changelog a aktualizovaná specifikace. Major verze má přijít ve chvíli, kdy se mění kontrakt, na který se klient mohl oprávněně spoléhat.
+
+Praktické rozlišení:
+
+| Změna | Typicky stačí | Pozor na |
+| --- | --- | --- |
+| nové volitelné pole ve výstupu | changelog | klienty, které padají na neznámých polích |
+| nové povinné pole ve vstupu | nová verze nebo dlouhé migrační okno | staré integrace a formuláře |
+| změna názvu pole | nová verze | mapování v SDK a exportech |
+| změna default řazení | breaking change | stránkování, synchronizace, reporting |
+| odstranění endpointu | deprecation + sunset plán | zákaznické automatizace |
+| zpřísnění oprávnění | bezpečnostní release + jasná komunikace | legitimní integrace se starým scope |
+
+Codyho praktické pravidlo: pokud se zákazník musí ptát „musím kvůli tomu změnit kód?“, napiš migrační poznámku. Pokud odpověď zní „ano“, chovej se k tomu jako k breaking change, i kdyby se vývojářsky zdálo, že „je to jen refaktor“. Refaktor je interní slovo. Zákazníkovi spadl cron.
+
+## HJ.2 Vyber strategii verzí podle toho, kdo API opravdu používá
+
+Neexistuje jediný svatý způsob verzování API. URL verze typu `/v1/invoices` je srozumitelná a dobře se ladí. Header verze umí držet čistší URL, ale hůř se ukazuje v prohlížeči a v jednoduchých ukázkách. Datumové verze se hodí tam, kde chceš přesně navázat chování na okamžik vydání, ale vyžadují disciplínu v dokumentaci.
+
+Nejdřív si odpověz:
+
+- Používají API hlavně interní klienti, zákaznické integrace, nebo veřejní partneři?
+- Potřebuješ držet více major verzí současně?
+- Jak snadno zákazník zjistí, jakou verzi právě volá?
+- Umí tvůj support podle requestu poznat verzi, scope, tenant a klientskou knihovnu?
+- Je verze navázaná i na SDK, dokumentaci a příklady?
+
+Pro malý B2B SaaS často vyhrává jednoduchost:
+
+```http
+GET /api/v1/invoices?limit=50
+Authorization: Bearer sk_live_...
+```
+
+A k tomu odpověď, která pomáhá supportu i zákazníkovi:
+
+```http
+X-Api-Version: 2026-08-16
+X-Request-Id: req_01j8example
+```
+
+Nemusíš cpát všechno do vlastních hlaviček. Důležité je, aby verze nebyla jen dekorace v URL. Musí být napojená na dokumentaci, testy, changelog, SDK a rozhodování o deprecaci.
+
+## HJ.3 Deprecation není vypínač, ale začátek migračního období
+
+Deprecation znamená: „Tuhle věc už nedoporučujeme používat a plánujeme cestu pryč.“ Neznamená to: „zítra to spadne, hodně štěstí.“ RFC 9745 definuje HTTP hlavičku `Deprecation`, která může klientům signalizovat, že resource je nebo bude deprekovaný, a umožňuje odkázat na dokumentaci pomocí link relation `deprecation`: https://www.rfc-editor.org/rfc/rfc9745.html
+
+Když navíc víš, kdy má resource přestat odpovídat, použij `Sunset`. RFC 8594 popisuje hlavičku `Sunset`, která komunikuje očekávaný okamžik, kdy URI pravděpodobně přestane být dostupné: https://www.rfc-editor.org/rfc/rfc8594.html
+
+Příklad odpovědi:
+
+```http
+Deprecation: @1798761599
+Sunset: Thu, 31 Dec 2026 23:59:59 GMT
+Link: <https://developer.example.com/migrations/v1-to-v2>; rel="deprecation"; type="text/html"
+```
+
+Důležité: hlavička sama o sobě nikoho nezachrání. Integrace ji možná nečte. Proto kombinuj signály:
+
+- developer changelog,
+- e-mail technickým kontaktům,
+- upozornění v dashboardu,
+- bezpečné API warningy v odpovědích,
+- SDK warning ve vývojovém režimu,
+- migrační checklist a konkrétní datum.
+
+Privacy-first detail: neposílej warningy do reklamních nástrojů ani produktové analytiky s celým seznamem endpointů zákazníka. Stačí agregovaný provozní signál: „tenant X stále používá deprekovanou verzi Y u endpointů této kategorie“. I migrace se dá dělat bez datového kabaretu.
+
+## HJ.4 Migrační průvodce musí ukázat rozdíl, ne jen novou pravdu
+
+Špatný migrační průvodce říká: „Použijte v2.“ Skvělý průvodce ukazuje konkrétní rozdíl mezi starým a novým světem. Zákazník nechce číst celou dokumentaci znovu. Chce vědět, co se ho týká.
+
+Struktura dobrého průvodce:
+
+1. Co se mění a proč.
+2. Koho se změna týká.
+3. Co zůstává kompatibilní.
+4. Přesné datum deprecation a sunset.
+5. Mapování starých polí na nová.
+6. Ukázky requestů a odpovědí před/po.
+7. Chybové stavy během migrace.
+8. Testovací postup v sandboxu.
+9. Kontakt nebo support cesta pro kritické integrace.
+
+Příklad mapování:
+
+| v1 | v2 | Poznámka |
+| --- | --- | --- |
+| `customer_email` | `customer.contact.email` | volitelné; nemusí být dostupné pro všechny role |
+| `total` | `amount.total` | řetězec s měnou odděleně |
+| `status="paid"` | `payment.status="settled"` | změna doménového jazyka |
+| `created` | `created_at` | ISO 8601 timestamp |
+
+Pokud měníš datový rozsah, napiš to lidsky: „v2 už nevrací e-mail zákazníka v seznamu faktur; detail je dostupný jen s oprávněním `customers:read`“. To není otravná právní poznámka. To je přesně hodnota privacy-first API: méně dat tam, kde nejsou potřeba.
+
+## HJ.5 Deprekuj i dokumentaci, SDK a příklady
+
+OpenAPI umí označovat operace nebo schémata jako deprekované pomocí vlastnosti `deprecated`; aktuální specifikace OpenAPI 3.0.4 popisuje `deprecated` mimo jiné u operací, parametrů i schémat: https://spec.openapis.org/oas/v3.0.4.html
+
+To je dobrý začátek, ale nestačí. Když deprekuješ endpoint, projdi celou integrační plochu:
+
+- OpenAPI specifikaci,
+- ručně psané návody,
+- SDK metody,
+- ukázkové repozitáře,
+- Postman/Bruno kolekce,
+- testovací data,
+- support šablony,
+- onboarding e-maily,
+- pricing a plan capability tabulky.
+
+Jinak zákazník narazí na starý příklad, zkopíruje ho a support dostane ticket „podle dokumentace to nefunguje“. Dokumentace není muzeum. Když endpoint odchází, staré příklady musí buď ukazovat varování, nebo být přesunuté do archivní části s jasným štítkem.
+
+## HJ.6 Měř používání starých verzí, ale nešmíruj integrace
+
+Bez měření nevíš, kdy můžeš starou verzi vypnout. Se špatným měřením zase vytvoříš detailní mapu zákaznických procesů, kterou vůbec nepotřebuješ držet.
+
+Rozumné signály:
+
+- počet requestů na verzi a endpointovou kategorii,
+- počet aktivních tenantů používajících starou verzi,
+- poslední použití staré verze podle tenantu,
+- chybovost staré verze po vydání migračního průvodce,
+- počet aktivních API klíčů bez kontaktu nebo vlastníka.
+
+Čemu se vyhnout:
+
+- ukládání celých payloadů jen kvůli migraci,
+- logování osobních údajů z requestů,
+- spojování API provozu s marketingovým profilem,
+- veřejné zobrazování detailů integrace bez oprávnění,
+- nekonečná retence historických requestů.
+
+Dobrá interní otázka zní: „Umíme zákazníkovi pomoct s migrací, aniž bychom viděli jeho obsah?“ Pokud ano, drž se agregátů, metadat a request ID. Pokud ne, navrhni dočasný support režim s výslovným účelem, omezeným přístupem a auditní stopou.
+
+## HJ.7 Checklist API verzování a deprecace
+
+- [ ] Každá veřejná verze API má vlastní dokumentaci, changelog a testovací scénáře.
+- [ ] Tým má napsané, co se počítá jako breaking change.
+- [ ] Nové verze minimalizují datový rozsah, místo aby slepě kopírovaly starý payload.
+- [ ] Deprekační oznámení obsahuje důvod, dopad, alternativu, termín a migrační průvodce.
+- [ ] Odpovědi deprekovaných endpointů používají vhodné signály, například `Deprecation`, `Sunset` a odkaz na dokumentaci.
+- [ ] OpenAPI, SDK, ukázky a support šablony jsou aktualizované společně.
+- [ ] Používání starých verzí se měří agregovaně a bez ukládání zbytečných payloadů.
+- [ ] Zákazník vidí, které jeho klíče nebo integrace používají starou verzi.
+- [ ] Sunset datum je dostatečně dopředu pro reálný nákupní a vývojový cyklus zákazníka.
+- [ ] Po vypnutí staré verze existuje bezpečný fallback: jasná chyba, archiv dokumentace a support postup.
+
+## Codyho komentář
+
+Verzování API je test dospělosti produktu. Ne proto, že by `/v2` vypadalo dospěle v URL, ale protože ukazuje, jestli tým umí měnit produkt bez toho, aby zákazníkům rozbil provoz. Nejlepší deprecation je skoro nudná: každý ví, co končí, proč to končí, co má udělat a do kdy. Žádné drama, žádné překvapení, žádný „tohle jsme napsali do release notes před třemi měsíci, tak co chcete“. To není komunikace. To je produktový únikový východ namalovaný fixou.
+
+## Zdroje k příloze
+
+- RFC 9745 — The Deprecation HTTP Response Header Field: https://www.rfc-editor.org/rfc/rfc9745.html
+- RFC 8594 — The Sunset HTTP Header Field: https://www.rfc-editor.org/rfc/rfc8594.html
+- OpenAPI Specification 3.0.4: https://spec.openapis.org/oas/v3.0.4.html
+
+## Shrnutí přílohy
+
+API verze jsou závazek vůči zákazníkům, ne jen technické označení. Dobré verzování jasně rozlišuje kompatibilní a breaking změny, vybírá jednoduchou strategii podle reálných integrací, používá deprecation a sunset signály, udržuje migrační průvodce, aktualizuje dokumentaci i SDK a měří staré verze jen v rozsahu nutném k bezpečné migraci. Privacy-first přístup znamená, že nová verze API je příležitost zmenšit datový rozsah, zpřesnit oprávnění a pomoci zákazníkům přejít bez šmírování jejich integrací.
+
 ## Pracovní log
+- 2026-08-16: Přidána příloha HJ o API verzování a deprecaci: breaking changes, strategie verzí, hlavičky Deprecation/Sunset, migrační průvodce, dokumentace, agregované měření a checklist.
 
 - 2026-08-16: Přidána příloha HI o API autorizaci v privacy-first SaaS: objektová a funkční autorizace, tenantové hranice, scopes, admin a support akce, negativní testy, bezpečné logování rozhodnutí a checklist.
 
