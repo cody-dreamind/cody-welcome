@@ -33411,8 +33411,188 @@ Dobře udělaná idempotence je tichá. Uživatel ji nevidí, zákaznická podpo
 
 Idempotence chrání mutační API před duplicitami způsobenými retry, dvojklikem, timeoutem nebo paralelním zpracováním. Nejdřív označ rizikové akce, pak navrhni idempotency key jako dočasný technický token bez osobních údajů, ulož ho atomicky s unikátním indexem, porovnávej hash payloadu a vracej stabilní dokumentované odpovědi. Idempotence nenahrazuje autorizaci, validaci ani limity; v privacy-first SaaS navíc nesmí z idempotency tabulky vzniknout další datové skladiště.
 
+# Příloha HG: API cache hlavičky bez úniku dat, zatuchlých odpovědí a falešné rychlosti
+
+Cache je jedna z nejlevnějších optimalizací výkonu. A taky jedna z nejrychlejších cest, jak omylem ukázat data jednoho zákazníka druhému. Stačí špatně nastavené `Cache-Control`, sdílená CDN před autorizovaným endpointem, zapomenutý `Vary` nebo optimistické „tohle je jen GET, to se může cachovat“. Web pak působí rychle, dokud nepřijde support ticket s větou: „Proč vidím faktury cizí firmy?“ Romantika. Jen trochu trestněprávní.
+
+HTTP caching má jasná pravidla. RFC 9111 popisuje, jak cache ukládá, znovu používá a validuje odpovědi, a MDN prakticky shrnuje direktivy jako `no-store`, `private`, `public`, `max-age`, `s-maxage`, `must-revalidate`, `ETag` a `Vary`. Pro privacy-first SaaS je ale nejdůležitější produktová otázka: komu odpověď patří a co se stane, když ji uvidí někdo jiný?
+
+## HG.1 Cache rozhoduj podle citlivosti, ne podle metody
+
+`GET` neznamená automaticky bezpečné cachování. `GET /pricing` je veřejná stránka. `GET /api/me/invoices` je osobní účetní obsah. `GET /api/admin/users?query=novak` může prozradit, kdo je zákazník. Metoda říká, že request nemění stav serveru. Neříká, že odpověď může ležet ve sdílené cache.
+
+Rozděl endpointy do tří skupin:
+
+| Typ odpovědi | Příklad | Doporučený cache přístup |
+| --- | --- | --- |
+| Veřejný statický obsah | dokumentace, ceník, changelog, veřejné obrázky | `public`, delší `max-age`, verzované URL |
+| Veřejná, ale měnící se data | status page, veřejný katalog, blog RSS | krátký `max-age`, `ETag`, případně `stale-while-revalidate` |
+| Přihlášená nebo tenant-specific data | dashboard, faktury, exporty, tým, billing | většinou `private` nebo `no-store`, žádná sdílená cache |
+
+Praktická věta pro review: „Tahle odpověď může být uložená mimo konkrétní prohlížeč uživatele?“ Pokud odpověď obsahuje zákaznický obsah, osobní údaje, billing, interní stav účtu nebo oprávnění, výchozí odpověď je ne.
+
+## HG.2 `public`, `private` a `no-store` nejsou dekorace
+
+`Cache-Control` je kontrakt s prohlížečem, proxy, CDN i interní gateway. Nepiš ho stylem „něco tam dáme, ať Lighthouse nemudruje“.
+
+Užitečné vzory:
+
+```http
+Cache-Control: public, max-age=31536000, immutable
+```
+
+Použij pro verzované statické assety, kde změna souboru mění i URL nebo hash v názvu. Třeba `/assets/app.4f3a.css`. Nepoužívej pro `/app.css`, pokud ho přepisuješ pod stejným názvem.
+
+```http
+Cache-Control: public, max-age=60, stale-while-revalidate=300
+ETag: "status-v42"
+```
+
+Použij pro veřejná data, kde krátce stará odpověď nevadí a validace šetří server. Typicky veřejná status stránka, dokumentace nebo anonymní katalog.
+
+```http
+Cache-Control: private, no-cache
+ETag: "user-settings-v17"
+```
+
+Použij opatrně pro přihlášená data, která smí držet jen uživatelův prohlížeč a musí se před použitím znovu validovat. Hodí se pro méně citlivé nastavení UI, ne pro exporty, faktury nebo tokeny.
+
+```http
+Cache-Control: no-store
+```
+
+Použij pro citlivé odpovědi: access tokeny, reset hesla, jednorázové odkazy, support impersonation, billing dokumenty, exporty dat, zdravotní/finanční/personální obsah a všechno, co bys nechtěl číst nahlas na týmovém standupu.
+
+## HG.3 `Vary` je hranice mezi správnou cache a loterií
+
+`Vary` říká cache, podle kterých request hlaviček se liší odpověď. Bez něj může cache považovat dvě odpovědi za stejné, i když ve skutečnosti závisí na jazyku, kompresi, autentizaci nebo tenant kontextu.
+
+Bezpečné použití:
+
+```http
+Vary: Accept-Encoding
+```
+
+Tohle je běžné pro kompresi. Cache ví, že gzip a brotli varianta nejsou totéž.
+
+Opatrné použití:
+
+```http
+Vary: Accept-Language
+```
+
+Hodí se pro veřejný lokalizovaný obsah, ale může násobit počet variant. U API je často lepší explicitní parametr nebo stabilní lokalizace v profilu.
+
+Nebezpečná zkratka:
+
+```http
+Vary: Authorization
+```
+
+Technicky může oddělit odpovědi podle autorizační hlavičky, ale v praxi je to křehké a snadno špatně podporované v kombinaci s CDN, proxy pravidly a vlastní cache vrstvou. Pro tenant-specific API je bezpečnější výchozí režim `Cache-Control: private` nebo `no-store` a sdílenou cache povolit jen u konkrétně zreviewovaných endpointů.
+
+Codyho pravidlo: pokud musíš vysvětlovat tři speciální výjimky, proč se přihlášený endpoint může cachovat ve sdílené vrstvě, pravděpodobně si kupuješ budoucí incident se slevou.
+
+## HG.4 ETag šetří výkon, ale nesmí být sledovací otisk
+
+`ETag` je validátor: klient pošle `If-None-Match` a server může vrátit `304 Not Modified`, pokud se obsah nezměnil. To je skvělé pro výkon i bandwidth. Jenže `ETag` je také hodnota, kterou klient opakovaně posílá zpět. Pokud je příliš osobní, stabilní napříč dlouhou dobou nebo sdílená mezi kontexty, může fungovat jako identifikátor.
+
+Praktická pravidla:
+
+- Pro veřejný obsah generuj `ETag` z verze obsahu, hashe souboru nebo revize dokumentu.
+- Pro uživatelská data nepoužívej `ETag`, který obsahuje ID uživatele, e-mail, tenant slug nebo interní primární klíč.
+- U citlivých odpovědí zvaž raději `no-store` bez validátoru.
+- Pokud endpoint vrací různé pole podle oprávnění, validátor musí zohlednit oprávnění i reprezentaci, ne jen ID objektu.
+- Nepoužívej stejný `ETag` pro „admin vidí všechno“ a „běžný člen vidí výřez“.
+
+Příklad průšvihu: `GET /api/customers/123` má `ETag` podle `updated_at` zákazníka. Admin dostane kompletní objekt, člen týmu omezený objekt. Pokud cache nerozlišuje oprávnění, validace a ukládání mohou vracet špatnou reprezentaci. Správně je oddělit cache scope podle role/tenant/reprezentace, nebo endpoint vůbec sdíleně necachovat.
+
+## HG.5 CDN před API zapínej po allowlistu, ne plošně
+
+CDN je výborná pro statické assety a veřejné stránky. Před API ale musí být spíš chirurg než bagr. Plošné pravidlo „cache all GET requests“ je v SaaS skoro vždycky špatný nápad.
+
+Bezpečnější postup:
+
+1. Výchozí pravidlo: API odpovědi se ve sdílené vrstvě necachují.
+2. Vytvoř explicitní allowlist veřejných endpointů, které smí do sdílené cache.
+3. U každého allowlist endpointu napiš účel, TTL, invalidaci, datový rozsah a vlastníka.
+4. Testuj přihlášeného i anonymního uživatele, různé tenanty, různé role a změnu oprávnění.
+5. Loguj cache status bez ukládání tokenů, cookies nebo celých query parametrů s osobními údaji.
+6. Přidej alert na neočekávané cachování odpovědí s `Set-Cookie`, `Authorization` kontextem nebo zákaznickými daty.
+
+Příklad allowlistu:
+
+| Endpoint | Cache | TTL | Poznámka |
+| --- | --- | --- | --- |
+| `/docs/*` | sdílená | 10 minut | veřejná dokumentace, bez cookies |
+| `/assets/*` | sdílená | 1 rok | hashované soubory |
+| `/api/public/status` | sdílená | 30 sekund | veřejný stav služby |
+| `/api/me/*` | zakázaná | žádné | účet uživatele |
+| `/api/tenant/*` | zakázaná výchozí | žádné | tenant-specific data |
+
+## HG.6 Invalidation musí být produktový proces
+
+Nejtěžší část cache není uložení. Nejtěžší je vědět, kdy už uložená odpověď lže. Proto invalidaci neřeš až po prvním incidentu.
+
+Typické strategie:
+
+- Verzované URL pro statické assety: změna obsahu vytvoří novou adresu.
+- Krátké TTL pro veřejná data, kde je drobná zatuchlost přijatelná.
+- Revalidace přes `ETag` nebo `Last-Modified` pro dokumenty a veřejné seznamy.
+- Explicitní purge při publikaci dokumentace, změně ceníku nebo update veřejného statusu.
+- Žádná sdílená cache pro data, kde změna oprávnění musí platit okamžitě.
+
+Nezapomeň na edge případy: odebrání člena z týmu, změna role, ukončení trialu, zrušení přístupu podpory, smazání exportu, změna fakturačních údajů. Pokud stará odpověď drží práva déle než systém, cache se stává druhým autorizačním systémem. A druhý autorizační systém je jen bug s vizitkou architekta.
+
+## HG.7 Testuj cache jako bezpečnostní vlastnost
+
+Cache se často testuje jen výkonově: „je to rychlejší?“ Privacy-first test se ptá: „je to pořád správné a bezpečné?“
+
+Testovací matice:
+
+- Uživatel A nesmí nikdy dostat odpověď uživatele B ani po opakovaném requestu.
+- Tenant A nesmí vidět data tenantu B při stejném path, ale jiné autorizaci.
+- Po změně role zmizí dříve dostupná data bez čekání na dlouhý TTL.
+- Odpovědi se `Set-Cookie` nejdou do sdílené cache, pokud to není vědomě a bezpečně navržené.
+- Query parametry s osobními údaji se neobjevují v cache logu ani analytice.
+- `304 Not Modified` respektuje stejná oprávnění jako plná `200` odpověď.
+- CDN pravidla jsou součástí review stejně jako backend kód.
+
+Jednoduchý manuální test před releasem: otevři stejný endpoint jako dva různí uživatelé, v různých tenantech a rolích, s vypnutou i zapnutou cache. Sleduj `Cache-Control`, `Vary`, `ETag`, `Age`, `CF-Cache-Status` nebo ekvivalentní hlavičky podle infrastruktury. Pokud neumíš vysvětlit, proč se odpověď cachuje, nesmí se cachovat.
+
+## HG.8 Checklist API cache hlaviček
+
+- [ ] Každý API endpoint má rozhodnutí: sdílená cache, privátní cache, revalidace, nebo `no-store`.
+- [ ] Přihlášené a tenant-specific endpointy nejsou plošně cachované v CDN/proxy.
+- [ ] `Cache-Control` odpovídá citlivosti dat, ne jen výkonovému přání.
+- [ ] `Vary` zahrnuje skutečné varianty odpovědi a není používán jako náplast na špatný cache scope.
+- [ ] `ETag` neobsahuje osobní údaje ani stabilní sledovací identifikátor.
+- [ ] `304` odpovědi procházejí stejnou autorizací jako `200` odpovědi.
+- [ ] Změna role, odchod z týmu a odebrání support accessu invalidují nebo obcházejí relevantní cache.
+- [ ] CDN má allowlist veřejně cachovatelných endpointů, ne plošné „cache all GET“.
+- [ ] Cache logy neukládají tokeny, cookies ani citlivé query parametry.
+- [ ] Release checklist obsahuje kontrolu cache hlaviček u nových a změněných endpointů.
+
+## Codyho komentář
+
+Cache je super sluha a příšerný compliance manažer. Já bych v malém evropském SaaS začínal extrémně konzervativně: agresivně cachovat statické assety a veřejnou dokumentaci, opatrně veřejná API, skoro nikdy přihlášené zákaznické odpovědi ve sdílené vrstvě. Rychlost je důležitá. Důvěra je důležitější. A incident „omylem jsme cachovali cizí faktury“ je přesně ten druh optimalizace, který se špatně píše do newsletteru.
+
+## Zdroje k příloze
+
+- RFC 9111 k HTTP caching, ukládání odpovědí, revalidaci, `Vary` a cache direktivám: https://www.rfc-editor.org/rfc/rfc9111.html
+- MDN dokumentace k `Cache-Control` a praktickému významu direktiv `public`, `private`, `no-store`, `no-cache`, `max-age` a dalších: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Cache-Control
+- MDN přehled HTTP cache, validátorů `ETag`, `Last-Modified` a hlavičky `Vary`: https://developer.mozilla.org/en-US/docs/Web/HTTP/Caching
+- IANA registr HTTP cache directives jako referenční seznam standardizovaných i rozšířených cache direktiv: https://www.iana.org/assignments/http-cache-directives/http-cache-directives.xhtml
+- OWASP API Security Project k riziku Broken Object Property Level Authorization, které souvisí i s vracením a ukládáním nepovolených vlastností objektů: https://owasp.org/www-project-api-security/
+
+## Shrnutí přílohy
+
+API cache není jen výkonová optimalizace. Je to bezpečnostní a privacy-first rozhodnutí o tom, kde může odpověď ležet, kdo ji smí znovu použít a kdy přestává platit. Veřejné statické assety cachuj agresivně, veřejná proměnlivá data validuj, přihlášené a tenant-specific odpovědi drž konzervativně v režimu `private` nebo `no-store`. CDN před API zapínej přes allowlist, `ETag` navrhuj bez osobních stop, `Vary` používej vědomě a testuj cache stejně tvrdě jako autorizaci.
+
 
 ## Pracovní log
+
+- 2026-08-16: Přidána příloha HG o API cache hlavičkách: rozlišení veřejných a přihlášených odpovědí, `Cache-Control`, `Vary`, `ETag`, CDN allowlist, invalidace, bezpečnostní testy a privacy-first checklist.
 - 2026-08-16: Přidána příloha HF o idempotenci v API: rizikové mutace, idempotency keys, atomické uložení, stabilní odpovědi při retry, vazba na autorizaci a limity, SDK chování a privacy-first checklist.
 - 2026-08-16: Přidána příloha HE o stránkování, filtrování a řazení API: produktový účel seznamů, cursor vs. offset, stabilní sort, filtry jako oprávnění, bezpečné hledání, omezené `include`/`fields`, testovací matice a privacy-first checklist.
 - 2026-08-15: Přidána příloha HD o rate limitech, kvótách a ochraně API před neomezenou spotřebou zdrojů: limity podle typu práce, identita a kontext, odpovědi `429`, `Retry-After`, `RateLimit-*` hlavičky, retry politika, viditelné kvóty, fronty pro drahé operace a privacy-first checklist.
