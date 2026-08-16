@@ -37189,7 +37189,202 @@ Stránkování je taková ta nudná věc, kterou nikdo nechce řešit v MVP. Pak
 
 List endpointy potřebují výchozí limity, tvrdá maxima a stabilní stránkování. U živých dat je cursor většinou bezpečnější než offset, rate limit má být férově dokumentovaný a `429` odpověď má klientovi říct, kdy a jak pokračovat. Velké exporty patří do asynchronních jobů se stavem, krátkou retencí, auditem stažení a jasným schématem. Privacy-first API nevrací všechno jen proto, že může; vrací přesně tolik, kolik je potřeba pro legitimní práci zákazníka.
 
+---
+
+# Příloha IB: Importní API a migrace dat bez CSV minového pole, duplicitního pekla a zákaznického rukojmí
+
+Import dat je krásný moment: zákazník ti právě říká, že chce do produktu přenést kus svého provozu. Gratulace. Zároveň ti posílá soubor, který vznikl exportem z cizího systému, ruční úpravou v Excelu, přeposláním přes e-mail a malou dávkou digitální magie. Pokud import navrhneš jako „vezmeme CSV a nějak to nacpeme do databáze“, koleduješ si o duplicity, poškozená data, bezpečnostní díry a supportové věštění z lógru.
+
+Privacy-first importní API má tři úkoly: bezpečně přijmout nedůvěryhodná data, dát člověku kontrolu před zápisem a umět opravit chybu bez forenzního dramatu. Import není jen technická utilita. Je to onboarding, compliance proces a důvěrový test v jednom.
+
+## IB.1 Import začíná migračním scénářem, ne upload tlačítkem
+
+Nejdřív pojmenuj, odkud data přicházejí, kdo je nahrává, proč je produkt potřebuje a co se stane po importu. Bez toho skončíš s univerzálním importérem všeho, což je produktový ekvivalent šuplíku „důležité kabely“: možná se jednou hodí, ale nikdo neví k čemu.
+
+Mini šablona importního scénáře:
+
+| Otázka | Příklad odpovědi |
+| --- | --- |
+| Zdroj | Export kontaktů ze starého CRM |
+| Formát | CSV v UTF-8, oddělovač čárka nebo středník |
+| Majitel importu | Admin zákaznického workspace |
+| Účel | Přenést aktivní obchodní kontakty pro navazující komunikaci |
+| Povolená data | Jméno, e-mail, firma, poznámka, štítky |
+| Zakázaná data | Rodná čísla, hesla, platební údaje, interní logy |
+| Výsledek | Náhled změn, potvrzení, asynchronní job, report chyb |
+| Retence uploadu | Smazat zdrojový soubor po dokončení nebo po krátké lhůtě |
+
+Tahle tabulka vypadá obyčejně, ale zachrání ti architekturu. Najednou víš, že upload má být vázaný na workspace, import smí spustit jen správná role, výsledek musí být auditovaný a zdrojový soubor nemá ležet v object storage do důchodu.
+
+## IB.2 Soubor je nedůvěryhodný vstup, i když ho poslal platící zákazník
+
+Importní soubor ber jako útok, dokud se neprokáže opak. Ne proto, že zákazníci jsou zlí. Protože exporty z jiných systémů bývají rozbité, ručně upravené a občas obsahují věci, které v cílovém produktu nemají co dělat.
+
+Praktická pravidla:
+
+- Omez velikost souboru, počet řádků, počet sloupců a maximální délku buněk.
+- Nepřijímej formát jen podle přípony; kontroluj MIME, strukturu a očekávaný parser.
+- U CSV počítej s oddělovačem, uvozovkami, BOM, různým kódováním a prázdnými řádky.
+- Nikdy neukládej celý soubor do běžných aplikačních logů.
+- Nezobrazuj cizí hodnoty v HTML bez escapování; importní preview je normální XSS plocha.
+- Pro spreadsheet exporty řeš formula injection: hodnota začínající `=`, `+`, `-` nebo `@` může být v tabulkovém programu vyhodnocená jako vzorec.
+
+CSV není „jednoduchý textový formát“. RFC 4180 popisuje běžné chování CSV, ale praxe je pestřejší než český účtenkový systém v restauraci po půlnoci: https://www.rfc-editor.org/rfc/rfc4180.html
+
+## IB.3 Mapování polí musí být explicitní smlouva
+
+Nejhorší importní API vezme názvy sloupců a automaticky je namapuje na interní model. To je rychlé přesně do chvíle, kdy zákazník nahraje sloupec `is_admin`, `tenant_id` nebo `created_by` a aplikace se tváří, že „uživatel si to přál“. Tady se potkává import s mass assignment rizikem, které OWASP řadí do problému s nadměrným vystavením a manipulací vlastností objektu: https://owasp.org/API-Security/editions/2023/en/0xa3-broken-object-property-level-authorization/
+
+Bezpečný import má allowlist:
+
+```text
+Povolené vstupní sloupce:
+- email -> contact.email
+- full_name -> contact.name
+- company -> contact.company_name
+- tags -> contact.tags[]
+- note -> contact.private_note
+
+Ignorované nebo zakázané sloupce:
+- id
+- tenant_id
+- role
+- password
+- billing_status
+- created_at
+```
+
+Když soubor obsahuje neznámý sloupec, nehádej. Nabídni ho v náhledu jako „nenamapováno“ a nech člověka rozhodnout, jestli ho přeskočit. Importér není AI věštec. A pokud AI používáš pro návrh mapování, ber výsledek jen jako návrh, ne jako automatické oprávnění zapsat data.
+
+## IB.4 Náhled před zápisem je produktová brzda, ne zdržování
+
+Před samotným importem ukaž preview. Ne pět náhodných řádků, ale rozhodovací přehled: kolik řádků bude vytvořeno, kolik aktualizováno, kolik přeskočeno, kolik má chybu a jaké sloupce se kam mapují.
+
+Dobré preview:
+
+- Ukáže prvních několik bezpečně escapovaných řádků pro kontrolu mapování.
+- Shrne validační chyby podle typu: chybějící e-mail, neplatný formát, duplicita, zakázané pole.
+- Řekne, jestli import vytvoří nové záznamy, aktualizuje existující, nebo jen doplní chybějící hodnoty.
+- Upozorní na citlivá data, která importér nerozpoznal jako povolená.
+- Vyžádá explicitní potvrzení člověkem s oprávněním.
+
+Příklad potvrzovací věty:
+
+> „Import vytvoří 284 kontaktů, aktualizuje 37 existujících kontaktů podle e-mailu a přeskočí 19 řádků s chybou. Zdrojový soubor smažeme po dokončení importu. Pokračovat?“
+
+Tohle není UX překážka. To je airbag.
+
+## IB.5 Duplicity řeš pravidlem, ne nadějí
+
+Každý import potřebuje deduplikační pravidlo. Bez něj zákazník za tři měsíce zjistí, že má v CRM pět Janů Nováků se stejným e-mailem, každý s jinou poznámkou a jeden z nich je omylem obchodní ředitel. Gratuluju, právě jsi vytvořil datovou telenovelu.
+
+Rozhodni předem:
+
+- Jaký je stabilní klíč: e-mail, externí ID, kombinace firmy a čísla smlouvy?
+- Co se stane při shodě: přeskočit, aktualizovat, sloučit štítky, nebo vytvořit konflikt?
+- Které pole nikdy nepřepisuje import bez výslovného souhlasu?
+- Jak se zachází s prázdnou hodnotou: znamená „smazat“, nebo „nechat beze změny“?
+- Kdo může importem měnit citlivé atributy?
+
+Pro B2B SaaS doporučuju výchozí režim „create-only“ nebo „update only selected mapped fields“. Hromadný import, který bez dotazu přepíše existující poznámky, role nebo stavy, je jen incident s hezčím tlačítkem.
+
+## IB.6 Importní job musí být auditovatelný a vratný
+
+Velké importy patří do asynchronního jobu. API přijme soubor, vytvoří importní job, vrátí stavový endpoint a průběžně zpracovává dávky. To navazuje na předchozí přílohy o stránkování, jobech a rate limitech: neblokuj request, nezkoušej všechno v jedné transakci přes půl internetu a hlavně nedělej retry tak, aby vznikly duplicity.
+
+Minimální stavový model:
+
+```text
+created -> validating -> waiting_for_confirmation -> queued -> running -> completed
+                                             \-> canceled
+running -> completed_with_errors
+running -> failed
+```
+
+Ke každému jobu ulož bezpečná metadata:
+
+- kdo import spustil a z jakého workspace,
+- kdy byl upload přijat, potvrzen a dokončen,
+- hash souboru nebo interní identifikátor, ne veřejně dostupný odkaz,
+- použitá verze importního schématu,
+- počet vytvořených, změněných, přeskočených a chybných řádků,
+- odkaz na krátkodobý chybový report bez celého zdrojového souboru.
+
+Rollback není vždycky jednoduchý, ale musíš mít plán. U create-only importu můžeš smazat záznamy vytvořené konkrétním jobem. U update importu ukládej změnový protokol pro vybraná pole, nebo aspoň umožni obnovu ze zálohy na úrovni tenantových dat. Neslibuj „vrátit vše jedním klikem“, pokud to neumíš. Slibuj konkrétní bezpečné chování.
+
+## IB.7 Chybový report má pomáhat, ne šířit data dál
+
+Když import selže, zákazník potřebuje opravit soubor. Nepotřebuje stáhnout kompletní kopii všech dat s interními ID, stack trace a syrovými payloady. Chybový report je další datový export, takže pro něj platí stejná privacy pravidla.
+
+Dobrý report obsahuje:
+
+- číslo řádku nebo stabilní řádkový identifikátor,
+- název vstupního sloupce,
+- lidské vysvětlení chyby,
+- bezpečný kód chyby pro automatizaci,
+- doporučení opravy,
+- jen minimální hodnotu potřebnou k pochopení chyby, ideálně maskovanou.
+
+Příklad:
+
+```csv
+row,column,error_code,message,safe_value
+42,email,invalid_email,"E-mail nemá platný formát","ja***@example"
+81,tags,too_many_items,"Pole tags obsahuje více než 20 položek","23 položek"
+```
+
+Chybové reporty drž krátce. Typicky hodiny až dny, podle velikosti zákazníka a procesu. Po vypršení retence report smaž a v audit logu nech jen metadata. Privacy-first neznamená, že zákazníkovi nepomůžeš. Znamená, že kvůli pomoci nevytvoříš druhou, hůř hlídanou databázi.
+
+## IB.8 Import a přenositelnost dat patří do stejné produktové mapy
+
+Import není izolovaná funkce. Pokud umožňuješ data snadno přinést, měl bys umožnit je rozumně odnést. GDPR článek 20 řeší právo na přenositelnost osobních údajů ve strukturovaném, běžně používaném a strojově čitelném formátu: https://gdpr-info.eu/art-20-gdpr/
+
+V praxi to znamená:
+
+- dokumentuj importní i exportní schéma,
+- drž stabilní názvy polí,
+- uváděj verzi formátu,
+- odděl zákaznický obsah od interních provozních metadat,
+- napiš, co se importuje automaticky a co vyžaduje ruční rozhodnutí,
+- neuzamykej zákazníka v produktu tím, že export je horší než import.
+
+Tohle je férové obchodně i technicky. Zákazník, který ví, že může odejít, se méně bojí přijít.
+
+## IB.9 Checklist importního API a migrace dat
+
+- Má každý import jasný účel, zdroj, povolená pole a vlastníka?
+- Kontroluje systém velikost, typ, strukturu, počet řádků a délku hodnot před zpracováním?
+- Existuje allowlist mapování polí místo automatického zápisu do interního modelu?
+- Umí preview ukázat vytvořené, změněné, přeskočené a chybné řádky před potvrzením?
+- Jsou neznámé sloupce explicitně přeskočené nebo ručně namapované?
+- Je deduplikační pravidlo zdokumentované a viditelné v UI/API?
+- Rozlišuje import prázdnou hodnotu, přeskočení pole a výslovné smazání?
+- Běží větší importy jako asynchronní job se stavovým endpointem?
+- Má import auditovatelná metadata bez ukládání celého payloadu do logů?
+- Existuje bezpečný plán rollbacku nebo obnovy pro create/update scénáře?
+- Jsou chybové reporty minimalizované, maskované a časově omezené?
+- Maže se zdrojový soubor po dokončení nebo po krátké retenční době?
+- Je importní formát sladěný s exportem a dokumentovaný pro zákazníky i integrátory?
+
+## Codyho komentář
+
+Import je onboarding v montérkách. Když funguje dobře, nikdo ho nechválí, protože „prostě nahrál soubor“. Když funguje špatně, zákazník začne nový produkt prvním ticketem, druhým ticketem a tichou myšlenkou, že migrace možná byla chyba. Udělej import nudný, předvídatelný a vratný. Nudná migrace je luxusní migrace.
+
+## Zdroje k příloze
+
+- RFC 4180: Common Format and MIME Type for CSV Files: https://www.rfc-editor.org/rfc/rfc4180.html
+- OWASP File Upload Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html
+- OWASP API3:2023 Broken Object Property Level Authorization: https://owasp.org/API-Security/editions/2023/en/0xa3-broken-object-property-level-authorization/
+- OWASP API4:2023 Unrestricted Resource Consumption: https://owasp.org/API-Security/editions/2023/en/0xa4-unrestricted-resource-consumption/
+- GDPR článek 20: právo na přenositelnost údajů: https://gdpr-info.eu/art-20-gdpr/
+
+## Shrnutí přílohy
+
+Importní API musí bezpečně přijmout nedůvěryhodný soubor, explicitně namapovat povolená pole, ukázat náhled před zápisem a zpracovat větší migrace jako auditovatelný asynchronní job. Deduplikace, prázdné hodnoty, rollback a chybové reporty nejsou detaily pro později; jsou to hranice mezi pohodlnou migrací a produkčním průšvihem. Privacy-first přístup navíc hlídá krátkou retenci uploadů, minimální logování, maskované reporty a férovou přenositelnost dat.
+
 ## Pracovní log
+- 2026-08-16: Přidána příloha IB o importním API a migraci dat: scénář importu, bezpečný upload, explicitní mapování polí, preview před zápisem, deduplikace, asynchronní joby, rollback, chybové reporty, přenositelnost dat a privacy-first checklist.
+
 - 2026-08-16: Přidána příloha IA o stránkování, rate limitech a exportech API: výchozí limity, cursor pagination, `429` odpovědi, bezpečné rate-limit logy, asynchronní exportní joby, přenositelnost dat, dokumentace SDK a privacy-first checklist.
 
 - 2026-08-16: Přidána příloha HZ o validaci a normalizaci API vstupů: doménový význam polí, bezpečná normalizace, odmítání neznámých polí, Problem Details chyby, objemové limity, URL/e-mail/ID pravidla, testy, dokumentace a privacy-first checklist.
