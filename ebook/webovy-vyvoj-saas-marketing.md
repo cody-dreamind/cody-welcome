@@ -36792,7 +36792,190 @@ Když API vrací celý interní model, je to jako poslat zákazníkovi fakturu i
 
 API odpovědi a vstupy musí být explicitní smlouva. Databázový model nepatří přímo do JSON odpovědi a klientský payload nepatří přímo do doménového objektu. Používej read/write DTO, allowlist polí, odmítání neznámých vstupů, field-level autorizaci, bezpečné `fields`/`include` parametry a negativní testy na únik citlivých vlastností. Privacy-first API je takové, které vrací minimum potřebných dat a odmítá pohodlnou magii dřív, než se z ní stane incident.
 
+---
+
+# Příloha HZ: Validace a normalizace API vstupů bez regexového pekla, tichých oprav a evropského datového kompostu
+
+Vstup do API je hranice mezi světem, který kontroluješ, a světem, kde někdo pošle datum jako `zítra`, cenu jako `-1`, e-mail s mezerou na konci, JSON o velikosti menšího románu a URL mířící do interní sítě. Dobrá validace není kosmetická vrstva před controllerem. Je to produktový, bezpečnostní a provozní kontrakt.
+
+OWASP Input Validation Cheat Sheet doporučuje validovat vstupy allowlist přístupem, kontrolovat datové typy, délky, rozsahy, formáty a používat normalizaci/canonicalization tak, aby aplikace pracovala s jednoznačnou podobou dat: https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html
+
+## HZ.1 Validace začíná otázkou „co tahle hodnota znamená?“
+
+Nejdřív neřeš regex. Řeš význam. `name` může být název firmy, jméno člověka, interní slug nebo štítek v kampani. Každý z těchto vstupů má jiné limity, jiné riziko a jinou chybovou hlášku.
+
+Praktický postup pro každé pole:
+
+- Pojmenuj doménový význam: „název projektu viditelný zákazníkovi“, ne jen `title`.
+- Urči datový typ: string, integer, decimal, boolean, enum, datum, URL, e-mail, objekt, pole.
+- Nastav minimální a maximální délku nebo rozsah.
+- Rozhodni, jestli hodnota smí být prázdná, `null`, chybějící nebo jen whitespace.
+- Urči, jestli je hodnota identifikátor, uživatelský obsah, technická konfigurace nebo filtr.
+
+Příklad rozdílu:
+
+| Pole | Špatná definice | Lepší definice |
+| --- | --- | --- |
+| `name` | string | Název workspace, 2–80 znaků, trimovaný, povolený Unicode text |
+| `slug` | string | URL identifikátor, `a-z`, `0-9`, pomlčka, 3–50 znaků, bez dvojité pomlčky |
+| `limit` | number | Celé číslo 1–100, výchozí 25, maximum nikdy nepřebírá klient |
+| `redirect_url` | string | HTTPS URL z povolených domén zákazníka, bez interních adres |
+
+Když význam pole není jasný, validace bude buď moc měkká, nebo moc tvrdá. Obojí bolí: měkká validace pouští incidenty, tvrdá validace rozbíjí legitimní zákaznická data.
+
+## HZ.2 Normalizuj jen tam, kde tím neměníš zákaznický úmysl
+
+Normalizace je užitečná: oříznout mezery na e-mailu, sjednotit velikost slugů, převést prázdný řetězec na chybějící hodnotu u volitelného filtru. Jenže tichá oprava může být i past. Pokud zákazník pošle částku `10,00`, systém ji nemá hádat jako deset korun, deset eur nebo řetězec z CSV exportu.
+
+Dobré pravidlo:
+
+- Normalizuj technické formáty, kde existuje jednoznačná canonical podoba.
+- U doménových hodnot raději vrať přesnou chybu než hádej.
+- U bezpečnostně citlivých hodnot nic „nevylepšuj“ potichu.
+- U uživatelského textu zachovej obsah a řeš bezpečné zobrazení až při výstupu.
+
+Příklad bezpečné normalizace:
+
+```json
+{
+  "email": " eva@example.com ",
+  "workspace_slug": "Dreamind CRM"
+}
+```
+
+Server může e-mail trimovat a normalizovat slug podle jasných pravidel:
+
+```json
+{
+  "email": "eva@example.com",
+  "workspace_slug": "dreamind-crm"
+}
+```
+
+Ale když payload obsahuje `billing_amount: "10k"`, nehádej. Vrať validační chybu a nech klienta poslat jednoznačný formát. API není věštkyně s JSON parserem.
+
+## HZ.3 Schéma musí odmítat neznámé tvary, ne je archivovat pro budoucí průšvih
+
+Příloha HY řešila DTO a mass assignment. Validace je první strážce stejné hranice. Pokud endpoint přijímá objekt, schéma má popsat nejen povinná pole, ale i to, co se stane s poli navíc.
+
+U vstupů preferuj režim „neznámé pole je chyba“. Důvod je jednoduchý: klient se rychle dozví, že posílá něco špatně, a backend omylem neuloží data, která později získají význam.
+
+Příklad validačního kontraktu:
+
+```json
+{
+  "display_name": "Eva",
+  "timezone": "Europe/Prague",
+  "is_admin": true
+}
+```
+
+Odpověď:
+
+```json
+{
+  "type": "https://api.example.com/problems/invalid-request",
+  "title": "Request contains unsupported fields",
+  "status": 400,
+  "errors": [
+    {
+      "path": "$.is_admin",
+      "code": "unsupported_field",
+      "message": "Field is not supported by this endpoint."
+    }
+  ],
+  "request_id": "req_123"
+}
+```
+
+JSON Schema má pro práci s objektovými vlastnostmi klíčová slova jako `additionalProperties` a v novějších návrzích také `unevaluatedProperties`; specifikace popisuje, jak se aplikují na vlastnosti objektu: https://github.com/json-schema-org/json-schema-spec/blob/main/specs/jsonschema-core.md
+
+## HZ.4 Validační chyby mají pomoct opravit request, ne odhalit backend
+
+Dobrá chybová odpověď řekne klientovi: kde je problém, co je špatně a jaký tvar očekáváme. Nemá říct: jak se jmenuje interní třída, jak vypadá SQL dotaz, jaký regex přesně používáme nebo jaká bezpečnostní pravidla lze obejít.
+
+RFC 9457 definuje formát Problem Details pro HTTP API a umožňuje přidat rozšiřující členy pro aplikační detaily chyb, například seznam validačních problémů: https://www.rfc-editor.org/rfc/rfc9457.html
+
+Praktická struktura validační chyby:
+
+- `type`: stabilní URL typu problému.
+- `title`: krátký lidský popis.
+- `status`: HTTP status, typicky `400` nebo `422` podle tvého kontraktu.
+- `errors`: pole konkrétních chyb s `path`, `code` a bezpečnou zprávou.
+- `request_id`: korelační ID pro support bez payloadu.
+
+Chyby piš tak, aby šly lokalizovat v klientovi. `code: "too_long"` je lepší než věta, kterou později přeložíš a rozbiješ integrátorům parser. Text je pro člověka. Kód je pro software.
+
+## HZ.5 Validuj velikost, hloubku a počet položek dřív, než validuješ poezii uvnitř
+
+API často spadne ne kvůli jednomu špatnému poli, ale kvůli objemu. Pole s deseti tisíci položkami, objekt zanořený do pekelného suterénu, řetězec o velikosti exportu nebo filtr, který spustí drahý dotaz přes celou historii.
+
+Bezpečnostní limity nastav před doménovou validací:
+
+- Maximální velikost request body.
+- Maximální počet položek v poli.
+- Maximální hloubka JSON objektu.
+- Maximální délka stringu před normalizací i po ní.
+- Maximální počet filtrů, `include`, `fields` a sort kritérií.
+
+Privacy-first důvod je prostý: čím méně nepotřebného obsahu přijmeš, tím méně ho skončí v logu, frontě, chybovém reportu nebo dočasném úložišti. Odmítnutý payload je někdy nejlepší datová minimalizace.
+
+## HZ.6 URL, e-maily a identifikátory nejsou „jen stringy“
+
+Některé vstupy vypadají nevinně, ale mají vedlejší efekty.
+
+URL může vést na interní síť, metadata endpoint, souborový server nebo lokální adresu. Pokud API přijímá webhook target, importní URL, avatar URL nebo callback URL, validuj nejen syntaxi, ale i účel: povolené schéma, povolené domény, zákaznické vlastnictví domény a zákaz přesměrování do zakázaných rozsahů.
+
+E-mail není jen regex. Potřebuješ rozhodnout, jestli slouží pro login, fakturaci, pozvánku, notifikaci nebo support komunikaci. U loginu řeš case folding opatrně, u pozvánek doručitelnost a u fakturace právní přesnost.
+
+Identifikátor není zákaznická pravda. `tenant_id`, `user_id`, `invoice_id` a `project_id` vždy ověř autorizací po validaci formátu. Validní ID může pořád patřit někomu jinému. Tady se validace potkává s tenantovou izolací a IDOR testy.
+
+## HZ.7 Validace patří do testů i dokumentace
+
+Validační pravidla, která existují jen v hlavě vývojáře nebo v jedné helper funkci, se časem rozpadnou. Kontrakt má být vidět v OpenAPI/JSON Schema, testech a integračních příkladech.
+
+Minimum pro každý veřejný endpoint:
+
+- Pozitivní test s minimálním platným payloadem.
+- Pozitivní test s běžným reálným payloadem.
+- Negativní test pro pole navíc.
+- Negativní test pro špatný typ.
+- Negativní test pro překročenou délku nebo rozsah.
+- Negativní test pro cizí tenant ID i při validním formátu.
+- Snapshot nebo contract test pro tvar validační chyby.
+
+Do dokumentace přidej příklady chyb. Integrátor ocení, když předem ví, jak vypadá `unsupported_field`, `invalid_format`, `too_many_items` nebo `value_out_of_range`. Support ocení, že nemusí lovit význam chyby v logu jako kapra v mlze.
+
+## HZ.8 Checklist validace a normalizace API vstupů
+
+- Má každý vstup doménový význam, typ, rozsah, délku a pravidlo pro prázdnou hodnotu?
+- Odmítá schéma neznámá pole místo tichého ignorování nebo ukládání?
+- Jsou normalizační kroky explicitní a bezpečné?
+- Existují limity na velikost body, počet položek, hloubku JSONu a délku stringů?
+- Vrací API stabilní validační chyby bez interních detailů?
+- Jsou URL, e-maily a identifikátory validované podle účelu, nejen podle syntaxe?
+- Ověřuje backend autorizaci i po úspěšné validaci formátu?
+- Jsou validační pravidla v dokumentaci, contract testech a integračních příkladech?
+- Neukládají se odmítnuté payloady do logů, analytiky ani support nástrojů?
+- Má tým jasné pravidlo, kdy použít `400`, `422` a kdy doménovou chybu?
+
+## Codyho komentář
+
+Validace je místo, kde se pozná dospělost API. Začátečnický backend se snaží „nějak přijmout všechno“. Dospělý backend je slušný, ale pevný: řekne „tohle neumím, tady je přesně proč, pošli to takhle“. To není nepříjemnost. To je zákaznická služba s helmou.
+
+## Zdroje k příloze
+
+- OWASP Input Validation Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html
+- RFC 9457: Problem Details for HTTP APIs: https://www.rfc-editor.org/rfc/rfc9457.html
+- JSON Schema Core Specification: https://github.com/json-schema-org/json-schema-spec/blob/main/specs/jsonschema-core.md
+
+## Shrnutí přílohy
+
+Validace API vstupů má být produktový kontrakt, ne sbírka náhodných regexů. Každé pole potřebuje jasný význam, typ, rozsah, limity a pravidla pro normalizaci. Schéma má odmítat neznámá pole, chybové odpovědi mají být stabilní a bezpečné a objemové limity mají chránit infrastrukturu i soukromí. Privacy-first API přijímá jen data, která opravdu potřebuje, a odmítnuté payloady neposílá dál do logů, analytiky ani support nástrojů.
+
 ## Pracovní log
+- 2026-08-16: Přidána příloha HZ o validaci a normalizaci API vstupů: doménový význam polí, bezpečná normalizace, odmítání neznámých polí, Problem Details chyby, objemové limity, URL/e-mail/ID pravidla, testy, dokumentace a privacy-first checklist.
+
 - 2026-08-16: Přidána příloha HY o API odpovědích a vstupních DTO: oddělení interních modelů od kontraktů, allowlist polí, ochrana před mass assignment, field-level autorizace, bezpečné `fields`/`include`, negativní testy a privacy-first checklist.
 
 - 2026-08-16: Přidána příloha HX o API tokenech: životní cyklus tokenů, scopes, expirace, rotace, okamžitá revokace, bezpečné logování, developer experience a privacy-first checklist.
