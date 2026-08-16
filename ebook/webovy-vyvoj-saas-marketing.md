@@ -33040,8 +33040,242 @@ Nejlepší limity jsou viditelné, předvídatelné a nudné. Zákazník chápe 
 
 Rate limiting v privacy-first SaaS chrání dostupnost, náklady, zákaznická data i férové využití produktu. Nestačí počítat requesty za minutu; je potřeba rozlišit levné a drahé operace, identitu a kontext, citlivé business toky, externě účtované služby a zákaznickou viditelnost kvót. Dobré API vrací akční `429`, dokumentuje retry chování, používá fronty pro drahou práci a sbírá jen takové provozní signály, které skutečně pomáhají službu chránit.
 
+# Příloha HE: Stránkování, filtrování a řazení API bez úniku dat, pomalých exportů a nekonečných seznamů
+
+Seznamy vypadají nevinně. „Vrať mi faktury.“ „Ukaž kontakty.“ „Najdi poslední objednávky.“ Jenže právě seznamové endpointy často rozhodují o tom, jestli je SaaS rychlý, bezpečný a použitelný, nebo jestli se z něj stane databázový ventilátor s API klíčem.
+
+Privacy-first API nevrací „všechno a klient si to přebere“. Vrací jen to, co konkrétní uživatel smí vidět, v rozumném objemu, s předvídatelným pořadím a s takovým filtrováním, které nejde použít jako sondu do cizích dat. Stránkování není kosmetika. Je to kontrakt mezi produktem, databází, zákazníkem a bezpečností.
+
+## HE.1 Každý seznam začíná otázkou: jakou práci zákazník dělá?
+
+Než navrhneš parametry `limit`, `offset`, `sort` a `filter`, napiš si scénář. Jinak endpoint sklouzne k univerzálnímu „dej mi tabulku“, který je pohodlný pro vývojáře, ale časem nebezpečný pro produkt.
+
+Praktické scénáře:
+
+- Support hledá posledních 20 tiketů podle zákazníka a stavu.
+- Účetní exportuje faktury za měsíc pro konkrétní firmu.
+- Admin kontroluje poslední změny oprávnění v týmu.
+- Integrace synchronizuje nové záznamy od posledního úspěšného běhu.
+- Uživatel v UI scrolluje projekty podle poslední aktivity.
+
+Každý scénář má jiný ideální tvar. UI seznam chce rychlou první stránku. Export chce asynchronní job. Synchronizace chce stabilní kurzor nebo časovou hranici. Auditní log chce neměnné pořadí a přísnější oprávnění. Pokud to všechno nacpeš do jednoho endpointu, dostaneš švýcarský nožík, kterým někdo nakonec zkusí ořezat databázi.
+
+Dobrá produktová věta pro seznamový endpoint zní:
+
+> „Tento endpoint vrací faktury, které aktuální uživatel smí vidět ve vybrané organizaci, primárně pro UI přehled a menší integrace. Velké účetní exporty běží přes samostatný exportní job.“
+
+Ta věta je nudná. Výborně. Nudné API je API, které o půlnoci nevolá.
+
+## HE.2 `offset` je jednoduchý, dokud nezačne bolet
+
+`offset`/`limit` stránkování je srozumitelné: `?limit=50&offset=100`. Pro malé, stabilní seznamy často stačí. Pro živá data a velké tabulky ale přináší tři typické problémy:
+
+- Při vkládání nebo mazání záznamů může klient něco přeskočit nebo vidět dvakrát.
+- Vysoký `offset` může být databázově drahý, protože server musí projít spoustu řádků, které nakonec zahodí.
+- Útočník nebo chybně napsaná integrace může generovat drahé dotazy jen posouváním stránkování hluboko do historie.
+
+Cursor pagination neříká „dej mi stránku číslo 27“. Říká „pokračuj od tohoto bodu“. JSON:API profil pro cursor pagination popisuje cursor-based stránkování jako strategii, která se vyhýbá některým pastem `offset`/`limit`, například posunům při změnách dat během procházení seznamu.
+
+Praktické pravidlo:
+
+- Pro malé administrační číselníky klidně použij `offset`.
+- Pro activity feed, faktury, objednávky, auditní logy a integrace preferuj cursor.
+- Pro velké exporty nepoužívej ani jedno jako hlavní mechanismus; udělej exportní job se stavem, expirací a auditní stopou.
+- Pro veřejné API nastav maximální `limit` a konzervativní default.
+
+Příklad odpovědi:
+
+```json
+{
+  "data": [
+    { "id": "inv_01", "number": "2026-001", "total": "1200.00" }
+  ],
+  "pagination": {
+    "limit": 50,
+    "next_cursor": "eyJhZnRlciI6Imludl8wMSJ9",
+    "has_more": true
+  }
+}
+```
+
+Kurzorem neprozrazuj interní SQL, citlivé ID ani obchodní rytmus zákazníka. Ber ho jako neprůhledný token. Klient ho má poslat zpět, ne rozebírat jako čajovou sedlinu.
+
+## HE.3 Stabilní řazení je bezpečnostní i UX detail
+
+Seznam bez jasného řazení je náhoda s JSONem. Když server jednou vrátí záznamy podle `created_at`, podruhé podle primárního klíče a potřetí podle nálady query planneru, klient nemůže spolehlivě stránkovat ani synchronizovat.
+
+Bezpečné pravidlo pro stránkování:
+
+- Každý seznam má výchozí řazení.
+- Řazení je deterministické, tedy obsahuje jednoznačný tie-breaker.
+- Kurzory vycházejí ze stejného řazení, které endpoint dokumentuje.
+- Klient smí řadit jen podle povoleného seznamu polí.
+- Řazení podle citlivých nebo interních polí je zakázané.
+
+Špatně:
+
+```http
+GET /api/customers?sort=internalRiskScore
+```
+
+Lépe:
+
+```http
+GET /api/customers?sort=-created_at
+```
+
+Ještě lépe v dokumentaci:
+
+```yaml
+allowed_sort_fields:
+  - created_at
+  - updated_at
+  - name
+default_sort: "-created_at,id"
+max_limit: 100
+```
+
+Tie-breaker typu `id` není detail. Když má deset záznamů stejný `created_at`, server pořád musí vědět, který z nich je první a který další. Jinak se z cursor pagination stane loterie s prémiovým plánem.
+
+## HE.4 Filtry jsou oprávnění v převleku
+
+Filtr není jen technická podmínka v SQL. Je to část bezpečnostního modelu. Pokud endpoint dovolí filtrovat podle `organization_id`, `user_id`, `status`, `email`, `created_by` nebo `role`, musí server nejdřív ověřit, že aktuální identita má právo takový rozsah vůbec dotazovat.
+
+Nebezpečný vzorec:
+
+```http
+GET /api/invoices?organization_id=org_cizi_firma
+```
+
+Server nesmí říct: „Organizace existuje, ale ty ji nesmíš vidět.“ To je informační únik. U seznamů je často lepší odpovědět stejně jako u prázdného výsledku nebo obecné chyby oprávnění podle kontextu produktu. Hlavně nesmí rozdíly v chování sloužit jako adresář cizích objektů.
+
+Praktická pravidla:
+
+- Scope dotazu odvozuj ze session, tokenu a aktivní organizace, ne z volného parametru od klienta.
+- Filtry validuj proti whitelistu, ne proti tomu, co ORM zrovna přijme.
+- Nedovol obecné `where`, `q`, `include`, `fields` nebo `expand` bez přísného omezení.
+- U každého pole ve výsledku ověř, jestli ho role smí vidět.
+- Testuj seznamy se dvěma organizacemi a dvěma uživateli, ne jen se šťastným admin účtem.
+
+OWASP v API Security Top 10 dlouhodobě upozorňuje na object-level authorization i object property-level authorization. V praxi to znamená: nestačí ověřit, že uživatel smí volat endpoint. Musíš ověřit, že smí vidět konkrétní objekty i konkrétní pole v odpovědi.
+
+## HE.5 Vyhledávání nesmí být boční kanál na zákaznická data
+
+Fulltextové nebo „rychlé“ hledání je obchodně skvělé. Zákazník napíše e-mail, číslo objednávky nebo jméno a najde výsledek. Pro privacy-first SaaS je ale důležité, aby hledání neprozrazovalo víc než běžný seznam.
+
+Rizika:
+
+- Autocomplete ukazuje e-maily lidí mimo aktuální organizaci.
+- Počet výsledků prozradí, že určitá firma nebo osoba existuje v systému.
+- Chybová hláška odhalí, které filtry jsou interně dostupné.
+- Globální hledání vrací jiné typy objektů, než uživatel čeká.
+- Log hledaných dotazů ukládá osobní údaje bez jasné retence.
+
+Bezpečnější přístup:
+
+- Hledání vždy běží uvnitř oprávněného scope.
+- Autocomplete zobrazuje až po minimální délce dotazu a s limitem výsledků.
+- Výsledky ukazují jen pole, která by uživatel viděl i v detailu.
+- Query logy buď anonymizuj/agreguj, nebo je drž krátce pro ladění kvality.
+- Citlivé vyhledávací výrazy neposílej do externí analytiky.
+
+Příklad mikrotextu do dokumentace:
+
+> „Parametr `search` hledá pouze v záznamech dostupných pro aktuální organizaci a roli. Hledané výrazy nepoužíváme pro marketingové profilování a v provozních logách je zkracujeme.“
+
+Tohle není právnická exhibice. Je to důvěra pro vývojáře zákazníka, který si nechce omylem poslat celý adresář do cizího nástroje.
+
+## HE.6 `include`, `expand` a `fields` drž na vodítku
+
+Vývojáři milují flexibilitu. `?include=customer,items,payments` a `?fields=*` vypadají jako produktivní zkratka. Jenže každé rozšíření odpovědi zvyšuje riziko nadměrného vystavení dat, pomalých dotazů a nejasné dokumentace.
+
+Praktický model:
+
+- `fields` dovol jen pro konkrétní zdroje a povolená pole.
+- `include` omez na malé množství bezpečných vztahů.
+- `expand` nedovol rekurzivně bez hloubkového limitu.
+- Citlivé vztahy vyžadují samostatný endpoint nebo samostatné oprávnění.
+- Výchozí odpověď drž malou a stabilní.
+
+Příklad:
+
+```http
+GET /api/invoices?fields[invoice]=id,number,total,due_date&include=customer
+```
+
+Server by měl odmítnout:
+
+```http
+GET /api/invoices?fields[invoice]=*&include=customer.bankAccount,internalNotes
+```
+
+Chyba má být konkrétní, ale ne upovídaná:
+
+```json
+{
+  "error": {
+    "code": "unsupported_include",
+    "message": "The requested include is not available for this endpoint.",
+    "request_id": "req_123"
+  }
+}
+```
+
+Neříkej klientovi „`customer.bankAccount` existuje, ale nemáš oprávnění“. Pokud to není nutné pro produktovou práci, takové přiznání patří do interního logu, ne do veřejné odpovědi.
+
+## HE.7 Seznamové endpointy potřebují vlastní testovací matici
+
+U detailu objektu se bezpečnost testuje relativně snadno: uživatel A nesmí číst objekt uživatele B. U seznamu je to zrádnější, protože chyby se schovají v kombinacích filtrů, řazení, stránkování a rolí.
+
+Minimální testovací matice:
+
+| Oblast | Co ověřit |
+| --- | --- |
+| Scope | Uživatel vidí jen záznamy své organizace nebo povoleného prostoru |
+| Role | Nižší role nedostane interní pole ani přes `fields` nebo `include` |
+| Pagination | Žádné duplicity ani přeskočené záznamy při stabilním řazení |
+| Limit | Server vynutí maximum i při vyšší hodnotě od klienta |
+| Filtry | Nepovolené filtry se odmítnou bez úniku informací |
+| Search | Hledání nevrací výsledky mimo oprávněný scope |
+| Výkon | Drahé dotazy mají limit, timeout nebo frontu |
+| Logy | Query parametry s osobními údaji se neukládají zbytečně dlouho |
+
+Testuj i negativní scénáře. Například uživatel s rolí `member` zkusí `?include=internalNotes`, cizí `organization_id`, obří `limit`, hluboký cursor, nepovolený `sort` a hledání podle e-mailu člověka z jiné organizace. Ano, je to otravné. Otravné testy jsou levnější než incident s exportem cizích faktur.
+
+## HE.8 Checklist stránkování, filtrování a řazení
+
+- Má každý seznamový endpoint jasný produktový účel a oddělený exportní scénář?
+- Je nastaven konzervativní default `limit` a tvrdé maximum?
+- Používáš cursor pagination u živých, velkých nebo integračních seznamů?
+- Má každý seznam deterministické výchozí řazení s tie-breakerem?
+- Jsou povolené filtry, sorty, `fields`, `include` a `expand` definované whitelistem?
+- Odvozuje server datový scope z identity a oprávnění, ne z volného parametru od klienta?
+- Kontroluješ oprávnění na úrovni objektů i jednotlivých polí odpovědi?
+- Neprozrazuje hledání existenci cizích zákazníků, uživatelů nebo objektů?
+- Jsou citlivé query parametry chráněné v logách a mají retenční pravidlo?
+- Existují testy pro kombinace role, organizace, filtru, řazení a stránkování?
+
+## Codyho komentář
+
+Můj pohled — Cody: seznamové API je jako výdejní okénko v archivu. Dobré okénko vydá přesně složky, na které máš právo, v rozumném balíku a s lístkem „další dávka tudy“. Špatné okénko řekne „tady máš klíče od sklepa, hlavně nic nerozbij“. Historie IT naznačuje, že někdo ten sklep samozřejmě rozbije.
+
+Největší rozdíl mezi hobby API a profesionálním SaaS API není v tom, jestli umí vrátit JSON. Je v tom, jestli i nudné endpointy jako seznamy respektují oprávnění, datové minimum, výkon a dokumentovaný kontrakt. Privacy-first tady není přídavek. Je to základní architektura dotazu.
+
+## Zdroje k příloze
+
+- JSON:API specifikace k pagination links, `page` query parameter family, řazení a poli `links`: https://jsonapi.org/format/index.html
+- JSON:API Cursor Pagination Profile k rozdílům mezi `offset`/`limit` a cursor-based stránkováním: https://jsonapi.org/profiles/ethanresnick/cursor-pagination/
+- RFC 8288 k Web Linking a hlavičce `Link`, která se používá i pro navigaci mezi stránkami API výsledků: https://www.rfc-editor.org/rfc/rfc8288.html
+- OWASP API1:2023 Broken Object Level Authorization k nutnosti ověřovat oprávnění u objektů získaných přes klientské parametry: https://owasp.org/API-Security/editions/2023/en/0xa1-broken-object-level-authorization/
+- OWASP API Security Project k API3:2023 Broken Object Property Level Authorization a riziku vystavení nebo manipulace nepovolených vlastností objektů: https://owasp.org/www-project-api-security/
+
+## Shrnutí přílohy
+
+Stránkování, filtrování a řazení nejsou jen pohodlí pro klienty. Jsou součástí bezpečnosti, výkonu a privacy-first kontraktu API. Dobré seznamové endpointy mají jasný účel, limitovaný rozsah, stabilní řazení, cursor pagination tam, kde dává smysl, whitelistované filtry a přísnou kontrolu objektů i polí. Velké exporty patří do samostatných jobů, hledání nesmí sloužit jako boční kanál a logy query parametrů nemají být skladiště osobních údajů.
+
 
 ## Pracovní log
+- 2026-08-16: Přidána příloha HE o stránkování, filtrování a řazení API: produktový účel seznamů, cursor vs. offset, stabilní sort, filtry jako oprávnění, bezpečné hledání, omezené `include`/`fields`, testovací matice a privacy-first checklist.
 - 2026-08-15: Přidána příloha HD o rate limitech, kvótách a ochraně API před neomezenou spotřebou zdrojů: limity podle typu práce, identita a kontext, odpovědi `429`, `Retry-After`, `RateLimit-*` hlavičky, retry politika, viditelné kvóty, fronty pro drahé operace a privacy-first checklist.
 - 2026-08-15: Přidána příloha HC o sandboxu a testovacích prostředích: syntetická data, oddělené klíče a endpointy, bezpečné simulace webhooků/e-mailů/plateb, reset a retence, maskované logy, integrační trasa a checklist.
 - 2026-08-15: Přidána příloha HB o API dokumentaci a developer portálu: OpenAPI jako zdroj pravdy, syntetické příklady, bezpečné tokeny, popis oprávnění a datového rozsahu, changelog, střídmé měření a checklist.
