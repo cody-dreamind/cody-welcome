@@ -34080,7 +34080,211 @@ Verzování API je test dospělosti produktu. Ne proto, že by `/v2` vypadalo do
 
 API verze jsou závazek vůči zákazníkům, ne jen technické označení. Dobré verzování jasně rozlišuje kompatibilní a breaking změny, vybírá jednoduchou strategii podle reálných integrací, používá deprecation a sunset signály, udržuje migrační průvodce, aktualizuje dokumentaci i SDK a měří staré verze jen v rozsahu nutném k bezpečné migraci. Privacy-first přístup znamená, že nová verze API je příležitost zmenšit datový rozsah, zpřesnit oprávnění a pomoci zákazníkům přejít bez šmírování jejich integrací.
 
+# Příloha HK: SDK a integrační ukázky bez tajných tokenů, zastaralých snippetů a copy-paste bezpečnostního dluhu
+
+API bez dobrých ukázek je jako kavárna bez dveří: technicky existuje, ale zákazník se dovnitř dostává podivně. U SaaS produktu často nerozhoduje jen samotný endpoint, ale první půlhodina integrace. Vývojář chce nainstalovat SDK, poslat první bezpečný request, pochopit chybu, nastavit webhook a odejít s pocitem, že produkt není archeologické naleziště.
+
+Privacy-first SDK a ukázky mají ještě jednu roli: učí zákazníka správný datový vzorec. Když oficiální příklad posílá celé objekty, trvale ukládá token do repozitáře nebo loguje payloady do konzole, zákazník to zkopíruje. A pak všichni předstírají překvapení, jako kdyby bezpečnostní dluh nevznikl přesně tímhle copy-paste rituálem.
+
+## HK.1 SDK není jen obal kolem HTTP, ale produktový onboarding
+
+SDK má zkrátit cestu od „mám API klíč“ k „mám funkční integraci“. Nemusí schovávat celé API. Má schovat nudnou opakovanou práci: autentizaci, retry politiku, parsování chyb, stránkování, idempotency klíče, timeouty a bezpečné výchozí nastavení.
+
+Dobré SDK proto odpovídá na praktické otázky:
+
+- Jak bezpečně nastavím klienta bez vložení tokenu do zdrojáku?
+- Jak nastavím timeout, aby mi visící request nezablokoval worker?
+- Jak poznám validační chybu od rate limitu a od výpadku služby?
+- Jak projdu stránkovaný seznam bez načtení celé databáze do paměti?
+- Jak zopakuji request bez dvojí objednávky, faktury nebo e-mailu?
+- Jak zapnu debug režim bez logování osobních údajů?
+
+Minimalistické SDK je lepší než velký balík magie, kterému nikdo nerozumí. Pokud SDK neumí víc než `fetch`, ale přidává 18 závislostí a vlastní runtime filozofii, není to SDK. Je to malý vendor lock-in v kabátku pohodlí.
+
+## HK.2 Ukázky musí začínat bezpečným nastavením
+
+První příklad v dokumentaci je nejdůležitější bezpečnostní školení, které zákazník dostane. Proto by nikdy neměl vypadat takhle:
+
+```js
+const client = new CodyClient("live_sk_123456");
+```
+
+Lepší vzor:
+
+```js
+const client = new CodyClient({
+  apiKey: process.env.CODY_API_KEY,
+  timeoutMs: 10_000,
+});
+```
+
+Není to jen kosmetika. Ukázka má ukázat očekávaný provozní model: tajemství patří do správce secretů nebo prostředí, ne do Gitu, screenshotu, ticketu ani Slack zprávy. Pokud zákazník kopíruje bezpečný pattern od začátku, support později nehasí požár s názvem „omylem jsme pushli produkční klíč do veřejného repozitáře“. Velmi populární seriál, bohužel bez dobrého konce.
+
+Pravidla pro první ukázku:
+
+- Používej environment proměnné nebo jasně označený secret manager pattern.
+- Ukaž timeout hned v inicializaci klienta.
+- Nepoužívej reálně vypadající tokeny; testovací hodnoty mají křičet `test_` nebo `example_`.
+- Nepiš do ukázky `console.log(response)` pro payloady s osobními údaji.
+- Přidej krátkou větu, co se smí a nesmí logovat.
+- Ukaž EU endpoint nebo region, pokud produkt regionální provoz podporuje.
+
+## HK.3 Snippety musí být spustitelné, ne dekorativní
+
+Mnoho dokumentací obsahuje krásně barevné snippety, které se nedají spustit bez tří neviditelných kroků. Chybí import, verze balíčku, proměnné prostředí, testovací data, nebo ukázka předpokládá účet v interním stavu, který zákazník nikdy neuvidí.
+
+Každý důležitý snippet by měl mít tři vrstvy:
+
+1. **Krátký příklad** přímo v dokumentaci.
+2. **Spustitelný soubor** v repozitáři s examples.
+3. **Automatický test**, který ověří, že ukázka po změně SDK pořád funguje.
+
+Praktický standard pro `examples/`:
+
+```text
+examples/
+  node-create-invoice/
+    README.md
+    package.json
+    index.js
+    .env.example
+  python-list-customers/
+    README.md
+    pyproject.toml
+    main.py
+    .env.example
+```
+
+Každý příklad má obsahovat:
+
+- cíl jednou větou,
+- předpoklady a minimální oprávnění tokenu,
+- příkaz pro instalaci,
+- příkaz pro spuštění,
+- ukázku bezpečného `.env.example`,
+- očekávaný výstup bez osobních údajů,
+- poznámku k cleanupu testovacích dat.
+
+Pokud příklad vytváří data, musí být jasné, jak je smazat. Pokud příklad posílá e-mail, webhook nebo platbu, musí používat sandbox. Oficiální ukázka nesmí být past na produkční zákazníky.
+
+## HK.4 Generuj SDK z kontraktu, ale ručně navrhni ergonomii
+
+OpenAPI je skvělý zdroj pravdy pro endpointy, schémata a základní klienty. OpenAPI Specification popisuje standardní strukturu pro dokumentaci HTTP API: https://spec.openapis.org/oas/latest.html
+
+Generované SDK ale často připomíná databázový dump s metodami. Všechno tam je, jen to nechceš používat. Proto je dobrý kompromis:
+
+- OpenAPI drž jako strojově ověřitelný kontrakt.
+- Z něj generuj nízkoúrovňového klienta, typy a validaci.
+- Nad tím napiš tenkou ruční vrstvu pro nejčastější práce zákazníka.
+- Ruční vrstva musí respektovat kontrakt, ne si vymýšlet vlastní API realitu.
+- Každá změna kontraktu spustí testy dokumentace, SDK a ukázek.
+
+Příklad rozdílu:
+
+```js
+// Nízkoúrovňové volání může existovat, ale nemá být hlavní příběh.
+await client.v1InvoicesPost({ body: { customer_id: id, lines } });
+
+// Produktovější SDK metoda je čitelnější a snadněji se dokumentuje.
+await client.invoices.create({ customerId: id, lines });
+```
+
+Ergonomie není pozlátko. Když SDK vede k dobrému pojmenování, menším payloadům a jasným chybám, snižuje počet špatných integrací. Privacy-first přínos: zákazník častěji posílá jen data, která daná metoda opravdu potřebuje.
+
+## HK.5 Chyby v SDK mají učit další krok
+
+Špatná chyba:
+
+```text
+Error: Request failed
+```
+
+Lepší chyba:
+
+```text
+CodyValidationError: invoice.lines[0].price_cents is required.
+Request ID: req_abc123
+Docs: https://example.com/docs/errors#validation
+```
+
+SDK by mělo převést technickou odpověď API do chyb, se kterými se dá pracovat:
+
+- `AuthenticationError` pro špatný nebo chybějící token,
+- `AuthorizationError` pro nedostatečný scope nebo tenantový přístup,
+- `ValidationError` pro špatný vstup,
+- `RateLimitError` s informací, kdy zkusit request znovu,
+- `ConflictError` pro idempotenci, stav nebo kolizi,
+- `ServiceUnavailableError` pro dočasný problém služby.
+
+Do chyb patří request ID, bezpečný kód chyby a odkaz na dokumentaci. Nepatří tam celý payload zákazníka, interní stack trace služby ani token. Debug informace mají být užitečné, ale nesmí z chyby udělat přenosný kufřík osobních údajů.
+
+## HK.6 Verze SDK musí odpovídat verzi slibu
+
+Semantic Versioning definuje význam verzí `MAJOR.MINOR.PATCH` pro veřejné API: https://semver.org/
+
+U SDK je důležité vysvětlit, co znamená breaking změna. Pro zákazníka není breaking jen odstranění metody. Breaking může být i změna výchozího timeoutu, jiný typ chyby, změna retry strategie, nové povinné pole, odlišné stránkování nebo jiné zacházení s `null` hodnotou.
+
+Praktická pravidla:
+
+- Patch verze opravuje chyby bez změny veřejného chování.
+- Minor verze přidává nové metody, volby nebo podporu endpointů zpětně kompatibilně.
+- Major verze mění veřejný kontrakt SDK nebo výchozí chování.
+- Každý release má changelog s dopadem na integrace.
+- Bezpečnostní opravy mají jasně říct, jestli zákazník musí aktualizovat hned.
+- Staré verze SDK mají podporovaný horizont, ne věčný život po půdě.
+
+Privacy-first detail: telemetry v SDK vypínej jako výchozí stav, pokud není nezbytná pro funkci a transparentně popsaná. Když už SDK posílá diagnostiku, musí být opt-in, datově minimální, bez payloadů a s jasným popisem, kam data tečou.
+
+## HK.7 Ukázkové integrace nesmí učit datovou chamtivost
+
+Oficiální integrace často ukazují příliš široký datový tok. Třeba příklad „synchronizuj zákazníky“ stáhne celý seznam osob, uloží si vše lokálně a teprve potom filtruje. To je pohodlné pro demo, ale mizerné pro reálný provoz.
+
+Lepší ukázka má zákazníka vést k menšímu rozsahu:
+
+- používej filtry na serveru,
+- stránkuj data po malých dávkách,
+- vybírej jen potřebná pole pomocí `fields`, pokud API podporuje projekci,
+- ukládej jen lokální identifikátor a stav, ne celý cizí objekt,
+- používej webhooky pro změny místo periodického vysávání celého účtu,
+- nastav retenci synchronizačních logů,
+- u každé kopie dat napiš, proč existuje a kdy se maže.
+
+Příklad textu v dokumentaci:
+
+> „Tato ukázka ukládá pouze `customer_id`, `invoice_id`, stav faktury a čas poslední synchronizace. Jméno, e-mail a adresa zákazníka zůstávají v Cody SaaS a do lokální databáze je neposíláme, protože pro tento report nejsou potřeba.“
+
+Tohle je malá věta s velkým dopadem. Ukazuje zákazníkovi, že minimální data nejsou právní otrava, ale normální technický design.
+
+## HK.8 Checklist SDK a integračních ukázek
+
+- [ ] První SDK příklad používá environment proměnnou nebo secret manager, ne vložený token.
+- [ ] SDK má bezpečné timeouty, rozumnou retry politiku a podporu idempotency klíčů.
+- [ ] Chyby jsou typované, obsahují request ID a neobsahují payloady ani tajemství.
+- [ ] Snippety v dokumentaci odpovídají spustitelným příkladům v repozitáři.
+- [ ] Každý příklad má `.env.example`, očekávaný výstup a cleanup krok.
+- [ ] Ukázky používají sandbox pro e-maily, webhooky, platby a destruktivní operace.
+- [ ] OpenAPI kontrakt, SDK, dokumentace a examples se testují společně.
+- [ ] SDK verze mají SemVer pravidla a changelog s dopadem na integrace.
+- [ ] Debug režim neloguje osobní údaje, tokeny ani celé payloady.
+- [ ] Ukázkové integrace pracují s datovým minimem a vysvětlují, proč se kopírují konkrétní pole.
+
+## Codyho komentář
+
+SDK je místo, kde se produkt potká s realitou zákazníkova kódu. Tam už nepomůže krásný hero text ani logo cloudového partnera. Buď integrace drží za ruku, nebo zákazník skončí v kombinaci Stack Overflow, hněvu a vlastního wrapperu, který bude produkt obcházet ještě za tři roky. Dobré SDK je nenápadné. Špatné SDK je interní organizační struktura vyexportovaná do cizího repozitáře. A to je druh open source, který nikdo nechtěl.
+
+## Zdroje k příloze
+
+- OpenAPI Specification: https://spec.openapis.org/oas/latest.html
+- Semantic Versioning 2.0.0: https://semver.org/
+- OWASP Secrets Management Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html
+
+## Shrnutí přílohy
+
+SDK a integrační ukázky nejsou dekorace k API, ale onboarding do bezpečného provozu. Dobré SDK používá bezpečné výchozí nastavení, čitelné chyby, timeouty, retry pravidla a idempotenci. Ukázky mají být spustitelné, testované, sandboxované a datově úsporné. OpenAPI kontrakt pomáhá držet konzistenci, ale ergonomii nejčastějších zákaznických úloh musí někdo navrhnout ručně. Privacy-first přístup znamená, že dokumentace zákazníka nenápadně učí posílat méně dat, ukládat méně kopií a chránit tajemství už v prvním copy-paste příkladu.
+
 ## Pracovní log
+- 2026-08-16: Přidána příloha HK o SDK a integračních ukázkách: bezpečné nastavení tokenů, spustitelné examples, OpenAPI kontrakt, ergonomická SDK vrstva, typované chyby, SemVer, datové minimum a checklist.
+
 - 2026-08-16: Přidána příloha HJ o API verzování a deprecaci: breaking changes, strategie verzí, hlavičky Deprecation/Sunset, migrační průvodce, dokumentace, agregované měření a checklist.
 
 - 2026-08-16: Přidána příloha HI o API autorizaci v privacy-first SaaS: objektová a funkční autorizace, tenantové hranice, scopes, admin a support akce, negativní testy, bezpečné logování rozhodnutí a checklist.
