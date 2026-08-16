@@ -35581,7 +35581,177 @@ Tenantová izolace je nudná jen do chvíle, než se rozbije. Pak je z ní nejdr
 Tenantová izolace v API je kombinace ověřené identity, explicitního tenant kontextu, objektové a property-level autorizace, centrálně vynucených datových filtrů, negativních testů, bezpečné cache, izolovaných exportů, kontrolovaných background jobů a přísných interních nástrojů. Privacy-first evropský SaaS k tomu přidává mapu dat napříč databázemi, soubory, logy, indexy, backupy a subdodavateli. Cílem není jen zabránit úniku dat, ale umět zákazníkovi srozumitelně dokázat, že jeho prostor je opravdu jeho.
 
 
+
+# Příloha HS: Regionální provoz API v Evropě bez datového ping-pongu, právního mlžení a supportu přes půl planety
+
+Evropský provoz API není jen věta v obchodní prezentaci. Je to soubor technických rozhodnutí: kde běží aplikace, kam tečou logy, kde se ukládají zálohy, kdo má support přístup, jak fungují fronty, jak se doručují e-maily, jak se analyzuje chování a co se stane, když zákazník požádá o export nebo smazání. Pokud data zůstávají v EU jen v hlavní databázi, ale mezitím odletí do amerického helpdesku, globální observability platformy a AI nástroje na sumarizaci ticketů, tak to není evropský provoz. To je evropská databáze s turistickým vízem.
+
+Privacy-first SaaS má regionální provoz popsaný tak, aby mu rozuměl vývojář, obchodník i zákazník před nákupem. Nejde o to tvrdit „nikdy nikam nic nepředáváme“, pokud to není pravda. Jde o to vědět, co se děje, minimalizovat přeshraniční pohyb dat a umět zákazníkovi říct konkrétně: kde jsou jeho data, kdo je zpracovává, jak dlouho a proč.
+
+Evropská komise k mezinárodním transferům osobních údajů připomíná, že při předávání mimo EHP mají platit zvláštní záruky, aby ochrana „cestovala s daty“: https://commission.europa.eu/law/law-topic/data-protection/international-dimension-data-protection/rules-international-data-transfers_en EDPB pro malé firmy zároveň popisuje transfery mimo EHP jako téma, které vyžaduje vhodný mechanismus, například rozhodnutí o odpovídající ochraně, standardní smluvní doložky nebo jiné nástroje podle GDPR: https://www.edpb.europa.eu/sme/be-compliant/international-data-transfers_en
+
+## HS.1 Region není jen hostingová volba v dropdownu
+
+Když dodavatel říká „EU region“, zjisti, čeho přesně se to týká. U SaaS provozu může mít každá vrstva vlastní region:
+
+| Vrstva | Co ověřit | Typická past |
+| --- | --- | --- |
+| Aplikační runtime | kde běží API, workery a cron joby | API v EU, ale background job v globálním regionu |
+| Databáze | primární region, repliky, read replicas | replika pro analytiku mimo EHP |
+| Objektové úložiště | bucket region, lifecycle, replikace | automatická cross-region replika „pro dostupnost“ |
+| Logy a tracing | ingestion region, retence, sampling | celé payloady v globálním log nástroji |
+| E-mail | zpracování obsahu a metadat | transakční e-mail ukládá těla zpráv mimo EU |
+| Support | kdo se dostane k účtu a odkud | dodavatel má 24/7 support bez regionálního omezení |
+| AI funkce | kam putují prompty, soubory a výstupy | shrnutí ticketu pošle osobní údaje do externího modelu |
+
+Praktický výstup má být jedna interní tabulka „kde data žijí“. Ne právnický román. Stačí sloupce: systém, typ dat, region, dodavatel, účel, retence, přístup, transfer mimo EHP ano/ne, dokumentace. Pokud tu tabulku neumíš vyplnit, nemáš evropský provoz pod kontrolou. Máš jen příjemný pocit z faktury v eurech.
+
+## HS.2 Datovou mapu kresli podle toku, ne podle organizačního diagramu
+
+Zákaznická data netečou podle toho, jak má firma pojmenované týmy. Tečou podle requestů, front, exportů, integrací a ručních zásahů. Proto začni cestou jedné konkrétní akce.
+
+Příklad: zákazník nahraje fakturu do SaaS pro účetní workflow.
+
+1. Browser pošle žádost o upload URL.
+2. API ověří tenant, roli a účel uploadu.
+3. Soubor jde do EU objektového úložiště.
+4. Worker vytvoří náhled a vytěží základní metadata.
+5. Výsledek se uloží do databáze.
+6. Audit log uloží bezpečnou událost bez obsahu faktury.
+7. Support vidí jen stav zpracování, ne celý dokument.
+8. Zákazník může soubor exportovat nebo smazat podle retenční politiky.
+
+U každého kroku se ptej:
+
+- Vzniká nové osobní nebo obchodně citlivé datum?
+- Posílá se obsah, nebo jen metadata?
+- Je krok synchronní, nebo ve frontě?
+- Kdo má k datům přístup při incidentu?
+- Jak se krok objeví v audit logu?
+- Co zůstane po smazání účtu?
+
+Tahle mapa je užitečnější než obecné „data processing overview“. Vývojář podle ní najde logovací chyby, obchodník podle ní odpoví na námitky a zákazník konečně uvidí, že privacy-first není jen parfém na compliance.
+
+## HS.3 Transfer mimo EHP je výjimka, kterou musíš pojmenovat
+
+Není realistické tvrdit, že každý evropský projekt nikdy nepoužije žádný mimoevropský nástroj. Realistické a poctivé je mít pravidlo: transfer mimo EHP je výjimka, ne default. Každá výjimka má vlastní záznam.
+
+Minimální záznam výjimky:
+
+```md
+### Výjimka: transakční e-mailový dodavatel
+
+- Účel: doručování systémových e-mailů zákazníkům.
+- Data: e-mailová adresa, předmět, technická metadata doručení, tělo šablony.
+- Obsah zákaznických dat: nepovoleno v běžných šablonách.
+- Region zpracování: EU pro odesílání, globální support metadata podle DPA.
+- Transfer mimo EHP: ano/ne podle aktuální smlouvy a nastavení.
+- Právní mechanismus: doplnit podle DPA a právní kontroly.
+- Alternativa: EU-only poskytovatel nebo vlastní SMTP relay.
+- Majitel: ops + právní odpovědná osoba.
+- Revize: každých 6 měsíců nebo při změně dodavatele.
+```
+
+Důležité: technický tým nemá sám rozhodovat právní mechanismus transferu, pokud jde o osobní údaje. Má ale dodat přesná fakta. Bez faktů právník jen hádá a výsledkem bývá dokument, který neodpovídá realitě. To je nejhorší kombinace: drahé, nudné a pořád nebezpečné.
+
+## HS.4 Logy jsou často nejrychlejší cesta ven z Evropy
+
+Produkční databáze bývá hlídaná. Logy často ne. Přitom logy obsahují request URL, e-maily, IP adresy, tenant ID, chybové detaily, názvy souborů, někdy celé payloady a občas i tokeny, protože někdo v pátek večer napsal `console.log(req.body)`. Ano, pátek večer je technický dluh s lidskou tváří.
+
+Privacy-first pravidla pro logy:
+
+- Nikdy neloguj celé request/response body jako výchozí chování.
+- Maskuj tokeny, cookies, API klíče, e-maily a identifikátory, které nejsou nutné pro support.
+- Odděl bezpečnostní logy, aplikační logy, audit logy a analytiku.
+- Nastav krátkou retenci pro detailní debug logy.
+- U každého log sinku ověř region zpracování a support přístup dodavatele.
+- Do alertů neposílej zákaznický obsah; stačí typ chyby, služba, tenant hash, request ID a odkaz do interního nástroje.
+
+Dobrá chybová věta pro support:
+
+```json
+{
+  "request_id": "req_01k2safe",
+  "tenant_ref": "ten_hash_8f3a",
+  "service": "invoice-import",
+  "error_type": "validation.failed",
+  "safe_detail": "Import failed because required columns are missing.",
+  "region": "eu-central",
+  "payload_logged": false
+}
+```
+
+Špatná chybová věta je cokoliv, co obsahuje celý CSV řádek zákazníka, osobní údaje, token nebo text faktury. Debug komfort nesmí vyhrát nad datovou mapou.
+
+## HS.5 Support přístup musí mít regionální i lidskou brzdu
+
+Největší riziko někdy není server. Je to člověk s admin nástrojem. Support potřebuje pomáhat, ale nemá mít neomezený přístup k zákaznickým datům jen proto, že „někdy se to hodí“.
+
+Základní pravidla:
+
+- Support vidí nejdřív metadata: stav účtu, typ chyby, plán, integrace, poslední bezpečné události.
+- Přístup k obsahu zákaznických dat vyžaduje důvod, časový limit a audit log.
+- Citlivé pohledy mají „break-glass“ režim se schválením nebo alespoň zpětnou kontrolou.
+- Externí dodavatel podpory nedostane produkční data bez výslovného účelu a smluvního krytí.
+- AI sumarizace ticketu pracuje jen s očištěným textem nebo syntetickým výřezem.
+
+Příklad support flow:
+
+1. Zákazník nahlásí problém a uvede `request_id`.
+2. Support najde bezpečný záznam bez obsahu payloadu.
+3. Pokud potřebuje detail, požádá zákazníka o konkrétní souhlas nebo bezpečný screenshot.
+4. Dočasný přístup se otevře na 30 minut.
+5. Každá akce se zapíše do zákaznického audit logu.
+6. Po vyřešení se přístup automaticky zavře.
+
+Tohle může znít přísně. Ve skutečnosti to šetří čas. Support nebloudí v databázi, zákazník ví, co se děje, a firma má důkaz, že přístup k datům není divoký západ s hezkým UI.
+
+## HS.6 Evropský provoz musí přežít incident i změnu dodavatele
+
+Regionální strategie není hotová, dokud nemáš plán na špatný den. Co když EU region dodavatele vypadne? Co když dodavatel změní DPA? Co když nová funkce začne posílat logy jinam? Co když zákazník z enterprise segmentu chce důkaz, že jeho data zůstávají v EHP?
+
+Připrav si tři provozní scénáře:
+
+| Scénář | Otázka | Připravený výstup |
+| --- | --- | --- |
+| Výpadek EU regionu | přepneme jinam, nebo degradujeme službu? | rozhodnutí podle typu dat a SLA |
+| Změna dodavatele | umíme exportovat konfiguraci, logy a historii? | offboarding checklist a retenční plán |
+| Zákaznický audit | umíme doložit regiony, subdodavatele a transfery? | aktuální datová mapa a seznam zpracovatelů |
+
+Pozor na automatické failovery. Pokud systém při výpadku EU regionu bez ptaní přepne zpracování osobních dat mimo EHP, není to jen technická zajímavost. Je to změna datového toku, která patří do právního i zákaznického rozhodování. Někdy je správnější dočasně omezit funkci než potichu změnit pravidla hry.
+
+## HS.7 Checklist regionálního provozu API
+
+Před spuštěním nebo větším releasem projdi tento checklist:
+
+- Máme aktuální mapu datových toků pro API, workery, logy, support a AI funkce.
+- U každého systému víme region zpracování, retenci, účel a typ dat.
+- Transfery mimo EHP jsou pojmenované jako výjimky, ne schované v poznámce pod čarou.
+- Logy neobsahují payloady, tokeny, celé dokumenty ani zbytečné osobní údaje.
+- Observability, e-mail, support a analytika mají stejnou privacy kontrolu jako databáze.
+- Support přístup je omezený, auditovaný a časově svázaný.
+- Zálohy a repliky respektují stejná regionální pravidla jako produkce.
+- Failover scénáře nerozbijí evropský datový slib potichu.
+- Seznam subdodavatelů odpovídá skutečnému provozu, ne verzi z onboarding prezentace.
+- Zákaznický trust pack umí jednoduše vysvětlit, kde data jsou a kdo se k nim může dostat.
+
+## Codyho komentář
+
+Můj pohled — Cody: evropský provoz není o tom, že si na web dáš vlaječku EU a doufáš, že se nikdo nezeptá na logy. Skutečná výhoda vzniká, když umíš říct „tohle víme, tohle neměříme, tady data držíme, tady máme výjimku a tady je důvod“. Je to méně efektní než generický slib „enterprise-grade security“, ale výrazně užitečnější. A jako bonus: když přijde audit, nevypadáš jako člověk, který právě poprvé otevřel vlastní architekturu.
+
+## Zdroje k příloze
+
+- European Commission — Rules on international data transfers: https://commission.europa.eu/law/law-topic/data-protection/international-dimension-data-protection/rules-international-data-transfers_en
+- European Commission — International dimension of data protection: https://commission.europa.eu/law/law-topic/data-protection/international-dimension-data-protection_en
+- European Data Protection Board — International data transfers for small business: https://www.edpb.europa.eu/sme/be-compliant/international-data-transfers_en
+- CNIL — Transfer Impact Assessment guide announcement: https://www.cnil.fr/en/transfer-impact-assessment-tia-cnil-publishes-final-version-its-guide
+
+## Shrnutí přílohy
+
+Regionální provoz API začíná přesnou mapou datových toků, ne hostingovou nálepkou. Privacy-first SaaS musí vědět, kde běží API, databáze, logy, zálohy, fronty, support a AI funkce; transfery mimo EHP má držet jako pojmenované výjimky; logy a observability musí minimalizovat obsah; support přístup má být omezený a auditovaný; failover a změny dodavatelů nesmí potichu rozbít evropský datový slib. Evropský provoz je produktová důvěra vyjádřená architekturou.
+
 ## Pracovní log
+- 2026-08-16: Přidána příloha HS o regionálním provozu API v Evropě: datové toky, EU regiony, transfery mimo EHP, bezpečné logování, support přístup, failover scénáře, subdodavatelé a privacy-first checklist.
 
 - 2026-08-16: Přidána příloha HR o tenantové izolaci v API: tenant kontext, objektová a property-level autorizace, IDOR negativní testy, cache, exporty, fronty, support přístup, evropská datová mapa a checklist.
 
