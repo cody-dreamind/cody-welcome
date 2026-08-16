@@ -36581,7 +36581,220 @@ API tokeny jsou místo, kde se láme rozdíl mezi „máme bezpečnostní strán
 
 API tokeny potřebují celý životní cyklus: vlastníka, účel, scopes, expiraci, rotaci, revokaci, audit a bezpečné logování. Token není univerzální heslo pro všechno; patří jedné integraci a má mít minimální oprávnění. Privacy-first provoz navíc znamená, že tokeny necestují do logů, analytiky, support exportů ani AI promptů. Developer experience má uživatele vést k bezpečným návykům: proměnné prostředí, syntetické příklady, jasné scopes a jednoduchá rotace.
 
+---
+
+# Příloha HY: API odpovědi a vstupní DTO bez úniku polí, mass assignment magie a JSONu jako skládky
+
+Dobré API nevrací „prostě model z databáze“. Dobré API vrací přesně to, co klient potřebuje pro danou práci, a přijímá přesně to, co smí klient změnit. To zní nudně. Což je u bezpečnosti většinou známka, že jdeme správným směrem a ne přímo do ohňostroje.
+
+OWASP v API Security Top 10 2023 popisuje Broken Object Property Level Authorization jako kombinaci dvou starých známých bolestí: příliš bohatých odpovědí a mass assignment zranitelností. Problém je společný: API neověřuje oprávnění na úrovni konkrétních vlastností objektu, takže uživatel může číst nebo měnit pole, která mu nepatří: https://owasp.org/API-Security/editions/2023/en/0xa3-broken-object-property-level-authorization/
+
+## HY.1 Odděl databázový model od API smlouvy
+
+Databázový model je interní pravda systému. API odpověď je veřejný kontrakt. Tyhle dvě věci se mohou podobat, ale nemají být stejné. Jakmile začneš vracet `user.toJSON()` nebo posílat celý ORM objekt, dáváš klientům a útočníkům víc informací, než je nutné: interní ID, stavové příznaky, role, timestampy, technická metadata nebo vlastnosti připravené pro budoucí funkce.
+
+Praktické pravidlo:
+
+- Doménový model popisuje, jak produkt funguje uvnitř.
+- Read DTO popisuje, co má klient vidět.
+- Write DTO popisuje, co smí klient poslat.
+- Admin DTO je jiný kontrakt než zákaznické DTO.
+- Support DTO je ještě přísnější, protože support často vidí data napříč zákazníky.
+
+Příklad interního objektu:
+
+```json
+{
+  "id": "usr_123",
+  "tenant_id": "ten_456",
+  "email": "eva@example.com",
+  "role": "owner",
+  "billing_state": "past_due",
+  "password_hash": "...",
+  "mfa_recovery_codes": ["..."],
+  "internal_risk_score": 72,
+  "created_at": "2026-08-16T10:00:00Z"
+}
+```
+
+Zákaznická odpověď pro profil má být nudnější:
+
+```json
+{
+  "id": "usr_123",
+  "email": "eva@example.com",
+  "role": "owner"
+}
+```
+
+Tahle nuda je záměr. API kontrakt není reality show interních polí.
+
+## HY.2 Response allowlist je levnější než forenzní omluva
+
+U odpovědí používej allowlist: explicitně vyber pole, která se mají vrátit. Ne blacklist: „vrátíme všechno kromě password“. Blacklist skoro vždycky zestárne. Přibude nové pole `recovery_codes`, `legal_hold`, `support_notes`, `ai_summary`, někdo ho zapomene přidat na blacklist a najednou máš incident, který začal jako pohodlný serializer.
+
+Bezpečný postup pro každý endpoint:
+
+- Napiš účel endpointu jednou větou.
+- Sepiš minimální pole potřebná pro tento účel.
+- U každého pole urč, kdo ho smí vidět: vlastník, admin tenant účtu, interní support, systém.
+- Pole s osobními údaji označ jako citlivá a vrať je jen tam, kde dávají produktový smysl.
+- Odpověď validuj schématem, aby se omylem nevrátilo nové interní pole.
+
+Příklad mapování:
+
+| Endpoint | Pole | Kdo smí vidět | Poznámka |
+| --- | --- | --- | --- |
+| `GET /me` | `email` | Přihlášený uživatel | Nutné pro profil |
+| `GET /team/members` | `email` | Admin týmu | Pozor u pozvánek |
+| `GET /team/members` | `last_login_at` | Admin týmu | Zvaž přesnost a účel |
+| `GET /team/members` | `mfa_enabled` | Admin týmu | Bez recovery detailů |
+| `GET /team/members` | `internal_risk_score` | Nikdo v zákaznickém API | Interní bezpečnostní signál |
+
+Privacy-first varianta často znamená nejen „nevracet tajemství“, ale i „nevracet zbytečnou přesnost“. U posledního přihlášení někdy stačí `active_recently: true`, ne přesný časový otisk pro každého člena týmu.
+
+## HY.3 Vstupní DTO musí odmítnout pole navíc
+
+Mass assignment vzniká ve chvíli, kdy framework ochotně přilepí klientský JSON na interní objekt. Klient pošle `name`, ale přidá i `role: "admin"`, `plan: "enterprise"` nebo `invoice_paid: true`. Pokud backend jen slepě binduje payload do modelu, právě jsi zákazníkovi půjčil šroubovák k rozvaděči.
+
+OWASP Mass Assignment Cheat Sheet doporučuje mimo jiné allowlist bindovatelných polí a použití DTO místo přímého mapování vstupu na doménové objekty: https://cheatsheetseries.owasp.org/cheatsheets/Mass_Assignment_Cheat_Sheet.html
+
+Praktická pravidla pro vstupy:
+
+- Validuj payload proti schématu a neznámá pole odmítej.
+- Nepoužívej stejný typ pro `create`, `update` a interní model.
+- Nikdy nedovol klientovi posílat `tenant_id`, `owner_id`, `role`, `price`, `paid`, `is_admin`, `verified`, `deleted_at` nebo podobná systémová pole, pokud k tomu nemá explicitní administrátorský endpoint.
+- U `PATCH` rozliš „pole chybí“ a „pole má být nastaveno na null“.
+- Po validaci znovu aplikuj autorizaci: i povolené pole nemusí být povolené pro tohoto uživatele.
+
+Příklad špatného `PATCH /users/usr_123`:
+
+```json
+{
+  "display_name": "Eva",
+  "role": "owner",
+  "billing_state": "paid"
+}
+```
+
+Správná odpověď není tiché ignorování. Správná odpověď je jasné odmítnutí:
+
+```json
+{
+  "type": "https://api.example.com/problems/invalid-request",
+  "title": "Request contains unsupported fields",
+  "status": 400,
+  "invalid_fields": ["role", "billing_state"],
+  "request_id": "req_123"
+}
+```
+
+Tiché ignorování je lákavé, ale zhoršuje integrace: klient si myslí, že změna prošla. Odmítnutí je otravnější dnes a levnější zítra.
+
+## HY.4 Field-level autorizace není jen pro GraphQL
+
+GraphQL tenhle problém zviditelňuje, protože klient si říká o konkrétní pole. REST ho ale má stejně, jen bývá schovaný v serializaci. Pokud jeden endpoint vrací objekt projektu, musíš rozhodnout, jestli uživatel smí vidět `billing_email`, `integration_secret_configured`, `data_region`, `usage_quota`, `member_count` nebo `last_export_at`.
+
+Field-level autorizace má být jednoduchá tabulka pravidel, ne deset podmínek rozházených v controlleru:
+
+| Pole | Běžný člen | Admin týmu | Owner | Interní support |
+| --- | --- | --- | --- | --- |
+| `project_name` | Ano | Ano | Ano | Jen s důvodem |
+| `billing_email` | Ne | Ne | Ano | Jen s dočasným přístupem |
+| `data_region` | Ano | Ano | Ano | Ano |
+| `api_token_fingerprint` | Ne | Ano | Ano | Jen maskovaně |
+| `support_notes` | Ne | Ne | Ne | Ano, bez exportu zákazníkovi |
+
+U privacy-first SaaS je dobré přidat ještě sloupec „proč“. Když u pole neexistuje dobré proč, pole do odpovědi nepatří. A pokud existuje dobré proč jen pro jedno UI, neznamená to, že pole patří do obecného endpointu pro všechny klienty.
+
+## HY.5 `fields` a `include` musí být smlouva, ne bufet
+
+Parametry jako `?fields=` a `?include=` jsou užitečné. Umí zmenšit odpovědi, zrychlit integrace a dát klientům kontrolu. Jenže bez allowlistu se z nich stane rentgen interního modelu.
+
+Bezpečné `fields`:
+
+```text
+GET /projects?fields=id,name,data_region
+```
+
+Nebezpečné `fields`:
+
+```text
+GET /projects?fields=*
+GET /projects?include=owner.billing,internal_notes,api_tokens
+```
+
+Pravidla:
+
+- Publikuj seznam povolených polí v dokumentaci.
+- Nepovoluj wildcard pro zákaznické API.
+- `include` drž na vztazích, které mají jasný produktový účel.
+- Každý `include` musí projít stejnou tenantovou a field-level autorizací jako samostatný endpoint.
+- Omez hloubku vnoření, aby si klient neobjednal databázový guláš s přílohou.
+
+Pokud klient potřebuje speciální datový výřez, často je lepší vytvořit nový endpoint pro konkrétní práci než rozšiřovat obecný endpoint do tvaru „pošli mi všechno a já si to nějak přeberu“.
+
+## HY.6 Testuj únik polí jako bezpečnostní regresi
+
+Testy nemají kontrolovat jen šťastnou cestu. Musí kontrolovat, že API něco nevrací a něco nepřijímá. To je trochu nepřirozené, protože vývojáři rádi testují přítomnost hodnot. Jenže u privacy-first provozu je nepřítomnost citlivého pole stejně důležitý výsledek jako správný status code.
+
+Testovací sada pro endpoint:
+
+- Snapshot schématu odpovědi pro různé role.
+- Negativní test, že odpověď neobsahuje interní pole.
+- Negativní test, že běžný uživatel nevidí admin-only pole.
+- Test payloadu s nepovolenými poli u `POST`, `PUT` a `PATCH`.
+- Test, že nepovolená pole se neignorují potichu, ale vrací validační chybu.
+- Test `include` a `fields` parametrů s pokusem o citlivé pole.
+- Test exportu, protože exporty rády obcházejí stejné DTO jako API.
+
+Příklad kontrolního seznamu zakázaných názvů polí pro automatizovaný test:
+
+```text
+password
+password_hash
+secret
+token
+api_key
+recovery_code
+internal_note
+risk_score
+deleted_at
+tenant_id
+```
+
+Ano, názvy polí samy o sobě nejsou dokonalý bezpečnostní mechanismus. Ale jako rychlá regresní síť fungují skvěle. Když se v zákaznické odpovědi objeví `password_hash`, nechceš filozofovat. Chceš zastavit build.
+
+## HY.7 Checklist API odpovědí a vstupních DTO
+
+- Má každý endpoint vlastní read/write DTO místo přímého ORM modelu?
+- Vybírá odpověď pole allowlistem, ne blacklistem?
+- Jsou citlivá pole označená a navázaná na konkrétní role a účely?
+- Odmítá validace neznámá vstupní pole?
+- Jsou systémová pole jako `role`, `tenant_id`, `paid` a `is_admin` mimo běžná zákaznická DTO?
+- Má `PATCH` jasnou semantiku pro chybějící hodnotu a `null`?
+- Prochází `fields` a `include` allowlistem, autorizací a limitem hloubky?
+- Existují negativní testy pro únik polí podle rolí?
+- Kontrolují testy i exporty, webhook payloady a audit log odpovědi?
+- Je dokumentace sladěná s reálným schématem odpovědí?
+
+## Codyho komentář
+
+Když API vrací celý interní model, je to jako poslat zákazníkovi fakturu i s poznámkami z interní porady. Možná si jich nevšimne. Možná ano. A možná z toho bude screenshot v bezpečnostním reportu, který si budeš číst ve 23:41 s kávou, co už dávno vzdala život. Moje doporučení: DTO nejsou byrokracie. DTO jsou plot mezi produktem a zákulisím.
+
+## Zdroje k příloze
+
+- OWASP API Security Top 10 2023 — API3 Broken Object Property Level Authorization: https://owasp.org/API-Security/editions/2023/en/0xa3-broken-object-property-level-authorization/
+- OWASP Mass Assignment Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Mass_Assignment_Cheat_Sheet.html
+- OWASP API Security Top 10 2023 — API1 Broken Object Level Authorization: https://owasp.org/API-Security/editions/2023/en/0xa1-broken-object-level-authorization/
+
+## Shrnutí přílohy
+
+API odpovědi a vstupy musí být explicitní smlouva. Databázový model nepatří přímo do JSON odpovědi a klientský payload nepatří přímo do doménového objektu. Používej read/write DTO, allowlist polí, odmítání neznámých vstupů, field-level autorizaci, bezpečné `fields`/`include` parametry a negativní testy na únik citlivých vlastností. Privacy-first API je takové, které vrací minimum potřebných dat a odmítá pohodlnou magii dřív, než se z ní stane incident.
+
 ## Pracovní log
+- 2026-08-16: Přidána příloha HY o API odpovědích a vstupních DTO: oddělení interních modelů od kontraktů, allowlist polí, ochrana před mass assignment, field-level autorizace, bezpečné `fields`/`include`, negativní testy a privacy-first checklist.
+
 - 2026-08-16: Přidána příloha HX o API tokenech: životní cyklus tokenů, scopes, expirace, rotace, okamžitá revokace, bezpečné logování, developer experience a privacy-first checklist.
 
 - 2026-08-16: Přidána příloha HW o retry politice API: retryable chyby, `Retry-After`, backoff s jitterem, idempotency key pro zápisy, stavové endpointy pro dlouhé operace, dokumentace SDK, bezpečná observability a checklist.
