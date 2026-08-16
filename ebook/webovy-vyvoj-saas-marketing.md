@@ -36432,7 +36432,157 @@ Retry politika chrání API i zákazníky před tím, aby se dočasná chyba zm�
 ---
 
 
+
+# Příloha HX: API tokeny, rotace a odvolání přístupů bez permanentních klíčů, sdílených tajemství a supportového archeologického výzkumu
+
+API token je malý řetězec s velkou mocí. Když unikne, útočník často nepotřebuje heslo, session cookie ani dramatickou hollywoodskou kapuci. Stačí mu posílat requesty jako legitimní integrace. Proto tokeny nepatří do Slacku, screenshotů, logů, JavaScriptu na frontendu ani do dokumentace jako „dočasný příklad“, který přežije tři reorganizace a jednu změnu domény.
+
+Dobrá tokenová strategie řeší celý životní cyklus: vydání, omezení oprávnění, bezpečné uložení, použití, rotaci, revokaci, audit a odchod zákazníka. OAuth 2.0 Security Best Current Practice v RFC 9700 popisuje bezpečnostní doporučení pro OAuth 2.0 a zpřísňuje některé starší vzorce používání: https://www.rfc-editor.org/info/rfc9700/. RFC 6750 popisuje bearer tokeny a připomíná jejich zásadní vlastnost: kdo token drží, může ho použít, pokud ho systém přijme: https://datatracker.ietf.org/doc/html/rfc6750. OWASP API Security Top 10 2023 řadí broken authentication mezi klíčová API rizika: https://owasp.org/API-Security/editions/2023/en/0xa2-broken-authentication/.
+
+## HX.1 Token není heslo s jiným jménem
+
+Heslo patří člověku. API token patří konkrétní integraci, aplikaci, prostředí nebo automatizaci. Pokud jeden token používá produkční billing, interní skript, testovací sandbox a externí agentura, nemáš autentizaci. Máš společný klíč pod rohožkou, jen rohožka má hezké UUID.
+
+Praktické pravidlo:
+
+| Typ přístupu | Komu patří | Jak má být omezen | Kdy ho zrušit |
+| --- | --- | --- | --- |
+| Osobní API token | jednomu uživateli | scope + tenant + role uživatele | při odchodu uživatele nebo změně role |
+| Servisní token | jedné integraci | konkrétní scopes a IP/region podle možnosti | při vypnutí integrace |
+| Sandbox token | testovacímu prostředí | jen sandbox data | při resetu sandboxu nebo neaktivitě |
+| Dočasný upload/download token | jedné akci | krátká expirace a konkrétní objekt | automaticky po expiraci nebo použití |
+| Interní support token | schválené podpoře | časové okno a audit | okamžitě po vyřešení ticketu |
+
+V UI pro správu tokenů ukaž účel, vlastníka, poslední použití, rozsah oprávnění, datum vytvoření a datum expirace. Neukaž celý token po vytvoření znovu. Pokud ho někdo ztratil, řešení není „zobrazit tajemství“, ale vytvořit nový a starý zrušit.
+
+## HX.2 Scopes mají popisovat práci, ne databázové tabulky
+
+Špatný scope vypadá jako interní implementace: `users.write`, `orders.all`, `db.admin`. Dobrý scope říká, jakou práci integrace smí dělat: `invoices:read`, `payments:create`, `webhooks:manage`, `exports:create`. Čím víc scope připomíná obchodní schopnost, tím lépe ho pochopí zákazník, vývojář i člověk, který řeší incident.
+
+Příklad pro malý B2B SaaS:
+
+| Scope | Dovoluje | Nedovoluje |
+| --- | --- | --- |
+| `contacts:read` | číst kontakty v tenantovi | exportovat všechny aktivity a poznámky |
+| `contacts:write` | vytvořit nebo upravit kontakt | měnit fakturační nastavení |
+| `projects:read` | číst projekty a stav | číst interní support poznámky |
+| `exports:create` | založit export podle oprávnění | stáhnout export bez další autorizace |
+| `billing:read` | číst faktury a tarif | měnit platební metodu |
+| `webhooks:manage` | spravovat endpointy webhooků | číst historické payloady bez omezení |
+
+Scopes nejsou náhrada za autorizaci objektů. Token s `contacts:read` pořád nesmí číst kontakty jiného tenanta. Tohle zní banálně, dokud někdo do controlleru nenapíše `findById(id)` místo `findByTenantAndId(tenant_id, id)`. Pak už to není banální, ale incident s vlastní židlí u postmortemu.
+
+## HX.3 Expirace a rotace musí být produktově použitelná
+
+Bez expirace se z tokenů stává archeologická vrstva. Po dvou letech nikdo neví, kdo je vytvořil, proč existují a jestli je ještě používá účetní export nebo zapomenutý Zapier z dob, kdy měl tým optimismus a osm trialů. Jenže příliš agresivní expirace zase rozbije integrace a zákazník začne tokeny ukládat do horších míst, aby „to už příště nebolelo“.
+
+Rozumný kompromis:
+
+- Nové tokeny mají výchozí expiraci, třeba 90 nebo 180 dní podle rizika.
+- Vysoce citlivé scopes vyžadují kratší expiraci nebo schválení administrátorem.
+- Produkční servisní tokeny mají plánovanou rotaci s překryvem starého a nového klíče.
+- UI ukazuje blížící se expirace a posílá upozornění správcům, ne všem lidem v tenantovi.
+- API podporuje dva aktivní tokeny pro jednu integraci během rotace.
+- Neaktivní tokeny se po definované době označí a nabídnou ke zrušení.
+
+Rotace bez překryvu je past. Zákazník musí mít možnost vytvořit nový token, nasadit ho, ověřit provoz a teprve potom zrušit starý. Pokud ho donutíš starý token zrušit předem, proměníš bezpečnostní proces v plánovaný výpadek. Gratuluju, compliance právě dostala vlastní incident.
+
+## HX.4 Revokace musí být rychlá, auditovatelná a nudná
+
+Revokace je brzda, která se používá ve stresu. Nesmí být schovaná za support tiketem, ručním SQL příkazem nebo čekáním na noční job. Když zákazník zjistí únik tokenu, potřebuje kliknout na „zrušit“, vidět potvrzení a mít jistotu, že další requesty s tokenem neprojdou.
+
+Revokační minimum:
+
+- Zrušení tokenu se projeví okamžitě nebo v řádu sekund.
+- Akce vytvoří audit log: kdo token zrušil, kdy, z jakého důvodu a jaký tokenový záznam se týkal.
+- Audit log neukládá plnou hodnotu tokenu, jen bezpečný fingerprint nebo poslední znaky.
+- Revokace neodstraňuje historický záznam, protože tým potřebuje stopu pro incident.
+- API odpoví bezpečně: neprozradí, jestli token existoval, pokud request není autorizovaný.
+- Po zrušení se token nedá obnovit, jen nahradit novým.
+
+Pro support připrav scénář: zákazník říká „asi nám unikl API klíč“. Odpověď nemá začínat otázkou „můžete nám ho poslat?“. Správná odpověď: zrušte token v administraci, vytvořte nový, nasaďte ho, zkontrolujte poslední použití a otevřeme audit událostí za dané období. Token samotný support nikdy nepotřebuje vidět.
+
+## HX.5 Tokeny nepatří do logů, analytiky ani promptů
+
+Bearer token je tajemství. Pokud ho uložíš do access logu, error trackeru, analytiky, session replaye nebo promptu pro AI asistenta, právě jsi rozšířil útočnou plochu. Privacy-first provoz znamená, že tajemství nikdy necestuje dál jen proto, že se to hodí při debugování.
+
+Bezpečné zacházení:
+
+- Maskuj `Authorization`, `Cookie`, `X-API-Key` a podobné hlavičky na hraně aplikace.
+- Do logů ukládej fingerprint tokenu, tenant, scope, výsledek autorizace a `request_id`.
+- V chybových reportech rediguj URL query parametry, protože někteří klienti bohužel posílají klíče i tam.
+- Do podpory neposílej raw requesty; připrav export metadat bez tajemství a payloadů.
+- AI asistenti smí pracovat se syntetickými příklady, ne s reálnými tokeny zákazníků.
+- Testy musí obsahovat falešné tokeny jasně označené jako nefunkční.
+
+Dobrý log:
+
+```json
+{
+  "event": "api.auth.denied",
+  "tenant_id": "ten_123",
+  "token_fingerprint": "tokfp_9f12",
+  "reason": "missing_scope",
+  "required_scope": "exports:create",
+  "request_id": "req_abc123"
+}
+```
+
+Špatný log je všechno, kde se objeví `Authorization: Bearer ...`. To není observability. To je sbírka klíčů pro budoucí průšvih, jen se hezky indexuje.
+
+## HX.6 Developer experience musí vést k bezpečným návykům
+
+Bezpečnost tokenů se nevyhraje varováním v dokumentaci, které nikdo nečte. Vyhraje se výchozími cestami, které jsou pohodlné a bezpečné zároveň.
+
+Co má obsahovat developer portál:
+
+- Tlačítko pro vytvoření tokenu s povinným názvem a účelem.
+- Výběr scopes s lidským popisem dopadu.
+- Doporučenou expiraci a vysvětlení, kdy ji zkrátit.
+- Ukázku uložení do proměnné prostředí, ne natvrdo do kódu.
+- Copy-paste příklady se syntetickými hodnotami jako `CODY_API_TOKEN`.
+- Přehled posledního použití bez IP detailů navíc, pokud nejsou potřebné pro bezpečnost.
+- Jednoznačné „revoke“ a „rotate“ akce.
+
+Příklad bezpečné ukázky:
+
+```bash
+export CODY_API_TOKEN="replace_me"
+curl -H "Authorization: Bearer $CODY_API_TOKEN" \
+  https://api.example.com/v1/projects
+```
+
+Do dokumentace nepatří reálný token ani „demo“ klíč, který funguje proti sdílenému účtu. Pokud chceš interaktivní demo, použij sandbox s omezenou platností, syntetickými daty a jasnou retencí.
+
+## HX.7 Checklist API tokenů a revokace
+
+- Má každý token jasného vlastníka, název, účel, scopes a expiraci?
+- Lze token po vytvoření zobrazit jen jednou?
+- Jsou scopes popsané jako produktové schopnosti, ne interní tabulky?
+- Kontroluje API tenant, objektová oprávnění a scope při každém requestu?
+- Existuje bezpečná rotace s překryvem starého a nového tokenu?
+- Projeví se revokace okamžitě nebo v řádu sekund?
+- Ukládají logy fingerprint a metadata místo plného tokenu?
+- Maskují se tajemství v logování, error trackingu, analytice a support exportech?
+- Má zákazník audit log vytvoření, rotace a zrušení tokenu?
+- Jsou dokumentační příklady bezpečné po copy-paste?
+
+## Codyho komentář
+
+API tokeny jsou místo, kde se láme rozdíl mezi „máme bezpečnostní stránku“ a „máme bezpečný produkt“. Moje pravidlo: token musí být tak omezený, aby jeho únik byl incident, ne konec světa. A zároveň tak použitelný, aby ho zákazník nemusel obcházet. Bezpečnost, která se nedá používat, je jen elegantní generátor workaroundů. A workaroundy, jak známo, mají rády produkci.
+
+## Zdroje k příloze
+
+- RFC 9700 — Best Current Practice for OAuth 2.0 Security: https://www.rfc-editor.org/info/rfc9700/
+- RFC 6750 — OAuth 2.0 Bearer Token Usage: https://datatracker.ietf.org/doc/html/rfc6750
+- OWASP API Security Top 10 2023 — API2 Broken Authentication: https://owasp.org/API-Security/editions/2023/en/0xa2-broken-authentication/
+
+## Shrnutí přílohy
+
+API tokeny potřebují celý životní cyklus: vlastníka, účel, scopes, expiraci, rotaci, revokaci, audit a bezpečné logování. Token není univerzální heslo pro všechno; patří jedné integraci a má mít minimální oprávnění. Privacy-first provoz navíc znamená, že tokeny necestují do logů, analytiky, support exportů ani AI promptů. Developer experience má uživatele vést k bezpečným návykům: proměnné prostředí, syntetické příklady, jasné scopes a jednoduchá rotace.
+
 ## Pracovní log
+- 2026-08-16: Přidána příloha HX o API tokenech: životní cyklus tokenů, scopes, expirace, rotace, okamžitá revokace, bezpečné logování, developer experience a privacy-first checklist.
 
 - 2026-08-16: Přidána příloha HW o retry politice API: retryable chyby, `Retry-After`, backoff s jitterem, idempotency key pro zápisy, stavové endpointy pro dlouhé operace, dokumentace SDK, bezpečná observability a checklist.
 - 2026-08-16: Přidána příloha HV o API SLO a error budgetu: kritické zákaznické cesty, SLI/SLO tabulka, error budget jako rozhodovací nástroj, alerty podle burn rate, privacy-first observability data a checklist.
