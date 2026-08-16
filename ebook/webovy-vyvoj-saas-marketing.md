@@ -33731,7 +33731,187 @@ API kontrakt je trochu jako dobrá domluva v týmu: nejvíc ho oceníš ve chví
 API kontrakt je provozní pojistka proti náhodným breaking changes, supportové archeologii a zbytečnému sdílení produkčních dat při ladění integrací. Drž specifikaci jako zdroj pravdy, definuj breaking change předem, testuj kritické konzumenty, ukázky dělej syntetické a release změny pouštěj přes kompatibilitní bránu. Privacy-first API není jen bezpečnější. Je i nudněji předvídatelné, což je v integracích kompliment, ne urážka.
 
 
+# Příloha HI: API autorizace bez IDOR loterie, admin endpointů na dobré slovo a tenantového chaosu
+
+Autentizace odpovídá na otázku „kdo volá“. Autorizace odpovídá na mnohem nepříjemnější otázku „co přesně smí tenhle volající udělat s tímhle konkrétním objektem právě teď“. V API se tyhle dvě věci často slepí dohromady. Uživatel má platný token, endpoint odpovídá, ID v URL existuje, všechno svítí zeleně. Jenže zelená kontrolka neříká, jestli účet opravdu smí číst fakturu cizího tenanta, měnit roli kolegy nebo exportovat celou databázi kontaktů.
+
+OWASP API Security Top 10 2023 dává Broken Object Level Authorization na první místo a připomíná, že API endpointy často pracují s identifikátory objektů, což vytváří široký prostor pro chyby v kontrole přístupu: https://owasp.org/www-project-api-security/ Zároveň samostatně popisuje Broken Function Level Authorization, kde běžný uživatel nebo anonymní klient dosáhne na funkci, která měla patřit jen jiné roli nebo administraci: https://owasp.org/API-Security/editions/2023/en/0xa5-broken-function-level-authorization/
+
+Privacy-first pointa je jednoduchá: únik nemusí vzniknout jen hackem s kapucí a dramatickou hudbou. Často stačí endpoint, který věří `account_id` z requestu víc než vlastnímu autorizačnímu modelu. A to je přesně ten druh nudné chyby, která umí zničit důvěru rychleji než marketing stihne napsat „bereme bezpečnost vážně“.
+
+## HI.1 Role nestačí, autorizace musí znát objekt
+
+Role typu `admin`, `member`, `viewer` jsou užitečné, ale samy o sobě nestačí. V multitenant SaaS není otázka jen „je uživatel admin?“, ale „je adminem právě v téhle organizaci?“ A ještě přesněji: „smí v téhle organizaci provést tuhle akci nad tímhle objektem, který je v tomhle stavu?“
+
+Špatný mentální model:
+
+```text
+user.role == "admin" -> povolit
+```
+
+Lepší mentální model:
+
+```text
+can(user, "invoice.read", invoice)
+```
+
+Tahle druhá varianta nutí systém načíst vztah mezi uživatelem, tenantem, objektem a akcí. Faktura nepatří jen do tabulky `invoices`; patří do organizace, má stav, může obsahovat osobní nebo účetní údaje a může mít vlastní pravidla pro export. Pokud kontroluješ jen roli, snadno přehlédneš hranici mezi tenanty.
+
+Praktický vzor pro každý endpoint:
+
+1. Z tokenu zjisti identitu volajícího a jeho aktivní kontext.
+2. Načti objekt podle ID tak, aby dotaz už obsahoval tenantové omezení.
+3. Zkontroluj akci proti objektu, ne jen proti URL.
+4. Vrať stejnou bezpečnou odpověď pro „neexistuje“ a „nesmíš vědět, že existuje“, pokud by rozdíl prozrazoval cizí data.
+5. Loguj rozhodnutí autorizace bez celého objektu a bez tokenu.
+
+Příklad rozdílu:
+
+```text
+GET /api/invoices/inv_123
+```
+
+Nebezpečná implementace se zeptá: „Existuje faktura `inv_123`?“ Bezpečnější implementace se zeptá: „Existuje faktura `inv_123`, která patří do některé organizace, kde má tenhle uživatel právo `invoice.read`?“ To není kosmetika. To je rozdíl mezi API a samoobslužným výdejním okénkem na cizí účetnictví.
+
+## HI.2 Tenantová hranice patří do datového dotazu, ne až do UI
+
+UI může skrýt tlačítko. API musí vynutit pravidlo. Jakmile se bezpečnost spoléhá na to, že frontend „přece neposílá špatné ID“, je hotovo. Útočník nepoužívá tvůj klikací prototyp. Používá HTTP klienta a zvědavost.
+
+Tenantovou hranici proto drž co nejblíž datům:
+
+- každý objekt má jasné vlastnictví nebo vazbu na tenant,
+- každý list endpoint filtruje podle tenantového kontextu serverově,
+- každý detail endpoint kontroluje přístup v dotazu nebo bezprostředně po načtení,
+- každá změnová operace ověřuje právo ke změně i aktuální stav objektu,
+- každý export a bulk endpoint má přísnější kontrolu než běžné čtení.
+
+Typická chyba vzniká u pomocných endpointů: autocomplete, exporty, interní vyhledávání, přílohy, historické záznamy, audit logy, veřejné sdílení, pozvánky. Hlavní obrazovka mívá autorizaci ošetřenou, protože ji někdo testuje. Vedlejší endpoint zůstane jako zapomenutá servisní chodba s cedulkou „tady nikdo nepůjde“. Internet tu cedulku nečte.
+
+Mini-checklist pro tenantové dotazy:
+
+- Umí každý dotaz říct, z jakého tenantového kontextu běží?
+- Nejde změnit `tenant_id`, `organization_id` nebo `account_id` jen parametrem v requestu?
+- Mají background joby a servisní účty vlastní omezený kontext?
+- Testujeme přístup mezi dvěma různými tenanty se stejnou rolí?
+- Nevrací chybové odpovědi rozdílné informace pro cizí a neexistující objekt?
+
+## HI.3 Scopes popisují účel, ne zdobení tokenu
+
+OAuth 2.0 a jeho okolí často svádí k tomu, že token dostane široký scope „ať to neotravuje“. Jenže scope je produktový závazek. Říká, jaký druh práce může klient dělat. RFC 9700 shrnuje současné bezpečnostní doporučení pro OAuth 2.0 a navazuje na starší RFC 6749, 6750 a 6819 s ohledem na praktické útoky a slabší režimy provozu: https://www.rfc-editor.org/info/rfc9700
+
+Pro SaaS API je dobré oddělit minimálně:
+
+| Scope | Příklad použití | Poznámka |
+| --- | --- | --- |
+| `profile:read` | načíst základní informace účtu | bez citlivých detailů |
+| `contacts:read` | číst kontakty | neznamená export všeho |
+| `contacts:write` | vytvářet a měnit kontakty | oddělené od mazání |
+| `invoices:read` | číst faktury | citlivější než běžná metadata |
+| `invoices:export` | hromadný export faktur | samostatné schválení |
+| `webhooks:manage` | nastavovat webhooky | riziko odtoku dat ven |
+| `admin:users` | správa uživatelů | jen pro úzkou roli |
+
+Scope ale nesmí nahradit objektovou autorizaci. Token se scope `invoices:read` neznamená „čti všechny faktury v systému“. Znamená „můžeš číst faktury v rámci kontextu, ke kterému máš oprávnění“. Tohle napiš i do dokumentace, protože integrační partneři často přemýšlejí podle scope názvů.
+
+Codyho komentář: scope `all` je jako klíč od budovy přilepený izolepou pod rohožku. Technicky pohodlné, duchovně únavné, bezpečnostně trapné.
+
+## HI.4 Admin a support akce potřebují tvrdší bránu
+
+Ne všechny endpointy mají stejné riziko. Čtení vlastního profilu není totéž jako export všech uživatelů, změna role, vypnutí 2FA, přidání webhooku nebo spuštění refundu. Citlivé akce musí mít další ochranné vrstvy.
+
+U admin a support funkcí zvaž:
+
+- oddělené role pro billing, podporu, technickou správu a vlastníka účtu,
+- potvrzení citlivé akce heslem, 2FA nebo re-auth krokem,
+- časově omezený support access s důvodem a viditelným audit logem,
+- maker-checker režim u nevratných nebo rizikových změn,
+- rate limit a alert pro neobvyklé množství exportů, pozvánek nebo změn rolí,
+- zákaz použití běžného zákaznického tokenu pro interní administraci.
+
+Support přístup je samostatná disciplína. Podpora často potřebuje pomoct rychle, ale to neznamená, že má mít univerzální průkaz do všech účtů. Lepší model: zákazník nebo oprávněný interní člověk zapne dočasný přístup, systém uloží důvod, rozsah, čas expirace a všechny provedené akce. Po expiraci přístup zmizí sám. Žádné „Pepa má pořád admina, protože kdysi ladil fakturaci“. Pepa si zaslouží méně pokušení a firma méně rizika.
+
+## HI.5 Testuj negativní scénáře jako hlavní funkci
+
+Autorizace se nedá ověřit jen happy path testem. Pokud test říká „admin vidí fakturu“, pořád nevíš, jestli běžný uživatel nevidí fakturu taky. Potřebuješ testovací matici identit, tenantů, rolí, stavů objektu a akcí.
+
+Minimální sada testů pro endpoint `GET /api/invoices/{id}`:
+
+| Scénář | Očekávání |
+| --- | --- |
+| vlastník organizace čte vlastní fakturu | povoleno |
+| účetní role čte fakturu ve své organizaci | povoleno podle pravidel |
+| běžný člen bez billing práva čte fakturu | zamítnuto |
+| uživatel z jiného tenanta čte existující fakturu | zamítnuto bez úniku detailu |
+| anonymní klient čte fakturu | zamítnuto |
+| token se správným scope, ale špatným tenantem | zamítnuto |
+| zrušený uživatel se starým tokenem | zamítnuto |
+
+Stejnou logiku použij pro `POST`, `PATCH`, `DELETE`, exporty, vyhledávání a přílohy. Právě přílohy bývají zákeřné: hlavní objekt má autorizaci, ale soubor na `/files/{id}` ji obchází. Pokud zákazník nahraje smlouvu, screenshot nebo fakturu, odkaz na soubor nesmí být alternativní API bez pravidel.
+
+Dobrá praxe je mít bezpečnostní fixture: dva tenanti, několik rolí, stejné názvy objektů a syntetická data. Test pak chytá přesně tu chybu, kdy se vývojář omylem spolehne na `id` bez tenantového omezení. Syntetická data jsou důležitá i privacy-first: testy nemají být muzeum produkčních úniků.
+
+## HI.6 Loguj autorizační rozhodnutí, ale ne vyrabovanou databázi
+
+Když se něco pokazí, potřebuješ vědět, kdo se pokusil o jakou akci, nad jakým typem objektu, s jakým výsledkem a v jakém tenantovém kontextu. Nepotřebuješ do logu uložit celý objekt, payload, token ani osobní údaje navíc.
+
+Užitečný autorizační log:
+
+```json
+{
+  "event": "authorization.denied",
+  "actor_id": "usr_123",
+  "tenant_id": "org_456",
+  "action": "invoice.export",
+  "resource_type": "invoice",
+  "resource_id_hash": "hash_abc",
+  "reason": "missing_scope",
+  "request_id": "req_789"
+}
+```
+
+Co tam nepatří: access token, e-mail zákazníka, celé číslo faktury, adresa, položky faktury, celý request body, session cookie nebo interní stack trace. Pokud potřebuješ korelaci, používej `request_id` a interní identifikátory s rozumnou retencí. Log je nástroj pro vyšetření, ne druhá databáze s horšími právy.
+
+Alerty nastav na vzory, které opravdu něco znamenají:
+
+- více zamítnutých přístupů napříč různými objekty,
+- pokusy o přístup mezi tenantry,
+- neobvyklý počet exportů nebo změn rolí,
+- použití starého tokenu po revokaci,
+- přístup support role mimo schválené okno,
+- nové endpointy bez autorizační politiky.
+
+## HI.7 Checklist API autorizace
+
+- Má každý endpoint jasně popsanou akci, objekt a rizikovost?
+- Kontroluje API přístup k objektu serverově, ne jen přes UI?
+- Je tenantová hranice součástí dotazu nebo bezprostředné autorizační kontroly?
+- Nejde změnit tenant, organizaci nebo vlastníka objektu parametrem v requestu?
+- Jsou scopes jemnější než `read/write/all` a odpovídají skutečné práci klienta?
+- Mají exporty, role, webhooky, billing a support akce přísnější pravidla?
+- Testujeme negativní scénáře mezi dvěma tenantry a více rolemi?
+- Chovají se `404` a `403` tak, aby neprozrazovaly cizí data?
+- Logujeme autorizační rozhodnutí bez tokenů a bez citlivých payloadů?
+- Má každý nový endpoint review autorizace před releasem?
+
+## Codyho komentář
+
+Nejlepší API autorizace je nudná ve dvou směrech: vývojář přesně ví, kam dát pravidlo, a útočník přesně nikam nedojde. Pokud musí každý endpoint vymýšlet vlastní mini-bezpečnostní filozofii, skončí to jako město, kde každé dveře mají jiný zámek, některé žádný a jedna garáž vede rovnou do účetnictví.
+
+## Zdroje k příloze
+
+- OWASP API Security Project a přehled API Security Top 10 2023, včetně Broken Object Level Authorization jako hlavního rizika: https://owasp.org/www-project-api-security/
+- OWASP API5:2023 Broken Function Level Authorization k riziku endpointů a funkcí dostupných mimo správnou roli nebo skupinu: https://owasp.org/API-Security/editions/2023/en/0xa5-broken-function-level-authorization/
+- RFC 9700, Best Current Practice for OAuth 2.0 Security, pro aktuální bezpečnostní doporučení k OAuth 2.0 a práci s tokeny: https://www.rfc-editor.org/info/rfc9700
+- OWASP Authorization Cheat Sheet k principům deny-by-default, centrální autorizační logiky a ověřování oprávnění při každém requestu: https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html
+
+## Shrnutí přílohy
+
+API autorizace musí rozhodovat podle identity, akce, objektu, tenanta a aktuálního stavu. Role jsou jen začátek; skutečná ochrana vzniká až v objektové kontrole, tenantově omezených dotazech, jemných scopes, tvrdší bráně pro citlivé akce, negativních testech a bezpečných autorizačních logách. Privacy-first SaaS nechrání data tím, že doufá ve slušnost klienta. Chrání je tím, že každé API volání musí projít jasným, opakovatelným a auditovatelným rozhodnutím.
+
+
 ## Pracovní log
+
+- 2026-08-16: Přidána příloha HI o API autorizaci v privacy-first SaaS: objektová a funkční autorizace, tenantové hranice, scopes, admin a support akce, negativní testy, bezpečné logování rozhodnutí a checklist.
 
 - 2026-08-16: Přidána příloha HH o API kontraktech: OpenAPI jako zdroj pravdy, definice breaking changes, schémata pro prázdné a chybové stavy, contract testy, syntetické payloady, release kompatibilitní brána a privacy-first checklist.
 - 2026-08-16: Přidána příloha HG o API cache hlavičkách: rozlišení veřejných a přihlášených odpovědí, `Cache-Control`, `Vary`, `ETag`, CDN allowlist, invalidace, bezpečnostní testy a privacy-first checklist.
