@@ -34692,7 +34692,166 @@ Webhooky jsou krásný příklad věci, která v demo videu trvá tři minuty a 
 
 Bezpečné webhooky mají jasný event kontrakt, ověřují podpis před zpracováním, chrání se proti replay útokům, zpracovávají duplicity idempotentně, oddělují příjem od business dopadu a ukládají jen bezpečná metadata. Privacy-first webhook není datová hadice. Je to přesně popsaná událost, která projde ověřenou bránou, udělá jednu věc a nezanechá po sobě hromadu citlivého bordelu.
 
+# Příloha HN: Asynchronní API joby bez timeoutů, duplicit a černé díry pro zákazníka
+
+Ne každá API operace se má dokončit během jednoho HTTP requestu. Import tisíce kontaktů, generování exportu, přepočet reportu, hromadná synchronizace faktur nebo mazání workspace po odchodu zákazníka nejsou „jen trochu pomalejší endpointy“. Jsou to práce. A práce potřebuje stav, vlastníka, limit, auditní stopu a jasnou odpověď pro klienta.
+
+Privacy-first pohled je jednoduchý: dlouhá operace nesmí nutit zákazníka opakovaně posílat stejný payload, nesmí schovávat citlivá data v logu workeru a nesmí držet raw soubory navždy jen proto, že se fronta tváří jako sklad. Asynchronní API není technická vychytávka. Je to slib, že i pomalá věc proběhne předvídatelně, bezpečně a dohledatelně.
+
+## HN.1 Nejdřív rozhodni, co patří mimo request
+
+Synchronní endpoint je dobrý pro rychlé čtení, validaci, vytvoření malého objektu nebo změnu jednoduchého stavu. Jakmile operace závisí na externím systému, velkém souboru, více tenantech, drahém výpočtu nebo lidské kontrole, začíná vonět po jobu. A „vonět“ myslím v tom smyslu, že když to ignoruješ, bude to za měsíc smrdět v produkci.
+
+Kandidáti na asynchronní zpracování:
+
+- importy a exporty větších dat,
+- hromadné změny uživatelů, oprávnění nebo ceníků,
+- generování PDF, reportů a archivů,
+- synchronizace s účetnictvím, CRM nebo platební bránou,
+- mazání, anonymizace a retenční úklid,
+- AI zpracování, které má nejistou latenci nebo pracuje s frontou.
+
+Rozhodovací otázka není „vejde se to do timeoutu dneska?“. Správná otázka je: „Co se stane, když to zákazník spustí desetkrát, zavře prohlížeč, dojde k retry, externí systém zpomalí a support se za dva dny zeptá, kde to skončilo?“ Pokud odpověď začíná slovem „ehm“, udělej job.
+
+## HN.2 `202 Accepted` je začátek smlouvy, ne hotový výsledek
+
+HTTP status `202 Accepted` říká, že request byl přijat ke zpracování, ale zpracování ještě nemusí být dokončeno. RFC 9110 popisuje `202` jako záměrně nekomitující odpověď pro případy, kdy výsledek může být zpracován později: https://www.rfc-editor.org/rfc/rfc9110.html#name-202-accepted. To je přesně model pro API joby.
+
+Dobrá odpověď na spuštění jobu:
+
+```json
+{
+  "job_id": "job_01J7EXAMPLE",
+  "status": "queued",
+  "status_url": "/v1/jobs/job_01J7EXAMPLE",
+  "cancel_url": "/v1/jobs/job_01J7EXAMPLE/cancel",
+  "created_at": "2026-08-16T09:00:00Z",
+  "expires_at": "2026-08-23T09:00:00Z"
+}
+```
+
+Špatná odpověď:
+
+```json
+{ "ok": true }
+```
+
+`ok: true` je API verze pokrčení ramen. Klient neví, jestli má čekat, pollovat, opakovat request, otevřít tiket nebo obětovat kávu démonům distribuovaných systémů. `202` bez `status_url` je jen elegantnější způsob, jak zákazníkovi říct: „něco jsme udělali, možná“.
+
+## HN.3 Stavový model musí být malý a nemilosrdně jasný
+
+Job nepotřebuje dvacet stavů, které rozumí jen autor workeru. Potřebuje stabilní životní cyklus, který používá API, UI, support i dokumentace. Čím víc stavů, tím víc hran, kde se integrace zasekne.
+
+Praktický základ:
+
+| Stav | Význam | Co vidí klient |
+| --- | --- | --- |
+| `queued` | práce je přijata a čeká | může pollovat nebo zrušit |
+| `running` | worker zpracovává úlohu | může sledovat průběh, ne opakovat start |
+| `succeeded` | výsledek je připraven | dostane výsledek nebo odkaz |
+| `failed` | práce skončila chybou | dostane bezpečný důvod a další krok |
+| `cancelled` | zákazník nebo systém práci zrušil | ví, že dopad byl zastaven nebo kompenzován |
+| `expired` | výsledek už není dostupný | musí spustit novou práci |
+
+U každého stavu napiš, zda je terminální. `succeeded`, `failed`, `cancelled` a `expired` obvykle ano. `queued` a `running` ne. Terminální stav se nemá samovolně měnit, pokud k tomu nemáš explicitní opravný proces. Job historie není gumovací tabule.
+
+## HN.4 Idempotence spouštění je povinná, ne prémiový tarif
+
+Dlouhé operace mají zvláštní schopnost lákat klienty k opakování. Uživatel klikne dvakrát. HTTP klient retryne request. Integrátor neví, jestli první request doběhl. Pokud každý start vytvoří nový job, můžeš snadno vygenerovat dvojí export, dvojí import nebo dvojí fakturační akci.
+
+Startovací endpoint proto podporuje idempotency key:
+
+```http
+POST /v1/imports
+Idempotency-Key: contacts-import-2026-08-16-a
+```
+
+Server uloží kombinaci tenant, endpoint, idempotency key a bezpečný hash vstupních parametrů. Pokud přijde stejný request znovu, vrátí stejný `job_id`. Pokud přijde stejný klíč s jiným payloadem, vrátí chybu typu „klíč už byl použit pro jiný záměr“.
+
+Privacy-first detail: idempotency key nesmí být e-mail zákazníka, rodné číslo, název interní kampaně ani jiný identifikátor, který potom zůstane v logu déle než samotná data. Klíč je technická stopa záměru, ne nový způsob profilování.
+
+## HN.5 Výsledek vrať střídmě a s expirací
+
+Asynchronní job často vyrábí výstup: CSV export, PDF report, ZIP archiv, seznam chyb importu nebo odkaz na vytvořený objekt. Výstup je datový produkt a zaslouží si stejnou otázku jako všechno ostatní: co přesně obsahuje, kdo ho smí stáhnout a kdy zmizí?
+
+Bezpečný výsledek obsahuje:
+
+- `result_url` jen pro oprávněného uživatele nebo služební účet,
+- jasnou expiraci odkazu i samotného artefaktu,
+- typ souboru a velikost před stažením,
+- počet zpracovaných, přeskočených a chybových položek,
+- chybový report bez citlivých hodnot, pokud to jde,
+- auditní záznam o vytvoření a stažení.
+
+U importů často stačí vrátit řádek, sloupec, kód chyby a krátkou nápovědu. Není nutné vracet celý původní řádek s osobními údaji. U exportů je dobré mít krátkou retenční dobu, například několik dní podle účelu. „Exporty necháváme navždy, kdyby se hodily“ je věta, po které privacy-first architekt slyší vzdálenou sirénu.
+
+## HN.6 Chyby popisuj jako další krok, ne jako interní román
+
+Job může selhat při validaci, kvůli limitu, kvůli oprávnění, kvůli externímu systému nebo kvůli interní chybě. Klient potřebuje vědět, jestli má opravit vstup, počkat, kontaktovat support, nebo zkusit operaci znovu. RFC 9457 definuje standardní formát „problem details“ pro strojově čitelné API chyby: https://www.rfc-editor.org/rfc/rfc9457.html. U jobů se hodí stejně jako u běžných endpointů.
+
+Příklad bezpečné chyby:
+
+```json
+{
+  "status": "failed",
+  "error": {
+    "type": "https://docs.example.com/problems/import-validation-failed",
+    "title": "Import obsahuje neplatné řádky",
+    "detail": "12 řádků nelze zpracovat. Stáhněte si chybový report a opravte vstupní soubor.",
+    "retryable": false,
+    "correlation_id": "req_01J7SAFE"
+  }
+}
+```
+
+Interní stack trace, SQL chyba nebo raw odpověď dodavatele patří do chráněného logu s retencí a přístupovým řízením. Ne do API odpovědi. OWASP API Security Top 10 2023 upozorňuje mimo jiné na rizika spojená s autorizačními chybami na úrovni objektů a vlastností; u jobů to znamená hlídat nejen samotný job, ale i jeho výsledky, reporty a metadata: https://owasp.org/www-project-api-security/.
+
+## HN.7 Monitoring jobů má chránit zákazníka i účet za infrastrukturu
+
+Fronta bez monitoringu je jen sofistikované místo, kde se práce ztratí potichu. Sleduj technické i produktové signály, ale zase bez datového vysavače.
+
+Minimum pro provoz:
+
+- počet jobů podle typu, stavu a tenantového tarifu,
+- stáří nejstaršího čekajícího jobu,
+- p95 a p99 doba zpracování podle typu,
+- počet retry a dead-letter položek,
+- počet zrušených a expirovaných výsledků,
+- objem uložených artefaktů a blížící se retenční úklid.
+
+Alert typu „fronta má 10 000 zpráv“ je méně užitečný než „exporty faktur čekají déle než 15 minut a porušují zákaznický slib“. Metrika má mít vlastníka a navazující akci. Jinak je to jen červená kontrolka, kterou se tým naučí ignorovat jako kontrolku motoru u firemní dodávky.
+
+## HN.8 Checklist asynchronních API jobů
+
+- Má každý dlouhý endpoint jasné rozhodnutí, proč je synchronní nebo asynchronní?
+- Vrací spuštění jobu `202 Accepted`, `job_id`, `status_url` a jasnou expiraci výsledku?
+- Je stavový model malý, dokumentovaný a sdílený mezi API, UI a supportem?
+- Podporuje startovací endpoint idempotency key a chrání před duplicitním dopadem?
+- Má každý výsledek oprávnění, expiraci, auditní stopu a datové minimum?
+- Jsou chyby strojově čitelné, bezpečné a orientované na další krok klienta?
+- Existuje možnost zrušení jobu nebo aspoň jasné vysvětlení, proč zrušit nejde?
+- Sleduje monitoring stáří fronty, retry, dead-letter položky a porušení zákaznického slibu?
+- Maže retenční úklid artefakty a vstupní payloady podle účelu, ne podle nálady disku?
+
+## Codyho komentář
+
+Asynchronní API job je jako výdejní lístek v dobré kavárně. Nečekáš u baristy s nataženou rukou, dostaneš číslo, víš, že se objednávka připravuje, a když se něco pokazí, někdo ti řekne co dál. Špatný job systém je kavárna, kde ti vezmou peníze, zmizí za závěs a po dvaceti minutách se dozvíš, že „to asi běží“. To není škálování. To je divadlo s frontou.
+
+## Zdroje k příloze
+
+- RFC 9110 — HTTP Semantics, status `202 Accepted`: https://www.rfc-editor.org/rfc/rfc9110.html#name-202-accepted
+- RFC 9457 — Problem Details for HTTP APIs: https://www.rfc-editor.org/rfc/rfc9457.html
+- OWASP API Security Project a API Security Top 10 2023: https://owasp.org/www-project-api-security/
+
+## Shrnutí přílohy
+
+Asynchronní API joby jsou správná odpověď na dlouhé, drahé nebo nejisté operace. Dobrý návrh vrací `202 Accepted`, stabilní `job_id`, čitelný stav, idempotentní spuštění, bezpečné výsledky, smysluplné chyby, monitoring a retenční úklid. Privacy-first princip říká: dlouhá operace nesmí být výmluva pro nekonečné ukládání payloadů, nejasné oprávnění nebo podporu přes křišťálovou kouli.
+
+---
+
+
 ## Pracovní log
+- 2026-08-16: Přidána příloha HN o asynchronních API jobech: rozhodnutí sync/async, `202 Accepted`, stavový model, idempotentní spouštění, bezpečné výsledky, problem details, monitoring, retence a privacy-first checklist.
 - 2026-08-16: Přidána příloha HM o bezpečných webhookách: event kontrakt, ověření podpisu nad raw body, replay ochrana, rychlý příjem přes frontu, idempotentní zpracování, minimální ukládání payloadů, odchozí webhooky a checklist.
 
 - 2026-08-16: Přidána příloha HL o korelačních ID a trasování API: bezpečné request ID, W3C trace context, logování metadat místo payloadů, SDK chyby, datová mapa observability, alerty a privacy-first checklist.
