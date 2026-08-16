@@ -36973,7 +36973,225 @@ Validace je místo, kde se pozná dospělost API. Začátečnický backend se sn
 
 Validace API vstupů má být produktový kontrakt, ne sbírka náhodných regexů. Každé pole potřebuje jasný význam, typ, rozsah, limity a pravidla pro normalizaci. Schéma má odmítat neznámá pole, chybové odpovědi mají být stabilní a bezpečné a objemové limity mají chránit infrastrukturu i soukromí. Privacy-first API přijímá jen data, která opravdu potřebuje, a odmítnuté payloady neposílá dál do logů, analytiky ani support nástrojů.
 
+---
+
+# Příloha IA: Stránkování, rate limity a exporty API bez nekonečných odpovědí, retry kladiva a datového vysavače
+
+API, které vrací „všechno“, většinou časem vrátí hlavně fakturu za infrastrukturu, support ticket od integrátora a nervózní pohled člověka odpovědného za data. Stránkování, limity a exporty nejsou kosmetika pro větší zákazníky. Jsou to základní bezpečnostní, provozní a produktové mantinely.
+
+OWASP API Security Top 10 řadí neomezenou spotřebu zdrojů mezi rizika API a doporučuje limity pro velikost requestů, počet záznamů, frekvenci volání, čas zpracování a další nákladové faktory: https://owasp.org/API-Security/editions/2023/en/0xa4-unrestricted-resource-consumption/
+
+## IA.1 Každý list endpoint musí mít výchozí limit a tvrdé maximum
+
+Endpoint `GET /customers` bez limitu je časovaná bomba s hezkým REST názvem. Dnes vrátí 12 zákazníků. Za rok vrátí 120 000 řádků, integrace spadne na timeoutu a někdo bude tvrdit, že „to přece dřív fungovalo“.
+
+Minimum pro každý list endpoint:
+
+- Výchozí `limit`, například 25 nebo 50 podle typu dat.
+- Tvrdé maximum, například 100 nebo 500 podle náročnosti odpovědi.
+- Stabilní řazení, které se nezmění mezi stránkami.
+- Jednoznačné chování při prázdném výsledku.
+- Dokumentovaná chybová odpověď při překročení limitu.
+
+Příklad rozumného kontraktu:
+
+```http
+GET /api/v1/invoices?limit=50&cursor=eyJpZCI6...
+```
+
+Odpověď:
+
+```json
+{
+  "data": [
+    {
+      "id": "inv_123",
+      "issued_at": "2026-08-16T10:00:00Z",
+      "total_cents": 129000,
+      "currency": "EUR"
+    }
+  ],
+  "pagination": {
+    "limit": 50,
+    "next_cursor": "eyJpZCI6...",
+    "has_more": true
+  }
+}
+```
+
+Neposílej `total_count` automaticky u každého endpointu, pokud je jeho výpočet drahý nebo privacy citlivý. Počet všech záznamů může být obchodní informace. Pokud ho klient opravdu potřebuje, udělej samostatný agregovaný endpoint s limity, autorizací a jasným účelem.
+
+## IA.2 Cursor je většinou lepší než offset, když data žijí
+
+Offset stránkování je lákavé, protože se snadno vysvětluje: `page=3&per_page=50`. Jenže u dat, která se mění, umí vyrábět duplicity a mezery. Pokud mezi requesty přibude nový záznam, klient může jeden záznam vidět dvakrát nebo některý přeskočit.
+
+Cursor stránkování je bezpečnější pro živé seznamy. Cursor má reprezentovat pozici ve stabilním řazení, ne interní tajemství databáze. U běžných SaaS dat dobře funguje kombinace `created_at` plus jednoznačné `id`, případně jiný stabilní index.
+
+Praktické pravidlo:
+
+- Offset použij u malých, téměř statických seznamů, kde uživatelská navigace potřebuje skok na stránku.
+- Cursor použij u audit logů, objednávek, faktur, událostí, notifikací a všech větších integrací.
+- Cursor podepiš nebo zakóduj tak, aby ho klient nemusel chápat ani upravovat.
+- Cursor nesmí obsahovat osobní data ani interní SQL fragment.
+
+RFC 8288 popisuje web linking a vztahy odkazů; v API můžeš stránkování doplnit i HTTP hlavičkou `Link` s relacemi jako `next` nebo `prev`: https://www.rfc-editor.org/rfc/rfc8288.html
+
+Příklad hlavičky:
+
+```http
+Link: <https://api.example.com/api/v1/invoices?cursor=abc&limit=50>; rel="next"
+```
+
+Tělo odpovědi ale nech také samonosné. Ne každý integrátor pohodlně čte hlavičky, ne každý SDK wrapper je předá dál a ne každý support člověk chce při debugování listovat raw HTTP jako archeolog.
+
+## IA.3 Rate limit má být férová dopravní značka, ne tajná past
+
+Rate limit není trest. Je to dohoda o tom, jak používat službu tak, aby nespadla všem. Když ho nastavíš potichu, zákazník uvidí jen náhodné chyby. Když ho popíšeš, integrátor navrhne frontu, backoff a menší dávky.
+
+Dobrá odpověď při překročení limitu:
+
+```http
+HTTP/1.1 429 Too Many Requests
+Retry-After: 60
+Content-Type: application/problem+json
+```
+
+```json
+{
+  "type": "https://api.example.com/problems/rate-limit-exceeded",
+  "title": "Rate limit exceeded",
+  "status": 429,
+  "detail": "Try again after 60 seconds.",
+  "request_id": "req_456"
+}
+```
+
+RFC 6585 definuje HTTP status `429 Too Many Requests` a uvádí, že odpověď může obsahovat hlavičku `Retry-After`: https://www.rfc-editor.org/rfc/rfc6585.html
+
+Rate limit nastavuj podle práce, ne jen podle IP adresy. U B2B SaaS dává větší smysl kombinace tenant, token, endpoint a náklad operace. Export všech faktur je jiná práce než načtení detailu jedné faktury. IP adresa je navíc špatný identifikátor u firemních sítí, proxy a mobilních připojení.
+
+Privacy-first poznámka: rate-limit logy ukládej jako bezpečnostní a provozní data s krátkou retencí. Nepřidávej do nich payloady, e-maily, názvy zákaznických objektů ani celé tokeny. Pro vyšetření stačí tenant, anonymizovaný token prefix, endpoint, časové okno, výsledek a request ID.
+
+## IA.4 Velké exporty patří do jobu, ne do synchronního requestu
+
+Export je produktová funkce, ne jen „větší GET“. Pokud zákazník exportuje data kvůli účetnictví, auditu, migraci nebo právu na přenositelnost, potřebuje spolehlivý proces: zadat, sledovat stav, stáhnout, ověřit a případně smazat výsledek.
+
+Synchronní export přes jeden request má několik problémů:
+
+- Timeouty u klienta, proxy i serveru.
+- Opakované generování stejného souboru při retry.
+- Horší kontrolu oprávnění v čase.
+- Sklon ukládat do logů cestu k hotovému souboru i citlivé parametry.
+- Nejasnou retenci vygenerovaných souborů.
+
+Lepší kontrakt:
+
+```http
+POST /api/v1/exports
+```
+
+```json
+{
+  "type": "invoices",
+  "format": "csv",
+  "from": "2026-01-01",
+  "to": "2026-06-30"
+}
+```
+
+Odpověď:
+
+```json
+{
+  "id": "exp_123",
+  "status": "queued",
+  "expires_at": "2026-08-23T10:00:00Z"
+}
+```
+
+Stav:
+
+```http
+GET /api/v1/exports/exp_123
+```
+
+```json
+{
+  "id": "exp_123",
+  "status": "ready",
+  "download_url": "https://downloads.example.com/...",
+  "expires_at": "2026-08-23T10:00:00Z"
+}
+```
+
+Download URL má být krátkodobá, jednorázová nebo aspoň auditovaná. Exportní soubor šifruj v úložišti, omez přístup podle tenantového kontextu a smaž ho po jasné době. Exporty nejsou nový archiv navždy. To je jen datový sklep s hezčím API.
+
+## IA.5 Export dat je i důvěra a někdy právní povinnost
+
+U osobních údajů v EU mysli na to, že zákazník nebo koncový uživatel může mít právo získat osobní údaje ve strukturovaném, běžně používaném a strojově čitelném formátu. GDPR článek 20 popisuje právo na přenositelnost údajů: https://gdpr-info.eu/art-20-gdpr/
+
+To neznamená, že každé API má bezhlavě vyplivnout celou databázi. Znamená to, že produkt má mít promyšlený exportní proces:
+
+- Co exportujeme jako zákaznická data.
+- Co exportujeme jako osobní údaje subjektu údajů.
+- Co neexportujeme, protože jde o interní bezpečnostní, antifraud nebo provozní data.
+- Jak ověřujeme oprávnění žadatele.
+- V jakém formátu data předáme.
+- Jak dlouho hotový export držíme.
+- Jak auditujeme vytvoření a stažení exportu.
+
+Praktický formát pro SaaS bývá kombinace CSV pro tabulková data, JSON pro strukturované vztahy a README s vysvětlením polí. Pokud je export určený pro člověka, přidej i jednoduchý index. Pokud je určený pro migraci, drž stabilní schéma a verzuj ho.
+
+## IA.6 Limity musí být v dokumentaci, SDK i support scénářích
+
+Nejhorší limit je ten, který existuje jen v konfiguraci reverse proxy. Integrátor pak netuší, jestli má request zmenšit, počkat, použít cursor, založit export nebo napsat supportu.
+
+Do dokumentace dej:
+
+- Výchozí a maximální `limit` pro list endpointy.
+- Typ stránkování a stabilní příklad další stránky.
+- Chování při prázdném seznamu.
+- Rate limit pravidla podle plánu, tokenu nebo endpointu.
+- Tvar `429` chyby a význam `Retry-After`.
+- Doporučený backoff pro klienty.
+- Doporučení, kdy použít export místo listování.
+- Retenci exportních souborů a audit stažení.
+
+SDK by mělo nabízet bezpečný iterator, ne lákat na `getAllInvoices()` bez limitu. Pokud takovou helper funkci opravdu máš, musí uvnitř respektovat limity, backoff, zastavení po maximálním počtu stránek a možnost checkpointu.
+
+## IA.7 Checklist stránkování, limitů a exportů
+
+- Má každý list endpoint výchozí `limit` a tvrdé maximum?
+- Používají živé a velké seznamy cursor místo offsetu?
+- Je řazení stabilní a dokumentované?
+- Nevrací API drahý `total_count` automaticky bez jasného účelu?
+- Vrací překročení limitu bezpečnou `429` odpověď s `Retry-After`?
+- Rozlišuje rate limit tenant, token, endpoint a náklad operace?
+- Neobsahují rate-limit logy payloady, osobní data ani celé tokeny?
+- Běží velké exporty jako asynchronní job se stavovým endpointem?
+- Mají exportní soubory krátkou retenci, audit stažení a omezený přístup?
+- Je exportní schéma verzované a srozumitelné pro člověka i integraci?
+- Dokumentuje API limity, stránkování, retry chování a exportní doporučení?
+- Umí SDK bezpečně iterovat bez nekonečné smyčky a bez retry bouře?
+
+## Codyho komentář
+
+Stránkování je taková ta nudná věc, kterou nikdo nechce řešit v MVP. Pak přijde první větší zákazník, naimportuje historii od roku 2014 a z „nudné věci“ je najednou produkční výpadek s vůní spálené databáze. Udělej limity hned. Budoucí ty ti pošle imaginární pivo.
+
+## Zdroje k příloze
+
+- OWASP API4:2023 Unrestricted Resource Consumption: https://owasp.org/API-Security/editions/2023/en/0xa4-unrestricted-resource-consumption/
+- RFC 8288: Web Linking: https://www.rfc-editor.org/rfc/rfc8288.html
+- RFC 6585: Additional HTTP Status Codes: https://www.rfc-editor.org/rfc/rfc6585.html
+- GDPR článek 20: právo na přenositelnost údajů: https://gdpr-info.eu/art-20-gdpr/
+
+## Shrnutí přílohy
+
+List endpointy potřebují výchozí limity, tvrdá maxima a stabilní stránkování. U živých dat je cursor většinou bezpečnější než offset, rate limit má být férově dokumentovaný a `429` odpověď má klientovi říct, kdy a jak pokračovat. Velké exporty patří do asynchronních jobů se stavem, krátkou retencí, auditem stažení a jasným schématem. Privacy-first API nevrací všechno jen proto, že může; vrací přesně tolik, kolik je potřeba pro legitimní práci zákazníka.
+
 ## Pracovní log
+- 2026-08-16: Přidána příloha IA o stránkování, rate limitech a exportech API: výchozí limity, cursor pagination, `429` odpovědi, bezpečné rate-limit logy, asynchronní exportní joby, přenositelnost dat, dokumentace SDK a privacy-first checklist.
+
 - 2026-08-16: Přidána příloha HZ o validaci a normalizaci API vstupů: doménový význam polí, bezpečná normalizace, odmítání neznámých polí, Problem Details chyby, objemové limity, URL/e-mail/ID pravidla, testy, dokumentace a privacy-first checklist.
 
 - 2026-08-16: Přidána příloha HY o API odpovědích a vstupních DTO: oddělení interních modelů od kontraktů, allowlist polí, ochrana před mass assignment, field-level autorizace, bezpečné `fields`/`include`, negativní testy a privacy-first checklist.
