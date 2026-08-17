@@ -39162,7 +39162,187 @@ Admin rozhraní není interní hračka, ale vysoce riziková produktová plocha.
 
 ---
 
+# Příloha IM: Interní reporty a BI dashboardy bez datového jezera na všechno, exportního sportu a metrikové mlhy
+
+Interní reporty jsou skvělé, dokud se z nich nestane nenápadná druhá databáze produktu. Tým si nejdřív řekne „jen potřebujeme pár čísel pro rozhodování“, pak vznikne export do tabulky, kopie v BI nástroji, screenshot ve Slacku, CSV v e-mailu, notebook u analytika a za tři měsíce nikdo neví, kde všude bydlí zákaznická data. Gratuluju, právě jste vynalezli datové jezero. Akorát bez governance, bez retence a s názvem `final_v3_REAL.xlsx`.
+
+Privacy-first SaaS neodmítá reporty. Odmítá datový chaos. Dobrý reporting pomáhá týmu rozhodovat, aniž by každému člověku ukazoval každé zákaznické pole. Staví na jasných otázkách, agregaci, pseudonymizaci, rolích, retenčních pravidlech a opatrném exportu. Cílem není „mít všechna data po ruce“. Cílem je mít správný signál pro správné rozhodnutí.
+
+## IM.1 Report začíná rozhodnutím, ne grafem
+
+Nejhorší zadání pro dashboard zní: „Chceme vidět všechno.“ To není analytika, to je digitální zvědavost v obleku. Každý report má začít otázkou, jaké rozhodnutí má podpořit.
+
+Příklady dobrých reportovacích otázek:
+
+- Které účty se zasekly v onboardingu a potřebují pomoc?
+- Které funkce používají platící zákazníci opakovaně?
+- Které marketingové stránky přivádějí kvalifikované poptávky?
+- Které integrace nejčastěji selhávají a zatěžují support?
+- Kde máme provozní riziko kvůli frontám, chybám nebo ruční práci?
+
+Každá otázka pak dostane metriku, segmentaci a akci. Pokud u grafu neumíš napsat, co tým udělá, když číslo vyroste nebo spadne, graf je dekorace. A dekorace v BI nástroji stojí víc než kytka na stole.
+
+Praktická šablona pro nový report:
+
+| Položka | Otázka |
+| --- | --- |
+| Rozhodnutí | Co konkrétně podle reportu změníme? |
+| Publikum | Kdo report potřebuje a proč? |
+| Zdroje dat | Ze kterých systémů data přicházejí? |
+| Granularita | Stačí agregace, nebo potřebujeme řádek zákazníka? |
+| Citlivost | Obsahuje report osobní údaje, billing, bezpečnostní události nebo obsah zákazníka? |
+| Retence | Jak dlouho má report a export existovat? |
+| Akce | Jaký je další krok při zeleném, žlutém a červeném stavu? |
+
+Mini-pravidlo: report bez vlastníka se časem stane dashboardovým kompostem. Nevoní, ale nikdo ho nechce vyhodit, protože „třeba se bude hodit“.
+
+## IM.2 Agregace je první volba, řádek zákazníka až výjimka
+
+Většina obchodních a produktových rozhodnutí nepotřebuje vidět konkrétní jména, e-maily nebo obsah zákaznické práce. Potřebuje trend, poměr, kohortu, počet, dobu, stav nebo změnu.
+
+Typické bezpečnější varianty:
+
+- místo seznamu všech uživatelů bez aktivity ukaž počet účtů podle fáze onboardingu,
+- místo e-mailů v reportu ukaž interní ID účtu a odkaz do adminu s oprávněním,
+- místo obsahu zpráv ukaž kategorii problému a počet výskytů,
+- místo přesných IP adres ukaž region nebo rizikový signál,
+- místo úplného event streamu ukaž agregaci po dni, tarifu nebo segmentu.
+
+GDPR princip minimalizace dat říká, že osobní údaje mají být přiměřené, relevantní a omezené na to, co je nezbytné pro účel zpracování; Evropská komise ho popisuje v přehledu principů GDPR: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en V reportingu to znamená jednoduchou otázku: opravdu člověk potřebuje identitu subjektu, nebo mu stačí signál?
+
+Když detail zákazníka opravdu potřebuješ, nedávej ho rovnou do BI. Použij drill-down do adminu, kde platí role, audit log, důvod přístupu a citlivější zobrazení. BI nástroj má ukazovat mapu města, ne klíče od každého bytu.
+
+## IM.3 Pseudonymizace není kouzelný neviditelný plášť
+
+Pseudonymizace pomáhá snížit riziko, ale není totéž co anonymizace. Pokud někde existuje klíč nebo kombinace dat, podle které lze zákazníka znovu poznat, pořád pracuješ s osobními údaji a musíš mít odpovídající proces.
+
+ENISA ve zprávě o pseudonymizačních technikách upozorňuje, že volba techniky závisí na scénáři, útočníkovi, dostupných datech a požadované užitečnosti výstupu: https://www.enisa.europa.eu/publications/pseudonymisation-techniques-and-best-practices Přeloženo do řeči malého SaaS: hash e-mailu bez soli není bezpečnostní zázrak. Je to často jen pozvánka pro slovníkový útok.
+
+Praktické postupy:
+
+- používej náhodná interní ID místo e-mailů a jmen v analytických tabulkách,
+- odděl mapovací tabulku identit od reportovacích dat a omez k ní přístup,
+- pro stabilní spojování událostí používej pseudonymy s tajným klíčem nebo serverovou logikou,
+- neukládej do reportů volné texty, pokud je nepotřebuješ pro konkrétní analýzu,
+- u malých segmentů dávej pozor na znovuidentifikování kombinací typu město + tarif + firma + čas,
+- dokumentuj, kdo umí pseudonym rozvázat zpět na zákazníka a za jakých podmínek.
+
+Příklad: report aktivace může pracovat s `account_reporting_id`, tarifem, týdnem registrace, počtem dokončených kroků a stavem integrace. E-mail vlastníka účtu zůstane v produkční databázi nebo adminu, ne v každém grafu.
+
+## IM.4 Exporty z BI musí mít kratší život než mem o pondělí
+
+Dashboard s oprávněními je jedna věc. Export do CSV je druhá. Jakmile někdo stáhne report, data opouštějí kontrolované prostředí. Může skončit v Downloads, e-mailu, firemním chatu, osobním notebooku, záloze, screenshotu nebo prezentaci. Tím se dramaticky mění riziko.
+
+Zaveď exportní pravidla:
+
+- citlivé reporty mají export vypnutý nebo omezený na konkrétní role,
+- každý export má důvod, vlastníka a automatickou expiraci,
+- soubor nese označení citlivosti a datum vytvoření,
+- odkazy na exporty expirují a nejdou veřejně sdílet,
+- hromadné exporty se logují jako bezpečnostně relevantní událost,
+- pravidelně se mažou staré exporty, snapshoty a dočasné analytické tabulky.
+
+OWASP Logging Cheat Sheet doporučuje řešit, která data do logů nepatří, jak chránit logy v klidu i při přenosu a jak nastavovat likvidaci logových dat: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html Stejná logika platí pro reportovací exporty. Export je evidence s rizikem, ne nevinný soubor pro „rychlé kouknutí“.
+
+Dobrá praxe: když tým potřebuje číslo pro prezentaci, exportuj agregovaný snapshot bez identifikátorů. Když potřebuje řešit konkrétní zákazníky, použij linky do adminu, ne tabulku s osobními údaji.
+
+## IM.5 BI nástroj není místo pro secrets, raw payloady a support deník
+
+Do reportingu často tečou data z aplikace, logů, CRM, plateb, supportu a marketingu. Každý zdroj má jinou citlivost. Pokud je smícháš do jedné „analytické pravdy“, rychle vznikne nejhorší možný sklad: všechno na jednom místě a půlka firmy s přístupem.
+
+Do BI typicky nepatří:
+
+- access tokeny, refresh tokeny, API klíče, webhook secrets a session hodnoty,
+- celé HTTP requesty a response payloady,
+- obsah zákaznických dokumentů, zpráv nebo příloh,
+- interní support poznámky bez klasifikace,
+- platební údaje nad rámec nutných billing stavů,
+- debug hodnoty, stack traces a systémová tajemství,
+- osobní údaje zaměstnanců zákazníka, pokud report řeší účet jako celek.
+
+Místo toho vytvoř datové vrstvy:
+
+| Vrstva | Obsah | Přístup |
+| --- | --- | --- |
+| Produktové agregace | počty, stavy, konverze, kohorty | product, vedení, marketing podle účelu |
+| Provozní signály | joby, chyby, fronty, dostupnost | engineering, operations |
+| Support přehled | tickety, typy problémů, SLA, bezpečné odkazy | support, customer success |
+| Bezpečnostní přehled | rizikové události, anomálie, přístupy | security, ops, omezené vedení |
+| Billing agregace | MRR, churn, stav plateb, tarify | finance, vedení |
+
+Každá vrstva má vlastníka, datovou klasifikaci a pravidla přístupu. Ne všechno musí být v jednom dashboardu. Jedna obrazovka pro všechny je pohodlná hlavně pro budoucí incident.
+
+## IM.6 Metriky musí být definované jako smlouva
+
+„Aktivní uživatel“ zní jednoduše, dokud marketing počítá návštěvy, produkt počítá dokončenou akci a finance počítají platící účty. Pak se tým pohádá nad jedním grafem a nikdo už neví, jestli roste produkt, nebo jen schopnost hádat se v kalendáři.
+
+Pro klíčové metriky vytvoř slovník:
+
+- název metriky,
+- přesná definice,
+- zdroj dat,
+- časové okno,
+- zahrnuté a vyloučené případy,
+- vlastník,
+- odkaz na dashboard,
+- poslední revize.
+
+Příklad:
+
+| Metrika | Definice | Poznámka |
+| --- | --- | --- |
+| Aktivovaný účet | účet dokončil první import a pozval alespoň jednoho člena týmu do 14 dnů | nepočítá testovací účty a interní workspace |
+| Kvalifikovaná poptávka | formulář s firemním e-mailem, konkrétním problémem a souhlasem s odpovědí | nevyžaduje telefon ani rozpočet |
+| Rizikový export | export obsahující osobní údaje nebo více než 1 000 řádků | loguje se s důvodem a expirací |
+
+Metrický slovník je nudný dokument. Což je přesně důvod, proč funguje. Nuda je v datech často známka dospělosti.
+
+## IM.7 AI nad reporty potřebuje hranice
+
+AI shrnutí dashboardů může ušetřit čas: najde anomálie, vysvětlí trend, připraví otázky pro review nebo navrhne segmenty k prověření. Ale pokud mu pošleš raw zákaznická data, support poznámky a exporty, právě jsi z chytrého pomocníka udělal dalšího zpracovatele s neurčitým účelem.
+
+Bezpečnější AI workflow:
+
+- posílej agregované tabulky místo řádků zákazníků,
+- odstraň identifikátory, volné texty a malé segmenty, kde hrozí znovuidentifikování,
+- používej evropský provoz nebo jasně schválený zpracovatelský režim,
+- ukládej prompt a odpověď jen tehdy, když to má účel a retenci,
+- vyžaduj lidské rozhodnutí u zásahů do zákazníků, cen, blokací nebo incidentů,
+- označ AI výstup jako návrh, ne jako pravdu vytesanou do dashboardu.
+
+Codyho komentář: AI nad metrikami je super, když ji krmíš signály. Když ji krmíš zákaznickým bordelem, jen automatizuješ bordel. To je sice škálování, ale toho druhu, po kterém security člověk mlčky zavře notebook.
+
+## IM.8 Checklist interních reportů a BI dashboardů
+
+- Má každý dashboard jasné rozhodnutí, publikum a vlastníka?
+- Je výchozí zobrazení agregované a bez zbytečných identifikátorů?
+- Jsou osobní údaje v reportech omezené na nezbytné případy?
+- Existuje datový slovník pro klíčové metriky a segmenty?
+- Je drill-down do detailu zákazníka řešen přes admin s oprávněním a auditní stopou?
+- Jsou exporty omezené rolí, důvodem, expirací a označením citlivosti?
+- Neobsahuje BI secrets, tokeny, session hodnoty, raw payloady ani zákaznický obsah bez účelu?
+- Mají reportovací tabulky a snapshoty retenční pravidla a pravidelný úklid?
+- Jsou malé segmenty a pseudonymizovaná data posouzené z hlediska znovuidentifikování?
+- Má AI analýza dashboardů vlastní pravidla pro anonymizaci, ukládání promptů a lidské schvalování?
+
+## Codyho komentář
+
+Reporty jsou dobrý sluha a velmi nenápadný šéf. Jakmile tým začne řídit produkt podle dashboardu, dashboard začne řídit tým. Můj pohled: privacy-first reporting má měřit méně věcí, ale přesněji. Lepší jeden graf, který vede k dobrému rozhodnutí, než třicet grafů, které jen dokazují, že máme předplatné BI nástroje.
+
+## Zdroje k příloze
+
+- Evropská komise — GDPR principy, včetně minimalizace dat a omezení účelu: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en
+- ENISA — Pseudonymisation techniques and best practices: https://www.enisa.europa.eu/publications/pseudonymisation-techniques-and-best-practices
+- OWASP Logging Cheat Sheet — data k vyloučení z logů, ochrana logů a likvidace logových dat: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+
+## Shrnutí přílohy
+
+Interní reporting má pomáhat rozhodovat, ne vytvářet druhou neřízenou kopii produktu. Privacy-first BI začíná otázkou a rozhodnutím, preferuje agregace před řádky zákazníků, používá pseudonymizaci realisticky, omezuje exporty, odděluje datové vrstvy, drží metrický slovník a dává AI nad reporty jasné hranice. Nejlepší dashboard není ten, který ukazuje všechno. Nejlepší dashboard ukazuje právě tolik, aby tým udělal správný další krok.
+
+---
+
 ## Pracovní log
+- 2026-08-17: Přidána příloha IM o interních reportech a BI dashboardech: rozhodovací otázky, agregace místo řádků zákazníků, realistická pseudonymizace, exporty s expirací, oddělené datové vrstvy, metrický slovník, AI hranice a privacy-first checklist.
 - 2026-08-17: Přidána příloha IL o admin rozhraní a interních nástrojích: role podle konkrétní práce, datové minimum na obrazovce, bezpečné vyhledávání, tření u rizikových akcí, časově omezený support access, auditní logy bez tajemství, release proces a privacy-first checklist.
 - 2026-08-17: Přidána příloha IK o CLI nástrojích pro SaaS: scénářové příkazy, bezpečné přihlášení bez tokenů v historii shellu, stabilní výstupy pro lidi i skripty, dry-run a potvrzení rizikových akcí, diagnostika bez tajemství, oddělený CI režim, bezpečná dokumentace a privacy-first checklist.
 - 2026-08-17: Přidána příloha IJ o SDK a klientských knihovnách: vztah SDK k OpenAPI kontraktu, názvy metod podle zákaznických scénářů, bezpečné defaulty, retry a idempotence, SemVer, typy chránící před datovým přebytkem, support mód bez citlivých logů, testování quickstartu a privacy-first checklist.
