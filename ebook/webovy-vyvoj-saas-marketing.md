@@ -37547,7 +37547,138 @@ Webhooky nejsou odpadní roura pro JSON. Jsou produktová smlouva mezi systémy.
 
 ---
 
+# Příloha ID: Autentizace API klientů bez tokenového chaosu, věčných session a přihlašovacího divadla
+
+Autentizace je vstupní brána. Autorizace rozhoduje, co smí kdo dělat. Tyhle dvě věci se často pletou, a pak vznikne systém, kde je uživatel sice „nějak přihlášený“, ale token žije věčně, refresh funguje jako kouzelná tramvajenka, mobilní aplikace ukládá tajemství do kapsy s dírou a support pak řeší incident stylem: „Můžete nám poslat screenshot konzole?“ Prosím ne. Konzole není zpovědnice.
+
+Pro privacy-first SaaS je dobrá autentizace víc než bezpečnostní povinnost. Je to součást důvěry: zákazník má vědět, jak se přistupuje k jeho účtu, jak lze přístupy odvolat, co se loguje a jak dlouho zůstává stopa. OWASP v API Security Top 10 2023 řadí broken authentication mezi hlavní API rizika a upozorňuje, že složitost autentizačních mechanismů často vede k chybným hranicím a slabým implementacím: https://owasp.org/www-project-api-security/
+
+## ID.1 Nejdřív rozliš typ klienta
+
+Ne každý API klient umí bezpečně držet tajemství. Serverová aplikace může mít klientský secret v dobře spravovaném prostředí. Browserová SPA, mobilní aplikace nebo desktopová aplikace ho reálně utají asi jako heslo napsané fixou na kelímek od kávy. Proto se autentizační návrh musí odvíjet od typu klienta, ne od toho, co se nejrychleji nakliká v identity provideru.
+
+Praktické členění:
+
+- **Server-to-server integrace**: může používat client credentials, podepisované requesty, mTLS nebo jiný mechanismus, kde tajemství drží backend.
+- **Webová aplikace se serverem**: ideálně drží session na serveru a do browseru posílá jen bezpečnou session cookie.
+- **SPA bez vlastního backendu**: potřebuje public-client tok, krátké tokeny, PKCE a velmi opatrné nakládání s refresh tokeny.
+- **Mobilní aplikace**: nesmí spoléhat na embedded secret; pracuje s public-client modelem, systémovým prohlížečem a bezpečným úložištěm platformy.
+- **CLI nástroje**: často potřebují device authorization flow nebo osobní token s jasným scope, expirací a revokací.
+
+Codyho praktické pravidlo: pokud klient běží na zařízení uživatele, považuj ho za veřejného klienta. Ne proto, že uživatel je padouch, ale protože binárky a JavaScript nejsou trezor. Jsou to skleněné vitríny s nálepkou „prosím nekoukat“.
+
+## ID.2 Token má být krátký slib, ne doživotní průkazka
+
+Access token má mít krátkou životnost a omezený účel. Refresh token má být chráněný výrazně přísněji, protože umožňuje vydávat nové access tokeny. RFC 9700, Best Current Practice for OAuth 2.0 Security, doporučuje mimo jiné rotaci refresh tokenů nebo sender-constrained tokeny pro veřejné klienty a popisuje opatření proti zneužití ukradených tokenů: https://www.rfc-editor.org/info/rfc9700/
+
+Co z toho plyne pro malý SaaS:
+
+- Access token nastav krátký; typicky minuty, ne týdny.
+- Refresh token rotuj při použití a detekuj opakované použití starého tokenu.
+- Refresh token vázej na klienta, zařízení nebo session kontext, pokud to dává smysl.
+- Při podezření na reuse raději odvolej celou token family a vyžádej nové přihlášení.
+- Tokeny nikdy neposílej v URL, protože URL končí v historii, logách, referrerech a občas i ve screenshotu na Slacku.
+
+Důležitý detail: expirace není náhrada revokace. Když zákazník odebere integraci, token musí přestat fungovat hned, ne až po „maximálně 30 dnech, držíme palečky“.
+
+## ID.3 Session cookie nastav jako bezpečnostní produkt
+
+Pro klasickou webovou aplikaci bývá bezpečná serverová session s cookie jednodušší a kontrolovatelnější než tokeny rozházené po browser storage. OWASP Session Management Cheat Sheet doporučuje silné session identifikátory, bezpečné cookie atributy, ochranu před session fixation a správnou invalidaci session: https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html
+
+Minimum pro session cookie:
+
+- `HttpOnly`, aby se k ní nedostal běžný JavaScript.
+- `Secure`, aby se posílala jen přes HTTPS.
+- `SameSite=Lax` jako rozumný výchozí stav pro běžné weby; přísnější nebo volnější režim jen podle konkrétního toku.
+- Krátká idle timeout politika a jasná absolute lifetime hranice.
+- Regenerace session ID po přihlášení, změně role nebo citlivé bezpečnostní akci.
+- Serverová invalidace při odhlášení, změně hesla, zapnutí MFA nebo odvolání zařízení.
+
+Nedávej access token do `localStorage`, pokud k tomu nemáš velmi dobrý důvod a zpracovaný threat model. `localStorage` je pohodlný šuplík, ale při XSS se z něj stává samoobslužný bufet. Pokud už browser tokeny používá, minimalizuj jejich životnost, drž je pokud možno v paměti a opři ochranu o Content Security Policy, XSS prevenci a backendové kontroly.
+
+## ID.4 Přihlášení musí brzdit útoky, ne zákazníka
+
+Autentizace není jen správné heslo. Je to celý tok: registrace, přihlášení, reset hesla, MFA, pozvánky, změna e-mailu, session management a recovery. OWASP Authentication Cheat Sheet shrnuje doporučení pro hesla, MFA, generické chybové hlášky, ochranu proti automatizovaným útokům a bezpečné obnovovací procesy: https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html
+
+Praktický návrh:
+
+- Používej generické přihlašovací chyby, které neprozrazují, jestli existuje účet.
+- Rate limituj přihlášení podle kombinace účtu, IP, zařízení a rizikového signálu, ne jen podle jedné hodnoty.
+- Reset hesla stav na jednorázovém tokenu s krátkou expirací a bez odhalení existence účtu.
+- Po změně hesla nebo MFA nabídni odhlášení všech aktivních session.
+- Pro citlivé akce vyžaduj čerstvé ověření, nejen session starou tři týdny.
+- U B2B účtů zvaž povinnou nebo alespoň silně doporučenou MFA pro administrátory.
+
+Codyho komentář: dobrá bezpečnost není taková, která na každé kliknutí vyžaduje další kód z aplikace. Dobrá bezpečnost pozná rozdíl mezi běžným návratem uživatele a změnou bankovního účtu pro fakturaci. Kontext je levnější než plošné otravování.
+
+## ID.5 Strojové integrace potřebují vlastní životní cyklus
+
+API klíč pro integraci není osobní heslo vývojáře. Má mít vlastní jméno, vlastníka, scope, datum vytvoření, poslední použití, expiraci, rotaci a audit. Pokud integrace běží pod účtem člověka, vznikne krásný problém: člověk odejde, účet se zavře a produkční import objednávek spadne v pátek v 16:58. To je sice dramatické, ale dramaturgicky zbytečné.
+
+Dobrý model pro B2B SaaS:
+
+| Položka | Doporučení |
+| --- | --- |
+| Název tokenu | Lidsky čitelný název podle integrace, ne `token-final-2` |
+| Vlastník | Tým nebo workspace, ne jen konkrétní uživatel |
+| Scope | Nejmenší nutný rozsah, odděleně čtení a zápis |
+| Expirace | Výchozí expirace a možnost bezpečné rotace |
+| Poslední použití | Timestamp bez ukládání payloadů |
+| Revokace | Okamžitá, auditovaná, viditelná administrátorům |
+| Ukázka | Token se zobrazí jen jednou a nikdy se nevrací celé tajemství |
+
+Pro privacy-first provoz je zásadní i logování. Loguj identifikátor tokenu, integrace, endpoint, výsledek a korelační ID. Neloguj celý token, request body, soubory ani zákaznický obsah. Token v logu je incident, ne debug informace.
+
+## ID.6 Autentizační logy mají pomáhat bez šmírování
+
+Bezpečnostní logy mají odpovědět na otázky: kdo se přihlásil, odkud přibližně, jakým typem klienta, jaký byl výsledek, co se změnilo a kdo odvolal přístup. Nemají být černou skříňkou plnou osobních údajů, user-agent románů a payloadů, které nikdo nikdy nečte.
+
+Doporučené události:
+
+- úspěšné a neúspěšné přihlášení,
+- vytvoření, rotace a odvolání API tokenu,
+- změna hesla, MFA nebo e-mailu,
+- vytvoření a přijetí pozvánky,
+- odhlášení všech zařízení,
+- detekce reuse refresh tokenu,
+- zablokování kvůli rate limitu nebo rizikovému vzoru.
+
+U každé události nastav retenci podle účelu. Bezpečnostní audit může potřebovat delší dobu než produktová analytika, ale pořád to není důvod držet surové IP adresy navždy. Pokud potřebuješ trend, často stačí agregace. Pokud potřebuješ forenzní detail, chraň ho přístupem, šifrováním, retenční politikou a auditním logem přístupů k logům. Ano, logy o logách. Bezpečnost občas připomíná cibuli; pointa je nebrečet nad ní až po incidentu.
+
+## ID.7 Checklist autentizace API klientů
+
+- Má každý typ klienta jasně popsaný bezpečný autentizační tok?
+- Nepoužívá veřejný klient tajemství, které stejně nemůže utajit?
+- Mají access tokeny krátkou životnost a omezený scope?
+- Rotují se refresh tokeny a detekuje se jejich opakované použití?
+- Lze token, session nebo celé zařízení okamžitě odvolat?
+- Neukládají se tokeny do URL, logů, analytiky, chybových reportů ani promptů?
+- Má session cookie `HttpOnly`, `Secure` a promyšlené `SameSite`?
+- Regeneruje se session po přihlášení a citlivých změnách?
+- Jsou reset hesla, MFA a změna e-mailu navržené bez prozrazování existence účtu?
+- Mají strojové integrace vlastníka, scope, expiraci, rotaci a audit?
+- Vidí administrátor přehled aktivních session a API tokenů?
+- Existuje test na revokaci, reuse refresh tokenu a pokus použít token mimo scope?
+
+## Codyho komentář
+
+Autentizace je přesně ta oblast, kde se nevyplatí být originální za každou cenu. Originalita patří do produktu, brandu a zákaznické zkušenosti. Přihlašování má být nudné, standardní, auditovatelné a pochopitelné. Když se bezpečnostní reviewer u autentizace nudí, je to kompliment. Když se směje nahlas, většinou už píše nález.
+
+## Zdroje k příloze
+
+- OWASP API Security Project, API Security Top 10 2023 a riziko broken authentication: https://owasp.org/www-project-api-security/
+- RFC 9700, Best Current Practice for OAuth 2.0 Security: https://www.rfc-editor.org/info/rfc9700/
+- OWASP Session Management Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html
+- OWASP Authentication Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html
+
+## Shrnutí přílohy
+
+API autentizace musí začít typem klienta, krátkými a omezenými tokeny, bezpečnou session politikou, okamžitou revokací a logy, které pomáhají řešit bezpečnost bez zbytečného sběru dat. Privacy-first přístup tady neznamená slabší ochranu; znamená méně tajemství na špatných místech, méně věčných přístupů a více kontroly pro zákazníka.
+
+---
+
 ## Pracovní log
+- 2026-08-17: Přidána příloha ID o autentizaci API klientů: typy klientů, krátké access tokeny, rotace refresh tokenů, bezpečné session cookie, přihlašovací toky, strojové integrace, bezpečnostní logy a privacy-first checklist.
 - 2026-08-17: Přidána příloha IC o webhookách a eventech: minimální payloady, podpis nad raw body, replay ochrana, idempotence, retry politika, delivery historie a privacy-first checklist.
 - 2026-08-16: Přidána příloha IB o importním API a migraci dat: scénář importu, bezpečný upload, explicitní mapování polí, preview před zápisem, deduplikace, asynchronní joby, rollback, chybové reporty, přenositelnost dat a privacy-first checklist.
 
