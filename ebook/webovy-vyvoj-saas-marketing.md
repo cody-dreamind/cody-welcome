@@ -38188,7 +38188,184 @@ Browser API klienti potřebují jiné hranice než serverové integrace. CORS na
 
 ---
 
+# Příloha IH: Verzování a ukončování API bez rozbitých integrací, tichých změn a changelogového hororu
+
+API není jen technické rozhraní. Je to smlouva se zákazníkem, integrátorem, supportem a tvým budoucím já, které bude za šest měsíců koukat do kódu a ptát se: „Kdo tohle pustil do produkce?“ Verzování API proto není estetika URL. Je to provozní disciplína: jak zavádět změny, aniž by se zákazník ráno probudil do světa, kde mu fakturace padá na `undefined is not a function`.
+
+Privacy-first pohled k tomu přidává ještě jednu vrstvu: každá nová verze, nové pole a nová integrace může měnit datové toky. Verze API tedy neřeší jen kompatibilitu. Řeší i to, jestli najednou neposíláš víc osobních údajů, delší payloady do logů nebo data do služby, kterou původní zákaznická smlouva vůbec nečekala.
+
+## IH.1 Verzi měň jen kvůli kontraktu, ne kvůli internímu refaktoru
+
+Nová verze API je drahá. Ne kvůli tomu, že přidáš `/v2`, ale protože musíš udržet dokumentaci, testy, SDK, support postupy, migrace a komunikaci. Pokud jen přepíšeš interní databázovou tabulku, nemá to zákazníka zajímat. Pokud změníš tvar odpovědi, význam pole, povinné vstupy, chování chyb nebo autorizaci, zákazníka to zajímá hodně.
+
+Praktické pravidlo:
+
+- Bez nové major verze můžeš přidat nepovinné pole, nový endpoint, nový stav ve výčtu, volitelný parametr nebo přesnější dokumentaci.
+- Novou major verzi zvaž, když odstraňuješ pole, měníš typ pole, měníš význam hodnoty, zpřísňuješ povinný vstup, měníš stránkování, měníš autentizaci nebo rušíš endpoint.
+- Bez verze nikdy neměň tichým způsobem to, na čem může stát zákaznický workflow.
+- Interní refaktor schovej za stejné API chování a ověř ho kontraktovými testy.
+
+Příklad:
+
+```json
+{
+  "id": "inv_123",
+  "status": "paid",
+  "total_cents": 9900
+}
+```
+
+Přidat `currency` je obvykle kompatibilní změna. Přejmenovat `total_cents` na `amount` není kompatibilní změna. Změnit `status` z `paid` na `settled` není kosmetika, ale rozbití pravidel u klienta. Ano, i když to „dává větší smysl“. Smysl je hezký, ale produkce má přednost.
+
+## IH.2 Kompatibilní změna musí být bezpečná i pro přísné klienty
+
+Některé klientské knihovny ignorují neznámá pole. Jiné validují odpověď přísně a spadnou, když se objeví něco navíc. To neznamená, že nikdy nesmíš přidat pole. Znamená to, že kompatibilitu musíš popsat a testovat.
+
+Do dokumentace dej větu typu:
+
+> „Klienti musí ignorovat neznámá pole v odpovědích. Nová nepovinná pole mohou být přidána bez nové major verze. Klienti nesmí spoléhat na pořadí polí v JSONu.“
+
+A zároveň buď férový: když máš existující zákazníky, kteří validují přísně, nejdřív jim změnu oznam a nabídni testovací prostředí. Standardní fráze v dokumentaci není kouzelný štít proti tomu, že zákazník už rok žije s jiným předpokladem.
+
+Privacy-first detail: nové pole může být technicky kompatibilní, ale datově citlivé. Přidat `customer_email` do odpovědi, kde dřív bylo jen `customer_id`, může rozbít interní pravidla zákazníka pro minimalizaci dat. Proto u každého nového pole doplň:
+
+- proč existuje,
+- jestli obsahuje osobní údaj,
+- kdo ho uvidí,
+- jestli se zapisuje do logů nebo exportů,
+- jak se projeví v oprávněních.
+
+## IH.3 Deprecation není věta v changelogu, ale řízená migrace
+
+Ukončování endpointů je místo, kde se ukáže, jestli je API produkt, nebo jen veřejně přístupná interní funkce. Dobrá deprecation politika má tři vrstvy: technický signál, lidskou komunikaci a migrační cestu.
+
+Technický signál:
+
+- U starého endpointu začni vracet deprecation informaci v HTTP hlavičce, pokud ji tvoje infrastruktura podporuje.
+- Přidej odkaz na migrační dokumentaci přes `Link` hlavičku nebo přímo do dokumentace endpointu.
+- Pokud má endpoint konkrétní datum ukončení, komunikuj ho i strojově, například pomocí `Sunset` hlavičky.
+- V chybových odpovědích po ukončení vrať jasný `410 Gone` nebo dobře popsaný `404`, ne generickou pětistovku.
+
+Lidská komunikace:
+
+- Oznámení pošli s dostatečným předstihem podle dopadu, ne v pátek v 16:58, protože chaos prý zvyšuje týmovou odolnost.
+- Vysvětli, proč se endpoint ruší: bezpečnost, datová minimalizace, lepší model, konsolidace.
+- Uveď, koho se změna týká: endpointy, scopes, verze SDK, integrační typy.
+- Přidej konkrétní migrační kroky a příklady requestů před/po.
+
+Migrační cesta:
+
+```text
+1. Najděte používání endpointu GET /v1/customers/export.
+2. Nahraďte ho POST /v2/exports s typem customer_export.
+3. Uložte returned job_id.
+4. Stav sledujte přes GET /v2/exports/{job_id}.
+5. Stažený soubor smažte po interně definované době retence.
+```
+
+Tohle je mnohem lepší než „endpoint bude odstraněn, použijte novou verzi“. To je migrační instrukce asi jako „nebuďte smutní“.
+
+## IH.4 Changelog musí být rozhodovací nástroj, ne archiv náhodných commitů
+
+Changelog pro API má odpovídat na otázku: „Musím dnes něco udělat?“ Ne „co všechno se stalo v repozitáři“. Rozděl ho podle dopadu:
+
+- **Breaking changes:** změny, které vyžadují úpravu klienta.
+- **Deprecations:** věci, které ještě fungují, ale mají plánované ukončení.
+- **Additions:** nové endpointy, pole, scopes a SDK funkce.
+- **Fixes:** opravy chování, které mohou změnit výsledky.
+- **Security/privacy:** změny oprávnění, datových toků, retence, logování nebo exportů.
+
+Každý záznam napiš stejným formátem:
+
+```text
+Datum: 2026-08-17
+Dopad: Breaking change
+Týká se: POST /v1/invoices, SDK cody-js <= 1.8
+Co se mění: pole total_cents bude nahrazeno money.amount_minor + money.currency
+Proč: podpora více měn bez odvozování z účtu
+Akce: migrujte do /v2/invoices do 2026-11-30
+Privacy dopad: žádné nové osobní údaje, změna se týká finančních částek
+```
+
+Tým díky tomu nemusí luštit emoční archeologii commitů. Zákazník ví, jestli má pracovat. Support ví, co má poslat. Vývoj ví, co má testovat.
+
+## IH.5 Staré verze měř, ale nešmíruj
+
+Potřebuješ vědět, kdo pořád používá starou verzi API. Nepotřebuješ kvůli tomu ukládat celé payloady, osobní údaje a nekonečné request body. Stačí provozní metadata:
+
+| Co měřit | Proč | Co neukládat |
+| --- | --- | --- |
+| Verze API | Odhalení adopce a rizika ukončení | Payload requestu |
+| Endpoint | Dopad migrace | Osobní údaje z těla |
+| Tenant nebo zákaznický účet | Cílená komunikace | Jména koncových uživatelů |
+| Typ klienta / SDK verze | Priorita SDK podpory | Access tokeny |
+| Počet volání za den | Kritičnost integrace | Detailní obsah odpovědi |
+| Chybovost | Riziko rozbité migrace | Interní stack trace zákazníkovi |
+
+Report pro migraci může vypadat takhle:
+
+```text
+Zákazník: Acme EU
+Staré endpointy za 7 dní: /v1/customers/export 312x, /v1/invoices 48x
+SDK: cody-php 1.4
+Poslední volání: 2026-08-17 04:12 UTC
+Doporučená akce: poslat migrační návod pro exporty a faktury
+```
+
+To je dost informací pro férovou migraci. Není potřeba vědět, jak se jmenuje každý kontakt v exportu. Datový vysavač zase může zůstat ve skříni, kde mu to sluší.
+
+## IH.6 Verze dokumentace, SDK a supportu musí držet stejný rytmus
+
+Nejhorší API změny nejsou ty těžké. Nejhorší jsou ty, kde dokumentace říká A, SDK dělá B, support posílá starý návod C a produkce vrací D. Uživatel pak ztrácí důvěru rychleji než landing page s popupem na newsletter.
+
+Před vydáním nové verze projdi čtyři artefakty:
+
+- **OpenAPI kontrakt:** obsahuje správné endpointy, schémata, chyby, scopes a příklady.
+- **Dokumentace:** vysvětluje rozdíly mezi verzemi a obsahuje migrační cestu.
+- **SDK:** má jasnou podporovanou verzi API, changelog a testy proti kontraktu.
+- **Support playbook:** říká, jak poznat starou integraci, jaký návod poslat a kdy eskalovat.
+
+Privacy-first kontrola navíc:
+
+- Změnila nová verze rozsah osobních údajů?
+- Přibyly nové exporty nebo logy?
+- Mění se subdodavatel, region nebo retence?
+- Potřebuje zákazník aktualizovat vlastní dokumentaci nebo DPIA?
+- Je změna popsaná lidsky, ne jen jako diff schématu?
+
+## IH.7 Checklist verzování a ukončování API
+
+- Máš jasně napsané, které změny jsou kompatibilní a které vyžadují novou major verzi?
+- Ignorování neznámých polí je zdokumentované a otestované s reálnými klienty?
+- Každé nové pole má popsaný účel, citlivost, oprávnění a dopad na logy/exporty?
+- Deprecation má technický signál, datum, migrační návod a vlastníka komunikace?
+- Changelog říká dopad, dotčené endpointy, akci, deadline a privacy dopad?
+- Měříš používání starých verzí pomocí metadat, ne payloadového skladiště?
+- Má support přehled, kteří zákazníci jsou ohrožení a co jim poslat?
+- Jsou OpenAPI, dokumentace, SDK a testovací prostředí ve stejné verzi reality?
+- Máš plán, co se stane po sunset datu: odpověď, support scénář, rollback výjimka?
+- Umíš zákazníkovi vysvětlit změnu jednou lidskou větou?
+
+## Codyho komentář
+
+Verzování API je slib, že zákazník nebude platit za tvůj interní chaos. Jasně, `/v2` vypadá jednoduše. Ale opravdová práce je v tom, aby každý věděl, co se změnilo, proč, kdy to přestane fungovat a jak migrovat bez víkendové archeologie. Codyho pravidlo: pokud změnu nedokážeš vysvětlit v changelogu, v support odpovědi a v jednom testu, ještě není připravená ven. Trochu nudné? Ano. Ale nudné API je v produkci často to největší sexy.
+
+## Zdroje k příloze
+
+- RFC 9745 — The Deprecation HTTP Header Field, standardizovaná hlavička pro označení zastarávání HTTP zdrojů: https://www.rfc-editor.org/rfc/rfc9745.html
+- RFC 8594 — The Sunset HTTP Header Field, hlavička pro komunikaci plánovaného ukončení dostupnosti zdroje: https://www.rfc-editor.org/rfc/rfc8594.html
+- RFC 9110 — HTTP Semantics, význam stavových kódů a obecná sémantika HTTP odpovědí: https://www.rfc-editor.org/rfc/rfc9110.html
+- Microsoft REST API Guidelines — doporučení pro evoluci API, kompatibilní změny, verzování a deprecation politiku: https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md
+- OWASP API Security Top 10 — bezpečnostní rizika API, která se promítají i do změn kontraktů, autorizace a expozice dat: https://owasp.org/API-Security/editions/2023/en/0x11-t10/
+
+## Shrnutí přílohy
+
+Verzování API je provozní a produktová disciplína. Nová major verze patří ke změně veřejného kontraktu, ne k internímu refaktoru. Kompatibilní změny musí být popsané, testované a bezpečné i z pohledu datové minimalizace. Deprecation potřebuje technický signál, jasné datum, migrační návod a lidskou komunikaci. Changelog má říkat dopad a akci, ne opisovat commity. Staré verze měř pomocí metadat, ne payloadů, a drž ve stejném rytmu OpenAPI kontrakt, dokumentaci, SDK i support playbook.
+
+---
+
 ## Pracovní log
+- 2026-08-17: Přidána příloha IH o verzování a ukončování API: kompatibilní vs. breaking změny, bezpečné rozšiřování odpovědí, deprecation a sunset komunikace, changelog podle dopadu, měření starých verzí bez payloadů, sladění OpenAPI dokumentace, SDK a supportu a privacy-first checklist.
 - 2026-08-17: Přidána příloha IG o CORS, CSRF a browser API klientech: rozdělení důvěry klientů, přesné origin allowlisty, credentials přes CORS, CSRF ochrana cookie session, Fetch Metadata, izolace widgetů, negativní testy a privacy-first checklist.
 - 2026-08-17: Přidána příloha IF o bezpečnostním logování API: otázky pro incidenty, metadata místo payloadů, redakce citlivých hodnot, katalog událostí, tenantové hranice, alerty podle vzorců, testy logování a privacy-first checklist.
 - 2026-08-17: Přidána příloha IE o autorizaci API: role vs. konkrétní schopnosti, deny-by-default, objektová a field-level autorizace, RBAC/ABAC/ReBAC modelování, support přístup, negativní testy a privacy-first checklist.
