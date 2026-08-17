@@ -17718,7 +17718,7 @@ Minimum pro vstup:
 - Normalizuj mezery, diakritiku a velikost písmen podle jazyka produktu.
 - Nepouštěj raw operátory vyhledávače, pokud je vědomě nenavrhuješ jako pokročilou funkci.
 - Vždy používej parametrizaci nebo bezpečné API vyhledávací knihovny.
-- Testuj speciální znaky: `%`, `_`, `*`, `"`, `'`, `\`, emoji, více mezer, prázdný dotaz.
+- Testuj speciální znaky: `%`, `_`, `*`, `"`, `'`, ``, emoji, více mezer, prázdný dotaz.
 
 ## DN.4 Loguj signály, ne deník lidských dotazů
 
@@ -37867,9 +37867,175 @@ Autorizace je místo, kde se pozná rozdíl mezi „máme SaaS“ a „máme dat
 
 API autorizace musí být explicitní, serverová a testovaná na úrovni akce, objektu, pole i tenantového kontextu. Role pomáhají se správou, ale skutečná bezpečnost stojí na deny-by-default pravidlech, objektové autorizaci, field-level ochraně, opatrném support přístupu a negativních testech, které hlídají, že zákaznická data zůstávají tam, kde mají.
 
+
+---
+
+# Příloha IF: Bezpečnostní logy API bez payloadového vysavače, forenzní slepoty a nekonečné skládky osobních údajů
+
+Zákaznický audit log říká zákazníkovi: „Tady je historie důležitých akcí ve vašem účtu.“ Bezpečnostní log říká provoznímu týmu: „Tady jsou signály, že se něco rozbíjí, někdo zkouší obejít pravidla nebo se chystá incident.“ Obě věci se doplňují, ale nemají mít stejný obsah, stejné oprávnění ani stejnou retenci.
+
+Nejhorší bezpečnostní log je paradoxně ten nejukecanější. Uloží celé requesty, odpovědi, tokeny, e-maily, adresy, payloady importů a občas i heslo, protože „forenzně se to může hodit“. Ano, hodit se to může. Stejně jako se může hodit mít doma náhradní dveře, tři sudy benzínu a krabici klíčů od sousedů. Praktická otázka zní: jaký problém tím řešíš a jaký nový problém tím vytváříš?
+
+## IF.1 Nejdřív si řekni, na jaké otázky má log odpovědět
+
+Bezpečnostní log není deník všeho, co server zažil. Je to sada důkazů pro konkrétní rozhodnutí. Před implementací napiš otázky, které budeš při incidentu opravdu řešit:
+
+- Kdo nebo co se pokusilo přihlásit?
+- Selhala autentizace kvůli špatnému tajemství, expiraci tokenu nebo rate limitu?
+- Který tenant, endpoint a typ objektu byl zasažen?
+- Byla akce povolena, odmítnuta nebo zastavena validační vrstvou?
+- Šlo o běžnou chybu klienta, nebo vzorec podobný útoku?
+- Který release, region a instance request obsloužily?
+- Jaký dopad má událost na zákazníka a musí se ozvat support?
+
+Z těchto otázek vznikne logovací kontrakt. Ne opačně. Pokud začneš tím, že loguješ „pro jistotu všechno“, skončíš se skladem dat, který je drahý, právně nepříjemný a při incidentu stejně pomalý.
+
+## IF.2 Loguj metadata, ne tajemství
+
+Bezpečnostní log má typicky obsahovat metadata: čas, službu, prostředí, region, request ID, tenant ID, actor ID, typ klienta, endpoint, metodu, rozhodnutí, důvod odmítnutí, kód chyby, risk signál a agregovatelný technický kontext. Nemá obsahovat access token, refresh token, API klíč, session cookie, celé tělo requestu, celé tělo odpovědi, heslo, jednorázový kód, platební údaje ani kompletní osobní data.
+
+Praktický příklad události:
+
+```json
+{
+  "event": "api.authorization.denied",
+  "time": "2026-08-17T03:00:00Z",
+  "environment": "production",
+  "region": "eu-central",
+  "request_id": "req_8f3...",
+  "tenant_id": "ten_123",
+  "actor_id": "usr_456",
+  "client_type": "dashboard",
+  "method": "GET",
+  "route": "/v1/invoices/{id}",
+  "resource_type": "invoice",
+  "decision": "deny",
+  "reason": "object_not_in_tenant",
+  "status": 403
+}
+```
+
+Všimni si dvou detailů: log říká dost na vyšetření IDOR pokusu, ale neukládá číslo faktury, adresu odběratele, položky faktury ani celý identifikátor requestu, pokud ho není nutné sdílet mimo interní systém. Bezpečnostní log má být lupa, ne kopírka databáze.
+
+## IF.3 Citlivé hodnoty rediguj už při vzniku události
+
+Maskování až v dashboardu je kosmetika. Pokud tajemství skončí v log pipeline, už se reálně šíří: agent, fronta, index, alert, export, záloha, debug výpis, screenshot do ticketu. Redakce musí proběhnout co nejblíž aplikaci, ideálně ve sdílené logovací knihovně.
+
+Jednoduché pravidlo:
+
+- `Authorization`, `Cookie`, `Set-Cookie`, `X-API-Key` a podobné hlavičky nikdy neloguj v plné hodnotě.
+- Tokeny, klíče a jednorázové kódy nahrazuj hodnotou `[redacted]`, ne „posledními čtyřmi znaky pro pohodlí“.
+- E-mail, telefon nebo IP adresu ukládej jen tam, kde máš jasný účel; jinak použij interní ID, prefix, hash s promyšlenou solí nebo agregaci.
+- Payloady importů, webhooků a formulářů neloguj celé; ukládej počet položek, typ validace a bezpečný chybový kód.
+- Při výjimce loguj typ chyby, stack trace a korelační ID, ale ne serializovaný request se vším všudy.
+
+OWASP Logging Cheat Sheet doporučuje do aplikačních logů nezahrnovat citlivá data jako session identifikátory, access tokeny, hesla, osobní data nebo komerčně citlivé informace, pokud to není nezbytné. To není akademická opatrnost. To je rozdíl mezi incidentem „měli jsme podezřelý request“ a incidentem „máme podezřelý request plus databázi tajemství v logovacím nástroji“.
+
+## IF.4 Události pojmenuj jako produktový slovník bezpečnosti
+
+Log typu `error` je zoufale málo. Pojmenování událostí musí být stabilní, strojově filtrovatelné a srozumitelné pro vývoj, support i bezpečnost. Dobré názvy popisují doménovou událost:
+
+- `api.authentication.failed`
+- `api.token.revoked_used`
+- `api.authorization.denied`
+- `api.rate_limit.exceeded`
+- `api.validation.rejected`
+- `api.export.started`
+- `api.support_access.granted`
+- `api.webhook.signature_invalid`
+
+Ke každé události napiš krátký katalog: kdy vzniká, kdo ji smí vidět, jak dlouho se drží, jaké pole je povinné, které pole je zakázané a jaký alert z ní může vzniknout. Katalog nemusí být román. Stačí tabulka, kterou si tým otevře při review nové funkce.
+
+Příklad:
+
+| Událost | Účel | Zakázaná data | Retence |
+| --- | --- | --- | --- |
+| `api.authentication.failed` | Detekce útoku nebo problému s přihlášením | Heslo, OTP, celý token | 90 dní |
+| `api.authorization.denied` | Vyšetření pokusů o přístup mimo oprávnění | Payload objektu, osobní data objektu | 180 dní |
+| `api.export.started` | Kontrola citlivých exportů | Obsah exportu, celé filtry s PII | 1 rok |
+| `api.support_access.granted` | Dohled nad support režimem | Screenshoty, zákaznické zprávy | 1 rok |
+
+Retence je příklad, ne univerzální zákon. U každého projektu ji nastav podle rizika, smluv, právních požadavků a provozní reality.
+
+## IF.5 Bezpečnostní log nesmí obejít tenantové hranice
+
+V multi-tenant SaaS je logovací systém často neviditelná zadní chodba. Produkt hlídá tenanty pečlivě, ale log dashboard najednou umí hledat napříč všemi zákazníky, exportovat CSV a poslat link do ticketu. To je bezpečnostní dluh s pěkným UI.
+
+Nastav pravidla:
+
+- Zákazník vidí jen svůj zákaznický audit log, ne interní bezpečnostní log všech tenantů.
+- Support vidí jen události potřebné pro konkrétní ticket a jen po omezenou dobu.
+- Vývojář v produkci vidí agregace a korelační metadata, ne automaticky všechno.
+- Přístup do logovacího nástroje má SSO, MFA, role, schvalování a vlastní audit.
+- Export logů je citlivá akce s důvodem, expirací a záznamem.
+
+Privacy-first provoz v Evropě neznamená jen evropský region databáze. Znamená i to, že logy, alerty, ticketovací přílohy a screenshoty nepřekračují hranice účelu jako turista bez mapy.
+
+## IF.6 Alerty stav na vzorcích, ne na panice
+
+Bezpečnostní log má smysl jen tehdy, když z něj někdo umí udělat rozhodnutí. Alert na každou chybu `401` nebo `403` rychle naučí tým ignorovat všechno. Lepší je sledovat vzorce:
+
+- mnoho neúspěšných přihlášení pro jeden účet,
+- mnoho neúspěšných přihlášení z jednoho zdroje,
+- použití revokovaného nebo expirovaného tokenu,
+- opakované odmítnutí objektového přístupu napříč ID,
+- neobvyklý objem exportů,
+- pokusy o mass assignment systémových polí,
+- vysoký počet neplatných webhook podpisů,
+- support přístup mimo běžný čas nebo bez ticketu.
+
+Každý alert musí mít vlastníka, závažnost, první krok a bezpečný odkaz do logů. Pokud alert jen říká „něco je divné“, je to horoskop s pagerem. Když říká „tenant A má 240 odmítnutých pokusů o cizí faktury za 5 minut, otevři runbook X“, je to provozní nástroj.
+
+## IF.7 Testuj, že neloguješ to, co logovat nesmíš
+
+Testy logování nejsou zbytečný luxus. Jsou pojistka proti tomu, že někdo při debugování dočasně přidá `console.log(request.body)` a „dočasně“ se stane archeologickou vrstvou produkce.
+
+Přidej testy pro:
+
+- autentizační chyby s tokenem v hlavičce,
+- validační chyby s e-mailem, telefonem a volným textem,
+- webhook s podpisem a payloadem,
+- import se souborem obsahujícím osobní údaje,
+- serverovou výjimku u endpointu s citlivým objektem,
+- exportní job s filtry,
+- support přístup k účtu.
+
+Test nemusí ověřovat celý log řádek. Stačí assert, že zakázané hodnoty se v log výstupu neobjeví a že potřebná metadata zůstala zachovaná. Jinými slovy: „neprozradili jsme tajemství“ a „pořád umíme incident vyšetřit“.
+
+## IF.8 Checklist bezpečnostních logů API
+
+- Má bezpečnostní log jasné otázky, na které má odpovídat při incidentu?
+- Existuje katalog událostí s účelem, povinnými poli, zakázanými poli a retencí?
+- Loguješ metadata místo plných payloadů, tokenů, cookies a osobních údajů?
+- Probíhá redakce citlivých hodnot už v aplikaci nebo sdílené logovací knihovně?
+- Jsou autentizační a autorizační události pojmenované stabilně a filtrovatelné?
+- Obsahují logy tenant kontext, region, request ID a rozhodnutí bez úniku obsahu objektů?
+- Má logovací nástroj SSO, MFA, role a vlastní audit přístupů?
+- Jsou support a vývojářské přístupy omezené podle účelu a času?
+- Mají exporty logů schválení, důvod, expiraci a auditní stopu?
+- Sledují alerty bezpečnostní vzorce, ne jednotlivé běžné chyby bez dopadu?
+- Existují testy, které ověřují, že zakázané hodnoty neskončí v logu?
+- Je retence logů nastavená podle účelu a rizika, ne podle velikosti disku?
+
+## Codyho komentář
+
+Logy jsou jako sklep v rodinném domě. Když je uklízíš průběžně, najdeš pojistky, nářadí i krabici s vánočními světýlky. Když tam deset let házíš všechno „pro jistotu“, při první havárii šlápneš na hrábě, najdeš plesnivou krabici osobních údajů a ještě zjistíš, že pojistky jsou za skříní. Privacy-first logování není méně bezpečnosti. Je to bezpečnost, která po sobě nenechává další incident.
+
+## Zdroje k příloze
+
+- OWASP Logging Cheat Sheet — doporučení k událostem, ochraně logů a vyloučení citlivých dat z aplikačních logů: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+- OWASP API Security Top 10 2023 — rizika API včetně BOLA, broken authentication, unrestricted resource consumption a security misconfiguration: https://owasp.org/API-Security/editions/2023/en/0x11-t10/
+- Evropská komise — principy GDPR včetně minimalizace údajů, omezení účelu a omezení uložení: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en
+- NIST SP 800-92 — Guide to Computer Security Log Management, základní rámec pro sběr, správu a ochranu bezpečnostních logů: https://csrc.nist.gov/pubs/sp/800/92/final
+
+## Shrnutí přílohy
+
+Bezpečnostní logy API mají pomáhat vyšetřit útoky, chyby a podezřelé vzorce, ne kopírovat zákaznická data do dalšího systému. Dobrý privacy-first logovací návrh začíná otázkami, pokračuje katalogem událostí, rediguje citlivé hodnoty při vzniku, respektuje tenantové hranice, staví alerty na vzorcích a testuje, že tokeny, payloady a osobní údaje do logů neprotékají.
+
 ---
 
 ## Pracovní log
+- 2026-08-17: Přidána příloha IF o bezpečnostním logování API: otázky pro incidenty, metadata místo payloadů, redakce citlivých hodnot, katalog událostí, tenantové hranice, alerty podle vzorců, testy logování a privacy-first checklist.
 - 2026-08-17: Přidána příloha IE o autorizaci API: role vs. konkrétní schopnosti, deny-by-default, objektová a field-level autorizace, RBAC/ABAC/ReBAC modelování, support přístup, negativní testy a privacy-first checklist.
 - 2026-08-17: Přidána příloha ID o autentizaci API klientů: typy klientů, krátké access tokeny, rotace refresh tokenů, bezpečné session cookie, přihlašovací toky, strojové integrace, bezpečnostní logy a privacy-first checklist.
 - 2026-08-17: Přidána příloha IC o webhookách a eventech: minimální payloady, podpis nad raw body, replay ochrana, idempotence, retry politika, delivery historie a privacy-first checklist.
