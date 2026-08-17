@@ -37677,7 +37677,200 @@ API autentizace musí začít typem klienta, krátkými a omezenými tokeny, bez
 
 ---
 
+# Příloha IE: Autorizace API bez role „admin asi může všechno“, IDOR loterie a úniku polí přes dobré úmysly
+
+Autentizace odpoví na otázku „kdo jsi?“. Autorizace odpoví na mnohem důležitější otázku: „smíš právě teď udělat tuhle konkrétní věc s tímhle konkrétním objektem?“ Pokud odpověď řešíš jen tím, že má uživatel roli `admin`, `member` nebo `viewer`, dřív nebo později narazíš na realitu: člen týmu smí vidět faktury, ale ne export všech kontaktů; externí účetní smí stáhnout účetní report, ale ne číst interní poznámky; support smí dočasně pomoci, ale ne si jen tak prohlížet zákaznický obsah jako večerní seriál.
+
+OWASP API Security Top 10 2023 řadí mezi hlavní API rizika broken object level authorization, broken object property level authorization i broken function level authorization. Jinými slovy: nestačí vědět, že token je platný. API musí ověřit objekt, pole i akci pro každý request, který pracuje se zákaznickými daty: https://owasp.org/API-Security/editions/2023/en/0x11-t10/
+
+## IE.1 Oprávnění modeluj jako práci, ne jako titul na vizitce
+
+Role jsou užitečná zkratka pro UI a správu týmu. Nejsou ale kompletní autorizační model. `Owner`, `Admin`, `Editor` a `Viewer` vypadají čistě v tabulce, ale skutečný produkt potřebuje rozhodnutí typu: „může Jana exportovat kontakty z tenantového účtu ABC, pokud je externí spolupracovnice, export obsahuje e-maily a účet je v režimu zvýšené ochrany?“ Tohle role sama neutáhne.
+
+Začni seznamem práce, kterou lidé v produktu reálně dělají:
+
+- správa členů týmu,
+- čtení a úprava zákaznických záznamů,
+- export dat,
+- práce s fakturací,
+- nastavení integrací,
+- čtení audit logu,
+- dočasný support přístup,
+- mazání účtu nebo workspace.
+
+Ke každé práci napiš minimální oprávnění. Teprve potom je seskup do rolí. Dobrá role není „všechno kromě mazání“. Dobrá role je balíček konkrétních schopností, které dávají smysl pro jeden typ člověka.
+
+Praktická tabulka:
+
+| Akce | Objekt | Běžný člen | Admin | Owner | Support |
+| --- | --- | --- | --- | --- | --- |
+| Číst projekt | Projekt ve stejném tenantovi | Ano | Ano | Ano | Jen s aktivním přístupem |
+| Exportovat kontakty | Kontakty | Ne | Podle nastavení | Ano | Ne |
+| Měnit fakturaci | Billing account | Ne | Ne | Ano | Ne |
+| Pozvat člena | Workspace | Ne | Ano | Ano | Ne |
+| Číst audit log | Audit log | Ne | Ano | Ano | Jen metadata |
+
+Codyho praktické pravidlo: když neumíš oprávnění vysvětlit zákazníkovi jednou větou, nebude ho umět bezpečně používat ani vývojář v kódu.
+
+## IE.2 Deny by default je nudná věta, která šetří incidenty
+
+OWASP Authorization Cheat Sheet doporučuje nejmenší nutná oprávnění, deny-by-default přístup, kontrolu oprávnění při každém requestu, správné umístění autorizačních kontrol, logování a testy autorizační logiky: https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html
+
+V API to znamená:
+
+- když pravidlo neexistuje, výsledek je `deny`, ne „asi povoleno“,
+- každý endpoint má explicitní autorizační kontrolu,
+- kontrola probíhá server-side, ne jen schováním tlačítka v UI,
+- autorizace se vyhodnocuje po načtení tenant kontextu a před vrácením dat,
+- chybové stavy neprozrazují víc, než musí,
+- citlivé akce mají auditovatelnou stopu.
+
+Typická chyba vypadá nevinně:
+
+```text
+GET /api/projects/123
+```
+
+Backend ověří token, najde projekt `123` a vrátí ho. Chybí kontrola, jestli projekt patří do tenantů, ke kterým má aktuální uživatel přístup, a jestli má právo projekt číst. Pokud stačí změnit `123` na `124`, máš IDOR. Není to elegantní hack. Je to bezpečnostní dveřní klika namontovaná zvenku.
+
+Bezpečnější mentální model:
+
+1. Kdo request posílá?
+2. V jakém tenantovi nebo workspace se pohybuje?
+3. Jakou akci chce provést?
+4. Nad jakým objektem?
+5. V jakém stavu je objekt?
+6. Existuje pro tuhle kombinaci explicitní povolení?
+7. Je potřeba další brzda: MFA, potvrzení, časově omezený support přístup nebo schválení ownerem?
+
+## IE.3 Objektová autorizace musí být blízko datům
+
+Broken Object Level Authorization vzniká často proto, že se kontrola udělá „někde nahoře“ a pak další vrstva načte objekt podle ID bez omezení. OWASP u API1:2023 upozorňuje, že každý endpoint pracující s ID objektu má ověřit, zda přihlášený uživatel smí požadovanou akci nad daným záznamem provést: https://owasp.org/API-Security/editions/2023/en/0xa1-broken-object-level-authorization/
+
+Prakticky pomáhá vzor „scoped query“:
+
+```text
+Najdi projekt podle project_id, ale pouze uvnitř tenantů a oprávnění aktuálního uživatele.
+```
+
+Nejdřív tedy neuděláš globální `findProject(id)` a až potom přemýšlíš, jestli ho smíš vrátit. Uděláš `findAccessibleProject(user, tenant, id, action)`. Když nic nenajde, request končí. Z pohledu útočníka je rozdíl mezi „neexistuje“ a „existuje, ale nesmíš“ často zbytečná informace.
+
+Kde objektová autorizace nesmí chybět:
+
+- detail záznamu podle ID,
+- editace a mazání,
+- exporty,
+- vyhledávání,
+- bulk operace,
+- změna vlastníka,
+- odkazy na soubory,
+- webhook delivery historie,
+- audit log a billing.
+
+Bulk operace jsou zrádné. `POST /api/projects/bulk-delete` s polem ID nesmí zkontrolovat jen první položku a zbytek vzít jako poslušné ovečky. Každý objekt potřebuje vlastní autorizační rozhodnutí, ideálně s reportem, co se povedlo a co bylo odmítnuto bez vyzrazení cizích dat.
+
+## IE.4 Field-level oprávnění chrání před nenápadným únikem
+
+Některá data jsou citlivá jen pro určité publikum. Člen týmu smí vidět název zákazníka, ale ne interní rizikovou poznámku. Uživatel smí upravit název projektu, ale ne přepsat `owner_id`, `billing_plan`, `is_admin` nebo `data_region`. API musí hlídat nejen objekt a akci, ale i konkrétní pole.
+
+Tohle je místo, kde se potkává autorizace s DTO a response allowlistem. Výstupní API smlouva má říkat, která pole se vrací pro jaký kontext. Vstupní DTO má odmítnout pole, která klient nesmí měnit. Pokud backend potichu ignoruje neznámá pole, vývojáři i útočníci se učí špatnou věc: „zkus to poslat, třeba to projde“.
+
+Praktické pravidlo:
+
+- Pro čtení definuj výstupní pohledy: veřejný, člen týmu, admin, owner, support metadata.
+- Pro zápis používej explicitní command DTO: `UpdateProjectName`, `ChangeBillingEmail`, `InviteMember`.
+- Citlivá pole vracej jen přes endpointy, které mají vlastní autorizaci a audit.
+- Při exportu použij samostatný allowlist polí a zákaznické varování, co export obsahuje.
+- Testuj, že běžný uživatel nedostane interní pole ani přes `include`, `fields`, GraphQL selection nebo debug endpoint.
+
+Privacy-first pohled je jednoduchý: data, která uživatel nepotřebuje pro aktuální práci, nemají cestovat přes síť. Ani „jen v JSONu“. JSON není temná hmota; lidé ho umí číst, logovat a omylem přeposlat.
+
+## IE.5 RBAC stačí na začátek, ABAC a ReBAC řeší realitu
+
+RBAC, tedy role-based access control, je dobrý start. Pro menší SaaS bývá srozumitelný a snadno se vysvětluje. Jakmile ale přibydou externí spolupracovníci, regionální pravidla, citlivé datové typy, dočasný support přístup, zákaznické policy a sdílení jednotlivých objektů, samotné role se začnou nafukovat do obludy typu `regional_billing_export_admin_without_delete_v2`.
+
+NIST SP 800-162 popisuje ABAC jako přístup, kde se rozhodnutí o oprávnění odvozuje z atributů subjektu, objektu, operace a případně prostředí proti definovaným pravidlům: https://csrc.nist.gov/pubs/sp/800/162/upd2/final
+
+V praxi to může být:
+
+- subjekt: uživatel je externí účetní, má MFA, patří do tenantů A a B,
+- objekt: faktura patří tenantovi A, obsahuje finanční data, region je EU,
+- akce: export PDF faktury,
+- prostředí: request jde z běžné session, ne ze support impersonace,
+- pravidlo: externí účetní smí exportovat faktury jen pro přiřazené tenanty a jen bez změny billing nastavení.
+
+ReBAC, tedy relationship-based access control, přidává vztahy: uživatel je vlastníkem projektu, členem workspace, správcem týmu, externím hostem nebo příjemcem sdíleného reportu. Pro B2B SaaS je často zdravý mix: role pro základní správu, atributy pro kontext a vztahy pro konkrétní objekty.
+
+Nezačínej ale nákupem autorizačního frameworku dřív než modelem. Nejprve napiš pravidla lidsky. Pak je převeď do kódu, policy enginu nebo databázových omezení. Jinak jen přesuneš chaos do dražší krabice.
+
+## IE.6 Support přístup je autorizace pod lupou
+
+Support access je riziková zóna, protože interní člověk může mít technicky víc možností než běžný zákazník. Privacy-first produkt musí mít support přístup navržený jako dočasné, účelové a auditovatelné oprávnění, ne jako univerzální „přepnout se do zákazníka“.
+
+Minimum:
+
+- zákazník nebo owner schvaluje přístup, pokud nejde o incidentní režim,
+- přístup má expiraci,
+- support vidí jen data nutná pro řešení požadavku,
+- citlivé sekce jsou maskované nebo vyžadují další schválení,
+- každá akce je v audit logu s důvodem,
+- zákazník může vidět historii support přístupů,
+- support token nejde použít pro exporty, změnu fakturace nebo mazání účtu.
+
+Incidentní výjimky musí být popsané předem. Pokud systém spadne a zákazník nedokáže kliknout na schválení, tým potřebuje break-glass režim. Ten ale musí mít důvod, omezené trvání, dodatečné schválení, silné logování a pravidelnou revizi. Jinak se z výjimky stane hlavní vchod.
+
+## IE.7 Testuj autorizaci jako produktovou smlouvu
+
+Autorizační pravidla nejsou jen bezpečnostní testy. Jsou testy obchodních slibů. Když říkáš zákazníkovi, že externí host neuvidí fakturaci, musí existovat test, který to hlídá. Když tvrdíš, že EU tenant nemá data v mimoevropském exportu, testuj i to.
+
+Dobrá testovací matice obsahuje:
+
+- role a vztahy uživatelů,
+- různé tenanty,
+- objekty v různých stavech,
+- citlivá pole,
+- bulk operace,
+- exporty,
+- support režim,
+- zrušené nebo expirované přístupy,
+- pokusy měnit systémová pole ve vstupu.
+
+Negativní test je často důležitější než pozitivní. Nejen „admin může exportovat“. Ale také „viewer nemůže exportovat“, „admin tenant A nemůže exportovat tenant B“, „support nemůže stáhnout celý export“ a „uživatel nemůže změnit `role` přes update profilu“.
+
+## IE.8 Checklist autorizace API
+
+- Má každá akce jasně pojmenovaný objekt, operaci a publikum?
+- Je výchozí rozhodnutí `deny`, pokud pravidlo chybí nebo selže?
+- Probíhá autorizační kontrola na serveru při každém requestu?
+- Ověřuje API tenant kontext a objektové oprávnění u každého ID z klienta?
+- Jsou bulk operace autorizované po jednotlivých objektech?
+- Mají citlivá pole samostatná pravidla pro čtení, zápis a export?
+- Odmítá vstupní DTO pole navíc a systémová pole, která klient nesmí měnit?
+- Jsou role složené z konkrétních schopností, ne z mlhavých titulů?
+- Používáš atributy nebo vztahy tam, kde samotné role nestačí?
+- Má support přístup důvod, expiraci, omezený rozsah a audit?
+- Existují negativní testy pro IDOR, field-level úniky, exporty a support režim?
+- Umí audit log vysvětlit, kdo povolil nebo odmítl citlivou akci bez ukládání payloadů?
+
+## Codyho komentář
+
+Autorizace je místo, kde se pozná rozdíl mezi „máme SaaS“ a „máme databázi připojenou k internetu s hezkým dashboardem“. Dobrá autorizace není sexy feature do produktového videa. Je to tichá infrastruktura důvěry. Když funguje, nikdo netleská. Když chybí, všichni najednou čtou logy, smlouvy a omluvné e-maily. Takže ano, raději nuda předem než drama potom.
+
+## Zdroje k příloze
+
+- OWASP API Security Top 10 2023 — přehled rizik včetně BOLA, BOPLA a broken function level authorization: https://owasp.org/API-Security/editions/2023/en/0x11-t10/
+- OWASP API1:2023 Broken Object Level Authorization — kontrola oprávnění u každého endpointu pracujícího s ID objektu: https://owasp.org/API-Security/editions/2023/en/0xa1-broken-object-level-authorization/
+- OWASP Authorization Cheat Sheet — least privilege, deny by default, kontrola při každém requestu, logování a testy: https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html
+- NIST SP 800-162 — definice a úvahy k Attribute Based Access Control: https://csrc.nist.gov/pubs/sp/800/162/upd2/final
+
+## Shrnutí přílohy
+
+API autorizace musí být explicitní, serverová a testovaná na úrovni akce, objektu, pole i tenantového kontextu. Role pomáhají se správou, ale skutečná bezpečnost stojí na deny-by-default pravidlech, objektové autorizaci, field-level ochraně, opatrném support přístupu a negativních testech, které hlídají, že zákaznická data zůstávají tam, kde mají.
+
+---
+
 ## Pracovní log
+- 2026-08-17: Přidána příloha IE o autorizaci API: role vs. konkrétní schopnosti, deny-by-default, objektová a field-level autorizace, RBAC/ABAC/ReBAC modelování, support přístup, negativní testy a privacy-first checklist.
 - 2026-08-17: Přidána příloha ID o autentizaci API klientů: typy klientů, krátké access tokeny, rotace refresh tokenů, bezpečné session cookie, přihlašovací toky, strojové integrace, bezpečnostní logy a privacy-first checklist.
 - 2026-08-17: Přidána příloha IC o webhookách a eventech: minimální payloady, podpis nad raw body, replay ochrana, idempotence, retry politika, delivery historie a privacy-first checklist.
 - 2026-08-16: Přidána příloha IB o importním API a migraci dat: scénář importu, bezpečný upload, explicitní mapování polí, preview před zápisem, deduplikace, asynchronní joby, rollback, chybové reporty, přenositelnost dat a privacy-first checklist.
