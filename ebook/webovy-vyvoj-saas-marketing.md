@@ -39528,7 +39528,146 @@ Customer health score má být jako dobrý parťák na customer success review: 
 
 Customer health score má být praktická pomůcka pro lepší péči o zákazníky, ne skrytý scoringový režim. Začíná účelem a akcí, používá jen signály spojené se zákaznickou hodnotou, ukazuje vysvětlitelné důvody, preferuje úroveň účtu před profilováním jednotlivců, zakazuje automatické tresty, omezuje historii a pravidelně testuje falešné poplachy. Privacy-first scoring nemá zákazníka soudit. Má týmu připomenout, kde může pomoct.
 
+# Příloha IO: Renewaly a upsell v B2B SaaS bez obchodního stalkingu, nátlakových triků a datové nenasytnosti
+
+Renewal je chvíle pravdy. Zákazník se neptá, kolik jste poslali newsletterů, kolik máte nových AI funkcí ani jestli obchodník hezky vybarvil CRM. Ptá se jednoduše: „Dostali jsme slíbenou hodnotu a chceme za ni platit dál?“ Upsell je podobný test. Má nabídnout další hodnotu ve správný čas, ne vytěžit každou stopu chování a proměnit ji v „personalizovaný“ tlak.
+
+Privacy-first renewal a upsell stojí na třech věcech: jasná evidence hodnoty, minimální zákaznická data a férová komunikace. Nejde o svatou chudobu obchodního týmu. Jde o to, aby obchod nepůsobil jako člověk, který stojí za zákazníkem v kanceláři s dalekohledem a šeptá: „Viděl jsem, že jste dnes klikli na export.“ To není péče. To je horor s fakturou.
+
+## IO.1 Renewal připravuj od prvního výsledku, ne měsíc před fakturou
+
+Špatný renewal proces začíná 30 dní před koncem smlouvy panickým e-mailem: „Dobrý den, blíží se prodloužení, dáme call?“ Dobrý renewal proces začíná ve chvíli, kdy zákazník poprvé získá slíbenou hodnotu. Tým si od začátku vede jednoduchý záznam: jaký výsledek zákazník chtěl, co se podařilo, co brzdí používání a jaký je další realistický krok.
+
+Praktická renewal karta účtu:
+
+| Oblast | Co zapisovat | Co nezapisovat |
+| --- | --- | --- |
+| Cíl zákazníka | „Zkrátit ruční reporting z 5 hodin týdně na 1 hodinu“ | Osobní dojmy o jednotlivých uživatelích |
+| Dosažená hodnota | „3 týmy používají šablonu měsíčního reportu“ | Přesné clickstream detaily bez účelu |
+| Riziko | „Import z ERP selhává u dvou polí“ | Spekulace typu „asi nejsou motivovaní“ |
+| Další krok | „Technický workshop k mapování polí“ | Automatický upsell bez potvrzené potřeby |
+| Důkaz | Agregovaná metrika, ticket, schválený zápis z hovoru | Raw payloady, nahrávky bez důvodu, interní drby |
+
+Renewal není kouzelný moment. Je to průběžné dokazování hodnoty. Pokud zákazník na konci roku poprvé slyší, jakou hodnotu produkt dodal, proces spal jako frontend po deployi v pátek večer.
+
+## IO.2 Používej hodnotové signály, ne šmírovací zkratky
+
+Obchodní tým často chce „všechna dostupná data“, protože víc dat vypadá jako lepší příprava. Jenže v B2B SaaS obvykle stačí méně, pokud jsou signály navázané na hodnotu účtu.
+
+Dobré signály pro renewal a upsell:
+
+- účet dokončil klíčový workflow opakovaně,
+- roste počet týmů nebo projektů, které aktivně používají placenou funkci,
+- zákazník narazil na limit, který opravdu brzdí práci,
+- integrace šetří měřitelný ruční čas,
+- support opakovaně řeší stejný procesní problém,
+- zákazník sám zmínil plán rozšíření týmu, země nebo produktu.
+
+Podezřelé signály:
+
+- sledování každého pohybu jednotlivce v aplikaci,
+- otevírání e-mailů jako hlavní důkaz zájmu,
+- skóre „pravděpodobnosti nákupu“ bez vysvětlitelných důvodů,
+- sentiment analýza soukromých support zpráv bez jasných hranic,
+- používání dat původně sebraných pro bezpečnostní logy k obchodnímu targetingu.
+
+Evropská komise u GDPR principů připomíná účelové omezení a minimalizaci: data mají být sbírána pro konkrétní účel a jen v rozsahu, který je pro něj nezbytný: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en Pro obchod to znamená jednoduchou brzdu: pokud bys signál nedokázal zákazníkovi říct nahlas bez trapného ticha, pravděpodobně ho nepoužívej.
+
+## IO.3 Upsell navrhuj jako pomoc s dalším výsledkem
+
+Upsell má smysl ve chvíli, kdy zákazník narazil na hranici současného tarifu nebo procesu a vyšší plán mu prokazatelně pomůže. Ne ve chvíli, kdy někdo v CRM potřebuje splnit kvartál. Ano, kvartál je reálný. Ale zákazník není zásobník ARR, do kterého se kope lžičkou.
+
+Dobrá upsell věta:
+
+> „Vidíme, že už tři týmy používají reporting a narážíte na ruční schvalování exportů. Vyšší plán by vám přidal automatické schvalovací workflow. Chcete ukázat, jestli by to řešilo váš konkrétní případ?“
+
+Špatná upsell věta:
+
+> „Všimli jsme si zvýšené aktivity ve vašem účtu, proto pro vás máme exkluzivní nabídku.“
+
+První věta mluví o práci zákazníka a dává mu kontrolu. Druhá zní jako kamera v rohu místnosti dostala obchodní bonus.
+
+Tři pravidla pro privacy-first upsell:
+
+- Nabídku opři o agregovaný nebo zákazníkem potvrzený kontext, ne o detailní sledování jednotlivce.
+- Vysvětli, jak konkrétní funkce navazuje na cíl zákazníka.
+- Dej zákazníkovi jednoduché „ne teď“ bez trestu, nátlaku a sedmidílné follow-up opery.
+
+## IO.4 Obchodní komunikace potřebuje frekvenci, kontext a úctu k odmítnutí
+
+Nejrychlejší cesta k nedůvěře je vzít jeden legitimní signál a rozjet z něj automatickou kadenci sedmi e-mailů, dvou LinkedIn zpráv a pasivně agresivního „jen připomínám“. Obchodní follow-up má být služba, ne kapající kohoutek.
+
+Nastav si obchodní komunikační pravidla:
+
+| Situace | Doporučený rytmus | Hranice |
+| --- | --- | --- |
+| Blíží se renewal | 90/60/30 dní podle velikosti účtu | Žádné překvapivé navýšení bez vysvětlení |
+| Zákazník narazil na limit | Jeden kontextový e-mail + nabídka hovoru | Neopakovat, pokud zákazník řekne ne |
+| Nová relevantní funkce | Segmentovaná zpráva podle používání účtu | Neposílat všem jen proto, že launch bolí |
+| Riziko odchodu | Pomoc s problémem, ne okamžitá sleva | Nevyužívat support bolest jako nátlak |
+
+GDPR dává lidem mimo jiné právo vznést námitku proti zpracování pro marketingové účely; Evropská komise práva subjektů údajů shrnuje zde: https://commission.europa.eu/law/law-topic/data-protection/information-individuals_en V B2B praxi proto obchodní systém potřebuje respektovat odhlášení, námitky a preference kontaktů. „Ale je to pracovní e-mail“ není kouzelné zaklínadlo, které smaže zdravý rozum.
+
+## IO.5 Renewal meeting má ukazovat hodnotu, rizika a volby
+
+Dobré renewal setkání není hodinová prezentace nových funkcí. Je to společné rozhodnutí, jestli produkt dál dává smysl. Připrav krátký dokument, který zákazník může přeposlat interně bez toho, aby obsahoval osobní data navíc.
+
+Struktura renewal review:
+
+1. Původní cíl: proč zákazník produkt pořizoval.
+2. Dosažená hodnota: konkrétní výsledky, ideálně agregovaně.
+3. Co nefungovalo: incidenty, nedodané sliby, otevřené blokery.
+4. Doporučení: prodloužit stejně, změnit plán, rozšířit, nebo zmenšit rozsah.
+5. Datové a provozní poznámky: kde jsou data, jaká je retence, jaké změny proběhly u subdodavatelů.
+6. Další kvartál: tři priority, ne třicet přání.
+
+Ukázka férové věty:
+
+> „Vyšší tarif doporučujeme jen pokud chcete automatizovat schvalování napříč více týmy. Pokud zůstane používání v jednom týmu, současný plán stačí.“
+
+Tohle možná krátkodobě nevyždíme každé euro. Dlouhodobě ale buduje důvěru. A důvěra je v evropském B2B SaaS pořád lepší retention nástroj než tabulka triků z growth blogu.
+
+## IO.6 Retence obchodních dat musí mít konec
+
+Obchodní poznámky, renewal decky, záznamy hovorů, call transkripty, usage snapshoty a exporty z CRM nemají žít věčně. Čím déle existují, tím větší je riziko, že se použijí mimo původní účel nebo uniknou v nejméně vtipný moment.
+
+Evropská komise k omezení uložení uvádí, že osobní data mají být uchovávána co nejkratší dobu s ohledem na účel a právní povinnosti: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en V renewal procesu to přelož do konkrétní tabulky:
+
+| Data | Doporučená praxe |
+| --- | --- |
+| Renewal snapshot | Uložit jen agregované metriky a závěr, ne raw eventy |
+| Call poznámky | Strukturovat podle zákaznického cíle, odstranit osobní dojmy |
+| Nahrávka hovoru | Vypnout defaultně, zapnout jen s důvodem a jasnou retencí |
+| CRM export | Expirace odkazu, zákaz ukládání na osobní disky |
+| Odmítnutý upsell | Uložit důvod a další vhodný termín, ne tlačit kadenci dál |
+
+## IO.7 Checklist renewalů a upsellu
+
+- Má každý renewal jasně zapsaný původní zákaznický cíl a dosaženou hodnotu?
+- Používáš pro obchodní přípravu hodnotové signály, ne detailní sledování jednotlivců?
+- Umíš zákazníkovi vysvětlit, proč mu doporučuješ vyšší tarif nebo rozšíření?
+- Existuje „ne teď“ bez automatického nátlaku, trestu nebo nekonečné sekvence?
+- Respektuje CRM odhlášení, námitky a komunikační preference kontaktů?
+- Obsahují renewal dokumenty jen data, která zákazník může bezpečně sdílet interně?
+- Mají call poznámky, nahrávky, usage snapshoty a exporty jasnou retenci?
+- Kontroluje někdo jednou měsíčně, jestli obchodní automatizace nepřerostla v datový vysavač?
+
+## Codyho komentář
+
+Upsell není sprosté slovo. Sprosté je prodávat vyšší tarif zákazníkovi, který ještě nedostal hodnotu z toho současného, a tvářit se u toho jako „trusted advisor“. Můj pohled: nejlepší obchodníci v privacy-first SaaS nejsou ti, kdo mají nejvíc dat. Jsou to ti, kdo umí z mála dobrých signálů položit správnou otázku a klidně říct: „Teď ještě nekupujte.“ Ano, sales tabulka si možná povzdechne. Zákazník si to zapamatuje.
+
+## Zdroje k příloze
+
+- Evropská komise — podmínky zpracování dat, účelové omezení a minimalizace: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en
+- Evropská komise — práva jednotlivců podle GDPR včetně práva vznést námitku a práva na výmaz: https://commission.europa.eu/law/law-topic/data-protection/information-individuals_en
+- Evropská komise — omezení uložení a revize osobních údajů: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en
+
+## Shrnutí přílohy
+
+Renewaly a upsell mají stát na prokazatelné hodnotě, ne na obchodním stalkingu. Privacy-first proces sleduje cíl účtu, agregované výsledky, relevantní limity, férové další kroky a jasnou retenci obchodních dat. Upsell má zákazníkovi pomoci k dalšímu výsledku, ne ho dotlačit pomocí detailního sledování, nátlakových sekvencí nebo skrytého scoringu. Dobrá obchodní komunikace respektuje odmítnutí, vysvětluje doporučení a používá méně dat, ale lépe.
+
 ## Pracovní log
+- 2026-08-17: Přidána příloha IO o renewalech a upsellu v B2B SaaS: evidence zákaznické hodnoty, hodnotové signály místo sledování jednotlivců, férový upsell, komunikační limity, renewal review, retence obchodních dat a privacy-first checklist.
 - 2026-08-17: Přidána příloha IN o customer health score bez šmírování: účel score, výběr hodnotových signálů, vysvětlitelné důvody, omezení profilování jednotlivců, zákaz automatických trestů, retence historie, kontrola falešných poplachů a privacy-first checklist.
 - 2026-08-17: Přidána příloha IM o interních reportech a BI dashboardech: rozhodovací otázky, agregace místo řádků zákazníků, realistická pseudonymizace, exporty s expirací, oddělené datové vrstvy, metrický slovník, AI hranice a privacy-first checklist.
 - 2026-08-17: Přidána příloha IL o admin rozhraní a interních nástrojích: role podle konkrétní práce, datové minimum na obrazovce, bezpečné vyhledávání, tření u rizikových akcí, časově omezený support access, auditní logy bez tajemství, release proces a privacy-first checklist.
