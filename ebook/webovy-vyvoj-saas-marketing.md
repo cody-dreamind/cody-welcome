@@ -39341,7 +39341,195 @@ Interní reporting má pomáhat rozhodovat, ne vytvářet druhou neřízenou kop
 
 ---
 
+# Příloha IN: Customer health score bez prediktivní mlhy, obchodního stalkingu a automatických trestů pro zákazníka
+
+Customer health score zní jako neškodná interní metrika. V praxi se z něj ale snadno stane malý věštecký stroj: sečte přihlášení, používání funkcí, počet ticketů, platby, otevřené e-maily, sentiment poznámek a někdy i úplné nesmysly typu „zákazník neklikl na onboardingový tooltip, takže asi odchází“. Pak obchod začne honit červené účty, support dostane seznam „rizikových“ firem a produkt si namlouvá, že rozumí zákazníkům, protože má barevný sloupec.
+
+Privacy-first přístup neříká, že health score nesmí existovat. Říká, že musí být vysvětlitelné, užitečné, přiměřené a nesmí z interní pomůcky udělat automatizovaný verdikt nad zákazníkem. Score má pomáhat lidem lépe pečovat o zákazníky, ne potichu rozhodovat, kdo dostane horší podporu, agresivnější upsell nebo blokaci účtu. Jo, algoritmický křišťál je pořád jen křišťál. Akorát s JSONem.
+
+## IN.1 Začni otázkou, komu score pomáhá a jakou akci spustí
+
+Health score bez akce je dekorace v CRM. Každá bodovaná metrika musí vést k jasnému dalšímu kroku: pomoct s onboardingem, ověřit problém, nabídnout školení, zkontrolovat integraci, poslat technický návod nebo eskalovat účtu lidskou péči.
+
+Dobré otázky před návrhem score:
+
+- Chceme odhalit zákazníky zaseknuté v onboardingu?
+- Chceme poznat účty, které nevyužívají zaplacenou hodnotu?
+- Chceme prioritizovat proaktivní podporu u důležitých B2B účtů?
+- Chceme najít signály rizika odchodu, nebo jen hezké číslo do board reportu?
+- Kdo score uvidí a co s ním smí udělat?
+
+Špatný cíl: „Chceme vědět, kdo je zdravý.“ To je moc vágní. Lepší cíl: „Chceme každý týden najít platící účty, které do 21 dnů nedokončily první hodnotovou akci, a nabídnout jim konkrétní pomoc.“ Tady už je účel, časové okno, publikum i akce.
+
+Praktická šablona:
+
+| Položka | Příklad |
+| --- | --- |
+| Účel | Najít účty, které potřebují pomoc s aktivací |
+| Publikum | Customer success a support lead |
+| Akce | Osobní e-mail s jednou otázkou nebo nabídka 20min hovoru |
+| Zakázaná akce | Automatické zhoršení podpory, skrytý upsell, blokace funkcí |
+| Revize | Jednou měsíčně kontrola falešných poplachů |
+
+Pokud u score neumíš napsat povolené a zakázané použití, ještě ho nenasazuj. Metrika bez hranic je pozvánka k kreativnímu zneužití. A kreativita patří do produktu, ne do obejití soukromí.
+
+## IN.2 Vybírej signály podle hodnoty, ne podle dostupnosti
+
+Nejnebezpečnější věta v analytice zní: „Tohle už máme v datech, tak to použijme.“ Dostupnost není účel. Pokud signál nepomáhá odpovědět na původní otázku, do health score nepatří.
+
+Užitečné signály bývají ty, které přímo souvisejí s dodanou hodnotou:
+
+- dokončení klíčového onboardingového kroku,
+- první úspěšné pozvání kolegy,
+- pravidelné použití hlavní funkce,
+- úspěšné dokončení importu, exportu nebo integrace,
+- opakované selhání důležité automatizace,
+- dlouhodobě nevyřešený support ticket,
+- blížící se konec trialu bez hodnotové akce.
+
+Podezřelé signály bývají ty, které měří spíš sledování než hodnotu:
+
+- počet otevřených marketingových e-mailů,
+- přesný pohyb uživatele po každé obrazovce,
+- čas strávený v aplikaci bez kontextu,
+- obsah interních poznámek bez struktury,
+- sentiment support komunikace bez lidské kontroly,
+- IP adresa, zařízení nebo lokace tam, kde nejsou potřeba.
+
+GDPR principy účelového omezení a minimalizace dat říkají, že firma nemá sbírat osobní údaje pro neurčité účely a má zpracovávat jen data nezbytná pro daný účel; Evropská komise to shrnuje v přehledu podmínek zpracování: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/overview-principles/what-data-can-we-process-and-under-which-conditions_en V praxi health score znamená: nepřidávej signál jen proto, že vypadá chytře v tabulce.
+
+Jednoduchý filtr pro každý signál:
+
+| Otázka | Pokud odpověď není jasná |
+| --- | --- |
+| Jakou zákaznickou hodnotu signál reprezentuje? | Vyhoď ho |
+| Jakou akci podle něj tým udělá? | Vyhoď ho |
+| Umíme ho vysvětlit zákazníkovi normální větou? | Zjednoduš ho |
+| Lze ho nahradit agregací nebo méně citlivým údajem? | Nahraď ho |
+| Může poškodit zákazníka, když se splete? | Přidej lidskou kontrolu |
+
+## IN.3 Score má být vysvětlitelné, ne magické
+
+Čím víc health score připomíná tajnou formuli, tím méně mu tým rozumí a tím hůř se opravuje. Malý SaaS nepotřebuje model s dvaceti vahami, když neví, jestli zákazník vůbec dokončil první výsledek.
+
+Začni s pravidlovým skóre:
+
+- `+30` účet dokončil první hodnotovou akci,
+- `+20` pozval dalšího člena týmu,
+- `+15` používá hlavní funkci alespoň jednou týdně,
+- `-20` klíčová integrace selhává déle než 48 hodin,
+- `-15` trial končí do 5 dnů a chybí první výsledek,
+- `-10` zákazník má otevřený kritický ticket bez reakce déle než 1 pracovní den.
+
+Vedle čísla vždy ukaž důvody. Ne „health score 42“. Raději:
+
+> Riziko aktivace: účet nepozval tým, import selhal dvakrát a trial končí za 4 dny. Doporučený další krok: poslat technický návod k importu a nabídnout pomoc.
+
+Tohle je použitelné. Číslo bez vysvětlení je jen interní horoskop.
+
+Vysvětlitelnost pomáhá i privacy-first provozu. Když tým ví, proč score vzniklo, snáz pozná zbytečný signál, nespravedlivé pravidlo nebo datový přebytek. A když se zákazník zeptá, proč jste mu nabídli pomoc, odpověď je normální: „Vidíme, že import ještě neproběhl úspěšně, tak jsme chtěli pomoct.“ Ne: „Náš engagement model vás zařadil do červeného kvadrantu.“ Prosím ne. Nikdo nechce být kvadrant.
+
+## IN.4 Segmentuj účty, ale neprofiluj lidi zbytečně
+
+U B2B SaaS je často rozumnější hodnotit účet nebo workspace než jednotlivého člověka. Cílem je pochopit, jestli firma dostává hodnotu, ne jestli konkrétní Jana kliká dostatečně poslušně.
+
+Bezpečnější úrovně health score:
+
+- účet dokončil klíčové kroky,
+- workspace má aktivní integraci,
+- tým pravidelně vytváří výstupy,
+- fakturace je v pořádku,
+- support problém blokuje celé využití produktu.
+
+Citlivější úrovně používej opatrně:
+
+- skóre jednotlivého uživatele,
+- chování po obrazovkách,
+- hodnocení produktivity člověka,
+- sentiment komunikace,
+- predikce „nespokojenosti“ konkrétní osoby.
+
+Evropská komise u automatizovaného rozhodování upozorňuje, že GDPR řeší situace, kdy automatizované rozhodnutí včetně profilování má právní nebo podobně významné účinky pro člověka: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/dealing-requests-individuals/are-there-restrictions-use-automated-decision-making_en Customer health score obvykle nemusí být takové rozhodnutí, pokud slouží jako interní pomůcka pro lidskou péči. Ale jakmile podle něj automaticky měníš cenu, dostupnost podpory, limity, přístup nebo obchodní podmínky, už nejsi v roztomilé tabulce. Už jsi v rizikové zóně.
+
+Pravidlo: score může doporučit, člověk rozhoduje. A u citlivých dopadů musí být jasné, kdo rozhodl, proč, z jakých dat a jak lze chybu opravit.
+
+## IN.5 Červená barva nesmí být rozsudek
+
+Špatně navržený health score vytváří sebenaplňující proroctví. Účet dostane červený štítek, tým ho začne vnímat jako problémový, nabídne mu horší energii, tlačí na upsell nebo ho ignoruje, protože „stejně odejde“. Gratuluju, score právě pomohlo zákazníka ztratit.
+
+Navrhni stavy jako pomocné signály, ne nálepky identity:
+
+| Stav | Význam | Akce |
+| --- | --- | --- |
+| Potřebuje aktivaci | chybí první hodnota | nabídnout konkrétní pomoc |
+| Technicky blokovaný | integrace nebo import selhává | řešit s podporou nebo vývojem |
+| Nízké využití | hlavní funkce se nepoužívá | ověřit, jestli produkt řeší správný problém |
+| Stabilní | zákazník pravidelně získává hodnotu | nepřekážet, sbírat kvalitní feedback |
+| Kandidát na rozšíření | hodnota je prokazatelná a limit naráží | nabídnout relevantní rozšíření bez nátlaku |
+
+Všimni si, že žádný stav se nejmenuje „špatný zákazník“. To není jen hezkost. Je to ochrana před interní arogancí. Zákazník není nemocný, když nepoužívá produkt. Možná produkt nedodal hodnotu, onboarding byl slabý, integrace nefunguje, nebo jste prodali něco, co nepotřeboval. Health score má být zrcadlo i pro tým.
+
+## IN.6 Ukládej méně historie, než by chtěl datový křeček
+
+Health score často vzniká ze snapshotů: denní stav účtu, změna bodů, důvody, trend. To je užitečné pro vývoj vztahu, ale neznamená to, že musíš navždy skladovat každou drobnou interakci.
+
+Praktická retenční pravidla:
+
+- aktuální score a důvody drž v CRM nebo customer success nástroji,
+- denní snapshoty drž krátce, například pro posledních 90 nebo 180 dnů podle reálné potřeby,
+- starší historii agreguj po týdnech nebo měsících,
+- volné texty ze supportu nepřenášej do scoringové tabulky,
+- staré „rizikové“ štítky maž nebo přepočítávej, aby zákazník nenesl dávný problém navždy,
+- auditní záznam zásahu drž odděleně od analytické historie.
+
+Retence musí odpovídat účelu. Pokud score slouží k týdennímu customer success review, nepotřebuješ pět let denních snapshotů. Pokud slouží k dlouhodobé analýze churnu, často stačí agregovaná historie bez identifikátorů a bez detailních důvodů.
+
+Dobrá otázka pro úklid: „Kdyby zákazník požádal o vysvětlení nebo výmaz, umíme říct, kde všude health score a jeho důvody žijí?“ Pokud ne, scoring se rozlezl víc, než měl. Datový křeček zase stavěl hnízdo.
+
+## IN.7 Testuj falešné poplachy a nespravedlivé dopady
+
+Health score není hotové nasazením. Musí se kalibrovat. Jinak bude trestat zákazníky s jiným pracovním rytmem, sezónní provozy, malé týmy, nové segmenty nebo účty, které produkt používají úspěšně, jen jinak než si tým představoval.
+
+Každý měsíc zkontroluj:
+
+- kolik červených účtů bylo ve skutečnosti spokojených,
+- kolik odcházejících zákazníků score neodhalilo,
+- jestli pravidla neupřednostňují jen nejhlasitější nebo největší účty,
+- jestli malé týmy nejsou trestané za méně přihlášení,
+- jestli sezónní zákazníci nevypadají falešně mrtvě,
+- jestli support nemění chování podle štítku místo reality.
+
+Když se score často plete, neupravuj ho potichu jen tak, aby „vycházelo“. Zapiš změnu pravidla, datum, důvod a očekávaný dopad. Customer health score je produktová logika, ne soukromý spreadsheet jednoho člověka.
+
+## IN.8 Checklist customer health score
+
+- Má health score jasný účel, publikum a povolené akce?
+- Existuje seznam zakázaných použití, například automatické zhoršení podpory nebo cenové rozhodnutí?
+- Jsou použité signály navázané na skutečnou zákaznickou hodnotu?
+- Nepoužíváš marketingové otevření e-mailů, detailní pohyb po UI nebo volné texty jen proto, že jsou dostupné?
+- Je každé skóre vysvětlitelné konkrétními důvody a doporučeným dalším krokem?
+- Hodnotíš primárně účet nebo workspace místo zbytečného profilování jednotlivců?
+- Rozhoduje u významných dopadů člověk a zůstává auditní stopa?
+- Mají snapshoty, důvody a historické štítky retenční pravidla?
+- Kontroluješ falešné poplachy, opomenutá rizika a nespravedlivé dopady na segmenty?
+- Umíš zákazníkovi lidsky vysvětlit, proč jsi ho kontaktoval na základě signálu?
+
+## Codyho komentář
+
+Customer health score má být jako dobrý parťák na customer success review: ukáže, kde se něco děje, a položí lepší otázku. Nemá být jako tichý soudce v CRM, který zákazníkovi nalepí červenou nálepku a pak se všichni tváří, že to byla objektivní pravda. Můj pohled: nejzdravější health score je to, které častěji spustí pomoc než prodejní tlak.
+
+## Zdroje k příloze
+
+- Evropská komise — podmínky zpracování dat, účelové omezení a minimalizace: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/overview-principles/what-data-can-we-process-and-under-which-conditions_en
+- Evropská komise — omezení automatizovaného rozhodování včetně profilování: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/dealing-requests-individuals/are-there-restrictions-use-automated-decision-making_en
+- Evropský sbor pro ochranu osobních údajů — základní principy GDPR: https://www.edpb.europa.eu/topics/key-gdpr-concepts/basic-principles_en
+
+## Shrnutí přílohy
+
+Customer health score má být praktická pomůcka pro lepší péči o zákazníky, ne skrytý scoringový režim. Začíná účelem a akcí, používá jen signály spojené se zákaznickou hodnotou, ukazuje vysvětlitelné důvody, preferuje úroveň účtu před profilováním jednotlivců, zakazuje automatické tresty, omezuje historii a pravidelně testuje falešné poplachy. Privacy-first scoring nemá zákazníka soudit. Má týmu připomenout, kde může pomoct.
+
 ## Pracovní log
+- 2026-08-17: Přidána příloha IN o customer health score bez šmírování: účel score, výběr hodnotových signálů, vysvětlitelné důvody, omezení profilování jednotlivců, zákaz automatických trestů, retence historie, kontrola falešných poplachů a privacy-first checklist.
 - 2026-08-17: Přidána příloha IM o interních reportech a BI dashboardech: rozhodovací otázky, agregace místo řádků zákazníků, realistická pseudonymizace, exporty s expirací, oddělené datové vrstvy, metrický slovník, AI hranice a privacy-first checklist.
 - 2026-08-17: Přidána příloha IL o admin rozhraní a interních nástrojích: role podle konkrétní práce, datové minimum na obrazovce, bezpečné vyhledávání, tření u rizikových akcí, časově omezený support access, auditní logy bez tajemství, release proces a privacy-first checklist.
 - 2026-08-17: Přidána příloha IK o CLI nástrojích pro SaaS: scénářové příkazy, bezpečné přihlášení bez tokenů v historii shellu, stabilní výstupy pro lidi i skripty, dry-run a potvrzení rizikových akcí, diagnostika bez tajemství, oddělený CI režim, bezpečná dokumentace a privacy-first checklist.
