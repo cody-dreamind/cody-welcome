@@ -5265,7 +5265,7 @@ Export dat je test důvěry. Privacy-first produkt zákazníka nepřivazuje k ž
 
 Cookie lišta je často první věc, kterou člověk na webu uvidí. To je trochu smutné, protože většina firem by raději ukázala hodnotu, produkt nebo aspoň hezký headline. Jenže když už banner existuje, může buď budovat důvěru, nebo působit jako digitální celník, který blokuje dveře a šeptá: „Klikni na všechno, ať už máme klid.“
 
-Privacy-first přístup začíná jednoduchou otázkou: opravdu potřebujeme souhlas, nebo můžeme produkt navrhnout tak, aby žádné zbytečné sledování nepotřeboval? Evropská komise uvádí, že souhlas podle GDPR má být svobodný, konkrétní, informovaný a jednoznačný a že odmítnutí nebo odvolání souhlasu nemá člověka znevýhodnit: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/legal-grounds-processing-data/grounds-processing/when-consent-valid_en CNIL k analytice připomíná, že měření návštěvnosti typicky podléhá pravidlům pro cookies a výjimka dává smysl jen při opravdu omezeném audience measurementu: https://www.cnil.fr/fr/node/677
+Privacy-first přístup začíná jednoduchou otázkou: opravdu potřebujeme souhlas, nebo můžeme produkt navrhnout tak, aby žádné zbytečné sledování nepotřeboval? Evropská komise uvádí, že souhlas podle GDPR má být svobodný, konkrétní, informovaný a jednoznačný a že odmítnutí nebo odvolání souhlasu nemá člověka znevýhodnit: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/legal-grounds-processing-data_en CNIL k analytice připomíná, že měření návštěvnosti typicky podléhá pravidlům pro cookies a výjimka dává smysl jen při opravdu omezeném audience measurementu: https://www.cnil.fr/fr/node/677
 
 *Codyho komentář:* Nejlepší cookie banner je ten, který nemusíš ukazovat, protože web funguje bez marketingové špionážní výbavy. Druhý nejlepší je ten, který se nechová jako casino automat v právnickém obleku.
 
@@ -5772,7 +5772,7 @@ Přihlašování má být bezpečné, srozumitelné a přiměřené riziku. Mal�
 
 - Martin Fowler: Feature Toggles — https://martinfowler.com/articles/feature-toggles.html
 - OWASP: Secrets Management Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html
-- European Commission: When is consent valid? — https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/legal-grounds-processing-data/grounds-processing/when-consent-valid_en
+- European Commission: When is consent valid? — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/legal-grounds-processing-data_en
 - CNIL: Use analytics on your websites and applications — https://www.cnil.fr/fr/node/677
 - European Commission: Dealing with requests from individuals — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/dealing-requests-individuals_en
 - European Commission: How should requests from individuals exercising their data protection rights be dealt with? — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/dealing-requests-individuals_en
@@ -13017,7 +13017,7 @@ Toto je můj pohled — Cody: nejlepší consent management je ten, který nepot
 ## Zdroje k příloze
 
 - EDPB: Guidelines 05/2020 on consent under Regulation 2016/679, přijaté 4. května 2020 — https://www.edpb.europa.eu/documents/guideline/guidelines-052020-on-consent-under-regulation-2016679_en
-- Evropská komise: kdy je souhlas podle GDPR platný, včetně odkazu na články 4(11), 7 a recitály 32, 42 a 43 — https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/legal-grounds-processing-data/grounds-processing/when-consent-valid_en
+- Evropská komise: kdy je souhlas podle GDPR platný, včetně odkazu na články 4(11), 7 a recitály 32, 42 a 43 — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/legal-grounds-processing-data_en
 - CNIL: pravidla pro cookies a jiné trackery, včetně vazby na podmínky souhlasu podle GDPR — https://cnil.fr/fr/cookies-et-autres-traceurs/que-dit-la-loi
 - CNIL: praktické vysvětlení sběru souhlasu a požadavků na svobodný, specifický, informovaný a jednoznačný souhlas — https://www.cnil.fr/fr/les-bases-legales/consentement
 
@@ -28577,7 +28577,7 @@ V in-app marketingu si hlídej hlavně tyhle pasti:
 - **Nerovná volba:** „Přijmout vše“ je jedno tlačítko, „nastavit“ je sedm kroků.
 - **Zamlžený dopad:** uživatel neví, jestli kliknutí spouští funkci, platbu, sdílení dat nebo jen náhled.
 
-GDPR souhlas má být svobodný, konkrétní, informovaný a jednoznačný; Evropská komise to shrnuje v praktickém vysvětlení pro firmy. Pro SaaS to znamená jednoduché pravidlo: pokud uživatel dává souhlas, nesmí ho k němu dotlačit design: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/legal-grounds-processing-data/grounds-processing/when-consent-valid_en
+GDPR souhlas má být svobodný, konkrétní, informovaný a jednoznačný; Evropská komise to shrnuje v praktickém vysvětlení pro firmy. Pro SaaS to znamená jednoduché pravidlo: pokud uživatel dává souhlas, nesmí ho k němu dotlačit design: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/legal-grounds-processing-data_en
 
 ## GE.5 Segmentace má být hrubá a vysvětlitelná
 
@@ -28660,7 +28660,7 @@ Můj pohled: nejlepší in-app marketing působí jako dobrý produktový kolega
 ## Zdroje k příloze
 
 - EDPB — Guidelines 03/2022 on deceptive design patterns in social media platform interfaces; užitečné principy pro rozpoznání manipulativních rozhraní a datově škodlivých voleb: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-032022-deceptive-design-patterns-social-media_en
-- Evropská komise — vysvětlení, kdy je souhlas podle GDPR platný: svobodný, konkrétní, informovaný a jednoznačný: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/legal-grounds-processing-data/grounds-processing/when-consent-valid_en
+- Evropská komise — vysvětlení, kdy je souhlas podle GDPR platný: svobodný, konkrétní, informovaný a jednoznačný: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/legal-grounds-processing-data_en
 - Evropská komise — pravidla informování lidí při sběru osobních údajů, včetně účelu, právního základu, příjemců a doby uložení: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/what-information-must-be-given-individuals-whose-data-collected_en
 
 ## Shrnutí přílohy
@@ -39926,7 +39926,7 @@ Všimni si, že reference nemusí obsahovat přesné obchodní metriky, pokud je
 
 Logo zákazníka není dekorace zdarma. Jméno člověka, role, fotka a citace jsou osobní údaje nebo obchodně citlivý materiál podle kontextu. Pokud je chceš použít v marketingu, potřebuješ jasnou domluvu: kde se reference objeví, v jaké podobě, na jak dlouho a kdo ji může stáhnout.
 
-Evropská komise u GDPR souhlasu připomíná, že souhlas má být svobodný, informovaný, konkrétní, jednoznačný a odvolatelný; žádost má být jasná a srozumitelná: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/legal-grounds-processing-data/grounds-processing/when-consent-valid_en
+Evropská komise u GDPR souhlasu připomíná, že souhlas má být svobodný, informovaný, konkrétní, jednoznačný a odvolatelný; žádost má být jasná a srozumitelná: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/legal-grounds-processing-data_en
 
 Praktická šablona souhlasu:
 
@@ -40036,7 +40036,7 @@ Reference nejsou trofeje na zdi. Jsou vypůjčená důvěra. A vypůjčená dův
 ## Zdroje k příloze
 
 - Evropská komise: Unfair Commercial Practices Directive a výklad k recenzím, endorsementům, influencer marketingu a dark patterns: https://commission.europa.eu/law/law-topic/consumer-protection-law/unfair-commercial-practices-and-price-indication/unfair-commercial-practices-directive_en
-- Evropská komise: kdy je souhlas podle GDPR platný, včetně požadavku na svobodnost, informovanost, konkrétnost a možnost odvolání: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/legal-grounds-processing-data/grounds-processing/when-consent-valid_en
+- Evropská komise: kdy je souhlas podle GDPR platný, včetně požadavku na svobodnost, informovanost, konkrétnost a možnost odvolání: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/legal-grounds-processing-data_en
 - EDPB: Guidelines 05/2020 on consent under Regulation 2016/679: https://www.edpb.europa.eu/documents/guideline/guidelines-052020-on-consent-under-regulation-2016679_en
 - Evropská komise: výsledky spotřebitelských kontrol online recenzí a problémů s informováním o sběru, zpracování a prevenci falešných recenzí: https://commission.europa.eu/topics/consumers/consumer-rights-and-complaints/enforcement-consumer-protection/sweeps_en
 
@@ -40371,7 +40371,158 @@ Affiliate není špinavé slovo. Špinavé je dělat z doporučení maskovanou r
 Privacy-first affiliate stojí na otevřeném disclosure, střídmém serverovém měření, bezpečné práci s referrerem, kontrole partnera a redakční integritě. Cílem není odmítat partnerství, ale nastavit je tak, aby provize nepřeválcovala důvěru a aby doporučení nepřidávalo zbytečný datový stín.
 
 
+
+# Příloha IT: Co-marketing a partnerské kampaně bez sdílených tabulek, remarketingového bahna a nejasných rolí
+
+Co-marketing zní nevinně: dva týmy spojí publikum, udělají společný článek, webinář, checklist nebo mini-kampaň a všichni si plácnou, protože reach zadarmo. Jenže právě tady se často potichu narodí datový guláš: export kontaktů do sdíleného sheetu, oba partneři „nějak“ pošlou follow-up, pixel se přidá „jen na landing page“ a nikdo neumí říct, kdo je za co odpovědný.
+
+Privacy-first co-marketing není brzda růstu. Je to způsob, jak spolupracovat bez toho, aby se z důvěry publika stala výměnná kartička. Každá partnerská kampaň má mít jasný slib pro účastníka, minimální sběr dat, oddělené souhlasy a předem popsané role. Nudné? Možná. Ale pořád méně nudné než vysvětlovat zákazníkovi, proč mu píší tři firmy, kterým nikdy nedal kontakt.
+
+## IT.1 Kampaň začni hodnotou pro člověka, ne výměnou databází
+
+Špatný začátek zní: „Vy pošlete e-mail své databázi, my pošleme e-mail své databázi a leady si pak rozdělíme.“ To není strategie, to je datový swap s oblekem.
+
+Lepší začátek je jedna konkrétní věta:
+
+> „Společně pomůžeme zakladatelům B2B SaaS nastavit privacy-first onboarding tak, aby první týden zákazníka vedl k hodnotě bez zbytečného sledování.“
+
+Až potom řeš kanály. Praktická tabulka:
+
+| Otázka | Dobrá odpověď |
+| --- | --- |
+| Pro koho je kampaň? | Jeden segment, jedna situace, jeden problém |
+| Co člověk dostane? | Checklist, šablonu, audit, ukázku nebo rozhodovací rámec |
+| Proč jsou potřeba dva partneři? | Každý dodá jinou expertizu, ne jen jiné publikum |
+| Jaký je férový další krok? | Volitelný follow-up, přímý odkaz, RSS, demo nebo konzultace |
+| Co se nesmí stát? | Automatické sdílení kontaktů bez jasného souhlasu |
+
+Pokud neumíš vysvětlit hodnotu bez slov „synergie“, „ekosystém“ a „komunitní přesah“, ještě chvíli piš. Nebo si dej kafe. Občas je to totéž.
+
+## IT.2 Role a datové toky napiš před spuštěním
+
+U partnerské kampaně nestačí vědět, kdo udělá grafiku. Potřebuješ vědět, kdo sbírá data, kde se ukládají, kdo je používá, kdo odpovídá na žádosti lidí a kdo data smaže po skončení kampaně.
+
+Mini datová mapa:
+
+| Krok | Data | Vlastník kroku | Retence |
+| --- | --- | --- | --- |
+| Landing page | návštěva, zdroj kampaně agregovaně | hostitel stránky | podle běžné analytiky |
+| Registrace | e-mail, volitelné jméno, volitelná firma | organizátor formuláře | např. 90 dní po akci, pokud není další vztah |
+| Účast | stav účasti, otázky položené v Q&A | organizátor eventu | jen pro vyhodnocení a odpovědi |
+| Follow-up | zaslání materiálů a volitelná nabídka | ten, komu člověk dal souhlas nebo existuje jasný vztah | podle účelu |
+| Partner report | agregovaná čísla | oba partneři | krátce, pro vyhodnocení kampaně |
+
+U složitější spolupráce si vyjasni, jestli je partner samostatný správce, zpracovatel nebo společný správce. EDPB ve vodítkách ke controller/processor rolím zdůrazňuje, že role vychází ze skutečného rozhodování o účelech a prostředcích zpracování, ne z nálepky ve smlouvě. Přeloženo do Codyho jazyka: když oba rozhodujete, proč a jak se budou kontakty používat, nestačí si říct „to je jen partner“.
+
+## IT.3 Souhlas s komunikací rozděl podle partnerů
+
+Největší průšvih co-marketingu je jedna věta typu:
+
+> „Registrací souhlasíte se zpracováním údajů našimi partnery.“
+
+To je mlha. Člověk neví, kdo mu bude psát, proč, jak často a jak to odmítne. Evropská komise u GDPR souhlasu uvádí, že má být svobodný, konkrétní, informovaný, jednoznačný, jasně viditelný a odvolatelný. Prakticky: souhlas s newsletterem partnera nesmí být povinná vstupenka na webinář.
+
+Lepší formulář:
+
+- **Povinné:** e-mail pro poslání odkazu a materiálů k akci.
+- **Volitelné:** „Chci dostat newsletter Dreamindu o privacy-first SaaS.“
+- **Volitelné:** „Chci dostat praktické materiály od partnera [název] k tématu [konkrétní téma].“
+- **Volitelné:** „Souhlasím, aby mě partner kontaktoval s nabídkou konzultace.“
+
+Každá volba má mít vlastní účel. Žádný předzaškrtnutý box. Žádné „souhlasím se vším, co marketing vymyslí do příštích Vánoc“. A u každé komunikace musí existovat jednoduché odhlášení nebo jiná cesta zpět.
+
+## IT.4 Sdílej agregace, ne surové kontakty
+
+Po kampani chce každý vědět, jestli to mělo smysl. To neznamená, že si partneři musí poslat CSV se všemi účastníky. Většinou stačí agregace:
+
+- počet návštěv landing page,
+- počet registrací podle zdroje,
+- počet účastníků,
+- počet stažení materiálu,
+- počet dobrovolných žádostí o kontakt,
+- počet domluvených follow-upů,
+- kvalitativní témata z otázek bez jmen a firem.
+
+Surový kontakt předávej jen tehdy, když k tomu existuje jasný účel a člověk ví, komu se kontakt předává. Příklad férového tlačítka po webináři:
+
+> „Chci, aby mě partner [název] kontaktoval kvůli ukázce nástroje. Předáme mu můj e-mail a volitelně firmu uvedenou při registraci.“
+
+Tohle je lepší než automatický export všech registrací, protože respektuje záměr člověka. A obchodně je to často kvalitnější lead než hromada lidí, kteří jen chtěli checklist a pak byli uneseni do CRM. Marketingový únos není segmentace, jen horší etiketa.
+
+## IT.5 Technická stránka kampaně má být nudná a kontrolovatelná
+
+Co-marketing se často rozbije na detailech: partner vloží vlastní skript, agentura přidá pixel, landing page běží na cizí doméně a po akci nikdo neví, kde všude zůstaly exporty.
+
+Privacy-first technické minimum:
+
+- Použij vlastní landing page nebo jasně schválenou evropskou event platformu.
+- Nepřidávej remarketingové pixely jen proto, že „by to šlo“.
+- Měř zdroj kampaně přes jednoduché UTM parametry bez osobních údajů.
+- Nastav `Referrer-Policy`, aby citlivé URL neposílaly víc kontextu než je nutné.
+- Sdílené dokumenty používej jen pro agregace, ne pro seznamy kontaktů.
+- Exporty pojmenuj, zašifruj nebo omez přístupem a nastav datum smazání.
+- Po kampani projdi nástroje: formulář, event platforma, nahrávka, chat, CRM, sdílené složky.
+
+Příklad provozního pravidla:
+
+> „Do sdílené partnerské složky patří jen anonymizované otázky, agregovaný report a schválené kreativy. Kontakty zůstávají v systému organizátora a partner je získá pouze přes samostatný opt-in.“
+
+Tohle pravidlo zachrání víc času než hodinová debata o tom, jestli CSV v Google Drive „není vlastně jen dočasné“. Dočasné soubory jsou jako vánoční výzdoba: když nemají datum úklidu, visí tam do dubna.
+
+## IT.6 Follow-up má být užitečný, krátký a oddělený
+
+Po akci neposílej pět e-mailů jen proto, že šablona z marketingového nástroje má pět kroků. Follow-up má navázat na slíbenou hodnotu a dát jasný další krok.
+
+Dobrý follow-up tok:
+
+1. **Den 0:** materiály, záznam, slíbený checklist, odpovědi na časté otázky.
+2. **Den 2 až 4:** jeden praktický navazující tip nebo šablona.
+3. **Den 5 až 7:** volitelná nabídka konzultace, demo nebo přihlášení k newsletteru.
+4. **Stop:** pokud člověk nereaguje a nedal souhlas k dalšímu kontaktu, nezačínej nekonečný hon.
+
+U partnerů drž oddělené cesty. Pokud se člověk přihlásil jen na akci pořádanou Dreamindem, partner nemá automaticky právo poslat mu obchodní nabídku. Pokud chce partner follow-up, dej účastníkovi jasné tlačítko nebo checkbox. Překvapivě jednoduché. Skoro podezřelé.
+
+## IT.7 Checklist co-marketingu a partnerské kampaně
+
+Před spuštěním:
+
+- Má kampaň jednu konkrétní hodnotu pro publikum?
+- Je jasné, proč spolupracují právě tito partneři?
+- Má landing page datovou větu u formuláře?
+- Jsou souhlasy oddělené podle účelu a partnera?
+- Víme, kdo je za formulář, event platformu, nahrávku a follow-up odpovědný?
+- Nepoužíváme předzaškrtnuté boxy ani povinný newsletter?
+- Neobsahují UTM parametry e-mail, firmu, ID kontaktu nebo jiné osobní údaje?
+- Je domluvená retence registrací, reportů, exportů a nahrávek?
+- Dostane partner jen agregace, pokud člověk výslovně nepožádá o kontakt?
+- Je po kampani naplánovaný úklid sdílených složek a nástrojů?
+
+Po kampani:
+
+- Zkontroluj, kdo dostal jaká data.
+- Smaž dočasné exporty a registrační údaje bez dalšího účelu.
+- Ulož jen agregovaný report a schválené materiály.
+- Zapiš, co fungovalo obsahově, ne jen kolik bylo leadů.
+- Aktualizuj šablonu kampaně, aby další akce nezačínala znovu datovým freestylem.
+
+## Codyho komentář
+
+Co-marketing je skvělý test důvěry mezi firmami. Když partner tlačí na „pošlete nám všechny registrace, my už si to nějak ošetříme“, je to červená vlajka velikosti billboardu u D1. Dobrý partner chápe, že kvalitní opt-in má větší hodnotu než tisíc kontaktů získaných metodou „však oni si zvyknou“.
+
+## Zdroje k příloze
+
+- Evropská komise: podmínky platného souhlasu podle GDPR, včetně jasného jazyka, konkrétnosti a možnosti odvolání: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/legal-grounds-processing-data_en
+- Evropská komise: jaké informace musí lidé dostat při sběru osobních údajů podle GDPR: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr/what-information-must-be-given-individuals-whose-data-collected_en
+- EDPB: Guidelines 07/2020 k pojmům controller, processor a společné správcovství v GDPR: https://www.edpb.europa.eu/public-consultations/guidelines-072020-on-the-concepts-of-controller-and-processor-in-the-gdpr_en
+- MDN: `Referrer-Policy` a řízení informací posílaných v hlavičce `Referer`: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Referrer-Policy
+
+## Shrnutí přílohy
+
+Privacy-first co-marketing stojí na jasné hodnotě, oddělených souhlasech, minimálním sdílení dat a uklizené technice. Partner nemá automaticky dostat celý seznam registrací jen proto, že přinesl publikum. Férová spolupráce sdílí agregace, předává kontakty jen na základě jasného záměru člověka a po kampani smaže dočasné datové stopy.
+
+
 ## Pracovní log
+- 2026-08-17: Přidána příloha IT o privacy-first co-marketingu a partnerských kampaních: hodnota pro publikum, role partnerů, oddělené souhlasy, agregované reporty, technická hygiena, follow-up a checklist.
 
 - 2026-08-17: Přidána příloha IS o affiliate, partnerských doporučeních a referral programech: transparentní disclosure, serverové měření, bezpečná práce s referrerem, kontrola partnerů, redakční integrita a privacy-first checklist.
 - 2026-08-17: Přidána příloha IR o privacy-first webinářích a online eventech: registrační minimum, přístup bez sledovacího rodea, nahrávky, Q&A, follow-up, recyklace obsahu a checklist.
