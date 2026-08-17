@@ -38364,7 +38364,215 @@ Verzování API je provozní a produktová disciplína. Nová major verze patř�
 
 ---
 
+# Příloha II: API dokumentace a developer experience bez tajných znalostí, copy-paste pastí a datového bludiště
+
+Dobré API není jen sada endpointů. Je to slib, že integrátor dokáže bezpečně udělat správnou věc bez archeologie ve Slacku, volání supportu a zkoušení payloadů metodou „když to projde, tak to asi funguje“. Dokumentace je proto součást produktu, ne kosmetický doplněk k backendu.
+
+U privacy-first SaaS má dokumentace ještě jednu práci navíc: musí ukazovat, jak API zachází s daty. Jaká pole jsou povinná, která jsou citlivá, co se loguje, jak se omezují scopes, kde jsou limity, jak funguje export a jak zákazník bezpečně smaže nebo opraví data. Bez toho se z developer experience snadno stane developer séance. Vyvolávání duchů bývalých implementátorů není škálovatelný proces, i když má jisté gotické kouzlo.
+
+## II.1 Dokumentace začíná use casem, ne seznamem endpointů
+
+Endpoint reference je nutná, ale nezačínej jí. Nový integrátor se nejdřív ptá: „Jaký obchodní nebo provozní úkol mám splnit?“ Teprve potom ho zajímá konkrétní metoda, parametr a status kód.
+
+Užitečná struktura API dokumentace:
+
+1. **Rychlý start:** vytvoření sandbox klíče, první request, první úspěšná odpověď.
+2. **Hlavní scénáře:** typické workflow po krocích, třeba vytvoření zákazníka, vystavení faktury, export dat nebo nastavení webhooku.
+3. **API reference:** přesná smlouva endpointů, schémat, stavových kódů, limitů a chyb.
+4. **Bezpečnost a data:** autentizace, scopes, retence, logování, regiony, export a smazání.
+5. **Migrace a changelog:** co se změnilo, koho se to týká a jak postupovat.
+
+Příklad rozdílu:
+
+- Slabé: „Endpoint `POST /contacts` vytvoří kontakt.“
+- Lepší: „Když importuješ nový lead z formuláře, pošli jen pole, která uživatel opravdu vyplnil. Telefon neposílej jako prázdný string, pokud nebyl zadán. API vrátí `201 Created` a `contact_id`, který použiješ pro další akce.“
+
+Dokumentace má vést k bezpečnému chování. Když příklady posílají přebytečná pole, integrátoři je budou kopírovat. Copy-paste je nejsilnější SDK na světě, bohužel občas s motorovou pilou místo bezpečnostního pásu.
+
+## II.2 OpenAPI kontrakt je zdroj pravdy, ale ne celá pravda
+
+OpenAPI je praktický standard pro popis HTTP API: umí popsat endpointy, parametry, requesty, odpovědi, security schemes i příklady. Aktuální specifikace OpenAPI Initiative je dostupná na https://spec.openapis.org/oas/latest.html
+
+Kontrakt by měl obsahovat minimálně:
+
+- přesné typy, povinná pole a `additionalProperties: false` tam, kde nechceš tichý příjem pole navíc,
+- příklady pro úspěšné i chybové odpovědi,
+- stavové kódy včetně `401`, `403`, `404`, `409`, `422` a `429`, pokud je API používá,
+- bezpečnostní schémata a scopes,
+- limity stránkování, maximální velikosti requestů a podporované formáty,
+- označení deprecated operací a odkaz na migrační návod.
+
+Ale samotný OpenAPI soubor nestačí. Neřekne dobře, proč workflow existuje, jak se rozhodovat mezi dvěma endpointy nebo co je bezpečné poslat v konkrétním B2B procesu. Proto vedle kontraktu udržuj ručně psané návody. Kontrakt hlídá přesnost. Návod hlídá pochopení.
+
+Praktické pravidlo: pokud je něco v dokumentaci, mělo by to být buď generované z kontraktu, nebo napojené na test, který spadne, když se realita rozjede. Ruční dokumentace bez revizního rytmu je krásná fosilie. Vypadá důležitě, ale produkt už dávno běží jinudy.
+
+## II.3 Chybové odpovědi mají být opravitelné, ne detektivní
+
+Integrátor nepotřebuje vědět, jak se jmenuje interní validátor. Potřebuje vědět, co má opravit. RFC 9457 popisuje formát Problem Details pro HTTP API, tedy standardizovaný způsob, jak vracet strojově i lidsky čitelné chyby: https://www.rfc-editor.org/rfc/rfc9457.html
+
+Dobrá chyba obsahuje:
+
+- stabilní typ chyby nebo kód,
+- lidský popis bez úniku interních detailů,
+- odkaz na dokumentaci,
+- pole nebo parametr, kterého se problém týká,
+- bezpečný request identifikátor pro support,
+- informaci, jestli má klient request opravit, zopakovat později, nebo eskalovat.
+
+Příklad:
+
+```json
+{
+  "type": "https://docs.example.eu/errors/validation",
+  "title": "Validation failed",
+  "status": 422,
+  "detail": "E-mail zákazníka není ve validním formátu.",
+  "field": "customer.email",
+  "request_id": "req_7F3K2Q"
+}
+```
+
+Co tam nepatří:
+
+- SQL dotaz,
+- stack trace,
+- celé původní payloady,
+- osobní údaje z jiných polí,
+- interní názvy služeb a síťové cesty,
+- „Something went wrong“, což je technický ekvivalent pokrčení ramen.
+
+Privacy-first bonus: request ID umožní supportu dohledat událost v logu bez toho, aby zákazník posílal screenshot s osobními údaji. Méně přeposílání dat, víc řešení problému. Nečekané, ale funguje.
+
+## II.4 Sandbox musí učit správné návyky
+
+Sandbox není hřiště, kde bezpečnost dostane dovolenou. Je to místo, kde si integrátor osvojí návyky, které později přenese do produkce. Pokud sandbox přijímá libovolná data, ignoruje scopes a vrací magické odpovědi, připravuješ zákazníkovi budoucí incident.
+
+Sandbox by měl mít:
+
+- oddělené klíče a jasné označení prostředí,
+- realistická schémata, limity a chyby,
+- testovací osobní údaje, ne reálná zákaznická data,
+- předvídatelné webhook testy včetně duplicit a retry scénářů,
+- možnost resetu dat,
+- dokumentované rozdíly proti produkci.
+
+Ukázka popisu v dokumentaci:
+
+```text
+Sandbox neodesílá produkční e-maily, ale validuje stejná povinná pole jako produkce. Webhooky mají stejné podpisové hlavičky a stejnou retry politiku. Testovací data se mažou po 30 dnech.
+```
+
+To je lepší než „sandbox je skoro jako produkce“. Slovo „skoro“ v integracích znamená „někde čeká víkendový problém v papučích“.
+
+## II.5 Příklady musí být minimální, bezpečné a kompletní
+
+Každý příklad v dokumentaci je produktové doporučení. Pokud ukážeš API klíč v URL, někdo ho dá do URL. Pokud v příkladu posíláš celé objekty místo minimálních polí, někdo bude posílat celé objekty. Pokud příklad ignoruje chyby, integrace bude ignorovat chyby.
+
+Bezpečný příklad má:
+
+- proměnné místo skutečných tajemství,
+- minimální potřebný payload,
+- hlavičky pro autentizaci a idempotenci, pokud jsou relevantní,
+- ukázku úspěchu i typické chyby,
+- poznámku k retry chování,
+- jasné oddělení sandboxu a produkce.
+
+Špatně:
+
+```bash
+curl "https://api.example.eu/customers?token=SECRET"
+```
+
+Lépe:
+
+```bash
+curl -X POST "https://api.example.eu/v1/customers" \
+  -H "Authorization: Bearer $EXAMPLE_API_TOKEN" \
+  -H "Content-Type: application/json" \
+  -H "Idempotency-Key: demo-customer-001" \
+  -d '{"email":"zakaznik@example.eu","name":"Demo zákazník"}'
+```
+
+Codyho komentář: příklady jsou jako kuchařka. Když první recept začíná „vezmi motorový olej a tajný klíč napiš na dveře lednice“, nečekej michelinskou integraci.
+
+## II.6 Dokumentuj datové dopady každé funkce
+
+Privacy-first API dokumentace nemá schovávat datové dopady v právní stránce někde v patičce. Integrátor potřebuje vědět přímo u endpointu, co se s daty stane.
+
+U citlivějších endpointů přidej blok:
+
+```text
+Data notes
+- Účel: vytvoření zákaznického kontaktu pro obchodní komunikaci.
+- Povinná osobní data: e-mail.
+- Volitelná osobní data: jméno, telefon.
+- Retence: podle nastavení workspace, výchozí 24 měsíců od poslední aktivity.
+- Logování: ukládáme metadata requestu, ne celý payload.
+- Region: zpracování v EU.
+- Export/smazání: zahrnuto v zákaznickém exportu a mazání kontaktů.
+```
+
+Tohle pomáhá vývojáři, nákupčímu i pověřenci pro ochranu osobních údajů. A hlavně to nutí produktový tým přemýšlet předem. Pokud neumíš blok vyplnit, endpoint možná ještě není připravený.
+
+## II.7 Dokumentace potřebuje testy, vlastníka a rytmus
+
+Dokumentace stárne jinak než kód: tiše. Kód aspoň občas spadne. Dokumentace se jen tváří sebevědomě a posílá lidi do zdi.
+
+Minimum provozní údržby:
+
+- každý endpoint má vlastníka,
+- změna API vyžaduje změnu OpenAPI kontraktu a changelogu,
+- příklady se spouští v CI proti sandboxu nebo mock serveru,
+- odkazy se kontrolují automaticky,
+- jednou měsíčně support označí tři nejčastější dotazy, které dokumentace nevysvětluje,
+- staré návody mají datum poslední revize.
+
+Praktická šablona revize:
+
+```text
+Stránka: Import zákazníků
+Vlastník: Product/API
+Poslední revize: 2026-08-17
+Změny od posledně: přidán limit 10 MB a chybový kód import_file_too_large
+Support signál: zákazníci nerozuměli mapování duplicit
+Akce: doplněn příklad duplicate_policy=skip
+```
+
+Developer experience není o tom, že dokumentace vypadá hezky. Je o tom, že snižuje počet chyb, zrychluje integraci a chrání data.
+
+## II.8 Checklist API dokumentace a developer experience
+
+- Má dokumentace rychlý start, hlavní scénáře, referenci, bezpečnostní kapitolu a changelog?
+- Je OpenAPI kontrakt aktuální, testovaný a používá přesná schémata místo volného JSON bahna?
+- Obsahují endpointy datové poznámky: účel, povinná data, retenci, logování, region a export/smazání?
+- Jsou chybové odpovědi stabilní, opravitelné a bez interních detailů nebo osobních údajů?
+- Ukazují příklady minimální bezpečný payload, správnou autentizaci a práci s idempotencí?
+- Je sandbox oddělený od produkce, realistický a bez reálných osobních dat?
+- Má každý návod vlastníka, datum revize a vazbu na changelog?
+- Kontroluje CI příklady, OpenAPI diffy a rozbité odkazy?
+- Má support jednoduchý request ID postup bez přeposílání payloadů?
+- Umí nový integrátor splnit hlavní workflow bez Slacku, interních znalostí a telepatie?
+
+## Codyho komentář
+
+API dokumentace je tichý obchodník, supporták a bezpečnostní školitel v jednom. Když je dobrá, nikdo ji moc nechválí, protože věci prostě fungují. Když je špatná, vznikají duplicitní faktury, exporty plné zbytečných polí a dotazy typu „můžete nám poslat příklad?“ Codyho pravidlo: dokumentace není hotová, když popíše endpoint. Je hotová, když průměrný integrátor bezpečně dokončí scénář a nepošle přitom víc dat, než musí.
+
+## Zdroje k příloze
+
+- OpenAPI Specification — oficiální specifikace pro popis HTTP API kontraktů, schémat, security schemes a příkladů: https://spec.openapis.org/oas/latest.html
+- RFC 9457 — Problem Details for HTTP APIs, standardizovaný formát chybových odpovědí: https://www.rfc-editor.org/rfc/rfc9457.html
+- RFC 9110 — HTTP Semantics, význam metod, stavových kódů a sémantiky odpovědí: https://www.rfc-editor.org/rfc/rfc9110.html
+- OWASP API Security Top 10 2023 — rizika API, která dokumentace a příklady nesmí zhoršovat špatnými návyky: https://owasp.org/API-Security/editions/2023/en/0x11-t10/
+- Microsoft REST API Guidelines — praktická doporučení pro konzistentní REST API, chyby, verze a dokumentaci: https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md
+
+## Shrnutí přílohy
+
+API dokumentace je součást produktu. Má začínat scénáři, pokračovat přes přesný OpenAPI kontrakt a ukazovat bezpečné minimální příklady. Chybové odpovědi musí být opravitelné a bez úniku interních detailů. Sandbox má učit produkční návyky, ne obcházet pravidla. Privacy-first dokumentace přímo u endpointů vysvětluje účel dat, retenci, logování, region a export nebo smazání. Bez vlastníka, testů a revizního rytmu dokumentace tiše stárne a mění se v datové bludiště.
+
+---
+
 ## Pracovní log
+- 2026-08-17: Přidána příloha II o API dokumentaci a developer experience: use-case struktura dokumentace, OpenAPI kontrakt, opravitelné chybové odpovědi podle Problem Details, realistický sandbox, bezpečné minimální příklady, datové poznámky u endpointů, revizní rytmus a privacy-first checklist.
 - 2026-08-17: Přidána příloha IH o verzování a ukončování API: kompatibilní vs. breaking změny, bezpečné rozšiřování odpovědí, deprecation a sunset komunikace, changelog podle dopadu, měření starých verzí bez payloadů, sladění OpenAPI dokumentace, SDK a supportu a privacy-first checklist.
 - 2026-08-17: Přidána příloha IG o CORS, CSRF a browser API klientech: rozdělení důvěry klientů, přesné origin allowlisty, credentials přes CORS, CSRF ochrana cookie session, Fetch Metadata, izolace widgetů, negativní testy a privacy-first checklist.
 - 2026-08-17: Přidána příloha IF o bezpečnostním logování API: otázky pro incidenty, metadata místo payloadů, redakce citlivých hodnot, katalog událostí, tenantové hranice, alerty podle vzorců, testy logování a privacy-first checklist.
