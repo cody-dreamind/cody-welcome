@@ -38762,7 +38762,191 @@ SDK je veřejná produktová vrstva nad API. Má vycházet z přesného kontrakt
 
 ---
 
+# Příloha IK: CLI nástroje pro SaaS bez tokenů v historii shellu, chaotických skriptů a supportu přes screenshoty
+
+API a SDK řeší integrace v aplikacích. CLI řeší každodenní provoz: export dat, import, diagnostiku, správu tokenů, deployment pomocných konfigurací, rychlé kontroly a automatizované úlohy v CI. Pro malý SaaS tým je dobré CLI násobič síly. Špatné CLI je zase elegantní způsob, jak dostat produkční token do historie terminálu, build logu nebo screenshotu v support ticketu. Gratuluju, vyrobili jsme incident s hezkým ASCII logem.
+
+Privacy-first CLI má jednu hlavní zásadu: usnadnit práci bez toho, aby z uživatelova počítače, CI logů a support konverzací udělalo datové skladiště. To znamená bezpečné přihlášení, minimální výstupy, jasné potvrzování rizikových akcí, předvídatelné formáty a dokumentaci, která nevede lidi ke kopírování tajemství do chatu.
+
+## IK.1 CLI navrhuj podle práce, ne podle interních endpointů
+
+CLI není mechanický obal nad API. Když příkaz jen kopíruje endpointy, vývojář musí znát interní model produktu dřív, než něco zvládne. Dobré CLI začíná scénáři.
+
+Užitečné scénáře pro B2B SaaS:
+
+- ověřit přihlášení a aktuální workspace,
+- vypsat stav služby nebo integrace,
+- spustit export dat a stáhnout výsledek,
+- nahrát importní soubor a zobrazit preview,
+- validovat konfigurační soubor před nasazením,
+- vypsat auditní události pro konkrétní administrátorskou akci,
+- rotovat API token nebo zneplatnit starý token,
+- vygenerovat diagnostický balíček bez osobních údajů.
+
+Slabé příkazy:
+
+```bash
+saas-cli post /v1/exports '{"format":"csv"}'
+saas-cli get /v1/jobs/job_123
+```
+
+Lepší příkazy:
+
+```bash
+saas exports create --format csv --scope invoices --from 2026-08-01
+saas exports status exp_123
+saas exports download exp_123 --output invoices.csv
+```
+
+CLI má skrývat HTTP detaily tam, kde nepomáhají, ale nesmí skrývat dopad. Uživatel má vždy vědět, jestli příkaz jen čte, mění konfiguraci, posílá data do produktu, nebo spouští nevratnou akci.
+
+## IK.2 Přihlášení nesmí učit lidi lepit tokeny do příkazů
+
+Nejrychlejší quickstart bývá zároveň nejnebezpečnější: „zkopírujte token a spusťte `--token sk_live_...`“. Funguje to. A taky to skončí v historii shellu, CI logu, sdílené obrazovce nebo poznámce v ticketu. OWASP Secrets Management Cheat Sheet doporučuje chránit tajemství během celého životního cyklu, včetně bezpečného ukládání, distribuce, rotace a auditovatelnosti: https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html
+
+Bezpečnější model:
+
+- `saas login` otevře browser/device flow nebo krátkodobý jednorázový kód,
+- access token je krátkodobý a refresh token se uloží do systémového keychainu,
+- v CI se používá oddělený service token se scopes a expirací,
+- token nikdy nevypisuj do stdout, debug logu ani chybové hlášky,
+- `saas auth status` ukáže účet, workspace, scopes a expiraci, ne samotné tajemství,
+- `saas logout` lokální token smaže a ideálně nabídne i serverovou revokaci.
+
+Pokud keychain není dostupný, CLI má jasně říct, kam bude token uložen, jaká jsou rizika a jak nastavit alternativu přes proměnnou prostředí. Žádné tiché ukládání do plain text souboru v domovském adresáři s optimismem „snad si toho nikdo nevšimne“.
+
+## IK.3 Výstup má být užitečný člověku i skriptu
+
+CLI často používají lidé ručně i automatizace. Když výstup pokaždé vypadá trochu jinak, skripty začnou parsovat barevné tabulky, lomítka, závorky a nálady designéra. To je digitální folklór, ne rozhraní.
+
+Praktický standard:
+
+- výchozí výstup je čitelná tabulka nebo krátké shrnutí,
+- `--json` vrací stabilní strojově čitelný formát,
+- `--quiet` vypisuje jen hodnotu potřebnou pro skript,
+- `--no-color` vypne ANSI barvy,
+- chyby jdou do stderr a data do stdout,
+- exit kódy jsou dokumentované a konzistentní.
+
+Příklad:
+
+```bash
+saas exports status exp_123 --json
+```
+
+```json
+{
+  "id": "exp_123",
+  "status": "ready",
+  "expiresAt": "2026-08-18T08:00:00Z",
+  "downloadUrlAvailable": true
+}
+```
+
+Privacy-first detail: JSON výstup nemá automaticky obsahovat osobní údaje jen proto, že „skript si to třeba přefiltruje“. Výchozí výstup má být minimální. Pro citlivější data použij explicitní volbu, například `--include-email`, a napiš do dokumentace, proč existuje.
+
+## IK.4 Rizikové akce potřebují dry-run, potvrzení a auditní stopu
+
+CLI umí způsobit velké škody rychle, tiše a opakovatelně. To je skvělé pro automatizaci a méně skvělé pro příkaz typu `delete all`, který někdo spustí ve špatném workspace. Proto má každá riziková akce mít brzdy podle dopadu.
+
+Vhodné brzdy:
+
+- `--dry-run` ukáže, co se stane, bez změny dat,
+- potvrzení vypíše konkrétní workspace, počet objektů a dopad,
+- pro nevratné akce vyžaduj přesný text, například název workspace,
+- `--yes` povol jen pro CI a stále loguj důvod nebo actor,
+- destruktivní příkazy podporují idempotenci a bezpečné opakování,
+- audit log ukládá metadata akce, ne celé payloady.
+
+Příklad dobrého potvrzení:
+
+```text
+Chystáš se archivovat 248 kontaktů ve workspace "Acme EU".
+Data nepůjde používat v kampaních, ale export zůstane dostupný 30 dní.
+Pro pokračování napiš: Acme EU
+```
+
+OWASP API Security Top 10 upozorňuje mimo jiné na rizika rozbité autorizace objektů, nadměrného vystavení dat a neomezeného využívání zdrojů: https://owasp.org/API-Security/editions/2023/en/0x11-t10/ CLI má tahle rizika tlumit, ne obcházet. Každý příkaz musí posílat tenant kontext, scopes a limitované dotazy stejně poctivě jako webová aplikace.
+
+## IK.5 Diagnostika nesmí být datový vysavač se zip příponou
+
+Support miluje diagnostické balíčky, protože zkracují pátrání. Privacy-first provoz je miluje jen tehdy, když jsou navržené s rozumem. Příkaz `saas diagnostics collect` nemá zabalit půlku disku, kompletní `.env`, request payloady a screenshot databáze. To není diagnostika. To je domácí úkol pro incident response.
+
+Bezpečný diagnostický balíček obsahuje typicky:
+
+- verzi CLI, OS, architekturu a runtime,
+- anonymizované ID konfigurace nebo workspace, pokud je potřeba,
+- poslední chybové kódy a request ID,
+- výsledek síťové kontroly bez tokenů,
+- informaci o regionu API a latenci,
+- redigovanou konfiguraci se seznamem klíčů, ne hodnot.
+
+Před vytvořením balíčku ukaž preview. Před odesláním na support vyžaduj souhlas. Pokud CLI umí balíček odeslat přímo, používej krátkodobý upload URL, šifrování při přenosu a retenci typu „smažeme za 7 dní“. A napiš to přímo do výstupu, ne do právní stránky ukryté za třemi scrollovacími pekly.
+
+## IK.6 CI režim odděl od lokální práce
+
+CLI v CI má jiné potřeby než CLI v terminálu vývojáře. V CI není interaktivní potvrzování, často běží v dočasném prostředí a logy čte víc lidí. Proto musí být režim CI explicitní.
+
+Praktická pravidla pro CI:
+
+- tokeny ber z proměnných prostředí nebo tajemství CI systému,
+- nikdy nevypisuj hodnoty proměnných začínajících na `TOKEN`, `SECRET`, `KEY` nebo podobně,
+- `--ci` vypne interaktivní otázky a barvy,
+- příkazy mají stabilní exit kódy pro pipeline,
+- dlouhé operace podporují polling s limitem a rozumným timeoutem,
+- výstupy pro artefakty neobsahují osobní údaje bez explicitní volby.
+
+NIST SP 800-204D popisuje DevSecOps přístup pro bezpečné nasazování cloud-native aplikací včetně automatizace, bezpečnostních kontrol a ochrany pipeline: https://csrc.nist.gov/pubs/sp/800/204/d/final CLI používané v CI je součást téhle pipeline. Není to vedlejší hračka. Když má oprávnění měnit produkční konfiguraci, patří do stejného rizikového modelu jako deployment skripty.
+
+## IK.7 Dokumentace CLI má ukazovat bezpečné návyky
+
+CLI dokumentace bývá plná rychlých příkladů. To je dobře. Jen nesmí být rychlé směrem k průšvihu. Každý příklad má ukazovat bezpečný způsob přihlášení, region, výstupní formát a práci s chybou.
+
+Dobrá dokumentace obsahuje:
+
+- instalační postup bez curl-pipe-shell magie, nebo alespoň s ověřením checksumu,
+- příklady pro lokální použití, CI a serverový provoz odděleně,
+- vysvětlení scopes a doporučených minimálních oprávnění,
+- bezpečný postup rotace tokenu,
+- tabulku exit kódů,
+- ukázku `--dry-run` před destruktivní akcí,
+- sekci „co nikdy neposílat supportu“.
+
+Codyho pravidlo: pokud dokumentace ukáže tajemství v příkazové řádce, zákazník ho jednou pošle do Slacku. Ne proto, že je nezodpovědný. Protože jsi mu právě řekl, že takhle se to dělá.
+
+## IK.8 Checklist CLI pro SaaS
+
+- Má CLI popsané hlavní scénáře podle práce uživatele, ne podle interních endpointů?
+- Umí `login`, `logout`, `auth status` a bezpečnou revokaci nebo rotaci tokenu?
+- Neukládá tokeny do historie shellu, stdout, debug logů ani plain text souboru bez varování?
+- Má oddělený režim pro lokální použití a CI?
+- Nabízí stabilní `--json`, `--quiet`, `--no-color` a dokumentované exit kódy?
+- Má rizikové akce `--dry-run`, konkrétní potvrzení a auditní stopu?
+- Rediguje citlivé hodnoty už při tvorbě logu nebo diagnostického balíčku?
+- Respektuje tenant, scopes, rate limity a serverovou autorizaci stejně jako webová aplikace?
+- Má příklady bez osobních údajů, produkčních tokenů a falešných datových zkratek?
+- Je v dokumentaci jasně napsané, co se ukládá lokálně, co se posílá do API a jak dlouho se to drží?
+
+## Codyho komentář
+
+CLI je zvláštní druh důvěry. Dáváš uživateli ostrý nástroj, který běží blízko jeho dat, konfigurace a automatizací. Největší chyba je tvářit se, že jde jen o pohodlný doplněk k API. Nejde. Dobré CLI je produkt, bezpečnostní rozhraní a support kanál v jednom. Když ho navrhneš privacy-first, ušetříš zákazníkům nervy a sobě budoucí incidenty, které by se špatně vysvětlovaly větou „ale vždyť to bylo jen v quickstartu“.
+
+## Zdroje k příloze
+
+- OWASP Secrets Management Cheat Sheet — životní cyklus tajemství, bezpečné ukládání, distribuce, rotace a audit: https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html
+- OWASP API Security Top 10 2023 — hlavní rizika API včetně autorizace objektů, nadměrného vystavení dat a neomezeného využívání zdrojů: https://owasp.org/API-Security/editions/2023/en/0x11-t10/
+- NIST SP 800-204D — strategie pro DevSecOps v cloud-native aplikacích a ochranu automatizovaných pipeline: https://csrc.nist.gov/pubs/sp/800/204/d/final
+- The Twelve-Factor App, Config — doporučení držet konfiguraci v prostředí a oddělit ji od kódu: https://12factor.net/config
+- RFC 9110 — HTTP Semantics pro správné chápání metod, stavů, opakování a významu odpovědí: https://www.rfc-editor.org/rfc/rfc9110.html
+
+## Shrnutí přílohy
+
+CLI pro SaaS má být produktové rozhraní, ne jen tenký obal nad endpointy. Bezpečné CLI řeší scénáře podle práce uživatele, ukládá tokeny opatrně, odděluje lokální a CI režim, nabízí stabilní výstupy pro skripty a chrání před nevratnými akcemi pomocí dry-run, potvrzení a auditních stop. Diagnostika nesmí sbírat payloady ani tajemství a dokumentace má ukazovat bezpečné návyky od prvního příkladu. Privacy-first CLI snižuje riziko support incidentů, úniku tokenů a zbytečného datového ping-pongu mezi zákazníkem, CI a SaaS provozem.
+
+---
+
 ## Pracovní log
+- 2026-08-17: Přidána příloha IK o CLI nástrojích pro SaaS: scénářové příkazy, bezpečné přihlášení bez tokenů v historii shellu, stabilní výstupy pro lidi i skripty, dry-run a potvrzení rizikových akcí, diagnostika bez tajemství, oddělený CI režim, bezpečná dokumentace a privacy-first checklist.
 - 2026-08-17: Přidána příloha IJ o SDK a klientských knihovnách: vztah SDK k OpenAPI kontraktu, názvy metod podle zákaznických scénářů, bezpečné defaulty, retry a idempotence, SemVer, typy chránící před datovým přebytkem, support mód bez citlivých logů, testování quickstartu a privacy-first checklist.
 - 2026-08-17: Přidána příloha II o API dokumentaci a developer experience: use-case struktura dokumentace, OpenAPI kontrakt, opravitelné chybové odpovědi podle Problem Details, realistický sandbox, bezpečné minimální příklady, datové poznámky u endpointů, revizní rytmus a privacy-first checklist.
 - 2026-08-17: Přidána příloha IH o verzování a ukončování API: kompatibilní vs. breaking změny, bezpečné rozšiřování odpovědí, deprecation a sunset komunikace, changelog podle dopadu, měření starých verzí bez payloadů, sladění OpenAPI dokumentace, SDK a supportu a privacy-first checklist.
