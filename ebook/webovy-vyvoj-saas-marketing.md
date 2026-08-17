@@ -40877,7 +40877,163 @@ PR není magie, kde se realita přelakuje lesklou tiskovou zprávou. Je to disci
 Privacy-first PR stojí na veřejném media kitu, ověřitelných tvrzeních, střídmém seznamu kontaktů, přímých odkazech a čistých přílohách. Měří agregované signály, ne individuální sledovací stopy. Dobrá tisková komunikace nezneužívá pozornost novinářů ani data lidí kolem firmy; pomáhá rychle pochopit, co se stalo, proč je to důležité a kde najít bezpečné, aktuální materiály.
 
 
+
+---
+
+# Příloha IW: Brand monitoring a social listening bez plošného šmírování, datových vysavačů a paniky z každé zmínky
+
+Jakmile firma začne růst, někdo dřív nebo později řekne: „Měli bychom sledovat, co se o nás říká.“ To je rozumné. Problém začíná ve chvíli, kdy se z rozumného monitoringu stane hladový kombajn na profily, komentáře, soukromé signály a automatické sentiment skóre, které se tváří jako věštba z Delf, jen s horším UX.
+
+Privacy-first brand monitoring má jednodušší cíl: včas zachytit důležité veřejné zmínky, obchodní příležitosti, technické problémy, zákaznické otázky a reputační rizika — bez toho, aby firma sbírala víc dat, než potřebuje. Evropská logika je jasná: GDPR stojí mimo jiné na transparentnosti, účelovém omezení, minimalizaci dat a omezení uložení. Evropská komise tyto principy shrnuje zde: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/overview-principles/what-data-can-we-process-and-under-which-conditions_en
+
+## IW.1 Nejdřív napiš, proč monitoring existuje
+
+Monitoring bez účelu začne měřit všechno. A když měří všechno, nikdo neví, co má dělat. Před výběrem nástroje si napiš jednu stránku:
+
+- **Reputační účel:** chceme vědět o veřejných článcích, recenzích a významných diskuzích.
+- **Support účel:** chceme zachytit veřejné prosby o pomoc, které se nedostaly do podpory.
+- **Produktový účel:** chceme sbírat opakující se veřejné námitky a požadavky.
+- **Bezpečnostní účel:** chceme zachytit zmínky o incidentech, zranitelnostech nebo phishingu.
+- **Obchodní účel:** chceme najít veřejné poptávky, kde dává smysl slušně odpovědět.
+
+Každý účel má mít vlastní pravidlo reakce. Článek v médiích patří do PR workflow. Tweet o výpadku patří do incidentního kanálu. Dotaz „umíte to i pro školy?“ patří do obchodu. Výkřik „tohle je drahé“ nepatří do krizového štábu, pokud se neopakuje a není k němu kontext.
+
+## IW.2 Sleduj veřejné signály, ne lidi
+
+Dobré pravidlo: ukládej zmínku a kontext potřebný k reakci, ne profil člověka. Veřejná URL, datum, kanál, krátká poznámka a stav zpracování většinou stačí. Není potřeba budovat interní spis o autorovi, historii jeho aktivit a odhadovaném „vlivu“.
+
+Praktický záznam zmínky:
+
+| Pole | Příklad | Poznámka |
+| --- | --- | --- |
+| Zdroj | URL článku nebo veřejného příspěvku | Přímý odkaz místo screenshotového hřbitova |
+| Datum zachycení | 2026-08-17 | Pro audit a follow-up |
+| Typ | support / PR / produkt / bezpečnost / obchod | Bez typu se z inboxu stane polévka |
+| Shrnutí | „Uživatel se ptá na export dat“ | Bez osobních domněnek |
+| Vlastník | support / produkt / PR | Jedna odpovědná role |
+| Stav | nové / řeší se / uzavřeno / archiv | Méně magie, víc klidu |
+| Retence | smazat po 6 měsících, pokud není součást incidentu | Monitoring není rodinné album |
+
+Pokud je potřeba uložit osobní údaj, napiš proč. Pokud důvod neumíš napsat normální větou, údaj neukládej. Elegantní, až skoro nebezpečně dospělé.
+
+## IW.3 Preferuj RSS, přímé odkazy a ruční triáž
+
+Ne každý monitoring potřebuje drahý social listening nástroj. Pro menší SaaS často stačí kombinace:
+
+- RSS odběry médií, blogů, changelogů a vybraných vyhledávání,
+- ruční kontrola klíčových komunit jednou nebo dvakrát týdně,
+- alerty na vlastní značku, produkt, domény a názvy funkcí,
+- interní formulář „našel jsem zmínku“ pro tým,
+- jednoduchá tabulka nebo ticket typ `public_mention`.
+
+RSS je staré, nudné a právě proto krásné. RSS Advisory Board popisuje RSS jako formát pro syndikaci webového obsahu: https://www.rssboard.org/rss-specification. Pro privacy-first provoz je výhoda jasná: firma může sledovat veřejné zdroje bez vkládání sledovacích skriptů, bez nutnosti přihlašovat se přes reklamní platformu a bez tahání sociálních widgetů do vlastního webu.
+
+U decentralizovaných komunit dává smysl znát i ActivityPub. W3C ho uvádí jako protokol pro decentralizované sociální sítě založený na ActivityStreams 2.0: https://www.w3.org/TR/activitypub/. Neznamená to, že má každý SaaS hned stavět vlastní federovaný server. Znamená to, že otevřené kanály a přímé odkazy nejsou nostalgie; jsou provozní strategie.
+
+## IW.4 Sentiment ber jako orientační signál, ne soudce pravdy
+
+Automatické štítky typu „pozitivní / neutrální / negativní“ vypadají manažersky. Jenže u češtiny, ironie, technických stížností a krátkých příspěvků se sentiment snadno trefí vedle. Věta „super, další geniální update“ může být pochvala, ale často je to jen zákazník, který právě mentálně odinstaloval váš produkt.
+
+Lepší klasifikace pro malý tým:
+
+- **Akční:** vyžaduje odpověď, opravu nebo eskalaci.
+- **Pozorovat:** zatím bez odpovědi, ale přidat k tématu.
+- **Archiv:** zajímavé, ale bez dalšího kroku.
+- **Ignorovat:** spam, bait, duplicitní šum.
+
+Když používáš AI shrnutí zmínek, nastav mu hranice: nesmí vymýšlet profil autora, nesmí odhadovat citlivé vlastnosti a má citovat jen veřejně dostupný text. Výstup AI ber jako návrh pro člověka, ne jako automatický trigger pro reakci.
+
+## IW.5 Odpověď má být užitečná, ne lovecká
+
+Ne každá veřejná zmínka potřebuje odpověď. A už vůbec nepotřebuje odpověď ve stylu „Ahoj, všimli jsme si, že jsi zmínil naši kategorii, chceš demo?“ To není social selling. To je digitální klepání na okno koupelny.
+
+Kdy odpovědět:
+
+- někdo se přímo ptá na váš produkt nebo kategorii,
+- někdo hlásí problém, který umíte vyřešit,
+- někdo sdílí nepravdivou informaci a oprava pomůže ostatním,
+- někdo píše veřejnou pochvalu a slušné poděkování dává smysl,
+- vzniká diskuze, kde můžete přidat konkrétní návod nebo zdroj.
+
+Kdy raději neodpovídat:
+
+- zmínka je jen frustrace bez otázky,
+- odpověď by vyžadovala řešit osobní údaje veřejně,
+- člověk zjevně nechce kontakt od značky,
+- šlo by jen o oportunistickou reklamu,
+- téma patří do podpory, ne do veřejného vlákna.
+
+Mini šablona odpovědi:
+
+> Díky za zmínku. Pokud řešíš export dat, tady je krátký návod: [přímý odkaz]. Kdyby šlo o konkrétní účet, napiš prosím přes podporu, ať to neřešíme veřejně.
+
+Tohle je jednoduché, pomáhá to i ostatním a netahá to citlivý kontext do veřejného prostoru.
+
+## IW.6 Datová mapa pro monitoring
+
+Monitoring přidej do stejné datové mapy jako formuláře, analytiku a podporu. Nepatří mimo systém jen proto, že „je to marketing“. Marketingové nástroje umí být datově hladovější než produkční databáze, jen nosí hezčí onboarding.
+
+Minimální datová mapa:
+
+- **Zdroje:** veřejné weby, média, RSS, sociální sítě, recenze, komunity.
+- **Zachycená data:** URL, veřejný text zmínky, datum, kanál, interní stav, vlastník.
+- **Nezachycovat:** soukromé profily, osobní domněnky, scraping uzavřených skupin, zbytečnou historii autora.
+- **Přístup:** PR, support a produkt jen podle potřeby.
+- **Retence:** běžné zmínky mazat nebo agregovat po stanovené době; incidentní záznamy držet podle incidentního procesu.
+- **Předávání:** ověřit, jestli nástroj posílá data mimo EU, používá data pro trénink nebo je sdílí s dalšími subdodavateli.
+
+EDPB se ve svých pokynech k targetingu uživatelů sociálních sítí věnuje mimo jiné rolím aktérů, transparentnosti a zpracování dat v prostředí sociálních platforem: https://www.edpb.europa.eu/documents/guideline/guidelines-82020-on-the-targeting-of-social-media-users_en. Pro malý tým z toho plyne praktická brzda: jakmile monitoring přerůstá do cílení, profilování nebo spojování dat ze sociálních sítí s CRM, už to není „jen čtení internetu“.
+
+## IW.7 Týdenní rutina bez paniky
+
+Brand monitoring má být rytmus, ne permanentní poplach.
+
+Jednoduchý týdenní provoz:
+
+1. **Pondělí:** projít nové zmínky, označit typ a vlastníka.
+2. **Úterý až čtvrtek:** řešit jen akční položky; šum nechat být.
+3. **Pátek:** vybrat tři produktové signály a jednu věc do obsahu nebo FAQ.
+4. **Měsíčně:** smazat nebo agregovat staré zmínky podle retenčního pravidla.
+5. **Kvartálně:** zkontrolovat nástroje, přístupy a exporty.
+
+Výstup pro vedení nemá být graf nálady internetu. Stačí krátké shrnutí:
+
+- Co se opakovalo?
+- Co jsme opravili nebo vysvětlili?
+- Které zmínky vedly ke změně v produktu, dokumentaci nebo webu?
+- Kde jsme nereagovali záměrně?
+- Co smažeme, protože už to nemá účel?
+
+## IW.8 Checklist privacy-first brand monitoringu
+
+- Má monitoring napsaný účel a vlastníka?
+- Sledujeme primárně veřejné zdroje, RSS a přímé odkazy?
+- Neukládáme profily lidí, pokud k tomu nemáme jasný důvod?
+- Má každá zmínka typ, stav a retenční pravidlo?
+- Umíme oddělit support, PR, produktový feedback a bezpečnostní signály?
+- Nepoužíváme sentiment skóre jako automatické rozhodnutí?
+- Neodpovídáme veřejně tam, kde by se řešily osobní údaje?
+- Máme šablonu pro přesun citlivých věcí do podpory?
+- Víme, kde dodavatel monitoringu ukládá data a komu je předává?
+- Mažeme nebo agregujeme staré zmínky místo nekonečného archivu?
+
+## Codyho komentář
+
+Brand monitoring je užitečný sluha a hrozný šéf. Když má jasné hranice, pomůže najít otázky, problémy a příležitosti. Když hranice nemá, vyrobí z firmy nervózního stalkera s dashboardem. A to fakt není značka, kterou chceš budovat — pokud teda neprodáváš dalekohledy pro marketingové oddělení. Cody nedoporučuje.
+
+## Zdroje k příloze
+
+- European Commission — GDPR principles, purpose limitation and data minimisation: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/overview-principles/what-data-can-we-process-and-under-which-conditions_en
+- European Data Protection Board — Guidelines 8/2020 on the targeting of social media users: https://www.edpb.europa.eu/documents/guideline/guidelines-82020-on-the-targeting-of-social-media-users_en
+- RSS Advisory Board — RSS 2.0 Specification: https://www.rssboard.org/rss-specification
+- W3C — ActivityPub Recommendation: https://www.w3.org/TR/activitypub/
+
+## Shrnutí přílohy
+
+Privacy-first brand monitoring není slepota vůči trhu. Je to disciplína: sledovat veřejné a užitečné signály, ukládat jen minimum kontextu, reagovat tam, kde to pomáhá, a pravidelně mazat šum. Malý SaaS nepotřebuje datový vysavač na celý internet. Potřebuje pár dobrých zdrojů, jasný proces, lidskou triáž a odvahu neodpovídat na každou jiskru, která se na síti zatřpytí.
+
 ## Pracovní log
+- 2026-08-17: Přidána příloha IW o brand monitoringu a social listeningu bez plošného šmírování: účely monitoringu, veřejné signály místo profilů, RSS a přímé odkazy, opatrné použití sentimentu, datová mapa, týdenní rutina a privacy-first checklist.
 - 2026-08-17: Přidána příloha IV o privacy-first PR, media kitu a tiskových výstupech: veřejný media kit, ověřitelná tisková zpráva, střídmá správa PR kontaktů, odkazy bez osobního trackingu, bezpečné screenshoty, workflow a checklist.
 - 2026-08-17: Přidána příloha IU o zákaznických komunitách: oddělení podpory a veřejné dokumentace, bezpečná pravidla, výběr nástroje podle datové mapy, moderace, střídmé notifikace, agregované měření a privacy-first checklist.
 - 2026-08-17: Přidána příloha IT o privacy-first co-marketingu a partnerských kampaních: hodnota pro publikum, role partnerů, oddělené souhlasy, agregované reporty, technická hygiena, follow-up a checklist.
