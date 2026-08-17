@@ -41197,7 +41197,154 @@ Pro Dreamindí styl platí jednoduchá hierarchie: vlastní doména, evropský p
 
 Privacy-first e-mailing není e-mailing bez měření. Je to e-mailing bez klamavé přesnosti a skrytého sledování. Místo posedlosti open rate sleduje odpovědi, kvalitní kliky, konverze, odhlášení a dlouhodobou důvěru. Dobrá kampaň umí fungovat s přímými odkazy, férovými preferencemi, rozumnou automatizací a minimem dat. Inbox není billboard s detektorem pohybu; je to osobní prostor. Chovej se podle toho.
 
+---
+
+# Příloha IY: Placená akvizice a retargeting bez pixelového cirkusu, temných publik a ztráty kontroly nad daty
+
+Placená akvizice umí být užitečná. Když máš jasnou nabídku, dobrý obsah a stránku, která návštěvníka nenechá tápat, pár dobře cílených kampaní dokáže urychlit učení trhu. Problém začíná ve chvíli, kdy se z akvizice stane datová výměna typu „nasypeme všechno do reklamního systému a on už si někoho najde“. To není strategie. To je marketingový automat na důvěru.
+
+Privacy-first přístup neříká „nikdy neinzeruj“. Říká: nejdřív definuj, co chceš zjistit nebo prodat, měř jen to, co potřebuješ, preferuj kontext před sledováním lidí napříč webem a nenech si z vlastního publika udělat cizí černou skříňku. Retargeting může krátkodobě zvednout čísla, ale pokud stojí na nejasném souhlasu, agresivní frekvenci a importu kontaktů bez jasného účelu, platíš za růst reputací.
+
+Evropský základ je jednoduchý, i když implementace bývá méně romantická. Evropská komise shrnuje, že souhlas má být svobodný, konkrétní, informovaný a jednoznačný a má jít snadno odvolat: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/legal-grounds-processing-data/grounds-processing/when-consent-valid_en. EDPB má samostatné Guidelines 05/2020 k souhlasu podle GDPR: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-052020-consent-under-regulation-2016679_en. A pro cílení na sociálních sítích existují Guidelines 8/2020, které připomínají, že targeting není jen reklamní nastavení, ale zpracování dat s rolemi, účely a riziky: https://www.edpb.europa.eu/documents_en?topic%5B549%7C19%5D=549%7C19&type%5Bguidance%5D=guidance.
+
+## IY.1 Nejdřív rozděl akvizici podle kontroly nad vztahem
+
+Ne všechny placené kampaně mají stejné datové riziko. Nejhorší je házet do jednoho pytle brandovou reklamu, search kampaně, sponzorovaný newsletter, retargeting, lookalike publika a upload zákaznických e-mailů. Každý typ kampaně odpovídá na jinou otázku a posílá data jinam.
+
+Praktické rozdělení:
+
+| Typ kampaně | Co se snaží udělat | Privacy-first riziko | Bezpečnější přístup |
+| --- | --- | --- | --- |
+| Search reklama | Zachytit existující poptávku | menší, pokud neměříš přes osobní profily | cílit na dotazy, měřit konverze serverově a agregovaně |
+| Kontextová reklama | Být u relevantního obsahu | závisí na síti a měření | vybrat konkrétní média, newslettery nebo oborové weby |
+| Sponzorovaný obsah | Vysvětlit problém a nabídku | nízké až střední | přímé odkazy na vlastní landing page, žádné skryté přesměrování |
+| Retargeting | Připomenout se návštěvníkům | vysoké, protože sleduje chování napříč webem | používat jen s jasným souhlasem, omezenou dobou a frekvencí |
+| Customer match | Cílit na existující kontakty | vysoké, protože nahráváš identifikátory | používat jen pro jasný účel, s dokumentací a alternativou bez uploadu |
+| Lookalike publika | Hledat podobné lidi | vysoké, protože účel bývá mlhavý | raději testovat kontext, obsah a ruční segmenty trhu |
+
+Tohle rozdělení má být na jedné stránce v interní dokumentaci. Ne kvůli auditu pro audit. Kvůli tomu, aby marketér, zakladatel i vývojář věděli, co se do kampaně vlastně zapíná. „Výkonová reklama“ není kouzelné slovo, které smaže datové toky.
+
+## IY.2 Kontext je často lepší cílení než pronásledování
+
+Malý SaaS nepotřebuje hned nejchytřejší reklamní algoritmus v galaxii. Často potřebuje být vidět na správném místě se správnou větou. Kontextové cílení je starší, méně sexy a někdy překvapivě účinné: reklama u oborového článku, sponzorovaný odstavec v newsletteru, katalog partnerů, podcast s přesným publikem, lokální odborný portál nebo přímá dohoda s komunitou.
+
+Příklad pro B2B SaaS na správu zakázek:
+
+- Slabší nápad: retargetovat každého návštěvníka webu 30 dní bannerem „Dokončete registraci“.
+- Lepší nápad: koupit sponzorovaný tip v newsletteru pro menší výrobní firmy a vést lidi na stránku „Jak mít zakázky pod kontrolou bez Excel chaosu“.
+- Ještě lepší nápad: přidat k tomu veřejný checklist, který jde stáhnout bez formuláře, a demo nabídnout až po přečtení konkrétního scénáře.
+
+Kontextové kampaně mají jednu výhodu: lidé nejsou cíleni proto, že je někdo sledoval po internetu, ale proto, že právě čtou nebo poslouchají relevantní téma. To je civilizovanější a často i lépe vysvětlitelné zákazníkovi. Ano, algoritmus se tváří chytřeji. Ale algoritmus také rád utrácí tvoje peníze v publiku, kterému nerozumíš.
+
+## IY.3 Retargeting používej jako skalpel, ne jako sirénu
+
+Retargeting dává smysl jen v úzkých situacích: návštěvník viděl cenovou stránku, začal registraci, četl konkrétní use-case nebo se vrátil k dokumentaci. I tehdy musí být jasné, že k tomu máš souhlas, účel, dobu trvání a frekvenční limit. Jinak jen vytváříš dojem, že firma stojí za rohem a šeptá „vím, co jsi včera kliknul“.
+
+Nastavení, které bych u privacy-first projektu považoval za rozumné:
+
+- Retargeting vypnout jako výchozí stav a zapínat ho jen pro konkrétní test.
+- Omezit publikum na jasné akce s obchodním významem, ne na každého návštěvníka homepage.
+- Nastavit krátké okno, například jednotky až nižší desítky dní podle nákupního cyklu.
+- Omezit frekvenci zobrazení, aby reklama nepůsobila jako digitální komár.
+- Vyloučit zákazníky, odhlášené kontakty a lidi po citlivých akcích.
+- Nikdy nepoužívat retargeting na citlivé segmenty, zdravotní témata, dluhy, rodinné situace nebo podobně zranitelný kontext.
+
+Měř primárně dopad na obchodní výsledek, ne jen počet zobrazení. Pokud retargeting zvedne kliky, ale zároveň zvýší odhlášení, stížnosti nebo negativní odpovědi, není to výhra. To je jen draze nakoupený odpor.
+
+## IY.4 Customer match a import kontaktů ber jako výjimku
+
+Nahrát e-maily zákazníků do reklamního systému je lákavé. Nástroj slíbí lepší cílení, podobná publika a „aktivaci dat“. Přeloženo do lidštiny: předáváš identifikátory lidí třetí straně, aby z nich udělala reklamní signál. To může mít své místo, ale nemá to být rutinní kliknutí v pátek odpoledne.
+
+Než nahraješ seznam kontaktů, odpověz písemně:
+
+1. Jaký je přesný účel kampaně?
+2. Které kontakty do seznamu patří a proč?
+3. Jaký právní základ používáš a kde je vysvětlený lidem?
+4. Jak dlouho bude publikum existovat?
+5. Kdo má přístup k exportu a jak se smaže?
+6. Existuje alternativa bez uploadu osobních identifikátorů?
+7. Jak poznáš, že experiment skončil a data se mají uklidit?
+
+Bez těchto odpovědí seznam neexportuj. A už vůbec neposílej CSV s kontakty přes chat, e-mail nebo sdílený disk bez expirace. Pokud musí export vzniknout, měl by mít vlastníka, omezený přístup, šifrované úložiště, krátkou retenci a záznam v datové mapě. Ano, je to méně pohodlné. Ale také méně hloupé, což bývá u bezpečnosti podceňovaná metrika.
+
+## IY.5 Landing page musí unést kampaň bez sledovací protézy
+
+Dobrá kampaň nezachrání špatnou stránku. A špatná stránka často svádí k přidání dalšího trackingu, protože tým neví, proč lidé nekonvertují. Jenže když je nabídka nejasná, pixel ti nepomůže. Jen přesněji změří zmatek.
+
+Před placeným provozem zkontroluj landing page:
+
+- Je jasné, pro koho je stránka a jaký problém řeší?
+- Navazuje headline na text reklamy nebo sponzorovaného odkazu?
+- Je primární CTA jednoznačné a férové?
+- Lze pokračovat bez založení účtu, pokud jde jen o vzdělávací obsah?
+- Je privacy informace u formuláře krátká a srozumitelná?
+- Neposílá stránka data do nástrojů, které pro daný test nepotřebuješ?
+- Dá se kampaň vyhodnotit z kombinace UTM parametrů, serverových logů, agregovaných konverzí a ručního feedbacku?
+
+Privacy-first varianta není slepá. Používá UTM parametry, vlastní analytiku, agregovaná čísla a kvalitativní signály. Rozdíl je v tom, že si neplete „víme dost pro rozhodnutí“ s „víme všechno o každém člověku“.
+
+## IY.6 Rozpočet rozděl na učení, ne na víru v platformu
+
+Malé týmy často pustí reklamu až ve chvíli, kdy už jsou nervózní. Pak chtějí rychlý výsledek, nechají platformu optimalizovat na cokoliv, co vypadá jako konverze, a po dvou týdnech prohlásí buď „reklama nefunguje“, nebo „musíme přidat budget“. Obě odpovědi můžou být špatně.
+
+Lepší je nastavit akviziční sprint:
+
+- **Hypotéza:** „Majitelé menších agentur řeší přehled nad projekty a reagují na slib kratších status meetingů.“
+- **Kanál:** jeden oborový newsletter a jedna search kampaň na přesné dotazy.
+- **Měření:** návštěvy, klik na demo, odpovědi na formulář, kvalita leadů po ručním posouzení.
+- **Limit:** pevný rozpočet a datum vyhodnocení.
+- **Rozhodnutí:** pokračovat, upravit sdělení, změnit segment, nebo test ukončit.
+
+Rozpočet nemá dokazovat, že platforma je kouzelná. Má kupovat poznání: jaký segment reaguje, jaká bolest rezonuje, jaký obsah pomáhá a jestli lidé chápou hodnotu produktu. Když se nic nenaučíš, i levná kampaň byla drahá.
+
+## IY.7 Datová mapa placené akvizice
+
+Každý placený kanál si zaslouží jednoduchou datovou mapu. Ne román, ale tabulku, kterou lze přečíst za pět minut.
+
+| Oblast | Otázka | Doporučení |
+| --- | --- | --- |
+| Vstupní data | Co posíláme reklamnímu systému? | preferuj jen kampaně, UTM a agregace; osobní identifikátory jen výjimečně |
+| Měření | Jak poznáme úspěch? | obchodní akce, odpovědi, kvalita leadů, ne jen impresní konfety |
+| Souhlas | Kdy používáme tracking vyžadující souhlas? | až po jasném rozhodnutí, dokumentaci a jednoduchém odmítnutí |
+| Retence | Jak dlouho držíme publika a exporty? | krátce, podle testu; po vyhodnocení uklidit |
+| Přístupy | Kdo spravuje kampaně a exporty? | osobní účty, role podle práce, žádné sdílené přihlašování |
+| Dodavatelé | Kde data končí? | ověř region, smlouvy, subdodavatele a možnost smazání |
+| Reporting | Co ukazujeme týmu? | agregované závěry, konkrétní rozhodnutí, žádné seznamy „sledovaných lidí“ |
+
+Tuhle mapu aktualizuj při každém novém kanálu, publiku nebo zásadní změně měření. Pokud na to není čas, není čas ani na bezpečné spuštění kampaně. Marketing bez datové mapy je jako řízení dodávky se zalepeným zadním oknem: nějak dojedeš, ale okolí si oddechne, až zastavíš.
+
+## IY.8 Checklist privacy-first placené akvizice
+
+Před spuštěním kampaně:
+
+- Má kampaň jednu jasnou hypotézu a jedno rozhodnutí, které po testu uděláme?
+- Je kanál vybraný podle publika a kontextu, ne jen podle reklamního rozhraní?
+- Víme, jaká data posíláme platformě, partnerovi nebo médiu?
+- Umíme kampaň vyhodnotit bez individuálního sledování každého návštěvníka?
+- Pokud používáme pixel nebo retargeting, máme jasný souhlas, účel, dobu a frekvenční limit?
+- Nepoužíváme zákaznické e-maily nebo podobná publika jako výchozí zkratku?
+- Je landing page rychlá, srozumitelná a bez zbytečných třetích stran?
+- Má formulář datové minimum a lidský mikrotext o zpracování údajů?
+- Jsou exporty, publika a přístupy omezené a po testu se uklidí?
+- Je report napsaný jako závěr pro rozhodnutí, ne jako festival metrik bez majitele?
+
+## Codyho komentář
+
+Placená reklama je zesilovač. Když zesílíš jasnou nabídku, pomůže. Když zesílíš zmatek, dostaneš dražší zmatek. A když zesílíš sledování bez respektu, možná získáš pár leadů, ale zároveň učíš trh, že tvoje značka potřebuje lidi honit po internetu jako zlevněné tenisky. To není moc evropské, ani moc chytré.
+
+## Zdroje k příloze
+
+- European Commission: podmínky platného souhlasu podle GDPR, včetně svobodnosti, konkrétnosti, informovanosti a možnosti odvolání: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/legal-grounds-processing-data/grounds-processing/when-consent-valid_en
+- EDPB: Guidelines 05/2020 on consent under Regulation 2016/679: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-052020-consent-under-regulation-2016679_en
+- EDPB: přehled dokumentů k online trackingu, targetingům a Guidelines 8/2020 on the targeting of social media users: https://www.edpb.europa.eu/documents_en?topic%5B549%7C19%5D=549%7C19&type%5Bguidance%5D=guidance
+- EUR-Lex: Directive 2002/58/EC, ePrivacy Directive, pro kontext pravidel kolem elektronických komunikací a koncových zařízení: https://eur-lex.europa.eu/eli/dir/2002/58/oj?locale=en
+
+## Shrnutí přílohy
+
+Privacy-first placená akvizice nestojí na zákazu reklamy. Stojí na kontrole: jasná hypotéza, kontextové kanály, střídmé měření, opatrný retargeting, výjimečné použití customer match seznamů a pravidelný úklid publik i exportů. Malý SaaS nepotřebuje sledovat každého návštěvníka jako detektiv v baloňáku. Potřebuje vědět, jaký slib funguje, pro koho má produkt hodnotu a které kanály přinášejí zákazníky bez zbytečné ztráty důvěry.
+
 ## Pracovní log
+- 2026-08-17: Přidána příloha IY o privacy-first placené akvizici a retargetingu: rozdělení kampaní podle kontroly nad vztahem, kontextové cílení, omezený retargeting, customer match jako výjimka, landing page bez sledovací protézy, akviziční sprint, datová mapa a checklist.
 - 2026-08-17: Přidána příloha IX o privacy-first e-mailových kampaních: rozdělení typů e-mailů, limity open rate, rozhodování o tracking pixelech, přímé odkazy, preference centrum, automatizační brzdy, datová mapa a checklist.
 - 2026-08-17: Přidána příloha IW o brand monitoringu a social listeningu bez plošného šmírování: účely monitoringu, veřejné signály místo profilů, RSS a přímé odkazy, opatrné použití sentimentu, datová mapa, týdenní rutina a privacy-first checklist.
 - 2026-08-17: Přidána příloha IV o privacy-first PR, media kitu a tiskových výstupech: veřejný media kit, ověřitelná tisková zpráva, střídmá správa PR kontaktů, odkazy bez osobního trackingu, bezpečné screenshoty, workflow a checklist.
