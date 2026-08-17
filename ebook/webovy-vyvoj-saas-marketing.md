@@ -40217,8 +40217,163 @@ Webináře nejsou problém. Problém je, když se z edukace udělá skrytý lead
 Privacy-first webinář stojí na jasném slibu, krátkém formuláři, férovém nahrávání, opatrné práci s chatem a užitečném follow-upu. Cílem není získat maximum dat o účastníkovi, ale vytvořit důvěru, praktickou hodnotu a obsah, který může žít dál na vlastním webu bez sledovacího cirkusu.
 
 
+# Příloha IS: Affiliate, partnerská doporučení a referral programy bez skrytých motivací, přesměrovávacích labyrintů a sledovacích pixelů
+
+Partnerské doporučení může být užitečný obchodní kanál. Zákazník hledá nástroj, partner zná kontext a firma získá kvalitní lead. Jenže stejný mechanismus se rychle zvrhne v šedou zónu: odkazy s deseti parametry, reklamní publika, remarketing, skryté provize a doporučení, které vypadá jako nezávislý názor, ale ve skutečnosti je to prodejní leták v převleku.
+
+Privacy-first affiliate není zákaz monetizace. Je to slušný kontrakt: čtenář ví, že doporučení má obchodní motiv, web neposílá víc údajů než je nutné a měření funguje bez toho, aby se z návštěvníka stala lovná zvěř.
+
+## IS.1 Nejdřív odděl doporučení, partnerství a reklamu
+
+Než začneš řešit technické měření, pojmenuj typ vztahu. Jiná pravidla má běžné doporučení v článku, jiná placené partnerství, jiná provize za registraci a jiná plnohodnotná reklamní kampaň.
+
+Praktické rozdělení:
+
+| Typ zmínky | Příklad | Co musí být jasné |
+| --- | --- | --- |
+| Neplacené doporučení | „Tento nástroj používám pro fakturaci.“ | Proč ho doporučuješ a pro koho se hodí |
+| Affiliate odkaz | „Když se registruješ přes tento odkaz, můžeme dostat provizi.“ | Že existuje provize nebo jiná výhoda |
+| Partnerství | Společný webinář, bundle, marketplace listing | Role obou stran a práce s daty |
+| Reklama | Zaplacené umístění v newsletteru nebo článku | Komerční povaha sdělení |
+
+Evropská komise ve výkladu k nekalým obchodním praktikám řeší mimo jiné transparentnost recenzí, doporučení, influencer marketing a datově řízenou personalizaci. Praktický závěr pro malý SaaS je jednoduchý: komerční motiv nemá být schovaný v patičce, kam se dostane jen archeolog s lupou.
+
+## IS.2 Transparentní disclosure patří k odkazu, ne do právního sklepa
+
+Pokud odkaz může přinést provizi, slevu, kredit nebo jinou obchodní výhodu, řekni to poblíž doporučení. Ne jako omluvu. Normálně, lidsky.
+
+Dobré mikrotexty:
+
+> „Tento odkaz je partnerský. Pokud si službu objednáš, můžeme získat provizi. Doporučení píšeme podle vlastní zkušenosti, ne podle výše provize.“
+
+> „Dreamind může za registraci přes tento odkaz získat kredit. Cena pro tebe se tím nemění.“
+
+> „Tento nástroj zmiňujeme, protože zapadá do privacy-first provozu v Evropě. Partnerský vztah je uvedený otevřeně.“
+
+Slabé varianty:
+
+- „Některé odkazy mohou být komerční.“ — moc vágní.
+- „Affiliate disclosure je zde.“ — moc daleko od konkrétního rozhodnutí.
+- „Sponzorováno partnerem“ bez vysvětlení — čtenář neví, jestli jde o reklamu, provizi nebo společný obsah.
+
+Disclosure má být krátké, čitelné a umístěné tam, kde člověk kliká nebo čte doporučení. Právní stránka může obsahovat detail, ale nesmí být jediné místo, kde se čtenář dozví podstatnou informaci.
+
+## IS.3 Referral měř serverově a střídmě
+
+Nejčistší affiliate měření je často nudné: vlastní přesměrovací URL, krátký kód kampaně, serverový log kliknutí, agregovaný report. Žádný externí pixel na každé stránce, žádné fingerprintingové ambice, žádné posílání e-mailu návštěvníka partnerovi před tím, než s tím člověk jasně souhlasí.
+
+Příklad jednoduchého modelu:
+
+- `/go/nastroj-x` přesměruje na partnerský web.
+- Server uloží čas, slug odkazu, stránku původu v rámci vlastního webu a hrubý zdroj návštěvy.
+- IP adresa zůstane jen v běžném bezpečnostním logu s krátkou retencí, ne v marketingové tabulce.
+- Konverze se páruje přes jednorázový referral kód nebo partnerem vrácený agregovaný report.
+- Detailní zákaznická data se nepředávají, pokud nejsou nutná pro smluvní vztah a jasně popsaná.
+
+Co raději nedělat:
+
+- nevkládat cizí tracking skript do každé stránky jen kvůli jednomu affiliate programu,
+- nepředávat e-mail, telefon nebo firmu partnerovi automaticky po kliknutí,
+- nepoužívat UTM parametry jako tajný šuplík pro osobní údaje,
+- nespojovat affiliate kliky s produktovou analytikou jednotlivých uživatelů,
+- neskladovat surové click logy déle, než je potřeba pro vyúčtování a kontrolu podvodů.
+
+## IS.4 Externí odkazy nesmí zbytečně odnášet kontext
+
+Každý odkaz na partnera může cílovému webu prozradit, odkud člověk přišel. Někdy je to v pořádku, jindy tím nechtěně posíláš citlivý kontext: interní slug, název zákaznické stránky, dotaz ve vyhledávání nebo část kampaně.
+
+MDN popisuje hlavičku `Referrer-Policy`, která řídí, kolik informací se posílá v hlavičce `Referer`. Pro privacy-first web dává smysl mít výchozí politiku aspoň `strict-origin-when-cross-origin`, případně u citlivějších odkazů použít `no-referrer` nebo atribut odkazu `rel="noreferrer"`.
+
+Praktické nastavení:
+
+- Na úrovni webu nastav `Referrer-Policy: strict-origin-when-cross-origin` nebo přísnější politiku podle kontextu.
+- U odkazů z interních, zákaznických nebo citlivých stránek používej `rel="noreferrer noopener"`.
+- U affiliate přesměrování neposílej v cílové URL nic, co by identifikovalo konkrétního uživatele.
+- U kampaní používej obecné parametry typu `source=blog` nebo `campaign=webinar-privacy`, ne `email=...`.
+- Otestuj odkaz v prohlížeči i v serverových logách, protože teorie v dokumentaci je krásná věc, ale produkce má vlastní smysl pro humor.
+
+Pozor na konflikt: některé partnerské programy chtějí referrer nebo konkrétní parametr kvůli přiřazení provize. To neznamená, že musíš zapnout datový ohňostroj. Znamená to vyjednat minimum: obecný partner ID, krátký click ID bez osobních údajů a jasnou retenční dobu.
+
+## IS.5 Partnera vybírej i podle datové mapy
+
+Affiliate program není jen marketingový detail. Je to dodavatelský vztah, který může sahat do webové analytiky, obchodních reportů, fakturace, supportu a někdy i do zákaznických dat. Proto se na partnera dívej podobně jako na jiného dodavatele.
+
+Otázky před zapnutím programu:
+
+- Kde partner provozuje systém a kde ukládá data?
+- Jaká data získá při kliknutí, registraci a konverzi?
+- Používá vlastní tracking skripty, cookies nebo fingerprinting?
+- Dá se měřit bez externího skriptu na našem webu?
+- Jak dlouho drží click ID, konverze a vyúčtovací podklady?
+- Komu data předává dál a jak to popisuje v podmínkách?
+- Umíme program vypnout bez rozbití obsahu a bez ztráty kontroly nad daty?
+
+Privacy-first priorita: preferuj partnerství, kde stačí přímý odkaz, serverové přesměrování, coupon/referral kód nebo agregovaný report. Pokud program vyžaduje globální tracking skript a široké datové sdílení, je to žlutá kontrolka. Ne vždy automatické „ne“, ale rozhodně „ukažte mi, proč je to nutné“.
+
+## IS.6 Obsah nesmí ztratit integritu kvůli provizi
+
+Affiliate weby často umírají na jednu nemoc: začnou doporučovat to, co platí nejvíc, ne to, co nejlépe řeší problém. Krátkodobě to může vydělat. Dlouhodobě to zabije důvěru rychleji než popup se slevou a odpočtem 04:59.
+
+Redakční pravidla:
+
+- Doporučuj jen nástroje, které umíš zasadit do konkrétního scénáře.
+- Uveď, pro koho nástroj není vhodný.
+- Odděl zkušenost, fakt a Codyho komentář.
+- Napiš, kdy byl text naposledy revidovaný.
+- Pokud má nástroj privacy nevýhodu, řekni ji i vedle affiliate odkazu.
+- Měj seznam zakázaných praktik: falešné recenze, generické žebříčky bez testování, skryté provize, dark patterns.
+
+Příklad férové věty:
+
+> „Tohle řešení je silné pro rychlé spuštění kampaní, ale pro citlivější evropské B2B bych před nasazením ověřil datové centrum, subdodavatele a možnosti vypnutí reklamních integrací.“
+
+Taková věta možná sníží počet impulzivních kliků. Zvýší ale kvalitu důvěry. A důvěra je u B2B dražší měna než jeden náhodný lead.
+
+## IS.7 Checklist affiliate a partnerských doporučení
+
+Před publikací:
+
+- [ ] Je u každého placeného nebo provizního odkazu jasně uvedený obchodní vztah.
+- [ ] Disclosure je poblíž doporučení, ne jen v právní stránce.
+- [ ] Text vysvětluje, proč je nástroj doporučený a pro koho se nehodí.
+- [ ] Partner prošel mini kontrolou dat: provoz, tracking, cookies, retence, subdodavatelé.
+- [ ] Odkazy neobsahují osobní údaje, interní identifikátory ani citlivé názvy zákazníků.
+
+Technika:
+
+- [ ] Web má nastavenou rozumnou `Referrer-Policy`.
+- [ ] Externí odkazy používají `noopener`; citlivější odkazy také `noreferrer`.
+- [ ] Affiliate měření funguje bez globálního cizího skriptu, pokud to jde.
+- [ ] Click logy mají vlastníka, účel a retenční dobu.
+- [ ] Reporty jsou agregované, pokud není detail nutný pro vyúčtování nebo řešení podvodu.
+
+Provoz:
+
+- [ ] Existuje seznam aktivních partnerství a jejich vlastníků.
+- [ ] Jednou za kvartál se ověří, že odkazy, disclosure a podmínky partnera stále sedí.
+- [ ] Změny provizí nemění redakční pořadí bez věcného důvodu.
+- [ ] Support ví, co odpovědět, když se zákazník zeptá na doporučení nebo provizi.
+- [ ] Program má exit plán: jak vypnout měření, odstranit skripty a upravit obsah.
+
+## Codyho komentář
+
+Affiliate není špinavé slovo. Špinavé je dělat z doporučení maskovanou reklamu a z odkazu potrubí na osobní údaje. Když je motiv otevřený, měření střídmé a doporučení poctivé, může partnerství fungovat bez toho, aby čtenář musel po každém kliknutí kontrolovat, jestli mu někdo nepřivázal datový přívěs.
+
+## Zdroje k příloze
+
+- Evropská komise: směrnice o nekalých obchodních praktikách a témata transparentnosti recenzí, doporučení, influencer marketingu, dark patterns a datově řízené personalizace: https://commission.europa.eu/law/law-topic/consumer-protection-law/unfair-commercial-practices-and-price-indication/unfair-commercial-practices-directive_en
+- MDN Web Docs: `Referrer-Policy` a řízení množství referrer informací posílaných při požadavcích: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Referrer-Policy
+- MDN Web Docs: `rel="noreferrer"` u odkazů a formulářů pro vynechání hlavičky `Referer`: https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/rel/noreferrer
+- EDPB: stručný přehled souhlasu podle GDPR, včetně odpovědnosti správce prokázat platný souhlas: https://www.edpb.europa.eu/system/files/2026-04/edpb-summary-consent_en.pdf
+
+## Shrnutí přílohy
+
+Privacy-first affiliate stojí na otevřeném disclosure, střídmém serverovém měření, bezpečné práci s referrerem, kontrole partnera a redakční integritě. Cílem není odmítat partnerství, ale nastavit je tak, aby provize nepřeválcovala důvěru a aby doporučení nepřidávalo zbytečný datový stín.
+
+
 ## Pracovní log
 
+- 2026-08-17: Přidána příloha IS o affiliate, partnerských doporučeních a referral programech: transparentní disclosure, serverové měření, bezpečná práce s referrerem, kontrola partnerů, redakční integrita a privacy-first checklist.
 - 2026-08-17: Přidána příloha IR o privacy-first webinářích a online eventech: registrační minimum, přístup bez sledovacího rodea, nahrávky, Q&A, follow-up, recyklace obsahu a checklist.
 - 2026-08-17: Přidána příloha IQ o referencích, případových studiích a sociálním důkazu: konkrétní výsledky, souhlas s logem a citací, bezpečné případové studie, transparentní recenze, brzdy automatizace, knihovna důkazů a privacy-first checklist.
 - 2026-08-17: Obnovena poškozená verze e-booku z předchozího zdravého commitu a přidána příloha IP o churnu, offboardingu a win-back komunikaci bez stalkingu: zrušení účtu, důvody odchodu, export, retence, segmentace, šablony a checklist.
