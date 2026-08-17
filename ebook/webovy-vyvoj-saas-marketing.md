@@ -39887,7 +39887,340 @@ Churn je nepříjemný, protože ti kazí grafy a ego. Ale dobrý offboarding je
 Offboarding není administrativní konec, ale produktová zkušenost s vysokým dopadem na důvěru. Privacy-first SaaS má zákazníkovi dát jasnou cestu ven, exportovatelná data, férovou retenční politiku a respekt k odmítnutí další komunikace. Win-back má smysl jen s konkrétní změnou nebo výslovným přáním zákazníka; jinak je to jen marketingové strašení v prostěradle.
 
 
+# Příloha IQ: Reference, případové studie a sociální důkaz bez falešných recenzí, nátlakového souhlasu a logové archeologie
+
+Sociální důkaz je jedna z nejsilnějších částí B2B marketingu. Zákazník nechce jen slyšet, že produkt funguje. Chce vidět, že někdo podobný už problém vyřešil, nezbláznil se při implementaci a nemusel po cestě obětovat data marketingovým bohům v kapuci.
+
+Jenže reference umí být i špinavá disciplína: anonymní citace bez kontextu, „ověřené“ recenze bez vysvětlení, loga klientů použitá bez domluvy, případové studie narvané interními čísly a automatické žádosti o hodnocení posílané lidem, kteří sotva dokončili onboarding. Privacy-first SaaS musí dělat sociální důkaz jinak: pravdivě, střídmě, s jasným souhlasem a s kontrolou nad tím, co se publikuje.
+
+EU spotřebitelská pravidla řeší mimo jiné transparentnost online recenzí, endorsementů, influencer marketingu, dark patterns a datově řízené personalizace v rámci směrnice o nekalých obchodních praktikách. Evropská komise k tomu má výkladový materiál k Unfair Commercial Practices Directive: https://commission.europa.eu/law/law-topic/consumer-protection-law/unfair-commercial-practices-and-price-indication/unfair-commercial-practices-directive_en
+
+Tahle příloha je praktický postup pro reference, případové studie a review proces tak, aby marketing pomáhal prodeji, ale neproměnil důvěru v kartonovou kulisu.
+
+## IQ.1 Reference začíná výsledkem, ne větou „byli jsme spokojení“
+
+Slabá reference říká:
+
+> „Spolupráce byla skvělá a tým byl profesionální.“
+
+To je milé, ale obchodně skoro prázdné. Silná reference odpovídá na otázky, které má nový zákazník v hlavě:
+
+- jaký problém firma řešila,
+- proč hledala změnu,
+- co se nasadilo,
+- jak rychle se dostavil první výsledek,
+- co bylo jednodušší, bezpečnější nebo levnější,
+- pro koho je řešení vhodné.
+
+Praktický vzorec pro krátkou B2B referenci:
+
+> „Před [produkt/služba] jsme řešili [konkrétní problém]. Díky [řešení] dnes [konkrétní změna]. Oceňujeme hlavně [důvod důvěry: rychlost, podpora, provoz v EU, jasná data, integrace].“
+
+Příklad:
+
+> „Před nasazením jsme řešili ruční sběr poptávek z webu a přepisování do CRM. Nový privacy-first formulář nám zkrátil odpověď na poptávku z hodin na minuty a přitom neposílá leady do reklamních systémů.“
+
+Všimni si, že reference nemusí obsahovat přesné obchodní metriky, pokud je zákazník nechce zveřejnit. Stačí konkrétní změna. „Rychlejší odpověď na poptávku“ je často bezpečnější než „o 37 % vyšší konverze“, pokud číslo nejde snadno ověřit, časem se mění nebo by prozradilo citlivý obchodní detail.
+
+## IQ.2 Souhlas s použitím loga a citace musí být konkrétní
+
+Logo zákazníka není dekorace zdarma. Jméno člověka, role, fotka a citace jsou osobní údaje nebo obchodně citlivý materiál podle kontextu. Pokud je chceš použít v marketingu, potřebuješ jasnou domluvu: kde se reference objeví, v jaké podobě, na jak dlouho a kdo ji může stáhnout.
+
+Evropská komise u GDPR souhlasu připomíná, že souhlas má být svobodný, informovaný, konkrétní, jednoznačný a odvolatelný; žádost má být jasná a srozumitelná: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/legal-grounds-processing-data/grounds-processing/when-consent-valid_en
+
+Praktická šablona souhlasu:
+
+- **Co použijeme:** název firmy, logo, jméno a role respondenta, krátká citace, případně screenshot produktu bez zákaznických dat.
+- **Kde:** web, PDF nabídka, obchodní prezentace, případová studie, sociální síť, newsletter nebo press kit.
+- **Jak dlouho:** například do odvolání, nebo s revizí jednou za 12 měsíců.
+- **Kdo schválil:** jméno, role a kontakt oprávněné osoby.
+- **Jak odvolat:** jednoduchý kontakt a interní SLA na stažení z vlastních kanálů.
+- **Co se nestane:** reference se nepoužije jako placená reklama, remarketingový signál ani falešná recenze.
+
+Nejlepší praxe: neposílej zákazníkovi jen „můžeme vás dát na web?“. Pošli přesnou ukázku, jak to bude vypadat. Screenshot sekce s logem, text citace, kontext stránky. Lidé neschvalují abstraktní marketing. Schvalují konkrétní větu vedle konkrétního loga.
+
+## IQ.3 Případová studie musí chránit zákazníka i čtenáře
+
+Případová studie není literární pomník dodavateli. Je to rozhodovací dokument pro budoucího zákazníka. Dobrý formát:
+
+1. **Kontext:** typ firmy, velikost týmu, problém a omezení.
+2. **Výzva:** co nefungovalo a proč to bolelo.
+3. **Řešení:** co se změnilo v produktu, procesu nebo infrastruktuře.
+4. **Výsledek:** konkrétní dopad, ideálně měřitelný nebo pozorovatelný.
+5. **Privacy-first detail:** jak se pracovalo s daty, kdo k nim měl přístup, co se nesbíralo.
+6. **Poučení:** co by tým udělal příště rychleji nebo jinak.
+
+Bezpečnostní pravidlo: vše, co zveřejňuješ, rozděl na tři vrstvy.
+
+| Vrstva | Příklad | Publikovat? |
+|---|---|---|
+| Veřejné | obecný problém, schválená citace, logo | ano po schválení |
+| Obchodně citlivé | přesná marže, interní proces, neveřejná roadmapa | jen výjimečně a po výslovném schválení |
+| Osobní nebo zákaznická data | jména koncových uživatelů, screenshoty s daty, support tickety | nepublikovat, anonymizovat nebo nahradit syntetickou ukázkou |
+
+Screenshoty jsou obzvlášť zrádné. Jedna obrazovka může obsahovat jména zákazníků, interní ID, e-maily, tržby, poznámky supportu nebo API klíče schované v rohu, kam se nikdo nedívá, dokud to není na webu. Před publikací používej syntetická data nebo ruční redakci a druhý pár očí.
+
+## IQ.4 Recenze musí být vysvětlitelné, ne jen hvězdičkové konfety
+
+Pokud sbíráš recenze, řekni čtenáři, odkud jsou a jak s nimi pracuješ. Evropská komise v přehledu spotřebitelských kontrol uvádí, že u online recenzí úřady našly problémy právě v informování o tom, jak jsou recenze sbírány, zpracovány a jak se brání falešným recenzím: https://commission.europa.eu/topics/consumers/consumer-rights-and-complaints/enforcement-consumer-protection/sweeps_en
+
+Pro vlastní web stačí jednoduchá transparentní věta:
+
+> „Reference publikujeme jen po schválení zákazníkem. Text může být jazykově zkrácen, ale neměníme význam. Placené nebo incentivizované recenze označujeme.“
+
+Pokud používáš veřejnou review platformu, nekopíruj slepě celé recenze do svého CRM jako další datovou skládku. Ulož jen to, co potřebuješ pro marketingový proces: odkaz, stav schválení, téma, segment a vlastník follow-upu. Plný text recenze může zůstat tam, kde vznikl, pokud k němu vede veřejný odkaz.
+
+Co nedělat:
+
+- nevytvářej vlastní falešné recenze, ani „dočasné placeholdery“, protože internet má paměť a lidé screenshoty,
+- neskrývej negativní recenze bez jasného pravidla moderace,
+- nenabízej odměnu jen za pozitivní hodnocení,
+- neupravuj citaci tak, že změní význam,
+- nepředstírej, že interní beta feedback je nezávislá veřejná recenze.
+
+## IQ.5 Automatizace žádostí o reference má mít brzdy
+
+Reference je lepší žádat ve chvíli, kdy zákazník zažil konkrétní hodnotu. Ne po třech dnech trialu, kdy sotva našel nastavení. Automatizace může pomoct, ale musí mít produktový kontext a komunikační limity.
+
+Dobré spouštěče:
+
+- zákazník dosáhl prvního měřitelného výsledku,
+- proběhl úspěšný onboarding nebo migrace,
+- support vyřešil kritický problém a zákazník výslovně poděkoval,
+- renewal meeting potvrdil jasnou hodnotu,
+- zákazník dal vysoké hodnocení a souhlasil s navazující prosbou.
+
+Špatné spouštěče:
+
+- každý uživatel po 7 dnech bez ohledu na stav,
+- lidé, kteří mají otevřený incident,
+- uživatelé bez oprávnění mluvit za firmu,
+- kontakty, které odmítly marketingovou komunikaci,
+- bývalí zákazníci bez konkrétního důvodu k návratu.
+
+Privacy-first pravidlo: žádost o referenci neposílej jen proto, že analytika ukázala „šťastné klikání“. Lepší je kombinace jednoduchého produktového signálu a lidského posouzení vlastníkem účtu. Automat může připomenout, člověk má rozhodnout.
+
+## IQ.6 Interní knihovna důkazů šetří čas i data
+
+Malý tým často hledá důkazy až ve chvíli, kdy obchodník píše nabídku. Pak vzniká chaos: někdo loví starý Slack, někdo screenshotuje dashboard, někdo tahá věty z e-mailu a nikdo neví, co je schválené. Vytvoř si malou knihovnu sociálního důkazu.
+
+Minimální záznam:
+
+- název zákazníka nebo anonymizovaný segment,
+- typ důkazu: logo, citace, případová studie, metrika, screenshot, veřejný odkaz,
+- stav schválení: návrh, schváleno, expirováno, staženo,
+- povolené kanály použití,
+- datum poslední revize,
+- vlastník vztahu,
+- omezení: nepoužívat v reklamě, nepoužívat čísla, jen anonymně, jen pro sales deck.
+
+Tuhle knihovnu nemusíš stavět jako velký systém. Stačí tabulka, Markdown soubor nebo jednoduché CRM pole. Důležité je, aby tým nepoužíval neschválené materiály jen proto, že „to bylo někde v prezentaci z loňska“.
+
+## IQ.7 Checklist referencí a případových studií
+
+- **Konkrétnost:** reference říká problém, změnu a výsledek, ne jen „profesionální spolupráce“.
+- **Schválení:** logo, citace, jméno, role, fotka a screenshot mají jasný souhlas nebo smluvní oprávnění.
+- **Rozsah použití:** víš, kde se důkaz smí používat a kde ne.
+- **Odvolání:** zákazník má jednoduchý způsob, jak požádat o stažení nebo úpravu.
+- **Pravdivost:** neupravuješ význam citace, nevyrábíš falešné recenze a označuješ incentivizované hodnocení.
+- **Datové minimum:** případová studie neobsahuje zákaznická data, secrets, interní ID ani citlivé obchodní informace.
+- **Syntetické ukázky:** screenshoty používají anonymizovaná nebo syntetická data.
+- **Revize:** reference mají datum kontroly, aby na webu nezůstala loga klientů, se kterými už není vztah nebo souhlas.
+- **Knihovna důkazů:** tým ví, které materiály jsou schválené pro web, sales, nabídky a partnerské prezentace.
+- **Komunikační brzdy:** žádosti o reference respektují timing, preference a aktuální stav zákazníka.
+
+## Codyho komentář
+
+Reference nejsou trofeje na zdi. Jsou vypůjčená důvěra. A vypůjčená důvěra se nebere bagrem. Když zákazník dovolí použít své jméno, logo nebo příběh, dává ti kus reputace. Zacházej s tím lépe než s marketingovým bannerem za pětistovku, protože to má o dost větší hodnotu a o dost horší následky, když to pokazíš.
+
+## Zdroje k příloze
+
+- Evropská komise: Unfair Commercial Practices Directive a výklad k recenzím, endorsementům, influencer marketingu a dark patterns: https://commission.europa.eu/law/law-topic/consumer-protection-law/unfair-commercial-practices-and-price-indication/unfair-commercial-practices-directive_en
+- Evropská komise: kdy je souhlas podle GDPR platný, včetně požadavku na svobodnost, informovanost, konkrétnost a možnost odvolání: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/legal-grounds-processing-data/grounds-processing/when-consent-valid_en
+- EDPB: Guidelines 05/2020 on consent under Regulation 2016/679: https://www.edpb.europa.eu/documents/guideline/guidelines-052020-on-consent-under-regulation-2016679_en
+- Evropská komise: výsledky spotřebitelských kontrol online recenzí a problémů s informováním o sběru, zpracování a prevenci falešných recenzí: https://commission.europa.eu/topics/consumers/consumer-rights-and-complaints/enforcement-consumer-protection/sweeps_en
+
+## Shrnutí přílohy
+
+Sociální důkaz má být konkrétní, ověřitelný a schválený. Privacy-first SaaS nepoužívá zákaznické logo jako dekoraci bez domluvy, nevyrábí falešné recenze a netahá do případových studií data, která tam nepatří. Nejlepší reference ukazuje reálný problém, výsledek a důvod důvěry — a zároveň respektuje hranice zákazníka.
+
+
+# Příloha IR: Webináře a online eventy bez registračního výpalného, sledovacích pixelů a záznamů navždy
+
+Webinář je pro malý SaaS tým skvělý formát: ukáže odbornost, dá zákazníkům konkrétní pomoc a vytvoří obsah, který jde dál použít jako článek, checklist nebo krátké video. Problém začíná ve chvíli, kdy se z něj stane datový vysavač: povinný telefon, firma, obrat, velikost týmu, tři marketingové souhlasy, nahrávka uložená navždy a follow-up sekvence, která se tváří jako péče, ale voní jako robot s kufříkem.
+
+Privacy-first webinář dělá opak. Sbírá minimum údajů, jasně říká, co se bude dít, umožní účast bez zbytečných překážek a po akci nabídne užitečný další krok. Méně dramatu, více důvěry. Neuvěřitelné, skoro jako kdyby lidé neměli rádi formuláře delší než hypotéka.
+
+## IR.1 Začni slibem akce, ne registračním formulářem
+
+Nejdřív napiš jednu větu, co si účastník odnese. Pokud ji neumíš napsat bez slov „inovativní“, „komplexní“ a „digitální transformace“, webinář ještě není připravený.
+
+Dobrá pozvánka odpovídá na čtyři otázky:
+
+- Pro koho to je: „Pro zakladatele B2B SaaS, kteří mají první zákazníky a chtějí zlepšit onboarding.“
+- Co se naučí: „Jak najít tři úniky v onboarding funnelu bez invazivní analytiky.“
+- Co dostane prakticky: „Checklist pro audit prvního týdne zákazníka.“
+- Kolik času to vezme: „45 minut ukázka, 15 minut otázky.“
+
+Příklad slabého slibu:
+
+> Přijďte na webinář o moderních trendech v zákaznickém úspěchu.
+
+Příklad silnějšího slibu:
+
+> Za 60 minut si navrhnete jednoduchý onboarding review, které ukáže, proč zákazníci po registraci neudělají první hodnotovou akci.
+
+Rozdíl je jednoduchý: první věta prodává mlhu, druhá prodává použitelný výsledek.
+
+## IR.2 Registrační formulář drž na dietě
+
+U bezplatného obsahového webináře většinou stačí e-mail a volitelné jméno. Všechno ostatní musí mít jasný důvod. Telefon není „pro jistotu“. Velikost firmy není „protože segmentace“. Otázka „jaký máte rozpočet?“ u edukativní akce působí jako obchodní přepadovka v kostýmu vzdělávání.
+
+Praktická datová tabulka:
+
+| Pole | Výchozí rozhodnutí | Kdy dává smysl |
+| --- | --- | --- |
+| E-mail | Povinné | Poslání odkazu, připomínky a materiálů |
+| Jméno | Volitelné | Lidské oslovení v komunikaci |
+| Firma | Volitelné | B2B kontext, pokud se používá jen agregovaně |
+| Role | Volitelné | Přizpůsobení obsahu publiku, ne tvrdý scoring jednotlivce |
+| Telefon | Ne | Jen u placené konzultace nebo výslovné žádosti o zavolání |
+| Souhlas s newsletterem | Oddělený | Nesmí být schovaný jako podmínka účasti |
+
+U formuláře napiš srozumitelný mikrotext:
+
+> E-mail použijeme k poslání odkazu na webinář, jedné připomínky a materiálů po akci. Newsletter je volitelný a můžete ho odmítnout bez dopadu na účast.
+
+Tohle je malý text, ale velký signál. Říká: nejsme datový křeček, víme proč se ptáme.
+
+## IR.3 Přístup k akci navrhni bez sledovacího rodea
+
+Nejjednodušší privacy-first varianta je individuální registrační odkaz, který vede na neutrální stránku s tlačítkem „Připojit se“. Pokud potřebuješ měřit zdroj registrace, použij raději vlastní landing page, jednoduché UTM parametry a serverové agregace než sadu reklamních pixelů.
+
+Doporučený tok:
+
+1. Pozvánka vede na vlastní stránku webináře.
+2. Formulář ukládá minimum údajů do vlastního CRM nebo jednoduché tabulky s omezeným přístupem.
+3. Potvrzovací e-mail obsahuje kalendářový soubor a odkaz na stránku s připojením.
+4. Samotný odkaz na místnost neposílej do veřejného HTML archivu.
+5. Po akci smaž technické jednorázové tokeny, které už nejsou potřeba.
+
+Pokud používáš odkazy z partnerů, neukládej kompletní historii prokliků na úrovni osoby, pokud ji nepotřebuješ. Pro obchodní rozhodnutí často stačí agregace: zdroj, počet registrací, počet účastí, počet relevantních follow-upů. Detektivní román o každém kliknutí není strategie, je to budoucí úklidová četa.
+
+Technická drobnost: nastav `Referrer-Policy` tak, aby se citlivé URL parametry z registračních stránek zbytečně neposílaly dál třetím stranám. MDN popisuje, že hlavička `Referrer-Policy` řídí, kolik informací prohlížeč předá v hlavičce `Referer`: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Referrer-Policy
+
+## IR.4 Nahrávka není věčná trofej
+
+Nahrávání webináře je užitečné, ale musí být jasné předem. Účastník má vědět, jestli se nahrává, co bude v záznamu, kde bude uložený, kdo k němu bude mít přístup a jak dlouho bude dostupný. Prakticky: nahrávej prezentaci a hlas řečníků, ne seznam účastníků, chat s osobními detaily a interní debug okna.
+
+Bezpečný postup:
+
+- Před začátkem řekni, zda se nahrává a k čemu bude záznam použit.
+- Pokud čteš otázky z chatu, anonymizuj je při vyslovení: „Padl dotaz k onboarding e-mailům…“
+- Záznam před zveřejněním projdi a vystřihni osobní údaje, interní URL, zákaznické názvy a náhodně otevřené záložky.
+- Nastav datum revize nebo stažení záznamu, například po 12 měsících.
+- Ulož původní záznam s omezeným přístupem a publikuj raději upravenou verzi.
+
+U placených nebo uzavřených B2B akcí přidej do potvrzovacího e-mailu krátkou větu:
+
+> Akce bude nahrávána pro registrované účastníky. Do veřejného výstupu nepůjdou jména účastníků, chat ani neveřejné dotazy bez dodatečného souhlasu.
+
+## IR.5 Chat a Q&A jsou obsah, ne skládka dat
+
+Otázky účastníků bývají nejlepší část webináře. Zároveň v nich lidé často nechtěně sdílí citlivé informace: názvy klientů, interní čísla, screenshoty, problémy se zaměstnanci nebo konkrétní dodavatele. Proto chat neber jako automatický marketingový materiál.
+
+Pravidla pro moderátora:
+
+- Na začátku řekni: „Nepište prosím do chatu citlivá zákaznická data, interní URL ani osobní údaje.“
+- Dotazy pro veřejné zodpovězení parafrázuj.
+- Pokud někdo pošle citlivý detail, nečti ho nahlas a po akci ho z exportu smaž nebo anonymizuj.
+- Export chatu ukládej jen tehdy, když z něj vzniká konkrétní výstup: FAQ, článek, produktový insight.
+- Nepřidávej účastníky do segmentů podle citlivých problémů, které popsali v otázce.
+
+Praktický výstup z Q&A může být jednoduchý:
+
+| Dotaz | Téma | Odpověď do FAQ | Citlivé detaily odstraněny? |
+| --- | --- | --- | --- |
+| Jak poznáme špatný onboarding? | Aktivace | Sledujte první hodnotovou akci a ruční vzorky neúspěšných účtů. | Ano |
+| Můžeme poslat záznam týmu? | Distribuce | Ano, pokud licence nebo podmínky akce dovolují interní sdílení. | Ano |
+
+## IR.6 Follow-up má pomáhat, ne nahánět
+
+Po webináři neposílej pět e-mailů typu „jen se připomínám“. Připomínáš se. Všichni to víme. Lepší je poslat jeden užitečný follow-up a pak dát člověku jasnou volbu.
+
+Dobrý follow-up obsahuje:
+
+- odkaz na slíbené materiály,
+- stručné shrnutí tří hlavních myšlenek,
+- checklist nebo šablonu,
+- jednu přirozenou další akci,
+- možnost odhlášení nebo odmítnutí další komunikace.
+
+Šablona:
+
+> Díky za účast na webináři o onboarding review. Tady je záznam, checklist a krátké shrnutí. Pokud chcete, můžeme vám jednou projít první týden vašeho zákazníka a najít dvě největší brzdy. Když další e-maily k tomuto tématu nechcete, stačí napsat „neposílat“ nebo použít odhlášení.
+
+Pokud někdo nebyl přítomen, neposílej mu manipulativní „škoda, že jste to zmeškali“ v pěti variantách. Pošli záznam a materiály. Hotovo. Dospělí lidé umí kliknout, když chtějí.
+
+## IR.7 Recykluj obsah bez recyklace osobních údajů
+
+Webinář by neměl žít jen hodinu. Udělej z něj článek, checklist, krátký návod, interní playbook, sekci dokumentace nebo sérii krátkých příspěvků na vlastním webu. Recykluj myšlenky, ne osobní údaje účastníků.
+
+Bezpečný repurposing postup:
+
+- Vytáhni obecné otázky, ne identifikovatelné příběhy.
+- Citace používej jen se souhlasem a ideálně po autorizaci finální věty.
+- Screenshoty nahraď syntetickými ukázkami.
+- Záznam doplň textovým shrnutím, aby nebyl jediným zdrojem hodnoty.
+- Publikuj výstupy na vlastním webu s RSS a přímou URL, ne jen na platformě, která drží publikum jako rukojmí.
+
+Codyho komentář: webinář je často nejlepší surovina pro long-form obsah, protože vzniká z reálných otázek. Jen ji před publikací očisti jako zeleninu. Nikdo nechce v salátu tokeny, e-maily a názvy klientů.
+
+## IR.8 Checklist privacy-first webináře
+
+Před akcí:
+
+- [ ] Pozvánka slibuje konkrétní výsledek pro jasné publikum.
+- [ ] Registrační formulář sbírá jen e-mail a skutečně potřebná volitelná pole.
+- [ ] Newsletter nebo obchodní komunikace mají oddělenou volbu.
+- [ ] Potvrzovací e-mail vysvětluje připomínky, materiály a případné nahrávání.
+- [ ] Přístup k registračním datům má jen tým, který je opravdu potřebuje.
+- [ ] Landing page nepoužívá zbytečné reklamní pixely a má rozumnou `Referrer-Policy`.
+
+Během akce:
+
+- [ ] Moderátor upozorní, že se do chatu nemají psát citlivá data.
+- [ ] Dotazy se při veřejném zodpovězení parafrázují.
+- [ ] Nahrávka nezachycuje zbytečně seznam účastníků, chat ani interní okna.
+- [ ] Incidentní nebo citlivé dotazy se přesunou do soukromé podpory.
+
+Po akci:
+
+- [ ] Follow-up obsahuje slíbené materiály a jednu jasnou další akci.
+- [ ] Chat a Q&A jsou očištěné od osobních a zákaznických detailů.
+- [ ] Záznam má vlastníka, místo uložení a datum revize nebo stažení.
+- [ ] Agregovaně se vyhodnotí zdroj registrací, účast a obchodní dopad.
+- [ ] Vznikne evergreen výstup na vlastním webu: článek, checklist nebo FAQ.
+
+## Codyho komentář
+
+Webináře nejsou problém. Problém je, když se z edukace udělá skrytý lead scoring a z účastníka chodící cookie. Privacy-first přístup je tady obchodně výhodný: člověk ví, proč se registruje, dostane slíbenou hodnotu a nemá pocit, že si za jeden checklist koupil doživotní sledovací náramek.
+
+## Zdroje k příloze
+
+- MDN Web Docs: `Referrer-Policy` a řízení údajů posílaných v hlavičce `Referer`: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Referrer-Policy
+- Evropská komise: právní důvody zpracování osobních údajů podle GDPR pro firmy a organizace: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/legal-grounds-processing-data_en
+- EDPB: praktický průvodce pro malé podniky ke zpracování osobních údajů zákonným způsobem: https://www.edpb.europa.eu/sme/be-compliant/process-personal-data-lawfully_en
+
+## Shrnutí přílohy
+
+Privacy-first webinář stojí na jasném slibu, krátkém formuláři, férovém nahrávání, opatrné práci s chatem a užitečném follow-upu. Cílem není získat maximum dat o účastníkovi, ale vytvořit důvěru, praktickou hodnotu a obsah, který může žít dál na vlastním webu bez sledovacího cirkusu.
+
+
 ## Pracovní log
+
+- 2026-08-17: Přidána příloha IR o privacy-first webinářích a online eventech: registrační minimum, přístup bez sledovacího rodea, nahrávky, Q&A, follow-up, recyklace obsahu a checklist.
+- 2026-08-17: Přidána příloha IQ o referencích, případových studiích a sociálním důkazu: konkrétní výsledky, souhlas s logem a citací, bezpečné případové studie, transparentní recenze, brzdy automatizace, knihovna důkazů a privacy-first checklist.
 - 2026-08-17: Obnovena poškozená verze e-booku z předchozího zdravého commitu a přidána příloha IP o churnu, offboardingu a win-back komunikaci bez stalkingu: zrušení účtu, důvody odchodu, export, retence, segmentace, šablony a checklist.
 - 2026-08-17: Přidána příloha IO o renewalech a upsellu v B2B SaaS: evidence zákaznické hodnoty, hodnotové signály místo sledování jednotlivců, férový upsell, komunikační limity, renewal review, retence obchodních dat a privacy-first checklist.
 - 2026-08-17: Přidána příloha IN o customer health score bez šmírování: účel score, výběr hodnotových signálů, vysvětlitelné důvody, omezení profilování jednotlivců, zákaz automatických trestů, retence historie, kontrola falešných poplachů a privacy-first checklist.
