@@ -40686,7 +40686,199 @@ Komunita není místo, kde značka vlastní zákazníky. Je to prostor, který s
 Privacy-first komunita má jasný účel, konkrétní pravidla, střídmé notifikace, moderaci a plán, jak převádět opakované dotazy do veřejné dokumentace. Neřeší citlivé účty ve veřejných vláknech, neměří lidi jako sportovní tabulku a neuvězní znalosti v nástroji bez exportu. Dobrá komunita není datová skládka; je to bezpečný most mezi produktem, podporou a zákaznickou zkušeností.
 
 
+# Příloha IV: PR, media kit a tiskové výstupy bez sledovacích odkazů, falešné exkluzivity a datového chaosu
+
+PR u malého SaaS týmu často začíná nevinně: někdo chce poslat tiskovou zprávu, dát novinářům logo, připravit příběh zakladatele a nasdílet pár screenshotů. Pak se přidá tabulka kontaktů, zkracovač odkazů, sledovací parametry, nahrávky rozhovorů, složka s fotkami, starý pitch deck, interní čísla a poznámky typu „tenhle novinář odpovídá jen když ho třikrát urgneš“. Gratuluju, z media kitu je najednou CRM bez pravidel a s náladou zapomenutého šuplíku.
+
+Privacy-first PR neznamená, že firma nesmí být vidět. Znamená to, že viditelnost nestaví na špinavých seznamech, skrytém měření a bezhlavém sdílení souborů. Dobré PR má být opakovatelné, pravdivé, snadno ověřitelné a bezpečné pro lidi uvnitř i venku.
+
+## IV.1 Media kit je produktová dokumentace pro veřejnost
+
+Media kit není hromada assetů „někde na disku“. Je to veřejná nebo poloveřejná stránka, která šetří čas novinářům, partnerům, pořadatelům akcí i týmu. Když ho připravíš dobře, nemusíš pokaždé ručně posílat logo, bio, screenshoty a větu „prosím použijte aktuální verzi“.
+
+Základní obsah media kitu:
+
+| Položka | Co obsahuje | Privacy-first poznámka |
+| --- | --- | --- |
+| Krátký popis firmy | 1 věta, 1 odstavec, delší boilerplate | Bez přehnaných claimů a neověřitelných superlativů |
+| Logo a vizuály | SVG/PNG, světlá/tmavá varianta, pravidla použití | Soubor bez skrytých metadat, jasná licence použití |
+| Produktové screenshoty | Anonymizované nebo syntetické účty | Žádná reálná zákaznická data, e-maily ani interní ID |
+| Zakladatelé a tým | Schválené fotky, bio, role, odkazy | Jen osoby, které s tím souhlasí a vědí, kde se fotky používají |
+| Kontakty | press e-mail, bezpečnostní kontakt, obchodní kontakt | Oddělené účely, ne osobní telefon v každé prezentaci |
+| Fakta a čísla | rok založení, trhy, milníky, vybrané metriky | Jen čísla, která lze obhájit a aktualizovat |
+| Archiv výstupů | tiskové zprávy, zmínky, podcasty | Přímé odkazy, ne embed zoo plná trackerů |
+
+Nejlepší media kit je normální URL na vlastním webu, ne sdílená složka s náhodnými právy. URL se dá aktualizovat, indexovat, citovat a poslat bez vysvětlování. Pokud některé materiály nemají být veřejné, odděl je do neveřejné složky s expirací přístupu.
+
+## IV.2 Tisková zpráva má být ověřitelná, ne kouzelnická mlha
+
+Slabá tisková zpráva křičí „revoluční platforma mění budoucnost“. Silná tisková zpráva říká, co se stalo, proč je to důležité, koho se to týká, jak to ověřit a s kým mluvit dál.
+
+Praktická struktura:
+
+1. Titulek s konkrétní novinkou.
+2. Perex do tří vět: co, pro koho, proč teď.
+3. Kontext problému a trhu bez nafouknutých statistik.
+4. Popis produktu, funkce, partnerství nebo výsledku.
+5. Citace zakladatele nebo zákazníka, která přidává názor, ne opakuje perex.
+6. Ověřitelná fakta: datum, dostupnost, cena nebo rozsah.
+7. Odkazy na media kit, produkt, dokumentaci a kontakt.
+
+Příklad lepší věty:
+
+> „Dreamind spouští privacy-first analytický modul pro evropské SaaS týmy, který měří aktivaci účtů bez reklamních pixelů a bez profilování jednotlivých zaměstnanců zákazníka.“
+
+Příklad horší věty:
+
+> „Dreamind redefinuje datově řízenou budoucnost zákaznické zkušenosti pomocí průlomového AI řešení.“
+
+Ta druhá věta má sice LinkedIn vůni, ale informační hodnotu lehce pod úrovní prázdného toastu.
+
+## IV.3 Seznam médií není doživotní majetek firmy
+
+PR kontakty jsou osobní údaje, i když jde o pracovní e-mail novináře nebo producenta. Evropská komise připomíná, že organizace mají osobní údaje zpracovávat zákonně, transparentně, pro jasný účel a jen v nezbytném rozsahu: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en
+
+Prakticky to znamená:
+
+- Nesbírej kontakty „pro jistotu“, protože se jednou možná budou hodit.
+- U každého kontaktu drž důvod: proč je relevantní pro dané téma.
+- Odděl novináře, partnery, influencery, zákazníky a investory.
+- Neprodávej ani nepředávej seznam dál bez jasného právního a etického důvodu.
+- Udržuj datum posledního kontaktu a pravidelně maž nerelevantní záznamy.
+- Respektuj odhlášení, odmítnutí a větu „tohle mi neposílejte“.
+
+Minimalistický záznam PR kontaktu:
+
+| Pole | Doporučení |
+| --- | --- |
+| Jméno | Ano, pokud ho používáš pro oslovení |
+| E-mail | Ano, pracovní kontakt |
+| Médium/projekt | Ano, kvůli relevanci tématu |
+| Témata | Ano, stručně: SaaS, AI, regulace, podnikání |
+| Poslední kontakt | Ano, kvůli frekvenci a úklidu |
+| Osobní poznámky | Velmi opatrně; žádné drby, zdravotní info ani soukromé detaily |
+| Tracking otevření | Ne jako výchozí; u PR je lepší odpověď než pixel |
+
+Codyho překlad: jestli by ti bylo trapné ukázat poznámku člověku, o kterém ji píšeš, nepatří do CRM. Ano, i když je „jen interní“.
+
+## IV.4 Odkazy měř tak, aby nebyly malým sledovacím detektivem
+
+PR týmy rády vědí, kdo klikl, odkud přišel a co četl. Jenže zkracovače odkazů, unikátní tracking parametry pro každého novináře a pixelované e-maily mohou snadno překročit hranici rozumného měření.
+
+Privacy-first alternativa:
+
+- Používej přímé odkazy na vlastní doméně.
+- Pokud potřebuješ měřit kampaň, používej agregované serverové statistiky nebo střídmé UTM parametry podle kanálu, ne podle osoby.
+- Nedávej každému novináři unikátní odkaz, pokud k tomu nemáš jasný důvod a vysvětlení.
+- Nepoužívej tracking pixel v osobním PR e-mailu jako výchozí taktiku.
+- V media kitu nabídni RSS nebo changelog pro lidi, kteří chtějí novinky bez registrace.
+- U souborů preferuj stabilní URL s verzí: například `/media/logo-dreamind-2026.svg`.
+
+EDPB ve svých pokynech k souhlasu podle GDPR zdůrazňuje, že souhlas má být svobodný, konkrétní, informovaný a jednoznačný; to je dobrý důvod nebastlit sledování do každého e-mailu jen proto, že to nástroj umí: https://www.edpb.europa.eu/documents/guideline/guidelines-052020-on-consent-under-regulation-2016679_en
+
+Dobré měření PR výstupu:
+
+- kolik lidí navštívilo veřejnou tiskovou stránku,
+- které materiály se stahují nejčastěji,
+- odkud chodí agregovaný traffic,
+- kolik relevantních odpovědí přišlo,
+- které otázky se opakují a mají se doplnit do media kitu.
+
+Špatné měření PR výstupu:
+
+- kdo přesně otevřel e-mail v 7:42,
+- kdo si stáhl logo a pak neodpověděl,
+- remarketing na lidi, kteří četli tiskovou zprávu,
+- osobní skóre „mediální ochoty“ podle kliků.
+
+## IV.5 Screenshoty, decky a nahrávky čistě od začátku
+
+Největší privacy průšvih v PR často není text, ale příloha. Screenshot s reálným zákazníkem, demo video s e-mailovými adresami, pitch deck s interní roadmapou nebo nahrávka rozhovoru uložená navždy v nástroji, který nikdo nekontroluje.
+
+Před zveřejněním nebo odesláním materiálu projdi:
+
+- Jsou screenshoty ze syntetického demo účtu?
+- Neobsahují URL tokeny, interní ID, e-maily, faktury nebo zákaznická jména?
+- Jsou metadata souborů bezpečná a rozumně vyčištěná?
+- Je jasné, kdo schválil citaci a použití loga zákazníka?
+- Má nahrávka rozhovoru účel, vlastníka a retenční dobu?
+- Je deck oddělený na veřejnou, partnerskou a interní verzi?
+- Dá se stará verze stáhnout nebo přesměrovat, když už není pravdivá?
+
+U fotek lidí platí jednoduché pravidlo: souhlas není telepatie. Pokud používáš portrét zakladatele, člena týmu nebo zákazníka, měj jasně schválené, kde a jak se fotka smí použít. Evropská komise uvádí, že lidé mají při sběru osobních údajů dostat informace mimo jiné o účelu, době uložení a příjemcích dat: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/what-information-must-be-given-individuals-whose-data-collected_en
+
+## IV.6 PR workflow bez chaosu
+
+Malý tým nepotřebuje velký PR systém. Potřebuje jasný rytmus a vlastnictví.
+
+Jednoduchý proces:
+
+1. Nápad na výstup vznikne jako krátký brief: novinka, publikum, důkaz, termín.
+2. Tým ověří, jestli tvrzení sedí a jestli jsou citace schválené.
+3. Privacy kontrola projde přílohy, odkazy, seznam kontaktů a tracking.
+4. Výstup dostane jednu kanonickou URL na webu.
+5. Distribuce proběhne přes relevantní kontakty, RSS, přímé odkazy a vlastní kanály.
+6. Po týdnu se vyhodnotí odpovědi, publikace, otázky a úpravy media kitu.
+7. Po kampani se uklidí dočasné soubory, neveřejné odkazy a pracovní tabulky.
+
+Pro každou větší PR aktivitu si nech mini rozhodovací záznam:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Co oznamujeme? | Konkrétní novinka, ne obecná nálada |
+| Komu je to užitečné? | Segment médií, zákazníků nebo partnerů |
+| Jaký důkaz přikládáme? | Screenshot, číslo, reference, demo, dokumentace |
+| Jaká data zpracujeme? | Kontakty, odpovědi, případně nahrávky |
+| Jak dlouho data držíme? | Datum revize nebo smazání |
+| Co neměříme? | Otevření e-mailů, individuální kliky, remarketing |
+
+## IV.7 Checklist privacy-first PR a media kitu
+
+Před publikací media kitu:
+
+- Má media kit jednu kanonickou URL na vlastním webu?
+- Jsou loga, fotky a screenshoty aktuální a schválené?
+- Jsou produktové ukázky anonymizované nebo syntetické?
+- Obsahují soubory jen metadata, která tam mají být?
+- Je jasné, kdo smí mluvit za firmu a přes jaký kontakt?
+- Jsou staré verze materiálů přesměrované nebo označené jako archiv?
+
+Před rozesláním PR výstupu:
+
+- Je novinka konkrétní, pravdivá a ověřitelná?
+- Má každý kontakt důvod, proč mu zprávu posíláme?
+- Nepoužíváme unikátní sledovací odkazy pro jednotlivé osoby?
+- Neobsahují e-maily tracking pixely jako výchozí nastavení?
+- Je v e-mailu jednoduchá možnost říct „tohle mi neposílejte“?
+- Jsou citace, loga a zákaznické zmínky schválené?
+- Máme plán úklidu dočasných seznamů, nahrávek a sdílených složek?
+
+Po kampani:
+
+- Doplň do media kitu nejčastější otázky.
+- Ulož jen výstupy, které mají budoucí hodnotu.
+- Smaž dočasné exporty kontaktů a pracovní kopie.
+- Zkontroluj, jestli se někde nešíří starý boilerplate nebo staré logo.
+- Vyhodnoť výsledky agregovaně: odpovědi, publikace, návštěvnost stránky, kvalita dotazů.
+
+## Codyho komentář
+
+PR není magie, kde se realita přelakuje lesklou tiskovou zprávou. Je to disciplína důvěry. Když má firma čistý media kit, ověřitelná tvrzení, přímé odkazy a respekt ke kontaktům, působí dospěleji než konkurence s pixelovým cirkusem a prezentací pojmenovanou `final_v7_really_final_new.pdf`.
+
+## Zdroje k příloze
+
+- Evropská komise: principy GDPR pro organizace, včetně transparentnosti, účelového omezení, minimalizace a omezení uložení: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en
+- Evropská komise: informace, které mají lidé dostat při sběru osobních údajů: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/what-information-must-be-given-individuals-whose-data-collected_en
+- EDPB: Guidelines 05/2020 on consent under Regulation 2016/679: https://www.edpb.europa.eu/documents/guideline/guidelines-052020-on-consent-under-regulation-2016679_en
+- Your Europe: přehled GDPR povinností pro firmy, včetně transparentního informování a odpovědnosti za soulad: https://europa.eu/youreurope/business/governance-and-sustainability/digital-and-data-compliance/data-protection-gdpr/index_en.htm
+
+## Shrnutí přílohy
+
+Privacy-first PR stojí na veřejném media kitu, ověřitelných tvrzeních, střídmém seznamu kontaktů, přímých odkazech a čistých přílohách. Měří agregované signály, ne individuální sledovací stopy. Dobrá tisková komunikace nezneužívá pozornost novinářů ani data lidí kolem firmy; pomáhá rychle pochopit, co se stalo, proč je to důležité a kde najít bezpečné, aktuální materiály.
+
+
 ## Pracovní log
+- 2026-08-17: Přidána příloha IV o privacy-first PR, media kitu a tiskových výstupech: veřejný media kit, ověřitelná tisková zpráva, střídmá správa PR kontaktů, odkazy bez osobního trackingu, bezpečné screenshoty, workflow a checklist.
 - 2026-08-17: Přidána příloha IU o zákaznických komunitách: oddělení podpory a veřejné dokumentace, bezpečná pravidla, výběr nástroje podle datové mapy, moderace, střídmé notifikace, agregované měření a privacy-first checklist.
 - 2026-08-17: Přidána příloha IT o privacy-first co-marketingu a partnerských kampaních: hodnota pro publikum, role partnerů, oddělené souhlasy, agregované reporty, technická hygiena, follow-up a checklist.
 
