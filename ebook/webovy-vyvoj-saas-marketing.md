@@ -38945,7 +38945,225 @@ CLI pro SaaS má být produktové rozhraní, ne jen tenký obal nad endpointy. B
 
 ---
 
+# Příloha IL: Admin rozhraní a interní nástroje bez superadmin pekla, datového bufetu a auditní mlhy
+
+Admin rozhraní je nejnebezpečnější část SaaS produktu, která se často tváří jako „jen interní pomůcka“. Má přístup k zákazníkům, fakturám, support akcím, exportům, tokenům, incidentům a někdy i k funkcím, které veřejné API správně nikdy nenabídne. Když se admin postaví jako rychlá tabulka s tlačítkem „upravit všechno“, není to nástroj. Je to nabitá kuše položená vedle kávovaru.
+
+Privacy-first SaaS bere admin jako produkt se stejnou disciplínou jako zákaznické rozhraní: jasné role, minimální data na obrazovce, potvrzení rizikových akcí, auditní stopa, krátkodobý support přístup, bezpečné vyhledávání a pravidelný úklid oprávnění. Interní nástroj neznamená interní chaos. Znamená menší publikum, ale větší dopad chyby.
+
+## IL.1 Admin začíná seznamem prací, ne rolí
+
+Role „admin“ je pohodlná zkratka, dokud ji nedostane deset lidí a nikdo už neví, kdo co skutečně potřebuje. Lepší začít tím, jakou práci má interní člověk udělat.
+
+Typické práce v malém SaaS:
+
+- support najde zákazníka a pomůže s konkrétním problémem,
+- finance upraví fakturační údaje nebo dohledá platbu,
+- product zkontroluje agregované signály používání,
+- operations spustí export, obnovu nebo reindexaci,
+- security prověří podezřelé přihlášení nebo incident,
+- founder vidí stav produktu, ale nemá automaticky mazat zákaznická data.
+
+Z těchto prací pak vzniknou oprávnění. Ne obráceně. OWASP Authorization Cheat Sheet doporučuje mimo jiné výchozí odmítnutí přístupu a princip nejmenších oprávnění: https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html Pro admin to znamená jednoduché pravidlo: člověk má vidět a dělat jen to, co odpovídá jeho práci dnes, ne hypoteticky jednou v budoucnu.
+
+Praktická matice:
+
+| Práce | Vidí | Může měnit | Nesmí |
+| --- | --- | --- | --- |
+| Support L1 | profil účtu, stav integrací, poslední bezpečné události | poznámku k ticketu, resend ověřovacího e-mailu | export dat, billing, tokeny, obsah zpráv bez důvodu |
+| Finance | fakturační profil, platby, daňové údaje | fakturační kontakt, interní billing poznámku | přihlášení jako zákazník, produktová data |
+| Operations | joby, fronty, stav exportů | retry jobu, bezpečný reindex | ruční editace zákaznického obsahu |
+| Security | auditní události, rizikové přihlášení | revokace session, vynucení resetu | marketingové segmenty, obchodní poznámky |
+
+Mini-pravidlo: pokud neumíš oprávnění popsat slovesem, je moc široké. „Spravovat zákazníky“ je mlha. „Zobrazit billing stav“ a „revokovat aktivní session“ jsou práce.
+
+## IL.2 Výchozí obrazovka nemá být datový bufet
+
+Admin často láká k tomu, aby na detail zákazníka nacpal všechno: e-mail, telefon, adresa, faktury, logy, poslední requesty, poznámky, integrace, eventy, UTM, support historie a ideálně ještě graf, protože graf působí manažersky. Jenže přehlednost a minimalizace dat jsou dvě strany stejné mince.
+
+Evropská komise u GDPR principů připomíná, že organizace má zpracovávat jen osobní údaje nezbytné pro daný účel a uchovávat je jen po potřebnou dobu: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/overview-principles/what-data-can-we-process-and-under-which-conditions_en V adminu se to překládá velmi konkrétně: výchozí pohled má ukázat minimum pro rozhodnutí, citlivější detaily až po důvodu a oprávnění.
+
+Dobrá struktura detailu účtu:
+
+- nahoře: název účtu, stav, tarif, region provozu, vlastník účtu,
+- bezpečný support kontext: otevřené tickety, poslední neinvazivní události, stav integrací,
+- oddělený billing panel jen pro oprávněné role,
+- oddělený bezpečnostní panel pro session, tokeny a auditní události,
+- oddělený datový panel pro exporty, retenci a žádosti subjektů údajů,
+- tlačítka rizikových akcí mimo běžný proud obrazovky.
+
+Co neschovávej jen CSS collapsem:
+
+- celé payloady API requestů,
+- obsah zákaznických zpráv,
+- osobní údaje členů týmu, které nesouvisí s ticketem,
+- tokeny, secrets, cookies a session identifikátory,
+- interní poznámky z obchodu, pokud je support nepotřebuje.
+
+Privacy-first admin nemá být trezor s průhlednými dveřmi. Má být pracovní stůl: na stole je to, co člověk potřebuje k aktuální práci, ne celý sklad firmy.
+
+## IL.3 Vyhledávání musí brzdit zvědavost
+
+Interní vyhledávání je užitečné a rizikové zároveň. Pokud každý může hledat podle e-mailu, telefonu, jména, IP adresy, fakturačního údaje a části obsahu zprávy, vznikne z adminu interní vyšetřovací nástroj. To nechceš, pokud zrovna nestavíš špatný díl krimi seriálu.
+
+Rozděl vyhledávání podle účelu:
+
+- support hledá účet podle ticketu, domény, zákaznického ID nebo e-mailu z aktuální komunikace,
+- finance hledá podle čísla faktury, variabilního symbolu nebo billing kontaktu,
+- security hledá podle bezpečnostního identifikátoru, request ID, session ID hash nebo časového okna,
+- produkt pracuje s agregací, ne s vyhledáváním jednotlivců.
+
+Bezpečné vzory:
+
+- omez počet výsledků a neukazuj citlivé detaily v seznamu,
+- loguj důvod vyhledávání u citlivých dotazů,
+- pro citlivé identifikátory používej přesnou shodu místo volného fulltextu,
+- u interních poznámek odděl support poznámky od obchodních a bezpečnostních,
+- pravidelně kontroluj neobvyklé vzorce hledání.
+
+Vyhledávání podle e-mailu je často nutné. Vyhledávání „všude ve všem“ nutné skoro nikdy není. Pokud někdo potřebuje investigaci, dej mu speciální proces, ne univerzální adminové kladivo.
+
+## IL.4 Rizikové akce potřebují tření
+
+Produktový design často odstraňuje tření. Admin design ho musí někdy přidat. Ne proto, aby lidi trpěli, ale aby nešlo omylem udělat věc, kterou pak řeší právník, support a tři lidé s výrazem „aha“.
+
+Rizikové akce:
+
+- smazání nebo anonymizace účtu,
+- export zákaznických dat,
+- přihlášení jako zákazník nebo dočasný support access,
+- změna vlastníka účtu,
+- revokace tokenů a session,
+- ruční úprava fakturačních údajů,
+- vypnutí bezpečnostního omezení,
+- resend hromadné komunikace.
+
+Každá riziková akce má mít:
+
+1. jasný popis dopadu,
+2. kontrolu oprávnění blízko akce,
+3. důvod nebo vazbu na ticket,
+4. preview následků, pokud to jde,
+5. potvrzení konkrétní akcí, ne jen náhodným kliknutím,
+6. auditní událost,
+7. možnost bezpečného rollbacku nebo kompenzačního kroku, pokud dává smysl.
+
+Příklad textu před exportem:
+
+> „Export obsahuje osobní údaje členů účtu. Spouštěj ho jen na žádost oprávněné osoby nebo podle schváleného procesu. Export bude dostupný 24 hodin a akce se zapíše do audit logu.“
+
+Tohle není strašení. To je služba budoucímu já, které nebude v incidentu luštit, proč někdo klikl na tlačítko v pátek v 16:58.
+
+## IL.5 Support přístup nesmí být permanentní převlek
+
+„Login as customer“ je mocná funkce a častý zdroj rizik. Někdy je praktická, ale nemá být výchozí odpovědí na každý ticket. Lepší je postupovat od nejméně invazivní možnosti.
+
+Pořadí podpory:
+
+1. dokumentace a screenshot od zákazníka bez citlivých údajů,
+2. bezpečné diagnostické údaje z adminu,
+3. jednorázový zákaznický export relevantního nastavení,
+4. dočasný support access s důvodem, časovým limitem a audit logem,
+5. výjimečný zásah do dat přes schválený runbook.
+
+Support access nastav takto:
+
+- zákazník ho ideálně explicitně povolí v aplikaci,
+- přístup je časově omezený,
+- support vidí jen relevantní části účtu,
+- každá akce je auditovaná jako support identita, ne jako zákazník,
+- citlivé části se maskují, pokud nejsou nutné,
+- po skončení ticketu se přístup automaticky vypne.
+
+Nikdy nevydávej interní přístup za zákaznickou session bez stopy. Audit log má říct: „Jana ze supportu otevřela objednávky účtu kvůli ticketu #1234.“ Ne: „Zákazník provedl divné věci, asi v transu.“
+
+## IL.6 Admin logy mají dokazovat odpovědnost, ne sbírat obsah
+
+Admin audit log musí odpovědět na otázky: kdo, kdy, odkud, s jakým oprávněním, nad jakým objektem a proč provedl akci. Nemá ukládat celé payloady, tokeny, hesla nebo citlivý obsah. OWASP Logging Cheat Sheet uvádí, že do logů obvykle nepatří například access tokeny, hesla, session identifikátory, šifrovací klíče ani citlivé osobní údaje: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+
+Dobrá auditní událost:
+
+```json
+{
+  "event": "admin.customer.export_requested",
+  "actor_id": "usr_123",
+  "actor_role": "support_lead",
+  "account_id": "acc_456",
+  "reason_ref": "ticket_789",
+  "result": "allowed",
+  "request_id": "req_abc",
+  "created_at": "2026-08-17T09:00:00Z"
+}
+```
+
+Špatná auditní událost:
+
+```json
+{
+  "event": "export",
+  "admin": "jana@example.eu",
+  "all_customer_data": "...",
+  "token": "..."
+}
+```
+
+Audit log chraň před úpravou, omez k němu přístup a nastav retenci podle účelu. U bezpečnostních a administrativních akcí obvykle potřebuješ delší stopu než u debug logů, ale pořád ne nekonečnou skládku. Retence má být vědomé rozhodnutí, ne vedlejší efekt toho, že tabulka zatím nepřetekla.
+
+## IL.7 Interní nástroje musí mít vlastní release proces
+
+Admin se často mění rychleji než veřejná aplikace, protože „to je jen pro nás“. Právě proto potřebuje kontrolu. Jeden neotestovaný filtr v adminu může ukázat data cizího tenanta. Jedno špatné tlačítko může spustit export všem. Jeden debug banner může zobrazit token. Veselé interní improvizace, velmi smutné externí následky.
+
+Minimum release procesu pro admin:
+
+- každá nová obrazovka má vlastníka a popsaný účel,
+- každé nové pole má datovou klasifikaci,
+- každá riziková akce má test oprávnění a auditní událost,
+- každé vyhledávání má limity a důvod použití,
+- každá integrace s produkčními daty má staging se syntetickými daty,
+- změny v rolích procházejí review někoho mimo autora,
+- po nasazení se kontroluje, jestli logy neobsahují tajemství.
+
+Testy, které se vyplatí:
+
+- support role nevidí billing panel,
+- finance role nevidí obsah zákaznických dat,
+- product role vidí agregace, ne konkrétní osoby,
+- admin akce bez ticket důvodu selže,
+- export cizího tenanta selže,
+- audit log vznikne i při odmítnuté akci,
+- UI neschová pole jen vizuálně, ale server je opravdu neposílá.
+
+## IL.8 Checklist admin rozhraní a interních nástrojů
+
+- Má každá admin role popsanou konkrétní práci a nejmenší potřebná oprávnění?
+- Je výchozí detail zákazníka omezený na data nutná pro běžný support nebo provoz?
+- Jsou billing, security, exporty a citlivý obsah oddělené podle rolí?
+- Má interní vyhledávání limity, účel a bezpečné výsledky bez datového bufetu?
+- Vyžadují rizikové akce důvod, preview dopadu, potvrzení a auditní záznam?
+- Je support access časově omezený, dohledatelný a oddělený od identity zákazníka?
+- Neobsahují admin logy tokeny, session ID, hesla, secrets ani celé zákaznické payloady?
+- Testují se negativní scénáře oprávnění stejně poctivě jako šťastná cesta?
+- Má admin vlastní release checklist, datovou klasifikaci a vlastníka obrazovek?
+- Probíhá pravidelný úklid rolí, bývalých zaměstnanců, dočasných přístupů a starých interních nástrojů?
+
+## Codyho komentář
+
+Admin je místo, kde se pozná dospělost SaaS týmu. Ne podle toho, jestli má hezkou tabulku, ale podle toho, jestli interní pohodlí nikdy nepřebije zákaznickou důvěru. Můj pohled: nejlepší admin je trochu nudný, trochu přísný a velmi konkrétní. Když v něm nejde udělat velká chyba bez jasné stopy, vyhrál design i provoz.
+
+## Zdroje k příloze
+
+- OWASP Authorization Cheat Sheet — deny by default, least privilege a bezpečné řízení přístupu: https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html
+- OWASP Logging Cheat Sheet — doporučení k logování a hodnotám, které do logů nepatří: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+- Evropská komise — GDPR principy minimalizace dat a omezení uložení: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/overview-principles/what-data-can-we-process-and-under-which-conditions_en
+
+## Shrnutí přílohy
+
+Admin rozhraní není interní hračka, ale vysoce riziková produktová plocha. Privacy-first SaaS ho staví na konkrétní práci rolí, minimálním výchozím zobrazení dat, bezpečném vyhledávání, tření u rizikových akcí, časově omezeném support přístupu, auditních logách bez tajemství a vlastním release procesu. Superadmin pro všechno je rychlý jen do prvního incidentu. Pak je najednou nejpomalejší člověk v místnosti.
+
+---
+
 ## Pracovní log
+- 2026-08-17: Přidána příloha IL o admin rozhraní a interních nástrojích: role podle konkrétní práce, datové minimum na obrazovce, bezpečné vyhledávání, tření u rizikových akcí, časově omezený support access, auditní logy bez tajemství, release proces a privacy-first checklist.
 - 2026-08-17: Přidána příloha IK o CLI nástrojích pro SaaS: scénářové příkazy, bezpečné přihlášení bez tokenů v historii shellu, stabilní výstupy pro lidi i skripty, dry-run a potvrzení rizikových akcí, diagnostika bez tajemství, oddělený CI režim, bezpečná dokumentace a privacy-first checklist.
 - 2026-08-17: Přidána příloha IJ o SDK a klientských knihovnách: vztah SDK k OpenAPI kontraktu, názvy metod podle zákaznických scénářů, bezpečné defaulty, retry a idempotence, SemVer, typy chránící před datovým přebytkem, support mód bez citlivých logů, testování quickstartu a privacy-first checklist.
 - 2026-08-17: Přidána příloha II o API dokumentaci a developer experience: use-case struktura dokumentace, OpenAPI kontrakt, opravitelné chybové odpovědi podle Problem Details, realistický sandbox, bezpečné minimální příklady, datové poznámky u endpointů, revizní rytmus a privacy-first checklist.
