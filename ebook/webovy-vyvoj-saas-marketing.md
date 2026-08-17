@@ -40521,7 +40521,173 @@ Co-marketing je skvělý test důvěry mezi firmami. Když partner tlačí na �
 Privacy-first co-marketing stojí na jasné hodnotě, oddělených souhlasech, minimálním sdílení dat a uklizené technice. Partner nemá automaticky dostat celý seznam registrací jen proto, že přinesl publikum. Férová spolupráce sdílí agregace, předává kontakty jen na základě jasného záměru člověka a po kampani smaže dočasné datové stopy.
 
 
+# Příloha IU: Zákaznické komunity bez datového tábořiště, vendor lock-inu a notifikačního hluku
+
+Komunita kolem SaaS umí být fantastická: zákazníci si radí navzájem, tým rychleji vidí opakované problémy, produkt získává důvěryhodné nápady a nováček nemá pocit, že po registraci spadl do tiché studny. Jenže komunitní prostor se velmi snadno změní v datové tábořiště. Lidé píší reálné problémy, nahrávají screenshoty, zmiňují zákazníky, sdílí logy, kopírují interní texty a někdy omylem pošlou i věci, které by měly zůstat za dveřmi firmy.
+
+Privacy-first komunita nezačíná otázkou „Slack, Discord, Facebook skupina, nebo něco vlastního?“. Začíná otázkou, jakou práci má komunita dělat a jak má chránit lidi, kteří jí věří. Technologie je až druhý krok. Ano, nudné pořadí. Přesně proto funguje.
+
+## IU.1 Nejdřív odděl podporu, komunitu a veřejnou dokumentaci
+
+Jedna skupina nemá suplovat všechno. Když se do jednoho prostoru namíchá support, feature requesty, veřejné oznámení, interní workaroundy, fakturační dotazy a volné povídání, vznikne informační kompot. A kompot je dobrý na chalupě, ne v provozu SaaS.
+
+Rozděl kanály podle účelu:
+
+| Účel | Vhodný prostor | Co tam patří | Co tam nepatří |
+| --- | --- | --- | --- |
+| Veřejné návody | dokumentace, blog, znalostní báze | ověřené postupy, changelog, FAQ | osobní údaje zákazníků, interní poznámky |
+| Zákaznická komunita | fórum, moderovaná skupina, komentáře pod návody | otázky, tipy, obecné scénáře | tajné logy, fakturace, bezpečnostní incidenty |
+| Individuální podpora | ticket, e-mail, portál | konkrétní účet, smlouva, citlivý problém | veřejné řešení s identifikací zákazníka |
+| Produktový feedback | formulář, veřejný roadmap board, rozhovor | návrhy, hlasování, kontext použití | automatický export celé aktivity uživatelů |
+| Stav služby | status stránka, RSS, e-mail pro incidenty | dostupnost, údržba, incident updates | spekulace a neveřejné detaily incidentu |
+
+Komunita je dobrá na sdílení vzorů a zkušeností. Není dobrá na řešení konkrétních osobních nebo smluvních problémů. Jakmile dotaz vyžaduje práci s účtem, přesměruj ho do podpory.
+
+## IU.2 Pravidla komunity napiš jako bezpečnostní návod, ne jako školní řád
+
+„Buďte na sebe hodní“ je milé, ale nestačí. Komunitní pravidla mají lidem vysvětlit, jak se ptát bezpečně a co nikdy neposílat veřejně.
+
+Praktická pravidla:
+
+- Neposílej screenshoty s osobními údaji, e-maily, fakturami, tokeny, URL s tajnými parametry nebo zákaznickými záznamy.
+- Když potřebuješ ukázat problém, nahraď data syntetickými příklady.
+- Bezpečnostní problém nepiš do veřejné skupiny; použij bezpečnostní kontakt nebo private support kanál.
+- Neoznačuj jiné zákazníky bez jejich souhlasu.
+- Nevyužívej komunitu k obcházení podpory u citlivých účtů.
+- Pokud si nejsi jistý, pošli méně dat a popiš scénář slovy.
+
+Dobré pravidlo je konkrétní a použitelné. Slabé pravidlo říká „nesdílejte citlivé údaje“. Silné pravidlo říká „nesdílejte API tokeny, celé logy, e-mailové adresy zákazníků ani screenshoty faktur“.
+
+Krátký mikrotext do komunity:
+
+> „Pište sem obecné otázky a zkušenosti. Pro konkrétní účet, faktury, logy, bezpečnostní hlášení nebo osobní údaje použijte podporu. Když přidáváte screenshot, anonymizujte jména, e-maily, identifikátory a tokeny.“
+
+## IU.3 Vyber nástroj podle datové mapy, ne podle toho, kde už všichni jsou
+
+Nejrychlejší odpověď bývá „uděláme skupinu tam, kde už lidi mají účet“. To je pohodlné, ale privacy-first tým se ptá dál: kde jsou data, kdo je správcem prostoru, jaké jsou exporty, jak funguje mazání, jaké jsou retenční možnosti, jestli lze vypnout zbytečné integrace a zda je služba použitelná bez reklamního profilování.
+
+Výběrový checklist pro komunitní nástroj:
+
+- Umí export příspěvků, členů a nastavení ve formátu, který není vězeňská cela s API nápisem?
+- Jde nastavit evropský region nebo alespoň smluvně rozumně popsat transfery?
+- Umí oddělit veřejné, zákaznické a interní prostory?
+- Podporuje role moderátorů bez sdíleného superadmin účtu?
+- Má audit log pro moderátorské a administrátorské akce?
+- Lze vypnout reklamní pixely, zbytečné embedy a externí sledovací skripty?
+- Umí smazání nebo anonymizaci účtu v rozumném procesu?
+- Má API nebo export pro případ migrace?
+
+Evropská pravidla ochrany osobních údajů stojí mimo jiné na principech minimalizace, transparentnosti, účelového omezení a omezení uložení. Evropská komise tyto principy shrnuje v přehledu GDPR pro organizace: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en
+
+Codyho překlad do praxe: nevybírej komunitní platformu jen podle emotikonů a vláken. Emotikony jsou fajn, ale export dat je fajn víc, když za rok zjistíš, že potřebuješ odejít.
+
+## IU.4 Veřejný obsah drž veřejný a zákaznický obsah drž v hranicích
+
+Komunita často začne jako uzavřený prostor, ale nejlepší odpovědi by měly časem skončit ve veřejné dokumentaci. Tím snižuješ počet opakovaných dotazů a zároveň nevytváříš závislost na uzavřené platformě.
+
+Praktický proces:
+
+1. Zákazník položí dotaz v komunitě.
+2. Moderátor zkontroluje, jestli dotaz neobsahuje citlivá data.
+3. Pokud jde o obecný problém, odpověď se po ověření převede do dokumentace nebo FAQ.
+4. Do komunity se vrátí přímý odkaz na veřejný návod.
+5. Původní vlákno se označí jako vyřešené nebo se zamkne, pokud začíná sbírat osobní detaily.
+
+Takhle komunita krmí veřejnou znalostní bázi, ale nezveřejňuje zákaznický kontext. Je to pomalejší než copy-paste. Také je to výrazně méně hloupé.
+
+U veřejných komunit mysli na indexaci. Pokud může vyhledávač číst vlákna, piš pravidla ještě přísněji a moderuj rychleji. U uzavřených komunit zase mysli na falešný pocit bezpečí: „je to jen pro členy“ neznamená „můžeme sem dávat cokoliv“.
+
+## IU.5 Moderace je produktová funkce, ne dobrovolná brigáda po večerech
+
+Bez moderace komunita časem vyrobí tři věci: duplicity, šum a riziko. Moderace není cenzura. Je to údržba bezpečného prostoru.
+
+Moderátor má mít jasný runbook:
+
+- Jak reagovat na příspěvek s osobními údaji.
+- Kdy příspěvek skrýt, upravit nebo přesunout do podpory.
+- Jak kontaktovat autora a vysvětlit důvod zásahu.
+- Kdy eskalovat bezpečnostní hlášení.
+- Jak označovat odpovědi, které jsou oficiální.
+- Jak často uklízet neaktuální návody a připnuté příspěvky.
+
+Příklad reakce na rizikový příspěvek:
+
+> „Díky za detail. Schoval jsem screenshot, protože obsahoval e-mailové adresy a identifikátor účtu. Pošli nám prosím upravenou verzi bez osobních údajů, nebo to dořešíme přes podporu.“
+
+Tohle je lepší než veřejně vynadat uživateli. Lidé se učí z hranic, ne z trapného pranýřování.
+
+## IU.6 Notifikace a digesty nastav jako pomoc, ne jako sirénu
+
+Komunitní nástroj chce často posílat všechno všem. Nové vlákno, odpověď, zmínka, reakce, doporučený příspěvek, „už jste tu dlouho nebyli“. Gratuluju, právě jsi postavil malý notifikační ohňostroj v kapse zákazníka.
+
+Privacy-first nastavení:
+
+- Výchozí notifikace jen pro přímé odpovědi, zmínky a důležité systémové zprávy.
+- Týdenní digest jako volba, ne povinnost.
+- Oddělené nastavení pro produktové novinky, komunitní aktivitu a incidentní komunikaci.
+- Žádné skryté tracking pixely v komunitních e-mailech.
+- Přímý odkaz na preference v každém opakovaném e-mailu.
+- RSS nebo veřejný changelog pro lidi, kteří nechtějí další účet.
+
+Komunita má snižovat úzkost, ne ji dávkovat po notifikacích. Když někdo vypne digest, není to urážka značky. Je to člověk, který si chrání pozornost. Tleskám, tiše, bez push notifikace.
+
+## IU.7 Měř zdraví komunity střídmě
+
+Měření komunity svádí k žebříčkům aktivity jednotlivců. Kdo nejvíc píše, kdo nejvíc reaguje, kdo je „power user“. Jenže produktově často stačí agregace a kvalitativní signály.
+
+Měř užitečné věci:
+
+- počet nových otázek podle tématu,
+- podíl dotazů vyřešených odkazem na dokumentaci,
+- počet opakovaných problémů za měsíc,
+- čas do první odpovědi u veřejných dotazů,
+- počet příspěvků přesunutých do podpory kvůli citlivým datům,
+- nejčastější mezery v dokumentaci,
+- dobrovolné žádosti o beta test nebo rozhovor.
+
+Nemusíš profilovat jednotlivé členy, abys poznal, že onboardingová dokumentace mate lidi ve třetím kroku. A pokud už měříš aktivitu uživatelů, popiš účel, retenci a přístup. Evropská komise shrnuje, že lidé mají při sběru osobních údajů dostat jasné informace o účelu, právním základu, době uložení a příjemcích dat: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/what-information-must-be-given-individuals-whose-data-collected_en
+
+## IU.8 Checklist privacy-first zákaznické komunity
+
+Před spuštěním:
+
+- Víme, jestli komunita řeší podporu, učení, feedback, nebo vztah se značkou?
+- Máme oddělené kanály pro veřejné návody, komunitu a individuální podporu?
+- Jsou pravidla konkrétní v tom, jaká data lidé nemají sdílet?
+- Má platforma export, rozumné role, audit log a srozumitelnou datovou mapu?
+- Umíme odkázat na bezpečnostní kontakt mimo veřejné vlákno?
+- Máme moderátorský runbook pro citlivé příspěvky?
+- Jsou notifikace výchozí střídmé a preference snadno dostupné?
+- Neobsahují komunitní e-maily tracking pixely ani zbytečné profilování?
+- Existuje proces, jak dobré odpovědi převést do veřejné dokumentace?
+- Máme retenční plán pro stará vlákna, exporty a neaktivní účty?
+
+Po spuštění:
+
+- Jednou měsíčně projdi nejčastější dotazy a přepiš je do dokumentace.
+- Uklízej připnuté příspěvky, aby z nich nebyla archeologie roadmapy.
+- Kontroluj, jestli moderace nepřesouvá citlivé případy pozdě.
+- Sleduj agregované signály, ne žebříčky „nejhodnějších zákazníků“.
+- Ověř, že export a smazání účtu fungují i mimo demo prezentaci dodavatele.
+
+## Codyho komentář
+
+Komunita není místo, kde značka vlastní zákazníky. Je to prostor, který si od nich půjčuje pozornost a důvěru. Když ho postavíš jako další akviziční past, lidé to ucítí. Když ho postavíš jako bezpečné místo pro učení, časem vznikne něco cennějšího než „engagement“: společná paměť produktu.
+
+## Zdroje k příloze
+
+- Evropská komise: principy GDPR pro organizace, včetně minimalizace, účelového omezení, transparentnosti a omezení uložení: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en
+- Evropská komise: informace, které mají lidé dostat při sběru osobních údajů: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/what-information-must-be-given-individuals-whose-data-collected_en
+- EDPB: Guidelines 07/2020 k rolím správce, zpracovatele a společných správců: https://www.edpb.europa.eu/public-consultations/guidelines-072020-on-the-concepts-of-controller-and-processor-in-the-gdpr_en
+- OWASP: Logging Cheat Sheet k bezpečnému logování událostí bez ukládání citlivých dat: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+
+## Shrnutí přílohy
+
+Privacy-first komunita má jasný účel, konkrétní pravidla, střídmé notifikace, moderaci a plán, jak převádět opakované dotazy do veřejné dokumentace. Neřeší citlivé účty ve veřejných vláknech, neměří lidi jako sportovní tabulku a neuvězní znalosti v nástroji bez exportu. Dobrá komunita není datová skládka; je to bezpečný most mezi produktem, podporou a zákaznickou zkušeností.
+
+
 ## Pracovní log
+- 2026-08-17: Přidána příloha IU o zákaznických komunitách: oddělení podpory a veřejné dokumentace, bezpečná pravidla, výběr nástroje podle datové mapy, moderace, střídmé notifikace, agregované měření a privacy-first checklist.
 - 2026-08-17: Přidána příloha IT o privacy-first co-marketingu a partnerských kampaních: hodnota pro publikum, role partnerů, oddělené souhlasy, agregované reporty, technická hygiena, follow-up a checklist.
 
 - 2026-08-17: Přidána příloha IS o affiliate, partnerských doporučeních a referral programech: transparentní disclosure, serverové měření, bezpečná práce s referrerem, kontrola partnerů, redakční integrita a privacy-first checklist.
