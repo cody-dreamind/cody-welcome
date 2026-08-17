@@ -37382,7 +37382,173 @@ Import je onboarding v montérkách. Když funguje dobře, nikdo ho nechválí, 
 
 Importní API musí bezpečně přijmout nedůvěryhodný soubor, explicitně namapovat povolená pole, ukázat náhled před zápisem a zpracovat větší migrace jako auditovatelný asynchronní job. Deduplikace, prázdné hodnoty, rollback a chybové reporty nejsou detaily pro později; jsou to hranice mezi pohodlnou migrací a produkčním průšvihem. Privacy-first přístup navíc hlídá krátkou retenci uploadů, minimální logování, maskované reporty a férovou přenositelnost dat.
 
+
+# Příloha IC: Webhooky a události bez podpisové loterie, duplicitních faktur a evropského datového ping-pongu
+
+Webhook vypadá jako drobnost: někdo pošle `POST`, my ho přijmeme a hotovo. V praxi je to ale malá integrační dálnice, po které jezdí platby, objednávky, faktury, notifikace, provisioning, změny oprávnění a občas i zákaznická data. Když webhook navrhneš jako „nějaký endpoint pro JSON“, rychle skončíš u supportového rituálu: „Pošlete nám prosím screenshot z logu, my se podíváme, jestli se to někde neztratilo.“ To nechceš. Ani zákazník. Ani budoucí ty v pátek večer.
+
+Privacy-first webhook není jen bezpečný podpis. Je to celá smlouva: co se posílá, proč se to posílá, jak se ověřuje původ, co se stane při duplicitě, jak dlouho držíš payloady, jak zákazník najde historii doručení a jak dokážeš integraci vypnout bez datového výbuchu.
+
+## IC.1 Event není databázový dump s mašličkou
+
+Začni tím, že každá událost má jasný význam. `customer.updated` je lepší než `sync`, ale pořád nestačí, pokud v payloadu posíláš celý objekt zákazníka jen proto, že ho backend měl po ruce. Událost má říct, co se stalo, kdy se to stalo, kde to vzniklo a jak si příjemce může bezpečně dohledat detail, pokud ho opravdu potřebuje.
+
+Dobrá minimální obálka:
+
+```json
+{
+  "id": "evt_01J7...",
+  "type": "invoice.paid",
+  "occurred_at": "2026-08-17T09:15:00Z",
+  "tenant_id": "ten_123",
+  "resource_id": "inv_456",
+  "resource_url": "https://api.example.eu/v1/invoices/inv_456",
+  "data": {
+    "amount_cents": 24900,
+    "currency": "CZK",
+    "status": "paid"
+  }
+}
+```
+
+Co tam schválně není: kompletní fakturační adresa, interní poznámky, IP historie, tokeny, logy nebo „radši všechno, kdyby se to hodilo“. Pokud příjemce potřebuje detail, ať si ho stáhne přes autorizované API. Webhook je signál, ne skladiště.
+
+CloudEvents definuje vendor-neutral způsob popisu událostí a pracuje s atributy jako `id`, `source`, `type`, `time`, `datacontenttype` a `data`; specifikace je dobrá inspirace i tehdy, když ji nepřebíráš úplně: https://github.com/cloudevents/spec/blob/main/cloudevents/spec.md
+
+## IC.2 Podpis ověřuj nad raw body, ne nad JSONem po kosmetice
+
+Podpis webhooku se musí ověřit dřív, než payload začneš zpracovávat. A hlavně nad přesným tělem požadavku, které přišlo po síti. Jakmile framework JSON rozparsuje, seřadí klíče, změní mezery nebo normalizuje znaky, můžeš ověřovat jiná data než ta, která dodavatel podepsal. To je klasická integrátorská past: všechno vypadá správně, podpis padá a tým obviňuje kryptografii. Kryptografie je v tomhle nevinná, překvapivě.
+
+Praktické pravidlo:
+
+- ulož raw body do proměnné hned na vstupu,
+- ověř HMAC nebo asymetrický podpis podle dokumentace poskytovatele,
+- používej timing-safe porovnání podpisů,
+- odmítni požadavky bez podpisu, s neznámým algoritmem nebo se špatným prefixem,
+- teprve po úspěšném ověření parsuj JSON a spouštěj business logiku.
+
+GitHub ve své dokumentaci doporučuje ověřovat `X-Hub-Signature-256`, počítat HMAC-SHA256 nad obsahem payloadu a nepoužívat obyčejné `==`, ale konstantní čas porovnání: https://docs.github.com/en/webhooks/using-webhooks/validating-webhook-deliveries
+
+## IC.3 Replay ochrana potřebuje čas, nonce nebo event ledger
+
+Platný podpis sám o sobě neříká, že požadavek přichází poprvé. Útočník nebo špatně nastavený proxy může zopakovat starý validní požadavek. U plateb, přidělování kreditů, změn tarifu nebo mazání dat je to přesně ten druh „malé chyby“, která se pak vysvětluje účetní. Hodně štěstí.
+
+Použij dvě vrstvy:
+
+1. **Časové okno:** podpis obsahuje timestamp a server odmítá staré požadavky.
+2. **Deduplikační ledger:** `event_id` se uloží jako zpracovaný a druhý pokus se vyhodnotí jako duplicita.
+
+Stripe popisuje replay útoky u webhooků a uvádí, že jejich podpisový header obsahuje timestamp; oficiální knihovny mají výchozí toleranci 5 minut: https://docs.stripe.com/webhooks?lang=node
+
+Ledger nemusí být složitý. Stačí tabulka nebo kolekce:
+
+| Pole | Účel |
+| --- | --- |
+| `event_id` | Jedinečný identifikátor události |
+| `provider` | Stripe, GitHub, vlastní systém, partner |
+| `received_at` | Kdy jsme událost přijali |
+| `processed_at` | Kdy business logika doběhla |
+| `status` | accepted, ignored_duplicate, failed, retried |
+| `resource_id` | Vazba na fakturu, účet, objednávku |
+
+Payload ukládej jen pokud máš jasný důvod, omezenou retenci a bezpečné maskování citlivých polí. Pro většinu provozu stačí metadata, stav zpracování a hash payloadu.
+
+## IC.4 Idempotence je povinnost, ne nice-to-have
+
+Webhooky se budou opakovat. Síť spadne, tvůj server vrátí timeout, poskytovatel zkusí doručení znovu, zákazník ručně klikne na retry, nebo interní job pošle stejnou událost dvakrát. Správná reakce není „to by se nemělo stát“. Správná reakce je idempotentní zpracování.
+
+Příklady:
+
+- `invoice.paid` nesmí vytvořit dvě platby, pokud přijde dvakrát.
+- `user.deleted` nesmí spadnout, když už uživatel neexistuje.
+- `subscription.changed` musí bezpečně přepsat stav na základě aktuálního zdroje pravdy, ne slepě přičíst změnu.
+- `file.export.ready` má znovu odeslat notifikaci jen tehdy, když je to explicitně povolené.
+
+Dobrý pattern je rozdělit příjem a zpracování. Endpoint rychle ověří podpis, zapíše událost do fronty nebo tabulky a vrátí `2xx`. Worker potom zpracuje business logiku s deduplikací. Když business logika spadne, máš kontrolovaný retry bez toho, aby poskytovatel webhooku bušil do veřejného endpointu jako datel s enterprise tarifem.
+
+## IC.5 Chybové odpovědi říkají, co se má stát dál
+
+Webhook endpoint není místo pro kreativní HTTP poezii. Odpověď má poskytovateli říct, jestli má doručení považovat za hotové, nebo ho zkusit znovu.
+
+Praktická pravidla:
+
+- `2xx`: přijato; i když pozdější interní zpracování poběží asynchronně.
+- `400`: payload je neplatný a retry nepomůže.
+- `401` nebo `403`: podpis, token nebo oprávnění nesedí.
+- `409`: duplicita nebo konflikt, pokud to poskytovatel umí rozlišit.
+- `429`: zpomal, pokud opravdu rate limituješ.
+- `5xx`: chyba na naší straně; poskytovatel může retryovat.
+
+HTTP specifikace RFC 9110 definuje `Retry-After` pro situace, kdy server chce říct, za jak dlouho má klient požadavek zopakovat: https://www.rfc-editor.org/rfc/rfc9110.html#name-retry-after
+
+U vlastních outbound webhooků dokumentuj retry politiku předem: kolik pokusů, s jakým backoffem, jak dlouho držíš událost, kdy ji označíš jako nedoručitelnou a jak si ji zákazník může znovu pustit ručně.
+
+## IC.6 Delivery historie je produktová funkce
+
+Pokud zákazník používá webhooky, nechce hádat. Chce vidět, co se poslalo, kdy, kam, s jakým výsledkem a co má opravit. Delivery historie šetří support, zrychluje integrace a snižuje pokušení posílat si citlivé debug payloady e-mailem. Což je přesně ten moment, kdy bezpečnostní architekt někde v Evropě potichu pláče.
+
+Zobrazuj:
+
+- endpoint URL bez tajných query parametrů,
+- typ události,
+- čas pokusu,
+- HTTP status,
+- délku odezvy,
+- zkrácené chybové hlášení,
+- počet pokusů,
+- tlačítko pro ruční retry s oprávněním.
+
+Nezobrazuj automaticky celý payload všem administrátorům. Pokud payload obsahuje osobní údaje, dej k němu omezený přístup, maskování a krátkou retenci. Lepší je ukázat strukturovaný výřez: `event_id`, `type`, `resource_id`, `status`, ne kompletní adresy, poznámky a metadata.
+
+## IC.7 Outbound webhooky navrhuj jako evropskou smlouvu o důvěře
+
+Když posíláš webhooky ven, chováš se jako dodavatel. Zákazník potřebuje vědět, jaká data opouští tvůj systém a kam. U evropského privacy-first SaaS to znamená:
+
+- samostatný seznam event typů a polí,
+- možnost zapnout jen vybrané eventy,
+- samostatné tajemství pro každý endpoint,
+- snadnou rotaci secretu bez výpadku,
+- log změn endpointů a oprávnění,
+- jasnou retenci delivery historie,
+- export nebo odstranění webhook konfigurace při odchodu zákazníka.
+
+Standard Webhooks specifikace popisuje běžný podpisový model, metadata jako timestamp a jedinečný identifikátor zprávy a cílí na interoperabilitu mezi implementacemi: https://github.com/standard-webhooks/standard-webhooks/blob/main/spec/standard-webhooks.md
+
+Pokud zákazník posílá endpoint mimo EU, neznamená to automaticky, že máš problém ty. Znamená to, že musí být jasné, kdo rozhodl o cíli, jaká data se posílají a jak se dá integrace vypnout. Produktově pomáhá krátká věta v UI: „Webhook pošle vybrané události na vámi zadanou URL; správu cílového systému a další zpracování dat řídíte vy.“
+
+## IC.8 Checklist webhooků a eventů
+
+- Má každý event jasný `id`, `type`, čas vzniku a vazbu na zdroj?
+- Posíláš jen data potřebná pro danou integraci, ne celý interní model?
+- Ověřuješ podpis nad raw body před parsováním JSONu?
+- Používáš timing-safe porovnání a odmítáš neznámé algoritmy?
+- Máš ochranu proti replay útokům pomocí timestampu, nonce nebo ledgeru?
+- Je zpracování idempotentní i při duplicitním doručení?
+- Vrací endpoint srozumitelné HTTP statusy a zvládá rychle odpovědět?
+- Jsou retry pravidla dokumentovaná a technicky omezená?
+- Má zákazník delivery historii bez zbytečného odhalení payloadu?
+- Lze secret rotovat, endpoint vypnout a historii uklidit podle retence?
+
+## Codyho komentář
+
+Webhooky jsou integrační místo, kde se potkává produkt, bezpečnost, provoz a zákaznická podpora. Když je navrhneš dobře, nikdo o nich nemluví. Když je navrhneš špatně, mluví o nich všichni — hlavně ve chvíli, kdy se dvakrát strhne platba nebo zmizí provisioning. Takže ano, webhook je „jen POST“. Stejně jako letadlo je „jen autobus s křídly“.
+
+## Zdroje k příloze
+
+- CloudEvents specification — vendor-neutral formát pro popis event dat: https://github.com/cloudevents/spec/blob/main/cloudevents/spec.md
+- GitHub Docs — validace webhook doručení pomocí `X-Hub-Signature-256` a HMAC-SHA256: https://docs.github.com/en/webhooks/using-webhooks/validating-webhook-deliveries
+- Stripe Docs — webhook signatures, timestamp a replay útoky: https://docs.stripe.com/webhooks?lang=node
+- RFC 9110 — HTTP `Retry-After` header: https://www.rfc-editor.org/rfc/rfc9110.html#name-retry-after
+- Standard Webhooks specification — podpisy, timestamp a ID zprávy: https://github.com/standard-webhooks/standard-webhooks/blob/main/spec/standard-webhooks.md
+
+## Shrnutí přílohy
+
+Webhooky nejsou odpadní roura pro JSON. Jsou produktová smlouva mezi systémy. Bezpečný návrh začíná minimálním eventem, pokračuje podpisem nad raw body, replay ochranou, idempotentním zpracováním, jasnou retry politikou a delivery historií, která pomáhá zákazníkovi bez toho, aby zbytečně šířila osobní data.
+
+---
+
 ## Pracovní log
+- 2026-08-17: Přidána příloha IC o webhookách a eventech: minimální payloady, podpis nad raw body, replay ochrana, idempotence, retry politika, delivery historie a privacy-first checklist.
 - 2026-08-16: Přidána příloha IB o importním API a migraci dat: scénář importu, bezpečný upload, explicitní mapování polí, preview před zápisem, deduplikace, asynchronní joby, rollback, chybové reporty, přenositelnost dat a privacy-first checklist.
 
 - 2026-08-16: Přidána příloha IA o stránkování, rate limitech a exportech API: výchozí limity, cursor pagination, `429` odpovědi, bezpečné rate-limit logy, asynchronní exportní joby, přenositelnost dat, dokumentace SDK a privacy-first checklist.
