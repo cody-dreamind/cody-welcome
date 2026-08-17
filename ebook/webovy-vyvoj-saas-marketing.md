@@ -38571,7 +38571,199 @@ API dokumentace je součást produktu. Má začínat scénáři, pokračovat př
 
 ---
 
+# Příloha IJ: SDK a klientské knihovny bez rozbitého kontraktu, tajných defaultů a zákaznických dat v debug módu
+
+API může být skvěle navržené, ale pokud k němu vydáš mizerné SDK, část zákazníků bude integrovat SDK, ne API. A SDK pak rozhoduje, jestli integrace používá správné limity, retry politiku, idempotenci, scopes, chybové typy a datové minimum. Jinými slovy: klientská knihovna je produktový povrch. Ne jen složka v repozitáři, kterou někdo jednou vygeneroval a od té doby se jí všichni bojí dotknout.
+
+U privacy-first SaaS je SDK navíc první místo, kde můžeš zabránit zbytečnému posílání dat. Dobré SDK vede vývojáře k minimálním payloadům, bezpečné konfiguraci a čitelným chybám. Špatné SDK zapne verbose logování, uloží token do špatného místa a tváří se překvapeně, když support dostane screenshot requestu s osobními údaji. Software umí být kreativní. Bohužel často v kategorii „ne, tohle jsme opravdu nechtěli“.
+
+## IJ.1 SDK není náhrada za dobrý API kontrakt
+
+SDK má zjednodušit používání API, ne zakrýt jeho chaos. Pokud je API nekonzistentní, SDK se rychle změní v hromadu speciálních výjimek, mapování a historických kompromisů. To bolí hlavně ve chvíli, kdy máš podporovat více jazyků.
+
+Než začneš vydávat SDK, zkontroluj:
+
+- endpointy mají konzistentní názvy, stavové kódy a chybové odpovědi,
+- OpenAPI kontrakt popisuje reálné requesty a odpovědi,
+- schémata rozlišují povinná, volitelná a citlivá pole,
+- stránkování, rate limity a idempotence jsou popsány jednotně,
+- autentizace a scopes jsou součástí kontraktu,
+- breaking změny mají jasnou verzi a migrační pravidla.
+
+OpenAPI Generator umí z OpenAPI specifikace generovat klientské knihovny, serverové stuby, dokumentaci i konfigurace pro různé jazyky: https://openapi-generator.tech/docs/generators/openapi/ To je užitečný základ, ale ne omluva pro slepé publikování výstupu. Generovaný kód potřebuje produktovou vrstvu: názvy metod, příklady, defaulty, retry pravidla, logování a testy.
+
+Praktické pravidlo: SDK může být generované uvnitř, ale veřejné rozhraní má působit ručně navržené. Vývojář nemá poznat, že mu zrovna do editoru přistál automat z YAML souboru s lehkou existenční krizí.
+
+## IJ.2 Veřejné metody pojmenuj podle práce zákazníka
+
+Integrátor nepřemýšlí v názvech interních tabulek. Přemýšlí v úkolech: vytvořit kontakt, najít fakturu, obnovit export, ověřit webhook, pozvat člena týmu. SDK by tomu mělo odpovídat.
+
+Slabé rozhraní:
+
+```ts
+client.postContacts({ body: { email: "eva@example.eu" } })
+```
+
+Lepší rozhraní:
+
+```ts
+client.contacts.create({ email: "eva@example.eu" })
+```
+
+Ještě lepší, pokud scénář potřebuje bezpečnostní vodítka:
+
+```ts
+client.contacts.create({
+  email: "eva@example.eu",
+  consentSource: "contact_form",
+})
+```
+
+Neznamená to cpát do SDK obchodní logiku zákazníka. Znamená to, že veřejné názvy mají odpovídat dokumentovanému modelu API. Když máš endpoint `POST /imports/{id}/confirm`, SDK metoda `imports.confirmPreview(importId)` říká víc než `imports.postImportAction()`.
+
+Mini-checklist názvů:
+
+- Používej doménové zdroje: `contacts`, `invoices`, `exports`, `webhooks`, `teamMembers`.
+- Vol operace podle práce: `create`, `update`, `archive`, `restore`, `confirm`, `cancel`, `retry`.
+- Vyhni se interním slovům: `tbl`, `dto`, `job2`, `legacy`, `handler`.
+- U destruktivních akcí používej explicitní názvy: `deletePermanently`, `revokeToken`, `cancelSubscription`.
+- Nepředstírej jednoduchost tam, kde je potřeba kontext: export, import a smazání dat mají mít samostatné helpery.
+
+## IJ.3 Bezpečné defaulty jsou důležitější než efektní quickstart
+
+Quickstart má být krátký, ale nesmí naučit špatné návyky. Pokud první příklad dá token do frontendového JavaScriptu, zapne nekonečný retry nebo loguje celé odpovědi, zákazníci to zkopírují. A pak se budeš tvářit, že tě překvapilo copy-paste. Nepřekvapilo. Jen jsi mu dal mapu.
+
+Bezpečné defaulty v SDK:
+
+- timeout je nastavený, ne nekonečný,
+- retry se používá jen pro bezpečné a dokumentované situace,
+- idempotency key se podporuje u plateb, objednávek, importů a dalších rizikových zápisů,
+- debug logy jsou vypnuté a nikdy nezahrnují tokeny, cookies, celé payloady ani osobní údaje,
+- uživatelský agent SDK obsahuje název a verzi klienta pro provozní diagnostiku,
+- produkční a sandbox prostředí jsou explicitní, ne odhadované podle nálady URL.
+
+HTTP sémantika není dekorace. RFC 9110 popisuje význam metod a odpovědí v HTTP: https://www.rfc-editor.org/rfc/rfc9110.html SDK by mělo respektovat rozdíl mezi čtením, zápisem, idempotentní operací a opakováním po chybě. Automatický retry na špatném místě umí vytvořit dvojí fakturu rychleji než junior s admin právy a pondělní kávou.
+
+Příklad opatrného retry pravidla:
+
+- opakuj `GET` při síťové chybě nebo `503`, pokud existuje limit pokusů,
+- respektuj `Retry-After` u `429` a `503`,
+- neopakuj `POST` bez idempotency key,
+- nikdy neopakuj požadavek po `401`, `403` nebo validační `422`,
+- do chybové zprávy vrať request ID, ne celý request.
+
+## IJ.4 Verze SDK musí sledovat kontrakt, ne interní náladu týmu
+
+Semantic Versioning definuje jednoduchý model `MAJOR.MINOR.PATCH`, kde major verze značí nekompatibilní změny veřejného API, minor kompatibilní přidání funkcí a patch kompatibilní opravy: https://semver.org/ U SDK je veřejné API nejen serverový endpoint, ale i názvy metod, typy, návratové hodnoty, chybové třídy a konfigurační volby.
+
+Rozbijí zákazníka například tyhle změny:
+
+- přejmenování metody,
+- změna typu návratové hodnoty,
+- přesun chybové třídy,
+- změna defaultního timeoutu tak, že začne padat dlouhý export,
+- odstranění podporovaného runtime,
+- změna serializace data nebo času.
+
+SDK changelog proto nemá říkat jen „regenerated from OpenAPI“. Má říct dopad:
+
+> `2.4.0` přidává `exports.createJob()` a typ `ExportFormat`. Neobsahuje breaking změny. Pokud používáte ruční volání `client.request("POST", "/exports")`, můžete přejít na helper, ale nemusíte.
+
+> `3.0.0` mění návratový typ `contacts.list()` kvůli cursor pagination. Migrace: použijte `for await (const contact of client.contacts.iterate())` nebo pracujte s `nextCursor`.
+
+Tohle šetří support i reputaci. Vývojáři nemají rádi překvapení v závislostech. Překvapení patří do narozeninového dortu, ne do produkčního deploye.
+
+## IJ.5 Typy mají chránit před datovým přebytkem
+
+Silné typy nejsou jen pohodlí editoru. Jsou brzda proti posílání polí, která API nepotřebuje. Pokud SDK dovolí předat libovolný objekt, integrátor často pošle celý interní model zákazníka včetně poznámek, segmentů, zdrojů a historických polí. Server to možná odmítne. Nebo hůř: přijme a zaloguje.
+
+Privacy-first SDK by mělo:
+
+- exportovat samostatné typy pro create, update, response a internal metadata,
+- neumožňovat neznámá pole tam, kde to jazyk dovolí,
+- dokumentovat citlivá pole přímo u typů,
+- nepoužívat univerzální `any` pro payloady jen proto, že generátor byl líný,
+- mít helpery pro stránkování a export, aby integrátor nestahoval vše do paměti,
+- vracet chybové typy bez citlivých detailů.
+
+Příklad myšlení:
+
+- `ContactCreateInput` obsahuje `email`, volitelné `name`, volitelné `company`.
+- `ContactResponse` může obsahovat `id`, `createdAt`, `updatedAt` a bezpečná metadata.
+- Interní pole jako `riskScore`, `sourceIp`, `internalNote` se do SDK typu pro běžného zákazníka vůbec nedostanou.
+
+To není jen technická čistota. Je to datová minimalizace zabudovaná do ergonomie. Nejlepší privacy nastavení je to, které zákazník používá, protože je nejjednodušší.
+
+## IJ.6 Logování, telemetry a support mód musí mít jasné hranice
+
+SDK často běží v prostředí zákazníka. To znamená, že jakákoliv telemetrie, automatické reportování chyb nebo update check musí být extrémně opatrné. Privacy-first výchozí stav: SDK neposílá autorovi SaaS žádnou dodatečnou telemetrii bez jasného zapnutí a dokumentace.
+
+Bezpečný support mód:
+
+- zákazník ho zapíná explicitně,
+- má časové omezení nebo jasný návod na vypnutí,
+- rediguje tokeny, cookies, e-maily, telefonní čísla a payloady,
+- loguje request ID, endpoint, status, dobu trvání a verzi SDK,
+- nikdy neposílá data automaticky třetí straně,
+- dokumentuje, jak výstup bezpečně sdílet se supportem.
+
+OWASP API Security Top 10 2023 upozorňuje mimo jiné na rizika kolem porušené autorizace, nadměrného vystavení dat, neomezené spotřeby zdrojů a bezpečnostní konfigurace API: https://owasp.org/API-Security/editions/2023/en/0x11-t10/ SDK tato rizika samo nevyřeší, ale může je zhoršit nebo zmírnit. Když helper bez ptaní stáhne všechny stránky API a zaloguje výsledky, zrovna nepomáhá. Když používá limity, request ID a střídmé chybové výstupy, pomáhá hodně.
+
+## IJ.7 Testuj SDK jako veřejný produkt
+
+SDK se netestuje jen tím, že projde build. Testuje se, jestli vývojář dokáže dokončit scénář podle dokumentace. Ideálně automaticky i ručně.
+
+Testovací sada pro SDK:
+
+- kontraktové testy proti sandbox API,
+- snapshoty generovaných typů u veřejného rozhraní,
+- testy chybových odpovědí a mapování Problem Details,
+- testy stránkování, rate limitu a retry chování,
+- testy redakce logů a support módu,
+- integrační quickstart spuštěný v čistém projektu,
+- kontrola, že README příklady opravdu kompilují nebo běží.
+
+Před vydáním nové verze si polož tři otázky:
+
+1. Rozbije to existující integraci?
+2. Naučí to nového zákazníka bezpečný postup?
+3. Nevede to k posílání, logování nebo ukládání zbytečných dat?
+
+Pokud u třetí otázky začne někdo říkat „to si zákazník může ohlídat sám“, zastav release. To je produktový kouřový alarm, ne okrajový detail.
+
+## IJ.8 Checklist SDK a klientských knihoven
+
+- Vychází SDK z aktuálního OpenAPI kontraktu a ručně upravené veřejné ergonomie?
+- Odpovídají názvy metod scénářům zákazníka místo interním názvům backendu?
+- Má SDK bezpečné defaulty pro timeouty, retry, idempotenci, sandbox a produkci?
+- Neposílá ani neloguje tokeny, cookies, payloady nebo osobní údaje v debug módu?
+- Používá SemVer podle veřejného rozhraní SDK, ne podle interního release pocitu?
+- Obsahuje changelog dopad na integrátora a jasný migrační návod?
+- Oddělují typy create/update vstupy od response modelů a interních polí?
+- Má SDK helpery pro stránkování, rate limity, exporty a request ID?
+- Běží automatické testy nad quickstartem, chybami, retry chováním a redakcí logů?
+- Je telemetry opt-in, popsaná a datově minimální?
+
+## Codyho komentář
+
+SDK je místo, kde se pozná, jestli firma myslí na integrátory, nebo jen vystavila API a doufá, že to někdo přežije. Codyho pohled: nejlepší klientská knihovna je nudná správným způsobem. Má předvídatelné verze, bezpečné defaulty, čitelné chyby, minimální typy a žádné překvapivé špehovací ambice. Když SDK zákazníka vede k lepším návykům, privacy-first přestává být dokument na webu a stává se každodenní ergonomií.
+
+## Zdroje k příloze
+
+- OpenAPI Generator — dokumentace generátoru klientských knihoven, serverových stubů a dalších výstupů z OpenAPI specifikace: https://openapi-generator.tech/docs/generators/openapi/
+- Semantic Versioning 2.0.0 — pravidla verzování veřejného API ve formátu `MAJOR.MINOR.PATCH`: https://semver.org/
+- RFC 9110 — HTTP Semantics, význam metod, odpovědí a sémantiky HTTP komunikace: https://www.rfc-editor.org/rfc/rfc9110.html
+- OWASP API Security Top 10 2023 — přehled hlavních rizik API, která může SDK zmírnit nebo nechtěně zesílit: https://owasp.org/API-Security/editions/2023/en/0x11-t10/
+- OpenAPI Specification — oficiální specifikace pro popis HTTP API kontraktů, schémat, security schemes a příkladů: https://spec.openapis.org/oas/latest.html
+
+## Shrnutí přílohy
+
+SDK je veřejná produktová vrstva nad API. Má vycházet z přesného kontraktu, ale nabízet ručně promyšlenou ergonomii, bezpečné defaulty a názvy podle práce zákazníka. Verze SDK musí respektovat veřejné rozhraní, changelog má popisovat dopad a migraci. Typy, helpery a logování mají chránit před zbytečným sběrem dat, ne ho usnadňovat. Privacy-first SDK neposílá telemetrii bez jasného zapnutí, rediguje citlivé hodnoty a testuje quickstart, chyby, retry chování i datovou minimalizaci jako součást release procesu.
+
+---
+
 ## Pracovní log
+- 2026-08-17: Přidána příloha IJ o SDK a klientských knihovnách: vztah SDK k OpenAPI kontraktu, názvy metod podle zákaznických scénářů, bezpečné defaulty, retry a idempotence, SemVer, typy chránící před datovým přebytkem, support mód bez citlivých logů, testování quickstartu a privacy-first checklist.
 - 2026-08-17: Přidána příloha II o API dokumentaci a developer experience: use-case struktura dokumentace, OpenAPI kontrakt, opravitelné chybové odpovědi podle Problem Details, realistický sandbox, bezpečné minimální příklady, datové poznámky u endpointů, revizní rytmus a privacy-first checklist.
 - 2026-08-17: Přidána příloha IH o verzování a ukončování API: kompatibilní vs. breaking změny, bezpečné rozšiřování odpovědí, deprecation a sunset komunikace, changelog podle dopadu, měření starých verzí bez payloadů, sladění OpenAPI dokumentace, SDK a supportu a privacy-first checklist.
 - 2026-08-17: Přidána příloha IG o CORS, CSRF a browser API klientech: rozdělení důvěry klientů, přesné origin allowlisty, credentials přes CORS, CSRF ochrana cookie session, Fetch Metadata, izolace widgetů, negativní testy a privacy-first checklist.
