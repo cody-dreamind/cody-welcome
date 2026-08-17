@@ -38034,7 +38034,162 @@ Bezpečnostní logy API mají pomáhat vyšetřit útoky, chyby a podezřelé vz
 
 ---
 
+# Příloha IG: CORS, CSRF a browser API klienti bez hvězdičkových originů, tajných tokenů ve frontendu a falešného pocitu bezpečí
+
+Browser klient je pohodlný, rychlý a nebezpečně svůdný. Stačí zavolat API z JavaScriptu, přidat `Authorization` header, povolit CORS a všechno funguje. Tedy až do chvíle, kdy zjistíš, že veřejný frontend neumí udržet tajemství, cookie se posílá ochotněji než firemní drb a `Access-Control-Allow-Origin: *` není bezpečnostní strategie, ale cedule „zkuste štěstí“.
+
+Privacy-first SaaS potřebuje jasně oddělit, co smí dělat prohlížeč, co musí zůstat na serveru a jaké hranice chrání uživatele před cizím webem, škodlivým skriptem nebo vlastním integračním nadšením. CORS není autentizace. CSRF token není dekorace. A browser API klient není mini-backend, i kdyby měl hezký TypeScript typ.
+
+## IG.1 Nejdřív rozděl klienty podle důvěry
+
+Než začneš řešit hlavičky, napiš si jednoduchou mapu klientů. Prohlížečový kód je veřejný. Uživatel si ho může otevřít, zkopírovat, upravit a spustit z jiného prostředí. Proto do něj nepatří žádný master API klíč, administrátorský token, long-lived secret ani integrační credential, který by umožnil akci mimo konkrétního uživatele.
+
+Praktické rozdělení:
+
+| Klient | Kde běží | Co smí | Co nesmí |
+| --- | --- | --- | --- |
+| Browser app | prohlížeč uživatele | UI akce aktuálního uživatele | držet serverové secrets, dělat admin exporty |
+| Server app | tvůj backend | volat interní API, držet tajemství | posílat tajemství do response |
+| Public widget | cizí web zákazníka | omezený formulář nebo embed | číst účet, měnit billing, obcházet tenant |
+| Machine client | server zákazníka | akce podle scope a rotovatelných klíčů | používat klíč ve frontendu |
+
+Z toho plyne návrhové pravidlo: pokud akce vyžaduje tajemství, privilegované oprávnění nebo přístup k většímu množství dat, patří za serverový proxy endpoint, ne přímo do browseru. Frontend může požádat backend: „udělej bezpečnou akci pro tohoto přihlášeného uživatele.“ Nemá dostat klíč od celé strojovny.
+
+## IG.2 CORS říká, kdo smí číst odpověď v prohlížeči, ne kdo je důvěryhodný
+
+CORS je mechanismus prohlížeče, který omezuje, které webové originy mohou číst odpovědi z jiného originu. MDN popisuje CORS jako systém HTTP hlaviček, které server používá k povolení načítání zdrojů z odlišného originu. Důležitý detail: CORS nebrání server-to-server requestům a nenahrazuje autentizaci ani autorizaci.
+
+Špatné mentální modely:
+
+- „Máme CORS, takže endpoint je bezpečný.“ Není. Jen říkáš prohlížeči, komu dá přečíst odpověď.
+- „Povolíme `*`, protože API je stejně chráněné tokenem.“ Možná, ale zbytečně rozšiřuješ útokovou plochu pro browser scénáře.
+- „Origin header je identita zákazníka.“ Není. Je to signál pro rozhodnutí, ne účetní systém.
+- „Když preflight projde, uživatel je oprávněný.“ Ne. Preflight ověřuje pravidla cross-origin požadavku, ne obchodní oprávnění.
+
+Lepší základ:
+
+```http
+Access-Control-Allow-Origin: https://app.example.eu
+Access-Control-Allow-Methods: GET, POST, PATCH
+Access-Control-Allow-Headers: Authorization, Content-Type, Idempotency-Key
+Access-Control-Allow-Credentials: true
+Vary: Origin
+```
+
+Pokud podporuješ víc zákaznických originů, nedělej regex typu `*.customer-domain.com` bez rozmyslu. Drž allowlist v konfiguraci tenantu, validuj přes přesnou shodu a změny audituj. Přidej `Vary: Origin`, aby cache nevrátila odpověď s povolením pro jiný origin. Cache je užitečný sluha, ale mizerný čtenář právních hranic.
+
+## IG.3 Credentials přes CORS jsou ostrý nůž
+
+Jakmile používáš cookies nebo `Authorization` header v cross-origin scénáři, přestáváš hrát jednoduchou hru. `Access-Control-Allow-Credentials: true` říká, že prohlížeč může poslat credentials a zpřístupnit odpověď povolenému originu. To je legitimní pro oddělenou app doménu a API doménu, ale musí to být přesně řízené.
+
+Pravidla pro cross-origin credentials:
+
+- nikdy nekombinuj credentials s nekontrolovaným seznamem originů,
+- nepoužívej `*` pro scénáře s cookies nebo autorizací,
+- povol jen konkrétní produkční a staging originy,
+- odděl administraci, public widget a zákaznické integrace,
+- pro embed scénáře zvaž samostatnou subdoménu a izolované scope,
+- loguj rozhodnutí CORS bez ukládání celých hlaviček a tokenů,
+- nastav krátkou a rozumnou `Access-Control-Max-Age`, aby šly opravy rychle nasadit.
+
+Privacy-first poznámka: origin allowlist je bezpečnostní a datový kontrakt. Když zákazník přidá nový origin, mělo by být jasné, kdo to schválil, k čemu slouží a jaké API schopnosti tím reálně zpřístupňuje uživatelům na daném webu.
+
+## IG.4 CSRF řeš podle toho, jak držíš session
+
+CSRF útok využívá toho, že prohlížeč může automaticky přiložit cookies k požadavku na tvůj web. Pokud používáš cookie-based session, nestačí říct „máme CORS“. Cizí web nemusí číst odpověď, aby způsobil škodu. Stačí, aby dokázal odeslat požadavek, který prohlížeč doplní o session cookie.
+
+OWASP CSRF Prevention Cheat Sheet doporučuje kombinaci obranných vrstev podle architektury: synchronizer token pattern, signed double-submit cookie, SameSite cookies, ověřování originu a refereru a další mitigace. Prakticky pro malý SaaS:
+
+- pro stav měnící akce vyžaduj CSRF token nebo jiný ověřený anti-CSRF mechanismus,
+- nastav session cookie s `Secure`, `HttpOnly` a vhodným `SameSite`,
+- nepoužívej `GET` pro změny stavu,
+- kontroluj `Origin` nebo `Referer` u citlivých requestů,
+- u vysoce rizikových akcí přidej re-auth, potvrzení nebo step-up MFA,
+- odděl API pro browser session od machine API s bearer tokeny.
+
+`SameSite=Lax` je často rozumný základ pro běžnou webovou aplikaci, ale není univerzální zázrak. `SameSite=None` vyžaduje `Secure` a má dávat smysl jen tam, kde skutečně potřebuješ cross-site cookies, například u pečlivě navrženého embedu. Každá výjimka má mít důvod, ne jen komentář „jinak to nefungovalo“.
+
+## IG.5 Fetch Metadata je užitečný filtr, ne hlavní zámek
+
+Fetch Metadata request headers dávají serveru signály jako `Sec-Fetch-Site`, `Sec-Fetch-Mode`, `Sec-Fetch-Dest` a `Sec-Fetch-User`. Specifikace W3C Fetch Metadata popisuje tyto hlavičky jako způsob, jak serverům pomoct rozlišovat kontext požadavku. Prakticky: můžeš odmítat podezřelé cross-site requesty, které do tvé aplikace nepatří.
+
+Příklad jednoduché politiky:
+
+- povol `same-origin` a `same-site` requesty,
+- povol konkrétní `cross-site` scénáře jen pro veřejné assets nebo schválené embedy,
+- blokuj cross-site requesty na stav měnící endpointy,
+- loguj blokování jako bezpečnostní metadata, ne jako celý request,
+- testuj dopad na starší browsery a legitimní integrace.
+
+Fetch Metadata nenahrazuje CSRF tokeny ani autorizaci. Je to další vrstva, která pomáhá odmítnout zjevně cizí provoz dřív, než se dostane k doménové logice. V malém týmu je to dobrý příklad bezpečnosti, která je jednoduchá, centrální a srozumitelná.
+
+## IG.6 Public widgety a embedy potřebují vlastní hranici
+
+Widget vložený na zákaznický web je jiný svět než tvoje přihlášená aplikace. Běží v cizím kontextu, potkává cizí skripty, jiné CSP, jiné consent režimy a často i marketingový cirkus, který bys na vlastním webu nikdy nepustil. Proto ho nenapojuj na stejné API schopnosti jako interní dashboard.
+
+Bezpečný widgetový návrh:
+
+- samostatná subdoména nebo izolovaný endpoint,
+- krátkodobý veřejný token navázaný na konkrétní účel,
+- allowlist parent originů, pokud widget pracuje s citlivějším kontextem,
+- žádný přístup k administrátorským nebo billing akcím,
+- rate limit podle tenant + origin + IP rozsahu bez zbytečné identifikace osoby,
+- minimální payload formuláře,
+- explicitní text u sběru dat, který zákazník může zobrazit uživateli.
+
+Pokud widget sbírá lead, feedback nebo support zprávu, dokumentuj, kdo je správce, kdo zpracovatel a kam data tečou. V Evropě nestačí, že formulář hezky animuje. Data za ním musí mít důvod, hranici a odpovědnost.
+
+## IG.7 Testy musí zkoušet i zakázané originy
+
+CORS a CSRF chyby se často objeví až v produkci, protože lokální vývoj běží na jednom originu a všechno je „dočasně“ povolené. Přidej testy, které ověřují nejen šťastnou cestu, ale i odmítnutí.
+
+Testovací scénáře:
+
+- povolený produkční origin dostane očekávané CORS hlavičky,
+- neznámý origin nedostane čitelnou odpověď s credentials,
+- preflight s nepovolenou metodou nebo hlavičkou selže,
+- stav měnící request bez CSRF tokenu je odmítnut,
+- cross-site request s podezřelým Fetch Metadata kontextem je odmítnut,
+- public widget nemůže volat dashboard endpoint,
+- machine token nefunguje v browser-only toku,
+- CORS rozhodnutí nezaloguje tokeny ani cookies.
+
+Do release checklistu přidej otázku: „Změnili jsme doménu, subdoménu, cookie atribut, CORS allowlist nebo embed scénář?“ Pokud ano, testuj to před deployem. Hlavičky jsou malé, ale umí rozbít velkou část produktu s elegancí padající skleničky na dlažbu.
+
+## IG.8 Checklist CORS, CSRF a browser API klientů
+
+- Máš jasně rozdělené browser, server, machine a widget klienty?
+- Neobsahuje frontend žádný master API klíč, long-lived secret ani admin credential?
+- Je CORS allowlist založený na přesných originech, ne na pohodlné hvězdičce?
+- Používáš `Vary: Origin`, pokud odpověď závisí na originu?
+- Jsou credentials povolené jen pro konkrétní a zdokumentované originy?
+- Chrání cookie-based session stav měnící akce proti CSRF?
+- Mají session cookies `Secure`, `HttpOnly` a promyšlené `SameSite`?
+- Používáš `GET` jen pro čtení, ne pro změny stavu?
+- Máš Fetch Metadata politiku nebo jiný centrální filtr pro podezřelé cross-site requesty?
+- Jsou widgety a embedy oddělené od dashboard API schopností?
+- Testuješ povolené i zakázané originy, preflight, CSRF a widget hranice?
+- Loguješ bezpečnostní rozhodnutí bez tokenů, cookies a osobních payloadů?
+
+## Codyho komentář
+
+CORS je jako recepční, která říká prohlížeči, komu smí ukázat odpověď. CSRF ochrana je zámek proti tomu, aby cizí web poslal uživatele podepsat něco za jeho zády. A browser token je cedulka „nechat na veřejné lavičce“, pokud se k němu chováš jako k tajemství. Privacy-first API návrh není paranoidní. Jen odmítá předstírat, že JavaScript v cizím počítači je bezpečný trezor. Není. Je to JavaScript v cizím počítači. Překvapivé finále, já vím.
+
+## Zdroje k příloze
+
+- MDN Web Docs — Cross-Origin Resource Sharing, přehled CORS mechanismu a souvisejících HTTP hlaviček: https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS
+- OWASP Cross-Site Request Forgery Prevention Cheat Sheet — doporučení k CSRF tokenům, SameSite cookies a ověřování originu: https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html
+- W3C Fetch Metadata — specifikace request hlaviček pro rozlišení kontextu požadavku: https://www.w3.org/TR/fetch-metadata/
+- RFC 6265 — HTTP State Management Mechanism, základní specifikace cookies: https://www.rfc-editor.org/rfc/rfc6265.html
+
+## Shrnutí přílohy
+
+Browser API klienti potřebují jiné hranice než serverové integrace. CORS nastavuje, které originy mohou číst odpovědi v prohlížeči, ale nenahrazuje autentizaci, autorizaci ani CSRF ochranu. Privacy-first návrh drží tajemství mimo frontend, povoluje přesné originy, opatrně zachází s credentials, chrání cookie session proti CSRF, používá Fetch Metadata jako další filtr, izoluje widgety a testuje i zakázané scénáře.
+
+---
+
 ## Pracovní log
+- 2026-08-17: Přidána příloha IG o CORS, CSRF a browser API klientech: rozdělení důvěry klientů, přesné origin allowlisty, credentials přes CORS, CSRF ochrana cookie session, Fetch Metadata, izolace widgetů, negativní testy a privacy-first checklist.
 - 2026-08-17: Přidána příloha IF o bezpečnostním logování API: otázky pro incidenty, metadata místo payloadů, redakce citlivých hodnot, katalog událostí, tenantové hranice, alerty podle vzorců, testy logování a privacy-first checklist.
 - 2026-08-17: Přidána příloha IE o autorizaci API: role vs. konkrétní schopnosti, deny-by-default, objektová a field-level autorizace, RBAC/ABAC/ReBAC modelování, support přístup, negativní testy a privacy-first checklist.
 - 2026-08-17: Přidána příloha ID o autentizaci API klientů: typy klientů, krátké access tokeny, rotace refresh tokenů, bezpečné session cookie, přihlašovací toky, strojové integrace, bezpečnostní logy a privacy-first checklist.
