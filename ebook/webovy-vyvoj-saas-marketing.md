@@ -44198,7 +44198,131 @@ Webhooky jsou produktová verze důvěřuj, ale ověřuj. Nejlepší endpoint je
 
 Příchozí webhook je důvěryhodný až po ověření podpisu, recency pravidel, schématu, tenant kontextu a idempotence. Robustní SaaS endpoint rychle přijme validní delivery, předá práci do fronty, bezpečně zvládne duplicity a loguje jen minimum potřebné pro provoz a audit. Privacy-first provoz tím chrání zákaznická data i tým před integračním chaosem, který se jinak tváří jako „jen jeden malý POST endpoint“.
 
+# Příloha JR: Transakční e-maily v SaaS bez spamové mlhy, úniku dat a marketingu převlečeného za servis
+
+Transakční e-mail je nudný hrdina SaaS provozu. Potvrzuje registraci, posílá reset hesla, upozorňuje na fakturu, změnu role, bezpečnostní událost nebo incident. Když funguje, nikdo netleská. Když nefunguje, zákazník se nedostane do účtu, účetní nemá doklad a support řeší duchy v doručitelnosti. Klasika: infrastruktura začne být vidět přesně ve chvíli, kdy by měla být neviditelná.
+
+Privacy-first pohled je jednoduchý: e-mail má doručit konkrétní informaci konkrétnímu člověku s minimem dat, bez sledovacích kudrlinek a bez toho, aby se ze servisní komunikace stala zadní vrátka pro marketing.
+
+## JR.1 Nejdřív rozděl typy e-mailů
+
+Nemíchej všechny zprávy do jedné mentální krabice „poslat e-mail“. Každý typ má jiný účel, riziko, retenci i tón.
+
+Základní katalog:
+
+| Typ e-mailu | Příklad | Hlavní riziko | Produktové pravidlo |
+| --- | --- | --- | --- |
+| Identity | potvrzení e-mailu, reset hesla, MFA recovery | převzetí účtu | krátká platnost odkazu, žádný citlivý detail |
+| Bezpečnost | nové přihlášení, změna hesla, změna role | panika nebo ignorování | stručně, jasně, s další bezpečnou akcí |
+| Provoz | pozvánka do týmu, dokončený export, incident update | únik kontextu | minimum obsahu, přímý odkaz do aplikace |
+| Fakturace | nová faktura, selhaná platba, změna tarifu | finanční údaje v inboxu | poslat stav a odkaz, ne kompletní účetní životopis |
+| Marketing | novinky, tipy, kampaně | nevyžádané oslovení | oddělený souhlas nebo jasný právní základ, snadné odhlášení |
+
+Prakticky: vytvoř integrační kartu pro každý typ e-mailu. Uveď účel, spouštěč, příjemce, šablonu, proměnné, retenční pravidla, možnost odhlášení a vlastníka. Bez vlastníka e-mail časem zmutuje. Většinou do něčeho, co nikdo nechtěl a všichni se bojí smazat.
+
+## JR.2 Do e-mailu patří minimum dat
+
+Inbox není bezpečný trezor. E-mail se přeposílá, indexuje, ukládá v mobilu, otevírá v náhledech a někdy končí v ticketovacím systému zákazníka. Proto neposílej víc, než je nutné pro pochopení situace.
+
+Lepší vzor:
+
+- „Export dat pro workspace `Acme EU` je připraven. Stáhnout ho může administrátor po přihlášení v aplikaci. Odkaz vyprší za 24 hodin.“
+
+Horší vzor:
+
+- „Tady je kompletní export jako příloha, včetně jmen, e-mailů, poznámek, interních ID a radosti pro každého, kdo se k té zprávě dostane.“
+
+U resetů hesla a obnovy účtu je minimálnost ještě důležitější. OWASP u zapomenutého hesla doporučuje jednotné odpovědi bez prozrazení, jestli účet existuje, časově omezené tokeny, dostatečnou náhodnost a ochranu proti zneužití hromadnými požadavky: https://cheatsheetseries.owasp.org/cheatsheets/Forgot_Password_Cheat_Sheet.html
+
+## JR.3 Šablona má být bezpečná i čitelná
+
+Dobrá transakční šablona má čtyři vrstvy:
+
+1. **Co se stalo** — jedna věta bez právnické mlhy.
+2. **Pro koho nebo čeho se to týká** — jen tolik kontextu, kolik je nutné.
+3. **Co má člověk udělat** — jedno hlavní CTA.
+4. **Co když to nebyl on** — bezpečný další krok u citlivých událostí.
+
+Příklad bezpečnostního e-mailu:
+
+> V účtu byl změněn způsob přihlášení. Pokud jste změnu provedli vy, není potřeba nic dělat. Pokud ne, otevřete nastavení zabezpečení v aplikaci a kontaktujte podporu.
+
+Neposílej do bezpečnostního e-mailu celé IP adresy, user agenty a geolokační detaily jako konfety. Často stačí přibližný čas, typ akce a odkaz do zabezpečeného auditního pohledu v aplikaci. Detailní technické údaje patří do interního logu nebo zákaznického audit logu s oprávněním, ne do zprávy, kterou může někdo přeposlat omylem do skupinového chatu.
+
+## JR.4 Doručitelnost začíná u domény
+
+Když SaaS posílá e-maily z domény, musí se o ni starat jako o produkční infrastrukturu. SPF říká, které servery smějí posílat za doménu; DKIM přidává kryptografický podpis zprávy; DMARC staví politiku nad SPF a DKIM a umožňuje reportování výsledků ověření. Technické specifikace jsou popsané v RFC 7208 pro SPF, RFC 6376 pro DKIM a RFC 7489 pro DMARC:
+
+- SPF: https://www.rfc-editor.org/rfc/rfc7208
+- DKIM: https://www.rfc-editor.org/rfc/rfc6376
+- DMARC: https://www.rfc-editor.org/rfc/rfc7489
+
+Pro malý tým to znamená:
+
+- používej samostatnou subdoménu pro aplikaci, například `mail.example.com`, a odděl ji od osobní pošty firmy,
+- nastav SPF, DKIM a DMARC před ostrým provozem, ne až po první vlně nedoručených resetů,
+- sleduj bounce a complaint signály, ale neproměň je v osobní profil uživatele,
+- měj postup pro rotaci DKIM klíčů a změnu e-mailového dodavatele,
+- neposílej z vývojového prostředí na reálné zákazníky.
+
+Codyho komentář: doručitelnost není magická reputační karma. Je to součet technické hygieny, rozumného objemu, očekávaného obsahu a toho, že neposíláš lidem věci, které nepotřebují. Šokující, já vím.
+
+## JR.5 Marketing nesmí potichu vlézt do servisních zpráv
+
+Servisní e-mail má pomáhat s konkrétní službou. Jakmile do faktury přidáš tři promo bloky, remarketingový pixel a „doporučené články jen pro vás“, měníš očekávání i riziko. Privacy-first pravidlo: transakční zpráva nesmí být záminka k další profilaci.
+
+Praktická pravidla:
+
+- odděl transakční a marketingové šablony,
+- nepřidávej tracking pixel do resetů hesla, pozvánek, bezpečnostních upozornění a incidentních zpráv,
+- u marketingových e-mailů nabídni srozumitelné odhlášení; RFC 8058 popisuje mechanismus one-click unsubscribe přes hlavičku `List-Unsubscribe-Post`: https://www.rfc-editor.org/rfc/rfc8058
+- ukládej jen provozní metadata potřebná pro doručení, podporu a audit,
+- nenech marketéra editovat bezpečnostní šablony bez review.
+
+RSS a přímé odkazy jsou pro obsah často lepší než agresivní e-mailový trychtýř. Newsletter má smysl, když ho lidé chtějí. Ne když je to past na e-mail u každého PDF, checklistu a mentálního povzdechu.
+
+## JR.6 Fronta, retry a audit chrání před chaosem
+
+E-mail neposílej jako vedlejší efekt HTTP requestu, na kterém čeká uživatel. Ulož událost, zařaď ji do fronty a doručení sleduj zvlášť. Aplikace má vědět, že e-mail byl naplánovaný, odeslaný, odmítnutý, dočasně nedoručený nebo definitivně selhal.
+
+Provozní model:
+
+- `queued` — e-mail čeká ve frontě,
+- `sent` — dodavatel ho převzal,
+- `delivered` — pokud máš spolehlivý delivery signál,
+- `soft_bounced` — dočasný problém, retry podle pravidel,
+- `hard_bounced` — adresa je pravděpodobně nedoručitelná,
+- `suppressed` — neposílat kvůli bezpečnostnímu, právnímu nebo reputačnímu pravidlu.
+
+U citlivých e-mailů loguj událost do auditní stopy: kdo změnu spustil, kdy, pro jaký workspace a jaký typ zprávy odešel. Neloguj celé tělo e-mailu, tokeny ani odkazy s tajemstvím. Když support řeší problém, stačí vědět, že reset odešel v 10:42 a zda ho poskytovatel přijal. Nepotřebuje číst token jako pohlednici z bezpečnostního pekla.
+
+## JR.7 Checklist privacy-first transakčních e-mailů
+
+- [ ] Každý typ e-mailu má účel, vlastníka, spouštěč, příjemce a šablonu.
+- [ ] Transakční a marketingové zprávy jsou oddělené obsahově i procesně.
+- [ ] Reset a recovery odkazy mají krátkou platnost, náhodné tokeny a ochranu proti hromadnému zneužití.
+- [ ] E-mail neobsahuje citlivá data, tokeny, kompletní exporty ani zbytečné technické detaily.
+- [ ] SPF, DKIM a DMARC jsou nastavené a dokumentované v provozním runbooku.
+- [ ] Bezpečnostní a incidentní e-maily nepoužívají tracking pixel ani marketingové doplňky.
+- [ ] Odesílání běží přes frontu se stavy, retry pravidly a dead-letter postupem.
+- [ ] Bounce a complaint signály se zpracovávají bez tvorby zbytečného uživatelského profilu.
+- [ ] Support vidí delivery metadata, ne celé tělo citlivé zprávy.
+- [ ] Existuje testovací režim, který brání odeslání vývojových e-mailů reálným zákazníkům.
+
+## Zdroje k příloze
+
+- OWASP Forgot Password Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Forgot_Password_Cheat_Sheet.html
+- RFC 7208 — Sender Policy Framework: https://www.rfc-editor.org/rfc/rfc7208
+- RFC 6376 — DomainKeys Identified Mail Signatures: https://www.rfc-editor.org/rfc/rfc6376
+- RFC 7489 — DMARC: https://www.rfc-editor.org/rfc/rfc7489
+- RFC 8058 — One-Click Unsubscribe: https://www.rfc-editor.org/rfc/rfc8058
+
+## Shrnutí přílohy
+
+Transakční e-mail je produkční systém, ne dekorace kolem aplikace. Privacy-first SaaS rozlišuje typy zpráv, posílá minimum dat, chrání identity a recovery toky, odděluje servisní komunikaci od marketingu a staví doručitelnost na SPF, DKIM, DMARC, frontách a bezpečném auditu. Výsledek není jen méně právního nervozity, ale hlavně klidnější zákaznická zkušenost: důležité zprávy dorazí, dávají smysl a nešmírují cestou.
+
 ## Pracovní log
+- 2026-08-18: Přidána příloha JR o transakčních e-mailech v SaaS: typy zpráv, minimalizace dat v šablonách, bezpečné reset a recovery toky, SPF/DKIM/DMARC, oddělení marketingu, fronta doručování, audit a privacy-first checklist.
 - 2026-08-18: Přidána příloha JQ o příchozích webhookách: integrační karta, ověřování podpisu nad raw body, replay ochrana, idempotence, rychlé 2xx odpovědi, validace payloadu, bezpečné logování, testovací sada a privacy-first checklist.
 - 2026-08-18: Přidána příloha JP o odchozích HTTP požadavcích a SSRF obraně: inventář externích volání, allowlisty, bezpečný HTTP klient, blokace interních rozsahů a metadata služeb, webhook testery, link preview a privacy-first checklist.
 - 2026-08-18: Přidána příloha JO o tenant izolaci v SaaS: bezpečnostní hranice workspace, BOLA/IDOR rizika, kontrola objektů a polí, admin/support režimy, cross-tenant testovací scénáře a privacy-first checklist.
