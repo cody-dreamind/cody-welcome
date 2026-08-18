@@ -43721,7 +43721,147 @@ Nejlepší SaaS poznáš i podle toho, jak se chová, když už mu zákazník ne
 Export dat, smazání účtu a odchod zákazníka jsou důkazem, jestli privacy-first hodnota existuje i mimo marketingovou stránku. Praktický SaaS rozlišuje účet, členství a workspace, nabízí použitelný export, má stavový model mazání, popsanou retenci záloh, bezpečné role a férový offboarding. Cílem není držet zákazníka silou, ale ukázat, že kontrola nad daty patří jemu.
 
 
+# Příloha JO: Tenant izolace v SaaS bez IDOR loterie, prohozených workspace a dat přes plot
+
+Multi-tenant SaaS je krásná věc: jedna aplikace, více zákazníků, společná infrastruktura, rychlejší provoz. Je to také krásný způsob, jak si vyrobit velmi drahý incident, pokud aplikace zamění „uživatel je přihlášený“ za „uživatel smí vidět tento konkrétní objekt v tomto konkrétním workspace“.
+
+OWASP API Security Top 10 2023 řadí Broken Object Level Authorization mezi hlavní API rizika a upozorňuje, že endpointy pracující s ID objektů musí kontrolovat oprávnění ke konkrétnímu záznamu v každé funkci, která objekt načítá. Samostatně řeší i Broken Object Property Level Authorization, tedy situace, kdy uživatel vidí nebo mění pole objektu, ke kterým nemá mít přístup: https://owasp.org/API-Security/editions/2023/en/0xa1-broken-object-level-authorization/ a https://owasp.org/API-Security/editions/2023/en/0xa3-broken-object-property-level-authorization/
+
+Privacy-first hodnota tu není slogan. Pokud zákazník nemá jistotu, že jeho workspace je oddělený od ostatních zákazníků, nezachrání to ani evropský hosting, ani hezká stránka o soukromí. Data přes plot jsou pořád data přes plot, jen s lepší typografií.
+
+## JO.1 Tenant není filtr v controlleru
+
+Nejčastější chyba v malém SaaS: každý dotaz má někde na začátku `workspace_id`, ale pravidlo není centrální, testované a vynucené. Jeden endpoint filtr má, druhý ne, třetí ho má jen při čtení a čtvrtý používá ID z URL jako důkaz pravdy. Pak stačí změnit `/projects/123` na `/projects/124` a aplikace ukáže cizí data.
+
+Správný model začíná tím, že tenant je bezpečnostní hranice, ne jen organizační štítek.
+
+Praktická pravidla:
+
+- Každý objekt s daty zákazníka má explicitní vazbu na tenant/workspace nebo na parent objekt, který tenant jednoznačně určuje.
+- Všechny čtecí i zápisové operace procházejí jedním autorizačním mechanismem, ne ručně lepenými podmínkami v každém controlleru.
+- Query helpery mají bezpečnou výchozí hodnotu: bez tenant kontextu raději nevrátit nic než vrátit všechno.
+- Background joby, exporty, webhooky a admin nástroje používají stejný tenant model jako webové UI.
+- Testy ověřují přístup dvěma různými účty ve dvou různých workspace, ne jen jedním adminem v ideálním scénáři.
+
+Špatný mentální model:
+
+> „Uživatel je přihlášený, takže může načíst projekt podle ID.“
+
+Lepší mentální model:
+
+> „Uživatel je členem workspace, má roli s právem číst projekty a projekt patří do stejného workspace.“
+
+## JO.2 ID objektu není oprávnění
+
+UUID je dobrý identifikátor, ale není to bezpečnostní politika. Náhodné a neuhodnutelné ID snižuje šanci na jednoduché hádání, ale neopraví chybějící autorizaci. OWASP u BOLA doporučuje nepředvídatelné identifikátory jako podporu, ne jako náhradu kontroly oprávnění.
+
+U každého endpointu si napiš větu:
+
+> Kdo smí udělat jakou akci s jakým objektem v jakém tenant kontextu?
+
+Příklad pro projektový SaaS:
+
+| Endpoint | Nestačí ověřit | Skutečná kontrola |
+|---|---|---|
+| `GET /projects/:id` | Uživatel je přihlášený | Projekt patří do workspace, kde je uživatel členem s právem číst projekty. |
+| `PATCH /projects/:id` | Uživatel je admin někde | Uživatel je admin právě v workspace daného projektu. |
+| `GET /files/:id/download` | Soubor existuje | Soubor patří k projektu, projekt patří k workspace a uživatel má právo číst soubory. |
+| `POST /exports` | Uživatel má účet | Export se vytváří jen pro workspace, kde má uživatel oprávnění exportovat. |
+| `DELETE /members/:id` | Uživatel má roli admin | Admin nesmí odebrat posledního ownera a akce platí jen v daném workspace. |
+
+Dobré pravidlo pro review: pokud endpoint přijímá ID z URL, query stringu, hlavičky nebo payloadu, musí být v testu scénář „cizí ID“. Ne jako volitelná paranoidní třešnička, ale jako základní bezpečnostní regresní test.
+
+## JO.3 Oprávnění kontroluj i na úrovni polí
+
+Tenant izolace není jen o tom, jestli uživatel vidí celý objekt. Často rozhoduje i to, která pole smí vidět nebo měnit. Běžný člen může vidět název projektu, ale ne fakturační údaje. Support může vidět technický stav ticketu, ale ne interní poznámky zákazníka. Integrace může číst stav objednávky, ale nemá měnit roli uživatele.
+
+Rizikové vzory:
+
+- API vrací celý databázový model přes univerzální serializaci.
+- Frontend „schovává“ citlivé pole, ale backend ho pořád posílá.
+- `PATCH` endpoint přijme libovolné pole z payloadu a ORM ho poslušně uloží.
+- Export obsahuje interní poznámky, protože sdílí serializer s admin obrazovkou.
+- GraphQL resolver dovolí dotáhnout pole, které UI běžně nepoužívá.
+
+Bezpečnější přístup:
+
+- Pro každý use-case definuj response schema: veřejný detail, interní detail, export, support view.
+- Aktualizace polí dělej allowlistem, ne „ulož všechno, co přišlo“.
+- Citlivá pole označ v modelu nebo serializeru a vyžaduj explicitní oprávnění.
+- Testuj mass assignment: běžný uživatel pošle v payloadu `role: owner`, `billingAccess: true` nebo `isInternal: true` a systém to odmítne.
+- Exporty měj jako vlastní datový produkt, ne vedlejší efekt stejného endpointu, který krmí tabulku v administraci.
+
+Codyho komentář: když frontend něco nezobrazuje, není to bezpečnost. Je to jen závěs. Útočník nepřichází na návštěvu do obýváku, ale rovnou do API.
+
+## JO.4 Admin a support módy nesmí obejít hranice
+
+Interní admin rozhraní je často největší zkratka v produktu. Vzniklo rychle, používá ho pět lidí, nikdo ho nevidí a „je přece za loginem“. Jenže právě admin umí dělat nejcitlivější věci: hledat zákazníky, resetovat přístupy, číst support data, spouštět exporty a opravovat integrace.
+
+Privacy-first admin režim potřebuje vlastní pravidla:
+
+- Support pracovník pracuje vždy v konkrétním tenant kontextu, ne v globálním nekonečném seznamu dat.
+- Přístup k zákaznickému workspace má důvod, časový limit a auditní stopu.
+- Citlivé akce vyžadují ticket, zákaznický souhlas nebo interní schválení podle rizika.
+- Admin vyhledávání neukazuje víc osobních údajů, než je nutné pro vyřešení úkolu.
+- Impersonace uživatele je výjimečný režim, viditelně označený a auditovaný; kde to jde, nahraď ji read-only support view.
+
+Důležité: interní tým není „mimo privacy“. Je to další skupina příjemců dat a musí mít minimální přístup podle práce. Pokud support nepotřebuje vidět obsah souboru, nemá ho vidět jen proto, že je to technicky pohodlné.
+
+## JO.5 Testovací scénáře pro tenant izolaci
+
+Tenant izolace se nedá otestovat jedním demo účtem. Potřebuješ minimálně dva zákaznické světy a několik rolí.
+
+Základní testovací sada:
+
+1. Vytvoř workspace `A` a `B`.
+2. V každém vytvoř ownera, admina a běžného člena.
+3. Vytvoř podobné objekty: projekty, soubory, fakturační profil, integrace, auditní události.
+4. Přihlaš se jako člen workspace `A` a zkus použít ID objektů z workspace `B`.
+5. Stejný pokus proveď pro čtení, zápis, export, smazání, webhook endpoint a download souboru.
+6. Ověř, že chyba je bezpečná: nevrací cizí data, neprozrazuje zbytečné detaily a je logovaná jako bezpečnostní signál.
+7. Ověř, že admin ve workspace `A` není adminem ve workspace `B`.
+8. Ověř, že interní support režim má auditní stopu a časové omezení.
+
+Praktická matice:
+
+| Scénář | Očekávání |
+|---|---|
+| Člen `A` načte projekt `B` | `404` nebo bezpečné `403`, žádná data. |
+| Admin `A` změní roli člena `B` | Akce odmítnuta. |
+| Export `A` obsahuje soubor z `B` | Test selže; export je vadný. |
+| Webhook integrace `A` odešle událost objektu `B` | Událost se nevytvoří a incidentní signál jde do logu. |
+| Support otevře workspace bez důvodu | Přístup odmítnut nebo vyžaduje schválený důvod. |
+
+Tuhle sadu spusť při každé změně kolem oprávnění, exportů, souborů, integrací a admin nástrojů. Přesně tam se tenant izolace láme nejčastěji.
+
+## JO.6 Checklist tenant izolace
+
+- [ ] Každý zákaznický objekt má jasnou vazbu na workspace nebo tenant.
+- [ ] Autorizace kontroluje akci, objekt, tenant a roli; nestačí samotný login.
+- [ ] Endpointy s ID z klienta mají test „cizí ID“.
+- [ ] UUID nebo náhodné ID je doplněk, ne náhrada oprávnění.
+- [ ] Query helpery a repository vrstvy neumí omylem vrátit všechno bez tenant kontextu.
+- [ ] Response schema vrací jen pole potřebná pro daný use-case.
+- [ ] Update endpointy používají allowlist polí a chrání před mass assignment.
+- [ ] Exporty, downloady, webhooky a background joby respektují stejná tenant pravidla jako UI.
+- [ ] Admin a support módy mají důvod, časový limit, auditní stopu a minimální rozsah.
+- [ ] Testovací data obsahují minimálně dva workspace a více rolí.
+- [ ] Bezpečnostní logy zachytí pokusy o cizí objekt bez ukládání citlivých payloadů.
+- [ ] Dokumentace pro tým vysvětluje rozdíl mezi autentizací, rolí, tenantem a objektovou autorizací.
+
+## Zdroje k příloze
+
+- OWASP API Security Top 10 2023 — API1 Broken Object Level Authorization: https://owasp.org/API-Security/editions/2023/en/0xa1-broken-object-level-authorization/
+- OWASP API Security Top 10 2023 — API3 Broken Object Property Level Authorization: https://owasp.org/API-Security/editions/2023/en/0xa3-broken-object-property-level-authorization/
+- OWASP API Security Top 10 2023 — přehled rizik: https://owasp.org/API-Security/editions/2023/en/0x11-t10/
+
+## Shrnutí přílohy
+
+Tenant izolace je základní bezpečnostní hranice SaaS produktu. Nestačí přihlášení, role v abstraktnu ani neuhodnutelné ID. Každá akce musí ověřit konkrétní objekt, konkrétní tenant a konkrétní oprávnění, včetně polí, exportů, webhooků, souborů a interních admin režimů. Privacy-first SaaS nechrání jen data před reklamními skripty; chrání i zákazníky před tím, aby se omylem nebo chybou dívali přes plot do cizího workspace.
+
+
 ## Pracovní log
+- 2026-08-18: Přidána příloha JO o tenant izolaci v SaaS: bezpečnostní hranice workspace, BOLA/IDOR rizika, kontrola objektů a polí, admin/support režimy, cross-tenant testovací scénáře a privacy-first checklist.
 - 2026-08-18: Přidána příloha JN o exportu dat, smazání účtu a odchodu zákazníka: oddělení účtu, členství a workspace, použitelný export, stavový model mazání, zálohy, role, offboarding a privacy-first checklist.
 
 - 2026-08-18: Přidána příloha JM o obnově účtu a ztraceném přístupu: scénáře recovery, bezpečný reset hesla, MFA recovery, support playbook, minimalizace důkazů identity, auditní stopa a privacy-first checklist.
