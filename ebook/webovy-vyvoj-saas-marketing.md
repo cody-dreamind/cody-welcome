@@ -43559,7 +43559,171 @@ Ta druhá věta je přesně ten moment, kdy privacy-first provoz tiše odchází
 Obnova účtu je jedna z nejcitlivějších částí SaaS identity. Dobrý privacy-first proces rozlišuje typy ztraceného přístupu, používá bezpečné reset tokeny, chrání MFA recovery před supportovou improvizací, minimalizuje důkazy identity, loguje rozhodnutí a po obnově kontroluje sessions i tokeny. Cílem je vrátit legitimního člověka k práci, ne vyrobit útočníkovi zkratku přes lidskou ochotu.
 
 
+# Příloha JN: Export dat, smazání účtu a odchod zákazníka bez rukojmí, chaosu a mazacího kouzelnictví
+
+Odchod zákazníka není produktové selhání. Produktové selhání je, když zákazník odejít nemůže, protože jeho data držíš jako rukojmí v krabici bez kliky. Privacy-first SaaS má export a smazání navržené stejně vážně jako onboarding: jasně, bezpečně, auditovatelně a bez supportové gymnastiky.
+
+V Evropě nejde jen o slušnost. GDPR dává lidem práva k jejich osobním údajům, včetně práva na přístup, výmaz za určitých podmínek a přenositelnost dat ve strojově čitelném formátu. Evropská komise tato práva shrnuje na stránce pro jednotlivce a EDPB k právu na přístup vydal samostatné vodítko: https://commission.europa.eu/law/law-topic/data-protection/information-individuals_en a https://www.edpb.europa.eu/documents/guideline/guidelines-012022-on-data-subject-rights-right-of-access_en
+
+To ale neznamená, že máš v panice přidat tlačítko „smaž vše“ a doufat, že databáze udělá zázrak. Export, výmaz i ukončení účtu jsou procesy s dopady na fakturaci, auditní logy, právní povinnosti, týmové workspace, zálohy a zákaznickou důvěru.
+
+## JN.1 Nejdřív odděl účet, workspace a data
+
+Malý SaaS často začne jednoduchým modelem: uživatel má účet a v účtu má data. Pak přijde první B2B zákazník, tři členové týmu, role admina, fakturační kontakt, externí účetní a najednou „smazat účet“ znamená sedm různých věcí.
+
+Rozliš minimálně:
+
+| Vrstva | Co znamená | Typické riziko |
+|---|---|---|
+| Přihlašovací účet | Identita konkrétního člověka | Smazání může rozbít auditní stopu a členství v týmech. |
+| Členství ve workspace | Vztah člověka ke konkrétní organizaci | Odchod z jedné firmy nesmí smazat účet v jiné firmě. |
+| Workspace/organizace | Sdílená data zákazníka | Jeden uživatel často nemá právo zrušit celý zákaznický účet. |
+| Fakturační profil | Údaje pro platby a účetnictví | Část dat může mít zákonnou retenční povinnost. |
+| Produktová data | Projekty, dokumenty, nastavení, integrace | Export musí být srozumitelný a použitelný. |
+| Bezpečnostní stopa | Audit logy, incidentové záznamy, abuse signály | Nesmí se proměnit v osobní kroniku, ale často nejde okamžitě vymazat všechno. |
+
+První pravidlo: uživatel by měl vždy vědět, jakou vrstvu právě mění. „Smazat můj účet“ není totéž jako „odebrat mě z workspace“ ani „zrušit celou firmu“. Pokud to UI směšuje, support bude hasit požáry a zákazník bude mít pocit, že produkt je past na data.
+
+## JN.2 Export dat má být použitelný, ne jen splněná formalita
+
+Export není zip soubor pojmenovaný `dump_final_v3_really_final.zip`, ve kterém jsou tři JSONy bez dokumentace a jeden CSV soubor v kódování, které pamatuje fax. Export má zákazníkovi umožnit pokračovat jinde, udělat interní archiv nebo splnit vlastní povinnost vůči lidem, jejichž data zpracovává.
+
+Dobrý export obsahuje:
+
+- čitelný formát pro běžné lidi: CSV, JSON, případně HTML/PDF pro dokumenty;
+- popis struktury: co znamenají sloupce, identifikátory, stavy a časové údaje;
+- časovou značku exportu a identitu workspace, kterého se export týká;
+- jasné oddělení aktivních dat, archivních dat a nastavení;
+- seznam vynechaných položek s důvodem, pokud něco exportovat nejde;
+- bezpečné doručení: krátce platný odkaz, přístup jen pro oprávněné role, žádné veřejné URL navždy.
+
+Praktický minimální balíček pro B2B SaaS:
+
+```text
+export-2026-08-18/
+  README.md
+  workspace.json
+  users.csv
+  projects.csv
+  records.jsonl
+  files/
+  audit-summary.csv
+  metadata.json
+```
+
+`README.md` vysvětlí strukturu. `metadata.json` obsahuje čas exportu, verzi schématu, rozsah exportu a kontaktní adresu pro dotazy. `audit-summary.csv` nemá obsahovat citlivé payloady, ale může uvést důležité provozní události: vytvoření workspace, změny ownerů, vypnutí integrací, datum ukončení.
+
+Codyho komentář: export, který pochopí jen autor ORM vrstvy po třetí kávě, není export. To je escape room.
+
+## JN.3 Smazání musí mít stavy, čekací lhůtu a výjimky
+
+Mazání dat se tváří binárně: data jsou, data nejsou. Ve skutečnosti je to workflow. Něco smažeš hned, něco anonymizuješ, něco ponecháš kvůli účetnictví, něco počká na konec retenční lhůty v zálohách a něco vůbec nesmí být smazané bez dopadu na jiné uživatele.
+
+Navrhni stavový model:
+
+| Stav | Co se děje | Doporučení |
+|---|---|---|
+| `active` | Účet nebo workspace běží | Uživatel vidí export a možnosti ukončení. |
+| `deletion_requested` | Někdo požádal o smazání | Zobraz rozsah, dopady, datum plánovaného smazání. |
+| `cooldown` | Běží ochranná lhůta | U B2B workspace pošli notifikaci ownerům/adminům. |
+| `locked_for_deletion` | Data už nejdou běžně měnit | Povol export a storno jen oprávněné roli. |
+| `deleted` | Aktivní data jsou odstraněna nebo anonymizována | Zůstává minimální záznam o provedení procesu. |
+| `backup_retention` | Kopie dožívají v zálohách | Dokumentuj dobu a obnovuj je jen v řízeném incident procesu. |
+
+Důležité: „smazat“ neznamená vždy `DELETE FROM users WHERE id = ?`. U týmového SaaS často potřebuješ zachovat referenční integritu: komentář může zůstat, ale autor se zobrazí jako „smazaný uživatel“; auditní záznam může zůstat, ale bez zbytečných osobních údajů; faktura může zůstat podle účetních pravidel, ale nesmí dál sloužit k marketingu.
+
+Mikrotext pro smazání workspace:
+
+> Smazání workspace odstraní aktivní produktová data a vypne integrace. Fakturační a bezpečnostní záznamy ponecháme jen po dobu, kdy je potřebujeme pro zákonné nebo bezpečnostní účely. Před smazáním si můžete stáhnout export.
+
+To je lepší než tlačítko „Zrušit účet“, které neřekne nic a přitom míří nabitou databází na nohu.
+
+## JN.4 Zálohy nejsou výmluva, ale musí být popsané
+
+Jedna z nejčastějších pastí: uživatel požádá o smazání, aplikace smaže aktivní záznamy, ale data zůstanou v zálohách. To samo o sobě nemusí být automaticky špatně, pokud zálohy slouží k obnově systému, mají omezenou retenci, nejsou běžně prohledávané a při obnově existuje postup, jak znovu aplikovat smazání.
+
+Privacy-first pravidlo:
+
+- zálohy mají vlastní retenční dobu;
+- přístup k zálohám je přísně omezený;
+- zálohy se nepoužívají pro analytiku, reporting ani supportové hledání;
+- při obnově produkce se znovu spustí seznam již provedených výmazů;
+- privacy stránka vysvětluje, že odstranění ze záloh proběhne podle retenčního cyklu.
+
+Provozní detail, který šetří nervy: veď `deletion_ledger`, tedy minimální interní seznam provedených výmazů. Nemá obsahovat kompletní stará data. Stačí stabilní interní identifikátor, typ objektu, čas žádosti, čas provedení, právní/provozní důvod a verze mazacího procesu. Když musíš obnovit databázi ze zálohy, ledger řekne, co se má znovu odstranit.
+
+## JN.5 Role a schvalování chrání zákazníka před omylem
+
+U osobního účtu může být smazání relativně přímočaré. U firemního workspace je to minové pole. Když běžný člen týmu omylem zruší celý workspace, privacy-first hodnota se rychle změní na „provozováno v Evropě, pohřbeno v panice“.
+
+Doporučené role:
+
+- běžný člen může exportovat vlastní data nebo odejít z workspace;
+- admin může odebrat členy a spravovat běžné exporty podle oprávnění;
+- owner může spustit ukončení workspace;
+- kritické smazání může vyžadovat potvrzení druhým ownerem nebo čerstvé MFA;
+- support nemá mazat data ručně, ale spouštět schválený proces s auditní stopou.
+
+Bezpečnostní potvrzení nemá být jen dialog „Opravdu?“. U destruktivních akcí používej:
+
+- shrnutí dopadu v bodech;
+- vyžádání názvu workspace nebo jiné kontextové potvrzení;
+- čerstvou autentizaci u citlivých změn;
+- cooldown u firemních účtů;
+- notifikaci ostatním ownerům;
+- možnost stáhnout export před finálním krokem.
+
+## JN.6 Offboarding zákazníka je součást zákaznické zkušenosti
+
+Když zákazník odchází, pořád je to zákazník. Může se vrátit, doporučit tě dál nebo aspoň nevyprávět, že tvůj SaaS je datová mucholapka. Odchod by proto měl být jasný, klidný a bez manipulace.
+
+Dobrá offboarding obrazovka odpoví na pět otázek:
+
+1. Co přesně se stane s mým účtem nebo workspace?
+2. Kdy se to stane?
+3. Co si můžu předtím stáhnout?
+4. Co zůstane kvůli právním, účetním nebo bezpečnostním důvodům?
+5. Koho kontaktovat, když potřebuji speciální export nebo mám právní požadavek?
+
+Feedback otázka může být volitelná, krátká a bez nátlaku:
+
+> Pomůže nám vědět, proč odcházíte? Odpověď je dobrovolná a nepoužijeme ji k reklamnímu profilování.
+
+Nedělej z odchodu retenční labyrint: pět slevových modálů, skryté tlačítko a nutnost psát supportu kvůli zrušení jsou krátkodobý trik. Dlouhodobě to ničí důvěru a zvyšuje množství naštvaných ticketů.
+
+## JN.7 Checklist exportu a smazání
+
+- [ ] Produkt rozlišuje přihlašovací účet, členství, workspace, fakturační profil a produktová data.
+- [ ] Uživatel před destruktivní akcí vidí přesný rozsah dopadu.
+- [ ] Export má dokumentovaný formát, časovou značku, verzi schématu a bezpečné doručení.
+- [ ] Export neobsahuje data jiných lidí mimo oprávněný rozsah workspace.
+- [ ] Smazání má stavový model, ne jednu magickou databázovou akci.
+- [ ] Existuje pravidlo pro anonymizaci autorů, komentářů a auditních stop.
+- [ ] Fakturační a bezpečnostní záznamy mají oddělenou retenci a účel.
+- [ ] Zálohy mají popsanou retenční dobu a nejsou používané pro jiné účely.
+- [ ] Po obnově ze zálohy lze znovu aplikovat již provedené výmazy.
+- [ ] Kritické ukončení workspace vyžaduje owner oprávnění, čerstvé ověření nebo druhé schválení.
+- [ ] Support spouští schválený proces, ne ruční mazání podle nálady v ticketu.
+- [ ] Offboarding obrazovka nabízí export, jasný termín a lidské vysvětlení zbytkových dat.
+
+## Codyho komentář
+
+Nejlepší SaaS poznáš i podle toho, jak se chová, když už mu zákazník neplatí. Pokud produkt dovolí férově odejít, exportovat data a pochopit, co se smaže, není to slabost. Je to sebevědomí. Datové rukojmí možná sníží churn v tabulce na jeden kvartál, ale zvýší nedůvěru na několik let. A ta se pak maže mnohem hůř než jeden řádek v databázi.
+
+## Zdroje k příloze
+
+- Evropská komise — Information for individuals, práva subjektů údajů v GDPR: https://commission.europa.eu/law/law-topic/data-protection/information-individuals_en
+- Evropská komise — Dealing with requests from individuals, přenositelnost a žádosti subjektů údajů: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/dealing-requests-individuals_en
+- EDPB — Guidelines 01/2022 on data subject rights, Right of access: https://www.edpb.europa.eu/documents/guideline/guidelines-012022-on-data-subject-rights-right-of-access_en
+
+## Shrnutí přílohy
+
+Export dat, smazání účtu a odchod zákazníka jsou důkazem, jestli privacy-first hodnota existuje i mimo marketingovou stránku. Praktický SaaS rozlišuje účet, členství a workspace, nabízí použitelný export, má stavový model mazání, popsanou retenci záloh, bezpečné role a férový offboarding. Cílem není držet zákazníka silou, ale ukázat, že kontrola nad daty patří jemu.
+
+
 ## Pracovní log
+- 2026-08-18: Přidána příloha JN o exportu dat, smazání účtu a odchodu zákazníka: oddělení účtu, členství a workspace, použitelný export, stavový model mazání, zálohy, role, offboarding a privacy-first checklist.
+
 - 2026-08-18: Přidána příloha JM o obnově účtu a ztraceném přístupu: scénáře recovery, bezpečný reset hesla, MFA recovery, support playbook, minimalizace důkazů identity, auditní stopa a privacy-first checklist.
 
 - 2026-08-18: Přidána příloha JL o přihlášení, MFA a session managementu: bezpečnostní katalog identity, heslová politika, MFA recovery, chráněné cookies, skutečné odhlášení, reset hesla, datová mapa a privacy-first checklist.
