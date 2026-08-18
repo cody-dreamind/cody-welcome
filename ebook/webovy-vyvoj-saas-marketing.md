@@ -43423,7 +43423,145 @@ Můj pohled — Cody: dobré přihlášení je jako dobrý vrátný. Neptá se k
 Přihlášení, MFA a session management jsou součást produktu i provozní bezpečnosti. Privacy-first SaaS má bezpečnou heslovou politiku, povinné MFA pro citlivé role, promyšlený recovery proces, chráněné session cookies, skutečné odhlášení, bezpečný reset hesla a datovou mapu identity. Cíl není uživatele šikanovat bezpečnostními rituály, ale dát firmě i zákazníkům jistotu, že přístup k datům má jasné hranice.
 
 
+# Příloha JM: Obnova účtu a ztracený přístup bez supportové improvizace, bezpečnostních otázek a účtů na dobré slovo
+
+Obnova účtu je bezpečnostní funkce, ne zákaznická laskavost v rohu helpdesku. Ve chvíli, kdy uživatel ztratí heslo, telefon s MFA aplikací, přístup k firemnímu e-mailu nebo vlastnictví workspace, se produkt dostává do nejrizikovější fáze identity: musí pomoct legitimnímu člověku zpět, ale nesmí otevřít dveře útočníkovi, který se tváří dost zoufale na to, aby support udělal výjimku.
+
+Privacy-first SaaS bere recovery jako řízený proces. Neptá se na „oblíbenou barvu ze základky“, neposílá hesla e-mailem a nenechá support vypínat MFA podle pocitu. Má předem popsané scénáře, jasné pravomoci, minimální sběr důkazů, auditní stopu a bezpečnou komunikaci. Jinak se z obnovy účtu stane improvizační divadlo, kde hlavní rekvizitou je riziko.
+
+OWASP u resetu hesla doporučuje mimo jiné konzistentní odpovědi pro existující i neexistující účty, jednorázové a expirované tokeny, bezpečné uložení tokenů a ochranu proti nadměrným automatizovaným požadavkům: https://cheatsheetseries.owasp.org/cheatsheets/Forgot_Password_Cheat_Sheet.html
+
+## JM.1 Rozliš typy obnovy, protože nemají stejné riziko
+
+„Nemůžu se přihlásit“ není jedna situace. Může jít o zapomenuté heslo, ztracený druhý faktor, změnu e-mailu, odchod ownera z firmy, kompromitovaný účet nebo spor o vlastnictví workspace. Každý scénář potřebuje jinou sílu ověření a jiný zásah do sessions.
+
+Praktická mapa scénářů:
+
+| Scénář | Kdo rozhoduje | Riziko | Výchozí postup |
+|---|---|---:|---|
+| Zapomenuté heslo | systém | střední | Jednorázový reset odkaz na ověřený e-mail. |
+| Ztracená MFA u běžného člena | owner/admin workspace | vyšší | Schválení interním adminem, auditní stopa, nové MFA. |
+| Ztracená MFA u ownera | předem určený recovery proces | vysoké | Kombinace firemních důkazů, čekací lhůty a notifikace ostatním adminům. |
+| Změna přihlašovacího e-mailu | přihlášený uživatel + potvrzení | vysoké | Čerstvé ověření, potvrzení na starý i nový e-mail, log. |
+| Kompromitovaný účet | bezpečnostní proces | kritické | Zrušení sessions, rotace tokenů, kontrola audit logu, informování workspace. |
+| Spor o vlastnictví workspace | obchodně-právní eskalace | kritické | Žádná rychlá změna přes support bez dokumentovaného schválení. |
+
+Malý SaaS nemusí mít korporátní identitní oddělení. Ale musí mít aspoň tabulku: jaký problém řešíme, kdo smí rozhodnout, jak ověřujeme identitu, jaká data sbíráme, co logujeme a kdy proces eskalujeme.
+
+## JM.2 Reset hesla má být nudný a předvídatelný
+
+Dobrý reset hesla je skoro nezajímavý: uživatel zadá e-mail, aplikace odpoví stejně bez ohledu na existenci účtu, případný reset odkaz přijde jen na registrovaný kanál, token je náhodný, jednorázový, expirovaný a po použití neplatný. Žádné „účet neexistuje“, žádné nekonečné tokeny, žádné automatické přihlášení po změně hesla.
+
+Doporučený tok:
+
+1. Uživatel zadá e-mail.
+2. UI zobrazí neutrální větu: „Pokud k tomuto e-mailu existuje účet, pošleme instrukce pro obnovu.“
+3. Backend vytvoří token jen pro existující účet, ale veřejná odpověď je stejná.
+4. Token ulož jako hash, ne jako čitelnou hodnotu v databázi.
+5. Odkaz platí krátce a jde použít jen jednou.
+6. Po nastavení nového hesla informuj uživatele e-mailem, ale heslo nikdy neposílej.
+7. Nabídni nebo rovnou proveď odhlášení ostatních sessions podle rizika.
+
+Mikrotext pro reset:
+
+> Pokud u nás účet s tímto e-mailem existuje, pošleme odkaz pro obnovu. Kvůli bezpečnosti neprozrazujeme, jestli je e-mail registrovaný.
+
+Codyho komentář: reset hesla není místo pro kreativitu. Kreativní reset obvykle znamená, že někde zůstane škvíra velikosti dodávky.
+
+## JM.3 MFA recovery nesmí být „napiš supportu a nějak to dáme“
+
+Ztracený druhý faktor je těžší než zapomenuté heslo, protože uživatel už přišel o část důkazu identity. Pokud support vypne MFA jen podle e-mailové prosby, MFA chrání účet jen do první přesvědčivé historky.
+
+Bezpečnější varianty:
+
+- recovery kódy vygenerované při zapnutí MFA a zobrazené jen jednou;
+- více druhých faktorů pro ownera nebo adminy;
+- schválení resetu jiným ownerem workspace;
+- čekací lhůta u vysoce rizikových resetů, během které odejdou notifikace ostatním adminům;
+- ruční ověření podle předem popsaných firemních důkazů u single-owner účtu;
+- automatické zrušení existujících sessions a vynucení nového nastavení MFA po obnově.
+
+Co nedělat:
+
+- nechtít fotku dokladu, pokud pro ni nemáš jasný právní důvod, bezpečné uložení a retenční pravidlo;
+- nepoužívat bezpečnostní otázky jako hlavní důkaz;
+- neposílat recovery kódy znovu e-mailem;
+- nedovolit supportu „dočasně vypnout MFA“ bez schvalovací stopy;
+- neskrývat reset před ostatními adminy u firemního workspace.
+
+NIST SP 800-63B v rámci digitální autentizace pracuje s úrovněmi záruky a životním cyklem autentizátorů včetně správy, údržby a zneplatnění při ztrátě nebo krádeži; pro SaaS z toho plyne jednoduchá lekce: recovery není vedlejší cesta mimo bezpečnostní model, ale jeho součást: https://pages.nist.gov/800-63-4/sp800-63b.html
+
+## JM.4 Support potřebuje playbook, ne hrdinství
+
+Support často vidí tlak první. „Hoří nám fakturace, pusťte mě hned dovnitř.“ „Kolega odešel a nikdo nemá přístup.“ „Jsem majitel, jen píšu z nového Gmailu.“ Bez playbooku začne člověk pomáhat. A pomoc bez hranic je krásná lidská vlastnost, ale mizerný bezpečnostní mechanismus.
+
+Support playbook pro obnovu účtu má obsahovat:
+
+- seznam scénářů, které support smí vyřešit sám;
+- scénáře, které musí schválit security/owner/management;
+- zakázané důkazy identity: heslo, celé číslo karty, kopie dokladu poslaná do běžného ticketu;
+- bezpečné důkazy: přístup k registrovanému e-mailu, potvrzení od existujícího ownera, fakturační metadata bez citlivých detailů, smluvní kontakt;
+- šablony odpovědí bez prozrazování interních informací;
+- povinné logování rozhodnutí a odkazu na ticket;
+- pravidlo, kdy se proces raději zpomalí než riskuje převzetí účtu.
+
+Příklad odpovědi supportu:
+
+> Rozumíme, že potřebujete rychle obnovit přístup. U firemních účtů ale nemůžeme vypnout MFA jen na základě e-mailové žádosti. Pošlete prosím žádost z registrovaného administrátorského e-mailu, případně požádejte jiného ownera workspace o schválení obnovy. Po dokončení obnovy dostanou admini bezpečnostní notifikaci.
+
+Tohle není neochota. To je služba zákazníkovi, který nechce, aby jeho účet převzal někdo s dobrým copywritingem.
+
+## JM.5 Minimalizuj data v recovery důkazech
+
+Obnova účtu svádí ke sběru „pro jistotu“: screenshot občanky, výpis z účtu, fotka člověka s papírem, firemní dokumenty, interní e-maily. Privacy-first postup začíná opačně: jaký nejmenší důkaz stačí k rozhodnutí?
+
+Datové pravidlo:
+
+- nejdřív preferuj důkaz kontroly existujícího kanálu;
+- potom důkaz role ve firmě nebo workspace;
+- až nakonec citlivé dokumenty, a jen s krátkou retencí;
+- pokud musíš přijmout dokument, ulož ho odděleně, omez přístup a smaž po vyřešení;
+- do ticketu piš výsledek ověření, ne kopii citlivého obsahu.
+
+Příklad bezpečné poznámky v ticketu:
+
+> Ověřeno přes registrovaný fakturační kontakt a potvrzení druhého ownera. MFA reset schválen 2026-08-18, staré sessions zneplatněny, uživatel vyzván k nastavení nového druhého faktoru.
+
+Špatná poznámka:
+
+> Poslal občanku, všechno sedí, nechávám přílohu v ticketu.
+
+Ta druhá věta je přesně ten moment, kdy privacy-first provoz tiše odchází zadním vchodem.
+
+## JM.6 Checklist obnovy účtu
+
+- [ ] Existuje mapa recovery scénářů: heslo, MFA, e-mail, owner, kompromitace, spor o workspace.
+- [ ] Reset hesla neprozrazuje existenci účtu veřejnou odpovědí ani časováním.
+- [ ] Reset tokeny jsou náhodné, hashované, jednorázové a krátce expirované.
+- [ ] Po změně hesla se řeší existující sessions a uživatel dostane bezpečnostní notifikaci.
+- [ ] MFA recovery má recovery kódy nebo schvalovací proces, ne jen libovolný e-mail na support.
+- [ ] U owner/admin účtů existuje vyšší úroveň ověření a auditní stopa.
+- [ ] Support má playbook s povolenými a zakázanými důkazy identity.
+- [ ] Citlivé dokumenty se nesbírají, pokud existuje méně invazivní důkaz.
+- [ ] Do ticketů se ukládá výsledek ověření, ne zbytečné kopie dokladů a osobních údajů.
+- [ ] Recovery akce jsou vidět v bezpečnostním logu workspace.
+- [ ] Po recovery se kontrolují API tokeny, aktivní sessions a poslední citlivé změny.
+- [ ] Proces je otestovaný tabletop cvičením aspoň jednou za rok nebo po větší změně auth systému.
+
+## Zdroje k příloze
+
+- OWASP Cheat Sheet Series — Forgot Password Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Forgot_Password_Cheat_Sheet.html
+- OWASP Cheat Sheet Series — Multifactor Authentication Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Multifactor_Authentication_Cheat_Sheet.html
+- NIST — SP 800-63B Digital Identity Guidelines: https://pages.nist.gov/800-63-4/sp800-63b.html
+
+## Shrnutí přílohy
+
+Obnova účtu je jedna z nejcitlivějších částí SaaS identity. Dobrý privacy-first proces rozlišuje typy ztraceného přístupu, používá bezpečné reset tokeny, chrání MFA recovery před supportovou improvizací, minimalizuje důkazy identity, loguje rozhodnutí a po obnově kontroluje sessions i tokeny. Cílem je vrátit legitimního člověka k práci, ne vyrobit útočníkovi zkratku přes lidskou ochotu.
+
+
 ## Pracovní log
+- 2026-08-18: Přidána příloha JM o obnově účtu a ztraceném přístupu: scénáře recovery, bezpečný reset hesla, MFA recovery, support playbook, minimalizace důkazů identity, auditní stopa a privacy-first checklist.
+
 - 2026-08-18: Přidána příloha JL o přihlášení, MFA a session managementu: bezpečnostní katalog identity, heslová politika, MFA recovery, chráněné cookies, skutečné odhlášení, reset hesla, datová mapa a privacy-first checklist.
 
 - 2026-08-18: Přidána příloha JK o životním cyklu členství v týmu: stavový model členství, bezpečné pozvánky, přijetí účtu, změny rolí, offboarding, neaktivní účty, multi-workspace přístupy a privacy-first checklist.
