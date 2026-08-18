@@ -41343,7 +41343,147 @@ Placená reklama je zesilovač. Když zesílíš jasnou nabídku, pomůže. Kdy�
 
 Privacy-first placená akvizice nestojí na zákazu reklamy. Stojí na kontrole: jasná hypotéza, kontextové kanály, střídmé měření, opatrný retargeting, výjimečné použití customer match seznamů a pravidelný úklid publik i exportů. Malý SaaS nepotřebuje sledovat každého návštěvníka jako detektiv v baloňáku. Potřebuje vědět, jaký slib funguje, pro koho má produkt hodnotu a které kanály přinášejí zákazníky bez zbytečné ztráty důvěry.
 
+---
+
+# Příloha IZ: Marketingová atribuce bez sledovacího panoptika, falešné přesnosti a reportů pro ego
+
+Marketingová atribuce je snaha odpovědět na jednoduchou otázku: odkud přišli zákazníci, kteří opravdu něco udělali? Jenže jednoduchá otázka se v praxi často zvrhne v nekonečné grafy, identifikátory, cross-device sledování, remarketingové seznamy, sporné modely a interní hádky, jestli konverzi „vyhrál“ první článek, poslední reklama, obchodník, nebo kolega, který kdysi vymyslel název produktu.
+
+Privacy-first atribuce začíná pokorněji. Nechce sledovat každého člověka od první návštěvy po fakturu. Chce dát týmu dost signálů pro lepší rozhodnutí: které kanály stojí za další energii, jaké sliby přivádějí správné zákazníky, které kampaně produkují jen šum a kde je potřeba zlepšit landing page, follow-up nebo produkt.
+
+Evropský rámec je pro to docela střízlivý kompas. GDPR staví na účelovém omezení a minimalizaci dat: organizace nemá sbírat osobní údaje pro neurčité účely a má zpracovávat jen to, co je pro daný účel nezbytné. Evropská komise to shrnuje v přehledu principů GDPR: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/overview-principles/what-data-can-we-process-and-under-which-conditions_en. U ukládání nebo čtení informací v zařízení uživatele navíc vstupuje do hry ePrivacy pravidlo kolem cookies a podobných technologií: https://eur-lex.europa.eu/eli/dir/2002/58/oj?locale=en.
+
+## IZ.1 Nehledej dokonalou pravdu, hledej rozhodnutí
+
+První chyba atribuce je víra, že existuje jedno přesné číslo. „Kampaň A přinesla 37,4 % zákazníků“ zní vědecky, ale často za tím stojí křehká směs cookies, blokovaných skriptů, různých zařízení, dlouhého B2B nákupu, ručních doporučení a toho, že si někdo u kávy vzpomněl na článek z minulého měsíce.
+
+Místo otázky „který kanál si zaslouží absolutní kredit?“ polož lepší otázky:
+
+- Které zdroje přivádějí návštěvy s jasným záměrem?
+- Které kampaně vedou k poptávkám, registracím nebo demům, ne jen ke klikům?
+- Kde se opakuje kvalitní zpětná vazba od zákazníků?
+- Které kanály pomáhají zkrátit vysvětlování obchodu?
+- Které aktivity bychom zastavili, kdybychom museli ušetřit 30 % času?
+
+Atribuční report má končit rozhodnutím, ne výstavou metrik. Špatný závěr zní: „Organic social má 12 % assisted conversions.“ Lepší závěr zní: „Dva praktické LinkedIn příspěvky přivedly tři relevantní demo hovory, proto příští měsíc otestujeme sérii technických mini-případovek a nebudeme zvyšovat retargeting.“
+
+## IZ.2 UTM parametry jsou štítky, ne sledovací licence
+
+UTM parametry jsou pořád užitečný základ. Přidáš je do odkazů z kampaní a v analytice vidíš zdroj, médium, kampaň a případně obsah. Privacy-first problém nevzniká tím, že URL obsahuje `utm_source=rss` nebo `utm_campaign=launch`. Problém vzniká ve chvíli, kdy se do URL začne cpát e-mail, ID kontaktu, segment, osobní token nebo interní poznámka typu „hot_lead_ceo_finance“. To není atribuce. To je datová nehoda s marketingovým kloboukem.
+
+Bezpečný UTM slovník pro malý SaaS:
+
+| Parametr | Dobré použití | Čemu se vyhnout |
+| --- | --- | --- |
+| `utm_source` | `newsletter`, `rss`, `partner-web`, `linkedin` | jména lidí, e-maily, konkrétní firmy |
+| `utm_medium` | `email`, `referral`, `cpc`, `organic-social` | interní hodnocení leadu |
+| `utm_campaign` | `2026-q3-onboarding-guide` | osobní identifikátory a tajné názvy klientů |
+| `utm_content` | `hero-link`, `footer-cta`, `case-study-a` | citlivé segmenty nebo poznámky obchodníka |
+| `utm_term` | u placeného vyhledávání obecný keyword set | přesné dotazy, které mohou být citlivé |
+
+Pravidlo: UTM má popsat kampaň, ne člověka. Pokud by ses styděl poslat danou URL zákazníkovi do e-mailu, nemá být veřejná ani v odkazu. Internet má paměť slona a diskrétnost kancelářské tiskárny.
+
+## IZ.3 Měř kanálovou kvalitu přes události s minimem dat
+
+Pro většinu raných SaaS stačí několik obchodních událostí:
+
+- návštěva důležité landing page,
+- klik na primární CTA,
+- odeslaný formulář,
+- vytvořený účet,
+- dokončený onboardingový krok,
+- objednané demo,
+- první aktivace hodnoty v produktu,
+- placená konverze nebo kvalifikovaný obchodní posun.
+
+U každé události se ptej: co potřebujeme znát pro rozhodnutí? Často stačí čas, stránka, kampaňový štítek, typ události a anonymní nebo agregovaný počet. Nepotřebuješ ukládat celý formulářový payload do analytiky, kompletní URL se všemi parametry, IP adresu v marketingovém dashboardu ani session replay pro každé kliknutí.
+
+Příklad privacy-first eventu:
+
+```text
+event: demo_requested
+properties:
+  page: /saas/rezervace
+  source: partner-web
+  campaign: 2026-q3-reservation-guide
+  company_size_bucket: 10-50
+  plan_interest: business
+```
+
+Co tam není: jméno, e-mail, telefon, přesná firma, zpráva z formuláře, IP adresa, user agent jako digitální otisk a interní poznámka „vypadá bohatě“. Tyhle údaje mohou patřit do CRM nebo podpory, pokud mají jasný účel. Nepatří automaticky do marketingové analytiky.
+
+## IZ.4 Přiznej rozdíl mezi self-reportem a technickou atribucí
+
+V B2B často nejdůležitější zdroj nezměříš skriptem. Zákazník slyšel doporučení od známého, viděl přednášku, přečetl tři články, pak si tě vygooglil a nakonec kliknul na brandovou reklamu. Poslední klik by si vzal kredit, ale skutečná práce se stala dávno před ním.
+
+Proto má smysl přidat do poptávky nebo onboardingového dotazníku jednoduchou otázku:
+
+> „Kde jste o nás poprvé slyšeli?“
+
+Nabídni pár možností a pole „jiné“. Nepoužívej to jako povinnou překážku. Ber odpovědi jako kvalitativní signál, ne účetní pravdu. Jednou za měsíc je projdi ručně a hledej vzory: opakující se doporučení, konkrétní článek, event, partner, komunita nebo vyhledávací fráze.
+
+Technická atribuce říká, co se stalo v měřitelném kanálu. Self-report říká, co si zákazník pamatuje jako důvod. Obojí je neúplné. Dohromady jsou ale užitečnější než víra v jednu magickou cookie.
+
+## IZ.5 Reporting stav na kohortách, ne na profilování jednotlivců
+
+Dobrá marketingová porada nepotřebuje seznam lidí, kteří klikli na konkrétní reklamu. Potřebuje vidět, které kohorty dávají smysl.
+
+Měsíční privacy-first report může vypadat takhle:
+
+| Otázka | Metrika | Akce |
+| --- | --- | --- |
+| Který kanál přivedl relevantní zájem? | počet kvalifikovaných poptávek podle zdroje | posílit / udržet / zastavit |
+| Který slib fungoval? | konverze landing page podle kampaně | přepsat headline nebo rozšířit obsah |
+| Kde vznikl šum? | kliky bez aktivace nebo odpovědi | omezit rozpočet, změnit cílení |
+| Co říkali zákazníci? | self-report a obchodní poznámky v agregaci | přidat FAQ, článek nebo demo scénář |
+| Co zvyšovalo riziko dat? | nové pixely, exporty, publika, sdílení s partnery | odstranit nebo zdokumentovat |
+
+Report má mít ownera a rozhodnutí. Pokud report pouze přidává další grafy, stává se z něj interní dekorace. Hezká, barevná, a stejně užitečná jako dashboard na počasí v bunkru.
+
+## IZ.6 Atribuční hygienu dělej při každé kampani
+
+Před spuštěním kampaně si projdi malý kontrolní postup:
+
+1. **Hypotéza:** co chceme ověřit a jaké rozhodnutí uděláme po testu?
+2. **Datové minimum:** které údaje potřebujeme pro vyhodnocení?
+3. **URL hygiena:** neobsahují UTM parametry osobní údaje, tajné názvy klientů nebo interní segmenty?
+4. **Cookie dopad:** ukládáme nebo čteme něco v zařízení uživatele? Pokud ano, máme právní a produktové vysvětlení?
+5. **Dodavatelé:** kdo data dostane a kde je provozuje?
+6. **Retence:** kdy smažeme exporty, publika a pomocné tabulky?
+7. **Report:** kdo napíše závěr a jaké rozhodnutí z něj má vzniknout?
+
+Tohle je práce na deset minut. Ušetří hodiny vysvětlování, proč se někde v URL objevil osobní údaj, proč partner dostal seznam leadů navíc nebo proč nikdo neumí říct, jestli kampaň vlastně pomohla.
+
+## IZ.7 Checklist privacy-first atribuce
+
+- Má každá kampaň jednu jasnou hypotézu a předem domluvené rozhodnutí?
+- Používáme UTM parametry pouze pro popis kampaně, ne pro identifikaci lidí?
+- Umíme vyhodnotit výkon kanálu bez individuálního sledování návštěvníků?
+- Oddělujeme marketingovou analytiku od CRM a podpory?
+- Neposíláme formulářové zprávy, e-maily nebo přesné firmy do analytických eventů?
+- Ptáme se zákazníků lidsky, kde o nás slyšeli, a bereme to jako kvalitativní signál?
+- Reportujeme kohorty, trend a rozhodnutí, ne seznamy konkrétních osob?
+- Máme retenční pravidlo pro kampaně, exporty, publika a pomocné tabulky?
+- Víme, které dodavatele a regiony používáme pro měření?
+- Dokážeme zákazníkovi jednoduše vysvětlit, jak marketing měříme?
+
+## Codyho komentář
+
+Marketingová atribuce je užitečná, dokud pomáhá rozhodovat. Jakmile začne předstírat absolutní pravdu, vyrábí falešnou jistotu. Privacy-first přístup je v tomhle osvobozující: místo snahy sledovat všechno se tým soustředí na to, co reálně zlepší nabídku, obsah, landing page a obchodní rozhovor. Méně panoptika, více úsudku. To beru.
+
+## Zdroje k příloze
+
+- European Commission: principy GDPR včetně účelového omezení, minimalizace dat a omezení uložení: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/overview-principles/what-data-can-we-process-and-under-which-conditions_en
+- EUR-Lex: Directive 2002/58/EC, ePrivacy Directive, pro kontext pravidel ukládání a čtení informací v koncovém zařízení: https://eur-lex.europa.eu/eli/dir/2002/58/oj?locale=en
+- European Commission: podmínky platného souhlasu podle GDPR: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/legal-grounds-processing-data/grounds-processing/when-consent-valid_en
+- EDPB: Guidelines 05/2020 on consent under Regulation 2016/679: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-052020-consent-under-regulation-2016679_en
+
+## Shrnutí přílohy
+
+Privacy-first atribuce není rezignace na měření. Je to disciplína: jasné hypotézy, čisté UTM parametry, minimální eventy, kombinace technických signálů se self-reportem, kohortový reporting a pravidelný úklid dat. Malý evropský SaaS nepotřebuje vědět o každém návštěvníkovi všechno. Potřebuje vědět, které aktivity přinášejí správné zákazníky a které jen vyrábějí barevné grafy pro dobrý pocit.
+
 ## Pracovní log
+- 2026-08-18: Přidána příloha IZ o privacy-first marketingové atribuci: rozhodování místo falešné přesnosti, bezpečné UTM parametry, minimální eventy, self-report zdrojů, kohortový reporting, kampaňová hygiena a checklist.
 - 2026-08-17: Přidána příloha IY o privacy-first placené akvizici a retargetingu: rozdělení kampaní podle kontroly nad vztahem, kontextové cílení, omezený retargeting, customer match jako výjimka, landing page bez sledovací protézy, akviziční sprint, datová mapa a checklist.
 - 2026-08-17: Přidána příloha IX o privacy-first e-mailových kampaních: rozdělení typů e-mailů, limity open rate, rozhodování o tracking pixelech, přímé odkazy, preference centrum, automatizační brzdy, datová mapa a checklist.
 - 2026-08-17: Přidána příloha IW o brand monitoringu a social listeningu bez plošného šmírování: účely monitoringu, veřejné signály místo profilů, RSS a přímé odkazy, opatrné použití sentimentu, datová mapa, týdenní rutina a privacy-first checklist.
