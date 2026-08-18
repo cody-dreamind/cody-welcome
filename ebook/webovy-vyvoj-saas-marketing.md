@@ -41643,7 +41643,145 @@ Výkon je často nejpoctivější privacy-first metrikou. Když stránka potřeb
 Privacy-first výkon není honba za perfektním skóre. Je to disciplína, která kombinuje odstranění zbytečností, výkonnostní rozpočet, opatrnou cache, promyšlené použití CDN, střídmé měření reálných cest a release proces, který nenechá web pomalu ztloustnout. Rychlost, bezpečnost a soukromí se tady nepřetahují. Když se dělají dobře, táhnou za stejný konec lana.
 
 
+# Příloha JB: Obrázky, fonty a vizuální assety bez pomalého webu, externích taháků a zbytečných otisků
+
+Obrázky a fonty jsou na webu takový nenápadný luxus: nikdo je neřeší, dokud stránka nezačne na mobilu funět jako notebook při videohovoru s dvaceti taby. Přitom právě assety často rozhodují o prvním dojmu. Hero fotka, ikony, produktové screenshoty a vlastní font umí dodat důvěryhodnost. Umí ale taky přidat megabajty, třetí strany, layout shift, právní nejasnosti a další malý datový odtok.
+
+Privacy-first web neříká „žádné obrázky, žádné fonty, všichni zpátky k Times New Roman“. Říká: každý asset má mít účel, vlastníka, rozumnou velikost, jasný původ a co nejmenší provozní stopu. Když obrázek nepomáhá prodat, vysvětlit nebo uklidnit, je to dekorace s měsíčním paušálem v podobě výkonu.
+
+## JB.1 Každý vizuál musí mít práci
+
+Než začneš optimalizovat formáty, polož nudnější otázku: proč ten vizuál na stránce je?
+
+Dobré role vizuálů:
+
+- **Vysvětlení:** screenshot ukazuje konkrétní workflow, které by text popisoval těžkopádně.
+- **Důkaz:** fotka reálného týmu, provozu, výsledku nebo dashboardu zvyšuje důvěru.
+- **Navigace:** ikona pomáhá rychle rozlišit sekce, tarify nebo typy funkcí.
+- **Emoce:** brandový obrázek podporuje tón značky, ale nesmí přebít sdělení.
+
+Slabé role vizuálů:
+
+- ilustrační fotka „lidé u notebooku se smějí na salát“,
+- 3D abstrakce stažená jen proto, že na webu zbylo prázdné místo,
+- screenshot plný reálných zákaznických dat,
+- ikony z pěti knihoven, protože „nějak se to tam vešlo“.
+
+Praktický test: u každého obrázku napiš do poznámky jednu větu „Tento obrázek pomáhá návštěvníkovi pochopit…“. Pokud větu nedokončíš bez marketingového balastu, obrázek smaž nebo nahraď něčím užitečnějším.
+
+## JB.2 Obrázky připrav podle kontextu, ne podle designového ega
+
+Web.dev připomíná, že u obrázků nejde jen o kompresi, ale také o dodání správné velikosti pro konkrétní zařízení a kontext: https://web.dev/learn/performance/image-performance?hl=en. Jinými slovy: mobil nepotřebuje stejný 2400px banner jako velký monitor. A už vůbec nepotřebuje původní export z Figmy, který má název `hero-final-final-v7-really-final.png` a váží jako menší dokumentární film.
+
+Rozumný postup:
+
+1. **Urči maximální zobrazovanou velikost.** Když je obrázek v kartě široké 360 px, nepotřebuje 2000 px originál.
+2. **Připrav varianty.** Pro responzivní layout použij `srcset` a `sizes`, aby prohlížeč mohl vybrat vhodný soubor.
+3. **Zvol formát podle obsahu.** Fotky patří typicky do AVIF/WebP/JPEG, jednoduché ikony do SVG, screenshoty často do WebP/PNG podle ostrosti textu.
+4. **Nastav rozměry v HTML nebo CSS.** Obrázek s definovanou šířkou a výškou méně rozhazuje layout.
+5. **Lazy-loaduj vedlejší obsah.** Obrázky mimo první obrazovku nemusí blokovat první dojem.
+
+Příklad jednoduchého pravidla pro malý tým:
+
+- hero obrázek: exportuj ve 2–3 šířkách, nastav `srcset`, drž datovou velikost při zemi,
+- produktový screenshot: anonymizuj data, ořízni zbytečný chrome prohlížeče, přidej popisek,
+- ikona: preferuj lokální SVG bez externího skriptu,
+- galerie: načítej až po scrollu a nedělej z ní povinnou vstupní bránu ke sdělení.
+
+Codyho komentář: nejrychlejší optimalizace obrázku je často jeho smazání. Brutální, levné, ekologické. UX chirurg by zatleskal, grafický maximalista možná ne.
+
+## JB.3 Produktové screenshoty nesmí vynášet data ven
+
+Screenshot je důkaz hodnoty, ale taky častý únik informací. Na marketingové stránce se snadno objeví jména zákazníků, interní poznámky, e-maily, částky, adresy, API klíče, URL staging prostředí nebo názvy projektů, které nemají být veřejné. A jakmile je screenshot v indexu, CDN, repozitáři a sdíleném decku, lovit ho zpátky je digitální varianta sbírání konfet ve větru.
+
+Bezpečný proces pro screenshoty:
+
+- Vytvoř demo účet se syntetickými daty.
+- Používej realistické, ale neexistující osoby, firmy, e-maily a zakázky.
+- Zkontroluj URL, titulky oken, notifikace, postranní panely a hover stavy.
+- Neanonymizuj jen rozmazáním, pokud jde o citlivá data; lepší je data vůbec nemít ve zdroji.
+- Ulož zdroj screenshotu do interní dokumentace: odkud vznikl, kdy, pro jakou stránku.
+- Při redesignu nebo změně UI naplánuj revizi screenshotů, jinak web začne ukazovat produkt, který už neexistuje.
+
+Pro SaaS je dobré mít malý „screenshot seed“: skript nebo šablonu, která naplní demo prostředí bezpečnými daty. Marketing pak nemusí pokaždé lovit náhodný reálný účet a vývojáři nemusí po večerech retušovat zákaznické názvy jako grafičtí hasiči.
+
+## JB.4 Fonty: brand ano, externí závislost ne automaticky
+
+Font je součást identity. Zároveň je to soubor, který se musí stáhnout, vykreslit a často sladit s fallbackem. Web.dev u web fontů doporučuje řešit nejen samotné fontové soubory, ale i načasování stylesheetů a načítání tak, aby fonty nebrzdily Core Web Vitals: https://web.dev/articles/font-best-practices?hl=en. MDN popisuje `font-display` jako descriptor v `@font-face`, kterým lze řídit chování textu během načítání fontu: https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/%40font-face/font-display
+
+Privacy-first rozhodování u fontů:
+
+- **Systémový font stack:** nejrychlejší a nejméně riziková volba pro mnoho B2B webů.
+- **Self-hostovaný font:** dobrý kompromis, když značka potřebuje vlastní výraz a tým umí řešit licenci, subsety a cache.
+- **Externí font CDN:** pohodlné, ale přidává třetí stranu, DNS požadavek, provozní závislost a otázku, co se při načtení posílá komu.
+
+Pokud použiješ vlastní font, drž se minima:
+
+- nenačítej pět řezů, když reálně používáš dva,
+- preferuj WOFF2 pro moderní prohlížeče,
+- rozděl fonty podle potřeby: běžný text, nadpisy, ikony neházej do jednoho kýble,
+- nastav dlouhou cache pro verzované fontové soubory,
+- otestuj fallback, aby stránka nevypadala rozbitě, když font nedorazí,
+- nepoužívej ikonový font jen proto, že to tak dělal bootstrapový archeolog v roce 2015.
+
+## JB.5 Ikony a ilustrace drž jako součást systému
+
+Ikony nejsou ozdoba, jsou jazyk. Když každá stránka používá jiný styl, uživatel se učí pokaždé znovu. A když se ikony tahají z externí knihovny přes skript, vzniká další závislost kvůli pár čárám.
+
+Praktický systém:
+
+- Vytvoř malou sadu ikon pro reálné významy: bezpečnost, export, tým, platby, integrace, dokumentace.
+- U každé ikony napiš, co znamená; ne jen jak vypadá.
+- SVG ukládej lokálně a kontroluj, že neobsahuje zbytečná metadata z exportu.
+- Nepoužívej ikonu jako jediný nosič informace; přidej text nebo přístupný popisek.
+- U ilustrací drž jednotný styl, paletu a pravidlo použití.
+
+Pro privacy-first značku fungují dobře vizuály, které ukazují kontrolu a klid: datové toky, evropský provoz, bezpečné exporty, auditní stopu, jednoduchý proces. Méně funguje generická futuristická mlha s visícím zámkem. Zámek na webu je často jen designová náplast na nedostatek konkrétnosti.
+
+## JB.6 Asset pipeline má být opakovatelná
+
+Nejhorší proces je „někdo někam nahrál obrázek a ono to funguje“. Funguje to do chvíle, než potřebuješ zjistit licenci, původ, původní rozměr, kdo to schválil a proč se na homepage najednou načítá 8 MB.
+
+Minimální asset pipeline pro malý tým:
+
+1. **Zdroj:** odkud asset pochází, kdo ho vytvořil, jaká je licence.
+2. **Účel:** na které stránce je a jaké rozhodnutí podporuje.
+3. **Privacy kontrola:** neobsahuje osobní, zákaznická nebo interní data.
+4. **Optimalizace:** správný formát, rozměry, komprese, alternativní text.
+5. **Nasazení:** lokální soubor nebo kontrolovaná evropská infrastruktura, ne náhodná externí URL.
+6. **Revize:** datum kontroly a vlastník, který asset odstraní nebo aktualizuje.
+
+U většího webu pomůže jednoduchá tabulka: `soubor`, `stránka`, `účel`, `zdroj`, `licence`, `obsahuje data`, `vlastník`, `revize`. Není to sexy. Ale když přijde redesign, audit nebo otázka „můžeme ten obrázek použít v kampani?“, tahle tabulka ušetří malý požár.
+
+## JB.7 Checklist obrázků, fontů a assetů
+
+- Má každý obrázek jasný účel na stránce?
+- Neobsahují screenshoty reálná zákaznická, osobní nebo interní data?
+- Jsou obrázky ve správném formátu a velikosti pro mobil i desktop?
+- Používáme `srcset`, `sizes`, rozměry a lazy loading tam, kde dávají smysl?
+- Jsou fonty buď systémové, nebo self-hostované s jasnou licencí a rozumnou cache?
+- Načítáme jen řezy fontů, které opravdu používáme?
+- Nezávisí kritické vykreslení stránky na externí fontové nebo ikonové službě?
+- Mají SVG ikony odstraněná zbytečná metadata a přístupné popisky tam, kde nesou význam?
+- Víme u každého assetu zdroj, licenci, vlastníka a datum poslední kontroly?
+- Umí web pořád působit důvěryhodně, i když se font nebo vedlejší obrázek nenačte?
+
+## Zdroje k příloze
+
+- Web.dev — Image performance: https://web.dev/learn/performance/image-performance?hl=en
+- Web.dev — Responsive images: https://web.dev/learn/design/responsive-images?hl=en
+- Web.dev — Best practices for fonts: https://web.dev/articles/font-best-practices?hl=en
+- MDN — `font-display` descriptor: https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/%40font-face/font-display
+
+## Shrnutí přílohy
+
+Vizuální assety mají pomáhat prodeji, důvěře a srozumitelnosti, ne dělat z webu pomalou výstavní síň. Privacy-first přístup znamená lokální kontrolu, bezpečné screenshoty, jasné licence, úsporné fonty, responzivní obrázky a opakovatelný proces. Krásný web je fajn. Krásný, rychlý a datově střídmý web je dospělý.
+
+---
+
 ## Pracovní log
+
+- 2026-08-18: Přidána příloha JB o obrázcích, fontech a vizuálních assetech: účel vizuálů, responzivní optimalizace, bezpečné screenshoty, self-hostované fonty, ikonový systém, asset pipeline a checklist.
 
 - 2026-08-18: Přidána příloha JA o výkonu webu, cache a rychlosti: odstraňování zbytečností, výkonnostní rozpočet, bezpečná cache, CDN/edge datová mapa, měření kritických cest bez osobních údajů, release proces a privacy-first checklist.
 - 2026-08-18: Přidána příloha IZ o privacy-first marketingové atribuci: rozhodování místo falešné přesnosti, bezpečné UTM parametry, minimální eventy, self-report zdrojů, kohortový reporting, kampaňová hygiena a checklist.
