@@ -43247,7 +43247,185 @@ Můj pohled — Cody: dobrý lifecycle členství je tak trochu personální odd
 Životní cyklus členství je provozní bezpečnostní proces, ne jen seznam uživatelů. Privacy-first SaaS má jasné stavy členství, bezpečné pozvánky, oddělení účtu od workspace, auditovatelné změny rolí, důsledný offboarding a pravidelné review neaktivních nebo externích přístupů. Cílem není administrátorská byrokracie, ale jednoduchá kontrola nad tím, kdo se kdy dostane k jakým datům.
 
 
+# Příloha JL: Přihlášení, MFA a session management bez tokenů v kapse, magických odhlášení a bezpečnostního divadla
+
+Přihlášení je v SaaS jeden z těch kusů produktu, které uživatel vidí jen pár vteřin — a firma na něm přitom staví důvěru celé aplikace. Když je moc přísné, brzdí práci. Když je moc volné, otevře dveře cizím lidem. Privacy-first přístup není „přidáme CAPTCHA a hotovo“, ale promyšlený životní cyklus identity: registrace, přihlášení, druhý faktor, reset, session, zařízení, odhlášení a incident.
+
+Tahle příloha navazuje na role a členství: nestačí vědět, kdo má v týmu jakou roli. Musíš také vědět, jak bezpečně prokazuje, že je to opravdu on, a jak rychle umíš přístup ukončit, když se něco pokazí.
+
+## JL.1 Přihlášení není jen formulář se dvěma inputy
+
+Základní chyba malého SaaS: login se udělá jako technická nutnost a zbytek se lepí až po prvním incidentu. Výsledkem bývá směs nekonzistentních chybových hlášek, tokenů v `localStorage`, reset odkazů bez jasné expirace a admin účtů chráněných stejně jako demo účet. To je jako dát trezorové dveře na papírovou boudu. Efektní, ale vítr má jiný názor.
+
+Praktický návrh:
+
+- rozděl identity podle rizika: běžný uživatel, admin, owner, support, integrace, interní operátor;
+- popiš kritické akce: změna e-mailu, změna hesla, zapnutí/vypnutí MFA, export dat, změna fakturace, pozvání člena, změna role;
+- u kritických akcí vyžaduj čerstvé ověření, ne jen starou session z notebooku na gauči;
+- přihlašovací chyby formuluj bezpečně: „E-mail nebo heslo nesedí“, ne „E-mail existuje, heslo je špatně“;
+- loguj bezpečnostní události bez payloadů a tajemství: čas, typ akce, výsledek, actor ID, workspace ID, hrubý kontext rizika.
+
+Příklad bezpečnostního katalogu:
+
+| Událost | Uživatel ji vidí? | Audit log? | Extra ověření? | Poznámka |
+|---|---:|---:|---:|---|
+| Nové přihlášení | ano | ano | ne vždy | Ukaž zařízení nebo přibližný kontext, ne přesnou stopu člověka. |
+| Změna hesla | ano | ano | ano | Po změně nabídni odhlášení ostatních sessions. |
+| Zapnutí MFA | ano | ano | ano | Ulož recovery kódy bezpečně a ukaž je jen jednou. |
+| Vypnutí MFA | ano | ano | ano | Pro adminy ideálně vyžaduj další potvrzení. |
+| Reset hesla | ano | ano | podle rizika | Odkaz musí expirovat a být jednorázový. |
+| Přidání admina | ano | ano | ano | Patří do týmového audit logu. |
+
+## JL.2 Hesla: méně divadla, víc odolnosti
+
+Moderní heslová politika nemá uživatele nutit vymýšlet `P@ssw0rd!2026`, které pak stejně skončí ve správci hesel, lepíku nebo recyklaci. Důležitější je minimální délka, blokace známě kompromitovaných hesel, bezpečné hashování, MFA pro citlivé role a rozumný reset proces.
+
+Praktické pravidlo pro malý B2B SaaS:
+
+- dovol dlouhá hesla a passphrases;
+- nevyžaduj absurdní mix symbolů, pokud tím jen zhoršíš použitelnost;
+- kontroluj heslo proti seznamům známě kompromitovaných hodnot;
+- hesla nikdy neloguj, neposílej e-mailem a neukládej reverzibilně;
+- změnu hesla vynucuj hlavně při podezření na kompromitaci, ne kalendářním rituálem;
+- pro adminy, ownery a interní operátory vyžaduj MFA.
+
+Mikrotext pro nastavení hesla:
+
+> Použij dlouhé unikátní heslo nebo passphrase. Doporučujeme správce hesel. Heslo nikdy neposíláme e-mailem a nikdo z podpory ho po tobě nebude chtít.
+
+## JL.3 MFA musí chránit účet, ne trestat člověka
+
+MFA je skvělá obrana proti útokům na hesla, ale jen když má dobré UX a recovery proces. Pokud uživatel ztratí telefon a jediná cesta zpět je „napište nám libovolný e-mail a my vám to vypneme“, právě sis vyrobil supportem řízenou díru do trezoru.
+
+Doporučené pořadí pro menší SaaS:
+
+1. nabídni TOTP aplikaci jako běžný druhý faktor;
+2. pro vysoce privilegované účty podporuj bezpečnostní klíče nebo passkeys, pokud to rozpočet a stack dovolí;
+3. SMS ber jako nouzovou kompatibilitu, ne jako zlatý standard;
+4. při zapnutí MFA vygeneruj recovery kódy a jasně vysvětli, že se mají uložit mimo aplikaci;
+5. vypnutí nebo reset MFA dělej přes ověřený proces s auditní stopou.
+
+Recovery proces musí být popsán předem:
+
+- kdo může požádat o reset MFA;
+- jak se ověří identita žadatele;
+- kdo reset schvaluje u firemního workspace;
+- jestli se při resetu ruší existující sessions;
+- jak se událost ukáže ownerovi nebo adminům;
+- jak dlouho se evidence drží.
+
+Codyho praktická rada: pro B2B produkt je často lepší mít „MFA required for admins“ než obecnou volbu, kterou nikdo nezapne. Bezpečnostní funkce, která zůstane v nastavení neobjevená, je dekorace.
+
+## JL.4 Session cookie má být nudná, krátká a dobře chráněná
+
+Session management je místo, kde se hodně aplikací tváří moderně, ale pod kapotou vozí refresh token v `localStorage` jako korunovační klenoty v igelitce. Pro běžné webové SaaS je dobrý výchozí směr serverová session nebo BFF vzor a cookie s `HttpOnly`, `Secure` a vhodným `SameSite` nastavením.
+
+Praktická pravidla:
+
+- session identifikátor nikdy neukládej do `localStorage` nebo `sessionStorage`;
+- používej `HttpOnly`, aby k session neměl přístup běžný JavaScript;
+- používej `Secure`, aby cookie nešla po nešifrovaném HTTP;
+- nastav `SameSite=Lax` nebo `Strict` podle toku aplikace;
+- regeneruj session po přihlášení a zvýšení oprávnění;
+- měj absolutní expiraci i idle timeout;
+- po změně hesla, vypnutí MFA nebo odebrání člena uměj zrušit relevantní sessions.
+
+Příklad rozhodovací tabulky:
+
+| Situace | Co udělat se session |
+|---|---|
+| Uživatel se přihlásil | Vytvořit novou session, staré anonymní ID zahodit. |
+| Uživatel změnil heslo | Nabídnout nebo vynutit odhlášení ostatních zařízení podle rizika. |
+| Admin snížil roli člena | Zneplatnit sessions, aby se práva nepřepočítala až za hodinu. |
+| Owner odebral člena | Okamžitě zrušit sessions a API tokeny pro daný workspace. |
+| Podezřelé přihlášení | Vyžádat další ověření nebo poslat bezpečnostní upozornění. |
+
+## JL.5 Odhlášení musí být skutečné
+
+„Odhlásit“ nemá znamenat jen smazat stav ve frontendu. Uživatel očekává, že server přestane session přijímat. Admin očekává, že odebraný člen už nemůže otevřít starý tab. A zákazník očekává, že support neumí kouzlit kolem pravidel.
+
+Co má odhlášení umět:
+
+- zneplatnit serverovou session;
+- smazat cookie na klientovi;
+- zrušit nebo rotovat související refresh tokeny;
+- zavřít sessions při změně role nebo odebrání z workspace;
+- ukázat uživateli seznam aktivních sessions nebo alespoň možnost „odhlásit ostatní zařízení“;
+- logovat bezpečnostní událost bez zbytečného detailu o zařízení.
+
+Příklad UI pro nastavení účtu:
+
+> Aktivní přihlášení: Toto zařízení, poslední aktivita dnes 12:41. Pokud sis přístup nepoznal, změň heslo a odhlaš ostatní zařízení.
+
+Privacy-first detail: přesná geolokace zařízení často není nutná. „Praha, Česko“ může působit efektně, ale také zavádět a sbírat víc, než potřebuješ. Lepší je zobrazit čas, typ zařízení podle user-agentu, případně hrubý region jen tehdy, když ho už máš legitimně a bezpečně.
+
+## JL.6 Reset hesla je bezpečnostní tok, ne e-mailová formalita
+
+Reset hesla je oblíbené místo útoků, protože obchází běžné přihlášení. Nemá prozrazovat, jestli účet existuje, nemá posílat nové heslo a nemá používat dlouho platný univerzální odkaz.
+
+Bezpečný reset v praxi:
+
+- odpověď formuláře je stejná pro existující i neexistující e-mail;
+- token je jednorázový, náhodný, dostatečně dlouhý a uložený hashovaně;
+- odkaz má krátkou expiraci;
+- po použití se token zneplatní;
+- po resetu informuj uživatele bezpečnostním e-mailem;
+- zvaž odhlášení ostatních sessions;
+- pokud má účet MFA, reset hesla nemá automaticky resetovat MFA.
+
+Mikrotext:
+
+> Pokud k tomuto e-mailu existuje účet, pošleme odkaz pro nastavení nového hesla. Odkaz platí omezenou dobu a lze použít jen jednou.
+
+## JL.7 Datová mapa identity a session
+
+Přihlašování se snadno rozroste do deseti tabulek a pěti externích služeb. Udělej si datovou mapu dřív, než ji po tobě bude chtít zákazník, auditor nebo incident.
+
+| Data | Účel | Retence | Pozor na |
+|---|---|---|---|
+| E-mail účtu | Identita a komunikace | Po dobu účtu + právní minimum | Změna e-mailu musí být ověřená. |
+| Hash hesla | Přihlášení | Po dobu lokálního loginu | Nikdy neexportovat do support nástrojů. |
+| MFA secret | Druhý faktor | Po dobu zapnuté MFA | Šifrovat, nezobrazovat po vytvoření. |
+| Recovery kódy | Obnova MFA | Do použití nebo regenerace | Ukládat hashovaně, ukázat jen jednou. |
+| Session ID | Přístup do aplikace | Krátká provozní retence | Nerenderovat do klientského JS. |
+| Security event | Detekce a audit | Podle rizika a smluv | Bez tokenů, payloadů a citlivých hodnot. |
+| Reset token | Obnova hesla | Minuty až jednotky hodin | Hashovat, jednorázově zneplatnit. |
+
+## JL.8 Checklist privacy-first přihlášení
+
+- [ ] Login nerozlišuje veřejně „neexistující e-mail“ a „špatné heslo“.
+- [ ] Hesla jsou hashovaná moderním algoritmem a nikdy se nelogují.
+- [ ] Známě kompromitovaná hesla jsou blokovaná nebo aspoň označená jako riziko.
+- [ ] Admini, owner účty a interní operátoři mají MFA povinné.
+- [ ] MFA recovery proces má jasná pravidla, auditní stopu a bezpečné schvalování.
+- [ ] Session cookie používá `HttpOnly`, `Secure` a promyšlené `SameSite`.
+- [ ] Tokeny a session ID nejsou v `localStorage` ani v URL.
+- [ ] Změna hesla, změna role, odebrání člena a reset MFA zneplatní relevantní sessions.
+- [ ] Reset hesla používá jednorázový expirovaný token a stejnou veřejnou odpověď pro všechny e-maily.
+- [ ] Aktivní sessions a bezpečnostní události jsou viditelné uživateli přiměřeně, bez přesného sledovacího profilu.
+- [ ] Security logy obsahují metadata pro obranu a audit, ne tajemství ani plné payloady.
+- [ ] Datová mapa identity vysvětluje účel, retenci a subdodavatele.
+
+## Codyho komentář
+
+Můj pohled — Cody: dobré přihlášení je jako dobrý vrátný. Neptá se každého návštěvníka na rodokmen do sedmé generace, ale taky nepustí člověka s cedulkou „jsem admin, věř mi bro“. Privacy-first login má být klidný, čitelný a přísný tam, kde jde o data zákazníků. Největší kompliment pro auth systém je, když o něm uživatel moc nepřemýšlí — a útočník bohužel ano.
+
+## Zdroje k příloze
+
+- OWASP Cheat Sheet Series — Authentication Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html
+- OWASP Cheat Sheet Series — Multifactor Authentication Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Multifactor_Authentication_Cheat_Sheet.html
+- OWASP Cheat Sheet Series — Session Management Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html
+- OWASP Cheat Sheet Series — Forgot Password Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Forgot_Password_Cheat_Sheet.html
+- NIST — SP 800-63-4 Digital Identity Guidelines, publikováno 2025-08-01: https://www.nist.gov/publications/nist-sp-800-63-4-digital-identity-guidelines
+
+## Shrnutí přílohy
+
+Přihlášení, MFA a session management jsou součást produktu i provozní bezpečnosti. Privacy-first SaaS má bezpečnou heslovou politiku, povinné MFA pro citlivé role, promyšlený recovery proces, chráněné session cookies, skutečné odhlášení, bezpečný reset hesla a datovou mapu identity. Cíl není uživatele šikanovat bezpečnostními rituály, ale dát firmě i zákazníkům jistotu, že přístup k datům má jasné hranice.
+
+
 ## Pracovní log
+- 2026-08-18: Přidána příloha JL o přihlášení, MFA a session managementu: bezpečnostní katalog identity, heslová politika, MFA recovery, chráněné cookies, skutečné odhlášení, reset hesla, datová mapa a privacy-first checklist.
+
 - 2026-08-18: Přidána příloha JK o životním cyklu členství v týmu: stavový model členství, bezpečné pozvánky, přijetí účtu, změny rolí, offboarding, neaktivní účty, multi-workspace přístupy a privacy-first checklist.
 
 - 2026-08-18: Přidána příloha JJ o oprávněních, rolích a týmových přístupech v SaaS: role podle scénářů, deny by default, objektová autorizace, bezpečné pozvánky, zákaz sdílených účtů, support access, access review, testovací scénáře a privacy-first checklist.
