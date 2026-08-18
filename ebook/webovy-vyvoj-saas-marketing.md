@@ -42074,7 +42074,170 @@ Můj pohled — Cody: nejlepší anti-bot opatření je často nudný produktov�
 Abuse ochrana má chránit službu, zákazníky a náklady, ne vyrábět tajnou databázi návštěvnických otisků. Začni mapou rizikových akcí, nastav limity podle skutečné ceny a dopadu, loguj jen obranné minimum, CAPTCHA používej až jako poslední vrstvu a po každém incidentu pravidla ukliď. Privacy-first bezpečnost není měkká bezpečnost. Je to bezpečnost, která ví, co chrání — a co už chránit nepotřebuje.
 
 
+
+# Příloha JE: Vyhledávání v SaaS bez úniku dotazů, datového kombajnu a SQL adrenalinu
+
+Vyhledávání v produktu vypadá nevinně: jedno pole, lupa, pár filtrů a hotovo. Jenže právě search box často prozradí víc než dlouhý registrační formulář. Uživatel do něj napíše jméno zákazníka, číslo faktury, zdravotní poznámku, interní kód projektu, e-mail kolegy nebo zoufalý dotaz typu „jak smazat účet před kontrolou“. Romantika databázového sklepa.
+
+Privacy-first vyhledávání proto neřeší jen rychlost a relevanci. Řeší i to, co se smí indexovat, kdo může co najít, jak dlouho žijí dotazy, co končí v logu a jestli si tým omylem nepostavil druhou databázi osobních údajů jen proto, že chtěl našeptávač.
+
+Evropské pravidlo je jednoduché: účel, minimalizace, omezení uložení a bezpečnost nejsou ozdoba privacy policy. Evropská komise shrnuje, že organizace nemá sbírat data pro neurčité účely a má zpracovávat jen data nezbytná pro daný účel: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/overview-principles/what-data-can-we-process-and-under-which-conditions_en
+
+## JE.1 Search začíná katalogem polí, ne výběrem enginu
+
+Než tým začne vybírat vyhledávací službu, má vědět, co vlastně chce hledat. Jinak skončí u indexu „všechno kromě svědomí“: názvy, popisy, poznámky, komentáře, přílohy, metadata, historické verze a občas i kus payloadu z integrace.
+
+Praktický katalog pro každou entitu:
+
+| Entita | Pole v indexu | Proč se hledá | Citlivost | Retence | Poznámka |
+| --- | --- | --- | --- | --- | --- |
+| Zákazník | Název firmy, interní ID | Rychlé otevření účtu | Střední | Po dobu vztahu | E-mail jen pokud je nutný pro support |
+| Faktura | Číslo, stav, částka v pásmu | Párování plateb | Střední | Podle účetních pravidel | Neindexovat poznámky z plateb |
+| Ticket | Předmět, štítky, stav | Support triáž | Vyšší | Podle support retence | Tělo ticketu jen v omezeném režimu |
+| Dokument | Název, typ, vlastník | Navigace v systému | Podle obsahu | Podle workspace politiky | Obsah příloh indexovat až po rozhodnutí |
+
+Důležité pravidlo: neindexuj pole jen proto, že existuje. Index je kopie dat s vlastním životem, vlastními právy, vlastními logy a vlastními průšvihy. Když zákazník požádá o výmaz nebo se změní oprávnění, musíš vědět, kde všude se výsledek objeví.
+
+## JE.2 Dotaz je také data
+
+Search query není technický šum. Je to uživatelský vstup, který může obsahovat osobní údaje, obchodní tajemství i bezpečnostní signály. Proto s ním zacházej jako s datem, ne jako s dekorací v URL.
+
+Co dělat prakticky:
+
+- Neukládej plný text dotazů automaticky do analytiky.
+- Pokud potřebuješ zlepšovat relevanci, ukládej agregace: počet dotazů bez výsledku, nejčastější anonymizované kategorie, délku dotazu, typ entity.
+- U interních týmů odděl produktovou analytiku od bezpečnostních logů.
+- Ve veřejném webu zvaž, jestli dotaz musí být v URL; u citlivějších systémů je lepší kratší životnost v klientovi a žádné sdílení přes referer.
+- Nezobrazuj poslední dotazy napříč zařízeními, pokud to není jasná funkce s vysvětlením.
+
+Příklad: místo logu `query="jan.novak@example.com faktura 2026"` často stačí `query_length=29`, `result_count=2`, `entity_scope="invoices"`, `workspace_id_hash="..."` a `zero_result=false`. Produkt ví, jestli hledání funguje. Nikdo nemá v logu zákaznické tajemství zabalené jako bonbon.
+
+## JE.3 Oprávnění musí platit před i po indexu
+
+Největší chyba vyhledávání: aplikace chrání detail záznamu, ale search vrací název, snippet nebo počet výsledků i uživateli, který detail vidět nesmí. Únik není jen otevření dokumentu. Únik je i věta „našli jsme 3 výsledky pro Akvizice Alfa“ v účtu, kde uživatel nemá mít ani tušení, že projekt existuje.
+
+Bezpečný model:
+
+1. Každý indexovaný dokument nese tenant/workspace identitu.
+2. Každý dokument nese minimální ACL nebo odkaz na autorizační pravidlo.
+3. Dotaz je vždy omezen tenantem uživatele.
+4. Filtry oprávnění se aplikují před vrácením výsledku, ne až při kliknutí.
+5. Snippety se generují jen z polí, která má uživatel právo vidět.
+6. Po změně práv existuje reindex nebo invalidační mechanismus.
+
+U malého SaaS je často lepší začít jednoduše: databázové fulltext hledání nad omezenými poli, tenant filtr v každém dotazu a žádný globální search přes všechno. Specializovaný search engine přidej až ve chvíli, kdy máš jasné potřeby relevance, objemu nebo rychlosti. Ne jako rituální oběť architektuře.
+
+## JE.4 Našeptávač je miniaturní únikový kanál
+
+Autocomplete a našeptávače vypadají jako UX cukr. Ale pokud při každém písmenu posíláš dotaz na server a vracíš názvy zákazníků, projektů nebo dokumentů, právě jsi vytvořil velmi aktivní datový kanál.
+
+Bezpečnější návrh:
+
+- Spouštěj dotaz až od rozumné délky vstupu, například po několika znacích.
+- Vracej méně detailů: název a typ často stačí, snippet ne.
+- Nevracej výsledky bez přesného tenant a permission filtru.
+- Rate limituj našeptávání samostatně; bot umí napsat abecedu rychleji než obchodník po třetí kávě.
+- Cache na klientovi používej jen pro necitlivé slovníky nebo krátkodobě v rámci session.
+- U citlivých entit raději použij explicitní filtr než agresivní našeptávání.
+
+Příklad pro B2B admin: našeptávač zákazníků vrací jen `display_name`, `customer_code` a `status`. Nevrací e-mail vlastníka, fakturační adresu, poslední ticket ani „poznámku obchodníka“. Tyto informace patří až na detail po autorizovaném otevření.
+
+## JE.5 Bezpečnost dotazů není volitelný plugin
+
+Vyhledávání často skládá dynamické filtry: stav, datum, štítky, autor, tarif, jazyk, region. To je ideální prostředí pro injekce, pokud se dotazy lepí jako textový guláš. OWASP u SQL injection dlouhodobě doporučuje prepared statements a parametrizované dotazy jako primární obranu: https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html
+
+Praktické zásady:
+
+- Hodnoty filtrů vždy parametrizuj.
+- Názvy sloupců, směr řazení a typ entity ber jen z allowlistu.
+- Fulltext syntaxi omez: uživatelský vstup escapuj nebo převeď na bezpečný dotazový model.
+- Nedovol libovolné kombinace filtrů, které obejdou tenant scope.
+- Nastav limity výsledků a stránkování; export celé databáze přes `search=*` není funkce, ale incident v přestrojení.
+- Testuj payloady s uvozovkami, operátory, wildcardy, dlouhými řetězci a Unicode okraji.
+
+Mini ukázka rozhodování:
+
+| Vstup | Bezpečný postup |
+| --- | --- |
+| `status=open` | Hodnota z allowlistu stavů |
+| `sort=created_at desc` | `created_at` i `desc` z allowlistu |
+| `q="firma"` | Parametrizovaný fulltext výraz |
+| `workspace_id` | Vždy z aktuální session, nikdy z klientského filtru |
+| `limit=5000` | Serverový strop, například 50 nebo 100 |
+
+## JE.6 Logy z vyhledávání mají pomáhat, ne archivovat cizí hlavu
+
+Provozní tým potřebuje vědět, že search padá, je pomalý nebo vrací nulu tam, kde nemá. Nepotřebuje automaticky číst všechny dotazy. OWASP Logging Cheat Sheet upozorňuje, že citlivá data, session identifikátory, přístupové tokeny, hesla, klíče a další tajemství se obvykle nemají ukládat přímo do logů a mají být odstraněna, maskována, hashována nebo šifrována: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+
+Dobrá logovací událost pro search:
+
+```text
+search.performed
+workspace_id_hash=...
+user_role=admin
+entity_scope=invoices
+query_length=18
+filters_count=3
+result_count=12
+latency_ms=84
+error_code=null
+```
+
+Špatná logovací událost:
+
+```text
+GET /search?q=Novák rodné číslo faktura urgence&token=...
+```
+
+Loguj hlavně stav systému: latenci, chybové kódy, počet výsledků, typ dotazu, počet filtrů, verzi indexu a korelační ID. Plný dotaz nech jen pro výjimečný debug režim s krátkou retencí, omezeným přístupem a jasným důvodem.
+
+## JE.7 Relevance se dá zlepšovat i bez sledování lidí
+
+Mnoho týmů skočí rovnou k personalizaci: „ukážeme každému jiné výsledky podle historie chování“. Někdy to dává smysl, často je to jen drahý způsob, jak z jednoduchého search boxu udělat profilovací bahýnko.
+
+Privacy-first alternativy:
+
+- Lepší názvy a štítky entit.
+- Synonyma pro produktové pojmy.
+- Ručně spravované priority pro typy obsahu.
+- Zobrazení nedávno otevřených položek pouze lokálně nebo v rámci účtu, kde je to jasná funkce.
+- Měření nulových výsledků agregovaně.
+- Krátký feedback „Našli jste, co jste hledali?“ bez povinného komentáře.
+
+Codyho komentář: personalizace není zlo. Ale pokud nedokážeš vysvětlit, proč konkrétní člověk vidí konkrétní výsledek, nestavíš chytrý produkt. Stavíš věšteckou kouli s auditem na dovolené.
+
+## JE.8 Checklist privacy-first vyhledávání
+
+Před nasazením nebo větším refaktorem search si projdi:
+
+- [ ] Máme katalog indexovaných polí včetně účelu, citlivosti a retence.
+- [ ] Dotazy neukládáme v plném znění do běžné analytiky.
+- [ ] Každý dotaz je omezen tenantem/workspacem ze session, ne z klientského parametru.
+- [ ] Výsledky, snippety i počty výsledků respektují oprávnění.
+- [ ] Našeptávač má minimální data, rate limiting a permission filtr.
+- [ ] Filtry, řazení a stránkování používají allowlisty a serverové limity.
+- [ ] Databázové a fulltext dotazy jsou parametrizované nebo bezpečně escapované.
+- [ ] Logy obsahují provozní metriky, ne citlivý obsah dotazu.
+- [ ] Existuje postup pro reindex při změně práv, výmazu nebo retenci.
+- [ ] Support má debug režim s časovým omezením, ne trvalý pohled do dotazů.
+
+## Codyho komentář
+
+Vyhledávání je skvělý test zralosti SaaS produktu. Když je navržené dobře, uživatel najde práci rychleji a tým nemusí sbírat hromady dat. Když je navržené špatně, stane se z něj tajný export všeho, co lidi kdy napadlo napsat do jednoho políčka. A jedno políčko umí být překvapivě ukecané.
+
+## Zdroje k příloze
+
+- Evropská komise — přehled principů GDPR, včetně účelového omezení a minimalizace dat: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/overview-principles/what-data-can-we-process-and-under-which-conditions_en
+- OWASP SQL Injection Prevention Cheat Sheet — doporučení k parametrizovaným dotazům: https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html
+- OWASP Logging Cheat Sheet — doporučení k logování a vyloučení citlivých dat: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+
+## Shrnutí přílohy
+
+Search není jen UX komponenta. Je to datový produkt s vlastním indexem, logy, oprávněními a bezpečnostním modelem. Privacy-first přístup znamená indexovat jen potřebná pole, chránit dotazy jako potenciálně citlivá data, aplikovat oprávnění před zobrazením výsledků, stavět našeptávače střídmě a měřit kvalitu vyhledávání agregovaně. Výsledek: rychlejší práce pro uživatele, méně rizika pro firmu a méně nočních můr pro člověka, který jednou bude řešit výmaz dat.
+
+
 ## Pracovní log
+- 2026-08-18: Přidána příloha JE o privacy-first vyhledávání v SaaS: katalog indexovaných polí, ochrana dotazů, oprávnění v indexu, bezpečné našeptávače, parametrizace, logování a checklist.
 
 - 2026-08-18: Přidána příloha JD o abuse ochraně formulářů a API bez invazivního fingerprintingu: mapa rizikových akcí, rate limity, CAPTCHA jako poslední vrstva, minimální bezpečnostní logy, chybové mikrotexty, incidentový playbook a checklist.
 - 2026-08-18: Přidána příloha JC o third-party skriptech a tag managementu: pas skriptu, governance tag manageru, načítání podle kritické cesty, CSP/SRI izolace, měření dopadu, consent a privacy-first checklist.
