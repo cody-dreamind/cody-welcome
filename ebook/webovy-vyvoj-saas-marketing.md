@@ -42557,7 +42557,137 @@ Souborový processing je místo, kde se krásně ukáže rozdíl mezi „máme f
 Bezpečné zpracování souborů nekončí uploadem. Potřebuje karanténu, viditelné stavy, malware sken jako jednu z vrstev, izolované parsery, opatrnou práci s metadaty, obezřetný výběr externích OCR služeb, frontu s limity a logování bez obsahu dokumentů. Privacy-first SaaS se k souborům chová jako k citlivému zákaznickému materiálu, ne jako k anonymnímu blobu, který se dá posílat kamkoli, protože „to jen generuje náhled“.
 
 
+
+# Příloha JH: Přístupné dokumenty, PDF exporty a náhledy bez bariér, slepých souborů a datového úniku
+
+Předchozí příloha řeší, jak soubory bezpečně skenovat a zpracovávat. Tahle navazuje otázkou, která bývá v malých SaaS týmech až podezřele často odložená: co když se k výslednému dokumentu uživatel nemůže pohodlně dostat? PDF faktura, export reportu, náhled smlouvy, potvrzení objednávky nebo tiskový přehled nejsou vedlejší artefakty. Pro část zákazníků jsou to hlavní pracovní výstupy.
+
+Přístupnost není jen „aby to nějak přečetla čtečka“. Je to produktová kvalita: dokument má mít strukturu, textový obsah, rozumné pořadí čtení, popisy důležitých vizuálů, dostatečný kontrast a použitelný alternativní formát. WCAG 2.2 popisuje principy vnímatelnosti, ovladatelnosti, srozumitelnosti a robustnosti na oficiální stránce W3C: https://www.w3.org/TR/WCAG22/. Evropský kontext navíc není čistě dobrovolný: směrnice European Accessibility Act řeší požadavky na přístupnost vybraných produktů a služeb v EU: https://eur-lex.europa.eu/eli/dir/2019/882/oj. U ICT se v Evropě často používá norma EN 301 549; veřejný přehled je dostupný přes AccessibleEU: https://accessible-eu-centre.ec.europa.eu/content-corner/digital-library/en-3015492021-accessibility-requirements-ict-products-and-services_en.
+
+Codyho překlad do řeči produktu: pokud SaaS vyrábí dokument, který zákazník potřebuje pro práci, nesmí to být jen hezky zabalený obrázek textu. To je digitální plakát, ne dokument.
+
+## JH.1 Export není screenshot v obleku
+
+Nejčastější chyba u PDF exportů je převést UI nebo HTML do obrázku a vložit ho do PDF. Vypadá to rychle, demo přežije, ale uživatelé tím dostanou soubor, který se špatně vyhledává, špatně kopíruje, často nejde rozumně přečíst asistivní technologií a může být zbytečně obří.
+
+Dobrý export má mít:
+
+- skutečný text, ne rasterizovaný screenshot,
+- logické nadpisy a pořadí čtení,
+- tabulky vytvořené jako tabulky, ne jako rozházené textové bloky,
+- metadata dokumentu bez citlivých interních údajů,
+- název souboru bez osobních dat, pokud to není nutné,
+- alternativu ve strojově čitelném formátu, typicky CSV nebo JSON.
+
+Příklad: měsíční report kampaní může mít PDF pro lidské čtení a CSV pro další zpracování. PDF vysvětlí závěry, CSV umožní zákazníkovi ověřit čísla ve vlastním nástroji. Privacy-first bonus: nemusíš uživatele nutit do dalšího dashboardu jen proto, aby získal data, která mu patří.
+
+## JH.2 Struktura dokumentu je součást obsahu
+
+V aplikaci řešíme semantické HTML, nadpisy a labely. U dokumentů se na to často zapomene, jako by export opustil civilizaci a odešel žít do PDF džungle. Jenže dokument má také informační architekturu.
+
+Praktický model pro exportovaný report:
+
+| Část | Co má obsahovat | Čemu se vyhnout |
+|---|---|---|
+| Titulek | Název reportu, období, účet nebo projekt | interní ID tenantů v hlavním názvu |
+| Shrnutí | 3-5 nejdůležitějších závěrů | dlouhý blok bez nadpisů |
+| Metriky | tabulky s jasnými jednotkami | graf bez datové alternativy |
+| Detail | členění podle rozhodnutí, která zákazník dělá | řazení podle interní databázové struktury |
+| Poznámky | metodika, omezení dat, čas exportu | právní a analytická mlha |
+| Příloha | CSV/JSON export nebo odkaz na bezpečný download | data pouze jako obrázek |
+
+Pokud používáš generátor PDF, otestuj výstup nejen očima, ale i klávesnicí, výběrem textu a jednoduchou kontrolou pořadí čtení. U reportů s grafy přidej krátké textové shrnutí: „Návštěvnost z organického vyhledávání rostla tři týdny po sobě, placená kampaň klesla po vypnutí brandového klíčového slova.“ Graf je důkaz, věta je rozhodovací informace.
+
+## JH.3 Tabulky a grafy musí přežít bez vizuální magie
+
+SaaS miluje dashboardy. Dashboardy milují grafy. Grafy milují situace, kdy po exportu nikdo netuší, co vlastně znamenají. Přístupný export proto musí oddělit vizuální reprezentaci od datové pravdy.
+
+U tabulek hlídej:
+
+- hlavičky sloupců s jednotkami,
+- jasné formátování prázdných hodnot,
+- vysvětlení zkratek,
+- stabilní pořadí sloupců,
+- součty a průměry označené jako souhrny,
+- žádné slučování buněk jen kvůli vizuálnímu efektu.
+
+U grafů přidej minimálně:
+
+- název grafu jako otázku nebo závěr,
+- období dat,
+- datovou tabulku v příloze nebo CSV,
+- popis významného trendu,
+- upozornění na neúplná data,
+- barvy, které nejsou jediným nositelem významu.
+
+Slabý popisek: „Vývoj konverzí.“
+
+Lepší popisek: „Konverze trial → placený účet klesly v týdnu po změně onboardingu z 12 % na 8 %; data jsou z 312 trial účtů.“
+
+Pokud je číslo důležité pro rozhodnutí, napiš ho textem. Nespoléhej, že každý uvidí malý bod v grafu, rozliší zelenou od červené a ještě bude mít chuť hrát archeologa v legendě.
+
+## JH.4 Náhled v aplikaci nesmí být jediná cesta
+
+Náhled dokumentu přímo v aplikaci je pohodlný, ale nesmí být past. Uživatel má mít možnost dokument stáhnout, získat strojově čitelný export a pochopit stav zpracování. Pokud náhled selže, produkt nemá říct „něco se pokazilo“ a odkráčet do digitálního křoví.
+
+Dobré UI pro dokument:
+
+- ukáže stav: čeká na zpracování, připraveno, chyba, expirováno,
+- nabídne stažení originálu i bezpečně vygenerovaného výstupu,
+- vysvětlí, proč dokument nejde otevřít,
+- nezobrazuje citlivá metadata z originálu,
+- respektuje oprávnění při každém otevření i stažení,
+- umožní obnovit export, pokud data v mezidobí změnila oprávnění nebo retenci.
+
+Privacy-first detail: náhledy ukládej jako odvozená data s vlastní retencí. Pokud zákazník smaže originál, ptej se, zda mají zmizet i miniatury, textové extrakty a cache. Odpověď bývá ano, pokud nemáš jasný právní nebo provozní důvod je držet.
+
+## JH.5 Přístupnost testuj jako běžnou regresi
+
+Přístupný dokument nevzniká jedním checklistem před spuštěním. Rozbije se při další změně šablony, fontu, tabulky, grafu nebo knihovny. Proto patří do release rutiny.
+
+Mini testovací sada pro exporty:
+
+1. Vygeneruj dokument s běžnými daty.
+2. Vygeneruj dokument s dlouhými názvy, diakritikou a prázdnými hodnotami.
+3. Zkus vybrat a kopírovat text.
+4. Zkontroluj pořadí čtení a nadpisy.
+5. Ověř kontrast hlavních prvků.
+6. Zkontroluj, že PDF metadata neobsahují interní cesty, jména vývojářů nebo testovací data.
+7. Otevři CSV a ověř kódování, oddělovače a jednotky.
+8. Smaž originální data a ověř, že zmizí i odvozené náhledy podle retenčního pravidla.
+
+Automatizace může hlídat část problému, ale ruční kontrola je pořád cenná. Hlavně u dokumentů, které jdou ven k zákazníkům, účetním, investorům nebo úřadům. Tady se chyba netváří jako bug. Tváří se jako neprofesionální firma.
+
+## JH.6 Checklist přístupných exportů a náhledů
+
+- [ ] Každý export má jasný účel, vlastníka a retenční pravidlo.
+- [ ] PDF obsahuje skutečný text, logickou strukturu a čitelné pořadí.
+- [ ] Grafy mají textové shrnutí a datovou alternativu.
+- [ ] Tabulky mají hlavičky, jednotky a stabilní strukturu.
+- [ ] Souborová metadata neprozrazují interní ani osobní údaje navíc.
+- [ ] Náhledy a textové extrakty mají stejná oprávnění jako originál.
+- [ ] Odvozené soubory se mažou spolu s originálem nebo podle zdokumentované retence.
+- [ ] Uživatel může získat strojově čitelný export, pokud data slouží k dalšímu zpracování.
+- [ ] Chybové stavy jsou srozumitelné a neprozrazují interní technologické detaily.
+- [ ] Přístupnost exportu je součástí release testů, ne jednorázová kosmetika.
+
+## Codyho komentář
+
+Přístupnost dokumentů je jedno z těch míst, kde se dobrý produkt pozná až ve chvíli, kdy uživatel není v ideálních podmínkách. Malý displej, čtečka obrazovky, účetní export v cizím nástroji, pomalé připojení, právní audit. Najednou se ukáže, jestli SaaS opravdu slouží zákazníkovi, nebo jen vyrobil pěkný obrázek s tlačítkem „Download“. Můj pohled: přístupný export je férovost zabalená do technického detailu.
+
+## Zdroje k příloze
+
+- W3C — Web Content Accessibility Guidelines 2.2: https://www.w3.org/TR/WCAG22/
+- EUR-Lex — Directive (EU) 2019/882, European Accessibility Act: https://eur-lex.europa.eu/eli/dir/2019/882/oj
+- AccessibleEU — EN 301 549 V3.2.1 overview: https://accessible-eu-centre.ec.europa.eu/content-corner/digital-library/en-3015492021-accessibility-requirements-ict-products-and-services_en
+
+## Shrnutí přílohy
+
+Exporty, PDF a náhledy jsou produktové funkce, ne odpad z backendu. Privacy-first SaaS vytváří dokumenty, které jsou čitelné, strukturované, přístupné, bezpečně uložené a snadno přenositelné. Když dokument obsahuje data zákazníka, musí mít stejnou úroveň respektu jako hlavní aplikace: minimální sběr, jasná oprávnění, rozumnou retenci a žádné slepé screenshoty převlečené za profesionální výstup.
+
+
 ## Pracovní log
+- 2026-08-18: Přidána příloha JH o přístupných dokumentech, PDF exportech a náhledech: strukturované PDF, tabulky, grafy, alternativní CSV/JSON, bezpečná metadata, retence odvozených souborů, release testy a privacy-first checklist.
 
 - 2026-08-18: Přidána příloha JG o antivirovém skenování, náhledech a zpracování dokumentů: stavový model, malware sken jako vrstva obrany, izolované parsery, metadata, externí OCR služby, fronty, bezpečné logování a checklist.
 - 2026-08-18: Přidána příloha JF o uploadech, dokumentech a přílohách v SaaS: účel, allowlist typů, bezpečné názvy, oprávnění, izolované zpracování, metadata, retence a checklist.
