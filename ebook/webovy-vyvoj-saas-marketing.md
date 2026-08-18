@@ -43860,7 +43860,161 @@ Tuhle sadu spusť při každé změně kolem oprávnění, exportů, souborů, i
 Tenant izolace je základní bezpečnostní hranice SaaS produktu. Nestačí přihlášení, role v abstraktnu ani neuhodnutelné ID. Každá akce musí ověřit konkrétní objekt, konkrétní tenant a konkrétní oprávnění, včetně polí, exportů, webhooků, souborů a interních admin režimů. Privacy-first SaaS nechrání jen data před reklamními skripty; chrání i zákazníky před tím, aby se omylem nebo chybou dívali přes plot do cizího workspace.
 
 
+# Příloha JP: Odchozí HTTP požadavky, webhook testery a SSRF obrana bez interního tunelu, DNS triků a metadatového průšvihu
+
+Moderní SaaS pořád někam volá: importuje feed, načítá obrázek z URL, posílá webhook, kontroluje Open Graph náhled, testuje integraci, stahuje fakturu nebo dovolí zákazníkovi nastavit callback endpoint. Každá taková funkce vypadá jako pohodlná drobnost. Bez pravidel se ale může změnit v server-side request forgery, tedy situaci, kdy útočník přinutí tvůj server volat adresy, kam by se z internetu normálně nedostal.
+
+OWASP SSRF Prevention Cheat Sheet rozlišuje scénáře, kdy aplikace smí volat jen známé důvěryhodné systémy, a scénáře, kdy musí volat libovolné externí URL. U prvního doporučuje allowlist identifikovaných cílů; u druhého kombinaci validačních pravidel, blokace interních rozsahů, kontroly DNS a síťových vrstev obrany. Zvlášť upozorňuje i na cloud metadata služby, protože SSRF se často používá právě k získání interních tokenů nebo přístupových údajů: https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html
+
+CWE-918 popisuje SSRF jako slabinu, kde webový server přijme URL nebo podobný vstup a provede požadavek na vzdálený zdroj, čímž může útočník zneužít důvěru, síťovou pozici nebo oprávnění serveru: https://cwe.mitre.org/data/definitions/918.html
+
+Privacy-first pointa je jednoduchá: odchozí požadavky nejsou jen technická integrace. Jsou to datové výstupy z produktu. Když je neřídíš, nevíš, kam aplikace posílá zákaznická data, kdo z nich vidí IP adresy serveru, jestli se někdo nedostane k interním službám a jestli tvůj „náhled odkazu“ náhodou není proxy do infrastruktury. To by bylo velmi elegantní self-own, jen bez elegance.
+
+## JP.1 Nejdřív sepiš všechny funkce, které volají ven
+
+SSRF obrana nezačíná regexem na URL. Začíná inventářem míst, kde aplikace sama vytváří síťový požadavek na základě vstupu od uživatele, zákazníka, administrátora nebo integrace.
+
+Typická místa v SaaS:
+
+- test webhook endpointu,
+- nastavení callback URL pro integraci,
+- import obrázku, loga, avatara nebo přílohy z externí URL,
+- generování náhledu odkazu v chatu, CRM nebo znalostní bázi,
+- import CSV/XML/ICS feedu,
+- načítání OpenAPI specifikace z URL,
+- serverový screenshot webu,
+- PDF generátor, který umí načítat externí assety,
+- e-mail template builder s obrázky z URL,
+- interní admin nástroj „otevři tuto adresu a ukaž výsledek“.
+
+Ke každému místu si napiš:
+
+| Funkce | Kdo zadává cíl | Smí volat kam | Posílá zákaznická data | Potřebuje odpověď ukládat |
+|---|---|---|---|---|
+| Webhook test | admin workspace | pouze veřejné HTTPS URL | ano, testovací payload | jen stav a hlavičky bez tajemství |
+| Logo import | člen týmu | veřejné HTTPS obrázky | ne | přeuložený obrázek bez původního URL v UI |
+| Link preview | běžný uživatel | veřejné HTTP/HTTPS po kontrole | URL z textu | titulek, popis, favicon podle allowlistu polí |
+| OpenAPI import | developer | veřejné HTTPS nebo schválený partner | možné interní názvy endpointů | validovaný kontrakt |
+
+Jakmile seznam existuje, je vidět rozdíl mezi „potřebujeme zavolat konkrétní API partnera“ a „uživatel může zadat libovolnou URL“. Tyto dvě věci nesmí sdílet stejný klient, stejná oprávnění a stejnou volnost.
+
+## JP.2 Preferuj allowlist před kreativní blokovací poesií
+
+Pokud funkce volá známé systémy, použij allowlist. Ne „zakážeme localhost a snad dobrý“, ale „tato integrace smí volat jen tyto hosty, tyto porty a tyto protokoly“.
+
+Příklad pro platební nebo účetní integraci:
+
+- povolený protokol: pouze `https`,
+- povolené hosty: konkrétní domény partnera,
+- povolené porty: typicky `443`,
+- redirecty: buď vypnuté, nebo znovu validované po každém kroku,
+- timeouty: krátké a oddělené pro connect/read,
+- odpověď: limit velikosti a typu obsahu,
+- log: host, účel, status, trvání, request ID — ne payload s osobními údaji.
+
+Denylist má v bezpečnosti svoje místo, ale jako poslední síť pod akrobatem, ne jako jediná konstrukce cirkusu. Útočníci milují alternativní zápisy IP adres, DNS rebinding, přesměrování, IPv6 překvapení, userinfo části URL a parser rozdíly mezi knihovnami. Jestli validuješ jednou knihovnou a request posíláš druhou, můžeš si vyrobit krásný rozdíl v interpretaci. Krásný pro útočníka, pochopitelně.
+
+## JP.3 Libovolná externí URL potřebuje tvrdý výstupní sandbox
+
+Některé funkce opravdu potřebují volat URL zadané uživatelem. Typicky náhled odkazu, import obrázku nebo ověření webhook endpointu. Tam nečekej, že samotná validace stringu stačí.
+
+Minimální pravidla:
+
+- povol jen `http` a `https`, často raději jen `https`, pokud use-case nepotřebuje jinak,
+- zakaž credentials v URL, například `https://user:pass@example.com`,
+- zakaž neobvyklé porty, pokud k nim není jasný důvod,
+- před requestem resolveuj A i AAAA záznamy a zkontroluj všechny IP adresy,
+- blokuj localhost, link-local, privátní, multicast, unspecified a další speciální rozsahy,
+- po redirectu validuj cílovou URL znovu, ne jen původní adresu,
+- nastav maximální počet redirectů, velikost odpovědi a časové limity,
+- nepředávej interní cookies, authorization hlavičky ani zákaznické tokeny,
+- stahuj obsah přes oddělený worker s minimálními právy a bez přístupu k interní síti.
+
+IANA vede registry speciálních IPv4 a IPv6 rozsahů, které jsou dobrým zdrojem pro kontrolu adresních bloků mimo běžnou veřejnou routovatelnost: https://www.iana.org/assignments/iana-ipv4-special-registry/iana-ipv4-special-registry.xhtml a https://www.iana.org/assignments/iana-ipv6-special-registry/iana-ipv6-special-registry.xhtml
+
+Praktický pattern pro malé týmy: vytvoř jeden interní `SafeHttpClient` pro všechny požadavky na URL od zákazníků. V kódu pak zakážeš přímé použití obecného HTTP klienta v místech, kde vstup pochází z uživatele. Security review je potom kontrola jednoho standardu, ne archeologická výprava po každém `fetch`.
+
+## JP.4 Cloud metadata endpointy ber jako červené tlačítko
+
+Cloud metadata služby jsou užitečné, ale při SSRF patří mezi nejcitlivější cíle. Typická adresa `169.254.169.254` se vyskytuje v různých cloudech. AWS dokumentace popisuje IMDSv2 jako tokenový režim pro EC2 instance a umožňuje vyžadovat `HttpTokens=required`, případně nastavovat metadata options na úrovni účtu, AMI nebo instance: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-options.html
+
+Azure dokumentace popisuje Instance Metadata Service jako REST API dostupné z běžící VM na neroutovatelné adrese `169.254.169.254`: https://learn.microsoft.com/en-us/azure/virtual-machines/instance-metadata-service
+
+Co z toho plyne prakticky:
+
+- blokuj přístup k metadata adresám v aplikačním SSRF filtru i na síťové vrstvě,
+- pokud běžíš v AWS, vyžaduj IMDSv2 a zakaž IMDSv1, kde to jde,
+- nepouštěj worker pro externí URL do stejné sítě jako databáze, admin služby a metadata endpointy,
+- používej egress firewall nebo proxy, která dovolí jen schválené cíle,
+- v kontejnerech zvaž, jestli vůbec potřebují přístup k metadata službě,
+- monitoruj pokusy o volání interních rozsahů bez ukládání plných zákaznických URL, pokud obsahují tokeny nebo osobní údaje.
+
+Evropský provoz neznamená, že metadata endpoint je méně nebezpečný. Jen má evropský přízvuk, což bezpečnostně nepomáhá.
+
+## JP.5 Webhook tester nesmí být obecný port scanner
+
+Webhooky jsou klasická SSRF past. Chceš zákazníkovi dovolit zadat endpoint a otestovat doručení. Bez omezení mu ale dáváš možnost říct tvému serveru: „Zkus zavolat tuto interní adresu a řekni mi, co se stalo.“ Gratuluji, právě vznikl chudý, ale snaživý port scanner.
+
+Bezpečnější webhook test:
+
+- vyžaduj vlastnictví endpointu pomocí challenge tokenu nebo podepsané testovací události,
+- testuj jen veřejnou HTTPS URL,
+- neukazuj detailní síťové chyby typu „connection refused na interním portu“,
+- vrať zákazníkovi praktický stav: doručeno, timeout, TLS chyba, neplatná odpověď,
+- neodesílej skutečný zákaznický payload při prvním testu,
+- ukládej delivery historii s krátkou retencí a bez citlivého těla požadavku,
+- nastav rate limit na testy, aby nešlo skenovat přes opakované pokusy.
+
+U webhooků je dobré oddělit dvě fáze: ověření endpointu a skutečný provoz. Ověření pracuje se syntetickým payloadem a minimálními informacemi. Skutečný provoz používá podepisování, retry pravidla, idempotenci a loguje jen metadata potřebná pro řešení doručení.
+
+## JP.6 Náhledy odkazů a importy assetů minimalizuj
+
+Link preview je drobná funkce, která ráda přeroste. Nejdřív chceš titulek. Pak obrázek. Pak favicon. Pak screenshot. Pak to začne načítat polovinu internetu a někde mezi tím vyteče soukromý odkaz z interní poznámky.
+
+Privacy-first pravidla pro náhledy:
+
+- náhled generuj jen pro odkazy, kde to dává uživateli hodnotu,
+- dovol vypnutí náhledu na úrovni workspace,
+- u citlivých prostorů zobraz raději čistý odkaz než automaticky volat cizí web,
+- ukládej jen nutná metadata: titulek, popis, hlavní obrázek, čas načtení,
+- neukládej celé HTML stránky,
+- respektuj rozumné limity velikosti a typů obsahu,
+- nepropaguj referrer ani interní kontext v hlavičkách,
+- pro assety preferuj přeuložení do vlastního kontrolovaného storage místo hotlinkingu.
+
+Codyho komentář: náhled odkazu je hezký sluha, ale špatný domácí mazlíček. Jakmile ho necháš běhat bez vodítka po produkční síti, najde přesně ty dveře, které měly zůstat zavřené.
+
+## JP.7 Checklist odchozích požadavků a SSRF obrany
+
+- [ ] Máme seznam všech funkcí, které posílají serverový požadavek na externí nebo zákazníkem zadanou URL.
+- [ ] Každá funkce má popsaný účel, povolené protokoly, hosty, porty, data a retenci odpovědi.
+- [ ] Známé integrace používají allowlist cílových domén nebo IP rozsahů.
+- [ ] URL od zákazníků prochází jedním bezpečným HTTP klientem, ne ruční validací v každé funkci.
+- [ ] Validujeme A i AAAA záznamy a blokujeme speciální, privátní, loopback, link-local a metadata adresy.
+- [ ] Redirecty jsou vypnuté nebo znovu validované po každém kroku.
+- [ ] Worker pro externí URL nemá přístup k databázi, interním admin službám ani cloud metadata endpointům.
+- [ ] Cloud metadata služby jsou chráněné síťově; v AWS vyžadujeme IMDSv2 tam, kde běží EC2.
+- [ ] Webhook testy používají syntetický payload, challenge token, rate limit a opatrné chybové hlášky.
+- [ ] Link preview a importy assetů mají limity velikosti, typů obsahu, retence a možnost vypnutí.
+- [ ] Logy ukládají účel, host, status, čas a bezpečnostní rozhodnutí; neukládají tajné URL tokeny ani payloady.
+- [ ] Negativní testy pokrývají `localhost`, `127.0.0.1`, `::1`, `169.254.169.254`, privátní IPv4 rozsahy, IPv6 lokální adresy, redirect na interní adresu a DNS změnu mezi validací a requestem.
+
+## Zdroje k příloze
+
+- OWASP Cheat Sheet Series — Server-Side Request Forgery Prevention: https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html
+- MITRE CWE-918 — Server-Side Request Forgery: https://cwe.mitre.org/data/definitions/918.html
+- IANA IPv4 Special-Purpose Address Space: https://www.iana.org/assignments/iana-ipv4-special-registry/iana-ipv4-special-registry.xhtml
+- IANA IPv6 Special-Purpose Address Space: https://www.iana.org/assignments/iana-ipv6-special-registry/iana-ipv6-special-registry.xhtml
+- AWS EC2 User Guide — Configure the Instance Metadata Service options: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-options.html
+- Microsoft Learn — Azure Instance Metadata Service: https://learn.microsoft.com/en-us/azure/virtual-machines/instance-metadata-service
+
+## Shrnutí přílohy
+
+Odchozí HTTP požadavky jsou bezpečnostní i privacy hranice produktu. SaaS má vědět, které funkce volají ven, kam smějí volat, jaká data nesou a co se ukládá z odpovědi. SSRF obrana stojí na allowlistech, bezpečném HTTP klientu, kontrole DNS a IP rozsahů, síťové izolaci workerů, ochraně cloud metadata služeb a opatrném logování. Cílem není zakázat integrace, ale zabránit tomu, aby se pohodlný webhook tester nebo link preview proměnil v interní tunel.
+
+
 ## Pracovní log
+- 2026-08-18: Přidána příloha JP o odchozích HTTP požadavcích a SSRF obraně: inventář externích volání, allowlisty, bezpečný HTTP klient, blokace interních rozsahů a metadata služeb, webhook testery, link preview a privacy-first checklist.
 - 2026-08-18: Přidána příloha JO o tenant izolaci v SaaS: bezpečnostní hranice workspace, BOLA/IDOR rizika, kontrola objektů a polí, admin/support režimy, cross-tenant testovací scénáře a privacy-first checklist.
 - 2026-08-18: Přidána příloha JN o exportu dat, smazání účtu a odchodu zákazníka: oddělení účtu, členství a workspace, použitelný export, stavový model mazání, zálohy, role, offboarding a privacy-first checklist.
 
