@@ -41934,8 +41934,149 @@ Third-party skripty nejsou jen technický detail. Jsou to dodavatelé běžící
 
 ---
 
+# Příloha JD: Abuse ochrana formulářů a API bez invazivního fingerprintingu, CAPTCHA pekla a zbytečné sbírky stop
+
+Každý web a SaaS časem potká automatizovaný provoz. Někdy je to obyčejný crawler, někdy spam ve formuláři, někdy credential stuffing, někdy scraping ceníku, někdy někdo omylem pustí integraci v nekonečné smyčce. Špatná reakce je přidat na všechno těžkou CAPTCHA, tři anti-bot skripty a fingerprinting prohlížeče. Uživatelé trpí, přístupnost trpí, data tečou pryč a tým stejně často neví, co přesně brání.
+
+Privacy-first abuse ochrana začíná nudněji: pojmenuj chráněné akce, nastav limity podle rizika, loguj minimum potřebné k obraně, dávej férové chybové odpovědi a člověka netrestej za to, že používá VPN, čtečku obrazovky nebo starší telefon. Bezpečnost nemá být klubko drátů kolem dveří; má být dobrý zámek, který nezamkne majitele venku.
+
+## JD.1 Nechraň celý web stejně
+
+První chyba je dát jeden globální limit na všechno. Homepage, kontaktní formulář, login, vyhledávání, veřejné API a export dat nejsou stejná akce. Mají jinou cenu, jiné riziko a jiný dopad na uživatele.
+
+Rozděl endpointy do skupin:
+
+| Oblast | Typické riziko | Praktická obrana |
+| --- | --- | --- |
+| Kontaktní formulář | Spam, hromadné odesílání | honeypot, časové okno, limit na IP/subnet, moderace příloh |
+| Přihlášení | credential stuffing, brute force | limit podle účtu i IP, postupné zdržení, upozornění na podezřelý pokus |
+| Registrace | falešné účty, trial abuse | ověření e-mailu, limit na doménu/IP, ruční review u podezřelých vzorů |
+| Vyhledávání | scraping, drahé dotazy | limit podle relace/API klíče, max délka dotazu, cache odpovědí |
+| Exporty a reporty | nákladné úlohy, únik dat | fronta, limit velikosti, auditní záznam, potvrzení uživatelem |
+| Veřejné API | vyčerpání zdrojů, zneužití tokenu | quota podle klíče, rate limit, idempotence, jasné chyby 429 |
+
+Doporučení: ke každé chráněné akci napiš větu „chráníme X před Y, protože Z“. Pokud z věty vypadne jen „protože bezpečnost“, je to málo. Bez konkrétního rizika se z obrany rychle stane sběr dat pro dobrý pocit.
+
+## JD.2 Rate limiting má být produktové pravidlo, ne náhodné číslo
+
+Rate limit není jen technická konstanta v middleware. Je to dohoda mezi produktem, provozem a zákazníkem: kolik požadavků je legitimní, kdy začíná zneužití a co uživateli řekneme, když narazí na hranici.
+
+Dobré limity kombinují více perspektiv:
+
+- podle uživatelského účtu, aby jeden zákazník omylem neshodil drahý endpoint;
+- podle API klíče, aby šlo izolovat integrace a partnery;
+- podle IP nebo subnetu, ale opatrně kvůli sdíleným sítím, NATu, kancelářím a VPN;
+- podle akce, protože `POST /login` a `GET /pricing` nemají stejnou toleranci;
+- podle nákladů, třeba počet exportovaných řádků, velikost uploadu nebo počet AI tokenů.
+
+Příklad pro malé B2B SaaS:
+
+| Akce | Limit | Reakce |
+| --- | --- | --- |
+| Odeslání kontaktního formuláře | 3 pokusy / 10 minut / IP + honeypot | tiché odmítnutí spamu, lidská chyba s možností kontaktu e-mailem |
+| Přihlášení | 5 neúspěchů / 15 minut / účet, 20 / IP | zdržení, bezpečnostní e-mail, žádné potvrzení existence účtu |
+| API čtení | 600 požadavků / 10 minut / klíč | `429 Too Many Requests`, `Retry-After`, odkaz na dokumentaci |
+| Export dat | 3 exporty / hodinu / workspace | zařazení do fronty nebo vysvětlení limitu |
+
+OWASP v API Security Top 10 2023 řadí neomezenou spotřebu zdrojů mezi významná API rizika. Praktický překlad: pokud požadavek stojí CPU, paměť, databázové dotazy, bandwidth, e-mailové kredity nebo peníze za externí API, musí mít rozumný strop.
+
+## JD.3 CAPTCHA ber jako poslední schod, ne první reflex
+
+CAPTCHA často přesouvá problém na uživatele. Blokuje lidi se zhoršeným zrakem, rozbíjí plynulost formulářů, přidává externí skripty a někdy posílá signály mimo kontrolu provozovatele webu. Privacy-first otázka zní: nejde to vyřešit blíž k serveru a s menším množstvím dat?
+
+Mírnější vrstvy, které často stačí:
+
+- honeypot pole skryté pro běžné uživatele a pojmenované tak, aby lákalo jednoduché boty;
+- minimální čas mezi načtením formuláře a odesláním, třeba spam odeslaný za 300 ms je podezřelý;
+- jednorázový serverový token formuláře s krátkou expirací;
+- limity na počet odkazů, velikost zprávy, podezřelé přílohy a opakující se texty;
+- blokování konkrétních vzorů až po ověření v logu, ne podle pocitu;
+- ruční fronta pro nejasné případy místo automatického zahazování všeho.
+
+Když už CAPTCHA opravdu dává smysl, používej ji selektivně: až po podezřelém chování, jen na rizikové akci a s alternativou pro člověka. Kontaktní formulář může nabídnout přímý e-mail. Přihlášení může nabídnout bezpečné obnovení přístupu. Cílem není dokázat uživateli, že není robot. Cílem je zastavit zneužití bez ponižující překážkové dráhy.
+
+## JD.4 Loguj obranné signály, ne osobní deník návštěvníka
+
+Abuse ochrana potřebuje pozorovatelnost. Nepotřebuje ale nekonečné profily lidí. U většiny malých webů stačí krátkodobé bezpečnostní logy s jasnou retencí a bez marketingového propojení.
+
+Rozumný záznam pro obranu může obsahovat:
+
+- čas události zaokrouhlený podle potřeby;
+- endpoint nebo chráněnou akci;
+- výsledek: povoleno, omezeno, odmítnuto, chyba;
+- důvod pravidla, třeba `rate_limit_login_account`;
+- pseudonymizovaný identifikátor účtu nebo API klíče;
+- zkrácenou nebo hashovanou IP pro krátkodobou korelaci;
+- technický request ID pro dohledání incidentu.
+
+Co do abuse logu většinou nepatří: plný obsah zprávy z formuláře, hesla nebo tokeny, kompletní URL s citlivými parametry, fingerprint prohlížeče pro marketingové spojování návštěv, dlouhodobé cross-site identifikátory a exporty do reklamních platforem.
+
+Doporučená retenční rutina:
+
+| Data | Retence | Poznámka |
+| --- | --- | --- |
+| Hrubé bezpečnostní logy | 7–30 dní | podle rizika a provozní potřeby |
+| Agregace útoků | 6–12 měsíců | počty, trendy, typy pravidel bez identifikace lidí |
+| Incidentové podklady | podle incident policy | jen relevantní výřez, s vlastní revizí |
+| Blokovací seznamy | pravidelná revize | každý blok má mít důvod a expiraci |
+
+## JD.5 Chybové zprávy mají pomáhat, ne vyzrazovat mapu útoku
+
+Při abuse ochraně je lákavé psát detailní chyby: „IP překročila limit pro účet novak@example.com“. To je dárek útočníkovi a zároveň nepříjemné pro uživatele. Dobrá zpráva říká, co má legitimní člověk udělat, ale neprozrazuje interní pravidla víc, než musí.
+
+Příklady mikrotextů:
+
+- Login: „Přihlášení se teď na chvíli zpomalilo kvůli většímu počtu pokusů. Zkuste to prosím za pár minut nebo obnovte heslo.“
+- Formulář: „Zprávu se nepodařilo odeslat. Pokud problém trvá, napište nám přímo na hello@example.com.“
+- API: „Překročili jste limit požadavků. Počkejte podle hlavičky `Retry-After` a snižte frekvenci volání.“
+- Export: „Export je příliš velký pro okamžité stažení. Připravíme ho na pozadí a pošleme odkaz oprávněnému uživateli.“
+
+U API buď konkrétnější než u veřejného formuláře. Vývojář potřebuje vědět, jestli má zpomalit, stránkovat, cacheovat nebo změnit integraci. Přidej dokumentaci limitů a stabilní hlavičky. U veřejného webu stačí lidská cesta ven.
+
+## JD.6 Provozní playbook: co dělat, když se abuse rozjede
+
+Když začne spam nebo scraping, tým má tendenci přepnout do režimu „blokuj všechno, co se hýbe“. Lepší je krátký playbook:
+
+1. Urči chráněnou akci: formulář, login, API, vyhledávání, export.
+2. Změř rozsah: počet požadavků, úspěšnost, dopad na zákazníky, náklady.
+3. Zaveď nejmenší účinnou brzdu: dočasný limit, fronta, vypnutí příloh, cache.
+4. Sleduj falešné pozitivy: stížnosti uživatelů, pokles konverzí, support tickety.
+5. Po incidentu pravidlo zjemni nebo zdokumentuj, aby dočasná páska nezůstala navždy.
+
+Praktický detail: každý blokovací mechanismus má mít majitele, expiraci a poznámku „proč existuje“. Jinak se za rok nikdo neodváží nic odstranit a web skončí jako půda po babičce: všechno možná jednou použijeme, ale nikdo neví k čemu.
+
+## JD.7 Checklist privacy-first abuse ochrany
+
+- Máme seznam chráněných akcí a u každé popsané konkrétní riziko.
+- Rate limity jsou jiné pro login, formuláře, API, exporty a drahé operace.
+- Limity kombinují účet/API klíč/IP/akci podle kontextu, ne jeden globální klacek.
+- CAPTCHA není výchozí obrana a má alternativu pro legitimního člověka.
+- Bezpečnostní logy mají jasný účel, minimální obsah a retenční dobu.
+- Do logů neukládáme hesla, tokeny, plné zprávy formulářů ani citlivé URL parametry.
+- API vrací srozumitelný `429 Too Many Requests` a pokud možno `Retry-After`.
+- Blokovací pravidla mají majitele, důvod, datum zavedení a expiraci nebo revizi.
+- Po incidentu zapisujeme, co pravidlo zastavilo, kolik mělo falešných pozitiv a jestli se má ponechat.
+- Abuse ochranu nepropojujeme s marketingovým profilem uživatele.
+
+## Codyho komentář
+
+Můj pohled — Cody: nejlepší anti-bot opatření je často nudný produktový design. Kratší formulář, serverový token, rozumný rate limit, fronta pro drahé exporty a pár dobrých logů udělají víc než magická krabička, která každému návštěvníkovi změří digitální otisk podrážky. A bonus: když sbíráš méně dat, máš méně věcí, které musíš vysvětlovat právníkovi, zákazníkovi a svému budoucímu já ve tři ráno.
+
+## Zdroje k příloze
+
+- OWASP API Security Top 10 2023 uvádí `API4:2023 - Unrestricted Resource Consumption` jako riziko spojené s neomezenou spotřebou síťových, výpočetních, paměťových a úložných zdrojů: https://owasp.org/API-Security/editions/2023/en/0x11-t10/
+- OWASP Bot Management and Anti-Automation Cheat Sheet popisuje automatizované hrozby jako credential stuffing, scraping, falešné registrace, card testing i riziko přehnaného fingerprintingu při obraně: https://cheatsheetseries.owasp.org/cheatsheets/Bot_Management_and_Anti-Automation_Cheat_Sheet.html
+- OWASP Automated Threats to Web Applications katalogizuje automatizované hrozby včetně credential stuffingu a scrapingu: https://owasp.org/www-project-automated-threats-to-web-applications/
+- MDN dokumentuje stavový kód `429 Too Many Requests` a jeho vazbu na rate limiting: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/429
+
+## Shrnutí přílohy
+
+Abuse ochrana má chránit službu, zákazníky a náklady, ne vyrábět tajnou databázi návštěvnických otisků. Začni mapou rizikových akcí, nastav limity podle skutečné ceny a dopadu, loguj jen obranné minimum, CAPTCHA používej až jako poslední vrstvu a po každém incidentu pravidla ukliď. Privacy-first bezpečnost není měkká bezpečnost. Je to bezpečnost, která ví, co chrání — a co už chránit nepotřebuje.
+
+
 ## Pracovní log
 
+- 2026-08-18: Přidána příloha JD o abuse ochraně formulářů a API bez invazivního fingerprintingu: mapa rizikových akcí, rate limity, CAPTCHA jako poslední vrstva, minimální bezpečnostní logy, chybové mikrotexty, incidentový playbook a checklist.
 - 2026-08-18: Přidána příloha JC o third-party skriptech a tag managementu: pas skriptu, governance tag manageru, načítání podle kritické cesty, CSP/SRI izolace, měření dopadu, consent a privacy-first checklist.
 - 2026-08-18: Přidána příloha JB o obrázcích, fontech a vizuálních assetech: účel vizuálů, responzivní optimalizace, bezpečné screenshoty, self-hostované fonty, ikonový systém, asset pipeline a checklist.
 
