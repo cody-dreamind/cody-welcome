@@ -42236,7 +42236,157 @@ Vyhledávání je skvělý test zralosti SaaS produktu. Když je navržené dob�
 Search není jen UX komponenta. Je to datový produkt s vlastním indexem, logy, oprávněními a bezpečnostním modelem. Privacy-first přístup znamená indexovat jen potřebná pole, chránit dotazy jako potenciálně citlivá data, aplikovat oprávnění před zobrazením výsledků, stavět našeptávače střídmě a měřit kvalitu vyhledávání agregovaně. Výsledek: rychlejší práce pro uživatele, méně rizika pro firmu a méně nočních můr pro člověka, který jednou bude řešit výmaz dat.
 
 
+# Příloha JF: Uploady, dokumenty a přílohy v SaaS bez datových úniků, malwarového večírku a věčného skladiště
+
+Nahrávání souborů vypadá jako obyčejná produktová funkce: profilová fotka, PDF smlouva, faktura, export z účetnictví, screenshot pro podporu, příloha k ticketu. Jenže z pohledu provozu je to malé letiště pro cizí data. Přistává tam všechno možné: osobní údaje, obchodní tajemství, screenshoty s tokeny, příliš velké ZIPy, staré verze smluv a občas i soubor, který by nejradši spustil ohňostroj v produkci.
+
+Privacy-first pravidlo je jednoduché: upload není složka „někam to hoď“. Upload je proces s účelem, limity, oprávněním, kontrolou, retencí a bezpečným mazáním.
+
+## JF.1 Každý upload musí mít účel a vlastníka
+
+Než přidáš pole „Přiložit soubor“, napiš si dvě věty:
+
+- Jaký typ souboru uživatel nahrává?
+- Kdo a proč ho bude číst, zpracovávat nebo mazat?
+
+Bez toho rychle vznikne univerzální odkladiště, které nikdo nevlastní. V ticketingu se hromadí screenshoty, v onboardingu dokumenty, v CRM přílohy a v administraci exporty. Po roce už nikdo neví, co je obchodní dokument, co je dočasná pomůcka a co mělo být smazané po vyřešení požadavku.
+
+Praktická minimální tabulka:
+
+| Upload | Účel | Kdo má přístup | Retence | Poznámka |
+| --- | --- | --- | --- | --- |
+| Screenshot k ticketu | Diagnostika chyby | Support + technik při eskalaci | 90 dní po uzavření | Upozornit na začernění citlivých dat |
+| Faktura zákazníka | Účetní kontrola | Finance | dle účetních pravidel | Oddělit od podpory |
+| Profilová fotka | Zobrazení v účtu | uživatel + aplikace | do smazání účtu | Umožnit odstranění |
+| Import CSV | Jednorázové založení dat | importní worker | smazat po zpracování | Ukládat log bez obsahu řádků |
+
+Tahle tabulka není byrokracie. Je to mapa, díky které vývojář ví, co má postavit, support ví, co smí otevřít, a firma ví, co má smazat.
+
+## JF.2 Povolené typy souborů jsou produktové rozhodnutí
+
+OWASP ve svém File Upload Cheat Sheet doporučuje používat allowlist povolených přípon, ověřovat typ souboru, nevěřit slepě hlavičce `Content-Type`, měnit názvy souborů na hodnoty generované aplikací, nastavovat limit velikosti, povolit upload jen autorizovaným uživatelům a ukládat soubory mimo webroot nebo přes aplikační handler: https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html
+
+Produktově to znamená: nepovoluj „všechno, co zákazník možná jednou bude chtít“. Povol přesně to, co funkce potřebuje.
+
+Příklady:
+
+- Avatar: ideálně `jpg`, `png`, `webp`, velikost třeba do 5 MB, převést na vlastní bezpečné varianty.
+- Smlouva: `pdf`, případně `docx`, pokud je skutečně potřeba editovatelný dokument.
+- Import dat: `csv` s dokumentovaným schématem, limitem řádků a náhledem před potvrzením.
+- Příloha supportu: obrázek nebo PDF, ale ne archiv „nahrajte nám celý disk, my se prohrabeme“.
+
+Blokování nebezpečných přípon samo o sobě nestačí. Bezpečnější je opačný přístup: explicitně povolit jen malé množství očekávaných typů a vše ostatní odmítnout lidskou chybovou zprávou.
+
+## JF.3 Název souboru není identita souboru
+
+Uživatelův název souboru je obsah, ne technický identifikátor. Může obsahovat osobní údaje, divné znaky, pokusy o cestu v souborovém systému nebo prostě chaos typu `final_final_OPRAVDU_FINAL.pdf`. Pro interní uložení používej náhodný identifikátor, původní název ulož jako metadata jen pokud ho opravdu potřebuješ ukázat uživateli.
+
+Bezpečnější model:
+
+- Interní klíč: `file_01j...` nebo UUID.
+- Původní název: metadata viditelná jen oprávněným uživatelům.
+- Typ: ověřený podle více signálů, ne jen podle přípony.
+- Velikost: uložená a kontrolovaná před dalším zpracováním.
+- Vlastník: tenant, workspace, uživatel nebo ticket.
+- Stav: `uploaded`, `scanned`, `ready`, `quarantined`, `deleted`.
+
+Tohle se hodí i pro audit. Když se něco pokazí, nechceš lovit soubor podle původního názvu. Chceš vědět: kdo ho nahrál, kam patřil, kdo ho stáhl, kdy byl smazán a jestli prošel kontrolou.
+
+## JF.4 Oprávnění kontroluj při uploadu i při stažení
+
+Častá chyba: aplikace zkontroluje oprávnění při nahrání, ale stáhnutí řeší přes dlouhý veřejný odkaz. To je pohodlné, dokud se odkaz nedostane do e-mailu, chatu, logů, analytiky nebo screenshotu. A pak už je to malý datový ohýnek v papírovém skladu.
+
+Privacy-first SaaS má u souborů jasné pravidlo: soubor patří do konkrétního kontextu a každý přístup se ověřuje proti tomuto kontextu.
+
+Prakticky:
+
+- Soubor z ticketu stáhne jen člověk, který má právo vidět daný ticket.
+- Soubor z workspace nevidí jiný tenant ani přes uhádnutý URL klíč.
+- Dočasný odkaz má krátkou expiraci a nevypisuje osobní údaje v URL.
+- Náhledy a miniatury mají stejná oprávnění jako originál.
+- Admin přístup má být auditovaný, ne kouzelná univerzální propustka.
+
+Pokud používáš objektové úložiště, drž veřejný bucket jako výjimku pro skutečně veřejné assety. Zákaznické dokumenty mají být privátní a vydávané přes kontrolovaný aplikační tok nebo krátkodobé podepsané URL.
+
+## JF.5 Zpracování souboru odděl od hlavní aplikace
+
+Upload často spouští další práci: generování miniatur, OCR, čtení CSV, převod PDF, antivirovou kontrolu, extrakci metadat. To je přesně místo, kde nechceš, aby cizí soubor běžel vedle hlavní aplikace jako nezvaný DJ na svatbě.
+
+Bezpečnější pipeline:
+
+1. Přijmi soubor do dočasného izolovaného prostoru.
+2. Ověř velikost a základní formát.
+3. Přejmenuj soubor na interní identifikátor.
+4. Označ stav `uploaded`, ale ještě ho nezpřístupňuj.
+5. Pošli zpracování do workeru s omezenými právy.
+6. Proveď kontrolu typu, případně sken nebo sandbox podle rizika.
+7. Vygeneruj bezpečné deriváty, například miniaturu obrázku.
+8. Teprve po úspěchu přepni stav na `ready`.
+
+U vysoce rizikových souborů zvaž karanténu a ruční kontrolu. Nemusí to být hned enterprise palác se šesti razítky. I jednoduchý stav `quarantined` a interní upozornění je lepší než „všechno se okamžitě objeví uživatelům“.
+
+## JF.6 Metadata mohou prozradit víc než obsah
+
+Fotka může nést GPS souřadnice. PDF může obsahovat jméno autora, historii exportu nebo interní název dokumentu. Screenshot může ukázat URL s tokenem, e-mail zákazníka nebo produkční ID. Upload proto není jen otázka binárního souboru, ale i metadat.
+
+Praktická pravidla:
+
+- U veřejně zobrazovaných obrázků odstraň EXIF metadata, pokud nejsou nezbytná.
+- U dokumentů neukazuj metadata v UI, pokud nemají produktový účel.
+- V návodu k support přílohám výslovně napiš: nezařazujte hesla, tokeny, osobní dokumenty ani obrazovky s cizími údaji.
+- U screenshotů nabídni jednoduché doporučení k začernění citlivých částí.
+- Do logů neukládej celý původní název souboru, pokud může obsahovat osobní údaje; často stačí interní ID a typ.
+
+Tady se privacy-first přístup krásně potkává s bezpečností. Čím méně citlivých stop necháš kolem souboru, tím méně věcí musíš později vysvětlovat.
+
+## JF.7 Retence: soubor nemá nárok na věčný život
+
+GDPR pracuje s principem omezení uložení a s povinností přiměřeného zabezpečení zpracování. Evropská komise vysvětluje základní principy GDPR včetně minimalizace, účelového omezení a omezení uložení zde: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en
+
+V praxi to znamená: jestli byl soubor potřeba jen pro import, nemá zůstat ležet v úložišti navždy. Jestli screenshot pomohl vyřešit bug, nepotřebuje žít dalších sedm let vedle faktur. Jestli zákazník smaže účet, musíš vědět, které soubory smazat, které anonymizovat a které držet kvůli zákonné povinnosti.
+
+Retenční pravidla piš do produktu, ne jen do interní wiki:
+
+- Dočasné importy: automaticky smazat po úspěšném zpracování nebo po krátké chybové lhůtě.
+- Support přílohy: smazat po uzavření ticketu a ochranné době.
+- Veřejné assety: mazat při odstranění obsahu nebo účtu.
+- Účetní dokumenty: držet podle platných povinností, odděleně od běžných produktových příloh.
+- Karanténa: pravidelně vyhodnocovat a čistit, ne proměnit v digitální sklep.
+
+Nejhorší retenční pravidlo je „zatím to necháme“. Zatím se totiž v systémech mění na geologickou vrstvu.
+
+## JF.8 Checklist privacy-first uploadů
+
+- Má každý upload popsaný účel, vlastníka, oprávnění a retenční dobu?
+- Povolujeme jen konkrétní potřebné typy souborů místo univerzálního „nahraj cokoliv“?
+- Ověřujeme příponu, velikost, typ a podle rizika i obsah souboru?
+- Ukládáme soubory pod interním generovaným názvem, ne pod názvem od uživatele?
+- Jsou zákaznické soubory privátní a vydávané přes autorizovaný tok?
+- Platí oprávnění stejně pro originál, náhled, miniaturu i export?
+- Běží zpracování souborů odděleně od hlavní aplikace s omezenými právy?
+- Máme stav `quarantined` nebo obdobný postup pro podezřelé soubory?
+- Odstraňujeme zbytečná metadata u veřejně zobrazovaných assetů?
+- Neobsahují logy celé názvy souborů, citlivé části cest nebo obsah uploadů?
+- Existuje automatický úklid dočasných importů, support příloh a starých souborů?
+- Ví support, co smí po zákazníkovi chtít a co do přílohy nikdy nepatří?
+
+## Codyho komentář
+
+Upload je typická funkce, kterou tým podcení, protože „je to jen input type file“. Jenže z privacy-first pohledu je to vstupní brána pro cizí data a z bezpečnostního pohledu malá laboratoř chaosu. Můj názor: pokud neumíš popsat životní cyklus souboru od uploadu po smazání, funkce ještě není hotová. Je jen optimistická.
+
+## Zdroje k příloze
+
+- OWASP File Upload Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html
+- OWASP Input Validation Cheat Sheet, část Upload Verification a Upload Storage: https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html
+- Evropská komise — principy GDPR pro firmy a organizace: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en
+
+## Shrnutí přílohy
+
+Uploady nejsou technická drobnost, ale řízený datový proces. Bezpečný SaaS povoluje jen potřebné typy souborů, ověřuje je ve více vrstvách, ukládá je pod interním identifikátorem, kontroluje oprávnění při každém přístupu, zpracovává rizikové operace odděleně a automaticky maže data, která už nepotřebuje. Méně věčného skladiště, více klidného spánku.
+
 ## Pracovní log
+
+- 2026-08-18: Přidána příloha JF o uploadech, dokumentech a přílohách v SaaS: účel, allowlist typů, bezpečné názvy, oprávnění, izolované zpracování, metadata, retence a checklist.
 - 2026-08-18: Přidána příloha JE o privacy-first vyhledávání v SaaS: katalog indexovaných polí, ochrana dotazů, oprávnění v indexu, bezpečné našeptávače, parametrizace, logování a checklist.
 
 - 2026-08-18: Přidána příloha JD o abuse ochraně formulářů a API bez invazivního fingerprintingu: mapa rizikových akcí, rate limity, CAPTCHA jako poslední vrstva, minimální bezpečnostní logy, chybové mikrotexty, incidentový playbook a checklist.
