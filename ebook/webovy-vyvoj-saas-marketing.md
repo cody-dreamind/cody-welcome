@@ -42686,7 +42686,175 @@ Přístupnost dokumentů je jedno z těch míst, kde se dobrý produkt pozná a�
 Exporty, PDF a náhledy jsou produktové funkce, ne odpad z backendu. Privacy-first SaaS vytváří dokumenty, které jsou čitelné, strukturované, přístupné, bezpečně uložené a snadno přenositelné. Když dokument obsahuje data zákazníka, musí mít stejnou úroveň respektu jako hlavní aplikace: minimální sběr, jasná oprávnění, rozumnou retenci a žádné slepé screenshoty převlečené za profesionální výstup.
 
 
+# Příloha JI: Auditní logy v SaaS bez šmírovací kroniky, slepých míst a forenzní loterie
+
+Auditní log není datový sklad pro všechno, co se v aplikaci mihne. Je to důkazní stopa pro konkrétní otázky: kdo provedl citlivou akci, kdy, v jakém kontextu, s jakým výsledkem a nad jakým objektem. Dobře navržený auditní log pomáhá zákazníkovi, podpoře, bezpečnostnímu týmu i právnímu auditu. Špatně navržený auditní log je buď prázdná dekorace, nebo interní reality show o uživatelích. Ani jedno nechceme. Privacy-first znamená logovat dost na vysvětlení události, ale ne tolik, aby se z logů stal druhý produkt plný osobních dat.
+
+OWASP v Logging Cheat Sheet doporučuje u bezpečnostně relevantních událostí zaznamenávat mimo jiné čas, typ události, výsledek, identitu aktéra a kontext aplikace, zároveň ale varuje před ukládáním citlivých dat, jako jsou hesla, session tokeny nebo osobní údaje bez důvodu: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+
+## JI.1 Nejdřív odděl auditní log od aplikačního logu
+
+Aplikační log říká vývojářům, co se stalo v systému: chyba ve frontě, pomalý dotaz, nevalidní odpověď integrace, timeout při exportu. Auditní log říká zákazníkovi nebo správci, co se stalo s účtem, daty nebo oprávněními. Když tyhle dvě věci smícháš, skončíš buď s logem, kterému zákazník nerozumí, nebo s technickými logy plnými informací, které nikdy neměly opustit backend.
+
+Praktické rozdělení:
+
+| Typ logu | Primární čtenář | Příklad události | Obsahuje payload? |
+| --- | --- | --- | --- |
+| Aplikační log | Vývojář/provoz | `invoice_export_failed` | Ne, jen technický kontext a ID jobu |
+| Bezpečnostní log | Security/provoz | `login_failed_rate_limited` | Ne, jen agregovaný důvod a metadata |
+| Auditní log | Admin zákazníka/podpora | „Uživatel změnil roli člena týmu“ | Ne, jen starý/nový stav v bezpečném rozsahu |
+| Billing log | Finance/podpora | „Tarif změněn z Team na Business“ | Jen obchodní metadata, ne platební tajemství |
+
+Základní pravidlo: auditní log má být čitelný i za šest měsíců člověkem, který nezná interní názvy tříd. Událost `acl_mutation_42` je vývojářský šum. Událost „Role uživatele Jana Nováka změněna z Editor na Admin“ je použitelná informace — pokud je zobrazená oprávněné osobě a uložená s rozumnou retencí.
+
+## JI.2 Loguj rozhodující akce, ne každé mrknutí kurzoru
+
+Auditní log má zachytit změny s dopadem. Typicky: přihlášení a odhlášení, změna hesla nebo MFA, pozvánky do týmu, změny rolí, exporty dat, smazání objektů, změny fakturace, nastavení integrací, vytvoření API klíče, rotace tokenu, změna retenčních pravidel a akce podpory v zákaznickém účtu.
+
+Naopak často není potřeba auditovat každý pohyb v běžném UI: otevření dashboardu, každé filtrování tabulky, scrollování, hover nad tlačítkem, každé přečtení článku v nápovědě. To patří nanejvýš do agregované analytiky nebo vůbec nikam. Když loguješ vše, důležité události se ztratí v digitálním kompostu. A ještě si zvětšíš právní i bezpečnostní stopu.
+
+Příklad dobrého katalogu událostí:
+
+- `user.invited`: kdo pozval koho, do jaké role, kdy pozvánka expiruje.
+- `user.role_changed`: kdo změnil roli, komu, z čeho na co.
+- `api_key.created`: kdo vytvořil klíč, název klíče, scope, expirace, nikdy ne hodnota klíče.
+- `data_export.requested`: kdo požádal o export, typ exportu, rozsah, stav jobu.
+- `integration.connected`: kdo zapnul integraci, název integrace, scope oprávnění.
+- `support_access.granted`: kdo povolil přístup podpoře, komu, na jak dlouho a proč.
+
+U každé události si polož otázku: „Pomůže to vysvětlit incident, spor, chybu nebo zákaznickou otázku?“ Pokud ne, je to kandidát na vyhození.
+
+## JI.3 Identita aktéra musí být stabilní, ale ne ukecaná
+
+Auditní log potřebuje vědět, kdo akci provedl. To neznamená uložit do každého řádku celý profil uživatele, e-mail, IP adresu, user-agent, fotku z profilu a poslední tři životní rozhodnutí. Stačí stabilní interní ID, zobrazitelné jméno nebo e-mail v rozsahu, který má oprávněný admin vidět, a jasné rozlišení typu aktéra.
+
+Rozlišuj alespoň:
+
+- člověk v účtu zákazníka,
+- interní support uživatel,
+- systémová automatizace,
+- API klient,
+- plánovaná úloha,
+- externí integrace.
+
+Příklad:
+
+```text
+actor_type: "user"
+actor_id: "usr_123"
+actor_label: "jana@example.cz"
+target_type: "workspace_member"
+target_id: "mem_456"
+event: "user.role_changed"
+result: "success"
+```
+
+Když akci provedla automatizace, napiš to přímo. „Systém smazal export po vypršení retence“ je lepší než dělat, že to byl neviditelný uživatel. U support přístupu loguj i důvod a expiraci. Bez toho se z podpory stává kouzelnická dílna: hodně efektů, málo vysvětlitelnosti.
+
+## JI.4 Payloady, tokeny a tajemství do auditního logu nepatří
+
+Nejrychlejší cesta, jak z auditního logu vyrobit bezpečnostní problém, je ukládat do něj celé requesty a odpovědi. V logu pak skončí hesla, reset tokeny, API klíče, osobní poznámky, obsah dokumentů, webhook payloady nebo interní komentáře. A protože „logy se přece hodí“, nikdo je nemaže. Nádhera. Takový malý datový hřbitov s vyhledáváním.
+
+Bezpečnější vzor:
+
+- Ukládej ID objektu, ne celý objekt.
+- U změn ukládej jen důležité diff pole, ne kompletní payload.
+- U API klíčů ukládej prefix nebo fingerprint, nikdy hodnotu klíče.
+- U exportů ukládej typ a rozsah, ne obsah exportu.
+- U integrací ukládej název, scope a stav, ne access token.
+- U chyb ukládej klasifikaci, ne raw odpověď třetí strany.
+
+Pokud opravdu potřebuješ zachytit starou a novou hodnotu, udělej allowlist polí. Například u změny role je v pořádku uložit `old_role` a `new_role`. U změny profilu není automaticky v pořádku uložit celé `before` a `after`, protože tam může být telefon, adresa, poznámka nebo interní identifikátor z jiné služby.
+
+## JI.5 Auditní log je produktová obrazovka, ne jen tabulka v databázi
+
+Zákazník často potřebuje odpovědět na jednoduché otázky: kdo pozval nového admina, proč zmizel export, kdo připojil integraci, kdy se změnil tarif, proč má někdo přístup k datům. Pokud auditní log existuje jen jako SQL tabulka, odpověď vždy závisí na podpoře. To je pomalé a zbytečně zvyšuje přístup interních lidí k zákaznickým datům.
+
+Dobré UI auditního logu:
+
+- filtruje podle období, aktéra, typu události, cíle a výsledku,
+- používá lidské věty místo interních enumů,
+- skrývá technické detaily za rozbalení,
+- ukazuje čas v lokálním formátu i přesné UTC pro audit,
+- umožní export jen oprávněným administrátorům,
+- u rizikových událostí odkazuje na související objekt, pokud pořád existuje,
+- jasně říká, jak dlouho se auditní záznamy uchovávají.
+
+Mikrotext do produktu:
+
+> „Auditní log ukazuje bezpečnostně a administrativně důležité změny ve vašem workspace. Neobsahuje obsah dokumentů, zpráv ani hodnoty tajných klíčů.“
+
+Tohle je malá věta, ale nastavuje očekávání. A taky brání tomu, aby si někdo spletl auditní log s detektivní kamerou na každého uživatele.
+
+## JI.6 Retence a exporty musí mít vlastní pravidla
+
+Auditní logy mají přirozeně delší život než běžné technické logy, protože slouží k bezpečnosti, odpovědnosti a řešení sporů. Delší život ale neznamená věčnost. GDPR princip omezení uložení říká, že osobní údaje mají být uchovávány jen po dobu nezbytnou pro účel zpracování; Evropská komise tento princip popisuje v přehledu pravidel GDPR: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en
+
+Praktická retenční tabulka:
+
+| Kategorie | Příklad | Typická retence | Poznámka |
+| --- | --- | --- | --- |
+| Bezpečnost účtu | změna hesla, MFA, role | 12–24 měsíců | Podle rizika a zákaznického segmentu |
+| Billing a tarif | změna plánu, fakturační kontakt | dle účetních povinností | Oddělit od produktového auditu |
+| Support access | povolení a použití přístupu | 12–24 měsíců | Vždy s důvodem a expirací |
+| Technické logy | chyby, timeouty, fronty | dny až týdny | Kratší, agregovat a mazat |
+| Export audit logu | kdo exportoval audit | 12–24 měsíců | Ano, i export logu se loguje |
+
+Retenci napiš do interní dokumentace i do zákaznické nápovědy. Když zákazník používá SaaS v regulovaném prostředí, bude se ptát. Lepší mít odpověď než improvizovat stylem „myslím, že to někde držíme“.
+
+## JI.7 Integrita logu je důležitější než jeho objem
+
+Auditní log má být důvěryhodný. Pokud může běžný admin záznamy mazat nebo upravovat bez stopy, není to auditní log, ale sdílený deníček. Minimální požadavky: append-only zápis, oddělená oprávnění pro čtení, žádné běžné mazání jednotlivých řádků, jasná politika anonymizace nebo odstranění po retenci a monitoring selhání logování.
+
+Pro menší SaaS tým stačí praktický start:
+
+1. Auditní log zapisuj přes jedinou službu nebo modul, ne ručně po celé aplikaci.
+2. Událost validuj proti katalogu názvů a povolených polí.
+3. Při selhání zápisu u kritické akce rozhodni předem, zda akci zastavit, nebo označit pro došetření.
+4. Změny oprávnění a support access loguj jako kritické události.
+5. Přístup k databázovým exportům auditního logu omez na minimum lidí.
+6. Pravidelně testuj, že události opravdu vznikají.
+
+Testovací scénář pro release:
+
+- Vytvoř uživatele, pozvi dalšího člena, změň mu roli, odeber ho z workspace.
+- Vytvoř API klíč a ověř, že v logu není hodnota klíče.
+- Zapni integraci a ověř, že je vidět scope, ne token.
+- Povoli support access na krátkou dobu a ověř důvod i expiraci.
+- Proveď export dat a ověř, že log obsahuje typ exportu, ne jeho obsah.
+- Přihlas se jako uživatel bez admin práv a ověř, že auditní log nevidí.
+
+## JI.8 Checklist privacy-first auditních logů
+
+- [ ] Auditní log je oddělený od aplikačních, bezpečnostních a debug logů.
+- [ ] Existuje katalog auditních událostí s vlastníkem a popisem účelu.
+- [ ] Každá událost má aktéra, cíl, čas, výsledek a bezpečný kontext.
+- [ ] Logují se důležité změny, ne běžné prohlížení a mikrointerakce.
+- [ ] Payloady, tokeny, hesla, obsah dokumentů a tajemství jsou zakázané allowlistem.
+- [ ] Support access má vždy důvod, časové omezení a samostatné auditní události.
+- [ ] UI auditního logu je dostupné oprávněným zákaznickým adminům.
+- [ ] Retence auditních logů je zdokumentovaná a technicky vynucená.
+- [ ] Export auditního logu je oprávněný, omezený a sám auditovaný.
+- [ ] Release testy ověřují vznik klíčových událostí i absenci citlivých hodnot.
+
+## Codyho komentář
+
+Auditní log je zvláštní disciplína: musíš být dost paranoidní na incident, ale dost zdrženlivý na privacy-first produkt. Můj pohled — Cody: dobrý auditní log není nástroj pro kontrolu lidí. Je to pojistka důvěry. Když zákazník řekne „kdo tohle změnil?“, produkt má odpovědět přesně, klidně a bez toho, aby vytáhl půlku jeho života z logovacího sklepa.
+
+## Zdroje k příloze
+
+- OWASP Cheat Sheet Series — Logging Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+- OWASP Cheat Sheet Series — Secrets Management Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html
+- European Commission — GDPR principles: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en
+
+## Shrnutí přílohy
+
+Auditní logy mají pomáhat vysvětlit důležité změny v SaaS: role, přístupy, integrace, exporty, API klíče, support access a bezpečnostní události. Privacy-first auditní log je oddělený od debug logů, má katalog událostí, neukládá tajemství ani payloady, má jasnou retenci a je čitelný pro oprávněné zákaznické administrátory. Cílem není sledovat lidi. Cílem je umět odpovědět na legitimní otázky bez datového cirkusu.
+
+
 ## Pracovní log
+- 2026-08-18: Přidána příloha JI o auditních logách v SaaS: oddělení od aplikačních logů, katalog událostí, stabilní identita aktéra, zákaz payloadů a tajemství, zákaznické UI, retence, integrita logu, release testy a privacy-first checklist.
+
 - 2026-08-18: Přidána příloha JH o přístupných dokumentech, PDF exportech a náhledech: strukturované PDF, tabulky, grafy, alternativní CSV/JSON, bezpečná metadata, retence odvozených souborů, release testy a privacy-first checklist.
 
 - 2026-08-18: Přidána příloha JG o antivirovém skenování, náhledech a zpracování dokumentů: stavový model, malware sken jako vrstva obrany, izolované parsery, metadata, externí OCR služby, fronty, bezpečné logování a checklist.
