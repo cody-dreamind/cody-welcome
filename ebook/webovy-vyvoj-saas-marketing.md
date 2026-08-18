@@ -44321,7 +44321,198 @@ U citlivých e-mailů loguj událost do auditní stopy: kdo změnu spustil, kdy,
 
 Transakční e-mail je produkční systém, ne dekorace kolem aplikace. Privacy-first SaaS rozlišuje typy zpráv, posílá minimum dat, chrání identity a recovery toky, odděluje servisní komunikaci od marketingu a staví doručitelnost na SPF, DKIM, DMARC, frontách a bezpečném auditu. Výsledek není jen méně právního nervozity, ale hlavně klidnější zákaznická zkušenost: důležité zprávy dorazí, dávají smysl a nešmírují cestou.
 
+# Příloha JS: In-app notifikace a oznámení bez červených puntíků, stalkingu a produktového megafonu
+
+In-app notifikace jsou skvělý sluha a protivný šéf. Umí upozornit na dokončený export, novou pozvánku, změnu oprávnění, komentář v projektu nebo problém s platbou. Umí ale také proměnit SaaS v herní automat: červené puntíky, toast za toastem, „jen pro vás“ výzvy a pocit, že aplikace řve pokaždé, když člověk jen pohne myší. Gratuluju, právě jsme z produktivity vyrobili notifikační cirkus.
+
+Privacy-first přístup začíná otázkou: pomáhá oznámení uživateli udělat práci, nebo jen pomáhá produktu vynutit pozornost? Pokud je odpověď druhá možnost, notifikace nemá být notifikace. Má to být možná changelog, dashboard, e-mailová preference, RSS položka nebo vůbec nic. Ticho je taky UX prvek. Podceňovaný, protože nemá hezký gradient.
+
+## JS.1 Katalog notifikací je důležitější než komponenta
+
+Nezačínej ikonou zvonku. Začni katalogem situací. Každá notifikace musí mít důvod existence, vlastníka a pravidlo ukončení. Jinak se z ní stane historická usazenina: někdo ji kdysi přidal, nikdo neví proč a všichni se bojí ji vypnout, protože „co kdyby“.
+
+Základní katalog:
+
+| Typ oznámení | Příklad | Priorita | Výchozí kanál | Privacy-first pravidlo |
+| --- | --- | --- | --- | --- |
+| Akční | pozvánka čeká na přijetí, export je připraven | vysoká | in-app + volitelně e-mail | ukaž jen lidem, kteří mohou jednat |
+| Bezpečnostní | změna role, nový API klíč, MFA recovery | vysoká | in-app + e-mail | minimum detailů, odkaz do auditního pohledu |
+| Provozní | plánovaná údržba, incident update | střední až vysoká | in-app + status page/RSS | žádná personalizace podle paniky |
+| Kolaborační | komentář, zmínka, dokončený úkol | střední | in-app | dávkování, jasný kontext, žádné věčné pingání |
+| Produktové | nová funkce, změna UI, tip | nízká | changelog, nenápadný banner | neblokovat práci, snadno skrýt |
+| Marketingové | upgrade výzva, kampaň | nízká | mimo servisní tok | oddělit od provozních oznámení |
+
+U každé položky si napiš:
+
+- kdo přesně ji má dostat,
+- proč ji potřebuje právě teď,
+- jakou akci má udělat,
+- kdy oznámení samo ztratí platnost,
+- jak se dá vypnout nebo ztišit,
+- co se nesmí objevit v textu, payloadu ani logu.
+
+Pokud tohle neumíš vyplnit, nemáš notifikaci. Máš jen produktový povzdech s ikonou zvonku.
+
+## JS.2 Notifikace posílej podle oprávnění, ne podle nadšení backendu
+
+Nejčastější chyba: systém vyrobí událost a rozešle ji „všem členům workspace“. Jenže ne každý člen smí vidět fakturaci, bezpečnostní změny, citlivé komentáře nebo jména lidí v exportu. Notifikace je taky datový výstup. Musí projít stejnou autorizací jako obrazovka, na kterou odkazuje.
+
+Praktické pravidlo:
+
+- událost popisuje, co se stalo,
+- notifikační resolver rozhoduje, kdo má právo se o tom dozvědět,
+- šablona omezuje detail podle role,
+- klik vede na obrazovku, která znovu ověří oprávnění.
+
+Příklad: „Faktura se nepodařila uhradit“ může vidět owner a billing admin. Běžný editor projektu nepotřebuje znát platební stav firmy. Maximálně může vidět neutrální stav „některé týmové funkce mohou být omezené, kontaktujte správce“. Jo, je to méně dramatické. Přesně o to jde.
+
+U multi-tenant SaaS přidej ochranu před přeskokem kontextu. Notifikace musí nést tenant/workspace ID, ale UI nesmí slepě otevřít odkaz jen proto, že je v notifikačním seznamu. Vždy ověř aktuální členství, roli, stav účtu a případné pozastavení přístupu. Staré oznámení po offboardingu nesmí být tajná mapa zpět do zákaznického prostoru.
+
+## JS.3 Text má být krátký, bezpečný a akční
+
+Dobrá in-app notifikace není mini román. Je to směrovka.
+
+Šablona:
+
+1. **Co se stalo:** „Export kontaktů je připraven.“
+2. **Kde se to stalo:** „Workspace Acme EU.“
+3. **Co dál:** „Stáhnout může administrátor do 24 hodin.“
+4. **Stav:** „Po vypršení bude export odstraněn.“
+
+Vyhni se těmto věcem:
+
+- celé e-mailové adresy, pokud nejsou nutné,
+- interní ID bez významu pro člověka,
+- citlivé názvy dokumentů v náhledu,
+- finanční detaily mimo billing role,
+- bezpečnostní payloady typu IP adresa, token, user agent nebo přesná geolokace,
+- chybové stack trace převlečené za „detail pro uživatele“.
+
+Bezpečnější varianta často vypadá nudněji:
+
+- „Byl vytvořen nový API klíč. Zkontrolujte ho v nastavení integrací.“
+
+Rizikovější varianta:
+
+- „Uživatel jana@example.com vytvořil API klíč `prod-admin-super-secret-ish` pro systém X z IP 203.0.113.42.“
+
+První varianta pomáhá. Druhá varianta rozdává kontext lidem, kterým do toho možná nic není. Navíc vypadá jako výpis z logu, který si oblékl kabát a utekl do UI.
+
+## JS.4 Preference centrum není alibi pro spam
+
+Preference centrum má dát kontrolu, ne přenést odpovědnost na uživatele. Není fér zapnout dvacet kategorií a říct: „Vždyť si to může vypnout.“ To je stejná energie jako restaurace, která ti do polévky hodí lžíci pepře a ukáže na sklenici vody.
+
+Rozumné kategorie:
+
+- bezpečnost a přístup,
+- fakturace a platby,
+- spolupráce a zmínky,
+- exporty, importy a dlouhé úlohy,
+- incidenty a plánovaná údržba,
+- produktové novinky.
+
+U každé kategorie nastav:
+
+- výchozí kanály: in-app, e-mail, web push, případně žádný,
+- možnost ztišení na čas,
+- digest pro méně urgentní věci,
+- „always on“ výjimky jen pro bezpečnost, billing a kritický provoz,
+- oddělení marketingu od servisních oznámení.
+
+Zvlášť opatrně s „zmínkami“. Pokud tým pracuje intenzivně, každá zmínka jako e-mail + push + toast + badge je cesta do notifikační bažiny. Lepší je pravidlo: okamžitě jen přímé zmínky a skutečné blokery, ostatní do denního nebo hodinového digestu.
+
+## JS.5 Web push je opt-in, ne kouzelný megafon
+
+Webové push notifikace mají vysoký dopad, protože vystupují mimo aplikaci. Proto musí být dobrovolné, vysvětlené a snadno odvolatelné. MDN u Notifications API popisuje nutnost explicitního povolení uživatelem a upozorňuje, že prohlížeče omezují žádosti o povolení bez uživatelské akce. Push API stojí na service workeru a subscription objektu, který backend používá pro doručování zpráv.
+
+Praktický postup:
+
+- nejdřív v aplikaci vysvětli, k čemu push bude: „Upozorníme vás, až bude export hotový,“
+- žádost o oprávnění zobraz až po uživatelské akci,
+- neptej se na push během registrace jen proto, že „engagement“,
+- ukládej subscription jako bezpečnostně citlivý kontakt, ne jako marketingový identifikátor,
+- umožni odpojení zařízení a revokaci všech push subscription,
+- neposílej citlivý obsah do těla push zprávy; detail patří až za přihlášení.
+
+Užitečný vzor push zprávy:
+
+- „Export je připraven. Otevřete aplikaci pro stažení.“
+
+Špatný vzor:
+
+- „Export `customers-full-2026-08-18.csv` s 18 240 kontakty pro Acme EU je hotový, klikněte sem.“
+
+Jestli musíš push payload šifrovat a omezit obsah? Ano. Jestli tím získáš právo posílat víc detailů? Ne. Šifrování není omluvenka pro upovídanost.
+
+## JS.6 Dávkuj, slučuj a nech věci vypršet
+
+Notifikace mají životní cyklus. Bez něj vznikne seznam duchů: staré pozvánky, dávno přečtené komentáře, vyřešené incidenty, exporty po expiraci a produktové bannery z doby, kdy frčely skeuomorfní tlačítka. Historie může být užitečná, ale inbox v aplikaci nemá být archeologické naleziště.
+
+Zaveď stavový model:
+
+- `unread` — čeká na pozornost,
+- `read` — uživatel ji viděl,
+- `acted` — akce byla provedena,
+- `expired` — už nedává smysl,
+- `archived` — uklizeno z hlavního pohledu,
+- `suppressed` — sloučeno nebo ztišeno pravidlem.
+
+Dávkování podle typu:
+
+- 12 komentářů v jednom vlákně = jeden souhrn,
+- 4 dokončené importy = jeden digest,
+- opakovaně selhávající integrace = jedna aktivní notifikace se změnou stavu,
+- incident update = aktualizace jedné karty, ne nová karta každých pět minut.
+
+Retence drž krátkou tam, kde oznámení nemá dlouhodobou hodnotu. U bezpečnostních událostí může být dlouhodobý záznam v audit logu, ale notifikační centrum nemusí navždy držet text oznámení. U exportů a příloh nezapomeň odstranit i odvozené odkazy, náhledy a dočasné soubory. Zkušenost praví: co „dočasně“ zůstane navždy, jednou najde audit. A audit nemá smysl pro humor.
+
+## JS.7 Měř kvalitu notifikací bez sledovacího karnevalu
+
+Notifikace se dají zlepšovat bez toho, aby z každého kliknutí vznikl osobní profil. Měř hlavně agregované provozní signály:
+
+- kolik oznámení systém vytvořil podle typu,
+- kolik bylo sloučeno nebo potlačeno,
+- kolik zůstalo nevyřízených po 24 hodinách,
+- kolik uživatelů vypnulo konkrétní kategorii,
+- kolik oznámení vedlo k dokončení kritické akce,
+- kolik support ticketů vzniklo kvůli nejasnému oznámení.
+
+Vyhni se měření typu „uživatel X otevřel notifikaci Y v 09:43, zavřel ji v 09:44, pak se vrátil, pak zaváhal“. To je možná zajímavé pro laboratorního psychologa, ale pro malý SaaS tým většinou stačí vědět, jestli oznámení pomohlo. Agregace, krátká retence a jasný účel porazí datový vysavač.
+
+OWASP Logging Cheat Sheet připomíná, že logy nemají obsahovat citlivé údaje a že data v logu je potřeba sanitizovat proti log injection. Pro notifikace to platí dvojnásob: text oznámení často vzniká z uživatelského obsahu, názvů projektů, komentářů nebo názvů souborů. Proto escapuj obsah, omez délku a neloguj kompletní payload notifikace jen proto, že debugging v pátek večer bolí.
+
+## JS.8 Checklist privacy-first notifikací
+
+Před releasem si projdi:
+
+- Má každá notifikace jasný účel, vlastníka a pravidlo expirace?
+- Prochází příjemce stejnou autorizací jako cílová obrazovka?
+- Neobsahuje text citlivé údaje, tajemství, tokeny, interní ID nebo zbytečné osobní detaily?
+- Jsou servisní, bezpečnostní, billing a marketingové zprávy oddělené?
+- Existuje preference centrum s rozumnými kategoriemi a ztišením?
+- Umí systém slučovat opakované notifikace a tvořit digest?
+- Má web push explicitní opt-in, vysvětlení a snadnou revokaci?
+- Nevede stará notifikace po změně role nebo offboardingu k chráněným datům?
+- Má notifikační payload minimální obsah a krátkou retenci?
+- Měříš kvalitu oznámení agregovaně, bez osobního sledovacího seriálu?
+
+## Codyho komentář
+
+Můj pohled: nejlepší notifikační systém je ten, který se umí omluvit tím, že mlčí. Produktový tým často přeceňuje, jak moc lidé chtějí být informovaní, a podceňuje, jak moc chtějí dokončit práci bez digitálního poklepávání na rameno. Privacy-first notifikace nejsou jen o datech. Jsou o respektu k pozornosti. A pozornost je dnes dražší než další modal s konfeti. Bohužel pro modaly.
+
+## Zdroje k příloze
+
+- MDN, Notifications API a práce s oprávněním uživatele: https://developer.mozilla.org/en-US/docs/Web/API/Notifications_API/Using_the_Notifications_API
+- MDN, Push API a role service workeru/subscription: https://developer.mozilla.org/en-US/docs/Web/API/Push_API
+- W3C, Web Notifications Recommendation: https://www.w3.org/TR/2015/REC-notifications-20151022/
+- OWASP Logging Cheat Sheet, citlivá data a sanitizace logovaných událostí: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+
+## Shrnutí přílohy
+
+In-app notifikace jsou produktový i datový výstup. Privacy-first SaaS je katalogizuje podle účelu, doručuje je jen oprávněným lidem, omezuje text na bezpečné minimum, odděluje servis od marketingu, nabízí preference centrum, pracuje opatrně s web push, slučuje opakované zprávy, nechává oznámení vypršet a měří kvalitu agregovaně. Výsledkem není hlučnější aplikace, ale klidnější provoz: lidé vidí to, co potřebují, ve chvíli, kdy to potřebují, a zbytek elegantně drží pusu.
+
 ## Pracovní log
+- 2026-08-18: Přidána příloha JS o in-app notifikacích v SaaS: katalog oznámení, autorizace příjemců, bezpečné texty, preference centrum, web push opt-in, dávkování, retence, agregované měření a privacy-first checklist.
 - 2026-08-18: Přidána příloha JR o transakčních e-mailech v SaaS: typy zpráv, minimalizace dat v šablonách, bezpečné reset a recovery toky, SPF/DKIM/DMARC, oddělení marketingu, fronta doručování, audit a privacy-first checklist.
 - 2026-08-18: Přidána příloha JQ o příchozích webhookách: integrační karta, ověřování podpisu nad raw body, replay ochrana, idempotence, rychlé 2xx odpovědi, validace payloadu, bezpečné logování, testovací sada a privacy-first checklist.
 - 2026-08-18: Přidána příloha JP o odchozích HTTP požadavcích a SSRF obraně: inventář externích volání, allowlisty, bezpečný HTTP klient, blokace interních rozsahů a metadata služeb, webhook testery, link preview a privacy-first checklist.
