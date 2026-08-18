@@ -42852,7 +42852,217 @@ Auditní log je zvláštní disciplína: musíš být dost paranoidní na incide
 Auditní logy mají pomáhat vysvětlit důležité změny v SaaS: role, přístupy, integrace, exporty, API klíče, support access a bezpečnostní události. Privacy-first auditní log je oddělený od debug logů, má katalog událostí, neukládá tajemství ani payloady, má jasnou retenci a je čitelný pro oprávněné zákaznické administrátory. Cílem není sledovat lidi. Cílem je umět odpovědět na legitimní otázky bez datového cirkusu.
 
 
+# Příloha JJ: Oprávnění, role a týmové přístupy bez admin chaosu, sdílených účtů a pozvánek navždy
+
+Oprávnění jsou nudná jen do chvíle, kdy zákazník zjistí, že bývalý kolega pořád vidí faktury, exporty nebo dokumenty. V malém SaaS týmu se přístupy často řeší pozdě: nejdřív existuje jeden admin, pak „dočasně“ sdílený účet, potom tři role pojmenované podle interního vtipu a nakonec support, který umí všechno, protože jinak by nešlo vyřešit ticket.
+
+Privacy-first produkt bere oprávnění jako součást UX. Uživatel má rozumět, kdo co vidí, proč to vidí a jak mu přístup odebrat. Vývojář má mít jedno místo, kde se rozhoduje o autorizaci. A firma má mít auditovatelný proces, ne naději, že „to v praxi nikdo nezneužije“.
+
+OWASP v Authorization Cheat Sheet doporučuje princip nejmenších oprávnění, výchozí zamítnutí, kontrolu oprávnění při každém požadavku a testy autorizační logiky: https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html. OWASP Top 10 zároveň řadí Broken Access Control mezi hlavní webová rizika: https://owasp.org/Top10/A01_2021-Broken_Access_Control/. Evropská komise u GDPR popisuje data protection by default mimo jiné jako omezení dostupnosti osobních údajů jen na potřebný okruh osob: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/obligations/what-does-data-protection-design-and-default-mean_en
+
+## JJ.1 Role začni od pracovních situací, ne od titulů
+
+Špatný začátek je tabulka „Owner, Admin, Manager, User“ bez popisu. Ještě horší začátek je checkbox „superadmin“, který umí úplně všechno a v kódu se rozlézá jako břečťan na staré zdi.
+
+Začni scénáři:
+
+- Kdo má platit a stahovat faktury?
+- Kdo smí pozvat další členy týmu?
+- Kdo vidí osobní nebo zákaznická data?
+- Kdo smí měnit integrace a API klíče?
+- Kdo smí exportovat data mimo aplikaci?
+- Kdo smí smazat workspace nebo ukončit tarif?
+
+Z těchto situací teprve vzniknou role. U malého B2B SaaS často stačí jednoduchý základ:
+
+| Role | Smysl | Typická oprávnění | Co nesmí |
+| --- | --- | --- | --- |
+| Owner | Právní a obchodní vlastník workspace | fakturace, členové, export, smazání účtu | obejít bezpečnostní limity bez auditu |
+| Admin | Správce provozu týmu | členové, konfigurace, integrace | měnit vlastnictví bez ownera |
+| Member | Běžný uživatel produktu | práce s vlastními daty a sdílenými objekty | fakturace, role, globální exporty |
+| Viewer | Čtení bez změn | přehledy, dokumenty, reporty | editace, export citlivých dat, integrace |
+| Billing | Finance bez obsahu produktu | faktury, tarif, platební údaje | zákaznický obsah, produktová data |
+
+Důležité: role nejsou marketingová dekorace. Každá role musí mít vlastní testy, vlastní popis v UI a vlastní mapu rizik.
+
+## JJ.2 Výchozí pravidlo: raději odmítnout než hádat
+
+Autorizace nesmí fungovat stylem „když se nic nenašlo, asi povolit“. Bezpečný základ je deny by default: pokud pravidlo explicitně neříká, že akce je povolená, akce se zamítne.
+
+Prakticky to znamená:
+
+- Nová funkce nemá být automaticky dostupná všem rolím.
+- Nový endpoint nemá spoléhat na to, že frontend schoval tlačítko.
+- Nový typ exportu nemá dědit oprávnění z podobné staré funkce bez revize.
+- Nová integrace nemá dostat plný přístup „pro jistotu“.
+- Nový support nástroj nemá vidět zákaznický obsah bez důvodu a expirace.
+
+Příklad rozhodovací věty pro pull request:
+
+> „Tato akce je dostupná pouze roli Admin nebo Owner v daném workspace. Kontrola probíhá server-side podle `workspace_id`, `actor_id`, role a stavu členství. Frontend jen zlepšuje UX, není bezpečnostní hranice.“
+
+Tohle je nudná věta. A právě proto je krásná. Nudná bezpečnost je nejlepší bezpečnost, protože se dá testovat.
+
+## JJ.3 Oprávnění kontroluj u objektu, ne jen u obrazovky
+
+Nejčastější chyba v SaaS není „uživatel se dostal do admin menu“. Často je to jemnější: uživatel má přístup k jedné stránce, ale přes upravené ID v URL získá cizí fakturu, dokument, komentář nebo export.
+
+Proto nestačí kontrolovat obrazovku. Kontroluj konkrétní objekt a vztah aktéra k objektu.
+
+Příklad špatně:
+
+- „Uživatel je přihlášený.“
+- „Uživatel má roli Member.“
+- „Endpoint `/documents/:id` může pokračovat.“
+
+Příklad lépe:
+
+- Uživatel je přihlášený.
+- Uživatel je aktivní člen workspace.
+- Dokument patří do stejného workspace.
+- Role nebo vztah uživatele k dokumentu povoluje čtení.
+- Dokument není smazaný, archivovaný mimo přístup nebo uzamčený retenčním pravidlem.
+
+U multi-tenant SaaS je `tenant_id` nebo `workspace_id` bezpečnostní hranice, ne jen filtr v databázi. Když se hranice rozbije, aplikace se z B2B nástroje změní na sousedský výměnný bazar dat. Nedoporučuji, pokud nechceš dělat incidentový maraton.
+
+## JJ.4 Pozvánky mají expirovat a mít jasný rozsah
+
+Pozvánka do týmu je přístupový token v obleku. Pokud nemá expiraci, omezený účel a auditní stopu, je to malý průšvih s hezkým tlačítkem „Přijmout“.
+
+Dobrá pozvánka obsahuje:
+
+- e-mail pozvaného člověka,
+- workspace nebo organizaci,
+- navrženou roli,
+- kdo pozvánku vytvořil,
+- čas vytvoření a expirace,
+- stav: čeká, přijata, expirovaná, zrušená,
+- bezpečný auditní záznam bez tokenu.
+
+Rozumný vzor pro malé týmy:
+
+- Pozvánka expiruje po 7 až 14 dnech.
+- Token je jednorázový a po přijetí se zneplatní.
+- Role se znovu validuje v okamžiku přijetí, ne jen při vytvoření pozvánky.
+- Owner nebo Admin může pozvánku zrušit před přijetím.
+- UI ukazuje čekající pozvánky ve správě členů.
+- Pokud je e-mail už členem jiného workspace, aplikace jasně ukáže, kam se člověk připojuje.
+
+Privacy-first detail: neposílej v pozvánce seznam existujících členů, interní data workspace ani ukázky obsahu. E-mail má říct „zve tě firma X do produktu Y jako role Z“, ne „tady je náhodný náhled na provoz firmy“.
+
+## JJ.5 Sdílené účty jsou dluh, který se tváří jako úspora
+
+Sdílený účet vznikne vždycky nevinně: „jen na chvilku“, „jen pro účetní“, „jen pro agenturu“. Problém je, že pak nevíš, kdo co udělal, komu odebrat přístup, jak vynutit MFA a jak rozlišit člověka od procesu.
+
+Lepší model:
+
+- Každý člověk má vlastní účet.
+- Agentura má vlastní uživatele, ne jeden společný login.
+- Technické integrace mají servisní účet nebo API klíč s jasným scope.
+- Dočasný přístup má expiraci.
+- Role se pravidelně revidují.
+
+Pokud zákazník trvá na sdíleném účtu, nabídni bezpečnější kompromis:
+
+- zdarma nebo levně přidej roli Viewer/Billing,
+- vytvoř auditovatelný agenturní přístup,
+- umožni omezený support access,
+- ukaž, že sdílený účet komplikuje bezpečnost i odpovědnost.
+
+Codyho praktická věta do obchodního hovoru:
+
+> „Sdílený login vám krátkodobě ušetří jedno místo, ale dlouhodobě zhorší dohledatelnost změn. Raději vám nastavíme omezenou roli pro účetní nebo agenturu.“
+
+## JJ.6 Support access nesmí být tajný tunel do zákaznického účtu
+
+Podpora občas potřebuje vidět kontext. To ale neznamená, že každý interní člověk má mít permanentní božský režim. Support access musí být produktová funkce s pravidly.
+
+Bezpečný support access:
+
+- vyžaduje konkrétní důvod nebo ticket,
+- má časové omezení,
+- ukazuje zákazníkovi, že byl aktivní,
+- loguje začátek, konec a typ přístupu,
+- neukazuje tajemství, tokeny, hesla ani platební údaje,
+- umožňuje režim „read-only“, pokud stačí,
+- jde okamžitě zrušit.
+
+Příklad policy:
+
+| Typ přístupu | Kdy | Limit | Audit |
+| --- | --- | --- | --- |
+| Read-only diagnostika | Reprodukce chyby v UI | 30 minut | důvod, ticket, aktér, workspace |
+| Technický zásah | Oprava konfigurace na žádost zákazníka | 2 hodiny | před/po změně, schvalovatel |
+| Incidentní přístup | Bezpečnostní nebo provozní incident | do uzavření incidentu | incident ID, rozsah, postmortem |
+
+Nikdy neřeš support access tajným SQL dotazem v produkci bez záznamu. To není „rychlá pomoc“. To je loterie s auditorem v publiku.
+
+## JJ.7 Pravidelná revize přístupů patří do provozní rutiny
+
+Oprávnění se kazí pomalu. Lidé mění role, agentury končí spolupráci, externisté dokončí projekt, interní admin odejde na dovolenou a dočasný přístup přežije tři kvartály jako fosilie v databázi.
+
+Zaveď jednoduchou měsíční rutinu:
+
+- Vyexportuj seznam členů, rolí, pozvánek a servisních účtů.
+- Najdi neaktivní účty za posledních 60 až 90 dní.
+- Zkontroluj všechny Ownery a Adminy.
+- Zruš expirované nebo nepoužité pozvánky.
+- Projdi API klíče a integrace s širokým scope.
+- Ověř support access výjimky.
+- Výsledek zapiš jako krátký provozní záznam.
+
+Pro malé firmy stačí tabulka, pokud je pravidelná. Pro větší B2B SaaS už dává smysl UI pro access review: kdo má přístup, proč, od kdy, kdo schválil a kdy se má znovu ověřit.
+
+## JJ.8 Testovací scénáře pro oprávnění
+
+Autorizace bez testů je přání. Testy mají pokrýt nejen šťastnou cestu, ale i zakázané kombinace.
+
+Minimální sada scénářů:
+
+- Viewer nesmí měnit nastavení workspace.
+- Member nesmí stáhnout faktury, pokud nemá Billing oprávnění.
+- Admin nesmí změnit vlastnictví Ownera bez odpovídajícího procesu.
+- Uživatel z workspace A nesmí přečíst dokument workspace B ani při znalosti ID.
+- Expirací pozvánky nejde vytvořit členství.
+- Zrušená pozvánka nejde přijmout.
+- Odebraný člen ztrácí přístup i k API a aktivním sessions podle definované policy.
+- Support access po expiraci přestane fungovat.
+- Export dat je dostupný jen oprávněné roli a vznikne auditní událost.
+- Frontendové skrytí tlačítka není jediná ochrana endpointu.
+
+Dobrá regresní sada má být čitelná pro produkt i security. Když název testu zní „returns 403 when member accesses another workspace invoice“, chápe ho vývojář, tester i unavený founder v pátek večer. To je cílový stav.
+
+## JJ.9 Checklist privacy-first oprávnění
+
+- [ ] Každá role má popis účelu, typická oprávnění a zakázané akce.
+- [ ] Autorizace používá deny by default a server-side kontrolu u každého citlivého požadavku.
+- [ ] Kontrola probíhá na úrovni konkrétního objektu, workspace a vztahu uživatele k objektu.
+- [ ] Frontendové skrytí prvků je jen UX, ne bezpečnostní hranice.
+- [ ] Pozvánky mají expiraci, jednorázový token, stav a auditní událost.
+- [ ] Sdílené účty jsou zakázané nebo aktivně nahrazované omezenými rolemi.
+- [ ] Servisní účty a API klíče mají jasný scope, vlastníka a rotaci.
+- [ ] Support access má důvod, expiraci, audit a bezpečný rozsah.
+- [ ] Neaktivní účty, pozvánky, admin role a široké scopes se pravidelně revidují.
+- [ ] Testy pokrývají zakázané přístupy mezi workspaces, rolemi a stavy objektů.
+
+## Codyho komentář
+
+Můj pohled — Cody: oprávnění jsou jeden z nejlepších testů produktové zralosti. Ne podle toho, kolik máš rolí, ale jestli umíš každou obhájit. Když se tým bojí odebrat admin práva, protože „pak se možná něco rozbije“, není to flexibilita. Je to technický dluh s visačkou „provozní realita“. A tyhle visačky mají protivný zvyk stát se incidentem.
+
+## Zdroje k příloze
+
+- OWASP Cheat Sheet Series — Authorization Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html
+- OWASP Top 10 — A01:2021 Broken Access Control: https://owasp.org/Top10/A01_2021-Broken_Access_Control/
+- European Commission — What does data protection by design and by default mean?: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/obligations/what-does-data-protection-design-and-default-mean_en
+
+## Shrnutí přílohy
+
+Oprávnění v SaaS nejsou jen administrátorská obrazovka. Jsou to pravidla důvěry: role podle reálných situací, deny by default, server-side kontrola u konkrétních objektů, bezpečné pozvánky, zákaz sdílených účtů, omezený support access a pravidelná revize přístupů. Privacy-first přístup znamená, že osobní a zákaznická data nejsou dostupná širšímu okruhu lidí jen proto, že je to pohodlné.
+
+
 ## Pracovní log
+- 2026-08-18: Přidána příloha JJ o oprávněních, rolích a týmových přístupech v SaaS: role podle scénářů, deny by default, objektová autorizace, bezpečné pozvánky, zákaz sdílených účtů, support access, access review, testovací scénáře a privacy-first checklist.
+
 - 2026-08-18: Přidána příloha JI o auditních logách v SaaS: oddělení od aplikačních logů, katalog událostí, stabilní identita aktéra, zákaz payloadů a tajemství, zákaznické UI, retence, integrita logu, release testy a privacy-first checklist.
 
 - 2026-08-18: Přidána příloha JH o přístupných dokumentech, PDF exportech a náhledech: strukturované PDF, tabulky, grafy, alternativní CSV/JSON, bezpečná metadata, retence odvozených souborů, release testy a privacy-first checklist.
