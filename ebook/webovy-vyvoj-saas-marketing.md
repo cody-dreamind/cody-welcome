@@ -41482,7 +41482,170 @@ Marketingová atribuce je užitečná, dokud pomáhá rozhodovat. Jakmile začne
 
 Privacy-first atribuce není rezignace na měření. Je to disciplína: jasné hypotézy, čisté UTM parametry, minimální eventy, kombinace technických signálů se self-reportem, kohortový reporting a pravidelný úklid dat. Malý evropský SaaS nepotřebuje vědět o každém návštěvníkovi všechno. Potřebuje vědět, které aktivity přinášejí správné zákazníky a které jen vyrábějí barevné grafy pro dobrý pocit.
 
+---
+
+# Příloha JA: Výkon webu, cache a rychlost bez analytického smogu, přehnaného JavaScriptu a CDN magie bez kontroly
+
+Rychlost webu není jen technická metrika pro lidi, kteří mají rádi grafy s milisekundami. Je to součást důvěry. Pomalý web říká: „Tady bude každá akce bolet.“ Rychlý web naopak šetří čas, baterku, nervy i náklady na infrastrukturu. A privacy-first přístup tomu překvapivě pomáhá: méně externích skriptů, méně reklamních pixelů, méně klientského bordelu a víc kontroly nad tím, co se uživateli opravdu posílá.
+
+Výkon ale nesmí skončit u náhodného minifikování. Malý SaaS potřebuje praktický systém: výkonnostní rozpočet, jasné cache vrstvy, měření skutečných zákaznických cest a release pravidla, která zabrání tomu, aby se landing page po třech kampaních změnila v digitální vánoční stromeček.
+
+## JA.1 Rychlost začíná odstraněním zbytečností
+
+Nejlevnější optimalizace je neposlat věc vůbec. Každý font, ikona, tracking skript, chat widget, video embed, animace a knihovna má mít práci. Pokud práci nemá, je to pasažér bez jízdenky.
+
+Začni inventurou:
+
+- Kolik externích domén se načítá na homepage, pricingu a registrační stránce?
+- Které skripty jsou kritické pro funkci a které jsou jen „možná se jednou bude hodit“?
+- Kolik CSS a JavaScriptu se posílá uživateli, který chce jen přečíst nabídku?
+- Které obrázky jsou větší, než jejich reálné zobrazení?
+- Které části stránky se mění často a které jsou prakticky statické?
+
+Privacy-first výhoda: když nepoužíváš reklamní pixely, session replay a pět sociálních embedů, máš menší právní plochu i menší výkonnostní plochu. To není asketismus. To je normální provozní hygiena.
+
+Praktický příklad: místo vloženého videa z externí platformy dej na stránku obrázek s tlačítkem a jasným odkazem. Uživatel se rozhodne, jestli chce přejít na video. Stránka se načte rychleji, nevolá cizí skripty hned při návštěvě a člověk má víc kontroly. Ano, je to méně „growth-hacky“. Taky je to méně slizké. Beru.
+
+## JA.2 Nastav výkonnostní rozpočet jako produktové pravidlo
+
+Výkonnostní rozpočet je limit, který tým nechce překročit. Ne proto, že by tabulka byla posvátná, ale protože bez limitu se web nafukuje potichu. Jeden widget nevadí. Pak druhý. Pak třetí. A najednou má stránka víc zavazadel než rodina na dovolené v Chorvatsku.
+
+Pro malý SaaS stačí jednoduchý rozpočet:
+
+| Oblast | Doporučené pravidlo pro tým | Co hlídat |
+| --- | --- | --- |
+| Externí skripty | Každý nový skript musí mít majitele a účel | doména, účel, data, fallback |
+| JavaScript | Marketingová stránka nesmí vyžadovat velký app bundle | code splitting, hydratace, nepotřebné knihovny |
+| Obrázky | Každý hero obrázek má moderní formát a správnou velikost | `srcset`, komprese, lazy loading mimo první viewport |
+| Fonty | Použij minimum řezů a lokální nebo dobře kontrolované servírování | FOUT/FOIT, preload, licence, zdroj |
+| Třetí strany | Nová služba vyžaduje datovou mapu | osobní údaje, region, DPA, vypnutí |
+
+Rozpočet dej do pull request šablony nebo release checklistu. Ne jako šikanu vývojářů, ale jako připomínku: výkon je vlastnost produktu. Když se zhorší, uživatel to cítí dřív než tým v dashboardu.
+
+## JA.3 Cache navrhuj podle pravdy o datech
+
+Cache není jedno tlačítko „zrychlit web“. Je to dohoda, jak dlouho je bezpečné používat uloženou odpověď. Špatně nastavená cache umí skvěle zrychlit chyby, staré ceny, cizí profil nebo rozbitou kampaň. Gratuluju, právě jsme vynalezli rychlý průšvih.
+
+Rozděl obsah do vrstev:
+
+- **Statická aktiva:** CSS, JavaScript, ikony, fonty a obrázky s verzovaným názvem mohou mít dlouhou cache, protože změna názvu vytvoří novou verzi.
+- **Veřejné stránky:** blog, dokumentace, landing page a help centrum se dají cachovat krátce až středně podle toho, jak často se mění.
+- **Personalizované stránky:** dashboard, fakturace, nastavení účtu a support data potřebují opatrnost; cache patří až za jasnou tenantovou izolaci.
+- **API odpovědi:** veřejné katalogy, konfigurace nebo číselníky se cachují jinak než data konkrétního zákazníka.
+- **Chybové odpovědi:** některé chyby nechceš cachovat vůbec, jiné krátce, aby se systém nezabil opakovanými dotazy.
+
+Praktická pravidla:
+
+- Verzovaná aktiva: dlouhá cache a neměnný název pouze do příštího buildu.
+- HTML dokumenty: raději kratší cache a rychlá možnost invalidace.
+- Uživatelská data: explicitně nastav, kdy se nesmí ukládat ve sdílené cache.
+- Admin a support rozhraní: žádná pohodlná cache citlivých odpovědí „protože to bylo rychlejší na demu“.
+- Preview kampaní: odděl od produkční cache, ať testovací obsah nevyleze ven.
+
+## JA.4 CDN a edge nejsou kouzelný prášek
+
+CDN může pomoct s latencí, dostupností a statickými aktivy. Ale privacy-first otázka zní: kdo vidí požadavky, hlavičky, IP adresy, cookies, URL a případně obsah? Pokud přes edge proxy teče celý web včetně přihlášených částí, není to jen výkonová komponenta. Je to významný subdodavatel v datové mapě.
+
+Před zapnutím CDN si napiš odpovědi:
+
+- Které části provozu přes ni potečou?
+- Půjdou přes ni přihlášené stránky, API nebo jen statická aktiva?
+- V jakých regionech se provoz zpracovává a loguje?
+- Jak dlouho se drží edge logy?
+- Umíme CDN obejít při incidentu?
+- Máme zdokumentovanou invalidaci cache?
+
+Evropský provoz neznamená, že nesmíš použít žádnou globální infrastrukturu. Znamená to, že víš, co přes ni posíláš, proč to děláš a jaké máš alternativy. Pokud je cílem jen rychlé servírování obrázků, nemusí přes stejnou vrstvu téct celé zákaznické API. Odděl aktiva od citlivých toků.
+
+## JA.5 Měř výkon bez šmírování uživatelů
+
+Výkon se dá měřit dvěma způsoby: laboratorně a v reálném provozu. Laboratorní test ti řekne, jestli stránka umí být rychlá v kontrolovaných podmínkách. Reálné měření ti ukáže, jak se chová u zákazníků na jejich zařízeních a sítích. Ani jedno nevyžaduje sbírat identitu člověka, nahrávat session nebo ukládat celý DOM jako výstavní exemplář.
+
+Privacy-first měření výkonu může ukládat agregované signály:
+
+- typ stránky nebo route,
+- čas načtení důležité části,
+- stav zařízení v hrubých kategoriích,
+- velikost přenesených dat,
+- chybu resource loadingu bez osobního payloadu,
+- verzi buildu,
+- zemi nebo region jen tehdy, když je to opravdu potřeba a agregované.
+
+Vyhni se ukládání plných URL s citlivými parametry, user ID v měřicích eventech, obsahu formulářů, přesné IP adresy v analytickém nástroji a permanentních identifikátorů pro sledování napříč návštěvami. Pokud potřebuješ řešit konkrétní problém zákazníka, udělej dočasný support režim se souhlasem a jasnou expirací, ne plošný šmírovací kombajn.
+
+## JA.6 Optimalizuj kritické cesty, ne jen skóre
+
+Skóre v testovacím nástroji je užitečné, ale není to zákazník. Zákazník chce najít odpověď, vyzkoušet produkt, zaplatit, pozvat kolegu, stáhnout fakturu nebo vyřešit problém. Proto měř a ladíš hlavně kritické cesty.
+
+Pro SaaS si vyber pět toků:
+
+1. Homepage → pricing → registrace.
+2. Registrace → první aktivace hodnoty.
+3. Přihlášení → dashboard.
+4. Dashboard → klíčová akce produktu.
+5. Fakturace nebo správa účtu → úspěšné dokončení změny.
+
+U každého toku napiš:
+
+- co je uživatelův cíl,
+- co musí být rychlé hned,
+- co se může načíst později,
+- které externí služby jsou v cestě,
+- jaký je fallback při selhání,
+- jak se pozná regres.
+
+Příklad: u pricing stránky je důležitý obsah tarifů, CTA, FAQ a důvěra. Není kritické spustit animovaný graf, načíst tři testimonial karusely a kontaktovat reklamní platformu ještě před tím, než člověk přečte nadpis. Produktový respekt někdy znamená nechat stránku dýchat.
+
+## JA.7 Release proces pro výkon
+
+Výkon se kazí postupně. Proto patří do release procesu:
+
+- Před větší změnou udělej baseline kritických stránek.
+- Po změně porovnej velikost assetů, počet externích requestů a základní načítání.
+- Nové třetí strany schvaluj přes datovou mapu i výkonový dopad.
+- U každého velkého obrázku ověř formát, rozměr a použití v layoutu.
+- Po releasu sleduj chyby načítání a nárůst pomalých cest.
+- Jednou měsíčně smaž nepoužívané skripty, CSS a experimenty.
+
+Když je tým malý, nepotřebuje nekonečný performance governance board. Stačí jeden majitel výkonu pro daný release a krátká otázka v review: „Zrychlili jsme, zpomalili jsme, nebo nevíme?“ Odpověď „nevíme“ je taky signál. Trochu trapný, ale užitečný.
+
+## JA.8 Checklist privacy-first výkonu a cache
+
+Před spuštěním nebo větší kampaní zkontroluj:
+
+- Má každá externí doména jasný účel, majitele a datovou poznámku?
+- Je homepage použitelná bez zbytečných třetích stran?
+- Jsou obrázky ve správném formátu, rozměru a načítání?
+- Má tým výkonnostní rozpočet pro skripty, assety a externí služby?
+- Jsou cache pravidla rozdělená pro statická aktiva, veřejné HTML, API a uživatelská data?
+- Neukládá sdílená cache personalizované odpovědi nebo citlivé hlavičky?
+- Existuje postup invalidace cache při chybě, změně ceny nebo incidentu?
+- Měří se kritické cesty, ne jen obecné skóre homepage?
+- Neobsahují performance eventy osobní údaje, plné URL s tokeny nebo payload formulářů?
+- Je CDN nebo edge proxy zapsaná v datové mapě včetně logů, regionů a fallbacku?
+- Kontroluje release velikost assetů a počet externích requestů?
+- Existuje měsíční úklid nepoužívaného JavaScriptu, experimentů a tracking zbytků?
+
+## Codyho komentář
+
+Výkon je často nejpoctivější privacy-first metrikou. Když stránka potřebuje dvacet cizích skriptů, aby vysvětlila jednu větu hodnoty, problém není v cache. Problém je v odvaze říct: tohle pryč. Rychlý web není asketický web. Je to web, který ví, proč existuje. A ano, méně věcí se taky méně rozbíjí. Šokující zjištění, věda stále mlčí.
+
+## Zdroje k příloze
+
+- MDN Web Docs: HTTP caching — přehled principů cache, validace a direktiv: https://developer.mozilla.org/en-US/docs/Web/HTTP/Caching
+- MDN Web Docs: Lazy loading — vysvětlení odloženého načítání nekritických zdrojů: https://developer.mozilla.org/en-US/docs/Web/Performance/Lazy_loading
+- web.dev: Optimize resource loading — praktický přehled prioritizace a načítání zdrojů: https://web.dev/learn/performance/optimize-resource-loading
+- web.dev: Back/forward cache — kontext pro návratovou cache v prohlížeči a praktické dopady na webové aplikace: https://web.dev/articles/bfcache
+- Evropská komise: GDPR principles — principy minimalizace, účelového omezení a transparentnosti při zpracování osobních údajů: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en
+
+## Shrnutí přílohy
+
+Privacy-first výkon není honba za perfektním skóre. Je to disciplína, která kombinuje odstranění zbytečností, výkonnostní rozpočet, opatrnou cache, promyšlené použití CDN, střídmé měření reálných cest a release proces, který nenechá web pomalu ztloustnout. Rychlost, bezpečnost a soukromí se tady nepřetahují. Když se dělají dobře, táhnou za stejný konec lana.
+
+
 ## Pracovní log
+
+- 2026-08-18: Přidána příloha JA o výkonu webu, cache a rychlosti: odstraňování zbytečností, výkonnostní rozpočet, bezpečná cache, CDN/edge datová mapa, měření kritických cest bez osobních údajů, release proces a privacy-first checklist.
 - 2026-08-18: Přidána příloha IZ o privacy-first marketingové atribuci: rozhodování místo falešné přesnosti, bezpečné UTM parametry, minimální eventy, self-report zdrojů, kohortový reporting, kampaňová hygiena a checklist.
 - 2026-08-17: Přidána příloha IY o privacy-first placené akvizici a retargetingu: rozdělení kampaní podle kontroly nad vztahem, kontextové cílení, omezený retargeting, customer match jako výjimka, landing page bez sledovací protézy, akviziční sprint, datová mapa a checklist.
 - 2026-08-17: Přidána příloha IX o privacy-first e-mailových kampaních: rozdělení typů e-mailů, limity open rate, rozhodování o tracking pixelech, přímé odkazy, preference centrum, automatizační brzdy, datová mapa a checklist.
