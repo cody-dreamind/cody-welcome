@@ -41779,8 +41779,164 @@ Vizuální assety mají pomáhat prodeji, důvěře a srozumitelnosti, ne dělat
 
 ---
 
+# Příloha JC: Third-party skripty a tag management bez digitálního blešího trhu
+
+Third-party skript je malý kousek cizího kódu, který si pustíš do vlastního domu. Někdy je užitečný: platební widget, mapa, video, chat, analytika, A/B test, affiliate měření. Někdy je to ale jen historická vrstva marketingového sedimentu, kterou nikdo nechce smazat, protože „co kdyby se to někdy hodilo“. Gratuluji, právě jsi vynalezl digitální půdu plnou krabic bez popisků.
+
+Privacy-first web nepovažuje third-party skripty za automatické zlo. Považuje je za dodavatele s přístupem k prohlížeči návštěvníka. A dodavatel s přístupem k návštěvníkovi má mít účel, vlastníka, datovou mapu, výkonový rozpočet, bezpečnostní omezení a plán vypnutí.
+
+Web.dev upozorňuje, že third-party JavaScript může zpomalovat výkon, přidávat síťové požadavky, blokovat vykreslování a nést privacy i security rizika: https://web.dev/articles/third-party-javascript. To není argument pro paniku. Je to argument pro inventář.
+
+## JC.1 Každý skript musí mít pas
+
+Nejhorší otázka u externího skriptu je: „Kdo to sem dal?“ Ještě horší odpověď: „Asi někdo z marketingu před dvěma redesigny.“
+
+Zaveď jednoduchý pas skriptu:
+
+| Pole | Co vyplnit |
+| --- | --- |
+| Název | Lidský název služby nebo knihovny |
+| Doména | Odkud se skript načítá |
+| Účel | Jedna věta, proč existuje |
+| Majitel | Konkrétní člověk nebo tým |
+| Data | Jaká data může služba vidět nebo přijmout |
+| Region | Kde dodavatel data zpracovává, pokud je zpracovává |
+| Právní základ | Proč je zpracování oprávněné nebo kde je souhlas |
+| Kritičnost | Co se stane, když skript vypadne |
+| Vypnutí | Jak ho bezpečně odstranit nebo zakázat |
+| Revize | Datum poslední kontroly |
+
+Praktické pravidlo: skript bez pasu se nenasazuje. Skript bez majitele se po revizi maže. Skript, který neumí nikdo vysvětlit, není „legacy“. Je to náhodná loterie v prohlížeči uživatele.
+
+## JC.2 Tag manager není výjimka z governance
+
+Tag manager je pohodlný, protože umožní přidávat skripty bez releasu aplikace. Přesně proto je nebezpečný. Pokud může kdokoli vložit nový vendor skript přes marketingové rozhraní, obešel jsi code review, bezpečnostní kontrolu, výkonový rozpočet i datovou mapu. To není agilita. To je díra v plotě s cedulí „rychlejší experimenty“.
+
+Rozumné nastavení tag managementu:
+
+- Přístup mají jen konkrétní lidé, ne celá firma přes sdílený účet.
+- Každá změna má ticket, účel, datum spuštění a plán vypnutí.
+- Volitelné skripty se nespouští před souhlasem, pokud ho potřebují.
+- Produkční změny schvaluje technický i marketingový vlastník.
+- Tag manager nesmí obsahovat staré experimenty, vypnuté kampaně a duplikátní měření.
+- Jednou měsíčně proběhne export konfigurace a kontrola diffu.
+
+Pokud malý tým nepotřebuje měnit skripty denně, často je lepší tag manager vůbec nemít. Přidat jeden měřicí skript do kódu s review je pomalejší o pár minut, ale rychlejší než řešit za rok archeologii tagů, které posílají data na sedm domén a jeden zapomenutý subdodavatel.
+
+## JC.3 Načítání navrhni podle kritické cesty
+
+Ne všechny skripty jsou stejně důležité. Některé musí běžet hned, protože bez nich stránka nefunguje. Většina marketingových skriptů ale nepatří do kritické cesty prvního vykreslení.
+
+Web.dev u third-party JavaScriptu doporučuje mimo jiné `async` nebo `defer`, odstranění skriptů bez jasné hodnoty, případně self-hosting, pokud je cizí server pomalý: https://web.dev/articles/optimizing-content-efficiency-loading-third-party-javascript?hl=en
+
+Praktické rozdělení:
+
+- **Kritické pro funkci:** platební prvek na checkoutu, anti-fraud u platby, autentizační widget. Načítej jen na stránkách, kde je potřeba.
+- **Užitečné, ale nekritické:** analytika, feedback widget, video embed. Načítej po hlavním obsahu nebo až po interakci.
+- **Kampaňové a dočasné:** A/B test, affiliate měření, jednorázový pixel. Dej jim datum konce.
+- **Dekorativní:** sociální tlačítko, externí badge, zbytečný chat na informační stránce. Kandidát na smazání.
+
+Příklad: místo automatického vložení videa může landing page ukázat náhledový obrázek, délku videa a přímý odkaz. Uživatel si zvolí, jestli chce otevřít externí službu. Web je rychlejší, transparentnější a nepředává návštěvu třetí straně jen proto, že někdo scrolloval kolem hero sekce.
+
+## JC.4 Omez dopad přes CSP, SRI a izolaci
+
+Když už externí skript potřebuješ, nechceš mu dát klíče od celé chalupy. Bezpečnostní hlavičky a izolace nejsou kouzelný štít, ale umí snížit škody.
+
+MDN popisuje `script-src` v Content Security Policy jako direktivu, která určuje povolené zdroje JavaScriptu: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy/script-src. Subresource Integrity umožňuje prohlížeči ověřit, že načtený skript nebo stylesheet odpovídá očekávanému kryptografickému hashi: https://developer.mozilla.org/en-US/docs/Web/Security/Defenses/Subresource_Integrity
+
+Praktický základ:
+
+- Nastav CSP s co nejužším `script-src`; nezačínej u `*` a pak se netvař překvapeně.
+- Nepoužívej inline handlery typu `onclick="..."`, pokud se jim můžeš vyhnout.
+- U externích statických skriptů používej SRI tam, kde to dává smysl a vendor nemění soubor pod stejnou URL.
+- Embedy izoluj přes `iframe`, sandbox, explicitní `allow` atributy a jasný fallback.
+- Nepředávej third-party skriptům identifikátory uživatele, e-mail, tenant ID ani interní názvy projektů, pokud to není nutné.
+- U widgetů testuj chování při výpadku vendor domény. Stránka nesmí spadnout jen proto, že chat má špatné úterý.
+
+CSP report-only režim je dobrý start: nejdřív zjistíš, co by se rozbilo, a potom politiku zpřísníš. Jen pozor, reporty samy mohou obsahovat citlivý kontext. I bezpečnostní nástroj potřebuje datovou mapu. Ano, i tady se skrývá malý administrativní skřítek.
+
+## JC.5 Měření dopadu dělej před nákupem i po nasazení
+
+Third-party skript není jednorázové rozhodnutí. Vendor může změnit velikost balíku, přidat další doménu, zhoršit cache, změnit embed nebo začít načítat nové subdodavatele. Proto nestačí kontrola při spuštění.
+
+Před nasazením změř:
+
+- počet nových domén a požadavků,
+- velikost staženého JavaScriptu,
+- dopad na první vykreslení a interaktivitu,
+- chování bez souhlasu s volitelnými cookies,
+- chování při blokování skriptu v prohlížeči nebo DNS,
+- co se posílá v URL, referreru, payloadu a lokálním úložišti.
+
+Po nasazení kontroluj:
+
+- jestli skript běží jen na stránkách, kde má účel,
+- jestli nezůstal zapnutý po konci kampaně,
+- jestli nepřibyly další vendor domény,
+- jestli neduplikuje funkci jiného nástroje,
+- jestli stále odpovídá privacy textům a souhlasové vrstvě.
+
+Jednoduchý test pro malý tým: otevři stránku v DevTools, filtruj podle domén mimo vlastní web, exportuj seznam a jednou měsíčně ho porovnej. Pokud se objeví nová doména, někdo musí říct proč. Když nikdo neví, doména jde do karantény.
+
+## JC.6 Consent není kouzelná propustka
+
+Souhlas může být nutný, ale není to morální čistička. I když člověk klikne na „Souhlasím“, pořád platí minimalizace, účelové omezení a rozumné zacházení s daty. Consent banner nemá být způsob, jak uživatele unavit do kapitulace.
+
+Dobrá praxe:
+
+- Nezbytné skripty drž odděleně od analytických, marketingových a experimentálních.
+- Volitelné skripty nespouštěj před odpovídajícím rozhodnutím uživatele.
+- U každé kategorie vysvětli lidsky účel, ne jen „zlepšení služeb“.
+- Nepředvyplňuj marketingové volby jako zapnuté.
+- Umožni změnu rozhodnutí bez hledání odkazu v patičce mezi právními fosiliemi.
+- Pokud lze měřit privacy-first analytikou bez osobních profilů, preferuj ji před reklamními pixely.
+
+Codyho komentář: když potřebuješ deset vendorů, aby ses dozvěděl, jestli landing page funguje, možná nemáš problém s atribucí. Možná máš problém s landing page. Bolí to, ale aspoň to nemá cookies.
+
+## JC.7 Checklist third-party skriptů
+
+Před přidáním nového skriptu:
+
+- Má skript jasný účel a majitele?
+- Existuje datová mapa: co vidí, co přijímá, kam posílá data?
+- Je vendor v souladu s privacy-first hodnotou projektu a evropským provozem?
+- Je skript opravdu nutný, nebo existuje serverové, lokální či jednodušší řešení?
+- Běží jen na stránkách, kde je potřeba?
+- Je mimo kritickou cestu, pokud není kritický pro funkci?
+- Je ošetřený CSP, SRI, iframe sandboxem nebo jiným omezením podle typu integrace?
+- Funguje stránka rozumně, když se skript nenačte?
+- Je souhlasová vrstva sladěná s realitou skriptu?
+- Má skript datum revize nebo vypnutí?
+
+Měsíční úklid:
+
+- Exportuj seznam externích domén.
+- Porovnej ho s pasy skriptů.
+- Smaž kampaně po termínu.
+- Odstraň duplikátní nástroje.
+- Zkontroluj, že privacy texty odpovídají skutečnému provozu.
+- Ověř výkon dopadu na mobilu, ne jen na kancelářské optice.
+
+## Codyho komentář
+
+Third-party skripty jsou jako koření. Trocha může pomoct, moc zničí jídlo a některé směsi obsahují věci, které radši nechceš číst nahlas. Privacy-first přístup není zákaz koření. Je to kuchař, který ví, co do receptu patří, kdo to dodal a co se stane, když to zítra zmizí z trhu.
+
+## Zdroje k příloze
+
+- Web.dev — Third-party JavaScript performance: https://web.dev/articles/third-party-javascript
+- Web.dev — Load Third-Party JavaScript: https://web.dev/articles/optimizing-content-efficiency-loading-third-party-javascript?hl=en
+- MDN — Content-Security-Policy `script-src`: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy/script-src
+- MDN — Subresource Integrity: https://developer.mozilla.org/en-US/docs/Web/Security/Defenses/Subresource_Integrity
+
+## Shrnutí přílohy
+
+Third-party skripty nejsou jen technický detail. Jsou to dodavatelé běžící v prohlížeči návštěvníka. Každý má mít pas, majitele, datovou mapu, výkonový rozpočet, bezpečnostní omezení a plán vypnutí. Tag manager nesmí obcházet governance, consent není kouzelná propustka a nejlepší skript je často ten, který se vůbec nenačte. Kruté, ale bandwidthově něžné.
+
+---
+
 ## Pracovní log
 
+- 2026-08-18: Přidána příloha JC o third-party skriptech a tag managementu: pas skriptu, governance tag manageru, načítání podle kritické cesty, CSP/SRI izolace, měření dopadu, consent a privacy-first checklist.
 - 2026-08-18: Přidána příloha JB o obrázcích, fontech a vizuálních assetech: účel vizuálů, responzivní optimalizace, bezpečné screenshoty, self-hostované fonty, ikonový systém, asset pipeline a checklist.
 
 - 2026-08-18: Přidána příloha JA o výkonu webu, cache a rychlosti: odstraňování zbytečností, výkonnostní rozpočet, bezpečná cache, CDN/edge datová mapa, měření kritických cest bez osobních údajů, release proces a privacy-first checklist.
