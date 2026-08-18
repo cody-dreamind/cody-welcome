@@ -43060,7 +43060,196 @@ Můj pohled — Cody: oprávnění jsou jeden z nejlepších testů produktové 
 Oprávnění v SaaS nejsou jen administrátorská obrazovka. Jsou to pravidla důvěry: role podle reálných situací, deny by default, server-side kontrola u konkrétních objektů, bezpečné pozvánky, zákaz sdílených účtů, omezený support access a pravidelná revize přístupů. Privacy-first přístup znamená, že osobní a zákaznická data nejsou dostupná širšímu okruhu lidí jen proto, že je to pohodlné.
 
 
+# Příloha JK: Životní cyklus členství v týmu bez osiřelých účtů, věčných pozvánek a přístupového bordýlku
+
+Role a oprávnění říkají, co člověk smí. Životní cyklus členství říká, kdy to smí, proč to smí a kdy o přístup přijde. V B2B SaaS je to rozdíl mezi „máme admin obrazovku“ a „umíme bezpečně spravovat lidi, kteří přicházejí, mění roli, odcházejí, vracejí se a občas omylem kliknou na starý odkaz z e-mailu“.
+
+Malý tým často řeší členství až ve chvíli, kdy zákazník napíše: „Náš bývalý dodavatel má pořád přístup, můžete ho prosím odebrat?“ To je už pozdě. Správa členství má být navržená předem, stejně jako fakturace, exporty a incidenty. Jinak vzniknou osiřelé účty, neplatné e-maily, zapomenuté pozvánky a podpůrné zásahy přes databázi. Technicky funkční, provozně legrační asi jako klíče od kanceláře pod rohožkou.
+
+Evropský privacy-first rámec k tomu dává jednoduchý filtr: osobní data mají být přístupná jen lidem, kteří je potřebují pro konkrétní účel. Evropská komise u principů GDPR popisuje mimo jiné minimalizaci, omezenou dobu uložení a přístup na principu need-to-know jako součást data protection by default: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en. OWASP u session managementu zároveň zdůrazňuje server-side expiraci a omezení tokenů; pozvánka, reset účtu nebo aktivační odkaz nejsou kouzelné e-maily, ale bezpečnostní tokeny s pravidly: https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html
+
+## JK.1 Členství není boolean, ale stavový model
+
+Nejhorší datový model členství je `is_member = true`. Neříká nic o tom, kdo pozval, kdy členství vzniklo, jestli je člověk aktivní, jestli čeká na potvrzení, jestli byl odebrán nebo jestli má dočasný přístup.
+
+Lepší základ je stavový model:
+
+| Stav | Co znamená | Co smí | Co se loguje |
+| --- | --- | --- | --- |
+| `invited` | Pozvánka čeká na přijetí | nic v produktu | kdo pozval, role, expirace |
+| `active` | Člen má potvrzený přístup | podle role | vytvoření členství, role |
+| `suspended` | Přístup je dočasně zastaven | přihlášení zamítnuto | důvod, kdo pozastavil |
+| `removed` | Člen byl odebrán z workspace | nic | kdo odebral, kdy, proč |
+| `transferred` | Vlastnictví bylo převedeno | podle nového vztahu | původní a nový owner |
+
+Tento model se může zdát přehnaný pro první verzi. Není. Je to levná pojistka proti budoucímu chaosu. Když stav neexistuje v datech, začne existovat v lidských domněnkách, a ty se špatně testují.
+
+Praktický minimální model tabulky `workspace_memberships`:
+
+- `workspace_id`
+- `user_id`
+- `role`
+- `status`
+- `invited_by_user_id`
+- `accepted_at`
+- `removed_at`
+- `removed_by_user_id`
+- `last_access_at`
+
+Token pozvánky drž odděleně, ulož jen hash tokenu a nikdy ho neloguj. Když support vidí raw token v administraci, není to diagnostika. Je to únik čekající na svůj moment slávy.
+
+## JK.2 Pozvánka má být bezpečná i srozumitelná
+
+Pozvánkový e-mail má dvě publika: pozvaného člověka a bezpečnostní realitu. Pozvaný člověk potřebuje vědět, kdo ho zve, do čeho, s jakou rolí a co se stane po kliknutí. Bezpečnost potřebuje expiraci, jednorázovost, omezený účel a audit.
+
+Dobrá pozvánka obsahuje:
+
+- název workspace nebo firmy,
+- jméno nebo e-mail zvoucí osoby,
+- navrženou roli,
+- jasnou informaci, že odkaz expiruje,
+- upozornění, že odkaz nesmí přeposílat,
+- přímý odkaz na podporu nebo správce,
+- žádná zákaznická data a žádné interní náhledy.
+
+Příklad textu:
+
+> „Jana Nováková vás zve do workspace Acme v Cody SaaS jako Member. Pozvánka platí 10 dní a po přijetí přestane fungovat. Pokud pozvánku nečekáte, ignorujte ji nebo napište správci workspace.“
+
+Co nedělat:
+
+- neposílat v e-mailu seznam členů týmu,
+- neposílat ukázky dokumentů nebo reportů,
+- nepoužívat věčné odkazy,
+- nepovolovat změnu e-mailu během přijetí bez další kontroly,
+- nepřijímat pozvánku, pokud byla role mezitím odebrána zvoucí osobě.
+
+Pozvánka se musí znovu validovat při přijetí. Neplatí logika „byla správná v době vytvoření, tak je správná navždy“. Mezitím mohl zvoucí admin odejít, workspace mohl změnit tarif nebo mohla být role zakázána.
+
+## JK.3 Přijetí pozvánky není jen registrace
+
+Při přijetí pozvánky často vzniká nový uživatel, nová session a nové členství. To jsou tři různé věci. Když je smícháš, vyrobíš chyby typu „uživatel vytvořen, členství ne“, „členství aktivní bez ověřeného e-mailu“ nebo „session existuje, i když pozvánka selhala“.
+
+Bezpečný flow:
+
+1. Uživatel otevře pozvánku.
+2. Server najde hash tokenu a ověří stav pozvánky.
+3. Server zkontroluje expiraci, workspace, roli a stav zvoucí osoby.
+4. Uživatel se přihlásí nebo založí účet se stejným e-mailem.
+5. E-mail pozvánky se spáruje s účtem nebo se vyžádá bezpečné ověření.
+6. Server vytvoří členství ve stavu `active`.
+7. Pozvánka se označí jako přijatá a token se zneplatní.
+8. Vznikne auditní událost.
+
+Důležitý detail: účet a členství nejsou totéž. Jeden člověk může mít účet a nebýt členem žádného workspace. Jeden účet může být členem více workspace. A odebrání z jednoho workspace nesmí smazat celý účet, pokud má člověk jiné legitimní vztahy k produktu.
+
+## JK.4 Změna role potřebuje důvod, ne jen dropdown
+
+Změna role vypadá jako obyčejné UI: vybrat roli, uložit, hotovo. Jenže role často rozhoduje o fakturaci, exportech, integracích, osobních datech a možnosti pozvat další lidi. Proto je změna role bezpečnostní akce.
+
+Minimální pravidla:
+
+- Role může měnit jen oprávněná osoba.
+- Ownera nejde odstranit bez náhradního Ownera.
+- Zvýšení oprávnění vyžaduje viditelný důvod nebo alespoň auditní událost.
+- U citlivých rolí zvaž reautentizaci.
+- Změna role se projeví okamžitě i v aktivních sessions nebo nejpozději podle jasné policy.
+- Uživatel dostane oznámení, pokud se jeho role významně změní.
+
+Příklad auditní události:
+
+```json
+{
+  "event": "workspace.member.role_changed",
+  "workspace_id": "w_123",
+  "actor_id": "u_admin",
+  "target_user_id": "u_member",
+  "old_role": "member",
+  "new_role": "admin",
+  "reason": "sprava_integraci",
+  "created_at": "2026-08-18T11:00:00Z"
+}
+```
+
+Do auditní události nepatří celé uživatelské profily, access tokeny ani payloady z formuláře. Patří tam stabilní identifikátory a význam změny. Audit log má vysvětlit, co se stalo, ne se stát druhou databází osobních údajů.
+
+## JK.5 Odchod člověka musí zavřít i boční dveře
+
+Odebrání člena z workspace není jen smazání řádku v tabulce členů. Člověk mohl mít aktivní session, API klíč, webhook konfiguraci, naplánované exporty, notifikace, uložené filtry, přístup přes support nebo propojený externí nástroj.
+
+Offboarding checklist pro člena:
+
+- ukonči nebo zneplatni aktivní sessions podle rizika,
+- zruš nebo převeď osobní API klíče,
+- zruš dočasný support access,
+- vypni osobní notifikace k workspace,
+- převeď vlastnictví automatizací, reportů nebo integrací,
+- zkontroluj naplánované exporty,
+- ponech auditní stopu podle retenční politiky,
+- uživateli jasně ukaž, že už nemá přístup k danému workspace.
+
+Pozor na vlastnictví objektů. Pokud odebereš uživatele, jeho dokumenty, komentáře nebo automatizace nemusí zmizet. Produkt má rozhodnout, co se stane: převod na workspace, anonymizované zobrazení „bývalý člen“, archivace, nebo explicitní výběr nástupce. Tiché smazání obsahu je oblíbený způsob, jak proměnit pondělí v incident.
+
+## JK.6 Neaktivní členové jsou signál, ne automatický trest
+
+Neaktivní účet nemusí být problém. Může jít o účetního, který stahuje fakturu jednou za měsíc, nebo auditora, který se připojí jednou za kvartál. Ale neaktivní admin s širokými oprávněními je riziko.
+
+Rozumný přístup:
+
+- Sleduj `last_access_at`, ale nepoužívej ho jako jedinou pravdu.
+- Rozlišuj role: neaktivní Viewer má jiné riziko než neaktivní Admin.
+- Posílej správcům pravidelné access review, ne panické e-maily každému uživateli.
+- U citlivých rolí vyžaduj potvrzení po 60 až 90 dnech neaktivity.
+- U externistů a agentur nastav expiraci členství už při pozvání.
+- Nikdy neodebírej přístup potichu, pokud tím můžeš rozbít provoz zákazníka.
+
+Příklad produktu pro malé B2B SaaS: jednou měsíčně zobrazit Ownerovi kartu „Zkontrolujte přístupy“ se seznamem adminů, externích domén, čekajících pozvánek a servisních účtů. Bez gamifikace, bez červených sirén, bez dashboardového adrenalinu. Jen provozní hygiena.
+
+## JK.7 Multi-workspace realita: člověk není jen e-mail
+
+V evropském B2B SaaS často jeden člověk pracuje pro více firem: konzultant, účetní, agentura, integrátor. Pokud identitu vážeš jen na e-mail a role chápeš globálně, zaděláváš si na průšvih.
+
+Správný model:
+
+- Uživatel je globální identita.
+- Workspace membership určuje vztah k jedné organizaci.
+- Role je vlastnost členství, ne celého uživatele.
+- Fakturační kontakty a produktoví členové mohou být různé osoby.
+- Přepínání workspace musí být v UI jasné a bezpečné.
+- Pozvánka musí přesně říkat, ke kterému workspace patří.
+
+Příklad bezpečnostní kontroly: když uživatel otevře `/workspace/acme/documents/123`, server neověřuje jen jeho účet. Ověřuje aktivní členství v `acme`, oprávnění k dokumentu a stav dokumentu. Pokud má stejný e-mail přístup také do `beta`, nesmí se žádný kontext míchat.
+
+## JK.8 Checklist lifecycle členství
+
+- [ ] Členství má stavový model: pozvaný, aktivní, pozastavený, odebraný nebo ekvivalentní jasné stavy.
+- [ ] Pozvánkové tokeny jsou jednorázové, expirované, uložené jako hash a nikdy se nelogují.
+- [ ] Přijetí pozvánky znovu validuje workspace, roli, expiraci a stav zvoucí osoby.
+- [ ] Účet a členství jsou oddělené pojmy; odebrání z workspace nemaže celý účet bez dalšího důvodu.
+- [ ] Změna role má server-side autorizaci, auditní událost a bezpečné pravidlo pro Ownera.
+- [ ] Odebrání člena řeší sessions, API klíče, notifikace, exporty, integrace a vlastnictví objektů.
+- [ ] Neaktivní admini, externisté a agentury se pravidelně revidují.
+- [ ] Multi-workspace přístup používá role na úrovni členství, ne globální role uživatele.
+- [ ] UI jasně ukazuje aktuální workspace, roli a čekající pozvánky.
+- [ ] Testy pokrývají přijetí expirované pozvánky, změnu role, odebrání člena a přístup do cizího workspace.
+
+## Codyho komentář
+
+Můj pohled — Cody: dobrý lifecycle členství je tak trochu personální oddělení v kódu. Není sexy, nedává krásné screenshoty na landing page a nikdo si ho nekoupí jako samostatnou funkci. Ale když funguje, zákazník má pocit, že produkt respektuje realitu firmy. Lidé přicházejí a odcházejí. Přístupy taky musí. Věčná pozvánka není péče o uživatele, je to zapomenutý klíč od sklepa.
+
+## Zdroje k příloze
+
+- European Commission — Principles of personal data processing under the GDPR: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
+- OWASP Cheat Sheet Series — Session Management Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html
+
+## Shrnutí přílohy
+
+Životní cyklus členství je provozní bezpečnostní proces, ne jen seznam uživatelů. Privacy-first SaaS má jasné stavy členství, bezpečné pozvánky, oddělení účtu od workspace, auditovatelné změny rolí, důsledný offboarding a pravidelné review neaktivních nebo externích přístupů. Cílem není administrátorská byrokracie, ale jednoduchá kontrola nad tím, kdo se kdy dostane k jakým datům.
+
+
 ## Pracovní log
+- 2026-08-18: Přidána příloha JK o životním cyklu členství v týmu: stavový model členství, bezpečné pozvánky, přijetí účtu, změny rolí, offboarding, neaktivní účty, multi-workspace přístupy a privacy-first checklist.
+
 - 2026-08-18: Přidána příloha JJ o oprávněních, rolích a týmových přístupech v SaaS: role podle scénářů, deny by default, objektová autorizace, bezpečné pozvánky, zákaz sdílených účtů, support access, access review, testovací scénáře a privacy-first checklist.
 
 - 2026-08-18: Přidána příloha JI o auditních logách v SaaS: oddělení od aplikačních logů, katalog událostí, stabilní identita aktéra, zákaz payloadů a tajemství, zákaznické UI, retence, integrita logu, release testy a privacy-first checklist.
