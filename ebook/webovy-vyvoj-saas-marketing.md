@@ -42384,8 +42384,182 @@ Upload je typická funkce, kterou tým podcení, protože „je to jen input typ
 
 Uploady nejsou technická drobnost, ale řízený datový proces. Bezpečný SaaS povoluje jen potřebné typy souborů, ověřuje je ve více vrstvách, ukládá je pod interním identifikátorem, kontroluje oprávnění při každém přístupu, zpracovává rizikové operace odděleně a automaticky maže data, která už nepotřebuje. Méně věčného skladiště, více klidného spánku.
 
+# Příloha JG: Antivirové skenování, náhledy a zpracování dokumentů bez úniku dat, falešné jistoty a procesoru v plamenech
+
+Uploadová příloha řeší, co do systému vůbec pustit. Tahle příloha řeší, co se s přijatým souborem děje potom. Protože soubor po nahrání obvykle nekončí jako mrtvá cihla v objektovém storage. Aplikace chce udělat náhled PDF, vytáhnout text, spočítat stránky, vytvořit miniaturu obrázku, převést dokument do interního formátu, poslat výsledek do AI asistenta, nebo soubor ukázat dalším lidem v týmu.
+
+Každý z těchto kroků je nový bezpečnostní a privacy problém. Parsery padají. Knihovny mají chyby. Dokumenty obsahují metadata. Office soubory mohou mít makra. PDF může nést aktivní obsah. Obrázek může mít EXIF s polohou. A cloudová služba na „rychlou extrakci textu“ může nenápadně přesunout zákaznická data mimo Evropu, protože vendorův marketingový web měl hezký gradient a žádný člověk se nezeptal: „Kam to vlastně posíláme?“ Klasika. Digitální banánová slupka v enterprise balení.
+
+## JG.1 Stav souboru musí být viditelný
+
+Soubor nemá mít jen stav „nahráno“. To je příliš hrubé. Praktický SaaS potřebuje stavový model, který oddělí fyzické přijetí souboru od jeho bezpečného zpřístupnění.
+
+Minimální stavový model:
+
+| Stav | Význam | Co smí uživatel dělat |
+|---|---|---|
+| `uploaded` | soubor dorazil do karantény | vidí, že upload proběhl |
+| `queued_for_scan` | čeká na bezpečnostní kontrolu | nemůže ho sdílet ani stáhnout |
+| `scan_failed` | sken technicky selhal | vidí opravitelnou chybu, soubor zůstává blokovaný |
+| `rejected_malware` | sken našel hrozbu | vidí obecné odmítnutí, ne detail signatury |
+| `processing` | vytváří se náhled, text nebo metadata | vidí průběh bez odhalování interních detailů |
+| `ready` | soubor prošel kontrolami | smí ho používat podle oprávnění |
+| `quarantined` | podezřelý nebo ručně blokovaný | řeší ho support nebo security role |
+
+Tenhle model pomáhá i produktově. Uživatel chápe, proč soubor není hned dostupný, support má jasnou řeč a vývojář nemusí lovit pravdu v logu pojmenovaném `final_final_upload_worker_2`. Pokud je soubor důležitý pro kritickou zákaznickou cestu, ukaž stav přímo v UI: „Kontrolujeme bezpečnost souboru. Obvykle hotovo do 30 sekund.“
+
+Privacy-first detail: stav uživateli sděl, ale neprozrazuj mu interní názvy skenerů, signatur, cest v souborovém systému nebo pravidel. Chybová zpráva „Soubor teď nejde bezpečně zpracovat, zkuste ho nahrát znovu nebo kontaktujte podporu“ je lepší než „ClamAV Error 2 on /mnt/quarantine/customer_123/tmp“. Druhá varianta je skoro pozvánka na exkurzi.
+
+## JG.2 Skenování není jediné pravidlo pravdy
+
+Antivirový sken je důležitá vrstva, ne kouzelná pečeť bezpečnosti. OWASP doporučuje u uploadů kombinovat allowlist přípon, validaci typu souboru, limity velikosti, změnu názvu, autorizaci, bezpečné úložiště a kontrolu obsahu. Skenování tedy patří do vícevrstvé obrany, ne místo ní.
+
+Praktický pipeline vypadá takhle:
+
+1. Přijmi soubor do karantény mimo veřejný web root.
+2. Ověř velikost, deklarovaný typ, skutečný typ a povolený scénář.
+3. Ulož ho pod interním ID, ne pod názvem od uživatele.
+4. Spusť malware sken.
+5. Pokud typ vyžaduje zpracování, proveď ho v izolovaném workeru.
+6. Vygeneruj bezpečný náhled nebo extrakt.
+7. Zapiš bezpečnostní výsledek bez citlivého obsahu.
+8. Teprve potom změň stav na `ready`.
+
+U malého týmu dává často smysl začít jedním skenerem a jasnou karanténou. Například ClamAV má režim démonu `clamd` a nástroje jako `clamdscan`; jeho dokumentace zároveň připomíná, že databázi signatur je potřeba aktualizovat přes `freshclam`. To není detail. Skenovací služba bez aktualizací je jako hlídač, který se naučil poznat zloděje v roce 2017 a od té doby si dal šlofíka.
+
+Co si pohlídat u skeneru:
+
+- aktualizace signatur běží a mají monitoring,
+- timeouty neblokují celý upload worker,
+- velké soubory mají samostatné limity,
+- výsledek `error` není totéž co `clean`,
+- pozitivní nález nikdy nevede k automatickému zveřejnění souboru,
+- skenovací log neobsahuje celý název, cestu ani obsah souboru, pokud to není nezbytné.
+
+## JG.3 Náhledy a extrakce textu dělej v izolaci
+
+Generování náhledu je zrádné, protože vypadá jako neškodná uživatelská funkce. „Jen uděláme thumbnail.“ Jenže právě parsery obrázků, PDF, archivů a kancelářských dokumentů historicky patří mezi místa, kde se potkává divoký vstup s komplexním kódem. Pokud worker zpracovává cizí soubory se stejnými právy jako hlavní aplikace, máš zbytečně velký výbuchový rádius.
+
+Dobré pravidlo: každý parser považuj za podezřelý spotřebič zapojený do zásuvky. Funguje, dokud nevyhodí pojistky.
+
+Izolovaný processing worker má mít:
+
+- oddělený runtime nebo kontejner,
+- read-only přístup ke vstupnímu souboru,
+- zápis jen do určeného výstupního místa,
+- žádný přístup k produkční databázi, pokud ho nepotřebuje,
+- omezenou síť nebo úplně vypnutý outbound provoz,
+- CPU, paměťové a časové limity,
+- jednoduchý výstupní kontrakt: `preview_id`, `text_extract_id`, `page_count`, `processing_status`.
+
+Pokud dokument převádíš na obrázek, HTML nebo text, výstup znovu validuj. Nestačí říct „vstup byl PDF, výstup bude určitě bezpečný“. Výstup může obsahovat vložené odkazy, aktivní HTML, chybné kódování, obří textové bloky nebo data, která nechceš posílat dál. U textové extrakce si dej limit znaků a jasně rozhodni, jestli extrakt smí být použit pro vyhledávání, AI asistenta nebo jen pro zobrazení uživateli.
+
+## JG.4 Metadata nejsou dekorace
+
+Soubor není jen obsah. Často nese metadata: autor dokumentu, název zařízení, software, čas vytvoření, GPS poloha, název interní složky, komentáře, revize, skryté listy v tabulce nebo text mimo viditelnou stránku. Pro zákazníka to může být citlivější než samotný soubor.
+
+Praktický privacy-first přístup:
+
+- u obrázků při veřejném zobrazení odstraň EXIF, pokud není pro funkci nutný,
+- u PDF a Office dokumentů odděl interní originál od veřejného náhledu,
+- u náhledů nepřenášej původní metadata, pokud k tomu není důvod,
+- u fulltextového indexu ukládej jen text potřebný pro vyhledávání,
+- u AI zpracování neposílej dokument celý, když stačí vybraná stránka nebo uživatelem označený výřez,
+- u exportů jasně řekni, zda obsahují originální soubory, náhledy, extrakty nebo všechno.
+
+Tohle je místo, kde je datová minimalizace z GDPR velmi praktická. Nejde o právnickou frázi do patičky. Jde o otázku: „Potřebujeme tohle metadata pole k funkci, kterou uživatel očekává?“ Pokud ne, pryč s tím. Metadata nejsou suvenýr.
+
+## JG.5 Externí skenovací a OCR služby posuzuj jako subdodavatele
+
+Skenování, OCR a konverze dokumentů svádí k rychlému napojení na externí API. Někdy to dává smysl. Ale z privacy-first pohledu je to zpracování zákaznických dat, ne „technická utilitka“. Pokud službě pošleš fakturu, smlouvu, CV, projektovou dokumentaci nebo screenshot administrace, poslal jsi jí data zákazníka. Hotovo, žádné kouzlo s názvem integrace to nezneviditelní.
+
+Před zapojením externí služby si vyplň mini dotazník:
+
+| Otázka | Dobrá odpověď |
+|---|---|
+| Kde se soubory zpracují? | EU/EHP region nebo jasně zdokumentované transfery |
+| Jak dlouho služba soubor drží? | krátká retence, ideálně volitelná nebo nulová po zpracování |
+| Používá data k tréninku? | ne, smluvně i technicky jasně |
+| Máme DPA? | ano, před produkčním provozem |
+| Lze posílat jen výřez nebo odvozeninu? | ano, ne vždy celý originál |
+| Máme auditní stopu volání? | ano, bez obsahu souboru v logu |
+
+Když odpovědi nejsou jasné, preferuj vlastní evropský processing. Nemusí to být hned perfektní strojovna s orchestrace baletem. I jednoduchý izolovaný worker v EU infrastruktuře je často lepší než posílat všechny dokumenty do černé krabičky jen proto, že měla SDK ve třech jazycích.
+
+## JG.6 Fronta chrání uživatele i infrastrukturu
+
+Zpracování souborů je ideální kandidát na asynchronní frontu. Upload request nemá držet otevřené spojení, zatímco se generuje náhled dvousetstránkového PDF, skenuje archiv a worker přemýšlí o smyslu života. Uživatel má dostat rychlou odpověď: soubor přijat, čeká na kontrolu, stav sledujeme.
+
+Dobrá fronta pro dokumenty řeší:
+
+- prioritu malých běžných souborů proti velkým dávkám,
+- retry jen u technických chyb, ne u souborů odmítnutých pravidlem,
+- deduplikaci stejného souboru podle bezpečného hashe,
+- limit souběžných jobů na tenant,
+- expiraci jobů, které se zasekly,
+- idempotenci, aby opakovaný job nevytvořil deset náhledů a tři různé pravdy.
+
+U velkých zákazníků přidej tenantové limity. Jeden zákazník, který nahraje archiv celého oddělení, nesmí zpomalit náhled faktury všem ostatním. Férovost infrastruktury je také součást produktu. Nikdo ji nechválí na landing page, ale všichni si všimnou, když chybí.
+
+## JG.7 Bezpečné logování výsledků zpracování
+
+U souborů je lákavé logovat hodně: název, MIME typ, cestu, hash, výstup parseru, text chyby, první stránku, počet nalezených entit. Odolej. Log má pomoct provozu, bezpečnosti a supportu, ne vytvořit druhou tajnou knihovnu zákaznických dokumentů.
+
+Loguj raději:
+
+- interní `file_id`, `tenant_id` a `job_id`,
+- stav kroku: `scan_clean`, `scan_error`, `preview_ready`, `processing_timeout`,
+- typ souboru jako kategorie, ne nutně původní název,
+- velikostní kategorii nebo přesnou velikost jen pokud ji potřebuješ,
+- čas trvání a použitý worker,
+- obecný důvod odmítnutí bez citlivých detailů.
+
+Neloggovat defaultně:
+
+- obsah dokumentu,
+- extrahovaný text,
+- celé původní názvy souborů,
+- lokální cesty,
+- signatury, které by pomáhaly útočníkovi ladit payload,
+- osobní údaje nalezené uvnitř dokumentu.
+
+Pro support připrav bezpečný detail: „Soubor nebyl zpracován kvůli překročení limitu velikosti“ nebo „Náhled se nepodařilo vytvořit, originál zůstává uložený a chráněný“. Pokud support potřebuje víc, ať použije časově omezený a auditovaný přístup. Ne screenshot do Slacku. Ano, i když „jen na minutku“. To je přesně ten druh minutky, ze které vzniká incident.
+
+## JG.8 Checklist processing pipeline pro soubory
+
+- Má každý soubor stav od karantény po `ready` a UI ho umí srozumitelně ukázat?
+- Je soubor dostupný ostatním uživatelům až po úspěšném skenu a nutném zpracování?
+- Bere systém `scan_error` jako blokující stav, ne jako tichý průchod?
+- Běží skener s aktualizovanými signaturami a monitoringem?
+- Jsou parsery a preview generátory izolované od hlavní aplikace?
+- Má processing worker omezenou síť, CPU, paměť a čas běhu?
+- Validuje se výstup z konverze stejně pečlivě jako vstup?
+- Odstraňují se metadata z veřejných náhledů, pokud nejsou nutná?
+- Je jasné, které extrakty smí do vyhledávání, AI funkcí a exportů?
+- Jsou externí OCR/skenovací služby vedené jako subdodavatelé s DPA a datovou mapou?
+- Má fronta tenantové limity, retry pravidla a idempotenci?
+- Logy obsahují provozní metadata, ale ne obsah souborů nebo extrahovaný text?
+
+## Codyho komentář
+
+Souborový processing je místo, kde se krásně ukáže rozdíl mezi „máme feature“ a „máme produkt“. Feature umí nahrát PDF. Produkt ví, kdo ho smí vidět, kdy je bezpečné ho otevřít, co se stane při chybě, jak dlouho ho drží, jestli z něj někdo omylem neposlal metadata pryč a jak to celé vysvětlit zákazníkovi bez paniky. Můj Dreamindí verdikt: zpracování dokumentů patří do stejné kategorie jako platby a autentizace. Není sexy, dokud se nerozbije. Pak je sexy úplně všem.
+
+## Zdroje k příloze
+
+- OWASP File Upload Cheat Sheet — doporučení pro validaci, bezpečné ukládání, limity a vícevrstvou obranu uploadů: https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html
+- OWASP Input Validation Cheat Sheet — doporučení analyzovat uploadované soubory na škodlivý obsah: https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html
+- ClamAV dokumentace ke skenování, `clamd`, `clamdscan` a aktualizaci signatur přes `freshclam`: https://docs.clamav.net/manual/Usage/Scanning.html
+- ClamAV dokumentace ke správě signatur a aktualizacím: https://docs.clamav.net/manual/Usage/SignatureManagement.html
+- Evropská komise — principy GDPR pro firmy a organizace, včetně minimalizace dat a bezpečnosti zpracování: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
+
+## Shrnutí přílohy
+
+Bezpečné zpracování souborů nekončí uploadem. Potřebuje karanténu, viditelné stavy, malware sken jako jednu z vrstev, izolované parsery, opatrnou práci s metadaty, obezřetný výběr externích OCR služeb, frontu s limity a logování bez obsahu dokumentů. Privacy-first SaaS se k souborům chová jako k citlivému zákaznickému materiálu, ne jako k anonymnímu blobu, který se dá posílat kamkoli, protože „to jen generuje náhled“.
+
+
 ## Pracovní log
 
+- 2026-08-18: Přidána příloha JG o antivirovém skenování, náhledech a zpracování dokumentů: stavový model, malware sken jako vrstva obrany, izolované parsery, metadata, externí OCR služby, fronty, bezpečné logování a checklist.
 - 2026-08-18: Přidána příloha JF o uploadech, dokumentech a přílohách v SaaS: účel, allowlist typů, bezpečné názvy, oprávnění, izolované zpracování, metadata, retence a checklist.
 - 2026-08-18: Přidána příloha JE o privacy-first vyhledávání v SaaS: katalog indexovaných polí, ochrana dotazů, oprávnění v indexu, bezpečné našeptávače, parametrizace, logování a checklist.
 
