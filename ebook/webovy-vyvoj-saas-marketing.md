@@ -44013,7 +44013,193 @@ Codyho komentář: náhled odkazu je hezký sluha, ale špatný domácí mazlí�
 Odchozí HTTP požadavky jsou bezpečnostní i privacy hranice produktu. SaaS má vědět, které funkce volají ven, kam smějí volat, jaká data nesou a co se ukládá z odpovědi. SSRF obrana stojí na allowlistech, bezpečném HTTP klientu, kontrole DNS a IP rozsahů, síťové izolaci workerů, ochraně cloud metadata služeb a opatrném logování. Cílem není zakázat integrace, ale zabránit tomu, aby se pohodlný webhook tester nebo link preview proměnil v interní tunel.
 
 
+
+# Příloha JQ: Příchozí webhooky bez falešné důvěry, duplicitních faktur a payloadů v logu
+
+Příchozí webhook vypadá jako obyčejný `POST`. Ve skutečnosti je to malá integrační smlouva: cizí systém ti říká „něco se stalo, jednej podle toho“. U plateb, fakturace, CRM, e-mailingu nebo CI/CD to může znamenat změnu stavu objednávky, založení účtu, odeslání notifikace nebo spuštění interního workflow. A přesně proto se k webhookům nechovej jako k formuláři z kontaktní stránky.
+
+GitHub ve své dokumentaci doporučuje ověřovat podpis webhook delivery ještě před zpracováním payloadu, používat tajný token s vysokou entropií, bezpečně ho ukládat a porovnávat podpis konstantním časem, ne obyčejným `==`: https://docs.github.com/en/webhooks/using-webhooks/validating-webhook-deliveries
+
+Stripe u webhooků popisuje ochranu proti replay útokům přes timestamp v hlavičce `Stripe-Signature`; jejich knihovny mají výchozí toleranci 5 minut a dokumentace výslovně varuje, že tolerance `0` recency kontrolu vypíná. Zároveň doporučuje rychle vrátit `2xx` před pomalou business logikou: https://docs.stripe.com/webhooks?lang=node
+
+Privacy-first pointa: webhook endpoint není odpadní trubka pro cizí JSON. Je to vstup do tvého systému. Musí mít jasný účel, ověřený původ, minimální ukládání, idempotentní zpracování a auditní stopu, která pomůže při incidentu, ale neuloží půlku zákaznického života jen proto, že `console.log(req.body)` bylo po ruce. To je přesně ten druh komfortu, který se později tváří jako archeologická expedice v produkčních logách.
+
+## JQ.1 Každý webhook začni integrační kartou
+
+Nejdřív si pro každý příchozí webhook napiš jednoduchou kartu. Ne implementační román, ale provozní dohodu, kterou pochopí vývojář, support i člověk, který za půl roku řeší incident.
+
+Šablona integrační karty:
+
+| Otázka | Příklad odpovědi |
+|---|---|
+| Kdo webhook posílá | Platební brána, účetní systém, Git provider |
+| Jaký je účel | Potvrdit zaplacenou fakturu, synchronizovat stav leadu, spustit build |
+| Jak se ověřuje původ | HMAC podpis, timestamp, veřejný klíč, mTLS nebo kombinace |
+| Jaký event zpracováváme | `invoice.paid`, `subscription.updated`, `push`, `lead.created` |
+| Jaký je idempotency klíč | ID eventu od poskytovatele plus interní typ akce |
+| Co ukládáme | ID eventu, čas, typ, výsledek, odkaz na interní objekt |
+| Co neukládáme | Celý payload, tokeny, hlavičky s tajemstvím, osobní data bez účelu |
+| Kdo je vlastník | Konkrétní tým nebo osoba, ne „backend někdy“ |
+| Jak se testuje | lokální fixture, staging endpoint, retry scénáře, duplicitní delivery |
+
+Tahle karta zabrání tomu, aby se webhooky množily jako houby po dešti bez majitele. Když nevíš, kdo endpoint vlastní a jak poznáš validní požadavek, endpoint zatím nepatří do produkce.
+
+## JQ.2 Podpis ověřuj nad syrovým tělem requestu
+
+Častá chyba: aplikace nejdřív JSON naparsuje, přeuspořádá, normalizuje encoding a teprve potom zkouší ověřit podpis. Jenže podpis bývá počítaný nad původním tělem requestu. Pokud middleware payload změnil, validní podpis může selhat — nebo si tým vytvoří vlastní „opravu“, která bezpečnost rozmělní.
+
+Praktické zásady:
+
+- Ověření podpisu dělej co nejdřív v request pipeline.
+- Použij syrové tělo požadavku přesně tak, jak dorazilo.
+- Vyžaduj aktuální podpisový algoritmus poskytovatele, typicky HMAC-SHA256, pokud ho podporuje.
+- Porovnávej podpis konstantním časem pomocí bezpečné funkce jazyka nebo frameworku.
+- Pokud podpis chybí nebo nesedí, vrať odmítnutí bez zpracování business logiky.
+- Nikdy nepiš tajný webhook secret do repozitáře, testovací fixture ani screenshotu dokumentace.
+
+Pseudotok endpointu:
+
+```text
+1. přijmi request
+2. zkontroluj velikost a metodu
+3. načti raw body
+4. ověř podpis a timestamp
+5. naparsuj JSON
+6. ověř typ eventu a schéma
+7. zapiš idempotency záznam
+8. zařaď práci do fronty
+9. vrať rychlé 2xx
+```
+
+Pořadí je důležité. Parser, databáze a business logika nemají utrácet čas za požadavky, které nejsou prokazatelně od očekávaného odesílatele.
+
+## JQ.3 Replay ochrana není volitelný doplněk
+
+Webhook podpis dokazuje, že payload odpovídá tajemství. Sám o sobě ale nemusí stačit proti situaci, kdy někdo zachytí starý platný požadavek a pošle ho znovu. Proto potřebuješ časové okno a idempotenci.
+
+Minimum pro replay ochranu:
+
+- kontroluj timestamp, pokud ho poskytovatel podepisuje,
+- nastav rozumné toleranční okno podle dokumentace poskytovatele,
+- odmítej požadavky mimo okno,
+- ukládej ID doručeného eventu nebo delivery ID,
+- zpracuj stejný event opakovaně jako bezpečnou no-op operaci,
+- nespoléhej na IP adresu jako jediný důkaz původu.
+
+Příklad: payment provider pošle `invoice.paid`. Endpoint ověří podpis, timestamp a event ID. Pokud event ID už existuje jako zpracované, neodešle druhou fakturu, nevytvoří druhé předplatné a nepošle zákazníkovi druhý vítací e-mail. Jen zapíše bezpečný stav „duplicate delivery ignored“ a vrátí úspěch.
+
+Tohle je rozdíl mezi robustním SaaS a produkčním kabaretem, kde jeden retry vyrobí zákazníkovi dvě licence a účetnímu tik v oku.
+
+## JQ.4 Rychle odpověz, práci dělej asynchronně
+
+Webhook poskytovatelé často retryují, když endpoint neodpoví včas nebo vrátí chybu. GitHub ve svých best practices uvádí, že server má na delivery odpovědět `2xx` do 10 sekund a dlouhou práci předat do fronty: https://docs.github.com/en/webhooks/using-webhooks/best-practices-for-using-webhooks
+
+Prakticky:
+
+- Endpoint má ověřit request, uložit minimální delivery záznam a předat úkol do fronty.
+- Dlouhé operace jako fakturace, synchronizace, e-mailing nebo generování PDF běží mimo HTTP request.
+- Retry logika musí rozlišit „delivery přijata“ a „business akce dokončena“.
+- Fronta má mít dead-letter stav, aby se chyby neztratily v nekonečném retry mlýnku.
+- Admin UI nebo interní panel má ukázat stav zpracování bez nutnosti číst produkční logy.
+
+Dobré stavy zpracování:
+
+| Stav | Význam |
+|---|---|
+| `received` | Request prošel podpisem a byl uložen minimální záznam |
+| `queued` | Práce čeká ve frontě |
+| `processed` | Business akce proběhla úspěšně |
+| `ignored_duplicate` | Event už byl zpracován |
+| `ignored_unknown_type` | Event typ není podporovaný |
+| `failed_retryable` | Dočasná chyba, bude retry |
+| `failed_final` | Chyba vyžaduje ruční zásah nebo změnu konfigurace |
+
+Tím chráníš zákaznickou zkušenost i provoz. Webhook endpoint není místo pro heroický synchronní monolit, který během jednoho requestu zavolá účetnictví, CRM, e-mailing a ještě si uvaří kafe.
+
+## JQ.5 Payload validuj jako externí vstup, ne jako pravdu z nebe
+
+I podepsaný webhook může obsahovat data, která nechceš slepě propsat do systému. Poskytovatel může změnit schéma, může poslat event pro objekt, který neznáš, nebo může jít o validní event pro jiný účet, prostředí či tenant. Podpis říká „přišlo od poskytovatele“. Neříká „všechno uvnitř můžeš bezmyšlenkovitě uložit“.
+
+Kontroly po podpisu:
+
+- Ověř, že event patří ke správnému účtu, aplikaci, organizaci nebo tenantovi.
+- Rozliš testovací a produkční prostředí; nikdy je nemíchej v jednom secretu.
+- Povol jen event typy, které opravdu podporuješ.
+- Validuj schéma a datové typy.
+- Mapuj externí ID na interní objekty přes explicitní vazbu, ne přes volné vyhledávání e-mailu.
+- U update eventů používej allowlist polí, která smějí změnit interní stav.
+- Neprováděj destruktivní akce jen proto, že event obsahuje text `deleted`.
+
+Příklad: CRM webhook pošle změnu leadu. Aplikace nemá podle e-mailu přepsat libovolného zákazníka v databázi. Má najít konkrétní integrační vazbu `external_contact_id -> internal_contact_id`, ověřit tenant a aktualizovat jen pole, která integrace vlastní. E-mail je identifikátor pro člověka, ne magický univerzální klíč do všech tabulek.
+
+## JQ.6 Logování: dost na audit, málo na únik
+
+Při ladění webhooků je lákavé logovat všechno. Celé tělo requestu, všechny hlavičky, chyby parseru, odpovědi interních služeb. Funguje to skvěle — až do chvíle, kdy logy obsahují osobní údaje, tokeny, fakturační údaje nebo neveřejný obsah zákazníků.
+
+Bezpečnější logovací model:
+
+- Loguj delivery ID, provider, event typ, čas přijetí, výsledek a interní korelační ID.
+- Ukládej hash payloadu pro forenzní porovnání místo celého payloadu.
+- Celý payload ukládej jen výjimečně, krátce, šifrovaně a s jasnou retenční dobou.
+- Maskuj podpisové hlavičky, API klíče, authorization hodnoty a cookies.
+- Nedávej payload do error message pro uživatele ani do externího monitoring nástroje bez datové mapy.
+- Retenci delivery logů nastav podle účelu: ladění, účetní audit, bezpečnostní incident.
+
+Privacy-first přístup není „neloguj nic“. To by bylo jen dobrovolné oslepnutí. Privacy-first znamená: loguj to, co pomůže provozu a bezpečnosti, ale neukládej cizí data jako suvenýr.
+
+## JQ.7 Testovací sada pro webhooky
+
+Webhooky se často testují ručně jednou během integrace a pak se na ně zapomene. Jenže selhávají v okrajích: retry, duplicita, starý timestamp, změna podpisového algoritmu, neznámý event, objekt z jiného tenantů, příliš velký payload.
+
+Minimální testy:
+
+- Validní podpis projde a nevalidní podpis skončí bez business akce.
+- Starý timestamp je odmítnut.
+- Stejné event ID zpracované dvakrát nevytvoří duplicitní stav.
+- Nepodporovaný event typ se bezpečně ignoruje a zaloguje.
+- Event pro cizí tenant nezmění žádná data.
+- Testovací secret nefunguje v produkčním endpointu a naopak.
+- Payload nad velikostní limit skončí dřív než parser začne alokovat půl serveru.
+- Chyba ve frontě přejde do retry nebo dead-letter stavu.
+- Logy neobsahují tajemství ani celý citlivý payload.
+
+Pro SaaS s platbami přidej konkrétní scénáře: úspěšná platba, nezaplacená faktura, zrušení předplatného, refund, změna tarifu, opakované doručení a eventy v jiném pořadí. Webhooky totiž nepřichází proto, aby respektovaly tvoji ideální sekvenční představu. Jsou to poslové z internetu. A internet je krásný, ale vychovaný úplně není.
+
+## JQ.8 Checklist příchozích webhooků
+
+- [ ] Každý webhook má integrační kartu s účelem, vlastníkem, ověřením a retenčním pravidlem.
+- [ ] Endpoint přijímá jen očekávanou metodu, content type a rozumnou velikost payloadu.
+- [ ] Podpis se ověřuje nad raw body před parsováním a business logikou.
+- [ ] Porovnání podpisu používá bezpečnou konstantní časovou funkci.
+- [ ] Timestamp nebo jiné recency pravidlo chrání před replay útoky.
+- [ ] Event ID nebo delivery ID zajišťuje idempotentní zpracování.
+- [ ] Test a produkce mají oddělené endpointy nebo aspoň oddělené secrety a konfiguraci.
+- [ ] Payload se validuje podle schématu a event allowlistu.
+- [ ] Externí ID se mapují na interní objekty přes explicitní vazbu v tenant kontextu.
+- [ ] Dlouhá práce běží ve frontě, endpoint rychle vrací odpověď.
+- [ ] Retry a dead-letter stavy jsou viditelné v provozním panelu nebo runbooku.
+- [ ] Logy obsahují delivery metadata, ne tajemství a celé citlivé payloady.
+- [ ] Secret má vlastníka, rotaci a není v repozitáři ani v dokumentačních ukázkách.
+- [ ] Existují testy pro nevalidní podpis, starý timestamp, duplicitu a cizí tenant.
+- [ ] Incidentní postup říká, jak webhook vypnout, otočit secret a znovu přehrát bezpečné eventy.
+
+## Codyho komentář
+
+Webhooky jsou produktová verze důvěřuj, ale ověřuj. Nejlepší endpoint je nudný: rychle zkontroluje podpis, uloží minimum, zařadí práci a odmítne být dramatický. Nudný integrační kód je podceňovaná forma luxusu.
+
+## Zdroje k příloze
+
+- GitHub Docs — Validating webhook deliveries: https://docs.github.com/en/webhooks/using-webhooks/validating-webhook-deliveries
+- GitHub Docs — Best practices for using webhooks: https://docs.github.com/en/webhooks/using-webhooks/best-practices-for-using-webhooks
+- Stripe Documentation — Receive Stripe events in your webhook endpoint: https://docs.stripe.com/webhooks?lang=node
+- OWASP API Security Top 10 2023 — přehled rizik pro API: https://owasp.org/API-Security/editions/2023/en/0x11-t10/
+
+## Shrnutí přílohy
+
+Příchozí webhook je důvěryhodný až po ověření podpisu, recency pravidel, schématu, tenant kontextu a idempotence. Robustní SaaS endpoint rychle přijme validní delivery, předá práci do fronty, bezpečně zvládne duplicity a loguje jen minimum potřebné pro provoz a audit. Privacy-first provoz tím chrání zákaznická data i tým před integračním chaosem, který se jinak tváří jako „jen jeden malý POST endpoint“.
+
 ## Pracovní log
+- 2026-08-18: Přidána příloha JQ o příchozích webhookách: integrační karta, ověřování podpisu nad raw body, replay ochrana, idempotence, rychlé 2xx odpovědi, validace payloadu, bezpečné logování, testovací sada a privacy-first checklist.
 - 2026-08-18: Přidána příloha JP o odchozích HTTP požadavcích a SSRF obraně: inventář externích volání, allowlisty, bezpečný HTTP klient, blokace interních rozsahů a metadata služeb, webhook testery, link preview a privacy-first checklist.
 - 2026-08-18: Přidána příloha JO o tenant izolaci v SaaS: bezpečnostní hranice workspace, BOLA/IDOR rizika, kontrola objektů a polí, admin/support režimy, cross-tenant testovací scénáře a privacy-first checklist.
 - 2026-08-18: Přidána příloha JN o exportu dat, smazání účtu a odchodu zákazníka: oddělení účtu, členství a workspace, použitelný export, stavový model mazání, zálohy, role, offboarding a privacy-first checklist.
