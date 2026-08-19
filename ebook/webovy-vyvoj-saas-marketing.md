@@ -46155,7 +46155,206 @@ Export dat je produktová pojistka důvěry. Firmy se ho bojí, protože si mysl
 
 Export zákaznických dat je důvěryhodná produktová funkce, ne nouzový dump databáze. Rozděl účely exportu, používej manifest a strojově čitelné formáty, chraň stažení stejně přísně jako citlivou administraci a testuj výsledek importem. Privacy-first SaaS se pozná i podle toho, jak férově nechá zákazníka odejít.
 
+# Příloha KD: Import zákaznických dat bez rozbité migrace, duplicit a toxického bordelu z minulého systému
+
+Export je slib, že zákazník není rukojmí. Import je druhá půlka stejné důvěry: zákazník může přijít s daty z minulého systému, aniž by se první týden změnil v archeologický výkop v CSV s kódováním „nějak to otevři, ono to půjde“.
+
+Privacy-first import není jen technická utilita. Je to bezpečnostní, produktový a supportní proces. Vstupní soubor může obsahovat osobní údaje, obchodní tajemství, interní poznámky, historické chyby, duplicitní kontakty i sloupce, které nový produkt vůbec nepotřebuje. Pokud import navrhneš jako „nahrajte cokoliv a my to nějak nacpeme do databáze“, stavíš si vlastní malý datový kompostér. Vonět nebude.
+
+## KD.1 Nejdřív odděl onboardingový, migrační a integrační import
+
+Ne každý import má stejný účel. Když je všechny hodíš do jednoho endpointu, skončíš s formulářem, který umí trochu všechno a bezpečně skoro nic.
+
+Rozliš minimálně tři typy:
+
+| Typ importu | Typický účel | Riziko | Doporučený režim |
+| --- | --- | --- | --- |
+| Onboardingový import | Zákazník si nahraje první kontakty, projekty nebo položky | Špatný formát, duplicitní data, moc sloupců | Asistovaný průvodce s náhledem |
+| Migrační import | Přechod z jiného systému | Velký objem, historické vazby, citlivé poznámky | Testovací běh, mapování, schválení |
+| Integrační import | Pravidelný přísun dat z jiného nástroje | Opakování, idempotence, změny schématu | API/worker s auditovatelným stavem |
+
+Praktický rozdíl: onboardingový import může být ruční CSV s pěti sloupci. Migrační import potřebuje plán, validační report a možnost rollbacku. Integrační import potřebuje idempotenci, monitoring a jasná pravidla, co znamená update, insert a smazání.
+
+Příklad dobré produktové věty:
+
+> „Import kontaktů slouží jen k založení adresáře pro vaši organizaci. Před uložením ukážeme náhled, duplicitní řádky označíme a sloupce, které nevyberete, zahodíme.“
+
+Tohle je lepší než „Nahrajte CSV“. CSV není produktový slib. CSV je jen krabice. Někdy plná věcí, někdy plná pavouků.
+
+## KD.2 Importní manifest říká, co přijímáš a co zahazuješ
+
+Každý import by měl mít malý manifest: popis podporovaných objektů, polí, formátů, limitů a transformačních pravidel. Manifest chrání zákazníka i tým, protože z importu dělá opakovatelný proces místo supportního věštění z Excelu.
+
+Minimální manifest:
+
+- **Objekt:** kontakt, firma, projekt, faktura, událost, dokument.
+- **Povinná pole:** například `email` u kontaktu nebo `name` u projektu.
+- **Volitelná pole:** jen ta, která produkt opravdu používá.
+- **Zakázaná pole:** rodná čísla, hesla, platební karty, interní poznámky bez účelu.
+- **Identifikátor:** podle čeho poznáš stejný objekt při opakovaném importu.
+- **Transformace:** normalizace e-mailu, měny, data, telefonního čísla, stavu.
+- **Retence stagingu:** jak dlouho uchováváš nahraný soubor a validační výstup.
+
+Privacy-first pravidlo: co neumíš smysluplně namapovat, neukládej „pro jistotu“. Pokud zákazník nahraje tabulku kontaktů se sloupcem `Poznámka z obchodního hovoru`, nepředpokládej automaticky, že patří do CRM. Nejdřív se zeptej, k čemu má sloužit. Je velký rozdíl mezi poznámkou „preferuje fakturaci e-mailem“ a poznámkou „majitel firmy se rozvádí, volej mu opatrně“. Druhá věta do importu fakt nechce. Ani s mašličkou.
+
+## KD.3 Staging databáze není odpadkový koš bez pravidel
+
+Bezpečný import má mezikrok. Soubor se nahraje do stagingu, projde validací, zákazník nebo operátor uvidí report a teprve pak se data zapíšou do produkčního modelu. Staging ale nesmí být temné podzemí, kde navždy žijí všechny pokusy o migraci.
+
+Dobrá staging pravidla:
+
+- Ulož původní soubor jen po dobu nutnou pro import a reklamaci výsledku.
+- Citlivá pole maskuj už ve validačním náhledu, pokud nejsou potřebná pro rozhodnutí.
+- Ke každému běhu ulož `import_id`, vlastníka, čas nahrání, zdroj, verzi manifestu a stav.
+- Chyby ukládej jako kódy a bezpečné ukázky, ne jako celé řádky s osobními údaji.
+- Po úspěšném importu smaž původní soubor podle retenčního pravidla.
+
+Praktický stavový model:
+
+| Stav | Co znamená | Co smí uživatel |
+| --- | --- | --- |
+| `uploaded` | Soubor je přijatý, ale nevalidovaný | Zrušit běh |
+| `validated` | Validace doběhla, existuje report | Schválit, opravit mapování, zahodit |
+| `approved` | Import čeká na zápis | Vidět souhrn a vlastníka |
+| `processing` | Worker zapisuje data | Sledovat průběh, neklikat panicky znovu |
+| `completed` | Data jsou zapsaná | Stáhnout report, zkontrolovat vzorek |
+| `failed` | Zápis selhal | Vidět bezpečnou chybu a další krok |
+| `expired` | Staging data byla smazána | Začít nový import |
+
+Tohle zní nudně. Výborně. Importy mají být nudné. Napínavé importy patří do hororu, ne do SaaS.
+
+## KD.4 Validace má být laskavá, ale ne naivní
+
+Uživatel neví, jak přesně vypadá tvůj interní model. Ty zase nevíš, v jakém stavu má data z minulého nástroje. Importní validace proto musí umět najít problém, vysvětlit ho a nabídnout opravu bez toho, aby pustila špatná data dál.
+
+Kontroluj minimálně:
+
+- **Formát:** e-mail, datum, číslo, měna, URL, jazyk, časové pásmo.
+- **Povinná pole:** bez nich objekt nedává smysl.
+- **Duplicity v souboru:** stejný e-mail, stejný externí identifikátor, stejný název projektu.
+- **Duplicity proti existujícím datům:** vložit nový, aktualizovat existující, přeskočit?
+- **Referenční vazby:** kontakt patří do firmy, položka patří k objednávce.
+- **Limity:** velikost souboru, počet řádků, délka textu, podporované typy příloh.
+- **Nebezpečný obsah:** skripty v HTML, vzorce v CSV, podezřelé odkazy, binární překvapení.
+
+Příklad validačního reportu pro zákazníka:
+
+| Řádek | Pole | Problém | Doporučená oprava |
+| --- | --- | --- | --- |
+| 18 | `email` | Chybí e-mail | Doplňte e-mail nebo řádek přeskočte |
+| 42 | `company_id` | Firma neexistuje | Namapujte na existující firmu nebo vytvořte novou |
+| 77 | `note` | Text je příliš dlouhý | Zkraťte poznámku nebo ji importujte jako dokument |
+| 91 | `email` | Kontakt už existuje | Vyberte aktualizaci, přeskočení nebo sloučení |
+
+Nedělej chyby typu „Invalid row“. To je technická verze pokrčení ramen. Lepší je „Řádek 18 nemá e-mail, takže kontakt nepůjde spolehlivě dohledat ani pozvat.“
+
+## KD.5 Mapování polí je produktové rozhodnutí, ne jen drag-and-drop
+
+Importní průvodce má zákazníkovi ukázat, co se stane s daty. Nejen hezkou tabulku. Opravdu ukázat: tento sloupec bude uložen sem, tento se zahodí, tento se použije jen pro deduplikaci, tento vytvoří vazbu.
+
+Dobrý importní průvodce:
+
+1. Rozpozná hlavičky, ale nechá je změnit.
+2. Ukáže náhled několika řádků se zamaskovanými citlivými částmi.
+3. Vysvětlí povinná pole lidským jazykem.
+4. Nabídne bezpečné výchozí hodnoty, ne agresivní automatiku.
+5. U každého nezmapovaného sloupce řekne, že nebude uložen.
+6. Před spuštěním ukáže souhrn: kolik vznikne nových objektů, kolik se aktualizuje, kolik se přeskočí.
+
+Příklad souhrnu před potvrzením:
+
+> „Import vytvoří 214 kontaktů, aktualizuje 36 existujících kontaktů podle e-mailu a přeskočí 12 řádků s chybou. Sloupce `Interní poznámka` a `Zdroj kampaně` nebudou uloženy. Původní soubor smažeme po 7 dnech.“
+
+Tohle je důvěra v praxi. Zákazník ví, co se stane. Support má jasný report. Backend nemusí předstírat, že magicky pochopil tabulku od konkurence.
+
+## KD.6 Idempotence chrání import před dvojitým kliknutím i opakovanou migrací
+
+Import se skoro nikdy nepovede dokonale napoprvé. Někdo opraví mapování, pustí testovací běh, nahraje novou verzi souboru nebo omylem klikne dvakrát. Bez idempotence pak dostaneš duplicitní kontakty, dvakrát založené projekty a zákazníka, který začne věřit v papírový blok víc než v tvůj SaaS.
+
+Použij stabilní identifikátory:
+
+- `external_id` z původního systému, pokud existuje.
+- Kombinaci `source_system + source_object_type + source_object_id` pro migrační importy.
+- Normalizovaný e-mail jen u objektů, kde je e-mail opravdu identita.
+- Hash bezpečně vybraných ne-citlivých polí jen jako pomocný signál, ne jako jedinou pravdu.
+
+U každého řádku rozhodni:
+
+| Situace | Bezpečné chování |
+| --- | --- |
+| Objekt neexistuje | Vytvořit nový záznam |
+| Objekt existuje a data se neliší | Označit jako beze změny |
+| Objekt existuje a data se liší | Aktualizovat podle schválené strategie |
+| Identita je nejasná | Zastavit řádek a chtít rozhodnutí |
+| Dvě řádky tvrdí stejnou identitu | Neimportovat automaticky, nabídnout sloučení |
+
+Technický detail, který stojí za zlatou hvězdičku: výsledkem importu nemá být jen `success`. Ulož počet vytvořených, aktualizovaných, přeskočených a nezměněných řádků. Při opakovaném běhu má být vidět, že systém rozpoznal už zpracovaná data.
+
+## KD.7 Rollback importu navrhni dřív, než ho potřebuješ
+
+Import mění hodně dat najednou. Takže ano, potřebuje rollback plán. Ne „někdo obnoví databázi ze zálohy“. To je kladivo na porcelán. Potřebuješ vědět, co přesně import vytvořil nebo změnil.
+
+Praktické možnosti rollbacku:
+
+- U nových objektů ukládej `created_by_import_id`, aby šly hromadně označit nebo odstranit.
+- U aktualizací ukládej bezpečný diff nebo snapshot předchozí hodnoty jen pro pole, která je nutné vracet.
+- U vazeb ukládej změny samostatně, protože vztahy bolí víc než samotné řádky.
+- U velkých migrací dělej import po dávkách s checkpointy.
+- U zákaznického UI nabídni „zrušit poslední import“ jen tam, kde to umíš udělat bez vedlejších škod.
+
+Rollback má mít časové okno. Například: „Import lze vrátit do 48 hodin, pokud na importovaných datech nevznikly navazující faktury.“ To není slabost. To je poctivá hranice. Nevratné dopady popiš před spuštěním.
+
+## KD.8 Importy testuj na špinavých datech, ne na ukázkovém CSV ze snu
+
+Ukázkový soubor s pěti perfektními řádky projde vždycky. Reálný import přinese prázdné buňky, české znaky, divné oddělovače, datum `1.2.26`, telefon `volejte asistentce`, buňky s odřádkováním, duplicitní hlavičky a poznámky, které by neměly nikdy spatřit světlo produkce.
+
+Testovací sada má obsahovat:
+
+- Soubor s českou diakritikou a různým kódováním.
+- CSV se středníkem, čárkou i tabulátorem.
+- Prázdné řádky, duplicitní řádky a duplicitní hlavičky.
+- Velký soubor blízko limitu.
+- Řádky s nebezpečnými vzorci typu `=HYPERLINK(...)`.
+- Data s časovým pásmem a bez něj.
+- Odkazy na neexistující vazby.
+- Soubor s poli, která produkt nesmí ukládat.
+
+U každého testu ověř nejen výsledek v databázi, ale i report pro uživatele. Import, který technicky správně selže, ale zákazník neví proč, je jen chyba s lepším PR.
+
+## KD.9 Checklist bezpečného importu dat
+
+Před prvním zákaznickým importem:
+
+- [ ] Víš, jestli jde o onboardingový, migrační nebo integrační import.
+- [ ] Máš manifest podporovaných objektů, polí, limitů a zakázaných dat.
+- [ ] Nezmapované sloupce se neukládají automaticky.
+- [ ] Uživatel vidí náhled, souhrn dopadu a retenční pravidlo pro původní soubor.
+- [ ] Staging data mají vlastní stav, vlastníka, retenci a auditní záznam.
+- [ ] Validační report je srozumitelný a neobsahuje celé citlivé řádky.
+- [ ] Import je idempotentní pro opakovaný běh stejného zdroje.
+- [ ] Existuje plán rollbacku nebo jasně popsané nevratné dopady.
+- [ ] Testovací sada obsahuje špinavá data, duplicity, chybné vazby a nebezpečný obsah.
+- [ ] Support ví, kde najde importní report a co může bezpečně poslat zákazníkovi.
+
+## Codyho komentář
+
+Import dat je jeden z nejlepších momentů, kdy může SaaS ukázat charakter. Buď zákazníkovi řekneš „pošli nám dump, nějak to pořešíme“, nebo mu dáš klidný proces: co přijímáme, co odmítáme, co smažeme, co půjde vrátit a co se přesně stane po kliknutí. Druhá varianta je méně heroická, ale víc evropská. A taky méně pravděpodobně skončí v pátečním callu s názvem „urgentní migrace — proč máme 18 000 duplicit“.
+
+## Zdroje k příloze
+
+- Evropská komise: principy GDPR včetně minimalizace dat, omezení účelu a omezení uložení: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en
+- Evropská komise: informace, které má správce poskytnout lidem při sběru osobních údajů: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/what-information-must-be-given-individuals-whose-data-collected_en
+- EUR-Lex: nařízení Evropského parlamentu a Rady (EU) 2023/2854, Data Act, kontext přístupu k datům a přenositelnosti mezi službami: https://eur-lex.europa.eu/eli/reg/2023/2854/oj
+
+## Shrnutí přílohy
+
+Bezpečný import dat potřebuje jasný účel, manifest, staging, validaci, náhled dopadu, idempotenci a plán návratu. Privacy-first SaaS neimportuje všechno, co zákazník omylem nahraje. Importuje jen data, která mají v produktu smysl, a zbytek férově zahodí nebo nechá zákazníka vědomě rozhodnout.
+
+---
+
 ## Pracovní log
+
+- 2026-08-19: Přidána příloha KD o bezpečném importu zákaznických dat: typy importů, manifest, staging, validace, mapování polí, idempotence, rollback, testy na špinavých datech a privacy-first checklist.
 - 2026-08-19: Přidána příloha KC o bezpečném exportu zákaznických dat: účely exportu, manifest, formáty CSV/JSON/JSONL, oprávnění, bezpečné ZIP balíčky, test importem, verzované exportní API a checklist.
 - 2026-08-19: Přidána příloha KB o support access a administrátorských zásazích: metadata-first diagnostika, delegovaný přístup, break-glass, impersonace, bezpečné supportní poznámky, pravidelné access review a privacy-first checklist.
 - 2026-08-19: Přidána příloha KA o bezpečnostním audit logu pro SaaS: účel logování, stabilní event model, zákaz citlivých dat, zákaznické UI, integrita, retence, přístupy a checklist.
