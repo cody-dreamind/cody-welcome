@@ -46352,8 +46352,163 @@ Bezpečný import dat potřebuje jasný účel, manifest, staging, validaci, ná
 
 ---
 
+# Příloha KE: Slučování duplicitních záznamů bez ztráty historie, překvapení v oprávněních a datového guláše
+
+Import dat je jen první půlka migrace. Druhá půlka je méně fotogenická, ale často důležitější: co uděláš s duplicitami? Dva kontakty se stejným e-mailem, tři firmy s drobnou odchylkou v názvu, uživatel pozvaný jednou přes pracovní adresu a podruhé přes alias, projekt založený ručně i importem. Když to necháš být, produkt začne působit jako účetnictví po firemním večírku. Když to sloučíš automaticky moc agresivně, můžeš spojit data lidí nebo týmů, kteří spolu nemají nic společného.
+
+Privacy-first pravidlo je jednoduché: deduplikace nemá být výmluva pro další sběr identifikátorů. Nejdřív použij data, která už oprávněně máš, a každé automatické sloučení omez na případy s vysokou jistotou. GDPR mimo jiné staví na přesnosti, minimalizaci údajů a omezení uložení; tyhle principy se u duplicit potkávají velmi prakticky: neponechávej nepořádek jen proto, že mazání je nepohodlné, ale neopravuj ho způsobem, který vytvoří větší riziko než původní duplicita.
+
+## KE.1 Nejdřív pojmenuj, co je vlastně duplicita
+
+Duplicita není univerzální slovo. V každém objektu znamená něco jiného. Kontakt se stejným e-mailem může být jasná duplicita. Firma se stejným názvem nemusí být duplicita vůbec. „Jan Novák“ je statistický folklór, ne identita.
+
+Rozděl záznamy podle rizika:
+
+| Objekt | Silný signál duplicity | Slabý signál duplicity | Riziko špatného sloučení |
+| --- | --- | --- | --- |
+| Uživatel | Ověřený e-mail ve stejném tenantovi | Stejné jméno | Velmi vysoké |
+| Kontakt v CRM | E-mail + firma | Telefon bez země | Střední až vysoké |
+| Firma | IČO, DIČ, doména potvrzená zákazníkem | Podobný název | Střední |
+| Fakturační profil | Daňové identifikátory + adresa | Název firmy | Vysoké |
+| Projekt | Externí ID ze zdrojového systému | Podobný název | Střední |
+
+U každého typu si napiš pravidlo: kdy se sloučí automaticky, kdy jen nabídne návrh a kdy se nesmí sloučit nikdy bez ručního potvrzení. Nejhorší politika je „nějak to fuzzy matchneme“. Fuzzy matching je skvělý sluha pro návrhy, ale mizerný soudce pro nevratné změny.
+
+## KE.2 Zaveď rozhodovací stupně místo jednoho magického tlačítka
+
+Bezpečný deduplikační proces má stupně jistoty. Produkt pak nemusí předstírat, že ví všechno.
+
+Praktický model:
+
+1. **Přesná shoda**: stejné stabilní `external_id`, stejné ověřené ID nebo stejný technický klíč v jednom tenantovi. Lze sloučit automaticky, pokud nehrozí konflikt oprávnění.
+2. **Silná shoda**: stejný e-mail a stejná firma, stejné IČO, stejná doména potvrzená administrátorem. Nabídni sloučení s náhledem rozdílů.
+3. **Podezření na duplicitu**: podobné jméno, překlep v doméně, podobný telefon, chybějící diakritika. Zobraz jako doporučení, nic neměň automaticky.
+4. **Zakázané sloučení**: různí tenantové, rozdílné právní subjekty, konfliktní role, rozdílné vlastnictví dat, aktivní bezpečnostní incident.
+
+Tlačítko „Sloučit vše“ zní lákavě, protože ušetří pár kliknutí. Ve skutečnosti často jen přesune práci do supportu. Lepší je dávkové potvrzení pouze pro bezpečné případy a samostatná fronta pro konflikty.
+
+## KE.3 Master záznam vybírej podle kvality, ne podle stáří
+
+Při slučování musíš rozhodnout, který záznam přežije jako hlavní. Nejjednodušší je vzít nejstarší nebo nejnovější. Nejlepší je vybrat nejdůvěryhodnější.
+
+Kvalitu záznamu urči podle zdroje a ověření:
+
+- Data ručně potvrzená vlastníkem účtu mají vyšší váhu než importovaný sloupec z CSV.
+- Fakturační údaje z platebního nebo účetního procesu mají vyšší váhu než poznámka obchodníka.
+- Ověřený e-mail má vyšší váhu než e-mail z historického exportu.
+- Hodnoty, které už zákazník upravil v produktu, nepřepisuj importem bez výslovného potvrzení.
+- Prázdná hodnota nemá přepsat neprázdnou jen proto, že pochází z novějšího souboru.
+
+Příklad pravidla pro kontakt:
+
+| Pole | Strategie při sloučení |
+| --- | --- |
+| Jméno | Vybrat nejnověji ručně upravenou hodnotu |
+| E-mail | Ponechat ověřený primární e-mail, další uložit jako alias jen pokud je podporovaný |
+| Telefon | Nepřepisovat automaticky, pokud jsou obě hodnoty neprázdné |
+| Firma | Sloučit jen při jasné vazbě ve stejném tenantovi |
+| Poznámky | Převést do historie s autorem, časem a zdrojem |
+| Tagy | Sjednotit množinu, ale zachovat původ tagu |
+
+Důležité: pravidla ukaž v UI nebo v importním reportu. Zákazník nemusí vidět interní algoritmus, ale má vědět, proč produkt zvolil jednu hodnotu a druhou přesunul do historie.
+
+## KE.4 Historii nezahazuj, ale nedělej z ní skládku
+
+Sloučení není mazání s lepším názvem. Potřebuješ zachovat auditní stopu: co bylo sloučeno, kdo to potvrdil, kdy, podle jakých pravidel a co se stalo s konfliktními hodnotami. Zároveň nechceš vytvořit věčný archiv všech starých osobních údajů.
+
+Dobrá merge historie obsahuje:
+
+- ID sloučených záznamů.
+- Aktéra: uživatel, automatický import, support režim.
+- Čas sloučení a zdroj rozhodnutí.
+- Souhrn změn bez citlivých payloadů.
+- Odkaz na importní běh nebo deduplikační dávku.
+- Retenční pravidlo pro staré hodnoty a konfliktní snapshoty.
+
+Špatná merge historie obsahuje celé JSON objekty se všemi poli, protože „se to může hodit“. Ano, může. Taky se může hodit helma v kanceláři, ale nenosíme ji kvůli tomu celý den. Ukládej jen tolik, kolik potřebuješ pro audit, podporu a případný rollback.
+
+## KE.5 Oprávnění a vazby jsou větší problém než textová pole
+
+Nejnebezpečnější část slučování nejsou jména a telefony. Jsou to vazby: členství v týmu, role, vlastnictví projektů, faktury, API klíče, sdílené odkazy, audit logy a integrace. Jedno špatné sloučení může někomu ukázat data, která vidět neměl.
+
+Před sloučením zkontroluj:
+
+- Jsou oba záznamy ve stejném tenantovi nebo workspace?
+- Mají kompatibilní role a oprávnění?
+- Nevznikne sloučením širší přístup, než měl kterýkoliv původní záznam?
+- Nepřenese se aktivní session, API token nebo pozvánka na nesprávnou identitu?
+- Nejsou ke záznamům navázané faktury, smlouvy nebo právní dokumenty?
+- Neprobíhá právní retence, bezpečnostní incident nebo žádost subjektu údajů?
+
+Bezpečné pravidlo: slučování identit a členství dělej přísněji než slučování obyčejných obchodních kontaktů. Pokud existuje pochybnost, vytvoř návrh pro administrátora, ne automatickou změnu.
+
+## KE.6 Zákaznické UI má ukázat rozdíly před kliknutím
+
+Deduplikace je důvěrová operace. Uživatel musí vidět, co se stane. Ne jen „našli jsme 14 duplicit“. To je teaser, ne návrh změny.
+
+Náhled sloučení by měl ukázat:
+
+- hlavní záznam, který zůstane,
+- záznamy, které budou označené jako sloučené,
+- pole s konfliktem a navrženou vítěznou hodnotu,
+- vazby, které se přesunou,
+- položky, které se nesmí sloučit automaticky,
+- možnost stáhnout nebo otevřít report po dokončení.
+
+Příklad mikrotextu:
+
+> „Sloučení ponechá kontakt `Jana Nováková` jako hlavní záznam. Přesune 3 poznámky, 2 úkoly a 1 otevřenou poptávku. Telefon z importu nepřepíše existující ručně upravený telefon. Původní záznam bude 30 dní dostupný v historii sloučení.“
+
+Tohle není zbytečná opatrnost. Je to produktová brzda tam, kde může jeden klik změnit význam dat.
+
+## KE.7 Rollback má být součást návrhu, ne supportní kouzlo
+
+Stejně jako u importu potřebuješ plán návratu. Jenže rollback sloučení je těžší, protože po sloučení se na hlavním záznamu může dál pracovat. Někdo přidá poznámku, vytvoří fakturu nebo změní oprávnění. Vrátit všechno do původního stavu pak nemusí být bezpečné.
+
+Praktický přístup:
+
+- Malé sloučení bez navazujících změn umožni vrátit do krátkého okna, třeba 24 až 72 hodin.
+- U větších dávek vytvoř report a vyžaduj potvrzení před spuštěním.
+- Pokud rollback není možný, nabídni ruční rozdělení vybraných vazeb.
+- Nevratné dopady napiš před kliknutím, ne až do dokumentace.
+- V audit logu označ, které záznamy vznikly rozdělením po chybném merge.
+
+Support nemá lovit staré hodnoty v databázové záloze. Má mít produktový nástroj, který ukáže poslední slučovací operace, stav rollbacku a bezpečné další kroky.
+
+## KE.8 Checklist bezpečného slučování duplicit
+
+Před zapnutím deduplikace v SaaS:
+
+- [ ] Máš definici duplicity zvlášť pro uživatele, kontakty, firmy, fakturační profily a projekty.
+- [ ] Automatické sloučení používáš jen pro přesné shody s nízkým rizikem.
+- [ ] Fuzzy matching slouží jako návrh, ne jako automatický rozsudek.
+- [ ] Master záznam vybíráš podle důvěryhodnosti zdroje a ověření polí.
+- [ ] Konfliktní hodnoty se neztrácí potichu a mají jasnou retenční politiku.
+- [ ] Vazby, role, session, tokeny a fakturační data mají samostatné bezpečnostní kontroly.
+- [ ] Uživatel vidí náhled dopadu před potvrzením.
+- [ ] Sloučení vytváří auditní stopu bez ukládání celých citlivých payloadů.
+- [ ] Existuje krátké rollback okno nebo jasně popsané nevratné dopady.
+- [ ] Support má report, který může bezpečně použít při vysvětlování změn zákazníkovi.
+
+## Codyho komentář
+
+Deduplikace je jako úklid skladu: zvenku to vypadá nudně, ale uvnitř rozhoduješ, co je stejné, co je podobné a co je cizí věc nalepená na špatné krabici. Privacy-first přístup tady není „brzda automatizace“. Je to pojistka, že produkt raději požádá o potvrzení, než aby sebevědomě spojil dva světy, které spolu jen sdílely podobný název.
+
+## Zdroje k příloze
+
+- EUR-Lex: článek 5 GDPR, principy zpracování osobních údajů včetně přesnosti, minimalizace údajů a omezení uložení: https://eur-lex.europa.eu/eli/reg/2016/679/oj#d1e1804-1-1
+- Evropská komise: základní principy GDPR pro firmy a organizace: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en
+- Evropská komise: informace, které mají lidé dostat při sběru osobních údajů: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/what-information-must-be-given-individuals-whose-data-collected_en
+
+## Shrnutí přílohy
+
+Bezpečné slučování duplicit začíná definicí identity, pokračuje stupni jistoty a končí auditovatelnou změnou, kterou zákazník chápe. Automatizuj jen přesné a nízkorizikové případy. U podobností nabídni návrh, ukaž dopad a chraň oprávnění, vazby i historii. Dobrý merge systém neříká „věř mi“. Říká „tady je důvod, tady je dopad a tady je cesta zpět, pokud to jde“.
+
+---
+
 ## Pracovní log
 
+- 2026-08-19: Přidána příloha KE o slučování duplicitních záznamů: definice duplicity, stupně jistoty, výběr master záznamu, merge historie, oprávnění a vazby, náhled dopadu, rollback a privacy-first checklist.
 - 2026-08-19: Přidána příloha KD o bezpečném importu zákaznických dat: typy importů, manifest, staging, validace, mapování polí, idempotence, rollback, testy na špinavých datech a privacy-first checklist.
 - 2026-08-19: Přidána příloha KC o bezpečném exportu zákaznických dat: účely exportu, manifest, formáty CSV/JSON/JSONL, oprávnění, bezpečné ZIP balíčky, test importem, verzované exportní API a checklist.
 - 2026-08-19: Přidána příloha KB o support access a administrátorských zásazích: metadata-first diagnostika, delegovaný přístup, break-glass, impersonace, bezpečné supportní poznámky, pravidelné access review a privacy-first checklist.
