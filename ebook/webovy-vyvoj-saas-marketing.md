@@ -47661,7 +47661,169 @@ MCP konektory a AI integrace jsou samostatná bezpečnostní hranice. Privacy-fi
 
 ---
 
+# Příloha KM: Human-in-the-loop pro AI bez alibistického tlačítka, schvalovací šikany a rozmazané odpovědnosti
+
+„Člověk ve smyčce“ zní bezpečně. Jenže v praxi často znamená jen to, že aplikace přidá potvrzovací modal a právní oddělení si odškrtne kolonku. To nestačí. Pokud člověk nemá kontext, čas, pravomoc a jasnou odpovědnost, není to dohled. Je to dekorace na průšvihu.
+
+U AI funkcí v SaaS je human-in-the-loop produktový návrh, ne právní zaklínadlo. Cílem není brzdit každou akci, ale určit, kde má automatizace běžet sama, kde má člověk schválit návrh a kde má člověk zůstat hlavním rozhodovatelem. Privacy-first přístup k tomu přidává ještě jednu otázku: kolik zákaznických dat musí člověk i model vidět, aby rozhodnutí bylo dobré a přiměřené?
+
+## KM.1 Nejdřív rozděl rozhodnutí podle dopadu
+
+Začni katalogem rozhodnutí, ne katalogem modelů. Stejný model může jednou generovat neškodný popis tlačítka a podruhé navrhovat změnu cenového tarifu zákazníka. Riziko není v názvu modelu, ale v dopadu akce.
+
+Praktická stupnice:
+
+| Úroveň | Příklad | Výchozí režim |
+| --- | --- | --- |
+| Nízký dopad | Návrh interního shrnutí meetingu | Automaticky vytvořit návrh, člověk může upravit |
+| Střední dopad | Návrh odpovědi zákazníkovi | Člověk schvaluje před odesláním |
+| Vysoký dopad | Změna tarifu, práv, fakturace nebo veřejného obsahu | Člověk rozhoduje, AI jen připraví podklady |
+| Kritický dopad | Mazání dat, bezpečnostní zásah, hromadná komunikace | Dvoustupňové schválení nebo zákaz automatizace |
+
+Tohle rozdělení musí být vidět v produktu i v backendu. Nestačí, že si tým v hlavě řekne „tohle je asi citlivé“. Hlava je špatná databáze. Má výpadky, žádné zálohy a občas běží na kávě místo indexů.
+
+## KM.2 Schválení musí ukázat dopad, ne jen výsledek
+
+Špatný schvalovací dialog říká:
+
+> „AI chce provést akci. Pokračovat?“
+
+Použitelný dialog říká:
+
+> „AI připravila odpověď zákazníkovi Novák s.r.o. Odpověď odejde na `jana@example.cz`, bude viditelná v ticketu `SUP-1842` a změní stav ticketu na `Čeká na zákazníka`. Přílohy se neposílají.“
+
+Člověk má před schválením vidět minimálně:
+
+- kdo akci spouští,
+- koho nebo čeho se akce týká,
+- jaká data AI použila,
+- co se přesně změní,
+- jestli je akce vratná,
+- komu bude výsledek viditelný,
+- jaké budou navazující automatizace.
+
+Privacy-first detail: neukazuj schvalovateli víc dat, než potřebuje. Když schvaluje odeslání připravené odpovědi, většinou nepotřebuje vidět celé CRM, fakturační historii a posledních dvacet příloh. Potřebuje relevantní kontext a jasný dopad.
+
+## KM.3 Lidský dohled bez pravomoci je divadlo
+
+Pokud člověk může jen kliknout „ano/ne“, ale nemůže návrh upravit, vyžádat si další kontext nebo eskalovat problém, není to dohled. Je to turniket.
+
+Dobrý human-in-the-loop tok má tyto akce:
+
+- **Schválit** — návrh je v pořádku a může pokračovat.
+- **Upravit a schválit** — člověk zachová rychlost AI, ale opraví tón, fakta nebo rozsah dat.
+- **Vrátit AI k přepracování** — s konkrétním důvodem, ne jen „nelíbí se mi to“.
+- **Eskalovat** — pro právní, bezpečnostní, finanční nebo zákaznický dopad.
+- **Zablokovat podobný návrh** — pokud se objevuje opakovaně špatný vzor.
+
+Příklad u supportu:
+
+> AI navrhne odpověď, že zákazník má smazat a znovu nahrát soubor. Supportér vidí, že soubor obsahuje mzdová data, a místo toho zvolí bezpečný postup přes dočasný support access. Klikne „upravit a schválit“ a současně označí návrh jako nevhodný pro typ incidentu `sensitive_file_processing`.
+
+To je dohled, který zlepšuje systém. Ne jen lidská brzda v UI.
+
+## KM.4 Kdo schválil, musí být dohledatelné bez ukládání tajemství
+
+Auditní stopa má odpovědět na otázku, co se stalo a proč, ale nesmí se stát druhou databází citlivého obsahu. U AI schvalování loguj metadata:
+
+| Pole | Co uložit | Co neukládat |
+| --- | --- | --- |
+| Akce | `support_reply_send` | Celý text dlouhého zákaznického ticketu |
+| Aktér | ID uživatele a role | Soukromé poznámky mimo systém |
+| Objekt | ID ticketu nebo faktury | Celý obsah příloh |
+| AI verze | ID prompt šablony, model, verze nástroje | Surový prompt s tajemstvími |
+| Rozhodnutí | Schváleno, upraveno, zamítnuto | Kompletní interní debata |
+| Důvod | Krátký kód nebo volitelná poznámka | Zbytečné osobní údaje |
+
+U regulovaných nebo citlivých funkcí přidej vazbu na risk kartu funkce: kdo je vlastník, jaká je retenční doba logu, jak se řeší incident a jak se zákazník dozví, že AI byla součást procesu.
+
+## KM.5 AI výstup označuj tam, kde to uživateli pomáhá rozhodnout
+
+Evropský AI Act vstoupil v platnost 1. srpna 2024 a jeho pravidla se uplatňují postupně. Evropská komise uvádí, že povinnosti transparentnosti podle článku 50 jsou vymahatelné od 2. srpna 2026, s dílčími přechodnými výjimkami pro některé systémy už uvedené na trh. Pro SaaS tým to prakticky znamená: inventarizuj zákaznicky viditelné AI výstupy a rozhodni, kde musí být jasné, že uživatel komunikuje se systémem AI nebo vidí AI generovaný či upravený obsah.
+
+Produktové pravidlo:
+
+- Pokud AI odpovídá jako chatbot, uživatel to má vědět před tím, než jí svěří data.
+- Pokud AI připraví text, který člověk pošle vlastním jménem, interní tým má vidět původ návrhu.
+- Pokud AI vytvoří veřejný marketingový obrázek, video nebo syntetický hlas, řeš označení před publikací.
+- Pokud AI jen interně třídí feedback do kategorií bez přímého dopadu na uživatele, označení může být v interní dokumentaci a nastavení funkce.
+
+Nejde jen o compliance. Je to UX důvěry. Když uživatel zjistí až dodatečně, že mluvil se strojem, není problém jen právní. Je to i trapné. A trapnost škáluje překvapivě dobře.
+
+## KM.6 Schvalovací fronta nesmí být skládka nerozhodnosti
+
+Human-in-the-loop často selže provozně: všechno čeká na člověka, nikdo neví proč, zákazník čeká a tým pak kontrolu obejde. Proto schvalovací frontu navrhni jako produktovou funkci.
+
+Každá položka ve frontě má mít:
+
+- typ akce,
+- prioritu,
+- vlastníka,
+- deadline,
+- důvod, proč vyžaduje člověka,
+- možnost dávkového zpracování jen pro nízkorizikové položky,
+- jasný stav: čeká, přepracovat, eskalováno, schváleno, zamítnuto, expirováno.
+
+Příklad SLA:
+
+| Typ položky | Deadline | Co když vyprší |
+| --- | --- | --- |
+| Návrh odpovědi v běžném supportu | 4 pracovní hodiny | Vrátí se do běžné fronty supportu bez AI akce |
+| Změna veřejné dokumentace | 2 pracovní dny | Eskalace na vlastníka docs |
+| Hromadný e-mail zákazníkům | Ruční termín kampaně | Bez schválení se neodešle |
+| Bezpečnostní zásah | 30 minut | Eskalace podle incidentového playbooku |
+
+Fronta bez expirace je jen pomalý hřbitov rozhodnutí. Fronta s expirací chrání produkt před tím, aby automatizace čekala věčně a pak někoho překvapila v nejhorší možný okamžik.
+
+## KM.7 Měř kvalitu dohledu, ne jen počet kliknutí
+
+Metrika „kolik návrhů lidé schválili“ je slabá. Může znamenat, že AI funguje dobře. Nebo že lidé klikají jako unavení holubi na tlačítko s drobky.
+
+Lepší metriky:
+
+- podíl návrhů schválených bez úprav,
+- podíl návrhů upravených před schválením,
+- nejčastější důvody zamítnutí,
+- čas do rozhodnutí podle rizikovosti,
+- počet eskalací podle typu akce,
+- incidenty nebo reklamace navázané na AI výstup,
+- objem citlivých dat zobrazených ve schvalovacím toku.
+
+Privacy-first reporting dělej agregovaně. Nepotřebuješ dashboard se všemi původními prompty a odpověďmi, aby ses rozhodl, že prompt šablona pro refundy je moc optimistická. Stačí vzorek schválený pro revizi, anonymizované příklady a kvalitní důvodové kódy.
+
+## KM.8 Checklist human-in-the-loop pro AI
+
+- Máš katalog AI rozhodnutí podle dopadu, ne jen seznam modelů.
+- Každá citlivá akce ukazuje před schválením konkrétní dopad.
+- Schvalovatel může návrh upravit, vrátit, eskalovat nebo zablokovat opakovaný špatný vzor.
+- Backend vynucuje, které akce vyžadují člověka; prompt to jen vysvětluje.
+- Audit log ukládá metadata rozhodnutí, ne surová zákaznická tajemství.
+- Zákaznicky viditelné AI interakce a syntetický obsah mají transparentní označení tam, kde je potřeba.
+- Schvalovací fronta má vlastníka, deadline, stavy a expiraci.
+- Měříš kvalitu dohledu pomocí úprav, zamítnutí, eskalací a incidentů, ne jen počtem kliknutí.
+- Retence promptů, návrhů a schvalovacích logů je popsaná a omezená.
+- U vysokého dopadu existuje kill switch nebo fallback na ruční proces.
+
+## Codyho komentář
+
+Human-in-the-loop je skvělý princip, pokud člověk opravdu vidí, co schvaluje. Pokud jen potvrzuje neprůhledný výstup modelu, přidali jsme do systému drahou lidskou CAPTCHA. Můj pohled: nejlepší AI produkty neříkají „věř mi“, ale „tady je návrh, tady jsou data, tady je dopad a tady je brzda“. To je méně kouzelné na demu, ale mnohem lepší v pondělí ráno, když se něco pokazí.
+
+## Zdroje k příloze
+
+- Evropská komise: AI Act, přehled právního rámce a harmonogramu uplatňování; uvádí vstup v platnost 1. srpna 2024 a postupnou použitelnost pravidel: https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai
+- AI Act Service Desk Evropské komise: „When does enforcement start?“, včetně informace, že transparentnostní povinnosti jsou vymahatelné od 2. srpna 2026 s uvedenou přechodnou výjimkou pro čl. 50(2): https://ai-act-service-desk.ec.europa.eu/en/ai-act/faq/when-does-enforcement-start
+- OWASP Top 10 for LLM Applications 2025: LLM06 Excessive Agency, doporučení omezovat autonomii, funkcionalitu, oprávnění a dopad nástrojů napojených na LLM: https://owasp.org/www-project-top-10-for-large-language-model-applications/2_0_vulns/LLM06_ExcessiveAgency.html
+- NIST: Artificial Intelligence Risk Management Framework: Generative Artificial Intelligence Profile, NIST AI 600-1, publikováno 26. července 2024; řeší mimo jiné řízení rizik, validaci, monitoring a roli lidského dohledu u generativní AI: https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence
+
+## Shrnutí přílohy
+
+Human-in-the-loop u AI není jedno potvrzovací tlačítko, ale návrh odpovědnosti. Privacy-first SaaS musí rozdělit AI rozhodnutí podle dopadu, ukazovat schvalovateli konkrétní změnu a použitá data, umožnit úpravu i eskalaci, auditovat metadata bez ukládání tajemství, transparentně označovat relevantní AI výstupy a hlídat kvalitu dohledu. Člověk má být smysluplná brzda a korektor, ne alibi přilepené na automatizaci.
+
+---
+
 ## Pracovní log
+
+- 2026-08-19: Přidána příloha KM o human-in-the-loop pro AI v privacy-first SaaS: rozdělení rozhodnutí podle dopadu, smysluplné schvalování, pravomoci schvalovatele, audit bez tajemství, transparentnost AI výstupů, schvalovací fronty, metriky kvality dohledu a checklist.
 
 - 2026-08-19: Přidána příloha KL o MCP konektorech a AI integracích v privacy-first SaaS: produktové karty konektorů, backendový tool registry, bezpečná správa tokenů, consent obrazovky, lokální konektory, SSRF ochrana, zákaznický inventář integrací a checklist.
 
