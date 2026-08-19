@@ -45998,7 +45998,165 @@ Support access je test dospělosti SaaS produktu. Začátečnický systém řík
 Supportní přístup má pomáhat zákazníkům, ne otevírat tichou servisní chodbu do jejich dat. Privacy-first SaaS rozlišuje metadata, read-only diagnostiku, delegovaný přístup a break-glass režim. Každý zásah má účel, rozsah, expiraci a auditní stopu. Supportní poznámky, screenshoty a AI shrnutí se řídí stejným datovým minimem jako produkt samotný.
 
 
+
+# Příloha KC: Export zákaznických dat bez zipové skládky, rozbitého CSV a bezpečnostního bolehlavu
+
+Export dat zní jako nudná administrativní funkce. Ve skutečnosti je to test férovosti SaaS produktu. Když zákazník odchází, dělá audit, mění dodavatele nebo potřebuje předat data internímu týmu, pozná během pěti minut, jestli jste stavěli produkt pro dlouhodobou důvěru, nebo pro digitální rukojmí.
+
+Privacy-first export není jen tlačítko „stáhnout ZIP“. Je to malý produktový tok: jasně vysvětlí, co se exportuje, kdo to smí spustit, jak dlouho bude balíček dostupný, co v něm chybí z bezpečnostních důvodů a jak lze výsledek znovu importovat nebo předat jinému systému.
+
+## KC.1 Nejdřív odděl export pro člověka, audit a migraci
+
+Jeden univerzální export většinou skončí jako obří archiv, kterému rozumí jen člověk, který už ve firmě nepracuje. Navrhni tři účely:
+
+- **Osobní export**: data konkrétní osoby nebo uživatele, typicky kvůli přístupu k údajům nebo portabilitě.
+- **Workspace export**: data účtu, projektu nebo organizace pro interní archiv, audit nebo offboarding.
+- **Migrační export**: strukturovaná data pro import do jiného systému, ideálně s dokumentací schématu.
+
+Každý účel má jiné oprávnění, retenci a formát. Osobní export nemusí obsahovat interní poznámky supportu. Workspace export nemusí obsahovat všechna osobní metadata jednotlivých členů. Migrační export musí být stabilní a strojově čitelný, ne jen hezký PDF památníček.
+
+Praktický model:
+
+| Typ exportu | Formát | Kdo spouští | Typická retence balíčku |
+| --- | --- | --- | --- |
+| Osobní data | JSON/CSV + čitelný index | uživatel nebo DPO/admin | krátká, např. 7 dní |
+| Workspace archiv | ZIP s manifestem | owner/admin | krátká, schválená politikou |
+| Migrace | JSONL/CSV + schema | owner/admin, někdy support na žádost | krátká, s jednorázovým odkazem |
+
+## KC.2 Manifest je mapa, bez které je export jen pytel souborů
+
+Do každého exportu přidej `manifest.json` nebo `README.md`. Zákazník nemá hádat, co je `items_2026_08_final_v3.csv` a proč chybí část dat. Manifest má popsat:
+
+- název účtu, workspace nebo rozsah exportu,
+- čas vytvoření a čas expirace odkazu,
+- verzi exportního schématu,
+- seznam souborů a počet záznamů,
+- vysvětlení vynechaných kategorií dat,
+- kontaktní cestu pro dotaz nebo nový export.
+
+Příklad stručného manifestu:
+
+```json
+{
+  "export_type": "workspace",
+  "schema_version": "2026-08-19",
+  "created_at": "2026-08-19T10:00:00Z",
+  "workspace_id": "ws_123",
+  "files": [
+    { "path": "projects.csv", "records": 42 },
+    { "path": "members.csv", "records": 8 },
+    { "path": "events.jsonl", "records": 921 }
+  ],
+  "excluded": [
+    "session cookies",
+    "security audit events containing third-party identifiers",
+    "internal support notes"
+  ]
+}
+```
+
+Tohle není byrokracie. To je rozdíl mezi „export funguje“ a „poslali jste mi tajemný zip, hodně štěstí, Indiana Jonesi“.
+
+## KC.3 Formát vol podle budoucího použití, ne podle pohodlí backendu
+
+CSV je skvělé pro tabulky. JSON je dobrý pro vztahová a vnořená data. JSONL se hodí pro dlouhé seznamy událostí. PDF se hodí pro člověkem čitelný report, ale není dobrý jako hlavní strojově čitelný export.
+
+Doporučení:
+
+- pro tabulková data použij UTF-8 CSV s hlavičkou, stabilními názvy sloupců a dokumentovaným oddělovačem,
+- pro vnořené objekty použij JSON se schématem a příklady,
+- pro velké eventy použij JSONL, aby šel soubor zpracovávat po řádcích,
+- pro přílohy zachovej původní soubory, ale přidej metadata mimo název souboru,
+- pro texty s diakritikou vždy otestuj otevření v běžných nástrojích.
+
+Privacy-first detail: export není omluva ke sběru navíc. Neexportuj data, která v systému nemáš držet. A pokud zjistíš, že export musí vytáhnout údaje z deseti zapomenutých tabulek, právě jsi nenašel exportní problém, ale datovou hygienu převlečenou za archeologii.
+
+## KC.4 Oprávnění exportu řeš jako bezpečnostní operaci
+
+Export může být největší jednorázový únik dat v celém produktu. Proto musí mít tvrdší pravidla než běžná obrazovka v aplikaci.
+
+Minimální pravidla:
+
+- export workspace dat smí spustit jen owner nebo role s výslovným oprávněním,
+- osobní export musí ověřit identitu žadatele a rozsah dat,
+- odkaz ke stažení musí být krátkodobý, náhodný a jednorázově auditovaný,
+- velký export vyžaduje potvrzení nebo druhý faktor,
+- support nesmí export vytvářet potichu bez zaznamenaného důvodu,
+- každý export se zapisuje do bezpečnostního audit logu.
+
+Tady se hodí stejná disciplína jako u tenant izolace: ID exportu není oprávnění. Pokud endpoint vypadá jako `/exports/{id}/download`, server musí znovu ověřit, že aktuální uživatel má právo stáhnout právě tenhle balíček. OWASP API Security Top 10 2023 popisuje broken object level authorization jako riziko u endpointů, kde útočník manipuluje s ID objektu; exporty jsou pro takovou chybu učebnicově drahé místo.
+
+## KC.5 Balíček musí být bezpečný i po stažení
+
+Po stažení exportu už zákazník drží kopii dat mimo tvůj systém. To neznamená, že odpovědnost končí, ale znamená to, že produkt má zákazníka férově připravit.
+
+Dobrá exportní obrazovka říká:
+
+- co přesně export obsahuje,
+- že soubor může obsahovat osobní nebo důvěrná data,
+- komu je vhodné ho předat,
+- kdy odkaz expiruje,
+- jak export bezpečně smazat nebo obnovit,
+- jak požádat o nový export.
+
+U ZIP archivů ošetři názvy souborů a cesty tak, aby při rozbalení nepřepisovaly soubory mimo cílovou složku. U příloh počítej s tím, že uživatelské soubory mohou být nebezpečné. OWASP u file uploadů upozorňuje, že riziko není jen obsah souboru, ale i metadata, název, cesta, velikost a následné zpracování. Export tedy nesmí slepě vyrobit archiv z hodnot, které do systému dřív poslal uživatel.
+
+## KC.6 Testuj export importem, ne jen existencí souboru
+
+Test „soubor se stáhl“ nestačí. To je jako říct, že auto funguje, protože má lak. Export testuj přes reálné použití:
+
+- vytvoř syntetický workspace s projekty, členy, fakturačními údaji, přílohami a historií,
+- spusť export přes UI i API,
+- ověř počet záznamů proti databázi,
+- otevři CSV v běžném tabulkovém nástroji,
+- zpracuj JSON/JSONL validačním skriptem,
+- proveď zkušební import do prázdného testovacího účtu nebo migračního nástroje,
+- ověř, že uživatel bez oprávnění export neuvidí ani přes přímou URL.
+
+Přidej i negativní testy: export cizího workspace, expirovaný odkaz, opakované stažení jednorázového odkazu, smazaný účet, deaktivovaný člen, příloha s podivným názvem a export při běžící změně dat.
+
+## KC.7 Exportní API má být nudné a verzované
+
+Pokud nabízíš export přes API, navrhni ho jako stabilní kontrakt:
+
+- `POST /exports` založí exportní job,
+- `GET /exports/{id}` vrátí stav, rozsah, expiraci a metadata,
+- `GET /exports/{id}/download` stáhne hotový balíček,
+- `DELETE /exports/{id}` zneplatní balíček dřív,
+- `schema_version` je součást odpovědi i manifestu.
+
+Neposílej velký export synchronně v requestu. Založ background job, ukaž stav a po dokončení pošli bezpečnou notifikaci. Retry musí být idempotentní: opakovaný požadavek na stejný rozsah nemá vyrobit pět různých archivů, pokud zákazník jen nervózně refreshuje.
+
+## KC.8 Checklist bezpečného exportu dat
+
+- [ ] Existuje mapa exportovatelných dat podle účelu: osobní, workspace, migrace.
+- [ ] Každý export má vlastníka, oprávnění a auditní záznam.
+- [ ] Exportní balíček obsahuje manifest se schématem, počty a výjimkami.
+- [ ] Hlavní formát je strojově čitelný: CSV, JSON nebo JSONL podle typu dat.
+- [ ] Odkazy ke stažení jsou krátkodobé, náhodné a vázané na oprávnění.
+- [ ] Velké nebo citlivé exporty vyžadují dodatečné potvrzení.
+- [ ] Názvy souborů, cesty a přílohy jsou sanitizované před vytvořením archivu.
+- [ ] Export je otestovaný proti tenant izolaci a přímým URL útokům.
+- [ ] Export je otestovaný importem nebo validačním skriptem.
+- [ ] Dokumentace zákazníkovi vysvětluje obsah, omezení a bezpečné zacházení.
+
+## Codyho komentář
+
+Export dat je produktová pojistka důvěry. Firmy se ho bojí, protože si myslí, že usnadňuje odchod zákazníka. Můj pohled — Cody: dobrý export paradoxně snižuje strach z nákupu. Když zákazník ví, že není uvězněný, snáz řekne ano. Vendor lock-in je možná krátkodobá pastička na faktury, ale dlouhodobě je to marketingový zápach.
+
+## Zdroje k příloze
+
+- GDPR, článek 20: právo na přenositelnost údajů a požadavek na strukturovaný, běžně používaný a strojově čitelný formát: https://eur-lex.europa.eu/eli/reg/2016/679/oj
+- EDPB: Right to data portability a navazující WP29 guidelines endorsed by EDPB: https://www.edpb.europa.eu/documents/guideline/right-to-data-portability_en
+- OWASP API Security Top 10 2023 — API1: Broken Object Level Authorization: https://owasp.org/API-Security/editions/2023/en/0xa1-broken-object-level-authorization/
+- OWASP: Unrestricted File Upload — rizika souborů, metadat, názvů a následného zpracování: https://owasp.org/www-community/vulnerabilities/Unrestricted_File_Upload
+
+## Shrnutí přílohy
+
+Export zákaznických dat je důvěryhodná produktová funkce, ne nouzový dump databáze. Rozděl účely exportu, používej manifest a strojově čitelné formáty, chraň stažení stejně přísně jako citlivou administraci a testuj výsledek importem. Privacy-first SaaS se pozná i podle toho, jak férově nechá zákazníka odejít.
+
 ## Pracovní log
+- 2026-08-19: Přidána příloha KC o bezpečném exportu zákaznických dat: účely exportu, manifest, formáty CSV/JSON/JSONL, oprávnění, bezpečné ZIP balíčky, test importem, verzované exportní API a checklist.
 - 2026-08-19: Přidána příloha KB o support access a administrátorských zásazích: metadata-first diagnostika, delegovaný přístup, break-glass, impersonace, bezpečné supportní poznámky, pravidelné access review a privacy-first checklist.
 - 2026-08-19: Přidána příloha KA o bezpečnostním audit logu pro SaaS: účel logování, stabilní event model, zákaz citlivých dat, zákaznické UI, integrita, retence, přístupy a checklist.
 - 2026-08-19: Přidána příloha JZ o usage meteringu a spotřebním účtování v SaaS: definice měřených jednotek, minimální metering eventy, idempotence, korekce, zákaznický usage dashboard, oddělení billingu od analytiky a privacy-first checklist.
