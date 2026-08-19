@@ -44511,7 +44511,143 @@ Můj pohled: nejlepší notifikační systém je ten, který se umí omluvit tí
 
 In-app notifikace jsou produktový i datový výstup. Privacy-first SaaS je katalogizuje podle účelu, doručuje je jen oprávněným lidem, omezuje text na bezpečné minimum, odděluje servis od marketingu, nabízí preference centrum, pracuje opatrně s web push, slučuje opakované zprávy, nechává oznámení vypršet a měří kvalitu agregovaně. Výsledkem není hlučnější aplikace, ale klidnější provoz: lidé vidí to, co potřebují, ve chvíli, kdy to potřebují, a zbytek elegantně drží pusu.
 
+# Příloha JT: Rate limity, kvóty a férové používání API bez trestání poctivých zákazníků
+
+Rate limiting se často nasadí až ve chvíli, kdy něco hoří: bot vyplní formulář, zákazník spustí export tisíckrát, integrace omylem cyklí webhook nebo jeden tenant sežere výkon celé aplikace. To je pozdě. Rate limity nejsou jen obrana proti útoku. Jsou produktová smlouva o férovém používání sdílených zdrojů.
+
+OWASP API Security Top 10 řadí neomezenou spotřebu zdrojů mezi významná API rizika a upozorňuje, že API často neomezují počet interakcí, velikost odpovědí, batch operace nebo náklady vyvolané jedním klientem: https://owasp.org/API-Security/editions/2023/en/0xa4-unrestricted-resource-consumption/
+
+Privacy-first pohled k tomu přidává ještě jednu věc: dobrý limit chrání službu bez toho, aby musel zavádět invazivní fingerprinting, sledování napříč weby nebo „bezpečnostní“ datový vysavač. Ano, jde to. Není třeba z každého návštěvníka dělat detektivní spis.
+
+## JT.1 Neomezuj jen IP adresu, omezuj skutečný zdroj rizika
+
+IP rate limit je jednoduchý, ale často hrubý. Sdílená kancelář, mobilní operátor, firemní VPN nebo škola můžou mít desítky lidí za jednou adresou. Naopak útočník nebo rozbitá integrace může adresy měnit. IP limit tedy ber jako jednu vrstvu, ne jako hlavní mozek systému.
+
+Prakticky si napiš tabulku limitovacích klíčů:
+
+| Akce | Primární klíč | Sekundární klíč | Poznámka |
+| --- | --- | --- | --- |
+| Přihlášení | účet nebo e-mail | IP / subnet | Chraň účet, ne jen formulář |
+| Reset hesla | účet nebo e-mail | IP | Zabraň enumeraci a e-mail spamu |
+| Vytvoření exportu | workspace | uživatel | Jeden tenant nesmí zahltit frontu |
+| API volání | API token / integrace | workspace | Token je přesnější než IP |
+| Webhook příjem | integrační partner | workspace | Kombinuj s ověřením podpisu |
+| Fulltext hledání | workspace | uživatel | Drahé dotazy brzdi dřív než databázi |
+
+Cíl není najít jeden dokonalý klíč. Cíl je kombinovat vrstvy tak, aby poctivý zákazník nebyl potrestán za souseda na stejné síti a aby jeden rozbitý skript nepoložil celé SaaS.
+
+## JT.2 Rozliš limity podle ceny operace
+
+Ne každé API volání stojí stejně. `GET /me` je levné. Export všech faktur za tři roky, generování PDF, import CSV, AI shrnutí nebo přepočet reportu jsou drahé. Když dáš všem endpointům stejný limit, buď bude limit zbytečně přísný pro běžné používání, nebo neochrání drahé operace.
+
+U každé důležité akce si označ:
+
+- **frekvenci:** kolikrát za minutu/hodinu/den je normální použití,
+- **náklad:** CPU, databáze, fronta, externí API, e-mail, úložiště,
+- **dopad:** co se stane zákazníkovi, když akci zpomalíš,
+- **zneužitelnost:** jde akcí posílat spam, vytvářet náklady nebo těžit data,
+- **obnovu:** kdy se limit resetuje a jestli uživatel vidí stav.
+
+Příklad: vytvoření měsíčního reportu může mít limit „5 paralelních reportů na workspace, 100 reportů denně“. Zobrazení hotového reportu může mít limit výrazně vyšší. Jinými slovy: limituj práci, ne čtení výsledku.
+
+## JT.3 Odpověď 429 má být užitečná, ne pasivně agresivní
+
+HTTP status `429 Too Many Requests` je standardizovaný v RFC 6585 a odpověď může obsahovat hlavičku `Retry-After`, která klientovi říká, kdy to zkusit znovu: https://datatracker.ietf.org/doc/html/rfc6585#section-4
+
+Dobrá odpověď pro API klienta:
+
+```http
+HTTP/1.1 429 Too Many Requests
+Retry-After: 60
+Content-Type: application/json
+
+{
+  "error": "rate_limit_exceeded",
+  "message": "Limit pro exporty byl dočasně vyčerpán. Zkuste to znovu za 60 sekund.",
+  "retryAfterSeconds": 60,
+  "limitScope": "workspace_exports"
+}
+```
+
+Špatná odpověď:
+
+```json
+{ "error": "nope" }
+```
+
+Ano, „nope“ je emočně uspokojivé. Produktově je to ale past na support. Klient neví, jestli má opakovat požadavek, čekat, kontaktovat podporu nebo začít panikařit jako JavaScript bez bundleru.
+
+## JT.4 Limity musí být viditelné tam, kde zákazník rozhoduje
+
+Pokud prodáváš SaaS s API, exporty nebo automatizacemi, limity nejsou drobné písmo. Jsou součást produktu. Zákazník potřebuje vědět, jestli jeho integrace zvládne běžný provoz.
+
+Zobrazuj limity na třech místech:
+
+- **Dokumentace API:** endpointy, limity, hlavičky, chování při překročení, doporučený retry/backoff.
+- **Nastavení workspace:** aktuální využití, denní/měsíční kvóty, aktivní integrace, poslední limitované události.
+- **Pricing nebo fair-use stránka:** co je zahrnuté v tarifu a co už je nadstandardní provoz.
+
+Privacy-first varianta: ukazuj agregované počty a technické scope, ne zbytečný seznam osobních aktivit. „Workspace vyčerpal 80 % denní kvóty exportů“ je užitečné. „Jana klikla 23× na export v 10:41 z IP adresy…“ většinou není potřeba pro běžné produktové UI.
+
+## JT.5 Backoff a fronty jsou lepší než tvrdá zeď
+
+Rate limit nemusí znamenat okamžité odmítnutí. U některých akcí je lepší požadavek přijmout, zařadit do fronty a dát uživateli stav. Typicky exporty, importy, synchronizace a reporty.
+
+Rozumné chování:
+
+- krátké bursty povol, pokud neohrožují službu,
+- drahou práci dej do fronty s limitem paralelismu,
+- klientům dokumentuj exponenciální backoff,
+- opakované požadavky dělej idempotentní,
+- u dlouhých úloh vrať `jobId` a stav místo čekání na requestu,
+- po dokončení pošli notifikaci nebo nabídni obnovitelný odkaz s expirací.
+
+Tím chráníš infrastrukturu a zároveň neztrácíš zákazníka, který jen udělal legitimní větší operaci. Produktově je rozdíl mezi „zkuste později“ a „máme to ve frontě, tady je stav“. První zní jako zavřené dveře. Druhé jako civilizace.
+
+## JT.6 Abuse ochrana bez invazivního fingerprintingu
+
+Mnoho anti-abuse řešení slibuje kouzelnou ochranu, ale platí se daty uživatelů. Pro evropský privacy-first provoz začni méně invazivně:
+
+- limity podle účtu, workspace, tokenu, formuláře a akce,
+- serverové bezpečnostní logy s krátkou retencí,
+- e-mailové ověření u rizikových toků,
+- proof-of-work nebo jednoduchá časová brzda u veřejných formulářů,
+- honeypot pole u formulářů, pokud nepoškozuje přístupnost,
+- ruční review pro extrémní případy místo plošného sledování všech.
+
+Externí bot ochranu zapínej až po datové mapě: jaká data odcházejí, do jaké země, na jakém právním základě, s jakou retencí a jak se chová služba bez souhlasu. Pokud odpověď zní „nevíme, ale dashboard je hezký“, je to červená vlajka v luxusním obalu.
+
+## JT.7 Checklist rate limitů a kvót
+
+- Má každá drahá nebo zneužitelná akce vlastní limit?
+- Rozlišuješ limit podle účtu, workspace, tokenu, IP a typu operace?
+- Jsou limity navázané na skutečný náklad, ne jen na počet HTTP requestů?
+- Vrací API při překročení srozumitelný `429` a ideálně `Retry-After`?
+- Umí klienti používat backoff a idempotentní opakování?
+- Vidí administrátor workspace agregované využití a blížící se vyčerpání kvóty?
+- Neobsahují logy rate limitů citlivé payloady, tokeny nebo zbytečné osobní údaje?
+- Existuje bezpečná výjimka pro větší zákazníky bez vypnutí ochrany pro celý systém?
+- Jsou limity testované v automatizovaných scénářích, ne jen ručně v Postmanu?
+- Má support stručný playbook, jak vysvětlit limit bez posílání interních detailů?
+
+## Codyho komentář
+
+Můj pohled: dobrý rate limit je jako dobrý vrátný. Neotravuje každého, kdo jde do práce, ale pozná, když někdo tahá do kanceláře bagr. Nejhorší varianta je limit, o kterém nikdo neví, dokud zákazníkovi v pátek večer nespadne integrace. To není bezpečnost. To je support ticket převlečený za architekturu.
+
+## Zdroje k příloze
+
+- OWASP API Security Top 10 2023, API4:2023 Unrestricted Resource Consumption: https://owasp.org/API-Security/editions/2023/en/0xa4-unrestricted-resource-consumption/
+- OWASP Bot Management and Anti-Automation Cheat Sheet, Rate Limiting and Quotas: https://cheatsheetseries.owasp.org/cheatsheets/Bot_Management_and_Anti-Automation_Cheat_Sheet.html
+- OWASP Denial of Service Cheat Sheet, rate limiting jako obranná vrstva: https://cheatsheetseries.owasp.org/cheatsheets/Denial_of_Service_Cheat_Sheet.html
+- IETF RFC 6585, HTTP status 429 Too Many Requests a `Retry-After`: https://datatracker.ietf.org/doc/html/rfc6585#section-4
+
+## Shrnutí přílohy
+
+Rate limity nejsou nepřátelská brzda růstu, ale ochrana férového provozu. Privacy-first SaaS limituje skutečné rizikové zdroje, rozlišuje cenu operací, vrací užitečné `429`, dokumentuje kvóty, používá fronty a backoff, chrání se bez invazivního fingerprintingu a ukazuje zákazníkům agregované využití. Výsledek je klidnější infrastruktura, méně nečekaných nákladů a méně supportových konverzací začínajících větou „ono to najednou přestalo fungovat“.
+
+
 ## Pracovní log
+- 2026-08-19: Přidána příloha JT o rate limitech, kvótách a férovém používání API: limitovací klíče, cena operací, odpověď 429, viditelnost kvót, fronty, backoff, abuse ochrana bez invazivního fingerprintingu a privacy-first checklist.
 - 2026-08-18: Přidána příloha JS o in-app notifikacích v SaaS: katalog oznámení, autorizace příjemců, bezpečné texty, preference centrum, web push opt-in, dávkování, retence, agregované měření a privacy-first checklist.
 - 2026-08-18: Přidána příloha JR o transakčních e-mailech v SaaS: typy zpráv, minimalizace dat v šablonách, bezpečné reset a recovery toky, SPF/DKIM/DMARC, oddělení marketingu, fronta doručování, audit a privacy-first checklist.
 - 2026-08-18: Přidána příloha JQ o příchozích webhookách: integrační karta, ověřování podpisu nad raw body, replay ochrana, idempotence, rychlé 2xx odpovědi, validace payloadu, bezpečné logování, testovací sada a privacy-first checklist.
