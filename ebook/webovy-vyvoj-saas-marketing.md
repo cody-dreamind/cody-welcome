@@ -47362,9 +47362,152 @@ RAG není lék na halucinace. Je to potrubí na kontext. A jako každé potrubí
 
 Privacy-first RAG musí být navržený jako datový a bezpečnostní systém, ne jako vektorová hračka přilepená k chatu. Začíná katalogem zdrojů, pokračuje tenantově bezpečným retrieval filtrem, rozumným chunkingem, životním cyklem indexu, nudným prompt builderem a měřením kvality bez ukládání citlivých promptů. Cílem není nacpat modelu maximum kontextu, ale dodat jen povolený a aktuální kontext, který uživateli pomůže bez toho, aby produkt omylem prodával sousedova data jako odpověď.
 
+
+---
+
+# Příloha KK: AI agenti, tool calling a oprávnění bez produkční motorové pily v dětské ohrádce
+
+AI agent v SaaS produktu není jen chytřejší chatbot. Jakmile umí volat nástroje, číst databázi, měnit stav účtu, posílat e-maily, zakládat úkoly nebo spouštět interní workflow, stává se z něj nová aplikační vrstva. A tahle vrstva potřebuje stejné bezpečnostní zásady jako API, administrace a integrační platforma dohromady.
+
+Největší omyl je přístup „model je chytrý, tak mu dáme nástroje a on si poradí“. Model možná rozumí úkolu, ale nerozumí tvé odpovědnosti vůči zákazníkovi, účetnictví, datové mapě, oprávněním tenantů a incidentnímu postmortemu, který nechceš psát ve tři ráno. OWASP GenAI LLM Top 10 2026 řadí excessive agency mezi klíčová rizika LLM aplikací: aplikace dostane příliš mnoho autonomie, oprávnění nebo funkcí a může pak provádět dopadové akce bez dostatečného omezení a ověření: https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/
+
+Privacy-first agent proto nezačíná promptem. Začíná katalogem akcí, oprávnění a lidských brzd.
+
+## KK.1 Nejdřív rozděl nástroje podle dopadu
+
+Všechny tool cally nejsou stejné. Některé jen čtou veřejná metadata. Jiné posílají zprávu zákazníkovi, mění fakturaci nebo mažou data. Pokud je házíš do jednoho pytle „tools“, stavíš ruletu s hezkým JSON schema.
+
+Praktické třídění:
+
+| Třída nástroje | Příklad | Výchozí pravidlo |
+| --- | --- | --- |
+| Bezpečné čtení | Vyhledat článek v dokumentaci, najít veřejnou stránku | Lze automaticky, ale s tenant filtrem a limity |
+| Citlivé čtení | Zobrazit zákaznické údaje, faktury, support historii | Jen podle oprávnění uživatele, logovat účel |
+| Návrh akce | Připravit odpověď, navrhnout refund, vytvořit koncept úkolu | Agent smí navrhnout, člověk potvrzuje |
+| Reverzibilní zápis | Změnit štítek, doplnit interní poznámku, vytvořit draft | Povolit s audit logem a undo plánem |
+| Dopadová akce | Odeslat e-mail, změnit tarif, spustit refund, smazat data | Vyžaduje potvrzení, policy check a často druhý faktor |
+| Nevratná akce | Trvalý výmaz, právní export, bezpečnostní změna | Agent jen připravuje kroky, finální akci dělá člověk nebo schválený workflow |
+
+Tahle tabulka má být součástí návrhu funkce, ne až bezpečnostní dokumentace po launchi. U každého nástroje napiš: kdo ho smí volat, nad jakými daty, s jakým limitem, jak se loguje a jak se dá zrušit škoda.
+
+## KK.2 Agent nesmí zdědit superadmina
+
+Nejhorší architektura: agent běží pod jedním interním tokenem, který umí všechno, a prompt ho „slušně požádá“, aby dělal jen povolené věci. To není bezpečnost. To je cedulka „prosím nekrást“ na otevřeném trezoru.
+
+Bezpečnější model:
+
+- Agent používá oprávnění aktuálního uživatele nebo explicitně omezený service účet.
+- Každý nástroj má vlastní scope, ne jeden univerzální `admin:*` token.
+- Backend znovu ověřuje oprávnění před provedením akce, i když agent tvrdí, že uživatel souhlasí.
+- Tenant filtr se aplikuje v datové vrstvě, ne jen v promptu.
+- Tokeny jsou krátkodobé a svázané s konkrétní akcí nebo relací.
+- Neúspěšné pokusy o citlivé akce se logují jako bezpečnostní signál.
+
+OWASP AI Agent Security Cheat Sheet výslovně varuje před příliš širokou konfigurací nástrojů a wildcard oprávněními u agentů: https://cheatsheetseries.owasp.org/cheatsheets/AI_Agent_Security_Cheat_Sheet.html
+
+Privacy-first pointa: agent nemá být obchvat oprávnění. Má být uživatelské rozhraní nad stejnými pravidly, která platí pro zbytek produktu.
+
+## KK.3 Potvrzení akce musí ukázat dopad, ne jen tlačítko „OK“
+
+Lidské potvrzení nefunguje, pokud člověk neví, co potvrzuje. „Agent chce provést akci“ je slabé. Dobré potvrzení ukazuje konkrétní změny, příjemce, data, náklady a možnost návratu.
+
+Příklad špatného potvrzení:
+
+> „Cody chce aktualizovat zákazníka. Pokračovat?“
+
+Příklad lepšího potvrzení:
+
+> „Cody připravil změnu tarifu pro zákazníka ACME s.r.o.: z `Trial` na `Team`, cena 2 900 Kč měsíčně, účinnost od 1. 9. 2026. Zákazníkovi se odešle e-mail s potvrzením. Akci můžeš vrátit do 24 hodin bez vystavení faktury.“
+
+Tohle není jen UX detail. Je to bezpečnostní kontrola. Člověk má šanci zastavit omyl dřív, než se z něj stane účetní, právní nebo reputační incident.
+
+## KK.4 Tool registry je produktový kontrakt
+
+Každý nástroj pro agenta by měl mít strojem čitelné schema a lidsky čitelný popis. Nestačí funkce `doStuff(customerId, payload)`. Potřebuješ kontrakt, který říká, co nástroj dělá, co nikdy nedělá, jaká data přijímá, jaké chyby vrací a jaké policy kontroly musí proběhnout.
+
+Minimum pro každý nástroj:
+
+- Název ve tvaru slovesa a objektu, například `create_invoice_draft`, ne `billing_tool`.
+- Popis účelu jednou větou.
+- Povolené role a scope.
+- Datové minimum ve vstupu.
+- Seznam polí, která se nesmí nikdy posílat do modelu.
+- Riziková třída a požadavek na potvrzení.
+- Rate limit a rozpočtový limit.
+- Auditní událost po úspěchu i neúspěchu.
+- Testovací scénáře pro prompt injection, špatný tenant a opakované volání.
+
+NIST AI RMF Generative AI Profile doporučuje řídit rizika generativní AI systematicky přes governance, mapování, měření a řízení rizik, ne jen přes jednorázové technické opatření: https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence
+
+Přeloženo do SaaS reality: tool registry není vývojářský detail. Je to místo, kde se potkává produkt, bezpečnost, support a compliance.
+
+## KK.5 Smyčky, opakování a náklady hlídej jako incidentní riziko
+
+Agent, který se zasekne, nemusí ukrást data. Stačí, když třicetkrát zavolá drahý model, odešle deset podobných e-mailů nebo opakovaně spustí import. To je pořád incident, jen nemá kapuci a temnou hudbu.
+
+Ochranné brzdy:
+
+- Maximální počet tool callů na jeden úkol.
+- Maximální čas běhu agenta.
+- Rozpočtový limit na účet, workspace nebo workflow.
+- Idempotency key pro zápisové akce.
+- Zákaz opakovaného volání stejného nástroje se stejnými parametry bez změny stavu.
+- Detekce smyčky podle opakujících se chyb.
+- Fallback do stavu „potřebuji člověka“, ne nekonečné zkoušení.
+
+U dopadových akcí platí jednoduché pravidlo: agent může být vytrvalý v přemýšlení, ale nesmí být vytrvalý v klikání na produkci.
+
+## KK.6 Logy mají vysvětlit rozhodnutí bez ukládání tajemství
+
+Když agent něco udělá, musíš umět zpětně vysvětlit proč. Ne kvůli zvědavosti. Kvůli supportu, bezpečnosti, reklamacím a důvěře zákazníka. Zároveň ale nechceš do logů ukládat celé prompty, zákaznické dokumenty nebo osobní údaje jen proto, že se to hodí při ladění.
+
+Bezpečný auditní záznam agentní akce může obsahovat:
+
+- ID uživatele a workspace.
+- ID nástroje a verzi tool kontraktu.
+- Rizikovou třídu akce.
+- Hash nebo referenci vstupu místo celého obsahu.
+- Zdroj oprávnění.
+- Výsledek policy checku.
+- Stav potvrzení člověkem.
+- Výsledek akce a případné ID změněného objektu.
+- Korelační ID pro incidentní vyšetření.
+
+Naopak do logu nepatří celé e-maily zákazníků, fakturační poznámky, nahrané dokumenty, API klíče, access tokeny ani „dočasně“ uložené prompt dumpy. Dočasně je v produkci často jiné slovo pro „najdeme to za dva roky při auditu“.
+
+## KK.7 Checklist bezpečného tool callingu
+
+- Každý agentní nástroj má vlastní rizikovou třídu.
+- Zápisové a dopadové akce mají explicitní potvrzení s náhledem dopadu.
+- Agent nepoužívá superadmin token ani wildcard oprávnění.
+- Backend ověřuje tenant, roli a scope nezávisle na modelu.
+- Tool registry obsahuje popis, schema, policy, limity a auditní eventy.
+- Citlivá data se neposílají do modelu, pokud pro akci nejsou nutná.
+- Opakované tool cally mají idempotency key a limit.
+- Agent má maximální čas běhu, počet kroků a rozpočtový strop.
+- Logy ukládají rozhodnutí a reference, ne celé citlivé vstupy.
+- Testy pokrývají prompt injection, cizí tenant, chybějící oprávnění, opakovanou akci a selhání nástroje.
+
+## Codyho komentář
+
+AI agent s nástroji je skvělý sluha, ale mizerný suverén. Dej mu malé klíče, jasný pracovní řád a dveře, které nejdou otevřít jen proto, že se to hezky vyargumentovalo v promptu. Nejlepší agentní architektura nepůsobí magicky. Působí nudně, čitelně a auditovatelně. Což je přesně ten druh nudy, ze které se dobře spí.
+
+## Zdroje k příloze
+
+- OWASP GenAI Security Project: OWASP GenAI LLM Top 10 2026, publikováno 3. srpna 2026, včetně rizika LLM03 Excessive Agency: https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/
+- OWASP Foundation: Top 10 for Large Language Model Applications, projektová stránka uvádějící přesun aktivního vývoje do OWASP GenAI Security Project a aktuální vydání 2026: https://owasp.org/www-project-top-10-for-large-language-model-applications/
+- OWASP Cheat Sheet Series: AI Agent Security Cheat Sheet, doporučení k oprávněním, konfiguraci nástrojů a agentním bezpečnostním kontrolám: https://cheatsheetseries.owasp.org/cheatsheets/AI_Agent_Security_Cheat_Sheet.html
+- NIST: Artificial Intelligence Risk Management Framework: Generative Artificial Intelligence Profile, NIST AI 600-1, publikováno 26. července 2024: https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence
+
+## Shrnutí přílohy
+
+Tool calling z AI agenta nedělá jen chytřejší UI, ale novou vrstvu oprávnění a rizik. Privacy-first SaaS musí rozdělit nástroje podle dopadu, zakázat superadmin přístup, vyžadovat smysluplné potvrzení u citlivých akcí, spravovat tool registry jako produktový kontrakt, hlídat smyčky a náklady a logovat rozhodnutí bez ukládání zákaznických tajemství. Agent má pomáhat lidem rychleji dělat bezpečné věci, ne zrychlit cestu k nevratnému průšvihu.
+
 ---
 
 ## Pracovní log
+
+- 2026-08-19: Přidána příloha KK o AI agentech a tool callingu v privacy-first SaaS: třídění nástrojů podle dopadu, omezená oprávnění, potvrzení dopadových akcí, tool registry, limity smyček a nákladů, bezpečné logy a checklist.
 
 - 2026-08-19: Přidána příloha KJ o privacy-first RAG a znalostních bázích pro AI: katalog zdrojů, oprávnění při retrievalu, bezpečný chunking, zapomínání indexu, prompt builder, měření kvality bez ukládání citlivých promptů a checklist.
 
