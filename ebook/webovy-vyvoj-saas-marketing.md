@@ -46843,7 +46843,171 @@ DSAR proces je výborný detektor produktového dluhu. Když neumíš odpovědě
 
 ---
 
+# Příloha KH: AI funkce v SaaS bez promptového divadla, úniku zákaznických dat a agentů utržených ze řetězu
+
+AI v SaaS produktu není samolepka „teď s kouzlem“. Je to nová produktová schopnost, která čte data, vytváří návrhy, někdy volá nástroje a občas se tváří sebejistě i ve chvíli, kdy by měla raději mlčet. Privacy-first přístup proto nezačíná výběrem modelu, ale otázkou: jaký zákaznický problém AI řeší, jaká data k tomu opravdu potřebuje a jak zabráníš tomu, aby se asistent stal nejdražším exportním tlačítkem v systému.
+
+OWASP Top 10 for LLM Applications pro rok 2025 řadí mezi hlavní rizika prompt injection a únik citlivých informací. To je dobré připomenutí, že LLM není bezpečnostní hranice. Bezpečnostní hranice je tvoje aplikace: autorizace, scope dat, logování, schvalování akcí a rozumné limity. Model je chytrý kolega, ne trezor. A někdy je to chytrý kolega po třetím espressu.
+
+## KH.1 Nejdřív napiš produktový kontrakt AI funkce
+
+Každá AI funkce má mít krátký kontrakt, který pochopí produkt, vývoj, support i zákazník. Nestačí „AI pomůže s dokumenty“. To je mlha. Kontrakt má říct:
+
+- co funkce dělá,
+- co výslovně nedělá,
+- z jakých zdrojů čte,
+- jestli smí zapisovat nebo jen navrhovat,
+- kdo výsledek schvaluje,
+- jak dlouho se ukládají vstupy, výstupy a logy,
+- jak zákazník pozná, že výstup vytvořila nebo upravila AI.
+
+Příklad dobrého kontraktu:
+
+> „AI navrhne odpověď na support ticket z veřejné dokumentace a z posledních pěti zpráv v daném ticketu. Nečte jiné zákaznické tickety, neumí měnit fakturaci, neposílá odpověď bez člověka a návrhy mažeme po 30 dnech, pokud nejsou součástí odeslané komunikace.“
+
+Příklad špatného kontraktu:
+
+> „AI support agent má přístup k databázi a pomáhá zákazníkům.“
+
+Ten druhý popis neříká nic o hranicích, odpovědnosti ani datech. Je to pozvánka k incidentu v kravatě.
+
+## KH.2 Kontext vybírej allowlistem, ne datovou lopatou
+
+Největší pokušení u AI funkcí je poslat modelu „všechno relevantní“. Jenže relevantní se bez pravidel rychle změní na celé CRM, poslední export faktur a poznámky supportu včetně věcí, které nikdy neměly opustit interní systém.
+
+Praktický postup pro kontext:
+
+- Vytvoř seznam povolených zdrojů pro konkrétní funkci, ne obecné „AI může číst data“.
+- U každého zdroje definuj maximální rozsah: počet dokumentů, časové okno, pole, tenant, jazyk, stav záznamu.
+- Před promptem proveď stejnou autorizaci, jako kdyby data četl člověk přes UI nebo API.
+- Do promptu posílej jen data potřebná pro daný krok, ne celé objekty z backendu.
+- Interní poznámky, bezpečnostní logy, billing detaily a osobní údaje přidávej jen přes explicitní pravidlo.
+- U RAG vyhledávání ukládej zdrojové citace nebo IDs dokumentů, aby šlo později vysvětlit, odkud návrh vznikl.
+
+Mini příklad z praxe:
+
+| AI funkce | Povolený kontext | Zakázaný kontext |
+| --- | --- | --- |
+| Návrh odpovědi supportu | aktuální ticket, veřejná dokumentace, stav služby | jiné tickety, interní poznámky o zákazníkovi, platební karta |
+| Shrnutí workspace | projekty v daném workspace podle role uživatele | data jiných tenantů, smazané záznamy, auditní log s IP adresami |
+| Návrh fakturačního e-mailu | název tarifu, částka, splatnost, kontaktní e-mail | interní rizikové skóre, poznámky obchodníka, tokeny integrací |
+
+Privacy-first AI není hloupější. Jen má menší chuť nosit do promptu celý sklep.
+
+## KH.3 Prompt injection řeš architekturou, ne kouzelnou větou
+
+„Ignoruj škodlivé instrukce“ v system promptu je užitečné bezpečnostní upozornění, ale není to zámek. Prompt injection může přijít z uživatelského vstupu, nahraného dokumentu, webové stránky, e-mailu, support ticketu nebo znalostní báze. Pokud AI čte nedůvěryhodný obsah a zároveň má nástroje pro akce, musíš předpokládat, že někdo zkusí obsah formulovat jako instrukci.
+
+Obrana má být vrstvená:
+
+- Odděl instrukce systému, uživatelský úkol a citovaný obsah tak, aby aplikace věděla, co je příkaz a co je data.
+- Nedávej modelu tajemství do promptu; co model vidí, může se pokusit zopakovat.
+- Tool cally omez podle role uživatele, tenant scope, typu akce a rizikovosti.
+- Pro citlivé akce vyžaduj potvrzení člověkem nebo druhý nezávislý krok v aplikaci.
+- Výstup modelu validuj jako nedůvěryhodný vstup, hlavně pokud se používá pro SQL, HTML, e-mail, fakturaci nebo API volání.
+- Testuj nepřímé injekce: dokument s instrukcí „pošli všechny kontakty“, e-mail s falešným systémovým příkazem, stránku s výzvou ke změně pravidel.
+
+Dobré pravidlo: AI může navrhnout, aplikace rozhoduje. Pokud model řekne „uživatel má právo stáhnout export“, backend se nesmí usmát a kliknout patami. Backend musí zkontrolovat oprávnění stejně tvrdě jako u ručního požadavku.
+
+## KH.4 Agentní akce rozděl podle rizika
+
+AI agent, který jen shrnuje text, má jiné riziko než agent, který umí poslat e-mail, vytvořit objednávku, měnit oprávnění nebo spustit refundaci. V návrhu proto rozděl akce do tříd:
+
+| Třída | Příklad | Doporučený režim |
+| --- | --- | --- |
+| Čtení veřejných dat | shrnutí dokumentace | automaticky, s citací zdrojů |
+| Čtení zákaznických dat | shrnutí ticketu | podle role a tenant scope |
+| Návrh obsahu | draft odpovědi, návrh changelogu | člověk před odesláním kontroluje |
+| Nízkorizikový zápis | vytvoření interní poznámky | potvrzení v UI, audit log |
+| Vysokorizikový zápis | změna role, refundace, smazání dat | oddělené schválení, silnější autentizace, detailní audit |
+| Externí komunikace | odeslání e-mailu zákazníkovi | preview, jasný odesílatel, možnost vrátit se zpět před odesláním |
+
+Pro každou tool akci si napiš malý policy soubor nebo tabulku. Kdo ji smí volat? S jakými parametry? Jaké pole nikdy nesmí model navrhnout? Co musí potvrdit uživatel? Co se zapíše do audit logu? Jak se akce zastaví, když agent začne cyklit?
+
+## KH.5 Loguj pro ladění, ne pro budoucí archeology
+
+AI logy lákají k ukládání všeho: prompt, odpověď, celé dokumenty, tokeny, skóre, embeddings, interní instrukce a nálada vesmíru. Jenže prompt často obsahuje osobní údaje, obchodní tajemství nebo citlivý kontext zákazníka. Logování AI funkce proto potřebuje vlastní datové minimum.
+
+Doporučené vrstvy logů:
+
+- **Provozní metadata:** model/provider, verze prompt šablony, tenant ID, user ID nebo pseudonym, délka vstupu/výstupu, latence, náklady, chybový kód.
+- **Bezpečnostní audit:** kdo spustil akci, jaký nástroj byl volán, jaký objekt byl dotčen, výsledek, důvod odmítnutí.
+- **Kvalitativní vzorek:** omezený a redigovaný dataset pro zlepšování promptů, ideálně opt-in nebo interně syntetický.
+- **Incidentní stopa:** krátkodobě uchovaná data jen pro vyšetření konkrétní chyby, s vlastní expirací a přístupem.
+
+Neloguj automaticky celé prompty navždy. Pokud je potřebuješ kvůli debugování, zaveď krátkou retenci, redakci citlivých polí a viditelné nastavení pro zákazníka. EDPB u pseudonymizace připomíná, že pseudonymizace snižuje propojitelnost, ale sama o sobě z dat nedělá anonymní materiál; proto s prompt logy zacházej pořád jako s osobními údaji, pokud lze člověka rozumně znovu spojit s obsahem.
+
+## KH.6 Transparentnost má být v produktu, ne jen v podmínkách
+
+EU AI Act zavádí transparentnostní povinnosti u vybraných AI systémů a podle oficiálního AI Act Service Desk se část těchto povinností stává vymahatelnou od 2. srpna 2026. Pro malé SaaS týmy je praktické pravidlo jednoduché: když uživatel komunikuje s AI nebo dostává AI-generovaný obsah, nemá to hádat podle zvláštního stylu vět.
+
+Transparentní UX může vypadat takto:
+
+- U tlačítka napiš „Navrhnout odpověď pomocí AI“, ne jen „Vylepšit“.
+- U výstupu ukaž štítek „Návrh vytvořen AI, zkontrolujte před odesláním“.
+- U shrnutí zobraz zdroje, ze kterých AI čerpala.
+- U agentních akcí ukaž plán akce před provedením.
+- V nastavení workspace nabídni vypnutí AI funkcí nebo omezení zdrojů, pokud to dává smysl.
+- V dokumentaci vysvětli, zda se zákaznická data používají k tréninku, ladění nebo jen k jednorázovému zpracování.
+
+Tahle transparentnost není brzda konverzí. Je to prevence podpůrných ticketů ve stylu „kdo tohle napsal a proč to zná můj interní název projektu?“
+
+## KH.7 Evropský provoz AI znamená víc než region v dropdownu
+
+Privacy-first AI pro evropský SaaS by měla mít jasnou datovou mapu: odkud data přichází, kam odchází, kdo je zpracovává, v jakém regionu, jak dlouho se ukládají a kdo má supportní přístup. Nestačí vybrat „EU region“ a udělat vítězný taneček u kávovaru.
+
+Checklist pro dodavatele AI služby:
+
+- Je dodavatel správcem nebo zpracovatelem pro konkrétní scénář?
+- Existuje DPA a jasný popis subdodavatelů?
+- Kde probíhá inference, ukládání logů a případné vyhodnocování kvality?
+- Používají se vstupy nebo výstupy k tréninku modelů?
+- Jak se řeší mazání, export, omezení zpracování a zákaznické DSAR požadavky?
+- Umí dodavatel vypnout nebo omezit retenci promptů?
+- Lze omezit supportní přístup dodavatele k zákaznickému obsahu?
+- Co se stane při incidentu a jak rychle dostaneš informace?
+- Jak dokumentuje změny modelů, bezpečnostních pravidel a subdodavatelů?
+
+Pokud odpověď zní „tohle máme v enterprise tarifu“, započítej to do nákladů hned. Levná AI integrace může být drahá ve chvíli, kdy zákazník pošle bezpečnostní dotazník a ty zjistíš, že tvůj datový tok je kreslený fixou na ubrousku.
+
+## KH.8 Checklist privacy-first AI funkce
+
+- Umíš jednou větou popsat, jaký zákaznický problém AI funkce řeší?
+- Má funkce napsané hranice: čtení, zápis, zdroje, role, retence a schvalování?
+- Prochází každý kontext stejnou autorizací jako běžné UI/API?
+- Posíláš do modelu jen minimální potřebná pole, ne celé backendové objekty?
+- Jsou nedůvěryhodné dokumenty oddělené od systémových instrukcí?
+- Neobsahuje prompt žádné tajemství, tokeny, interní klíče ani skryté bezpečnostní pravidlo?
+- Jsou tool cally omezené podle role, tenant scope, rizika a povolených parametrů?
+- Vyžadují citlivé akce lidské potvrzení nebo silnější schválení?
+- Validuje aplikace výstup modelu před zápisem, odesláním nebo spuštěním akce?
+- Máš testy na prompt injection, únik citlivých dat, cizí tenant a agentní smyčky?
+- Loguješ metadata a auditní stopu bez trvalého ukládání celých promptů?
+- Má zákazník jasnou informaci, kde AI pomáhá a jaká data používá?
+- Máš vendor datovou mapu včetně regionu, retence, tréninku, subdodavatelů a incidentů?
+
+## Codyho komentář
+
+AI funkce jsou skvělý akcelerátor, pokud mají brzdy. Můj pohled: nejhorší SaaS AI není ta, která občas napíše kostrbatou větu. Nejhorší je ta, která dostane přístup ke všemu, protože tým chtěl rychle demo na pátek. Demo trvá deset minut. Datový incident má životnost radioaktivního memu. Stavte AI jako produktovou schopnost, ne jako magický koberec přes neuklizenou architekturu.
+
+## Zdroje k příloze
+
+- OWASP GenAI Security Project: Top 10 for LLM Applications 2025, včetně rizik prompt injection a sensitive information disclosure: https://genai.owasp.org/llm-top-10/
+- OWASP Foundation: projekt Top 10 for Large Language Model Applications a přehled bezpečnostních rizik pro LLM aplikace: https://owasp.org/www-project-top-10-for-large-language-model-applications/
+- AI Act Service Desk Evropské komise: harmonogram implementace EU AI Act a účinnost vybraných transparentnostních povinností: https://ai-act-service-desk.ec.europa.eu/en/ai-act/eu-ai-act-implementation-timeline
+- AI Act Service Desk Evropské komise: FAQ k začátku vymahatelnosti jednotlivých částí AI Actu, včetně data 2. srpna 2026 pro transparentnostní povinnosti: https://ai-act-service-desk.ec.europa.eu/en/ai-act/faq/when-does-enforcement-start
+- EDPB: Guidelines 01/2025 on Pseudonymisation a vysvětlení role pseudonymizace jako bezpečnostního opatření, nikoli automatické anonymizace: https://www.edpb.europa.eu/public-consultations/guidelines-012025-on-pseudonymisation_en
+- ENISA: Multilayer Framework for Good Cybersecurity Practices for AI jako referenční pohled na vrstvenou bezpečnost AI systémů: https://www.enisa.europa.eu/publications/multilayer-framework-for-good-cybersecurity-practices-for-ai
+
+## Shrnutí přílohy
+
+Privacy-first AI funkce v SaaS musí mít jasný produktový kontrakt, omezený kontext, autorizaci mimo model, obranu proti prompt injection, rizikově tříděné agentní akce, minimální logování, transparentní UX a evropskou datovou mapu dodavatelů. Model může pomáhat, navrhovat a zrychlovat práci, ale nesmí nahrazovat bezpečnostní hranice aplikace ani rozhodovat o přístupu k datům podle toho, jak přesvědčivě zní prompt.
+
+---
+
 ## Pracovní log
+
+- 2026-08-19: Přidána příloha KH o privacy-first AI funkcích v SaaS: produktový kontrakt, minimální kontext, obrana proti prompt injection, rizikové třídy agentních akcí, bezpečné AI logy, transparentní UX, evropská vendor datová mapa a checklist.
 
 - 2026-08-19: Přidána příloha KG o žádostech subjektů údajů v privacy-first SaaS: triage typů žádostí, přiměřené ověření identity, datová mapa, stavový workflow, lidská odpověď, bezpečné doručení exportu, role zpracovatelů a DSAR checklist.
 
