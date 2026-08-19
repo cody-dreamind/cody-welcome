@@ -47982,7 +47982,140 @@ Můj názor: dobrá AI observabilita je nudná jako kvalitní účetnictví. Nep
 
 AI observabilita má dát týmu traceability, kvalitu a bezpečnost bez toho, aby z logů vznikla druhá databáze citlivých zákaznických dat. Praktický základ je logovat metadata, verze, zdroje, tokeny, náklady, policy výsledky a lidské zásahy; plný obsah ukládat jen v řízeném debug režimu. Nejlepší dashboard není ten s nejvíc grafy, ale ten, který rychle ukáže, co se změnilo, koho se to týká a jaký další krok má vlastník udělat.
 
+# Příloha KO: Náklady AI funkcí bez finanční mlhy, tokenového požáru a špatně nastavených zákaznických slibů
+
+AI funkce mají zvláštní talent tvářit se v demu levně a v produkci pak potichu sežrat rozpočet jako hladový krtek kabeláž. Ne proto, že by každý model byl drahý, ale protože náklady nevznikají jen jedním requestem. Vznikají kombinací promptu, retrievalu, nástrojů, retry, dlouhých konverzací, evaluací, debug logů, embeddingů, front, podpory a špatně nastavených zákaznických očekávání.
+
+Privacy-first SaaS má výhodu: když už z principu minimalizuje data, má lepší šanci minimalizovat i náklady. Kratší kontext, jasnější účel, méně zbytečných tool callů a rozumná retence nejsou jen bezpečnostní ctnosti. Jsou to i účty, které nepřipomínají losování sportky.
+
+FinOps Foundation popisuje mimo jiné principy vlastnictví nákladů, dostupných a přesných dat, rozhodování podle byznys hodnoty a unit economics: https://www.finops.org/framework/ OpenTelemetry zároveň udržuje sémantické konvence pro jednotné názvy atributů, aby provozní data nebyla sbírka kreativních snowflake polí: https://opentelemetry.io/docs/concepts/semantic-conventions/ U AI funkcí je to dobrý základ: měř konzistentně, ale neukládej víc obsahu, než opravdu potřebuješ.
+
+## KO.1 Nejdřív pojmenuj jednotku hodnoty
+
+Cena za token je technický detail. Produktově tě zajímá cena za užitečný výsledek. Pokud nevíš, jaký výsledek AI funkce dodává, budeš optimalizovat tabulku bez významu. Levný request, který nepomůže zákazníkovi, je pořád plýtvání. Drahý request, který ušetří hodinu odborné práce, může být skvělý obchod.
+
+Příklady jednotek hodnoty:
+
+| AI funkce | Špatná jednotka | Lepší jednotka |
+| --- | --- | --- |
+| Návrh odpovědi v supportu | cena za request | cena za vyřešený ticket s přijatým návrhem |
+| RAG nad znalostní bází | cena za dotaz | cena za odpověď se správným zdrojem |
+| Generátor nabídek | cena za vygenerovaný text | cena za odeslanou nabídku bez zásadní ruční přestavby |
+| Interní analytický asistent | cena za konverzaci | cena za rozhodnutí nebo report, který tým skutečně použil |
+| Klasifikace leadů | cena za klasifikaci | cena za kvalifikovaný lead se zpětnou kontrolou |
+
+Prakticky: u každé AI funkce napiš jednu větu „platíme za to, aby zákazník mohl…“. Teprve potom definuj metriky. Jinak budeš ladit tokeny, zatímco produkt hoří v jiné místnosti.
+
+## KO.2 Rozpočtuj podle scénáře, ne podle průměru z dema
+
+Demo bývá čisté: krátký prompt, jeden uživatel, žádný retry, žádné opakované dotazy, žádný zákazník s dvacetistránkovým PDF a kreativní představou, že chatbot je právník, účetní i terapeut. Produkce je jiná planeta. Rozpočet proto dělej ve scénářích.
+
+Minimální rozpočtová tabulka:
+
+| Scénář | Co započítat | Otázka pro tým |
+| --- | --- | --- |
+| Běžné použití | vstup, výstup, retrieval, jeden tool call | Kolik stojí normální úspěšný úkol? |
+| Horší případ | dlouhý vstup, více zdrojů, retry, úprava člověkem | Kdy už je úkol dražší než ruční práce? |
+| Zneužití | automatické smyčky, neúspěšné pokusy, scraping endpointu | Jak rychle se zastaví finanční škoda? |
+| Launch špička | onboarding více zákazníků, importy, evaluace | Máme kapacitu a rozpočet na první týden? |
+| Incident | debug režim, opakované testy, ruční review | Kdo může dočasně zvýšit limity? |
+
+Do odhadu nepatří jen model. Patří tam i embeddingy, vektorová databáze, úložiště logů, evaluační běhy, monitoring, fronty, supportní čas a práce na ladění promptů. Když to nezapočítáš, AI funkce bude vypadat výnosně jen proto, že část nákladů sedí v cizím šuplíku.
+
+## KO.3 Každý request musí nést nákladový kontext
+
+Bez kontextu nevíš, komu náklad patří. Bez vlastnictví se náklady mění na mlhu. AI request by proto měl nést produktové a provozní metadata, která umožní bezpečné přiřazení bez ukládání obsahu promptu.
+
+Užitečná metadata:
+
+- `tenant_id` nebo interní organizační jednotka, ideálně pseudonymizovaně v analytické vrstvě.
+- `feature`, `workflow` a `plan`, aby šlo poznat, která produktová část náklady vytváří.
+- `model`, `prompt_template_version`, `retrieval_profile` a povolené nástroje.
+- `input_tokens`, `output_tokens`, počet retrieval dotazů, počet tool callů a latence.
+- `cost_estimate_minor_units`, tedy odhad ceny v nejmenší měnové jednotce, pokud ho umíš spočítat.
+- `outcome`, například `accepted`, `edited`, `rejected`, `blocked`, `failed` nebo `timed_out`.
+
+Privacy-first hranice: pro nákladové řízení většinou nepotřebuješ ukládat text vstupu ani výstupu. Potřebuješ vědět, že funkce v tarifu Pro vygenerovala tři dlouhé odpovědi, z nichž dvě člověk zahodil. To je produktový signál. Samotný obsah zákaznické konverzace je jiná liga rizika.
+
+## KO.4 Limity navrhni jako součást produktu
+
+Rate limit není trest. Je to bezpečnostní pás. U AI funkcí chrání dostupnost, rozpočet i uživatele před tím, že systém omylem udělá něco tisíckrát. Limity ale musí být pochopitelné a fér. Pokud zákazník narazí na zeď bez vysvětlení, bude mít pocit, že produkt je rozbitý, ne chráněný.
+
+Praktický limitní model:
+
+- **Denní limit pro běžné akce:** chrání před náhodným klikáním a jednoduchým zneužitím.
+- **Měsíční kvóta podle tarifu:** dává obchodní rámec a pomáhá pricingu.
+- **Limit souběhu:** brání tomu, aby jeden tenant zabral frontu všem ostatním.
+- **Maximální délka vstupu:** chrání náklady i kvalitu odpovědi.
+- **Maximální počet tool callů na úkol:** zastaví agentní výlety do lesa.
+- **Nouzový kill switch:** umožní vypnout konkrétní workflow, model nebo konektor bez deploye.
+
+Text v produktu může být normální: „Dnešní limit pro AI návrhy je vyčerpaný. Zítra se obnoví, nebo můžete pokračovat ručně. Vaše data nikam neposíláme navíc jen proto, abychom limit obešli.“ Ano, je to delší než „429“. Ale taky méně protivné.
+
+## KO.5 Optimalizuj nejdřív návrh úkolu, potom model
+
+Když je AI funkce drahá, první reakce bývá „vyměníme model za levnější“. Někdy správně. Často je ale levnější model jen náplast na špatně navržený úkol. Pokud posíláš do modelu celou historii workspace, deset dokumentů a instrukci „něco s tím udělej“, problém není ceník. Problém je produktový návrh.
+
+Pořadí optimalizace:
+
+1. Zkrať úkol: rozděl velký neurčitý požadavek na menší konkrétní kroky.
+2. Omez kontext: používej allowlist zdrojů, ne automatické přisypávání všeho, co se našlo.
+3. Cacheuj bezpečné mezivýsledky: například embeddingy, klasifikace veřejných dokumentů nebo šablonové části.
+4. Použij levnější model pro routing, klasifikaci a jednoduché kontroly, dražší jen pro úkoly s reálnou hodnotou.
+5. Nastav stop podmínky: když chybí data, nevolej další model, ale zeptej se uživatele nebo vrať opravitelný stav.
+6. Sleduj odmítnuté výstupy: nejdražší je generace, kterou člověk pravidelně smaže.
+
+Codyho komentář: „Levnější model“ je občas jako menší kýbl pod děravou střechu. Pomůže, ale pořád prší. Nejdřív oprav střechu.
+
+## KO.6 Pricing nesmí slibovat nekonečnou AI magii
+
+Pokud AI funkci zahrneš do tarifu bez limitů, musíš vědět proč. „Unlimited AI“ zní hezky na landing page, ale v malém SaaS často znamená „nevíme, kdo zaplatí účet, až to někdo začne používat“. Férovější je pojmenovat balíčky podle hodnoty a dát jasné limity, které zákazník chápe.
+
+Příklad pro B2B SaaS:
+
+- Tarif Start obsahuje 200 AI návrhů měsíčně pro běžné supportní odpovědi.
+- Tarif Growth obsahuje 1 500 návrhů, vyšší souběh a report využití.
+- Tarif Scale má individuální limit, rozpočtové alerty, vlastní retenční nastavení a možnost schvalovat navýšení.
+- Překročení limitu nejdřív upozorní správce, potom nabídne ruční pokračování nebo dokoupení balíčku.
+
+U enterprise zákazníků přidej administrátorský panel: spotřeba podle funkce, limit podle týmu, export přehledu, upozornění před dosažením limitu a audit změn kvót. Ne proto, aby zákazník kontroloval lidi jako skladové položky, ale aby rozpočet nebyl překvapení.
+
+## KO.7 Checklist nákladové disciplíny AI funkcí
+
+Před spuštěním AI funkce zkontroluj:
+
+- Má funkce jasně popsanou jednotku hodnoty, ne jen technickou cenu za request?
+- Umíš spočítat náklad běžného, horšího a zneužitelného scénáře?
+- Loguješ tokeny, model, prompt verzi, outcome a odhad ceny bez ukládání plného obsahu?
+- Má každý náklad vlastníka: tenant, tarif, funkci nebo interní tým?
+- Existují denní, měsíční, souběžné a nouzové limity?
+- Umí produkt vysvětlit limit lidsky a nabídnout další krok?
+- Máš alert na nákladovou anomálii, ne jen měsíční překvapení na faktuře?
+- Ví pricing, support i sales, co je v tarifu zahrnuté a co už je nadlimit?
+- Existuje kill switch pro drahé workflow, model nebo konektor?
+- Kontroluješ pravidelně odmítnuté a editované výstupy jako signál plýtvání?
+
+## Codyho komentář
+
+AI náklady nejsou jen finanční téma. Jsou to produktové hranice, bezpečnostní brzdy a důvěra zákazníka v jednom balíčku. Privacy-first přístup tady paradoxně pomáhá i byznysu: méně zbytečných dat v kontextu znamená menší riziko, nižší latenci a často nižší účet. Elegantní trojkombinace, skoro podezřelé.
+
+## Zdroje k příloze
+
+- FinOps Framework — principy vlastnictví, dostupných dat, byznys hodnoty a unit economics: https://www.finops.org/framework/
+- FinOps Foundation — Unit Economics Capability: https://www.finops.org/framework/capabilities/unit-economics/
+- OpenTelemetry — Semantic Conventions pro konzistentní telemetry data: https://opentelemetry.io/docs/concepts/semantic-conventions/
+- OWASP Top 10 for LLM Applications — mimo jiné rizika prompt injection, excessive agency a unbounded consumption: https://owasp.org/www-project-top-10-for-large-language-model-applications/
+
+## Shrnutí přílohy
+
+Nákladová disciplína AI funkcí začíná tím, že měříš hodnotu, ne jen tokeny. Privacy-first SaaS má u každého AI requestu znát účel, vlastníka, model, prompt verzi, nákladový odhad a výsledek bez ukládání citlivého obsahu. Limity, kvóty, kill switche, scénářové rozpočty a férový pricing nejsou brzda inovace. Jsou to mantinely, díky kterým AI funkce přežije první skutečné používání bez finančního požáru.
+
+---
+
+
 ## Pracovní log
+
+- 2026-08-19: Přidána příloha KO o nákladové disciplíně AI funkcí: jednotka hodnoty, scénářové rozpočty, metadata bez obsahu promptů, limity, optimalizace úkolu, pricing a checklist.
 - 2026-08-19: Obnoven plný obsah e-booku po poškozeném posledním commitu a přidána příloha KN o AI observabilitě: metadata místo plošných prompt logů, kvalita, alerty, prompt injection, debug režim, retence a checklist.
 
 - 2026-08-19: Přidána příloha KM o human-in-the-loop pro AI v privacy-first SaaS: rozdělení rozhodnutí podle dopadu, smysluplné schvalování, pravomoci schvalovatele, audit bez tajemství, transparentnost AI výstupů, schvalovací fronty, metriky kvality dohledu a checklist.
