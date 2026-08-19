@@ -47199,9 +47199,174 @@ Můj pohled: evaly jsou nejméně sexy část AI produktu a právě proto jsou t
 
 Evaluace AI funkce v privacy-first SaaS má měřit konkrétní produktový úkol, ne abstraktní sílu modelu. Potřebuje zlatou sadu scénářů, vícero hodnoticích os, automatickou regresi, ruční review citlivých případů, testy prompt injection a cizího tenantu, produkční monitoring s minimem dat a dokumentované změny modelů. Kvalita AI není pocit z dema; je to opakovatelná kontrola, která chrání zákazníka, produkt i tým před optimismem s fakturou.
 
+
+---
+
+# Příloha KJ: RAG a znalostní báze pro AI bez cizích tenantů ve výsledcích, starých dokumentů a embeddingového smogu
+
+RAG zní jako elegantní řešení halucinací: vezmeme dokumenty, uložíme je do vektorové databáze, modelu přidáme relevantní kontext a najednou odpovídá podle našich zdrojů. Krásné. Až na tu drobnost, že špatně navržený RAG umí být velmi sofistikovaný způsob, jak modelu doručit špatná, stará, tajná nebo cizí data s razítkem „relevantní“. To je jako najmout knihovníka, který občas omylem půjčuje firemní účetnictví sousedům.
+
+Privacy-first RAG není jen otázka kvality odpovědi. Je to otázka datových hranic: co se smí indexovat, kdo to smí najít, jak dlouho to v indexu žije, jak se řeší změny oprávnění a jestli se do promptu neposílá víc, než uživatel potřebuje pro aktuální úkol. OWASP Top 10 for LLM Applications 2025 zařazuje mezi rizika mimo jiné prompt injection, sensitive information disclosure, system prompt leakage a vector and embedding weaknesses. NIST Generative AI Profile zase připomíná, že generativní AI je potřeba řídit napříč životním cyklem včetně datových zdrojů, bezpečnosti, privacy a měření rizik.
+
+## KJ.1 Nejdřív rozhodni, co do znalostní báze vůbec patří
+
+Ne každý dokument je vhodný pro RAG jen proto, že existuje. Znalostní báze pro AI má být kurátorovaný produktový zdroj, ne vysavač sdíleného disku. Pokud do indexu pošleš všechno, model bude mít přístup k věcem, které člověk sice někde uložil, ale nikdy je neměl používat jako odpověď zákazníkovi.
+
+Rozděl zdroje do kategorií:
+
+- **Veřejné zdroje:** dokumentace, help centrum, changelog, pricing, veřejné FAQ.
+- **Interní provozní zdroje:** runbooky, incidentové postupy, support playbooky, produktové rozhodnutí.
+- **Tenantové zdroje:** data konkrétního zákazníka, jeho dokumenty, nastavení, faktury, zprávy a projekty.
+- **Citlivé zdroje:** bezpečnostní poznámky, právní dokumenty, HR, interní obchodní informace, tajemství a přístupové údaje.
+- **Zakázané zdroje:** surové exporty produkční databáze, chaty bez očištění, osobní schránky, klíče, tokeny, dumpy logů.
+
+Pro každou kategorii napiš pravidlo: kdo ji smí indexovat, kdo ji smí vyhledat, pro jaký účel se používá, jak dlouho se drží a jak se z indexu maže. Pokud pravidlo neumíš napsat, zdroj do RAG nepatří. Codyho vědecká metoda: když je odpověď „nějak se to pak ohlídá“, právě jsi našel budoucí incident.
+
+## KJ.2 Retrieval musí respektovat oprávnění před hledáním i po něm
+
+Nejčastější chyba: aplikace udělá vektorové hledání přes společný index a oprávnění řeší až nad výsledky. To vypadá prakticky, dokud se v logu nebo promptu neobjeví úryvek dokumentu z jiného workspace. U tenantového SaaS má být oprávnění součástí retrieval vrstvy, ne kosmetická kontrola v UI.
+
+Bezpečný vzor:
+
+- Každý chunk má metadata: `tenant_id`, `workspace_id`, `source_id`, `document_version`, `classification`, `allowed_roles`, `retention_until`.
+- Dotaz se spouští s identitou uživatele, tenantem, rolí a účelem.
+- Retrieval filtruje podle oprávnění ještě před výpočtem kandidátů, pokud to databáze umožňuje.
+- Po retrievalu proběhne druhá autorizační kontrola nad každým výsledkem.
+- Prompt builder přijme jen výsledky, které prošly kontrolou těsně před sestavením promptu.
+- Logy ukládají ID zdrojů a rozhodnutí, ne celé citlivé úryvky.
+
+Příklad rozhodovacího pravidla:
+
+```text
+Uživatel může použít chunk v AI odpovědi, pouze pokud:
+- patří do stejného tenant_id,
+- patří do workspace, ke kterému má uživatel přístup,
+- klasifikace dokumentu je povolená pro danou AI funkci,
+- dokument není expirovaný ani označený k odstranění,
+- účel dotazu odpovídá povolenému účelu zdroje.
+```
+
+RAG bez oprávnění je jen rychlejší cesta k úniku dat. Ano, embeddingy vypadají matematicky a nevinně. Ne, matematika ti neodpustí chybějící ACL.
+
+## KJ.3 Chunking není nožík na dokumenty, ale bezpečnostní rozhodnutí
+
+Chunking rozhoduje, jaký kontext se dostane do promptu. Příliš velké chunky tahají do odpovědi zbytečná data. Příliš malé chunky ztrácejí význam a model si domýšlí chybějící souvislosti. Privacy-first kompromis: chunk má být nejmenší jednotka, která dává smysl pro konkrétní úkol.
+
+Praktická pravidla:
+
+- Chunkuj podle struktury dokumentu: nadpis, sekce, FAQ položka, krok runbooku, ne slepě po 1 000 znacích.
+- Ke každému chunku ulož zdroj, verzi, datum platnosti a klasifikaci.
+- Nelep do jednoho chunku veřejnou instrukci a interní poznámku.
+- Citlivé hodnoty nahrazuj odkazem na bezpečný zdroj, ne textem v indexu.
+- U zákaznických dat preferuj referenci na objekt místo kopie celého objektu.
+- U dlouhých dokumentů přidej krátký lidsky kontrolovaný souhrn jen tam, kde je opravdu potřeba.
+
+Špatný chunk:
+
+```text
+Pricing FAQ + interní sleva pro enterprise + poznámka obchodníka + seznam zákazníků, kterým jsme to slíbili.
+```
+
+Dobrý chunk:
+
+```text
+Veřejné FAQ: Jak funguje roční fakturace?
+Zdroj: help/pricing/annual-billing.md
+Klasifikace: public
+Platnost: od 2026-07-01
+Text: Roční fakturaci lze zapnout v nastavení účtu. Sleva se zobrazuje přímo v administraci podle aktuálního tarifu.
+```
+
+## KJ.4 Index musí umět zapomenout
+
+Databáze dokument změnila, uživatel ztratil přístup, zákazník požádal o výmaz, smlouva skončila, stránka byla stažená. Pokud RAG index dál drží staré chunky, produkt lže i poctivě napsané aplikaci. „Smazali jsme to z primární databáze“ nestačí, když embeddingový index dál šeptá minulost modelu do ucha.
+
+Navrhni životní cyklus indexu:
+
+- **Ingest:** zdroj se načte, očistí, klasifikuje a verzovaně rozdělí na chunky.
+- **Aktualizace:** změna zdroje vytvoří novou verzi a starou označí jako neaktivní.
+- **Revoke:** změna oprávnění okamžitě znepřístupní výsledky, i když reindex ještě běží.
+- **Delete:** výmaz zdroje odstraní text, embeddingy i cache odpovědí, kde je to relevantní.
+- **Expire:** dokumenty s platností po datu se automaticky vyřadí z retrievalu.
+- **Audit:** systém umí říct, kdy byl zdroj indexován, použit, deaktivován a smazán.
+
+U tenantových dat je dobré oddělit „není vyhledatelné“ a „fyzicky odstraněno“. První musí nastat okamžitě při změně oprávnění. Druhé může proběhnout asynchronně, ale musí mít stav, termín a kontrolu dokončení.
+
+## KJ.5 Prompt builder má být nudný filtr, ne kreativní kuchař
+
+Model by neměl dostat hromadu výsledků a modlitbu, že si vybere správně. Prompt builder je poslední kontrolní bod před odesláním dat do modelu. Jeho práce je nudná: vybrat povolené chunky, seřadit je, omezit počet, odstranit zbytečné údaje, přidat citace a jasně oddělit instrukce od nedůvěryhodného obsahu.
+
+Dobré pravidlo pro prompt builder:
+
+- Vkládej nejvýš tolik kontextu, kolik je potřeba k odpovědi.
+- Každý vložený chunk označ zdrojem a klasifikací.
+- Nedůvěryhodný obsah dej do jasné datové sekce, ne mezi instrukce.
+- Nepřidávej systémové tajemství, API klíče, interní role ani bezpečnostní pravidla jako „tajný prompt“.
+- Pokud zdroje nestačí, model má říct, že neví, a navrhnout další krok.
+- U citlivých akcí vrať návrh člověku, ne automatické provedení.
+
+Mini šablona odpovědi v aplikaci:
+
+```text
+Odpověď je založena na těchto zdrojích:
+1. Help centrum: Roční fakturace, verze 2026-07-01
+2. Nastavení účtu: tarif a stav fakturace pro aktuální workspace
+
+Nejistota:
+Chybí informace o tom, zda má zákazník individuální smluvní podmínky. Před odesláním ověř v účtu.
+```
+
+Citace nejsou jen akademická estetika. Pomáhají uživateli rychle zkontrolovat, odkud odpověď přišla, a dávají týmu signál, který dokument je špatný, zastaralý nebo chybí.
+
+## KJ.6 Měř kvalitu retrievalu bez ukládání cizích příběhů
+
+RAG se často rozbije potichu: odpověď je plynulá, ale zdroje jsou mimo, staré nebo příliš obecné. Měř proto retrieval zvlášť od generování. Neptej se jen „líbila se odpověď“, ale „našel systém správné zdroje pro správného uživatele“.
+
+Metriky, které dávají smysl:
+
+- podíl odpovědí se zdrojem,
+- podíl odpovědí, kde uživatel otevřel citovaný zdroj,
+- počet „nevím“ odpovědí u dotazů, které měly mít zdroj,
+- počet výsledků vyřazených autorizační kontrolou,
+- počet použití expirovaného nebo deaktivovaného zdroje,
+- ruční hodnocení top výsledků na zlaté sadě scénářů.
+
+Privacy-first měření: ukládej normalizovaný typ dotazu, ID zdrojů, skóre a rozhodnutí, ne celé zákaznické texty. Pokud potřebuješ ladit konkrétní problém, udělej krátkodobý debug režim se souhlasem, retencí a maskováním dat. Trvalé ukládání promptů „pro zlepšování produktu“ je často jen datový sklep s hezčí cedulkou.
+
+## KJ.7 Checklist privacy-first RAG
+
+- Máme katalog zdrojů a víme, které do RAG nepatří.
+- Každý chunk má tenant, workspace, zdroj, verzi, klasifikaci, platnost a oprávnění.
+- Retrieval filtruje výsledky podle oprávnění před hledáním i po něm.
+- Prompt builder posílá jen minimální povolený kontext pro aktuální úkol.
+- Chunking nelepí veřejné, interní a citlivé informace do jedné jednotky.
+- Index umí okamžitě znepřístupnit zdroje při změně oprávnění.
+- Výmaz řeší text, embeddingy, cache i odvozené souhrny.
+- Odpovědi uvádějí zdroje nebo jasně přiznají nejistotu.
+- Logy obsahují ID a rozhodnutí, ne celé citlivé prompty.
+- Zlatá sada testuje cizí tenant, starý dokument, prompt injection v dokumentu a chybějící zdroj.
+
+## Codyho komentář
+
+RAG není lék na halucinace. Je to potrubí na kontext. A jako každé potrubí občas teče, pokud ho někdo postaví z dobrých úmyslů, jednoho demo skriptu a věty „vektorovka to nějak najde“. Nejlepší RAG systémy nejsou ty, které najdou nejvíc textu. Jsou to ty, které najdou správný text pro správného člověka, ve správný okamžik, a zbytek nechají za dveřmi.
+
+## Zdroje k příloze
+
+- OWASP GenAI Security Project: Top 10 for LLM Applications 2025, včetně prompt injection, sensitive information disclosure, system prompt leakage a vector and embedding weaknesses: https://genai.owasp.org/llm-top-10/
+- OWASP Foundation: Top 10 for Large Language Model Applications a přehled aktuálního projektu: https://owasp.org/www-project-top-10-for-large-language-model-applications/
+- OWASP Cheat Sheet Series: LLM Prompt Injection Prevention Cheat Sheet, doporučení k oddělení instrukcí od nedůvěryhodných dat a obraně proti prompt injection: https://cheatsheetseries.owasp.org/cheatsheets/LLM_Prompt_Injection_Prevention_Cheat_Sheet.html
+- NIST: Artificial Intelligence Risk Management Framework, oficiální zdroje k AI RMF: https://www.nist.gov/itl/ai-risk-management-framework
+- NIST: Artificial Intelligence Risk Management Framework: Generative Artificial Intelligence Profile, NIST AI 600-1, publikováno 26. července 2024: https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence
+
+## Shrnutí přílohy
+
+Privacy-first RAG musí být navržený jako datový a bezpečnostní systém, ne jako vektorová hračka přilepená k chatu. Začíná katalogem zdrojů, pokračuje tenantově bezpečným retrieval filtrem, rozumným chunkingem, životním cyklem indexu, nudným prompt builderem a měřením kvality bez ukládání citlivých promptů. Cílem není nacpat modelu maximum kontextu, ale dodat jen povolený a aktuální kontext, který uživateli pomůže bez toho, aby produkt omylem prodával sousedova data jako odpověď.
+
 ---
 
 ## Pracovní log
+
+- 2026-08-19: Přidána příloha KJ o privacy-first RAG a znalostních bázích pro AI: katalog zdrojů, oprávnění při retrievalu, bezpečný chunking, zapomínání indexu, prompt builder, měření kvality bez ukládání citlivých promptů a checklist.
 
 - 2026-08-19: Přidána příloha KI o evaluacích AI funkcí v privacy-first SaaS: evaluační kontrakt, zlatá sada scénářů, víceosé hodnocení, regresní brány, škodlivé vstupy, produkční monitoring s minimem dat, dokumentace změn modelů a checklist.
 
