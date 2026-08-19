@@ -45853,7 +45853,153 @@ Audit log je jedna z těch věcí, které nikdo nechce navrhovat, dokud ho zoufa
 Bezpečnostní audit log má odpovědět na otázku, kdo udělal důležitou akci, čeho se týkala, kdy proběhla a s jakým výsledkem. Neřeší každý klik, nekopíruje zákaznická data a neslouží jako skládka payloadů. Privacy-first SaaS má audit log navržený jako stabilní, minimální, chráněný a zákazníkovi srozumitelný systém důvěry.
 
 
+# Příloha KB: Support access a administrátorské zásahy bez tichého koukání do zákaznických účtů
+
+Supportní přístup je citlivá schopnost produktu. Na jednu stranu umí zachránit zákazníka, který se zasekl v nastavení, rozbil integraci nebo potřebuje rychle vyřešit incident. Na druhou stranu je to jedna z největších interních bran k datům, pokud se navrhne jako „admin může všechno, protože mu věříme“. Důvěra je hezká věc, ale v bezpečnostním návrhu je lepší ji podložit omezením, auditovatelností a krátkou životností. Jinak z toho vznikne digitální univerzální klíč od všech bytů v domě. Praktické? Ano. Rozumné? Ani trochu.
+
+OWASP Authorization Cheat Sheet doporučuje princip deny-by-default, nejmenších oprávnění a kontrolu autorizace u každého požadavku: https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html. OWASP Logging Cheat Sheet zase připomíná, že bezpečnostní logování má zachytit relevantní události bez ukládání zbytečně citlivého obsahu: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html. Pro evropský privacy-first SaaS se k tomu přidává ještě GDPR princip minimalizace dat, účelového omezení a odpovědnosti správce: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng.
+
+## KB.1 Nejdřív rozděl typy supportního přístupu
+
+Ne každý problém vyžaduje stejné oprávnění. Pokud support potřebuje zkontrolovat stav faktury, nemá kvůli tomu vidět zákaznické dokumenty. Pokud technik ladí selhávající webhook, nepotřebuje editovat členy týmu. A pokud někdo řeší incident, potřebuje zvláštní režim s jasným důvodem, schválením a následnou kontrolou.
+
+Praktické vrstvy supportního přístupu:
+
+| Režim | Kdy se používá | Co smí | Co nesmí |
+| --- | --- | --- | --- |
+| Metadata only | běžná podpora | vidět stav účtu, tarif, technické stavy, počty | číst obsah zákaznických dat |
+| Read-only support | diagnostika konkrétního problému | zobrazit omezený kontext potřebný k řešení ticketu | měnit data, exportovat vše, obcházet role |
+| Delegovaný přístup | zákazník výslovně povolí pomoc | pracovat v rozsahu a čase povoleném zákazníkem | pokračovat po expiraci, dělat jiné akce |
+| Break-glass | incident nebo blokující provozní stav | dočasný silně auditovaný zásah | běžné používání bez schválení |
+| Interní admin | správa platformy | spravovat systémové objekty | vstupovat do zákaznického obsahu bez režimu výše |
+
+Tohle rozdělení zabraňuje typické lenosti: jeden superadmin panel pro všechno. Superadmin panel je lákavý, protože se rychle vyvíjí. Jenže přesně proto se z něj později stane nejrizikovější obrazovka v celé firmě.
+
+## KB.2 Výchozí režim má být metadata-first
+
+Nejužitečnější supportní UI často nemusí ukazovat samotná zákaznická data. Potřebuje ukázat stav systému: jestli integrace běží, kdy naposledy dorazil webhook, jaký error code vrátil import, jestli e-mail odešel, zda je účet blokovaný limitem, kdo má roli vlastníka a jaká je poslední auditovaná změna.
+
+Dobré metadata-first prvky:
+
+- stav účtu, tarifu, trialu, kvót a posledních billingových změn,
+- health check integrací bez zobrazování celého payloadu,
+- počty objektů, poslední aktualizace a stav fronty,
+- poslední bezpečnostně relevantní audit eventy,
+- bezpečně zkrácené identifikátory požadavků, jobů a webhooků,
+- tlačítko „požádat zákazníka o přístup“ místo přímého vstupu do účtu.
+
+Příklad u importu CSV: support nepotřebuje vidět celý soubor. Často stačí název importu, čas, stav, počet řádků, počet chyb, typ chyby, odkaz na zákazníkem viditelný report a `request_id`. Pokud chyba říká „sloupec `email` chybí“, není potřeba ukládat ani ukazovat všechny e-maily z importu. Diagnostika ano, datová hostina ne.
+
+## KB.3 Delegovaný přístup musí být viditelný zákazníkovi
+
+Když support vstupuje do zákaznického prostoru, zákazník by to měl vědět. Ideální model je delegovaný přístup: zákazník v administraci zapne pomoc, zvolí rozsah, časovou platnost a případně konkrétní ticket. Support pak neobchází oprávnění; používá dočasné povolení, které má jasný účel.
+
+Minimální návrh delegovaného přístupu:
+
+- zákazník vidí, kdo o přístup žádá a proč,
+- přístup má expiraci, například 1 hodinu, 24 hodin nebo do uzavření ticketu,
+- rozsah je omezený na konkrétní workspace, modul nebo typ akce,
+- zákazník může přístup kdykoliv zrušit,
+- všechny akce jsou v zákaznickém audit logu,
+- UI viditelně označuje, že support pracuje v cizím prostoru.
+
+Text v produktu může být jednoduchý:
+
+> „Support Dreamindu žádá o dočasný read-only přístup k nastavení integrace kvůli ticketu #1842. Přístup vyprší za 24 hodin a můžete ho kdykoliv zrušit.“
+
+Tohle je mnohem lepší než interní magie ve stylu „my vám tam mrkneme“. Privacy-first značka nesmí stavět důvěru na neviditelných zkratkách.
+
+## KB.4 Break-glass režim není tajná zadní vrátka
+
+Break-glass je nouzový režim pro situace, kdy zákazník nemůže přístup schválit a zásah je nutný kvůli bezpečnosti, dostupnosti nebo ochraně dat. Typicky: incident, kompromitovaný účet, rozbitá produkční migrace, zacyklený job ničící data nebo účet vlastníka, ke kterému se nikdo nedostane.
+
+Pravidla pro break-glass:
+
+- vyžaduj důvod, odkaz na incident nebo ticket a krátký popis plánované akce,
+- omez délku přístupu na minimum, třeba 15 nebo 60 minut,
+- odděl schvalovatele od člověka, který zásah provádí, pokud velikost týmu dovolí,
+- po skončení automaticky odeber oprávnění,
+- pošli interní upozornění a vytvoř audit event,
+- při citlivém zásahu připrav zákaznické vysvětlení nebo incident update.
+
+Break-glass by měl být nepohodlný záměrně. Ne tak nepohodlný, aby lidé hledali obchvat, ale dost nepohodlný na to, aby ho nikdo nepoužíval pro běžnou podporu. Pokud se break-glass používá každý týden, není to nouzový režim. Je to špatně navržený supportní proces s dramatickým názvem.
+
+## KB.5 Impersonace je poslední možnost, ne výchozí UX
+
+„Přihlásit se jako zákazník“ je silná funkce a měla by být poslední možnost. Lepší jsou bezpečnější alternativy: reprodukční sandbox se syntetickými daty, read-only diagnostika, sdílený debug report, zákazníkem nahraný screenshot bez citlivých údajů nebo dočasné sdílení konkrétní obrazovky.
+
+Pokud impersonaci opravdu potřebuješ, nastav tvrdá pravidla:
+
+- support nemůže vidět hesla, tokeny, recovery kódy ani celé tajné hodnoty,
+- akce provedené supportem se zapisují jako supportní aktér, ne jako zákazník,
+- zákazník v audit logu vidí, že akci provedl support v delegovaném režimu,
+- nebezpečné akce vyžadují další potvrzení nebo jsou zakázané,
+- session je krátká a nelze ji prodlužovat donekonečna,
+- impersonace nejde spustit bez důvodu a vazby na ticket.
+
+Špatný audit event: `user.deleted_project`. Lepší audit event: `support_session.project_deleted`, kde metadata ukazují supportního aktéra, zákaznický workspace, důvod, ticket a bezpečný identifikátor projektu. Zákazník nesmí později slyšet „vypadá to, že jste to smazali vy“, když to ve skutečnosti udělal někdo z týmu dodavatele.
+
+## KB.6 Supportní poznámky nesmí být druhá databáze zákaznických tajemství
+
+Support často uniká privacy-first návrhu bokem: lidé ručně kopírují chyby, e-maily, výřezy logů, screenshoty, části payloadů a „pro jistotu“ celé zprávy do ticketovacího systému. Pak se řeší produktová databáze, ale nejcitlivější bordel žije v poznámkách. Krásná ukázka toho, že chaos je multi-cloud i bez strategie.
+
+Pravidla pro supportní poznámky:
+
+- nikdy nekopíruj hesla, tokeny, session ID, celé webhook payloady ani osobní dokumenty,
+- používej interní odkazy na objekty místo kopírování obsahu,
+- u screenshotů začerňuj osobní údaje a zákaznický obsah,
+- poznámky strukturovaně odděl: problém, dopad, kroky, výsledek, navazující úkol,
+- nastav retenci ticketů podle účelu, ne podle toho, že nástroj umí archiv navždy,
+- citlivější přílohy maž po vyřešení nebo přesouvej do řízeného úložiště s expirací.
+
+U AI asistenta ve supportu platí totéž ještě silněji. Shrnutí ticketu je užitečné, ale prompt nemá obsahovat víc zákaznických dat, než je nutné. Pokud lze pracovat s anonymizovaným popisem a error kódem, neposílej do modelu celý export zákazníka. Codyho suchá poznámka: „AI mi to hezky shrne“ není právní základ ani bezpečnostní strategie.
+
+## KB.7 Kontroluj support access pravidelně
+
+Supportní přístup není jednorázová implementace. Je to provozní rutina. Jakmile firma roste, mění se lidé, role, procesy, dodavatelé i zákaznické požadavky. Co bylo bezpečné pro tři zakladatele, nemusí být bezpečné pro třicet lidí a externí podporu.
+
+Měsíční kontrola:
+
+- kdo má supportní, admin nebo break-glass oprávnění,
+- které přístupy nebyly použité a mají se odebrat,
+- kolik delegovaných přístupů bylo aktivováno a proč,
+- jestli existují break-glass zásahy bez následného review,
+- zda audit log ukazuje dost detailu bez citlivého obsahu,
+- jestli ticketovací systém neobsahuje zbytečné osobní údaje,
+- jestli supportní dokumentace odpovídá aktuálnímu produktu.
+
+U větších B2B zákazníků může být dobré nabídnout export audit logu supportních zásahů. Ne jako PDF divadlo jednou za rok, ale jako normální produktovou funkci: filtr podle období, aktéra, důvodu a typu akce.
+
+## KB.8 Checklist supportního přístupu
+
+- Máme oddělený metadata-only, read-only, delegovaný a break-glass režim?
+- Umí support vyřešit většinu ticketů bez čtení zákaznického obsahu?
+- Vidí zákazník, kdy support žádá o přístup, co uvidí a kdy přístup vyprší?
+- Logujeme supportní akce jako supportní akce, ne jako běžnou aktivitu zákazníka?
+- Má break-glass důvod, expiraci, schválení a následné review?
+- Jsou nebezpečné akce při impersonaci zakázané nebo dodatečně potvrzované?
+- Nekopírujeme citlivá data do ticketů, poznámek, screenshotů a AI promptů?
+- Máme retenční pravidla pro supportní přílohy a diagnostické exporty?
+- Probíhá pravidelný access review lidí, kteří mají supportní oprávnění?
+- Umíme zákazníkovi srozumitelně vysvětlit, kdo k jeho účtu přistoupil a proč?
+
+## Codyho komentář
+
+Support access je test dospělosti SaaS produktu. Začátečnický systém říká: „Admini můžou všechno, protože jsme hodní.“ Dospělý systém říká: „I hodní lidé dostanou jen takový přístup, který potřebují, na omezený čas a s auditní stopou.“ Můj pohled: nejlepší supportní přístup je ten, který zákazník chápe, může kontrolovat a nemusí se ho bát.
+
+## Zdroje k příloze
+
+- OWASP Authorization Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html
+- OWASP Logging Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+- Nařízení GDPR, oficiální text EUR-Lex: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
+
+## Shrnutí přílohy
+
+Supportní přístup má pomáhat zákazníkům, ne otevírat tichou servisní chodbu do jejich dat. Privacy-first SaaS rozlišuje metadata, read-only diagnostiku, delegovaný přístup a break-glass režim. Každý zásah má účel, rozsah, expiraci a auditní stopu. Supportní poznámky, screenshoty a AI shrnutí se řídí stejným datovým minimem jako produkt samotný.
+
+
 ## Pracovní log
+- 2026-08-19: Přidána příloha KB o support access a administrátorských zásazích: metadata-first diagnostika, delegovaný přístup, break-glass, impersonace, bezpečné supportní poznámky, pravidelné access review a privacy-first checklist.
 - 2026-08-19: Přidána příloha KA o bezpečnostním audit logu pro SaaS: účel logování, stabilní event model, zákaz citlivých dat, zákaznické UI, integrita, retence, přístupy a checklist.
 - 2026-08-19: Přidána příloha JZ o usage meteringu a spotřebním účtování v SaaS: definice měřených jednotek, minimální metering eventy, idempotence, korekce, zákaznický usage dashboard, oddělení billingu od analytiky a privacy-first checklist.
 - 2026-08-19: Přidána příloha JY o entitlementech a produktových nárocích v SaaS: oddělení tarifů, oprávnění, kvót, výjimek a feature flagů, katalog nároků, auditované výjimky, viditelné limity, backendové vynucení, testovací matice a privacy-first checklist.
