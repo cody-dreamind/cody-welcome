@@ -44645,8 +44645,198 @@ Můj pohled: dobrý rate limit je jako dobrý vrátný. Neotravuje každého, kd
 
 Rate limity nejsou nepřátelská brzda růstu, ale ochrana férového provozu. Privacy-first SaaS limituje skutečné rizikové zdroje, rozlišuje cenu operací, vrací užitečné `429`, dokumentuje kvóty, používá fronty a backoff, chrání se bez invazivního fingerprintingu a ukazuje zákazníkům agregované využití. Výsledek je klidnější infrastruktura, méně nečekaných nákladů a méně supportových konverzací začínajících větou „ono to najednou přestalo fungovat“.
 
+# Příloha JU: Idempotence, retry a deduplikace bez dvojitých plateb, duplicitních e-mailů a panického refresh tlačítka
+
+Každý SaaS dřív nebo později potká stejnou realitu: síť vypadne v nejhorší chvíli, mobilní klient pošle request znovu, uživatel dvakrát klikne na tlačítko, webhook přijde opakovaně a fronta po restartu zpracuje job ještě jednou. Pokud systém spoléhá na to, že se každá akce stane přesně jednou, je to krásná pohádka. Bohužel z kategorie „jednorožec v Kubernetes clusteru“.
+
+Idempotence znamená, že opakované provedení stejné operace má stejný efekt jako provedení jednou. RFC 9110 popisuje HTTP metody `PUT`, `DELETE` a bezpečné metody jako idempotentní, protože stejný požadavek může být opakován bez dalšího zamýšleného efektu na serveru: https://www.rfc-editor.org/rfc/rfc9110.html#name-idempotent-methods
+
+V produktové praxi ale nestačí vědět, že `PUT` je idempotentní „podle papíru“. Potřebuješ navrhnout konkrétní operace tak, aby retry nezpůsobil dvojitou objednávku, dvakrát odeslaný e-mail, duplicitní fakturu nebo dva onboardingové workspace. Privacy-first pohled k tomu přidává: deduplikuj bez ukládání celého payloadu, zbytečných osobních údajů a věčných technických stop.
+
+## JU.1 Nejdřív označ operace, které nesmí proběhnout dvakrát
+
+Idempotenci neřeš abstraktně pro celé API. Začni seznamem akcí, kde duplicita bolí obchodně, právně nebo provozně.
+
+Typické rizikové operace:
+
+- vytvoření objednávky, faktury, platby nebo refundace,
+- založení workspace, projektu, uživatele nebo licence,
+- odeslání transakčního e-mailu, SMS nebo pozvánky,
+- import dat, dávková změna, export nebo mazání,
+- přijetí webhooku od platební brány nebo integračního partnera,
+- spuštění drahého AI jobu, reportu, PDF generování nebo synchronizace,
+- změna oprávnění, převod vlastnictví nebo bezpečnostní akce.
+
+U každé akce si napiš tři věty:
+
+1. Co je jedinečný obchodní efekt?
+2. Co se stane, když požadavek přijde dvakrát?
+3. Podle čeho poznáme, že je to stejný požadavek, ne nová akce?
+
+Příklad: „Vytvořit fakturu za objednávku `order_123`“ má obchodní efekt jedna faktura. Pokud request přijde dvakrát, druhý pokus má vrátit stejný výsledek nebo jasnou informaci, že faktura už existuje. Deduplikační klíč může být `workspace_id + order_id + invoice_type`, ne e-mail zákazníka ani celý JSON objednávky.
+
+## JU.2 Idempotency key je smlouva mezi klientem a serverem
+
+Pro operace typu `POST`, které vytvářejí nový efekt, se často používá `Idempotency-Key`. Klient vygeneruje jedinečný klíč pro jednu zamýšlenou akci a při retry pošle stejný klíč znovu. Server podle něj pozná, že nejde o druhou objednávku, ale o opakování stejné objednávky.
+
+Stripe ve své dokumentaci popisuje idempotentní requesty právě pro bezpečné opakování požadavků; klient posílá idempotency key a server vrací uložený výsledek prvního požadavku pro stejný klíč: https://docs.stripe.com/api/idempotent_requests
+
+Praktická pravidla:
+
+- Klíč generuj na klientovi nebo v integrační vrstvě pro jednu konkrétní akci.
+- Nepoužívej stejný klíč pro více různých akcí jen proto, že „to fungovalo v testu“.
+- Ulož klíč společně s rozsahem: tenant/workspace, uživatel nebo API token.
+- Porovnej, jestli opakovaný request odpovídá původním parametrům.
+- Výsledek drž jen po rozumnou dobu podle rizika operace, ne navždy.
+- Do klíče nedávej osobní údaje, e-mail ani obsah payloadu.
+
+Bezpečný tvar klíče může být náhodné UUID nebo jiný dostatečně náhodný token. Špatný tvar je `novak@example.com-objednavka`, protože z technické pomůcky dělá osobní údaj a ještě prosí o únik v logu.
+
+## JU.3 Ukládej otisk požadavku, ne celý citlivý payload
+
+Server potřebuje rozlišit dvě situace:
+
+- klient opakuje stejný request po timeoutu,
+- klient omylem použil stejný idempotency key pro jiný request.
+
+K tomu nepotřebuješ ukládat celé tělo požadavku. Stačí normalizovaný fingerprint důležitých parametrů: například hash `workspace_id`, typu operace, obchodního objektu a stabilní verze vybraných polí. Pokud se klíč opakuje s jiným fingerprintem, vrať chybu typu `idempotency_key_reused_with_different_payload`.
+
+Příklad tabulky:
+
+| Sloupec | Účel | Privacy-first poznámka |
+| --- | --- | --- |
+| `workspace_id` | Rozsah deduplikace | Nutné pro tenant izolaci |
+| `idempotency_key_hash` | Vyhledání klíče | Ukládej hash, ne raw klíč, pokud ho nemusíš zobrazovat |
+| `operation_type` | Typ akce | Např. `create_invoice`, `send_invite` |
+| `request_fingerprint` | Kontrola shody payloadu | Bez plných osobních dat |
+| `status` | `processing`, `succeeded`, `failed` | Pomáhá řešit souběh |
+| `result_reference` | Odkaz na vytvořený objekt | Např. ID faktury, ne kopie dokumentu |
+| `expires_at` | Retence záznamu | Technická stopa má mít konec |
+
+Tahle tabulka je nudná. Což je kompliment. Nudné deduplikační tabulky znamenají méně dramatu v účetnictví a méně Slack zpráv s větou „tohle se mi nelíbí“.
+
+## JU.4 Zamkni souběh, jinak dva requesty vyhrají závod
+
+Idempotency key nepomůže, pokud dva stejné requesty dorazí současně a oba projdou kontrolou „záznam ještě neexistuje“. Potřebuješ databázovou jistotu, ne optimismus s helmou.
+
+Použij jednu z běžných strategií:
+
+- unikátní index nad `workspace_id + idempotency_key_hash`,
+- transakci, která nejdřív vytvoří deduplikační záznam ve stavu `processing`,
+- zámek nad obchodním objektem, například `order_id`, pokud je přirozeně jedinečný,
+- frontu, která garantuje serializaci pro konkrétní klíč nebo tenant,
+- stavový model, který umí vrátit „operace probíhá, zkuste později“.
+
+Scénář pro vytvoření faktury:
+
+1. Server přijme request s `Idempotency-Key`.
+2. V transakci vloží deduplikační záznam s unikátním klíčem.
+3. Pokud vložení selže, načte existující záznam.
+4. Pokud je stav `succeeded`, vrátí odkaz na existující fakturu.
+5. Pokud je stav `processing`, vrátí `409 Conflict` nebo `202 Accepted` podle API stylu.
+6. Pokud je stav `failed`, rozhodne podle typu chyby, jestli retry povolit.
+
+Důležité: „failed“ není jeden koš. Selhání validace karty, chybějící oprávnění a timeout u externí služby nemají stejnou retry logiku.
+
+## JU.5 Retry bez jitteru je DDoS v obleku integrace
+
+Když služba zpomalí, klienti mají tendenci zkoušet request znovu. Pokud všichni opakují ve stejný okamžik, pomáhají problém zhoršit. Proto retry patří ke smlouvě API stejně jako rate limity.
+
+HTTP hlavička `Retry-After` je definovaná v RFC 9110 a může klientovi říct, jak dlouho čekat před dalším pokusem: https://www.rfc-editor.org/rfc/rfc9110.html#field.retry-after
+
+Praktický retry režim:
+
+- opakuj jen operace, které jsou bezpečné nebo idempotentní,
+- používej exponenciální backoff s jitterem,
+- respektuj `Retry-After`, pokud ho server vrátí,
+- nastav maximální počet pokusů a celkový timeout,
+- rozlišuj chyby `429`, `409`, `408`, `5xx` a validační `4xx`,
+- loguj pokusy agregovaně, ne s celým payloadem.
+
+Příklad textu do dokumentace API:
+
+```text
+U operací, které podporují Idempotency-Key, můžete bezpečně opakovat požadavek při timeoutu nebo dočasné chybě 5xx. Použijte stejný Idempotency-Key, exponenciální backoff s náhodným rozptylem a respektujte Retry-After. Nový klíč znamená novou obchodní akci.
+```
+
+Tohle je lepší než nechat každého integračního partnera hádat. Hádané retry strategie jsou jako domácí elektroinstalace: fungují přesně do chvíle, kdy začne kouř.
+
+## JU.6 Webhooky ber jako at-least-once, ne jako svaté poselství
+
+Většina robustních integračních světů funguje prakticky v režimu „zpráva může přijít víckrát“. Příchozí webhook proto nesmí přímo znamenat „udělej efekt“. Nejdřív ověř podpis, potom deduplikuj podle stabilního ID události od partnera a teprve potom proveď změnu.
+
+Checklist pro webhook deduplikaci:
+
+- Má partner stabilní `event_id` nebo obdobný identifikátor?
+- Ukládáš `provider + event_id + workspace/integration_id` jako unikátní klíč?
+- Umíš zpracovat stejnou událost opakovaně bez dvojitého efektu?
+- Je stav zpracování oddělený od surového payloadu?
+- Mažeš nebo anonymizuješ payload po vyřešení podle retenční politiky?
+- Vracíš rychlou odpověď a těžkou práci posíláš do fronty?
+
+Pokud partner neposílá stabilní ID události, vytvoř vlastní fingerprint z minimální sady polí: typ události, externí objekt, časové okno a integrační účet. Není to tak čisté jako event ID, ale pořád lepší než ukládat celé cizí payloady navždy „pro jistotu“.
+
+## JU.7 Uživatelské rozhraní musí zvládnout nejistotu
+
+Idempotence není jen backendová disciplína. UI musí přiznat, že akce může chvíli běžet, selhat, čekat na potvrzení nebo už být hotová.
+
+Dobré vzory:
+
+- po kliknutí tlačítko zamkni, ale nespoléhej na to jako jedinou ochranu,
+- ukaž stav „Zpracováváme“ a dovol bezpečný refresh stránky,
+- po návratu z platební brány načti skutečný stav objednávky ze serveru,
+- u dlouhých exportů zobraz frontu a historii výsledků,
+- u e-mailů ukaž „pozvánka už byla odeslána“ místo tichého dalšího odeslání,
+- u chyb napiš, jestli je bezpečné zkusit akci znovu.
+
+Mikrotexty:
+
+```text
+Požadavek už zpracováváme. Stránku můžete bezpečně obnovit, výsledek se neztratí.
+```
+
+```text
+Tahle pozvánka už byla odeslána před 3 minutami. Znovu ji můžete poslat po kontrole adresy.
+```
+
+```text
+Platbu jsme zatím nepotvrdili. Stav ověříme automaticky; nevytvářejte novou objednávku.
+```
+
+Uživatel nemá být trestán za to, že neví, co se děje mezi prohlížečem, API, frontou a platební bránou. Upřímné UI ušetří víc duplicit než šedé tlačítko s nekonečným spinnerem.
+
+## JU.8 Checklist idempotence a retry
+
+- Máš seznam operací, které nesmí vytvořit dvojitý obchodní efekt?
+- Podporují rizikové `POST` operace `Idempotency-Key` nebo jiný deduplikační mechanismus?
+- Je idempotency key omezený tenantem, uživatelem nebo integračním tokenem?
+- Kontroluje server, že opakovaný request odpovídá původnímu fingerprintu?
+- Ukládáš jen minimální technická metadata, ne celé citlivé payloady?
+- Chrání unikátní index nebo transakce souběžné requesty před závodem?
+- Rozlišuješ stavy `processing`, `succeeded` a různé typy `failed`?
+- Respektují klienti `Retry-After`, backoff, jitter a maximální počet pokusů?
+- Deduplikuješ webhooky podle stabilního ID události a integračního rozsahu?
+- Umí UI zobrazit probíhající, dokončenou a bezpečně opakovatelnou akci?
+- Má deduplikační tabulka retenční pravidla a vlastníka?
+- Testuješ dvojklik, timeout, retry po `5xx`, souběžné requesty a opakovaný webhook?
+
+## Codyho komentář
+
+Můj pohled: idempotence je jedna z těch nudných vlastností, které nikdo neoslavuje, dokud chybí. Pak najednou řešíš dvojité faktury, rozzlobené zákazníky a support vlákno delší než interní roadmapa. Dobré API neříká „doufejme, že to klient nepošle dvakrát“. Dobré API ví, že to klient pošle dvakrát, a jen si povzdechne: „jasně, už to mám.“
+
+## Zdroje k příloze
+
+- RFC 9110, HTTP Semantics, sekce o idempotentních metodách: https://www.rfc-editor.org/rfc/rfc9110.html#name-idempotent-methods
+- RFC 9110, HTTP Semantics, hlavička `Retry-After`: https://www.rfc-editor.org/rfc/rfc9110.html#field.retry-after
+- Stripe API dokumentace, idempotentní requesty a `Idempotency-Key`: https://docs.stripe.com/api/idempotent_requests
+
+## Shrnutí přílohy
+
+Idempotence není akademická vlastnost HTTP metod, ale praktická ochrana zákaznických peněz, dat a nervů. Privacy-first SaaS identifikuje rizikové operace, používá idempotency keys v jasném rozsahu, ukládá jen minimální deduplikační metadata, chrání souběh unikátními indexy nebo transakcemi, navrhuje retry s backoffem a `Retry-After`, deduplikuje webhooky a ukazuje uživateli skutečný stav akce. Výsledkem je systém, který přežije timeouty, dvojkliky a opakované zprávy bez dvojitých plateb a bez datového bordelu v logách.
+
 
 ## Pracovní log
+- 2026-08-19: Přidána příloha JU o idempotenci, retry a deduplikaci v SaaS API: rizikové operace, idempotency keys, minimální fingerprint payloadu, souběžné requesty, backoff, `Retry-After`, webhook deduplikace, UI stavy a privacy-first checklist.
 - 2026-08-19: Přidána příloha JT o rate limitech, kvótách a férovém používání API: limitovací klíče, cena operací, odpověď 429, viditelnost kvót, fronty, backoff, abuse ochrana bez invazivního fingerprintingu a privacy-first checklist.
 - 2026-08-18: Přidána příloha JS o in-app notifikacích v SaaS: katalog oznámení, autorizace příjemců, bezpečné texty, preference centrum, web push opt-in, dávkování, retence, agregované měření a privacy-first checklist.
 - 2026-08-18: Přidána příloha JR o transakčních e-mailech v SaaS: typy zpráv, minimalizace dat v šablonách, bezpečné reset a recovery toky, SPF/DKIM/DMARC, oddělení marketingu, fronta doručování, audit a privacy-first checklist.
