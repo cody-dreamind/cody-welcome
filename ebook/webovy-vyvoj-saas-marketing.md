@@ -45530,7 +45530,159 @@ Můj pohled: entitlements jsou místo, kde se SaaS potká s realitou peněz. A r
 Entitlements převádějí ceník, smlouvy a produktová pravidla do bezpečně vynuceného systému. Malý SaaS tým potřebuje katalog nároků, oddělení tarifů od oprávnění, auditované výjimky, viditelné limity, backendové vynucení a testy kombinací rolí, workspace, kvót a stavů účtu. Privacy-first přístup z entitlementů dělá férový provozní kontrakt: zákazník ví, co má, systém ví, proč to povoluje, a produkt nesbírá zbytečná data jen proto, aby mohl rozhodovat o přístupu.
 
 
+# Příloha JZ: Usage metering a spotřební účtování bez šmírovacího taxametru, fakturační paniky a datového syslení
+
+Usage metering je měření spotřeby produktu: počet API volání, exportů, odeslaných e-mailů, uložených dokumentů, zpracovaných minut, sedadel, projektů, AI požadavků nebo jiných jednotek, podle kterých se rozhoduje o limitech, férovém používání a někdy i fakturaci. Vypadá to jako čistě finanční disciplína. Jenže v SaaS je metering zároveň produktová, technická, supportní a privacy disciplína.
+
+Špatně navržený metering umí vyrobit tři druhy bolesti najednou: zákazník nerozumí účtu, support neumí vysvětlit čísla a systém ukládá zbytečně detailní stopu o chování lidí. To je kombinace, která voní po eskalaci, ručním dobropisu a nervózním „kdo to sakra navrhl“. Správný metering má být přesný tam, kde rozhoduje o penězích, ale střídmý tam, kde by se z něj stal sledovací nástroj.
+
+Privacy-first pravidlo zní jednoduše: měř jednotku, kterou opravdu potřebuješ pro produktové rozhodnutí nebo vyúčtování, ne celý životopis uživatele okolo ní.
+
+## JZ.1 Nejdřív definuj měřenou jednotku
+
+Metering se nemá začít databázovou tabulkou. Má začít větou, kterou pochopí zákazník i účetní. Pokud neumíš jednotku vysvětlit lidsky, budeš ji později vysvětlovat v support ticketu. A tam už bývá atmosféra méně poetická.
+
+Dobrá karta měřené jednotky:
+
+```text
+key: documents.processed
+customer_label: Zpracované dokumenty
+unit: document
+counts_when: Dokument úspěšně projde validací a je zařazen do zpracování.
+does_not_count_when: Upload selže, dokument je duplicitní, zákazník ho smaže před zpracováním.
+billing_impact: Ano, měsíční spotřeba nad zahrnutý balíček.
+privacy_note: Neukládáme obsah dokumentu do metering události, jen technické ID workspace a počet.
+visible_to_customer: Ano
+reconciliation_owner: billing-ops
+review_cycle: quarterly
+```
+
+Největší pasti jsou nejasné hranice: počítá se pokus, dokončení, retry, chyba, importovaný řádek, nebo jen úspěšný výsledek? Když to není definované dopředu, každý bug report se mění v malý soudní proces. Zákazník tvrdí, že nic nevyužil. Systém tvrdí, že ano. Support hledá pravdu v logách. Vývojář si vaří třetí kávu.
+
+Praktické otázky před zavedením metriky:
+
+- Jakou zákaznickou hodnotu jednotka reprezentuje?
+- Je jednotka pochopitelná bez znalosti interní architektury?
+- Kdy přesně vzniká započitatelná událost?
+- Jak se chová retry, rollback, partial failure a duplicitní požadavek?
+- Je jednotka stejná pro limit, pricing a interní kapacitní plánování?
+- Jak zákazník ověří, že spotřeba dává smysl?
+
+Pokud je odpověď „to nějak dopočítáme z eventů“, zastav. Dopočítávání je fajn pro analytiku. Pro fakturaci a limity potřebuješ stabilní kontrakt.
+
+## JZ.2 Metering event není produktový šmírák
+
+Metering událost má být účetní doklad spotřeby, ne detailní profil chování člověka. Nepatří do ní celé payloady, názvy dokumentů, vyhledávací dotazy, text promptů, obsah exportů ani interní komentáře supportu. Pokud se v budoucnu bude řešit reklamace účtu, nepotřebuješ vědět, co přesně bylo v dokumentu. Potřebuješ vědět, že workspace v daný čas spustil započitatelnou jednotku podle jasného pravidla.
+
+Střídmé schéma metering události:
+
+```text
+event_id: evt_01jz...
+workspace_id: ws_123
+meter_key: documents.processed
+quantity: 1
+occurred_at: 2026-08-19T07:15:00Z
+source: document_pipeline
+idempotency_key: docproc_ws123_job456
+status: accepted
+correction_of: null
+```
+
+Co do meteringu typicky nepatří:
+
+- obsah dokumentu, zprávy, promptu nebo formuláře,
+- osobní poznámky obchodníka nebo supportu,
+- kompletní IP adresa jako obchodní identifikátor,
+- user-agent a fingerprint pro každé účtované použití,
+- URL s tokeny, e-maily nebo citlivými parametry,
+- debug payload „pro jistotu“.
+
+OWASP Logging Cheat Sheet doporučuje z logů vylučovat citlivá data a sanitizovat události proti log injection; stejný přístup patří i do meteringu, protože metering události se často uchovávají dlouho, exportují do fakturace a čtou je lidé mimo vývojový tým: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+
+## JZ.3 Idempotence rozhoduje o důvěře v čísla
+
+Spotřební účtování bez idempotence je taxametr na rozbité silnici. Každý retry může přičíst další jednotku, každá síťová chyba může vyrobit dvojí záznam a každý incident se pak řeší ruční korekcí. Zákazník možná odpustí chybu. Hůř odpouští účet, který vypadá jako generátor náhodných čísel.
+
+Každá započitatelná operace potřebuje stabilní idempotency key. Nemusí to být veřejný API klíč; často stačí deterministický klíč z workspace, typu operace a interního jobu. Důležité je, aby stejná reálná spotřeba nevytvořila dvě fakturovatelné události.
+
+Příklad pravidla:
+
+```text
+meter_key: ai.summary.generated
+idempotency_key: workspace_id + document_id + summary_version
+counts_once: true
+retry_behavior: opakovaný retry vrátí původní metering event
+correction_behavior: chybný event se neopravuje přepsáním, ale korekční událostí
+```
+
+Korekce nedělej tichým editováním historie. U spotřeby, která může ovlivnit cenu nebo limit, je lepší přidat opravnou událost: `quantity: -1`, důvod, vazbu na původní event a auditní stopu. Ano, je to méně elegantní než přepsat řádek. Ale fakturační realita má ráda stopu. Kouzlení s historií má rádo incidenty.
+
+## JZ.4 Zákazník musí vidět spotřebu dřív než fakturu
+
+Metering schovaný až ve faktuře je pozvánka do supportu. Pokud zákazník platí podle spotřeby nebo naráží na kvóty, musí mít průběžný přehled v produktu. Ne nutně real-time na milisekundu, ale dost čerstvý na to, aby mohl rozhodovat.
+
+Užitečný zákaznický přehled obsahuje:
+
+- aktuální období a čas poslední aktualizace,
+- zahrnutý limit nebo balíček,
+- dosavadní spotřebu podle měřených jednotek,
+- odhad dopadu na cenu, pokud existuje usage-based účtování,
+- vysvětlení, co se počítá a co ne,
+- export souhrnu pro účetní nebo správce workspace,
+- kontakt nebo postup pro reklamaci nesrovnalosti.
+
+Nepotřebuješ zákazníkovi ukazovat každé kliknutí každého člověka. Často stačí agregace po workspace a období. Pokud je potřeba detail, udělej ho oprávněný, filtrovatelný a bezpečný: žádné citlivé názvy souborů, žádné payloady, žádné osobní poznámky. Správce má rozumět spotřebě, ne špehovat tým.
+
+Dobrý mikrotext:
+
+> „Do spotřeby počítáme pouze dokumenty, které úspěšně projdou validací a začnou se zpracovávat. Neúspěšné uploady, duplicitní soubory a systémové retry neúčtujeme.“
+
+Tohle je malá věta, která ušetří velké množství „ale já jsem to jen zkusil“ debat.
+
+## JZ.5 Odděl metering pro billing, produkt a observabilitu
+
+Jedna událost pro všechno zní úsporně, dokud nezačne bolet. Billing potřebuje přesnost, auditovatelnost a korekce. Produkt potřebuje agregované signály pro rozhodování. Observabilita potřebuje technický kontext pro provoz. Když to smícháš, skončíš buď s fakturační tabulkou plnou debug polí, nebo s analytikou, která se bojí smazat cokoliv, protože „co kdyby to bylo na fakturu“.
+
+Rozumné vrstvy:
+
+- **Billing metering**: minimální, idempotentní, auditovatelný, dlouhodobě konzistentní.
+- **Produktová analytika**: agregovaná, krátkodobější, určená pro rozhodování o funkcích.
+- **Technické logy**: provozní, retenčně omezené, bez citlivých payloadů.
+- **Zákaznický usage dashboard**: srozumitelný výřez z billing meteringu.
+
+Data protection by design and by default znamená navrhovat zpracování tak, aby byly ochrana dat a střídmé výchozí nastavení součástí systému, ne dodatečná náplast. Evropská komise tento princip popisuje v přehledu povinností pro firmy a organizace: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/obligations_en
+
+Prakticky: billing nepotřebuje znát marketingový zdroj uživatele. Produktová analytika nepotřebuje číslo faktury. Observabilita nepotřebuje text zákaznického dokumentu. Každá vrstva má svůj účel, retenci a přístupová práva.
+
+## JZ.6 Checklist usage meteringu
+
+Před nasazením spotřebního měření si projdi tenhle kontrolní seznam:
+
+- Má každá měřená jednotka jasnou zákaznickou definici?
+- Je určeno, kdy přesně událost vzniká a kdy se naopak nepočítá?
+- Má každá započitatelná operace idempotency key?
+- Umíme řešit korekce bez tichého přepisování historie?
+- Neobsahují metering události payloady, tajemství ani zbytečná osobní data?
+- Vidí zákazník průběžnou spotřebu, období a vysvětlení pravidel?
+- Je oddělen billing metering od produktové analytiky a technických logů?
+- Má metering vlastníka, review cyklus a testovací scénáře?
+- Existuje proces pro reklamaci účtu nebo spornou spotřebu?
+- Má support bezpečný náhled bez přístupu k citlivému obsahu zákazníka?
+
+Codyho komentář: usage-based pricing může být férový, ale jen když zákazník rozumí taxametru. Pokud metering připomíná černou skříňku, zákazník nebude vnímat flexibilitu. Bude vnímat riziko. A riziko je přesně ta věc, kterou B2B zákazníci rádi přepočítávají na „radši ještě počkáme“.
+
+## Zdroje k příloze
+
+- OWASP Logging Cheat Sheet, doporučení k vyloučení citlivých dat a sanitizaci logovaných událostí: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+- Evropská komise, povinnosti firem a organizací včetně data protection by design and by default: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/obligations_en
+
+## Shrnutí přílohy
+
+Usage metering má být přesný, vysvětlitelný a střídmý. Malý SaaS tým potřebuje jasně definované měřené jednotky, minimální metering události, idempotenci, korekční události, zákaznický usage dashboard, oddělení billingových dat od analytiky a bezpečný support proces. Privacy-first metering neměří lidi víc, než je nutné; měří férovou spotřebu produktu a nechává zákazníkovi kontrolu nad tím, co platí, čerpá a může ověřit.
+
+
 ## Pracovní log
+- 2026-08-19: Přidána příloha JZ o usage meteringu a spotřebním účtování v SaaS: definice měřených jednotek, minimální metering eventy, idempotence, korekce, zákaznický usage dashboard, oddělení billingu od analytiky a privacy-first checklist.
 - 2026-08-19: Přidána příloha JY o entitlementech a produktových nárocích v SaaS: oddělení tarifů, oprávnění, kvót, výjimek a feature flagů, katalog nároků, auditované výjimky, viditelné limity, backendové vynucení, testovací matice a privacy-first checklist.
 - 2026-08-19: Přidána příloha JX o feature flags, rolloutech a kill switchích: typy flagů, minimální targeting, rollout stupně, audit změn, úklid starých flagů, experimenty bez tichého sledování a checklist.
 - 2026-08-19: Obnoven plný obsah e-booku po předchozím zkrácení souboru a přidána příloha JW o plánovaných úlohách, cronu a automatizacích: katalog jobů, stav běhů, idempotence, datové minimum, alerty, ruční spuštění, retenční brzdy a checklist.
