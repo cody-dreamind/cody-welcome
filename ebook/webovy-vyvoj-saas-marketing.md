@@ -45170,7 +45170,190 @@ Můj pohled: scheduled joby jsou nejlepší test provozní dospělosti SaaS. Lan
 Plánované úlohy nejsou vedlejší poznámka v provozu SaaS. Každý cron, timer nebo scheduler potřebuje katalog, vlastníka, stavový záznam, idempotenci, bezpečné ruční spuštění, alerty podle dopadu a datové minimum. Privacy-first přístup z nich dělá kontrolovanou automatizaci místo produkčního folklóru: úloha ví, proč běží, co smí měnit, jak se opakuje, co loguje a kdy má uklidit po sobě.
 
 
+# Příloha JX: Feature flags, rollout a kill switch bez konfigurační džungle, tajných experimentů a datového vysavače
+
+Feature flag vypadá jako drobnost: jeden přepínač, jedna podmínka, jedna nová funkce. Pak přijdou tři tarify, dvě země, beta skupina, interní preview, enterprise výjimka, mobilní klient se starou verzí a někdo se zeptá: „Kdo vlastně tu funkci vidí?“ V tu chvíli už to není přepínač. Je to provozní systém rozhodování.
+
+Dobře navržené feature flags pomáhají malému SaaS týmu pouštět změny postupně, zastavit průšvih bez deploye a ověřovat produktové hypotézy bezpečněji než stylem „nasadíme všem a budeme doufat“. Špatně navržené flagy ale vytvoří nečitelnou směs výjimek, starých větví kódu, zákaznických nespravedlností a osobních dat v targeting pravidlech. Takový systém je potom dražší než samotná funkce.
+
+Privacy-first pohled je jednoduchý: flag má řídit chování produktu s minimem dat, jasným vlastníkem, omezenou životností a auditovatelnou změnou. Nemá být skrytý reklamní experiment, segmentační databáze ani trvalá omluvenka pro nedokončený kód.
+
+## JX.1 Nejdřív pojmenuj typ flagu
+
+Ne každý přepínač slouží ke stejné věci. Když se všechny jmenují jen `newDashboard`, `betaFlow` nebo `temporaryFix`, tým velmi rychle ztratí přehled, co je bezpečnostní pojistka, co produktový test a co dávno mrtvý zbytek po release.
+
+Praktické typy flagů:
+
+- **Release flag**: schová hotovou funkci, dokud není připravená dokumentace, migrace nebo obchodní komunikace.
+- **Ops flag**: umožní vypnout rizikovou část systému při incidentu, například exporty, importy nebo drahé AI zpracování.
+- **Permission flag**: řídí dostupnost podle tarifu, role nebo smluvního nastavení.
+- **Experiment flag**: porovnává varianty chování produktu, ale musí mít jasnou hypotézu a konec.
+- **Migration flag**: pomáhá přepnout mezi starým a novým tokem během technické migrace.
+
+U každého flagu si hned při založení napiš kategorii. Ne kvůli byrokracii, ale kvůli tomu, že každá kategorie má jinou životnost. Release flag má po releasu zmizet. Ops flag může zůstat dlouho, ale musí mít runbook. Experiment flag bez hypotézy je jen gambling s uživatelským rozhraním.
+
+Příklad názvu a metadat:
+
+```text
+key: billing.invoice_pdf_v2
+type: migration
+owner: finance-product
+created: 2026-08-19
+remove_after: 2026-09-30
+default: off
+privacy_note: Targeting jen podle workspace ID a tarifu, bez osobních profilů.
+rollback: Vypnout flag, nové faktury se generují starým rendererem.
+```
+
+Tohle je nudné. Přesně proto to funguje.
+
+## JX.2 Targeting dělej podle práce, ne podle zvědavosti
+
+Největší privacy riziko u feature flags není samotný přepínač. Je to chuť cílit podle všeho, co systém ví: role, firma, země, obrat, aktivita, počet kliků, zdroj kampaně, e-mailová doména, interní poznámky ze salesu. Technicky to jde. Produktově to často nedává smysl. Privacy-first tým se ptá: jaké nejmenší kritérium stačí?
+
+Dobré targeting signály:
+
+- tarif nebo smluvní entitlement,
+- role v daném workspace,
+- explicitní beta opt-in,
+- technická kompatibilita klienta,
+- region provozu, pokud jde o dostupnost infrastruktury nebo právní omezení,
+- procentuální rollout podle stabilního anonymního klíče.
+
+Rizikové targeting signály:
+
+- chování jednotlivce napříč celým produktem bez jasného účelu,
+- marketingové segmenty přenesené do produktu bez vysvětlení,
+- citlivé údaje nebo proxy citlivých kategorií,
+- obsah zákaznických dat, dokumentů, zpráv nebo ticketů,
+- ručně psané výjimky typu „tenhle zákazník si stěžoval, tak mu to zapneme jinak“ bez záznamu.
+
+Příklad pro beta funkci AI shrnutí support ticketů: stačí workspace opt-in, role správce a potvrzení, že se budou zpracovávat jen tickety v daném workspace. Není potřeba cílit na konkrétní uživatele podle toho, jak často píší supportu. To už začíná smrdět profilováním, a ne tím příjemným způsobem jako čerstvá káva.
+
+## JX.3 Rollout musí mít stupně a brzdy
+
+„Zapneme to 10 % uživatelů“ není rollout plán. Je to začátek věty. Plán říká, komu, proč, kdy, podle jakých signálů pokračujeme a kdy couváme.
+
+Jednoduchý rollout pro menší SaaS:
+
+1. Interní preview na testovacích workspace.
+2. Beta opt-in pro několik zákazníků, kteří vědí, co testují.
+3. Malý procentuální rollout u nízkorizikových účtů.
+4. Rozšíření podle provozních metrik a zákaznických signálů.
+5. Default zapnuto pro nové účty.
+6. Migrace existujících účtů s možností krátkého návratu.
+7. Odstranění flagu a staré větve kódu.
+
+Každý stupeň má mít vstupní a výstupní podmínky. U fakturace to může být: žádné duplicitní faktury, žádné zvýšení chyb generování PDF, support rozumí nové chybové hlášce, účetní exporty sedí na ruční kontrolu. U dashboardu to může být: stránka se načte rychle, nepřibyly chyby autorizace, zákazníci najdou hlavní akci a exporty dávají stejná čísla jako starý dashboard.
+
+Brzdy jsou stejně důležité jako plyn:
+
+- kill switch pro vypnutí rizikové funkce bez deploye,
+- automatický stop při překročení chybovosti nebo nákladů,
+- ruční schválení před rozšířením na citlivé zákazníky,
+- jasná komunikace podpory, co se mění a co dělat při problému,
+- návratová cesta pro data, která nová funkce změnila.
+
+Když rollback znamená „snad obnovíme zálohu a nějak to dopočítáme“, flag není bezpečnostní mechanismus. Je to ozdobný vypínač na zdi, za kterou stejně hoří.
+
+## JX.4 Audit změn je povinný, protože flag mění produkt
+
+Feature flag není jen konfigurace. Mění to, co zákazník vidí, kolik zaplatí, jaká data se zpracují nebo jak funguje kritický proces. Proto změna flagu patří do auditní stopy.
+
+Minimum pro audit:
+
+- kdo změnu provedl,
+- kdy se stala,
+- jaký flag a jaké pravidlo se změnilo,
+- původní a nová hodnota,
+- důvod změny,
+- odkaz na ticket, incident, release nebo experiment,
+- rozsah dopadu: všichni, konkrétní workspace, tarif, procento rollout skupiny.
+
+Do audit logu ale nepatří celý targeting payload, pokud obsahuje osobní data. Lepší je uložit čitelný popis pravidla a stabilní identifikátory bez zbytečných detailů. OWASP Logging Cheat Sheet doporučuje citlivá data v logách odstraňovat, maskovat, hashovat nebo šifrovat podle rizika: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+
+Příklad bezpečnější audit věty:
+
+```text
+2026-08-19 09:14Z feature_flag.updated
+actor=admin_42
+flag=billing.invoice_pdf_v2
+change=enabled for 5 workspaces
+reason=beta rollout wave 2
+ticket=PROD-1842
+```
+
+Příklad horší věty:
+
+```text
+Enabled invoice_pdf_v2 for acme@example.com because CEO complained in ticket with bank account screenshots.
+```
+
+Druhá věta možná pomůže jednomu člověku pochopit kontext. Zároveň krásně ukládá osobní údaje a interní drby tam, kde nemají co dělat. Gratuluji, vyrobili jsme si malý compliance suvenýr.
+
+## JX.5 Flagy musí pravidelně umírat
+
+Trvalý feature flag je technický dluh s vlastním UI. Každá stará podmínka zdvojuje testovací scénáře, komplikuje debugování a zvyšuje riziko, že někdo opraví jen jednu větev. Martin Fowlerův článek o feature toggles upozorňuje mimo jiné na validační složitost a náklady na správu flagů: https://martinfowler.com/articles/feature-toggles.html
+
+Zaveď jednoduchou hygienu:
+
+- Každý flag má `remove_after` nebo revizní datum.
+- Release a migration flagy nesmí žít bez aktivní výjimky.
+- Staré flagy se řeší v pravidelném technickém úklidu, ne až při incidentu.
+- Kódová větev staré varianty se smaže, jakmile je rollout dokončený.
+- Dokumentace a screenshoty se aktualizují ve stejném úklidovém PR.
+- Support a sales dostanou informaci, že staré chování už neexistuje.
+
+Praktický dotaz do měsíčního review: „Které flagy změnily za posledních 30 dní hodnotu?“ Pokud odpověď zní „žádné“ a zároveň jich máte v systému 80, není to platforma pro agilitu. Je to muzeum vypínačů.
+
+## JX.6 Experiment není omluva pro tiché sledování
+
+Experimentální flagy jsou lákavé, protože umožní zkoušet varianty bez velkého deploy procesu. Jenže produktový experiment pořád pracuje s lidmi. I když nejde o právně citlivou změnu, férový produkt by měl mít hranice.
+
+Privacy-first experiment má:
+
+- jasnou hypotézu před spuštěním,
+- nejmenší možný rozsah dat,
+- krátké časové okno,
+- metriky agregované podle účelu,
+- zákaz zásahu do citlivých toků bez extra kontroly,
+- dokumentované rozhodnutí po skončení,
+- odstranění experimentální větve.
+
+Příklad hypotézy: „Když v onboardingu ukážeme jeden konkrétní další krok místo obecného dashboardu, více nových workspace dokončí první import do 24 hodin.“ K měření stačí agregovaný počet dokončených importů pro variantu A/B, ne seznam každého kliknutí každého uživatele od prvního nadechnutí.
+
+Experimenty v cenách, dostupnosti funkcí nebo právních souhlasech jsou citlivější. U nich buď extra opatrný: zákazník nesmí zjistit, že dostal horší podmínky jen proto, že algoritmus hodil kostkou. Férovost je taky produktová metrika, jen se hůř kreslí do grafu.
+
+## JX.7 Checklist feature flags a rolloutů
+
+- Má každý flag jasný typ: release, ops, permission, experiment nebo migration?
+- Má flag vlastníka, datum vytvoření, revizní datum a plán odstranění?
+- Je default bezpečný pro nové účty, testovací prostředí i výpadkové scénáře?
+- Používá targeting nejmenší možné množství dat a vyhýbá se citlivým signálům?
+- Existuje rollout plán se stupni, metrikami pokračování a podmínkami rollbacku?
+- Lze rizikovou funkci vypnout bez deploye a bez ručního zásahu do databáze?
+- Zapisují se změny flagů do audit logu bez zbytečných osobních údajů?
+- Má support stručný popis, co flag mění a jak poznat problém?
+- Probíhá pravidelný úklid starých flagů včetně odstranění mrtvého kódu?
+- Jsou experimentální flagy časově omezené a vyhodnocené před dalším krokem?
+
+## Codyho komentář
+
+Můj pohled: feature flag je jako ostrý kuchyňský nůž. V rukou klidného týmu pomůže připravit večeři. V rukou týmu bez procesu rozřeže release na deset nečitelných variant a někdo pak půl dne debugguje, proč zákazník z Polska vidí starý checkout jen v Safari po úplňku. Flagy nejsou problém. Problém je flag bez vlastníka, bez konce a bez vědomí, jaká data používá k rozhodování.
+
+## Zdroje k příloze
+
+- Martin Fowler, Feature Toggles / Feature Flags: typy toggle, validace konfigurace a náklady dlouhodobých flagů: https://martinfowler.com/articles/feature-toggles.html
+- OWASP Logging Cheat Sheet, doporučení k bezpečnému logování a vyloučení citlivých dat: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+- OWASP API Security Top 10 2023, API4 Unrestricted Resource Consumption jako připomínka limitů, nákladů a provozních brzd: https://owasp.org/API-Security/editions/2023/en/0xa4-unrestricted-resource-consumption/
+
+## Shrnutí přílohy
+
+Feature flags jsou užitečné jen tehdy, když mají typ, vlastníka, bezpečný default, minimální targeting, audit změn, rollout plán, kill switch a plán odstranění. Privacy-first SaaS je nepoužívá jako skryté sledování ani jako trvalou skládku starého kódu. Používá je jako řízený provozní mechanismus: změnu pustit pomalu, měřit jen nutné signály, rychle zastavit průšvih a po dokončení uklidit.
+
+
 ## Pracovní log
+- 2026-08-19: Přidána příloha JX o feature flags, rolloutech a kill switchích: typy flagů, minimální targeting, rollout stupně, audit změn, úklid starých flagů, experimenty bez tichého sledování a checklist.
 - 2026-08-19: Obnoven plný obsah e-booku po předchozím zkrácení souboru a přidána příloha JW o plánovaných úlohách, cronu a automatizacích: katalog jobů, stav běhů, idempotence, datové minimum, alerty, ruční spuštění, retenční brzdy a checklist.
 - 2026-08-19: Přidána příloha JV o background jobech, frontách a workerech: výběr asynchronních operací, stavový model jobů, minimální payload, retry podle typu chyby, dead-letter queue, UX dlouhých úloh, monitoring podle zákaznických slibů a privacy-first checklist.
 - 2026-08-19: Přidána příloha JU o idempotenci, retry a deduplikaci v SaaS API: rizikové operace, idempotency keys, minimální fingerprint payloadu, souběžné requesty, backoff, `Retry-After`, webhook deduplikace, UI stavy a privacy-first checklist.
