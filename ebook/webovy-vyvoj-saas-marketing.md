@@ -46681,7 +46681,171 @@ Mazání dat v SaaS je produktový a provozní proces, ne jednorázový SQL př�
 
 ---
 
+# Příloha KG: Žádosti subjektů údajů bez supportního chaosu, zbytečného kopírování dokladů a právního divadla
+
+Žádost o přístup, opravu, výmaz, omezení zpracování nebo přenositelnost dat není „otravný compliance ticket“. Je to okamžik, kdy zákazník testuje, jestli firma opravdu rozumí vlastním datům. A malé SaaS týmy tady často narazí ne proto, že by měly zlé úmysly, ale protože data leží v aplikaci, billing systému, supportu, logách, e-mailu, exportech a u integrací — tedy všude, kde se v minulosti řeklo „to vyřešíme později“.
+
+Evropská komise shrnuje, že organizace mají žádosti jednotlivců řešit bez zbytečného odkladu a typicky do jednoho měsíce; u složitých nebo početných žádostí lze lhůtu prodloužit, ale člověk o tom musí být informován: https://europa.eu/youreurope/business/governance-and-sustainability/digital-and-data-compliance/data-protection-gdpr/index_en.htm
+
+Privacy-first produkt proto nemá spoléhat na hrdinství jednoho člověka v supportu. Má mít proces, který je klidný, auditovatelný, bezpečný a srozumitelný. Žádný šanonový cosplay, žádné „pošlete nám občanku pro jistotu“, žádné exporty osobních dat přes nechráněný e-mail. Prostě normální provozní disciplína.
+
+## KG.1 Žádost začíná triage, ne panikou
+
+První chyba je hodit všechny žádosti do jedné krabice „GDPR“ a začít improvizovat. Přitom každé právo má jiný dopad na produkt, data i zákaznický vztah. Přístup k datům znamená najít a vysvětlit, co zpracováváš. Oprava znamená změnit nepřesné údaje. Výmaz znamená posoudit, co lze odstranit a co musí zůstat kvůli zákonné povinnosti nebo obhajobě nároků. Přenositelnost znamená dát data v použitelném formátu, ne PDF z pekla.
+
+Praktická triage tabulka:
+
+| Typ žádosti | Co zjistit jako první | Typická akce | Riziko |
+| --- | --- | --- | --- |
+| Přístup | Kdo žádá a k jakému účtu patří | Export + vysvětlení kategorií dat | Předání dat špatné osobě |
+| Oprava | Který údaj je nepřesný | Změna údaje + záznam důvodu | Rozbití historických dokladů |
+| Výmaz | Jaký vztah má člověk k účtu/workspace | Orchestrace výmazu nebo odmítnutí části | Falešné „smazáno“ |
+| Omezení | Která data jsou sporná | Zmrazení zpracování mimo nutné uložení | Produkt dál data používá |
+| Přenositelnost | Jde o data poskytnutá uživatelem | Strukturovaný export | Nepoužitelný formát |
+| Námitka | Proti jakému účelu směřuje | Zastavení daného účelu nebo odůvodnění | Marketing/profilování jede dál |
+
+U každé žádosti si ulož jen pracovní minimum: datum přijetí, kanál, ověřenou identitu, typ žádosti, související účet/workspace, odpovědnou osobu, termín, rozhodnutí a bezpečnou auditní stopu. Nelep do ticketu citlivé payloady ani celé exporty. Supportní systém není trezor, i když se tak občas tváří s cenovkou enterprise.
+
+## KG.2 Identitu ověř přiměřeně, ne maximalisticky
+
+Ověření identity je nutné, protože poslat osobní data útočníkovi by byla solidní ukázka toho, jak nevypadá privacy-first provoz. Jenže přiměřené ověření neznamená vždy chtít sken občanky, selfie s dnešními novinami a krevní skupinu oblíbeného účetního.
+
+Použij nejméně invazivní metodu, která odpovídá riziku:
+
+- Přihlášený uživatel v aplikaci může žádost potvrdit přes aktivní session a druhý faktor, pokud ho účet používá.
+- E-mail z adresy účtu může stačit pro nízkorizikovou opravu jednoduchých údajů, ale nestačí pro export celého workspace.
+- Administrátor workspace může žádat o export nebo výmaz workspace dat, ale běžný člen obvykle nemá právo rozhodnout za celý tým.
+- Doklad totožnosti žádej jen tehdy, když identitu nelze rozumně ověřit jinak; umožni zakrytí údajů, které nepotřebuješ.
+- Každý nahraný doklad měj s krátkou retencí, omezeným přístupem a jasným účelem.
+
+Příklad mikrotextu v aplikaci:
+
+> „Žádost potvrzujete jako přihlášený uživatel účtu. Pro export celého workspace může být potřeba potvrzení administrátora. Doklady totožnosti nežádáme, pokud identitu umíme ověřit bezpečnější a méně invazivní cestou.“
+
+## KG.3 Datová mapa rozhoduje o kvalitě odpovědi
+
+Když žádost dorazí, není čas poprvé zjišťovat, kde všude se osobní údaje nacházejí. Datová mapa z předchozích příloh tady přestává být dokument a stává se operačním manuálem. Pro každý systém potřebuješ vědět: jaká data drží, kdo je správcem nebo zpracovatelem, jak dlouho data zůstávají, jak se exportují, jak se opravují a jak se mažou.
+
+Minimální mapa pro DSAR proces:
+
+| Systém | Typ dat | Akce při přístupu | Akce při výmazu | Vlastník |
+| --- | --- | --- | --- | --- |
+| Aplikační databáze | Profil, nastavení, obsah | Export přes interní job | Výmaz/anonymizace podle retenční mapy | Backend |
+| Billing | Fakturační údaje, platby | Souhrn + faktury | Retence podle účetních povinností | Finance |
+| Support | Tickety, přílohy | Relevantní komunikace | Mazání příloh a starých poznámek | Support |
+| E-mail | Transakční zprávy | Metadata a relevantní zprávy | Retence podle účelu | Ops |
+| Logy | Bezpečnostní metadata | Vysvětlení kategorií, ne surový dump | Retenční cyklus | SRE/Ops |
+| Integrace | Předaná data | Seznam příjemců a účelů | Žádost zpracovateli nebo odpojení | Produkt |
+
+Evropská komise u práva na přístup uvádí, že organizace má potvrdit, zda data zpracovává, poskytnout kopii osobních údajů a dodat informace o zpracování včetně účelů, kategorií dat a příjemců: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/dealing-requests-individuals_en
+
+To neznamená, že máš člověku poslat každý interní řádek logu. Znamená to dát mu smysluplnou, bezpečnou a úplnou odpověď. Surový dump může prozradit cizí data, interní bezpečnostní detaily nebo tajemství jiných uživatelů. Dobrá odpověď je jako dobré API: strukturovaná, čitelná, omezená účelem a bez překvapení.
+
+## KG.4 Workflow musí mít stav, termín a vlastníka
+
+DSAR proces bez workflow končí u věty „myslel jsem, že to řeší někdo jiný“. To je drahá věta. Každá žádost potřebuje stavový automat, který unese dovolenou, nemoc i páteční odpoledne.
+
+Jednoduchý stavový model:
+
+1. `received` — žádost přijata a založena.
+2. `identity_check` — probíhá ověření identity nebo oprávnění.
+3. `scoping` — určuje se rozsah účtu, workspace a systémů.
+4. `processing` — běží export, oprava, omezení nebo výmaz.
+5. `review` — odpověď kontroluje odpovědná osoba, ideálně druhý pár očí u citlivých případů.
+6. `answered` — odpověď odeslána bezpečným kanálem.
+7. `closed` — uzavřeno včetně interního záznamu a retenčního timeru pro samotný ticket.
+
+Každý stav má mít jasnou další akci. Pokud `identity_check` čeká na uživatele, napiš mu přesně, co potřebuješ a proč. Pokud `processing` čeká na dodavatele, ulož datum eskalace. Pokud `review` stojí déle než dva pracovní dny, alertuj vlastníka. Ne proto, aby měl tým další dashboard, ale protože lhůty se neptají, jestli máš zrovna sprint planning.
+
+## KG.5 Odpověď má být lidská, ne právnický kouřostroj
+
+Dobrá odpověď na žádost má tři vrstvy: shrnutí pro člověka, strukturovaná data a právně/provozně přesné vysvětlení. Neschovávej odpověď za neurčité věty typu „vaše data zpracováváme v souladu s platnými předpisy“. To je věta, která říká všechno a nic, tedy hlavně nic.
+
+Šablona odpovědi:
+
+```text
+Dobrý den,
+
+potvrzujeme, že jsme zpracovali vaši žádost ze dne [datum].
+
+Rozsah: [účet/workspace/e-mail]
+Typ žádosti: [přístup / oprava / výmaz / přenositelnost / omezení / námitka]
+Výsledek: [co jsme udělali]
+
+Součástí odpovědi je:
+- kopie relevantních osobních údajů ve formátu [CSV/JSON/PDF podle účelu],
+- vysvětlení kategorií údajů a účelů zpracování,
+- seznam hlavních příjemců nebo kategorií příjemců,
+- informace o údajích, které nemůžeme smazat hned, včetně důvodu a retenční doby.
+
+Pokud máte k odpovědi otázky, napište na [kontakt].
+```
+
+U exportu přidej manifest: co soubor obsahuje, jaké má schéma, kdy byl vytvořen, pro jaký účet platí a do kdy je odkaz dostupný. U výmazu napiš, co bylo smazáno hned, co doběhne asynchronně, co zůstává kvůli zákonné povinnosti a kdy zaniknou zálohy běžným retenčním cyklem. Pravda může být trochu méně sexy než „vše smazáno okamžitě“, ale zato se pak nemusíš potit při auditu.
+
+## KG.6 Bezpečné doručení je součást odpovědi
+
+DSAR odpověď často obsahuje citlivá data. Poslat ji jako nešifrovanou přílohu všem lidem v kopii je ekvivalent toho, že zamkneš trezor a klíč přilepíš izolepou na dveře. Doručovací kanál navrhni podle citlivosti.
+
+Bezpečnější vzor:
+
+- Export připrav jako krátkodobý odkaz po přihlášení do aplikace.
+- Odkaz nech expirovat po rozumné době, například 7 nebo 14 dní podle citlivosti a interních pravidel.
+- U stažení vyžaduj stejný nebo silnější ověřovací faktor než u žádosti.
+- Do e-mailu neposílej osobní údaje, jen informaci, že odpověď je připravena.
+- Zaznamenej stažení exportu jako auditní událost bez ukládání obsahu exportu do logu.
+- Po expiraci export smaž a ponech jen minimální provozní stopu.
+
+U malého týmu je úplně v pořádku začít ručním procesem, pokud je bezpečný a zdokumentovaný. Co není v pořádku: hledat data ručně v produkční databázi, kopírovat je do tabulky na sdíleném disku a doufat, že si toho nikdo nevšimne. Naděje není bezpečnostní kontrola. Ani když má hezkou ikonku.
+
+## KG.7 Zpracovatelé nejsou výmluva, jsou součást procesu
+
+Když data leží u dodavatele, pořád potřebuješ vědět, jak žádost dopadne. Některé žádosti vyřešíš přímo ve vlastním produktu, jiné musí projít přes zpracovatele. Proto má vendor checklist obsahovat i DSAR praktické otázky:
+
+- Umí dodavatel exportovat data konkrétního uživatele nebo workspace?
+- Umí data opravit, smazat nebo omezit podle pokynu?
+- Jaký má reakční čas na privacy žádosti?
+- Jsou data v EU nebo alespoň s jasným právním rámcem pro předání?
+- Jak se řeší zálohy a logy u dodavatele?
+- Máš kontakt nebo proces, který není jen obecný support formulář do černé díry?
+
+EDPB ve finálních Guidelines 01/2022 k právu na přístup rozebírá praktické provedení práva na přístup a zdůrazňuje, že odpověď má subjektu údajů umožnit porozumět zpracování a ověřit jeho zákonnost: https://www.edpb.europa.eu/documents/guideline/guidelines-012022-on-data-subject-rights-right-of-access_en
+
+Pro privacy-first SaaS je dobré držet „DSAR runbook“ vedle incidentového playbooku. Ne proto, že žádost je incident, ale protože potřebuje stejnou disciplínu: vlastník, časová osa, komunikační šablony, seznam systémů a jasné uzavření.
+
+## KG.8 Checklist DSAR procesu
+
+- Máš veřejný a snadno dohledatelný kontakt pro žádosti subjektů údajů?
+- Umí support rozeznat typ žádosti a neposílá všechno do obecné fronty „právní“?
+- Eviduješ datum přijetí, termín odpovědi, stav, vlastníka a rozsah žádosti?
+- Ověřuješ identitu přiměřeně riziku, ne automaticky nejinvazivnější metodou?
+- Máš datovou mapu systémů včetně billing, supportu, logů, e-mailu a integrací?
+- Umíš bezpečně vytvořit export bez cizích dat, interních tajemství a surových bezpečnostních logů?
+- Má odpověď lidské shrnutí, strukturovaná data a vysvětlení kategorií/účelů/příjemců?
+- Doručuješ odpověď přes bezpečný kanál s expirací, ne jako nahodilou přílohu?
+- Víš, které části výmazu musí počkat kvůli zákonné retenci, zálohám nebo obhajobě nároků?
+- Kontroluješ po uzavření, že samotný DSAR ticket nemá nekonečnou retenci?
+
+## Codyho komentář
+
+DSAR proces je výborný detektor produktového dluhu. Když neumíš odpovědět, kde jsou data jednoho člověka, pravděpodobně neumíš spolehlivě odpovědět ani na otázku, co tvůj produkt opravdu sbírá. Můj pohled: nejlepší privacy stránka na světě nepomůže, pokud při první žádosti začne tým ručně prohledávat databázi jako detektivové v seriálu, kde všichni hackují přes zelený terminál. Důvěra se nebuduje slibem, ale schopností slib splnit bez divadla.
+
+## Zdroje k příloze
+
+- Your Europe: přehled povinností podle GDPR včetně reakce na žádosti jednotlivců bez zbytečného odkladu a zpravidla do jednoho měsíce: https://europa.eu/youreurope/business/governance-and-sustainability/digital-and-data-compliance/data-protection-gdpr/index_en.htm
+- Evropská komise: jak řešit žádosti jednotlivců podle GDPR, včetně přístupu, opravy, výmazu, omezení a přenositelnosti: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/dealing-requests-individuals_en
+- Evropská komise: informace pro jednotlivce o právech podle GDPR: https://commission.europa.eu/law/law-topic/data-protection/information-individuals_en
+- EDPB: Guidelines 01/2022 on data subject rights — Right of access, finální verze z 17. dubna 2023: https://www.edpb.europa.eu/documents/guideline/guidelines-012022-on-data-subject-rights-right-of-access_en
+
+## Shrnutí přílohy
+
+Žádosti subjektů údajů nejsou jednorázová právní odpověď, ale provozní schopnost SaaS produktu. Privacy-first tým má triage, přiměřené ověření identity, živou datovou mapu, workflow se stavem a vlastníkem, bezpečný export, jasné doručení a zapojené zpracovatele. Cílem není člověka odradit formulářovým bludištěm, ale férově splnit práva bez úniku dat a bez supportního chaosu.
+
+---
+
 ## Pracovní log
+
+- 2026-08-19: Přidána příloha KG o žádostech subjektů údajů v privacy-first SaaS: triage typů žádostí, přiměřené ověření identity, datová mapa, stavový workflow, lidská odpověď, bezpečné doručení exportu, role zpracovatelů a DSAR checklist.
 
 - 2026-08-19: Přidána příloha KF o mazání, anonymizaci a retenčních stopách v SaaS: rozdíl mezi účtem, členstvím a workspace, retenční mapa, soft delete stavy, anonymizace vs. pseudonymizace, orchestraci výmazu, auditní minimum, zákaznické UI a privacy-first checklist.
 
