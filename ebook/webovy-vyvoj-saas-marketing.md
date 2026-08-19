@@ -46506,7 +46506,184 @@ Bezpečné slučování duplicit začíná definicí identity, pokračuje stupni
 
 ---
 
+
+# Příloha KF: Mazání, anonymizace a retenční stopy bez falešného „smazáno“, rozbitého auditu a datových zombie
+
+Mazání dat v SaaS zní jednoduše jen do chvíle, než se potká s fakturami, auditními logy, zálohami, sdílenými objekty, exporty, supportními tickety a integracemi. Uživatel klikne „smazat účet“ a očekává konec. Firma mezitím zjistí, že e-mail je v CRM, jméno v PDF faktuře, ID v audit logu, avatar v objektovém storage, kopie v záloze a poznámka v ticketu od supportu. Vítej v datové archeologii, kde každý střep tvrdí, že je „kritický pro provoz“.
+
+Privacy-first pravidlo: mazání není jedno SQL `DELETE`. Je to produktový proces s jasným slibem, stavem, výjimkami a důkazem dokončení. GDPR počítá s právem na výmaz a zároveň s tím, že výmaz nemusí být absolutní ve všech situacích — například pokud existuje zákonná povinnost nebo jiný legitimní důvod data držet. Evropská komise ve svém přehledu práv subjektů údajů popisuje práva jako přístup, opravu, výmaz a přenositelnost a u práva být zapomenut připomíná i povinnost podniknout rozumné kroky vůči dalším místům, kde byla data zveřejněna nebo předána: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/dealing-requests-individuals_en
+
+## KF.1 Nejdřív rozliš mazání účtu, členství, workspace a dat
+
+Největší průšvih vzniká, když produkt používá slovo „účet“ pro všechno. V B2B SaaS ale existuje několik různých věcí:
+
+| Objekt | Co znamená | Typická akce | Pozor na |
+| --- | --- | --- | --- |
+| Uživatelský účet | Identita člověka pro přihlášení | Deaktivace nebo výmaz identity | Členství ve více workspaces |
+| Členství | Vazba člověka na tým nebo organizaci | Odebrání role a přístupu | Audit kdo co udělal |
+| Workspace | Sdílený prostor zákazníka | Uzavření, archivace, výmaz | Vlastnictví dat více lidí |
+| Obsah | Projekty, dokumenty, záznamy, přílohy | Export, anonymizace, výmaz | Sdílené objekty a reference |
+| Fakturace | Smlouvy, faktury, platby | Retence podle právní povinnosti | Nelze mazat jako běžný profil |
+
+Prakticky: tlačítko „Smazat účet“ nesmí potichu smazat workspace celému týmu. A tlačítko „Opustit tým“ nesmí tvrdit, že mažeme všechna osobní data, když pouze odebíráme přístup.
+
+Dobré UX používá konkrétní slovesa:
+
+- „Deaktivovat moje přihlášení“
+- „Opustit workspace Dreamind Demo“
+- „Požádat o export dat workspace“
+- „Požádat o výmaz osobních údajů“
+- „Uzavřít a smazat workspace po retenční lhůtě“
+
+Ano, je to méně sexy než jedno obří červené tlačítko. Ale červené tlačítko bez přesného významu je jen UX verze petardy v serverovně.
+
+## KF.2 Retenční mapa rozhoduje dřív než právní panika
+
+Mazání se nedá navrhnout bez retenční mapy. Ta říká, jaká data držíš, proč, kde, jak dlouho a co se s nimi stane po ukončení účelu. GDPR princip omezení uložení znamená, že osobní údaje nemají být uchovávány déle, než je potřeba pro daný účel; Evropská komise shrnuje i související principy minimalizace, účelového omezení a přesnosti: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en
+
+Minimum retenční mapy:
+
+| Kategorie | Účel | Typická retence | Akce po retenci |
+| --- | --- | --- | --- |
+| Aktivní profil | Poskytování služby | Po dobu účtu | Deaktivace nebo výmaz |
+| Přístupové logy | Bezpečnost a řešení incidentů | Krátká provozní lhůta | Agregace nebo smazání |
+| Audit log | Důkaz změn a ochrana zákazníka | Dle rizika a smlouvy | Omezení přístupu, později mazání |
+| Faktury | Účetní a daňové povinnosti | Dle zákona | Archivace mimo produktové UI |
+| Support tickety | Řešení požadavků | Dle podpory a smlouvy | Redakce nebo smazání příloh |
+| Produktová analytika | Zlepšení služby | Agregovaně co nejdéle, osobně co nejkratší dobu | Agregace/anonymizace |
+| Zálohy | Obnova po havárii | Krátké rotační okno | Přepsání rotací |
+
+Retenční mapa má být součást produktu, ne skrytý dokument v šanonu. Když navrhuješ novou funkci, přidej otázku: „Jak se tahle data smažou?“ Pokud odpověď zní „to dořešíme později“, právě sis koupil technický dluh s právním úrokem.
+
+## KF.3 Soft delete je stav, ne konečné mazání
+
+Soft delete je užitečný. Chrání před omylem, umožní obnovu a pomáhá s konzistencí vazeb. Problém je, když ho produkt vydává za skutečný výmaz.
+
+Bezpečný stavový model:
+
+1. **Aktivní**: data se běžně používají.
+2. **Deaktivováno**: přístup je zastaven, data zůstávají kvůli obnově nebo vyřízení procesu.
+3. **Čeká na výmaz**: běží retenční okno, export nebo kontrola právních výjimek.
+4. **Produktově smazáno**: data nejsou dostupná v aplikaci ani interním supportním UI.
+5. **Technicky vymazáno nebo anonymizováno**: osobní vazba je odstraněna z primárních úložišť.
+6. **Dosaženo zálohami**: staré zálohy s daty doběhly rotační retencí.
+
+Uživatelovi neříkej „všechno je okamžitě pryč“, pokud víš, že kopie žije v backupu ještě 14 nebo 30 dní. Řekni pravdu: „Data jsme odstranili z produkční aplikace. Zálohy se přepíšou v rámci běžné retenční lhůty.“ To je dospělé. A dospělost je v B2B překvapivě dobrý marketing.
+
+## KF.4 Anonymizace není přejmenování člověka na „Uživatel 123“
+
+Anonymizace znamená, že data už nejde přiměřeně spojit s konkrétní osobou. Pseudonymizace znamená, že vazba je oslabená, ale stále může existovat přes další informace. EDPB k tématu anonymizace a pseudonymizace výslovně rozlišuje, že pseudonymizace snižuje vazbu na jednotlivce, zatímco anonymizace má data učinit nespojitelnými s jednotlivcem; skutečně anonymizovaná data už nejsou osobními údaji: https://www.edpb.europa.eu/topics/ai-and-technology/anonymisation-pseudonymisation_en
+
+EDPB v lednu 2025 přijal pokyny 01/2025 k pseudonymizaci a zdůraznil mimo jiné, že pseudonymizovaná data, která lze pomocí dodatečných informací znovu přiřadit osobě, zůstávají osobními údaji: https://www.edpb.europa.eu/news/edpb-adopts-pseudonymisation-guidelines-and-paves-the-way-to-improve-cooperation-with_en
+
+Praktický rozdíl:
+
+| Přístup | Příklad | Je to osobní údaj? | Kdy použít |
+| --- | --- | --- | --- |
+| Maskování | `j***@firma.cz` | Často ano | UI náhledy, support |
+| Pseudonymizace | `user_9f3a` + oddělený klíč | Ano, pokud existuje klíč | Analýza, testovací prostředí, interní reporting |
+| Agregace | „12 aktivních uživatelů v tarifu Pro“ | Většinou ne, pokud nejde zpětně rozpoznat jednotlivce | Produktové metriky |
+| Anonymizace | Odstraněné identifikátory + kontrola znovuidentifikace | Mimo GDPR jen pokud je opravdu nevratná | Dlouhodobé statistiky |
+
+Špatná anonymizace:
+
+- ponechá unikátní kombinaci firmy, role, města a časů přihlášení,
+- smaže e-mail, ale nechá externí ID z původního systému,
+- nahradí jméno hashem bez soli a pak tvrdí, že je hotovo,
+- nechá textové poznámky, kde je e-mail a telefon napsaný ručně,
+- anonymizuje hlavní tabulku, ale zapomene na eventy, exporty a přílohy.
+
+Dobrá anonymizace začíná otázkou: „Kdo by mohl data znovu spojit a s čím?“ Pokud odpověď zní „my, podle audit logu a CSV exportu“, není to anonymizace. Je to maskovaný problém s knírkem.
+
+## KF.5 Výmaz musí mít orchestrace, ne ruční hon na tabulky
+
+U malého SaaS se dá první mazání udělat ručně. Podruhé to ještě projde. Potřetí už vzniká chaos. Výmaz potřebuje orchestraci: centrální proces, který ví, co má smazat, anonymizovat, odpojit, přegenerovat nebo ponechat.
+
+Model výmazového jobu:
+
+| Krok | Co dělá | Výsledek |
+| --- | --- | --- |
+| Validace žádosti | Ověří identitu a oprávnění žadatele | Žádost je legitimní nebo zamítnutá |
+| Zmrazení změn | Zabrání novým zápisům do mazané oblasti | Stabilní snapshot procesu |
+| Export nabídka | Dá možnost stáhnout data před výmazem | Zákazník není rukojmí |
+| Datová mapa | Najde související záznamy a úložiště | Seznam akcí |
+| Výjimky | Označí fakturaci, právní spory, auditní minimum | Vysvětlené ponechání |
+| Mazání/anonymizace | Provede konkrétní akce idempotentně | Stav po jednotlivých krocích |
+| Ověření | Zkontroluje, že data nejsou v produktovém UI/API | Důkaz dokončení |
+| Potvrzení | Pošle stručnou zprávu bez citlivých detailů | Uzavřená žádost |
+
+Každý krok má být idempotentní. Když job spadne u pátého kroku, další běh nesmí znovu poslat export, smazat jiný objekt nebo vytvořit nový support ticket. Mazání má být nudné jako účetní kalendář. Přesně to chceš.
+
+## KF.6 Auditní stopa nesmí popřít výmaz
+
+Častá námitka zní: „Musíme všechno logovat kvůli auditu.“ Ano, audit je důležitý. Ne, neznamená to, že audit log má obsahovat kompletní původní profil uživatele, jeho e-mail, zprávy a přílohy. Auditní stopa má dokazovat, že se něco stalo, ne sloužit jako druhá databáze osobních údajů.
+
+U výmazu loguj minimum:
+
+| Událost | Bezpečný obsah |
+| --- | --- |
+| Žádost přijata | Typ žádosti, čas, interní ID procesu |
+| Oprávnění ověřeno | Výsledek ověření, metoda, ne kopie dokladů |
+| Výjimka uplatněna | Kategorie výjimky, právní nebo smluvní důvod |
+| Akce dokončena | Typ úložiště, počet objektů, stav |
+| Potvrzení odesláno | Čas a kanál, ne plné znění citlivé zprávy |
+
+Pokud potřebuješ zachovat vazbu kvůli bezpečnosti nebo právní obraně, odděl ji od běžného produktu, omez přístupy a nastav retenci. „Schováme to v logu navždy“ není strategie. Je to digitální sklep, kde jednoho dne najdeš všechno, co jsi údajně smazal.
+
+## KF.7 Zákazník potřebuje stav, ne černou díru
+
+Výmaz může trvat. Export může trvat. Právní výjimka může vyžadovat vysvětlení. To ale neznamená, že zákazník má poslat žádost a čekat do tepelné smrti vesmíru.
+
+Dobré stavové UI:
+
+- ukáže, co zákazník žádá: výmaz účtu, workspace, obsahu nebo konkrétní datové kategorie,
+- vysvětlí, co se smaže okamžitě a co až po retenční lhůtě,
+- nabídne export před nevratným krokem,
+- ukáže datum plánovaného dokončení,
+- po dokončení zobrazí stručné potvrzení,
+- u výjimek vysvětlí kategorii důvodu lidskou řečí,
+- nedává supportu možnost potichu proces „pozastavit“ bez stavu.
+
+Příklad textu:
+
+> „Přijali jsme žádost o výmaz osobních údajů z pracovního prostoru Acme. Přístup jsme deaktivovali okamžitě. Produktová data odstraníme do 7 dnů, pokud nejsou součástí zákonné účetní nebo bezpečnostní retence. Zálohy doběhnou automatickou rotací do 30 dnů.“
+
+Tohle je lepší než „Vaše žádost byla zpracována“. Ta věta zní jako úřední razítko bez inkoustu.
+
+## KF.8 Checklist mazání, anonymizace a retence
+
+- Máš oddělený výmaz uživatelského účtu, členství, workspace a konkrétních datových kategorií?
+- Existuje retenční mapa pro profily, logy, audit, fakturaci, support, analytiku, exporty a zálohy?
+- Rozlišuje produkt stavy `active`, `deactivated`, `pending_deletion`, `deleted`, `anonymized` a doběh záloh?
+- Říkáš uživateli pravdu o tom, co je smazané hned a co doběhne retenční lhůtou?
+- Je anonymizace testovaná proti znovuidentifikaci, nebo jen přejmenovává záznamy?
+- Nezůstávají osobní údaje v audit logu, supportních poznámkách, exportech, přílohách a integračních payloads?
+- Je výmazový job idempotentní, restartovatelný a auditovaný bez citlivých payloadů?
+- Umí zákazník před výmazem získat použitelný export?
+- Má support jasný playbook, co smí a nesmí při žádosti o výmaz dělat?
+- Kontroluješ pravidelně, že retenční joby skutečně běží a nemažou víc ani méně, než mají?
+
+## Codyho komentář
+
+Mazání je jeden z nejlepších testů, jestli firma myslí privacy-first vážně. Sbírat data umí každý formulář s ambicemi. Férově je odstranit, vysvětlit výjimky a nepředstírat anonymizaci tam, kde existuje zpětná vazba, to už je disciplína pro dospělé SaaS. Můj pohled: pokud si malý tým udělá kvalitní retenční mapu dřív než třetí dashboard, ušetří si později tolik bolesti, že by se to mělo dát odečíst z daní. Bohužel nejsem finanční poradce, jen robot s názorem a lehce podezřelým vztahem k tabulkám.
+
+## Zdroje k příloze
+
+- Evropská komise: práva jednotlivců podle GDPR včetně přístupu, opravy, výmazu a přenositelnosti: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/dealing-requests-individuals_en
+- Evropská komise: principy GDPR včetně minimalizace dat, omezení účelu a omezení uložení: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en
+- EDPB: přehled rozdílu mezi anonymizací a pseudonymizací: https://www.edpb.europa.eu/topics/ai-and-technology/anonymisation-pseudonymisation_en
+- EDPB: zpráva z 17. ledna 2025 o přijetí pokynů 01/2025 k pseudonymizaci: https://www.edpb.europa.eu/news/edpb-adopts-pseudonymisation-guidelines-and-paves-the-way-to-improve-cooperation-with_en
+- EDPB: Guidelines 01/2025 on Pseudonymisation (PDF): https://www.edpb.europa.eu/system/files/2025-01/edpb_guidelines_202501_pseudonymisation_en.pdf
+
+## Shrnutí přílohy
+
+Mazání dat v SaaS je produktový a provozní proces, ne jednorázový SQL příkaz. Privacy-first přístup odděluje typy výmazu, drží retenční mapu, říká pravdu o zálohách, nepředstírá anonymizaci, chrání auditní stopu před citlivými daty a dává zákazníkovi jasný stav. Dobré mazání je nudné, auditovatelné a férové — přesně proto buduje důvěru.
+
+---
+
 ## Pracovní log
+
+- 2026-08-19: Přidána příloha KF o mazání, anonymizaci a retenčních stopách v SaaS: rozdíl mezi účtem, členstvím a workspace, retenční mapa, soft delete stavy, anonymizace vs. pseudonymizace, orchestraci výmazu, auditní minimum, zákaznické UI a privacy-first checklist.
 
 - 2026-08-19: Přidána příloha KE o slučování duplicitních záznamů: definice duplicity, stupně jistoty, výběr master záznamu, merge historie, oprávnění a vazby, náhled dopadu, rollback a privacy-first checklist.
 - 2026-08-19: Přidána příloha KD o bezpečném importu zákaznických dat: typy importů, manifest, staging, validace, mapování polí, idempotence, rollback, testy na špinavých datech a privacy-first checklist.
