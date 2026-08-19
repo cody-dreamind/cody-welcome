@@ -47505,7 +47505,165 @@ Tool calling z AI agenta nedělá jen chytřejší UI, ale novou vrstvu oprávn�
 
 ---
 
+# Příloha KL: MCP konektory a AI integrace bez tokenového karnevalu, slepé důvěry a datových průsaků
+
+AI agent bez konektorů je často jen rychlejší textové pole. AI agent s konektory už ale umí číst e-maily, sahat do CRM, vytvářet pull requesty, spouštět buildy, upravovat databáze nebo posílat zprávy zákazníkům. To je produktově užitečné a bezpečnostně ostré. Přesně ten typ funkce, která v demu vypadá jako kouzlo a v incidentu jako motorová pila v kanceláři.
+
+MCP a podobné integrační vrstvy dávají aplikacím standardizovaný způsob, jak modelu nabídnout nástroje, zdroje a kontext. Privacy-first otázka nezní „umíme připojit všechno?“, ale „které nástroje smí být připojené, pro koho, s jakými daty, pod jakým dohledem a s jakou možností vypnutí?“
+
+## KL.1 Konektor je bezpečnostní hranice, ne plugin na efekt
+
+Každý konektor popiš jako malý produkt. Ne jako technický detail v konfiguraci agenta. U každého konektoru musí být jasné:
+
+- jaký problém řeší,
+- k jakým systémům se připojuje,
+- jaká data čte,
+- jaká data zapisuje,
+- kdo ho smí používat,
+- jak se odpojí,
+- co se loguje,
+- jak se řeší chyba nebo podezření na zneužití.
+
+Špatný popis:
+
+> „Připojení k účetnictví.“
+
+Použitelný popis:
+
+> „Konektor umí vyhledat fakturu podle čísla, zobrazit stav zaplacení a vytvořit návrh upomínky. Neumí měnit bankovní spojení, mazat doklady ani odesílat platby.“
+
+Ten rozdíl je zásadní. První věta říká jen název systému. Druhá věta vymezuje schopnosti, hranice a očekávání.
+
+## KL.2 Registr konektorů drž mimo prompt
+
+Tool registry nemá být kus textu, který model může omylem přepsat vlastním nadšením. Má být backendový kontrakt. Prompt může vysvětlit, jak nástroje používat, ale pravomoci musí vynucovat aplikace.
+
+U každého konektoru drž strukturovanou kartu:
+
+| Pole | Příklad |
+| --- | --- |
+| Název | `billing_invoice_lookup` |
+| Účel | Najít fakturu a zobrazit stav |
+| Typ | Čtení |
+| Datové kategorie | ID zákazníka, číslo faktury, stav, částka |
+| Riziko | Střední, protože pracuje s finančním kontextem |
+| Oprávnění | Jen role Finance a Owner |
+| Limity | 20 dotazů za uživatele za hodinu |
+| Logování | Kdo hledal, jaký tenant, ID faktury, výsledek bez detailu položek |
+| Vypnutí | Feature flag `connector.billing.read.enabled` |
+
+Privacy-first pravidlo: karta konektoru má být čitelná i pro člověka mimo vývojový tým. Když ji neumí pochopit produktový manažer, neumí ji bezpečně schválit ani zákazník.
+
+## KL.3 Tokeny nesmí téct skrz systém jako limonáda
+
+Nejhorší integrační architektura je „vezmeme uživatelův token a pošleme ho dál, nějak to dopadne“. MCP bezpečnostní doporučení výslovně řeší rizika token passthrough, zmateného zástupce, session hijackingu i SSRF při objevování autorizačních endpointů. Praktický překlad pro malý SaaS tým: token není univerzální razítko, které se posílá mezi službami, protože je to zrovna pohodlné.
+
+Bezpečnější vzorec:
+
+1. Uživatel autorizuje konkrétní konektor pro konkrétní účel.
+2. Backend uloží credential šifrovaně a odděleně od produktových dat.
+3. Agent nikdy nedostane surový token do promptu.
+4. Tool endpoint ověří uživatele, tenant, roli, scope i aktuální stav integrace.
+5. Downstream volání používá minimální scope a vlastní serverovou kontrolu.
+6. Revokace konektoru okamžitě zneplatní další volání.
+
+U EU provozu navíc řeš, kde credential fyzicky bydlí, kdo k němu má přístup a jestli se při volání integrace nepřenáší zákaznický obsah mimo smluvně pokrytý region.
+
+## KL.4 Consent obrazovka má říct dopad, ne jen „připojit“
+
+Souhlas s konektorem není kosmetické OAuth okno, které uživatel odklikne, protože chce pokračovat. Má vysvětlit dopad lidsky:
+
+- „Cody bude moct číst názvy projektů a stav úkolů.“
+- „Cody nebude moct mazat úkoly ani měnit členy týmu.“
+- „Data se použijí pouze pro odpovědi v rámci tohoto workspace.“
+- „Konektor může vypnout Owner v nastavení integrací.“
+
+Pro citlivější integrace přidej dvoustupňové schválení: běžný uživatel požádá o připojení a Owner nebo Admin ho povolí. Ano, je to méně sexy než jedno tlačítko. Ale bezpečnost není talentová soutěž v počtu kliknutí za sekundu.
+
+Příklad mikrotextu:
+
+> „Připojením CRM povolíte AI asistentovi vyhledat existující kontakt a připravit návrh odpovědi. Asistent nesmí kontakt smazat, exportovat seznam kontaktů ani spustit hromadnou kampaň.“
+
+## KL.5 Lokální konektory ber jako software s přístupem k počítači
+
+Lokální MCP server nebo desktopový konektor může mít přístup k souborům, terminálu, prohlížeči, Git repozitářům nebo interním síťovým službám. To je jiná liga než obyčejné API přes HTTPS.
+
+Bezpečný baseline:
+
+- instaluj jen konektory z důvěryhodného zdroje,
+- pinuj verze balíčků a kontroluj změny,
+- nespouštěj instalační příkazy bez review,
+- odděl pracovní účet od osobního prostředí,
+- nepouštěj lokální konektor s přístupem k celému disku, pokud potřebuje jednu složku,
+- loguj, jaké nástroje byly klientovi nabídnuté,
+- umožni rychlé vypnutí konektoru při podezření.
+
+Codyho pravidlo: lokální konektor není „jen config“. Je to binárka nebo skript, který běží blízko uživatelských tajemství. Chovej se k němu jako k dodavateli, ne jako k tapetě.
+
+## KL.6 SSRF a objevování endpointů neřeš ručně v pátek večer
+
+Integrační vrstvy často potřebují načíst metadata, OAuth discovery dokumenty, schémata nebo vzdálené zdroje. Pokud útočník dokáže ovlivnit URL, může zkusit donutit server, aby sáhl na interní adresy, cloud metadata endpointy nebo lokální služby. MCP bezpečnostní dokumentace proto zmiňuje blokaci privátních rozsahů, kontrolu redirectů a opatrnost u server-side klientů.
+
+Praktický checklist pro HTTP volání z konektoru:
+
+- povol jen `https://` pro produkční vzdálené endpointy,
+- používej allowlist domén tam, kde to jde,
+- blokuj privátní, link-local a loopback rozsahy mimo explicitní vývojový režim,
+- validuj každý redirect, ne jen první URL,
+- nedůvěřuj DNS výsledku navždy,
+- nastav krátké timeouty a limity velikosti odpovědi,
+- neukládej celé chybové odpovědi, pokud mohou obsahovat tajemství.
+
+Ruční parsování IP adres je past. Útočníci milují alternativní zápisy, IPv6 okrajové případy a redirectové matrjošky. Použij ověřenou knihovnu nebo síťovou egress policy.
+
+## KL.7 Zákazník potřebuje integrační inventář
+
+B2B zákazník se nebude ptát jen „umí to Slack?“ Bude se ptát: kam tečou data, jak se konektor vypne, kdo ho povolil, jaký má scope, kde jsou logy a co se stane při odchodu.
+
+V administraci ukaž jednoduchý inventář:
+
+| Integrace | Stav | Povolená data | Povolené akce | Poslední použití | Vlastník |
+| --- | --- | --- | --- | --- | --- |
+| CRM | Aktivní | Kontakty, firmy, poznámky bez příloh | Čtení, návrh odpovědi | 2026-08-19 | Jana, Owner |
+| Fakturace | Částečná | Faktury a platby | Jen čtení | 2026-08-18 | Petr, Finance |
+| GitHub | Vypnuto | Žádná | Žádná | Nikdy | — |
+
+Přidej tlačítko „Zobrazit poslední použití“ a „Odpojit“. Pokud odpojení nechá stínové kopie dat v cache, napiš to rovnou a dej možnost jejich smazání. Tiché cache jsou přesně ten detail, který vypadá nevinně až do prvního auditu.
+
+## KL.8 Checklist MCP konektorů a AI integrací
+
+- Každý konektor má produktovou kartu s účelem, daty, akcemi, vlastníkem a vypnutím.
+- Tool registry je backendový kontrakt, ne jen instrukce v promptu.
+- Agent nikdy nedostává surové tokeny, hesla ani dlouhodobé credentials.
+- Každé volání ověřuje uživatele, tenant, roli, scope a stav integrace.
+- Consent obrazovka vysvětluje konkrétní čtení, zápisy a omezení.
+- Citlivé zápisové akce vyžadují potvrzení dopadu nebo schválení vlastníkem.
+- Lokální konektory mají omezený filesystem/network přístup a pinované verze.
+- HTTP klient chrání proti SSRF, redirectům na interní rozsahy a nekonečným odpovědím.
+- Administrace ukazuje aktivní integrace, scope, vlastníka, poslední použití a odpojení.
+- Cache a dočasné kopie mají retenční pravidlo a možnost úklidu po odpojení.
+- Logy obsahují auditní metadata, ale ne celé zákaznické dokumenty ani tokeny.
+- Incidentní runbook obsahuje postup revokace konektoru, rotace credentials a zákaznické oznámení.
+
+## Codyho komentář
+
+Nejlepší AI integrace není ta, která umí „všechno“. Nejlepší je ta, která umí přesně tolik, kolik zákazník čeká, a ani o pixel víc. Když konektor neumíš vysvětlit v jedné tabulce, je moc nejasný. A když neumíš vypnout jeho dopad jedním řízeným postupem, není to integrace, ale sázka do bezpečnostní loterie. Spoiler: loterie bývá výnosná hlavně pro loterii.
+
+## Zdroje k příloze
+
+- Model Context Protocol: Security Best Practices, aktuální dokumentace k rizikům jako confused deputy, token passthrough, SSRF, session hijacking a lokální MCP servery: https://modelcontextprotocol.io/docs/2025-11-25/tutorials/security/security_best_practices
+- OWASP Cheat Sheet Series: AI Agent Security Cheat Sheet, doporučení k agentním oprávněním, nástrojům, auditovatelnosti a lidskému dohledu: https://cheatsheetseries.owasp.org/cheatsheets/AI_Agent_Security_Cheat_Sheet.html
+- NIST: Artificial Intelligence Risk Management Framework: Generative Artificial Intelligence Profile, NIST AI 600-1, publikováno 26. července 2024: https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence
+
+## Shrnutí přílohy
+
+MCP konektory a AI integrace jsou samostatná bezpečnostní hranice. Privacy-first SaaS je musí navrhovat jako produktový kontrakt: s jasným účelem, minimálním scope, backendovým vynucením oprávnění, bezpečnou správou tokenů, srozumitelným consentem, ochranou proti SSRF, inventářem pro zákazníka a rychlým vypnutím. Agent má pracovat přes kontrolované nástroje, ne přes tajné superklíče schované v promptu.
+
+---
+
 ## Pracovní log
+
+- 2026-08-19: Přidána příloha KL o MCP konektorech a AI integracích v privacy-first SaaS: produktové karty konektorů, backendový tool registry, bezpečná správa tokenů, consent obrazovky, lokální konektory, SSRF ochrana, zákaznický inventář integrací a checklist.
 
 - 2026-08-19: Přidána příloha KK o AI agentech a tool callingu v privacy-first SaaS: třídění nástrojů podle dopadu, omezená oprávnění, potvrzení dopadových akcí, tool registry, limity smyček a nákladů, bezpečné logy a checklist.
 
