@@ -45352,7 +45352,186 @@ Můj pohled: feature flag je jako ostrý kuchyňský nůž. V rukou klidného t�
 Feature flags jsou užitečné jen tehdy, když mají typ, vlastníka, bezpečný default, minimální targeting, audit změn, rollout plán, kill switch a plán odstranění. Privacy-first SaaS je nepoužívá jako skryté sledování ani jako trvalou skládku starého kódu. Používá je jako řízený provozní mechanismus: změnu pustit pomalu, měřit jen nutné signály, rychle zastavit průšvih a po dokončení uklidit.
 
 
+# Příloha JY: Entitlements a produktové nároky bez tarifního chaosu, skrytých výjimek a zákaznické loterie
+
+Entitlement je produktové pravidlo, které říká, na co má zákazník nárok: kolik členů týmu může pozvat, jestli má API přístup, jaký export smí spustit, jak dlouho se drží historie, jestli má audit log, jaké integrace jsou dostupné a co se stane po překročení limitu. Zní to účetně, ale ve skutečnosti je to jeden z nejdůležitějších provozních systémů SaaS.
+
+Když entitlements nejsou explicitní, produkt se začne rozhodovat podle náhodných podmínek v kódu: `if plan == "pro"`, `if customerId in specialList`, `if isEnterprise`, `if oldContract`, `if beta`, `if adminSaidSo`. Po pár měsících nikdo neví, co vlastně zákazník koupil, co dostal historickou výjimkou a co funguje jen proto, že se na to bojíme sáhnout. To není flexibilita. To je tarifní archeologie s produkčními důsledky.
+
+Privacy-first SaaS potřebuje entitlements navržené stejně pečlivě jako autorizaci. Nejde jen o monetizaci, ale o férovost, bezpečnost, auditovatelnost a datové minimum. Zákazník má vědět, co má k dispozici. Tým má vědět, proč. Systém má rozhodovat konzistentně. A nikdo kvůli tomu nemá stavět datový profil zákazníka větší než samotný produkt.
+
+## JY.1 Odděl tarif, smlouvu, oprávnění a technický limit
+
+Nejčastější chyba je nacpat všechno do jednoho slova: „plan“. Jenže tarif není totéž co oprávnění. Oprávnění není totéž co limit. A smluvní výjimka není totéž co feature flag. Když se tyhle vrstvy smíchají, vznikne kód, kde změna ceníku omylem otevře exporty, vypne audit log nebo zákazníkovi zruší API klíče.
+
+Praktické vrstvy:
+
+- **Tarif**: obchodní balíček, například `starter`, `team`, `business`.
+- **Entitlement**: konkrétní nárok, například `api_access`, `audit_log`, `monthly_exports_limit`.
+- **Oprávnění uživatele**: role nebo vztah člověka k akci, například owner smí změnit billing.
+- **Technická kvóta**: měřitelný limit spotřeby, například počet exportů za měsíc.
+- **Smluvní výjimka**: explicitní odchylka s důvodem, vlastníkem a koncem.
+- **Feature flag**: dočasné řízení release, migrace, experimentu nebo kill switche.
+
+Příklad špatné podmínky:
+
+```text
+if user.plan == "business":
+  allow_export_all_customers()
+```
+
+Příklad čitelnějšího rozhodování:
+
+```text
+if can(user, "export_customers", workspace) and entitlement(workspace, "customer_export") == "enabled":
+  if quota_remaining(workspace, "customer_exports_monthly") > 0:
+    start_export_job()
+```
+
+Ano, je to delší. Ale je z toho vidět, že autorizace, nárok a kvóta jsou tři různé otázky. U SaaS, který pracuje se zákaznickými daty, je to rozdíl mezi kontrolovaným produktem a kouzelnickou větví `if`.
+
+## JY.2 Katalog entitlementů je zdroj pravdy
+
+Každý entitlement by měl mít kartu podobně jako API endpoint, scheduled job nebo feature flag. Bez katalogu se entitlementy časem schovají v ceníku, kódu, CRM, fakturačním nástroji a hlavě člověka, který zrovna odjel na dovolenou. To je mimochodem tradiční architektura malého SaaS: důležitá informace běží na biologickém serveru s dovolenou.
+
+Minimální karta entitlementu:
+
+```text
+key: audit_log.retention_days
+type: numeric_limit
+owner: product-security
+default_by_plan:
+  starter: 0
+  team: 30
+  business: 365
+customer_visible: true
+enforced_in: backend
+source_of_truth: billing_entitlements
+privacy_note: Řídí délku dostupnosti auditních událostí; nemění obsah logu.
+support_override: only_with_expiry
+review_cycle: quarterly
+```
+
+Důležité je slovo `enforced_in`. Entitlement zobrazený jen ve frontendu není kontrola, ale dekorace. Backend musí ověřit nárok při každé citlivé akci. UI může pomáhat vysvětlením, disabled stavem nebo výzvou k upgradu, ale nesmí být jedinou bránou. OWASP v autorizaci doporučuje princip nejmenších oprávnění a deny-by-default přístup; stejná disciplína patří i do produktových nároků, protože mnoho entitlementů přímo otevírá přístup k datům nebo operacím.
+
+## JY.3 Výjimky ano, ale s datem spotřeby
+
+B2B SaaS bez výjimek je krásný diagram, ne realita. Jeden zákazník má starou smlouvu, druhý pilot, třetí individuální limit exportů, čtvrtý enterprise doplněk, pátý migruje z původního tarifu. Výjimky jsou v pořádku, pokud nejsou neviditelné.
+
+Každá výjimka potřebuje:
+
+- důvod, proč existuje,
+- vlastníka, který ji schválil,
+- rozsah, koho a čeho se týká,
+- datum konce nebo datum review,
+- auditní záznam změny,
+- zákaznický dopad při zrušení,
+- plán návratu do standardního tarifu.
+
+Špatná výjimka:
+
+```text
+customer_123 has unlimited exports because Ondřej promised something in 2024 maybe
+```
+
+Dobrá výjimka:
+
+```text
+workspace: acme-eu
+entitlement: exports.monthly_limit
+standard_value: 50
+override_value: 200
+reason: migration from legacy contract
+approved_by: sales-lead
+expires_at: 2026-11-30
+customer_visible_note: Legacy migration allowance until renewal.
+```
+
+Privacy-first pravidlo: výjimka nemá být profil zákazníka. Neukládej do ní interní poznámky typu „náročný klient“, „hodně tlačí na cenu“ nebo „CEO zná investora“. Entitlement systém má rozhodovat o produktu, ne sloužit jako CRM drbník.
+
+## JY.4 Limity vysvětluj dřív, než bolí
+
+Limit, který zákazník objeví až chybou, působí jako past. Limit, který vidí dopředu, působí jako férové pravidlo. Rozdíl není v technice, ale v komunikaci.
+
+U kvót a limitů zobrazuj:
+
+- aktuální spotřebu a období, například „32 z 50 exportů tento měsíc“,
+- co se stane po dosažení limitu,
+- kdo může limit zvýšit nebo tarif změnit,
+- zda existuje grace režim,
+- kdy se limit obnoví,
+- odkaz na detail tarifu nebo billing nastavení.
+
+Mikrotext před limitem:
+
+> „V tarifu Team máte 50 zákaznických exportů měsíčně. Teď jste na 44. Po dosažení limitu půjdou dál exportovat jednotlivé záznamy, ale hromadný export se pozastaví do dalšího období.“
+
+Mikrotext po limitu:
+
+> „Měsíční limit hromadných exportů je vyčerpaný. Data nezamykáme: jednotlivé záznamy zůstávají dostupné a owner workspace může navýšit tarif nebo požádat o dočasné navýšení.“
+
+Tohle je mnohem lepší než `403 Forbidden`. Technicky je odpověď možná správně, lidsky je to facan dveřmi.
+
+## JY.5 Entitlements testuj jako bezpečnostní hranici
+
+Entitlement není jen pricing tabulka. Často rozhoduje, jestli zákazník získá export dat, delší historii, integraci, API klíč, admin funkci nebo automatizaci. Proto patří do testů stejně jako autorizace. OWASP API Security Top 10 popisuje riziko broken object level authorization jako situaci, kdy API neověří, zda má uživatel právo pracovat s konkrétním objektem. U entitlementů je podobné riziko: systém sice ví, kdo uživatel je, ale neověří, zda jeho workspace má daný nárok.
+
+Testovací matice pro jednu funkci:
+
+- uživatel má roli, workspace má entitlement: akce projde,
+- uživatel má roli, workspace entitlement nemá: akce neprojde,
+- uživatel nemá roli, workspace entitlement má: akce neprojde,
+- starý tarif s výjimkou: akce projde jen v rozsahu výjimky,
+- překročená kvóta: akce se zastaví nebo zařadí podle pravidel,
+- zrušený workspace: akce neprojde bez ohledu na staré nároky,
+- support/admin režim: akce vyžaduje explicitní důvod a audit.
+
+U každého testu kontroluj nejen odpověď API, ale i vedlejší efekty: nevznikl job, neposlal se e-mail, neodečetla se kvóta, nevznikl export, nezapsal se citlivý payload do logu. Nejlepší entitlement kontrola je ta, která selže nudně a bezpečně.
+
+## JY.6 Frontend má učit, backend rozhodovat
+
+Frontend je skvělé místo pro vysvětlení nároků: badge tarifu, uzamčená karta funkce, odhad spotřeby, CTA na upgrade, porovnání tarifů. Backend je jediné správné místo pro vynucení. Pokud stačí otevřít devtools a poslat request ručně, entitlement neexistuje. Existuje jen iluze, že tlačítko nebylo vidět.
+
+Dobré UI chování:
+
+- Ukáže nedostupnou funkci s krátkým vysvětlením, ne jen šedý hrob tlačítka.
+- Neukazuje citlivé počty nebo názvy objektů, ke kterým zákazník nemá nárok.
+- Odděluje „nemáš roli“ od „workspace nemá tarifní nárok“ jen tam, kde to neprozrazuje citlivý stav.
+- Nezneužívá limit jako nátlakový dark pattern.
+- Umožní export nebo odchod zákazníka i po downgrade, pokud to vyžaduje férový offboarding.
+
+Privacy-first komentář: zákazník nemá být rukojmí tarifu. Omezení funkcí je normální. Zamčení vlastních dat jako prodejní taktika je trapné. A ještě k tomu špatně stárne v Evropě, kde kontrola nad daty není jen hezký slogan.
+
+## JY.7 Checklist entitlement systému
+
+- Má každý produktový nárok stabilní klíč, typ, vlastníka a popis zákaznického dopadu?
+- Je zdroj pravdy jeden systém, ne směs ceníku, CRM, kódu a ručních poznámek?
+- Rozlišuje aplikace tarif, entitlement, uživatelskou roli, kvótu, výjimku a feature flag?
+- Vynucuje backend všechny citlivé entitlementy i při ručně poslaném API requestu?
+- Mají výjimky datum konce nebo review, důvod a auditní stopu?
+- Vidí zákazník férově spotřebu limitů a dopad dosažení kvóty?
+- Neobsahují targeting pravidla osobní nebo obchodní poznámky, které do produktu nepatří?
+- Existují testy pro kombinace role, workspace, tarifu, výjimky, kvóty a zrušeného účtu?
+- Umí tým bezpečně změnit ceník bez nechtěného otevření dat nebo funkcí?
+- Je downgrade navržen tak, aby chránil data, ale nedržel zákazníka jako rukojmí?
+
+## Codyho komentář
+
+Můj pohled: entitlements jsou místo, kde se SaaS potká s realitou peněz. A realita peněz umí být hlučná. Sales chce výjimku, produkt chce jednoduchost, support chce rychle pomoct, zákazník chce férovost a vývojář chce, aby se z toho nestal grep přes celý repozitář. Dobře navržený entitlement systém není sexy feature, ale šetří stovky malých konfliktů. Je to tarifní diplomacie zabalená do bezpečného kódu.
+
+## Zdroje k příloze
+
+- OWASP Authorization Cheat Sheet, princip nejmenších oprávnění a deny-by-default přístup: https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html
+- OWASP API Security Top 10 2023, API1 Broken Object Level Authorization jako riziko chybějící kontroly přístupu ke konkrétním objektům: https://owasp.org/API-Security/editions/2023/en/0xa1-broken-object-level-authorization/
+- OpenFeature specifikace, Evaluation Context jako struktura pro vyhodnocování feature flagů a targeting key: https://openfeature.dev/specification/sections/evaluation-context/
+
+## Shrnutí přílohy
+
+Entitlements převádějí ceník, smlouvy a produktová pravidla do bezpečně vynuceného systému. Malý SaaS tým potřebuje katalog nároků, oddělení tarifů od oprávnění, auditované výjimky, viditelné limity, backendové vynucení a testy kombinací rolí, workspace, kvót a stavů účtu. Privacy-first přístup z entitlementů dělá férový provozní kontrakt: zákazník ví, co má, systém ví, proč to povoluje, a produkt nesbírá zbytečná data jen proto, aby mohl rozhodovat o přístupu.
+
+
 ## Pracovní log
+- 2026-08-19: Přidána příloha JY o entitlementech a produktových nárocích v SaaS: oddělení tarifů, oprávnění, kvót, výjimek a feature flagů, katalog nároků, auditované výjimky, viditelné limity, backendové vynucení, testovací matice a privacy-first checklist.
 - 2026-08-19: Přidána příloha JX o feature flags, rolloutech a kill switchích: typy flagů, minimální targeting, rollout stupně, audit změn, úklid starých flagů, experimenty bez tichého sledování a checklist.
 - 2026-08-19: Obnoven plný obsah e-booku po předchozím zkrácení souboru a přidána příloha JW o plánovaných úlohách, cronu a automatizacích: katalog jobů, stav běhů, idempotence, datové minimum, alerty, ruční spuštění, retenční brzdy a checklist.
 - 2026-08-19: Přidána příloha JV o background jobech, frontách a workerech: výběr asynchronních operací, stavový model jobů, minimální payload, retry podle typu chyby, dead-letter queue, UX dlouhých úloh, monitoring podle zákaznických slibů a privacy-first checklist.
