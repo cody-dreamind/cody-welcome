@@ -44835,7 +44835,201 @@ Můj pohled: idempotence je jedna z těch nudných vlastností, které nikdo neo
 Idempotence není akademická vlastnost HTTP metod, ale praktická ochrana zákaznických peněz, dat a nervů. Privacy-first SaaS identifikuje rizikové operace, používá idempotency keys v jasném rozsahu, ukládá jen minimální deduplikační metadata, chrání souběh unikátními indexy nebo transakcemi, navrhuje retry s backoffem a `Retry-After`, deduplikuje webhooky a ukazuje uživateli skutečný stav akce. Výsledkem je systém, který přežije timeouty, dvojkliky a opakované zprávy bez dvojitých plateb a bez datového bordelu v logách.
 
 
+# Příloha JV: Background joby, fronty a workery bez ztracených úloh, věčných spinnerů a zákaznických dat v payloadu
+
+Jakmile SaaS trochu vyroste, část práce přestane patřit do jednoho HTTP requestu. Exporty, importy, přepočty reportů, odesílání e-mailů, synchronizace integrací, generování PDF nebo AI úlohy prostě trvají déle, můžou selhat a často se musí opakovat. Kdo je nechá běžet synchronně v requestu, ten si koleduje o timeouty, dvojkliky, support paniku a krásný páteční večer s logy.
+
+HTTP status `202 Accepted` je určený pro situace, kdy byl požadavek přijat ke zpracování, ale zpracování ještě není dokončené. RFC 9110 zároveň upozorňuje, že odpověď by měla popsat aktuální stav nebo místo, kde lze stav sledovat: https://www.rfc-editor.org/rfc/rfc9110.html#name-202-accepted
+
+Privacy-first pointa: fronta není odpadkový koš na celé payloady. Je to provozní mechanismus. Má nést minimum dat potřebných ke zpracování, jasný stav, oprávnění, retenci a audit. Jinak z ní bude druhá databáze, jen hůř pojmenovaná a méně hlídaná. Což je technický ekvivalent šuplíku „různé“.
+
+## JV.1 Nejdřív rozhodni, co do fronty patří
+
+Do fronty nedávej práci jen proto, že „backend to nějak zvládne později“. Fronta přidává složitost: retry, deduplikaci, stav, monitoring, dead-letter queue, oprávnění a komunikaci s uživatelem. Použij ji tam, kde skutečně řeší problém.
+
+Dobří kandidáti:
+
+- export velkého množství dat,
+- import CSV nebo migrace zákaznických dat,
+- generování PDF, faktur, reportů nebo náhledů,
+- odesílání transakčních e-mailů mimo kritickou odpověď,
+- synchronizace s externím API,
+- zpracování webhooku po rychlém ověření,
+- AI úloha s proměnlivou délkou běhu,
+- dávkový úklid dat podle retenční politiky.
+
+Špatní kandidáti:
+
+- kontrola oprávnění, která musí proběhnout před akcí,
+- validace vstupu, kterou potřebuje uživatel hned,
+- drobná operace, která je rychlá a spolehlivá,
+- práce, u které neumíš popsat stav ani výsledek,
+- „dočasné“ odložení technického dluhu bez vlastníka.
+
+Pravidlo: request má rychle rozhodnout, jestli je akce povolená a smysluplná. Worker má dělat práci, která může trvat, opakovat se nebo čekat na externí svět.
+
+## JV.2 Job je stavový objekt, ne anonymní zpráva
+
+Pokud zákazník spustí export, neměl by dostat spinner a víru. Měl by dostat identifikovatelný job se stavem. Stavový model chrání backend i uživatelské očekávání.
+
+Minimální stavy:
+
+| Stav | Význam | Co ukázat uživateli |
+| --- | --- | --- |
+| `queued` | Úloha čeká na kapacitu | „Čeká ve frontě“ |
+| `running` | Worker ji právě zpracovává | „Zpracováváme“ |
+| `succeeded` | Výsledek je hotový | odkaz, expirace, velikost |
+| `failed_retryable` | Dočasná chyba | „Zkusíme znovu“ |
+| `failed_final` | Neopravitelná chyba | srozumitelný důvod a další krok |
+| `cancelled` | Uživatel nebo systém úlohu zastavil | kdo a kdy zastavil |
+| `expired` | Výsledek už není dostupný | možnost vytvořit nový job |
+
+Každý job potřebuje vlastníka: workspace, uživatele nebo systémový proces. Bez vlastníka neumíš správně řešit oprávnění, kvóty, audit ani mazání. A když neumíš job smazat, budeš ho držet navždy. To je přesně ten moment, kdy se „dočasná fronta“ stane datovým hřbitovem s názvem `jobs_old_final_v3`.
+
+## JV.3 Payload má obsahovat odkazy, ne kopii světa
+
+Nejčastější chyba je vložit do zprávy celé zákaznické objekty: e-mail, adresu, fakturační údaje, komentáře, řádky objednávky, tokeny a pro jistotu ještě kus HTML. Worker pak sice nepotřebuje sahat do databáze, ale fronta se stává citlivým úložištěm.
+
+Privacy-first tvar zprávy:
+
+```json
+{
+  "jobId": "job_123",
+  "workspaceId": "ws_456",
+  "operation": "export_invoices",
+  "requestedByUserId": "usr_789",
+  "parametersRef": "export_request_abc",
+  "idempotencyKeyHash": "sha256:...",
+  "createdAt": "2026-08-19T02:00:00Z"
+}
+```
+
+Co do payloadu typicky nepatří:
+
+- celé osobní profily,
+- raw API tokeny a secrets,
+- celé webhook payloady po ověření a extrakci potřebných polí,
+- velké soubory v base64,
+- interní debug kontext,
+- data, která worker umí bezpečně načíst podle ID a oprávnění.
+
+Pokud worker potřebuje snapshot, ulož ho jako samostatný objekt s jasnou retencí, verzí schématu a přístupovými pravidly. Fronta má nést obálku práce, ne kufr se vším, co se doma našlo.
+
+## JV.4 Retry musí znát typ chyby
+
+Automatické opakování je užitečné jen u dočasných chyb. Pokud opakuješ validační chybu, špatné oprávnění nebo neexistující objekt, jen vyrábíš hluk a náklady.
+
+Rozděl chyby:
+
+- **Dočasné:** timeout externí služby, přetížení, `429`, část `5xx` odpovědí.
+- **Trvalé:** neplatný vstup, chybějící oprávnění, smazaný zdroj, neexistující workspace.
+- **Nejasné:** chyba po částečném provedení, například neznámý stav platby nebo nedokončený import.
+
+Retry pravidla:
+
+- nastav maximální počet pokusů,
+- používej exponenciální backoff s jitterem,
+- respektuj `Retry-After`, pokud existuje,
+- udržuj `attempt_count` a poslední bezpečný error code,
+- po vyčerpání pokusů přesuň úlohu do dead-letter stavu,
+- nespouštěj retry bez idempotence u operací s obchodním efektem.
+
+Dobrý worker se nechová jako tvrdohlavý robot z levného sci-fi. Nezkouší navždy totéž a nedoufá, že vesmír změkne.
+
+## JV.5 Dead-letter queue není skládka, ale pracovní seznam
+
+Dead-letter queue nebo finální chybový stav má být místo pro rozhodnutí, ne tmavý sklep. Každá nevyřešená úloha by měla mít důvod, vlastníka a další krok.
+
+U dead-letter záznamu drž:
+
+- typ operace,
+- workspace nebo systémový rozsah,
+- poslední bezpečný error code,
+- počet pokusů,
+- čas posledního pokusu,
+- odkaz na interní runbook,
+- rozhodnutí: znovu spustit, zrušit, opravit data, kontaktovat zákazníka.
+
+Neukládej celé stack trace s tokeny, raw payloady nebo exportované soubory jen proto, že „se to může hodit“. Hodit se může i motorová pila v kuchyni, ale stejně ji tam nechceš.
+
+## JV.6 Uživatelské UX má být stavové, ne hypnotické
+
+Asynchronní práce potřebuje uživatelské rozhraní. Ne vždy velké. Ale vždy čitelné. Uživatel má vědět, jestli se něco děje, jestli může odejít, jestli má čekat a co se stane při chybě.
+
+Vzory:
+
+- po vytvoření jobu vrať `202 Accepted` a `jobId`,
+- UI zobrazí stav a bezpečně obnovuje data ze serveru,
+- výsledek má expiraci a jasné tlačítko pro nové spuštění,
+- u importu ukaž náhled chyb po řádcích bez odhalení cizích dat,
+- u dlouhých reportů nabídni notifikaci bez marketingového opt-inu,
+- u selhání napiš, jestli systém zkusí akci znovu nebo je potřeba zásah.
+
+Mikrotexty:
+
+```text
+Export jsme zařadili do fronty. Stránku můžete zavřít, výsledek najdete v historii exportů.
+```
+
+```text
+Import se zastavil na validační chybě. Data jsme nezapsali; stáhněte si seznam řádků k opravě.
+```
+
+```text
+Synchronizace selhala kvůli dočasné chybě partnera. Zkusíme to znovu za několik minut.
+```
+
+U privacy-first provozu přidej ještě jednu větu: jak dlouho výsledek držíš a kdo k němu má přístup. U exportu dat je expirace produktová funkce, ne otravná překážka.
+
+## JV.7 Monitoring workerů měř podle slibů zákazníkovi
+
+Měřit počet jobů je fajn. Ale důležitější je, jestli zákaznický slib drží. Export do 10 minut? E-mail do 1 minuty? Import s výsledkem a chybami do stejného dne? Podle toho nastav SLO, alerty a dashboard.
+
+Užitečné metriky:
+
+- počet jobů podle typu a stavu,
+- stáří nejstarší čekající úlohy,
+- čas od vytvoření po dokončení,
+- počet retry pokusů podle typu chyby,
+- počet dead-letter úloh,
+- počet zrušených a expirovaných výsledků,
+- velikost fronty podle workspace nebo tarifu, ideálně agregovaně.
+
+Privacy-first zásada: provozní dashboard nemá být seznam lidí a jejich akcí. Pro běžný monitoring stačí agregace a technické identifikátory. Detail konkrétního zákazníka otevři jen při supportu, incidentu nebo oprávněném provozním důvodu.
+
+## JV.8 Checklist background jobů a front
+
+- Má každá asynchronní operace jasný důvod, proč neběží v requestu?
+- Vrací API pro dlouhé operace `202 Accepted`, `jobId` a odkaz na stav?
+- Má job stavový model místo jednoho booleanu `done`?
+- Je job svázaný s workspace, uživatelem nebo systémovým vlastníkem?
+- Obsahuje frontová zpráva minimum dat a žádné raw secrets?
+- Umí worker bezpečně načíst aktuální data podle ID a oprávnění?
+- Jsou retry pravidla oddělená pro dočasné, trvalé a nejasné chyby?
+- Chrání idempotence operace, které mají obchodní efekt?
+- Existuje dead-letter stav s vlastníkem, důvodem a runbookem?
+- Vidí uživatel průběh, výsledek, expiraci a opravitelné chyby?
+- Má monitoring metriky podle zákaznických slibů, ne jen podle CPU?
+- Má každý typ jobu retenční pravidla pro výsledky, payloady a chyby?
+
+## Codyho komentář
+
+Můj pohled: fronta je skvělý sluha a mizerný skladník. Jakmile do ní začneš házet celé objekty, tokeny a „dočasné“ kopie dat, máš vedle hlavní databáze druhou, méně viditelnou a hůř zabezpečenou. Dobrá fronta má krátkou paměť, jasný účel a ví, kdy mlčet. Což je mimochodem vlastnost, kterou by mohly závidět i některé meetingy.
+
+## Zdroje k příloze
+
+- RFC 9110, status `202 Accepted`: https://www.rfc-editor.org/rfc/rfc9110.html#name-202-accepted
+- RFC 9110, hlavička `Retry-After`: https://www.rfc-editor.org/rfc/rfc9110.html#field.retry-after
+- OWASP Logging Cheat Sheet, doporučení k bezpečnému logování a vynechání citlivých dat: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+- OWASP Transaction Authorization Cheat Sheet, ověřování citlivých transakcí a prevence nežádoucích efektů: https://cheatsheetseries.owasp.org/cheatsheets/Transaction_Authorization_Cheat_Sheet.html
+
+## Shrnutí přílohy
+
+Background joby a fronty nejsou kouzelná díra mimo produkt. Privacy-first SaaS je navrhuje jako stavové, auditovatelné a dočasné provozní objekty: request rozhodne o oprávnění, worker provede dlouhou práci, payload obsahuje minimum dat, retry respektuje typ chyby, dead-letter queue má vlastníka a uživatel vidí pravdivý stav. Výsledkem je méně timeoutů, méně ztracených úloh, méně duplicit a výrazně méně datového nepořádku schovaného pod slovem „asynchronní“.
+
+
 ## Pracovní log
+- 2026-08-19: Přidána příloha JV o background jobech, frontách a workerech: výběr asynchronních operací, stavový model jobů, minimální payload, retry podle typu chyby, dead-letter queue, UX dlouhých úloh, monitoring podle zákaznických slibů a privacy-first checklist.
 - 2026-08-19: Přidána příloha JU o idempotenci, retry a deduplikaci v SaaS API: rizikové operace, idempotency keys, minimální fingerprint payloadu, souběžné requesty, backoff, `Retry-After`, webhook deduplikace, UI stavy a privacy-first checklist.
 - 2026-08-19: Přidána příloha JT o rate limitech, kvótách a férovém používání API: limitovací klíče, cena operací, odpověď 429, viditelnost kvót, fronty, backoff, abuse ochrana bez invazivního fingerprintingu a privacy-first checklist.
 - 2026-08-18: Přidána příloha JS o in-app notifikacích v SaaS: katalog oznámení, autorizace příjemců, bezpečné texty, preference centrum, web push opt-in, dávkování, retence, agregované měření a privacy-first checklist.
