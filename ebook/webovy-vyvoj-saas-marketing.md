@@ -49941,7 +49941,187 @@ Export je test charakteru produktu. Když firma umí data férově vrátit, bezp
 
 Bezpečný export není SQL dump s hezčím názvem. Je to produktová funkce s jasným účelem, minimem dat, oprávněními, expirací, revokací, auditní stopou a srozumitelným formátem. Privacy-first přístup chrání zákazníka i provozovatele: běžné reporty sdílí jen nutné agregace, portabilita má dokumentovaný rozsah a support exporty jsou výjimka s důvodem, ne tajná zkratka.
 
+# Příloha LB: Klientské portály a sdílení dokumentů bez e-mailového chaosu, veřejných složek a přístupů navždy
+
+Klientský portál často vznikne z dobrého úmyslu: „Nebudeme si posílat dokumenty e-mailem, dáme klientům jedno místo.“ Výborně. Jenže bez jasných pravidel se z portálu rychle stane společný šuplík, kde vedle smlouvy leží interní poznámka, starý export, screenshot s osobními údaji a uživatel, který měl odejít z projektu před třemi měsíci. Digitální pořádek je jako lednice v kanceláři: všichni předpokládají, že se o ni někdo stará. A pak jednoho dne najdeš biologický experiment.
+
+Privacy-first klientský portál má být opakem chaotické sdílené složky. Má mít jasný účel, role, životní cyklus dokumentů, auditní stopu, bezpečné pozvánky a pravidelný úklid. Cílem není udělat z každého stažení dokumentu bezpečnostní obřad s bubny. Cílem je, aby klient věděl, kde co najde, tým věděl, co smí sdílet, a provozovatel uměl vysvětlit, kdo měl k čemu přístup.
+
+## LB.1 Portál navrhuj podle situací, ne podle stromu složek
+
+Nezačínej otázkou „jaké složky vytvoříme“. Začni otázkou „co se v portálu reálně děje“. Složky jsou až výsledek. Pokud navrhneš strukturu podle interního týmu, klient dostane mapu cizí kuchyně. Pokud ji navrhneš podle situací, najde rychle to, co potřebuje.
+
+Typické situace:
+
+- klient chce schválit nabídku, smlouvu nebo rozsah práce,
+- klient potřebuje stáhnout fakturu, report nebo výstup,
+- tým potřebuje bezpečně předat citlivý podklad,
+- obě strany řeší připomínky k dokumentu,
+- projekt končí a je potřeba předat archiv,
+- klient mění lidi v týmu a staré přístupy mají skončit.
+
+Z těchto situací potom vyrob informační architekturu:
+
+| Sekce | Účel | Výchozí přístup | Retence |
+| --- | --- | --- | --- |
+| Dokumenty ke schválení | Nabídky, objednávky, smlouvy | Klient admin + interní owner | Do schválení + smluvní archiv |
+| Výstupy projektu | Finální předávky, reporty, exporty | Projektový tým klienta | Po dobu projektu + domluvená lhůta |
+| Fakturace | Faktury a účetní doklady | Klient admin, účetní role | Podle účetní povinnosti mimo běžný portálový úklid |
+| Bezpečné podklady | Citlivé vstupy od klienta | Jen určení lidé | Krátká lhůta, ideálně automatické smazání |
+| Historie aktivit | Kdo co nahrál, stáhl, schválil | Admini a support podle role | Omezená a dokumentovaná |
+
+Praktické pravidlo: každá sekce má mít vlastní větu účelu. „Sem patří finální výstupy projektu, ne pracovní soubory a ne interní poznámky.“ Taková věta působí obyčejně, ale brání pozdějšímu digitálnímu kompostu.
+
+## LB.2 Pozvánka není trvalý klíč od budovy
+
+Největší riziko klientských portálů není hacker v mikině. Často je to pozvánka poslaná na špatný e-mail, účet bez MFA, externí konzultant s přístupem navždy nebo sdílený login „info@firma.cz“, ke kterému nikdo nezná skutečného člověka. Autorizace musí být postavená na serveru a podle výchozího pravidla „nepovoleno, dokud není jasně povoleno“. OWASP Authorization Cheat Sheet doporučuje mimo jiné centrální autorizační mechanismus, deny-by-default přístup a ověřování oprávnění u každého požadavku: https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html
+
+Bezpečný model pozvánek:
+
+- pozvánka je časově omezená,
+- pozvánka je navázaná na konkrétní e-mail,
+- první přihlášení vynutí nastavení účtu,
+- citlivější portál nabízí nebo vyžaduje MFA,
+- role vybírá interní owner, ne automaticky každý člen týmu,
+- pozvánky a změny rolí se zapisují do audit logu,
+- odchod člověka z klientského týmu má jednoduché odebrání přístupu.
+
+Vyhni se větě „pošleme jim jeden odkaz a oni si to přepošlou“. To je pohodlné přesně do chvíle, kdy se odkaz dostane člověku, který už ve firmě nepracuje, nebo partnerovi, který měl vidět jen jednu přílohu. Sdílení musí mít adresáta. Jinak nemáš přístupový model, jen optimismus.
+
+## LB.3 Dokumenty mají životní cyklus
+
+Soubor v portálu není kámen v muzeu. Má vznik, vlastníka, stav, možné schválení, možnou expiraci a někdy i bezpečné smazání. Pokud to neřešíš v produktu, bude to řešit support ručně. A ruční support u citlivých dokumentů je místo, kde vznikají ty nejdražší „ups“ momenty.
+
+Minimální stavy dokumentu:
+
+- **Koncept:** vidí jen interní tým, není určený klientovi.
+- **Ke sdílení:** prošel kontrolou a má nastavený rozsah přístupu.
+- **Sdíleno:** klient má přístup a systém eviduje, komu byl dokument zpřístupněn.
+- **Schváleno nebo nahrazeno:** dokument je uzavřený, případně existuje novější verze.
+- **Archivováno:** dokument zůstává dostupný jen podle pravidel retence.
+- **Smazáno nebo anonymizováno:** dokument už nemá důvod být v portálu.
+
+U citlivějších dokumentů přidej kontrolní otázky před zveřejněním:
+
+- Obsahuje dokument osobní údaje, přístupové údaje, tokeny nebo interní poznámky?
+- Patří dokument opravdu tomuto klientovi a workspace?
+- Vidí ho jen role, které ho potřebují?
+- Má dokument nastavenou expiraci nebo důvod dlouhodobého uchování?
+- Existuje starší verze, kterou má systém označit jako nahrazenou?
+
+Codyho komentář: verzování dokumentů je nudná superschopnost. Bez něj se tým hádá, jestli „final_v7_opravdu_final.pdf“ je aktuální. S ním se hádá méně. Což je v projektovém řízení přibližně ekvivalent světového míru.
+
+## LB.4 Upload musí být bezpečný už před uložením
+
+Upload od klienta je důvěryhodný jen v tom smyslu, že věříme, že klient existuje. Ne že každý jeho soubor je bezpečný, správný, malý, čitelný a bez překvapení. OWASP File Upload Cheat Sheet doporučuje kombinovat allowlist přípon, validaci typu a signatury souboru, bezpečné názvy, limity velikosti, ukládání mimo webroot a kontrolu oprávnění: https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html
+
+Praktický baseline pro portál:
+
+- povol jen očekávané typy souborů podle účelu sekce,
+- nastav limit velikosti a počtu souborů,
+- přejmenuj soubory interním identifikátorem, původní název drž jako metadata,
+- ukládej soubory do neveřejného úložiště,
+- stahování řeš přes autorizovaný endpoint nebo krátkodobý podepsaný odkaz,
+- skenuj soubory, pokud hrozí malware nebo makra,
+- neextrahuj ZIP archiv bez limitů na počet souborů, hloubku a výslednou velikost,
+- loguj bezpečnostní události bez ukládání obsahu souborů do logů.
+
+Ukázka produktového pravidla:
+
+> „Do sekce Bezpečné podklady lze nahrát PDF, PNG, JPG nebo CSV do 25 MB. Soubory jsou dostupné pouze lidem vybraným u požadavku a automaticky se smažou 30 dní po uzavření ticketu, pokud owner nenastaví delší retenci.“
+
+Tohle je mnohem lepší než „nahrajte cokoliv“. „Cokoliv“ je ve webové bezpečnosti skoro vždycky pozvánka na cirkus.
+
+## LB.5 Sdílení má být úzké, odvolatelné a viditelné
+
+Klientský portál má často dvě roviny sdílení: interní sdílení v rámci klientské organizace a externí sdílení mimo ni. Tyto světy nesmí splývat. Externí konzultant, auditor nebo partner může potřebovat jeden dokument, ne celé historické album projektu.
+
+Dobré sdílení má tyto vlastnosti:
+
+- **Úzký rozsah:** dokument, složka nebo konkrétní balík, ne celý workspace omylem.
+- **Jasný příjemce:** e-mail nebo účet, ne anonymní veřejný odkaz bez kontroly.
+- **Expirace:** datum konce přístupu je součást sdílení, ne ruční poznámka v hlavě.
+- **Revokace:** owner umí přístup okamžitě zrušit.
+- **Viditelnost:** admin vidí, kdo má aktuálně přístup.
+- **Audit:** systém eviduje vytvoření odkazu, změnu práv, stažení a zrušení přístupu.
+
+U sdílených odkazů používej krátkou expiraci a jednorázové nebo adresné odkazy tam, kde dokument obsahuje citlivější data. U opravdu citlivých věcí raději vyžaduj přihlášení. Ano, přidá to jeden krok. Ale pořád je to méně bolestivé než vysvětlovat klientovi, proč jeho dokument přežil v cizím inboxu déle než některé civilizace.
+
+## LB.6 Portál potřebuje audit log, ale ne sledovací román
+
+Audit log má odpovědět na otázky: kdo co udělal, kdy, v jakém workspace, s jakým typem objektu a jaký byl výsledek. Nemá být skladištěm obsahu dokumentů, komentářů nebo plných URL s tokeny. OWASP Logging Cheat Sheet zdůrazňuje bezpečnostní účel logování, výběr vhodných událostí, ochranu logů a vyloučení citlivých dat: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+
+Loguj hlavně:
+
+- vytvoření a přijetí pozvánky,
+- změnu role nebo odebrání přístupu,
+- nahrání, nahrazení, archivaci a smazání dokumentu,
+- vytvoření, otevření a revokaci sdíleného odkazu,
+- stažení citlivého dokumentu,
+- neúspěšné pokusy o přístup mimo oprávnění,
+- změnu retenčního pravidla.
+
+Neloguj:
+
+- obsah dokumentu,
+- celé bezpečnostní tokeny,
+- zbytečné osobní údaje příjemců mimo identifikátor účtu,
+- soukromé komentáře, které nejsou bezpečnostní událostí,
+- payloady uploadů.
+
+Audit log by měl být dostupný adminovi klienta v rozumné podobě. Ne jako forenzní dump, ale jako čitelný přehled: „Jana Nováková sdílela `Smlouva 2026.pdf` s `audit@example.eu`, přístup vyprší 2026-09-20.“ To je informace, se kterou jde pracovat.
+
+## LB.7 Session a zařízení patří do zákaznické kontroly
+
+Portál pracuje s dokumenty, takže přihlášení není detail. Uživatel musí mít možnost vidět aktivní session, odhlásit ostatní zařízení a změnit bezpečnostní nastavení. OWASP Session Management Cheat Sheet popisuje session jako stav navázaný na uživatele a zdůrazňuje bezpečné zacházení se session tokeny, jejich životní cyklus a ochranu cookies: https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html
+
+Praktické minimum:
+
+- session cookie má `HttpOnly`, `Secure` a rozumné `SameSite`,
+- session se obnovuje bezpečně po přihlášení a změně oprávnění,
+- citlivé akce mohou vyžadovat opětovné ověření,
+- uživatel vidí poslední aktivitu a aktivní zařízení,
+- admin může odebrat přístup bývalému členovi týmu,
+- změna role invaliduje staré oprávnění bez čekání na další den,
+- pozvánky a reset odkazy mají krátkou platnost.
+
+Pro B2B portál je dobré zavést roli „bezpečnostní kontakt“ nebo „workspace owner“. Někdo na straně klienta musí mít odpovědnost za lidi, kteří mají přístup. Pokud odpovědnost nemá nikdo, přístup mají nakonec všichni. To je sice demokratické, ale ne úplně bezpečné.
+
+## LB.8 Checklist klientského portálu
+
+Před spuštěním nebo větší úpravou klientského portálu projdi tento checklist:
+
+- Má každá sekce portálu jasný účel a vlastníka?
+- Jsou role navržené podle reálných situací klienta, ne podle interní organizační mapy?
+- Jsou pozvánky časově omezené a navázané na konkrétní identitu?
+- Umí admin rychle odebrat přístup konkrétnímu člověku?
+- Má každý dokument stav, vlastníka a retenční pravidlo?
+- Jsou citlivé uploady omezené typem, velikostí, oprávněním a uložením mimo veřejný prostor?
+- Mají sdílené odkazy expiraci, revokaci a auditní stopu?
+- Kontroluje server oprávnění u každého stažení a náhledu?
+- Neobsahují logy obsah dokumentů, plné tokeny nebo zbytečné osobní údaje?
+- Vidí klient srozumitelně, kdo má k čemu přístup?
+- Existuje offboarding scénář pro konec projektu nebo odchod člověka z klientského týmu?
+- Je portál použitelný bez externích trackerů, social widgetů a zbytečných třetích stran?
+
+## Codyho komentář
+
+Klientský portál má být klidné místo. Ne „další systém“, který musí klient hlídat, ale bezpečný stůl, kde leží jen věci k dané spolupráci. Nejlepší portál není ten s nejvíc funkcemi. Je to ten, kde se citlivý dokument nedostane špatnému člověku, staré přístupy nezůstanou viset navždy a klient nemusí přemýšlet, jestli mu něco důležitého uteklo v e-mailu. Privacy-first tady není doplněk. Je to samotný důvod, proč portál existuje.
+
+## Zdroje k příloze
+
+- OWASP Authorization Cheat Sheet — doporučení pro centrální autorizaci, deny-by-default přístup a kontrolu oprávnění: https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html
+- OWASP File Upload Cheat Sheet — praktická ochrana uploadů, validace souborů, bezpečné ukládání a limity: https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html
+- OWASP Logging Cheat Sheet — bezpečnostní logování, výběr událostí, ochrana logů a vyloučení citlivých dat: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+- OWASP Session Management Cheat Sheet — životní cyklus session, bezpečné tokeny, cookies a řízení přihlášení: https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html
+
+## Shrnutí přílohy
+
+Klientský portál není sdílená složka s lepším brandingem. Je to produktová a provozní vrstva pro bezpečné předávání dokumentů, schvalování a přístup klientů. Privacy-first portál stojí na účelu sekcí, adresných pozvánkách, serverové autorizaci, bezpečném uploadu, expirovaném sdílení, audit logu bez citlivého obsahu a jednoduchém offboardingu lidí i celých projektů.
+
 ## Pracovní log
+
+- 2026-08-20: Přidána příloha LB o klientských portálech a sdílení dokumentů: situační struktura portálu, bezpečné pozvánky, životní cyklus dokumentů, uploady, expirované sdílení, audit log, session kontrola a privacy-first checklist.
 
 - 2026-08-20: Přidána příloha LA o exportech, sdílených reportech a datové portabilitě: typy exportů, datové minimum, expirované odkazy, strukturovaný portabilní archiv, exportní joby, bezpečný audit a checklist.
 
