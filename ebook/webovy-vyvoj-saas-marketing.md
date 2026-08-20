@@ -51510,7 +51510,172 @@ Můj pohled: dobrý access control není funkce, kterou zákazník obdivuje na p
 
 Přístupová práva jsou produktová architektura, ne administrační detail. Role mají vycházet z reálných akcí, výchozí oprávnění mají být minimální, backend musí autorizaci kontrolovat sám a SSO je hlavně způsob, jak zákazník dostane identitu pod vlastní správu. Session a tokeny je potřeba chránit jako přístupové karty, audit log má zaznamenávat důležité změny bez zbytečného sledování a offboarding musí umět rychle ukončit přístupy, session i klíče. Privacy-first identita není o nedůvěře k uživatelům. Je o tom, že dobrý systém nemusí každému dávat klíče od všeho.
 
+# Příloha LL: Incidentní runbooky a krizová komunikace bez paniky, hrdinského improvizování a zákaznického mlžení
+
+Incident není jen „něco spadlo“. Incident je stav, kdy systém, data, bezpečnost nebo zákaznický slib nefungují tak, že běžná práce nestačí. Malý SaaS tým nepotřebuje válečnou místnost s třiceti rolemi a nástěnkou jak z kriminálky. Potřebuje jasný runbook, který unavenému člověku ve 22:40 řekne: co ověřit, komu zavolat, co neříkat, co zapsat a kdy problém eskalovat.
+
+Privacy-first provoz má u incidentů jednu výhodu: když sbíráš méně dat a máš kratší retenční doby, máš méně věcí, které se mohou rozbít nebo uniknout. To ale není výmluva pro chaos. Méně dat znamená menší výbuch, ne automaticky hasicí přístroj.
+
+## LL.1 Runbook piš pro stres, ne pro auditní pohodu
+
+Runbook není dokument, který vypadá chytře v klidném sprintu. Je to návod pro situaci, kdy někdo právě dostal alert, zákazník píše „nejde nám fakturace“ a monitoring se tváří jako vánoční stromeček po zkratu. Proto má být krátký, konkrétní a seřazený podle rozhodnutí.
+
+Minimální struktura runbooku:
+
+- **Kdy použít:** jasná definice spouštěče, například „API vrací 5xx více než 5 minut“.
+- **První kontrola:** odkazy na dashboardy, logy, status externích služeb a poslední deploy.
+- **Role:** incident lead, technický řešitel, komunikace zákazníkům, záznamník.
+- **Bezpečnostní brzdy:** co se nesmí dělat bez schválení, třeba mazat data nebo vypínat audit.
+- **Komunikační šablony:** interní update, zákaznický update, závěrečné shrnutí.
+- **Konec incidentu:** podmínky návratu do normálu a povinné postmortem.
+
+Příklad špatného kroku v runbooku:
+
+> „Zkontroluj logy a oprav problém.“
+
+Lepší krok:
+
+> „Otevři dashboard `API errors`, filtruj posledních 30 minut, porovnej endpointy `/login`, `/billing` a `/export`. Pokud chyba souvisí s posledním deployem a rollback nevyžaduje migraci databáze, připrav rollback a požádej incident leada o potvrzení.“
+
+Ten rozdíl je důležitý. Runbook nemá dokazovat, že tým umí používat slova jako observabilita. Má snížit počet rozhodnutí v okamžiku, kdy mozek běží na kávu a tichou paniku.
+
+## LL.2 Severity podle dopadu, ne podle hlasitosti zákazníka
+
+Incidenty se nesmí třídit podle toho, kdo nejhlasitěji křičí. Priority mají vycházet z dopadu na zákazníky, data, bezpečnost, peníze a právní povinnosti. Jeden velký zákazník může mít obrovský obchodní dopad, ale technická závažnost musí být popsaná tak, aby ji tým uměl použít i bez politického divadla.
+
+Praktická stupnice pro malý SaaS:
+
+| Úroveň | Příklad | Reakce |
+| --- | --- | --- |
+| SEV1 | Podezření na únik osobních údajů, plošný výpadek přihlášení, nemožnost používat kritickou funkci pro většinu zákazníků | okamžitý incident režim, interní kanál, vlastník komunikace, právní/privacy triage |
+| SEV2 | Výpadek důležité části produktu pro část zákazníků, chybné faktury, selhávající exporty | rychlé řešení, průběžné update, postmortem podle dopadu |
+| SEV3 | Degradace výkonu, chyba v méně kritické funkci, občasné timeouty | naplánovaná oprava, monitoring, krátký záznam |
+| SEV4 | Kosmetická chyba, jednotlivý support případ bez systémového dopadu | běžný backlog nebo support workflow |
+
+U každé úrovně napiš tři věci: kdo rozhoduje, za jak dlouho má být první update a jaký záznam musí zůstat. Když tohle není předem, vzniká improvizace. A improvizace je roztomilá v jazzu, ne v incident response.
+
+## LL.3 Privacy triage dělej hned na začátku
+
+U evropského SaaS nestačí otázka „běží služba?“. U incidentu se musí hned ověřit i datový dopad: zda šlo o osobní údaje, zda se data mohla zpřístupnit neautorizované osobě, zda se změnila nebo ztratila, koho se to týká a jestli je potřeba právní notifikace.
+
+GDPR pracuje s pojmem porušení zabezpečení osobních údajů a článek 33 stanovuje oznamování dozorovému úřadu bez zbytečného odkladu, pokud možno do 72 hodin od okamžiku, kdy se správce o porušení dozvěděl, pokud není nepravděpodobné riziko pro práva a svobody lidí. To není výzva k panickému e-mailu po pěti minutách. Je to důvod mít triage připravenou předem.
+
+Privacy otázky pro první hodinu:
+
+- Dotýká se incident osobních údajů, zákaznických dokumentů, identit, plateb nebo support obsahu?
+- Jde o nedostupnost, ztrátu, změnu, neoprávněné zveřejnění nebo neoprávněný přístup?
+- Kolik tenantů, uživatelů nebo záznamů může být zasaženo?
+- Dá se dopad omezit okamžitým vypnutím funkce, rotací klíčů nebo zneplatněním session?
+- Máme dost informací pro interní rozhodnutí, nebo potřebujeme forenzní zachování stop?
+- Kdo rozhodne o kontaktování DPO, právníka, zákazníka nebo úřadu?
+
+Privacy-first zásada: do incidentního kanálu nekopíruj celé osobní údaje, exporty databází ani screenshoty s citlivým obsahem. Používej ID, rozsahy, hashované nebo redigované ukázky a odkazy do systémů s oprávněním. Incident kanál není dočasná skládka jen proto, že všichni spěchají.
+
+## LL.4 Komunikace má být rychlá, přesná a skromná
+
+Zákazník nepotřebuje román. Potřebuje vědět, jestli je problém známý, jaký má dopad, co má dělat a kdy přijde další update. Nejhorší kombinace je mlčení následované přehnanou jistotou. Když nevíš, řekni co víš, co ověřuješ a kdy se ozveš znovu.
+
+Šablona prvního zákaznického update:
+
+> „Evidujeme problém s [část služby], který může způsobovat [dopad]. Tým problém řeší od [čas]. Zatím nemáme potvrzený dopad na [data / bezpečnost / fakturaci]. Další update pošleme nejpozději v [čas]. Pokud potřebujete urgentní pomoc, napište na [kontakt].“
+
+Šablona průběžného update:
+
+> „Potvrdili jsme příčinu v [oblast bez zbytečných interních detailů]. Probíhá [opatření]. Dopad je omezený na [rozsah]. Další update pošleme v [čas] nebo dříve, pokud se stav změní.“
+
+Šablona uzavření:
+
+> „Incident je vyřešený od [čas]. Příčinou bylo [stručné vysvětlení]. Dopad byl [rozsah]. Přidali jsme [opatření], aby se problém neopakoval. Detailní shrnutí pošleme [kdy], pokud se vás incident týkal.“
+
+Co do komunikace nepatří:
+
+- interní obviňování dodavatele nebo konkrétního člověka,
+- sliby typu „už se to nikdy nestane“,
+- právní závěry bez právní kontroly,
+- přesné technické detaily, které by zvyšovaly bezpečnostní riziko,
+- osobní údaje nebo identifikátory jiných zákazníků.
+
+## LL.5 Status page je provozní slib, ne marketingová výloha
+
+Status stránka má pomáhat zákazníkům rozhodnout, jestli je problém u nich, nebo u tebe. Nemá sloužit k tomu, aby firma vypadala bezchybně. Pokud status page ukazuje zeleno během incidentu, zákazník se nenaučí, že jsi stabilní. Naučí se, že status page je dekorace.
+
+Privacy-first status page:
+
+- nepotřebuje sledovací skripty,
+- má přímou URL a RSS/Atom feed pro odběr změn,
+- popisuje dopad jazykem zákazníka,
+- odděluje veřejné informace od zákaznicky specifických detailů,
+- má historii incidentů a údržby,
+- umožňuje ruční update i při výpadku hlavní aplikace.
+
+Pokud status page hostuje stejná infrastruktura jako aplikace, je to jako náhradní klíč zamčený uvnitř bytu. Pro malý tým stačí jednoduchý statický web nebo nezávislá evropská služba, ale musí být mimo hlavní blast radius.
+
+## LL.6 Postmortem nemá hledat viníka, ale lepší systém
+
+Po incidentu je lákavé najít člověka, který „to pokazil“. To je rychlé, emocionálně uspokojivé a obvykle skoro k ničemu. Užitečné postmortem hledá systémové mezery: proč šla chyba do produkce, proč ji monitoring nechytil dřív, proč rollback nebyl jasný, proč komunikace vázla a proč runbook neexistoval nebo nefungoval.
+
+Struktura postmortem:
+
+- **Časová osa:** co se stalo, kdy jsme to zjistili, kdy jsme reagovali, kdy bylo vyřešeno.
+- **Dopad:** koho se to týkalo, jaké funkce, jak dlouho, jaká data.
+- **Příčina:** technická i procesní, bez detektivky s jedním viníkem.
+- **Co fungovalo:** rychlé kroky, dobré alerty, užitečné nástroje.
+- **Co nefungovalo:** chybějící signály, nejasné role, pomalá rozhodnutí.
+- **Opatření:** konkrétní úkoly s vlastníkem a termínem.
+- **Zákaznické shrnutí:** co lze bezpečně sdílet ven.
+
+Dobré opatření není „zlepšíme monitoring“. Dobré opatření je „přidat alert na 5xx u `/checkout` nad 2 % po dobu 5 minut, vlastník Petra, termín pátek“. Incident bez opatření je drahé školení bez poznámek.
+
+## LL.7 Regulatorní hodiny měj v runbooku, ne v hlavě
+
+Ne každý malý SaaS spadá pod stejné regulatorní režimy. Ale každý evropský tým by měl mít v runbooku poznámku, které hodiny se ho mohou týkat. U GDPR je kritická triage porušení zabezpečení osobních údajů a možná 72hodinová notifikace dozorovému úřadu. U NIS2 se pro dotčené typy subjektů pracuje mimo jiné s brzkým varováním do 24 hodin a oznámením incidentu do 72 hodin. To neznamená, že každý startup má stejnou povinnost. Znamená to, že „zjistíme po víkendu“ je špatný compliance pattern.
+
+Praktická karta v runbooku:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Máme DPO nebo privacy kontakt? | jméno, e-mail, telefon, záloha |
+| Kdo rozhoduje o GDPR incidentu? | role, ne jen osoba |
+| Který dozorový úřad je primární? | odkaz a interní poznámka |
+| Spadáme do NIS2 nebo podobného režimu? | ano/ne/ověřit právně |
+| Kdo může kontaktovat zákazníka o datovém dopadu? | role a schvalovací krok |
+| Kde je šablona incident reportu? | odkaz na dokument |
+
+Pokud si nejsi jistý právní povinností, nepiš do statusu definitivní věty. Napiš, že dopad vyšetřuješ, a interně eskaluj na kompetentní osobu. Cody není právník. Cody je jen robot, který ví, že právní termíny v incidentu mají větší výbušnost než nepojmenovaný shell skript v produkci.
+
+## LL.8 Checklist incidentního runbooku
+
+- Existuje runbook pro výpadek aplikace, bezpečnostní incident, chybný deploy, problém s platbami a problém s e-mailem?
+- Má každý runbook jasný spouštěč, první kroky a vlastníka rozhodnutí?
+- Je severity definovaná podle dopadu na zákazníka, data, peníze a bezpečnost?
+- Umíme během první hodiny udělat privacy triage bez kopírování citlivých dat do chatu?
+- Má incident kanál pravidla pro redakci údajů a odkazy do systémů s oprávněním?
+- Máme připravené šablony prvního update, průběžného update a uzavření?
+- Funguje status page mimo hlavní infrastrukturu a nabízí přímý odkaz nebo RSS/Atom?
+- Víme, kdo řeší právní posouzení GDPR/NIS2 a kde jsou kontakty?
+- Děláme postmortem s konkrétními úkoly, vlastníkem a termínem?
+- Testujeme alespoň jednou za kvartál jeden incidentní scénář nanečisto?
+
+## Codyho komentář
+
+Můj pohled: incidentní připravenost není o tom, že se nikdy nic nerozbije. To je pohádka pro pitch decky a lidi, kteří nikdy nenasadili DNS změnu v pátek. Dobrý tým se pozná podle toho, že když se něco rozbije, ví kdo vede, co se vypíná, co se zapisuje a jak se mluví se zákazníkem. Klid není absence problémů. Klid je připravený postup.
+
+## Zdroje k příloze
+
+- ENISA — Incident management: přehled evropských aktivit, CSIRT schopností a incident response připravenosti: https://www.enisa.europa.eu/topics/incident-management
+- ENISA — How to set up CSIRT and SOC: praktické vedení pro budování CSIRT/SOC schopností: https://www.enisa.europa.eu/publications/how-to-set-up-csirt-and-soc
+- ENISA — Threats and Incidents: shrnutí incidentního reportingu v EU včetně NIS2 časových rámců: https://www.enisa.europa.eu/topics/state-of-cybersecurity-in-the-eu/threats-and-incidents
+- EDPB — Guidelines 9/2022 on personal data breach notification under GDPR: výklad oznamování porušení zabezpečení osobních údajů: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-92022-personal-data-breach-notification-under_en
+- EUR-Lex — GDPR, článek 33: oznámení porušení zabezpečení osobních údajů dozorovému úřadu: https://eur-lex.europa.eu/eli/reg/2016/679/oj
+- EUR-Lex — NIS2 Directive: evropský rámec kybernetické bezpečnosti a incidentního reportingu pro vybrané subjekty: https://eur-lex.europa.eu/eli/dir/2022/2555/oj
+
+## Shrnutí přílohy
+
+Incidentní runbook je provozní pojistka pro okamžiky, kdy tým nemá čas vymýšlet proces. Má definovat spouštěče, role, první kontrolu, severity, privacy triage, bezpečné komunikační šablony, status page, právní hodiny a postmortem. Privacy-first incident response znamená méně kopírování citlivých dat, jasnější rozhodování, nezávislou komunikaci a konkrétní opatření po každém problému. Incidenty nejdou úplně odstranit. Panika ale ano, pokud ji nahradíš připraveným postupem.
+
 ## Pracovní log
+
+- 2026-08-20: Přidána příloha LL o incidentních runboocích a krizové komunikaci: severity podle dopadu, privacy triage, zákaznické šablony, status page, postmortem, regulatorní hodiny GDPR/NIS2 a checklist připravenosti.
 
 - 2026-08-20: Přidána příloha LK o přístupových právech, SSO a týmové identitě: role podle práce, výchozí minimum oprávnění, backend autorizace, OIDC/SSO, bezpečné session a tokeny, audit log, offboarding a privacy-first checklist.
 
