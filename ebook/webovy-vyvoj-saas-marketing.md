@@ -48112,9 +48112,144 @@ Nákladová disciplína AI funkcí začíná tím, že měříš hodnotu, ne jen
 
 ---
 
+# Příloha KP: AI fallback a degradace služby bez paniky, tichého lhaní a zákaznických dat na útěku
+
+AI funkce se v produkci nerozbíjejí jen výpadkem modelu. Rozbíjejí se pomalou odpovědí, vyčerpaným limitem, špatným retrieval výsledkem, změnou modelu, nedostupným konektorem, příliš dlouhým dokumentem, blokací bezpečnostní politiky nebo tím, že uživatel čekal právní jistotu a dostal sebevědomý odstavec s náladou powerpointového kouzelníka.
+
+Fallback proto není nouzová poznámka v backlogu. Je to produktová vlastnost. Dobře navržený privacy-first SaaS ví, co udělá, když AI funkce nemůže bezpečně dodat výsledek. Někdy nabídne ruční workflow. Někdy zúží úkol. Někdy požádá člověka o doplnění. Někdy férově řekne: „Tohle teď neumíme zpracovat spolehlivě.“ To není selhání. To je dospělost.
+
+NIST AI Risk Management Framework mezi charakteristikami důvěryhodné AI uvádí mimo jiné validitu, spolehlivost, bezpečnost, odolnost, transparentnost a soukromí: https://www.nist.gov/itl/ai-risk-management-framework OWASP Top 10 for LLM Applications upozorňuje na rizika jako nadměrná autonomie, citlivé informace, prompt injection a neomezená spotřeba zdrojů: https://owasp.org/www-project-top-10-for-large-language-model-applications/ Fallback plán je praktická odpověď na otázku: jak se systém chová, když tyhle rizikové situace opravdu nastanou.
+
+## KP.1 Rozliš typ selhání, jinak opravíš špatnou věc
+
+„AI nefunguje“ je stejně užitečná diagnóza jako „internet je divný“. Provozní fallback začíná klasifikací selhání. Každý typ má jinou reakci, jiného vlastníka a jiný dopad na uživatele.
+
+Minimální mapa selhání:
+
+| Typ selhání | Příklad | Správná reakce |
+| --- | --- | --- |
+| Nedostupnost služby | model provider vrací chyby nebo timeouty | fronta, retry s limitem, ruční režim, status zpráva |
+| Bezpečnostní blokace | prompt injection, požadavek na cizí data, nebezpečný tool call | zastavit akci, vysvětlit důvod, zalogovat metadata |
+| Nedostatek kontextu | RAG nenajde zdroj, dokument je zastaralý | požádat o doplnění, nabídnout ruční výběr zdroje |
+| Nízká jistota | odpověď je možná, ale riziková | označit jako návrh, vyžádat schválení člověkem |
+| Nákladový limit | vyčerpaná kvóta, podezřelá smyčka | přerušit, ukázat limit, nabídnout další krok |
+| Právní nebo etická hranice | zákazník chce rozhodnutí s vysokým dopadem | nepředstírat autoritu, předat člověku nebo expertovi |
+
+Tahle tabulka má být součástí návrhu funkce, ne až postmortem po incidentu. Pokud nevíš, jaký fallback platí pro bezpečnostní blokaci, produkt bude mít tendenci dělat nejhorší možnou věc: „zkusit to ještě jednou trochu jinak“.
+
+## KP.2 Navrhni degradaci služby jako uživatelský tok
+
+Degradace služby znamená, že produkt zůstane použitelný i bez plné AI magie. Uživatel možná nedostane automatický výsledek, ale pořád ví, co dělat dál. To je rozdíl mezi spolehlivým produktem a spinnerem, který hypnotizuje obrazovku do stavu smutku.
+
+Příklady degradace podle funkce:
+
+- Supportní AI návrh neodpoví: zobraz šablonu ruční odpovědi, relevantní články znalostní báze a možnost pokračovat bez AI.
+- Generátor nabídky selže: ulož rozepsané vstupy, nabídni základní osnovu nabídky a upozorni člověka, že automatické doplnění neproběhlo.
+- RAG asistent nenajde zdroj: vrať „nenašel jsem dostatečný zdroj“, ne sebevědomý odhad z mlhy.
+- Agentní workflow narazí na rizikovou akci: zastav se před dopadem, ukaž plánované kroky a vyžádej potvrzení.
+- Analytický asistent překročí limit: nabídni agregovaný report z existujících dat místo dalšího generování.
+
+Dobrá degradace chrání práci uživatele. Nikdy nesmí zmizet rozepsaný text, vybraný dokument, formulář ani historie toho, co se systém pokusil udělat. Když už selže automatizace, nesmí s sebou stáhnout i lidskou práci. To už není AI, to je kancelářský poltergeist.
+
+## KP.3 Fallback nesmí potichu měnit datová pravidla
+
+Nejhorší fallback je ten, který při problému obejde vlastní zásady. Například primární model běží v evropském režimu s omezenou retencí, ale při výpadku se požadavek potichu pošle jinému providerovi s jinými pravidly. Technicky šikovné. Důvěrově výbušné.
+
+Privacy-first fallback pravidla:
+
+- Pokud záložní provider zpracovává jiná data, v jiném regionu nebo s jinou retencí, nesmí být zapnutý potichu.
+- Fallback nesmí rozšířit rozsah dat jen proto, že první pokus selhal.
+- Když systém přejde z automatického režimu na ruční podporu, support nesmí získat širší přístup bez důvodu a auditu.
+- Debug režim při incidentu nesmí začít ukládat plné prompty a výstupy bez časového omezení a vlastníka.
+- Zákazník má mít u citlivých funkcí možnost vědět, zda byl použit jiný režim zpracování.
+
+Praktická věta do interního pravidla: „Fallback smí zhoršit pohodlí, latenci nebo míru automatizace. Nesmí zhoršit soukromí bez vědomého rozhodnutí a komunikace.“ Tuhle větu bych klidně vytiskl na hrnek. Hned vedle „neposílej produkční data do testu“.
+
+## KP.4 Retry má mít brzdy, ne ambice maratonce
+
+Retry politika u AI funkcí musí počítat s tím, že každý další pokus může stát peníze, čas a bezpečnostní riziko. Pokud model vrací timeout, není vždy nejlepší řešení poslat stejný prompt pětkrát. Pokud agent neví, co dělat dál, není řešení dát mu dalších deset tool callů a modlit se k démonovi automatizace.
+
+Rozumný retry model:
+
+- krátký retry pro dočasné síťové chyby,
+- exponenciální backoff s náhodným rozptylem,
+- maximální počet pokusů podle typu úkolu,
+- zákaz retry pro bezpečnostní blokace a policy odmítnutí,
+- idempotentní identifikátor úkolu, aby nevznikly duplicitní e-maily, faktury nebo změny dat,
+- jasný stav pro uživatele: čeká, opakuje se, selhalo, předáno člověku, hotovo.
+
+U agentních workflow přidej limit kroků, limit nákladů a limit času. Pokud agent po třech krocích nenašel cestu, pravděpodobně nepotřebuje svobodu. Potřebuje lepší zadání nebo člověka.
+
+## KP.5 Lidské předání musí být připravené před incidentem
+
+Human fallback není „někdo se na to podívá“. Je to konkrétní tok práce. Kdo dostane úkol? Co uvidí? Jaká data smí otevřít? Co uživatel uvidí mezitím? Jak se vrátí výsledek? Jak se pozná, že ruční zásah nepřepsal zákaznická data špatně?
+
+Minimální předávací balíček pro člověka:
+
+- ID úkolu, tenant, funkce a čas vzniku.
+- Bezpečný souhrn problému bez plného citlivého payloadu.
+- Důvod předání: timeout, nízká jistota, bezpečnostní blokace, limit nebo chybějící data.
+- Odkazy na zdroje, které smí člověk použít.
+- Doporučený další krok a zakázané kroky.
+- Auditní záznam ručního zásahu.
+
+Uživatel mezitím nemá čekat v prázdnu. Lepší zpráva: „Automatické zpracování teď nejde dokončit spolehlivě. Uložili jsme vaše zadání a předali ho podpoře. Ozveme se do jednoho pracovního dne.“ Horší zpráva: „Something went wrong.“ To je věta, která by měla jít do muzea pasivní agrese softwaru.
+
+## KP.6 Testuj selhání stejně vážně jako šťastnou cestu
+
+Demo testuje, co se stane, když všechno vyjde. Produkce testuje, co se stane, když nevyjde skoro nic a zákazník zrovna pospíchá. Proto musí mít AI funkce testy fallbacků, nejen testy hezké odpovědi.
+
+Testovací scénáře:
+
+- model provider je nedostupný,
+- model odpovídá příliš pomalu,
+- retrieval vrátí nulové nebo konfliktní zdroje,
+- vstup je příliš dlouhý,
+- uživatel žádá data mimo své oprávnění,
+- tool call selže uprostřed workflow,
+- limit se vyčerpá během úkolu,
+- bezpečnostní filtr zastaví požadavek,
+- ruční předání trvá déle než slíbený čas,
+- fallback nesmí poslat data jinému providerovi bez schváleného režimu.
+
+Každý scénář by měl mít očekávaný text pro uživatele, provozní stav, auditní záznam a metriku. Pokud se fallback testuje jen ručně jednou před launchí, není to fallback. Je to rituál pro uklidnění produktového svědomí.
+
+## KP.7 Checklist AI fallbacku a degradace
+
+Před spuštěním AI funkce zkontroluj:
+
+- Má každá AI funkce popsané typy selhání a odpovídající reakce?
+- Existuje ruční nebo omezený režim, který zachová hlavní práci uživatele?
+- Fallback nemění region, providera, retenci ani rozsah dat potichu?
+- Retry politika rozlišuje technickou chybu, bezpečnostní blokaci a nedostatek kontextu?
+- Agentní workflow má limit kroků, času, nákladů a povolených nástrojů?
+- Uživatel dostane srozumitelný stav místo nekonečného spinneru?
+- Support při ručním předání vidí jen data nutná k vyřešení úkolu?
+- Debug režim má vlastníka, časové omezení a retenční pravidla?
+- Fallback scénáře jsou součástí testovací matice a release checklistu?
+- Incident komunikace umí říct, co bylo nedostupné, bez zveřejňování zákaznických dat?
+
+## Codyho komentář
+
+Nejlepší AI funkce není ta, která se tváří neomylně. Je to ta, která ví, kdy nemá pokračovat. V privacy-first SaaS je elegantní selhání lepší než sebevědomá halucinace s přístupem do produkce. Produkt, který umí bezpečně zpomalit, bývá spolehlivější než produkt, který umí jen zrychlovat směrem ke zdi.
+
+## Zdroje k příloze
+
+- NIST AI Risk Management Framework — důvěryhodnost, spolehlivost, bezpečnost, odolnost a soukromí AI systémů: https://www.nist.gov/itl/ai-risk-management-framework
+- NIST AI RMF Core — požadavek na validaci, bezpečné fungování a řízení rizik nasazených AI systémů: https://airc.nist.gov/airmf-resources/airmf/5-sec-core/
+- OWASP Top 10 for LLM Applications — bezpečnostní rizika LLM aplikací včetně excessive agency a unbounded consumption: https://owasp.org/www-project-top-10-for-large-language-model-applications/
+- OWASP LLM06 Excessive Agency — riziko příliš širokých oprávnění a dopadů agentních aplikací: https://owasp.org/www-project-top-10-for-large-language-model-applications/2_0_vulns/LLM06_ExcessiveAgency.html
+
+## Shrnutí přílohy
+
+AI fallback není technická drobnost, ale produktová, provozní a privacy-first pojistka. Každá AI funkce má vědět, jak bezpečně selhat: zachovat práci uživatele, neobcházet datová pravidla, nepokračovat po bezpečnostní blokaci, omezit retry smyčky, předat práci člověku s minimem dat a testovat selhání stejně vážně jako úspěšnou cestu.
+
+---
+
 
 ## Pracovní log
 
+- 2026-08-20: Přidána příloha KP o AI fallbacku a degradaci služby: typy selhání, fallback UX, datová pravidla, retry brzdy, lidské předání, testovací scénáře a checklist.
 - 2026-08-19: Přidána příloha KO o nákladové disciplíně AI funkcí: jednotka hodnoty, scénářové rozpočty, metadata bez obsahu promptů, limity, optimalizace úkolu, pricing a checklist.
 - 2026-08-19: Obnoven plný obsah e-booku po poškozeném posledním commitu a přidána příloha KN o AI observabilitě: metadata místo plošných prompt logů, kvalita, alerty, prompt injection, debug režim, retence a checklist.
 
