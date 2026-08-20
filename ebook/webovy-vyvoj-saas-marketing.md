@@ -50452,8 +50452,205 @@ Prompt injection nejde „vyřešit promptem“. Dá se jen zkrotit architekturo
 
 Prompt injection je hlavně problém hranic: co je instrukce, co jsou data a co je akce. Bezpečný SaaS odděluje nedůvěryhodný kontext od systémových pravidel, chrání RAG oprávněními, omezuje tool calling, validuje výstupy, testuje nepřímé útoky a drží citlivé akce za lidským potvrzením. Privacy-first princip tu není brzda; je to nejlevnější bezpečnostní vrstva, protože méně kontextu znamená menší útok i menší škodu.
 
+# Příloha LE: Agentní oprávnění a audit bez robota s klíčem od celé firmy
+
+AI agent v SaaS není jen chytřejší chatbot. Jakmile umí číst databázi, volat API, měnit stav účtu, psát zákazníkům nebo spouštět interní workflow, je to nový typ uživatele systému. Jenže uživatel, který umí velmi přesvědčivě vysvětlit, proč chce udělat blbost. Elegantní, moderní, a pořád blbost.
+
+OWASP AI Agent Security Cheat Sheet doporučuje u agentů minimalizovat nástroje, používat per-tool oprávnění, oddělovat sady nástrojů podle důvěry a vyžadovat explicitní autorizaci pro citlivé operace: https://cheatsheetseries.owasp.org/cheatsheets/AI_Agent_Security_Cheat_Sheet.html. OWASP LLM06:2025 zároveň popisuje „excessive agency“ jako riziko, které vzniká z nadměrné funkcionality, nadměrných oprávnění nebo nadměrné autonomie: https://genai.owasp.org/llmrisk/llm062025-excessive-agency/
+
+Privacy-first agentní produkt proto nezačíná otázkou „co všechno agent dokáže“. Začíná otázkou: „co přesně smí udělat bez člověka, co smí jen navrhnout a co nesmí nikdy.“
+
+## LE.1 Agent není role, agent je oprávněný pracovní režim
+
+Častá chyba je vytvořit v systému roli `AI_AGENT` a dát jí přístup „aby to fungovalo“. To je bezpečnostní ekvivalent univerzálního klíče pod rohožkou. Agent nepotřebuje jednu obří roli. Potřebuje pracovní režimy podle úkolu.
+
+Praktické rozdělení:
+
+| Režim | Co smí | Co nesmí | Příklad |
+| --- | --- | --- | --- |
+| Návrhář | číst omezený kontext a připravit návrh | zapisovat do produkce | návrh odpovědi na ticket |
+| Kontrolor | porovnat data a vypsat rizika | měnit data | kontrola fakturačního nastavení |
+| Operátor | provést malou vratnou akci | dělat finanční, právní nebo veřejné akce | změna štítku v CRM |
+| Správce s potvrzením | připravit diff a čekat na schválení | obejít schválení | změna tarifu, smazání exportu |
+
+Každý režim má mít vlastní seznam nástrojů, limit dat, retenční pravidlo a auditní stopu. Tím se z „AI asistenta“ stane kontrolovatelná součást produktu, ne tajemná bytost z šuplíku „nějak to funguje“.
+
+## LE.2 Tool katalog piš jako bezpečnostní dokument
+
+Každý tool call je malá API integrace. Pokud není popsaná, tým nebude vědět, co vlastně agent může. A když to neví tým, útočník bude mít velmi zajímavé odpoledne.
+
+Pro každý nástroj udržuj krátkou kartu:
+
+| Pole | Co napsat | Příklad |
+| --- | --- | --- |
+| Účel | proč nástroj existuje | „Najít objednávku podle ID zákazníka“ |
+| Dopad | read-only, vratný zápis, nevratná akce | „read-only“ |
+| Data | jaká data se posílají agentovi a nástroji | „ID objednávky, stav, částka bez poznámek“ |
+| Scope | jaké objekty smí nástroj zasáhnout | „jen objednávky tenantů uživatele“ |
+| Brána | kdy je potřeba potvrzení | „export nad 50 záznamů“ |
+| Log | co se ukládá | „tool, uživatel, tenant, parametry bez obsahu dokumentu“ |
+| Vypnutí | kdo může tool deaktivovat | „admin produktu nebo security owner“ |
+
+U nástrojů s dopadem používej pozitivní povolení, ne negativní zakazování. Lepší je „agent smí změnit štítek ticketu na jeden z pěti povolených stavů“ než „agent nesmí mazat zákazníky“. Druhá věta nechává příliš mnoho kreativního prostoru. A kreativita patří do kampaní, ne do oprávnění.
+
+## LE.3 Schvalování musí být vázané na konkrétní parametry
+
+Lidské potvrzení není kouzelné tlačítko „ano, důvěřuji AI“. Má potvrzovat konkrétní akci s konkrétními parametry. Jinak se z něj stane alibi.
+
+Špatně:
+
+> „Agent chce upravit účet zákazníka. Schválit?“
+
+Lépe:
+
+> „Agent navrhuje změnit tarif zákazníka Novák s.r.o. z `Starter` na `Pro`, od 2026-09-01, bez změny platební metody. Důvod: zákazník potvrdil upgrade v ticketu #4821. Schválit jednu tuto akci?“
+
+Dobrá schvalovací brána má:
+
+- název akce a systém, ve kterém se provede,
+- identitu zákazníka nebo objektu,
+- přesné parametry před a po,
+- zdroj důvodu, například ticket, objednávku nebo interní žádost,
+- informaci, zda je akce vratná,
+- dobu platnosti schválení,
+- uživatele, který schválil.
+
+Schválení nesmí být přenosné. Když agent po potvrzení změní parametry, musí žádat znovu. Pokud akce vyprší, musí žádat znovu. Pokud se změní zákazník, částka, datum nebo rozsah dat, hádej co: znovu. Ano, je to nudné. Bezpečnost často je. Proto funguje.
+
+## LE.4 Audit log má vysvětlit rozhodnutí, ne ukládat celý mozek
+
+Audit agentních akcí musí být použitelný při incidentu, zákaznickém dotazu i interní kontrole. Nemá ale ukládat kompletní prompty, celé dokumenty a citlivé zákaznické texty jen proto, že „kdyby něco“. Privacy-first audit ukládá metadata a rozhodovací stopu, ne datový močál.
+
+Minimální auditní záznam:
+
+- kdo agenta spustil,
+- v jakém tenantovi a pracovním režimu běžel,
+- jaký nástroj chtěl použít,
+- jaké validované parametry nástroj dostal,
+- zda šlo o read-only, vratnou nebo nevratnou akci,
+- jaké pravidlo akci povolilo nebo odmítlo,
+- kdo a kdy akci schválil, pokud bylo potřeba potvrzení,
+- technický výsledek bez zbytečného obsahu zákaznických dat.
+
+Příklad rozdílu:
+
+| Přístup | Audit |
+| --- | --- |
+| Datový vysavač | uloží celý prompt, celé PDF, odpověď modelu a interní chain-of-thought |
+| Privacy-first | uloží ID dokumentu, hash/verzi, typ akce, parametry, pravidlo, výsledek a odkaz na oprávněný zdroj |
+
+Pokud potřebuješ pro ladění více detailů, udělej krátkodobý debug režim s omezeným přístupem, jasnou expirací a zákazem produkčních tajemství. Debug log, který nikdo nevypíná, je jen budoucí incident s odloženým startem.
+
+## LE.5 Paměť agenta nesmí být skládka
+
+Agentní paměť vypadá lákavě: asistent si pamatuje preference, kontext účtu a předchozí interakce. Jenže paměť je také místo pro únik dat, prompt injection a staré nepravdy. OWASP AI Agent Security Cheat Sheet uvádí memory poisoning jako jedno z agentních rizik; RAG Security Cheat Sheet k tomu doplňuje kontroly pro ingest, retrieval, validaci výstupu a navazující agentní integrace: https://cheatsheetseries.owasp.org/cheatsheets/RAG_Security_Cheat_Sheet.html
+
+Pravidla pro paměť:
+
+- ukládej jen fakta, která mají jasný účel,
+- odděl osobní preference od pracovních dat zákazníka,
+- u každé položky drž původ, vlastníka, datum a expiraci,
+- dovol uživateli paměť zobrazit, opravit a smazat,
+- nikdy neukládej tajné klíče, hesla, tokeny nebo celé citlivé dokumenty,
+- nepoužívej paměť jako autoritu pro oprávnění.
+
+Příklad bezpečné paměti:
+
+> „Uživatel preferuje stručné technické shrnutí v češtině.“
+
+Příklad špatné paměti:
+
+> „Zákazník poslal neveřejnou smlouvu a agent si z ní zapamatoval cenu, kontakty, interní poznámky a právní formulace pro budoucí použití.“
+
+Paměť má zlepšovat ergonomii. Nemá se stát druhou databází bez práv, retence a správy.
+
+## LE.6 Rozpočty a limity jsou bezpečnostní funkce
+
+Agent bez limitů může udělat škodu i bez zlého úmyslu. Stačí smyčka, špatně navržený retry, příliš široký dotaz nebo nečekaně drahý tool. OWASP mezi agentními riziky zmiňuje i unbounded consumption a útoky typu denial of wallet, kdy útočník nebo chyba způsobí nadměrné výpočetní náklady: https://cheatsheetseries.owasp.org/cheatsheets/AI_Agent_Security_Cheat_Sheet.html
+
+Nastav limity na několika vrstvách:
+
+- maximální počet kroků agenta na jeden úkol,
+- maximální počet tool callů podle režimu,
+- časový limit běhu,
+- cenový rozpočet na tenant, uživatele a den,
+- limit velikosti kontextu a počtu dokumentů,
+- rate limit pro zápisové akce,
+- circuit breaker při opakovaných chybách.
+
+Když limit spadne, agent nemá improvizovat. Má stručně vysvětlit, co stihl, co nestihl a jak může člověk bezpečně pokračovat. „Došel mi rozpočet, tak jsem to zkusil přes jinou cestu“ je přesně věta, kterou v produkci slyšet nechceš.
+
+## LE.7 Praktický návrhový vzor: agentní akční karta
+
+Před zapnutím nové agentní akce vyplň kartu. Jedna stránka stačí.
+
+```text
+NÁZEV AKCE:
+[např. Připravit odpověď na support ticket]
+
+REŽIM AGENTA:
+[návrhář / kontrolor / operátor / správce s potvrzením]
+
+UŽIVATELSKÝ PŘÍNOS:
+[co se zrychlí nebo zlepší]
+
+DATA:
+[jaká data agent čte, odkud a proč]
+
+NÁSTROJE:
+[konkrétní tool cally a jejich scope]
+
+ZÁPISOVÝ DOPAD:
+[žádný / vratný / nevratný / externě viditelný]
+
+SCHVALOVACÍ BRÁNA:
+[kdy musí člověk potvrdit a co přesně potvrzuje]
+
+AUDIT:
+[metadata, pravidlo, výsledek, retence]
+
+LIMITY:
+[kroky, čas, cena, počet dokumentů, počet zápisů]
+
+EXIT:
+[jak akci vypnout, kdo je vlastník, jak obnovit stav]
+```
+
+Karta je nudná schválně. Pokud ji tým neumí vyplnit, akce není připravená do produkce. Jestli se někdo urazí, že mu karta brzdí inovaci, nabídni mu kávu a připomeň, že incidenty také inovují — hlavně účet za právníka.
+
+## LE.8 Checklist agentních oprávnění a auditu
+
+- Má agent rozdělené pracovní režimy místo jedné univerzální role?
+- Má každý tool jasný účel, scope, datové minimum a vlastníka?
+- Jsou zápisové, finanční, právní a externě viditelné akce za schválením?
+- Je schválení vázané na konkrétní parametry a krátkou platnost?
+- Vynucuje backend oprávnění nezávisle na tom, co model navrhne?
+- Ukládá audit log rozhodovací metadata bez celých promptů a zákaznických dokumentů?
+- Má agentní paměť účel, původ, expiraci a možnost uživatelské kontroly?
+- Existují limity na kroky, tool cally, čas, cenu, kontext a zápisové akce?
+- Umí tým rychle vypnout konkrétní tool, režim nebo celou agentní funkci?
+- Jsou rizikové změny agentních oprávnění součástí security review před releasem?
+
+## Codyho komentář
+
+Agentní AI je skvělá, když je líná správným způsobem: navrhne, zkontroluje, připraví diff, upozorní na riziko a nechá člověka rozhodnout u věcí s dopadem. Nejhorší agent je ten, který má plná práva, nulovou paměť na vlastní limity a UI, které všechno schová za roztomilé „Hotovo“. Roztomilost není kontrolní mechanismus. Bohužel, protože by se to krásně prodávalo.
+
+## Zdroje k příloze
+
+- OWASP AI Agent Security Cheat Sheet — least privilege pro nástroje, oddělení trust levelů, explicitní autorizace citlivých operací, memory poisoning, denial of wallet a testování agentů: https://cheatsheetseries.owasp.org/cheatsheets/AI_Agent_Security_Cheat_Sheet.html
+- OWASP LLM06:2025 Excessive Agency — riziko nadměrné funkcionality, oprávnění a autonomie u LLM systémů s nástroji: https://genai.owasp.org/llmrisk/llm062025-excessive-agency/
+- OWASP RAG Security Cheat Sheet — praktické kontroly pro ingest, vektorové úložiště, retrieval, validaci výstupu a agentní integrace: https://cheatsheetseries.owasp.org/cheatsheets/RAG_Security_Cheat_Sheet.html
+- OWASP MCP Security Cheat Sheet — bezpečnostní rizika dynamického spouštění nástrojů přes MCP a doporučení pro tool discovery, oprávnění a izolaci: https://cheatsheetseries.owasp.org/cheatsheets/MCP_Security_Cheat_Sheet.html
+- NIST AI 600-1, Generative AI Profile — rámec pro řízení rizik generativní AI v životním cyklu systému: https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence
+
+## Shrnutí přílohy
+
+Bezpečný AI agent v SaaS potřebuje úzké pracovní režimy, tool katalog, backendové oprávnění, parametrické schvalování, audit bez datového vysavače, kontrolovanou paměť, rozpočty a rychlý kill switch. Privacy-first přístup tady není jen etická pozice. Je to praktická architektura: méně dat v kontextu, méně nástrojů v ruce, méně autonomie u dopadových akcí a mnohem méně překvapení v pondělí ráno.
+
 
 ## Pracovní log
+
+- 2026-08-20: Přidána příloha LE o agentních oprávněních a auditu: pracovní režimy agentů, tool katalog, parametrické schvalování, privacy-first audit, bezpečná paměť, rozpočty, limity, akční karta a checklist.
 
 - 2026-08-20: Přidána příloha LD o prompt injection a bezpečných AI akcích: oddělení instrukcí od dat, štítky důvěry, RAG pravidla, tool calling jako API, regresní testy, výstupní brány, prompt pattern a privacy-first checklist.
 
