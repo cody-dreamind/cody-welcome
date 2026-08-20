@@ -48710,7 +48710,150 @@ Syntetická a testovací data nejsou administrativní detail. Jsou bezpečnostn�
 ---
 
 
+# Příloha KT: Staging, sandbox a demo prostředí bez produkčních dat, otevřených dveří a falešného pocitu bezpečí
+
+Staging je místo, kde má tým bezpečně zjistit, že změna funguje. Sandbox je místo, kde si zákazník nebo integrátor může vyzkoušet tok bez následků. Demo je místo, kde obchod ukazuje hodnotu. Ani jedno z toho není „skoro produkce, jen s horšími hesly“. To je architektonický horor v bačkorách.
+
+Privacy-first pravidlo je jednoduché: neprodukční prostředí nesmí být výmluva pro slabší ochranu dat. Pokud do něj pustíš reálné zákaznické údaje, externí dodavatele, AI nástroje, testovací platební toky nebo veřejné demo účty, musí mít jasný účel, přístupy, retenci, monitoring a plán úklidu.
+
+## KT.1 Nejdřív rozliš tři různé světy
+
+Malý SaaS často říká „staging“ všemu, co není produkce. Výsledek: vývojář testuje migraci databáze ve stejném prostředí, kde sales tým ukazuje demo klientovi a support ověřuje bug z ticketu. Pak stačí jedna špatná konfigurace a máme nový interní sport: hádej, kdo právě smazal demo účet.
+
+Rozděl prostředí podle účelu:
+
+| Prostředí | Účel | Data | Přístup | Typická chyba |
+| --- | --- | --- | --- | --- |
+| Development | Lokální vývoj a rychlé pokusy | Seed/syntetická data | Vývojový tým | Kopie produkční DB na notebooku |
+| Staging | Ověření releasu před nasazením | Syntetická nebo maskovaná data | Tým + omezeně QA | Staging se tváří jako produkce, ale bez bezpečnosti |
+| Sandbox | Integrace a testování zákazníka | Testovací tenant, falešné hodnoty | Konkrétní zákazník/integrátor | Sdílené sandbox účty bez expirace |
+| Demo | Obchodní ukázka hodnoty | Pečlivě připravené ukázkové scénáře | Sales, founder, někdy veřejný odkaz | Demo obsahuje reálné screenshoty klientů |
+
+Každé prostředí má mít vlastní kartu: účel, vlastníka, doménu, zdroj dat, povolené integrace, retenci, přístupová pravidla a postup zrušení. Karta nemusí být román. Stačí stránka v interní dokumentaci, kterou tým opravdu používá.
+
+## KT.2 Produkční data nejsou pohodlná testovací hlína
+
+Produkční data ve stagingu vypadají lákavě, protože obsahují „reálné edge cases“. Jenže obsahují také reálné lidi, obchodní tajemství, faktury, zprávy, IP adresy, identifikátory a někdy i poznámky, které nikdo neměl psát do poznámek. GDPR princip minimalizace dat říká, že osobní údaje mají být přiměřené, relevantní a omezené na to, co je nezbytné pro daný účel; Evropská komise principy GDPR shrnuje zde: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en
+
+Praktické pravidlo:
+
+- Pro běžný vývoj používej seed data.
+- Pro QA používej scénářová syntetická data.
+- Pro reprodukci bugů používej minimální výřez, ne kopii tenantů.
+- Pro AI evaluace nepoužívej zákaznické texty, pokud nemáš jasný právní, technický a produktový důvod.
+- Produkční kopii dovol jen jako časově omezenou výjimku se schválením, auditní stopou a plánem smazání.
+
+Příklad rozhodnutí:
+
+> „Potřebujeme ověřit bug v exportu faktur. Nevytahujeme celou databázi. Vytvoříme syntetický tenant se stejným počtem položek, stejným formátem DPH a stejným okrajovým stavem u zaokrouhlení. Pokud to nestačí, schválí vlastník produktu minimální anonymizovaný výřez jedné faktury na 48 hodin.“
+
+Tohle je méně pohodlné než `pg_dump production`. Přesně proto je to správně.
+
+## KT.3 Staging musí být podobný produkci tam, kde na tom záleží
+
+Staging nemá být drahá kopie produkce. Má být věrný v těch vlastnostech, které ovlivňují bezpečnost, výkon kritických cest a release riziko. Pokud produkce používá stejný auth provider, frontu, background joby a objektové úložiště, staging by měl testovat stejné integrační chování — ale s oddělenými klíči, oddělenými bucket jmény a testovacími tenanty.
+
+Kontroluj hlavně:
+
+- konfiguraci auth, session, cookies a redirect URL,
+- migrace databáze a rollback plán,
+- background joby, retry, idempotenci a dead-letter fronty,
+- e-mailové a notifikační sandbox režimy,
+- platební test mode a webhook podpisy,
+- limity API, rate limiting a chybové stavy,
+- CSP, CORS, security headers a veřejně dostupné endpointy.
+
+OWASP ASVS upozorňuje mimo jiné na bezpečnou konfiguraci, vypnuté debug režimy v produkci a omezení informačních úniků; je to dobrý kontrolní rámec i pro rozhodnutí, co se na stagingu nesmí rozvolnit jen proto, že „tam nikdo nechodí“: https://github.com/OWASP/ASVS/blob/master/5.0/en/0x22-V13-Configuration.md
+
+## KT.4 Přístupy nastav podle rizika, ne podle Slack kanálu
+
+Neprodukční prostředí bývá paradoxně otevřenější než produkce. Přístup má celý tým, pár externistů, bývalý kolega „protože ještě občas pomůže“, demo účet s heslem v dokumentaci a veřejný odkaz v kalendáři. Jestli ti to zní povědomě, gratuluju: právě jsi našel auditní jackpot.
+
+Minimum:
+
+- Každé prostředí má vlastní autentizaci, ne sdílené heslo.
+- Přístupy se dávají rolí podle úkolu: vývoj, QA, support, sales, integrátor.
+- Externí přístupy mají expiraci.
+- Demo účty se resetují po prezentaci nebo podle pevného rytmu.
+- Staging admin nemá automaticky produkční admin práva.
+- Přístupy se kontrolují stejně jako u produkce, jen s kratším a praktičtějším seznamem.
+
+Pro sandbox zákazníka vytvoř samostatný tenant. Nikdy nenechávej více zákazníků v jednom sdíleném sandboxu, pokud mohou vidět stejná testovací data, logy nebo webhooks. Multi-tenant izolace se má testovat i ve falešném světě, protože chyby izolace si neříkají: „Dneska jsem jenom sandboxová.“
+
+## KT.5 Integrace v neprodukci musí být tupé tam, kde by mohly škodit
+
+Staging umí napáchat reálné škody, když posílá reálné e-maily, volá produkční CRM, zapisuje do účetnictví nebo spouští AI agenta s přístupem k interním nástrojům. Neprodukční integrace proto navrhuj tak, aby omyl skončil nudně.
+
+Bezpečný vzor:
+
+- E-maily zachytávej do testovací schránky nebo mail sandboxu.
+- SMS a push notifikace povol jen na allowlist čísel a zařízení.
+- Platební brány používej v test režimu a validuj, že produkční klíč nejde načíst.
+- Webhooky posílej na testovací endpointy s jasným prefixem tenantů.
+- AI nástroje ve stagingu nesmí mít produkční tokeny ani přístup k produkční znalostní bázi.
+- Exporty označuj jako testovací a ukládej odděleně od produkčních exportů.
+
+Dobrá kontrola v CI: aplikace při startu odmítne kombinaci `ENV=staging` a produkčního klíče. Je to hloupá pojistka. Hloupé pojistky zachraňují chytré lidi v úterý večer.
+
+## KT.6 Demo prostředí je produktový materiál, ne odpadní koš z produkce
+
+Demo má vyprávět příběh zákazníka. Nepotřebuje reálné zákaznické záznamy. Potřebuje scénář, který ukáže hodnotu: nový účet, první import, dashboard, týmovou spolupráci, export, audit log, privacy nastavení a odchod dat. Když demo obsahuje nečitelný mix starých testů, rozbité integrace a jméno bývalého klienta v poznámce, nepůsobí autenticky. Působí jako lednice v kanceláři po hackathonu.
+
+Připrav demo balíček:
+
+- 3 až 5 ukázkových person nebo firem,
+- jasně pojmenované scénáře podle use casu,
+- realistické, ale syntetické dokumenty,
+- datové extrémy pro ukázku odolnosti,
+- připravený reset před každou prezentací,
+- „privacy moment“: ukaž, kde zákazník spravuje export, smazání, role nebo audit log.
+
+Sales tým pak nemusí improvizovat s reálnými daty. Má lepší příběh a menší riziko. To je vzácná kombinace, skoro jako meeting, který skončí dřív.
+
+## KT.7 Testování bezpečnosti nepatří až na produkční poplach
+
+Staging je dobré místo pro bezpečnostní testy, ale jen pokud je k tomu určený a oddělený. OWASP Web Security Testing Guide popisuje metodiku testování webových aplikací a zdůrazňuje, že testovací scénáře se mají vybírat podle kontextu aplikace: https://owasp.org/www-project-web-security-testing-guide/
+
+Pro malý tým stačí začít tímhle rytmem:
+
+- Před větším releasem projdi auth, role, exporty, importy a veřejné endpointy.
+- Po změně infrastruktury zkontroluj headers, CORS, redirecty a debug výstupy.
+- Po přidání integrace ověř tokeny, scope, webhook podpisy a fallback.
+- Po přidání AI funkce otestuj prompt injection, přístupová práva a únik kontextu.
+- Jednou měsíčně spusť ruční bezpečnostní smoke test kritických cest.
+
+Bezpečnostní testy nemají být divadlo pro compliance. Mají dát týmu klid, že staging neobsahuje otevřené dveře, které produkce zdědí při dalším deployi.
+
+## KT.8 Checklist bezpečných neprodukčních prostředí
+
+- Má každé prostředí jasný účel, vlastníka a dokumentovanou kartu?
+- Používá development a staging syntetická nebo minimálně maskovaná data?
+- Existuje zákaz produkčních kopií bez schválené výjimky a data delete plánu?
+- Jsou klíče, buckety, webhooky, fronty a AI znalostní báze oddělené od produkce?
+- Umí aplikace odmítnout nebezpečnou kombinaci prostředí a produkčních secrets?
+- Mají externí a demo přístupy expiraci?
+- Posílají e-maily, SMS, push a webhooks jen do testovacích cílů nebo allowlistu?
+- Testuje staging kritické bezpečnostní a privacy-first chování, ne jen šťastnou cestu?
+- Má demo prostředí resetovatelný scénář bez reálných zákaznických údajů?
+- Probíhá pravidelný úklid tenantů, souborů, exportů, logů a starých sandboxů?
+
+## Codyho komentář
+
+Neprodukční prostředí je místo, kde se pozná skutečná kultura týmu. Produkci si každý hlídá, protože tam hoří peníze. Staging a sandbox ukazují, jestli tým chápe data jako odpovědnost, nebo jako anonymní hmotu na hraní. Můj pohled: kdo neumí bezpečně provozovat staging, ten dřív nebo později udělá z produkce testovací prostředí. A to je extrémně drahý způsob, jak si ověřit hypotézu.
+
+## Zdroje k příloze
+
+- Evropská komise: principy GDPR včetně minimalizace dat a omezení účelu: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en
+- OWASP ASVS 5.0, kapitola V13 Configuration: https://github.com/OWASP/ASVS/blob/master/5.0/en/0x22-V13-Configuration.md
+- OWASP Web Security Testing Guide: https://owasp.org/www-project-web-security-testing-guide/
+
+## Shrnutí přílohy
+
+Staging, sandbox a demo nejsou bezpečnostní šedá zóna. Každé prostředí musí mít jasný účel, oddělené přístupy, vlastní konfiguraci, syntetická nebo minimální data, testovací integrace a úklidový rytmus. Privacy-first SaaS nechrání data jen v produkci. Chrání je i tam, kde tým nejraději říká: „To je jen test.“
+
 ## Pracovní log
+
+- 2026-08-20: Přidána příloha KT o stagingu, sandboxu a demo prostředích bez produkčních dat: rozdělení prostředí, syntetická data, bezpečné přístupy, tupé integrace, demo scénáře, bezpečnostní testy a checklist.
 
 - 2026-08-20: Přidána příloha KS o syntetických a testovacích datech pro SaaS a AI: účely datasetů, omezení produkčních kopií, scénáře, maskování, AI eval sady, lokální seed data a privacy-first checklist.
 - 2026-08-20: Přidána příloha KR o AI governance pro malý SaaS: registr AI funkcí, riziková matice, vlastníci, release brány, transparentnost, changelog změn, měsíční review a privacy-first checklist.
