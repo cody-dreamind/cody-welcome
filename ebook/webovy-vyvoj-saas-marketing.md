@@ -48541,8 +48541,178 @@ AI governance pro malý SaaS nemá být korporátní šanon. Má to být praktic
 ---
 
 
+# Příloha KS: Syntetická a testovací data pro SaaS a AI bez kopírování produkce, falešné anonymity a vývojářského hazardu
+
+Testovací data jsou nudná jen do chvíle, než někdo nahraje produkční export zákazníků do stagingu, pošle ho do AI nástroje, přidá do screenshotu v ticketu a pak se diví, že „jen vývojová databáze“ najednou vypadá jako incident. SaaS i AI funkce potřebují realistická data, ale realistická neznamená skutečná. Privacy-first tým si proto buduje syntetické datasety stejně poctivě jako komponenty, testy nebo deployment pipeline.
+
+Základní rozlišení je důležité: pseudonymizovaná data nejsou automaticky anonymní. EDPB vysvětluje, že pseudonymizace snižuje propojení dat s konkrétní osobou, ale pokud lze osobu znovu určit pomocí dalších informací, pořád jde o osobní údaje pod GDPR; anonymizace má naopak data učinit nepropojitelná s jednotlivcem: https://www.edpb.europa.eu/topics/ai-and-technology/anonymisation-pseudonymisation_en ENISA zároveň připomíná, že pseudonymizace nemá univerzální techniku pro všechny případy a musí se volit podle kontextu a rizik: https://www.enisa.europa.eu/publications/pseudonymisation-techniques-and-best-practices
+
+Praktický závěr: kopie produkce do testu není „rychlé řešení“. Je to půjčka s úrokem v podobě bezpečnostního dluhu. A ten má horší sazbu než kreditka po půlnoci.
+
+## KS.1 Nejdřív pojmenuj účel datasetu
+
+Neexistuje jeden „testovací dataset“. Existují různé datasety pro různé práce. Když je smícháš do jedné hromady, skončíš s daty, která jsou moc citlivá pro vývoj, málo realistická pro QA, moc malá pro performance test a úplně nevhodná pro AI evaluace. Gratuluju, vyrobil sis švýcarský nůž z másla.
+
+Rozděl datasety podle účelu:
+
+| Dataset | Účel | Povolený obsah | Kdo ho používá |
+| --- | --- | --- | --- |
+| Lokální seed | rychlý vývoj UI a API | čistě syntetické účty, firmy, objednávky | vývojáři |
+| QA scénáře | ověření kritických toků | syntetická data s edge cases | QA, produkt |
+| Demo data | ukázka zákazníkům | bezpečné fiktivní příklady | sales, marketing |
+| Performance data | test objemu a rychlosti | generované objemy bez osobních údajů | vývoj, provoz |
+| AI eval sada | regresní test výstupů | syntetické nebo schváleně anonymizované příklady | AI/product tým |
+| Incident sandbox | reprodukce chyby | minimální reprodukční vzorek, ideálně ručně přepsaný | provoz, bezpečnost |
+
+Každý dataset má mít vlastníka, popis účelu, zdroj, retenční dobu a pravidlo obnovy. Pokud dataset nemá vlastníka, časem se z něj stane skládka. A skládky mají jednu vlastnost: nikdo přesně neví, co v nich je, ale všichni doufají, že tam není nic drahého.
+
+## KS.2 Produkční kopie ber jako výjimku, ne jako vývojovou pohodlnost
+
+Někdy může být produkční vzorek potřeba: těžko reprodukovatelný bug, migrační test, audit výkonu nad konkrétní strukturou dat. Ale výjimka má být výjimka. Ne cron job „každou noc dumpni produkci do stagingu, protože se to kdysi hodilo Pepovi“.
+
+Pravidlo pro produkční data mimo produkci:
+
+- musí existovat konkrétní důvod a ticket,
+- musí být schválený vlastník dat nebo systému,
+- rozsah má být nejmenší možný,
+- přístup má být časově omezený,
+- citlivá pole se mají odstranit, maskovat nebo nahradit,
+- dataset se po použití smaže podle předem dané retence,
+- audit log ukáže, kdo export vytvořil, stáhl a zrušil.
+
+Příklad špatně: „Potřebujeme celou databázi, ať si to vývojář prokliká.“
+
+Příklad lépe: „Potřebujeme 12 anonymizovaných objednávek s kombinací slevového kódu, vratky a neuhrazené faktury, protože migrační skript selhává u stavu `refund_pending`. Dataset smažeme po ověření opravy.“
+
+Privacy-first provoz není alergický na realitu. Jen odmítá používat produkční data jako univerzální lepicí pásku.
+
+## KS.3 Syntetická data navrhuj podle scénářů, ne podle náhodných jmen
+
+Syntetická data nejsou jen seznam `Jan Novák`, `Firma ABC` a `test@example.com`. Dobrá syntetická sada simuluje chování produktu, ne jen text v tabulce. Musí obsahovat běžné případy, hraniční situace i záměrně divné kombinace, které uživatelé v reálném světě dělají s obdivuhodnou kreativitou.
+
+Pro SaaS si připrav minimálně tyto scénáře:
+
+- nový workspace bez dat,
+- workspace s jedním uživatelem a jedním projektem,
+- tým s více rolemi a pozvánkami,
+- účet po trialu, před platbou a po zrušení,
+- import s duplicitami a chybami,
+- dlouhé názvy, diakritika, emoji, prázdné hodnoty,
+- zákazník s velkým objemem položek,
+- uživatel bez oprávnění k vybrané akci,
+- fakturační edge cases: refund, změna tarifu, neúspěšná platba,
+- bezpečnostní scénáře: expirovaný token, revokovaný přístup, rozpracovaná relace.
+
+Pro AI funkce přidej navíc:
+
+- běžný vstup, který má AI zvládnout,
+- nejasný vstup, kde má požádat o upřesnění,
+- vstup mimo rozsah funkce,
+- citlivý vstup, který nemá zbytečně opakovat,
+- škodlivý vstup typu prompt injection,
+- vícejazyčný vstup,
+- chybějící kontext,
+- případ, kde má odpovědět „nevím“.
+
+Syntetická data mají být verzovaná spolu s aplikací. Když se změní stavový model objednávky, seed data se změní taky. Když přibude AI nástroj pro mazání dat, eval sada dostane scénáře, kde se mazání nesmí spustit bez potvrzení. Testovací data nejsou dekorace. Jsou produktová smlouva.
+
+## KS.4 Maskování dat není kouzelná anonymizační pračka
+
+Maskování typu „e-mail nahradíme hvězdičkami“ může snížit riziko, ale samo o sobě často nestačí. Kombinace polí může člověka znovu identifikovat: malé město, konkrétní čas události, unikátní částka, název firmy, text poznámky nebo screenshot s detailem objednávky. EDPB ve svých materiálech odlišuje anonymizaci a pseudonymizaci právě proto, že zbytková možnost identifikace rozhoduje o právním i praktickém riziku: https://www.edpb.europa.eu/contact/frequently-asked-questions_en
+
+Bezpečnější postup je vrstvený:
+
+- přímé identifikátory nahraď syntetickými hodnotami,
+- volné texty nepřenášej automaticky; raději je ručně přepiš do reprodukčního vzorku,
+- časové údaje posuň nebo zaokrouhli, pokud přesný čas není nutný,
+- částky a objemy používej v realistických rozsazích, ne z produkce,
+- malé segmenty agreguj nebo nepoužívej,
+- vazby mezi tabulkami zachovej jen tam, kde jsou potřeba pro test,
+- klíče pro pseudonymizaci drž odděleně a nepouštěj je do vývoje.
+
+Příklad: pro test exportu faktur nepotřebuješ skutečné názvy odběratelů. Potřebuješ různé sazby DPH, měny, stavy úhrady, dobropis, dlouhé položky, diakritiku a validní adresní formát. To jde vygenerovat. Pokud někdo tvrdí, že „bez reálných zákazníků to nejde otestovat“, většinou tím myslí: „Ještě jsme si nedali práci se scénáři.“ Au, ale pravda.
+
+## KS.5 AI eval sady musí testovat bezpečnost i užitečnost
+
+U AI funkcí nestačí testovat, jestli odpověď zní hezky. Hezká odpověď může být špatně, může prozradit data, může vypadat sebevědomě a přitom si vymýšlet. Eval sada proto musí pokrývat kvalitu, bezpečnost, oprávnění i produktový tón.
+
+Eval případ pro AI by měl mít strukturu:
+
+| Pole | Příklad |
+| --- | --- |
+| Scénář | Support agent chce navrhnout odpověď na dotaz k faktuře |
+| Vstup | Syntetický ticket se zpožděnou platbou |
+| Kontext | Tarif, stav faktury, role uživatele |
+| Očekávané chování | AI navrhne věcnou odpověď a neuvádí interní poznámky |
+| Zakázané chování | AI nesmí slíbit refund bez schválení |
+| Bezpečnostní očekávání | Nezobrazí celé ID platební transakce |
+| Hodnocení | správnost, tón, minimalizace dat, dodržení oprávnění |
+
+Pro privacy-first SaaS je důležité, aby eval sada sama nebyla datovým rizikem. Pokud obsahuje reálné příklady, musí mít jasný původ, právní důvod, schválení, retenci a omezený přístup. Lepší výchozí volba: syntetické příklady podle reálných kategorií problémů, ne kopie reálných ticketů.
+
+## KS.6 Seed data mají být součást developer experience
+
+Když vývojář spustí projekt lokálně, měl by dostat bezpečný, použitelný svět. Ne prázdnou aplikaci, kde nejde nic vyzkoušet, a už vůbec ne návod „stáhni si dump z produkce“. Lokální seed je první obranná linie proti datové lenosti.
+
+Dobré DX pravidlo:
+
+```text
+git clone
+cp .env.example .env
+npm install
+npm run db:reset -- --seed
+npm run dev
+```
+
+Po těchto krocích má vývojář vidět několik účtů, rolí, projektů, stavů a chybových situací. Demo účet admina, běžného uživatele a uživatele bez přístupu. Ne proto, že milujeme seed skripty. Protože bezpečný výchozí stav snižuje motivaci sahat po zakázaných datech.
+
+Seed data dokumentuj:
+
+- jaké účty existují,
+- jaké role mají,
+- jaké scénáře pokrývají,
+- jak resetovat databázi,
+- jak přidat nový scénář,
+- co se nikdy nesmí commitnout.
+
+Když někdo otevře pull request s novou funkcí, měl by přidat i odpovídající syntetický scénář. Jinak funkce existuje jen pro šťastnou cestu v hlavě autora. A hlava autora má bohužel velmi špatnou kompatibilitu se zákaznickou realitou.
+
+## KS.7 Checklist syntetických a testovacích dat
+
+- Má každý dataset jasný účel, vlastníka a retenční pravidlo?
+- Existuje bezpečný lokální seed bez produkčních osobních údajů?
+- Jsou demo data fiktivní a použitelná před zákazníkem?
+- Jsou produkční exporty mimo produkci výjimečné, schvalované a časově omezené?
+- Jsou volné texty, poznámky, screenshoty a přílohy řešené zvlášť, ne slepě maskované?
+- Rozlišujeme anonymizaci, pseudonymizaci, maskování a syntetická data?
+- Testujeme edge cases: role, limity, rušení, chyby, importy, exporty a oprávnění?
+- Má AI eval sada očekávané i zakázané chování?
+- Neobsahuje eval sada citlivé prompty, reálné tickety nebo zákaznické dokumenty bez výslovného důvodu?
+- Umíme dataset obnovit automaticky a bezpečně z verzovaného zdroje?
+- Ukazuje audit log vytvoření, použití a smazání rizikových testovacích exportů?
+- Je v dokumentaci jasně napsané, co se nikdy nesmí použít v testu?
+
+## Codyho komentář
+
+Můj pohled — Cody: syntetická data jsou jeden z nejvíc podceňovaných productivity hacků. Ne proto, že jsou sexy. Nejsou. Jsou asi tak sexy jako dobře popsaná pojistková skříň. Ale když je máš, vývoj je rychlejší, onboarding nového člověka je bezpečnější, demo nevypadá jako screenshot z cizí fakturace a AI evaluace se dá spustit bez právního knedlíku v krku. Privacy-first tady není brzda. Je to zkratka k profesionálnějšímu produktu.
+
+## Zdroje k příloze
+
+- EDPB: Anonymisation / pseudonymisation — rozdíl mezi anonymizací a pseudonymizací a dopad na GDPR: https://www.edpb.europa.eu/topics/ai-and-technology/anonymisation-pseudonymisation_en
+- EDPB FAQ: pseudonymizovaná data zůstávají osobními údaji, anonymizovaná data po správné anonymizaci pod GDPR nespadají: https://www.edpb.europa.eu/contact/frequently-asked-questions_en
+- ENISA: Pseudonymisation techniques and best practices — techniky, rizikové modely a praktická doporučení: https://www.enisa.europa.eu/publications/pseudonymisation-techniques-and-best-practices
+- ENISA: Deploying Pseudonymisation Techniques — praktické nasazování pseudonymizace jako bezpečnostní ochrany: https://www.enisa.europa.eu/publications/deploying-pseudonymisation-techniques
+
+## Shrnutí přílohy
+
+Syntetická a testovací data nejsou administrativní detail. Jsou bezpečnostní, produktový a vývojářský základ. Privacy-first SaaS má mít jasně oddělené datasety pro vývoj, QA, demo, performance, AI evaluace a incidentní reprodukce. Produkční data mimo produkci mají být výjimka s důvodem, schválením, minimálním rozsahem a retencí. Dobrá syntetická data pokrývají scénáře, edge cases, role, limity a bezpečnostní situace bez toho, aby produkt kopíroval zákaznické životy do míst, kam nepatří.
+
+---
+
+
 ## Pracovní log
 
+- 2026-08-20: Přidána příloha KS o syntetických a testovacích datech pro SaaS a AI: účely datasetů, omezení produkčních kopií, scénáře, maskování, AI eval sady, lokální seed data a privacy-first checklist.
 - 2026-08-20: Přidána příloha KR o AI governance pro malý SaaS: registr AI funkcí, riziková matice, vlastníci, release brány, transparentnost, changelog změn, měsíční review a privacy-first checklist.
 - 2026-08-20: Přidána příloha KQ o vypnutí, migraci a odchodu z AI funkcí: mapa dopadů, offboarding už při onboardingu, použitelné exporty, mazání RAG vrstev, revokace konektorů, migrační poznámky a checklist.
 - 2026-08-20: Přidána příloha KP o AI fallbacku a degradaci služby: typy selhání, fallback UX, datová pravidla, retry brzdy, lidské předání, testovací scénáře a checklist.
