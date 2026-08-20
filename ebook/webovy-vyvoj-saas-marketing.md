@@ -51373,7 +51373,146 @@ Support je nejlepší produktový výzkum, který už máš zaplacený. Jen ho n
 
 Privacy-first support má být rychlý, ale ne ukvapený; měřený, ale ne šmírovací; strukturovaný, ale ne byrokratický. SLA definuje slib podle dopadu, ticket sbírá jen nutný kontext, tagy pomáhají rozhodování a eskalace předává vývoji čistý problém místo emočního románu. Nejlepší support metrika není počet zavřených ticketů. Je to počet opakovaných problémů, které se díky podpoře už nemusely stát znovu.
 
+# Příloha LK: Přístupová práva, SSO a týmová identita bez sdílených hesel, role „admin pro všechny“ a auditního hororu
+
+Přístupová práva jsou v SaaS produktu jako klíče od kanceláře, skladu a trezoru. Dokud má tým tři lidi, často se to tváří jednoduše: jeden účet, jedno heslo, všichni všechno vidí a když něco nejde, „dej mu admina“. Jenže přesně tady vzniká bezpečnostní dluh, který se později opravuje bolestivěji než CSS z roku 2011. A to už je co říct.
+
+Privacy-first přístup k identitě znamená dvě věci najednou: uživatelé mají pohodlný a spolehlivý přístup k práci, kterou mají dělat, ale produkt zbytečně nerozšiřuje oprávnění, nesbírá identitní údaje navíc a umí vysvětlit, kdo kdy získal přístup k čemu. Nejde o paranoidní zámky na každé kliknutí. Jde o jednoduchou provozní hygienu.
+
+OWASP ASVS dává týmům praktický rámec pro ověřování technických bezpečnostních kontrol webových aplikací a aktuální stabilní verze 5.0.0 je použitelná jako nákupní i vývojová opora: https://owasp.org/www-project-application-security-verification-standard/. Pro běžný malý SaaS z toho plyne skromná, ale zásadní lekce: autentizace, session management a access control nejsou „později“. Jsou součást produktu od prvního zákaznického účtu.
+
+## LK.1 Role navrhuj podle práce, ne podle organizační fantazie
+
+Nejhorší role v malém SaaS se jmenuje `admin`. Druhá nejhorší se jmenuje `superadmin`. Třetí nejhorší je `owner`, pokud dělá totéž co obě předchozí, jen v hezčím svetru. Role nemají popisovat mocenský pocit. Mají popisovat práci, kterou člověk v produktu opravdu vykonává.
+
+Začni inventářem akcí:
+
+| Oblast | Akce | Riziko | Typická role |
+| --- | --- | --- | --- |
+| Uživatelé | Pozvat člena týmu | Střední | Správce týmu |
+| Uživatelé | Změnit roli jiného uživatele | Vysoké | Vlastník organizace |
+| Billing | Změnit tarif nebo fakturační údaje | Vysoké | Billing správce |
+| Data | Exportovat celý workspace | Vysoké | Vlastník nebo data správce |
+| Integrace | Přidat webhook/API klíč | Vysoké | Technický správce |
+| Obsah | Upravit běžný záznam | Nízké až střední | Editor |
+| Audit | Číst audit log | Střední | Bezpečnostní nebo compliance role |
+
+Potom role slož z těchto akcí. Ne opačně. Pokud nejdřív vymyslíš pět rolí a pak do nich začneš sypat oprávnění, vznikne politická mapa, ne bezpečnostní model. Praktické pravidlo: každá role má mít jednu větu „tahle role existuje proto, aby...“. Když větu nedopíšeš, role je pravděpodobně bordel v kostýmu architektury.
+
+## LK.2 Výchozí přístup má být minimum, ne dárek za registraci
+
+Nový uživatel má dostat nejmenší oprávnění, se kterým zvládne první užitečnou práci. Ne všechno, co by se mu jednou mohlo hodit. OWASP Access Control Cheat Sheet zdůrazňuje návrh přístupových kontrol tak, aby se oprávnění kontrolovala konzistentně a nebyla jen věcí schovaného tlačítka v UI: https://cheatsheetseries.owasp.org/cheatsheets/Access_Control_Cheat_Sheet.html
+
+V praxi to znamená:
+
+- backend musí kontrolovat oprávnění u každé citlivé akce,
+- UI může skrýt tlačítko, ale nesmí být jedinou ochranou,
+- API endpoint nesmí spoléhat na to, že „frontend to neposílá“,
+- role se nesmí počítat jen z názvu v tokenu bez ověření proti aktuálnímu stavu,
+- změna role musí invalidovat nebo přepočítat aktivní oprávnění,
+- exporty a destruktivní akce musí mít zvláštní kontrolu.
+
+Příklad špatného patternu: uživatel otevře detail fakturace, UI mu neschová tlačítko „změnit tarif“, ale server stejně přijme požadavek, protože `organizationId` sedí. Příklad lepšího patternu: server kontroluje, že uživatel patří do organizace, má billing oprávnění, akce není blokovaná stavem účtu a změna se zapíše do audit logu.
+
+## LK.3 SSO není enterprise ozdoba, ale snížení provozního chaosu
+
+Single sign-on se často bere jako funkce pro velké firmy a drahé tarify. To je obchodně pochopitelné, ale technicky je dobré chápat SSO hlavně jako způsob, jak zákazník dostane identitu pod vlastní kontrolu. Když firma používá centrální identitu, umí vypnout člověka při odchodu, vyžadovat vlastní MFA a vynutit bezpečnostní politiku bez ručního lovu účtů po SaaS džungli.
+
+OpenID Connect je identitní vrstva nad OAuth 2.0 a umožňuje klientům ověřit identitu uživatele přes autorizační server a získat základní claims interoperabilním způsobem: https://openid.net/specs/openid-connect-core-1_0.html. Pro malý SaaS z toho neplyne nutnost stavět vlastní identity provider. Spíš platí: pokud přidáváš SSO, drž se standardního OIDC/SAML toku, nepřenášej role v neověřených parametrech a jasně odděl autentizaci od autorizace.
+
+Praktický návrh pro B2B SaaS:
+
+- e-mail a heslo nebo magic link pro malé týmy,
+- MFA/passkeys pro citlivé účty a správce,
+- OIDC/SAML pro zákazníky, kteří chtějí centrální správu identity,
+- mapování domény nebo IdP na konkrétní organizaci,
+- oddělená konfigurace SSO od běžného pozvání uživatele,
+- nouzový break-glass účet s velmi přísným režimem a auditováním.
+
+SSO ale neřeší autorizaci za tebe. To, že uživatel prošel firemním identity providerem, neznamená, že smí exportovat všechna data, mazat workspace nebo měnit billing. Autentizace říká „kdo jsi“. Autorizace říká „co smíš“. Kdo to smíchá, ten si koleduje o bezpečnostní guláš.
+
+## LK.4 Session a tokeny chraň jako přístupové karty
+
+Session cookie není drobnost. Je to dočasná přístupová karta k účtu. OWASP Session Management Cheat Sheet doporučuje, aby session identifikátor neobsahoval citlivé nebo osobní údaje, používal silnou náhodnost a byl chráněn TLS a atributem `Secure`: https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html
+
+Minimum pro webovou aplikaci:
+
+- session ID je náhodný identifikátor, ne zakódovaný e-mail nebo user ID,
+- session cookie má `Secure`, `HttpOnly` a rozumné `SameSite`,
+- přihlášení, změna hesla, změna role a přechod do admin režimu regenerují session,
+- logout opravdu zneplatní serverovou session nebo refresh token,
+- dlouhé přihlášení má obnovovací mechanismus a limity,
+- tokeny se neposílají v URL, protože URL končí v historii, logách a refererech,
+- citlivé akce mohou vyžadovat reautentizaci.
+
+Privacy-first detail: do session store neukládej víc, než potřebuješ pro rozhodnutí aplikace. Nepatří tam celé profily, zákaznický obsah, marketingové segmenty ani poznámky obchodníka. Session má nést stav přístupu, ne biografii člověka.
+
+## LK.5 Audit log má pomáhat zákazníkovi, ne špehovat tým
+
+Audit log je jedna z nejdůležitějších B2B funkcí, protože zákazník potřebuje vidět, co se stalo s jeho účtem. Zároveň je to místo, kde lze snadno přestřelit. Logovat každý pohyb myši a každé otevření stránky není bezpečnost. Je to datový vysavač s tabulkou navíc.
+
+Loguj události, které mění bezpečnostní, datový nebo obchodní stav:
+
+- přihlášení a rizikové neúspěšné pokusy v agregované podobě,
+- změny rolí a pozvání uživatelů,
+- vytvoření, zobrazení a zneplatnění API klíče,
+- zapnutí nebo změna SSO,
+- export dat,
+- změna fakturace nebo tarifu,
+- změna retenčních a integračních nastavení,
+- použití support/admin přístupu do zákaznického účtu.
+
+Každá auditní událost má mít: čas, aktéra, organizaci, typ akce, cílový objekt, výsledek, zdrojový režim a bezpečný detail. „Bezpečný detail“ znamená třeba `role změněna z editor na billing správce`, ne kompletní dump objektu před a po změně. Pokud audit log obsahuje osobní údaje nebo identifikátory, vztahuje se na něj stejná logika retence, přístupu a exportu jako na ostatní zákaznická data.
+
+## LK.6 Offboarding je funkce, ne ruční lov v administraci
+
+Největší bezpečnostní mezery často nevznikají při registraci, ale při odchodu. Člověk odejde ze zákaznické firmy, externí agentura dokončí práci, konzultant už nepotřebuje přístup, ale účet žije dál jako digitální zombie. Milé, dokud se nerozhodne okusovat produkční data.
+
+Offboarding checklist pro zákaznický workspace:
+
+- odebrat nebo deaktivovat uživatele,
+- zneplatnit jeho aktivní session a refresh tokeny,
+- převést vlastnictví automatizací, API klíčů a reportů,
+- zkontrolovat sdílené odkazy a exporty,
+- odebrat support access nebo externí role,
+- zaznamenat změnu do audit logu,
+- nabídnout zákazníkovi pravidelné review uživatelů.
+
+Pokud má zákazník SSO, offboarding se má opřít o IdP, ale produkt by přesto měl mít vlastní bezpečnostní brzdy: pravidelnou synchronizaci, reakci na deaktivaci uživatele a možnost ručního nouzového odebrání. „To řeší zákazníkovo SSO“ není plán. Je to přání napsané technickým fontem.
+
+## LK.7 Checklist přístupových práv a identity
+
+- Má každá role jasnou větu, proč existuje?
+- Kontroluje backend oprávnění u každé citlivé akce, ne jen UI?
+- Dostává nový uživatel výchozí minimum oprávnění?
+- Umíme oddělit autentizaci od autorizace v kódu i dokumentaci?
+- Regenerujeme session po přihlášení a změně oprávnění?
+- Neposíláme tokeny v URL a neukládáme do nich osobní údaje?
+- Podporujeme MFA nebo passkeys pro správce a citlivé účty?
+- Má SSO konfigurace jasného vlastníka a auditní stopu?
+- Umíme zákazníkovi ukázat bezpečný audit log důležitých změn?
+- Existuje offboarding postup, který zneplatní session, klíče a externí přístupy?
+
+## Codyho komentář
+
+Můj pohled: dobrý access control není funkce, kterou zákazník obdivuje na první demo schůzce. Je to funkce, kterou ocení ve chvíli, kdy někdo odejde z týmu, audit se zeptá na změny rolí nebo se objeví podezřelé přihlášení. Přístupová práva jsou nudná stejně jako brzdy v autě. A stejně jako brzdy jsou nejzajímavější přesně ve chvíli, kdy nefungují. Takže je radši udělejme nudně dobře.
+
+## Zdroje k příloze
+
+- OWASP Application Security Verification Standard — rámec pro ověřování bezpečnostních kontrol webových aplikací: https://owasp.org/www-project-application-security-verification-standard/
+- OWASP Access Control Cheat Sheet — doporučení pro návrh a kontrolu přístupových oprávnění: https://cheatsheetseries.owasp.org/cheatsheets/Access_Control_Cheat_Sheet.html
+- OWASP Session Management Cheat Sheet — bezpečné session ID, cookie atributy, TLS a regenerace session po změně oprávnění: https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html
+- OpenID Connect Core 1.0 — standardní identitní vrstva nad OAuth 2.0 pro ověření identity uživatele: https://openid.net/specs/openid-connect-core-1_0.html
+- RFC 9700 — Best Current Practice pro bezpečnost OAuth 2.0: https://www.rfc-editor.org/rfc/rfc9700.html
+- FIDO Alliance — passkeys jako přístup k bezheslové autentizaci: https://fidoalliance.org/passkeys/
+
+## Shrnutí přílohy
+
+Přístupová práva jsou produktová architektura, ne administrační detail. Role mají vycházet z reálných akcí, výchozí oprávnění mají být minimální, backend musí autorizaci kontrolovat sám a SSO je hlavně způsob, jak zákazník dostane identitu pod vlastní správu. Session a tokeny je potřeba chránit jako přístupové karty, audit log má zaznamenávat důležité změny bez zbytečného sledování a offboarding musí umět rychle ukončit přístupy, session i klíče. Privacy-first identita není o nedůvěře k uživatelům. Je o tom, že dobrý systém nemusí každému dávat klíče od všeho.
+
 ## Pracovní log
+
+- 2026-08-20: Přidána příloha LK o přístupových právech, SSO a týmové identitě: role podle práce, výchozí minimum oprávnění, backend autorizace, OIDC/SSO, bezpečné session a tokeny, audit log, offboarding a privacy-first checklist.
 
 - 2026-08-20: Přidána příloha LJ o support SLA a provozních metrikách bez sledovacího divadla: priority podle dopadu, datové minimum v ticketech, týmové metriky, slovník tagů, eskalační karta, zákaznické šablony, retence support dat a privacy-first checklist.
 
