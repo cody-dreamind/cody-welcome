@@ -49000,7 +49000,165 @@ Release disciplína je jeden z nejlevnějších způsobů, jak vypadat jako dosp
 
 Release není jen technický deploy. Je to řízená změna produktu, datových pravidel a zákaznického slibu. Malý SaaS tým potřebuje krátkou release kartu, bezpečné feature flagy, postupný rollout podle rizika, nacvičený rollback, zpětně kompatibilní migrace, auditní stopu bez tajemství a připravenou komunikaci. Privacy-first release proces chrání zákazníka i tým: méně paniky, méně datových překvapení, méně nočních detektivek.
 
+# Příloha KV: Post-release review bez lovu viníků, vanity metrik a tichého zhoršování produktu
+
+Release nekončí tím, že pipeline zezelená a tým si v chatu pošle raketu. To je jen okamžik, kdy začne realita hlasovat. Post-release review je krátká rutina, která ověří, jestli změna splnila slib, nerozbila kritickou cestu, nezhoršila důvěru a nepřidala datový nepořádek, který se za tři měsíce bude tvářit jako „legacy“.
+
+V malém SaaS týmu nemusí jít o dvouhodinový ceremoniál. Stačí 20–30 minut, jeden vlastník a jasná šablona. Důležité je, aby se review dělo pravidelně u rizikových změn, ne až ve chvíli, kdy zákazník napíše „hele, ono to nějak divně mažeme faktury“.
+
+## KV.1 Review plánuj už při releasu
+
+Nejhorší post-release review je to, které vznikne až po průšvihu. U každé změny si už v release kartě napiš, co se bude po nasazení kontrolovat, kdy a kdo to udělá. Bez toho tým sklouzne k pocitům: „Vypadá to v pohodě, nikdo nekřičí.“ Jenže mlčící zákazník není důkaz spokojenosti. Někdy jen odešel tiše, jako profík.
+
+Minimum pro release kartu:
+
+- Co měl release zlepšit pro zákazníka.
+- Které kritické cesty se změny dotýkají.
+- Jak poznáme první den, že je něco špatně.
+- Jak poznáme po týdnu, že změna dává smysl.
+- Kdo review vlastní a kam zapíše výsledek.
+- Co je předem domluvený rollback nebo follow-up.
+
+Příklad: nasazuješ nový onboarding krok pro import dat. Post-release review nemá měřit jen počet kliknutí na tlačítko. Má ověřit, jestli zákazníci import dokončí, jestli chybové stavy dávají smysl, jestli support nedostává stejné dotazy, jestli se v logu neukládají citlivé ukázky souborů a jestli export/import dokumentace odpovídá tomu, co produkt opravdu dělá.
+
+## KV.2 Sleduj zákaznický dopad, ne jen technický klid
+
+Technické metriky jsou nutné, ale ne úplné. Pokud po releasu nemáš chyby v logu, neznamená to, že zákazník chápe novou funkci. Znamená to jen, že server nekřičí. Produktová realita bývá tišší a zákeřnější.
+
+Praktická post-release sada pro malý SaaS:
+
+| Oblast | Co kontrolovat | Špatný signál |
+| --- | --- | --- |
+| Kritická cesta | Dokončení hlavního úkolu | Lidé začnou odpadávat v novém kroku |
+| Support | Nové dotazy a opakované nejasnosti | Stejná otázka od více zákazníků během týdne |
+| Provoz | Chyby, latence, fronty, retry | Skrytý růst timeoutů nebo ručních zásahů |
+| Důvěra | Texty, e-maily, stavy, changelog | Zákazník neví, co se změnilo a proč |
+| Data | Nová pole, logy, exporty, retence | Sbírá se víc dat, než release sliboval |
+
+Codyho praktické pravidlo: u každého většího releasu sleduj jednu technickou metriku, jednu produktovou metriku a jeden signál důvěry. Tři dobré signály porazí dashboard se čtyřiceti grafy, který nikdo neotevře, protože vypadá jako kokpit ponorky.
+
+## KV.3 Blameless neznamená bezzubé
+
+Post-release review nemá hledat viníka. Má hledat systémovou změnu, která zabrání opakování problému. To ale neznamená, že bude měkké a neurčité. „Příště si dáme větší pozor“ není závěr, to je kancelářská poezie.
+
+Dobrá review otázka zní:
+
+- Který signál jsme měli vidět dřív?
+- Které rozhodnutí bylo rozumné s tehdejšími informacemi, ale zpětně potřebuje lepší pojistku?
+- Kde byl proces moc ruční nebo závislý na jednom člověku?
+- Který test, alert, checklist nebo text by snížil riziko příště?
+- Co smažeme nebo zjednodušíme, aby se chyba neopakovala kvůli složitosti?
+
+Špatná review otázka zní: „Kdo to schválil?“ Správnější verze je: „Jaké informace schvalovateli chyběly a jak je příště dostane před rozhodnutím?“ To je rozdíl mezi kulturou opravy a kulturou honu na čarodějnice. Čarodějnice navíc málokdy píšou dobré changelogy.
+
+## KV.4 Privacy review udělej jako pevnou část, ne právní dodatek
+
+Každý release může změnit datovou stopu produktu. Nové pole ve formuláři, nový event v analytice, nový log v integrační frontě, nový export, nová AI funkce, nový support pohled. Pokud to zkontroluješ až při ročním GDPR úklidu, už nebudeš dělat prevenci, ale archeologii.
+
+Privacy-first post-release review se ptá:
+
+- Přibyly nové osobní údaje nebo metadata?
+- Změnil se účel zpracování, nebo jen technická implementace?
+- Posílají se data novému subdodavateli nebo do nové oblasti?
+- Ukládají logy payloady, prompt, odpovědi modelu, URL s tokenem nebo celé e-maily?
+- Sedí retenční doba s reálnou potřebou?
+- Odráží privacy stránka, dokumentace a obchodní materiály skutečný stav?
+- Má zákazník pořád rozumný export, smazání nebo vypnutí?
+
+Příklad: přidáš AI shrnutí support ticketů. Post-release review nesmí skončit u „shrnutí se generuje“. Musí ověřit, jestli se do observability neukládají celé texty ticketů, jestli prompt neobsahuje zbytečné identifikátory, jestli support ví, že výstup je návrh, a jestli zákazníkům nepodsouváš automatizované rozhodnutí jako lidské stanovisko.
+
+## KV.5 Rozliš opravu, follow-up a produktový dluh
+
+Po releasu se často objeví tři druhy práce. Když je hodíš do jednoho pytle, vznikne chaos s názvem „ještě to doladíme“. Nedoladíte. Jen si vytvoříte muzeum drobných slibů.
+
+Používej jednoduché třídění:
+
+- **Oprava:** něco je rozbité proti slíbenému chování nebo bezpečnostnímu očekávání. Má prioritu a vlastníka.
+- **Follow-up:** změna funguje, ale zákaznická cesta potřebuje lepší text, dokumentaci nebo drobnou UX úpravu.
+- **Produktový dluh:** rozhodnutí bylo přijatelné pro release, ale dlouhodobě zvyšuje složitost, provozní riziko nebo datovou stopu.
+
+U každé položky napiš termín rozhodnutí, ne jen termín práce. Někdy nejlepší follow-up není další feature, ale odstranění dočasného flagu, sjednocení textů nebo vypnutí eventu, který nikdo nepoužívá. Ano, mazání je taky produktová práce. Jen nemá tak hezké demo.
+
+## KV.6 Zákaznická komunikace má být součást review
+
+Release komunikace často popíše, co je nové. Post-release review má ověřit, jestli zákazníci změnu pochopili a jestli komunikace nezamlčela důležité dopady. U B2B SaaS je to klíčové hlavně u změn oprávnění, exportů, importů, integrací, fakturace, datových toků a AI funkcí.
+
+Kontroluj tři vrstvy komunikace:
+
+1. **Produkt:** mikrotexty, prázdné stavy, potvrzení, varování a chybové hlášky.
+2. **Dokumentace:** changelog, nápověda, API docs, migrační poznámky, FAQ.
+3. **Obchod a support:** co může tým slíbit, jak vysvětlí rizika a jak eskaluje problém.
+
+Praktický příklad: změníš způsob, jak se počítá limit v tarifu. Nestačí upravit pricing stránku. Review má ověřit, že aplikace ukazuje stejnou logiku, fakturace nepřekvapí staré zákazníky, support má větu pro vysvětlení a changelog jasně říká, koho se změna týká. Překvapení patří do narozeninového dortu, ne do účtu za SaaS.
+
+## KV.7 Udržuj post-release zápis krátký a použitelný
+
+Zápis z review má být tak krátký, aby ho tým opravdu četl, a tak konkrétní, aby se podle něj dalo jednat. Neopisuj celý meeting. Zapiš rozhodnutí, signály a další kroky.
+
+Šablona:
+
+```markdown
+# Post-release review: [název releasu]
+
+Datum review:
+Vlastník:
+Release odkaz:
+
+## Co se mělo zlepšit
+-
+
+## Co jsme ověřili
+- Kritická cesta:
+- Provozní metriky:
+- Support signály:
+- Privacy/datová stopa:
+- Dokumentace a komunikace:
+
+## Co jsme zjistili
+-
+
+## Rozhodnutí
+- Ponechat / rollback / upravit / sledovat do [datum]
+
+## Akce
+- [ ] Oprava: ... / vlastník / termín
+- [ ] Follow-up: ... / vlastník / termín
+- [ ] Dluh k odstranění: ... / vlastník / termín
+```
+
+Ukládej review k releasu, ne do náhodného chatu. Chat je dobrý na koordinaci, špatný na paměť. Po třech týdnech je z něj digitální kompost.
+
+## KV.8 Checklist post-release review
+
+- Má release kartu s jasným očekávaným dopadem.
+- Je určený vlastník review a datum kontroly.
+- Jsou zkontrolované kritické zákaznické cesty, ne jen technické logy.
+- Review sleduje technický, produktový a důvěrový signál.
+- Je ověřené, že datová stopa odpovídá původnímu slibu.
+- Logy neukládají zbytečné payloady, tajemství ani osobní údaje.
+- Privacy stránka, dokumentace a obchodní materiály odpovídají realitě.
+- Zjištění jsou roztříděná na opravu, follow-up a produktový dluh.
+- Každá akce má vlastníka, termín a důvod.
+- Dočasné feature flagy a workaroundy mají datum odstranění.
+- Zákaznická komunikace říká, koho se změna týká a co má udělat.
+- Review je uložené u releasu a jde najít bez archeologické expedice.
+
+## Codyho komentář
+
+Můj názor: malý tým nepotřebuje víc meetingů, potřebuje lepší zpětnou vazbu. Post-release review je levný způsob, jak se učit z reality bez toho, aby každá lekce bolela zákazníka. Když review trvá déle než samotný release, přeháníte to. Když žádné review není, jen doufáte. A doufání je strategie, která má skvělé PR a mizerné SLA.
+
+## Zdroje k příloze
+
+- Google SRE Workbook: Postmortem culture — blameless a systematické učení z incidentů: https://sre.google/workbook/postmortem-culture/
+- Atlassian: Incident postmortem guide — praktická struktura postmortem procesu: https://www.atlassian.com/incident-management/postmortem
+- OWASP Logging Cheat Sheet — doporučení k bezpečnému logování a vynechání citlivých dat: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+
+## Shrnutí přílohy
+
+Post-release review drží release napojený na realitu: ověřuje zákaznický dopad, provozní zdraví, komunikaci a datovou stopu. Největší hodnota není v dlouhém zápisu, ale v krátké rutině, která včas odhalí, co opravit, co vysvětlit a co smazat dřív, než z toho vyroste produktový dluh s vlastním poštovním směrovacím číslem.
 ## Pracovní log
+
+- 2026-08-20: Přidána příloha KV o post-release review: plán kontroly už při releasu, zákaznický dopad, blameless učení, privacy review, třídění oprav a follow-upů, zákaznická komunikace, šablona zápisu a checklist.
 
 - 2026-08-20: Přidána příloha KU o release, rollbacku a feature flags: release karta, postupný rollout, bezpečné flagy, rollback scénáře, databázové migrace, release logy, zákaznická komunikace a checklist.
 
