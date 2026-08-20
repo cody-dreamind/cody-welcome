@@ -49470,7 +49470,154 @@ Bezpečnostní regrese je jako čištění zubů. Není to heroická disciplína
 Bezpečnostní regresní testy mají chránit konkrétní sliby produktu: kdo smí co vidět, měnit, exportovat, mazat a spouštět. Nejsilnější nejsou v generickém skeneru, ale v produktových invariantech, syntetických scénářích, krátkém release gate a rozhodnutí, které umí release pustit, omezit nebo zastavit bez drama seriálu.
 
 
+# Příloha KY: Abuse monitoring, rate limity a obrana proti botům bez sledovacího pekla, falešných blokací a datového vysavače
+
+Bezpečnost SaaS nekončí u toho, že formulář odmítne špatné heslo a API má test na oprávnění. Jakmile produkt začne fungovat, objeví se automatizované pokusy o registrace, credential stuffing, scraping, zneužívání trialů, spam přes formuláře, přetěžování drahých endpointů a občas i člověk, který zjistí, že „export všech dat“ je krásné tlačítko pro noční ohňostroj databáze.
+
+Privacy-first obrana proti zneužití má těžší úkol než běžné „hoď tam fingerprinting a hotovo“. Musí chránit produkt, zákazníky i rozpočet, ale nesmí z každého návštěvníka dělat podezřelý datový profil. Dobrá obrana proto stojí na účelu, minimálních signálech, vrstvených limitech a jasném procesu pro výjimky.
+
+OWASP v API Security Top 10 2023 uvádí riziko `API4:2023 - Unrestricted Resource Consumption`, tedy situace, kdy API dovolí spotřebovávat síť, CPU, paměť, úložiště nebo další zdroje bez dostatečných brzd: https://owasp.org/API-Security/editions/2023/en/0x11-t10/. OWASP má také samostatný projekt k automatizovaným hrozbám ve webových aplikacích, který popisuje scénáře jako credential stuffing, scraping nebo hromadné zakládání účtů: https://owasp.org/www-project-automated-threats-to-web-applications/. A ENISA v Threat Landscape 2025 upozorňuje, že EU digitální infrastruktura zůstává cílem různých skupin včetně DDoS aktivit: https://www.enisa.europa.eu/news/etl-2025-eu-consistently-targeted-by-diverse-yet-convergent-threat-groups.
+
+## KY.1 Nejdřív pojmenuj, co je zneužití
+
+Bez definice abuse signálů tým skončí u dvou extrémů: buď neblokuje nic, nebo trestá normální zákazníky za trochu aktivnější používání. Začni seznamem chování, které produktu reálně škodí.
+
+Příklad pro B2B SaaS:
+
+| Scénář | Proč vadí | První obrana |
+| --- | --- | --- |
+| Stovky neúspěšných loginů na jeden účet | Riziko credential stuffingu | Limit podle účtu, IP a časového okna |
+| Hromadné registrace z jedné sítě | Spam, trial abuse, náklady | E-mailové ověření, zpomalení, ruční review |
+| Exporty velkých datasetů opakovaně za minutu | Náklady, výkon, možné exfiltrace | Job queue, limit frekvence, audit log |
+| Volání AI endpointu ve smyčce | Přímé náklady a zhoršení služby | Token budget, denní kvóta, circuit breaker |
+| Scraping veřejného katalogu | Zátěž a obchodní riziko | Cache, robots politika, limit anonymních requestů |
+
+Neřeš „boti obecně“. Řeš konkrétní chování, které má konkrétní dopad. Obrana proti spam registracím je jiná než obrana proti zneužití drahého AI shrnutí. Kdo to slije do jedné metriky „suspicious score“, ten si zadělává na magický černý box. A černé boxy jsou super jen do kouzelnického představení, ne do zákaznické podpory.
+
+## KY.2 Sbírej minimální signály, ne digitální otisky pro radost
+
+Abuse monitoring nepotřebuje vědět všechno. Potřebuje vědět dost na rozhodnutí: povolit, zpomalit, vyžádat ověření, blokovat, předat člověku.
+
+Privacy-first signály pro většinu malých SaaS:
+
+- stabilní ID účtu, uživatele, workspace nebo API klíče,
+- typ akce a endpoint,
+- časové okno a počet pokusů,
+- výsledek akce: úspěch, chyba, odmítnutí, limit,
+- hrubý síťový kontext, pokud je nutný pro bezpečnost,
+- velikost požadavku nebo spotřebované jednotky: počet řádků, tokeny, exportovaná MB,
+- korelační ID requestu pro incidentní dohledání.
+
+Naopak si dobře rozmysli persistentní device fingerprinting, tajné cross-site identifikátory, dlouhodobé ukládání kompletních IP adres bez účelu nebo posílání dat do anti-fraud služeb, kterým neumíš vysvětlit datové toky. Někdy může být silnější kontrola nutná, ale musí mít konkrétní důvod, retenční dobu a popis v dokumentaci.
+
+Praktická věta do interní datové mapy:
+
+> „Pro ochranu účtů a dostupnosti ukládáme bezpečnostní události typu přihlášení, odmítnutý požadavek, překročení limitu a export dat. Události držíme 90 dní, delší uchování používáme jen u incidentů.“
+
+Retenci přizpůsob riziku. Login abuse signály často nepotřebují žít roky. Incidentní evidence může mít delší právní a provozní důvod, ale má být oddělená od běžného telemetry odpadu.
+
+## KY.3 Rate limit navrhni podle práce, ne podle jedné IP adresy
+
+Jednoduchý limit „100 requestů za minutu z IP“ je lepší než nic, ale moderní produkt potřebuje víc vrstev. Zákazník za firemní NAT bránou nesmí spadnout do stejného koše jako útočník s jedním skriptem. A drahý endpoint potřebuje jinou brzdu než statický obrázek.
+
+Vrstvy limitů:
+
+- **Anonymní návštěvník:** rozumný limit na veřejné stránky, formuláře a search endpointy.
+- **Účet nebo workspace:** limity podle placeného tarifu, férového použití a reálných nákladů.
+- **Uživatel:** ochrana proti omylům i zneužití jednoho účtu.
+- **API klíč nebo integrace:** samostatné kvóty, aby jedna integrace neshodila celý workspace.
+- **Endpoint:** přísnější pravidla pro exporty, AI, importy, reporty a dávkové operace.
+- **Nákladová jednotka:** tokeny, počet řádků, velikost souboru, počet e-mailů nebo počet webhooks.
+
+Příklad:
+
+- `GET /projects` může mít měkký limit a agresivní cache.
+- `POST /ai/summarize` má denní token budget a limit souběžných jobů.
+- `POST /exports` spouští asynchronní úlohu, má maximální velikost a blokuje opakovaný export stejného datasetu během krátkého okna.
+- `POST /login` sleduje kombinaci účtu, uživatele, IP rozsahu a počtu neúspěšných pokusů.
+
+Rate limit má uživateli říct, co se stalo a kdy může pokračovat. Odpověď `429 Too Many Requests` bez vysvětlení je technicky správně, ale produktově líné. Lepší je přidat bezpečné hlášení: „Export už běží. Další export stejného projektu půjde spustit za 10 minut.“ Bez vyzrazení interních pravidel, ale s jasným dalším krokem.
+
+## KY.4 Bot obrana má být stupňovaná, ne jednorázová atomovka
+
+Ne každé podezřelé chování si zaslouží blokaci. Některé stačí zpomalit, některé poslat do fronty, některé ověřit a jen malé procento rovnou odmítnout.
+
+Stupnice zásahů:
+
+1. **Pozoruj:** loguj událost a sleduj trend.
+2. **Zpomal:** přidej progresivní zpoždění nebo menší kvótu.
+3. **Omez:** vypni jen rizikovou akci, ne celý účet.
+4. **Ověř:** vyžádej e-mail, MFA, potvrzení vlastníka nebo support review.
+5. **Zablokuj:** použij jen u jasného zneužití nebo vysokého rizika.
+6. **Pouč systém:** přidej pravidlo, test nebo produktovou změnu, aby se situace neopakovala.
+
+Privacy-first výhoda: když obranu skládáš z produktových omezení a minimálních signálů, nepotřebuješ hned nakupovat těžký sledovací anti-bot stack. Například u trial abuse často pomůže ověřený e-mail, omezené počty workspace, rozumné limity exportů a ruční review rizikových případů. Není sexy, ale funguje. Což je v provozu překvapivě podceňovaná vlastnost.
+
+## KY.5 Výjimky a false positives musí mít cestu ven
+
+Každý limit jednou trefí dobrého zákazníka. Účetní dělá měsíční exporty, integrátor spustí migraci, nový zákazník importuje historii. Pokud tým nemá proces výjimek, support začne tajně vypínat bezpečnostní pravidla „na chvíli“. Tohle je cesta do sklepa, kde bydlí budoucí incident.
+
+Nastav výjimky jako řízený proces:
+
+- kdo může limit navýšit,
+- na jak dlouho výjimka platí,
+- pro jaký účet, endpoint nebo API klíč,
+- kdo výjimku schválil,
+- jak se výjimka automaticky vrátí zpět,
+- jak se zákazníkovi vysvětlí bezpečný postup.
+
+Příklad support odpovědi:
+
+> „Vidíme, že narážíte na limit exportů při migraci. Navýšíme limit pro váš workspace na 48 hodin a doporučujeme export spouštět po jednotlivých projektech. Po dokončení se limit automaticky vrátí na standardní hodnotu.“
+
+Tím chráníš zákazníka i systém. A hlavně nevytváříš trvalé díry jen proto, že někdo potřeboval rychle dokončit migraci v pátek v 16:48. Historie lidstva by měla páteční produkční změny regulovat přísněji než pyrotechniku.
+
+## KY.6 Dashboard má ukazovat rozhodnutí, ne akvárium grafů
+
+Abuse monitoring dashboard není dekorace do kanceláře. Má pomoci odpovědět: děje se něco špatného, koho to ovlivňuje, co máme udělat teď a co změnit v produktu později?
+
+Užitečné pohledy:
+
+- top překročené limity podle endpointu a workspace,
+- neúspěšné login pokusy podle účtu a časového okna,
+- nákladové špičky u AI, exportů, importů a webhooků,
+- nové registrace podle rizikových vzorců,
+- blokované akce s možností support review,
+- false positives a počet ručních výjimek,
+- trend opakovaných incidentů podle scénáře.
+
+Každý panel by měl mít vlastníka a akci. Pokud graf nikdo nepoužívá k rozhodnutí, smaž ho nebo ho přesuň do měsíčního review. Méně grafů, víc klidu. Ano, Grafana pak vypadá méně jako kokpit raketoplánu. To je dobře; většina SaaS stejně neletí na Mars, jen potřebuje neposlat zákazníkům cizí export.
+
+## KY.7 Checklist abuse monitoringu a rate limitů
+
+- Máme pojmenované hlavní abuse scénáře pro přihlášení, registrace, exporty, API, AI a formuláře?
+- Víme u každého scénáře, jaký má dopad na zákazníka, náklady, dostupnost a data?
+- Sbíráme jen signály nutné pro bezpečnostní rozhodnutí a máme k nim retenční dobu?
+- Máme limity podle účtu, uživatele, API klíče, endpointu a nákladové jednotky, ne jen podle IP?
+- Vracíme bezpečné a srozumitelné hlášky při překročení limitu?
+- Umíme zpomalit nebo omezit rizikovou akci bez zbytečného vypnutí celého účtu?
+- Existuje proces dočasných výjimek s expirací a auditní stopou?
+- Sledujeme false positives a support má cestu, jak je řešit bez tajného vypínání pravidel?
+- Testujeme rate limity a abuse scénáře v neprodukčních prostředích se syntetickými daty?
+- Revidujeme limity po větších releasech, cenových změnách a spuštění AI funkcí?
+
+## Codyho komentář
+
+Rate limiting je často prezentovaný jako technická brzda. Já ho beru jako produktový slib: „Služba zůstane dostupná a férová i tehdy, když se někdo chová divně.“ Privacy-first přístup tomu přidává druhou polovinu: „A kvůli obraně nebudeme preventivně profilovat všechny slušné lidi.“ To je přesně ten druh dospělé nudy, na které stojí dobrý SaaS.
+
+## Zdroje k příloze
+
+- OWASP API Security Top 10 2023, `API4:2023 - Unrestricted Resource Consumption`: https://owasp.org/API-Security/editions/2023/en/0x11-t10/
+- OWASP Automated Threats to Web Applications Project: https://owasp.org/www-project-automated-threats-to-web-applications/
+- ENISA Threat Landscape 2025, zpráva o cílení na digitální infrastrukturu EU a DDoS aktivitách: https://www.enisa.europa.eu/news/etl-2025-eu-consistently-targeted-by-diverse-yet-convergent-threat-groups
+
+## Shrnutí přílohy
+
+Abuse monitoring není licence na plošné sledování. Je to disciplína, která chrání účty, dostupnost a náklady pomocí jasně definovaných scénářů, minimálních signálů, vrstvených limitů a řízených výjimek. Malý SaaS nepotřebuje hned obří anti-fraud aparát. Potřebuje vědět, co je normální chování, co už je zneužití, jak zasáhnout přiměřeně a jak zákazníkovi dát bezpečnou cestu ven, když limit trefí legitimní práci.
+
 ## Pracovní log
+
+- 2026-08-20: Přidána příloha KY o abuse monitoringu, rate limitech a obraně proti botům: definice zneužití, minimální bezpečnostní signály, vrstvené limity, stupňovaná obrana, výjimky, dashboard a privacy-first checklist.
 - 2026-08-20: Přidána příloha KX o bezpečnostních regresních testech: rizikové cesty, bezpečnostní diff, produktové invarianty, manuální scénáře, syntetická data, release gate a checklist.
 
 - 2026-08-20: Přidána příloha KW o incidentním učení: zákaznický dopad, timeline, mitigace versus oprava versus prevence, privacy triage, ověřitelné akce, měsíční vzory, šablona zápisu a checklist.
