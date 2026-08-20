@@ -48246,9 +48246,145 @@ AI fallback není technická drobnost, ale produktová, provozní a privacy-firs
 
 ---
 
+# Příloha KQ: Vypnutí, migrace a odchod z AI funkce bez rukojmí, temných koutů a účetního překvapení
+
+Každá AI funkce má mít plán zapnutí. To už dnes většina týmů chápe. Méně sexy, ale mnohem důležitější otázka zní: co se stane, když ji zákazník chce vypnout, zúžit, migrovat jinam nebo úplně opustit? Pokud odpověď zní „to pak nějak vyřeší support“, právě se rodí budoucí incident s vůní spálené důvěry.
+
+Privacy-first SaaS nesmí stavět AI jako klec. Zákazník má mít kontrolu nad tím, jaké vstupy se používají, jaké výstupy se ukládají, jaké konektory jsou připojené, jak dlouho žije index znalostní báze a co se smaže při odchodu. Dobrá AI funkce proto myslí na konec už v návrhu. Ne proto, že chceme zákazníky posílat pryč. Protože svobodný odchod zvyšuje důvěru při nákupu.
+
+NIST AI RMF v části Manage uvádí mezi tématy po nasazení mimo jiné monitoring, odvolání a override, decommissioning, incident response, recovery a change management: https://airc.nist.gov/airmf-resources/airmf/5-sec-core/ Evropská komise u GDPR připomíná právo na přenositelnost údajů a další práva jednotlivců včetně přístupu, opravy a výmazu: https://commission.europa.eu/law/law-topic/data-protection/information-individuals_en A u souhlasu zdůrazňuje, že odvolání má být stejně snadné jako jeho udělení: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/legal-grounds-processing-data_en
+
+## KQ.1 Vypnutí není jedna páčka, ale mapa dopadů
+
+„Vypnout AI“ může znamenat několik různých věcí. Někdy zákazník nechce generování odpovědí. Někdy chce jen vypnout tréninkové nebo evaluační využití vlastních dat. Někdy chce odpojit konektor. Někdy chce smazat embedding index. Někdy chce zachovat historii výstupů kvůli auditu, ale zabránit dalšímu zpracování.
+
+Nejdřív proto rozděl AI funkci na části:
+
+| Část AI funkce | Co zákazník může chtít vypnout | Co musí produkt vysvětlit |
+| --- | --- | --- |
+| Generování výstupu | návrhy textů, shrnutí, klasifikace | co se stane s rozpracovanými úkoly |
+| Retrieval / RAG | vyhledávání v dokumentech | zda se smaže index, zdroje nebo oboje |
+| Konektory | e-mail, CRM, úložiště, kalendář | jak se zruší tokeny a oprávnění |
+| Ukládání historie | prompty, odpovědi, metadata | co je auditní stopa a co obsah úkolu |
+| Učení a evaluace | použití dat pro zlepšování kvality | jaký účel se vypíná a co zůstává nutné |
+| Automatické akce | tool calling, workflow, agentní kroky | které akce přestanou běžet okamžitě |
+
+Jedna globální páčka „AI on/off“ je lákavě jednoduchá, ale často zavádějící. Lepší je mít hlavní přepínač pro běžné uživatele a pod ním jasné nastavení pro administrátora workspace. Když administrátor vypne generování, produkt musí říct, jestli se tím zároveň vypíná indexace, integrace a uchování minulých výsledků. Ticho je tady bezpečnostní antipattern.
+
+## KQ.2 Offboarding začíná před onboardingem
+
+Nejlepší chvíle navrhnout odchod je ve chvíli, kdy kreslíš onboarding. V každém kroku, kde uživatel přidává data nebo oprávnění, si polož otázku: jak to později odpojí, exportuje nebo smaže?
+
+Praktický návrh onboarding/offboarding páru:
+
+- Připojení znalostní báze: ukaž, které složky se indexují, a připrav obrazovku „Odpojit zdroj a odstranit index“.
+- Připojení CRM: ukaž přesné scope oprávnění a připrav revokaci tokenu v produktu i návod pro externí systém.
+- Zapnutí AI návrhů v supportu: ukaž, zda se ukládají návrhy odpovědí, a připrav volbu retence.
+- Zapnutí automatického workflow: ukaž seznam možných akcí a připrav kill switch pro všechny budoucí běhy.
+- Povolení používání dat pro evaluaci: odděl souhlas nebo nastavení od samotné dodávky služby, pokud to není nezbytné pro kontrakt.
+
+Offboarding není jen finální „smazat účet“. Je to sada menších návratových cest. Zákazník může chtít přestat používat jednu AI funkci, ale zůstat u produktu. Pokud ho kvůli tomu nutíš psát supportu, vyvoláváš dojem, že kontrolu nad daty drží produkt, ne zákazník. A to je přesně ten moment, kdy právník zákazníka začne mít nepříjemně dobré otázky.
+
+## KQ.3 Export musí být použitelný, ne archeologický nález
+
+Pokud AI funkce vytváří zákaznickou hodnotu, musí jít rozumně odnést. Export není milost. Je to produktová schopnost, která snižuje strach z adopce. Uživatel si AI asistenta raději zapne, když ví, že výsledky, konfigurace a důležité záznamy nezůstanou uvězněné v proprietární mlze.
+
+Co typicky exportovat:
+
+- konfiguraci AI funkce: zapnuté režimy, limity, retence, modelové profily, pravidla schvalování,
+- zdrojový katalog: seznam indexovaných dokumentů, stav indexu, čas poslední synchronizace,
+- uživatelsky vytvořené šablony: instrukce, tone-of-voice, workflow recepty, uložené prompty,
+- výsledky práce: schválené návrhy, shrnutí, klasifikace, rozhodovací záznamy,
+- auditní metadata: kdo akci spustil, kdy, s jakým typem nástroje a s jakým výsledkem,
+- integrační inventář: připojené služby, scope oprávnění, stav tokenů, vlastník konektoru.
+
+Export má mít manifest. Minimálně: datum vytvoření, workspace, rozsah exportu, verzi schématu, časové období, seznam souborů a vysvětlení polí. Bez manifestu je export jen hromádka JSONů s ambicí stát se budoucí hádankou pro juniorního vývojáře.
+
+Privacy-first detail: auditní metadata exportuj odděleně od obsahu promptů a odpovědí. Zákazník často potřebuje doložit, že se něco stalo, ale nepotřebuje kvůli tomu znovu šířit citlivý obsah. Když to jde, dej mu volbu „exportovat metadata“ a „exportovat obsah“ zvlášť.
+
+## KQ.4 Smazání indexu není totéž jako smazání dokumentů
+
+U RAG funkcí vzniká častý zmatek: zákazník smaže dokument ze znalostní báze, ale systém dál drží chunk, embedding, cache odpovědi nebo evaluační vzorek. Z pohledu produktu „už to není vidět“. Z pohledu datové kontroly je to spíš kouzelnické číslo s falešným dnem.
+
+Rozliš tyto vrstvy:
+
+- původní dokument nebo záznam,
+- normalizovaná kopie pro zpracování,
+- chunky a metadata,
+- embeddingy,
+- retrieval cache,
+- vygenerované odpovědi odkazující na zdroj,
+- evaluační nebo debug vzorky,
+- auditní stopa o zpracování.
+
+Když uživatel odpojí zdroj, produkt má říct, které vrstvy smaže hned, které po doběhnutí fronty, které zůstávají jako minimální auditní metadata a proč. Pokud něco nejde smazat okamžitě kvůli zálohám, napiš retenční realitu normálně: „V produkci bude index odstraněn do 24 hodin, v šifrovaných zálohách vyprší podle retenčního plánu do 30 dní.“ Samozřejmě jen pokud je to pravda. Fikce patří do fantasy, ne do privacy notice.
+
+## KQ.5 Revokace tokenů musí být součástí produktu
+
+AI integrace často stojí na konektorech: e-mail, dokumenty, ticketing, kalendář, CRM. Odpojení konektoru proto nesmí znamenat jen „už ho nezobrazujeme v UI“. Musí se revokovat token, zrušit naplánované synchronizace, zastavit webhooks, vyčistit fronty a zapsat auditní událost.
+
+Checklist odpojení konektoru:
+
+- zastav nové synchronizace a agentní akce,
+- zruš nebo zneplatni uložený access token a refresh token,
+- vypni webhooky nebo odběry událostí u externí služby,
+- doběhnuté joby označ stavem „zastaveno odpojením“, ne obecným errorem,
+- odstraň nebo expiruj cache načtených dat,
+- aktualizuj integrační inventář zákazníka,
+- pošli administrátorovi krátké potvrzení s dopadem.
+
+Důležitý detail: pokud token nejde revokovat přes API, produkt to má říct a nabídnout přesný návod pro ruční odebrání v externí službě. „Odpojeno“ nesmí znamenat „my už to nepoužijeme, ale token pořád někde žije a doufáme, že se nebude nudit“.
+
+## KQ.6 Změna modelu potřebuje migrační poznámku
+
+AI funkce se může změnit i bez toho, že zákazník něco vypíná. Stačí vyměnit model, prompt šablonu, retrieval strategii nebo pravidla guardrailů. U interního nástroje to může být běžný release. U zákaznického SaaS to ale může změnit kvalitu, náklady, latenci, region zpracování nebo vysvětlitelnost výsledků.
+
+Každá významná změna AI funkce má mít krátkou migrační poznámku:
+
+- co se mění,
+- proč se to mění,
+- koho se to týká,
+- jestli se mění zpracovávaná data, region, retence nebo subdodavatel,
+- jaký je očekávaný dopad na kvalitu, cenu nebo rychlost,
+- jak zákazník změnu otestuje,
+- jestli existuje dočasný návrat na předchozí režim.
+
+Nemusí to být román. Stačí poctivý changelog. Privacy-first SaaS zákazníkovi neříká „věř nám, je to lepší“. Říká „tady je změna, tady je dopad, tady je kontrola“. To je nudné, dospělé a podezřele účinné.
+
+## KQ.7 Checklist vypnutí a migrace AI funkce
+
+- Je jasně rozlišeno vypnutí generování, indexace, konektorů, historie, evaluace a automatických akcí.
+- Každý onboarding krok má odpovídající offboarding krok.
+- Administrátor vidí, co se stane s rozpracovanými úkoly, indexy, cache, tokeny a auditními stopami.
+- Export obsahuje manifest, verzi schématu a oddělení obsahu od metadat.
+- RAG vrstva umí smazat nebo expirací odstranit dokumenty, chunky, embeddingy a cache podle retenčního plánu.
+- Odpojení konektoru revokuje tokeny, zastaví synchronizace, vypne webhooky a aktualizuje inventář.
+- Významná změna modelu nebo promptu má changelog s dopadem na data, kvalitu, náklady a zákaznickou kontrolu.
+- Zákazník má u citlivých AI funkcí možnost self-service vypnutí bez čekání na support.
+- Retence po odchodu je popsaná lidsky a odpovídá skutečné technické implementaci.
+- Support má playbook pro částečné vypnutí AI funkce, ne jen pro kompletní zrušení účtu.
+
+## Codyho komentář
+
+AI lock-in bude u SaaS produktů jeden z největších zdrojů budoucí nedůvěry. Ne proto, že by každý zákazník chtěl odejít. Ale protože nechce zjistit, že zapnutím asistenta vytvořil druhou skrytou databázi, kterou nikdo neumí vysvětlit. Můj pohled: nejlepší prodejní argument pro AI funkci není „umíme magii“. Je to „umíme magii vypnout, vysvětlit a uklidit“. Méně Harry Potter, víc dobrý správce domu. Nudné? Možná. Ale nikomu kvůli tomu nehoří audit.
+
+## Zdroje k příloze
+
+- NIST AI RMF Core — řízení rizik AI po nasazení včetně monitoringu, override, decommissioningu, incident response, recovery a change managementu: https://airc.nist.gov/airmf-resources/airmf/5-sec-core/
+- NIST AI RMF 1.0 — rámec pro řízení AI rizik napříč životním cyklem systému: https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-ai-rmf-10
+- Evropská komise — informace pro jednotlivce o právech podle GDPR včetně přístupu, opravy, výmazu a přenositelnosti: https://commission.europa.eu/law/law-topic/data-protection/information-individuals_en
+- Evropská komise — právní základy zpracování a princip, že odvolání souhlasu má být stejně snadné jako jeho udělení: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/legal-grounds-processing-data_en
+
+## Shrnutí přílohy
+
+AI funkce má být navržená tak, aby šla bezpečně vypnout, migrovat, exportovat a uklidit. Privacy-first přístup znamená rozlišit vrstvy zpracování, dát zákazníkovi self-service kontrolu, mazat indexy a cache podle jasné retenční mapy, revokovat konektory skutečně a dokumentovat změny modelů jako produktové změny s dopadem na data, kvalitu i náklady.
+
+---
+
 
 ## Pracovní log
 
+- 2026-08-20: Přidána příloha KQ o vypnutí, migraci a odchodu z AI funkcí: mapa dopadů, offboarding už při onboardingu, použitelné exporty, mazání RAG vrstev, revokace konektorů, migrační poznámky a checklist.
 - 2026-08-20: Přidána příloha KP o AI fallbacku a degradaci služby: typy selhání, fallback UX, datová pravidla, retry brzdy, lidské předání, testovací scénáře a checklist.
 - 2026-08-19: Přidána příloha KO o nákladové disciplíně AI funkcí: jednotka hodnoty, scénářové rozpočty, metadata bez obsahu promptů, limity, optimalizace úkolu, pricing a checklist.
 - 2026-08-19: Obnoven plný obsah e-booku po poškozeném posledním commitu a přidána příloha KN o AI observabilitě: metadata místo plošných prompt logů, kvalita, alerty, prompt injection, debug režim, retence a checklist.
