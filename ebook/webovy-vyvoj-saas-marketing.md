@@ -50119,7 +50119,176 @@ Klientský portál má být klidné místo. Ne „další systém“, který mus
 
 Klientský portál není sdílená složka s lepším brandingem. Je to produktová a provozní vrstva pro bezpečné předávání dokumentů, schvalování a přístup klientů. Privacy-first portál stojí na účelu sekcí, adresných pozvánkách, serverové autorizaci, bezpečném uploadu, expirovaném sdílení, audit logu bez citlivého obsahu a jednoduchém offboardingu lidí i celých projektů.
 
+# Příloha LC: AI funkce v SaaS bez černé skříňky, datového hladu a regulatorního infarktu
+
+AI funkce dnes umí zvednout hodnotu SaaS produktu rychleji než další tři tabulky v administraci. Umí shrnovat, třídit, navrhovat odpovědi, hledat v dokumentech, hlídat anomálie nebo připravit první draft. Jenže stejnou rychlostí umí také rozmazat odpovědnost: kdo vidí data, co model ukládá, proč se výsledek zobrazil a kdo za něj ručí?
+
+Privacy-first AI v SaaS není zákaz AI. Je to disciplína: sbírat méně, vysvětlovat víc, držet kontrolu u zákazníka a nepouštět citlivá data do nástroje jen proto, že má v demu hezký gradient. Evropský AI Act zavádí mimo jiné pravidla pro transparentnost vybraných AI systémů, povinnosti pro různé role v AI hodnotovém řetězci a postupné termíny použitelnosti; GDPR pořád platí všude tam, kde AI pracuje s osobními údaji. Proto se AI funkce navrhuje jako produktová, právní i provozní funkce zároveň, ne jako magická text area s tlačítkem „generovat“.
+
+## LC.1 Nejdřív pojmenuj rozhodnutí, které AI podporuje
+
+Špatné zadání zní: „Přidáme AI asistenta.“ Dobré zadání zní: „Pomůžeme support týmu navrhnout první odpověď na ticket, ale člověk ji musí před odesláním přečíst a schválit.“ Rozdíl je zásadní. První zadání prodává kouř. Druhé říká, kdo rozhoduje, kde je hranice automatiky a jak poznáme, že funkce pomáhá.
+
+U každé AI funkce si napiš jednoduchou kartu:
+
+| Otázka | Příklad odpovědi |
+| --- | --- |
+| Jaký uživatelský problém řeší? | Support nestíhá psát první návrhy odpovědí. |
+| Co je vstup? | Text ticketu, veřejná dokumentace, interní šablony odpovědí. |
+| Co je výstup? | Návrh odpovědi označený jako návrh. |
+| Kdo rozhoduje? | Support agent výsledek upraví a odešle. |
+| Jaké riziko hrozí? | Halucinace, únik citlivých údajů, špatný tón komunikace. |
+| Jaká je brzda? | Povinné lidské schválení, citace zdrojového článku, log jen metadata. |
+
+Tahle karta brání tomu, aby se AI funkce nafoukla do všeho najednou. Zároveň pomáhá později při dokumentaci, supportu i bezpečnostním review. Jestli kartu neumíš vyplnit, funkce ještě není připravená na produkci. Jo, bolí to méně než vysvětlovat zákazníkovi, proč mu robot sebevědomě poradil nesmysl.
+
+## LC.2 Vstupy minimalizuj před promptem, ne až v podmínkách služby
+
+Největší privacy chyba u AI není samotný model. Je to líný kontext. Vývojář pošle „pro jistotu“ celý záznam zákazníka, posledních dvacet zpráv, interní poznámky, logy, e-mail, telefon a ještě poznámku obchodníka, protože jednou možná pomůže. Tak se ze slibné funkce stane datový vysavač s hezkým spinnerem.
+
+Praktický postup před každým voláním modelu:
+
+- Rozděl vstup na povinný, užitečný a zbytečný kontext.
+- Vyhoď identifikátory, které nejsou nutné pro výsledek: e-mail, telefon, interní ID, fakturační údaje.
+- Nahraď osobní údaje placeholdery, pokud model nepotřebuje znát skutečnou hodnotu.
+- Omez časový rozsah: poslední relevantní zpráva často stačí víc než celá historie účtu.
+- Neposílej přílohy automaticky; uživatel má vědět, které dokumenty AI použije.
+- Ulož si pravidlo minimalizace do kódu nebo konfigurační vrstvy, ne jen do wiki.
+
+Příklad: AI shrnutí obchodní poptávky nepotřebuje IP adresu, user agent, přesný čas otevření e-mailu ani interní poznámku „asi problematický klient“. Potřebuje zadání, typ firmy, cíle, rozpočet pokud ho zákazník sám uvedl a historii komunikace relevantní k nabídce.
+
+## LC.3 Transparentnost napiš do UI, ne jen do privacy policy
+
+Uživatel nemá luštit, jestli zrovna mluví s člověkem, pravidlovým filtrem nebo generativním modelem. V UI jasně označ, kdy AI vytváří návrh, kdy pouze pomáhá vyhledat informaci a kdy výsledek může být nepřesný. AI Act pracuje s požadavky na transparentnost u určitých typů AI interakcí a výstupů; produktově je ale dobré být srozumitelný i tam, kde tě k tomu netlačí paragraf.
+
+Dobré mikrotexty:
+
+- „AI připravila návrh odpovědi. Před odesláním ho zkontrolujte.“
+- „Shrnutí vychází z dokumentů, které máte oprávnění zobrazit.“
+- „AI může udělat chybu. U právních, zdravotních nebo finančních rozhodnutí ověřte výsledek u odborníka.“
+- „Tato funkce neposílá obsah do reklamních systémů ani nepoužívá zákaznická data pro veřejný marketing.“
+
+Špatné mikrotexty:
+
+- „Chytrý asistent ví vše.“
+- „Automaticky optimalizujeme vaše podnikání.“
+- „Souhlasem potvrzujete zpracování za účelem zlepšování služeb.“
+
+Poslední věta je oblíbený zaklínací koberec. Zamete pod sebe všechno a pak se všichni diví, že z toho práší.
+
+## LC.4 Loguj audit funkce, ne obsah zákazníka
+
+AI funkce potřebuje provozní stopu: kdy běžela, kdo ji spustil, jaký typ akce provedla, jaký model nebo provider byl použit, jestli uživatel výstup přijal, upravil nebo zahodil. To neznamená ukládat celý prompt, celou odpověď a citlivý obsah vstupních dokumentů do debug logu.
+
+Bezpečnější auditní záznam může vypadat takto:
+
+| Pole | Příklad | Poznámka |
+| --- | --- | --- |
+| `event` | `ai_reply_draft_generated` | Typ akce bez obsahu odpovědi. |
+| `actor_id` | interní ID uživatele | Bez e-mailu, pokud není potřeba. |
+| `workspace_id` | interní ID účtu | Pro dohledání oprávnění. |
+| `source_count` | `3` | Kolik dokumentů bylo použito, ne jejich obsah. |
+| `model_family` | `hosted_llm` | Kategorie stačí pro provozní review. |
+| `result_action` | `edited_before_send` | Pomáhá měřit užitečnost bez šmírování textu. |
+| `retention_until` | datum | Auditní stopa má konec života. |
+
+Obsah promptu ukládej jen tehdy, když máš jasný účel, právní základ, omezený přístup, retenci a bezpečné maskování. Pro většinu malých SaaS produktů stačí u AI funkcí kombinace metadata logu, error klasifikace a dobrovolného reportu problému od uživatele.
+
+## LC.5 Dej zákazníkovi kontrolu nad AI funkcemi
+
+AI funkce nemají být tajný motor pod kapotou, který nejde vypnout. B2B zákazník často potřebuje vědět, jestli se jeho data posílají subdodavateli, v jakém regionu se zpracují, zda se používají k tréninku a jak se funkce zapíná pro uživatele. Když mu to neřekneš dopředu, zjistí to v bezpečnostním dotazníku. A dotazníky nemají smysl pro humor.
+
+Minimum kontroly:
+
+- Admin umí AI funkci vypnout pro celý workspace.
+- Citlivé moduly mají samostatné nastavení, ne jeden globální přepínač „AI ano/ne“.
+- Uživatel vidí, kdy výsledek vznikl pomocí AI.
+- Dokumentace popisuje vstupy, výstupy, subdodavatele a retenci.
+- Enterprise zákazník může požádat o datové upřesnění před zapnutím funkce.
+- Výchozí stav respektuje riziko: nízkorizikové návrhy mohou být zapnuté dřív, citlivé automatizace až po explicitním nastavení.
+
+Codyho pravidlo: AI funkce, která nejde vysvětlit administrátorovi zákazníka za dvě minuty, není produktová výhoda. Je to budoucí ticket s předmětem „urgent security questionnaire“.
+
+## LC.6 AI výstup musí mít bezpečnostní mantinely
+
+U generativních funkcí nestačí říct „model se snad trefí“. Potřebuješ mantinely před voláním, během zpracování i po výsledku.
+
+Praktické mantinely:
+
+- **Před voláním:** kontrola oprávnění, minimalizace vstupu, omezení délky, allowlist zdrojů.
+- **Během volání:** systémové instrukce podle účelu, zákaz vymýšlení citací, oddělení interních pravidel od uživatelského vstupu.
+- **Po výsledku:** validace formátu, detekce citlivých údajů, povinné lidské schválení u externí komunikace.
+- **V UI:** jasné označení návrhu, tlačítko pro nahlášení problému, možnost výsledek zahodit bez trestu.
+- **V provozu:** monitoring chybových tříd, rate limit, rollback nebo vypnutí funkce bez redeploye.
+
+U funkcí typu „AI odpoví zákazníkovi sama“ buď extrémně opatrný. Automatická odpověď může být dobrá u jednoduchého stavového dotazu, ale ne u reklamace, právního sporu, bezpečnostního incidentu nebo finančního rozhodnutí. Tam je AI dobrý kopilot, ne kapitán. Kapitán s halucinacemi by byl v letectví taky trochu problém.
+
+## LC.7 Připrav AI dodavatelský list
+
+Pro každou AI službu nebo model si udržuj krátký interní list. Není to román pro právní oddělení. Je to provozní mapa, aby tým věděl, co se kam posílá.
+
+Šablona:
+
+```markdown
+# AI dodavatelský list: [název služby]
+
+## Účel
+K čemu službu používáme a ve kterých funkcích.
+
+## Data
+Jaké typy dat posíláme, co neposíláme, jak probíhá minimalizace.
+
+## Region a subdodavatelé
+Kde se data zpracují, kdo další se může podílet, jaké smlouvy máme.
+
+## Trénování a ukládání
+Zda se vstupy nebo výstupy používají k tréninku, jak dlouho se uchovávají.
+
+## Přístup a audit
+Kdo u nás může funkci zapnout, kdo vidí logy, jak řešíme incident.
+
+## Exit plán
+Jak funkci vypnout, změnit dodavatele nebo vymazat uložená data.
+```
+
+Tenhle list aktualizuj při změně modelu, regionu, subdodavatele, retence nebo účelu. „Jen jsme přepnuli endpoint“ může být z pohledu dat úplně nová realita.
+
+## LC.8 Checklist privacy-first AI funkce
+
+Před spuštěním AI funkce projdi tento checklist:
+
+- Má funkce jasně popsaný uživatelský problém a rozhodnutí, které podporuje?
+- Je určeno, zda AI pouze navrhuje, nebo samostatně jedná?
+- Jsou vstupy minimalizované před odesláním modelu?
+- Neposílají se zbytečné identifikátory, interní poznámky, fakturační údaje nebo celé historie účtu?
+- Vidí uživatel v UI, kdy výsledek vytvořila nebo ovlivnila AI?
+- Má admin možnost funkci vypnout nebo omezit pro workspace?
+- Je dokumentováno, jaký dodavatel/model se používá, kde se data zpracují a jaká je retence?
+- Jsou logy postavené primárně na metadatech, ne na obsahu promptů a odpovědí?
+- Má výstup validaci, bezpečnostní mantinely a jasný fallback?
+- Je externí komunikace vytvořená AI před odesláním schválena člověkem?
+- Existuje cesta pro nahlášení špatného výstupu a následné produktové zlepšení?
+- Je možné funkci rychle vypnout bez zásahu do celé aplikace?
+
+## Codyho komentář
+
+AI v SaaS má být jako dobrý junior kolega: rychlý, užitečný, ale s jasným zadáním a review. Když ho necháš běhat po databázi s univerzálním přístupem, bude možná produktivní. Taky může být produktivně nebezpečný. Privacy-first AI není brzda inovace; je to způsob, jak inovaci dostat do firem, které mají reálné zákazníky, smlouvy a odpovědnost. Jinými slovy: méně kouzelného prachu, víc provozní kázně.
+
+## Zdroje k příloze
+
+- Evropská komise — přehled regulatorního rámce AI Actu a postupného zavádění pravidel: https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai
+- EUR-Lex — Regulation (EU) 2024/1689, oficiální text AI Actu včetně transparentnostních povinností: https://eur-lex.europa.eu/eli/reg/2024/1689/oj
+- Evropská komise — GDPR principy pro firmy a organizace, včetně minimalizace a transparentnosti: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en
+- EDPB — Opinion 28/2024 k určitým aspektům ochrany osobních údajů při zpracování v kontextu AI modelů: https://www.edpb.europa.eu/our-work-tools/our-documents/opinion-board-art-64/opinion-282024-certain-data-protection-aspects_en
+
+## Shrnutí přílohy
+
+AI funkce v SaaS musí mít jasný účel, minimalizované vstupy, transparentní UI, audit bez zbytečného obsahu, zákaznickou kontrolu, bezpečnostní mantinely a dodavatelský list. Privacy-first přístup neříká „AI nikdy“. Říká: víme, co posíláme, proč to posíláme, komu to posíláme, jak dlouho to žije a kdo za výsledek odpovídá.
+
+
 ## Pracovní log
+
+- 2026-08-20: Přidána příloha LC o AI funkcích v SaaS: jasné rozhodnutí, minimalizace vstupů, transparentní UI, audit bez obsahu, zákaznická kontrola, bezpečnostní mantinely, AI dodavatelský list a privacy-first checklist.
 
 - 2026-08-20: Přidána příloha LB o klientských portálech a sdílení dokumentů: situační struktura portálu, bezpečné pozvánky, životní cyklus dokumentů, uploady, expirované sdílení, audit log, session kontrola a privacy-first checklist.
 
