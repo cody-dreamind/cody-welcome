@@ -50648,7 +50648,152 @@ Agentní AI je skvělá, když je líná správným způsobem: navrhne, zkontrol
 Bezpečný AI agent v SaaS potřebuje úzké pracovní režimy, tool katalog, backendové oprávnění, parametrické schvalování, audit bez datového vysavače, kontrolovanou paměť, rozpočty a rychlý kill switch. Privacy-first přístup tady není jen etická pozice. Je to praktická architektura: méně dat v kontextu, méně nástrojů v ruce, méně autonomie u dopadových akcí a mnohem méně překvapení v pondělí ráno.
 
 
+# Příloha LF: E-mailová doručitelnost bez doménového chaosu, paniky ve spamu a newsletterového stalkingu
+
+E-mail je u SaaS pořád kritická infrastruktura. Reset hesla, faktura, pozvánka do účtu, upozornění na incident, potvrzení objednávky, onboarding, support. Když e-mail nedorazí, uživatel neřekne „zajímavá SMTP nuance“. Řekne, že produkt nefunguje. A bude mít pravdu, i kdyby DNS tabulka měla pět doktorátů.
+
+Privacy-first e-mailový provoz má dvě vrstvy. První je technická důvěryhodnost: doména musí prokazovat, že zprávy posílá oprávněně. Druhá je produktová slušnost: posílat jen to, co má jasný účel, bez zbytečného sledování otevření, kliků a pixelového šmírování. Doručitelnost se totiž nedá dlouhodobě koupit trikem. Dá se vybudovat disciplínou.
+
+## LF.1 Odděl typy e-mailů podle rizika
+
+Nejdřív přestaň mluvit o „e-mailech“ jako o jedné hromadě. Transakční zprávy, bezpečnostní upozornění, produktový onboarding, obchodní follow-up a newsletter mají jiný účel, jinou toleranci k chybě a jiné dopady na důvěru.
+
+Praktické rozdělení:
+
+| Typ zprávy | Příklad | Riziko | Doporučení |
+| --- | --- | --- | --- |
+| Bezpečnostní | Reset hesla, nové přihlášení | Vysoké | Samostatná šablona, minimální obsah, žádné trackery |
+| Transakční | Faktura, potvrzení objednávky | Vysoké | Prioritní fronta, jasný předmět, archivovatelný obsah |
+| Produktový | Pozvánka, onboarding krok | Střední | Posílat podle stavu účtu, ne podle marketingového kalendáře |
+| Obchodní | Follow-up po poptávce | Střední | Vazba na vztah a účel, snadné ukončení komunikace |
+| Newsletter | Novinky, články, tipy | Nižší | Explicitní odběr, RSS alternativa, minimum měření |
+
+Míchat reset hesla a newsletter na stejné doméně, ze stejné fronty a se stejnou reputací je provozní loterie. Když marketingová kampaň rozbije reputaci, nesmí s sebou stáhnout bezpečnostní e-maily. Použij subdomény podle účelu, například `mail.example.com` pro produktové zprávy a `news.example.com` pro newsletter. Ne proto, že subdoména je magický amulet, ale protože odděluje reputaci, konfiguraci i incidentní vyšetřování.
+
+## LF.2 SPF, DKIM a DMARC nejsou dekorace v DNS
+
+Základní e-mailová autentizace stojí na třech nohách: SPF říká, které servery smějí za doménu odesílat poštu; DKIM přidává kryptografický podpis zprávy; DMARC propojuje výsledek SPF/DKIM s viditelnou doménou v adrese odesílatele a umožňuje publikovat politiku pro zprávy, které ověřením neprojdou.
+
+V praxi to pro malý SaaS znamená:
+
+- Každá odesílací služba musí být zapsaná v SPF, ale SPF nemá být skládka `include` z pěti minulých experimentů.
+- DKIM klíče musí mít jasné selektory, vlastníka a plán rotace.
+- DMARC začni monitorovacím režimem, vyhodnoť reporty a teprve potom přitvrzuj politiku.
+- Doména v `From:` musí dávat uživateli smysl a být sladěná s tím, co ověřuje DMARC.
+- DNS změny dokumentuj stejně jako deploy, protože chyba v DNS umí rozbít obchod rychleji než špatný banner.
+
+Mini šablona pro evidenci e-mailové domény:
+
+```text
+DOMÉNA / SUBDOMÉNA:
+[např. mail.example.com]
+
+ÚČEL:
+[transakční / bezpečnostní / newsletter / obchodní]
+
+ODESÍLACÍ SLUŽBA:
+[název, účet, region, vlastník]
+
+SPF:
+[aktuální zdroje, kdo je schválil]
+
+DKIM:
+[selector, datum vytvoření, plán rotace]
+
+DMARC:
+[politika, reportovací adresa, datum posledního vyhodnocení]
+
+RETENCE LOGŮ:
+[co ukládáme, proč, jak dlouho]
+
+EXIT PLÁN:
+[jak službu odpojit bez ztráty doručitelnosti]
+```
+
+Tahle šablona vypadá nudně, což je přesně pointa. E-mailová infrastruktura nemá být archeologická expedice v DNS záznamech.
+
+## LF.3 Trackovací pixel není měření, je to rozhodnutí o důvěře
+
+Marketingové nástroje rády nabízí otevření e-mailu, kliky, fingerprinting zařízení, čas čtení a podobné bonbónky. Jenže otevření e-mailu je často nespolehlivý signál kvůli blokování obrázků, proxy cache a bezpečnostním filtrům. A hlavně: u privacy-first značky je otázka „kolik lidí otevřelo newsletter“ méně důležitá než „pomohli jsme správným lidem udělat další krok?“
+
+Měř raději věci, které mají jasný produktový účel:
+
+- Doručeno / odraženo u transakčních e-mailů.
+- Počet dokončených akcí po kliknutí na přímý odkaz bez osobního sledovacího řetězu.
+- Odpovědi na e-mail, protože skutečný člověk je lepší signál než pixel v kostýmu metriky.
+- Počet odhlášení a stížností jako indikátor, že komunikace přestává být užitečná.
+- Manuální kvalitu: jednou měsíčně projít pět reálných odpovědí a pět odhlášení.
+
+Pokud potřebuješ UTM parametry, drž je neosobní: zdroj, kampaň, typ obsahu. Nepřidávej identifikátor uživatele do každého odkazu jen proto, že to nástroj dovolí. „Dovolí“ není totéž co „je to dobrý nápad“. To platí i mimo e-mail, ale tady zvlášť — schránka je osobní prostor, ne akvárium.
+
+## LF.4 Preference centrum má být produktová funkce
+
+Odhlášení nemá být trestná výprava přes tři potvrzení. Dobré preference centrum dává uživateli kontrolu:
+
+- Bezpečnostní a transakční e-maily vysvětli jako nutné pro provoz účtu.
+- Marketingové a vzdělávací e-maily nech zapnout i vypnout samostatně.
+- Nabídni frekvenci: okamžitě, týdenní souhrn, měsíční souhrn, nikdy.
+- Ukaž, z jakého důvodu uživatel zprávy dostává: zákazník, trial, odběr blogu, účastník webináře.
+- Přidej RSS odkaz pro lidi, kteří chtějí obsah bez předání e-mailu.
+
+Příklad mikrotextu:
+
+> „Produktové bezpečnostní e-maily posíláme, aby účet fungoval a šel chránit. Tipy a novinky jsou volitelné. Pokud je vypnete, účet zůstane normálně aktivní. Články můžete číst i přes RSS.“
+
+Tohle je malý text, ale velký signál. Říká: nejsi lead v trychtýři, jsi člověk s kontrolou nad vlastní schránkou. Ano, marketingový dashboard možná zapláče. Nabídni mu kapesník z recyklovaného papíru.
+
+## LF.5 Incident doručitelnosti řeš jako provozní incident
+
+Když začnou padat odražené e-maily nebo zákazníci hlásí, že reset hesla není ve schránce, není čas na náhodné klikání v administraci. Připrav si jednoduchý playbook.
+
+Prvních 30 minut:
+
+1. Ověř rozsah: týká se problém jedné domény příjemce, jedné subdomény odesílatele, nebo všech zpráv?
+2. Zkontroluj poslední DNS změny, DKIM podpis, SPF výsledek a DMARC reporty.
+3. Podívej se na frontu: čeká, selhává, throttluje, nebo služba vrací odmítnutí?
+4. Rozliš transakční dopad: reset hesla a faktury mají prioritu před newsletterem.
+5. Vypni nebo odlož kampaně, které mohou zhoršovat reputaci.
+6. Připrav krátkou interní zprávu: dopad, stav, další kontrola, vlastník.
+
+Do zákaznické komunikace nepiš technické zaklínadlo. Piš dopad:
+
+> „U části účtů se zpožďují transakční e-maily, hlavně reset hesla a pozvánky. Pracujeme na opravě a dočasně jsme pozastavili marketingové rozesílky, aby se priorita přesunula na provozní zprávy.“
+
+To je srozumitelné. A hlavně to zákazníkovi říká, že víš, co je pro něj důležité.
+
+## LF.6 Checklist e-mailového provozu pro malý SaaS
+
+- Má každá odesílací doména nebo subdoména jasný účel a vlastníka?
+- Jsou transakční, bezpečnostní, produktové a newsletterové zprávy oddělené podle rizika?
+- Jsou SPF záznamy krátké, aktuální a bez historických služeb?
+- Podepisuje každá legitimní odesílací služba DKIM správnou doménou?
+- Je DMARC nastavený, reporty někdo čte a politika se zpřísňuje podle důkazů, ne podle odvahy?
+- Existuje evidence DNS záznamů, DKIM selectorů, reportovacích adres a odesílacích účtů?
+- Neobsahují transakční a bezpečnostní e-maily marketingové pixely ani zbytečné externí obrázky?
+- Umí uživatel snadno vypnout volitelné zprávy bez dopadu na účet?
+- Nabízíš pro obsah RSS nebo veřejný archiv místo vynuceného newsletteru?
+- Má tým playbook pro incident doručitelnosti včetně prioritizace transakčních zpráv?
+
+## Codyho komentář
+
+E-mail je starý, divný a neuvěřitelně živý. Připomíná sklep v činžáku: všichni ho používají, každý tam něco odložil a jednou za čas zjistíš, že bez něj nejde fungovat. Privacy-first přístup tady není brzda marketingu. Je to způsob, jak si nespálit doménu, důvěru ani nervy. Posílej méně, podepisuj správně, měř střídmě a uživateli nech dveře ven. Radikální myšlenka: když tě chce číst, nemusíš ho pronásledovat pixelem.
+
+## Zdroje k příloze
+
+- RFC 7208 — Sender Policy Framework (SPF) pro autorizaci odesílajících serverů přes DNS TXT záznamy: https://www.rfc-editor.org/info/rfc7208/
+- RFC 6376 — DomainKeys Identified Mail (DKIM) a kryptografické podepisování e-mailových zpráv: https://www.rfc-editor.org/info/rfc6376/
+- RFC 9989 — aktuální DMARC specifikace z května 2026, která nahrazuje RFC 7489 a RFC 9091: https://www.rfc-editor.org/info/rfc9989/
+- Google Email sender guidelines — praktické požadavky a doporučení pro autentizaci, odhlášení a chování odesílatelů: https://support.google.com/a/answer/81126
+
+## Shrnutí přílohy
+
+Privacy-first e-mailový provoz stojí na oddělení typů zpráv, čistých SPF záznamech, správném DKIM podpisu, postupně zpřísňovaném DMARC, minimálním sledování, férovém preference centru a incidentním playbooku. Doručitelnost není jen technická konfigurace. Je to reputace produktu vyjádřená v DNS, frontách, šablonách a respektu k inboxu.
+
+
+
 ## Pracovní log
+
+- 2026-08-20: Přidána příloha LF o e-mailové doručitelnosti a doménové reputaci: oddělení typů zpráv, SPF/DKIM/DMARC, minimální tracking, preference centrum, incidentní playbook a privacy-first checklist.
 
 - 2026-08-20: Přidána příloha LE o agentních oprávněních a auditu: pracovní režimy agentů, tool katalog, parametrické schvalování, privacy-first audit, bezpečná paměť, rozpočty, limity, akční karta a checklist.
 
