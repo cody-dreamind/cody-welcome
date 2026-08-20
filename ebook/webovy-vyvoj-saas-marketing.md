@@ -49753,7 +49753,197 @@ Threat modeling není o tom, že se tým začne bát vlastního produktu. Je to 
 
 Threat modeling pro malý SaaS má být krátký, konkrétní a napojený na release proces. Stačí pracovní list, datový tok, hranice důvěry, scénáře „co se nesmí stát“ a výstupy převedené do testů, limitů, flagů nebo vědomých rozhodnutí. Privacy-first hodnota se tu ukazuje naplno: nejdřív škrtat zbytečné datové toky, potom chránit ty nezbytné.
 
+# Příloha LA: Exporty, sdílené reporty a datová portabilita bez ZIP chaosu, veřejných odkazů a úniku přes „jenom CSV“
+
+Export je jedna z těch funkcí, která vypadá nudně, dokud se nepovede špatně. Pak se z ní stane elegantní stroj na únik dat: CSV s celou zákaznickou databází, veřejný odkaz bez expirace, PDF report poslaný do cizího workspace nebo ZIP archiv, který obsahuje víc tajemství než rodinná porada po třetím víně.
+
+Privacy-first SaaS bere export jako produktovou funkci, ne jako tlačítko „stáhnout všechno“. Export má mít účel, rozsah, oprávnění, auditní stopu, expiraci a lidsky srozumitelný formát. A ano, má fungovat i ve chvíli, kdy zákazník odchází. Držet data jako rukojmí je obchodní strategie pro padouchy v levném seriálu, ne pro důvěryhodný evropský produkt.
+
+## LA.1 Nejdřív rozděl exporty podle účelu
+
+Neexistuje jeden bezpečný export. Existuje několik typů exportu a každý má jiné riziko. Když je hodíš do jednoho tlačítka „Exportovat“, začneš řešit bezpečnost až ve chvíli, kdy už je soubor pryč.
+
+Rozumné rozdělení:
+
+- **Pracovní export:** uživatel si stáhne tabulku aktuálního pohledu, třeba faktury za měsíc nebo seznam úkolů.
+- **Report pro sdílení:** tým vytvoří PDF nebo odkaz s výsledky pro klienta, vedení nebo partnera.
+- **Administrativní export:** vlastník workspace potřebuje účetní, právní nebo bezpečnostní data.
+- **Portabilita účtu:** zákazník chce odejít nebo přesunout svá data do jiného systému.
+- **Interní support export:** tým si vytahuje data pro řešení incidentu nebo ticketu.
+
+Každý typ si zaslouží vlastní pravidla. Pracovní export může být rychlý a omezený aktuálním filtrem. Portabilita musí být úplnější, strojově čitelná a dobře zdokumentovaná. Support export by měl být výjimka s důvodem, časovým omezením a audit logem.
+
+Praktická věta do produktové karty:
+
+> „Tento export slouží k předání měsíčního přehledu zákazníkovi. Obsahuje pouze agregované metriky, ne jednotlivé eventy ani osobní údaje uživatelů.“
+
+Když takovou větu neumíš napsat, export ještě není připravený. Není to detail. Je to kouř z motoru.
+
+## LA.2 Exportuj minimum, ne celou databázi v kostýmu tabulky
+
+CSV působí nevinně, protože je to „jen text“. Jenže právě proto se šíří extrémně snadno: příloha v e-mailu, kopie na ploše, import do cizího nástroje, screenshot, sdílený disk. Export musí respektovat stejnou datovou minimalizaci jako aplikace.
+
+Před každým exportem si projdi sloupce:
+
+- Je sloupec nutný pro účel exportu?
+- Je to osobní údaj, interní poznámka, bezpečnostní hodnota nebo obchodní tajemství?
+- Potřebuje příjemce plnou hodnotu, nebo stačí maskovaná/verifikovaná varianta?
+- Musí být data na úrovni jednotlivce, nebo stačí agregace?
+- Má uživatel, který export spouští, oprávnění vidět všechna pole i mimo export?
+
+Příklad pro report kampaně:
+
+| Pole | Ve výchozím reportu? | Poznámka |
+| --- | --- | --- |
+| Název kampaně | Ano | Nutné pro orientaci |
+| Počet návštěv | Ano | Agregovaná metrika |
+| Konverzní poměr | Ano | Agregovaná metrika |
+| E-maily leadů | Ne | Patří do CRM, ne do reportu |
+| IP adresy návštěvníků | Ne | Pro marketingový report zbytečné riziko |
+| Interní poznámky obchodníka | Ne | Nejsou určeny klientovi |
+
+U B2B SaaS je dobré zavést „export profile“: běžný uživatel dostane bezpečný výchozí rozsah, admin může zvolit rozšířený rozsah a citlivý export vyžaduje potvrzení nebo druhé schválení. Není to byrokracie. Je to airbag.
+
+## LA.3 Sdílené odkazy musí expirovat a vědět, komu patří
+
+Veřejný odkaz na report je pohodlný. A přesně proto je nebezpečný. Pokud odkaz nemá expiraci, možnost zrušení, rozsah oprávnění a auditní stopu, není to sdílení. Je to malý veřejný sklad dat s hezkým URL.
+
+Bezpečný sdílený report má mít:
+
+- jasného vlastníka,
+- konkrétní příjemce nebo alespoň omezený token,
+- expiraci ve dnech, ne v geologických obdobích,
+- možnost okamžité revokace,
+- log zobrazení nebo stažení bez přehnaného profilování,
+- oddělení reportu od živých interních dat,
+- vodítko v UI, co report obsahuje.
+
+Dobré výchozí nastavení:
+
+- interní report: dostupný jen přihlášeným členům workspace,
+- klientský report: odkaz expirovaný za 7 až 30 dní podle citlivosti,
+- citlivý report: vyžaduje přihlášení nebo jednorázový kód,
+- veřejný report: obsahuje jen agregovaná nebo anonymizovaná data.
+
+Mikrotext před vytvořením odkazu:
+
+> „Odkaz umožní zobrazit agregovaný report bez přihlášení po dobu 14 dní. Neobsahuje kontaktní údaje leadů ani interní poznámky. Odkaz můžete kdykoli zrušit.“
+
+Tohle je malý text, ale velký rozdíl. Uživatel ví, co sdílí. Produkt nelže mlčením.
+
+## LA.4 Portabilita není nouzový SQL dump
+
+Evropská komise shrnuje právo na přenositelnost dat tak, že jednotlivec může v určitých situacích získat své osobní údaje ve strukturovaném, strojově čitelném formátu a případně je přenést jinému správci, pokud je to technicky možné. Prakticky: když zpracováváš osobní data automatizovaně na základě smlouvy nebo souhlasu, nemůže být export zákaznických dat improvizace v pátek večer.
+
+Produktově to znamená:
+
+- mít dokumentovaný rozsah dat, která umíš vyexportovat,
+- rozlišit osobní data uživatele, data workspace a data jiných osob,
+- použít formát, který jde reálně zpracovat: CSV, JSON, případně ZIP s manifestem,
+- přidat popis polí a časové zóny,
+- oddělit soubory, přílohy, auditní záznamy a nastavení,
+- neexportovat tajemství, tokeny, interní bezpečnostní poznámky ani hash hesla,
+- mít proces pro ověření identity žadatele.
+
+Špatný export:
+
+> `export_final_v3_REAL.csv`, kde jsou všechny tabulky slepené dohromady, bez vysvětlení, v kódování „hodně štěstí“.
+
+Lepší export:
+
+```text
+workspace-export-2026-08-20.zip
+├── manifest.json
+├── README.md
+├── users.csv
+├── projects.csv
+├── invoices.csv
+├── files/
+└── audit-summary.csv
+```
+
+`manifest.json` popíše datum vytvoření, workspace, rozsah exportu, verzi schématu a seznam souborů. `README.md` lidsky vysvětlí, co jednotlivé soubory obsahují. Ano, je to trochu víc práce. Ale méně než vysvětlovat zákazníkovi, proč v exportu chybí půlka dat a druhá půlka je v binárním slizu.
+
+## LA.5 Exportní job musí být provozní funkce
+
+U malých datasetů stačí synchronní download. U větších exportů je lepší background job: uživatel export zadá, systém ho připraví, pošle notifikaci a soubor je omezeně dostupný. Tím získáš kontrolu nad výkonem, timeouty, limity i auditní stopou.
+
+Exportní job by měl mít:
+
+- stav: čeká, běží, hotovo, selhal, expiroval, zrušen,
+- vlastníka a oprávnění,
+- typ exportu a rozsah filtrů,
+- velikost a počet záznamů,
+- čas vytvoření a expirace,
+- bezpečné uložení mimo veřejný webroot,
+- možnost revokace a smazání souboru,
+- rate limit, aby si někdo nevyrobil exportní DDoS na vlastní účet.
+
+OWASP u práce se soubory připomíná obranu ve vrstvách: validace typu a velikosti, bezpečné názvy, omezení oprávnění, uložení mimo přímý veřejný přístup a limity pro upload/download. Stejná logika platí i pro generované exporty. Soubor vytvořený aplikací není automaticky bezpečný jen proto, že ho nevložil uživatel.
+
+Praktické pravidlo: exportní soubor je dočasný artefakt, ne archiv. Dlouhodobá pravda má zůstat v databázi a dokumentované retenci, ne ve složce `exports/old/please-do-not-delete`.
+
+## LA.6 Audituj exporty bez šmírování obsahu
+
+U exportů chceš vědět, kdo co spustil, pro jaký účel a kdy byl soubor stažen nebo zrušen. Nechceš logovat celý obsah exportu. To by byl krásný příklad bezpečnostního logu, který se sám stal bezpečnostním problémem. Bravo, cirkus má nové číslo.
+
+Auditní záznam exportu:
+
+- `actor_id`, `workspace_id`, role a případně schvalovatel,
+- typ exportu,
+- filtr nebo rozsah v bezpečné podobě,
+- počet záznamů a velikost souboru,
+- stav jobu,
+- čas vytvoření, stažení, expirace a revokace,
+- technický identifikátor souboru,
+- důvod u citlivých nebo support exportů.
+
+Do logu nepatří:
+
+- celé řádky CSV,
+- tokeny a podepsané URL,
+- osobní údaje, které nejsou nutné pro audit,
+- interní poznámky zákazníka,
+- obsah příloh,
+- prompt nebo odpověď AI nástroje, pokud export vznikal pomocí AI sumarizace.
+
+Užitečný detail: přidej do administrace přehled posledních exportů. Zákazník tak vidí, že se s daty zachází kontrolovaně. Důvěra se nebuduje slibem „bereme bezpečnost vážně“. Buduje se tím, že zákazník najde konkrétní stopu a rozumí jí.
+
+## LA.7 Checklist bezpečných exportů a reportů
+
+- Má každý export jasný účel a typ: pracovní, report, administrativní, portabilita nebo support?
+- Exportuje se jen minimum polí potřebných pro daný účel?
+- Jsou citlivá pole maskovaná, agregovaná nebo ve výchozím stavu vypnutá?
+- Kontroluje backend oprávnění ke každému záznamu, nejen viditelnost tlačítka v UI?
+- Mají sdílené odkazy expiraci, revokaci a jasný popis obsahu?
+- Jsou exportní soubory uložené mimo veřejný webroot a dostupné přes aplikační autorizaci?
+- Má větší export background job se stavem, limity a chybovým hlášením?
+- Maže se dočasný soubor po expiraci automaticky?
+- Existuje auditní stopa bez logování obsahu exportu?
+- Umíš zákazníkovi vysvětlit rozdíl mezi běžným exportem, reportem a portabilitou dat?
+- Má export `README` nebo manifest, pokud obsahuje víc souborů nebo komplexní schéma?
+- Testuješ, že uživatel z tenanta A nikdy nevyexportuje data tenanta B?
+
+## Codyho komentář
+
+Export je test charakteru produktu. Když firma umí data férově vrátit, bezpečně sdílet a srozumitelně popsat, ukazuje tím sebevědomí. Když zákazník musí prosit support o SQL dump, produkt vlastně říká: „Vstup snadný, odchod přes sklep.“ Privacy-first SaaS má mít dveře ven stejně civilizované jako dveře dovnitř. Je to slušnost. A slušnost škáluje překvapivě dobře.
+
+## Zdroje k příloze
+
+- Evropská komise — žádosti subjektů údajů a přenositelnost dat podle GDPR: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/dealing-individuals-requests_en
+- Evropská komise — přehled práv jednotlivců včetně práva na přenositelnost dat: https://commission.europa.eu/law/law-topic/data-protection/information-individuals_en
+- EUR-Lex — nařízení (EU) 2016/679, oficiální text GDPR včetně článku 20: https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32016R0679
+- OWASP File Upload Cheat Sheet — bezpečné nakládání se soubory, validace, limity, oprávnění a umístění souborů: https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html
+- OWASP Authorization Cheat Sheet — principy autorizace, deny-by-default a kontroly oprávnění na serveru: https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html
+- OWASP Logging Cheat Sheet — doporučení pro bezpečné logování a ochranu citlivých dat v logách: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+
+## Shrnutí přílohy
+
+Bezpečný export není SQL dump s hezčím názvem. Je to produktová funkce s jasným účelem, minimem dat, oprávněními, expirací, revokací, auditní stopou a srozumitelným formátem. Privacy-first přístup chrání zákazníka i provozovatele: běžné reporty sdílí jen nutné agregace, portabilita má dokumentovaný rozsah a support exporty jsou výjimka s důvodem, ne tajná zkratka.
+
 ## Pracovní log
+
+- 2026-08-20: Přidána příloha LA o exportech, sdílených reportech a datové portabilitě: typy exportů, datové minimum, expirované odkazy, strukturovaný portabilní archiv, exportní joby, bezpečný audit a checklist.
 
 - 2026-08-20: Přidána příloha KZ o threat modelingu pro malý SaaS: triggery, pracovní list, datové toky, hranice důvěry, převod rizik do úkolů, mini-workshop a privacy-first checklist.
 
