@@ -49331,7 +49331,147 @@ Incidenty nejsou ostuda. Ostuda je opakovat stejný incident, protože první z�
 
 Incidentní učení převádí chaos na konkrétní zlepšení: popíše zákaznický dopad, poskládá timeline, oddělí mitigaci od opravy a prevence, udělá privacy triage a dotáhne ověřitelné akce. Nejde o hledání viníka, ale o zmenšení příštího rizika. Malý SaaS tým tím získá klidnější provoz, lepší důvěru zákazníků a méně déjà vu momentů typu „tohle už jsme přece jednou řešili“.
 
+
+# Příloha KX: Bezpečnostní regresní testy bez pentestového divadla, release loterie a zákaznických dat v testlabu
+
+Bezpečnostní regresní test není každoroční rituál, kdy někdo pošle PDF s červenými lebkami a tým měsíc předstírá, že ho čte. Je to praktická kontrola, že změna nerozbila věci, na kterých stojí důvěra zákazníka: přihlášení, oprávnění, izolaci tenantů, platby, exporty, mazání dat, integrace, logování a incidentní viditelnost.
+
+Malý SaaS tým nepotřebuje bezpečnostní cirkus. Potřebuje krátký, opakovatelný a srozumitelný systém, který se spustí při rizikové změně a dá jasnou odpověď: můžeme to bezpečně pustit, pustíme to postupně, nebo brzda — tady je konkrétní problém.
+
+## KX.1 Regrese začíná mapou rizikových cest
+
+Nejhorší bezpečnostní testovací plán zní: „zkontrolujeme aplikaci“. To není plán, to je přáníčko. Začni seznamem cest, kde chyba bolí nejvíc.
+
+Pro běžný B2B SaaS si napiš minimálně tyhle oblasti:
+
+- přihlášení, MFA, reset hesla a session,
+- pozvánky do týmu, role a změny oprávnění,
+- přístup k tenant datům přes UI, API, exporty a background joby,
+- billing akce: změna tarifu, fakturační údaje, platební stavy,
+- importy, uploady, webhooky a veřejné callback URL,
+- admin zásahy, support access a audit log,
+- smazání účtu, retence a export osobních dat.
+
+U každé cesty si doplň jednu větu: „Co se nesmí stát?“ Například: „Uživatel z workspace A nesmí přes upravené ID stáhnout export workspace B.“ Tohle je lepší než abstraktní „otestovat autorizaci“, protože se z toho dá udělat konkrétní test.
+
+## KX.2 Každá riziková změna má bezpečnostní diff
+
+Bezpečnostní regresi nespouštěj jen podle velikosti pull requestu. Malý diff může změnit pravidla přístupu, velký diff může být jen přeskládaný CSS kabát. Rozhoduj podle dopadu.
+
+Bezpečnostní diff si polož před mergem:
+
+- Mění se autentizace, autorizace, role nebo session?
+- Přibývá nový endpoint, webhook, upload, export nebo admin akce?
+- Posíláme data novému dodavateli nebo do nové integrační vrstvy?
+- Mění se retenční pravidla, mazání, audit log nebo zákaznický export?
+- Přidává se AI funkce, která čte zákaznický obsah nebo volá nástroje?
+- Mění se fronty, cron joby nebo dávkové zpracování napříč tenanty?
+
+Pokud je odpověď ano, release karta má mít část „bezpečnostní regrese“. Ne román. Stačí seznam dotčených rizik, testů a vlastníka.
+
+## KX.3 Automatizuj invarianty, ne divadelní skóre
+
+Automatizované skenery jsou užitečné, ale nesmí nahradit vlastní pravidla produktu. Generický nástroj neví, že faktura zákazníka má být viditelná jen pro účetní roli v daném workspace. To víš ty. A právě to má být v testech.
+
+Dobré bezpečnostní invarianty:
+
+- uživatel bez role `owner` nemůže měnit billing,
+- člen workspace nevidí projekty jiného workspace ani při ruční změně ID,
+- deaktivovaný uživatel nemůže dokončit starou session,
+- export obsahuje jen data daného tenanta a neobsahuje interní poznámky supportu,
+- webhook bez platného podpisu se odmítne před zpracováním payloadu,
+- reset hesla neprozradí, jestli e-mail v systému existuje,
+- audit log nezapisuje tokeny, hesla, celé prompt payloady ani platební údaje.
+
+Takové testy nemusí být krásné. Musí být tvrdohlavé. Když někdo později přepíše autorizaci „rychlou zkratkou“, test má spadnout dřív než důvěra zákazníka.
+
+## KX.4 Manuální scénáře drž krátké a opakovatelné
+
+Ne všechno jde rozumně automatizovat hned. Manuální bezpečnostní regrese je v pořádku, pokud není pokaždé improvizovaná. Vytvoř si scénáře, které zvládne projít vývojář nebo product owner bez toho, aby si hrál na filmového hackera v kapuci.
+
+Příklad scénáře pro tenant izolaci:
+
+1. Vytvoř dva testovací workspaces: `Alpha` a `Beta`.
+2. Přihlas uživatele, který je členem jen `Alpha`.
+3. Zkopíruj URL detailu projektu z `Beta` a otevři ji pod uživatelem z `Alpha`.
+4. Zkus totéž přes API s ID objektu z `Beta`.
+5. Ověř, že odpověď neprozradí název, existenci ani metadata cizího objektu.
+6. Zkontroluj audit log: má zachytit odmítnutý pokus bez citlivého payloadu.
+
+Tohle je obyčejné, konkrétní a extrémně užitečné. Žádná magie. Jen dveře, klika, zámek, kontrola, že se neotevřelo do cizího bytu.
+
+## KX.5 Testovací data nesmí být produkční odpad
+
+Bezpečnostní testy často potřebují realistické situace: více tenantů, různé role, staré pozvánky, expirované tokeny, rozbité webhooky, velké exporty. To ale neznamená kopírovat produkční databázi do stagingu a doufat, že „je to interní“.
+
+Privacy-first postup:
+
+- používej syntetická seed data s jasnými scénáři,
+- produkční kopii ber jako výjimku s časovým omezením a schválením,
+- maskování nepovažuj automaticky za anonymizaci,
+- testovací e-maily směruj do bezpečné schránky nebo lokálního sinku,
+- externí integrace v testu přepni do sandboxu nebo stubu,
+- po testu smaž dočasná data podle checklistu, ne podle nálady.
+
+Cílem je testovat riziko, ne rozmnožovat zákaznická data. Produkce není semínkovna pro staging. Produkce je produkce. Překvapivé, já vím.
+
+## KX.6 Výsledek testu musí vést k rozhodnutí
+
+Bezpečnostní regrese bez rozhodnutí je jen drahá poznámka. Každý běh zakonči jedním ze čtyř stavů:
+
+- **Go:** rizikové scénáře prošly, release může pokračovat.
+- **Go s omezením:** release může jít jen za feature flagem, na omezené zákazníky nebo s monitoringem.
+- **No-go:** problém blokuje release, protože ohrožuje data, oprávnění, peníze nebo dostupnost.
+- **Needs review:** výsledek není jasný a potřebuje konkrétního vlastníka, ne nekonečný thread.
+
+Do zápisu patří datum, verze, testované scénáře, nalezené problémy, rozhodnutí a follow-up akce. Neukládej screenshoty s osobními údaji, plné request payloady ani tokeny. Pokud potřebuješ důkaz, použij redakci a korelační ID.
+
+## KX.7 Malý release gate pro bezpečnostní regresi
+
+Pro menší tým stačí tenhle minimální gate:
+
+| Otázka | Kdo odpovídá | Důkaz |
+| --- | --- | --- |
+| Mění release citlivou cestu? | autor změny | release karta |
+| Existují testovací účty a data pro scénář? | vývojář | seed nebo test run |
+| Prošly automatizované invarianty? | CI | odkaz na běh |
+| Prošel ruční scénář, pokud je potřeba? | reviewer | krátký zápis |
+| Víme, co monitorovat po nasazení? | vlastník služby | alert/report |
+| Máme rollback nebo kill switch? | vlastník releasu | release plán |
+
+Gate nemá brzdit každou opravu překlepu. Má zabránit tomu, aby změna oprávnění prošla stejnou rutinou jako nový odstín šedé v patičce.
+
+## KX.8 Checklist bezpečnostních regresních testů
+
+- Máme seznam kritických zákaznických cest a bezpečnostních invariantů?
+- Spouštíme regresi podle rizika změny, ne podle počtu řádků v diffu?
+- Testujeme tenant izolaci přes UI, API i background zpracování tam, kde to dává smysl?
+- Ověřujeme negativní scénáře: cizí ID, chybějící role, expirovaný token, neplatný podpis?
+- Používáme syntetická data místo produkčních kopií?
+- Neukládáme do testovacích artefaktů tokeny, osobní údaje ani celé payloady?
+- Má každý no-go nález vlastníka a jasné kritérium opravy?
+- Má release po rizikové změně monitoring, rollback nebo kill switch?
+- Jsou výsledky regresí dohledatelné bez čtení tajných dat?
+- Revizujeme seznam testů po incidentech a post-release review?
+
+## Codyho komentář
+
+Bezpečnostní regrese je jako čištění zubů. Není to heroická disciplína, nikdo ti za ni netleská, ale když ji ignoruješ, jednou to bude drahé, bolestivé a někdo použije slovo „extrakce“. V SaaS navíc nejde jen o tvoje zuby. Máš v puse data zákazníků. Ano, metafora se utrhla, ale pointa drží.
+
+## Zdroje k příloze
+
+- OWASP Application Security Verification Standard popisuje ASVS jako základ pro testování technických bezpečnostních kontrol a seznam požadavků pro bezpečný vývoj: https://owasp.org/www-project-application-security-verification-standard/
+- OWASP Web Security Testing Guide je praktický referenční materiál pro testování webových aplikací: https://owasp.org/www-project-web-security-testing-guide/
+- OWASP Cheat Sheet Series poskytuje stručné bezpečnostní návody pro konkrétní aplikační témata: https://cheatsheetseries.owasp.org/
+- OWASP Logging Cheat Sheet zdůrazňuje aplikační logování pro bezpečnostní i provozní případy a uvádí i data, která se do logů nemají ukládat: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+
+## Shrnutí přílohy
+
+Bezpečnostní regresní testy mají chránit konkrétní sliby produktu: kdo smí co vidět, měnit, exportovat, mazat a spouštět. Nejsilnější nejsou v generickém skeneru, ale v produktových invariantech, syntetických scénářích, krátkém release gate a rozhodnutí, které umí release pustit, omezit nebo zastavit bez drama seriálu.
+
+
 ## Pracovní log
+- 2026-08-20: Přidána příloha KX o bezpečnostních regresních testech: rizikové cesty, bezpečnostní diff, produktové invarianty, manuální scénáře, syntetická data, release gate a checklist.
 
 - 2026-08-20: Přidána příloha KW o incidentním učení: zákaznický dopad, timeline, mitigace versus oprava versus prevence, privacy triage, ověřitelné akce, měsíční vzory, šablona zápisu a checklist.
 
