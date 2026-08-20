@@ -50790,8 +50790,160 @@ E-mail je starý, divný a neuvěřitelně živý. Připomíná sklep v činžá
 Privacy-first e-mailový provoz stojí na oddělení typů zpráv, čistých SPF záznamech, správném DKIM podpisu, postupně zpřísňovaném DMARC, minimálním sledování, férovém preference centru a incidentním playbooku. Doručitelnost není jen technická konfigurace. Je to reputace produktu vyjádřená v DNS, frontách, šablonách a respektu k inboxu.
 
 
+# Příloha LG: Smlouvy, objednávky a elektronické podpisy bez PDF džungle, slepého klikání a právního cosplaye
+
+Smlouva v malém SaaS týmu často vzniká jako zvláštní koláž: obchodní nabídka v e-mailu, objednávka v PDF, DPA v odkazu, faktura v účetním systému, podpis přes nějaký nástroj, souhlas s podmínkami v aplikaci a poznámka „domluveno s paní Novákovou“ někde v CRM. Dokud všechno funguje, tváří se to jako proces. Když přijde spor, audit nebo zákazníkovo „ukažte mi, co jsme vlastně odsouhlasili“, začne digitální archeologie.
+
+Privacy-first přístup ke smlouvám neznamená, že musíš každou objednávku podepisovat kvalifikovaným certifikátem a archivovat v trezoru pod Alpami. Znamená to, že umíš doložit, kdo co odsouhlasil, kdy, v jaké verzi, na jakém základě, s jakými datovými dopady a bez zbytečného sběru osobních údajů okolo.
+
+## LG.1 Nejdřív rozděl obchodní dokumenty podle dopadu
+
+Ne každé kliknutí v aplikaci je smlouva a ne každé PDF potřebuje podpisový ceremoniál. První krok je rozdělit dokumenty podle toho, co mění pro zákazníka, produkt a data.
+
+Praktické rozdělení:
+
+| Dokument nebo akce | Příklad | Dopad | Doporučený důkaz |
+| --- | --- | --- | --- |
+| Nabídka | Cenová kalkulace, scope implementace | Obchodní očekávání | Verze nabídky, odeslání, přijetí |
+| Objednávka | Aktivace tarifu, počet uživatelů | Fakturace a služba | Potvrzení oprávněnou osobou |
+| Smluvní podmínky | SaaS ToS, SLA, support pravidla | Práva a povinnosti | Verze textu a čas souhlasu |
+| DPA | Zpracovatelská smlouva | Osobní údaje zákazníka | Role, účely, subdodavatelé, datum |
+| Změna tarifu | Upgrade, downgrade, add-on | Cena a rozsah služby | Auditní záznam změny |
+| Bezpečnostní výjimka | Dočasný support access, ruční export | Riziko pro data | Schválení, expirace, důvod |
+
+Tahle tabulka pomáhá zastavit oblíbený chaos: všechno je „smlouva“, ale nic nejde najít. U každého typu dokumentu si napiš minimální důkaz, který potřebuješ uložit. Ne víc. Ne méně. Pokud potřebuješ jen doložit, že zákazník přijal obchodní podmínky verze `2026-08-20`, neukládej screenshot celé obrazovky s IP adresou, user agentem, polohou myši a náladou prohlížeče. Ano, přeháním. Ale jen trochu.
+
+## LG.2 Elektronický podpis vybírej podle rizika, ne podle dojmu
+
+EU rámec eIDAS rozlišuje úrovně elektronických podpisů. Evropská komise shrnuje, že elektronický podpis nemá být odmítnut jen proto, že je elektronický, a že kvalifikovaný elektronický podpis má napříč EU ekvivalentní právní účinek jako vlastnoruční podpis: https://ec.europa.eu/digital-building-blocks/sites/spaces/DIGITAL/pages/880312429/eSignature%2BFAQ
+
+To ale neznamená, že každý B2B trial potřebuje kvalifikovaný podpis. Znamená to, že máš volit úroveň důkazu podle rizika:
+
+- Nízké riziko: kliknutí na přijetí podmínek při registraci, uložená verze podmínek, čas a účet.
+- Střední riziko: objednávka placeného tarifu potvrzená oprávněným administrátorem účtu, e-mailové potvrzení, audit log.
+- Vyšší riziko: individuální smlouva, významné SLA, veřejný sektor, citlivá data nebo velká hodnota kontraktu; zvaž pokročilý nebo kvalifikovaný podpis.
+- Kritické riziko: dokument, kde zákazník nebo právník výslovně požaduje kvalifikovaný elektronický podpis; použij poskytovatele a službu ověřitelnou v EU trusted listech.
+
+Evropská komise provozuje eIDAS Dashboard a uvádí, že kvalifikovaný poskytovatel nebo služba je kvalifikovaná jen tehdy, pokud se nachází v důvěryhodném seznamu: https://digital-strategy.ec.europa.eu/en/policies/eu-trusted-lists
+
+Praktický závěr: nenech se hypnotizovat hezkým podpisovým widgetem. U každého nástroje se ptej, jaký typ podpisu skutečně poskytuje, kde ověřuje identitu, kde ukládá auditní stopu, kdo jsou subdodavatelé, jak exportuje důkazní balíček a jestli jde odejít bez ztráty historie.
+
+## LG.3 Verze podmínek je produktové API
+
+Smluvní podmínky nejsou statická stránka, kterou někdo jednou opsal z internetu a pak se za ni všichni modlí. V SaaS se mění funkce, ceny, subdodavatelé, regiony, AI vlastnosti, SLA i support proces. Každá změna podmínek musí být verzovaná stejně disciplinovaně jako API.
+
+Minimální model verzování:
+
+```text
+DOCUMENT_ID: terms-of-service
+VERSION: 2026-08-20
+EFFECTIVE_FROM: 2026-09-01
+CHANGE_TYPE: minor / material
+OWNER: legal/product
+SUMMARY: Přidána pravidla pro nový audit export.
+CUSTOMER_NOTICE: Ano/ne, kanál, datum
+ARCHIVE_URL: interní odkaz na neměnnou verzi
+```
+
+V aplikaci pak neukládej jen `accepted_terms: true`. To je právní ekvivalent věty „něco se stalo, věř mi“. Ulož raději: identifikátor dokumentu, verzi, čas souhlasu, účet, uživatele nebo roli, kanál souhlasu a odkaz na archivovanou verzi textu. Obsah samotných podmínek drž jako neměnný artefakt: Markdown, PDF/A nebo HTML snapshot. Hlavně ať ho za půl roku nepřepíše deploy.
+
+## LG.4 DPA napoj na datovou mapu, ne na šuplík právních dokumentů
+
+Pokud SaaS zpracovává osobní údaje zákazníkových uživatelů jménem zákazníka, DPA není „příloha pro procurement“. Je to provozní dokument. EDPB ve svém průvodci pro malé firmy připomíná, že vztah správce a zpracovatele má být upraven smlouvou, ve které jsou zdokumentované operace zpracování a prostředky zpracování: https://www.edpb.europa.eu/sme/learn-the-basics/data-controller-or-data-processor_en
+
+Privacy-first DPA musí sedět s realitou produktu:
+
+- účely zpracování odpovídají funkcím, které zákazník používá,
+- kategorie osobních údajů odpovídají datové mapě,
+- subdodavatelé mají jasný účel, region a roli,
+- transfery mimo EHP nejsou schované v obecné větě,
+- technická a organizační opatření odpovídají skutečnému provozu,
+- exit, export a výmaz mají konkrétní postup.
+
+Nejhorší varianta je DPA, která slibuje světovou bezpečnost, zatímco produkt posílá support screenshoty do náhodného nástroje a uchovává exporty navždy. To není právní ochrana. To je drahá tapeta.
+
+## LG.5 Auditní stopa má dokazovat souhlas, ne sledovat člověka
+
+U smluvních akcí chceš vědět, co se stalo. Nechceš z toho udělat behaviorální profil administrátora. Auditní záznam má být úzký, srozumitelný a použitelný.
+
+Dobrá událost:
+
+```json
+{
+  "event": "contract.terms.accepted",
+  "account_id": "acc_123",
+  "actor_id": "usr_456",
+  "actor_role": "owner",
+  "document_id": "terms-of-service",
+  "document_version": "2026-08-20",
+  "accepted_at": "2026-08-20T17:30:00Z",
+  "source": "app_checkout"
+}
+```
+
+Špatná událost: uložený celý request, IP adresa bez retenčního důvodu, user agent navždy, fingerprint prohlížeče, screenshot podpisové obrazovky a kompletní obsah interních poznámek. Bezpečnostní důkaz nemá být datový vysavač v obleku.
+
+## LG.6 Změny smluv a cen komunikuj jako produktovou změnu
+
+Změna podmínek nebo ceny není jen právní formalita. Je to zásah do důvěry. Zákazník má pochopit, co se mění, odkdy, proč a co může udělat, pokud s tím nesouhlasí.
+
+Praktický vzorec oznámení:
+
+```text
+Co se mění:
+[konkrétní změna, ne právnický odstavec]
+
+Od kdy:
+[datum účinnosti]
+
+Koho se to týká:
+[tarify / nové účty / všichni zákazníci]
+
+Proč:
+[stručné vysvětlení]
+
+Co můžete udělat:
+[akceptovat, exportovat data, změnit tarif, kontaktovat podporu]
+
+Kde najdete plné znění:
+[odkaz na archivovanou verzi]
+```
+
+U privacy-first značky je lepší přiznat dopad než ho zahrabat do věty „pokračováním v používání služby vyjadřujete souhlas“. Někdy to právně stačí. Marketingově to ale voní jako koberec, pod kterým se něco schovává.
+
+## LG.7 Checklist smluv, objednávek a podpisů
+
+- Má každý typ obchodního dokumentu jasný účel, vlastníka a retenční dobu?
+- Ukládáš u souhlasů konkrétní verzi dokumentu, čas, účet, aktéra a kanál?
+- Je archiv starých podmínek neměnný a dohledatelný?
+- Volíš úroveň elektronického podpisu podle rizika dokumentu?
+- Umíš ověřit, zda je kvalifikovaná podpisová služba v EU trusted listu?
+- Neobsahuje auditní stopa smluvních akcí zbytečné osobní údaje nebo fingerprinting?
+- Sedí DPA s reálnou datovou mapou, subdodavateli, regiony a exit procesem?
+- Má zákazník přímý přístup ke smluvním dokumentům, objednávkám, fakturám a historii změn?
+- Existuje postup pro změnu podmínek nebo cen včetně oznámení a data účinnosti?
+- Umíš při odchodu zákazníka dodat export smluvních a fakturačních dokumentů bez ručního lovu v pěti systémech?
+
+## Codyho komentář
+
+Smlouvy jsou UX. Jen nudnější a s větší šancí, že je jednou bude číst právník. Malý SaaS tým si často myslí, že „pořádek ve smlouvách“ znamená koupit podpisový nástroj. Ve skutečnosti znamená vědět, co zákazník odsouhlasil, proč to bylo potřeba, kde je přesná verze a jak se to váže na data. Podpis je až poslední vrstva. Základ je disciplína. Bohužel méně sexy než animované konfety po checkoutu, ale podstatně užitečnější.
+
+## Zdroje k příloze
+
+- Evropská komise — eSignature FAQ k právním účinkům elektronických podpisů podle eIDAS a rozdílu mezi běžným, pokročilým a kvalifikovaným podpisem: https://ec.europa.eu/digital-building-blocks/sites/spaces/DIGITAL/pages/880312429/eSignature%2BFAQ
+- EUR-Lex — konsolidované znění nařízení eIDAS, článek 25 o právních účincích elektronických podpisů: https://eur-lex.europa.eu/eli/reg/2014/910/2024-05-20/eng
+- Evropská komise — EU trusted lists a pravidlo, že kvalifikovaný poskytovatel nebo služba musí být v důvěryhodném seznamu: https://digital-strategy.ec.europa.eu/en/policies/eu-trusted-lists
+- EDPB — průvodce pro malé firmy k rolím správce a zpracovatele a smluvnímu vztahu při zpracování osobních údajů: https://www.edpb.europa.eu/sme/learn-the-basics/data-controller-or-data-processor_en
+
+## Shrnutí přílohy
+
+Privacy-first smluvní provoz stojí na rozdělení dokumentů podle dopadu, přiměřené úrovni elektronického podpisu, verzování podmínek, DPA napojené na datovou mapu, úzké auditní stopě a férové komunikaci změn. Cílem není právní divadlo ani nekonečný PDF archiv. Cílem je doložit obchodní vztah přesně, srozumitelně a bez zbytečného sběru dat.
+
+
 
 ## Pracovní log
+
+- 2026-08-20: Přidána příloha LG o smlouvách, objednávkách a elektronických podpisech: rozdělení dokumentů podle dopadu, eIDAS úrovně podpisů, verzování podmínek, DPA napojená na datovou mapu, úzký audit souhlasů, komunikace změn a privacy-first checklist.
 
 - 2026-08-20: Přidána příloha LF o e-mailové doručitelnosti a doménové reputaci: oddělení typů zpráv, SPF/DKIM/DMARC, minimální tracking, preference centrum, incidentní playbook a privacy-first checklist.
 
