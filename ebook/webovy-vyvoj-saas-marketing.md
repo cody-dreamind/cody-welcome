@@ -51094,8 +51094,147 @@ Domény jsou nudné přesně do chvíle, kdy nudné nejsou. Pak jsou najednou ne
 Privacy-first doménový provoz stojí na inventáři domén a subdomén, řízených DNS změnách, provozně zvládnutém DNSSEC, CAA záznamech, postupném HSTS, prevenci převzetí subdomén a výběru dodavatelů podle kontroly nad daty i odchodu. Doména není drobná technická položka. Je to kořen důvěry, dostupnosti a značky.
 
 
+---
+
+# Příloha LI: Subdodavatelé, zpracovatelské řetězce a vendor evidence bez tabulkové archeologie, slepých DPA a „to řeší právník“ alibi
+
+Malý SaaS málokdy běží úplně sám. I když máš vlastní aplikaci, vlastní doménu a evropský hosting, pořád se kolem produktu objevují další služby: e-mailový poskytovatel, platební brána, monitoring, helpdesk, analytika, zálohování, AI API, účetnictví, CRM nebo CDN. Každá z nich může být technická pomůcka, obchodní zkratka — nebo nenápadný otvor v datové mapě.
+
+Privacy-first firma proto neřeší subdodavatele až ve chvíli, kdy se velký zákazník zeptá na bezpečnostní dotazník. Řeší je jako běžnou součást produktu. Ne proto, aby všichni chodili po kanceláři s výrazem auditního ducha. Ale proto, že produkt bez přehledu o dodavatelích nemá pod kontrolou vlastní slib zákazníkovi.
+
+GDPR pracuje s rolí správce a zpracovatele a u externího zpracování vyžaduje smlouvu nebo jiný právní akt se zárukami vhodných technických a organizačních opatření. Evropská komise to shrnuje v části o aplikaci GDPR pro firmy a organizace: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/application-gdpr_en
+
+## LI.1 Nejdřív rozliš roli, ne název firmy
+
+Ne každý dodavatel je stejný typ rizika. Stejná služba může v jednom procesu fungovat jako zpracovatel a v jiném jako samostatný správce. Název dodavatele nestačí. Rozhoduje účel, kontrola nad prostředky zpracování a to, kdo určuje, proč se data používají.
+
+Praktické rozdělení:
+
+- **Zpracovatel**: služba zpracovává osobní údaje podle tvých instrukcí, typicky hosting, e-mailová rozesílka transakčních zpráv nebo helpdesk pro tvoje zákaznické tickety.
+- **Samostatný správce**: služba určuje vlastní účely, typicky některé platební, účetní nebo compliance služby, které mají vlastní zákonné povinnosti.
+- **Technický dodavatel bez osobních dat**: nástroj nedostává osobní údaje ani metadata, ze kterých lze reálně identifikovat člověka.
+- **Rizikový smíšený režim**: služba tvrdí, že je jen zpracovatel, ale zároveň používá data pro vlastní analytiku, zlepšování modelů, reklamu nebo benchmarky.
+
+EDPB ve svých pokynech 07/2020 vysvětluje pojmy správce a zpracovatel a zdůrazňuje, že posouzení má vycházet z reálného vlivu na účely a prostředky zpracování, ne jen z popisku ve smlouvě: https://www.edpb.europa.eu/documents/guideline/guidelines-072020-on-the-concepts-of-controller-and-processor-in-the-gdpr_en
+
+Mini-příklad: e-mailová služba, která jen odešle reset hesla podle tvého pokynu, je typicky zpracovatel. Platební brána, která zpracovává platbu a plní vlastní regulatorní povinnosti, může být pro část operací samostatný správce. AI nástroj, který si nechává vstupy pro trénování, není „jen krabička na prompt“ — je to samostatné produktové a právní rozhodnutí.
+
+## LI.2 Vendor evidence musí být živá, ne pohřebiště odkazů
+
+Evidence dodavatelů nemá být excel, který vznikl před enterprise due diligence a od té doby se otevírá jen při rituálu paniky. Má to být krátký provozní dokument, který si rozumí s datovou mapou, architekturou a zákaznickou komunikací.
+
+U každého dodavatele eviduj minimálně:
+
+| Pole | Proč existuje |
+| --- | --- |
+| Název služby | Aby šlo poznat, o kom mluvíme |
+| Vlastník ve firmě | Kdo umí rozhodnout o změně, vypnutí nebo incidentu |
+| Účel použití | Proč službu vůbec potřebujeme |
+| Typ dat | Jaké kategorie údajů služba dostává |
+| Role podle GDPR | Zpracovatel, samostatný správce, společný správce, bez osobních dat |
+| Region zpracování | Kde se data ukládají a odkud k nim může být přístup |
+| Subdodavatelé | Kdo další se může dostat do řetězce |
+| Smlouva / DPA | Odkaz na aktuální dokument a datum revize |
+| Retence | Jak dlouho data zůstávají u dodavatele |
+| Exit plán | Jak data exportovat, smazat a službu nahradit |
+
+Stačí Markdown tabulka v repozitáři, interní wiki nebo jednoduchý registr v administraci. Důležité je, aby evidence měla vlastníka a revizní rytmus. Nástroj bez vlastníka je jako firemní hrnek bez majitele: všichni ho používají, nikdo ho nemyje.
+
+## LI.3 Subdodavatelský řetězec čti jako produktovou závislost
+
+Subdodavatel není drobná poznámka pod čarou. Pokud tvůj helpdesk používá další službu pro ukládání příloh, monitoring používá externí alerting a AI API používá hosting mimo EU, zákaznická data cestují dál, než by naznačoval jeden hezký checkbox „EU region“.
+
+Článek 28 GDPR řeší také zapojení dalších zpracovatelů a princip, že zpracovatel nesmí dalšího zpracovatele zapojit bez předchozího konkrétního nebo obecného písemného povolení správce. Oficiální znění GDPR je dostupné v EUR-Lexu: https://eur-lex.europa.eu/eli/reg/2016/679/oj
+
+Prakticky si hlídej:
+
+- Jestli dodavatel zveřejňuje seznam subdodavatelů a změnový mechanismus.
+- Jestli umí poslat oznámení o novém subdodavateli dřív, než je zapojen do zpracování.
+- Jestli máš reálnou možnost námitky, ne jen odkaz na stránku, kterou nikdo nečte.
+- Jestli se při změně subdodavatele mění region, typ dat nebo riziko.
+- Jestli máš dopad změny promítnutý do trust packu a privacy dokumentace.
+
+Tady nejde o to blokovat každý nástroj. Jde o to vědět, kdy se změnila podstata slibu zákazníkovi. Pokud zákazníkovi říkáš „data zůstávají v EU“ a dodavatel potichu přidá subdodavatele s přístupem mimo EU, není to kosmetika. Je to produktová změna důvěry.
+
+## LI.4 DPA nečti jako PDF pro archiv, ale jako provozní kontrakt
+
+DPA má odpovědět na praktické otázky: co dodavatel smí dělat, jak chrání data, jak hlásí incidenty, jak pomáhá s žádostmi subjektů údajů, co se stane po ukončení služby a jak zapojuje subdodavatele. Pokud je dokument právně hezký, ale provozně nepoužitelný, v incidentu tě nezachrání.
+
+Při kontrole DPA si poznamenej:
+
+- Jaké instrukce dodavatel přijímá a kde jsou popsány.
+- Jak rychle hlásí bezpečnostní incident nebo porušení ochrany dat.
+- Jak řeší smazání nebo vrácení dat po ukončení smlouvy.
+- Jaké technické a organizační opatření uvádí konkrétně, ne jen obecně.
+- Jak umožňuje audit nebo poskytuje nezávislé zprávy a certifikace.
+- Jaké má limity odpovědnosti a zda nedělají z ochrany dat papírového tygra.
+
+Pro malý tým je dobrý kompromis „DPA karta“: jedna interní stránka, která shrne nejdůležitější body smlouvy lidsky. Ne nahrazení právní kontroly, ale překlad do provozu. Když support, vývojář nebo founder potřebuje rozhodnout, nemá lovit větu na straně 37.
+
+## LI.5 Onboarding dodavatele je malý bezpečnostní release
+
+Přidání nového dodavatele není administrativní detail. Je to změna toku dat. Mělo by projít podobným minimálním procesem jako nasazení nové funkce.
+
+Jednoduchý onboarding:
+
+1. Popiš účel: jaký problém nástroj řeší a proč nestačí existující řešení.
+2. Vyplň datovou kartu: jaká data potečou dovnitř a ven.
+3. Urči roli: zpracovatel, správce, bez osobních dat, smíšený režim.
+4. Zkontroluj region a subdodavatele.
+5. Projdi DPA nebo podmínky zpracování.
+6. Nastav minimální přístupy a vypni zbytečné integrace.
+7. Doplň evidenci, trust pack a případně privacy stránku.
+8. Přidej datum první revize.
+
+Příklad: chceš zapnout nový nástroj na produktové nahrávky obrazovky. Rychlá produktová hodnota je lákavá. Ale privacy-first otázky jsou nepříjemně konkrétní: nahrává osobní údaje? Umí maskovat vstupy? Kde ukládá záznamy? Jak dlouho? Kdo má přístup? Jde nahrávání zapnout jen pro interní testovací workspace? Umí zákazník odmítnout? Pokud odpovědi nejsou dobré, není to „growth experiment“. Je to datový vysavač v převleku.
+
+## LI.6 Offboarding dodavatele musí být připravený před rozchodem
+
+Nejhorší čas řešit export a smazání dat je den, kdy dodavatel zdražil, zhoršil podmínky nebo měl incident. Exit plán patří do evidence už při onboardingu.
+
+Offboardingový postup:
+
+- Zastav nové datové toky: vypni webhooks, API klíče, automatizace a přesměrování.
+- Exportuj potřebná data ve čitelném formátu a ověř, že jdou použít.
+- Přenes integrace na náhradní řešení nebo vlastní komponentu.
+- Smaž data u dodavatele podle smlouvy a ulož potvrzení.
+- Zruš účty, tokeny, servisní uživatele a přístupy týmu.
+- Aktualizuj privacy dokumentaci, trust pack, interní runbooky a monitoring.
+
+Privacy-first exit plán nemusí znamenat, že nikdy nepoužiješ externí službu. Znamená, že žádná externí služba nedrží produkt jako rukojmí. Když neumíš odejít, není to dodavatel. Je to nájemní smlouva s labyrintem.
+
+## LI.7 Checklist pro subdodavatele a zpracovatelské řetězce
+
+- Má každý dodavatel jasný účel, vlastníka a vazbu na produktovou funkci?
+- Víme, jestli je dodavatel zpracovatel, samostatný správce nebo technická služba bez osobních dat?
+- Máme u zpracovatelů aktuální DPA nebo odpovídající smluvní dokument?
+- Evidujeme region zpracování, přístup podpory a seznam subdodavatelů?
+- Dostáváme oznámení o změnách subdodavatelů a umíme je vyhodnotit?
+- Neposíláme do nástroje víc dat, než potřebuje pro konkrétní účel?
+- Jsou API klíče, webhooky a servisní účty omezené na minimum?
+- Umíme službu vypnout bez ztráty zákaznických dat a bez odstávky základní funkce?
+- Máme potvrzený postup smazání nebo vrácení dat po ukončení?
+- Je evidence napojená na privacy stránku, trust pack a incidentní plán?
+
+## Codyho komentář
+
+Subdodavatelé jsou místo, kde se z privacy-first hodnoty stává disciplína. Je snadné říct „běžíme v Evropě“. Těžší je vědět, co dělá každý widget, každý webhook a každé API za krásným produktem. Codyho pohled: dobrý vendor registr není právní strašák, ale mapa závislostí. Ukazuje, co můžeš slíbit zákazníkovi, co můžeš rychle vypnout a kde máš raději postavit menší vlastní řešení než kupovat další SaaS bonbon zabalený do trackingového celofánu.
+
+## Zdroje k příloze
+
+- Evropská komise — aplikace GDPR pro firmy a organizace, včetně požadavku na smlouvu se zpracovatelem a vhodné záruky: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/application-gdpr_en
+- EDPB — Guidelines 07/2020 on the concepts of controller and processor in the GDPR: https://www.edpb.europa.eu/documents/guideline/guidelines-072020-on-the-concepts-of-controller-and-processor-in-the-gdpr_en
+- EUR-Lex — Nařízení (EU) 2016/679, článek 28 o zpracovateli a zapojení dalších zpracovatelů: https://eur-lex.europa.eu/eli/reg/2016/679/oj
+
+## Shrnutí přílohy
+
+Privacy-first práce se subdodavateli začíná rozlišením rolí, pokračuje živou vendor evidencí, kontrolou subdodavatelských řetězců, čitelnou DPA kartou, onboardingem jako malým bezpečnostním releasem a exit plánem připraveným před rozchodem. Cílem není nemít dodavatele. Cílem je nemít slepé místo v datech, důvěře a odpovědnosti.
+
+
 
 ## Pracovní log
+
+- 2026-08-20: Přidána příloha LI o subdodavatelích a zpracovatelských řetězcích: role správců a zpracovatelů, živá vendor evidence, kontrola subdodavatelů, DPA karta, onboarding jako bezpečnostní release, offboarding a privacy-first checklist.
 
 - 2026-08-20: Přidána příloha LH o doménách, DNS a TLS provozu: inventář domén, DNS změny jako deploy, DNSSEC, CAA, HSTS, prevence převzetí subdomén, evropský výběr dodavatelů a privacy-first checklist.
 
