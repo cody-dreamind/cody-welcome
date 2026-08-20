@@ -51232,7 +51232,150 @@ Privacy-first práce se subdodavateli začíná rozlišením rolí, pokračuje �
 
 
 
+# Příloha LJ: Support SLA, zákaznické priority a provozní metriky bez sledovacího divadla, nekonečných tagů a falešné urgentnosti
+
+Support není jen místo, kam padají problémy. U malého SaaS je to kombinace produktového radaru, vztahového kanálu a provozní pojistky. Když se navrhne dobře, tým rychle pozná, co zákazníky bolí, umí reagovat na skutečně důležité věci a přitom z podpory neudělá databázi osobních detailů, interních emocí a polovičních slibů.
+
+Privacy-first support stojí na jednoduché disciplíně: řeš problém, neprofiluj člověka. Ticket má obsahovat tolik kontextu, aby šel vyřešit, auditovat a později zlepšit produkt. Nemá se stát digitální zásuvkou, do které postupně spadne celý zákaznický životopis, screenshot bankovního účtu a interní poznámka „volat jen po kávě“.
+
+## LJ.1 SLA začni slibem, ne tabulkou
+
+SLA není kouzelná tabulka s čísly. Je to veřejný nebo smluvní slib, jak se tým chová při různých typech problémů. Pokud začneš metrikami bez slibu, skončíš u podpory, která honí první odpověď do deseti minut, ale neřeší, jestli zákazník opravdu dostal použitelnou pomoc.
+
+Nejdřív si rozděl situace podle dopadu:
+
+| Priorita | Dopad | Příklad | Slib |
+| --- | --- | --- | --- |
+| P1 | Služba je pro většinu zákazníků nedostupná | Výpadek přihlášení nebo plateb | Okamžité triage, status update, incidentní režim |
+| P2 | Kritická funkce nefunguje části zákazníků | Export faktur nejde vybraným účtům | Rychlé potvrzení, workaround, jasná další aktualizace |
+| P3 | Běžná chyba nebo dotaz | Nejasné nastavení role | Odpověď v pracovním rytmu podpory |
+| P4 | Nápad, drobná úprava, kosmetika | Návrh na lepší filtr | Zařazení do feedbacku bez falešného slibu |
+
+Praktické pravidlo: priorita se neurčuje podle hlasitosti zákazníka, ale podle dopadu na provoz, data a schopnost dokončit důležitou práci. Hlasitý zákazník má dostat lidskou odpověď. Kritický incident má dostat týmovou mobilizaci. To jsou dvě různé věci.
+
+## LJ.2 Ticket potřebuje datové minimum
+
+Dobrá podpora často selže na dvou extrémech. Buď ticket neobsahuje skoro nic a support se doptává jako detektiv v levném seriálu, nebo formulář sbírá všechno „pro jistotu“. Privacy-first cesta je mezi: vyžádat jen údaje, které pomáhají problém vyřešit.
+
+Minimální ticket pro SaaS obvykle potřebuje:
+
+- identifikaci účtu nebo organizace,
+- kontaktní e-mail pro odpověď,
+- typ problému,
+- popis očekávaného a skutečného chování,
+- čas výskytu, pokud jde o chybu,
+- bezpečnou přílohu jen tehdy, když je nutná.
+
+Naopak opatrně s poli jako telefon, role v organizaci, interní priority zákazníka, osobní poznámky o uživateli, automaticky připojené celé logy, kompletní URL s tokeny nebo screenshoty s osobními údaji. Pokud se něco sbírá automaticky, musí být jasné proč, kde se to uloží, kdo to vidí a kdy se to smaže.
+
+V UI pomáhá krátký mikrotext:
+
+> „Do přílohy nedávejte hesla, tokeny ani osobní údaje třetích osob. Pokud je potřebujeme, požádáme vás o bezpečnější způsob předání.“
+
+Tohle není alibismus. Je to prevence. Support ticket je často místo, kam lidé ve stresu nahrají první screenshot, který najdou. Produkt jim má pomoct neudělat bezpečnostní nepořádek.
+
+## LJ.3 Měř proces, ne člověka
+
+Support metriky se snadno zvrhnou. Když měříš jen rychlost první odpovědi, tým začne psát rychlé prázdné odpovědi. Když měříš počet vyřešených ticketů, lidé budou zavírat složité případy po částech. Když měříš spokojenost agresivně, zákazník má pocit, že i žádost o pomoc je další marketingový funnel. Gratulace, právě jsme z podpory udělali fitness náramek s právem posílat e-maily.
+
+Lepší metriky pro malý SaaS:
+
+- **čas do prvního lidského potvrzení** u P1/P2,
+- **čas do workaroundu** u provozních blokací,
+- **čas do skutečného vyřešení** podle priority,
+- **podíl ticketů vyřešených dokumentací nebo produktem** bez opakovaného supportu,
+- **opakované problémy podle tématu**, ne podle jednotlivého uživatele,
+- **počet eskalací, které odhalily produktový dluh**.
+
+Měř na úrovni týmu, zákaznické organizace nebo produktu. Nepotřebuješ žebříček „nejpomalejší agent týdne“, pokud nejsi fanoušek demotivace jako služby. Potřebuješ vědět, kde proces drhne: nejasná dokumentace, chybějící oprávnění, komplikovaný onboarding, slabé chybové hlášky nebo nestabilní integrace.
+
+## LJ.4 Tagy drž jako slovník, ne kompost
+
+Tagování ticketů je skvělé, dokud každý člověk nepřidá vlastní variantu téhož problému: `login`, `Log-in`, `přihlášení`, `auth`, `nejde se přihlásit`, `uživatel zuří`. Po pár měsících je z toho archeologie.
+
+Začni malým slovníkem:
+
+- oblast produktu: `billing`, `auth`, `reporty`, `import`, `export`, `integrace`,
+- typ práce: `bug`, `dotaz`, `nastavení`, `feature-request`, `incident`,
+- dopad: `blokuje-práci`, `degraduje-práci`, `kosmetika`,
+- původ: `zákazník`, `monitoring`, `interní-test`, `obchod`,
+- privacy riziko: `obsahuje-osobní-data`, `bez-osobních-dat`, `vyžaduje-redakci`.
+
+Každý tag musí mít vlastníka a definici. Pokud tag nikdo nepoužívá při rozhodování, smaž ho. Support taxonomie není sbírka suvenýrů z minulých sprintů.
+
+## LJ.5 Eskalace má mít předávací protokol
+
+Eskalace z podpory na vývoj bývá bolestivá, protože ticket obsahuje emoce, ale ne reprodukci. Vývojář pak hádá, support čeká, zákazník nervózně obnovuje inbox a všichni se tváří, že to je agilita.
+
+Předávací karta pro vývoj má být krátká:
+
+- co zákazník chtěl udělat,
+- co se stalo místo toho,
+- koho a jak moc to blokuje,
+- odkaz na bezpečně zredukované logy,
+- reprodukční kroky,
+- očekávaný výsledek,
+- poslední komunikovaný slib zákazníkovi,
+- jestli ticket obsahuje osobní nebo citlivá data.
+
+Pokud se musí přidat logy, nejdřív je očisti. Tokeny, session ID, osobní údaje, obsah zpráv a zákaznická data patří pryč, pokud nejsou nutné pro řešení konkrétní chyby. OWASP ve svém Logging Cheat Sheet zdůrazňuje, že logy nemají ukládat citlivé údaje, autentizační tajemství ani data, která nejsou pro účel logování potřebná. To je přesně ten typ nudné věty, která šetří incidenty.
+
+## LJ.6 Zákaznická komunikace musí být předvídatelná
+
+Uživatelé často odpustí chybu rychleji než ticho. Support by měl mít jednoduché šablony pro potvrzení, průběžný update, workaround, předání vývoji, opravu a uzavření.
+
+Příklad potvrzení u P2:
+
+> „Díky za nahlášení. Vidíme, že export faktur selhává u vašeho účtu a blokuje vám měsíční uzávěrku. Předali jsme to do technické triáže. Další update pošleme nejpozději do 14:30. Do té doby prosím neposílejte další exporty opakovaně, ať nezvětšujeme frontu úloh.“
+
+Dobrá zpráva dělá čtyři věci: potvrzuje realitu, pojmenuje dopad, říká další krok a nastaví čas další komunikace. Neprodává, nemlží a neobsahuje „děkujeme za trpělivost“ jako univerzální náplast na všechno.
+
+## LJ.7 Retence supportu není navždy
+
+Support data mají životní cyklus. Některé tickety potřebuješ déle kvůli smluvní historii, bezpečnostnímu vyšetření nebo účetní návaznosti. Běžné dotazy ale nemají bydlet v helpdesku donekonečna jen proto, že export do CSV je hned vedle tlačítka „všechno“.
+
+Nastav retenční pravidla:
+
+- běžné dotazy anonymizovat nebo mazat po definované době,
+- incidentní tickety držet podle incidentního a právního režimu,
+- přílohy mazat dřív než samotné konverzace,
+- interní poznámky pravidelně čistit,
+- uzavřené přístupy supportu automaticky odebírat,
+- exporty z helpdesku ukládat jen do schváleného prostoru.
+
+Principy GDPR zahrnují mimo jiné minimalizaci údajů a omezení uložení. V praxi to znamená, že retenční tabulka není právnická dekorace, ale provozní plán úklidu. Ano, úklid je méně sexy než nový dashboard. Ale dashboard se starými citlivými daty je jen hezky osvětlený problém.
+
+## LJ.8 Checklist support SLA a metrik
+
+- Máme jasně popsané priority P1–P4 podle dopadu, ne podle hlasitosti zákazníka?
+- Ví support, kdy přepnout ticket do incidentního režimu?
+- Sbírá formulář jen data nutná k vyřešení problému?
+- Varuje UI před nahráváním hesel, tokenů a citlivých screenshotů?
+- Máme slovník tagů s definicemi a vlastníkem?
+- Měříme týmový proces, ne mikromanagement jednotlivců?
+- Umíme předat vývoji reprodukční kroky, dopad a očištěné logy?
+- Má každá eskalace poslední komunikovaný slib zákazníkovi?
+- Mažeme nebo anonymizujeme staré běžné tickety podle retenčního pravidla?
+- Kontrolujeme pravidelně, které opakované dotazy má vyřešit dokumentace nebo produkt?
+
+## Codyho komentář
+
+Support je nejlepší produktový výzkum, který už máš zaplacený. Jen ho nesmíš pokazit tím, že z něj uděláš chaotickou skládku. Můj pohled: malý SaaS nepotřebuje dokonalý enterprise helpdesk. Potřebuje jasné priority, slušnou komunikaci, čistá data a rytmus, ve kterém se opakované problémy mění na produktové zlepšení. To je méně efektní než barevný dashboard, ale výrazně užitečnější. Což je přesně důvod, proč to nebude populární na konferenčním slidu. Škoda, přežijeme.
+
+## Zdroje k příloze
+
+- Evropská komise — principy GDPR, včetně minimalizace údajů a omezení uložení: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en
+- Evropská komise — informace, které mají lidé dostat při sběru osobních údajů: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/what-information-must-be-given-individuals-whose-data-collected_en
+- OWASP Logging Cheat Sheet — doporučení k bezpečnému logování a vynechání citlivých údajů: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+- ENISA — doporučení a materiály k incidentům a provozní bezpečnosti organizací v EU: https://www.enisa.europa.eu/topics/incident-response
+
+## Shrnutí přílohy
+
+Privacy-first support má být rychlý, ale ne ukvapený; měřený, ale ne šmírovací; strukturovaný, ale ne byrokratický. SLA definuje slib podle dopadu, ticket sbírá jen nutný kontext, tagy pomáhají rozhodování a eskalace předává vývoji čistý problém místo emočního románu. Nejlepší support metrika není počet zavřených ticketů. Je to počet opakovaných problémů, které se díky podpoře už nemusely stát znovu.
+
 ## Pracovní log
+
+- 2026-08-20: Přidána příloha LJ o support SLA a provozních metrikách bez sledovacího divadla: priority podle dopadu, datové minimum v ticketech, týmové metriky, slovník tagů, eskalační karta, zákaznické šablony, retence support dat a privacy-first checklist.
 
 - 2026-08-20: Přidána příloha LI o subdodavatelích a zpracovatelských řetězcích: role správců a zpracovatelů, živá vendor evidence, kontrola subdodavatelů, DPA karta, onboarding jako bezpečnostní release, offboarding a privacy-first checklist.
 
