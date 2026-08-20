@@ -49156,7 +49156,184 @@ Můj názor: malý tým nepotřebuje víc meetingů, potřebuje lepší zpětnou
 ## Shrnutí přílohy
 
 Post-release review drží release napojený na realitu: ověřuje zákaznický dopad, provozní zdraví, komunikaci a datovou stopu. Největší hodnota není v dlouhém zápisu, ale v krátké rutině, která včas odhalí, co opravit, co vysvětlit a co smazat dřív, než z toho vyroste produktový dluh s vlastním poštovním směrovacím číslem.
+
+# Příloha KW: Incidentní učení bez hasičského divadla, tajných poznámek a opakovaných průšvihů
+
+Incident není jen výpadek serveru. V SaaS je incident každá událost, která naruší zákaznický slib: nedostupnost, ztráta dat, špatně spočítaná fakturace, omylem odeslané e-maily, únik oprávnění, rozbitý export, přehnaně zvědavé logy nebo AI funkce, která začne odpovídat s autoritou člověka, co nikdy nečetl vlastní dokumentaci.
+
+Incidentní učení je rutina, která z události vytěží zlepšení bez lovu viníka. Nejde o to napsat dramatický román. Jde o to pochopit dopad, opravit systémové příčiny, zkrátit příští detekci, zmenšit blast radius a nezapomenout na privacy dopady. Malý tým na to nepotřebuje bezpečnostní oddělení s uniformou. Potřebuje jednu jednoduchou šablonu, jasné prahy a disciplínu dotahovat akce.
+
+## KW.1 Incident definuj podle dopadu na zákazníka
+
+Když incident definuješ jen technicky, přehlédneš polovinu reality. „API mělo pět minut 500“ je užitečný detail, ale zákazníka zajímá, jestli nemohl dokončit objednávku, exportovat data nebo odeslat fakturu. Proto začni dopadem.
+
+Praktická klasifikace:
+
+- **Dostupnost:** služba nejde používat, kritická cesta padá nebo je výrazně pomalá.
+- **Integrita:** data jsou špatně změněná, duplicitní, ztracená nebo nekonzistentní.
+- **Důvěrnost:** data viděl někdo, kdo je vidět neměl, nebo mohla odejít mimo očekávaný účel.
+- **Doručení:** e-mail, webhook, export, import nebo background job nedorazil správně.
+- **Obchodní dopad:** fakturace, tarif, trial, kvóta nebo entitlement se chová jinak, než zákazník čekal.
+- **Komunikační dopad:** zákazník dostal nejasnou, opožděnou nebo zavádějící informaci.
+
+Příklad: chyba v exportu kontaktů nemusí shodit aplikaci. Přesto je to incident, pokud zákazník stáhl neúplný soubor a podle něj udělal obchodní rozhodnutí. Incident není určen tím, jak moc se potí vývojář. Incident je určen tím, co se stalo zákazníkovi.
+
+## KW.2 Sbírej timeline, ne dojmy
+
+První verze incidentního zápisu má být jednoduchá časová osa. Ne „Petr asi něco nasadil“. Ale konkrétně: kdy začala chyba, kdy ji systém detekoval, kdy ji člověk pochopil, kdy se spustila mitigace, kdy se služba stabilizovala a kdy zákazník dostal informaci.
+
+Minimum timeline:
+
+- čas prvního známého dopadu,
+- čas první detekce,
+- kdo incident převzal,
+- jaké kroky mitigace proběhly,
+- kdy se dopad zastavil,
+- kdy byla ověřena obnova,
+- kdy a jak proběhla komunikace.
+
+Do timeline nepatří osobní soudy. Patří tam pozorovatelné události. Místo „support reagoval pozdě“ napiš „první zákaznický ticket přišel v 09:12, incident kanál vznikl v 09:47“. To je materiál pro zlepšení. Nadávka je jen kouřový efekt, a ten v provozu obvykle znamená, že už něco hoří.
+
+Privacy-first detail: timeline nesmí kopírovat zákaznický obsah, osobní údaje nebo celé payloady. Používej interní ID, typ události, tenant ID jen pokud je nutné, a redigované ukázky. Incidentní dokumentace nemá být nová datová skládka.
+
+## KW.3 Odděl mitigaci, opravu a prevenci
+
+Týmy často zamíchají tři různé věci do jedné věty: „Opravili jsme to.“ Co přesně? Zastavili dopad? Opravili příčinu? Nebo jen restartovali worker a doufají, že vesmír bude hodný?
+
+Rozlišuj:
+
+- **Mitigace:** rychlý krok, který zastaví nebo zmenší dopad. Například vypnutí flagu, omezení fronty, rollback, ruční přepnutí poskytovatele.
+- **Oprava:** změna, která odstraní konkrétní chybu. Například oprava validace, idempotence nebo špatného SQL dotazu.
+- **Prevence:** systémové opatření, které sníží šanci opakování nebo zrychlí detekci. Například alert, test, guardrail, limit, checklist, bezpečnější default.
+
+Příklad akčních položek po duplicitním odeslání fakturačních e-mailů:
+
+| Typ | Akce | Dobrý výsledek |
+| --- | --- | --- |
+| Mitigace | Pozastavit frontu fakturačních e-mailů | Žádné další duplicity neodcházejí |
+| Oprava | Přidat idempotency key pro typ e-mailu a fakturační období | Stejný e-mail nejde odeslat dvakrát |
+| Prevence | Přidat alert na neobvyklý počet transakčních e-mailů za 10 minut | Tým se dozví problém dřív než zákazníci |
+
+Bez tohoto rozlišení vzniká falešný klid. Restart vypadá jako řešení, ale často je to jen provozní ibuprofen.
+
+## KW.4 Privacy incident triage udělej vždy, i když „šlo jen o výpadek“
+
+Každý incident si zaslouží krátkou privacy otázku: dotkla se událost osobních údajů, zákaznického obsahu, oprávnění, logů, exportů, integrací nebo subdodavatelů? Pokud ano, incidentní review musí obsahovat datovou část.
+
+Krátký privacy triage formulář:
+
+- Jaké typy dat byly zasažené?
+- Kolika zákazníků nebo subjektů se to mohlo týkat?
+- Šlo o dostupnost, integritu nebo důvěrnost dat?
+- Viděl data někdo neoprávněný?
+- Odešla data do jiného systému nebo regionu, než bylo slíbeno?
+- Existují logy, které obsahují citlivější data než samotný incident?
+- Je potřeba zapojit DPO, právníka, bezpečnostního vlastníka nebo zákaznickou komunikaci?
+
+U osobních údajů je potřeba brát vážně pravidla pro oznamování porušení zabezpečení. Evropská komise shrnuje, že správce má porušení oznámit dozorovému úřadu bez zbytečného odkladu a obvykle do 72 hodin, pokud je pravděpodobné riziko pro práva a svobody lidí. EDPB má k oznamování porušení zabezpečení samostatné Guidelines 9/2022. Prakticky: nečekej s privacy triage až na hotový postmortem, protože právní hodiny neumí pauzu na „ještě doladíme tabulku“.
+
+Codyho komentář: nejhorší věta po incidentu je „asi se nic nestalo“. Možná pravda. Možná drahá mlha. Lepší je mít desetiminutový triage a vědět.
+
+## KW.5 Akce piš tak, aby šly ověřit
+
+Postmortem bez dotažených akcí je jen hezky formátovaná vzpomínka. Každá akce má mít vlastníka, termín, typ dopadu a ověřitelné dokončení. „Zlepšit monitoring“ není akce. „Přidat alert na 5% nárůst chyb importu během 15 minut a otestovat ho simulovanou chybou“ už akce je.
+
+Dobrá akce obsahuje:
+
+- konkrétní sloveso,
+- místo změny,
+- měřitelný výsledek,
+- vlastníka,
+- termín,
+- důkaz dokončení,
+- prioritu podle rizika, ne podle hlasitosti v chatu.
+
+Špatně:
+
+> „Podíváme se na logy a vylepšíme alerty.“
+
+Lépe:
+
+> „Do 2026-08-27 přidat alert `billing_email_duplicate_rate`, který spustí incidentní upozornění při více než 3 duplicitách za 10 minut; ověřit v testovací frontě a odkázat test v runbooku.“
+
+Akce drž v jednom trackeru. Pokud jsou schované v dokumentu, který nikdo neotevře, postupně zkamení. A zkamenělé akce mají jednu nepříjemnou vlastnost: vracejí se jako stejné incidenty s novým datem.
+
+## KW.6 Uč se napříč incidenty, nejen uvnitř jednoho
+
+Jedno review najde konkrétní opravu. Série review najde vzor. Po pěti incidentech už může být vidět, že problém není „smůla“, ale například slabá migrace databáze, nejasné vlastnictví front, chybějící synthetic monitoring nebo příliš široký support access.
+
+Jednou měsíčně si polož:
+
+- Který typ incidentů se opakuje?
+- Kde je nejdelší čas mezi dopadem a detekcí?
+- Které akce se nedotahují?
+- Který systém generuje nejvíc ručních zásahů?
+- Kde se incidenty týkají datových pravidel, exportů nebo oprávnění?
+- Které incidenty odhalili zákazníci dřív než tým?
+
+Privacy-first metriky incidentního učení:
+
+- počet incidentů s datovým dopadem podle typu,
+- medián času do detekce u kritických cest,
+- procento incidentů se zákaznickou komunikací do domluveného času,
+- počet opakovaných příčin za posledních 90 dní,
+- počet nedokončených akcí po termínu,
+- počet incidentních zápisů obsahujících citlivá data, ideálně nula, děkujeme pěkně.
+
+Měř agregovaně. Cílem není vytvořit tabulku hanby podle lidí. Cílem je najít slabá místa systému.
+
+## KW.7 Připrav šablonu dřív, než ji potřebuješ
+
+V incidentu nikdo nechce vymýšlet strukturu dokumentu. Připrav jednu šablonu, která se dá vyplnit za 30 minut po stabilizaci. Krátká šablona je lepší než dokonalá šablona, která se nepoužívá.
+
+### Šablona incidentního učení
+
+| Pole | Co vyplnit |
+| --- | --- |
+| Název | Jedna věta podle dopadu, ne podle interního kódu chyby |
+| Stav | Draft / review / akce běží / uzavřeno |
+| Vlastník | Jeden člověk odpovědný za zápis a follow-up |
+| Dopad | Koho se to týkalo, jak dlouho, co nemohl udělat |
+| Timeline | Fakta v čase, bez osobních soudů |
+| Detekce | Jak jsme se to dozvěděli a co má být příště rychlejší |
+| Mitigace | Co zastavilo dopad |
+| Příčiny | Technické, procesní a produktové faktory |
+| Privacy triage | Data, oprávnění, regiony, logy, oznamování |
+| Komunikace | Interní a zákaznické zprávy, odkazy, další update |
+| Akce | Vlastník, termín, ověření, priorita |
+| Poučení | Co změníme v produktu, procesu nebo dokumentaci |
+
+## KW.8 Checklist incidentního učení
+
+- Má incident popsaný zákaznický dopad, ne jen technickou chybu?
+- Existuje timeline od prvního dopadu po ověřenou obnovu?
+- Jsou oddělené mitigace, opravy a preventivní akce?
+- Proběhl privacy triage pro data, oprávnění, integrace, logy a regiony?
+- Neobsahuje zápis citlivé payloady, osobní údaje nebo tajemství?
+- Má každá akce vlastníka, termín a ověřitelný výsledek?
+- Je zákaznická komunikace dohledatelná a konzistentní se skutečným dopadem?
+- Prošel tým opakující se vzory z incidentů alespoň jednou měsíčně?
+- Přibylo po incidentu něco do runbooku, testů, alertů nebo produktové dokumentace?
+- Je jasné, kdo incident definitivně uzavírá?
+
+## Codyho komentář
+
+Incidenty nejsou ostuda. Ostuda je opakovat stejný incident, protože první zápis skončil jako literární cvičení bez akce. Privacy-first tým nemusí být bezchybný. Musí být poctivý, rychlý v učení a opatrný na data i ve chvíli, kdy všichni kolem hasí produkci virtuálním kýblem.
+
+## Zdroje k příloze
+
+- European Commission: What is a data breach and what do we have to do in case of a data breach? — přehled povinností při porušení zabezpečení osobních údajů: https://commission.europa.eu/law/law-topic/data-protection/reform/rules-business-and-organisations/obligations/what-data-breach-and-what-do-we-have-do-case-data-breach_en
+- European Data Protection Board: Guidelines 9/2022 on personal data breach notification under GDPR — metodika k oznamování porušení zabezpečení: https://www.edpb.europa.eu/documents/guideline/guidelines-92022-on-personal-data-breach-notification-under-gdpr_en
+- Google SRE Workbook: Postmortem Culture: Learning from Failure — blameless postmortem, akční položky a sdílení poučení: https://sre.google/workbook/postmortem-culture/
+- OWASP Logging Cheat Sheet — bezpečné logování a omezení citlivých dat v logách: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+
+## Shrnutí přílohy
+
+Incidentní učení převádí chaos na konkrétní zlepšení: popíše zákaznický dopad, poskládá timeline, oddělí mitigaci od opravy a prevence, udělá privacy triage a dotáhne ověřitelné akce. Nejde o hledání viníka, ale o zmenšení příštího rizika. Malý SaaS tým tím získá klidnější provoz, lepší důvěru zákazníků a méně déjà vu momentů typu „tohle už jsme přece jednou řešili“.
+
 ## Pracovní log
+
+- 2026-08-20: Přidána příloha KW o incidentním učení: zákaznický dopad, timeline, mitigace versus oprava versus prevence, privacy triage, ověřitelné akce, měsíční vzory, šablona zápisu a checklist.
 
 - 2026-08-20: Přidána příloha KV o post-release review: plán kontroly už při releasu, zákaznický dopad, blameless učení, privacy review, třídění oprav a follow-upů, zákaznická komunikace, šablona zápisu a checklist.
 
