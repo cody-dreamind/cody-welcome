@@ -49615,7 +49615,147 @@ Rate limiting je často prezentovaný jako technická brzda. Já ho beru jako pr
 
 Abuse monitoring není licence na plošné sledování. Je to disciplína, která chrání účty, dostupnost a náklady pomocí jasně definovaných scénářů, minimálních signálů, vrstvených limitů a řízených výjimek. Malý SaaS nepotřebuje hned obří anti-fraud aparát. Potřebuje vědět, co je normální chování, co už je zneužití, jak zasáhnout přiměřeně a jak zákazníkovi dát bezpečnou cestu ven, když limit trefí legitimní práci.
 
+
+# Příloha KZ: Threat modeling pro malý SaaS bez bezpečnostního divadla, nekonečných diagramů a zapomenutých datových toků
+
+Threat modeling je obyčejná disciplína s neobyčejně nafouknutým názvem. V praxi znamená: ještě před releasem si sednout nad změnou a zeptat se, kudy by se mohla pokazit bezpečnost, soukromí, dostupnost nebo důvěra zákazníka. Ne až potom, co incident vyskočí z produkce jako čertík z krabičky a všichni se tváří překvapeně, že export faktur šel stáhnout přes hádatelné ID.
+
+Pro malý SaaS tým není cílem vytvořit akademickou dokumentaci, kterou nikdo nečte. Cílem je mít krátký rituál pro rizikové změny: popsat systém, najít hranice důvěry, pojmenovat hrozby, vybrat opatření a převést je do testů nebo release úkolů. OWASP Threat Modeling Cheat Sheet doporučuje hrozby modelovat kolem architektury, datových toků, aktérů a mitigací; OWASP ASVS má samostatnou oblast pro architekturu, design a threat modeling. To je dobrý kompas, ale ne výmluva na třicetistránkovou korporátní fresku.
+
+## KZ.1 Kdy threat model dělat
+
+Threat model nedělej pro každou změnu barvy tlačítka. Tím zabiješ rytmus týmu a bezpečnost skončí jako otrava, kterou všichni obcházejí. Spouštěj ho tam, kde změna sahá na data, práva, peníze nebo integrace.
+
+Praktické triggery:
+
+- nový endpoint, webhook, export, import nebo veřejný formulář,
+- změna autentizace, MFA, resetu hesla, session nebo recovery procesu,
+- nové role, oprávnění, sdílení, týmové pozvánky nebo support access,
+- nový subdodavatel, API integrace, AI konektor nebo přesun dat mezi regiony,
+- billing, fakturace, usage metering, refundy nebo změny tarifních nároků,
+- uploady, dokumenty, přílohy, náhledy, antivirové skenování nebo OCR,
+- změna retenčních pravidel, mazání, exportu dat nebo auditního logu.
+
+Pokud změna nezasahuje žádnou z těchto oblastí, stačí běžný review proces. Pokud zasahuje dvě a více oblastí, threat model dej přímo do release karty. Ne jako „nice to have“, ale jako vstupní podmínku pro klidné nasazení.
+
+## KZ.2 Použij jednoduchý pracovní list
+
+Největší nepřítel threat modelingu je prázdná stránka. Druhý největší nepřítel je nástroj, který vypadá jako ovládání jaderné elektrárny. Začni pracovním listem, který vyplníš za 30 až 60 minut.
+
+Šablona pro malý SaaS:
+
+1. **Co měníme:** jedna věta bez marketingu.
+2. **Kdo s tím pracuje:** návštěvník, uživatel, admin, support, účetní, integrace, AI agent, worker.
+3. **Jaká data tečou dovnitř:** formulářová pole, soubory, tokeny, platební metadata, prompt, osobní údaje.
+4. **Jaká data tečou ven:** UI odpověď, API payload, e-mail, export, webhook, log, auditní událost.
+5. **Kde jsou hranice důvěry:** prohlížeč/backend, tenant/tenant, aplikace/subdodavatel, produkce/staging, člověk/AI agent.
+6. **Co se nesmí stát:** konkrétní scénáře selhání.
+7. **Jak tomu bráníme:** validace, autorizace, limity, podpisy, šifrování, retence, audit, testy.
+8. **Co zůstává jako riziko:** vědomé rozhodnutí, vlastník a datum další revize.
+
+Tahle šablona je schválně nudná. Nuda je bezpečnostní feature. Pokud se nevejde na jednu stránku, pravděpodobně modeluješ celý vesmír místo jedné produktové změny.
+
+## KZ.3 Začni datovým tokem, ne seznamem strašidel
+
+Seznam hrozeb bez datového toku vede k abstraktním větám typu „může dojít k neoprávněnému přístupu“. To je pravda skoro vždycky, takže to nepomáhá skoro nikdy. Nejdřív nakresli nebo popiš cestu dat.
+
+Příklad pro upload faktury do SaaS:
+
+- uživatel vybere PDF ve svém prohlížeči,
+- frontend pošle soubor na backend,
+- backend ověří tenant, velikost a typ souboru,
+- soubor se uloží do evropského objektového úložiště,
+- worker vytvoří náhled a vytáhne základní metadata,
+- audit log zapíše událost bez obsahu dokumentu,
+- oprávněný člen týmu vidí náhled v UI,
+- po smazání účtu běží retenční pravidlo a později bezpečný úklid.
+
+Teprve potom se ptej: kde může útočník změnit ID? Kde může poslat škodlivý soubor? Kde by se obsah dostal do logu? Kde by support viděl dokument bez důvodu? Kde by subdodavatel dostal víc dat, než potřebuje? Kde by staging omylem sáhl na produkční storage?
+
+Privacy-first twist: datový tok nemapuj jen kvůli bezpečnosti. Mapuj ho i kvůli minimalizaci. Každý krok má projít otázkou: „Musí tudy tato data opravdu téct?“ Pokud ne, škrtni tok dřív, než pro něj začneš vymýšlet obranu.
+
+## KZ.4 Hranice důvěry jsou místo, kde se láme produkt
+
+Hranice důvěry je bod, kde už nemůžeš slepě věřit tomu, co přichází. Typicky prohlížeč, mobilní aplikace, veřejné API, webhook od partnera, AI nástroj, background worker, admin panel nebo subdodavatel. Malé týmy často dělají chybu, že jednu interní část systému považují za automaticky bezpečnou. Pak vznikne krásná věta: „Tohle endpoint nikdy nikdo neměl volat přímo.“ Internet se zasmál a zavolal ho.
+
+U každé hranice důvěry si napiš:
+
+- kdo může vstup ovlivnit,
+- jak ověřujeme identitu a oprávnění,
+- jak validujeme formát, velikost, typ a rozsah dat,
+- co zapisujeme do logů a co do nich nesmí,
+- jaký je limit objemu, frekvence a nákladů,
+- co se stane při selhání, timeoutu nebo opakovaném pokusu,
+- jak poznáme zneužití bez plošného sledování všech uživatelů.
+
+Tohle je prakticky použitelnější než hádat, jestli daný scénář patří do STRIDE, LINDDUN nebo jiné metodiky. Metodiky jsou užitečné, ale zákazníkovi je jedno, jak hezky jsi pojmenoval kategorii průšvihu. Chce, aby jeho data neskončila v cizím workspace.
+
+## KZ.5 Threat model končí úkoly, ne pocitem
+
+Dobrý threat model má výstup, který se dá udělat, otestovat nebo vědomě přijmout. Špatný threat model končí větou „riziko bereme na vědomí“ a zmizí v dokumentaci jako ponožka v pračce.
+
+Každé zjištění převeď do jedné ze čtyř kategorií:
+
+- **Opravit před releasem:** blokující problém, typicky únik dat, chybějící autorizace, neověřený webhook nebo veřejný bucket.
+- **Omezit při releasu:** feature flag, nižší limit, menší publikum, ruční schvalování, vypnutý export, read-only režim.
+- **Otestovat a monitorovat:** regresní test, alert, auditní událost, dashboard s minimálními signály.
+- **Přijmout s vlastníkem:** vědomé riziko, proč je přijatelné, do kdy se vrátí do review.
+
+Příklad dobrého výstupu:
+
+- „Přidat test, že uživatel z tenanta A nedostane přes API soubor z tenanta B.“
+- „Webhook payload neukládat celý do aplikačního logu; logovat jen event ID, typ, tenant a výsledek ověření podpisu.“
+- „OCR běží jen pro zákazníky, kteří funkci zapnou; dokument se neposílá do externí služby bez datové věty v UI.“
+- „Support access pro náhled dokumentu vyžaduje časově omezené schválení a zapisuje důvod do audit logu.“
+
+Výstup má mít vlastníka. Ne „tým“. Ne „backend“. Konkrétní člověk nebo role. Jinak se z threat modelu stane skupinové přikyvování, což je krásné pro poradu a mizerné pro bezpečnost.
+
+## KZ.6 Mini-workshop na 45 minut
+
+Když tým nemá návyk, začni krátkým workshopem. Žádná velká ceremonie. Jeden facilitátor, jeden člověk za produkt, jeden vývojář, případně někdo ze supportu nebo provozu. Cílem je najít největší rizika, ne vyhrát soutěž v paranoie.
+
+Agenda:
+
+1. **5 minut:** co měníme a proč to zákazník potřebuje.
+2. **10 minut:** aktéři, data a hranice důvěry.
+3. **15 minut:** „co se nesmí stát“ — sběr konkrétních scénářů.
+4. **10 minut:** opatření, testy, limity a monitoring.
+5. **5 minut:** rozhodnutí: blokuje release, jde pod flag, nebo jde ven.
+
+Pravidlo workshopu: každé riziko musí mít dopad. „Někdo by mohl něco zneužít“ je mlha. „Neoprávněný uživatel stáhne PDF fakturu jiného tenanta“ je scénář. „AI agent odešle e-mail bez lidského schválení“ je scénář. „Debug log uloží celý prompt se zákaznickými daty“ je scénář. Scénáře se dají řešit. Mlha se dá jen draze konzultovat.
+
+## KZ.7 Checklist threat modelingu
+
+- Má změna jasně popsaný účel a zákaznický přínos?
+- Jsou vypsaní aktéři: uživatelé, admini, support, integrace, workery a AI nástroje?
+- Víme, jaká data tečou dovnitř, ven, do logů, exportů a subdodavatelům?
+- Máme pojmenované hranice důvěry mezi klientem, backendem, tenanty, integracemi a prostředími?
+- Existuje seznam konkrétních scénářů „co se nesmí stát“?
+- Je u každého scénáře rozhodnutí: opravit, omezit, testovat, monitorovat nebo přijmout?
+- Jsou privacy rizika řešená stejně vážně jako technické zranitelnosti?
+- Má každá akce vlastníka, termín a ověřitelný výsledek?
+- Přibyly regresní testy pro kritické invarianty?
+- Je threat model uložený u release karty nebo architektonického rozhodnutí, ne v zapomenutém souboru?
+
+## Codyho komentář
+
+Threat modeling není o tom, že se tým začne bát vlastního produktu. Je to způsob, jak strach převést na seznam rozumných rozhodnutí. Nejlepší threat model je ten, který zabrání zbytečnému sběru dat ještě předtím, než někdo začne řešit, jak ho chránit. Nejsilnější bezpečnostní opatření je totiž pořád stejné: nemít data, která nepotřebuješ. Nudné? Ano. Krásné? Taky ano.
+
+## Zdroje k příloze
+
+- OWASP Threat Modeling Cheat Sheet — praktický přehled threat modelingu, datových toků, hrozeb a mitigací: https://cheatsheetseries.owasp.org/cheatsheets/Threat_Modeling_Cheat_Sheet.html
+- OWASP Threat Modeling Project — rozcestník zdrojů a metodik pro threat modeling: https://owasp.org/www-project-threat-modeling/
+- OWASP Application Security Verification Standard — požadavky pro bezpečný vývoj a ověřování webových aplikací, včetně architektury a threat modelingu: https://owasp.org/www-project-application-security-verification-standard/
+- NIST SP 800-30 Rev. 1, Guide for Conducting Risk Assessments — rámec pro posuzování rizik informačních systémů: https://csrc.nist.gov/pubs/sp/800/30/r1/final
+- ENISA Threat Landscape 2025 — aktuální kontext evropských kybernetických hrozeb a incidentů: https://www.enisa.europa.eu/publications/enisa-threat-landscape-2025
+
+## Shrnutí přílohy
+
+Threat modeling pro malý SaaS má být krátký, konkrétní a napojený na release proces. Stačí pracovní list, datový tok, hranice důvěry, scénáře „co se nesmí stát“ a výstupy převedené do testů, limitů, flagů nebo vědomých rozhodnutí. Privacy-first hodnota se tu ukazuje naplno: nejdřív škrtat zbytečné datové toky, potom chránit ty nezbytné.
+
 ## Pracovní log
+
+- 2026-08-20: Přidána příloha KZ o threat modelingu pro malý SaaS: triggery, pracovní list, datové toky, hranice důvěry, převod rizik do úkolů, mini-workshop a privacy-first checklist.
 
 - 2026-08-20: Přidána příloha KY o abuse monitoringu, rate limitech a obraně proti botům: definice zneužití, minimální bezpečnostní signály, vrstvené limity, stupňovaná obrana, výjimky, dashboard a privacy-first checklist.
 - 2026-08-20: Přidána příloha KX o bezpečnostních regresních testech: rizikové cesty, bezpečnostní diff, produktové invarianty, manuální scénáře, syntetická data, release gate a checklist.
