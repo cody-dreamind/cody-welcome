@@ -48851,7 +48851,158 @@ Neprodukční prostředí je místo, kde se pozná skutečná kultura týmu. Pro
 
 Staging, sandbox a demo nejsou bezpečnostní šedá zóna. Každé prostředí musí mít jasný účel, oddělené přístupy, vlastní konfiguraci, syntetická nebo minimální data, testovací integrace a úklidový rytmus. Privacy-first SaaS nechrání data jen v produkci. Chrání je i tam, kde tým nejraději říká: „To je jen test.“
 
+---
+
+# Příloha KU: Release, rollback a feature flags bez heroického deploye, tiché změny pravidel a nočního lovu viníka
+
+Release není okamžik, kdy někdo zmáčkne zelené tlačítko a tým začne doufat, že monitoring zůstane nudný. Release je řízená změna slibu vůči zákazníkovi: něco nového umíme, něco jsme opravili, něco může mít dopad na data, cenu, výkon, oprávnění nebo podporu. Když je release dobře připravený, rollback není ostuda. Je to bezpečnostní pás. Když připravený není, rollback je detektivka v produkčním kouři.
+
+Privacy-first SaaS má ještě jednu vrstvu: deploy nesmí potichu změnit datová pravidla. Nová verze nesmí začít sbírat citlivější eventy, posílat data do jiného regionu, prodlužovat retenci nebo zapínat AI funkci nad zákaznickým obsahem jen proto, že to „technicky prošlo“. To není inovace. To je produktová verze dveří bez kliky.
+
+## KU.1 Release začíná kartou změny, ne pipeline jobem
+
+Malý tým nepotřebuje korporátní change advisory board, kde se i oprava překlepu schvaluje jako stavba mostu. Potřebuje krátkou release kartu, která nutí říct podstatné věci předem.
+
+Šablona release karty:
+
+- Co se mění pro uživatele?
+- Koho se změna týká: všichni, nový tarif, vybraní zákazníci, interní tým?
+- Mění se data: nová pole, nové eventy, nový export, nová retence, nový subdodavatel?
+- Mění se oprávnění: role, scope tokenů, API přístup, admin funkce?
+- Jak poznáme úspěch první hodinu po releasu?
+- Jak poznáme, že release škodí?
+- Jaký je rollback nebo vypnutí přes feature flag?
+- Kdo je vlastník releasu a kdo rozhoduje o návratu zpět?
+
+Release karta má být krátká. Pokud ji tým neumí vyplnit za deset minut, změna je buď špatně pochopená, nebo moc velká. Obojí je dobrý signál ještě před produkcí.
+
+## KU.2 Feature flag není skládka nedodělaného produktu
+
+Feature flag je výborný nástroj pro postupné zapnutí, interní test, bezpečné vypnutí a oddělení deploye od releasu. GitLab ve své dokumentaci popisuje postupné nasazování přes incremental rollouts jako způsob, jak směrovat změnu nejdřív na část prostředí nebo uživatelů: https://docs.gitlab.com/ci/environments/incremental_rollouts/
+
+Jenže feature flag se snadno změní v temný les. Nikdo neví, co je zapnuté, proč to existuje, kdo flag vlastní a kdy se smaže. Výsledek: produkt má víc alternativních realit než špatně napsaný sci-fi seriál.
+
+Každý flag proto musí mít kartu:
+
+- název a účel,
+- vlastník,
+- výchozí stav,
+- dopad na data a oprávnění,
+- komu se smí zapnout,
+- metrika úspěchu,
+- nouzový vypínač,
+- datum úklidu.
+
+Privacy-first pravidlo: flag nesmí obejít souhlas, smluvní podmínky, regionální omezení nebo zákaznické nastavení. Pokud má zákazník vypnuté AI zpracování dokumentů, žádný „experimentální rollout“ mu ho nesmí zapnout bokem. Tady není prostor pro kreativitu. Tady má být systém nudný jako účetní tabulka — a přesně proto bezpečný.
+
+## KU.3 Rollout dělej podle rizika, ne podle ega týmu
+
+Ne každá změna potřebuje slavnostní release plán. Oprava textu v patičce může jít rovnou ven. Změna fakturace, exportu dat, rolí nebo AI odpovědí nad zákaznickými dokumenty potřebuje postupný rollout.
+
+Praktické rozdělení:
+
+| Typ změny | Doporučený rollout | Signál pro zastavení |
+| --- | --- | --- |
+| Text, drobný UI detail | Běžný deploy | Chyba v kritické cestě |
+| Nový formulář nebo onboarding | Interně, pak 5 až 10 % nových uživatelů | Pokles dokončení, nárůst supportu |
+| Změna oprávnění | Vybraný tenant, audit log kontrola, pak širší rollout | Nečekané access denied nebo access allowed |
+| Import/export dat | Testovací tenant, malá skupina, ruční kontrola souborů | Chybné sloupce, únik polí, timeouty |
+| AI funkce nad zákaznickým obsahem | Opt-in beta, eval sada, omezené limity | Halucinace s dopadem, porušení oprávnění, nákladový skok |
+| Fakturace a pricing | Interní simulace, shadow výpočet, ruční kontrola | Rozdíl v částkách, špatný tarif, nejasná komunikace |
+
+Postupný rollout chrání tým před iluzí, že staging všechno ukázal. Neukázal. Staging nemá reálné síťové nálady, náhodné prohlížeče, staré účty, zvláštní integrace a uživatele, kteří kliknou přesně tam, kam by nikdo příčetný neklikl. Uživatelé jsou nejlepší chaos engineering. Bohužel nejsou vždy dobrovolníci, takže se k nim chovej opatrně.
+
+## KU.4 Rollback musí být nacvičený před incidentem
+
+Rollback není jen „vrátíme commit“. U webu to někdy stačí. U SaaS s databází, frontami, e-maily, webhooks, cache, indexy a AI znalostní bází často ne.
+
+Před releasem si napiš rollback scénář:
+
+- Lze vrátit aplikaci bez změny databáze?
+- Jsou migrace zpětně kompatibilní?
+- Co se stane s úlohami ve frontě vytvořenými novou verzí?
+- Pošle rollback zákazníkům duplicitní e-maily nebo webhooky?
+- Potřebuje se vyčistit cache, index nebo feature flag?
+- Co se stane s daty vytvořenými novým formulářem?
+- Kdo rollback spouští a kde je příkaz?
+
+Google SRE kniha u release engineeringu zdůrazňuje mimo jiné automatizaci, opakovatelnost a self-service procesy, aby release nebyl ruční rituál závislý na jedné osobě: https://sre.google/sre-book/release-engineering/
+
+Pro malý tým je největší výhra prostá: rollback příkaz musí existovat, musí být otestovaný a nesmí ho znát jen jeden člověk s notebookem někde ve vlaku. Ano, i vlaky mají Wi-Fi. Ne, to není plán obnovy.
+
+## KU.5 Migrace databáze navrhuj jako dvě bezpečné poloviny
+
+Nejhorší rollbacky bývají po databázových změnách. Bezpečnější vzor je expand-and-contract:
+
+1. Přidej nové pole nebo tabulku bez rozbití staré aplikace.
+2. Nasazuj aplikaci, která umí číst starý i nový tvar.
+3. Přepiš zápis postupně a sleduj chyby.
+4. Doplň backfill v malých dávkách.
+5. Teprve po stabilitě odstraň starý tvar.
+
+Privacy-first doplněk: migrace má mít datový popis. Nejen „add column customer_notes“, ale i proč pole existuje, jaká je retence, kdo ho vidí a jestli se dostane do exportu nebo AI kontextu. Databáze není šuplík na budoucí nápady. Je to místo, kde zákaznická důvěra dostává konkrétní tvar.
+
+## KU.6 Release loguj tak, aby šel vysvětlit bez čtení tajemství
+
+OWASP Logging Cheat Sheet připomíná, že aplikační logy slouží provozním i bezpečnostním účelům a že auditní stopy se hodí například pro změny dat, exporty nebo vyšetření incidentu: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+
+Release log má odpovědět na otázky:
+
+- Jaká verze běží?
+- Kdy byla nasazena?
+- Kdo release spustil nebo schválil?
+- Jaké feature flagy se změnily?
+- Jaké migrace proběhly?
+- Jaký byl výsledek smoke testu?
+- Kdo rozhodl o rollbacku nebo pokračování rollout vlny?
+
+Nemá obsahovat zákaznický obsah, plné prompty, soukromé dokumenty ani tokeny. Pro vyšetření většinou stačí identifikátor tenantů, typ události, verze, čas, výsledek a korelační ID. Debugging přes kompletní osobní údaje je jako opravovat hodinky kladivem. Někdy se něco pohne, ale nebudeš se tím chlubit.
+
+## KU.7 Komunikace k zákazníkům patří do releasu, ne až do omluvy
+
+Zákazník nemusí vědět o každém refaktoru. Potřebuje ale vědět o změnách, které ovlivní jeho práci, data, cenu, práva, integrace nebo dostupnost.
+
+Praktická komunikační matice:
+
+- Tichý release: oprava chyby bez dopadu, interní optimalizace, drobný UI detail.
+- Changelog: nová funkce, zlepšení toku, oprava viditelné chyby.
+- E-mail nebo in-app zpráva: změna chování, práv, exportu, integrace, datového nastavení.
+- Předstihové oznámení: plánovaný výpadek, breaking API změna, migrace dat, změna subdodavatele.
+- Incident komunikace: dopad na dostupnost, integritu dat, bezpečnost nebo privacy.
+
+Privacy-first tón je jednoduchý: říkej, co se mění, proč, koho se to týká, co má zákazník udělat a kde najde detaily. Žádné „vylepšujeme vaše zkušenosti“ tam, kde se ve skutečnosti mění exportní formát. Lidská řeč je levná. Ztracená důvěra drahá.
+
+## KU.8 Checklist release a rollback disciplíny
+
+- Má každá významná změna release kartu s dopadem na uživatele, data a oprávnění?
+- Je určeno, jestli jde o běžný deploy, postupný rollout, opt-in betu nebo změnu vyžadující oznámení?
+- Má každý feature flag vlastníka, účel, výchozí stav, metriky, nouzové vypnutí a datum úklidu?
+- Respektují flagy zákaznické privacy volby, regionální pravidla a smluvní omezení?
+- Existuje rollback scénář pro aplikaci, databázi, fronty, webhooks, cache, indexy a AI kontext?
+- Jsou databázové migrace zpětně kompatibilní nebo jasně označené jako nevratné?
+- Proběhl smoke test kritických cest po deployi?
+- Loguje release verzi, čas, schválení, flagy, migrace a výsledek bez zákaznických tajemství?
+- Má tým jasné stop podmínky pro zastavení rollout vlny?
+- Je zákaznická komunikace připravená před releasem, ne až po prvním rozzlobeném ticketu?
+
+## Codyho komentář
+
+Release disciplína je jeden z nejlevnějších způsobů, jak vypadat jako dospělá firma, i když tým sedí u jednoho stolu a deploye se řeší mezi kávou a obědem. Můj pohled: dobrý release proces nemá zpomalit vývoj. Má odstranit paniku. Když víš, co se mění, jak to vypneš a komu to řekneš, můžeš být odvážnější. Bez toho nejsi rychlý startup. Jsi jen člověk běžící po schodech s otevřeným kelímkem espressa.
+
+## Zdroje k příloze
+
+- GitLab Docs: Incremental rollouts with GitLab CI/CD: https://docs.gitlab.com/ci/environments/incremental_rollouts/
+- Google SRE Book: Release Engineering: https://sre.google/sre-book/release-engineering/
+- OWASP Logging Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+- OWASP DevSecOps Verification Standard, Release/Deploy a Operate/Monitor fáze: https://owasp.org/www-project-devsecops-verification-standard/
+
+## Shrnutí přílohy
+
+Release není jen technický deploy. Je to řízená změna produktu, datových pravidel a zákaznického slibu. Malý SaaS tým potřebuje krátkou release kartu, bezpečné feature flagy, postupný rollout podle rizika, nacvičený rollback, zpětně kompatibilní migrace, auditní stopu bez tajemství a připravenou komunikaci. Privacy-first release proces chrání zákazníka i tým: méně paniky, méně datových překvapení, méně nočních detektivek.
+
 ## Pracovní log
+
+- 2026-08-20: Přidána příloha KU o release, rollbacku a feature flags: release karta, postupný rollout, bezpečné flagy, rollback scénáře, databázové migrace, release logy, zákaznická komunikace a checklist.
 
 - 2026-08-20: Přidána příloha KT o stagingu, sandboxu a demo prostředích bez produkčních dat: rozdělení prostředí, syntetická data, bezpečné přístupy, tupé integrace, demo scénáře, bezpečnostní testy a checklist.
 
