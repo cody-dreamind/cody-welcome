@@ -50941,7 +50941,163 @@ Privacy-first smluvní provoz stojí na rozdělení dokumentů podle dopadu, př
 
 
 
+
+# Příloha LH: Domény, DNS a TLS provoz bez paniky, vendor lock-inu a bezpečnostních záznamů z pravěku
+
+Doména je malý řádek v ceníku a obrovská část důvěry. Na doméně stojí web, e-mail, přihlášení, reset hesla, zákaznický portál, API, dokumentace, faktury, status stránka i odkazy v obchodních materiálech. Když ji ztratíš, rozbije se víc než jen homepage. Když ji špatně nastavíš, útočník nepotřebuje poetický zero-day; stačí mu zapomenutý DNS záznam, opuštěná subdoména nebo certifikát, který nikdo nehlídal.
+
+Privacy-first provoz domén není jen „máme DNSSEC a hotovo“. Je to pořádek v tom, kdo domény vlastní, kdo může měnit DNS, jaké subdomény existují, kam ukazují, jak se vydávají certifikáty, jak se ověřuje změna dodavatele a co se stane, když registrátor, DNS poskytovatel nebo hosting v pátek večer začne dělat umění.
+
+## LH.1 Udělej doménový inventář, ne seznam přání
+
+Malý SaaS často začne jednou doménou a po dvou letech má hlavní web, starý landing page, staging, dokumentaci, krátké odkazy, status stránku, e-mailové subdomény, partnerské microsites a testovací věci, které „určitě smažeme příští sprint“. Nesmažou. Samozřejmě.
+
+Inventář drž jednoduše:
+
+| Položka | Příklad | Proč ji evidovat |
+| --- | --- | --- |
+| Registrátor | kde je doména koupená | vlastnictví, expirace, převod |
+| DNS poskytovatel | kdo hostuje zónu | dostupnost, oprávnění, export zóny |
+| Účel domény | web, produkt, e-mail, brand | dopad výpadku a vlastník |
+| Kritické subdomény | `app`, `api`, `mail`, `status` | prioritní monitoring |
+| Rizikové záznamy | CNAME na externí služby | možnost převzetí subdomény |
+| Certifikáty | způsob vydání a obnova | dostupnost a důvěra prohlížeče |
+| Retence změn | audit DNS úprav | incidentní vyšetřování |
+
+U každé domény si napiš vlastníka. Ne „firma“. Konkrétní člověk nebo tým. Doména bez vlastníka je jen čekající incident s ročním předplatným.
+
+## LH.2 DNS změna je deploy
+
+DNS záznamy vypadají neškodně, protože jsou krátké. Jenže jeden špatný `MX`, `CNAME` nebo `TXT` záznam umí rozbít e-mail, přesměrovat provoz, zneplatnit ověření domény u dodavatele nebo otevřít cestu k převzetí subdomény. Chovej se k DNS změnám jako k deployi infrastruktury.
+
+Minimum procesu:
+
+- Každá změna má důvod, autora, čas a očekávaný dopad.
+- Kritické změny mají druhé oči, hlavně u `NS`, `MX`, `CAA`, wildcardů a CNAME na externí služby.
+- Před změnou víš, jaký je aktuální TTL a jak dlouho může trvat návrat zpět.
+- Po změně ověříš výsledek z více resolverů, nejen z laptopu přilepeného na kancelářskou Wi-Fi.
+- Staré záznamy se mažou až po ověření, že na ně nic neodkazuje.
+
+Praktický trik: u velké migrace sniž TTL dopředu, ne v okamžiku požáru. Pokud má záznam TTL 24 hodin a ty ho začneš měnit ve chvíli, kdy už ho potřebuješ přepnout, vesmír ti sice zatleská za optimismus, ale uživatelům to nepomůže.
+
+## LH.3 DNSSEC zapni jen tak, aby šel přežít i rollover
+
+DNSSEC chrání DNS odpovědi kryptografickým podpisem a pomáhá bránit podvržení záznamů. CZ.NIC dlouhodobě popisuje DNSSEC jako rozšíření DNS, které ověřuje pravost dat v doménovém systému: https://www.nic.cz/dnssec/
+
+Zapnutí DNSSEC ale není nálepka na web. Je to provozní závazek. Musíš vědět, kdo drží klíče, jak probíhá DS záznam u registrátora, kdo umí udělat rollover a jak poznáš, že validace selhává. Špatně spravovaný DNSSEC může doménu odříznout stejně elegantně jako výpadek nameserverů, jen s větším pocitem odbornosti.
+
+Mini-checklist před DNSSEC:
+
+- Podporuje DNS poskytovatel automatickou a dokumentovanou správu klíčů?
+- Umí registrátor bezpečně nastavit a měnit DS záznamy?
+- Máš monitoring DNSSEC validace pro hlavní domény?
+- Ví někdo v týmu, jak DNSSEC dočasně opravit nebo vypnout bez paniky?
+- Je rollover klíčů popsaný v provozní dokumentaci?
+
+Codyho komentář: DNSSEC je skvělý sluha a velmi suchý pán. Zapnout ho kliknutím bez provozního playbooku je jako koupit trezor a ztratit návod, klíč i člověka, který ví, proč jsme ho pořizovali.
+
+## LH.4 CAA záznamy omezí, kdo smí vydávat certifikáty
+
+CAA záznamy říkají certifikačním autoritám, kdo smí pro doménu vydávat TLS certifikáty. RFC 8659 popisuje CAA jako DNS mechanismus pro vyjádření autorizační politiky certifikačních autorit: https://www.rfc-editor.org/rfc/rfc8659
+
+Pro malý SaaS je CAA praktická pojistka proti chaosu. Pokud používáš například jednu nebo dvě certifikační autority, zapiš je. Když později někdo přidá novou službu, která chce vydávat certifikát přes jinou autoritu, musí projít vědomým rozhodnutím místo tichého „nějak se to ověřilo“.
+
+Příklad rozhodovací otázky před CAA změnou:
+
+```text
+PROČ NOVÁ CA:
+[nový hosting / CDN / e-mail tracking doména / zákaznický portál]
+
+KTERÉ DOMÉNY:
+[apex, www, app, api, wildcard]
+
+KDO SCHVALUJE:
+[infrastruktura + vlastník produktu]
+
+JAKÝ JE EXIT:
+[jak certifikát přesuneme nebo zrušíme]
+```
+
+CAA není náhrada za správu přístupů. Je to brzda proti překvapení. A brzdy jsou dobré. Zeptej se každého, kdo někdy jel z kopce.
+
+## LH.5 HSTS nasazuj postupně, ne jako heroický přepínač
+
+HTTP Strict Transport Security říká prohlížeči, aby s doménou komunikoval jen přes HTTPS. MDN popisuje hlavičku `Strict-Transport-Security` jako mechanismus, kterým web informuje prohlížeč, že má být přístupný pouze přes HTTPS: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security
+
+To je výborné, pokud máš HTTPS správně všude. Je to méně výborné, pokud někde zapomeneš starou subdoménu, interní nástroj nebo redirect řetěz, který žije jen díky tomu, že prohlížeč byl doteď tolerantní. Pro preload seznam navíc hstspreload.org uvádí požadavky jako platný certifikát, přesměrování z HTTP na HTTPS, `max-age` alespoň 31536000, `includeSubDomains` a `preload`: https://hstspreload.org/
+
+Bezpečný postup:
+
+- Nejdřív otestuj HTTPS na všech veřejných subdoménách.
+- Začni kratším `max-age`, sleduj chyby a teprve potom prodlužuj.
+- `includeSubDomains` zapínej až ve chvíli, kdy máš inventář subdomén a žádné opuštěné systémy.
+- Preload ber jako závazek, ne jako SEO kouzlo.
+- U každé nové subdomény měj default HTTPS, redirect a monitoring certifikátu.
+
+HSTS je krásný příklad bezpečnostní funkce, která trestá improvizaci. Přesně proto je dobrá.
+
+## LH.6 Chraň se před převzetím subdomény
+
+Subdomain takeover vzniká typicky tak, že DNS záznam pořád ukazuje na externí službu, ale služba už není aktivní nebo není svázaná s účtem vlastníka. Útočník pak může zkusit daný hostname zaregistrovat u cílové služby a tvářit se jako legitimní subdoména. OWASP Web Security Testing Guide tento scénář řadí mezi testování přebírání subdomén a upozorňuje na opuštěné DNS záznamy mířící na služby třetích stran: https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/02-Configuration_and_Deployment_Management_Testing/10-Test_for_Subdomain_Takeover
+
+Praktické obrany:
+
+- Eviduj všechny CNAME a alias záznamy na externí platformy.
+- Při vypnutí služby smaž DNS záznam jako součást offboardingu, ne „někdy později“.
+- Pravidelně testuj, zda subdomény nevrací chybové stránky typu „project not found“ nebo „claim this domain“.
+- Nepoužívej wildcard DNS jako koberec na všechno, pokud k tomu nemáš silný důvod.
+- U marketingových microsites měj datum expirace a vlastníka už při vytvoření.
+
+Privacy-first poznámka: subdoména není jen technická adresa. Pokud ji někdo převezme, může sbírat přihlašovací pokusy, formuláře, cookies, referery nebo důvěru zákazníků. A to je přesně druh incidentu, který se špatně vysvětluje větou „ale byla to jen stará kampaň“.
+
+## LH.7 Domény vybírej s ohledem na Evropu a odchod
+
+Registrátor, DNS hosting, certifikáty, monitoring a CDN jsou dodavatelé s přístupem k důležité vrstvě provozu. U privacy-first SaaS se neptej jen „kolik to stojí“ a „má to hezký dashboard“. Ptej se:
+
+- Kde je dodavatel usazený a kde provozuje podpůrné systémy?
+- Kdo má administrátorský přístup k zóně a jak se přihlašuje?
+- Umí export zóny ve standardním formátu?
+- Má audit log změn a rozumné role?
+- Podporuje DNSSEC, CAA, API tokeny s úzkými oprávněními a nouzový přístup?
+- Jak rychle lze doménu převést nebo DNS přesunout jinam?
+- Používá služba zbytečné tracking skripty v administračním rozhraní nebo support procesu?
+
+EU provoz neznamená slepě odmítat každý nástroj mimo Evropu. Znamená to vědět, kde jsou kritická data a kontrolní roviny, jaké máš smlouvy, jaký je exit plán a jestli výměnou za pohodlí neodevzdáváš příliš mnoho moci nad vlastní doménou.
+
+## LH.8 Checklist domén, DNS a TLS
+
+- Existuje aktuální inventář domén, subdomén, DNS poskytovatelů, registrátorů a vlastníků?
+- Má každá kritická doména zapnuté vícefaktorové ověření a omezený počet administrátorů?
+- Jsou změny DNS dokumentované jako infrastrukturní deploy?
+- Máš monitoring expirace domény, nameserverů, DNSSEC validace a TLS certifikátů?
+- Jsou staré CNAME záznamy na externí služby pravidelně kontrolované kvůli převzetí subdomény?
+- Je DNSSEC zapnutý jen tam, kde existuje proces pro DS záznamy, rollover a incidentní opravu?
+- Omezují CAA záznamy certifikační autority na skutečně používané poskytovatele?
+- Je HSTS nasazené postupně a `includeSubDomains` odpovídá reálnému inventáři?
+- Umíš rychle exportovat DNS zónu a přejít k jinému poskytovateli?
+- Ví tým, co udělat při expiraci domény, chybě certifikátu, výpadku DNS nebo podezření na převzetí subdomény?
+
+## Codyho komentář
+
+Domény jsou nudné přesně do chvíle, kdy nudné nejsou. Pak jsou najednou nejdůležitější věc ve firmě a všichni hledají člověka, který „to tehdy nastavoval“. Privacy-first provoz začíná u vlastnictví: vlastní doména, vlastní přehled, vlastní export, vlastní možnost odejít. DNS není místo pro heroismus. Je to místo pro malé opakovatelné rituály, které zabrání tomu, aby se z pětiminutové změny stal víkendový folklór.
+
+## Zdroje k příloze
+
+- CZ.NIC — DNSSEC jako rozšíření DNS pro ověřování pravosti dat v doménovém systému: https://www.nic.cz/dnssec/
+- RFC 8659 — DNS Certification Authority Authorization (CAA) a politika, které CA smějí vydávat certifikáty pro doménu: https://www.rfc-editor.org/rfc/rfc8659
+- MDN Web Docs — hlavička `Strict-Transport-Security` a chování HSTS v prohlížečích: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security
+- hstspreload.org — požadavky pro zařazení domény do HSTS preload seznamu: https://hstspreload.org/
+- OWASP Web Security Testing Guide — testování převzetí subdomény přes opuštěné DNS záznamy a externí služby: https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/02-Configuration_and_Deployment_Management_Testing/10-Test_for_Subdomain_Takeover
+
+## Shrnutí přílohy
+
+Privacy-first doménový provoz stojí na inventáři domén a subdomén, řízených DNS změnách, provozně zvládnutém DNSSEC, CAA záznamech, postupném HSTS, prevenci převzetí subdomén a výběru dodavatelů podle kontroly nad daty i odchodu. Doména není drobná technická položka. Je to kořen důvěry, dostupnosti a značky.
+
+
+
 ## Pracovní log
+
+- 2026-08-20: Přidána příloha LH o doménách, DNS a TLS provozu: inventář domén, DNS změny jako deploy, DNSSEC, CAA, HSTS, prevence převzetí subdomén, evropský výběr dodavatelů a privacy-first checklist.
 
 - 2026-08-20: Přidána příloha LG o smlouvách, objednávkách a elektronických podpisech: rozdělení dokumentů podle dopadu, eIDAS úrovně podpisů, verzování podmínek, DPA napojená na datovou mapu, úzký audit souhlasů, komunikace změn a privacy-first checklist.
 
