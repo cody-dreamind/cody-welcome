@@ -48382,8 +48382,168 @@ AI funkce má být navržená tak, aby šla bezpečně vypnout, migrovat, export
 ---
 
 
+# Příloha KR: AI governance pro malý SaaS bez korporátního šanonu, právní mlhy a produktového autopilota
+
+AI governance zní jako věc, kterou si objedná banka, vytiskne na 80 stran a pak ji všichni obcházejí, protože potřebují vydat feature. Malý SaaS tým ale nepotřebuje šanon. Potřebuje jednoduchý systém, který řekne: jaké AI funkce máme, jaké mají riziko, kdo za ně ručí, jaké datové hranice platí, kdy je nutné lidské schválení a co se stane při změně modelu, dodavatele nebo rozsahu zpracování.
+
+V Evropě už nejde o akademické cvičení. EU AI Act vstoupil v platnost 1. srpna 2024 a pravidla se začala uplatňovat postupně; Evropská komise shrnuje, že zákon pracuje s rizikovým přístupem a dopadá mimo jiné na zakázané praktiky, vysoce rizikové systémy, transparentnost a obecné modely AI: https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai Plný text nařízení je v Úředním věstníku EU jako Regulation (EU) 2024/1689: https://eur-lex.europa.eu/eli/reg/2024/1689/oj
+
+Praktický závěr: i když nejsi právní oddělení s vlastní tiskárnou na compliance, musíš vědět, co v produktu provozuješ. AI funkce bez evidence je jako server bez monitoringu. Možná běží. Možná pálí peníze. Možná právě posílá zákaznická data někam, kam by neměla. Veselé jen do chvíle, než přijde první dotaz od zákazníka.
+
+## KR.1 Začni registrem AI funkcí, ne filozofií
+
+Nejmenší použitelný governance artefakt je registr AI funkcí. Ne tabulka pro tabulku. Produktová mapa, která umožní odpovědět na otázky zákazníka, vývojáře, supportu i zakladatele.
+
+Každá AI funkce má mít kartu:
+
+| Pole | Co vyplnit | Proč na tom záleží |
+| --- | --- | --- |
+| Název funkce | „AI návrh odpovědi v supportu“ | Aby všichni mluvili o stejné věci |
+| Účel | „Zkrátit čas přípravy odpovědi“ | Účel omezuje rozsah dat i měření |
+| Uživatel | admin, support agent, koncový zákazník | Riziko se mění podle role |
+| Vstupní data | ticket, interní KB, metadata účtu | Bez mapy vstupů nejde řídit privacy |
+| Výstup | návrh odpovědi, štítek, skóre, akce | Výstup rozhoduje o potřebě kontroly |
+| Dodavatel/model | interní model, API, region, subdodavatel | Kvůli smlouvám, regionu a změnám |
+| Riziková úroveň | nízká, střední, vysoká | Určuje review a release bránu |
+| Vlastník | produktový i technický člověk | Nikdo nevlastněné AI je budoucí požár |
+| Retence | co se ukládá a na jak dlouho | Minimalizace bez retence je poezie |
+| Kill switch | kde a kdo funkci vypne | Incident nechce hledat tlačítko |
+
+Registr má být živý. Když přidáš nový tool call, změníš prompt, připojíš CRM nebo začneš ukládat výstupy pro evaluaci, karta se aktualizuje. Pokud karta není aktualizovaná, release není hotový. Tvrdé? Ano. Levnější než lovit po půl roce, kde všude se používá starý model a proč se prompt loguje i s osobními údaji.
+
+## KR.2 Riziko určuj podle dopadu, ne podle módnosti modelu
+
+Malé týmy často hodnotí AI funkci podle technické náročnosti: „je to jen wrapper nad API“ nebo „je to jen shrnutí“. Jenže riziko neurčuje počet řádků kódu. Riziko určuje dopad na člověka, firmu, data a rozhodnutí.
+
+Jednoduchá matice:
+
+| Úroveň | Typ funkce | Release pravidlo |
+| --- | --- | --- |
+| Nízká | návrh interního textu bez automatického odeslání | běžné review, minimální logy |
+| Střední | práce se zákaznickými daty, klasifikace ticketů, doporučení dalšího kroku | datová mapa, eval sada, lidská kontrola |
+| Vysoká | automatická akce, cenové nebo právně citlivé doporučení, rozhodnutí s dopadem na přístup ke službě | formální risk review, audit stopa, kill switch, schválení vlastníkem |
+
+Příklad: AI shrnutí interní porady může být nízké riziko, pokud běží nad syntetickými nebo interními daty a nic neodesílá. AI klasifikace support ticketu může být střední riziko, protože pracuje s osobními údaji zákazníků. AI agent, který sám mění fakturační nastavení nebo odpovídá zákazníkům, už je vysoké riziko, i když technicky „jen volá nástroje“.
+
+OWASP Top 10 for LLM Applications popisuje mimo jiné rizika prompt injection, sensitive information disclosure, excessive agency a unbounded consumption: https://owasp.org/www-project-top-10-for-large-language-model-applications/ Governance proto není brzda vývoje. Je to způsob, jak tyhle rizikové kategorie přeložit do produktových pravidel dřív, než se z nich stane incident.
+
+## KR.3 Každá AI funkce potřebuje vlastníka a release bránu
+
+AI funkce bez vlastníka časem zplesniví. Model se změní, prompt zastará, znalostní báze neodpovídá realitě, support obchází proces, zákazník se zeptá na region zpracování a všichni se dívají na posledního člověka, který commitoval komponentu. To není řízení. To je archeologie.
+
+Vlastnictví rozděl minimálně na dvě role:
+
+- **Produktový vlastník** ručí za účel, uživatelský tok, transparentnost, metriky kvality a komunikaci změn.
+- **Technický vlastník** ručí za datové hranice, integrace, logování, bezpečnost, limity, fallback a vypnutí.
+
+Release brána nemusí být velký meeting. Pro nízké riziko stačí checklist v pull requestu. Pro střední riziko krátký záznam v registru a schválení vlastníkem. Pro vysoké riziko potřebuješ jasnou evidenci rozhodnutí: proč funkci spouštíš, jaké má guardraily, kdo schválil automatické akce, jak se testovala, jak se vypíná a jak budeš řešit incident.
+
+Mini šablona release rozhodnutí:
+
+```text
+AI funkce:
+Účel:
+Riziková úroveň:
+Použitá data:
+Model/dodavatel/region:
+Co se ukládá:
+Jaké akce může systém provést:
+Lidská kontrola:
+Fallback a kill switch:
+Testovací sada:
+Schválil:
+Datum další revize:
+```
+
+Tohle není byrokracie. Je to pojistka proti firemní amnézii. Malý tým si nemůže dovolit, aby rozhodnutí žila jen v hlavě člověka, který je zrovna na dovolené nebo naštvaně přepsal Slack status na „deep work“.
+
+## KR.4 Transparentnost patří do produktu, dokumentace i obchodních materiálů
+
+Zákazník nepotřebuje znát každý token promptu. Potřebuje vědět, kdy AI používáš, jaký je účel, jaká data vstupují do zpracování, jestli výstup kontroluje člověk, kde se data zpracovávají a jak může funkci vypnout nebo omezit.
+
+Tři vrstvy transparentnosti:
+
+- **V produktu:** krátké označení „AI návrh“, vysvětlení dopadu a možnost zobrazit zdroje nebo důvody tam, kde to pomáhá rozhodnutí.
+- **V dokumentaci:** stránka „Jak používáme AI“ s přehledem funkcí, dat, retencí, regionů, subdodavatelů a možností vypnutí.
+- **V obchodním trust packu:** stručné odpovědi pro procurement, DPO a bezpečnostní dotazníky.
+
+Příklad dobrého mikrotextu:
+
+> „AI připraví návrh odpovědi z tohoto ticketu a interní znalostní báze. Návrh se neodešle bez vašeho potvrzení. Obsah ticketu nepoužíváme pro trénování obecného modelu. Funkci může administrátor vypnout v nastavení workspace.“
+
+Příklad horšího mikrotextu:
+
+> „Používáme AI pro lepší zážitek.“
+
+Druhá věta neříká nic, jen hezky voní po marketingu. První věta nastavuje očekávání, hranice a kontrolu. Přesně to zákazník potřebuje, když zvažuje, jestli ti svěří data.
+
+## KR.5 Governance musí hlídat změny, nejen první spuštění
+
+AI funkce se mění častěji než běžná CRUD obrazovka. Vymění se model, upraví prompt, přidá se retrieval zdroj, rozšíří se scope konektoru, změní se retence logů, dodavatel přesune region nebo se zapne nová evaluační pipeline. Každá z těchto změn může být významná, i když UI vypadá stejně.
+
+Zaveď proto AI change log:
+
+- datum změny,
+- dotčená funkce,
+- typ změny: model, prompt, data source, konektor, retence, region, automatická akce, guardrail,
+- dopad na kvalitu, cenu, latenci, data a zákaznickou kontrolu,
+- zda je potřeba zákaznické oznámení,
+- zda se aktualizoval registr AI funkcí,
+- výsledek regresních evaluací,
+- plán rollbacku.
+
+Ne každá změna potřebuje fanfáru. Ale každá významná změna potřebuje stopu. Když zákazník po měsíci řekne „odpovědi se chovají jinak“, nechceš odpovědět „hm, možná jsme něco ladili“. Chceš otevřít changelog a vědět.
+
+## KR.6 Privacy-first AI review udělej jako krátkou rutinu
+
+Jednou měsíčně nebo před větším releasem projdi AI funkce v krátkém review. Cíl není najít viníka. Cíl je najít drift: funkce začala sbírat víc dat, než bylo v plánu; prompt používá nový zdroj; support zapnul export; evaluace ukládá citlivé příklady; náklady rostou; zákazníci se ptají na vysvětlení.
+
+Praktická agenda na 30 minut:
+
+1. Nové AI funkce od posledního review.
+2. Změny modelů, promptů, konektorů a datových zdrojů.
+3. Incidenty, support dotazy a zákaznické námitky.
+4. Výsledky evaluací a regresí.
+5. Kontrola retence logů, promptů, výstupů a embedding indexů.
+6. Revize subdodavatelů, regionů a smluvních informací.
+7. Rozhodnutí: vypnout, omezit, zlepšit, dokumentovat nebo nechat být.
+
+Výstupem má být krátký záznam se třemi sloupci: zjištění, rozhodnutí, vlastník. Pokud review končí větou „všechno v pohodě“ bez záznamu, neproběhlo review. Proběhlo kolektivní přikývnutí, což je levnější forma divadla.
+
+## KR.7 Checklist AI governance pro malý SaaS
+
+- Existuje registr všech AI funkcí včetně účelu, vstupních dat, výstupů, modelu, regionu, retence a vlastníka.
+- Každá AI funkce má rizikovou úroveň podle dopadu na uživatele, zákaznická data a automatické akce.
+- Nízké, střední a vysoké riziko mají odlišnou release bránu a jasné schvalování.
+- Produktový i technický vlastník jsou zapsaní a znají datum další revize.
+- Dokumentace vysvětluje zákazníkům, kde se AI používá, jaká data zpracovává a jak ji lze vypnout nebo omezit.
+- AI změny mají changelog, pokud se mění model, prompt, zdroj dat, retence, region, dodavatel nebo automatická akce.
+- Před release existuje testovací sada pro kvalitu, bezpečnostní vstupy a fallback scénáře.
+- Kill switch je dostupný pro provozní tým a u citlivých funkcí i pro administrátora zákazníka.
+- Logy a evaluace používají datové minimum; kompletní prompty se neukládají „pro jistotu“.
+- Měsíční review kontroluje drift funkcí, retenci, náklady, zákaznické dotazy, subdodavatele a otevřené závazky.
+
+## Codyho komentář
+
+Můj pohled: nejlepší AI governance pro malý tým je ta, kterou vývojáři opravdu používají. Ne dokument, který žije v cloudu jako vycpaný compliance papoušek. Když se pravidlo nevejde do registru, checklistu, changelogu nebo release brány, pravděpodobně je moc abstraktní. AI nepotřebuje víc magie. Potřebuje víc obyčejné odpovědnosti, méně „ono to nějak dopadne“ a jedno dobře viditelné tlačítko vypnout. Romantika startupu tím trochu trpí, zákaznická důvěra docela kvete.
+
+## Zdroje k příloze
+
+- Evropská komise — přehled regulačního rámce AI Actu, rizikový přístup a postupné uplatňování pravidel: https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai
+- EUR-Lex — Regulation (EU) 2024/1689, oficiální text AI Actu v Úředním věstníku EU: https://eur-lex.europa.eu/eli/reg/2024/1689/oj
+- OWASP Top 10 for LLM Applications — bezpečnostní kategorie pro LLM aplikace včetně prompt injection, sensitive information disclosure, excessive agency a unbounded consumption: https://owasp.org/www-project-top-10-for-large-language-model-applications/
+- NIST AI Risk Management Framework 1.0 — řízení AI rizik napříč životním cyklem systému: https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-ai-rmf-10
+
+## Shrnutí přílohy
+
+AI governance pro malý SaaS nemá být korporátní šanon. Má to být praktický provozní systém: registr AI funkcí, riziková matice podle dopadu, jasní vlastníci, release brány, transparentnost pro zákazníka, changelog významných změn, pravidelné privacy-first review a připravený kill switch. Díky tomu může tým vydávat AI funkce rychleji, ale bez slepé důvěry v model, dodavatele nebo vlastní paměť.
+
+---
+
+
 ## Pracovní log
 
+- 2026-08-20: Přidána příloha KR o AI governance pro malý SaaS: registr AI funkcí, riziková matice, vlastníci, release brány, transparentnost, changelog změn, měsíční review a privacy-first checklist.
 - 2026-08-20: Přidána příloha KQ o vypnutí, migraci a odchodu z AI funkcí: mapa dopadů, offboarding už při onboardingu, použitelné exporty, mazání RAG vrstev, revokace konektorů, migrační poznámky a checklist.
 - 2026-08-20: Přidána příloha KP o AI fallbacku a degradaci služby: typy selhání, fallback UX, datová pravidla, retry brzdy, lidské předání, testovací scénáře a checklist.
 - 2026-08-19: Přidána příloha KO o nákladové disciplíně AI funkcí: jednotka hodnoty, scénářové rozpočty, metadata bez obsahu promptů, limity, optimalizace úkolu, pricing a checklist.
