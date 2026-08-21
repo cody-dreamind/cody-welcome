@@ -192,8 +192,155 @@ Lepší struktura může být:
 
 Tohle není jen lepší copywriting. Je to lepší obchodní architektura.
 
+
+## 2. Ideální zákazník, nabídka a positioning
+
+Kapitola o ideálním zákazníkovi bývá často první místo, kde se z praktického byznysového plánování stane firemní astrologie. Vznikne persona „Petr, 38 let, má rád kávu, inovace a efektivitu“. Skvělé. A teď co přesně má být na homepage?
+
+Pro web, SaaS a marketing je užitečnější jiná otázka: **kdo má problém tak bolestivý, že je ochotný změnit svoje chování, zaplatit a riskovat přechod na nové řešení?**
+
+Ideální zákazník není nejhezčí logo do referencí. Je to segment, kde se potkávají čtyři věci:
+
+- problém je konkrétní a opakovaný,
+- zákazník má rozpočet nebo přímý ekonomický důvod ho vytvořit,
+- umíte mu dodat měřitelný výsledek,
+- umíte ho rozumně oslovit bez reklamního stalkingu po půlce internetu.
+
+*Codyho komentář: pokud je vaše cílovka „všechny firmy, které chtějí růst“, gratuluju — právě jste si vybrali trh o velikosti vesmíru a podobně praktickou navigaci.*
+
+### 2.1 Začněte situací, ne demografií
+
+U B2B webů a SaaSů často víc než věk nebo pohlaví rozhoduje situace. Zákazník hledá řešení, protože se něco změnilo: tým vyrostl, tabulky přestaly stačit, audit odhalil riziko, marketingové náklady rostou, zákaznická podpora nestíhá nebo firma expanduje do více zemí.
+
+Popište zákazníka takto:
+
+- **Role:** kdo rozhoduje, kdo používá, kdo blokuje.
+- **Situace:** co se právě děje ve firmě.
+- **Bolest:** co je drahé, pomalé, rizikové nebo nepřehledné.
+- **Spouštěč:** proč to řeší právě teď.
+- **Důkaz hodnoty:** podle čeho pozná, že se investice vyplatila.
+- **Námitka:** čeho se bojí před nákupem.
+
+Příklad pro SaaS nástroj na správu dokumentů:
+
+- **Role:** majitel účetní firmy rozhoduje, účetní tým používá, klienti nahrávají dokumenty.
+- **Situace:** firma má desítky klientů a e-mailové přílohy začínají být chaos.
+- **Bolest:** ztracené dokumenty, špatná dohledatelnost, riziko posílání citlivých dat na špatnou adresu.
+- **Spouštěč:** nový velký klient vyžaduje bezpečnější proces.
+- **Důkaz hodnoty:** kratší čas dohledání dokumentu, méně e-mailů, jasná auditní stopa.
+- **Námitka:** klienti se nebudou chtít učit další portál.
+
+Z takového popisu už jde napsat homepage, demo scénář i onboarding. Z persony „Petr má rád kávu“ jde maximálně objednat kapsle do kanceláře.
+
+### 2.2 Oddělte zákazníka, uživatele a kupujícího
+
+U jednoduchého webu pro živnostníka to může být jedna osoba. U SaaS produktu často ne. Když tyto role smícháte, web začne odpovídat špatnému člověku.
+
+Typický rozdíl:
+
+- **Kupující** řeší cenu, riziko, smlouvu, bezpečnost a návratnost.
+- **Uživatel** řeší rychlost, jednoduchost, podporu a každodenní pohodlí.
+- **Technický schvalovatel** řeší integrace, přístupová práva, data, audit a provoz.
+- **Interní odpůrce** řeší ztrátu kontroly, změnu zvyku nebo strach, že automatizace ukáže nepořádek.
+
+Dobrý web nemusí každému říkat všechno najednou. Má ale každé roli nabídnout cestu:
+
+- pro vedení stránku s obchodní hodnotou,
+- pro uživatele ukázku workflow,
+- pro technický tým bezpečnostní a integrační informace,
+- pro skeptiky jasné vysvětlení migrace, podpory a kontroly nad daty.
+
+Privacy-first hodnota sem patří velmi konkrétně. Nestačí věta „bereme bezpečnost vážně“. Napište, kde běží infrastruktura, jaké externí služby používáte, jak dlouho držíte data, kdo má přístup k administraci a jestli jde exportovat obsah. Pro evropské zákazníky je kontrola nad daty často součást důvěry, ne nudná patička právních dokumentů.
+
+### 2.3 Nabídka musí být balíček rozhodnutí
+
+Nabídka není jen seznam funkcí. Je to odpověď na otázku: „Co přesně dostanu, jak rychle, s jakým rizikem a co mám udělat teď?“
+
+Slabá nabídka:
+
+> Vyvíjíme moderní webové aplikace na míru.
+
+Silnější nabídka:
+
+> Do 30 dnů navrhneme a spustíme interní portál pro jeden klíčový proces: role, formuláře, auditní stopa, export dat a provoz v evropském prostředí. Začínáme mapováním procesu na 90minutovém workshopu.
+
+Proč je druhá lepší:
+
+- říká, co vznikne,
+- omezuje rozsah,
+- ukazuje první krok,
+- snižuje nejistotu,
+- zahrnuje provozní hodnotu,
+- dá se porovnat s alternativou.
+
+U produktového SaaSu může stejný princip vypadat takto:
+
+> Pro týmy do 50 lidí, které vyřizují zákaznické požadavky e-mailem, nabízíme jednoduchý helpdesk s evropským hostingem, RSS přehledem změn a bez reklamních trackerů. Spuštění první schránky trvá 20 minut.
+
+To není básnička pro billboard. Je to pracovní formulace, ze které vznikne nadpis, pricing, demo, FAQ i sales e-mail.
+
+### 2.4 Positioning: vyberte si hřiště, kde můžete vyhrát
+
+Positioning znamená říct, v jaké kategorii vás má zákazník chápat a proč jste pro jeho situaci dobrá volba. Když to neuděláte vy, zákazník si vás zařadí sám — často do šuplíku „další agentura“, „další CRM“, „další AI nástroj“ nebo „další drahá věc, na kterou teď nemám čas“.
+
+Praktický positioning má pět vět:
+
+1. **Pro koho:** Pro malé B2B týmy, které prodávají odbornou službu.
+2. **V jaké situaci:** Když web nepřivádí kvalitní poptávky a obchodní tým pořád vysvětluje stejné věci.
+3. **Jaká kategorie:** Stavíme obsahově řízené weby a jednoduché SaaS nástroje.
+4. **Hlavní rozdíl:** Navrhujeme je jako obchodní systém s privacy-first evropským provozem.
+5. **Důkaz:** Každá stránka má jasný účel, měření bez invazivních trackerů a plán další optimalizace.
+
+Těchto pět vět nemusí být vidět celé na webu. Ale tým je musí znát. Jinak budou homepage, nabídky, články i obchodní hovory pokaždé znít trochu jinak — a zákazník si odnese pocit, že prodáváte všechno a nic.
+
+### 2.5 Co dělat, když máte více segmentů
+
+Více segmentů není problém. Problém je míchat je do jedné stránky tak, že se nikdo necítí oslovený. Pokud prodáváte podobnou technologii více typům zákazníků, vytvořte pro každý segment vlastní vstupní stránku nebo alespoň jasný blok.
+
+Příklad:
+
+- **Pro účetní firmy:** bezpečné předávání dokumentů, auditní stopa, klientský portál.
+- **Pro výrobní firmy:** schvalování požadavků, evidence údržby, role ve směnách.
+- **Pro marketingové týmy:** microsites, formuláře, kampaně, rychlé publikování obsahu.
+
+Společná technologie může být stejná, ale jazyk, důkazy a námitky jsou jiné. Účetní firma chce slyšet o důvěrnosti a dohledatelnosti. Marketingový tým chce rychlost kampaní a méně čekání na vývoj. Výrobní firma chce stabilní proces a jasné odpovědnosti.
+
+Pokud nemáte kapacitu udělat segmentové stránky pořádně, vyberte jeden hlavní segment a ostatní nechte jako sekundární. Lepší ostrá nabídka pro menší trh než univerzální omáčka pro všechny, kterou si nikdo nenaloží.
+
+### Checklist: ideální zákazník a positioning
+
+- [ ] Umíme popsat zákazníka podle situace, ne jen podle demografie.
+- [ ] Víme, kdo je kupující, uživatel, technický schvalovatel a možný odpůrce.
+- [ ] Máme pojmenovaný spouštěč, proč zákazník řeší problém právě teď.
+- [ ] Nabídka říká konkrétní výstup, rozsah, první krok a snížení rizika.
+- [ ] Positioning má jasnou kategorii a rozdíl oproti běžné alternativě.
+- [ ] Privacy-first provoz popisujeme konkrétně, ne jen dekorativní větou.
+- [ ] Pro více segmentů máme oddělený jazyk, důkazy a námitky.
+- [ ] Umíme jednou větou říct, pro koho nejsme ideální volba.
+
+### Mini cvičení: 45 minut k ostřejší nabídce
+
+Vezměte jednu službu nebo produkt a vyplňte tento formulář:
+
+1. Zákazník je v situaci: `_____`.
+2. Největší bolest je: `_____`.
+3. Pokud ji nevyřeší, stane se: `_____`.
+4. Nabízíme mu: `_____`.
+5. První hmatatelný výsledek bude: `_____`.
+6. Největší námitka bude: `_____`.
+7. Snížíme riziko tím, že: `_____`.
+8. Data a provoz řešíme takto: `_____`.
+
+Pak z toho napište pracovní nadpis:
+
+> Pomáháme `_____` vyřešit `_____` pomocí `_____`, bez `_____`.
+
+Není cílem mít dokonalý slogan. Cílem je mít větu, podle které poznáte, co na web patří a co je jen pěkně znějící balast. Balast je v marketingu jako kabely za monitorem — nějak tam vždycky vznikne, ale neměl by řídit firmu.
+
 ---
 
 ## Pracovní log
+
+- 2026-08-21: Dopsána kapitola 2 „Ideální zákazník, nabídka a positioning“ s příklady segmentace, nabídkou, positioningem a checklistem.
 
 - 2026-08-21: Založena struktura e-booku, pracovní osnova a dopsána kapitola 1 „Web jako obchodní systém“ s praktickým checklistem.
