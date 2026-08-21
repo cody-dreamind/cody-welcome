@@ -4644,7 +4644,244 @@ Po hodině budete mít lepší přehled než mnoho týmů po celodenním worksho
 
 ---
 
+## 23. Privacy-first provoz v Evropě
+
+Privacy-first provoz není věta do patičky webu. Je to způsob, jak navrhnout produkt, infrastrukturu, procesy a marketing tak, aby zákazník nemusel slepě věřit, že se s jeho daty zachází slušně. Má to vidět v architektuře, smlouvách, nastavení přístupů, supportu i měření.
+
+Evropský provoz neznamená, že všechno musí být pomalé, drahé a ručně obsluhované v šanonu s eurohvězdičkami. Znamená to, že tým ví, kde data jsou, proč tam jsou, kdo k nim má přístup, jak dlouho tam zůstávají a co se stane, když zákazník odejde.
+
+Pro malé SaaS týmy je to obchodní výhoda. Velké firmy často prodávají „enterprise privacy“ až v drahém tarifu. Malý tým může mít důvěru zabudovanou od začátku: méně integrací, méně trackerů, jasnější provoz, rychlejší odpovědi na otázky zákazníků.
+
+*Codyho komentář: privacy-first není anti-marketing. Je to marketing pro dospělé. Místo „dáme všude pixel a uvidíme“ říkáte „měříme to, co potřebujeme, a zbytek necháme lidem na pokoji“. Radikální koncept, já vím.*
+
+### 23.1 Nakreslete si provozní mapu dat
+
+První krok není výběr hostingu. První krok je mapa. Bez ní se provozní rozhodnutí mění v hádání podle ceníků a hezkých landing pages dodavatelů.
+
+Mapa dat má odpovědět na pět otázek:
+
+| Otázka | Praktický význam |
+| --- | --- |
+| Jaká data sbíráme? | Účet, profil, fakturace, logy, analytika, support, marketing. |
+| Proč je sbíráme? | Služba, bezpečnost, účetnictví, podpora, zlepšování produktu. |
+| Kde leží? | Aplikace, databáze, zálohy, logy, e-mailing, helpdesk, BI nástroj. |
+| Kdo k nim má přístup? | Interní role, support, administrátoři, zpracovatelé, automatizace. |
+| Jak dlouho je držíme? | Aktivní účet, retenční lhůta, účetní povinnost, bezpečnostní logy. |
+
+Začněte jednoduchým diagramem. Nemusí být krásný. Stačí tok:
+
+1. návštěvník přijde na web,
+2. analytika uloží agregovanou návštěvu,
+3. formulář pošle poptávku,
+4. aplikace vytvoří účet,
+5. platební brána zpracuje platbu,
+6. support řeší dotaz,
+7. logy pomáhají najít chybu,
+8. zálohy chrání dostupnost.
+
+U každého kroku dopište, jestli jde o osobní údaje, technické údaje, citlivý provozní kontext nebo anonymní/agregovaná data. Tohle není právní poezie. Je to provozní inventář.
+
+### 23.2 Volte evropský default, ne evropskou výmluvu
+
+Evropský provoz začíná defaulty. Když každý nový nástroj musí zvlášť dokazovat, že patří do stacku, držíte kontrolu. Když tým přidává SaaS nástroje podle toho, kdo má nejhezčí onboarding, kontrolu postupně ztratíte.
+
+Praktická pravidla pro výběr dodavatele:
+
+- **Region dat:** umí EU region a je opravdu použitý pro váš účet?
+- **Subdodavatelé:** kdo další data zpracovává a kde?
+- **Export:** umíte data dostat ven ve strojově použitelném formátu?
+- **Mazání:** umíte účet, obsah a logicky související data odstranit nebo anonymizovat?
+- **Přístup:** umí nástroj SSO, role, audit log a omezení support přístupu?
+- **Smlouvy:** existuje DPA, seznam zpracovatelů a jasné podmínky změn?
+- **Lock-in:** přežije produkt, když nástroj za rok vyměníte?
+
+Evropský default neznamená slepě odmítat každý mimoevropský nástroj. Znamená to, že přenos dat mimo EU není bezmyšlenkovitý standard, ale vědomé rozhodnutí s důvodem, posouzením rizika a alternativami. Evropská komise vede přehled rozhodnutí o odpovídající ochraně pro vybrané země a Evropský sbor pro ochranu osobních údajů publikuje doporučení k mezinárodním předáním. Pokud stavíte SaaS pro evropské klienty, tyhle odkazy patří do provozní dokumentace, ne do zapomenuté záložky.
+
+### 23.3 Oddělte marketingová, produktová a bezpečnostní data
+
+Jedna z nejčastějších chyb je házet všechna data do jedné mentální krabice „analytics“. Jenže marketing, produkt a bezpečnost mají jiné účely, jiné riziko a jiné lidi, kteří je potřebují vidět.
+
+Rozdělte datové vrstvy:
+
+- **Marketingová data:** návštěvnost stránek, zdroj kampaní, stažení materiálu, přihlášení k odběru.
+- **Produktová data:** aktivace, používání funkcí, dokončení onboardingu, chybové stavy.
+- **Bezpečnostní data:** přihlášení, změny hesla, administrátorské akce, podezřelé pokusy.
+- **Support data:** konverzace, přílohy, diagnostické informace, souhlas se zobrazením účtu.
+- **Fakturační data:** zákazník, tarif, platby, daňové doklady, účetní archiv.
+
+Každá vrstva má mít vlastní pravidla. Marketing nepotřebuje vidět bezpečnostní logy. Support nepotřebuje export všech platebních údajů. Produktový dashboard často nepotřebuje e-mail konkrétního člověka, stačí anonymizovaný účet nebo agregace.
+
+Privacy-first princip: měřte rozhodnutí, ne zvědavost. Pokud z dat neumíte odvodit konkrétní produktové nebo obchodní rozhodnutí, pravděpodobně je nepotřebujete.
+
+Příklad dobré události:
+
+```text
+event: onboarding_completed
+properties:
+  plan: team
+  workspace_age_days: 2
+  source: checklist
+```
+
+Příklad špatné události:
+
+```text
+event: user_clicked_everything
+properties:
+  email: jana@example.com
+  full_url_with_tokens: ...
+  free_text_note: ...
+```
+
+První pomáhá zlepšit onboarding. Druhá je datová žumpa v kabátě metriky.
+
+### 23.4 Přístupy řešte jako produktovou funkci
+
+Přístupová práva nejsou interní detail pro admin obrazovku. Jsou součást důvěry. Zákazník chce vědět, kdo vidí jeho data, jak se to řídí a co zůstane zapsané.
+
+Minimum pro malý SaaS:
+
+- role podle odpovědnosti, ne podle seniority,
+- oddělené účty pro každého člověka,
+- žádné sdílené admin heslo,
+- povinné MFA u administrátorů,
+- audit log pro citlivé akce,
+- časově omezený support přístup,
+- pravidelná revize aktivních účtů,
+- okamžité odebrání přístupů při odchodu člověka z týmu.
+
+U supportu pomáhá režim „žádat o přístup“. Zákazník nebo oprávněný interní člověk schválí dočasný přístup k účtu, support vidí jen potřebná data a systém uloží kdo, kdy, proč a co otevřel. Tohle je výrazně lepší než univerzální admin pohled, který umí všechno a pamatuje si nic.
+
+Checklist pro citlivou akci:
+
+- [ ] Je jasné, kdo akci provedl?
+- [ ] Je jasné, kdy se stala?
+- [ ] Je jasné, na jaký účet nebo objekt mířila?
+- [ ] Je jasné, proč byla provedena?
+- [ ] Umíme ji vrátit, nebo alespoň vysvětlit dopad?
+- [ ] Je log chráněný proti tichému přepsání?
+
+### 23.5 Logy a zálohy jsou také osobní data
+
+Týmy často řeší privacy u databáze a zapomenou na logy, monitoring, chybové reporty a zálohy. Jenže právě tam často končí tokeny, e-maily, IP adresy, URL s parametry, celé formuláře nebo interní poznámky.
+
+Pro logy nastavte pravidla:
+
+- nelogovat hesla, tokeny, cookies ani celé autorizační hlavičky,
+- maskovat e-maily, telefonní čísla a identifikátory, pokud nejsou nutné,
+- oddělit aplikační logy od auditních logů,
+- omezit přístup podle role,
+- nastavit retenční dobu podle účelu,
+- u incidentu umět logy bezpečně zachovat jako důkaz,
+- testovat, že nové endpointy omylem neposílají do logů celé request body.
+
+U záloh se ptejte:
+
+- kde fyzicky leží,
+- jak jsou šifrované,
+- kdo je umí obnovit,
+- jak často se testuje obnova,
+- jak dlouho se drží,
+- co se stane po smazání zákazníka,
+- zda existuje dokumentovaný proces pro částečnou obnovu.
+
+Privacy-first provoz neznamená nemít logy nebo zálohy. Znamená to mít je účelově, bezpečně a s omezenou životností. Bez logů nezjistíte incident. Bez retence vytvoříte archiv všeho navždy. Ani jedno není dobrý nápad, pokud vás baví spánek.
+
+### 23.6 Připravte se na přenositelnost a odchod zákazníka
+
+Důvěra se pozná i podle toho, jak snadno může zákazník odejít. Pokud export neexistuje, dokumentace mlží a mazání dat je ruční alchymie, zákazník brzy pochopí, že „platforma“ znamená klec s hezkým UI.
+
+Evropský Data Act se začal uplatňovat 12. září 2025 a mimo jiné posiluje pravidla kolem přístupu k datům a změny poskytovatelů cloudových služeb. Pro malý SaaS je praktický závěr jednoduchý: navrhujte data tak, aby se dala rozumně exportovat, vysvětlit a migrovat. I když se konkrétní právní dopady liší podle typu služby, dobrý export je produktová výhoda už teď.
+
+Praktický exportní balíček:
+
+- CSV nebo JSON pro strukturovaná data,
+- ZIP pro přílohy a dokumenty,
+- README s popisem polí,
+- čas vytvoření exportu,
+- informace o rozsahu exportu,
+- bezpečné doručení nebo časově omezený odkaz,
+- auditní záznam, kdo export spustil.
+
+Mazání řešte podobně konkrétně:
+
+- co se smaže hned,
+- co se anonymizuje,
+- co zůstává kvůli účetnictví nebo bezpečnosti,
+- kdy se data odstraní ze záloh,
+- jak se zákazník dozví stav žádosti,
+- kdo umí řešit výjimky.
+
+### 23.7 Udělejte z privacy součást prodeje i onboardingu
+
+Privacy-first hodnota se nesmí schovat jen do právních dokumentů. Pokud ji děláte dobře, použijte ji v obchodě, onboardingu a supportu.
+
+Na webu se hodí krátká stránka „Bezpečnost a data“, která odpovídá lidsky:
+
+- kde služba běží,
+- jaké hlavní zpracovatele používáte,
+- jestli používáte reklamní trackery,
+- jak fungují zálohy a logy,
+- jak řešíte support přístup,
+- jak zákazník získá export,
+- koho kontaktovat kvůli bezpečnosti nebo privacy.
+
+V onboardingu zase vysvětlete, proč některá data nechcete. Například: „Telefon nevyžadujeme, protože pro vytvoření účtu není potřeba.“ To je drobný text, ale dělá hodně. Ukazuje, že datové minimum není chyba formuláře, ale záměr.
+
+Pro obchodní tým připravte privacy battlecard:
+
+| Námitka zákazníka | Dobrá odpověď |
+| --- | --- |
+| Kde jsou naše data? | Popis regionu, hostingu, záloh a hlavních zpracovatelů. |
+| Používáte reklamní trackery? | Jasné ano/ne a popis analytiky bez sledování napříč weby. |
+| Kdo z vašeho týmu vidí data? | Role, support režim, audit log, MFA. |
+| Umíme odejít? | Exportní formáty, postup ukončení, mazání a retence. |
+| Co když nastane incident? | Kontaktní místo, interní playbook, komunikace a evidence. |
+
+Tohle zkracuje prodej. Ne proto, že by každý zákazník četl všechny detaily, ale protože připravenost je vidět. A důvěra se často prodává rychleji než další animace v hero sekci.
+
+### Checklist kapitoly 23
+
+- [ ] Máme aktuální mapu datových toků pro web, produkt, support, fakturaci a monitoring.
+- [ ] U každého nástroje víme, kde data leží, kdo je zpracovává a jak je exportujeme.
+- [ ] Marketingová, produktová, bezpečnostní, supportní a fakturační data mají oddělený účel a přístupová pravidla.
+- [ ] Administrátorské a supportní přístupy mají MFA, role, audit log a revizní rytmus.
+- [ ] Logy neobsahují tajné hodnoty ani zbytečné osobní údaje a mají jasnou retenci.
+- [ ] Zálohy jsou šifrované, testované a popsané včetně retenčních pravidel.
+- [ ] Zákazník má realistickou cestu k exportu, ukončení účtu a vysvětlení mazání.
+- [ ] Privacy-first hodnota je vidět na webu, v onboardingu, v obchodních odpovědích i v dokumentaci.
+
+### Mini cvičení: privacy-first provozní audit za 90 minut
+
+Vyberte pět nejdůležitějších nástrojů ve stacku: hosting, databázi, e-mailing, analytiku a support. U každého vyplňte:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaký nástroj kontrolujeme? |  |
+| Jaká data do něj posíláme? |  |
+| Je to nutné pro službu, bezpečnost, podporu, marketing nebo účetnictví? |  |
+| Kde jsou data uložena? |  |
+| Kdo má přístup? |  |
+| Jaký je exportní postup? |  |
+| Jaká je retenční doba? |  |
+| Která data můžeme přestat sbírat? |  |
+| Jaké riziko řešíme jako první? |  |
+
+Po auditu vyberte jednu věc k okamžitému zlepšení. Ne deset. Jednu. Třeba vypnout zbytečný tracker, zkrátit retenci logů, doplnit DPA do evidence, zavést MFA pro adminy nebo napsat stránku „Bezpečnost a data“. Malý konkrétní krok porazí velký compliance plán, který zůstane v kalendáři jako strašidlo.
+
+### Zdroje ke kapitole 23
+
+- European Commission: [Data protection under GDPR](https://commission.europa.eu/law/law-topic/data-protection/data-protection-eu_en)
+- European Commission: [Adequacy decisions](https://commission.europa.eu/law/law-topic/data-protection/international-dimension-data-protection/adequacy-decisions_en)
+- European Data Protection Board: [Recommendations on supplementary measures for international transfers](https://www.edpb.europa.eu/our-work-tools/our-documents/recommendations/recommendations-012020-measures-supplement-transfer-tools_en)
+- European Commission: [Data Act explained](https://digital-strategy.ec.europa.eu/en/factpages/data-act-explained)
+- ENISA: [Cybersecurity Guide for SMEs](https://www.enisa.europa.eu/publications/cybersecurity-guide-for-smes)
+
+---
+
 ## Pracovní log
+- 2026-08-21: Dopsána kapitola 23 „Privacy-first provoz v Evropě“ s mapou dat, evropským defaultem, oddělením datových vrstev, přístupy, logy, zálohami, exportem, onboardingem, checklistem a ověřenými zdroji.
+
 - 2026-08-21: Dopsána kapitola 22 „Dokumentace jako firemní paměť“ s typy dokumentace, jedním zdrojem pravdy, ADR, privacy dokumentací, workflow aktualizacemi, revizemi, checklistem a ověřenými zdroji.
 
 - 2026-08-21: Dopsána kapitola 21 „Automatizace bez ztráty kontroly“ s mapováním procesů, řízením rizika, auditní stopou, privacy-first datovými toky, AI kopilotem, vypínači, checklistem a ověřenými zdroji.
