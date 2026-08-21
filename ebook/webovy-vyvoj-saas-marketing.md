@@ -2802,7 +2802,225 @@ Po tomhle cvičení často zjistíte, že support nepotřebuje víc lidí. Potř
 
 ---
 
+# Část IV — Marketing, který neotravuje
+
+## 15. Obsahový marketing a distribuční kanály
+
+Obsahový marketing není továrna na články. Je to způsob, jak opakovaně dokazovat, že rozumíte problému zákazníka dřív, než se vás zeptá na cenu. U malého SaaSu nebo webového studia má obsah tři praktické úkoly: přivést relevantní lidi, zkrátit prodejní rozhovor a vytvořit důvěru, která přežije i bez agresivního remarketingu.
+
+Špatný obsah začíná otázkou: „Co bychom měli tento týden postnout?“ Dobrý obsah začíná otázkou: „Jaké rozhodnutí zákazník právě neumí udělat a jak mu ho zjednodušíme?“
+
+Marketing, který neotravuje, nepotřebuje sledovat člověka přes půl internetu. Potřebuje dobrý archiv odpovědí, jasné distribuční kanály a měření, které pomáhá zlepšovat obsah bez sběru zbytečných osobních dat.
+
+### 15.1 Stavte obsah podle nákupních otázek
+
+Neplánujte obsah jen podle formátu. „Napíšeme blogpost, newsletter a LinkedIn post“ není strategie. Je to seznam krabiček. Začněte typem otázky, kterou zákazník řeší.
+
+Praktická mapa otázek:
+
+| Fáze | Otázka zákazníka | Vhodný obsah | Cíl |
+| --- | --- | --- | --- |
+| Problém | „Proč nám web nepřivádí poptávky?“ | diagnostický článek, checklist | pojmenovat bolest |
+| Možnosti | „Máme koupit šablonu, CMS nebo vývoj na míru?“ | srovnání přístupů | pomoct vybrat směr |
+| Riziko | „Co se pokazí u SaaSu s osobními daty?“ | bezpečnostní a provozní návod | snížit nejistotu |
+| Rozhodnutí | „Proč zrovna vy?“ | case study, ukázka procesu | dokázat důvěryhodnost |
+| Provoz | „Jak to budeme spravovat po spuštění?“ | dokumentace, release notes, support postup | ukázat dlouhodobou péči |
+
+Každý dobrý obsahový kus by měl mít jednu hlavní otázku a jednu jasnou odpověď. Pokud článek slibuje „kompletní průvodce digitální transformací“ a po 2 000 slovech pořád není jasné, co má čtenář udělat, je to spíš mlha než marketing.
+
+Praktický formát pro plánování:
+
+```markdown
+Téma: Privacy-first analytika pro B2B web
+Otázka: Jak měřit kampaně bez invazivního trackingu?
+Čtenář: zakladatel malého SaaSu nebo marketér
+Po přečtení má umět: rozhodnout, co měřit a co nesbírat
+Primární CTA: stáhnout checklist nebo objednat audit měření
+Distribuce: blog, RSS, LinkedIn výtah, interní odkaz z landing page
+Měření: zobrazení článku, klik na checklist, poptávka s UTM parametrem
+```
+
+### 15.2 Vytvořte obsahové pilíře, ne hromádku náhodných textů
+
+Malý tým potřebuje opakovatelnost. Obsahové pilíře jsou témata, ke kterým se vracíte dlouhodobě, protože přímo souvisí s produktem, službou a obchodní strategií.
+
+Pro Dreamind styl by pilíře mohly vypadat takto:
+
+- **Web jako obchodní systém:** landing pages, SEO, výkon, formuláře, konverze.
+- **SaaS provoz:** onboarding, billing, role, audit log, support, release notes.
+- **Privacy-first Evropa:** EU hosting, data minimization, analytika bez šmírování, DPA, incidenty.
+- **AI v praktickém provozu:** automatizace, interní asistenti, kontrola dat, bezpečné workflow.
+- **Produktivita malého týmu:** dokumentace, rozhodovací logy, méně nástrojů, lepší proces.
+
+Ke každému pilíři si vytvořte jeden hlavní „pillar“ článek a několik podpůrných textů. Hlavní článek vysvětluje téma široce. Podpůrné texty řeší konkrétní otázky a interně odkazují zpět.
+
+Příklad pro pilíř „Privacy-first Evropa“:
+
+- hlavní článek: „Privacy-first provoz webu a SaaSu v Evropě“;
+- podpůrný článek: „Jak měřit kampaně bez third-party cookies“;
+- podpůrný článek: „Co má být v DPA pro malý SaaS“;
+- podpůrný článek: „Checklist EU hostingu před spuštěním“;
+- case study: „Jak jsme odstranili z webu invazivní tracking a neztratili obchodní přehled“.
+
+Google ve svých Search Central materiálech dlouhodobě zdůrazňuje užitečný, spolehlivý obsah pro lidi a dobrou technickou dostupnost stránky. Přeloženo do Codyho řeči: pište věci, které člověku fakt pomůžou, a nechte vyhledávač, ať je umí normálně přečíst. Žádná šamanistická SEO aromalampa není potřeba.
+
+### 15.3 Distribuce začíná doma
+
+Největší chyba obsahového marketingu je spoléhat na jeden cizí algoritmus. Sociální síť může změnit dosah, pravidla, API i náladu rychleji, než stihnete říct „engagement“. Proto musí mít obsah vlastní domov.
+
+Priorita kanálů:
+
+1. **Vlastní web** — kanonická verze obsahu, interní odkazy, archiv, strukturovaná data.
+2. **RSS feed** — přímý odběr bez platformního prostředníka.
+3. **E-mail jen s jasným souhlasem** — žádné kupované databáze a žádné „našli jsme váš kontakt na internetu“ kouzlení.
+4. **Přímé odkazy** — posílání relevantního článku konkrétnímu člověku nebo klientovi.
+5. **Sociální sítě** — výtah, komentář, diskuze, ale ne jediný zdroj návštěvnosti.
+6. **Komunity a partneři** — sdílení tam, kde je téma opravdu užitečné.
+
+RSS je pořád podceňovaný superkanál. Není sexy, neposílá vám konfety a neříká tomu „creator economy“, ale dává čtenáři kontrolu. W3C WebSub navíc ukazuje, že i otevřená publikační infrastruktura může fungovat s automatickým doručováním aktualizací bez uzamčení do jedné platformy.
+
+Privacy-first distribuce znamená:
+
+- čtenář může sledovat obsah bez účtu na sociální síti,
+- každý článek má stabilní URL,
+- sdílení funguje obyčejným odkazem, ne externím tracking skriptem,
+- newsletter není povinná brána k obsahu,
+- odhlášení z e-mailu je jednoduché a respektované,
+- analytika měří výkon obsahu agregovaně, ne osobní pohyb jednotlivce.
+
+### 15.4 Jeden obsah, více užitečných výstupů
+
+Recyklace obsahu není ostuda. Ostuda je publikovat stejnou vatu v pěti formátech a tvářit se, že vznikla strategie. Dobrý postup je vzít jeden kvalitní zdrojový materiál a přepsat ho pro různé situace.
+
+Příklad z jednoho článku „Checklist před spuštěním SaaSu v EU“:
+
+- blogový článek vysvětlí celý kontext,
+- samostatný checklist slouží jako praktický tahák,
+- krátký LinkedIn post vytáhne tři nejčastější chyby,
+- interní prodejní e-mail pošle checklist relevantnímu leadu,
+- support dokumentace rozpracuje část o rolích a exportu dat,
+- release note odkáže na checklist při spuštění nové bezpečnostní funkce.
+
+Při repurposingu měňte úhel, ne jen délku. Čtenář na blogu chce kontext. Člověk na sociální síti chce rychlý insight. Zákazník v e-mailu chce vědět, proč je to relevantní právě pro něj.
+
+Praktický rytmus pro malý tým:
+
+- 1× měsíčně jeden hlubší článek nebo case study,
+- 2–4× měsíčně krátký praktický návod,
+- průběžně aktualizace starších článků podle změn produktu a zdrojů,
+- každý release proměnit aspoň v interní poznámku, někdy v veřejný text,
+- každý opakovaný support dotaz zvážit jako kandidáta na obsah.
+
+### 15.5 Měřte obsah bez zbytečného sledování
+
+Měření obsahu má odpovědět na rozhodovací otázky:
+
+- Která témata přivádějí relevantní návštěvníky?
+- Které články pomáhají před poptávkou nebo trialem?
+- Kde lidé klikají na další krok?
+- Které texty potřebují aktualizovat?
+- Jaké kanály přivádějí poptávky s dobrým kontextem?
+
+K tomu nepotřebujete vědět, že konkrétní člověk četl článek v úterý ve 22:13, pak si odskočil na lednici a ve čtvrtek se vrátil z jiného zařízení. Potřebujete agregovaná data, UTM parametry, serverové logy s rozumnou retencí a kvalitní CRM poznámku u poptávky.
+
+Minimum metrik:
+
+- návštěvy článku podle zdroje,
+- kliknutí na primární CTA,
+- poptávky nebo registrace, které přišly přes obsah,
+- nejčastější interní vyhledávání na webu,
+- počet aktualizovaných článků za měsíc,
+- počet support dotazů vyřešených odkazem na existující obsah.
+
+UTM používejte střídmě a čitelně:
+
+```text
+?utm_source=linkedin&utm_medium=social&utm_campaign=saas-eu-checklist
+?utm_source=rss&utm_medium=feed&utm_campaign=monthly-guide
+?utm_source=client-email&utm_medium=direct&utm_campaign=privacy-audit
+```
+
+Nepište do UTM osobní údaje, názvy konkrétních firem bez důvodu ani interní poznámky typu `utm_campaign=honza_lead_velky_problem`. URL často končí ve sdílených nástrojích, logách a přeposlaných e-mailech. Co byste nechtěli vidět ve veřejném screenshotu, nedávejte do parametru.
+
+### 15.6 Redakční workflow bez korporátního divadla
+
+Obsah nepotřebuje desetičlennou komisi. Potřebuje jasné vlastnictví, termíny a kritéria kvality.
+
+Jednoduchý workflow:
+
+1. **Nápad** — otázka zákazníka, zdroj inspirace, vazba na pilíř.
+2. **Brief** — pro koho je text, co má člověk umět po přečtení, jaké zdroje ověřit.
+3. **Draft** — první verze bez ladění každé věty.
+4. **Odborná kontrola** — fakta, právní a privacy rizika, technická přesnost.
+5. **Editace** — struktura, příklady, CTA, interní odkazy.
+6. **Publikace** — metadata, kanonická URL, RSS, sitemap, distribuce.
+7. **Údržba** — datum poslední revize a důvod aktualizace.
+
+Každý publikovaný text by měl mít:
+
+- vlastníka,
+- datum publikace,
+- datum poslední kontroly,
+- primární cílovou skupinu,
+- hlavní CTA,
+- zdroje,
+- interní odkazy na související obsah,
+- poznámku, kdy text zkontrolovat znovu.
+
+Obsah zastarává. U článků o právu, cenách, konkrétních nástrojích, bezpečnosti nebo SEO praktikách si rovnou naplánujte revizi. U evergreen textů stačí méně často, ale i ty by měly občas projít kontrolou, jestli pořád odrážejí produkt a positioning.
+
+### Codyho komentář: marketing je slib, provoz je důkaz
+
+Obsahový marketing se často rozbije na tom, že firma píše krásné sliby, ale produkt, support a onboarding je neumí splnit. To je nejrychlejší cesta k nedůvěře.
+
+Můj pohled — Cody: nejlepší marketing pro malý SaaS je veřejně přemýšlet nad problémy, které opravdu řešíte, a pak ukázat, jak je řeší produkt, dokumentace i provoz. Když tvrdíte „privacy-first“, musí to být vidět v analytice, formulářích, supportu, hostingu i distribuci obsahu. Jinak je to jen hezká fráze v kabátku z bio bavlny.
+
+### Checklist: obsahový marketing a distribuce
+
+- [ ] Máme 3–5 obsahových pilířů navázaných na produkt a obchod.
+- [ ] Každý plánovaný obsah odpovídá na konkrétní zákaznickou otázku.
+- [ ] Vlastní web je kanonický domov obsahu.
+- [ ] Web má funkční RSS feed nebo jasný plán jeho doplnění.
+- [ ] Sociální sítě používáme jako distribuční vrstvu, ne jako jediný archiv.
+- [ ] Newsletter sbírá jen dobrovolné přihlášky a má jednoduché odhlášení.
+- [ ] UTM parametry neobsahují osobní údaje ani citlivý obchodní kontext.
+- [ ] Každý článek má vlastníka, datum kontroly a zdroje.
+- [ ] Opakované support dotazy se převádějí na dokumentaci nebo blog.
+- [ ] Měříme agregovaně výkon obsahu, ne osobní profil čtenáře.
+
+### Mini cvičení: obsahový plán na 90 minut
+
+Vezměte jeden produkt nebo službu a vyplňte tuto tabulku:
+
+| Pilíř | Otázka zákazníka | Formát | CTA | Distribuce | Zdroj dat pro zlepšení |
+| --- | --- | --- | --- | --- | --- |
+| Privacy-first Evropa | „Jak poznám, že náš web zbytečně nesbírá data?“ | checklist | audit měření | blog + RSS + přímý odkaz | kliky na audit, dotazy v poptávce |
+| SaaS provoz | „Co musí umět administrace před prvním enterprise klientem?“ | návod | konzultace architektury | blog + LinkedIn výtah | čas na stránce, odpovědi sales týmu |
+| Web jako obchodní systém | „Proč máme návštěvnost, ale málo poptávek?“ | diagnostický článek | landing page audit | blog + case study odkaz | konverze na audit |
+
+Pak vyberte jen jeden řádek a napište brief:
+
+1. Pro koho text je.
+2. Jaké rozhodnutí má zjednodušit.
+3. Jaký příklad nebo checklist musí obsahovat.
+4. Jaké zdroje je potřeba ověřit.
+5. Kde se bude distribuovat první týden.
+
+Za 90 minut nemusíte mít hotový článek. Máte mít dobrý plán, který zabrání tomu, aby další text vznikl jen proto, že „bychom měli být víc vidět“. Vidět je fajn. Být užitečný je lepší.
+
+### Zdroje ke kapitole 15
+
+- Google Search Central: [SEO Starter Guide](https://developers.google.com/search/docs/fundamentals/seo-starter-guide)
+- Google Search Central: [Creating helpful, reliable, people-first content](https://developers.google.com/search/docs/fundamentals/creating-helpful-content)
+- RSS Advisory Board: [RSS 2.0 Specification](https://www.rssboard.org/rss-specification)
+- W3C: [WebSub Recommendation](https://www.w3.org/TR/websub/)
+- European Commission: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
+
+---
+
 ## Pracovní log
+- 2026-08-21: Dopsána kapitola 15 „Obsahový marketing a distribuční kanály“ s obsahovými pilíři, RSS a vlastní distribucí, repurposingem, privacy-first měřením, redakčním workflow, checklistem a ověřenými zdroji.
+
 - 2026-08-21: Dopsána kapitola 14 „Support, dokumentace a release notes“ s mapou dotazů, Diátaxis strukturou dokumentace, privacy-first support procesem, release notes, incident šablonami, checklistem a ověřenými zdroji.
 
 - 2026-08-21: Dopsána kapitola 13 „Administrace, role a auditní stopa“ s RBAC modelem, citlivými akcemi, audit logem, support přístupem, exportem dat, testováním oprávnění, checklistem a ověřenými zdroji.
