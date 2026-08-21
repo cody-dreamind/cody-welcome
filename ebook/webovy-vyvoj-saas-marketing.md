@@ -4879,7 +4879,347 @@ Po auditu vyberte jednu věc k okamžitému zlepšení. Ne deset. Jednu. Třeba 
 
 ---
 
+## 24. Checklist před spuštěním
+
+Spuštění webu nebo SaaS produktu není slavnostní okamžik, kdy se klikne na zelené tlačítko a tým odejde na dort. Tedy může být dort, nejsem barbar. Ale produktově je launch hlavně kontrolovaný přechod z interního světa do reality: uživatelé klikají jinak, formuláře se vyplňují kreativně, cache si dělá vlastní poezii a první skutečný zákazník často objeví věc, kterou deset testovacích účtů elegantně minulo.
+
+Dobrá předstartovní kontrola nemá být šanon o 80 stranách. Má zabránit drahým chybám, sjednotit odpovědnost a dát týmu klid, že se po spuštění ví, co sledovat a kdo co řeší. U malého týmu je ideální checklist, který se dá projít za 2–4 hodiny před menší změnou a za 1–2 dny před větším spuštěním.
+
+Princip je jednoduchý: **neověřujte všechno, ověřte nejdůležitější rizika**. Pokud launch pokazí jeden špatný meta title, je to nepříjemné. Pokud pokazí platby, přihlášení, consent, zálohy nebo e-mailové doručování, je to už malý provozní cirkus se vstupným zdarma.
+
+*Codyho komentář: launch checklist není nedůvěra v tým. Je to důvěra v realitu, že i chytrým lidem občas uteče zatržítko. Realita má bohužel velmi dobré QA oddělení.*
+
+### 24.1 Nejdřív napište rozsah spuštění
+
+První otázka nezní „máme všechno hotové?“. Ta otázka je past, protože odpověď bude vždycky „skoro“. Lepší je napsat, co přesně se spouští a co se vědomě nespouští.
+
+Krátký launch brief:
+
+```text
+Název spuštění: Nová landing page pro konzultace
+Datum a čas: 2026-08-24 09:00
+Vlastník: Jana
+Primární cíl: zvýšit počet kvalifikovaných poptávek
+Primární konverze: odeslaný formulář / rezervace hovoru
+Dotčené části: homepage, stránka služby, formulář, CRM integrace, analytika
+Mimo rozsah: blog, pricing, klientská sekce
+Rollback: návrat na předchozí build + vypnutí nové kampaně
+```
+
+U SaaS produktu doplňte:
+
+- které role uživatelů se mění,
+- jestli se mění databázové schéma,
+- zda běží migrace dat,
+- jaké e-maily se začnou posílat,
+- které integrace dostanou nové payloady,
+- co uvidí stávající zákazníci,
+- jak poznáte, že je potřeba rollback.
+
+Rozsah má být tak konkrétní, aby člověk mimo projekt pochopil, co má po spuštění otestovat. Pokud launch brief vypadá jako „nasazení změn Q3“, je to moc široké. To není brief, to je krabice s překvapením.
+
+### 24.2 Obsah, nabídka a důvěra
+
+Před spuštěním si projděte web očima člověka, který vás nezná a má málo času. Nečte vše. Skenuje. Hledá odpověď: „Je to pro mě? Vyřeší to můj problém? Můžu jim věřit? Co mám udělat dál?“
+
+Kontrola obsahu:
+
+- hlavní nadpis říká konkrétní hodnotu, ne interní slogan,
+- první obrazovka vysvětluje komu pomáháte a s čím,
+- každá klíčová stránka má jeden jasný další krok,
+- CTA text říká akci, ne abstraktní „odeslat“,
+- reference, případové studie nebo důkazy jsou blízko rozhodovacím místům,
+- ceny, rozsah služby nebo způsob spolupráce nejsou schované jako tajný quest,
+- právní a provozní informace jsou dostupné, ale nepřebíjejí prodejní text,
+- formuláře říkají, co se stane po odeslání.
+
+Příklad slabého CTA:
+
+```text
+Zjistit více
+```
+
+Lepší CTA:
+
+```text
+Domluvit 30minutovou konzultaci
+```
+
+U SaaS onboarding stránky:
+
+```text
+Vytvořit pracovní prostor a pozvat tým
+```
+
+Před spuštěním si také přečtěte všechny prázdné stavy, validační chyby a potvrzovací zprávy. Tyhle malé texty často rozhodují, jestli uživatel pokračuje, nebo si jde udělat kávu a už se nikdy nevrátí. Chybová hláška „Invalid input“ je technicky pravda, ale lidsky k ničemu.
+
+### 24.3 Technické minimum: rychlost, responzivita, přístupnost
+
+Technický launch checklist není soutěž o perfektní skóre v každém nástroji. Je to kontrola, že web nebo aplikace nepadají na základních věcech.
+
+Projděte minimálně:
+
+- desktop, mobil a tablet pro hlavní scénáře,
+- hlavní prohlížeče, které používají vaši zákazníci,
+- navigaci klávesnicí přes formuláře a modaly,
+- viditelný focus stav u interaktivních prvků,
+- kontrast textu a tlačítek,
+- alternativní texty u významových obrázků,
+- správnou hierarchii nadpisů,
+- stav bez JavaScriptu tam, kde je potřeba alespoň informační fallback,
+- rychlost načtení klíčových stránek,
+- velikost obrázků, lazy loading a fonty,
+- chování při pomalém připojení.
+
+WCAG 2.2 je dobrý referenční rámec pro přístupnost: ne proto, aby si malý tým hrál na právní kancelář, ale protože testovatelná pravidla pomáhají odhalit praktické bariéry. U launch kontroly začněte minimem: formuláře musí jít vyplnit klávesnicí, chyby musí být čitelné, focus nesmí mizet a ovládací prvky musí mít srozumitelný název.
+
+Rychlost řešte z pohledu uživatele, ne jen laboratorního skóre. Pokud homepage váží několik megabajtů kvůli hero videu, které nikdo nepotřebuje, máte obchodní problém v kostýmu designu. U SaaS aplikace zase hlídejte, aby první produktový úkol nebyl blokovaný půlminutovým načítáním dashboardu.
+
+### 24.4 SEO a sdílení: aby stránka šla najít i poslat
+
+SEO před spuštěním není o tom, že napíšete 40 klíčových slov do patičky a budete doufat, že vyhledávač dostane nostalgii po roce 2003. Jde o to, aby vyhledávače i lidé pochopili obsah a aby stránka vypadala dobře při sdílení.
+
+Kontrola pro každou veřejnou důležitou stránku:
+
+- unikátní `<title>`,
+- meta description odpovídající obsahu,
+- jeden hlavní nadpis H1,
+- kanonická URL,
+- čitelné slugy,
+- Open Graph název, popis a obrázek,
+- strukturovaná data tam, kde dávají smysl,
+- interní odkazy z relevantních stránek,
+- žádné omylem nastavené `noindex`,
+- funkční `robots.txt`,
+- aktuální `sitemap.xml`,
+- správné přesměrování starých URL.
+
+Google Search Central dlouhodobě zdůrazňuje užitečný, dobře strukturovaný obsah a technickou dostupnost pro crawlování. Prakticky: stránka má jít načíst, pochopit, indexovat a sdílet bez toho, aby vyhledávač musel hádat, co vlastně nabízíte.
+
+Mini test sdílení:
+
+1. Zkopírujte URL do interního chatu.
+2. Zkontrolujte náhled: název, popis, obrázek.
+3. Otevřete URL v anonymním okně.
+4. Zkuste stránku najít přes interní navigaci.
+5. Ověřte, že stránka není dostupná jen z kampaně nebo tajného odkazu.
+
+### 24.5 Konverze, formuláře a e-maily
+
+Formuláře jsou místo, kde se marketing potkává s realitou backendu. Před spuštěním otestujte každý formulář ručně, a to včetně chybových stavů. Nestačí, že „to prošlo u mě“.
+
+Checklist formuláře:
+
+- povinná pole jsou opravdu nutná,
+- validace je srozumitelná,
+- ochrana proti spamu neblokuje běžné uživatele,
+- po odeslání přijde potvrzení uživateli, pokud ho slibujete,
+- interní notifikace dorazí správnému člověku nebo týmu,
+- lead se propíše do správného systému,
+- UTM parametry se ukládají jen v rozumném rozsahu,
+- souhlas je oddělený od podmínek, pokud má jiný účel,
+- uživatel ví, co bude další krok,
+- osobní data nejdou do URL, logů ani náhodných alertů.
+
+U SaaS produktu přidejte kontrolu e-mailů:
+
+- ověřovací e-mail,
+- pozvánka do týmu,
+- reset hesla,
+- potvrzení platby,
+- selhaná platba,
+- upozornění na změnu role,
+- bezpečnostní oznámení,
+- uvítací onboarding.
+
+Každý e-mail má mít jasný předmět, lidský text, přímý odkaz na akci a informaci, proč ho člověk dostal. U bezpečnostních e-mailů nepište marketingové fráze. Když někdo resetuje heslo, nepotřebuje slyšet, že „společně měníme budoucnost práce“. Potřebuje vědět, co se stalo a co má dělat, pokud to nebyl on.
+
+### 24.6 Privacy-first a právní minimum
+
+Privacy-first kontrola má odpovědět na otázku: **víme, jaká data sbíráme, proč, kde leží, komu je posíláme a jak dlouho je držíme?** Pokud ne, launch ještě není hotový.
+
+Před spuštěním ověřte:
+
+- cookie a tracker inventář,
+- seznam zpracovatelů,
+- datové toky formulářů a integrací,
+- právní základ pro jednotlivé účely,
+- retenční doby,
+- export a mazání účtu,
+- přístupová práva interního týmu,
+- support přístup k zákaznickým datům,
+- logování citlivých údajů,
+- zálohy a jejich obnovu,
+- privacy policy a obchodní podmínky,
+- DPA nebo zpracovatelské smlouvy u B2B služby.
+
+Evropský provoz berte jako defaultní volbu, ne marketingovou nálepku. Pokud používáte externí službu mimo EU nebo službu s nejasným tokem dat, napište si proč, jaká data tam jdou a jestli existuje rozumná evropská alternativa. Někdy může být výjimka oprávněná. Neoprávněné je nevědět.
+
+Praktický privacy launch test:
+
+```text
+Vytvoř testovací účet.
+Vyplň všechny hlavní formuláře.
+Zkontroluj analytiku, CRM, e-mailing, logy a error tracking.
+Sepiš, kde se testovací e-mail objevil.
+Smaž účet nebo lead.
+Ověř, co zůstalo a proč.
+```
+
+Tohle cvičení je nepříjemně užitečné. Během hodiny často najdete víc privacy rizik než během tří meetingů s názvem „data governance alignment“.
+
+### 24.7 Bezpečnost a provozní připravenost
+
+Bezpečnost před launchem nezačíná penetračním testem za statisíce. Začíná tím, že základní věci nejsou rozbité.
+
+Minimum:
+
+- MFA pro administrátory,
+- oddělené účty místo sdílených hesel,
+- princip nejmenších oprávnění,
+- bezpečné ukládání tajemství mimo repozitář,
+- aktualizované závislosti,
+- kontrola známých zranitelností,
+- ochrana proti základním OWASP rizikům,
+- rate limiting u citlivých endpointů,
+- audit log u administrátorských akcí,
+- monitoring chyb a dostupnosti,
+- zálohy a otestovaná obnova,
+- rollback postup.
+
+OWASP Top 10 berte jako praktický seznam rizik, která se vyplatí mít v hlavě i u menších aplikací: broken access control, cryptographic failures, injection, misconfiguration nebo slabá autentizace nejsou problémy jen pro enterprise. Malý SaaS umí bolet stejně, jen má menší tým na hašení.
+
+Provozní checklist:
+
+- [ ] Víme, kdo drží launch pohotovost první den.
+- [ ] Víme, kde sledovat chyby, výkon a konverze.
+- [ ] Máme kontakt na hosting, DNS, e-mailing a platební bránu.
+- [ ] Máme připravenou krátkou incident zprávu pro zákazníky.
+- [ ] Máme rollback krok po kroku.
+- [ ] Víme, které metriky po spuštění sledujeme každou hodinu.
+- [ ] Víme, kdy launch zastavit.
+
+### 24.8 Platební, obchodní a support scénáře
+
+Pokud produkt bere peníze, platby musí projít end-to-end. Testovací režim nestačí, pokud jste nikdy neověřili produkční konfiguraci. Ideálně proveďte malou reálnou platbu a refund.
+
+Zkontrolujte:
+
+- založení zákazníka,
+- výběr tarifu,
+- platbu kartou nebo převodem,
+- vystavení faktury,
+- daňové údaje,
+- změnu tarifu,
+- zrušení předplatného,
+- refund,
+- selhanou platbu,
+- upozornění internímu týmu,
+- stav účtu po expiraci trialu.
+
+U služby bez online plateb ověřte obchodní cestu:
+
+- poptávka dorazí správně,
+- tým ví, kdo odpovídá,
+- existuje odpovědní šablona,
+- schůzka jde rezervovat,
+- nabídka má jasný další krok,
+- lead nezůstane viset bez majitele.
+
+Support připravte ještě před prvními dotazy. Stačí jednoduchý dokument:
+
+```text
+Nejčastější otázky
+Známé limity
+Jak eskalovat technický problém
+Jak požádat o dočasný support přístup
+Jak vrátit platbu
+Jak nahlásit bezpečnostní problém
+```
+
+Launch bez support přípravy je jako otevřít kavárnu a zjistit, že nikdo neví, kde jsou hrnky. Romantické jen v sitcomu.
+
+### 24.9 Launch den: malý řídicí panel
+
+V den spuštění nepotřebujete třicet grafů. Potřebujete krátký panel, který ukáže, jestli se děje něco důležitého.
+
+Sledujte:
+
+- dostupnost webu nebo aplikace,
+- chybovost hlavních endpointů,
+- rychlost klíčových stránek,
+- počet registrací nebo leadů,
+- dokončení primární konverze,
+- doručitelnost e-mailů,
+- platby a selhané platby,
+- support dotazy,
+- neobvyklé bezpečnostní události,
+- zpětnou vazbu od prvních uživatelů.
+
+Nastavte si tři prahy:
+
+| Stav | Co znamená | Akce |
+| --- | --- | --- |
+| Zelená | Vše funguje v očekávaném rozsahu. | Sledujeme, odpovídáme, zapisujeme poznámky. |
+| Oranžová | Něco je rozbité, ale existuje workaround. | Opravujeme, komunikujeme dotčeným lidem, držíme launch. |
+| Červená | Selhává klíčová funkce nebo hrozí ztráta dat. | Stop kampaní, rollback nebo hotfix podle playbooku. |
+
+Po launchi udělejte krátké vyhodnocení do 48 hodin:
+
+- Co fungovalo?
+- Co nefungovalo?
+- Co jsme museli řešit ručně?
+- Jaké otázky měli uživatelé?
+- Co chybělo v dokumentaci?
+- Jaké metriky byly užitečné a jaké jen dělaly hluk?
+- Co upravíme před dalším spuštěním?
+
+### Univerzální checklist před spuštěním
+
+- [ ] Launch brief popisuje rozsah, vlastníka, cíl a rollback.
+- [ ] Hlavní stránka vysvětluje hodnotu, cílovku a další krok.
+- [ ] Veřejné stránky mají titulky, popisy, OG metadata, kanonické URL a interní odkazy.
+- [ ] `robots.txt` a `sitemap.xml` odpovídají tomu, co má být indexované.
+- [ ] Klíčové scénáře fungují na mobilu, desktopu a klávesnici.
+- [ ] Formuláře mají srozumitelnou validaci, potvrzení a správné datové toky.
+- [ ] E-maily se odesílají, doručují a vysvětlují důvod zprávy.
+- [ ] Analytika měří rozhodnutí, ne identitu návštěvníka.
+- [ ] Cookie a zpracovatelský inventář odpovídá realitě.
+- [ ] Administrátoři mají MFA a oddělené účty.
+- [ ] Tajemství nejsou v repozitáři ani v klientském kódu.
+- [ ] Zálohy existují a obnova byla aspoň jednou otestovaná.
+- [ ] Monitoring sleduje dostupnost, chyby a klíčové konverze.
+- [ ] Platby, faktury, trialy a refundy jsou otestované, pokud se jich launch týká.
+- [ ] Support ví, co se spouští a jak eskalovat problém.
+- [ ] Existuje stručná incident a rollback šablona.
+- [ ] Po launchi je naplánované 48hodinové vyhodnocení.
+
+### Mini cvičení: předstartovní kontrola za 120 minut
+
+Pokud nemáte čas na ideální launch proces, udělejte alespoň tohle:
+
+1. **20 minut:** napište launch brief, rozsah a rollback.
+2. **20 minut:** projděte homepage nebo hlavní produktový tok jako nový uživatel.
+3. **20 minut:** otestujte formulář, e-mail a interní notifikaci.
+4. **20 minut:** zkontrolujte mobil, klávesnici, kontrast a největší obrázky.
+5. **20 minut:** projděte privacy datový tok jednoho testovacího uživatele.
+6. **20 minut:** ověřte monitoring, odpovědnosti a první support odpověď.
+
+Výsledek nemusí být dokonalý. Má být použitelný. Když najdete pět problémů a tři opravíte před spuštěním, právě jste si koupili klid levněji než krizovým meetingem v pátek večer.
+
+### Zdroje ke kapitole 24
+
+- W3C: [Web Content Accessibility Guidelines (WCAG) 2.2](https://www.w3.org/TR/WCAG22/)
+- OWASP: [OWASP Top 10:2021](https://owasp.org/Top10/2021/)
+- Google Search Central: [SEO Starter Guide](https://developers.google.com/search/docs/fundamentals/seo-starter-guide)
+- Google Search Central: [Get started with Search: a developer's guide](https://developers.google.com/search/docs/fundamentals/get-started-developers)
+- European Commission: [Data protection under GDPR](https://commission.europa.eu/law/law-topic/data-protection/data-protection-eu_en)
+
+---
+
 ## Pracovní log
+- 2026-08-21: Dopsána kapitola 24 „Checklist před spuštěním“ s launch briefem, kontrolou obsahu, techniky, SEO, formulářů, privacy-first provozu, bezpečnosti, plateb, supportu, launch panelem, checklistem a ověřenými zdroji.
+
 - 2026-08-21: Dopsána kapitola 23 „Privacy-first provoz v Evropě“ s mapou dat, evropským defaultem, oddělením datových vrstev, přístupy, logy, zálohami, exportem, onboardingem, checklistem a ověřenými zdroji.
 
 - 2026-08-21: Dopsána kapitola 22 „Dokumentace jako firemní paměť“ s typy dokumentace, jedním zdrojem pravdy, ADR, privacy dokumentací, workflow aktualizacemi, revizemi, checklistem a ověřenými zdroji.
