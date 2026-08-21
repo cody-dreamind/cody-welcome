@@ -339,7 +339,196 @@ Není cílem mít dokonalý slogan. Cílem je mít větu, podle které poznáte,
 
 ---
 
+## 3. Landing page, která odpovídá na správné otázky
+
+Landing page není menší homepage. Je to stránka s jedním konkrétním úkolem: pomoct správnému návštěvníkovi rozhodnout se, jestli má udělat další krok. Čím je stránka konkrétnější, tím méně musí návštěvník hádat. A hádání je v marketingu drahé — lidé při něm odcházejí, obchodníci pak dovysvětlují a tým má pocit, že „web asi nefunguje“.
+
+Dobrá landing page nevyhrává tím, že má nejvíc animací, gradientů a ikon s raketou. Vyhrává tím, že odpoví na otázky ve správném pořadí:
+
+- Jsem tady správně?
+- Co přesně získám?
+- Proč tomu mám věřit?
+- Co mě to bude stát — peníze, čas, riziko, pozornost?
+- Co se stane po kliknutí?
+- Jak zacházíte s mými daty?
+
+Když stránka tyhle otázky neřeší, návštěvník si odpovědi domyslí. A domýšlení málokdy pracuje ve váš prospěch. Mozek je líný účetní s bezpečnostním školením: když nerozumí nabídce, raději ji zařadí do složky „později“, což často znamená „nikdy“.
+
+### 3.1 Jeden návštěvník, jedna situace, jeden další krok
+
+Nejčastější chyba landing page je snaha obsloužit všechny najednou. Zakladatel chce mluvit na korporace, malé firmy, neziskovky, investory, vývojáře i vlastní maminku, která konečně pochopí, co vlastně dělá. Výsledek je stránka tak obecná, že se v ní nikdo nenajde.
+
+Začněte jednoduchou větou:
+
+> Tato stránka je pro [typ člověka nebo týmu], který právě řeší [konkrétní situaci] a potřebuje [další krok].
+
+Příklady:
+
+- Stránka je pro B2B firmy, které chtějí nahradit tabulkový proces jednoduchým interním portálem a potřebují domluvit úvodní workshop.
+- Stránka je pro marketingové týmy, které spouštějí více kampaní měsíčně a potřebují microsites bez čekání na celý vývojový sprint.
+- Stránka je pro malé SaaS týmy, které chtějí přejít z invazivní analytiky na privacy-first měření a potřebují vědět, co se při migraci neztratí.
+
+Jakmile máte tuhle větu, je mnohem snazší rozhodnout, co na stránce zůstane. Pokud blok nepomáhá tomuto člověku v této situaci udělat tento krok, patří pryč nebo na jinou stránku.
+
+*Codyho komentář: mazání sekcí je podceňovaná marketingová disciplína. Přidat blok umí každý. Smazat vlastní oblíbený odstavec a zachránit tím konverzi, to už chce charakter.*
+
+### 3.2 Hero sekce má říct hodnotu, ne jen náladu
+
+První obrazovka stránky musí udělat tři věci: pojmenovat situaci, slíbit konkrétní výsledek a nabídnout další krok. Nemusí vysvětlit všechno. Musí dát návštěvníkovi důvod pokračovat.
+
+Slabý hero:
+
+> Moderní digitální řešení pro váš růst
+
+Silnější hero:
+
+> Spusťte klientský portál pro bezpečné předávání dokumentů do 30 dnů
+
+Podnadpis:
+
+> Navrhneme role, formuláře, auditní stopu a evropský provoz tak, aby klienti nemuseli posílat citlivé soubory e-mailem.
+
+Primární akce:
+
+> Domluvit 30minutovou konzultaci
+
+Sekundární akce:
+
+> Zobrazit příklad portálu
+
+Rozdíl není v poetice. Rozdíl je v rozhodovatelnosti. Druhá varianta říká, co vznikne, pro jaký problém a co má člověk udělat. První varianta by mohla prodávat software, koučink, svíčky nebo nový tarif na tiskárnu. To není dobré znamení.
+
+Hero sekce by měla obsahovat:
+
+- konkrétní výsledek nebo posun,
+- jasný kontext zákazníka,
+- jednu primární výzvu k akci,
+- jeden důkaz nebo upřesnění pod CTA,
+- žádné prázdné superlativy bez vysvětlení.
+
+Pokud používáte vizuál, ať něco vysvětluje. Screenshot workflow, náhled dashboardu, schéma procesu nebo krátká ukázka výsledku je lepší než abstraktní ilustrace lidí ukazujících na modrý oblak. Modrý oblak už toho v B2B marketingu zažil hodně. Nechte ho odpočívat.
+
+### 3.3 Struktura stránky: od bolesti k bezpečnému rozhodnutí
+
+Landing page má vést návštěvníka podobně jako dobrý obchodní rozhovor. Nezačíná technickými detaily. Začíná rozpoznáním situace a postupně snižuje nejistotu.
+
+Praktická struktura:
+
+1. **Hero:** pro koho je nabídka, jaký výsledek slibuje a jaký je další krok.
+2. **Problém:** co dnes zákazníka brzdí, kolik ruční práce nebo rizika to vytváří.
+3. **Řešení:** jak vypadá nový stav a proč je jednodušší než současný chaos.
+4. **Jak to funguje:** tři až pět kroků procesu, ne encyklopedie funkcí.
+5. **Důkazy:** reference, mini case study, screenshot, číslo z vlastních dat nebo konkrétní ukázka výstupu.
+6. **Privacy a provoz:** kde běží data, kdo k nim má přístup, jak se exportují a co se neměří.
+7. **Námitky:** odpovědi na otázky ohledně ceny, migrace, času, bezpečnosti a podpory.
+8. **CTA:** opakovaný další krok s vysvětlením, co se stane po odeslání.
+
+Tahle struktura není vězení. Je to výchozí kostra. U levného self-service SaaSu může být stránka kratší a rychleji vést k registraci. U dražší B2B služby bude potřebovat více důkazů, vysvětlení procesu a často i bezpečnostní sekci.
+
+Důležité je pořadí. Když začnete tabulkou funkcí, návštěvník ještě neví, proč by ho funkce měly zajímat. Když začnete formulářem, neví, co dostane. Když začnete historií firmy, pravděpodobně řešíte vlastní potřebu vyprávět, ne zákazníkovu potřebu rozhodnout se.
+
+### 3.4 Důkazy nemusí být velké, ale musí být konkrétní
+
+Malé firmy často čekají na „velkou referenci“, než začnou používat důkazy. To je škoda. Důkaz nemusí být logo známé značky. Důkaz je cokoli, co snižuje nejistotu a ukazuje, že nabídka existuje v realitě.
+
+Použitelné důkazy:
+
+- krátká citace zákazníka s konkrétním výsledkem,
+- anonymizovaný před/po příklad procesu,
+- screenshot reálného rozhraní bez citlivých dat,
+- ukázka dokumentace nebo onboardingového checklistu,
+- popis typického projektu krok za krokem,
+- veřejný changelog nebo release notes,
+- bezpečnostní a provozní informace napsané lidsky.
+
+Slabý důkaz:
+
+> Naši klienti jsou spokojení.
+
+Silnější důkaz:
+
+> Po nasazení klientského portálu přestal tým posílat smlouvy jako přílohy e-mailů. Každý dokument má vlastní stav, odpovědnou osobu a dohledatelnou historii změn.
+
+Pokud zatím nemáte zákaznické výsledky, ukažte alespoň kvalitu procesu. Například: jak vedete workshop, jak vypadá návrh informační architektury, jak předáváte přístupy, jak dokumentujete incidenty nebo jak probíhá export dat. To všechno jsou důkazy dospělosti. A u privacy-first provozu často rozhodují víc než marketingová nálepka „bezpečné řešení“.
+
+### 3.5 Formulář je součást produktu
+
+Formulář není technická formalita na konci stránky. Je to první skutečný kontakt s vaším systémem. Pokud je dlouhý, zmatený nebo sbírá zbytečné údaje, říká tím: „Naše pohodlí je důležitější než vaše důvěra.“ To není ideální začátek vztahu, pokud zrovna neprodáváte administrativní utrpení jako službu.
+
+Pro poptávkovou landing page často stačí:
+
+- jméno,
+- e-mail,
+- krátký popis situace,
+- volitelně web nebo firma,
+- jasný souhlas s tím, jak odpovíte a jak data použijete.
+
+Nepotřebujete telefon jako povinné pole, pokud první reakce bude e-mailem. Nepotřebujete velikost firmy, rozpočet a oblíbenou barvu CRM, pokud to zjistíte v úvodním hovoru. Každé pole má mít důvod. Když ho nedokážete vysvětlit, smažte ho.
+
+U privacy-first formuláře napište přímo pod odesílací tlačítko:
+
+> Údaje použijeme jen pro odpověď na váš dotaz. Nepřidáme vás do newsletteru bez souhlasu a nepředáváme data reklamním sítím.
+
+Je to krátké, lidské a důvěryhodné. Právní dokumenty mají existovat, ale formulář potřebuje i srozumitelnou mikro-kopii. Návštěvník nemá luštit, jestli se kliknutím přihlašuje ke konzultaci, newsletteru, lead scoringu a možná i k odběru firemního horoskopu.
+
+### 3.6 Měřte rozhodnutí, ne každý pohyb myši
+
+Landing page potřebuje měření, ale ne šmírovací karneval. Privacy-first přístup znamená sledovat jen to, co pomáhá zlepšovat stránku a službu. Většinou stačí několik událostí:
+
+- zobrazení stránky,
+- klik na primární CTA,
+- odeslání formuláře,
+- klik na důkaz nebo case study,
+- stažení checklistu,
+- odchod na dokumentaci nebo pricing.
+
+K tomu přidejte kvalitativní poznámky z obchodních hovorů: jaké otázky se opakují, kde lidé váhají, čemu nerozumí, co je přesvědčilo. Často právě tyhle poznámky zlepší landing page víc než další dashboard.
+
+Praktický rytmus vyhodnocení:
+
+1. Jednou týdně projděte formuláře a hovory.
+2. Vypište tři nejčastější nejasnosti.
+3. Upravte jeden blok stránky.
+4. Změnu zapište do jednoduchého changelogu.
+5. Po dalším týdnu porovnejte kvalitu poptávek, ne jen počet kliků.
+
+Měření má sloužit rozhodnutí, ne vyrábět iluzi kontroly. Pokud máte deset grafů a žádnou změnu v textu, stránce ani nabídce, neměříte. Jen sbíráte digitální prach.
+
+### Checklist: landing page
+
+- [ ] Stránka je napsaná pro jednu jasnou situaci zákazníka.
+- [ ] Hero sekce říká konkrétní výsledek a další krok.
+- [ ] Primární CTA je na stránce konzistentní a vizuálně jasné.
+- [ ] Každý blok pomáhá rozhodnutí: vysvětluje hodnotu, důkaz, proces nebo námitku.
+- [ ] Důkazy jsou konkrétní: screenshot, příklad, citace, proces nebo mini case study.
+- [ ] Formulář sbírá jen údaje, které opravdu potřebujete.
+- [ ] U formuláře je lidsky napsané, jak s daty naložíte.
+- [ ] Stránka neobsahuje reklamní trackery ani zbytečné externí skripty.
+- [ ] Měříte klíčové akce, ne každý pohyb návštěvníka.
+- [ ] Máte jednoduchý rytmus pro úpravy podle reálných dotazů a výsledků.
+
+### Mini šablona: první verze landing page za 90 minut
+
+Vezměte jednu nabídku a vyplňte následující kostru. Nepište ještě finální copy. Nejdřív odpovězte věcně:
+
+1. Pro koho je stránka: `_____`.
+2. Jakou situaci řeší: `_____`.
+3. Jaký výsledek slibuje: `_____`.
+4. Co je první krok: `_____`.
+5. Jak dnes vypadá problém: `_____`.
+6. Jak vypadá lepší stav: `_____`.
+7. Jaké jsou tři kroky spolupráce nebo používání produktu: `_____`.
+8. Jaký důkaz můžete ukázat hned: `_____`.
+9. Jaká je největší námitka: `_____`.
+10. Co jasně říct o datech, provozu a soukromí: `_____`.
+
+Z odpovědí pak složte stránku. Ne opačně. Když začnete designem bez těchto odpovědí, budete jen přesouvat obdélníky a doufat, že se z nich náhodou stane strategie. Obdélníky jsou fajn. Ale strategii za vás neudělají.
+
+---
+
 ## Pracovní log
+
+- 2026-08-21: Dopsána kapitola 3 „Landing page, která odpovídá na správné otázky“ se strukturou stránky, praktickými příklady, privacy-first formulářem, měřením a checklistem.
 
 - 2026-08-21: Dopsána kapitola 2 „Ideální zákazník, nabídka a positioning“ s příklady segmentace, nabídkou, positioningem a checklistem.
 
