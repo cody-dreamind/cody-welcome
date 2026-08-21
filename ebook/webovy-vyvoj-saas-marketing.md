@@ -1876,9 +1876,243 @@ Potom škrtňte polovinu nápadů. Ano, polovinu. Produkt nezačne být lepší 
 - OWASP: [API Security Project](https://owasp.org/www-project-api-security/)
 - OWASP: [API1:2023 Broken Object Level Authorization](https://owasp.org/API-Security/editions/2023/en/0xa1-broken-object-level-authorization/)
 
+
+---
+
+## 11. Onboarding a aktivace uživatele
+
+Onboarding není prohlídka produktu s pěti bublinami a konfety po kliknutí na tlačítko. Onboarding je cesta od prvního slibu k prvnímu skutečnému výsledku. U SaaS produktu rozhoduje o tom, jestli se uživatel dostane přes počáteční nejistotu, pochopí hodnotu a vrátí se i druhý den.
+
+Aktivace není totéž co registrace. Registrace znamená, že někdo vyplnil formulář. Aktivace znamená, že poprvé zažil hodnotu, kvůli které má smysl produkt používat dál.
+
+Příklad:
+
+- U nástroje na monitoring webu není aktivace „uživatel vytvořil účet“. Aktivace je „uživatel přidal web, systém provedl první kontrolu a ukázal konkrétní problém nebo potvrzení, že je vše v pořádku“.
+- U fakturačního SaaSu není aktivace „uživatel otevřel dashboard“. Aktivace je „uživatel vystavil první fakturu nebo importoval klienta“.
+- U nástroje na interní dokumentaci není aktivace „uživatel založil workspace“. Aktivace je „tým našel první odpověď bez ptaní se v chatu“.
+
+*Codyho komentář: signup obrazovka není vítězná páska. Je to turniket. Pokud po něm následuje mlha, produkt neprodáváte — pouštíte lidi do labyrintu s logem.*
+
+### 11.1 Navrhněte onboarding od výsledku zpět
+
+Začněte otázkou: **co musí uživatel udělat, aby poprvé cítil „aha, tohle mi šetří práci“?** Teprve potom navrhujte kroky, obrazovky a e-maily.
+
+Praktický postup:
+
+1. Napište jednu aktivační událost.
+2. Vypište kroky, které k ní uživatel musí udělat.
+3. Škrtněte všechno, co není nutné před první hodnotou.
+4. Přesuňte pokročilé volby až po aktivaci.
+5. Přidejte ukázková data, šablonu nebo průvodce tam, kde prázdný stav blokuje pochopení.
+
+Špatně navržený onboarding často vypadá takto:
+
+- vytvořte účet,
+- potvrďte e-mail,
+- vyplňte profil firmy,
+- nastavte fakturační údaje,
+- pozvěte tým,
+- vyberte tarif,
+- propojte integrace,
+- a teprve potom možná uvidíte produkt.
+
+Lepší verze:
+
+- vytvořte účet,
+- zadejte jeden web nebo projekt,
+- produkt ukáže první užitečný výsledek,
+- až potom nabídne doplnění týmu, fakturace a integrací.
+
+To neznamená ignorovat bezpečnost nebo zákonné povinnosti. Znamená to neplést provozní administrativu s první hodnotou. Pokud potřebujete ověřit e-mail kvůli bezpečnosti, udělejte to jasně a rychle. Pokud nepotřebujete adresu firmy před prvním testem, neptejte se na ni jen proto, že v CRM existuje kolonka.
+
+### 11.2 Prázdný stav je součást produktu
+
+Nejhorší první obrazovka SaaSu je prázdný dashboard s textem „zatím tu nic není“. Technicky pravda. Produktově kapitulace.
+
+Prázdný stav má vysvětlit:
+
+- co sem bude patřit,
+- proč to uživatele zajímá,
+- jaký je první krok,
+- kolik času to zabere,
+- co se stane po dokončení.
+
+Příklad pro nástroj na sběr dokumentů od klientů:
+
+> Tady uvidíte dokumenty od klientů podle měsíce a stavu zpracování. Začněte vytvořením prvního klienta nebo použijte ukázkového klienta, abyste si vyzkoušeli celý proces za dvě minuty.
+
+Dobré prázdné stavy často používají jednu ze tří taktik:
+
+- **Ukázková data:** uživatel vidí, jak má hotový výsledek vypadat.
+- **Šablona:** produkt nabídne bezpečný start místo prázdného plátna.
+- **Jedna akce:** obrazovka má jeden jasný další krok, ne katalog všech možností.
+
+U privacy-first SaaSu si dejte pozor na ukázková data. Nikdy nepoužívejte reálná zákaznická data „jen anonymizovaně“, pokud nemáte proces, který opravdu odstraní identifikátory a riziko zpětné identifikace. Pro onboarding raději vytvořte realistická fiktivní data: fiktivní firmu, fiktivní kontakty, fiktivní projekty. Je to nudnější než kopírovat produkci, ale nudné bezpečí je pořád lepší než kreativní incident.
+
+### 11.3 Sbírejte jen data, která zlepší další krok
+
+Každé pole ve formuláři je dluh. Uživatel ho musí pochopit, vyplnit a důvěřovat vám, že s ním naložíte rozumně. Tým ho musí ukládat, chránit, exportovat, mazat a vysvětlit v dokumentaci.
+
+Proto se u každého onboardingového dotazu ptejte:
+
+- Použijeme odpověď hned v dalším kroku?
+- Změní odpověď nastavení produktu?
+- Pomůže odpověď uživateli rychleji k výsledku?
+- Je odpověď povinná z právního, bezpečnostního nebo fakturačního důvodu?
+- Umíme produkt spustit i bez ní?
+
+Pokud odpověď nepotřebujete hned, dejte ji do pozdějšího nastavení. GDPR stojí mimo jiné na principech minimalizace dat a omezení uložení: osobní údaje mají být přiměřené, relevantní, omezené na nezbytné účely a neuchovávané déle, než je nutné. V praxi to není jen právní věta. Je to výborný produktový filtr.
+
+Příklad lepšího pořadí otázek:
+
+| Fáze | Ptejte se | Neptejte se zatím |
+| --- | --- | --- |
+| První spuštění | Název projektu, URL webu, pracovní e-mail | IČO, fakturační adresa, velikost týmu |
+| První hodnota | Co chce uživatel zkontrolovat nebo vytvořit | Kompletní profil firmy |
+| Před pozváním týmu | Role pozvaných lidí | Detailní organizační struktura |
+| Před platbou | Fakturační údaje a souhlas s podmínkami | Marketingové preference nesouvisející s nákupem |
+
+Tím zároveň snižujete support. Uživatel, který vidí méně otázek, udělá méně chyb. A tým nemusí řešit, proč někdo vyplnil „Praha“ do pole pro DIČ, protože už byl unavený z formulářového výslechu.
+
+### 11.4 Vysvětlete bezpečnost tam, kde vzniká obava
+
+Bezpečnostní informace nepatří jen do patičky a právních dokumentů. Patří do okamžiku, kdy se uživatel ptá: „Můžu tomu věřit?“
+
+Typická místa:
+
+- připojení domény nebo webu,
+- pozvání kolegů,
+- nahrání souboru,
+- propojení integrace,
+- zadání platebních údajů,
+- přístup administrátora k zákaznickým datům,
+- export a mazání účtu.
+
+Místo obecného „vaše data jsou v bezpečí“ napište konkrétně:
+
+- „Používáme tento přístup jen ke čtení.“
+- „Token můžete kdykoliv odpojit v nastavení.“
+- „Soubor zpracujeme v evropském prostředí a po 30 dnech smažeme.“
+- „Administrátor přístup vidí v auditní stopě.“
+- „Export připravíme jako ZIP a po stažení ho automaticky odstraníme.“
+
+U autentizace a relací se vyplatí držet ověřených bezpečnostních standardů místo vlastního kouzlení. OWASP ASVS popisuje požadavky na webové aplikace včetně ověřování, správy relací a řízení přístupu. Pro malý SaaS z toho plyne jednoduché minimum: bezpečné session, odhlášení, timeout podle rizika, obnova tokenu po přihlášení, kontrola oprávnění u každé citlivé akce a audit důležitých změn.
+
+Privacy-first onboarding má být klidný, ne paranoidní. Uživatel nepotřebuje bezpečnostní román. Potřebuje v pravou chvíli vědět, co se stane s jeho daty a jak nad nimi drží kontrolu.
+
+### 11.5 Onboardingové e-maily: méně sekvencí, více užitku
+
+E-mail je užitečný, pokud pomáhá uživateli vrátit se k rozdělané hodnotě. Je otravný, pokud jen imituje zájem automatem.
+
+Dobrá onboardingová sekvence může mít tři typy zpráv:
+
+1. **Dokončení prvního výsledku:** „Přidejte první projekt, kontrola zabere dvě minuty.“
+2. **Vysvětlení konkrétní hodnoty:** „Tady jsou tři věci, které z reportu poznáte.“
+3. **Bezpečný další krok:** „Pozvěte kolegu s rolí pouze pro čtení.“
+
+Neposílejte sérii sedmi e-mailů jen proto, že marketingový nástroj má šablonu „SaaS onboarding drip campaign“. Pokud uživatel první hodnotu zažil, další zpráva má prohlubovat použití. Pokud ji nezažil, má pomoci odstranit překážku. Pokud produkt nepotřebuje, respektujte to a nechte ho odejít bez digitálního tahání za rukáv.
+
+Privacy-first pravidla pro onboardingové e-maily:
+
+- používejte transakční e-maily tam, kde uživatel očekává informaci,
+- marketingové sdělení oddělte od provozního sdělení,
+- nepoužívejte skryté trackovací pixely jako výchozí odpověď na každou otázku,
+- dávejte přímé odkazy místo sociálních skriptů,
+- nabídněte RSS nebo changelog pro lidi, kteří nechtějí newsletter,
+- jasně řekněte, jak se odhlásit z neprovozní komunikace.
+
+Měření otevření e-mailu je lákavé, ale často nepřesné a invazivní. Pro aktivaci je užitečnější sledovat produktové události, které mají vztah k hodnotě: první projekt, první import, první report, první pozvaný kolega, první export. A i ty měřte agregovaně a s rozumnou retencí.
+
+### 11.6 Udělejte checklist aktivace pro tým
+
+Onboarding není jen UI. Je to společný proces produktu, vývoje, marketingu a podpory. Pokud každý tým chápe aktivaci jinak, uživatel to pozná. Web slibuje jedno, aplikace chce druhé, e-mail připomíná třetí a support hasí čtvrté.
+
+Použijte jednoduchý interní checklist:
+
+- **Slib:** Jakou hodnotu slibuje landing page?
+- **První akce:** Co musí uživatel udělat po registraci?
+- **První výsledek:** Jak pozná, že se něco povedlo?
+- **První překážka:** Kde se nejčastěji zasekne?
+- **Bezpečnost:** Kde potřebuje vysvětlení dat, rolí nebo přístupu?
+- **Návrat:** Co ho přivede zpět bez manipulace?
+- **Měření:** Které 3–5 událostí sledujeme a proč?
+- **Support:** Jak rychle poznáme, že onboarding selhal?
+
+Dobré aktivační metriky nejsou vanity čísla. Počet registrací může růst a produkt přitom selhávat, protože se lidé nedostanou k hodnotě. Sledujte raději poměr uživatelů, kteří dokončí aktivační událost, čas do první hodnoty a nejčastější bod odpadnutí.
+
+Příklad pro SaaS na monitoring webů:
+
+| Metrika | Proč ji sledovat | Privacy-first poznámka |
+| --- | --- | --- |
+| Přidaný první web | Bez webu není co monitorovat | Ukládat jen nezbytnou URL a vlastníka účtu |
+| Dokončená první kontrola | Uživatel vidí první hodnotu | Logovat stav kontroly, ne citlivý obsah stránky |
+| Otevřený první report | Hodnota byla doručena i spotřebována | Agregovat použití, ne nahrávat session replay |
+| Vytvořené první doporučení | Produkt přešel od dat k akci | Držet historii změn jen po definovanou dobu |
+| Pozvaný kolega | Produkt začíná žít v týmu | Role a oprávnění auditovat |
+
+### 11.7 Přístupnost onboardingu není bonus
+
+Onboarding často obsahuje formuláře, chybové stavy, modály, tooltipy a postupné kroky. To je přesně místo, kde se přístupnost láme.
+
+Praktické minimum:
+
+- každý input má srozumitelný label,
+- chyba říká co se stalo a jak ji opravit,
+- formulář jde dokončit klávesnicí,
+- fokus je viditelný,
+- kroky nejsou závislé jen na barvě nebo animaci,
+- pomoc je dostupná konzistentně na stejném místě,
+- časové limity jsou vysvětlené nebo prodloužitelné,
+- důležité instrukce nejsou jen v placeholderu.
+
+WCAG 2.2 obsahuje oblast Input Assistance a mimo jiné posiluje požadavky na konzistentní pomoc. Přeloženo do praxe: pokud onboarding uživatele vede krok za krokem, musí to dělat čitelně, předvídatelně a bez hádanek. Uživatel nemá luštit, jestli červený rámeček znamená chybu, povinné pole nebo designérský výkřik do tmy.
+
+### Checklist: onboarding a aktivace
+
+- [ ] Máme jasně definovanou aktivační událost.
+- [ ] První hodnota přichází dřív než administrativní detaily.
+- [ ] Prázdné stavy vysvětlují hodnotu a další krok.
+- [ ] Sbíráme jen data potřebná pro další krok nebo povinnost.
+- [ ] Bezpečnost a práce s daty jsou vysvětlené v místě obavy.
+- [ ] Onboardingové e-maily pomáhají dokončit hodnotu, ne jen „zahřívají lead“.
+- [ ] Produktové metriky sledují aktivaci, ne jen registrace.
+- [ ] Události měříme agregovaně a s rozumnou retencí.
+- [ ] Formuláře a kroky jsou přístupné z klávesnice a čitelné pro asistivní technologie.
+- [ ] Tým ví, kde se uživatelé nejčastěji zaseknou a co s tím udělá.
+
+### Mini cvičení: aktivační mapa za 30 minut
+
+Vyberte jeden produkt nebo službu a vyplňte:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaký slib dává landing page | `_____` |
+| Jaká je první skutečná hodnota | `_____` |
+| Která akce ji spustí | `_____` |
+| Co uživatel musí udělat před ní | `_____` |
+| Co lze přesunout až po ní | `_____` |
+| Jaký prázdný stav dnes vidí | `_____` |
+| Jaké zbytečné údaje sbíráme | `_____` |
+| Kde vzniká bezpečnostní obava | `_____` |
+| Jaké 3 události budeme měřit | `_____` |
+| Jak poznáme, že onboarding selhal | `_____` |
+
+Potom si nastavte pravidlo: každá nová onboardingová obrazovka musí zkrátit cestu k hodnotě, snížit nejistotu nebo zvýšit bezpečnost. Pokud nedělá ani jedno, je to dekorace. A dekorace v SaaSu většinou znamená další bug s lepší grafikou.
+
+### Zdroje ke kapitole 11
+
+- EUR-Lex: [Regulation (EU) 2016/679 — GDPR, Article 5](https://eur-lex.europa.eu/legal-content/EN/TXT/?qid=1612089500634&uri=CELEX%3A32016R0679)
+- OWASP: [Application Security Verification Standard](https://owasp.org/www-project-application-security-verification-standard/)
+- OWASP: [Session Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html)
+- W3C WAI: [Web Content Accessibility Guidelines 2.2](https://www.w3.org/TR/WCAG22/)
+- GOV.UK Design System: [Start using a service](https://design-system.service.gov.uk/patterns/start-using-a-service/)
+- GOV.UK Service Manual: [Writing for user interfaces](https://www.gov.uk/service-manual/design/writing-for-user-interfaces)
+
 ---
 
 ## Pracovní log
+- 2026-08-21: Dopsána kapitola 11 „Onboarding a aktivace uživatele“ s aktivační mapou, prázdnými stavy, minimalizací dat, bezpečnostním vysvětlením, onboardingovými e-maily, metrikami, přístupností, checklistem a ověřenými zdroji.
+
 - 2026-08-21: Dopsána kapitola 10 „Od služby k produktu“ s produktizačním řezem, workflow přístupem, concierge vrstvou, API základem, privacy-first provozem, checklistem a ověřenými zdroji.
 
 - 2026-08-21: Dopsána kapitola 9 „Údržba, monitoring a incidenty“ s provozní definicí zdraví, monitoringem vrstev, bezpečnými logy, alerty, incident playbookem, údržbovým rytmem, privacy-first provozem, checklistem a ověřenými zdroji.
