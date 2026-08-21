@@ -4447,7 +4447,206 @@ Pokud pravidlo nejde napsat bez slov „nějak“, „asi“ a „mělo by“, j
 
 ---
 
+## 22. Dokumentace jako firemní paměť
+
+Dokumentace není administrativní daň za to, že máte produkt. Je to paměť firmy. Když je dobrá, nový člověk se rychle zorientuje, zákazník nemusí psát na podporu kvůli každé drobnosti a vývojář po třech měsících pochopí, proč se něco udělalo právě takhle. Když je špatná, tým žije v archeologii Slacku, starých e-mailů a větě „to ví přece Honza“.
+
+U malých webových a SaaS týmů má dokumentace ještě jednu výhodu: brání opakovanému rozhodování. Stejné otázky se neřeší znovu od nuly. Proč používáme tenhle hosting? Jak funguje refundace? Co se stane při incidentu? Kdo může exportovat zákaznická data? Jak vypadá release? Odpovědi nemají být schované v hlavě člověka, který je zrovna na dovolené, nemocný nebo — dramatická pauza — už pracuje jinde.
+
+*Codyho komentář: dokumentace není místo, kam tým ukládá vinu. „Mělo by se to někde psát“ není strategie. Je to jen pasivně-agresivní kouzlo, které bohužel nefunguje.*
+
+### 22.1 Pište dokumentaci podle rozhodnutí, ne podle nástroje
+
+Nejdřív si ujasněte, jaká rozhodnutí má dokumentace podporovat. Teprve potom řešte, jestli bude ve wiki, Markdownu v repozitáři, interním portálu nebo v helpdesku.
+
+Praktické kategorie:
+
+- **Produktová dokumentace:** co produkt dělá, pro koho je, jaké má limity a jak se používá.
+- **Technická dokumentace:** architektura, API, datové modely, integrace, lokální vývoj, deploy.
+- **Provozní dokumentace:** monitoring, incidenty, zálohy, bezpečnostní postupy, přístupy.
+- **Obchodní dokumentace:** nabídky, positioning, case studies, kvalifikace leadů, pricing argumentace.
+- **Support dokumentace:** časté dotazy, makra odpovědí, eskalace, známé problémy.
+- **Privacy dokumentace:** datové toky, zpracovatelé, retenční doby, právní základy, exporty a mazání dat.
+
+Každý dokument má mít jasnou odpověď na tři otázky:
+
+1. **Kdo ho používá?** Zákazník, support, vývojář, obchodník, founder, auditor?
+2. **Kdy ho otevře?** Při onboardingu, chybě, prodeji, releasu, incidentu, kontrole?
+3. **Jaké rozhodnutí po něm udělá?** Klikne, nasadí, eskaluje, odmítne požadavek, opraví nastavení?
+
+Pokud dokument nemá uživatele, situaci ani rozhodnutí, nejspíš vzniká jen proto, že někdo chce uklidit mentální nepořádek. To je legitimní, ale pojmenujte ho jako pracovní poznámku, ne jako oficiální firemní zdroj pravdy.
+
+### 22.2 Použijte čtyři typy dokumentace
+
+Dobrá dokumentace není jedna hromada článků. Diátaxis framework rozlišuje čtyři typy dokumentace: tutoriály, návody, vysvětlení a reference. Je to užitečné dělení, protože každý typ odpovídá na jinou potřebu.
+
+Pro SaaS tým to může vypadat takto:
+
+- **Tutoriál:** „Vytvořte první projekt za 10 minut.“ Vede začátečníka krok za krokem.
+- **Návod:** „Jak nastavit vlastní doménu.“ Řeší konkrétní úkol.
+- **Reference:** „API endpointy pro fakturaci.“ Je přesná, úplná a méně upovídaná.
+- **Vysvětlení:** „Proč používáme evropské datové centrum.“ Dává kontext a důvody.
+
+Nejčastější chyba je míchat všechno dohromady. Zákazník hledá rychlý návod, ale dostane filozofii architektury. Vývojář chce referenci endpointu, ale čte marketingovou pohádku o revoluci v produktivitě. Founder chce rozhodnout o riziku, ale najde jen seznam kroků bez kontextu.
+
+Jednoduché pravidlo:
+
+- když člověk začíná, dejte mu tutoriál,
+- když chce splnit úkol, dejte mu návod,
+- když potřebuje přesný detail, dejte mu referenci,
+- když se ptá „proč“, dejte mu vysvětlení.
+
+### 22.3 Držte jeden zdroj pravdy
+
+Firma může mít víc míst pro dokumentaci, ale konkrétní informace má mít jedno autoritativní místo. Jinak vzniknou tři různé návody, dva staré screenshoty a jedna tabulka, která „asi platí, ale radši se zeptej“.
+
+Příklady jednoho zdroje pravdy:
+
+- **API kontrakty:** OpenAPI soubor v repozitáři, generovaný portál pro čtení.
+- **Release proces:** `docs/release.md` vedle kódu, protože změny procesu často souvisí s vývojem.
+- **Veřejná nápověda:** help centrum nebo statické stránky napojené na verzovaný obsah.
+- **Datové toky a zpracovatelé:** interní privacy dokument spravovaný společně produktem, technikou a právní odpovědnou osobou.
+- **Obchodní argumentace:** krátký battlecard dokument, který má vlastníka a datum poslední revize.
+
+Když stejnou informaci potřebujete na více místech, raději odkazujte než kopírujte. Například veřejná stránka „Bezpečnost a data“ může shrnovat principy, ale interní privacy dokument má držet detailní datové toky, retenční lhůty a seznam zpracovatelů. Veřejný text má být srozumitelný, interní text auditovatelný.
+
+### 22.4 Dokumentujte rozhodnutí, která se draze zapomínají
+
+Ne všechno stojí za dokumentaci. Pokud je něco samozřejmé, stabilní a snadno dohledatelné, nepotřebuje to román. Prioritu mají informace, jejichž ztráta bolí.
+
+Dokumentujte hlavně:
+
+- **architektonická rozhodnutí:** proč byl zvolen konkrétní stack, databáze, hosting nebo integrační vzor,
+- **bezpečnostní hranice:** kdo má přístup kam, jak se schvalují citlivé akce, jak se rotují klíče,
+- **privacy pravidla:** jaká data sbíráte, proč, kde leží, jak dlouho je držíte a kdo je zpracovává,
+- **provozní postupy:** jak obnovit službu, jak spustit rollback, jak komunikovat incident,
+- **produktové limity:** co produkt záměrně nedělá a proč,
+- **obchodní závazky:** co slibujete zákazníkům ve smlouvách, SLA, onboardingu a marketingu.
+
+Pro technická rozhodnutí se hodí krátký formát ADR — Architecture Decision Record. Nemusí být akademický. Stačí:
+
+| Pole | Co vyplnit |
+| --- | --- |
+| Kontext | Jaký problém řešíme? |
+| Rozhodnutí | Co jsme vybrali? |
+| Alternativy | Co jsme zvažovali a odmítli? |
+| Důsledky | Co tím získáme a co nás to stojí? |
+| Datum a vlastník | Kdy vzniklo a kdo ho umí vysvětlit? |
+
+Příklad:
+
+> Rozhodnutí: Pro analytiku používáme agregované měření bez reklamních identifikátorů. Důvod: chceme znát výkon obsahu a kampaní, ale nechceme stavět marketing na sledování jednotlivců napříč weby. Důsledek: méně detailní remarketing, vyšší důvěra a jednodušší privacy komunikace.
+
+Tohle je přesně typ rozhodnutí, které se za rok hodí. Ne proto, že by tým zapomněl, jak kliknout v nástroji, ale protože zapomene kontext kompromisu.
+
+### 22.5 Privacy-first dokumentace není právní šanon
+
+Privacy dokumentace má být použitelná pro produkt, vývoj, support i obchod. Pokud existuje jen jako složka pro audit, tým ji nebude používat. A když ji tým nepoužívá, dřív nebo později začne realita utíkat od papíru.
+
+Minimum pro evropský SaaS:
+
+- **Mapa dat:** jaké osobní údaje vstupují do systému, odkud, proč a kam pokračují.
+- **Seznam zpracovatelů:** hosting, e-mail, platby, support, analytika, monitoring, AI nástroje.
+- **Retence:** jak dlouho držíte účty, logy, zálohy, fakturační data, support konverzace a marketingové kontakty.
+- **Práva subjektů údajů:** kdo řeší export, opravu, výmaz, omezení zpracování a námitky.
+- **Incident postup:** koho kontaktovat, jak vyhodnotit dopad, jak uchovat důkazy a jak komunikovat.
+- **Datové minimum:** která pole jsou povinná, která volitelná a která vůbec nesbírat.
+
+GDPR výslovně pracuje s povinností vést záznamy o činnostech zpracování pro řadu organizací podle článku 30. I když konkrétní rozsah vždy záleží na situaci, prakticky se vyplatí mít přehled o účelech, kategoriích údajů, příjemcích a lhůtách. Ne kvůli šanonu. Kvůli tomu, aby produktové rozhodnutí typu „přidáme nový nástroj na e-maily“ nezačínalo archeologickou expedicí.
+
+Privacy-first dokumentace má být krátká, živá a propojená s realitou:
+
+- nový externí nástroj = aktualizace seznamu zpracovatelů,
+- nové pole ve formuláři = kontrola účelu a retenční doby,
+- nová analytická událost = kontrola, jestli nejde o osobní údaj nebo citlivý vzorec chování,
+- nový support proces = kontrola, kdo vidí zákaznická data.
+
+### 22.6 Dokumentace má být součást workflow
+
+Dokumentace, která se aktualizuje „až bude čas“, se neaktualizuje. Čas je mýtické zvíře, které žije někde mezi backlogem a pátečním odpolednem.
+
+Lepší je přidat dokumentaci do běžných workflow:
+
+- Pull request mění API? Aktualizuje se OpenAPI specifikace nebo referenční dokument.
+- Release mění chování produktu? Přidají se release notes a případně help článek.
+- Nová integrace posílá data mimo aplikaci? Aktualizuje se privacy mapa.
+- Incident odhalil slabé místo? Doplní se runbook a prevenční checklist.
+- Support dostal stejný dotaz potřetí? Vznikne veřejný nebo interní návod.
+- Obchod slyší novou námitku? Doplní se battlecard nebo FAQ.
+
+V repozitáři se hodí jednoduchý checklist pro změny:
+
+- [ ] Mění se veřejné chování produktu?
+- [ ] Mění se API, datový model nebo integrace?
+- [ ] Mění se sběr, účel nebo tok dat?
+- [ ] Potřebuje support novou odpověď?
+- [ ] Potřebuje zákazník nový návod?
+- [ ] Má změna dopad na onboarding, pricing nebo smluvní sliby?
+
+Když je odpověď ano, dokumentace není „extra práce“. Je součást dokončení úkolu.
+
+### 22.7 Nastavte revize a vlastnictví
+
+Každý důležitý dokument má mít vlastníka. Ne proto, aby za něj někdo dostal trest, ale aby bylo jasné, kdo hlídá jeho použitelnost.
+
+Praktické minimum:
+
+- u každého dokumentu vlastník nebo tým,
+- datum poslední věcné revize,
+- značka stavu: draft, platné, zastaralé, archiv,
+- krátký changelog u provozních a privacy dokumentů,
+- pravidelná revize podle rizika.
+
+Revizní rytmus:
+
+- **měsíčně:** support makra, známé problémy, onboardingové návody,
+- **kvartálně:** produktové FAQ, obchodní argumentace, veřejná nápověda,
+- **pololetně:** architektura, incident runbooky, přístupová pravidla,
+- **při každé změně:** zpracovatelé, datové toky, právní texty, bezpečnostní procesy.
+
+U archivace buďte nemilosrdní. Starý dokument bez varování je horší než žádný dokument. Když už musí zůstat kvůli historii, označte ho jako archiv a přidejte odkaz na aktuální verzi.
+
+### Checklist kapitoly 22
+
+- [ ] Víme, kdo používá jednotlivé typy dokumentace a při jakém rozhodnutí.
+- [ ] Rozlišujeme tutoriály, návody, reference a vysvětlení.
+- [ ] Každá důležitá informace má jeden zdroj pravdy.
+- [ ] Dokumentujeme drahá rozhodnutí, limity, provozní postupy a privacy pravidla.
+- [ ] Máme mapu dat, zpracovatelů, retence a práv subjektů údajů.
+- [ ] Aktualizace dokumentace je součástí PR, releasu, incidentu a support workflow.
+- [ ] Důležité dokumenty mají vlastníka, stav a datum poslední revize.
+- [ ] Zastaralé dokumenty se označují nebo archivují, nenechávají se potichu strašit v rohu.
+
+### Mini cvičení: dokumentační inventura za 60 minut
+
+Vezměte deset dokumentů, které tým používá nejčastěji nebo které by měl používat při průšvihu. U každého vyplňte:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Název dokumentu |  |
+| Typ: tutoriál / návod / reference / vysvětlení |  |
+| Kdo ho používá? |  |
+| Jaké rozhodnutí podporuje? |  |
+| Kde je zdroj pravdy? |  |
+| Kdo je vlastník? |  |
+| Kdy byl naposledy věcně ověřen? |  |
+| Co je zastaralé nebo chybí? |  |
+| Jaký je další krok? |  |
+
+Po hodině budete mít lepší přehled než mnoho týmů po celodenním workshopu s barevnými lepíky. A bonus: žádný lepík neposílá osobní údaje do cizí analytiky. Zatím. Snad.
+
+### Zdroje ke kapitole 22
+
+- Diátaxis: [The Grand Unified Theory of Documentation](https://diataxis.fr/)
+- Write the Docs: [Docs as Code](https://www.writethedocs.org/guide/docs-as-code/)
+- GDPR.eu: [GDPR Article 30 — Records of processing activities](https://gdpr.eu/article-30-records-of-processing-activities/)
+- OpenAPI Initiative: [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+
+---
+
 ## Pracovní log
+- 2026-08-21: Dopsána kapitola 22 „Dokumentace jako firemní paměť“ s typy dokumentace, jedním zdrojem pravdy, ADR, privacy dokumentací, workflow aktualizacemi, revizemi, checklistem a ověřenými zdroji.
+
 - 2026-08-21: Dopsána kapitola 21 „Automatizace bez ztráty kontroly“ s mapováním procesů, řízením rizika, auditní stopou, privacy-first datovými toky, AI kopilotem, vypínači, checklistem a ověřenými zdroji.
 
 - 2026-08-21: Dopsána kapitola 20 „Rozhodovací systém pro malé týmy“ s typy rozhodnutí, rozhodovacím logem, týdenním rytmem, prioritizací „teď/potom/ne teď“, rolemi, privacy-first daty, checklistem a mini cvičením.
