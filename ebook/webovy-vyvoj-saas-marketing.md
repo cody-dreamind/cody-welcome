@@ -3944,7 +3944,275 @@ Pak z toho napište krátkou verzi na jednu stránku. Nepište hned román. Nejd
 
 ---
 
+
+# Část V — Produktivita a provoz
+
+## 20. Rozhodovací systém pro malé týmy
+
+Malý tým nemá problém s nedostatkem nápadů. Malý tým má problém s tím, že každý dobrý nápad vypadá urgentně, každá urgentní věc vypadá důležitě a po třech týdnech nikdo neví, proč se vlastně začalo dělat zrovna tohle.
+
+Rozhodovací systém není korporátní divadlo s komisí, razítkem a třemi tabulkami. Je to jednoduchý způsob, jak se domluvit:
+
+- co teď řešíme,
+- proč to řešíme,
+- podle čeho poznáme výsledek,
+- kdo rozhoduje,
+- kdy rozhodnutí znovu otevřeme.
+
+Bez toho se produktový vývoj mění na frontu polovičních úkolů. Web čeká na texty. SaaS čeká na onboarding. Marketing čeká na case study. Zakladatel čeká na „ještě jednu drobnost“. A drobnost má mezitím vlastní backlog, hypotéku a ambice stát se platformou.
+
+### 20.1 Rozlišujte typ rozhodnutí
+
+Ne každé rozhodnutí si zaslouží stejnou váhu. Když tým řeší barvu tlačítka stejně dlouho jako změnu cenového modelu, systém je rozbitý. V praxi pomáhá rozdělit rozhodnutí do tří kategorií.
+
+| Typ rozhodnutí | Příklad | Jak rozhodovat |
+| --- | --- | --- |
+| Reverzibilní | text CTA, pořadí sekcí, varianta e-mailu | rychle otestovat, zapsat výsledek |
+| Nákladné | změna CMS, nový integrační partner, redesign onboardingu | krátká analýza, dopad, vlastník |
+| Strategické | segment zákazníků, pricing, region provozu, práce s daty | vědomé rozhodnutí zakladatelů, jasné trade-offy |
+
+Reverzibilní rozhodnutí dělejte rychle. Pokud jde změnu vrátit během hodiny, nepotřebuje třídenní debatu. Nákladná rozhodnutí potřebují kontext, ale ne román. Strategická rozhodnutí si zaslouží klid, protože ovlivní produkt, marketing i provoz.
+
+Praktická otázka před diskusí:
+
+> Když se spleteme, jak těžké bude rozhodnutí vrátit?
+
+Pokud odpověď zní „nasadíme jiný text“, rozhodněte dnes. Pokud zní „budeme migrovat data zákazníků mezi dodavateli“, zpomalte. To není zbabělost, to je údržba budoucího já.
+
+### 20.2 Každé větší rozhodnutí napište jako krátký záznam
+
+Malé týmy často rozhodují v chatu. To je rychlé, ale špatně dohledatelné. Po měsíci najdete jen větu „jo, to dává smysl“ a nikdo netuší, k čemu se vztahovala. Proto si veďte lehký rozhodovací log.
+
+Šablona rozhodnutí:
+
+```text
+# Rozhodnutí: [název]
+
+Datum: [YYYY-MM-DD]
+Vlastník: [jméno/role]
+Stav: navrženo / schváleno / zrušeno / k revizi
+
+Kontext:
+- Jaký problém řešíme?
+- Proč teď?
+
+Možnosti:
+1. [varianta A]
+2. [varianta B]
+3. [nedělat nic]
+
+Rozhodnutí:
+- Co jsme vybrali?
+- Proč?
+
+Trade-offy:
+- Co tím získáme?
+- Co tím ztratíme nebo odložíme?
+
+Kontrola:
+- Podle čeho poznáme, že to funguje?
+- Kdy se k tomu vrátíme?
+```
+
+Tahle šablona není proto, aby se tým tvářil jako poradenská firma. Je proto, aby se příště nemuselo znovu dokazovat, proč jste něco udělali. Rozhodnutí bez kontextu stárne jako mléko na slunci.
+
+U webu může záznam vypadat takto:
+
+```text
+# Rozhodnutí: Primární CTA na homepage
+
+Datum: 2026-08-21
+Vlastník: marketing + founder
+Stav: schváleno
+
+Kontext:
+- Homepage má tři různé hlavní akce a návštěvníci nevědí, kam pokračovat.
+- Obchod chce víc kvalifikovaných konzultací, ne obecné dotazy.
+
+Možnosti:
+1. „Domluvit konzultaci“ jako hlavní CTA.
+2. „Stáhnout checklist“ jako hlavní CTA.
+3. Nechat tři rovnocenná tlačítka.
+
+Rozhodnutí:
+- Hlavní CTA bude „Domluvit konzultaci“.
+- Checklist zůstane sekundární pro návštěvníky, kteří nejsou připravení mluvit.
+
+Trade-offy:
+- Získáme jasnější obchodní signál.
+- Můžeme přijít o část anonymních stažení checklistu.
+
+Kontrola:
+- Sledujeme kvalifikované konzultace a poměr formulářů po dobu 4 týdnů.
+```
+
+### 20.3 Vytvořte týdenní rytmus, ne nekonečný meeting
+
+Produktivita malého týmu nestojí na tom, že se všichni vidí každý den na callu. Stojí na tom, že práce má rytmus a rozhodnutí mají místo.
+
+Doporučený týdenní rytmus:
+
+- **Pondělí:** vybrat 1–3 hlavní výsledky týdne.
+- **Středa:** krátká kontrola blokátorů, ne status divadlo.
+- **Pátek:** zapsat, co se dokončilo, co se odložilo a proč.
+- **Průběžně:** urgentní provozní věci řešit mimo plán, ale zapisovat dopad.
+
+Pondělní otázky:
+
+1. Co musí být v pátek hotové, aby týden dával smysl?
+2. Která práce přímo pomáhá zákazníkovi nebo prodeji?
+3. Co blokuje ostatní lidi?
+4. Co můžeme vědomě nedělat?
+
+Páteční otázky:
+
+1. Co jsme opravdu dokončili?
+2. Co se jen přesunulo v kalendáři a proč?
+3. Jaké rozhodnutí jsme udělali?
+4. Jaké nové riziko se objevilo?
+5. Co smažeme z backlogu, protože už to není důležité?
+
+*Codyho komentář: backlog není muzeum nápadů. Pokud v něm položka rok hnije a nikdo ji neobhajuje, není to strategie. Je to kompost.*
+
+### 20.4 Používejte „teď, potom, nikdy“ místo nekonečných priorit
+
+Prioritizační matice jsou užitečné, dokud z nich není akademický sport. Malému týmu často stačí tři koše:
+
+- **Teď:** práce pro aktuální cyklus.
+- **Potom:** důležité věci, které mají jasný důvod, ale nevejdou se teď.
+- **Nikdy / ne teď:** věci, které zní dobře, ale nemají dostatečný dopad.
+
+Koš „nikdy“ je bolestivý, ale zdravý. Když tým nic neodmítá, ve skutečnosti odmítá fokus. Jen to dělá pomalu a draze.
+
+Příklad pro SaaS onboarding:
+
+| Nápad | Koš | Důvod |
+| --- | --- | --- |
+| Zkrátit první nastavení z 8 kroků na 3 | Teď | Přímo ovlivňuje aktivaci |
+| Přidat video tutoriály | Potom | Užitečné, ale nejdřív musí být jasný tok |
+| Gamifikace s odznaky | Ne teď | Neřeší hlavní překážku uživatele |
+| Export audit logu pro adminy | Teď | Častý požadavek B2B zákazníků |
+| Nový veřejný roadmap portál | Potom | Pomůže komunikaci, ale není blokátor |
+
+Každá priorita by měla projít otázkou:
+
+> Který konkrétní problém zákazníka nebo týmu tím odstraníme?
+
+Pokud odpověď zní „bude to hezké mít“, položka pravděpodobně patří do „potom“ nebo „ne teď“. Hezké věci jsou fajn. Jen nesmí sežrat důležité věci.
+
+### 20.5 Rozhodujte s daty, ale neschovávejte se za ně
+
+Data pomáhají, ale neudělají produktové rozhodnutí za vás. U malého SaaSu bývá dat málo, jsou šumová a často popisují minulost, ne příležitost. To neznamená rozhodovat pocitově. Znamená to kombinovat signály.
+
+Užitečné signály:
+
+- opakované otázky zákazníků,
+- support tickety se stejnou příčinou,
+- chování v onboardingovém toku,
+- kvalita a zdroj poptávek,
+- ruční rozhovory se zákazníky,
+- technický dluh, který zpomaluje dodávku,
+- právní nebo bezpečnostní rizika,
+- provozní náklady a složitost.
+
+Rozhodovací věta může znít:
+
+> Vidíme tři opakované support dotazy týdně k nastavení rolí, dva enterprise leady se ptaly na audit log a interně tím trávíme zhruba půl dne týdně. Proto v příštím cyklu upřednostníme lepší správu rolí před novou marketingovou stránkou.
+
+Tohle je lepší než „máme pocit, že admin je nějaký slabší“. Pocit může být začátek. Rozhodnutí potřebuje kontext.
+
+Privacy-first poznámka: když sbíráte rozhodovací data, držte se minima. Pro zlepšení onboardingu často nepotřebujete znát jméno člověka, jeho kompletní historii kliků a obsah všech polí. Stačí vědět, ve kterém kroku proces končí, jaký typ účtu používá a zda šlo o technickou chybu nebo nejasný text.
+
+### 20.6 Každé ano má svoje ne
+
+Největší náklad rozhodnutí nebývá samotná práce. Bývá to práce, která se kvůli němu nestane. Proto u každé větší věci napište explicitní „ne“.
+
+Příklady:
+
+- Ano: dopíšeme dokumentaci pro administrátory. Ne: tento týden nepřidáme další variantu pricing stránky.
+- Ano: opravíme pomalý formulář a spam ochranu. Ne: nebudeme zatím měnit celý design kontaktní stránky.
+- Ano: zavedeme auditní log. Ne: nebudeme ještě stavět komplexní permission builder.
+- Ano: spustíme RSS a newsletter. Ne: nebudeme do webu přidávat remarketingový pixel jen proto, že „to tak dělají všichni“.
+
+Explicitní „ne“ chrání tým před tichým přetížením. Když se nepojmenuje, lidé si často myslí, že se všechno stihne. Nestihne. Fyzika je v tomhle otravně konzistentní.
+
+### 20.7 Rozhodovací role: kdo navrhuje, kdo schvaluje, kdo vykoná
+
+Malý tým nepotřebuje složitý governance model, ale potřebuje vědět, kdo má poslední slovo. Jinak vzniká nekonečná kolektivní mlha.
+
+Jednoduchý model:
+
+- **Navrhovatel:** připraví kontext, možnosti a doporučení.
+- **Rozhodovatel:** nese odpovědnost za ano/ne.
+- **Realizátor:** dodá změnu a hlídá dopad.
+- **Konzultovaný člověk:** doplní expertizu, ale nerozhoduje.
+- **Informovaný člověk:** má vědět výsledek, ne být zatažen do každé debaty.
+
+U malého webového projektu může být rozhodovatel zakladatel, realizátor vývojář a konzultovaný člověk marketér. U bezpečnostního nastavení SaaSu může být rozhodovatel technický lead a konzultovaný člověk právník nebo DPO. U textu homepage může rozhodovat marketing, ale obchod by měl dodat námitky zákazníků.
+
+Nejdůležitější pravidlo: kdo rozhoduje, musí mít právo říct „dost“. Bez toho se tým zasekne na nekonečném ladění.
+
+### 20.8 Mini systém pro denní provoz
+
+Pokud nechcete zavádět nový nástroj, začněte jedním souborem nebo stránkou v interní dokumentaci.
+
+Struktura:
+
+```text
+/operations
+  weekly-plan.md
+  decision-log.md
+  risks.md
+  metrics.md
+  incidents.md
+```
+
+Obsah minimálního provozního systému:
+
+- **weekly-plan.md:** tři hlavní výsledky týdne, blokátory, odložené věci.
+- **decision-log.md:** rozhodnutí podle šablony z této kapitoly.
+- **risks.md:** technická, obchodní, právní a provozní rizika.
+- **metrics.md:** pár metrik, které tým opravdu používá.
+- **incidents.md:** stručné záznamy problémů a poučení.
+
+Tento systém má jednu výhodu: jde číst. Není zamčený v nástroji, který za rok někdo přestane používat. Markdown, Git, interní wiki nebo jednoduchý evropský knowledge base nástroj stačí. Důležité je, aby záznamy přežily chat a byly dohledatelné.
+
+### Checklist kapitoly 20
+
+- [ ] Máme jasné rozlišení reverzibilních, nákladných a strategických rozhodnutí.
+- [ ] Větší rozhodnutí zapisujeme krátkou šablonou: kontext, možnosti, rozhodnutí, trade-offy, kontrola.
+- [ ] Týden má rytmus: výběr priorit, kontrolu blokátorů a závěrečné vyhodnocení.
+- [ ] Backlog dělíme na „teď“, „potom“ a „ne teď“.
+- [ ] U každého většího „ano“ zapisujeme i odpovídající „ne“.
+- [ ] Rozlišujeme role: navrhovatel, rozhodovatel, realizátor, konzultovaný a informovaný.
+- [ ] Rozhodovací data sbíráme privacy-first: minimum údajů, jasný účel, žádné zbytečné profilování.
+- [ ] Provozní znalosti ukládáme mimo chat do čitelné dokumentace.
+
+### Mini cvičení: rozhodnutí za 20 minut
+
+Vyberte jedno rozhodnutí, které se v týmu vleče déle než týden. Neřešte ho v chatu. Vyplňte tuto tabulku:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaký problém přesně řešíme? |  |
+| Co se stane, když nerozhodneme? |  |
+| Jaké jsou 2–3 realistické možnosti? |  |
+| Která možnost je doporučená a proč? |  |
+| Co tím vědomě odkládáme? |  |
+| Kdo má poslední slovo? |  |
+| Kdy výsledek zkontrolujeme? |  |
+
+Pak rozhodnutí zapište jednou větou:
+
+> Rozhodli jsme se pro [varianta], protože [důvod], a vědomě odkládáme [co], výsledek zkontrolujeme [kdy].
+
+Pokud se věta nedá napsat, ještě nerozhodujete. Jen kroužíte kolem problému jako produktový sup.
+
+---
+
 ## Pracovní log
+- 2026-08-21: Dopsána kapitola 20 „Rozhodovací systém pro malé týmy“ s typy rozhodnutí, rozhodovacím logem, týdenním rytmem, prioritizací „teď/potom/ne teď“, rolemi, privacy-first daty, checklistem a mini cvičením.
+
 - 2026-08-21: Dopsána kapitola 19 „Case studies a důkaz hodnoty“ se strukturou případové studie, metrikami, citacemi, před/po příběhem, privacy-first schvalováním, knihovnou důkazů, checklistem a ověřenými zdroji.
 
 - 2026-08-21: Dopsána kapitola 18 „Měření kampaní bez invazivního trackingu“ s UTM slovníkem, agregovanou analytikou, cookie inventářem, server-side měřením, reportingem, checklistem a ověřenými zdroji.
