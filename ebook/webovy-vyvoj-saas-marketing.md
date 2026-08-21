@@ -2562,7 +2562,249 @@ Tahle matice je nudná jen do chvíle, než první zákazník napíše: „Kdo n
 
 ---
 
+
+## 14. Support, dokumentace a release notes
+
+Support není oddělení pro hašení průšvihů. U malého SaaSu je to jeden z nejlepších produktových radarů, které máte. Každý dotaz říká něco o tom, kde je produkt nejasný, kde onboarding selhává, kde dokumentace chybí a kde marketing slibuje víc, než aplikace vysvětluje.
+
+Dobře nastavený support má tři cíle:
+
+- rychle pomoct konkrétnímu člověku,
+- snížit počet opakovaných dotazů,
+- proměnit zpětnou vazbu v lepší produkt.
+
+Špatně nastavený support dělá opak: odpovídá pokaždé ručně, drží znalosti v hlavách dvou lidí, posílá screenshoty přes chat, neumí najít historii problému a po každém releasu čeká, kdo první zakřičí. To není zákaznická péče. To je improvizační divadlo s fakturací.
+
+### 14.1 Začněte mapou dotazů, ne nákupem helpdesku
+
+Než začnete vybírat support nástroj, napište si typy dotazů, které očekáváte. Nástroj má podporovat proces, ne ho kouzelně vymyslet za vás. Pro první B2B SaaS obvykle stačí pět kategorií:
+
+| Kategorie | Příklad dotazu | Co z toho má vzniknout |
+| --- | --- | --- |
+| Onboarding | „Jak pozvu kolegu?“ | lepší prázdný stav, návod, checklist |
+| Billing | „Kde stáhnu fakturu?“ | jasná administrace účtu, billing FAQ |
+| Technický problém | „Import skončil chybou.“ | diagnostika, log, retry, runbook |
+| Bezpečnost a data | „Kde jsou data uložená?“ | privacy stránka, DPA, bezpečnostní FAQ |
+| Produktový požadavek | „Umíte schvalovací workflow?“ | štítek v backlogu, segmentace, rozhodnutí |
+
+Každý příchozí dotaz by měl dostat nejen odpověď, ale i štítek. Po měsíci se podívejte na vzory. Pokud se stejná otázka objeví pětkrát, problém není v uživatelích. Problém je v produktu, dokumentaci nebo komunikaci.
+
+Praktické minimum support systému:
+
+- jedno veřejné místo, kam psát,
+- interní vlastník dotazu,
+- stav dotazu: nové, čeká na nás, čeká na zákazníka, vyřešeno,
+- kategorie dotazu,
+- vazba na účet nebo workspace,
+- bezpečný způsob přiložení logu nebo exportu,
+- pravidlo, kdy se z dotazu stává bug nebo produktový požadavek.
+
+*Codyho komentář: support inbox bez štítků je jako šuplík „různé“. Na začátku vypadá nevinně, po půl roce v něm žije digitální jezevec.*
+
+### 14.2 Dokumentace má odpovídat na čtyři různé potřeby
+
+Dokumentace není jedna věc. Uživatelé přicházejí s různými režimy: někdo se učí poprvé, někdo chce splnit konkrétní úkol, někdo hledá přesný parametr API a někdo potřebuje pochopit, proč je produkt navržený určitým způsobem.
+
+Užitečný rámec nabízí Diátaxis, který rozlišuje čtyři druhy dokumentace: tutoriály, návody, referenci a vysvětlení. Pro SaaS tým je to praktická mapa, ne akademické cvičení.
+
+| Typ dokumentace | Kdy ji uživatel potřebuje | Příklad v SaaSu |
+| --- | --- | --- |
+| Tutoriál | učí se produkt od nuly | „Vytvořte první projekt za 10 minut“ |
+| Návod | chce dokončit konkrétní úkol | „Jak pozvat člena týmu“ |
+| Reference | hledá přesné informace | API endpointy, role, limity, webhook payloady |
+| Vysvětlení | potřebuje pochopit souvislosti | „Jak navrhujeme auditní stopu“ |
+
+Nejčastější chyba je míchat všechno dohromady. Článek „Jak nastavit import“ začne úvodem o historii firmy, pokračuje výpisem API polí, v půlce má filozofii datové suverenity a končí screenshotem staré administrace. Uživatel chtěl jeden úkol. Dostal exkurzi.
+
+Dobrá dokumentace má jasný účel:
+
+- tutoriál vede krok za krokem a nevyžaduje znalost detailů,
+- návod řeší jeden konkrétní scénář,
+- reference je přesná, úplná a snadno prohledatelná,
+- vysvětlení pomáhá s rozhodnutím a mentálním modelem.
+
+Pro první verzi dokumentace napište raději deset krátkých článků než jednu nekonečnou příručku. Každý článek má mít jasný název ve slovech zákazníka: „Jak změnit vlastníka workspace“ je lepší než „Workspace ownership management“. Pokud prodáváte v češtině, mluvte česky. Angličtina v rozhraní může být praktická u technických termínů, ale support a dokumentace mají snižovat stres, ne předvádět slovní zásobu.
+
+### 14.3 Znalostní báze musí být propojená s produktem
+
+Dokumentace schovaná někde v patičce pomůže jen lidem, kteří mají čas hledat. Produkt má umět nabídnout správnou nápovědu ve správný okamžik.
+
+Příklady dobrého propojení:
+
+- prázdný stav projektu odkazuje na tutoriál „Vytvořte první projekt“,
+- chyba importu odkazuje na návod „Jak připravit CSV soubor“,
+- nastavení rolí odkazuje na vysvětlení „Co smí Owner, Admin, Member a Viewer“,
+- API stránka odkazuje na referenci a ukázkové requesty,
+- billing stránka odkazuje na fakturační FAQ a postup změny DIČ,
+- bezpečnostní nastavení odkazuje na stránku o datech, retenci a logování.
+
+Každý článek by měl mít vlastníka a datum poslední kontroly. Ne proto, aby administrace vypadala dospěle. Protože zastaralá dokumentace je horší než žádná: dává uživateli sebevědomí udělat špatný krok.
+
+Jednoduché pravidlo údržby:
+
+- při každém releasu zkontrolujte dotčené články,
+- při každém opakovaném support dotazu doplňte nebo upravte návod,
+- jednou měsíčně projděte nejčtenější články,
+- jednou za kvartál smažte nebo archivujte zastaralé části,
+- u bezpečnostních a právních textů držte datum revize viditelně.
+
+Privacy-first poznámka: pokud používáte externí knowledge base, zkontrolujte, jaké osobní údaje posíláte do vyhledávání, chatu, analytics a zpětné vazby u článků. Veřejná dokumentace nemusí znát identitu čtenáře. Interní support kontext ano, ale jen v rozsahu potřebném pro řešení požadavku.
+
+### 14.4 Support odpovědi pište jako malé produktové rozhraní
+
+Dobrá odpověď v supportu není jen „vyřešeno“. Je to mikro UX. Má snížit nejistotu, dát další krok a nezvětšit bezpečnostní riziko.
+
+Šablona dobré odpovědi:
+
+1. potvrzení problému vlastními slovy,
+2. krátké vysvětlení příčiny nebo aktuálního stavu,
+3. konkrétní kroky pro zákazníka,
+4. co uděláte vy a kdy,
+5. odkaz na dokumentaci,
+6. upozornění na bezpečné zacházení s daty, pokud je relevantní.
+
+Příklad:
+
+> Díky za hlášení. Import skončil na chybě ve sloupci `email`, protože dva řádky obsahují neplatnou adresu. Soubor prosím nemusíte posílat celý. Stačí opravit řádky 18 a 42 podle návodu k CSV importu a spustit import znovu. Pokud chyba zůstane, pošlete nám ID importu z detailu běhu — podle něj dohledáme technický log bez přístupu k vašim datům.
+
+Tahle odpověď dělá několik věcí správně: nevyžaduje zbytečný export dat, říká přesně kde je problém, posílá uživatele na návod a dává bezpečnou eskalační cestu.
+
+Co v supportu nedělat:
+
+- nechtít hesla, tokeny ani celé databázové exporty,
+- neposílat osobní údaje do nástrojů bez smluvního a bezpečnostního základu,
+- neslibovat termín opravy, který nemáte pod kontrolou,
+- neschovávat incident za neurčité „někteří uživatelé mohou pociťovat potíže“, pokud znáte dopad,
+- neházet zákazníka mezi tři inboxy.
+
+Support je součást důvěry. U privacy-first produktu by měl zákazník cítit, že pomoc neznamená ztrátu kontroly nad daty.
+
+### 14.5 Release notes nejsou git log v kabátu
+
+Release notes mají říct uživatelům, co se změnilo a proč je to zajímá. Nejsou seznam commitů, interních ticketů ani oslava toho, že se konečně přejmenovala proměnná `foo2`.
+
+Udržujte dvě vrstvy:
+
+- **Changelog** jako průběžný, strukturovaný záznam významných změn.
+- **Release notes** jako srozumitelné oznámení konkrétního releasu pro zákazníky.
+
+Formát Keep a Changelog doporučuje psát změny pro lidi, řadit je podle typů a uvádět datum vydání. Semantic Versioning zase pomáhá dát verzím význam: major pro nekompatibilní změny, minor pro kompatibilní funkce a patch pro opravy chyb. Nemusíte dogmaticky verzovat každý interní SaaS jako open-source knihovnu, ale význam verzí má být jasný aspoň týmu a náročnějším zákazníkům.
+
+Praktická struktura release notes:
+
+```markdown
+## 2026-08-21 — Lepší import kontaktů
+
+### Nové
+- Import teď ukazuje náhled prvních 20 řádků před spuštěním.
+
+### Změněno
+- Chybové hlášky u CSV importu nově ukazují číslo řádku a název sloupce.
+
+### Opraveno
+- Opravili jsme situaci, kdy import skončil bez jasné chyby u prázdného souboru.
+
+### Pro administrátory
+- Audit log nově zapisuje spuštění, dokončení a selhání importu.
+```
+
+Release notes pište podle dopadu:
+
+- běžní uživatelé chtějí vědět, co mohou nově udělat,
+- admini chtějí vědět, co se mění v oprávněních, datech a nastavení,
+- vývojáři chtějí znát API změny, deprecations a migrační kroky,
+- management chce pochopit hodnotu bez detailů implementace.
+
+Pokud změna ovlivňuje data, bezpečnost, billing nebo oprávnění, neschovávejte ji mezi drobnosti. Dejte jí vlastní odstavec a jasně napište, jestli zákazník musí něco udělat.
+
+### 14.6 Incident komunikace potřebuje šablony před incidentem
+
+Při incidentu se špatně vymýšlí tón, struktura a přesná slova. Proto mějte šablony připravené dopředu. Atlassian i Statuspage ve svých materiálech zdůrazňují rychlé potvrzení problému, pravidelné aktualizace a jasné pojmenování dopadu. To je důležitější než dokonalá věta.
+
+Minimum veřejné incident zprávy:
+
+- co se děje,
+- koho se to týká,
+- jaký je dopad,
+- co právě děláte,
+- kdy přijde další update,
+- kde bude finální postmortem nebo shrnutí.
+
+Příklad první zprávy:
+
+> Vyšetřujeme zvýšenou chybovost při importu souborů v EU regionu. Běžné přihlášení a práce s projekty fungují. Další update zveřejníme do 30 minut.
+
+Příklad závěrečné zprávy:
+
+> Incident s importy v EU regionu byl vyřešen v 14:35 UTC. Příčinou byla chybná konfigurace fronty po releasu. Importy spuštěné mezi 13:50 a 14:35 UTC doporučujeme zkontrolovat a případně spustit znovu. Do 24 hodin doplníme krátké technické shrnutí a preventivní kroky.
+
+Incident komunikace má být pravdivá, stručná a pravidelná. Ne každá věc potřebuje román. Ale každá vážnější věc potřebuje vlastnictví.
+
+### 14.7 Privacy-first support stack
+
+Support stack vybírejte podle dat, která jím potečou. U SaaSu to mohou být e-maily zákazníků, fakturační kontext, interní poznámky, logy, screenshoty, nahrávky a někdy i citlivé obchodní údaje. To není místo pro náhodný nástroj „protože má hezký widget“.
+
+Před nasazením support nástroje si odpovězte:
+
+- Kde jsou data fyzicky uložená?
+- Má dodavatel EU region a smluvní zpracovatelské podmínky?
+- Jak dlouho drží konverzace, přílohy a metadata?
+- Dá se vypnout tracking návštěvníků bez aktivní konverzace?
+- Umíme exportovat a smazat data zákazníka?
+- Kdo v týmu má přístup ke konverzacím?
+- Jak se auditují interní poznámky a impersonace?
+- Posíláme obsah ticketů do AI funkcí? Pokud ano, za jakých podmínek?
+
+Privacy-first neznamená, že nikdy nepoužijete externí nástroj. Znamená to, že víte, co se děje s daty, umíte to vysvětlit zákazníkovi a nepřidáváte sledování jen proto, že checkbox existuje.
+
+### Checklist: support, dokumentace a release notes
+
+- [ ] Máme jednu jasnou support adresu nebo formulář.
+- [ ] Každý dotaz dostává kategorii, stav a vlastníka.
+- [ ] Opakované dotazy se mění v úpravu produktu nebo dokumentace.
+- [ ] Dokumentace rozlišuje tutoriály, návody, referenci a vysvětlení.
+- [ ] Články mají vlastníka a datum poslední kontroly.
+- [ ] Support odpovědi nevyžadují zbytečná osobní data, exporty ani tajné klíče.
+- [ ] Changelog obsahuje jen významné změny a je psaný pro lidi.
+- [ ] Release notes jasně označují změny v datech, rolích, API a billingu.
+- [ ] Incident šablony jsou připravené předem.
+- [ ] Support nástroje mají ověřený EU provoz, retenci, export a mazání dat.
+
+### Mini cvičení: support systém za jedno odpoledne
+
+Vezměte posledních 20 zákaznických dotazů, nebo pokud je ještě nemáte, napište 20 pravděpodobných dotazů podle produktu. Ke každému doplňte:
+
+| Dotaz | Kategorie | Chybí v produktu? | Chybí v dokumentaci? | Riziko pro data? | Další krok |
+| --- | --- | --- | --- | --- | --- |
+| „Jak změním vlastníka účtu?“ | administrace | částečně | ano | střední | návod + jasnější UI |
+| „Můžete se podívat do našeho importu?“ | technický problém | ano | ano | vysoké | ID importu místo souboru |
+| „Kde najdu DPA?“ | bezpečnost a data | ne | ano | nízké | privacy centrum |
+
+Pak vyberte tři nejčastější nebo nejrizikovější dotazy a pro každý vytvořte:
+
+1. krátký článek v dokumentaci,
+2. šablonu support odpovědi,
+3. návrh produktového zlepšení,
+4. pravidlo, jaká data si support smí vyžádat,
+5. release note text, pokud změna půjde do produktu.
+
+Po tomhle cvičení často zjistíte, že support nepotřebuje víc lidí. Potřebuje méně tření, lepší texty a produkt, který umí vysvětlit sám sebe dřív, než uživatel otevře inbox.
+
+### Zdroje ke kapitole 14
+
+- Diátaxis: [A systematic approach to technical documentation authoring](https://diataxis.fr/)
+- Keep a Changelog: [Changelog basics and guiding principles](https://keepachangelog.com/en/2.0.0/)
+- Semantic Versioning: [Semantic Versioning 2.0.0](https://semver.org/)
+- Atlassian: [Incident communication templates and examples](https://www.atlassian.com/incident-management/incident-communication/templates)
+- Atlassian Support: [Incident template library](https://support.atlassian.com/statuspage/docs/incident-template-library/)
+- European Commission: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
+- European Commission: [Dealing with individuals' requests under GDPR](https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/dealing-individuals-requests_en)
+
+---
+
 ## Pracovní log
+- 2026-08-21: Dopsána kapitola 14 „Support, dokumentace a release notes“ s mapou dotazů, Diátaxis strukturou dokumentace, privacy-first support procesem, release notes, incident šablonami, checklistem a ověřenými zdroji.
+
 - 2026-08-21: Dopsána kapitola 13 „Administrace, role a auditní stopa“ s RBAC modelem, citlivými akcemi, audit logem, support přístupem, exportem dat, testováním oprávnění, checklistem a ověřenými zdroji.
 
 - 2026-08-21: Dopsána kapitola 12 „Pricing, trial a platby“ s hodnotovou jednotkou, tarify, trial modelem, EU DPH/SCA kontextem, dunningem, privacy-first billingem, checklistem a ověřenými zdroji.
