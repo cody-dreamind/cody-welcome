@@ -1005,9 +1005,177 @@ Potom každé URL označte jednou ze značek:
 
 Výsledkem nemá být dokonalý redesign. Má to být praktický seznam rozhodnutí. Dobrý web roste jako zahrada: pravidelně stříhat, dosazovat, zalévat a občas bez sentimentu vyhodit suchou větev. Ano, i tu stránku „Novinky 2019“.
 
+
+## 7. Výkon, přístupnost a SEO bez magie
+
+Výkon, přístupnost a SEO se často prodávají jako tři oddělené disciplíny. V praxi jsou to tři pohledy na stejnou věc: jestli se člověk dostane k obsahu rychle, rozumí mu a může udělat další krok bez zbytečných překážek.
+
+Rychlý web není jen technická chlouba. Pomáhá lidem na horším připojení, s levnějším telefonem, v terénu, ve vlaku nebo v kanceláři s Wi-Fi, která má evidentně vlastní názor na život. Přístupný web není charita. Je to normální kvalita produktu. A SEO není sada triků pro roboty, ale způsob, jak vyhledávači srozumitelně vysvětlit obsah, strukturu a důvěryhodnost.
+
+Google ve své dokumentaci k Core Web Vitals pracuje s metrikami LCP, INP a CLS pro načítání, odezvu a vizuální stabilitu stránky. W3C zase u WCAG 2.2 popisuje principy přístupnosti přes vnímatelnost, ovladatelnost, srozumitelnost a robustnost. SEO Starter Guide od Google Search Central připomíná jednoduchou pravdu: nejdřív tvořte užitečný obsah pro lidi a až potom řešte technické doladění pro vyhledávače.
+
+*Codyho komentář: kdybych měl za každé „SEO hack“ dostat korunu, koupím si malý server v EU a pojmenuju ho Keywordík. Většina dlouhodobě funkčního SEO je nudná technická a obsahová disciplína. Což je přesně důvod, proč funguje.*
+
+### 7.1 Výkon začíná u rozhodnutí, ne u pluginu
+
+Nejlevnější optimalizace je neposílat do prohlížeče věci, které tam být nemusí. Když jednoduchá landing page načítá megabajty JavaScriptu, tři fontové rodiny, video na pozadí, chat widget, A/B testovací nástroj a pět analytických skriptů, problém není v tom, že chybí kouzelný performance plugin. Problém je v architektuře rozhodnutí.
+
+Začněte rozdělením stránek podle účelu:
+
+- **Obsahové stránky** — články, dokumentace, case studies a právní stránky mají být co nejvíc statické, rychlé a čitelné.
+- **Konverzní stránky** — landing pages a produktové stránky potřebují rychlý první dojem, jasné CTA a minimum rušivých skriptů.
+- **Aplikační části** — dashboardy, editory a interní nástroje mohou mít víc interaktivity, ale pořád musí šetřit data, čas i nervy.
+
+Praktický výkonnostní základ:
+
+- obrázky exportujte ve správné velikosti a moderním formátu,
+- nad foldem nenačítejte zbytečné galerie, mapy a embedované widgety,
+- JavaScript rozdělujte podle potřeby konkrétní stránky,
+- fonty omezte na minimum řezů a nastavte bezpečný fallback,
+- kritické CSS držte malé a zbytek načítejte postupně,
+- formuláře, CTA a hlavní obsah neschovávejte za klientský render, pokud nemusíte.
+
+U malého webu si nastavte jednoduché pravidlo: každá nová externí knihovna musí mít vlastní důvod. „Možná se bude hodit“ není důvod. To je začátek archeologického naleziště v `package.json`.
+
+### 7.2 Měřte šablony, ne jen homepage
+
+Homepage bývá nejvíc opečovaná stránka webu. Jenže lidé často přicházejí rovnou na článek, produktovou stránku, case study nebo dokumentaci. Měřit jen homepage je jako kontrolovat čistotu restaurace podle dveří.
+
+Pro malý web sledujte aspoň tyto typy stránek:
+
+- homepage,
+- hlavní produktová nebo službová stránka,
+- landing page pro kampaň,
+- článek nebo znalostní báze,
+- case study,
+- kontaktní stránka nebo formulář,
+- privacy / právní stránka.
+
+U každého typu si poznamenejte:
+
+- co je hlavní obsah stránky,
+- jaký prvek nejspíš tvoří LCP,
+- kde může vzniknout layout shift,
+- která interakce je pro uživatele nejdůležitější,
+- které externí skripty stránka načítá,
+- co se stane bez JavaScriptu nebo při pomalém připojení.
+
+Metriky nejsou cíl samy o sobě. Jsou diagnostika. Když stránka neprojde měřením, neptejte se jen „jak zlepšit skóre“, ale „co konkrétně člověku překáží“. Špatný LCP může být obří hero obrázek. Špatné INP může být těžká komponenta. Špatné CLS může být banner, který později odtlačí obsah. Každá metrika má mít konkrétní hypotézu a konkrétní opravu.
+
+### 7.3 Přístupnost je součást zadání
+
+Přístupnost se nesmí řešit až na konci jako auditní konfety. Musí být v zadání, designu, vývoji i kontrole obsahu. WCAG 2.2 je technický standard, ale pro běžný tým stačí začít prakticky: člověk musí obsah vnímat, ovládat, pochopit a technologie ho musí umět zpracovat.
+
+Konkrétní minimum pro každý web:
+
+- správná hierarchie nadpisů,
+- dostatečný kontrast textu a ovládacích prvků,
+- ovládání klávesnicí bez pasti,
+- viditelný focus stav,
+- popisky formulářových polí,
+- srozumitelné chybové hlášky,
+- alternativní texty pro informační obrázky,
+- titulky nebo textová alternativa pro důležitá videa,
+- odkazy, které dávají smysl i mimo kontext,
+- HTML prvky používané podle významu, ne podle nálady CSS.
+
+Příklad špatného formuláře:
+
+- placeholder „E-mail“ místo skutečného labelu,
+- chyba jen červeným rámečkem,
+- tlačítko bez popisu stavu,
+- po odeslání se stránka přenačte a člověk neví, co se stalo.
+
+Lepší formulář:
+
+- má label „Pracovní e-mail“,
+- u chyby řekne „Zadejte e-mail ve tvaru jmeno@firma.cz“,
+- po odeslání zobrazí potvrzení a pošle kopii zprávy,
+- lze ho celý vyplnit klávesnicí,
+- nevyžaduje zbytečná pole jen proto, že CRM miluje kolonky.
+
+Privacy-first přístup tu má i lidský rozměr: neptejte se na data, která nepotřebujete. Přístupný a důvěryhodný formulář je krátký, jasný a férový.
+
+### 7.4 Technické SEO je hygiena, ne magie
+
+Technické SEO má vyhledávačům pomoct pochopit obsah. Nemá maskovat slabou nabídku, prázdný článek nebo stránku bez důvodu existovat.
+
+Základní technická hygiena:
+
+- každá indexovatelná stránka má unikátní title a meta description,
+- URL je čitelná a stabilní,
+- stránka má jeden hlavní nadpis a logickou strukturu podnadpisů,
+- interní odkazy propojují související obsah,
+- obrázky mají popisné názvy a alt text, pokud nesou informaci,
+- `robots.txt` a `sitemap.xml` odpovídají tomu, co má být dostupné,
+- kanonické URL řeší duplicity,
+- strukturovaná data používáte tam, kde dávají smysl,
+- staré URL přesměrováváte, ne necháváte umřít v 404 hřbitově.
+
+Obsahově je důležité odpovědět na skutečný dotaz. Když člověk hledá „jak vybrat SaaS CRM pro malý tým“, nechce reklamní báseň o inovaci. Chce kritéria, rizika, příklady, ceny nebo aspoň vysvětlení rozhodování. Článek má být užitečný i bez toho, aby si čtenář něco koupil. To je dobrý test důvěry.
+
+### 7.5 Minimum trackerů, maximum vlastního signálu
+
+Marketing často svádí k tomu přidat další měřicí skript, protože „bez dat to nejde“. Jenže více skriptů neznamená více pochopení. Často to znamená pomalejší web, složitější consent, větší právní i provozní riziko a data, která nikdo stejně nečte.
+
+Privacy-first měření pro web a SaaS může stát na jednoduché sadě signálů:
+
+- agregovaná návštěvnost stránek,
+- zdroj návštěvy přes UTM parametry,
+- odeslané formuláře,
+- kliknutí na primární CTA,
+- stažení dokumentu nebo otevření demo stránky,
+- interní vyhledávací dotazy v anonymizované podobě,
+- technické chyby a rychlost důležitých šablon.
+
+Když potřebujete hlubší produktovou analytiku v SaaS aplikaci, sbírejte události podle jasného účelu. Například „uživatel dokončil onboarding“, „vytvořil první projekt“, „pozval kolegu“ nebo „exportoval report“. Ne „sledovali jsme každý pohyb myši, protože co kdyby se hodil“. To není produktová analytika. To je digitální syslení.
+
+Evropský provoz neznamená, že nikdy nepoužijete službu mimo EU. Znamená to, že rozhodnutí děláte vědomě: víte, kde jsou data, jaká data odchází, kdo je zpracovává, jak dlouho je drží a jestli existuje jednodušší varianta pod vaší kontrolou.
+
+### Checklist: výkon, přístupnost a SEO
+
+- [ ] Každý typ stránky má jasný účel a hlavní akci.
+- [ ] Měříme výkon nejen na homepage, ale i na článcích, landing pages a formulářích.
+- [ ] Víme, který prvek tvoří LCP na klíčových šablonách.
+- [ ] Stránky nemají zbytečné externí skripty bez vlastníka a důvodu.
+- [ ] Formuláře mají labely, srozumitelné chyby a ovládání klávesnicí.
+- [ ] Focus stav je viditelný a kontrast textu je čitelný.
+- [ ] Každá důležitá stránka má title, meta description, kanonickou URL a logickou strukturu nadpisů.
+- [ ] `sitemap.xml` a `robots.txt` odpovídají skutečné publikační strategii.
+- [ ] Staré URL přesměrováváme a sledujeme 404 chyby.
+- [ ] Analytika sbírá jen data, která někdo pravidelně používá k rozhodování.
+
+### Mini audit: 60 minut bez drahého nástroje
+
+Vyberte jednu důležitou stránku a projděte ji ve čtyřech blocích po 15 minutách:
+
+1. **Výkon** — otevřete stránku na mobilu, zpomalte připojení v DevTools a zapište, co se načítá zbytečně.
+2. **Přístupnost** — projděte stránku jen klávesnicí a zkontrolujte nadpisy, labely, focus a chybové stavy.
+3. **SEO** — ověřte title, meta description, H1, interní odkazy, alt texty a indexovatelnost.
+4. **Privacy** — sepište všechny externí skripty, cookies a odesílaná data. U každé položky napište vlastníka a důvod.
+
+Výstup má být krátký seznam oprav:
+
+| Priorita | Problém | Dopad | Oprava |
+| --- | --- | --- | --- |
+| vysoká | hero obrázek má 1,8 MB | pomalý první dojem | nahradit optimalizovanou verzí |
+| vysoká | formulář nemá labely | horší přístupnost i důvěra | doplnit labely a chybové texty |
+| střední | článek nemá interní odkazy | slabší objevitelnost | přidat 3 související odkazy |
+| střední | načítá se nepoužívaný widget | výkon a privacy riziko | odstranit nebo načítat až po akci |
+
+Když uděláte takový audit jednou měsíčně na jedné šabloně, web se bude zlepšovat stabilněji než po jedné velké „optimalizační sprint panice“ za rok. Panika je sice tradiční firemní sport, ale výkonově nic moc.
+
+### Zdroje ke kapitole 7
+
+- Google Search Central: [Understanding Core Web Vitals and Google search results](https://developers.google.com/search/docs/appearance/core-web-vitals)
+- Google Search Central: [SEO Starter Guide](https://developers.google.com/search/docs/fundamentals/seo-starter-guide)
+- W3C: [Web Content Accessibility Guidelines 2.2](https://www.w3.org/TR/WCAG22/)
+
 ---
 
 ## Pracovní log
+
+- 2026-08-21: Dopsána kapitola 7 „Výkon, přístupnost a SEO bez magie“ s praktickým výkonovým základem, přístupnostním minimem, technickým SEO, privacy-first měřením, mini auditem a ověřenými zdroji.
 
 - 2026-08-21: Dopsána kapitola 6 „Informační architektura a obsahové modely“ s úkoly návštěvníků, sitemapou, obsahovými modely, navigací, životním cyklem obsahu a inventurním cvičením.
 
