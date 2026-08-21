@@ -687,7 +687,170 @@ Po cvičení nevznikne velká značka. Vznikne použitelný základ. A to je př
 
 ---
 
+# Část II — Webový vývoj prakticky
+
+## 5. Technický stack pro malý tým
+
+Technický stack je sada rozhodnutí, která budete udržovat dlouho poté, co zmizí nadšení z první verze. U malého týmu proto není nejlepší stack ten nejmodernější. Nejlepší je ten, který tým dokáže bezpečně provozovat, vysvětlit klientovi, rozumně najmout, opravit v pátek odpoledne a za rok bez pláče rozšířit.
+
+Stack má sloužit produktu. Ne egu vývojáře, ne trendům na sociálních sítích a už vůbec ne pocitu, že „když to není distribuované, tak to není opravdový SaaS“. Distribuovaný chaos je pořád chaos, jen má víc dashboardů.
+
+Pro první verzi webu nebo SaaSu se ptejte hlavně:
+
+- kolik lidí na tom bude pracovat,
+- jak rychle potřebujete ověřit hodnotu,
+- jak citlivá data zpracováváte,
+- kdo bude systém provozovat,
+- jaké integrace jsou opravdu nutné,
+- co se stane, když jedna část vypadne,
+- jak snadno půjde projekt předat nebo najmout dalšího člověka.
+
+*Codyho komentář: stack není módní outfit. Nemusí každou sezónu vypadat jinak. Když funguje, je bezpečný a tým ho umí, je to vlastnost, ne ostuda.*
+
+### 5.1 Vyberte nejmenší architekturu, která unese realitu
+
+Malý tým často nepotřebuje mikroslužby, event streaming, tři frontendy a architekturu připomínající mapu metra po kávě. Potřebuje jasné hranice, jednoduché nasazení a minimum míst, kde může vzniknout chyba.
+
+Pro většinu prvních verzí stačí jedna z těchto variant:
+
+- **Statický nebo obsahový web:** vhodný pro marketingový web, blog, dokumentaci, microsite nebo jednoduchou prezentaci služby.
+- **Server-renderovaná aplikace:** vhodná pro SaaS s přihlášením, formuláři, administrací, fakturací a běžnou obchodní logikou.
+- **Jednoduchá API aplikace s frontendem:** vhodná tam, kde potřebujete oddělený klientský frontend, mobilní aplikaci nebo více spotřebitelů API.
+- **Interní nástroj:** vhodný pro provozní týmy, administraci, reporting nebo automatizaci procesu bez veřejné marketingové vrstvy.
+
+Důležité není, jak vznešeně architektura zní. Důležité je, jestli umí odpovědět na praktické otázky:
+
+- Kde se řeší autentizace?
+- Kde se ukládají data?
+- Kde se logují chyby?
+- Jak se dělá záloha?
+- Jak se nasazuje nová verze?
+- Jak se vrací předchozí verze?
+- Kdo má přístup do produkce?
+
+Pokud na tyto otázky neumíte odpovědět na jedné stránce dokumentace, stack je pro aktuální fázi pravděpodobně moc složitý.
+
+### 5.2 Databáze: začněte konzervativně
+
+Databáze je srdce produktu. Ukládá zákazníky, objednávky, nastavení, auditní záznamy, fakturaci, obsah nebo dokumenty. Experimentovat se srdcem jen proto, že někdo napsal nadšený thread, je odvážné. A „odvážné“ je někdy hezké slovo pro „budoucí incident“.
+
+Pro většinu malých SaaSů je bezpečná výchozí volba relační databáze. Důvody jsou nudné, tedy výborné:
+
+- umí transakce,
+- dobře modeluje vztahy,
+- má zralé nástroje pro zálohy,
+- vývojáři ji znají,
+- dobře se kontrolují práva a integrita dat,
+- podporuje reporting a auditní dotazy.
+
+Alternativy dávají smysl, když máte jasný důvod: fulltext, fronty, analytické dotazy, cache, dokumentové ukládání nebo časové řady. Ale nepřidávejte další úložiště dřív, než víte, jak ho budete zálohovat, monitorovat a mazat podle pravidel uchovávání dat.
+
+Privacy-first pohled je jednoduchý: čím víc úložišť, tím víc míst, kde musíte hlídat přístupy, retenci, exporty, mazání a bezpečnost. Jedna dobře spravovaná databáze je často lepší než pět specializovaných služeb, které nikdo neumí nakreslit na tabuli bez záchvatu.
+
+### 5.3 Hosting a provoz: Evropa jako výchozí nastavení
+
+Pro Dreamind styl je dobré brát evropský provoz jako základní produktové rozhodnutí, ne jako pozdější právní doplněk. Neznamená to slepě odmítat každý mimoevropský nástroj. Znamená to vědomě vědět, kde data končí a proč.
+
+Při výběru hostingu si napište tabulku:
+
+| Otázka | Co hledat |
+| --- | --- |
+| Kde fyzicky běží produkce? | EU region, jasná dokumentace lokality, možnost volby regionu |
+| Kdo má administrátorský přístup? | konkrétní role, MFA, audit přístupů |
+| Jak se dělají zálohy? | frekvence, šifrování, test obnovy, retenční doba |
+| Jak se nasazuje? | automatizace, rollback, oddělené prostředí pro test |
+| Jak se řeší incident? | logy, alerty, kontakty, odpovědnost |
+| Jak odejít pryč? | export dat, standardní technologie, žádný zbytečný lock-in |
+
+U malého týmu je často lepší jeden srozumitelný evropský VPS nebo spravovaná platforma s jasnými pravidly než slepenec služeb, který vypadá pohodlně, ale posílá data na deset míst. Komfort je fajn, dokud nezjistíte, že neumíte říct zákazníkovi, kde přesně jsou jeho údaje.
+
+### 5.4 Frontend: nepřetěžujte stránku kvůli jednoduchému obsahu
+
+Marketingový web potřebuje rychlost, čitelnost, přístupnost a jednoduchou údržbu. Pokud stránka hlavně zobrazuje obsah, nepotřebuje nutně těžkou klientskou aplikaci. Potřebuje dobré HTML, smysluplnou strukturu, optimalizované obrázky, formuláře a měření bez invazivních skriptů.
+
+Praktické pravidlo:
+
+- obsahové stránky generujte co nejjednodušeji,
+- interaktivitu přidávejte tam, kde pomáhá úkolu,
+- formuláře validujte na klientovi i serveru,
+- navigaci a základní obsah nenechávejte závislé jen na JavaScriptu,
+- komponenty sdílejte, ale nedělejte z každého odstavce návrhový systém.
+
+U SaaS aplikace je interaktivní frontend často potřeba. I tam ale platí: uživatel neplatí za počet stavových knihoven. Platí za to, že dokončí úkol rychle, bezpečně a bez pocitu, že aplikace bojuje sama se sebou.
+
+### 5.5 Integrace: každá externí služba je závazek
+
+Integrace umí šetřit čas, ale každá přidává závislost. Platební brána, e-mailing, analytika, helpdesk, mapy, CRM, chat widget, AI API, monitoring — všechno může dávat smysl. Nic z toho by ale nemělo přibýt bez krátkého rozhodovacího zápisu.
+
+Pro každou integraci si odpovězte:
+
+1. Jaký problém řeší?
+2. Jaká data do ní posíláme?
+3. Je služba nezbytná pro běh produktu?
+4. Co se stane při výpadku?
+5. Dá se vypnout bez rozbití hlavní funkce?
+6. Kde jsou data uložena?
+7. Jaký je plán migrace nebo náhrady?
+
+Tohle není byrokracie. Je to pojistka proti tomu, aby se z jednoduchého produktu stal katalog cizích skriptů. U privacy-first provozu navíc platí, že marketingová pohodlnost není automaticky dostatečný důvod pro sběr dat přes třetí stranu.
+
+### 5.6 Dokumentujte rozhodnutí, ne jen kód
+
+Malý tým často dokumentaci odkládá, protože „všichni víme, jak to funguje“. To je pravda do chvíle, než jeden člověk odjede na dovolenou, přijde nový vývojář nebo se po půl roce řeší, proč vlastně existují tři fronty a dvě databáze.
+
+Stačí jednoduchý technický dokument:
+
+- přehled architektury,
+- důvod výběru hlavních technologií,
+- seznam externích služeb,
+- popis prostředí: lokál, test, produkce,
+- nasazovací postup,
+- zálohy a obnova,
+- práce s tajnými klíči,
+- datové toky a citlivá data,
+- kontakty pro incidenty.
+
+U každého většího rozhodnutí přidejte krátký záznam:
+
+> Rozhodli jsme se pro `X`, protože `Y`. Nevybrali jsme `Z`, protože `A`. Rozhodnutí znovu otevřeme, pokud nastane `B`.
+
+Takový zápis je lepší než dlouhá debata ztracená v chatu. Pomáhá novým lidem, klientovi i budoucímu vám. Budoucí vy mimochodem ocení, když mu nebudete schovávat miny do produkce. Je to slušnost vůči vlastnímu já.
+
+### Checklist: technický stack pro malý tým
+
+- [ ] Umíme jednou větou vysvětlit, proč jsme zvolili aktuální architekturu.
+- [ ] Stack odpovídá fázi produktu, ne ambicím na konferenční přednášku.
+- [ ] Máme jasné místo pro autentizaci, data, logy, chyby a konfiguraci.
+- [ ] Databázová volba je konzervativní, zálohovaná a dobře pochopitelná.
+- [ ] Víme, kde fyzicky běží produkce a kde jsou uložená data.
+- [ ] Každá externí služba má popsaný účel, datové toky a plán vypnutí.
+- [ ] Formuláře, měření a marketingové integrace respektují privacy-first principy.
+- [ ] Nasazení, rollback a obnova ze zálohy nejsou závislé na jednom člověku.
+- [ ] Existuje krátká technická dokumentace pro předání projektu.
+- [ ] Novou technologii přidáváme až po jasném rozhodovacím zápisu.
+
+### Mini cvičení: stack audit za 60 minut
+
+Otevřete repozitář, hosting, databázi a seznam externích služeb. Pak vyplňte:
+
+1. Hlavní aplikace běží na: `_____`.
+2. Produkční data jsou v: `_____`.
+3. Produkce fyzicky běží v regionu: `_____`.
+4. Přístup do produkce mají: `_____`.
+5. Záloha se dělá: `_____`.
+6. Obnovu ze zálohy jsme naposledy testovali: `_____`.
+7. Externí služby s osobními daty jsou: `_____`.
+8. Služby, které můžeme vypnout bez pádu produktu: `_____`.
+9. Největší provozní riziko stacku je: `_____`.
+10. Jedno rozhodnutí, které tento měsíc zdokumentujeme: `_____`.
+
+Výsledek nemusí být dokonalý. Má být pravdivý. Stack, který umíte popsat poctivě, můžete zlepšovat. Stack, který existuje jen jako hromada implicitních znalostí v hlavě jednoho člověka, je drahé kouzelnictví.
+
+---
+
 ## Pracovní log
+
+- 2026-08-21: Dopsána kapitola 5 „Technický stack pro malý tým“ s architekturou, databází, evropským provozem, frontendem, integracemi, dokumentací a stack auditem.
 
 - 2026-08-21: Dopsána kapitola 4 „Minimum viable brand: důvěra bez agenturního divadla“ s tónem značky, vizuálním minimem, důvěrou, provozními texty, privacy-first positioningem a checklistem.
 
