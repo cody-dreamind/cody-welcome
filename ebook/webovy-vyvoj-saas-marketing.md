@@ -2331,7 +2331,240 @@ Na konci si položte nepříjemnou otázku: kdyby pricing stránku četl váš n
 
 ---
 
+## 13. Administrace, role a auditní stopa
+
+Administrace je místo, kde se SaaS produkt mění z hezké aplikace na skutečný provozní systém. Uživatelé potřebují spravovat tým, práva, faktury, data, integrace a někdy i chyby, které sami vyrobili v pátek v 16:57. Pokud admin rozhraní vznikne až jako dodatek, bývá to poznat: všichni mají moc dělat všechno, citlivé akce nejsou dohledatelné a support řeší věci přímým zásahem do databáze. To není administrace. To je escape room s produkčními daty.
+
+Dobrá administrace má tři cíle:
+
+1. **Bezpečně rozdělit odpovědnost.** Každý člověk má mít práva podle své role a situace.
+2. **Zpřehlednit provoz.** Tým ví, kdo co nastavil, co se změnilo a co je potřeba řešit.
+3. **Snížit potřebu ručních zásahů.** Support pomáhá, ale nemusí kvůli každé drobnosti sahat do databáze nebo impersonovat uživatele.
+
+U privacy-first SaaSu je administrace ještě důležitější. Nejde jen o pohodlí. Jde o kontrolu nad daty, auditovatelnost a důvěru. Evropský zákazník se čím dál častěji ptá: kdo má přístup k datům, kde to najdu, jak ho odeberu a co se stalo, když někdo něco změnil? Admin sekce má umět odpovědět bez toho, aby vývojář lovil logy jako archeolog v JSON poušti.
+
+*Codyho komentář: admin rozhraní je často nejupřímnější část produktu. Marketing říká „enterprise-ready“, ale když nejde odebrat bývalého zaměstnance bez SQL dotazu, enterprise právě spadl ze židle.*
+
+### 13.1 Nejdřív pojmenujte objekty a odpovědnosti
+
+Role nedávají smysl bez jasného modelu vlastnictví. Dřív než začnete kreslit tabulku oprávnění, pojmenujte hlavní objekty produktu:
+
+- organizace nebo workspace,
+- tým,
+- projekt,
+- klient,
+- dokument,
+- automatizace,
+- faktura,
+- integrace,
+- API klíč,
+- uživatel,
+- auditní událost.
+
+Pak si u každého objektu položte tři otázky:
+
+1. Kdo ho může vidět?
+2. Kdo ho může změnit?
+3. Kdo za něj odpovídá, když změna způsobí problém?
+
+Příklad: API klíč není jen řádek v nastavení. Je to přístupový token k datům nebo akcím. Proto má mít vlastníka, rozsah oprávnění, datum vytvoření, poslední použití, možnost rotace a auditní stopu. Pokud API klíč umí všechno a nikdo neví, kdo ho vytvořil, máte ve skutečnosti administrátorský účet v přestrojení za technickou integraci.
+
+U malých SaaSů se vyplatí začít konzervativně. Nemusíte hned stavět nekonečný permission builder. Stačí jasně oddělit běžné používání, správu týmu, billing a bezpečnostní nastavení.
+
+### 13.2 RBAC většinou stačí, ABAC nechte na později
+
+Nejběžnější model je RBAC: role-based access control. Uživatel má roli a ta role určuje, co smí. Pro první B2B SaaS často stačí čtyři role:
+
+| Role | Typické právo | Typické omezení |
+| --- | --- | --- |
+| Owner | správa workspace, billing, mazání organizace | měl by být alespoň jeden, ale ne deset |
+| Admin | správa uživatelů, projektů a nastavení | nemusí vidět platební metody nebo rušit účet |
+| Member | běžná práce s projekty a daty | nespravuje role ani globální nastavení |
+| Viewer | čtení vybraných dat | nemění obsah ani konfiguraci |
+
+ABAC, tedy attribute-based access control, přidává pravidla podle atributů: oddělení, země, typ dat, stav projektu, citlivost dokumentu nebo vlastnictví záznamu. Je silnější, ale také složitější na vysvětlení, testování a audit. Pokud ho nepotřebujete, nezačínejte jím.
+
+Praktické pravidlo: pro první verzi navrhněte role tak, aby zákazník nemusel rozumět interní architektuře produktu. Role mají být popsané lidsky:
+
+- „Může spravovat fakturaci“ je lepší než `billing:write`.
+- „Může zvát členy týmu“ je lepší než `organization.members.invite.create`.
+- „Může exportovat osobní údaje“ musí být viditelné a záměrně udělené právo, ne vedlejší efekt role Admin.
+
+Technické permission kódy jsou v pořádku v databázi a testech. V rozhraní mají být přeložené do rozhodnutí, kterým zákazník rozumí.
+
+### 13.3 Nebezpečné akce vyžadují jiný rytmus
+
+Ne všechny akce jsou stejné. Změna názvu projektu nepotřebuje stejnou ochranu jako smazání organizace nebo export všech dat. Admin rozhraní má rozlišovat běžné, citlivé a nevratné akce.
+
+| Typ akce | Příklad | Doporučené chování |
+| --- | --- | --- |
+| Běžná | změna názvu projektu | okamžité uložení, jasná zpětná vazba |
+| Citlivá | změna role uživatele | potvrzení, audit log, případně notifikace |
+| Bezpečnostní | vytvoření API klíče | zobrazení tajemství jen jednou, omezený rozsah |
+| Nevratná | smazání workspace | opakované potvrzení, čekací lhůta nebo soft delete |
+| Compliance | export osobních údajů | audit, oprávnění, časové omezení odkazu |
+
+Citlivé akce by měly mít minimálně:
+
+- jasné pojmenování důsledku,
+- potvrzení aktivní volbou, ne jen náhodným klikem,
+- auditní záznam,
+- možnost zjistit, kdo akci provedl,
+- rozumnou obnovu nebo reverzní proces, pokud to dává smysl.
+
+U mazání dat používejte soft delete tam, kde to pomůže napravit chybu, ale ne jako výmluvu pro nekonečnou retenci. Pokud máte zákonný nebo smluvní důvod držet data, popište ho. Pokud ne, smažte je. GDPR princip omezení uložení a minimalizace dat není dekorace do právních dokumentů; je to architektonické rozhodnutí.
+
+### 13.4 Audit log má být produktová funkce, ne debug výpis
+
+Audit log není jen pro vývojáře. Je to funkce pro zákazníka, support a bezpečnost. Má odpovědět na otázky:
+
+- kdo provedl akci,
+- kdy se stala,
+- čeho se týkala,
+- jaký byl výsledek,
+- odkud přibližně přišla,
+- jaký byl důvod nebo kontext, pokud ho uživatel uvedl.
+
+Rozumný auditní záznam může vypadat takto:
+
+| Pole | Příklad |
+| --- | --- |
+| čas | `2026-08-21T12:18:03Z` |
+| aktér | `jana@example.eu` |
+| akce | `member.role_changed` |
+| objekt | `workspace:dreamind-demo / user:petr@example.eu` |
+| změna | `Member → Admin` |
+| výsledek | `success` |
+| kontext | `provedeno z administrace týmu` |
+
+Co do audit logu nepatří:
+
+- hesla,
+- celé session tokeny,
+- celé webhook payloady,
+- osobní údaje bez důvodu,
+- obsah dokumentů,
+- platební údaje,
+- tajné API klíče.
+
+Log má být užitečný, ale ne zvětšovat škodu při úniku. Pro privacy-first provoz je důležité logy kategorizovat: bezpečnostní logy, aplikační logy, auditní logy a analytika nejsou totéž. Mají mít různá oprávnění, retenci i způsob exportu.
+
+### 13.5 Support nástroje nesmí obejít produktovou bezpečnost
+
+Každý SaaS nakonec potřebuje podporu: najít účet, ověřit stav integrace, restartovat import, pomoci s billingem. Problém nastane, když support získá neomezený přístup „protože je to jednodušší“. Jednodušší pro support často znamená rizikovější pro zákazníka.
+
+Bezpečnější model:
+
+- support vidí jen data potřebná pro řešení požadavku,
+- citlivé údaje jsou maskované,
+- impersonace je výjimečná, časově omezená a auditovaná,
+- zákazník vidí nebo může zjistit, že support přistupoval k účtu,
+- interní poznámky neobsahují tajné klíče ani kopie dokumentů,
+- ruční opravy mají vlastní workflow a záznam.
+
+Pokud musíte umožnit impersonaci, nedělejte z ní tajný teleport. Dejte jí pravidla: kdo ji smí spustit, na jak dlouho, s jakým důvodem, jak se zapisuje a které akce jsou během impersonace blokované. Například mazání dat, změna billing údajů nebo generování API klíčů by měly zůstat zakázané nebo vyžadovat další schválení.
+
+### 13.6 Administrace musí umět export, odchod a obnovu
+
+Zákazník, který nemůže odejít, není loajální. Je rukojmí. A rukojmí obvykle nepíšou hezké case studies.
+
+Privacy-first SaaS má mít jasné procesy pro:
+
+- export dat ve srozumitelném formátu,
+- převod vlastnictví workspace,
+- odebrání bývalého člena týmu,
+- rotaci API klíčů,
+- zrušení účtu,
+- smazání nebo anonymizaci dat,
+- obnovu omylem smazaného objektu, pokud je v retenční lhůtě.
+
+Export nemusí být luxusní hned v první verzi, ale musí být plánovaný. I jednoduchý CSV nebo JSON export je lepší než odpověď „napište supportu a my něco vytáhneme“. U B2B zákazníků je schopnost exportu často součást důvěry: ukazuje, že produkt nestojí na uzamčení dat, ale na hodnotě služby.
+
+### 13.7 Přístupová práva testujte jako business pravidla
+
+Chyby v rolích jsou zákeřné, protože se často neprojeví rozbitou stránkou. Projeví se tím, že někdo vidí nebo mění něco, co nemá. Proto permission model nepatří jen do kontroleru a pocitu „to nějak máme“.
+
+Testujte minimálně:
+
+- Viewer nemůže měnit nastavení.
+- Member nemůže zvát nové členy, pokud to není záměr.
+- Admin nemůže zrušit billing nebo smazat ownera, pokud to nemá povolené.
+- Owner nemůže odebrat posledního ownera bez převodu vlastnictví.
+- API klíč nemůže udělat víc, než říká jeho rozsah.
+- Uživatel z jednoho workspace nevidí objekty jiného workspace.
+- Export osobních údajů vyžaduje správnou roli a zapisuje audit log.
+
+Každý nalezený bug v oprávnění berte jako příležitost přidat test. Ne jako jednorázovou opravu. Přístupová práva jsou obchodní pravidla a bezpečnostní hranice zároveň.
+
+### 13.8 Minimální admin pro první B2B SaaS
+
+Pokud stavíte první verzi, nesnažte se vytvořit perfektní enterprise konzoli. Postavte nejmenší administraci, která zákazníkovi dá kontrolu a vám sníží provozní riziko.
+
+Minimum:
+
+1. Přehled workspace a základních údajů.
+2. Správa členů týmu a rolí.
+3. Billing a fakturační údaje.
+4. API klíče nebo integrace, pokud je produkt používá.
+5. Audit log citlivých akcí.
+6. Export dat.
+7. Bezpečnostní nastavení: heslo, relace, případně SSO nebo 2FA podle segmentu.
+8. Kontaktní cesta na support s kontextem účtu.
+
+Všechno ostatní může počkat, pokud to není nutné pro hlavní workflow. Admin má být bezpečný a srozumitelný, ne nafouknutý. Nejhorší varianta je poloviční enterprise: spousta nastavení, ale žádná jasná odpovědnost.
+
+### Checklist: administrace, role a auditní stopa
+
+- [ ] Máme pojmenované hlavní objekty produktu a jejich vlastníky.
+- [ ] Role jsou srozumitelné zákazníkovi, ne jen vývojářům.
+- [ ] Owner, Admin, Member a Viewer mají jasně oddělená práva.
+- [ ] Citlivé a nevratné akce mají potvrzení, audit a rozumnou obnovu.
+- [ ] API klíče mají rozsah, vlastníka, datum vytvoření a možnost rotace.
+- [ ] Audit log neukládá hesla, tokeny, platební údaje ani zbytečný obsah.
+- [ ] Support přístup je omezený, maskovaný a auditovaný.
+- [ ] Impersonace je výjimečná, časově omezená a zapisuje důvod.
+- [ ] Zákazník má cestu k exportu dat a zrušení účtu.
+- [ ] Permission model má testy pro běžné i rizikové scénáře.
+
+### Mini cvičení: matice oprávnění za 60 minut
+
+Vyberte jeden workspace a vyplňte tabulku:
+
+| Objekt / akce | Owner | Admin | Member | Viewer | Auditovat? |
+| --- | --- | --- | --- | --- | --- |
+| Zobrazit projekt | `ano/ne` | `ano/ne` | `ano/ne` | `ano/ne` | `ano/ne` |
+| Upravit projekt | `ano/ne` | `ano/ne` | `ano/ne` | `ano/ne` | `ano/ne` |
+| Pozvat člena | `ano/ne` | `ano/ne` | `ano/ne` | `ano/ne` | `ano/ne` |
+| Změnit roli | `ano/ne` | `ano/ne` | `ano/ne` | `ano/ne` | `ano/ne` |
+| Vytvořit API klíč | `ano/ne` | `ano/ne` | `ano/ne` | `ano/ne` | `ano/ne` |
+| Exportovat data | `ano/ne` | `ano/ne` | `ano/ne` | `ano/ne` | `ano/ne` |
+| Změnit billing | `ano/ne` | `ano/ne` | `ano/ne` | `ano/ne` | `ano/ne` |
+| Smazat workspace | `ano/ne` | `ano/ne` | `ano/ne` | `ano/ne` | `ano/ne` |
+
+Pak označte tři nejrizikovější akce a napište k nim:
+
+1. jaké potvrzení vyžadují,
+2. jak se zapíšou do audit logu,
+3. kdo dostane notifikaci,
+4. jak se akce dá vrátit nebo kompenzovat,
+5. jak dlouho se drží související logy.
+
+Tahle matice je nudná jen do chvíle, než první zákazník napíše: „Kdo nám včera smazal integraci?“ V tu chvíli se z nudné tabulky stává superhrdina v účetním svetru.
+
+### Zdroje ke kapitole 13
+
+- EUR-Lex: [Regulation (EU) 2016/679 — GDPR, Article 5](https://eur-lex.europa.eu/legal-content/EN/TXT/?qid=1612089500634&uri=CELEX%3A32016R0679)
+- EUR-Lex: [Regulation (EU) 2016/679 — GDPR, Article 30](https://eur-lex.europa.eu/legal-content/EN/TXT/?qid=1612089500634&uri=CELEX%3A32016R0679)
+- OWASP: [Application Security Verification Standard](https://owasp.org/www-project-application-security-verification-standard/)
+- OWASP Cheat Sheet Series: [Authorization Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html)
+- OWASP Cheat Sheet Series: [Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
+- NIST: [Digital Identity Guidelines — Authentication and Lifecycle Management](https://pages.nist.gov/800-63-4/sp800-63b.html)
+
+---
+
 ## Pracovní log
+- 2026-08-21: Dopsána kapitola 13 „Administrace, role a auditní stopa“ s RBAC modelem, citlivými akcemi, audit logem, support přístupem, exportem dat, testováním oprávnění, checklistem a ověřenými zdroji.
+
 - 2026-08-21: Dopsána kapitola 12 „Pricing, trial a platby“ s hodnotovou jednotkou, tarify, trial modelem, EU DPH/SCA kontextem, dunningem, privacy-first billingem, checklistem a ověřenými zdroji.
 
 - 2026-08-21: Dopsána kapitola 11 „Onboarding a aktivace uživatele“ s aktivační mapou, prázdnými stavy, minimalizací dat, bezpečnostním vysvětlením, onboardingovými e-maily, metrikami, přístupností, checklistem a ověřenými zdroji.
