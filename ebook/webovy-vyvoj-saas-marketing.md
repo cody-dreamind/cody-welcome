@@ -1666,7 +1666,221 @@ Potom si vyberte jednu slabinu a opravte ji hned. Ne „někdy v Q4“. Hned. Ne
 
 ---
 
+# Část III — SaaS produkt
+
+## 10. Od služby k produktu
+
+SaaS často nevznikne tak, že si někdo sedne k čistému repozitáři, zazní filmová hudba a za tři sprinty je hotovo. V menších evropských firmách vzniká mnohem častěji z opakované služby: konzultací, interní automatizace, tabulky, zákaznického portálu, reportingu nebo procesu, který tým dělá pořád dokola.
+
+To je dobrá zpráva. Služba už má kontakt se zákazníkem, znalost reálného problému a často i první peníze. Špatná zpráva: služba a produkt se řídí jinou logikou. Co zvládne jeden chytrý člověk ručně, nemusí jít bezpečně, levně a opakovatelně provozovat pro desítky zákazníků.
+
+Tahle kapitola je o přechodu. Ne o tom „uděláme SaaS a prodáme firmu za miliardu“. Spíš: jak poznat, co z vaší služby má být produkt, co má zůstat službou a jak to postavit bez toho, aby z aplikace vznikl drahý chaos s loginem.
+
+*Codyho komentář: největší past produktizace je přepsat všechno, co umíte ručně, do softwaru. Produkt není automatizovaná kopie agentury. Produkt je zúžený slib, který umíte dodat opakovaně.*
+
+### 10.1 Nejdřív najděte opakovaný moment hodnoty
+
+Produktizovat má smysl jen část služby, která se opakuje a má jasnou hodnotu pro zákazníka. Ne každá interní rutina je produkt. Některé věci jsou jen provozní lepidlo, které má zůstat uvnitř firmy.
+
+Hledejte momenty, kde platí aspoň tři z těchto signálů:
+
+- zákazníci se na stejnou věc ptají opakovaně,
+- tým opakovaně vyrábí podobný výstup,
+- existuje jasný vstup, postup a výsledek,
+- zákazník chápe hodnotu bez dlouhého vysvětlování,
+- ruční dodání je drahé nebo pomalé,
+- automatizace nezhorší důvěru ani kvalitu,
+- výsledek jde měřit jednoduchou metrikou.
+
+Příklad: agentura pro B2B weby ručně každý měsíc posílá klientům report „co se na webu děje“. Špatný produktizační nápad je postavit univerzální analytickou platformu pro všechny firmy na světě. Lepší první produkt je privacy-first klientský dashboard pro konkrétní typ zákazníka: poptávkové weby, kde se ukazuje dostupnost webu, odeslané formuláře, výkon klíčových stránek, nové publikované články a seznam doporučených úprav.
+
+Rozdíl je zásadní. První varianta soutěží s celým trhem analytiky. Druhá varianta řeší konkrétní opakovaný problém existujících klientů.
+
+### 10.2 Oddělte službu, produkt a concierge vrstvu
+
+Při přechodu ze služby na SaaS nepřepínejte ze dne na den do režimu „všechno samoobslužně“. V praxi bývá zdravější rozdělit nabídku na tři vrstvy.
+
+**Služba** je práce, kterou dělá tým na míru. Hodí se pro strategii, obsah, integrace, migrace, audit nebo rozhodnutí, kde je potřeba zkušený člověk.
+
+**Produkt** je opakovatelný systém. Má standardní onboarding, jasná pravidla, vlastní administraci, role, dokumentaci, support a měřitelný výsledek.
+
+**Concierge vrstva** je ruční pomoc kolem produktu. Zákazník má pocit jednoduchosti, ale vy zatím nemusíte automatizovat každý roh systému. Typicky sem patří nastavení prvního účtu, import dat, kontrola konfigurace nebo měsíční doporučení.
+
+Praktický model pro začátek:
+
+| Vrstva | Co dodává | Jak se účtuje | Kdy škálovat |
+| --- | --- | --- | --- |
+| Služba | Audit, strategie, implementace | jednorázově nebo projektově | když je marže zdravá |
+| Produkt | Opakovaný přístup k aplikaci | měsíčně nebo ročně | když onboarding nezávisí na zakladateli |
+| Concierge | Pomoc, import, doporučení | setup fee nebo vyšší tarif | když ruční práce odhaluje opakovaný vzor |
+
+Tahle kombinace je pro malé týmy často lepší než čistý self-service SaaS. Umí generovat cashflow, učí vás od zákazníků a zároveň brání tomu, abyste tři měsíce stavěli automatizaci pro problém, který nikdo nechce.
+
+### 10.3 Zúžte produktový slib
+
+Služba může být široká: „pomůžeme vám s webem, marketingem a automatizací“. Produkt široký být nesmí. SaaS potřebuje úzký slib, protože jinak se rozpadne onboarding, pricing, roadmapa i komunikace.
+
+Použijte tuto větu:
+
+> Produkt pomáhá [konkrétnímu typu zákazníka] udělat [opakovaný úkol] tak, aby [měřitelný výsledek] bez [hlavní překážka].
+
+Příklady:
+
+- Produkt pomáhá menším B2B firmám sledovat poptávkový web tak, aby rychle viděly technické a obchodní problémy bez invazivních trackerů.
+- Produkt pomáhá účetním kancelářím bezpečně sbírat dokumenty od klientů tak, aby snížily počet e-mailových příloh bez složitého školení klientů.
+- Produkt pomáhá SaaS týmům publikovat release notes tak, aby zákazníci viděli změny na jednom místě bez závislosti na sociálních sítích.
+
+Dobrá produktová věta obsahuje zákazníka, úkol, výsledek a překážku. Pokud v ní zůstane „platforma pro správu všeho“, vraťte se o krok zpět. Produktizace není nafukování. Je to přesné řezání.
+
+### 10.4 Vyberte první workflow, ne seznam funkcí
+
+Začněte jedním workflow od začátku do konce. Ne modulem. Ne sadou obrazovek. Workflow je příběh uživatele, který má jasný vstup, rozhodnutí a výsledek.
+
+Příklad pro klientský dashboard:
+
+1. Klient otevře měsíční přehled.
+2. Vidí tři nejdůležitější změny: dostupnost, formuláře, doporučení.
+3. Klikne na doporučení „zrychlit stránku Ceník“.
+4. Vidí důvod, dopad a návrh akce.
+5. Potvrdí, že chce úpravu řešit.
+6. Tým dostane strukturovaný úkol.
+
+Tohle je produktová cesta. Seznam funkcí typu „dashboard, grafy, notifikace, uživatelé, export CSV“ je jen inventář stavebního materiálu. Bez workflow nevíte, co je důležité.
+
+Inspirace z přístupu Shape Up: nejdřív nastavte apetit, tedy kolik práce si problém zaslouží, a až potom hledejte řešení, které se do tohoto rámce vejde. Pro malý SaaS je to velmi užitečné, protože vás to chrání před nekonečným „ještě přidáme jednu drobnost“.
+
+### 10.5 První verze má mít ruční zadní vrátka
+
+MVP nemusí být celé automatické. Naopak: dobrá první verze často kombinuje jednoduchý produktový povrch a ruční provoz uvnitř.
+
+Co lze na začátku dělat ručně:
+
+- schvalovat nové účty,
+- importovat data,
+- kontrolovat kvalitu výstupů,
+- posílat měsíční souhrn,
+- nastavovat integrace,
+- vyhodnocovat doporučení,
+- řešit výjimky v supportu.
+
+Co by ale ruční být nemělo:
+
+- přístupová práva,
+- auditní stopa důležitých akcí,
+- zálohování,
+- mazání a export dat,
+- fakturační evidence,
+- základní monitoring,
+- bezpečnostní kontroly API.
+
+Ruční zadní vrátka jsou v pořádku pro učení. Nejsou v pořádku pro důvěru a bezpečnost. Když zákazník smaže projekt, mělo by být jasné kdo, kdy a co udělal. Když administrátor vidí data zákazníka, musí existovat důvod a stopa. Když integrace selže, systém to má poznat dřív než rozzlobený klient.
+
+### 10.6 Produktové API navrhujte dřív než hezký dashboard
+
+I když první zákazník používá jen webové rozhraní, SaaS se dlouhodobě opírá o datový model a API. Dashboard je viditelná část. API je smlouva mezi částmi systému, integracemi a budoucností.
+
+Nemusíte hned publikovat veřejné API. Měli byste ale mít jasně popsané:
+
+- hlavní objekty a jejich vztahy,
+- kdo vlastní který objekt,
+- jak se kontroluje oprávnění,
+- které operace mění data,
+- jak vypadá chyba,
+- jak se řeší idempotence u opakovaných požadavků,
+- jak se verzuje změna rozhraní,
+- jak se loguje bez úniku citlivých dat.
+
+Pro HTTP API dává smysl průběžně udržovat strojově čitelný popis rozhraní. OpenAPI je standardní způsob, jak popsat schopnosti HTTP služby tak, aby jim rozuměli lidé i nástroje. Nejde o byrokracii. Dobrá specifikace zrychluje frontend, testy, dokumentaci i integrace.
+
+Bezpečnostní detail, který bolí častěji než kreativní hackeři ve filmech: každý endpoint pracující s ID objektu musí ověřit, že aktuální uživatel opravdu smí s tím konkrétním objektem pracovat. OWASP API Security Top 10 řadí broken object-level authorization mezi zásadní rizika API. Přeloženo do normální řeči: nestačí, že je uživatel přihlášený. Musí mít právo na daný projekt, fakturu, soubor nebo záznam.
+
+### 10.7 Privacy-first produktizace: méně dat, méně dluhu
+
+Při službě můžete spoustu věcí vyřešit domluvou. V SaaS produktu se ale každé rozhodnutí o datech násobí počtem zákazníků. Proto je privacy-first přístup praktičtější, než vypadá.
+
+U každé nové funkce se ptejte:
+
+- Potřebujeme tato osobní nebo citlivá data opravdu ukládat?
+- Stačí agregovaná hodnota místo individuální historie?
+- Jak dlouho data potřebujeme držet?
+- Umí zákazník data exportovat?
+- Umí zákazník data smazat?
+- Kde data fyzicky běží?
+- Které třetí strany se k datům dostanou?
+- Dá se funkce provozovat bez reklamních identifikátorů a cross-site trackingu?
+
+Evropský provoz není jen hostingová poznámka. Je to produktové rozhodnutí. Pokud chcete prodávat firmám, které řeší důvěru, compliance a kontrolu nad daty, musíte tyto odpovědi znát dřív, než přijde bezpečnostní dotazník od zákazníka.
+
+Praktické minimum:
+
+- oddělte produkční, testovací a vývojová data,
+- do testovacích prostředí nedávejte reálné osobní údaje, pokud to není nutné,
+- nastavte role podle práce, ne podle ega,
+- používejte přímé odkazy a RSS pro komunikaci změn,
+- měřte produkt agregovaně, ne šmírováním každého pohybu,
+- dokumentujte zpracovatele a retenci dat přímo v provozní dokumentaci.
+
+### 10.8 Kdy službu ještě neproduktizovat
+
+Produktizace není povinná evoluce každé služby. Někdy je lepší zůstat u služby, zvýšit cenu, zlepšit proces a automatizovat jen interní nástroje.
+
+Neproduktizujte, pokud:
+
+- každý zákazník potřebuje zásadně jiné řešení,
+- hodnota vzniká hlavně expertním úsudkem, ne opakovatelným workflow,
+- neumíte jasně pojmenovat kupujícího,
+- nemáte kanál, jak produkt distribuovat,
+- support by byl dražší než výnos,
+- bezpečný provoz byste lepili bokem,
+- produkt by kanibalizoval službu bez lepší marže nebo strategické výhody.
+
+Lepší mezikrok může být interní nástroj. Automatizujte část doručování služby, zrychlete tým, získejte data a teprve potom rozhodněte, jestli má smysl udělat z toho zákaznický produkt.
+
+### Checklist: od služby k prvnímu SaaS produktu
+
+- [ ] Umíme jednou větou popsat zákazníka, úkol, výsledek a překážku.
+- [ ] Vybrali jsme jedno workflow od začátku do konce.
+- [ ] Víme, které části zůstanou službou, produktem a concierge vrstvou.
+- [ ] Máme apetit pro první verzi a seznam věcí, které záměrně neděláme.
+- [ ] Známe hlavní objekty, vlastníky dat a pravidla oprávnění.
+- [ ] Kritické operace mají auditní stopu.
+- [ ] Umíme exportovat a mazat zákaznická data.
+- [ ] Víme, kde běží produkční data a kdo k nim má přístup.
+- [ ] Měření produktu funguje bez invazivních trackerů.
+- [ ] První zákazníci chápou hodnotu bez půlhodinové produktové pohádky.
+
+### Mini cvičení: produktizační řez za 45 minut
+
+Vezměte jednu službu, kterou dnes děláte opakovaně, a vyplňte:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Který výstup zákazník opakovaně chce | `_____` |
+| Co dnes děláme ručně | `_____` |
+| Co se dá standardizovat | `_____` |
+| Co musí zůstat expertní službou | `_____` |
+| Jaký je první měřitelný výsledek | `_____` |
+| Jaká data musíme uložit | `_____` |
+| Jaká data ukládat nemusíme | `_____` |
+| Kdo bude první ideální zákazník | `_____` |
+| Co první verze záměrně neumí | `_____` |
+| Jak poznáme, že má smysl pokračovat | `_____` |
+
+Potom škrtňte polovinu nápadů. Ano, polovinu. Produkt nezačne být lepší tím, že do něj nacpete každou zkušenost z pěti let služby. Začne být lepší tím, že jednu zkušenost doručí spolehlivě, bezpečně a opakovaně.
+
+### Zdroje ke kapitole 10
+
+- Basecamp: [Shape Up — Set Boundaries](https://basecamp.com/shapeup/1.2-chapter-03)
+- Basecamp: [Shape Up — Write the Pitch](https://basecamp.com/shapeup/1.5-chapter-06)
+- OpenAPI Initiative: [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- OWASP: [API Security Project](https://owasp.org/www-project-api-security/)
+- OWASP: [API1:2023 Broken Object Level Authorization](https://owasp.org/API-Security/editions/2023/en/0xa1-broken-object-level-authorization/)
+
+---
+
 ## Pracovní log
+- 2026-08-21: Dopsána kapitola 10 „Od služby k produktu“ s produktizačním řezem, workflow přístupem, concierge vrstvou, API základem, privacy-first provozem, checklistem a ověřenými zdroji.
+
 - 2026-08-21: Dopsána kapitola 9 „Údržba, monitoring a incidenty“ s provozní definicí zdraví, monitoringem vrstev, bezpečnými logy, alerty, incident playbookem, údržbovým rytmem, privacy-first provozem, checklistem a ověřenými zdroji.
 
 - 2026-08-21: Dopsána kapitola 8 „Formuláře, leady a integrace bez chaosu“ s návrhem polí, validací, consentem, mapou toku dat, automatizací, spam ochranou, checklistem a ověřenými GDPR zdroji.
