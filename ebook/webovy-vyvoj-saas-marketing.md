@@ -2110,7 +2110,230 @@ Potom si nastavte pravidlo: každá nová onboardingová obrazovka musí zkráti
 
 ---
 
+## 12. Pricing, trial a platby
+
+Cena není jen číslo na stránce. Je to součást produktu, marketingu, podpory i provozního rizika. Dobře nastavený pricing pomáhá zákazníkovi rychle pochopit, pro koho produkt je, kdy se vyplatí a jak bezpečně začne. Špatně nastavený pricing vytváří chaos: tým vysvětluje výjimky, support řeší fakturaci místo hodnoty a produkt se plní funkcemi pro zákazníky, kteří nikdy neměli být cílovkou.
+
+U malého SaaSu je největší nebezpečí v tom, že pricing vznikne jako kompromis mezi strachem a tabulkou konkurence. „Dejme to levně, ať někdo přijde“ zní bezpečně, ale často jen přitáhne zákazníky, kteří potřebují nejvíc podpory a mají nejmenší ochotu platit. Druhý extrém je enterprise divadlo: žádná cena, všude „kontaktujte sales“, ale produkt zatím neumí ani pořádně vystavit fakturu.
+
+*Codyho komentář: pricing není morální soud. Není to otázka, jestli jste „drazí“ nebo „levní“. Je to otázka, jestli cena odpovídá hodnotě, segmentu a nákladům na provoz. Romantika stranou, servery se neplatí dobrým pocitem.*
+
+### 12.1 Začněte hodnotovou jednotkou
+
+Nejdřív si pojmenujte, podle čeho zákazník vnímá hodnotu. Ne podle čeho se vám dobře programuje billing.
+
+Příklady hodnotových jednotek:
+
+- počet aktivních uživatelů,
+- počet projektů nebo workspace,
+- počet zpracovaných dokumentů,
+- počet auditovaných URL,
+- objem uložených dat,
+- počet odeslaných zpráv,
+- počet automatizací,
+- počet klientů obsloužených přes produkt.
+
+Dobrá hodnotová jednotka má tři vlastnosti:
+
+1. **Zákazník jí rozumí.** Umí odhadnout, kolik jí potřebuje.
+2. **Roste s hodnotou.** Když zákazník dostává víc užitku, dává smysl, že platí víc.
+3. **Neodměňuje špatné chování.** Pokud účtujete za něco, co chce zákazník minimalizovat, bude produkt působit jako brzda.
+
+Špatný příklad: účtovat support nástroj podle počtu odpovědí, když zákazník chce počet dotazů snížit. Lepší může být účtovat podle počtu obsloužených zákazníků, týmových sedadel nebo automatizovaných workflow.
+
+### 12.2 Tři tarify většinou stačí
+
+Pro malý SaaS bývá rozumné začít třemi tarify:
+
+| Tarif | Pro koho | Role v nabídce |
+| --- | --- | --- |
+| Start | jednotlivec nebo malý tým | nízké riziko vstupu |
+| Pro | hlavní cílový segment | primární obchodní volba |
+| Business | větší tým s vyššími nároky | bezpečnost, správa, priority support |
+
+Neznamená to, že musíte mít přesně tři karty na pricing stránce navždy. Znamená to, že zákazník má rychle poznat, kam patří. Pokud má pricing sedm variant, pět doplňků, tři výjimky a PDF s poznámkami pod čarou, nevypadá to sofistikovaně. Vypadá to jako interní spreadsheet, který utekl na veřejnost.
+
+Praktické pravidlo:
+
+- **Start** nesmí kanibalizovat hlavní hodnotu pro profesionální zákazníky.
+- **Pro** má být jasně nejvýhodnější pro cílový segment.
+- **Business** má řešit riziko, správu a odpovědnost, ne jen přidat „neomezeně vše“.
+
+Příklady funkcí pro Business tarif:
+
+- SSO nebo pokročilejší správa přístupu,
+- audit log,
+- delší retence dat,
+- smluvní DPA,
+- prioritní podpora,
+- vlastní limity,
+- administrace více týmů,
+- fakturace na objednávku.
+
+### 12.3 Trial má ověřit hodnotu, ne sbírat platební kartu
+
+Trial není trik, jak získat kartu a doufat, že zákazník zapomene zrušit předplatné. To je krátkodobě možná výnos, dlouhodobě ztráta důvěry. Trial má zákazníkovi umožnit bezpečně ověřit, že produkt splní slib.
+
+Vyberte jeden z modelů:
+
+| Model | Kdy dává smysl | Riziko |
+| --- | --- | --- |
+| Free trial bez karty | produkt jde rychle vyzkoušet | více nekvalifikovaných účtů |
+| Trial s kartou | vysoká hodnota, dražší provoz | vyšší tření a méně registrací |
+| Freemium | síťový efekt nebo dlouhodobá adopce | náklady na neplatící uživatele |
+| Demo / concierge start | komplexní B2B prodej | pomalejší škálování |
+| Pilot s jasným cílem | enterprise nebo regulované prostředí | nutnost dobře řídit rozsah |
+
+U privacy-first SaaSu je dobré u trialu vysvětlit:
+
+- jaká data zákazník nahraje,
+- kde budou zpracována,
+- kdy se smažou po skončení trialu,
+- kdo k nim má přístup,
+- jak exportovat nebo smazat účet,
+- jestli se trial data používají k trénování modelů nebo analýze.
+
+Pokud odpověď na poslední bod zní „ne“, řekněte to nahlas. Pro evropské zákazníky je to obchodní argument, ne nudný právní detail.
+
+### 12.4 Pricing stránka musí odpovědět na praktické otázky
+
+Dobrá pricing stránka není jen tabulka funkcí. Má odstranit nejistotu před nákupem.
+
+Měla by jasně říct:
+
+- co přesně je v ceně,
+- jestli se cena uvádí bez DPH nebo včetně DPH,
+- jak funguje měsíční a roční platba,
+- co se stane při překročení limitu,
+- jestli lze tarif změnit během období,
+- jak funguje zrušení předplatného,
+- jaké platební metody přijímáte,
+- kdo je smluvní protistrana,
+- kde jsou obchodní podmínky, DPA a zásady zpracování dat,
+- jak kontaktovat podporu kvůli fakturaci.
+
+Příklad mikrocopy:
+
+> Ceny jsou uvedené bez DPH. U zákazníků z EU dopočítáme DPH podle fakturačních údajů. Předplatné můžete kdykoli zrušit v administraci; přístup zůstane aktivní do konce zaplaceného období.
+
+Tohle není sexy text. Ale šetří support, snižuje vratky a zvyšuje důvěru. Což je velmi sexy, jen v účetním tričku.
+
+### 12.5 Platby navrhujte jako rizikový proces
+
+Platba je nejcitlivější část cesty. Zákazník už věří dost na to, aby vytáhl kartu, a vy máte jednu šanci nepůsobit podezřele.
+
+Praktické minimum:
+
+- používejte ověřenou platební bránu místo vlastního ukládání karet,
+- neukládejte čísla karet ve vlastní aplikaci,
+- nastavte webhooks pro úspěšné platby, selhání, refundace a zrušení předplatného,
+- pište idempotentní zpracování webhooků,
+- oddělte stav objednávky, faktury a přístupu k produktu,
+- logujte platební události bez citlivých údajů,
+- připravte ruční postup pro sporné platby a chargebacky,
+- testujte obnovu předplatného, downgrade, upgrade i neúspěšnou platbu.
+
+V Evropě počítejte se silným ověřením zákazníka u online plateb kartou. PSD2 zavedla požadavky na strong customer authentication a platební brány to typicky řeší přes 3-D Secure nebo podobný mechanismus. Pro produktový tým je důležité nebrat dodatečné ověření jako bug. Je to součást regulovaného platebního toku.
+
+### 12.6 DPH a fakturace neodkládejte na „pak“
+
+U SaaSu prodávaného do EU se velmi rychle objeví otázky DPH, země zákazníka, reverse charge, spotřebitel vs. firma a doklady. Detaily vždy řešte s účetní nebo daňovým poradcem, ale produktově musíte mít připravené minimálně:
+
+- sběr fakturačních údajů,
+- ověření DIČ u B2B zákazníků, pokud je relevantní,
+- správné rozlišení B2B a B2C,
+- jasné zobrazení DPH v checkoutu,
+- vystavení dokladu,
+- export pro účetnictví,
+- postup pro refundace a dobropisy,
+- archivaci dokladů podle interních pravidel.
+
+Pro přeshraniční B2C prodej digitálních služeb v EU existuje režim One Stop Shop, který umožňuje přiznávat vybrané typy DPH přes jeden členský stát místo registrace v každé zemi zvlášť. To není výzva k domácímu daňovému freestyle. Je to signál, že billing musí znát zemi zákazníka a že „všechno za jednu cenu pro všechny“ může být účetně zrádné.
+
+*Codyho komentář: nejhorší čas řešit fakturaci je chvíle, kdy první větší zákazník řekne „pošlete nám objednávku, DPA a fakturu s reverse charge“. V tu chvíli už nechcete googlit rozdíl mezi účtenkou, fakturou a panikou.*
+
+### 12.7 Dunning: záchrana platby bez trapného nátlaku
+
+Neúspěšná platba neznamená, že zákazník nechce platit. Karta expirovala, banka odmítla transakci, firma změnila fakturační e-mail nebo někdo prostě ignoroval notifikaci. Dunning je proces, jak neúspěšné platby řešit slušně a systematicky.
+
+Dobrý dunning obsahuje:
+
+- upozornění před expirací karty, pokud to brána umožňuje,
+- e-mail po selhání platby s jasným dalším krokem,
+- několik opakovaných pokusů v rozumném intervalu,
+- grace period, během které produkt ještě funguje,
+- omezení přístupu až po jasném varování,
+- jednoduchou aktualizaci platební metody,
+- interní alert u důležitých zákazníků,
+- záznam do auditní historie účtu.
+
+Špatný dunning zní jako výhrůžka. Dobrý dunning zní jako služba:
+
+> Platba se nepovedla. Přístup necháváme aktivní do 7. září, ať vám nepřerušíme práci. Platební kartu můžete aktualizovat tady: …
+
+### 12.8 Privacy-first billing
+
+Billing je plný citlivých údajů: jména, firmy, adresy, DIČ, platební identifikátory, historie objednávek. Privacy-first přístup neznamená, že žádná data nesbíráte. Znamená, že přesně víte proč, kde jsou a kdy mizí.
+
+Praktický návrh:
+
+| Oblast | Co dělat | Čemu se vyhnout |
+| --- | --- | --- |
+| Platební karty | Tokenizace přes platební bránu | Vlastní ukládání karet |
+| Fakturační údaje | Sbírat jen potřebná pole | Povinné údaje bez důvodu |
+| Analytika checkoutu | Měřit agregované kroky | Session replay platební stránky |
+| Webhooky | Logovat typ události a ID | Logovat celé payloady s osobními údaji |
+| Retence | Definovat účetní a provozní důvody | Nekonečné držení „pro jistotu“ |
+| Podpora | Maskovat citlivé údaje v administraci | Sdílet faktury a payloady v chatu |
+
+GDPR princip minimalizace dat platí i pro billing. Pokud údaj nepotřebujete pro smlouvu, fakturaci, bezpečnost nebo zákonnou povinnost, nemá v checkoutu co dělat. Každé pole navíc je tření pro zákazníka a závazek pro vás.
+
+### Checklist: pricing, trial a platby
+
+- [ ] Máme pojmenovanou hodnotovou jednotku, podle které dává cena smysl.
+- [ ] Hlavní tarif odpovídá cílovému segmentu, ne interním kompromisům.
+- [ ] Trial má jasný cíl a vede k první hodnotě.
+- [ ] Pricing stránka vysvětluje DPH, limity, změny tarifu a zrušení.
+- [ ] Checkout nepůsobí překvapivě a sbírá jen nezbytné údaje.
+- [ ] Platební karty neukládáme ve vlastní aplikaci.
+- [ ] Webhooky jsou idempotentní a neukládají zbytečné osobní údaje.
+- [ ] Fakturace rozlišuje B2B/B2C a počítá s EU DPH scénáři.
+- [ ] Máme proces pro neúspěšné platby, refundace a ruční zásahy.
+- [ ] Billing data mají jasnou retenci, přístupová práva a auditní stopu.
+
+### Mini cvičení: pricing rozhodnutí za 45 minut
+
+Vyplňte tabulku pro jeden produkt:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jakou měřitelnou hodnotu zákazník získá | `_____` |
+| Podle jaké jednotky hodnota roste | `_____` |
+| Kdo je hlavní platící segment | `_____` |
+| Jaký tarif má být výchozí doporučení | `_____` |
+| Co patří do Start tarifu | `_____` |
+| Co patří až do Business tarifu | `_____` |
+| Jak zákazník pozná úspěšný trial | `_____` |
+| Jaká data musíme sebrat pro fakturaci | `_____` |
+| Co se stane při neúspěšné platbě | `_____` |
+| Jaká billing data mažeme nebo anonymizujeme | `_____` |
+
+Na konci si položte nepříjemnou otázku: kdyby pricing stránku četl váš nejlepší zákazník, pochopil by do dvou minut, co koupit a proč? Pokud ne, problém není v zákazníkovi. Problém je v tom, že tabulka funkcí předstírá strategii.
+
+### Zdroje ke kapitole 12
+
+- European Commission: [VAT for businesses — One Stop Shop](https://taxation-customs.ec.europa.eu/taxation/vat/vat-businesses_en)
+- European Commission: [Strong customer authentication requirement of PSD2 comes into force](https://finance.ec.europa.eu/publications/strong-customer-authentication-requirement-psd2-comes-force_en)
+- EUR-Lex: [Regulation (EU) 2016/679 — GDPR, Article 5](https://eur-lex.europa.eu/legal-content/EN/TXT/?qid=1612089500634&uri=CELEX%3A32016R0679)
+- Stripe Docs: [Handle failed payments](https://docs.stripe.com/billing/revenue-recovery)
+- Stripe Docs: [Webhooks](https://docs.stripe.com/webhooks)
+- Česká obchodní inspekce: [Účtování cen a plateb](https://www.coi.cz/faq/uctovani-cen-a-plateb/)
+
+---
+
 ## Pracovní log
+- 2026-08-21: Dopsána kapitola 12 „Pricing, trial a platby“ s hodnotovou jednotkou, tarify, trial modelem, EU DPH/SCA kontextem, dunningem, privacy-first billingem, checklistem a ověřenými zdroji.
+
 - 2026-08-21: Dopsána kapitola 11 „Onboarding a aktivace uživatele“ s aktivační mapou, prázdnými stavy, minimalizací dat, bezpečnostním vysvětlením, onboardingovými e-maily, metrikami, přístupností, checklistem a ověřenými zdroji.
 
 - 2026-08-21: Dopsána kapitola 10 „Od služby k produktu“ s produktizačním řezem, workflow přístupem, concierge vrstvou, API základem, privacy-first provozem, checklistem a ověřenými zdroji.
