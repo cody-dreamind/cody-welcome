@@ -3245,7 +3245,217 @@ Když z toho vznikne jen jedna lepší landing page a jeden aktualizovaný člá
 
 ---
 
+## 17. E-mail, RSS a komunitní distribuce
+
+Distribuce obsahu je místo, kde se dobrý marketing často pokazí. Firma konečně napíše užitečný článek, case study nebo návod — a pak ho schová za formulář s povinným telefonem, pošle ho do nástroje s pěti trackery, přidá agresivní pop-up a diví se, že čtenář neutíká nadšeně do CRM, ale prostě utíká.
+
+Privacy-first distribuce není tichý marketing. Je to marketing, který respektuje, že vztah s publikem se buduje důvěrou, ne sledovacím pixelem v každé kapse. E-mail, RSS a komunity pořád fungují, pokud se používají jako kanály pro užitečnost, ne jako potrubí na tlak.
+
+Tahle kapitola je o tom, jak dostat obsah k lidem bez reklamního cirkusu: přes vlastní seznam, otevřený feed, přímé odkazy a komunity, kde dává smysl být přítomný.
+
+*Codyho komentář: když jediná distribuční strategie zní „hodíme to na LinkedIn a algoritmus se postará“, tak se algoritmus většinou postará hlavně o vaše zklamání.*
+
+### 17.1 Vlastní distribuční kanál je pojistka proti algoritmům
+
+Sociální sítě mohou být dobré místo pro objevování, ale špatný základ celé distribuce. Pravidla se mění, dosah kolísá, účty se mohou zablokovat a publikum ve skutečnosti patří platformě. Vlastní kanály jsou nudnější, ale stabilnější.
+
+Pro malý B2B tým doporučuji tři vrstvy:
+
+- **Web jako zdroj pravdy:** každý článek, návod, checklist, release note nebo case study má vlastní URL.
+- **RSS nebo Atom feed:** lidé i nástroje mohou sledovat novinky bez registrace a bez sledování.
+- **E-mailový seznam:** dobrovolný odběr pro lidi, kteří chtějí souhrny, pozvánky nebo praktické materiály.
+
+Sociální síť pak není archiv ani hlavní databáze kontaktů. Je to distribuční okno: krátký komentář, odkaz na vlastní web a případně diskuze. Když platforma zítra změní pravidla, pořád máte obsah, feed i seznam odběratelů.
+
+Praktické pravidlo: **nejdřív publikujte na vlastním webu, potom distribuujte jinam**. Ne obráceně. Když nejlepší myšlenky končí jen v uzavřeném vlákně na cizí platformě, dlouhodobě stavíte cizí knihovnu.
+
+### 17.2 RSS není retro. Je to respekt k čtenáři
+
+RSS a Atom feedy jsou jednoduché, otevřené způsoby, jak nabídnout odběr novinek. Nevyžadují účet, profilování, cookies ani aplikaci konkrétní platformy. Čtenář si sám vybere čtečku a kdy chce obsah číst.
+
+U webu nebo SaaS produktu se feed hodí pro:
+
+- nové blogové články,
+- release notes,
+- incident postmortemy,
+- produktové novinky,
+- technické návody,
+- veřejný changelog,
+- dokumentaci s novými stránkami.
+
+Technické minimum:
+
+- feed má stabilní URL, například `/rss.xml` nebo `/feed.xml`,
+- každá položka obsahuje titulek, URL, datum publikace a stručné shrnutí,
+- položky mají stabilní identifikátor,
+- HTML hlavička odkazuje na feed přes `rel="alternate"` a typ `application/rss+xml` nebo `application/atom+xml`,
+- feed je validní XML a vrací správný `Content-Type`,
+- starší URL feedu zůstane přesměrovaná, pokud ji měníte.
+
+Příklad odkazu v HTML:
+
+```html
+<link rel="alternate" type="application/rss+xml" title="Blog" href="https://example.cz/rss.xml">
+```
+
+RSS nemusí být hezké. Má být spolehlivé. Pokud chcete být extra vstřícní, přidejte na web stránku „Jak nás sledovat“, kde vysvětlíte RSS čtečky, e-mailový odběr a přímé odkazy. Ano, pár lidí si možná řekne, že je to stará škola. Ti samí lidé pak budou brečet, až jim platforma sebere dosah. Vkusná ironie zdarma.
+
+### 17.3 Newsletter bez právní a reputační kocoviny
+
+E-mail je silný kanál, protože jde přímo k člověku. Právě proto má být opatrný. V Evropě nejde jen o GDPR, ale také o pravidla pro elektronický marketing podle ePrivacy směrnice a národní implementace. Prakticky: neberte e-mailovou adresu jako pozvánku k neomezenému otravování.
+
+Minimum pro zdravý odběr:
+
+- odběr je dobrovolný a oddělený od jiných souhlasů,
+- text u formuláře jasně říká, co bude chodit a jak často,
+- potvrzení odběru je uložené v auditovatelné podobě,
+- každý e-mail má jednoduché odhlášení,
+- odhlášení funguje bez přihlášení a bez vyjednávání,
+- databáze odběratelů se nepoužívá pro jiné účely bez jasného právního základu,
+- staré neaktivní kontakty se pravidelně čistí.
+
+Dobrá formulace u odběru:
+
+> Jednou až dvakrát měsíčně pošleme praktické tipy k webovému vývoji, SaaS provozu a privacy-first marketingu. Žádný reklamní ohňostroj. Odběr můžete kdykoli zrušit jedním kliknutím.
+
+Špatná formulace:
+
+> Odesláním formuláře souhlasíte se zpracováním osobních údajů a obchodními sděleními našich partnerů.
+
+To druhé možná vypadá právně. Ve skutečnosti to zní jako past v obleku.
+
+### 17.4 E-mailová segmentace má pomáhat, ne šmírovat
+
+Segmentace nemusí znamenat sledování každého kliknutí a scoring člověka podle toho, jak dlouho koukal na cenovou stránku. U malého B2B marketingu často stačí segmentace podle dobrovolně zvoleného zájmu.
+
+Příklady šetrných segmentů:
+
+- zakladatel SaaS,
+- marketingový tým,
+- technický provoz,
+- privacy-first analytika,
+- produktivita a automatizace,
+- release notes produktu.
+
+Čtenář si může vybrat, co chce dostávat. Firma díky tomu neposílá všechno všem. To je marketingový ekvivalent toho, že na schůzce nemluvíte přes megafon do obličeje každému v místnosti.
+
+Praktické datové minimum pro newsletter:
+
+| Údaj | Proč ho držet | Kdy ho mazat |
+| --- | --- | --- |
+| E-mail | doručení odběru | po odhlášení, pokud není potřeba krátká blokace proti opětovnému importu |
+| Čas a zdroj souhlasu | doložení odběru | podle interní retenční politiky |
+| Preferované téma | relevantnější obsah | při odhlášení nebo změně preferencí |
+| Jazyk | správná jazyková verze | při odhlášení |
+| Základní doručitelnost | ochrana reputace domény | po vyřešení bounce/complaint procesu |
+
+Naopak opatrně s detailní historií otevření, fingerprintingem, importem koupených databází a automatickým obohacováním kontaktů z externích zdrojů. Pokud neumíte jasně vysvětlit, proč údaj potřebujete, pravděpodobně ho nepotřebujete.
+
+### 17.5 Komunity: nejdřív přínos, potom odkaz
+
+Komunitní distribuce funguje, když se nechováte jako chodící reklamní banner. V každé komunitě je potřeba nejdřív pochopit pravidla, tón a opakující se problémy lidí. Teprve potom má smysl sdílet vlastní obsah.
+
+Dobré komunitní chování:
+
+- odpovědět konkrétně na otázku,
+- přidat vlastní zkušenost nebo mini návod,
+- sdílet odkaz jen když opravdu rozšiřuje odpověď,
+- přiznat vztah k produktu nebo firmě,
+- neautomatizovat hromadné komentáře,
+- nevyužívat komunitu jako levný lead scraper,
+- vracet se do diskuze a reagovat na doplňující otázky.
+
+Příklad dobré odpovědi:
+
+> Řešili jsme podobný problém u B2B webu s delším nákupním cyklem. Pomohlo nám oddělit technickou dokumentaci od prodejní landing page a přidat checklist pro IT schvalovatele. Sepsal jsem k tomu návod tady: [odkaz]. Pokud nechceš klikat, klíčové kroky jsou tyhle tři…
+
+Příklad špatné odpovědi:
+
+> Super otázka! Mrkni na náš revoluční nástroj, který transformuje růst digitálních firem.
+
+První varianta pomáhá. Druhá varianta si koleduje o ban a tiché kolektivní protočení očí.
+
+### 17.6 Distribuční rytmus pro jednu publikaci
+
+Každý větší obsahový kus by měl mít vlastní distribuční mini plán. Ne proto, aby marketing vypadal zaměstnaně, ale aby se z jednoho dobrého materiálu nestal jednorázový výkřik do prázdna.
+
+Příklad rytmu pro nový odborný článek:
+
+1. **Den publikace:** článek na webu, RSS položka, e-mail pro relevantní segment.
+2. **Den 1–2:** krátký post s jedním praktickým poznatkem a přímým odkazem.
+3. **Den 3–7:** odpovědi v komunitách, kde se téma reálně řeší.
+4. **Týden 2:** krátký checklist nebo vizuální shrnutí z článku.
+5. **Měsíc 1:** interní vyhodnocení dotazů, návštěvnosti, kvality leadů a zpětné vazby.
+6. **Kvartál:** aktualizace článku, pokud se změnila praxe, produkt nebo regulace.
+
+Privacy-first měření u takového rytmu nepotřebuje osobní profilování. Stačí:
+
+- agregovaná návštěvnost článku,
+- počet odběrů RSS nebo newsletteru,
+- počet odpovědí a kvalitních reakcí,
+- počet relevantních poptávek,
+- témata dotazů, která se opakují,
+- interní poznámka, jestli obsah pomohl sales nebo supportu.
+
+Měřte hlavně kvalitu signálu. Jeden konkrétní e-mail od správného zákazníka je často hodnotnější než tisíc anonymních impresí, které zmizí rychleji než budget po špatně nastavené kampani.
+
+### 17.7 Checklist: e-mail, RSS a komunitní distribuce
+
+- [ ] Každý důležitý obsah má vlastní stabilní URL na našem webu.
+- [ ] Web nabízí RSS nebo Atom feed a odkazuje na něj v HTML hlavičce.
+- [ ] Newsletter jasně říká, co bude chodit a jak často.
+- [ ] Souhlas s odběrem je oddělený, doložitelný a snadno odvolatelný.
+- [ ] Každý e-mail obsahuje funkční odhlášení bez překážek.
+- [ ] Segmentace stojí na dobrovolných preferencích, ne na invazivním profilování.
+- [ ] Nepoužíváme koupené databáze ani nejasně získané kontakty.
+- [ ] Komunitní sdílení začíná užitečnou odpovědí, ne reklamním odkazem.
+- [ ] Distribuční plán počítá s opakováním, repurposingem a aktualizací.
+- [ ] Vyhodnocení pracuje s agregovanými daty a krátkou retencí.
+
+### Mini cvičení: distribuční karta článku
+
+Vyberte jeden článek nebo návod a vyplňte:
+
+| Pole | Odpověď |
+| --- | --- |
+| Hlavní čtenář | Kdo má z obsahu největší užitek? |
+| Praktický slib | Co bude umět po přečtení udělat? |
+| Primární URL | Kde je zdroj pravdy? |
+| Feed | Do kterého RSS/Atom feedu patří? |
+| E-mailový segment | Komu ho poslat a komu raději ne? |
+| Komunity | Kde se téma řeší přirozeně? |
+| Repurposing | Jaký checklist, šablona nebo krátký post z něj vznikne? |
+| Měření | Jak poznáme přínos bez profilování jednotlivců? |
+
+Příklad:
+
+| Pole | Odpověď |
+| --- | --- |
+| Hlavní čtenář | zakladatel malého SaaSu v EU |
+| Praktický slib | navrhne newsletter bez zbytečných dat a trackerů |
+| Primární URL | `/blog/newsletter-bez-trackeru/` |
+| Feed | hlavní blogový RSS feed |
+| E-mailový segment | privacy-first marketing, SaaS zakladatelé |
+| Komunity | české indie SaaS skupiny, evropské privacy komunity |
+| Repurposing | checklist odběrového formuláře |
+| Měření | návštěvy článku, odpovědi, nové dobrovolné odběry, poptávky |
+
+Když tahle karta nejde vyplnit, obsah možná není připravený k distribuci. A to je v pořádku. Lepší opravit slib a cílovku před odesláním než potom sledovat, jak se e-mail propadá do složky „Promotions“ jako kámen do rybníka.
+
+### Zdroje ke kapitole 17
+
+- European Commission: [Legal grounds for processing data](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/legal-grounds-processing-data_en)
+- European Union / EUR-Lex: [Directive 2002/58/EC — ePrivacy Directive](https://eur-lex.europa.eu/eli/dir/2002/58/oj)
+- European Data Protection Board: [Guidelines 05/2020 on consent under Regulation 2016/679](https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-052020-consent-under-regulation-2016679_en)
+- Your Europe: [Data protection and online privacy](https://europa.eu/youreurope/citizens/consumers/internet-telecoms/data-protection-online-privacy/index_en.htm)
+- RFC Editor: [RFC 4287 — The Atom Syndication Format](https://www.rfc-editor.org/info/rfc4287/)
+- MDN Web Docs: [HTML `rel` attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/rel)
+
+---
+
 ## Pracovní log
+- 2026-08-21: Dopsána kapitola 17 „E-mail, RSS a komunitní distribuce“ s vlastním distribučním kanálem, RSS/Atom feedem, newsletterovým souhlasem, šetrnou segmentací, komunitním sdílením, distribučním rytmem, checklistem a ověřenými zdroji.
+
 - 2026-08-21: Dopsána kapitola 16 „SEO pro český a evropský trh“ s hledacím záměrem, lokalizací, technickým SEO, strukturovanými daty, privacy-first měřením, linkbuildingem, workflow, checklistem a ověřenými zdroji.
 
 - 2026-08-21: Dopsána kapitola 15 „Obsahový marketing a distribuční kanály“ s obsahovými pilíři, RSS a vlastní distribucí, repurposingem, privacy-first měřením, redakčním workflow, checklistem a ověřenými zdroji.
