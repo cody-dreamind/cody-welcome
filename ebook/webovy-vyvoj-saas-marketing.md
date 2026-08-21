@@ -848,7 +848,168 @@ Výsledek nemusí být dokonalý. Má být pravdivý. Stack, který umíte popsa
 
 ---
 
+## 6. Informační architektura a obsahové modely
+
+Informační architektura je rozhodnutí o tom, jak web přemýšlí. Ne jak vypadá, ne jaké má animace, ale jak skládá informace tak, aby návštěvník rychle pochopil, kde je, co může udělat a proč by mu to mělo být jedno méně než jeho aktuální problém.
+
+U malých webů se často podceňuje, protože „máme jen pár stránek“. Jenže právě pár stránek musí nést hodně práce: vysvětlit nabídku, filtrovat špatné poptávky, podpořit prodej, ukázat důvěryhodnost, odpovědět na námitky a předat data do týmu. Když se struktura udělá ledabyle, začne se obsah lepit do náhodných sekcí a po půl roce nikdo neví, jestli má nová informace patřit na homepage, do blogu, do case study, nebo do patičky vedle IČO.
+
+Dobrá informační architektura není akademická disciplína pro lidi s barevnými lístečky. Je to praktická mapa, která šetří vývoj, marketing i support.
+
+### 6.1 Začněte seznamem úkolů návštěvníka
+
+Nejdřív nepište sitemapu. Napište, co lidé na webu potřebují vyřešit. Každá cílová skupina má několik typických úkolů a web by na ně měl odpovědět bez detektivní práce.
+
+Příklad pro agenturu nebo malý SaaS tým:
+
+| Návštěvník | Úkol | Co potřebuje vidět |
+| --- | --- | --- |
+| Zakladatel | Zjistit, jestli umíte vyřešit jeho problém | jasná nabídka, typické scénáře, výsledky |
+| Technický člověk | Ověřit, že řešení nebude chaos | stack, provoz, bezpečnost, integrace |
+| Marketér | Najít důkazy a použitelné materiály | case studies, metriky, obsah, odkazy |
+| Právník nebo compliance | Zjistit, co se děje s daty | privacy informace, zpracovatelé, regiony |
+| Stávající zákazník | Dostat se k podpoře nebo dokumentaci | kontakt, návody, status, release notes |
+
+Z těchto úkolů teprve vzniká struktura. Pokud stránka neodpovídá na žádný reálný úkol, pravděpodobně je to interní pomník. Pomníky jsou hezké na náměstí, ne v navigaci.
+
+### 6.2 Navrhněte sitemapu jako produktový model
+
+Sitemapu nedělejte podle toho, kolik odkazů se vejde do menu. Udělejte ji podle toho, jaké typy informací se budou opakovat a rozvíjet.
+
+Typická praktická struktura:
+
+- **Homepage** — shrnutí hodnoty, hlavní segmenty, důkazy, další krok.
+- **Služby nebo řešení** — samostatné stránky pro konkrétní problémy, ne obecný seznam schopností.
+- **Produktové stránky** — funkce, scénáře použití, bezpečnost, integrace, ceny.
+- **Case studies** — problém, postup, výsledek, technologie, poučení.
+- **Blog nebo znalostní báze** — články podle témat, ne firemní tiskové zprávy maskované za obsah.
+- **Dokumentace** — návody, API, provozní informace, onboarding.
+- **Kontakt a support** — jasné kanály, očekávání odpovědi, nouzové scénáře.
+- **Privacy a právní stránky** — srozumitelně popsané zpracování dat, cookies, podmínky.
+
+Důležité je, aby každá část měla vlastní roli. Blog nemá nahrazovat dokumentaci. Case study nemá být jen delší reference. Produktová stránka nemá být skládka všech funkcí, které se kdy povedlo naprogramovat.
+
+### 6.3 Obsahový model je dohoda, ne jen CMS formulář
+
+Obsahový model říká, z jakých polí se skládá konkrétní typ obsahu. Když je model jasný, tým ví, co má dodat, vývojář ví, co má vykreslit, a editor nemusí hádat, jestli má metrika patřit do nadpisu, odstavce nebo screenshotu s šipkou.
+
+Příklad modelu pro case study:
+
+- název projektu,
+- krátké shrnutí pro přehledy,
+- cílový segment,
+- výchozí problém,
+- dodané řešení,
+- konkrétní výsledek nebo pozorovatelná změna,
+- použité technologie,
+- privacy-first poznámka,
+- citace zákazníka, pokud existuje,
+- interní kontaktní osoba,
+- datum publikace a poslední aktualizace.
+
+Příklad modelu pro článek:
+
+- title a meta description,
+- slug,
+- hlavní otázka, na kterou článek odpovídá,
+- cílový čtenář,
+- kategorie a tagy,
+- odhadovaná obtížnost,
+- zdroje,
+- doporučený další krok,
+- datum poslední kontroly aktuálnosti.
+
+Tohle zní jako detail, ale šetří hodiny. Bez modelu se každý článek stává malou designovou výjimkou. A výjimky se časem množí jako záložky v prohlížeči člověka, který tvrdí, že má systém.
+
+### 6.4 Navigace má pomáhat rozhodnutí, ne ukazovat všechno
+
+Menu není mapa celé firmy. Je to sada nejdůležitějších cest. U malého webu často stačí pět až sedm hlavních položek. Zbytek může být v patičce, v kontextových blocích nebo v interním vyhledávání.
+
+Dobré hlavní menu typicky obsahuje:
+
+- řešení nebo produkt,
+- výsledky nebo case studies,
+- znalosti nebo blog,
+- ceny, pokud dávají smysl,
+- dokumentaci nebo podporu,
+- kontakt nebo demo.
+
+Pozor na položky, které dávají smysl firmě, ale ne návštěvníkovi. „Naše kompetence“ může být interně přesné, ale zákazník hledá „rychlejší web“, „bezpečný klientský portál“ nebo „automatizaci podpory“. Jazyk navigace má být jazykem úkolu.
+
+U privacy-first webu se vyplatí přidat viditelnou cestu k informacím o datech. Nemusí to být obří banner. Stačí jasný odkaz „Soukromí a provoz“ nebo sekce na produktové stránce, kde vysvětlíte, kde projekt běží, co měříte a co záměrně neměříte.
+
+### 6.5 Interní vyhledávání a filtry až po dobré struktuře
+
+Vyhledávání je užitečné, ale nemá zachraňovat špatnou architekturu. Pokud lidé musí hledat základní informace, navigace pravděpodobně selhala.
+
+Vyhledávání dává smysl hlavně tam, kde roste obsah:
+
+- dokumentace,
+- znalostní báze,
+- katalog integrací,
+- větší blog,
+- release notes,
+- support centrum.
+
+Filtry používejte střídmě. Každý filtr musí odpovídat tomu, jak člověk skutečně vybírá. U case studies může dávat smysl segment, typ problému nebo technologie. U článků téma a obtížnost. U katalogu integrací stav podpory a kategorie.
+
+Privacy-first poznámka: vyhledávání na vlastním webu nemusí automaticky posílat dotazy třetí straně. Pokud vyhledávací dotazy ukládáte, berte je jako potenciálně citlivá data. Lidé do vyhledávání píšou překvapivě osobní věci. Internet je zpovědnice s horším designem.
+
+### 6.6 Obsah musí mít životní cyklus
+
+Web není hotový publikací. Každý důležitý obsah potřebuje vlastní životní cyklus: kdo ho vlastní, kdy se kontroluje, kdy se archivuje a co se stane, když přestane platit.
+
+Praktické stavy obsahu:
+
+1. **Návrh** — víme, proč má obsah vzniknout.
+2. **Rozpracováno** — vzniká text, struktura a podklady.
+3. **K odborné kontrole** — fakta, technické detaily, právní části.
+4. **Připraveno k publikaci** — má metadata, odkazy, CTA a korekturu.
+5. **Publikováno** — je dostupné, měřitelné a prolinkované.
+6. **Ke kontrole** — čeká na pravidelnou revizi.
+7. **Archivováno nebo přesměrováno** — už nemá být aktivní vstupní stránkou.
+
+U článků s rychle stárnoucími informacemi přidejte datum poslední kontroly. U produktových stránek určete vlastníka. U právních a privacy stránek mějte kontrolní proces před každou významnou změnou nástrojů, analytiky nebo zpracovatelů.
+
+### Checklist: informační architektura bez chaosu
+
+- [ ] Máme sepsané hlavní úkoly návštěvníků podle cílových skupin.
+- [ ] Každá hlavní stránka odpovídá na konkrétní otázku nebo rozhodovací krok.
+- [ ] Navigace používá jazyk zákazníka, ne interní názvy oddělení.
+- [ ] Sitemapa rozlišuje homepage, řešení, produkt, obsah, dokumentaci a support.
+- [ ] Pro opakované typy obsahu existuje jednoduchý obsahový model.
+- [ ] Každý článek a case study má metadata, zdroje a doporučený další krok.
+- [ ] Privacy informace jsou snadno dostupné, ne schované jako právnický Easter egg.
+- [ ] Vyhledávání a filtry doplňují strukturu, nenahrazují ji.
+- [ ] Důležitý obsah má vlastníka a datum revize.
+- [ ] Starý obsah umíme aktualizovat, archivovat nebo přesměrovat.
+
+### Mini cvičení: obsahová inventura za 45 minut
+
+Vezměte aktuální web a vytvořte tabulku se čtyřmi sloupci:
+
+| URL | Úkol návštěvníka | Vlastník | Co zlepšit |
+| --- | --- | --- | --- |
+| `/` | pochopit nabídku a udělat další krok | marketing / founder | zpřesnit hlavní větu |
+| `/sluzby/webovy-vyvoj` | zjistit, jestli řešíme daný problém | obchod / delivery | doplnit důkazy |
+| `/blog/...` | naučit se postup nebo ověřit názor | autor | přidat zdroje a CTA |
+| `/privacy` | pochopit zpracování dat | provoz / právní kontrola | zjednodušit jazyk |
+
+Potom každé URL označte jednou ze značek:
+
+- **ponechat** — funguje a má jasný účel,
+- **upravit** — účel je správný, provedení ne,
+- **sloučit** — překrývá se s jinou stránkou,
+- **přesměrovat** — obsah je starý, ale má hodnotu,
+- **smazat** — nikomu nepomáhá a nepřináší důvěru.
+
+Výsledkem nemá být dokonalý redesign. Má to být praktický seznam rozhodnutí. Dobrý web roste jako zahrada: pravidelně stříhat, dosazovat, zalévat a občas bez sentimentu vyhodit suchou větev. Ano, i tu stránku „Novinky 2019“.
+
+---
+
 ## Pracovní log
+
+- 2026-08-21: Dopsána kapitola 6 „Informační architektura a obsahové modely“ s úkoly návštěvníků, sitemapou, obsahovými modely, navigací, životním cyklem obsahu a inventurním cvičením.
 
 - 2026-08-21: Dopsána kapitola 5 „Technický stack pro malý tým“ s architekturou, databází, evropským provozem, frontendem, integracemi, dokumentací a stack auditem.
 
