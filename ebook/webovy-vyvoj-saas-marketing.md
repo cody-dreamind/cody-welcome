@@ -526,7 +526,170 @@ Z odpovědí pak složte stránku. Ne opačně. Když začnete designem bez těc
 
 ---
 
+## 4. Minimum viable brand: důvěra bez agenturního divadla
+
+Značka není logo nalepené na web těsně před spuštěním. Značka je soubor očekávání, která v člověku vyvoláte dřív, než s vámi mluví. U malého webu nebo SaaSu nemusí být obří. Musí být konzistentní, čitelná a důvěryhodná.
+
+Minimum viable brand není zkratka pro „udělejme to ledabyle“. Je to způsob, jak dát produktu dostatek identity, aby působil profesionálně, aniž by tým tři měsíce ladil odstín modré a zapomněl ověřit, jestli někdo chce platit.
+
+Pro první verzi značky stačí odpovědět na pět otázek:
+
+- Jaký problém řešíme a pro koho?
+- Jak chceme působit při prvním kontaktu?
+- Co nikdy nechceme slíbit ani dělat?
+- Jak jednoduchým jazykem popíšeme naši hodnotu?
+- Jak pozná zákazník, že nám může věřit?
+
+*Codyho komentář: když se tým hádá o logo, ale neumí jednou větou říct, proč má zákazník odpovědět na formulář, není to branding workshop. Je to kreativní úniková místnost.*
+
+### 4.1 Začněte tónem, ne logem
+
+Logo pomáhá s rozpoznatelností, ale tón rozhoduje, jestli vám člověk rozumí. Tón značky se projevuje v titulku, tlačítku, chybové hlášce, e-mailu po odeslání formuláře i v dokumentaci. Pokud je web lidský a následný e-mail zní jako výpis z právního oddělení robotické pojišťovny, značka se rozpadá.
+
+Vezměte si tři až pět vlastností, které mají být z textu cítit. Například:
+
+- praktický,
+- klidný,
+- technicky kompetentní,
+- transparentní,
+- lehce neformální.
+
+Pak si napište i opačný seznam. Ten je stejně důležitý:
+
+- nebudeme strašit zákazníka buzzwordy,
+- nebudeme předstírat jistotu tam, kde potřebujeme ověřování,
+- nebudeme schovávat limity služby,
+- nebudeme používat agresivní prodejní tlak,
+- nebudeme mluvit o datech neurčitě.
+
+Tón značky není literární soutěž. Je to provozní nástroj. Díky němu ví copywriter, vývojář i člověk na supportu, jak má znít produkt v reálných situacích.
+
+### 4.2 Vizuální systém má zmenšit chaos
+
+První verze vizuální identity potřebuje málo prvků, ale musí být použitelné. Praktické minimum:
+
+- jedna primární barva,
+- jedna klidná doplňková barva,
+- neutrální škála pro texty, pozadí a ohraničení,
+- dvě úrovně typografie pro nadpisy a běžný text,
+- styl tlačítek a odkazů,
+- pravidla pro karty, formuláře a upozornění,
+- jednoduchý způsob práce s ikonami nebo ilustracemi.
+
+Tohle často stačí víc než dvacetistránkový brand manuál. Důležité je, aby se prvky neopakovaly náhodně. Primární tlačítko má vypadat stejně v hero sekci, pricingu i modalu. Chybové hlášky mají mít stejný tón. Karty mají mít podobné odsazení. Web pak působí klidně, i když za ním stojí malý tým.
+
+U privacy-first značky přidejte ještě jedno pravidlo: vizuální styl nesmí maskovat nejasnost v nakládání s daty. Krásná stránka s mlhavou větou „zlepšujeme váš zážitek pomocí partnerů“ nevzbuzuje důvěru. Vzbuzuje podezření, že za rohem čeká reklamní cirkus s cookies transparentem velikosti menší dodávky.
+
+### 4.3 Důvěra vzniká konkrétností
+
+Malá značka nemá vždy roky referencí. To nevadí. Důvěru můžete stavět i jinak, pokud jste konkrétní a poctiví.
+
+Použitelné prvky důvěry:
+
+- krátký popis procesu spolupráce,
+- ukázka výsledku nebo demo,
+- veřejná dokumentace,
+- odpovědi na časté námitky,
+- jasná informace, kdo za projektem stojí,
+- přímý kontakt bez formulářové labyrintologie,
+- transparentní informace o provozu, datech a podpoře.
+
+Místo obecného „jsme bezpeční a spolehliví“ napište raději:
+
+> Data z kontaktního formuláře používáme jen pro odpověď. Nepřidáváme vás automaticky do newsletteru a nesdílíme poptávky s reklamními platformami.
+
+Místo „rychlá implementace“ napište:
+
+> První funkční verzi landing page obvykle připravujeme v jednom krátkém cyklu: strategie, texty, návrh, implementace, kontrola formulářů a měření.
+
+Místo „moderní technologie“ napište:
+
+> Stack vybíráme podle provozu, údržby a týmu, který s ním bude žít po spuštění.
+
+Konkrétnost snižuje riziko v hlavě zákazníka. A riziko je často větší brzda než cena.
+
+### 4.4 Značka musí přežít běžný provoz
+
+Branding se netestuje jen na homepage. Testuje se v momentech, kdy se něco nepovede nebo kdy zákazník potřebuje jasnost.
+
+Zkontrolujte proto:
+
+- potvrzení po odeslání formuláře,
+- automatický e-mail po registraci,
+- stránku 404,
+- chybové hlášky ve formulářích,
+- prázdné stavy v aplikaci,
+- dokumentaci k prvnímu nastavení,
+- odpověď na otázku „kde jsou moje data?“.
+
+Pokud je značka opravdu promyšlená, tyhle části nepůsobí jako z jiné firmy. U SaaSu jsou navíc často důležitější než marketingové bannery. Uživatel si vás zapamatuje podle toho, jestli jste mu v krizovém momentu pomohli, nebo jste mu ukázali hlášku „Error 500: contact administrator“ a odešli na oběd.
+
+Praktický test: vezměte jednu reálnou situaci, třeba neúspěšnou platbu, zapomenuté heslo nebo chybu ve formuláři. Napište text tak, aby byl:
+
+1. srozumitelný,
+2. klidný,
+3. užitečný,
+4. bez obviňování uživatele,
+5. konzistentní s tónem značky.
+
+Příklad:
+
+> Platba se nepovedla. Kartu jsme nezatížili. Zkuste platbu znovu, nebo nám napište na podporu a společně to vyřešíme.
+
+Tohle je značka v provozu. Ne jen barvy v prezentaci.
+
+### 4.5 Privacy-first jako součást značky
+
+Soukromí nemá být schované jen v patičce pod odkazem „zásady“. Pokud je evropský a privacy-first provoz součást hodnoty, ukažte ho normálně v produktu i marketingu.
+
+Může to být krátký blok na webu:
+
+> Navrženo, postaveno a provozováno v Evropě. Sbíráme jen data, která potřebujeme pro službu, podporu a zlepšování produktu. Nepoužíváme reklamní trackery a preferujeme přímé kanály jako RSS, dokumentaci a e-mail se souhlasem.
+
+Nebo praktický seznam v dokumentaci:
+
+- kde aplikace běží,
+- jaká data ukládá,
+- kdo k nim má přístup,
+- jak dlouho je drží,
+- jak může zákazník data exportovat nebo smazat,
+- jaké externí služby jsou zapojené.
+
+Nemusíte z toho dělat morální manifest na třicet odstavců. Stačí být konkrétní. Pro část zákazníků to bude rozhodovací kritérium. Pro ostatní to bude signál, že přemýšlíte dlouhodobě a nechcete jejich data rozházet po internetu jako konfety.
+
+### Checklist: minimum viable brand
+
+- [ ] Umíme jednou větou popsat, jak chceme působit.
+- [ ] Máme tři až pět vlastností tónu značky a jasný seznam věcí, kterým se vyhýbáme.
+- [ ] Primární vizuální prvky jsou omezené, konzistentní a použitelné v celém webu.
+- [ ] Tlačítka, formuláře, karty a upozornění mají sjednocený styl.
+- [ ] Na webu jsou konkrétní důkazy důvěry, ne jen obecné fráze.
+- [ ] Běžné provozní texty odpovídají tónu značky.
+- [ ] Soukromí, data a evropský provoz jsou vysvětlené lidsky a konkrétně.
+- [ ] Značka pomáhá rozhodnutí zákazníka, neblokuje spuštění projektu.
+
+### Mini cvičení: značka za jedno odpoledne
+
+Vezměte tým, otevřete prázdný dokument a vyplňte následující šablonu:
+
+1. Chceme působit jako: `_____`, `_____`, `_____`.
+2. Rozhodně nechceme působit jako: `_____`, `_____`, `_____`.
+3. Naše nejjednodušší věta hodnoty: `_____`.
+4. Tři slova, která v textech klidně používáme: `_____`.
+5. Tři slova, kterým se vyhneme: `_____`.
+6. Primární barva a její role: `_____`.
+7. Jak vysvětlíme nakládání s daty jednou lidskou větou: `_____`.
+8. Jak zní potvrzení po odeslání formuláře: `_____`.
+9. Jak zní chybová hláška, když se něco nepovede: `_____`.
+10. Jaký konkrétní důkaz důvěry dáme na web hned: `_____`.
+
+Po cvičení nevznikne velká značka. Vznikne použitelný základ. A to je přesně pointa: značka má pomoct spustit lepší produkt, ne vytvořit další důvod, proč se bojíte kliknout na „publikovat“.
+
+---
+
 ## Pracovní log
+
+- 2026-08-21: Dopsána kapitola 4 „Minimum viable brand: důvěra bez agenturního divadla“ s tónem značky, vizuálním minimem, důvěrou, provozními texty, privacy-first positioningem a checklistem.
 
 - 2026-08-21: Dopsána kapitola 3 „Landing page, která odpovídá na správné otázky“ se strukturou stránky, praktickými příklady, privacy-first formulářem, měřením a checklistem.
 
