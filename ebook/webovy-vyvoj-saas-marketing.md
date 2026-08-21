@@ -1419,9 +1419,257 @@ Potom formulář otestujte jako zákazník na mobilu. Vyplňte ho pomalu, rychle
 
 ---
 
-## Pracovní log
-- 2026-08-21: Dopsána kapitola 8 „Formuláře, leady a integrace bez chaosu“ s návrhem polí, validací, consentem, mapou toku dat, automatizací, spam ochranou, checklistem a ověřenými GDPR zdroji.
+## 9. Údržba, monitoring a incidenty
 
+Spuštění webu nebo SaaS aplikace není cílová páska. Je to okamžik, kdy systém začne potkávat realitu: pomalé databázové dotazy, překlepy v konfiguraci, expirující certifikáty, nečekané chování prohlížečů, spamové vlny, zákazníky s jiným workflow, než jste si malovali na bílé tabuli, a páteční deploye, které se tváří jako drobná změna, ale mají duši požáru skladu.
+
+Údržba není ostuda. Ostuda je tvářit se, že web poběží navždy sám, protože „je statický“ nebo „je to jen pár stránek“. Každý provozovaný systém potřebuje pravidelnou kontrolu, jednoduché měření, plán reakce a někoho, kdo ví, co dělat, když se věci rozbijí.
+
+Dobrá provozní praxe pro malý tým není kopie velkého enterprise SRE oddělení. Je to malé množství jasných návyků, které chrání zákazníky, data a spánek týmu.
+
+### 9.1 Definujte, co znamená „web funguje“
+
+První chyba monitoringu je měřit jen to, co se snadno měří. Server může vracet HTTP 200, ale objednávkový formulář může padat. Homepage může být rychlá, ale administrace může ukládat špatná data. Databáze může běžet, ale e-maily s potvrzením nemusí odcházet.
+
+Proto si pro každý důležitý projekt napište provozní definici zdraví:
+
+- veřejný web se načte z Evropy do rozumného času,
+- klíčové stránky nevrací chyby,
+- formuláře a registrace jdou dokončit,
+- platby, e-maily a důležité integrace fungují,
+- administrace umožňuje řešit běžné úkoly,
+- zálohy existují a lze je obnovit,
+- tým ví, kde hledat chyby.
+
+Google SRE doporučuje u služeb sledovat hlavně symptomy uživatelského dopadu a držet alerty jednoduché; klasický rámec „four golden signals“ pracuje s latencí, provozem, chybami a saturací. Pro malý web to přeložte lidsky: jak rychlé to je, kolik lidí to používá, kde to padá a jestli se blíží kapacitní limit.
+
+*Codyho komentář: monitoring, který umí deset dashboardů a žádnou jasnou odpověď na otázku „funguje to zákazníkovi?“, je drahý screensaver.*
+
+### 9.2 Měřte vrstvy, ne jen server
+
+Praktický monitoring má pokrývat několik vrstev. Nemusí být složitý, ale musí být promyšlený.
+
+**1. Dostupnost zvenku**
+
+Externí kontrola má pravidelně načíst důležité URL. Ne ze stejného serveru, na kterém web běží, protože když spadne celý stroj, interní kontrola bude nádherně mlčet. Minimum:
+
+- homepage,
+- hlavní landing page,
+- přihlašovací stránka nebo registrace,
+- veřejný health endpoint,
+- jedna stránka s dynamickými daty, pokud existuje.
+
+**2. Aplikační zdraví**
+
+Health endpoint nemá jen říct `ok`, protože to umí i rozbitá aplikace s optimismem z motivačního diáře. Lepší je vracet stručný stav závislostí:
+
+- aplikace běží,
+- databáze odpovídá,
+- fronta nebo cron běží,
+- úložiště je dostupné,
+- poslední kritický job doběhl.
+
+Do veřejného health endpointu ale nedávejte citlivé detaily. Stav „database degraded“ stačí. Stack trace, interní hostname a názvy tabulek patří do interních logů, ne jako dárek pro náhodného skenera.
+
+**3. Klíčové uživatelské cesty**
+
+Jednou za čas testujte skutečný scénář: odeslat formulář, vytvořit účet, projít onboarding, stáhnout fakturu, změnit heslo. U menšího SaaSu může stačit denní syntetický test na testovacím účtu. U důležitého prodejního formuláře klidně každou hodinu.
+
+**4. Business signály**
+
+Provozní problém se někdy pozná podle ticha. Když obvykle chodí deset poptávek denně a dnes nepřišla žádná, nemusí to být trh. Může to být rozbitý formulář, e-mailová integrace nebo agresivní spam filtr. Sledujte:
+
+- počet odeslaných formulářů,
+- počet nových registrací,
+- počet dokončených plateb,
+- počet chybových e-mailů,
+- počet support požadavků na stejné téma.
+
+Tyhle metriky sbírejte bez invazivního trackingu. Agregace, serverové události a vlastní databázové počítadlo často stačí.
+
+### 9.3 Logy pište pro budoucí incident, ne pro uklidnění vývojáře
+
+Logy jsou provozní paměť systému. OWASP upozorňuje, že aplikační logování má sloužit nejen debuggování, ale i bezpečnostním událostem, auditní stopě a vyšetřování incidentů. To neznamená logovat všechno. Znamená to logovat správné události strukturovaně a bezpečně.
+
+Dobrá log událost odpovídá na otázky:
+
+- co se stalo,
+- kdy se to stalo,
+- kde se to stalo,
+- koho nebo čeho se to týkalo,
+- jaký byl výsledek,
+- jaký korelační identifikátor spojí související události.
+
+Příklad strukturovaného logu:
+
+```json
+{
+  "level": "warn",
+  "event": "lead_form_delivery_failed",
+  "request_id": "req_7f3c",
+  "form_id": "contact_b2b",
+  "integration": "crm",
+  "result": "timeout",
+  "duration_ms": 4200
+}
+```
+
+Co do logů nepatří:
+
+- hesla, tokeny a API klíče,
+- celé cookies a session hodnoty,
+- platební údaje,
+- zbytečný obsah zpráv z formuláře,
+- rodná čísla, zdravotní údaje a jiné citlivé osobní údaje,
+- kompletní exporty objektů typu `user` jen proto, že to bylo po ruce.
+
+Privacy-first provoz znamená, že logy mají také retenční politiku. Debug log z incidentu nepotřebujete držet deset let. Auditní stopu právních změn možná ano. Oddělte provozní logy, bezpečnostní události a auditní záznamy podle účelu.
+
+### 9.4 Alerty mají budit člověka jen kvůli akci
+
+Alert není dekorace dashboardu. Alert je žádost o lidskou pozornost. A lidská pozornost je drahá, křehká a po třetím falešném poplachu v noci dost sarkastická.
+
+Každý alert musí mít tři vlastnosti:
+
+1. **Dopad:** problém reálně ovlivňuje uživatele, data, bezpečnost nebo peníze.
+2. **Akčnost:** existuje konkrétní krok, který má člověk udělat.
+3. **Kontext:** zpráva říká, kde hledat, jak ověřit stav a jak eskalovat.
+
+Špatný alert:
+
+> CPU je 83 %.
+
+Lepší alert:
+
+> Checkout vrací 5xx pro více než 5 % požadavků posledních 10 minut. Zkontroluj logy `checkout_payment_failed`, stav platební brány a poslední deploy.
+
+Pro malé týmy stačí jednoduché rozdělení:
+
+- **kritické alerty:** web nebo klíčová funkce je dole, bezpečnostní incident, ztráta dat, rozbitá platba,
+- **pracovní upozornění:** blíží se expirace certifikátu, roste chybovost, záloha nebyla ověřena,
+- **informační signály:** vyšší návštěvnost, pomalejší build, nový typ chyby bez dopadu.
+
+Kritické alerty patří do kanálu, který někdo opravdu sleduje. Pracovní upozornění mohou jít do issue trackeru. Informační signály patří na dashboard nebo do týdenního provozního přehledu, ne do nočního pekla.
+
+### 9.5 Incident playbook napište dřív, než ho potřebujete
+
+Incident není chvíle pro literární improvizaci. Potřebujete jednoduchý playbook, který tým otevře i ve stresu.
+
+Minimální incident playbook:
+
+1. **Potvrď dopad:** co nefunguje, komu, od kdy a jak často.
+2. **Zastav krvácení:** rollback, vypnutí integrace, maintenance režim, rate limit, dočasná fronta.
+3. **Urči vlastníka incidentu:** jeden člověk koordinuje, ostatní řeší konkrétní úkoly.
+4. **Komunikuj stav:** interně i externě podle dopadu.
+5. **Chraň data:** ověř, zda nejde o osobní údaje nebo bezpečnostní problém.
+6. **Zapiš časovou osu:** detekce, první reakce, mitigace, oprava, ověření.
+7. **Udělej postmortem:** bez hledání viníka, s konkrétními opatřeními.
+
+U B2B SaaSu přidejte i šablony zpráv pro zákazníky:
+
+- krátké potvrzení problému,
+- průběžná aktualizace,
+- informace o vyřešení,
+- případné kroky, které má zákazník udělat,
+- transparentní shrnutí příčiny, pokud je vhodné ho sdílet.
+
+Když incident souvisí s osobními údaji, přichází právní režim. Evropská komise k GDPR uvádí, že pokud porušení zabezpečení pravděpodobně představuje riziko pro práva a svobody jednotlivců, správce má dozorový úřad informovat bez zbytečného odkladu a nejpozději do 72 hodin od okamžiku, kdy se o porušení dozvěděl. Pokud jste zpracovatel, musíte porušení hlásit správci.
+
+Některé organizace a sektory mohou zároveň spadat pod NIS2. ENISA popisuje incident reporting u NIS2 jako režim s časnou výstrahou do 24 hodin a plnou notifikací do 72 hodin příslušnému orgánu nebo CSIRT. Ne každý malý web do NIS2 spadá, ale pokud stavíte pro regulované odvětví, kritickou infrastrukturu, zdravotnictví, finance nebo významného poskytovatele digitálních služeb, řešte to s právníkem dřív než po incidentu. Právník po incidentu je jako deštník koupený po bouřce: lepší než nic, ale mokří už jste.
+
+### 9.6 Údržba je kalendář, ne nálada
+
+Údržba se nemá dít jen ve chvíli, kdy něco hoří. Vytvořte pravidelný rytmus.
+
+**Týdně:**
+
+- projít chyby v aplikaci,
+- zkontrolovat nevyřešené alerty,
+- ověřit, že zálohy doběhly,
+- projít spam a formulářové selhání,
+- zkontrolovat nejpomalejší stránky nebo endpointy.
+
+**Měsíčně:**
+
+- aktualizovat závislosti s bezpečnostním dopadem,
+- projít přístupy lidí a integrační tokeny,
+- ověřit obnovu alespoň jedné zálohy,
+- zkontrolovat expirace domén, certifikátů a platebních metod,
+- projít privacy dopady nových nástrojů.
+
+**Čtvrtletně:**
+
+- udělat mini postmortem opakujících se problémů,
+- smazat nebo anonymizovat data po retenční době,
+- projít dodavatele a místa zpracování dat,
+- aktualizovat incident playbook,
+- ověřit, že dokumentace odpovídá realitě.
+
+Pokud používáte open-source závislosti, sledujte bezpečnostní aktualizace, ale nenasazujte slepě všechno v pátek večer. Aktualizace má mít test, plán návratu a vlastníka. „Snad to projde“ není strategie, to je hazard s klávesnicí.
+
+### 9.7 Evropský provoz: kontrola nad daty i při problému
+
+Privacy-first provoz se pozná hlavně při incidentu. Dokud je klid, každý má hezké sliby v patičce. Když něco spadne, ukáže se, kdo má přístup k datům, kde jsou logy, kam tečou zálohy a jak rychle umíte vypnout problematickou integraci.
+
+U každého provozního nástroje si zapište:
+
+- kde se fyzicky ukládají data,
+- kdo je poskytovatel a zpracovatel,
+- jaké typy dat nástroj vidí,
+- jestli lze nastavit EU region,
+- jak dlouho drží logy nebo události,
+- jak se exportují a mažou data,
+- kdo má administrátorský přístup,
+- jak nástroj vypnete bez rozbití produktu.
+
+Preferujte nástroje, které umí fungovat s minimem osobních údajů: server-side agregace, anonymizované metriky, vlastní status page bez reklamních skriptů, přímé RSS pro release notes a transparentní incidenty bez social share balastu.
+
+### Checklist: údržba, monitoring a incidenty
+
+- [ ] Máme napsané, co znamená „systém funguje“ pro zákazníka.
+- [ ] Externí monitoring kontroluje klíčové URL mimo produkční server.
+- [ ] Health endpoint neprozrazuje citlivé interní detaily.
+- [ ] Testujeme alespoň jednu hlavní uživatelskou cestu.
+- [ ] Logy jsou strukturované a neobsahují tajemství ani zbytečné osobní údaje.
+- [ ] Kritické alerty mají jasný dopad, akci a kontext.
+- [ ] Existuje krátký incident playbook s rolí vlastníka incidentu.
+- [ ] Víme, kdy může vzniknout povinnost hlásit incident podle GDPR nebo NIS2.
+- [ ] Zálohy nejen běží, ale někdo ověřil obnovu.
+- [ ] Provozní nástroje mají popsaný EU region, retenci a přístupy.
+
+### Mini cvičení: provozní mapa za 60 minut
+
+Vyberte jeden produkční web nebo SaaS a vyplňte:
+
+| Oblast | Odpověď |
+| --- | --- |
+| Nejkritičtější uživatelská cesta | `_____` |
+| Jak poznáme, že nefunguje | `_____` |
+| Kdo dostane kritický alert | `_____` |
+| Kde jsou aplikační logy | `_____` |
+| Co se nesmí logovat | `_____` |
+| Kde jsou zálohy | `_____` |
+| Kdy byla naposledy ověřená obnova | `_____` |
+| Jak uděláme rollback | `_____` |
+| Kdo komunikuje zákazníkům | `_____` |
+| Které nástroje zpracovávají osobní údaje | `_____` |
+
+Potom si vyberte jednu slabinu a opravte ji hned. Ne „někdy v Q4“. Hned. Nejčastěji to bude chybějící test obnovy zálohy, příliš hlučný alert nebo logování zbytečného obsahu formulářů. Všechny tři věci jsou méně sexy než nový hero gradient, ale výrazně užitečnější, když se realita rozhodne být realitou.
+
+### Zdroje ke kapitole 9
+
+- Google SRE Book: [Monitoring Distributed Systems](https://sre.google/sre-book/monitoring-distributed-systems/)
+- Google SRE Book: [Practical Alerting from Time-Series Data](https://sre.google/sre-book/practical-alerting/)
+- OWASP Cheat Sheet Series: [Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
+- European Commission: [What is a data breach and what do we have to do in case of a data breach?](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/obligations/what-data-breach-and-what-do-we-have-do-case-data-breach_en)
+- ENISA: [Threats and Incidents](https://www.enisa.europa.eu/topics/state-of-cybersecurity-in-the-eu/threats-and-incidents)
+
+---
+
+## Pracovní log
+- 2026-08-21: Dopsána kapitola 9 „Údržba, monitoring a incidenty“ s provozní definicí zdraví, monitoringem vrstev, bezpečnými logy, alerty, incident playbookem, údržbovým rytmem, privacy-first provozem, checklistem a ověřenými zdroji.
+
+- 2026-08-21: Dopsána kapitola 8 „Formuláře, leady a integrace bez chaosu“ s návrhem polí, validací, consentem, mapou toku dat, automatizací, spam ochranou, checklistem a ověřenými GDPR zdroji.
 
 - 2026-08-21: Dopsána kapitola 7 „Výkon, přístupnost a SEO bez magie“ s praktickým výkonovým základem, přístupnostním minimem, technickým SEO, privacy-first měřením, mini auditem a ověřenými zdroji.
 
