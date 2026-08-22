@@ -150,6 +150,7 @@ M. Retence a mazání dat bez paniky
 N. Předávací protokol pro web a SaaS bez vendor lock-inu
 O. 14denní onboardingový plán pro B2B SaaS bez datového přejídání
 P. Nákupní checklist pro privacy-first SaaS nástroje
+Q. Produktové experimenty bez datového smogu
 
 ---
 
@@ -8834,9 +8835,175 @@ Výstupem nemá být dokonalý audit. Výstupem má být rozhodnutí. Nástroj b
 - Evropská komise: Data Act, přehled pravidel pro férový přístup k datům a přepínání mezi poskytovateli datových služeb: https://digital-strategy.ec.europa.eu/en/policies/data-act
 - Evropská komise: Data Act explained, praktické vysvětlení kapitol včetně cloud switchingu, interoperability a ochrany před nefér smluvními podmínkami: https://digital-strategy.ec.europa.eu/en/factpages/data-act-explained
 
+
+## Q. Produktové experimenty bez datového smogu
+
+Experiment není kouzelná nálepka, která z náhodného nápadu udělá vědu. V malém týmu je experiment hlavně bezpečný způsob, jak se něco naučit dřív, než kvůli tomu přepíšete půl produktu, spálíte měsíc marketingu nebo posbíráte data, která vlastně nepotřebujete.
+
+Privacy-first experimentování má jednoduchý princip: nejdřív formulujte rozhodnutí, které chcete udělat, a teprve potom vybírejte metodu měření. Ne obráceně. Pokud začnete nástrojem, skončíte často u toho, že měříte všechno, protože nástroj umí všechno. To je produktový ekvivalent bufetu: vypadá to jako hojnost, ale za hodinu se ptáte, proč jste kombinovali sushi, guláš a tři druhy pudinku.
+
+*Codyho komentář: dobrý experiment není ten, který má nejvíc grafů. Dobrý experiment je ten, po kterém tým ví, co udělat dál — a nemusí kvůli tomu vytvořit malý datový Mordor.*
+
+### Q.1 Začněte rozhodnutím, ne metrikou
+
+Než napíšete „otestujeme nový onboarding“, napište větu:
+
+> Potřebujeme rozhodnout, jestli [změna] pomůže [komu] dosáhnout [výsledku] natolik, že [další krok].
+
+Příklady:
+
+- Potřebujeme rozhodnout, jestli kratší registrační formulář pomůže menším B2B týmům rychleji vytvořit první projekt natolik, že ho nasadíme pro všechny nové účty.
+- Potřebujeme rozhodnout, jestli veřejná cenová stránka sníží počet nekvalifikovaných poptávek natolik, že přestaneme posílat pricing PDF ručně.
+- Potřebujeme rozhodnout, jestli e-mail s jedním konkrétním dalším krokem zvýší dokončení onboardingu natolik, že ho zařadíme do výchozí sekvence.
+
+Rozhodnutí drží experiment při zemi. Metrika pak není dekorace, ale důkaz. Pokud nevíte, jaké rozhodnutí po experimentu padne, experiment ještě nezačínejte.
+
+### Q.2 Vyberte nejmenší bezpečný signál
+
+Ne každý experiment potřebuje A/B test, nový analytický nástroj nebo deset událostí v produktu. Často stačí menší signál, který je levnější, rychlejší a šetrnější k datům.
+
+Praktické typy signálů:
+
+- **Kvalitativní signál:** pět krátkých rozhovorů, odpovědi na jednu otázku ve formuláři, poznámky ze supportu.
+- **Behaviorální signál:** kliknutí na primární akci, dokončení jednoho kroku, vytvoření prvního projektu, návrat do aplikace.
+- **Obchodní signál:** počet kvalifikovaných poptávek, odpovědi na nabídku, trial-to-call poměr, aktivní používání po demo hovoru.
+- **Provozní signál:** méně support dotazů, méně ručních zásahů, rychlejší vyřízení, méně chybových stavů.
+
+Privacy-first pravidlo: vyberte signál, který vyžaduje nejméně osobních dat a pořád stačí pro rozhodnutí. Když můžete měřit agregovanou konverzi stránky, nepotřebujete individuální cestu každého návštěvníka. Když stačí anonymizovaný počet dokončených kroků, nepotřebujete nahrávky session. Když potřebujete rozhovor, nepotřebujete ho navždy držet v transkriptu.
+
+### Q.3 Experiment brief na jednu stránku
+
+Každý experiment si zaslouží krátký brief. Ne proto, aby tým vyráběl dokumenty pro dokumenty, ale aby se po dvou týdnech nehádal, co vlastně znamená „fungovalo to“.
+
+Použijte tuto šablonu:
+
+```markdown
+# Experiment: [název]
+
+## Rozhodnutí
+Co po experimentu rozhodneme?
+
+## Hypotéza
+Věříme, že [změna] pomůže [segmentu] dosáhnout [výsledku], protože [důvod].
+
+## Segment
+Koho se experiment týká a koho se netýká?
+
+## Varianta
+Co přesně měníme?
+
+## Primární signál
+Jak poznáme, že změna pomohla?
+
+## Guardrails
+Co se nesmí zhoršit?
+
+## Data
+Jaká data sbíráme, proč, kde jsou uložená a kdy je mažeme?
+
+## Délka
+Kdy experiment začne, skončí a kdo ho vyhodnotí?
+
+## Rozhodovací pravidlo
+Co uděláme při výsledku pozitivní / neutrální / negativní?
+```
+
+Brief musí být konkrétní. „Zlepšíme onboarding“ nestačí. „Snížíme počet kroků registrace ze sedmi na čtyři a budeme sledovat dokončení prvního projektu do 24 hodin“ už je něco, s čím se dá pracovat.
+
+### Q.4 Guardrails: co nesmí experiment rozbít
+
+Experimenty lákají k optimalizaci jedné metriky na úkor všeho ostatního. Zvednete počet registrací tím, že schováte cenu? Možná. Zvednete počet kvalifikovaných zákazníků? To už jisté není. Snížíte počet polí ve formuláři? Skvělé. Ztratíte informaci, bez které obchodní tým neumí rozlišit relevantní poptávku? Méně skvělé.
+
+Ke každému experimentu si napište guardrails:
+
+- nesmí se zvýšit počet support dotazů k danému kroku,
+- nesmí klesnout kvalita poptávek,
+- nesmí vzniknout nový povinný sběr osobních údajů,
+- nesmí se zhoršit přístupnost nebo výkon stránky,
+- nesmí vzniknout závislost na nástroji bez exportu,
+- nesmí se změna dotknout existujících zákazníků bez jasné komunikace.
+
+Guardrails jsou obzvlášť důležité v marketingu. Krátkodobý růst konverzí může vypadat krásně v reportu, ale pokud je vykoupený agresivním copywritingem, tmavými vzory nebo skrytým sběrem dat, produkt dlouhodobě ztrácí důvěru. A důvěra se obnovuje výrazně hůř než button text.
+
+### Q.5 Jak měřit bez osobního profilu návštěvníka
+
+Malý privacy-first tým většinou nepotřebuje osobní profil každého návštěvníka. Potřebuje vědět, jestli změna pomohla rozhodnutí.
+
+Použitelné přístupy:
+
+- **Agregované eventy:** počty zobrazení, kliknutí a dokončení bez ukládání detailních cest jednotlivců.
+- **Krátké UTM značení:** rozlišujte kampaň a zdroj, ale nevkládejte do URL osobní údaje ani interní poznámky.
+- **Serverové provozní logy:** používejte je pro chyby a výkon, ne jako náhradní behaviorální sledování uživatelů.
+- **Dobrovolná zpětná vazba:** jedna otázka po dokončení kroku často vysvětlí víc než deset grafů.
+- **Vzorkované rozhovory:** mluvte s lidmi, kteří souhlasí, a po vyhodnocení smažte surové poznámky, pokud už nejsou potřeba.
+
+Příklad: chcete zjistit, jestli nová landing page lépe vede lidi k poptávce. Stačí měřit zobrazení stránky, kliknutí na primární akci, odeslané poptávky a kvalitu poptávek podle interního štítku. Nepotřebujete replay obrazovky, fingerprinting ani sdílení publik s reklamní sítí.
+
+### Q.6 Rozhodovací tabulka po experimentu
+
+Vyhodnocení má být nudné. To je kompliment. Když je rozhodovací pravidlo jasné předem, tým nemusí po skončení experimentu kreativně vysvětlovat, proč „to vlastně dopadlo dobře“, i když data vypadají jako mokrá lepenka.
+
+| Výsledek | Co udělat | Co zapsat |
+| --- | --- | --- |
+| Jasně pozitivní | nasadit změnu nebo rozšířit na další segment | dopad, guardrails, další krok |
+| Slabě pozitivní | ponechat omezeně a udělat druhou iteraci | co chybělo k jistotě |
+| Neutrální | vrátit změnu nebo omezit rozsah | proč signál nestačil |
+| Negativní | vrátit změnu a zdokumentovat učení | co se zhoršilo a proč |
+| Nečitelné | neopakovat naslepo; zlepšit brief | chyba v měření nebo rozsahu |
+
+Nezapomeňte zapsat i experimenty, které nevyšly. Neúspěšný experiment je levně koupená informace. Nezapsaný neúspěšný experiment je budoucí týmová repríza stejné chyby, jen s novým názvem v backlogu.
+
+### Q.7 Knihovna experimentů
+
+Držte všechny experimenty na jednom místě. Stačí jednoduchá tabulka:
+
+| Pole | Proč existuje |
+| --- | --- |
+| název | aby se experiment dal najít |
+| oblast | web, onboarding, pricing, support, marketing |
+| segment | koho se týkal |
+| hypotéza | co jste věřili předem |
+| primární signál | podle čeho se rozhodovalo |
+| guardrails | co se hlídalo |
+| výsledek | pozitivní, neutrální, negativní, nečitelné |
+| rozhodnutí | nasadit, iterovat, zahodit, vrátit |
+| datum review | kdy se k tomu vrátit |
+
+Knihovna experimentů pomáhá hlavně po třech měsících. Uvidíte, jestli se pořád točíte kolem stejného problému, jestli experimentujete jen s tlačítky místo hodnoty, nebo jestli marketing optimalizuje leady, které produkt neumí aktivovat.
+
+### Q.8 Praktický checklist experimentu
+
+- [ ] Experiment začíná rozhodnutím, ne nástrojem.
+- [ ] Hypotéza obsahuje segment, změnu, výsledek a důvod.
+- [ ] Primární signál stačí pro rozhodnutí.
+- [ ] Guardrails chrání kvalitu, důvěru, výkon a privacy-first hodnotu.
+- [ ] Nesbíráme osobní data, která nejsou nutná.
+- [ ] Víme, kde se data ukládají a kdo k nim má přístup.
+- [ ] Máme datum ukončení experimentu.
+- [ ] Předem víme, co znamená pozitivní, neutrální a negativní výsledek.
+- [ ] Výsledek zapíšeme do knihovny experimentů.
+- [ ] Po vyhodnocení uklidíme dočasné eventy, štítky a přístupy.
+- [ ] Pokud experiment nevyšel, zapíšeme učení bez hledání viníka.
+- [ ] Pokud experiment vyšel, převedeme ho do běžného provozu a dokumentace.
+
+### Mini cvičení: první experiment za 40 minut
+
+1. Vyberte jednu stránku, onboardingový krok nebo e-mail, který má jasný obchodní účel.
+2. Napište jedno rozhodnutí, které chcete udělat.
+3. Formulujte hypotézu podle šablony.
+4. Vyberte jeden primární signál a maximálně tři guardrails.
+5. Zkontrolujte, jestli jde signál měřit agregovaně nebo s menším množstvím dat.
+6. Napište datum začátku, datum konce a vlastníka vyhodnocení.
+7. Předem určete, co uděláte při pozitivním, neutrálním a negativním výsledku.
+8. Po skončení experimentu zapište výsledek do knihovny a smažte dočasná data, která už nepotřebujete.
+
+Výstupem je jedna stránka briefu a jedno rozhodnutí. Ne laboratoř. Ne nový stack. Ne dashboard se sedmi filtry, které nikdo nepoužije. Malý tým vyhrává rychlostí učení a čistotou provozu.
+
 ---
 
 ## Pracovní log
+- 2026-08-22: Přidána příloha Q „Produktové experimenty bez datového smogu“ s rozhodovacím briefem, výběrem bezpečných signálů, guardrails, agregovaným měřením, vyhodnocovací tabulkou, knihovnou experimentů, checklistem a mini cvičením.
+
 - 2026-08-22: Přidána příloha P „Nákupní checklist pro privacy-first SaaS nástroje“ s rizikovým zařazením nástrojů, vendor kartou, GDPR rolemi, exportem, privacy-first skóre, schvalovacím rytmem, checklistem, mini cvičením a ověřenými zdroji.
 
 - 2026-08-22: Přidána příloha O „14denní onboardingový plán pro B2B SaaS bez datového přejídání“ s aktivačním momentem, fázemi prvních 14 dní, minimalizací dat, onboardingovými zprávami, metrickou kartou, checklistem a mini cvičením.
