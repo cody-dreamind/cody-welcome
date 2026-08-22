@@ -144,6 +144,7 @@ G. Údržbový kalendář pro web, SaaS a marketing
 H. 90minutový workshop: převod e-booku do akčního plánu
 I. Produktový backlog bez chaosu
 J. Rozhodovací deník pro web, SaaS a marketing
+K. Zpětná vazba od zákazníků bez datového smogu
 
 ---
 
@@ -7552,6 +7553,174 @@ Vyberte jedno aktuální rozhodnutí, které se teď v týmu motá v chatu. Tře
 
 ---
 
+## K. Zpětná vazba od zákazníků bez datového smogu
+
+Zpětná vazba je palivo pro web, SaaS i marketing. Jenže palivo může pohánět motor, nebo zapálit garáž. Malé týmy často sklouznou do dvou extrémů: buď se zákazníků neptají vůbec, nebo nasadí pět formulářů, session recording, heatmapy, pop-up dotazníky a automatické skórování nálady. Výsledek bývá překvapivě podobný: hodně šumu, málo jasných rozhodnutí a zbytečně moc citlivých stop.
+
+Privacy-first přístup neznamená, že nebudete sbírat zpětnou vazbu. Znamená, že budete předem vědět, proč ji sbíráte, jak dlouho ji držíte, kdo ji čte a jaké rozhodnutí z ní má vzniknout.
+
+### K.1 Začněte otázkou, kterou chcete rozhodnout
+
+Nejdřív nenavrhujte dotazník. Napište rozhodnutí, které má zpětná vazba podpořit.
+
+Příklady dobrých otázek:
+
+- Proč lidé nedokončí poptávkový formulář?
+- Který krok onboardingu nejvíc brzdí první hodnotu?
+- Jak zákazníci popisují problém vlastními slovy?
+- Které informace chybí na pricing stránce před nákupem?
+- Co se opakuje v supportu tak často, že to patří do produktu nebo dokumentace?
+
+Příklady špatných otázek:
+
+- Co si zákazníci myslí o našem webu?
+- Jak zlepšit produkt?
+- Jaký obsah máme dělat?
+- Proč nerosteme rychleji?
+
+Špatné otázky nejsou špatné proto, že by byly hloupé. Jsou moc široké. Zákazník vám pak dá názor, vy dostanete hromadu poznámek a tým se pohádá, jestli „víc moderní“ znamená kratší text, jiné barvy nebo nový framework. To je přesně ten typ meetingu, ze kterého i kávovar žádá home office.
+
+### K.2 Vyberte nejmenší metodu, která stačí
+
+Nepotřebujete hned výzkumný program. Pro malé týmy obvykle stačí jedna z těchto metod:
+
+- **Tři krátké rozhovory:** vhodné pro positioning, nabídku, onboarding a pricing nejistoty.
+- **Jedna otázka po dokončení akce:** vhodné po registraci, poptávce, nákupu nebo stažení materiálu.
+- **Support tagging:** označování opakovaných dotazů v supportu jedním štítkem.
+- **Měsíční přehled z chatu a e-mailu:** ruční výběr opakujících se vzorů bez ukládání zbytečných detailů.
+- **Anonymizovaná knihovna citací:** krátké formulace zákazníků, které pomáhají copywritingu a product discovery.
+
+Praktické pravidlo: pokud neumíte říct, jak zpětnou vazbu vyhodnotíte za 30 minut, metoda je pravděpodobně moc složitá.
+
+### K.3 Šablona krátkého zákaznického rozhovoru
+
+Rozhovor má být konkrétní, krátký a bezpečný. Neprodávejte během něj. Nesnažte se zákazníka přesvědčit, že vaše řešení je skvělé. Cílem je pochopit realitu, ne získat potlesk.
+
+Použijte tuto strukturu:
+
+```md
+## Kontext
+- S kým mluvíme: role nebo typ zákazníka, ne zbytečné osobní detaily
+- Proč mluvíme: rozhodnutí, které rozhovor podporuje
+- Co nesbíráme: citlivé údaje, interní dokumenty, přístupy, osobní data mimo účel
+
+## Otázky
+1. Co vás vedlo k tomu, že jste začali problém řešit?
+2. Jak jste to řešili předtím?
+3. Co bylo při výběru řešení nejvíc nejasné?
+4. Který moment vám ukázal, že řešení funguje nebo nefunguje?
+5. Jak byste problém popsali kolegovi vlastními slovy?
+
+## Výstup
+- Tři opakující se signály
+- Jedna citace použitelná pro copy nebo dokumentaci
+- Jedno rozhodnutí pro backlog
+- Jedna věc, kterou nesmíme dál sbírat nebo ukládat
+```
+
+Pokud rozhovor nahráváte, řekněte proč, kdo k nahrávce má přístup a kdy ji smažete. U malého týmu často stačí nenahrávat vůbec a zapisovat jen shrnutí. Méně dat, méně rizika, méně budoucího úklidu. Ano, to zní skoro až dospěle.
+
+### K.4 Zpětná vazba na webu: jedna otázka stačí
+
+Web nemusí mít agresivní widget v rohu každé stránky. Začněte jednou dobrovolnou otázkou na místě, kde má návštěvník jasný kontext.
+
+Příklady:
+
+- Na pricing stránce: „Co vám tady chybí k rozhodnutí?“
+- Po odeslání formuláře: „Co bylo při popisu poptávky nejtěžší?“
+- V dokumentaci: „Našli jste odpověď? Pokud ne, co jste hledali?“
+- Po onboardingu: „Který krok byl nejméně jasný?“
+
+Dobrá otázka má tři vlastnosti:
+
+- odpovídá na konkrétní rozhodnutí,
+- nevyžaduje citlivá data,
+- jde vyhodnotit ručně bez detektivní práce.
+
+Pokud odpověď nepotřebuje e-mail, neptejte se na e-mail. Pokud nepotřebuje jméno firmy, neptejte se na firmu. Pokud potřebujete kontakt pro follow-up, oddělte ho od samotné odpovědi a jasně vysvětlete, že je dobrovolný.
+
+### K.5 Jak zpětnou vazbu třídit
+
+Zpětná vazba bez třídění se rychle změní v sentimentální skládku. Použijte jednoduchý systém štítků:
+
+- **Nejasná hodnota:** zákazník nechápe, co přesně nabízíte.
+- **Chybějící důvěra:** zákazník chce důkaz, referenci, bezpečnostní informaci nebo vysvětlení provozu.
+- **Třecí krok:** zákazník narazil ve formuláři, onboardingu, platbě nebo dokumentaci.
+- **Funkční požadavek:** zákazník chce novou schopnost produktu.
+- **Provozní riziko:** zpětná vazba ukazuje na support, bezpečnost, fakturaci nebo dostupnost.
+- **Marketingový jazyk:** zákazník použil formulaci, kterou stojí za to promítnout do copy.
+
+Každý měsíc vyberte maximálně tři nejsilnější vzory. Ne deset. Ne „všechno je důležité“. Tři. Malý tým vyhrává tím, že umí říct ne i dobrým nápadům.
+
+### K.6 Privacy-first pravidla pro feedback systém
+
+- Sbírejte jen odpovědi, které podporují konkrétní rozhodnutí.
+- Oddělte obsah zpětné vazby od kontaktních údajů, pokud kontakt není nutný.
+- Citace anonymizujte dřív, než je vložíte do interní knihovny nebo marketingu.
+- Přístup k surové zpětné vazbě dejte jen lidem, kteří ji opravdu vyhodnocují.
+- Nastavte retenci: surové odpovědi mažte dřív než syntézy a rozhodnutí.
+- U citlivějších témat používejte shrnutí místo doslovných záznamů.
+- Nesdílejte screenshoty zákaznických systémů do náhodných nástrojů.
+- U každého feedback nástroje si napište, kde běží data a jak je exportujete.
+
+Privacy-first provoz není nepřítel výzkumu. Je to filtr, který vás nutí sbírat kvalitnější signály. Když si neumíte obhájit, proč ukládáte konkrétní údaj, pravděpodobně ho nepotřebujete.
+
+### K.7 Měsíční syntéza zpětné vazby
+
+Jednou měsíčně si udělejte krátký přehled. Stačí jedna stránka:
+
+```md
+## Období
+- Měsíc:
+- Zdroje: rozhovory, support, formulář, dokumentace
+
+## Tři nejsilnější vzory
+1.
+2.
+3.
+
+## Dopad na web
+- Co upravíme v copy, struktuře nebo důkazech:
+
+## Dopad na produkt
+- Co patří do backlogu nebo dokumentace:
+
+## Dopad na marketing
+- Jaké formulace, otázky nebo témata se opakují:
+
+## Privacy-first úklid
+- Co smažeme:
+- Co anonymizujeme:
+- Co přestaneme sbírat:
+
+## Jedno rozhodnutí
+- Tento měsíc uděláme:
+- Vlastník:
+- Důkaz dopadu:
+```
+
+Tahle stránka je důležitější než graf s osmi barevnými segmenty. Vede ke konkrétní práci: upravit hero text, doplnit FAQ, změnit onboarding, přepsat dokumentaci, nebo odmítnout požadavek, který nepatří do strategie.
+
+### Mini checklist: feedback bez datového smogu
+
+- [ ] Víme, jaké rozhodnutí má zpětná vazba podpořit.
+- [ ] Používáme nejmenší metodu, která stačí.
+- [ ] Každá otázka má jasný účel.
+- [ ] Kontaktní údaje sbíráme jen při dobrovolném follow-upu.
+- [ ] Surové odpovědi mají vlastníka, přístup a retenci.
+- [ ] Citace anonymizujeme před použitím v marketingu nebo dokumentaci.
+- [ ] Každý měsíc vybíráme maximálně tři vzory.
+- [ ] Z každé syntézy vznikne jedno rozhodnutí nebo vědomé „teď ne“.
+- [ ] Feedback nástroje mají ověřený export a popsané místo provozu.
+
+### Mini cvičení: pět odpovědí za 30 minut
+
+Vyberte jednu stránku nebo jeden krok produktu, který chcete zlepšit. Napište jednu otázku, kterou tam můžete položit bez sběru zbytečných údajů. Nasbírejte prvních pět odpovědí, ručně je označte štítky a rozhodněte jednu malou úpravu.
+
+*Codyho komentář: pět kvalitních odpovědí často odhalí víc než dashboard, který se snaží vypadat jako řídicí centrum vesmírné mise. Pokud po přečtení odpovědí nevíte, co udělat, problém možná není v datech, ale v otázce.*
+
+---
+
 # Závěr: Udělejte z e-booku pracovní systém
 
 Pokud jste dočetli až sem, gratuluju. Ne proto, že jste hrdinně přežili Codyho tabulky, checklisty a občasné kopnutí do marketingové mlhy. Hlavní pointa je jednodušší: web, SaaS a marketing se nezlepší tím, že si tým jednou přečte dlouhý dokument. Zlepší se tím, že z něj udělá pravidelný pracovní rytmus.
@@ -7682,6 +7851,8 @@ Pak to opravdu udělejte. Ne dokonale. Dokončeně.
 ---
 
 ## Pracovní log
+- 2026-08-22: Přidána příloha K „Zpětná vazba od zákazníků bez datového smogu“ se zákaznickými rozhovory, jednou otázkou na webu, tříděním signálů, měsíční syntézou, privacy-first pravidly, checklistem a mini cvičením.
+
 - 2026-08-22: Přidána příloha J „Rozhodovací deník pro web, SaaS a marketing“ s kartou rozhodnutí, příkladem formuláře, napojením na backlog a měsíční review, privacy-first kontrolou a checklistem.
 
 - 2026-08-22: Přidána příloha I „Produktový backlog bez chaosu“ s kartou backlog položky, typy práce, jednoduchým prioritizačním skóre, limity rozpracované práce, týdenním rituálem, privacy-first pravidly, checklistem a zdroji.
