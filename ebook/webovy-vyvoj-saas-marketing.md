@@ -9417,7 +9417,136 @@ Výstupem je menší, jasnější a bezpečnější změna. Ne papírový bunkr.
 - CNIL v praktickém průvodci upozorňuje, že cookies a trackery obvykle vyžadují informování, souhlas a možnost odmítnutí; pro některé měření návštěvnosti existují úzké výjimky: https://www.cnil.fr/fr/node/677
 - Evropská komise uvádí, že Data Act se v EU používá od 12. září 2025 a zahrnuje i pravidla usnadňující změnu poskytovatelů cloudových služeb: https://digital-strategy.ec.europa.eu/en/policies/data-act
 
+## T. Bezpečnostní minimum pro malý SaaS tým
+
+Bezpečnost malého SaaSu často padá do dvou extrémů. Buď se neřeší, protože „zatím nejsme banka“, nebo se z ní udělá divadlo s dvaceti politikami, kterým nikdo nerozumí. Ani jedno nepomáhá. Malý tým potřebuje minimum, které je praktické, opakovatelné a viditelné v každodenní práci.
+
+OWASP Top 10 je dobrý seznam rizik pro webové aplikace, ale není to návod typu „klikni sem a máš hotovo“. OWASP ASVS jde hlouběji a hodí se jako kontrolní rámec pro požadavky. CIS Controls zase pomáhají přeložit bezpečnost do provozních opatření. Pro malý evropský tým je pointa jednoduchá: chránit účty, kód, produkční data, zákaznickou důvěru a schopnost obnovy.
+
+*Codyho komentář: bezpečnost není samostatný šanon. Je to kvalita produktu. Když zákazníkovi utečou data, nepomůže, že CTA tlačítko mělo skvělou konverzi. Gratuluju, právě jste optimalizovali cestu do pekla.*
+
+### T.1 Začněte mapou aktiv
+
+Nejdřív sepište, co vlastně chráníte. Bez toho tým sklouzne k náhodným opatřením: někdo řeší CSP hlavičky, ale produkční databáze má sdílený admin účet. Hezké, ale trochu jako zamykat poštovní schránku a nechat otevřený trezor.
+
+Minimální mapa aktiv:
+
+- **Produkční aplikace:** doména, hosting, runtime, deploy pipeline, build artefakty.
+- **Data:** databáze, soubory, zálohy, logy, exporty, analytika, support přílohy.
+- **Identita:** účty týmu, zákaznické účty, servisní účty, API klíče, OAuth aplikace.
+- **Kód:** repozitáře, CI/CD, dependency lockfile, secrets v prostředí, review pravidla.
+- **Komunikace:** support e-mail, status page, incident kontakty, interní chat.
+- **Dodavatelé:** hosting, e-mail, platby, monitoring, error tracking, analytika, AI nástroje.
+
+Ke každému aktivu napište vlastníka a nejhorší realistický scénář. Ne „apokalypsa“. Konkrétně: únik fakturačních dat, převzetí admin účtu, smazání databáze, podvržený deploy, veřejný bucket, token v repozitáři.
+
+### T.2 Účty: MFA, role a žádné sdílené identity
+
+První bezpečnostní vrstva je nudná: účty. Právě proto funguje. Každý účet, který má přístup k produkci, fakturaci, DNS, e-mailu, repozitáři nebo zákaznickým datům, musí mít MFA. Ne „až budeme větší“. Hned.
+
+Praktické minimum:
+
+- pro každého člověka samostatný účet,
+- MFA pro administrátory i vývojáře s produkčním dopadem,
+- oddělené osobní a servisní účty,
+- nejmenší nutná práva,
+- pravidelný review přístupů,
+- okamžité odebrání přístupů při odchodu člověka nebo dodavatele.
+
+Servisní účty pojmenujte podle účelu, ne podle člověka: `billing-webhook-prod`, `backup-reader`, `deploy-bot`. U každého má být jasné, kdo ho vlastní, kdy byl vytvořen, jaká má práva a jak se rotuje token.
+
+### T.3 Secrets nejsou konfigurace pro ležérní život
+
+API klíče, databázová hesla, webhook podpisy a privátní tokeny nesmí žít v repozitáři, screenshotu, chatu ani v poznámce „dočasně“. Dočasně je nejdelší jednotka v softwaru hned po „po launchi to uklidíme“.
+
+Bezpečný základ:
+
+- secrets ukládejte do správce secrets nebo produkčního prostředí hostingu,
+- lokální `.env` soubory necommitujte,
+- pro každý environment používejte jiné hodnoty,
+- rotujte klíče po incidentu, odchodu dodavatele nebo změně integračního účelu,
+- nikdy neposílejte secrets do klientského JavaScriptu,
+- logy filtrujte tak, aby neobsahovaly tokeny, celé hlavičky ani citlivé URL parametry.
+
+U každé nové integrace si položte otázku: „Kdyby tento klíč unikl, co přesně může útočník udělat?“ Pokud odpověď zní „všechno“, integrace má moc velká práva.
+
+### T.4 Dependency hygiena bez falešného pocitu bezpečí
+
+Automatické upozornění na zranitelnosti je užitečné, ale samo o sobě neznamená bezpečný produkt. Malý tým potřebuje rytmus: kdo upozornění čte, co se opravuje hned, co se plánuje a co se vědomě akceptuje.
+
+Jednoduchá triáž:
+
+- **Kritické a exploatovatelné v produkci:** opravit okamžitě nebo dočasně vypnout zasaženou funkci.
+- **Vysoké bez přímé expozice:** naplánovat do nejbližší údržby a zapsat důvod.
+- **Vývojové závislosti:** ověřit dopad na build a CI, nepanikařit podle titulku.
+- **Nepoužívaný balík:** odstranit místo nekonečného aktualizování.
+
+Dependency update není jen změna čísla verze. Patří k němu changelog, test hlavního flow, rollback plán a kontrola, jestli se nezměnily licenční nebo provozní podmínky.
+
+### T.5 Produkční data nepatří do vývoje
+
+Privacy-first provoz a bezpečnost se potkávají v jedné zásadě: vývojové prostředí nemá být skládka produkčních dat. Pokud potřebujete testovací data, vytvořte anonymizovaný dataset, syntetická data nebo malý ručně připravený vzorek.
+
+Zakázané zkratky:
+
+- kopie celé produkční databáze do notebooku,
+- reálné e-maily zákazníků v testovacím e-mailingu,
+- support přílohy v demo prostředí,
+- logy s osobními údaji v nástroji třetí strany,
+- sdílený export „jen na debug“ v chatu.
+
+Když opravdu musíte pracovat s produkčním incidentem, použijte časově omezený přístup, auditní stopu a minimální rozsah dat. Po vyřešení incidentu přístup odeberte a do logu napište, proč byl použit.
+
+### T.6 Zálohy testujte, jinak máte jen hezký placebo rituál
+
+Záloha, kterou nikdo nikdy neobnovil, je přání. Ne plán. Malý SaaS má mít jasně napsané, co se zálohuje, jak často, kde to leží, kdo má přístup a jak dlouho obnova trvá.
+
+Obnovovací minimum:
+
+- databáze má pravidelné zálohy mimo primární runtime,
+- kritické soubory a konfigurace jsou součástí obnovy,
+- secrets nejsou v záloze uložené jako čitelný bonus pro budoucího útočníka,
+- alespoň jednou za čtvrtletí proběhne test obnovy,
+- výsledek testu se zapíše: čas obnovy, problém, další krok.
+
+Privacy-first poznámka: zálohy musí respektovat retenci. Pokud uživatel žádá o smazání, nemá to automaticky znamenat ruční hrabání ve starých zálohách, ale musí existovat pravidlo, kdy zálohy expirují a jak se data nevrací zpět do aktivního systému.
+
+### T.7 Bezpečnostní checklist před releasem
+
+- [ ] Nová funkce má jasný datový účel a prošla privacy review.
+- [ ] Admin a produkční přístupy mají MFA.
+- [ ] Nové role mají nejmenší nutná oprávnění.
+- [ ] Secrets nejsou v kódu, logu, chatu ani klientském balíčku.
+- [ ] Webhooky ověřují podpis nebo jiný důvěryhodný mechanismus.
+- [ ] Vstupy jsou validované na serveru, ne jen v UI.
+- [ ] Chybové hlášky neprozrazují interní detaily.
+- [ ] Dependency změny mají zkontrolovaný changelog a rollback plán.
+- [ ] Testovací prostředí nepoužívá reálná produkční data bez ochrany.
+- [ ] Logy neobsahují citlivá pole, tokeny ani celé payloady.
+- [ ] Zálohy existují a poslední test obnovy má datum.
+- [ ] Incident kontakt a komunikační šablona jsou aktuální.
+
+### Mini cvičení: bezpečnostní minimum za 60 minut
+
+1. Sepište deset nejdůležitějších aktiv podle T.1.
+2. U každého napište vlastníka a nejhorší realistický scénář.
+3. Zkontrolujte MFA u repozitáře, hostingu, DNS, e-mailu a fakturace.
+4. Najděte jeden starý účet nebo token a odeberte ho.
+5. Ověřte, kdy naposledy proběhl test obnovy ze zálohy.
+6. Vyberte jednu dependency nebo integraci s nejvyšším rizikem a napište rozhodnutí: opravit, odstranit, akceptovat, sledovat.
+7. Výsledek zapište do bezpečnostního logu.
+
+Výstupem není certifikace. Výstupem je tým, který ví, co chrání, kdo za to odpovídá a co udělá, když se něco pokazí.
+
+### Zdroje k příloze T
+
+- OWASP Top 10 popisuje nejkritičtější rizika webových aplikací; aktuální projektová stránka uvádí jako nejnovější vydanou verzi OWASP Top Ten 2025: https://owasp.org/www-project-top-ten/
+- OWASP Application Security Verification Standard poskytuje ověřovací rámec pro aplikační bezpečnostní požadavky: https://owasp.org/www-project-application-security-verification-standard/
+- CIS Critical Security Controls v8 shrnují prioritizovaná bezpečnostní opatření pro organizace: https://www.cisecurity.org/controls/v8
+- ENISA „Cybersecurity guide for SMEs“ nabízí praktický dvanáctikrokový průvodce kyberbezpečností pro malé a střední podniky: https://www.enisa.europa.eu/publications/cybersecurity-guide-for-smes
+
 ## Pracovní log
+- 2026-08-22: Přidána příloha T „Bezpečnostní minimum pro malý SaaS tým“ s mapou aktiv, MFA a rolemi, správou secrets, dependency hygienou, pravidly pro produkční data, testováním záloh, release checklistem, mini cvičením a ověřenými zdroji.
 - 2026-08-22: Přidána příloha S „Privacy-by-design review před každou větší změnou“ s kartou změny, datovou mapou, právním základem, kontrolou analytiky, vendor checkem, AI review, stop pravidly, checklistem, mini cvičením a ověřenými zdroji.
 - 2026-08-22: Přidána příloha R „Komunikační protokol pro změny a incidenty“ se čtyřmi úrovněmi událostí, status kartou, šablonami zpráv, interními incident pravidly, changelog/status doporučeními, checklistem, mini drillem a ověřenými zdroji.
 - 2026-08-22: Přidána příloha Q „Produktové experimenty bez datového smogu“ s rozhodovacím briefem, výběrem bezpečných signálů, guardrails, agregovaným měřením, vyhodnocovací tabulkou, knihovnou experimentů, checklistem a mini cvičením.
