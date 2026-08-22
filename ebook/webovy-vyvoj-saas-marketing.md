@@ -5678,7 +5678,298 @@ To není „digitální transformace“. To je uklizený základ, na kterém se 
 
 ---
 
+## B. Šablony pro malé privacy-first týmy
+
+Tahle příloha je sada krátkých šablon, které si můžete zkopírovat do interní dokumentace, issue trackeru nebo obyčejného Markdown souboru. Cíl není vytvořit firemní byrokratické muzeum. Cíl je mít pár opakovatelných formulářů, díky kterým se tým rozhoduje rychleji, méně zapomíná a umí zákazníkovi vysvětlit, co se s jeho daty děje.
+
+Šablony jsou záměrně textové. Markdown přežije změnu nástroje, dá se verzovat v Gitu, jde poslat e-mailem a nevyžaduje, aby se kvůli jedné tabulce otevíral enterprise portál, který má vlastní onboarding akademii a chuť na vaši duši.
+
+*Codyho komentář: pokud šablonu nikdo nevyplní za deset minut, je moc dlouhá. Zkraťte ji. Proces, který malý tým nepoužívá, neexistuje. Jen zabírá místo v Notionu a dělá, že pracuje.*
+
+### B.1 Projektový brief na jednu stránku
+
+Použijte ho před začátkem webu, produktové funkce nebo marketingové kampaně. Brief nemá nahradit přemýšlení. Má zabránit tomu, aby se přemýšlení odehrávalo až ve chvíli, kdy už je půlka věci nakódovaná.
+
+```markdown
+# Projektový brief: [název]
+
+## 1. Pro koho to děláme
+- Primární zákazník / uživatel:
+- Jeho situace:
+- Pro koho to není:
+
+## 2. Jaký problém řešíme
+- Dnešní bolest:
+- Co se stane, když ji nevyřešíme:
+- Jak zákazník pozná zlepšení:
+
+## 3. Nabídka nebo řešení
+- Jednověté vysvětlení:
+- Hlavní výhoda:
+- Hlavní riziko / námitka:
+- Jak riziko snížíme:
+
+## 4. Úspěch
+- Primární metrika:
+- Kvalitativní signál:
+- Co by znamenalo, že projekt nemá smysl dál tlačit:
+
+## 5. Privacy-first dopad
+- Jaká osobní data sbíráme:
+- Proč je potřebujeme:
+- Kde se ukládají:
+- Kdo k nim má přístup:
+- Jak dlouho je držíme:
+- Jak je smažeme nebo exportujeme:
+
+## 6. Rozsah
+- Musí být ve verzi 1:
+- Může počkat:
+- Výslovně neděláme:
+
+## 7. Vlastníci a termíny
+- Vlastník rozhodnutí:
+- Vlastník realizace:
+- Datum kontroly:
+```
+
+Praktické pravidlo: pokud nevíte vyplnit „pro koho to není“, projekt pravděpodobně ještě nemá hranice. A projekt bez hranic je jen elegantní způsob, jak si objednat chaos s fakturou.
+
+### B.2 Datová karta funkce
+
+Každá nová funkce, formulář nebo integrace by měla mít datovou kartu. Ne proto, že by tým miloval tabulky. Protože pozdější otázka „kam vlastně posíláme e-mail zákazníka?“ nemá být detektivka.
+
+```markdown
+# Datová karta: [funkce / formulář / integrace]
+
+## Účel
+- Proč data zpracováváme:
+- Jaký uživatelský nebo obchodní problém tím řešíme:
+
+## Data
+| Pole | Povinné? | Účel | Citlivost | Poznámka |
+| --- | --- | --- | --- | --- |
+| jméno | ano/ne | | nízká/střední/vysoká | |
+| e-mail | ano/ne | | střední | |
+
+## Tok dat
+1. Uživatel zadá data v:
+2. Data se odešlou do:
+3. Data se uloží v:
+4. Notifikace jde do:
+5. Záloha / log vzniká v:
+
+## Přístupy
+- Kdo data vidí běžně:
+- Kdo data vidí při supportu:
+- Jak se přístup odebírá:
+
+## Retence
+- Jak dlouho data držíme:
+- Kdy je mažeme:
+- Jak řešíme export:
+
+## Kontrola před spuštěním
+- [ ] Sbíráme jen nezbytná pole.
+- [ ] Uživatel rozumí, proč data zadává.
+- [ ] Data nejdou do nástroje bez jasného účelu.
+- [ ] Přístupy jsou omezené podle role.
+- [ ] Chyby a logy neobsahují zbytečně celé osobní údaje.
+```
+
+Ukázka rozhodnutí: telefonní číslo v lead formuláři není „pro jistotu“. Buď je součástí jasného dalšího kroku, nebo patří pryč. Každé pole navíc snižuje důvěru a zvyšuje provozní odpovědnost.
+
+### B.3 Landing page review karta
+
+Tuhle kartu použijte při kontrole homepage, produktové stránky nebo kampaně. Ideálně ji vyplní někdo, kdo stránku nestavěl. Autor stránky často vidí záměr. Návštěvník vidí jen výsledek.
+
+```markdown
+# Review stránky: [URL]
+
+## První dojem
+- Je do 10 sekund jasné, co nabízíme?
+- Je jasné, pro koho to je?
+- Je jasný další krok?
+
+## Důvěra
+- Jaký důkaz je nejviditelnější?
+- Chybí reference, ukázka, číslo, certifikace nebo proces?
+- Je vysvětlené, co se stane po odeslání formuláře?
+
+## Obsah
+- Která část je nejsilnější?
+- Která část je nejvíc obecná?
+- Jakou námitku stránka neřeší?
+
+## Přístupnost a použitelnost
+- Dá se stránka ovládat klávesnicí?
+- Mají formuláře srozumitelné popisky?
+- Jsou nadpisy a CTA čitelné na mobilu?
+
+## Privacy-first kontrola
+- Načítají se zbytečné externí skripty?
+- Je měření vysvětlené férově?
+- Funguje základní obsah bez marketingových cookies?
+
+## Doporučené změny
+1. Nejrychlejší oprava:
+2. Největší dopad:
+3. Co zatím nedělat:
+```
+
+Hodnocení nedělejte jako známkování ega. Dělejte ho jako servisní prohlídku. Stránka není dobrá proto, že ji tým obhájí na meetingu. Je dobrá proto, že pomáhá správnému člověku udělat další krok.
+
+### B.4 Incident mini-playbook
+
+Incident nemusí být dramatický výpadek celé aplikace. Může to být rozbitý formulář, špatně odeslaný e-mail, nefunkční platba, omylem veřejná URL nebo marketingový skript, který začal sbírat víc, než měl. Malý tým nepotřebuje velký krizový manuál. Potřebuje jasný první postup.
+
+```markdown
+# Incident: [stručný název]
+
+## Stav
+- Detekováno kdy:
+- Detekoval kdo / jak:
+- Aktuální dopad:
+- Dotčené systémy:
+- Dotčená data:
+
+## První opatření
+- [ ] Zastavit nebo obejít problém.
+- [ ] Omezit další dopad.
+- [ ] Zapsat časovou osu.
+- [ ] Určit vlastníka komunikace.
+- [ ] Určit vlastníka technické opravy.
+
+## Komunikace
+- Interní shrnutí:
+- Zákaznické shrnutí:
+- Kdo musí být informován:
+- Kdy dáme další update:
+
+## Oprava
+- Kořenová příčina:
+- Krátkodobá oprava:
+- Trvalá oprava:
+- Jak ověříme, že je opraveno:
+
+## Poučení
+- Co chybělo v monitoringu:
+- Co chybělo v dokumentaci:
+- Co automatizujeme nebo zjednodušíme:
+```
+
+U privacy incidentů platí ještě jedna zásada: nejdřív zastavit dopad, potom přesně zjistit rozsah, potom komunikovat. Nehádat. Nezlehčovat. Nepsat „mohlo dojít“ jen proto, že to zní měkčeji. Důvěra se neudrží mlhou.
+
+### B.5 Měsíční growth a provozní review
+
+Jednou měsíčně se podívejte na růst, produkt i provoz v jednom dokumentu. Když se marketing hodnotí odděleně od supportu a provozu, tým snadno slaví návštěvnost, zatímco zákazníci padají do rozbitého onboardingu. To je jako tleskat dešti, když vám teče střechou.
+
+```markdown
+# Měsíční review: [měsíc]
+
+## 1. Co se povedlo
+- Nejlepší obchodní signál:
+- Nejlepší produktové zlepšení:
+- Nejlepší provozní zlepšení:
+
+## 2. Co nefungovalo
+- Kde návštěvníci nebo uživatelé odpadali:
+- Co opakovaně řešil support:
+- Co tým dělal ručně příliš často:
+
+## 3. Data bez šmírování
+- Nejčtenější obsah / stránky:
+- Nejlepší zdroje relevantní návštěvnosti:
+- Konverze podle agregovaných dat:
+- Kterou metriku přestaneme sledovat:
+
+## 4. Privacy-first změny
+- Nové datové toky:
+- Nové nebo odebrané nástroje:
+- Změny v přístupech:
+- Co je potřeba aktualizovat v dokumentaci:
+
+## 5. Rozhodnutí na další měsíc
+- Jedna věc zlepšit:
+- Jednu věc zjednodušit:
+- Jednu věc odstranit:
+- Vlastník:
+- Termín kontroly:
+```
+
+Review musí končit rozhodnutím. Pokud skončí jen větou „bylo to zajímavé“, nebylo to review, ale placený podcast pro tři lidi v kalendáři.
+
+### B.6 Release checklist pro obsah
+
+Obsah je také produkt. Článek, landing page, case study nebo dokumentace mohou přivést zákazníka, snížit support i vysvětlit hodnotu. Proto si zaslouží vlastní kontrolu před publikací.
+
+```markdown
+# Release checklist obsahu: [název]
+
+## Smysl
+- Pro koho je obsah:
+- Na jakou otázku odpovídá:
+- Jaký další krok nabízí:
+
+## Kvalita
+- [ ] Titulek je konkrétní.
+- [ ] Úvod rychle vysvětluje přínos.
+- [ ] Text obsahuje příklad, checklist nebo postup.
+- [ ] Vlastní názory jsou označené.
+- [ ] Faktická tvrzení mají zdroj, pokud nejsou interní zkušeností.
+
+## SEO a distribuce
+- [ ] URL je čitelná.
+- [ ] Meta title a description jsou napsané pro člověka.
+- [ ] Stránka má interní odkazy.
+- [ ] Obsah se objeví v RSS.
+- [ ] Má připravený krátký distribuční text.
+
+## Privacy-first kontrola
+- [ ] Neobsahuje osobní nebo klientská data bez souhlasu.
+- [ ] Screenshoty jsou anonymizované.
+- [ ] Embedy nenačítají zbytečné trackery.
+- [ ] CTA neplete poptávku s marketingovým souhlasem.
+```
+
+Nejjednodušší zlepšení obsahu je doplnit konkrétní „co udělat dál“. Čtenář nemá po dobrém textu zůstat v prázdnu. Má vědět, jak si téma vyzkoušet, ověřit nebo posunout ve vlastním projektu.
+
+### B.7 Jak šablony udržet živé
+
+Šablony stárnou stejně jako kód. Rozdíl je v tom, že kód začne házet chyby, zatímco zastaralá šablona se tváří důležitě a tiše kazí rozhodování. Nastavte proto jednoduchý režim údržby.
+
+- Každá šablona má vlastníka.
+- Každá šablona má datum poslední revize.
+- Po každém větším projektu upravte jednu větu, která v praxi nefungovala.
+- Šablony držte v repozitáři nebo v nástroji s historií změn.
+- Nepřidávejte povinná pole, pokud podle nich nikdo nerozhoduje.
+- Jednou za čtvrtletí smažte šablony, které nikdo nepoužil.
+
+Mini cvičení na 30 minut:
+
+1. Vyberte jednu šablonu z téhle přílohy.
+2. Použijte ji na reálný projekt z posledních dvou týdnů.
+3. Označte tři pole, která pomohla rozhodnout.
+4. Smažte nebo přepište dvě pole, která byla jen formální.
+5. Uložte upravenou verzi jako týmový default.
+
+Výsledek není dokonalý proces. Výsledek je návyk: důležitá rozhodnutí, datové toky, launch a provoz nejsou v hlavách lidí, ale v krátkých dokumentech, ke kterým se tým umí vrátit.
+
+### Checklist k příloze B
+
+- [ ] Projektový brief se vejde na jednu stránku.
+- [ ] Každá nová funkce má datovou kartu.
+- [ ] Landing page review dělá někdo mimo autora stránky.
+- [ ] Incident playbook existuje před prvním incidentem.
+- [ ] Měsíční review končí třemi rozhodnutími: zlepšit, zjednodušit, odstranit.
+- [ ] Obsahový release checklist obsahuje SEO, distribuci i privacy kontrolu.
+- [ ] Šablony mají vlastníka a pravidelnou revizi.
+
+---
+
 ## Pracovní log
+- 2026-08-22: Přidána příloha B „Šablony pro malé privacy-first týmy“ s projektovým briefem, datovou kartou, landing page review, incident playbookem, měsíčním review, obsahovým release checklistem a údržbou šablon.
+
 - 2026-08-22: Přidána příloha A „30denní akční plán pro privacy-first web a SaaS“ s týdenním postupem, denními úkoly, ukázkami výstupů, checklistem a ověřenými zdroji.
 
 - 2026-08-21: Dopsána kapitola 24 „Checklist před spuštěním“ s launch briefem, kontrolou obsahu, techniky, SEO, formulářů, privacy-first provozu, bezpečnosti, plateb, supportu, launch panelem, checklistem a ověřenými zdroji.
