@@ -145,6 +145,7 @@ H. 90minutový workshop: převod e-booku do akčního plánu
 I. Produktový backlog bez chaosu
 J. Rozhodovací deník pro web, SaaS a marketing
 K. Zpětná vazba od zákazníků bez datového smogu
+L. Redakční systém pro obsah, který přežije kampaň
 
 ---
 
@@ -7850,7 +7851,251 @@ Pak to opravdu udělejte. Ne dokonale. Dokončeně.
 
 ---
 
+
+## L. Redakční systém pro obsah, který přežije kampaň
+
+Obsahový marketing často selže ne proto, že tým neumí psát, ale proto, že nemá systém. Článek vznikne, někdo ho pošle na LinkedIn, někdo přidá odkaz do newsletteru, pak se všichni tváří, že distribuce proběhla. Za měsíc nikdo neví, jestli text pomohl, co z něj vzniklo, kde je aktualizovaná verze a proč se podobný článek nemá psát znovu.
+
+Redakční systém pro malý tým nemusí být těžký. Stačí jednoduchá fronta nápadů, jasná šablona briefu, release checklist, distribuční karta a pravidelná údržba. Cílem není vyrábět víc obsahu. Cílem je vyrábět obsah, který má obchodní smysl, dá se dohledat, dá se aktualizovat a nespoléhá na invazivní sledování lidí po internetu.
+
+### L.1 Začněte redakčním slibem
+
+Než otevřete dokument, napište si redakční slib. Je to jedna až dvě věty, které říkají, komu obsah pomáhá, s čím a jakým stylem. Bez slibu se obsah rozpadne na směs novinek, názorů, SEO textů a interních nápadů. Tedy klasická firemní polévka, ve které plave trochu všeho a nikdo neví, kdo objednal kopr.
+
+Příklad pro privacy-first SaaS:
+
+> Pomáháme českým a evropským malým týmům stavět weby, SaaS produkty a marketing tak, aby měly kontrolu nad daty, jasnou nabídku a dlouhodobě udržitelný provoz. Píšeme prakticky, konkrétně a bez growth-hack mlhy.
+
+Dobrý redakční slib odpovídá na čtyři otázky:
+
+- **Pro koho píšeme:** zakladatel SaaSu, marketér, technický lead, majitel služby.
+- **Jakou změnu má obsah vyvolat:** lepší rozhodnutí, audit, úprava webu, jednodušší workflow.
+- **Jaký tón držíme:** praktický, český, konkrétní, bez strašení a bez korporátní vaty.
+- **Co záměrně neděláme:** nepíšeme články jen kvůli trendu, nehoníme virální témata, nepoužíváme manipulativní tracking.
+
+*Codyho komentář: redakční slib je malý filtr proti obsahu typu „5 důvodů, proč je rok 2026 rokem AI“. Pokud článek neprojde slibem, možná patří do poznámek, ne na web.*
+
+### L.2 Každý obsah má mít brief, ne jen název
+
+Název článku nestačí. „Napišme něco o produktivitě“ je zadání asi stejně přesné jako „postavme něco s databází“. Redakční brief nemusí být dlouhý, ale musí oddělit nápad od práce.
+
+Použijte tuto šablonu:
+
+```md
+# Redakční brief
+
+## Téma
+- Pracovní název:
+- Typ obsahu: článek / case study / checklist / release notes / landing page / návod
+
+## Čtenář
+- Kdo to bude číst:
+- V jaké situaci je:
+- Jakou otázku si klade:
+
+## Hodnota
+- Co bude umět po přečtení:
+- Jaký konkrétní výstup si odnese:
+
+## Obchodní smysl
+- Na jakou nabídku nebo produkt obsah navazuje:
+- Jaký další krok dává smysl:
+
+## Důkaz a zdroje
+- Vlastní zkušenost:
+- Interní data bez osobních detailů:
+- Externí zdroje k ověření:
+
+## Privacy-first kontrola
+- Potřebujeme měřit osobu, nebo stačí agregovaný signál:
+- Bude v obsahu jméno klienta, screenshot, citace nebo údaj:
+- Je potřeba schválení před publikací:
+```
+
+Brief chrání tým před dvěma extrémy: před prázdným SEO textem a před osobním esejem bez dalšího kroku. Obojí může být hezky napsané. Obojí může být obchodně k ničemu.
+
+### L.3 Vytvořte jednoduchý redakční kanban
+
+Pro malý tým stačí šest stavů:
+
+1. **Nápad:** volná poznámka, ještě bez práce.
+2. **Brief:** vyplněná šablona, jasný čtenář a hodnota.
+3. **Draft:** vzniká první verze.
+4. **Review:** kontrola faktů, tónu, SEO, přístupnosti a privacy.
+5. **Publikováno:** obsah je venku a má distribuční kartu.
+6. **Údržba:** obsah čeká na aktualizaci, sloučení nebo archivaci.
+
+Důležité pravidlo: do stavu „Draft“ nesmí jít položka bez briefu. Jinak tým jen přesouvá chaos z hlavy do dokumentu. Druhé pravidlo: ve stavu „Review“ musí být maximálně tolik položek, kolik dokážete opravdu zkontrolovat. Jinak se z review stane tichý hřbitov článků, které „už skoro jsou“.
+
+Minimální limity pro malý tým:
+
+- maximálně 3 aktivní drafty,
+- maximálně 2 články v review,
+- maximálně 1 velký obsahový projekt měsíčně,
+- každý publikovaný obsah má datum další kontroly.
+
+### L.4 Review není jen korektura
+
+Obsahové review má ověřit, jestli text splnil účel. Pravopis je důležitý, ale sám o sobě neudělá z článku dobrý obchodní materiál. Hezky napsaná mlha je pořád mlha, jen s čárkami na správném místě.
+
+Použijte pět kontrol:
+
+**1. Kontrola hodnoty**
+
+- Je do 30 sekund jasné, pro koho text je?
+- Má čtenář konkrétní další krok?
+- Obsah odpovídá na skutečnou otázku, ne na interní potřebu něco publikovat?
+
+**2. Kontrola důkazů**
+
+- Jsou fakta, trendy, právní povinnosti nebo benchmarky ozdrojované?
+- Jsou vlastní názory jasně označené?
+- Nejsou v textu citlivé nebo klientské informace bez souhlasu?
+
+**3. Kontrola SEO a sdílení**
+
+- Má stránka jasný title, meta description a kanonickou URL?
+- Má čitelný slug?
+- Dává smysl struktura nadpisů?
+- Pokud jde o článek, odpovídá strukturovaným datům typu Article nebo BlogPosting podle Schema.org?
+
+**4. Kontrola přístupnosti**
+
+- Obrázky mají smysluplné alternativní texty, pokud nesou informaci.
+- Odkazy dávají smysl i bez okolní věty.
+- Nadpisy nepřeskakují jen kvůli vizuální velikosti.
+- Kontrast a čitelnost odpovídají základním principům WCAG.
+
+**5. Privacy-first kontrola**
+
+- Neobsahuje stránka nové trackery bez jasného důvodu?
+- Stačí měřit page view, referrer, konverzi nebo klik na přímý odkaz agregovaně?
+- Neposílá formulář data do zbytečné třetí služby?
+- Má obsah RSS/přímý odkaz místo závislosti na sociální síti?
+
+### L.5 Distribuční karta: jeden obsah, více životů
+
+Publikací práce nezačíná ani nekončí. Publikace je jen okamžik, kdy obsah konečně opustí interní akvárium. Každý větší obsah proto potřebuje distribuční kartu.
+
+```md
+# Distribuční karta
+
+## Primární URL
+- Kanonická adresa:
+- RSS dostupné: ano/ne
+
+## Cílový čtenář
+- Hlavní segment:
+- Situace:
+
+## Kanály
+- Web:
+- RSS:
+- Newsletter nebo e-mail:
+- Komunita:
+- Přímé oslovení:
+- Sociální síť bez trackerů a automatického vkládání skriptů:
+
+## Recyklace
+- Krátký checklist:
+- Interní šablona:
+- Slide nebo obrázek:
+- FAQ položka:
+- Odstavec do dokumentace:
+
+## Měření
+- Primární signál:
+- Sekundární signál:
+- Co neměříme:
+
+## Údržba
+- Datum kontroly:
+- Kdy archivovat nebo sloučit:
+```
+
+Distribuce má začít vlastními kanály: web, RSS, přímé odkazy, e-mail se souhlasem, komunita, dokumentace a produkt. Sociální sítě mohou být doplněk, ale nemají být jediný distribuční systém. Platforma, kterou nevlastníte, je pronajatý billboard. Občas funguje skvěle. Občas se změní algoritmus a billboard se přes noc otočí směrem do lesa.
+
+### L.6 Měřte obsah tak, aby šlo rozhodovat
+
+U obsahu nepotřebujete vědět, že konkrétní člověk přečetl odstavec tři a pak si šel udělat kávu. Potřebujete vědět, jestli obsah přitáhl správné publikum, pomohl rozhodnutí a stojí za aktualizaci.
+
+Praktické signály:
+
+- návštěvy stránky v agregaci,
+- zdroj návštěvy bez profilování osoby,
+- klik na primární další krok,
+- počet přímých odpovědí nebo poptávek,
+- počet interních použití obsahu v sales, supportu nebo onboardingu,
+- počet aktualizací po nových otázkách zákazníků,
+- kvalita dotazů po přečtení obsahu.
+
+Měsíční redakční review může mít jen tři otázky:
+
+1. Který obsah pomohl rozhodnutí zákazníka?
+2. Který obsah potřebuje aktualizovat, protože už neodpovídá realitě?
+3. Který typ obsahu přestaneme na měsíc dělat?
+
+Třetí otázka je nejdůležitější a zároveň nejméně populární. Obsahová strategie bez škrtání je jen nekonečná restaurace, kde se pořád přidává další stránka menu.
+
+### L.7 Údržba obsahu je produktová práce
+
+Starý obsah není nutně špatný. Špatný je starý obsah, který se tváří jako aktuální. U praktického e-booku, blogu nebo dokumentace proto nastavte jednoduché revize.
+
+Doporučený rytmus:
+
+- **Každý měsíc:** zkontrolovat nejčtenější stránky, rozbité odkazy a hlavní konverzní texty.
+- **Každé čtvrtletí:** projít články s právním, bezpečnostním, pricingovým nebo nástrojovým kontextem.
+- **Každého půl roku:** sloučit duplicity, aktualizovat interní odkazy, odstranit obsah bez jasné hodnoty.
+- **Po každé větší změně produktu:** zkontrolovat onboardingové články, FAQ, release notes a landing pages.
+
+U každého článku si zapište:
+
+- datum publikace,
+- datum poslední kontroly,
+- vlastníka,
+- stav: aktuální / aktualizovat / sloučit / archivovat,
+- důvod aktualizace,
+- odkazy na navazující obsah.
+
+Archivace není prohra. Je to hygiena. Někdy nejlepší obsahová úprava není napsat nový článek, ale odstranit starý text, který mate zákazníky a tváří se jako moudrost z digitálního orákula.
+
+### L.8 Praktický checklist redakčního systému
+
+- [ ] Máme redakční slib pro konkrétní publikum.
+- [ ] Každý větší obsah má brief, ne jen název.
+- [ ] Redakční kanban má jasné stavy a limity rozpracované práce.
+- [ ] Review kontroluje hodnotu, důkazy, SEO, přístupnost a privacy-first dopad.
+- [ ] Každý publikovaný obsah má kanonickou URL, title, meta description a plán distribuce.
+- [ ] Preferujeme vlastní kanály: web, RSS, přímé odkazy, dokumentaci a e-mail se souhlasem.
+- [ ] Měříme agregované signály, ne detailní chování jednotlivců.
+- [ ] Každý důležitý obsah má datum další kontroly.
+- [ ] Starý obsah umíme aktualizovat, sloučit nebo archivovat bez sentimentálního dramatu.
+- [ ] Měsíčně rozhodneme i to, co přestaneme publikovat.
+
+### Mini cvičení: redakční systém za 45 minut
+
+1. Napište redakční slib v jedné větě.
+2. Vyberte 10 existujících nebo plánovaných obsahů.
+3. U každého označte čtenáře, situaci a další krok.
+4. Tři nejslabší položky smažte nebo přesuňte do poznámek.
+5. Pro nejlepší položku vyplňte redakční brief.
+6. Napište distribuční kartu s vlastními kanály jako výchozím bodem.
+7. Nastavte datum kontroly a jednu agregovanou metriku.
+
+*Codyho komentář: dobrý redakční systém není mašina na víc textu. Je to filtr, který chrání pozornost týmu i čtenáře. Internet už má obsahu dost. Co mu chybí, je obsah, který ví, proč existuje.*
+
+### Zdroje k příloze L
+
+- Schema.org definuje strukturovaná data pro `Article` a související typy obsahu: https://schema.org/Article
+- W3C Web Content Accessibility Guidelines 2.2 popisují principy přístupnosti webového obsahu: https://www.w3.org/TR/WCAG22/
+- RSS 2.0 specifikace popisuje základní formát pro nezávislou distribuci obsahu přes feed: https://www.rssboard.org/rss-specification
+- Git dokumentace k branch workflow je užitečná inspirace pro oddělení draftů, review a publikovaných změn i mimo kód: https://git-scm.com/book/en/v2/Git-Branching-Branching-Workflows
+
+---
+
 ## Pracovní log
+- 2026-08-22: Přidána příloha L „Redakční systém pro obsah, který přežije kampaň“ s redakčním slibem, briefem, kanbanem, review kontrolou, distribuční kartou, měřením bez invazivního trackingu, údržbou obsahu, checklistem, mini cvičením a ověřenými zdroji.
+
 - 2026-08-22: Přidána příloha K „Zpětná vazba od zákazníků bez datového smogu“ se zákaznickými rozhovory, jednou otázkou na webu, tříděním signálů, měsíční syntézou, privacy-first pravidly, checklistem a mini cvičením.
 
 - 2026-08-22: Přidána příloha J „Rozhodovací deník pro web, SaaS a marketing“ s kartou rozhodnutí, příkladem formuláře, napojením na backlog a měsíční review, privacy-first kontrolou a checklistem.
