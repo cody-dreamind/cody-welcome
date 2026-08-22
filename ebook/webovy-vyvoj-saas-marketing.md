@@ -142,6 +142,7 @@ E. Dodavatelský brief pro privacy-first nástroje a služby
 F. AI asistenti v malém týmu bez úniku dat
 G. Údržbový kalendář pro web, SaaS a marketing
 H. 90minutový workshop: převod e-booku do akčního plánu
+I. Produktový backlog bez chaosu
 
 ---
 
@@ -7170,6 +7171,239 @@ Tahle verze není náhrada týmového sladění, ale je lepší než čekat měs
 
 ---
 
+
+## I. Produktový backlog bez chaosu
+
+Backlog má být mapa rozhodnutí, ne hřbitov dobrých nápadů. Malé týmy se často tváří, že potřebují lepší nástroj. Ve skutečnosti potřebují jasnější pravidla: co do backlogu smí, kdo to vlastní, kdy se to smaže a podle čeho poznáme, že věc stojí za práci.
+
+Tahle příloha převádí kapitoly e-booku do jednoduchého systému pro web, SaaS i marketing. Hodí se ve chvíli, kdy už máte nápadů víc než kapacity, což je přirozený stav skoro každého týmu, který nezaměstnává osm klonů a jednu kouzelnou tabuli.
+
+### I.1 Backlog není skladiště, ale fronta rozhodnutí
+
+Do backlogu nepatří každá věta, kterou někdo řekl na poradě. Patří tam jen položky, které mají aspoň minimální vztah k zákazníkovi, provozu nebo byznysu.
+
+Každá položka musí odpovědět na pět otázek:
+
+- **Jaký problém řešíme?** Ne „přidat dashboard“, ale „uživatel neví, jestli import doběhl správně“.
+- **Pro koho je problém důležitý?** Zákazník, support, obchod, provoz, účetnictví nebo vývoj.
+- **Jaký důkaz máme?** Poptávka, support ticket, rozhovor, metrika, incident nebo opakovaný interní zádrhel.
+- **Co se stane, když to neuděláme?** Ztráta důvěry, ruční práce, bezpečnostní riziko, horší konverze, nebo jen žádné velké drama.
+- **Jak poznáme hotovo?** Viditelný výstup, ne pocit, že jsme „posunuli téma“.
+
+Položka bez odpovědi na tyhle otázky není úkol. Je to poznámka. Poznámky jsou užitečné, ale nemají se převlékat za prioritu.
+
+### I.2 Rozdělte backlog podle typu práce
+
+Jeden nekonečný seznam míchá strategii, bugy, texty, bezpečnost, marketingové experimenty a „až někdy“ nápady. Pak se těžko rozhoduje, protože každá položka vypadá jako jiný živočišný druh. Codyho zoologické okénko končí tady: rozdělte backlog do pěti front.
+
+**1. Důvěra a konverze**
+
+- landing page,
+- formuláře,
+- reference,
+- case studies,
+- pricing texty,
+- kontaktní cesty.
+
+**2. Aktivace a produktová hodnota**
+
+- onboarding,
+- prázdné stavy,
+- první úkol uživatele,
+- importy,
+- role,
+- dokumentace v aplikaci.
+
+**3. Provoz a bezpečnost**
+
+- monitoring,
+- zálohy,
+- incident playbook,
+- oprávnění,
+- auditní stopa,
+- aktualizace závislostí.
+
+**4. Marketing a distribuce**
+
+- články,
+- SEO úpravy,
+- RSS,
+- release notes,
+- partnerské výstupy,
+- kampaně měřené bez invazivního trackingu.
+
+**5. Výzkum a rozhodnutí**
+
+- rozhovory se zákazníky,
+- dodavatelský brief,
+- prototyp,
+- technická analýza,
+- datová mapa,
+- privacy dopad před změnou.
+
+Tahle struktura pomáhá odhalit přetížení. Když máte dvacet marketingových nápadů a žádnou položku v provozu, možná nebudujete růst, ale hezký koberec přes technický sklep.
+
+### I.3 Používejte krátkou kartu položky
+
+Nesnažte se z každého úkolu udělat diplomku. Stačí karta, která donutí tým přemýšlet před zahájením práce.
+
+```md
+# Backlog karta
+
+## Název
+- Krátce:
+
+## Typ
+- Důvěra a konverze / Aktivace / Provoz / Marketing / Výzkum:
+
+## Problém
+- Co konkrétně nefunguje:
+- Koho se to týká:
+
+## Důkaz
+- Odkaz na ticket, rozhovor, metriku, stránku nebo incident:
+
+## Návrh řešení
+- Nejmenší smysluplná změna:
+- Co záměrně neděláme:
+
+## Privacy-first kontrola
+- Jaká data změna používá:
+- Kde budou uložená:
+- Kdo k nim má přístup:
+- Co nesbíráme:
+
+## Definice hotovo
+- Výstup:
+- Test nebo kontrola:
+- Kdo schválí:
+```
+
+Nejdůležitější pole je „co záměrně neděláme“. Bez něj se malý úkol nafoukne jako reklamní rozpočet po větě „zkusíme ještě jeden kanál“.
+
+### I.4 Prioritizujte podle energie, ne jen podle dopadu
+
+Klasická priorizace ráda porovnává dopad a náročnost. To je užitečné, ale malým týmům často chybí ještě třetí osa: energie. Některé úkoly jsou sice důležité, ale tým na ně nemá kontext, chuť ani mentální kapacitu. Když je stejně natlačíte do sprintu, dostanete polovičatý výsledek a unavený tým.
+
+Použijte proto jednoduché skóre 1–5:
+
+| Kritérium | Otázka | 1 bod | 5 bodů |
+| --- | --- | --- | --- |
+| Dopad | Jak moc to pomůže zákazníkovi nebo provozu? | kosmetika | jasná hodnota |
+| Důkaz | Jak jistí jsme si problémem? | dojem | opakovaný signál |
+| Náročnost | Jak těžké je to dokončit? | velké riziko | malá změna |
+| Energie | Má tým chuť a kontext to dotáhnout? | odpor | jasný tah |
+| Privacy riziko | Přidává práce citlivá data nebo třetí strany? | vysoké riziko | žádné nebo nižší riziko |
+
+U náročnosti a privacy rizika znamená vyšší skóre lepší situaci: menší tření, menší riziko, větší šance na dokončení. Není to vědecký model. Je to rozhovor s čísly, aby porada nebyla jen soutěž nejhlasitějších názorů.
+
+### I.5 Nastavte limit rozpracované práce
+
+Backlog se zlepší až ve chvíli, kdy omezíte počet rozpracovaných věcí. Kanban přístup pracuje s omezením práce v průběhu jako s jedním ze základních mechanismů toku práce; pro malý tým to prakticky znamená: méně otevřených položek, více dokončených změn.
+
+Začněte brutálně jednoduše:
+
+- maximálně 1 strategická změna týdně,
+- maximálně 2 produktové nebo webové úpravy najednou,
+- maximálně 1 experiment bez jasného vlastníka,
+- maximálně 0 položek bez definice hotovo.
+
+Ano, nula. Položka bez definice hotovo může počkat v poznámkách, dokud se z ní nestane skutečný úkol.
+
+### I.6 Týdenní backlog rituál za 25 minut
+
+Jednou týdně si dejte krátký backlog úklid. Cílem není projít všechno. Cílem je ochránit příští týden před chaosem.
+
+**0–5 minut: Smazat nebo odložit**
+
+- položky bez vlastníka,
+- nápady bez důkazu,
+- věci starší než 90 dní bez opakovaného signálu,
+- duplicity,
+- „nice to have“ úkoly, které nikdo nechce obhájit.
+
+**5–10 minut: Doplnit kontext**
+
+- přidat důkaz,
+- doplnit privacy-first kontrolu,
+- napsat definici hotovo,
+- rozdělit moc velké položky.
+
+**10–18 minut: Vybrat jednu prioritu**
+
+- jedna věc pro zákazníka,
+- jedna věc pro provoz,
+- jedna věc pro učení, pokud má smysl.
+
+**18–25 minut: Uzavřít plán**
+
+- kdo rozhodne,
+- kdo provede,
+- kdy bude hotovo,
+- co se tento týden vědomě neřeší.
+
+Ticho po větě „co se tento týden neřeší“ je dobré znamení. Znamená to, že tým právě potkal realitu. Je trochu nepříjemná, ale obvykle má pravdu.
+
+### I.7 Privacy-first backlog pravidla
+
+Backlog je skvělé místo, kde zastavit špatné datové nápady dřív, než se dostanou do kódu, obchodních automatizací nebo marketingových kampaní.
+
+U každé položky, která pracuje s osobními nebo zákaznickými daty, vyžadujte jednu z těchto značek:
+
+- **Bez nových dat:** změna nepřidává sběr ani sdílení dat.
+- **Méně dat:** změna odstraňuje pole, tracker, export, přístup nebo zbytečnou retenci.
+- **Stejná data, lepší kontrola:** změna zlepšuje role, logy, dokumentaci, export nebo mazání.
+- **Nová data:** změna přidává sběr, nový účel, integraci nebo nového zpracovatele.
+
+Položky se značkou „Nová data“ nesmí jít rovnou do práce. Nejdřív potřebují datovou kartu: účel, právní a provozní důvod, umístění, retenci, přístup, zpracovatele, informování uživatele a plán odstranění. GDPR pracuje s principem data protection by design and by default; v praxi to znamená, že minimalizace a kontrola mají být součást návrhu, ne úklid po spuštění.
+
+### I.8 Jak poznat, že backlog funguje
+
+Funkční backlog nevypadá nutně plně. Vypadá čitelně. Tým ví, co se dělá, proč se to dělá a co se záměrně nedělá.
+
+Signály zdravého backlogu:
+
+- dokončené položky přibývají rychleji než rozpracované,
+- každá aktivní položka má vlastníka,
+- položky mají důkaz nebo jsou označené jako výzkum,
+- privacy kontrola není výjimka, ale běžné pole,
+- velké nápady se nejdřív tvarují do menších řezů,
+- tým umí říct „ne teď“ bez dvacetiminutové omluvné eseje,
+- staré položky mizí bez pocitu viny.
+
+Nezdravý backlog poznáte podle vět jako „to tam necháme, třeba se to bude hodit“. Možná bude. Ale pokud se to nehodilo poslední čtvrtletí, pravděpodobně to není priorita. Je to digitální půda.
+
+### Mini checklist: backlog bez chaosu
+
+- [ ] Máme pět typů backlog položek, ne jeden nekonečný seznam.
+- [ ] Každá aktivní položka má problém, důkaz, vlastníka a definici hotovo.
+- [ ] U každé položky víme, co záměrně neděláme.
+- [ ] Týdně vybíráme málo práce a chráníme limit rozpracovaných věcí.
+- [ ] Položky s novými daty nejdou do práce bez datové karty.
+- [ ] Staré položky pravidelně mažeme nebo převádíme na výzkum.
+- [ ] Backlog obsahuje i provoz, dokumentaci a privacy-first údržbu, ne jen nové funkce.
+- [ ] Každý týden vznikne aspoň jeden dokončený výstup.
+
+### Mini cvičení: úklid backlogu za 30 minut
+
+1. Vyberte 20 posledních položek z backlogu.
+2. U každé označte typ: konverze, aktivace, provoz, marketing nebo výzkum.
+3. Smažte položky bez důkazu, vlastníka a opakovaného signálu.
+4. U pěti nejlepších doplňte privacy-first kontrolu.
+5. Vyberte jednu položku na příští týden.
+6. Napište jednu věc, kterou tento týden vědomě neděláte.
+
+*Codyho komentář: nejlepší backlog není ten, kde je všechno. Nejlepší backlog je ten, který týmu pomáhá dokončovat správné věci a nekrmit pocit viny. Pocit viny ještě nikdy nenasadil dobrý release. Maximálně napsal pasivně-agresivní poznámku do Jira ticketu.*
+
+### Zdroje k příloze I
+
+- Shape Up od Basecampu popisuje práci s appetite, tvarováním problému a menšími řezy práce: https://basecamp.com/shapeup
+- Kanban Guide popisuje tok práce, explicitní pravidla a omezení práce v průběhu: https://kanbanguides.org/english/
+- GDPR článek 25 řeší data protection by design and by default v evropském právním rámci: https://eur-lex.europa.eu/eli/reg/2016/679/oj
+- Architecture Decision Records pomáhají zapisovat rozhodnutí, jejich kontext a důsledky: https://adr.github.io/
+
+---
+
 # Závěr: Udělejte z e-booku pracovní systém
 
 Pokud jste dočetli až sem, gratuluju. Ne proto, že jste hrdinně přežili Codyho tabulky, checklisty a občasné kopnutí do marketingové mlhy. Hlavní pointa je jednodušší: web, SaaS a marketing se nezlepší tím, že si tým jednou přečte dlouhý dokument. Zlepší se tím, že z něj udělá pravidelný pracovní rytmus.
@@ -7300,6 +7534,8 @@ Pak to opravdu udělejte. Ne dokonale. Dokončeně.
 ---
 
 ## Pracovní log
+- 2026-08-22: Přidána příloha I „Produktový backlog bez chaosu“ s kartou backlog položky, typy práce, jednoduchým prioritizačním skóre, limity rozpracované práce, týdenním rituálem, privacy-first pravidly, checklistem a zdroji.
+
 - 2026-08-22: Přidána příloha H „90minutový workshop: převod e-booku do akčního plánu“ s agendou, rolí moderátora, privacy-first kontrolou, šablonou výstupu, příkladem hotového zápisu a checklistem.
 
 - 2026-08-22: Přidána příloha G „Údržbový kalendář pro web, SaaS a marketing“ s týdenním, měsíčním, čtvrtletním, pololetním a ročním rytmem údržby, praktickými šablonami, checklistem, mini cvičením a ověřenými zdroji.
