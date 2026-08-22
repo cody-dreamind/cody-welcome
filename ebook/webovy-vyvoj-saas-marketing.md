@@ -20,6 +20,77 @@ Praktický český e-book od Codyho z Dreamindu pro lidi, kteří chtějí stav�
 5. **SaaS je služba, ne jen aplikace.** Onboarding, fakturace, support, bezpečnost a metriky jsou součást produktu.
 6. **Produktivita znamená méně rozpracované práce.** Ne víc nástrojů, tabulí a rituálních standupů u ohně.
 
+## Jak e-book používat podle role
+
+Tenhle e-book nemusíte číst lineárně jako román. Není tu žádná tajná zápletka, ve které se v kapitole 18 ukáže, že hlavní padouch byl Google Tag Manager v kabátu. Používejte ho jako pracovní mapu: najděte svoji situaci, vyberte jednu část a dokončete jeden konkrétní výstup.
+
+### Zakladatel SaaSu
+
+Začněte kapitolami 1, 2, 10, 11, 12 a 24. Potřebujete hlavně ověřit, jestli produkt řeší dost bolestivý problém, jestli se nový uživatel dostane k hodnotě a jestli pricing odpovídá tomu, za co zákazník reálně platí.
+
+První týdenní výstup:
+
+- jedna věta hodnoty,
+- definice aktivačního momentu,
+- jednoduchý pricing brief,
+- checklist rizik před spuštěním,
+- seznam dat, která produkt opravdu potřebuje.
+
+Pozor na typickou past: stavět administraci, role, integrace a „enterprise připravenost“ dřív, než je jasné, kdo má za produkt platit a proč. Robustní SaaS bez jasné poptávky je jen drahý hobby projekt s loginem.
+
+### Majitel služby nebo agentury
+
+Začněte kapitolami 1, 3, 4, 8, 19 a přílohou B. Vaším cílem není mít nejkomplikovanější web v oboru, ale web, který vysvětlí službu, zvedne důvěru a zlepší kvalitu poptávek.
+
+První týdenní výstup:
+
+- přepsaná hero sekce podle zákaznického problému,
+- jedna konkrétní landing page pro hlavní službu,
+- kratší formulář s jasným očekáváním dalšího kroku,
+- mini case study nebo anonymizovaný důkaz hodnoty,
+- landing page review karta z přílohy B.
+
+Pozor na typickou past: schovávat konkrétní nabídku za obecné věty o kvalitě, individuálním přístupu a inovacích. Zákazník nechce luštit firemní poezii. Chce vědět, jestli mu umíte pomoct.
+
+### Marketér nebo growth člověk
+
+Začněte kapitolami 15, 16, 17, 18, 19 a přílohou C. Marketing má být distribuční systém, ne sbírka nahodilých kampaní, které přežijí jen do další porady.
+
+První týdenní výstup:
+
+- tři obsahové pilíře,
+- distribuční plán pro jeden článek nebo case study,
+- UTM slovník bez chaosu,
+- privacy-first metrická karta,
+- seznam kanálů, které na měsíc vědomě neřešíte.
+
+Pozor na typickou past: měřit všechno, co nástroj ukáže, a rozhodovat se podle posledního grafu. Metrika bez rozhodnutí je dekorace. Hezká, ale pořád dekorace.
+
+### Vývojář nebo technický lead
+
+Začněte kapitolami 5, 6, 7, 9, 13, 21, 22 a 23. Vaším úkolem je držet systém jednoduchý, provozovatelný a auditovatelný. Ne vyhrát interní soutěž o nejvíc služeb v architektuře.
+
+První týdenní výstup:
+
+- stack brief s důvody výběru,
+- mapa datových toků,
+- základní monitoring a incident kontakt,
+- rozhodnutí o rolích a auditní stopě,
+- dokumentace „jak se projekt spouští, zálohuje a obnovuje“.
+
+Pozor na typickou past: přidávat nástroje místo odstranění nejasností. Každá nová služba přidává nejen schopnost, ale i účet, oprávnění, logy, riziko a budoucí migraci. Ano, i ta „malá“ integrace. Hlavně ta.
+
+### Checklist: výběr první iterace
+
+- [ ] Vybrali jsme jednu roli nebo hlavní situaci, ne celý e-book najednou.
+- [ ] Máme jeden konkrétní výstup na tento týden.
+- [ ] Víme, která kapitola nebo šablona k výstupu patří.
+- [ ] Změna má vlastníka a termín.
+- [ ] Víme, jak poznáme, že změna pomohla.
+- [ ] Zkontrolovali jsme, jestli změna nesbírá zbytečná data.
+- [ ] Všechny nové nástroje mají jasné místo provozu a odpovědnost.
+- [ ] Po dokončení zapíšeme rozhodnutí do dokumentace nebo pracovního logu.
+
 ## Pracovní osnova
 
 ### Část I — Strategický základ
@@ -6269,6 +6340,8 @@ Pak to opravdu udělejte. Ne dokonale. Dokončeně.
 ---
 
 ## Pracovní log
+- 2026-08-22: Přidána úvodní navigační sekce „Jak e-book používat podle role“ s doporučenými kapitolami, prvními výstupy a checklistem pro zakladatele SaaSu, majitele služeb, marketéry a technické leady.
+
 - 2026-08-22: Přidán závěr „Udělejte z e-booku pracovní systém“ s týdenním rytmem, měsíční agendou, privacy-first kontrolou, posledním checklistem a mini cvičením pro první iteraci po dočtení.
 - 2026-08-22: Přidána příloha C „Slovník metrik pro web, SaaS a marketing“ s praktickými definicemi webových, SaaS, marketingových a produktivitních metrik, šablonou metrické karty, měsíčním review a privacy-first checklistem.
 
