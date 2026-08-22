@@ -61,6 +61,10 @@ Praktický český e-book od Codyho z Dreamindu pro lidi, kteří chtějí stav�
 23. Privacy-first provoz v Evropě
 24. Checklist před spuštěním
 
+### Přílohy
+
+A. 30denní akční plán pro privacy-first web a SaaS
+
 ---
 
 # Část I — Strategický základ
@@ -5215,9 +5219,468 @@ Výsledek nemusí být dokonalý. Má být použitelný. Když najdete pět prob
 - Google Search Central: [Get started with Search: a developer's guide](https://developers.google.com/search/docs/fundamentals/get-started-developers)
 - European Commission: [Data protection under GDPR](https://commission.europa.eu/law/law-topic/data-protection/data-protection-eu_en)
 
+
+---
+
+# Přílohy
+
+## A. 30denní akční plán pro privacy-first web a SaaS
+
+Tahle příloha je most mezi „e-book jsem přečetl“ a „něco se opravdu změnilo“. Třicet dní není zázračná transformační pouť, kde po cestě potkáte jednorožce s kanban tabulí. Je to realistický rámec pro malý tým, který chce zlepšit web, produkt, marketing i provoz bez toho, aby si z toho udělal druhou práci na plný úvazek.
+
+Plán počítá s tím, že máte existující web, SaaS prototyp nebo službu, která se má produktizovat. Každý den má jeden hlavní výstup. Když den nestihnete, neposouvejte celý plán jako domino. Zapište důvod, vyberte nejbližší důležitý úkol a pokračujte. Produktivita není dokonalý kalendář. Produktivita je schopnost vrátit se k podstatě.
+
+*Codyho komentář: pokud chcete plán použít v týmu, nedělejte z něj 30 meetingů. To by byl trest, ne proces. Stačí krátký týdenní checkpoint a sdílený dokument s výsledky.*
+
+### Týden 1: Ujasnit nabídku, zákazníka a datové toky
+
+První týden není o redesignu. Je o tom zjistit, jestli web a produkt říkají správným lidem správnou věc — a jestli přitom nesbíráte data, která nepotřebujete.
+
+#### Den 1: Jedna věta hodnoty
+
+Napište pracovní větu:
+
+> Pomáháme [komu] dosáhnout [čeho] bez [bolesti nebo rizika].
+
+Potom ji porovnejte s homepage. Pokud návštěvník během deseti sekund nepozná, komu pomáháte a proč by ho to mělo zajímat, máte první úkol.
+
+Výstup dne:
+
+- jedna pracovní věta hodnoty,
+- seznam tří slov nebo frází, které musí být na webu srozumitelné,
+- jedna věc, kterou z homepage odstraníte, protože nepomáhá rozhodnutí.
+
+#### Den 2: Ideální zákazník a ne-zákazník
+
+Popište dva profily:
+
+- **Ideální zákazník:** má problém, rozpočet, motivaci a schopnost rozhodnout.
+- **Ne-zákazník:** vypadá lákavě, ale typicky přinese chaos, scope creep nebo špatné očekávání.
+
+Praktický příklad:
+
+| Typ | Signál | Jak se projeví na webu |
+| --- | --- | --- |
+| Ideální zákazník | Ptá se na výsledek, rizika a provoz. | Nabídněte case study, proces a konzultaci. |
+| Ne-zákazník | Chce „jen něco rychle naklikat“. | Vysvětlete minimální rozsah a hranice spolupráce. |
+
+Výstup dne: krátký profil ideálního zákazníka a věta, pro koho produkt není.
+
+#### Den 3: Mapa dat
+
+Vezměte jeden běžný scénář, například odeslání formuláře, registraci nebo objednávku. Popište:
+
+1. Jaká data uživatel zadá.
+2. Kam se uloží.
+3. Kdo k nim má přístup.
+4. Jak dlouho je držíte.
+5. Jak je smažete nebo exportujete.
+
+Tohle není jen právní cvičení. Je to provozní mapa. Když nevíte, kde data jsou, nemůžete je chránit ani zákazníkovi férově vysvětlit, co se děje.
+
+Výstup dne: jedna tabulka datového toku.
+
+#### Den 4: Inventář nástrojů
+
+Sepište všechny nástroje, které web nebo produkt používá:
+
+- hosting,
+- analytika,
+- e-mailing,
+- formuláře,
+- CRM,
+- platební brána,
+- support,
+- monitoring,
+- CDN,
+- fonty,
+- embedované skripty.
+
+Ke každému napište: účel, typ dat, region provozu, vlastník účtu a zda je nástroj opravdu nutný.
+
+Privacy-first pravidlo: co nemá jasný účel, jde pryč nebo do karantény k rozhodnutí.
+
+#### Den 5: Cookie a tracker audit
+
+Otevřete web v anonymním okně, ideálně s vypnutými doplňky, a zkontrolujte:
+
+- jaké cookies vzniknou před souhlasem,
+- jaké externí skripty se načítají,
+- zda analytika funguje bez invazivního sledování,
+- zda nejsou na webu staré marketingové pixely,
+- zda cookie banner neříká něco jiného než realita.
+
+Pokud používáte pouze nezbytné cookies a šetrnou agregovanou analytiku, napište to jednoduše. Pokud používáte marketingové cookies, potřebujete srozumitelný souhlas a skutečnou možnost odmítnutí.
+
+#### Den 6: Obsahová mezera
+
+Projděte homepage, produktovou stránku a kontaktní stránku. U každé si položte otázky:
+
+- Je jasné, co nabízíme?
+- Je jasné, pro koho to je?
+- Je jasný další krok?
+- Je vidět důkaz důvěry?
+- Je vysvětlené, co se stane po odeslání formuláře?
+
+Výstup dne: seznam pěti nejdůležitějších obsahových oprav.
+
+#### Den 7: Týdenní rozhodnutí
+
+Vyberte tři opravy na další týden:
+
+1. jednu obchodní,
+2. jednu technickou,
+3. jednu privacy/provozní.
+
+Nesnažte se opravit všechno. Malý tým vyhrává soustředěním, ne tím, že si otevře 47 ticketů a pak se tváří překvapeně, že realita neaplauduje.
+
+### Týden 2: Zlepšit web jako obchodní systém
+
+Druhý týden je o stránkách, které mají přivádět správné lidi ke správné akci.
+
+#### Den 8: Přepište hero sekci
+
+Hero sekce má odpovědět na tři otázky:
+
+- Co to je?
+- Pro koho to je?
+- Co mám udělat dál?
+
+Příklad:
+
+> Stavíme privacy-first weby a SaaS aplikace pro evropské B2B týmy, které potřebují růst bez ztráty kontroly nad daty.
+
+CTA může být jednoduché: „Domluvit konzultaci“, „Projít checklist“, „Podívat se na case study“. Hlavně ať není generické „Zjistit více“, protože to je tlačítko, které zní jako recepční v prázdném coworkingu.
+
+#### Den 9: Přidejte sekci „Jak spolupráce probíhá“
+
+Lidé se nebojí jen ceny. Bojí se chaosu. Popište proces:
+
+1. Úvodní diagnostika.
+2. Návrh řešení a rozsahu.
+3. Iterační vývoj.
+4. Spuštění a provoz.
+5. Pravidelné zlepšování.
+
+U každého kroku napište, co dodáte vy a co potřebujete od zákazníka.
+
+#### Den 10: Důkazy hodnoty
+
+Přidejte alespoň jeden typ důkazu:
+
+- konkrétní výsledek,
+- mini case study,
+- ukázku procesu,
+- screenshot s vysvětlením,
+- citaci klienta,
+- veřejnou dokumentaci,
+- transparentní technické rozhodnutí.
+
+Když nemáte velkou referenci, použijte „proof of work“: ukažte, jak přemýšlíte, co kontrolujete a jak minimalizujete rizika.
+
+#### Den 11: Formulář bez zbytečného výslechu
+
+Zkraťte formulář na minimum. Pro první kontakt často stačí:
+
+- jméno,
+- e-mail,
+- krátký popis situace,
+- volitelně web nebo firma.
+
+Pod formulář napište, co se stane dál:
+
+> Ozveme se do dvou pracovních dnů. Data použijeme jen pro odpověď na poptávku a nebudeme je předávat marketingovým nástrojům.
+
+Tohle je malá věta, ale velký signál důvěry.
+
+#### Den 12: SEO minimum
+
+Zkontrolujte pro hlavní stránky:
+
+- unikátní `<title>`,
+- meta description,
+- jeden hlavní nadpis,
+- kanonickou URL,
+- interní odkazy,
+- srozumitelný slug,
+- Open Graph metadata,
+- indexovatelnost v `robots.txt` a `sitemap.xml`.
+
+SEO není magie. Je to disciplína, ve které vyhledávači i lidem říkáte: „Tahle stránka má tento účel.“
+
+#### Den 13: Rychlost a přístupnost
+
+Otestujte stránku na mobilu, pomalém připojení a klávesnici. Opravte alespoň jednu věc:
+
+- příliš velký obrázek,
+- chybějící alternativní text,
+- špatný kontrast,
+- nejasný focus stav,
+- layout skákající při načítání,
+- formulář bez viditelné chyby.
+
+Přístupnost není bonus pro „někoho jiného“. Je to kvalita rozhraní pro všechny, včetně člověka, který má v tramvaji jednu ruku, špatný signál a nulovou toleranci k vašemu spinneru.
+
+#### Den 14: Publikační rytmus
+
+Vytvořte jednoduchý publikační plán na měsíc:
+
+- jeden praktický článek,
+- jeden checklist,
+- jednu krátkou case study nebo rozbor,
+- jeden update produktu.
+
+Ke každému napište distribuční kanál: web, RSS, LinkedIn příspěvek, e-mail, komunita, přímý odkaz klientům. Preferujte vlastní web a RSS jako základ, sociální sítě berte jako distribuční výlohu, ne jako archiv znalostí.
+
+### Týden 3: Zpevnit SaaS a provoz
+
+Třetí týden se dívá dovnitř produktu. Cíl: méně ruční improvizace, jasnější onboarding, lepší kontrola nad daty.
+
+#### Den 15: Aktivační moment
+
+Napište jednu větu:
+
+> Uživatel je aktivovaný, když poprvé [konkrétní akce s hodnotou].
+
+Příklady:
+
+- vytvoří první projekt a pozve kolegu,
+- propojí formulář s inboxem,
+- publikuje první stránku,
+- nahraje dokument a bezpečně ho nasdílí klientovi.
+
+Pak zkontrolujte onboarding: vede k tomuto momentu, nebo jen ukazuje funkce?
+
+#### Den 16: Prázdné stavy
+
+Najděte tři prázdné stavy v aplikaci a přepište je tak, aby pomáhaly:
+
+- co tu bude,
+- proč je to užitečné,
+- jak vytvořit první položku,
+- kde najít příklad.
+
+Špatně: „Zatím tu nic není.“
+
+Lépe: „Zatím nemáte žádný projekt. Vytvořte první projekt pro klienta, nastavte vlastníka a přidejte první úkol.“
+
+#### Den 17: Role a oprávnění
+
+Sepište role v produktu. U každé napište, co smí:
+
+| Role | Smí | Nesmí |
+| --- | --- | --- |
+| Owner | Fakturace, členové, export dat. | Být bez MFA u citlivého účtu. |
+| Admin | Nastavení workspace, integrace. | Mazat účet bez potvrzení ownera. |
+| Member | Pracovat s běžnými daty. | Měnit billing a bezpečnost. |
+| Support | Dočasný přístup s důvodem. | Trvalý přístup bez auditu. |
+
+Výstup dne: jednoduchá matice oprávnění.
+
+#### Den 18: Auditní stopa
+
+Vyberte pět událostí, které má produkt logovat:
+
+- přihlášení,
+- změna role,
+- export dat,
+- smazání dat,
+- změna fakturace,
+- připojení integrace,
+- support přístup.
+
+Audit log nemá být skládka osobních údajů. Má odpovědět na otázku: kdo udělal citlivou akci, kdy a proč.
+
+#### Den 19: Support šablony
+
+Připravte tři odpovědi:
+
+1. Jak požádat o export dat.
+2. Jak nahlásit bezpečnostní problém.
+3. Co se děje při výpadku nebo incidentu.
+
+Dobrý support není jen rychlá odpověď. Je to klidný systém, který v nepříjemné situaci nepůsobí jako panika v Google Docu.
+
+#### Den 20: Zálohy a obnova
+
+Zkontrolujte:
+
+- co se zálohuje,
+- jak často,
+- kde jsou zálohy uložené,
+- kdo k nim má přístup,
+- jak dlouho se drží,
+- kdy jste naposledy zkusili obnovu.
+
+Pokud jste obnovu nikdy netestovali, nemáte jistotu. Máte přání v kostýmu procesu.
+
+#### Den 21: Release notes
+
+Napište krátké release notes pro poslední změnu:
+
+- co je nové,
+- proč to vzniklo,
+- koho se to týká,
+- zda je potřeba akce uživatele,
+- jestli se mění práce s daty.
+
+Privacy-first release notes mají výhodu: nemusíte se tvářit tajemně. Naopak. Transparentnost je funkce.
+
+### Týden 4: Marketing, měření a dlouhodobý rytmus
+
+Čtvrtý týden propojí produkt, web a marketing do opakovatelného systému.
+
+#### Den 22: Obsahové pilíře
+
+Vyberte tři témata, která dlouhodobě dokazují odbornost. Pro Dreamind styl by to mohlo být:
+
+- privacy-first webový vývoj v Evropě,
+- SaaS architektura pro malé B2B týmy,
+- AI automatizace bez ztráty kontroly nad daty.
+
+Ke každému napište pět konkrétních otázek zákazníků. Z otázek vznikají články, ne z potřeby „něco postnout“.
+
+#### Den 23: Distribuce bez závislosti na algoritmu
+
+Pro každý nový obsah určete:
+
+- kanonickou URL na vlastním webu,
+- RSS položku,
+- krátký sociální teaser,
+- přímé odkazy pro relevantní klienty nebo komunitu,
+- interní odkaz z existující stránky.
+
+Sociální síť je megafon. Vlastní web je knihovna. Stavte knihovnu.
+
+#### Den 24: Měření kampaní
+
+Zaveďte jednoduchý UTM slovník:
+
+| Parametr | Příklad | Pravidlo |
+| --- | --- | --- |
+| `utm_source` | `linkedin`, `rss`, `partner` | odkud návštěva přišla |
+| `utm_medium` | `social`, `feed`, `email`, `referral` | typ kanálu |
+| `utm_campaign` | `saas-checklist-2026` | konkrétní iniciativa |
+
+Neměřte člověka napříč internetem. Měřte, které kanály přivádějí relevantní návštěvy a konverze.
+
+#### Den 25: Newsletter nebo RSS?
+
+Rozhodněte, co má být hlavní distribuční kanál:
+
+- RSS jako default pro otevřený, neinvazivní odběr.
+- E-mail pro lidi, kteří chtějí přímé upozornění a dali jasný souhlas.
+- Žádné automatické přidávání kontaktů z poptávek do newsletteru.
+
+Praktické pravidlo: poptávka není marketingový souhlas. Je to žádost o odpověď.
+
+#### Den 26: Case study kostra
+
+Připravte šablonu:
+
+1. Kontext klienta.
+2. Problém.
+3. Omezení.
+4. Řešení.
+5. Výsledek.
+6. Co bychom příště udělali stejně.
+7. Co bychom příště udělali jinak.
+8. Jak byla chráněna data.
+
+I anonymizovaná case study může být silná, když popisuje rozhodování a dopad.
+
+#### Den 27: Automatizace s brzdou
+
+Vyberte jednu opakující se ruční činnost a navrhněte automatizaci. Ke každé automatizaci napište:
+
+- vstup,
+- výstup,
+- vlastníka,
+- log,
+- ruční override,
+- co se stane při chybě.
+
+Automatizace bez vypínače je jen budoucí incident s lepším marketingem.
+
+#### Den 28: Měsíční provozní review
+
+Vytvořte šablonu pro měsíční kontrolu:
+
+- Co přineslo poptávky nebo aktivace?
+- Kde uživatelé odpadávali?
+- Co se rozbilo opakovaně?
+- Jaké otázky měl support?
+- Jaké datové toky se změnily?
+- Co smažeme, zjednodušíme nebo zdokumentujeme?
+
+Review má končit rozhodnutími, ne jen pocitem, že jste „probrali situaci“.
+
+#### Den 29: Stop-doing list
+
+Sepište věci, které přestanete dělat:
+
+- měřit metriky, podle kterých nikdo nerozhoduje,
+- publikovat obsah bez distribuce,
+- přidávat nástroje bez datového inventáře,
+- držet staré skripty „pro jistotu",
+- opravovat onboarding ručním supportem místo úpravou produktu.
+
+Malé týmy často nezrychlí tím, že přidají kapacitu. Zrychlí tím, že přestanou krmit procesní plevel.
+
+#### Den 30: Akční závěr
+
+Na konci třiceti dnů vytvořte jednu stránku:
+
+- co se změnilo,
+- co mělo dopad,
+- co zůstává riziko,
+- co je další nejdůležitější krok,
+- kdo je vlastník,
+- do kdy se to udělá.
+
+Nepotřebujete slavnostní prezentaci. Potřebujete rozhodnutí, která přežijí pondělí.
+
+### Hotový výstup po 30 dnech
+
+Poctivě odpracovaný plán by měl zanechat:
+
+- jasnější positioning a homepage,
+- kratší a důvěryhodnější formulář,
+- základní SEO a přístupnostní opravy,
+- mapu hlavních datových toků,
+- inventář nástrojů a trackerů,
+- popsaný aktivační moment v produktu,
+- jednoduchou matici rolí,
+- auditní stopu pro citlivé akce,
+- support a incident šablony,
+- publikační a distribuční rytmus,
+- měsíční provozní review.
+
+To není „digitální transformace“. To je uklizený základ, na kterém se dá stavět bez toho, aby každý další nápad spadl do bažiny improvizace.
+
+### Rychlý checklist pro tým
+
+- [ ] Každý týden má maximálně tři hlavní priority.
+- [ ] Každý den končí konkrétním výstupem, ne jen diskusí.
+- [ ] Každý nový nástroj má vlastníka a datový účel.
+- [ ] Každý formulář sbírá jen data, která opravdu potřebuje.
+- [ ] Každý marketingový kanál vede zpět na vlastní web.
+- [ ] Každý citlivý produktový krok má auditní stopu.
+- [ ] Každý měsíc má review, kde se něco smaže, zjednoduší nebo zlepší.
+
+### Zdroje k příloze A
+
+- European Commission: [Data protection under GDPR](https://commission.europa.eu/law/law-topic/data-protection/data-protection-eu_en)
+- European Data Protection Board: [Guidelines 05/2020 on consent under Regulation 2016/679](https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-052020-consent-under-regulation-2016679_en)
+- CNIL: [Cookies and other trackers](https://www.cnil.fr/en/cookies-and-other-trackers)
+- W3C: [Web Content Accessibility Guidelines (WCAG) 2.2](https://www.w3.org/TR/WCAG22/)
+- Google Search Central: [SEO Starter Guide](https://developers.google.com/search/docs/fundamentals/seo-starter-guide)
+
 ---
 
 ## Pracovní log
+- 2026-08-22: Přidána příloha A „30denní akční plán pro privacy-first web a SaaS“ s týdenním postupem, denními úkoly, ukázkami výstupů, checklistem a ověřenými zdroji.
+
 - 2026-08-21: Dopsána kapitola 24 „Checklist před spuštěním“ s launch briefem, kontrolou obsahu, techniky, SEO, formulářů, privacy-first provozu, bezpečnosti, plateb, supportu, launch panelem, checklistem a ověřenými zdroji.
 
 - 2026-08-21: Dopsána kapitola 23 „Privacy-first provoz v Evropě“ s mapou dat, evropským defaultem, oddělením datových vrstev, přístupy, logy, zálohami, exportem, onboardingem, checklistem a ověřenými zdroji.
