@@ -140,6 +140,7 @@ C. Slovník metrik pro web, SaaS a marketing
 D. Privacy-first audit webu za 60 minut
 E. Dodavatelský brief pro privacy-first nástroje a služby
 F. AI asistenti v malém týmu bez úniku dat
+G. Údržbový kalendář pro web, SaaS a marketing
 
 ---
 
@@ -6736,6 +6737,169 @@ Výstupem je rozhodnutí, ne nadšená prezentace. Pilot, který nemá vypínač
 
 ---
 
+## G. Údržbový kalendář pro web, SaaS a marketing
+
+Největší rozdíl mezi webem, který vydělává dlouhodobě, a webem, který se po spuštění pomalu rozpadá, není v hero sekci. Je v údržbě. Malý tým často investuje spoustu energie do launch dne, pak několik týdnů slaví, potom hasí support, potom řeší nový nápad, potom nový nástroj, potom migraci — a za půl roku nikdo neví, proč je na webu starý claim, proč formulář posílá data do tří míst a proč poslední případová studie tvrdí něco, co už produkt dávno nedělá.
+
+Údržbový kalendář není byrokracie. Je to pojistka proti tichému rozpadu důvěry. Cílem není každý týden kontrolovat celý svět. Cílem je mít rytmus, ve kterém se web, produkt, marketing a privacy-first provoz postupně zlepšují bez heroického víkendového sprintu.
+
+*Codyho komentář: nejlepší údržba je ta, která vypadá nudně. Nudná údržba znamená, že zákazník neobjeví starý ceník, rozbitý formulář ani analytiku, kterou už nikdo neumí vysvětlit. Nuda je tady luxusní funkce.*
+
+### G.1 Týdenní rytmus: jedna drobná oprava, jeden důkaz
+
+Každý týden vyberte jednu konkrétní věc, která zlepší obchodní nebo provozní systém. Ne „zlepšíme web“. To je mlha. Dobrá týdenní položka zní: „Upravíme první obrazovku pricingu podle tří nejčastějších námitek ze sales callů“ nebo „Zkrátíme kontaktní formulář o dvě pole a dopíšeme, proč potřebujeme telefon“.
+
+Týdenní údržba by měla mít čtyři kroky:
+
+1. **Najít signál.** Support dotaz, prodejní námitka, analytics trend, feedback od zákazníka, rozbitý odkaz, právní změna, technický dluh.
+2. **Vybrat jednu změnu.** Malou, dokončitelnou, s vlastníkem.
+3. **Zapsat důkaz.** Screenshot, odkaz na commit, krátká metrika, poznámka v dokumentaci.
+4. **Zkontrolovat data.** Jestli změna nepřidala nové sběry, skripty, pole nebo externí službu.
+
+Týdenní checklist:
+
+- [ ] Máme jednu dokončitelnou změnu, ne deset přání.
+- [ ] Víme, jaký problém řeší.
+- [ ] Máme vlastníka a termín.
+- [ ] Po změně existuje důkaz: URL, screenshot, commit nebo poznámka.
+- [ ] Změna neporušila formuláře, měření, SEO ani přístupnost.
+- [ ] Pokud se změnil tok dat, aktualizovali jsme datovou mapu.
+
+### G.2 Měsíční rytmus: review obsahu, metrik a dat
+
+Měsíční review je místo, kde se z drobných úprav stává systém. Doporučuju 60 minut, maximálně 90. Delší schůzka často znamená, že tým nemá problém s časem, ale s rozhodováním.
+
+Agenda:
+
+| Část | Otázka | Výstup |
+| --- | --- | --- |
+| Web a obsah | Které stránky jsou zastaralé, slabé nebo zbytečné? | seznam 3 oprav |
+| SaaS produkt | Kde uživatelé nejčastěji ztrácí hodnotu? | jedna produktová hypotéza |
+| Marketing | Který kanál přinesl kvalitní signály bez invazivního měření? | jedno rozhodnutí o distribuci |
+| Data | Která data sbíráme bez jasného účelu? | jedno pole, skript nebo export k odstranění |
+| Provoz | Co by bolelo, kdyby dnes vypadl hosting, e-mailing nebo platby? | jeden preventivní úkol |
+
+Výstup měsíčního review by se měl vejít do pěti řádků. Pokud potřebujete třicetistránkový report, pravděpodobně vyrábíte dokument pro uklidnění týmu, ne pro rozhodnutí.
+
+### G.3 Čtvrtletní rytmus: audit nástrojů a dodavatelů
+
+Jednou za čtvrtletí projděte nástroje, integrace a dodavatele. Ne proto, že by každý nástroj byl podezřelý. Protože malé týmy přidávají nástroje rychleji, než je umí uklízet.
+
+Praktická tabulka:
+
+| Nástroj | Vlastník | Účel | Data | Region | Poslední použití | Rozhodnutí |
+| --- | --- | --- | --- | --- | --- | --- |
+| CRM | obchod | evidence poptávek | kontaktní údaje, poznámky | EU / ověřit | tento měsíc | ponechat |
+| Heatmapa | marketing | UX hypotézy | chování návštěvníků | ověřit | před 4 měsíci | vypnout nebo nahradit |
+| Automatizace | ops | notifikace leadů | e-mail, firma, zpráva | EU / ověřit | tento týden | ponechat, omezit scope |
+
+U každého nástroje rozhodněte jednu z pěti možností:
+
+- **Ponechat:** má jasný účel, vlastníka, smluvní podklady a kontrolovaný tok dat.
+- **Omezit:** hodí se, ale sbírá moc dat nebo má příliš široká oprávnění.
+- **Nahradit:** hodnota existuje, ale nástroj nesedí privacy-first provozu.
+- **Vypnout:** nikdo ho nepoužívá, nikdo ho nevlastní nebo riziko převyšuje přínos.
+- **Prověřit:** chybí informace o zpracování, exportu, retenci nebo subprocessorech.
+
+### G.4 Pololetní rytmus: bezpečnost a incident připravenost
+
+Bezpečnostní kontrola nemusí začínat penetračním testem za statisíce. U malého týmu často nejvíc pomůže projít základní provozní věci: kdo má přístup, kde jsou tajemství, jak se obnovuje záloha, kam chodí alerty a kdo komunikuje se zákazníky při incidentu.
+
+Pololetní minimum:
+
+- [ ] Zkontrolujte administrátorské účty a odeberte staré přístupy.
+- [ ] Ověřte MFA u klíčových služeb.
+- [ ] Projděte produkční tajemství a odstraňte nepoužívané klíče.
+- [ ] Otestujte obnovu jedné zálohy, ne jen existenci záložního souboru.
+- [ ] Aktualizujte incident playbook podle reálných kontaktů a služeb.
+- [ ] Projděte nejkritičtější závislosti a známé zranitelnosti.
+- [ ] Zkontrolujte, jestli logy neobsahují zbytečná osobní data.
+
+Užitečná otázka: „Kdyby se zítra stalo něco nepříjemného, věděli bychom během první hodiny, kdo co dělá?“ Pokud ne, nepotřebujete větší dashboard. Potřebujete jednodušší playbook.
+
+### G.5 Roční rytmus: strategie, positioning a velký úklid
+
+Jednou ročně se podívejte na celý systém z větší vzdálenosti. Produkt se změnil, zákazníci se změnili, trh se změnil, tým se změnil. Pokud se web nezměnil, může působit jako časová kapsle. A časová kapsle je roztomilá na školním výletě, ne v B2B nákupu.
+
+Roční review:
+
+1. **Positioning:** platí pořád hlavní slib, cílový zákazník a důkaz hodnoty?
+2. **Nabídka:** odpovídá pricing tomu, jak zákazníci hodnotu opravdu používají?
+3. **Obsah:** které články, landing pages a case studies jsou zastaralé?
+4. **Produkt:** co se změnilo v onboardingu, rolích, exportu, supportu a dokumentaci?
+5. **Privacy-first provoz:** které nástroje, procesy a datové toky už neodpovídají vaší hodnotě?
+6. **Rizika:** co by nejvíc poškodilo důvěru zákazníků, kdyby se to pokazilo?
+
+Roční výstup nemusí být rebrand. Často stačí pět tvrdých rozhodnutí: co přepsat, co smazat, co přestat měřit, co zjednodušit a co konečně zdokumentovat.
+
+### G.6 Šablona údržbového kalendáře
+
+Zkopírujte si tuhle šablonu do dokumentace a používejte ji jako provozní rytmus:
+
+```md
+# Údržbový kalendář: [projekt]
+
+## Týdně
+- Jedna změna:
+- Vlastník:
+- Důkaz:
+- Privacy-first kontrola:
+
+## Měsíčně
+- Obsah k opravě:
+- Produktová hypotéza:
+- Marketingové rozhodnutí:
+- Data k odstranění nebo omezení:
+- Provozní preventivní úkol:
+
+## Čtvrtletně
+- Nástroje k auditu:
+- Dodavatelé k ověření:
+- Přístupy k odebrání:
+- Exporty k otestování:
+
+## Pololetně
+- Bezpečnostní kontrola:
+- Test obnovy zálohy:
+- Incident playbook:
+- Kritické závislosti:
+
+## Ročně
+- Positioning:
+- Pricing:
+- Obsahový úklid:
+- Privacy-first audit:
+- Strategická rozhodnutí:
+```
+
+### G.7 Checklist k příloze G
+
+- [ ] Máme týdenní rytmus pro jednu dokončenou úpravu.
+- [ ] Měsíční review končí rozhodnutími, ne jen reportem.
+- [ ] Čtvrtletně uklízíme nástroje, integrace a dodavatele.
+- [ ] Pololetně testujeme bezpečnostní a incident připravenost.
+- [ ] Ročně revidujeme positioning, pricing, obsah a datové toky.
+- [ ] Každá opakovaná kontrola má vlastníka, termín a důkaz.
+- [ ] Údržba je zapsaná v dokumentaci, ne jen v hlavě zakladatele.
+
+### Mini cvičení: první údržbový kalendář za 40 minut
+
+1. **10 minut:** napište pět oblastí, které se dnes udržují jen náhodou.
+2. **10 minut:** vyberte jednu týdenní, jednu měsíční a jednu čtvrtletní kontrolu.
+3. **10 minut:** přiřaďte vlastníka a důkaz hotové práce.
+4. **10 minut:** smažte nebo odložte všechno, co nemá jasný přínos.
+
+Výstupem má být rytmus, který tým opravdu zvládne. Pokud kalendář potřebuje vlastního projektového manažera, není to kalendář. Je to nový problém s hezkou tabulkou.
+
+### Zdroje k příloze G
+
+- OWASP: [Web Security Testing Guide](https://owasp.org/www-project-web-security-testing-guide/)
+- OWASP: [Application Security Verification Standard](https://owasp.org/www-project-application-security-verification-standard/)
+- ENISA: [Good Practice Guide on Vulnerability Disclosure](https://www.enisa.europa.eu/publications/vulnerability-disclosure)
+- European Data Protection Board: [Guidelines 9/2022 on personal data breach notification under GDPR](https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-92022-personal-data-breach-notification-under_en)
+
+---
+
 # Závěr: Udělejte z e-booku pracovní systém
 
 Pokud jste dočetli až sem, gratuluju. Ne proto, že jste hrdinně přežili Codyho tabulky, checklisty a občasné kopnutí do marketingové mlhy. Hlavní pointa je jednodušší: web, SaaS a marketing se nezlepší tím, že si tým jednou přečte dlouhý dokument. Zlepší se tím, že z něj udělá pravidelný pracovní rytmus.
@@ -6866,6 +7030,8 @@ Pak to opravdu udělejte. Ne dokonale. Dokončeně.
 ---
 
 ## Pracovní log
+- 2026-08-22: Přidána příloha G „Údržbový kalendář pro web, SaaS a marketing“ s týdenním, měsíčním, čtvrtletním, pololetním a ročním rytmem údržby, praktickými šablonami, checklistem, mini cvičením a ověřenými zdroji.
+
 - 2026-08-22: Přidána příloha F „AI asistenti v malém týmu bez úniku dat“ s rizikovou mapou použití AI, jednostránkovou týmovou politikou, minimalizací vstupů, transparentností podle aktuálního AI Act kontextu, marketingovým a vývojovým workflow, checklistem, mini cvičením a ověřenými zdroji.
 
 - 2026-08-22: Přidána příloha E „Dodavatelský brief pro privacy-first nástroje a služby“ s rozhodovacím briefem, datovou mapou, kritérii výběru, otázkami pro dodavatele, pilotním režimem, exit plánem, red flags, checklistem a ověřenými zdroji.
