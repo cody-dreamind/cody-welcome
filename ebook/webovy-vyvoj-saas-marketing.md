@@ -64,6 +64,8 @@ Praktický český e-book od Codyho z Dreamindu pro lidi, kteří chtějí stav�
 ### Přílohy
 
 A. 30denní akční plán pro privacy-first web a SaaS
+B. Šablony pro malé privacy-first týmy
+C. Slovník metrik pro web, SaaS a marketing
 
 ---
 
@@ -5967,7 +5969,179 @@ Výsledek není dokonalý proces. Výsledek je návyk: důležitá rozhodnutí, 
 
 ---
 
+## C. Slovník metrik pro web, SaaS a marketing
+
+Metriky nejsou dekorace do dashboardu. Jsou to nástroje pro rozhodování. Když metrika nevede k lepší otázce, lepšímu rozhodnutí nebo lepší prioritě, je to jen číslo na nástěnce. Hezké, lesklé, a po třech týdnech ignorované stejně jako firemní nástěnka s fotkami z teambuildingu.
+
+Tahle příloha není encyklopedie všech možných KPI. Je to praktický slovník pro malé týmy, které chtějí řídit web, SaaS a marketing bez invazivního sledování. Cílem není vědět všechno o každém člověku. Cílem je pochopit, kde systém funguje, kde se lidé ztrácí a co má tým zlepšit jako další.
+
+### C.1 Metrika potřebuje vlastníka, účel a rozhodnutí
+
+Každou důležitou metriku popište jednou krátkou kartou:
+
+```md
+# Metrika: [název]
+
+## Proč ji sledujeme
+[Jaké rozhodnutí nám pomáhá dělat.]
+
+## Definice
+[Přesný výpočet nebo pravidlo.]
+
+## Zdroj dat
+[Analytika, produktová databáze, fakturace, support, ruční review.]
+
+## Frekvence
+[Denně, týdně, měsíčně, po kampani.]
+
+## Vlastník
+[Kdo kontroluje kvalitu dat a navrhuje změny.]
+
+## Akce při změně
+[Co uděláme, když metrika výrazně stoupne nebo klesne.]
+```
+
+Bez téhle karty vzniká klasický chaos: někdo mluví o návštěvách, někdo o sessions, někdo o uživatelích, někdo o leadu jako e-mailu a někdo jako zaplaceném zákazníkovi. Všichni mají graf. Nikdo nemá stejnou realitu.
+
+### C.2 Webové metriky: kvalita návštěvy je víc než objem
+
+U webu malého týmu obvykle stačí sledovat méně metrik, ale pravidelně a ve správném kontextu.
+
+**Návštěvy a unikátní návštěvníci** ukazují přibližný objem zájmu. Samy o sobě ale neříkají, jestli web přivádí správné lidi. Pokud roste návštěvnost blogu, ale nerostou relevantní poptávky, není to automaticky úspěch. Možná píšete dobrý obsah pro špatné publikum.
+
+**Vstupní stránky** ukazují, kde lidé začínají. Praktická otázka: odpovídá každá důležitá vstupní stránka na otázku „kde jsem, proč na tom záleží a co mám udělat dál“?
+
+**Konverzní události** sledujte jako agregované počty: odeslaný formulář, klik na e-mail, stažení checklistu, přechod do dokumentace, otevření ceníku. Privacy-first přístup znamená, že nepotřebujete skládat detailní profil návštěvníka. Potřebujete vědět, zda stránka vede k dalšímu kroku.
+
+**Kvalita leadů** je často důležitější než počet leadů. Jednoduché třídění stačí:
+
+- A: přesně odpovídá ideálnímu zákazníkovi,
+- B: relevantní, ale menší nebo méně urgentní,
+- C: mimo fokus,
+- spam: technický nebo obchodní odpad.
+
+Když počet leadů roste, ale podíl A/B klesá, marketing pravděpodobně slibuje moc obecně.
+
+### C.3 SaaS metriky: sledujte cestu k hodnotě
+
+SaaS není „uživatel se registroval“. SaaS je „uživatel opakovaně získává hodnotu a má důvod zůstat“.
+
+**Aktivace** je okamžik, kdy uživatel poprvé zažije hlavní hodnotu produktu. Definujte ji podle produktu, ne podle pohodlí analytiky. U fakturačního nástroje to může být první vystavená faktura. U nástroje na dokumentaci první publikovaná stránka. U analytiky první nasazený projekt s reálnými daty.
+
+**Time to value** měří, jak dlouho trvá cesta od registrace k první hodnotě. Pokud je dlouhá, problém nemusí být v marketingu. Může být v onboardingu, prázdných stavech, importu dat, oprávněních nebo špatně vysvětleném prvním kroku.
+
+**Retence** říká, jestli se lidé vrací. Pro malé týmy je užitečnější jednoduchá kohorta než složitý BI chrám. Například: kolik týmů, které se registrovaly v daném měsíci, provedlo klíčovou akci i po 30 dnech?
+
+**Churn** sledujte číselně i kvalitativně. Samotné procento odchodů nestačí. Ke každému zrušení se snažte přiřadit důvod:
+
+- chybějící funkce,
+- příliš složité použití,
+- cena versus vnímaná hodnota,
+- interní změna u zákazníka,
+- bezpečnostní nebo právní požadavek,
+- nevhodný zákazník od začátku.
+
+**Expansion signály** ukazují, kde produkt přirozeně roste: více uživatelů v týmu, více projektů, častější exporty, vyšší limit, opakované použití API. Tyhle signály pomáhají navrhnout pricing bez hádání z křišťálové koule.
+
+### C.4 Marketingové metriky: distribuční kanál musí mít hypotézu
+
+Každý kanál by měl mít jednoduchou hypotézu:
+
+> Pokud budeme [aktivita] pro [publikum], očekáváme [měřitelný signál] do [časový rámec].
+
+Příklad:
+
+> Pokud budeme každý týden publikovat praktický článek o privacy-first SaaS provozu pro malé evropské týmy, očekáváme do tří měsíců růst relevantních organických návštěv a alespoň pět kvalitních konzultačních poptávek.
+
+Sledujte hlavně:
+
+- **publikační rytmus**: zda tým opravdu distribuuje konzistentně,
+- **kvalitu návštěvnosti**: které kanály přivádí relevantní lidi,
+- **další krok**: kolik lidí přejde na ceník, case study, kontakt nebo demo,
+- **obsahové téma**: která témata přináší nejlepší obchodní kontext,
+- **náklady pozornosti**: kolik času kanál bere týmu oproti výsledku.
+
+Privacy-first distribuce preferuje vlastní kanály: web, RSS, e-mail s jasným souhlasem, komunitní místa a přímé odkazy. Sociální sítě mohou pomoci, ale nemají být jediným místem, kde firma existuje. Pronajatý dosah je fajn, dokud vám někdo nepřestaví algoritmus pod nohama. Což se samozřejmě nikdy nestává. Ehm.
+
+### C.5 Produktivita týmu: měřte tok práce, ne počet hodin v nástroji
+
+Produktivita není počet ticketů přesunutých do „Done“. Produktivita je schopnost doručovat důležité věci bez vyhoření a bez hromadění skrytého dluhu.
+
+Praktické metriky pro malý tým:
+
+- **rozpracovaná práce**: kolik věcí je současně otevřených,
+- **stáří rozpracovaných úkolů**: co už visí příliš dlouho,
+- **čekání na rozhodnutí**: kde práce stojí kvůli nejasnému vlastnictví,
+- **incidenty a opakované chyby**: co se vrací a proč,
+- **podíl údržby**: kolik kapacity jde do oprav, aktualizací a provozu,
+- **dokončené rozhodnutí**: kolik rozhodnutí mělo jasný výsledek, ne jen meeting.
+
+Tyhle metriky stačí kontrolovat týdně. Ne proto, aby se tým kontroloval jako výrobní linka, ale aby viděl přetížení dřív, než začne hořet support, kvalita nebo nálada.
+
+### C.6 Privacy-first pravidla pro metriky
+
+Než přidáte novou událost, pixel, integraci nebo export dat, projděte pět otázek:
+
+1. Jaké rozhodnutí bez této metriky neumíme udělat?
+2. Lze odpověď získat agregovaně místo sledování jednotlivce?
+3. Jak dlouho data opravdu potřebujeme držet?
+4. Kdo k nim má přístup a proč?
+5. Umíme metriky vysvětlit zákazníkovi bez trapného kašlání do rukávu?
+
+Pokud nedokážete odpovědět na první otázku, metriku nesbírejte. Pokud nedokážete odpovědět na pátou, nesbírejte ji už vůbec.
+
+### C.7 Měsíční metrický review pro malé týmy
+
+Jednou měsíčně stačí krátké review. Nepotřebujete prezentaci na 42 slidech. Potřebujete rozhodnout.
+
+Struktura:
+
+```md
+# Měsíční metrický review: [měsíc]
+
+## 1. Co se změnilo
+- Web:
+- SaaS:
+- Marketing:
+- Provoz:
+
+## 2. Co nás překvapilo
+- Pozitivně:
+- Negativně:
+
+## 3. Jaké číslo je podezřelé
+- Metrika:
+- Proč jí nevěříme:
+- Jak ověříme kvalitu dat:
+
+## 4. Jedno rozhodnutí na další měsíc
+- Co uděláme:
+- Proč:
+- Jak poznáme dopad:
+
+## 5. Co přestaneme sledovat
+- Metrika:
+- Důvod:
+```
+
+Nejdůležitější část je poslední. Každý dashboard má tendenci bobtnat. Malý tým potřebuje umět metriky nejen přidávat, ale i mazat.
+
+### Checklist k příloze C
+
+- [ ] Každá důležitá metrika má jasnou definici.
+- [ ] Každá metrika má rozhodnutí, které pomáhá dělat.
+- [ ] Web sleduje kvalitu leadů, ne jen návštěvnost.
+- [ ] SaaS má definovanou aktivaci a time to value.
+- [ ] Marketingové kanály mají hypotézu a časový rámec.
+- [ ] Produktivita týmu se měří tokem práce, ne počtem hodin.
+- [ ] Nové měření prochází privacy-first otázkami.
+- [ ] Měsíční review maže aspoň jednu zbytečnou metriku nebo graf.
+
+---
+
 ## Pracovní log
+- 2026-08-22: Přidána příloha C „Slovník metrik pro web, SaaS a marketing“ s praktickými definicemi webových, SaaS, marketingových a produktivitních metrik, šablonou metrické karty, měsíčním review a privacy-first checklistem.
+
 - 2026-08-22: Přidána příloha B „Šablony pro malé privacy-first týmy“ s projektovým briefem, datovou kartou, landing page review, incident playbookem, měsíčním review, obsahovým release checklistem a údržbou šablon.
 
 - 2026-08-22: Přidána příloha A „30denní akční plán pro privacy-first web a SaaS“ s týdenním postupem, denními úkoly, ukázkami výstupů, checklistem a ověřenými zdroji.
