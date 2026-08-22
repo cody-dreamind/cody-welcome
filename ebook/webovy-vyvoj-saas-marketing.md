@@ -147,6 +147,7 @@ J. Rozhodovací deník pro web, SaaS a marketing
 K. Zpětná vazba od zákazníků bez datového smogu
 L. Redakční systém pro obsah, který přežije kampaň
 M. Retence a mazání dat bez paniky
+N. Předávací protokol pro web a SaaS bez vendor lock-inu
 
 ---
 
@@ -8279,9 +8280,222 @@ Malý tým nemusí mít dokonalý governance proces. Musí mít rytmus. Retence 
 - Zákon o DPH v § 35 uvádí uchovávání daňových dokladů po dobu 10 let od konce zdaňovacího období, ve kterém se plnění uskutečnilo: https://www.zakonyprolidi.cz/cs/2004-235?text=n%C3%A1le%C5%BEitosti+da%C5%88ov%C3%A9ho+dokladu
 - ENISA report „Cybersecurity for SMEs“ doporučuje pravidelné, oddělené, šifrované a testované zálohy a zmiňuje pravidlo 3-2-1: https://www.enisa.europa.eu/publications/enisa-report-cybersecurity-for-smes
 
+## N. Předávací protokol pro web a SaaS bez vendor lock-inu
+
+Předání projektu není slavnostní e-mail s větou „všechno je v repozitáři“. To je jen moderní verze poklepání na server a útěku do západu slunce. Dobré předání znamená, že nový člověk nebo tým dokáže projekt spustit, pochopit, změnit, nasadit, obnovit ze zálohy a bezpečně provozovat bez archeologické expedice v chatech, fakturách a hlavě původního dodavatele.
+
+Pro privacy-first web nebo SaaS je předání ještě důležitější. Nejde jen o kód. Jde o data, přístupy, provozní zodpovědnost, externí služby, retenční pravidla a schopnost odejít od dodavatele bez toho, aby se produkt rozsypal jako sušenka v batohu.
+
+### N.1 Co má být předáno
+
+Předávací protokol berte jako inventář provozuschopnosti. Nemá dokazovat, že projekt existuje. Má dokazovat, že je převzatelný.
+
+Minimální balík:
+
+- **Repozitář a historie:** zdrojový kód, hlavní větev, build instrukce, deploy postup, popis verzování a pravidla pro releasy.
+- **Provozní dokumentace:** domény, DNS, hosting, databáze, e-mailové služby, fronty, úložiště souborů, cron joby, monitoring a logy.
+- **Datová mapa:** jaká osobní a provozní data se sbírají, kde leží, kdo k nim má přístup, jak dlouho se drží a jak se mažou.
+- **Přístupy:** seznam účtů, rolí, vlastníků, servisních účtů, API klíčů a míst, kde se rotují tajemství.
+- **Design a obsah:** Figma nebo jiný zdroj designu, komponenty, texty, obrázky, licence, fonty, ikony a redakční pravidla.
+- **Obchodní kontext:** hlavní cílové skupiny, nabídka, konverze, metriky, aktivní kampaně a rozhodnutí, která ovlivnila podobu produktu.
+- **Exit plán:** jak se projekt dá migrovat jinam, exportovat data, změnit dodavatele a vypnout nepotřebné služby.
+
+Pokud některý bod chybí, není to automaticky průšvih. Průšvih je, když nikdo neví, že chybí.
+
+### N.2 Předávací dokument na jednu stránku
+
+Jednostránkový dokument je lepší než padesátistránkový PDF monument, který nikdo neotevře. Detailní dokumentace může být jinde, ale hlavní mapa má být krátká.
+
+```markdown
+# Předání projektu: [název]
+
+## Stav projektu
+- Produkční URL:
+- Repozitář:
+- Poslední nasazená verze:
+- Odpovědný vlastník:
+- Technický kontakt:
+
+## Jak projekt spustit
+- Lokální spuštění:
+- Testy:
+- Build:
+- Deploy:
+- Rollback:
+
+## Provozní závislosti
+- Hosting:
+- Databáze:
+- E-mail:
+- Analytika:
+- Úložiště:
+- Monitoring:
+
+## Data a privacy
+- Kategorie dat:
+- Externí zpracovatelé:
+- Retence:
+- Export dat:
+- Mazání dat:
+
+## Přístupy a tajemství
+- Kde jsou účty:
+- Kde jsou secrets:
+- Co se musí po předání rotovat:
+- Kdo má produkční přístup:
+
+## Známá rizika
+- Technický dluh:
+- Bezpečnostní rizika:
+- Provozní slabá místa:
+- Neověřené předpoklady:
+
+## Prvních 7 dní po převzetí
+- [ ] Spustit lokálně
+- [ ] Nasadit testovací změnu
+- [ ] Ověřit zálohu a obnovu
+- [ ] Zkontrolovat přístupy
+- [ ] Ověřit datovou mapu
+- [ ] Zapsat první rozhodnutí do deníku
+```
+
+Tenhle dokument se hodí už na začátku spolupráce. Když ho dodavatel neumí vyplnit průběžně, pravděpodobně nestaví předatelný systém, ale závislost na sobě. Což je obchodně chytré pro něj a provozně otravné pro vás. Krásná symetrie, bohužel špatným směrem.
+
+### N.3 Převzetí kódu: nejdřív spustit, potom věřit
+
+U kódu neplatí „předáno“, dokud ho nový člověk nespustí mimo počítač původního autora. Lokální prostředí je často nejrychlejší detektor skrytého chaosu.
+
+Při převzetí ověřte:
+
+- čistý checkout z repozitáře,
+- instalaci závislostí bez ruční magie,
+- lokální spuštění podle dokumentace,
+- běh testů nebo alespoň základní smoke test,
+- build produkční verze,
+- nasazení malé neškodné změny do testovacího prostředí,
+- rollback nebo návrat na předchozí verzi,
+- migrace databáze na prázdném i existujícím prostředí.
+
+Příklad dobré předávací věty:
+
+> Nový vývojář spustil projekt z čistého repozitáře na svém stroji, provedl testovací migraci, nasadil změnu textu do stagingu a ověřil rollback.
+
+Příklad špatné předávací věty:
+
+> Funguje to u nás, jen si musíte nastavit pár věcí.
+
+„Pár věcí“ je technická jednotka pro „nikdo to nezapsal“.
+
+### N.4 Převzetí provozu: komu zvoní alert
+
+Projekt není převzatý, dokud není jasné, kdo ho hlídá. Web nebo SaaS může mít krásný kód, ale když v sobotu spadne formulář a alert chodí na bývalého dodavatele, máte provozní escape room. Bez zábavné části.
+
+Pro každý provozní prvek určete:
+
+| Oblast | Co ověřit | Výstup |
+|---|---|---|
+| Doména a DNS | vlastník domény, přístup, expirace, DNS záznamy | seznam účtů a kritických záznamů |
+| Hosting | region, plán, přístupy, limity, fakturace | provozní karta hostingu |
+| Databáze | zálohy, migrace, přístupy, obnovovací postup | ověřený restore test |
+| E-mail | SPF, DKIM, DMARC, odesílací limity, bounce handling | e-mailová provozní karta |
+| Monitoring | uptime, chyby, výkon, alert kontakty | seznam alertů a vlastníků |
+| Logy | rozsah logování, retence, osobní data | logovací pravidla |
+| Secrets | úložiště tajemství, rotace, přístupové role | seznam rotací po předání |
+| Zálohy | frekvence, šifrování, oddělení, test obnovy | datum posledního úspěšného testu |
+
+U privacy-first projektu přidejte ještě jednu otázku: běží tahle služba v Evropě, nebo aspoň v režimu, který odpovídá datové mapě a smluvním slibům? Když odpověď zní „asi jo“, není to odpověď. Je to kouřový efekt.
+
+### N.5 Přístupová hygiena po předání
+
+Předání bez rotace přístupů je jako koupit byt a nechat původním majitelům klíče, protože „vypadají sympaticky“. Možná ano. Stejně ne.
+
+Po převzetí udělejte do 7 dní:
+
+1. Zrušte účty lidí, kteří projekt dál neprovozují.
+2. Přepněte vlastnictví domén, repozitářů, hostingů a plateb na správnou organizaci.
+3. Otočte API klíče, webhook secrets, deploy tokeny a hesla servisních účtů.
+4. Zkontrolujte, jestli produkční přístup nemá osobní účet místo týmové role.
+5. Zapněte dvoufaktorové ověření tam, kde to jde.
+6. Rozdělte role podle potřeby: vlastník, vývojář, support, finance, analytika.
+7. Zapište, kdo smí přidávat nové uživatele a kdo schvaluje vyšší oprávnění.
+
+Největší varování: sdílený účet typu `admin@firma.cz`, ke kterému má heslo pět lidí a jeden bývalý brigádník. To není provozní efektivita. To je budoucí incident, který si jen ještě nevybral datum.
+
+### N.6 Data: export, migrace a smazání
+
+Předání má zahrnovat nejen „kde data jsou“, ale i „jak je dostaneme ven“. Export není luxus pro enterprise zákazníky. Je to základní svoboda provozu.
+
+Ověřte u každé důležité kategorie dat:
+
+- jak se exportuje,
+- v jakém formátu,
+- kdo export smí spustit,
+- jestli export obsahuje osobní data,
+- jak se export bezpečně předává,
+- jak dlouho export existuje,
+- jak se export smaže,
+- jak se ověří úplnost migrace.
+
+Praktický default pro malé týmy: exporty dělejte ve čitelném formátu jako CSV, JSON nebo ZIP se strukturou složek a `README`. U složitějších dat přidejte slovník polí. Když export pochopí jen původní autor, není to export. Je to hádanka s příponou `.json`.
+
+### N.7 Design, obsah a licence
+
+Hodně předání se tváří technicky, ale web často stojí i na věcech mimo kód: fonty, fotografie, ilustrace, texty, komponenty, šablony, ikony, obchodní argumenty a schvalovací poznámky. Když chybí, nový tým sice spustí build, ale neumí udělat konzistentní změnu.
+
+Předat potřebujete:
+
+- zdrojové design soubory a přístup k nim,
+- pravidla pro barvy, typografii, mezery a komponenty,
+- originály obrázků a jejich licence,
+- seznam externích fontů nebo self-hosted variant,
+- redakční pravidla pro tón komunikace,
+- seznam klíčových stránek a jejich účel,
+- zdroje tvrzení v marketingových textech,
+- proces schválení nové case study nebo reference.
+
+Privacy-first detail: externí fonty, embedované mapy, videa a widgety nejsou jen designové rozhodnutí. Jsou to datové toky. Při předání má být jasné, které z nich jsou opravdu nutné a které se dají self-hostovat, nahradit statickým obrázkem nebo úplně odstranit.
+
+### N.8 Akceptační checklist předání
+
+- [ ] Nový člověk spustil projekt z čistého repozitáře podle dokumentace.
+- [ ] Existuje popsaný build, deploy a rollback.
+- [ ] Produkční URL, domény, DNS a hosting mají jasného vlastníka.
+- [ ] Databáze má ověřenou zálohu a test obnovy.
+- [ ] Datová mapa odpovídá reálnému provozu.
+- [ ] Retenční pravidla jsou zapsaná a technicky proveditelná.
+- [ ] Externí služby mají vlastníka, fakturaci, region a důvod použití.
+- [ ] Secrets jsou uložené mimo repozitář a po předání rotované.
+- [ ] Bývalí dodavatelé nemají nepotřebné produkční přístupy.
+- [ ] Design zdroje, texty, licence a obsahová pravidla jsou dostupné.
+- [ ] Export dat je otestovaný alespoň na malé vzorkové sadě.
+- [ ] Známá rizika jsou zapsaná bez kosmetického mlžení.
+- [ ] Prvních 7 dní po převzetí má konkrétního vlastníka.
+
+### Mini cvičení: předání za 60 minut
+
+1. Otevřete repozitář a zkuste projekt spustit podle dokumentace bez dotazování autora.
+2. Sepište tři věci, které nejsou jasné do 10 minut.
+3. Najděte všechny externí služby, které projekt používá.
+4. U každé napište vlastníka, region, účel a datové kategorie.
+5. Ověřte, kde jsou secrets a kdo je umí rotovat.
+6. Vyberte jednu malou změnu a projděte cestu build → staging → rollback.
+7. Zapište rizika do rozhodovacího deníku a přiřaďte vlastníka.
+
+*Codyho komentář: dobré předání není nedůvěra k dodavateli. Je to profesionální způsob, jak chránit obě strany. Dodavatel nedostává zoufalé telefonáty po půlnoci a klient nezjistí při incidentu, že jediný deploy uměl člověk, který je zrovna na horách bez signálu. Win-win, žádná magie.*
+
+### Zdroje k příloze N
+
+- OWASP Application Security Verification Standard pomáhá strukturovat bezpečnostní požadavky a ověřování aplikací: https://owasp.org/www-project-application-security-verification-standard/
+- OWASP Software Assurance Maturity Model popisuje opakovatelné bezpečnostní praktiky pro vývoj a provoz softwaru: https://owasp.org/www-project-samm/
+- ENISA „Cybersecurity for SMEs“ zdůrazňuje zálohy, aktualizace, řízení přístupů a incident response pro malé a střední organizace: https://www.enisa.europa.eu/publications/enisa-report-cybersecurity-for-smes
+- W3C WCAG 2.2 je praktický referenční rámec pro kontrolu přístupnosti webu při převzetí a údržbě: https://www.w3.org/TR/WCAG22/
+- Mozilla MDN dokumentuje bezpečnostní HTTP hlavičky, které se hodí zařadit do technického předávacího checklistu: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers#security
+
 ---
 
 ## Pracovní log
+- 2026-08-22: Přidána příloha N „Předávací protokol pro web a SaaS bez vendor lock-inu“ s předávací mapou, jednostránkovou šablonou, převzetím kódu a provozu, přístupovou hygienou, exportem dat, designovými zdroji, akceptačním checklistem, mini cvičením a zdroji.
+
 - 2026-08-22: Přidána příloha M „Retence a mazání dat bez paniky“ s retenční maticí, praktickými dobami držení, mazacím workflow, zálohami, produktovými texty, měsíčním úklidem, checklistem, mini cvičením a ověřenými zdroji.
 
 - 2026-08-22: Přidána příloha L „Redakční systém pro obsah, který přežije kampaň“ s redakčním slibem, briefem, kanbanem, review kontrolou, distribuční kartou, měřením bez invazivního trackingu, údržbou obsahu, checklistem, mini cvičením a ověřenými zdroji.
