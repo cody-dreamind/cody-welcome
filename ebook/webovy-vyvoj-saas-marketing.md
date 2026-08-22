@@ -138,6 +138,7 @@ A. 30denní akční plán pro privacy-first web a SaaS
 B. Šablony pro malé privacy-first týmy
 C. Slovník metrik pro web, SaaS a marketing
 D. Privacy-first audit webu za 60 minut
+E. Dodavatelský brief pro privacy-first nástroje a služby
 
 ---
 
@@ -6382,6 +6383,209 @@ Na konci auditu rozdělte nálezy do tří skupin:
 
 ---
 
+## E. Dodavatelský brief pro privacy-first nástroje a služby
+
+Malý tým často nepadne na tom, že by neuměl vybrat nástroj. Padne na tom, že vybere deset nástrojů, každý má jiné podmínky, jiné datové centrum, jiný export, jiné účty, jinou fakturaci a žádný společný důvod, proč v systému vůbec je. Pak přijde první bezpečnostní dotaz od klienta, audit nebo odchod kolegy a najednou se ukáže, že „jen jsme to rychle napojili“ byla ve skutečnosti smlouva s budoucím chaosem.
+
+Tahle příloha je krátký brief, který použijte pokaždé, když chcete přidat nový SaaS nástroj, dodavatele, agenturu, analytiku, chatbot, CRM, e-mailing, hosting, helpdesk, automatizační službu nebo AI kopilota. Neřeší právní detail za advokáta. Řeší provozní disciplínu: víme, proč nástroj potřebujeme, jaká data přes něj tečou, kde jsou uložená, kdo k nim má přístup a jak odejdeme, když se rozhodneme změnit směr.
+
+*Codyho komentář: nástroj bez exit plánu je vztah bez klíčů od vlastního bytu. Romantické možná první týden, pak už spíš operační horor.*
+
+### E.1 Nejprve napište rozhodnutí, ne seznam funkcí
+
+Výběr nástroje nezačínejte tabulkou „má / nemá funkci“. Začněte rozhodnutím, které má nástroj podpořit. Funkce totiž snadno vytvoří iluzi pokroku: tool umí automatizace, segmentace, AI, webhooks, dashboardy a 37 druhů exportu. Jenže pokud nevíte, jaké rozhodnutí z něj má vypadnout, přidáváte jen další vrstvu správy.
+
+Mini brief rozhodnutí:
+
+```markdown
+## Nástroj nebo dodavatel
+Název:
+Vlastník v týmu:
+Datum rozhodnutí:
+
+## Proč ho zvažujeme
+Jaký problém řeší:
+Jak dnes problém řešíme:
+Co se stane, když nástroj nepřidáme:
+
+## Rozhodnutí, která má podporovat
+1.
+2.
+3.
+
+## Časový horizont
+Testujeme do:
+Rozhodneme podle:
+Kdo rozhodne:
+```
+
+Dobrá formulace problému zní třeba: „Potřebujeme zjistit, které typy poptávek se opakují, abychom z nich udělali lepší landing page a support šablony.“ Slabá formulace zní: „Potřebujeme CRM, protože ho mají všichni.“ Všichni mají i chaos v notifikacích. To není benchmark, to je varování.
+
+### E.2 Udělejte datovou mapu před prvním napojením
+
+Každý nový nástroj posuzujte podle dat, ne podle hezkého onboardingového videa. GDPR pracuje s principy jako účelové omezení, minimalizace dat a odpovědnost správce; pro praktický tým to znamená jednoduchou věc: sbírejte jen to, co umíte vysvětlit, ochránit a smazat.
+
+Datová mapa pro nástroj:
+
+| Otázka | Odpověď |
+|---|---|
+| Jaká osobní data do nástroje posíláme? | Například e-mail, IP adresa, jméno, firma, obsah zprávy. |
+| Jaká neosobní, ale citlivá provozní data posíláme? | Například obchodní pipeline, chybové logy, URL neveřejných stránek. |
+| Kdo je interní vlastník dat? | Jeden člověk, ne „marketing“ jako mytická bytost. |
+| Kdo je dodavatel v roli správce nebo zpracovatele? | Zapsat podle smluvního a faktického použití. |
+| Kde jsou data uložena a zpracována? | Země, region, subprocessoři, zálohy. |
+| Jak dlouho data držíme? | Retence podle účelu, ne „navždy, protože disk je levný“. |
+| Jak data smažeme nebo exportujeme? | Konkrétní postup, formát, odpovědnost. |
+| Co se stane při incidentu? | Kontakt, SLA, interní postup, komu voláme jako prvnímu. |
+
+Nejčastější skrytý problém jsou logy a integrace. Tým posuzuje jen hlavní databázi, ale zapomene, že stejná data odchází do error trackingu, e-mailingového nástroje, podpory, analytiky, záloh, webhook queue a AI promptů. Privacy-first provoz znamená sledovat celý tok, ne jen místo, kde se data tváří nejvíc oficiálně.
+
+### E.3 Kritéria výběru: Evropa jako výchozí nastavení
+
+Privacy-first neznamená, že každý nástroj musí být self-hosted a tým má ve sklepě hladit vlastní server. Znamená to, že výchozí otázka je: můžeme to provozovat v Evropě, s jasnou smlouvou, rozumnou minimalizací dat a bez zbytečných trackerů? Pokud ano, nezačínejte hledáním složitější varianty jen proto, že americký nástroj má lesklejší demo.
+
+Použijte vážená kritéria:
+
+| Kritérium | Váha | Co hledáme |
+|---|---:|---|
+| Účel a fit | 25 % | Řeší konkrétní problém, ne jen přidává funkce. |
+| Datová kontrola | 25 % | EU region, jasní subprocessoři, export, smazání, retence. |
+| Bezpečnost | 20 % | MFA, role, audit log, šifrování, incident proces. |
+| Provozní jednoduchost | 15 % | Tým to zvládne spravovat bez nového polovičního úvazku. |
+| Integrace | 10 % | API, webhooks, dokumentace, možnost vypnout části toku. |
+| Cena a exit | 5 % | Cena je pochopitelná a migrace není rukojmí. |
+
+Cena má záměrně malou váhu. Levný nástroj, který rozbije data, proces nebo důvěru, je drahý nástroj v převleku. Naopak dražší evropské řešení s lepší kontrolou nad daty může být obchodně výhodnější, protože sníží tření v B2B prodeji, bezpečnostních dotaznících a interním provozu.
+
+### E.4 Otázky pro dodavatele před podpisem
+
+Dodavateli neposílejte obecné „jak jste na tom s GDPR?“. To je jako zeptat se restaurace, jestli vaří dobře. Odpověď bude ano, a ještě dostanete hezké PDF. Ptejte se konkrétně.
+
+Pošlete tento blok:
+
+```markdown
+Dobrý den,
+
+zvažujeme nasazení vašeho řešení pro [účel]. Potřebujeme doplnit provozní a privacy-first informace:
+
+1. V jakých zemích a regionech ukládáte a zpracováváte zákaznická data?
+2. Jaké subprocessory používáte pro hosting, podporu, analytiku, monitoring a AI funkce?
+3. Lze nastavit EU-only nebo EU-preferred zpracování dat?
+4. Jaký je postup exportu všech zákaznických dat a v jakých formátech?
+5. Jaký je postup úplného smazání dat po ukončení spolupráce?
+6. Jaké role, MFA a auditní logy jsou dostupné v tarifu, který zvažujeme?
+7. Jak informujete zákazníky při bezpečnostním incidentu?
+8. Lze vypnout marketingové trackery, produktovou telemetrii nebo AI zpracování obsahu?
+9. Jak je řešen přístup vašich pracovníků k našim datům?
+10. Kde najdeme aktuální DPA, seznam subprocessorů a bezpečnostní dokumentaci?
+
+Děkuji.
+```
+
+Odpověď uložte vedle rozhodovacího briefu. Ne do osobního e-mailu člověka, který za tři měsíce odejde na Bali hledat produktový smysl v Notion šablonách. Do týmové dokumentace.
+
+### E.5 Testovací režim: sandbox bez zbytečných dat
+
+První test nástroje dělejte s minimem reálných dat. Většina integrací nepotřebuje při pilotu kompletní zákaznickou databázi. Potřebuje ověřit workflow, role, export, webhooky, notifikace a kvalitu výstupů.
+
+Bezpečný pilot:
+
+- použijte testovací projekt nebo samostatný workspace,
+- importujte jen malý vzorek dat nebo anonymizované příklady,
+- vypněte automatické obohacování kontaktů, trackery a AI funkce, pokud nejsou nutné,
+- nastavte role pro konkrétní lidi, ne sdílený účet,
+- otestujte export ještě před tím, než nástroj začnete používat naplno,
+- napište, co přesně se musí stát, aby nástroj přešel do produkčního použití.
+
+Pilot bez kritérií se velmi rychle změní na trvalé řešení. „Necháme to zatím běžet“ je nejčastější název pro neřízenou adopci. Když nástroj po testu neprojde, vypněte ho, smažte data a zapište důvod. I špatný pilot je užitečný, pokud z něj vznikne lepší rozhodnutí.
+
+### E.6 Exit plán napište hned na začátku
+
+Exit plán není pesimismus. Je to hygienické minimum. Tým potřebuje vědět, jak odejde, když nástroj zdraží, změní podmínky, zhorší podporu, přestane dávat smysl nebo se objeví lepší evropská alternativa.
+
+Exit plán na jednu stránku:
+
+```markdown
+## Co musíme umět exportovat
+- Kontakty:
+- Obsah:
+- Nastavení:
+- Historie komunikace:
+- Logy nebo metriky:
+
+## Kam data půjdou
+Cílový systém nebo archiv:
+Formát:
+Vlastník migrace:
+
+## Co musíme vypnout
+- API klíče:
+- Webhooky:
+- DNS nebo skripty:
+- Uživatelé:
+- Fakturace:
+
+## Důkaz ukončení
+Potvrzení smazání:
+Datum:
+Kdo zkontroloval:
+```
+
+U nástrojů, které zasahují do webu, přidejte technickou poznámku: kde je skript vložený, jak se vypíná, jestli existuje fallback a jestli bez něj web funguje. U nástrojů, které pracují s komunikací, přidejte poznámku, jak zachováte historii pro support a právní potřeby bez držení zbytečných osobních dat.
+
+### E.7 Red flags: kdy říct ne
+
+Nástroj nebo dodavatel nemusí být zlý, aby nebyl vhodný. Někdy jen nepasuje do vašeho rizikového profilu. Řekněte ne nebo minimálně zastavte rozhodnutí, pokud:
+
+- dodavatel neumí jasně říct, kde se data zpracovávají,
+- seznam subprocessorů je neúplný nebo schovaný za obchodní kontakt,
+- export existuje jen jako placená služba bez jasného formátu,
+- smazání dat je ruční, nejasné nebo bez potvrzení,
+- MFA, role a audit log jsou dostupné až v extrémně drahém tarifu,
+- AI funkce nejdou vypnout nebo není jasné, zda se obsah používá k tréninku,
+- nástroj vkládá na web externí skripty bez možnosti omezení,
+- obchodník slibuje „GDPR compliant“, ale nedodá DPA ani bezpečnostní dokumentaci,
+- pilot vyžaduje import kompletní databáze,
+- tým neumí určit vlastníka nástroje.
+
+Nejtvrdší pravidlo: pokud neumíte vysvětlit, proč nástroj potřebuje konkrétní osobní data, neposílejte je tam. Nejdřív opravte návrh procesu.
+
+### E.8 Praktický checklist před schválením nástroje
+
+- [ ] Máme napsaný problém, který nástroj řeší.
+- [ ] Máme vlastníka nástroje a datum revize.
+- [ ] Víme, jaká data do nástroje půjdou.
+- [ ] Víme, kde se data ukládají a zpracovávají.
+- [ ] Máme DPA nebo smluvní podklady uložené v dokumentaci.
+- [ ] Zkontrolovali jsme subprocessory.
+- [ ] Nastavili jsme MFA, role a nejmenší potřebná oprávnění.
+- [ ] Vypnuli jsme zbytečnou telemetrii, marketingové trackery a AI zpracování.
+- [ ] Otestovali jsme export před produkčním nasazením.
+- [ ] Máme exit plán a postup smazání dat.
+- [ ] Pilot má konečné datum a kritéria úspěchu.
+- [ ] Nástroj nepřidává novou závislost bez jasné hodnoty.
+
+### Mini cvičení: výběr nástroje za 45 minut
+
+Vyberte jeden nástroj, který tým aktuálně používá nebo zvažuje. Nepouštějte se do všech najednou. To je cesta k tabulce tak velké, že bude potřebovat vlastní governance komisi.
+
+1. **10 minut:** napište problém, účel a vlastníka nástroje.
+2. **10 minut:** vyplňte datovou mapu.
+3. **10 minut:** projděte kritéria výběru a red flags.
+4. **10 minut:** napište tři otázky pro dodavatele nebo interního vlastníka.
+5. **5 minut:** rozhodněte: ponechat, testovat dál, omezit, nahradit nebo vypnout.
+
+Výstupem není perfektní dokumentace. Výstupem je lepší rozhodnutí. A když zjistíte, že nástroj nikdo nevlastní a nikdo neví, proč je napojený na web, máte hotový první úkol: vypnout, zdokumentovat nebo převzít. V tomhle pořadí podle rizika.
+
+### Zdroje k příloze E
+
+- European Commission: [Data protection under GDPR](https://commission.europa.eu/law/law-topic/data-protection_en)
+- European Commission: [Rules for business and organisations](https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations_en)
+- European Data Protection Board: [Guidelines 07/2020 on the concepts of controller and processor in the GDPR](https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-072020-concepts-controller-and-processor-gdpr_en)
+- ENISA: [Cloud security for SMEs](https://www.enisa.europa.eu/publications/cloud-security-for-smes)
+
+---
+
 # Závěr: Udělejte z e-booku pracovní systém
 
 Pokud jste dočetli až sem, gratuluju. Ne proto, že jste hrdinně přežili Codyho tabulky, checklisty a občasné kopnutí do marketingové mlhy. Hlavní pointa je jednodušší: web, SaaS a marketing se nezlepší tím, že si tým jednou přečte dlouhý dokument. Zlepší se tím, že z něj udělá pravidelný pracovní rytmus.
@@ -6512,6 +6716,8 @@ Pak to opravdu udělejte. Ne dokonale. Dokončeně.
 ---
 
 ## Pracovní log
+- 2026-08-22: Přidána příloha E „Dodavatelský brief pro privacy-first nástroje a služby“ s rozhodovacím briefem, datovou mapou, kritérii výběru, otázkami pro dodavatele, pilotním režimem, exit plánem, red flags, checklistem a ověřenými zdroji.
+
 - 2026-08-22: Přidána příloha D „Privacy-first audit webu za 60 minut“ s auditní tabulkou, kontrolou skriptů, formulářů, cookies, externích služeb, konverzí, rozhodovacím plánem a ověřenými zdroji.
 
 - 2026-08-22: Přidána úvodní navigační sekce „Jak e-book používat podle role“ s doporučenými kapitolami, prvními výstupy a checklistem pro zakladatele SaaSu, majitele služeb, marketéry a technické leady.
