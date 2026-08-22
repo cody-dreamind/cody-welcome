@@ -137,6 +137,7 @@ Pozor na typickou past: přidávat nástroje místo odstranění nejasností. Ka
 A. 30denní akční plán pro privacy-first web a SaaS
 B. Šablony pro malé privacy-first týmy
 C. Slovník metrik pro web, SaaS a marketing
+D. Privacy-first audit webu za 60 minut
 
 ---
 
@@ -6210,6 +6211,177 @@ Nejdůležitější část je poslední. Každý dashboard má tendenci bobtnat.
 
 ---
 
+## D. Privacy-first audit webu za 60 minut
+
+Tahle příloha je rychlá kontrola pro web, který už existuje. Neřeší paragrafy do posledního odstavce a nenahrazuje právní audit. Je to provozní kontrola pro tým, který chce během jedné hodiny zjistit, jestli web zbytečně neposílá data ven, netváří se privacy-first jen v patičce a nemá měření slepené metodou „někdo to kdysi přidal do Tag Manageru a radši se neptejme“.
+
+Výstupem není dlouhý dokument. Výstupem má být seznam konkrétních změn: co odstranit, co upravit, co zdokumentovat a co nechat být, protože to má jasný účel.
+
+### D.1 Připravte si auditní tabulku
+
+Vytvořte si jednoduchou tabulku se šesti sloupci:
+
+| Oblast | Co jsme našli | Účel | Data | Riziko | Další krok |
+| --- | --- | --- | --- | --- | --- |
+| Analytika | Umami skript | Návštěvnost a konverze | agregované události | nízké | ponechat, zkontrolovat retenci |
+| Formulář | kontaktní formulář | poptávka | jméno, e-mail, zpráva | střední | zkrátit pole, doplnit text účelu |
+| Embed | YouTube video | ukázka produktu | IP, cookies třetí strany | vyšší | nahradit klikacím náhledem |
+
+Nepopisujte každý soubor v projektu. Popisujte datové dotyky: místa, kde web něco měří, posílá, ukládá nebo načítá od třetí strany.
+
+*Codyho komentář: pokud tabulka během deseti minut vyroste na čtyřicet položek, není to audit. Je to nález archeologického naleziště. Gratuluju, máte marketingový stack z doby bronzové.*
+
+### D.2 Prvních 10 minut: projděte externí skripty
+
+Otevřete web v prohlížeči, zobrazte zdroj stránky a v DevTools zkontrolujte síťové požadavky. Hledejte hlavně:
+
+- analytické skripty,
+- reklamní a remarketingové pixely,
+- chat widgety,
+- vložená videa a mapy,
+- fonty z cizích CDN,
+- A/B testovací nástroje,
+- formulářové a CRM integrace,
+- error tracking a session replay.
+
+U každé položky si položte tři otázky:
+
+1. K čemu přesně ji potřebujeme?
+2. Jaká data posílá mimo náš systém?
+3. Umíme stejný účel splnit jednodušším nebo evropsky provozovaným řešením?
+
+Praktické rozhodování:
+
+- **Ponechat:** skript má jasný účel, rozumná data, dokumentované nastavení a vlastníka.
+- **Omezit:** skript je užitečný, ale sbírá víc dat, než je potřeba, nebo běží na všech stránkách zbytečně.
+- **Nahradit:** skript řeší legitimní potřebu, ale existuje šetrnější varianta.
+- **Smazat:** nikdo neví, proč tam je, nebo jen plní historickou funkci „kdysi jsme chtěli zkusit growth“.
+
+### D.3 Dalších 10 minut: zkontrolujte formuláře
+
+Formulář je často nejcitlivější část jednoduchého webu. Ne proto, že by byl technicky složitý, ale protože lidé do něj dobrovolně píšou kontext, rozpočty, interní problémy a někdy i věci, které by rozhodně neměly končit v pěti SaaS integracích.
+
+Zkontrolujte:
+
+- kolik polí formulář vyžaduje,
+- zda každé pole pomáhá vyřídit poptávku,
+- kam se data po odeslání ukládají,
+- komu přijde notifikace,
+- jestli se zpráva posílá do CRM, e-mailu, chatu nebo task manageru,
+- jestli je u formuláře jasně napsané, proč údaje sbíráte,
+- jestli marketingový souhlas není schovaný v obchodním kontaktu.
+
+Ukázka lepšího textu pod formulářem:
+
+> Údaje použijeme jen k odpovědi na vaši poptávku. Nepřidáme vás automaticky do newsletteru. Pokud spolu začneme řešit projekt, domluvíme si další zpracování dat samostatně.
+
+Tohle není právnický odstavec. Je to lidské vysvětlení. A přesně tak má privacy-first působit: čitelně, klidně a bez pocitu, že na uživatele právě vyskočil formulář z finančního úřadu.
+
+### D.4 Dalších 10 minut: oddělte nutné cookies od pohodlných trackerů
+
+Ne všechny cookies jsou stejné. Některé jsou technicky nutné: třeba session cookie pro přihlášení nebo nastavení jazyka. Jiné slouží analytice, personalizaci, reklamě nebo vloženým službám. Praktický audit proto nezačíná otázkou „máme cookie lištu?“, ale otázkou „co přesně ukládáme do zařízení uživatele a proč?“
+
+Mini inventář:
+
+| Název | Účel | Nutnost | Retence | Třetí strana | Souhlas |
+| --- | --- | --- | --- | --- | --- |
+| session | přihlášení | nutné | session | ne | řešit jako technicky nutné |
+| analytics_id | měření návštěv | nenutné | 13 měsíců | podle nástroje | podle nastavení a jurisdikce ověřit |
+| marketing_pixel | remarketing | nenutné | dle platformy | ano | typicky ano |
+
+V evropském kontextu se vyplatí držet jednoduché pravidlo: co není nutné pro službu, musí mít velmi dobrý důvod, čitelné vysvětlení a správně nastavený režim souhlasu. EDPB popisuje platný souhlas jako svobodný, konkrétní, informovaný a jednoznačný. Evropská komise stejný princip vysvětluje pro jednotlivce jednoduše: člověk má rozumět tomu, s čím souhlasí, a má mít možnost souhlas odvolat.
+
+### D.5 Dalších 10 minut: najděte skrytá třetí místa
+
+Největší překvapení často nejsou v analytice. Jsou v nenápadných závislostech:
+
+- font načítaný z externí CDN,
+- obrázek v e-mailové šabloně z cizí domény,
+- mapa v patičce kontaktu,
+- kalendářový widget pro rezervaci schůzky,
+- live chat, který se načte i na stránce s privacy policy,
+- dokumentace hostovaná mimo hlavní doménu,
+- starý experimentální skript, který už nikdo nevlastní.
+
+U každé externí služby si napište:
+
+- název dodavatele,
+- zemi nebo region provozu,
+- typ dat,
+- důvod použití,
+- alternativu s menším datovým dopadem,
+- vlastníka rozhodnutí.
+
+Nemusíte všechno hned migrovat. Stačí mít mapu. Bez mapy se privacy-first mění v pocit. A pocit se při prvním incidentu mění v „kdo to tam sakra dal?“.
+
+### D.6 Dalších 10 minut: ověřte měření konverzí
+
+Konverze se dají měřit i bez invazivního sledování. Malému webu často stačí:
+
+- agregovaná návštěvnost klíčových stránek,
+- kliknutí na hlavní CTA,
+- odeslání formuláře,
+- stažení PDF nebo checklistu,
+- zdroj kampaně přes UTM parametry,
+- ruční kvalifikace leadu v CRM nebo tabulce.
+
+Zkontrolujte, jestli každá měřená událost odpovídá rozhodnutí. Například:
+
+| Událost | Rozhodnutí |
+| --- | --- |
+| klik na „Domluvit konzultaci“ | testujeme, jestli nabídka motivuje k dalšímu kroku |
+| odeslaný formulář | sledujeme kvalitu a objem poptávek |
+| klik na RSS | ověřujeme zájem o neinvazivní distribuci |
+| otevření case study | rozhodujeme, které důkazy hodnoty dál rozvíjet |
+
+Co nemá rozhodnutí, nemažte automaticky. Nejdřív se zeptejte vlastníka. Pokud žádný vlastník neexistuje, je to silný signál, že měření nejspíš nepotřebujete.
+
+### D.7 Posledních 10 minut: sepište rozhodnutí
+
+Na konci auditu rozdělte nálezy do tří skupin:
+
+**Dnes odstraníme**
+
+- staré pixely bez vlastníka,
+- duplicitní analytické skripty,
+- embedy, které se načítají bez interakce,
+- formulářová pole, která nikdo nepoužívá.
+
+**Tento týden upravíme**
+
+- texty u formulářů,
+- cookie a consent nastavení,
+- dokumentaci datových toků,
+- retenci analytiky a logů,
+- seznam dodavatelů.
+
+**Tento měsíc rozhodneme**
+
+- migraci externích služeb,
+- self-hosted nebo EU-hosted alternativy,
+- sjednocení domén a CDN,
+- interní pravidla pro nové marketingové nástroje.
+
+### Mini checklist: 60minutový audit
+
+- [ ] Víme, jaké externí skripty web načítá.
+- [ ] Každý skript má účel, vlastníka a rozhodnutí ponechat/upravit/smazat.
+- [ ] Formuláře sbírají jen data potřebná pro daný krok.
+- [ ] Marketingový souhlas není spojený s běžnou poptávkou.
+- [ ] Cookies a trackery jsou rozdělené podle účelu a nutnosti.
+- [ ] Embedy třetích stran se nenačítají zbytečně před interakcí.
+- [ ] Konverze se měří agregovaně a podle rozhodnutí, ne ze zvědavosti.
+- [ ] Výstup auditu obsahuje konkrétní změny pro dnešek, týden a měsíc.
+
+### Zdroje k příloze D
+
+- European Data Protection Board: [Guidelines 05/2020 on consent under Regulation 2016/679](https://www.edpb.europa.eu/documents/guideline/guidelines-052020-on-consent-under-regulation-2016679_en)
+- European Commission: [Information for individuals — consent in data protection](https://commission.europa.eu/law/law-topic/data-protection/information-individuals_en)
+- CNIL: [Take into account the legal basis in the technical implementation](https://www.cnil.fr/en/sheet-ndeg15-take-account-legal-basis-technical-implementation)
+- CNIL: [Use analytics on your websites and applications](https://www.cnil.fr/fr/node/677)
+
+---
+
 # Závěr: Udělejte z e-booku pracovní systém
 
 Pokud jste dočetli až sem, gratuluju. Ne proto, že jste hrdinně přežili Codyho tabulky, checklisty a občasné kopnutí do marketingové mlhy. Hlavní pointa je jednodušší: web, SaaS a marketing se nezlepší tím, že si tým jednou přečte dlouhý dokument. Zlepší se tím, že z něj udělá pravidelný pracovní rytmus.
@@ -6340,6 +6512,8 @@ Pak to opravdu udělejte. Ne dokonale. Dokončeně.
 ---
 
 ## Pracovní log
+- 2026-08-22: Přidána příloha D „Privacy-first audit webu za 60 minut“ s auditní tabulkou, kontrolou skriptů, formulářů, cookies, externích služeb, konverzí, rozhodovacím plánem a ověřenými zdroji.
+
 - 2026-08-22: Přidána úvodní navigační sekce „Jak e-book používat podle role“ s doporučenými kapitolami, prvními výstupy a checklistem pro zakladatele SaaSu, majitele služeb, marketéry a technické leady.
 
 - 2026-08-22: Přidán závěr „Udělejte z e-booku pracovní systém“ s týdenním rytmem, měsíční agendou, privacy-first kontrolou, posledním checklistem a mini cvičením pro první iteraci po dočtení.
