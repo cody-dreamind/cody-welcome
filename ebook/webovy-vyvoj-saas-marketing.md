@@ -146,6 +146,7 @@ I. Produktový backlog bez chaosu
 J. Rozhodovací deník pro web, SaaS a marketing
 K. Zpětná vazba od zákazníků bez datového smogu
 L. Redakční systém pro obsah, který přežije kampaň
+M. Retence a mazání dat bez paniky
 
 ---
 
@@ -8091,9 +8092,198 @@ Archivace není prohra. Je to hygiena. Někdy nejlepší obsahová úprava není
 - RSS 2.0 specifikace popisuje základní formát pro nezávislou distribuci obsahu přes feed: https://www.rssboard.org/rss-specification
 - Git dokumentace k branch workflow je užitečná inspirace pro oddělení draftů, review a publikovaných změn i mimo kód: https://git-scm.com/book/en/v2/Git-Branching-Branching-Workflows
 
+## M. Retence a mazání dat bez paniky
+
+Retence dat je nudné téma jen do chvíle, než někdo položí jednoduchou otázku: „Proč tady pořád máme export poptávek z roku 2019, včetně telefonů, poznámek z obchodního hovoru a názvu psa?“ Pak už to nudné není. Pak je to archeologie s právním oddělením v zádech. Krása.
+
+Privacy-first tým nepotřebuje skladovat všechno „pro jistotu“. Potřebuje vědět, která data drží, proč je drží, kdo za ně odpovídá, kdy se mažou a jak se mažou i ze záloh. Retence není jen GDPR tabulka. Je to provozní disciplína, která chrání zákazníky, tým i budoucí migrace.
+
+*Codyho komentář: data jsou jako krabice při stěhování. Když je nepopíšete a nevyhodíte včas, jednou zaplatíte drahou dodávku za převoz věcí, které nikdo nepotřebuje. Jen u dat navíc může přijít úřad, incident nebo nervózní enterprise zákazník.*
+
+### M.1 Rozdělte data podle účelu, ne podle databázové tabulky
+
+První chyba je ptát se: „Jak dlouho držíme tabulku `users`?“ Správná otázka zní: „Jaké účely se v té tabulce potkávají?“ Jeden uživatelský účet může obsahovat přihlašovací údaje, fakturační kontakt, marketingový souhlas, support historii, auditní stopu a technická nastavení. Každá vrstva může mít jinou dobu držení.
+
+Začněte jednoduchou mapou:
+
+- **Identita a účet:** e-mail, jméno, role, tým, stav účtu.
+- **Fakturace:** faktury, daňové doklady, platební stav, adresa firmy.
+- **Produktová data:** projekty, dokumenty, nastavení, importy, výstupy.
+- **Support:** zprávy, přílohy, interní poznámky, souhlas se vzdálenou pomocí.
+- **Marketing:** newsletter souhlas, zdroj registrace, preference komunikace.
+- **Bezpečnost a audit:** přihlášení, změny oprávnění, citlivé administrativní akce.
+- **Technické logy:** chybové logy, request ID, agregované metriky, monitoring.
+- **Zálohy:** snapshoty databází, objektové úložiště, exporty a archivy.
+
+Ke každé kategorii napište účel v jedné větě. Pokud účel nejde napsat bez slov „možná“, „někdy“, „hodilo by se“ nebo „pro jistotu“, pravděpodobně nejde o účel. Jde o digitální syslení.
+
+Praktický příklad:
+
+- **Špatně:** „Data uživatelů držíme pro provoz služby.“
+- **Lépe:** „E-mail aktivního uživatele držíme pro přihlášení, bezpečnostní oznámení a správu účtu.“
+- **Ještě lépe:** „E-mail aktivního uživatele držíme po dobu trvání účtu; po zrušení účtu ho odstraníme z produktové databáze do 30 dnů, pokud není součástí fakturačních dokladů nebo otevřeného právního sporu.“
+
+Tahle formulace hned ukazuje, že retence není jedno číslo. Je to pravidlo s výjimkami, vlastníkem a technickým dopadem.
+
+### M.2 Vytvořte retenční matici na jednu stránku
+
+Retenční matice nemusí být korporátní román. Pro malý SaaS nebo agenturní web stačí tabulka, kterou tým opravdu používá při vývoji, supportu a úklidu dat.
+
+Doporučené sloupce:
+
+## Kategorie dat
+
+Popište data jazykem člověka, ne jen názvem tabulky. Například „poptávky z kontaktního formuláře“, „newsletter souhlasy“, „audit log změn rolí“, „daňové doklady“, „soubory nahrané zákazníkem“.
+
+## Účel
+
+Jedna věta: proč data držíme a jaké rozhodnutí nebo službu umožňují. Účel má být konkrétní. „Analytika“ nestačí. „Měsíční agregované vyhodnocení zdrojů poptávek“ už je použitelné.
+
+## Právní nebo provozní důvod
+
+Rozlišujte smlouvu, oprávněný zájem, souhlas, právní povinnost a čistě technickou potřebu. Nejsem právník v saku, ale produktově platí: když nevíte důvod, nevíte ani dobu držení.
+
+## Doba držení
+
+Uveďte konkrétní pravidlo: „po dobu aktivního účtu“, „90 dní od uzavření ticketu“, „13 měsíců agregovaně“, „10 let u daňových dokladů podle DPH kontextu“. Kde si nejste jistí, napište „ověřit s účetní/právníkem“ a dejte tomu datum. Ne „někdy“.
+
+## Způsob mazání
+
+Popište, jestli jde o fyzické smazání, anonymizaci, pseudonymizaci, agregaci nebo archivaci s omezeným přístupem. Pozor: anonymizace není přejmenování sloupce `email` na `deleted_user`. To je spíš cosplay.
+
+## Vlastník
+
+Každá kategorie má mít člověka nebo roli: produkt, support, finance, technický lead. Bez vlastníka se retenční pravidla mění v dekorativní compliance tapetu.
+
+### M.3 Praktický návrh retenčních dob pro malý web a SaaS
+
+Následující návrh není právní rada. Je to startovní bod pro produktové rozhodnutí, které si upravíte podle služby, smluv, účetnictví a rizika. Když zpracováváte citlivé údaje, zdravotní data, dětská data nebo regulovaný sektor, přestaňte improvizovat a vezměte právníka. Ano, i když má Notion hezkou šablonu.
+
+| Kategorie | Praktický default | Poznámka |
+|---|---:|---|
+| Poptávky z webového formuláře | 6–12 měsíců od poslední reakce | Staré leady bez vztahu raději smažte nebo anonymizujte. |
+| Newsletter souhlas | po dobu odběru + důkaz odhlášení podle potřeby | Držte datum, zdroj a verzi souhlasu; neposílejte bez jasného důvodu. |
+| Support tickety | 12–24 měsíců od uzavření | Přílohy a citlivé údaje mažte dřív, pokud nejsou nutné. |
+| Produktová data aktivního účtu | po dobu trvání účtu | Umožněte export a jasné ukončení. |
+| Produktová data po zrušení účtu | 30–90 dní pro obnovu, pak smazat nebo anonymizovat | Délku napište do podmínek a produktu. |
+| Audit log bezpečnostních akcí | 12–24 měsíců | U citlivějších B2B služeb může být delší doba rozumná, ale zdůvodněná. |
+| Aplikační chybové logy | 14–90 dní | Logy minimalizujte; osobní data do nich ideálně neposílejte vůbec. |
+| Agregovaná analytika | dlouhodobě, pokud nejde o osobní data | Agregace je kamarád. Profilování jednotlivců už méně. |
+| Daňové doklady a účetní záznamy | podle zákonných lhůt | V ČR typicky 10 let pro daňové doklady DPH a účetní závěrky, 5 let pro vybrané účetní záznamy. |
+| Zálohy databáze | podle RPO/RTO, často 14–90 dní | Retence záloh má být kratší než „navždy, protože storage je levná“. |
+
+Největší past je míchat zákonné archivy s produktovou databází. Fakturu musíte uchovat. To ale neznamená, že musíte držet kompletní produktový profil, staré onboardingové odpovědi a pět let starý CSV import v aktivní administraci.
+
+### M.4 Mazání musí být workflow, ne ruční rituál
+
+Ruční mazání funguje přibližně stejně spolehlivě jako novoroční předsevzetí o pravidelném cvičení. První týden dobré, pak přijde release, klient, nemoc, dovolená a najednou máte v databázi fosilie.
+
+Navrhněte mazání jako běžný provozní proces:
+
+1. **Označení stavu:** záznam dostane stav `pending_deletion`, `anonymized`, `deleted` nebo podobný jasný marker.
+2. **Odklad pro obnovu:** u účtů může dávat smysl krátké ochranné okno, například 30 dní.
+3. **Automatický job:** pravidelně najde záznamy po retenční lhůtě a provede akci.
+4. **Auditní stopa:** uloží se minimální důkaz, že mazání proběhlo, bez zbytečného obsahu původních dat.
+5. **Kontrola výjimek:** právní spor, otevřená fakturace nebo bezpečnostní incident může retenci oprávněně prodloužit.
+6. **Report:** měsíčně vidíte počet smazaných, anonymizovaných a blokovaných záznamů.
+
+Příklad produktového pravidla:
+
+> Když zákazník zruší účet, produkt okamžitě vypne přístup, nabídne export, označí produktová data ke smazání za 30 dní, ponechá fakturační doklady v odděleném finančním archivu a po dokončení smaže soubory i vyhledávací index.
+
+Technicky si dejte pozor na odvozená úložiště: fulltext indexy, cache, event streamy, datový sklad, BI exporty, e-mailing nástroj, CRM, helpdesk a lokální CSV u někoho na ploše. Poslední položka je mimochodem oblíbený žánr hororu.
+
+### M.5 Zálohy nejsou výmluva pro věčnou retenci
+
+Zálohy mají obnovit provoz, ne obcházet retenční pravidla. Pokud smažete zákaznická data v produkci, obvykle se nemá smysl pokoušet okamžitě přepisovat všechny historické backup snapshoty. Musíte ale vědět, jak dlouho zálohy žijí, kdo k nim má přístup a co se stane při obnově.
+
+Dobrá backup politika odpovídá na pět otázek:
+
+- Jak často zálohujeme a jaký je přijatelný výpadek dat?
+- Kde zálohy fyzicky a právně leží?
+- Jsou šifrované a oddělené od produkčního prostředí?
+- Jak dlouho je držíme a kdo schvaluje výjimky?
+- Kdy jsme naposledy otestovali obnovu?
+
+ENISA pro malé a střední firmy doporučuje pravidelné a pokud možno automatizované zálohy, oddělení od produkčního prostředí, šifrování a testování obnovy. To je praktický základ. Když záloha nikdy nebyla obnovena, není to záloha. Je to optimistický soubor.
+
+Privacy-first doplněk: po obnově ze starší zálohy spusťte „re-delete“ proces. To znamená, že systém znovu aplikuje log smazání a anonymizací provedených od okamžiku zálohy. Jinak můžete omylem vrátit data, která měla být pryč.
+
+### M.6 Retence v produktu: ukažte pravidla lidem
+
+Retenční pravidla nemají žít jen v interní dokumentaci. Uživatelé a zákazníci mají rozumět tomu, co se stane s jejich daty.
+
+Dobré produktové texty:
+
+- u exportu řeknou, co export obsahuje a co ne,
+- u zrušení účtu vysvětlí, kdy data zmizí,
+- u fakturace oddělí produktová data od zákonných dokladů,
+- u supportu upozorní, ať lidé neposílají citlivé údaje zbytečně,
+- u analytiky popíšou agregované měření bez osobního profilování,
+- u záloh přiznají retenční okno bez falešného slibu okamžitého vymazání ze všech snapshotů.
+
+Ukázka textu pro zrušení účtu:
+
+> Po zrušení účtu vám dáme 30 dní na stažení exportu. Poté odstraníme produktová data z aktivních systémů. Fakturační doklady uchováváme odděleně po dobu vyžadovanou právními předpisy. Zálohy se přepisují podle našeho retenčního cyklu a při případné obnově znovu aplikujeme záznamy o smazání.
+
+Tohle je lepší než mlhavé „Vaše soukromí bereme vážně“. Tu větu by měli zakázat používat všem, kdo zároveň vkládají na web sedmnáct marketingových pixelů. Codyho malé legislativní okénko, děkuji.
+
+### M.7 Měsíční úklid dat za 30 minut
+
+Jednou měsíčně udělejte krátký úklid. Ne jako velký audit s fanfárami. Jako provozní hygienu.
+
+Agenda:
+
+1. Otevřete retenční matici.
+2. Zkontrolujte nové formuláře, integrace a exporty za poslední měsíc.
+3. Najděte datovou kategorii bez vlastníka nebo lhůty.
+4. Projděte mazací job: běžel, selhal, nebo tiše trucoval?
+5. Zkontrolujte počet záznamů po lhůtě.
+6. Ověřte jednu obnovu ze zálohy nebo aspoň její poslední test.
+7. Zapište jedno rozhodnutí: smazat, zkrátit retenci, oddělit archiv, upravit texty.
+
+Malý tým nemusí mít dokonalý governance proces. Musí mít rytmus. Retence bez rytmu se mění v jednorázovou akci před auditem. A jednorázové akce před auditem jsou drahý sport.
+
+### Praktický checklist retence a mazání
+
+- [ ] Máme mapu kategorií dat podle účelu.
+- [ ] Každá kategorie má vlastníka.
+- [ ] Každá kategorie má retenční dobu nebo úkol „ověřit“ s datem.
+- [ ] Oddělujeme produktová data, fakturační doklady, support a technické logy.
+- [ ] U zrušení účtu máme jasný exportní a mazací proces.
+- [ ] Mazání běží automaticky nebo v pravidelném provozním rytmu.
+- [ ] Umíme vysvětlit, co se maže, anonymizuje, archivuje nebo drží kvůli právní povinnosti.
+- [ ] Zálohy mají vlastní retenční dobu a test obnovy.
+- [ ] Po obnově ze zálohy umíme znovu aplikovat smazání.
+- [ ] Produktové texty neslibují víc, než technicky umíme splnit.
+- [ ] Měsíčně kontrolujeme nové datové toky a exporty.
+- [ ] Staré CSV exporty a lokální kopie nejsou mimo pravidla jen proto, že „jsou bokem“.
+
+### Mini cvičení: retenční matice za 45 minut
+
+1. Vyberte jeden formulář, jednu databázovou tabulku a jednu externí službu.
+2. Sepište všechny kategorie dat, které se v nich objevují.
+3. Ke každé napište účel jednou větou.
+4. Označte zákonnou, smluvní, provozní nebo marketingovou potřebu.
+5. Navrhněte retenční dobu.
+6. Vyberte jednu kategorii, kterou můžete smazat nebo anonymizovat už tento týden.
+7. Přidejte pravidlo do rozhodovacího deníku a retenční matice.
+
+*Codyho komentář: nejlepší retenční politika je ta, která se vejde na jednu stránku a někdo ji opravdu používá. Nejhorší je ta, která má třicet stran, žije ve složce „Compliance final final v3“ a nikdo neví, jestli platí.*
+
+### Zdroje k příloze M
+
+- Evropská komise shrnuje principy GDPR včetně minimalizace dat a omezení uložení: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
+- EDPB Guidelines 4/2019 k Article 25 GDPR vysvětlují data protection by design and by default: https://www.edpb.europa.eu/documents/guideline/guidelines-42019-on-article-25-data-protection-by-design-and-by-default_en
+- Finanční správa popisuje standardní lhůty úschovy účetních záznamů, včetně 10 let pro účetní závěrku a výroční zprávu a 5 let pro vybrané účetní záznamy: https://financnisprava.gov.cz/cs/dane/dane/dan-z-prijmu/ucetnictvi/obecne-informace
+- Zákon o DPH v § 35 uvádí uchovávání daňových dokladů po dobu 10 let od konce zdaňovacího období, ve kterém se plnění uskutečnilo: https://www.zakonyprolidi.cz/cs/2004-235?text=n%C3%A1le%C5%BEitosti+da%C5%88ov%C3%A9ho+dokladu
+- ENISA report „Cybersecurity for SMEs“ doporučuje pravidelné, oddělené, šifrované a testované zálohy a zmiňuje pravidlo 3-2-1: https://www.enisa.europa.eu/publications/enisa-report-cybersecurity-for-smes
+
 ---
 
 ## Pracovní log
+- 2026-08-22: Přidána příloha M „Retence a mazání dat bez paniky“ s retenční maticí, praktickými dobami držení, mazacím workflow, zálohami, produktovými texty, měsíčním úklidem, checklistem, mini cvičením a ověřenými zdroji.
+
 - 2026-08-22: Přidána příloha L „Redakční systém pro obsah, který přežije kampaň“ s redakčním slibem, briefem, kanbanem, review kontrolou, distribuční kartou, měřením bez invazivního trackingu, údržbou obsahu, checklistem, mini cvičením a ověřenými zdroji.
 
 - 2026-08-22: Přidána příloha K „Zpětná vazba od zákazníků bez datového smogu“ se zákaznickými rozhovory, jednou otázkou na webu, tříděním signálů, měsíční syntézou, privacy-first pravidly, checklistem a mini cvičením.
