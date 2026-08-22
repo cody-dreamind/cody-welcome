@@ -148,6 +148,7 @@ K. Zpětná vazba od zákazníků bez datového smogu
 L. Redakční systém pro obsah, který přežije kampaň
 M. Retence a mazání dat bez paniky
 N. Předávací protokol pro web a SaaS bez vendor lock-inu
+O. 14denní onboardingový plán pro B2B SaaS bez datového přejídání
 
 ---
 
@@ -8493,7 +8494,186 @@ Privacy-first detail: externí fonty, embedované mapy, videa a widgety nejsou j
 
 ---
 
+## O. 14denní onboardingový plán pro B2B SaaS bez datového přejídání
+
+Onboarding není prohlídka všech funkcí. Je to řízená cesta k prvnímu prokazatelnému výsledku. U B2B SaaSu to často není „uživatel klikl na tři tlačítka“, ale něco mnohem praktičtějšího: tým pozval kolegu, nahrál první data, vytvořil první projekt, nastavil integraci, poslal první report nebo vyřešil první reálný případ.
+
+Dobře navržený onboarding má dvě vlastnosti: vede zákazníka k hodnotě a zároveň nesbírá víc dat, než je potřeba. To druhé je důležité nejen kvůli privacy-first provozu, ale i kvůli konverzi. Každé zbytečné pole, povinná integrace nebo „jen pro personalizaci“ otázka je malá brzda. A když jich nasypete dost, máte z onboardingového flow digitální překážkovou dráhu.
+
+### O.1 Nejdřív pojmenujte aktivační moment
+
+Aktivační moment je první jasný důkaz, že uživatel pochopil hodnotu produktu a udělal krok, který ji odemyká. Nemusí to být platba. Nemusí to být ani dokončený účet. Musí to být akce, po které je mnohem pravděpodobnější, že zákazník bude pokračovat.
+
+Příklady aktivačních momentů:
+
+| Typ SaaSu | Slabý aktivační moment | Lepší aktivační moment |
+| --- | --- | --- |
+| projektové řízení | vytvořený účet | první projekt se dvěma úkoly a pozvaným kolegou |
+| analytika | vložený tracking kód | první dashboard s reálnou událostí a pojmenovaným rozhodnutím |
+| helpdesk | přihlášení do aplikace | první vyřešený ticket s uloženou odpovědí |
+| fakturace | vyplněný profil | první vystavený nebo importovaný doklad |
+| dokumentace | vytvořený workspace | první publikovaná stránka a interní odkaz |
+
+Praktické pravidlo: aktivační moment má být měřitelný, srozumitelný týmu a přímo napojený na hodnotu, kterou zákazník kupuje. Pokud je aktivační moment „uživatel prošel welcome tour“, pravděpodobně měříte výlet, ne hodnotu.
+
+### O.2 Rozdělte prvních 14 dní na tři fáze
+
+Nemusíte uživateli vysvětlit celý produkt během první hodiny. Naopak: čím víc toho ukážete najednou, tím víc odpovědnosti přesunete na něj. Malý B2B tým obvykle potřebuje jasnou sekvenci.
+
+| Fáze | Dny | Cíl | Co nechat na později |
+| --- | --- | --- | --- |
+| Start | 0–1 | účet, základní kontext, první akce | pokročilé role, kompletní profil, všechny integrace |
+| Hodnota | 2–7 | první výsledek v reálném workflow | exporty, detailní reporting, automatizace okrajových scénářů |
+| Zvyk | 8–14 | opakované použití, týmové zapojení, další krok | enterprise nastavení, kosmetické preference, dlouhé školení |
+
+Tahle tabulka je užitečná hlavně při produktových debatách. Když někdo navrhne nové onboardingové pole, zeptejte se: pomáhá to fázi Start, Hodnota nebo Zvyk? Pokud ne, pryč s tím. Tedy do backlogu. Nejsme barbaři, jen nechceme z registračního formuláře dělat výslech.
+
+### O.3 Den 0: registrace bez zbytečného sběru dat
+
+První formulář má být co nejkratší. U B2B SaaSu většinou stačí:
+
+- pracovní e-mail,
+- heslo nebo bezpečné přihlášení,
+- název organizace,
+- souhlas s podmínkami,
+- volitelně jeden kontextový údaj, který opravdu mění první zkušenost.
+
+Co odložit:
+
+- telefon,
+- fakturační údaje,
+- velikost firmy,
+- marketingový rozpočet,
+- detailní segment,
+- povinné pozvání celého týmu,
+- povinné napojení kalendáře, CRM nebo účetnictví.
+
+Privacy-first onboarding má jednoduchý slib: „Nejdřív vám ukážeme hodnotu, potom si řekneme o další data, až budou potřeba.“ Tohle není jen etika. Je to i lepší produktová psychologie. Uživatel snáz poskytne data ve chvíli, kdy chápe, co za ně dostane.
+
+Ukázka mikrotextu:
+
+```md
+Název organizace používáme jen pro vytvoření vašeho pracovního prostoru.
+Fakturační údaje budeme chtít až při přechodu na placený tarif.
+```
+
+### O.4 Dny 1–3: jeden hlavní úkol, ne produktová exkurze
+
+První obrazovka po registraci má odpovědět na tři otázky:
+
+1. Kde jsem?
+2. Co mám udělat teď?
+3. Proč mi to pomůže?
+
+Místo univerzálního dashboardu zkuste „startovací úkol“. Například:
+
+- vytvořte první projekt,
+- importujte jeden soubor,
+- napište první znalostní článek,
+- přidejte první formulář,
+- nastavte první pravidlo,
+- pozvěte jednoho kolegu, pokud je týmová spolupráce součást hodnoty.
+
+Špatný onboarding říká: „Tady je 12 modulů, hodně štěstí.“ Dobrý onboarding říká: „Začněte tímhle jedním krokem, za tři minuty uvidíte první výsledek.“
+
+### O.5 Dny 4–7: pomozte dokončit první reálný výstup
+
+V téhle fázi už uživatel pravděpodobně ví, co produkt dělá, ale pořád neví, jestli se mu vyplatí změnit návyk. Cílem je dostat ho k výsledku, který může ukázat kolegovi, klientovi nebo šéfovi.
+
+Praktické prvky:
+
+- šablona prvního projektu nebo dokumentu,
+- ukázková data, která lze jedním klikem smazat,
+- checklist „dokončeno, když…“,
+- contextual help přímo u složitějších nastavení,
+- krátký e-mail s jedním doporučeným krokem,
+- možnost rezervovat pomoc bez nátlaku.
+
+Příklad e-mailu:
+
+```md
+Předmět: Dokončete první report za 10 minut
+
+Ahoj,
+váš workspace je připravený. Nejrychlejší další krok je vytvořit první report
+ze šablony „Měsíční přehled“.
+
+Potřebujete k tomu jen:
+1. vybrat zdroj dat,
+2. pojmenovat report,
+3. zkontrolovat první graf.
+
+Žádné fakturační údaje zatím nechceme. Ty řešíme až při přechodu na placený tarif.
+```
+
+Ano, e-mail je nudně konkrétní. Přesně proto funguje líp než „Objevte všechny možnosti naší platformy“. To je věta, po které uživatel objevuje hlavně tlačítko archivovat.
+
+### O.6 Dny 8–14: převeďte jednorázové použití na rytmus
+
+Po prvním výsledku přichází nejtěžší část: zvyk. Uživatel se má vrátit ne proto, že jste mu poslali pět notifikací, ale protože produkt zapadl do reálného pracovního rytmu.
+
+Pomáhá:
+
+- týdenní souhrn s užitečnými změnami, ne vanity statistikami,
+- připomenutí nedokončeného výstupu s jasným důvodem,
+- návrh dalšího kroku podle stavu účtu,
+- pozvání kolegy až ve chvíli, kdy existuje něco, co má kolega vidět,
+- jednoduchá cesta k exportu nebo sdílení výsledku,
+- otázka na zpětnou vazbu po konkrétním použití.
+
+Privacy-first varování: personalizace nemusí znamenat skryté profilování. Často stačí stav účtu a poslední nedokončený úkol. Nepotřebujete sledovat každý pohyb myši, náladu v kalendáři a horoskop oddělení nákupu. I když by z toho šel udělat nádherně děsivý dashboard.
+
+### O.7 Onboardingová metrická karta
+
+Měřte jen metriky, ze kterých plyne rozhodnutí. Doporučená karta:
+
+| Metrika | Otázka | Rozhodnutí |
+| --- | --- | --- |
+| dokončení registrace | kde lidé odpadají před účtem? | zkrátit formulář, upravit validaci, vysvětlit důvod pole |
+| čas k první akci | jak rychle uživatel začne? | změnit první obrazovku, odstranit rušení |
+| dosažení aktivačního momentu | kolik účtů dojde k první hodnotě? | upravit startovací úkol, šablonu nebo pomoc |
+| návrat v prvních 7 dnech | má produkt důvod k opakovanému použití? | přidat rytmus, souhrn nebo další krok |
+| pozvání kolegy | vzniká týmová hodnota? | lépe načasovat pozvánku nebo vysvětlit spolupráci |
+| první support dotaz | kde je největší nejistota? | doplnit mikrotext, šablonu nebo nápovědu |
+
+Nesbírejte metriky „protože se můžou hodit“. V onboardingové fázi umí malé množství kvalitních signálů říct víc než oceán událostí s názvy typu `button_click_17_final_final_v2`.
+
+### O.8 Checklist 14denního onboardingu
+
+- [ ] Máme pojmenovaný aktivační moment pro hlavní segment.
+- [ ] Registrace žádá jen data nutná pro první hodnotu.
+- [ ] Každé povinné pole má jasný důvod.
+- [ ] První obrazovka vede k jedné hlavní akci.
+- [ ] Welcome tour nevysvětluje funkce, ale pomáhá dokončit úkol.
+- [ ] Uživatel dostane šablonu nebo příklad, ne prázdnou plochu.
+- [ ] E-maily v prvních 14 dnech mají vždy jeden konkrétní další krok.
+- [ ] Pozvání kolegy je načasované až po vytvoření hodnoty.
+- [ ] Fakturační údaje se nevyžadují dřív, než jsou opravdu potřeba.
+- [ ] Ukázková data lze snadno smazat.
+- [ ] Onboardingové události jsou popsané v datové mapě.
+- [ ] Metriky se používají pro rozhodnutí, ne pro dekoraci reportu.
+- [ ] Existuje jednoduchý export nebo sdílení prvního výsledku.
+- [ ] Po 14 dnech víme, co zlepšit v další iteraci.
+
+### Mini cvičení: 45 minut nad vaším onboardingem
+
+1. Napište jednu větu: „Uživatel je aktivovaný, když…“
+2. Otevřete registrační formulář a vyškrtněte všechno, co není nutné do prvního výsledku.
+3. Nakreslete první tři obrazovky po registraci.
+4. U každé obrazovky napište jednu hlavní akci.
+5. Sepište první tři e-maily nebo zprávy v aplikaci.
+6. U každé zprávy smažte vše, co nevede k dalšímu kroku.
+7. Vyberte tři onboardingové metriky a napište, jaké rozhodnutí podle nich uděláte.
+
+Výstupem má být jedna stránka: aktivační moment, první úkol, první týdenní rytmus, metriky a data, která opravdu potřebujete. Když se nevejde na jednu stránku, nejspíš jste zase začali onboardovat celý produkt najednou. Klid. Produkt vám neuteče. Uživatel možná ano.
+
+*Codyho komentář: nejlepší onboarding působí skoro neviditelně. Uživatel nemá pocit, že byl „proveden funnelovou optimalizací“. Má pocit, že se rychle dostal k výsledku. Což je, překvapivě, přesně pointa.*
+
+---
+
 ## Pracovní log
+- 2026-08-22: Přidána příloha O „14denní onboardingový plán pro B2B SaaS bez datového přejídání“ s aktivačním momentem, fázemi prvních 14 dní, minimalizací dat, onboardingovými zprávami, metrickou kartou, checklistem a mini cvičením.
+
 - 2026-08-22: Přidána příloha N „Předávací protokol pro web a SaaS bez vendor lock-inu“ s předávací mapou, jednostránkovou šablonou, převzetím kódu a provozu, přístupovou hygienou, exportem dat, designovými zdroji, akceptačním checklistem, mini cvičením a zdroji.
 
 - 2026-08-22: Přidána příloha M „Retence a mazání dat bez paniky“ s retenční maticí, praktickými dobami držení, mazacím workflow, zálohami, produktovými texty, měsíčním úklidem, checklistem, mini cvičením a ověřenými zdroji.
