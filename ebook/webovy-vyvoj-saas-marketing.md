@@ -143,6 +143,7 @@ F. AI asistenti v malém týmu bez úniku dat
 G. Údržbový kalendář pro web, SaaS a marketing
 H. 90minutový workshop: převod e-booku do akčního plánu
 I. Produktový backlog bez chaosu
+J. Rozhodovací deník pro web, SaaS a marketing
 
 ---
 
@@ -7404,6 +7405,153 @@ Nezdravý backlog poznáte podle vět jako „to tam necháme, třeba se to bude
 
 ---
 
+## J. Rozhodovací deník pro web, SaaS a marketing
+
+Malé týmy často netrpí tím, že by měly málo nápadů. Trpí tím, že se dobrá rozhodnutí ztratí v chatu, na poradě, v hlavě jednoho člověka nebo v komentáři u úkolu, který za měsíc nikdo nenajde. Rozhodovací deník je jednoduchý způsob, jak z webu, SaaS a marketingu udělat systém, který se učí.
+
+Není to těžká korporátní dokumentace. Je to krátký záznam: co jsme se rozhodli, proč, podle čeho poznáme dopad a jaké datové riziko tím vzniká. Když se za tři měsíce vrátíte k otázce „proč jsme to vlastně udělali?“, deník zabrání archeologii v Slacku. Lidstvo tím možná nezachráníme, ale týmu ušetříme pár šedivých vlasů.
+
+### J.1 Co do deníku patří
+
+Zapisujte jen rozhodnutí, která mění směr, náklady, data nebo provozní odpovědnost. Deník nemá být katalog každé drobné úpravy tlačítka. Má zachytit věci, ke kterým se budete chtít vrátit, až přijde první problém, audit, redesign nebo nový člověk v týmu.
+
+Typická rozhodnutí:
+
+- změna positioningu nebo hlavní nabídky,
+- nový formulář, integrace nebo datový tok,
+- změna primární konverze na webu,
+- nasazení analytiky, CRM, e-mailingu nebo support nástroje,
+- změna pricingu, trialu nebo platebního procesu,
+- rozhodnutí o hostingu, zálohách, logování nebo monitoringu,
+- spuštění nové kampaně s měřením dopadu,
+- vypnutí nástroje, který už nemá jasný účel.
+
+Pravidlo: pokud rozhodnutí sbírá data, mění zákaznickou cestu nebo zvyšuje provozní závislost, patří do deníku. Pokud jen opravuje překlep, patří do commitu a hotovo.
+
+### J.2 Jedna karta rozhodnutí
+
+Používejte stejný formát pokaždé. Díky tomu deník nezestárne do chaosu, který bude připomínat půdu po babičce, jen s více UTM parametry.
+
+```md
+# Rozhodnutí: [krátký název]
+
+## Kontext
+- Jaký problém řešíme:
+- Koho se týká:
+- Co se stane, když nerozhodneme:
+
+## Možnosti
+- Varianta A:
+- Varianta B:
+- Varianta C:
+
+## Rozhodnutí
+- Vybraná varianta:
+- Proč právě teď:
+- Kdo rozhodl:
+- Datum:
+
+## Důkaz dopadu
+- Jaká metrika nebo signál se má změnit:
+- Kdy se k rozhodnutí vrátíme:
+- Co by znamenalo, že rozhodnutí nefunguje:
+
+## Privacy-first kontrola
+- Jaká data rozhodnutí používá:
+- Kde data běží:
+- Kdo má přístup:
+- Jak dlouho data držíme:
+- Co můžeme nesbírat:
+
+## Následky
+- Co musíme upravit v dokumentaci:
+- Co musíme oznámit týmu nebo zákazníkům:
+- Jaký je plán návratu zpět:
+```
+
+Karta má být krátká. Když vyplňování trvá déle než samotné rozhodnutí, něco je špatně. Cílem není vytvořit literaturu faktu. Cílem je zachytit důvod a hranice rozhodnutí.
+
+### J.3 Příklad: nový formulář pro poptávky
+
+```md
+# Rozhodnutí: Zkrátit hlavní poptávkový formulář
+
+## Kontext
+- Jaký problém řešíme: Lidé opouštějí formulář a část polí nepoužíváme při odpovědi.
+- Koho se týká: Noví B2B zájemci a obchodní tým.
+- Co se stane, když nerozhodneme: Budeme dál sbírat data, která nepotřebujeme, a pravděpodobně ztrácet poptávky.
+
+## Možnosti
+- Varianta A: Nechat formulář beze změny.
+- Varianta B: Zkrátit formulář na jméno, e-mail, web a popis situace.
+- Varianta C: Nahradit formulář rezervačním kalendářem.
+
+## Rozhodnutí
+- Vybraná varianta: B.
+- Proč právě teď: Chceme snížit tření a minimalizovat sběr dat.
+- Kdo rozhodl: Produkt + obchod.
+- Datum: 2026-08-22.
+
+## Důkaz dopadu
+- Jaká metrika nebo signál se má změnit: Dokončení formuláře a kvalita odpovědí.
+- Kdy se k rozhodnutí vrátíme: Za 30 dní.
+- Co by znamenalo, že rozhodnutí nefunguje: Více nekvalitních poptávek nebo horší schopnost odpovědět.
+
+## Privacy-first kontrola
+- Jaká data rozhodnutí používá: Kontaktní údaje a dobrovolný popis situace.
+- Kde data běží: V e-mailu a interním CRM pod kontrolou týmu.
+- Kdo má přístup: Obchod a člověk odpovědný za poptávky.
+- Jak dlouho data držíme: Podle interní retenční politiky pro obchodní komunikaci.
+- Co můžeme nesbírat: Telefon, rozpočet, velikost firmy a marketingové souhlasy v prvním kroku.
+
+## Následky
+- Co musíme upravit v dokumentaci: Datovou mapu a text pod formulářem.
+- Co musíme oznámit týmu nebo zákazníkům: Týmu stačí krátká poznámka v měsíčním review.
+- Jaký je plán návratu zpět: Přidat jedno pole jen tehdy, když chybějící informace opakovaně brzdí odpověď.
+```
+
+Všimněte si, že karta neřeší barvu tlačítka ani interní vkus. Řeší problém, data, důkaz a návratnost rozhodnutí. To je přesně ta nudná disciplína, která v provozu dělá rozdíl.
+
+### J.4 Kde deník držet
+
+Vyberte místo, které tým opravdu používá. Rozhodovací deník může být:
+
+- složka v repozitáři, například `docs/decisions`,
+- stránka v interní dokumentaci,
+- tabulka s odkazy na detailní karty,
+- součást produktového workspace, pokud má jasná pravidla a export.
+
+Privacy-first doporučení: pokud rozhodnutí obsahují informace o zákaznících, incidentech nebo dodavatelích, nedávejte je do nástroje jen proto, že je pohodlný. Zkontrolujte přístupy, export, region provozu a retenční pravidla. Rozhodovací deník je firemní paměť, ne veřejná nástěnka na náměstí.
+
+### J.5 Napojení na práci týmu
+
+Deník funguje jen tehdy, když se používá v běžném rytmu. Přidejte ho do tří míst:
+
+1. **Před větší změnou:** položka v backlogu má odkaz na návrh rozhodnutí.
+2. **Po dokončení změny:** karta dostane datum revize a důkaz dopadu.
+3. **Při měsíčním review:** tým projde rozhodnutí, která mají být vyhodnocena.
+
+Tím se z deníku nestane archiv, ale řídicí panel rozhodnutí. Když se ukáže, že změna nepomohla, není to selhání. Je to signál k úpravě. Horší je nemít záznam a jen matně tušit, že „někdy jsme něco měnili, myslím že kvůli konverzím“.
+
+### J.6 Checklist rozhodovacího deníku
+
+- [ ] Máme jedno místo, kde jsou důležitá rozhodnutí dohledatelná.
+- [ ] Každá karta má kontext, možnosti, rozhodnutí, důkaz a privacy-first kontrolu.
+- [ ] U každého rozhodnutí je vlastník a datum návratu.
+- [ ] Rozhodnutí, která sbírají data, mají popsaný účel, přístup a retenci.
+- [ ] Backlog položky odkazují na rozhodnutí, pokud mění směr nebo provoz.
+- [ ] Měsíční review kontroluje stará rozhodnutí, ne jen nové nápady.
+- [ ] Umíme říct, která rozhodnutí se ukázala jako špatná a co jsme změnili.
+- [ ] Deník jde exportovat a přežije změnu nástroje.
+
+### Mini cvičení: první rozhodnutí za 20 minut
+
+Vyberte jedno aktuální rozhodnutí, které se teď v týmu motá v chatu. Třeba nový formulář, nový obsahový kanál, změnu pricingu nebo nasazení analytiky. Vyplňte kartu rozhodnutí jen v bodech. Pak smažte polovinu textu a nechte jen to, co pomůže budoucímu týmu pochopit kontext.
+
+*Codyho komentář: rozhodovací deník není proto, aby měl tým víc administrativy. Je proto, aby za půl roku nemusel opakovat stejné debaty se stejnými argumenty a novým optimismem. Optimismus je fajn. Cache rozhodnutí je lepší.*
+
+---
+
 # Závěr: Udělejte z e-booku pracovní systém
 
 Pokud jste dočetli až sem, gratuluju. Ne proto, že jste hrdinně přežili Codyho tabulky, checklisty a občasné kopnutí do marketingové mlhy. Hlavní pointa je jednodušší: web, SaaS a marketing se nezlepší tím, že si tým jednou přečte dlouhý dokument. Zlepší se tím, že z něj udělá pravidelný pracovní rytmus.
@@ -7534,6 +7682,8 @@ Pak to opravdu udělejte. Ne dokonale. Dokončeně.
 ---
 
 ## Pracovní log
+- 2026-08-22: Přidána příloha J „Rozhodovací deník pro web, SaaS a marketing“ s kartou rozhodnutí, příkladem formuláře, napojením na backlog a měsíční review, privacy-first kontrolou a checklistem.
+
 - 2026-08-22: Přidána příloha I „Produktový backlog bez chaosu“ s kartou backlog položky, typy práce, jednoduchým prioritizačním skóre, limity rozpracované práce, týdenním rituálem, privacy-first pravidly, checklistem a zdroji.
 
 - 2026-08-22: Přidána příloha H „90minutový workshop: převod e-booku do akčního plánu“ s agendou, rolí moderátora, privacy-first kontrolou, šablonou výstupu, příkladem hotového zápisu a checklistem.
