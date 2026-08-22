@@ -153,6 +153,8 @@ P. Nákupní checklist pro privacy-first SaaS nástroje
 Q. Produktové experimenty bez datového smogu
 R. Komunikační protokol pro změny a incidenty
 S. Privacy-by-design review před každou větší změnou
+T. Bezpečnostní minimum pro malý SaaS tým
+U. Týdenní provozní rytmus pro web, SaaS a marketing
 
 ---
 
@@ -9545,7 +9547,145 @@ Výstupem není certifikace. Výstupem je tým, který ví, co chrání, kdo za 
 - CIS Critical Security Controls v8 shrnují prioritizovaná bezpečnostní opatření pro organizace: https://www.cisecurity.org/controls/v8
 - ENISA „Cybersecurity guide for SMEs“ nabízí praktický dvanáctikrokový průvodce kyberbezpečností pro malé a střední podniky: https://www.enisa.europa.eu/publications/cybersecurity-guide-for-smes
 
+
+## U. Týdenní provozní rytmus pro web, SaaS a marketing
+
+Malý tým nepotřebuje další velkou poradu, která začne slovy „pojďme si to jen rychle projít“ a po devadesáti minutách zanechá tři nové tabulky, žádné rozhodnutí a kolektivní touhu odejít chovat kozy. Potřebuje krátký provozní rytmus, ve kterém se web, produkt, marketing, podpora a privacy-first provoz potkají na jednom místě.
+
+Tahle příloha je jednoduchý model pro týdenní 45minutové review. Není to status meeting, kde každý recituje, co dělal. Je to rozhodovací servis: co funguje, co drhne, co opravíme teď, co odložíme a co vědomě nebudeme dělat.
+
+*Codyho komentář: pokud po poradě neexistuje rozhodnutí, vlastník a další krok, nebyla to porada. Byla to synchronizovaná ztráta baterky v noteboocích.*
+
+### U.1 Připravte jednu stránku před poradou
+
+Provozní rytmus funguje jen tehdy, když se tým nesejde nad prázdnou obrazovkou. Den před review připravte jednostránkový přehled. Ne prezentaci. Ne export ze všech nástrojů. Jednu stránku, kterou člověk pochopí za pět minut.
+
+Struktura týdenní provozní stránky:
+
+- **Cíl týdne:** jedna věta, co mělo být nejdůležitější.
+- **Výsledek:** co se reálně změnilo pro zákazníka, návštěvníka nebo tým.
+- **Signály:** 3–5 metrik nebo pozorování, která stojí za rozhodnutí.
+- **Problémy:** co blokuje web, produkt, marketing, support nebo provoz.
+- **Data a privacy:** nové datové toky, nové nástroje, nové formuláře, nové exporty.
+- **Rozhodnutí:** co se má rozhodnout dnes, ne někdy v mlze.
+- **Další týden:** jeden až tři konkrétní závazky.
+
+Nepřidávejte všechno, co se stalo. Přidejte jen to, co mění chování týmu. Pokud někdo chce detail, může si otevřít podklad. Provozní stránka je mapa, ne skládka.
+
+### U.2 Agenda na 45 minut
+
+Časový limit je důležitý. Nutí tým pojmenovat podstatné věci a neschovávat nerozhodnost za diskusi.
+
+Praktická agenda:
+
+- **0–5 minut: kontext.** Co byl cíl týdne a co se změnilo.
+- **5–15 minut: zákaznické signály.** Poptávky, aktivace, support, feedback, odmítnutí, časté otázky.
+- **15–25 minut: web a marketing.** Výkon hlavních stránek, obsah, kampaně, organická návštěvnost, konverze.
+- **25–35 minut: produkt a provoz.** Release, chyby, monitoring, incidenty, technický dluh, zálohy, bezpečnostní drobnosti.
+- **35–42 minut: privacy-first kontrola.** Nové nástroje, formuláře, logy, exporty, přístupy, retence.
+- **42–45 minut: rozhodnutí.** Co uděláme, kdo to vlastní a kdy se pozná výsledek.
+
+Když se objeví velké téma, nevysajte jím celou poradu. Zapište samostatné rozhodnutí nebo workshop. Týdenní review má řídit provozní tempo, ne řešit každou existenciální otázku firmy.
+
+### U.3 Signály vybírejte podle rozhodnutí
+
+Metriky nejsou dekorace. Každý signál na týdenní stránce musí odpovídat na otázku: „Jaké rozhodnutí podle toho uděláme?“
+
+Dobré týdenní signály:
+
+- počet kvalitních poptávek z hlavních landing pages,
+- aktivační moment nových uživatelů,
+- nejčastější support téma,
+- chybovost nebo dostupnost kritického flow,
+- nejčtenější obsah a jeho další krok,
+- počet otevřených provozních rizik,
+- nové nebo změněné datové toky.
+
+Slabé signály:
+
+- celková návštěvnost bez kontextu,
+- počet impresí bez vazby na nabídku,
+- počet dokončených tasků bez dopadu,
+- průměrná čísla, která zakrývají rozdíly mezi segmenty,
+- grafy, které vypadají důležitě, ale nikdo podle nich nic nezmění.
+
+U každé metriky doplňte interpretaci jednou větou. Například: „Landing page pro audit má méně návštěv, ale vyšší poměr kvalitních poptávek; příští týden posílíme distribuci místo přepisování stránky.“ To je rozhodovatelná věta. „Konverze je 2,8 %“ je jen číslo v obleku.
+
+### U.4 Privacy-first kontrola jako pevný blok
+
+Privacy-first se nesmí řešit jen při launchi nebo po incidentu. Musí mít vlastní místo v rytmu. Stačí sedm minut týdně, pokud jsou otázky konkrétní.
+
+Týdenní privacy-first otázky:
+
+- Přidali jsme nový formulář, event, cookie, pixel, SDK nebo externí skript?
+- Začali jsme posílat data novému dodavateli nebo do nového regionu?
+- Vznikl nový export, report, log nebo ruční seznam zákazníků?
+- Má někdo nový přístup k produkci, analytice, supportu nebo fakturaci?
+- Držíme někde data déle, než dává smysl pro daný účel?
+- Vysvětluje produkt uživateli dost jasně, proč data potřebujeme?
+- Umíme novou změnu vypnout, omezit nebo auditovat?
+
+Když je odpověď „nevím“, neznamená to automaticky stopku. Znamená to úkol: zjistit, zapsat, rozhodnout. Největší riziko malých týmů často není zlá vůle. Je to nevědomost schovaná za rychlost.
+
+### U.5 Rozhodovací tabule: teď, příště, ne teď
+
+Na konci review nesmí vzniknout jen seznam nápadů. Vzniká rozhodovací tabule se třemi sloupci.
+
+**Teď** znamená práci pro příští týden. Maximum tři položky. Každá má vlastníka, výstup a důkaz dokončení.
+
+**Příště** znamená důležité, ale ne aktuální. Položka má datum návratu, jinak je to jen odkladiště pro špatné svědomí.
+
+**Ne teď** znamená vědomě odmítnuté téma. Tohle je nejpodceňovanější sloupec. Chrání tým před tím, aby každý nápad zůstal viset jako mentální notifikace.
+
+Příklad:
+
+- **Teď:** Přepsat první obrazovku pricing stránky podle tří nejčastějších námitek z poptávek. Vlastník: produkt + copy. Důkaz: publikovaná změna a anotace v changelogu.
+- **Příště:** Zvážit nový onboardingový e-mail po dokončení prvního projektu. Vrátit se za dva týdny po vyhodnocení aktivace.
+- **Ne teď:** Nepřidávat chat widget, dokud není jasný support proces a datový tok.
+
+### U.6 Týdenní výstup má být malý, ale dokončený
+
+Týdenní rytmus není závod v množství aktivit. Je to systém pro dokončování. Lepší je jedna hotová změna, která zlepší hlavní flow, než pět rozpracovaných iniciativ a šestý nový board, protože pátý už začal působit provinile.
+
+Dobré týdenní výstupy:
+
+- jedna vylepšená landing page,
+- jeden dokončený onboardingový krok,
+- jeden odstraněný zbytečný formulářový údaj,
+- jedna aktualizovaná case study,
+- jeden otestovaný restore ze zálohy,
+- jeden uzavřený incident postmortem,
+- jeden odebraný tracker nebo nevyužívaná integrace.
+
+Každý výstup zapište do pracovního logu projektu. Ne kvůli byrokracii, ale kvůli paměti. Za tři měsíce bude tým potřebovat vědět, proč se něco změnilo. Historie rozhodnutí šetří víc času než další status meeting. Což je nízká laťka, ale i tak.
+
+### U.7 Praktický checklist týdenního review
+
+- [ ] Máme jednostránkový podklad připravený před poradou.
+- [ ] Každý signál má interpretaci a navazuje na rozhodnutí.
+- [ ] Zákaznické signály mají přednost před interním pocitem vytíženosti.
+- [ ] Prošli jsme web, marketing, produkt, support a provoz.
+- [ ] Privacy-first kontrola má vlastní čas, ne zbytek poslední minuty.
+- [ ] Nové nástroje, exporty, přístupy a datové toky jsou zapsané.
+- [ ] Vznikly maximálně tři závazky na další týden.
+- [ ] Každý závazek má vlastníka, termín a důkaz dokončení.
+- [ ] Některé nápady jsme vědomě dali do „ne teď“.
+- [ ] Pracovní log obsahuje stručný záznam rozhodnutí.
+
+### Mini cvičení: první týdenní review za 30 minut
+
+1. Otevřete prázdný dokument a napište cíl minulého týdne jednou větou.
+2. Přidejte tři zákaznické signály: poptávka, support, používání produktu nebo feedback.
+3. Přidejte dva provozní signály: chyba, výkon, release, záloha, přístup nebo incident.
+4. Přidejte jednu privacy-first otázku, na kterou zatím neznáte odpověď.
+5. Rozdělte nápady do sloupců teď, příště, ne teď.
+6. Vyberte jednu změnu na příští týden a napište důkaz dokončení.
+7. Po týdnu se vraťte k tomu, jestli změna opravdu pomohla.
+
+Výstupem není dokonalý manažerský proces. Výstupem je tým, který každý týden udělá jednu smysluplnou změnu a nenechá provoz, marketing ani soukromí uživatelů hnít v rohu jako zapomenutý ticket z roku raz dva.
+
 ## Pracovní log
+- 2026-08-22: Přidána příloha U „Týdenní provozní rytmus pro web, SaaS a marketing“ s jednostránkovým podkladem, 45minutovou agendou, výběrem signálů, privacy-first kontrolou, rozhodovací tabulí, checklistem a mini cvičením.
 - 2026-08-22: Přidána příloha T „Bezpečnostní minimum pro malý SaaS tým“ s mapou aktiv, MFA a rolemi, správou secrets, dependency hygienou, pravidly pro produkční data, testováním záloh, release checklistem, mini cvičením a ověřenými zdroji.
 - 2026-08-22: Přidána příloha S „Privacy-by-design review před každou větší změnou“ s kartou změny, datovou mapou, právním základem, kontrolou analytiky, vendor checkem, AI review, stop pravidly, checklistem, mini cvičením a ověřenými zdroji.
 - 2026-08-22: Přidána příloha R „Komunikační protokol pro změny a incidenty“ se čtyřmi úrovněmi událostí, status kartou, šablonami zpráv, interními incident pravidly, changelog/status doporučeními, checklistem, mini drillem a ověřenými zdroji.
