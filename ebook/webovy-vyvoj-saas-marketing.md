@@ -151,6 +151,7 @@ N. Předávací protokol pro web a SaaS bez vendor lock-inu
 O. 14denní onboardingový plán pro B2B SaaS bez datového přejídání
 P. Nákupní checklist pro privacy-first SaaS nástroje
 Q. Produktové experimenty bez datového smogu
+R. Komunikační protokol pro změny a incidenty
 
 ---
 
@@ -9001,7 +9002,189 @@ Výstupem je jedna stránka briefu a jedno rozhodnutí. Ne laboratoř. Ne nový 
 
 ---
 
+## R. Komunikační protokol pro změny a incidenty
+
+V malém týmu se komunikace často řeší až ve chvíli, kdy už někdo píše „hele, ono to nejde“ a v chatu přibývá tepová frekvence. Přitom většina provozních průšvihů není jen technická. Je to i komunikační test: kdo ví, co se děje, kdo rozhoduje, co říkáme zákazníkům a co raději neříkáme, dokud to nemáme ověřené.
+
+Komunikační protokol není PR divadlo. Je to praktická dohoda, jak tým mluví o změnách, výpadcích, chybách, bezpečnostních událostech a citlivých opravách. Privacy-first verze navíc hlídá, aby se při řešení incidentu nerozsypala data do náhodných screenshotů, chatů, externích nástrojů a dobře míněných, ale nebezpečně detailních zpráv.
+
+### R.1 Rozdělte události podle dopadu
+
+Ne každá změna potřebuje stejnou hlasitost. Když budete k drobné úpravě textu psát krizové prohlášení, zákazníci si zvyknou vás ignorovat. Když budete mlčet u problému s fakturací, zákazníci si zvyknou vám nevěřit. Ani jedno není zrovna růstová strategie, pokud zrovna neprodáváte chaos jako službu.
+
+Používejte čtyři úrovně:
+
+| Úroveň | Příklad | Komunikace |
+| --- | --- | --- |
+| Běžná změna | nový článek, menší UI úprava, doplněné FAQ | release notes nebo interní poznámka |
+| Viditelná produktová změna | nový onboarding, změna formuláře, změna pricing textu | oznámení dotčeným uživatelům nebo changelog |
+| Provozní problém | zpomalení, nedostupnost, chyba integrace, problém s e-mailem | stavová zpráva, průběžné aktualizace, závěrečné shrnutí |
+| Bezpečnostní nebo datová událost | podezření na neoprávněný přístup, únik, ztráta dat, chybné oprávnění | incident režim, omezený tým, právní/privacy kontrola, cílená komunikace |
+
+První otázka po zjištění problému nemá být „kdo za to může“, ale „jaký je dopad a kdo potřebuje informaci, aby mohl jednat“. Hledání viníka je skvělý způsob, jak ztratit čas a získat horší logy.
+
+### R.2 Jedna status karta pro každou větší událost
+
+U každé viditelné změny nebo incidentu založte krátkou status kartu. Může být v repozitáři, interní dokumentaci nebo ticketu. Důležité je, aby měla vlastníka a aby se neměnila v román.
+
+```md
+# Status karta: [název události]
+
+## Stav
+- Úroveň: běžná změna / viditelná změna / provozní problém / bezpečnostní událost
+- Aktuální stav: zjišťujeme / řešíme / mitigováno / opraveno / uzavřeno
+- Vlastník komunikace:
+- Technický vlastník:
+- Čas zjištění:
+- Poslední aktualizace:
+
+## Dopad
+- Koho se to týká:
+- Co uživatel vidí:
+- Co nevíme:
+- Co je mimo dopad:
+
+## Data a privacy
+- Pracujeme s osobními daty: ano/ne/ověřujeme
+- Jaká data jsou v riziku nebo v logách:
+- Kam se smí posílat screenshoty a výpisy:
+- Co musíme anonymizovat:
+
+## Komunikace
+- Interní kanál:
+- Externí zpráva:
+- Další aktualizace nejpozději:
+- Kdo schvaluje veřejné sdělení:
+
+## Uzavření
+- Co jsme opravili:
+- Co zákazníkům říkáme:
+- Co doplníme do dokumentace:
+- Jaké preventivní opatření vzniklo:
+```
+
+Tahle karta chrání tým před dvěma chybami: neříct nic, protože „ještě nemáme všechno“, a říct moc, protože „lidi chtějí transparentnost“. Transparentnost neznamená házet surové logy na veřejnost. Znamená včas, pravdivě a přiměřeně vysvětlit dopad.
+
+### R.3 Připravte si tři typy zpráv předem
+
+V klidu se píše líp než v incidentu. Připravte šablony pro tři situace:
+
+**1. Plánovaná změna**
+
+```md
+Dobrý den,
+
+[dne / v týdnu] upravíme [část služby].
+
+Co se mění:
+- [konkrétní změna]
+
+Proč to děláme:
+- [hodnota pro zákazníka nebo provoz]
+
+Dopad:
+- [co musí zákazník udělat / nemusí dělat]
+
+Privacy-first poznámka:
+- [jestli se mění sběr, zpracování nebo umístění dat]
+
+Pokud máte otázky, napište na [kontakt].
+```
+
+**2. Provozní problém**
+
+```md
+Aktuálně řešíme problém s [část služby].
+
+Dopad:
+- [co nefunguje nebo je zpomalené]
+
+Co víme:
+- [ověřená fakta]
+
+Co děláme:
+- [aktuální krok]
+
+Další aktualizaci pošleme nejpozději v [čas].
+```
+
+**3. Uzavření problému**
+
+```md
+Problém s [část služby] je vyřešený.
+
+Dopad trval:
+- [časový rozsah]
+
+Příčina:
+- [stručně a bez zbytečného technického kouře]
+
+Co jsme změnili:
+- [oprava]
+- [prevence]
+
+Pokud u sebe stále vidíte problém, napište na [kontakt].
+```
+
+U bezpečnostních nebo datových událostí nepoužívejte univerzální text naslepo. Nejdřív ověřte fakta, rozsah, právní povinnost a dopad na lidi. GDPR pracuje s oznamováním porušení zabezpečení osobních údajů dozorovému úřadu a v některých případech i dotčeným osobám; konkrétní postup proto musí vycházet ze skutečného rizika, ne z paniky.
+
+### R.4 Interní komunikační pravidla během incidentu
+
+Při incidentu si tým často škodí sám: někdo stáhne logy do počítače, někdo pošle screenshot do externího chatu, někdo přidá dodavatele bez omezení a někdo začne vysvětlovat zákazníkům domněnky. Proto nastavte jednoduchá pravidla:
+
+- Jeden člověk vlastní externí komunikaci.
+- Jeden člověk vlastní technickou koordinaci.
+- Surová data, logy a screenshoty zůstávají v určeném bezpečném místě.
+- Do veřejné nebo zákaznické zprávy jdou jen ověřená fakta.
+- Každá aktualizace rozlišuje „víme“, „ověřujeme“ a „udělali jsme“.
+- Pokud se řeší osobní data, přidává se privacy nebo právní kontrola.
+- Po incidentu se smažou dočasné exporty, přístupy a pracovní kopie.
+
+*Codyho komentář: největší hrdina incidentu není člověk, který napíše nejvíc zpráv. Je to člověk, který zabrání tomu, aby tým vyráběl druhý incident během řešení prvního. Ano, je to méně filmové. O to víc užitečné.*
+
+### R.5 Changelog, release notes a status page bez trackerů
+
+Komunikace nemusí znamenat marketingový nálet. Privacy-first provoz preferuje kanály, které lidé mohou číst bez sledovacích skriptů:
+
+- veřejný changelog s přímými URL,
+- RSS nebo Atom feed pro produktové novinky,
+- jednoduchá status stránka bez reklamních pixelů,
+- e-mail jen pro zákazníky, kterých se změna týká,
+- interní měsíční shrnutí pro tým a support.
+
+Release notes pište podle dopadu, ne podle interního seznamu commitů. Zákazníka obvykle nezajímá, že jste „refaktorovali validační vrstvu“. Zajímá ho, že formulář lépe vysvětluje chyby a neposílá zbytečná pole. Vývojářský detail si nechte do technického logu.
+
+### R.6 Praktický checklist komunikační připravenosti
+
+- [ ] Máme čtyři úrovně událostí a víme, kdo je vyhlašuje.
+- [ ] Máme status kartu pro změny a incidenty.
+- [ ] Víme, kdo vlastní externí komunikaci a kdo technické řešení.
+- [ ] Máme šablony pro plánovanou změnu, provozní problém a uzavření problému.
+- [ ] U datových událostí máme privacy/právní kontrolu před externí zprávou.
+- [ ] Surové logy a screenshoty mají bezpečné místo a jasná pravidla sdílení.
+- [ ] Zprávy zákazníkům rozlišují fakta, domněnky a další aktualizaci.
+- [ ] Po incidentu uklízíme dočasné exporty, přístupy a pracovní soubory.
+- [ ] Release notes popisují dopad na uživatele, ne jen interní technickou práci.
+- [ ] Status a changelog jsou dostupné bez invazivních trackerů.
+
+### Mini cvičení: komunikační drill za 35 minut
+
+1. Vyberte jeden pravděpodobný problém: výpadek formuláře, chybu plateb, zpožděný e-mail nebo chybné oprávnění.
+2. Vyplňte status kartu jen podle toho, co byste věděli v prvních 15 minutách.
+3. Napište první externí zprávu do 500 znaků.
+4. Označte, které informace nesmíte poslat bez ověření.
+5. Napište závěrečné shrnutí, jako kdyby byl problém za hodinu vyřešený.
+6. Doplňte jednu preventivní změnu do backlogu nebo dokumentace.
+
+Výstupem není dokonalý krizový manuál. Výstupem je tým, který při prvním problému nezačne improvizovat jako kapela, která se potkala až na pódiu.
+
+### Zdroje k příloze R
+
+- EDPB Guidelines 01/2021 uvádějí příklady posuzování a oznamování porušení zabezpečení osobních údajů podle GDPR: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-012021-examples-regarding-personal-data-breach_en
+- Evropská komise shrnuje směrnici NIS2 a její zaměření na kybernetickou odolnost a hlášení incidentů u vybraných organizací: https://digital-strategy.ec.europa.eu/en/policies/nis2-directive
+
 ## Pracovní log
+- 2026-08-22: Přidána příloha R „Komunikační protokol pro změny a incidenty“ se čtyřmi úrovněmi událostí, status kartou, šablonami zpráv, interními incident pravidly, changelog/status doporučeními, checklistem, mini drillem a ověřenými zdroji.
 - 2026-08-22: Přidána příloha Q „Produktové experimenty bez datového smogu“ s rozhodovacím briefem, výběrem bezpečných signálů, guardrails, agregovaným měřením, vyhodnocovací tabulkou, knihovnou experimentů, checklistem a mini cvičením.
 
 - 2026-08-22: Přidána příloha P „Nákupní checklist pro privacy-first SaaS nástroje“ s rizikovým zařazením nástrojů, vendor kartou, GDPR rolemi, exportem, privacy-first skóre, schvalovacím rytmem, checklistem, mini cvičením a ověřenými zdroji.
