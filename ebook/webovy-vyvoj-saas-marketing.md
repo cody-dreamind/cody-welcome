@@ -9684,7 +9684,165 @@ Každý výstup zapište do pracovního logu projektu. Ne kvůli byrokracii, ale
 
 Výstupem není dokonalý manažerský proces. Výstupem je tým, který každý týden udělá jednu smysluplnou změnu a nenechá provoz, marketing ani soukromí uživatelů hnít v rohu jako zapomenutý ticket z roku raz dva.
 
+## V. Měsíční report pro malý SaaS bez metrického divadla
+
+Měsíční report má malému týmu pomoct rozhodnout, ne demonstrovat, že máte grafy. Pokud report otevře zakladatel, vývojář, marketér i člověk ze supportu a každý si z něj odnese jinou pravdu, není to report. Je to horoskop v tabulkovém procesoru.
+
+Tahle příloha ukazuje jednoduchý formát měsíčního reportu pro web, SaaS a marketing. Hodí se pro zakladatele, malé týmy i agentury, které chtějí klientovi ukázat dopad práce bez invazivního trackingu a bez toho, aby z každého návštěvníka vyráběly digitální složku tlustší než manuál k tiskárně.
+
+*Codyho komentář: nejlepší report není ten nejdelší. Nejlepší report je ten, po kterém někdo něco správného udělá.*
+
+### V.1 Report začněte otázkami, ne nástrojem
+
+Nejdřív si napište, jaká rozhodnutí má report podpořit. Teprve potom vybírejte metriky. Obrácený postup vede k tomu, že měříte všechno, co umí nástroj exportovat, a pak se tváříte, že to byla strategie.
+
+Praktické otázky pro měsíční report:
+
+- **Web:** Které stránky pomáhají získat kvalitní poptávky a které jen zabírají místo v menu?
+- **SaaS:** Dostávají se noví uživatelé k první hodnotě rychleji, nebo se zasekávají?
+- **Marketing:** Který obsah nebo kanál přivádí správné lidi, ne jen anonymní provoz?
+- **Support:** Jaké problémy se opakují tak často, že už nejsou support, ale produktový dluh?
+- **Provoz:** Co ohrožuje dostupnost, bezpečnost, výkon nebo důvěru?
+- **Privacy-first:** Přibyly datové toky, nástroje, exporty nebo přístupy, které potřebují kontrolu?
+
+Každá otázka by měla vést k jedné z akcí: pokračovat, upravit, zastavit, opravit, zdokumentovat nebo odstranit. Pokud metrika neumí ovlivnit žádné rozhodnutí, patří do archivu, ne do hlavního reportu.
+
+### V.2 Jednostránková struktura reportu
+
+Měsíční report pro malý tým se má vejít na jednu hlavní stránku. Detaily, exporty a grafy mohou být v příloze, ale rozhodovací vrstva musí být krátká.
+
+Šablona hlavní stránky:
+
+- **Shrnutí měsíce:** tři věty o tom, co se změnilo a proč na tom záleží.
+- **Hlavní výhra:** jedna věc, kterou má tým zopakovat nebo posílit.
+- **Hlavní problém:** jedna věc, kterou má tým opravit jako první.
+- **Tři signály:** maximálně tři metriky nebo pozorování s interpretací.
+- **Zákaznický hlas:** citace, dotaz, námitka nebo vzorec ze supportu.
+- **Privacy-first stav:** nové datové toky, přístupy, nástroje a retenční otázky.
+- **Rozhodnutí:** 1–3 konkrétní kroky na další měsíc.
+
+Ukázka shrnutí:
+
+> Landing page pro audit přinesla méně návštěv, ale vyšší kvalitu poptávek. Největší brzda je nejasný další krok po odeslání formuláře. Příští měsíc zjednodušíme follow-up, doplníme jednu case study a odstraníme duplicitní tracking event.
+
+Tohle je užitečnější než sedm grafů bez komentáře. Graf bez interpretace je jen obrázek, který se tváří dospěle.
+
+### V.3 Vyberte tři typy signálů
+
+Report nemá být účetní uzávěrka všeho, co se v produktu stalo. Stačí tři typy signálů: obchodní, produktový a provozní.
+
+**Obchodní signál** říká, jestli se produkt nebo web posouvá k lepším zákazníkům. Může to být počet kvalifikovaných poptávek, počet demo žádostí, poměr relevantních leadů, vývoj MRR, počet expanzí nebo důvody odmítnutí nabídky.
+
+**Produktový signál** říká, jestli lidé dosahují hodnoty. Pro SaaS to může být aktivační moment, dokončení prvního klíčového úkolu, opakované použití, počet uživatelů, kteří se zasekli v onboardingu, nebo nejčastější důvod kontaktování supportu.
+
+**Provozní signál** říká, jestli systém zůstává důvěryhodný. Sledujte dostupnost kritických flow, chyby, incidenty, zálohy, bezpečnostní resty, změny přístupů, objem logů a nevyřízené privacy úkoly.
+
+Ke každému signálu napište:
+
+- co se změnilo,
+- proč se to pravděpodobně stalo,
+- jak moc tomu věříte,
+- co s tím uděláte,
+- co záměrně neuděláte.
+
+Věta „návštěvnost vzrostla o 18 %“ sama o sobě nestačí. Lepší je: „Návštěvnost vzrostla hlavně díky jednomu článku, ale nepřinesla kvalitní poptávky; příští měsíc článek doplníme o konkrétní nabídku a nebudeme kvůli tomu přepisovat celý web.“
+
+### V.4 Privacy-first část nechte stejně viditelnou jako tržby
+
+Privacy-first provoz nesmí být poznámka pod čarou. Pokud v reportu vidíte tržby, kampaně a chyby, musí tam být i stav dat. Jinak tým velmi rychle sklouzne k tomu, že soukromí řeší až ve chvíli, kdy už je pozdě a někdo říká větu „tohle jsme asi měli zkontrolovat dřív“.
+
+Měsíční privacy-first blok:
+
+- **Nové sběry dat:** formuláře, eventy, logy, importy, exporty, analytika.
+- **Noví dodavatelé:** nástroje, integrace, API, podpůrné služby, AI asistenti.
+- **Nové přístupy:** lidé, role, externisté, support režim, administrace.
+- **Retence:** data, která se drží déle, než bylo plánováno.
+- **Mazání:** žádosti, ruční zásahy, technické dluhy v mazacím workflow.
+- **Dokumentace:** změny, které nejsou zapsané v datové mapě nebo interním rozhodovacím logu.
+- **Rizika:** jedna věc, která má příští měsíc dostat vlastníka.
+
+Dobrá otázka zní: „Kdyby se nás zákazník zeptal, proč tato data máme a kdy je smažeme, umíme odpovědět bez improvizace?“ Pokud ne, report má vytvořit úkol. Ne paniku. Úkol.
+
+### V.5 Reportujte změnu proti rozhodnutí, ne proti náladě
+
+Měsíční report má navazovat na minulý měsíc. Jinak každý měsíc začínáte znovu a tým si plete aktivitu s pohybem vpřed.
+
+U každého rozhodnutí z minulého reportu doplňte stav:
+
+- **Dokončeno:** výsledek existuje a má důkaz.
+- **Částečně:** něco se změnilo, ale chybí dopad nebo dokončení.
+- **Zastaveno:** rozhodli jsme se nepokračovat a víme proč.
+- **Přeneseno:** úkol zůstává důležitý, ale má nový termín a důvod.
+- **Ztraceno:** nikdo to nevlastnil; je potřeba buď přidělit vlastníka, nebo úkol smazat.
+
+Slovo „ztraceno“ zní nepříjemně, což je přesně jeho účel. Malé týmy nepotřebují víc optimistických statusů. Potřebují vidět, kde jim práce padá mezi židle.
+
+### V.6 Praktická šablona měsíčního reportu
+
+Zkopírujte si tuto šablonu a držte ji tři měsíce beze změny. Nejdřív vytvořte rytmus, potom ladění.
+
+## Měsíční report: [měsíc]
+
+## 1. Shrnutí
+- Co se tento měsíc nejvíc změnilo:
+- Proč je to důležité:
+- Co uděláme příště:
+
+## 2. Tři signály
+- Obchodní signál:
+- Produktový signál:
+- Provozní signál:
+
+## 3. Zákaznický hlas
+- Citace, dotaz nebo vzorec:
+- Co z toho plyne:
+
+## 4. Privacy-first stav
+- Nové datové toky:
+- Nové nástroje nebo dodavatelé:
+- Nové přístupy:
+- Retence nebo mazání:
+- Co doplnit do dokumentace:
+
+## 5. Rozhodnutí na další měsíc
+- Rozhodnutí 1:
+- Vlastník:
+- Důkaz dokončení:
+- Termín:
+
+### V.7 Praktický checklist měsíčního reportu
+
+- [ ] Report se vejde na jednu hlavní stránku.
+- [ ] Každá metrika má interpretaci jednou větou.
+- [ ] Report obsahuje obchodní, produktový a provozní signál.
+- [ ] Je jasné, co se změnilo proti minulému měsíci.
+- [ ] Zákaznický hlas není anonymní dekorace, ale vstup pro rozhodnutí.
+- [ ] Privacy-first část je viditelná a má vlastní úkoly.
+- [ ] Nové datové toky, nástroje a přístupy jsou zapsané.
+- [ ] Každé rozhodnutí má vlastníka, termín a důkaz dokončení.
+- [ ] V reportu jsou maximálně tři priority na další měsíc.
+- [ ] Vědomě jsme smazali nebo odložili aspoň jednu zbytečnou metriku.
+
+### Mini cvičení: první měsíční report za 50 minut
+
+1. Otevřete poslední týdenní review a vyberte tři nejdůležitější signály.
+2. Ke každému napište interpretaci: co se stalo, proč a co s tím uděláte.
+3. Přidejte jeden zákaznický hlas ze supportu, prodeje nebo rozhovoru.
+4. Zapište nové datové toky, nástroje, přístupy a retenční otázky.
+5. Z minulého měsíce označte rozhodnutí jako dokončeno, částečně, zastaveno, přeneseno nebo ztraceno.
+6. Vyberte maximálně tři kroky na další měsíc.
+7. U každého kroku napište vlastníka, termín a důkaz dokončení.
+
+Výstupem není perfektní reportingový systém. Výstupem je měsíční rozhodovací dokument, který drží pohromadě web, produkt, marketing, provoz a důvěru zákazníků. Což je poměrně hodně práce na jednu stránku. Ale pořád míň než opravovat půl roku špatných rozhodnutí.
+
+### Zdroje k příloze V
+
+- Evropská komise shrnuje principy GDPR pro zpracování osobních údajů, včetně účelového omezení, minimalizace dat, přesnosti, omezení uložení a integrity/confidentiality: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/overview-principles/what-data-can-we-process-and-under-which-conditions_en
+- EDPB Guidelines 4/2019 popisují přístup „Data Protection by Design and by Default“ podle článku 25 GDPR: https://www.edpb.europa.eu/documents/guideline/guidelines-42019-on-article-25-data-protection-by-design-and-by-default_en
+- ENISA „Cybersecurity for SMEs“ a navazující průvodce pro malé a střední podniky dávají praktický rámec pro provozní a bezpečnostní hygienu malých týmů: https://www.enisa.europa.eu/publications/enisa-report-cybersecurity-for-smes
+
 ## Pracovní log
+- 2026-08-22: Přidána příloha V „Měsíční report pro malý SaaS bez metrického divadla“ se strukturou jednostránkového reportu, třemi typy signálů, privacy-first blokem, návazností na rozhodnutí, šablonou, checklistem, mini cvičením a ověřenými zdroji.
 - 2026-08-22: Přidána příloha U „Týdenní provozní rytmus pro web, SaaS a marketing“ s jednostránkovým podkladem, 45minutovou agendou, výběrem signálů, privacy-first kontrolou, rozhodovací tabulí, checklistem a mini cvičením.
 - 2026-08-22: Přidána příloha T „Bezpečnostní minimum pro malý SaaS tým“ s mapou aktiv, MFA a rolemi, správou secrets, dependency hygienou, pravidly pro produkční data, testováním záloh, release checklistem, mini cvičením a ověřenými zdroji.
 - 2026-08-22: Přidána příloha S „Privacy-by-design review před každou větší změnou“ s kartou změny, datovou mapou, právním základem, kontrolou analytiky, vendor checkem, AI review, stop pravidly, checklistem, mini cvičením a ověřenými zdroji.
