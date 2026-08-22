@@ -152,6 +152,7 @@ O. 14denní onboardingový plán pro B2B SaaS bez datového přejídání
 P. Nákupní checklist pro privacy-first SaaS nástroje
 Q. Produktové experimenty bez datového smogu
 R. Komunikační protokol pro změny a incidenty
+S. Privacy-by-design review před každou větší změnou
 
 ---
 
@@ -9183,7 +9184,241 @@ Výstupem není dokonalý krizový manuál. Výstupem je tým, který při prvn�
 - EDPB Guidelines 01/2021 uvádějí příklady posuzování a oznamování porušení zabezpečení osobních údajů podle GDPR: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-012021-examples-regarding-personal-data-breach_en
 - Evropská komise shrnuje směrnici NIS2 a její zaměření na kybernetickou odolnost a hlášení incidentů u vybraných organizací: https://digital-strategy.ec.europa.eu/en/policies/nis2-directive
 
+---
+
+## S. Privacy-by-design review před každou větší změnou
+
+Privacy-first provoz se nerozbije jedním velkým zlým rozhodnutím. Častěji se rozpadne po malých krocích: někdo přidá nový formulář, někdo zapne lepší analytiku, někdo pošle export do dalšího nástroje, někdo přidá „jen jeden“ pixel, protože kampaň ho přece potřebuje. Za tři měsíce už nikdo přesně neví, kde všude data tečou. Gratuluji, máte datové klubíčko. Kočka by měla radost, DPO méně.
+
+Privacy-by-design review je krátká kontrola před změnou. Ne právní román, ne blokace vývoje, ale 20–30 minut, které zabrání tomu, aby tým poslal do produkce funkci, kterou potom musí složitě vysvětlovat, opravovat nebo mazat.
+
+Používejte ho pro každou změnu, která:
+
+- přidává nové pole do formuláře,
+- mění onboarding nebo registraci,
+- zavádí novou integraci,
+- mění analytiku, UTM pravidla nebo eventy,
+- posílá data do externího nástroje,
+- přidává automatizované rozhodování nebo AI asistenta,
+- mění retenci, export, mazání nebo oprávnění,
+- zasahuje do fakturace, supportu nebo auditních logů.
+
+Smyslem není brzdit tým. Smyslem je zachytit datové náklady dřív, než se stanou architekturou.
+
+### S.1 Začněte kartou změny, ne debatou v chatu
+
+Každá větší změna má mít jednu krátkou kartu. Pokud se nevejde na jednu stránku, pravděpodobně ještě není dost jasná.
+
+```markdown
+# Privacy-by-design review: [název změny]
+
+## Co měníme
+- Stručný popis změny.
+- Které stránky, obrazovky, API nebo procesy se mění.
+
+## Proč to děláme
+- Obchodní nebo produktový důvod.
+- Jaké rozhodnutí nebo výsledek od změny čekáme.
+
+## Jaká data používáme
+- Nová data.
+- Stávající data použitá novým způsobem.
+- Citlivá nebo riziková data.
+
+## Kam data tečou
+- Databáze.
+- Logy.
+- E-mail nebo support.
+- Analytika.
+- Externí nástroje.
+
+## Jak dlouho data držíme
+- Primární úložiště.
+- Logy.
+- Zálohy.
+- Exporty.
+
+## Jak změnu vysvětlíme lidem
+- Text u formuláře.
+- Privacy policy.
+- Help nebo dokumentace.
+- Release notes.
+
+## Rozhodnutí
+- Schválit / upravit / odložit / zahodit.
+- Vlastník a datum review.
+```
+
+Karta má jednu důležitou vlastnost: nutí tým mluvit konkrétně. „Zlepšíme personalizaci“ nestačí. „Přidáme obor firmy do registrace, abychom ukázali relevantní onboardingovou šablonu“ už se dá posoudit.
+
+### S.2 Tři otázky, které odhalí většinu problémů
+
+Před každou změnou položte tři otázky:
+
+1. **Potřebujeme ta data opravdu pro slíbenou hodnotu?**
+2. **Umíme stejného výsledku dosáhnout s menším množstvím dat?**
+3. **Umíme člověku jednoduše vysvětlit, co se stane a proč?**
+
+Pokud odpověď na třetí otázku zní „no, to je složitější“, změna ještě není připravená. Ne proto, že uživatelé neumí pochopit komplexitu. Ale proto, že tým často sám neví, co vlastně zavádí.
+
+Příklad:
+
+- Špatně: „Budeme sbírat telefon, protože se může hodit salesu.“
+- Lépe: „Telefon budeme chtít až při objednání konzultace, protože jinak není nutný pro vytvoření účtu.“
+- Ještě lépe: „Telefon bude volitelný, u pole vysvětlíme účel a pro běžný trial ho nebudeme vyžadovat.“
+
+Tohle je privacy-first produktové myšlení: nejdřív hodnota, potom data. Ne naopak.
+
+### S.3 Datová mapa změny: kudy data opravdu projdou
+
+U malé změny stačí jednoduchý seznam. U větší změny kreslete tok dat. Ne kvůli hezkému diagramu, ale kvůli odpovědnosti.
+
+Minimální datová mapa:
+
+| krok | otázka | příklad odpovědi |
+|---|---|---|
+| sběr | kde data vzniknou | registrační formulář |
+| validace | co se kontroluje | e-mail, doména firmy, délka textu |
+| uložení | kde data skončí | aplikační databáze v EU regionu |
+| zpracování | co s nimi systém dělá | výběr onboardingové šablony |
+| sdílení | kdo další je dostane | žádný externí nástroj, jen interní support role |
+| logování | co se dostane do logů | ID účtu, stav validace, ne celý obsah formuláře |
+| export | jak data dostane zákazník ven | CSV export v administraci |
+| mazání | jak data zmizí | smazání účtu + retenční pravidlo pro faktury |
+
+Nejčastější problém není databáze. Tu tým obvykle řeší. Problém jsou vedlejší kopie: logy, support nástroje, exporty, dočasné tabulky, screenshoty, testovací prostředí a automatizace, které „jen přeposílají notifikaci“. Právě tam privacy-first přístup vyhrává konkrétností.
+
+### S.4 Právní základ není kouzelné razítko
+
+U každého zpracování napište právní nebo provozní důvod. Ne proto, abyste si zahráli na právní kancelář, ale proto, aby vývoj, produkt a marketing neměli každý vlastní realitu.
+
+Praktické rozlišení:
+
+- **Smlouva:** data nutná pro poskytnutí služby, například účet, objednávka, fakturace nebo doručení výstupu.
+- **Souhlas:** volitelné věci, které člověk může odmítnout bez rozbití služby, typicky některé marketingové komunikace nebo trackery.
+- **Oprávněný zájem:** bezpečnost, prevence zneužití, základní provozní logy nebo některé B2B vztahy — vždy s posouzením dopadu a možností námitky tam, kde dává smysl.
+- **Právní povinnost:** účetnictví, daňové doklady nebo povinnosti vyplývající ze zákona.
+
+Důležité: právní základ nemá být výmluva pro sběr navíc. Pokud něco není nutné, nepomůže ani sebehezčí kolonka v dokumentaci.
+
+### S.5 Cookie a analytické změny kontrolujte zvlášť
+
+Analytika je zvláštní kategorie, protože se tváří nevinně: „jen měříme návštěvnost“. Jenže rozdíl mezi agregovanou statistikou a sledovací mašinou je v praxi obrovský.
+
+Před přidáním analytického eventu nebo nástroje zkontrolujte:
+
+- jestli se měří agregovaně,
+- jestli se neposílají osobní údaje v URL, názvu eventu nebo parametrech,
+- jestli event nejde spojovat napříč weby nebo produkty,
+- jestli se používají cookies nebo jiné identifikátory,
+- jestli je nástroj provozovaný v EU nebo s jasnými transfer pravidly,
+- jestli je potřeba consent a jak se respektuje odmítnutí,
+- jestli máte retenční limit a možnost smazat dočasné eventy.
+
+Příklad špatného eventu:
+
+```text
+lead_form_submitted_email_petr.novak@example.cz_package_enterprise
+```
+
+Příklad lepšího eventu:
+
+```text
+lead_form_submitted
+```
+
+Parametry držte obecné: typ formuláře, jazyk stránky, kampaň, stav validace. E-mail, telefon, jméno, název firmy nebo volný text do analytiky nepatří. Pokud vás svědí ruka to tam poslat, dejte si kávu a jděte se projít. Tohle je přesně ten okamžik, kdy se z „užitečných dat“ stává budoucí průšvih.
+
+### S.6 Vendor check: integrace není jen API klíč
+
+Každá nová integrace přidává nový vztah. Nejen technický, ale i provozní, právní a bezpečnostní.
+
+Vendor check před nasazením:
+
+- [ ] Víme, kdo je provozovatel a kde má data.
+- [ ] Víme, jestli je dodavatel zpracovatel, správce, nebo samostatný správce.
+- [ ] Máme DPA nebo jiný odpovídající smluvní základ, pokud je potřeba.
+- [ ] Víme, zda dochází k přenosu mimo EU/EHP.
+- [ ] Umíme vypnout nebo obejít integraci bez pádu produktu.
+- [ ] Umíme exportovat data zpět.
+- [ ] Umíme data smazat nebo požádat o smazání.
+- [ ] Máme vlastníka API klíče a rotace přístupů.
+- [ ] Integrace neposílá víc dat, než potřebuje.
+- [ ] Máme zapsaný exit plán.
+
+U malého SaaSu je nejlepší integrace ta, která má jasný účel a jasný konec. Vendor lock-in často nezačne smlouvou na tři roky. Začne tím, že si tým zvykne posílat do nástroje data, která neumí dostat ven v použitelné podobě.
+
+### S.7 AI změny: prompt je také datový tok
+
+Pokud změna používá AI asistenta, přidejte samostatný AI review. Ne proto, že AI je magická bytost z datového lesa, ale protože do promptů lidé posílají překvapivě citlivé věci.
+
+AI review otázky:
+
+- Jaká data jdou do promptu?
+- Jsou v promptu osobní údaje, obchodní tajemství nebo zákaznický obsah?
+- Dá se vstup před odesláním zkrátit, anonymizovat nebo pseudonymizovat?
+- Kde se prompt a odpověď ukládají?
+- Používá poskytovatel data k tréninku nebo zlepšování služby?
+- Máme evropský provoz nebo jasně popsané transfery?
+- Vidí výstup člověk před tím, než odejde zákazníkovi?
+- Umíme dohledat, proč automatizace něco udělala?
+
+Praktické pravidlo: AI má dostat kontext potřebný pro úkol, ne celý životopis zákazníka a archiv e-mailů od roku 2019. Ano, modely mají rády kontext. Vaše compliance taky ráda spí.
+
+### S.8 Rozhodovací pravidla: kdy změnu zastavit
+
+Privacy-by-design review má mít zuby. Jinak je to jen další rituál do firemního kalendáře.
+
+Změnu zastavte nebo vraťte k úpravě, pokud:
+
+- není jasný účel sběru dat,
+- data se posílají do nástroje bez schváleného dodavatele,
+- chybí retenční pravidlo,
+- není jasné, jak uživatel dostane informaci nebo volbu,
+- analytika obsahuje osobní údaje,
+- logy ukládají obsah zpráv, tokeny, hesla nebo citlivé parametry,
+- testovací prostředí používá produkční osobní data bez ochrany,
+- změna znemožní export nebo smazání dat,
+- tým neumí vysvětlit dopad zákazníkovi jednou srozumitelnou větou.
+
+Není ostuda změnu vrátit. Ostuda je nasadit něco, o čem všichni tušili, že je divné, ale nikdo nechtěl být „ten negativní“. Buďte ten negativní. V privacy-first firmě je to kompliment.
+
+### S.9 Praktický checklist před merge nebo release
+
+- [ ] Změna má vyplněnou privacy-by-design kartu.
+- [ ] Je jasný účel a očekávaná hodnota pro uživatele nebo zákazníka.
+- [ ] Sbíráme jen data, která jsou opravdu nutná.
+- [ ] U každého nového datového prvku víme, kde vzniká, kde se ukládá a kdy mizí.
+- [ ] Do analytiky neposíláme osobní údaje ani volný zákaznický text.
+- [ ] Logy neobsahují hesla, tokeny, celé zprávy, e-maily nebo citlivé parametry.
+- [ ] Nový dodavatel prošel vendor checkem.
+- [ ] U cookies, trackerů a marketingových eventů víme, jestli je potřeba consent.
+- [ ] U AI funkcí máme zkontrolované prompty, retenci a lidskou kontrolu výstupu.
+- [ ] Privacy policy, help texty nebo produktová dokumentace se aktualizují, pokud se mění realita.
+- [ ] Existuje plán vypnutí, exportu nebo návratu zpět.
+- [ ] Rozhodnutí je zapsané v dokumentaci, ne ztracené v chatu.
+
+### Mini cvičení: privacy review za 30 minut
+
+1. Vezměte jednu plánovanou změnu z backlogu.
+2. Vyplňte kartu změny bez hledání dokonalých formulací.
+3. Označte všechna nová nebo nově použitá data.
+4. Nakreslete datovou mapu v osmi krocích: sběr, validace, uložení, zpracování, sdílení, logování, export, mazání.
+5. Najděte jedno pole, event, log nebo integraci, kterou můžete odstranit nebo zmenšit.
+6. Napište jednu větu pro uživatele: „Tato data používáme proto, aby…“
+7. Rozhodněte: schválit, upravit, odložit nebo zahodit.
+
+Výstupem je menší, jasnější a bezpečnější změna. Ne papírový bunkr. Privacy-first není brzda vývoje; je to způsob, jak stavět produkt, který za půl roku pořád chápete.
+
+### Zdroje k příloze S
+
+- EDPB Guidelines 4/2019 vysvětlují data protection by design and by default podle článku 25 GDPR a doporučují promítnout ochranu dat do návrhu i výchozího nastavení: https://www.edpb.europa.eu/documents/guideline/guidelines-42019-on-article-25-data-protection-by-design-and-by-default_en
+- EDPB Guidelines 05/2020 shrnují požadavky na souhlas podle GDPR, včetně jeho svobodnosti, konkrétnosti, informovanosti a odvolatelnosti: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-052020-consent-under-regulation-2016679_en
+- CNIL v praktickém průvodci upozorňuje, že cookies a trackery obvykle vyžadují informování, souhlas a možnost odmítnutí; pro některé měření návštěvnosti existují úzké výjimky: https://www.cnil.fr/fr/node/677
+- Evropská komise uvádí, že Data Act se v EU používá od 12. září 2025 a zahrnuje i pravidla usnadňující změnu poskytovatelů cloudových služeb: https://digital-strategy.ec.europa.eu/en/policies/data-act
+
 ## Pracovní log
+- 2026-08-22: Přidána příloha S „Privacy-by-design review před každou větší změnou“ s kartou změny, datovou mapou, právním základem, kontrolou analytiky, vendor checkem, AI review, stop pravidly, checklistem, mini cvičením a ověřenými zdroji.
 - 2026-08-22: Přidána příloha R „Komunikační protokol pro změny a incidenty“ se čtyřmi úrovněmi událostí, status kartou, šablonami zpráv, interními incident pravidly, changelog/status doporučeními, checklistem, mini drillem a ověřenými zdroji.
 - 2026-08-22: Přidána příloha Q „Produktové experimenty bez datového smogu“ s rozhodovacím briefem, výběrem bezpečných signálů, guardrails, agregovaným měřením, vyhodnocovací tabulkou, knihovnou experimentů, checklistem a mini cvičením.
 
