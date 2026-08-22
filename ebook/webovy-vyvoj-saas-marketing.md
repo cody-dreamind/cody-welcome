@@ -141,6 +141,7 @@ D. Privacy-first audit webu za 60 minut
 E. Dodavatelský brief pro privacy-first nástroje a služby
 F. AI asistenti v malém týmu bez úniku dat
 G. Údržbový kalendář pro web, SaaS a marketing
+H. 90minutový workshop: převod e-booku do akčního plánu
 
 ---
 
@@ -6900,6 +6901,275 @@ Výstupem má být rytmus, který tým opravdu zvládne. Pokud kalendář potře
 
 ---
 
+## H. 90minutový workshop: převod e-booku do akčního plánu
+
+E-book je užitečný jen tehdy, když z něj vznikne konkrétní změna. Ne „inspirace“, ne „musíme se k tomu vrátit“, ne „hodíme to do Notionu a jednou se na to někdo podívá“. Konkrétní změna. Ideálně taková, kterou malý tým zvládne rozjet během týdne.
+
+Tahle příloha je návod na 90minutový workshop pro zakladatele, marketéra, vývojáře, produktového člověka nebo malý tým. Cíl není probrat celý e-book. Cíl je vybrat jednu oblast, rozhodnout první iteraci, omezit rizika a zapsat, kdo co udělá.
+
+*Codyho komentář: pokud workshop skončí tím, že máte šest nových workshopů, gratuluju, právě jste vynalezli poradenský perpetuum mobile. Zastavte to dřív, než začne účtovat měsíční retainer.*
+
+### H.1 Kdy workshop použít
+
+Workshop použijte ve chvíli, kdy tým ví, že web, SaaS nebo marketing potřebuje posun, ale neví, kde začít. Hodí se hlavně pro situace, kdy se míchá více problémů najednou:
+
+- homepage neříká jasně, co nabízíte,
+- produkt má registrace, ale málo aktivovaných uživatelů,
+- marketing publikuje obsah, který se dál nedistribuuje,
+- tým sbírá data, ale nedělá podle nich rozhodnutí,
+- provoz stojí na několika nástrojích, u kterých nikdo neví, kde končí data,
+- dokumentace existuje jen v hlavách lidí a ve starých zprávách.
+
+Nečekejte na ideální čas. Workshop má být pracovní zkratka, ne slavnostní strategický offsite s koláčky a dramatickým názvem. Stačí kalendář, sdílený dokument a ochota říct „tohle teď neřešíme“.
+
+### H.2 Kdo má být u stolu
+
+Ideální sestava je malá. Čtyři až šest lidí je maximum, u menších projektů stačí dva.
+
+Role:
+
+- **Vlastník byznysu:** ví, co má projekt vydělávat nebo zlepšit.
+- **Vlastník zákazníka:** zná dotazy, námitky, support a obchodní realitu.
+- **Vlastník produktu nebo webu:** rozumí tomu, co jde změnit rychle a co je větší zásah.
+- **Technický vlastník:** hlídá provoz, data, integrace, bezpečnost a údržbu.
+- **Moderátor:** drží čas, zapisuje rozhodnutí a zabíjí odbočky dřív, než se rozmnoží.
+
+Jedna osoba může mít víc rolí. U malého SaaSu je běžné, že zakladatel je byznys, produkt, support i člověk, který v pátek večer resetuje DNS. Není to ideální, ale je to realita. Důležité je role pojmenovat, aby bylo jasné, z jakého pohledu kdo mluví.
+
+### H.3 Příprava před workshopem: 20 minut samostatně
+
+Každý účastník si předem připraví krátké odpovědi. Bez prezentací. Bez 38 slidů. Stačí odrážky.
+
+Otázky:
+
+1. Kde dnes nejvíc ztrácíme důvěru zákazníka?
+2. Kde dnes nejvíc ztrácíme čas týmu?
+3. Kde dnes sbíráme nebo posíláme data, aniž bychom přesně věděli proč?
+4. Která jedna změna by za týden přinesla viditelný posun?
+5. Kterou kapitolu nebo přílohu e-booku bychom měli použít jako pracovní vodítko?
+
+Příklad připravené odpovědi:
+
+```text
+Největší problém: Uživatel po registraci neví, co má udělat jako první.
+Dopad: Máme demo účty, ale málo dokončených prvních projektů.
+Podezřelá data: Ptáme se na telefon, velikost firmy a roli hned při registraci.
+První změna: Zkrátit registraci a přidat první úkol v prázdném stavu.
+Kapitola: 11 Onboarding a aktivace uživatele + B.2 Datová karta funkce.
+```
+
+Tahle příprava šetří čas. Workshop pak nezačíná mlhavou debatou, ale konkrétními signály.
+
+### H.4 Agenda na 90 minut
+
+Držte čas tvrdě. Pokud téma potřebuje víc než přidělený blok, zapište ho do „parkoviště“ a vraťte se k cíli workshopu.
+
+#### 0–10 minut: sladění cíle
+
+Moderátor přečte jediný cíl:
+
+> Na konci workshopu máme jednu prioritní změnu, vlastníka, důkaz úspěchu a privacy-first kontrolu.
+
+Pak tým potvrdí, že cílem není vyřešit celý web, celý produkt ani firemní strategii na příští dekádu. Ambice je hezká věc. Bez hranic je to jen dobře oblečený chaos.
+
+#### 10–25 minut: sběr bolestí
+
+Každý přečte své odpovědi z přípravy. Moderátor zapisuje jen krátké názvy problémů:
+
+- nejasná nabídka,
+- slabý onboarding,
+- zbytečně dlouhý formulář,
+- chybějící case study,
+- neudržovaný seznam nástrojů,
+- nejasná metrika úspěchu.
+
+V této fázi se ještě nehledá řešení. Jen se sbírají signály. Jakmile někdo začne „já bych to celé přepsal do nového frameworku“, zapište návrh a vraťte ho zpátky k problému. Framework není diagnóza.
+
+#### 25–40 minut: výběr jedné brzdy
+
+Každý účastník dá dva hlasy oblastem, které podle něj nejvíc brzdí výsledek. Jeden hlas znamená dopad na zákazníka, druhý hlas dopad na tým nebo provoz.
+
+Vyberte oblast s největší kombinací:
+
+- zákaznická bolest,
+- obchodní dopad,
+- realistická změna do jednoho týdne,
+- nižší privacy nebo provozní riziko po úpravě.
+
+Pokud se tým hádá mezi dvěma oblastmi, vyberte tu, která nejrychleji sníží nejistotu. Ne tu, která zní nejvíc strategicky. Strategicky zní skoro všechno, když to řeknete pomalu a u toho kýváte hlavou.
+
+#### 40–55 minut: převod na konkrétní změnu
+
+Vybranou brzdu přepište do jedné změny podle šablony:
+
+```text
+Změníme [konkrétní část systému]
+pro [konkrétního uživatele nebo tým]
+aby [konkrétní výsledek]
+bez [privacy/provozní riziko, kterému se chceme vyhnout].
+```
+
+Příklady:
+
+- Změníme hero sekci hlavní landing page pro majitele služeb, aby do 10 sekund pochopili výsledek auditu bez nutnosti číst obecné agenturní fráze.
+- Změníme registraci pro nové SaaS uživatele, aby první projekt vytvořili bez zadávání zbytečných firemních údajů.
+- Změníme měsíční marketing report pro tým, aby končil jedním rozhodnutím bez exportů osobních dat do dalších nástrojů.
+
+Dobrá změna je tak konkrétní, že by ji někdo mohl začít dělat hned po workshopu. Pokud věta obsahuje „optimalizovat“, „zlepšit“, „posílit“ nebo „strategicky uchopit“, přepište ji. Tyhle výrazy jsou pohodlné, ale často maskují, že nikdo neví, co se má stát.
+
+### H.5 Datová a privacy-first kontrola
+
+Než změnu schválíte, projděte krátkou kontrolu. Privacy-first není fáze po implementaci. Je to brzda před průšvihem a zároveň produktová výhoda.
+
+Otázky:
+
+- Budeme kvůli změně sbírat nová osobní data?
+- Posíláme data do nového nástroje nebo nové země?
+- Potřebujeme upravit consent, privacy policy, datovou mapu nebo interní dokumentaci?
+- Umíme změnu měřit agregovaně, bez invazivního sledování jednotlivců?
+- Co můžeme odstranit místo toho, abychom něco přidali?
+
+Příklad:
+
+```text
+Změna: Zkrátit registrační formulář.
+Nová data: Ne.
+Odebraná data: Telefon, velikost firmy, pracovní role.
+Měření: Počet dokončených registrací a počet vytvořených prvních projektů.
+Dokumentace: Aktualizovat datovou kartu registrace.
+Riziko: Sales bude chtít telefon zpět. Rozhodnutí: telefon až po vyžádané konzultaci.
+```
+
+Tohle je přesně ten typ rozhodnutí, který vypadá malý, ale dlouhodobě chrání důvěru. Méně polí, méně únikových cest pro data, méně vysvětlování.
+
+### H.6 Důkaz úspěchu: jedna metrika a jeden signál
+
+Každá iterace potřebuje důkaz. Ne nutně dokonalý experiment. Stačí vědět, podle čeho za týden nebo měsíc poznáte, že změna dává smysl.
+
+Použijte dvojici:
+
+- **Jedna metrika:** číslo, které se dá opakovaně sledovat.
+- **Jeden kvalitativní signál:** zpětná vazba, support dotaz, obchodní reakce nebo interní pozorování.
+
+Příklady:
+
+| Typ změny | Metrika | Kvalitativní signál |
+|---|---|---|
+| Nová hero sekce | Kliknutí na konzultaci / návštěvy stránky | Lidé v hovoru opakují stejnou hodnotu, kterou stránka slibuje |
+| Kratší registrace | Dokončené registrace / zahájené registrace | Uživatelé se méně ptají, proč potřebujete jejich data |
+| Nový onboarding krok | Vytvořené první projekty | Support dostává méně dotazů „kde mám začít“ |
+| Měsíční metrický review | Počet rozhodnutí z review | Tým ruší metriky, které nikdo nepoužívá |
+| Privacy audit nástrojů | Počet odstraněných externích skriptů | Vývojář umí popsat datové toky bez detektivní práce |
+
+Metrika bez kvalitativního signálu může být slepá. Kvalitativní signál bez metriky může být anekdota. Spolu tvoří dostatečně dobrý kompas pro malý tým.
+
+### H.7 Výstup workshopu na jednu stránku
+
+Na konci musí vzniknout stručný zápis. Pokud je delší než jedna stránka, nikdo ho nebude používat. Pokud je kratší než pět vět, pravděpodobně v něm chybí rozhodnutí.
+
+Šablona:
+
+```text
+# Workshop výstup
+
+Datum:
+Účastníci:
+Vybraná brzda:
+Použitá kapitola/příloha e-booku:
+
+## Změna
+Změníme:
+Pro koho:
+Aby:
+Bez čeho / jaké riziko hlídáme:
+
+## Vlastnictví
+Vlastník změny:
+Technický nebo provozní reviewer:
+Termín první iterace:
+
+## Důkaz
+Metrika:
+Kvalitativní signál:
+Kdy vyhodnotíme:
+
+## Privacy-first kontrola
+Nová data:
+Odebraná data:
+Nový nástroj nebo tok dat:
+Nutná aktualizace dokumentace:
+
+## Další krok
+První konkrétní úkol:
+Co vědomě neřešíme:
+```
+
+Klíčová je poslední řádka: co vědomě neřešíme. Malé týmy neprohrávají proto, že nemají nápady. Prohrávají proto, že mají moc nápadů otevřených najednou.
+
+### H.8 Příklad hotového výstupu
+
+```text
+Datum: 2026-08-22
+Účastníci: zakladatel, vývojář, člověk ze supportu
+Vybraná brzda: Noví uživatelé nedokončují první projekt.
+Použitá kapitola/příloha: 11 Onboarding a aktivace, B.2 Datová karta funkce.
+
+Změna:
+Změníme prázdný stav po registraci pro nové uživatele,
+aby do pěti minut vytvořili první projekt,
+bez vyžadování telefonu, velikosti firmy a role při registraci.
+
+Vlastnictví:
+Vlastník změny: produkt
+Reviewer: vývojář + support
+Termín první iterace: pátek
+
+Důkaz:
+Metrika: vytvořené první projekty / dokončené registrace
+Kvalitativní signál: méně support dotazů „co mám udělat jako první“
+Vyhodnocení: za 14 dní
+
+Privacy-first kontrola:
+Nová data: žádná
+Odebraná data: telefon, role, velikost firmy
+Nový tok dat: žádný
+Dokumentace: aktualizovat datovou kartu registrace a onboarding changelog
+
+Další krok:
+Produkt napíše nový prázdný stav, vývojář upraví formulář,
+support připraví tři nejčastější dotazy k prvnímu projektu.
+Neřešíme: redesign dashboardu, nové šablony, automatické e-maily.
+```
+
+Všimněte si, že výstup není efektní. Je použitelný. To je mnohem vzácnější vlastnost.
+
+### H.9 Checklist workshopu
+
+- [ ] Workshop má jeden cíl a časový limit.
+- [ ] Účastníci přišli s připravenými odpověďmi.
+- [ ] Vybrali jsme jednu brzdu, ne celý seznam problémů.
+- [ ] Změna je napsaná konkrétní větou.
+- [ ] Má vlastníka, reviewer a termín první iterace.
+- [ ] Má jednu metriku a jeden kvalitativní signál.
+- [ ] Prošli jsme privacy-first kontrolu.
+- [ ] Zapsali jsme, co vědomě neřešíme.
+- [ ] Výstup se vejde na jednu stránku.
+- [ ] Další krok je tak malý, že může začít do 24 hodin.
+
+### Mini cvičení: workshop bez workshopu za 25 minut
+
+Pokud jste sami nebo nemáte čas svolávat tým, udělejte zkrácenou verzi:
+
+1. **5 minut:** napište tři největší brzdy webu, SaaSu nebo marketingu.
+2. **5 minut:** vyberte jednu podle dopadu na zákazníka.
+3. **5 minut:** přepište ji na konkrétní změnu.
+4. **5 minut:** určete metriku, kvalitativní signál a privacy kontrolu.
+5. **5 minut:** napište první úkol a jednu věc, kterou teď neřešíte.
+
+Tahle verze není náhrada týmového sladění, ale je lepší než čekat měsíc na „správný prostor“. Správný prostor často znamená jen to, že problém mezitím vyrostl a pořídil si vlastní budget.
+
+---
+
 # Závěr: Udělejte z e-booku pracovní systém
 
 Pokud jste dočetli až sem, gratuluju. Ne proto, že jste hrdinně přežili Codyho tabulky, checklisty a občasné kopnutí do marketingové mlhy. Hlavní pointa je jednodušší: web, SaaS a marketing se nezlepší tím, že si tým jednou přečte dlouhý dokument. Zlepší se tím, že z něj udělá pravidelný pracovní rytmus.
@@ -7030,6 +7300,8 @@ Pak to opravdu udělejte. Ne dokonale. Dokončeně.
 ---
 
 ## Pracovní log
+- 2026-08-22: Přidána příloha H „90minutový workshop: převod e-booku do akčního plánu“ s agendou, rolí moderátora, privacy-first kontrolou, šablonou výstupu, příkladem hotového zápisu a checklistem.
+
 - 2026-08-22: Přidána příloha G „Údržbový kalendář pro web, SaaS a marketing“ s týdenním, měsíčním, čtvrtletním, pololetním a ročním rytmem údržby, praktickými šablonami, checklistem, mini cvičením a ověřenými zdroji.
 
 - 2026-08-22: Přidána příloha F „AI asistenti v malém týmu bez úniku dat“ s rizikovou mapou použití AI, jednostránkovou týmovou politikou, minimalizací vstupů, transparentností podle aktuálního AI Act kontextu, marketingovým a vývojovým workflow, checklistem, mini cvičením a ověřenými zdroji.
