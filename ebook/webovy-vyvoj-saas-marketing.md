@@ -149,6 +149,7 @@ L. Redakční systém pro obsah, který přežije kampaň
 M. Retence a mazání dat bez paniky
 N. Předávací protokol pro web a SaaS bez vendor lock-inu
 O. 14denní onboardingový plán pro B2B SaaS bez datového přejídání
+P. Nákupní checklist pro privacy-first SaaS nástroje
 
 ---
 
@@ -8671,7 +8672,173 @@ Výstupem má být jedna stránka: aktivační moment, první úkol, první týd
 
 ---
 
+## P. Nákupní checklist pro privacy-first SaaS nástroje
+
+Nákup SaaS nástroje není jen otázka ceny a funkcí. U malého týmu je to hlavně rozhodnutí o datech, provozní závislosti a budoucí možnosti odejít. Špatně vybraný nástroj umí vypadat levně první měsíc a draze ve chvíli, kdy v něm máte zákaznickou historii, fakturaci, support, marketingové kontakty a půlku procesů.
+
+Privacy-first nákupní proces nemusí být právnický román. Stačí mít krátký checklist, který donutí tým položit správné otázky dřív, než někdo připojí produkční data „jen na zkoušku“. Ano, přesně ta věta, kterou později najdete v incident reportu.
+
+### P.1 Rozdělte nástroje podle rizika
+
+Ne každý nástroj potřebuje stejnou kontrolu. Ikonkový editor bez osobních dat není totéž co CRM, helpdesk nebo produktová analytika. Nejdřív nástroj zařaďte do jedné ze tří úrovní.
+
+| Úroveň | Příklady | Minimální kontrola |
+| --- | --- | --- |
+| nízké riziko | design inspirace, veřejné screenshoty, interní poznámky bez osobních údajů | vlastník, účel, možnost exportu, cena |
+| střední riziko | projektové řízení, redakční kalendář, znalostní báze | datová mapa, přístupy, export, retenční pravidla, smluvní základ |
+| vysoké riziko | CRM, e-mailing, analytika, helpdesk, billing, auth, AI nad zákaznickými daty | DPA, role správce/zpracovatele, subdodavatelé, umístění dat, auditní logy, mazání, exit plán |
+
+Pravidlo: pokud nástroj vidí zákazníky, platby, chování uživatelů, support nebo interní know-how, berte ho minimálně jako střední riziko. Pokud zároveň rozhoduje o komunikaci, přístupu nebo automatizaci, posuňte ho na vysoké riziko.
+
+### P.2 Pět otázek před trialem
+
+Před založením trial účtu si napište odpovědi na těchto pět otázek:
+
+1. Jaký konkrétní problém nástroj řeší?
+2. Jaká data do něj půjdou během prvních 14 dní?
+3. Kdo bude mít přístup a jak se přístup odebere?
+4. Jak data dostaneme ven, když nástroj odmítneme?
+5. Co se rozbije, když nástroj na den vypadne?
+
+Pokud neumíte odpovědět na první otázku, nekupujete nástroj. Kupujete naději s měsíční fakturou. Pokud neumíte odpovědět na čtvrtou, nekupujete nástroj. Kupujete budoucí migraci.
+
+### P.3 Minimální vendor karta
+
+Pro každý nástroj držte jednu kartu. Nemusí být hezká. Musí být dohledatelná.
+
+```md
+## Nástroj
+Název, URL, vlastník v týmu, datum schválení.
+
+## Účel
+Jaké rozhodnutí, proces nebo výstup nástroj podporuje.
+
+## Data
+Kategorie dat, osobní údaje, citlivé údaje, zákaznická data, interní know-how.
+
+## Role podle GDPR
+Správce, zpracovatel, společný správce nebo samostatný správce. Důvod zařazení.
+
+## Provoz a subdodavatelé
+Region dat, hosting, subprocesors, support přístup, logy.
+
+## Přístupy
+Role, SSO/MFA, offboarding, auditní stopa.
+
+## Export a mazání
+Formát exportu, frekvence záloh/exportů, mazání po ukončení, retenční pravidla.
+
+## Cena a limit
+Aktuální tarif, fakturační vlastník, limit pro automatické navýšení.
+
+## Exit plán
+Kam data přesuneme, kdo rozhoduje, jak dlouho migrace potrvá.
+```
+
+Nejdůležitější řádek je „účel“. Když účel zmizí, nástroj se má zrušit nebo znovu schválit. Jinak se z něj stane digitální kůlna, do které se roky hází data, protože „tam přece historicky něco je“.
+
+### P.4 GDPR role: nehádejte, zapisujte důvod
+
+U každého nástroje si určete, jakou roli má vůči osobním údajům. EDPB ve svých pokynech k pojmům správce a zpracovatel zdůrazňuje, že role vychází z toho, kdo určuje účely a prostředky zpracování, ne z názvu ve smlouvě. Prakticky: nestačí, že dodavatel říká „jsme processor“. Musí to dávat smysl podle toho, co služba opravdu dělá.
+
+Typické rozlišení:
+
+- **Zpracovatel:** nástroj zpracovává data podle vašich pokynů, například hosting, helpdesk nebo e-mailing pro vaše kontakty.
+- **Samostatný správce:** dodavatel používá data pro vlastní účely, například některé platební, bezpečnostní nebo ověřovací služby.
+- **Společné správcovství:** obě strany společně určují podstatné účely a prostředky, což vyžaduje jasné rozdělení odpovědnosti.
+
+Do vendor karty nepište jen štítek. Pište i důvod: „Dodavatel X je zpracovatel, protože ukládá support tickety podle našich pokynů, nepoužívá obsah ticketů pro vlastní marketing a máme DPA.“ Tohle je krátké, praktické a při auditu výrazně lepší než „někdo to kdysi řešil ve Slacku“.
+
+### P.5 Export, interoperabilita a konec vztahu
+
+Privacy-first nákup nekončí podpisem. Končí až ve chvíli, kdy víte, jak odejít. Evropský Data Act je použitelný od 12. září 2025 a mimo jiné řeší férovější přístup k datům, přenositelnost a přepínání mezi poskytovateli datových služeb včetně cloudových služeb. Pro malý tým z toho plyne jednoduchá provozní lekce: export a exit plán nejsou nice-to-have, ale nákupní kritérium.
+
+Ptejte se:
+
+- Má nástroj export všech relevantních dat bez placeného „enterprise“ divadla?
+- Je export dokumentovaný a strojově čitelný, například CSV, JSON, XML nebo otevřené API?
+- Obsahuje export metadata, historii, přílohy a vazby mezi záznamy?
+- Lze data po ukončení smlouvy smazat a dostat potvrzení?
+- Jak dlouho dodavatel drží zálohy po smazání?
+- Jsou limity API a exportů vhodné pro realistickou migraci?
+
+Když dodavatel umí data jen „na vyžádání přes support“, berte to jako žlutou vlajku. Když neumí říct formát, termín a rozsah exportu, je to vlajka červená. A pokud vám tvrdí, že export není potřeba, protože „u nás zákazníci neodcházejí“, poděkujte za upřímný hororový trailer.
+
+### P.6 Privacy-first skóre nástroje
+
+Pro rychlé rozhodování použijte jednoduché skóre 0–2 body za každou oblast.
+
+| Oblast | 0 bodů | 1 bod | 2 body |
+| --- | --- | --- | --- |
+| účel | nejasný | užitečný, ale široký | konkrétní problém a vlastník |
+| data | nevíme, co sbírá | základní mapa existuje | jasná data, minimalizace, retence |
+| EU provoz | nejasný nebo mimo EU bez vysvětlení | volitelný EU region | EU region/default a jasní subdodavatelé |
+| smlouvy | bez DPA nebo nejasné role | DPA existuje, ale potřebuje kontrolu | role, DPA i subdodavatelé jsou jasní |
+| přístupy | sdílené účty | role existují | MFA/SSO, role, audit, offboarding |
+| export | ruční nebo neúplný | export základních dat | úplný export a ověřený exit plán |
+| cena | nejasné limity | známý tarif | známé limity, vlastník a stop-loss |
+
+Vyhodnocení:
+
+- **0–6 bodů:** nepouštět produkční data.
+- **7–10 bodů:** použít jen s omezeným rozsahem a jasným vlastníkem rizika.
+- **11–14 bodů:** vhodné pro běžný provoz, pokud souhlasí technický a datový vlastník.
+
+Skóre není právní stanovisko. Je to brzda proti impulzivnímu nákupu. A brzdy jsou fajn. Zvlášť když jedete z kopce na SaaS marketplace.
+
+### P.7 Schvalovací rytmus pro malý tým
+
+Nástroj by neměl schvalovat jen člověk, který ho chce používat. Stačí lehký rytmus:
+
+1. Žadatel vyplní vendor kartu.
+2. Technický vlastník zkontroluje integrace, export a bezpečnostní minimum.
+3. Datový vlastník zkontroluje účel, role, retenci a subdodavatele.
+4. Finanční vlastník nastaví tarif, limit a fakturační kontakt.
+5. Po 30 dnech proběhne review: používáme to, šetří to práci, drží to data rozumně?
+
+U nízkorizikových nástrojů stačí zkrácená verze. U vysokorizikových nástrojů si dejte čas. Rychlý nákup CRM nebo analytiky bez datové mapy je jako nastěhovat do kanceláře cizího člověka s klíčem od archivu a říct mu, ať se „nějak chová slušně“.
+
+### P.8 Praktický checklist před nákupem
+
+- [ ] Víme, jaký problém nástroj řeší a kdo je vlastník.
+- [ ] Nástroj má zařazené riziko: nízké, střední nebo vysoké.
+- [ ] Máme datovou mapu pro první reálné použití.
+- [ ] U osobních údajů máme určenou GDPR roli a důvod.
+- [ ] Známe region uložení dat a subdodavatele.
+- [ ] Máme DPA nebo víme, proč není potřeba.
+- [ ] Přístupy jsou přes individuální účty, ideálně s MFA nebo SSO.
+- [ ] Je jasné, kdo odebírá přístupy při odchodu člověka z týmu.
+- [ ] Export je dostupný, dokumentovaný a otestovaný na vzorku.
+- [ ] Víme, jak se data mažou po ukončení používání.
+- [ ] Cena má vlastníka, limit a datum další kontroly.
+- [ ] Nástroj neobsahuje zbytečné trackery nebo social skripty.
+- [ ] Po 30 dnech je naplánované review reálného přínosu.
+
+### Mini cvičení: vendor review za 45 minut
+
+1. Vyberte jeden nástroj, který už používáte a obsahuje zákaznická nebo uživatelská data.
+2. Vyplňte vendor kartu jen z dostupných informací.
+3. Označte tři největší neznámé.
+4. Udělejte testovací export a zkontrolujte, jestli by šel použít pro migraci.
+5. Najděte subdodavatele a region dat.
+6. Rozhodněte: ponechat, omezit data, nahradit, nebo zrušit.
+7. Zapište datum další kontroly.
+
+Výstupem nemá být dokonalý audit. Výstupem má být rozhodnutí. Nástroj buď slouží týmu a respektuje data, nebo jen pohodlně zvětšuje provozní mlhu.
+
+*Codyho komentář: dobrý SaaS nástroj poznáte i podle toho, jak snadno se s ním dá férově skončit. Vendor, který vám pomůže odejít, si paradoxně zaslouží větší důvěru než ten, který vás drží zamčené za exportem „kontaktujte sales“.*
+
+### Zdroje k příloze P
+
+- EDPB Guidelines 07/2020 k pojmům správce a zpracovatel v GDPR: https://www.edpb.europa.eu/documents/guideline/guidelines-072020-on-the-concepts-of-controller-and-processor-in-the-gdpr_en
+- Evropská komise: Data Act, přehled pravidel pro férový přístup k datům a přepínání mezi poskytovateli datových služeb: https://digital-strategy.ec.europa.eu/en/policies/data-act
+- Evropská komise: Data Act explained, praktické vysvětlení kapitol včetně cloud switchingu, interoperability a ochrany před nefér smluvními podmínkami: https://digital-strategy.ec.europa.eu/en/factpages/data-act-explained
+
+---
+
 ## Pracovní log
+- 2026-08-22: Přidána příloha P „Nákupní checklist pro privacy-first SaaS nástroje“ s rizikovým zařazením nástrojů, vendor kartou, GDPR rolemi, exportem, privacy-first skóre, schvalovacím rytmem, checklistem, mini cvičením a ověřenými zdroji.
+
 - 2026-08-22: Přidána příloha O „14denní onboardingový plán pro B2B SaaS bez datového přejídání“ s aktivačním momentem, fázemi prvních 14 dní, minimalizací dat, onboardingovými zprávami, metrickou kartou, checklistem a mini cvičením.
 
 - 2026-08-22: Přidána příloha N „Předávací protokol pro web a SaaS bez vendor lock-inu“ s předávací mapou, jednostránkovou šablonou, převzetím kódu a provozu, přístupovou hygienou, exportem dat, designovými zdroji, akceptačním checklistem, mini cvičením a zdroji.
