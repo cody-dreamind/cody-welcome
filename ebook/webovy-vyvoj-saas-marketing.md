@@ -139,6 +139,7 @@ B. Šablony pro malé privacy-first týmy
 C. Slovník metrik pro web, SaaS a marketing
 D. Privacy-first audit webu za 60 minut
 E. Dodavatelský brief pro privacy-first nástroje a služby
+F. AI asistenti v malém týmu bez úniku dat
 
 ---
 
@@ -6586,6 +6587,155 @@ Výstupem není perfektní dokumentace. Výstupem je lepší rozhodnutí. A kdy�
 
 ---
 
+## F. AI asistenti v malém týmu bez úniku dat
+
+AI asistent může malému týmu ušetřit hodiny práce: shrne support ticket, připraví návrh landing page, pomůže s SQL dotazem, vygeneruje varianty e-mailu nebo najde díru v dokumentaci. Jenže stejný nástroj se umí během pěti minut proměnit v datový vysavač, pokud do něj tým bez rozmyslu kopíruje osobní údaje, obchodní tajemství, interní incidenty a exporty z CRM.
+
+Dobrá zpráva: nemusíte AI zakázat. Stačí ji provozovat jako normální firemní systém. Tedy s účelem, pravidly, přístupy, logy, datovou mapou a jasnou odpovědností. Ano, je to méně romantické než „AI transformace“. Zato to nezní jako pozvánka na budoucí auditní horor.
+
+### F.1 Rozdělte použití AI podle rizika
+
+Ne každé použití AI má stejné riziko. Návrh titulku pro blog je jiná liga než analýza zákaznických smluv nebo automatické rozhodování o ceně. Malý tým by měl začít jednoduchou mapou:
+
+| Úroveň | Příklad použití | Povolená data | Kontrola |
+| --- | --- | --- | --- |
+| Nízké riziko | návrh osnovy článku, kontrola formulace, brainstorming kampaně | veřejné nebo anonymní informace | běžná lidská revize |
+| Střední riziko | shrnutí interní dokumentace, návrh odpovědi supportu, analýza anonymizovaných dat | interní data bez citlivých osobních údajů | revize vlastníkem procesu |
+| Vysoké riziko | práce se smlouvami, HR daty, zdravotními údaji, bezpečnostními incidenty nebo zákaznickými exporty | pouze po schválení a minimalizaci | právní, bezpečnostní a provozní review |
+| Zakázané bez zvláštního projektu | automatické rozhodování s dopadem na člověka, skryté profilování, manipulativní personalizace | žádná produkční data | samostatné posouzení a dokumentace |
+
+Praktické pravidlo: pokud byste daná data neposlali běžnému externímu dodavateli e-mailem, neposílejte je ani do AI nástroje. AI není kouzelná černá skříňka mimo realitu. Je to dodavatel, API, logy, účty, oprávnění a smluvní vztah. Prostě další systém, který se tváří chytřeji než tabulka. Někdy právem, někdy velmi sebevědomě špatně.
+
+### F.2 Napište týmovou AI politiku na jednu stránku
+
+AI politika nemusí mít 40 stran. U malého týmu stačí dokument, který lidé opravdu přečtou. Doporučená struktura:
+
+```md
+# AI pravidla týmu
+
+## Povolené použití
+- Na co AI běžně používáme:
+- Jaké typy dat jsou povolené:
+
+## Zakázané použití
+- Co do AI nikdy nevkládáme:
+- Které procesy nesmí AI rozhodovat sama:
+
+## Schvalování
+- Kdo schvaluje nový AI nástroj:
+- Kdo schvaluje práci s produkčními daty:
+
+## Transparentnost
+- Kdy uživateli říkáme, že komunikuje s AI:
+- Kdy označujeme AI generovaný nebo upravený obsah:
+
+## Kontrola výstupů
+- Kdo odpovídá za finální text, kód nebo rozhodnutí:
+- Jak řešíme chyby a incidenty:
+```
+
+Tahle stránka má být praktická, ne právnický koberec. Když designer neví, jestli může dát do chatu screenshot zákaznického dashboardu, dokument selhal. Když support neví, jestli může poslat celé vlákno konverzace do sumarizace, dokument selhal taky.
+
+### F.3 Minimalizujte vstupy dřív, než řešíte model
+
+Nejlevnější ochrana je neposílat zbytečná data. Před každým AI workflow udělejte tři úpravy:
+
+1. **Ořízněte kontext.** Model často nepotřebuje celý export, historii zákazníka ani interní poznámky. Potřebuje konkrétní výřez.
+2. **Anonymizujte osoby.** Nahraďte jména, e-maily, telefony, IP adresy, čísla objednávek a identifikátory neutrálními značkami.
+3. **Oddělte tajemství.** API klíče, hesla, tokeny, neveřejné cenové dohody, bezpečnostní detaily a incidentní logy do běžného AI chatu nepatří.
+
+Ukázka lepšího zadání:
+
+```md
+Špatně:
+Tady je export 300 zákazníků z CRM. Najdi mi nejlepší segmenty pro kampaň.
+
+Lépe:
+Tady je anonymizovaný souhrn: segment A má 38 firem, medián obratu X, problém Y,
+nejčastější námitku Z. Navrhni tři hypotézy kampaně a otázky pro ověření.
+```
+
+U kódu platí totéž. Model nepotřebuje celé `.env`, produkční dump databáze ani přístupové údaje, aby vysvětlil chybu validace formuláře. Pokud je potřebuje, nejspíš se neptáte dost konkrétně.
+
+### F.4 Transparentnost není jen právní checkbox
+
+Od 2. srpna 2026 se v EU začala vymáhat část pravidel AI Actu včetně vybraných transparentních povinností: například uživatel má být informován, když komunikuje s chatbotem, a deepfakes nebo určité AI generované či upravené výstupy mají být označené podle kontextu. U menších týmů to prakticky znamená: nehrát si na člověka, když odpovídá bot, a neskrývat AI původ tam, kde by mohl uživatele mást.
+
+Praktické texty:
+
+- **Chatbot:** „Jsem AI asistent. Pomůžu s rychlou orientací, ale důležité odpovědi kontroluje tým.“
+- **Support návrh:** „Odpověď připravil AI nástroj a zkontroloval ji člověk z podpory.“
+- **AI obrázek v kampani:** „Ilustrační obrázek byl vytvořen pomocí AI.“
+- **Automatické shrnutí:** „Toto je automaticky vytvořené shrnutí konverzace pro interní použití.“
+
+Transparentnost není omluva pro horší kvalitu. Věta „vygenerováno AI“ neznamená „neručíme za nic, hodně štěstí“. Odpovědnost má pořád člověk nebo firma, která výstup používá.
+
+### F.5 AI workflow pro marketing bez invazivního trackingu
+
+Marketing často láká k tomu, aby se do AI posílalo všechno: návštěvy, heatmapy, CRM, e-maily, call transkripty, reklamní publika. Privacy-first cesta je opačná: používat AI hlavně na práci s agregovaným poznáním a veřejným obsahem.
+
+Bezpečnější workflow:
+
+1. Vezměte anonymizované poznatky z prodejních hovorů: námitky, slova zákazníků, časté otázky.
+2. Přidejte veřejné podklady: landing page, dokumentaci, ceník, FAQ, články.
+3. Požádejte AI o návrh hypotéz: co vysvětlit lépe, jaké námitky doplnit, jaké téma rozpracovat.
+4. Výstup zkontroluje člověk, který rozumí zákazníkům.
+5. Dopad měřte agregovaně: kvalita poptávek, odpovědi, přímé návštěvy, dokončené formuláře.
+
+Tím získáte většinu užitku bez toho, aby se z marketingu stala malá sledovací laboratoř s hezkými grafy a špatným svědomím.
+
+### F.6 AI workflow pro vývoj bez bezpečnostního průšvihu
+
+AI v kódu je výborný junior kolega: rychlý, ochotný, někdy geniální a občas naprosto přesvědčený o nesmyslu. Proto potřebuje mantinely.
+
+Pravidla pro vývoj:
+
+- Neposílejte produkční tajemství, `.env`, privátní klíče ani celé databázové dumpy.
+- U citlivého kódu posílejte minimální reprodukci problému, ne celý systém.
+- Každý AI návrh projde review stejně jako kód od člověka.
+- Bezpečnostní změny testujte a dokumentujte, ne jen „model říkal, že je to safe“.
+- U generovaného kódu kontrolujte licence, závislosti, vstupní validaci a error handling.
+- U automatizovaných agentů nastavte omezená oprávnění, audit log a možnost rychlého vypnutí.
+
+Malý tým by měl mít pro AI asistenty samostatné technické role: co smí číst, co smí zapisovat, kam může volat, jaké repozitáře vidí a kdo schvaluje akce s dopadem na produkci. Agent s přístupem „všechno všude“ není produktivita. To je pending incident v kapuci.
+
+### F.7 Checklist před nasazením AI asistenta
+
+- [ ] Víme, jaký problém AI asistent řeší a jak poznáme přínos.
+- [ ] Máme určeného vlastníka nástroje a procesu.
+- [ ] Zapsali jsme, jaká data do AI vstupují a kde se zpracovávají.
+- [ ] Minimalizujeme nebo anonymizujeme vstupy před odesláním.
+- [ ] Zkontrolovali jsme smlouvu, subprocessory, retenci a možnost vypnutí trénování na datech.
+- [ ] Uživatel pozná, kdy komunikuje s AI nebo kdy je obsah AI generovaný.
+- [ ] Výstupy s obchodním, právním, bezpečnostním nebo zákaznickým dopadem kontroluje člověk.
+- [ ] Agent má nejmenší potřebná oprávnění a auditní stopu.
+- [ ] Máme incident postup pro únik dat, špatnou odpověď nebo neoprávněnou akci.
+- [ ] Umíme nástroj vypnout a exportovat nebo smazat relevantní data.
+
+### Mini cvičení: AI use case za 30 minut
+
+Vyberte jeden konkrétní AI nápad, který tým zvažuje. Ne „zavedeme AI do firmy“. To je jako říct „zavedeme elektřinu do strategie“.
+
+1. **5 minut:** napište jednu větu: „AI pomůže komu udělat co rychleji nebo lépe.“
+2. **5 minut:** označte riziko: nízké, střední, vysoké, zakázané bez projektu.
+3. **5 minut:** napište seznam dat, která AI opravdu potřebuje.
+4. **5 minut:** vyškrtněte všechna data, která nepotřebuje.
+5. **5 minut:** napište transparentní větu pro uživatele nebo interní tým.
+6. **5 minut:** rozhodněte pilot: vlastník, termín, metrika, vypínač.
+
+Výstupem je rozhodnutí, ne nadšená prezentace. Pilot, který nemá vypínač, není pilot. Je to adopce s lepším PR.
+
+### Zdroje k příloze F
+
+- European Commission: [AI Act](https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai)
+- European Commission: [The enforcement framework of the AI Act](https://digital-strategy.ec.europa.eu/en/policies/enforcement-ai-act)
+- European Commission: [Transparency obligations under Article 50 of the AI Act](https://digital-strategy.ec.europa.eu/en/faqs/transparency-obligations-under-article-50-ai-act)
+- European Commission: [Code of Practice on marking and labelling AI-generated content](https://digital-strategy.ec.europa.eu/en/news/commission-publishes-code-practice-marking-and-labelling-ai-generated-content)
+- European Data Protection Board: [Fundamentals of Secure AI Systems with Personal Data](https://www.edpb.europa.eu/system/files/2025-06/spe-training-on-ai-and-data-protection-technical_en.pdf)
+- ENISA: [Multilayer Framework for Good Cybersecurity Practices for AI](https://www.enisa.europa.eu/publications/multilayer-framework-for-good-cybersecurity-practices-for-ai)
+
+---
+
 # Závěr: Udělejte z e-booku pracovní systém
 
 Pokud jste dočetli až sem, gratuluju. Ne proto, že jste hrdinně přežili Codyho tabulky, checklisty a občasné kopnutí do marketingové mlhy. Hlavní pointa je jednodušší: web, SaaS a marketing se nezlepší tím, že si tým jednou přečte dlouhý dokument. Zlepší se tím, že z něj udělá pravidelný pracovní rytmus.
@@ -6716,6 +6866,8 @@ Pak to opravdu udělejte. Ne dokonale. Dokončeně.
 ---
 
 ## Pracovní log
+- 2026-08-22: Přidána příloha F „AI asistenti v malém týmu bez úniku dat“ s rizikovou mapou použití AI, jednostránkovou týmovou politikou, minimalizací vstupů, transparentností podle aktuálního AI Act kontextu, marketingovým a vývojovým workflow, checklistem, mini cvičením a ověřenými zdroji.
+
 - 2026-08-22: Přidána příloha E „Dodavatelský brief pro privacy-first nástroje a služby“ s rozhodovacím briefem, datovou mapou, kritérii výběru, otázkami pro dodavatele, pilotním režimem, exit plánem, red flags, checklistem a ověřenými zdroji.
 
 - 2026-08-22: Přidána příloha D „Privacy-first audit webu za 60 minut“ s auditní tabulkou, kontrolou skriptů, formulářů, cookies, externích služeb, konverzí, rozhodovacím plánem a ověřenými zdroji.
