@@ -12667,7 +12667,212 @@ Hotovo znamená: tým má rozhodnutí a jeden konkrétní patch. Ne dokument, kt
 - EDPB má mezi schválenými pokyny materiál WP248 rev.01 k DPIA a určování, zda zpracování pravděpodobně povede k vysokému riziku: https://www.edpb.europa.eu/endorsed-wp29-guidelines_en
 - ÚOOÚ v základní příručce k ochraně údajů uvádí posouzení vlivu jako součást povinností správce u rizikovějších zpracování: https://uoou.gov.cz/verejnost/zakladni-prirucka-k-ochrane-udaju
 
+## AL. Marketingový datový audit bez šmírovacího autopilota
+
+Marketing často začíná nevinně: jeden měřicí skript, jeden pixel, jedno „jen si ověříme výkon kampaní“. O tři měsíce později má web víc externích požadavků než věcných argumentů v hero sekci a nikdo si nepamatuje, kdo co zapnul. To není growth. To je datový bordel s dashboardem.
+
+Marketingový datový audit je krátká provozní revize toho, jaká data marketing sbírá, kam odcházejí, proč existují a jaké rozhodnutí z nich opravdu vzniká. Nejde o zákaz měření. Jde o to měřit tak, aby firma rozuměla výkonu kanálů, ale nevyráběla z návštěvníků chodící reklamní profily.
+
+Privacy-first přístup v Evropě stojí na jednoduchém pravidle: nejdřív minimalizace a účel, potom nástroj. Pokud neumíte jednou větou říct, jaké rozhodnutí daný skript podporuje, pravděpodobně na webu nemá co dělat. Ano, i když má hezký dashboard a sales člověk slíbil, že „implementace je na pět minut“. To je mimochodem věta, která v IT často znamená „pět minut plus tři týdny následků“.
+
+*Codyho komentář: nejlepší marketingový stack pro malý tým není ten s nejvíc integracemi. Je to ten, který přežije audit, onboarding nového člověka a otázku zákazníka: „co o mně sbíráte?“ bez trapného ticha.*
+
+### AL.1 Udělejte inventuru marketingových datových vstupů
+
+Začněte seznamem všech míst, kde marketing sbírá nebo odvozuje signály. Neřešte zatím, jestli je nástroj „dobrý“ nebo „špatný“. Jen napište realitu.
+
+Typické vstupy:
+
+- webová analytika,
+- UTM parametry,
+- formuláře a lead magnety,
+- newsletter nebo RSS odběry,
+- CRM poznámky,
+- chat a support widgety,
+- heatmapy a session replay,
+- reklamní pixely,
+- affiliate nebo referral parametry,
+- produktová analytika propojená s marketingem,
+- exporty do tabulek,
+- automatizace mezi nástroji.
+
+U každého vstupu doplňte tři věci: kdo ho vlastní, jaké rozhodnutí podporuje a jestli obsahuje osobní údaje nebo identifikátory. Už tahle jednoduchá tabulka často odhalí, že část měření existuje jen proto, že „se to kdysi nastavilo“. Krásný důvod. Archeologie s JavaScriptem.
+
+Praktický příklad:
+
+```markdown
+## Datový vstup
+- Název: UTM parametry v odkazech z LinkedInu
+- Vlastník: marketing
+- Účel: porovnat měsíční výkon distribučních kanálů
+- Osobní údaje: ne, pokud se neukládají do user-level profilu
+- Kam data jdou: webová analytika, měsíční report
+- Rozhodnutí: posílit / omezit kanál podle kvality návštěv a poptávek
+- Revize: měsíčně
+```
+
+### AL.2 Rozdělte měření podle rizika
+
+Ne každé měření má stejnou váhu. Agregovaný počet návštěv landing page je jiné riziko než session replay formuláře s e-mailovou adresou. Proto si vytvořte jednoduché kategorie.
+
+Nízké riziko:
+
+- agregované page views,
+- anonymizované nebo nepřímé počty konverzí,
+- UTM vyhodnocené na úrovni kampaní,
+- serverové logy s krátkou retencí a omezeným přístupem,
+- RSS statistiky bez profilování konkrétních čtenářů.
+
+Střední riziko:
+
+- CRM leady s historií zdroje,
+- newsletter segmenty podle zájmu,
+- produktová analytika navázaná na účet,
+- remarketingové publikum bez citlivých kategorií,
+- automatizace, která posílá data mezi více dodavateli.
+
+Vysoké riziko:
+
+- session replay a heatmapy se vstupy do formulářů,
+- reklamní pixely napříč webem,
+- fingerprinting nebo pokusy obcházet odmítnutí cookies,
+- enrichment leadů z externích databází,
+- spojování marketingových, produktových a support dat do detailního profilu,
+- předávání dat mimo EU/EHP bez jasného právního a smluvního krytí.
+
+Pro nízké riziko většinou stačí dobrá dokumentace, krátká retence a omezený přístup. Pro střední riziko potřebujete jasný účel, kontrolu souhlasů a datovou mapu. Pro vysoké riziko si položte nepříjemnou otázku: opravdu bez toho produkt nebo marketing nefunguje? Pokud odpověď zní „konkurence to má“, není to důvod. Je to ozvěna.
+
+### AL.3 Consent navrhujte férově, ne jako konverzní past
+
+Pokud používáte volitelné cookies, reklamní skripty nebo jiné trackery, banner nesmí být marketingová minihra. Souhlas má být svobodný, konkrétní, informovaný a jednoznačný. EDPB ve svých pokynech k souhlasu podle GDPR zdůrazňuje, že souhlas má být skutečnou volbou, ne výsledkem tlaku nebo matoucího designu.
+
+Praktická pravidla:
+
+- tlačítko odmítnout musí být stejně snadné jako přijmout,
+- volitelné skripty se nespouští před souhlasem,
+- text říká konkrétní účely, ne obecné „zlepšování služeb“,
+- nastavení jde později změnit,
+- design nezvýrazňuje přijetí tak agresivně, že odmítnutí vypadá jako tajný level,
+- odmítnutí nesmí rozbít běžné používání webu, pokud skript není nezbytný.
+
+CNIL opakovaně řešil případy, kdy odmítnutí cookies nebylo stejně jednoduché jako přijetí. EDPB zase vydal pokyny k deceptive design patterns v rozhraních sociálních platforem; i když se týkají konkrétně sociálních sítí, pro marketingové weby je z nich užitečné praktické ponaučení: UI texty, barvy, hierarchie a tok obrazovky mohou manipulovat s rozhodnutím člověka stejně účinně jako právní klička.
+
+Privacy-first varianta pro malý tým: začněte bez reklamních pixelů a session replay. Použijte agregovanou analytiku, UTM parametry, serverové konverze bez osobních profilů a kvalitní formulářové otázky. Pokud později přidáte volitelný skript, projde release checklistem, consent testem a zápisem do datové mapy.
+
+### AL.4 Neposílejte každý lead do každého nástroje
+
+Častá marketingová automatizace vypadá takto: formulář pošle data do CRM, CRM do e-mailingu, e-mailing do scoringu, scoring do reklamy, reklama zpět do analytiky a někde cestou vznikne tabulka, o které nikdo neví. Výsledkem je systém, kde je snadné data rozšířit a těžké je opravit, exportovat nebo smazat.
+
+Zaveďte pravidlo „jeden primární domov dat“. Lead má mít jasné místo, kde se drží aktuální stav. Ostatní nástroje dostávají jen minimum, které potřebují pro konkrétní úkol.
+
+Příklad rozumného toku:
+
+1. Landing page odešle formulář do vlastního backendu nebo CRM.
+2. CRM uloží kontakt, zdroj a souhlasové informace.
+3. E-mailing dostane jen e-mail, jméno, jazyk a seznam, pokud existuje platný důvod nebo souhlas.
+4. Analytika dostane agregovanou konverzi bez obsahu zprávy.
+5. Měsíční report pracuje s počty a kvalitou leadů, ne s exportem všech osobních údajů.
+
+Pokud nástroj potřebuje celý obsah poptávky, zeptejte se proč. Pokud odpověď zní „aby AI mohla lépe segmentovat“, zastavte se. Možná stačí ruční štítek, kategorie problému nebo agregovaný signál.
+
+### AL.5 Připravte marketingový exit plán
+
+Marketingové nástroje se mění rychle. Dnes je to elegantní řešení, zítra zdražení, akvizice, změna podmínek nebo přesun dat do režimu, který už se vám nelíbí. Privacy-first tým proto neřeší exit až ve chvíli, kdy hoří faktura. Má ho připravený předem.
+
+EU Data Act platí od 12. září 2025 a mimo jiné posiluje možnost přechodu mezi poskytovateli data-processing služeb, včetně cloudových služeb. To je dobrý směr, ale produktově se nespoléhejte jen na regulaci. Váš vlastní exit plán má být konkrétnější než věta „nějak to vyexportujeme“.
+
+U každého marketingového nástroje si zapište:
+
+- jaká data v něm jsou,
+- v jakém formátu jdou exportovat,
+- jestli export obsahuje i souhlasy, odhlášení a historii změn,
+- jak dlouho trvá migrace,
+- co se stane s formuláři, automatizacemi a odkazy po vypnutí,
+- jak se mažou data u dodavatele,
+- jaký je nouzový režim na 48 hodin.
+
+Marketingový nástroj bez exit plánu není nástroj. Je to malý rukojmí program v SaaS kabátku.
+
+### AL.6 Šablona: marketingová datová karta
+
+```markdown
+# Marketingová datová karta: [název nástroje / toku]
+
+## Účel
+- Jaké rozhodnutí nebo proces podporuje:
+- Co by se stalo, kdybychom ho vypnuli:
+
+## Data
+- Kategorie dat:
+- Osobní údaje / identifikátory:
+- Citlivá nebo riziková data:
+- Zdroj dat:
+
+## Tok
+- Kam data vstupují:
+- Kam se předávají:
+- Kde se ukládají:
+- Kdo má přístup:
+
+## Consent a právní základ
+- Je potřeba souhlas:
+- Kde se ukládá stav souhlasu:
+- Jak se dá změnit nebo odvolat:
+
+## Retence a mazání
+- Jak dlouho data držíme:
+- Jak se mažou v primárním systému:
+- Jak se mažou u dodavatelů:
+
+## Exit
+- Exportní formát:
+- Nouzový režim:
+- Náhradní řešení:
+- Datum posledního testu exportu:
+
+## Rozhodnutí
+- Zachovat / omezit / nahradit / vypnout:
+- Vlastník:
+- Revize:
+```
+
+### AL.7 Checklist: marketing bez šmírovacího autopilota
+
+- [ ] Máme seznam všech marketingových skriptů, formulářů, integrací a exportů.
+- [ ] U každého vstupu víme, jaké rozhodnutí podporuje.
+- [ ] Volitelné cookies a trackery se nespouští před souhlasem.
+- [ ] Odmítnutí souhlasu je stejně jednoduché jako přijetí.
+- [ ] Neposíláme celý obsah leadů do nástrojů, které ho nepotřebují.
+- [ ] CRM nebo jiný primární systém je jasný domov zákaznických dat.
+- [ ] Reporty pracují primárně s agregovanými signály.
+- [ ] Každý marketingový dodavatel má exportní a mazací postup.
+- [ ] Máme plán, co vypnout jako první, pokud se nástroj stane rizikem.
+- [ ] Nový skript se nenasazuje bez datové karty a vlastníka.
+
+### Mini cvičení: marketingový datový audit za 60 minut
+
+1. Otevřete produkční web a seznam používaných marketingových nástrojů.
+2. Sepište všechny skripty, formuláře, pixely, automatizace a exporty.
+3. U každého napište účel jednou větou.
+4. Označte nízké, střední a vysoké riziko.
+5. Najděte jeden nástroj nebo tok, který neposkytuje jasné rozhodnutí.
+6. Zkontrolujte, jestli odmítnutí cookies funguje stejně snadno jako přijetí.
+7. Vyberte jednu věc k omezení, vypnutí nebo lepšímu zdokumentování.
+8. Přidejte vlastníka a termín do 14 dní.
+
+Hotovo znamená: audit vytvořil jednu konkrétní změnu. Ne jen hezký seznam. Seznam bez akce je muzeum nepořádku.
+
+### Zdroje k příloze AL
+
+- EDPB Guidelines 05/2020 on consent under GDPR vysvětlují požadavky na svobodný, konkrétní, informovaný a jednoznačný souhlas: https://www.edpb.europa.eu/sites/default/files/files/file1/edpb_guidelines_202005_consent_en.pdf
+- CNIL upozorňuje, že odmítnutí cookies má být stejně snadné jako jejich přijetí, a popisuje problematické praktiky při cookie bannerech: https://www.cnil.fr/en/refusing-cookies-should-be-easy-accepting-them-cnil-continues-its-action-and-issues-new-orders
+- CNIL v roce 2025 popsal dark patterns v cookie bannerech, například vizuální zvýhodnění přijetí oproti odmítnutí: https://www.cnil.fr/en/dark-patterns-cookie-banners-cnil-issues-formal-notice-website-publishers
+- EDPB Guidelines 03/2022 popisují deceptive design patterns a doporučení pro rozhraní, která nemají manipulovat s rozhodováním lidí o osobních údajích: https://www.edpb.europa.eu/documents/guideline/guidelines-032022-on-deceptive-design-patterns-in-social-media-platform_en
+- Evropská komise k Data Act uvádí, že nařízení se začalo uplatňovat 12. září 2025 a zahrnuje také pravidla pro efektivnější přechod mezi poskytovateli data-processing služeb: https://digital-strategy.ec.europa.eu/en/policies/data-act
+
 ## Pracovní log
+
+- 2026-08-23: Přidána příloha AL „Marketingový datový audit bez šmírovacího autopilota“ s inventurou marketingových dat, rizikovými kategoriemi, consent pravidly, omezením předávání leadů, exit plánem, šablonou datové karty, checklistem, mini cvičením a ověřenými zdroji.
 
 - 2026-08-23: Přidána příloha AK „DPIA pro malý SaaS bez právního dramatu“ se screeningem rizik, mini DPIA kartou, scénáři, produktovými opatřeními, eskalací, napojením na release proces, checklistem, mini cvičením a ověřenými zdroji.
 
