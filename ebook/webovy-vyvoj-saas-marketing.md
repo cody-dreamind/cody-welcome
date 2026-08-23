@@ -13521,7 +13521,190 @@ Hotovo není ve chvíli, kdy backup job svítí zeleně. Hotovo je ve chvíli, k
 - European Commission vysvětluje, že při porušení zabezpečení osobních údajů s rizikem pro práva a svobody lidí má organizace oznámit událost dozorovému úřadu bez zbytečného odkladu, nejpozději do 72 hodin: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/obligations/what-data-breach-and-what-do-we-have-do-case-data-breach_en
 
 
+## AP. Bezpečnostní hlavičky bez cargo cult konfigurace
+
+Bezpečnostní hlavičky jsou levná obranná vrstva. Nevyřeší špatnou autentizaci, děravé oprávnění ani SQL dotaz napsaný s optimismem člověka, který nikdy neviděl produkční logy. Pomůžou ale prohlížeči dělat správné věci: držet HTTPS, omezit načítání skriptů, zabránit vložení stránky do cizího iframe, snížit únik referrerů a nehádat MIME typy jako věštkyně z cookies banneru.
+
+Pro malý web nebo SaaS je dobrý cíl jednoduchý: mít sadu hlaviček, které rozumíte, umíte je otestovat a nezlomí vám produkt při každém přidání obrázku, platební brány nebo support widgetu. Cargo cult konfigurace typu „zkopíruj nejpřísnější CSP z blogu a modli se“ je skvělá cesta k pátečnímu incidentu. Ano, pátek si incidenty vybírají záměrně. Mají vkus.
+
+*Codyho komentář: bezpečnostní hlavička není talisman. Pokud nevíte, proč ji nastavujete, máte jen delší odpověď serveru a lepší pocit. To je málo.*
+
+### AP.1 Začněte inventářem toho, co stránka opravdu načítá
+
+Než napíšete `Content-Security-Policy`, udělejte malou inventuru zdrojů. U statického marketingového webu to může být otázka půl hodiny. U SaaSu s dashboardem, platbami, uploady, mapami a helpdeskem to bude delší, ale pořád levnější než rozbitý checkout.
+
+Zapište si:
+
+- odkud se načítá JavaScript,
+- odkud se načítají styly a fonty,
+- odkud se načítají obrázky a video,
+- kam aplikace posílá `fetch` / API požadavky,
+- které domény používají formuláře, platby, e-mailové potvrzení nebo support,
+- jestli produkt používá iframe, embed, OAuth popup, web worker nebo blob URL,
+- které části jsou veřejný web a které přihlášená aplikace.
+
+Privacy-first filtr: každá externí doména v CSP je zároveň datová otázka. Pokud stránka načítá script z cizí služby, nejde jen o bezpečnost. Jde o to, kdo se dozví, že návštěvník přišel, jaký má prohlížeč, IP adresu, referrer a někdy i další kontext. Evropský provoz není jen region databáze. Je to i seznam skriptů, které si pouštíte do prohlížeče zákazníka.
+
+Mini příklad inventáře:
+
+| Typ zdroje | Povolený původ | Důvod | Vlastník | Revize |
+| --- | --- | --- | --- | --- |
+| `script-src` | `'self'` | vlastní frontend bundle | vývoj | každý release |
+| `img-src` | `'self' data:` | lokální obrázky a inline ikony | vývoj | měsíčně |
+| `connect-src` | `'self' https://api.example.eu` | aplikační API v EU | vývoj | každý release API |
+| `form-action` | `'self'` | vlastní formuláře | produkt | kvartálně |
+| `frame-ancestors` | `'none'` | stránka se nemá vkládat do iframe | bezpečnost | ročně |
+
+Pokud do tabulky neumíte napsat důvod, doména tam pravděpodobně nemá být. Tohle pravidlo je nepříjemně účinné. Skoro jako úklid sklepa, jen méně pavouků a více JavaScriptu.
+
+### AP.2 Nastavte základní sadu hlaviček podle typu stránky
+
+Pro veřejný marketingový web bývá dobrý základ:
+
+```http
+Strict-Transport-Security: max-age=31536000; includeSubDomains
+X-Content-Type-Options: nosniff
+Referrer-Policy: strict-origin-when-cross-origin
+Permissions-Policy: geolocation=(), microphone=(), camera=()
+Content-Security-Policy: default-src 'self'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'; object-src 'none'; img-src 'self' data:; script-src 'self'; style-src 'self'; upgrade-insecure-requests
+```
+
+Pro přihlášenou SaaS aplikaci je potřeba být opatrnější. Možná potřebujete `connect-src` pro API, `img-src` pro uživatelské uploady, `frame-src` pro platební bránu nebo `worker-src` pro exporty. Neotevírejte ale CSP stylem `default-src *`. To je jako zamknout dveře a nechat vedle nich ceduli „klíč pod rohožkou, prosím nespěchejte“.
+
+Praktičtější SaaS start:
+
+```http
+Strict-Transport-Security: max-age=31536000; includeSubDomains
+X-Content-Type-Options: nosniff
+Referrer-Policy: strict-origin-when-cross-origin
+Permissions-Policy: geolocation=(), microphone=(), camera=()
+Content-Security-Policy: default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data: https://assets.example.eu; connect-src 'self' https://api.example.eu; script-src 'self'; style-src 'self'; upgrade-insecure-requests
+Cache-Control: no-store
+```
+
+`Cache-Control: no-store` nedávejte slepě na celý veřejný web, protože byste zbytečně zhoršili výkon statických assetů. Dává smysl pro citlivé přihlášené stránky, odpovědi s osobními údaji, exporty a administraci. Pro veřejné statické soubory naopak používejte verzované assety a rozumnou cache.
+
+### AP.3 CSP zavádějte ve dvou krocích
+
+Content Security Policy je nejsilnější a zároveň nejčastěji rozbitá část. MDN popisuje CSP jako mechanismus, kterým server říká prohlížeči, jaké zdroje může stránka načítat a co smí kód dělat. OWASP ji doporučuje jako obranu proti XSS a dalším injekčním útokům, ale zároveň je potřeba ji přizpůsobit konkrétní aplikaci.
+
+Bezpečný postup:
+
+1. **Inventář:** zapište skutečné zdroje z produkce a stagingu.
+2. **Report-only režim:** nejdřív nastavte `Content-Security-Policy-Report-Only`, pokud máte kam bezpečně sbírat reporty.
+3. **Lokální test:** projděte homepage, landing pages, login, registraci, checkout, dashboard a exporty.
+4. **Zúžení:** odeberte wildcardy, `unsafe-inline` a cizí domény bez důvodu.
+5. **Enforce:** přepněte na `Content-Security-Policy` až po kontrole hlavních cest.
+6. **Release kontrola:** každá nová externí služba musí aktualizovat CSP kartu.
+
+Privacy-first poznámka k reportům: CSP report může obsahovat URL a technický kontext stránky. Neposílejte reporty automaticky do libovolné externí služby bez datové karty. Pokud je sbíráte, nastavte krátkou retenci, agregaci a omezený přístup. Bezpečnostní monitoring nemá být zadními dveřmi k dalšímu trackingu.
+
+### AP.4 HSTS zapínejte až po kontrole HTTPS reality
+
+`Strict-Transport-Security` říká prohlížeči, že má pro doménu používat HTTPS. MDN i OWASP popisují HSTS jako ochranu proti návratu na nešifrované HTTP a proti části downgrade útoků. To je dobré. Zároveň to znamená, že pokud máte rozbité certifikáty, zapomenuté subdomény nebo staré HTTP endpointy, můžete si problém zabetonovat do prohlížečů uživatelů.
+
+Před zapnutím dlouhého HSTS:
+
+- všechny veřejné stránky fungují přes HTTPS,
+- HTTP přesměrovává na HTTPS,
+- certifikáty se obnovují automaticky,
+- subdomény jsou zmapované,
+- staging nebo interní subdomény nejsou omylem pod `includeSubDomains`, pokud na to nejsou připravené,
+- tým ví, kdo řeší incident s certifikátem.
+
+Začněte klidně kratším `max-age`, ověřte provoz a teprve potom přidejte delší hodnotu. HSTS preload je samostatné rozhodnutí, ne checkbox pro pocit dospělosti. U malého týmu ho řešte až ve chvíli, kdy máte domény, subdomény a certifikáty opravdu pod kontrolou.
+
+### AP.5 Nechte prohlížeč odmítat zbytečné schopnosti
+
+`Permissions-Policy` je dobrý způsob, jak říct: tahle stránka nepotřebuje kameru, mikrofon, geolokaci ani jiné citlivé schopnosti. Pro běžný B2B web nebo SaaS administraci je výchozí postoj jednoduchý: zakázat vše, co produkt nepoužívá.
+
+Příklad:
+
+```http
+Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=(), usb=(), interest-cohort=()
+```
+
+Některé direktivy se v čase mění a podpora v prohlížečích není stejná, takže konfiguraci berte jako živý seznam, ne jako vytesané desatero. Důležitý je princip: nepovolujte citlivé browser API jen proto, že jednou možná vznikne funkce „najdi nejbližší pobočku pomocí GPS“. Až vznikne, dostane vlastní rozhodnutí, text pro uživatele a privacy review.
+
+### AP.6 Šablona: karta bezpečnostních hlaviček
+
+```markdown
+# Karta bezpečnostních hlaviček: [web / aplikace / doména]
+
+## Rozsah
+- Doména:
+- Typ stránek: veřejný web / přihlášená aplikace / administrace / API
+- Vlastník:
+- Datum poslední revize:
+
+## Povolené zdroje
+- Skripty:
+- Styly a fonty:
+- Obrázky a média:
+- API / connect:
+- Formuláře:
+- Iframe / embed:
+
+## Hlavičky
+- Strict-Transport-Security:
+- Content-Security-Policy:
+- Referrer-Policy:
+- Permissions-Policy:
+- X-Content-Type-Options:
+- Cache-Control pro citlivé stránky:
+
+## Privacy-first kontrola
+- Které externí domény dostávají požadavky z prohlížeče:
+- Kde tyto služby provozují data:
+- Jaký je právní základ nebo důvod použití:
+- Jaká je alternativa s menším únikem dat:
+
+## Testování
+- Nástroj / skript:
+- Testované uživatelské cesty:
+- Známé výjimky:
+- Další revize:
+```
+
+### AP.7 Checklist: security headers bez rozbitého webu
+
+- [ ] Máme inventář všech externích zdrojů, které stránka načítá.
+- [ ] Každá externí doména má vlastníka, důvod a privacy-first posouzení.
+- [ ] HTTPS funguje na hlavní doméně i relevantních subdoménách.
+- [ ] HSTS nezapínáme s `includeSubDomains`, dokud neznáme dopad na subdomény.
+- [ ] CSP začíná restriktivně a výjimky přidáváme vědomě.
+- [ ] Nepoužíváme `default-src *` jako „dočasné“ řešení bez termínu odstranění.
+- [ ] `frame-ancestors` chrání stránky, které nemají být vložené do cizího iframe.
+- [ ] `object-src 'none'` vypíná staré embed mechanismy, které produkt nepotřebuje.
+- [ ] `Referrer-Policy` omezuje zbytečné předávání detailních URL na cizí weby.
+- [ ] `Permissions-Policy` zakazuje browser schopnosti, které produkt nepoužívá.
+- [ ] Citlivé přihlášené odpovědi mají odpovídající cache pravidla.
+- [ ] Po každé nové integraci proběhne kontrola CSP a datových toků.
+
+### Mini cvičení: hlavičkový audit za 45 minut
+
+1. Otevřete produkční web a vyexportujte response headers pro homepage, login, jednu landing page a jednu přihlášenou stránku.
+2. Zapište všechny externí domény, které se objeví v network panelu.
+3. Označte domény jako nutné, volitelné nebo historické.
+4. Navrhněte základní CSP bez wildcardů.
+5. Zkontrolujte, jestli by CSP nezlomila formulář, checkout, support nebo obrázky.
+6. Nastavte report-only režim nebo staging test.
+7. Vytvořte kartu bezpečnostních hlaviček a naplánujte jednu opravu.
+
+Výstup není „máme A+ v online scanneru“. Výstup je rozumná, pochopená a udržovatelná konfigurace, která chrání uživatele a zároveň nepouští do stránky cizí skripty bez důvodu. Scanner je pomůcka. Produktová odpovědnost je pořád na vás. Překvapení, nástroje za vás pořád neudělají práci. Drzost.
+
+### Zdroje k příloze AP
+
+- OWASP HTTP Headers Cheat Sheet shrnuje doporučené bezpečnostní response hlavičky, jejich účel a typické konfigurace: https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Headers_Cheat_Sheet.html
+- MDN Content Security Policy guide vysvětluje, jak CSP omezuje zdroje stránky, brání XSS, řeší clickjacking a jak ji nasazovat: https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CSP
+- MDN Strict-Transport-Security dokumentuje HSTS, jeho syntaxi, účel a dopady na budoucí HTTPS spojení: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Strict-Transport-Security
+- OWASP HTTP Strict Transport Security Cheat Sheet popisuje přínosy HSTS, související hrozby a praktické poznámky k nasazení: https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Strict_Transport_Security_Cheat_Sheet.html
+- MDN Web Security doporučuje HTTPS, CSP, `frame-ancestors` a další základní obrany jako jádro webové bezpečnosti: https://developer.mozilla.org/en-US/docs/Web/Security
+
+
 ## Pracovní log
+- 2026-08-23: Přidána příloha AP „Bezpečnostní hlavičky bez cargo cult konfigurace“ s inventářem zdrojů, základní sadou HTTP hlaviček, CSP/HSTS postupem, Permissions-Policy, kartou bezpečnostních hlaviček, checklistem, mini auditem a ověřenými zdroji.
+
 - 2026-08-23: Přidána příloha AO „Zálohy a obnova bez falešného pocitu bezpečí“ s inventářem obnovy, RPO/RTO, 3-2-1-plus přístupem, restore testem, backup kartou, incident postupem, checklistem, mini cvičením a ověřenými zdroji.
 
 - 2026-08-23: Přidána příloha AN „SLA, status page a support závazky bez falešných devítek“ se SLI/SLO/SLA rámcem, status page šablonami, support prioritami, údržbou, postmortem, checklistem a ověřenými zdroji.
