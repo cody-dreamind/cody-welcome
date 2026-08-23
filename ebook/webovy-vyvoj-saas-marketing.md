@@ -229,6 +229,7 @@ V. Měsíční report pro malý SaaS bez metrického divadla
 W. Roční privacy-first revize webu a SaaS
 X. Trust centrum pro malý privacy-first SaaS
 Y. AI workflow pro web, SaaS a marketing bez úniku dat
+Z. Revizní sprint pro web, SaaS a marketing po 90 dnech
 
 ---
 
@@ -10507,7 +10508,210 @@ Výsledek má být obyčejný: méně chaosu, méně dat v cizích systémech a 
 - Evropská komise shrnuje GDPR principy včetně účelového omezení, minimalizace dat, omezení uložení, integrity, důvěrnosti a odpovědnosti: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en
 - EDPB popisuje Taskforce on Generative AI Enforcement jako platformu pro výměnu informací o vyšetřováních generativní AI a podporu souladu s GDPR: https://www.edpb.europa.eu/about-edpb/edpb-plenaries-subgroups-and-taskforces_en
 
+## Z. Revizní sprint pro web, SaaS a marketing po 90 dnech
+
+Každý web, SaaS i marketingový systém po spuštění trochu zdivočí. Přibudou nové formuláře, jedna rychlá integrace „jen na kampaň“, tři texty upravené ve spěchu, dva nejasné reporty, pět backlog položek bez vlastníka a jeden nástroj, který už nikdo neumí vypnout, protože „to asi něco dělá“. Revizní sprint po 90 dnech je praktická brzda proti tomu, aby se z dobrého startu stal pomalý provozní kompost.
+
+Nejde o audit pro audit. Cílem je zjistit, co po třech měsících opravdu funguje, co je jen historická náhoda a kde web nebo SaaS sbírá víc dat, práce nebo rizika, než potřebuje. Tři měsíce jsou dost dlouhá doba na první signály a dost krátká na to, aby šly chyby opravit bez archeologické expedice.
+
+*Codyho komentář: revizní sprint je jako servis kola. Když ho vynecháte jednou, možná se nic nestane. Když ho vynecháváte rok, zjistíte to ve chvíli, kdy vám upadne šlapka uprostřed kopce. Marketingově se tomu říká „nečekaná optimalizační příležitost“.*
+
+### Z.1 Začněte původním záměrem, ne aktuálním chaosem
+
+První hodina revize patří otázce: co jsme chtěli, aby systém dělal? Vraťte se k původnímu briefu, rozhodovacímu deníku, launch checklistu nebo alespoň k první verzi landing page. Pokud žádný původní záměr nemáte, vytvořte ho zpětně. Není to ideální, ale pořád lepší než hodnotit projekt podle nálady z poslední porady.
+
+Zapište čtyři věci:
+
+- **Primární úkol:** co měl web, produkt nebo kampaň umožnit zákazníkovi.
+- **Obchodní očekávání:** jaký signál měl ukázat, že práce dává smysl.
+- **Provozní očekávání:** kolik ruční práce, supportu a údržby jste byli ochotni nést.
+- **Datové očekávání:** jaká data byla opravdu nutná a proč.
+
+Příklad:
+
+```markdown
+## Původní záměr
+- Web měl přivést kvalifikované poptávky na konzultaci privacy-first SaaS architektury.
+- Úspěch měl znamenat 8 dobrých poptávek měsíčně, ne maximální počet vyplněných formulářů.
+- Tým byl ochoten věnovat vyhodnocení 30 minut týdně.
+- Formulář měl sbírat jen jméno, e-mail, firmu, typ projektu a krátký kontext.
+```
+
+Bez tohoto návratu se revize snadno zvrhne do seznamu náhodných přání: nové animace, jiná hero fotka, další automation flow, více grafů, méně grafů, možná podcast, možná TikTok, možná raději ticho. Záměr drží revizi při zemi.
+
+### Z.2 Rozdělte revizi na pět vrstev
+
+Revizní sprint má fungovat i pro malý tým. Proto nechte každou vrstvu projít krátce, ale konkrétně. U každé hledejte jednu věc, kterou zachovat, jednu věc zlepšit a jednu věc odstranit.
+
+1. **Nabídka a obsah:** rozumí návštěvník do deseti vteřin, komu pomáháte a s čím?
+2. **Konverzní cesta:** ví člověk, jaký je další krok a co se stane po odeslání formuláře nebo registraci?
+3. **Produktové chování:** dostane se uživatel k první hodnotě bez zbytečných polí, obrazovek a vysvětlování?
+4. **Provoz a podpora:** které dotazy, chyby nebo ruční kroky se opakují a proč?
+5. **Data a soukromí:** sbíráte pořád jen data, která potřebujete, nebo se mezitím připlížil datový bufet?
+
+U každé vrstvy používejte reálné artefakty: stránku, formulář, support ticket bez osobních údajů, anonymizovaný onboarding záznam, agregovaný report, rozhodovací kartu. Nehodnoťte abstraktní dojmy. Dojmy jsou dobrý začátek debaty, ale špatný důkaz.
+
+### Z.3 Připravte revizní tabuli
+
+Revizní tabule má mít málo sloupců a jasná pravidla. Pokud potřebujete třicet stavů, pravděpodobně neřešíte sprint, ale administrativní cosplay.
+
+```markdown
+# Revizní sprint: [oblast]
+
+## Zachovat
+- Co funguje a nechceme rozbít:
+
+## Zlepšit
+- Co má signál problému a reálný dopad:
+
+## Odstranit
+- Co nepřináší hodnotu, zvyšuje riziko nebo bere čas:
+
+## Ověřit
+- Co nevíme a potřebujeme zjistit před rozhodnutím:
+
+## Rozhodnutí
+- Co uděláme teď:
+- Co vědomě neuděláme:
+- Kdo je vlastník:
+- Termín:
+- Důkaz dokončení:
+```
+
+Do tabule nepatří všechno, co někoho napadne. Patří tam položky, které mají alespoň jeden z těchto signálů:
+
+- zákazníci se na danou věc opakovaně ptají,
+- lidé padají v konkrétním kroku onboardingové nebo konverzní cesty,
+- tým musí opakovaně ručně opravovat stejný problém,
+- metrika se změnila a existuje rozumná hypotéza proč,
+- data tečou do nástroje, který už nemá jasný účel,
+- text, slib nebo proces neodpovídá tomu, co firma skutečně dodává.
+
+Jedna dobrá revizní tabule je lepší než rozsáhlý auditní dokument, který nikdo neotevře. Dokumenty mají podporovat rozhodnutí, ne simulovat pohyb.
+
+### Z.4 Vyhodnocujte signály v kontextu, ne izolovaně
+
+Po 90 dnech už často máte dost signálů na první zlepšení, ale ještě nemusíte mít jistotu na velká rozhodnutí. Buďte praktičtí. Nekoukejte jen na jednu metriku a nepředstírejte, že graf zná celý příběh.
+
+Příklady kontextového vyhodnocení:
+
+- **Nízká konverze formuláře** může znamenat špatnou nabídku, moc polí, nejasný další krok, slabý důkaz hodnoty nebo špatnou návštěvnost.
+- **Hodně registrací a nízká aktivace** může znamenat dobrý marketing, ale špatný onboarding, nepochopenou hodnotu nebo příliš brzké vyžadování dat.
+- **Málo support dotazů** může znamenat skvělý produkt, ale také to, že lidé problém vzdali a odešli.
+- **Vysoká návštěvnost článku** může být úspěch, pokud přivádí relevantní lidi, nebo jen hezké číslo bez obchodního dopadu.
+
+Praktické pravidlo: každé rozhodnutí v revizním sprintu potřebuje kombinaci alespoň dvou signálů. Například agregovaná analytika plus zákaznická zpětná vazba. Nebo support téma plus ruční provozní náklad. Nebo změna v onboardingovém kroku plus konkrétní dotazy od nových uživatelů.
+
+Privacy-first varianta měření je jednoduchá: pracujte s agregovanými trendy, anonymizovanými poznámkami a jasně omezeným účelem. Nepotřebujete sledovat člověka napříč internetem, abyste poznali, že formulář s dvanácti poli je malá administrativní pastička.
+
+### Z.5 Hledejte mazání, nejen přidávání
+
+Revize není jen seznam nových úkolů. Je to i příležitost něco zrušit. Malé týmy často trpí tím, že každá iterace něco přidá, ale málokterá něco odebere. Výsledek? Web s pěti CTA, SaaS se sedmi nejasnými nastaveními, marketing se třemi reporty a tým s pocitem, že „by to chtělo systém“. Ano. Chtělo. Ideálně takový, který umí mazat.
+
+Co typicky odstranit:
+
+- formulářová pole, která nikdo nepoužívá při kvalifikaci nebo onboardingu,
+- skripty a embed prvky z kampaní, které už neběží,
+- metriky, podle kterých se nerozhoduje,
+- automatizace bez vlastníka,
+- produktové volby, které vytvářejí support dotazy a nemají jasnou hodnotu,
+- staré texty, které slibují něco, co už neprodáváte,
+- účty v nástrojích, které nemají aktivního správce,
+- interní dokumenty označené jako „aktuální“, ale naposledy otevřené za vlády pravěkého sprintu.
+
+Mazání má mít stejné bezpečnostní minimum jako přidávání: vlastník, důvod, kontrola dopadu, možnost návratu, pokud jde o technickou změnu. Ale nebojte se ho. Odebraná zbytečnost je často levnější a bezpečnější než nová optimalizace.
+
+### Z.6 Naplánujte jen jednu hlavní změnu
+
+Na konci revizního sprintu vyberte jednu hlavní změnu na další dva týdny. Ne pět. Ne „balíček quick wins“, který ve skutečnosti znamená dvacet drobných zásahů bez priority. Jednu změnu, která má nejlepší poměr dopadu, jistoty a nízkého privacy rizika.
+
+Dobré výstupy revize:
+
+- zkrátíme poptávkový formulář a upravíme potvrzovací e-mail,
+- přepíšeme hero sekci podle reálných dotazů zákazníků,
+- doplníme onboardingový checklist do prvního prázdného stavu,
+- odstraníme nepoužívaný marketingový skript a aktualizujeme cookie inventář,
+- zjednodušíme pricing stránku a přidáme tři konkrétní příklady použití,
+- vytvoříme veřejnou stránku trust centra s minimem ověřitelných informací.
+
+Špatné výstupy revize:
+
+- „zlepšit konverze“,
+- „víc pracovat s daty“,
+- „udělat marketing robustnější“,
+- „připravit strategii“,
+- „zamyslet se nad privacy“.
+
+To nejsou výstupy. To jsou názvy porad, ze kterých člověk odchází s chutí založit si papírnictví.
+
+### Šablona: jednostránkový zápis revizního sprintu
+
+```markdown
+# Revizní sprint po 90 dnech: [projekt / oblast]
+
+## Původní záměr
+- Primární úkol:
+- Obchodní očekávání:
+- Provozní očekávání:
+- Datové očekávání:
+
+## Signály
+- Agregovaná data:
+- Zákaznická zpětná vazba:
+- Support / provoz:
+- Technická nebo privacy rizika:
+
+## Zachovat
+- Co funguje:
+- Proč to necháváme:
+
+## Zlepšit
+- Co má největší dopad:
+- Jaká je hypotéza změny:
+
+## Odstranit
+- Co rušíme:
+- Jak ověříme, že nic důležitého nerozbíjíme:
+
+## Rozhodnutí na 14 dní
+- Jedna hlavní změna:
+- Vlastník:
+- Termín:
+- Důkaz dokončení:
+- Signál úspěchu:
+- Privacy-first kontrola:
+
+## Neřešíme teď
+- Vědomě odložené nápady:
+```
+
+### Checklist: revizní sprint bez provozního divadla
+
+- [ ] Máme původní záměr nebo jsme ho zpětně jasně popsali.
+- [ ] Revize pokrývá nabídku, konverzní cestu, produktové chování, provoz a data.
+- [ ] Každý problém má alespoň jeden konkrétní signál, ne jen pocit.
+- [ ] Rozhodnutí se opírají o kombinaci metrik, zpětné vazby a provozních poznatků.
+- [ ] Hledali jsme věci k odstranění, ne jen nové úkoly.
+- [ ] Zkontrolovali jsme formuláře, skripty, integrace a přístupy z pohledu minimalizace dat.
+- [ ] Vybrali jsme jednu hlavní změnu na dalších 14 dní.
+- [ ] Změna má vlastníka, termín, důkaz dokončení a signál úspěchu.
+- [ ] Vědomě jsme zapsali, co teď neřešíme.
+- [ ] Výstup je uložený tam, kde ho tým za měsíc opravdu najde.
+
+### Mini cvičení: 90minutová revize po spuštění
+
+1. Vyberte jednu oblast: hlavní landing page, onboarding, pricing, support nebo měření.
+2. Během 10 minut napište původní záměr a očekávání.
+3. Během 20 minut projděte tři signály: agregovaná data, zákaznickou zpětnou vazbu a provozní poznámky.
+4. Během 15 minut vyplňte „zachovat, zlepšit, odstranit“.
+5. Během 15 minut udělejte privacy-first kontrolu dat, skriptů, nástrojů a přístupů.
+6. Během 20 minut vyberte jednu změnu na dalších 14 dní a napište rozhodovací kartu.
+7. Během 10 minut zapište, co vědomě neřešíte, aby se sprint nerozpadl na seznam přání.
+
+Po 90 dnech nechcete vědět všechno. Chcete vědět dost na další rozumný krok. Dobrý revizní sprint proto nekončí velkou prezentací. Končí jednou dokončenou změnou, menším množstvím zbytečných dat a týmem, který ví, proč dělá právě tohle.
+
 ## Pracovní log
+- 2026-08-23: Přidána příloha Z „Revizní sprint pro web, SaaS a marketing po 90 dnech“ s pětivrstvou revizí, tabulí zachovat/zlepšit/odstranit, kontextovým vyhodnocením signálů, mazáním zbytečností, jednostránkovou šablonou, checklistem a 90minutovým cvičením.
 - 2026-08-23: Přidána příloha Y „AI workflow pro web, SaaS a marketing bez úniku dat“ s rizikovým tříděním použití AI, minimalizací promptů, výběrem nástroje podle dat, pravidly lidské kontroly, AI workflow kartou, AI gramotností, checklistem, mini auditem a ověřenými EU zdroji.
 - 2026-08-23: Přidána příloha X „Trust centrum pro malý privacy-first SaaS“ s praktickou strukturou veřejné stránky, vrstvami dokumentů a interních důkazů, datovými toky, seznamem subdodavatelů, bezpečnostní komunikací, procesem žádostí subjektů údajů, šablonou, checklistem, mini cvičením a ověřenými zdroji.
 - 2026-08-23: Doplněna úvodní část „Jak z e-booku udělat týmový workshop“ s 75minutovým rámcem, výběrem workshopu podle situace, šablonou zápisu a privacy-first checklistem.
