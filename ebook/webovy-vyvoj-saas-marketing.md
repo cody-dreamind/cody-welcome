@@ -13702,7 +13702,176 @@ Výstup není „máme A+ v online scanneru“. Výstup je rozumná, pochopená 
 - MDN Web Security doporučuje HTTPS, CSP, `frame-ancestors` a další základní obrany jako jádro webové bezpečnosti: https://developer.mozilla.org/en-US/docs/Web/Security
 
 
+## AQ. Registr dodavatelů a subprocesorů bez slepé důvěry
+
+Privacy-first provoz nestojí jen na tom, že vlastní aplikace je hezky napsaná, běží v Evropě a netahá do stránky pět reklamních pixelů jako vánoční řetěz. Stojí i na tom, že víte, komu data předáváte dál. Hosting, e-mailing, platby, support, analytika, monitoring, AI nástroje, CRM, transkripce hovorů, fakturace — každý z těchto nástrojů může být buď rozumný pomocník, nebo nenápadná díra v datové mapě.
+
+Registr dodavatelů není právnická dekorace. Je to provozní seznam odpovědí na otázku: „Kdo se může dotknout dat našich zákazníků a proč?“ Pokud na tuhle otázku tým odpovídá stylem „asi jen pár služeb, počkej, zeptám se v chatu“, registr neexistuje. Existuje jen optimismus. A optimismus je skvělý na brainstorming, horší na audit.
+
+### AQ.1 Rozlišujte dodavatele, zpracovatele a subprocesory
+
+Ne každý nástroj má stejnou roli. Prakticky potřebujete rozlišit tři kategorie:
+
+- **Běžný dodavatel:** poskytuje službu, ale nedostává osobní údaje zákazníků ani uživatelů. Příklad: nástroj pro kreslení ikon bez importu zákaznických dat.
+- **Zpracovatel:** zpracovává osobní údaje vaším jménem, podle vašich pokynů. Příklad: hosting databáze, e-mailový nástroj pro transakční zprávy nebo helpdesk.
+- **Subprocesor:** další subjekt, kterého používá váš zpracovatel. Příklad: e-mailová služba, kterou používá váš helpdesk k doručování odpovědí.
+
+GDPR článek 28 stojí právě na tom, že zpracovatel nesmí být černá skříňka. Má pracovat podle doložených pokynů, používat odpovídající bezpečnostní opatření, pomáhat s právy subjektů údajů a nezapojovat dalšího zpracovatele bez podmínek. Přeloženo do provozní češtiny: nestačí vědět název nástroje. Potřebujete vědět, jaká data bere, kde běží, komu je předává a jak z něj odejdete.
+
+**Codyho komentář:** Pokud registr dodavatelů vypadá jako seznam log v nákupním oddělení, je to špatně. Má to být mapa rizika, ne sbírka faktur. Ano, faktury jsou taky důležité. Ne, faktura vám neřekne, jestli support nástroj posílá přílohy mimo EU.
+
+### AQ.2 Začněte živým inventářem, ne dokonalou tabulkou
+
+První verze registru má být hotová za dvě hodiny, ne po třech měsících interního alchymistického programu. Sežeňte z týmu seznam používaných nástrojů a ke každému zapište minimum:
+
+| Pole | Otázka | Příklad |
+|---|---|---|
+| Název | Jak se služba jmenuje? | Transakční e-mail |
+| Vlastník | Kdo ji ve firmě používá a hlídá? | Produktový lead |
+| Účel | Proč ji potřebujeme? | Posílání potvrzení a obnovy hesla |
+| Data | Jaké osobní údaje do ní jdou? | E-mail, jméno, jazyk, ID účtu |
+| Role | Dodavatel, zpracovatel, subprocesor? | Zpracovatel |
+| Region | Kde jsou data uložena a zpracována? | EU region |
+| Smlouva | Máme DPA / zpracovatelskou smlouvu? | Ano, uložená v právní složce |
+| Subprocesory | Kde je jejich seznam? | Ve vendor trust centru |
+| Retence | Jak dlouho se data drží? | Logy 30 dní, zprávy podle účtu |
+| Exit | Jak data exportujeme nebo smažeme? | Export CSV + API delete |
+| Revize | Kdy naposledy někdo ověřil realitu? | 2026-08-23 |
+
+První cíl není perfektní právní elegance. První cíl je odhalit šedé zóny: nástroje bez vlastníka, služby bez jasného účelu, data posílaná do marketingu „pro jistotu“, staré integrace, které už nikdo nepoužívá, ale pořád mají API klíč. To jsou místa, kde vzniká provozní riziko.
+
+### AQ.3 Prioritizujte podle dopadu na lidi
+
+Nezačínejte tím, že budete stejně hluboce auditovat favicon generátor a produkční databázi. Ano, obojí je nástroj. Ne, riziko není stejné. Doporučené pořadí kontroly:
+
+1. **Produkční hosting, databáze, objektové úložiště a zálohy.** Tady leží jádro zákaznických dat.
+2. **Identita, přihlášení, SSO, role a administrace.** Tady se rozhoduje, kdo se k datům dostane.
+3. **Support a CRM.** Sem lidé často sami napíšou citlivé věci, protože chtějí problém vyřešit rychle.
+4. **E-mailing a notifikace.** Obsah zpráv, metadata a seznamy příjemců umí být překvapivě výživné.
+5. **Analytika, marketing a reklamní nástroje.** Tady hrozí profilování, přenosy a sběr dat, která vlastně nepotřebujete.
+6. **AI nástroje a automatizace.** Tady se riziko často schová do promptů, příloh, exportů a pohodlných integrací.
+
+U každé služby si dejte jednoduché skóre 1–3:
+
+- **1 — nízké riziko:** žádná osobní data nebo jen veřejné údaje, snadné vypnutí.
+- **2 — střední riziko:** běžná kontaktní nebo provozní data, jasná smlouva, omezený rozsah.
+- **3 — vysoké riziko:** zákaznický obsah, přístup k účtům, citlivé přílohy, rozsáhlé logy, AI zpracování nebo přenos mimo EU.
+
+Služby se skóre 3 mají mít vlastníka, smluvní kontrolu, popsané subprocesory, plán omezení dat a testovaný exit. Bez toho jsou to malé časované bomby s hezkým logem.
+
+### AQ.4 Ptejte se dodavatelů na konkrétní věci
+
+Obecná odpověď „jsme GDPR compliant“ není odpověď. Je to marketingový ekvivalent kouřové clony. Ptejte se tak, aby šlo odpověď uložit do registru:
+
+- Které kategorie osobních údajů služba zpracovává?
+- V jakých zemích jsou data uložena a kde k nim může být vzdálený přístup?
+- Jaký je seznam subprocesorů a jak se oznamují změny?
+- Jak dlouho se drží aplikační logy, audit logy, support zprávy a zálohy?
+- Jak funguje export, smazání a ukončení smlouvy?
+- Kdo u dodavatele může přistupovat k zákaznickým datům a jak je přístup logovaný?
+- Existuje DPA, bezpečnostní dokumentace, certifikace nebo popis technických a organizačních opatření?
+- Lze nastavit EU region, vypnout trénování modelů nebo omezit sdílení dat pro produktovou analytiku?
+
+Pokud dodavatel neumí odpovědět, není to automaticky důvod k panice. Je to důvod k rozhodnutí. Buď službu omezíte jen na data, která zvládnete obhájit, nebo najdete alternativu, nebo si vědomě zapíšete riziko. Co nedělejte: nepředstírejte, že otázka neexistuje, protože nástroj je pohodlný. Pohodlí je častý nepřítel dobré datové hygieny. Velmi charismatický nepřítel, bohužel.
+
+### AQ.5 Subprocesory hlídejte jako změnový proces
+
+Subprocesor není poznámka pod čarou. Když váš hlavní dodavatel přidá další službu, může se změnit datový tok, region, bezpečnostní model i právní riziko. Evropský sbor pro ochranu osobních údajů v aktuálním stanovisku k odpovědnosti správců při využívání zpracovatelů a subprocesorů zdůrazňuje, že správce má mít dostatek informací pro posouzení celého řetězce zpracování. Prakticky: seznam subprocesorů nemá být odkaz, který nikdo nikdy neotevřel.
+
+Nastavte si jednoduchý proces:
+
+1. U klíčových dodavatelů se přihlaste k oznámením o změnách subprocesorů.
+2. Novou změnu posuďte podle dat, regionu a účelu.
+3. Pokud změna přidává významné riziko, eskalujte ji vlastníkovi služby.
+4. Pokud změnu akceptujete, zapište datum a důvod.
+5. Pokud ji neakceptujete, spusťte exit plán nebo omezení rozsahu dat.
+
+Tohle nemusí být dramatická rada s deseti lidmi. U malého SaaSu často stačí měsíční kontrola změn u pěti nejdůležitějších služeb. Ale musí se dít. Automaticky. Jinak se z registru stane muzeum dobrých úmyslů.
+
+### AQ.6 Šablona: karta dodavatele
+
+```markdown
+# Karta dodavatele: [název služby]
+
+## Vlastník
+- Interní vlastník:
+- Tým:
+- Datum poslední revize:
+
+## Účel
+- Proč službu používáme:
+- Co by se stalo, kdybychom ji vypnuli:
+- Alternativa / fallback:
+
+## Data
+- Kategorie údajů:
+- Zdroj dat:
+- Citlivost:
+- Posíláme zákaznický obsah? ano/ne
+
+## Role a smlouvy
+- Role: dodavatel / zpracovatel / subprocesor
+- DPA / smlouva:
+- Bezpečnostní dokumentace:
+- Seznam subprocesorů:
+
+## Provoz
+- Region uložení:
+- Možný vzdálený přístup:
+- Retence:
+- Logování přístupů:
+- Zálohy:
+
+## Privacy-first rozhodnutí
+- Jak minimalizujeme data:
+- Co je vypnuté:
+- Jak informujeme uživatele:
+- Kdy službu znovu posoudíme:
+
+## Exit
+- Export:
+- Smazání:
+- Ukončení přístupů:
+- Riziko vendor lock-inu:
+```
+
+Tuhle kartu ukládejte tam, kde ji najde produkt, technika i vedení. Ne jen právník. Ne jen zakladatel. Ne jen člověk, který službu kdysi koupil a teď už pracuje jinde. Data nemají nostalgii. Přístupy často ano.
+
+### AQ.7 Checklist: dodavatelé pod kontrolou
+
+- [ ] Máme seznam všech nástrojů, které přijímají osobní údaje nebo zákaznický obsah.
+- [ ] Každý zpracovatel má interního vlastníka a jasný účel použití.
+- [ ] U klíčových služeb máme uloženou DPA nebo zpracovatelské podmínky.
+- [ ] Víme, kde jsou data uložena a zda existuje vzdálený přístup mimo EU.
+- [ ] U služeb s vyšším rizikem sledujeme změny subprocesorů.
+- [ ] Marketingové, analytické a AI nástroje mají omezený rozsah dat.
+- [ ] Každá nová integrace prochází datovou kartou před nasazením, ne až po incidentu.
+- [ ] Máme exit plán pro nejdůležitější dodavatele.
+- [ ] Čtvrtletně mažeme nepoužívané služby, API klíče a staré přístupy.
+
+### Mini cvičení: registr dodavatelů za 75 minut
+
+1. Vypište všechny nástroje používané ve vývoji, marketingu, supportu, prodeji a provozu.
+2. Označte ty, které přijímají osobní údaje, zákaznický obsah nebo provozní logy.
+3. Ke každému určete vlastníka a účel.
+4. Vyberte pět nejrizikovějších služeb.
+5. Pro každou vyplňte kartu dodavatele alespoň v minimální podobě.
+6. U každé služby napište jedno opatření: omezit data, doplnit smlouvu, zapnout EU region, smazat starý účet nebo připravit exit.
+7. Naplánujte měsíční kontrolu změn subprocesorů u kritických dodavatelů.
+
+Výstupem není „máme vendor management“. Výstupem je seznam služeb, kterým rozumíte natolik, že se za ně dokážete zákazníkovi podívat do očí. To je v B2B často silnější argument než další animovaný gradient na homepage. I když gradient se tváří velmi sebevědomě.
+
+### Zdroje k příloze AQ
+
+- GDPR článek 28 popisuje pravidla pro zpracovatele, smluvní povinnosti a zapojení dalších zpracovatelů: https://gdpr-info.eu/art-28-gdpr/
+- Evropská komise shrnuje vztah správce a zpracovatele a praktické povinnosti při zpracování osobních údajů: https://commission.europa.eu/law/law-topic/data-protection/reform/rules-business-and-organisations/obligations/controllerprocessor/what-data-controller-or-data-processor_en
+- EDPB Opinion 22/2024 řeší odpovědnosti správců při využívání zpracovatelů a subprocesorů, včetně potřeby znát zpracovatelský řetězec: https://www.edpb.europa.eu/our-work-tools/our-documents/opinion-board-art-64/opinion-222024-certain-obligations-following_en
+- CNIL guide pro zpracovatele vysvětluje povinnosti zpracovatelů podle GDPR a praktické požadavky na smlouvy, bezpečnost a pomoc správcům: https://www.cnil.fr/en/processor-guide
+
+
 ## Pracovní log
+
+- 2026-08-23: Přidána příloha AQ „Registr dodavatelů a subprocesorů bez slepé důvěry“ s rolemi dodavatelů, inventářem nástrojů, prioritizací rizika, otázkami pro dodavatele, procesem změn subprocesorů, kartou dodavatele, checklistem, mini cvičením a ověřenými zdroji.
 - 2026-08-23: Přidána příloha AP „Bezpečnostní hlavičky bez cargo cult konfigurace“ s inventářem zdrojů, základní sadou HTTP hlaviček, CSP/HSTS postupem, Permissions-Policy, kartou bezpečnostních hlaviček, checklistem, mini auditem a ověřenými zdroji.
 
 - 2026-08-23: Přidána příloha AO „Zálohy a obnova bez falešného pocitu bezpečí“ s inventářem obnovy, RPO/RTO, 3-2-1-plus přístupem, restore testem, backup kartou, incident postupem, checklistem, mini cvičením a ověřenými zdroji.
