@@ -11987,7 +11987,188 @@ Výstupem není bezpečnostní román. Výstupem je jedna konkrétní změna, d�
 - NIST SP 800-63B popisuje obnovu účtu pomocí předem připravených recovery kontaktů, recovery kódů nebo opakováním části původního ověřovacího procesu podle úrovně rizika: https://pages.nist.gov/800-63-4/sp800-63b.html
 - ENISA v materiálech pro SME zdůrazňuje bezpečnostní opatření jako přístupová práva, zálohy, dohledatelnost a řízení rizik podle dopadu na malou organizaci: https://www.enisa.europa.eu/publications/enisa-report-cybersecurity-for-smes
 
+## AH. Zpracovatelská smlouva bez právnické mlhy
+
+Zpracovatelská smlouva není PDF, které někdo podepíše a pak ho uloží do složky „compliance_final_v7_opravdu_final“. Je to provozní mapa odpovědnosti: kdo s daty pracuje, proč, na čí pokyn, kde jsou subdodavatelé, jak se řeší incident a co se stane po ukončení služby.
+
+Pro malý SaaS tým je dobrá DPA praktická pojistka proti dvěma extrémům. První extrém: „GDPR řeší právník, nás se to netýká.“ Druhý extrém: „Do každé smlouvy dáme 30 stran univerzální magie.“ Ani jedno nepomůže, když zákazník položí jednoduchou otázku: kde budou naše data a kdo je může vidět?
+
+*Codyho komentář: DPA není místo pro machrování. Nejlepší zpracovatelská smlouva je ta, kterou umí vysvětlit support, sales i vývojář. Pokud ji chápe jen právník, máte dokument, ne systém.*
+
+### AH.1 Nejdřív určete roli: správce, zpracovatel, nebo oba
+
+Před jakýmkoli textem si napište, v jaké roli jste u konkrétní služby. GDPR rozlišuje správce a zpracovatele podle toho, kdo určuje účely a prostředky zpracování. EDPB k tomu má samostatné pokyny k pojmům správce a zpracovatel, protože v praxi to často není „jednou zpracovatel, navždy zpracovatel“.
+
+Prakticky:
+
+- **Jste zpracovatel**, když provozujete SaaS a zákazník do něj vkládá data svých zákazníků nebo zaměstnanců pro vlastní účely.
+- **Jste správce**, když sbíráte vlastní marketingové leady, fakturační údaje, support historii nebo analytiku svého webu.
+- **Můžete být v obou rolích současně**, jen pro jiné datové toky. To není chyba. Chyba je tvářit se, že jeden podpis vyřeší všechno.
+
+Příklad: B2B CRM nástroj je typicky zpracovatel pro kontakty, které do něj vloží zákazník. Stejná firma je ale správcem u vlastních faktur, trial registrací, webové analytiky a komunikace se zájemci. DPA má řešit jen tu část, kde zpracováváte osobní údaje jménem zákazníka.
+
+### AH.2 DPA začíná popisem služby, ne paragrafem
+
+Článek 28 GDPR vyžaduje, aby smlouva popsala předmět a dobu zpracování, povahu a účel, typ osobních údajů, kategorie subjektů údajů a práva a povinnosti správce. Přeloženo do lidské řeči: bez konkrétní přílohy neví nikdo nic.
+
+Dobrá příloha má odpovědět na pět otázek:
+
+1. Jakou službu poskytujeme?
+2. Jaké datové operace kvůli tomu děláme?
+3. Jaké typy osobních údajů mohou být uvnitř?
+4. Čích lidí se data týkají?
+5. Jak dlouho data držíme po ukončení služby?
+
+Špatný příklad: „Zpracovatel zpracovává osobní údaje za účelem poskytování služeb.“ To je smluvní mlha. Hezká na papíře, nepoužitelná při incidentu.
+
+Lepší příklad: „Zpracovatel provozuje aplikaci pro správu zákaznických ticketů. Zpracování zahrnuje uložení ticketů, vyhledávání, odesílání notifikací, auditní záznamy a export dat. Data mohou obsahovat jméno, e-mail, obsah komunikace, technické identifikátory, role uživatelů a časové záznamy akcí.“
+
+### AH.3 Subdodavatelé: seznam, změny a právo namítnout
+
+EDPB pro malé firmy výslovně připomíná, že další zpracovatel může být zapojen jen s písemným oprávněním správce a smlouva se subdodavatelem má zajistit stejnou úroveň ochrany jako původní vztah. Pro SaaS to znamená: databáze, hosting, e-mailing, monitoring, support nástroj a AI nástroj nejsou „technické detaily“. Jsou to součásti řetězce.
+
+U každého subdodavatele držte minimálně:
+
+- název a web,
+- účel použití,
+- zemi nebo region provozu,
+- kategorii dat,
+- informaci, jestli dochází k předání mimo EHP,
+- odkaz na DPA nebo bezpečnostní dokumentaci,
+- datum poslední revize.
+
+Privacy-first výchozí pravidlo: pokud existuje rozumná evropská varianta, začněte tam. Ne proto, že Evropa má hezčí datacentra. Protože menší datová vzdálenost, méně transferových výjimek a jasnější odpovědnost často znamenají nižší provozní riziko.
+
+### AH.4 Bezpečnostní opatření napište konkrétně, ale rozumně
+
+DPA má řešit vhodná technická a organizační opatření. Není nutné zveřejnit interní obranné detaily tak přesně, aby si útočník udělal kafe a checklist. Ale „přiměřená bezpečnostní opatření“ je zase skoro nic.
+
+Použitelná struktura:
+
+- **Přístupy:** jedinečné účty, role, MFA pro administraci, revize oprávnění.
+- **Šifrování:** TLS při přenosu, šifrování úložišť nebo citlivých hodnot podle typu dat.
+- **Logy:** auditní záznamy citlivých akcí, omezená retence, žádná tajemství v logu.
+- **Zálohy:** frekvence, oddělení, test obnovy, retence záloh.
+- **Vývoj:** oddělené prostředí, žádná produkční data v lokálu bez jasného důvodu.
+- **Incidenty:** kontaktní kanál, lhůta oznámení správci, interní odpovědnost.
+
+Tohle je přesně místo, kde se právní text potkává s provozem. Pokud něco slíbíte ve smlouvě, musí to existovat v systému. Jinak jste si neudělali compliance, ale budoucí trapas v PDF.
+
+### AH.5 Pokyny správce a hranice supportu
+
+Zpracovatel má osobní údaje zpracovávat jen na doložené pokyny správce. V praxi potřebujete rozlišit běžné produktové chování, support zásahy a mimořádné požadavky.
+
+Příklad pravidel:
+
+- běžné ukládání, notifikace, vyhledávání a exporty vyplývají z používání produktu,
+- support nesmí otevírat obsah zákaznických dat bez důvodu a auditní stopy,
+- oprava dat na žádost zákazníka musí být zaznamenaná v ticketu,
+- požadavek mimo standardní funkce musí mít vlastníka, datum, rozsah a důvod,
+- pokud pokyn vypadá rizikově nebo právně problematicky, eskaluje se místo slepého provedení.
+
+Mini pravidlo pro tým: každý ruční zásah do zákaznických dat musí být vysvětlitelný jednou větou. Pokud nejde vysvětlit, nemá se stát.
+
+### AH.6 Ukončení služby: vrátit, smazat, nebo obojí
+
+Článek 28 počítá s tím, že po skončení služby zpracovatel podle volby správce data vrátí nebo smaže, pokud další uložení nevyžaduje právo. To musí být produktově i provozně možné.
+
+Zeptejte se:
+
+- Umí zákazník exportovat data bez ticketu?
+- Je export čitelný a zdokumentovaný?
+- Víme, co se smaže hned a co až po retenční lhůtě?
+- Jak se chovají zálohy?
+- Jak potvrzujeme dokončení mazání?
+- Co zůstává ve fakturaci, auditních záznamech nebo bezpečnostních logách?
+
+Tady se krásně propojuje DPA, offboarding, retenční kalendář a vendor exit plán. Pokud tyhle čtyři části říkají každá něco jiného, vyhraje realita. A realita má v právních sporech nepříjemný smysl pro humor.
+
+### AH.7 Šablona: DPA karta pro malý SaaS
+
+```md
+# DPA karta: [název služby]
+
+## Role
+- My jako: zpracovatel / správce / obě role podle datového toku
+- Zákazník jako: správce / společný správce / jiná role
+- Kontaktní osoba pro privacy: [jméno nebo role]
+
+## Služba a účel
+- Co služba dělá:
+- Proč zpracování probíhá:
+- Hlavní produktové operace s daty:
+
+## Data
+- Kategorie osobních údajů:
+- Kategorie subjektů údajů:
+- Citlivé nebo zvláštní kategorie údajů: ano/ne + vysvětlení
+- Data, která výslovně nechceme přijímat:
+
+## Subdodavatelé
+- Hosting:
+- Databáze/úložiště:
+- E-mail/notifikace:
+- Monitoring/logy:
+- Support:
+- AI nebo automatizace:
+
+## Bezpečnost
+- Přístupy a MFA:
+- Logy a auditní stopa:
+- Zálohy a obnova:
+- Oddělení prostředí:
+- Incident kontakt:
+
+## Ukončení
+- Export:
+- Mazání:
+- Retence po ukončení:
+- Zálohy:
+
+## Revize
+- Vlastník:
+- Poslední revize:
+- Další revize:
+```
+
+### AH.8 Checklist: DPA bez právnické mlhy
+
+- [ ] Víme, u kterých datových toků jsme správce a u kterých zpracovatel.
+- [ ] DPA příloha konkrétně popisuje službu, účel, typy dat a kategorie subjektů údajů.
+- [ ] Seznam subdodavatelů je aktuální a zákazník ví, jak se dozví o změně.
+- [ ] U každého subdodavatele známe region provozu a případné předání mimo EHP.
+- [ ] Bezpečnostní opatření odpovídají tomu, co opravdu děláme.
+- [ ] Support zásahy do zákaznických dat mají pravidla a auditní stopu.
+- [ ] Incident oznámení má kontakt, odpovědnost a interní postup.
+- [ ] Export a mazání po ukončení služby jsou technicky proveditelné.
+- [ ] DPA karta má vlastníka a datum příští revize.
+- [ ] Sales nepřepisuje privacy sliby kreativně podle toho, jak moc chce uzavřít obchod. Ano, i to je bezpečnostní opatření.
+
+### Mini cvičení: DPA review za 55 minut
+
+Vezměte jednu službu, kterou prodáváte B2B zákazníkům, a projděte tento postup:
+
+1. Napište tři datové toky: zákaznická data v produktu, vlastní billing, support.
+2. U každého toku určete roli: správce nebo zpracovatel.
+3. Vyplňte první verzi DPA karty.
+4. Najděte tři subdodavatele s největším dopadem.
+5. U každého doplňte region, účel a typ dat.
+6. Porovnejte bezpečnostní sliby ve smlouvě s realitou v provozu.
+7. Vyberte jednu opravu do 14 dní: lepší seznam subdodavatelů, exportní návod, support audit log, retenci záloh nebo jasnější incident kontakt.
+
+Výstupem není dokonalá smlouva. Výstupem je mapa, díky které právník, vývojář a zákazník nemluví každý o jiné planetě.
+
+### Zdroje k příloze AH
+
+- GDPR článek 28 stanovuje požadavky na vztah správce a zpracovatele, včetně doložených pokynů, subdodavatelů, bezpečnosti, asistence správci, auditu a vrácení nebo smazání dat po skončení služby: https://eur-lex.europa.eu/legal-content/EN/TXT/?qid=1594051658864&uri=CELEX%3A32016R0679
+- EDPB průvodce pro malé firmy vysvětluje rozdíl mezi správcem a zpracovatelem, povinnosti zpracovatele a obsah smlouvy mezi správcem a zpracovatelem: https://www.edpb.europa.eu/sme/learn-the-basics/data-controller-or-data-processor_en
+- EDPB Guidelines 07/2020 rozebírají pojmy controller/processor, jejich role, odpovědnosti a situace, kdy může jeden subjekt vystupovat v různých rolích podle konkrétního zpracování: https://www.edpb.europa.eu/documents/guideline/guidelines-072020-on-the-concepts-of-controller-and-processor-in-the-gdpr_en
+- EDPB Opinion 22/2024 připomíná povinnosti správců při spoléhání na zpracovatele a subdodavatele, včetně dostupnosti informací o identitě všech zapojených zpracovatelů a ověřování dostatečných záruk: https://www.edpb.europa.eu/news/edpb-adopts-opinion-on-processors-guidelines-on-legitimate-interest-statement-on-draft_ga
+- Evropská komise přijala standardní smluvní doložky mezi správci a zpracovateli podle čl. 28 GDPR v prováděcím rozhodnutí 2021/915: https://eur-lex.europa.eu/legal-content/en/ALL/?uri=CELEX%3A32021D0915
+
 ## Pracovní log
+
+- 2026-08-23: Přidána příloha AH „Zpracovatelská smlouva bez právnické mlhy“ s rolí správce/zpracovatele, DPA přílohou, subdodavateli, bezpečnostními opatřeními, support pokyny, ukončením služby, DPA kartou, checklistem, mini review a ověřenými GDPR/EDPB zdroji.
 
 - 2026-08-23: Přidána příloha AG „Obnova účtu a support ověření bez bezpečnostního divadla“ se scénáři rizika, pravidly pro reset hesla a MFA recovery, omezeným support přístupem, kartou citlivé žádosti, komunikačními vzory, checklistem, mini drillem a ověřenými zdroji.
 
