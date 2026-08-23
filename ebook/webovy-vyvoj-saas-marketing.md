@@ -11078,7 +11078,183 @@ Výstupem není „uklizený celý backlog“. Výstupem je menší šum a jasn�
 - The Kanban Guide ve verzi May 2025 popisuje workflow, řízení WIP, aktivní správu položek a základní flow metriky: https://kanbanguides.org/the-kanban-guide/2025.5/
 - Shape Up od Basecampu vysvětluje přístup k tvarování práce, apetitu, rizikům, rozhodování o sázkách a udržování čistého seznamu práce: https://basecamp.com/shapeup
 
+## AC. Zákaznické rozhovory, které nekončí seznamem přání
+
+Zákaznický rozhovor není anketa, sales call ani terapie pro zakladatele, který potřebuje slyšet, že jeho nápad je krásný. Je to krátké zjišťování reality: co člověk dnes dělá, proč ho to bolí, jaké má omezení, co už zkusil a za co by byl ochotný nést náklady. Ne nutně peníze hned. Nákladem může být čas, migrace, změna procesu nebo vysvětlení týmu.
+
+Špatný rozhovor končí větou „to je zajímavý nápad“. Dobrý rozhovor končí konkrétním signálem: člověk ukázal současný workaround, poslal starou tabulku, popsal poslední incident, domluvil další krok, doporučil kolegu nebo řekl jasné „tohle pro nás není priorita“. I negativní signál je dar. Jen není tak instagramově hezký.
+
+### AC.1 Neověřujte nápad, ověřujte situaci
+
+Nezačínejte otázkou „Používali byste náš produkt?“ Lidé jsou milí, konfliktním situacím se vyhýbají a hypotetická budoucnost je levná. Ptejte se na minulost a současnost.
+
+Lepší otázky:
+
+- Kdy naposledy jste tento problém řešili?
+- Co se stalo těsně předtím?
+- Jak jste to vyřešili bez nás?
+- Kolik lidí se toho muselo dotknout?
+- Co vás na současném řešení stojí čas, peníze nebo nervy?
+- Co jste už zkusili a proč to nestačilo?
+
+Horší otázky:
+
+- Líbí se vám náš nápad?
+- Zaplatili byste za to?
+- Chtěli byste AI funkci?
+- Máme přidat integraci s vaším nástrojem?
+
+*Codyho komentář:* zákazník není produktový manažer vašeho roadmapového bufetu. Má popsat vlastní realitu. Řešení je vaše práce.
+
+### AC.2 Připravte rozhovor jako malý výzkumný sprint
+
+Jedna sada rozhovorů má mít jeden cíl. Ne „zjistit feedback“. To je mlha. Cíl musí být rozhodnutí, které po rozhovorech uděláte.
+
+Příklady dobrého cíle:
+
+- zjistit, jestli účetní agentury řeší reporting klientům ručně každý měsíc,
+- ověřit, jestli provozní manažeři e-shopů mají bolest při předávání incidentů,
+- pochopit, proč trial uživatelé nedokončí první import dat,
+- zjistit, jestli zákazníci rozumí rozdílu mezi tarify.
+
+Před sprintem si napište:
+
+- segment lidí, se kterými mluvíte,
+- rozhodnutí, které chcete udělat,
+- tři hlavní oblasti otázek,
+- co nebudete v rozhovoru prodávat,
+- jaká data nebudete sbírat,
+- kam zapíšete poznámky a kdo k nim má přístup.
+
+U malého týmu stačí pět až osm rozhovorů v jednom segmentu. Ne proto, že by to byl magický počet, ale protože po několika dobrých rozhovorech obvykle uvidíte opakující se vzory. Pokud se vzory neopakují, možná nemáte segment, ale sbírku náhodných lidí se společným kalendářem.
+
+### AC.3 Privacy-first pravidla pro rozhovory
+
+Rozhovory často vypadají nevinně, ale rychle v nich vzniknou citlivé poznámky: jména zákazníků, interní procesy, screenshoty, finanční částky, frustrace konkrétních lidí. Než otevřete nahrávání, nastavte hranice.
+
+Praktická pravidla:
+
+- Nahrávejte jen tehdy, když je to opravdu potřeba a člověk s tím jasně souhlasí.
+- V poznámkách anonymizujte osobní jména, názvy koncových klientů a interní konflikty.
+- Neukládejte surové nahrávky „pro jistotu“ bez retenční doby.
+- Sdílejte syntézu, ne celé přepisy, pokud tým nepotřebuje detail.
+- Neposílejte rozhovory do nástrojů, u kterých nevíte, kde data běží a kdo je zpracovává.
+- Oddělte citace určené pro veřejné použití od interních poznámek.
+
+EDPB u GDPR opakovaně zdůrazňuje principy zákonnosti, férovosti, transparentnosti, omezení účelu, minimalizace dat a omezení uložení. Pro rozhovory to znamená jednoduchou věc: sbírejte jen to, co potřebujete pro rozhodnutí, vysvětlete proč a smažte to, až důvod skončí.
+
+### AC.4 Šablona rozhovoru na 30 minut
+
+Držte rozhovor krátký. Čím delší slot, tím větší riziko, že se z výzkumu stane volné povídání s drahým kalendářovým parfémem.
+
+**0–3 minuty: rámec**
+
+- Děkujeme za čas, nejdeme vám nic prodávat.
+- Zajímá nás vaše reálná zkušenost, ne hodnocení našeho nápadu.
+- Pokud něco nechcete sdílet, klidně to přeskočíme.
+- Poznámky použijeme jen pro produktové rozhodování.
+
+**3–10 minut: kontext**
+
+- Jakou roli v procesu máte?
+- Jak často problém řešíte?
+- Kdo další je do toho zapojený?
+- Jak dnes poznáte, že je výsledek hotový?
+
+**10–22 minut: poslední konkrétní situace**
+
+- Vzpomenete si na poslední případ?
+- Co bylo spouštěčem?
+- Jaké kroky jste udělali?
+- Kde se to zaseklo?
+- Jaké nástroje, tabulky nebo zprávy jste použili?
+- Co by se stalo, kdybyste to neřešili?
+
+**22–27 minut: důsledky a priority**
+
+- Co vás to stálo?
+- Kdo si toho všiml?
+- Jak poznáte, že je to dost velký problém na změnu?
+- Jaké jiné problémy mají přednost?
+
+**27–30 minut: další krok**
+
+- Je ještě někdo, s kým bychom měli mluvit?
+- Můžeme vám později poslat shrnutí toho, co jsme pochopili?
+- Pokud budeme testovat prototyp, dává smysl se ozvat?
+
+### AC.5 Zápis dělejte jako důkazní kartu
+
+Po rozhovoru nepište literární report. Pište kartu, která pomůže rozhodnout. Když se po měsíci vrátíte ke kartě a nerozumíte, proč vznikla, nebyla to karta. Byla to poznámková mlha.
+
+**Karta rozhovoru**
+
+- Segment:
+- Role respondenta:
+- Datum:
+- Kontext problému:
+- Poslední konkrétní situace:
+- Současný workaround:
+- Dopad:
+- Citace schválená pro interní použití:
+- Citace schválená pro veřejné použití:
+- Data, která nesmíme dál sdílet:
+- Signál: silný / střední / slabý / negativní
+- Doporučené rozhodnutí:
+- Retence poznámek:
+
+Silný signál není „líbilo se mu to“. Silný signál je konkrétní bolest, opakované chování, jasný dopad a ochota udělat další krok. Slabý signál je kompliment. Negativní signál je informace, že problém není naléhavý, segment nesedí nebo řešení naráží na procesní realitu.
+
+### AC.6 Syntéza: nehledat průměr, hledat vzor
+
+Po sérii rozhovorů nedělejte tabulku hlasování o funkcích. Lidé navrhují funkce podle nástrojů, které znají. Vy hledejte vzory v problémech.
+
+Tři dobré syntetické otázky:
+
+- Jaký problém se objevil u více lidí stejným jazykem?
+- Kde lidé už dnes platí časem, penězi nebo reputačním rizikem?
+- Který workaround je tak bolestivý, že by stálo za to ho nahradit?
+
+Výstup syntézy rozdělte na čtyři části:
+
+- **potvrzeno:** opakuje se a má konkrétní dopad,
+- **nejisté:** zajímavé, ale chybí opakování nebo důsledek,
+- **vyvráceno:** náš předpoklad nesedí,
+- **neřešit teď:** problém existuje, ale není pro aktuální fázi.
+
+Tím chráníte roadmapu před efektem posledního rozhovoru. Poslední zákazník nemá automaticky pravdu jen proto, že byl poslední a měl hezký mikrofon.
+
+### Checklist: zákaznické rozhovory bez datového smogu
+
+- [ ] Každý rozhovor má jasné rozhodnutí, které má podpořit.
+- [ ] Ptáme se na konkrétní minulost a současné workaroundy, ne na hypotetické sliby.
+- [ ] Respondent ví, proč rozhovor děláme a jak použijeme poznámky.
+- [ ] Nahrávání má jasný souhlas, účel a retenční dobu.
+- [ ] Poznámky anonymizují zbytečné osobní a klientské údaje.
+- [ ] Výstupem je karta rozhovoru, ne volný přepis.
+- [ ] Syntéza hledá opakované problémy, ne průměrný seznam funkcí.
+- [ ] Negativní signály zapisujeme stejně poctivě jako pozitivní.
+
+### Mini cvičení: rozhovorový sprint za 60 minut přípravy
+
+1. Během 10 minut napište jedno rozhodnutí, které chcete rozhovory podpořit.
+2. Během 10 minut vyberte jeden segment a pět konkrétních lidí nebo firem.
+3. Během 15 minut připravte otázky na poslední reálnou situaci.
+4. Během 10 minut napište privacy-first pravidla pro poznámky, nahrávky a citace.
+5. Během 10 minut připravte kartu rozhovoru.
+6. Během 5 minut napište krátkou pozvánku bez prodejního nátlaku.
+
+Výstupem není dokonalý výzkumný plán. Výstupem je bezpečný, konkrétní a použitelný rozhovorový sprint. A ano, je lepší udělat pět poctivých rozhovorů než 200 odpovědí v anketě, kde lidé klikají mezi obědem a tramvají.
+
+### Zdroje k příloze AC
+
+- EDPB shrnuje základní principy GDPR včetně transparentnosti, omezení účelu, minimalizace dat a omezení uložení: https://www.edpb.europa.eu/topics/key-gdpr-concepts/basic-principles_en
+- EDPB průvodce pro malé podniky vysvětluje zákonné zpracování osobních údajů a podmínky platného souhlasu: https://www.edpb.europa.eu/sme/be-compliant/process-personal-data-lawfully_en
+- The Mom Test od Roba Fitzpatricka popularizuje praktický přístup k rozhovorům o reálném chování místo hypotetického hodnocení nápadu: https://www.momtestbook.com/
+
 ## Pracovní log
+- 2026-08-23: Přidána příloha AC „Zákaznické rozhovory, které nekončí seznamem přání“ s rozhovorovým sprintem, privacy-first pravidly, 30minutovou strukturou rozhovoru, kartou důkazů, syntézou signálů, checklistem, mini cvičením a ověřenými zdroji.
+
 - 2026-08-23: Přidána příloha AB „Backlog bez nekonečného skladiště přání“ s tříděním vstupů, triage kartou, WIP limity, měsíčním pruningem, privacy-first filtrem, 14denní rozhodovací frontou, checklistem, mini cvičením a ověřenými zdroji.
 
 - 2026-08-23: Přidána příloha AA „Offboarding zákazníka bez zamčených dat“ s oddělením zrušení, exportu a mazání, návrhem férové odchodové cesty, exportním minimem, mazací mapou, vendor návazností, offboardingovou kartou, checklistem, mini drillem a ověřenými zdroji.
