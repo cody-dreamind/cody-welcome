@@ -13328,7 +13328,202 @@ Výsledek není certifikace spolehlivosti. Výsledek je první dohoda mezi produ
 - ENISA Incident Management Plan shrnuje základní prvky incident managementu, od kritérií spuštění plánu po návrat do normálního provozu: https://tools.enisa.europa.eu/topics/risk-management/current-risk/bcm-resilience/bc-plan/incident-management-plan
 
 
+## AO. Zálohy a obnova bez falešného pocitu bezpečí
+
+Záloha není soubor někde v cloudu. Záloha je schopnost vrátit službu, data a důvěru do použitelného stavu v čase, který firma přežije. To je nepříjemně praktická definice, protože odhalí rozdíl mezi „něco se nám někam kopíruje“ a „umíme obnovit projekt, fakturaci, auditní logy a zákaznické přílohy bez paniky“.
+
+Malý SaaS často řeší zálohy pozdě. Dokud je produkt mladý, vypadá to jako technická hygiena, která počká. Jenže data jsou postupně produktová paměť: účty, projekty, platby, komentáře, nastavení, dokumenty, support historie, auditní stopa. Když se ztratí, neobnovujete jen databázi. Obnovujete zákaznickou důvěru. A ta nemá tlačítko `restore`.
+
+*Codyho komentář: nejnebezpečnější věta v provozu je „to se určitě zálohuje“. Druhá nejnebezpečnější je „to zjistíme, až bude potřeba“. Gratuluju, právě jste vynalezli chaos s latencí.*
+
+### Co má být chráněné
+
+Začněte inventářem obnovy, ne výběrem backup nástroje. Cílem není zazálohovat všechno stejně. Cílem je vědět, co musíte obnovit jako první, co může počkat a co se naopak do záloh nemá dostat vůbec.
+
+Typické vrstvy:
+
+- **Primární databáze:** účty, projekty, objednávky, nastavení, role, auditní události.
+- **Objektové úložiště:** nahrané soubory, exporty, přílohy, faktury, obrázky, dokumenty.
+- **Konfigurace:** proměnné prostředí, DNS, e-mailové domény, webhooky, feature flags, role v administraci.
+- **Zdrojový kód a infrastruktura:** Git repozitář, infrastructure-as-code, migrační skripty, release tagy.
+- **Provozní znalost:** runbooky, incident postupy, kontakty, přístupy k poskytovatelům.
+- **Marketingová a obchodní data:** formuláře, consent záznamy, CRM exporty, šablony kampaní.
+
+Privacy-first pointa: záloha není výmluva pro nekonečnou retenci. Pokud zákaznická data mažeme z produkce kvůli ukončení účtu nebo retenci, musíme mít rozumný plán, jak se mazání promítne i do záloh. Nemusí to znamenat okamžité fyzické vyříznutí ze všech archivů. Musí to ale znamenat jasnou retenci, omezený přístup a pravidlo, že obnovou staré zálohy omylem neoživíme data, která už měla být pryč.
+
+### RPO a RTO lidsky
+
+Dvě zkratky, které stojí za to znát:
+
+- **RPO — Recovery Point Objective:** kolik dat si můžete dovolit ztratit. Například „maximálně 15 minut objednávek“ nebo „maximálně 24 hodin analytických agregátů“.
+- **RTO — Recovery Time Objective:** jak rychle má být služba nebo proces zpět. Například „login do 2 hodin“, „export dat do 1 pracovního dne“.
+
+Neopisujte hodnoty z enterprise prezentací. Malý SaaS má být realistický. Pokud nemáte nonstop tým, neslibujte obnovu do 15 minut. Pokud nemáte ověřený restore test, neslibujte nic s přesností na minuty. Interně si ale hodnoty napište, protože bez nich nevíte, jak často zálohovat, co automatizovat a co musí mít ruční postup.
+
+Příklad:
+
+| Oblast | RPO | RTO | Poznámka |
+| --- | ---: | ---: | --- |
+| Primární databáze | 15 minut | 4 hodiny | PITR nebo časté snapshoty, pravidelný restore test |
+| Objektové úložiště | 1 hodina | 8 hodin | verze souborů, ochrana proti hromadnému smazání |
+| Faktury a billing exporty | 24 hodin | 1 pracovní den | oddělený export, šifrované uložení |
+| Marketingové agregáty | 24 hodin | 2 pracovní dny | není kritická cesta produktu |
+| Dokumentace a runbooky | 24 hodin | 4 hodiny | Git nebo export mimo primární nástroj |
+
+Tohle není právní kouzlo. Je to provozní dohoda. Když spadne služba, tým nemá debatovat, jestli je důležitější obnovit blog, faktury nebo zákaznické projekty. Má to vědět dopředu.
+
+### Pravidlo 3-2-1 s evropskou hlavou
+
+Klasické pravidlo 3-2-1 říká: mějte alespoň tři kopie dat, na dvou různých typech úložiště, z toho jednu mimo hlavní prostředí. Pro malý evropský SaaS bych ho přepsal praktičtěji:
+
+1. **Produkční data:** běžná databáze a soubory.
+2. **Rychlá obnova:** snapshoty nebo point-in-time recovery ve stejném regionu či poskytovateli.
+3. **Oddělená kopie:** šifrovaná kopie mimo primární účet, ideálně v evropském regionu a s jinými přístupy.
+4. **Ochrana proti kompromitaci:** immutable, offline nebo jinak oddělená záloha, kterou útočník s běžným admin účtem nesmaže.
+5. **Test obnovy:** důkaz, že data nejdou jen uložit, ale i vrátit.
+
+Ano, to je spíš 3-2-1-plus než čisté 3-2-1. Důvod je jednoduchý: ransomware a kompromitované účty nemají úctu k historickým pravidlům. Pokud backup účet používá stejné přihlášení jako produkce, útočník nemá problém se zálohami. Má bonusovou úroveň.
+
+Privacy-first doporučení:
+
+- držte zálohy v EU nebo u poskytovatele, kde umíte smluvně i technicky obhájit přenosy,
+- šifrujte zálohy při přenosu i v klidu,
+- oddělte přístupy k produkci a zálohám,
+- logujte přístup k zálohám,
+- pravidelně mažte staré zálohy podle retenčního kalendáře,
+- neukládejte do záloh tajemství, která tam nemusí být, například staré exporty s API klíči.
+
+### Restore test je produktová funkce
+
+Největší chyba není chybějící záloha. Největší chyba je netestovaná záloha, která se tváří jako řešení. Restore test má být pravidelný, krátký a zdokumentovaný. Nemusí pokaždé obnovovat celou firmu. Musí ale ověřit nejdůležitější cesty.
+
+Minimální měsíční test:
+
+1. Vyberte jednu databázovou zálohu z posledních 7 dní.
+2. Obnovte ji do izolovaného prostředí, ne do produkce.
+3. Ověřte, že aplikace naběhne proti obnovené databázi.
+4. Zkontrolujte reprezentativní záznamy: uživatel, projekt, role, auditní log, faktura nebo export.
+5. Ověřte, že citlivá data nejsou viditelná lidem mimo nutný testovací tým.
+6. Zapište čas obnovy, chyby, ruční kroky a rozdíl proti RTO.
+7. Testovací prostředí bezpečně smažte.
+
+Kvartální test by měl jít dál: simulujte ztrátu primární databáze, hromadné smazání souborů nebo kompromitaci admin účtu. Ne proto, abyste hráli kybernetické divadlo s dramatickou hudbou. Protože většina slabin se neukáže v dokumentaci, ale v ručním kroku, který umí jen jeden člověk na dovolené.
+
+### Co nezálohovat slepě
+
+Zálohovat všechno navždy zní bezpečně, ale privacy-first provoz říká: opatrně. Některá data do dlouhých záloh nepatří, nebo mají mít kratší retenci než jádro produktu.
+
+Zvlášť kontrolujte:
+
+- dočasné exporty zákaznických dat,
+- ladicí dumpy databází,
+- logy s osobními údaji,
+- support přílohy,
+- nahrávky hovorů a obrazovek,
+- staré marketingové CSV importy,
+- soubory s tokeny, hesly nebo privátními klíči.
+
+Praktické pravidlo: pokud by bylo nepříjemné vysvětlovat zákazníkovi, proč je daný soubor ještě po roce v backup archivu, pravděpodobně potřebuje kratší retenci nebo lepší proces mazání.
+
+### Backup karta systému
+
+Použijte tuhle kartu pro databázi, objektové úložiště, CRM, fakturaci i dokumentaci. Jeden systém, jedna karta.
+
+```markdown
+# Backup karta: [systém]
+
+## Účel
+- Co systém dělá:
+- Proč je kritický:
+- Kdo je vlastník:
+
+## Data
+- Jaké typy dat obsahuje:
+- Obsahuje osobní data? ano/ne
+- Obsahuje citlivá nebo smluvní data? ano/ne
+
+## Obnova
+- RPO:
+- RTO:
+- Priorita obnovy: P1/P2/P3
+- Závislosti pro obnovu:
+
+## Zálohování
+- Frekvence:
+- Umístění primární zálohy:
+- Oddělená/offline/immutable kopie:
+- Šifrování:
+- Retence:
+
+## Přístupy
+- Kdo smí zálohy číst:
+- Kdo smí spustit obnovu:
+- Kde se loguje přístup:
+- Jak se odebírá přístup při offboardingu:
+
+## Test
+- Poslední restore test:
+- Výsledek:
+- Čas obnovy:
+- Zjištěné problémy:
+- Další test:
+```
+
+### Incident: záloha existuje, ale obnova selže
+
+Tohle je scénář, který bolí, protože tým nejdřív zažije úlevu a pak pád do sklepa. Záloha je poškozená, chybí klíč, migrační skript nejde pustit, objektové soubory nejsou ve stejném stavu jako databáze nebo dokumentace obnovy odkazuje na člověka, který už ve firmě není.
+
+První postup:
+
+1. Zastavte další automatické mazání nebo přepis záloh.
+2. Izolujte poslední známé dobré kopie.
+3. Zapište časovou osu pokusů o obnovu.
+4. Oddělte technickou obnovu od zákaznické komunikace.
+5. Ověřte, jestli jde obnovit částečná funkčnost.
+6. Zkontrolujte, zda incident zahrnuje osobní data a spouští povinnost posouzení nebo oznámení.
+7. Po obnově udělejte postmortem zaměřený na proces, ne na hledání obětního admina.
+
+Pokud incident zahrnuje osobní data, nespoléhejte na pocit. GDPR pracuje s rizikem pro práva a svobody lidí a v některých případech vyžaduje oznámení dozorovému úřadu bez zbytečného odkladu, nejpozději do 72 hodin od zjištění. To neznamená panikařit. Znamená to mít v incident playbooku jasnou větev pro posouzení dopadu na osobní data.
+
+### Checklist: zálohy, kterým se dá věřit
+
+- [ ] Máme seznam systémů, které musíme umět obnovit.
+- [ ] Každý kritický systém má RPO, RTO a vlastníka.
+- [ ] Zálohy databáze, souborů, konfigurace a dokumentace řešíme odděleně.
+- [ ] Existuje kopie mimo primární účet nebo prostředí.
+- [ ] Kritické zálohy jsou šifrované a přístup k nim je oddělený od produkce.
+- [ ] Máme ochranu proti hromadnému smazání nebo kompromitaci admin účtu.
+- [ ] Restore test běží pravidelně a má zápis.
+- [ ] Víme, které typy dat do dlouhých záloh nepatří.
+- [ ] Retence záloh odpovídá retenčnímu kalendáři a zákaznickým slibům.
+- [ ] Obnova staré zálohy má krok pro opětovné promítnutí mazání a změn oprávnění.
+- [ ] Backup dokumentace je dostupná i při výpadku hlavního nástroje.
+- [ ] Po každém restore testu vznikne konkrétní oprava nebo potvrzení, že postup funguje.
+
+### Mini cvičení: první restore test za 90 minut
+
+1. Vyberte jeden kritický systém, ideálně primární databázi nebo objektové úložiště.
+2. Vyplňte backup kartu jen pro tento systém.
+3. Najděte poslední zálohu a ověřte, kdo k ní má přístup.
+4. Obnovte ji do izolovaného prostředí.
+5. Spusťte minimální aplikační kontrolu nebo ruční kontrolu dat.
+6. Změřte čas od začátku obnovy po použitelný výsledek.
+7. Zapište, co chybělo: klíče, dokumentace, oprávnění, skript, člověk, rozhodnutí.
+8. Naplánujte jednu opravu do 14 dní.
+
+Hotovo není ve chvíli, kdy backup job svítí zeleně. Hotovo je ve chvíli, kdy někdo jiný než původní autor umí podle dokumentace obnovit důležitou část systému. Zelená fajfka je hezká. Obnovená služba je lepší.
+
+### Zdroje k příloze AO
+
+- UK National Cyber Security Centre v části Data security doporučuje více záloh na různých místech, 3-2-1 pravidlo, oddělené offline zálohy a pravidelné testování obnovy: https://www.ncsc.gov.uk/collection/10-steps/data-security
+- NIST SP 800-34 Rev. 1 popisuje contingency planning pro informační systémy včetně vazby na zálohy, obnovu a testování plánů: https://csrc.nist.gov/pubs/sp/800/34/r1/upd1/final
+- ENISA Technical Implementation Guidance k řízení kybernetických rizik zmiňuje pravidlo 3-2-1, šifrování záloh a propojení disaster recovery s incident response: https://www.enisa.europa.eu/sites/default/files/2025-06/ENISA_Technical_implementation_guidance_on_cybersecurity_risk_management_measures_version_1.0.pdf
+- European Commission vysvětluje, že při porušení zabezpečení osobních údajů s rizikem pro práva a svobody lidí má organizace oznámit událost dozorovému úřadu bez zbytečného odkladu, nejpozději do 72 hodin: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/obligations/what-data-breach-and-what-do-we-have-do-case-data-breach_en
+
+
 ## Pracovní log
+- 2026-08-23: Přidána příloha AO „Zálohy a obnova bez falešného pocitu bezpečí“ s inventářem obnovy, RPO/RTO, 3-2-1-plus přístupem, restore testem, backup kartou, incident postupem, checklistem, mini cvičením a ověřenými zdroji.
+
 - 2026-08-23: Přidána příloha AN „SLA, status page a support závazky bez falešných devítek“ se SLI/SLO/SLA rámcem, status page šablonami, support prioritami, údržbou, postmortem, checklistem a ověřenými zdroji.
 
 
