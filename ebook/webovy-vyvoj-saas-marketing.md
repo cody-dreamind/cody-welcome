@@ -11775,7 +11775,222 @@ Konkrétní lhůty si doplňte podle svého právního rámce, smluv, lokální 
 - EDPB zpráva k právu na výmaz popisuje, že malé organizace často zápasí s určením retenčních lhůt a že plošné použití nejdelší lhůty na všechna zpracování je problematické: https://www.edpb.europa.eu/system/files/2026-02/edpb_cef-report_2025_right-to-erasure_en.pdf
 - CNIL prakticky shrnuje, že osobní data nelze držet neomezeně a retenční doba má vycházet z účelu, kvůli kterému byla data získána: https://www.cnil.fr/en/data-protection-in-data-collection-management
 
+
+## AG. Obnova účtu a support ověření bez bezpečnostního divadla
+
+Každý SaaS jednou narazí na stejný moment: zákazník se nedostane do účtu, ztratil MFA zařízení, odešel admin, někdo chce změnit fakturační e-mail nebo support žádá o přístup do workspace. Tohle nevypadá jako produktová funkce. V praxi je to ale přesně místo, kde se láme důvěra.
+
+Špatně navržená obnova účtu je buď moc tvrdá, takže poctivý zákazník skončí ve slepé uličce, nebo moc měkká, takže útočníkovi stačí působit naléhavě a vědět pár veřejných údajů. Privacy-first přístup není „ověřme člověka občankou pro jistotu“. Privacy-first přístup je: ověřit jen to, co je přiměřené riziku, zapsat rozhodnutí a minimalizovat data, která support při řešení vůbec vidí.
+
+*Codyho komentář: obnova účtu je typická oblast, kde produktové týmy podcení nudné scénáře. Pak přijde pátek 16:47, zákazník má zablokovanou fakturaci a support improvizuje podle nálady v chatu. To není proces. To je escape room s produkčními daty.*
+
+### AG.1 Rozdělte scénáře podle rizika
+
+Ne všechny žádosti jsou stejné. Změna jména v profilu není stejné riziko jako předání vlastnictví workspace. Pokud vše řešíte stejným procesem, skončíte buď zbytečně přísní, nebo nebezpečně benevolentní.
+
+Praktické rozdělení:
+
+- **Nízké riziko:** změna zobrazovaného jména, jazyk účtu, preference notifikací, dotaz na běžnou funkci.
+- **Střední riziko:** reset hesla, změna kontaktního e-mailu, obnovení přístupu po ztrátě jednoho faktoru, přidání člena týmu.
+- **Vysoké riziko:** reset MFA bez záložního kódu, změna vlastníka workspace, export všech dat, změna fakturačních údajů, zrušení účtu, ruční zásah do rolí.
+- **Kritické riziko:** podezření na převzetí účtu, hromadný export, spor mezi bývalým zaměstnancem a firmou, právní žádost, bezpečnostní incident.
+
+Každá úroveň má mít předem dané ověřovací kroky, časovou prodlevu a pravidlo, kdo ji smí schválit. U malého týmu nemusíte mít bezpečnostní oddělení. Stačí říct: vysoké riziko nikdy neřeší jeden člověk sám a nikdy jen na základě naléhavé zprávy.
+
+Příklad:
+
+- Reset hesla řeší automatický flow přes e-mail a bezpečný jednorázový token.
+- Reset MFA bez záložního kódu vyžaduje druhý nezávislý signál, například potvrzení z dříve ověřené fakturační adresy nebo schválení existujícím vlastníkem workspace.
+- Převod vlastnictví workspace vyžaduje zápis, čekací dobu a informování původních adminů.
+
+### AG.2 Nikdy nepoužívejte znalost veřejných údajů jako identitu
+
+Bezpečnostní otázky typu „jméno prvního psa“ vypadají hezky jen do chvíle, než si uvědomíte, že půlka odpovědí leží na sociálních sítích a druhá půlka v rodinném WhatsAppu. OWASP dlouhodobě upozorňuje, že obnovovací mechanismy nesmí umožnit enumeraci účtů a že reset hesla má používat náhodné, jednorázové, časově omezené tokeny.
+
+Co nepoužívat jako hlavní důkaz identity:
+
+- znalost jména firmy,
+- znalost poslední faktury,
+- veřejný e-mail z webu,
+- telefonní číslo z podpisu,
+- LinkedIn profil,
+- „působí jako náš zákazník“,
+- screenshot administrace bez ověření původu.
+
+Co je lepší:
+
+- potvrzení přes už přihlášené zařízení,
+- potvrzení existujícím vlastníkem nebo adminem workspace,
+- jednorázové recovery kódy,
+- předem uložený recovery kontakt,
+- potvrzení přes dříve ověřený e-mail nebo fakturační kontakt,
+- kombinace více slabších signálů místo jednoho divadelního silného.
+
+NIST u obnovy účtu doporučuje pracovat s předem připravenými recovery možnostmi nebo zopakováním části původního ověřovacího procesu. Přeloženo do malého SaaSu: recovery se má navrhnout dřív, než zákazník panikaří. Ne až v ticketu.
+
+### AG.3 Support nesmí vidět víc dat, než potřebuje
+
+Support často potřebuje pomoci rychle, ale rychlost není omluva pro plný přístup do zákaznických dat. Privacy-first support má dvě zásady: omezený pohled a auditní stopu.
+
+Support by měl umět vidět:
+
+- stav účtu,
+- role a členy týmu,
+- poslední bezpečnostní události v omezené podobě,
+- stav fakturace bez plných platebních údajů,
+- technické chybové kódy,
+- metadata potřebná k diagnostice.
+
+Support by naopak běžně neměl vidět:
+
+- obsah zákaznických dokumentů,
+- plné exporty dat,
+- hesla nebo secrets,
+- celé platební údaje,
+- privátní poznámky uživatelů,
+- interní data jiných zákazníků.
+
+Pokud výjimečně potřebujete „impersonation“ nebo support přístup do účtu, udělejte z toho samostatnou funkci, ne skryté admin kouzlo. Uživatel má vidět, že přístup proběhl, proč proběhl, kdo ho spustil a kdy skončil. Ideálně má support přístup vyžadovat časové omezení, důvod a audit log.
+
+EDPB ve svém průvodci pro malé firmy zdůrazňuje řízení oprávnění, jedinečné účty, pravidelné revize přístupů a odstranění zastaralých oprávnění. To je přesně základ pro support režim: žádné sdílené admin účty, žádné „dočasně jsem si nechal superadmina“, žádné tiché klikání v datech zákazníka.
+
+### AG.4 Navrhněte bezpečný reset hesla jako produktový flow
+
+Reset hesla není e-mailová formalita. Je to veřejná bezpečnostní funkce, kterou budou zkoušet i lidé, kteří vám nepřejí nic hezkého. A ne, tlačítko „Zapomněli jste heslo?“ není dekorace pod loginem.
+
+Praktické minimum:
+
+- Odpověď po zadání e-mailu je stejná pro existující i neexistující účet.
+- Reset token je náhodný, jednorázový a časově omezený.
+- Token se ukládá bezpečně, ne jako čitelný řetězec v databázi.
+- Po použití token okamžitě expiroval.
+- Po změně hesla se uživateli pošle bezpečnostní upozornění.
+- Staré session se podle rizika ukončí nebo aspoň znovu ověří.
+- Formulář má rate limiting a ochranu proti automatizovanému zneužití.
+- Support nikdy neposílá nové heslo ručně.
+
+Příklad textu po odeslání resetu:
+
+> Pokud e-mail patří k účtu, poslali jsme odkaz pro obnovu hesla. Z bezpečnostních důvodů neprozrazujeme, jestli u nás účet existuje.
+
+Tohle je malá věta, ale řeší velký problém: útočník nemůže jednoduše testovat, kdo má u vás účet. Ano, zákazník by možná ocenil konkrétnější hlášku. Útočník taky. A tomu radost dělat nemusíme.
+
+### AG.5 Připravte ztrátu MFA jako normální scénář
+
+MFA je skvělá věc, dokud někdo neutopí telefon, odejde zaměstnanec nebo se rozbije firemní zařízení. Pokud nemáte proces obnovy, tým pod tlakem vymyslí obchvat. A obchvaty mají tendenci být nejkratší cestou do průšvihu.
+
+Základní návrh:
+
+- Při zapnutí MFA nabídněte recovery kódy a vysvětlete, kam je bezpečně uložit.
+- U týmových účtů doporučte minimálně dva vlastníky nebo adminy.
+- Reset MFA rozdělte podle rizika účtu a role uživatele.
+- U vlastníka workspace použijte silnější ověření než u běžného člena.
+- Po resetu MFA informujte všechny relevantní adminy.
+- U rizikových účtů nastavte krátkou čekací dobu před citlivými akcemi.
+
+Příklad pravidla:
+
+- Běžný člen týmu může obnovit MFA přes recovery kód nebo schválení adminem.
+- Admin může obnovit MFA přes recovery kód, druhého admina nebo ověřený recovery kontakt.
+- Jediný vlastník workspace nemůže změnit vlastnictví a zároveň resetovat MFA bez druhého schválení nebo čekací lhůty.
+
+Tady nejde o komplikování života. Jde o to, aby největší pravomoci neměly nejjednodušší zadní dveře.
+
+### AG.6 Udělejte z každé citlivé žádosti kartu
+
+Citlivá support žádost nemá končit v chatu jako „vyřešeno“. Má po ní zůstat krátká karta, která vysvětlí, co se stalo a proč bylo rozhodnutí přiměřené. Ne kvůli byrokracii, ale kvůli tomu, že za tři měsíce už si nikdo nevzpomene, proč se vlastnictví účtu převádělo v neděli večer.
+
+Šablona:
+
+# Karta citlivé support žádosti: [ID ticketu]
+
+## Kontext
+
+- Zákazník / workspace:
+- Žadatel:
+- Typ žádosti:
+- Riziková úroveň:
+- Dopad při chybě:
+
+## Ověření
+
+- Použité signály:
+- Nepoužité nebo odmítnuté signály:
+- Kdo schválil:
+- Časová prodleva:
+
+## Zásah
+
+- Co jsme změnili:
+- Jak dlouho trval dočasný přístup:
+- Koho jsme informovali:
+- Jaký auditní záznam vznikl:
+
+## Následná opatření
+
+- Co má zákazník udělat:
+- Co má upravit produkt nebo proces:
+- Datum revize:
+
+Tuhle kartu můžete držet v interním ticketingu nebo dokumentaci. Důležité je, aby neobsahovala víc osobních dat, než je nutné pro zpětnou dohledatelnost. Pokud si do ní kopírujete občanky, screenshoty inboxu a celé exporty, tak jste právě vynalezli nové citlivé úložiště. Gratuluji, ale prosím ne.
+
+### AG.7 Komunikace má snižovat paniku, ne prozrazovat obranu
+
+U obnovy účtu a podezřelých žádostí pište jasně, ale ne tak, aby text sloužil jako manuál pro útočníka. Zákazník potřebuje vědět, co se děje, jak dlouho to potrvá a co má udělat. Nemusí znát přesnou kombinaci signálů, která otevře účet.
+
+Dobrá odpověď supportu:
+
+> Díky, jde o citlivou změnu přístupu. Z bezpečnostních důvodů ji nemůžeme potvrdit jen z tohoto chatu. Pošleme ověřovací krok na dříve nastavený kontakt a po potvrzení vás budeme informovat. Do té doby nebudeme měnit vlastníka ani vypínat MFA.
+
+Špatná odpověď supportu:
+
+> Stačí nám screenshot faktury a LinkedIn profil jednatele, pak vám vypneme MFA.
+
+První odpověď říká, že proces existuje. Druhá odpověď právě zveřejnila recept na sociální inženýrství. A sociální inženýrství miluje přesné recepty ještě víc než startupy milují slovo „platforma“.
+
+### AG.8 Checklist: obnova účtu bez bezpečnostního divadla
+
+- [ ] Máme vypsané scénáře obnovy účtu a support zásahů.
+- [ ] Každý scénář má rizikovou úroveň.
+- [ ] Reset hesla neprozrazuje existenci účtu.
+- [ ] Reset tokeny jsou jednorázové, časově omezené a bezpečně uložené.
+- [ ] MFA recovery má recovery kódy nebo předem nastavený kontakt.
+- [ ] Vysokorizikové změny neřeší jeden člověk bez druhého schválení.
+- [ ] Support používá vlastní účty, ne sdíleného admina.
+- [ ] Support vidí jen metadata nutná k řešení žádosti.
+- [ ] Impersonation nebo support přístup je časově omezený a auditovaný.
+- [ ] Citlivé žádosti mají krátkou kartu rozhodnutí.
+- [ ] Zákazník dostává bezpečnostní upozornění po zásadních změnách.
+- [ ] Proces nevyžaduje zbytečné kopie dokladů ani trvalé ukládání citlivých příloh.
+- [ ] Přístupy supportu se pravidelně revidují.
+- [ ] Incidentní scénáře zahrnují i ztrátu MFA a spor o vlastnictví workspace.
+
+### Mini cvičení: recovery drill za 45 minut
+
+Vyberte jeden scénář: „jediný admin ztratil MFA“ nebo „bývalý zaměstnanec žádá o převod workspace“. Pak projděte následující kroky:
+
+1. Napište, jaký je nejhorší realistický dopad chybného rozhodnutí.
+2. Určete rizikovou úroveň scénáře.
+3. Vyberte dva až tři ověřovací signály, které už dnes máte.
+4. Vyškrtněte signály, které jsou jen veřejně zjistitelné údaje.
+5. Napište support odpověď, která je jasná, ale neprozrazuje přesný recept.
+6. Vyplňte kartu citlivé support žádosti.
+7. Najděte jeden produktový patch: recovery kódy, druhý admin, audit log, upozornění nebo čekací lhůta.
+
+Výstupem není bezpečnostní román. Výstupem je jedna konkrétní změna, díky které příští recovery nebude improvizace.
+
+### Zdroje k příloze AG
+
+- EDPB průvodce pro malé firmy k zabezpečení osobních dat zdůrazňuje autentizaci, správu oprávnění, jedinečné účty, pravidelné revize přístupů a odstranění zastaralých oprávnění: https://www.edpb.europa.eu/sme/be-compliant/secure-personal-data_en
+- OWASP Forgot Password Cheat Sheet doporučuje jednotné odpovědi u resetu hesla, náhodné jednorázové tokeny, časové omezení tokenů a ochranu proti zneužití obnovovacího flow: https://cheatsheetseries.owasp.org/cheatsheets/Forgot_Password_Cheat_Sheet.html
+- OWASP Authentication Cheat Sheet odkazuje na bezpečný password recovery mechanism jako součást autentizačního návrhu: https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html
+- NIST SP 800-63B popisuje obnovu účtu pomocí předem připravených recovery kontaktů, recovery kódů nebo opakováním části původního ověřovacího procesu podle úrovně rizika: https://pages.nist.gov/800-63-4/sp800-63b.html
+- ENISA v materiálech pro SME zdůrazňuje bezpečnostní opatření jako přístupová práva, zálohy, dohledatelnost a řízení rizik podle dopadu na malou organizaci: https://www.enisa.europa.eu/publications/enisa-report-cybersecurity-for-smes
+
 ## Pracovní log
+
+- 2026-08-23: Přidána příloha AG „Obnova účtu a support ověření bez bezpečnostního divadla“ se scénáři rizika, pravidly pro reset hesla a MFA recovery, omezeným support přístupem, kartou citlivé žádosti, komunikačními vzory, checklistem, mini drillem a ověřenými zdroji.
+
 
 - 2026-08-23: Přidána příloha AF „Retenční kalendář bez digitální půdy“ s kategorizací dat, životním cyklem, pravidly pro mazání/anonymizaci/agregaci, šablonou retenční karty, checklistem, mini cvičením a ověřenými zdroji.
 
