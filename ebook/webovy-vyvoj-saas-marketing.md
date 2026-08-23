@@ -12870,7 +12870,226 @@ Hotovo znamená: audit vytvořil jednu konkrétní změnu. Ne jen hezký seznam.
 - EDPB Guidelines 03/2022 popisují deceptive design patterns a doporučení pro rozhraní, která nemají manipulovat s rozhodováním lidí o osobních údajích: https://www.edpb.europa.eu/documents/guideline/guidelines-032022-on-deceptive-design-patterns-in-social-media-platform_en
 - Evropská komise k Data Act uvádí, že nařízení se začalo uplatňovat 12. září 2025 a zahrnuje také pravidla pro efektivnější přechod mezi poskytovateli data-processing služeb: https://digital-strategy.ec.europa.eu/en/policies/data-act
 
+## AM. Export dat pro zákazníka bez CSV hororu
+
+Export dat je jedna z těch funkcí, které se skvěle odkládají, dokud nepřijde první zákazník s požadavkem „pošlete nám všechno, co o nás máte“. V tu chvíli se často ukáže, že „všechno“ znamená pět tabulek, tři přílohy, historické záznamy v logu, poznámky v CRM, faktury v účetním nástroji a jednu integraci, o které si všichni mysleli, že už dávno neexistuje. Gratuluju, právě jste objevili datovou archeologii.
+
+Privacy-first SaaS má export navržený jako běžnou součást produktu, ne jako ruční krizový rituál. Zákazník má mít možnost rozumně odejít, převzít si svoje data, splnit vlastní povinnosti a pokračovat jinde bez toho, aby musel luštit proprietární skládačku. To není slabost produktu. To je důkaz, že si věříte.
+
+Právní rámec není jediný důvod, proč export řešit, ale v Evropě je důležitý. GDPR v článku 20 řeší právo na přenositelnost osobních údajů u zpracování založeného na souhlasu nebo smlouvě a prováděného automatizovaně. EDPB ve své příručce pro malé firmy připomíná, že běžné formáty jako CSV, XML nebo JSON dávají smysl právě proto, že umožňují další použití dat. Data Act navíc od 12. září 2025 posílil evropský tlak na přechoditelnost a interoperabilitu u data-processing služeb. Přeloženo z eurořeči do provozu: zákazníkovo „chci odejít“ nemá být bezpečnostní incident, obchodní drama ani technická pomsta.
+
+*Codyho komentář: pokud zákazníka drží jen to, že export je peklo, nemáte retenci. Máte digitální lepicí pásku. Drží to, ale není to produktová strategie.*
+
+### AM.1 Rozlište export, přístup a přenositelnost
+
+Nejdřív si ujasněte, o jaký typ požadavku jde. V praxi se často hází do jednoho pytle tři různé věci:
+
+- **přístup k údajům:** člověk nebo zákazník chce vědět, jaké osobní údaje zpracováváte a proč,
+- **export účtu nebo workspace:** zákazník chce provozní data ze služby pro vlastní archiv, migraci nebo audit,
+- **přenositelnost:** subjekt údajů chce strojově čitelná data, která vám poskytl nebo která vznikla pozorováním jeho používání služby, pokud jsou splněné podmínky GDPR článku 20.
+
+Pro malý SaaS je nejpraktičtější navrhnout export širší než právní minimum, ale jasně označit, co která část znamená. Právní minimum řeší osobní údaje a konkrétní práva subjektů údajů. Produktový export řeší také projekty, nastavení, obsah, vazby, historii a obchodní data, která zákazník potřebuje pro kontinuitu. Když tyto vrstvy smícháte, vznikne buď zbytečně úzký export, nebo nebezpečný balík všeho pro všechny.
+
+Praktické rozdělení:
+
+- **Uživatelský export:** profil, nastavení, historie aktivit, souhlasy, relevantní metadata.
+- **Workspace export:** projekty, položky, komentáře, soubory, konfigurace, členové a role.
+- **Administrativní export:** faktury, objednávky, smluvní údaje, billing historie.
+- **Auditní export:** změny oprávnění, bezpečnostní události, důležité provozní logy v omezeném rozsahu.
+- **Mazací balík:** potvrzení, co bylo smazáno, co zůstává kvůli právní povinnosti a kdy se smaže zbytek.
+
+Ne každý zákazník má dostat každou vrstvu automaticky. Admin workspace může exportovat projektová data, ale nemusí dostat osobní bezpečnostní detaily všech členů. Účetní kontakt potřebuje faktury, ne interní komentáře v projektu. Role nejsou dekorace v nastavení. Jsou to brzdy, které mají fungovat zrovna ve chvíli, kdy někdo klikne na „stáhnout všechno“.
+
+### AM.2 Navrhněte exportní mapu dřív než tlačítko
+
+Tlačítko „Exportovat“ je poslední detail. Nejdřív vytvořte exportní mapu: seznam datových oblastí, jejich zdrojů, vlastníků a formátů. Tuhle mapu napojte na datovou mapu, retenční kalendář, offboarding zákazníka a vendor exit plán. Ano, e-book se začíná tvářit jako propojený systém. To je záměr, ne nehoda.
+
+Exportní mapa má u každé oblasti odpovědět na otázky:
+
+- kde data vznikají,
+- kde je primární zdroj pravdy,
+- jestli obsahují osobní údaje,
+- kdo smí export spustit,
+- v jakém formátu se vydávají,
+- jak se zachází s daty jiných osob,
+- jaká metadata jsou nutná pro pochopení exportu,
+- jak dlouho je exportní soubor dostupný,
+- jak se export loguje.
+
+Příklad:
+
+```markdown
+## Exportní oblast: projektové komentáře
+- Zdroj pravdy: databáze aplikace
+- Obsah: text komentáře, autor, čas vytvoření, vazba na projekt a úkol
+- Osobní údaje: jméno/e-mail autora, případně obsah vložený zákazníkem
+- Oprávnění: vlastník workspace nebo admin s právem exportu
+- Formát: JSONL pro úplnost, CSV pro základní přehled
+- Metadata: schéma polí, čas exportu, verze aplikace
+- Omezení: interní systémové poznámky supportu nejsou součástí zákaznického exportu
+- Retence exportního souboru: 7 dní, potom automatické smazání
+- Audit: kdo export spustil, kdy, pro jaký workspace
+```
+
+Dobrá exportní mapa zabrání tomu, aby vývojář při první žádosti lovil data ručně přes SQL a doufal, že na nic nezapomněl. Ruční export přes produkční databázi není funkce. Je to adrenalinový sport v kancelářském oblečení.
+
+### AM.3 Formát má být čitelný pro stroj i člověka
+
+PDF export vypadá hezky, ale pro migraci je často k ničemu. Screenshot tabulky je ještě horší, to už rovnou pošlete zákazníkovi fax a omluvný dopis. Pro data, která mají jít dál použít, volte otevřené a běžné formáty.
+
+Praktické minimum:
+
+- **CSV:** tabulková data, seznamy, faktury, jednoduché reporty,
+- **JSON nebo JSONL:** strukturovaná data, vazby, hierarchie, eventy,
+- **XML:** pokud je běžný v daném oboru nebo integraci,
+- **ZIP balík:** více souborů, přílohy, metadata a schémata dohromady,
+- **README soubor:** lidské vysvětlení obsahu exportu, verze a omezení.
+
+Každý export by měl obsahovat také metadata. Bez nich je export jako krabice kabelů po stěhování: určitě je tam něco důležitého, ale nikdo nechce zjistit co.
+
+Do metadata souboru dejte:
+
+- ID zákazníka nebo workspace,
+- čas vytvoření exportu,
+- verzi aplikace nebo schématu,
+- seznam souborů,
+- popis polí,
+- časovou zónu,
+- kódování,
+- informaci o vynechaných oblastech a důvodu,
+- kontakt pro dotazy.
+
+U citlivějších exportů zvažte šifrovaný ZIP nebo bezpečný download odkaz s expirací. Neposílejte velké exporty jako přílohu e-mailem, pokud obsahují osobní nebo obchodně citlivá data. E-mailová schránka není datový trezor. Je to spíš chodba, kde lidé nechávají krabice s nápisem „důvěrné“.
+
+### AM.4 Export nesmí porušit práva ostatních lidí
+
+GDPR i praktický zdravý rozum připomínají, že poskytnutí kopie nebo přenos dat nemá poškodit práva a svobody dalších osob. V SaaS kontextu to znamená hlavně pozor na sdílené workspacy, komentáře, auditní logy, support konverzace a přílohy.
+
+Typické konflikty:
+
+- jeden uživatel žádá export, ale data obsahují komentáře dalších členů týmu,
+- administrátor chce export workspace včetně aktivit lidí, kteří už ve firmě nepracují,
+- zákazník chce support historii, kde jsou interní poznámky podpory,
+- projekt obsahuje osobní údaje koncových uživatelů zákazníka,
+- export by prozradil bezpečnostní detaily, interní ID nebo infrastrukturu.
+
+Řešení není všechno odmítnout. Řešení je navrhnout vrstvy a redakci:
+
+- oddělte osobní uživatelský export od workspace exportu,
+- interní support poznámky exportujte jen jako veřejnou komunikaci, ne interní diagnostiku,
+- u auditních logů zvažte rozsah polí a časové období,
+- přidejte možnost anonymizovat nebo pseudonymizovat určité role,
+- v exportu jasně napište, co bylo vynecháno a proč.
+
+Tohle je dobré řešit už v datovém modelu. Pokud jsou interní poznámky, zákaznické zprávy a systémové události v jedné nerozlišitelné hromadě, export bude bolet. A jak víme, bolest v datovém modelu má jednu otravnou vlastnost: posílá faktury do budoucnosti.
+
+### AM.5 Udělejte export testovatelný a opakovatelný
+
+Export není hotový, když jednou projde na ukázkovém účtu se třemi položkami. Hotový je, když ho umíte spustit opakovaně, ověřit integritu a vysvětlit výsledek zákazníkovi.
+
+Minimální testovací sada:
+
+- prázdný účet,
+- malý účet s běžným obsahem,
+- velký účet s tisíci položek,
+- účet s přílohami,
+- účet s více rolemi,
+- účet po smazání uživatele,
+- účet s historickými daty po migraci schématu,
+- účet s diakritikou, emoji a dlouhými texty.
+
+U každého exportu ověřte:
+
+- soubor jde stáhnout,
+- soubor jde rozbalit,
+- schéma odpovídá dokumentaci,
+- počty záznamů sedí proti databázi,
+- citlivá pole nejsou navíc,
+- časové údaje jsou konzistentní,
+- export se po expiraci smaže,
+- akce je zapsaná v auditním logu.
+
+Pokud export generujete asynchronně, dejte uživateli stav: čeká, běží, hotovo, chyba, expirováno. Chybová hláška „něco se nepovedlo“ je sice poetická, ale pro zákazníka v migraci naprosto k ničemu. Lepší je „export příloh se nezdařil, projektová data jsou připravena, opakujte export příloh nebo kontaktujte podporu s ID požadavku“.
+
+### AM.6 Šablona: exportní karta SaaS účtu
+
+```markdown
+# Exportní karta: [produkt / workspace / datová oblast]
+
+## Účel
+- Proč export existuje:
+- Kdo ho typicky používá:
+- Jaké rozhodnutí nebo proces podporuje:
+
+## Oprávnění
+- Kdo může export spustit:
+- Je potřeba další ověření:
+- Kdo je informován po spuštění exportu:
+
+## Rozsah dat
+- Zahrnuté oblasti:
+- Vyloučené oblasti:
+- Důvod vyloučení:
+- Data jiných osob a omezení:
+
+## Formát
+- Formáty souborů:
+- Metadata:
+- Verze schématu:
+- Kódování a časová zóna:
+
+## Bezpečnost
+- Jak se export generuje:
+- Jak dlouho je dostupný:
+- Jak je chráněn download:
+- Kde se loguje přístup:
+
+## Kontrola
+- Testovací scénáře:
+- Kontrola integrity:
+- Datum posledního testu:
+- Vlastník:
+```
+
+### AM.7 Checklist: export bez rukojmí a bez paniky
+
+- [ ] Máme rozlišený osobní export, workspace export, administrativní export a auditní export.
+- [ ] Víme, která data jsou právní minimum a která jsou produktová služba navíc.
+- [ ] Každá exportní oblast má zdroj pravdy, vlastníka a formát.
+- [ ] Používáme otevřené a strojově čitelné formáty tam, kde mají data jít dál použít.
+- [ ] Export obsahuje README nebo metadata se schématem polí.
+- [ ] Export nejde spustit bez správného oprávnění a citlivé exporty mají dodatečné ověření.
+- [ ] Neprozrazujeme interní support poznámky, bezpečnostní detaily ani data dalších osob bez důvodu.
+- [ ] Exportní soubory mají expiraci a po ní se mažou.
+- [ ] Každý export je auditovaný: kdo, kdy, co a pro jaký účet.
+- [ ] Testujeme export na prázdných, velkých, historických a víceuživatelských účtech.
+
+### Mini cvičení: první exportní mapa za 60 minut
+
+1. Vyberte jeden typ účtu nebo workspace ve vašem SaaSu.
+2. Sepište pět nejdůležitějších datových oblastí, které by zákazník potřeboval při odchodu.
+3. U každé oblasti napište zdroj pravdy, formát a vlastníka.
+4. Označte osobní údaje, data dalších osob a interní údaje, které do exportu nepatří.
+5. Navrhněte ZIP strukturu exportu včetně `README.md` a `metadata.json`.
+6. Vyberte jeden testovací účet a ručně ověřte, jestli by šel export sestavit bez hádání.
+7. Zapište první technický patch: schéma, API endpoint, administrační tlačítko nebo interní runbook.
+8. Dejte patchi vlastníka a termín do 14 dní.
+
+Hotovo znamená: víte, co exportovat, komu to smí patřit, v jakém formátu to vydat a co udělat jako první implementační krok. Ne že máte ambiciózní větu v roadmapě. Roadmapa unese všechno. Produkce už méně.
+
+### Zdroje k příloze AM
+
+- GDPR článek 15 na EUR-Lex řeší právo subjektu údajů na přístup a kopii zpracovávaných osobních údajů: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
+- GDPR článek 20 na EUR-Lex stanovuje právo na přenositelnost údajů ve strukturovaném, běžně používaném a strojově čitelném formátu, pokud jsou splněné podmínky tohoto článku: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
+- EDPB příručka pro malé firmy k právům subjektů údajů vysvětluje praktické zacházení s žádostmi a uvádí CSV, XML a JSON jako běžné formáty pro přenositelnost: https://www.edpb.europa.eu/sme/be-compliant/respect-individuals-rights_en
+- EDPB Guidelines 01/2022 k právu na přístup jsou finální pokyny k tomu, jak právo na přístup implementovat v praxi: https://www.edpb.europa.eu/documents/guideline/guidelines-012022-on-data-subject-rights-right-of-access_en
+- EDPB/WP29 Guidelines on the right to data portability WP242 rev.01 rozpracovávají praktický výklad práva na přenositelnost podle GDPR: https://www.edpb.europa.eu/documents/guideline/guidelines-on-the-right-to-data-portability-under-regulation-2016679-wp242_en
+- Evropská komise k Data Act uvádí, že nařízení se začalo uplatňovat 12. září 2025 a zahrnuje také rámec pro efektivnější přechod mezi poskytovateli data-processing služeb: https://digital-strategy.ec.europa.eu/en/policies/data-act
+
+
 ## Pracovní log
+
+- 2026-08-23: Přidána příloha AM „Export dat pro zákazníka bez CSV hororu“ s rozlišením přístupu/exportu/přenositelnosti, exportní mapou, doporučenými formáty, ochranou práv dalších osob, testovací sadou, exportní kartou, checklistem, mini cvičením a ověřenými zdroji.
 
 - 2026-08-23: Přidána příloha AL „Marketingový datový audit bez šmírovacího autopilota“ s inventurou marketingových dat, rizikovými kategoriemi, consent pravidly, omezením předávání leadů, exit plánem, šablonou datové karty, checklistem, mini cvičením a ověřenými zdroji.
 
