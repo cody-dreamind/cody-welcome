@@ -227,6 +227,7 @@ T. Bezpečnostní minimum pro malý SaaS tým
 U. Týdenní provozní rytmus pro web, SaaS a marketing
 V. Měsíční report pro malý SaaS bez metrického divadla
 W. Roční privacy-first revize webu a SaaS
+X. Trust centrum pro malý privacy-first SaaS
 
 ---
 
@@ -10106,7 +10107,230 @@ Výstupem není certifikát dokonalosti. Výstupem je klidnější provoz, mén�
 - ENISA „Cybersecurity guide for SMEs“ dává malým a středním firmám praktické kroky k lepší bezpečnostní hygieně: https://www.enisa.europa.eu/publications/cybersecurity-guide-for-smes
 - ENISA „Cybersecurity for SMEs — Challenges and Recommendations“ rozebírá bezpečnostní rizika a doporučení pro malé a střední podniky v EU: https://www.enisa.europa.eu/publications/enisa-report-cybersecurity-for-smes
 
+## X. Trust centrum pro malý privacy-first SaaS
+
+Trust centrum není jen velká stránka pro enterprise prodej, kde se schovají loga certifikací, právní dokumenty a PDF tak dlouhé, že se u nich dá usnout dřív než u aktualizace účetního softwaru. Pro malý SaaS je trust centrum hlavně praktická odpověď na otázku: „Můžeme vám svěřit data a nebude nás to za půl roku bolet?“
+
+Dobré trust centrum zkracuje obchodní konverzace, pomáhá supportu, snižuje počet opakovaných dotazů a nutí tým udržovat pořádek ve vlastních odpovědích. Privacy-first hodnota se totiž neprodává větou „bereme soukromí vážně“. Prodává se tím, že člověk rychle najde, jaká data sbíráte, kde běžíte, kdo jsou dodavatelé, jak řešíte bezpečnost, jak se dá odejít a koho kontaktovat, když má dotaz.
+
+Pro malé týmy platí jednoduché pravidlo: trust centrum má být pravdivé, stručné a udržované. Raději jedna poctivá stránka než falešný korporátní chrám důvěry, který nikdo neaktualizoval od doby, kdy byla hlavní produktová novinka „nový dashboard v betě“.
+
+### X.1 Začněte otázkami, které opravdu dostáváte
+
+Nejdřív sepište dotazy ze sales callů, supportu, bezpečnostních dotazníků a e-mailů. Trust centrum nemá být výkladní skříň ega. Má být samoobslužná odpověď na opakované obavy.
+
+Typické otázky zákazníků:
+
+- Kde jsou data fyzicky nebo smluvně provozovaná?
+- Jaké osobní údaje produkt zpracovává?
+- Používáte subdodavatele a kde je najdu?
+- Jak řešíte zálohy, obnovu a incidenty?
+- Kdo v týmu má přístup k zákaznickým datům?
+- Dá se data exportovat nebo smazat?
+- Používáte AI a posíláte do ní zákaznická data?
+- Jaké dokumenty můžeme poslat našemu právníkovi nebo bezpečnostnímu týmu?
+
+Pokud se otázka objevila třikrát, patří do trust centra. Pokud se objevila jednou, ale blokuje velkého zákazníka, patří tam také. Pokud ji nikdo nikdy nepoložil a jen vypadá dobře na stránce, dejte ji do backlogu. Ano, i trust centrum může mít vanity obsah. Lidstvo je kreativní v nesprávných směrech.
+
+### X.2 Oddělte veřejnou stránku, dokumenty a interní důkazy
+
+Trust centrum má tři vrstvy. Nemíchejte je dohromady.
+
+**Veřejná stránka** vysvětluje základní postoj: provoz, data, bezpečnost, subdodavatelé, kontakt a odkazy na dokumenty. Má být srozumitelná i pro člověka, který není právník ani security specialista.
+
+**Dokumenty** obsahují detail: privacy policy, terms, DPA, seznam subdodavatelů, bezpečnostní přehled, retenční pravidla, případně status page nebo incident policy. Dokumenty musí mít vlastní verzi a datum poslední aktualizace.
+
+**Interní důkazy** jsou věci, které nechcete dávat veřejně, ale musíte je umět ukázat v prodejním nebo auditním procesu: záznamy o revizi přístupů, test obnovy záloh, seznam technických opatření, výsledek dependency auditu, incident postmortem bez citlivých detailů.
+
+Praktická struktura:
+
+- `/trust` — hlavní stránka s odpověďmi a odkazy.
+- `/privacy` — jasné vysvětlení zpracování osobních údajů.
+- `/subprocessors` — seznam subdodavatelů a účelů.
+- `/security` — bezpečnostní přehled bez zbytečných tajemství.
+- `/status` nebo přímý odkaz na status page.
+- interní složka `trust-evidence` — neveřejné důkazy pro tým.
+
+Veřejně vysvětlujte principy. Neveřejně držte důkazy. Tajemství typu konkrétní konfigurace infrastruktury, interní IP rozsahy nebo detailní postupy útoku do trust centra nepatří. Důvěra ano, návod pro útočníka ne. Drobný rozdíl, ale docela praktický.
+
+### X.3 Vysvětlete datové toky lidsky
+
+Privacy-first trust centrum musí odpovědět na základní datovou mapu bez právnické mlhy. Evropská komise u GDPR principů zdůrazňuje transparentnost, účelové omezení, minimalizaci dat, omezení uložení a odpovědnost správce. To nejsou jen právní hesla. Jsou to výborné nadpisy pro produktovou komunikaci.
+
+U každé hlavní datové kategorie napište:
+
+- proč ji potřebujete,
+- odkud přichází,
+- kde se ukládá,
+- kdo k ní má přístup,
+- jak dlouho ji držíte,
+- jak ji zákazník může exportovat nebo smazat,
+- jestli ji sdílíte se subdodavatelem.
+
+Příklad stručného popisu:
+
+> Kontaktní údaje administrátora používáme k vytvoření účtu, bezpečnostním upozorněním a provozní komunikaci. Neukládáme je do marketingových systémů bez samostatného souhlasu. Přístup má support a administrátoři provozu. Data držíme po dobu trvání smlouvy a následně podle retenčních pravidel pro účetní a bezpečnostní účely.
+
+Tohle je lepší než věta „vaše data chráníme nejlepšími standardy“. Ta zní hezky, ale neříká skoro nic. Trust centrum má z neurčité důvěry udělat konkrétní odpovědi.
+
+### X.4 Seznam subdodavatelů udržujte jako produktovou závislost
+
+Subdodavatelé nejsou nudná právní příloha. Jsou součást produktu. Pokud používáte hosting, e-mail, platební bránu, monitoring, support, analytiku nebo AI asistenta, zákazník má právo vědět, kam mohou jeho data téct.
+
+Minimální karta subdodavatele:
+
+## Název
+- Dodavatel:
+- Služba:
+- Účel:
+- Typ dat:
+- Region provozu:
+- Role podle GDPR:
+- Odkaz na dokumentaci dodavatele:
+- Interní vlastník:
+- Datum poslední kontroly:
+- Exit poznámka:
+
+Privacy-first verze téhle karty přidává ještě jednu otázku: „Umíme tuto službu nahradit nebo vypnout bez ztráty kontroly nad zákaznickými daty?“ Pokud odpověď zní „netušíme“, nemáte jen vendor problém. Máte produktové riziko s fakturou.
+
+Seznam subdodavatelů aktualizujte při každém nákupu nástroje, nové integraci, změně regionu nebo větší změně účelu zpracování. Ne jednou ročně, když se někdo lekne, že právník bude chtít aktuální verzi. To je procesní horor, ne governance.
+
+### X.5 Bezpečnost pište konkrétně, ale ne nebezpečně
+
+Bezpečnostní sekce má uklidnit rozumného zákazníka a zároveň neprozrazovat detaily, které zbytečně pomáhají útočníkům. ENISA ve svých materiálech pro malé a střední podniky doporučuje praktickou bezpečnostní hygienu: řízení přístupů, zálohy, aktualizace, školení, reakci na incidenty a kontinuitu provozu. Trust centrum má ukázat, že tyto oblasti řešíte systematicky.
+
+Veřejně popište například:
+
+- že používáte MFA u kritických účtů,
+- že přístupy přidělujete podle role a pravidelně revidujete,
+- že produkční data nejsou výchozí testovací materiál,
+- že zálohy testujete obnovou,
+- že máte incident kontakt a postup eskalace,
+- že sledujete závislosti a bezpečnostní aktualizace,
+- že citlivé údaje nepatří do logů, screenshotů a volných poznámek.
+
+Neuvádějte veřejně přesné názvy interních bezpečnostních nástrojů, detailní topologii, konkrétní retenční výjimky u logů nebo postupy, které by se daly zneužít. Zákazník potřebuje vědět, že bezpečnost řídíte. Nepotřebuje přesný plán, kudy se má útočit.
+
+### X.6 Připravte odpovědi na práva subjektů údajů
+
+Trust centrum má lidem říct, jak se ozvat, když chtějí řešit přístup k datům, opravu, export, výmaz nebo námitku. EDPB má k právu na přístup samostatné pokyny a prakticky to znamená jediné: žádosti lidí nejsou improvizační sport.
+
+Minimální veřejná odpověď:
+
+- kam poslat žádost,
+- jak ověříte identitu žadatele,
+- jaké typy žádostí umíte vyřídit,
+- co uděláte, když je žádost nejasná,
+- jak komunikujete stav žádosti,
+- kdo je interní vlastník procesu.
+
+Interní checklist pro žádost:
+
+- [ ] Máme bezpečně ověřenou identitu žadatele.
+- [ ] Víme, ke kterému zákaznickému účtu nebo organizaci žádost patří.
+- [ ] Zkontrolovali jsme produktová data, billing, support, logy a marketingové systémy.
+- [ ] Oddělili jsme data žadatele od dat jiných osob.
+- [ ] Výstup je srozumitelný a neobsahuje cizí osobní údaje.
+- [ ] Zapsali jsme datum, vlastníka a výsledek žádosti.
+
+Malý tým nemusí mít velký právní portál. Musí ale vědět, co udělá v pondělí ráno, když žádost přijde. „Zeptáme se někoho“ není proces. Je to začátek Slack vlákna, které zestárne špatně.
+
+### X.7 Trust centrum musí mít vlastníka a revizi
+
+Největší riziko trust centra je, že po spuštění začne lhát. Ne úmyslně. Prostě tím, že se produkt změní a stránka ne. Přibude nástroj, změní se onboarding, přidá se AI workflow, přesune se hosting, změní se support proces — a trust stránka pořád hrdě tvrdí stav z minulého kvartálu.
+
+Nastavte jednoduchý rytmus:
+
+- **Při každé větší změně:** aktualizace datových toků, subdodavatelů a bezpečnostního přehledu.
+- **Měsíčně:** kontrola otevřených privacy a security úkolů.
+- **Čtvrtletně:** revize dokumentů, kontaktů a veřejných tvrzení.
+- **Ročně:** součást roční privacy-first revize z přílohy W.
+
+Každá trust stránka má mít nahoře nebo dole datum poslední aktualizace. Pokud se bojíte datum ukázat, je to signál, že stránku neudržujete. A pokud stránku neudržujete, není to trust centrum. Je to historický artefakt v markdownu.
+
+### Praktická šablona trust centra
+
+Zkopírujte si tuto strukturu a vyplňte ji krátce. První verze nemusí být dokonalá. Musí být pravdivá.
+
+## Trust centrum
+
+## 1. Jak přemýšlíme o datech
+- Sbíráme jen data nutná pro provoz, podporu a zlepšování produktu.
+- Nepoužíváme invazivní tracking ani marketingové skripty bez jasného důvodu.
+- Preferujeme evropský provoz a dodavatele s dobrou kontrolou nad daty.
+
+## 2. Jaká data zpracováváme
+- Účty a kontakty:
+- Produktová data:
+- Billing data:
+- Support data:
+- Technické logy:
+
+## 3. Kde data běží
+- Hosting:
+- Databáze:
+- Zálohy:
+- Monitoring:
+- E-mail a support:
+
+## 4. Subdodavatelé
+- Odkaz na seznam subdodavatelů:
+- Datum poslední aktualizace:
+- Kontakt pro dotazy:
+
+## 5. Bezpečnostní minimum
+- Přístupy:
+- MFA:
+- Zálohy:
+- Logy:
+- Incidenty:
+- Aktualizace:
+
+## 6. Export, mazání a odchod
+- Jak zákazník získá export:
+- Jak požádá o mazání:
+- Co se drží kvůli právním nebo bezpečnostním důvodům:
+- Jak dlouho trvá odchod:
+
+## 7. Kontakt
+- Privacy/security kontakt:
+- Support kontakt:
+- Datum poslední aktualizace:
+
+### Checklist: trust centrum pro malý SaaS
+
+- [ ] Trust centrum odpovídá na reálné zákaznické otázky.
+- [ ] Veřejná stránka je srozumitelná i bez právníka.
+- [ ] Dokumenty mají datum poslední aktualizace.
+- [ ] Seznam subdodavatelů obsahuje účel, data, region, vlastníka a datum kontroly.
+- [ ] Datové toky jsou popsané podle účelu, přístupů, retence a exportu.
+- [ ] Bezpečnostní sekce je konkrétní, ale neprozrazuje citlivé detaily.
+- [ ] Je jasné, kam poslat privacy nebo security dotaz.
+- [ ] Tým ví, jak vyřídit žádost o přístup, export nebo výmaz.
+- [ ] Trust centrum má vlastníka a čtvrtletní revizi.
+- [ ] Každá nová integrace má povinnost aktualizovat trust centrum.
+
+### Mini cvičení: první trust centrum za 90 minut
+
+1. Vytáhněte deset posledních zákaznických dotazů na bezpečnost, data, provoz nebo dodavatele.
+2. Rozdělte je do bloků: data, provoz, subdodavatelé, bezpečnost, export, kontakt.
+3. Sepište jednu stránku s krátkými odpověďmi bez právnické mlhy.
+4. Vytvořte tabulku subdodavatelů a označte chybějící údaje.
+5. Přidejte privacy/security kontakt a datum poslední aktualizace.
+6. Nechte stránku přečíst člověka ze sales nebo supportu.
+7. Zapište tři věci, které zatím neumíte doložit, do interního backlogu.
+
+Výstupem není dokonalý compliance portál. Výstupem je místo, kam můžete zákazníka poslat, aniž byste se modlili, že tam není starý nesmysl. V malém SaaSu je to malý zázrak s velkým obchodním dopadem.
+
+### Zdroje k příloze X
+
+- Evropská komise shrnuje principy GDPR pro firmy a organizace včetně transparentnosti, účelového omezení, minimalizace dat, omezení uložení a odpovědnosti: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en
+- EDPB Guidelines 01/2022 popisují právo subjektu údajů na přístup a praktické požadavky na vyřizování těchto žádostí: https://www.edpb.europa.eu/documents/guideline/guidelines-012022-on-data-subject-rights-right-of-access_en
+- ENISA „Cybersecurity guide for SMEs“ dává malým a středním firmám praktické kroky k bezpečnostní hygieně: https://www.enisa.europa.eu/publications/cybersecurity-guide-for-smes
+- ENISA „Cybersecurity for SMEs — Challenges and Recommendations“ rozebírá bezpečnostní rizika a doporučení pro malé a střední podniky v EU: https://www.enisa.europa.eu/publications/enisa-report-cybersecurity-for-smes
+
 ## Pracovní log
+- 2026-08-23: Přidána příloha X „Trust centrum pro malý privacy-first SaaS“ s praktickou strukturou veřejné stránky, vrstvami dokumentů a interních důkazů, datovými toky, seznamem subdodavatelů, bezpečnostní komunikací, procesem žádostí subjektů údajů, šablonou, checklistem, mini cvičením a ověřenými zdroji.
 - 2026-08-23: Doplněna úvodní část „Jak z e-booku udělat týmový workshop“ s 75minutovým rámcem, výběrem workshopu podle situace, šablonou zápisu a privacy-first checklistem.
 - 2026-08-23: Přidána příloha W „Roční privacy-first revize webu a SaaS“ s šesti bloky revize, inventurou změn, kontrolou webu, datovou inventurou, revizí nástrojů a přístupů, testem obnovy, ročním plánem, checklistem, mini cvičením a ověřenými zdroji.
 - 2026-08-22: Přidána příloha V „Měsíční report pro malý SaaS bez metrického divadla“ se strukturou jednostránkového reportu, třemi typy signálů, privacy-first blokem, návazností na rozhodnutí, šablonou, checklistem, mini cvičením a ověřenými zdroji.
