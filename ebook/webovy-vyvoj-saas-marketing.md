@@ -228,6 +228,7 @@ U. Týdenní provozní rytmus pro web, SaaS a marketing
 V. Měsíční report pro malý SaaS bez metrického divadla
 W. Roční privacy-first revize webu a SaaS
 X. Trust centrum pro malý privacy-first SaaS
+Y. AI workflow pro web, SaaS a marketing bez úniku dat
 
 ---
 
@@ -10329,7 +10330,185 @@ Výstupem není dokonalý compliance portál. Výstupem je místo, kam můžete 
 - ENISA „Cybersecurity guide for SMEs“ dává malým a středním firmám praktické kroky k bezpečnostní hygieně: https://www.enisa.europa.eu/publications/cybersecurity-guide-for-smes
 - ENISA „Cybersecurity for SMEs — Challenges and Recommendations“ rozebírá bezpečnostní rizika a doporučení pro malé a střední podniky v EU: https://www.enisa.europa.eu/publications/enisa-report-cybersecurity-for-smes
 
+## Y. AI workflow pro web, SaaS a marketing bez úniku dat
+
+AI asistenti jsou skvělí na zrychlení práce. Umí navrhnout varianty textů, vysvětlit chybu v kódu, připravit osnovu článku, zkrátit briefing, najít slepá místa v onboardingové sekvenci nebo pomoct supportu napsat srozumitelnější odpověď. Jenže ve chvíli, kdy do nástroje bez rozmyslu kopírujete zákaznická data, interní čísla, produkční logy a neveřejný kód, nevzniká produktivita. Vzniká datová pračka se sebevědomím.
+
+Privacy-first AI workflow má jednoduchý cíl: dostat z AI užitečnou práci, ale nenechat ji stát se neviditelnou exportní cestou pro citlivá data. Pro malý SaaS tým to neznamená psát padesátistránkovou politiku. Znamená to nastavit pár pravidel, která lidé opravdu použijí v pondělí v 9:13, když spěchají a potřebují hotový návrh textu.
+
+*Codyho komentář: AI bez pravidel je jako sdílený firemní disk „final_final_v7“. Nějakou dobu to funguje. Pak všichni předstírají, že vědí, kde je pravda.*
+
+### Y.1 Rozdělte AI použití podle rizika
+
+Neřešte každý prompt stejně. Jiná věc je požádat AI o deset variant titulku blogového článku a jiná věc je vložit do modelu export zákaznických ticketů. První může být běžná kreativní práce. Druhá už je datové zpracování, které potřebuje jasný účel, minimální rozsah a kontrolu dodavatele.
+
+Praktické rozdělení:
+
+- **Nízké riziko:** brainstorming veřejných témat, stylistické varianty, generování struktury článku, vysvětlení obecného kódu bez interních secrets.
+- **Střední riziko:** shrnutí anonymizované zpětné vazby, návrh support odpovědi bez osobních údajů, refaktor neveřejného kódu bez klíčů a zákaznických dat.
+- **Vysoké riziko:** produkční logy, zákaznické dokumenty, billing data, bezpečnostní incidenty, právní texty, HR data, zdravotní nebo jiné citlivé údaje.
+- **Zakázané bez samostatného schválení:** secrets, API klíče, hesla, privátní tokeny, celé databázové exporty, neanonymizované osobní údaje, materiály pod NDA bez povolení.
+
+Tým má znát příklady, ne jen abstraktní klasifikaci. Do interní wiki napište: „Toto do AI dávat můžeš“, „Toto nejdřív anonymizuj“, „Toto sem nedávej nikdy“. Jedna tabulka porazí deset Slack debat.
+
+### Y.2 Každý AI workflow začněte účelem
+
+Před výběrem nástroje napište jednu větu:
+
+> AI používáme k [konkrétní úkol] nad [typ dat] proto, abychom [rozhodnutí nebo výstup].
+
+Příklady dobrých účelů:
+
+- AI navrhuje varianty hero sekce z veřejného produktového briefu, aby marketing rychleji připravil landing page.
+- AI shrnuje anonymizované support dotazy do témat, aby produktový tým vybral tři zlepšení onboardingového flow.
+- AI kontroluje pull request bez produkčních dat, aby vývojář rychleji našel čitelnostní a testovací mezery.
+
+Příklady špatných účelů:
+
+- „Chceme být víc AI.“
+- „Nahrajme tam všechno a uvidíme.“
+- „Konkurence to určitě taky používá.“
+
+Účel je důležitý i podle GDPR principů: osobní data mají být zpracována pro konkrétní účel, v nezbytném rozsahu a po omezenou dobu. Pokud účel neumíte napsat bez mlhy, pravděpodobně ještě nevíte, co vlastně zpracováváte.
+
+### Y.3 Minimalizujte prompt stejně jako formulář
+
+Prompt je vstupní formulář. Jen vypadá méně nebezpečně, protože má přátelské textové pole a někdy i hezký gradient. Pravidla jsou ale podobná: neposílejte víc dat, než je nutné pro výstup.
+
+Před odesláním promptu projděte čtyři kroky:
+
+1. **Vyhoďte identifikátory.** Jména, e-maily, telefonní čísla, adresy, ID zákazníků a interní názvy nahraďte obecnými štítky.
+2. **Zkraťte kontext.** Místo celého ticketu pošlete relevantní pasáž nebo ručně připravené shrnutí.
+3. **Oddělte fakta od citací.** Pokud nepotřebujete přesnou formulaci zákazníka, parafrázujte.
+4. **Zkontrolujte metadata.** Screenshoty, logy a exporty mohou obsahovat tokeny, URL s parametry, IP adresy nebo názvy interních systémů.
+
+Ukázka bezpečnějšího promptu:
+
+```text
+Role: Pomáháš zlepšit onboarding B2B SaaS.
+Kontext: Máme anonymizované téma z podpory. Uživatelé nerozumí prvnímu kroku po registraci.
+Data: 12 z 38 nových účtů za poslední měsíc se zastavilo před dokončením importu. Bez osobních údajů.
+Úkol: Navrhni tři varianty prázdného stavu a krátký checklist, který uživatele dovede k prvnímu importu.
+Omezení: Nepřidávej další povinná pole. Nepředpokládej sledování jednotlivce napříč webem.
+```
+
+Tohle je praktický rozdíl mezi „AI pomáhá týmu“ a „AI dostala pytel dat a přejeme si, aby se nic nestalo“.
+
+### Y.4 Vyberte nástroj podle dat, ne podle demíčka
+
+AI nástroj nekupujte podle toho, jak hezky vypadá demo. Kupujte ho podle toho, jak zachází s daty. U každého nástroje si zapište minimálně:
+
+- kdo je provozovatel a kde sídlí,
+- kde se zpracovávají a ukládají data,
+- zda se vstupy používají k trénování nebo zlepšování modelu,
+- jaké jsou retenční lhůty pro prompty, výstupy a logy,
+- jak funguje export a mazání dat,
+- jaké role a přístupy má administrátor,
+- zda existuje enterprise nastavení pro vypnutí tréninku, audit logy a správu uživatelů,
+- kdo je vlastníkem interního schválení.
+
+Pro evropský privacy-first provoz preferujte nástroje, které umožní řídit region zpracování, smluvní podmínky, retenční dobu a přístupy. Pokud to nástroj neumí vysvětlit, není to drobná administrativní vada. Je to produktové riziko.
+
+### Y.5 AI výstup není pravda, je pracovní návrh
+
+AI umí psát přesvědčivě i ve chvíli, kdy si plete fakta. Proto musí mít každý AI workflow jasný typ kontroly. Jinak se z asistenta stane automat na sebevědomé polopravdy. Což je mimochodem tržní segment, který už obsadily některé porady.
+
+Kontrolní pravidla podle výstupu:
+
+- **Marketingový text:** ověřte faktická tvrzení, reference, právní formulace a sliby zákazníkům.
+- **SEO obsah:** ověřte aktuální data, zdroje, citace, datum publikace a lokální kontext.
+- **Kód:** spusťte testy, zkontrolujte bezpečnostní dopady a nenechte AI měnit architekturu mimo zadání.
+- **Support odpověď:** ověřte tón, konkrétní stav účtu a to, že odpověď neprozrazuje cizí data.
+- **Analýza zpětné vazby:** kontrolujte, jestli AI nepřidala motivace, které v datech nejsou.
+
+Interní pravidlo může být jednoduché: AI výstup nesmí odejít k zákazníkovi, do produkce nebo do právního dokumentu bez lidské kontroly vlastníkem oblasti.
+
+### Y.6 Vytvořte týmovou AI kartu
+
+Pro každý schválený AI workflow stačí jedna karta. Ne román. Karta má být tak krátká, aby ji člověk přečetl dřív, než otevře nový chat.
+
+```markdown
+# AI workflow karta: [název]
+
+## Účel
+- Co AI pomáhá vytvořit:
+- Jaké rozhodnutí nebo výstup podporuje:
+
+## Data
+- Povolená data:
+- Data vyžadující anonymizaci:
+- Zakázaná data:
+- Retence vstupů a výstupů:
+
+## Nástroj
+- Název:
+- Provozovatel:
+- Region zpracování:
+- Použití dat pro trénink:
+- Vlastník účtu:
+
+## Kontrola
+- Kdo kontroluje výstup:
+- Co se musí ověřit:
+- Kdy se workflow zastaví:
+
+## Revize
+- Datum schválení:
+- Datum příští kontroly:
+- Vlastník:
+```
+
+Kartu držte u nástrojů, které tým opravdu používá. Pokud se karta rok neotevřela, workflow buď neexistuje, nebo existuje mimo kontrolu. Ani jedna varianta není výhra.
+
+### Y.7 AI gramotnost není školení na hodinu a zapomenout
+
+AI Act v EU zavedl povinnost podporovat AI gramotnost lidí, kteří s AI systémy pracují. Pro malý tým to prakticky znamená: lidé mají rozumět tomu, kdy AI použít, kdy ne, jaké má limity, jak chránit data a kdy výstup eskalovat.
+
+Minimum pro tým:
+
+- krátké vstupní školení pro každého, kdo používá AI nástroje,
+- praktické příklady povolených a zakázaných promptů,
+- vysvětlení rozdílu mezi veřejnými, interními, důvěrnými a osobními daty,
+- pravidlo lidské kontroly pro zákaznické, právní, bezpečnostní a produktové výstupy,
+- kanál pro hlášení chyby, úniku nebo podezřelého výstupu,
+- čtvrtletní revize nástrojů a workflow.
+
+Nedělejte z AI školení divadlo. Dejte lidem deset reálných situací z vašeho týmu a nechte je rozhodnout, co by do AI poslali, co anonymizovali a co vůbec neotevírali. To naučí víc než slide s robotem a slovem „innovation“.
+
+### Checklist: AI workflow bez úniku dat
+
+- [ ] Máme jasně popsaný účel AI workflow.
+- [ ] Víme, jaká data do workflow vstupují a co je zakázané.
+- [ ] Prompty minimalizují osobní, zákaznická a interně citlivá data.
+- [ ] Nástroj má zkontrolovaný region zpracování, retenci, trénování a export.
+- [ ] Výstupy podléhají lidské kontrole podle rizika.
+- [ ] Tým má praktické příklady povolených a zakázaných promptů.
+- [ ] AI workflow má vlastníka a datum další revize.
+- [ ] Incident nebo podezřelý únik má jasný eskalační postup.
+- [ ] Zákaznické nebo právně významné použití AI je transparentně vysvětlené.
+- [ ] Nepoužívané AI nástroje se ruší stejně důsledně jako jiné SaaS účty.
+
+### Mini cvičení: AI workflow audit za 45 minut
+
+1. Sepište pět nejčastějších způsobů, jak tým dnes používá AI.
+2. Ke každému napište účel, typ dat, nástroj a vlastníka.
+3. Označte workflow jako nízké, střední nebo vysoké riziko.
+4. U jednoho středního nebo vysokého rizika napište AI workflow kartu.
+5. Z promptů odstraňte osobní údaje, interní identifikátory a zbytečný kontext.
+6. Doplňte pravidlo lidské kontroly výstupu.
+7. Naplánujte revizi za tři měsíce a zrušte nástroje, které nikdo neumí obhájit.
+
+Výsledek má být obyčejný: méně chaosu, méně dat v cizích systémech a lepší výstupy. Pokud AI workflow nejde popsat jednoduše, není to pokročilost. Je to kouřostroj nad rizikem.
+
+### Zdroje k příloze Y
+
+- Evropská komise uvádí, že AI Act vstoupil v platnost 1. srpna 2024 a od 2. srpna 2026 se začal uplatňovat s výjimkami, mimo jiné pro zakázané praktiky a AI gramotnost od 2. února 2025 a GPAI povinnosti od 2. srpna 2025: https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai
+- Evropská komise v Q&A k AI gramotnosti vysvětluje, že povinnost podle článku 4 AI Actu se používá od 2. února 2025 a míří na opatření podporující AI gramotnost lidí pracujících s AI systémy: https://digital-strategy.ec.europa.eu/en/faqs/ai-literacy-questions-answers
+- Evropská komise shrnuje GDPR principy včetně účelového omezení, minimalizace dat, omezení uložení, integrity, důvěrnosti a odpovědnosti: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en
+- EDPB popisuje Taskforce on Generative AI Enforcement jako platformu pro výměnu informací o vyšetřováních generativní AI a podporu souladu s GDPR: https://www.edpb.europa.eu/about-edpb/edpb-plenaries-subgroups-and-taskforces_en
+
 ## Pracovní log
+- 2026-08-23: Přidána příloha Y „AI workflow pro web, SaaS a marketing bez úniku dat“ s rizikovým tříděním použití AI, minimalizací promptů, výběrem nástroje podle dat, pravidly lidské kontroly, AI workflow kartou, AI gramotností, checklistem, mini auditem a ověřenými EU zdroji.
 - 2026-08-23: Přidána příloha X „Trust centrum pro malý privacy-first SaaS“ s praktickou strukturou veřejné stránky, vrstvami dokumentů a interních důkazů, datovými toky, seznamem subdodavatelů, bezpečnostní komunikací, procesem žádostí subjektů údajů, šablonou, checklistem, mini cvičením a ověřenými zdroji.
 - 2026-08-23: Doplněna úvodní část „Jak z e-booku udělat týmový workshop“ s 75minutovým rámcem, výběrem workshopu podle situace, šablonou zápisu a privacy-first checklistem.
 - 2026-08-23: Přidána příloha W „Roční privacy-first revize webu a SaaS“ s šesti bloky revize, inventurou změn, kontrolou webu, datovou inventurou, revizí nástrojů a přístupů, testem obnovy, ročním plánem, checklistem, mini cvičením a ověřenými zdroji.
