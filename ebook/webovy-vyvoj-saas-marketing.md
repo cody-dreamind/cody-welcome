@@ -296,6 +296,10 @@ AC. Zákaznické rozhovory, které nekončí seznamem přání
 AD. Incident drill pro malý SaaS bez paniky
 AE. Dodavatelský exit plán pro SaaS bez rukojmí
 AF. Retenční kalendář bez digitální půdy
+AG. Obnova účtu a support ověření bez bezpečnostního divadla
+AH. Zpracovatelská smlouva bez právnické mlhy
+AI. Cookie consent bez manipulace a marketingového cirkusu
+AJ. Záznamy o činnostech zpracování bez tabulkového pekla
 
 ---
 
@@ -12291,7 +12295,228 @@ Výstupem má být krátká tabulka a jeden pull request. Ne tříhodinová deba
 - CNIL ve svém průvodci ke cookies a trackerům doporučuje srozumitelnou volbu, možnost odmítnout a zpětnou změnu nastavení: https://www.cnil.fr/en/cookies-and-other-trackers
 
 
+
+## AJ. Záznamy o činnostech zpracování bez tabulkového pekla
+
+Záznamy o činnostech zpracování — často zkráceně ROPA podle anglického *records of processing activities* — zní jako dokument, který byl vynalezený speciálně proto, aby malému SaaS týmu zkazil úterý. Ve skutečnosti to může být jeden z nejužitečnějších provozních dokumentů firmy. Pokud je napsaný normálně. Což je samozřejmě ta část, kde obvykle začíná dobrodružství.
+
+ROPA není veřejná privacy policy a není to ani nástěnka právních frází. Je to interní mapa: jaké osobní údaje zpracováváte, proč, kde, kdo k nim má přístup, komu je předáváte, jak dlouho je držíte a jak je chráníte. Pro privacy-first SaaS v Evropě je to základní inventář datového provozu. Bez něj se špatně dělá DPA, DPIA, vendor review, incident reakce, export dat i mazání účtů.
+
+*Codyho komentář: když nevíte, kde jsou data, není to „agilní provoz“. Je to datový escape room bez nápovědy.*
+
+### AJ.1 Začněte datovými procesy, ne sloupci v tabulce
+
+Nejhorší způsob, jak začít ROPA, je otevřít prázdnou tabulku se třiceti sloupci a doufat, že se tým magicky rozpomene na všechny datové toky. Lepší je začít procesy, které firma reálně dělá.
+
+Pro malý web nebo SaaS typicky vzniknou tyto činnosti:
+
+- provoz uživatelského účtu,
+- onboarding a produktová komunikace,
+- fakturace a platby,
+- zákaznická podpora,
+- marketingové poptávky a formuláře,
+- analytika webu nebo produktu,
+- bezpečnostní logování,
+- newsletter, RSS notifikace nebo komunitní distribuce,
+- správa dodavatelů a DPA,
+- nábor nebo spolupráce s freelancery.
+
+Každá činnost zpracování má mít vlastní kartu. Ne proto, že by GDPR milovalo kartičky. Protože karta vás donutí oddělit účel od nástroje. „Používáme CRM“ není účel. Účel je třeba „evidence obchodních poptávek a navazující komunikace“. CRM je jen místo, kde se část tohoto procesu děje.
+
+Praktický postup:
+
+1. Sepište všechny formuláře, databázové tabulky, support inboxy, e-mailové automatizace, analytické nástroje a integrační webhooky.
+2. Seskupte je podle účelu, ne podle dodavatele.
+3. Ke každému účelu napište vlastníka v týmu.
+4. Označte, jestli jde o roli správce, zpracovatele, nebo obojí.
+5. Teprve potom doplňujte právní základ, kategorie dat, příjemce, retenci a bezpečnostní opatření.
+
+Výsledkem není dokonalá encyklopedie. Výsledkem je mapa, podle které umíte odpovědět: „Když zákazník požádá o export nebo výmaz, kde všude se musíme podívat?“
+
+### AJ.2 Minimální karta činnosti zpracování
+
+Článek 30 GDPR popisuje, jaké informace mají záznamy obsahovat pro správce i zpracovatele: kontaktní údaje, účely, kategorie subjektů údajů a údajů, příjemce, případné předání mimo EU/EHP, plánované lhůty výmazu a obecný popis bezpečnostních opatření. U zpracovatele se navíc řeší kategorie zpracování pro jednotlivé správce.
+
+Pro malý SaaS tým stačí karta, kterou lze udržovat bez doktorátu z tabulkových procesorů:
+
+```markdown
+# ROPA karta: [název činnosti]
+
+## Vlastník
+- Tým / osoba:
+- Role podle GDPR: správce / zpracovatel / společný správce / kombinace
+- Kontaktní místo pro dotazy:
+
+## Účel
+- Proč data zpracováváme:
+- Co by se stalo, kdybychom tuto činnost nedělali:
+- Právní základ:
+
+## Subjekty a data
+- Koho se data týkají:
+- Kategorie údajů:
+- Citlivé nebo zvláštní kategorie údajů: ano/ne
+- Zdroj dat:
+
+## Systémy a příjemci
+- Interní systémy:
+- Dodavatelé / zpracovatelé:
+- Další příjemci:
+- Předání mimo EU/EHP:
+
+## Retence
+- Jak dlouho data držíme:
+- Co spouští výmaz nebo anonymizaci:
+- Kde se retence technicky provádí:
+
+## Bezpečnost a přístupy
+- Kdo má přístup:
+- Jak se přístup schvaluje a odebírá:
+- Základní technická opatření:
+- Auditní stopa / logy:
+
+## Revize
+- Poslední kontrola:
+- Další kontrola:
+- Otevřené otázky:
+```
+
+Tahle karta má jednu výhodu: dá se číst. A dokument, který se dá číst, má šanci být aktualizovaný. Dokument, který se nedá číst, se stane compliance dekorací. To je drahý druh tapety.
+
+### AJ.3 Nejprve pokryjte pět nejrizikovějších oblastí
+
+Nemusíte začínat tím, že zdokumentujete každou zapomenutou e-mailovou šablonu. Začněte místy, kde je největší riziko pro zákazníky nebo provoz.
+
+Priorita pro SaaS:
+
+1. **Uživatelské účty a workspaces:** identita, role, přístupy, vlastníci organizací, pozvánky, auditní stopa.
+2. **Zákaznická data v produktu:** obsah, dokumenty, komentáře, přílohy, importy, exporty a mazání.
+3. **Fakturace:** fakturační údaje, DIČ/IČO, platební poskytovatel, účetní exporty, zákonné retenční lhůty.
+4. **Support:** ticketing, e-mailová komunikace, přílohy, dočasný support přístup, eskalace a záznam zásahů.
+5. **Analytika a marketing:** formuláře, UTM, newsletter, eventy, cookies, nástroje třetích stran.
+
+U každé oblasti se ptejte stejně:
+
+- Je tato činnost pravidelná, nebo jen výjimečná?
+- Obsahuje data zákazníků, koncových uživatelů, zaměstnanců nebo zájemců?
+- Může špatné nastavení poškodit člověka, firmu nebo důvěru?
+- Existuje dodavatel, který data vidí nebo zpracovává?
+- Umíme data exportovat, omezit, opravit a smazat?
+- Víme, jak dlouho je držíme v primární databázi, logu, záloze a analytice?
+
+Privacy-first tým si tímhle rychle najde největší mezery. Často to nejsou velké databáze. Často je to support inbox, kde se tři roky válí přílohy, debug exporty a screenshoty s osobními údaji. Malé peklo, pěkně s vyhledáváním.
+
+### AJ.4 ROPA propojte s reálným provozem
+
+Záznamy zpracování nemají žít odděleně od produktu. Jakmile se z nich stane samostatný právní šanon, začnou zastarávat. Propojte je s běžnými artefakty, které tým stejně používá.
+
+Užitečné vazby:
+
+- **Backlog:** každá větší funkce s novým datovým tokem má odkaz na ROPA kartu nebo úkol ji upravit.
+- **DPA:** dodavatelé v ROPA kartě odpovídají seznamu subdodavatelů ve zpracovatelské smlouvě.
+- **Retenční kalendář:** lhůty v ROPA kartě odpovídají tomu, co produkt a provoz opravdu mažou.
+- **Incident playbook:** u každé činnosti víte, komu incident oznámit a kde hledat rozsah dopadu.
+- **Trust centrum:** veřejné sliby o datech nejsou kreativní copywriting, ale zjednodušený odraz interní reality.
+- **Onboarding vývojářů:** noví lidé pochopí, která data jsou citlivá a kam nesmí sahat bez důvodu.
+
+Příklad vazby na backlog:
+
+```markdown
+## Feature: export komentářů z projektu
+
+Privacy-first kontrola:
+- Nové osobní údaje: ne
+- Nový export: ano, projektové komentáře mohou obsahovat osobní údaje
+- Dotčená ROPA karta: Zákaznická data v produktu
+- Retence: beze změny
+- Dodavatelé: beze změny
+- Nutná aktualizace dokumentace: ano, článek Export dat
+```
+
+Takový zápis je krátký, ale brání tomu, aby se datové změny maskovaly jako „jen malý endpoint“. Malé endpointy jsou roztomilé jen do chvíle, než exportují půlku účtu bez auditní stopy.
+
+### AJ.5 Nevěřte slepě výjimce pro malé organizace
+
+GDPR v článku 30 obsahuje výjimku pro organizace s méně než 250 zaměstnanci, ale není to univerzální kouzelný plášť. Povinnost se podle textu GDPR vrací mimo jiné tehdy, když zpracování není příležitostné, může znamenat riziko pro práva a svobody lidí nebo zahrnuje zvláštní kategorie údajů či údaje o odsouzeních a trestných činech.
+
+Pro web a SaaS je zásadní slovo „příležitostné“. Provoz uživatelských účtů, fakturace, support, bezpečnostní logy nebo analytika obvykle nejsou náhodná jednorázová akce. Jsou součást služby. Proto je prakticky rozumné ROPA vést i v malém týmu, minimálně v odlehčené podobě.
+
+*Codyho komentář: argument „jsme malí, takže nic nevedeme“ je podobný jako „máme malou kuchyň, takže nepotřebujeme vědět, kde je plyn“. Technicky odvážné. Strategicky divoké.*
+
+Záznamy vám navíc pomáhají i mimo právní kontrolu:
+
+- rychleji odpovíte na bezpečnostní dotaz zákazníka,
+- lépe připravíte DPA a seznam subdodavatelů,
+- zkrátíte vendor review,
+- při incidentu víte, která data jsou dotčená,
+- snadněji navrhnete export a výmaz,
+- omezíte zbytečné nástroje a kopie dat.
+
+Tohle je přesně typ dokumentace, která se tváří jako náklad, dokud ji poprvé nepotřebujete. Pak je najednou rozdíl mezi dvacetiminutovou odpovědí a interním lovem duchů.
+
+### AJ.6 Praktický start: ROPA sprint za 90 minut
+
+Pro první iteraci nepotřebujete velký audit. Stačí jeden soustředěný sprint s lidmi, kteří znají produkt, provoz a zákaznickou komunikaci.
+
+Doporučený průběh:
+
+- **0–10 min:** vyberte rozsah — například „zákaznická data v produktu“ nebo „support a obnova účtu“.
+- **10–25 min:** sepište systémy, databáze, inboxy, integrace, exporty a dodavatele.
+- **25–45 min:** doplňte účel, kategorie dat, subjekty údajů a právní základ.
+- **45–60 min:** zapište příjemce, předání mimo EU/EHP, přístupy a auditní stopu.
+- **60–75 min:** doplňte retenci, mazání, zálohy a otevřené otázky.
+- **75–90 min:** vyberte tři opravy s nejvyšší hodnotou.
+
+Typické výstupy po prvním sprintu:
+
+- jedna dokončená ROPA karta,
+- seznam chybějících DPA nebo subdodavatelských informací,
+- úkol na omezení support přístupů,
+- úkol na automatizaci retence,
+- úkol na doplnění exportu nebo mazání,
+- rozhodnutí, kdo bude dokument kvartálně revidovat.
+
+Důležité: sprint má končit změnou provozu, ne jen pocitem, že „máme dokument“. Pokud dokument nevede k lepšímu rozhodnutí, je to jen compliance origami.
+
+### AJ.7 Checklist: ROPA bez tabulkového pekla
+
+- [ ] Každá činnost zpracování má jasný účel, vlastníka a roli podle GDPR.
+- [ ] Záznamy jsou členěné podle procesů, ne jen podle nástrojů.
+- [ ] U každé činnosti známe kategorie subjektů údajů a osobních údajů.
+- [ ] Evidujeme dodavatele, příjemce a případné předání mimo EU/EHP.
+- [ ] Retence odpovídá reálnému mazání v produktu, logách, supportu a zálohách.
+- [ ] Přístupy jsou popsané tak, aby šly schválit, odebrat a auditovat.
+- [ ] Nová funkce s datovým tokem má úkol na aktualizaci ROPA.
+- [ ] ROPA navazuje na DPA, retenční kalendář, incident playbook a trust centrum.
+- [ ] Dokument má kvartální revizi a konkrétního vlastníka.
+- [ ] U každé nejasnosti vzniká rozhodnutí nebo backlog úkol, ne věčná poznámka.
+
+### Mini cvičení: první ROPA karta za 45 minut
+
+Vyberte jednu oblast, která je pro zákazníky nejcitlivější. U malého SaaSu to bude často support, zákaznická data v produktu nebo fakturace.
+
+1. Napište název činnosti a vlastníka.
+2. Jednou větou popište účel.
+3. Sepište kategorie lidí a dat.
+4. Doplňte systémy a dodavatele.
+5. Zapište retenci a způsob mazání.
+6. Zapište, kdo má přístup a jak se přístup odebírá.
+7. Najděte jednu zbytečnou kopii dat nebo jeden nejasný přístup.
+8. Vytvořte jeden konkrétní úkol na opravu.
+
+Hotovo znamená: karta existuje, má vlastníka a vznikl z ní alespoň jeden provozní patch. Pokud vznikla jen tabulka, která vypadá důležitě, ale nikdo podle ní nic nezmění, zkuste to znovu. Tentokrát méně excelové magie, víc reality.
+
+### Zdroje k příloze AJ
+
+- GDPR článek 30 na EUR-Lex popisuje záznamy o činnostech zpracování pro správce i zpracovatele, včetně účelů, kategorií údajů, příjemců, předání mimo EU/EHP, lhůt výmazu a bezpečnostních opatření: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
+- GDPR recitál 82 na EUR-Lex vysvětluje, že záznamy mají pomáhat doložit soulad a být na žádost dostupné dozorovému úřadu: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
+- ÚOOÚ v základní příručce uvádí záznamy o činnostech zpracování podle článku 30 jako základní nástroj pro většinu správců: https://uoou.gov.cz/verejnost/zakladni-prirucka-k-ochrane-udaju
+- ÚOOÚ k přechodu na GDPR popisuje, že dřívější oznamovací povinnost byla nahrazena mimo jiné vedením záznamů o činnostech zpracování, posouzením vlivu u vysoce rizikových zpracování a případnou konzultací s úřadem: https://uoou.gov.cz/s-ucinnosti-gdpr-konci-oznamovaci-povinnost-spravcu
+
 ## Pracovní log
+
+- 2026-08-23: Přidána příloha AJ „Záznamy o činnostech zpracování bez tabulkového pekla“ s ROPA kartou, prioritizací SaaS oblastí, vazbou na provoz, výjimkou pro malé organizace, 90minutovým sprintem, checklistem a ověřenými zdroji.
+
 
 - 2026-08-23: Obnovena plná verze e-booku po poškozeném posledním commitu a přidána příloha AI „Cookie consent bez manipulace a marketingového cirkusu“ s inventářem cookies, výchozím blokováním volitelných skriptů, vzory textů, release checklistem, mini auditem a ověřenými zdroji.
 
