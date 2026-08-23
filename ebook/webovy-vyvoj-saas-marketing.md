@@ -295,6 +295,7 @@ AB. Backlog bez nekonečného skladiště přání
 AC. Zákaznické rozhovory, které nekončí seznamem přání
 AD. Incident drill pro malý SaaS bez paniky
 AE. Dodavatelský exit plán pro SaaS bez rukojmí
+AF. Retenční kalendář bez digitální půdy
 
 ---
 
@@ -11612,7 +11613,171 @@ Důležité je, aby nouzový režim nesbíral víc dat než běžný provoz. Kdy
 - EDPB Guidelines 4/2019 k Article 25 GDPR vysvětlují data protection by design and by default, což podporuje minimalizaci dat a promyšlené nastavení nástrojů už při návrhu: https://www.edpb.europa.eu/documents/guideline/guidelines-42019-on-article-25-data-protection-by-design-and-by-default_en
 
 
+
+## AF. Retenční kalendář bez digitální půdy
+
+Retence dat je nudné téma přesně do chvíle, kdy někdo najde pět let starý export zákazníků v zapomenuté složce, CRM drží dávno neplatné leady, analytika má detailnější historii než firemní účetnictví a supportní nástroj stále obsahuje přílohy, které už nikdo nepotřebuje. Pak to najednou nudné není. Pak je to takový malý thriller, jen bez dobrého soundtracku.
+
+Retenční kalendář je jednoduchá tabulka, která říká, jak dlouho konkrétní typ dat držíte, proč, kde, kdo za něj odpovídá a co se s ním stane na konci. Není to právnická dekorace. Je to provozní nástroj, který pomáhá stavět SaaS a marketing tak, aby se z dat nestala digitální půda plná věcí „pro jistotu“.
+
+### AF.1 Začněte účelem, ne tabulkou lhůt
+
+Nejhorší retenční politika vzniká tak, že si tým otevře prázdnou tabulku a začne vymýšlet čísla. „Leady 24 měsíců, logy 12 měsíců, support 5 let, protože to tak vypadá dospěle.“ Gratuluji, právě jste vytvořili compliance cosplay.
+
+Správný začátek je účel:
+
+- proč data vznikají,
+- jaké rozhodnutí nebo službu umožňují,
+- kdo je reálně používá,
+- jak poznáme, že už nejsou potřeba,
+- jestli existuje zákonná nebo smluvní povinnost je držet,
+- jestli stačí anonymizace, agregace nebo kratší technický log.
+
+Příklad: e-mail z kontaktního formuláře nepotřebujete držet věčně jen proto, že přišel přes web. Pokud se z něj nestane obchodní vztah, po určité době ztrácí hodnotu. Pokud se z něj stane klient, patří do jiné kategorie: smluvní komunikace, fakturace, projektová historie nebo support. Jedna cesta dat se větví podle účelu, ne podle toho, v jaké aplikaci zrovna leží.
+
+*Codyho komentář:* „Pro jistotu“ není retenční důvod. Je to přiznání, že tým neví, co s daty dělá. Upřímnost cením, ale do privacy dokumentace bych to nedával.
+
+### AF.2 Rozdělte data podle životního cyklu
+
+Malý SaaS tým nepotřebuje padesát kategorií. Potřebuje dost jemné dělení na to, aby mazání nebylo nebezpečné a aby uchovávání nebylo nekonečné. Prakticky začněte těmito skupinami:
+
+- **Marketingové signály:** agregovaná návštěvnost, UTM parametry, kampaně, obsahové metriky.
+- **Leady a poptávky:** formuláře, e-maily, kvalifikační poznámky, obchodní komunikace.
+- **Zákaznický účet:** profil, organizace, role, nastavení, smluvní údaje.
+- **Produktová data:** obsah vytvořený uživatelem, konfigurace, pracovní objekty, importy.
+- **Support a incidenty:** tickety, přílohy, diagnostika, interní poznámky, incident zápisy.
+- **Bezpečnostní a provozní logy:** přihlášení, změny oprávnění, auditní události, chybové logy.
+- **Billing a účetnictví:** faktury, platby, daňové doklady, upomínky.
+- **Zálohy a exporty:** snapshoty, ruční exporty, migrační balíčky, testovací kopie.
+
+U každé skupiny napište, jestli jde o aktivní data, archiv, zálohu, nebo anonymizovanou/agregovanou historii. To je důležité, protože aktivní CRM záznam, účetní doklad a záloha databáze mají jiný účel, jiný přístupový režim a jiný konec životnosti.
+
+### AF.3 Retence není jen smazat, ale i omezit
+
+Konec retenční lhůty nemusí vždy znamenat okamžité fyzické smazání ze všech vrstev v jedné sekundě. Praktický privacy-first provoz rozlišuje několik akcí:
+
+- **Smazat:** data už nejsou potřeba a nejde o zákonnou nebo smluvní povinnost.
+- **Anonymizovat:** chcete držet trend nebo statistiku, ale nepotřebujete identifikovat člověka.
+- **Agregovat:** detailní události nahradíte souhrnem za den, týden nebo měsíc.
+- **Archivovat s omezeným přístupem:** data držíte kvůli právní, účetní nebo bezpečnostní potřebě, ale nejsou v běžném provozu.
+- **Omezit zpracování:** data dočasně nevyužíváte jinak než pro nutné uchování, například kvůli sporu nebo zákonné povinnosti.
+
+Tohle je užitečné hlavně u supportu a bezpečnosti. Chybový log může být cenný několik dní po incidentu, méně cenný po měsíci a zbytečně rizikový po roce. Auditní log změn oprávnění naopak může mít delší bezpečnostní hodnotu, ale nemusí být dostupný každému administrátorovi v běžném rozhraní.
+
+### AF.4 Zálohy nejsou výmluva pro věčné držení
+
+Zálohy jsou častá šedá zóna. Tým nastaví mazání v aplikaci, ale nikdo neví, jak dlouho stará data přežijí v backupech, exportech a testovacích kopiích. Retenční kalendář proto musí mít zvláštní řádek pro zálohy.
+
+Minimum, které chcete znát:
+
+- jak často zálohy vznikají,
+- jak dlouho se drží,
+- kdo k nim má přístup,
+- jestli jsou šifrované,
+- kde geograficky běží,
+- jak se obnovují,
+- co se stane se smazanými daty v existujících zálohách,
+- jestli se zálohy nepoužívají jako pohodlný testovací dataset.
+
+Privacy-first pravidlo: produkční osobní data nepatří do vývojového prostředí jen proto, že „to bude rychlejší“. Pokud potřebujete realistická testovací data, připravte anonymizovaný dataset nebo generátor. Ano, je to méně pohodlné. Také je to méně průšvihové. To bývá v podnikání docela výhoda.
+
+### AF.5 Udělejte mazání viditelné v produktu i provozu
+
+Mazání nesmí být ruční rituál, který zná jen jeden vývojář a jeho poznámka v terminálu. U každé kategorie dat určete, jestli bude mazání:
+
+- automatické podle stáří,
+- spouštěné administrátorem,
+- spouštěné zákazníkem,
+- součástí offboardingu,
+- součástí měsíční nebo kvartální údržby,
+- blokované zákonnou povinností nebo otevřeným sporem.
+
+Pokud uživatel smaže účet, má dostat jasné vysvětlení, co se smaže hned, co zůstane kvůli zákonným povinnostem, co zůstane v zálohách do jejich rotace a jak požádat o další informace. Tohle není jen právní text. Je to důvěra ve chvíli, kdy vztah končí. A férový konec je často nejlepší důkaz, že produkt nebyl past.
+
+### AF.6 Šablona: retenční karta datové kategorie
+
+```md
+## Kategorie dat
+- Název:
+- Příklad dat:
+- Systémy, kde data vznikají:
+- Provozní vlastník:
+- Technický vlastník:
+
+## Účel a základ
+- Účel zpracování:
+- Právní/smluvní důvod uchování:
+- Kdo data používá:
+- Co se stane, když data smažeme příliš brzy:
+- Co se stane, když data držíme příliš dlouho:
+
+## Retence
+- Aktivní použití do:
+- Archiv do:
+- Zálohy do:
+- Akce na konci: smazat / anonymizovat / agregovat / archivovat / omezit
+- Automatizace mazání:
+
+## Přístup a bezpečnost
+- Role s přístupem:
+- Citlivost:
+- Šifrování:
+- Logování přístupu:
+- Export povolen: ano/ne
+
+## Revize
+- Poslední kontrola:
+- Další kontrola:
+- Otevřené otázky:
+```
+
+### AF.7 Praktický retenční kalendář pro malý SaaS
+
+Začněte s jednoduchou tabulkou. Nepotřebujete hned nástroj za tisíce eur měsíčně, který bude nejdřív tři měsíce implementovat konzultant. Stačí pracovní dokument, který někdo vlastní a tým podle něj opravdu upravuje systémy.
+
+| Kategorie | Aktivní použití | Archiv/záloha | Akce na konci | Vlastník |
+| --- | --- | --- | --- | --- |
+| Neuzavřené leady | dokud běží obchodní komunikace | krátká obchodní historie podle interní politiky | smazat nebo anonymizovat poznámky | obchod |
+| Zákaznický účet | po dobu služby | omezeně po ukončení kvůli exportu a podpoře | offboarding, export, mazání | produkt |
+| Produktová data | po dobu účtu/projektu | podle backup rotace | export a mazání podle žádosti/offboardingu | technický lead |
+| Support ticket | po dobu řešení a přiměřené poučení | omezený archiv pro kvalitu podpory | anonymizovat nebo smazat přílohy | support |
+| Auditní log oprávnění | podle bezpečnostní potřeby | omezený přístup | archivovat nebo smazat podle politiky | security/tech |
+| Billing doklady | podle účetních a daňových povinností | zabezpečený archiv | držet jen nutný rozsah | finance |
+| Agregovaná analytika | průběžné reportování | dlouhodobé trendy bez identifikace | ponechat jako agregát | marketing |
+
+Konkrétní lhůty si doplňte podle svého právního rámce, smluv, lokální účetní povinnosti a rizika. E-book není váš právník. Je to Cody, což je lepší na vtípky a horší na razítka.
+
+### AF.8 Checklist: retenční kalendář bez digitální půdy
+
+- [ ] Každá datová kategorie má účel, vlastníka a konec životnosti.
+- [ ] Retenční lhůty nejsou opsané od nejdelší povinnosti pro úplně jiný typ dat.
+- [ ] Rozlišujeme aktivní data, archiv, zálohy a agregované statistiky.
+- [ ] U každé kategorie víme, jestli na konci mažeme, anonymizujeme, agregujeme, archivujeme nebo omezujeme zpracování.
+- [ ] Zálohy mají vlastní retenční pravidlo a nejsou používané jako testovací databáze.
+- [ ] Supportní přílohy, exporty a ruční CSV soubory mají stejnou disciplínu jako produkční databáze.
+- [ ] Mazání je částečně automatizované nebo aspoň pravidelně kontrolované, ne závislé na paměti jednoho člověka.
+- [ ] Zákazník chápe, co se při zrušení účtu děje s jeho daty.
+- [ ] Retenční kalendář revidujeme při změně produktu, nástroje, právní povinnosti nebo datového rozsahu.
+
+### Mini cvičení: první retenční kalendář za 60 minut
+
+1. Během 10 minut vypište sedm hlavních kategorií dat podle této přílohy.
+2. Během 10 minut ke každé kategorii dopište účel a vlastníka.
+3. Během 15 minut najděte systémy, kde data reálně leží: aplikace, CRM, e-mail, support, fakturace, zálohy, exporty.
+4. Během 10 minut označte nejrizikovější místa: staré exporty, přílohy, produkční kopie, nejasné logy.
+5. Během 10 minut určete první tři akce: smazat, anonymizovat, zkrátit retenci, omezit přístup nebo zdokumentovat povinnost.
+6. Během 5 minut zapište datum další revize a vlastníka. Bez vlastníka je to jen hezký dokument. A hezké dokumenty nemažou data.
+
+### Zdroje k příloze AF
+
+- Evropská komise v přehledu principů GDPR vysvětluje storage limitation: osobní data mají být uchovávaná co nejkratší dobu podle účelu a právních povinností, s nastavením lhůt pro výmaz nebo revizi: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
+- EDPB průvodce pro malé firmy uvádí, že organizace mají mít interní politiku retenčních lhůt podle účelu a postup pro mazání nebo anonymizaci dat: https://www.edpb.europa.eu/sme/learn-the-basics/data-protection-basics_en
+- EDPB zpráva k právu na výmaz popisuje, že malé organizace často zápasí s určením retenčních lhůt a že plošné použití nejdelší lhůty na všechna zpracování je problematické: https://www.edpb.europa.eu/system/files/2026-02/edpb_cef-report_2025_right-to-erasure_en.pdf
+- CNIL prakticky shrnuje, že osobní data nelze držet neomezeně a retenční doba má vycházet z účelu, kvůli kterému byla data získána: https://www.cnil.fr/en/data-protection-in-data-collection-management
+
 ## Pracovní log
+
+- 2026-08-23: Přidána příloha AF „Retenční kalendář bez digitální půdy“ s kategorizací dat, životním cyklem, pravidly pro mazání/anonymizaci/agregaci, šablonou retenční karty, checklistem, mini cvičením a ověřenými zdroji.
 
 - 2026-08-23: Přidána příloha AE „Dodavatelský exit plán pro SaaS bez rukojmí“ s klasifikací dodavatelů, testem exportu, kontrolou smluvního ukončení, nouzovým režimem, vendor exit kartou, checklistem, mini cvičením a ověřenými zdroji.
 
