@@ -91,6 +91,76 @@ Pozor na typickou past: přidávat nástroje místo odstranění nejasností. Ka
 - [ ] Všechny nové nástroje mají jasné místo provozu a odpovědnost.
 - [ ] Po dokončení zapíšeme rozhodnutí do dokumentace nebo pracovního logu.
 
+## Jak z e-booku udělat týmový workshop
+
+Největší riziko podobných materiálů není to, že by byly moc dlouhé. Největší riziko je, že je tým přečte, souhlasně pokývá hlavou a pak se vrátí ke stejnému chaosu jako předtím. Klasika. Produktivita jako wellness pobyt pro dokumenty.
+
+Proto berte e-book jako zdroj pracovních sezení. Jedno sezení má mít jeden výstup, jednoho vlastníka a jednu změnu v reálném systému. Pokud po workshopu nevznikne upravená stránka, rozhodnutí, checklist, datová mapa nebo backlog položka, byl to spíš diskusní kroužek než práce.
+
+### Workshopový rámec na 75 minut
+
+Použijte ho pokaždé, když chcete z kapitoly udělat akci:
+
+1. **5 minut — vyberte problém.** Pojmenujte jednu věc, která dnes brzdí web, SaaS nebo marketing.
+2. **10 minut — přečtěte jen relevantní část.** Ne celý e-book. Jen kapitolu, checklist nebo šablonu, která odpovídá problému.
+3. **15 minut — sepište aktuální stav.** Jak to funguje teď, kde jsou data, kdo je vlastník, co bolí zákazníka nebo tým.
+4. **20 minut — navrhněte změnu.** Jednu konkrétní úpravu, ne redesign vesmíru.
+5. **10 minut — zkontrolujte privacy-first dopad.** Jaká data změna sbírá, kam tečou, kdo k nim má přístup a jestli jsou opravdu nutná.
+6. **10 minut — určete důkaz dokončení.** Screenshot, pull request, upravený text, zrušený nástroj, nová karta v dokumentaci.
+7. **5 minut — zapište rozhodnutí.** Kdo, co, proč, dokdy a podle čeho poznáte, že to pomohlo.
+
+Tohle zní jednoduše, protože to jednoduché je. Těžká část není formát. Těžká část je odolat pokušení otevřít deset témat najednou a tvářit se, že multitasking je strategie.
+
+### Jak vybrat první workshop podle situace
+
+- **Málo poptávek:** vezměte kapitoly 1, 2 a 3; výstupem má být přepsaná nabídka nebo landing page.
+- **Hodně nekvalitních poptávek:** vezměte kapitoly 2, 3, 8 a 19; výstupem má být jasnější segment, formulář a důkaz hodnoty.
+- **SaaS má registrace, ale nízkou aktivaci:** vezměte kapitoly 10, 11 a přílohu O; výstupem má být aktivační moment a 14denní onboarding.
+- **Tým se topí v nástrojích:** vezměte kapitoly 20, 21, 22 a přílohu P; výstupem má být vendor karta a rozhodnutí, co zrušit nebo omezit.
+- **Marketing měří moc a ví málo:** vezměte kapitoly 15, 18 a přílohy C, V; výstupem má být jedna metrická karta a měsíční report bez datového cirkusu.
+- **Privacy-first je zatím jen slogan:** vezměte kapitolu 23 a přílohy D, S, W; výstupem má být datová mapa a tři konkrétní úkoly ke snížení rizika.
+
+### Šablona výstupu z workshopu
+
+Zapište výsledek stručně. Ideálně tak, aby se k němu šlo za měsíc vrátit bez archeologického výzkumu ve firemním chatu.
+
+```markdown
+# Workshop: [téma]
+
+## Problém
+- Co dnes nefunguje:
+- Koho se to týká:
+- Jaký má problém dopad:
+
+## Rozhodnutí
+- Co změníme:
+- Proč právě teď:
+- Co kvůli tomu nebudeme řešit:
+
+## Privacy-first kontrola
+- Jaká data změna používá:
+- Kde data běží:
+- Kdo k nim má přístup:
+- Jak dlouho je držíme:
+- Co můžeme nesbírat:
+
+## Dokončení
+- Vlastník:
+- Termín:
+- Důkaz dokončení:
+- Signál, že změna pomohla:
+```
+
+### Checklist: workshop bez chaosu
+
+- [ ] Workshop má jedno téma a jeden očekávaný výstup.
+- [ ] Účastníci vědí, které kapitoly nebo přílohy jsou relevantní.
+- [ ] Debata začíná reálným problémem, ne oblíbeným nástrojem.
+- [ ] Každé rozhodnutí má vlastníka, termín a důkaz dokončení.
+- [ ] Privacy-first kontrola je součástí rozhodnutí, ne dodatečná brzda.
+- [ ] Vznikl zápis, který jde najít i bez hledání ve třech chatech.
+- [ ] Další workshop se plánuje až po dokončení nebo vědomém uzavření předchozí změny.
+
 ## Pracovní osnova
 
 ### Část I — Strategický základ
@@ -10037,6 +10107,7 @@ Výstupem není certifikát dokonalosti. Výstupem je klidnější provoz, mén�
 - ENISA „Cybersecurity for SMEs — Challenges and Recommendations“ rozebírá bezpečnostní rizika a doporučení pro malé a střední podniky v EU: https://www.enisa.europa.eu/publications/enisa-report-cybersecurity-for-smes
 
 ## Pracovní log
+- 2026-08-23: Doplněna úvodní část „Jak z e-booku udělat týmový workshop“ s 75minutovým rámcem, výběrem workshopu podle situace, šablonou zápisu a privacy-first checklistem.
 - 2026-08-23: Přidána příloha W „Roční privacy-first revize webu a SaaS“ s šesti bloky revize, inventurou změn, kontrolou webu, datovou inventurou, revizí nástrojů a přístupů, testem obnovy, ročním plánem, checklistem, mini cvičením a ověřenými zdroji.
 - 2026-08-22: Přidána příloha V „Měsíční report pro malý SaaS bez metrického divadla“ se strukturou jednostránkového reportu, třemi typy signálů, privacy-first blokem, návazností na rozhodnutí, šablonou, checklistem, mini cvičením a ověřenými zdroji.
 - 2026-08-22: Přidána příloha U „Týdenní provozní rytmus pro web, SaaS a marketing“ s jednostránkovým podkladem, 45minutovou agendou, výběrem signálů, privacy-first kontrolou, rozhodovací tabulí, checklistem a mini cvičením.
