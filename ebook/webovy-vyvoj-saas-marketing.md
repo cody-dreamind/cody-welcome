@@ -300,6 +300,7 @@ AG. Obnova účtu a support ověření bez bezpečnostního divadla
 AH. Zpracovatelská smlouva bez právnické mlhy
 AI. Cookie consent bez manipulace a marketingového cirkusu
 AJ. Záznamy o činnostech zpracování bez tabulkového pekla
+AK. DPIA pro malý SaaS bez právního dramatu
 
 ---
 
@@ -12513,7 +12514,162 @@ Hotovo znamená: karta existuje, má vlastníka a vznikl z ní alespoň jeden pr
 - ÚOOÚ v základní příručce uvádí záznamy o činnostech zpracování podle článku 30 jako základní nástroj pro většinu správců: https://uoou.gov.cz/verejnost/zakladni-prirucka-k-ochrane-udaju
 - ÚOOÚ k přechodu na GDPR popisuje, že dřívější oznamovací povinnost byla nahrazena mimo jiné vedením záznamů o činnostech zpracování, posouzením vlivu u vysoce rizikových zpracování a případnou konzultací s úřadem: https://uoou.gov.cz/s-ucinnosti-gdpr-konci-oznamovaci-povinnost-spravcu
 
+
+## AK. DPIA pro malý SaaS bez právního dramatu
+
+DPIA, tedy posouzení vlivu na ochranu osobních údajů, zní jako dokument, který vzniká v místnosti bez oken, kde se živí jen studenou kávou a paragrafy. Ve skutečnosti je to užitečný pracovní nástroj: pomáhá včas zjistit, jestli nová funkce, integrace nebo proces nevytváří příliš vysoké riziko pro lidi.
+
+Malý SaaS nemusí dělat DPIA pro každou drobnou změnu. Ale měl by umět rychle poznat, kdy už nejde jen o běžnou datovou hygienu. Typicky ve chvíli, kdy zpracovává citlivější data, dělá rozsáhlejší profilování, automatizované rozhodování, systematické monitorování, práci s polohou, finančními údaji, zdravotními údaji, dětmi nebo jinak zranitelnými skupinami.
+
+*Codyho komentář: DPIA není právní amulet. Když se napíše až po releasu jen proto, aby se našel papír do složky, je to compliance cosplay. Smysl má před rozhodnutím, dokud ještě můžete změnit architekturu.*
+
+### AK.1 Nejdřív rozhodněte, jestli DPIA vůbec potřebujete
+
+Začněte krátkým screeningem. Cílem není právně filozofovat, ale rozhodnout, jestli stačí běžné privacy-by-design review, nebo je potřeba hlubší posouzení.
+
+Praktické otázky:
+
+- Zpracováváme novou kategorii osobních údajů, kterou jsme dřív neměli?
+- Děláme automatizované hodnocení lidí, skórování, segmentaci nebo doporučování s dopadem na službu?
+- Propojujeme data z více zdrojů tak, že vzniká nový profil člověka nebo firmy?
+- Zpracování je rozsáhlé, dlouhodobé nebo těžko očekávatelné pro uživatele?
+- Pracujeme s citlivými údaji, dětmi, zaměstnanci, zdravotními daty, finančními signály nebo polohou?
+- Nasazujeme novou technologii, kterou tým neumí dobře vysvětlit ani vypnout?
+- Pokud by se data dostala ven, způsobilo by to lidem reálnou škodu, diskriminaci, ztrátu kontroly nebo reputační problém?
+
+Pokud odpovíte „ano“ na jednu silnou otázku nebo na několik menších najednou, udělejte alespoň mini DPIA. Lepší krátké poctivé posouzení než dlouhá debata v chatu, která se za měsíc nedá dohledat.
+
+### AK.2 Mini DPIA karta na jednu stránku
+
+Pro malý tým funguje jedna stránka lépe než velký dokument. Větší formát použijte až ve chvíli, kdy karta ukáže vysoké riziko.
+
+## Název změny
+
+Co zavádíme: například „automatické doporučení dalšího kroku v onboardingu podle aktivity uživatele“.
+
+## Účel
+
+Proč to děláme a jaké rozhodnutí nebo službu tím podporujeme. Účel má být konkrétní: „zkrátit čas k prvnímu dokončenému projektu“, ne „zlepšit user experience“, protože to je firemní mlha v elegantním svetru.
+
+## Data
+
+Jaké osobní údaje používáme, odkud pocházejí, jestli jsou nutné a jestli existuje menší varianta. Uveďte také data v logách, analytice, supportu a exportech.
+
+## Lidé a dopad
+
+Koho se změna týká a co se může stát, když systém udělá chybu. U B2B SaaSu myslete nejen na administrátora, ale i na běžné uživatele zákaznické organizace.
+
+## Rizika
+
+Sepište konkrétní rizika, ne obecné věty. Špatně: „únik dat“. Lépe: „support agent uvidí obsah projektů zákazníka bez schváleného důvodu“.
+
+## Opatření
+
+Jak riziko snižujete: minimalizace dat, agregace, kratší retence, role, audit log, vysvětlení v UI, opt-out, ruční kontrola, omezení dodavatelů, lokální zpracování, evropský provoz.
+
+## Zbytkové riziko
+
+Co zůstává i po opatřeních. Pokud zbytkové riziko pořád vypadá vysoko, změnu nezakrývejte hezkou formulací. Buď ji upravte, nebo řešte konzultaci s odborníkem a případně dozorovým úřadem.
+
+## Rozhodnutí
+
+Jedna z možností: spustit, spustit po úpravách, udělat plnou DPIA, zastavit. Přidejte vlastníka a datum revize.
+
+### AK.3 Rizika pište jako scénáře, ne jako strašidla
+
+Dobré DPIA stojí na scénářích. Tým má pochopit, co se může stát v reálném provozu.
+
+Příklady pro web a SaaS:
+
+- Nový heatmap nástroj ukládá obsah formulářových polí nebo session replay bez jasného souhlasu.
+- AI support asistent dostane celé ticketové vlákno včetně osobních údajů a pošle ho mimo EU/EHP bez kontroly.
+- Marketingová segmentace spojí produktové chování s e-mailingem tak, že uživatel nečeká rozsah sledování.
+- Admin role umožní export všech zákaznických dat bez druhého schválení a bez auditního záznamu.
+- Logování chyb zachytí tokeny, e-maily, obsah zpráv nebo identifikátory třetích osob.
+- Nová integrace drží data déle než hlavní produkt a nikdo nemá nastavené mazání při offboardingu.
+
+U každého scénáře napište dopad na člověka, pravděpodobnost, existující kontrolu a jednu změnu, která riziko sníží. Neřešte deset abstraktních rizik. Vyberte tři až pět reálných.
+
+### AK.4 Opatření mají měnit produkt, ne jen dokument
+
+Pokud DPIA skončí jen závěrem „riziko akceptováno“, je to podezřelé. Dobré posouzení často vede k produktovým úpravám.
+
+Typická opatření pro malý SaaS:
+
+- sbírat méně dat v registraci a citlivější údaje chtít až ve chvíli, kdy jsou opravdu potřeba,
+- použít agregované signály místo individuálního profilu,
+- zkrátit retenci logů a oddělit bezpečnostní logy od marketingových metrik,
+- omezit support přístup na konkrétní důvod, čas a auditní stopu,
+- dát administrátorům zákazníka přehled exportů, přístupů a mazání,
+- přidat lidské schválení před automatizovaným zásahem s významným dopadem,
+- vysvětlit v produktu, proč data používáte a jak je člověk může změnit nebo smazat,
+- vybrat evropský nebo self-hosted nástroj, pokud externí služba přidává zbytečné riziko.
+
+Privacy-first hodnota Dreamindu je v tomhle praktická: méně dat, kratší cesty, méně subdodavatelů a jasnější vysvětlení často znamenají i jednodušší produkt. Není to brzda. Je to architektonická dieta.
+
+### AK.5 Kdy DPIA eskalovat
+
+Mini DPIA je pracovní filtr. Někdy ale nestačí.
+
+Eskalujte, když:
+
+- neumíte riziko snížit na přijatelnou úroveň,
+- změna může mít významný dopad na práva lidí,
+- používáte rozsáhlé sledování, profilování nebo automatizované rozhodování,
+- zpracování zahrnuje zvláštní kategorie údajů nebo zranitelné skupiny,
+- zákazník, auditor nebo DPO potřebuje formálnější výstup,
+- tým se neshodne, jestli je zpracování férové a očekávatelné.
+
+Eskalace neznamená automaticky stopku. Znamená, že už nestačí „Cody si myslí, že dobrý“. Potřebujete právní, bezpečnostní nebo DPO pohled a lepší důkazní stopu.
+
+### AK.6 Napojte DPIA na release proces
+
+DPIA nesmí žít vedle produktu jako zapomenutý dokument. Napojte ji na momenty, kdy se reálně rozhoduje.
+
+Praktický workflow:
+
+1. Product brief obsahuje screening DPIA otázky.
+2. Pokud screening ukáže riziko, vzniká mini DPIA karta.
+3. Vývojové úkoly obsahují opatření jako běžnou práci, ne jako právní poznámku bokem.
+4. Před releasem se kontroluje, jestli opatření opravdu existují v produktu, logách, rolích a dokumentaci.
+5. Po 30 až 90 dnech se ověří, jestli se zpracování v provozu nerozrostlo jinam.
+
+Tím se z DPIA stane součást produktové kvality. Ne razítko, které někdo honí v pátek večer, protože release už samozřejmě „musí ven“. Pátek večer je mimochodem nejhorší compliance framework. Hned po „to se pak dopíše“.
+
+### Checklist: DPIA bez právního dramatu
+
+- [ ] Máme screening otázky pro každou větší změnu s osobními údaji.
+- [ ] Umíme rozhodnout, kdy stačí privacy review a kdy je potřeba mini nebo plná DPIA.
+- [ ] Mini DPIA karta popisuje účel, data, lidi, rizika, opatření, zbytkové riziko a rozhodnutí.
+- [ ] Rizika jsou napsaná jako reálné scénáře, ne jako obecná strašidla.
+- [ ] Opatření se promítají do produktu, rolí, logů, retence, dodavatelů a komunikace.
+- [ ] Vysoké zbytkové riziko se neignoruje, ale eskaluje.
+- [ ] DPIA je napojená na product brief, release checklist a následnou revizi.
+- [ ] U každé karty je vlastník, datum a odkaz na související ROPA, DPA, retenční kalendář nebo trust centrum.
+
+### Mini cvičení: DPIA screening za 35 minut
+
+Vyberte jednu plánovanou změnu, která pracuje s osobními údaji: nový analytický nástroj, AI asistenta, export, segmentaci, support funkci nebo onboardingový krok.
+
+1. Popište změnu jednou větou.
+2. Odpovězte na sedm screeningových otázek z části AK.1.
+3. Sepište tři nejpravděpodobnější rizikové scénáře.
+4. Ke každému napište jedno opatření, které by šlo udělat před releasem.
+5. Rozhodněte: bez DPIA, mini DPIA, plná DPIA, nebo stop.
+6. Zapište jeden produktový úkol, který sníží riziko už v této iteraci.
+
+Hotovo znamená: tým má rozhodnutí a jeden konkrétní patch. Ne dokument, který jen říká „budeme dbát na ochranu osobních údajů“. To je věta, která by měla sama požádat o výmaz.
+
+### Zdroje k příloze AK
+
+- GDPR článek 35 na EUR-Lex stanovuje posouzení vlivu na ochranu osobních údajů tam, kde je pravděpodobné vysoké riziko pro práva a svobody fyzických osob: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
+- GDPR článek 36 na EUR-Lex řeší předchozí konzultaci s dozorovým úřadem, pokud by zpracování i přes opatření představovalo vysoké riziko: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
+- EDPB má mezi schválenými pokyny materiál WP248 rev.01 k DPIA a určování, zda zpracování pravděpodobně povede k vysokému riziku: https://www.edpb.europa.eu/endorsed-wp29-guidelines_en
+- ÚOOÚ v základní příručce k ochraně údajů uvádí posouzení vlivu jako součást povinností správce u rizikovějších zpracování: https://uoou.gov.cz/verejnost/zakladni-prirucka-k-ochrane-udaju
+
 ## Pracovní log
+
+- 2026-08-23: Přidána příloha AK „DPIA pro malý SaaS bez právního dramatu“ se screeningem rizik, mini DPIA kartou, scénáři, produktovými opatřeními, eskalací, napojením na release proces, checklistem, mini cvičením a ověřenými zdroji.
 
 - 2026-08-23: Přidána příloha AJ „Záznamy o činnostech zpracování bez tabulkového pekla“ s ROPA kartou, prioritizací SaaS oblastí, vazbou na provoz, výjimkou pro malé organizace, 90minutovým sprintem, checklistem a ověřenými zdroji.
 
