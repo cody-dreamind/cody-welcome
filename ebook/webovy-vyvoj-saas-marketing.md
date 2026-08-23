@@ -10937,7 +10937,150 @@ Výstupem má být jedna konkrétní úprava odchodové cesty. Ne desetibodová 
 - EDPB Guidelines on the right to data portability vysvětlují praktický význam přenositelnosti dat podle GDPR: https://www.edpb.europa.eu/documents/guideline/guidelines-on-the-right-to-data-portability-under-regulation-2016679-wp242_en
 - EDPB Guidelines 4/2019 k data protection by design and by default pomáhají převést ochranu dat do návrhu produktu a procesů: https://www.edpb.europa.eu/documents/guideline/guidelines-42019-on-article-25-data-protection-by-design-and-by-default_en
 
+## AB. Backlog bez nekonečného skladiště přání
+
+Backlog je užitečný sluha a příšerný skladník. Když do něj tým hází každý nápad, požadavek, bug, „jednou by se mohlo“ a poznámku z porady, rychle vznikne digitální půda plná krabic bez štítků. Nikdo neví, co je důležité, co zestárlo, co má zákaznický důkaz a co tam jen přežívá, protože to kdysi řekl někdo hlasitý.
+
+Malý webový nebo SaaS tým nepotřebuje nekonečný backlog. Potřebuje rozhodovací frontu. Rozdíl je zásadní: backlog říká „někdy možná“, rozhodovací fronta říká „tohle stojí za další zpracování, protože víme proč“. V privacy-first provozu je to ještě důležitější, protože každá nová funkce může přidat datový tok, oprávnění, vendor závislost, retenční problém nebo support závazek. Funkce není jen tlačítko. Funkce je malý provozní tvor, kterého budete krmit.
+
+### AB.1 Rozdělte vstupy dřív, než z nich uděláte úkoly
+
+Ne všechno, co přijde do týmu, patří rovnou do vývoje. Jeden zákaznický požadavek může být signál problému, ale nemusí být správným řešením. Interní nápad může být dobrý, ale bez kontextu jen nafoukne seznam. Bug může být drobnost, nebo symptom hlubšího provozního rizika.
+
+Používejte čtyři vstupní koše:
+
+- **Problémy zákazníků:** co lidem brání v dosažení hodnoty, ideálně doložené rozhovorem, supportem, obchodem nebo agregovanou analytikou.
+- **Provozní rizika:** bezpečnost, dostupnost, zálohy, přístupy, dokumentace, fakturace, support a compliance.
+- **Růstové příležitosti:** landing page, obsah, pricing, onboarding, doporučení, distribuce a aktivace.
+- **Technická údržba:** dluh, závislosti, refaktor, testy, mazání nevyužitého kódu, zjednodušení integrací.
+
+Každý vstup musí mít zdroj. Ne nutně externí odkaz, ale jasný původ: ticket, rozhovor, incident, měsíční report, revizní sprint, obchodní poznámka, interní audit. Položka bez zdroje je jen pocit v kostýmu úkolu. A pocity jsou fajn, ale deployovat je do produkce nedoporučuju.
+
+### AB.2 Vytvořte krátkou „triage kartu“ místo dlouhého zadání
+
+Před tím, než se z nápadu stane práce, vyplňte jednoduchou kartu. Cílem není popsat řešení do posledního pixelu, ale zjistit, jestli má smysl investovat další čas.
+
+#### Triage karta
+
+#### Název
+
+Krátká věta bez interního žargonu: „Zkrátit první export reportu z 8 minut na méně než 1 minutu“.
+
+#### Typ
+
+Zákaznický problém / provozní riziko / růstová příležitost / technická údržba.
+
+#### Zdroj signálu
+
+Odkaz na ticket, poznámku z hovoru, incident, report, audit nebo konkrétní pozorování.
+
+#### Proč teď
+
+Co se stane, když to neuděláme tento měsíc? Pokud odpověď zní „nic moc“, položka pravděpodobně nemusí být nahoře.
+
+#### Dopad na data
+
+Přidává položka nové osobní údaje, nový vendor, nové logy, novou roli, export, retenci nebo přístup?
+
+#### Nejmenší užitečný výstup
+
+Jaká nejmenší změna by pomohla ověřit směr nebo snížit riziko?
+
+#### Rozhodnutí
+
+Teď / připravit pitch / sledovat / zahodit.
+
+Triage karta má být krátká. Pokud se nevejde na jednu stránku, pravděpodobně už nepíšete triage, ale román s vedlejšími postavami. To může být krásné, ale sprint planning to obvykle nepřežije.
+
+### AB.3 Omezte rozpracovanou práci, ne ambice
+
+Kanban Guide pracuje s pojmem WIP jako s prací, která už začala, ale ještě neskončila. Pro malý tým je tohle brutálně praktické. Čím víc věcí je otevřených, tím hůř se dokončuje, komunikuje a provozně hlídá.
+
+Místo otázky „kolik toho zvládneme otevřít?“ se ptejte „kolik toho zvládneme dokončit bez rozbití supportu, kvality a důvěry?“ To je mnohem méně heroické, ale mnohem zdravější. Hrdinství v malém SaaSu často znamená, že někdo večer hasí věci, které ráno nikdo neměl rozdělat.
+
+Praktické WIP limity pro malý tým:
+
+- maximálně jedna větší produktová změna v aktivní implementaci,
+- maximálně jedna větší marketingová nebo obsahová iniciativa,
+- maximálně jedna provozní oprava s rizikem dopadu na zákazníky,
+- nejvýš tři aktivní drobné úkoly na člověka,
+- žádná nová větší položka, dokud není jasné, co se dokončilo, zahodilo nebo explicitně odložilo.
+
+Codyho komentář: WIP limit není brzda kreativity. Je to bezpečnostní pás. Bez něj možná pojedete rychleji, ale také výrazně vtipněji proletíte čelním sklem reality.
+
+### AB.4 Zaveďte pravidelný backlog pruning
+
+Backlog se nekazí dramaticky. Kazí se potichu. Položky stárnou, kontext mizí, priority se mění a tým si zvykne, že v seznamu je stovka věcí, které nikdo nečte. Proto potřebujete úklidový rituál.
+
+Jednou za měsíc projděte položky, které nejsou aktivní ani připravené na další cyklus. U každé rozhodněte:
+
+- **ponechat:** pořád má zdroj, dopad a jasný další krok,
+- **spojit:** jde o stejný problém jako jiná položka,
+- **zmenšit:** rozsah je moc velký, ale existuje menší užitečný výstup,
+- **přesunout do signálů:** problém existuje, řešení ještě není jasné,
+- **zahodit:** položka už nemá dost důvodů.
+
+Zahazování není selhání. Je to údržba pozornosti. Pokud se důležitá věc vrátí, vrátí se s novým signálem. Pokud se nevrátí, právě jste si ušetřili mentální nájem za starou krabici.
+
+### AB.5 Privacy-first filtr před povýšením položky
+
+Než se položka dostane do aktivní práce, projděte krátký privacy-first filtr. Ne kvůli papírování, ale kvůli návrhu. Nejlevnější změna je ta, kterou nemusíte předělávat po právním, bezpečnostním nebo zákaznickém průšvihu.
+
+Pět kontrolních otázek:
+
+- Přidáváme nová osobní nebo zákaznická data?
+- Měníme účel zpracování nebo očekávání uživatele?
+- Posíláme data novému nástroji, API nebo subdodavateli?
+- Potřebujeme novou retenci, export, mazání nebo auditní stopu?
+- Umíme změnu vysvětlit zákazníkovi jednou srozumitelnou větou?
+
+Pokud odpověď na některou otázku zní „nevíme“, položka není připravená k implementaci. Může být důležitá, ale patří do přípravy, ne do vývoje. „Nejdřív to naprogramujeme a pak uvidíme“ je oblíbená metoda výroby budoucích incidentů.
+
+### AB.6 Rozhodovací fronta na 14 dní
+
+Pro malé týmy funguje krátký horizont. Dlouhé roadmapy vypadají profesionálně, ale často jen esteticky maskují nejistotu. Na další dva týdny si vytvořte rozhodovací frontu s maximálně pěti kandidáty.
+
+Každý kandidát musí mít:
+
+- triage kartu,
+- vlastníka,
+- odhad apetitu ve dnech, ne falešnou přesnost v hodinách,
+- privacy-first filtr,
+- definici hotovo,
+- rozhodnutí, co se kvůli tomu nebude dělat.
+
+Výběr dělejte podle kombinace dopadu, naléhavosti, rizika a připravenosti. Nevybírejte jen nejhlasitější požadavek. Hlasitost je metrika mikrofonu, ne strategie.
+
+### Checklist: backlog bez skladiště přání
+
+- [ ] Každá položka má typ: zákazník, provoz, růst nebo údržba.
+- [ ] Každá položka má jasný zdroj signálu.
+- [ ] Aktivní práce má WIP limit, který tým opravdu dodržuje.
+- [ ] Staré položky se jednou měsíčně mažou, slučují nebo zmenšují.
+- [ ] Před implementací proběhne privacy-first filtr.
+- [ ] Položka má nejmenší užitečný výstup, ne jen velkou vizi.
+- [ ] Rozhodovací fronta na 14 dní má maximálně pět kandidátů.
+- [ ] U každé vybrané práce víme, co kvůli ní vědomě neděláme.
+
+### Mini cvičení: backlog pruning za 45 minut
+
+1. Vyberte 20 nejstarších otevřených položek.
+2. Během 10 minut označte jejich typ a zdroj signálu.
+3. Během 10 minut smažte nebo archivujte položky bez zdroje a bez jasného dopadu.
+4. Během 10 minut spojte duplicity do jednoho problému.
+5. Během 10 minut vyberte tři položky pro další triage kartu.
+6. Během 5 minut napište jednu věc, kterou tým příštích 14 dní vědomě neřeší.
+
+Výstupem není „uklizený celý backlog“. Výstupem je menší šum a jasnější fronta. To bohatě stačí. Backlog se nestane zdravým tím, že ho jednou heroicky přerovnáte. Zdravý je tehdy, když se pravidelně zmenšuje, zpřesňuje a chrání tým před zbytečnou rozpracovaností.
+
+### Zdroje k příloze AB
+
+- The Kanban Guide ve verzi May 2025 popisuje workflow, řízení WIP, aktivní správu položek a základní flow metriky: https://kanbanguides.org/the-kanban-guide/2025.5/
+- Shape Up od Basecampu vysvětluje přístup k tvarování práce, apetitu, rizikům, rozhodování o sázkách a udržování čistého seznamu práce: https://basecamp.com/shapeup
+
 ## Pracovní log
+- 2026-08-23: Přidána příloha AB „Backlog bez nekonečného skladiště přání“ s tříděním vstupů, triage kartou, WIP limity, měsíčním pruningem, privacy-first filtrem, 14denní rozhodovací frontou, checklistem, mini cvičením a ověřenými zdroji.
+
 - 2026-08-23: Přidána příloha AA „Offboarding zákazníka bez zamčených dat“ s oddělením zrušení, exportu a mazání, návrhem férové odchodové cesty, exportním minimem, mazací mapou, vendor návazností, offboardingovou kartou, checklistem, mini drillem a ověřenými zdroji.
 
 - 2026-08-23: Přidána úvodní část „Jak e-book udržovat aktuální v týmu“ s rytmem údržby, šablonou navazujících rozhodnutí, signály užitečnosti a checklistem pro živý pracovní dokument.
