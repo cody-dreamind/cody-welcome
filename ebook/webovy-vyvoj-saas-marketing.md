@@ -10770,7 +10770,176 @@ To nejsou výstupy. To jsou názvy porad, ze kterých člověk odchází s chut�
 
 Po 90 dnech nechcete vědět všechno. Chcete vědět dost na další rozumný krok. Dobrý revizní sprint proto nekončí velkou prezentací. Končí jednou dokončenou změnou, menším množstvím zbytečných dat a týmem, který ví, proč dělá právě tohle.
 
+## AA. Offboarding zákazníka bez zamčených dat
+
+Onboarding dostává v SaaS světě hodně pozornosti, protože vypadá hezky v grafech, prezentacích a produktových mapách. Offboarding bývá jeho méně populární bratranec, který přijde na návštěvu, když zákazník ruší účet, chce export dat, mění dodavatele nebo řeší právní požadavek. Právě tam se ale ukáže, jestli je privacy-first jen marketingová věta, nebo skutečný provozní princip.
+
+Dobrý offboarding neznamená, že zákazník nikdy neodejde. To je produktová fantasy literatura. Dobrý offboarding znamená, že odchod proběhne klidně, bezpečně, dokumentovaně a bez pocitu rukojmí. Uživatel má vědět, co se stane s jeho účtem, daty, fakturací, přístupy, integracemi a historií komunikace. Tým má vědět, kdo co dělá, co se maže, co se drží kvůli zákonným nebo účetním důvodům a jak se ověří, že proces opravdu skončil.
+
+Privacy-first SaaS by měl umět říct: „Data jsou vaše, pomůžeme vám odejít férově.“ Krátkodobě to může bolet ego. Dlouhodobě to zvedá důvěru. Zákazník, kterému nekomplikujete odchod, se mnohem snáz vrátí nebo vás doporučí. Zákazník držený exportním peklem si vás zapamatuje také, jen trochu méně poeticky.
+
+### AA.1 Oddělte zrušení účtu, export dat a mazání dat
+
+Nejčastější chyba je házet všechny odchodové scénáře do jednoho tlačítka „Delete account“. Jenže zrušení předplatného, export pracovních dat a výmaz osobních údajů jsou tři různé procesy.
+
+**Zrušení předplatného** řeší obchodní vztah: další fakturaci, konec placeného období, refund policy, přístup k placeným funkcím a informaci pro billing. Nemusí automaticky znamenat okamžité smazání dat.
+
+**Export dat** řeší přenositelnost a praktický odchod. Zákazník potřebuje dostat data v použitelném formátu, ideálně bez podpory, ticketu a prosebného rituálu u ohně. U B2B účtů musí být jasné, kdo export může spustit.
+
+**Mazání dat** řeší životní cyklus osobních a zákaznických dat. Část dat můžete smazat hned, část po ochranné lhůtě a část musíte držet kvůli účetnictví, právním nárokům nebo bezpečnostním logům. To má být vysvětlené předem, ne až ve chvíli, kdy se zákazník ptá potřetí.
+
+Praktické pravidlo: v rozhraní, dokumentaci i interním playbooku používejte tři samostatné názvy: `Cancel subscription`, `Export data`, `Delete workspace/account`. Překlady si upravte podle tónu produktu, ale význam nemíchejte.
+
+### AA.2 Navrhněte odchodovou cestu jako produktovou funkci
+
+Offboarding nemá být temná ulička v nastavení, kde člověk hledá tlačítko jako tajný vchod do sklepa. Má být krátká, jasná a bez manipulačních triků.
+
+Minimální obrazovka pro zrušení by měla říct:
+
+- kdy skončí placené období,
+- jestli zůstane přístup k účtu a na jak dlouho,
+- co se stane s daty,
+- jak spustit export,
+- kdo v týmu dostane potvrzení,
+- kam napsat, pokud jde o bezpečnostní nebo právní dotaz.
+
+Zeptejte se na důvod odchodu, ale dobrovolně. Nepodmiňujte zrušení dotazníkem, call termínem nebo „promluvte si nejdřív s naším retention specialistou“. To není péče, to je úniková místnost převlečená za customer success.
+
+Dobrá mikrocopy:
+
+> Předplatné můžete zrušit kdykoli. Po skončení placeného období zůstane workspace dostupný v režimu pouze pro čtení po dobu 30 dní. Export dat můžete spustit před zrušením i během této lhůty. Některé fakturační a bezpečnostní záznamy uchováváme po dobu vyžadovanou právními nebo provozními důvody.
+
+Čísla v textu berte jako příklad. Skutečné lhůty musí odpovídat vaší retenční matici, smlouvám a právnímu kontextu. Ano, to znamená, že produkt, právník a provoz si mají promluvit dřív než při prvním naštvaném ticketu.
+
+### AA.3 Export musí být použitelný, ne jen technicky existující
+
+Export ve formátu, který jde otevřít jen interním skriptem pojmenovaným `temporary_final_export_2.js`, není férový export. Uživatel má dostat data tak, aby je uměl zkontrolovat, archivovat nebo předat jinému systému.
+
+Použitelné exportní minimum:
+
+- CSV pro tabulková data,
+- JSON pro strukturovaná produktová data,
+- ZIP archiv pro kombinaci souborů a metadat,
+- README s popisem polí, časových zón, identifikátorů a vazeb,
+- informace, co export neobsahuje a proč.
+
+U B2B SaaSů přidejte roli nebo oprávnění `Data export`. Ne každý administrátor musí mít právo stáhnout všechno. Export je citlivá akce, takže patří do audit logu: kdo ho spustil, kdy, pro jaký workspace, jaký rozsah a kdy odkaz expiruje.
+
+Privacy-first detail: exportní odkaz má být časově omezený, ideálně chráněný opětovným ověřením identity. Posílat export jako nešifrovanou přílohu e-mailem je pohodlné asi jako nechávat klíče od kanceláře pod rohožkou s cedulkou „prosím nekrást“.
+
+### AA.4 Mazání popište podle vrstev dat
+
+Mazání není jeden SQL příkaz a vítězný taneček. V reálném produktu máte účetní doklady, aplikační záznamy, uživatelský obsah, logy, zálohy, support komunikaci, analytiku, e-maily a subdodavatele. Každá vrstva má jiný účel, vlastníka a retenční pravidlo.
+
+Jednoduchá mazací mapa:
+
+| Vrstva | Typický příklad | Co říct uživateli | Interní kontrola |
+| --- | --- | --- | --- |
+| Účet a profil | jméno, e-mail, role | kdy se smaže nebo anonymizuje | audit práv a aktivních session |
+| Workspace data | projekty, záznamy, soubory | jak dlouho běží grace period | dokončení exportu a potvrzení vlastníka |
+| Fakturace | faktury, platby, daňové údaje | co držíte kvůli účetnictví | právní důvod a retenční lhůta |
+| Support | tickety, e-maily | co zůstává kvůli historii řešení | odstranění nepotřebných příloh |
+| Logy | bezpečnostní a provozní logy | agregace nebo omezené uchování | expirace podle retenční politiky |
+| Zálohy | snapshot databáze | kdy data zmizí z běžné obnovy | dokumentovaný cyklus záloh |
+
+Když zákazník žádá o výmaz osobních údajů, odpověď nemá být „smazali jsme účet“. Má být jasné, které vrstvy byly smazané, které anonymizované, které zůstávají do konkrétní lhůty a proč. Pokud musíte část dat držet, vysvětlete účel a právní důvod lidsky.
+
+### AA.5 Subdodavatelé jsou součást offboardingu
+
+Pokud data posíláte do e-mailingu, fakturace, chatu, analytiky, helpdesku nebo AI služby, odchod nekončí ve vaší databázi. Musíte vědět, jestli subdodavatel data maže automaticky, po API, ručně přes administraci, nebo až po žádosti na podporu. Tady se krásně pozná, jestli byl vendor review z přílohy P opravdu review, nebo jen optimistický klik na „Sign up“.
+
+Do interního playbooku napište pro každého důležitého dodavatele:
+
+- jaká zákaznická data dostává,
+- jestli má vlastní export,
+- jestli má vlastní mazací proces,
+- kdo má přístup do administrace,
+- kde je dokumentace k DPA a subdodavatelům,
+- jak ověříte dokončení po ukončení účtu.
+
+Pokud dodavatel neumí rozumný export ani mazání, je to produktové riziko. Ne nutně okamžitý důvod k migraci, ale rozhodně důvod napsat ho do vendor karty a přestat se tvářit, že integrace je jen API endpoint s hezkým logem.
+
+### AA.6 Šablona: offboardingová karta zákazníka
+
+```markdown
+# Offboarding zákazníka: [název zákazníka / workspace]
+
+## Kontext
+- Důvod odchodu, pokud ho zákazník dobrovolně uvedl:
+- Typ účtu / plán:
+- Datum zrušení předplatného:
+- Konec placeného období:
+- Vlastník procesu:
+
+## Export
+- Požadovaný rozsah exportu:
+- Formát exportu:
+- Kdo export schválil:
+- Kdo export stáhl:
+- Datum expirace odkazu:
+- Poznámky k neexportovaným datům:
+
+## Přístupy
+- Deaktivované účty:
+- Zrušené API klíče:
+- Odpojené integrace:
+- Ukončené support nebo admin přístupy:
+
+## Mazání a retence
+- Data smazaná hned:
+- Data anonymizovaná:
+- Data držená do konkrétní lhůty:
+- Důvod dalšího uchování:
+- Stav záloh:
+
+## Subdodavatelé
+- Dotčené služby:
+- Export / mazání u dodavatelů:
+- Důkaz dokončení:
+
+## Uzavření
+- Potvrzení zákazníkovi odesláno:
+- Interní audit log zkontrolován:
+- Poučení pro produkt nebo support:
+```
+
+Tahle karta nemusí vznikat pro každý malý trial účet, který po dvou dnech zmizel jako novoroční předsevzetí. Používejte ji pro placené B2B zákazníky, účty s citlivějšími daty, ruční migrace, právní požadavky a situace, kde hrozí nedorozumění.
+
+### AA.7 Checklist: férový konec vztahu
+
+- [ ] Zrušení předplatného, export a mazání jsou oddělené procesy.
+- [ ] Zákazník před potvrzením ví, kdy končí přístup a co se stane s daty.
+- [ ] Důvod odchodu je dobrovolný, ne překážka zrušení.
+- [ ] Export je ve srozumitelném formátu a obsahuje popis polí.
+- [ ] Exportní odkaz je časově omezený a citlivá akce je v audit logu.
+- [ ] Mazání je popsané podle vrstev dat, ne jednou obecnou větou.
+- [ ] Retenční výjimky mají důvod, vlastníka a lhůtu.
+- [ ] Subdodavatelé mají popsaný exportní a mazací postup.
+- [ ] API klíče, tokeny, integrace a session se po odchodu vypínají.
+- [ ] Support ví, jak odpovědět bez právního freestyle jazzu.
+- [ ] Offboarding vytvoří jeden poznatek pro produkt, dokumentaci nebo pricing.
+
+### Mini cvičení: offboarding drill za 45 minut
+
+1. Vyberte jeden typ zákazníka: trial, placený self-service, B2B workspace nebo enterprise účet.
+2. Během 10 minut napište, co se dnes stane po kliknutí na zrušení.
+3. Během 10 minut projděte, jak by zákazník získal export dat a kdo ho může spustit.
+4. Během 10 minut vyplňte mazací mapu pro účet, workspace data, fakturaci, support, logy a zálohy.
+5. Během 10 minut zkontrolujte dva nejdůležitější subdodavatele.
+6. Během 5 minut vyberte jednu změnu: lepší text v UI, exportní README, audit log, retenční karta nebo support makro.
+
+Výstupem má být jedna konkrétní úprava odchodové cesty. Ne desetibodová strategie „zlepšit churn“. Když už zákazník odchází, poslední dojem by neměl být administrativní horor. Férový konec vztahu je pořád součást produktu.
+
+### Zdroje k příloze AA
+
+- Evropská komise shrnuje práva subjektů údajů včetně přístupu, opravy, výmazu, omezení zpracování, přenositelnosti a námitky: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/dealing-requests-individuals_en
+- Evropská komise popisuje principy GDPR, zejména transparentnost, minimalizaci dat, omezení uložení, integritu, důvěrnost a odpovědnost: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en
+- EDPB Guidelines on the right to data portability vysvětlují praktický význam přenositelnosti dat podle GDPR: https://www.edpb.europa.eu/documents/guideline/guidelines-on-the-right-to-data-portability-under-regulation-2016679-wp242_en
+- EDPB Guidelines 4/2019 k data protection by design and by default pomáhají převést ochranu dat do návrhu produktu a procesů: https://www.edpb.europa.eu/documents/guideline/guidelines-42019-on-article-25-data-protection-by-design-and-by-default_en
+
 ## Pracovní log
+- 2026-08-23: Přidána příloha AA „Offboarding zákazníka bez zamčených dat“ s oddělením zrušení, exportu a mazání, návrhem férové odchodové cesty, exportním minimem, mazací mapou, vendor návazností, offboardingovou kartou, checklistem, mini drillem a ověřenými zdroji.
+
 - 2026-08-23: Přidána úvodní část „Jak e-book udržovat aktuální v týmu“ s rytmem údržby, šablonou navazujících rozhodnutí, signály užitečnosti a checklistem pro živý pracovní dokument.
 
 - 2026-08-23: Přidána příloha Z „Revizní sprint pro web, SaaS a marketing po 90 dnech“ s pětivrstvou revizí, tabulí zachovat/zlepšit/odstranit, kontextovým vyhodnocením signálů, mazáním zbytečností, jednostránkovou šablonou, checklistem a 90minutovým cvičením.
