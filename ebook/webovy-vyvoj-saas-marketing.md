@@ -11252,7 +11252,210 @@ Výstupem není dokonalý výzkumný plán. Výstupem je bezpečný, konkrétní
 - EDPB průvodce pro malé podniky vysvětluje zákonné zpracování osobních údajů a podmínky platného souhlasu: https://www.edpb.europa.eu/sme/be-compliant/process-personal-data-lawfully_en
 - The Mom Test od Roba Fitzpatricka popularizuje praktický přístup k rozhovorům o reálném chování místo hypotetického hodnocení nápadu: https://www.momtestbook.com/
 
+## AD. Incident drill pro malý SaaS bez paniky
+
+Incident není až okamžik, kdy hoří produkce, zákazníci píšou caps lockem a někdo v chatu pošle „to se nikdy nestalo“. Incident je každá situace, kdy se systém chová jinak, než má, a může poškodit dostupnost, důvěrnost, integritu dat, zákaznickou důvěru nebo schopnost týmu normálně pracovat.
+
+Malý tým nepotřebuje válečnou místnost s osmi dashboardy a třípísmennými rolemi, které zná jen auditor. Potřebuje jednoduchý nacvičený postup: kdo rozhoduje, kde jsou informace, jak se chrání data, kdy se komunikuje a jak se po incidentu zlepší systém. Incident drill je zkouška nanečisto. Levná, trochu nepohodlná a extrémně užitečná. Přesně jako záloha, kterou jste opravdu obnovili, ne jen obdivovali v administraci.
+
+### AD.1 Vyberte jeden realistický scénář
+
+Nezačínejte katastrofickým filmem. První drill má být tak konkrétní, aby šel projít za 45 až 60 minut a aby se týkal vašeho reálného provozu.
+
+Dobré scénáře pro malý web nebo SaaS:
+
+- formulář přestal posílat leady do CRM,
+- administrátor omylem exportoval špatný seznam zákazníků,
+- unikl API klíč do repozitáře,
+- produkční deploy rozbil onboarding,
+- platební webhook se zpracoval dvakrát,
+- analytický nástroj začal sbírat víc dat, než bylo schváleno,
+- zákazník žádá výmaz dat a tým neví, kde všude kopie existují.
+
+Každý scénář popište jednou větou: „V úterý v 10:15 zjistíme, že [co se stalo], dopad může být [na koho/co] a první signál přišel z [monitoring/support/zákazník].“
+
+*Codyho komentář:* pokud scénář nejde napsat jednou větou, pravděpodobně netestujete incident response, ale románový vesmír. Ten si nechte na víkend.
+
+### AD.2 Připravte role dřív než řešení
+
+Incident se nerozpadá jen kvůli technice. Často se rozpadá kvůli tomu, že všichni zároveň zjišťují, kdo smí rozhodnout. Proto si předem určete minimální role.
+
+Pro malý tým stačí:
+
+- **Incident lead:** drží čas, priority a rozhodnutí.
+- **Technický řešitel:** ověřuje příčinu, navrhuje opravu a hlídá rizika zásahu.
+- **Komunikace:** připravuje interní a externí zprávy, i když je nakonec nepošle.
+- **Privacy owner:** posuzuje, jestli jde o osobní údaje, jaký je rozsah a jestli se musí řešit další povinnosti.
+- **Zapisovatel:** ukládá časovou osu, hypotézy, rozhodnutí a otevřené otázky.
+
+Jedna osoba může mít víc rolí, ale role musí být pojmenované. V mini týmu může incident lead být zároveň zapisovatel. Jen by neměl být zároveň jediný člověk, který naslepo opravuje produkci, píše zákazníkům a loví právní základ v patnácti záložkách. Takhle se vyrábí chaos s dobrou vůlí.
+
+### AD.3 Během drillu nehledejte dokonalost, hledejte tření
+
+Cílem není dokázat, že tým je připravený. Cílem je najít místa, kde by se reálný incident zbytečně zasekl.
+
+Sledujte hlavně:
+
+- jak rychle najdete správný kontakt,
+- jestli existuje aktuální přístup k produkci,
+- jestli víte, kde jsou logy a kdo do nich smí,
+- jestli logy neobsahují zbytečně citlivá data,
+- jestli umíte vypnout rizikovou integraci bez celého deploye,
+- jestli zákaznická komunikace nezní jako právní mlha,
+- jestli někdo zapisuje rozhodnutí v čase.
+
+Praktický formát: nastavte časovač na 45 minut. Prvních 5 minut přečtěte scénář a rozdělte role. Dalších 25 minut projděte reakci krok za krokem. Posledních 15 minut sepište, co chybělo, co bylo nejasné a jaká jedna změna se udělá do 14 dní.
+
+### AD.4 Privacy-first otázky položte hned na začátku
+
+U evropského provozu se privacy neřeší až ve chvíli, kdy někdo vymyslí hezkou omluvnou větu. Ptejte se hned:
+
+- Týká se incident osobních údajů?
+- Jakých kategorií lidí se může týkat: zákazníci, uživatelé, zaměstnanci, dodavatelé?
+- Jde o dostupnost, důvěrnost, integritu, nebo kombinaci?
+- Jaký je nejmenší rozumný rozsah zasažených dat?
+- Které systémy a subdodavatelé mohou mít kopii nebo log?
+- Jak zabráníme dalšímu šíření dat během řešení?
+- Co musíme zachovat jako důkaz a co naopak nesmíme dál kopírovat?
+
+EDPB v pokynech k oznamování porušení zabezpečení osobních údajů vysvětluje, že správce má posuzovat povahu porušení, pravděpodobné důsledky a riziko pro práva a svobody lidí. Pro malý tým z toho plyne jednoduché pravidlo: nepanikařit, ale rychle oddělit technickou závadu od incidentu s dopadem na osobní data.
+
+### AD.5 Mějte připravenou komunikační kostru
+
+V incidentu nepište zprávy od nuly. V klidu zní tým lidsky. Ve stresu zní buď jako robot, nebo jako tiskové oddělení firmy, která právě objevila slovo „transparentnost“.
+
+Interní status karta:
+
+```markdown
+# Incident status: [název]
+
+## Stav
+- Úroveň: informační / omezený dopad / vážný dopad
+- Začátek: [čas]
+- Aktuální dopad: [stručně]
+- Incident lead: [jméno]
+
+## Co víme
+- [ověřený fakt]
+- [ověřený fakt]
+
+## Co nevíme
+- [otevřená otázka]
+- [otevřená otázka]
+
+## Další krok
+- [akce]
+- Vlastník: [jméno]
+- Termín další aktualizace: [čas]
+```
+
+Externí zpráva má mít čtyři části:
+
+1. co se stalo,
+2. koho a čeho se to týká,
+3. co tým dělá teď,
+4. kdy přijde další aktualizace nebo kde bude dostupná.
+
+Neříkejte „žádná data nebyla ohrožena“, pokud to ještě nevíte. Řekněte „zatím nemáme důkaz, že…“ nebo „ověřujeme rozsah…“. Přesnost je důvěryhodnější než sebevědomé mlžení.
+
+### AD.6 Po drillu vzniká jeden malý patch provozu
+
+Incident drill bez následné změny je firemní úniková hra. Zábava možná, zlepšení nula. Každý drill musí skončit jedním konkrétním patchem provozu.
+
+Příklady dobrých výstupů:
+
+- doplnit kontakt na hosting a platební bránu do incident karty,
+- přidat runbook pro rotaci API klíče,
+- zkrátit retenci aplikačních logů,
+- odstranit osobní údaje z debug logů,
+- vytvořit šablonu status zprávy,
+- přidat test obnovy zálohy do měsíčního rytmu,
+- ujasnit, kdo má právo schválit zákaznickou komunikaci,
+- doplnit seznam subdodavatelů do trust centra.
+
+Jedna změna stačí. Důležité je, aby měla vlastníka, termín a místo, kde bude dohledatelná. Pokud po drillu vznikne deset úkolů bez priority, právě jste vytvořili další incident. Gratuluju, meta vrstva odemčena.
+
+### AD.7 Šablona: incident drill karta
+
+```markdown
+# Incident drill: [scénář]
+
+## Cíl drillu
+- Jaké rozhodnutí nebo schopnost ověřujeme:
+
+## Scénář
+- Co se stalo:
+- První signál:
+- Možný dopad:
+
+## Role
+- Incident lead:
+- Technický řešitel:
+- Komunikace:
+- Privacy owner:
+- Zapisovatel:
+
+## Časová osa
+- T+0:
+- T+10:
+- T+25:
+- T+45:
+
+## Privacy-first kontrola
+- Osobní údaje: ano/ne/nevíme
+- Kategorie dat:
+- Zasažené systémy:
+- Subdodavatelé:
+- Potřebné důkazy:
+- Data, která nekopírujeme dál:
+
+## Co fungovalo
+- [poznatek]
+
+## Co se zaseklo
+- [poznatek]
+
+## Jeden patch do 14 dní
+- Akce:
+- Vlastník:
+- Termín:
+```
+
+### Checklist: incident drill bez paniky
+
+- [ ] Vybrali jsme jeden realistický scénář.
+- [ ] Role jsou jasné před začátkem drillu.
+- [ ] Víme, kde jsou kontakty, přístupy, logy a runbooky.
+- [ ] Privacy otázky pokládáme v první fázi, ne až po technické opravě.
+- [ ] Zapisujeme časovou osu, fakta, hypotézy a rozhodnutí.
+- [ ] Externí komunikace rozlišuje ověřená fakta a otevřené otázky.
+- [ ] Nekopírujeme zbytečně osobní data do chatu, ticketů ani AI nástrojů.
+- [ ] Drill končí jednou provozní změnou s vlastníkem a termínem.
+- [ ] Výstup ukládáme do dokumentace, ne do paměti člověka, který bude zrovna na dovolené.
+
+### Mini cvičení: první incident drill za 60 minut
+
+1. Během 5 minut vyberte jeden scénář z posledních 90 dní nebo z největší současné obavy.
+2. Během 5 minut rozdělte role a otevřete incident drill kartu.
+3. Během 20 minut projděte reakci od prvního signálu po stabilizaci.
+4. Během 10 minut projděte privacy-first otázky a seznam systémů.
+5. Během 10 minut napište interní status kartu a návrh externí věty pro zákazníka.
+6. Během 10 minut vyberte jeden patch provozu, který uděláte do 14 dní.
+
+Hotovo. Nevyřešili jste bezpečnost světa, ale snížili jste šanci, že při prvním problému budete hledat heslo, právní text a viníka ve stejném okně prohlížeče.
+
+### Zdroje k příloze AD
+
+- NIST SP 800-61 Rev. 3 popisuje incident response jako součást řízení kyberbezpečnostních rizik a navazuje na Cybersecurity Framework 2.0: https://csrc.nist.gov/pubs/sp/800/61/r3/final
+- NIST SP 800-61 Rev. 2 detailně rozpracovává přípravu, detekci, analýzu, containment, eradication, recovery a lessons learned: https://www.nist.gov/publications/computer-security-incident-handling-guide
+- ENISA v technickém guidance k opatřením kyberbezpečnostního risk managementu doporučuje dokumentované postupy, role a runbooky pro běžné typy incidentů: https://www.enisa.europa.eu/sites/default/files/2025-06/ENISA_Technical_implementation_guidance_on_cybersecurity_risk_management_measures_version_1.0.pdf
+- EDPB Guidelines 9/2022 k oznamování porušení zabezpečení osobních údajů pod GDPR shrnují posuzování rizika, dokumentaci a notifikační povinnosti: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-92022-personal-data-breach-notification-under_en
+
+
 ## Pracovní log
+
+- 2026-08-23: Přidána příloha AD „Incident drill pro malý SaaS bez paniky“ s realistickými scénáři, rolemi, privacy-first otázkami, komunikační kostrou, šablonou incident drill karty, checklistem, 60minutovým cvičením a ověřenými zdroji.
+
 - 2026-08-23: Přidána příloha AC „Zákaznické rozhovory, které nekončí seznamem přání“ s rozhovorovým sprintem, privacy-first pravidly, 30minutovou strukturou rozhovoru, kartou důkazů, syntézou signálů, checklistem, mini cvičením a ověřenými zdroji.
 
 - 2026-08-23: Přidána příloha AB „Backlog bez nekonečného skladiště přání“ s tříděním vstupů, triage kartou, WIP limity, měsíčním pruningem, privacy-first filtrem, 14denní rozhodovací frontou, checklistem, mini cvičením a ověřenými zdroji.
