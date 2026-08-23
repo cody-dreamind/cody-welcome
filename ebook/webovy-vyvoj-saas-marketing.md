@@ -290,6 +290,11 @@ W. Roční privacy-first revize webu a SaaS
 X. Trust centrum pro malý privacy-first SaaS
 Y. AI workflow pro web, SaaS a marketing bez úniku dat
 Z. Revizní sprint pro web, SaaS a marketing po 90 dnech
+AA. Offboarding zákazníka bez zamčených dat
+AB. Backlog bez nekonečného skladiště přání
+AC. Zákaznické rozhovory, které nekončí seznamem přání
+AD. Incident drill pro malý SaaS bez paniky
+AE. Dodavatelský exit plán pro SaaS bez rukojmí
 
 ---
 
@@ -11452,7 +11457,164 @@ Hotovo. Nevyřešili jste bezpečnost světa, ale snížili jste šanci, že př
 - EDPB Guidelines 9/2022 k oznamování porušení zabezpečení osobních údajů pod GDPR shrnují posuzování rizika, dokumentaci a notifikační povinnosti: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-92022-personal-data-breach-notification-under_en
 
 
+## AE. Dodavatelský exit plán pro SaaS bez rukojmí
+
+Vendor lock-in není jen technický problém. Je to obchodní riziko, bezpečnostní riziko a občas i tichý zabiják produktové rychlosti. Malý tým často vybere nástroj podle toho, že „to umí hned“, ale zapomene se zeptat, jak z něj odejde, až přestane dávat smysl. A pak vznikne klasická scéna: data někde jsou, export nějak existuje, ale nikdo neví, jestli obsahuje vazby, metadata, historii, soubory, souhlasy a auditní stopu.
+
+Dodavatelský exit plán není pesimistický dokument. Je to pojistka, že můžete dělat lepší rozhodnutí. Když víte, jak odejít, méně se bojíte nástroje vyměnit, vyjednat lepší podmínky nebo omezit jeho rozsah.
+
+*Codyho komentář: „Nikdy nebudeme migrovat“ je věta, kterou software slyší jako pozvánku k požáru. Ne hned. Až ve chvíli, kdy máte nejmíň času.*
+
+### AE.1 Exit plán pište už při nákupu
+
+Nečekejte na chvíli, kdy dodavatel zdraží, změní podmínky, přestane vyhovovat bezpečnosti nebo vám přestane odpovídat support. Exit plán patří do nákupního briefu stejně jako cena, funkce a integrace.
+
+U každého důležitého nástroje si napište:
+
+- jaká data do něj posíláte,
+- jestli jde o osobní údaje, obchodní data, technické logy nebo obsah,
+- kdo je vlastník dat a kdo je provozní vlastník nástroje,
+- jak vypadá plný export,
+- jak dlouho by trvala migrace na alternativu,
+- co by se rozbilo, kdyby služba na týden vypadla,
+- jestli máte smluvně popsané mazání a ukončení spolupráce.
+
+Tahle karta nemusí mít dvacet stran. Stačí jedna stránka, pokud obsahuje konkrétní odpovědi. „Export CSV“ není konkrétní odpověď. „Export kontaktů, firem, aktivit, souhlasů, příloh a vazeb mezi nimi jednou měsíčně do otevřeného formátu“ už začíná znít jako plán.
+
+### AE.2 Rozdělte dodavatele podle dopadu
+
+Ne každý nástroj potřebuje stejný režim. Ikonkový generátor a produkční databáze nejsou stejná liga, i když obojí má hezký pricing page a slibuje „AI-powered workflow“.
+
+Praktické rozdělení:
+
+- **Kritický dodavatel:** bez něj produkt neběží, nejde fakturovat, nejde se přihlásit nebo nejde obsloužit zákazníka.
+- **Datově citlivý dodavatel:** drží osobní údaje, zákaznický obsah, obchodní tajemství, support historii nebo produktové logy.
+- **Procesní dodavatel:** výpadek neohrozí data, ale zastaví práci týmu, například projektové řízení nebo dokumentace.
+- **Nahraditelný dodavatel:** jeho výpadek bolí, ale existuje rychlá ruční nebo alternativní cesta.
+
+Pro kritické a datově citlivé dodavatele potřebujete exit plán vždy. Pro procesní dodavatele stačí lehčí plán a pravidelný export. U nahraditelných nástrojů často stačí vlastník, seznam dat a rozhodnutí, že do nich nikdy neposíláte citlivé informace.
+
+### AE.3 Export testujte jako obnovu ze zálohy
+
+Export, který jste nikdy neotevřeli, je marketingová víra. Test exportu je jednoduchý: stáhněte data, otevřete je mimo původní nástroj a ověřte, že dávají smysl člověku i systému.
+
+Testujte hlavně:
+
+- úplnost záznamů,
+- vazby mezi objekty,
+- časové značky,
+- identifikátory,
+- přílohy a soubory,
+- souhlasy a právní základy,
+- auditní nebo systémovou historii, pokud ji potřebujete,
+- formát a dokumentaci exportu.
+
+U SaaS produktu je dobré mít jeden malý „migrační vzorek“: anonymizovaný nebo testovací dataset, na kterém ověříte, že export jde převést do jiného systému. Nemusíte stavět kompletní migraci dopředu. Stačí vědět, že data nejsou zamčená v proprietárním bahně.
+
+### AE.4 Smlouva má popisovat konec, ne jen začátek
+
+Malé týmy smlouvy často čtou jen při nákupu. Jenže nejdůležitější části se ukážou při konci: výpovědní lhůta, dostupnost exportu, mazání, retence záloh, přístup k logům, podpora při migraci a změna subdodavatelů.
+
+Do vendor karty si opište minimálně:
+
+- jak ukončíte službu,
+- jak dlouho budou data po ukončení dostupná,
+- jak požádáte o smazání dat,
+- jak dodavatel zachází se zálohami po smazání,
+- zda umí potvrdit dokončení mazání,
+- jak oznamuje změny subdodavatelů,
+- kde jsou data fyzicky nebo smluvně provozovaná,
+- kdo má přístup k supportním datům.
+
+Privacy-first provoz v Evropě neznamená, že nikdy nepoužijete neevropský nástroj. Znamená to, že chápete riziko, minimalizujete data, máte právní a technickou kontrolu a umíte vysvětlit, proč daný nástroj používáte. Evropský provoz má být default, výjimka má mít důvod a datum revize.
+
+### AE.5 Připravte nouzový režim
+
+Exit plán není jen migrace pryč. Je to i odpověď na otázku: co děláme, když dodavatel nefunguje dnes odpoledne?
+
+Nouzový režim může být překvapivě jednoduchý:
+
+- formulář dočasně nahradí e-mailová adresa s jasným textem,
+- automatickou fakturaci dočasně nahradí ruční vystavení dokladu,
+- zákaznický portál doplní statická status stránka,
+- interní dokumentace má offline export,
+- support má připravenou odpověď bez slibování detailů, které neví.
+
+Důležité je, aby nouzový režim nesbíral víc dat než běžný provoz. Když spadne CRM, neposílejte zákaznická data chaoticky do osobních tabulek, messengerů a AI nástrojů. Krizová improvizace je přesně chvíle, kdy soukromí dostává přes prsty.
+
+### AE.6 Šablona: vendor exit karta
+
+```md
+## Dodavatel
+- Název:
+- Účel:
+- Provozní vlastník:
+- Technický vlastník:
+- Kritičnost: kritický / datově citlivý / procesní / nahraditelný
+
+## Data
+- Typy dat:
+- Osobní údaje: ano/ne
+- Citlivost:
+- Lokace provozu/dat:
+- Subdodavatelé:
+
+## Export
+- Dostupný formát:
+- Co export obsahuje:
+- Co export neobsahuje:
+- Poslední test exportu:
+- Výsledek testu:
+
+## Ukončení
+- Výpovědní lhůta:
+- Dostupnost dat po ukončení:
+- Mazání a retence záloh:
+- Potvrzení smazání:
+
+## Náhradní režim
+- Ruční workaround:
+- Alternativní nástroj:
+- Maximální tolerovaný výpadek:
+- Komunikační text:
+
+## Rozhodnutí
+- Používat dál / omezit / migrovat / nahradit:
+- Důvod:
+- Další revize:
+```
+
+### AE.7 Checklist: bez rukojmí u dodavatelů
+
+- [ ] Každý kritický nebo datově citlivý nástroj má vlastní vendor exit kartu.
+- [ ] Víme, jaká data do nástroje posíláme a proč.
+- [ ] Export je otestovaný mimo původní nástroj.
+- [ ] Export obsahuje vazby, metadata a souhlasy, pokud je potřebujeme.
+- [ ] Smluvní podmínky pokrývají ukončení, mazání, retenci a subdodavatele.
+- [ ] Máme nouzový režim pro výpadek kritické služby.
+- [ ] Do dočasných workaroundů neposíláme zbytečná osobní data.
+- [ ] Evropský provoz je default a každá výjimka má zapsaný důvod.
+- [ ] Exit plán revidujeme aspoň jednou ročně nebo při změně ceny, podmínek či datového rozsahu.
+
+### Mini cvičení: první vendor exit plán za 50 minut
+
+1. Během 5 minut vyberte jeden nástroj, bez kterého by produkt nebo marketing dnes bolel nejvíc.
+2. Během 10 minut vyplňte účel, vlastníky, kritičnost a typy dat.
+3. Během 15 minut najděte export, stáhněte testovací data a ověřte, co chybí.
+4. Během 10 minut projděte ukončení služby, mazání a retenci v podmínkách nebo smlouvě.
+5. Během 5 minut napište nouzový režim pro výpadek.
+6. Během 5 minut rozhodněte jeden další krok: doplnit smlouvu, omezit data, otestovat migraci nebo hledat alternativu.
+
+### Zdroje k příloze AE
+
+- ENISA Cloud Security Guide for SMEs popisuje vendor lock-in jako bezpečnostní a finanční riziko a doporučuje migrační/exit plány, pravidelné zálohy ve standardním formátu a testování migrace: https://www.enisa.europa.eu/publications/cloud-security-guide-for-smes
+- ENISA Security Framework for Governmental Clouds zahrnuje exit management mezi kroky bezpečného cloudového provozu; princip je užitečný i pro malé SaaS týmy, jen v menším rozsahu: https://www.enisa.europa.eu/publications/security-framework-for-governmental-clouds
+- EDPB Guidelines 4/2019 k Article 25 GDPR vysvětlují data protection by design and by default, což podporuje minimalizaci dat a promyšlené nastavení nástrojů už při návrhu: https://www.edpb.europa.eu/documents/guideline/guidelines-42019-on-article-25-data-protection-by-design-and-by-default_en
+
+
 ## Pracovní log
+
+- 2026-08-23: Přidána příloha AE „Dodavatelský exit plán pro SaaS bez rukojmí“ s klasifikací dodavatelů, testem exportu, kontrolou smluvního ukončení, nouzovým režimem, vendor exit kartou, checklistem, mini cvičením a ověřenými zdroji.
 
 - 2026-08-23: Přidána příloha AD „Incident drill pro malý SaaS bez paniky“ s realistickými scénáři, rolemi, privacy-first otázkami, komunikační kostrou, šablonou incident drill karty, checklistem, 60minutovým cvičením a ověřenými zdroji.
 
