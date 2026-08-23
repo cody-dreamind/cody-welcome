@@ -161,6 +161,66 @@ Zapište výsledek stručně. Ideálně tak, aby se k němu šlo za měsíc vrá
 - [ ] Vznikl zápis, který jde najít i bez hledání ve třech chatech.
 - [ ] Další workshop se plánuje až po dokončení nebo vědomém uzavření předchozí změny.
 
+## Jak e-book udržovat aktuální v týmu
+
+E-book má největší hodnotu ve chvíli, kdy se z něj nestane PDF relikvie. Víte, ten typ dokumentu, který všichni „určitě někdy přečtou“, zatímco si mezitím každý tým vytvoří vlastní chaos ve Slacku, Notionu, e-mailu a dvou tabulkách s názvem `final_final_v3`. Tohle nechceme. Berte ho jako živý pracovní manuál: část textu čtete, část upravujete podle reality a část převádíte do konkrétních šablon, checklistů a rozhodnutí.
+
+Praktické pravidlo: každá firma by měla mít jednu interní kopii nebo navazující pracovní dokument, kde si k jednotlivým kapitolám dopíše vlastní rozhodnutí. Ne obecné poznámky typu „souhlasíme“. Konkrétní věci: jaký stack používáme, kde běží data, kdo vlastní formuláře, jak měříme kampaně, jak řešíme export a mazání dat, které nástroje už nechceme přidávat.
+
+### Doporučený rytmus údržby
+
+- **Týdně:** vyberte jednu kapitolu nebo přílohu, která souvisí s aktuální prací, a převeďte ji do jednoho dokončeného úkolu.
+- **Měsíčně:** projděte metriky, zákaznické signály a privacy-first rizika; aktualizujte jen rozhodnutí, která se opravdu změnila.
+- **Kvartálně:** udělejte revizi nástrojů, datových toků, formulářů, automatizací a veřejných slibů na webu.
+- **Ročně:** vraťte se ke kapitolám o provozu, privacy, bezpečnosti a trust centru; ověřte, jestli odpovídají realitě firmy.
+
+Tento rytmus není další manažerská modlitba u kalendáře. Je to pojistka proti tomu, aby se web, SaaS a marketing postupně nerozpadly na sadu drobných výjimek, které už nikdo neumí vysvětlit.
+
+### Co si zapisovat vedle e-booku
+
+Ke každé použité části si zapisujte čtyři věci:
+
+1. **Rozhodnutí:** co jsme podle kapitoly změnili nebo potvrdili.
+2. **Důvod:** proč je to pro nás důležité právě teď.
+3. **Dopad na data:** jaká data sbíráme, přesouváme, ukládáme nebo mažeme.
+4. **Revize:** kdy se k rozhodnutí vrátíme a kdo to hlídá.
+
+Příklad:
+
+```markdown
+## Kapitola 18: Měření kampaní bez invazivního trackingu
+
+- Rozhodnutí: Budeme používat pouze UTM parametry a agregovanou analytiku bez osobních profilů.
+- Důvod: Potřebujeme porovnat kanály, ne sledovat jednotlivé lidi napříč webem.
+- Dopad na data: Nesbíráme user-level historii kampaní; měsíční report pracuje s agregovanými zdroji návštěvnosti.
+- Revize: Každé první pondělí v měsíci, vlastník marketingu + technický lead.
+```
+
+### Jak poznat, že e-book opravdu pomáhá
+
+Nepoznáte to podle počtu přečtených stran. To je metrika vhodná maximálně pro školní čtenářský deník, a i tam je to sporné. Poznáte to podle toho, že se v týmu zmenšuje počet nejasností.
+
+Dobré signály:
+
+- tým umí stručně říct, komu web slouží a co má návštěvník udělat dál,
+- nové nástroje mají vlastníka, datovou kartu a důvod použití,
+- formuláře sbírají méně dat, ale přinášejí kvalitnější poptávky,
+- marketingové reporty vedou k rozhodnutí, ne jen k delší poradě,
+- support dotazy se vracejí zpět do dokumentace, onboardingu nebo produktu,
+- incidenty mají zápis, poučení a konkrétní follow-up,
+- privacy-first není poslední odstavec v dokumentu, ale běžná součást návrhu.
+
+### Checklist: živý e-book místo mrtvého dokumentu
+
+- [ ] Máme jedno místo, kde se zapisují rozhodnutí navázaná na kapitoly.
+- [ ] Každá úprava webu, SaaSu nebo marketingu má vlastníka a důkaz dokončení.
+- [ ] U každé nové integrace víme, kde běží data a kdo k nim má přístup.
+- [ ] Měsíční review pracuje s agregovanými signály a konkrétními rozhodnutími.
+- [ ] Kvartálně mažeme nebo omezujeme nástroje, skripty, formulářová pole a metriky bez jasné hodnoty.
+- [ ] Veřejné sliby na webu, v trust centru a v obchodních materiálech odpovídají realitě provozu.
+- [ ] Tým umí vysvětlit nejen co dělá, ale i proč něco záměrně nedělá.
+- [ ] Codyho komentáře bereme jako lehce sarkastické bezpečnostní zábradlí, ne jako náhradu vlastního úsudku. Bohužel. Nebo bohudík.
+
 ## Pracovní osnova
 
 ### Část I — Strategický základ
@@ -10711,6 +10771,8 @@ To nejsou výstupy. To jsou názvy porad, ze kterých člověk odchází s chut�
 Po 90 dnech nechcete vědět všechno. Chcete vědět dost na další rozumný krok. Dobrý revizní sprint proto nekončí velkou prezentací. Končí jednou dokončenou změnou, menším množstvím zbytečných dat a týmem, který ví, proč dělá právě tohle.
 
 ## Pracovní log
+- 2026-08-23: Přidána úvodní část „Jak e-book udržovat aktuální v týmu“ s rytmem údržby, šablonou navazujících rozhodnutí, signály užitečnosti a checklistem pro živý pracovní dokument.
+
 - 2026-08-23: Přidána příloha Z „Revizní sprint pro web, SaaS a marketing po 90 dnech“ s pětivrstvou revizí, tabulí zachovat/zlepšit/odstranit, kontextovým vyhodnocením signálů, mazáním zbytečností, jednostránkovou šablonou, checklistem a 90minutovým cvičením.
 - 2026-08-23: Přidána příloha Y „AI workflow pro web, SaaS a marketing bez úniku dat“ s rizikovým tříděním použití AI, minimalizací promptů, výběrem nástroje podle dat, pravidly lidské kontroly, AI workflow kartou, AI gramotností, checklistem, mini auditem a ověřenými EU zdroji.
 - 2026-08-23: Přidána příloha X „Trust centrum pro malý privacy-first SaaS“ s praktickou strukturou veřejné stránky, vrstvami dokumentů a interních důkazů, datovými toky, seznamem subdodavatelů, bezpečnostní komunikací, procesem žádostí subjektů údajů, šablonou, checklistem, mini cvičením a ověřenými zdroji.
