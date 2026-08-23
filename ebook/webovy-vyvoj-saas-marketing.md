@@ -155,6 +155,8 @@ R. Komunikační protokol pro změny a incidenty
 S. Privacy-by-design review před každou větší změnou
 T. Bezpečnostní minimum pro malý SaaS tým
 U. Týdenní provozní rytmus pro web, SaaS a marketing
+V. Měsíční report pro malý SaaS bez metrického divadla
+W. Roční privacy-first revize webu a SaaS
 
 ---
 
@@ -9837,11 +9839,205 @@ Výstupem není perfektní reportingový systém. Výstupem je měsíční rozho
 
 ### Zdroje k příloze V
 
-- Evropská komise shrnuje principy GDPR pro zpracování osobních údajů, včetně účelového omezení, minimalizace dat, přesnosti, omezení uložení a integrity/confidentiality: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/overview-principles/what-data-can-we-process-and-under-which-conditions_en
+- Evropská komise shrnuje principy GDPR pro zpracování osobních údajů, včetně účelového omezení, minimalizace dat, přesnosti, omezení uložení a integrity/confidentiality: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en
 - EDPB Guidelines 4/2019 popisují přístup „Data Protection by Design and by Default“ podle článku 25 GDPR: https://www.edpb.europa.eu/documents/guideline/guidelines-42019-on-article-25-data-protection-by-design-and-by-default_en
 - ENISA „Cybersecurity for SMEs“ a navazující průvodce pro malé a střední podniky dávají praktický rámec pro provozní a bezpečnostní hygienu malých týmů: https://www.enisa.europa.eu/publications/enisa-report-cybersecurity-for-smes
 
+## W. Roční privacy-first revize webu a SaaS
+
+Týdenní review drží tým v rytmu. Měsíční report drží rozhodnutí pohromadě. Roční revize má jiný účel: zastavit autopilota a ověřit, jestli web, SaaS, marketing a provoz pořád odpovídají realitě. Ne realitě z původního briefu, ale realitě zákazníků, dat, rozpočtu, rizik a týmu.
+
+Malé projekty často nestárnou dramaticky. Nestane se jeden velký průšvih. Spíš se tiše nahromadí deset drobností: starý formulář sbírá pole navíc, bývalý dodavatel má pořád přístup, integrace nikdo nevlastní, landing page slibuje starou nabídku, dokumentace popisuje stav před třemi releasy a marketing měří událost, podle které se už nikdo nerozhoduje.
+
+Roční privacy-first revize je úklid před tím, než se z drobností stane provozní archeologie. A archeologie je super v muzeu. Méně super v produkční databázi.
+
+### W.1 Revizi neplánujte jako audit všeho
+
+Pokud si roční revizi nastavíte jako „zkontrolujeme celý web, celou aplikaci, celý marketing, všechny procesy a ještě strategii“, pravděpodobně nevznikne nic. Vznikne tabulka. Velká. Smutná. S barevnými statusy a nulovou změnou.
+
+Lepší je rozdělit revizi do šesti bloků:
+
+- **Nabídka a positioning:** komu sloužíte, co slibujete a co už neplatí.
+- **Obsah a konverze:** které stránky pomáhají, které matou a které jen zabírají místo.
+- **Produkt a onboarding:** kde lidé přicházejí k hodnotě a kde se zaseknou.
+- **Data a privacy:** co sbíráte, proč, kde to teče a kdy se to maže.
+- **Provoz a bezpečnost:** přístupy, zálohy, incidenty, logy, dependencies, monitoring.
+- **Nástroje a dodavatelé:** co platíte, kdo to vlastní a jak byste odešli.
+
+Každý blok má mít maximálně tři rozhodnutí. Roční revize není skladiště všech nápadů. Je to filtr.
+
+### W.2 Začněte inventurou změn od poslední revize
+
+Nejdřív sepište, co se za rok změnilo. Bez hodnocení. Jen fakta.
+
+Praktické otázky:
+
+- Přibyly nové landing pages, formuláře, eventy nebo exporty?
+- Změnila se hlavní nabídka, segment zákazníků nebo pricing?
+- Přibyli noví dodavatelé, integrace, AI asistenti nebo podpůrné nástroje?
+- Změnily se role v týmu, externisté nebo support proces?
+- Přibyly nové datové kategorie, nové logy nebo nové analytické události?
+- Proběhl incident, výpadek, bezpečnostní nález nebo zákaznická stížnost?
+- Máme data, která držíme déle, než jsme si slíbili?
+
+Výstupem je seznam změn. Ne interpretace. Ne obhajoba. Ne poetický román o tom, že „projekt organicky vyrostl“. Vyrostl. Teď zjistíme, jestli mu někde netrčí kabely.
+
+### W.3 Zkontrolujte, jestli web pořád prodává správnou věc
+
+Web po roce často neodpovídá tomu, co firma opravdu prodává. Tým upravil nabídku, zákazníci začali kupovat jiný balíček, support opakuje stejné vysvětlení, ale homepage pořád mluví jazykem původního launch briefu.
+
+Roční kontrola webu:
+
+- Porovnejte hero sekci s nejčastějšími důvody nákupu za poslední rok.
+- Najděte stránky, které mají návštěvnost, ale žádný jasný další krok.
+- Smažte nebo přepište nabídky, které už aktivně neprodáváte.
+- Doplněte konkrétní důkazy: case study, čísla, anonymizované výsledky, ukázky procesu.
+- Zkontrolujte, jestli formuláře sbírají jen data potřebná pro další krok.
+- Ověřte, že privacy sliby nejsou marketingová dekorace, ale odpovídají provozu.
+
+Příklad rozhodnutí:
+
+> Homepage pořád prodává „vývoj webů“, ale nejkvalitnější poptávky přišly na privacy-first SaaS MVP. Do 30 dnů upravíme hlavní nabídku, přidáme samostatnou landing page a zkrátíme formulář z devíti polí na pět.
+
+### W.4 Udělejte datovou inventuru bez výmluv
+
+Jednou ročně si projděte datovou mapu jako skeptický zákazník. Ne jako tým, který „ví, jak to je“. Přesně tohle vědění bývá problém, protože často žije v hlavách a chatu, ne v dokumentaci.
+
+U každého hlavního toku dat odpovězte:
+
+- Jaká data sbíráme?
+- Od koho?
+- Pro jaký účel?
+- Kde jsou uložená?
+- Kdo k nim má přístup?
+- Jak dlouho je držíme?
+- Jak je exportujeme?
+- Jak je mažeme?
+- Který dodavatel nebo subdodavatel je součástí toku?
+- Umíme to vysvětlit zákazníkovi lidskou řečí?
+
+Privacy-first revize má vytvořit hlavně tři typy úkolů:
+
+- **Smazat:** data, eventy, exporty a účty, které už nemají účel.
+- **Zpřesnit:** dokumentaci, právní základ, retenční pravidla, texty pro uživatele.
+- **Zabezpečit:** přístupy, logy, zálohy, secrets, support režim a vendor proces.
+
+*Codyho komentář: nejlevnější osobní údaj je ten, který nikdy nesbíráte. Má nulové náklady na storage, nulovou migrační bolest a velmi elegantní bezpečnostní profil. Minimalismus, ale konečně užitečný.*
+
+### W.5 Zrevidujte nástroje podle vlastnictví, ne podle faktur
+
+Seznam placených nástrojů je dobrý začátek, ale nestačí. Některé rizikové nástroje jsou zdarma. Některé levné integrace mají přístup k velmi citlivým datům. A některé drahé nástroje nikdo nepoužívá, což je speciální druh smutku.
+
+U každého nástroje doplňte:
+
+- vlastník v týmu,
+- účel,
+- typ dat,
+- provozní region nebo místo zpracování,
+- role podle datového vztahu,
+- přístupy a úroveň oprávnění,
+- exportní možnost,
+- retenční nastavení,
+- náklady,
+- exit plán.
+
+Pak nástroje rozdělte do čtyř skupin:
+
+- **Nechat:** má jasný účel, vlastníka, data a rozumný provoz.
+- **Omezit:** nástroj zůstává, ale potřebuje méně přístupů, méně dat nebo kratší retenci.
+- **Nahradit:** nástroj neodpovídá privacy-first hodnotě, provozu nebo ceně.
+- **Zrušit:** nikdo ho nevlastní, nepoužívá nebo neumí vysvětlit.
+
+U nástrojů, které sahají na zákaznická data, nestačí „používáme to, protože je to pohodlné“. Pohodlí je argument. Není to ale automatická propustka přes privacy-first review.
+
+### W.6 Projděte přístupy jako incident, který se zatím nestal
+
+Přístupy se kazí nenápadně. Někdo pomáhal s kampaní, někdo řešil support, někdo testoval integraci, někdo odešel z týmu a někdo dostal admin práva „jen na chvíli“. Ta chvíle pak oslaví první narozeniny.
+
+Roční kontrola přístupů:
+
+- Vypište všechny produkční systémy, administrace, hostingy, analytiky, CRM, fakturace a repozitáře.
+- U každého systému stáhněte seznam uživatelů a rolí.
+- Označte účty bez vlastníka, sdílené účty a účty externistů.
+- Snižte admin role tam, kde stačí editor nebo read-only.
+- Zrušte přístupy lidem a dodavatelům, kteří už je nepotřebují.
+- Ověřte MFA u kritických účtů.
+- Zapište, kdo schválil ponechané výjimky a do kdy platí.
+
+Dobré pravidlo: pokud by vás překvapilo, že daný účet udělal změnu v produkci, nemá mít právo ji udělat.
+
+### W.7 Ověřte obnovitelnost, ne jen existenci záloh
+
+„Máme zálohy“ je věta, která bez testu znamená asi tolik jako „máme doma hasicí přístroj, někde“. Roční revize musí ověřit, že se dá projekt obnovit.
+
+Minimální test obnovy:
+
+- Vyberte jeden kritický systém nebo databázi.
+- Najděte poslední použitelnou zálohu.
+- Obnovte ji do bezpečného testovacího prostředí.
+- Ověřte, že aplikace umí nad obnovenými daty běžet.
+- Změřte čas od začátku obnovy po použitelný stav.
+- Zapište překážky, ruční kroky a chybějící tajemství.
+- Aktualizujte runbook.
+
+Nemusíte testovat všechno najednou. Ale každý rok musíte vědět, jestli vaše nejdůležitější data nejsou jen teoreticky zálohovaná. Teoretická záloha je v praxi forma optimismu. A optimismem databázi neobnovíte.
+
+### W.8 Rozhodnutí zapisujte jako roční plán, ne jako přání
+
+Roční revize má skončit malým plánem. Ne seznamem 64 restů, které se všichni bojí otevřít. Vyberte maximálně deset rozhodnutí a rozdělte je do kvartálů.
+
+Šablona rozhodnutí:
+
+## Rozhodnutí
+- Co změníme:
+- Proč:
+- Vlastník:
+- Termín:
+- Důkaz dokončení:
+- Riziko, které tím snižujeme:
+- Co kvůli tomu nebudeme dělat:
+
+Příklad:
+
+> Do konce Q1 zrušíme starý formulář pro lead magnet, protože sbírá telefon a firmu bez jasného účelu. Nahradíme ho RSS odběrem a přímým stažením checklistu. Důkaz dokončení: odstraněný formulář, aktualizovaná datová mapa a smazaná exportní tabulka.
+
+### W.9 Praktický checklist roční revize
+
+- [ ] Máme seznam změn za poslední rok.
+- [ ] Homepage a hlavní landing pages odpovídají aktuální nabídce.
+- [ ] Neaktivní stránky mají rozhodnutí: upravit, sloučit, přesměrovat nebo smazat.
+- [ ] Formuláře sbírají jen data nutná pro další krok.
+- [ ] Datová mapa odpovídá realitě provozu.
+- [ ] Každý hlavní datový tok má účel, retenci, vlastníka a způsob mazání.
+- [ ] Nástroje jsou rozdělené na nechat, omezit, nahradit nebo zrušit.
+- [ ] Kritické přístupy mají vlastníka, správnou roli a MFA.
+- [ ] Externisté a bývalí členové týmu nemají zbytečné přístupy.
+- [ ] Proběhl aspoň jeden praktický test obnovy ze zálohy.
+- [ ] Dokumentace, runbooky a rozhodovací log jsou aktualizované.
+- [ ] Roční plán obsahuje maximálně deset rozhodnutí.
+- [ ] Každé rozhodnutí má vlastníka, termín a důkaz dokončení.
+
+### Mini cvičení: roční revize za 90 minut
+
+1. Vezměte poslední roční období a sepište deset největších změn webu, produktu, marketingu a provozu.
+2. Vyberte tři stránky, které nejvíc ovlivňují obchod, a zkontrolujte jejich slib, důkazy, formuláře a další krok.
+3. Otevřete datovou mapu a najděte tři datové toky, které pravděpodobně neodpovídají realitě.
+4. Projděte pět nejrizikovějších nástrojů podle typu dat, ne podle ceny.
+5. Zkontrolujte přístupy v jednom kritickém systému.
+6. Vyberte jeden obnovovací test, který uděláte do 30 dnů.
+7. Zapište maximálně pět rozhodnutí pro příští kvartál.
+
+Výstupem není certifikát dokonalosti. Výstupem je klidnější provoz, méně zbytečných dat, méně starých přístupů a web, který pořád říká pravdu. To je velmi slušný výsledek na jeden pracovní blok.
+
+### Zdroje k příloze W
+
+- Evropská komise popisuje principy GDPR včetně minimalizace dat, omezení uložení, integrity, důvěrnosti a odpovědnosti správce: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en
+- EDPB Guidelines 4/2019 vysvětlují data protection by design and by default podle článku 25 GDPR: https://www.edpb.europa.eu/documents/guideline/guidelines-42019-on-article-25-data-protection-by-design-and-by-default_en
+- ENISA „Cybersecurity guide for SMEs“ dává malým a středním firmám praktické kroky k lepší bezpečnostní hygieně: https://www.enisa.europa.eu/publications/cybersecurity-guide-for-smes
+- ENISA „Cybersecurity for SMEs — Challenges and Recommendations“ rozebírá bezpečnostní rizika a doporučení pro malé a střední podniky v EU: https://www.enisa.europa.eu/publications/enisa-report-cybersecurity-for-smes
+
 ## Pracovní log
+- 2026-08-23: Přidána příloha W „Roční privacy-first revize webu a SaaS“ s šesti bloky revize, inventurou změn, kontrolou webu, datovou inventurou, revizí nástrojů a přístupů, testem obnovy, ročním plánem, checklistem, mini cvičením a ověřenými zdroji.
 - 2026-08-22: Přidána příloha V „Měsíční report pro malý SaaS bez metrického divadla“ se strukturou jednostránkového reportu, třemi typy signálů, privacy-first blokem, návazností na rozhodnutí, šablonou, checklistem, mini cvičením a ověřenými zdroji.
 - 2026-08-22: Přidána příloha U „Týdenní provozní rytmus pro web, SaaS a marketing“ s jednostránkovým podkladem, 45minutovou agendou, výběrem signálů, privacy-first kontrolou, rozhodovací tabulí, checklistem a mini cvičením.
 - 2026-08-22: Přidána příloha T „Bezpečnostní minimum pro malý SaaS tým“ s mapou aktiv, MFA a rolemi, správou secrets, dependency hygienou, pravidly pro produkční data, testováním záloh, release checklistem, mini cvičením a ověřenými zdroji.
