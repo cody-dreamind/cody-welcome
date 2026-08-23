@@ -301,6 +301,9 @@ AH. Zpracovatelská smlouva bez právnické mlhy
 AI. Cookie consent bez manipulace a marketingového cirkusu
 AJ. Záznamy o činnostech zpracování bez tabulkového pekla
 AK. DPIA pro malý SaaS bez právního dramatu
+AL. Marketingový datový audit bez šmírovacího autopilota
+AM. Export dat pro zákazníka bez CSV hororu
+AN. SLA, status page a support závazky bez falešných devítek
 
 ---
 
@@ -13087,7 +13090,247 @@ Hotovo znamená: víte, co exportovat, komu to smí patřit, v jakém formátu t
 - Evropská komise k Data Act uvádí, že nařízení se začalo uplatňovat 12. září 2025 a zahrnuje také rámec pro efektivnější přechod mezi poskytovateli data-processing služeb: https://digital-strategy.ec.europa.eu/en/policies/data-act
 
 
+
+## AN. SLA, status page a support závazky bez falešných devítek
+
+Spolehlivost se v malém SaaSu často řeší dvěma extrémy. Buď nikdo nic neslibuje, protože „jsme malý tým“, nebo se do obchodní prezentace napíše dostupnost s tolika devítkami, že by se za ni nemusela stydět ani jaderná elektrárna. Obě varianty jsou špatně. První vytváří nejistotu. Druhá vytváří dluh, který se splácí při prvním incidentu.
+
+Dobré SLA není kouzelný štít proti výpadkům. Je to dohoda o očekáváních: co služba má dělat, jak měříte dostupnost, kdy komunikujete, jak rychle reagujete, co zákazník dostane při problému a co je mimo rozumný rozsah. Pro privacy-first produkt je důležité ještě něco navíc: incident komunikace nesmí zbytečně odkrývat osobní data, interní infrastrukturu ani detaily, které by pomohly útočníkovi víc než zákazníkovi.
+
+*Codyho komentář: „99,99 %“ v ceníku vypadá krásně, dokud nezjistíte, že nikdo neví, co přesně se měří, kdo to počítá a jestli se do toho započítává sobotní migrace databáze provedená metodou „drž mi kafe“.*
+
+### AN.1 Rozlišujte SLI, SLO a SLA
+
+Nejdřív si pojmenujte tři vrstvy spolehlivosti:
+
+- **SLI:** signál, který měří konkrétní vlastnost služby, například úspěšnost požadavků, latenci API, doručitelnost transakčních e-mailů nebo dostupnost loginu.
+- **SLO:** interní cíl kvality služby, podle kterého tým rozhoduje o prioritách, riziku a údržbě.
+- **SLA:** externí závazek vůči zákazníkovi, často smluvní, který může obsahovat kompenzace nebo konkrétní reakční časy.
+
+Malý tým by měl začít SLO, ne veřejným SLA. Interní cíl vám pomůže řídit produkt bez toho, abyste si hned podepsali obchodní granát. Teprve když umíte službu měřit, provozovat a vysvětlit, má smysl slíbit něco zákazníkovi.
+
+Praktický příklad:
+
+| Vrstva | Příklad |
+| --- | --- |
+| SLI | Podíl úspěšných požadavků na `/login` a `/api/projects` za posledních 30 dní |
+| SLO | 99,5 % úspěšných požadavků pro klíčové akce v pracovní době zákazníků |
+| SLA | U business tarifu garantujeme reakci na kritický incident do 2 hodin v pracovních dnech |
+
+Pozor: dostupnost homepage není totéž co dostupnost produktu. Pokud marketingový web běží, ale uživatel se nepřihlásí, zákazník neřekne „aspoň máme krásnou hero sekci“. Řekne něco méně publikovatelného.
+
+### AN.2 Vyberte uživatelské cesty, ne technické ego metriky
+
+SLO má odpovídat tomu, co zákazník opravdu potřebuje udělat. Ne tomu, co se nejsnáze měří. CPU, paměť a počet běžících kontejnerů jsou důležité provozní signály, ale zákazník kupuje výsledek.
+
+Začněte třemi až pěti cestami:
+
+- přihlášení a obnova přístupu,
+- vytvoření nebo úprava hlavního objektu v produktu,
+- načtení dashboardu nebo reportu,
+- odeslání transakčního e-mailu,
+- zaplacení, vystavení faktury nebo změna tarifu,
+- export dat nebo uzavření účtu.
+
+U každé cesty napište:
+
+- jaký výsledek uživatel očekává,
+- co znamená úspěch,
+- co znamená degradace,
+- jaký signál měříte,
+- co tým udělá při porušení cíle.
+
+Ukázka:
+
+```markdown
+# SLO karta: Přihlášení
+
+## Uživatelský výsledek
+Uživatel se může bezpečně přihlásit a pokračovat v práci.
+
+## SLI
+Podíl úspěšných login požadavků bez 5xx odpovědi a bez timeoutu.
+
+## SLO
+Za posledních 30 dní má být 99,5 % login pokusů technicky úspěšných.
+
+## Akce při porušení
+Zastavit méně důležité produktové změny, projít chyby autentizace, doplnit monitoring a naplánovat fix.
+```
+
+Tahle karta je nudná. Výborně. Spolehlivost má být nudná. Drama patří do seriálů, ne do autentizace.
+
+### AN.3 Status page pište pro lidi, ne pro právní alibi
+
+Status page má zákazníkovi říct, jestli problém znáte, jaký má dopad, co děláte a kdy dáte další update. Nemá sloužit jako místo, kam po incidentu schováte větu „někteří uživatelé mohli zaznamenat potíže“, zatímco půlka zákazníků obnovuje stránku jako rituál deště.
+
+Dobrá status page obsahuje:
+
+- aktuální stav hlavních služeb,
+- jasné oddělení výpadku, degradace a údržby,
+- čas začátku incidentu,
+- dopad na uživatele,
+- další očekávaný update,
+- historické incidenty,
+- odkaz na podporu nebo bezpečnostní kontakt.
+
+V privacy-first režimu si hlídejte, co nezveřejňovat:
+
+- osobní údaje zákazníků,
+- interní názvy databází, bucketů, serverů a providerů, pokud nejsou nutné,
+- přesné technické detaily zneužitelné k útoku,
+- domněnky před ověřením,
+- jména lidí z týmu, pokud k tomu není důvod.
+
+Šablona prvního status updatu:
+
+```markdown
+## Stav: degradace služby
+
+Od [čas] řešíme problém, který ovlivňuje [část služby]. Dopad: [co uživatelé vidí].
+
+Aktuálně děláme: [konkrétní krok bez citlivých detailů].
+
+Další update pošleme nejpozději v [čas]. Pokud máte urgentní obchodní dopad, kontaktujte [support kontakt].
+```
+
+Nečekejte na dokonalé vysvětlení. První dobrý update je často lepší než ticho následované románem. Ticho si zákazník vyloží sám a jeho fantazie obvykle nemá compliance oddělení.
+
+### AN.4 Support závazky nastavte podle dopadu
+
+Reakční čas nemá být stejný pro „nemůžu se přihlásit“, „chybí mi faktura“, „jak změním logo“ a „máte překlep v patičce“. Rozdělte support podle dopadu a napište to lidsky.
+
+Praktické priority:
+
+| Priorita | Dopad | Reakce | Příklad |
+| --- | --- | --- | --- |
+| P1 kritické | služba je nedostupná nebo hrozí bezpečnostní dopad | okamžitá triage podle plánu | login nejde většině zákazníků |
+| P2 vysoké | důležitá funkce nefunguje a blokuje práci | rychlá reakce v pracovním režimu | export dat končí chybou |
+| P3 běžné | chyba má workaround nebo menší dopad | standardní support | špatné řazení v tabulce |
+| P4 dotaz | otázka, přání, kosmetika | podle kapacity | změna textu v šabloně |
+
+Ke každé prioritě doplňte:
+
+- kanál pro nahlášení,
+- pracovní dobu podpory,
+- kdo dělá triage,
+- kdy eskalovat technickému týmu,
+- jak informovat zákazníka,
+- co patří do postmortem.
+
+Malý tým nemusí slibovat 24/7 podporu. Ale musí být jasné, co zákazník může čekat. Upřímné „kritické incidenty řešíme i mimo pracovní dobu, běžné dotazy v pracovních dnech“ je lepší než falešná nonstop dostupnost, která ve skutečnosti znamená „někdo si možná všimne notifikace mezi večeří a spánkem“.
+
+### AN.5 Údržbu oznamujte jako produktovou funkci
+
+Plánovaná údržba není selhání. Selhání je, když ji zákazník zjistí tím, že mu uprostřed práce zmizí aplikace. Údržba má mít vlastní proces a vlastní komunikační šablonu.
+
+Před údržbou si zapište:
+
+- proč je údržba potřeba,
+- koho se dotkne,
+- očekávané okno,
+- možnost dopadu na data,
+- rollback plán,
+- kontaktní osobu,
+- kdy pošlete potvrzení o dokončení.
+
+Krátká šablona oznámení:
+
+```markdown
+Dne [datum] mezi [čas] a [čas] proběhne plánovaná údržba [část služby].
+
+Důvod: [stručně]. Očekávaný dopad: [co může zákazník pozorovat]. Data zákazníků nemigrujeme / migrujeme [co a jak obecně].
+
+Po dokončení pošleme potvrzení. Pokud údržbu potřebujete kvůli vlastnímu provozu odložit, napište nám do [čas].
+```
+
+Pokud údržba souvisí s daty, pište opatrně a konkrétně. „Optimalizujeme infrastrukturu“ je někdy pravda, ale často taky mlha. Lepší je říct, že aktualizujete databázovou vrstvu, bez zbytečných interních detailů, a že máte zálohu a rollback plán.
+
+### AN.6 Postmortem má hledat systém, ne viníka
+
+Po větším incidentu napište krátké postmortem. Ne proto, aby si tým užil retrospektivní sebemrskačství, ale aby se stejné selhání neopakovalo.
+
+Dobré postmortem obsahuje:
+
+- časovou osu,
+- dopad na zákazníky,
+- detekci a reakci,
+- kořenové nebo přispívající příčiny,
+- co fungovalo,
+- co nefungovalo,
+- konkrétní nápravná opatření,
+- vlastníky a termíny,
+- privacy-first kontrolu komunikace a logů.
+
+Mini šablona:
+
+```markdown
+# Postmortem: [incident]
+
+## Shrnutí
+Co se stalo a jaký byl dopad:
+
+## Časová osa
+- [čas] první signál:
+- [čas] potvrzení incidentu:
+- [čas] mitigace:
+- [čas] obnova:
+
+## Příčiny
+Technické:
+Procesní:
+Komunikační:
+
+## Co zlepšíme
+1.
+2.
+3.
+
+## Privacy-first kontrola
+- Nezveřejnili jsme zbytečná osobní data:
+- Logy a exporty použité při řešení mají vlastníka a retenci:
+- Zákazníci dostali dost informací bez bezpečnostního rizika:
+```
+
+Psaní postmortem bez úkolů je terapie. Úkoly bez vlastníků jsou fikce. Vlastníci bez termínu jsou přání. A přání je skvělé, pokud jste právě našli zlatou rybku, ne když provozujete SaaS.
+
+### AN.7 Checklist: spolehlivost bez divadla
+
+- [ ] Máme vybrané klíčové uživatelské cesty, ne jen technické metriky.
+- [ ] Každá cesta má SLI, SLO a akci při porušení cíle.
+- [ ] Veřejné SLA slibuje jen to, co umíme měřit a provozně unést.
+- [ ] Status page rozlišuje výpadek, degradaci a plánovanou údržbu.
+- [ ] První incident update má jasný dopad, aktuální krok a čas další aktualizace.
+- [ ] Support priority odpovídají dopadu na zákazníka.
+- [ ] Údržba má oznámení, rollback plán a potvrzení dokončení.
+- [ ] Postmortem končí konkrétními opatřeními, vlastníky a termíny.
+- [ ] Incident komunikace neprozrazuje osobní data ani zbytečné interní detaily.
+- [ ] Závazky kontrolujeme při každé větší změně infrastruktury, tarifu nebo support procesu.
+
+### Mini cvičení: první SLO a status playbook za 75 minut
+
+1. Vyberte jednu kritickou uživatelskou cestu, například login, vytvoření projektu nebo export dat.
+2. Napište, co pro uživatele znamená úspěch, degradace a výpadek.
+3. Vyberte jeden SLI, který už dnes umíte nebo brzy dokážete měřit.
+4. Nastavte realistický interní SLO a napište, co uděláte při jeho porušení.
+5. Připravte první status update šablonu pro výpadek i degradaci.
+6. Rozdělte support priority P1 až P4 podle dopadu.
+7. Napište jednu postmortem šablonu a určete, kde bude uložená.
+8. Naplánujte revizi po prvním reálném incidentu nebo po 30 dnech provozu.
+
+Výsledek není certifikace spolehlivosti. Výsledek je první dohoda mezi produktem, vývojem, supportem a zákazníkem. A to je pro malý SaaS často důležitější než další monitoring dashboard, který všichni obdivují a nikdo nečte.
+
+### Zdroje k příloze AN
+
+- Google Site Reliability Engineering vysvětluje vztah mezi SLI, SLO a SLA a doporučuje definovat cíle podle toho, co uživatelé potřebují: https://sre.google/sre-book/service-level-objectives/
+- Google SRE kniha v kapitole o riziku popisuje error budget jako praktický způsob, jak vyvažovat spolehlivost a rychlost změn: https://sre.google/sre-book/embracing-risk/
+- RFC 9110 definuje HTTP sémantiku včetně významu stavových kódů, které se hodí při návrhu měření dostupnosti a chyb: https://www.rfc-editor.org/rfc/rfc9110.html
+- ENISA Incident Management Plan shrnuje základní prvky incident managementu, od kritérií spuštění plánu po návrat do normálního provozu: https://tools.enisa.europa.eu/topics/risk-management/current-risk/bcm-resilience/bc-plan/incident-management-plan
+
+
 ## Pracovní log
+- 2026-08-23: Přidána příloha AN „SLA, status page a support závazky bez falešných devítek“ se SLI/SLO/SLA rámcem, status page šablonami, support prioritami, údržbou, postmortem, checklistem a ověřenými zdroji.
+
 
 - 2026-08-23: Přidána příloha AM „Export dat pro zákazníka bez CSV hororu“ s rozlišením přístupu/exportu/přenositelnosti, exportní mapou, doporučenými formáty, ochranou práv dalších osob, testovací sadou, exportní kartou, checklistem, mini cvičením a ověřenými zdroji.
 
