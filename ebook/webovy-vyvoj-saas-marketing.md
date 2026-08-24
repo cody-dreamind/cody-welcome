@@ -298,6 +298,7 @@ AE. Dodavatelský exit plán pro SaaS bez rukojmí
 AF. Retenční kalendář bez digitální půdy
 AG. Obnova účtu a support ověření bez bezpečnostního divadla
 AH. Zpracovatelská smlouva bez právnické mlhy
+AI. DPA checklist pro malé SaaS týmy
 AJ. Záznamy o činnostech zpracování bez tabulkového pekla
 AK. DPIA pro malý SaaS bez právního dramatu
 AL. Marketingový datový audit bez šmírovacího autopilota
@@ -322,6 +323,7 @@ BD. Customer success bez šmírovacího health score
 BE. Produktové experimenty bez manipulační laboratoře
 BF. Vendor lock-in a exit plán bez dramatického útěku oknem
 BG. Produktová analytika bez sledování jednotlivců
+BH. Responsible disclosure bez bezpečnostního divadla
 
 ## 1. Web jako obchodní systém
 
@@ -16816,7 +16818,201 @@ Dobrá produktová analytika je skromná, ale užitečná. Ukazuje týmu, kde pr
 - CNIL ve svém přehledu k audience measurement uvádí podmínky, kdy mohou být analytické cookies vyňaté ze souhlasu, včetně omezení účelu, možnosti námitky, oddělení dat, zkrácení IP a omezení životnosti trackerů; zároveň upozorňuje, že mnoho velkých analytických řešení se do výjimky nevejde: https://www.cnil.fr/fr/node/677
 - EUR-Lex právní text GDPR Article 5 obsahuje principy minimalizace, omezení uložení a integrity/důvěrnosti; praktické nastavení analytiky by mělo tyto principy respektovat už při návrhu eventů: https://eur-lex.europa.eu/eli/reg/2016/679/art_5/oj
 
+---
+
+## BH. Responsible disclosure bez bezpečnostního divadla
+
+Každý veřejný web nebo SaaS časem přitáhne někoho, kdo najde chybu. Někdy to bude zákazník, který omylem narazí na cizí data. Někdy bezpečnostní výzkumník. Někdy automatický scanner. A někdy člověk, který píše „urgent vulnerability report“ tak dramaticky, že by mohl dělat trailer na horor. Rozdíl mezi klidným řešením a panikou často není v tom, jestli chyba existuje. Je v tom, jestli tým ví, kam se má hlášení poslat a co se s ním stane.
+
+Responsible disclosure není bounty program pro korporaci. Pro malý tým je to hlavně jasná vstupní brána, bezpečný triage proces a slušná komunikace. Cílem není slíbit odměny, právní imunitu na všechno ani nepřetržitý SOC. Cílem je ukázat: pokud najdete problém, víme, jak ho přijmout, ověřit, opravit a uzavřít.
+
+*Codyho komentář: bezpečnostní kontakt není „security@firma.cz“, který vede do mailboxu člověka, co odešel před dvěma lety. To není proces. To je digitální schránka odvahy.*
+
+### BH.1 Vytvořte jedno jasné místo pro hlášení
+
+Začněte jednoduchým pravidlem: kdo najde bezpečnostní problém, nemá hádat, kam psát. Na webu, v dokumentaci a ideálně i v `security.txt` má být uvedený bezpečnostní kontakt. Standard `security.txt` podle RFC 9116 definuje strojově čitelný soubor pro publikování bezpečnostních kontaktů a dalších informací pro reportování zranitelností.
+
+Minimální sada pro malý SaaS:
+
+- e-mail pro bezpečnostní hlášení,
+- veřejná stránka s pravidly hlášení,
+- interní vlastník triage,
+- záložní člověk pro dovolenou nebo nemoc,
+- jednoduchý SLA slib pro první odpověď,
+- rozhodnutí, zda přijímáte šifrovanou komunikaci.
+
+Příklad veřejného textu:
+
+```md
+# Bezpečnostní hlášení
+
+Pokud jste našli bezpečnostní problém na našem webu nebo v aplikaci, napište na security@example.com.
+
+Prosíme, pošlete:
+- stručný popis problému,
+- kroky k reprodukci,
+- dotčenou URL nebo část aplikace,
+- možný dopad,
+- kontakt pro doplňující otázky.
+
+Prosíme, netestujte destruktivní scénáře, nepřistupujte k cizím datům nad rámec ověření a nezveřejňujte detail před domluvou s námi.
+
+Na první zprávu se snažíme odpovědět do 3 pracovních dnů.
+```
+
+Neslibujte víc, než umíte splnit. Lepší je skromná, poctivá odpověď do tří pracovních dnů než marketingový slib „24/7 security response“, který ve skutečnosti kontrolujete v pátek večer mezi pizzou a deployem.
+
+### BH.2 Nastavte interní triage bez chaosu
+
+Hlášení zranitelnosti není běžný support ticket. Má mít vlastní frontu nebo štítek, omezený přístup a jasný postup. Důvod je jednoduchý: zpráva může obsahovat citlivé technické detaily, reprodukční kroky nebo informaci o možné expozici osobních dat.
+
+Triage karta:
+
+```md
+## Bezpečnostní hlášení
+ID:
+Datum přijetí:
+Kontakt reportéra:
+Kanál:
+
+## Shrnutí
+Dotčený systém:
+Typ problému:
+Možný dopad:
+
+## První klasifikace
+Závažnost: nízká / střední / vysoká / kritická
+Dotčená data: žádná / interní / zákaznická / osobní / citlivá
+Zneužitelnost: nejasná / lokální / vzdálená / automatizovatelná
+
+## Akce
+Vlastník:
+První odpověď odeslána:
+Reprodukce ověřena:
+Mitigace:
+Oprava:
+Komunikace:
+Uzavřeno:
+```
+
+První triage by měla odpovědět na tři otázky: je problém reálný, koho může poškodit a co musíme udělat hned. Hned neznamená perfektní opravu. Hned může znamenat vypnout konkrétní endpoint, zneplatnit token, omezit export, přidat rate limit, stáhnout veřejný soubor nebo izolovat účet.
+
+### BH.3 Oddělte disclosure od incident response
+
+Ne každé hlášení zranitelnosti je incident. Ale každé hlášení může incident odhalit. Proto potřebujete rozhodovací bránu:
+
+| Situace | Režim | Co udělat |
+| --- | --- | --- |
+| Teoretická chyba bez důkazu dopadu | vulnerability triage | ověřit reprodukci, zapsat riziko, naplánovat opravu |
+| Chyba s možným dopadem na zákaznická data | security incident review | zapojit vlastníka dat, zkontrolovat logy, rozhodnout o komunikaci |
+| Prokazatelný neoprávněný přístup nebo únik | incident response | spustit incident playbook, právní a zákaznickou komunikaci |
+| Spamový nebo neověřitelný report | low priority triage | slušně požádat o reprodukci, neklikat na podezřelé přílohy |
+
+Tahle brána chrání tým před dvěma extrémy. První extrém je ignorovat všechno, dokud se nestane průšvih. Druhý extrém je vyhlásit incident u každého skenu, který našel chybějící hlavičku. Ani jedno není dospělé. Ano, i bezpečnost může mít pubertu.
+
+### BH.4 Komunikujte s reportérem slušně a úsporně
+
+Bezpečnostní výzkumník není automaticky útočník. Zároveň mu nemusíte posílat interní architekturu, logy ani právní stanoviska. Dobrá komunikace je stručná, věcná a drží hranice.
+
+Šablona první odpovědi:
+
+```md
+Dobrý den,
+
+díky za hlášení. Přijali jsme ho pod ID [ID] a předáváme ho do bezpečnostní triage.
+
+Prosíme, neposílejte další testy, které by mohly ovlivnit dostupnost služby nebo data jiných uživatelů. Pokud budeme potřebovat doplnění, ozveme se.
+
+První vyhodnocení pošleme nejpozději do [datum].
+
+Děkujeme.
+```
+
+Šablona žádosti o doplnění:
+
+```md
+Dobrý den,
+
+díky za doplnění. Abychom mohli problém ověřit bez zbytečné práce s produkčními daty, potřebujeme:
+
+- přesnou URL nebo část aplikace,
+- kroky k reprodukci,
+- očekávaný a skutečný výsledek,
+- informaci, zda jste při testu viděli cizí data.
+
+Prosíme, neposílejte kopie osobních údajů. Pokud jste na ně narazili, stačí popsat typ dat a rozsah.
+```
+
+Privacy-first pravidlo: v komunikaci minimalizujte další šíření dat. Pokud reportér viděl cizí e-mail, nepotřebujete screenshot se všemi údaji. Potřebujete vědět, že došlo k expozici e-mailu, v jakém toku a za jakých podmínek.
+
+### BH.5 Připravte opravu tak, aby po ní zůstal důkaz
+
+Oprava zranitelnosti má mít auditní stopu. Ne proto, že milujeme papírování. Protože za měsíc budete chtít vědět, co se stalo, kdo rozhodl, proč zvolená oprava stačila a jestli je potřeba další prevence.
+
+Minimální záznam opravy:
+
+- ID hlášení,
+- stručný popis chyby,
+- odkaz na commit nebo release,
+- dotčené části systému,
+- rozhodnutí o komunikaci zákazníkům,
+- rozhodnutí o rotaci klíčů, tokenů nebo hesel,
+- rozhodnutí o log retention pro vyšetření,
+- následné preventivní opatření.
+
+Pokud chyba souvisela s osobními daty, zapojte privacy kontrolu. GDPR principy jako integrita, důvěrnost, minimalizace a odpovědnost nejsou jen právní text. V praxi říkají: víme, co se stalo, víme, kterých dat se to týká, a umíme doložit, co jsme udělali.
+
+### BH.6 `security.txt` jako malá, ale užitečná věc
+
+Soubor `/.well-known/security.txt` není zázračný štít. Je to směrovka. Pomáhá automatizovaným nástrojům i lidem najít správný kontakt. Pro malý tým stačí jednoduchá verze:
+
+```txt
+Contact: mailto:security@example.com
+Expires: 2027-08-24T00:00:00.000Z
+Preferred-Languages: cs, en
+Canonical: https://example.com/.well-known/security.txt
+Policy: https://example.com/security
+```
+
+Pozor na `Expires`: soubor má mít budoucí datum expirace a tým ho musí obnovovat. Jinak se z dobrého signálu stane další zapomenutý artefakt. Přidejte obnovu do ročního bezpečnostního review nebo provozního kalendáře.
+
+### BH.7 Checklist: responsible disclosure pro malý tým
+
+- [ ] Máme veřejný bezpečnostní kontakt.
+- [ ] Kontakt nevede do osobního mailboxu jednoho člověka bez náhrady.
+- [ ] Máme stránku s pravidly hlášení a hranicemi testování.
+- [ ] Máme interní triage kartu pro bezpečnostní hlášení.
+- [ ] Víme, kdo rozhoduje o závažnosti a první mitigaci.
+- [ ] Umíme rozlišit běžné hlášení, bezpečnostní incident a možný únik dat.
+- [ ] Komunikace s reportérem minimalizuje další šíření osobních dat.
+- [ ] Opravy mají odkaz na commit, release nebo provozní záznam.
+- [ ] Po opravě zapisujeme preventivní opatření.
+- [ ] Máme `security.txt` nebo rozhodnutí, proč ho zatím nemáme.
+- [ ] Pravidla kontrolujeme aspoň jednou ročně.
+
+### Mini cvičení: disclosure proces za 50 minut
+
+1. Napište veřejný bezpečnostní kontakt a záložního vlastníka.
+2. Sepište pravidla hlášení na jednu krátkou stránku.
+3. Vytvořte triage kartu podle šablony výše.
+4. Připravte první odpověď reportérovi.
+5. Rozhodněte, kde bude `security.txt` a kdo hlídá expiraci.
+6. Projděte jeden fiktivní scénář: „uživatel vidí cizí fakturu“.
+7. Zapište, kdy se z hlášení stává incident.
+
+Hotový výstup je bezpečnostní kontakt, pravidla, triage karta a jeden otestovaný scénář. Nečekejte na „až budeme větší“. Bezpečnostní hlášení nechodí podle velikosti firmy. Chodí podle toho, jestli máte veřejný systém a dost smůly.
+
+### Zdroje k příloze BH
+
+- RFC 9116 definuje `security.txt` jako standard pro publikování bezpečnostních kontaktů a politik: https://www.rfc-editor.org/rfc/rfc9116
+- ENISA popisuje coordinated vulnerability disclosure jako proces spolupráce mezi reportérem, vlastníkem systému a dalšími stranami při řešení zranitelností: https://www.enisa.europa.eu/publications/coordinated-vulnerability-disclosure-policies-in-the-eu
+- NCSC-NL publikoval praktickou coordinated vulnerability disclosure guide s důrazem na jasná pravidla, bezpečné testování a komunikaci: https://english.ncsc.nl/publications/publications/2019/juni/01/coordinated-vulnerability-disclosure-the-guideline
+- CISA vysvětluje vulnerability disclosure policy jako mechanismus, který říká výzkumníkům, jak bezpečně hlásit zranitelnosti a co mohou očekávat: https://www.cisa.gov/resources-tools/resources/vulnerability-disclosure-policy-template
+- EUR-Lex právní text GDPR Article 5 obsahuje principy integrity, důvěrnosti, minimalizace a odpovědnosti, které se promítají i do práce s bezpečnostními hlášeními: https://eur-lex.europa.eu/eli/reg/2016/679/art_5/oj
+
 ## Pracovní log
+
+- 2026-08-24: Přidána příloha BH „Responsible disclosure bez bezpečnostního divadla“ s bezpečnostním kontaktem, triage kartou, hranicí mezi hlášením a incidentem, komunikačními šablonami, `security.txt`, checklistem, mini cvičením a ověřenými zdroji.
 
 - 2026-08-24: Přidána příloha BG „Produktová analytika bez sledování jednotlivců“ s návrhem event slovníku, aktivačním momentem, agregací jako výchozím režimem, varováním před session replay, dashboardovou šablonou, checklistem, mini cvičením a ověřenými zdroji.
 
