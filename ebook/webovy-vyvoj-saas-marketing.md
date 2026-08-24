@@ -15231,7 +15231,180 @@ Výsledek nemusí být literární dílo. Má být čitelný, pravdivý a dohled
 - RSS 2.0 specifikace popisuje syndikační formát pro nezávislé sledování novinek přes feed: https://www.rssboard.org/rss-specification
 - WCAG 2.2 je vhodná připomínka, že release stránky a changelogy mají být přístupné stejně jako zbytek produktu: https://www.w3.org/TR/WCAG22/
 
+
+## AZ. Zpětná vazba bez produktového šmírování
+
+Zpětná vazba je palivo produktu. Jenže palivo není totéž co požár v datovém skladu. Malý web nebo SaaS nepotřebuje vědět o každém pohybu myší, aby zjistil, proč lidé nerozumí nabídce, kde se zaseknou v onboardingovém kroku nebo co jim chybí před nákupem. Často stačí kombinace krátkého dotazu, support poznámek, agregovaných metrik a pravidelného review.
+
+Privacy-first feedback loop má jednoduchý cíl: zlepšovat produkt s minimem osobních dat a maximem kontextu. Nehoní iluzi absolutního poznání. Raději sbírá menší množství kvalitnějších signálů, u kterých tým ví, odkud pochází, proč je potřebuje a kdy je smaže.
+
+*Codyho komentář: když tým řekne „potřebujeme víc dat“, často tím myslí „potřebujeme lepší otázku“. A lepší otázka je levnější než další tracker. Nepříjemné, ale krásně praktické.*
+
+### AZ.1 Rozdělte feedback podle rozhodnutí
+
+Než přidáte dotazník, widget, heatmapu nebo další analytický skript, napište si rozhodnutí, které má feedback podpořit. Bez toho budete sbírat signály „pro jistotu“ a za měsíc budete mít tabulku plnou poznámek, které nikdo neumí použít.
+
+Praktické kategorie:
+
+- **Srozumitelnost nabídky:** návštěvník chápe, co nabízíte, pro koho to je a co má udělat dál.
+- **Aktivace:** nový uživatel se dostane k první hodnotě bez podpory a bez frustrace.
+- **Důvěra:** zákazník ví, kde běží data, kdo k nim má přístup a jak řešíte bezpečnost.
+- **Cena a balíčky:** uživatel rozumí rozdílům mezi tarify a ví, který zvolit.
+- **Chybějící schopnost:** produkt neumí něco, co blokuje nákup, nasazení nebo každodenní používání.
+- **Provozní bolest:** support, fakturace, exporty, role nebo integrace zdržují tým i zákazníka.
+
+Každý sběr zpětné vazby má mít větu: „Tento feedback sbíráme, abychom rozhodli o…“ Pokud ji neumíte doplnit, nesbírejte. Ano, je to kruté. Ale tabulky bez rozhodnutí už mají v digitálním podsvětí vlastní patro.
+
+### AZ.2 Volte nejméně invazivní metodu, která ještě odpoví
+
+Ne každá otázka potřebuje stejnou metodu. Čím citlivější je cesta nebo data, tím opatrněji volte nástroj.
+
+Nízkoinvazivní začátek:
+
+- krátký e-mail po onboardingu s jednou otázkou,
+- odkazy „Byla tahle stránka užitečná? Ano / Ne / Co chybělo?“ u dokumentace,
+- měsíční rozhovory s pěti zákazníky,
+- agregované metriky návštěvnosti a konverzí,
+- interní štítky support ticketů podle tématu,
+- jednoduchý formulář na veřejné stránce bez marketingového přestřelení.
+
+Vyšší zásah do soukromí zvažujte až ve chvíli, kdy slabší metoda nestačí. Nahrávání session, detailní heatmapy, identifikace uživatelských cest napříč zařízeními nebo obohacování kontaktů z externích databází nesmí být výchozí režim jen proto, že to umí nástroj. „Umí“ není totéž co „potřebujeme“.
+
+Příklad: pokud chcete zjistit, proč lidé opouštějí pricing stránku, začněte třemi kroky. Nejprve zkontrolujte text a jasnost tarifů. Pak přidejte neinvazivní otázku „Co vám chybí k rozhodnutí?“ Nakonec udělejte pět rozhovorů se zákazníky, kteří cenu řešili v obchodním procesu. Teprve když pořád nevíte, kde problém vzniká, řešte detailnější experiment.
+
+### AZ.3 Ptejte se konkrétně, krátce a v kontextu
+
+Špatná otázka:
+
+> Jak hodnotíte naši platformu?
+
+Lepší otázka:
+
+> Co vám dnes bránilo dokončit nastavení projektu?
+
+Dobrá otázka má být spojená s konkrétním momentem. Po registraci se ptejte na první hodnotu. Po přečtení dokumentace se ptejte, co chybělo. Po zrušení účtu se ptejte na důvod odchodu, ale bez výslechové místnosti s kobercem z korporátu.
+
+Praktické vzory:
+
+- **Po demo callu:** „Která jedna věc vám chybí k rozhodnutí, jestli pokračovat?“
+- **Po aktivaci:** „Co bylo při prvním nastavení nejméně jasné?“
+- **Po support odpovědi:** „Vyřešila odpověď váš problém? Pokud ne, co zůstalo otevřené?“
+- **Na pricingu:** „Který rozdíl mezi tarify není jasný?“
+- **U dokumentace:** „Jaký příklad by vám pomohl použít tento návod?“
+- **Při odchodu:** „Jaký hlavní důvod vás vedl ke zrušení?“
+
+Neptejme se na víc, než tým reálně zpracuje. Jeden dobrý otevřený dotaz často přinese víc než deset hvězdiček, tři škály a pole „další komentář“, které uživatel vyplní slovy „nevím“ nebo pasivně agresivním smajlíkem.
+
+### AZ.4 Oddělte signál od identity
+
+Většina produktových rozhodnutí nepotřebuje znát jméno konkrétního člověka. Potřebuje znát typ zákazníka, situaci, plán, fázi cesty a problém. Identitu uchovávejte jen tam, kde je potřeba pro follow-up, support nebo obchodní vztah.
+
+U každého feedback kanálu si nastavte minimální datový model:
+
+- téma feedbacku,
+- kontext stránky nebo funkce,
+- zákaznický segment nebo tarif,
+- volitelný kontakt pro navazující komunikaci,
+- datum přijetí,
+- stav zpracování,
+- rozhodnutí nebo důvod odložení.
+
+Pokud člověk zanechá kontakt, jasně řekněte proč: „E-mail použijeme jen tehdy, pokud se budeme chtít doptat k této připomínce.“ Nepřidávejte ho automaticky do newsletteru, CRM sekvence ani remarketingového publika. To není růst. To je důvěra hozená do skartovačky s efektním grafem.
+
+### AZ.5 Udělejte z feedbacku týdenní produktový rituál
+
+Feedback bez rytmu se mění v digitální půdu pro plevel. Něco přijde ze supportu, něco z formuláře, něco z obchodního hovoru a něco si někdo pamatuje „určitě přesně“. Za dva týdny se tým hádá, jestli to říkali tři zákazníci, nebo jeden zákazník třikrát.
+
+Jednoduchý týdenní rituál:
+
+1. Sesbírejte nové signály z posledních sedmi dnů.
+2. Sloučte duplicity podle tématu, ne podle kanálu.
+3. Označte dopad: blokuje nákup, blokuje aktivaci, zvyšuje support, snižuje důvěru, nebo je to jen přání.
+4. Vyberte maximálně jednu změnu na příští týden.
+5. U zbytku napište „čeká“, „ne teď“ nebo „potřebujeme ověřit“.
+6. Po nasazení změny sledujte jeden až dva signály, ne celý vesmír.
+
+Výstupem nemá být dokonalá roadmapa. Výstupem má být rozhodnutí. Když feedback jen přepisujete z jednoho nástroje do druhého, nevzniká produktové učení. Vzniká administrativní cosplay.
+
+### AZ.6 Šablona: karta feedback kanálu
+
+Použijte ji pro každý nový formulář, dotazník, widget nebo interní sběr support poznámek.
+
+## Kanál
+
+- Název:
+- Kde se zobrazuje nebo sbírá:
+- Vlastník:
+- Frekvence review:
+
+## Rozhodnutí
+
+- Jaké rozhodnutí má kanál podpořit:
+- Které otázky zodpoví:
+- Které otázky záměrně nezodpovídá:
+
+## Data
+
+- Jaká data sbíráme:
+- Která data nesbíráme:
+- Je kontakt povinný, volitelný nebo zakázaný:
+- Jak dlouho data držíme:
+
+## Zpracování
+
+- Kdo má přístup:
+- Kde data běží:
+- Jak se mažou duplicity a citlivé údaje:
+- Jak se feedback dostane do roadmapy:
+
+## Text pro uživatele
+
+- Proč se ptáme:
+- Co se stane s odpovědí:
+- Jak požádat o smazání nebo opravu:
+
+## Kontrola
+
+- Datum poslední revize:
+- Rozhodnutí z posledního review:
+- Kanál ponechat / zjednodušit / vypnout:
+
+### AZ.7 Checklist: feedback bez produktového šmírování
+
+- [ ] Víme, jaké rozhodnutí feedback podporuje.
+- [ ] Začali jsme nejméně invazivní metodou, která může odpovědět.
+- [ ] Otázky jsou krátké, konkrétní a navázané na kontext.
+- [ ] Kontakt je volitelný, pokud není nezbytný pro follow-up.
+- [ ] Feedback se automaticky nepřelévá do marketingových seznamů.
+- [ ] Data mají vlastníka, místo uložení a retenční dobu.
+- [ ] Citlivé údaje ze supportu nebo formulářů umíme odstranit.
+- [ ] Tým má týdenní nebo měsíční rytmus review.
+- [ ] Každý kanál pravidelně vypínáme, pokud už nepomáhá rozhodovat.
+- [ ] Nový nástroj prošel otázkou: kde běží data a kdo k nim má přístup?
+
+### Mini cvičení: feedback loop za 60 minut
+
+1. Vyberte jednu cestu: pricing, registrace, onboarding, dokumentace nebo zrušení účtu.
+2. Napište rozhodnutí, které potřebujete udělat do dvou týdnů.
+3. Zvolte jednu neinvazivní metodu sběru: krátký dotaz, rozhovor, support štítek nebo agregovanou metriku.
+4. Napište jednu hlavní otázku a jednu doplňující otázku.
+5. Určete, jestli potřebujete kontakt. Pokud ano, napište přesný důvod.
+6. Nastavte retenční dobu a vlastníka review.
+7. Naplánujte první vyhodnocení za sedm dní.
+8. Před spuštěním smažte všechna pole, která jsou „možná jednou užitečná“.
+
+Výsledek má být malý, ale živý. Jeden dobrý feedback kanál, který tým každý týden používá, je cennější než pět sofistikovaných dashboardů, které jen dokazují, že lidé klikají na věci. Překvapivé zjištění: lidé na webu opravdu klikají. Nobelovka zatím nikde.
+
+### Zdroje k příloze AZ
+
+- Evropská komise shrnuje GDPR principy včetně účelového omezení, minimalizace dat, omezení uložení, integrity, důvěrnosti a odpovědnosti: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
+- Evropská komise vysvětluje, že typ a množství zpracovaných osobních dat závisí na právním důvodu a zamýšleném použití, přičemž zpracování má respektovat klíčové principy GDPR: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/overview-principles/what-data-can-we-process-and-under-which-conditions_en
+- EDPB v pokynech k souhlasu podle GDPR popisuje požadavky na platný souhlas a situace, kdy je potřeba řešit právní základ zpracování: https://www.edpb.europa.eu/documents/guideline/guidelines-052020-on-consent-under-regulation-2016679_en
+- EDPB v pokynech k data protection by design and by default doporučuje navrhovat ochranu dat už při návrhu služby a ve výchozím nastavení: https://www.edpb.europa.eu/documents/guideline/guidelines-42019-on-article-25-data-protection-by-design-and-by-default_en
+
 ## Pracovní log
+
+- 2026-08-24: Přidána příloha AZ „Zpětná vazba bez produktového šmírování“ s návrhem privacy-first feedback loopu, konkrétními otázkami, šablonou karty kanálu, checklistem, mini cvičením a ověřenými zdroji.
 
 - 2026-08-24: Přidána příloha AY „Release notes a changelog bez produktového šumu“ s rozlišením changelogu, release notes a interního briefu, typy změn, privacy-first kontrolou, distribučním modelem přes vlastní kanály, šablonou, checklistem, mini cvičením a ověřenými zdroji.
 
