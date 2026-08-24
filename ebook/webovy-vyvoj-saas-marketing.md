@@ -16400,7 +16400,190 @@ Výstupem má být jeden experiment brief, ne nová platforma, pět tabulek a t�
 - Your Europe prakticky vysvětluje, že souhlas má být svobodný, konkrétní, informovaný a jednoznačný a má být dán jasnou potvrzující akcí: https://europa.eu/youreurope/business/governance-and-sustainability/digital-and-data-compliance/data-protection-gdpr/index_en.htm
 - EDPB Guidelines 4/2019 k data protection by design and by default jsou užitečný základ pro návrh experimentů s minimální datovou stopou: https://www.edpb.europa.eu/documents/guideline/guidelines-42019-on-article-25-data-protection-by-design-and-by-default_en
 
+
+## BF. Vendor lock-in a exit plán bez dramatického útěku oknem
+
+Vendor lock-in nevzniká jen tím, že si vyberete špatný nástroj. Častěji vzniká potichu: přidáte jednu proprietární databázovou funkci, jeden automatizační skript, jeden reportingový export, jeden billing plugin, jeden „dočasný“ webhook a za půl roku už nikdo neumí říct, co by se stalo, kdyby dodavatel zdražil, změnil podmínky, vypadl, skončil nebo začal posílat vaše data na výlet po planetě.
+
+Privacy-first firma nemusí být paranoidní. Stačí, když ví, kde má data, jak je dostane ven a co se rozbije, když jeden dodavatel zmizí. Exit plán není známka nedůvěry vůči dodavateli. Je to normální provozní hygiena. Stejně jako zálohy. Nikdo neříká „věříme disku, takže nezálohujeme“. Teda někdo ano, ale pak obvykle následuje malá firemní tragikomedie.
+
+Evropský kontext tomu dává ještě jeden rozměr: nejde jen o technickou migraci, ale i o smlouvy, datové toky, subdodavatele, přístup k datům, auditní stopu a kontinuitu služby. Evropská komise u Data Actu řeší přepínání mezi cloudovými a edge službami, smluvní transparentnost a odstranění překážek při změně poskytovatele. ENISA ve svých cloudových doporučeních pro malé a střední firmy zase upozorňuje, že zákazník má mít plán migrace nebo odchodu a pravidelně testovat, jestli obnovu nebo přesun dat opravdu zvládne.
+
+### BF.1 Rozlišujte pohodlí, závislost a rukojmí
+
+Ne každá závislost je problém. Každý produkt stojí na závislostech: framework, databáze, hosting, e-mail, platby, DNS, monitoring, support, analytika. Problém začíná ve chvíli, kdy tým neví, jak drahá, rychlá a bezpečná by byla změna.
+
+Používejte tři úrovně:
+
+- **Pohodlí:** nástroj šetří práci, ale dá se nahradit bez zásadního dopadu na zákazníka.
+- **Závislost:** nástroj je důležitý pro provoz, ale máme dokumentaci, export, náhradní postup a vlastníka.
+- **Rukojmí:** nástroj drží kritická data nebo proces, export není ověřený, smluvní podmínky jsou nejasné a migrace by se řešila až v panice.
+
+Praktický příklad: používat hosted e-mailovou službu pro transakční zprávy je závislost. Nemít seznam šablon, bounce pravidla, suppression list, DNS záznamy a náhradního poskytovatele je rukojmí. Používat cloudovou databázi je závislost. Nemít pravidelný export ve čitelném formátu a ověřenou obnovu je adrenalinový sport převlečený za SaaS.
+
+### BF.2 Udělejte mapu kritických dodavatelů
+
+Exit plán nezačíná migrací. Začíná inventářem. Sepište služby, bez kterých produkt, web nebo marketing nemůže fungovat, a rozdělte je podle dopadu na zákazníka.
+
+Minimální mapa dodavatelů:
+
+- **Identita a přístupy:** login, SSO, správa rolí, recovery procesy.
+- **Hosting a runtime:** web, API, worker procesy, CDN, DNS, storage.
+- **Datová vrstva:** databáze, cache, vyhledávání, souborové úložiště, zálohy.
+- **Komunikace:** transakční e-maily, newsletter, support, notifikace.
+- **Obchod:** platby, fakturace, účetní exporty, CRM.
+- **Měření:** webová analytika, eventy, logy, uptime monitoring, error tracking.
+- **Automatizace a AI:** workflow nástroje, napojení na modely, interní asistenti.
+
+U každé služby si napište: co drží, kde běží, kdo k ní má přístup, jaký má export, jaký má retenční režim, kdo je vlastník a jak dlouho by trvala nouzová náhrada. Ano, je to nudné. Taky je nudné mít dveře u serverovny. Přesto je tam máme z nějakého důvodu.
+
+### BF.3 Export testujte dřív, než ho potřebujete
+
+Nejhorší čas na první export je den, kdy služba zdraží, vypadne nebo oznámí změnu podmínek. Export musí být pravidelně ověřovaný provozní postup, ne tlačítko, kterému všichni věří, protože má hezkou ikonku.
+
+Dobrá exportní kontrola odpoví na pět otázek:
+
+1. **Úplnost:** obsahuje export všechna zákaznická, provozní a konfigurační data, která potřebujeme?
+2. **Použitelnost:** dá se export přečíst běžnými nástroji a importovat jinam bez ruční archeologie?
+3. **Kontext:** obsahuje datový model, vztahy, časové zóny, jednotky, měny a stavové hodnoty?
+4. **Bezpečnost:** je export šifrovaný, přístupově omezený a po testu smazaný?
+5. **Obnova:** dokážeme z exportu obnovit testovací prostředí nebo alespoň kritickou část služby?
+
+Formát není detail. CSV bez vazeb může stačit pro jednoduché kontakty, ale nestačí pro produkt s projekty, oprávněními, auditní stopou a fakturací. JSON Lines může být praktičtější pro eventy, SQL dump pro relační data, statické soubory pro dokumentaci a Markdown pro znalostní bázi. Cílem není mít jeden posvátný formát. Cílem je mít data přenositelná, srozumitelná a ověřená.
+
+### BF.4 Smlouvu čtěte podle scénářů, ne podle optimismu
+
+Smluvní kontrola malého SaaSu nemusí znamenat právní román na tři večery. Stačí projít scénáře, které by vás bolely.
+
+Ptejte se:
+
+- Jak rychle dostaneme data po ukončení služby?
+- V jakém formátu a za jakých nákladů?
+- Co se stane s daty po ukončení smlouvy?
+- Kde jsou primární a záložní datová centra?
+- Kdo jsou subdodavatelé a jak se dozvíme o změně?
+- Máme právo na audit, bezpečnostní dokumentaci nebo relevantní certifikace?
+- Jaké jsou SLA, kompenzace a výjimky?
+- Co se stane při incidentu, insolvenční situaci nebo dlouhodobém výpadku?
+- Lze smlouvu ukončit bez ztráty dat a bez technického trestu?
+
+U kritických dodavatelů si tyto odpovědi napište do interní karty. Nespoléhejte na to, že „to někde v administraci bude“. V administraci bývá hodně věcí. Včetně nastavení, které nikdo nechce omylem kliknout v pátek v 16:58.
+
+### BF.5 Architekturu stavte s jedním úmyslným švem
+
+Ne každý kus systému musí být dokonale přenositelný. To by malý tým zabilo dřív než konkurence. Potřebujete ale úmyslné švy: místa, kde lze službu vyměnit bez přepisování půlky produktu.
+
+Praktické švy:
+
+- e-mailová služba přes vlastní `EmailProvider` rozhraní,
+- platby oddělené od interního entitlement modelu,
+- analytické eventy posílané přes vlastní minimální event gateway,
+- souborové úložiště skryté za jednoduchou storage vrstvou,
+- AI funkce oddělené od produktové logiky a zákaznických dat,
+- import/export běžící mimo UI jako opakovatelný job,
+- konfigurace prostředí mimo kód a mimo osobní účty vývojářů.
+
+Šev není abstrakce pro abstrakci. Je to pojistka v místech, kde je dodavatel kritický, data citlivá nebo migrace pravděpodobná. Když máte tři zákazníky a jeden formulář, nepotřebujete platform engineering. Když máte stovky firemních účtů, fakturaci, auditní log a privacy sliby, už potřebujete víc než „nějak to pak vyexportujeme“.
+
+### BF.6 Privacy-first exit plán chrání i zákazníka
+
+Exit plán není jen interní krizový dokument. Je to součást důvěry. Zákazník má vědět, že jeho data nejsou zamčená v černé skříňce, kterou umí otevřít jen jeden dodavatel, jeden vývojář a možná ještě náhodný cron job z roku 2023.
+
+Do zákaznické dokumentace můžete dát stručně:
+
+- jaké exporty nabízíte,
+- kdo je může spustit,
+- jak dlouho export vzniká,
+- co obsahuje a neobsahuje,
+- jak dlouho je dostupný,
+- jak se po ukončení účtu mažou data,
+- kam se obrátit při migraci.
+
+Není potřeba zveřejnit interní krizový playbook. Stačí ukázat, že zákazník není datové rukojmí. To je obchodní argument i privacy-first závazek.
+
+### BF.7 Šablona: karta dodavatelské závislosti
+
+```markdown
+# Dodavatel: [název]
+
+## Účel
+- Co služba dělá:
+- Které části produktu/webu/marketingu ovlivňuje:
+- Kritičnost: nízká / střední / vysoká / existenční
+
+## Data
+- Jaká data zpracovává:
+- Obsahuje osobní údaje:
+- Obsahuje citlivá obchodní data:
+- Primární lokalita provozu:
+- Subdodavatelé:
+
+## Přístupy
+- Interní vlastník:
+- Kdo má administrátorský přístup:
+- Jak se přístup odebere:
+- Je zapnuté MFA:
+
+## Export a obnova
+- Exportní formát:
+- Frekvence testu exportu:
+- Poslední ověřená obnova:
+- Kam se export ukládá:
+- Kdy se testovací export maže:
+
+## Exit scénář
+- Náhradní dodavatel nebo postup:
+- Odhad času migrace:
+- Největší riziko migrace:
+- Co se musí oznámit zákazníkům:
+
+## Smlouva a revize
+- Výpovědní lhůta:
+- SLA:
+- DPA / zpracovatelská smlouva:
+- Datum další revize:
+```
+
+### BF.8 Checklist: nejsme rukojmí dodavatele
+
+- [ ] Máme seznam kritických dodavatelů a vlastníka u každého z nich.
+- [ ] Víme, jaká data každý dodavatel zpracovává a kde jsou provozována.
+- [ ] Kritická data mají ověřený export v použitelném formátu.
+- [ ] Alespoň jednou za kvartál testujeme obnovu nebo import klíčových dat.
+- [ ] Přístupy k dodavatelům jsou chráněné MFA a nejsou navázané na jednu osobu.
+- [ ] Smluvní podmínky řeší ukončení, export, mazání, SLA a subdodavatele.
+- [ ] Máme náhradní postup pro DNS, e-mail, platby, hosting, databázi a support.
+- [ ] Produktová architektura má švy v místech kritických externích služeb.
+- [ ] Zákazníkům umíme lidsky vysvětlit, jak si odnesou data.
+- [ ] Po zrušení nástroje mažeme tokeny, webhooky, uživatele, testovací exporty a staré skripty.
+
+### Mini cvičení: exit mapa za 75 minut
+
+1. Vyberte pět dodavatelů, bez kterých by produkt nebo web dnes bolel nejvíc.
+2. U každého napište, jaká data drží a kdo má administrátorský přístup.
+3. Zjistěte, jestli existuje export a v jakém formátu.
+4. Jeden export stáhněte do bezpečného testovacího prostoru a ověřte, že je čitelný.
+5. Napište nejpravděpodobnější důvod odchodu: cena, výpadek, compliance, akvizice, špatný support.
+6. U nejrizikovější služby navrhněte jeden architektonický šev nebo náhradní postup.
+7. Zapište datum další revize.
+
+Výstupem není kompletní migrace. Výstupem je mapa, která sníží paniku při prvním problému. A panika je drahá. Navíc má mizerné UX.
+
+### Codyho komentář
+
+Nejlepší exit plán je ten, který možná nikdy nepoužijete, ale díky němu jednáte klidněji každý den. Když víte, že data umíte odnést, vyjednáváte s dodavateli lépe, stavíte architekturu střízlivěji a zákazníkům neslibujete magii. To není anti-cloud. To je pro-dospělost.
+
+### Zdroje k příloze BF
+
+- Evropská komise vysvětluje Data Act a kapitolu o přepínání mezi data processing službami včetně cloudových a edge služeb, otevřených rozhraní, strojově čitelných exportů a odstraňování překážek při změně poskytovatele: https://digital-strategy.ec.europa.eu/en/factpages/data-act-explained
+- Evropská komise uvádí, že Data Act vstoupil v platnost 11. ledna 2024 a používá se od 12. září 2025; součástí jsou pravidla pro efektivní přepínání mezi poskytovateli data-processing služeb: https://digital-strategy.ec.europa.eu/en/policies/data-act
+- EUR-Lex, Regulation (EU) 2023/2854, je právní text Data Actu a obsahuje pravidla k interoperabilitě, přenositelnosti a přepínání mezi službami zpracování dat: https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32023R2854
+- ENISA Cloud Security Guide for SMEs popisuje vendor lock-in jako finanční i bezpečnostní riziko a doporučuje migrační/exit plán, pravidelné zálohy ve standardním formátu a testování migrace: https://www.enisa.europa.eu/sites/default/files/publications/Cloud%20Security%20Guide%20for%20SMEs.pdf
+- ENISA NIS2 Technical Implementation Guidance zahrnuje praktická opatření pro řízení rizik, business continuity, incident handling a supply-chain security v digitální infrastruktuře a ICT službách: https://www.enisa.europa.eu/publications/nis2-technical-implementation-guidance
+
 ## Pracovní log
+
+- 2026-08-24: Přidána příloha BF „Vendor lock-in a exit plán bez dramatického útěku oknem“ s mapou dodavatelských závislostí, exportními testy, smluvní kontrolou, architektonickými švy, zákaznickým vysvětlením odchodu, kartou dodavatele, checklistem, mini cvičením a ověřenými EU/ENISA zdroji.
 
 - 2026-08-24: Přidána příloha BE „Produktové experimenty bez manipulační laboratoře“ s hypotézami, minimalizací experimentálních dat, varováním před temnými vzorci, rozhodovacími pravidly, šablonou experiment briefu, checklistem, mini cvičením a ověřenými evropskými zdroji.
 
