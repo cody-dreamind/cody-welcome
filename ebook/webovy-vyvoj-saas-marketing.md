@@ -15821,7 +15821,229 @@ Výstupem není kompletní expanze do Evropy. Výstupem je jeden lokalizovaný e
 - Your Europe popisuje, že před nákupem má zákazník v EU dostat jasné a srozumitelné informace o produktu nebo službě, ceně, obchodníkovi a souvisejících podmínkách: https://europa.eu/youreurope/citizens/consumers/shopping/contract-information/index_en.htm
 - EDPB Guidelines 05/2020 připomínají, že souhlas podle GDPR má být svobodný, konkrétní, informovaný a jednoznačný: https://www.edpb.europa.eu/documents/guideline/guidelines-052020-on-consent-under-regulation-2016679_en
 
+
+## BC. Export a offboarding zákazníka bez datového rukojmí
+
+Privacy-first SaaS se pozná i podle toho, jak se chová ve chvíli, kdy zákazník odchází. Ne když podepisuje smlouvu, ne když kliká na demo, ne když obchod slavnostně posílá „těšíme se na spolupráci“. Opravdový test důvěry přijde při exportu, zrušení účtu, předání projektu, ukončení pilotu nebo migraci ke konkurenci. Ano, i ke konkurenci. Produkt, který zákazníka drží hlavně tím, že mu komplikuje odchod, není dobrý SaaS. Je to digitální lep.
+
+Export a offboarding nejsou jen právní nebo technické téma. Jsou součást zákaznické zkušenosti. Pokud tým umí férově vysvětlit, jak si zákazník odnese data, kdo může export spustit, co se smaže, co zůstane kvůli účetnictví nebo auditu a jak dlouho běží ochranná lhůta, zvyšuje tím důvěru i u lidí, kteří nakonec zůstanou.
+
+*Codyho komentář: „Vaše data patří vám“ zní hezky. Ale pokud export znamená napsat supportu, čekat týden a dostat ZIP s názvem `final_export_new2.zip`, tak to není princip. To je adventní kalendář nejistoty.*
+
+### BC.1 Definujte odchod jako běžnou produktovou cestu
+
+Odchod zákazníka není výjimka. Je to normální životní fáze účtu. Malý SaaS by měl mít popsané alespoň čtyři scénáře:
+
+- **Zrušení trialu:** uživatel ještě nemá plnohodnotný placený vztah, ale mohl vložit data.
+- **Zrušení placeného účtu:** firma končí používání produktu a potřebuje export, faktury a potvrzení.
+- **Migrace části dat:** zákazník zůstává, ale chce exportovat projekt, tým, objednávky, dokumenty nebo historii.
+- **Ukončení workspace kvůli bezpečnosti nebo neplacení:** přístup může být omezený, ale data a účetní doklady pořád potřebují jasný režim.
+
+Každý scénář má mít stejnou základní kostru: kdo může akci spustit, co se stane hned, co se stane po ochranné lhůtě, jaký export je dostupný, jaké výjimky existují a komu se posílá potvrzení. Pokud to není popsané, support bude improvizovat. A improvizace u mazání dat je přesně ten typ adrenalinu, který si nechte raději na sport. Nebo na nasazení v pátek večer, pokud nemáte rádi svůj víkend.
+
+Praktické minimum:
+
+- v administraci jasně ukažte stav předplatného a vlastnictví účtu,
+- oddělte zrušení automatické obnovy od okamžitého smazání dat,
+- nabídněte export před destruktivní akcí,
+- vysvětlete ochrannou lhůtu a retenční pravidla,
+- po dokončení pošlete potvrzení se shrnutím.
+
+### BC.2 Export má být použitelný, ne jen formálně existující
+
+Export není splněný tím, že se někde v systému objeví tlačítko. Užitečný export musí být čitelný, dokumentovaný a přiměřeně kompletní. Zákazník nemá dostat hromadu interních ID bez vysvětlení, ale ani vyčištěný export tak moc, že ztratí kontext.
+
+U každého typu dat rozhodněte:
+
+- jestli patří do samoobslužného exportu,
+- v jakém formátu se vydává,
+- jestli obsahuje osobní údaje,
+- kdo ho smí stáhnout,
+- jak dlouho odkaz platí,
+- zda je potřeba auditní záznam.
+
+Dobré výchozí formáty:
+
+- **CSV** pro tabulková data, seznamy, fakturační přehledy a reporty.
+- **JSON** pro strukturovaná aplikační data, která může převzít jiný systém.
+- **PDF** pro faktury, potvrzení, smluvní přehledy a lidsky čitelné dokumenty.
+- **ZIP** jako obálka pro více souborů, nikdy jako omluva pro chaos.
+
+K exportu přidejte jednoduchý `README` soubor nebo stránku dokumentace. Vysvětlete strukturu, časové pásmo, formát dat, kódování, význam sloupců a limity. Ano, i když vám to připadá samozřejmé. Samozřejmé věci jsou ty, kvůli kterým pak support hledá odpověď ve vlákně z minulého kvartálu.
+
+Příklad popisu exportu:
+
+```markdown
+# Export projektů
+
+Export obsahuje projekty z workspace k datu vytvoření exportu.
+Časové údaje jsou v UTC ve formátu ISO 8601.
+
+## Soubory
+- projects.csv: základní seznam projektů
+- project_members.csv: přiřazení členů k projektům
+- README.md: popis polí a omezení exportu
+
+## Neobsahuje
+- interní auditní logy
+- support konverzace
+- smazané přílohy po retenční lhůtě
+- systémové identifikátory bez významu pro zákazníka
+```
+
+### BC.3 Oprávnění a audit chraňte víc než samotné tlačítko
+
+Export často obsahuje citlivější souhrn než běžná obrazovka aplikace. Uživatel, který normálně vidí jen část dat, by neměl jedním kliknutím stáhnout celý workspace. Proto exporty navrhujte podle rolí a rozsahu.
+
+Rozumné pravidlo:
+
+- běžný člen exportuje jen data, ke kterým má přístup,
+- administrátor exportuje vybrané oblasti workspace,
+- vlastník účtu může spustit kompletní offboarding export,
+- support nespouští export jménem zákazníka bez ověření a záznamu,
+- systém loguje kdo, kdy, co a pro jaký workspace exportoval.
+
+Audit log nemá obsahovat exportovaná data. Má obsahovat metadata potřebná pro dohledání akce: identitu uživatele, čas, typ exportu, rozsah, stav, expiraci odkazu a případně ticket nebo důvod. Tady je krásně vidět privacy-first princip: log má chránit zákazníka, ne vytvářet druhou tajnou databázi všeho.
+
+U citlivých exportů přidejte další ochranu:
+
+- potvrzení heslem nebo čerstvou session,
+- e-mailové upozornění vlastníkovi workspace,
+- krátkou expiraci odkazu,
+- možnost export zrušit před dokončením,
+- omezení počtu exportů v čase,
+- samostatné oprávnění pro billing, audit a obsahová data.
+
+### BC.4 Mazání vysvětlete po vrstvách
+
+„Smazat účet“ není jedna akce. V reálném systému existují aktivní data, zálohy, logy, faktury, support historie, e-maily, integrační fronty a exportní soubory. Pokud je zákazníkovi slíbíte smazat všechno okamžitě, pravděpodobně buď lžete, nebo nemáte účetnictví. Ani jedno není ideální pro brand, věřte mi.
+
+Lepší je popsat vrstvy:
+
+1. **Okamžité omezení přístupu:** uživatelé se už nedostanou do workspace nebo se zastaví billing.
+2. **Ochranná lhůta:** zákazník může obnovit účet nebo stáhnout export.
+3. **Produktové mazání:** aktivní aplikační data se smažou nebo anonymizují.
+4. **Retence povinných záznamů:** faktury, smluvní a bezpečnostní záznamy zůstávají po zákonnou nebo oprávněnou dobu.
+5. **Expirace záloh:** data postupně mizí ze záloh podle backup politiky.
+
+Tahle struktura je férovější než magické tlačítko „Delete forever“. Zákazník dostane reálné očekávání a tým má provozní návod. Důležité je, aby veřejný text odpovídal skutečnému systému. Pokud zálohy expirují do 35 dní, napište to. Pokud support přílohy mažou jiná pravidla, napište to také.
+
+### BC.5 Offboarding e-mail má uklidnit, ne prodat návrat za každou cenu
+
+Po zrušení účtu neposílejte zákazníkovi marketingový román o tom, jak vám bude chybět. Pošlete praktické shrnutí. Retenční lhůty, export, faktury, kontakt, potvrzení. Můžete se zeptat na důvod odchodu, ale dobrovolně a krátce.
+
+Šablona:
+
+```markdown
+Předmět: Potvrzení zrušení workspace [název]
+
+Dobrý den,
+
+potvrzujeme zrušení workspace [název] k [datum].
+
+Co se stane dál:
+- Přístup uživatelů bude ukončen: [datum/okamžitě]
+- Export dat je dostupný do: [datum]
+- Faktury zůstávají dostupné/pošleme je na: [kontakt]
+- Produktová data smažeme nebo anonymizujeme po: [lhůta]
+- Zálohy expirují podle backup politiky do: [lhůta]
+
+Export stáhnete zde: [odkaz]
+Odkaz expiruje: [datum a čas]
+
+Pokud potřebujete pomoc s předáním dat nebo potvrzením o smazání, napište na [kontakt].
+
+Krátká dobrovolná otázka: co byl hlavní důvod zrušení?
+[odpovědět]
+```
+
+Všimněte si, že šablona nejdřív řeší potřeby zákazníka. Ne retenci revenue za každou cenu. Win-back nabídka může existovat, ale nemá překrýt datové informace. Pokud je zákazník ve stresu kvůli migraci, sleva mu nevyřeší otázku, kde jsou jeho soubory.
+
+### BC.6 Šablona: karta exportu a offboardingu
+
+```markdown
+# Export/offboarding karta: [workspace / datová oblast / plán]
+
+## Scénář
+- Typ odchodu:
+- Kdo může akci spustit:
+- Vyžadované ověření:
+- Interní vlastník procesu:
+
+## Export
+- Dostupné formáty:
+- Zahrnutá data:
+- Nezahrnutá data:
+- Dokumentace exportu:
+- Expirace odkazu:
+- Limit počtu exportů:
+
+## Oprávnění a audit
+- Role s oprávněním:
+- Auditní události:
+- Upozornění:
+- Support postup:
+
+## Mazání a retence
+- Okamžité změny po zrušení:
+- Ochranná lhůta:
+- Produktové mazání/anonymizace:
+- Povinně uchovávané záznamy:
+- Zálohy:
+
+## Komunikace
+- Potvrzovací e-mail:
+- Kontakt pro dotazy:
+- Dobrovolný feedback:
+- Potvrzení o dokončení:
+
+## Kontrola
+- Poslední test exportu:
+- Poslední test mazání:
+- Známé výjimky:
+- Datum další revize:
+```
+
+Karta má být krátká, ale konkrétní. Pokud u některého pole neumíte odpovědět, není to selhání šablony. Je to přesně důvod, proč ji vyplňujete.
+
+### BC.7 Checklist: zákazník si může férově odnést data
+
+- [ ] Zrušení účtu, zrušení obnovy a smazání dat jsou oddělené akce.
+- [ ] Uživatel vidí, co se stane hned a co až po ochranné lhůtě.
+- [ ] Export je dostupný před destruktivní akcí.
+- [ ] Export má dokumentovaný formát, strukturu, časové pásmo a limity.
+- [ ] Citlivé exporty respektují role, rozsah oprávnění a čerstvé ověření.
+- [ ] Exportní odkazy expirují a jejich stažení se auditně zaznamená.
+- [ ] Support nemůže obejít zákaznická oprávnění bez ověření a záznamu.
+- [ ] Faktury, smlouvy, auditní záznamy a zálohy mají samostatná retenční pravidla.
+- [ ] Offboarding e-mail obsahuje export, retenci, kontakt a další kroky bez marketingového mlžení.
+- [ ] Proces pravidelně testujeme na demo workspace, nejen popisujeme v dokumentaci.
+
+### Mini cvičení: export a offboarding za 80 minut
+
+1. Vyberte jednu hlavní datovou oblast, kterou zákazníci nejspíš budou chtít odnést.
+2. Sepište, kdo ji smí exportovat a v jakém rozsahu.
+3. Navrhněte minimální exportní formát a krátký `README` popis.
+4. Zapište, co export záměrně neobsahuje a proč.
+5. Popište tři vrstvy mazání: aktivní data, povinné záznamy, zálohy.
+6. Napište potvrzovací offboarding e-mail pro jeden konkrétní scénář.
+7. Vytvořte auditní události: export spuštěn, export připraven, export stažen, export expiroval, workspace zrušen.
+8. Otestujte proces na demo workspace a zapište jednu věc, která byla nejasná.
+
+Výstupem není dokonalý datový portál. Výstupem je férový a testovatelný odchodový proces. Zákazníka možná nezastaví v odchodu. Ale zvýší šanci, že o vás nebude mluvit jako o firmě, která mu při loučení zamkla kufr.
+
+### Zdroje k příloze BC
+
+- Evropská komise shrnuje GDPR principy včetně minimalizace dat, omezení účelu, omezení uložení, integrity, důvěrnosti a odpovědnosti: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en
+- Evropská komise vysvětluje práva subjektů údajů včetně výmazu, omezení zpracování a přenositelnosti v strojově čitelném formátu: https://commission.europa.eu/law/law-topic/data-protection/information-individuals_en
+- Evropská komise v praktickém návodu pro organizace popisuje vyřizování žádostí jednotlivců včetně přenositelnosti údajů podle článku 20 GDPR: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/dealing-requests-individuals_en
+- EDPB zveřejňuje pokyny k právu na přenositelnost údajů podle GDPR, které řeší rozsah, formáty a praktické předávání dat: https://www.edpb.europa.eu/documents/guideline/guidelines-on-the-right-to-data-portability-under-regulation-2016679-wp242_en
+- EDPB Data Protection Guide for small business vysvětluje praktické povinnosti organizací včetně práv subjektů údajů, bezpečnosti a odpovědnosti: https://www.edpb.europa.eu/sme-data-protection-guide/home_en
+- Evropská komise popisuje vztahy mezi správci a zpracovateli a nutnost smluvního vymezení zpracování osobních údajů: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/obligations/controller-processor/what-data-controller-or-data-processor_en
+
 ## Pracovní log
+
+- 2026-08-24: Přidána příloha BC „Export a offboarding zákazníka bez datového rukojmí“ s produktovým návrhem odchodu zákazníka, použitelnými exporty, oprávněními, auditní stopou, vrstvami mazání, offboarding e-mailem, kartou procesu, checklistem, mini cvičením a ověřenými zdroji.
 
 - 2026-08-24: Přidána příloha BB „Lokalizace SaaSu pro Evropu bez překladového karnevalu“ s výběrem trhu podle signálu, lokalizací nabídky, technickým SEO základem, pricing/DPH kontrolou, support minimem, privacy-first měřením, kartou lokalizace, checklistem, mini cvičením a ověřenými zdroji.
 
