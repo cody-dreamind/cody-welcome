@@ -14715,7 +14715,187 @@ Výstupem není dokonalý compliance program. Výstupem je jedna datová oblast,
 - CNIL prakticky shrnuje princip „jak dlouho mohou být data uchována“ a doporučuje definovat dobu uchování podle účelu zpracování: https://cnil.fr/en/sheet-ndeg14-define-data-retention-period
 - ICO vysvětluje princip storage limitation a nutnost pravidelně mazat nebo anonymizovat data, která už nejsou potřeba: https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/data-protection-principles/a-guide-to-the-data-protection-principles/storage-limitation/
 
+## AW. Cookie consent bez temných vzorců a zbytečného divadla
+
+Cookie lišta není designový doplněk. Je to kus právního, produktového a technického rozhraní, který uživateli říká: „Tady rozhoduješ o tom, co se s tebou bude dít.“ Pokud to rozhraní navrhnete jako past, možná krátkodobě zvednete procento souhlasů. Dlouhodobě tím ale říkáte, že důvěru měníte za jeden graf v analytice. To je obchod, který privacy-first firma nemá uzavírat.
+
+Dobrá consent vrstva má být nudně poctivá: jasná, krátká, stejně jednoduchá pro odmítnutí i přijetí a napojená na reálný inventář technologií. Ne na legendární tabulku „cookies v2 final“, kterou naposledy otevřel někdo před redesignem.
+
+### AW.1 Nejdřív zjistěte, jestli lištu vůbec potřebujete
+
+První otázka nezní „jaký CMP nástroj koupíme“. První otázka zní: co web skutečně ukládá nebo čte v zařízení uživatele a proč. Technické cookies nutné pro fungování služby jsou jiná kategorie než marketingové identifikátory, remarketing, heatmapy nebo cross-site profilování.
+
+Praktický postup:
+
+1. Otevřete web v čistém profilu prohlížeče.
+2. Zapište cookies, localStorage, sessionStorage, pixel requesty, embeds a skripty třetích stran.
+3. U každé položky určete účel: nezbytné fungování, bezpečnost, preference, analytika, marketing, obsah třetí strany.
+4. Rozhodněte, co se může spustit před souhlasem a co až po něm.
+5. Odstraňte vše, co nemá vlastníka nebo jasný účel.
+
+ÚOOÚ u technických cookies připomíná, že pokud web používá pouze technické a nikoli netechnické cookies, není nutné zavádět cookie lištu; informační povinnost ale zůstává. To je skvělá zpráva pro malé weby: někdy je nejlepší consent banner ten, který vůbec nepotřebujete, protože jste z webu vyhodili zbytečné sledování. Ano, radikální nápad: méně krabic, méně štítků na krabicích.
+
+### AW.2 Přijetí a odmítnutí musí být stejně snadné
+
+Souhlas má být svobodný, konkrétní, informovaný a jednoznačný. V praxi to znamená, že uživatel nemá být dotlačený k zelenému tlačítku jen proto, že odmítnutí je schované v šedém odkazu za textem „pokračovat bez personalizovaného zážitku“. Pokud potřebujete UX kouzla, aby lidé klikli na „souhlasím“, pravděpodobně neprodáváte důvěru, ale únavu.
+
+Dobré první zobrazení banneru:
+
+- stručně řekne, k čemu netechnické cookies slouží,
+- nabídne tlačítko pro odmítnutí ve stejné vrstvě jako tlačítko pro přijetí,
+- umožní detailní nastavení podle účelů,
+- nespouští netechnické skripty před volbou,
+- nepoužívá manipulativní barvy, velikosti a texty,
+- neblokuje základní obsah, pokud cookies nejsou nutné pro požadovanou službu.
+
+EDPB ve zprávě cookie banner taskforce výslovně řešil problematické vzory jako předem zaškrtnuté volby, chybějící odmítnutí v první vrstvě nebo vizuální zvýhodnění přijetí. Není potřeba čekat, až se konkrétní dark pattern dostane do sankčního rozhodnutí. Stačí jednoduché pravidlo: kdyby stejný vzor použil dodavatel proti vám, vadilo by vám to? Pokud ano, nedávejte to na web.
+
+### AW.3 Kategorie navrhujte podle účelů, ne podle dodavatelů
+
+Uživatel nerozhoduje o značkách nástrojů. Rozhoduje o účelech zpracování. Proto je lepší členit volby podle smyslu: nezbytné, preference, analytika, marketing, externí média. V detailu pak ukažte konkrétní nástroje, dobu uložení, poskytovatele a odkaz na další informace.
+
+Příklad jednoduché struktury:
+
+```markdown
+## Nezbytné
+- Účel: přihlášení, bezpečnost, uložení consent volby.
+- Stav: vždy aktivní, bez nich služba nefunguje.
+- Data: session identifikátor, CSRF token, consent preference.
+- Retence: po dobu relace nebo podle bezpečnostní potřeby.
+
+## Analytika první strany
+- Účel: agregované měření návštěvnosti a výkonu obsahu.
+- Stav: volitelné.
+- Data: stránka, referrer, zařízení v agregované podobě.
+- Retence: měsíční agregace, bez user-level profilů.
+
+## Marketing
+- Účel: měření kampaní nebo remarketing.
+- Stav: výchozí vypnuto.
+- Data: jen pokud pro to existuje jasný důvod a souhlas.
+- Retence: krátká, dokumentovaná, s možností odvolání.
+```
+
+Privacy-first varianta Dreamindu: pokud analytika funguje bez osobních profilů a bez předávání identifikátorů do reklamních ekosystémů, držte se jí. Na většinu malých webů nepotřebujete marketingový sledovací cirkus. Potřebujete vědět, které stránky lidem pomáhají, odkud přicházejí kvalitní poptávky a co opravit. To jde i bez toho, aby se z návštěvníka stal sběratelský předmět.
+
+### AW.4 Consent musí být technicky vynucený
+
+Banner, který něco slibuje, ale skripty už mezitím běží, je jen dekorace s právním rizikem. Consent rozhodnutí musí řídit načítání skriptů, iframe embedů, pixelů i klientských SDK. Nestačí mít text „respektujeme vaše soukromí“ a pod ním osm requestů do marketingových sítí. To je jako napsat „zákaz vstupu“ na dveře, které jste nechali dokořán a ještě k nim dali šipku.
+
+Technická pravidla:
+
+- netechnické skripty načítejte až po odpovídající volbě,
+- consent preference ukládejte minimalisticky a s jasnou expirací,
+- změna nastavení musí být dostupná i později,
+- odvolání souhlasu musí zastavit další zpracování pro daný účel,
+- externí embedy načítejte přes kliknutí nebo privacy mód,
+- preview a staging prostředí nesmí potichu posílat data do produkční analytiky,
+- každý nový skript musí projít cookie a datovou kartou.
+
+U SaaSu přidejte ještě jednu vrstvu: produktové nastavení workspace. Někdy rozhoduje návštěvník webu, jindy administrátor zákaznické organizace a jindy koncový uživatel služby. Tyto role nemíchejte. Consent banner pro veřejný web není totéž co smluvní nastavení zpracování dat v B2B SaaSu.
+
+### AW.5 Text pište lidsky a bez právnické mlhy
+
+Consent text má být srozumitelný ve chvíli, kdy ho člověk vidí. Ne až po otevření zásad ochrany osobních údajů ve třetím tabu a malém doktorském studiu evropského práva.
+
+Špatně:
+
+> Používáme cookies za účelem zlepšení uživatelské zkušenosti a personalizace obsahu našich partnerů.
+
+Lépe:
+
+> Volitelné cookies nám pomáhají měřit návštěvnost a zjistit, které stránky fungují. Marketingové cookies používáme jen po vašem souhlasu. Odmítnutí je stejně snadné jako přijetí.
+
+Ještě lépe pro privacy-first web:
+
+> Základ webu funguje bez marketingových cookies. Pokud souhlasíte s analytikou, pomůžete nám zlepšovat obsah podle agregovaných návštěv. Nesestavujeme reklamní profily.
+
+### AW.6 Šablona: consent karta webu
+
+```markdown
+# Consent karta: [web / aplikace]
+
+## Rozsah
+- URL nebo produkt:
+- Vlastník:
+- Datum poslední revize:
+
+## Inventář technologií
+- Cookies:
+- LocalStorage / SessionStorage:
+- Skripty třetích stran:
+- Iframe a externí embedy:
+- Server-side měření:
+
+## Účely
+- Nezbytné:
+- Preference:
+- Analytika:
+- Marketing:
+- Externí obsah:
+
+## Pravidla spuštění
+- Co běží před souhlasem:
+- Co běží po souhlasu s analytikou:
+- Co běží po souhlasu s marketingem:
+- Jak se řeší odmítnutí:
+
+## UX a texty
+- Text první vrstvy:
+- Tlačítka první vrstvy:
+- Detailní nastavení:
+- Kde lze souhlas změnit:
+
+## Data a retence
+- Jaká data vznikají:
+- Kam se předávají:
+- Jak dlouho se drží:
+- Jak se odvolání souhlasu projeví technicky:
+
+## Kontrola
+- Jak testujeme čistou návštěvu bez souhlasu:
+- Jak testujeme změnu nastavení:
+- Kdo schvaluje nový skript:
+- Datum další revize:
+```
+
+### AW.7 Checklist: consent bez triků
+
+- [ ] Máme aktuální inventář cookies, storage, skriptů, embedů a server-side měření.
+- [ ] Technické cookies jsou oddělené od analytiky, marketingu a externích médií.
+- [ ] Odmítnutí je v první vrstvě stejně dostupné jako přijetí.
+- [ ] Žádná volitelná kategorie není předem zapnutá.
+- [ ] Netechnické skripty se nespustí před souhlasem.
+- [ ] Uživatel může nastavení později změnit nebo souhlas odvolat.
+- [ ] Texty jsou konkrétní, krátké a bez manipulativních formulací.
+- [ ] Nový marketingový nebo analytický nástroj nejde přidat bez consent karty.
+- [ ] Privacy dokumentace odpovídá tomu, co web opravdu načítá.
+- [ ] Preferujeme agregovanou analytiku, první stranu a evropský provoz před reklamním profilováním.
+
+### Mini cvičení: cookie audit za 45 minut
+
+1. Otevřete web v anonymním okně a v DevTools smažte storage.
+2. Načtěte homepage bez interakce s bannerem.
+3. Zapište všechny cookies, storage položky a requesty na třetí strany.
+4. Klikněte na odmítnutí a ověřte, že se nespustilo nic volitelného.
+5. Klikněte na detailní nastavení a projděte účely, texty a výchozí stav.
+6. Zapněte analytiku a ověřte, že běží jen povolená analytika.
+7. Najděte místo, kde lze volbu později změnit.
+8. Založte jeden úkol: odstranit zbytečný skript, opravit text, nebo doplnit technické blokování.
+
+Výstupem má být jedna consent karta a jeden opravený problém. Ne desetistránkový audit, po kterém všichni hrdinně odejdou na oběd a banner zůstane stejný. Hrdinství je fajn, ale fungující odmítací tlačítko je lepší.
+
+### Zdroje k příloze AW
+
+- ÚOOÚ v českých odpovědích ke cookies uvádí, že technické cookies samy o sobě nevyžadují cookie lištu, ale informační povinnost zůstává, a že odmítnutí souhlasu má být stejně jednoduché jako jeho udělení: https://uoou.gov.cz/verejnost/qa-otazky-a-odpovedi/cookies
+- ÚOOÚ k českému opt-in režimu cookies od roku 2022 shrnuje, že ukládání netechnických cookies vyžaduje souhlas a starý opt-out výklad nestačí: https://uoou.gov.cz/novinky/vse/cookies-od-zacatku-roku-2022-pouze-se-souhlasem
+- EDPB Guidelines 05/2020 vysvětlují podmínky platného souhlasu podle GDPR, zejména svobodnost, konkrétnost, informovanost a jednoznačný projev vůle: https://www.edpb.europa.eu/documents/guideline/guidelines-052020-on-consent-under-regulation-2016679_en
+- EDPB Cookie Banner Taskforce Report popisuje problematické vzory v cookie bannerech, například chybějící odmítnutí v první vrstvě, předem zaškrtnuté volby nebo zavádějící vizuální hierarchii: https://www.edpb.europa.eu/documents/task-force-report/report-of-the-work-undertaken-by-the-cookie-banner-taskforce_en
+- Evropské znění GDPR obsahuje definici souhlasu v článku 4 odst. 11 a obecné principy zpracování v článku 5: https://eur-lex.europa.eu/eli/reg/2016/679/oj
+
 ## Pracovní log
+
+- 2026-08-24: Přidána příloha AW „Cookie consent bez temných vzorců a zbytečného divadla“ s auditním postupem, pravidly pro odmítnutí/přijetí, technickým vynucením, consent kartou, checklistem, mini cvičením a ověřenými zdroji.
 
 - 2026-08-24: Přidána příloha AV „Retence a mazání dat bez digitálního syslení“ s inventářem životního cyklu dat, retenčními třídami, produktovou cestou mazání, kontrolou exportů/logů/integrací/záloh, retenční kartou, checklistem, mini cvičením a ověřenými zdroji.
 - 2026-08-24: Přidána příloha AU „Rate limiting a abuse prevence bez sledovací paranoie“ s mapou zneužitelných cest, vícevrstvými limity, minimalizací abuse signálů, UX při omezení, šetrnou spam ochranou formulářů, kartou pravidla, checklistem, mini cvičením a ověřenými zdroji.
