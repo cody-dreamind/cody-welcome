@@ -15602,7 +15602,229 @@ Výstupem má být jedna karta AI funkce a tři konkrétní úpravy: jedno omeze
 - EDPB v Opinion 28/2024 řeší vybrané otázky zpracování osobních údajů u AI modelů, včetně toho, že anonymitu modelu je potřeba posuzovat případ od případu: https://www.edpb.europa.eu/documents/opinion-of-the-board-art-64/opinion-282024-on-certain-data-protection-aspects-related-to_en
 - EDPB shrnuje, že GDPR principy mají podporovat odpovědnou AI inovaci při ochraně osobních údajů: https://www.edpb.europa.eu/news/edpb-opinion-on-ai-models-gdpr-principles-support-responsible-ai_en
 
+## BB. Lokalizace SaaSu pro Evropu bez překladového karnevalu
+
+Evropská expanze často nezačne novou pobočkou, ale jednou větou v backlogu: „Přeložíme web do angličtiny a němčiny.“ Zní to nevinně. Jenže lokalizace není jen překlad tlačítek. Je to nabídka, pricing, fakturace, právní texty, support, data, měření, SEO, onboarding a očekávání zákazníka v konkrétním trhu. Pokud to odfláknete, produkt vypadá globálně jen z dálky. Zblízka je to český formulář s anglickými nálepkami a platebním tokem, který v Německu vyvolá pocit „radši zavolám právníkovi“.
+
+Praktický cíl této přílohy: připravit lokalizaci tak, aby malý tým zvládl vstoupit do dalšího evropského trhu bez chaosu v obsahu, zbytečného sběru dat a falešného dojmu, že stačí strojově přeložit homepage. Privacy-first lokalizace znamená: jasný jazyk, minimum dat, lokální důvěra, evropský provoz a měření bez šmírovacího cirkusu.
+
+### BB.1 Nevybírejte jazyk podle ega, ale podle signálu
+
+„Angličtina pro celý svět“ je lákavá, protože působí velkolepě. Pro malý SaaS je ale lepší vybrat první lokalizaci podle obchodního signálu: odkud chodí relevantní poptávky, kdo už produkt zkouší, kde umíte obsloužit support, kde máte reference a kde zvládnete fakturaci, smlouvy a privacy dokumentaci.
+
+První trh vybírejte podle pěti otázek:
+
+- Máme alespoň několik konkrétních leadů nebo zákazníků z daného trhu?
+- Umíme v daném jazyce odpovědět na support do 1–2 pracovních dnů?
+- Dává naše nabídka smysl v místním kontextu, nebo používáme české zkratky a předpoklady?
+- Umíme správně řešit DPH, měnu, fakturační údaje a obchodní podmínky?
+- Víme, která data z lokalizace potřebujeme měřit a která nepotřebujeme vůbec?
+
+Dobré pořadí pro malý tým bývá: nejdřív lokalizovaná landing page pro jeden segment, potom onboarding a support šablony, teprve pak celý produkt. Přeložit všechno najednou je drahé, pomalé a krásně to násobí chyby. Takový excelový wellness pobyt pro budoucí bugy.
+
+Codyho komentář: jestli neumíte ručně prodat první tři zákazníky v daném trhu, automatická lokalizace vám nejspíš neotevře Evropu. Jen vyrobí víc URL adres, o které se nikdo nestará.
+
+### BB.2 Lokalizujte nabídku, ne jen slova
+
+Překlad říká stejnou věc jiným jazykem. Lokalizace říká správnou věc správnému člověku ve správném kontextu. U SaaSu to znamená, že nestačí přeložit „šetříme čas“. Musíte vysvětlit, jaký čas, komu, v jakém procesu a proč je bezpečné svěřit vám data.
+
+Příklad pro B2B SaaS:
+
+```markdown
+Slabý překlad:
+Save time with automated reporting.
+
+Lepší lokalizace:
+Create monthly client reports from approved first-party data without exporting spreadsheets to external tools.
+
+Privacy-first doplnění:
+Data stays in EU hosting, access is role-based, and every export is logged.
+```
+
+U každé lokalizované stránky zkontrolujte:
+
+- zda hero sekce mluví o lokálním problému, ne o interní funkci,
+- zda důkazy hodnoty odpovídají cílovému trhu nebo jsou jasně označené jako české reference,
+- zda pricing používá měnu a daňovou logiku, které zákazník čeká,
+- zda formulář nevyžaduje údaje, které pro první kontakt nepotřebujete,
+- zda privacy a security argumenty nejsou schované až v patičce.
+
+Lokalizace má mít vlastní „message mapu“. Pro každý trh si napište: segment, hlavní bolest, slib, důkaz, námitky, privacy argument, CTA a zákaznická slova, která se mají používat. Tím zabráníte tomu, aby jedna stránka říkala „compliance“, druhá „security“, třetí „GDPR“ a čtvrtá „peace of mind“, aniž by kdokoliv věděl, co vlastně prodáváte.
+
+### BB.3 Technický základ: URL, jazyk a canonical bez SEO loterie
+
+Vícejazyčný web potřebuje čistou technickou strukturu. Ne proto, že SEO roboti mají rádi rituály, ale protože uživatel i vyhledávač musí pochopit, která verze stránky je pro který jazyk nebo region.
+
+Praktický model pro malý evropský web:
+
+- `/cs/` pro češtinu,
+- `/en/` pro angličtinu,
+- `/de/` pro němčinu,
+- samostatné URL pro každou jazykovou verzi,
+- správný atribut `lang` v HTML,
+- vzájemné `hreflang` odkazy mezi ekvivalentními stránkami,
+- self-referencing canonical na každé jazykové verzi,
+- `x-default` pro obecnou volbu jazyka nebo globální landing page.
+
+Nedělejte jednu URL, která mění jazyk jen podle prohlížeče. Uživatel pak nemůže snadno sdílet správnou verzi, analytika je rozmazaná a vyhledávače si z toho udělají malý escape room. Automatické přesměrování podle IP používejte opatrně: nabídněte přepnutí, ale neschovávejte ostatní jazyky.
+
+Mini technický checklist:
+
+- [ ] Každá lokalizovaná stránka má vlastní URL.
+- [ ] HTML deklaruje hlavní jazyk přes `lang`.
+- [ ] Stránky mají reciproké `hreflang` vazby.
+- [ ] Canonical neukazuje omylem jen na českou verzi.
+- [ ] Sitemap obsahuje důležité lokalizované stránky.
+- [ ] Přepínač jazyka vede na ekvivalentní obsah, ne vždy na homepage.
+- [ ] 404, formulářové chyby a systémové e-maily existují ve stejném jazyce jako cesta uživatele.
+
+### BB.4 Pricing, DPH a smluvní texty řešte před kampaní
+
+Když začnete prodávat digitální službu zákazníkům v dalších zemích EU, vstupují do hry praktické otázky: komu prodáváte, jestli jde o B2B nebo B2C, jak se určuje DPH, jaké informace musí zákazník dostat před nákupem a kdo nese odpovědnost za fakturační tok. Tohle není místo pro hrdinské „nějak to dopočítáme v tabulce“. Tabulka má úžasnou schopnost tvářit se jako účetnictví, dokud nepřijde první kontrola.
+
+Pro malý SaaS si před spuštěním kampaně připravte:
+
+- rozlišení B2B a B2C zákazníka,
+- pravidla pro ověření DIČ u firemních zákazníků,
+- měnu a zobrazení cen včetně nebo bez DPH,
+- text u checkoutu, který jasně říká, co zákazník kupuje,
+- proces storna, refundace a ukončení předplatného,
+- fakturační údaje, které opravdu potřebujete,
+- odpovědnost: účetní, právník, produktový vlastník.
+
+EU pravidla pro přeshraniční B2C prodej a One Stop Shop se mohou lišit podle typu služby, zákazníka a objemu. Proto v e-booku nedávám univerzální daňovou radu. Dávám produktové pravidlo: pricing a checkout nelokalizujte až po marketingu. Kampaň, která přivede zákazníky do rozbité fakturace, není růst. Je to jen rychlejší výroba support ticketů.
+
+### BB.5 Support a dokumentace jsou součást lokalizace
+
+Lokalizovaný web bez lokalizovaného supportu je slib bez provozu. Nemusíte hned překládat celou znalostní bázi, ale musíte mít připravené minimální odpovědi pro kritické situace: přihlášení, platba, faktura, export dat, smazání účtu, bezpečnostní incident, změna tarifu a kontakt na člověka.
+
+Minimální support sada pro nový trh:
+
+- kontaktní stránka ve stejném jazyce,
+- potvrzovací e-mail po odeslání formuláře,
+- odpověď na dotaz k fakturaci,
+- odpověď na dotaz k datům a jejich smazání,
+- krátká stránka „Security & Privacy Overview“,
+- návod na první úspěšný krok v produktu,
+- interní slovník zakázaných slibů.
+
+Zakázané sliby jsou podceňované. Tým má vědět, že nesmí napsat „data nikdy neopustí naši infrastrukturu“, pokud používáte externí e-mailing, support desk nebo platební bránu. Lepší je přesná formulace: „Produktová data provozujeme v EU; pro platby používáme externího zpracovatele uvedeného v seznamu subprocesorů.“ Méně sexy? Ano. Důvěryhodnější? Taky ano.
+
+### BB.6 Měřte lokalizaci privacy-first
+
+U nové lokalizace nepotřebujete sledovat každý pohyb myši. Potřebujete vědět, jestli lokalizovaná cesta přivádí správné lidi a kde se lámou zásadní kroky.
+
+Stačí jednoduchá metrická karta:
+
+```markdown
+Trh / jazyk: DE
+Primární cesta: landing page -> demo request
+Rozhodnutí za měsíc: pokračovat / upravit positioning / zastavit
+
+Metriky:
+- návštěvy lokalizované landing page podle agregovaného zdroje
+- míra kliknutí na hlavní CTA
+- počet kvalitních poptávek
+- nejčastější support otázky
+- počet chyb ve formuláři nebo checkoutu
+
+Nesbírat:
+- session replay bez jasného souhlasu
+- detailní fingerprinting
+- zbytečné osobní údaje u anonymních návštěv
+- surové prompt vstupy s osobními údaji kvůli překladu
+```
+
+U překladů a AI nástrojů nastavte pravidlo, že se do nich neposílají zákaznická data, smlouvy ani interní poznámky bez schváleného režimu. Lokalizační workflow je taky datový tok. Screenshot obrazovky s reálným zákazníkem není „jen kontext pro překladatele“. Je to potenciální únik.
+
+### BB.7 Šablona: karta lokalizace trhu
+
+## Trh a jazyk
+
+- Jazyk:
+- Region:
+- Cílový segment:
+- Vlastník lokalizace:
+- Datum revize:
+
+## Obchodní signál
+
+- Proč tento trh teď:
+- Existující leady nebo zákazníci:
+- Hlavní očekávaný use case:
+- Rozhodnutí po 30 dnech:
+
+## Obsah
+
+- Lokalizované stránky:
+- Lokální námitky:
+- Důkazy hodnoty:
+- Zakázané sliby:
+- Slovník preferovaných termínů:
+
+## Produkt a support
+
+- Lokalizovaný onboarding:
+- Kritické e-maily:
+- Support jazyk a SLA:
+- Dokumentace minimum:
+- Incident kontakt:
+
+## Fakturace a právo
+
+- B2B/B2C režim:
+- Měna:
+- DPH kontrola:
+- Obchodní podmínky:
+- Refundace a ukončení:
+
+## Data a privacy
+
+- Nové datové toky:
+- Dodavatelé lokalizace:
+- Překladové nástroje:
+- Retence:
+- Měření:
+
+### BB.8 Checklist: lokalizace bez chaosu
+
+- [ ] Vybrali jsme trh podle signálu, ne podle dojmu.
+- [ ] Máme lokalizovanou nabídku, ne jen přeložený slogan.
+- [ ] Každá jazyková verze má vlastní URL a správný `lang`.
+- [ ] `hreflang` a canonical nekanibalizují lokalizované stránky.
+- [ ] Checkout a pricing odpovídají B2B/B2C režimu.
+- [ ] Support zvládne kritické dotazy v daném jazyce.
+- [ ] Privacy a security texty odpovídají reálnému provozu.
+- [ ] Překladatelé, AI nástroje a agentury jsou v registru dodavatelů.
+- [ ] Měříme jen agregované signály potřebné pro rozhodnutí.
+- [ ] Po 30 dnech máme jasné rozhodnutí: pokračovat, upravit, nebo zastavit.
+
+### Mini cvičení: první lokalizační sprint za 90 minut
+
+1. Vyberte jeden jazyk a jeden segment.
+2. Sepište tři konkrétní signály, proč má lokalizace smysl teď.
+3. Přepište hero sekci pro daný trh, ne jen doslovně přeložte českou verzi.
+4. Zkontrolujte formulář: odstraňte pole, která nejsou nutná pro první odpověď.
+5. Napište tři support šablony: fakturace, data, demo/onboarding.
+6. Zapište technické požadavky: URL, `lang`, `hreflang`, canonical, sitemap.
+7. Zapište datové toky: překlad, analytika, formulář, CRM, support.
+8. Vyberte jednu metrickou kartu pro 30denní vyhodnocení.
+
+Výstupem není kompletní expanze do Evropy. Výstupem je jeden lokalizovaný experiment, který se dá spustit, změřit a bezpečně zastavit. Což je mimochodem přesný opak „přeložme celý web a uvidíme“. To druhé je produktový ohňostroj: chvíli hezké, pak smrad a někdo uklízí.
+
+### Zdroje k příloze BB
+
+- W3C doporučuje deklarovat výchozí jazyk stránky pomocí atributu `lang` a u odlišných jazykových částí označit změnu jazyka: https://www.w3.org/International/geo/html-tech/tech-lang.html
+- Google Search Central popisuje použití `hreflang` pro stránky s lokalizovanými verzemi a doporučuje vzájemné vazby mezi variantami: https://developers.google.com/search/docs/advanced/crawling/localized-versions
+- Google Search Central shrnuje práci s vícejazyčnými a víceregionálními weby včetně samostatných URL a jazykových anotací: https://developers.google.com/search/docs/specialty/international/managing-multi-regional-sites
+- Your Europe uvádí, že při přeshraničním prodeji zboží nebo služeb spotřebitelům v EU lze pro vybrané případy použít One Stop Shop pro jedno přiznání a platbu DPH: https://europa.eu/youreurope/business/finance-and-tax/vat/index_en.htm
+- Your Europe popisuje, že před nákupem má zákazník v EU dostat jasné a srozumitelné informace o produktu nebo službě, ceně, obchodníkovi a souvisejících podmínkách: https://europa.eu/youreurope/citizens/consumers/shopping/contract-information/index_en.htm
+- EDPB Guidelines 05/2020 připomínají, že souhlas podle GDPR má být svobodný, konkrétní, informovaný a jednoznačný: https://www.edpb.europa.eu/documents/guideline/guidelines-052020-on-consent-under-regulation-2016679_en
+
 ## Pracovní log
+
+- 2026-08-24: Přidána příloha BB „Lokalizace SaaSu pro Evropu bez překladového karnevalu“ s výběrem trhu podle signálu, lokalizací nabídky, technickým SEO základem, pricing/DPH kontrolou, support minimem, privacy-first měřením, kartou lokalizace, checklistem, mini cvičením a ověřenými zdroji.
+
 
 - 2026-08-24: Přidána příloha BA „AI asistenti v SaaSu bez úniku kontextu“ s rizikovým členěním AI funkcí, minimalizací prompt kontextu, human-in-the-loop pravidly, transparentním UX, dodavatelskými otázkami, kartou AI funkce, checklistem, mini cvičením a ověřenými EU/EDPB zdroji.
 
