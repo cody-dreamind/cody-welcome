@@ -15066,7 +15066,174 @@ Výsledek nemusí vypadat jako enterprise portál. Má být pravdivý, použitel
 - Evropská komise popisuje standardní smluvní doložky jako nástroj pro smluvní vztahy mezi správci a zpracovateli: https://commission.europa.eu/law/law-topic/data-protection/international-dimension-data-protection/standard-contractual-clauses-scc_en
 - ENISA ve svých doporučeních k incident response zdůrazňuje přípravu rolí, komunikačních kanálů, eskalace a dokumentace incidentů: https://www.enisa.europa.eu/publications/good-practice-guide-for-incident-management
 
+## AY. Release notes a changelog bez produktového šumu
+
+Release notes nejsou slavnostní fanfára po každém commitu. Jsou dohoda se zákazníkem: co se změnilo, koho se to týká, co má udělat a jestli se mění riziko, data nebo provoz. Malý SaaS často píše release notes buď moc technicky, nebo moc marketingově. První varianta zní jako výpis z gitu, druhá jako reklamní leták, který se bojí říct, že se něco rozbilo.
+
+Dobré release notes pomáhají zákazníkům, supportu, obchodu i vývoji. Zákazník ví, co je nové. Support ví, na co se lidé budou ptát. Obchod ví, jak mluvit o hodnotě. Vývoj má stopu rozhodnutí. A privacy-first tým má místo, kde férově řekne i to, že změna přidává nové zpracování dat, nový export, nový subdodavatelský tok nebo novou kontrolu přístupů.
+
+*Codyho komentář: release notes, které říkají jen „vylepšili jsme výkon a opravili drobné chyby“, jsou textový ekvivalent pokrčení rameny. Možná je to pravda. Ale zákazník z toho nepozná nic, kromě toho, že někdo nechtěl psát konkrétně.*
+
+### AY.1 Oddělte changelog, release notes a interní release brief
+
+Tyhle tři věci spolu souvisí, ale nemají stejný účel.
+
+**Changelog** je chronologický technicko-produktový záznam významných změn. Má být dohledatelný a stabilní. Hodí se pro vývojáře, zákaznické administrátory a interní tým.
+
+**Release notes** jsou čitelná komunikace pro uživatele nebo zákazníky. Vysvětlují dopad změny, ne jen její existenci.
+
+**Interní release brief** připravuje tým před vydáním. Říká, co se vydává, jaké je riziko, kdo drží support, jak měříme dopad a co se stane při rollbacku.
+
+Praktické pravidlo:
+
+- changelog odpovídá na „co přesně se změnilo“,
+- release notes odpovídají na „proč mě to má zajímat“,
+- release brief odpovídá na „jsme připraveni to bezpečně pustit ven“.
+
+Když se tyhle vrstvy smíchají, vzniká chaos. Veřejný text je moc technický, interní příprava moc neurčitá a zákazník se dozví zásadní změnu až ze support ticketu. To není komunikace. To je produktová schovávaná.
+
+### AY.2 Používejte typy změn, kterým rozumí lidé
+
+Inspirujte se přístupem Keep a Changelog: změny seskupujte podle typu, ne podle toho, v jakém commitu vznikly. Pro malý SaaS stačí tyto kategorie:
+
+- **Přidáno:** nová funkce, nový export, nový obsah, nový kanál.
+- **Změněno:** úprava chování, textu, toku, pravidel nebo výchozího nastavení.
+- **Opraveno:** chyba, regres, rozbitá validace, špatné zobrazení.
+- **Bezpečnost:** oprava zranitelnosti, zpřísnění přístupů, auditní stopa.
+- **Privacy:** méně dat, nová retence, lepší export, odstraněný tracker, změna subdodavatele.
+- **Deprecováno:** funkce nebo API, které bude odstraněné později.
+- **Odstraněno:** funkce, pole, integrace, endpoint nebo obsah, který už neexistuje.
+
+Privacy sekci nedávejte jen do velkých změn. Pokud odstraníte zbytečné pole z registrace, vypnete marketingový skript nebo zkrátíte retenci logů, napište to. Zákazníkům tím ukazujete, že privacy-first není patičkový slogan, ale skutečná produktová práce.
+
+### AY.3 Každá poznámka má říct dopad
+
+Slabá release note říká:
+
+> Přidali jsme nový export.
+
+Lepší release note říká:
+
+> Administrátoři teď mohou exportovat seznam projektů do CSV. Export obsahuje název projektu, stav a datum poslední změny; neobsahuje interní komentáře ani osobní poznámky. Odkaz na export expiruje po 24 hodinách.
+
+Dobrá poznámka odpoví na pět otázek:
+
+- Koho se změna týká?
+- Co se změnilo v chování produktu?
+- Co má uživatel udělat, pokud vůbec něco?
+- Jaký je dopad na data, přístupy nebo integrace?
+- Kde najde detail: dokumentaci, trust stránku, API referenci nebo support kontakt?
+
+Pokud změna nemá žádný dopad na uživatele, nemusí být ve veřejných release notes. Může zůstat v interním changelogu. Zákazníci nepotřebují číst, že jste přejmenovali proměnnou. Vývojář ano, pokud tím zachrání budoucí debug. Každý text má svého čtenáře.
+
+### AY.4 Privacy-first release kontrola
+
+Před zveřejněním release notes projděte krátkou kontrolu:
+
+- Přidává release nový typ osobních dat?
+- Mění se účel zpracování, retence nebo okruh lidí s přístupem?
+- Přibyl subdodavatel, integrace, AI workflow nebo export?
+- Musí se aktualizovat privacy policy, DPA, seznam subprocesorů nebo trust pack?
+- Je změna popsána lidsky, bez slibů, které provoz neumí doložit?
+- Existuje plán, jak informovat dotčené administrátory nebo zákazníky?
+
+Příklad zápisu:
+
+```markdown
+### Privacy
+
+- Zkrátili jsme výchozí retenci aplikačních chybových logů z 90 na 30 dní. Bezpečnostní auditní logy zůstávají oddělené a mají vlastní retenční pravidla.
+- Export projektů nově neobsahuje interní support poznámky. Administrátor pořád vidí, kdo export vytvořil a kdy odkaz expiruje.
+```
+
+Tohle je užitečnější než mlhavé „zlepšili jsme ochranu dat“. Konkrétnost buduje důvěru. Mlha buduje podezření, případně velmi dlouhý e-mail od zákazníkova security týmu.
+
+### AY.5 Distribuce: vlastní kanály jako default
+
+Release notes patří na vlastní web nebo do dokumentace. Ideálně mají stabilní URL, RSS feed a odkaz z aplikace. E-mail používejte pro změny, které vyžadují akci, ovlivňují bezpečnost, mění workflow nebo mají obchodní dopad. Neposílejte každou drobnost všem. To není transparentnost, to je inbox cardio.
+
+Doporučený systém:
+
+- veřejný changelog nebo release stránka,
+- RSS feed pro lidi a týmy, které chtějí změny sledovat bez sociálních sítí,
+- krátký in-app odkaz na relevantní release notes,
+- administrátorský e-mail jen pro zásadní změny,
+- interní release brief pro support a obchod.
+
+U B2B SaaSu přidejte ještě „customer impact“ značku:
+
+- **Info:** zákazník nemusí nic dělat.
+- **Action:** zákazník má udělat konkrétní krok.
+- **Admin:** změna se týká administrátorů, rolí, exportu, fakturace nebo bezpečnosti.
+- **Breaking:** změna může rozbít existující workflow, API nebo integraci.
+- **Privacy:** změna se týká dat, retence, přístupů, subdodavatelů nebo souhlasů.
+
+### AY.6 Šablona release notes
+
+```markdown
+# Release notes: [název / verze / datum]
+
+## Shrnutí
+- Jedna až tři věty: co je nejdůležitější a koho se to týká.
+
+## Přidáno
+- [dopad na uživatele, ne interní detail]
+
+## Změněno
+- [co se chová jinak]
+
+## Opraveno
+- [co už nebude bolet]
+
+## Bezpečnost a privacy
+- [data, přístupy, retence, audit, export, subdodavatelé]
+
+## Akce pro zákazníka
+- Musíte něco udělat:
+- Termín:
+- Kontakt pro dotazy:
+
+## Odkazy
+- Dokumentace:
+- Trust / privacy detail:
+- Status nebo incident detail:
+```
+
+Pokud používáte verze, držte se jednoduchého pravidla: patch pro opravy, minor pro kompatibilní nové schopnosti, major pro rozbíjející změny. SemVer to popisuje přesněji pro software s veřejným API; pro marketingovou nebo produktovou komunikaci z něj berte hlavně disciplínu: číslo verze má nést význam, ne jen vypadat technicky.
+
+### AY.7 Checklist před publikací
+
+- [ ] Release notes říkají dopad na uživatele, ne jen interní změnu.
+- [ ] Důležité změny jsou seskupené podle typu.
+- [ ] Breaking změny, deprecace a bezpečnostní opravy jsou jasně viditelné.
+- [ ] Privacy dopad je popsaný konkrétně.
+- [ ] Text neobsahuje interní detaily, které zbytečně zvyšují bezpečnostní riziko.
+- [ ] Support a obchod dostali interní brief.
+- [ ] Dokumentace, trust pack a subdodavatelský seznam jsou aktualizované, pokud se jich release týká.
+- [ ] Release má stabilní URL a dá se dohledat později.
+- [ ] Zákazník ví, jestli musí něco udělat.
+
+### Mini cvičení: release notes za 35 minut
+
+1. Vyberte poslední release nebo větší změnu produktu.
+2. Sepište pět nejdůležitějších změn bez commit zpráv.
+3. U každé napište: koho se týká, co se změnilo a jestli má privacy/security dopad.
+4. Rozdělte změny do kategorií: přidáno, změněno, opraveno, bezpečnost, privacy.
+5. Napište jednu větu pro support: „Na co se zákazníci pravděpodobně zeptají?“
+6. Přidejte stabilní URL, datum a vlastníka další aktualizace.
+
+Výsledek nemusí být literární dílo. Má být čitelný, pravdivý a dohledatelný. Release notes jsou drobná věc, která dělá produkt dospělejším. A dospělý produkt je ten, který zákazníka nepřekvapuje změnami schovanými pod koberec.
+
+### Zdroje k příloze AY
+
+- Keep a Changelog doporučuje psát changelog pro lidi, seskupovat stejné typy změn a držet nejnovější verzi nahoře: https://keepachangelog.com/en/1.1.0/
+- Semantic Versioning 2.0.0 popisuje význam verzí major, minor a patch pro software s veřejným API: https://semver.org/
+- RSS 2.0 specifikace popisuje syndikační formát pro nezávislé sledování novinek přes feed: https://www.rssboard.org/rss-specification
+- WCAG 2.2 je vhodná připomínka, že release stránky a changelogy mají být přístupné stejně jako zbytek produktu: https://www.w3.org/TR/WCAG22/
+
 ## Pracovní log
+
+- 2026-08-24: Přidána příloha AY „Release notes a changelog bez produktového šumu“ s rozlišením changelogu, release notes a interního briefu, typy změn, privacy-first kontrolou, distribučním modelem přes vlastní kanály, šablonou, checklistem, mini cvičením a ověřenými zdroji.
 
 - 2026-08-24: Přidána příloha AX „Trust pack pro B2B SaaS bez prodejního mlžení“ se strukturou veřejné a neveřejné důvěryhodnostní dokumentace, Security & Privacy Overview šablonou, due diligence odpověďmi, kontrolou souladu s realitou produktu, prodejními odpověďmi, revizním rytmem, checklistem a ověřenými zdroji.
 
