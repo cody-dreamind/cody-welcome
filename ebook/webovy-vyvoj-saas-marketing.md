@@ -319,6 +319,9 @@ BA. AI asistenti v SaaSu bez úniku kontextu
 BB. Lokalizace SaaSu pro Evropu bez překladového karnevalu
 BC. Export a offboarding zákazníka bez datového rukojmí
 BD. Customer success bez šmírovacího health score
+BE. Produktové experimenty bez manipulační laboratoře
+BF. Vendor lock-in a exit plán bez dramatického útěku oknem
+BG. Produktová analytika bez sledování jednotlivců
 
 ## 1. Web jako obchodní systém
 
@@ -16581,7 +16584,241 @@ Nejlepší exit plán je ten, který možná nikdy nepoužijete, ale díky němu
 - ENISA Cloud Security Guide for SMEs popisuje vendor lock-in jako finanční i bezpečnostní riziko a doporučuje migrační/exit plán, pravidelné zálohy ve standardním formátu a testování migrace: https://www.enisa.europa.eu/sites/default/files/publications/Cloud%20Security%20Guide%20for%20SMEs.pdf
 - ENISA NIS2 Technical Implementation Guidance zahrnuje praktická opatření pro řízení rizik, business continuity, incident handling a supply-chain security v digitální infrastruktuře a ICT službách: https://www.enisa.europa.eu/publications/nis2-technical-implementation-guidance
 
+## BG. Produktová analytika bez sledování jednotlivců
+
+Produktová analytika má odpovědět na jednoduchou otázku: **pomáhá produkt lidem dojít k hodnotě, kvůli které si ho pořídili?** Nemá z týmu udělat malou zpravodajskou službu, která ví, kolikrát jeden konkrétní člověk pohnul kurzorem, kde zaváhal a jestli se při onboardingovém videu podrbal na duši.
+
+Malý SaaS často nepotřebuje detailní sledování každého uživatele. Potřebuje vědět, kde se lidé zaseknou, jestli aktivace funguje, které funkce přinášejí hodnotu, jestli nové verze nerozbily důležitý tok a jestli zákazník umí produkt používat bez supportu. To jde navrhnout privacy-first: s minimem osobních údajů, agregací, krátkou retencí, jasným účelem a bez automatického sběru všeho „pro jistotu“.
+
+Evropský rámec je v tomhle poměrně přímočarý. Evropská komise vysvětluje princip minimalizace tak, že organizace má sbírat jen osobní data nutná pro daný účel, a princip omezení uložení tak, že data nemají zůstávat déle, než je potřeba. EDPB u privacy by design and by default zdůrazňuje, že ochrana dat má být zabudovaná od začátku a pravidelně kontrolovaná. Pro produktovou analytiku to znamená: měření není technický doplněk, ale produktové rozhodnutí.
+
+### BG.1 Začněte rozhodnutím, ne eventem
+
+Nejčastější chyba analytiky je začít seznamem eventů. `button_clicked`, `modal_opened`, `tab_changed`, `filter_used`, `rage_click_detected`, `user_probably_confused_and_slightly_sad`. Tým pak po měsíci sedí nad stovkami událostí a neumí z nich udělat jediné rozhodnutí.
+
+Začněte opačně. Ke každému měření napište rozhodnutí, které má podporovat:
+
+- Zlepšit onboarding, protože noví uživatelé nedojdou k první hodnotě.
+- Zjednodušit import, protože zákazníci odpadávají před prvním použitelným výstupem.
+- Upravit pricing, protože aktivní týmy narážejí na špatnou hranici tarifu.
+- Zlepšit dokumentaci, protože support řeší pořád stejný krok.
+- Omezit funkci, která vypadá populárně, ale nepomáhá retenci ani výsledku.
+
+Teprve potom navrhněte eventy. Produktová analytika má být slovník otázek, ne koberec telemetrie.
+
+### BG.2 Definujte aktivační moment a cestu k němu
+
+Aktivační moment je první situace, kdy uživatel zažije skutečnou hodnotu produktu. Není to registrace. Není to kliknutí na „Začít“. Je to dokončený výsledek.
+
+Příklady:
+
+- nástroj pro fakturaci: první odeslaná faktura,
+- rezervační systém: první potvrzená rezervace,
+- projektový nástroj: první úkol předaný konkrétnímu člověku,
+- analytický SaaS: první použitelný report pro rozhodnutí,
+- AI asistent: první odpověď, kterou člověk použil po kontrole.
+
+Měřte cestu k aktivačnímu momentu ve vrstvách:
+
+1. **Start:** vytvoření účtu nebo workspace.
+2. **Nastavení:** minimum konfigurace nutné pro první hodnotu.
+3. **První akce:** uživatel vložil, importoval nebo vytvořil první relevantní objekt.
+4. **První výsledek:** produkt vytvořil něco použitelného.
+5. **Potvrzení hodnoty:** uživatel výsledek sdílel, použil, exportoval, zaplatil nebo se vrátil.
+
+Privacy-first detail: nepotřebujete ukládat kompletní obsah faktury, zprávy, projektu nebo zákaznického záznamu. Většinou stačí stavový event, čas, typ účtu, plán, anonymizovaný identifikátor workspace a pár bezpečných vlastností.
+
+### BG.3 Oddělte produktové eventy od osobního profilu
+
+Produktový event říká, že se v systému něco stalo. Osobní profil se snaží popsat člověka. Mezi těmito dvěma světy má být jasná hranice.
+
+Bezpečnější event:
+
+```json
+{
+  "event": "first_invoice_sent",
+  "workspace_id": "hashed_workspace_id",
+  "plan": "starter",
+  "country_group": "EU",
+  "occurred_at": "2026-08-24T14:00:00Z"
+}
+```
+
+Rizikovější event:
+
+```json
+{
+  "event": "first_invoice_sent",
+  "user_email": "jana@example.cz",
+  "customer_name": "Klient ABC",
+  "invoice_total": 184500,
+  "invoice_pdf_text": "...",
+  "ip_address": "...",
+  "full_user_agent": "..."
+}
+```
+
+Ten druhý event možná potěší budoucího datového archeologa, ale produktovému týmu často nepřidá lepší rozhodnutí. Jen přidá riziko, retenční povinnost, bezpečnostní nároky a vysvětlovací kolečko u privacy review.
+
+Pravidlo: pokud vlastnost eventu neumíte spojit s konkrétním rozhodnutím, neukládejte ji. Pokud ji potřebujete jen jednou pro diagnostiku, dejte ji do dočasného logu s krátkou retencí, ne do věčné produktové analytiky.
+
+### BG.4 Navrhněte event slovník jako API
+
+Eventy jsou interní API produktu. Když je pojmenujete chaoticky, reporty se rozpadnou stejně spolehlivě jako frontend bez komponent.
+
+Dobrá karta eventu obsahuje:
+
+- **Název:** `invoice_sent`, ne `click_submit_2`.
+- **Účel:** jaké rozhodnutí podporuje.
+- **Vlastník:** produkt, marketing, support nebo provoz.
+- **Objekt:** workspace, projekt, účet, objednávka, článek.
+- **Povolené vlastnosti:** jen schválený seznam polí.
+- **Zakázaná data:** e-mail, jméno, volný text, obsah dokumentu, tokeny, IP, pokud nejsou nutné.
+- **Retence:** jak dlouho se drží detail a kdy přechází do agregace.
+- **Kontrola kvality:** jak poznáme duplicitní nebo chybné eventy.
+
+Ukázka:
+
+```markdown
+# Event: onboarding_completed
+
+## Účel
+- Ověřit, jestli nový workspace dojde k první hodnotě.
+
+## Spouštěč
+- Uživatel dokončí povinné kroky a vytvoří první použitelný výstup.
+
+## Vlastnosti
+- plan: free / starter / business
+- workspace_age_hours: číslo zaokrouhlené na celé hodiny
+- setup_path: manual / import / invitation
+
+## Zakázaná data
+- e-mail uživatele
+- jméno zákazníka
+- obsah importovaných dat
+- IP adresa
+
+## Retence
+- detail 90 dní
+- agregace po měsících 24 měsíců
+```
+
+### BG.5 Agregace má být default, detail výjimka
+
+U většiny produktových otázek stačí agregace:
+
+- kolik workspace dokončilo onboarding v prvních 24 hodinách,
+- jaký podíl importů skončil chybou,
+- kolik týmů používá konkrétní workflow aspoň jednou týdně,
+- kde v aktivaci vzniká největší propad,
+- jestli nová verze zlepšila dokončení formuláře.
+
+Detailní stopa jednoho uživatele má dávat smysl jen u supportu, bezpečnosti, fakturace nebo explicitního troubleshooting režimu. I tam má mít vlastního vlastníka, omezený přístup a kratší životnost.
+
+Praktický model retence:
+
+| Vrstva | Účel | Identifikace | Retence |
+| --- | --- | --- | --- |
+| Detailní event | debug nové funkce | pseudonymní workspace | 30–90 dní |
+| Produktová agregace | roadmap a onboarding | bez jednotlivce | 12–24 měsíců |
+| Bezpečnostní log | detekce incidentů | podle potřeby | dle rizika a právního účelu |
+| Support historie | řešení konkrétní žádosti | konkrétní účet | podle support pravidel |
+
+Tohle není univerzální právní recept. Je to startovací provozní model. U citlivějších produktů, regulovaných oborů nebo většího rozsahu zpracování si retenční dobu ověřte samostatně.
+
+### BG.6 Pozor na session replay a „behaviorální magii“
+
+Session replay, heatmapy a detailní behaviorální nástroje vypadají lákavě, protože slibují, že konečně uvidíte, co uživatel dělá. Jenže často sbírají přesně ten typ kontextu, který nechcete: texty ve formulářích, chování konkrétní osoby, citlivé části rozhraní, interní data zákazníka a metadata, která se pak těžko vysvětlují.
+
+Než takový nástroj zapnete, vyžadujte:
+
+- maskování citlivých polí a částí rozhraní,
+- vypnutí nahrávání na stránkách s osobními nebo zákaznickými daty,
+- jasný právní základ a režim souhlasu, pokud je potřeba,
+- krátkou retenci,
+- omezený přístup jen pro konkrétní role,
+- zákaz používání pro individuální profilování,
+- dokumentovaný účel experimentu,
+- datum vypnutí.
+
+Často zjistíte, že stejný problém vyřeší tři uživatelské rozhovory, anonymizovaný funnel a jeden dobře napsaný support tag. Méně cirkusu, víc signálu.
+
+### BG.7 Privacy-first dashboard pro produktový tým
+
+Dashboard má pomáhat týdennímu rozhodování, ne hypnotizovat tým svítícími grafy. Začněte jednou stránkou:
+
+```markdown
+# Produktový dashboard týdne
+
+## Aktivace
+- Nové workspace:
+- Dokončení onboarding do 24 h:
+- Největší propad:
+
+## Hodnota
+- Workspace s hlavním workflow tento týden:
+- První použitelný výstup:
+- Opakované použití:
+
+## Kvalita
+- Chybovost kritického toku:
+- Support dotazy k onboarding kroku:
+- Nejčastější důvod nedokončení:
+
+## Privacy-first kontrola
+- Nové eventy tento týden:
+- Eventy ke smazání nebo agregaci:
+- Podezřelá vlastnost eventu:
+
+## Rozhodnutí
+- Co upravíme příští týden:
+- Co nebudeme měřit dál:
+```
+
+Každý týden smažte nebo slučte aspoň jeden graf, který nevede k akci. Dashboard, který jen roste, je digitální plevel. A plevel se netváří jako insight jen proto, že má gradient.
+
+### BG.8 Checklist: produktová analytika bez šmírování
+
+- [ ] Každý event má jasné rozhodnutí, které podporuje.
+- [ ] Aktivační moment je definovaný jako výsledek pro uživatele, ne jako registrace.
+- [ ] Event slovník zakazuje volný text, obsah dokumentů, e-maily, tokeny a zbytečné identifikátory.
+- [ ] Produktové eventy jsou oddělené od osobních profilů a CRM poznámek.
+- [ ] Detailní eventy mají krátkou retenci a agregace je výchozí režim.
+- [ ] Session replay a heatmapy nejsou zapnuté plošně bez účelu, maskování a vypnutí.
+- [ ] Nové měření prochází privacy-by-design review před nasazením.
+- [ ] Support, bezpečnost a produktová analytika mají oddělené účely a přístupy.
+- [ ] Dashboard končí rozhodnutím, ne jen „zajímavým trendem“.
+- [ ] Tým pravidelně maže eventy a grafy, které už nepomáhají.
+
+### Mini cvičení: event slovník za 60 minut
+
+1. Vyberte jeden kritický tok: onboarding, import, první platba, export nebo pozvánka do týmu.
+2. Napište rozhodnutí, která podle toku potřebujete dělat.
+3. Definujte aktivační moment nebo dokončení toku.
+4. Navrhněte maximálně sedm eventů.
+5. U každého eventu napište povolené a zakázané vlastnosti.
+6. Určete retenci detailu a agregace.
+7. Vyberte jeden graf, který půjde na týdenní dashboard.
+8. Vyberte jeden signál, který záměrně měřit nebudete.
+
+Hotový výstup má být krátký event slovník a jeden dashboardový blok. Pokud po hodině máte třicet eventů a žádné rozhodnutí, vraťte se na začátek. Analytika není lov pokémonů. Nemusíte je chytit všechny.
+
+### Codyho komentář
+
+Dobrá produktová analytika je skromná, ale užitečná. Ukazuje týmu, kde produkt pomáhá a kde selhává. Špatná analytika sbírá všechno, protože se bojí rozhodnout, co je důležité. Privacy-first přístup není brzda datové práce. Je to disciplína, která vás donutí měřit jen to, co unesete vysvětlit zákazníkovi i sami sobě.
+
+### Zdroje k příloze BG
+
+- Evropská komise shrnuje principy GDPR včetně minimalizace dat, omezení účelu a omezení uložení: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/overview-principles/what-data-can-we-process-and-under-which-conditions_en
+- Evropská komise v přehledu principů GDPR uvádí, že pokud je to možné, je vhodnější používat anonymní data a že osobní data mají být přiměřená, relevantní a omezená na nezbytný účel: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
+- EDPB Guidelines 4/2019 k Article 25 GDPR popisují data protection by design and by default jako průběžný proces zabudovaný do návrhu systémů: https://www.edpb.europa.eu/documents/guideline/guidelines-42019-on-article-25-data-protection-by-design-and-by-default_en
+- CNIL ve svém přehledu k audience measurement uvádí podmínky, kdy mohou být analytické cookies vyňaté ze souhlasu, včetně omezení účelu, možnosti námitky, oddělení dat, zkrácení IP a omezení životnosti trackerů; zároveň upozorňuje, že mnoho velkých analytických řešení se do výjimky nevejde: https://www.cnil.fr/fr/node/677
+- EUR-Lex právní text GDPR Article 5 obsahuje principy minimalizace, omezení uložení a integrity/důvěrnosti; praktické nastavení analytiky by mělo tyto principy respektovat už při návrhu eventů: https://eur-lex.europa.eu/eli/reg/2016/679/art_5/oj
+
 ## Pracovní log
+
+- 2026-08-24: Přidána příloha BG „Produktová analytika bez sledování jednotlivců“ s návrhem event slovníku, aktivačním momentem, agregací jako výchozím režimem, varováním před session replay, dashboardovou šablonou, checklistem, mini cvičením a ověřenými zdroji.
 
 - 2026-08-24: Přidána příloha BF „Vendor lock-in a exit plán bez dramatického útěku oknem“ s mapou dodavatelských závislostí, exportními testy, smluvní kontrolou, architektonickými švy, zákaznickým vysvětlením odchodu, kartou dodavatele, checklistem, mini cvičením a ověřenými EU/ENISA zdroji.
 
