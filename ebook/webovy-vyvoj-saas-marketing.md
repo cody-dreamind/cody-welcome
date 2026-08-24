@@ -17981,7 +17981,231 @@ Privacy impact check je pro mě jeden z nejlepších testů dospělosti SaaSu. N
 - CNIL nabízí praktické materiály a metodiku PIA/DPIA, včetně přístupu k popisu zpracování, rizik a opatření: https://www.cnil.fr/en/privacy-impact-assessment-pia
 
 
+## BN. Žádosti subjektů údajů bez support chaosu
+
+Každý SaaS, který pracuje s osobními údaji, jednou dostane zprávu typu: „Pošlete mi všechno, co o mně máte“, „Smažte můj účet“, „Opravte moje údaje“, nebo nejzábavnější varianta: „Nevím, co přesně chci, ale GDPR.“ Pokud na to tým nemá proces, skončí to improvizací mezi supportem, vývojem, fakturací a někým, kdo se snaží najít správný export v adminu pojmenovaném `final-final-v2`.
+
+Privacy-first přístup neznamená jen mít hezkou zásadu ochrany osobních údajů. Znamená umět prakticky obsloužit práva lidí bez paniky, bez nadměrného sběru identifikačních údajů a bez toho, aby support omylem poslal data nesprávné osobě. Proces má být lidský, ověřitelný a dostatečně jednoduchý, aby ho tým použil i v pátek odpoledne. Ano, i tehdy, kdy káva už není nápoj, ale infrastruktura.
+
+### BN.1 Jaké žádosti typicky přijdou
+
+Nejčastější žádosti v malém webu nebo B2B SaaSu:
+
+- **Přístup k údajům:** uživatel chce vědět, jaké údaje o něm vedete a proč.
+- **Oprava:** uživatel chce opravit nepřesný údaj v profilu, fakturaci nebo zákaznickém záznamu.
+- **Výmaz:** uživatel chce smazat účet nebo konkrétní data.
+- **Omezení zpracování:** uživatel nechce, aby se s daty dočasně dál pracovalo.
+- **Přenositelnost:** uživatel chce strukturovaný export dat, která vám poskytl nebo která vznikla jeho používáním služby.
+- **Námitka:** uživatel nechce určité zpracování, typicky marketing nebo profilování.
+- **Odvolání souhlasu:** uživatel chce zastavit zpracování založené na souhlasu.
+
+Praktická pointa: support nemusí v první minutě právně kvalifikovat každý článek GDPR. Musí bezpečně přijmout požadavek, ověřit identitu přiměřeně riziku, založit záznam, nasměrovat ho správnému vlastníkovi a komunikovat srozumitelně. Právní přesnost se dá doplnit. Uniklá data už se doplňují hůř.
+
+### BN.2 Příjem žádosti: jeden vstup, žádné drama
+
+Vytvořte jeden interní postup, který platí pro všechny kanály: e-mail, chat, formulář, support ticket i zprávu obchodníkovi. Ne proto, že procesy jsou sexy. Nejsou. Ale protože žádost subjektu údajů často přijde mimo „správný“ formulář a GDPR práva se neztratí jen proto, že člověk použil obyčejný e-mail.
+
+Minimální příjmový formulář pro support:
+
+| Pole | Co vyplnit | Proč |
+|---|---|---|
+| Datum přijetí | kdy zpráva dorazila | kvůli lhůtě a auditní stopě |
+| Kanál | e-mail, chat, formulář, obchodník | víte, kde odpovědět |
+| Žadatel | jméno/e-mail/organizace | základní identifikace |
+| Typ žádosti | přístup, oprava, výmaz, export, námitka, nejasné | triage |
+| Dotčený účet | tenant, workspace, user ID, pokud je bezpečně známé | vazba na data |
+| Riziko | nízké/střední/vysoké | rozhoduje o ověření identity |
+| Vlastník | support, privacy, produkt, vývoj, finance | žádost má člověka, ne „někoho“ |
+| Deadline | interní termín | žádost nesmí zapadnout |
+| Stav | přijato / ověřujeme / řešíme / odpovězeno / uzavřeno | přehled |
+
+U malého týmu stačí ticket v helpdesku, issue v interním trackeru nebo řádek v omezené tabulce. Důležité je, aby záznam neobsahoval víc osobních údajů, než je nutné. Privacy request tracker se nesmí stát druhou tajnou databází zákazníků. To by bylo krásně ironické a úplně špatně.
+
+### BN.3 Ověření identity podle rizika
+
+Největší chyba je chtít občanku u každé žádosti. Druhá největší chyba je neověřit nic a poslat export prvnímu člověku, který zná e-mail zákazníka. Správně je vrstvit ověření podle rizika.
+
+Tři úrovně ověření:
+
+1. **Nízké riziko:** změna marketingového odběru, odvolání souhlasu, obecný dotaz. Ověřte kontrolu nad e-mailem odhlašovacím odkazem nebo odpovědí ze stejné adresy.
+2. **Střední riziko:** export běžných účtových dat, oprava profilu, smazání běžného účtu. Ověřte přihlášení do účtu, potvrzení přes registrovaný e-mail nebo administrátora workspace.
+3. **Vysoké riziko:** export citlivých dat, změna údajů s finančním dopadem, žádost za jinou osobu, podezřelý kanál, kompromitovaný účet. Vyžádejte dodatečné ověření, zapojte privacy/security vlastníka a neposílejte data mimo bezpečný kanál.
+
+Pravidlo: ptejte se jen na takové ověření, které je nutné pro danou žádost. Když člověk chce odhlásit newsletter, nepotřebujete datum narození, fakturační adresu ani jméno jeho prvního křečka. Křeček si zaslouží soukromí taky.
+
+### BN.4 Triage: co udělat v prvních 24 hodinách
+
+První den nerozhoduje o dokonalé právní odpovědi. Rozhoduje o tom, jestli tým ví, co se děje.
+
+Postup pro prvních 24 hodin:
+
+1. Založte záznam v request trackeru.
+2. Potvrďte přijetí žádosti lidskou větou.
+3. Určete, jestli je žádost jasná, nebo potřebuje upřesnění.
+4. Zařaďte riziko ověření identity.
+5. Najděte dotčené systémy: produkt, CRM, fakturace, support, analytika, logy, newsletter, zálohy.
+6. Určete vlastníka odpovědi a technického vlastníka dat.
+7. Nastavte interní deadline dřív než zákonnou lhůtu.
+
+Praktický interní deadline: první odpověď do 1 pracovního dne, triage do 2 pracovních dnů, technický export nebo mazací plán do 10 pracovních dnů. Neuvádím to jako právní lhůtu, ale jako provozní rytmus, který malému týmu zabrání v režimu „někdo to snad řeší“.
+
+### BN.5 Export dat, který jde použít
+
+Export není skládka. Když uživateli pošlete tři CSV soubory bez vysvětlení, dva JSONy s interními názvy sloupců a screenshot databáze, technicky jste možná něco dodali. Prakticky jste vytvořili digitální únikovou místnost.
+
+Dobrý export obsahuje:
+
+- čitelný seznam kategorií údajů,
+- strukturovaný soubor pro strojové zpracování tam, kde to dává smysl,
+- lidské vysvětlení polí,
+- časové razítko exportu,
+- informaci, co v exportu není a proč,
+- bezpečný způsob předání,
+- dobu platnosti odkazu nebo archivu,
+- kontakt pro doplňující otázky.
+
+U B2B SaaSu rozlišujte osobní účet uživatele a data workspace/tenantu. Uživatel může mít právo na své osobní údaje, ale nemusí mít právo odnést obchodní data celé firmy. Proto je důležité mít role, audit log a jasné rozlišení: „vaše osobní údaje“ versus „data organizace, ke které máte nebo jste měl přístup“.
+
+### BN.6 Výmaz bez rozbití účetnictví a auditní stopy
+
+Výmaz není klávesa `DELETE FROM users WHERE email = ...` a modlitba. Některá data lze smazat hned, některá anonymizovat, některá ponechat kvůli právní povinnosti, smlouvě, obraně právních nároků nebo bezpečnostní auditní stopě. Důležité je umět to vysvětlit a mít předem popsané vrstvy.
+
+Vrstvy mazání:
+
+| Vrstva | Typický postup | Poznámka |
+|---|---|---|
+| Produktový profil | smazat nebo anonymizovat | uživatel už nemá účet ani osobní profil |
+| Obsah vytvořený uživatelem | smazat, převést vlastnictví, anonymizovat | záleží na tenant pravidlech |
+| Fakturace | ponechat nutné účetní záznamy | oddělit od produktového profilu |
+| Support | omezit a po retenci smazat | pozor na citlivé přílohy |
+| Analytika | agregovat nebo odstranit identifikátory | nejlepší je nesbírat detail zbytečně |
+| Logy | rotace, minimalizace, pseudonymizace | bezpečnostní logy mají vlastní režim |
+| Zálohy | neobnovovat smazaná data do produkce | popsat, jak se výmaz projeví po obnově |
+
+Při výmazu si vždy napište odpověď ve stylu: co jsme smazali, co jsme anonymizovali, co musíme ponechat a podle jakého důvodu, kdy se projeví retence v zálohách a koho kontaktovat při dotazu. Bez detailů, které by odhalily interní architekturu víc, než je nutné.
+
+### BN.7 Šablony odpovědí
+
+Krátké šablony pomáhají supportu odpovědět rychle a konzistentně. Upravte je podle konkrétní situace a kanálu.
+
+**Potvrzení přijetí:**
+
+```text
+Dobrý den,
+
+potvrzujeme přijetí vaší žádosti týkající se osobních údajů. Teď ji ověříme a zařadíme podle typu požadavku. Pokud budeme potřebovat upřesnění nebo ověření identity, ozveme se vám přes tento kanál.
+
+Děkujeme.
+```
+
+**Žádost o upřesnění:**
+
+```text
+Dobrý den,
+
+abychom žádost vyřídili správně a bezpečně, potřebujeme upřesnit, čeho se má týkat: přístup k údajům, oprava, výmaz, export, omezení zpracování, námitka, nebo odvolání souhlasu.
+
+Prosíme nezasílejte nám žádné zbytečné doklady ani citlivé údaje. Pokud bude potřeba ověření identity, pošleme vám bezpečný postup.
+```
+
+**Dokončení výmazu:**
+
+```text
+Dobrý den,
+
+vaši žádost jsme vyřídili. Údaje, které jsme mohli smazat nebo anonymizovat, už nejsou aktivně používané v produktu. Některé záznamy můžeme po omezenou dobu ponechat, pokud je to nutné například pro účetnictví, bezpečnost, řešení sporu nebo splnění právní povinnosti.
+
+Pokud chcete upřesnit konkrétní část odpovědi, napište nám prosím na tento e-mail.
+```
+
+**Codyho komentář:** Tyhle texty mají být normální lidská čeština. Pokud odpověď zní jako kouzlo vyvolávající paragrafového démona, uživatel jí nebude věřit. A support ji nebude chtít posílat.
+
+### BN.8 Interní runbook
+
+```markdown
+# Žádost subjektu údajů: [ID]
+
+## Příjem
+- Datum přijetí:
+- Kanál:
+- Žadatel:
+- Dotčený účet / tenant:
+- Typ žádosti:
+- Stav:
+- Vlastník odpovědi:
+- Technický vlastník:
+- Interní deadline:
+
+## Ověření
+- Riziko: nízké / střední / vysoké
+- Zvolený způsob ověření:
+- Co jsme nevyžádali, protože to není nutné:
+- Výsledek ověření:
+
+## Datová mapa
+- Produktová databáze:
+- Fakturace:
+- Support:
+- CRM:
+- Newsletter / marketing:
+- Analytika:
+- Logy:
+- Zálohy:
+- Dodavatelé:
+
+## Vyřízení
+- Co exportujeme:
+- Co opravujeme:
+- Co mažeme:
+- Co anonymizujeme:
+- Co ponecháváme a proč:
+- Jak předáme odpověď:
+- Kdo provedl kontrolu:
+
+## Uzavření
+- Datum odpovědi:
+- Odpověď odeslána přes:
+- Follow-up úkoly:
+- Poučení pro produkt / dokumentaci:
+```
+
+Runbook má žít vedle incidentů, access review a datové mapy. Když žádost ukáže, že nevíte, kde všude data jsou, není to chyba uživatele. Je to backlog položka pro tým.
+
+### BN.9 Checklist: žádosti bez chaosu
+
+- [ ] Máme jeden interní vstupní postup pro všechny kanály.
+- [ ] Support umí poznat žádost subjektu údajů i bez právních formulací.
+- [ ] Každá žádost má datum přijetí, vlastníka, stav a interní deadline.
+- [ ] Ověření identity odpovídá riziku a nevyžaduje zbytečné doklady.
+- [ ] Datová mapa pokrývá produkt, fakturaci, support, CRM, analytiku, logy, newsletter, zálohy a dodavatele.
+- [ ] Export je čitelný pro člověka a použitelný pro stroj, pokud to dává smysl.
+- [ ] Výmaz rozlišuje produktová data, účetnictví, bezpečnostní logy, support a zálohy.
+- [ ] Odpovědi jsou srozumitelné a neprozrazují zbytečné interní detaily.
+- [ ] Každá žádost končí follow-upem, pokud odhalila problém v produktu nebo dokumentaci.
+- [ ] Request tracker sám nesbírá zbytečně osobní údaje.
+
+### Mini cvičení: simulace žádosti za 50 minut
+
+1. Vymyslete fiktivní žádost: „Pošlete mi všechna moje data a smažte účet.“
+2. Najděte všechny systémy, kde by se údaje objevily.
+3. Rozhodněte, jak ověříte identitu bez zbytečných dokladů.
+4. Sepište, co by šlo exportovat, smazat, anonymizovat a ponechat.
+5. Napište finální odpověď uživateli v lidské češtině.
+6. Zapište tři produktové úpravy, které by další žádost zjednodušily.
+
+Výsledek má být praktický test reality. Pokud simulace trvá 50 minut a tým se třikrát zeptá „kde to vlastně máme uložené?“, e-book právě splnil svůj účel. Trochu bolestivě, ale účelově.
+
+### Zdroje k příloze BN
+
+- GDPR čl. 12 až 23 popisují transparentní komunikaci a práva subjektů údajů včetně přístupu, opravy, výmazu, omezení, přenositelnosti, námitky a pravidel pro rozhodování založené na automatizovaném zpracování: https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=CELEX%3A32016R0679
+- EDPB Guidelines 01/2022 k právu na přístup vysvětlují rozsah odpovědi, identifikaci žadatele, kopii údajů a praktické limity při vyřizování žádosti: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-012022-data-subject-rights-right-access_en
+- ÚOOÚ shrnuje práva subjektu údajů a prakticky rozlišuje přístup, opravu, výmaz, omezení zpracování, přenositelnost a námitku: https://uoou.gov.cz/pro-verejnost/prava-subjektu-udaju
+- EDPB Guidelines 07/2020 k pojmům správce a zpracovatel pomáhají určit, kdo žádost vyřizuje a kdo má pouze asistovat jako zpracovatel: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-072020-concepts-controller-and-processor-gdpr_en
+
+
 ## Pracovní log
+
+- 2026-08-24: Přidána příloha BN „Žádosti subjektů údajů bez support chaosu“ s typy žádostí, příjmovým formulářem, ověřením identity podle rizika, triage postupem, exportem, výmazem, šablonami odpovědí, runbookem, checklistem, mini simulací a ověřenými GDPR/EDPB/ÚOOÚ zdroji.
 
 - 2026-08-24: Přidána příloha BM „Privacy impact check bez právního paralyzéru“ s tříúrovňovým posouzením změn, deseti kontrolními otázkami, minimalizací dat, UX texty, šablonou privacy impact karty, checklistem, mini cvičením a ověřenými GDPR/EDPB/CNIL zdroji.
 
