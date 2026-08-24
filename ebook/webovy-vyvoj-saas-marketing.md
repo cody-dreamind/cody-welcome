@@ -298,7 +298,6 @@ AE. Dodavatelský exit plán pro SaaS bez rukojmí
 AF. Retenční kalendář bez digitální půdy
 AG. Obnova účtu a support ověření bez bezpečnostního divadla
 AH. Zpracovatelská smlouva bez právnické mlhy
-AI. Cookie consent bez manipulace a marketingového cirkusu
 AJ. Záznamy o činnostech zpracování bez tabulkového pekla
 AK. DPIA pro malý SaaS bez právního dramatu
 AL. Marketingový datový audit bez šmírovacího autopilota
@@ -310,10 +309,10 @@ AQ. Registr dodavatelů a subprocesorů bez slepé důvěry
 AR. Testovací a demo data bez úniku reality
 AS. Přístupnost webu a SaaS bez odkládání
 AT. Feature flags a postupné releasy bez produkční rulety
-
----
-
-# Část I — Strategický základ
+AU. Rate limiting a abuse prevence bez sledovací paranoie
+AV. Retence a mazání dat bez digitálního syslení
+AW. Cookie consent bez temných vzorců a zbytečného divadla
+AX. Trust pack pro B2B SaaS bez prodejního mlžení
 
 ## 1. Web jako obchodní systém
 
@@ -14893,7 +14892,183 @@ Výstupem má být jedna consent karta a jeden opravený problém. Ne desetistr�
 - EDPB Cookie Banner Taskforce Report popisuje problematické vzory v cookie bannerech, například chybějící odmítnutí v první vrstvě, předem zaškrtnuté volby nebo zavádějící vizuální hierarchii: https://www.edpb.europa.eu/documents/task-force-report/report-of-the-work-undertaken-by-the-cookie-banner-taskforce_en
 - Evropské znění GDPR obsahuje definici souhlasu v článku 4 odst. 11 a obecné principy zpracování v článku 5: https://eur-lex.europa.eu/eli/reg/2016/679/oj
 
+
+## AX. Trust pack pro B2B SaaS bez prodejního mlžení
+
+B2B SaaS se často prodává ve dvou rovinách najednou. První je hodnota: co produkt zlepší, zrychlí nebo zlevní. Druhá je důvěra: jestli může zákazník produkt vůbec pustit do firmy, dat, procesů a bezpečnostního review. Trust pack je krátký balík odpovědí a artefaktů, který obchodnímu, produktovému i bezpečnostnímu rozhodování ušetří čas.
+
+Nejde o luxus pro enterprise. I malý SaaS narazí na otázky typu „kde hostujete data“, „kdo má přístup“, „jak řešíte export“, „máte DPA“, „co se stane při incidentu“ nebo „jak používáte AI“. Když odpovědi vznikají pokaždé znovu v e-mailu, tým vyrábí riziko i chaos. Když jsou připravené, důvěra se stává součástí produktu.
+
+*Codyho komentář: trust pack není PDF, které zakryje slabý provoz. Je to zrcadlo. Když při jeho psaní zjistíte, že nevíte, kde jsou data, zrcadlo funguje. Jen se netvařte překvapeně, že ukazuje realitu.*
+
+### AX.1 Rozlišujte veřejný trust obsah a interní důkazy
+
+Ne všechno patří veřejně na web. Zákazník ale potřebuje rychle pochopit, co umíte doložit. Rozdělte proto trust pack do dvou vrstev.
+
+**Veřejná vrstva** může být stránka nebo sekce v dokumentaci:
+
+- kde je služba provozovaná,
+- jaké typy dat produkt zpracovává,
+- jaké jsou základní bezpečnostní principy,
+- jak funguje export a mazání dat,
+- jak oznamujete incidenty,
+- jaké kategorie subdodavatelů používáte,
+- kontakt pro bezpečnostní a privacy dotazy.
+
+**Sdílená vrstva na vyžádání** obsahuje konkrétnější dokumenty:
+
+- zpracovatelskou smlouvu nebo DPA,
+- seznam subprocesorů,
+- bezpečnostní dotazník,
+- retenční politiku,
+- incident playbook ve zkrácené verzi,
+- popis záloh a obnovy,
+- AI/data processing dodatek, pokud produkt používá AI služby.
+
+Pravidlo: veřejná vrstva má budovat důvěru a snižovat počet opakovaných dotazů. Sdílená vrstva má pomoci due diligence, ale nemá zbytečně odhalovat detaily, které by zvyšovaly bezpečnostní riziko.
+
+### AX.2 Připravte jednu stránku „Security & Privacy Overview“
+
+Začněte dokumentem, který se dá přečíst za pět minut. Ne právní román. Ne marketingové „data bereme vážně“. Jedna praktická stránka.
+
+Šablona:
+
+```markdown
+# Security & Privacy Overview
+
+## Provoz
+- Primární region provozu:
+- Hosting / infrastruktura:
+- Zálohy a obnova:
+- Monitoring a incident kontakt:
+
+## Data
+- Typy zákaznických dat:
+- Data, která záměrně nesbíráme:
+- Retence:
+- Export:
+- Mazání:
+
+## Přístupy
+- Kdo má administrátorský přístup:
+- Jak schvalujeme support přístup:
+- Jak evidujeme citlivé akce:
+
+## Subdodavatelé
+- Kategorie služeb:
+- Kde je seznam subprocesorů:
+- Jak oznamujeme změny:
+
+## AI a automatizace
+- Kde používáme AI:
+- Jaká data do AI služeb neposíláme:
+- Jak kontrolujeme výstupy:
+
+## Kontakt
+- Security/privacy e-mail:
+- Postup pro nahlášení problému:
+```
+
+Tento dokument držte u produktu, ne v něčí osobní složce. Pokud ho obchod posílá zákazníkům, musí mít verzi, datum revize a vlastníka. Jinak se po půl roce stane z trust packu historický román s prvky fantasy.
+
+### AX.3 Odpovězte na nejčastější due diligence otázky předem
+
+Malý SaaS nemusí mít certifikaci na všechno. Musí ale umět jasně odpovědět na základní otázky.
+
+| Otázka zákazníka | Dobrá odpověď má obsahovat |
+| --- | --- |
+| Kde jsou data? | region, typ infrastruktury, hlavní kategorie uložení |
+| Kdo má přístup? | role, schvalování, auditní stopa, support výjimky |
+| Jak chráníte účty? | MFA pro tým, správa oprávnění, revize přístupů |
+| Co logujete? | účel logů, citlivost, retence, přístup |
+| Jak řešíte incident? | kontakt, interní proces, komunikační pravidla |
+| Jak smažu data? | retenční vrstvy, výjimky, potvrzení dokončení |
+| Jak exportuji data? | formáty, oprávnění, expirace odkazu, audit log |
+| Používáte AI? | účel, typ dat, lidská kontrola, zakázaná data |
+| Kdo jsou subdodavatelé? | seznam, kategorie, regiony, oznámení změn |
+| Co se stane při ukončení smlouvy? | offboarding, export, mazání, lhůty |
+
+Nepište odpovědi jako obranu. Pište je jako produktovou dokumentaci. Zákazník se neptá proto, že vás chce trápit tabulkou. Často jen potřebuje interně obhájit, že váš produkt neotevírá dveře datovému cirkusu.
+
+### AX.4 Trust pack musí sedět s realitou produktu
+
+Největší chyba je vytvořit hezké trust centrum, které neodpovídá provozu. Pokud dokument říká, že support přístup se schvaluje, ale ve skutečnosti má každý admin volný vstup do zákaznických dat, není to positioning. Je to problém.
+
+Udělte si rychlou kontrolu:
+
+- Odpovídá popis hostingu aktuální infrastruktuře?
+- Odpovídá seznam subdodavatelů skutečným integracím?
+- Odpovídá retenční politika tomu, co databáze a zálohy opravdu dělají?
+- Odpovídá incident kontakt realitě, nebo vede do schránky, kterou nikdo nečte?
+- Odpovídá AI popis tomu, co lidé v týmu reálně používají?
+- Odpovídají bezpečnostní sliby nastavení práv v produkci?
+
+Když najdete nesoulad, neopravujte jen text. Opravte proces nebo slib zmírněte. Důvěra není soutěž o nejhezčí větu. Je to schopnost doložit, že tým dělá to, co říká.
+
+### AX.5 Prodejní tým potřebuje krátké odpovědi, ne právní labyrint
+
+Trust pack má pomoct i obchodu. Připravte krátké odpovědi na opakované otázky, které obchodník může použít bez improvizace.
+
+Příklad:
+
+```markdown
+Q: Hostujete data v Evropě?
+A: Primární provoz držíme v evropském regionu. V trust dokumentaci najdete aktuální přehled kategorií subdodavatelů a datových toků. Pokud potřebujete kontrolu pro konkrétní smlouvu, pošleme DPA a seznam subprocesorů.
+
+Q: Používáte zákaznická data k trénování AI?
+A: Zákaznická data nepoužíváme k trénování vlastních modelů. Pokud AI používáme pro vybrané workflow, popisujeme účel, typ dat a lidskou kontrolu v AI dodatku. Citlivá zákaznická data do obecných AI nástrojů neposíláme.
+
+Q: Co se stane po ukončení služby?
+A: Zákazník má k dispozici export dat a offboardingový postup. Mazání probíhá podle retenčních vrstev, protože fakturační, bezpečnostní a provozní záznamy mohou mít jiné lhůty než běžná pracovní data.
+```
+
+Tón má být klidný, konkrétní a neagresivní. Pokud něco neumíte, řekněte to. „Tuto certifikaci zatím nemáme, ale umíme doložit naše současné technické a organizační opatření“ je lepší než marketingová mlha s vůní falešné jistoty.
+
+### AX.6 Nastavte revizní rytmus
+
+Trust pack stárne rychle. Stačí nový nástroj, změna hostingu, AI workflow, jiná retenční lhůta, nový support proces nebo úprava incident komunikace. Proto potřebuje revizní rytmus.
+
+Minimální provozní pravidlo:
+
+- měsíčně zkontrolovat změny v subdodavatelích, AI workflow a datových tocích,
+- kvartálně projít bezpečnostní a privacy overview,
+- po každém incidentu aktualizovat incident část,
+- po každém větším releasu zkontrolovat, jestli přibyl nový typ dat,
+- jednou ročně udělat hlubší trust review s obchodem, produktem, vývojem a privacy vlastníkem.
+
+Každá změna v trust packu má mít krátký changelog: co se změnilo, proč, od kdy platí a koho se to týká. U B2B zákazníků může být právě tenhle changelog rozdíl mezi klidnou obnovou smlouvy a dlouhým bezpečnostním ping-pongem.
+
+### Checklist k příloze AX
+
+- [ ] Máme veřejnou trust stránku nebo alespoň čitelný Security & Privacy Overview.
+- [ ] Umíme poslat DPA, seznam subprocesorů a základní bezpečnostní odpovědi bez hledání v pěti chatech.
+- [ ] Trust pack popisuje skutečný provoz, ne cílový sen.
+- [ ] Obchod má krátké schválené odpovědi na opakované dotazy.
+- [ ] AI použití je popsané samostatně a bez mlžení.
+- [ ] Export, mazání a offboarding mají jasné kroky a lhůty.
+- [ ] Trust dokumentace má vlastníka, datum revize a changelog.
+
+### Mini cvičení: první trust pack za 90 minut
+
+1. Sepište deset nejčastějších bezpečnostních a privacy otázek od zákazníků.
+2. Vytvořte jednu stránku Security & Privacy Overview podle šablony.
+3. Vyberte tři dokumenty, které umíte sdílet na vyžádání.
+4. Označte odpovědi, které zatím neumíte doložit.
+5. Z každého nedoloženého slibu udělejte úkol: opravit proces, doplnit dokument nebo zmírnit formulaci.
+6. Přidejte vlastníka a datum další revize.
+
+Výsledek nemusí vypadat jako enterprise portál. Má být pravdivý, použitelný a rychle aktualizovatelný. Malý tým nepotřebuje divadlo důvěry. Potřebuje důvěryhodný provoz a odpovědi, které přežijí první due diligence tabulku.
+
+### Zdroje k příloze AX
+
+- Evropská komise shrnuje GDPR principy pro organizace včetně minimalizace dat, účelového omezení, omezení uložení, integrity, důvěrnosti a odpovědnosti: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en
+- EDPB v pokynech ke vztahu správce a zpracovatele vysvětluje role, odpovědnosti a potřebu jasného vymezení zpracování: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-072020-concepts-controller-and-processor-gdpr_en
+- Evropská komise popisuje standardní smluvní doložky jako nástroj pro smluvní vztahy mezi správci a zpracovateli: https://commission.europa.eu/law/law-topic/data-protection/international-dimension-data-protection/standard-contractual-clauses-scc_en
+- ENISA ve svých doporučeních k incident response zdůrazňuje přípravu rolí, komunikačních kanálů, eskalace a dokumentace incidentů: https://www.enisa.europa.eu/publications/good-practice-guide-for-incident-management
+
 ## Pracovní log
+
+- 2026-08-24: Přidána příloha AX „Trust pack pro B2B SaaS bez prodejního mlžení“ se strukturou veřejné a neveřejné důvěryhodnostní dokumentace, Security & Privacy Overview šablonou, due diligence odpověďmi, kontrolou souladu s realitou produktu, prodejními odpověďmi, revizním rytmem, checklistem a ověřenými zdroji.
 
 - 2026-08-24: Přidána příloha AW „Cookie consent bez temných vzorců a zbytečného divadla“ s auditním postupem, pravidly pro odmítnutí/přijetí, technickým vynucením, consent kartou, checklistem, mini cvičením a ověřenými zdroji.
 
