@@ -309,6 +309,7 @@ AP. Bezpečnostní hlavičky bez cargo cult konfigurace
 AQ. Registr dodavatelů a subprocesorů bez slepé důvěry
 AR. Testovací a demo data bez úniku reality
 AS. Přístupnost webu a SaaS bez odkládání
+AT. Feature flags a postupné releasy bez produkční rulety
 
 ---
 
@@ -14208,8 +14209,186 @@ Výstupem není certifikát dokonalosti. Výstupem je konkrétní opravená bari
 - W3C uvádí WCAG 2.2 jako W3C Recommendation a doporučuje jej pro maximální budoucí použitelnost přístupnostních prací: https://www.w3.org/TR/wcag/
 - AccessibleEU popisuje EN 301 549 jako harmonizovaný standard pro požadavky na přístupnost ICT produktů a služeb, který podporuje evropskou směrnici o přístupnosti webů a mobilních aplikací veřejného sektoru: https://accessible-eu-centre.ec.europa.eu/content-corner/digital-library/en-3015492021-accessibility-requirements-ict-products-and-services_en
 
+
+## AT. Feature flags a postupné releasy bez produkční rulety
+
+Malý SaaS tým často nepotřebuje složitý release vlak, sedm prostředí a kalendář plný rituálů. Potřebuje schopnost dostat změnu do produkce bezpečně, zapnout ji jen tam, kde dává smysl, rychle ji vypnout při problému a po ověření po sobě uklidit. Feature flags jsou přesně ten typ nástroje, který může být buď elegantní pojistka, nebo nový druh chaosu s hezkým názvem.
+
+Feature flag je rozhodnutí v běžícím systému: tato funkce je pro tuto situaci zapnutá, vypnutá, omezená nebo dostupná jen pro vybranou skupinu. Nejde jen o podmínku v kódu. Jde o produktové, provozní a datové rozhodnutí. Když se s flags zachází lehkovážně, vznikne „toggle debt“: staré podmínky, nejasní vlastníci, neotestované kombinace a funkce, které nikdo neumí spolehlivě zapnout ani smazat. Takový systém pak nepřipomíná řízený release, ale vánoční světýlka v serverovně. Bliká to, ale nikdo neví proč.
+
+Privacy-first pohled je jednoduchý: flag má snižovat riziko pro uživatele, ne vytvářet nový tajný profilovací systém. Pokud kvůli postupnému releasu začnete sbírat detailní identitu, chování, segmenty a historii kliků bez jasného účelu, jen jste vyměnili release riziko za datové riziko. Gratuluji, našli jsme horší obchod.
+
+### AT.1 Rozlišujte typ flagu podle účelu
+
+Ne každý flag je stejný. V praxi pomáhá rozdělit je podle toho, proč existují:
+
+- **Release flag:** schová nedokončenou nebo rizikovou funkci, aby kód mohl být nasazen dřív než produktové spuštění.
+- **Ops flag:** umožní rychle vypnout drahou, pomalou nebo rizikovou část systému při incidentu.
+- **Permission flag:** zpřístupní funkci konkrétnímu tarifu, roli, workspace nebo beta skupině.
+- **Experiment flag:** rozdělí provoz mezi varianty kvůli ověření hypotézy.
+- **Migration flag:** řídí přechod mezi starým a novým modelem dat, API nebo výpočtem.
+
+Pro každý typ platí jiné pravidlo životnosti. Release flag má zmizet rychle. Ops flag může zůstat déle, ale musí mít jasný runbook. Permission flag se často stane součástí produktu, takže má patřit do modelu oprávnění, ne do náhodné podmínky v komponentě. Experiment flag má mít hypotézu, konec a rozhodnutí. Migration flag má skončit po dokončené migraci a ověření dat.
+
+*Codyho komentář: flag bez typu je jako krabice ve sklepě s nápisem „různé“. Všichni tuší, že je tam problém, ale nikdo nechce být ten hrdina s baterkou.*
+
+### AT.2 Každý flag potřebuje vlastníka, expiraci a rollback plán
+
+Feature flag není „dočasná věc v kódu“. Je to malý provozní závazek. Proto má mít kartu stejně jako integrace, metrika nebo dodavatel.
+
+Minimum pro každý flag:
+
+- název bez hádanek, například `billing_invoice_pdf_v2`, ne `newThing`,
+- typ flagu,
+- vlastník,
+- účel a očekávaný výsledek,
+- výchozí stav pro nové účty,
+- pravidlo zapnutí a vypnutí,
+- datum revize nebo expirace,
+- co se stane při rollbacku,
+- jaké logy a metriky se sledují,
+- jaká data se kvůli flagu používají.
+
+Rollback plán musí být konkrétní. Nestačí „vypneme flag“. U datových změn potřebujete vědět, jestli nová verze už zapsala data jinak, jestli stará verze umí nový stav přečíst a jestli vypnutí flagu nepřeruší rozpracované akce uživatelů. Nejrizikovější nejsou tlačítka. Nejrizikovější jsou změny v oprávněních, fakturaci, mazání, exportu, notifikacích a synchronizaci s externími systémy.
+
+### AT.3 Postupný release dělejte podle rizika, ne podle procent
+
+„Zapneme to na 10 % uživatelů“ zní vědecky. Někdy ale jen matematicky rozprostřete problém mezi lidi, kteří si ho nezasloužili. Lepší je postupovat podle rizikových vrstev.
+
+Doporučený postup:
+
+1. **Interní účty:** tým ověří základní cestu, logy, chybové stavy a vypnutí flagu.
+2. **Testovací zákazník nebo beta skupina:** ideálně lidé, kteří rozumí, že funkce je v řízeném ověření.
+3. **Nízkorizikový segment:** účty bez kritických integrací, velkých datových objemů nebo smluvních SLA.
+4. **Hlavní segment:** širší zapnutí až po ověření signálů.
+5. **Citlivé segmenty:** větší zákazníci, regulované oblasti nebo účty s vyšším dopadem až po explicitním review.
+
+Procenta se hodí až tehdy, když segmentace nevyžaduje osobní profilování a když máte dost provozu, aby čísla něco znamenala. U malého B2B SaaSu je často lepší ručně vybraná beta skupina než „statistická magie“ na třiceti uživatelích. To není experiment. To je horoskop s dashboardem.
+
+### AT.4 Měřte agregované signály, ne detailní šmírování
+
+Při postupném releasu potřebujete vědět, jestli nová funkce funguje. To ale neznamená, že musíte sbírat všechno o každém uživateli. Měřte hlavně signály, které vedou k rozhodnutí:
+
+- chybovost nové cesty,
+- latence nebo spotřeba zdrojů,
+- dokončení klíčové akce,
+- počet support dotazů,
+- počet ručních zásahů,
+- počet vypnutí nebo návratů na starou variantu,
+- kvalita dat po migraci.
+
+U experimentů si předem napište hypotézu a rozhodovací pravidlo. Například: „Nový onboarding necháme zapnutý, pokud během dvou týdnů nezvýší počet support dotazů a zlepší dokončení prvního projektu o smysluplný rozdíl.“ Pokud pravidlo nemáte, budete si po kampani jen prohlížet grafy a vybírat ten, který nejlépe podporuje oblíbený názor v týmu. To je sice lidské, ale produktově poněkud drahé.
+
+Privacy-first měření preferuje agregaci, krátkou retenci a minimum identifikátorů. Pokud potřebujete konzistentně zařadit účet do varianty, často stačí stabilní interní ID účtu nebo workspace, ne marketingový identifikátor napříč webem. A pokud jde o citlivou funkci, experimentování na uživatelích bez jasného vysvětlení může být špatný nápad i tehdy, když je technicky možné.
+
+### AT.5 Feature flags nesmí obejít oprávnění
+
+Permission flag není bezpečnostní model. Pokud funkce pracuje s citlivými daty, skutečná kontrola musí být na serveru a v oprávněních, ne jen v UI. Skrytý button není ochrana. Je to dekorace pro útočníka s DevTools.
+
+Praktická pravidla:
+
+- UI flag může skrýt nebo ukázat cestu, ale API musí samo ověřit oprávnění.
+- Admin přepínače musí mít audit log: kdo změnil co, kdy a proč.
+- Kritické flagy mají vyžadovat silnější oprávnění než běžná konfigurace účtu.
+- Stav flagu se nemá posílat do klienta, pokud zbytečně odhaluje interní roadmapu, tarify nebo bezpečnostní logiku.
+- Support tým má měnit jen flagy, které patří do support procesu, ne provozní vypínače celé aplikace.
+
+Zvlášť opatrní buďte u funkcí jako export dat, mazání účtu, změna rolí, billing, veřejné sdílení, AI zpracování obsahu nebo integrace třetích stran. Tam flag neznamená jen „nová obrazovka“. Znamená změnu datového toku.
+
+### AT.6 Uklízejte flagy jako součást dokončení
+
+Done neznamená „funkce je zapnutá“. Done znamená: rozhodli jsme, flag jsme odstranili nebo převedli do trvalé konfigurace, testy odpovídají novému stavu a dokumentace nelže.
+
+Každý sprint nebo měsíční release review by měl obsahovat krátkou otázku: které flagy můžeme smazat? Staré flagy zvyšují složitost testování, čitelnost kódu i riziko incidentu. Nejhorší jsou kombinace starých release flagů a nových permission flagů, protože tým pak netuší, která větev kódu je vlastně živá.
+
+Jednoduchý úklidový rytmus:
+
+- jednou týdně projít flagy s expirací v příštích 14 dnech,
+- jednou měsíčně smazat ukončené release a experiment flagy,
+- po každé migraci odstranit starou větev kódu,
+- před větším refaktorem zkontrolovat, jestli ho nekomplikuje historický flag,
+- po incidentu ověřit, jestli ops flag nezůstal trvale vypnutý bez rozhodnutí.
+
+### AT.7 Šablona: karta feature flagu
+
+```markdown
+# Feature flag: [název]
+
+## Účel
+- Typ flagu:
+- Proč existuje:
+- Jaký výsledek ověřujeme:
+- Co se stane, když flag nepoužijeme:
+
+## Vlastnictví
+- Vlastník:
+- Tým:
+- Datum vytvoření:
+- Datum revize nebo expirace:
+
+## Zapnutí
+- Výchozí stav:
+- Kdo může flag změnit:
+- Pro koho bude zapnutý jako první:
+- Jak poznáme, že můžeme pokračovat:
+
+## Rollback
+- Jak flag vypnout:
+- Co se stane s rozpracovanými akcemi:
+- Jak ověříme návrat do bezpečného stavu:
+- Koho informovat:
+
+## Data a privacy
+- Jaká data flag používá:
+- Vzniká nový datový tok:
+- Posíláme něco externímu dodavateli:
+- Jak dlouho držíme experimentální nebo rollout logy:
+
+## Úklid
+- Kdy flag smažeme:
+- Jaké testy upravíme:
+- Jakou dokumentaci aktualizujeme:
+```
+
+### AT.8 Checklist: release bez produkční rulety
+
+- [ ] Každý nový flag má typ, vlastníka a datum revize.
+- [ ] Název flagu vysvětluje oblast a účel bez interních vtipů.
+- [ ] Výchozí stav je bezpečný pro nové i existující účty.
+- [ ] API a backend oprávnění fungují nezávisle na UI flagu.
+- [ ] Rollout postupuje podle rizikových segmentů, ne jen podle náhodného procenta.
+- [ ] Kritické změny mají rollback plán včetně dopadu na data.
+- [ ] Metriky releasu jsou agregované a vedou ke konkrétnímu rozhodnutí.
+- [ ] Admin změny flagů se logují a mají omezená oprávnění.
+- [ ] Experimenty mají hypotézu, konec a pravidlo vyhodnocení.
+- [ ] Staré release, experiment a migration flagy se mažou jako součást dokončení.
+- [ ] Dokumentace, support poznámky a onboarding odpovídají aktuálnímu stavu funkce.
+- [ ] Nový flag neotevírá zbytečný datový tok do externí služby.
+
+### Mini cvičení: flag review za 45 minut
+
+Vezměte jeden existující nebo plánovaný flag a projděte ho jako malý release audit:
+
+1. Napište jeho typ, účel, vlastníka a datum expirace.
+2. Popište první skupinu účtů, kde bude zapnutý, a proč právě tam.
+3. Určete tři signály, které rozhodnou o pokračování nebo rollbacku.
+4. Zkontrolujte, jestli flag nemění oprávnění, export, mazání, billing nebo externí integrace.
+5. Napište přesný krok vypnutí a ověření bezpečného stavu.
+6. Rozhodněte, kdy flag smažete nebo převedete do trvalého produktového nastavení.
+
+Výstupem má být jedna vyplněná karta feature flagu a jeden konkrétní úkol: upravit implementaci, doplnit logování, omezit oprávnění, napsat rollback postup nebo naplánovat odstranění starého flagu.
+
+### Zdroje k příloze AT
+
+- Martin Fowler popisuje feature toggles včetně release, experiment, ops a permission toggle kategorií a upozorňuje na rozdíl mezi krátkodobými a dlouhodobými flagy: https://martinfowler.com/articles/feature-toggles.html
+- OpenFeature definuje vendor-agnostickou specifikaci a API pro feature flagging, což je užitečné při návrhu přenositelného řešení bez uzamčení u jednoho dodavatele: https://openfeature.dev/
+- CNCF uvádí OpenFeature jako incubating projekt a popisuje jeho roli ve standardizaci feature flag managementu: https://www.cncf.io/projects/openfeature/
+- OWASP Logging Cheat Sheet doporučuje konzistentní aplikační logování bezpečnostních událostí a zároveň upozorňuje, že logy mohou obsahovat osobní nebo citlivé informace a musí být chráněné: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+- Evropská komise shrnuje princip data protection by design jako povinnost promýšlet technická a organizační opatření už při návrhu zpracování: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
+
 ## Pracovní log
 
+- 2026-08-24: Přidána příloha AT „Feature flags a postupné releasy bez produkční rulety“ s typy flagů, vlastníkem a expirací, rizikovým rolloutem, privacy-first měřením, server-side oprávněními, úklidem flagů, šablonou, checklistem, mini cvičením a ověřenými zdroji.
 - 2026-08-24: Přidána příloha AS „Přístupnost webu a SaaS bez odkládání“ s praktickým sprintem pro kritické uživatelské cesty, kartou změny, prioritizací bariér, privacy-first kontrolou, mini cvičením a ověřenými EU/W3C zdroji.
 - 2026-08-24: Přidána příloha AR „Testovací a demo data bez úniku reality“ s pravidly pro prostředí, syntetická data, anonymizaci, demo scénáře, screenshoty/logy/AI vstupy, kartou testovacích dat, checklistem, mini cvičením a ověřenými zdroji.
 - 2026-08-23: Přidána příloha AQ „Registr dodavatelů a subprocesorů bez slepé důvěry“ s rolemi dodavatelů, inventářem nástrojů, prioritizací rizika, otázkami pro dodavatele, procesem změn subprocesorů, kartou dodavatele, checklistem, mini cvičením a ověřenými zdroji.
