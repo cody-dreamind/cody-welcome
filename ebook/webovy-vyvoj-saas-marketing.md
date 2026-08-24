@@ -17377,7 +17377,211 @@ Tímhle nevznikne dokonalý bezpečnostní program. Vznikne první důkaz, že t
 - ENISA „Data Protection Engineering“ propojuje bezpečnostní a privacy opatření s technickým návrhem systémů: https://www.enisa.europa.eu/sites/default/files/publications/ENISA%20Report%20-%20Data%20Protection%20Engineering.pdf
 - OWASP ASVS obsahuje praktické požadavky na autentizaci, session management, access control a auditovatelnost aplikací: https://owasp.org/www-project-application-security-verification-standard/
 
+## BK. Status page a incident komunikace bez paniky a mlžení
+
+Když SaaS spadne, zákazník většinou nepotřebuje román. Potřebuje vědět tři věci: jestli se ho problém týká, co má dělat teď a kdy dostane další informaci. Status page proto není marketingová stránka pro dobré počasí. Je to krizový nástroj, který má fungovat i ve chvíli, kdy tým zrovna nemá náladu psát krásné věty, protože produkce hoří a monitoring dělá zvuky, které by měly být v hororu.
+
+Privacy-first incident komunikace má ještě jednu vrstvu: nesmí kvůli transparentnosti zbytečně odhalit zákaznická data, interní architekturu, bezpečnostní detaily nebo identitu konkrétních lidí. Transparentnost neznamená „vyklopíme všechno“. Znamená „řekneme pravdu v rozsahu, který lidem pomůže a nezvětší škodu“.
+
+*Codyho komentář: nejlepší status page je ta, kterou nemusíte často používat. Druhá nejlepší je ta, která nevypadá, jako by ji během incidentu psal právník, vývojář a vyděšený obchodník střídavě jednou rukou.*
+
+### BK.1 Rozdělte provozní incident a osobní datový breach
+
+Ne každý výpadek je porušení zabezpečení osobních údajů. A ne každý bezpečnostní incident znamená, že musíte hned poslat veřejný status všem zákazníkům. Největší chaos vzniká, když tým míchá dohromady tři různé otázky:
+
+1. **Dostupnost:** funguje služba, API, přihlášení, e-mailing, platby nebo zákaznická administrace?
+2. **Integrita:** jsou data správná, kompletní a nedošlo k jejich nechtěné změně?
+3. **Důvěrnost:** mohlo dojít k neoprávněnému přístupu, úniku nebo zveřejnění osobních či obchodně citlivých dat?
+
+Pro status page často stačí první dvě otázky. Pro právní a privacy postup je kritická hlavně třetí. GDPR čl. 33 řeší oznámení porušení zabezpečení osobních údajů dozorovému úřadu bez zbytečného odkladu a pokud možno do 72 hodin od zjištění, pokud je pravděpodobné riziko pro práva a svobody lidí. Čl. 34 navazuje komunikací směrem k dotčeným osobám v případě vysokého rizika. To není kosmetická poznámka do footeru, ale procesní hranice, kterou musí tým znát před incidentem.
+
+Praktický minimální model:
+
+- **Provozní incident:** řeší dostupnost, výkon, chyby, zpoždění a degradaci služby.
+- **Bezpečnostní incident:** řeší podezření na zneužití účtu, zranitelnost, neoprávněný přístup nebo kompromitaci systému.
+- **Personal data breach:** řeší porušení bezpečnosti, které vede k náhodnému nebo protiprávnímu zničení, ztrátě, změně, neoprávněnému zpřístupnění nebo přístupu k osobním údajům.
+
+Jedna událost může spadat do více kategorií. Výpadek databáze může být jen provozní problém. Chybný export faktur poslaný špatnému zákazníkovi může být datový breach i bez výpadku. A kompromitovaný admin účet je bezpečnostní incident, dokud nezjistíte rozsah; potom se může stát i osobním datovým breachem.
+
+### BK.2 Status page pište podle dopadu, ne podle interní architektury
+
+Zákazníkovi je většinou jedno, že „replica lag v regionálním PostgreSQL clusteru způsobuje front pressure v worker queue“. Pokud není databázový fajnšmekr, chce vědět, že exporty běží pomaleji, nové reporty se zpožďují a data se neztratila.
+
+Status update má mít jednoduchou strukturu:
+
+- **Co se děje:** konkrétní projev z pohledu zákazníka.
+- **Koho se to týká:** všichni, část EU zákazníků, jen jeden modul, jen API, jen nové registrace.
+- **Dopad na data:** žádný známý dopad, probíhá ověření, pozastavené zpracování, riziko duplicity, riziko zpoždění.
+- **Co děláme:** vyšetřujeme, nasazujeme opravu, vracíme rollback, obnovujeme frontu, kontaktujeme dodavatele.
+- **Další update:** konkrétní čas nebo pravidlo, například „další aktualizace do 30 minut“.
+
+Nepoužívejte formulace, které uklidňují bez obsahu: „usilovně pracujeme“, „situaci monitorujeme“, „omlouváme se za nepříjemnosti“. Jedna věta omluvy je v pořádku. Pět vět omluvy místo faktů je mlha. A mlha patří do Krkonoš, ne do incident komunikace.
+
+### BK.3 Minimální sada komponent na status page
+
+Malý SaaS nepotřebuje status page s dvaceti komponentami, pokud má reálně tři kritické části. Příliš detailní stránka často odhalí interní architekturu a zároveň mate zákazníky. Začněte podle uživatelských cest:
+
+| Komponenta | Co zákazník chápe | Typické metriky uvnitř týmu |
+|---|---|---|
+| Webová aplikace | Lze se přihlásit a pracovat | dostupnost, chybovost, latence |
+| API | Integrace mohou volat službu | 5xx, timeouty, rate limit chyby |
+| Exporty a importy | Data se dají přenášet | délka fronty, selhání jobů |
+| E-mailové notifikace | Odcházejí pozvánky a upozornění | bounce, delay, provider status |
+| Platby a fakturace | Lze zaplatit a stáhnout fakturu | webhooky, payment intents, invoice errors |
+| Support a dokumentace | Lze získat pomoc | dostupnost helpdesku, formulář, knowledge base |
+
+Interní monitoring může být mnohem detailnější. Veřejná status page má mluvit jazykem zákazníka. Pokud provozujete EU-first produkt, zvažte také oddělení regionů jen tehdy, když je zákazníkům opravdu užitečné. „EU region“ dává smysl. „node-17b“ ne.
+
+### BK.4 Připravte šablony dřív, než je budete potřebovat
+
+Incident není ideální čas na hledání slov. Připravte si krátké šablony, které tým jen doplní. Ne proto, že by šablona řešila incident za vás. Protože brání tomu, aby první veřejná věta vznikla ve stresu jako poetická směs technického detailu a právního úniku.
+
+#### První oznámení
+
+```markdown
+Vyšetřujeme problém s [část služby].
+
+Dopad: [co zákazník může pozorovat].
+Rozsah: [koho se to pravděpodobně týká / co zatím nevíme].
+Data: [žádný známý dopad / dopad ověřujeme / specifický dopad].
+Další update: do [čas].
+```
+
+#### Průběžný update
+
+```markdown
+Stav: [vyšetřujeme / našli jsme příčinu / nasazujeme opravu / obnovujeme službu].
+
+Co víme: [stručný fakt].
+Co děláme: [konkrétní krok].
+Co má dělat zákazník: [nic / obejít přes X / počkat s Y / kontaktovat support].
+Další update: do [čas].
+```
+
+#### Vyřešeno
+
+```markdown
+Incident je vyřešený.
+
+Období dopadu: [čas od–do].
+Dopad: [co se stalo z pohledu zákazníka].
+Data: [výsledek kontroly dopadu na data].
+Následný krok: [postmortem / technické opatření / kontaktování dotčených zákazníků].
+```
+
+U bezpečnostních nebo privacy incidentů šablona nestačí. Tam potřebujete interní eskalační cestu: kdo rozhoduje o právním posouzení, kdo kontaktuje DPO nebo právníka, kdo komunikuje se zákazníky, kdo dokumentuje fakta a kdo má právo publikovat veřejnou informaci.
+
+### BK.5 Incident log je interní důkaz, ne literární žánr
+
+Veřejná komunikace má být stručná. Interní incident log má být přesný. Ne kvůli byrokracii, ale kvůli tomu, že po třech hodinách incidentu si tým nebude pamatovat, jestli se rollback spustil v 10:14 nebo 10:41. A přesně tyhle detaily pak rozhodují o tom, jestli dokážete doložit průběh, dopad a nápravná opatření.
+
+Do interního logu zapisujte:
+
+- čas zjištění a zdroj signálu,
+- jméno incident leadu,
+- rozhodnutí a kdo je schválil,
+- změny v produkci, rollbacky a vypnutí funkcí,
+- dotčené zákaznické cesty,
+- předběžné a finální hodnocení dopadu na data,
+- komunikaci se zákazníky, dodavateli a případně úřady,
+- následná opatření a vlastníky.
+
+GDPR výslovně požaduje dokumentovat porušení zabezpečení osobních údajů včetně faktů, dopadů a přijatých opatření. I když nakonec událost nebude reportovatelná, dobrý interní záznam pomůže ukázat, proč jste se tak rozhodli. „Mysleli jsme si to v chatu“ není dokumentace. Je to přání oblečené za proces.
+
+### BK.6 Privacy-first pravidla pro veřejné postmortem
+
+Postmortem má zlepšit důvěru a provoz, ne poskytnout útočníkům návod nebo zákazníkům zbytečný strach. Publikujte hlavně dopad, časovou osu, příčinu v rozumné abstrakci a opatření. Vynechte konkrétní tajemství, interní IP adresy, názvy slabě chráněných systémů, osobní údaje zaměstnanců a detaily, které by šly snadno zneužít.
+
+Dobré veřejné postmortem obsahuje:
+
+- krátké shrnutí bez eufemismů,
+- časovou osu s hlavními milníky,
+- dopad na zákaznické cesty,
+- informaci o dopadu na data nebo o dokončeném ověření,
+- příčinu popsanou dostatečně konkrétně pro důvěru,
+- opatření, která už jsou hotová,
+- opatření, která mají termín a vlastníka,
+- kontakt pro dotazy.
+
+Špatné postmortem obsahuje hlavně pasivní věty: „došlo k problému“, „některé systémy byly ovlivněny“, „byla přijata opatření“. Kým? Jaká? Kdy? Pokud text nejde přeložit do konkrétních úkolů, je to jen reputační kouřostroj.
+
+### BK.7 Šablona: incident karta
+
+```markdown
+# Incident: [název]
+
+## Klasifikace
+- Typ: provozní / bezpečnostní / personal data breach / dodavatelský
+- Závažnost: nízká / střední / vysoká / kritická
+- Incident lead:
+- Začátek dopadu:
+- Zjištěno v:
+- Vyřešeno v:
+
+## Dopad
+- Dotčené služby:
+- Dotčení zákazníci nebo segment:
+- Dopad na dostupnost:
+- Dopad na integritu dat:
+- Dopad na důvěrnost dat:
+- Dočasné omezení pro zákazníky:
+
+## Komunikace
+- Veřejný status: ano/ne
+- Zákaznický e-mail: ano/ne
+- Support briefing: ano/ne
+- Právní/DPO eskalace: ano/ne
+- Další update nejpozději:
+
+## Časová osa
+- [čas] Signál:
+- [čas] Rozhodnutí:
+- [čas] Akce:
+- [čas] Výsledek:
+
+## Nápravná opatření
+- Hotovo:
+- Do 7 dnů:
+- Do 30 dnů:
+- Co záměrně neděláme:
+```
+
+### BK.8 Checklist: status page bez paniky
+
+- [ ] Máme definované komponenty podle zákaznických cest, ne podle interních serverů.
+- [ ] Tým ví, kdy publikovat veřejný status a kdy nejdřív eskalovat bezpečnostní posouzení.
+- [ ] Každý status update obsahuje dopad, rozsah, stav dat a čas další aktualizace.
+- [ ] Máme šablony pro první oznámení, průběžný update, vyřešení a postmortem.
+- [ ] Interní incident log zachycuje časy, rozhodnutí, dopad, komunikaci a nápravná opatření.
+- [ ] U každého incidentu oddělujeme dostupnost, integritu a důvěrnost dat.
+- [ ] Veřejné texty neobsahují zbytečné osobní údaje, interní tajemství ani zneužitelné detaily.
+- [ ] Support dostane krátký briefing dřív, než mu zákazníci začnou posílat screenshoty paniky.
+- [ ] Po incidentu vznikne alespoň jedno opatření s vlastníkem a termínem.
+- [ ] Ověřili jsme, jestli incident nespustil povinnosti podle GDPR nebo smluv se zákazníky.
+
+### Mini cvičení: status page za 50 minut
+
+1. Napište pět zákaznických cest, které musí být na status page srozumitelné.
+2. Ke každé cestě přiřaďte interní monitoring, ale veřejně používejte zákaznický název.
+3. Připravte tři šablony: první oznámení, průběžný update a vyřešeno.
+4. Vytvořte incident kartu pro modelový výpadek přihlášení na 30 minut.
+5. Doplňte větu o dopadu na data: co víte, co ověřujete a co zatím netvrdíte.
+6. Určete člověka, který má právo publikovat status, a náhradníka.
+7. Po cvičení smažte všechny zbytečné detaily, které zákazník nepotřebuje.
+
+Výsledek má být praktický: když zítra spadne přihlášení, tým nebude vymýšlet proces během požáru. Jen otevře šablonu, doplní fakta a komunikuje včas. Což je přesně ten nudný druh profesionality, který zákazníci milují hlavně ve chvíli, kdy něco nefunguje.
+
+### Zdroje k příloze BK
+
+- GDPR čl. 33 a 34 stanovují pravidla pro oznámení porušení zabezpečení osobních údajů dozorovému úřadu a komunikaci dotčeným osobám: https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32016R0679
+- EDPB Guidelines 9/2022 shrnují postupy pro oznámení personal data breach podle GDPR: https://www.edpb.europa.eu/documents/guideline/guidelines-92022-on-personal-data-breach-notification-under-gdpr_en
+- EDPB Guidelines 01/2021 uvádějí praktické příklady posuzování a oznamování porušení zabezpečení osobních údajů: https://www.edpb.europa.eu/documents/guideline/guidelines-012021-on-examples-regarding-personal-data-breach-notification_en
+- ENISA Good Practice Guide for Incident Management popisuje incident handling proces včetně detekce, triage, řešení, uzavření a post-analýzy: https://www.enisa.europa.eu/publications/good-practice-guide-for-incident-management
+- ENISA Cybersecurity Guide for SMEs doporučuje malým a středním firmám praktická bezpečnostní opatření včetně incident response přípravy: https://www.enisa.europa.eu/publications/cybersecurity-guide-for-smes
+
 ## Pracovní log
+
+- 2026-08-24: Přidána příloha BK „Status page a incident komunikace bez paniky a mlžení“ s rozlišením provozního incidentu, bezpečnostního incidentu a personal data breach, šablonami status updatů, incident kartou, postmortem pravidly, checklistem, mini cvičením a ověřenými EU/EDPB/ENISA zdroji.
 
 - 2026-08-24: Přidána příloha BJ „Kvartální access review bez bezpečnostního divadla“ s mapou přístupových vrstev, přístupovou kartou, pravidly schvalování, kvartálním rituálem, offboarding testem, rizikovou maticí, checklistem, mini cvičením a ověřenými zdroji.
 
