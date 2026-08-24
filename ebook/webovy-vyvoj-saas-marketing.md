@@ -308,6 +308,7 @@ AO. Zálohy a obnova bez falešného pocitu bezpečí
 AP. Bezpečnostní hlavičky bez cargo cult konfigurace
 AQ. Registr dodavatelů a subprocesorů bez slepé důvěry
 AR. Testovací a demo data bez úniku reality
+AS. Přístupnost webu a SaaS bez odkládání
 
 ---
 
@@ -14056,8 +14057,160 @@ Výstupem není dokonalé testovací království. Výstupem je první bezpečn�
 - ENISA report „Data Pseudonymisation: Advanced Techniques and Use Cases“ zdůrazňuje, že pseudonymizace není univerzální řešení a má být kombinovaná s posouzením rizik: https://www.enisa.europa.eu/publications/data-pseudonymisation-advanced-techniques-and-use-cases
 
 
+
+## AS. Přístupnost webu a SaaS bez odkládání
+
+Přístupnost se v malých týmech často odkládá, protože zní jako velký právní a designový projekt. A protože každý velký projekt má v kalendáři krásné místo: „někdy po launchi“. Jenže přístupnost není samostatná dobročinná nadstavba. Je to kvalita produktu. Pokud se člověk nedostane přes klávesnici k objednávce, nepochopí chybu ve formuláři, nevidí kontrast textu nebo se ztratí ve fakturaci, není to jen problém „edge case“. Je to rozbitý obchodní proces s hezčím názvem.
+
+V evropském kontextu navíc přístupnost přestává být jen interní standard dobré práce. European Accessibility Act se týká vybraných produktů a služeb v EU a v Česku je transponovaný zákonem č. 424/2023 Sb., který nabyl účinnosti 28. června 2025. Ne každý malý web spadne automaticky do stejného režimu, ale čekat, až právník potvrdí, že opravdu musíte, je slabá strategie. Přístupný web je rychlejší na použití, srozumitelnější, lépe testovatelný a obvykle i lépe konvertuje. Ano, přístupnost je tajně UX disciplína v kabátu regulace.
+
+*Codyho komentář: když někdo řekne „naši uživatelé asistivní technologie nepoužívají“, většinou tím myslí „nikdy jsme se nezeptali a naše rozhraní jim to možná ani nedovolilo“. To je výzkum asi jako hádat počasí podle nálady kávovaru.*
+
+### AS.1 Udělejte z přístupnosti běžnou součást kvality
+
+Nezačínejte obřím auditem o 160 stránkách. Začněte definicí minimální kvality, kterou musí splnit každá nová stránka, formulář a produktová změna. Přístupnost má být součástí design review, code review, QA a release checklistu, ne oddělený rituál těsně před spuštěním.
+
+Praktické minimum pro malý tým:
+
+- stránka jde ovládat klávesnicí bez pasti,
+- interaktivní prvky mají viditelný focus,
+- formuláře mají labely, popisy a srozumitelné chyby,
+- text má dostatečný kontrast a rozumnou velikost,
+- obsah dává smysl při zvětšení a na mobilu,
+- obrázky mají smysluplný alternativní text nebo jsou správně dekorativní,
+- nadpisy tvoří logickou strukturu,
+- stavové zprávy nejsou dostupné jen barvou, ikonou nebo animací.
+
+Tohle není náhrada za odborný audit. Je to provozní pojistka, aby tým nevyráběl nové dluhy každý týden. Pokud přístupnost řešíte až po dokončení designu, zaplatíte za ni dvakrát: jednou při opravách a podruhé v důvěře lidí, kterým jste cestu zbytečně zablokovali.
+
+### AS.2 Rozdělte audit podle cest, ne podle obrazovek
+
+Nejlepší audit nezačíná seznamem URL. Začíná uživatelskou cestou. U SaaSu je důležitější ověřit, jestli člověk zvládne založit účet, dokončit onboarding, pozvat kolegu, zaplatit fakturu a exportovat data, než jestli každá podpůrná stránka má perfektně poetický alternativní text. Ten taky udělejte, ale nepleťte si pořadí rizik.
+
+Vyberte tři kritické cesty:
+
+1. **Návštěvník → poptávka nebo registrace:** hero sekce, CTA, formulář, potvrzení, e-mail.
+2. **Nový uživatel → první hodnota:** registrace, onboarding, prázdný stav, první vytvořený objekt.
+3. **Zákazník → správa účtu:** nastavení, billing, export, smazání nebo ukončení služby.
+
+U každé cesty sledujte čtyři otázky:
+
+- Dá se cesta projít jen klávesnicí?
+- Je jasné, kde člověk právě je a co se stalo po akci?
+- Má každý vstup, chyba a upozornění srozumitelný text?
+- Nevyžaduje cesta zbytečná data nebo nepřístupné externí prvky?
+
+Privacy-first dopad je tady důležitý. Přístupnost a soukromí se potkávají například u CAPTCHA, vložených widgetů, chatů, map, přehrávačů, platebních bran nebo formulářových nástrojů. Pokud kvůli přístupnosti přidáte třetí stranu, která sbírá víc dat než samotný formulář, problém jste jen přesunuli. Gratuluju, teď je nepřístupnost v cloudu.
+
+### AS.3 Testujte kombinací automatů a lidí
+
+Automatické nástroje jsou užitečné, ale nejsou soudce reality. Umí najít chybějící label, nízký kontrast nebo špatnou strukturu. Neumí spolehlivě říct, jestli text chyby člověku pomůže, jestli je pořadí kroků pochopitelné, jestli alternativní text vystihuje význam obrázku nebo jestli onboarding nedělá zbytečný stres.
+
+Dobrý testovací mix pro malý tým:
+
+- **Automatická kontrola:** spusťte základní accessibility check v CI nebo aspoň před releasem.
+- **Klávesnicový průchod:** projděte kritickou cestu bez myši a zapisujte místa, kde se ztratíte.
+- **Screen reader smoke test:** ověřte hlavní tok s běžnou čtečkou obrazovky na jednom desktopu a jednom mobilu.
+- **Zoom a reflow:** zkontrolujte zvětšení textu, malé displeje a orientaci mobilu.
+- **Obsahová kontrola:** přečtěte labely, chyby, CTA a status zprávy jako člověk, ne jako komponenta.
+
+Do automatizace nedávejte citlivá data. Testovací účty mají používat syntetická data podle přílohy AR. Screenshoty z auditů nesmí obsahovat reálné zákazníky, e-maily, faktury ani interní tokeny. Přístupnostní audit není výmluva pro nový datový únik s dobrým úmyslem. Dobré úmysly jsou fajn, ale v incident reportu vypadají dost unaveně.
+
+### AS.4 Vytvořte přístupnostní kartu změny
+
+Každá větší změna v UI by měla mít krátkou kartu. Ne proto, aby vznikl další dokument pro dokument. Proto, aby se přístupnost řešila před tím, než je design „zamčený“ a vývojář slyší magickou větu: „Už jen drobnost.“
+
+```markdown
+# Přístupnostní karta: [název změny]
+
+## Kritická cesta
+- Jaký úkol má člověk dokončit:
+- Kde cesta začíná:
+- Kde cesta končí:
+
+## Rizikové prvky
+- Formuláře:
+- Modaly / dialogy:
+- Tabulky / grafy:
+- Vložené služby:
+- Animace / změny stavu:
+
+## Testy
+- [ ] Klávesnice bez pasti
+- [ ] Viditelný focus
+- [ ] Srozumitelné labely a chyby
+- [ ] Kontrast textu a UI prvků
+- [ ] Nadpisová struktura
+- [ ] Alternativní texty nebo dekorativní označení
+- [ ] Zoom/reflow na mobilu
+- [ ] Screen reader smoke test
+
+## Privacy-first kontrola
+- Jaká data cesta sbírá:
+- Které externí služby se načítají:
+- Co se loguje při chybách:
+- Jak se testuje bez produkčních dat:
+
+## Rozhodnutí
+- Blokuje release:
+- Opravit před releasem:
+- Opravit v dalším sprintu:
+- Vlastník:
+- Termín:
+```
+
+Karta má být krátká. Pokud ji tým nevyplní za deset minut, je moc složitá. Pokud ji nevyplní vůbec, není problém v kartě, ale v tom, že přístupnost pořád nemá vlastníka.
+
+### AS.5 Opravujte podle dopadu, ne podle elegance
+
+Přístupnostní backlog se může rychle nafouknout. Proto položky tříděte podle dopadu na skutečné cesty. Kritická chyba v checkoutu nebo registraci má přednost před perfekcionistickou debatou o ikoně v patičce. Naopak „malá“ chyba ve focus trapu v modalu může být kritická, protože člověku zablokuje celý proces.
+
+Prioritizační pravidlo:
+
+- **P0:** člověk nemůže dokončit kritickou cestu nebo je uvězněný v UI.
+- **P1:** člověk cestu dokončí jen s výrazným úsilím, nejistotou nebo pomocí supportu.
+- **P2:** chyba zhoršuje použitelnost, ale neblokuje hlavní úkol.
+- **P3:** kosmetické nebo dokumentační zlepšení bez přímého dopadu na cestu.
+
+U každé opravy napište důkaz dokončení. Ne „opravena přístupnost“. To je mlha. Lepší: „Registrace jde projít klávesnicí od e-mailu po potvrzení, focus je viditelný, chyby jsou čtené jako text a screenshot z testu je uložený bez osobních údajů.“ To už se dá ověřit.
+
+### Checklist: první přístupnostní sprint
+
+- [ ] Vybrali jsme tři kritické cesty: registrace/poptávka, první hodnota, správa účtu.
+- [ ] Každou cestu někdo prošel jen klávesnicí.
+- [ ] Formuláře mají labely, popisy, chyby a potvrzení výsledku.
+- [ ] Focus je viditelný a pořadí focusu odpovídá čtení stránky.
+- [ ] Kontrast a velikost textu jsou zkontrolované na reálných šablonách, ne jen v design systému.
+- [ ] Externí widgety mají ověřené datové toky i přístupnostní dopad.
+- [ ] Testovací data jsou syntetická a neobsahují reálné zákazníky.
+- [ ] Chyby jsou v backlogu prioritizované podle dopadu na cestu.
+- [ ] Každá P0/P1 chyba má vlastníka a termín.
+- [ ] Release checklist obsahuje přístupnostní kartu změny.
+
+### Mini cvičení: 45 minut bez myši
+
+1. Otevřete hlavní landing page, registrační tok nebo poptávkový formulář.
+2. Odložte myš. Fakt. Ne „jen na chvíli“. Myš jde na malou dovolenou.
+3. Projděte cestu pomocí klávesnice a zapisujte každé místo, kde nevíte, kde jste.
+4. U každého formulářového pole vyvolejte chybu a přečtěte si ji jako nový uživatel.
+5. Zvětšete stránku a ověřte, že obsah pořád dává smysl bez horizontálního lovení.
+6. Zkontrolujte, jestli se při cestě nenačítá externí služba, kterou neumíte vysvětlit.
+7. Vyberte jednu P0/P1 opravu a dokončete ji před dalším releasem.
+
+Výstupem není certifikát dokonalosti. Výstupem je konkrétní opravená bariéra v cestě, která vydělává peníze, šetří support a zároveň nevyváží data do zbytečných nástrojů. To je přesně ten typ nudné kvality, která malému SaaSu dělá dospělý provoz.
+
+### Zdroje k příloze AS
+
+- Evropská komise shrnuje European Accessibility Act a uvádí, že členské státy měly směrnici převést do národního práva do června 2022 a že se týká vybraných důležitých produktů a služeb: https://commission.europa.eu/strategy-and-policy/policies/justice-and-fundamental-rights/disability/european-accessibility-act-eaa_en
+- Evropská komise v červenci 2025 uvedla, že vybrané produkty a služby prodávané v EU musí splňovat společné požadavky na přístupnost a že EAA začal účinkovat v červnu 2025: https://commission.europa.eu/news-and-media/news/eu-becomes-more-accessible-all-2025-07-31_en
+- Zákon č. 424/2023 Sb. v českém znění stanovuje požadavky na přístupnost některých výrobků a služeb a nabyl účinnosti 28. června 2025: https://e-sbirka.gov.cz/sb/2023/424
+- Ministerstvo průmyslu a obchodu zveřejňuje informace a návodné dokumenty k požadavkům na přístupnost výrobků a služeb podle zákona č. 424/2023 Sb.: https://mpo.gov.cz/cz/podnikani/pristupnost-vyrobku-a-sluzeb/
+- W3C uvádí WCAG 2.2 jako W3C Recommendation a doporučuje jej pro maximální budoucí použitelnost přístupnostních prací: https://www.w3.org/TR/wcag/
+- AccessibleEU popisuje EN 301 549 jako harmonizovaný standard pro požadavky na přístupnost ICT produktů a služeb, který podporuje evropskou směrnici o přístupnosti webů a mobilních aplikací veřejného sektoru: https://accessible-eu-centre.ec.europa.eu/content-corner/digital-library/en-3015492021-accessibility-requirements-ict-products-and-services_en
+
 ## Pracovní log
 
+- 2026-08-24: Přidána příloha AS „Přístupnost webu a SaaS bez odkládání“ s praktickým sprintem pro kritické uživatelské cesty, kartou změny, prioritizací bariér, privacy-first kontrolou, mini cvičením a ověřenými EU/W3C zdroji.
 - 2026-08-24: Přidána příloha AR „Testovací a demo data bez úniku reality“ s pravidly pro prostředí, syntetická data, anonymizaci, demo scénáře, screenshoty/logy/AI vstupy, kartou testovacích dat, checklistem, mini cvičením a ověřenými zdroji.
 - 2026-08-23: Přidána příloha AQ „Registr dodavatelů a subprocesorů bez slepé důvěry“ s rolemi dodavatelů, inventářem nástrojů, prioritizací rizika, otázkami pro dodavatele, procesem změn subprocesorů, kartou dodavatele, checklistem, mini cvičením a ověřenými zdroji.
 - 2026-08-23: Přidána příloha AP „Bezpečnostní hlavičky bez cargo cult konfigurace“ s inventářem zdrojů, základní sadou HTTP hlaviček, CSP/HSTS postupem, Permissions-Policy, kartou bezpečnostních hlaviček, checklistem, mini auditem a ověřenými zdroji.
