@@ -313,6 +313,12 @@ AU. Rate limiting a abuse prevence bez sledovací paranoie
 AV. Retence a mazání dat bez digitálního syslení
 AW. Cookie consent bez temných vzorců a zbytečného divadla
 AX. Trust pack pro B2B SaaS bez prodejního mlžení
+AY. Release notes a changelog bez produktového šumu
+AZ. Zpětná vazba bez produktového šmírování
+BA. AI asistenti v SaaSu bez úniku kontextu
+BB. Lokalizace SaaSu pro Evropu bez překladového karnevalu
+BC. Export a offboarding zákazníka bez datového rukojmí
+BD. Customer success bez šmírovacího health score
 
 ## 1. Web jako obchodní systém
 
@@ -16041,7 +16047,194 @@ Výstupem není dokonalý datový portál. Výstupem je férový a testovatelný
 - EDPB Data Protection Guide for small business vysvětluje praktické povinnosti organizací včetně práv subjektů údajů, bezpečnosti a odpovědnosti: https://www.edpb.europa.eu/sme-data-protection-guide/home_en
 - Evropská komise popisuje vztahy mezi správci a zpracovateli a nutnost smluvního vymezení zpracování osobních údajů: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/obligations/controller-processor/what-data-controller-or-data-processor_en
 
+
+## BD. Customer success bez šmírovacího health score
+
+Customer success v malém SaaSu nemá být tajná analytická laboratoř, která z každého kliknutí vyrábí psychologický profil zákazníka a pak se tváří, že jde o „péči“. Má to být jednoduchý systém, který včas pozná, že zákazník nedostává slíbenou hodnotu, a nabídne pomoc dřív, než se z produktu stane další zapomenutý účet na firemní kartě.
+
+Privacy-first customer success stojí na dvou pravidlech. Za prvé: sledujte jen signály, podle kterých umíte udělat férovou akci. Za druhé: zákazník má rozumět tomu, proč některé signály používáte a jak mu pomáhají. Pokud metrika slouží jen k tomu, aby tým měl pocit kontroly, je to metrický talisman. Hezky se drží, ale zákazníka nezachrání.
+
+*Codyho komentář: health score, kterému nerozumí zákazník ani tým, není health score. Je to horoskop s databází.*
+
+### BD.1 Začněte definicí úspěchu, ne dashboardem
+
+První otázka nezní „jaké eventy sbíráme“. Zní: „Co znamená, že zákazník uspěl?“ U každého typu zákazníka napište jeden konkrétní výsledek. Ne aktivitu. Výsledek.
+
+Příklady:
+
+- účetní kancelář bezpečně sdílí první dokument s klientem,
+- B2B tým spustí první landing page a dostane kvalifikovanou poptávku,
+- interní produktový tým uzavře první feedback loop od nápadu po rozhodnutí,
+- agentura předá klientovi web se srozumitelným provozním protokolem.
+
+Teprve potom hledejte signály, které ukazují, že se zákazník k výsledku blíží nebo od něj odjíždí někam do příkopu. Aktivita sama o sobě nestačí. Uživatel může mít deset přihlášení týdně a stejně jen hledat tlačítko, které jste schovali pod ikonku s kreativním názvem. Gratuluji, vyrobili jste engagement zoufalství.
+
+Dobrá definice úspěchu má tři části:
+
+- **výsledek:** co zákazník zvládne,
+- **čas:** do kdy se to má stát,
+- **důkaz:** podle čeho poznáte, že to není jen pocit.
+
+Příklad: „Nový tým do 14 dnů pozve aspoň dva členy, vytvoří první projekt, dokončí první export a nepotřebuje support k základnímu nastavení.“ To je použitelná definice. „Zákazník je aktivní“ je mlha.
+
+### BD.2 Health score stavte z malého počtu vysvětlitelných signálů
+
+Health score má pomáhat prioritizovat péči, ne vytvářet neprůhledné skóre zákazníkovy duše. Začněte pěti až sedmi signály. Každý signál musí mít vlastníka, akci a důvod.
+
+Praktické signály pro malý SaaS:
+
+- dokončení aktivačního momentu,
+- pravidelný návrat k hlavnímu workflow,
+- dokončený export, publikace, report nebo jiný hodnotový výstup,
+- počet nedokončených kritických kroků v onboardingu,
+- support téma opakující se u stejného účtu,
+- blížící se konec trialu bez jasného výstupu,
+- neúspěšná platba nebo administrativní blokace,
+- žádný návrat po období, kdy zákazník běžně pracuje.
+
+Špatné signály pro privacy-first tým:
+
+- detailní sledování každého pohybu myši,
+- nahrávání session bez jasného důvodu a souhlasu,
+- profilování jednotlivců tam, kde stačí úroveň účtu nebo organizace,
+- dlouhodobé držení surových eventů jen „pro jistotu“,
+- skryté scoringové modely, které neumíte vysvětlit ani vlastnímu supportu.
+
+U každého signálu si napište: „Když tohle uvidíme, co uděláme?“ Pokud odpověď neexistuje, signál nesbírejte. V privacy-first provozu je nejčistší metrika často ta, kterou jste se rozhodli vůbec nevytvořit.
+
+### BD.3 Pracujte s účtem, ne s tajným profilem člověka
+
+B2B SaaS často slouží organizaci, ne izolovanému jednotlivci. Proto dávejte přednost signálům na úrovni účtu, workspace nebo týmu. Zákazníka zajímá, jestli jeho organizace dostává hodnotu, ne jestli se jeden konkrétní uživatel v úterý večer proklikal do nastavení.
+
+Privacy-first pravidla pro customer success data:
+
+- agregujte na úroveň účtu, kde to stačí,
+- držte surové eventy krátce a výstupy déle jen agregovaně,
+- neukládejte obsah zákaznických dat do success poznámek,
+- oddělte produktové signály od marketingových profilů,
+- nepřenášejte support kontext do AI nebo externích nástrojů bez kontroly,
+- citlivé poznámky pište fakticky, ne hodnotícím jazykem.
+
+Rozdíl mezi užitečnou poznámkou a problémem:
+
+- Dobře: „Tým nedokončil import kvůli chybějícím právům administrátora. Nabídnout 20minutové nastavení rolí.“
+- Špatně: „Klient je zmatený a asi technologicky slabý.“
+
+Customer success poznámky nejsou terapeutický deník obchodního týmu. Jsou provozní paměť, která má pomoci zákazníkovi a neublížit mu, kdyby ji později někdo musel ukázat, exportovat nebo auditovat.
+
+### BD.4 Nudge má být pomoc, ne manipulace
+
+Když health score ukáže riziko, další krok má být užitečný. Ne automatická lavina e-mailů, pop-upů a urgentních badge s energií „kup teď, jinak zemře jednorožec“.
+
+Dobré intervence:
+
+- krátký e-mail s jedním konkrétním dalším krokem,
+- nabídka callu k dokončení prvního workflow,
+- produktový checklist, který ukáže, co chybí,
+- upozornění administrátorovi na blokaci týmu,
+- odkaz na dokumentaci přesně k problému,
+- transparentní připomenutí trialu a možnost exportu dat.
+
+Špatné intervence:
+
+- skryté urgency triky,
+- opakované e-maily bez reakce na kontext,
+- automatické slevy bez pochopení problému,
+- pressure call jen proto, že zákazník otevřel pricing,
+- retenční dark patterns při rušení účtu.
+
+Customer success má snižovat tření, ne zvyšovat tlak. Pokud zákazník chce odejít, pomozte mu odejít férově. Část lidí se vrátí právě proto, že jste se nechovali jako datový únosce s veselou onboardingovou maskou.
+
+### BD.5 Success review dělejte jako rozhodovací rituál
+
+Jednou týdně nebo jednou za dva týdny projděte jen účty, u kterých existuje signál pro akci. Ne všechny zákazníky. Ne všechny grafy. Jen situace, kde může tým pomoct.
+
+Struktura 30minutového success review:
+
+- **5 minut:** nové aktivace a první hodnotové momenty,
+- **10 minut:** účty s rizikem nedokončeného workflow,
+- **5 minut:** opakované support blokace,
+- **5 minut:** zákazníci blízko obnovy, trial konce nebo odchodu,
+- **5 minut:** privacy-first kontrola nových signálů a poznámek.
+
+Každý probíraný účet musí skončit jednou ze čtyř akcí:
+
+- **Pomoci:** konkrétní zpráva, call, dokumentace nebo oprava.
+- **Opravit produkt:** problém se opakuje a nemá ho řešit ruční péče.
+- **Nechat být:** zákazník je v pořádku a nepotřebuje další dotek.
+- **Uklidit data:** signál, poznámka nebo export už nemá účel.
+
+Tím se customer success drží jako provozní systém, ne jako nekonečný pocit v CRM.
+
+### BD.6 Šablona customer success karty
+
+Použijte jednoduchou kartu pro účty, které vyžadují pozornost. Ne pro každého zákazníka. Jen tam, kde existuje rozhodnutí.
+
+## Účet
+- Název účtu:
+- Segment:
+- Plán nebo typ spolupráce:
+- Vlastník vztahu:
+
+## Definice úspěchu
+- Hodnotový moment:
+- Očekávaný čas:
+- Důkaz hodnoty:
+
+## Signály
+- Pozitivní signály:
+- Rizikové signály:
+- Support témata:
+- Produktové blokace:
+
+## Privacy-first kontrola
+- Použitá data:
+- Úroveň agregace:
+- Retence poznámek:
+- Externí nástroje:
+- Co nesmíme zapisovat:
+
+## Další krok
+- Akce:
+- Vlastník:
+- Termín:
+- Jak poznáme výsledek:
+
+### BD.7 Praktický checklist customer success bez šmírování
+
+- [ ] Máme definovaný úspěch zákazníka jako konkrétní výsledek.
+- [ ] Health score používá jen vysvětlitelné signály s jasnou akcí.
+- [ ] Surové eventy nedržíme déle, než potřebujeme pro účel.
+- [ ] Tam, kde stačí účet nebo workspace, nesledujeme jednotlivce.
+- [ ] Customer success poznámky neobsahují zbytečné osobní údaje ani subjektivní nálepky.
+- [ ] Support, produkt a marketing neslévají data do jednoho profilu bez důvodu.
+- [ ] Automatické nudges jsou užitečné, přiměřené a snadno zastavitelné.
+- [ ] Odchod zákazníka není záměrně ztížený.
+- [ ] Success review končí akcí, opravou produktu, rozhodnutím „nechat být“ nebo úklidem dat.
+- [ ] Nový success signál prochází privacy-first kontrolou před nasazením.
+
+### Mini cvičení: success systém za 45 minut
+
+1. Vyberte jeden zákaznický segment.
+2. Napište jednu větu, co pro něj znamená úspěch do 14 nebo 30 dnů.
+3. Vyberte maximálně sedm signálů, které ukazují cestu k tomuto úspěchu.
+4. U každého signálu napište konkrétní akci týmu.
+5. Škrtněte signály, které nemají akci nebo vyžadují zbytečně osobní data.
+6. Sepište jednu customer success kartu pro rizikový účet.
+7. Nastavte první 30minutové review a po něm smažte poznámky, které nemají další účel.
+
+Výstupem není obří customer success platforma. Výstupem je menší počet lepších signálů, rychlejší pomoc zákazníkovi a méně datového smogu kolem lidí, kteří vám důvěřují. To je hezký obchodní model: pomáhat bez šmírování. Skoro podezřele dospělé.
+
+### Zdroje k příloze BD
+
+- Evropská komise shrnuje principy GDPR pro firmy a organizace včetně minimalizace dat, omezení uložení, transparentnosti a odpovědnosti: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en
+- EDPB Guidelines 4/2019 vysvětlují data protection by design and by default podle článku 25 GDPR: https://www.edpb.europa.eu/documents/guideline/guidelines-42019-on-article-25-data-protection-by-design-and-by-default_en
+- EDPB Guidelines 8/2020 k cílení uživatelů sociálních sítí popisují rizika profilování, kombinování dat a ztráty kontroly nad osobními údaji; principy jsou užitečné i pro zdrženlivý návrh customer success signálů: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-82020-targeting-social-media-users_en
+- NIST Privacy Framework pomáhá organizacím řídit privacy rizika a navrhovat procesy kolem dat s ohledem na identifikaci, řízení, kontrolu, komunikaci a ochranu: https://www.nist.gov/privacy-framework
+
 ## Pracovní log
+
+- 2026-08-24: Přidána příloha BD „Customer success bez šmírovacího health score“ s definicí zákaznického úspěchu, vysvětlitelnými signály, privacy-first health score pravidly, férovými nudges, success review rituálem, kartou účtu, checklistem, mini cvičením a ověřenými zdroji.
 
 - 2026-08-24: Přidána příloha BC „Export a offboarding zákazníka bez datového rukojmí“ s produktovým návrhem odchodu zákazníka, použitelnými exporty, oprávněními, auditní stopou, vrstvami mazání, offboarding e-mailem, kartou procesu, checklistem, mini cvičením a ověřenými zdroji.
 
