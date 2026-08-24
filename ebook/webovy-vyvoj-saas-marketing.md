@@ -17010,7 +17010,215 @@ Hotový výstup je bezpečnostní kontakt, pravidla, triage karta a jeden otesto
 - CISA vysvětluje vulnerability disclosure policy jako mechanismus, který říká výzkumníkům, jak bezpečně hlásit zranitelnosti a co mohou očekávat: https://www.cisa.gov/resources-tools/resources/vulnerability-disclosure-policy-template
 - EUR-Lex právní text GDPR Article 5 obsahuje principy integrity, důvěrnosti, minimalizace a odpovědnosti, které se promítají i do práce s bezpečnostními hlášeními: https://eur-lex.europa.eu/eli/reg/2016/679/art_5/oj
 
+## BI. Datová mapa pro SaaS bez excelového hřbitova
+
+Datová mapa je nudná jen do chvíle, než se někdo zeptá: „Kde všude máme e-mail zákazníka?“ Pak se z nudného dokumentu stane rozdíl mezi klidnou odpovědí a firemním honem na duchy v integracích, exportech, logách, fakturaci, analytice a historických zálohách. Pro privacy-first SaaS v Evropě není datová mapa právnická dekorace. Je to provozní mapa systému.
+
+Nejde o to vytvořit dokonalou tabulku se stovkou sloupců. Jde o to mít dostatečně přesný přehled, aby tým uměl navrhovat funkce, řešit incidenty, odpovídat na žádosti zákazníků a hodnotit nové dodavatele bez improvizace. Pokud datovou mapu neumíte vysvětlit vlastními slovy, pravděpodobně nemáte datovou mapu. Máte jen dokument, který čeká na bolestivý audit.
+
+### BI.1 Začněte událostí, ne databází
+
+Častá chyba: tým otevře databázové schéma a začne přepisovat tabulky. To vypadá technicky, ale rychle to mine podstatu. Datová mapa má odpovídat na otázku, co se s daty děje v reálném procesu. Proto začněte událostmi.
+
+Příklad pro B2B SaaS:
+
+- návštěvník odešle kontaktní formulář,
+- obchodník vytvoří lead,
+- zákazník založí workspace,
+- uživatel pozve kolegu,
+- systém vystaví fakturu,
+- support řeší ticket,
+- produkt odešle notifikaci,
+- zákazník požádá o export nebo smazání dat.
+
+Ke každé události napište: kdo ji spouští, jaká data vznikají, kam tečou, kdo k nim má přístup a kdy mizí. Až potom řešte tabulky, kolekce, fronty, webhooky a exporty.
+
+**Codyho komentář:** databázové schéma je mapa potrubí. Datová mapa je otázka, proč tím potrubím vůbec něco teče a kdo si může pustit kohoutek.
+
+### BI.2 Minimální karta datového toku
+
+Pro malý tým stačí jedna praktická karta na každý důležitý tok. Měla by být tak krátká, aby ji šlo udržovat, a tak konkrétní, aby se podle ní dalo rozhodovat.
+
+```markdown
+# Datový tok: [název]
+
+## Spouštěč
+- Kdo nebo co tok spouští:
+- Kde se tok spouští:
+- Jak často se děje:
+
+## Data
+- Kategorie dat:
+- Konkrétní pole:
+- Citlivost:
+- Co záměrně nesbíráme:
+
+## Účel a právní základ
+- Proč data potřebujeme:
+- Jaký je právní základ / smluvní důvod:
+- Kde je to vysvětleno uživateli:
+
+## Systémy
+- Zdrojový systém:
+- Interní úložiště:
+- Externí dodavatelé:
+- Přenos mimo EU/EHP:
+
+## Přístupy
+- Kdo data vidí:
+- Kdo je může měnit:
+- Jak se přístup loguje:
+
+## Retence a mazání
+- Jak dlouho data držíme:
+- Co spouští smazání:
+- Kde mohou zůstat technické kopie:
+- Kdy se kontroluje výjimka:
+
+## Kontrola
+- Vlastník toku:
+- Poslední revize:
+- Další revize:
+- Odkaz na související ticket / ADR:
+```
+
+Karta nemusí být právně poetická. Má být použitelná. Když někdo přidává nový webhook do CRM, otevře kartu a vidí, jestli mění účel, dodavatele, retenci nebo přístupová práva. Pokud ano, nejde o „malou integraci“. Jde o změnu datového toku.
+
+### BI.3 Datové oblasti místo nekonečného seznamu polí
+
+Nepopisujte každý atribut hned na začátku. Začněte oblastmi. Detail polí doplňujte tam, kde rozhoduje riziko nebo provoz.
+
+Praktické oblasti pro SaaS:
+
+- **Identita:** e-mail, jméno, role, autentizační metadata, stav účtu.
+- **Organizace:** název firmy, workspace, fakturační údaje, smluvní kontakty.
+- **Produktová data:** projekty, dokumenty, nastavení, importy, exporty, vlastní obsah zákazníka.
+- **Provozní data:** logy, auditní stopa, chybové záznamy, bezpečnostní události.
+- **Marketing a sales:** poptávky, zdroje kampaní, poznámky z obchodního procesu, souhlasy.
+- **Support:** tickety, přílohy, diagnostika, komunikace se zákazníkem.
+- **Analytika:** agregované události, metriky aktivace, výkonové signály, anonymizované trendy.
+- **AI kontext:** prompty, odpovědi, vložené dokumenty, odvozené embeddingy, hodnoticí signály.
+
+U každé oblasti si označte citlivost: nízká, střední, vysoká. Ne kvůli nálepce. Kvůli chování systému. Vysoká citlivost znamená méně lidí, kratší retenci, lepší audit, silnější šifrování a opatrnější exporty.
+
+### BI.4 Kde data opravdu jsou
+
+Datová mapa často selže na slovech „to je jen v aplikaci“. Není. Data žijí v mnoha místech:
+
+- primární databáze,
+- read replica,
+- fulltext index,
+- object storage,
+- fronty a event stream,
+- log management,
+- error monitoring,
+- zákaznický support,
+- billing systém,
+- e-mailing,
+- analytika,
+- zálohy,
+- lokální vývojová prostředí,
+- exporty stažené administrátorem,
+- AI provider nebo vlastní inference vrstva.
+
+U každého místa napište, jestli obsahuje osobní data, zákaznický obsah, metadata nebo jen agregaci. Tohle je moment, kdy se privacy-first přístup projeví prakticky: čím méně kopií, tím méně mazání, méně přístupů a méně vysvětlování.
+
+Příklad rozhodnutí:
+
+- Produktová analytika drží jen agregované události po dnech, ne historii jednotlivého uživatele.
+- Error monitoring rediguje e-maily, tokeny, adresy a zákaznický obsah před odesláním.
+- Support přílohy se automaticky mažou po 90 dnech, pokud nejsou součástí aktivního incidentu.
+- Vývojové prostředí nepoužívá kopii produkční databáze bez anonymizace.
+- AI funkce neposílá celé workspace dokumenty, ale jen minimální kontext potřebný pro konkrétní úlohu.
+
+### BI.5 Mapa dodavatelů a subdodavatelů
+
+Každý dodavatel v datové mapě musí mít jasnou odpověď na pět otázek:
+
+1. Jaký účel plní?
+2. Jaká data dostává?
+3. Kde data zpracovává a ukládá?
+4. Kdo jsou jeho další subdodavatelé?
+5. Jak se data exportují a mažou?
+
+Pokud odpověď zní „asi někde v cloudu“, ještě nejste hotovi. Pro evropský privacy-first provoz preferujte dodavatele s jasnou evropskou lokalitou dat, transparentním seznamem subdodavatelů, rozumným DPA, exportem bez prosíku na support a možností vypnout nepotřebné trackingové vrstvy.
+
+Praktická tabulka:
+
+| Dodavatel | Účel | Data | Region | Subdodavatelé | Retence | Exit test |
+|---|---|---|---|---|---|---|
+| Billing | fakturace | firma, e-mail, fakturační údaje | EU/EHP preferováno | odkaz | podle účetních povinností | kvartálně |
+| E-mail | transakční e-maily | e-mail, šablona, metadata doručení | EU/EHP preferováno | odkaz | 30–90 dní metadata | pololetně |
+| Monitoring | chyby a výkon | redigované logy, technické metadata | EU/EHP preferováno | odkaz | krátká technická retence | kvartálně |
+| AI | asistované funkce | minimální kontext úlohy | EU/EHP nebo smluvně řízené | odkaz | podle funkce | před releasem |
+
+Tabulka není náhrada smluv. Je to operační přehled, díky kterému tým rychle pozná, kde vzniká nové riziko.
+
+### BI.6 Datová mapa v produktovém vývoji
+
+Datová mapa nemá žít jen u právníka. Má být součástí běžného vývoje. Když navrhujete novou funkci, přidejte malou sekci do technického nebo produktového briefu:
+
+```markdown
+## Dopad na data
+
+- Vznikají nová osobní data? [ano/ne]
+- Mění se účel zpracování? [ano/ne]
+- Přidáváme dodavatele nebo nový region? [ano/ne]
+- Mění se retence? [ano/ne]
+- Vzniká nový export, log nebo analytická událost? [ano/ne]
+- Je potřeba aktualizovat privacy text, DPA, trust centrum nebo interní datovou mapu? [ano/ne]
+```
+
+Pokud jsou všechny odpovědi „ne“, změna pravděpodobně nepotřebuje velkou privacy ceremonii. Pokud je jedna odpověď „ano“, vytvořte nebo upravte kartu datového toku. Tím se z compliance nestane brzda, ale normální součást návrhu.
+
+### BI.7 Jak často mapu udržovat
+
+Datová mapa stárne rychleji než interní název projektu. Proto potřebuje rytmus:
+
+- **Při každém novém dodavateli:** doplnit účel, data, region, subdodavatele a exit plán.
+- **Při nové produktové funkci:** zkontrolovat nové datové oblasti, logy, analytiku a exporty.
+- **Měsíčně:** projít změny z release notes a doplnit, co chybí.
+- **Kvartálně:** ověřit retence, přístupy a datové kopie mimo hlavní systém.
+- **Ročně:** sladit datovou mapu s privacy policy, DPA, trust centrem a obchodními materiály.
+
+Nejlepší kontrolní otázka: dokážeme do jednoho pracovního dne zjistit, kde všude máme data konkrétního zákazníka a jak se mažou? Pokud ne, datová mapa není provozní nástroj. Je to přání.
+
+### BI.8 Checklist: datová mapa bez chaosu
+
+- [ ] Datová mapa začíná reálnými událostmi a procesy, ne jen databázovými tabulkami.
+- [ ] Každý důležitý datový tok má vlastníka a datum poslední revize.
+- [ ] U každého toku víme účel, kategorii dat, právní základ, systémy, přístupy a retenci.
+- [ ] Máme přehled míst, kde data žijí: databáze, logy, fronty, indexy, zálohy, support, billing, analytika a AI vrstva.
+- [ ] Dodavatelé mají zapsaný účel, region, subdodavatele, retenci a exit test.
+- [ ] Produktové briefy obsahují krátkou sekci „Dopad na data“.
+- [ ] Nové integrace se neschvalují bez odpovědi na otázku, kde data běží a kdo k nim má přístup.
+- [ ] Vývojové a testovací prostředí nepoužívá produkční osobní data bez jasné anonymizace nebo výjimky.
+- [ ] Privacy policy, DPA, trust centrum a interní datová mapa si neodporují.
+- [ ] Tým umí datovou mapu použít při incidentu, exportu, mazání i zákaznickém dotazu.
+
+### Mini cvičení: první datová mapa za 55 minut
+
+1. Vyberte jeden kritický proces: registrace, billing, support nebo AI funkci.
+2. Popište ho jako událostní tok od začátku do konce.
+3. U každého kroku napište data, systém, dodavatele a přístup.
+4. Označte kopie mimo hlavní databázi: logy, zálohy, exporty, fronty a support.
+5. Najděte tři data, která můžete nesbírat, redigovat nebo držet kratší dobu.
+6. Zapište vlastníka toku a datum další revize.
+7. Vytvořte jeden follow-up úkol do backlogu.
+
+Hotový výstup není perfektní katalog firmy. Je to jedna použitelná karta toku, kterou můžete zítra použít při vývoji, supportu nebo zákaznickém dotazu. A pak další. Datová mapa se nestaví velkým třeskem. Staví se tím, že přestanete lhát sami sobě, že „někde to určitě máme“.
+
+### Zdroje k příloze BI
+
+- Evropská komise vysvětluje principy zpracování osobních dat podle GDPR včetně účelu, minimalizace a právního základu: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/overview-principles/what-data-can-we-process-and-under-which-conditions_en
+- EDPB průvodce pro malé podniky uvádí, že compliance zahrnuje privacy by design, záznamy o činnostech zpracování a v určitých situacích DPIA: https://www.edpb.europa.eu/sme/be-compliant/be-compliant_en
+- EDPB vysvětluje rozdíl mezi správcem a zpracovatelem a smluvní povinnosti ve vztahu správce–zpracovatel: https://www.edpb.europa.eu/sme/learn-the-basics/data-controller-or-data-processor_en
+- ENISA report „Privacy and Data Protection by Design“ propojuje právní principy s technickými a organizačními opatřeními privacy by design: https://www.enisa.europa.eu/publications/privacy-and-data-protection-by-design
+- ENISA „Data Protection Engineering“ popisuje technická opatření jako minimalizaci, pseudonymizaci a další privacy-enhancing přístupy: https://www.enisa.europa.eu/sites/default/files/publications/ENISA%20Report%20-%20Data%20Protection%20Engineering.pdf
+
 ## Pracovní log
+
+- 2026-08-24: Přidána příloha BI „Datová mapa pro SaaS bez excelového hřbitova“ s událostním mapováním toků, kartou datového toku, mapou dodavatelů, produktovým workflow, checklistem, mini cvičením a ověřenými evropskými zdroji.
 
 - 2026-08-24: Přidána příloha BH „Responsible disclosure bez bezpečnostního divadla“ s bezpečnostním kontaktem, triage kartou, hranicí mezi hlášením a incidentem, komunikačními šablonami, `security.txt`, checklistem, mini cvičením a ověřenými zdroji.
 
