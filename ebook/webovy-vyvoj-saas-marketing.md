@@ -17216,7 +17216,170 @@ Hotový výstup není perfektní katalog firmy. Je to jedna použitelná karta t
 - ENISA report „Privacy and Data Protection by Design“ propojuje právní principy s technickými a organizačními opatřeními privacy by design: https://www.enisa.europa.eu/publications/privacy-and-data-protection-by-design
 - ENISA „Data Protection Engineering“ popisuje technická opatření jako minimalizaci, pseudonymizaci a další privacy-enhancing přístupy: https://www.enisa.europa.eu/sites/default/files/publications/ENISA%20Report%20-%20Data%20Protection%20Engineering.pdf
 
+## BJ. Kvartální access review bez bezpečnostního divadla
+
+Přístupy jsou zvláštní druh technického dluhu. Nevypadají jako bug, neblikají červeně v dashboardu a obvykle se neobjeví v roadmapě. Jenže každý zapomenutý účet, starý API token, sdílený admin login nebo „dočasný“ přístup pro freelancera je malá díra v provozní důvěře. A v malém SaaS týmu je důvěra často hlavní měna.
+
+Access review není korporátní rituál pro lidi, kteří milují tabulky. Je to pravidelná kontrola, jestli lidé, systémy a dodavatelé mají jen takové přístupy, které pořád potřebují. Privacy-first verze má jednoduché pravidlo: méně přístupů, kratší doba, jasnější vlastnictví.
+
+*Codyho komentář:* Nejlepší přístup je ten, který nikdy nevznikl. Druhý nejlepší je ten, který má vlastníka, důvod a datum konce. Všechno ostatní je „uvidíme“ převlečené za bezpečnostní politiku.
+
+### BJ.1 Co přesně revidovat
+
+Nezačínejte otázkou „kdo má přístup do aplikace?“. To je moc úzké. SaaS provoz má víc vrstev:
+
+- **Produktové role:** administrátoři workspace, support role, interní testovací účty, impersonace, billing role.
+- **Infrastruktura:** hosting, databáze, object storage, CDN, DNS, monitoring, zálohy, CI/CD, secrets manager.
+- **Vývoj:** Git repozitáře, issue tracker, staging, preview prostředí, package registry, design soubory.
+- **Support a obchod:** helpdesk, CRM, e-mail schránky, kalendáře, nahrávky hovorů, dokumenty se zákaznickými poznámkami.
+- **Analytika a marketing:** agregovaná analytika, UTM reporty, formuláře, newsletter/RSS nástroje, landing page integrace.
+- **Dodavatelé:** účetnictví, platby, e-mailing, hosting, AI služby, překlady, právní a bezpečnostní konzultanti.
+
+Praktický začátek: udělejte seznam systémů, které by vás bolely, kdyby se do nich někdo dostal omylem. Pak přidejte systémy, které drží osobní data. Průnik těchto dvou skupin je priorita pro první review.
+
+### BJ.2 Přístupová karta
+
+Každý citlivý systém má mít krátkou kartu. Ne román, jen věci, které pomáhají rozhodnout.
+
+```markdown
+# Přístupová karta: [systém / oblast]
+
+## Účel
+- Proč systém používáme:
+- Jaká data obsahuje:
+- Riziková třída: nízká / střední / vysoká
+
+## Vlastník
+- Business vlastník:
+- Technický vlastník:
+- Kdo schvaluje nový přístup:
+
+## Přístupy
+- Role:
+- Aktivní uživatelé:
+- Servisní účty / tokeny:
+- Dodavatelé:
+
+## Kontroly
+- MFA povinné: ano/ne
+- Sdílené účty zakázané: ano/ne
+- Logování citlivých akcí: ano/ne
+- Poslední review:
+- Další review:
+
+## Rozhodnutí
+- Odebrat:
+- Omezit:
+- Ponechat s důvodem:
+- Follow-up úkoly:
+```
+
+Karta je užitečná jen tehdy, když ji tým dokáže projít za pět minut. Pokud potřebujete půl hodiny jen na pochopení sloupců, gratuluji, právě jste vytvořili bezpečnostní karaoke.
+
+### BJ.3 Pravidla pro schvalování přístupů
+
+Malý tým nepotřebuje těžkopádný IAM program. Potřebuje několik jasných pravidel:
+
+1. **Žádný přístup bez účelu.** „Abych se podíval“ není účel. „Vyřešit ticket #1234 do pátku“ už účel je.
+2. **Výchozí role je čtení nebo žádná role.** Admin práva jsou výjimka, ne onboardingový dárek.
+3. **Dočasné přístupy mají datum konce.** Freelancer, audit, migrace, incident — všechno má expiraci.
+4. **Citlivé systémy vyžadují MFA.** Bez výjimky pro „rychle to jen nastavím“. Právě tam bydlí průšvih.
+5. **Servisní účty nejsou lidé.** Mají vlastníka, minimální oprávnění, rotaci tajemství a logování použití.
+6. **Support přístup je omezený.** Ideálně přes auditovanou funkci v produktu, ne přes přímý vstup do databáze.
+
+Privacy-first detail: když někdo potřebuje zákaznická data jen pro diagnostiku, nejdřív zvažte redigovaný pohled, agregaci, sandbox kopii nebo reprodukci na testovacích datech. Přístup k produkčním osobním datům má být poslední možnost, ne pohodlná zkratka.
+
+### BJ.4 Kvartální 60minutový rituál
+
+Access review se dá zvládnout bez velké ceremonie. Jednou za kvartál:
+
+1. **10 minut — změny od minula.** Noví lidé, odchody, noví dodavatelé, nové integrace, nové citlivé funkce.
+2. **15 minut — top systémy.** Projděte 5 až 10 nejrizikovějších systémů podle přístupových karet.
+3. **15 minut — účty a role.** Odeberte staré účty, snižte role, ověřte MFA, najděte sdílené účty.
+4. **10 minut — tokeny a automatizace.** Zkontrolujte API klíče, CI secrets, webhooky a servisní účty.
+5. **5 minut — dodavatelé.** Potvrďte, že externí přístupy pořád dávají smysl.
+6. **5 minut — rozhodnutí.** Zapište odebrané přístupy a follow-up úkoly.
+
+Výstupem není „měli jsme meeting“. Výstupem jsou odebrané přístupy, snížená oprávnění, doplněné expirace a pár konkrétních úkolů. Pokud po review nic nezměníte, buď máte extrémně čistý provoz, nebo jste se jen hezky sešli. Hádejme opatrně.
+
+### BJ.5 Offboarding jako nejdůležitější test
+
+Nejrychlejší způsob, jak odhalit špatný access management, je simulovat odchod člověka nebo dodavatele.
+
+Checklist offboardingu:
+
+- [ ] Vypnout primární účet ve správci identit nebo hlavním workspace.
+- [ ] Odebrat přístupy v GitHubu/Gitu, hostingu, databázích, monitoringu a CI/CD.
+- [ ] Zrušit nebo převést e-mailové aliasy, sdílené inboxy a kalendáře.
+- [ ] Rotovat tokeny, které osoba mohla vidět v lokálním `.env`, dokumentaci nebo CI logu.
+- [ ] Převést vlastnictví dokumentů, projektů, platebních účtů a produkčních služeb.
+- [ ] Zkontrolovat dodavatelské portály, kde osoba měla samostatný login.
+- [ ] Zapsat datum, kdo provedl kontrolu a co zůstalo jako riziko.
+
+Dobré pravidlo: offboarding musí být proveditelný bez toho, aby bývalý člověk musel „ještě něco přeposlat“. Pokud potřebujete jeho dobrou vůli, nemáte proces. Máte sociální hazard.
+
+### BJ.6 Jak poznat přístupový zápach
+
+Varovné signály:
+
+- Jeden sdílený admin účet pro celý tým.
+- Produkční databáze dostupná přímo z notebooků bez skoku přes auditovanou vrstvu.
+- API klíče v dlouhých dokumentech, chatech nebo starých issue komentářích.
+- Dodavatel má přístup „pro jistotu“, i když projekt skončil před půl rokem.
+- Staging obsahuje kopii produkčních osobních dat a má slabší ochranu než produkce.
+- Support řeší běžné dotazy přes SQL dotazy místo produktového admin rozhraní.
+- Nikdo neumí říct, kdo schvaluje nový admin přístup.
+
+U každého zápachu se ptejte: můžeme přístup odebrat, omezit, nahradit produktovou funkcí nebo alespoň zalogovat? Bez této otázky se review změní na inventuru špatného svědomí.
+
+### BJ.7 Mini matice rizika
+
+| Přístup | Riziko | Doporučené opatření |
+|---|---:|---|
+| Čtení agregované analytiky | Nízké | Role jen pro čtení, žádná osobní data, roční kontrola. |
+| Support pohled na zákaznický účet | Střední | Audit log, důvod přístupu, omezené role, pravidelné review. |
+| Produkční databáze | Vysoké | Minimum lidí, MFA, síťové omezení, audit, schválení, krátká expirace. |
+| CI/CD secrets | Vysoké | Least privilege, rotace, žádné logování hodnot, oddělení prostředí. |
+| Billing a fakturace | Vysoké | Oddělené role, silná autentizace, exportní kontrola, audit změn. |
+| Externí dodavatel | Střední až vysoké | DPA podle role, omezený rozsah, datum konce, exit kontrola. |
+
+Matice není náhrada za přemýšlení. Je to brzda proti tomu, aby všechno skončilo jako „střední riziko“ a tým mohl jít na kafe. Kafe ano, ale až po odebrání starých adminů.
+
+### BJ.8 Checklist: access review bez chaosu
+
+- [ ] Máme seznam kritických systémů a vlastníka každého z nich.
+- [ ] Každý citlivý systém má přístupovou kartu s datem poslední revize.
+- [ ] Admin role jsou výjimka a mají jasný důvod.
+- [ ] MFA je povinné pro hosting, Git, e-mail, billing, databáze, CI/CD a správu domén.
+- [ ] Dočasné přístupy mají expiraci a vlastníka.
+- [ ] Servisní účty a API tokeny mají popis, minimální oprávnění a plán rotace.
+- [ ] Support přístup k zákaznickým datům je auditovaný a omezený.
+- [ ] Sdílené účty jsou odstraněné nebo mají konkrétní plán zrušení.
+- [ ] Offboarding checklist byl otestovaný na reálném nebo modelovém scénáři.
+- [ ] Výsledek review je zapsaný jako rozhodnutí, ne jako neurčitý pocit bezpečí.
+
+### Mini cvičení: první access review za 45 minut
+
+1. Vyberte tři systémy: Git, hosting a helpdesk/CRM.
+2. U každého napište vlastníka, aktivní uživatele, adminy a externí účty.
+3. Označte přístupy, které nejsou nutné pro práci v příštích 30 dnech.
+4. Odeberte alespoň jeden starý nebo příliš široký přístup.
+5. U jednoho servisního tokenu doplňte vlastníka a datum rotace.
+6. Zapište jeden follow-up do backlogu: produktový support pohled, SSO, lepší logování nebo automatický offboarding.
+
+Tímhle nevznikne dokonalý bezpečnostní program. Vznikne první důkaz, že tým umí přístupy aktivně spravovat. A to je u malého SaaSu mnohem cennější než politika, kterou nikdo nečetl od doby, kdy ji někdo heroicky zkopíroval z internetu.
+
+### Zdroje k příloze BJ
+
+- GDPR čl. 32 požaduje přiměřená technická a organizační opatření pro bezpečnost zpracování, včetně schopnosti zajistit důvěrnost, integritu, dostupnost a odolnost systémů: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
+- EDPB průvodce pro malé podniky shrnuje praktické oblasti GDPR compliance pro malé organizace: https://www.edpb.europa.eu/sme/be-compliant/be-compliant_en
+- ENISA „Cybersecurity Guide for SMEs“ doporučuje mimo jiné řízení přístupů, silnou autentizaci, zálohy a procesy pro práci s dodavateli: https://www.enisa.europa.eu/publications/cybersecurity-guide-for-smes
+- ENISA „Data Protection Engineering“ propojuje bezpečnostní a privacy opatření s technickým návrhem systémů: https://www.enisa.europa.eu/sites/default/files/publications/ENISA%20Report%20-%20Data%20Protection%20Engineering.pdf
+- OWASP ASVS obsahuje praktické požadavky na autentizaci, session management, access control a auditovatelnost aplikací: https://owasp.org/www-project-application-security-verification-standard/
+
 ## Pracovní log
+
+- 2026-08-24: Přidána příloha BJ „Kvartální access review bez bezpečnostního divadla“ s mapou přístupových vrstev, přístupovou kartou, pravidly schvalování, kvartálním rituálem, offboarding testem, rizikovou maticí, checklistem, mini cvičením a ověřenými zdroji.
 
 - 2026-08-24: Přidána příloha BI „Datová mapa pro SaaS bez excelového hřbitova“ s událostním mapováním toků, kartou datového toku, mapou dodavatelů, produktovým workflow, checklistem, mini cvičením a ověřenými evropskými zdroji.
 
