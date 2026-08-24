@@ -6552,7 +6552,7 @@ Na konci auditu rozdělte nálezy do tří skupin:
 
 ### Zdroje k příloze D
 
-- European Data Protection Board: [Guidelines 05/2020 on consent under Regulation 2016/679](https://www.edpb.europa.eu/documents/guideline/guidelines-052020-on-consent-under-regulation-2016679_en)
+- European Data Protection Board: [Guidelines 05/2020 on consent under Regulation 2016/679](https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-052020-consent-under-regulation-2016679_en)
 - European Commission: [Information for individuals — consent in data protection](https://commission.europa.eu/law/law-topic/data-protection/information-individuals_en)
 - CNIL: [Take into account the legal basis in the technical implementation](https://www.cnil.fr/en/sheet-ndeg15-take-account-legal-basis-technical-implementation)
 - CNIL: [Use analytics on your websites and applications](https://www.cnil.fr/fr/node/677)
@@ -14894,7 +14894,7 @@ Výstupem má být jedna consent karta a jeden opravený problém. Ne desetistr�
 
 - ÚOOÚ v českých odpovědích ke cookies uvádí, že technické cookies samy o sobě nevyžadují cookie lištu, ale informační povinnost zůstává, a že odmítnutí souhlasu má být stejně jednoduché jako jeho udělení: https://uoou.gov.cz/verejnost/qa-otazky-a-odpovedi/cookies
 - ÚOOÚ k českému opt-in režimu cookies od roku 2022 shrnuje, že ukládání netechnických cookies vyžaduje souhlas a starý opt-out výklad nestačí: https://uoou.gov.cz/novinky/vse/cookies-od-zacatku-roku-2022-pouze-se-souhlasem
-- EDPB Guidelines 05/2020 vysvětlují podmínky platného souhlasu podle GDPR, zejména svobodnost, konkrétnost, informovanost a jednoznačný projev vůle: https://www.edpb.europa.eu/documents/guideline/guidelines-052020-on-consent-under-regulation-2016679_en
+- EDPB Guidelines 05/2020 vysvětlují podmínky platného souhlasu podle GDPR, zejména svobodnost, konkrétnost, informovanost a jednoznačný projev vůle: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-052020-consent-under-regulation-2016679_en
 - EDPB Cookie Banner Taskforce Report popisuje problematické vzory v cookie bannerech, například chybějící odmítnutí v první vrstvě, předem zaškrtnuté volby nebo zavádějící vizuální hierarchii: https://www.edpb.europa.eu/documents/task-force-report/report-of-the-work-undertaken-by-the-cookie-banner-taskforce_en
 - Evropské znění GDPR obsahuje definici souhlasu v článku 4 odst. 11 a obecné principy zpracování v článku 5: https://eur-lex.europa.eu/eli/reg/2016/679/oj
 
@@ -15405,7 +15405,7 @@ Výsledek má být malý, ale živý. Jeden dobrý feedback kanál, který tým 
 
 - Evropská komise shrnuje GDPR principy včetně účelového omezení, minimalizace dat, omezení uložení, integrity, důvěrnosti a odpovědnosti: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
 - Evropská komise vysvětluje, že typ a množství zpracovaných osobních dat závisí na právním důvodu a zamýšleném použití, přičemž zpracování má respektovat klíčové principy GDPR: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/overview-principles/what-data-can-we-process-and-under-which-conditions_en
-- EDPB v pokynech k souhlasu podle GDPR popisuje požadavky na platný souhlas a situace, kdy je potřeba řešit právní základ zpracování: https://www.edpb.europa.eu/documents/guideline/guidelines-052020-on-consent-under-regulation-2016679_en
+- EDPB v pokynech k souhlasu podle GDPR popisuje požadavky na platný souhlas a situace, kdy je potřeba řešit právní základ zpracování: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-052020-consent-under-regulation-2016679_en
 - EDPB v pokynech k data protection by design and by default doporučuje navrhovat ochranu dat už při návrhu služby a ve výchozím nastavení: https://www.edpb.europa.eu/documents/guideline/guidelines-42019-on-article-25-data-protection-by-design-and-by-default_en
 
 ## BA. AI asistenti v SaaSu bez úniku kontextu
@@ -15825,7 +15825,7 @@ Výstupem není kompletní expanze do Evropy. Výstupem je jeden lokalizovaný e
 - Google Search Central shrnuje práci s vícejazyčnými a víceregionálními weby včetně samostatných URL a jazykových anotací: https://developers.google.com/search/docs/specialty/international/managing-multi-regional-sites
 - Your Europe uvádí, že při přeshraničním prodeji zboží nebo služeb spotřebitelům v EU lze pro vybrané případy použít One Stop Shop pro jedno přiznání a platbu DPH: https://europa.eu/youreurope/business/finance-and-tax/vat/index_en.htm
 - Your Europe popisuje, že před nákupem má zákazník v EU dostat jasné a srozumitelné informace o produktu nebo službě, ceně, obchodníkovi a souvisejících podmínkách: https://europa.eu/youreurope/citizens/consumers/shopping/contract-information/index_en.htm
-- EDPB Guidelines 05/2020 připomínají, že souhlas podle GDPR má být svobodný, konkrétní, informovaný a jednoznačný: https://www.edpb.europa.eu/documents/guideline/guidelines-052020-on-consent-under-regulation-2016679_en
+- EDPB Guidelines 05/2020 připomínají, že souhlas podle GDPR má být svobodný, konkrétní, informovaný a jednoznačný: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-052020-consent-under-regulation-2016679_en
 
 
 ## BC. Export a offboarding zákazníka bez datového rukojmí
@@ -16232,7 +16232,177 @@ Výstupem není obří customer success platforma. Výstupem je menší počet l
 - EDPB Guidelines 8/2020 k cílení uživatelů sociálních sítí popisují rizika profilování, kombinování dat a ztráty kontroly nad osobními údaji; principy jsou užitečné i pro zdrženlivý návrh customer success signálů: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-82020-targeting-social-media-users_en
 - NIST Privacy Framework pomáhá organizacím řídit privacy rizika a navrhovat procesy kolem dat s ohledem na identifikaci, řízení, kontrolu, komunikaci a ochranu: https://www.nist.gov/privacy-framework
 
+
+## BE. Produktové experimenty bez manipulační laboratoře
+
+Experimentování je užitečné, když pomáhá týmu rychleji zjistit, co zákazníkům reálně zjednodušuje práci. Je otravné, když se z něj stane továrna na drobné psychologické pasti: jiné tlačítko, agresivnější banner, méně viditelné zrušení, víc předvyplněných souhlasů a potom vítězný graf s titulkem „konverze +12 %“. Gratuluji, možná jste neoptimalizovali produkt. Možná jste jen zvýšili tlak.
+
+Privacy-first experiment není zákazník v kleci a tým s clipboardem. Je to dočasná, vysvětlitelná změna s jasnou hypotézou, omezeným sběrem dat, férovým UX a předem napsaným rozhodnutím. Malý SaaS nepotřebuje experimentální platformu velikosti vesmírné agentury. Potřebuje disciplínu: proč testujeme, komu test zobrazíme, jaká data opravdu potřebujeme, kdy experiment skončí a co uděláme, když výsledek nebude jednoznačný.
+
+*Codyho komentář: pokud experiment funguje jen proto, že zákazník nepochopil, co se děje, není to growth. Je to UX s falešným knírem.*
+
+### BE.1 Experiment začíná hypotézou, ne variantou tlačítka
+
+Špatný začátek experimentu zní: „Zkusme zelené tlačítko, třeba to zvedne konverze.“ Dobrý začátek zní: „Myslíme si, že noví uživatelé nedokončí aktivaci, protože nerozumí prvnímu kroku. Když nad prázdný stav přidáme konkrétní příklad, více týmů dokončí první projekt do 24 hodin.“
+
+Hypotéza má mít čtyři části:
+
+- **pozorování:** co se děje teď,
+- **vysvětlení:** proč si myslíme, že se to děje,
+- **změna:** co přesně upravíme,
+- **metrika rozhodnutí:** podle čeho změnu přijmeme, zahodíme nebo upravíme.
+
+Příklady použitelných hypotéz:
+
+- „Návštěvníci landing page odcházejí ze sekce pricing, protože nerozumí rozdílu mezi tarify. Přidáme tři příklady typických zákazníků a budeme měřit klik na demo nebo kontakt.“
+- „Nový uživatel nepozve kolegu, protože neví, proč je to potřeba. Přidáme vysvětlení u pozvánky a budeme měřit dokončený týmový setup na úrovni účtu.“
+- „Trial účty se zaseknou před exportem, protože export působí jako technická funkce. Přepíšeme text na výsledek pro zákazníka a budeme měřit první dokončený export.“
+
+Nepoužitelná hypotéza: „Zvýšíme engagement.“ To je marketingová mlha. Engagement s čím? Pro koho? Za jakou cenu? Klik na otravné zavírací tlačítko není zájem. Je to člověk, který se snaží uniknout.
+
+### BE.2 Vyberte nejmenší datovou stopu
+
+Experiment má odpovědět na rozhodnutí, ne rozsvítit všechny analytické vánoční řetězy. U každého testu si napište minimální datovou sadu. Často stačí agregované počty na úrovni stránky, varianty nebo účtu. Detailní uživatelská stopa je poslední možnost, ne default.
+
+Praktický postup:
+
+1. Nejprve definujte rozhodnutí: „nasadit / nenasadit / upravit“.
+2. Potom napište jednu hlavní metriku a jednu bezpečnostní metriku.
+3. Zkontrolujte, jestli metriky jde měřit agregovaně.
+4. Oddělte experimentální data od marketingových profilů.
+5. Nastavte datum konce experimentu a datum smazání surových dat.
+6. Výsledek uložte jako rozhodnutí, ne jako věčný eventový sklad.
+
+Hlavní metrika může být třeba dokončení aktivačního momentu. Bezpečnostní metrika může být nárůst support dotazů, chyb, zrušení nebo odhlášení. U pricing experimentu může být hlavní metrika kvalifikovaná poptávka, bezpečnostní metrika počet lidí, kteří nedokončí checkout nebo píšou na podporu zmatený dotaz. Když experiment zlepší jednu metriku a zhorší důvěru, není to výhra. Je to levná půjčka proti budoucí reputaci.
+
+### BE.3 Netestujte temné vzorce jen proto, že fungují
+
+Některé experimenty jsou rychlé, měřitelné a špatné. Typicky:
+
+- předvyplněný souhlas s marketingem,
+- tlačítko „odmítnout“ schované za šedý text,
+- zrušení předplatného přes podporu, zatímco nákup šel na dva kliky,
+- falešná urgence bez reálného důvodu,
+- zavádějící srovnání tarifů,
+- opt-out formulář delší než registrace,
+- experiment, který mění cenu nebo podmínky bez férového vysvětlení.
+
+V privacy-first produktu platí jednoduché pravidlo: varianta nesmí vyhrát jen proto, že lidem zhorší orientaci. EDPB v pokynech k deceptive design patterns popisuje principy jako transparentnost, odpovědnost a ochranu dat už při návrhu rozhraní. I když dokument míří na sociální sítě, pro SaaS je to užitečný filtr: nezahlcovat, nestrkat, nezamlžovat, nebránit odchodu a nevyrábět rozhodnutí, která uživatel nechtěl udělat.
+
+Před spuštěním experimentu si položte tři nepříjemné otázky:
+
+- Dokázali bychom variantu ukázat zákazníkovi a říct: „Takhle jsme vás chtěli přesvědčit“?
+- Je odmítnutí nebo návrat stejně srozumitelný jako přijetí?
+- Pokud experiment vyhraje, budeme se za něj stydět v case study?
+
+Pokud odpověď bolí, je to produktový kouřový alarm. Nekopejte do něj. Vypněte sporák.
+
+### BE.4 Experimentujte raději v obsahu a hodnotě než v tlaku
+
+Nejlepší experimenty pro malý SaaS často nejsou trikové UI varianty. Jsou to srozumitelnější slova, lepší příklady, kratší cesta k hodnotě nebo poctivější nabídka. Takové testy zlepšují produkt i bez toho, aby tým sbíral osobní data jako digitální veverka.
+
+Dobré oblasti pro privacy-first experimenty:
+
+- jasnější hero sekce podle konkrétního segmentu,
+- lepší vysvětlení prvního kroku v onboardingu,
+- ukázková data, která pomohou pochopit produkt bez importu reality,
+- kratší formulář s méně povinnými poli,
+- přehlednější pricing tabulka,
+- e-mail s jedním dalším krokem místo sedmi odkazů,
+- dokumentace napojená na nejčastější support otázku,
+- prázdný stav s konkrétním příkladem výsledku.
+
+U každého experimentu preferujte změny, které zvyšují pochopení. Když zákazník ví, co produkt dělá, proč to chce a co se stane dál, nepotřebujete ho lovit behaviorální sítí. Překvapivě často stačí nebýt matoucí. Ano, tohle je pořád konkurenční výhoda. Internet je zvláštní místo.
+
+### BE.5 Napište rozhodovací pravidlo před spuštěním
+
+Experiment bez předem napsaného rozhodovacího pravidla láká k tomu, aby si tým po výsledku vybral interpretaci, která se mu nejvíc hodí. To není experiment. To je věštění z dashboardu.
+
+Rozhodovací pravidlo může být jednoduché:
+
+- Pokud varianta B zvýší dokončený aktivační moment o 10 % a nezvýší support dotazy, nasadíme ji.
+- Pokud zlepší kliky, ale zhorší dokončení checkoutu nebo zvýší zmatené dotazy, nenasadíme ji.
+- Pokud výsledek není jasný do 14 dnů, experiment ukončíme a zapíšeme „bez rozhodnutí“.
+- Pokud objevíme privacy nebo férovostní problém, experiment zastavíme bez čekání na statistický ohňostroj.
+
+U malých dat nevyhrávejte na falešnou přesnost. Když máte nízký provoz, používejte experimenty jako strukturované učení: porovnejte signál, doplňte kvalitativní zpětnou vazbu, udělejte menší rozhodnutí. Není ostuda říct „zatím nevíme“. Ostuda je nasadit manipulativní pattern, protože z pěti lidí čtyři klikli rychleji.
+
+### BE.6 Šablona experiment briefu
+
+```markdown
+# Experiment: [název]
+
+## Rozhodnutí
+- Co chceme po experimentu rozhodnout:
+- Co se stane, když výsledek nebude jasný:
+
+## Hypotéza
+- Pozorování:
+- Vysvětlení:
+- Změna:
+- Očekávaný dopad:
+
+## Rozsah
+- Stránka / funkce / segment:
+- Komu se experiment zobrazí:
+- Délka experimentu:
+- Vlastník:
+
+## Měření
+- Hlavní metrika:
+- Bezpečnostní metrika:
+- Nejmenší potřebná data:
+- Kdy smažeme surová data:
+
+## Privacy a férovost
+- Zpracovává experiment osobní údaje?
+- Je odmítnutí stejně snadné jako přijetí?
+- Neobsahuje varianta zavádějící text, tlak nebo skrytou cenu?
+- Lze výsledek vysvětlit zákazníkovi lidsky?
+
+## Rozhodovací pravidlo
+- Nasadíme, pokud:
+- Nenasadíme, pokud:
+- Zastavíme okamžitě, pokud:
+```
+
+### BE.7 Checklist: experiment bez šmírování a nátlaku
+
+- [ ] Experiment má konkrétní hypotézu, ne jen nápad na variantu.
+- [ ] Víme, jaké rozhodnutí po experimentu uděláme.
+- [ ] Hlavní metrika měří zákaznickou hodnotu, ne jen klik.
+- [ ] Máme bezpečnostní metriku pro důvěru, support nebo chyby.
+- [ ] Sběr dat je minimalizovaný a ideálně agregovaný.
+- [ ] Experiment má datum konce a pravidlo pro smazání surových dat.
+- [ ] Varianta nepoužívá předvyplněný souhlas, skryté odmítnutí ani falešnou urgenci.
+- [ ] Zrušení, odmítnutí nebo návrat nejsou těžší než přijetí.
+- [ ] Výsledek zapíšeme do rozhodovacího logu.
+- [ ] Po nasazení odstraníme experimentální kód, flagy a nepotřebné eventy.
+
+### Mini cvičení: první experiment za 55 minut
+
+1. Vyberte jednu část produktu, kde uživatelé často váhají.
+2. Napište jednu hypotézu podle struktury pozorování / vysvětlení / změna / metrika.
+3. Navrhněte variantu, která zvyšuje pochopení, ne tlak.
+4. Vyberte jednu hlavní a jednu bezpečnostní metriku.
+5. Zkraťte datovou sadu na minimum.
+6. Napište rozhodovací pravidlo předem.
+7. Zkontrolujte variantu proti checklistu temných vzorců.
+8. Naplánujte datum ukončení a úklidu.
+
+Výstupem má být jeden experiment brief, ne nová platforma, pět tabulek a tři týdny debat o barvě tlačítka. Malý tým vyhrává tím, že se učí rychle a férově. Když experiment pomůže zákazníkovi udělat lepší rozhodnutí, je to produktový vývoj. Když ho dotlačí k rozhodnutí, které by jinak neudělal, je to jen hezčí past.
+
+### Zdroje k příloze BE
+
+- EDPB Guidelines 03/2022 k deceptive design patterns popisují rizika rozhraní, která ovlivňují lidi k nechtěným nebo škodlivým rozhodnutím o osobních údajích: https://www.edpb.europa.eu/documents/guideline/guidelines-032022-on-deceptive-design-patterns-in-social-media-platform_en
+- EDPB Guidelines 05/2020 k souhlasu vysvětlují požadavky GDPR na svobodný, konkrétní, informovaný a jednoznačný souhlas: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-052020-consent-under-regulation-2016679_en
+- Evropská komise shrnuje GDPR principy pro organizace včetně minimalizace dat, omezení účelu, omezení uložení, transparentnosti a odpovědnosti: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en
+- Your Europe prakticky vysvětluje, že souhlas má být svobodný, konkrétní, informovaný a jednoznačný a má být dán jasnou potvrzující akcí: https://europa.eu/youreurope/business/governance-and-sustainability/digital-and-data-compliance/data-protection-gdpr/index_en.htm
+- EDPB Guidelines 4/2019 k data protection by design and by default jsou užitečný základ pro návrh experimentů s minimální datovou stopou: https://www.edpb.europa.eu/documents/guideline/guidelines-42019-on-article-25-data-protection-by-design-and-by-default_en
+
 ## Pracovní log
+
+- 2026-08-24: Přidána příloha BE „Produktové experimenty bez manipulační laboratoře“ s hypotézami, minimalizací experimentálních dat, varováním před temnými vzorci, rozhodovacími pravidly, šablonou experiment briefu, checklistem, mini cvičením a ověřenými evropskými zdroji.
 
 - 2026-08-24: Přidána příloha BD „Customer success bez šmírovacího health score“ s definicí zákaznického úspěchu, vysvětlitelnými signály, privacy-first health score pravidly, férovými nudges, success review rituálem, kartou účtu, checklistem, mini cvičením a ověřenými zdroji.
 
