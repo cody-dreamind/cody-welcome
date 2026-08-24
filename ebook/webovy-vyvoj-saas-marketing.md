@@ -15402,7 +15402,209 @@ Výsledek má být malý, ale živý. Jeden dobrý feedback kanál, který tým 
 - EDPB v pokynech k souhlasu podle GDPR popisuje požadavky na platný souhlas a situace, kdy je potřeba řešit právní základ zpracování: https://www.edpb.europa.eu/documents/guideline/guidelines-052020-on-consent-under-regulation-2016679_en
 - EDPB v pokynech k data protection by design and by default doporučuje navrhovat ochranu dat už při návrhu služby a ve výchozím nastavení: https://www.edpb.europa.eu/documents/guideline/guidelines-42019-on-article-25-data-protection-by-design-and-by-default_en
 
+## BA. AI asistenti v SaaSu bez úniku kontextu
+
+AI asistent v produktu může být výborný sluha: shrne dlouhé ticketové vlákno, navrhne odpověď zákazníkovi, pomůže uživateli najít funkci nebo přepíše interní poznámku do lidské češtiny. Může být ale taky luxusní potrubí, kterým omylem posíláte zákaznická data do nástroje, jehož nastavení nikdo nečetl, smlouvu nikdo nekontroloval a logy nikdo neumí najít. To už není inovace. To je jen dražší verze tlačítka „odeslat problém někam do mlhy“.
+
+Praktický cíl této přílohy: navrhnout AI asistenta tak, aby pomáhal práci, ale nerozbil důvěru, GDPR logiku, bezpečnostní model ani evropský privacy-first provoz. Nejde o odmítání AI. Jde o to, aby AI funkce měla stejnou disciplínu jako platební brána, export dat nebo admin oprávnění.
+
+### BA.1 Začněte rozhodnutím, ne promptem
+
+Nejhorší zadání zní: „Přidejme AI asistenta.“ To není zadání. To je konfeta vystřelená do backlogu. Začněte rozhodnutím, které má AI zlepšit.
+
+Dobrá zadání:
+
+- support chce zkrátit první návrh odpovědi u opakovaných dotazů,
+- obchod chce vytvořit shrnutí CRM poznámek před follow-upem,
+- uživatel chce najít správnou akci v komplikovaném nastavení,
+- produktový tým chce seskupit anonymizovanou zpětnou vazbu podle témat,
+- administrátor chce rychleji pochopit, proč import selhal.
+
+Špatná zadání:
+
+- „budeme mít chatbota, protože ho má konkurence“,
+- „napojíme model na všechna data a uvidíme“,
+- „AI bude odpovídat zákazníkům sama, člověk to občas zkontroluje“,
+- „pošleme tam celé databázové řádky, ať má kontext“.
+
+AI funkce má mít vlastní kartu: účel, uživatel, vstupní data, výstup, hranice použití, riziko chyby, schvalování a plán vypnutí. Pokud kartu neumíte vyplnit, AI ještě nemáte připravenou. Máte jen demo. Demo je fajn na konferenci. Méně fajn ve fakturačním systému.
+
+### BA.2 Rozdělte AI podle rizika
+
+Ne každá AI funkce má stejné riziko. Překlad interního textu je něco jiného než automatické doporučení, komu schválit úvěr, koho vyřadit z náboru nebo komu omezit účet. EU AI Act pracuje s rizikovým přístupem a od 2. srpna 2026 začaly platit a vymáhat se mimo jiné nové transparentní povinnosti pro vybrané AI systémy; u systémů s vyšším rizikem se termíny a povinnosti liší podle kategorie a konkrétního použití. Proto nestačí říct „používáme AI“. Musíte říct kde, k čemu a s jakým dopadem.
+
+Pro malý SaaS používejte čtyři pracovní třídy:
+
+1. **Pomocník pro text:** návrh odpovědi, shrnutí, přepis, překlad. Nízké až střední riziko podle dat.
+2. **Vyhledávání a doporučení:** nápověda v produktu, návrh další akce, třídění ticketů. Střední riziko, protože může měnit chování uživatele nebo týmu.
+3. **Automatizace interního workflow:** návrh priority, kategorizace incidentů, kontrola fakturačních anomálií. Střední až vyšší riziko podle dopadu.
+4. **Rozhodování o lidech nebo právech:** nábor, kredit, pojištění, vzdělávání, zaměstnanci, přístup ke službě. Vysoké riziko nebo právně citlivá oblast; bez právní a bezpečnostní kontroly sem nechoďte.
+
+Codyho komentář: jestli vám někdo tvrdí, že „je to jen doporučení algoritmu“, zeptejte se, kdo nese následky, když se tím doporučením tým začne řídit automaticky. Ticho po otázce bývá nejlepší metrika rizika.
+
+### BA.3 Minimalizujte kontext dřív, než minimalizujete náklady
+
+U AI se často optimalizují tokeny kvůli ceně. To je užitečné, ale privacy-first pořadí je jiné: nejdřív minimalizujte data kvůli riziku, potom kvůli nákladům.
+
+Před odesláním promptu si položte pět otázek:
+
+- Potřebuje model celé jméno zákazníka, nebo stačí role?
+- Potřebuje e-mail, telefon, IP adresu, interní ID nebo fakturační údaje?
+- Potřebuje celé vlákno, nebo jen poslední zprávu a bezpečně vybraný kontext?
+- Potřebuje přílohy, nebo jen extrahovaný úryvek bez osobních údajů?
+- Potřebuje data uložit u dodavatele, nebo stačí jednorázové zpracování bez trénování?
+
+Praktický pattern pro support asistenta:
+
+```markdown
+Vstup do modelu:
+- typ dotazu: fakturace / technický problém / onboarding
+- anonymizované shrnutí problému
+- relevantní článek dokumentace
+- tón odpovědi
+- omezení: nenavrhovat slevu, neslibovat termín, neposuzovat právní věci
+
+Nevkládat:
+- celé jméno zákazníka
+- e-mail a telefon
+- fakturační údaje
+- interní poznámky obchodníka
+- API klíče, tokeny, session ID
+- kompletní historii účtu
+```
+
+Když AI potřebuje kontext, vytvořte kontextovou vrstvu. Ne „vezmi všechno z databáze“. Kontextová vrstva je úzké API, které vrací jen schválená pole a má logiku pro redakci citlivých údajů. Ano, je to práce navíc. Přesně proto je to bezpečnostní opatření, ne dekorace v architektuře.
+
+### BA.4 Lidské schválení není formalita
+
+U generativní AI je velké lákadlo pustit výstup rovnou ven. Nedělejte to u věcí, které mohou poškodit zákazníka, značku nebo bezpečnost. AI může navrhnout odpověď, ale člověk má zkontrolovat význam, tón, slib, přesnost a datovou bezpečnost.
+
+Pravidla pro human-in-the-loop:
+
+- návrh odpovědi zákazníkovi musí být před odesláním viditelně označený jako návrh,
+- systém nesmí skrýt původní zdrojový kontext,
+- člověk musí vidět, které části byly doplněné modelem,
+- nebezpečné akce nesmí jít provést jen přes AI návrh,
+- odmítnutí nebo úprava návrhu se má používat jako signál kvality, ne jako ostuda operátora.
+
+Užitečný detail: logujte rozhodnutí, ne zbytečný obsah. Například „AI navrhla kategorii billing, člověk změnil na technical“ je užitečný provozní signál. Ukládat celý prompt se zákaznickými osobními daty navždy je datové syslení v laboratorním plášti.
+
+### BA.5 Transparentnost napište lidsky
+
+Pokud uživatel interaguje s AI systémem nebo dostává obsah vytvořený či výrazně upravený AI, řešte transparentnost včas. Evropská komise k AI Actu zdůrazňuje, že od 2. srpna 2026 začala vymáhat pravidla a nové transparentní požadavky, včetně situací, kdy mají uživatelé vědět, že komunikují s AI nebo že obsah byl AI vytvořen či upraven.
+
+Dobrá transparentní věta v produktu:
+
+> Tento návrh odpovědi vytvořil AI asistent z vybraného kontextu ticketu a dokumentace. Před odesláním ho kontroluje člověk.
+
+Dobrá věta v nápovědě:
+
+> AI vyhledávání může navrhnout relevantní postup, ale neprovádí akce za vás a nemá přístup k platebním údajům.
+
+Špatná věta:
+
+> V rámci zlepšování uživatelského zážitku můžeme využívat pokročilé technologie.
+
+To není transparentnost. To je mlhový generátor. Uživatel má pochopit, co AI dělá, jaký má dopad a kde končí její pravomoc.
+
+### BA.6 Vyberte dodavatele podle datového režimu
+
+Při výběru AI dodavatele neřešte jen kvalitu modelu a cenu. Zeptejte se:
+
+- kde se zpracování fyzicky a smluvně odehrává,
+- jestli se vstupy nebo výstupy používají k trénování,
+- jak dlouho dodavatel drží logy,
+- kdo má k logům přístup,
+- zda existuje DPA a seznam subprocesorů,
+- jak funguje mazání a export,
+- jestli lze nastavit region, retenci a vypnutí ukládání,
+- jak dodavatel řeší incidenty a změny modelu.
+
+Privacy-first default pro evropský SaaS: pokud můžete úlohu vyřešit menším modelem v evropském provozu, udělejte to. Nejlepší model na světě není automaticky nejlepší volba pro shrnutí tří odstavců interní poznámky. Občas nepotřebujete raketu. Potřebujete dobře označené koště.
+
+### BA.7 Šablona: karta AI funkce
+
+```markdown
+# AI funkce: [název]
+
+## Účel
+- Jaké rozhodnutí nebo práci zlepšuje:
+- Kdo ji používá:
+- Co je výstup:
+- Co výstup nesmí dělat:
+
+## Riziková třída
+- Pomocník pro text / doporučení / interní workflow / citlivé rozhodování:
+- Dopad chyby:
+- Potřebná kontrola člověkem:
+
+## Data
+- Vstupní data povolená:
+- Vstupní data zakázaná:
+- Redakce nebo anonymizace před odesláním:
+- Retence promptů a výstupů:
+
+## Dodavatel a provoz
+- Model nebo služba:
+- Region zpracování:
+- Trénování na našich datech: ano/ne
+- DPA a subprocesoři:
+- Logy a incident kontakt:
+
+## UX a transparentnost
+- Jak uživatel pozná AI výstup:
+- Kde je vysvětlení limitů:
+- Jak lze výstup upravit, odmítnout nebo nahlásit:
+
+## Měření
+- Agregovaný signál hodnoty:
+- Signál rizika:
+- Review rytmus:
+- Vlastník:
+
+## Vypnutí
+- Kdy funkci vypneme:
+- Jaký je fallback proces:
+- Jak smažeme nebo omezíme uložené výstupy:
+```
+
+### BA.8 Checklist: AI asistent bez úniku kontextu
+
+- [ ] AI funkce řeší konkrétní rozhodnutí nebo práci, ne obecné „přidání AI“.
+- [ ] Máme rizikovou třídu a víme, jaký dopad může mít chyba.
+- [ ] Prompt dostává jen minimální schválený kontext.
+- [ ] Citlivá pole jsou redigovaná před odesláním, ne až po něm.
+- [ ] Uživatel nebo operátor vidí, že jde o AI návrh.
+- [ ] Člověk schvaluje výstupy, které jdou zákazníkovi nebo mění jeho situaci.
+- [ ] Dodavatel má ověřený datový režim, retenci, DPA a subprocesory.
+- [ ] Logujeme provozní rozhodnutí, ne zbytečně kompletní osobní obsah.
+- [ ] Máme fallback, vypínač a vlastníka review.
+- [ ] Veřejné texty o AI odpovídají tomu, co systém opravdu dělá.
+
+### Mini cvičení: AI funkce za 70 minut
+
+1. Vyberte jednu AI funkci, která už existuje nebo je v backlogu.
+2. Napište její účel jednou větou bez slova „AI“.
+3. Zařaďte ji do rizikové třídy.
+4. Vypište všechna vstupní data, která dnes nebo plánovaně dostává.
+5. Škrtněte každé pole, které není nutné pro výsledek.
+6. Napište transparentní větu pro uživatele nebo operátora.
+7. Ověřte dodavatele: trénování, retence, region, DPA, subprocesoři.
+8. Doplňte fallback: co tým udělá, když AI funkci vypnete.
+
+Výstupem má být jedna karta AI funkce a tři konkrétní úpravy: jedno omezení dat, jedno UX vysvětlení a jedno provozní pravidlo. Jestli z toho vznikne desetistránkový AI manifest, vraťte se na začátek. Cílem je bezpečnější produkt, ne dokument, který bude číst jen compliance archeolog.
+
+### Zdroje k příloze BA
+
+- Evropská komise oznámila, že AI Act vstoupil v platnost 1. srpna 2024 a zavádí povinnosti podle rizikových kategorií AI systémů: https://commission.europa.eu/news-and-media/news/ai-act-enters-force-2024-08-01_en
+- AI Act Service Desk Evropské komise uvádí implementační milníky včetně postupného náběhu povinností a plného rozjezdu hlavních aplikačních milníků do 2. srpna 2028: https://ai-act-service-desk.ec.europa.eu/en/ai-act/eu-ai-act-implementation-timeline
+- Evropská komise informovala, že od 2. srpna 2026 začíná vymáhání pravidel AI Actu a nových transparentních požadavků pro vybrané AI systémy: https://digital-strategy.ec.europa.eu/en/news/commission-starts-enforcing-ai-act-rules-and-new-transparency-requirements-2-august
+- EDPB v Opinion 28/2024 řeší vybrané otázky zpracování osobních údajů u AI modelů, včetně toho, že anonymitu modelu je potřeba posuzovat případ od případu: https://www.edpb.europa.eu/documents/opinion-of-the-board-art-64/opinion-282024-on-certain-data-protection-aspects-related-to_en
+- EDPB shrnuje, že GDPR principy mají podporovat odpovědnou AI inovaci při ochraně osobních údajů: https://www.edpb.europa.eu/news/edpb-opinion-on-ai-models-gdpr-principles-support-responsible-ai_en
+
 ## Pracovní log
+
+- 2026-08-24: Přidána příloha BA „AI asistenti v SaaSu bez úniku kontextu“ s rizikovým členěním AI funkcí, minimalizací prompt kontextu, human-in-the-loop pravidly, transparentním UX, dodavatelskými otázkami, kartou AI funkce, checklistem, mini cvičením a ověřenými EU/EDPB zdroji.
 
 - 2026-08-24: Přidána příloha AZ „Zpětná vazba bez produktového šmírování“ s návrhem privacy-first feedback loopu, konkrétními otázkami, šablonou karty kanálu, checklistem, mini cvičením a ověřenými zdroji.
 
