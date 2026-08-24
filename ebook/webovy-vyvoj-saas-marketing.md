@@ -304,6 +304,10 @@ AK. DPIA pro malý SaaS bez právního dramatu
 AL. Marketingový datový audit bez šmírovacího autopilota
 AM. Export dat pro zákazníka bez CSV hororu
 AN. SLA, status page a support závazky bez falešných devítek
+AO. Zálohy a obnova bez falešného pocitu bezpečí
+AP. Bezpečnostní hlavičky bez cargo cult konfigurace
+AQ. Registr dodavatelů a subprocesorů bez slepé důvěry
+AR. Testovací a demo data bez úniku reality
 
 ---
 
@@ -13869,8 +13873,192 @@ Výstupem není „máme vendor management“. Výstupem je seznam služeb, kter
 - CNIL guide pro zpracovatele vysvětluje povinnosti zpracovatelů podle GDPR a praktické požadavky na smlouvy, bezpečnost a pomoc správcům: https://www.cnil.fr/en/processor-guide
 
 
+## AR. Testovací a demo data bez úniku reality
+
+Testovací prostředí je zvláštní místo. Všichni vědí, že není produkce, a proto se k němu často chovají hůř než k produkci. Přesně tím vznikají nejdražší malé průšvihy: export reálné databáze do stagingu, screenshot s osobními údaji v dokumentaci, demo účet plný skutečných klientů, logy z testu uložené v nástroji, kde je najednou vidí polovina firmy. Gratuluju, právě jste vytvořili privacy-first escape room. Jen bez zábavy.
+
+Pro malý SaaS je bezpečná práce s testovacími a demo daty praktická disciplína, ne právní dekorace. Produkt potřebuje realistická data, aby se dalo testovat UI, výkon, role, onboarding, fakturace a support. Zároveň ale nepotřebuje kopírovat skutečné osobní údaje zákazníků do každého prostředí, kde zrovna někdo ladí bug.
+
+Základní pravidlo:
+
+> Produkční data patří do produkce. Do vývoje, testů, dokumentace a dema patří data syntetická, anonymizovaná nebo pečlivě omezená.
+
+To zní samozřejmě. V provozu se ale často zlomí na větě „jen na chvíli si stáhnu dump“. Tohle „jen na chvíli“ má v bezpečnosti podobnou pověst jako „rychlá schůzka“ v kalendáři. Všichni víme, jak to dopadne.
+
+### AR.1 Rozdělte prostředí podle rizika
+
+Nejdřív si napište, kde všude se data objevují. Ne jen databáze. Data žijí i v obrázcích, e-mailech, logách, exportech, testovacích účtech, support ticketech, analytice, CI artefaktech a prezentacích pro obchod.
+
+Typická prostředí:
+
+- **Lokální vývoj:** notebook vývojáře, seed skripty, lokální databáze, debug logy.
+- **Preview větve:** krátkodobé deploymenty pro review pull requestů.
+- **Staging:** stabilnější prostředí pro testování před releasem.
+- **Demo:** prostředí pro obchod, onboarding, školení nebo veřejnou ukázku.
+- **Dokumentace a screenshoty:** návody, help centrum, interní runbooky, release notes.
+- **Automatizované testy:** CI, testovací artefakty, snapshoty, e-mailové sandboxy.
+- **Analytika a monitoring:** události z testů, chyby, performance trace, session reprodukce pokud je vůbec používáte.
+
+Ke každému prostředí si napište tři věci: kdo k němu má přístup, jaká data tam smějí být a kdy se prostředí maže nebo obnovuje. Pokud to nikdo neumí říct, prostředí není „jen staging“. Je to šuplík na riziko.
+
+### AR.2 Syntetická data jsou výchozí volba
+
+Syntetická data jsou data vytvořená pro testování, ne převzatá z reálného účtu. Nemusí být dokonalá. Musí být dost realistická, aby odhalila produktové problémy.
+
+Dobrý seed dataset obsahuje:
+
+- různé role uživatelů,
+- prázdné i plné stavy,
+- dlouhé názvy projektů, firem a souborů,
+- diakritiku, české adresy, evropské formáty dat a měn,
+- neaktivní účty, pozvánky, expirace a chybové scénáře,
+- rozumně velký objem dat pro výkonové testy,
+- edge cases, které UI obvykle rozbijí dřív než zákazník.
+
+Příklad špatného demo účtu:
+
+- jedna firma,
+- jeden uživatel,
+- tři položky,
+- všechno zelené,
+- žádná historie,
+- žádná chyba,
+- žádný dlouhý text.
+
+Takové demo je hezké, ale nepravdivé. Ukáže produkt v showroomu, ne v provozu. Lepší demo účet má realistický nepořádek: rozpracovaný projekt, dokončený projekt, nevyřízenou pozvánku, varování, fakturu, starší komentáře a prázdný stav pro novou funkci. Jen bez reálných lidí.
+
+### AR.3 Anonymizace není najít a nahradit jméno
+
+Když už musíte použít data odvozená z produkce, nestačí přepsat jména na „Jan Novák“ a e-mail na `test@example.com`. Osobní údaj může být i kombinace hodnot: název firmy, čas události, část adresy, poznámka v komentáři, ID zakázky, text ticketu nebo unikátní vzorec chování.
+
+Bezpečnější postup:
+
+1. **Omezte rozsah:** vezměte jen tabulky a sloupce potřebné pro konkrétní test.
+2. **Odstraňte volné texty:** komentáře, poznámky a popisy jsou nejčastější nosiče nečekaných osobních údajů.
+3. **Pseudonymizujte konzistentně:** stejný uživatel má ve všech tabulkách stejné falešné ID, ale bez vazby na reálnou identitu.
+4. **Posuňte časy:** zachovejte relativní sekvenci, ale smažte přesné reálné datumy, pokud nejsou nutné.
+5. **Přepište identifikátory:** e-maily, telefony, adresy, IP, tokeny, názvy firem, fakturační údaje.
+6. **Zkontrolujte výstup:** anonymizovaný dataset otestujte jako produktový artefakt, ne jako vedlejší soubor.
+7. **Nastavte retenci:** dataset má datum expirace a vlastníka.
+
+Pseudonymizace je užitečná, ale není kouzelný plášť neviditelnosti. Pokud existuje oddělená tabulka nebo log, který pseudonymy spojuje zpět s lidmi, pořád pracujete s osobními údaji a musíte s nimi podle toho zacházet. Pokud lze člověka znovu poznat kombinací hodnot, problém nezmizel. Jen dostal falešný knír.
+
+### AR.4 Demo prostředí navrhujte jako produkt
+
+Demo není skládka screenshotů z produkce. Demo je řízený příběh, který má ukázat hodnotu produktu a zároveň neprozradit cizí data. Obchodní tým by neměl sahat po reálném zákaznickém účtu jen proto, že demo dataset vypadá prázdně.
+
+Dobré demo prostředí má:
+
+- jasný scénář podle segmentu zákazníka,
+- resetovatelný stav po každé ukázce,
+- oddělené účty pro obchodníky a testovací uživatele,
+- falešné firmy, lidi, projekty a dokumenty,
+- realistickou historii aktivit,
+- vypnuté nebo sandboxované e-maily, webhooky a platby,
+- viditelné označení, že jde o demo,
+- žádné napojení na produkční zákaznická data.
+
+Příklad demo scénáře pro B2B SaaS:
+
+1. Uživatel založí workspace pro fiktivní firmu `Severní dílna s.r.o.`.
+2. Pozve kolegu s rolí schvalovatele.
+3. Nahraje ukázkový dokument bez reálných údajů.
+4. Vytvoří požadavek, který projde workflow.
+5. Zobrazí auditní stopu a export.
+6. Ukáže, kde se nastavuje retence a smazání.
+
+Tím obchod ukazuje hodnotu, ne databázovou archeologii. A vývoj má stabilní prostředí, které lze obnovit, testovat a dokumentovat.
+
+### AR.5 Chraňte screenshoty, logy a AI vstupy
+
+Únik testovacích dat se často nestane přes databázi. Stane se přes vedlejší kanál. Screenshot v issue, log v CI, paste do AI nástroje, nahrávka obrazovky, export pro support, příloha v e-mailu. Proto do pravidel zahrňte i materiály, které tým bere jako „jen pomocné“.
+
+Praktická pravidla:
+
+- Screenshoty do dokumentace pořizujte z demo prostředí, ne z produkce.
+- Bug report má obsahovat minimální reprodukční data, ne celý zákaznický kontext.
+- CI logy nesmí vypisovat tokeny, e-maily, obsah formulářů ani celé payloady.
+- AI nástroje nesmí dostávat reálná zákaznická data, pokud k tomu není jasný schválený proces.
+- Support ticket s citlivým obsahem má mít omezený přístup a retenci.
+- Sdílené nahrávky obrazovky po vyřešení smažte nebo anonymizujte.
+- Exporty pro debugging mají expiraci, šifrování a vlastníka.
+
+Privacy-first kultura se pozná podle toho, co tým udělá ve spěchu. Ne podle toho, co tvrdí v prezentaci. Ve spěchu lidé kopírují, screenshotují a posílají věci „jen interně“. Interně je krásné slovo. Bohužel neumí šifrovat.
+
+### AR.6 Šablona: karta testovacích dat
+
+```markdown
+# Karta testovacích dat: [produkt / prostředí / dataset]
+
+## Účel
+- Co testujeme:
+- Kdo dataset používá:
+- Jak dlouho ho potřebujeme:
+
+## Původ dat
+- Syntetická / anonymizovaná / omezený produkční výřez:
+- Kdo vytvořil dataset:
+- Kdy byl vytvořen:
+- Kdy expirovat nebo obnovit:
+
+## Rozsah
+- Tabulky / entity:
+- Vyloučené sloupce:
+- Volné texty:
+- Soubory a přílohy:
+- Logy a události:
+
+## Ochrana
+- Prostředí:
+- Přístupy:
+- Šifrování:
+- E-maily, webhooky a platby:
+- Retence:
+
+## Kontrola
+- Jak ověřujeme, že dataset neobsahuje reálné údaje:
+- Kdo schválil použití:
+- Kdy proběhne revize:
+```
+
+Tuhle kartu nepotřebuje každý malý seed skript. Potřebuje ji každý dataset, který se sdílí mezi lidmi, používá v demu, vznikl z produkce nebo se ukládá déle než jeden krátký testovací cyklus. Jinak se z něj časem stane tajemný artefakt s názvem `realistic-final-demo-data-copy.sql`. A to je přesně typ souboru, který by měl v týmu spustit tichý alarm.
+
+### AR.7 Checklist: testovací data bez úniku reality
+
+- [ ] Máme pravidlo, že vývoj, staging a demo nepoužívají produkční data jako výchozí možnost.
+- [ ] Seed skripty vytvářejí realistická syntetická data včetně edge cases.
+- [ ] Demo prostředí má resetovatelný scénář a neobsahuje reálné zákaznické účty.
+- [ ] Produkční výřezy se používají jen po schválení, omezení rozsahu a anonymizační kontrole.
+- [ ] Volné texty, soubory a komentáře se z testovacích datasetů odstraňují nebo nahrazují.
+- [ ] CI logy, screenshoty a bug reporty neobsahují osobní údaje ani tajné hodnoty.
+- [ ] E-maily, webhooky, notifikace a platby jsou v testu sandboxované nebo vypnuté.
+- [ ] Každý sdílený dataset má vlastníka, účel a datum expirace.
+- [ ] AI asistenti a externí nástroje nedostávají reálná zákaznická data bez schváleného procesu.
+- [ ] Restore nebo refresh stagingu neobnoví omylem data, která už měla být smazaná.
+
+### Mini cvičení: bezpečný demo dataset za 60 minut
+
+1. Vyberte jednu hlavní uživatelskou cestu, kterou často ukazujete zákazníkům.
+2. Vypište všechny entity, které cesta potřebuje: účet, projekt, dokument, komentář, fakturu, auditní událost.
+3. Vytvořte fiktivní firmu, uživatele a scénář s realistickou historií.
+4. Přidejte alespoň tři edge cases: dlouhý název, prázdný stav, chybovou validaci nebo expirovanou pozvánku.
+5. Zkontrolujte, že žádný text, soubor ani screenshot nepochází z produkce.
+6. Vypněte reálné e-maily, webhooky a platby.
+7. Napište do dokumentace krátký postup: jak demo resetovat, kdo ho vlastní a kdy se reviduje.
+
+Výstupem není dokonalé testovací království. Výstupem je první bezpečný dataset, který obchod, produkt i vývoj můžou používat bez toho, aby se někdo modlil, že v poznámce nezůstalo jméno skutečného klienta. Modlitba je fajn v kostele. V datové hygieně preferuju kontrolu.
+
+### Zdroje k příloze AR
+
+- Evropská komise shrnuje principy GDPR včetně minimalizace dat, přesnosti a omezení uložení: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
+- EDPB přehled základních principů GDPR uvádí mimo jiné účelové omezení, minimalizaci, integritu a důvěrnost jako základní pravidla zpracování: https://www.edpb.europa.eu/topics/key-gdpr-concepts/basic-principles_en
+- ENISA report „Pseudonymisation techniques and best practices“ popisuje pseudonymizaci jako praktickou bezpečnostní techniku a upozorňuje na různé scénáře a útočné modely: https://www.enisa.europa.eu/publications/pseudonymisation-techniques-and-best-practices
+- ENISA report „Data Pseudonymisation: Advanced Techniques and Use Cases“ zdůrazňuje, že pseudonymizace není univerzální řešení a má být kombinovaná s posouzením rizik: https://www.enisa.europa.eu/publications/data-pseudonymisation-advanced-techniques-and-use-cases
+
+
 ## Pracovní log
 
+- 2026-08-24: Přidána příloha AR „Testovací a demo data bez úniku reality“ s pravidly pro prostředí, syntetická data, anonymizaci, demo scénáře, screenshoty/logy/AI vstupy, kartou testovacích dat, checklistem, mini cvičením a ověřenými zdroji.
 - 2026-08-23: Přidána příloha AQ „Registr dodavatelů a subprocesorů bez slepé důvěry“ s rolemi dodavatelů, inventářem nástrojů, prioritizací rizika, otázkami pro dodavatele, procesem změn subprocesorů, kartou dodavatele, checklistem, mini cvičením a ověřenými zdroji.
 - 2026-08-23: Přidána příloha AP „Bezpečnostní hlavičky bez cargo cult konfigurace“ s inventářem zdrojů, základní sadou HTTP hlaviček, CSP/HSTS postupem, Permissions-Policy, kartou bezpečnostních hlaviček, checklistem, mini auditem a ověřenými zdroji.
 
