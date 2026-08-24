@@ -17579,7 +17579,219 @@ Výsledek má být praktický: když zítra spadne přihlášení, tým nebude v
 - ENISA Good Practice Guide for Incident Management popisuje incident handling proces včetně detekce, triage, řešení, uzavření a post-analýzy: https://www.enisa.europa.eu/publications/good-practice-guide-for-incident-management
 - ENISA Cybersecurity Guide for SMEs doporučuje malým a středním firmám praktická bezpečnostní opatření včetně incident response přípravy: https://www.enisa.europa.eu/publications/cybersecurity-guide-for-smes
 
+## BL. Zálohy a obnova bez falešného pocitu bezpečí
+
+Záloha není soubor, který někde existuje. Záloha je schopnost vrátit službu do použitelného stavu v čase, který firma, zákazník a smlouvy přežijí bez nervového zhroucení. Pokud jste nikdy nezkusili obnovu, nemáte zálohu. Máte naději. A naděje je krásná věc, jen se špatně mountuje do produkce.
+
+U malého SaaSu bývá největší problém v tom, že backup proces vzniká postupně a neviditelně: databáze se zálohuje u poskytovatele, soubory v objektovém úložišti někdo „asi“ verzoval, konfigurace je v `.env`, fakturační data jsou u platební brány a marketingové exporty žijí v nástroji, který měl být jen dočasný. Všechno nějak funguje — dokud jeden incident neukáže, že obnovit službu znamená skládat puzzle bez obrázku na krabici.
+
+Privacy-first provoz zálohy ještě zpřísňuje. Nejde jen o dostupnost. Záloha často obsahuje produkční osobní údaje, historické chyby, smazaná data, tokeny, exporty a logy. Špatně navržená záloha umí obejít retenci, právo na výmaz i interní přístupová pravidla. Jinými slovy: backup není technická drobnost. Je to datový produkt se všemi riziky, jen má méně hezké UI.
+
+### BL.1 Začněte obnovou, ne zálohou
+
+První otázka nezní „jak často zálohujeme?“. První otázka zní: **co přesně musí po incidentu znovu fungovat jako první?**
+
+Rozdělte obnovu podle zákaznických cest:
+
+- **Přihlášení a identita:** uživatel se dostane do účtu, reset hesla funguje, MFA není rozbité.
+- **Hlavní produktová data:** zákazník vidí svoje projekty, dokumenty, objednávky nebo nastavení.
+- **Platby a fakturace:** tarif, licence, faktury a stav předplatného odpovídají realitě.
+- **Souborová data:** nahrané soubory, obrázky, exporty a přílohy se obnoví konzistentně s databází.
+- **Konfigurace:** DNS, tajemství, environment proměnné, feature flags a integrační klíče jsou dostupné bezpečně.
+- **Komunikace:** support ví, co říct, a status page neprodává mlhu v balení „degradovaný výkon“.
+
+Pro každou cestu stanovte dvě čísla:
+
+- **RTO:** do kdy musí být služba zpět v použitelném stavu.
+- **RPO:** kolik dat si můžete dovolit ztratit.
+
+Příklad pro malý B2B SaaS:
+
+| Oblast | RTO | RPO | Poznámka |
+|---|---:|---:|---|
+| Přihlášení | 2 hodiny | 15 minut | Bez loginu zákazník neudělá nic. |
+| Hlavní databáze | 4 hodiny | 30 minut | Obnova musí zahrnout i migrace schématu. |
+| Fakturace | 1 pracovní den | 0 až 24 hodin | Stav ověřit proti platební bráně. |
+| Uploady | 1 pracovní den | 24 hodin | Nutná konzistence s DB odkazy. |
+| Analytika | 3 pracovní dny | 7 dní | Agregovaná data nejsou první priorita. |
+
+*Codyho komentář: nejčastější manažerská fantazie je RTO „hned“ a RPO „nic neztratit“ za rozpočet „ideálně zdarma“. To není plán, to je pohádka pro investory před spaním.*
+
+### BL.2 Co všechno patří do backup inventáře
+
+Backup inventář má být krátký, konkrétní a pravidelně ověřovaný. Ne román, ne diagram pro architektonickou soutěž, ale pracovní seznam věcí, bez kterých službu neobnovíte.
+
+Zapište minimálně:
+
+- **Databáze:** název, poskytovatel, region, frekvence záloh, retence, šifrování, postup obnovy.
+- **Objektové úložiště:** bucket, region, verzování, lifecycle pravidla, ochrana proti smazání, test obnovy.
+- **Aplikační konfigurace:** proměnné prostředí, tajemství, integrační klíče, kde jsou uloženy, kdo má přístup.
+- **Kód a infrastruktura:** repozitáře, IaC, build konfigurace, migrace, nasazovací postup, image registry.
+- **Externí systémy:** platební brána, e-mailing, CRM, helpdesk, analytika, produktové nástroje.
+- **Dokumentace:** runbook obnovy, kontakty, smluvní priority, incident šablony.
+
+Důležité je zapsat i věci, které **záměrně nezálohujete**. Například detailní raw logy po krátké retenci, session replay nahrávky, marketingové user-level profily nebo dočasné exporty. Privacy-first provoz často vyhrává tím, že některá data vůbec nechce držet při životě. Skvělá zpráva: co nemáte, to nemusíte obnovovat, chránit ani vysvětlovat dozorovému úřadu.
+
+### BL.3 Tři vrstvy záloh
+
+Pro malý tým se osvědčuje jednoduchá třívrstvá logika:
+
+1. **Rychlá provozní obnova:** snapshoty databáze, point-in-time recovery, verzování objektů a rollback posledního deploye.
+2. **Odolná izolovaná kopie:** záloha mimo primární účet, region nebo síť, s oddělenými přístupy a MFA.
+3. **Dlouhodobá regulační vrstva:** jen data, která opravdu musíte držet kvůli účetnictví, smlouvám nebo zákonným povinnostem.
+
+Nepleťte si je. Rychlý snapshot není obrana proti kompromitovanému admin účtu, pokud útočník smaže produkci i snapshoty jedním klikem. Dlouhodobý archiv zase není pohodlný způsob, jak obnovit aplikaci za hodinu. Každá vrstva má jiný účel, jinou retenci a jiné přístupové pravidlo.
+
+Praktické minimum:
+
+- produkční databáze má automatické zálohy a pravidelný export obnovitelný mimo primární účet,
+- kritické soubory mají verzování nebo periodický export,
+- tajemství nejsou uložená v záloze databáze ani v repozitáři,
+- backup přístup nemá stejný člověk, stejný token a stejný účet jako produkční admin,
+- alespoň jedna kopie je chráněná proti okamžitému přepsání nebo smazání,
+- obnova se testuje v odděleném prostředí, ne rovnou v produkci na styl „drž mi kafe“.
+
+### BL.4 Privacy-first pravidla pro zálohy
+
+Zálohy musí respektovat stejnou datovou disciplínu jako produkce. V některých ohledech ještě přísnější, protože se do nich často nikdo nedívá, dokud není pozdě.
+
+Použijte tato pravidla:
+
+- **Minimalizace:** zálohujte jen systémy a data, která jsou nutná pro obnovu nebo zákonnou povinnost.
+- **Retence:** pro každý typ zálohy stanovte dobu držení a důvod; neurčité „navždy“ je červená vlajka v reflexní vestě.
+- **Šifrování:** zálohy šifrujte při přenosu i uložení; klíče držte odděleně od samotných záloh.
+- **Přístupy:** backup administrace má vlastní role, MFA, audit log a pravidelný access review.
+- **Výmaz:** proces mazání zákaznických dat musí řešit i to, kdy data vypadnou ze záloh nebo jak je při obnově znovu nesprávně neoživit.
+- **Testovací prostředí:** obnovy do testu anonymizujte nebo přísně omezte přístup; produkční osobní údaje nejsou vývojářská dekorace.
+
+Příklad formulace pro interní politiku:
+
+```markdown
+Zálohy produkční databáze držíme 30 dní pro provozní obnovu. Dlouhodobě archivujeme pouze účetní a smluvní záznamy podle zákonných povinností. Přístup k backup úložišti mají jen určené role s MFA. Obnovu testujeme kvartálně v izolovaném prostředí; produkční osobní údaje v testu anonymizujeme nebo prostředí po testu smažeme.
+```
+
+### BL.5 Restore drill: test, který odhalí realitu
+
+Jednou za kvartál udělejte restore drill. Ne auditní divadlo s krásným zápisem, ale skutečný test obnovy vybraného systému.
+
+Postup:
+
+1. Vyberte scénář: například omylem smazaná tabulka, poškozené uploady, kompromitovaný admin účet nebo nefunkční region.
+2. Určete cíl: co má po testu fungovat a jaké RTO/RPO ověřujete.
+3. Vytvořte izolované prostředí bez dopadu na produkci.
+4. Obnovte data podle runbooku bez pomoci člověka, který proces napsal.
+5. Ověřte aplikaci funkčně: login, hlavní workflow, export, fakturace, oprávnění.
+6. Zapište čas, problémy, chybějící přístupy, ruční kroky a nejasnosti.
+7. Upravte runbook a vytvořte follow-up úkoly s vlastníkem.
+
+Měřte hlavně:
+
+- čas do první použitelné obnovy,
+- stáří obnovených dat,
+- počet ručních kroků,
+- chybějící nebo příliš široká oprávnění,
+- nekonzistence mezi databází a soubory,
+- tajemství nebo osobní údaje, které se objevily tam, kde neměly.
+
+Restore drill nemá hledat viníka. Má hledat pravdu. A pravda je levnější v úterý odpoledne než v pátek večer během incidentu.
+
+### BL.6 Runbook obnovy
+
+Runbook obnovy má být tak srozumitelný, aby ho zvládl technický člověk, který projekt zná, ale není autorem každého detailu. Pokud postup funguje jen v hlavě jednoho seniora, nemáte runbook. Máte single point of genius, což zní lichotivě, dokud ten člověk není na dovolené.
+
+Šablona:
+
+```markdown
+# Restore runbook: [systém]
+
+## Účel
+- Co obnovujeme:
+- Jaký zákaznický dopad řešíme:
+- RTO:
+- RPO:
+
+## Vstupy
+- Zdroj zálohy:
+- Přístupová role:
+- Potřebné tajemství:
+- Související systémy:
+
+## Postup
+1. Ověř incident a rozhodnutí o obnově.
+2. Zastav zápisy nebo přepni systém do maintenance režimu, pokud je to nutné.
+3. Vyber bod obnovy.
+4. Obnov do izolovaného prostředí.
+5. Spusť migrace nebo kompatibilitní kroky.
+6. Ověř integritu dat.
+7. Ověř hlavní zákaznické workflow.
+8. Přepni provoz nebo připrav produkční obnovu.
+9. Informuj support a aktualizuj status.
+10. Zapiš výsledek, časy a follow-up.
+
+## Kontrola
+- Login funguje: ano/ne
+- Hlavní workflow funguje: ano/ne
+- Oprávnění sedí: ano/ne
+- Fakturace sedí: ano/ne
+- Uploady sedí: ano/ne
+- Audit log zachytil obnovu: ano/ne
+- Privacy kontrola hotová: ano/ne
+
+## Po obnově
+- Co se ztratilo:
+- Co bylo obnoveno ručně:
+- Co musíme opravit do 7 dnů:
+- Co musíme zlepšit do 30 dnů:
+```
+
+### BL.7 Nejčastější chyby
+
+- **Zálohy jsou ve stejném účtu jako produkce.** Kompromitace účtu pak znamená kompromitaci obnovy.
+- **Nikdo nezná RTO/RPO.** Tým neví, jestli má obnovovat rychle, přesně, nebo právně opatrně.
+- **Obnovuje se jen databáze.** Aplikace pak ukazuje odkazy na soubory, které neexistují, nebo fakturační stavy, které nesedí.
+- **Testuje se jen stažení dumpu.** Dump na disku není funkční služba.
+- **Zálohy ignorují mazání dat.** Obnovením staré kopie se vrátí data, která už měla být pryč.
+- **Přístupy jsou příliš široké.** Každý admin umí smazat produkci i backup. Komfortní, svižné, katastrofální.
+- **Runbook je zastaralý.** Poslední deploy změnil migrace, provider změnil UI a jediný screenshot v dokumentaci už patří do muzea.
+
+### BL.8 Checklist: zálohy, kterým se dá věřit
+
+- [ ] Máme definované RTO a RPO pro hlavní zákaznické cesty.
+- [ ] Backup inventář obsahuje databáze, soubory, konfiguraci, kód, externí systémy a dokumentaci.
+- [ ] Víme, která data záměrně nezálohujeme a proč.
+- [ ] Kritické zálohy nejsou závislé na stejném účtu, tokenu nebo síti jako produkce.
+- [ ] Zálohy jsou šifrované a klíče jsou oddělené od backup úložiště.
+- [ ] Přístup k zálohám má MFA, audit log a pravidelný access review.
+- [ ] Retence záloh odpovídá účelu, smlouvám a pravidlům mazání dat.
+- [ ] Obnova se testuje aspoň kvartálně v izolovaném prostředí.
+- [ ] Test obnovy ověřuje funkční aplikaci, ne jen existenci souboru.
+- [ ] Po každém restore drillu vznikne aktualizovaný runbook a konkrétní follow-up.
+
+### Mini cvičení: restore drill za 60 minut
+
+1. Vyberte jednu kritickou zákaznickou cestu, například přihlášení nebo hlavní databázi projektu.
+2. Napište její RTO a RPO tak, jak je dnes realisticky zvládnete, ne jak by to vypadalo hezky v prezentaci.
+3. Najděte poslední dostupnou zálohu a ověřte, kdo k ní má přístup.
+4. Obnovte ji do izolovaného prostředí.
+5. Spusťte tři funkční kontroly: login, hlavní workflow, export nebo fakturace.
+6. Zapište skutečný čas obnovy a všechna místa, kde jste improvizovali.
+7. Vytvořte jeden úkol, který do týdne zkrátí obnovu nebo sníží riziko ztráty dat.
+
+Výsledek není dokonalý disaster recovery plán. Výsledek je to, že tým poprvé zjistí, jestli jeho zálohy umí něco víc než zabírat místo a generovat uklidňující zelené ikonky.
+
+### Zdroje k příloze BL
+
+- GDPR čl. 32 zahrnuje důvěrnost, integritu, dostupnost, odolnost systémů a schopnost včas obnovit dostupnost a přístup k osobním údajům po fyzickém nebo technickém incidentu: https://eur-lex.europa.eu/legal-content/EN/TXT/?qid=1573621990672&uri=CELEX%3A32016R0679
+- Směrnice NIS2 řadí mezi opatření řízení kybernetických rizik také business continuity, backup management, disaster recovery a crisis management: https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32022L2555
+- Prováděcí nařízení Komise (EU) 2024/2690 konkretizuje pro vybrané subjekty požadavky na backup plány, recovery times, bezpečné umístění kopií, kontroly přístupu, retenci a pravidelné integrity checks: https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?qid=1787078457670&uri=OJ%3AL_202402690
+- ENISA Business Continuity Management for SMEs doporučuje dokumentovaný backup plán, pravidelné zálohy a periodické testování schopnosti obnovy: https://www.enisa.europa.eu/sites/default/files/publications/ENISA_BCM_for_SMEs_V1_0.pdf
+- ENISA Cybersecurity for SMEs zdůrazňuje bezpečné offline zálohy a pravidelné testy obnovy jako obranu proti ransomware scénářům: https://www.enisa.europa.eu/sites/default/files/publications/ENISA%20Report%20-%20Cybersecurity%20for%20SMES%20Challenges%20and%20Recommendations.pdf
+
+
 ## Pracovní log
+
+- 2026-08-24: Přidána příloha BL „Zálohy a obnova bez falešného pocitu bezpečí“ s RTO/RPO přístupem, backup inventářem, privacy-first pravidly, restore drillem, runbookem, checklistem, mini cvičením a ověřenými EU/ENISA zdroji.
+
 
 - 2026-08-24: Přidána příloha BK „Status page a incident komunikace bez paniky a mlžení“ s rozlišením provozního incidentu, bezpečnostního incidentu a personal data breach, šablonami status updatů, incident kartou, postmortem pravidly, checklistem, mini cvičením a ověřenými EU/EDPB/ENISA zdroji.
 
