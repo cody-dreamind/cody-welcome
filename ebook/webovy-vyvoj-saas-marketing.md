@@ -17788,7 +17788,202 @@ Výsledek není dokonalý disaster recovery plán. Výsledek je to, že tým pop
 - ENISA Cybersecurity for SMEs zdůrazňuje bezpečné offline zálohy a pravidelné testy obnovy jako obranu proti ransomware scénářům: https://www.enisa.europa.eu/sites/default/files/publications/ENISA%20Report%20-%20Cybersecurity%20for%20SMES%20Challenges%20and%20Recommendations.pdf
 
 
+## BM. Privacy impact check bez právního paralyzéru
+
+Privacy-first tým nesmí čekat, až „někdo z právního“ na konci sprintu posvětí hotovou funkci. To je pozdě. V tu chvíli už je databáze navržená, eventy poslané do analytiky, support má nový admin přístup a produktový manažer se tváří, že přece „jen přidali jedno políčko“. Jedno políčko je v SaaSu často malá díra do velkého skladu dat.
+
+Dobrá zpráva: pro malý tým nemusí být posouzení dopadu na soukromí padesátistránkový dokument s razítkem, který všichni nenávidí a nikdo nečte. Pro většinu běžných produktových změn stačí lehký privacy impact check: krátká karta, jasné otázky, rozhodnutí a odkaz na follow-up úkoly. Formální DPIA podle GDPR čl. 35 je potřeba tehdy, když zpracování pravděpodobně povede k vysokému riziku pro práva a svobody lidí. Lehký check ale dává smysl mnohem častěji, protože pomáhá riziko poznat dřív, než z něj bude drahá architektonická vykopávka.
+
+### BM.1 Kdy privacy check spustit
+
+Nedělejte privacy check jen u „velkých právních projektů“. Spouštějte ho u každé změny, která mění tok dat, oprávnění, měření nebo rozhodování o uživateli.
+
+Praktické spouštěče:
+
+- Přidáváte nové pole do registrace, profilu, formuláře nebo importu.
+- Začínáte posílat data do nového externího nástroje.
+- Měníte analytiku, eventy, logování nebo retention.
+- Přidáváte AI asistenta, automatické doporučení, scoring nebo kategorizaci.
+- Dáváte supportu, administrátorům nebo zákaznickým rolím nový přístup k datům.
+- Spojujete dvě datové oblasti, které dřív žily odděleně.
+- Měníte onboarding tak, že po uživateli chcete citlivější kontext.
+- Přidáváte export, mazání, archivaci nebo backup pravidlo.
+
+Privacy check nemá brzdit vývoj. Má fungovat jako test před merge: krátký, opakovatelný a dost konkrétní na to, aby zachytil průšvih. Pokud ho nejde vyplnit za 20 minut, změna je buď moc velká, nebo tým neví, jak data tečou. Obojí je signál, ne administrativní selhání.
+
+### BM.2 Tři úrovně místo jedné těžké procedury
+
+Ne každá změna potřebuje stejnou hloubku. Malý tým si vystačí se třemi úrovněmi.
+
+**Úroveň 1: rychlá kontrola.** Použijte ji u běžných změn bez nových osobních údajů a bez nového dodavatele. Výstupem je krátká poznámka v issue nebo pull requestu: „Data se nemění / event zůstává agregovaný / retence beze změny.“
+
+**Úroveň 2: privacy impact karta.** Použijte ji, když vzniká nový datový tok, nový účel, nový přístup nebo nový externí systém. Výstupem je karta podle šablony níže a konkrétní úkoly: minimalizovat pole, zkrátit retenci, přidat export, upravit text pro uživatele, doplnit DPA, omezit přístupy.
+
+**Úroveň 3: formální DPIA nebo právní/security review.** Použijte ji, když změna může vést k vysokému riziku: systematické sledování, rozsáhlé profilování, citlivé údaje, automatizované rozhodování s významným dopadem, rozsáhlé zpracování dat zranitelných osob, nebo kombinace datových sad, která výrazně zvyšuje moc nad člověkem. Tady už nestačí „Cody říkal, že cajk“. Tady chcete strukturované posouzení, odpovědného vlastníka a někdy i konzultaci s DPO nebo právníkem.
+
+Tahle tříúrovňová logika pomáhá udržet rychlost. Většina změn projde úrovní 1 nebo 2. Úroveň 3 je výjimka, ale když přijde, tým už má připravené podklady.
+
+### BM.3 Otázky, které odhalí většinu rizik
+
+Privacy check má být konkrétní. Neptejte se „je to GDPR compliant?“ To je otázka, která generuje mlhu. Ptejte se na tok dat, účel a dopad.
+
+Použijte těchto deset otázek:
+
+1. Jaké nové údaje vznikají nebo se začínají používat?
+2. Proč je potřebujeme právě pro tuto funkci?
+3. Umíme splnit stejný účel s menším množstvím dat?
+4. Kdo data uvidí v produktu, administraci, supportu a logách?
+5. Posíláme data mimo vlastní infrastrukturu nebo novému dodavateli?
+6. Jak dlouho data držíme a co spouští jejich smazání?
+7. Umí uživatel data opravit, exportovat nebo smazat?
+8. Vzniká z dat doporučení, skóre, segment nebo rozhodnutí o uživateli?
+9. Jak změnu vysvětlíme člověku bez právního slovníku?
+10. Co se stane, když se tahle data objeví u špatné osoby?
+
+Pokud tým nedokáže odpovědět na otázku 2 nebo 3, funkce pravděpodobně sbírá data „pro jistotu“. To je privacy-first anti-pattern. Pokud tým nedokáže odpovědět na otázku 4 nebo 5, nemá pod kontrolou provoz. Pokud tým nedokáže odpovědět na otázku 10, podceňuje bezpečnostní i reputační dopad.
+
+### BM.4 Minimalizace jako produktové rozhodnutí
+
+Minimalizace dat není jen právní princip. Je to produktová disciplína. Každé pole ve formuláři, každý event a každý log zvyšuje náklady na vysvětlení, ochranu, export, mazání a incident response.
+
+Příklad: SaaS chce při registraci ptát obor, velikost firmy, telefon, web, fakturační zemi a hlavní problém. Produktový argument zní: „Pomůže nám to personalizovat onboarding.“ Privacy-first návrh může vypadat takhle:
+
+- Fakturační zemi sbírat až při fakturaci, ne při registraci.
+- Telefon nedělat povinný, pokud produkt neobsahuje telefonickou podporu.
+- Obor a velikost firmy nahradit volitelnou otázkou „co chcete dnes vyřešit?“.
+- Personalizaci spustit z chování v aplikaci agregovaně, ne z tajného profilu.
+- Vysvětlit uživateli, proč otázka existuje a co se stane, když ji přeskočí.
+
+Výsledek: onboarding je kratší, data jsou čistší a tým nemusí chránit informace, které vlastně nepotřebuje. Ano, marketing přijde o pár sloupců v CRM. Přežije to. CRM už přežila horší věci, třeba export do Excelu pojmenovaný `final_final_v3.xlsx`.
+
+### BM.5 Privacy texty pište zároveň s funkcí
+
+Když změna ovlivní data, napište vedle technického řešení i lidské vysvětlení. Ne až před launch. Text pro uživatele je test porozumění: pokud tým neumí jednou větou říct, proč data sbírá, pravděpodobně to nemá jasné ani interně.
+
+Dobrá mikrocopy:
+
+> „Název firmy používáme pro zobrazení ve vašem workspace a na fakturách. Můžete ho později změnit v nastavení.“
+
+Slabá mikrocopy:
+
+> „Zpracováváme údaje za účelem zlepšování služeb a personalizace uživatelské zkušenosti.“
+
+První věta říká účel, místo použití a kontrolu. Druhá věta říká hlavně to, že někdo objevil šuplík s právnickými frázemi a rozhodl se ho vysypat na uživatele.
+
+### BM.6 Šablona: privacy impact karta
+
+```markdown
+# Privacy impact karta: [funkce / změna]
+
+## Shrnutí
+- Co se mění:
+- Pro koho:
+- Vlastník změny:
+- Úroveň kontroly: 1 / 2 / 3
+
+## Data
+- Nové údaje:
+- Existující údaje použité nově:
+- Zakázaná data, která nesmíme sbírat:
+- Agregace nebo pseudonymizace:
+
+## Účel a minimální rozsah
+- Produktový účel:
+- Nejmenší datová varianta:
+- Co jsme z návrhu odstranili:
+- Co je volitelné:
+
+## Přístupy a dodavatelé
+- Kdo data uvidí:
+- Kde data technicky leží:
+- Noví dodavatelé nebo subdodavatelé:
+- Smlouvy / DPA / region provozu:
+
+## Retence a práva uživatele
+- Jak dlouho data držíme:
+- Mazání:
+- Export:
+- Oprava:
+- Dopad na zálohy a logy:
+
+## Rizika a opatření
+- Co by uživateli vadilo, kdyby se to pokazilo:
+- Pravděpodobnost:
+- Dopad:
+- Opatření před spuštěním:
+- Opatření po spuštění:
+
+## Komunikace
+- Text v produktu:
+- Změna dokumentace nebo privacy notice:
+- Interní poznámka pro support:
+
+## Rozhodnutí
+- Schváleno / vrátit k úpravě / poslat na DPIA:
+- Kdo rozhodl:
+- Datum:
+- Follow-up úkoly:
+```
+
+Kartu ukládejte tam, kde žije rozhodnutí: k issue, PR, ADR nebo produktové specifikaci. Ne do samostatné složky `compliance`, kam chodí dokumenty tiše zestárnout a zemřít.
+
+### BM.7 Jak privacy check zapojit do vývoje
+
+Nejlepší privacy proces je ten, který se objeví ve chvíli, kdy tým stejně plánuje práci.
+
+Praktický workflow:
+
+1. V product discovery označte, jestli změna pracuje s daty.
+2. Při psaní issue přidejte sekci „Data a privacy“.
+3. Před implementací vyplňte úroveň 1 nebo 2.
+4. V pull requestu ověřte, že kód odpovídá kartě: pole, eventy, logy, oprávnění, retence.
+5. Před releasem zkontrolujte text pro uživatele, dokumentaci a support poznámku.
+6. Po releasu sledujte jen agregované signály, které jste si předem schválili.
+7. Jednou měsíčně projděte otevřené privacy follow-upy.
+
+Tohle není papírování navíc. Je to způsob, jak nedělat produktovou archeologii po šesti měsících, kdy se někdo zeptá: „Proč vlastně ukládáme datum narození u B2B nástroje na faktury?“
+
+### BM.8 Checklist: privacy impact check bez paralyzéru
+
+- [ ] Každá změna s novým datovým tokem má privacy check před implementací.
+- [ ] Tým umí popsat účel nových dat jednou lidskou větou.
+- [ ] Z návrhu byly odstraněny údaje, které nejsou nutné pro daný účel.
+- [ ] Je jasné, kdo data uvidí v produktu, administraci, supportu, logách a exportech.
+- [ ] Noví dodavatelé mají popsaný účel, region provozu, DPA a přístup k datům.
+- [ ] Retence, mazání, export a oprava jsou vyřešené dřív než release.
+- [ ] Analytika je agregovaná jako default; detail jednotlivce je výjimka s důvodem.
+- [ ] Text v produktu vysvětluje sběr dat bez právnické mlhy.
+- [ ] Vysoké riziko eskaluje na formální DPIA nebo právní/security review.
+- [ ] Privacy follow-upy mají vlastníka a deadline, ne jen dobrý pocit v meetingu.
+
+### Mini cvičení: privacy check za 45 minut
+
+1. Vyberte jednu plánovanou funkci, která přidává pole, event, integraci nebo nové oprávnění.
+2. Vyplňte otázky z části BM.3 bez hledání dokonalých formulací.
+3. Najděte jeden údaj, který můžete odstranit, odložit nebo udělat volitelný.
+4. Napište jednu větu pro uživatele: proč data potřebujete a co s nimi uděláte.
+5. Zkontrolujte, jestli změna vyžaduje nového dodavatele nebo změnu retence.
+6. Rozhodněte úroveň: rychlá kontrola, privacy impact karta, nebo formální DPIA.
+7. Vytvořte maximálně tři follow-up úkoly před releasem.
+
+Výsledek má být krátký záznam, podle kterého lze udělat produktové rozhodnutí. Ne slohovka pro šanon. Když privacy dokument přečte jen jeho autor a možná audit za dva roky, selhal jako produktový nástroj.
+
+### Codyho komentář
+
+Privacy impact check je pro mě jeden z nejlepších testů dospělosti SaaSu. Ne proto, že by malý tým měl předstírat korporátní compliance oddělení. Právě naopak: malý tým má výhodu, že může změnit návrh hned. Když privacy řešíte včas, často nezískáte jen bezpečnější produkt, ale i jednodušší UX, menší databázi, kratší onboarding a méně důvodů vysvětlovat zákazníkům, proč jste si schovali něco, co jste nikdy nepotřebovali.
+
+### Zdroje k příloze BM
+
+- GDPR čl. 25 zavádí data protection by design and by default a čl. 35 popisuje posouzení vlivu na ochranu osobních údajů při pravděpodobně vysokém riziku: https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32016R0679
+- EDPB Guidelines 4/2019 vysvětlují data protection by design and by default jako praktické promítnutí principů ochrany dat do návrhu zpracování: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-42019-article-25-data-protection-design-and_en
+- Article 29 Working Party / EDPB vodítka k DPIA popisují kritéria vysokého rizika a příklady situací, kdy je posouzení dopadu vyžadované: https://ec.europa.eu/newsroom/article29/items/611236
+- Evropská komise shrnuje, že DPIA je povinné u zpracování, které pravděpodobně povede k vysokému riziku pro práva a svobody fyzických osob: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/obligations/controllerprocessor/what-data-protection-impact-assessment-dpia_en
+- CNIL nabízí praktické materiály a metodiku PIA/DPIA, včetně přístupu k popisu zpracování, rizik a opatření: https://www.cnil.fr/en/privacy-impact-assessment-pia
+
+
 ## Pracovní log
+
+- 2026-08-24: Přidána příloha BM „Privacy impact check bez právního paralyzéru“ s tříúrovňovým posouzením změn, deseti kontrolními otázkami, minimalizací dat, UX texty, šablonou privacy impact karty, checklistem, mini cvičením a ověřenými GDPR/EDPB/CNIL zdroji.
 
 - 2026-08-24: Přidána příloha BL „Zálohy a obnova bez falešného pocitu bezpečí“ s RTO/RPO přístupem, backup inventářem, privacy-first pravidly, restore drillem, runbookem, checklistem, mini cvičením a ověřenými EU/ENISA zdroji.
 
