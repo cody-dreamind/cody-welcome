@@ -14386,8 +14386,174 @@ Výstupem má být jedna vyplněná karta feature flagu a jeden konkrétní úko
 - OWASP Logging Cheat Sheet doporučuje konzistentní aplikační logování bezpečnostních událostí a zároveň upozorňuje, že logy mohou obsahovat osobní nebo citlivé informace a musí být chráněné: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
 - Evropská komise shrnuje princip data protection by design jako povinnost promýšlet technická a organizační opatření už při návrhu zpracování: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
 
+
+## AU. Rate limiting a abuse prevence bez sledovací paranoie
+
+Malý SaaS nepotřebuje hned bezpečnostní centrum s dvaceti obrazovkami, mapou světa a dramatickou červenou tečkou nad každým požadavkem z kavárenské Wi-Fi. Potřebuje ale bránit základní útoky: brute force přihlášení, spam formuláře, scraping veřejných endpointů, hromadné registrace, vyčerpání API limitů a zneužití exportů nebo pozvánek.
+
+Privacy-first přístup neznamená „necháme dveře otevřené, protože nechceme sbírat data“. Znamená to: chráníme službu s minimem identifikátorů, agregujeme signály, nastavujeme rozumné limity a citlivá rozhodnutí necháváme auditovatelná. Tedy bezpečnost bez toho, aby se z každého návštěvníka stal podezřelý profil v malé soukromé detektivce.
+
+### AU.1 Začněte mapou zneužitelných cest
+
+Rate limiting nemá být jedna globální hodnota nalepená na celý web. Jiný limit potřebuje veřejná landing page, jiný login, jiný password reset, jiný kontaktní formulář a úplně jiný export všech zákaznických dat.
+
+První mapa abuse rizik:
+
+| Cesta | Typ zneužití | Dopad | Signál | První opatření |
+| --- | --- | --- | --- | --- |
+| `/login` | hádání hesel | převzetí účtu | opakované neúspěšné pokusy | limit podle účtu + IP, MFA výzva, zpoždění |
+| `/forgot-password` | zahlcení e-mailu | obtěžování uživatele | mnoho resetů pro jeden e-mail | tichá odpověď, krátkodobý limit, audit |
+| kontaktní formulář | spam | support šum | mnoho podobných zpráv | honeypot, limit, fronta ke kontrole |
+| API export | exfiltrace | únik dat | opakované velké exporty | role, limit, potvrzení, audit log |
+| pozvánky do týmu | spam/invites abuse | reputace domény | mnoho pozvánek z účtu | limit za tým, potvrzení domény, review |
+
+Dobré pravidlo: chraňte nejdřív cesty, které buď mění stav účtu, posílají e-mail, čtou hodně dat, nebo stojí peníze. Statická stránka „O nás“ obvykle nepotřebuje stejný režim jako endpoint pro export faktur. Překvapivé, já vím.
+
+### AU.2 Kombinujte limity, ne jednu magickou brzdu
+
+Jeden limit podle IP adresy je jednoduchý, ale křehký. Uživatelé za firemní NAT bránou mohou vypadat jako jeden člověk, zatímco útočník může IP adresy střídat. Proto je lepší kombinovat několik jemných limitů podle typu akce.
+
+Praktické vrstvy:
+
+- **IP limit:** hrubá ochrana proti náhlému provozu z jednoho zdroje.
+- **Účetní limit:** ochrana konkrétního účtu, e-mailu nebo workspace před cíleným zneužitím.
+- **Akční limit:** zvláštní pravidla pro reset hesla, pozvánky, exporty, webhooks nebo API klíče.
+- **Objemový limit:** ochrana proti velkým odpovědím, hromadným exportům a drahým operacím.
+- **Časové zpoždění:** postupné zpomalování místo okamžitého tvrdého zákazu.
+
+U přihlášení používejte opatrnost: tvrdé uzamčení účtu po několika pokusech může samo vytvořit denial-of-service proti legitimnímu uživateli. Lepší bývá kombinace zpoždění, dočasného omezení, dodatečného ověření a upozornění na podezřelou aktivitu. OWASP u autentizace doporučuje řešit ochranu proti automatizovaným útokům a zároveň dávat pozor na zneužitelné lockout mechanismy.
+
+### AU.3 Sbírejte minimální signály a krátce je držte
+
+Abuse prevence často svádí k tomu sbírat všechno „pro jistotu“: IP, user agent, fingerprint, geolokaci, historii kliků, čas mezi úhozy, náladu procesoru a horoskop requestu. Privacy-first SaaS má jít opačně: nejdřív definovat rozhodnutí a až pak signály.
+
+Minimální sada pro většinu malých SaaSů:
+
+- timestamp zaokrouhlený podle potřeby,
+- typ akce,
+- pseudonymizovaný identifikátor účtu nebo workspace,
+- hrubý zdrojový identifikátor pro krátkodobé limity,
+- výsledek akce,
+- důvod omezení, pokud k němu došlo.
+
+Co raději nedělat jako výchozí stav:
+
+- trvalý fingerprint zařízení,
+- sdílení abuse dat do marketingových nástrojů,
+- neomezené uchovávání raw IP adres,
+- profilování běžných uživatelů podle chování napříč produktem,
+- automatické blokace bez možnosti rozumné kontroly u citlivých zákazníků.
+
+*Codyho komentář:* bezpečnostní log, který se po roce používá jako marketingový segment, není bezpečnostní log. Je to převlečený tracker s helmou.
+
+### AU.4 Navrhněte uživatelskou zkušenost při omezení
+
+Rate limit není jen backendový detail. Je to produktová situace. Když legitimní uživatel narazí na limit, má pochopit, co se stalo a co může udělat dál. Ne dostat hlášku `429` a pocit, že právě selhal jako člověk.
+
+Dobrá hláška:
+
+```text
+Tuhle akci jsme dočasně omezili, protože z účtu přišlo příliš mnoho podobných požadavků.
+Zkuste to prosím za pár minut. Pokud jde o naléhavou věc, napište na podporu a přidejte čas pokusu.
+```
+
+Horší hláška:
+
+```text
+Suspicious activity detected. Access denied.
+```
+
+U citlivých akcí přidejte bezpečnou alternativu: potvrzení e-mailem, MFA výzvu, ruční schválení supportem nebo pozdější frontu. Důležité je neprozrazovat útočníkovi příliš mnoho detailů. U resetu hesla například odpovídejte stejně bez ohledu na to, jestli e-mail v systému existuje.
+
+### AU.5 Spam ochrana formulářů nemusí znamenat invazivní CAPTCHA
+
+CAPTCHA často přesouvá problém na uživatele, zhoršuje přístupnost a může přidat externí skript s vlastním sběrem dat. Než ji nasadíte, zkuste levnější a šetrnější vrstvy.
+
+Praktické pořadí:
+
+1. honeypot pole skryté pro lidi, ale viditelné pro jednoduché boty,
+2. minimální čas mezi načtením a odesláním formuláře,
+3. server-side validace povinných polí a délky textu,
+4. limit podle formuláře, účtu, e-mailu nebo hrubého zdroje,
+5. moderovaná fronta pro rizikové zprávy,
+6. až potom privacy review externí ochrany.
+
+Pokud externí ochranu opravdu potřebujete, napište si datovou kartu: co se posílá dodavateli, odkud služba běží, jak dlouho drží data, jestli používá cookies, jaký má dopad na přístupnost a jak ji vypnete při incidentu nebo změně dodavatele.
+
+### AU.6 Šablona: abuse pravidlo na jednu kartu
+
+```markdown
+## Název pravidla
+- Cesta nebo akce:
+- Vlastník:
+- Datum revize:
+
+## Riziko
+- Co se může zneužít:
+- Dopad na zákazníka:
+- Dopad na provoz:
+
+## Limit
+- Typ limitu:
+- Okno:
+- Prah:
+- Co se stane při překročení:
+
+## Data
+- Jaké signály používáme:
+- Co záměrně nesbíráme:
+- Retence raw signálů:
+- Retence agregace:
+
+## Uživatelská cesta
+- Text chyby nebo upozornění:
+- Bezpečná alternativa:
+- Support postup:
+
+## Kontrola
+- Jak poznáme falešné pozitivy:
+- Jak poznáme, že pravidlo pomáhá:
+- Kdy limit upravíme:
+```
+
+### AU.7 Checklist: abuse prevence bez sledovací paranoie
+
+- [ ] Máme mapu nejrizikovějších cest: login, reset hesla, formuláře, pozvánky, exporty a API.
+- [ ] Každý limit má vlastníka, důvod, časové okno a revizi.
+- [ ] Nepoužíváme jednu globální brzdu pro všechny akce.
+- [ ] Citlivé akce mají kombinaci limitu, ověření, audit logu a bezpečné alternativy.
+- [ ] Logy obsahují jen signály potřebné pro rozhodnutí a mají retenci.
+- [ ] Raw IP adresy, user agenty a podobné identifikátory neposíláme do marketingových nástrojů.
+- [ ] Chybové hlášky pomáhají legitimním uživatelům, ale neprozrazují útočníkovi zbytečné detaily.
+- [ ] Spam ochranu formulářů řešíme nejdřív server-side a přístupně, ne automaticky invazivní CAPTCHA službou.
+- [ ] Pravidelně kontrolujeme falešné pozitivy, hlavně u firemních zákazníků a sdílených sítí.
+
+### Mini cvičení: první abuse review za 60 minut
+
+Vyberte jednu cestu, která je buď veřejná, posílá e-mail, nebo pracuje s citlivými daty. Typicky login, reset hesla, kontaktní formulář nebo export dat.
+
+Postup:
+
+1. Napište tři způsoby, jak by šla cesta zneužít.
+2. Určete, kdo by utrpěl škodu: uživatel, tým, reputace, rozpočet nebo dostupnost služby.
+3. Navrhněte limit podle akce a krátký retenční režim pro potřebné signály.
+4. Napište text, který uvidí legitimní uživatel při omezení.
+5. Zkontrolujte, že opatření nepřidává zbytečný tracker nebo externí skript.
+6. Vytvořte jednu abuse kartu a jeden implementační úkol.
+
+Výstupem není dokonalý anti-fraud systém. Výstupem je první konkrétní pravidlo, které sníží reálné riziko a zároveň nezmění váš SaaS na datovou vysávací stanici. To je výhra. Tichá, ale výhra.
+
+### Zdroje k příloze AU
+
+- OWASP Authentication Cheat Sheet popisuje ochranu autentizace včetně throttlingu, lockoutu a rizik příliš jednoduchých blokací: https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html
+- OWASP Automated Threats to Web Applications popisuje typické automatizované útoky jako credential stuffing, scraping, spam a zneužití funkcí aplikace: https://owasp.org/www-project-automated-threats-to-web-applications/
+- OWASP Logging Cheat Sheet doporučuje logovat bezpečnostně relevantní události, ale zároveň chránit logy a vyhýbat se zbytečnému ukládání citlivých dat: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+- Článek 5 GDPR definuje mimo jiné zásady minimalizace údajů, omezení uložení, integrity a důvěrnosti zpracování: https://eur-lex.europa.eu/eli/reg/2016/679/oj
+- Evropská komise shrnuje principy GDPR pro organizace včetně minimalizace dat a data protection by design: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
+
 ## Pracovní log
 
+- 2026-08-24: Přidána příloha AU „Rate limiting a abuse prevence bez sledovací paranoie“ s mapou zneužitelných cest, vícevrstvými limity, minimalizací abuse signálů, UX při omezení, šetrnou spam ochranou formulářů, kartou pravidla, checklistem, mini cvičením a ověřenými zdroji.
 - 2026-08-24: Přidána příloha AT „Feature flags a postupné releasy bez produkční rulety“ s typy flagů, vlastníkem a expirací, rizikovým rolloutem, privacy-first měřením, server-side oprávněními, úklidem flagů, šablonou, checklistem, mini cvičením a ověřenými zdroji.
 - 2026-08-24: Přidána příloha AS „Přístupnost webu a SaaS bez odkládání“ s praktickým sprintem pro kritické uživatelské cesty, kartou změny, prioritizací bariér, privacy-first kontrolou, mini cvičením a ověřenými EU/W3C zdroji.
 - 2026-08-24: Přidána příloha AR „Testovací a demo data bez úniku reality“ s pravidly pro prostředí, syntetická data, anonymizaci, demo scénáře, screenshoty/logy/AI vstupy, kartou testovacích dat, checklistem, mini cvičením a ověřenými zdroji.
