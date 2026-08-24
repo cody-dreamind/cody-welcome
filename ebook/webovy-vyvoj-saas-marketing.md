@@ -14551,8 +14551,173 @@ Výstupem není dokonalý anti-fraud systém. Výstupem je první konkrétní pr
 - Článek 5 GDPR definuje mimo jiné zásady minimalizace údajů, omezení uložení, integrity a důvěrnosti zpracování: https://eur-lex.europa.eu/eli/reg/2016/679/oj
 - Evropská komise shrnuje principy GDPR pro organizace včetně minimalizace dat a data protection by design: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
 
+## AV. Retence a mazání dat bez digitálního syslení
+
+Data se v malém SaaSu často nemažou ze tří důvodů: „jednou se můžou hodit“, „bojíme se něco rozbít“ a „nikdo neví, kde všude jsou“. Všechny tři důvody jsou lidské. Ani jeden není dobrý provozní model. Retence není právnická formalita na poslední stránce privacy policy. Je to produktové rozhodnutí: jak dlouho držíme data, proč, kdo za to ručí a co se stane, když už je nepotřebujeme.
+
+Privacy-first přístup neznamená mazat všechno hned a pak před zákazníkem dělat kouzelnický trik „a teď váš audit log zmizel“. Znamená držet data jen tak dlouho, jak dává smysl pro službu, bezpečnost, účetnictví, podporu a zákonné povinnosti. Zbytek má mít plánovaný konec. Ano, i staré exporty. Hlavně staré exporty.
+
+*Codyho komentář:* nejnebezpečnější databáze není ta produkční. Je to složka `old-export-final-actually-final` v úložišti, o kterém už nikdo neví.
+
+### AV.1 Začněte inventářem dat podle životního cyklu
+
+Nejdřív si nesepisujte abstraktní tabulku „všechna data“. Vezměte jednu oblast produktu a projděte její životní cyklus. Typicky účet, workspace, projekt, fakturace, support ticket, marketingový lead nebo audit log.
+
+Pro každou oblast zapište:
+
+- kdy data vznikají,
+- kdo je zadává nebo generuje,
+- kde se ukládají,
+- kam se kopírují,
+- kdo je používá,
+- jak dlouho jsou potřeba v aktivním produktu,
+- jak dlouho jsou potřeba kvůli bezpečnosti, účetnictví nebo smlouvě,
+- kdy a jak se mažou nebo anonymizují.
+
+Tím rychle zjistíte, že retence není jedno číslo pro celý systém. Profilová fotka, faktura, auditní záznam, e-mail v newsletteru a technický log nemají stejný důvod existence. A když nemají stejný důvod, nemají mít ani stejnou dobu uchování.
+
+### AV.2 Rozdělte data do retenčních tříd
+
+Praktický malý tým nepotřebuje čtyřicet kategorií. Potřebuje pár tříd, které jdou pochopit a provozovat.
+
+Použitelný start:
+
+1. **Aktivní produktová data:** data, která uživatel vidí nebo používá při běžné práci.
+2. **Účetní a smluvní data:** faktury, objednávky, smlouvy, platební reference a daňové podklady.
+3. **Bezpečnostní a auditní data:** přihlášení, změny oprávnění, citlivé administrativní akce a incidentní stopa.
+4. **Support data:** e-maily, ticket historie, přílohy a interní poznámky podpory.
+5. **Marketingová data:** newsletter souhlasy, lead formuláře, UTM agregace a kampaňové reporty.
+6. **Dočasná technická data:** cache, job fronty, session data, preview buildy, exporty a importní soubory.
+7. **Zálohy:** kopie dat pro obnovu, které se nemažou stejně jako primární záznamy, ale musí mít vlastní cyklus.
+
+Ke každé třídě napište výchozí pravidlo. Například: aktivní produktová data držíme po dobu trvání účtu, po zrušení účtu je 30 dní možné obnovit workspace a potom data mažeme nebo anonymizujeme. Účetní doklady držíme podle zákonných povinností. Dočasné exporty mažeme po 7 nebo 30 dnech podle rizika.
+
+### AV.3 Mazání navrhněte jako produktovou cestu, ne jako panické tlačítko
+
+Dobré mazání má být nudné. Uživatel ví, co se stane. Admin ví, co se stane. Support ví, co se stane. Databáze ví, co se stane. Nikdo nemusí v pátek večer ručně spouštět SQL dotaz s výrazem člověka, který právě otevřel portál do pekla.
+
+Rozlišujte alespoň čtyři akce:
+
+- **deaktivace:** účet nebo workspace už nejde používat, ale data ještě existují,
+- **měkké smazání:** data nejsou v běžném rozhraní, běží ochranná lhůta pro obnovu,
+- **tvrdé smazání:** primární data jsou odstraněna z produkčních systémů,
+- **anonymizace:** záznam zůstává pro statistiku nebo integritu systému, ale už nejde rozumně spojit s osobou.
+
+U SaaSu je často lepší mít krátkou ochrannou lhůtu než okamžité nevratné smazání. Ale tahle lhůta musí být jasná, dokumentovaná a technicky vynucená. Ne „někdy to promažeme, až bude čas“. Čas nebude. Bude další roadmapa.
+
+### AV.4 Nezapomeňte na kopie, exporty, logy a integrace
+
+Retenční politika, která řeší jen hlavní databázi, je poloviční práce. Data obvykle utečou do míst, která nejsou vidět v produktovém UI.
+
+Zkontrolujte hlavně:
+
+- CSV exporty generované pro zákazníky nebo support,
+- importní soubory po dokončení migrace,
+- přílohy v support systému,
+- e-mailové notifikace obsahující osobní údaje,
+- logy s identifikátory, IP adresami nebo URL parametry,
+- analytické a marketingové nástroje,
+- webhook payloady a integrační fronty,
+- staging, demo a preview prostředí,
+- zálohy a snapshoty.
+
+U každého místa si napište, jestli mazání probíhá automaticky, ručně, nebo vůbec. Třetí možnost je červená vlajka. Ne nutně ostuda — spíš úkol. Ostuda je tvářit se, že se to nepočítá, protože „to není produkce“.
+
+### AV.5 Zálohy potřebují vlastní pravidla a očekávání
+
+Zálohy nejdou vždy čistit záznam po záznamu stejně jako produkční databázi. To ale neznamená, že mohou držet osobní data navždy. Potřebují vlastní retenční okno, šifrování, omezený přístup a jasné pravidlo obnovy.
+
+Praktický model:
+
+- denní zálohy držet krátce,
+- týdenní nebo měsíční zálohy držet jen tam, kde to dává provozní smysl,
+- staré zálohy automaticky expirovat,
+- přístup k zálohám omezit na minimum lidí,
+- při obnově vědět, jak znovu aplikovat smazání nebo blokaci dat, která už mezitím neměla existovat.
+
+Pokud uživatel požádá o smazání, je fér vysvětlit, že data budou odstraněna z aktivních systémů a ze záloh podle retenčního cyklu. Důležité je, aby tento cyklus nebyl nekonečný a aby obnova zálohy znovu neoživila data, která měla být pryč.
+
+### AV.6 Šablona: retenční karta datové oblasti
+
+```markdown
+# Retenční karta: [datová oblast]
+
+## Kontext
+- Produkt / služba:
+- Vlastník:
+- Datum poslední revize:
+
+## Účel dat
+- Proč data vznikají:
+- Kdo je používá:
+- Co by přestalo fungovat bez těchto dat:
+
+## Kategorie
+- Typy údajů:
+- Citlivost:
+- Systémy, kde data žijí:
+- Integrace, kam data odchází:
+
+## Retence
+- Aktivní uchování:
+- Ochranná lhůta po zrušení:
+- Zákonný nebo smluvní důvod delšího uchování:
+- Retence logů:
+- Retence exportů a importů:
+- Retence záloh:
+
+## Mazání
+- Spouštěč mazání:
+- Automatický job nebo ruční proces:
+- Co mažeme:
+- Co anonymizujeme:
+- Co zůstává a proč:
+
+## Kontrola
+- Jak ověříme, že mazání proběhlo:
+- Kdo schvaluje výjimku:
+- Kdy kartu znovu otevřeme:
+```
+
+### AV.7 Checklist: retence bez digitálního hromadění
+
+- [ ] Každá hlavní datová oblast má vlastní retenční kartu.
+- [ ] Retence je odvozená od účelu, ne od velikosti disku.
+- [ ] Rozlišujeme aktivní data, účetní data, auditní data, support, marketing, dočasné soubory a zálohy.
+- [ ] Máme jasnou ochrannou lhůtu po zrušení účtu nebo workspace.
+- [ ] Exporty, importy, preview data a přílohy se mažou automaticky nebo mají pravidelnou kontrolu.
+- [ ] Logy neobsahují zbytečné osobní údaje a mají kratší retenční okna podle rizika.
+- [ ] Zálohy mají vlastní expiraci, šifrování a omezený přístup.
+- [ ] Obnova ze zálohy nevrací natrvalo data, která už měla být smazaná.
+- [ ] Support ví, jak odpovědět na žádost o smazání nebo export bez improvizace.
+- [ ] Veřejná privacy dokumentace odpovídá reálnému provozu.
+
+### Mini cvičení: retenční sprint za 75 minut
+
+Vyberte jednu datovou oblast, která je zároveň častá a riziková. Dobří kandidáti: lead formuláře, support tickety, produktové exporty, audit logy nebo zrušené workspaces.
+
+Postup:
+
+1. Napište, proč data vznikají a kdo je používá.
+2. Najděte všechna místa, kam se kopírují: databáze, e-mail, logy, exporty, integrace, zálohy.
+3. Rozdělte záznamy na aktivní data, dočasná data, právně nutná data a data vhodná k anonymizaci.
+4. Navrhněte výchozí dobu uchování a ochrannou lhůtu po zrušení.
+5. Určete automatický mazací nebo anonymizační job.
+6. Napište jednu support odpověď pro zákazníka, který se ptá, co se stane po smazání.
+7. Založte retenční kartu a jeden technický úkol.
+
+Výstupem není dokonalý compliance program. Výstupem je jedna datová oblast, u které už víte, proč ji držíte, kdy skončí a kdo za to ručí. To je přesně ten druh nudné disciplíny, který šetří nervy při auditu, incidentu i zákaznickém dotazu.
+
+### Zdroje k příloze AV
+
+- Článek 5 GDPR stanovuje zásady minimalizace údajů a omezení uložení; článek 17 řeší právo na výmaz: https://eur-lex.europa.eu/eli/reg/2016/679/oj
+- EDPB Guidelines 4/2019 k článku 25 GDPR vysvětlují data protection by design and by default včetně minimalizace a omezení zpracování: https://edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-42019-article-25-data-protection-design-and_en
+- CNIL prakticky shrnuje princip „jak dlouho mohou být data uchována“ a doporučuje definovat dobu uchování podle účelu zpracování: https://cnil.fr/en/sheet-ndeg14-define-data-retention-period
+- ICO vysvětluje princip storage limitation a nutnost pravidelně mazat nebo anonymizovat data, která už nejsou potřeba: https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/data-protection-principles/a-guide-to-the-data-protection-principles/storage-limitation/
+
 ## Pracovní log
 
+- 2026-08-24: Přidána příloha AV „Retence a mazání dat bez digitálního syslení“ s inventářem životního cyklu dat, retenčními třídami, produktovou cestou mazání, kontrolou exportů/logů/integrací/záloh, retenční kartou, checklistem, mini cvičením a ověřenými zdroji.
 - 2026-08-24: Přidána příloha AU „Rate limiting a abuse prevence bez sledovací paranoie“ s mapou zneužitelných cest, vícevrstvými limity, minimalizací abuse signálů, UX při omezení, šetrnou spam ochranou formulářů, kartou pravidla, checklistem, mini cvičením a ověřenými zdroji.
 - 2026-08-24: Přidána příloha AT „Feature flags a postupné releasy bez produkční rulety“ s typy flagů, vlastníkem a expirací, rizikovým rolloutem, privacy-first měřením, server-side oprávněními, úklidem flagů, šablonou, checklistem, mini cvičením a ověřenými zdroji.
 - 2026-08-24: Přidána příloha AS „Přístupnost webu a SaaS bez odkládání“ s praktickým sprintem pro kritické uživatelské cesty, kartou změny, prioritizací bariér, privacy-first kontrolou, mini cvičením a ověřenými EU/W3C zdroji.
