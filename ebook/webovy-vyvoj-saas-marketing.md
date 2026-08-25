@@ -19046,7 +19046,184 @@ Výstup má být jedna stránka: co měříme, proč to měříme, co vypneme a 
 - CNIL v pravidlech pro cookies a další trackery vysvětluje, že trackery, které nejsou nezbytné, vyžadují souhlas a že odmítnutí má být stejně jednoduché jako přijetí: https://www.cnil.fr/en/cookies-and-other-tracking-devices
 - Apple Mail Privacy Protection dokumentace popisuje, že Mail může načítat vzdálený obsah přes proxy a tím ovlivňovat spolehlivost open-rate měření: https://support.apple.com/en-us/102289
 
+
+## BS. Exit plán dodavatele: aby vendor lock-in nebyl firemní rukojmí
+
+Vendor lock-in nevzniká jen tím, že používáte proprietární cloud nebo SaaS. Vzniká hlavně tím, že nikdo neumí odpovědět na nudné otázky: jak data vyexportujeme, kdo má přístup k API klíčům, co se stane s webhooky, kde jsou šablony e-mailů, jak obnovíme historii fakturace a kolik času máme, než nám účet zavřou. Nudné otázky jsou mimochodem často ty, které zachrání firmě páteční večer. Bohužel bez konfetek.
+
+Privacy-first exit plán není výzva „všechno si napišme sami“. To je jiný druh bolesti. Cílem je používat dobré nástroje, ale nebýt jimi držený za kotník. Každý důležitý dodavatel by měl mít jednoduchou kartu: co u něj běží, jaká data drží, jaký je exportní formát, jak se ruší účet, jak se maže nebo anonymizuje obsah a jaký je náhradní postup, když služba zdraží, změní podmínky nebo prostě spadne.
+
+*Codyho komentář:* Můj pohled: dobrý dodavatel se pozná i podle toho, jak snadno se od něj dá odejít. Pokud vám prodejce umí ukázat demo za 14 minut, ale neumí popsat export dat za 14 dní, není to partnerství. Je to hotel bez dveří ven.
+
+### BS.1 Rozdělte dodavatele podle rizika
+
+Ne každý nástroj potřebuje stejný exit plán. Pokud používáte jednorázový nástroj na tvorbu banneru, stačí vědět, kde je finální soubor. Pokud přes dodavatele teče fakturace, support, CRM, analytika, e-mailing nebo uživatelská data, potřebujete tvrdší pravidla.
+
+Praktické dělení:
+
+- **Nízké riziko:** nástroj nedrží osobní data, kritický provoz ani historii rozhodnutí.
+- **Střední riziko:** nástroj drží pracovní data, obsah, šablony, kampaně nebo interní dokumentaci.
+- **Vysoké riziko:** nástroj drží zákaznická data, billing, autentizaci, produktovou analytiku, support historii, zdravotní provoz aplikace nebo klíčovou automatizaci.
+- **Kritické riziko:** bez nástroje nejde prodávat, fakturovat, obsloužit zákazníka, splnit zákonnou povinnost nebo obnovit službu po incidentu.
+
+Pro nízké riziko stačí poznámka v inventáři. Pro vysoké a kritické riziko potřebujete exportní test, alternativní postup a vlastníka. Ne „někdo z týmu“. Konkrétní člověk. „Někdo“ je v provozu většinou jen hezčí jméno pro nikoho.
+
+### BS.2 Karta dodavatele: minimum, které musíte vědět
+
+U každého důležitého dodavatele si udržujte jednu stránku. Ne prezentaci. Ne román. Jednu kartu, kterou pochopí zakladatel, vývojář i člověk z podpory.
+
+Karta má obsahovat:
+
+- název služby a účel použití,
+- vlastník v týmu,
+- typ dat a citlivost,
+- země nebo region zpracování,
+- právní role dodavatele, pokud zpracovává osobní údaje,
+- přístupy, role a způsob přihlášení,
+- exportní formáty a limity,
+- API nebo webhooky, které by bylo potřeba přepojit,
+- integrační závislosti v produktu, webu, e-mailingu nebo fakturaci,
+- retenční pravidla a způsob výmazu po ukončení,
+- odhad času na migraci,
+- poslední datum testu exportu.
+
+U privacy-first provozu je důležité nezaměňovat „máme smlouvu“ za „umíme odejít“. Smlouva je nutná, ale exportní soubor v otevřeném formátu je v krizové chvíli praktičtější než PDF s podpisem. Ideální je mít obojí. Ano, dospělost občas vypadá jako tabulka.
+
+### BS.3 Exportní test dělejte před krizí
+
+Export dat netestujte poprvé ve chvíli, kdy vám dodavatel oznámí změnu ceny, zrušení plánu nebo bezpečnostní incident. Tehdy už nemáte test. Máte improvizované divadlo s potem v hlavní roli.
+
+Jednou za kvartál vyberte jednoho vysokorizikového dodavatele a zkuste malý export:
+
+1. Stáhněte data přes běžný export nebo API.
+2. Zapište formát, velikost, čas a omezení.
+3. Otevřete soubor mimo původní nástroj.
+4. Ověřte, jestli export obsahuje metadata potřebná k obnovení kontextu.
+5. Zkontrolujte, jestli export neobsahuje víc osobních údajů, než čekáte.
+6. Vyzkoušejte import nebo alespoň mapování do náhradního systému.
+7. Aktualizujte kartu dodavatele.
+
+Důležité je neřešit jen „data existují“. Řešte, jestli jsou použitelná. CSV bez ID vztahů, export kontaktů bez souhlasů, faktury bez vazby na zákazníka nebo support tikety bez příloh jsou hezké artefakty, ale mizerný plán obnovy.
+
+### BS.4 Přenositelnost není jen právní pojem
+
+GDPR zná právo na přenositelnost údajů, ale produktový tým by měl přemýšlet šíř. Uživatelé, zákazníci i vaše vlastní firma potřebují data ve srozumitelném, strojově čitelném a dokumentovaném formátu. Ne proto, že to zní pěkně v trust centru, ale protože to snižuje závislost a zvyšuje důvěru.
+
+Prakticky to znamená:
+
+- exporty v běžných formátech jako CSV, JSON, XML, ICS nebo ZIP podle typu dat,
+- dokumentovaný význam polí,
+- stabilní identifikátory tam, kde se data propojují,
+- oddělení osobních údajů od technických metadat, pokud to dává smysl,
+- možnost stáhnout auditní nebo fakturační historii podle role a oprávnění,
+- jasné limity exportu u velkých objemů dat,
+- bezpečné předání exportu a rozumnou expiraci odkazu,
+- informaci, co se po ukončení účtu maže, anonymizuje nebo musí zůstat kvůli zákonným povinnostem.
+
+Pokud stavíte vlastní SaaS, navrhněte export dřív než první enterprise obchodní schůzku. Export je funkce důvěry. Ukazuje, že zákazníka nedržíte v produktu násilím, ale hodnotou.
+
+### BS.5 Exit scénáře, které stojí za přípravu
+
+Nemusíte plánovat každou apokalypsu. Stačí pokrýt nejpravděpodobnější situace, které malé firmy bolí nejvíc.
+
+Scénáře:
+
+- dodavatel výrazně zdraží nebo zruší tarif,
+- nástroj změní podmínky zpracování dat,
+- služba přestane vyhovovat evropskému nebo klientskému požadavku,
+- účet je zablokovaný kvůli platbě, spamu nebo chybné automatické kontrole,
+- klíčová integrace přestane fungovat,
+- dodavatel má bezpečnostní incident,
+- tým zjistí, že nástroj sbírá víc dat, než je potřeba,
+- produkt přeroste možnosti nástroje,
+- zákazník požádá o export nebo výmaz dat, která jsou rozprostřená přes více služeb.
+
+Ke každému scénáři stačí krátká odpověď: kdo rozhoduje, co vypneme, co exportujeme, co přepojíme, koho informujeme a jak poznáme, že je migrace hotová.
+
+### BS.6 Šablona: karta exit plánu
+
+```markdown
+## Dodavatel
+- Název:
+- Účel:
+- Vlastník:
+- Riziko: nízké / střední / vysoké / kritické
+- Region provozu:
+- Právní role u osobních údajů:
+
+## Data
+- Kategorie dat:
+- Citlivost:
+- Retence:
+- Exportní formát:
+- Dokumentace polí:
+- Poslední exportní test:
+
+## Integrace
+- API:
+- Webhooky:
+- SSO / autentizace:
+- Fakturace / e-mailing / analytika:
+- Secrets a přístupy:
+
+## Exit scénář
+- Důvod odchodu:
+- První krok:
+- Náhradní nástroj nebo manuální režim:
+- Odhad času migrace:
+- Komunikační plán:
+- Mazání nebo anonymizace po ukončení:
+
+## Rozhodnutí
+- Co držíme u dodavatele:
+- Co držíme u sebe:
+- Co nesbíráme:
+- Kdy kartu znovu ověříme:
+```
+
+Tahle šablona není náhrada právní kontroly ani bezpečnostního auditu. Je to provozní minimum, které zabrání tomu, aby se vendor management řešil až ve chvíli, kdy už někdo nervózně hledá heslo v chatu. Což samozřejmě nikdo nikdy nedělá. Mrk.
+
+### BS.7 Checklist: exit plán bez paniky
+
+- [ ] Máme inventář dodavatelů podle rizika.
+- [ ] Každý vysokorizikový dodavatel má vlastníka.
+- [ ] Víme, jaká data dodavatel drží a v jakém regionu se zpracovávají.
+- [ ] Exportní formát je otevřený nebo alespoň dobře dokumentovaný.
+- [ ] Export jsme skutečně otevřeli mimo původní nástroj.
+- [ ] Víme, které integrace, webhooky a API klíče by bylo potřeba přepojit.
+- [ ] Máme plán pro zablokovaný účet nebo výpadek dodavatele.
+- [ ] Víme, co se stane s daty po ukončení služby.
+- [ ] Retence exportů je krátká a exporty jsou bezpečně uložené.
+- [ ] U zákaznických dat umíme vysvětlit export, výmaz i omezení.
+- [ ] Kritické dodavatele revidujeme alespoň kvartálně.
+- [ ] Nový nástroj nejde do provozu bez zapsaného exit minima.
+
+### Mini cvičení: vendor exit drill za 60 minut
+
+Vyberte jednoho dodavatele, bez kterého by tým měl opravdu nepříjemný den. Ideálně e-mailing, CRM, fakturaci, support, analytiku nebo auth. Pak během jedné hodiny udělejte toto:
+
+1. Vyplňte kartu dodavatele.
+2. Najděte exportní funkci nebo API dokumentaci.
+3. Stáhněte malý export testovacích nebo omezených dat.
+4. Otevřete export mimo původní nástroj.
+5. Zapište chybějící metadata a integrační závislosti.
+6. Určete manuální nouzový režim na 48 hodin.
+7. Vytvořte jeden follow-up úkol, který sníží lock-in.
+
+Dobrý výstup není dokonalá migrace. Dobrý výstup je menší nejistota. Pokud po hodině víte, že export neobsahuje souhlasy, webhooky nemají vlastníka nebo billing data nejdou rozumně spojit se zákazníkem, právě jste našli problém levně. To je přesně ten druh levné bolesti, který mám rád.
+
+### Zdroje k příloze BS
+
+- GDPR článek 20 upravuje právo na přenositelnost údajů a pracuje s požadavkem strukturovaného, běžně používaného a strojově čitelného formátu: https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=CELEX%3A02016R0679-20160504
+- EDPB Guidelines 01/2022 k právu na přístup pomáhají nastavit procesy pro poskytování kopií osobních údajů a srozumitelnou komunikaci vůči subjektům údajů: https://www.edpb.europa.eu/documents/guideline/guidelines-012022-on-data-subject-rights-right-of-access_en
+- Evropská komise v přehledu Data Act uvádí, že pravidla platí od 12. září 2025 a kapitola VI řeší switching mezi cloudovými a edge službami včetně interoperabilních exportů: https://digital-strategy.ec.europa.eu/en/factpages/data-act-explained
+- EUR-Lex text Data Actu, nařízení (EU) 2023/2854, obsahuje pravidla k přepínání mezi službami zpracování dat a odstranění překážek switchingu: https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=CELEX%3A32023R2854
+- ENISA Cloud Security Guide for SMEs doporučuje malým a středním firmám při pořizování cloudových služeb hodnotit bezpečnostní rizika a klást dodavatelům konkrétní otázky: https://www.enisa.europa.eu/publications/cloud-security-guide-for-smes
+
 ## Pracovní log
+
+- 2026-08-25: Přidána příloha BS „Exit plán dodavatele“ s rizikovým tříděním vendorů, kartou dodavatele, exportním testem, přenositelností dat, exit scénáři, checklistem, hodinovým vendor exit drillem a ověřenými GDPR/EDPB/EU/ENISA zdroji.
+
 
 - 2026-08-25: Přidána příloha BR „E-mailové metriky bez sledovacích pixelů“ s rozhodovacím rámcem pro e-mailové metriky, privacy-first přístupem k open/click trackingu, segmentací, onboardingem, reaktivací, checklistem, mini auditem a ověřenými EDPB/EU/CNIL/Apple zdroji.
 
