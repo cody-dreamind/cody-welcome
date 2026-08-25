@@ -21531,7 +21531,166 @@ Výstupem má být lepší systém, ne dokonale napsaná vina. Když se po postm
 - ENISA technické guidance k NIS2 opatřením doporučuje incident handling policy s rolemi, odpovědnostmi a postupy pro detekci, analýzu, containment, reakci, obnovu, dokumentaci a reporting: https://www.enisa.europa.eu/sites/default/files/2025-06/ENISA_Technical_implementation_guidance_on_cybersecurity_risk_management_measures_version_1.0.pdf
 
 
+## CF. AI asistenti v SaaS bez datového chaosu
+
+AI asistent v SaaS má být pracovní nástroj, ne magická krabička, která potichu čte všechno, zapisuje kamkoliv a po chybě řekne „jako jazykový model…“. Pokud má pomáhat zákazníkům, obchodníkům nebo supportu, musí mít stejně jasné hranice jako každý jiný provozní systém: účel, data, oprávnění, auditní stopu, člověka ve smyčce a vypínač.
+
+Praktická otázka nezní „kam všude můžeme dát AI“. Praktická otázka zní: **které rozhodnutí nebo úkol bude s AI rychlejší, levnější nebo kvalitnější, aniž bychom ztratili kontrolu nad daty?** Pokud na to tým neumí odpovědět jednou větou, AI feature ještě není produktová funkce. Je to demo s pěkným gradientem a budoucím incidentem v ceně.
+
+### CF.1 Začněte katalogem použití, ne výběrem modelu
+
+Model je důležitý, ale první dokument má být katalog použití. Ten říká, kde AI do produktu vstupuje, co smí dělat a jaké riziko nese. Bez katalogu se rychle stane, že jeden tým používá AI na support odpovědi, druhý na analýzu zákaznických dat, třetí na generování marketingu a nikdo netuší, kde končí osobní údaje.
+
+Minimální katalog použití:
+
+- **Název použití:** například „návrh odpovědi supportu“, „shrnutí ticketu“, „generování SQL dotazu“, „doporučení dalšího kroku v CRM“.
+- **Uživatel:** zákazník, support agent, administrátor, obchodník, interní tým.
+- **Účel:** konkrétní pracovní výsledek, ne „zvýšení produktivity“.
+- **Vstupní data:** text ticketu, metadata účtu, dokumentace, fakturační stav, interní poznámky.
+- **Výstup:** návrh textu, klasifikace, shrnutí, akce v systému, upozornění.
+- **Míra autonomie:** pouze návrh, návrh s potvrzením, automatická akce, zakázaná automatická akce.
+- **Dopad chyby:** kosmetický, provozní, finanční, právní, bezpečnostní, reputační.
+- **Vlastník:** člověk, který ručí za pravidla, testování a vypnutí.
+
+Codyho komentář: pokud se vám katalog nevejde na jednu tabulku, nevadí. Pokud ho neumíte vůbec sepsat, vadí to hodně. AI bez inventáře je jako integrace bez dokumentace, jen se tváří chytřeji.
+
+### CF.2 Datová minimizace platí i pro prompt
+
+Prompt není kouzelná díra mimo systém. Je to zpracování dat. Co pošlete do modelu, může obsahovat osobní údaje, obchodní tajemství, technické informace nebo bezpečnostní kontext. Proto má každý AI tok projít stejnou otázkou jako formulář nebo CRM pole: **potřebujeme tenhle údaj pro daný výsledek?**
+
+Praktická pravidla:
+
+- neposílejte celé účty, když stačí poslední dvě zprávy a typ tarifu,
+- neposílejte e-mail, telefon nebo adresu, pokud výstup nepotřebuje identitu,
+- nahrazujte identifikátory pseudonymy tam, kde stačí kontext,
+- oddělte systémové instrukce, uživatelský obsah a interní data,
+- neposílejte secrets, API klíče, interní tokeny ani konfigurační hodnoty,
+- nastavte retenci a logování AI požadavků záměrně, ne podle výchozího nastavení dodavatele.
+
+Příklad pro support: asistent nepotřebuje kompletní profil zákazníka, aby navrhl odpověď na dotaz k faktuře. Často stačí typ problému, anonymizovaný stav předplatného, jazyk zákazníka a relevantní výřez dokumentace. Pokud má support agent před odesláním odpověď schválit, model nepotřebuje právo posílat e-mail sám.
+
+### CF.3 Rozdělte AI podle autonomie
+
+Ne každá AI funkce je stejně riziková. Generování interního shrnutí má jiný dopad než automatické mazání dat, změna tarifu nebo rozhodnutí, že zákazník „není dobrý lead“. Tým by měl proto AI použití rozdělit podle autonomie.
+
+Jednoduché úrovně:
+
+- **Nápověda:** AI jen vysvětluje, hledá v dokumentaci nebo navrhuje text.
+- **Asistence:** AI připraví návrh, člověk ho upraví a schválí.
+- **Doporučení:** AI navrhne další krok, ale systém jasně ukáže důvod a alternativy.
+- **Akce s potvrzením:** AI připraví změnu v systému, člověk ji musí potvrdit.
+- **Autonomní akce:** AI provede změnu sama podle pravidel a auditní stopy.
+
+Pro malý evropský SaaS doporučuji začít prvními třemi úrovněmi. Autonomní akce nechte až na moment, kdy máte dobré testy, audit log, rollback, monitoring a jasný právní i produktový důvod. Ano, zní to méně sexy než „agent všechno vyřeší“. Ale zase se ráno neprobudíte do CRM, kde robot přejmenoval pipeline na existenciální poezii.
+
+### CF.4 Oprávnění musí být užší než u člověka
+
+AI asistent nesmí mít automaticky všechna práva člověka, který ho spustil. V ideálním případě má ještě užší oprávnění: čte jen vybrané zdroje, zapisuje jen návrhy, akce provádí přes omezené API a každý krok zapisuje do audit logu.
+
+Dobrá architektura:
+
+- AI vrstva nemá přímý přístup do produkční databáze.
+- Nástroje pro akce jsou malé, pojmenované a validují vstupy.
+- Každý nástroj má vlastní scope: číst ticket, navrhnout odpověď, vytvořit draft, vyhledat dokumentaci.
+- Zápisové akce vyžadují potvrzení člověkem nebo jasnou politiku.
+- Audit log ukládá kdo akci spustil, jaký nástroj běžel, jaký byl výsledek a kdo ho schválil.
+- Citlivé akce mají rate limit, alert a možnost okamžitého vypnutí.
+
+Anti-pattern: dát modelu obecný interní token a říct mu v promptu, ať je opatrný. Prompt není bezpečnostní hranice. Je to instrukce. Bez technických guardrailů je to lepící páska na trezoru.
+
+### CF.5 Výstupy musí být ověřitelné
+
+AI odpověď bez odkazu na zdroj je podezření, ne fakt. U produktové dokumentace, supportu, obchodních doporučení a právně citlivých textů musí být jasné, z čeho výstup vychází. To neznamená, že každý odstavec potřebuje akademickou citaci. Znamená to, že uživatel nebo operátor má možnost ověřit důležité tvrzení.
+
+Prakticky:
+
+- u odpovědí z dokumentace přikládejte odkazy na konkrétní články,
+- u interních doporučení ukažte použité signály,
+- u generovaného textu označte, že jde o návrh,
+- u zákaznické komunikace nechte člověka převzít odpovědnost před odesláním,
+- u chyb modelu mějte tlačítko „nahlásit špatnou odpověď“,
+- pravidelně revidujte vzorky výstupů, ne jen průměrnou spokojenost.
+
+Pro marketingový obsah platí podobné pravidlo: AI může pomoct s osnovou, variantami titulku nebo prvním draftem. Fakta, ceny, právní tvrzení, benchmarky a citace musí projít lidskou kontrolou a odkazem na zdroj. Kreativní zkratka je fajn. Halucinovaná reference je trapas s konfety.
+
+### CF.6 Šablona: AI use-case karta
+
+```md
+# AI use-case karta
+
+## Základ
+- Název použití:
+- Vlastník:
+- Uživatelé:
+- Účel:
+- Míra autonomie:
+
+## Data
+- Vstupní data:
+- Osobní údaje:
+- Citlivé nebo interní údaje:
+- Minimalizace / pseudonymizace:
+- Retence promptů a výstupů:
+
+## Model a dodavatelé
+- Model / služba:
+- Region provozu:
+- Zpracovatelská smlouva / DPA:
+- Subdodavatelé:
+- Nastavení trénování na zákaznických datech:
+
+## Guardraily
+- Povolené nástroje:
+- Zakázané akce:
+- Potvrzení člověkem:
+- Audit log:
+- Rate limit / monitoring:
+- Vypínač:
+
+## Testování
+- Testovací scénáře:
+- Zakázané vstupy:
+- Očekávané selhání:
+- Review vzorků:
+- Datum další revize:
+```
+
+### Checklist: AI asistent bez privacy průšvihu
+
+- [ ] Každé AI použití má vlastníka a jasný účel.
+- [ ] Víme, která vstupní data model skutečně potřebuje.
+- [ ] Prompt neobsahuje secrets, zbytečné identifikátory ani celé databázové záznamy.
+- [ ] Model ani AI gateway nemají přímý neomezený přístup do produkce.
+- [ ] Zápisové akce mají potvrzení, audit log a rollback.
+- [ ] Výstupy u faktických tvrzení odkazují na ověřitelný zdroj.
+- [ ] Uživatel pozná, kdy komunikuje s AI nebo čte AI návrh tam, kde je to relevantní.
+- [ ] Máme proces pro hlášení špatných odpovědí a revizi vzorků.
+- [ ] Dodavatel, region, DPA, subdodavatelé a retence jsou zapsané v datové mapě.
+- [ ] Existuje rychlý vypínač pro jednotlivý AI use-case, ne jen pro celou aplikaci.
+
+### Mini cvičení: AI inventura za 45 minut
+
+1. Během 10 minut sepište všechna místa, kde už dnes používáte AI: produkt, support, marketing, vývoj, obchod, interní poznámky.
+2. Během 10 minut označte u každého použití vstupní data, výstup a míru autonomie.
+3. Během 10 minut vyberte tři nejrizikovější toky podle dopadu chyby a citlivosti dat.
+4. Během 10 minut doplňte k jednomu toku AI use-case kartu.
+5. Během 5 minut rozhodněte jednu změnu: méně dat do promptu, užší oprávnění, lidské potvrzení, audit log nebo vypínač.
+
+Výstupem nemá být zákaz AI. Výstupem má být AI, která se dá provozovat bez trapného pocitu, že produkt řídí velmi sebevědomý stážista s root přístupem.
+
+### Zdroje k příloze CF
+
+- Nařízení Evropského parlamentu a Rady (EU) 2024/1689, tedy EU AI Act, stanovuje rizikový rámec pro AI systémy a mimo jiné rozlišuje povinnosti poskytovatelů a nasazujících subjektů: https://eur-lex.europa.eu/eli/reg/2024/1689/oj
+- Evropská komise shrnuje povinnosti pro poskytovatele obecných AI modelů podle AI Actu, včetně dokumentace, transparentnosti a zvláštních povinností pro modely se systémovým rizikem: https://digital-strategy.ec.europa.eu/en/factpages/general-purpose-ai-obligations-under-ai-act
+- NIST AI Risk Management Framework 1.0 pracuje s funkcemi Govern, Map, Measure a Manage a slouží jako praktický rámec pro řízení rizik AI systémů: https://www.nist.gov/itl/ai-risk-management-framework
+- NIST AI 600-1 Generative AI Profile z 26. července 2024 doplňuje AI RMF o specifická rizika generativní AI a navržené postupy jejich řízení: https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf
+- EDPB u tématu AI zdůrazňuje odpovědnou inovaci v souladu s GDPR a ochranu osobních údajů při vývoji i používání AI technologií: https://www.edpb.europa.eu/topics/ai-and-technology/artificial-intelligence_en
+- ENISA ve frameworku dobrých kyberbezpečnostních praktik pro AI doporučuje brát bezpečnost AI jako rozšíření běžné ICT bezpečnosti a řešit ji ve vrstvách od základních kontrol po AI-specifická rizika: https://www.enisa.europa.eu/publications/multilayer-framework-for-good-cybersecurity-practices-for-ai
+
+
 ## Pracovní log
+
+- 2026-08-25: Přidána příloha CF „AI asistenti v SaaS bez datového chaosu“ s katalogem použití, minimalizací promptů, úrovněmi autonomie, oprávněními, ověřitelností výstupů, use-case kartou, checklistem a ověřenými zdroji.
 
 - 2026-08-25: Přidána příloha CE „Postmortem bez hledání viníka a bez ztráty paměti“ se spouštěči postmortemu, časovou osou, blameless analýzou, privacy-first kontrolou, akčními položkami, šablonou, checklistem, drillem a ověřenými NIST/Google SRE/Atlassian/ENISA zdroji.
 
