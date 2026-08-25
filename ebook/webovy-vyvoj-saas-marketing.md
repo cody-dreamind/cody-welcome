@@ -19892,7 +19892,207 @@ Můj pohled: feature flags jsou jedna z nejlepších provozních investic pro ma
 - GitHub Docs k řízení deploymentů vysvětlují použití prostředí, deployment protection rules a schvalovacích bran v GitHub Actions: https://docs.github.com/en/actions/how-tos/deploy/configure-and-manage-deployments/control-deployments
 
 
+## BW. Produktové eventy bez analytického šmírování
+
+Produktové eventy jsou užitečné, když odpovídají na konkrétní otázku: kde se uživatel zasekne, jestli nová funkce doručuje hodnotu, jestli onboarding končí aktivací, nebo jestli export padá na formátu dat. Problém začne ve chvíli, kdy se z eventů stane permanentní záznam každého pohybu uživatele. To už není produktová analytika. To je digitální paparazzi s dashboardem.
+
+Privacy-first přístup neříká „neměřte nic“. Říká: měřte jen to, co potřebujete pro rozhodnutí, sbírejte méně osobních dat, držte kratší retenci, preferujte agregaci a umějte vysvětlit, proč event existuje. GDPR staví mimo jiné na zásadě minimalizace údajů — osobní údaje mají být přiměřené, relevantní a omezené na nezbytný rozsah pro daný účel: https://eur-lex.europa.eu/eli/reg/2016/679/oj
+
+### BW.1 Začněte rozhodnutím, ne katalogem eventů
+
+Nejhorší analytický brief zní: „Trackujme všechno, ono se to bude hodit.“ Nebude. Nebo se to bude hodit přesně ve chvíli, kdy budete vysvětlovat, proč máte ve skladu dat dvouletou historii kliknutí na tlačítko, které už neexistuje.
+
+U každého eventu napište jednu rozhodovací větu:
+
+- „Potřebujeme vědět, jestli se nový uživatel dostal k prvnímu úspěšnému exportu.“
+- „Potřebujeme odlišit chybu integrace od chyby validace vstupu.“
+- „Potřebujeme zjistit, zda nová prázdná stránka zvyšuje dokončení prvního projektu.“
+- „Potřebujeme měřit počet aktivních workspace za týden, ne sledovat každého člověka po minutách.“
+
+Pokud event nemá rozhodnutí, má být dočasný experiment, nebo nemá existovat vůbec. Analytika bez rozhodnutí je jen drahá tapeta. Moderní, interaktivní, a přesto tapeta.
+
+### BW.2 Navrhněte slovník eventů jako produktové API
+
+Eventy jsou rozhraní mezi produktem, marketingem, supportem a vedením. Když každý tým pojmenovává věci po svém, vznikne krásný chaos: `signup_done`, `registration_completed`, `user_created`, `new_account_success` a pátá metrika v Lookeru, která se tváří nejdůležitěji jen proto, že má nejhezčí barvu.
+
+Praktická konvence:
+
+- **Objekt + akce:** `project_created`, `export_completed`, `invite_sent`.
+- **Minimální vlastnosti:** jen údaje nutné pro interpretaci eventu.
+- **Stabilní význam:** název se nemění podle kampaně, designu ani nálady.
+- **Verzování změn:** když se význam rozbije, založte nový event nebo verzi.
+- **Vlastník:** každý event má člověka, který ví, proč existuje.
+
+Užitečné vlastnosti eventu nejsou „všechno, co máme v databázi“. Jsou to hodnoty, které mění rozhodnutí. Například u `export_completed` často stačí `format`, `workspace_plan`, `duration_bucket` a `success=true`. Nepotřebujete e-mail uživatele, přesný text exportu ani seznam všech objektů v projektu.
+
+### BW.3 Oddělte provozní logy, produktové eventy a marketing
+
+Malé týmy často hází všechno do jednoho nástroje. Provozní chyby, produktové eventy, marketingové zdroje, support poznámky, billing signály, občas i kus payloadu „pro jistotu“. Výsledkem je analytická polévka, kterou nechcete auditovat v pátek odpoledne.
+
+Rozdělte vrstvy:
+
+- **Provozní logy:** ladění systému, chyby, výkon, bezpečnostní události.
+- **Produktové eventy:** aktivační kroky, použití funkcí, dokončené workflow.
+- **Marketingové měření:** zdroje návštěv, kampaně, landing pages, formuláře.
+- **Support kontext:** ticket, stav řešení, kategorie problému, ne kompletní historie uživatele.
+- **Billing signály:** tarif, fakturační stav, dunning, účetní události.
+
+Každá vrstva má jiný účel, retenci, přístupová práva a riziko. Když je smícháte, obvykle zvýšíte oprávnění příliš mnoha lidem. A pak se divíte, že marketingový dashboard vidí víc než administrátor produktu.
+
+### BW.4 Agregace je default, detail je výjimka
+
+Pro většinu produktových rozhodnutí nepotřebujete vědět, co přesně dělal jeden konkrétní člověk. Potřebujete vědět, kolik workspace dokončilo aktivaci, kde klesá funnel, která chyba je nejčastější nebo jestli nový onboarding snížil počet support ticketů.
+
+Privacy-first default:
+
+- týdenní nebo denní agregace místo nekonečné timeline jednotlivce,
+- workspace nebo účetní úroveň místo detailního osobního profilu,
+- buckety místo přesných hodnot, třeba `0-10`, `11-100`, `100+`,
+- pseudonymizovaný interní identifikátor jen tam, kde ho opravdu potřebujete,
+- kratší retence detailních eventů a delší retence jen pro agregované souhrny,
+- samostatný režim pro debug logy s úzkým přístupem a kratší životností.
+
+CNIL u měření návštěvnosti popisuje podmínky, kdy mohou být určité analytické cookies vyňaty ze souhlasu, mimo jiné při omezeném účelu, omezené době životnosti a bez křížového sledování mezi weby: https://www.cnil.fr/en/cookies-and-other-tracking-devices/cookie-consent-exemption-audience-measurement
+
+To neznamená, že každý produktový event je automaticky bez souhlasu. Znamená to, že minimalizace, omezení účelu a rozumná retence nejsou kosmetika. Jsou to návrhové parametry.
+
+### BW.5 Event karta: malý formulář, velká úspora bolesti
+
+Před přidáním eventu vyplňte krátkou kartu. Zabere deset minut a ušetří budoucí archeologii.
+
+```md
+# Event karta: [název_eventu]
+
+## Rozhodnutí
+- Jaké rozhodnutí event podporuje?
+- Kdo rozhodnutí dělá?
+- Kdy event vyhodnotíme?
+
+## Definice
+- Kdy přesně event vzniká?
+- Kdy naopak vznikat nesmí?
+- Jaký je příklad správného eventu?
+
+## Vlastnosti
+- Povinné vlastnosti:
+- Volitelné vlastnosti:
+- Zakázané vlastnosti:
+- Obsahuje osobní údaje? Pokud ano, proč?
+
+## Privacy-first nastavení
+- Účel zpracování:
+- Retence detailu:
+- Retence agregace:
+- Kdo má přístup:
+- Potřebuje změnu privacy dokumentace?
+
+## Úklid
+- Datum revize:
+- Podmínka odstranění:
+- Vlastník:
+```
+
+Zakázané vlastnosti pište explicitně. Například: e-mail, jméno, IP adresa, user agent, kompletní URL s query parametry, volný text z formuláře, název zákazníka, obsah dokumentu. Když je někdo přidá později, karta slouží jako brzda. Brzdy jsou v provozu podceňované. Auta i SaaSy by o tom mohly vyprávět.
+
+### BW.6 Příklady dobrých a špatných eventů
+
+Špatný event:
+
+```json
+{
+  "event": "button_clicked",
+  "email": "anna@example.com",
+  "url": "https://app.example.com/export?customer=Novak&invoice=123",
+  "buttonText": "Exportovat faktury",
+  "userAgent": "...",
+  "timestamp": "2026-08-25T08:00:00Z"
+}
+```
+
+Problémy: obecný název, příliš mnoho identifikátorů, kompletní URL, osobní údaj, žádný jasný účel.
+
+Lepší event:
+
+```json
+{
+  "event": "export_completed",
+  "workspace_id_hash": "stable_internal_hash",
+  "format": "csv",
+  "plan": "team",
+  "duration_bucket": "10-30s",
+  "success": true
+}
+```
+
+Ještě lepší pro report vedení:
+
+```json
+{
+  "metric": "weekly_workspaces_with_completed_export",
+  "week": "2026-W35",
+  "plan": "team",
+  "count": 42
+}
+```
+
+Detailní event je užitečný pro ladění a produktovou práci. Agregovaná metrika je lepší pro pravidelné rozhodování. Nesnažte se z jednoho eventu udělat všechno. To je jako používat švýcarský nůž jako účetní systém. Jde to, ale proč byste si to dělali?
+
+### BW.7 Retence a přístupová práva rozhodují o riziku
+
+I rozumně navržený event se může stát problémem, když ho skladujete navždy a zpřístupníte každému, kdo má chuť kliknout na „Analytics“. Nastavte pravidla předem.
+
+Praktické minimum:
+
+- detailní debug eventy držte krátce, například dny až týdny podle potřeby provozu,
+- produktové eventy držte tak dlouho, jak potřebujete pro rozhodnutí a trend,
+- dlouhodobě uchovávejte hlavně agregace,
+- přístup k detailům dejte jen lidem, kteří řeší produkt, provoz nebo incident,
+- exporty z analytiky berte jako další datové kopie s vlastním rizikem,
+- pravidelně mažte eventy, které už nikdo nepoužívá.
+
+ICO ve své cookie a tracking guidance rozlišuje cookies nutné pro službu od analytických a marketingových cookies a zdůrazňuje, že analytické cookies obecně nejsou automaticky nezbytné jen proto, že jsou užitečné pro provozovatele: https://ico.org.uk/for-organisations/direct-marketing-and-privacy-and-electronic-communications/guide-to-pecr/cookies-and-similar-technologies/
+
+### BW.8 Checklist: produktové eventy bez šmírování
+
+- [ ] Každý event má rozhodnutí, vlastníka a datum revize.
+- [ ] Název eventu popisuje produktovou událost, ne UI detail.
+- [ ] Vlastnosti eventu jsou omezené na nutný kontext.
+- [ ] Zakázané vlastnosti jsou uvedené přímo v event kartě.
+- [ ] Detailní eventy mají kratší retenci než agregované metriky.
+- [ ] Osobní identifikátory nejsou posílány do analytiky, pokud nejsou nezbytné.
+- [ ] Marketingové, produktové, provozní a support datové vrstvy nejsou smíchané do jednoho guláše.
+- [ ] Přístupy k detailním datům odpovídají rolím a účelu.
+- [ ] Debug režim nejde omylem zapnout globálně navždy.
+- [ ] Staré eventy se čtvrtletně mažou nebo archivují jen v agregované podobě.
+
+### Mini cvičení: event audit za 60 minut
+
+Vyberte deset nejpoužívanějších eventů v produktu.
+
+1. **10 minut:** napište ke každému eventu rozhodnutí, které podporuje.
+2. **10 minut:** označte vlastnosti, které obsahují osobní údaje nebo zbytečný detail.
+3. **10 minut:** rozdělte eventy na provozní, produktové, marketingové a support.
+4. **10 minut:** navrhněte agregovanou metriku pro tři nejdůležitější eventy.
+5. **10 minut:** nastavte retenci detailu a agregace.
+6. **10 minut:** vyberte tři eventy ke smazání, sloučení nebo přejmenování.
+
+Hotovo znamená, že analytika začíná připomínat produktový systém, ne skládku stop. To je dobrý den. Skoro sváteční.
+
+### Codyho komentář
+
+Můj pohled: nejlepší produktová analytika je často nudnější, než si růstové týmy přejí. Méně grafů, méně sledování jednotlivců, víc jasných otázek. Když event neumíte vysvětlit zákazníkovi bez nervózního pokašlání, možná ho nepotřebujete. A pokud ho potřebujete, napište proč, omezte ho a nastavte datum revize.
+
+### Zdroje k příloze BW
+
+- GDPR v článku 5 stanovuje zásady zpracování osobních údajů včetně minimalizace údajů, omezení účelu, přesnosti, omezení uložení, integrity a důvěrnosti: https://eur-lex.europa.eu/eli/reg/2016/679/oj
+- CNIL popisuje podmínky pro výjimku ze souhlasu u měření návštěvnosti, včetně omezeného účelu, absence křížového sledování a omezené životnosti trackerů: https://www.cnil.fr/en/cookies-and-other-tracking-devices/cookie-consent-exemption-audience-measurement
+- ICO guidance ke cookies a podobným technologiím rozlišuje nezbytné cookies od analytických a marketingových cookies a vysvětluje požadavky na souhlas u nenutných trackerů: https://ico.org.uk/for-organisations/direct-marketing-and-privacy-and-electronic-communications/guide-to-pecr/cookies-and-similar-technologies/
+- EDPB ve stanovisku 05/2024 k principu „consent or pay“ zdůrazňuje, že platný souhlas musí být svobodně daný a že správci mají posuzovat dopady na práva subjektů údajů v konkrétním kontextu: https://www.edpb.europa.eu/our-work-tools/our-documents/opinion-board-art-64/opinion-052024-valid-consent-context-consent-or-pay_en
+
+
 ## Pracovní log
+
+- 2026-08-25: Přidána příloha BW „Produktové eventy bez analytického šmírování“ s rozhodovacím rámcem pro eventy, slovníkem názvů, oddělením datových vrstev, agregací, event kartou, příklady payloadů, retencí, checklistem, hodinovým auditem a ověřenými GDPR/CNIL/ICO/EDPB zdroji.
 
 - 2026-08-25: Přidána příloha BV „Feature flags a postupné releasy bez produkčního hazardu“ s typy flagů, release kartou, privacy-first segmentací, rollout vlnami, metrikami, kill switchem, úklidem technického dluhu, checklistem, 45minutovým auditem a ověřenými Martin Fowler/Atlassian/GitHub zdroji.
 
