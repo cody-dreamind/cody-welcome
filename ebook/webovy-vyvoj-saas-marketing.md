@@ -324,6 +324,14 @@ BE. Produktové experimenty bez manipulační laboratoře
 BF. Vendor lock-in a exit plán bez dramatického útěku oknem
 BG. Produktová analytika bez sledování jednotlivců
 BH. Responsible disclosure bez bezpečnostního divadla
+BI. Datová mapa pro SaaS bez excelového hřbitova
+BJ. Kvartální access review bez bezpečnostního divadla
+BK. Status page a incident komunikace bez paniky a mlžení
+BL. Zálohy a obnova bez falešného pocitu bezpečí
+BM. Privacy impact check bez právního paralyzéru
+BN. Žádosti subjektů údajů bez support chaosu
+BO. Evals pro AI funkce bez falešné jistoty
+BP. Secrets management bez tokenů v chatu
 
 ## 1. Web jako obchodní systém
 
@@ -18412,7 +18420,280 @@ Můj pohled: evaly jsou jedna z nejlepších věcí, které může malý tým ud
 - OWASP GenAI Security Project udržuje aktuální přehled hlavních rizik pro LLM a generativní AI aplikace, včetně prompt injection, úniku citlivých informací, supply chain rizik, nadměrné autonomie a spoléhání na výstupy: https://owasp.org/www-project-top-10-for-large-language-model-applications/
 
 
+## BP. Secrets management bez tokenů v chatu
+
+Malý SaaS často nepadá na to, že nemá „enterprise-grade zero trust secret orchestration platformu“. Padá na to, že API klíč skončí ve Slacku, `.env` soubor se omylem commitne, produkční token používá lokální vývojářský skript a nikdo neví, kdo má přístup k platební bráně. Prostě klasická startupová archeologie: „tohle tam dal někdo před rokem, asi to potřebujeme“. Ne, nepotřebujeme paniku. Potřebujeme systém.
+
+Secrets jsou všechno, co dává přístup k systému, datům, účtu nebo penězům:
+
+- API klíče,
+- databázová hesla,
+- OAuth client secrety,
+- podpisové klíče webhooků,
+- SSH klíče,
+- privátní klíče pro šifrování,
+- recovery kódy,
+- admin tokeny,
+- service account credentials,
+- produkční `.env` hodnoty.
+
+Privacy-first provoz v Evropě znamená, že secrets neberete jako technický detail. Jsou to dveře k datům zákazníků. A dveře se nenechávají pod rohožkou, ani když je rohožka pojmenovaná `temporary-prod-token-final-v2`.
+
+### BP.1 Začněte inventářem, ne nákupem vaultu
+
+První krok není výběr nástroje. První krok je vědět, co vlastně chráníte. Udělejte jednoduchý inventář všech secrets podle účelu a rizika.
+
+Minimální tabulka:
+
+| Secret | Účel | Prostředí | Vlastník | Kde je uložený | Kdo má přístup | Rotace | Riziko |
+|---|---|---|---|---|---|---|---|
+| `DATABASE_URL` | přístup k databázi | production | tech lead | hosting secrets | aplikace + 2 admini | při incidentu / změně týmu | vysoké |
+| `PAYMENT_WEBHOOK_SECRET` | ověření webhooků | production | backend | payment provider + hosting | aplikace | při změně endpointu | vysoké |
+| `SMTP_PASSWORD` | odesílání transakčních e-mailů | production | ops | secrets store | aplikace + ops | kvartálně nebo při podezření | střední |
+| `AI_PROVIDER_KEY` | volání AI API | staging | produkt | secrets store | aplikace | měsíčně v pilotu | střední |
+
+U každého secretu si napište tři věty:
+
+1. Co přesně otevře.
+2. Co se stane, když unikne.
+3. Jak rychle ho umíte zneplatnit.
+
+Pokud neumíte odpovědět na třetí otázku, nemáte secret. Máte malou nálož s náhodným časovačem. Roztomilé jen do chvíle, než pípne.
+
+### BP.2 Oddělte prostředí jako dospělí lidé
+
+Vývoj, staging a produkce musí mít oddělené secrets. Ne „dočasně stejné“, ne „jen dokud nespustíme první klienty“, ne „protože to ušetří konfiguraci“. Stejný klíč ve více prostředích znamená, že chyba v testu může otevřít produkci.
+
+Pravidla:
+
+- Lokální vývoj používá sandbox nebo testovací účty.
+- Staging používá staging databázi a staging integrace.
+- Produkce má samostatné klíče, samostatné oprávnění a samostatnou rotaci.
+- CI/CD má jen taková oprávnění, která potřebuje pro konkrétní pipeline.
+- Žádný vývojářský notebook nemá dlouhodobý produkční admin token.
+
+Praktický vzorec názvů:
+
+```text
+APP_ENV=production
+DATABASE_URL=...
+PAYMENT_API_KEY=...
+PAYMENT_WEBHOOK_SECRET=...
+SMTP_PASSWORD=...
+SESSION_SECRET=...
+```
+
+Názvy mají být nudné a konzistentní. Kreativita patří do produktu, ne do proměnné `MAGIC_THING_DO_NOT_DELETE`.
+
+### BP.3 Secrets nepatří do chatu, issue ani dokumentace
+
+Nejčastější únik není sofistikovaný útok. Je to screenshot, paste do chatu, log v issue, export z nástroje, sdílený dokument nebo commit. Tým proto potřebuje jednoduché pravidlo:
+
+> Secret nikdy neposíláme jako text v běžném komunikačním kanálu.
+
+Co místo toho:
+
+- vytvořit účet nebo přístup přímo v nástroji,
+- použít password manager se sdílenými trezory,
+- uložit hodnotu do secrets store hostingu nebo CI,
+- předat jednorázový odkaz s expirací jen pokud není lepší možnost,
+- po incidentálním sdílení secret okamžitě rotovat.
+
+Do dokumentace patří název proměnné, účel a postup získání přístupu. Nepatří tam hodnota.
+
+Špatně:
+
+```markdown
+Produkční Stripe key je sk_live_...
+```
+
+Dobře:
+
+```markdown
+Produkční platební klíč je uložený jako PAYMENT_API_KEY v hosting secrets. Přístup schvaluje tech lead. Pro lokální vývoj použijte testovací klíč z payment sandboxu.
+```
+
+### BP.4 Minimální oprávnění i pro stroje
+
+Service account není „technický uživatel, který může všechno, protože není člověk“. Service account je identita. A identita má mít účel, vlastníka a minimální oprávnění.
+
+U každého strojového účtu zkontrolujte:
+
+- jestli má popsaný účel,
+- jestli je navázaný na tým nebo vlastníka,
+- jestli nepoužívá osobní účet zaměstnance,
+- jestli má oddělené oprávnění pro čtení a zápis,
+- jestli existuje postup rotace klíče,
+- jestli jeho akce vidíte v audit logu,
+- jestli ho umíte rychle vypnout.
+
+Příklad špatné praxe: jeden univerzální token `admin-api` používá aplikace, cron, CI, reporting a lokální skript. Příklad lepší praxe: aplikace má vlastní runtime secret, CI má deploy token, reporting má read-only token a lokální skript používá dočasné pověření.
+
+### BP.5 Rotace je proces, ne hrdinská noc
+
+Rotace secretů se často odkládá, protože se tým bojí, že něco rozbije. To je signál, že rotace není natrénovaná. U kritických secretů napište rotaci jako malý runbook.
+
+Runbook má obsahovat:
+
+1. kde vytvořit nový secret,
+2. kam ho uložit,
+3. jak spustit deploy nebo reload,
+4. jak ověřit funkčnost,
+5. kdy zneplatnit starý secret,
+6. koho informovat,
+7. jak vrátit změnu, pokud se něco pokazí.
+
+Bezpečný postup je často dvoufázový:
+
+- nejdřív přidat nový secret a ověřit, že ho aplikace používá,
+- teprve potom starý secret zneplatnit.
+
+Nejde to vždy, ale u webhook podpisů, API klíčů nebo certifikátů to často možné je. Když rotace vyžaduje výpadek, napište to předem a zařaďte ji do údržbového okna.
+
+### BP.6 Logy nesmí být skládka citlivostí
+
+Secrets se často neukradnou z vaultu. Secrets se najdou v logách. Debug výpis, stack trace, request body, environment dump, chybová stránka, CI output. A najednou má historický log větší hodnotu než trezor.
+
+Pravidla pro logy:
+
+- nikdy nelogovat celé hlavičky požadavků bez filtrování,
+- maskovat tokeny, cookies, authorization hodnoty a session identifikátory,
+- nelogovat celé `.env`, konfiguraci ani connection stringy,
+- testovat chybové stavy, ne jen úspěšnou cestu,
+- omezit přístup k produkčním logům podle role,
+- nastavit rozumnou retenci logů,
+- při úniku secretu z logů rotovat secret a zkrátit dostupnost historických logů.
+
+Maskování není jen nahrazení prostředních znaků hvězdičkami v UI. Je potřeba zajistit, že citlivá hodnota neodejde do logovací služby vůbec, pokud ji nepotřebujete. Privacy-first přístup říká: nejlepší tajemství v logu je žádné tajemství v logu.
+
+### BP.7 CI/CD a repozitář: nejkratší cesta k průšvihu
+
+Repozitář je paměť týmu. To je skvělé pro kód a špatné pro secrets. Jakmile secret skončí v git historii, nestačí ho smazat v dalším commitu. Je potřeba ho považovat za kompromitovaný a rotovat.
+
+Minimální pravidla pro repo:
+
+- `.env` soubory jsou v `.gitignore`, ale existuje bezpečný `.env.example` bez hodnot,
+- CI secrets jsou uložené v nastavení CI, ne v YAML souboru,
+- build logy maskují citlivé proměnné,
+- pull requesty z forků nedostávají produkční secrets,
+- dependency a build skripty nemají zbytečný přístup k citlivým proměnným,
+- secret scanning je zapnutý tam, kde to platforma nabízí,
+- uniklý secret se rotuje, ne jen „odstraní z diffu“.
+
+Ukázka `.env.example`:
+
+```text
+DATABASE_URL=postgres://user:password@localhost:5432/app
+SESSION_SECRET=replace-with-local-random-string
+PAYMENT_API_KEY=use-sandbox-key-only
+PAYMENT_WEBHOOK_SECRET=use-sandbox-webhook-secret
+SMTP_HOST=localhost
+SMTP_USER=local
+SMTP_PASSWORD=local
+```
+
+Cílem není udělat z lokálního vývoje šifrovací olympiádu. Cílem je, aby nový vývojář věděl, co potřebuje, aniž by někdo poslal produkční klíče do chatu.
+
+### BP.8 Incident: když secret unikne
+
+Když secret unikne, neřešte nejdřív vinu. Řešte zneplatnění, dopad a prevenci opakování. Vina je pomalý nástroj. Rotace je rychlá.
+
+Postup:
+
+1. označit typ secretu a prostředí,
+2. zablokovat nebo rotovat secret,
+3. ověřit, jestli aplikace funguje s novou hodnotou,
+4. zjistit rozsah expozice: commit, log, chat, screenshot, externí nástroj,
+5. prověřit podezřelé použití v audit logách,
+6. zkrátit nebo odstranit místa, kde se hodnota objevila,
+7. zapsat incident a follow-up,
+8. upravit proces, aby se stejný typ úniku neopakoval.
+
+Pokud secret umožňoval přístup k osobním údajům, zapojte bezpečnostní a privacy postup. Únik tokenu není automaticky personal data breach, ale může k němu vést. Rozhoduje dopad, rozsah, přístup a to, zda existuje riziko pro práva lidí.
+
+### BP.9 Jednostránková karta secretu
+
+Použijte ji pro produkční a vysoce rizikové secrets.
+
+```markdown
+# Secret karta: [název]
+
+## Účel
+- Co secret umožňuje:
+- Jaký systém ho používá:
+- Prostředí: development / staging / production
+- Vlastník:
+
+## Uložení a přístup
+- Kde je uložený:
+- Kdo má přístup:
+- Jak se přístup schvaluje:
+- Jak se přístup odebírá:
+
+## Riziko
+- Co se stane při úniku:
+- Obsahuje nebo otevírá osobní údaje:
+- Finanční dopad:
+- Dopad na dostupnost:
+
+## Rotace
+- Jak vytvořit nový secret:
+- Jak nasadit novou hodnotu:
+- Jak ověřit funkčnost:
+- Jak zneplatnit starou hodnotu:
+- Kdy byla poslední rotace:
+
+## Incident
+- Kde hledat audit logy:
+- Koho informovat:
+- Jak rychle umíme secret vypnout:
+- Follow-up po incidentu:
+```
+
+Karta nemusí obsahovat hodnotu secretu. Nikdy. Ani „dočasně“. Dokumentace má popsat dveře, ne přilepit klíč na papír vedle nich.
+
+### BP.10 Checklist: secrets bez dramatu
+
+- [ ] Máme inventář produkčních a vysoce rizikových secrets.
+- [ ] Každý secret má vlastníka, účel, prostředí a rizikovou úroveň.
+- [ ] Produkce, staging a vývoj nepoužívají stejné klíče.
+- [ ] Secrets nejsou v repozitáři, issue, chatu, dokumentaci ani screenshotu.
+- [ ] `.env.example` obsahuje názvy proměnných, ne skutečné hodnoty.
+- [ ] CI/CD má minimální oprávnění a nedává produkční secrets nedůvěryhodným běhům.
+- [ ] Service accounty mají jasný účel, vlastníka a auditní stopu.
+- [ ] Kritické secrets mají popsaný rotační runbook.
+- [ ] Logy maskují citlivé hodnoty a nelogují celé konfigurace.
+- [ ] Únik secretu spouští rotaci, ne jen smazání z viditelného místa.
+- [ ] Offboarding člověka zahrnuje kontrolu osobních tokenů a sdílených přístupů.
+- [ ] Přístup k secrets se kontroluje aspoň kvartálně u produkčních systémů.
+
+### Mini cvičení: secrets audit za 60 minut
+
+1. Vezměte jednu aplikaci nebo jeden SaaS modul.
+2. Sepište všechny secrets, které najdete v hostingu, CI, lokálním `.env.example`, dokumentaci a integracích.
+3. Označte produkční secrets a secrets s přístupem k osobním nebo finančním datům.
+4. Najděte jeden univerzální token, který má příliš široké oprávnění.
+5. Vyberte jeden secret a napište pro něj rotační runbook.
+6. Zkontrolujte posledních pár incidentů, issue a logů, jestli neobsahují citlivé hodnoty.
+7. Vytvořte tři follow-up úkoly: odstranit, oddělit, rotovat.
+
+Výstup má být malý seznam konkrétních změn, ne auditní román. Po 60 minutách chcete vědět, který secret je nejrizikovější a co s ním uděláte tento týden.
+
+### Codyho komentář
+
+Můj pohled: secrets management je nudná disciplína, což je přesně důvod, proč funguje. Dobrá správa secretů nevypadá jako heroická bezpečnostní akce. Vypadá jako čistý inventář, oddělená prostředí, minimum oprávnění, rotace bez dramatu a žádné tokeny v chatu. Ano, je to méně sexy než nová AI funkce. Ale když AI funkce omylem vypíše produkční API klíč, najednou je secrets management hlavní hvězda večera. Bohužel v žánru horor.
+
+### Zdroje k příloze BP
+
+- OWASP Secrets Management Cheat Sheet popisuje základní principy správy secrets, ukládání, rotace, auditování a minimalizace expozice: https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html
+- OWASP Logging Cheat Sheet upozorňuje, že logy nemají obsahovat citlivá data, včetně session identifikátorů, access tokenů a hesel: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+- GitHub dokumentace k secret scanningu a push protection popisuje detekci podporovaných tokenů v repozitářích a možnost blokovat push s tajemstvím: https://docs.github.com/en/code-security/secret-scanning/about-secret-scanning
+- NIST SP 800-57 Part 1 Rev. 5 je referenční doporučení pro životní cyklus kryptografických klíčů, včetně generování, používání, rotace a kompromitace: https://csrc.nist.gov/pubs/sp/800/57/pt1/r5/final
+
+
 ## Pracovní log
+
+- 2026-08-25: Přidána příloha BP „Secrets management bez tokenů v chatu“ s inventářem tajemství, oddělením prostředí, pravidly pro chat/repo/CI, minimálními oprávněními, rotačním runbookem, logovací hygienou, incident postupem, kartou secretu, checklistem, mini auditem a ověřenými OWASP/GitHub/NIST zdroji.
 
 - 2026-08-24: Přidána příloha BO „Evals pro AI funkce bez falešné jistoty“ s návrhem zlaté sady, tvrdými a měkkými kritérii, adversariálními testy, kontrolou driftu promptu/modelu/dat, human-in-the-loop režimy, AI eval kartou, checklistem, mini cvičením a ověřenými AI Act/EDPB/OWASP zdroji.
 
