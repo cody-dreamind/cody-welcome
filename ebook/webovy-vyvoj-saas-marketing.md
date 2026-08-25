@@ -20252,7 +20252,199 @@ Můj pohled: dobrá incidentní komunikace je produktová funkce. Není vidět k
 - Britské NCSC má srozumitelný Small Business Guide: Response & Recovery, který doporučuje připravit role, kontakty, komunikační postupy a obnovu před incidentem: https://www.ncsc.gov.uk/collection/small-business-guidance--response-and-recovery
 
 
+## BY. Žádosti subjektů údajů bez supportového chaosu
+
+Žádost o přístup, výmaz nebo přenositelnost dat často nepřijde jako právnický dopis. Přijde jako obyčejná zpráva: „Pošlete mi, co o mně máte,“ „smažte účet,“ „dejte mi export,“ nebo „proč mi pořád chodí e-maily?“ Pokud tým nemá proces, začne improvizovat support, vývoj, obchod a někdy i zakladatel ve dvě ráno. To je krásná cesta k tomu, že jedna žádost skončí ve třech nástrojích, dvou tabulkách a jednom zapomenutém Slack vlákně. Romantika digitální administrativy.
+
+Privacy-first SaaS k tomu přistupuje opačně: žádost subjektu údajů není otrava, ale produktový use case. Uživatel má mít jasnou cestu, tým má mít jednoduchou kartu žádosti, data mají být dohledatelná bez detektivky a odpověď má být včasná, srozumitelná a minimální. GDPR dává subjektům údajů práva a správcům povinnost reagovat obvykle do jednoho měsíce. Prakticky to znamená: proces nesmí začínat až ve chvíli, kdy žádost dorazí.
+
+### BY.1 Udělejte z práv proces, ne ruční lov dat
+
+Začněte seznamem nejpravděpodobnějších žádostí. Malý web, e-shop nebo SaaS obvykle řeší hlavně:
+
+- **Přístup k údajům:** uživatel chce vědět, jaké osobní údaje zpracováváte a proč.
+- **Opravu údajů:** uživatel chce změnit nepřesný kontakt, fakturační údaj nebo profil.
+- **Výmaz:** uživatel chce smazat účet nebo data, která už nepotřebujete.
+- **Omezení zpracování:** uživatel žádá, abyste data dočasně nepoužívali určitým způsobem.
+- **Přenositelnost:** uživatel chce strojově čitelný export dat, která vám poskytl.
+- **Námitku:** uživatel nesouhlasí například s určitou marketingovou nebo oprávněně-zájmovou aktivitou.
+- **Odvolání souhlasu:** uživatel chce vypnout newsletter, analytiku, nahrávání nebo jiný volitelný účel.
+
+Ke každému právu si napište tři věci: kde data vznikají, kdo je umí najít a jaká je bezpečná výstupní forma. Pokud to nejde napsat na jednu stránku, pravděpodobně máte buď zbytečně roztahaná data, nebo špatně pojmenované systémy. Obojí bolí, ale aspoň už víte kde.
+
+### BY.2 Jeden vstup, jedna karta, jeden vlastník
+
+Žádosti přijímejte na jasném místě: support e-mail, formulář v aplikaci, nebo dedikovaná privacy adresa. Nemusí to být komplikované. Důležité je, aby tým věděl, že taková zpráva není běžný ticket typu „nejde mi změnit avatar“.
+
+Minimální DSR karta:
+
+- **ID žádosti:** například `DSR-2026-08-25-01`.
+- **Datum přijetí:** kdy žádost dorazila a jakým kanálem.
+- **Identita žadatele:** jak byla ověřena a jaké riziko ověření má.
+- **Typ žádosti:** přístup, výmaz, oprava, přenositelnost, námitka, odvolání souhlasu.
+- **Rozsah:** účet, workspace, fakturace, newsletter, support historie, produktová data.
+- **Vlastník:** osoba odpovědná za koordinaci a odpověď.
+- **Deadline:** standardně jeden měsíc od přijetí, s poznámkou, zda je potřeba prodloužení.
+- **Systémy:** seznam míst, kde se data kontrolují.
+- **Rozhodnutí:** co bylo provedeno, co nešlo provést a proč.
+- **Odpověď:** datum, kanál a stručné shrnutí.
+
+Kartu držte interně a minimalizujte v ní osobní údaje. Paradoxně i proces pro ochranu osobních údajů umí vytvořit novou hromádku citlivých dat. Nedělejte si z DSR logu malý paralelní profil uživatele.
+
+### BY.3 Ověření identity nesmí být bezpečnostní divadlo
+
+U žádosti o přístup nebo export ověřujte identitu přiměřeně riziku. Když uživatel píše z přihlášeného účtu a žádá export vlastních běžných dat, často stačí potvrzení v aplikaci nebo e-mail na registrovanou adresu. Když žádá o citlivější data, změnu vlastnictví workspace nebo export firemních dat, potřebujete silnější ověření.
+
+Praktická stupnice:
+
+- **Nízké riziko:** odhlášení z newsletteru, odvolání marketingového souhlasu, oprava překlepu.
+- **Střední riziko:** export vlastních profilových a produktových dat.
+- **Vysoké riziko:** export dat celého workspace, přístup k fakturaci, žádost přes novou adresu, spor mezi členy týmu.
+
+Neptej se automaticky na občanku. To je často víc dat, než potřebujete. Lepší je použít existující autentizaci, potvrzovací odkaz, administrátorský workflow nebo ověření přes již známý kanál. Pokud si nejste jistí, vyžádejte jen doplňující informaci nutnou k ověření. Privacy-first ověření znamená: dost bezpečné na ochranu účtu, dost úsporné na ochranu člověka.
+
+### BY.4 Mapa systémů je polovina odpovědi
+
+Největší zdržení nebývá právní formulace, ale otázka „kde všude toho člověka máme?“ Proto udržujte malou datovou mapu pro DSR:
+
+- **Aplikace:** profil, workspace, role, nastavení, obsah vytvořený uživatelem.
+- **Fakturace:** zákazník, objednávky, faktury, daňové povinnosti, platební metadata.
+- **Support:** e-maily, ticket historie, přílohy, interní poznámky.
+- **Marketing:** newsletter, souhlasy, preference, odhlášení, lead magnety.
+- **Analytika:** agregované eventy, pseudonymní identifikátory, retenční pravidla.
+- **Logy:** bezpečnostní a provozní záznamy, doba uchování, přístupová práva.
+- **Zálohy:** co obsahují, jak dlouho žijí a jak se řeší výmaz v obnově.
+- **Dodavatelé:** kdo je zpracovatel, kde běží data a jak se u něj žádost propisuje.
+
+U každého systému napište, jestli umíte data vyhledat podle e-mailu, interního ID, tenant ID nebo jiného klíče. Vyhledávání podle e-mailu je pohodlné, ale u SaaS účtů často nestačí. Jeden člověk může mít více e-mailů, více workspace a různé role. Interní stabilní ID bývá spolehlivější.
+
+### BY.5 Výmaz není tlačítko „spálit vesnici“
+
+Právo na výmaz neznamená, že okamžitě smažete úplně všechno ze všech vrstev bez přemýšlení. Některá data musíte držet kvůli smlouvě, účetnictví, obraně právních nároků nebo bezpečnostním logům. Důležité je umět rozlišit účely a uživateli vysvětlit, co smažete, co anonymizujete, co ponecháte a proč.
+
+Praktický model výmazu:
+
+- **Produktová data:** smažte nebo předem převeďte vlastnictví podle pravidel workspace.
+- **Profil:** smažte nebo anonymizujte identifikátory, které už nejsou potřeba.
+- **Marketing:** okamžitě ukončete zasílání a ponechte jen suppression záznam, aby se člověk omylem znovu nepřihlásil.
+- **Fakturace:** ponechte povinné účetní údaje po zákonnou dobu, ale nepoužívejte je pro nové účely.
+- **Bezpečnostní logy:** držte po omezenou dobu podle retenční politiky a omezte přístup.
+- **Zálohy:** neslibujte ruční mazání jednotlivých záznamů v každé historické záloze; popište, kdy zálohy expirují a jak zabráníte návratu smazaných dat při obnově.
+
+Dobrá odpověď k výmazu není „hotovo“. Dobrá odpověď říká, co bylo odstraněno, co zůstává, z jakého důvodu a kdy zmizí i z retenčních vrstev. Bez právnické kouřové clony.
+
+### BY.6 Export má být použitelný, ne trest za zvědavost
+
+Když uživatel žádá přístup nebo přenositelnost, neposílejte screenshoty administrace ani datový dump, kterému rozumí jen seniorní backend vývojář po třetí kávě. Export by měl být čitelný a bezpečný.
+
+Praktická pravidla:
+
+- Používejte otevřené formáty, například `CSV`, `JSON` nebo `Markdown` shrnutí.
+- Oddělte uživatelsky čitelné vysvětlení od strojového exportu.
+- Nepřikládejte data jiných lidí z workspace, pokud k tomu není jasný důvod a oprávnění.
+- Vysvětlete, co v exportu není, například agregovaná anonymní analytika.
+- Chraňte export expirujícím odkazem nebo předáním přes přihlášenou aplikaci.
+- Zalogujte vytvoření exportu, ale neukládejte export navždy „pro jistotu“.
+
+Příklad jednoduché struktury exportu:
+
+```text
+export/
+  README.md
+  profile.json
+  workspace-memberships.csv
+  billing-summary.csv
+  support-requests.csv
+  consents.json
+```
+
+Soubor `README.md` vysvětlí účel, datum exportu, kontaktní adresu a limity. Strojové soubory pak nejsou hádanka. A ne, `final_export_v7_REAL_FINAL.zip` není informační architektura.
+
+### BY.7 Šablona: DSR karta
+
+```markdown
+# DSR karta: [ID]
+
+## Přijetí
+- Datum přijetí:
+- Kanál:
+- Žadatel:
+- Dotčený účet / workspace:
+
+## Typ a rozsah žádosti
+- Typ žádosti:
+- Rozsah dat:
+- Právní / produktová omezení:
+- Deadline odpovědi:
+
+## Ověření identity
+- Metoda ověření:
+- Riziková úroveň:
+- Dodatečné informace vyžádány:
+- Výsledek ověření:
+
+## Systémy ke kontrole
+- Aplikace:
+- Fakturace:
+- Support:
+- Marketing:
+- Analytika:
+- Logy:
+- Dodavatelé:
+
+## Provedené kroky
+- Export vytvořen:
+- Data opravena:
+- Data smazána / anonymizována:
+- Data ponechána a důvod:
+- Dodavatelé informováni:
+
+## Odpověď
+- Datum odpovědi:
+- Kanál:
+- Shrnutí odpovědi:
+- Další krok:
+```
+
+### BY.8 Checklist: žádosti subjektů údajů bez chaosu
+
+- Máte jasný kanál pro privacy žádosti a support ho umí rozpoznat.
+- Každá žádost dostane DSR kartu, vlastníka a deadline.
+- Identitu ověřujete přiměřeně riziku, ne sběrem zbytečných dokladů.
+- Datová mapa pokrývá aplikaci, fakturaci, support, marketing, analytiku, logy, zálohy a dodavatele.
+- Export používá otevřené formáty a neobsahuje data jiných osob bez důvodu.
+- Výmaz rozlišuje produktová data, zákonné povinnosti, logy, zálohy a suppression záznamy.
+- Odvolání souhlasu se propíše do všech relevantních systémů bez ručního přepisování.
+- Každé rozhodnutí, odmítnutí nebo částečné splnění je stručně zdokumentované.
+- DSR log má vlastní retenci a neobsahuje zbytečné osobní údaje.
+
+### Mini cvičení: DSR drill za 60 minut
+
+1. **10 minut:** vezměte tři scénáře: „pošlete mi moje data“, „smažte účet“ a „odhlašuji souhlas“.
+2. **10 minut:** pro každý scénář vyplňte DSR kartu jen z toho, co dnes opravdu víte.
+3. **15 minut:** projděte datovou mapu a označte systémy, kde neumíte data rychle najít.
+4. **10 minut:** napište vzor odpovědi pro export a výmaz bez právnické mlhy.
+5. **10 minut:** určete automatizaci, která odstraní největší ruční riziko.
+6. **5 minut:** zapište jedno rozhodnutí do backlogu a jedno pravidlo do support handbooku.
+
+Hotovo je až ve chvíli, kdy žádost zvládne i člověk, který ji neřešil posledních pětkrát. Jinak nemáte proces, ale ústní tradici. A ty v SaaS obvykle končí archeologií v inboxu.
+
+### Codyho komentář
+
+Můj pohled: DSR proces je skvělý lakmusový papírek datové hygieny. Pokud neumíte člověku vysvětlit, kde jeho data jsou, proč je držíte a jak je smažete, problém není v GDPR. Problém je v architektuře produktu. Privacy-first firma se nebojí žádostí subjektů údajů, protože má data pod kontrolou. A když je nemá, žádost je užitečný budíček, ne nepřátelský útok.
+
+### Zdroje k příloze BY
+
+- GDPR v článcích 12 až 23 popisuje práva subjektů údajů, včetně transparentních informací, přístupu, opravy, výmazu, omezení zpracování, přenositelnosti, námitky a pravidel pro automatizované rozhodování: https://eur-lex.europa.eu/eli/reg/2016/679/oj
+- GDPR článek 12 stanovuje pravidla pro odpovědi na žádosti subjektů údajů, včetně srozumitelné komunikace a standardní lhůty jednoho měsíce: https://eur-lex.europa.eu/eli/reg/2016/679/oj
+- EDPB Guidelines 01/2022 k právu na přístup vysvětlují rozsah odpovědi, kopii osobních údajů, ověření identity a praktické limity při vyřizování žádostí: https://www.edpb.europa.eu/our-work-tools/documents/public-consultations/2022/guidelines-012022-data-subject-rights-right_en
+- Evropská komise shrnuje práva jednotlivců podle GDPR, včetně přístupu, opravy, výmazu, omezení, přenositelnosti, námitky a odvolání souhlasu: https://commission.europa.eu/law/law-topic/data-protection/information-individuals_en
+- Evropská komise u právních základů zpracování připomíná, že odvolání souhlasu má být možné a že po odvolání je potřeba ukončit zpracování pro daný účel, pokud neexistuje jiný právní základ: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/legal-grounds-processing-data_en
+
+
 ## Pracovní log
+
+- 2026-08-25: Přidána příloha BY „Žádosti subjektů údajů bez supportového chaosu“ s DSR procesem, kartou žádosti, ověřením identity podle rizika, datovou mapou, výmazovým modelem, exportní strukturou, checklistem, hodinovým DSR drillem a ověřenými GDPR/EDPB/Evropská komise zdroji.
 
 - 2026-08-25: Přidána příloha BX „Incidentní komunikace bez paniky a mlžení“ se SEV tříděním, incidentní kartou, první zprávou, status page pravidly, GDPR časovou osou, kanály podle publika, checklistem, tabletop cvičením a ověřenými GDPR/EDPB/ENISA/NCSC zdroji.
 
