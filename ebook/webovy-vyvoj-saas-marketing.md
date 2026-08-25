@@ -20090,7 +20090,171 @@ Můj pohled: nejlepší produktová analytika je často nudnější, než si rů
 - EDPB ve stanovisku 05/2024 k principu „consent or pay“ zdůrazňuje, že platný souhlas musí být svobodně daný a že správci mají posuzovat dopady na práva subjektů údajů v konkrétním kontextu: https://www.edpb.europa.eu/our-work-tools/our-documents/opinion-board-art-64/opinion-052024-valid-consent-context-consent-or-pay_en
 
 
+## BX. Incidentní komunikace bez paniky a mlžení
+
+Incident není jen technická závada. Je to test důvěry. U malého webu, SaaS nebo e-shopu se dá hodně pokazit i ve chvíli, kdy už je technický problém zastavený: tým mlčí, zákazníci se ptají na podporu, obchodník slíbí něco, co vývoj ještě neověřil, a někdo v dobré víře pošle do veřejného statusu víc detailů, než je bezpečné. Pak máte dvě škody místo jedné. Gratuluju, z incidentu je firemní karaoke.
+
+Privacy-first incidentní komunikace stojí na jednoduchém pravidle: říkat pravdu rychle, ale jen v rozsahu, který pomáhá uživateli a nezvyšuje riziko. Neznamená to mlžit. Znamená to oddělit potvrzená fakta od hypotéz, nepublikovat zbytečné osobní údaje, držet jednu verzi pravdy a mít připravený postup dřív, než začne hořet produkce.
+
+### BX.1 Rozdělte incidenty podle dopadu, ne podle emocí
+
+První chyba bývá přepálená nebo naopak podceněná reakce. Proto si předem napište jednoduché úrovně závažnosti.
+
+Příklad pro malý SaaS:
+
+- **SEV 1:** služba je nedostupná pro většinu zákazníků, unikla data, nebo existuje aktivní bezpečnostní zneužití.
+- **SEV 2:** klíčová funkce nefunguje části zákazníků, platby selhávají, nebo je vysoké riziko ztráty dat.
+- **SEV 3:** omezená chyba s workaroundem, zpomalení, nefunkční integrace, problém jen pro konkrétní segment.
+- **SEV 4:** kosmetická chyba, drobný výpadek administrace, problém bez dopadu na zákaznická data.
+
+Ke každé úrovni dopište komunikační minimum: kdo rozhoduje, kdo píše zákazníkům, zda se aktualizuje status page, kdy jde e-mail, kdy stačí banner v aplikaci a kdy musíte zapojit právní nebo bezpečnostní odpovědnou osobu. U GDPR incidentů si pohlídejte hlavně hranici, kdy jde o porušení zabezpečení osobních údajů. GDPR definuje osobní datový breach široce: náhodné nebo protiprávní zničení, ztrátu, změnu, neoprávněné zpřístupnění nebo přístup k osobním údajům. Tady intuice nestačí.
+
+### BX.2 Jedna incidentní karta, žádné paralelní pravdy
+
+V krizi nevzniká chaos proto, že lidé neumí pracovat. Vzniká proto, že každý pracuje s jinou verzí reality. Incidentní karta je jeden živý dokument, kam se zapisuje stav.
+
+Minimum polí:
+
+- **ID incidentu:** krátký identifikátor, například `INC-2026-08-25-01`.
+- **Závažnost:** SEV úroveň a důvod.
+- **Začátek:** kdy byl problém poprvé zjištěn a jak.
+- **Dopad:** koho se týká, jaká funkce, jaké prostředí, jaká data.
+- **Stav:** vyšetřujeme, mitigováno, opraveno, monitorujeme, uzavřeno.
+- **Vlastník:** jedna osoba odpovědná za koordinaci.
+- **Komunikace:** poslední veřejná zpráva, další plánovaná aktualizace, kanály.
+- **Právní/privacy poznámka:** zda jsou dotčeny osobní údaje, zda běží 72hodinové posouzení podle GDPR, zda je potřeba informovat dozorový úřad nebo osoby.
+
+Kartu držte interně. Ven posílejte jen destilovanou verzi. Interní karta může obsahovat hypotézy, technické detaily a citlivé vazby. Veřejná komunikace má obsahovat dopad, stav, další krok a čas další aktualizace.
+
+### BX.3 První zpráva má uklidnit, ne vyhrát literární soutěž
+
+První oznámení nemusí znát root cause. Musí být pravdivé a užitečné.
+
+Dobrá první zpráva:
+
+> Evidujeme zvýšenou chybovost při přihlášení do aplikace. Problém vyšetřujeme, další aktualizaci zveřejníme do 30 minut. Zatím nemáme potvrzený dopad na zákaznická data.
+
+Špatná první zpráva:
+
+> Kvůli neočekávaným okolnostem může u některých uživatelů docházet k suboptimálnímu zážitku.
+
+To druhé je korporátní parfém na spálený kabel. Uživatel potřebuje vědět: co se děje, jestli má něco udělat, zda jsou ohrožená data a kdy se dozví víc.
+
+### BX.4 Status page není marketingový plakát
+
+Status page má být nudná, přesná a historicky čitelná. Nepřehánějte design, nepřidávejte trackery a neskrývejte minulost. Privacy-first varianta může být velmi jednoduchá: statická stránka, RSS/Atom feed pro incidenty, e-mail jen pro zákazníky, kterých se incident týká, a žádné reklamní skripty.
+
+Praktické pravidlo:
+
+- Aktualizujte status page u SEV 1 a SEV 2 vždy.
+- U SEV 3 ji aktualizujte, pokud dopad pozná zákazník bez vašeho interního kontextu.
+- U SEV 4 stačí interní log, pokud se problém nepromítl do zákaznické služby.
+
+Text na status page pište bez osobních údajů, interních IP adres, tokenů, názvů zákazníků, detailů zranitelnosti a přesných exploit kroků. Po incidentu můžete přidat postmortem, ale až po bezpečnostní kontrole.
+
+### BX.5 GDPR časová osa: hodiny běží od zjištění
+
+Pokud incident zahrnuje osobní údaje, nejde jen o reputaci. GDPR říká, že pokud je pravděpodobné riziko pro práva a svobody fyzických osob, správce oznamuje porušení zabezpečení dozorovému úřadu bez zbytečného odkladu a pokud možno do 72 hodin od okamžiku, kdy se o něm dozvěděl. EDPB k tomu vydává praktické pokyny k notifikaci breachů. Ne každý incident se musí hlásit, ale každý podezřelý incident si zaslouží rychlé posouzení a záznam rozhodnutí.
+
+Mini rozhodovací strom:
+
+1. Obsahuje incident osobní údaje?
+2. Došlo k jejich ztrátě, změně, zničení, neoprávněnému přístupu nebo zpřístupnění?
+3. Jaký je pravděpodobný dopad na lidi?
+4. Lze dopad rychle snížit technickým opatřením, například zneplatněním tokenů?
+5. Je nutné informovat dozorový úřad?
+6. Je vysoké riziko pro dotčené osoby, takže je nutné informovat i je?
+
+Codyho praktická rada: i když nakonec nehlásíte, napište si proč. „Rozhodli jsme se nehlásit, protože...“ je mnohem lepší než „nikdo si nepamatuje, kdo to tehdy řešil“.
+
+### BX.6 Kanály podle publika
+
+Ne všichni potřebují stejnou zprávu.
+
+- **Uživatelé:** dopad, workaround, stav, další aktualizace.
+- **Platící zákazníci:** dopad na službu, SLA kontext, přímý kontakt, plán nápravy.
+- **Interní tým:** technický stav, odpovědnosti, časová osa, rizika, zákaznické otázky.
+- **Podpora:** schválené odpovědi, eskalační pravidla, co neslibovat.
+- **Partneři a dodavatelé:** jen informace nutné pro jejich součinnost.
+- **Dozorové orgány:** strukturované informace podle právního rámce, bez marketingové omáčky.
+
+Udržujte zprávy konzistentní. Pokud status page říká „monitorujeme“, support nemá psát „už je vše definitivně vyřešeno“. A pokud právník ještě posuzuje datový dopad, obchod nemá zákazníkovi garantovat, že se dat netýká nic. Všichni máme rádi optimismus, ale incidentní komunikace není místo pro horoskopy.
+
+### BX.7 Šablona: incidentní komunikační karta
+
+```markdown
+# Incidentní komunikační karta: [ID]
+
+## Shrnutí
+- Co se stalo:
+- Aktuální stav:
+- Závažnost:
+- Vlastník incidentu:
+
+## Dopad
+- Dotčené služby:
+- Dotčení uživatelé / segmenty:
+- Dopad na data:
+- Workaround:
+
+## Privacy a právní posouzení
+- Jsou dotčeny osobní údaje?
+- Typ údajů:
+- Pravděpodobné riziko pro lidi:
+- Notifikace dozorovému úřadu:
+- Informování dotčených osob:
+- Důvod rozhodnutí:
+
+## Komunikace
+- Status page:
+- E-mail zákazníkům:
+- Interní oznámení:
+- Další aktualizace v:
+
+## Po incidentu
+- Root cause:
+- Opatření:
+- Vlastník nápravy:
+- Datum review:
+```
+
+### BX.8 Checklist: incidentní komunikace bez paniky
+
+- Máte definované SEV úrovně a komunikační pravidla.
+- Každý incident má jednu incidentní kartu a jednoho vlastníka.
+- První zpráva obsahuje dopad, stav a čas další aktualizace.
+- Veřejné texty neobsahují osobní údaje, interní identifikátory ani exploit detaily.
+- Support má schválenou odpověď a ví, kdy eskalovat.
+- U osobních údajů běží GDPR posouzení od okamžiku zjištění incidentu.
+- Rozhodnutí o hlášení nebo nehlášení je zapsané.
+- Po uzavření vznikne krátké postmortem s konkrétními opatřeními.
+
+### Mini cvičení: tabletop incident za 45 minut
+
+1. **10 minut:** vyberte realistický scénář, například únik exportu, chybné oprávnění nebo výpadek přihlášení.
+2. **10 minut:** vyplňte incidentní kartu jen z informací, které byste měli během první hodiny.
+3. **10 minut:** napište první veřejnou zprávu a odpověď pro support.
+4. **10 minut:** projděte GDPR rozhodovací strom a zapište, co ještě nevíte.
+5. **5 minut:** určete tři změny, které příště zrychlí reakci.
+
+Výstupem není dokonalý plán. Výstupem je zjištění, kde by tým začal improvizovat. To je přesně místo, kde má vzniknout šablona, automatizace nebo jasnější vlastnictví.
+
+### Codyho komentář
+
+Můj pohled: dobrá incidentní komunikace je produktová funkce. Není vidět každý den, ale když ji potřebujete, rozhoduje o tom, jestli zákazník řekne „stala se chyba“ nebo „těmhle lidem už nevěřím“. Transparentnost není psát všechno. Transparentnost je psát včas, pravdivě, s respektem k bezpečnosti a soukromí lidí.
+
+### Zdroje k příloze BX
+
+- GDPR článek 33 upravuje oznámení porušení zabezpečení osobních údajů dozorovému úřadu bez zbytečného odkladu a pokud možno do 72 hodin; článek 34 řeší komunikaci porušení dotčeným subjektům údajů při vysokém riziku: https://eur-lex.europa.eu/eli/reg/2016/679/oj
+- EDPB publikuje pokyny 9/2022 k oznamování porušení zabezpečení osobních údajů podle GDPR, včetně praktického posuzování rizika a dokumentace rozhodnutí: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-92022-personal-data-breach-notification-under_en
+- ENISA má pro malé a střední podniky praktický průvodce kyberbezpečností, který zahrnuje přípravu na incidenty, plánování reakce a obnovu: https://www.enisa.europa.eu/publications/cybersecurity-guide-for-smes
+- ENISA k evropskému incident response a crisis managementu popisuje roli CSIRT sítě, krizových cvičení a koordinace při významných incidentech: https://www.enisa.europa.eu/topics/eu-incident-response-and-cyber-crisis-management
+- Britské NCSC má srozumitelný Small Business Guide: Response & Recovery, který doporučuje připravit role, kontakty, komunikační postupy a obnovu před incidentem: https://www.ncsc.gov.uk/collection/small-business-guidance--response-and-recovery
+
+
 ## Pracovní log
+
+- 2026-08-25: Přidána příloha BX „Incidentní komunikace bez paniky a mlžení“ se SEV tříděním, incidentní kartou, první zprávou, status page pravidly, GDPR časovou osou, kanály podle publika, checklistem, tabletop cvičením a ověřenými GDPR/EDPB/ENISA/NCSC zdroji.
 
 - 2026-08-25: Přidána příloha BW „Produktové eventy bez analytického šmírování“ s rozhodovacím rámcem pro eventy, slovníkem názvů, oddělením datových vrstev, agregací, event kartou, příklady payloadů, retencí, checklistem, hodinovým auditem a ověřenými GDPR/CNIL/ICO/EDPB zdroji.
 
