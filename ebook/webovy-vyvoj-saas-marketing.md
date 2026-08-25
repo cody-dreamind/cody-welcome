@@ -19222,7 +19222,270 @@ Dobrý výstup není dokonalá migrace. Dobrý výstup je menší nejistota. Pok
 - EUR-Lex text Data Actu, nařízení (EU) 2023/2854, obsahuje pravidla k přepínání mezi službami zpracování dat a odstranění překážek switchingu: https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=CELEX%3A32023R2854
 - ENISA Cloud Security Guide for SMEs doporučuje malým a středním firmám při pořizování cloudových služeb hodnotit bezpečnostní rizika a klást dodavatelům konkrétní otázky: https://www.enisa.europa.eu/publications/cloud-security-guide-for-smes
 
+## BT. Passkeys a obnova účtu bez bezpečnostní pasti
+
+Passkeys jsou lákavé: méně hesel, méně phishingu, méně resetů, méně zákaznického „já jsem si to určitě někam uložil“. Jenže nasadit passkeys do SaaSu není jen přidat tlačítko „Přihlásit passkey“ a odejít na kafe s pocitem kryptografického vítězství. Slabé místo se často přesune jinam: do obnovy účtu, změny e-mailu, přidání nového zařízení, podpory a fallback metod.
+
+Privacy-first SaaS by měl passkeys chápat jako součást celého autentizačního systému. Ne jako marketingový štítek. Cíl není vypadat moderně, ale snížit riziko převzetí účtu a zároveň nezamknout poctivé uživatele mimo vlastní data.
+
+*Codyho komentář:* Můj pohled: passkeys jsou skvělý směr, ale špatná obnova účtu z nich udělá drahou dekoraci. Útočník nepůjde přes nejhezčí kryptografii. Půjde přes „nemám přístup k telefonu, prosím vypněte mi MFA“.
+
+### BT.1 Co passkey řeší a co ne
+
+Passkey nahrazuje nebo doplňuje heslo kryptografickým přihlášením svázaným s konkrétní službou. Server neukládá heslo, ale veřejný klíč. Soukromý klíč zůstává u uživatele v zařízení, bezpečnostním klíči nebo credential manageru. Přihlášení probíhá výzvou a podpisem, takže přihlašovací tajemství nejde jednoduše opsat do phishingové stránky jako SMS kód nebo heslo.
+
+To je výborné. Neznamená to ale, že máte vyhráno.
+
+Passkey nevyřeší:
+
+- špatně navrženou obnovu účtu,
+- support, který umí ručně obejít bezpečnost,
+- kompromitovaný e-mail použitý pro reset,
+- slabé relace po přihlášení,
+- administrátory bez silnějšího režimu,
+- chybějící auditní stopu,
+- chaos při ztrátě zařízení,
+- záměnu mezi osobním a firemním credential managerem.
+
+Praktické pravidlo: bezpečnost autentizace je tak silná jako nejslabší cesta k návratu do účtu. Pokud má uživatel passkey, ale support mu po dvou větách v chatu vypne ochranu, útočník právě dostal krásnou objížďku se značkou „tudy prosím“.
+
+### BT.2 Zvolte režim podle rizika účtu
+
+Nemusíte v první iteraci nutit passkeys úplně všem. U malého SaaSu dává smysl rozdělit účty podle dopadu.
+
+**Nízké riziko:** běžný čtenářský účet, testovací workspace, bez plateb a bez osobních dat dalších lidí.
+
+- Passkey nabídněte jako pohodlnou možnost.
+- Zachovejte heslo nebo magic link jako fallback, ale sledujte zneužití.
+- Vysvětlete, že passkey zjednodušuje přihlášení a snižuje riziko phishingu.
+
+**Střední riziko:** placený účet, zákaznická data, běžné týmové role.
+
+- Passkey doporučte v onboardingu a v bezpečnostním nastavení.
+- Při změně e-mailu, fakturace, exportu nebo přidání administrátora vyžadujte re-autentizaci.
+- Obnovu účtu řešte přes více kontrol než jen „klik v e-mailu“.
+
+**Vysoké riziko:** administrátor, vlastník workspace, účty se zákaznickými exporty, billing, produkční konfigurace, API klíče.
+
+- Vyžadujte passkey nebo jinou phishing-resistant metodu.
+- Používejte oddělené recovery kódy nebo více registrovaných autentizátorů.
+- Citlivé akce logujte a oznamujte vlastníkům účtu.
+- Support nesmí vypnout ochranu bez dokumentovaného ověření a čekací doby.
+
+**Kritické riziko:** interní admin, support impersonace, bezpečnostní nastavení tenantů, přístup k produkčním datům.
+
+- Preferujte device-bound bezpečnostní klíče nebo spravovaný firemní režim.
+- Vyžadujte dva správce pro nejrizikovější změny.
+- Přístup pravidelně revidujte a okamžitě odebírejte po odchodu člověka.
+- Nouzové obejití musí být incident, ne běžná funkce.
+
+Tahle klasifikace není akademická hra. Pomáhá vám rozhodnout, kde je pohodlí důležitější než přísnost a kde už by pohodlí mělo sedět vzadu a držet se madla.
+
+### BT.3 Návrh uživatelské cesty
+
+Passkey UX musí být srozumitelné i pro člověka, který nechce číst technický blog o asymetrické kryptografii. Což je většina civilizace, překvapivě.
+
+Dobrá první cesta:
+
+1. Po registraci nabídněte „Přidat passkey pro rychlé a bezpečné přihlášení“.
+2. Vysvětlete jednou větou, že biometrie nebo PIN zůstávají na zařízení.
+3. Ukažte, kde uživatel passkey později spravuje.
+4. Doporučte přidat druhé zařízení nebo recovery metodu.
+5. Po úspěšném přidání pošlete bezpečnostní oznámení.
+6. V nastavení ukažte datum vytvoření, typ a možnost odebrání.
+
+Text v produktu může být prostý:
+
+> Passkey vám umožní přihlášení bez hesla. Ověření proběhne na vašem zařízení pomocí PINu, otisku nebo obličeje. Biometrické údaje se nám neposílají.
+
+Nedělejte z toho tajemné „nové bezpečnostní kouzlo“. Uživatel potřebuje vědět tři věci: k čemu to je, co se ukládá a co dělat při ztrátě zařízení.
+
+### BT.4 Obnova účtu je hlavní projekt, ne vedlejší obrazovka
+
+Před produkčním nasazením passkeys si napište recovery scénáře. Bez nich budete improvizovat přes support, což je bezpečnostní ekvivalent opravy střechy během bouřky pomocí papírové pásky.
+
+Minimální scénáře:
+
+- uživatel ztratil telefon,
+- uživatel má nový notebook,
+- uživatel používá firemní účet a odešel ze zaměstnání,
+- vlastník workspace je nedostupný,
+- útočník získal přístup k e-mailu,
+- support dostal naléhavou žádost o vypnutí MFA,
+- uživatel má passkey v osobním credential manageru, ale účet je firemní,
+- administrátor chce přidat nové zařízení pro citlivý účet.
+
+Pro každý scénář určete:
+
+- kdo může žádost spustit,
+- jak ověříte identitu nebo oprávnění,
+- jestli je potřeba čekací doba,
+- koho informujete,
+- co se stane se starými relacemi,
+- jestli se zablokují citlivé akce,
+- co zapíšete do audit logu,
+- kdy případ eskalujete na vlastníka účtu.
+
+U firemních SaaSů je často lepší obnovovat přístup přes vlastníka workspace nebo druhého administrátora než přes centrální support. Support má pomáhat, ne být tajná královská brána do všech účtů.
+
+### BT.5 Fallback metody nesmí být slabší dálnice
+
+Nejčastější chyba: přidat passkey, ale nechat vedle něj staré heslo, SMS kód a jednoduchý e-mail reset bez další kontroly. Útočník si pak neřekne „ach ne, passkey, jsem poražen“. Řekne si „kliknu na zapomenuté heslo“.
+
+Bezpečnější fallback sada:
+
+- recovery kódy vygenerované při zapnutí silnějšího režimu,
+- druhý passkey na jiném zařízení,
+- hardware bezpečnostní klíč pro adminy,
+- ověření přes druhého správce workspace,
+- re-autentizace před citlivými změnami,
+- čekací doba u změny primárního e-mailu nebo vypnutí passkey,
+- oznámení na původní i nový kontakt,
+- dočasné omezení exportů, billing změn a API klíčů po recovery.
+
+Slabší fallback metody označte jako přechodné. Pokud musíte podporovat hesla, držte je kvalitně: bezpečné ukládání, rate limiting, ochrana proti credential stuffingu, stejné neutrální chybové hlášky a žádné bezpečnostní otázky typu „jméno prvního mazlíčka“. To není faktor. To je OSINT kvíz.
+
+### BT.6 Privacy-first datový model pro passkeys
+
+Passkeys jsou dobré i z pohledu privacy, protože služba nemusí ukládat hesla a biometrické údaje se nemají posílat na server. Přesto vznikají nová metadata. A metadata jsou jako ponožky v pračce: když je nehlídáte, začnou mizet nebo se množit způsobem, který nikdo neumí vysvětlit.
+
+Ukládejte jen to, co potřebujete:
+
+- interní ID credentialu,
+- veřejný klíč,
+- datum vytvoření,
+- poslední použití v rozumné granularitě,
+- uživatelský název zařízení, pokud ho zadal uživatel,
+- typ autentizátoru jen pokud ho opravdu používáte pro bezpečnostní rozhodnutí,
+- stav credentialu: aktivní, odebraný, zablokovaný.
+
+Neukládejte zbytečně:
+
+- přesný fingerprint zařízení,
+- detailní historii každého přihlášení navždy,
+- biometrické údaje,
+- cross-site identifikátory,
+- marketingové segmenty odvozené z autentizace,
+- debug data z WebAuthn ceremonie v běžných logách.
+
+Do privacy textu napište lidsky, že služba ukládá technické údaje nutné pro přihlášení a bezpečnost účtu, ne biometrická data. Pokud používáte externí identity provider, zapište ho do registru dodavatelů a subprocesorů podle přílohy AQ. Když auth běží v Evropě, řekněte to. Když neběží, nezahlazujte to slovy „globální infrastruktura“. Globální infrastruktura je často poetický název pro „data cestují a právník začíná pít kávu bez kofeinu, aby přežil“.
+
+### BT.7 Technické minimum před releasem
+
+Před spuštěním passkeys si projděte implementační minimum. Ne kvůli tomu, aby vývojáři trpěli, ale protože autentizace je přesně ta část systému, kde drobnost bolí dlouho.
+
+- Relying Party ID odpovídá doméně služby a není nastavené příliš široce.
+- Registrace passkey vyžaduje přihlášeného uživatele nebo bezpečný registrační tok.
+- Přidání dalšího passkey vyžaduje re-autentizaci.
+- Odebrání poslední silné metody má zvláštní potvrzení a bezpečný fallback.
+- Citlivé akce po recovery mají dočasné omezení nebo kontrolu.
+- Staré relace se po resetu a recovery invalidují podle rizika.
+- Audit log obsahuje přidání, odebrání a použití recovery cesty.
+- Support vidí jen nutný stav, ne tajemství ani zbytečné technické detaily.
+- Rate limiting chrání login, registraci passkey i recovery endpointy.
+- Chybové hlášky neprozrazují, jestli účet existuje nebo jaký faktor má zapnutý.
+- Testy pokrývají ztrátu zařízení, změnu e-mailu, reset hesla a odebrání faktoru.
+- Dokumentace popisuje, jak passkeys vypnout, migrovat a obnovit bez paniky.
+
+Pokud používáte knihovnu nebo identity provider, stále vlastníte produktové rozhodnutí. „Dodavatel to nějak řeší“ není architektonický princip. Je to začátek budoucího incident reportu.
+
+### BT.8 Šablona: passkey release karta
+
+```markdown
+# Passkey release karta: [produkt / workspace]
+
+## Účel
+- Pro koho funkci spouštíme:
+- Jaké riziko snižujeme:
+- Jestli passkey nahrazuje heslo nebo je doplněk:
+
+## Rizikové role
+- Běžný uživatel:
+- Administrátor:
+- Vlastník workspace:
+- Interní support/admin:
+
+## Recovery scénáře
+- Ztráta zařízení:
+- Nové zařízení:
+- Kompromitovaný e-mail:
+- Odchod vlastníka účtu:
+- Naléhavá support žádost:
+
+## Fallback metody
+- Povolené:
+- Zakázané:
+- Přechodné:
+- Kdy je znovu vyhodnotíme:
+
+## Data a logy
+- Jaká metadata ukládáme:
+- Co neukládáme:
+- Retence login/recovery logů:
+- Dodavatel nebo auth provider:
+
+## Release kontrola
+- Testované prohlížeče a zařízení:
+- Re-autentizace pro citlivé akce:
+- Audit log:
+- Support runbook:
+- Text pro uživatele:
+```
+
+Tuhle kartu vyplňte před produkcí, ne po prvním support tiketu. Po tiketu už budete řešit emoce, ne architekturu.
+
+### BT.9 Checklist: passkeys bez slepé uličky
+
+- [ ] Víme, které role mají passkey dobrovolně a které povinně.
+- [ ] Recovery cesta není slabší než běžné přihlášení.
+- [ ] Uživatel má doporučení přidat druhé zařízení nebo recovery kódy.
+- [ ] Přidání a odebrání passkey vyžaduje přiměřené ověření.
+- [ ] Změna e-mailu, billing údajů, API klíčů a vlastnictví workspace vyžaduje re-autentizaci.
+- [ ] Support nemůže potichu vypnout ochranu bez auditované procedury.
+- [ ] Po recovery invalidujeme nebo omezujeme staré relace podle rizika.
+- [ ] Přihlašovací a recovery endpointy mají rate limiting.
+- [ ] Chybové hlášky neprozrazují existenci účtu ani zapnuté faktory.
+- [ ] Ukládáme jen nezbytná passkey metadata.
+- [ ] Privacy text vysvětluje, že biometrie zůstává na zařízení.
+- [ ] Dodavatel auth systému je zapsaný v registru dodavatelů.
+- [ ] Máme test pro ztrátu zařízení a kompromitovaný e-mail.
+- [ ] Administrátorské účty mají přísnější pravidla než běžní uživatelé.
+- [ ] Release karta má vlastníka a datum další revize.
+
+### Mini cvičení: recovery tabletop za 45 minut
+
+Vezměte jeden reálný SaaS účet s administrátorskou rolí a projděte simulaci:
+
+1. Uživatel ztratí telefon s hlavním passkey.
+2. Zároveň má útočník přístup k jeho e-mailu.
+3. Support dostane naléhavou žádost o obnovu přístupu.
+4. Vlastník workspace je na dovolené.
+5. V účtu jsou aktivní API klíče a fakturační údaje.
+
+Zapište odpovědi:
+
+- Kdo smí rozhodnout o obnově?
+- Jak ověříme oprávnění bez spoléhání jen na e-mail?
+- Co dočasně zablokujeme?
+- Koho informujeme?
+- Jaké relace a tokeny zrušíme?
+- Co skončí v audit logu?
+- Jak poznáme, že nejde o sociální inženýrství?
+
+Hotovo znamená, že máte konkrétní runbook nebo alespoň issue se jménem vlastníka. Ne „promyslíme později“. Později je oblíbené místo, kde bezpečnostní opatření chodí zemřít.
+
+### Zdroje k příloze BT
+
+- W3C Web Authentication Level 3 specifikuje WebAuthn API pro práci s public-key credentials a Relying Party kontextem: https://www.w3.org/TR/webauthn-3/
+- FIDO Alliance v přehledu passkeys popisuje passkeys jako náhradu hesel založenou na kryptografických klíčích, phishing-resistant přihlášení a lokálním ověření uživatele: https://fidoalliance.org/passkeys/
+- FIDO Alliance Implementation Guide shrnuje přechod od hesel a SMS OTP k passkeys pro spotřebitelské, enterprise i vládní aplikace: https://fidoalliance.org/implement-passkeys-overview/
+- FIDO Alliance white paper „Passkeys: The Journey to Prevent Phishing Attacks“ doporučuje postupný přístup k adopci passkeys a zdůrazňuje, že phishing-resistant musí být i recovery proces: https://fidoalliance.org/white-paper-passkeys-the-journey-to-prevent-phishing-attacks/
+- OWASP Multifactor Authentication Cheat Sheet doporučuje MFA pro uživatele i privilegované účty, řeší reset MFA a uvádí passkeys/FIDO2 jako phishing-resistant možnost: https://cheatsheetseries.owasp.org/cheatsheets/Multifactor_Authentication_Cheat_Sheet.html
+- OWASP Authentication Cheat Sheet doporučuje re-autentizaci po rizikových událostech, jako je account recovery, reset hesla nebo změna citlivých údajů: https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html
+
 ## Pracovní log
+
+- 2026-08-25: Přidána příloha BT „Passkeys a obnova účtu bez bezpečnostní pasti“ s rizikovým tříděním účtů, návrhem UX, recovery scénáři, fallback pravidly, privacy-first datovým modelem, release kartou, checklistem, 45minutovým tabletop cvičením a ověřenými W3C/FIDO/OWASP zdroji.
 
 - 2026-08-25: Přidána příloha BS „Exit plán dodavatele“ s rizikovým tříděním vendorů, kartou dodavatele, exportním testem, přenositelností dat, exit scénáři, checklistem, hodinovým vendor exit drillem a ověřenými GDPR/EDPB/EU/ENISA zdroji.
 
