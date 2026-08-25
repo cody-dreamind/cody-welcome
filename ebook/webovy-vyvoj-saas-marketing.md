@@ -22190,7 +22190,204 @@ Přístupové revize nejsou sexy. Nikdo kvůli nim netleská na demo day. Ale kd
 - NIST SP 800-53 Rev. 5 zahrnuje kontrolu AC-2 pro account management a pravidla pro správu, změny a revize účtů: https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final
 
 
+## CJ. Export dat a přenositelnost bez vendor lock-inu
+
+Export dat není „enterprise feature pro později“. Je to součást důvěry. Pokud zákazník do vašeho SaaSu vloží práci, kontakty, dokumenty, historii objednávek nebo konfiguraci, musí vědět, že se ke svým datům dostane i ve chvíli, kdy odchází, mění proces nebo si chce udělat vlastní archiv. Jinak nestavíte produkt. Stavíte digitální skříň bez kliky.
+
+Privacy-first produkt má export promyšlený dřív, než přijde první naštvaný e-mail. Ne proto, že chcete zákazníky vyhánět. Právě naopak: férový odchod snižuje strach ze vstupu. Když lidé vědí, že nejsou rukojmí, snáz vyzkouší novou službu.
+
+### CJ.1 Rozlišujte export, zálohu a migraci
+
+Tři slova, která se v týmu ráda hází do jednoho pytle, ale znamenají jiné věci:
+
+- **Export pro uživatele:** zákazník si stáhne svoje data ve srozumitelném formátu.
+- **Záloha pro provoz:** tým obnoví službu po havárii nebo chybě.
+- **Migrace mezi systémy:** data se přenesou do jiného nástroje, často s mapováním polí a kontrolou kvality.
+
+Pokud to smícháte, skončíte u tlačítka „export“, které vytvoří obří ZIP, ve kterém je databázový dump, tři JSONy bez dokumentace a soubor `readme_final_really.txt`. Gratuluji, zákazník má data, ale nemá šanci je použít. To není přenositelnost. To je archeologie.
+
+Praktické pravidlo: export pro zákazníka musí být čitelný člověkem i strojem. Ideální je kombinace CSV pro tabulková data, JSON pro strukturovaná data, originální soubory pro nahrané dokumenty a jednoduchý manifest, který vysvětluje obsah balíčku.
+
+### CJ.2 Udělejte mapu exportovatelných dat
+
+Nezačínejte tlačítkem v administraci. Začněte mapou dat. U každé části produktu si napište, co patří zákazníkovi, co je systémová metadata a co je interní provozní informace.
+
+Příklad pro malý B2B SaaS:
+
+| Oblast | Exportovat | Formát | Poznámka |
+|---|---|---|---|
+| Zákazníci a kontakty | ano | CSV + JSON | jen data daného workspace |
+| Projekty a úkoly | ano | JSON + CSV souhrn | zachovat vztahy mezi položkami |
+| Nahrané soubory | ano | původní formát | přidat manifest s cestou a popisem |
+| Faktury | ano | PDF + CSV metadata | podle účetních a smluvních pravidel |
+| Audit log | částečně | CSV | jen relevantní akce, bez interních tajemství |
+| Systémové logy | ne běžně | interní | poskytovat jen při incidentu nebo právním důvodu |
+| Interní poznámky supportu | zpravidla ne | interní | ověřit podle role správce/zpracovatele a smlouvy |
+
+U každé položky doplňte vlastníka, retenci a způsob ověření oprávnění. Export je citlivá operace: často obsahuje víc dat najednou než běžná obrazovka v aplikaci. Proto má patřit mezi akce, které vyžadují silné ověření, auditní stopu a jasné oprávnění.
+
+### CJ.3 Formát je produktové rozhodnutí
+
+Dobré exporty nejsou krásné. Jsou nudné, stabilní a dokumentované. Přesně takové věci má software občas dělat, i když to nevypadá dobře na konferenčním slidu.
+
+Použijte několik pravidel:
+
+- **CSV jen pro plochá data.** Kontakty, objednávky, fakturační položky nebo seznamy událostí. Přidejte hlavičky, UTF-8 a jasný oddělovač.
+- **JSON pro vztahy a konfiguraci.** Projekty s úkoly, nastavení workspace, šablony, workflow nebo napojené entity.
+- **Manifest pro celý balíček.** Soubor `manifest.json` nebo `README.md`, který popíše verzi exportu, čas vytvoření, organizaci, obsah složek a význam polí.
+- **Stabilní identifikátory.** Pokud má úkol vazbu na projekt, exportujte ID projektu i lidský název. Migrace pak není hádanka.
+- **Verzování schématu.** Každý export má mít verzi. Až přidáte pole, nerozbijete staré importní skripty.
+- **Žádné skryté závislosti na interní databázi.** Názvy tabulek typu `tenant_user_rel_v2_old` zákazníkovi neříkají nic kromě toho, že někde ve sklepě brečí DBA.
+
+Ukázka minimálního manifestu:
+
+```json
+{
+  "exportVersion": "1.0",
+  "createdAt": "2026-08-25T20:00:00Z",
+  "workspace": "acme-cz",
+  "requestedBy": "owner@example.com",
+  "files": [
+    { "path": "contacts.csv", "description": "Kontakty včetně štítků" },
+    { "path": "projects.json", "description": "Projekty, úkoly a vazby" },
+    { "path": "uploads/", "description": "Nahrané soubory v původním formátu" }
+  ],
+  "notes": "Export neobsahuje interní support poznámky ani provozní logy."
+}
+```
+
+### CJ.4 Oprávnění a bezpečnost exportu nejsou detail
+
+Export dat je typická funkce, která vypadá jednoduše, dokud ji někdo nepoužije špatně. V malém SaaSu často stačí jedna chyba v oprávnění a uživatel si stáhne data cizí organizace. To je přesně ten druh bugů, po kterém se i káva tváří zklamaně.
+
+Minimum bezpečného exportu:
+
+- export smí spustit jen role s jasným oprávněním,
+- u větších exportů vyžadujte potvrzení nebo re-authentication,
+- export běží asynchronně a má expirující odkaz,
+- odkaz není veřejný bez ověření,
+- každý export se zapisuje do audit logu,
+- zákazník vidí, kdo export vytvořil a kdy,
+- tým má limit velikosti, frekvence a počtu současných exportů,
+- exportní job filtruje data podle workspace nebo tenant hranice na serveru, ne podle UI.
+
+Privacy-first detail: do exportu neházejte všechno jen proto, že je to technicky snazší. Pokud zákazník žádá kontakty, nepotřebuje raw event logy, IP adresy a interní diagnostiku. Minimalizace platí i u předávání dat zpět zákazníkovi.
+
+### CJ.5 Přenositelnost není jen GDPR tlačítko
+
+GDPR obsahuje právo na přenositelnost údajů pro osobní údaje za určitých podmínek. V SaaS praxi je ale rozumné jít dál: umožnit zákazníkovi exportovat i provozní a obchodní data, pokud mu patří a smlouva tomu nebrání. Ne proto, že „musíte vždycky všechno“. Protože je to férové a snižuje lock-in.
+
+U B2B produktu si rozdělte exporty podle situace:
+
+- **Běžný self-service export:** vlastník workspace stáhne data pro interní použití.
+- **Export subjektu údajů:** konkrétní člověk žádá data, která se ho týkají.
+- **Offboarding export:** zákazník končí a potřebuje kompletní archiv.
+- **Migrační export:** zákazník přechází do jiného systému a potřebuje strukturované vazby.
+- **Právní nebo účetní export:** faktury, smlouvy, objednávky a záznamy podle povinností.
+
+Každý typ má jiný rozsah, jiný schvalovací proces a jinou retenci. Když je hodíte do jednoho tlačítka, budete později vysvětlovat, proč export buď chybí, nebo obsahuje moc. Ani jedna varianta není roztomilá.
+
+### CJ.6 Import plánujte dřív, než ho slíbíte
+
+Export bez importu je pořád užitečný. Import bez dobrého návrhu je naopak rychlá cesta k rozbité databázi. Pokud chcete podporovat migraci z jiného nástroje nebo zpětný import vlastních exportů, napište si pravidla předem.
+
+Před prvním importem zodpovězte:
+
+- Co se stane s duplicitami?
+- Jak mapujeme stará ID na nová ID?
+- Jak řešíme chybějící povinná pole?
+- Kdo uvidí importní log?
+- Umíme import vrátit zpět?
+- Jak validujeme soubory před zápisem?
+- Jak omezíme škodu, když import obsahuje citlivá data navíc?
+- Jak dlouho držíme původní importní soubor?
+
+Praktický postup pro malý tým: nejdřív podporujte export. Potom přidejte interní migrační skript pro konkrétní zákaznické onboardingy. Až se scénář opakuje, udělejte z něj veřejný import. Neobracejte pořadí. Veřejný import bez zkušenosti s reálnými daty je jako stavět most podle nálady řeky.
+
+### CJ.7 Šablona: exportní karta
+
+```markdown
+# Exportní karta: [název exportu]
+
+## Účel
+- Pro koho export je:
+- Kdy se používá:
+- Jaké rozhodnutí nebo proces podporuje:
+
+## Rozsah dat
+- Zahrnuté entity:
+- Vyloučená data:
+- Osobní údaje:
+- Citlivé nebo rizikové položky:
+
+## Formát
+- Soubory:
+- Schéma/verze:
+- Dokumentace polí:
+- Ukázkový export:
+
+## Oprávnění
+- Kdo může export spustit:
+- Jak se ověřuje identita:
+- Kdo export schvaluje, pokud je potřeba:
+
+## Provoz
+- Jak dlouho export vzniká:
+- Jak dlouho je odkaz platný:
+- Kde se dočasně ukládá:
+- Kdy se maže:
+
+## Audit
+- Co logujeme:
+- Kdo log kontroluje:
+- Jak zákazník pozná, že export proběhl:
+
+## Test
+- Testovací dataset:
+- Kontrola tenant hranic:
+- Kontrola obnovitelnosti nebo použitelnosti:
+```
+
+### CJ.8 Checklist: export bez rukojmí
+
+- [ ] Víme, které datové oblasti musí zákazník umět získat zpět.
+- [ ] Rozlišujeme self-service export, offboarding export a žádost subjektu údajů.
+- [ ] Exportní formáty jsou dokumentované a stabilní.
+- [ ] Každý export má verzi schématu a manifest.
+- [ ] Exporty filtrují data podle tenant hranice na serveru.
+- [ ] Export může spustit jen oprávněná role.
+- [ ] Větší nebo citlivé exporty mají audit log a expirující odkaz.
+- [ ] Do exportu nedáváme interní poznámky, secrets ani zbytečné raw logy.
+- [ ] Máme pravidlo pro mazání dočasných exportních souborů.
+- [ ] Offboarding zákazníka obsahuje export, potvrzení rozsahu a navazující mazání.
+- [ ] Umíme vysvětlit, co export neobsahuje a proč.
+- [ ] Aspoň jednou za kvartál testujeme export na reálném anonymizovaném scénáři.
+
+### Mini cvičení: exportní audit za 50 minut
+
+1. **10 minut:** vypište pět nejdůležitějších datových oblastí v produktu.
+2. **10 minut:** u každé určete, jestli patří do běžného exportu, offboardingu nebo jen do interní zálohy.
+3. **10 minut:** vyberte jednu oblast a navrhněte formát exportu včetně manifestu.
+4. **10 minut:** projděte oprávnění, audit log a expiraci odkazu.
+5. **10 minut:** napište první exportní kartu a jeden test tenant izolace.
+
+Výstupem nemá být dokonalý exportní systém. Výstupem má být jasné rozhodnutí, co zákazník dostane zpět, v jakém formátu a za jakých bezpečnostních podmínek. To je základ, na kterém se dá stavět bez vendor-lock-in kouře a zrcadel.
+
+### Codyho komentář
+
+Můj názor: nejlepší lock-in je hodnota, ne překážky. Pokud zákazník zůstává jen proto, že se bojí migrace, nemáte loajalitu. Máte rukojmí s fakturačním obdobím. Férový export je paradoxně prodejní argument: ukazuje, že produktu věříte dost na to, abyste zákazníkovi nechali otevřené dveře.
+
+### Zdroje k příloze CJ
+
+- GDPR článek 20 popisuje právo na přenositelnost osobních údajů v běžně používaném a strojově čitelném formátu: https://eur-lex.europa.eu/eli/reg/2016/679/oj
+- EDPB/WP29 Guidelines on the right to data portability vysvětlují praktický výklad přenositelnosti podle GDPR: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-right-data-portability-under-regulation-2016679_en
+- Nařízení EU Data Act řeší mimo jiné přístup k datům a pravidla pro změnu služeb zpracování dat v EU: https://eur-lex.europa.eu/eli/reg/2023/2854/oj
+- Evropská komise shrnuje Data Act a uvádí, že většina pravidel se používá od 12. září 2025: https://digital-strategy.ec.europa.eu/en/policies/data-act
+
+
 ## Pracovní log
+
+- 2026-08-25: Přidána příloha CJ „Export dat a přenositelnost bez vendor lock-inu“ s mapou exportovatelných dat, doporučenými formáty, bezpečnostními pravidly, typy exportů, importními otázkami, exportní kartou, checklistem, mini auditem a ověřenými zdroji.
 
 - 2026-08-25: Přidána příloha CI „Přístupové revize a offboarding bez zapomenutých účtů“ s rizikovým členěním účtů, onboardingem, offboardingem, pravidelnou revizí oprávnění, privacy-first omezením přístupů, kartou přístupu, checklistem, mini auditem a ověřenými GDPR/ENISA/NCSC/NIST zdroji.
 
