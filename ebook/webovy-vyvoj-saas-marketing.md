@@ -20794,7 +20794,185 @@ Integrace jsou místo, kde se nejčastěji potká dobrý úmysl s provozní real
 - EDPB Guidelines 01/2022 on data subject rights — right of access — praktický kontext pro dohledatelnost osobních údajů v systémech: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-012022-data-subject-rights-right-access_en
 
 
+## CB. Retenční plán dat: kdy mazat bez paniky a hrdinství
+
+Data se v malých týmech často mažou dvěma způsoby: nikdy, nebo dramaticky po incidentu. Ani jedno není strategie. První varianta vytvoří skládku osobních údajů, starých leadů, logů, exportů a příloh. Druhá varianta vytvoří noční bojovku, kde někdo v produkci hledá, co všechno vlastně existuje. Retenční plán je nudnější a zdravější varianta: dopředu říká, jak dlouho která data držíte, proč, kde, kdo za ně odpovídá a co se stane po uplynutí doby.
+
+GDPR nestaví retenci jako kosmetickou tabulku do šuplíku. Princip omezení uložení říká, že osobní údaje nemají zůstávat v identifikovatelné podobě déle, než je nutné pro účel zpracování. Prakticky: nestačí říct „mažeme podle potřeby“. Potřeba musí být pojmenovaná, obhajitelná a provozně proveditelná. Jinak je to jen poetický název pro „nikdo na to nemyslel“.
+
+### CB.1 Retence začíná účelem, ne číslem
+
+Nejhorší začátek je otázka „kolik měsíců se to běžně drží?“ Lepší otázka zní: „K čemu přesně data potřebujeme?“ Teprve potom řešte délku. Stejný e-mail může mít jinou retenci jako aktivní účet, fakturační kontakt, supportní zpráva, newsletterový odběratel nebo starý lead. Kontext rozhoduje.
+
+U každé kategorie dat si napište:
+
+- **Účel** — proč data vznikají a jaké rozhodnutí nebo službu umožňují.
+- **Právní důvod** — smlouva, zákonná povinnost, oprávněný zájem, souhlas nebo jiný důvod.
+- **Aktivní doba** — jak dlouho s daty běžně pracujete v hlavním systému.
+- **Archivní doba** — jestli existuje důvod držet je omezeně mimo běžnou práci.
+- **Mazací moment** — událost, která spustí výmaz nebo anonymizaci.
+- **Výjimky** — spor, účetní povinnost, bezpečnostní šetření, blokace účtu.
+- **Důkaz** — jak doložíte, že pravidlo existuje a proběhlo.
+
+Praktický příklad: kontaktní formulář pro poptávku můžete držet po dobu obchodního jednání a krátkou navazující dobu kvůli kontextu. Pokud se z poptávky nestane zákazník, nepotřebujete ji věčně v CRM, e-mailu, notifikaci, exportu i poznámkách. Ano, historická zvědavost obchodníka není retenční důvod. Smutné, ale civilizované.
+
+### CB.2 Rozdělte data podle životního cyklu
+
+CNIL popisuje užitečný model životního cyklu dat: aktivní databáze, mezilehlá archivace a konečné smazání nebo anonymizace. Pro malé týmy je to výborné, protože odděluje „potřebujeme to každý den“ od „musíme to omezeně držet“.
+
+Tři praktické vrstvy:
+
+- **Aktivní vrstva** — data jsou v aplikaci, CRM, supportu nebo administračním rozhraní a tým je používá k běžné práci.
+- **Omezený archiv** — data už nejsou v každodenním workflow, ale existuje jasný důvod je dočasně držet s omezeným přístupem.
+- **Výmaz nebo anonymizace** — data už nepotřebujete v identifikovatelné podobě; buď zmizí, nebo zůstanou jen agregované či anonymizované statistiky.
+
+Tahle struktura brání jedné časté chybě: místo archivace se nechá všechno v aktivním CRM, protože „co kdyby“. Jenže aktivní systém má obvykle víc lidí, víc integrací a víc exportních možností. Archiv má být menší, přísnější a méně pohodlný. Když je archiv stejně pohodlný jako produkce, není to archiv. Je to produkce s falešným knírkem.
+
+### CB.3 Navrhněte retenční tabulku pro realitu, ne auditní sen
+
+Retenční plán nemusí mít sto řádků. První verze má pokrýt datové kategorie, které reálně držíte. Většina malých SaaSů a webových projektů začne s těmito oblastmi:
+
+- uživatelské účty a profily,
+- workspace, projekty a obsah vytvořený uživatelem,
+- billing a fakturační údaje,
+- supportní komunikace,
+- obchodní leady a CRM poznámky,
+- newsletter a distribuční preference,
+- produktové eventy a agregované metriky,
+- provozní logy, bezpečnostní logy a audit log,
+- zálohy,
+- exporty, přílohy a ruční pracovní soubory.
+
+U každé oblasti napište konkrétní pravidlo. Ne „dle potřeby“, ale třeba „supportní ticket: aktivně po dobu řešení a navazující provozní kontroly; poté anonymizace nebo výmaz příloh podle citlivosti“. Přesná čísla si nastavte podle účelu, lokální právní povinnosti a rizika. Pokud si nejste jistí, zapište nejistotu jako úkol pro právní nebo účetní kontrolu, ne jako věčný stav.
+
+### CB.4 Logy mají vlastní pravidla
+
+Logy bývají největší nenápadná past. Vývojář něco zapne kvůli ladění, služba začne ukládat payloady, automatizační nástroj si schová historii běhů, monitoring přidá detailní requesty a za pár měsíců máte paralelní databázi osobních údajů, jen s horším vyhledáváním a menší odpovědností. Gratuluju, vynalezli jste datový sklep.
+
+Pravidla pro logy:
+
+- Logujte technický stav, ne celé osobní zprávy a formulářové payloady.
+- Oddělte provozní logy od bezpečnostních a auditních logů.
+- Nastavte kratší retenci pro detailní debug logy než pro agregované provozní metriky.
+- Maskujte e-maily, tokeny, adresy, textová pole a identifikátory, pokud nejsou nutné.
+- Dejte logům vlastníka; „to je v observability“ není vlastník.
+- Testujte, co se do logu dostane při chybě validace, timeoutu a výjimce.
+
+Debug režim by měl mít datum vypnutí. Pokud někdo řekne „necháme to zapnuté, kdyby se to vrátilo“, odpověď je: dobrý nápad, napišme k tomu retenční riziko, vlastníka a termín. Najednou to obvykle tak skvěle nezní.
+
+### CB.5 Zálohy nejsou výmluva proti mazání
+
+Zálohy komplikují retenci, protože data se po smazání z produkce mohou chvíli vyskytovat v backupu. To nemusí být automaticky problém, pokud máte rozumné pravidlo: zálohy mají omezenou dobu, omezený přístup, nepoužívají se pro běžné vyhledávání a při obnově víte, jak znovu aplikovat výmazy nebo blokace.
+
+Do plánu napište:
+
+- jak dlouho držíte zálohy,
+- kdo má přístup k obnově,
+- jestli jsou zálohy šifrované,
+- jak často testujete obnovu,
+- jak po obnově zohledníte žádosti o výmaz,
+- kde jsou zálohy fyzicky nebo smluvně provozované,
+- jak se mažou staré snapshoty.
+
+Privacy-first provoz v Evropě znamená, že u záloh řešíte nejen techniku, ale i jurisdikci a dodavatele. Když je produkce v EU a zálohy někde v neurčitém globálním cloudu, nemáte evropský provoz. Máte evropskou fasádu a datový výlet.
+
+### CB.6 Mazání musí být testovatelný proces
+
+Retenční plán bez mechanismu je přání. Mechanismus může být automatická purge úloha, ruční měsíční review, skript pro anonymizaci starých leadů nebo workflow v CRM. Důležité je, aby někdo uměl ukázat, že se pravidlo opravdu provádí.
+
+Minimální provozní model:
+
+- **Týdně** zkontrolujte chyby mazacích úloh a front.
+- **Měsíčně** projděte ruční exporty, sdílené disky a CRM segmenty.
+- **Kvartálně** ověřte retenční tabulku proti reálným systémům.
+- **Po releasu integrace** zkontrolujte, jestli nepřibyla nová kopie dat.
+- **Po incidentu nebo DSR žádosti** doplňte, kde se data hledala a co chybělo.
+
+Důkaz o mazání nemusí obsahovat smazaná data. Stačí auditní záznam typu: kategorie, období, počet záznamů, metoda, výsledek, čas a odpovědná služba nebo člověk. Cílem není vytvořit další skladiště osobních údajů s názvem „důkazy o tom, že neskladujeme osobní údaje“. To by bylo až příliš meta, i na mě.
+
+### CB.7 Šablona: retenční karta
+
+```markdown
+# Retenční karta: [datová kategorie]
+
+## Účel
+- Proč data vznikají:
+- Kdo je používá:
+- Jaké rozhodnutí nebo službu umožňují:
+
+## Právní a provozní důvod
+- Právní důvod:
+- Smluvní nebo zákonná povinnost:
+- Riziko při předčasném smazání:
+
+## Uložení
+- Aktivní systémy:
+- Archivní systémy:
+- Zálohy:
+- Integrace a exporty:
+
+## Retence
+- Aktivní doba:
+- Archivní doba:
+- Mazací nebo anonymizační moment:
+- Výjimky:
+
+## Provedení
+- Automatický mechanismus:
+- Ruční review:
+- Vlastník:
+- Důkaz o provedení:
+
+## Revize
+- Poslední kontrola:
+- Další kontrola:
+- Otevřené otázky:
+```
+
+Použijte ji nejdřív pro jednu kategorii, ne pro celý vesmír. Doporučený start: leady, supportní tickety nebo debug logy. Tam bývá nejvíc praktického nepořádku a nejrychlejší výhra.
+
+### CB.8 Checklist: retence bez skládky
+
+- [ ] Každá hlavní datová kategorie má popsaný účel.
+- [ ] Retenční doba vychází z účelu, ne ze zvyku nástroje.
+- [ ] Aktivní data jsou oddělená od omezeného archivu.
+- [ ] Logy nemají nekonečnou retenci a neukládají zbytečné payloady.
+- [ ] Zálohy mají vlastní pravidla, šifrování, přístup a dobu držení.
+- [ ] Mazání nebo anonymizace je automatizované tam, kde to dává smysl.
+- [ ] Ruční exporty, přílohy a pracovní soubory jsou zahrnuté v plánu.
+- [ ] Po obnově ze zálohy existuje postup pro opětovné uplatnění výmazů.
+- [ ] Tým ví, kdo je vlastník každé retenční karty.
+- [ ] Retenční plán se reviduje při novém nástroji, integraci nebo účelu.
+
+### Mini cvičení: retenční audit za 60 minut
+
+1. Vyberte jednu kategorii dat, která vás trochu znervózňuje.
+2. Najděte všechny systémy, kde se její kopie může objevit.
+3. Napište účel jednou větou a škrtěte všechno, co účel nepodporuje.
+4. Rozdělte data na aktivní vrstvu, archiv a výmaz nebo anonymizaci.
+5. Zkontrolujte logy, exporty, notifikace a zálohy.
+6. Dopište vlastníka, retenční pravidlo a důkaz provedení.
+7. Udělejte jednu okamžitou změnu: vypněte payload v logu, smažte starý export, nebo nastavte automatickou purge úlohu.
+
+Výstupem je jedna vyplněná retenční karta a jeden konkrétní úklid. Ne strategická iniciativa s názvem „Data Governance 360“. Pokud má název víc slov než první změna, něco se pokazilo.
+
+### Codyho komentář
+
+Můj pohled: retence je jedna z nejpodceňovanějších produktových funkcí. Uživatel ji nevidí, marketing ji neprodá na hero sekci a tým ji často začne řešit až ve chvíli, kdy někdo požádá o výmaz nebo přijde incident. Přitom dobrý retenční plán zrychluje support, snižuje riziko, zlevňuje provoz a dává týmu klid. Privacy-first není jen „nesbíráme moc dat“. Privacy-first znamená také „víme, kdy data pustit z ruky“.
+
+### Zdroje k příloze CB
+
+- GDPR článek 5 definuje princip omezení uložení a navazuje ho na účel zpracování osobních údajů: https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32016R0679
+- EDPB Guidelines 4/2019 k data protection by design and by default vysvětlují, že omezení uložení a mazání mají být zabudované do zpracování už ve výchozím nastavení: https://www.edpb.europa.eu/documents/guideline/guidelines-42019-on-article-25-data-protection-by-design-and-by-default_en
+- EDPB příručka pro malé podniky připomíná, že osobní údaje nemají být uchovávány déle, než je nezbytné, a mají být smazány nebo anonymizovány po skončení účelu: https://www.edpb.europa.eu/sme/find-practical-info/faq_en?page=1
+- CNIL prakticky popisuje, že osobní údaje nelze držet neomezeně a retenční doba se určuje podle cíle, kvůli kterému byla data shromážděna: https://www.cnil.fr/fr/node/679
+- CNIL checklist k minimalizaci dat doporučuje definovat retenční dobu pro každou kategorii dat, zahrnout logy a zavést automatické mazací mechanismy: https://www.cnil.fr/en/sheet-ndeg7-minimize-data-collection
+- ICO vysvětluje princip storage limitation a doporučuje retenční politiky a výmaz nebo anonymizaci dat, která už nejsou potřeba: https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/data-protection-principles/a-guide-to-the-data-protection-principles/storage-limitation/
+
+
 ## Pracovní log
+
+- 2026-08-25: Přidána příloha CB „Retenční plán dat“ s účelovým návrhem retenčních dob, životním cyklem dat, pravidly pro logy a zálohy, testovatelným mazáním, retenční kartou, checklistem, hodinovým auditem a ověřenými GDPR/EDPB/CNIL/ICO zdroji.
 
 - 2026-08-25: Přidána příloha CA „Datové předávky mezi nástroji bez integračního tunelu hrůzy“ s katalogem předávek, kontraktem toku, minimalizací payloadu, poruchovým režimem, šablonou karty, integračním detoxem a ověřenými zdroji.
 
