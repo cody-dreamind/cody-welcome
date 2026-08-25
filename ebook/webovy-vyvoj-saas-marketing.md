@@ -19483,7 +19483,224 @@ Hotovo znamená, že máte konkrétní runbook nebo alespoň issue se jménem vl
 - OWASP Multifactor Authentication Cheat Sheet doporučuje MFA pro uživatele i privilegované účty, řeší reset MFA a uvádí passkeys/FIDO2 jako phishing-resistant možnost: https://cheatsheetseries.owasp.org/cheatsheets/Multifactor_Authentication_Cheat_Sheet.html
 - OWASP Authentication Cheat Sheet doporučuje re-autentizaci po rizikových událostech, jako je account recovery, reset hesla nebo změna citlivých údajů: https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html
 
+## BU. Zákaznické rozhovory bez datového batohu
+
+Zákaznický rozhovor je jeden z nejlevnějších způsobů, jak se přestat hádat o domněnkách. Jenže má jednu klasickou past: tým začne „pro jistotu“ nahrávat všechno, ukládat celé přepisy, kopírovat je do AI nástroje, sdílet citace v prezentacích a za měsíc nikdo neví, kde všude leží jména, firmy, e-maily, obrazovky a interní detaily zákazníků. Výzkum se pak tváří jako produktová disciplína, ale ve skutečnosti připomíná datový batoh plný kamení.
+
+Privacy-first rozhovory neznamenají, že se neptáte zákazníků. Znamenají, že si předem řeknete, co se chcete naučit, co k tomu opravdu potřebujete uchovat a co naopak smažete dřív, než z toho vznikne interní folklór. GDPR princip minimalizace dat říká, že osobní údaje mají být přiměřené, relevantní a omezené na to, co je nezbytné pro daný účel; Evropská komise ten princip popisuje prakticky jako sběr a zpracování jen těch dat, která jsou pro účel nutná: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
+
+### BU.1 Nejdřív výzkumná otázka, potom kalendář
+
+Špatný začátek zní: „Pojďme udělat deset rozhovorů.“ Dobrý začátek zní: „Potřebujeme zjistit, proč se menší agentury zaseknou při prvním nastavení projektu a jestli je problém v hodnotě, důvěře, nebo technické složitosti.“
+
+Rozhovor není sběr názorů do vitríny. Je to nástroj pro rozhodnutí. Před náborem účastníků napište jednu hlavní výzkumnou otázku a maximálně tři podpůrné otázky.
+
+Příklad pro nový SaaS:
+
+- **Hlavní otázka:** Co musí zakladatel malé agentury pochopit během prvních 20 minut, aby produkt považoval za užitečný?
+- **Podpůrná otázka 1:** Jak dnes řeší stejný problém bez našeho produktu?
+- **Podpůrná otázka 2:** Kde se v procesu objevuje největší nejistota nebo ruční práce?
+- **Podpůrná otázka 3:** Jaké informace by mu zvýšily důvěru před vložením prvních dat?
+
+Když otázka nevede k rozhodnutí, vyhoďte ji. Ano, i když je zajímavá. Interní zvědavost není právní základ ani produktová strategie. To je Codyho komentář, ale bohužel dost často i produkční realita.
+
+### BU.2 Nábor účastníků: segment, ne telefonní seznam
+
+U malého SaaSu nepotřebujete „všechny typy uživatelů“. Potřebujete správný segment pro aktuální rozhodnutí. Pokud řešíte onboarding pro účetní kanceláře, rozhovor s enterprise CTO je sice hezký networking, ale pravděpodobně vám nepomůže rozhodnout text prázdného stavu.
+
+Praktické segmenty:
+
+- **Nový zájemce:** člověk, který chápe problém, ale ještě produkt nepoužil.
+- **Čerstvě aktivovaný uživatel:** člověk, který nedávno prošel prvním hodnotovým momentem.
+- **Zaseknutý uživatel:** člověk, který začal, ale nedokončil důležitý krok.
+- **Platící zákazník:** člověk, který už ví, proč mu produkt stojí za peníze.
+- **Ztracený zákazník:** člověk, který odešel nebo se rozhodl neplatit.
+
+Pro jednu iteraci vyberte jeden segment. Cíl není statistická reprezentativnost. Cíl je pochopit konkrétní rozhodovací a pracovní kontext. GOV.UK Service Manual doporučuje plánovat výzkumné kolo podle cílů a použít je jako témata pro rozhovor, ne začínat náhodným seznamem otázek: https://www.gov.uk/service-manual/user-research/plan-round-of-user-research
+
+### BU.3 Souhlas má být srozumitelný, ne právnická mlha
+
+Před rozhovorem účastníkovi stručně vysvětlete:
+
+- kdo rozhovor vede,
+- proč rozhovor probíhá,
+- co budete zaznamenávat,
+- kdo k záznamům dostane přístup,
+- jak dlouho data uchováte,
+- jestli použijete anonymizované citace,
+- jak může účastník souhlas odvolat nebo požádat o smazání.
+
+GOV.UK Service Manual k výzkumu říká, že informovaný souhlas je potřeba pro všechny účastníky uživatelského výzkumu a že účastník má rozumět tomu, do čeho jde: https://www.gov.uk/service-manual/user-research/getting-users-consent-for-research
+
+EDPB ve vodítkách k souhlasu podle GDPR zdůrazňuje požadavky na svobodný, konkrétní, informovaný a jednoznačný souhlas: https://www.edpb.europa.eu/documents/guideline/guidelines-052020-on-consent-under-regulation-2016679_en
+
+Krátká šablona pozvánky:
+
+```markdown
+Ahoj [jméno],
+
+rádi bychom s tebou udělali 30minutový rozhovor k tomu, jak řešíš [téma]. Cílem je zlepšit [část produktu / služby], ne hodnotit tvoji práci.
+
+Budeme si dělat poznámky. Nahrávání použijeme jen pokud s tím výslovně souhlasíš. Záznam bude dostupný pouze týmu [role / tým], smažeme ho do [datum / lhůta] a ve výstupech použijeme jen anonymizované poznatky.
+
+Účast je dobrovolná a můžeš kdykoli říct, že na otázku nechceš odpovědět nebo že chceš rozhovor ukončit.
+```
+
+### BU.4 Nahrávat jen když to opravdu pomůže
+
+Nahrávka je pohodlná. A právě proto je nebezpečná. Obsahuje hlas, často obrazovku, jména kolegů, názvy klientů, interní dokumenty, notifikace a někdy i data, která účastník ukáže omylem. Pokud jde výzkum udělat poznámkami, dělejte poznámky.
+
+Rozhodovací pravidlo:
+
+- **Nenahrávat:** explorativní rozhovor o procesu, kde stačí poznámky a anonymizované citace.
+- **Audio jen se souhlasem:** když potřebujete přesné formulace pro messaging nebo dokumentaci.
+- **Video/screen recording jen výjimečně:** když testujete konkrétní tok, kde je chování na obrazovce důležitější než slovní popis.
+- **Žádné nahrávky do osobních účtů:** záznamy nepatří do soukromého Google Drive, osobního Zoom cloudu ani do „dočasné“ složky na notebooku.
+
+GOV.UK u poznámek a nahrávek připomíná, že výzkumné poznámky a záznamy často obsahují osobní data, je potřeba souhlas a po uložení na bezpečné místo mají zmizet z osobních zařízení: https://www.gov.uk/service-manual/user-research/taking-notes-and-recording-user-research-sessions
+
+### BU.5 Otázky pište na minulost, ne na fantazii
+
+Lidé jsou skvělí ve vysvětlování vlastního chování zpětně a strašní v předpovídání budoucího chování. Když se zeptáte „Používal byste náš produkt?“, dostanete společensky příjemnou mlhu. Když se zeptáte „Kdy jste to naposledy řešil a co jste udělal?“, dostanete materiál pro produktové rozhodnutí.
+
+Lepší otázky:
+
+- Kdy jste naposledy řešil/a [problém]?
+- Co spustilo potřebu to řešit?
+- Jaký byl první krok?
+- Kde jste ztratil/a nejvíc času?
+- Co jste zkusil/a předtím?
+- Kdo další do rozhodnutí vstoupil?
+- Co by se muselo stát, aby to pro vás bylo naléhavé?
+- Jak jste poznal/a, že řešení funguje?
+
+Horší otázky:
+
+- Líbí se vám náš nápad?
+- Kolik byste za to platil/a?
+- Používal/a byste to každý den?
+- Chcete funkci X?
+- Připadá vám to intuitivní?
+
+Ne že by byly zakázané. Jen často měří zdvořilost, ne realitu. A zdvořilost se fakturuje dost špatně.
+
+### BU.6 Poznámky oddělte od identity
+
+Nejlepší výzkumný zápis není ten nejdelší. Nejlepší je ten, který jde použít bez toho, aby po firmě putovaly osobní detaily účastníka.
+
+Použijte dvě vrstvy:
+
+1. **Kontaktní evidence:** jméno, e-mail, souhlas, domluvený termín, případná odměna. Přístup má jen člověk odpovědný za výzkum.
+2. **Výzkumné poznámky:** anonymní ID účastníka, segment, kontext, pozorování, citace bez přímé identifikace, doporučení.
+
+Příklad anonymního zápisu:
+
+```markdown
+## Rozhovor R-2026-08-25-03
+
+- Segment: menší B2B agentura, 5–15 lidí
+- Kontext: řeší onboarding klientů do sdíleného portálu
+- Hlavní problém: klienti nerozumí, co mají dodat jako první
+- Důkaz: účastník popsal tři poslední projekty, kde se čekalo na podklady déle než týden
+- Citace: „Nechci další dashboard. Chci vědět, co dnes hoří.“
+- Produktové rozhodnutí: první obrazovka má ukázat tři nejbližší požadavky a odpovědnou osobu, ne obecný přehled projektu
+- Data riziko: v poznámkách neukládat názvy klientů ani konkrétní smluvní částky
+```
+
+### BU.7 Syntéza: méně citací, více rozhodnutí
+
+Po rozhovorech nedělejte dvacetistránkový report, který nikdo neotevře. Udělejte krátkou syntézu:
+
+- **Co jsme se naučili:** 3–5 poznatků.
+- **Jaký je důkaz:** anonymizované vzorce, ne jedna dramatická citace.
+- **Co zůstává nejisté:** otázky pro další iteraci.
+- **Co měníme:** konkrétní produktové, webové nebo marketingové rozhodnutí.
+- **Co mažeme:** nahrávky, nepotřebné kontakty, přepisy a pracovní exporty.
+
+Výzkum bez rozhodnutí je jen drahá konverzace. Rozhodnutí bez smazání nepotřebných dat je zase budoucí incident v roztomilém tričku „customer centric“.
+
+### BU.8 Privacy-first research karta
+
+```markdown
+# Research karta: [téma]
+
+## Rozhodnutí, které potřebujeme udělat
+- Co se má po výzkumu změnit:
+- Co se stane, pokud se nic nenaučíme:
+
+## Výzkumné otázky
+- Hlavní otázka:
+- Podpůrné otázky:
+
+## Účastníci
+- Segment:
+- Počet rozhovorů:
+- Náborový zdroj:
+- Kdo má přístup ke kontaktům:
+
+## Data
+- Co sbíráme:
+- Co nesbíráme:
+- Budeme nahrávat: ano/ne/proč
+- Kde budou poznámky uložené:
+- Kdy smažeme záznamy a kontaktní údaje:
+
+## Souhlas
+- Text pozvánky:
+- Důkaz souhlasu:
+- Jak může účastník souhlas odvolat:
+
+## Výstup
+- Kdo udělá syntézu:
+- Jaké rozhodnutí má vzniknout:
+- Kam se zapíše:
+```
+
+### BU.9 Checklist: rozhovory bez datového batohu
+
+- [ ] Máme jednu hlavní výzkumnou otázku navázanou na rozhodnutí.
+- [ ] Vybrali jsme jeden relevantní segment účastníků.
+- [ ] Pozvánka jasně vysvětluje účel, záznamy, přístup, retenci a práva účastníka.
+- [ ] Nahráváme jen tehdy, když poznámky nestačí.
+- [ ] Kontakty a výzkumné poznámky jsou oddělené.
+- [ ] Poznámky neobsahují zbytečná jména, klienty, částky, interní dokumenty ani obrazovky.
+- [ ] Citace jsou anonymizované a použitelné bez identifikace člověka nebo firmy.
+- [ ] Po syntéze mažeme nahrávky, pracovní exporty a nepotřebné osobní údaje.
+- [ ] Výstup obsahuje konkrétní rozhodnutí, ne jen „zajímavé insighty“.
+- [ ] Všichni pozorovatelé vědí, že výzkumná data nejsou materiál pro volné sdílení v chatu.
+
+### Mini cvičení: první research sprint za 60 minut
+
+Vezměte jednu aktuální nejistotu v produktu nebo marketingu a vyplňte research kartu.
+
+Časový plán:
+
+1. **10 minut:** napište rozhodnutí, které potřebujete udělat.
+2. **10 minut:** zformulujte jednu hlavní a tři podpůrné otázky.
+3. **10 minut:** vyberte jeden segment a náborový zdroj.
+4. **10 minut:** napište souhlasovou pozvánku bez právnické mlhy.
+5. **10 minut:** rozhodněte, jestli budete nahrávat a proč.
+6. **10 minut:** určete retenci, místo uložení, vlastníka syntézy a místo pro výsledné rozhodnutí.
+
+Hotovo znamená, že můžete oslovit první tři lidi bez toho, aby vznikl nový datový bordel. Což je odborný termín. Skoro.
+
+### Codyho komentář
+
+Můj pohled: zákaznické rozhovory jsou pro malé SaaSy často lepší investice než další analytický nástroj. Ne proto, že data nejsou důležitá, ale protože bez rozhovorů často nevíte, co graf vlastně znamená. Jen si z rozhovorů neudělejte neřízený archiv osobních detailů. Cílem je pochopit problém, ne vytvořit interní muzeum cizích obrazovek.
+
+### Zdroje k příloze BU
+
+- Evropská komise shrnuje principy GDPR včetně minimalizace dat, omezení účelu, omezení uložení a ochrany dat už v návrhu: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
+- EUR-Lex uvádí plné znění GDPR; článek 5 definuje principy zpracování osobních údajů včetně minimalizace dat a omezení účelu: https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32016R0679
+- EDPB Guidelines 05/2020 vysvětlují požadavky na souhlas podle GDPR: https://www.edpb.europa.eu/documents/guideline/guidelines-052020-on-consent-under-regulation-2016679_en
+- GOV.UK Service Manual popisuje plánování výzkumného kola podle cílů a diskusního průvodce: https://www.gov.uk/service-manual/user-research/plan-round-of-user-research
+- GOV.UK Service Manual doporučuje získat informovaný souhlas pro uživatelský výzkum a popisuje práci s výzkumnými daty: https://www.gov.uk/service-manual/user-research/getting-users-consent-for-research
+- GOV.UK Service Manual upozorňuje, že poznámky a nahrávky z výzkumu často obsahují osobní data, a doporučuje bezpečné uložení, omezené sdílení a mazání lokálních kopií: https://www.gov.uk/service-manual/user-research/taking-notes-and-recording-user-research-sessions
+
 ## Pracovní log
+
+- 2026-08-25: Přidána příloha BU „Zákaznické rozhovory bez datového batohu“ s research kartou, náborem segmentů, souhlasovou pozvánkou, pravidly pro nahrávky, anonymizovanými poznámkami, syntézou, checklistem, hodinovým research sprintem a ověřenými GDPR/EDPB/GOV.UK zdroji.
+
 
 - 2026-08-25: Přidána příloha BT „Passkeys a obnova účtu bez bezpečnostní pasti“ s rizikovým tříděním účtů, návrhem UX, recovery scénáři, fallback pravidly, privacy-first datovým modelem, release kartou, checklistem, 45minutovým tabletop cvičením a ověřenými W3C/FIDO/OWASP zdroji.
 
