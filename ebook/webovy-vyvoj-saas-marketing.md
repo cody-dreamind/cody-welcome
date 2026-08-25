@@ -20970,7 +20970,207 @@ Můj pohled: retence je jedna z nejpodceňovanějších produktových funkcí. U
 - ICO vysvětluje princip storage limitation a doporučuje retenční politiky a výmaz nebo anonymizaci dat, která už nejsou potřeba: https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/data-protection-principles/a-guide-to-the-data-protection-principles/storage-limitation/
 
 
+## CC. Datová rezidence a hosting bez mapy pokladů
+
+„Máme to v EU“ je dobrý začátek, ale samo o sobě to není provozní plán. Malý SaaS může běžet na evropském serveru a přesto posílat osobní údaje přes americký helpdesk, CDN, error monitoring, e-mailing, platební bránu, AI nástroj, webhook nebo ruční export v tabulce. Datová rezidence proto není nálepka na pricing stránce hostingu. Je to mapa toho, kde se data fyzicky ukládají, odkud k nim může někdo přistupovat a jaký právní režim se použije, když opustí Evropský hospodářský prostor.
+
+Privacy-first přístup Dreamindu zní jednoduše: evropský provoz jako výchozí volba, minimum subdodavatelů, žádné zbytečné trackery a jasná možnost odejít i s daty. Prakticky to znamená, že výběr infrastruktury není jen technické rozhodnutí. Je to produktové, obchodní a důvěrové rozhodnutí. Uživatelé nemusí znát každý detail vašeho Kubernetes clusteru, ale měli by poznat, že nad daty máte kontrolu. A tým by měl umět během deseti minut odpovědět: „Kde jsou zákaznická data a kdo se k nim může dostat?“
+
+### CC.1 Rozlišujte uložení, zpracování a přístup
+
+Nejčastější chyba je mluvit o „uložení v EU“, jako kdyby tím všechno končilo. Jenže osobní údaje mohou být:
+
+- **uložené** v databázi, object storage, záloze nebo logovacím systému,
+- **zpracovávané** aplikací, frontou, vyhledáváním, e-mailingem nebo analytikou,
+- **přenášené** mezi nástroji přes webhooky, API, exporty a notifikace,
+- **zpřístupněné** supportu, administrátorům, subdodavatelům nebo bezpečnostnímu týmu,
+- **kopírované** do debug logů, crash reportů, screenshotů, AI promptů a příloh ticketů.
+
+Když dodavatel říká „EU region“, zeptejte se přesněji: platí to pro produkční databázi, zálohy, metadata, logy, supportní přístup, diagnostiku i interní tooling? Pokud odpověď zní „většinou“, napište si, co znamená menšina. V právu i provozu bývá právě menšina nejdražší.
+
+Praktický příklad: aplikace běží v Německu, databáze je v Irsku, object storage ve Francii, ale error monitoring posílá stack trace do globální služby mimo EHP a stack trace občas obsahuje e-mail uživatele nebo payload formuláře. Marketingová věta „hostováno v EU“ pak sice není úplně lež, ale je to hodně kreativní gymnastika. Codyho překlad: hezký billboard, horší mapa.
+
+### CC.2 Udělejte si rezidenční mapu po datových kategoriích
+
+Mapa datové rezidence nemá začínat seznamem serverů. Má začínat kategoriemi dat. Pro každou kategorii určete, kde vzniká, kde žije, kam se kopíruje, jak dlouho tam zůstává a kdo má přístup. Když začnete infrastrukturou, snadno přehlédnete ruční exporty a podpůrné nástroje. Když začnete daty, infrastruktura se ukáže sama.
+
+Minimální kategorie pro malý SaaS:
+
+- **Identita a účet** — e-mail, jméno, workspace, role, MFA nastavení.
+- **Zákaznický obsah** — projekty, dokumenty, komentáře, uploady, interní poznámky.
+- **Billing** — fakturační údaje, platby, daňové doklady, dunning komunikace.
+- **Support** — ticket, přílohy, screenshoty, diagnostika, interní odpovědi.
+- **Marketing a leady** — poptávky, newsletter, UTM parametry, CRM historie.
+- **Produktová analytika** — agregované eventy, aktivace, použití funkcí, retenční metriky.
+- **Provozní data** — logy, auditní stopa, monitoring, incidentní evidence, zálohy.
+
+U každé kategorie přidejte tři štítky:
+
+- **Primární region** — kde je hlavní kopie dat.
+- **Sekundární region** — zálohy, replikace, disaster recovery, cache.
+- **Přístupový režim** — kdo se k datům může dostat a odkud.
+
+Tím oddělíte reálnou kontrolu od pocitu kontroly. Pocit kontroly je, když máte logo evropského hostingu v patičce. Reálná kontrola je, když víte, že supportní příloha se po 30 dnech smaže, debug payload se nemá kam uložit a subdodavatel mimo EHP dostává jen agregovaná metadata nebo vůbec nic.
+
+### CC.3 EU default neznamená zákaz všeho mimo EU
+
+Privacy-first neznamená ideologicky zakázat každý nástroj mimo Evropu. Znamená to nastavit evropský provoz jako výchozí, přenosy mimo EHP dělat jen s jasným důvodem a neschovávat riziko pod větu „všichni to tak dělají“. Někdy dává smysl použít mimoevropského dodavatele, protože má unikátní funkci, bezpečnostní přínos nebo zákaznickou hodnotu. Ale musí projít stejným filtrem jako každá jiná citlivá změna.
+
+Rozhodovací filtr:
+
+- Existuje evropská alternativa, která pokryje 80 % potřeby bez zásadní újmy?
+- Posíláme osobní údaje, pseudonymizovaná data, agregace, nebo jen technická metadata?
+- Je přenos nezbytný pro službu, nebo jen pro pohodlí týmu?
+- Umíme data minimalizovat před odesláním?
+- Máme smluvní základ, informace o subdodavatelích a transfer mechanismus?
+- Má nástroj EU region i pro logy, zálohy, support a diagnostiku?
+- Umíme nástroj vypnout nebo nahradit bez rukojmí?
+
+Když odpověď na tři otázky po sobě zní „nevíme“, není to stopka navždy. Je to stopka pro nasazení dnes. Rozdíl je drobný, ale ušetří spoustu budoucího potu.
+
+### CC.4 Přenos mimo EHP si napište jako rozhodnutí, ne poznámku v hlavě
+
+GDPR počítá s mezinárodními přenosy, ale chce, aby byly podložené. Evropská komise vydává rozhodnutí o odpovídající ochraně pro některé země nebo rámce. Pro USA existuje EU-US Data Privacy Framework, ale vztahuje se na certifikované organizace a pořád je nutné ověřovat konkrétního příjemce a účel. Pokud adekvátní rozhodnutí nepokrývá konkrétní situaci, typicky se řeší standardní smluvní doložky a případná doplňková opatření podle rizika.
+
+Pro malý tým z toho plyne jednoduché pravidlo: každý přenos mimo EHP musí mít kartu. Ne právní román, ale krátký záznam, který přežije výměnu člověka v týmu.
+
+Karta má odpovědět:
+
+- Jaká data se přenášejí?
+- Komu a do jaké země nebo právního rámce?
+- Proč je přenos nezbytný?
+- Jaký je právní a smluvní mechanismus?
+- Jaká doplňková technická nebo organizační opatření používáme?
+- Jak poznáme, že dodavatel změnil region, subdodavatele nebo podmínky?
+- Co je plán B, když přenos přestane být přijatelný?
+
+Tohle není paranoie. To je pojistka proti tomu, aby se jedno malé „zapneme integraci“ proměnilo v nekontrolovanou síť datových cest.
+
+### CC.5 Subdodavatelé jsou součást produktu
+
+Pokud provozujete SaaS, vaši zákazníci nekupují jen vaše rozhraní. Kupují i vaši volbu hostingu, e-mailové služby, platební brány, observability, supportu a automatizace. Subdodavatelé jsou tichá část produktu. Když je neřídíte, řídí oni vás.
+
+GDPR článek 28 řeší vztah správce, zpracovatele a dalšího zpracovatele. Prakticky: pokud jako zpracovatel berete subdodavatele, potřebujete k tomu autorizaci a smluvní řetězec, který přenáší odpovídající povinnosti dál. EDPB ve své příručce pro malé podniky připomíná, že subdodavatel jedná podle pokynů zpracovatele a smlouva se subdodavatelem má poskytovat stejnou úroveň ochrany jako původní zpracovatelská smlouva.
+
+Veřejný seznam subdodavatelů je dobrý signál důvěry. Nemusí ukazovat interní tajemství, ale měl by říct:
+
+- název dodavatele,
+- účel použití,
+- typ dat,
+- region zpracování,
+- právní role,
+- odkaz na DPA nebo bezpečnostní dokumentaci,
+- datum poslední kontroly,
+- způsob oznámení změn.
+
+Pokud nechcete seznam zveřejnit, mějte ho aspoň připravený pro zákazníky. Ale upřímně: u privacy-first produktu je veřejný přehled subdodavatelů jako uklizená kuchyň v restauraci. Nikdo vás nenutí ukazovat každý šroubek trouby, ale čistý provoz se dobře prodává.
+
+### CC.6 Hosting vybírejte podle provozních schopností, ne jen regionu
+
+Evropský region je podmínka, ne celá odpověď. Při výběru hostingu nebo infrastruktury se dívejte na schopnosti, které rozhodují v běžném provozu i v krizi.
+
+Ptejte se na:
+
+- **Regiony a replikace** — kde běží produkce, zálohy, cache a disaster recovery.
+- **Šifrování** — šifrování v klidu, při přenosu a správa klíčů.
+- **Přístupy** — role, MFA, audit log, nouzový přístup, supportní přístup dodavatele.
+- **Logy** — co se loguje, jak dlouho, kde a jestli lze maskovat citlivé hodnoty.
+- **Zálohy** — retence, test obnovy, mazací režim, izolace záloh.
+- **Export** — jak rychle dostanete data ven v běžném i krizovém scénáři.
+- **Smlouvy** — DPA, subdodavatelé, oznámení změn, místo soudní příslušnosti.
+- **Provozní důkazy** — status page, incident history, bezpečnostní dokumentace, certifikace, kontakty.
+
+Cena je důležitá, ale nejlevnější hosting bez auditní stopy, jasných regionů a exportu dat může být drahý přesně ve chvíli, kdy potřebujete klid. Infrastrukturou se nešetří tak, že zahodíte kontrolu. Šetří se tak, že kupujete jen schopnosti, které opravdu potřebujete, a ne marketingový cirkus okolo.
+
+### CC.7 Šablona: rezidenční karta služby
+
+```markdown
+# Rezidenční karta: [název služby]
+
+## Účel
+- Proč službu používáme:
+- Jakou produktovou nebo provozní hodnotu přináší:
+- Co by se stalo, kdybychom ji vypnuli:
+
+## Data
+- Kategorie dat:
+- Osobní údaje:
+- Citlivost:
+- Minimalizace před odesláním:
+- Zakázané payloady:
+
+## Regiony
+- Primární uložení:
+- Zálohy a replikace:
+- Logy a diagnostika:
+- Supportní přístup:
+- Přenos mimo EHP: ano/ne
+
+## Právní a smluvní režim
+- Role dodavatele:
+- DPA:
+- Subdodavatelé:
+- Transfer mechanismus:
+- Datum poslední kontroly:
+
+## Bezpečnost
+- MFA a role:
+- Audit log:
+- Šifrování:
+- Incidentní kontakt:
+- Exit/export postup:
+
+## Rozhodnutí
+- Schválil:
+- Platí do revize:
+- Podmínky dalšího používání:
+- Plán B:
+```
+
+Kartu ukládejte vedle vendor evidence, ne do náhodného dokumentu s názvem „GDPR final final opravdu final“. Název souboru by měl přežít i audit, nejen pondělní náladu.
+
+### CC.8 Checklist: hosting a datová rezidence bez mlhy
+
+- [ ] Máme seznam služeb, které ukládají, zpracovávají nebo přenášejí osobní údaje.
+- [ ] U každé služby známe primární region, zálohy, logy a supportní přístup.
+- [ ] Evropský provoz je výchozí volba pro produkční data.
+- [ ] Přenos mimo EHP má písemné rozhodnutí, účel a právní mechanismus.
+- [ ] Subdodavatelé jsou evidovaní a změny mají jasný oznamovací kanál.
+- [ ] Debug logy, crash reporty a supportní přílohy nejsou skrytý datový sklad.
+- [ ] Hosting má audit log, MFA, role a obnovitelný export dat.
+- [ ] Zálohy mají popsaný region, retenci, šifrování a test obnovy.
+- [ ] Existuje plán B pro kritické služby.
+- [ ] Veřejné trust centrum nebo bezpečnostní stránka říká pravdu bez přehnaných slibů.
+
+### Mini cvičení: rezidenční audit za 60 minut
+
+1. Vyberte jednu datovou kategorii, třeba supportní přílohy nebo produktové eventy.
+2. Napište všechny systémy, kde se data mohou objevit: aplikace, databáze, logy, e-mail, ticketing, exporty, zálohy.
+3. Ke každému systému doplňte region produkce, region záloh a kdo má přístup.
+4. Označte přenosy mimo EHP a napište, proč jsou nutné.
+5. Najděte jedno místo, kde lze data minimalizovat, maskovat nebo úplně vypnout.
+6. Vyplňte jednu rezidenční kartu služby.
+7. Udělejte jednu změnu hned: vypněte zbytečný payload, zkraťte retenci logu, nebo přidejte chybějící službu do seznamu subdodavatelů.
+
+Výsledek za hodinu není dokonalá compliance mapa. Výsledek je menší mlha. A menší mlha je u infrastruktury luxusní věc, protože narazit do zdi v mlze je sice poetické, ale pořád to bolí.
+
+### Codyho komentář
+
+Můj pohled: datová rezidence je skvělý filtr na produktovou dospělost. Ne proto, že by každý tým musel mít armádu právníků a barevný diagram přes celou zeď. Ale proto, že nutí položit jednoduché otázky: kam data tečou, kdo je drží, co o nich víme a jak odejdeme. Malý evropský SaaS nemusí vyhrát tím, že má nejvíc integrací. Může vyhrát tím, že má nejméně překvapení.
+
+### Zdroje k příloze CC
+
+- Evropská komise vysvětluje rozhodnutí o odpovídající ochraně pro přenosy osobních údajů do třetích zemí a uvádí i informace k EU-US Data Privacy Frameworku: https://commission.europa.eu/law/law-topic/data-protection/international-dimension-data-protection/adequacy-decisions_en
+- Prováděcí rozhodnutí Komise (EU) 2023/1795 popisuje odpovídající úroveň ochrany podle EU-US Data Privacy Frameworku a vztah k certifikovaným organizacím: https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32023D1795
+- EDPB Recommendations 01/2020 popisují postup pro posouzení přenosů do třetích zemí a doplňková opatření k transferovým nástrojům: https://www.edpb.europa.eu/documents/recommendation/recommendations-012020-on-measures-that-supplement-transfer-tools-to_en
+- GDPR článek 28 stanovuje pravidla pro zpracovatele, další zpracovatele, smluvní povinnosti, asistenci správci, výmaz nebo vrácení dat a audity: https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32016R0679
+- EDPB příručka pro malé podniky vysvětluje role správce, zpracovatele a subdodavatele včetně požadavku na odpovídající smluvní ochranu: https://www.edpb.europa.eu/sme/learn-the-basics/data-controller-or-data-processor_en
+- EDPB příručka pro malé podniky shrnuje praktický význam data protection by design and by default pro nástroje, procesy a obchodní aktivity: https://www.edpb.europa.eu/sme/be-compliant/be-compliant_en
+
+
 ## Pracovní log
+
+- 2026-08-25: Přidána příloha CC „Datová rezidence a hosting bez mapy pokladů“ s rozlišením uložení/zpracování/přístupu, rezidenční mapou, pravidly pro přenosy mimo EHP, seznamem subdodavatelů, hostingovým due diligence, rezidenční kartou, checklistem, hodinovým auditem a ověřenými zdroji.
 
 - 2026-08-25: Přidána příloha CB „Retenční plán dat“ s účelovým návrhem retenčních dob, životním cyklem dat, pravidly pro logy a zálohy, testovatelným mazáním, retenční kartou, checklistem, hodinovým auditem a ověřenými GDPR/EDPB/CNIL/ICO zdroji.
 
