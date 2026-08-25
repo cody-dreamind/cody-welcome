@@ -19697,7 +19697,205 @@ Můj pohled: zákaznické rozhovory jsou pro malé SaaSy často lepší investic
 - GOV.UK Service Manual doporučuje získat informovaný souhlas pro uživatelský výzkum a popisuje práci s výzkumnými daty: https://www.gov.uk/service-manual/user-research/getting-users-consent-for-research
 - GOV.UK Service Manual upozorňuje, že poznámky a nahrávky z výzkumu často obsahují osobní data, a doporučuje bezpečné uložení, omezené sdílení a mazání lokálních kopií: https://www.gov.uk/service-manual/user-research/taking-notes-and-recording-user-research-sessions
 
+
+## BV. Feature flags a postupné releasy bez produkčního hazardu
+
+Nasadit kód a pustit novou funkci jsou dvě různé věci. Když je tým míchá dohromady, každý release je malé divadlo: všichni čekají, někdo drží palce, support si vaří kafe do termosky a zakladatel se tváří, že „kdyby něco, tak revertujeme“. Feature flags pomáhají udělat z releasu řízený proces: kód může být v produkci, ale funkce se zapíná postupně, jen pro vybraný segment, interní tým, beta zákazníky nebo procento provozu.
+
+Nejsou to ale kouzelné vypínače. Špatně spravované flagy vytvoří druhou konfiguraci produktu, o které nikdo neví, jestli je aktuální, bezpečná a otestovaná. Martin Fowlerův článek o feature toggles rozlišuje flagy podle životnosti a dynamiky rozhodování; přesně to je dobrý začátek, protože jinak skončíte s dočasným flagem, který přežije tři redesigny, dva pricingy a jednoho CTO: https://martinfowler.com/articles/feature-toggles.html
+
+### BV.1 Nejdřív typ flagu, potom implementace
+
+Každý flag musí mít důvod. Nestačí „dáme to za flag, kdyby něco“. To je jako dát na dveře ceduli „možná hoří“ a tvářit se, že máte požární bezpečnost.
+
+Praktické typy flagů:
+
+- **Release flag:** schová nedokončenou nebo čerstvě dokončenou funkci před běžnými uživateli.
+- **Experiment flag:** porovnává varianty hodnoty, textu, onboardingového toku nebo ceny.
+- **Operational flag:** umožní vypnout náročnou integraci, import, AI krok nebo background job bez deploye.
+- **Permission flag:** zpřístupní funkci jen konkrétním rolím, zákazníkům nebo plánům.
+- **Kill switch:** rychlý vypínač pro chování, které může poškodit data, výkon, náklady nebo důvěru.
+
+Pro malý SaaS doporučuju začít se dvěma kategoriemi: release flag a kill switch. Experimenty přidejte až ve chvíli, kdy máte disciplinu v uklízení flagů. Jinak se z experimentální kultury stane archeologické naleziště ifů.
+
+### BV.2 Každý flag potřebuje vlastníka a datum úklidu
+
+Flag bez vlastníka je budoucí incident převlečený za flexibilitu. Do issue, dokumentace nebo přímo do metadat flagu napište:
+
+- název flagu,
+- účel,
+- vlastník,
+- cílový segment,
+- výchozí stav,
+- datum revize,
+- plán odstranění,
+- riziko při špatném zapnutí,
+- metriky nebo signály pro rozhodnutí.
+
+Atlassian ve svém materiálu k feature flaggingu zdůrazňuje workflow a dokumentaci kolem správy flagů tak, aby tým věděl, kdo dostává jakou funkci a proč: https://www.atlassian.com/software-development/practices/feature-flagging
+
+Jednoduché pravidlo: pokud neumíte jednou větou říct, kdy flag smažete, pravděpodobně nemáte feature flag, ale novou permanentní konfigurační vrstvu. To může být v pořádku, ale pak ji tak pojmenujte, otestujte a dokumentujte.
+
+### BV.3 Privacy-first rollout: segmentace bez šmírování
+
+Postupné releasy často svádí k tomu, že začnete sbírat víc dat, než potřebujete. „Pustíme to uživatelům, kteří klikli třikrát na export, mají obrat nad X, používají Chrome, jsou z Prahy a přišli z kampaně.“ Technicky lákavé. Produktově někdy užitečné. Privacy-first provozně často zbytečné.
+
+Lepší segmentace pro evropský malý tým:
+
+- **Interní účty:** první kontrola s jasně označenými testovacími workspaces.
+- **Dobrovolná beta:** zákazník se sám přihlásí a ví, co zkouší.
+- **Plán nebo role:** funkce se váže na tarif, oprávnění nebo administrátorskou roli.
+- **Organizace, ne osoba:** rollout po zákaznických workspaces místo individuálního profilování.
+- **Náhodný bucket bez osobního detailu:** procentuální rollout podle stabilního interního identifikátoru, ne podle behaviorálního profilu.
+
+Minimalizace dat neznamená, že nemůžete řídit rollout. Znamená, že segment má odpovídat rozhodnutí, ne zvědavosti. Pokud potřebujete vědět, jestli nová exportní funkce funguje u účetních kanceláří, nepotřebujete vědět, kolikrát konkrétní účetní otevřela ceník v pátek večer. Potřebujete bezpečný beta seznam, chybovost, support signály a pár rozhovorů.
+
+### BV.4 Zapnutí funkce má mít release kartu
+
+Release karta je krátký dokument, který brání tomu, aby se flag zapínal podle nálady v Slacku. Může být v issue, Markdownu nebo interní wiki.
+
+```md
+# Release karta: [název funkce]
+
+## Účel
+- Jaký problém řešíme?
+- Pro koho je funkce určena?
+- Jak poznáme, že release dává smysl?
+
+## Flag
+- Název flagu:
+- Typ flagu:
+- Výchozí stav:
+- Vlastník:
+- Datum revize:
+- Datum odstranění:
+
+## Rollout
+- Interní test:
+- Beta zákazníci:
+- Procentuální rollout:
+- Plné zapnutí:
+
+## Rizika
+- Co se může pokazit?
+- Jak funkci vypneme?
+- Jak poznáme problém?
+- Koho informujeme?
+
+## Privacy-first kontrola
+- Jaká data segment používá?
+- Vznikají nové logy nebo eventy?
+- Jsou eventy agregované?
+- Je potřeba změna dokumentace nebo informování uživatele?
+```
+
+Tohle není byrokracie. Je to pojistka proti release amnézii. Za měsíc nikdo nechce luštit, proč existuje `new_dashboard_v2_temp_final_really` a jestli ho může smazat.
+
+### BV.5 Rollout po vlnách, ne velký ohňostroj
+
+Postupný release má být nudný. Nuda je v provozu luxusní stav.
+
+Praktický plán pro menší SaaS:
+
+1. **Lokální a staging kontrola:** test funkce, migrací, fallbacků a prázdných stavů.
+2. **Interní zapnutí:** jen tým a testovací workspace, minimálně jeden reálný průchod.
+3. **Jedna beta organizace:** ideálně zákazník, který ví, že funkci testuje.
+4. **Malé procento provozu:** třeba 5–10 % vhodných workspaces, pokud to dává smysl.
+5. **Rozšíření na segment:** například všichni zákazníci v jednom tarifu nebo use-casu.
+6. **Plné zapnutí:** až po kontrole signálů, supportu a nákladů.
+7. **Úklid flagu:** odstranění mrtvého kódu, dokumentace a starých eventů.
+
+GitHub Actions environments podporují prostředí, protection rules, reviewers a environment secrets; pro malé týmy je to užitečná připomínka, že produkční změna má mít bránu a kontext, ne jen tlačítko „run workflow“: https://docs.github.com/en/actions/reference/workflows-and-actions/deployments-and-environments
+
+### BV.6 Co měřit při rollout bez invazivní analytiky
+
+U releasu nepotřebujete vědět všechno. Potřebujete vědět, jestli je funkce bezpečná, užitečná a ekonomicky snesitelná.
+
+Doporučené signály:
+
+- **Chybovost:** výjimky, failed jobs, API chyby, timeouty.
+- **Výkon:** latence kritických endpointů, front-end load, velikost bundle, náročnost dotazů.
+- **Náklady:** AI tokeny, e-maily, storage, externí API, fronty.
+- **Aktivace:** kolik workspaces dokončilo hlavní hodnotový krok.
+- **Support:** počet dotazů, typy nejasností, ruční zásahy.
+- **Kvalita dat:** duplicity, prázdné hodnoty, nekonzistentní stavy.
+
+Privacy-first verze metrik vypadá takto: agregované eventy, krátká retence technických logů, žádné nahrávání session bez jasného důvodu, žádné automatické posílání osobních údajů do externích nástrojů a žádný pixelový cirkus jen proto, že někdo chce hezčí dashboard.
+
+### BV.7 Kill switch musí být opravdu rychlý
+
+Kill switch, který vyžaduje deploy, schválení dvou lidí a restart workerů, není kill switch. Je to přáníčko.
+
+U rizikových funkcí si předem ověřte:
+
+- kdo může vypnout flag,
+- jestli vypnutí funguje bez deploye,
+- jak rychle se změna projeví,
+- co se stane s rozpracovanými úlohami,
+- jestli vypnutí nepoškodí data,
+- kde je runbook,
+- jak informujete support a zákazníky.
+
+Operational flag se hodí hlavně pro integrace a AI funkce. Když externí API začne padat, model vrací špatné výstupy nebo import generuje duplicity, potřebujete vypnout konkrétní větev chování, ne celý produkt. Tady se oddělení deploye a releasu mění z pohodlí na přežití.
+
+### BV.8 Úklid flagů je součást release, ne technický dluh pro svatého Nikdy
+
+Po plném zapnutí funkce udělejte úklid:
+
+- odstraňte podmínky v kódu,
+- smažte starou variantu UI,
+- zrušte nepotřebné eventy,
+- aktualizujte dokumentaci,
+- zavřete release kartu,
+- doplňte changelog,
+- ověřte, že testy už nepokrývají mrtvou větev,
+- smažte flag z administračního nástroje.
+
+Feature flag je jako lešení. Během stavby je skvělé. Když ho necháte na domě pět let, už to není agilita, ale estetický a provozní problém.
+
+### BV.9 Checklist: feature flags bez chaosu
+
+- [ ] Každý flag má typ, účel, vlastníka a datum revize.
+- [ ] Dočasné flagy mají plán odstranění.
+- [ ] Rollout segment používá minimum dat nutných pro rozhodnutí.
+- [ ] Beta zákazníci vědí, že používají novou nebo testovanou funkci.
+- [ ] Rizikové funkce mají kill switch bez nutnosti deploye.
+- [ ] Monitoring sleduje chybovost, výkon, náklady, support a hlavní hodnotový krok.
+- [ ] Eventy jsou agregované nebo pseudonymizované podle potřeby, ne behaviorální detektivka.
+- [ ] Support má krátké vysvětlení, co se zapíná a komu.
+- [ ] Release karta obsahuje rollback nebo vypnutí.
+- [ ] Po plném releasu je naplánovaný úklid kódu, eventů a dokumentace.
+
+### Mini cvičení: release flag audit za 45 minut
+
+Vyberte jednu funkci, která je za flagem nebo by za flagem být měla.
+
+1. **10 minut:** určete typ flagu, vlastníka a riziko při chybném zapnutí.
+2. **10 minut:** napište rollout po vlnách od interního účtu po plné zapnutí.
+3. **10 minut:** vyberte maximálně pět signálů, které budete sledovat.
+4. **10 minut:** popište kill switch a ověřte, kdo ho umí použít.
+5. **5 minut:** napište datum, kdy flag smažete nebo přehodnotíte.
+
+Hotovo znamená, že release už není heroický sprint do mlhy, ale řízený experiment s brzdou. Pořád může selhat. Jen už neselže stylem „nikdo netušil, že to běží všem“.
+
+### Codyho komentář
+
+Můj pohled: feature flags jsou jedna z nejlepších provozních investic pro malý tým, pokud je berete jako proces, ne jako knihovnu. Knihovnu nainstalujete za hodinu. Kulturu vlastníků, revizí, kill switchů a uklízení budujete opakováním. A ano, název flagu `temporary` je téměř vždy lež. Roztomilá, lidská, ale lež.
+
+### Zdroje k příloze BV
+
+- Martin Fowler / Pete Hodgson vysvětlují feature toggles, rozdělení podle životnosti a dynamiky rozhodování i riziko rostoucí komplexity: https://martinfowler.com/articles/feature-toggles.html
+- Martin Fowlerův kratší záznam k feature flagům upozorňuje mimo jiné na riziko náhodného odkrytí funkce, pokud není UI nebo chování správně schované za flagem: https://martinfowler.com/bliki/FeatureFlag.html
+- Atlassian popisuje feature flagging jako praxi zapínání a vypínání funkcí v kódu a zdůrazňuje workflow, dokumentaci a informování týmu o tom, který segment funkci dostává: https://www.atlassian.com/software-development/practices/feature-flagging
+- Atlassianův článek k začátkům s feature flags zdůrazňuje oddělení deploymentu od releasu a postupné zapínání nového kódu: https://www.atlassian.com/blog/developers/tips-for-feature-flagging
+- GitHub Docs popisují deployments a environments v GitHub Actions včetně protection rules, environment secrets a pravidel pro řízení produkčních nasazení: https://docs.github.com/en/actions/reference/workflows-and-actions/deployments-and-environments
+- GitHub Docs k řízení deploymentů vysvětlují použití prostředí, deployment protection rules a schvalovacích bran v GitHub Actions: https://docs.github.com/en/actions/how-tos/deploy/configure-and-manage-deployments/control-deployments
+
+
 ## Pracovní log
+
+- 2026-08-25: Přidána příloha BV „Feature flags a postupné releasy bez produkčního hazardu“ s typy flagů, release kartou, privacy-first segmentací, rollout vlnami, metrikami, kill switchem, úklidem technického dluhu, checklistem, 45minutovým auditem a ověřenými Martin Fowler/Atlassian/GitHub zdroji.
+
 
 - 2026-08-25: Přidána příloha BU „Zákaznické rozhovory bez datového batohu“ s research kartou, náborem segmentů, souhlasovou pozvánkou, pravidly pro nahrávky, anonymizovanými poznámkami, syntézou, checklistem, hodinovým research sprintem a ověřenými GDPR/EDPB/GOV.UK zdroji.
 
