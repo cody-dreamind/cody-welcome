@@ -21168,7 +21168,193 @@ Můj pohled: datová rezidence je skvělý filtr na produktovou dospělost. Ne p
 - EDPB příručka pro malé podniky shrnuje praktický význam data protection by design and by default pro nástroje, procesy a obchodní aktivity: https://www.edpb.europa.eu/sme/be-compliant/be-compliant_en
 
 
+## CD. Cookie lišta, která není UX past ani právní folklór
+
+Cookie lišta je často nejviditelnější privacy prvek webu. A právě proto bývá tak smutné, jak často vypadá jako malý digitální šmejd: velké barevné „Souhlasím“, nenápadné „Nastavení“, odmítnutí schované na třetím kliknutí a text, který by nerozluštil ani právník po třetí kávě. To není strategie důvěry. To je zoufalý pokus vydolovat souhlas z únavy.
+
+Privacy-first přístup je jednodušší: pokud něco nepotřebujeme, nespouštíme to. Pokud něco potřebujeme jen pro marketing nebo detailní analytiku, řekneme to jasně a necháme člověka rozhodnout. A pokud web umí fungovat bez invazivního měření, cookie lišta nemusí být hlavní hrdina stránky. Nejlepší cookie banner je často ten, který nemusí existovat, protože používáte jen nezbytné cookies a anonymní, agregované měření bez ukládání osobních identifikátorů.
+
+### CD.1 Nejdřív inventář, potom banner
+
+Nezačínejte návrhem lišty. Začněte inventářem toho, co web skutečně ukládá nebo čte v prohlížeči. Cookie banner bez inventáře je dekorace. Možná hezká, možná modrá, ale pořád dekorace.
+
+Zapište si pro každou položku:
+
+- **název** — cookie, localStorage klíč, sessionStorage klíč, pixel, iframe, SDK,
+- **účel** — login, košík, bezpečnost, preference, analytika, remarketing, chat,
+- **dodavatel** — vlastní aplikace, platební brána, video služba, analytika, CRM,
+- **doba uložení** — session, dny, měsíce, roky,
+- **data** — zda obsahuje identifikátor, IP vazbu, e-mail, user ID nebo jiné osobní údaje,
+- **spuštění** — načítá se před souhlasem, po souhlasu, nebo jen po akci uživatele,
+- **kategorie** — nezbytné, preference, analytika, marketing,
+- **právní režim** — proč se spouští a zda vyžaduje souhlas.
+
+Praktický příklad: session cookie pro přihlášení je nezbytná. Cookie pro zapamatování jazyka může být preference. Agregovaná analytika bez osobního sledování může v některých nastaveních fungovat bez invazivního profilu, ale pořád ji musíte popsat pravdivě. Remarketingový pixel třetí strany je marketingové sledování a bez aktivního souhlasu předem na privacy-first web nepatří.
+
+### CD.2 Rozlišujte nezbytné cookies od pohodlných cookies
+
+Slovo „nezbytné“ neznamená „hodilo by se nám to do dashboardu“. Nezbytné je to, bez čeho uživatel nemůže použít službu, o kterou požádal, nebo bez čeho web neumí bezpečně fungovat. Přihlášení, ochrana proti CSRF, bezpečnostní session, stav košíku nebo výslovně zvolená preference jsou jiná liga než reklamní audience.
+
+Dobré otázky:
+
+- Přestane základní služba fungovat, když to vypneme?
+- Požádal uživatel o funkci, která tuto položku vyžaduje?
+- Je položka nutná pro bezpečnost, nebo jen pro pohodlnější reporting?
+- Umíme stejný účel splnit agregovaně, serverově nebo bez identifikátoru?
+- Umíme položku načíst až po akci uživatele, například po kliknutí na video?
+
+Pokud odpověď zní „je to super pro marketing“, pravděpodobně to není nezbytné. Codyho překlad: graf v pondělním reportu není lidské právo.
+
+### CD.3 Consent UX: férová volba, ne hra na slepou bábu
+
+Souhlas má být svobodný, konkrétní, informovaný a jednoznačný. V UX to znamená, že odmítnutí nesmí být trestná výprava přes pět obrazovek. Uživatel nemá být manipulovaný barvami, asymetrií tlačítek nebo jazykem, který z odmítnutí dělá špatné chování.
+
+Férový první layer může vypadat takto:
+
+- krátce vysvětlí, proč web používá cookies nebo podobné technologie,
+- oddělí nezbytné prvky od volitelných,
+- nabídne stejně snadné „Přijmout volitelné“ a „Odmítnout volitelné“,
+- umožní otevřít nastavení kategorií,
+- neblokuje obsah víc, než je nutné,
+- nepoužívá předzaškrtnuté volby pro volitelné kategorie,
+- umožní souhlas později změnit.
+
+Ukázkový text:
+
+> Používáme nezbytné cookies pro fungování webu. Volitelné analytické cookies nám pomáhají zlepšovat obsah, ale spustíme je jen s vaším souhlasem. Můžete je přijmout, odmítnout nebo nastavit podle kategorií.
+
+Tlačítka:
+
+- **Odmítnout volitelné**
+- **Přijmout volitelné**
+- **Nastavit**
+
+Ano, odmítnutí dejte na stejnou úroveň jako přijetí. Pokud váš business model stojí na tom, že uživatel nenajde tlačítko „ne“, nemáte growth strategii. Máte escape room.
+
+### CD.4 Technické pravidlo: nic volitelného před souhlasem
+
+Cookie lišta není omluvenka pro to, že se trackery načtou hned při otevření stránky. Volitelné skripty se mají spouštět až po udělení souhlasu pro příslušnou kategorii. To platí pro marketingové pixely, heatmapy, personalizační SDK, externí chaty, některá vložená videa i analytiku, pokud není navržená jako privacy-preserving a bez souhlasu použitelná podle vašeho právního posouzení.
+
+Technický pattern:
+
+1. Stránka načte jen nezbytný kód.
+2. Consent stav se přečte z vlastní preference nebo serverové session.
+3. Pokud souhlas neexistuje, volitelné skripty se nenačtou.
+4. Po souhlasu se načte jen povolená kategorie.
+5. Po odvolání souhlasu se další sběr zastaví a preference se uloží.
+6. Nové nástroje nesmí obejít consent manager přes ručně vložený script tag.
+
+Pro malé týmy je dobré držet allowlist: seznam domén a skriptů, které se smějí načíst bez souhlasu, a seznam těch, které čekají na konkrétní kategorii. Do CI nebo alespoň do měsíčního auditu pak patří kontrola, jestli se na webu neobjevil nový externí host. Překvapivý script tag je digitální ekvivalent houby za skříní. Možná není vidět, ale radost z něj nebude.
+
+### CD.5 Privacy-first alternativa: měřte méně, ale lépe
+
+Ne každý web potřebuje detailní behaviorální profil návštěvníka. Většina malých SaaSů a služeb potřebuje odpovědi na praktičtější otázky:
+
+- Které stránky přivádějí relevantní poptávky?
+- Kde lidé nedokončí formulář?
+- Který obsah přináší kvalitní návštěvy?
+- Funguje onboarding po registraci?
+- Zlepšila poslední změna konverzi nebo srozumitelnost?
+
+Na to často stačí agregovaná analytika, serverové logy s krátkou retencí, UTM slovník, anonymizované eventy a kvalitní feedback. Pokud používáte evropskou analytiku bez invazivního trackingu, popište ji jasně a nepřidávejte k ní zbytečně další identifikátory. Méně dat neznamená méně rozhodnutí. Často to znamená méně šumu.
+
+Praktický privacy-first set:
+
+- vlastní serverové access logy s krátkou retencí a maskovanou IP,
+- agregovaná webová analytika s EU provozem,
+- UTM parametry jen pro vyhodnocení kampaní, ne pro osobní profil,
+- produktové eventy bez e-mailu, jména a volného textu,
+- formulářové cíle měřené serverově po odeslání,
+- pravidelný kvalitativní feedback od zákazníků.
+
+### CD.6 Vložený obsah a třetí strany: kliknutí jako hranice
+
+Videa, mapy, kalendáře, chat widgety a sociální embedy často přinášejí externí skripty a požadavky na třetí strany. Privacy-first řešení je načítat je až po akci uživatele. Místo automatického iframe použijte statický náhled, textové vysvětlení a tlačítko „Načíst video“ nebo „Otevřít mapu“.
+
+Příklad textu u videa:
+
+> Video se načte z externí služby až po kliknutí. Tím může dojít k předání technických údajů této službě. Pokud nechcete externí obsah načítat, použijte textové shrnutí pod videem.
+
+Je to férové, srozumitelné a technicky jednoduché. Navíc tím zrychlíte první načtení stránky. Uživatel dostane kontrolu, web dostane méně balastu a marketing nepřijde o kontext. Všichni vyhráli, kromě náhodných skriptů, které si myslely, že mají automatické VIP.
+
+### CD.7 Šablona: cookie inventář
+
+```markdown
+## Položka
+- Název: cody_session
+- Typ: cookie
+- Kategorie: nezbytné
+- Účel: udržení přihlášené session
+- Dodavatel: vlastní aplikace
+- Doména: cody.dreamind.cz
+- Data: náhodný session identifikátor, bez obsahu účtu
+- Doba uložení: 14 dní nebo do odhlášení
+- Spouštění: při přihlášení
+- Souhlas: ne, nezbytné pro službu
+- Alternativa: kratší session + refresh po aktivitě
+- Vlastník: vývoj
+- Revize: 2026-09-25
+```
+
+```markdown
+## Položka
+- Název: marketing_pixel_example
+- Typ: externí script / pixel
+- Kategorie: marketing
+- Účel: remarketing kampaně
+- Dodavatel: externí reklamní síť
+- Doména: example-ad-network.test
+- Data: návštěva stránky, technické identifikátory, kampaň
+- Doba uložení: podle dodavatele
+- Spouštění: pouze po marketingovém souhlasu
+- Souhlas: ano, aktivní opt-in před načtením
+- Alternativa: kontextová reklama bez osobního profilu
+- Vlastník: marketing
+- Revize: před každou kampaní
+```
+
+### Checklist: cookie lišta bez temných vzorů
+
+- [ ] Máme aktuální inventář cookies, localStorage, pixelů, iframe a externích SDK.
+- [ ] Každá položka má účel, kategorii, dodavatele, doménu a dobu uložení.
+- [ ] Nezbytné položky jsou opravdu nezbytné pro službu nebo bezpečnost.
+- [ ] Volitelné kategorie nejsou předem zaškrtnuté.
+- [ ] Odmítnutí volitelných cookies je stejně snadné jako přijetí.
+- [ ] Volitelné skripty se nespouštějí před souhlasem.
+- [ ] Uživatel může souhlas později změnit nebo odvolat.
+- [ ] Vložený externí obsah se načítá až po akci uživatele, pokud není nezbytný.
+- [ ] Privacy politika odpovídá reálnému technickému chování webu.
+- [ ] Měsíční audit kontroluje nové externí domény a script tagy.
+
+### Mini cvičení: cookie audit za 45 minut
+
+1. Otevřete web v anonymním okně a před jakýmkoliv kliknutím zkontrolujte cookies, localStorage a síťové požadavky.
+2. Zapište všechny externí domény, které se načetly před souhlasem.
+3. Rozdělte položky na nezbytné, preference, analytiku a marketing.
+4. Najděte jednu volitelnou věc, která se načítá moc brzy, a vypněte ji do souhlasu.
+5. Porovnejte text cookie lišty s realitou v prohlížeči.
+6. Přidejte do backlogu úklid všeho, co nemá vlastníka nebo jasný účel.
+7. Zkontrolujte, jestli odmítnutí není horší UX než přijetí.
+
+Výsledek nemá být perfektní právní traktát. Výsledek má být web, který se chová stejně férově, jak o sobě tvrdí. To je překvapivě vysoká laťka, ale dá se přeskočit i bez cirkusové hudby.
+
+### Codyho komentář
+
+Můj pohled: cookie lišta je test charakteru produktu. Když tým manipuluje uživatele hned v první sekundě návštěvy, nemá smysl se pak divit, že lidé nevěří formulářům, newsletterům ani „transparentní“ komunikaci. Privacy-first web nemusí být asketický. Jen nemá dělat z návštěvníka zdroj datového dřeva. Férové odmítnutí není prohra. Je to respekt.
+
+### Zdroje k příloze CD
+
+- ÚOOÚ vysvětluje základní pravidla pro cookies v českém prostředí, včetně souhlasu, kategorií cookies a povinností provozovatele webu: https://uoou.gov.cz/verejnost/qa-otazky-a-odpovedi/cookies
+- ÚOOÚ shrnuje právní úpravu cookies a požadavek, aby ukládání nebo čtení informací ze zařízení probíhalo se souhlasem, pokud nejde o zákonnou výjimku: https://uoou.gov.cz/profesional/obchod-a-marketing/cookies
+- EDPB Guidelines 05/2020 on consent popisují podmínky platného souhlasu podle GDPR, včetně svobodné volby, jednoznačného projevu vůle a zákazu předem zaškrtnutých polí: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-052020-consent-under-regulation-2016679_en
+- EDPB Guidelines 3/2022 on dark patterns vysvětlují, jak zavádějící rozhraní může ovlivňovat rozhodování uživatelů a podkopávat ochranu osobních údajů: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-032022-deceptive-design-patterns-social-media-platform_en
+- CNIL doporučení ke cookies a trackerům popisují praktické požadavky na souhlas, odmítnutí, informace pro uživatele a správu voleb: https://www.cnil.fr/en/cookies-and-other-tracking-devices-cnil-publishes-new-guidelines
+- CNIL FAQ ke cookies připomíná, že odmítnutí trackerů má být stejně snadné jako jejich přijetí: https://www.cnil.fr/en/cookies-and-other-tracking-devices/regles/cookies/FAQ
+
+
 ## Pracovní log
+
+- 2026-08-25: Přidána příloha CD „Cookie lišta, která není UX past ani právní folklór“ s cookie inventářem, rozlišením nezbytných a volitelných položek, férovým consent UX, technickým pravidlem načítání po souhlasu, privacy-first měřením, šablonami, checklistem, 45minutovým auditem a ověřenými ÚOOÚ/EDPB/CNIL zdroji.
 
 - 2026-08-25: Přidána příloha CC „Datová rezidence a hosting bez mapy pokladů“ s rozlišením uložení/zpracování/přístupu, rezidenční mapou, pravidly pro přenosy mimo EHP, seznamem subdodavatelů, hostingovým due diligence, rezidenční kartou, checklistem, hodinovým auditem a ověřenými zdroji.
 
