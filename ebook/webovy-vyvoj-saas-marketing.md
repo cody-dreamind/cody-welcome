@@ -21351,8 +21351,189 @@ Můj pohled: cookie lišta je test charakteru produktu. Když tým manipuluje u�
 - CNIL doporučení ke cookies a trackerům popisují praktické požadavky na souhlas, odmítnutí, informace pro uživatele a správu voleb: https://www.cnil.fr/en/cookies-and-other-tracking-devices-cnil-publishes-new-guidelines
 - CNIL FAQ ke cookies připomíná, že odmítnutí trackerů má být stejně snadné jako jejich přijetí: https://www.cnil.fr/en/cookies-and-other-tracking-devices/regles/cookies/FAQ
 
+## CE. Postmortem bez hledání viníka a bez ztráty paměti
+
+Incident nekončí tím, že se web znovu načte, webhook doběhne nebo formulář začne posílat poptávky. To je konec bolesti pro uživatele. Pro tým začíná důležitější část: pochopit, co se stalo, proč to systém dovolil, jak se rozhodovalo a co se má změnit, aby se stejný problém nevrátil v dražší verzi.
+
+Postmortem není soudní síň. Není to ani literární kroužek pro psaní epických incidentních románů. Je to krátký, pravdivý a použitelný záznam učení. Google SRE popisuje blameless postmortem jako kulturu, která hledá přispívající příčiny bez obviňování jednotlivců; Atlassian zase zdůrazňuje, že postmortem má zachytit dopad, kroky řešení, příčinu a následné akce. Pro malý SaaS tým z toho plyne jednoduché pravidlo: pište postmortem tak, aby podle něj šla udělat lepší změna, ne aby někdo vypadal chytře po bitvě.
+
+*Codyho komentář: věta „za to mohl deploy“ je stejně užitečná jako „za požár mohl oheň“. Technicky možná ano, ale jako prevence je to bída s logem.*
+
+### CE.1 Předem určete, kdy postmortem vzniká
+
+Pokud tým rozhoduje až po incidentu, jestli „to stálo za postmortem“, často vyhraje únava. Proto si napište spouštěče předem.
+
+Postmortem napište vždy, když nastane aspoň jedna z těchto situací:
+
+- zákazník viděl výpadek, ztrátu funkce nebo špatný výsledek,
+- došlo ke ztrátě, poškození, úniku nebo podezření na špatné zpřístupnění dat,
+- bylo nutné ručně zasáhnout do produkce, rollbacku, databáze nebo oprávnění,
+- monitoring problém nezachytil a přišel až od zákazníka,
+- řešení trvalo déle než předem domluvený limit,
+- incident odhalil nejasnou odpovědnost, chybějící runbook nebo slabý vendor proces,
+- někdo z týmu postmortem výslovně požádá.
+
+U malého týmu nemusí být každý postmortem dlouhý. Drobnější událost může mít jednostránkový záznam. Datový nebo bezpečnostní incident potřebuje pečlivější dokumentaci, protože se bude hodit pro právní posouzení, komunikaci a auditní stopu.
+
+### CE.2 Pište časovou osu faktů, ne rekonstrukci hrdinství
+
+Časová osa je páteř postmortemu. Má zachytit, co se kdy stalo, kdo co věděl a jaké rozhodnutí padlo. Nehodnoťte v ní lidi. Nepřikrášlujte tempo. Nevynechávejte slepé uličky jen proto, že vypadají trapně. Právě slepé uličky často ukážou, kde chybí signál, přístup nebo dokumentace.
+
+Dobrá časová osa obsahuje:
+
+- první signál problému,
+- čas potvrzení dopadu,
+- první mitigaci,
+- změny stavu pro zákazníky,
+- klíčová technická rozhodnutí,
+- komunikaci interně i externě,
+- okamžik obnovy služby,
+- pozdější zjištění po detailní analýze.
+
+Příklad:
+
+```md
+09:12 — Support dostal první zprávu, že formulář neodesílá potvrzení.
+09:18 — Technický vlastník potvrdil chybu v e-mailové integraci.
+09:25 — Formulář dočasně přepnut na záložní e-mailovou notifikaci.
+09:40 — Zákazníkům v dotčeném workflow poslána status zpráva.
+10:05 — Nalezena příčina: změna webhook secretu nebyla nasazena do produkčního prostředí.
+10:22 — Secret rotován, integrace obnovena, odeslán testovací lead.
+10:45 — Zkontrolováno, že žádné leady nebyly ztraceny; 6 zpráv bylo doručeno ručně.
+```
+
+Tohle je lepší než „ráno byl problém s e-mailem, opravili jsme“. Taková věta je pocit, ne paměť.
+
+### CE.3 Hledejte přispívající příčiny, ne jednoho pachatele
+
+Většina incidentů nemá jednu čistou příčinu. Má řetězec: změna konfigurace, chybějící kontrola, slabý alert, nejasný runbook, příliš široký přístup, testovací scénář mimo realitu, vendor chování, které nikdo nečekal. Když vyberete jen poslední článek, opravíte symptom.
+
+Ptejte se:
+
+- Co umožnilo, aby se chyba dostala do produkce?
+- Proč ji testy, review nebo monitoring nezachytily dřív?
+- Jaké informace tým v danou chvíli neměl?
+- Který runbook, alert, dashboard nebo vlastník chyběl?
+- Které rozhodnutí bylo rozumné podle tehdejších informací, ale zpětně potřebuje lepší podporu?
+- Jaký datový nebo privacy-first dopad incident měl nebo mohl mít?
+
+Blameless neznamená „nikdo nenese odpovědnost“. Znamená „řešíme systém, ve kterém lidé pracovali“. Odpovědnost pak vypadá jako konkrétní změna procesu, ne jako rituální oběť v komentářích.
+
+### CE.4 Privacy-first část nevynechávejte ani u technických incidentů
+
+I zdánlivě technický incident může mít datový dopad. Výpadek e-mailu může znamenat ruční exporty. Chyba v oprávnění může ukázat data jiného týmu. Ladění výkonu může vytvořit logy s citlivými parametry. Incident je přesně chvíle, kdy tým sahá po zkratkách.
+
+Do každého postmortemu přidejte krátkou privacy-first sekci:
+
+- Jaká data byla nebo mohla být zasažena?
+- Vznikly během řešení nové exporty, screenshoty, logy nebo kopie?
+- Kdo k nim měl přístup a kde jsou uložené?
+- Je potřeba něco smazat, anonymizovat nebo přesunout do bezpečného úložiště?
+- Dotkl se incident zpracovatele, subdodavatele nebo přenosu mimo EHP?
+- Je nutné upravit datovou mapu, retenční kalendář, DPA kartu nebo trust centrum?
+
+Pokud odpověď zní „nevíme“, zapište to jako otevřenou otázku s vlastníkem. Ne jako uklidňující ticho.
+
+### CE.5 Akční položky musí být malé a ověřitelné
+
+Nejhorší konec postmortemu je seznam typu „zlepšit monitoring“, „lépe komunikovat“, „víc testovat“. To jsou přání, ne akce. Dobrá akční položka má vlastníka, termín a důkaz dokončení.
+
+Špatně:
+
+- Zlepšit alerty.
+- Dát pozor na secrets.
+- Lépe dokumentovat incidenty.
+
+Lépe:
+
+- Do pátku přidat alert na chybu odeslání formuláře po třech selháních za 10 minut.
+- Přidat kontrolu přítomnosti `WEBHOOK_SECRET` do deploy smoke testu.
+- Vytvořit runbook „rotace e-mail webhook secretu“ a odkázat ho ze status karty.
+
+U každé položky napište i typ:
+
+- **Prevence:** snižuje šanci opakování.
+- **Detekce:** zkracuje dobu do zjištění.
+- **Reakce:** zrychluje mitigaci.
+- **Komunikace:** zlepšuje zprávy zákazníkům a týmu.
+- **Privacy úklid:** maže dočasná data, omezuje přístupy nebo opravuje datovou mapu.
+
+Malý tým by měl z jednoho postmortemu vybrat maximálně tři akce. Pokud jich vznikne dvanáct, vyberte první tři podle dopadu a zbytek dejte do backlogu jako signály. Postmortem nemá být generátor nekonečné práce. Má být generátor lepší práce.
+
+### CE.6 Šablona: postmortem na jednu stránku
+
+```md
+# Postmortem: [název incidentu]
+
+## Shrnutí
+- Co se stalo:
+- Dopad na zákazníky / tým / data:
+- Doba trvání:
+- Aktuální stav:
+
+## Časová osa
+- [čas] — [ověřený fakt]
+- [čas] — [ověřený fakt]
+
+## Přispívající příčiny
+- Technická:
+- Procesní:
+- Komunikační:
+- Datová / privacy-first:
+
+## Co fungovalo
+- [co pomohlo]
+
+## Co nefungovalo
+- [co zdrželo nebo zvýšilo riziko]
+
+## Privacy-first kontrola
+- Zasažená data:
+- Dočasné kopie / exporty:
+- Subdodavatelé:
+- Úklid dat:
+- Dokumentace k aktualizaci:
+
+## Akce
+- [akce] — vlastník — termín — důkaz dokončení
+- [akce] — vlastník — termín — důkaz dokončení
+```
+
+### Checklist: postmortem bez ztráty paměti
+
+- [ ] Máme předem dané spouštěče, kdy postmortem vzniká.
+- [ ] Časová osa odděluje ověřená fakta od hypotéz.
+- [ ] Text neobviňuje jednotlivce, ale hledá přispívající systémové příčiny.
+- [ ] Dopad na zákazníky, tým, data a provoz je popsaný konkrétně.
+- [ ] Privacy-first sekce řeší dočasné kopie, exporty, logy a subdodavatele.
+- [ ] Akční položky mají vlastníka, termín a důkaz dokončení.
+- [ ] Vybrali jsme maximálně tři nejdůležitější následné akce.
+- [ ] Postmortem je uložený tam, kde ho tým najde při příštím incidentu.
+- [ ] Relevantní poučení se promítlo do runbooku, monitoringu, backlogu nebo trust centra.
+
+### Mini cvičení: postmortem drill za 40 minut
+
+1. Vyberte jeden nedávný menší incident, chybu nebo provozní zásek.
+2. Během 10 minut napište časovou osu jen z ověřených faktů.
+3. Během 10 minut najděte tři přispívající příčiny mimo „někdo udělal chybu“.
+4. Během 10 minut projděte privacy-first otázky: data, exporty, logy, přístupy, dodavatelé.
+5. Během 5 minut vyberte nejvýše tři akční položky.
+6. Během 5 minut určete, kde postmortem bude uložený a kdy zkontrolujete dokončení akcí.
+
+Výstupem má být lepší systém, ne dokonale napsaná vina. Když se po postmortemu nic nezmění, nebylo to učení. Byla to schůzka s dramatickou hudbou v pozadí.
+
+### Zdroje k příloze CE
+
+- NIST SP 800-61 Rev. 3 z dubna 2025 popisuje incident response jako součást řízení kyberbezpečnostních rizik a zdůrazňuje přípravu, detekci, reakci, obnovu a zlepšování schopností: https://csrc.nist.gov/pubs/sp/800/61/r3/final
+- Google SRE Workbook vysvětluje blameless postmortem kulturu a doporučuje začít jednoduchým procesem, který se postupně ladí podle organizace: https://sre.google/workbook/postmortem-culture/
+- Google SRE Book popisuje postmortem jako záznam incidentu, dopadu, reakce, příčin a následných opatření a doporučuje předem definovat kritéria, kdy postmortem vzniká: https://sre.google/sre-book/postmortem-culture/
+- Atlassian Incident Management Handbook shrnuje postmortem jako záznam dopadu, kroků řešení, příčiny a follow-up akcí pro prevenci opakování: https://www.atlassian.com/incident-management/handbook/postmortems
+- ENISA technické guidance k NIS2 opatřením doporučuje incident handling policy s rolemi, odpovědnostmi a postupy pro detekci, analýzu, containment, reakci, obnovu, dokumentaci a reporting: https://www.enisa.europa.eu/sites/default/files/2025-06/ENISA_Technical_implementation_guidance_on_cybersecurity_risk_management_measures_version_1.0.pdf
+
 
 ## Pracovní log
+
+- 2026-08-25: Přidána příloha CE „Postmortem bez hledání viníka a bez ztráty paměti“ se spouštěči postmortemu, časovou osou, blameless analýzou, privacy-first kontrolou, akčními položkami, šablonou, checklistem, drillem a ověřenými NIST/Google SRE/Atlassian/ENISA zdroji.
 
 - 2026-08-25: Přidána příloha CD „Cookie lišta, která není UX past ani právní folklór“ s cookie inventářem, rozlišením nezbytných a volitelných položek, férovým consent UX, technickým pravidlem načítání po souhlasu, privacy-first měřením, šablonami, checklistem, 45minutovým auditem a ověřenými ÚOOÚ/EDPB/CNIL zdroji.
 
