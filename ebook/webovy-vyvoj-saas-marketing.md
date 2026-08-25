@@ -22024,7 +22024,175 @@ Výstupem není „musíme to ještě probrat“. Výstupem je karta, rozhodnut�
 - Evropská komise k Data Act vysvětluje cíl usnadnit zákazníkům datových služeb, včetně cloudových a edge služeb, přechod mezi poskytovateli: https://digital-strategy.ec.europa.eu/en/factpages/data-act-explained
 
 
+## CI. Přístupové revize a offboarding bez zapomenutých účtů
+
+Přístupy jsou zvláštní druh technického dluhu: většinou nejsou vidět, dokud někdo neodejde, nezmění roli, nepřibude externista, neunikne token nebo se v auditu nezeptá nepříjemně klidný člověk: „A proč má bývalý dodavatel pořád admina?“ V tu chvíli už nejde o administrativní detail. Jde o bezpečnost produktu, důvěru zákazníků a schopnost vysvětlit, kdo se může dostat k jakým datům.
+
+Privacy-first SaaS nemá přístupy řešit stylem „všichni jsme malý tým, tak si věříme“. Důvěra je fajn. Jenže účet s produkčním přístupem nerozlišuje mezi milým kolegou, ukradeným heslem a starým API tokenem z dob, kdy se všechno dělalo rychle, protože „MVP, vole“. Potřebujete systém, který je jednoduchý, pravidelný a dokazatelný.
+
+### CI.1 Přístup není odměna, ale pracovní potřeba
+
+Základní pravidlo zní: přístup existuje jen tehdy, když má konkrétní pracovní důvod, vlastníka a revizi. Ne „možná se bude hodit“. Ne „ať má radši všechno“. Ne „Petr to kdysi nastavoval“. To nejsou důvody, to jsou archeologické vrstvy budoucího průšvihu.
+
+U každého účtu si zapisujte minimálně:
+
+- kdo účet používá,
+- k jaké službě nebo prostředí patří,
+- jakou má roli,
+- proč ji potřebuje,
+- kdo přístup schválil,
+- kdy se má znovu zkontrolovat,
+- jak se přístup ruší.
+
+Pro malý tým nemusí jít o velký IAM systém. Na začátku stačí tabulka, interní dokument nebo jednoduchý registr v issue trackeru. Důležité je, aby přístupy nebyly rozptýlené v hlavách, chatech a zapomenutých pozvánkách. Hlava je skvělé místo pro nápady, ale mizerná databáze oprávnění.
+
+### CI.2 Rozdělte účty podle rizika
+
+Ne všechny účty jsou stejně nebezpečné. Přístup do nástroje pro plánování obsahu není totéž jako produkční databáze, billing, DNS nebo administrace identity provideru. Proto přístupy rozdělte do rizikových vrstev.
+
+Praktické členění:
+
+- **Vrstva 0 — veřejné nebo nízké riziko:** nástroje bez zákaznických dat a bez dopadu na provoz.
+- **Vrstva 1 — interní provoz:** projektové nástroje, dokumentace, support bez citlivých dat.
+- **Vrstva 2 — zákaznická nebo obchodní data:** CRM, helpdesk, analytika, fakturace, exporty.
+- **Vrstva 3 — kritická infrastruktura:** produkční databáze, hosting, identity provider, DNS, platební brána, zálohy, auditní logy.
+
+Pro vrstvy 2 a 3 platí přísnější režim: MFA, nejmenší oprávnění, žádné sdílené účty, časově omezené výjimky, auditní stopa a pravidelná revize. Pokud nástroj nic z toho neumí, není automaticky zakázaný, ale musí mít kompenzační opatření: menší rozsah dat, izolované použití, ruční kontrolu exportů nebo jasný exit plán.
+
+### CI.3 Přístupový onboarding musí být pomalejší než pozvánka do Slacku
+
+Když nastoupí nový člověk nebo externista, největší chyba je udělat jeden rychlý balík pozvánek. „Tady máš všechno, ať můžeš pracovat.“ Zní to efektivně. Ve skutečnosti tím vyrábíte oprávnění, která nikdo nedokáže později obhájit.
+
+Lepší postup:
+
+1. Nejdřív napište pracovní roli a první konkrétní úkoly.
+2. Potom určete minimální sadu nástrojů pro první týden.
+3. U každého nástroje nastavte nejnižší použitelnou roli.
+4. Kritické přístupy přidávejte až ve chvíli, kdy jsou opravdu potřeba.
+5. Po 14 dnech udělejte krátkou kontrolu: co chybí, co je navíc, co se dá ubrat.
+
+Externisté mají mít ještě jasnější hranice: časové omezení, oddělený účet, zákaz sdílených loginů, minimální přístup k produkci a domluvený offboarding už při startu spolupráce. Offboarding domluvený až při konci spolupráce je jako hasicí přístroj objednaný během požáru. Poetické, ale zbytečně dramatické.
+
+### CI.4 Offboarding není HR formalita
+
+Odchod člověka, změna role nebo konec dodavatele je bezpečnostní událost. Ne nutně incident, ale událost, která má mít postup. Čím víc SaaSů, integrací a automatizací používáte, tím méně se můžete spoléhat na ruční paměť.
+
+Offboarding checklist má začít před posledním dnem:
+
+- zrušit nebo převést primární účty,
+- odebrat role ve vrstvách 2 a 3,
+- rotovat sdílené nebo podezřelé tokeny,
+- zkontrolovat API klíče, webhooky a deploy klíče,
+- převést vlastnictví dokumentů, repozitářů, fakturace a domén,
+- ověřit, že e-mailové aliasy a forwarding neodnášejí data mimo tým,
+- zapsat dokončení do přístupového registru.
+
+Zvláštní pozornost dejte účtům, které nejsou navázané na člověka: servisní účty, deploy tokeny, integrační klíče, sdílené schránky a staré testovací identity. Ty často přežijí několik organizačních změn a tváří se nenápadně. Přesně proto jsou nebezpečné.
+
+### CI.5 Pravidelná revize: málo, ale poctivě
+
+Přístupová revize nemusí být celofiremní rituál s 280 řádky v tabulce a třemi týdny utrpení. Pro malý tým funguje rytmus podle rizika:
+
+- vrstva 3: měsíčně nebo po každé významné změně týmu,
+- vrstva 2: kvartálně,
+- vrstva 1: pololetně,
+- vrstva 0: při úklidu nástrojů nebo rušení projektu.
+
+Revize má odpovědět na čtyři otázky:
+
+1. Potřebuje člověk nebo služba tento přístup pořád?
+2. Potřebuje stejnou úroveň oprávnění?
+3. Existuje auditní stopa pro citlivé akce?
+4. Umíme přístup rychle odebrat, když bude potřeba?
+
+Když odpověď není jasná, výchozí rozhodnutí má být omezení, ne ponechání. Přístup, který nikdo neumí obhájit, není produktivní pohodlí. Je to otevřené okno.
+
+### CI.6 Privacy-first vrstva: méně lidí u méně dat
+
+Privacy-first přístup není jen o tom, kde data fyzicky běží. Je i o tom, kolik lidí, služeb a automatizací se k nim může dostat. Evropský hosting nepomůže, když má k databázi přístup půlka týmu, bývalý dodavatel, starý integrační token a supportní nástroj, který kopíruje všechno „pro lepší zákaznickou zkušenost“. Gratuluji, právě jste vyrobili evropský chaos v pěkném regionu.
+
+U citlivých dat používejte praktické brzdy:
+
+- support vidí jen data potřebná pro řešení konkrétního případu,
+- produkční databáze nemá být běžné pracovní prostředí,
+- exporty jsou omezené rolí, účelem a auditním zápisem,
+- přístup k billing údajům je oddělený od produktové administrace,
+- servisní účty mají vlastní roli a tajemství, ne lidský účet sdílený v týmu,
+- výjimky mají expiraci a vlastníka.
+
+Cílem není znemožnit práci. Cílem je, aby běžná práce nepotřebovala zbytečně široká oprávnění. Pokud většina každodenních úkolů vyžaduje admina, problém není v lidech. Problém je v návrhu produktu nebo provozu.
+
+### CI.7 Šablona: karta přístupu
+
+```markdown
+## Základ
+- Služba nebo systém:
+- Typ účtu: člověk / servisní účet / dodavatel / sdílená schránka
+- Vlastník:
+- Riziková vrstva: 0 / 1 / 2 / 3
+- Datum vytvoření:
+- Datum další revize:
+
+## Důvod
+- K čemu je přístup potřeba:
+- Jaký konkrétní úkol umožňuje:
+- Co se stane, když přístup odebereme:
+
+## Oprávnění
+- Role:
+- Prostředí: produkce / staging / interní / billing / infrastruktura
+- MFA nebo jiná ochrana:
+- Auditní log dostupný: ano / ne / částečně
+- Časové omezení nebo expirace:
+
+## Data
+- Kategorie dat, ke kterým přístup vede:
+- Exporty povoleny: ano / ne / omezeně
+- Přístup supportu nebo dodavatele:
+- Dopad při kompromitaci:
+
+## Offboarding
+- Jak se přístup ruší:
+- Navazující tokeny, klíče nebo webhooky:
+- Co se musí převést na jiného vlastníka:
+- Kdo potvrzuje dokončení:
+```
+
+### CI.8 Checklist: přístupy bez digitálních duchů
+
+- [ ] Každý přístup má vlastníka, důvod a datum revize.
+- [ ] Účty jsou rozdělené podle rizikové vrstvy.
+- [ ] Vrstva 2 a 3 má MFA, nejmenší oprávnění a žádné sdílené účty.
+- [ ] Kritické výjimky jsou časově omezené a zapsané.
+- [ ] Servisní účty, API klíče a webhooky mají vlastní evidenci.
+- [ ] Offboarding pokrývá nástroje, repozitáře, dokumenty, billing, domény, tokeny i e-mailové aliasy.
+- [ ] Exporty zákaznických dat jsou omezené rolí, účelem a auditní stopou.
+- [ ] Revize přístupů probíhá podle rizika, ne podle toho, kdy si někdo vzpomene.
+- [ ] Přístup, který nikdo neumí obhájit, se omezí nebo odebere.
+- [ ] Po každé změně role se kontrolují oprávnění, ne jen podpis v HR systému.
+
+### Mini cvičení: přístupový audit za 45 minut
+
+Vyberte tři nejkritičtější služby: hosting, databázi a billing nebo identity provider. Během 10 minut sepište všechny lidské účty. Během dalších 10 minut sepište servisní účty, API klíče, deploy klíče a webhooky. Potom 15 minut označujte každý přístup jako „potřeba“, „omezit“, „odebrat“ nebo „nevíme“. Posledních 10 minut udělejte jen jednu akci: odeberte jeden zbytečný přístup, snižte jednu roli, zapněte MFA, nastavte expiraci výjimky nebo vytvořte kartu pro nejrizikovější účet.
+
+Výstupem má být jedna konkrétní změna a seznam dalších dvou kontrol. Ne velká bezpečnostní strategie. Ta by skončila ve složce „Q4 priority“ a všichni víme, co to znamená. Ano, digitální hřbitov.
+
+### Codyho komentář
+
+Přístupové revize nejsou sexy. Nikdo kvůli nim netleská na demo day. Ale když je děláte dobře, zákazníkům se nestane, že jejich data pořád vidí někdo, kdo už dávno nemá důvod. To je přesně ten typ nudné profesionality, která odděluje stabilní SaaS od improvizované aplikace s fakturací.
+
+### Zdroje k příloze CI
+
+- GDPR článek 5 stanovuje principy zpracování osobních údajů včetně integrity, důvěrnosti a odpovědnosti správce: https://eur-lex.europa.eu/eli/reg/2016/679/oj
+- GDPR článek 32 popisuje bezpečnost zpracování a rizika neoprávněného zpřístupnění nebo přístupu k osobním údajům: https://eur-lex.europa.eu/eli/reg/2016/679/oj
+- ENISA Technical Implementation Guidance k NIS2 uvádí praktická opatření pro access control, RBAC, least privilege, správu identit a auditní stopy: https://www.enisa.europa.eu/publications/nis2-technical-implementation-guidance
+- NCSC doporučuje u SaaS aplikací uplatňovat least privilege a omezovat dopad kompromitovaných administrátorských identit pomocí vhodných rolí: https://www.ncsc.gov.uk/collection/cloud/using-cloud-services-securely/using-saas-securely
+- NIST SP 800-53 Rev. 5 zahrnuje kontrolu AC-2 pro account management a pravidla pro správu, změny a revize účtů: https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final
+
+
 ## Pracovní log
+
+- 2026-08-25: Přidána příloha CI „Přístupové revize a offboarding bez zapomenutých účtů“ s rizikovým členěním účtů, onboardingem, offboardingem, pravidelnou revizí oprávnění, privacy-first omezením přístupů, kartou přístupu, checklistem, mini auditem a ověřenými GDPR/ENISA/NCSC/NIST zdroji.
 
 - 2026-08-25: Přidána příloha CH „Dodavatelský due diligence bez tabulkového očistce“ s úrovněmi dopadu na data, provozními otázkami na vendory, DPA/SCC kontrolou, rozhodováním o přenosech mimo EHP, exit plánem, vendor review kartou, checklistem a ověřenými EU/EDPB zdroji.
 
