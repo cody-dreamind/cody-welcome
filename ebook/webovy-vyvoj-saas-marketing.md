@@ -349,6 +349,7 @@ CD. Cookie lišta, která není UX past ani právní folklór
 CE. Postmortem bez hledání viníka a bez ztráty paměti
 CF. AI asistenti v SaaS bez datového chaosu
 CG. Prompt injection a agentní nástroje bez bezpečnostní loterie
+CH. Dodavatelský due diligence bez tabulkového očistce
 
 ## 1. Web jako obchodní systém
 
@@ -21857,8 +21858,175 @@ Výstupem má být jedna konkrétní bezpečnostní změna, ne pocit, že „AI 
 - NIST AI 600-1 Generative AI Profile z 26. července 2024 doplňuje AI RMF o rizika generativní AI včetně škodlivého obsahu, úniku informací a potřeby měření a řízení rizik: https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf
 - ENISA ve frameworku dobrých kyberbezpečnostních praktik pro AI doporučuje řešit AI bezpečnost jako vícevrstvý problém v návaznosti na běžné ICT kontroly a AI-specifická rizika: https://www.enisa.europa.eu/publications/multilayer-framework-for-good-cybersecurity-practices-for-ai
 
+## CH. Dodavatelský due diligence bez tabulkového očistce
+
+Dodavatelský due diligence není rituál, při kterém pošlete vendorovi dvacetistránkový dotazník a pak doufáte, že odpověď „ano, bezpečnost řešíme“ magicky vyřešila riziko. Nevyřešila. Jen jste vyrobili soubor, který se dá založit do složky „kdyby se někdo ptal“. Což je mimochodem přesně místo, kde dobré řízení rizik chodí umřít.
+
+Privacy-first tým potřebuje praktičtější postup: rychle poznat, jestli dodavatel smí do vašeho provozu, s jakými daty, za jakých smluvních podmínek, jak se dá opustit a kdo to bude hlídat. Cílem není právní dokonalost. Cílem je rozhodnutí, které se dá za šest měsíců znovu pochopit.
+
+### CH.1 Rozdělte dodavatele podle dopadu na data
+
+Ne každý nástroj potřebuje stejnou kontrolu. Ikonová knihovna bez účtu a bez přenosu dat není stejné riziko jako CRM, support desk, hosting, analytika nebo AI nástroj napojený na interní znalostní bázi. Když všechno hodnotíte stejně, tým začne due diligence obcházet, protože ho právem považuje za administrativní cosplay.
+
+Použijte čtyři úrovně:
+
+- **Úroveň 0 — žádná osobní nebo zákaznická data:** nástroj slouží jen pro inspiraci, statické assety nebo lokální práci bez synchronizace.
+- **Úroveň 1 — veřejná nebo nízkoriziková data:** například plánování obsahu, veřejné texty, anonymní agregované metriky.
+- **Úroveň 2 — běžná zákaznická a provozní data:** e-mail, jméno, firma, support ticket, fakturační údaje, produktové eventy.
+- **Úroveň 3 — citlivý provoz:** hosting, databáze, autentizace, zálohy, AI nad interními dokumenty, přístupy administrátorů, bezpečnostní logy.
+
+Praktické pravidlo: úroveň 0 schválí vlastník týmu, úroveň 1 potřebuje krátkou kartu, úroveň 2 potřebuje DPA a datovou mapu, úroveň 3 potřebuje bezpečnostní a exit review. Ano, je to méně sexy než „prostě koupíme tool“. Ale levnější než migrovat vše v pátek večer, protože někdo zjistil, že export je placený enterprise doplněk.
+
+### CH.2 Ptejte se na provoz, ne na marketingové fráze
+
+Dobré otázky nejsou „jste bezpeční?“ nebo „jste GDPR compliant?“. Na to každý odpoví ano, protože málokterý obchodník se ráno probudí s touhou napsat „ne, jsme datová džungle“. Ptejte se tak, aby odpověď šla ověřit nebo převést do rozhodnutí.
+
+Minimální sada otázek:
+
+- Kde jsou data fyzicky uložena a kde mohou být zpracována?
+- Kdo je správce, zpracovatel nebo další zpracovatel?
+- Jaký seznam subdodavatelů platí pro náš případ použití?
+- Jak dostaneme oznámení o změně subdodavatele?
+- Jaké logy vznikají a jak dlouho se drží?
+- Jak funguje export všech našich dat?
+- Jak funguje mazání po ukončení smlouvy?
+- Kdo u dodavatele může přistupovat k zákaznickým datům a za jakých podmínek?
+- Existuje auditní stopa supportních přístupů?
+- Jaký je proces incidentního oznámení?
+
+Pokud vendor nedokáže odpovědět na základní otázky o datech, není to detail. Je to produktový signál. Možná je nástroj skvělý pro hobby projekt, ale ne pro SaaS, který chce v Evropě působit důvěryhodně.
+
+### CH.3 DPA není příloha, kterou nikdo nečte
+
+U zpracovatelů osobních údajů potřebujete smluvní režim podle role a typu zpracování. V evropském kontextu je důležité rozlišit běžnou zpracovatelskou smlouvu podle článku 28 GDPR, standardní smluvní doložky pro vztah správce–zpracovatel v EHP a standardní smluvní doložky pro přenos mimo EHP. Neházejte to do jednoho šuplíku s názvem „legal nějak“.
+
+V praxi si u každého dodavatele napište:
+
+- zda zpracovává osobní údaje vaším jménem,
+- jaký je účel zpracování,
+- jaké kategorie osobních údajů dostane,
+- jaké kategorie subjektů údajů se týkají,
+- jak dlouho zpracování trvá,
+- zda používá další zpracovatele,
+- zda dochází k přenosu mimo EHP,
+- jaká jsou opatření pro bezpečnost, audit, pomoc s právy subjektů údajů a ukončení služby.
+
+Tím se z právního dokumentu stává provozní mapa. A provozní mapa je přesně to, co chcete mít v ruce, když zákazník pošle bezpečnostní dotazník nebo když řešíte incident.
+
+### CH.4 Transfer mimo EHP vyžaduje rozhodnutí, ne pokrčení rameny
+
+Privacy-first neznamená, že nikdy nesmíte použít dodavatele mimo Evropu. Znamená to, že to nesmí být nevědomý default. Pokud data opouštějí EHP nebo k nim může mít přístup subjekt mimo EHP, napište si mechanismus přenosu, účel, rozsah dat, alternativy a důvod, proč je to přijatelné.
+
+Rozhodovací minimum:
+
+- Je dostupná evropská alternativa s rozumnými provozními parametry?
+- Je přenos nutný pro konkrétní funkci, nebo jen pohodlný?
+- Jaké kategorie dat se přenášejí?
+- Existuje rozhodnutí o odpovídající ochraně, SCC nebo jiný mechanismus?
+- Potřebujeme doplňující technická opatření, například šifrování, pseudonymizaci nebo omezení payloadu?
+- Umíme dodavatele opustit bez ztráty dat a provozní kontinuity?
+
+*Codyho komentář:* Když je jediný argument pro mimoevropský nástroj „všichni ho používají“, je to slabý argument. Všichni taky někdy pojmenovali soubor `final_v8_real_final`. Popularita není governance.
+
+### CH.5 Exit plán pište před podpisem, ne po rozchodu
+
+Nejlepší čas ptát se na export, mazání a migraci je před nákupem. Po podpisu smlouvy už se z otázky „umíte export?“ může stát veselá archeologie obchodních podmínek. Vendor lock-in často nevznikne proto, že by byl dodavatel zlý. Vznikne proto, že tým neví, jaká data v nástroji vznikají, jaké automatizace na ně navazují a kdo má klíče.
+
+U každého důležitého dodavatele si zapište:
+
+- formát exportu,
+- periodicitu testu exportu,
+- vlastníka přístupů,
+- seznam navazujících integrací,
+- postup vypnutí webhooks/API tokenů,
+- postup smazání nebo anonymizace dat,
+- kontaktní cestu pro urgentní incident,
+- náhradní provozní variantu na 24–72 hodin.
+
+Nemusíte mít detailní migrační projekt pro každý nástroj. Ale u úrovně 2 a 3 potřebujete vědět, co uděláte první den, když dodavatel zdraží, změní podmínky, vypadne, prodá se nebo začne posílat vaše data na dobrodružnou cestu kolem světa.
+
+### CH.6 Šablona: vendor review karta
+
+```markdown
+## Základ
+- Dodavatel:
+- Nástroj/služba:
+- Vlastník v týmu:
+- Úroveň dopadu na data: 0 / 1 / 2 / 3
+- Rozhodnutí: schválit / schválit s omezením / odložit / zamítnout
+
+## Použití
+- K čemu nástroj potřebujeme:
+- Co nahrazuje:
+- Co se stane, když ho nepoužijeme:
+- Alternativy v EU/EHP:
+
+## Data
+- Kategorie dat:
+- Kategorie subjektů údajů:
+- Region uložení:
+- Region zpracování:
+- Přístup supportu dodavatele:
+- Logy a retence:
+
+## Smlouvy a subdodavatelé
+- Role dodavatele: správce / zpracovatel / společný správce / jiná
+- DPA nebo SCC:
+- Subdodavatelé:
+- Oznámení změn subdodavatelů:
+- Přenos mimo EHP:
+
+## Bezpečnost
+- SSO/MFA:
+- Role a oprávnění:
+- Auditní log:
+- Incidentní oznámení:
+- Zálohy nebo obnova:
+
+## Exit
+- Exportní formát:
+- Test exportu:
+- Mazání po ukončení:
+- Navazující integrace:
+- Náhradní postup:
+
+## Revize
+- Datum schválení:
+- Další revize:
+- Co může změnit rozhodnutí:
+```
+
+### CH.7 Checklist: due diligence bez očistce
+
+- [ ] Dodavatel má přiřazenou úroveň dopadu na data.
+- [ ] Víme, proč nástroj potřebujeme a co se stane, když ho nevezmeme.
+- [ ] Známe kategorie dat, region uložení, region zpracování a supportní přístup.
+- [ ] Máme jasno, jestli dodavatel vystupuje jako správce, zpracovatel nebo jiná role.
+- [ ] U zpracovatele máme DPA nebo odpovídající smluvní režim.
+- [ ] U přenosu mimo EHP máme zapsaný mechanismus a důvod rozhodnutí.
+- [ ] Seznam subdodavatelů je dostupný a změny mají oznamovací proces.
+- [ ] Přístupy v nástroji podporují nejmenší oprávnění, ideálně SSO/MFA a auditní log.
+- [ ] Export a mazání nejsou jen slib v obchodním hovoru, ale ověřitelný postup.
+- [ ] Review karta má vlastníka a datum další kontroly.
+
+### Mini cvičení: vendor review za 60 minut
+
+Vyberte jeden nástroj, který používáte každý týden a zároveň v něm jsou zákaznická nebo provozní data. Během 10 minut určete úroveň dopadu na data. Během 15 minut vyplňte datovou část review karty. Během 15 minut projděte smluvní režim, subdodavatele a regiony. Během 10 minut napište exit minimum: export, mazání, integrace, náhradní postup. Posledních 10 minut rozhodněte jednu změnu: omezení dat, úprava přístupů, doplnění DPA, test exportu nebo hledání evropské alternativy.
+
+Výstupem není „musíme to ještě probrat“. Výstupem je karta, rozhodnutí a jeden konkrétní follow-up. Schůzka bez follow-upu je podcast s kalendářovou pozvánkou.
+
+### Zdroje k příloze CH
+
+- GDPR článek 28 popisuje požadavky na zpracovatele, další zpracovatele a smluvní závazky při zpracování osobních údajů: https://eur-lex.europa.eu/eli/reg/2016/679/oj
+- EDPB Guidelines 07/2020 k pojmům správce a zpracovatel vysvětlují odpovědnosti, zapojení zpracovatelů a návaznost dalších zpracovatelů: https://www.edpb.europa.eu/documents/guideline/guidelines-072020-on-the-concepts-of-controller-and-processor-in-the-gdpr_en
+- Evropská komise uvádí standardní smluvní doložky pro vztah správců a zpracovatelů v EU/EHP jako nástroj pro plnění požadavků článku 28 GDPR: https://commission.europa.eu/publications/standard-contractual-clauses-controllers-and-processors-eueea_en
+- Evropská komise popisuje pravidla mezinárodních přenosů osobních údajů mimo EHP včetně rozhodnutí o odpovídající ochraně, SCC, binding corporate rules a dalších mechanismů: https://commission.europa.eu/law/law-topic/data-protection/international-dimension-data-protection/rules-international-data-transfers_en
+- Evropská komise k Data Act vysvětluje cíl usnadnit zákazníkům datových služeb, včetně cloudových a edge služeb, přechod mezi poskytovateli: https://digital-strategy.ec.europa.eu/en/factpages/data-act-explained
+
 
 ## Pracovní log
+
+- 2026-08-25: Přidána příloha CH „Dodavatelský due diligence bez tabulkového očistce“ s úrovněmi dopadu na data, provozními otázkami na vendory, DPA/SCC kontrolou, rozhodováním o přenosech mimo EHP, exit plánem, vendor review kartou, checklistem a ověřenými EU/EDPB zdroji.
 
 - 2026-08-25: Přidána příloha CG „Prompt injection a agentní nástroje bez bezpečnostní loterie“ s rozdělením důvěry vstupů, návrhem omezených nástrojů, tříděním akcí podle rizika, auditním logem, testovacími scénáři, kartou nástroje, checklistem a ověřenými OWASP/NIST/ENISA zdroji.
 
