@@ -18860,7 +18860,196 @@ Hotovo znamená, že víte, co se skutečně načítá, ne jen co si myslíte, �
 - CNIL ve svých pravidlech pro cookies a další trackery zdůrazňuje, že odmítnutí má být stejně jednoduché jako přijetí a že pokračování v prohlížení samo o sobě nestačí jako souhlas: https://www.cnil.fr/en/cookies-and-other-tracking-devices
 - MDN Web Docs dokumentují `localStorage`, `sessionStorage` a cookies jako různé mechanismy ukládání dat v prohlížeči, které je vhodné při testování kontrolovat: https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
 
+
+## BR. E-mailové metriky bez sledovacích pixelů
+
+E-mail je pořád jeden z nejpraktičtějších kanálů pro SaaS, služby i obsahový marketing. Problém začíná ve chvíli, kdy se z něj stane malá sledovací laboratoř: otevření přes neviditelný pixel, kliky svázané s konkrétním člověkem, segmenty podle podezřele přesného chování a automatizace, která se tváří jako péče, ale voní jako stalking v obleku.
+
+Privacy-first e-mailový systém se ptá jinak: jaké signály opravdu potřebujeme k lepšímu obsahu, produktu nebo supportu? Většinou stačí méně dat, než tvrdí marketingový nástroj. Doručitelnost, odpovědi, odhlášení, agregované kliky, ručně označený zájem a kvalitativní zpětná vazba často řeknou víc než graf otevření, který navíc kazí ochrany soukromí v mailových klientech. Ano, metrika může být přesná asi jako mokrý prst ve větru s certifikátem enterprise.
+
+*Codyho komentář:* Můj pohled: e-mail bez tracking pixelu není krok zpět. Je to dospělý kanál, kde si přiznáme, že důvěra je cennější než falešná přesnost open rate.
+
+### BR.1 Nejdřív rozhodnutí, potom metrika
+
+Před měřením si napište, jaké rozhodnutí má metrika podpořit. Pokud neumíte dokončit větu „když uvidíme X, uděláme Y“, metriku pravděpodobně nepotřebujete.
+
+Dobré rozhodovací otázky:
+
+- Máme posílat méně často, nebo častěji?
+- Které téma vede k reálné odpovědi, poptávce nebo aktivaci?
+- Který onboardingový e-mail lidem pomáhá dokončit první užitečný krok?
+- Kde lidé očekávali něco jiného, než dostali?
+- Který segment potřebuje jiný obsah, protože má jinou práci k dokončení?
+- Které automatizace můžeme vypnout, protože nepřinášejí hodnotu?
+
+Špatná otázka zní: „Jak zvýšíme open rate?“ Lepší otázka zní: „Pomáhá tenhle e-mail člověku udělat další smysluplný krok?“ Open rate je jen nepřímý a často rozbitý signál. Odpověď, klik na jasný zdroj, dokončený onboardingový krok nebo snížení support dotazů bývá praktičtější.
+
+### BR.2 Open tracking berte jako volitelný rizikový signál
+
+Tracking pixel funguje tak, že e-mail obsahuje malý vzdálený obrázek. Když ho klient načte, systém si může zapsat otevření, čas, technické údaje a někdy i další kontext. Jenže moderní e-mailové klienty obrázky blokují, cachují nebo načítají přes proxy. Výsledek: číslo v dashboardu vypadá hezky, ale nemusí znamenat skutečné přečtení.
+
+Privacy-first pravidlo:
+
+- nepoužívejte open tracking jako hlavní KPI,
+- nevytvářejte z otevření individuální profil zájmu,
+- nepouštějte automatizace typu „otevřel třikrát, tlač víc“,
+- vysvětlete v privacy textu, pokud vzdálené obrázky nebo link tracking používáte,
+- umožněte odhlášení a preferenční změny bez ponižujícího bludiště,
+- u důležitých provozních e-mailů neměřte víc, než potřebujete pro doručení a bezpečnost.
+
+Pokud open tracking zapnete, napište si proč. Například krátkodobý test doručitelnosti u nové domény může mít smysl. Trvalé individuální skórování každého newsletterového čtenáře už je jiná liga — a ne ta hezká.
+
+### BR.3 Měřte kliky opatrně a s kontextem
+
+Klik je silnější signál než otevření, protože uživatel provedl konkrétní akci. I tady ale platí: méně je často víc. Není nutné ukládat kompletní osobní historii každého kliknutí navždy jen proto, že to nástroj umí.
+
+Praktická varianta pro malý tým:
+
+- používejte UTM parametry pro agregované vyhodnocení kampaní,
+- link tracking používejte jen tam, kde z něj plyne konkrétní rozhodnutí,
+- u produktových onboarding e-mailů měřte spíš dokončení kroku v aplikaci než samotný klik,
+- retenci detailních kliků nastavte krátce,
+- do URL nedávejte e-mail, jméno, firmu ani jiné osobní údaje,
+- pro veřejný obsah preferujte přímé URL bez přesměrovacích mezivrstev, pokud detailní měření nepotřebujete.
+
+Příklad: u článku v newsletteru může stačit `?utm_source=newsletter&utm_medium=email&utm_campaign=saas-onboarding-2026-08`. Nepotřebujete vědět, že Franta z účetnictví klikl přesně v 8:42 z tramvaje. A pokud si myslíte, že to potřebujete, dejte si kávu a napište rozhodnutí, které tím opravdu zlepšíte.
+
+### BR.4 Nahraďte šmírování kvalitnějšími signály
+
+Nejlepší e-mailové signály často nejsou tajné. Jsou explicitní.
+
+Používejte například:
+
+- odpověď na e-mail,
+- klik na jasně popsaný zdroj,
+- vyplněnou preferenci témat,
+- dokončený onboardingový krok,
+- aktivaci funkce v produktu,
+- odhlášení nebo snížení frekvence,
+- krátkou otázku „bylo to užitečné?“ s jedním klikem,
+- ručně označený zájem po obchodním hovoru,
+- support dotaz, který ukáže nejasnost v obsahu.
+
+Rozdíl je v respektu. Místo skrytého odhadování se lidí ptáte, nebo měříte výsledek, který souvisí s hodnotou. Privacy-first marketing není slepý. Jen nepotřebuje dalekohled namířený do obýváku.
+
+### BR.5 Segmentace podle úmyslu, ne podle každého pohybu
+
+Segmentace je užitečná, když pomáhá poslat relevantnější obsah. Je škodlivá, když z lidí dělá sbírku behaviorálních štítků, které nikdo neumí vysvětlit.
+
+Dobré segmenty pro B2B SaaS:
+
+- role: zakladatel, vývojář, marketér, provozní člověk,
+- fáze: zvažuje, testuje, aktivoval, platí, řeší obnovu,
+- zájem: web, SaaS, privacy, marketing, AI funkce,
+- jazyk a region,
+- explicitní preference frekvence,
+- zákaznický typ: self-service, agentura, enterprise lead.
+
+Špatné segmenty:
+
+- „otevřel posledních 7 e-mailů, ale neklikl, pošli tlakový follow-up“,
+- „navštívil pricing třikrát, ukaž mu agresivní slevu“,
+- „čte v noci, asi je zoufalý lead“,
+- „neaktivní = spamuj, dokud se neprobudí nebo neodhlásí“.
+
+Segment má mít název, účel, zdroj dat, vlastníka a datum revize. Pokud segment nikdo nepoužil pro rozhodnutí za posledních 90 dní, smažte ho. Datová půda zarůstá rychle. Bohužel ne bazalkou.
+
+### BR.6 Onboardingové e-maily měřte přes hodnotu
+
+U SaaSu je lákavé měřit onboarding přes otevření každé zprávy. Lepší je měřit, jestli e-mail pomohl uživateli udělat první hodnotný krok.
+
+Příklad metrické karty:
+
+## E-mail
+
+Název: „Importujte první projekt“  
+Účel: pomoct novému účtu dostat data do produktu  
+Adresát: nový administrátor účtu do 24 hodin od registrace
+
+## Hlavní signál
+
+Aktivační krok: vytvořen první projekt a přidán první člen týmu  
+Časové okno: 7 dní od registrace  
+Rozhodnutí: pokud méně než 35 % účtů dokončí krok, upravíme text, prázdný stav nebo importní flow
+
+## Vedlejší signály
+
+- odpovědi na e-mail,
+- klik na dokumentaci,
+- support dotazy k importu,
+- odhlášení z onboarding série,
+- agregovaný počet doručených a bouncnutých zpráv.
+
+## Privacy-first pravidla
+
+- žádné ukládání individuálního open score,
+- žádné citlivé údaje v UTM parametrech,
+- detailní eventy držet krátce,
+- reportovat agregovaně po kohortách,
+- explicitně popsat, které provozní zprávy uživatel dostává a proč.
+
+Taková karta posouvá debatu od „předmět měl nízký open rate“ k „uživatelé nerozumí importu“. To je užitečnější problém. A také méně marketingové astrologie.
+
+### BR.7 Reaktivační kampaně bez nátlaku
+
+Reaktivace je citlivá disciplína. Když někdo dlouho nereaguje, možná nechce být reaktivován. Šokující koncept, já vím.
+
+Férový reaktivační postup:
+
+1. Zkontrolujte, jestli e-mail má reálný důvod: bezpečnost, hodnota, změna produktu, konec trialu nebo volba preferencí.
+2. Pošlete jednu jasnou zprávu s možností snížit frekvenci nebo se odhlásit.
+3. Nepoužívejte temné vzorce typu „budeme plakat, jestli odejdete“.
+4. Nezvyšujte tlak podle otevření nebo neotevření.
+5. Po neaktivitě kontakt archivujte, omezte nebo smažte podle retenční politiky.
+6. U placených zákazníků oddělte obchodní kontakt, fakturaci a produktovou komunikaci.
+
+Dobrá věta v reaktivačním e-mailu:
+
+„Posíláme vám poslední zprávu k této sérii, protože jste dlouho nereagovali. Pokud chcete zůstat u měsíčních tipů, potvrďte zájem tady. Pokud ne, nic nemusíte dělat.“
+
+Tohle je krátké, slušné a bez emocionálního vydírání. Internet přežije.
+
+### BR.8 Checklist: e-mailové metriky bez sledovacích pixelů
+
+- [ ] Každá e-mailová metrika má napsané rozhodnutí, které podporuje.
+- [ ] Open tracking není hlavní KPI pro obsah, onboarding ani obchod.
+- [ ] Link tracking používáme jen tam, kde má jasný účel.
+- [ ] UTM parametry neobsahují osobní údaje.
+- [ ] Segmenty jsou vysvětlitelné, malé a pravidelně revidované.
+- [ ] Onboarding měří hodnotový krok v produktu, ne jen otevření zprávy.
+- [ ] Reaktivační kampaně mají limit počtu zpráv a férové odhlášení.
+- [ ] Preference témat a frekvence jsou dostupné bez support lístku.
+- [ ] Detailní e-mailové eventy mají krátkou retenci.
+- [ ] Privacy text popisuje, jestli používáme vzdálené obrázky, link tracking nebo profilování.
+- [ ] Doručitelnost sledujeme bez sběru zbytečných osobních dat.
+- [ ] Staré neaktivní kontakty pravidelně mažeme nebo anonymizujeme podle retenční politiky.
+
+### Mini cvičení: e-mail audit za 50 minut
+
+Vyberte jednu newsletterovou kampaň a jednu onboardingovou sérii. Pak udělejte rychlý audit:
+
+1. Sepište všechny metriky, které nástroj ukazuje.
+2. U každé napište rozhodnutí, které podle ní opravdu děláte.
+3. Označte metriky založené na otevření e-mailu.
+4. Zkontrolujte, jestli URL neobsahují osobní údaje.
+5. Vyberte jeden segment, který smažete nebo zjednodušíte.
+6. Přepište jeden KPI z „open/click“ na hodnotový výsledek.
+7. Aktualizujte privacy text nebo datovou mapu, pokud realita neodpovídá dokumentaci.
+
+Výstup má být jedna stránka: co měříme, proč to měříme, co vypneme a co budeme sledovat místo toho. Pokud po auditu zůstane méně grafů, ale lepší rozhodnutí, gratuluju — přesně to byl plán.
+
+### Zdroje k příloze BR
+
+- EDPB Guidelines 05/2020 on consent shrnují požadavky na svobodný, konkrétní, informovaný a jednoznačný souhlas podle GDPR: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-052020-consent-under-regulation-2016679_en
+- Směrnice 2002/58/ES o soukromí a elektronických komunikacích upravuje mimo jiné ukládání a získávání informací z koncového zařízení uživatele: https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=CELEX%3A02002L0058-20091219
+- GDPR článek 5 stanovuje zásady zpracování osobních údajů, včetně minimalizace údajů, účelového omezení a omezení uložení: https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=CELEX%3A02016R0679-20160504
+- CNIL v pravidlech pro cookies a další trackery vysvětluje, že trackery, které nejsou nezbytné, vyžadují souhlas a že odmítnutí má být stejně jednoduché jako přijetí: https://www.cnil.fr/en/cookies-and-other-tracking-devices
+- Apple Mail Privacy Protection dokumentace popisuje, že Mail může načítat vzdálený obsah přes proxy a tím ovlivňovat spolehlivost open-rate měření: https://support.apple.com/en-us/102289
+
 ## Pracovní log
+
+- 2026-08-25: Přidána příloha BR „E-mailové metriky bez sledovacích pixelů“ s rozhodovacím rámcem pro e-mailové metriky, privacy-first přístupem k open/click trackingu, segmentací, onboardingem, reaktivací, checklistem, mini auditem a ověřenými EDPB/EU/CNIL/Apple zdroji.
+
 
 - 2026-08-25: Obnovena poškozená verze e-booku z posledního nepoškozeného commitu a přidána příloha BQ „Consent regression test“ s ručními a automatizovanými scénáři, testovací kartou, checklistem, mini cvičením a ověřenými EDPB/CNIL/MDN zdroji.
 
