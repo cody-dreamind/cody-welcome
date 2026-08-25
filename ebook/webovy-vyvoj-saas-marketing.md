@@ -332,6 +332,17 @@ BM. Privacy impact check bez právního paralyzéru
 BN. Žádosti subjektů údajů bez support chaosu
 BO. Evals pro AI funkce bez falešné jistoty
 BP. Secrets management bez tokenů v chatu
+BQ. Consent regression test: aby cookie lišta nebyla jen hezká kulisa
+BR. E-mailové metriky bez sledovacích pixelů
+BS. Exit plán dodavatele: aby vendor lock-in nebyl firemní rukojmí
+BT. Passkeys a obnova účtu bez bezpečnostní pasti
+BU. Zákaznické rozhovory bez datového batohu
+BV. Feature flags a postupné releasy bez produkčního hazardu
+BW. Produktové eventy bez analytického šmírování
+BX. Incidentní komunikace bez paniky a mlžení
+BY. Žádosti subjektů údajů bez supportového chaosu
+BZ. CRM a lead pipeline bez osobního datového smetiště
+CA. Datové předávky mezi nástroji bez integračního tunelu hrůzy
 
 ## 1. Web jako obchodní systém
 
@@ -20618,7 +20629,174 @@ Můj pohled: dobré CRM není to, které ví o člověku nejvíc. Dobré CRM je 
 - ICO prakticky popisuje princip minimalizace dat jako povinnost sbírat a držet jen osobní údaje potřebné pro konkrétní účel a umět to doložit: https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/data-protection-principles/a-guide-to-the-data-protection-principles/data-minimisation/
 
 
+## CA. Datové předávky mezi nástroji bez integračního tunelu hrůzy
+
+Integrace jsou skvělé do chvíle, než se z nich stane neviditelné potrubí, kterým tečou osobní údaje, obchodní poznámky, supportní kontext a interní metadata do sedmi nástrojů, o kterých už nikdo neví. Pak se někdo zeptá „kde všude je e-mail zákazníka?“ a místnost náhle objeví krásu ticha. Takového toho ticha, které stojí peníze.
+
+Privacy-first tým bere každou datovou předávku jako malé rozhraní s vlastníkem, účelem, rozsahem a pravidlem ukončení. Ne jako technický detail schovaný ve webhooku. Integrace totiž není jen „když přijde formulář, pošli to do CRM“. Je to právní, bezpečnostní, produktové a provozní rozhodnutí v jednom balíčku. Ano, balíček s mašlí z auditního logu.
+
+### CA.1 Začněte katalogem předávek, ne kresbou celé galaxie
+
+Nemusíte hned vytvářet dokonalou enterprise datovou architekturu. Pro malý SaaS nebo web stačí katalog datových předávek: přehled, odkud kam data putují, proč, kdo za tok odpovídá a jak poznáte, že je pořád potřeba.
+
+Minimální katalog:
+
+- **Zdroj** — formulář, aplikace, billing, support, analytika, e-mail, administrace.
+- **Cíl** — CRM, helpdesk, účetnictví, e-mailing, interní dashboard, datový sklad.
+- **Spouštěč** — odeslání formuláře, platba, změna tarifu, ticket, ruční export, cron.
+- **Předávaná data** — konkrétní pole, ne neurčité „user data“.
+- **Účel** — obchodní follow-up, fakturace, support, bezpečnost, produktové rozhodnutí.
+- **Právní role** — správce, zpracovatel, samostatný správce nebo společné správcovství.
+- **Retence** — jak dlouho data v cíli zůstávají a kdo je maže.
+- **Vlastník** — člověk, který umí tok vysvětlit a vypnout.
+
+Praktický příklad: když lead formulář posílá jméno, e-mail, firmu, zprávu, UTM zdroj a souhlas do CRM, katalog má říct přesně tohle. Ne „web → obchod“. To je popis vhodný pro nástěnku v zasedačce, ne pro provoz.
+
+### CA.2 Předávka má mít kontrakt jako API
+
+Každý datový tok si zaslouží malý kontrakt. Nemusí to být OpenAPI specifikace dlouhá jako telefonní seznam, ale musí být jasné, co tok smí poslat, kdy, komu a co se stane při chybě.
+
+Kontrakt předávky odpovídá na otázky:
+
+- Jaká pole jsou povinná?
+- Jaká pole jsou volitelná?
+- Která pole jsou výslovně zakázaná?
+- Posílají se data okamžitě, dávkově, nebo ručně?
+- Jak se řeší chyba, timeout nebo duplicitní odeslání?
+- Loguje se obsah dat, nebo jen technický stav?
+- Kdo schvaluje změnu pole nebo přidání cílového nástroje?
+
+Dobré zakázané pole je například „celá poznámka obchodníka“ u automatického předání do marketingového nástroje. Obchodní poznámka může obsahovat citlivý kontext, který marketing nepotřebuje. Pokud se něco nevejde do účelu předávky, nepatří do payloadu. A pokud to někdo chce „pro jistotu“, je to přesně ten moment, kdy se má otevřít datová karta, ne Slack anketa.
+
+### CA.3 Minimalizujte payload, ne jen počet nástrojů
+
+Tým často řeší, kolik má nástrojů. To je důležité, ale nestačí. Jeden špatně navržený webhook může být větší problém než tři dobře omezené nástroje. Klíčové je, kolik dat posíláte, jak detailní jsou a jestli se dají spojit do profilu člověka.
+
+Pravidla pro payload:
+
+- Posílejte identifikátor záznamu místo celého objektu, pokud cílový systém detail nepotřebuje.
+- U marketingu preferujte agregované nebo segmentové signály místo historie jednotlivce.
+- U supportu neposílejte billing detaily, pokud support řeší jen technický problém.
+- U produktové analytiky neposílejte e-mail, jméno ani firmu, pokud stačí anonymní workspace ID.
+- U interních notifikací neposílejte celé zprávy zákazníka do chatu, pokud stačí odkaz do systému s oprávněním.
+
+Příklad: notifikace „Nová poptávka z webu: SaaS audit, zdroj: organic, vlastník: obchod“ je výrazně bezpečnější než automaticky poslaný celý obsah formuláře do týmového chatu. Chat je pohodlný, ale často mizerně ohraničený archiv. Pohodlí bez hranic je jen budoucí incident v tričku „rychlá automatizace“.
+
+### CA.4 Integrace musí mít režim poruchy
+
+Datová předávka není hotová tím, že prošel první test. Musíte vědět, co se stane, když cíl vypadne, webhook se zopakuje, API vrátí chybu nebo někdo změní pole bez oznámení.
+
+Pro každý důležitý tok nastavte:
+
+- **Idempotenci** — opakované volání nevytvoří pět stejných leadů.
+- **Retry pravidla** — kolikrát a jak dlouho se opakuje neúspěšné odeslání.
+- **Dead letter seznam** — kam padají nezpracované události k ruční opravě.
+- **Alert** — kdo se dozví, že předávka selhává.
+- **Ruční náhradní postup** — co tým udělá, když integrace nejde obnovit hned.
+- **Auditní stopu** — kdy, kam a s jakým výsledkem se data poslala.
+
+Pozor na logy. Při ladění je lákavé uložit celý request a response. Jenže log není bezpečný trezor. Do provozních logů patří technický stav, ID záznamu, typ chyby a čas. Celé osobní údaje nebo obsah zprávy jen ve výjimečném, zdůvodněném a omezeném režimu.
+
+### CA.5 Změny předávek schvalujte jako změny produktu
+
+Přidání jednoho pole do integrace vypadá nevinně. „Pošleme do CRM ještě telefon, preferovaný rozpočet a poznámku z briefu.“ Jenže tím měníte rozsah zpracování, přístupová práva, retenci a možná i informační povinnost vůči člověku. Gratuluji, právě jste z produktové drobnosti udělali privacy změnu. Nebolí to, když ji zachytíte včas.
+
+Před změnou toku se zeptejte:
+
+- Podporuje nové pole konkrétní rozhodnutí nebo proces?
+- Má cílový nástroj právo a potřebu pole vidět?
+- Je pole uvedené v datové mapě, zásadách ochrany osobních údajů nebo interní dokumentaci?
+- Změní se právní základ, retence nebo seznam zpracovatelů?
+- Umíme pole exportovat, opravit a smazat?
+- Je potřeba upravit smlouvu, DPA nebo seznam subprocesorů?
+
+Oficiální GDPR rámec pro vztah správce a zpracovatele stojí hlavně na článku 28 GDPR a EDPB výklad k rolím správce a zpracovatele připomíná, že role se mají posuzovat podle skutečné rozhodovací moci nad účely a prostředky zpracování, ne podle názvu v obchodní smlouvě. Prakticky: u každé integrace si ověřte, jestli dodavatel jen zpracovává data pro vás, nebo s nimi rozhoduje i pro vlastní účely.
+
+### CA.6 Šablona: karta datové předávky
+
+```markdown
+# Datová předávka: [název toku]
+
+## Účel
+- Proč tok existuje:
+- Jaké rozhodnutí nebo proces podporuje:
+- Co se stane, když tok vypneme:
+
+## Zdroj a cíl
+- Zdrojový systém:
+- Cílový systém:
+- Spouštěč:
+- Frekvence:
+- Vlastník:
+
+## Data
+- Povinná pole:
+- Volitelná pole:
+- Zakázaná pole:
+- Identifikátory:
+- Obsahuje zvláštní kategorie údajů? ano/ne:
+
+## Právní a smluvní režim
+- Role stran:
+- Právní základ / účel:
+- DPA nebo smluvní ujednání:
+- Subprocesoři:
+- Přenos mimo EU/EHP:
+
+## Provoz
+- Retry pravidla:
+- Chybová fronta:
+- Alert:
+- Auditní stopa:
+- Retence v cíli:
+- Postup vypnutí:
+
+## Revize
+- Datum poslední kontroly:
+- Příští revize:
+- Rozhodnutí: ponechat / omezit / vypnout
+```
+
+### CA.7 Checklist: datové předávky bez tunelu hrůzy
+
+- [ ] Každá automatická předávka má zdroj, cíl, účel a vlastníka.
+- [ ] Payload obsahuje jen pole nutná pro daný proces.
+- [ ] Zakázaná pole jsou explicitně uvedená, ne jen „dáme pozor“.
+- [ ] Cílový nástroj má jasnou právní roli a smluvní režim.
+- [ ] Přenosy mimo EU/EHP jsou vědomé rozhodnutí, ne vedlejší efekt nástroje.
+- [ ] Logy neobsahují celé osobní údaje ani obsah zákaznických zpráv bez důvodu.
+- [ ] Chyby mají retry pravidla, dead letter místo a vlastníka.
+- [ ] Změna pole v integraci prochází privacy-first kontrolou.
+- [ ] Tok se dá vypnout bez rozbití celého produktu.
+- [ ] Při žádosti o přístup, opravu nebo výmaz víme, ve kterých cílech data hledat.
+
+### Mini cvičení: integrační detox za 60 minut
+
+1. Vyberte jeden konkrétní tok, například webový formulář → CRM nebo aplikace → e-mailing.
+2. Vypište všechna pole, která se posílají dnes.
+3. U každého pole napište účel jednou větou.
+4. Označte pole, která cílový nástroj nepotřebuje k žádnému rozhodnutí.
+5. Zkontrolujte, jestli se celý payload neukládá v logu, chatu nebo automatizační platformě.
+6. Dopište vlastníka, retry pravidla a postup vypnutí.
+7. Udělejte jednu změnu hned: smažte pole, zkraťte payload, nebo omezte notifikaci.
+
+Výstupem není krásný diagram. Výstupem je menší datový batoh a jeden tok, který tým umí vysvětlit. Diagram si nakreslete až potom. Prosím. Diagramy jsou fajn, ale osobní údaje se podle nich samy nesmažou.
+
+### Codyho komentář
+
+Integrace jsou místo, kde se nejčastěji potká dobrý úmysl s provozní realitou. „Ať se to automaticky pošle všude, kde by se to mohlo hodit“ zní produktivně, dokud někdo nepotřebuje data opravit, exportovat nebo smazat. Můj pohled: nejlepší integrace je nudná, omezená, zdokumentovaná a snadno vypnutelná. Ano, nudná. V bezpečnosti je nuda kompliment.
+
+### Zdroje k příloze CA
+
+- GDPR článek 5 — zásady zpracování včetně minimalizace údajů, omezení účelu a omezení uložení: https://gdpr-info.eu/art-5-gdpr/
+- GDPR článek 28 — povinnosti při zapojení zpracovatele: https://gdpr-info.eu/art-28-gdpr/
+- EDPB Guidelines 07/2020 on the concepts of controller and processor in the GDPR — výklad rolí správce, zpracovatele a společných správců: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-072020-concepts-controller-and-processor-gdpr_en
+- EDPB Guidelines 01/2022 on data subject rights — right of access — praktický kontext pro dohledatelnost osobních údajů v systémech: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-012022-data-subject-rights-right-access_en
+
+
 ## Pracovní log
+
+- 2026-08-25: Přidána příloha CA „Datové předávky mezi nástroji bez integračního tunelu hrůzy“ s katalogem předávek, kontraktem toku, minimalizací payloadu, poruchovým režimem, šablonou karty, integračním detoxem a ověřenými zdroji.
 
 - 2026-08-25: Přidána příloha BZ „CRM a lead pipeline bez osobního datového smetiště“ s návrhem stavů kontaktů, CRM poli, lead scoringem, retencí, integrační mapou, datovou kartou, checklistem, hodinovým CRM detoxem a ověřenými GDPR/EDPB/Evropská komise/ICO zdroji.
 
