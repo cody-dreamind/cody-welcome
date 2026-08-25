@@ -19105,6 +19105,8 @@ Jednou za kvartál vyberte jednoho vysokorizikového dodavatele a zkuste malý e
 
 Důležité je neřešit jen „data existují“. Řešte, jestli jsou použitelná. CSV bez ID vztahů, export kontaktů bez souhlasů, faktury bez vazby na zákazníka nebo support tikety bez příloh jsou hezké artefakty, ale mizerný plán obnovy.
 
+Praktický detail navíc: k exportu přiložte krátký `README` pro budoucího člověka v krizi. Stačí popsat, odkud soubor vznikl, kdy byl stažený, jaké filtry byly použité, co v něm chybí a jak poznat, že import do náhradního systému proběhl správně. Export bez kontextu je totiž často jen datová fosilie s lepším názvem souboru.
+
 ### BS.4 Přenositelnost není jen právní pojem
 
 GDPR zná právo na přenositelnost údajů, ale produktový tým by měl přemýšlet šíř. Uživatelé, zákazníci i vaše vlastní firma potřebují data ve srozumitelném, strojově čitelném a dokumentovaném formátu. Ne proto, že to zní pěkně v trust centru, ale protože to snižuje závislost a zvyšuje důvěru.
