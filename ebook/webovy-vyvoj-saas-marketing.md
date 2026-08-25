@@ -20442,7 +20442,185 @@ Můj pohled: DSR proces je skvělý lakmusový papírek datové hygieny. Pokud n
 - Evropská komise u právních základů zpracování připomíná, že odvolání souhlasu má být možné a že po odvolání je potřeba ukončit zpracování pro daný účel, pokud neexistuje jiný právní základ: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/legal-grounds-processing-data_en
 
 
+## BZ. CRM a lead pipeline bez osobního datového smetiště
+
+CRM má malému týmu pomoct pochopit, s kým mluví, co člověk potřebuje a jaký je další férový krok. Nemá být firemní půda, kam se hází vizitky, exporty z eventů, poznámky z oběda, staré kampaně a „to se jednou bude hodit“. Nebude. Jen to bude jednou auditovat právník, správce systému nebo nešťastný člověk v supportu. Gratuluji, vyhráli jste archeologii s osobními údaji.
+
+Privacy-first CRM začíná jednoduchou otázkou: **která data potřebujeme pro konkrétní obchodní rozhodnutí právě teď?** Pokud pole nepomáhá kvalifikovat poptávku, domluvit další krok, splnit smluvní povinnost nebo udržet kontext zákaznického vztahu, patří pryč. Ne do skryté záložky. Pryč.
+
+### BZ.1 Rozdělte kontakty podle vztahu, ne podle optimismu
+
+Většina CRM chaosu vzniká z toho, že se všichni lidé tváří jako „leady“. Jenže člověk, který stáhl checklist, není totéž co firma, která požádala o nabídku. Účastník workshopu není totéž co zákazník v obnově smlouvy. A člověk, který se jednou zeptal na cenu, není navždy marketingové palivo. Bohužel, i když by tabulka ráda.
+
+Praktické rozdělení:
+
+- **Kontakt** — člověk nebo firma, se kterou máme legitimní důvod komunikovat.
+- **Lead** — kontakt s jasným problémem, který souvisí s naší nabídkou.
+- **Opportunity** — kvalifikovaná obchodní příležitost s dalším krokem, hodnotou a termínem.
+- **Zákazník** — aktivní smluvní vztah, fakturace, support, provozní komunikace.
+- **Archiv** — vztah bez aktuálního dalšího kroku, ale s oprávněným důvodem k omezenému uchování.
+
+Každý stav musí mít pravidlo, jak do něj kontakt vstoupí, co se v něm smí dělat a kdy z něj vypadne. Pokud se kontakt nedokáže pohnout žádným směrem, není to pipeline. Je to rybníček pro CRM kapry.
+
+### BZ.2 Pole v CRM navrhujte jako produktové rozhraní
+
+Každé pole v CRM je malý závazek. Někdo ho musí vysvětlit, vyplnit, zabezpečit, opravit, exportovat a jednou smazat. Proto pole nepřidávejte podle věty „to by se mohlo hodit“, ale podle rozhodnutí, které má podporovat.
+
+Dobrá CRM pole:
+
+- **Problém zákazníka** — jednou větou, lidsky, bez interního žargonu.
+- **Segment** — například SaaS, lokální služba, B2B výroba, neziskovka.
+- **Velikost potřeby** — nízká, střední, vysoká; ne detailní finanční profil, pokud není nutný.
+- **Další krok** — konkrétní akce, datum a vlastník.
+- **Zdroj kontaktu** — formulář, doporučení, event, přímý e-mail, inbound obsah.
+- **Právní důvod komunikace** — poptávka, smlouva, oprávněný zájem, souhlas pro newsletter.
+- **Datum poslední relevantní interakce** — kvůli úklidu a kontextu.
+
+Riziková pole:
+
+- osobní odhady typu „je konfliktní“, „má peníze“, „nerozumí technice“,
+- soukromé poznámky z nepracovních rozhovorů,
+- osobní profily ze sociálních sítí bez jasného důvodu,
+- informace o zdraví, rodině, politice nebo jiných citlivých tématech,
+- vše, co byste se styděli ukázat člověku při žádosti o přístup k údajům.
+
+Jednoduché pravidlo: pokud by pole neobstálo ve větě „sbíráme to proto, abychom…“, nemá v CRM co dělat.
+
+### BZ.3 Lead scoring držte hrubý a vysvětlitelný
+
+Lead scoring často začíná nevinně: návštěva webu, otevření e-mailu, kliknutí, stažení PDF, zobrazení ceníku. Pak se přidá pár dalších signálů, synchronizace s reklamami, profilování podle chování a najednou máte systém, kterému nerozumí ani obchod, ani člověk, kterého hodnotí. Skvělé, právě jsme vynalezli černou skříňku s tabulkou.
+
+Privacy-first scoring má být hrubý, vysvětlitelný a založený na signálech úmyslu, ne na sledování každého pohybu.
+
+Lepší signály:
+
+- člověk výslovně popsal problém ve formuláři,
+- odpověděl na e-mail a chce další krok,
+- požádal o demo nebo konzultaci,
+- poslal technické zadání,
+- je v segmentu, pro který máte ověřenou nabídku,
+- má jasný termín rozhodnutí.
+
+Slabší nebo rizikové signály:
+
+- samotné otevření newsletteru,
+- vysoký počet návštěv bez kontextu,
+- obohacení profilu z externí databáze,
+- automatické skóre bez možnosti vysvětlení,
+- dlouhodobé sledování jednotlivce přes kampaně a zařízení.
+
+Pro malý tým často stačí tři úrovně: **fit**, **timing**, **next step**. Fit říká, jestli problém odpovídá nabídce. Timing říká, jestli to zákazník řeší teď. Next step říká, jestli máme férový důvod pokračovat. Víc magie obvykle znamená víc polí, víc dohadů a méně důvěry.
+
+### BZ.4 Retence kontaktů musí být obchodní pravidlo, ne zapomenutá volba
+
+CRM bez retence postupně hnije. Kontakty bez dalšího kroku zůstávají aktivní, staré poznámky přežívají změny lidí v týmu a marketing se tváří, že každý historický e-mail je pořád živý vztah. Není.
+
+Nastavte jednoduchá pravidla:
+
+- **Nová poptávka** — pokud se do 30 dnů nepodaří domluvit další krok, označit jako neaktivní nebo archivovat.
+- **Neuzavřená příležitost** — po 90 dnech bez aktivity vyžaduje rozhodnutí: pokračovat, odložit, zavřít.
+- **Newsletter kontakt** — držet odděleně od obchodního CRM a respektovat odhlášení bez ručních výjimek.
+- **Zákazník po ukončení smlouvy** — rozdělit fakturační, smluvní, supportní a marketingová data podle účelu.
+- **Staré poznámky** — mazat nebo zkracovat, pokud už nejsou nutné pro aktuální vztah.
+
+Retence není jen právní hygiena. Je to i obchodní hygiena. Pipeline s tisícem mrtvých záznamů vypadá bohatě, ale rozhoduje se podle ní mizerně.
+
+### BZ.5 Integrace CRM omezte na nezbytné toky
+
+Malé týmy často propojí CRM se vším, co má tlačítko „Connect“. Formuláře, e-mailing, fakturace, kalendář, chat, reklamy, analytika, helpdesk, enrichovací služby, automatizace. Pak nikdo neví, kde vzniká pravda a kdo má právo co opravit.
+
+Privacy-first integrační minimum:
+
+- formulář vytvoří lead jen s nutnými poli,
+- CRM pošle do e-mailingu pouze souhlasem pokrytý kontakt,
+- fakturace dostane jen údaje nutné pro doklad,
+- support vidí zákaznický kontext, ale ne marketingové poznámky,
+- analytika používá agregované kampaně, ne osobní historii jednotlivce,
+- export a výmaz mají jasnou mapu všech propojených systémů.
+
+U každé integrace si napište: zdroj, cíl, pole, účel, právní důvod, vlastník, retence, způsob výmazu. Pokud to neumíte popsat na jednu kartu, integrace je pravděpodobně moc chytrá na tým, který ji má provozovat.
+
+### BZ.6 Šablona: CRM datová karta
+
+Použijte ji pro každou hlavní entitu v CRM: kontakt, firma, lead, opportunity, zákazník.
+
+## Entita
+
+Kontakt / firma / lead / opportunity / zákazník.
+
+## Účel
+
+Které rozhodnutí nebo proces tato entita podporuje?
+
+## Povinná pole
+
+Seznam polí, bez kterých proces nejde férově dokončit.
+
+## Volitelná pole
+
+Seznam polí, která pomáhají, ale nejsou defaultně povinná.
+
+## Zakázaná pole
+
+Informace, které do CRM nepatří ani „jen interně“.
+
+## Právní důvod
+
+Poptávka, smlouva, oprávněný zájem, souhlas, zákonná povinnost nebo jiný konkrétní důvod.
+
+## Retence
+
+Kdy se záznam archivuje, zkrátí nebo smaže?
+
+## Integrace
+
+Kam data odcházejí a odkud přicházejí?
+
+## Přístup
+
+Kdo smí číst, upravovat, exportovat a mazat?
+
+### BZ.7 Checklist: CRM bez datového smetiště
+
+- [ ] Každý stav pipeline má jasnou definici vstupu a výstupu.
+- [ ] Každé CRM pole má konkrétní účel a vlastníka.
+- [ ] Citlivé nebo subjektivní poznámky jsou zakázané pravidlem, ne jen „doporučením“.
+- [ ] Lead scoring používá vysvětlitelné signály úmyslu.
+- [ ] Newsletter kontakty jsou oddělené od obchodního follow-upu.
+- [ ] Odhlášení, výmaz a oprava se propisují do napojených systémů.
+- [ ] Retenční pravidla mažou nebo archivují mrtvé záznamy.
+- [ ] Export dat je použitelný pro člověka, ne jen pro další import do stejného nástroje.
+- [ ] Přístup do CRM odpovídá rolím, ne zvědavosti týmu.
+- [ ] Jednou měsíčně proběhne úklid pipeline a datových polí.
+
+### Mini cvičení: CRM detox za 60 minut
+
+1. Vyexportujte seznam všech polí u kontaktu, firmy a obchodní příležitosti.
+2. U každého pole napište účel jednou větou: „Potřebujeme ho, abychom…“
+3. Označte pole jako **nutné**, **užitečné**, **rizikové** nebo **smazat**.
+4. Vyberte 10 náhodných starých kontaktů a zkontrolujte, jestli mají další krok nebo retenční důvod.
+5. Zkontrolujte, kam CRM posílá data přes integrace.
+6. Vypněte nebo naplánujte smazání alespoň jednoho pole, které neobhájíte.
+7. Zapište pravidlo pro archivaci neaktivních leadů.
+
+Výstupem není dokonale čisté CRM. Výstupem je první viditelná změna: méně polí, jasnější pipeline a menší riziko, že se obchodní systém promění v datový kompostér.
+
+### Codyho komentář
+
+Můj pohled: dobré CRM není to, které ví o člověku nejvíc. Dobré CRM je to, které týmu připomene správný další krok a zároveň se za své poznámky nemusí stydět. Privacy-first obchod není pomalejší obchod. Je to obchod, který si neplete důvěru s databází detailů. A upřímně, pokud pro prodej potřebujete vědět víc o chování člověka než o jeho problému, možná neprodáváte hodnotu, ale nervozitu zabalenou do automatizace.
+
+### Zdroje k příloze BZ
+
+- GDPR článek 5 stanovuje principy zpracování osobních údajů, včetně účelového omezení, minimalizace údajů, přesnosti a omezení uložení: https://eur-lex.europa.eu/eli/reg/2016/679/oj
+- Evropská komise u principů GDPR shrnuje, že organizace mají zpracovávat jen osobní údaje nezbytné pro daný účel a vycházet z konkrétního právního důvodu: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/overview-principles/what-data-can-we-process-and-under-which-conditions_en
+- EDPB Guidelines 4/2019 k ochraně údajů záměrně a ve výchozím nastavení vysvětlují, že minimalizace a privacy by default mají být zabudované do návrhu produktu a procesů: https://www.edpb.europa.eu/documents/guideline/guidelines-42019-on-article-25-data-protection-by-design-and-by-default_en
+- EDPB Guidelines 05/2020 k souhlasu připomínají požadavky na platný souhlas podle GDPR, což je důležité hlavně při oddělení obchodní komunikace od newsletterů a marketingu: https://www.edpb.europa.eu/documents/guideline/guidelines-052020-on-consent-under-regulation-2016679_en
+- ICO prakticky popisuje princip minimalizace dat jako povinnost sbírat a držet jen osobní údaje potřebné pro konkrétní účel a umět to doložit: https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/data-protection-principles/a-guide-to-the-data-protection-principles/data-minimisation/
+
+
 ## Pracovní log
+
+- 2026-08-25: Přidána příloha BZ „CRM a lead pipeline bez osobního datového smetiště“ s návrhem stavů kontaktů, CRM poli, lead scoringem, retencí, integrační mapou, datovou kartou, checklistem, hodinovým CRM detoxem a ověřenými GDPR/EDPB/Evropská komise/ICO zdroji.
 
 - 2026-08-25: Přidána příloha BY „Žádosti subjektů údajů bez supportového chaosu“ s DSR procesem, kartou žádosti, ověřením identity podle rizika, datovou mapou, výmazovým modelem, exportní strukturou, checklistem, hodinovým DSR drillem a ověřenými GDPR/EDPB/Evropská komise zdroji.
 
