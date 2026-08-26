@@ -26383,7 +26383,211 @@ Nejlepší důkaz, že respektujete zákaznická data, je možnost je důstojně
 - EDPB Guidelines on the right to data portability WP242 rev.01 vysvětlují praktické hranice a doporučení k právu na portabilitu: https://www.edpb.europa.eu/documents/guideline/guidelines-on-the-right-to-data-portability-under-regulation-2016679-wp242_en
 - Evropská komise — Data Act explained popisuje pravidla pro přístup k datům, cloud switching, interoperabilitu a postupné odstranění switching poplatků včetně data egress: https://digital-strategy.ec.europa.eu/en/factpages/data-act-explained
 
+## DE. Importy dat a migrace bez rozbité kvality
+
+Export je jen polovina svobody. Druhá polovina je import. Pokud zákazník umí data stáhnout, ale nikam je rozumně nedostane, pořád žije v datovém akváriu. Hezky průhledném, právně obhajitelném, ale pořád akváriu. Malý SaaS často podcení importy, protože na začátku vypadá jednodušší říct: „Pošlete nám CSV a my to nějak nahrajeme.“ To „nějak“ je přesně ten okamžik, kdy vzniká technický dluh, support peklo a bezpečnostní loterie.
+
+Import není jen technická utilita. Je to produktový onboarding, migrační proces, bezpečnostní hranice a důkaz, že si vážíte času zákazníka. Dobrý import umí odmítnout špatná data srozumitelně, ukázat náhled změn před zápisem, zachovat auditní stopu a nepustit do systému cizí soubor jen proto, že má příponu `.csv`. Ano, i tabulka může být útočný vektor. Digitální svět je kreativní hlavně v tom, jak umí zneužít nudné věci.
+
+Privacy-first import má navíc evropskou disciplínu: sbírá jen data nutná pro účel migrace, odděluje dočasné importní soubory od trvalých zákaznických dat, maže pracovní kopie po dokončení a jasně říká, kdo se k migrovaným datům dostane. Ne „nahrajte všechno a my uvidíme“. Spíš „nahrajte tento konkrétní formát, ukážeme vám mapování, označíme konflikty, nic nezapíšeme bez potvrzení a dočasný soubor smažeme“.
+
+*Codyho komentář:* Import je recepce vašeho produktu. Když na recepci zákazníkovi řeknete „hoďte kufry někam do sklepa, kolega se v tom zítra pohrabe“, není to onboarding. Je to horor s CSV soundtrackem.
+
+### DE.1 Import začíná datovým kontraktem
+
+Než napíšete parser, napište kontrakt. Importní kontrakt říká, jaká data přijímáte, v jakém formátu, v jaké verzi schématu, kdo je smí nahrát a co se stane, když neprojdou validací. Bez kontraktu skončíte u kódu, který se postupně učí tolerovat každou historickou výjimku. Za půl roku už nikdo neví, proč se sloupec `phone2_old_final` převádí na poznámku v profilu.
+
+Minimální importní kontrakt:
+
+- **Účel:** proč import existuje a jaké zákaznické rozhodnutí podporuje.
+- **Formát:** CSV, JSON, JSONL, ZIP balík nebo API dávka.
+- **Schéma:** povinná pole, volitelná pole, datové typy, limity délky a verze.
+- **Mapování:** jak se vstupní pole převádějí na interní objektový model.
+- **Oprávnění:** kdo smí import spustit, potvrdit a zrušit.
+- **Chování při chybě:** zda se odmítá celý import, řádek, soubor nebo konkrétní pole.
+- **Retence:** jak dlouho držíte původní soubor, validační report a importní log.
+
+Příklad produktového kontraktu:
+
+```text
+Import: Customer contacts v1
+Účel: migrace kontaktů do workspace CRM
+Formát: CSV, UTF-8, oddělovač čárka, první řádek hlavičky
+Povinná pole: email, consent_source, created_at
+Volitelná pole: company, first_name, last_name, tags
+Zakázaná pole: poznámky z interního CRM, čísla dokladů, hesla, raw cookies
+Validace: e-mail formát, datum ISO 8601, max. 50 tagů na kontakt
+Konflikty: shoda podle e-mailu v rámci workspace
+Zápis: až po preview a potvrzení adminem
+Retence souboru: 7 dní u neúspěšného importu, 24 hodin po dokončení úspěšného importu
+```
+
+Dobré pravidlo: importní kontrakt musí pochopit support i zákazník. Pokud ho umí přečíst jen autor parseru, není to kontrakt, ale kouzelnická kniha.
+
+### DE.2 Preview je bezpečnostní brzda i obchodní UX
+
+Import bez náhledu je produkční změna naslepo. U malých týmů to často začne nevinně: admin nahraje CSV, backend ho zpracuje, systém pošle „hotovo“. Pak se zjistí, že sloupce byly posunuté, diakritika se rozbila, deset tisíc kontaktů dostalo špatný segment a někdo právě vytvořil newsletterovou miniaturní katastrofu.
+
+Importní flow by mělo mít čtyři kroky:
+
+1. **Upload:** soubor se uloží do dočasného prostoru s limitem velikosti a typů.
+2. **Validace:** systém zkontroluje formát, schéma, velikosti, duplicitní hodnoty a zakázaná pole.
+3. **Preview:** uživatel vidí souhrn, mapování, ukázkové řádky, chyby a odhad dopadu.
+4. **Commit:** teprve po potvrzení se data zapíšou do hlavního systému.
+
+Preview nemá být kosmetika. Má odpovědět na otázky:
+
+- Kolik záznamů bude vytvořeno, aktualizováno, přeskočeno nebo odmítnuto?
+- Která pole se importují a která se ignorují?
+- Jak se řeší duplicity a konflikty?
+- Které řádky mají chybu a jak ji opravit?
+- Jaké notifikace nebo automatizace se po importu spustí?
+- Dá se import bezpečně vrátit zpět?
+
+Praktický příklad: pokud import kontaktů spouští onboardingové e-maily, preview musí ukázat i tuto následnou akci. Jinak uživatel netuší, že nahráním souboru spustí komunikaci na lidi, kteří možná nedali souhlas. To není růst. To je spamovací minové pole.
+
+### DE.3 Validujte soubor jako nedůvěryhodný vstup
+
+Každý importní soubor je nedůvěryhodný vstup. I když ho poslal platící zákazník. I když se jmenuje `final_clean_contacts.csv`. Hlavně když se jmenuje `final_clean_contacts.csv`. OWASP u uploadů doporučuje kombinovat allowlist přípon, kontrolu obsahu, limity velikosti, bezpečné ukládání a oddělení od veřejně dostupného prostoru. To stejné platí pro importy v SaaSu.
+
+Importní bezpečnostní minimum:
+
+- povolte jen konkrétní typy souborů podle účelu,
+- kontrolujte velikost souboru i počet záznamů,
+- nepoužívejte původní název souboru jako cestu nebo identifikátor,
+- ukládejte soubory mimo veřejný webový prostor,
+- parsujte data streamovaně nebo dávkově, ne „všechno do paměti a modlitba“,
+- odmítněte nečekané sloupce u citlivých importů,
+- normalizujte kódování a oddělovače,
+- logujte metadata, ne celý obsah souboru,
+- skenujte nebo izolujte soubory, které mohou obsahovat binární přílohy.
+
+U CSV myslete i na formula injection: pokud exportujete nebo zobrazujete importovaná data v tabulkových nástrojích, hodnoty začínající znaky jako `=`, `+`, `-` nebo `@` mohou být interpretované jako vzorce. Importní vrstva by měla takové hodnoty označit, escapovat při exportu nebo nedovolit v polích, kde nedávají smysl.
+
+Tohle není paranoia. To je běžná hygiena. Import je brána do systému a brána bez kontroly je jen díra s hezkým tlačítkem „Nahrát“.
+
+### DE.4 Migrace není jen přesun řádků
+
+Když zákazník migruje z jiného nástroje, nepřenáší jen data. Přenáší pracovní zvyky, pojmenování, historické chyby, role, odpovědnosti a očekávání. Pokud import řeší jen technické mapování sloupců, zákazník často skončí s daty v novém systému, ale bez důvěry v jejich kvalitu.
+
+U migračních importů proto přidejte rozhodovací vrstvu:
+
+- **Mapování pojmů:** co znamená „lead“, „aktivní zákazník“, „projekt“, „archivováno“ ve starém a novém systému.
+- **Čištění dat:** co se opraví automaticky, co vyžaduje ruční rozhodnutí a co se odmítne.
+- **Konflikty:** jak se řeší duplicity, změněná jména, opakované e-maily a historické identifikátory.
+- **Omezení:** co nový systém neumí nebo záměrně nechce převzít.
+- **Kontrola po importu:** vzorek záznamů, součty, počty, náhodná kontrola a zákaznické potvrzení.
+
+Příklad z praxe: starý CRM export obsahuje pole `status`, kde jsou hodnoty `new`, `warm`, `vip`, `bad`, `later`, `ondrej_vi`. Nový systém má stavy `new`, `qualified`, `active`, `archived`. Import nesmí hádat. Má ukázat mapování a nechat admina rozhodnout, co znamená každá hodnota. Jinak do produktu přenesete chaos a ještě mu dáte nový kabát.
+
+### DE.5 Importní chyby pište pro lidi, ne pro parser
+
+Chybová hláška `Row 184: invalid enum value` je technicky pravdivá a lidsky téměř zbytečná. Import je často stresující okamžik: zákazník chce začít používat produkt, má soubor z jiného systému a potřebuje vědět, co má opravit. Pokud mu dáte log, který vypadá jako výpis z nevyspalého backendu, přenesete práci na support.
+
+Dobrá chyba obsahuje:
+
+- řádek nebo identifikátor záznamu,
+- název pole,
+- aktuální hodnotu v bezpečně zkrácené podobě,
+- jasné pravidlo,
+- příklad správné hodnoty,
+- informaci, jestli chyba blokuje celý import nebo jen řádek.
+
+Lepší hláška:
+
+```text
+Řádek 184, pole „status“: hodnota „vip_old“ není povolená.
+Povolené hodnoty jsou: new, qualified, active, archived.
+Tento řádek nebude importován, ostatní řádky mohou pokračovat.
+```
+
+Ještě lepší je nabídnout opravný soubor: `errors.csv` se sloupci `row_number`, `field`, `value`, `problem`, `expected_format`. Zákazník ho otevře, opraví a nahraje znovu. Support si mezitím může dopít kávu, což je civilizační úspěch.
+
+### DE.6 Šablona: importní karta
+
+```markdown
+# Importní karta
+
+## Základ
+- Název importu:
+- Účel:
+- Vlastník:
+- Verze schématu:
+- Cílový objekt v produktu:
+
+## Vstup
+- Povolené formáty:
+- Maximální velikost:
+- Maximální počet záznamů:
+- Povinná pole:
+- Volitelná pole:
+- Zakázaná pole:
+
+## Mapování
+- Klíč pro duplicity:
+- Pravidla aktualizace existujících záznamů:
+- Pravidla pro konflikty:
+- Výchozí hodnoty:
+- Pole vyžadující ruční potvrzení:
+
+## Bezpečnost a privacy
+- Kdo smí upload spustit:
+- Kdo smí potvrdit zápis:
+- Kde je dočasný soubor uložen:
+- Jak dlouho se drží původní soubor:
+- Co se loguje:
+- Co se nikdy neloguje:
+
+## UX
+- Co ukazuje preview:
+- Jak vypadá report chyb:
+- Jak uživatel import zruší:
+- Jak pozná dokončení:
+- Jak se řeší rollback:
+```
+
+### DE.7 Checklist: import bez chaosu
+
+- [ ] Import má popsaný účel, vlastníka a verzi schématu.
+- [ ] Povolené formáty jsou explicitní a omezené.
+- [ ] Soubor se ukládá do dočasného odděleného prostoru, ne přímo k produkčním datům.
+- [ ] Systém kontroluje velikost, typ, strukturu, kódování a počet záznamů.
+- [ ] Import má preview před zápisem do hlavního systému.
+- [ ] Uživatel vidí počty vytvořených, aktualizovaných, přeskočených a chybných záznamů.
+- [ ] Chybový report je opravitelný člověkem, nejen čitelný parserem.
+- [ ] Konflikty a duplicity mají jasná pravidla.
+- [ ] Import nespouští e-maily, webhooks nebo automatizace bez explicitního potvrzení.
+- [ ] Dočasné soubory a reporty se mažou podle retenčního pravidla.
+- [ ] Audit log ukládá metadata importu, ne citlivý obsah celého souboru.
+- [ ] Existuje testovací soubor s dobrými, chybnými a hraničními daty.
+
+### Mini cvičení: import audit za 60 minut
+
+1. Vyberte jeden import, který zákazníci nebo tým používají nejčastěji.
+2. Napište jeho importní kartu podle šablony výše.
+3. Připravte tři testovací soubory: správný, částečně chybný a nebezpečný.
+4. Ověřte, jestli systém ukáže preview před zápisem.
+5. Zkontrolujte, zda import nespustí automatizace bez vědomého potvrzení.
+6. Najděte, kde zůstává původní soubor po dokončení nebo selhání.
+7. Upravte jednu chybovou hlášku tak, aby ji pochopil zákazník bez vývojáře.
+8. Přidejte do dokumentace příklad správného souboru a popis nejčastějších chyb.
+
+Výstupem má být jeden bezpečnější import, ne ambiciózní migrační platforma na tři kvartály. Začněte u importu, který má největší dopad na onboarding nebo největší riziko úniku dat. Tam se investice vrátí nejrychleji.
+
+### Codyho komentář
+
+Importy jsou test charakteru produktu. Ukazují, jestli zákazníkovi pomáháte začít, nebo ho necháváte uklízet po vašem parseru. Dobrý import je trochu nudný, hodně konkrétní a velmi nekompromisní v tom, co odmítne. Přesně tak to má být. Nudná data jsou zdravá data.
+
+### Zdroje k příloze DE
+
+- OWASP File Upload Cheat Sheet doporučuje allowlist přípon, validaci typu a obsahu, limity velikosti, bezpečné ukládání a další kontroly pro uploady: https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html
+- OWASP CSV Injection popisuje rizika vzorců v tabulkových souborech a doporučuje ošetřit nebezpečné začátky buněk při práci s CSV: https://owasp.org/www-community/attacks/CSV_Injection
+- Evropská komise — Data Act explained shrnuje důraz na přístup k datům, interoperabilitu a cloud switching, což dává importům a migracím produktový i provozní kontext: https://digital-strategy.ec.europa.eu/en/factpages/data-act-explained
+- Evropská komise: Principles of the GDPR připomíná zásady minimalizace dat, účelového omezení, omezení uložení a odpovědnosti, které se vztahují i na dočasné importní soubory: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
+
 ## Pracovní log
+
+- 2026-08-26: Přidána příloha DE „Importy dat a migrace bez rozbité kvality“ s importním kontraktem, preview flow, bezpečností uploadů, migračním mapováním, lidskými chybovými hláškami, importní kartou, checklistem, hodinovým auditem a ověřenými OWASP/EU/GDPR zdroji.
 
 - 2026-08-26: Přidána příloha DD „Exporty dat a portabilita bez rukojmí v databázi“ s typy exportů, otevřenými formáty, manifestem, oprávněními, ochranou dat třetích osob, asynchronním exportním flow, exit plánem, exportní kartou, checklistem, hodinovým auditem a ověřenými GDPR/EDPB/EU Data Act zdroji.
 
