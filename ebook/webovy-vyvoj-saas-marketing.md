@@ -24979,7 +24979,187 @@ Můj názor: domény jsou nudné jen do chvíle, než přestanou fungovat. Pak s
 - OWASP Cheat Sheet Series: [Transport Layer Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Transport_Layer_Security_Cheat_Sheet.html) — praktická doporučení k TLS konfiguraci, certifikátům a bezpečnému provozu HTTPS.
 
 
+
+## CX. Open-source závislosti a SBOM bez paniky
+
+Open-source závislosti jsou jako šroubky v produktu. Většinu času si jich nikdo nevšímá, protože všechno drží pohromadě. Pak přijde bezpečnostní advisory, opuštěný balíček, rozbitý transitive dependency strom nebo právní otázka kolem licence — a najednou se z nenápadného šroubku stane porada na tři hodiny. Gratuluju, software supply chain právě vstoupil do místnosti a tváří se, že tu byl odjakživa.
+
+Cílem malé SaaS firmy není mít korporátní bezpečnostní proces s dvaceti formuláři. Cílem je vědět, z čeho je produkt složený, které části jsou rizikové, kdo rozhoduje o aktualizacích a jak rychle umíte reagovat, když se v důležité knihovně objeví problém. Privacy-first provoz tady znamená i datovou střídmost: méně nástrojů, méně neznámých skriptů, méně závislostí, které mají přístup k produkčním datům.
+
+Evropský kontext tomu dává další váhu. EU Cyber Resilience Act, tedy nařízení (EU) 2024/2847, zavádí horizontální kyberbezpečnostní požadavky pro produkty s digitálními prvky a počítá i s dokumentací komponent a zpracováním zranitelností. Pokud stavíte SaaS, knihovnu, integraci nebo produkt, který se dotýká evropského trhu, berte inventář závislostí jako provozní hygienu, ne jako hezký bonus pro auditora.
+
+### CX.1 Začněte inventářem, ne nástrojem
+
+První chyba je otevřít katalog nástrojů a začít řešit, jestli potřebujete „enterprise supply chain platform“. Možná jednou ano. Dnes nejspíš potřebujete vědět pět obyčejných věcí:
+
+- jaké package managery používáte,
+- kde vzniká lockfile,
+- co běží v produkci,
+- které závislosti zpracovávají zákaznická nebo provozní data,
+- kdo smí přidat novou runtime závislost.
+
+Rozdělte závislosti do tří vrstev:
+
+| Vrstva | Příklady | Riziko | Praktické pravidlo |
+|---|---|---:|---|
+| Runtime | web framework, ORM, auth knihovna, payment SDK | vysoké | schvaluje technický vlastník, sleduje zranitelnosti |
+| Build a vývoj | bundler, test runner, formatter, CLI nástroje | střední | aktualizovat pravidelně, hlídat install skripty |
+| Obsah a frontend doplňky | komponenty, ikonky, widgety, tracking skripty | proměnlivé | u externích skriptů vždy řešit data a consent |
+
+Nepotřebujete dokonalý seznam všeho ručně v tabulce. Potřebujete opakovatelný způsob, jak seznam vygenerovat z repozitáře a release artefaktu. Lockfile je dobrý začátek, ale není to celý příběh: produkční image, serverless balíček nebo statický build může obsahovat jinou realitu než vývojářský notebook.
+
+### CX.2 SBOM má být pracovní mapa, ne compliance suvenýr
+
+SBOM, Software Bill of Materials, je strojově čitelný seznam softwarových komponent. Hodí se pro audit, bezpečnost, zákaznické otázky i incidenty. Ale jen pokud ho umíte vytvořit, najít a použít. SBOM, který jednou ročně vznikne ručně a pak spí ve složce `audit-final`, je asi tak užitečný jako hasicí přístroj zamčený v jiné budově.
+
+Pro malý SaaS stačí jednoduchý režim:
+
+1. **Generovat SBOM při release:** ideálně z lockfile nebo build artefaktu.
+2. **Uložit ho k verzi:** připojit k release, artefaktu nebo internímu provoznímu záznamu.
+3. **Použít ho při zranitelnosti:** když vyjde advisory, rychle zjistit, jestli a kde komponentu používáte.
+4. **Neslibovat víc, než umíte dodat:** zákazníkům popište proces, ne marketingovou pohádku.
+
+Praktický zápis k release může vypadat takto:
+
+```markdown
+## Release 2026-08-26
+
+- Verze: 1.14.0
+- Commit: abc123
+- Artefakt: app-web-1.14.0
+- SBOM: sbom-app-web-1.14.0.spdx.json
+- Kritické runtime závislosti: auth, database driver, payment SDK, email provider SDK
+- Kontrola zranitelností: bez známé kritické runtime zranitelnosti v době vydání
+- Výjimky: jedna dev dependency s moderate advisory, nebalí se do produkce
+- Vlastník rozhodnutí: technický lead
+```
+
+*Codyho komentář:* SBOM není magický štít. Je to mapa. A mapa je skvělá věc, když hoří les. Jen ji nechcete kreslit až ve chvíli, kdy už vám kouří boty.
+
+### CX.3 Nová závislost je produktové rozhodnutí
+
+Každý balíček přináší údržbu, bezpečnostní profil, licenci, chování při aktualizaci a někdy i datový tok. Proto se u nové runtime závislosti ptejte:
+
+- Řeší problém, který opravdu máme?
+- Umíme funkci napsat jednoduše sami bez většího rizika?
+- Má balíček aktivní údržbu a jasný release rytmus?
+- Má rozumně omezený počet transitive dependencies?
+- Běží jen v aplikaci, nebo posílá data ven?
+- Jaká je licence a sedí k našemu použití?
+- Kdo bude hlídat aktualizace a případné breaking changes?
+
+Příklad: knihovna na generování PDF faktur může být v pořádku. Ale pokud kvůli ní přidáte headless browser, tři systémové balíčky, externí službu a debug logy s fakturačními údaji, už to není „malá závislost“. To je provozní rozhodnutí s dopadem na bezpečnost, privacy i dostupnost.
+
+### CX.4 Aktualizace dělejte pravidelně a nudně
+
+Nejhorší strategie je nechat závislosti rok hnít a pak dělat hrdinský „upgrade sprint“. Hrdinství je ve vývoji často jen špatně naplánovaná údržba v kostýmu dramatu.
+
+Doporučený rytmus:
+
+- **Týdně:** automatické malé patch/minor PR pro nízkorizikové dev a frontend závislosti.
+- **Měsíčně:** ruční review runtime závislostí, bezpečnostních advisory a opuštěných balíčků.
+- **Kvartálně:** audit hlavních frameworků, SDK dodavatelů, licencí a build pipeline.
+- **Při incidentu:** samostatná větev, jasné testy, release notes a záznam rozhodnutí.
+
+U bezpečnostních aktualizací odlišujte dopad:
+
+| Situace | Reakce |
+|---|---|
+| Kritická zranitelnost v internet-facing runtime knihovně | okamžité posouzení, hotfix nebo mitigace |
+| Zranitelnost v dev dependency mimo produkční artefakt | ověřit rozsah, naplánovat update, nezpanikařit |
+| Opuštěný balíček bez advisory | najít náhradu, naplánovat migraci, zapsat riziko |
+| Major upgrade frameworku | samostatný projekt, testovací plán, rollback cesta |
+
+### CX.5 Privacy-first filtr pro závislosti
+
+Bezpečnost závislostí není jen CVE skóre. U SaaS produktu v Evropě je stejně důležité, co závislost dělá s daty.
+
+Před přidáním nové knihovny, SDK nebo externího skriptu projděte privacy-first filtr:
+
+- **Data:** jaká data komponenta vidí nebo může vidět?
+- **Provoz:** běží lokálně, na vašem serveru, v EU cloudu, nebo volá třetí zemi?
+- **Telemetrie:** posílá knihovna diagnostiku, usage data nebo error reporty?
+- **Konfigurace:** jde telemetrii vypnout a je vypnutá ve výchozím nastavení?
+- **Retence:** vznikají logy, cache nebo exporty mimo hlavní systém?
+- **Subdodavatel:** je potřeba DPA, vendor karta nebo záznam v trust centru?
+
+Typický příklad je frontend widget. Technicky „jen malý script“. Prakticky může číst URL, referer, identifikátor uživatele, obsah formuláře nebo chování návštěvníka. Pokud nepotřebujete externí skript, nepřidávejte ho. Pokud ho potřebujete, zdokumentujte účel, data, consent a alternativu.
+
+### CX.6 Šablona: karta závislosti
+
+```markdown
+# Karta závislosti
+
+## Základ
+- Název:
+- Verze / rozsah verzí:
+- Typ: runtime / build / dev / externí skript / služba
+- Repozitář nebo dodavatel:
+- Licence:
+- Vlastník v týmu:
+
+## Účel
+- Jaký problém řeší:
+- Proč nestačí vlastní jednoduchá implementace:
+- Kde se používá:
+- Co se rozbije při výpadku nebo odstranění:
+
+## Bezpečnost
+- Vidí zákaznická nebo osobní data:
+- Běží v produkčním artefaktu:
+- Má známé zranitelnosti:
+- Jak sledujeme advisory:
+- Jak rychle musíme reagovat na kritický problém:
+
+## Privacy-first kontrola
+- Posílá data mimo náš systém:
+- Kde data běží:
+- Je potřeba DPA nebo vendor karta:
+- Lze vypnout telemetrii:
+- Jak dlouho držíme související logy:
+
+## Údržba
+- Jak často aktualizujeme:
+- Kdo schvaluje major upgrade:
+- Jak testujeme změnu:
+- Rollback plán:
+- Datum další revize:
+```
+
+### CX.7 Checklist: závislosti bez chaosu
+
+- [ ] Máme jasný seznam package managerů, lockfile a produkčních artefaktů.
+- [ ] Runtime závislosti mají vlastníka a důvod použití.
+- [ ] Nové externí skripty procházejí privacy-first filtrem před nasazením.
+- [ ] SBOM nebo ekvivalentní inventář vzniká při release, ne ručně po půlnoci.
+- [ ] Bezpečnostní advisory se třídí podle reálného dopadu na produkci.
+- [ ] Opuštěné balíčky mají plán náhrady, ne jen povzdech v komentáři.
+- [ ] Kritické aktualizace mají test, rollback a krátký záznam rozhodnutí.
+- [ ] Zákazníkům slibujeme jen procesy a artefakty, které umíme opravdu dodat.
+
+### Mini cvičení: dependency audit za 60 minut
+
+1. Vyberte jeden produkční repozitář.
+2. Najděte všechny lockfile a build artefakty, které souvisejí s releasem.
+3. Označte deset nejdůležitějších runtime závislostí.
+4. U každé napište účel, vlastníka a jestli vidí zákaznická data.
+5. Vyberte jednu závislost, kterou můžete odstranit, nahradit nebo lépe izolovat.
+6. Zapište jednu změnu do backlogu s důkazem dokončení.
+
+Výstup nemá být „udělali jsme audit“. Výstup má být konkrétní rozhodnutí: třeba „odstraníme nepoužívaný tracking SDK“, „zapneme pravidelné dependency PR“, „přidáme SBOM k release artefaktu“ nebo „u PDF generátoru ověříme licenci a produkční data“.
+
+### Zdroje k příloze CX
+
+- EU: Cyber Resilience Act — nařízení (EU) 2024/2847 a požadavky na produkty s digitálními prvky, zranitelnosti a dokumentaci komponent: https://eur-lex.europa.eu/eli/reg/2024/2847/oj/eng
+- OWASP Software Component Verification Standard — praktický rámec kontrol pro integritu softwarového supply chainu včetně SBOM: https://scvs.owasp.org/
+- OWASP SCVS V2: Software Bill of Materials Requirements — konkrétní kontrolní body pro SBOM: https://scvs.owasp.org/scvs/v2-software-bill-of-materials/
+- OpenSSF Scorecard — automatizované bezpečnostní signály pro open-source projekty: https://openssf.org/scorecard/
+- CISA SBOM Resources Library — rozcestník k SBOM materiálům a bezpečnému vývoji: https://www.cisa.gov/topics/cyber-threats-and-advisories/sbom/sbomresourceslibrary
+
 ## Pracovní log
+
+- 2026-08-26: Přidána příloha CX „Open-source závislosti a SBOM bez paniky“ s inventářem závislostí, release SBOM postupem, privacy-first filtrem, kartou závislosti, checklistem, mini auditem a ověřenými zdroji.
+
 
 - 2026-08-26: Přidána příloha CW „Domény, DNS a certifikáty bez ztraceného vlastnictví“ s vlastnictvím domén, verzovanými DNS změnami, prevencí vendor lock-inu, certifikáty, e-mailovou DNS hygienou, provozní kartou, checklistem, 45minutovým auditem a ověřenými zdroji.
 
