@@ -23967,7 +23967,192 @@ Auditní logy jsou místo, kde se dobře pozná dospělost SaaSu. Junior produkt
 - NIST SP 800-92 Guide to Computer Security Log Management — starší, ale pořád užitečný rámec pro sběr, ochranu, analýzu a likvidaci bezpečnostních logů: https://www.nist.gov/publications/guide-computer-security-log-management
 - EDPB SME guide: Data breaches — přehled pro malé organizace k řešení porušení zabezpečení osobních údajů a související odpovědnosti: https://www.edpb.europa.eu/sme/assess-the-risks/data-breaches_en
 
+## CS. Feature flags a rollout bez produktového hazardu
+
+Feature flag je malý přepínač s velkou mocí. Umí oddělit nasazení kódu od zapnutí funkce, pustit novinku jen části uživatelů, rychle vypnout rizikovou integraci nebo otestovat chování bez dramatického releasu v pátek odpoledne. Ano, páteční release pořád existuje. Lidstvo je nepoučitelné.
+
+Pro malý SaaS je feature flag hlavně nástroj řízení rizika. Není to omluva pro nekonečné rozpracované funkce, tajné experimenty bez hypotézy nebo konfiguraci, kterou po šesti měsících chápe jen člověk, který mezitím odešel chovat alpaky do hor. Dobrý flag má účel, vlastníka, plán odstranění a jasnou odpověď na otázku: „Co se stane, když ho vypneme?“
+
+### CS.1 Rozlišujte nasazení, release a dostupnost
+
+Nasazení znamená, že je kód v produkčním prostředí. Release znamená, že funkce začne být dostupná uživatelům. Dostupnost znamená, kdo konkrétně ji může používat a za jakých podmínek. Když tyhle tři věci smícháte, každý release je trochu hazard: buď pustíte všechno všem, nebo se bojíte nasazovat malé změny.
+
+Praktické rozdělení:
+
+- **Deploy:** technický akt; kód je v produkci, ale funkce může být schovaná.
+- **Release:** produktové rozhodnutí; funkce je zapnutá pro určený segment.
+- **Rollout:** postupné rozšiřování; například interní tým, beta zákazníci, 10 %, 50 %, všichni.
+- **Kill switch:** bezpečnostní brzda; vypíná rizikovou část bez rollbacku celé aplikace.
+- **Permission flag:** omezuje funkci podle tarifu, role nebo smlouvy.
+- **Experiment flag:** testuje hypotézu a musí mít datum konce.
+
+Příklad: nový export faktur můžete nasadit ve středu, zapnout ve čtvrtek jen internímu účtu, v pondělí pustit třem zákazníkům a až po kontrole logů ho dát všem. Uživatelé nevidí technické nervy v zákulisí. To je dobře. Uživatel si nekoupil divadelní představení „DevOps pod tlakem“.
+
+### CS.2 Každý flag potřebuje typ a datum vyhození
+
+Největší problém feature flags není zapnutí. Největší problém je, že zůstanou v systému navždy. Pak vzniká flag debt: kombinace starých podmínek, mrtvého kódu, nejasných variant a testů, které už nikdo neumí rozumně interpretovat.
+
+Při založení flagu vyplňte minimálně:
+
+- název v jednotném formátu, například `billing_export_v2_enabled`,
+- typ flagu: release, experiment, permission, ops, kill switch,
+- vlastník: konkrétní člověk nebo tým,
+- výchozí bezpečný stav,
+- segment, kterému se flag týká,
+- datum revize nebo odstranění,
+- odkaz na ticket, rozhodnutí nebo release poznámku,
+- dopad na data a privacy.
+
+Krátkodobý release flag by měl zmizet hned po stabilním releasu. Experiment flag má zmizet po vyhodnocení. Permission flag může zůstat dlouhodobě, ale pak patří do produktového modelu, ne do „dočasné“ konfigurace. Kill switch může zůstat, pokud má playbook a někdo ví, kdy ho použít.
+
+### CS.3 Segmentace nesmí být tajná diskriminace ani datový vysavač
+
+Feature flags svádí k jemné segmentaci: země, firma, role, tarif, chování, historie, pravděpodobnost nákupu, oblíbená barva ponožek. Technicky to jde. Produktově to často nedává smysl. Privacy-first otázka zní: potřebujeme tak přesný signál, nebo si jen vyrábíme datovou závislost?
+
+Bezpečné segmenty pro malý SaaS:
+
+- interní uživatelé,
+- testovací tenant,
+- ručně označený beta zákazník,
+- tarif nebo role,
+- procentuální rollout podle stabilního anonymního klíče,
+- region jen tehdy, když souvisí s právem, jazykem nebo provozem.
+
+Rizikové segmenty:
+
+- chování napříč webem a aplikací bez jasného účelu,
+- citlivé osobní údaje,
+- importované marketingové publikum bez přezkoumaného souhlasu,
+- segmenty vytvořené jen pro „personalizaci“, kterou nikdo nevyhodnocuje,
+- experimenty, které mění cenu, dostupnost nebo podmínky bez produktového rozhodnutí.
+
+Pokud používáte procentuální rollout, používejte stabilní hash nad interním identifikátorem, ne náhodu při každém requestu. Uživatel nemá ráno vidět novou navigaci, po obědě starou a večer variantu C, protože systém má kreativní den.
+
+### CS.4 Flagy logujte, ale neukládejte zbytečné osobní detaily
+
+U každého důležitého vyhodnocení flagu chcete vědět, proč uživatel dostal danou variantu. Zároveň nechcete vytvořit paralelní šmírovací analytiku. Logujte rozhodnutí, ne životopis uživatele.
+
+Minimální bezpečný záznam:
+
+- `flag_key`,
+- `variant` nebo boolean hodnota,
+- `reason`, například default, targeting, percentage, override,
+- čas,
+- prostředí,
+- tenant nebo pseudonymizovaný uživatelský klíč,
+- korelační ID requestu,
+- verze pravidel.
+
+Do flag logů nepatří e-mail, celé jméno, text promptu, obsah dokumentu, číslo karty, session token, API klíč ani kompletní payload. Pokud potřebujete ladit, přidejte krátkodobý debug režim s omezenou retencí a vlastníkem. Debug log bez konce je jen budoucí incident v larválním stádiu.
+
+### CS.5 Rollout musí mít metriky, stop pravidla a ruční brzdu
+
+Postupné zapnutí není strategie, pokud nevíte, co sledujete. Před rolloutem určete signály, které rozhodnou o pokračování, zastavení nebo návratu. Pro malý SaaS stačí jednoduchá karta:
+
+- primární signál: aktivace funkce, dokončený workflow, úspěšný export, odeslaná objednávka,
+- ochranný signál: chybovost, latence, support dotazy, počet ručních zásahů,
+- privacy signál: neočekávané nové pole v logu, větší objem exportů, změna datového toku,
+- stop pravidlo: konkrétní hranice, při které flag vypnete,
+- vlastník rozhodnutí: kdo může rollout posunout dál,
+- komunikační plán: kdo informuje support nebo zákazníky.
+
+Příklad stop pravidla: „Pokud chybovost exportu faktur přesáhne 2 % během jedné hodiny nebo vzniknou tři support tickety se stejným problémem, vypínáme `billing_export_v2_enabled` a píšeme interní incident poznámku.“ Není to dokonalá věda, ale je to lepší než „uvidíme podle nálady dashboardu“.
+
+### CS.6 Technická implementace má být nudná a čitelná
+
+Feature flag systém nemusí být velká platforma. Pro začátek stačí jednoduchý konfigurační zdroj, audit změn, cache s rozumnou expirací a jasný fallback. Čím kritičtější funkce, tím víc musíte řešit dostupnost flag služby: aplikace nesmí spadnout jen proto, že konfigurační API mělo škytavku.
+
+Implementační pravidla:
+
+- flag vyhodnocujte na jednom místě, ne roztroušeně v každé komponentě,
+- používejte typed wrapper, aby špatný název flagu selhal při vývoji,
+- výchozí hodnota musí být bezpečná a dokumentovaná,
+- kritické ops flagy cachujte tak, aby šly použít i při výpadku provideru,
+- změny konfigurace auditujte stejně jako změny oprávnění,
+- staré flagy mažte i s mrtvým kódem a testy,
+- frontend flag nikdy nepovažujte za bezpečnostní kontrolu; oprávnění musí vynucovat backend.
+
+Pokud nechcete vendor lock-in, podívejte se na OpenFeature: cílí na vendor-agnostické API pro feature flagging a existuje jako CNCF projekt. To neznamená, že musíte hned zavádět další platformu. Znamená to, že si můžete navrhnout kód tak, aby aplikace nebyla přivařená k jednomu dodavateli.
+
+### CS.7 Šablona: rollout karta feature flagu
+
+## Základ
+
+- Název flagu:
+- Typ: release / experiment / permission / ops / kill switch
+- Vlastník:
+- Datum založení:
+- Datum revize nebo odstranění:
+
+## Funkce
+
+- Co flag zapíná:
+- Bezpečný výchozí stav:
+- Co se stane při vypnutí:
+- Jak poznáme, že může být flag odstraněn:
+
+## Segmentace
+
+- Komu se zapíná jako první:
+- Jaký identifikátor používáme pro rollout:
+- Jaká osobní data nejsou potřeba:
+- Kdo smí změnit targeting:
+
+## Metriky a brzdy
+
+- Primární signál úspěchu:
+- Ochranné signály:
+- Privacy-first signál:
+- Stop pravidlo:
+- Kdo rozhoduje o dalším kroku:
+
+## Provoz
+
+- Kde je konfigurace:
+- Jak se auditují změny:
+- Jaký je fallback při výpadku:
+- Kde je release poznámka:
+- Kdy smažeme mrtvý kód:
+
+### CS.8 Checklist: feature flags bez chaosu
+
+- [ ] Každý nový flag má typ, vlastníka a datum revize.
+- [ ] Název flagu je čitelný a odpovídá jednotné konvenci.
+- [ ] Výchozí hodnota je bezpečná při výpadku konfigurace.
+- [ ] Frontend flag neslouží jako jediná bezpečnostní kontrola.
+- [ ] Segmentace nepoužívá zbytečná osobní data.
+- [ ] Procentuální rollout je stabilní pro stejného uživatele nebo tenant.
+- [ ] Změny flagů mají auditní stopu.
+- [ ] Rollout má primární signál, ochranné signály a stop pravidlo.
+- [ ] Support ví, která funkce je v betě nebo postupném zapnutí.
+- [ ] Experiment má hypotézu a datum vyhodnocení.
+- [ ] Po releasu existuje úkol na odstranění dočasného flagu.
+- [ ] Logy flagů neobsahují tajemství, celé payloady ani zbytečné osobní údaje.
+
+### Mini cvičení: rollout audit za 50 minut
+
+1. **10 minut:** Sepište všechny aktivní flagy v aplikaci nebo aspoň v hlavním produktu.
+2. **10 minut:** U každého označte typ, vlastníka a datum poslední změny.
+3. **10 minut:** Najděte flagy bez jasného data odstranění nebo bez dokumentovaného účelu.
+4. **10 minut:** Vyberte jeden rizikový rollout a doplňte stop pravidlo.
+5. **5 minut:** Zkontrolujte, zda targeting nepotřebuje zbytečná osobní data.
+6. **5 minut:** Smažte nebo naplánujte smazání jednoho mrtvého flagu. Malý úklid, velká duševní hygiena.
+
+### Codyho komentář
+
+Feature flags jsou skvělé, když zrychlují bezpečné učení. Jsou hrozné, když maskují nerozhodnost. Pokud flag nemá vlastníka, metriky a konec, není to řízení releasu. Je to zapomenutý vypínač ve sklepě produktu. A jak ví každý hororový film: sklepy je dobré uklízet dřív, než začnou vydávat zvuky.
+
+### Zdroje k příloze CS
+
+- Martin Fowler: Feature Toggles — klasický praktický text o kategoriích feature toggles, jejich životnosti a riziku složitosti: https://martinfowler.com/articles/feature-toggles.html
+- Martin Fowler: FeatureFlag — kratší slovníkové shrnutí pojmu feature flag a související terminologie: https://martinfowler.com/bliki/FeatureFlag.html
+- OpenFeature — vendor-agnostická specifikace a API pro feature flagging: https://openfeature.dev/
+- CNCF: OpenFeature project — informace o projektu OpenFeature v rámci Cloud Native Computing Foundation: https://www.cncf.io/projects/openfeature/
+- OWASP Logging Cheat Sheet — doporučení pro logování, sanitizaci a vynechání citlivých dat z logů: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+
 ## Pracovní log
+- 2026-08-26: Přidána příloha CS „Feature flags a rollout bez produktového hazardu“ s rozdělením deploy/release/rollout, typy flagů, prevencí flag debtu, privacy-first segmentací, logováním, rollout metrikami, technickou implementací, šablonou, checklistem, 50minutovým auditem a ověřenými zdroji.
+
 - 2026-08-26: Přidána příloha CR „Auditní logy bez šmírovacího deníčku“ s rozdělením typů logů, seznamem auditovatelných akcí, minimalizací dat, retencí, integritou, zákaznickým zobrazením, šablonou, checklistem a ověřenými zdroji.
 
 
