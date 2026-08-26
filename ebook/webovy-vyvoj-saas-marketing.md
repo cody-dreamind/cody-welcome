@@ -25936,7 +25936,241 @@ Nejlepší agentní systém není ten, který umí všechno. Nejlepší je ten, 
 - NIST AI 600-1 Generative AI Profile popisuje použití funkcí Govern, Map, Measure a Manage pro generativní AI rizika: https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence
 - Evropská komise: Principles of the GDPR připomíná zásady účelového omezení, minimalizace dat, omezení uložení a odpovědnosti: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
 
+## DC. Schvalovací brány pro AI akce bez klikacího divadla
+
+Předchozí příloha řešila AI agenty a jejich nástroje. Teď přichází praktická otázka, na které se láme většina „bezpečných“ agentních workflow: kdy má AI jen navrhnout další krok, kdy ho smí provést sama a kdy musí počkat na člověka?
+
+Špatná odpověď zní: „Dáme tam confirm dialog.“ To je bezpečnostní placebo s tlačítkem. Pokud člověk nevidí dopad akce, zdroj dat, změny před/po a možnost bezpečně odmítnout, není to schvalování. Je to rituální kliknutí, kterým si tým kupuje falešný klid.
+
+Dobrá schvalovací brána je produktový a provozní mechanismus. Zpomaluje jen rizikové akce, u běžných věcí nepřekáží a hlavně dává člověku dost kontextu, aby mohl říct ano, ne, upravit nebo eskalovat. OWASP u agentních AI zdůrazňuje rizika nadměrné autonomie, zneužitelných nástrojů a nedostatečných kontrol. NIST AI RMF zase tlačí na řízení rizik přes mapování, měření a správu. Pro malý SaaS to znamená jednoduché pravidlo: agent může zrychlit práci, ale nesmí zamlžit odpovědnost.
+
+*Codyho komentář:* Pokud vaše bezpečnost stojí na tom, že unavený člověk v pátek v 17:42 klikne na „Confirm“, gratuluju. Postavili jste CAPTCHA pro vlastní tým.
+
+### DC.1 Rozdělte akce podle dopadu, ne podle technické obtížnosti
+
+Technicky jednoduchá akce může mít velký dopad. Odeslat e-mail, změnit tarif, deaktivovat účet nebo přepsat fakturační kontakt může být v kódu jeden API call. Pro zákazníka je to ale reálná událost.
+
+Použijte čtyři úrovně dopadu:
+
+| Úroveň | Typ akce | Příklad | Výchozí režim |
+|---|---|---|---|
+| Nízká | Bez změny stavu | shrnutí ticketu, návrh odpovědi, vyhledání dokumentace | agent smí provést |
+| Střední | Vratná změna v interním systému | přidat štítek, vytvořit draft, navrhnout úkol | agent smí provést nebo požádat podle kontextu |
+| Vysoká | Externí dopad nebo zákaznická změna | odeslat e-mail, změnit tarif, upravit oprávnění | člověk schvaluje preview |
+| Kritická | Peníze, smazání, bezpečnost, produkce | refundace, mazání dat, reset MFA, deploy, export všech dat | více kroků, silnější ověření, audit |
+
+Tahle tabulka má být součástí návrhu funkce, ne až bezpečnostní dodatek před releasem. Když produktový tým přidává novou agentní schopnost, musí zároveň říct, do které úrovně dopadu patří.
+
+### DC.2 Schválení musí ukázat rozdíl před a po
+
+Člověk nemá schvalovat větu „Agent chce provést akci“. Člověk má vidět přesně, co se změní.
+
+Dobré preview obsahuje:
+
+- **akci:** co se má stát,
+- **důvod:** proč to agent navrhuje,
+- **zdroje:** z jakých dat agent vycházel,
+- **diff:** co bylo před změnou a co bude po ní,
+- **dopad:** koho se změna dotkne,
+- **rizika:** co může být špatně,
+- **možnosti:** schválit, upravit, odmítnout, eskalovat.
+
+Příklad špatného preview:
+
+```text
+AI chce upravit subscription. Schválit?
+```
+
+Příklad lepšího preview:
+
+```text
+Navržená akce: změnit tarif zákazníka ACME s.r.o. z Trial na Team.
+
+Důvod: uživatel Jan Novák v ticketu #1842 potvrdil objednávku tarifu Team od 2026-09-01.
+
+Před změnou:
+- tarif: Trial
+- cena: 0 Kč
+- počet uživatelů: 2
+- fakturační kontakt: finance@acme.example
+
+Po změně:
+- tarif: Team
+- cena: 4 900 Kč / měsíc bez DPH
+- počet uživatelů: 10
+- fakturační kontakt: finance@acme.example
+
+Rizika:
+- v ticketu není přiložená objednávka,
+- změna spustí fakturační workflow,
+- zákazník dostane potvrzovací e-mail.
+
+Možnosti:
+- Schválit
+- Upravit datum účinnosti
+- Vytvořit draft odpovědi zákazníkovi
+- Odmítnout a zapsat důvod
+```
+
+Privacy-first detail: preview nesmí bez důvodu zobrazovat osobní údaje, které ke schválení nejsou potřeba. Pokud schvalujete změnu tarifu, nepotřebujete vidět celou historii komunikace zákazníka. Stačí citovaný ticket, relevantní věta a odkaz na zdroj v systému.
+
+### DC.3 Vysoké riziko vyžaduje druhý signál
+
+U kritických akcí nestačí jedno kliknutí. Ne proto, že by tým potřeboval víc byrokracie, ale protože kritické akce mají často kombinaci peněz, bezpečnosti, dostupnosti a osobních dat.
+
+Použijte druhý signál podle typu akce:
+
+- **Mazání dat:** potvrzení účelu, rozsahu a retenčního pravidla.
+- **Export dat:** potvrzení identity žadatele a rozsahu exportu.
+- **Změna oprávnění:** kontrola role, tenant izolace a časového omezení.
+- **Refundace nebo billing:** schválení finančním vlastníkem nebo limitem částky.
+- **Produkční změna:** odkaz na release, rollback plán a stav monitoringu.
+- **Bezpečnostní reset:** ověření kanálu mimo stejnou kompromitovatelnou relaci.
+
+Druhý signál nemusí být vždy druhý člověk. U menšího týmu může jít o silnější autentizaci, časový zámek, předem definovaný limit nebo povinnost vyplnit důvod. Důležité je, aby systém rozlišoval „běžná vratná změna“ a „akce, která se bude špatně vysvětlovat zákazníkovi, právníkovi nebo budoucímu já“.
+
+### DC.4 Agent nesmí schvalovat sám sebe
+
+To zní samozřejmě, ale v praxi se to rozbije nenápadně. Agent navrhne změnu, stejný agent zkontroluje riziko, stejný agent rozhodne, že riziko je nízké, a stejný agent provede akci. Výborně, právě jste vynalezli firemní monolog s API klíčem.
+
+Oddělte minimálně tři role:
+
+1. **Navrhovatel:** agent připraví návrh a zdroje.
+2. **Kontrolor:** pravidla nebo člověk ověří dopad, oprávnění a limity.
+3. **Vykonavatel:** systém provede akci jen po splnění podmínek.
+
+U malého SaaSu to nemusí být tři samostatné aplikace. Stačí architektonické pravidlo: prompt ani model nemají rozhodovat o vlastních oprávněních. Oprávnění, limity, tenant scope a požadavek na schválení patří do aplikační vrstvy.
+
+### DC.5 Schválení logujte jako rozhodnutí, ne jako technickou událost
+
+Audit log typu `approved=true` je lepší než nic, ale pořád je slabý. Za měsíc už nikdo nebude vědět, co se vlastně schválilo a proč.
+
+Minimální záznam schválení:
+
+```markdown
+## AI approval log
+
+- Čas:
+- Schvalovatel:
+- Role schvalovatele:
+- Agent / workflow:
+- Nástroj:
+- Navržená akce:
+- Dopadová úroveň:
+- Zdrojové záznamy:
+- Diff před/po:
+- Důvod schválení nebo odmítnutí:
+- Druhý signál použit: ano/ne/jaký
+- Výsledek provedení:
+- Rollback nebo follow-up:
+```
+
+Log má být užitečný pro support, bezpečnostní review i zákaznickou důvěru. Nemá být skladištěm promptů, osobních údajů a interních debat. Ukládejte rozhodnutí, odkaz na zdroje a minimální technický kontext. Ne celý konverzační román. Nikdo nechce číst promptovou Vojnu a mír.
+
+### DC.6 Navrhněte odmítnutí jako normální cestu
+
+Schvalovací brána není dobrá, pokud vede všechny cesty k potvrzení. Odmítnutí musí být rychlé, bezpečné a užitečné.
+
+Když člověk odmítne návrh, systém by měl nabídnout:
+
+- vybrat důvod odmítnutí,
+- upravit návrh bez ztráty kontextu,
+- vytvořit follow-up úkol,
+- označit chybějící zdroj,
+- nahlásit špatné chování agenta,
+- přidat pravidlo pro příště.
+
+Příklad důvodů odmítnutí:
+
+- chybí zákaznické potvrzení,
+- špatný tenant nebo účet,
+- příliš široký rozsah,
+- citlivá data v návrhu,
+- akce má počkat na release okno,
+- nejsem správný schvalovatel,
+- agent špatně pochopil zadání.
+
+Tohle není jen UX detail. Odmítnutí jsou tréninkový materiál pro proces, ne nutně pro model. Ukazují, kde chybí pravidla, zdroje, role nebo produktové hranice.
+
+### DC.7 Šablona: schvalovací karta AI akce
+
+Použijte ji u každé agentní akce, která mění stav systému nebo komunikuje ven.
+
+```markdown
+# Schvalovací karta AI akce
+
+## Základ
+- Název akce:
+- Agent/workflow:
+- Vlastník:
+- Nástroj/API:
+- Dopadová úroveň: nízká/střední/vysoká/kritická
+
+## Kontext
+- Proč akce vzniká:
+- Zdroje, ze kterých agent vychází:
+- Tenant/zákazník:
+- Dotčené osoby nebo role:
+
+## Změna
+- Stav před:
+- Stav po:
+- Externí komunikace:
+- Finanční dopad:
+- Dopad na osobní údaje:
+
+## Kontroly
+- Kdo smí schválit:
+- Potřebuje druhý signál:
+- Limit jedné akce:
+- Rate limit:
+- Rollback/kompenzace:
+- Audit log:
+
+## UX
+- Co uvidí schvalovatel:
+- Jak může návrh upravit:
+- Jak odmítne a zapíše důvod:
+- Co se stane po schválení:
+```
+
+### DC.8 Checklist před zapnutím agentní akce
+
+- [ ] Akce má přiřazenou dopadovou úroveň.
+- [ ] Oprávnění jsou řízená aplikací, ne promptem.
+- [ ] Preview ukazuje rozdíl před/po.
+- [ ] Schvalovatel vidí zdroje a důvod návrhu.
+- [ ] Kritické akce mají druhý signál.
+- [ ] Agent nemůže sám změnit vlastní limity ani režim schválení.
+- [ ] Odmítnutí je normální cesta, ne chyba workflow.
+- [ ] Audit log ukládá rozhodnutí, zdroje a výsledek, ne zbytečná osobní data.
+- [ ] Existuje rollback nebo kompenzační postup.
+- [ ] Pravidla se testují po změně promptu, modelu, nástroje nebo oprávnění.
+
+### Mini cvičení: approval audit za 45 minut
+
+1. Vyberte jednu existující nebo plánovanou AI akci, která něco zapisuje.
+2. Zařaďte ji do dopadové úrovně.
+3. Napište stav před a po ve formě, kterou by viděl schvalovatel.
+4. Určete, kdo smí akci schválit a kdy je potřeba druhý signál.
+5. Sepište tři důvody odmítnutí.
+6. Zkontrolujte, jestli preview neukazuje zbytečná osobní data.
+7. Navrhněte auditní záznam, který půjde pochopit i za tři měsíce.
+8. Otestujte jeden zlý vstup: zákaznický text, který se snaží agenta přimět k obejití schválení.
+
+Výstupem má být jedna schvalovací karta, ne desetistránková politika. Malý tým potřebuje pravidla, která opravdu používá. Ne compliance koberec, pod který se zamete strach.
+
+### Zdroje k příloze DC
+
+- OWASP Agentic AI — Threats and Mitigations popisuje hrozby agentních systémů a potřebu omezení autonomie, nástrojů a oprávnění: https://genai.owasp.org/resource/agentic-ai-threats-and-mitigations/
+- OWASP Top 10 for LLM and GenAI zahrnuje riziko Excessive Agency a další kategorie relevantní pro agentní nástroje: https://genai.owasp.org/initiatives/top-10-for-llm-and-genai/
+- OWASP AI Agent Security Cheat Sheet doporučuje strukturované testování agentů po změnách promptů, nástrojů, paměti, politik nebo modelů: https://cheatsheetseries.owasp.org/cheatsheets/AI_Agent_Security_Cheat_Sheet.html
+- NIST AI Risk Management Framework a Generative AI Profile poskytují rámec pro mapování, měření a řízení rizik AI systémů: https://www.nist.gov/itl/ai-risk-management-framework
+- Evropská komise: Principles of the GDPR připomíná zásady minimalizace dat, účelového omezení, omezení uložení a odpovědnosti: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
+
 ## Pracovní log
+
+- 2026-08-26: Přidána příloha DC „Schvalovací brány pro AI akce bez klikacího divadla“ s dopadovými úrovněmi, preview před/po, druhým signálem pro kritické akce, oddělením rolí, approval logem, odmítáním návrhů, šablonou, checklistem, 45minutovým auditem a ověřenými OWASP/NIST/EU zdroji.
 
 - 2026-08-26: Přidána příloha DB „AI agenti a nástroje bez autonomního průšvihu“ s mapou schopností, kartami nástrojů, úrovněmi autonomie, obranou proti nedůvěryhodnému vstupu, auditním logem, workflow briefem, checklistem, hodinovým review a ověřenými OWASP/NIST/EU zdroji.
 
