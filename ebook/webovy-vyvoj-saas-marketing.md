@@ -23396,7 +23396,184 @@ Po hodině máte jeden monitorovací scénář, který chrání zákaznický sli
 - NIST Cybersecurity Framework 2.0 popisuje funkce Identify, Protect, Detect, Respond a Recover, které pomáhají propojit monitoring s provozní reakcí: https://www.nist.gov/cyberframework
 - W3C WCAG 2.2 kritérium 4.1.3 Status Messages je užitečné pro návrh stavových a chybových zpráv, které asistivní technologie zachytí bez zbytečné změny fokusu: https://www.w3.org/TR/WCAG22/#status-messages
 
+
+## CP. AI gramotnost v týmu bez compliance divadla
+
+AI funkce v malém SaaSu často nevzniknou jako velká strategie. Spíš někdo řekne: „Přidáme asistenta, ať to uživatelům něco navrhuje.“ Pak druhý člověk připojí model k interním datům, třetí přidá export do CRM, čtvrtý zkopíruje prompt z chatu a najednou máte systém, který sice umí psát hezké věty, ale nikdo přesně neví, co smí číst, co smí měnit, kdo za výstup odpovídá a jak se pozná chyba. Gratuluji, právě jste si pořídili stážistu s API klíčem a bez školení.
+
+AI gramotnost není povinné školení o tom, že „umělá inteligence je budoucnost“. To už ví i firemní mikrovlnka, jen o tom zatím nemá LinkedIn profil. Praktická AI gramotnost znamená, že tým rozumí omezením, rizikům a odpovědnostem konkrétních AI funkcí, které používá nebo nabízí zákazníkům. Ne obecně. Konkrétně: jaká data do modelu vstupují, jaký výstup vzniká, kdo ho kontroluje, co se loguje, kdy člověk musí zasáhnout a jak se funkce vypne, když začne dělat neplechu.
+
+Privacy-first přístup je tady výhoda. Pokud už od začátku odmítnete posílat do AI vše „pro jistotu“, máte jednodušší dokumentaci, menší bezpečnostní riziko a srozumitelnější produktový slib. AI pak není černá skříňka napojená na firemní krevní oběh, ale omezený nástroj s jasnou rolí.
+
+*Codyho komentář: AI gramotnost neznamená, že každý v týmu musí umět vysvětlit transformer u tabule. Stačí, když nikdo nepošle celé CRM do promptu jen proto, že odpověď pak zní „víc kontextově“. Kontext je skvělý sluha a výborný únik dat.*
+
+### CP.1 Sepište AI funkce jako produktový inventář
+
+Nejdřív zjistěte, kde AI ve firmě opravdu je. Ne kde by mohla být, ne kde by ji rád viděl investor, ale kde už se používá dnes. Inventář má zahrnovat interní nástroje, zákaznické funkce, automatizace, experimenty, skripty, pluginy v kancelářských aplikacích a „dočasné“ workflow, které běží už šest měsíců. Dočasnost v SaaSu je často jen technický dluh s lepším PR.
+
+Praktické členění:
+
+| Typ použití | Příklad | Hlavní riziko | Privacy-first pravidlo |
+|---|---|---|---|
+| Interní pomocník | shrnutí meetingu, návrh e-mailu, analýza supportu | vložení osobních nebo obchodních dat bez kontroly | používat anonymizované nebo minimalizované vstupy |
+| Produktová funkce | generování odpovědi, doporučení dalšího kroku | zákazník bere výstup jako autoritativní rozhodnutí | jasně označit AI výstup a přidat lidskou kontrolu u rizikových kroků |
+| Agentní workflow | AI volá nástroje, zapisuje do systému, posílá zprávy | nechtěná akce, prompt injection, přístup mimo rozsah | nejmenší oprávnění, potvrzení před dopadovou akcí, audit log |
+| Analytická funkce | klasifikace leadů, sentiment, priorita ticketu | profilování a automatizované rozhodování | agregace, vysvětlitelnost, možnost opravy a nespoléhat na jeden signál |
+| Vývojářský nástroj | generování kódu, review, testy | vložení tajemství nebo licenčně problematického kódu | zákaz vkládání secrets, kontrola výstupu, repo pravidla |
+
+Inventář nemusí být dokonalý dokument na 30 stran. Stačí jedna tabulka, která odpoví na otázku: co AI dělá, pro koho, s jakými daty a s jakým dopadem. Bez téhle mapy se školení týmu rychle změní v obecné fráze typu „buďte opatrní“. To je rada na úrovni cedule „nepadejte“ vedle otevřené šachty.
+
+### CP.2 Určete, co tým musí umět podle role
+
+AI gramotnost má být přiměřená roli. Obchodník nepotřebuje znát architekturu vektorové databáze, ale musí vědět, že do AI nesmí poslat neveřejnou smlouvu zákazníka jen proto, že chce hezčí odpověď. Vývojář nepotřebuje marketingový workshop o „AI mindsetu“, ale musí umět navrhnout datové hranice, logování a fallback. Support musí vědět, kdy AI návrh použít, kdy ho přepsat a kdy eskalovat člověku.
+
+Doporučený minimální obsah podle role:
+
+- **Zakladatel a management:** rozhodují, které AI use-casy mají hodnotu, kdo vlastní riziko, jak se vysvětlují zákazníkům a kdy se funkce vypíná.
+- **Produkt:** definuje účel AI funkce, hranice výstupu, uživatelské sdělení, metriku kvality a situace pro lidskou kontrolu.
+- **Vývoj:** řeší datové toky, přístupy, bezpečnost, testy, auditní stopu, monitoring a bezpečný release.
+- **Marketing a obchod:** neslibují schopnosti, které produkt neumí garantovat, a nepoužívají zákaznická data v externích AI nástrojích bez pravidel.
+- **Support:** používá AI jako návrh, ne jako automatickou pravdu, a umí poznat citlivý případ, který patří člověku.
+- **Finance a provoz:** kontrolují náklady, smlouvy, subdodavatele, DPA, rezidenci dat a exit plán.
+
+Evropský AI Act výslovně pracuje s požadavkem na AI gramotnost pro poskytovatele a deployery AI systémů. Podle Evropské komise začal článek 4 platit od 2. února 2025 a dohled nad jeho pravidly se spouští od 2. srpna 2026. Prakticky to znamená, že nestačí mít jeden interní dokument schovaný v intranetu. Tým musí rozumět svým konkrétním AI nástrojům, rizikům a odpovědnostem v kontextu práce, kterou opravdu dělá.
+
+### CP.3 Oddělte prompt pravidla od datových pravidel
+
+Mnoho firem začne AI governance tím, že napíše „prompt guidelines“. To je užitečné, ale nestačí. Prompt říká, jak se ptát. Datová pravidla říkají, co do otázky vůbec smí vstoupit. Bez datových pravidel skončíte u krásně formulovaných promptů, které elegantně pašují osobní údaje do cizí infrastruktury.
+
+Rozdělte interní pravidla na dvě vrstvy:
+
+1. **Prompt pravidla:** jak formulovat úkol, jak požadovat zdroje, jak uvádět nejistotu, jak ověřovat výstup, jak nepředstírat přesnost.
+2. **Datová pravidla:** jaké typy dat lze použít, co musí být anonymizované, co je zakázané, kde může model běžet, jak se nastavuje retence a kdo schvaluje výjimku.
+
+Příklad jednoduchého datového semaforu:
+
+| Kategorie dat | Povoleno v běžném AI nástroji? | Příklad | Poznámka |
+|---|---:|---|---|
+| Veřejný obsah | Ano | text z webu, veřejná dokumentace | ověřit zdroj a autorská práva |
+| Interní neveřejný obsah | Jen ve schváleném nástroji | interní postup, anonymizovaná case study | zkontrolovat smlouvu a retenci |
+| Osobní údaje zákazníků | Jen pokud je to nezbytné a schválené | support ticket s e-mailem | minimalizace, účel, přístupová kontrola |
+| Citlivé nebo zvláštní kategorie | Standardně ne | zdravotní údaje, biometrie, politické názory | právní a bezpečnostní review předem |
+| Secrets a přístupové údaje | Nikdy | API klíč, token, heslo | incident, rotace a zápis |
+
+Tohle pravidlo je nudné. Což je skvělé. Bezpečnostní pravidla mají být nudná, opakovatelná a srozumitelná. Pokud potřebujete ke každému použití AI tři porady, pravidlo je moc složité. Pokud pravidlo nebrání žádnému reálnému průšvihu, je to dekorace.
+
+### CP.4 Naučte tým rozpoznat nespolehlivý výstup
+
+AI výstup může být užitečný a zároveň špatný. To není paradox, to je každodenní provoz. Model může napsat přesvědčivý text, který obsahuje neexistující odkaz, zastaralé tvrzení, špatný právní závěr, falešnou jistotu nebo produktový slib, který firma neumí splnit. Nejhorší kombinace je sebevědomý tón a nulové ověření.
+
+Tým by měl znát pět kontrolních otázek:
+
+- **Je výstup ověřitelný?** Pokud obsahuje fakt, číslo, právní požadavek nebo tržní tvrzení, musí mít zdroj.
+- **Je výstup aktuální?** U regulace, cen, nástrojů, bezpečnostních doporučení a trendů nestačí paměť modelu.
+- **Je výstup v rozsahu role?** AI nesmí rozhodovat tam, kde má jen navrhovat.
+- **Neobsahuje víc dat, než potřebuje?** Shrnutí support ticketu nemá vracet osobní detaily, které nikdo nepotřebuje.
+- **Je jasné, kdo výstup schválil?** U dopadových výstupů musí existovat lidský vlastník.
+
+Praktický trik: do šablon pro AI výstupy přidejte povinnou sekci „Nejistoty a co ověřit“. Když model tvrdí, že nic ověřit netřeba, je to signál k opatrnosti, ne důkaz geniality.
+
+### CP.5 Agentní nástroje školte jako oprávnění, ne jako hračku
+
+Když AI jen navrhuje text, riziko je omezené. Když AI umí volat nástroje, číst databázi, posílat e-maily, měnit záznamy nebo spouštět skripty, už nejde o chatbot. Jde o operátora systému. A operátor systému potřebuje oprávnění, audit, limity a pravidla eskalace.
+
+Pro každý agentní nástroj si tým musí umět odpovědět:
+
+- Jaký přesný úkol nástroj plní?
+- Jaké vstupy jsou důvěryhodné a jaké jsou jen uživatelský obsah?
+- Jaká data může nástroj číst?
+- Jaké akce může provést bez potvrzení?
+- Které akce vyžadují lidský souhlas?
+- Kde vzniká auditní log?
+- Jak nástroj zastavíme nebo vypneme?
+- Jak poznáme prompt injection nebo manipulativní instrukci v datech?
+
+Agentní workflow má mít malé oprávnění a krátkou smyčku zpětné vazby. Pokud agent potřebuje přístup k celému CRM, fakturačnímu systému, databázi a e-mailu, aby „možná pomohl“, není to pomocník. Je to budoucí incident s hezkým avatarovým kolečkem.
+
+### CP.6 Šablona: AI gramotnostní karta
+
+```markdown
+## AI funkce nebo nástroj
+
+- Název:
+- Vlastník:
+- Publikum: interní / zákaznické / obojí
+- Stav: experiment / pilot / produkce / vypnuto
+
+## Účel
+
+- Jaký problém řeší:
+- Co výslovně nedělá:
+- Jak poznáme, že pomáhá:
+
+## Data
+
+- Vstupní data:
+- Zakázaná data:
+- Místo zpracování:
+- Retence:
+- Subdodavatelé:
+
+## Lidská kontrola
+
+- Co AI jen navrhuje:
+- Co může udělat sama:
+- Co vyžaduje potvrzení:
+- Kdo schvaluje výstup u rizikových případů:
+
+## Provoz
+
+- Audit log:
+- Monitoring kvality:
+- Fallback při chybě:
+- Vypnutí nebo rollback:
+
+## Školení
+
+- Kdo nástroj používá:
+- Co musí před použitím vědět:
+- Datum poslední revize:
+```
+
+Tuhle kartu vyplňte pro každou AI funkci, která má přístup k interním nebo zákaznickým datům. U drobných experimentů stačí kratší verze, ale nesmí zmizet datová pravidla a vlastník.
+
+### CP.7 Checklist: AI gramotnost bez divadla
+
+- [ ] Máme inventář interních i zákaznických AI použití.
+- [ ] Každá AI funkce má vlastníka a jasný účel.
+- [ ] Tým ví, která data do AI nástrojů nesmí.
+- [ ] Prompt pravidla jsou oddělená od datových pravidel.
+- [ ] U dopadových výstupů existuje lidská kontrola.
+- [ ] AI výstupy s fakty, právem, cenami nebo trendy se ověřují ze zdrojů.
+- [ ] Agentní nástroje mají nejmenší nutná oprávnění.
+- [ ] Rizikové akce vyžadují potvrzení člověkem.
+- [ ] Logy neobsahují zbytečné osobní údaje ani secrets.
+- [ ] Zákazník pozná, kdy komunikuje s AI funkcí nebo dostává AI návrh.
+- [ ] Existuje jednoduchý způsob, jak AI funkci vypnout.
+- [ ] Pravidla se revidují při změně modelu, providera, datového toku nebo účelu.
+
+### Mini cvičení: AI literacy review za 60 minut
+
+1. **10 minut:** Sepište všechny AI nástroje a funkce, které tým používá posledních 30 dní.
+2. **10 minut:** U každé položky označte data: veřejná, interní, osobní, citlivá, secrets.
+3. **10 minut:** Vyberte tři nejrizikovější použití podle dopadu na zákazníka nebo data.
+4. **15 minut:** Pro nejrizikovější položku vyplňte AI gramotnostní kartu.
+5. **10 minut:** Napište tři pravidla, která tým použije hned od zítřka.
+6. **5 minut:** Určete vlastníka revize a datum další kontroly.
+
+Výstupem není „AI strategie“. Výstupem je konkrétní seznam funkcí, jedna vyplněná karta a tři pravidla, která sníží riziko v reálném provozu. To je mnohem užitečnější než motivační slide s robotem, který se tváří, že rozumí kvartálním cílům.
+
+### Zdroje k příloze CP
+
+- Nařízení Evropského parlamentu a Rady (EU) 2024/1689, tzv. AI Act, definuje mimo jiné požadavky související s AI gramotností a rolemi poskytovatelů/deployerů AI systémů: https://eur-lex.europa.eu/eli/reg/2024/1689/oj
+- Evropská komise shrnuje AI literacy jako praktickou povinnost podle článku 4 AI Actu a uvádí, že se vztahuje na poskytovatele i deployery AI systémů, s přihlédnutím k roli, zkušenostem a kontextu použití: https://digital-strategy.ec.europa.eu/en/policies/ai-talent-skills-and-literacy
+- GDPR v čl. 5 stanoví zásady zpracování osobních údajů včetně účelového omezení, minimalizace údajů, přesnosti, omezení uložení, integrity a důvěrnosti: https://eur-lex.europa.eu/eli/reg/2016/679/oj
+- EDPB Guidelines 01/2025 k pseudonymizaci ukazují, proč samotné „odstranění jména“ nestačí a proč je potřeba řešit kontext, propojení a zbytkové riziko: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-012025-pseudonymisation_en
+- OWASP GenAI Security Project uvádí aktuální Top 10 rizik pro LLM a generativní AI aplikace, včetně prompt injection, úniku citlivých informací, nadměrné agentní pravomoci, špatného zacházení s výstupy a misinformation: https://genai.owasp.org/llm-top-10/
+
 ## Pracovní log
+
+- 2026-08-26: Přidána příloha CP „AI gramotnost v týmu bez compliance divadla“ s inventářem AI funkcí, role-based školením, oddělením prompt a datových pravidel, kontrolou nespolehlivých výstupů, agentními oprávněními, AI gramotnostní kartou, checklistem, hodinovým review cvičením a ověřenými EU/GDPR/EDPB/OWASP zdroji.
 
 - 2026-08-26: Přidána příloha CO „Syntetický monitoring bez uživatelského šmírování“ s mapou zákaznických slibů, syntetickými kontrolami, monitorovacím účtem, health endpointy, logovací minimalizací, alert kartou, frontami, browser signály, checklistem, 60minutovým cvičením a ověřenými MDN/OWASP/GDPR/NIST/W3C zdroji.
 
