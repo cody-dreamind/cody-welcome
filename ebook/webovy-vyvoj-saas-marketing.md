@@ -22966,7 +22966,226 @@ Výstupem má být malá změna, ne bezpečnostní epos. Nejlepší první výhr
 - Mozilla HTTP Observatory slouží jako praktická kontrola bezpečnostních hlaviček a dalších webových bezpečnostních nastavení: https://developer.mozilla.org/en-US/observatory
 
 
+## CN. Status page a provozní komunikace bez kouřové clony
+
+Status page je zvláštní věc: když ji nepotřebujete, vypadá jako zbytečný provozní luxus. Když ji potřebujete, je pozdě začít řešit, kdo zná heslo, jak se píše incident a jestli výpadek nazvat „degradovaný výkon“, nebo prostě „nejde to“. Malý SaaS nepotřebuje korporátní válečnou místnost. Potřebuje jedno veřejné místo pravdy, interní rytmus a jazyk, kterému zákazník rozumí i bez titulku „senior cloud reliability sorcerer“.
+
+Dobrá status page neřeší jen dostupnost. Řeší důvěru. Ukazuje, že problém vidíte, pracujete na něm a umíte po něm říct, co se změnilo. Privacy-first varianta navíc nedělá ze stránky další sledovací zařízení: žádné marketingové pixely, žádné invazivní session replaye, žádné přihlášení k odběru přes nástroj, který si pro radost posílá metadata přes půl internetu.
+
+*Codyho komentář: nejhorší status page je zelená status page během reálného výpadku. To už není status page, to je digitální plynové osvětlení. Hezké, kulaté, zelené — a úplně k ničemu.*
+
+### CN.1 Rozdělte stav služby podle toho, co zákazník opravdu používá
+
+Status „všechno běží“ je užitečný asi jako dashboard s jednou metrikou „firma je v pohodě“. Rozdělte službu na komponenty, které odpovídají zákaznické zkušenosti, ne interní architektuře.
+
+Praktické komponenty pro malý SaaS:
+
+| Komponenta | Co znamená pro zákazníka | Interní signál |
+|---|---|---|
+| Web / marketing | Lidé se dostanou na web, dokumentaci a ceník. | HTTP 200, rychlost odpovědi, TLS certifikát. |
+| Aplikace | Uživatel se přihlásí a používá hlavní workflow. | Login, session, hlavní API, frontend health check. |
+| API | Integrace zákazníků dostávají správné odpovědi. | Chybovost, latence, rate limit, auth. |
+| Platby | Zákazník může zaplatit, změnit plán nebo stáhnout fakturu. | Provider, webhooky, fakturační fronta. |
+| E-mail / notifikace | Důležité zprávy odcházejí a nejsou blokované. | Queue, bounce rate, provider status. |
+| Import / export | Data lze bezpečně nahrát nebo stáhnout. | Job queue, storage, expirace exportů. |
+| Support | Uživatel ví, kam napsat a co čekat. | Helpdesk, mailbox, SLA interního triage. |
+
+Nepopisujte zákazníkovi „Redis cluster shard 2“. Popište „notifikace mohou chodit se zpožděním“. Interní názvy patří do runbooku. Veřejný status patří člověku, který chce vědět, jestli má pokračovat v práci, obejít problém, nebo jít uvařit kafe.
+
+### CN.2 Používejte malý, předem daný slovník stavů
+
+Když stav vymýšlíte během incidentu, vznikají poetické katastrofy typu „částečná anomálie konektivity“. Dopředu si nastavte slovník a držte se ho.
+
+Doporučený minimální slovník:
+
+- `Operational` / „V provozu“: komponenta funguje v běžných mezích.
+- `Degraded performance` / „Zhoršený výkon“: služba odpovídá, ale pomaleji nebo méně spolehlivě.
+- `Partial outage` / „Částečný výpadek“: část uživatelů, regionů nebo funkcí nefunguje.
+- `Major outage` / „Významný výpadek“: hlavní workflow je nedostupné.
+- `Maintenance` / „Údržba“: plánovaný zásah s popsaným dopadem a časovým oknem.
+
+Ke každému stavu přidejte zákaznický dopad. Ne „databáze má vyšší latenci“, ale „uložení změn může trvat déle a část požadavků může selhat“. Technický detail dejte až do další věty nebo interní poznámky.
+
+U API doplňte i chování odpovědí. HTTP specifikace RFC 9110 definuje význam stavových kódů; produktově je důležité, aby klienti dostávali konzistentní odpovědi. Když je služba dočasně přetížená, `503 Service Unavailable` s `Retry-After` je pro integraci užitečnější než náhodný mix `500`, timeoutu a ticha. Pokud vracíte strojově čitelné chyby, držte jednotný formát; RFC 9457 popisuje „problem details“ pro HTTP API právě pro takové situace.
+
+### CN.3 První zpráva má být rychlá, ne dokonalá
+
+Incidentní komunikace nemá čekat na kompletní diagnózu. První zpráva má říct tři věci:
+
+1. víme o problému,
+2. koho nebo čeho se pravděpodobně týká,
+3. kdy dáme další update.
+
+Šablona první zprávy:
+
+```text
+Vyšetřujeme problém s [komponenta]. Někteří uživatelé mohou vidět [dopad].
+Začali jsme incident řešit v [čas a zóna]. Další update dáme nejpozději v [čas].
+```
+
+Příklad:
+
+```text
+Vyšetřujeme problém s exporty dat. Někteří uživatelé mohou čekat déle na dokončení CSV a JSON exportů.
+Začali jsme incident řešit v 10:20 CET. Další update dáme nejpozději v 10:45 CET.
+```
+
+Všimněte si, co tam není: hádání příčiny, obviňování dodavatele, zlehčování dopadu, interní slang a marketingová fráze „omlouváme se za případné nepříjemnosti“ jako jediná informace. Omluva je fajn. Ale sama o sobě neopraví ani export, ani důvěru.
+
+### CN.4 Aktualizace pište v rytmu, i když není velký posun
+
+Ticho během incidentu zvětšuje problém. Když zákazník neví, jestli někdo pracuje, začne si vytvářet vlastní teorii. A lidský mozek je v produkčním incidentu horší monitoring než rozumný alerting.
+
+Nastavte si update interval podle závažnosti:
+
+| Závažnost | Veřejný update | Interní kontrola |
+|---|---:|---:|
+| Významný výpadek | každých 15–30 minut | každých 5–10 minut |
+| Částečný výpadek | každých 30–60 minut | každých 15 minut |
+| Zhoršený výkon | každých 60 minut nebo při změně | každých 30 minut |
+| Plánovaná údržba | předem, při startu, při konci | podle runbooku |
+
+Update bez velkého posunu může znít takhle:
+
+```text
+Problém stále vyšetřujeme. Potvrdili jsme dopad na exporty vytvořené po 10:05 CET.
+Nové exporty zůstávají ve frontě a data nejsou ztracená. Další update dáme do 11:15 CET.
+```
+
+Tohle je užitečné, protože zákazník ví rozsah, stav dat a další čas. „Stále pracujeme na řešení“ bez kontextu je jen provozní šum v drahém kabátě.
+
+### CN.5 Privacy-first status page: méně sledování, více kontroly
+
+Status page často běží mimo hlavní aplikaci, což je správně: když spadne aplikace, stránka se stavem má přežít. Jenže „mimo hlavní aplikaci“ nesmí znamenat „mimo naše hodnoty“.
+
+Privacy-first pravidla:
+
+- Hostujte status page nezávisle na hlavní aplikaci, ideálně v evropském regionu nebo u evropského poskytovatele.
+- Nepřidávejte reklamní pixely, social share skripty ani session replay.
+- Nabídněte RSS nebo Atom feed pro odběr incidentů bez nutnosti předávat e-mail.
+- Pokud nabízíte e-mailové odběry, sbírejte jen e-mail, účel, souhlas a auditní stopu přihlášení.
+- Ukládejte incidentní historii tak dlouho, jak má provozní smysl, ne navždy „protože storage je levná“.
+- Nepište do veřejného statusu osobní data, názvy zákazníků ani interní identifikátory ticketů.
+- Oddělte veřejnou komunikaci od interních logů; status page není výpis debug konzole.
+
+Dobrá varianta pro malý tým je statická status page generovaná z Markdownu nebo jednoduchého administrátorského formuláře, nasazená mimo primární runtime. Pokud používáte hotový nástroj, ptejte se stejně jako u každého dodavatele: kde jsou data, kdo je zpracovatel, jak funguje export incidentní historie, jak se ruší účet a jaké notifikační kanály používá.
+
+### CN.6 API incidenty komunikujte lidem i strojům
+
+U SaaSu často nestačí napsat „máme výpadek“. Integrace potřebují vědět, jestli mají retryovat, přestat posílat dávky, nebo kontaktovat člověka.
+
+Minimum pro API incident:
+
+- veřejná status komponenta `API`,
+- strojově čitelné chyby se stabilním typem,
+- `Retry-After`, pokud dává smysl,
+- dokumentované rate limit a maintenance chování,
+- incident ID, které jde spojit s podporou,
+- informace, zda jsou data ztracená, opožděná, nebo jen nedostupná.
+
+Příklad zákaznické zprávy:
+
+```text
+API odpovídá zvýšeným počtem 503 pro požadavky na /exports. Klienti mohou požadavky opakovat po době uvedené v hlavičce Retry-After.
+Data přijatá před incidentem zůstávají uložená. Nové exportní joby se mohou zpozdit.
+```
+
+Příklad interního pravidla: pokud chyba vzniká na bezpečnostní nebo autorizační vrstvě, veřejná komunikace nesmí prozradit detaily, které by útočníkovi pomohly. Stačí popsat dopad a bezpečný workaround.
+
+### CN.7 Po vyřešení napište uzavření a krátké postmortem
+
+Zelený status po incidentu nestačí. Uzavření má říct:
+
+- kdy byl problém vyřešen,
+- jaký byl potvrzený dopad,
+- jestli zákazníci musí něco udělat,
+- jestli proběhne detailnější postmortem,
+- kde bude dostupná historie incidentu.
+
+Šablona uzavření:
+
+```text
+Incident je vyřešený k [čas]. Dopad se týkal [komponenta / uživatelé / časové okno].
+[Data nebyla ztracena / část akcí je potřeba zopakovat / kontaktujeme dotčené zákazníky].
+Do [datum] doplníme stručné postmortem se změnami, které sníží riziko opakování.
+```
+
+Postmortem nemusí být román. Stačí stručné shrnutí, časová osa, příčina v bezpečné míře detailu, co fungovalo, co zlepšíte a kdo vlastní akce. NIST Cybersecurity Framework 2.0 řadí komunikaci, analýzu a zlepšení mezi důležité části reakce a obnovy; produktově to znamená hlavně neopakovat stejný výpadek ve stejném převleku.
+
+### Šablona: status incident karta
+
+```markdown
+# Status incident: [ID]
+
+## Základ
+- Stav: investigating / identified / monitoring / resolved
+- Závažnost:
+- Komponenty:
+- Začátek:
+- Konec:
+- Vlastník komunikace:
+
+## Dopad
+- Koho se problém týká:
+- Co uživatel vidí:
+- Jsou data ztracená, opožděná nebo nedostupná:
+- Workaround:
+
+## Veřejné zprávy
+- První update:
+- Průběžné updaty:
+- Uzavření:
+- Odkaz na postmortem:
+
+## Privacy-first kontrola
+- Obsahuje zpráva osobní data? Ne / Ano, upravit:
+- Obsahuje interní identifikátory? Ne / Ano, upravit:
+- Je odběr dostupný přes RSS/Atom:
+- Retence incidentní historie:
+
+## Akce po incidentu
+- Technická akce:
+- Procesní akce:
+- Komunikační akce:
+- Datum revize:
+```
+
+### CN.8 Checklist: status page bez mlžení
+
+- [ ] Status page běží mimo hlavní aplikaci a přežije běžný výpadek produkce.
+- [ ] Komponenty odpovídají zákaznickým funkcím, ne interním názvům infrastruktury.
+- [ ] Máte předem daný slovník stavů a závažností.
+- [ ] První incidentní zpráva říká dopad, čas začátku a termín dalšího updatu.
+- [ ] Updaty mají rytmus i ve chvíli, kdy ještě neznáte příčinu.
+- [ ] API incidenty používají konzistentní HTTP kódy a strojově čitelné chyby.
+- [ ] Status page nemá marketingové trackery ani zbytečné skripty třetích stran.
+- [ ] Odběr incidentů jde přes RSS/Atom nebo jiný nízkodatový kanál.
+- [ ] Veřejná komunikace neobsahuje osobní data, interní ticket ID ani názvy zákazníků.
+- [ ] Každý významnější incident končí uzavřením a alespoň krátkým postmortem.
+
+### Mini cvičení: status page drill za 50 minut
+
+1. 10 minut: sepište pět komponent podle zákaznické zkušenosti.
+2. 10 minut: napište slovník stavů a závažností.
+3. 10 minut: připravte první zprávu pro hypotetický výpadek API.
+4. 10 minut: připravte update po 30 minutách bez jasné příčiny.
+5. 5 minut: zkontrolujte, zda status page nepotřebuje trackery, cookies ani zbytečný login.
+6. 5 minut: založte status incident kartu a přiřaďte vlastníka komunikace.
+
+Výstupem má být jedna použitelná šablona, ne dokonalý krizový portál. První dobrá status page může být statická stránka, RSS feed a jasný proces. To je pořád výrazně lepší než tři lidé v chatu, kteří se během výpadku ptají: „Kdo to vlastně napíše zákazníkům?“
+
+### Zdroje k příloze CN
+
+- RFC 9110 definuje HTTP sémantiku včetně významu stavových kódů a hlaviček používaných při komunikaci mezi klientem a serverem: https://www.rfc-editor.org/rfc/rfc9110
+- RFC 9457 popisuje standardizovaný formát „Problem Details“ pro strojově čitelné chyby v HTTP API: https://www.rfc-editor.org/rfc/rfc9457
+- W3C WCAG 2.2 obsahuje kritérium 4.1.3 Status Messages, které pomáhá zpřístupnit stavové zprávy asistivním technologiím bez zbytečné změny fokusu: https://www.w3.org/TR/WCAG22/#status-messages
+- NIST Cybersecurity Framework 2.0 zahrnuje funkce Respond a Recover, které zdůrazňují komunikaci, analýzu, obnovu a zlepšování po událostech: https://www.nist.gov/cyberframework
+- Atlassian Incident Management Handbook prakticky popisuje incidentní role, komunikaci, updaty a post-incident review: https://www.atlassian.com/incident-management/handbook
+
+
 ## Pracovní log
+
+- 2026-08-26: Přidána příloha CN „Status page a provozní komunikace bez kouřové clony“ s návrhem komponent podle zákaznické zkušenosti, slovníkem stavů, šablonami prvního updatu a uzavření, privacy-first pravidly, API incident komunikací, status incident kartou, checklistem, 50minutovým drillem a ověřenými RFC/W3C/NIST/Atlassian zdroji.
 
 - 2026-08-26: Přidána příloha CM „Bezpečnostní hlavičky bez cargo cult konfigurace“ s inventářem zdrojů, postupným CSP, ochranou proti clickjackingu, referrer a permissions politikou, HSTS/MIME minimem, testováním, kartou hlaviček, checklistem, 45minutovým auditem a ověřenými MDN/OWASP/Mozilla zdroji.
 
