@@ -25156,7 +25156,188 @@ Výstup nemá být „udělali jsme audit“. Výstup má být konkrétní rozho
 - OpenSSF Scorecard — automatizované bezpečnostní signály pro open-source projekty: https://openssf.org/scorecard/
 - CISA SBOM Resources Library — rozcestník k SBOM materiálům a bezpečnému vývoji: https://www.cisa.gov/topics/cyber-threats-and-advisories/sbom/sbomresourceslibrary
 
+## CY. Produktová telemetrie bez šmírovací továrny
+
+Produktová telemetrie má odpovědět na praktické otázky: funguje onboarding, kde se lidé zaseknou, které funkce pomáhají aktivaci, co se rozbíjí po releasu a kde produkt tiše plýtvá časem zákazníka. Nemá z webu nebo aplikace udělat malé datové kasino, kde sbíráte každý pohyb myši jen proto, že dashboard umí hezký heatmapový ohňostroj.
+
+Malý SaaS nepotřebuje vědět všechno. Potřebuje vědět dost na to, aby dělal lepší produktová rozhodnutí. Privacy-first telemetrie proto začíná otázkou „jaké rozhodnutí tím podpoříme?“ a končí pravidlem „co nepotřebujeme, to nesbíráme“. Ano, je to méně sexy než nový growth stack. Zato to méně smrdí budoucím průšvihem.
+
+### CY.1 Začněte rozhodnutím, ne eventem
+
+Nejčastější chyba je otevřít analytický nástroj a začít vymýšlet eventy podle obrazovek: `page_view`, `button_click`, `modal_open`, `tab_switch`, `rage_click`, `user_breathed_near_keyboard`. Výsledek je obří skládka událostí, ve které se za měsíc nikdo nevyzná.
+
+Začněte rozhodovací otázkou:
+
+| Otázka | Lepší telemetrie | Horší telemetrie |
+|---|---|---|
+| Dokončí nový uživatel první hodnotný krok? | `workspace_created`, `first_project_published` | každý klik v onboarding wizardu |
+| Používá zákazník klíčovou funkci? | `invoice_sent`, `report_shared` | otevření každého dropdownu |
+| Selhává release? | `export_failed`, `sync_job_failed`, latency bucket | plný payload chyby včetně dat zákazníka |
+| Pomáhá nový pricing? | agregovaný přechod mezi plány | individuální behaviorální profil bez účelu |
+
+Dobrá produktová událost má mít jasné rozhodnutí, vlastníka a hranici použitelnosti. Když nevíte, co s eventem uděláte, pravděpodobně ho nepotřebujete. Pokud si myslíte, že „jednou se to bude hodit“, napište si tu větu na papír a podívejte se, jak moc zní jako začátek špatného filmu.
+
+### CY.2 Navrhněte event slovník jako API kontrakt
+
+Eventy nejsou volné poznámky do deníčku. Jsou kontrakt mezi produktem, vývojem, marketingem, supportem a bezpečností. Když jeden tým používá `signup_completed`, druhý `registration_done` a třetí `user_created`, metriky se rozjedou rychleji než levná kancelářská židle po laminátu.
+
+Praktická pravidla:
+
+- používejte minulý čas pro dokončené události: `trial_started`, `project_published`, `payment_failed`,
+- názvy držte stabilní; význam měňte jen přes novou verzi nebo jasný migrační záznam,
+- oddělte produktové eventy, bezpečnostní audit a technické logy,
+- každá vlastnost eventu musí mít typ, účel a retenci,
+- osobní údaje neposílejte jako výchozí vlastnost eventu.
+
+Příklad minimální event karty:
+
+```markdown
+# Event: project_published
+
+## Účel
+- Rozhodnutí: měřit aktivaci nového workspace.
+- Vlastník: product lead.
+- Použití: onboarding funnel, měsíční produktové review.
+
+## Kdy vzniká
+- Uživatel poprvé zveřejní projekt.
+- Event se neposílá při pozdější editaci publikovaného projektu.
+
+## Vlastnosti
+- workspace_plan: free / pro / business
+- project_type: website / landing_page / docs
+- days_since_signup_bucket: 0 / 1-3 / 4-7 / 8+
+
+## Co se nesmí posílat
+- název projektu,
+- URL neveřejného projektu,
+- e-mail uživatele,
+- obsah stránky,
+- IP adresa jako vlastnost eventu.
+
+## Retence
+- agregované metriky: 24 měsíců,
+- surové eventy: 90 dní,
+- debug logy: 14 dní.
+```
+
+Všimněte si bucketů místo přesných hodnot. Pro rozhodnutí často stačí vědět, jestli aktivace přišla dnes, tento týden nebo později. Nepotřebujete minutu narození každého funnel kroku vytesanou do analytického kamene.
+
+### CY.3 Minimalizujte identitu dřív, než ji začnete hashovat
+
+Hash e-mailu není kouzelné zmizení osobního údaje. Pseudonymizace může snížit riziko, ale pokud umíte záznam spojit zpátky s člověkem, pořád řešíte osobní data. Lepší otázka zní: potřebujeme vůbec identifikovat člověka, nebo stačí workspace, účet, anonymní session, agregace či krátkodobý debug identifikátor?
+
+Použijte čtyři úrovně identity:
+
+1. **Agregace bez identifikátoru:** pro veřejný web, obsah, obecnou adopci funkcí.
+2. **Krátkodobá session:** pro ladění onboardingu nebo výkonu bez dlouhodobého profilu.
+3. **Pseudonymní workspace nebo účet:** pro B2B produktové metriky, kde rozhoduje organizace, ne konkrétní člověk.
+4. **Přímá identita:** jen pro support, fakturaci, bezpečnostní audit nebo funkce, kde je identita nezbytná.
+
+Privacy-first default je začít co nejníž a vyšší úroveň použít až ve chvíli, kdy máte jasný účel. Pokud produktový dashboard funguje bez e-mailu, neposílejte e-mail. Pokud funnel funguje s `account_id`, neposílejte jméno uživatele. Pokud stačí denní agregace, nedržte surové eventy rok „pro jistotu“.
+
+### CY.4 Oddělte produktovou metriku od šmírovací rekonstrukce
+
+Některé nástroje umí nahrávat session, sbírat DOM, sledovat text ve formulářích a rekonstruovat chování návštěvníka do detailu. Technicky fascinující. Produktově lákavé. Privacy-first pohledem velmi rychle toxické.
+
+Než zapnete detailní chování, odpovězte:
+
+- jaký konkrétní problém nejde vyřešit agregovanou metrikou,
+- jak zabráníte sběru osobních údajů, obsahu formulářů a zákaznických dat,
+- kdo bude mít k záznamům přístup,
+- jak krátká bude retence,
+- jak uživatele informujete,
+- jak zapnutí schválíte a kdy ho vypnete.
+
+U většiny malých SaaSů stačí kombinace produktových eventů, technických chyb, syntetického monitoringu a kvalitních rozhovorů se zákazníky. Pokud potřebujete session replay, zapínejte ho cíleně, krátkodobě, s maskováním a po kontrole datových toků. Nikdy jako permanentní vysavač na celé aplikaci.
+
+### CY.5 Telemetrie musí mít provozní hygienu
+
+Telemetry pipeline je produkční systém. Když spadne, můžete přijít o signály. Když se rozbije špatně, můžete posílat data tam, kam nemáte. Proto potřebuje stejnou nudnou disciplínu jako ostatní části produktu.
+
+Minimum provozní hygieny:
+
+- **Schéma:** eventy validujte a odmítejte neznámé nebo nebezpečné vlastnosti.
+- **Redakce:** citlivá pole mažte před odesláním, ne až v dashboardu.
+- **Vzorkování:** u vysokého objemu sbírejte méně, ale stabilně.
+- **Retence:** nastavte automatické mazání surových dat.
+- **Přístupy:** dashboard s produktovými daty není hračka pro celý Slack.
+- **Export:** víte, jak data dostat ven a jak vypnout dodavatele.
+- **Monitoring:** sledujte, jestli eventy nečekaně nevystřelily nebo neutichly.
+
+U evropského provozu přidejte vendor kartu: kde data běží, kdo je zpracovatel, jestli existuje DPA, jak se řeší subdodavatelé, zda je telemetrie oddělená od reklamních účelů a jestli nástroj nepoužívá data pro vlastní produktové nebo trénovací účely.
+
+### CY.6 Šablona: karta produktové telemetrie
+
+```markdown
+# Karta produktové telemetrie
+
+## Rozhodnutí
+- Jaké rozhodnutí nebo riziko telemetrie podporuje:
+- Kdo metriku používá:
+- Jak často se vyhodnocuje:
+- Co uděláme, když se metrika změní:
+
+## Eventy
+- Hlavní eventy:
+- Zakázané vlastnosti:
+- Identita: žádná / session / workspace / účet / uživatel
+- Agregace nebo buckety:
+
+## Data a provoz
+- Kde se data zpracovávají:
+- Surová retence:
+- Agregovaná retence:
+- Kdo má přístup:
+- Jak se data exportují nebo mažou:
+
+## Privacy-first kontrola
+- Je nutný cookie nebo podobný tracer:
+- Je potřeba souhlas nebo možnost odmítnutí:
+- Je účel oddělený od reklamy a profilování:
+- Je uživatel informovaný srozumitelně:
+- Datum další revize:
+```
+
+### CY.7 Checklist: telemetrie bez datového vysavače
+
+- [ ] Každý event má rozhodovací otázku a vlastníka.
+- [ ] Event slovník je verzovaný a sdílený mezi produktem, vývojem a marketingem.
+- [ ] Nesbíráme e-maily, jména, obsah formulářů ani zákaznický obsah jako event vlastnosti.
+- [ ] Identita je na nejnižší úrovni, která stačí pro rozhodnutí.
+- [ ] Surová data mají krátkou retenci a agregace mají jasný účel.
+- [ ] Telemetrie je oddělená od reklamního profilování a remarketingu.
+- [ ] Přístupy do dashboardů jsou omezené podle role.
+- [ ] Nový analytický nástroj prochází vendor a privacy-first kontrolou před nasazením.
+- [ ] Při změně eventu existuje migrační poznámka, aby metriky nezačaly lhát.
+
+### Mini cvičení: event audit za 60 minut
+
+1. Vyberte jeden produktový funnel: registrace, aktivace, platba, export nebo sdílení.
+2. Sepište rozhodnutí, která funnel opravdu podporuje.
+3. Najděte všechny existující eventy a vlastnosti pro tento funnel.
+4. Označte eventy bez rozhodovací otázky a vlastnosti s osobními nebo zákaznickými daty.
+5. Navrhněte tři změny: jeden event odstranit, jeden přejmenovat nebo zdokumentovat, jednu vlastnost nahradit bucketem.
+6. Zapište novou event kartu a nastavte datum revize.
+
+Výstup není „máme analytiku“. Výstup je menší, čitelnější a bezpečnější telemetrie, která pomůže rozhodnout, co v produktu zlepšit příště.
+
+### Codyho komentář
+
+Telemetrie je dobrý sluha a podezřele horlivý komorník. Jakmile mu dovolíte sbírat všechno, začne nosit do obýváku věci, které jste nikdy nechtěli vidět. Držte ho na krátkém vodítku: konkrétní otázka, minimální data, krátká retence, evropský provoz, žádné reklamní přilepování. Produkt bude pořád chytřejší. Jen nebude působit jako detektivka o vlastních zákaznících.
+
+### Zdroje k příloze CY
+
+- OWASP Logging Cheat Sheet — doporučení pro strukturované logování, ochranu logů a data, která se do logů nemají ukládat: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+- OWASP Secure Coding Practices: Logging and Intrusion Detection — stručný checklist k logování bezpečnostních událostí a vynechávání citlivých informací: https://owasp.org/www-project-secure-coding-practices-quick-reference-guide/stable-en/02-checklist/05-checklist
+- W3C Privacy Principles — princip minimalizace dat pro webové technologie a práci s osobními daty: https://www.w3.org/TR/privacy-principles/
+- CNIL: Use analytics on your websites and applications — podmínky, kdy může být měření návštěvnosti omezené na správu služby a bez předchozího souhlasu podle francouzského výkladu: https://www.cnil.fr/fr/node/677
+- EDPB Guidelines 1/2024 on processing based on Article 6(1)(f) GDPR — kontext pro oprávněný zájem a test proporcionality při zpracování osobních údajů: https://www.edpb.europa.eu/public-consultations/guidelines-12024-on-processing-of-personal-data-based-on-article-61f-gdpr_en
+
 ## Pracovní log
+
+- 2026-08-26: Přidána příloha CY „Produktová telemetrie bez šmírovací továrny“ s rozhodovacím návrhem eventů, event slovníkem, minimalizací identity, provozní hygienou, kartou telemetrie, checklistem, hodinovým auditem a ověřenými zdroji.
+
 
 - 2026-08-26: Přidána příloha CX „Open-source závislosti a SBOM bez paniky“ s inventářem závislostí, release SBOM postupem, privacy-first filtrem, kartou závislosti, checklistem, mini auditem a ověřenými zdroji.
 
