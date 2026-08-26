@@ -23183,7 +23183,223 @@ Výstupem má být jedna použitelná šablona, ne dokonalý krizový portál. P
 - Atlassian Incident Management Handbook prakticky popisuje incidentní role, komunikaci, updaty a post-incident review: https://www.atlassian.com/incident-management/handbook
 
 
+
+## CO. Syntetický monitoring bez uživatelského šmírování
+
+Monitoring bývá v malém SaaSu nebezpečně svůdný. Začne to nevinně: „Chceme vědět, jestli aplikace funguje.“ O tři integrace později posíláte do pěti nástrojů URL, IP adresy, user agenty, session ID, e-mail v chybové hlášce a screenshot uživatelovy obrazovky. Gratuluji, právě jste z provozního monitoringu vyrobili datový vysavač v reflexní vestě.
+
+Privacy-first monitoring stojí na jiné otázce: co potřebujeme vědět, abychom službu udrželi zdravou, aniž bychom z lidí dělali testovací sondu? Odpověď je překvapivě praktická: syntetické kontroly, technické metriky, bezpečně navržené logy, ruční runbook a jasné hranice, co do monitoringu nikdy nepatří.
+
+Syntetický monitoring znamená, že službu kontroluje robot podle předem daného scénáře. Nečekáte, až vám reálný zákazník omylem poslouží jako detektor výpadku. Měříte login sandbox účtem, dostupnost homepage, API health endpoint, vytvoření testovacího záznamu nebo dokončení exportu. Když to spadne, víte to rychle. Když to funguje, nemusíte kvůli tomu sledovat každý pohyb reálných lidí.
+
+*Codyho komentář: nejlepší monitoring je ten, který vám řekne „hoří produkce“, ne ten, který umí zrekonstruovat uživatelův oběd podle scrollování. Provozní jistota ano. Digitální paparazzi ne.*
+
+### CO.1 Začněte zákaznickými sliby, ne seznamem nástrojů
+
+Monitoring nemá začínat otázkou „jaký nástroj použijeme“. Má začínat otázkou „co jsme zákazníkovi slíbili“. Pokud slibujete, že uživatel může kdykoli vyexportovat data, export musí mít syntetickou kontrolu. Pokud je klíčová funkce objednávka konzultace, kontrolujte formulář, validaci a doručení interní notifikace. Pokud prodáváte API, kontrolujte autentizaci, limitaci, typickou odpověď a chování při chybě.
+
+Praktická mapa slibů:
+
+| Slib zákazníkovi | Syntetická kontrola | Signál problému | Privacy-first poznámka |
+|---|---|---|---|
+| Web je dostupný | `GET /` a vybrané veřejné stránky | Chyba, pomalá odpověď, špatný certifikát | Bez cookies a bez personalizovaných URL. |
+| Uživatel se přihlásí | Sandbox účet projde loginem | Login selže nebo trvá neobvykle dlouho | Účet nesmí obsahovat reálná data. |
+| Data lze uložit | Testovací zápis a smazání | API chyba, timeout, nekonzistentní stav | Oddělený tenant s krátkou retencí. |
+| Export funguje | Vytvoření malého exportu | Job se zasekne nebo soubor chybí | Export obsahuje jen syntetická data. |
+| E-mail dorazí | Testovací zpráva do technické schránky | Fronta stojí, provider odmítá zprávy | Neposílat kopie reálných zpráv. |
+| Platba projde testem | Testovací režim platební brány | Webhook nedorazí, stav se nezmění | Žádná reálná karta ani zákaznické údaje. |
+
+Výsledkem nemá být observability cirkus. Výsledkem je malý seznam kontrol, které odpovídají tomu, co by zákazníka opravdu bolelo.
+
+### CO.2 Vytvořte monitorovací účet, který nemůže nic rozbít
+
+Syntetický monitoring potřebuje vlastní identitu. Nepoužívejte účet zakladatele, admina ani reálného zákazníka. Testovací účet má být nudný, omezený a snadno rozpoznatelný.
+
+Doporučené vlastnosti monitorovacího účtu:
+
+- je v samostatném testovacím tenantu nebo workspace,
+- má minimální oprávnění potřebná pro scénář,
+- pracuje jen se syntetickými daty,
+- má jasný prefix v názvech záznamů, například `monitoring-smoke-*`,
+- jeho akce jsou v audit logu označené jako syntetická kontrola,
+- jeho tokeny mají krátkou životnost nebo rotaci,
+- nemá přístup k produkčním zákaznickým datům mimo testovací prostor.
+
+Tohle je důležité i pro bezpečnost. OWASP Logging Cheat Sheet doporučuje logovat bezpečnostně relevantní události, ale zároveň upozorňuje, že logy nemají obsahovat citlivá data, pokud to není nezbytné. Syntetický účet vám umožní oddělit provozní signál od osobních údajů a zmenšit riziko, že se monitoring stane vedlejší databází zákaznického chování.
+
+### CO.3 Health endpoint nesmí lhát ani prozradit vnitřnosti
+
+Endpoint `/health` je užitečný, ale často bývá buď příliš hloupý, nebo příliš upovídaný. „OK“ vrácené statickým frontendem neříká nic o tom, zda funguje databáze, fronta a přihlášení. Naopak detailní výpis verzí, regionů, názvů databází a interních chyb dává útočníkovi mapu pokladů. Tentokrát fakt ne tu dobrou mapu.
+
+Rozdělte health endpointy podle publika:
+
+| Endpoint | Publikum | Obsah | Příklad |
+|---|---|---|---|
+| `/healthz` | load balancer / uptime check | jednoduchý stav procesu | `200 ok` nebo `503 unavailable` |
+| `/readyz` | orchestrátor / deploy | závislosti potřebné pro provoz | databáze dostupná, migrace hotové |
+| interní dashboard | tým | detailnější stav komponent | latence DB, fronta, storage, e-mail |
+| syntetický scénář | monitoring | skutečný uživatelský průchod | login, zápis, export, smazání |
+
+Veřejný endpoint má být minimalistický. Detailní diagnostika patří za autentizaci, do interní sítě nebo do nástroje s omezenými právy. Pokud endpoint selže, vraťte konzistentní HTTP stav a krátkou odpověď. Detail chyby patří do interního logu, ne na veřejný internet.
+
+### CO.4 Logujte události, ne osobní příběhy
+
+Provozní log má odpovědět na otázky: co se stalo, kdy, kde, v jaké komponentě a s jakým technickým výsledkem. Nemá opisovat obsah formulářů, e-mailů, dokumentů, poznámek ani promptů. GDPR v článku 5 staví na zásadách minimalizace, omezení účelu a omezení uložení; v monitoringu to znamená sbírat jen to, co umíte obhájit pro provoz a bezpečnost.
+
+Bezpečnější logovací vzor:
+
+```json
+{
+  "event": "export.completed",
+  "component": "exports",
+  "tenant_hash": "tnt_8f1a...",
+  "actor_type": "synthetic_monitor",
+  "duration_ms": 1840,
+  "result": "success",
+  "request_id": "req_01J...",
+  "timestamp": "2026-08-26T02:00:00Z"
+}
+```
+
+Co do běžného logu nepatří:
+
+- e-mailová adresa v otevřené podobě,
+- celé jméno zákazníka,
+- obsah zprávy, promptu, dokumentu nebo formuláře,
+- access token, refresh token, API klíč nebo session cookie,
+- platební údaje,
+- přesná IP adresa, pokud ji nepotřebujete pro bezpečnostní účel,
+- URL s osobními parametry nebo magic linkem.
+
+Když potřebujete korelaci, používejte `request_id`, interní ID, hashované tenant ID nebo krátkodobý technický identifikátor. A hlavně nastavte retenci. Log bez retenčního pravidla je jen budoucí incident, který si zatím dává kafe.
+
+### CO.5 Alert má mít vlastníka, závažnost a akci
+
+Alert typu „něco je divné“ je jen dražší úzkost. Dobrý alert říká, kdo ho řeší, proč přišel a co má člověk udělat jako první.
+
+Minimální alert karta:
+
+| Pole | Co vyplnit |
+|---|---|
+| Název | `Export synthetic check failed` |
+| Služba | Exporty dat |
+| Závažnost | SEV2, pokud exporty nejdou déle než 15 minut |
+| Vlastník | On-call nebo konkrétní role |
+| Dopad | Uživatelé nemohou stáhnout data |
+| První krok | Otevřít runbook `exports-incident.md` |
+| Eskalace | Pokud trvá 30 minut, informovat support a status page vlastníka |
+| Privacy kontrola | Alert neobsahuje zákaznická data ani exportní obsah |
+
+Alertujte na zákaznický dopad, ne na každé zakuckání infrastruktury. Jeden krátký výpadek interní závislosti může být zajímavý pro trend, ale nemusí budit člověka. Naopak selhání syntetického checkoutu, loginu nebo exportu je signál, že zákaznický slib možná neplatí.
+
+### CO.6 Měřte fronty a dávkové úlohy, protože tam se schovává tichý výpadek
+
+Web vrací `200`, aplikace se načte, ale zákazník čeká hodinu na e-mail nebo export. To je výpadek, jen nemá tu slušnost tvářit se jako výpadek. Malé SaaSy často kontrolují homepage a API, ale zapomenou na fronty, cron úlohy, webhooky a integrace.
+
+Sledujte hlavně:
+
+- stáří nejstarší zprávy ve frontě,
+- počet opakovaných pokusů,
+- počet mrtvých zpráv v dead-letter queue,
+- poslední úspěšný běh každého cronu,
+- počet nedoručených webhooků,
+- čas od požadavku po dokončení exportu,
+- rozdíl mezi „job vytvořen“ a „job dokončen“.
+
+Syntetická kontrola dávkové úlohy může být jednoduchá: vytvořit malý testovací export, počkat na dokončení, ověřit velikost a formát, potom soubor smazat. Není nutné kopírovat reálná data. Vlastně je lepší, když tam žádná nejsou.
+
+### CO.7 Browser signály sbírejte úsporně
+
+Frontend chyby a výkon stránky jsou užitečné, ale tady se snadno sklouzne k invazivnímu sledování. Pokud používáte klientské reportování, posílejte minimum: typ chyby, komponentu, verzi aplikace, anonymizovaný technický identifikátor a `request_id`. Neposílejte obsah polí, DOM snapshoty, full URL s tokeny ani nahrávky relace.
+
+Pro jednoduché odeslání krátkého provozního signálu při odchodu ze stránky existuje například `navigator.sendBeacon`, který MDN popisuje jako mechanismus pro asynchronní odeslání malého množství dat bez blokování odchodu ze stránky. To ale není povolenka posílat všechno. Je to technický kanál; pravidla minimalizace si musíte napsat sami.
+
+Praktické pravidlo pro browser monitoring:
+
+```text
+Pokud by se z payloadu dalo poznat, kdo je uživatel nebo co přesně dělal v obsahu aplikace,
+payload je moc bohatý a musí se ořezat.
+```
+
+Privacy-first alternativa k session replayi: přidejte do rozhraní tlačítko „Nahlásit problém“, které pošle uživatelem schválený popis, technický `request_id`, verzi aplikace a volitelný screenshot po výslovném potvrzení. Méně magie, více respektu. Strašně nudné. Tedy přesně dobře.
+
+### Šablona: monitorovací karta služby
+
+```markdown
+# Monitorovací karta: [služba / workflow]
+
+## Zákaznický slib
+- Co má fungovat:
+- Kdo je dotčený při výpadku:
+- Přijatelná degradace:
+
+## Syntetická kontrola
+- Scénář:
+- Frekvence:
+- Testovací účet / tenant:
+- Testovací data:
+- Úklid po testu:
+
+## Signály
+- Dostupnost:
+- Latence:
+- Chybovost:
+- Fronty / dávkové úlohy:
+- Poslední úspěšný běh:
+
+## Alert
+- Spouštěč:
+- Závažnost:
+- Vlastník:
+- První krok:
+- Eskalace:
+
+## Privacy-first kontrola
+- Obsahuje signál osobní data:
+- Obsahuje payload obsah uživatele:
+- Retence logů:
+- Kdo má přístup:
+- Jak se data mažou:
+```
+
+### CO.8 Checklist: monitoring bez datového vysavače
+
+- [ ] Každá kontrola vychází z konkrétního zákaznického slibu.
+- [ ] Syntetické scénáře používají oddělený účet bez reálných zákaznických dat.
+- [ ] Health endpointy jsou rozdělené na veřejné, readiness a interní diagnostiku.
+- [ ] Veřejné endpointy neprozrazují interní názvy systémů, verze ani detailní chyby.
+- [ ] Logy obsahují události, technický kontext a korelační ID, ne obsah uživatelských dat.
+- [ ] Citlivé hodnoty se redigují před uložením, ne až při exportu z logovacího nástroje.
+- [ ] Alerty mají vlastníka, závažnost, první krok a eskalační pravidlo.
+- [ ] Fronty, crony, webhooky a exporty mají vlastní kontroly, ne jen pasivní logy.
+- [ ] Browser monitoring neposílá DOM snapshoty, obsah polí ani plné URL s tokeny.
+- [ ] Retence logů a monitorovacích dat je krátká, zdokumentovaná a testovatelná.
+- [ ] Monitoringový nástroj má evropský provoz nebo jasně zdokumentovaný datový režim.
+- [ ] Incidentní signály lze napojit na status page bez ručního přepisování chaosu.
+
+### Mini cvičení: 60 minut na monitoring hlavního workflow
+
+1. 10 minut: vyberte jedno workflow, které by zákazník opravdu pocítil — login, export, platba, formulář nebo API volání.
+2. 10 minut: napište zákaznický slib a minimální syntetický scénář.
+3. 10 minut: vytvořte testovací účet, testovací data a pravidlo úklidu.
+4. 10 minut: sepište tři signály — dostupnost, latenci a chybovost nebo stav fronty.
+5. 10 minut: napište alert kartu s vlastníkem, závažností a prvním krokem.
+6. 10 minut: proveďte privacy-first audit payloadů a vyhoďte vše, co není nutné.
+
+Po hodině máte jeden monitorovací scénář, který chrání zákaznický slib a nevyrábí datovou skládku. To je lepší než deset dashboardů, které krásně ukazují, že nikdo neví, co vlastně znamená „služba funguje“.
+
+### Zdroje k příloze CO
+
+- MDN dokumentace `Navigator.sendBeacon()` popisuje asynchronní odesílání malých objemů dat z prohlížeče bez blokování odchodu ze stránky: https://developer.mozilla.org/en-US/docs/Web/API/Navigator/sendBeacon
+- OWASP Logging Cheat Sheet shrnuje, jak navrhovat bezpečnostně užitečné logování, jaké události zaznamenávat a čemu se v logách vyhýbat: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+- GDPR článek 5 definuje zásady zpracování osobních údajů včetně minimalizace, omezení účelu a omezení uložení: https://eur-lex.europa.eu/eli/reg/2016/679/oj
+- NIST Cybersecurity Framework 2.0 popisuje funkce Identify, Protect, Detect, Respond a Recover, které pomáhají propojit monitoring s provozní reakcí: https://www.nist.gov/cyberframework
+- W3C WCAG 2.2 kritérium 4.1.3 Status Messages je užitečné pro návrh stavových a chybových zpráv, které asistivní technologie zachytí bez zbytečné změny fokusu: https://www.w3.org/TR/WCAG22/#status-messages
+
 ## Pracovní log
+
+- 2026-08-26: Přidána příloha CO „Syntetický monitoring bez uživatelského šmírování“ s mapou zákaznických slibů, syntetickými kontrolami, monitorovacím účtem, health endpointy, logovací minimalizací, alert kartou, frontami, browser signály, checklistem, 60minutovým cvičením a ověřenými MDN/OWASP/GDPR/NIST/W3C zdroji.
+
 
 - 2026-08-26: Přidána příloha CN „Status page a provozní komunikace bez kouřové clony“ s návrhem komponent podle zákaznické zkušenosti, slovníkem stavů, šablonami prvního updatu a uzavření, privacy-first pravidly, API incident komunikací, status incident kartou, checklistem, 50minutovým drillem a ověřenými RFC/W3C/NIST/Atlassian zdroji.
 
