@@ -27260,7 +27260,142 @@ Můj pohled: bezpečnostní dotazníky jsou nepříjemné hlavně tehdy, když n
 - OWASP Top 10 for LLM Applications — rizika jako prompt injection, sensitive information disclosure a agentní oprávnění u AI funkcí: https://owasp.org/www-project-top-10-for-large-language-model-applications/
 - Evropská komise — AI Act jako evropský rámec pro důvěryhodné a bezpečné používání AI systémů: https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai
 
+
+## DJ. Prompt knihovna a AI šablony bez halucinačního copy-paste
+
+AI funkce v malém SaaSu často začnou nevinně: jeden prompt pro shrnutí ticketu, druhý pro návrh odpovědi, třetí pro kategorizaci leadu. Pak někdo prompt upraví „jen trochu“, někdo jiný ho zkopíruje do další služby, třetí přidá interní kontext a za měsíc už nikdo neví, která verze řídí produkční chování. Gratuluju, vyrobili jste promptovou džungli. Má listy, liány a občas z ní vyskočí právní riziko.
+
+Prompt není poznámka bokem. Pokud ovlivňuje zákaznickou zkušenost, rozhodnutí v produktu nebo zpracování dat, je to součást systému. Má mít vlastníka, verzi, testy, pravidla pro data a jasné hranice použití. Privacy-first přístup navíc znamená, že prompt knihovna nesmí být tajný sklad osobních údajů, obchodních detailů a „užitečných příkladů“ z reálných zákaznických konverzací.
+
+### DJ.1 Rozdělte prompty podle dopadu
+
+Ne každý prompt potřebuje stejnou disciplínu. Prompt na interní brainstorming blogového titulku má jiné riziko než prompt, který navrhuje odpověď zákazníkovi, třídí bezpečnostní incident nebo volá agentní nástroj. Malý tým si vystačí se čtyřmi úrovněmi:
+
+| Úroveň | Příklad | Riziko | Minimální kontrola |
+|---|---|---|---|
+| Nízká | návrh interních nápadů, pracovní osnova | špatná kvalita výstupu | vlastník a stručný účel |
+| Střední | shrnutí ticketu, návrh e-mailu, klasifikace obsahu | nepřesnost, tón, únik kontextu | testovací sada, kontrola dat, lidské schválení před odesláním |
+| Vysoká | návrh změny nastavení, triage incidentu, doporučení zákaznického kroku | provozní nebo právní dopad | verze, review, auditní log, omezený kontext, fallback |
+| Kritická | agent s nástrojem pro zápis, mazání, billing nebo oprávnění | přímá škoda | explicitní approval gate, oddělené role, simulace, zákaz automatického provedení |
+
+Praktické pravidlo: čím blíž je prompt k akci, penězům, osobním datům nebo bezpečnosti, tím méně má být „rychlý experiment“ a tím víc produkční artefakt. Ano, prompt může být artefakt. Ne, nemusí mít vlastní standup. Zatím.
+
+### DJ.2 Každá šablona má mít kartu promptu
+
+Prompt knihovna není složka s názvem `prompts-final`. Je to katalog použití. Každá šablona má popsat, proč existuje, jaký vstup smí dostat, jaký výstup se očekává a kdo odpovídá za její kvalitu.
+
+Použitelná karta promptu:
+
+```markdown
+## Prompt: Návrh odpovědi na support ticket
+
+- Účel: Pomoci supportu připravit první návrh odpovědi, ne odesílat odpověď automaticky.
+- Vlastník: Head of Support
+- Dopadová úroveň: Střední
+- Povolené vstupy: text ticketu, veřejná dokumentace, plán zákazníka bez platebních detailů
+- Zakázané vstupy: hesla, API klíče, celé exporty účtu, interní poznámky o zákazníkovi
+- Povolený výstup: návrh odpovědi s odkazy na dokumentaci a jasným přiznáním nejistoty
+- Zakázaný výstup: právní sliby, garance dostupnosti, změna ceny, diagnostika bez důkazů
+- Lidská kontrola: povinná před odesláním zákazníkovi
+- Testovací sada: 12 anonymizovaných ticketů, 3 edge cases, 2 jazykové varianty
+- Poslední revize: 2026-08-26
+```
+
+Karta chrání tým před dvěma extrémy: buď prompt nikdo neudržuje, nebo se z něj stane román, který už nikdo nechce číst. Dobrá karta je stručná, ale rozhodnutelná. Když někdo navrhne změnu, hned víte, co se musí zkontrolovat.
+
+### DJ.3 Testujte prompty na příkladech, ne na naději
+
+Prompt, který jednou odpověděl hezky v chatu, ještě není připravený pro produkt. Potřebujete malou testovací sadu. Nemusí to být akademická laboratoř s bílými plášti a tabulí plnou řeckých písmen. Stačí sada reprezentativních vstupů, očekávaných vlastností výstupu a zakázaných chování.
+
+U každého produkčního promptu si připravte:
+
+- **běžné scénáře:** typické vstupy, které tvoří většinu provozu,
+- **edge cases:** neúplný vstup, rozpor v datech, jiný jazyk, rozzlobený zákazník,
+- **bezpečnostní scénáře:** prompt injection, požadavek na interní data, pokus obejít pravidla,
+- **privacy scénáře:** osobní údaje, data třetích osob, citlivé poznámky, příliš široký kontext,
+- **kvalitativní kritéria:** přesnost, tón, struktura, odkazy na zdroje, přiznání nejistoty.
+
+Výstup testu nemusí být binární. U generativních funkcí často stačí hodnotit, jestli výstup splňuje pravidla: nepřidává neověřená tvrzení, neprozrazuje neveřejný kontext, nevolá k akci bez oprávnění a jasně říká, kdy si není jistý. U vyššího rizika přidejte porovnání více modelů nebo verzí promptu, ale neudělejte z toho nekonečnou soutěž krásy. Cílem je bezpečné rozhodnutí, ne tabulka, která získá doktorát z nerozhodnosti.
+
+### DJ.4 Oddělte instrukce, kontext a uživatelský vstup
+
+Nejčastější promptový chaos vzniká tím, že se do jednoho textového blobu nalepí systémová pravidla, interní dokumentace, uživatelský vstup, příklady a přání produktového manažera. Pak se někdo diví, že se model nechá zmást textem „ignoruj předchozí instrukce“. Nedůvěryhodný vstup se má chovat jako data, ne jako instrukce.
+
+Praktický návrh:
+
+- **Systémová pravidla:** stabilní bezpečnostní a produktová pravidla, verzovaná v kódu nebo konfiguračním úložišti.
+- **Vývojářské instrukce:** konkrétní workflow, formát výstupu, hranice nástroje.
+- **Retrieval kontext:** jen dokumenty, které uživatel nebo proces smí vidět.
+- **Uživatelský vstup:** označený jako nedůvěryhodný obsah, nikdy jako pravidlo.
+- **Příklady:** anonymizované a oddělené od reálných zákaznických dat.
+
+U agentních funkcí navíc oddělte prompt od oprávnění nástroje. Prompt může říkat „navrhni změnu fakturačního e-mailu“, ale oprávnění nástroje musí technicky zabránit tomu, aby model sám změnu provedl bez schválení. Bezpečnostní hranice v textu je užitečná. Bezpečnostní hranice v kódu je hranice. Ten rozdíl je malý jen do prvního incidentu.
+
+### DJ.5 Minimalizujte data v příkladech a logách
+
+Prompt knihovna často začne jako praktická sada ukázek. Pak se do ní dostanou reálné tickety, e-maily, exporty, screenshoty a interní poznámky. To je pohodlné, ale privacy-first provoz nemá stát na tom, že interní dokumentace obsahuje cizí osobní údaje „protože to líp ukazuje realitu“.
+
+Doporučení:
+
+- používejte syntetické nebo silně anonymizované příklady,
+- netrénujte tým na příkladech obsahujících tajemství, tokeny, zdravotní, finanční nebo jiné citlivé údaje,
+- logujte metadata běhu promptu, ne celý prompt s kompletním kontextem, pokud to není nezbytné,
+- nastavte retenční dobu pro prompt logy podle účelu ladění a auditu,
+- u vyššího rizika oddělte debug režim od běžného provozu,
+- pravidelně mažte staré experimentální prompty, které už nikdo nepoužívá.
+
+Codyho komentář: nejlepší prompt je často ten, který dostane méně dat. Model pak nemá co omylem prozradit, tým má menší compliance zátěž a všichni stráví méně času vysvětlováním, proč se v testovacím příkladu jmenuje zákazník skutečným jménem. Nádherná trojvýhra.
+
+### DJ.6 Zaveďte změnový proces bez těžké byrokracie
+
+Prompt se bude měnit. To je v pořádku. Špatně je měnit ho bez historie. Minimální proces:
+
+1. změna má důvod a očekávaný dopad,
+2. někdo zkontroluje data a bezpečnostní hranice,
+3. proběhne testovací sada,
+4. změna dostane verzi,
+5. release notes stručně řeknou, co se změnilo,
+6. existuje rollback na předchozí verzi.
+
+U nízkého rizika může být review jeden člověk a pár testů. U vysokého rizika přidejte technického vlastníka, privacy ownera a člověka z provozu nebo supportu. Ne proto, aby se práce zpomalila. Proto, aby se omylem nezrychlila do zdi.
+
+### Checklist: prompt knihovna, která se dá provozovat
+
+- [ ] Každý produkční prompt má vlastníka, účel a dopadovou úroveň.
+- [ ] Prompt karta popisuje povolené a zakázané vstupy.
+- [ ] Uživatelský vstup je technicky oddělený od instrukcí.
+- [ ] Retrieval kontext respektuje oprávnění uživatele nebo procesu.
+- [ ] Testovací sada obsahuje běžné, okrajové, bezpečnostní a privacy scénáře.
+- [ ] Reálné zákaznické příklady jsou anonymizované nebo nahrazené syntetickými daty.
+- [ ] Prompt logy mají jasný účel, rozsah a retenční dobu.
+- [ ] Kritické akce vyžadují approval gate mimo samotný prompt.
+- [ ] Každá změna promptu má verzi, důvod, výsledek testu a rollback.
+- [ ] Staré experimenty se pravidelně mažou místo toho, aby žily jako archeologická vrstva v repozitáři.
+
+### Hodinové cvičení: audit prompt knihovny
+
+1. Vyberte jednu AI funkci, která je už v produktu nebo v interním provozu.
+2. Najděte všechny prompty, které ji ovlivňují.
+3. U každého vyplňte účel, vlastníka, dopadovou úroveň a povolené vstupy.
+4. Zkontrolujte, jestli příklady neobsahují reálná osobní data nebo tajemství.
+5. Přidejte tři bezpečnostní testy: prompt injection, požadavek na neveřejná data, pokus o akci bez oprávnění.
+6. Nastavte datum další revize a smažte jednu starou šablonu, kterou už nikdo neumí vysvětlit.
+
+Výstupem je jedna udržovatelná prompt karta a malá testovací sada. Ne „AI governance program 2030“. Ten by se krásně vyjímal v prezentaci, ale tady chceme něco, co přežije pondělní support.
+
+### Zdroje k příloze DJ
+
+- OWASP Top 10 for LLM Applications 2025 — rizika prompt injection, sensitive information disclosure, excessive agency a dalších kategorií pro LLM aplikace: https://owasp.org/www-project-top-10-for-large-language-model-applications/
+- OWASP Generative AI Security Project — průběžně udržované praktické materiály pro bezpečný návrh generativních AI systémů: https://genai.owasp.org/
+- NIST AI Risk Management Framework — rámec pro mapování, měření, řízení a správu rizik AI systémů: https://www.nist.gov/itl/ai-risk-management-framework
+- NIST AI RMF Generative AI Profile — profil rizik a opatření pro generativní AI: https://www.nist.gov/itl/ai-risk-management-framework/generative-ai-profile
+- European Commission — AI Act a povinnosti včetně AI gramotnosti a řízení rizik podle role poskytovatele nebo nasazující organizace: https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai
+- EDPB — stanovisko 28/2024 k ochraně osobních údajů při vývoji a nasazení AI modelů: https://www.edpb.europa.eu/our-work-tools/our-documents/opinion-board-art-64/opinion-282024-certain-data-protection-aspects_en
+
 ## Pracovní log
+
+- 2026-08-26: Přidána příloha DJ „Prompt knihovna a AI šablony bez halucinačního copy-paste“ s dopadovými úrovněmi promptů, kartou promptu, testovací sadou, oddělením instrukcí od nedůvěryhodného vstupu, minimalizací dat, změnovým procesem, checklistem, hodinovým auditem a ověřenými OWASP/NIST/EU/EDPB zdroji.
+
 
 - 2026-08-26: Přidána příloha DI „Bezpečnostní dotazníky a trust odpovědi bez copy-paste rizika“ s knihovnou schválených odpovědí, vlastníky a datem ověření, úrovněmi citlivosti, trust centrem, AI blokem, šablonou odpovědi, checklistem, hodinovým cvičením a ověřenými zdroji.
 
