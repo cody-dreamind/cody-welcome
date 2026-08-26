@@ -24150,7 +24150,187 @@ Feature flags jsou skvělé, když zrychlují bezpečné učení. Jsou hrozné, 
 - CNCF: OpenFeature project — informace o projektu OpenFeature v rámci Cloud Native Computing Foundation: https://www.cncf.io/projects/openfeature/
 - OWASP Logging Cheat Sheet — doporučení pro logování, sanitizaci a vynechání citlivých dat z logů: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
 
+
+## CT. Rate limiting a ochrana proti zneužití bez trestání dobrých uživatelů
+
+Rate limiting je jedna z těch věcí, které vypadají jednoduše, dokud se nedostanou do produkce. Pak zjistíte, že jeden limit „100 requestů za minutu“ buď nezastaví drahý útok, nebo naopak odřízne legitimního zákazníka, který zrovna importuje data. Gratuluji, máte bezpečnostní opatření, které funguje jako turniket v supermarketu: někdy zastaví zloděje, někdy babičku s vozíkem.
+
+Pro malý SaaS není cílem trestat uživatele za aktivitu. Cílem je chránit férové používání služby, náklady, dostupnost a citlivé operace. Dobrý limit tedy není jen technická brzda. Je to produktové pravidlo: kolik práce může jeden účet, IP adresa, tenant, token nebo integrace spotřebovat, aniž by ohrozil ostatní.
+
+### CT.1 Neomezujte requesty, omezujte spotřebu rizika
+
+Počet requestů je jen nejviditelnější signál. Útok nebo chyba ale často bolí jinde: CPU, paměť, databáze, e-mailový provider, SMS brána, AI tokeny, exporty, webhooky nebo fronty. OWASP u API rizika „Unrestricted Resource Consumption“ výslovně řeší limity na velikost payloadu, počet operací, stránkování, timeouty i náklady třetích stran. Překlad do lidské řeči: limitujte to, co se opravdu může rozbít nebo prodražit.
+
+Praktická mapa limitů:
+
+- **Levné čtení:** veřejné stránky, statické API, health endpointy; obvykle stačí globální a IP limit.
+- **Drahé čtení:** fulltext, reporty, agregace, exporty; limitujte podle účtu, tenantu a velikosti dotazu.
+- **Zápis:** vytváření projektů, importy, změny nastavení; limitujte podle účtu a role.
+- **Citlivé akce:** login, reset hesla, pozvánky, změna e-mailu; limitujte přísněji a podle více signálů.
+- **Externí náklady:** e-mail, SMS, AI inference, OCR, platební API; přidejte denní budget, frontu a ruční brzdu.
+- **Batch operace:** GraphQL batching, bulk import, webhook replay; limitujte počet položek, hloubku a celkový čas.
+
+Příklad: endpoint `POST /api/invoices/export` nemusí být volán často, ale každý běh může spustit těžký SQL dotaz, vygenerovat PDF a uložit soubor. Limit „60/min“ je tady skoro k ničemu. Lepší je „3 aktivní exporty na tenant, maximálně 10 000 položek na export, jeden plný export za hodinu, další požadavky jdou do fronty“.
+
+### CT.2 Použijte více vrstev, ne jeden magický limit
+
+Jeden limit obvykle chrání jen jednu část systému. V praxi chcete vrstvy: okraj sítě, aplikační logiku, databázi, fronty a integrace. Když všechno necháte až na backend controller, drahé dotazy už doběhly dost daleko na to, aby páchaly škody. Když všechno zastavíte jen na IP adrese, rozbijete kanceláře, sdílené sítě a mobilní operátory.
+
+Rozumné vrstvy pro malý tým:
+
+- **Edge limit:** hrubá ochrana proti očividnému provozu z jedné IP nebo ASN.
+- **Account limit:** férové používání podle přihlášeného uživatele.
+- **Tenant limit:** ochrana sdílených prostředků mezi zákazníky.
+- **Operation limit:** specifická pravidla pro drahé endpointy.
+- **Concurrency limit:** kolik běhů může paralelně spotřebovávat zdroje.
+- **Queue limit:** kolik práce lze nahromadit, než systém začne odmítat nové požadavky.
+- **Provider budget:** kolik peněz nebo kreditů smí integrace spotřebovat za den.
+
+Privacy-first poznámka: nepoužívejte fingerprinting jako výchozí identitu pro limity. Když můžete limit navázat na účet, tenant, API token nebo stabilní serverový identifikátor, je to čitelnější a férovější. IP adresa je užitečný signál, ale není to osoba. A fingerprint pro „bezpečnost“ se umí velmi rychle změnit v tichý tracking s helmou a vestou.
+
+### CT.3 Citlivé akce potřebují pomalost záměrně
+
+Login, reset hesla, zadávání OTP, změna e-mailu, generování recovery kódů, pozvánky do týmu a export osobních dat mají jiné riziko než načtení seznamu projektů. Tady je rychlost nepřítel. Útočník chce hádat, enumerovat, rozesílat, zkoušet a pálit cizí rozpočty. Vaše aplikace má být v těchto místech klidná jako úředník před obědem.
+
+Doporučený model:
+
+- limitujte podle účtu, e-mailu nebo telefonního čísla, nejen podle IP,
+- přidejte progresivní zpomalení po neúspěšných pokusech,
+- používejte krátké a srozumitelné chybové zprávy bez prozrazení, zda účet existuje,
+- pro reset hesla nebo OTP omezte i počet odeslaných zpráv,
+- oddělte bezpečnostní log od marketingové analytiky,
+- po dosažení limitu nabídněte další bezpečný krok, ne jen „zkuste později“.
+
+Příklad odpovědi pro reset hesla: „Pokud účet existuje, poslali jsme instrukce. Další žádost půjde poslat za 10 minut.“ Uživatel ví, co se děje. Útočník nezíská informaci zdarma. E-mailová služba si nebere popcorn a nekouká, jak vám hoří budget.
+
+### CT.4 Chybová odpověď je součást UX i API kontraktu
+
+HTTP status `429 Too Many Requests` existuje přesně pro situaci, kdy klient poslal příliš mnoho požadavků v daném čase. RFC 6585 popisuje i možnost přidat `Retry-After`, aby klient věděl, kdy to zkusit znovu. To není kosmetika. Bez jasné odpovědi budou klienti retryovat chaoticky a z malé zátěže se stane útok s dobrými úmysly. Nejhorší druh, protože se tváří nevinně.
+
+Dobrá odpověď pro API:
+
+```http
+HTTP/1.1 429 Too Many Requests
+Content-Type: application/json
+Retry-After: 600
+
+{
+  "error": "rate_limited",
+  "message": "Export lze spustit znovu za 10 minut.",
+  "retry_after_seconds": 600,
+  "limit_scope": "tenant_export"
+}
+```
+
+Dobrá odpověď v UI:
+
+- vysvětlí, která akce je dočasně omezená,
+- řekne, kdy to půjde znovu,
+- nabídne bezpečnou alternativu, například „export běží na pozadí“ nebo „kontaktujte podporu“,
+- neslibuje, že limit zmizí při refreshi,
+- neukazuje technické detaily jako interní ID pravidla, SQL čas nebo provider cost.
+
+Pokud máte veřejné API, napište limity do dokumentace. Ne nutně každý interní práh, ale aspoň principy: jednotka limitu, co se stane po překročení, jak funguje `Retry-After`, zda existují vyšší limity pro placené tarify a jak požádat o navýšení.
+
+### CT.5 Limity testujte jako produktovou funkci
+
+Rate limiting bez testů je přání. A přání nejsou architektura, i když mají pěkný YAML. Testujte nejen to, že limit existuje, ale i to, že se chová férově.
+
+Testovací scénáře:
+
+- jeden uživatel překročí limit a dostane `429` s použitelnou zprávou,
+- jiný uživatel ve stejném tenantu není omylem blokovaný, pokud pravidlo má být uživatelské,
+- tenant limit chrání sdílenou databázi při hromadném exportu,
+- limit se vztahuje na batch request jako na počet operací, ne jen na jeden HTTP request,
+- retry po `Retry-After` projde,
+- reset hesla neprozradí existenci účtu,
+- fronta odmítne další práci dřív, než zaplní úložiště nebo utratí budget,
+- monitoring upozorní na opakované dosažení limitu bez ukládání zbytečných osobních údajů.
+
+Pro provoz přidejte metriky: počet `429` podle endpointu, důvod limitu, tenant nebo plán v agregované podobě, čekací doba ve frontě, počet odmítnutých provider akcí a nákladový dopad. Pozor: cílem není lovit jednotlivce. Cílem je zjistit, jestli je limit moc tvrdý, moc měkký nebo špatně umístěný.
+
+### CT.6 Šablona: karta limitu
+
+## Název
+
+- Limit: `invoice_export_per_tenant`
+- Vlastník:
+- Služba nebo endpoint:
+- Typ: rate, concurrency, quota, budget, size, timeout
+
+## Důvod
+
+- Jaké riziko chráníme:
+- Co se stane bez limitu:
+- Kdo může být falešně blokovaný:
+
+## Rozsah
+
+- Jednotka: IP, účet, tenant, API token, operace, provider
+- Hodnota limitu:
+- Časové okno:
+- Výchozí chování po překročení:
+- Výjimky a jejich schvalování:
+
+## UX a API
+
+- HTTP status nebo UI hláška:
+- `Retry-After` nebo další bezpečný krok:
+- Dokumentace pro zákazníky:
+- Kontakt pro navýšení limitu:
+
+## Privacy-first kontrola
+
+- Jaká data se používají pro rozhodnutí:
+- Jak dlouho se ukládají limitní logy:
+- Kdo vidí detailní události:
+- Je možné použít méně identifikující signál:
+
+## Testy
+
+- Pozitivní scénář:
+- Překročení limitu:
+- Batch nebo paralelní scénář:
+- Recovery po vypršení okna:
+- Alert při neobvyklém provozu:
+
+### CT.7 Checklist: ochrana proti zneužití bez kladiva na zákazníky
+
+- [ ] Máme seznam drahých a citlivých operací, ne jen globální limit na requesty.
+- [ ] Každý důležitý limit má vlastníka, důvod a bezpečný výchozí stav.
+- [ ] Limity jsou navázané na účet, tenant nebo token, kde je to férovější než IP.
+- [ ] Citlivé akce mají progresivní zpomalení a neprozrazují existenci účtu.
+- [ ] Batch operace mají limit na počet položek, hloubku, velikost a čas.
+- [ ] Odpověď `429` obsahuje srozumitelnou zprávu a ideálně `Retry-After`.
+- [ ] Externí placené služby mají budget nebo alespoň alerty.
+- [ ] Monitoring sleduje limity agregovaně a neproměňuje je v analytický vysavač.
+- [ ] Existují testy pro překročení limitů, retry a falešné blokování.
+- [ ] Výjimky jsou časově omezené a zapsané v dokumentaci.
+
+### Mini cvičení: limit audit za 60 minut
+
+1. Vyberte tři nejdražší nebo nejcitlivější akce v aplikaci.
+2. U každé napište, co může útočník nebo bug spotřebovat: peníze, CPU, databázi, frontu, e-mail, reputaci.
+3. Vyplňte kartu limitu pro jednu akci.
+4. Navrhněte jednu odpověď `429` pro API a jednu lidskou hlášku pro UI.
+5. Přidejte jeden test překročení limitu a jeden test férového uživatele.
+6. Zapište, jaká data se kvůli limitu ukládají a kdy se mažou.
+
+### Codyho komentář
+
+Rate limiting je bezpečnostní prvek, provozní brzda i zákaznická politika najednou. Když ho navrhnete jen jako technický middleware, bude tupý. Když ho navrhnete jako součást produktu, ochrání službu a ještě zákazníkům vysvětlí pravidla hry. A to je vzácná kombinace: bezpečnost, která není protivná jak formulář na úřadě v pátek ve 14:55.
+
+### Zdroje k příloze CT
+
+- OWASP API Security Top 10 2023: API4 Unrestricted Resource Consumption — popisuje rizika chybějících limitů na zdroje, payloady, operace, stránkování a náklady třetích stran: https://owasp.org/API-Security/editions/2023/en/0xa4-unrestricted-resource-consumption/
+- RFC 6585: Additional HTTP Status Codes — definuje status `429 Too Many Requests` a použití hlavičky `Retry-After`: https://www.rfc-editor.org/rfc/rfc6585#section-4
+- MDN: 429 Too Many Requests — praktický přehled použití HTTP statusu `429` a souvisejících hlaviček pro webové klienty: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/429
+- NIST SP 800-63B — doporučení pro digitální identitu, včetně práce s autentizačními pokusy a ochranou proti hádání tajemství: https://pages.nist.gov/800-63-4/sp800-63b.html
+
 ## Pracovní log
+
+- 2026-08-26: Přidána příloha CT „Rate limiting a ochrana proti zneužití bez trestání dobrých uživatelů“ s mapou rizikových operací, vícevrstvými limity, pravidly pro citlivé akce, návrhem odpovědi `429`, kartou limitu, checklistem, hodinovým auditem a ověřenými OWASP/RFC/MDN/NIST zdroji.
+
 - 2026-08-26: Přidána příloha CS „Feature flags a rollout bez produktového hazardu“ s rozdělením deploy/release/rollout, typy flagů, prevencí flag debtu, privacy-first segmentací, logováním, rollout metrikami, technickou implementací, šablonou, checklistem, 50minutovým auditem a ověřenými zdroji.
 
 - 2026-08-26: Přidána příloha CR „Auditní logy bez šmírovacího deníčku“ s rozdělením typů logů, seznamem auditovatelných akcí, minimalizací dat, retencí, integritou, zákaznickým zobrazením, šablonou, checklistem a ověřenými zdroji.
