@@ -24814,7 +24814,161 @@ E-mail je pořád jeden z nejlepších produktových kanálů, ale jen když se 
 
 
 
+
+## CW. Retence a mazání dat bez digitálního syslení
+
+Data mají v produktu životní cyklus. Vzniknou, pomáhají doručit službu, občas pomáhají vyřešit spor nebo incident — a pak mají zmizet, anonymizovat se nebo se přesunout do jasně zdůvodněného archivu. Pokud tohle neřídíte, databáze se časem změní v digitální půdu po babičce: všechno se tam „může někdy hodit“, nikdo neví, co je v krabicích, a při každém stěhování se všichni tváří, že to vyřeší příště.
+
+Privacy-first SaaS v Evropě musí umět vysvětlit nejen proč data sbírá, ale i proč je pořád drží. GDPR principy minimalizace a omezení uložení říkají jednoduše: sbírejte jen to, co potřebujete, a nedržte osobní data déle, než je nutné pro daný účel. Právo na výmaz podle článku 17 navíc znamená, že mazání není laskavost v supportu, ale schopnost systému.
+
+### CW.1 Retence není jedna lhůta pro celou firmu
+
+Nejhorší retenční politika je věta „držme to dva roky“. Čeho přesně? Účetních dokladů? Login logů? Rozpracovaných formulářů? Support ticketů? Analytických eventů? Záloh? Exportů? Každá kategorie má jiný účel, riziko a právní nebo provozní důvod.
+
+Začněte datovými třídami:
+
+- **Účetní a fakturační data:** drží se podle účetních a daňových povinností; mazání uživatelského účtu obvykle neznamená okamžité smazání faktury.
+- **Produktová data zákazníka:** projekty, nastavení, dokumenty, záznamy a obsah, který zákazník aktivně spravuje.
+- **Bezpečnostní a auditní logy:** přihlášení, změny oprávnění, citlivé akce, exporty a administrátorské zásahy.
+- **Technické logy:** chyby, metriky výkonu, fronty, webhooky, e-mailové doručení.
+- **Marketingová a analytická data:** návštěvnost, kampaně, newsletter preference, souhlasy a odhlášení.
+- **Dočasná data:** upload staging, importní soubory, debug výstupy, cache, preview tokeny a jednorázové odkazy.
+
+Každá třída má mít vlastní pravidlo. Ne proto, že milujeme tabulky. Protože univerzální pravidlo buď smaže něco, co musíte držet, nebo drží něco, co už dávno nemá existovat. Obě varianty jsou drahé, jen každá jinak.
+
+### CW.2 Mazání navrhujte jako produktovou funkci
+
+Mazání není jeden SQL příkaz spuštěný po půlnoci. V reálném SaaSu bývá uživatel napojený na organizaci, faktury, role, webhooky, auditní logy, e-maily, soubory, integrace, zálohy a support historii. Pokud mazání nepromyslíte, skončíte s polovičním účtem: v UI už není, v exportu pořád je, v logu je e-mail, v supportu je screenshot a ve skladu objektů leží původní upload. Digitální zombie. Bez mozku, ale s právním rizikem.
+
+Praktický postup:
+
+1. **Definujte objekt mazání:** uživatel, organizace, projekt, import, e-mailová adresa, konkrétní soubor.
+2. **Rozhodněte akci pro každou datovou třídu:** smazat, anonymizovat, agregovat, oddělit od identity, ponechat kvůli povinnosti.
+3. **Oddělte okamžité deaktivace od finálního výmazu:** účet může být nejdřív uzamčen, exportován a po ochranné lhůtě smazán.
+4. **Zapište audit výmazu bez zbytečných osobních dat:** kdo žádost zpracoval, kdy, jaký rozsah, jaký důvod ponechání výjimek.
+5. **Testujte obnovu i neobnovu:** po výmazu nesmí export, API ani admin hledání vracet osobní data, která měla zmizet.
+
+Důležité: anonymizace není přejmenování `ondrej@example.com` na `deleted-user-123`. Pokud jde z dalších polí člověka rozumně spojit zpět, pořád pracujete s osobními daty. Pseudonymizace je užitečná bezpečnostní technika, ale není kouzelná gumovací propiska.
+
+### CW.3 Dočasná data jsou nejčastější zapomenutý sklep
+
+Malé týmy často hlídají hlavní databázi, ale zapomenou na okraje: importní CSV, přílohy v supportu, staging uploady, debug logy, dočasné exporty, náhledy dokumentů, cache odpovědí a staré soubory z migrací. Právě tam bývá nejvíc citlivých dat s nejmenší kontrolou.
+
+Zaveďte jednoduché pravidlo: každá dočasná cesta má mít expiraci už při vzniku. Ne „někdy uklidíme“. Konkrétní `expires_at`, storage lifecycle, cron job nebo frontový úkol. Ideálně s metrikou, kolik objektů čeká na smazání a kolik smazání selhalo.
+
+Příklady:
+
+- importní soubor z formuláře smažte po dokončení importu nebo po 7 dnech při chybě,
+- jednorázový export udržujte dostupný třeba 24–72 hodin podle rizika a velikosti,
+- preview token zrušte po prvním použití nebo krátké expiraci,
+- debug logy z incidentu přesuňte do řízeného incident záznamu a původní výpis smažte,
+- cache s uživatelskými daty mažte při změně oprávnění, odhlášení nebo výmazu účtu.
+
+Codyho komentář: dočasné soubory jsou jako „jen na chvíli“ krabice na chodbě. Za měsíc kolem nich chodíte automaticky a za rok tvrdíte, že jsou součást architektury.
+
+### CW.4 Zálohy potřebují vlastní výmazovou logiku
+
+Zálohy jsou zvláštní případ. Nemusíte vždy umět okamžitě fyzicky vymazat jeden záznam ze všech historických backupů, ale musíte vědět, jak se osobní data po obnově znovu nevrátí do produkce. To znamená dokumentovaný postup: pokud obnovíme databázi ze zálohy, jak znovu aplikujeme výmazy, anonymizace a změny souhlasů provedené po čase zálohy?
+
+Praktický model:
+
+- produkční výmaz zapíše minimalizovaný záznam do `erasure_events`,
+- restore postup po obnově přehraje výmazy od času zálohy,
+- zálohy mají vlastní retenci a po jejím konci se mažou celé,
+- přístup k zálohám je užší než přístup k produkční administraci,
+- test obnovy ověřuje nejen funkčnost aplikace, ale i znovuaplikování výmazů.
+
+Tohle je přesně místo, kde se privacy-first potkává s provozní realitou. Nejde o slib „všechno hned smažeme ze všech médií“. Jde o pravdivý, technicky proveditelný a auditovatelný postup, který zákazníkovi ani regulátorovi neprodává pohádku.
+
+### CW.5 Retence musí být vidět v produktu i dokumentaci
+
+Pokud retenční pravidla zná jen jeden vývojář a možná jedna stránka v interním wiki, zákazník z toho nic nemá. Privacy-first přístup znamená, že hlavní pravidla vysvětlíte lidsky: co držíte během používání služby, co se stane po deaktivaci, co zůstává kvůli fakturaci nebo bezpečnosti, jak požádat o výmaz a jak fungují exporty.
+
+Do produktu patří minimálně:
+
+- nastavení pro smazání účtu nebo organizace, pokud to dává smysl,
+- jasný text, co se smaže okamžitě a co má ochrannou lhůtu,
+- export před výmazem,
+- potvrzení kritické akce více než jedním klikem,
+- informace, koho kontaktovat u specifické žádosti,
+- interní auditní stopa bez zbytečných osobních detailů.
+
+Do dokumentace patří retenční tabulka pro hlavní datové kategorie. Nemusí to být právnická encyklopedie. Stačí čitelné: účel, typ dat, lhůta, akce po lhůtě, výjimky, vlastník.
+
+### CW.6 Šablona: retenční karta datové třídy
+
+```markdown
+## Retenční karta
+
+### Datová třída
+- Název:
+- Příklady dat:
+- Systémy a úložiště:
+
+### Účel
+- Proč data vznikají:
+- Kdo je používá:
+- Jaké rozhodnutí nebo funkci podporují:
+
+### Retence
+- Běžná lhůta:
+- Spouštěč začátku lhůty:
+- Akce po lhůtě: smazat / anonymizovat / agregovat / archivovat
+- Výjimky a důvody:
+
+### Výmaz a export
+- Kde se data objeví v exportu:
+- Jak se smažou při výmazu účtu nebo organizace:
+- Co zůstává kvůli právnímu, bezpečnostnímu nebo smluvnímu důvodu:
+
+### Provoz
+- Vlastník:
+- Automatizace mazání:
+- Monitoring selhání:
+- Poslední test:
+```
+
+### CW.7 Checklist: retence bez datového syslení
+
+- [ ] Máme seznam hlavních datových tříd, ne jednu univerzální lhůtu.
+- [ ] Každá datová třída má účel, vlastníka, lhůtu a akci po lhůtě.
+- [ ] Dočasné soubory, exporty, cache a debug data mají automatickou expiraci.
+- [ ] Mazání účtu řeší databázi, soubory, logy, integrace, e-maily i support.
+- [ ] Víme, co se smaže, co anonymizuje a co se ponechá z oprávněného důvodu.
+- [ ] Po obnově ze zálohy umíme znovu aplikovat výmazy provedené po času zálohy.
+- [ ] Admin rozhraní a exporty po výmazu nevracejí data, která měla zmizet.
+- [ ] Retenční pravidla jsou popsaná lidsky v dokumentaci nebo privacy centru.
+- [ ] Selhání mazací úlohy vytváří alert, ne tichý hřbitov dat.
+
+### Mini cvičení: retenční audit za 60 minut
+
+1. Vyberte jednu oblast: uživatelské účty, importy, support, logy nebo marketing.
+2. Sepište všechny systémy, kde se data z této oblasti mohou objevit.
+3. Ke každému systému napište účel, vlastníka a současnou dobu uložení.
+4. Označte data, která jsou dočasná, ale nemají expiraci.
+5. Vyberte jednu datovou třídu a vyplňte retenční kartu.
+6. Navrhněte jednu automatizaci mazání a jeden test, že mazání opravdu proběhlo.
+7. Zapište, co zákazníkovi vysvětlíte v produktu nebo dokumentaci.
+
+Výstupem má být jedna dokončená retenční karta a jeden konkrétní úklidový úkol. Ne celofiremní program „Data Detox 2030“. Ten zní sice grantově, ale dneska potřebujete smazat ty importní soubory z roku, kdy se všichni učili péct chleba.
+
+### Codyho komentář
+
+Můj názor: dobrý SaaS poznáte i podle toho, že umí data pustit. Ne proto, že data nemají hodnotu, ale protože důvěra má větší hodnotu než nekonečný sklad historických záznamů. Privacy-first není asketismus. Je to produktová disciplína: držet data, která slouží zákazníkovi, a zbavit se těch, která slouží jen budoucí výmluvě „možná se to bude hodit“.
+
+### Zdroje k příloze CW
+
+- Evropská komise: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en) — přehled principů včetně minimalizace dat a omezení uložení.
+- Evropská komise: [What data can we process and under which conditions?](https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/overview-principles/what-data-can-we-process-and-under-which-conditions_en) — praktické vysvětlení účelu, minimalizace a uložení osobních dat jen po nezbytnou dobu.
+- EUR-Lex: [GDPR Article 17](https://eur-lex.europa.eu/eli/reg/2016/679/art_17/oj/eng) — právo subjektu údajů na výmaz osobních údajů bez zbytečného odkladu v uvedených případech.
+- OWASP Cheat Sheet Series: [Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html) — doporučení k logování, včetně vyloučení citlivých dat, ochrany logů a retenčních pravidel.
+- OWASP ASVS 5.0: [Security Logging and Error Handling](https://github.com/OWASP/ASVS/blob/master/5.0/en/0x25-V16-Security-Logging-and-Error-Handling.md) — ověřovací požadavky na inventář logování, kontrolu přístupu, retenci a ochranu soukromí v logovacích systémech.
+
+
 ## Pracovní log
+
+- 2026-08-26: Přidána příloha CW „Retence a mazání dat bez digitálního syslení“ s datovými třídami, návrhem mazání jako produktové funkce, úklidem dočasných dat, obnovou ze záloh, retenční kartou, checklistem, hodinovým auditem a ověřenými GDPR/OWASP zdroji.
+
 
 - 2026-08-26: Přidána příloha CV „Transakční e-maily a doručitelnost bez datového cirkusu“ s kategorizací e-mailů, doménovou hygienou, one-click unsubscribe, privacy-first metrikami, bezpečným obsahem, vendor exit otázkami, provozním briefem, checklistem a ověřenými zdroji.
 
