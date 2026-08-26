@@ -24583,7 +24583,240 @@ Webhooky jsou místo, kde se technická lenost maskuje jako rychlá integrace. M
 - OWASP Cheat Sheet Series: [Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html) — doporučení pro bezpečnostní logování, oddělení účelů logů a rozumný rozsah ukládaných událostí.
 
 
+## CV. Transakční e-maily a doručitelnost bez datového cirkusu
+
+E-mail je v SaaSu divná infrastruktura: vypadá nudně, dokud nepřestane chodit reset hesla, faktura, pozvánka do týmu nebo potvrzení objednávky. Pak se z něj stane incident s krásně pasivně agresivní větou „mně nic nepřišlo“. Transakční e-mail není marketingový newsletter v obleku. Je to součást produktu, bezpečnosti, supportu i důvěry.
+
+Cílem této přílohy je nastavit e-mail tak, aby byl doručitelný, auditovatelný a privacy-first. Nejde o hon za každým pixelem v šabloně ani o sběr co nejvíc behaviorálních dat. Jde o to, aby správná zpráva odešla správnému člověku, šla ověřit, neprozradila zbytečné osobní údaje a nezamkla vás u dodavatele, ze kterého se později špatně odchází.
+
+### CV.1 Rozdělte e-maily podle účelu, ne podle šablony
+
+První dobré rozhodnutí je oddělit typy zpráv. Ne kvůli pořádkumilovnosti, ale kvůli právnímu základu, prioritě doručení, obsahu, odhlašování a monitoringu.
+
+Použijte čtyři praktické skupiny:
+
+- **Bezpečnostní e-maily:** reset hesla, magic link, nový přístup, změna e-mailu, export dat, smazání účtu.
+- **Provozní e-maily:** pozvánka do workspace, upozornění na incident, dokončený import, selhaná integrace, změna oprávnění.
+- **Fakturační e-maily:** faktura, platba selhala, trial končí, změna tarifu, potvrzení refundace.
+- **Marketingové a vztahové e-maily:** newsletter, produktové novinky, vzdělávací série, nabídka rozšíření.
+
+Každá skupina má mít vlastní pravidla. Bezpečnostní e-mail má vysokou prioritu, krátkou platnost odkazu, minimální obsah a jasný audit. Marketingový e-mail má mít souhlas nebo jiný ověřený právní základ, odhlášení a oddělené metriky. Fakturační e-mail potřebuje dohledatelnost, ale nemá být reklamní leták s fakturou jako přílohou. To je přesně ten moment, kdy produkt začne znít jako bazarový newsletter. Nedělejme si to.
+
+Praktická karta typu e-mailu:
+
+```markdown
+## E-mail: reset hesla
+
+- Kategorie: bezpečnostní
+- Spouštěč: uživatel požádal o reset hesla
+- Právní/produktový důvod: zabezpečení účtu a plnění služby
+- Priorita doručení: kritická
+- Odesílací doména: auth.example.com nebo vyhrazený transakční stream
+- Obsahuje osobní údaje: e-mail příjemce, IP jen v interním auditu, ne v těle zprávy
+- Odkaz: jednorázový token, krátká expirace, žádný tracking redirect
+- Odhlašování: ne, nejde o marketing
+- Logování: message ID, typ, čas, stav doručení, bez tokenu a bez plného těla
+- Fallback: support postup pro uživatele, kterému zpráva nedorazí
+```
+
+### CV.2 Doménová hygiena je základ produktu
+
+Doručitelnost nezačíná v editoru šablony, ale v DNS. Pokud nemáte SPF, DKIM, DMARC, správné reverzní DNS a TLS, řešíte problém od konce. Gmail od roku 2024 požaduje pro odesílatele na Gmail účty minimálně autentizaci přes SPF nebo DKIM, platné forward/reverse DNS, TLS při přenosu, formát podle RFC 5322 a nízkou míru spamu. Pro odesílatele nad 5 000 zpráv denně na osobní Gmail účty přidává požadavky na SPF i DKIM, DMARC a u marketingových zpráv one-click unsubscribe. Google zároveň ve FAQ uvádí, že od listopadu 2025 zpřísňuje vymáhání u nevyhovujícího provozu.
+
+Praktický základ pro malý SaaS:
+
+- **Vyhrazená odesílací doména:** například `mail.example.com`, `notify.example.com` nebo `billing.example.com`; neposílejte všechno z hlavní domény bez rozmyslu.
+- **SPF:** dovoluje konkrétním službám posílat za vaši doménu, ale držte ho krátký a pravidelně ho čistěte.
+- **DKIM:** podepisuje zprávu a je důležitý pro důvěryhodnost i pro one-click unsubscribe podle RFC 8058.
+- **DMARC:** nastavuje pravidla pro nesoulad SPF/DKIM a dává vám reporty o tom, kdo se za doménu pokouší posílat.
+- **TLS:** přenos mezi servery má být šifrovaný; pro přísnější politiku zvažte MTA-STS a TLS reporting.
+- **Oddělené streamy:** transakční e-maily oddělte od marketingu, aby kampaň se špatnou reputací nepoškodila reset hesla.
+
+Codyho komentář: e-mailová reputace je jako kreditní skóre domény. Buduje se dlouho, zničí se rychle a vysvětluje se špatně. Pokud vám někdo navrhne posílat marketing, faktury a reset hesla jedním streamem, zhluboka se nadechněte a schovejte DNS přístupy.
+
+### CV.3 Odhlašování patří do marketingu, ne do resetu hesla
+
+Marketingové a hromadné zprávy musí být snadno odmítnutelné. U Gmailu i Yahoo je one-click unsubscribe praktický požadavek pro relevantní bulk/subscribed zprávy. RFC 8058 popisuje hlavičku `List-Unsubscribe-Post: List-Unsubscribe=One-Click` a požaduje, aby související unsubscribe hlavičky byly pokryté platným DKIM podpisem.
+
+Důležité je nerozbít tím transakční zprávy. Reset hesla, bezpečnostní upozornění a faktury nemají být odhlašovatelné stejným mechanismem jako newsletter. Uživatel může odmítnout marketing, ale pořád musí dostat zprávu nutnou pro bezpečnost nebo plnění služby. Naopak marketingový e-mail bez viditelného odhlášení je pozvánka do spamu a support pekla.
+
+Praktická pravidla:
+
+- Každý marketingový e-mail má v těle jasný odhlašovací odkaz.
+- One-click endpoint provede odhlášení bez dalšího přihlašování, CAPTCHA nebo dotazníku.
+- Odhlašovací token je náhodný, omezený účelem a neobsahuje čitelné osobní údaje.
+- Odhlášení potvrďte krátce, bez upsell divadla a bez nových trackerů.
+- Preference centrum je doplněk, ne překážka: uživatel má mít možnost „odhlásit vše“.
+- Transakční a bezpečnostní zprávy odlišujte kategorií, doménou, obsahem i logikou odhlášení.
+
+Antivzor:
+
+```text
+Chcete se odhlásit? Přihlaste se, vyplňte důvod, potvrďte preference, počkejte na e-mail a klikněte na další odkaz.
+```
+
+Lepší vzor:
+
+```text
+Odhlásit z produktových novinek
+Správa e-mailových preferencí
+```
+
+A po kliknutí:
+
+```text
+Hotovo. Produktové novinky na tento e-mail už posílat nebudeme.
+```
+
+### CV.4 Tracking pixel není metrika důvěry
+
+Otevření e-mailu je lákavá metrika, protože vypadá jednoduše. Jenže v moderních klientech ji zkreslují proxy, blokování obrázků, privacy ochrany a automatické načítání. Navíc tracking pixel často znamená zpracování dalších údajů o příjemci, zařízení, čase, IP adrese nebo klientovi. Pro privacy-first SaaS je lepší ptát se: jaké rozhodnutí podle té metriky uděláme?
+
+Doporučené metriky podle účelu:
+
+- **Bezpečnostní e-maily:** počet odeslaných zpráv, bounce rate, latence doručení, počet úspěšně dokončených bezpečnostních akcí.
+- **Fakturační e-maily:** doručitelnost, selhané platby vyřešené po upozornění, počet kontaktů na support kvůli fakturaci.
+- **Produktové e-maily:** kliknutí na jasně označené odkazy, následná aktivace funkce, odhlášení a spam stížnosti.
+- **Newsletter:** počet aktivních odběratelů, čistý růst, kliknutí na přímé odkazy, odpovědi, odhlášení.
+
+Privacy-first pravidlo: pokud pixel nepotřebujete pro konkrétní rozhodnutí, nepoužívejte ho. Kliknutí měřte ideálně agregovaně, bez reklamních identifikátorů a bez sdílení s třetími stranami. Přímé odkazy a RSS jsou často lepší než snaha vědět o každém otevření e-mailu. Ano, graf bude méně sexy. Zato nebude smrdět jako datový vysavač po Black Friday.
+
+### CV.5 Obsah e-mailu má nést minimum rizika
+
+E-mail je špatné místo pro tajemství. Přeposílá se, indexuje v klientech, končí ve sdílených schránkách, někdy v tiketech a občas na screenshotech. Proto by tělo zprávy nemělo obsahovat nic, co byste nechtěli vidět v cizím mailboxu.
+
+Bezpečný obsahový základ:
+
+- Neposílejte hesla, dlouhodobé tokeny, API klíče ani plné osobní údaje.
+- U odkazů používejte krátkou expiraci a jednorázové použití tam, kde jde o bezpečnost.
+- U faktur neposílejte víc údajů, než je nutné pro identifikaci a účetnictví.
+- U týmových pozvánek jasně ukažte organizaci, roli a kdo pozvánku poslal.
+- U změn oprávnění napište, co se změnilo, ale nedávejte do e-mailu citlivý obsah projektu.
+- U incidentů popište dopad lidsky, ale neprozrazujte interní architekturu zbytečně detailně.
+
+Příklad dobrého bezpečnostního e-mailu:
+
+```text
+Předmět: Potvrďte změnu e-mailu ve vašem účtu
+
+Někdo požádal o změnu e-mailové adresy pro účet v Example SaaS.
+
+Pokud jste to byli vy, potvrďte změnu tímto odkazem. Odkaz platí 30 minut.
+
+Pokud jste o změnu nežádali, nic nepotvrzujte a zkontrolujte aktivní relace v účtu.
+```
+
+Co tam záměrně není: IP adresa v těle, user agent, celý token, interní ID účtu, marketingový banner, doporučené články a tři sociální ikonky. E-mail má práci, tak ať ji udělá a jde domů.
+
+### CV.6 Vendor lock-in řešte dřív než první větší kampaň
+
+E-mailový poskytovatel není jen SMTP endpoint. Často drží šablony, suppression list, bounce historii, reputační segmenty, event logy, preference, automatizace a někdy i kontaktní databázi. Když ho měníte až ve chvíli, kdy doručitelnost hoří, migrujete v nejhorším možném okamžiku.
+
+Před výběrem dodavatele si odpovězte:
+
+- Kde jsou data uložena a kdo k nim má přístup?
+- Umí dodavatel EU region nebo evropský provoz, pokud je to pro vás požadavek?
+- Lze exportovat suppression list, bounce historii, šablony a preference?
+- Umí oddělit transakční a marketingové streamy?
+- Jak dlouho drží event logy a lze retenci omezit?
+- Jak se řeší DPA, subdodavatelé a přenosy mimo EHP?
+- Umí webhooky s podpisem a idempotentním zpracováním eventů?
+- Co se stane, když služba vypadne nebo účet omylem pozastaví?
+
+Privacy-first doporučení: držte zdroj pravdy o kontaktech, souhlasech a preferencích u sebe. Dodavatel e-mailu má být prováděcí vrstva, ne jediná kopie vztahu se zákazníkem. Marketingový seznam bez vlastního exportu je jen pronajatá paměť.
+
+### CV.7 Šablona: e-mailový provozní brief
+
+```markdown
+## E-mailový provozní brief
+
+### Domény a autentizace
+- Odesílací domény:
+- SPF záznamy:
+- DKIM selektory:
+- DMARC politika:
+- TLS/MTA-STS stav:
+- Vlastník DNS:
+
+### Kategorie zpráv
+- Bezpečnostní:
+- Provozní:
+- Fakturační:
+- Marketingové:
+- Nepovolené kombinace:
+
+### Data a retence
+- Jaké osobní údaje jsou v těle e-mailu:
+- Jaké údaje jsou v logu poskytovatele:
+- Retence eventů:
+- Exportní postup:
+- Suppression list jako zdroj pravdy:
+
+### Doručitelnost
+- Monitoring bounce rate:
+- Monitoring spam stížností:
+- Testovací mailboxy:
+- Alert při selhání kritických e-mailů:
+- Fallback pro reset hesla / fakturaci:
+
+### Odhlašování
+- Kategorie s odhlášením:
+- One-click endpoint:
+- Preference centrum:
+- SLA pro propsání odhlášení:
+- Audit změny preferencí:
+
+### Incidenty
+- Kdo řeší doručitelnost:
+- Kdo komunikuje zákazníkům:
+- Jak se pozastaví marketingový stream:
+- Jak se ověří návrat do normálu:
+```
+
+### CV.8 Checklist: e-mail bez šmírování a chaosu
+
+- [ ] Máme oddělené bezpečnostní, provozní, fakturační a marketingové e-maily.
+- [ ] Každá kategorie má vlastní účel, prioritu, vlastníka a pravidla logování.
+- [ ] SPF, DKIM a DMARC jsou nastavené a pravidelně kontrolované.
+- [ ] Kritické e-maily nepoužívají tracking pixel ani marketingové redirecty.
+- [ ] Marketingové e-maily mají viditelné odhlášení a one-click unsubscribe tam, kde je relevantní.
+- [ ] Tokeny v e-mailech jsou jednorázové nebo krátkodobé podle rizika.
+- [ ] E-mailové logy neukládají celé tělo zprávy bez dobrého důvodu.
+- [ ] Suppression list a preference umíme exportovat a obnovit.
+- [ ] Bounce, spam stížnosti a latence kritických zpráv mají monitoring.
+- [ ] Máme fallback postup, když uživateli nedorazí reset hesla nebo faktura.
+
+### Mini cvičení: e-mail audit za 60 minut
+
+1. Vyberte pět nejdůležitějších e-mailů v produktu.
+2. Zařaďte je do kategorií: bezpečnostní, provozní, fakturační, marketingové.
+3. U každého napište, jaká data jsou v těle, odkazu, logu a u dodavatele.
+4. Zkontrolujte SPF, DKIM, DMARC a odesílací doménu.
+5. U marketingu ověřte odhlášení a preference.
+6. U kritických zpráv ověřte monitoring a fallback.
+7. Sepište tři opravy: jednu DNS, jednu obsahovou, jednu provozní.
+
+Výstupem není román o doručitelnosti. Výstupem je krátký seznam rizik, vlastníků a nejbližších změn. Přesně ten typ dokumentu, který zachrání páteční večer, když e-maily začnou mizet do spamu.
+
+### Codyho komentář
+
+E-mail je pořád jeden z nejlepších produktových kanálů, ale jen když se k němu chováte s respektem. Můj pohled: privacy-first doručitelnost není o tom, že odmítnete měření. Je o tom, že měříte zdraví služby a důvěru, ne mikropohyby člověka v inboxu. Méně stalkingu, víc spolehlivosti. Revoluční koncept, já vím.
+
+### Zdroje k příloze CV
+
+- Google Help: [Email sender guidelines](https://support.google.com/mail/answer/81126?hl=en) — aktuální požadavky pro odesílání na Gmail účty, včetně SPF/DKIM, DNS, TLS, spam rate, DMARC pro bulk sendery a odhlašování.
+- Google Help: [Email sender guidelines FAQ](https://support.google.com/mail/answer/14229414?hl=en) — doplňuje vymáhání pravidel, včetně informace o zpřísnění u nevyhovujícího provozu od listopadu 2025.
+- Yahoo Sender Hub: [Sender Requirements & Recommendations](https://senders.yahooinc.com/best-practices/) — doporučení a požadavky Yahoo pro autentizaci, DMARC, relevantní obsah a one-click unsubscribe.
+- RFC 8058: [Signaling One-Click Functionality for List Email Headers](https://www.rfc-editor.org/rfc/rfc8058.html) — standard pro one-click unsubscribe a požadavky na DKIM podpis souvisejících hlaviček.
+- RFC 8461: [SMTP MTA Strict Transport Security](https://www.rfc-editor.org/info/rfc8461/) — specifikace MTA-STS pro přísnější TLS politiku mezi mail servery.
+- RFC 8460: [SMTP TLS Reporting](https://www.rfc-editor.org/rfc/rfc8460.html) — TLS reporty pro sledování problémů s šifrovaným přenosem e-mailů.
+- GDPR: [Article 5](https://gdpr-info.eu/art-5-gdpr/) a [Article 6](https://gdpr-info.eu/art-6-gdpr/) — principy minimalizace, omezení účelu a právní základy zpracování osobních údajů.
+
+
+
 ## Pracovní log
+
+- 2026-08-26: Přidána příloha CV „Transakční e-maily a doručitelnost bez datového cirkusu“ s kategorizací e-mailů, doménovou hygienou, one-click unsubscribe, privacy-first metrikami, bezpečným obsahem, vendor exit otázkami, provozním briefem, checklistem a ověřenými zdroji.
 
 - 2026-08-26: Přidána příloha CU „Webhooky a integrační události bez slepé důvěry“ s dopadovou kategorizací, ověřením podpisů, idempotencí, odděleným zpracováním, SSRF ochranou, kartou webhooku, checklistem, mini cvičením a ověřenými zdroji.
 
