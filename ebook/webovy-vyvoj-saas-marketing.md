@@ -26585,7 +26585,180 @@ Importy jsou test charakteru produktu. Ukazují, jestli zákazníkovi pomáháte
 - Evropská komise — Data Act explained shrnuje důraz na přístup k datům, interoperabilitu a cloud switching, což dává importům a migracím produktový i provozní kontext: https://digital-strategy.ec.europa.eu/en/factpages/data-act-explained
 - Evropská komise: Principles of the GDPR připomíná zásady minimalizace dat, účelového omezení, omezení uložení a odpovědnosti, které se vztahují i na dočasné importní soubory: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
 
+## DF. Webhooky a integrační eventy bez tichého požáru
+
+Webhook je krásný vynález: jedna aplikace udělá akci a druhá se o tom dozví skoro hned. Tedy do chvíle, než zjistíte, že jeden event přišel třikrát, druhý nedorazil vůbec, třetí dorazil ve špatném pořadí a čtvrtý vám někdo zkusil poslat z internetu ručně. Pak už to není integrace, ale malý festival požárníků.
+
+Pro malý SaaS je webhook nejčastěji hranice mezi produktem a okolním světem: platby, fakturace, CRM, e-mailing, notifikace, automatizace, AI agenti, importy, exporty. Proto se k webhookům chovejte jako k veřejnému API. I když je endpoint „jen interní“. Pokud na něj vede URL z internetu, není interní. Je to veřejná branka s cedulkou „prosím, nekopejte do dveří“.
+
+### DF.1 Každý webhook má mít vlastní kontrakt
+
+Nezačínejte tím, že endpoint prostě přijme JSON a „nějak se uvidí“. To je architektura typu mokrý karton. Webhook potřebuje kontrakt stejně jako API: kdo ho posílá, jaké eventy existují, jak se ověřují, jak vypadá payload, co znamená úspěch a co se stane při opakování.
+
+Minimální kontrakt webhooku:
+
+- **Provider:** kdo event posílá a z jaké domény nebo služby.
+- **Event type:** konkrétní název události, například `invoice.paid`, `user.deleted`, `document.export.ready`.
+- **Verze payloadu:** aby změna struktury nerozbila staré konzumenty.
+- **Identifikátor eventu:** stabilní ID pro deduplikaci.
+- **Čas vzniku:** kdy event vznikl u providera, ne kdy dorazil k vám.
+- **Subjekt:** čeho se event týká, například zákazník, faktura, projekt nebo export.
+- **Akce systému:** co přesně vaše aplikace po přijetí udělá.
+- **Idempotence:** co se stane, když přijde stejný event znovu.
+- **Retence:** jak dlouho držíte payload, metadata a chyby.
+
+Praktický příklad: platební webhook `invoice.paid` nesmí jen „zapnout tarif“. Má ověřit podpis, uložit event ID, zjistit aktuální stav faktury z důvěryhodného zdroje, provést změnu idempotentně a zapsat auditní záznam. Pokud stejný event přijde znovu, systém nemá znovu posílat uvítací e-mail, vystavovat doklad nebo měnit quota. Má říct: „Díky, znám tě.“
+
+### DF.2 Podpis ověřujte před parsováním obchodní logiky
+
+Webhook bez ověření podpisu je veřejný formulář převlečený za integraci. Útočník nemusí prolomit váš účet u providera. Stačí mu trefit endpoint a poslat payload, který vaše aplikace vezme vážně. To je levnější než espresso v centru Prahy, což není dobrá bezpečnostní hranice.
+
+Bezpečný příjem webhooku:
+
+1. Přijměte raw tělo požadavku přesně tak, jak dorazilo.
+2. Ověřte podpis proti sdílenému tajemství nebo veřejnému klíči providera.
+3. Zkontrolujte timestamp a odmítněte staré požadavky mimo povolené okno.
+4. Až potom parsujte JSON a spouštějte aplikační logiku.
+5. Uložte `event_id`, typ eventu, výsledek zpracování a hash payloadu.
+
+Důležité: mnoho podpisových schémat počítá podpis z raw těla. Pokud framework nejdřív JSON přepíše, seřadí klíče nebo změní whitespace, ověření může selhat — nebo hůř, tým ho „dočasně“ vypne. Dočasné bezpečnostní vypnutí má životnost švába. Přežije všechno.
+
+### DF.3 Idempotence není bonus, ale základní vlastnost
+
+Většina rozumných providerů webhooky opakuje, když nedostane úspěšnou odpověď. Síť vypadne, worker spadne, databáze se zamkne, odpověď se ztratí. To není chyba providera. To je internet, naše společná kabelová polévka.
+
+Proto musí být zpracování webhooku idempotentní: opakované doručení stejného eventu nesmí způsobit opakovaný obchodní dopad.
+
+Příklad idempotentního postupu:
+
+- event `subscription.updated` dorazí s `event_id = evt_123`,
+- systém se pokusí vložit `evt_123` do tabulky zpracovaných eventů s unikátním indexem,
+- pokud vložení selže kvůli duplicitě, endpoint vrátí úspěch a nic dalšího nedělá,
+- pokud vložení projde, systém načte aktuální stav subscription od providera,
+- aplikuje rozdíl proti vlastnímu stavu,
+- zapíše výsledek jako `processed`, `ignored`, `retryable_error` nebo `permanent_error`.
+
+Nepoužívejte jako deduplikaci jen kombinaci `customer_id + event_type`. Zákazník může mít více relevantních událostí stejného typu. Deduplikujte podle ID eventu od providera nebo vlastního stabilního idempotency klíče.
+
+### DF.4 Rychlá odpověď patří před těžkou práci
+
+Webhook endpoint nemá renderovat PDF, posílat deset e-mailů, aktualizovat CRM a dělat mentální gymnastiku nad celou databází. Má rychle ověřit požadavek, uložit práci do fronty a odpovědět. Těžké zpracování patří do workeru.
+
+Doporučené flow:
+
+1. `POST /webhooks/provider` přijme požadavek.
+2. Ověří podpis, timestamp a základní typ eventu.
+3. Zapíše event do tabulky `webhook_events`.
+4. Vrátí providerovi `2xx`, pokud event bezpečně převzal.
+5. Worker zpracuje event mimo request.
+6. Retry logika řeší dočasné chyby bez blokování providera.
+7. Admin vidí stav eventu a může ručně spustit opakování, pokud je to bezpečné.
+
+Tohle výrazně zjednodušuje incidenty. Když se něco pokazí, máte frontu událostí, stav zpracování a možnost replaye. Bez toho máte jen logy, stres a větu „ono to včera fungovalo“, což není observabilita, ale folklór.
+
+### DF.5 Privacy-first pravidla pro integrační payloady
+
+Webhooky často obsahují víc dat, než vaše aplikace potřebuje. Provider pošle celé zákaznické objekty, e-mail, adresu, metadata, někdy i interní poznámky. Vaše aplikace ale často potřebuje jen ID objektu a typ změny.
+
+Privacy-first pravidla:
+
+- Ukládejte raw payload jen pokud ho opravdu potřebujete pro audit nebo opakování.
+- Pokud raw payload ukládáte, nastavte krátkou retenci a přístup jen pro provozní role.
+- Pro běžnou logiku preferujte načtení aktuálního stavu přes API podle ID objektu.
+- Do logů neposílejte celé payloady, e-maily, adresy, tokeny ani metadata zákazníků.
+- U každého provideru popište, zda data zůstávají v EU/EHP nebo kam se předávají.
+- Nepřidávejte webhook do nástroje jen proto, že má hezkou integraci na jedno kliknutí.
+
+*Codyho komentář:* Integrace na jedno kliknutí je produktově lákavá, ale privacy-first tým se ptá ještě na druhé kliknutí: kde skončí data, kdo je uvidí a jak se smažou. Ano, kazí to demo. Ne, není mi to líto.
+
+### DF.6 Šablona: karta webhooku
+
+```md
+## Základ
+- Název webhooku:
+- Provider:
+- Endpoint:
+- Vlastník:
+- Prostředí: produkce / staging
+- Kritičnost: nízká / střední / vysoká / kritická
+
+## Eventy
+- Povolené typy eventů:
+- Verze payloadu:
+- Identifikátor eventu:
+- Identifikátor subjektu:
+- Akce v našem systému:
+
+## Ověření
+- Podpisové schéma:
+- Kde je uložené tajemství nebo klíč:
+- Povolené timestamp okno:
+- Jak rotujeme tajemství:
+- Jak testujeme neplatný podpis:
+
+## Zpracování
+- Kde ukládáme přijatý event:
+- Jak řešíme deduplikaci:
+- Co běží synchronně:
+- Co běží ve workeru:
+- Retry pravidla:
+- Ruční replay: ano / ne / jen admin
+
+## Data a privacy
+- Jaká osobní data payload obsahuje:
+- Co ukládáme trvale:
+- Co ukládáme dočasně:
+- Retence raw payloadu:
+- Co se nesmí logovat:
+- Kde provider provozuje data:
+
+## Incidenty
+- Jak poznáme selhání:
+- Kdo dostane alert:
+- Jak webhook dočasně vypneme:
+- Jak dohrajeme nezpracované eventy:
+- Jak informujeme zákazníky při dopadu:
+```
+
+### DF.7 Checklist: webhook bez tichého požáru
+
+- [ ] Každý webhook má popsaný účel, providera, vlastníka a kritičnost.
+- [ ] Endpoint ověřuje podpis nad raw tělem požadavku.
+- [ ] Timestamp nebo nonce chrání proti replay útokům.
+- [ ] Tajemství nejsou v repozitáři ani v klientském kódu.
+- [ ] Eventy se deduplikují podle stabilního `event_id`.
+- [ ] Zpracování je idempotentní a opakované doručení nemění stav dvakrát.
+- [ ] Endpoint odpovídá rychle a těžkou práci předává workeru.
+- [ ] Chyby se ukládají jako stav eventu, ne jen jako řádek v logu.
+- [ ] Raw payload má jasnou retenci a omezený přístup.
+- [ ] Logy neobsahují tokeny, celé payloady ani zbytečná osobní data.
+- [ ] Existuje bezpečný ruční replay pro opravené chyby.
+- [ ] Testy pokrývají platný podpis, neplatný podpis, starý timestamp, duplicitní event a neznámý typ eventu.
+
+### Mini cvičení: webhook audit za 60 minut
+
+1. Vyberte jeden webhook, který má přímý obchodní dopad: platby, billing, provisioning nebo mazání dat.
+2. Vyplňte kartu webhooku podle šablony výše.
+3. Najděte, kde se ověřuje podpis a zda ověření běží nad raw tělem.
+4. Pošlete stejný testovací event dvakrát a ověřte, že se stav nezmění dvakrát.
+5. Zkontrolujte logy po testu a smažte z nich zbytečná osobní data.
+6. Simulujte chybu workeru a ověřte, že event zůstane dohledatelný a opakovatelný.
+7. Přidejte jeden alert na nárůst `retryable_error` nebo `permanent_error`.
+8. Zapište do dokumentace postup rotace webhook tajemství.
+
+Výstupem má být jeden webhook, který se dá bezpečně provozovat, ne tabulka přání pro integrační platformu století. Začněte u eventu, který by při duplicitě poslal peníze, změnil tarif nebo smazal data. Tam se chyby tváří nejdražší.
+
+### Zdroje k příloze DF
+
+- GitHub Docs popisují validaci webhooků přes `X-Hub-Signature-256`, práci s raw payloadem a bezpečné porovnání podpisu: https://docs.github.com/en/webhooks/using-webhooks/validating-webhook-deliveries
+- Stripe Docs doporučují ověřovat webhook podpisy, kontrolovat timestamp a chránit endpoint před replay útoky: https://docs.stripe.com/webhooks/signature
+- OWASP REST Security Cheat Sheet doporučuje autentizaci, validaci vstupů, omezení citlivých dat v logách a bezpečné zacházení s API endpointy: https://cheatsheetseries.owasp.org/cheatsheets/REST_Security_Cheat_Sheet.html
+- OWASP API Security Top 10 2023 připomíná rizika neautorizovaného přístupu k objektům, nadměrné expozice dat a nekontrolované spotřeby zdrojů u API: https://owasp.org/API-Security/editions/2023/en/0x11-t10/
+
 ## Pracovní log
+
+- 2026-08-26: Přidána příloha DF „Webhooky a integrační eventy bez tichého požáru“ s kontraktem webhooku, ověřením podpisu, idempotencí, frontovým zpracováním, privacy-first pravidly, kartou webhooku, checklistem, hodinovým auditem a ověřenými GitHub/Stripe/OWASP zdroji.
+
 
 - 2026-08-26: Přidána příloha DE „Importy dat a migrace bez rozbité kvality“ s importním kontraktem, preview flow, bezpečností uploadů, migračním mapováním, lidskými chybovými hláškami, importní kartou, checklistem, hodinovým auditem a ověřenými OWASP/EU/GDPR zdroji.
 
