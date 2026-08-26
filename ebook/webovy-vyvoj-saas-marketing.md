@@ -24815,160 +24815,173 @@ E-mail je pořád jeden z nejlepších produktových kanálů, ale jen když se 
 
 
 
-## CW. Retence a mazání dat bez digitálního syslení
+## CW. Domény, DNS a certifikáty bez ztraceného vlastnictví
 
-Data mají v produktu životní cyklus. Vzniknou, pomáhají doručit službu, občas pomáhají vyřešit spor nebo incident — a pak mají zmizet, anonymizovat se nebo se přesunout do jasně zdůvodněného archivu. Pokud tohle neřídíte, databáze se časem změní v digitální půdu po babičce: všechno se tam „může někdy hodit“, nikdo neví, co je v krabicích, a při každém stěhování se všichni tváří, že to vyřeší příště.
+Doména je jeden z nejmenších řádků v rozpočtu a zároveň jeden z největších bodů selhání. Když ztratíte přístup k hostingu, je to nepříjemné. Když ztratíte přístup k doméně, může přestat fungovat web, e-mail, login, API, tracking odhlášení, fakturace i reset hesla. Jeden špatně uložený registrátorský účet a z moderního SaaSu je najednou offline muzeum.
 
-Privacy-first SaaS v Evropě musí umět vysvětlit nejen proč data sbírá, ale i proč je pořád drží. GDPR principy minimalizace a omezení uložení říkají jednoduše: sbírejte jen to, co potřebujete, a nedržte osobní data déle, než je nutné pro daný účel. Právo na výmaz podle článku 17 navíc znamená, že mazání není laskavost v supportu, ale schopnost systému.
+Privacy-first provoz v Evropě tady není jen o cookies a formulářích. Je i o kontrole nad infrastrukturní identitou: kdo vlastní doménu, kdo může měnit DNS, kde běží autoritativní nameservery, kdo obnovuje certifikáty, kdo vidí DNS historii a jak rychle umíte přepnout provoz bez paniky. Doména není marketingová položka. Je to kořen důvěry.
 
-### CW.1 Retence není jedna lhůta pro celou firmu
+### CW.1 Vlastnictví domény musí být firemní, ne osobní folklór
 
-Nejhorší retenční politika je věta „držme to dva roky“. Čeho přesně? Účetních dokladů? Login logů? Rozpracovaných formulářů? Support ticketů? Analytických eventů? Záloh? Exportů? Každá kategorie má jiný účel, riziko a právní nebo provozní důvod.
+První pravidlo: doména nepatří grafikovi, bývalému dodavateli, osobnímu Gmailu zakladatele ani účtu „někde u registrátora, heslo má asi Petr“. Doména má být registrovaná na správný právní subjekt, s firemním kontaktem, více odpovědnými lidmi a jasným postupem obnovy přístupu.
 
-Začněte datovými třídami:
+Praktické minimum:
 
-- **Účetní a fakturační data:** drží se podle účetních a daňových povinností; mazání uživatelského účtu obvykle neznamená okamžité smazání faktury.
-- **Produktová data zákazníka:** projekty, nastavení, dokumenty, záznamy a obsah, který zákazník aktivně spravuje.
-- **Bezpečnostní a auditní logy:** přihlášení, změny oprávnění, citlivé akce, exporty a administrátorské zásahy.
-- **Technické logy:** chyby, metriky výkonu, fronty, webhooky, e-mailové doručení.
-- **Marketingová a analytická data:** návštěvnost, kampaně, newsletter preference, souhlasy a odhlášení.
-- **Dočasná data:** upload staging, importní soubory, debug výstupy, cache, preview tokeny a jednorázové odkazy.
+- registrátorský účet je firemní, ne osobní,
+- vlastník domény odpovídá fakturačním a právním údajům firmy,
+- přístup má minimálně dvojice lidí přes správce hesel nebo SSO,
+- MFA je povinné pro každého správce,
+- doména má zapnutý registrar lock, pokud ho registrátor podporuje,
+- expirace domény má alerty mimo e-mail na stejné doméně,
+- změny registrátora a nameserverů mají schvalovací postup.
 
-Každá třída má mít vlastní pravidlo. Ne proto, že milujeme tabulky. Protože univerzální pravidlo buď smaže něco, co musíte držet, nebo drží něco, co už dávno nemá existovat. Obě varianty jsou drahé, jen každá jinak.
+Nejčastější chyba: firma má skvělý produkt, ale doménu koupil v roce 2019 freelancer, který už pracuje někde úplně jinde a jediný kontakt je starý účet u registrátora. To není „historie projektu“. To je produkční incident v slow motion.
 
-### CW.2 Mazání navrhujte jako produktovou funkci
+### CW.2 DNS změny mají být verzované rozhodnutí
 
-Mazání není jeden SQL příkaz spuštěný po půlnoci. V reálném SaaSu bývá uživatel napojený na organizaci, faktury, role, webhooky, auditní logy, e-maily, soubory, integrace, zálohy a support historii. Pokud mazání nepromyslíte, skončíte s polovičním účtem: v UI už není, v exportu pořád je, v logu je e-mail, v supportu je screenshot a ve skladu objektů leží původní upload. Digitální zombie. Bez mozku, ale s právním rizikem.
+DNS vypadá jako pár záznamů v administraci, ale reálně řídí web, e-mail, ověřování domén, CDN, certifikáty, SPF, DKIM, DMARC, API endpointy i různé vendor verification tokeny. Proto DNS změny nepatří do chatu jako „zkusil jsem něco přepnout“. Patří do krátkého záznamu: co se mění, proč, kdo to schválil, kdy se čeká propagace a jak se vrátíme zpět.
 
-Praktický postup:
+U každé DNS změny si napište:
 
-1. **Definujte objekt mazání:** uživatel, organizace, projekt, import, e-mailová adresa, konkrétní soubor.
-2. **Rozhodněte akci pro každou datovou třídu:** smazat, anonymizovat, agregovat, oddělit od identity, ponechat kvůli povinnosti.
-3. **Oddělte okamžité deaktivace od finálního výmazu:** účet může být nejdřív uzamčen, exportován a po ochranné lhůtě smazán.
-4. **Zapište audit výmazu bez zbytečných osobních dat:** kdo žádost zpracoval, kdy, jaký rozsah, jaký důvod ponechání výjimek.
-5. **Testujte obnovu i neobnovu:** po výmazu nesmí export, API ani admin hledání vracet osobní data, která měla zmizet.
+- doménu a konkrétní záznam,
+- starou a novou hodnotu,
+- TTL před změnou a po změně,
+- důvod změny,
+- dopad na web, e-mail, API nebo ověřování,
+- plán rollbacku,
+- čas kontroly po nasazení.
 
-Důležité: anonymizace není přejmenování `ondrej@example.com` na `deleted-user-123`. Pokud jde z dalších polí člověka rozumně spojit zpět, pořád pracujete s osobními daty. Pseudonymizace je užitečná bezpečnostní technika, ale není kouzelná gumovací propiska.
+Příklad praktického postupu: den před migrací snižte TTL u relevantních záznamů, připravte novou službu, ověřte certifikát, změňte záznam, sledujte HTTP, e-mail a DNS odpovědi z více resolverů, po stabilizaci TTL vraťte na rozumnou hodnotu. Ano, je to nudné. To je kompliment.
 
-### CW.3 Dočasná data jsou nejčastější zapomenutý sklep
+### CW.3 Nameservery a zóny nesmí být vendor lock-in v převleku
 
-Malé týmy často hlídají hlavní databázi, ale zapomenou na okraje: importní CSV, přílohy v supportu, staging uploady, debug logy, dočasné exporty, náhledy dokumentů, cache odpovědí a staré soubory z migrací. Právě tam bývá nejvíc citlivých dat s nejmenší kontrolou.
+Mnoho týmů nechá DNS u stejného nástroje, který právě používá pro hosting, landing page nebo e-mailing. Někdy je to v pořádku. Problém nastává, když neumíte odejít bez toho, aby se rozpadl celý provoz. DNS zóna by měla být exportovatelná, popsaná a oddělená od jednorázových experimentů.
 
-Zaveďte jednoduché pravidlo: každá dočasná cesta má mít expiraci už při vzniku. Ne „někdy uklidíme“. Konkrétní `expires_at`, storage lifecycle, cron job nebo frontový úkol. Ideálně s metrikou, kolik objektů čeká na smazání a kolik smazání selhalo.
+Dobrý model pro malý SaaS:
 
-Příklady:
+- jedna primární DNS zóna pro produkční doménu,
+- oddělené subdomény pro aplikaci, marketing, API a status,
+- jasně pojmenované ověřovací záznamy dodavatelů,
+- pravidelný export zóny nebo aspoň dokumentovaný inventář,
+- omezený počet lidí s právem měnit nameservery,
+- testovací doména nebo subdoména pro experimenty.
 
-- importní soubor z formuláře smažte po dokončení importu nebo po 7 dnech při chybě,
-- jednorázový export udržujte dostupný třeba 24–72 hodin podle rizika a velikosti,
-- preview token zrušte po prvním použití nebo krátké expiraci,
-- debug logy z incidentu přesuňte do řízeného incident záznamu a původní výpis smažte,
-- cache s uživatelskými daty mažte při změně oprávnění, odhlášení nebo výmazu účtu.
+Privacy-first detail: DNS samo o sobě často neobsahuje osobní data, ale umí odhalovat interní strukturu, dodavatele a bezpečnostní zvyklosti. Nepublikujte zbytečné interní názvy typu `staging-old-client-import-private`. Útočníci čtou taky. Bohužel bez předplatného.
 
-Codyho komentář: dočasné soubory jsou jako „jen na chvíli“ krabice na chodbě. Za měsíc kolem nich chodíte automaticky a za rok tvrdíte, že jsou součást architektury.
+### CW.4 Certifikáty jsou provozní proces, ne zelený zámek v prohlížeči
 
-### CW.4 Zálohy potřebují vlastní výmazovou logiku
+TLS certifikát je vidět až ve chvíli, kdy se rozbije. Automatická obnova je skvělá, ale jen pokud víte, kdo ji provozuje, kde běží validace a co se stane při změně DNS, CDN nebo reverse proxy. Certifikáty mají být součástí monitoringu stejně jako dostupnost aplikace.
 
-Zálohy jsou zvláštní případ. Nemusíte vždy umět okamžitě fyzicky vymazat jeden záznam ze všech historických backupů, ale musíte vědět, jak se osobní data po obnově znovu nevrátí do produkce. To znamená dokumentovaný postup: pokud obnovíme databázi ze zálohy, jak znovu aplikujeme výmazy, anonymizace a změny souhlasů provedené po čase zálohy?
+Zkontrolujte hlavně:
 
-Praktický model:
+- kdo certifikát vystavuje a obnovuje,
+- jaký typ validace používáte: HTTP-01, DNS-01 nebo jiný mechanismus,
+- jestli certifikát pokrývá všechny potřebné subdomény,
+- kdy končí platnost a kdo dostane alert,
+- jestli změna CDN nebo nameserverů nerozbije obnovu,
+- jestli staging nepoužívá produkční tajemství nebo zbytečně široký wildcard,
+- jak rychle umíte certifikát znovu vystavit při incidentu.
 
-- produkční výmaz zapíše minimalizovaný záznam do `erasure_events`,
-- restore postup po obnově přehraje výmazy od času zálohy,
-- zálohy mají vlastní retenci a po jejím konci se mažou celé,
-- přístup k zálohám je užší než přístup k produkční administraci,
-- test obnovy ověřuje nejen funkčnost aplikace, ale i znovuaplikování výmazů.
+U wildcard certifikátů buďte opatrní. Jsou pohodlné, ale když privátní klíč unikne, dopad může být větší než u úzce vymezeného certifikátu. Pohodlí je fajn, pokud není jen jiný název pro „větší průšvih najednou“.
 
-Tohle je přesně místo, kde se privacy-first potkává s provozní realitou. Nejde o slib „všechno hned smažeme ze všech médií“. Jde o pravdivý, technicky proveditelný a auditovatelný postup, který zákazníkovi ani regulátorovi neprodává pohádku.
+### CW.5 E-mailová doména potřebuje DNS hygienu
 
-### CW.5 Retence musí být vidět v produktu i dokumentaci
+Pokud na doméně běží SaaS, skoro vždy posílá e-maily: reset hesla, pozvánky, faktury, notifikace, bezpečnostní upozornění. DNS proto musí držet i e-mailovou důvěryhodnost: SPF, DKIM, DMARC, případně MTA-STS a TLS reporting podle potřeby.
 
-Pokud retenční pravidla zná jen jeden vývojář a možná jedna stránka v interním wiki, zákazník z toho nic nemá. Privacy-first přístup znamená, že hlavní pravidla vysvětlíte lidsky: co držíte během používání služby, co se stane po deaktivaci, co zůstává kvůli fakturaci nebo bezpečnosti, jak požádat o výmaz a jak fungují exporty.
+Praktický checklist pro e-mailovou část DNS:
 
-Do produktu patří minimálně:
+- SPF obsahuje jen skutečně používané odesílací služby,
+- DKIM klíče mají jasný selector a vlastníka,
+- DMARC politika odpovídá realitě a má reportovací adresu,
+- marketingové a transakční e-maily jsou oddělené subdoménou nebo reputačně,
+- bounce a return-path domény nejsou zapomenuté u bývalého dodavatele,
+- odhlašovací a preference odkazy fungují i po migraci e-mailového nástroje.
 
-- nastavení pro smazání účtu nebo organizace, pokud to dává smysl,
-- jasný text, co se smaže okamžitě a co má ochrannou lhůtu,
-- export před výmazem,
-- potvrzení kritické akce více než jedním klikem,
-- informace, koho kontaktovat u specifické žádosti,
-- interní auditní stopa bez zbytečných osobních detailů.
+Codyho komentář: nejsem fanoušek posílání všeho z jedné domény přes pět nástrojů a modlitbu. Doručitelnost není magie. Je to DNS, reputace, obsah a disciplína. Takže vlastně magie, jen s TXT záznamy.
 
-Do dokumentace patří retenční tabulka pro hlavní datové kategorie. Nemusí to být právnická encyklopedie. Stačí čitelné: účel, typ dat, lhůta, akce po lhůtě, výjimky, vlastník.
-
-### CW.6 Šablona: retenční karta datové třídy
+### CW.6 Šablona: doménová provozní karta
 
 ```markdown
-## Retenční karta
+## Doménová provozní karta
 
-### Datová třída
-- Název:
-- Příklady dat:
-- Systémy a úložiště:
+### Základ
+- Doména:
+- Registrátor:
+- Právní vlastník:
+- Primární správce:
+- Zástupce:
+- Datum expirace:
 
-### Účel
-- Proč data vznikají:
-- Kdo je používá:
-- Jaké rozhodnutí nebo funkci podporují:
+### Přístupy
+- Kde je uložen přístup:
+- MFA zapnuto: ano/ne
+- Registrar lock: ano/ne
+- Kdo může měnit nameservery:
+- Kdo může měnit DNS záznamy:
 
-### Retence
-- Běžná lhůta:
-- Spouštěč začátku lhůty:
-- Akce po lhůtě: smazat / anonymizovat / agregovat / archivovat
-- Výjimky a důvody:
+### DNS
+- Autoritativní nameservery:
+- Produkční zóna exportovaná: ano/ne
+- Kritické záznamy: web / app / API / e-mail / status
+- Poslední změna:
+- Rollback postup:
 
-### Výmaz a export
-- Kde se data objeví v exportu:
-- Jak se smažou při výmazu účtu nebo organizace:
-- Co zůstává kvůli právnímu, bezpečnostnímu nebo smluvnímu důvodu:
+### Certifikáty
+- Vystavitel:
+- Validace:
+- Automatická obnova:
+- Monitoring expirace:
+- Kritické subdomény:
 
-### Provoz
-- Vlastník:
-- Automatizace mazání:
-- Monitoring selhání:
-- Poslední test:
+### E-mail
+- SPF:
+- DKIM:
+- DMARC:
+- MTA-STS/TLS reporty:
+- Vlastník doručitelnosti:
 ```
 
-### CW.7 Checklist: retence bez datového syslení
+### CW.7 Checklist: doména bez provozního hazardu
 
-- [ ] Máme seznam hlavních datových tříd, ne jednu univerzální lhůtu.
-- [ ] Každá datová třída má účel, vlastníka, lhůtu a akci po lhůtě.
-- [ ] Dočasné soubory, exporty, cache a debug data mají automatickou expiraci.
-- [ ] Mazání účtu řeší databázi, soubory, logy, integrace, e-maily i support.
-- [ ] Víme, co se smaže, co anonymizuje a co se ponechá z oprávněného důvodu.
-- [ ] Po obnově ze zálohy umíme znovu aplikovat výmazy provedené po času zálohy.
-- [ ] Admin rozhraní a exporty po výmazu nevracejí data, která měla zmizet.
-- [ ] Retenční pravidla jsou popsaná lidsky v dokumentaci nebo privacy centru.
-- [ ] Selhání mazací úlohy vytváří alert, ne tichý hřbitov dat.
+- [ ] Doména je registrovaná na správný firemní subjekt.
+- [ ] Přístup k registrátorovi není vázaný na jednu osobu nebo bývalého dodavatele.
+- [ ] MFA, správce hesel a registrar lock jsou zapnuté tam, kde to jde.
+- [ ] Expirace domény má alert mimo e-mail na stejné doméně.
+- [ ] DNS zóna má inventář nebo pravidelný export.
+- [ ] Kritické DNS změny mají záznam, rollback a kontrolu po propagaci.
+- [ ] Certifikáty mají monitoring expirace a popsaný proces obnovy.
+- [ ] SPF, DKIM a DMARC odpovídají skutečným odesílacím službám.
+- [ ] Experimenty neběží přímo v produkční zóně bez důvodu.
+- [ ] Při offboardingu dodavatele se kontrolují i domény, DNS, certifikáty a e-mailové ověřovací záznamy.
 
-### Mini cvičení: retenční audit za 60 minut
+### Mini cvičení: doménový audit za 45 minut
 
-1. Vyberte jednu oblast: uživatelské účty, importy, support, logy nebo marketing.
-2. Sepište všechny systémy, kde se data z této oblasti mohou objevit.
-3. Ke každému systému napište účel, vlastníka a současnou dobu uložení.
-4. Označte data, která jsou dočasná, ale nemají expiraci.
-5. Vyberte jednu datovou třídu a vyplňte retenční kartu.
-6. Navrhněte jednu automatizaci mazání a jeden test, že mazání opravdu proběhlo.
-7. Zapište, co zákazníkovi vysvětlíte v produktu nebo dokumentaci.
+1. Vyberte hlavní produkční doménu.
+2. Ověřte registrátora, vlastníka, expiraci, MFA a registrar lock.
+3. Sepište pět nejkritičtějších DNS záznamů: web, app, API, e-mail, status.
+4. Zkontrolujte, kdo může měnit nameservery a DNS zónu.
+5. Ověřte expiraci TLS certifikátů pro hlavní subdomény.
+6. Projděte SPF, DKIM a DMARC a označte staré dodavatele.
+7. Vyplňte doménovou provozní kartu a vytvořte jeden úkol na odstranění největšího rizika.
 
-Výstupem má být jedna dokončená retenční karta a jeden konkrétní úklidový úkol. Ne celofiremní program „Data Detox 2030“. Ten zní sice grantově, ale dneska potřebujete smazat ty importní soubory z roku, kdy se všichni učili péct chleba.
+Výstupem není kompletní síťařská diplomka. Výstupem je jistota, že doména neumře kvůli staré kartě, zapomenutému účtu nebo TXT záznamu po nástroji, který už nikdo neplatí.
 
 ### Codyho komentář
 
-Můj názor: dobrý SaaS poznáte i podle toho, že umí data pustit. Ne proto, že data nemají hodnotu, ale protože důvěra má větší hodnotu než nekonečný sklad historických záznamů. Privacy-first není asketismus. Je to produktová disciplína: držet data, která slouží zákazníkovi, a zbavit se těch, která slouží jen budoucí výmluvě „možná se to bude hodit“.
+Můj názor: domény jsou nudné jen do chvíle, než přestanou fungovat. Pak se z nich stane nejdražší položka v backlogu, protože každá minuta výpadku vysvětluje zákazníkům, že „jen něco u DNS“ je vlastně celý produkt. Dobrá doménová hygiena není geek detail. Je to základní provozní sebeúcta.
 
 ### Zdroje k příloze CW
 
-- Evropská komise: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en) — přehled principů včetně minimalizace dat a omezení uložení.
-- Evropská komise: [What data can we process and under which conditions?](https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/overview-principles/what-data-can-we-process-and-under-which-conditions_en) — praktické vysvětlení účelu, minimalizace a uložení osobních dat jen po nezbytnou dobu.
-- EUR-Lex: [GDPR Article 17](https://eur-lex.europa.eu/eli/reg/2016/679/art_17/oj/eng) — právo subjektu údajů na výmaz osobních údajů bez zbytečného odkladu v uvedených případech.
-- OWASP Cheat Sheet Series: [Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html) — doporučení k logování, včetně vyloučení citlivých dat, ochrany logů a retenčních pravidel.
-- OWASP ASVS 5.0: [Security Logging and Error Handling](https://github.com/OWASP/ASVS/blob/master/5.0/en/0x25-V16-Security-Logging-and-Error-Handling.md) — ověřovací požadavky na inventář logování, kontrolu přístupu, retenci a ochranu soukromí v logovacích systémech.
+- ICANN: [Registrant Educational Materials](https://www.icann.org/resources/pages/educational-2012-02-25-en) — přehled odpovědností držitele domény a významu přesných kontaktních údajů.
+- ICANN: [EPP Status Codes](https://www.icann.org/resources/pages/epp-status-codes-2014-06-16-en) — vysvětlení stavů domény včetně zámků, které mohou chránit před neoprávněným převodem nebo změnou.
+- CISA: [Securing the Domain Name System](https://www.cisa.gov/resources-tools/resources/securing-domain-name-system-dns) — doporučení pro správu DNS, ochranu registrátorských účtů, DNSSEC a monitoring změn.
+- Let’s Encrypt: [Rate Limits](https://letsencrypt.org/docs/rate-limits/) — limity vydávání certifikátů, které je dobré znát při automatizaci a incidentní obnově.
+- OWASP Cheat Sheet Series: [Transport Layer Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Transport_Layer_Security_Cheat_Sheet.html) — praktická doporučení k TLS konfiguraci, certifikátům a bezpečnému provozu HTTPS.
 
 
 ## Pracovní log
 
-- 2026-08-26: Přidána příloha CW „Retence a mazání dat bez digitálního syslení“ s datovými třídami, návrhem mazání jako produktové funkce, úklidem dočasných dat, obnovou ze záloh, retenční kartou, checklistem, hodinovým auditem a ověřenými GDPR/OWASP zdroji.
-
+- 2026-08-26: Přidána příloha CW „Domény, DNS a certifikáty bez ztraceného vlastnictví“ s vlastnictvím domén, verzovanými DNS změnami, prevencí vendor lock-inu, certifikáty, e-mailovou DNS hygienou, provozní kartou, checklistem, 45minutovým auditem a ověřenými zdroji.
 
 - 2026-08-26: Přidána příloha CV „Transakční e-maily a doručitelnost bez datového cirkusu“ s kategorizací e-mailů, doménovou hygienou, one-click unsubscribe, privacy-first metrikami, bezpečným obsahem, vendor exit otázkami, provozním briefem, checklistem a ověřenými zdroji.
 
