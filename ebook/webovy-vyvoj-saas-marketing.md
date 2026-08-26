@@ -25334,7 +25334,228 @@ Telemetrie je dobrý sluha a podezřele horlivý komorník. Jakmile mu dovolíte
 - CNIL: Use analytics on your websites and applications — podmínky, kdy může být měření návštěvnosti omezené na správu služby a bez předchozího souhlasu podle francouzského výkladu: https://www.cnil.fr/fr/node/677
 - EDPB Guidelines 1/2024 on processing based on Article 6(1)(f) GDPR — kontext pro oprávněný zájem a test proporcionality při zpracování osobních údajů: https://www.edpb.europa.eu/public-consultations/guidelines-12024-on-processing-of-personal-data-based-on-article-61f-gdpr_en
 
+
+## CZ. Design systém pro malý SaaS bez komponentového blešího trhu
+
+Design systém není luxus pro firmy s patnácti designéry, interním Figma parlamentem a rituálem pojmenování každého odstínu šedé. Pro malý SaaS je to hlavně způsob, jak přestat řešit stejnou věc pokaždé znovu: jak vypadá tlačítko, co znamená chyba, kdy používáme modal, jak se chová prázdný stav, jak se vysvětluje práce s daty a kde zákazník pozná, že produkt je důvěryhodný.
+
+Špatný design systém začíná katalogem komponent. Dobrý začíná opakovanými rozhodnutími. Pokud každý formulář sbírá jiné údaje, každé upozornění má jiný tón a každá stránka používá trochu jiný spacing, problém není v tom, že nemáte dost komponent. Problém je, že produkt nemá paměť. A produkt bez paměti se chová jako tým po třetí kávě: rychle, sebevědomě a podezřele nekonzistentně.
+
+Privacy-first design systém navíc neřeší jen barvy a rohy. Řeší i datové chování rozhraní: kdy se ptáme na osobní údaj, kdy vysvětlujeme účel, jak vypadá souhlas, jak zobrazujeme auditní stopu, jak pracujeme s chybou a jak uživateli dáme kontrolu bez toho, aby musel číst interní právní román.
+
+### CZ.1 Začněte inventářem opakování
+
+Nejdřív projděte produkt, web, onboarding, e-maily a administraci. Nehledejte krásu. Hledejte opakování a tření.
+
+Zapište si:
+
+- kolik typů tlačítek reálně existuje,
+- kolik verzí formulářového pole se používá,
+- jak se liší chybové hlášky,
+- kde produkt sbírá osobní údaje,
+- kde uživatel potvrzuje citlivou akci,
+- kde se ukazuje stav načítání, prázdný stav a úspěch,
+- které obrazovky vypadají jako z jiného produktu.
+
+Nepotřebujete pixel-perfect audit celé aplikace. Začněte třemi nejčastějšími cestami: registrace, první hodnotný krok a správa účtu. Pokud jsou konzistentní tam, už jste snížili většinu každodenního chaosu. Pokud nejsou, nepomůže vám další design workshop se slovem „delight“ na třetím slidu.
+
+Praktická tabulka pro inventář:
+
+| Oblast | Co sjednotit | Privacy-first kontrola |
+|---|---|---|
+| Formuláře | label, help text, validace, error state | ptáme se jen na data s jasným účelem |
+| CTA | primární/sekundární/destruktivní akce | citlivé akce nejsou schované za stejným stylem jako „uložit“ |
+| Notifikace | success, warning, error, info | zprávy neprozrazují zbytečné osobní nebo interní údaje |
+| Prázdné stavy | vysvětlení, příklad, další krok | onboarding nesbírá data „pro jistotu“ |
+| Nastavení účtu | export, mazání, členové, fakturace | uživatel najde kontrolu nad daty bez support ticketu |
+
+### CZ.2 Tokeny jsou rozhodnutí, ne barevný slovník
+
+Design tokeny dávají smysl, když pojmenovávají význam, ne náhodný hex kód. `blue-500` je barva. `color-action-primary-bg` je rozhodnutí. `space-4` je hodnota. `space-form-field-gap` je záměr. Rozdíl je zásadní: produkt se mění podle významu, ne podle toho, kdo si zrovna oblíbil konkrétní odstín.
+
+Minimální sada tokenů pro malý SaaS:
+
+```markdown
+## Barvy
+- color-bg-page
+- color-bg-surface
+- color-text-primary
+- color-text-muted
+- color-action-primary-bg
+- color-action-primary-text
+- color-action-danger-bg
+- color-border-default
+- color-border-focus
+
+## Typografie
+- font-size-body
+- font-size-title
+- line-height-body
+- font-weight-regular
+- font-weight-semibold
+
+## Rozestupy
+- space-page-x
+- space-section-y
+- space-card-padding
+- space-form-gap
+- space-inline-gap
+
+## Stavy
+- opacity-disabled
+- outline-focus
+- shadow-popover
+- radius-card
+- radius-control
+```
+
+Držte tokeny malé a srozumitelné. Pokud máte v prvním týdnu 240 tokenů, pravděpodobně jste nevytvořili systém, ale malý slovník utrpení. W3C Design Tokens Community Group pracuje na společném formátu pro vyjádření tokenů a interoperabilitu mezi nástroji; pro malý tým je důležité hlavně to, že tokeny mají být přenositelné a čitelné, ne uvězněné v jednom nástroji.
+
+### CZ.3 Komponenty navrhujte podle rizika a frekvence
+
+Nezačínejte komponentou `AvatarWithBadgeAndOptionalTooltipButOnlyOnTuesday`. Začněte tím, co se používá často nebo nese riziko.
+
+Priorita komponent:
+
+1. **Form controls:** input, select, textarea, checkbox, radio, switch, validation message.
+2. **Akce:** button, link button, destructive confirmation, secondary action.
+3. **Zpětná vazba:** alert, toast, inline error, empty state, loading state.
+4. **Navigace:** header, sidebar, tabs, breadcrumbs.
+5. **Data:** table, list, detail card, filter, pagination.
+6. **Trust a privacy:** consent panel, data export block, delete account flow, audit log row.
+
+Každá komponenta má mít čtyři vrstvy:
+
+- **Vizuální pravidlo:** jak vypadá a kdy se používá.
+- **Interakční pravidlo:** hover, focus, disabled, loading, keyboard chování.
+- **Obsahové pravidlo:** jaký text do ní patří a jaký tón používá.
+- **Datové pravidlo:** jaká data zobrazuje, ukládá, posílá nebo nesmí obsahovat.
+
+Příklad: destruktivní potvrzení nemá být jen červený modal. Má mít jasné pojmenování akce, dopad, možnost zrušení, rozlišení vratné/nevratné akce a zákaz ukládat potvrzovací text do analytiky. Ano, i modální okno může být privacy-first. Malé vítězství civilizace.
+
+### CZ.4 Přístupnost patří do definice hotovo
+
+Přístupnost není „až bude čas“. Čas nebude. Čas odešel do jiné firmy, která má méně modálních oken. Proto ji dejte přímo do komponent.
+
+U každé interaktivní komponenty ověřte:
+
+- dá se ovládat klávesnicí,
+- má viditelný focus,
+- má správný label nebo přístupný název,
+- chyba je propojená s polem,
+- kontrast textu a stavů je čitelný,
+- změna stavu není sdělená jen barvou,
+- komponenta funguje ve zmenšeném viewportu,
+- text jde přeložit bez rozbití layoutu.
+
+W3C u WCAG doporučuje používat nejnovější verzi WCAG 2.2 pro dlouhodobější použitelnost. V Evropě se pro ICT přístupnost používá standard EN 301 549; pokud dodáváte veřejnému sektoru nebo regulovanějším zákazníkům, neberte přístupnost jako kosmetiku, ale jako součást důvěry a prodejní připravenosti.
+
+Praktické pravidlo pro malý tým: komponenta bez focus stavu, error stavu a prázdného stavu není hotová. Je jen hezká na screenshotu. Screenshot bohužel zákazníkovi nevyplní formulář.
+
+### CZ.5 Obsah komponent je součást systému
+
+Design systém bez copy pravidel končí tím, že jeden button říká „Odeslat“, druhý „Submit“, třetí „OK“ a čtvrtý „Pokračujte laskavě do administrativního pekla“. Text je rozhraní. U SaaSu často dokonce důležitější než ikona.
+
+Zaveďte krátká pravidla:
+
+- tlačítko říká konkrétní akci: „Vytvořit projekt“, ne „OK“,
+- chyba vysvětluje opravu: „Zadejte firemní e-mail“, ne „Neplatná hodnota“,
+- prázdný stav ukazuje další krok, ne omluvu,
+- citlivá akce říká dopad: „Smazat export i uložené soubory“,
+- privacy text vysvětluje účel lidsky: „E-mail použijeme pro přihlášení a bezpečnostní upozornění.“
+
+Codyho mini pravidlo: když text zní jako z právního PDF, přepište ho. Když po přepsání zní jako reklama na magický růst, přepište ho znovu. Normální lidé existují. Pište pro ně.
+
+### CZ.6 Šablona: karta komponenty
+
+```markdown
+# Karta komponenty
+
+## Základ
+- Název:
+- Vlastník:
+- Kde se používá:
+- Stav: návrh / používá se / deprecated
+
+## Účel
+- Jaký problém řeší:
+- Kdy ji použít:
+- Kdy ji nepoužít:
+
+## Varianty
+- Default:
+- Hover/focus:
+- Disabled:
+- Loading:
+- Error/empty/success:
+- Destructive varianta:
+
+## Obsah
+- Doporučený text:
+- Zakázaný text:
+- Překladové poznámky:
+
+## Data a privacy
+- Jaká data zobrazuje:
+- Jaká data sbírá:
+- Co se nesmí logovat:
+- Retence souvisejících stavů:
+
+## Přístupnost
+- Keyboard chování:
+- Focus:
+- Label/ARIA:
+- Kontrast:
+- Testovací scénář:
+
+## Implementace
+- Zdroj v kódu:
+- Tokeny:
+- Testy:
+- Poslední revize:
+```
+
+Karta nemusí být dlouhá. Má být dost konkrétní, aby další člověk nemusel hádat. Pokud u komponenty neumíte vyplnit „kdy ji nepoužít“, pravděpodobně vytváříte univerzální švýcarský nůž, kterým si tým časem uřízne palec.
+
+### CZ.7 Checklist: design systém bez divadla
+
+- [ ] Máme inventář nejčastějších obrazovek, formulářů a chybových stavů.
+- [ ] Tokeny pojmenovávají význam, ne pouze vzhled.
+- [ ] První komponenty řeší frekvenci a riziko, ne okrajové scénáře.
+- [ ] Každá komponenta má definovaný focus, disabled, loading, error a empty state.
+- [ ] Formuláře mají jasný účel polí a nesbírají data „pro jistotu“.
+- [ ] Destruktivní akce mají samostatný vzor potvrzení a vysvětlení dopadu.
+- [ ] Přístupnost je součást definition of done, ne samostatný audit na konci.
+- [ ] Copy pravidla jsou vedle vizuálních pravidel.
+- [ ] Komponenty obsahují privacy-first datové pravidlo: co zobrazují, co sbírají a co se nesmí logovat.
+- [ ] Nepoužívané varianty a komponenty mají datum odstranění.
+
+### Mini cvičení: design system audit za 60 minut
+
+1. Vyberte jednu zákaznickou cestu: registrace, onboarding, fakturace nebo správa týmu.
+2. Vypište všechny komponenty, které se na cestě opakují.
+3. Označte tři největší nekonzistence, které zpomalují vývoj nebo matou zákazníka.
+4. U každé zkontrolujte, jestli má privacy-first datové pravidlo.
+5. Vyberte jednu komponentu, kterou zítra sjednotíte v kódu i dokumentaci.
+6. Přidejte jí kartu komponenty a jeden test nebo ruční kontrolní scénář.
+
+Výstupem není nový design systém. Výstupem je jedna sjednocená komponenta s jasným pravidlem. Malý systém roste komponentu po komponentě. Velký systém napsaný najednou roste hlavně do frustrace.
+
+### Codyho komentář
+
+Design systém má být kuchařka, ne muzeum porcelánu. Když pomáhá rychleji stavět, lépe vysvětlovat riziko a méně sbírat zbytečná data, funguje. Když se tým bojí přidat input, protože musí nejdřív svolat radu starších nad tokenem `surface-muted-subtle-2`, něco se pokazilo. Systém má chránit pozornost, ne vyrábět nový druh interní byrokracie.
+
+### Zdroje k příloze CZ
+
+- W3C Design Tokens Community Group — komunitní skupina pro standardizaci design tokenů a interoperabilitu mezi nástroji: https://www.w3.org/community/design-tokens/
+- W3C Design Tokens Format Module 2025.10 — specifikace formátu pro vyjádření design token dat: https://www.w3.org/community/reports/design-tokens/CG-FINAL-format-20251028/
+- W3C WCAG 2 Overview — přehled WCAG a doporučení používat nejnovější verzi WCAG pro přístupnost webu: https://www.w3.org/WAI/standards-guidelines/wcag/
+- W3C Web Content Accessibility Guidelines 2.2 — aktuální doporučení pro testovatelná kritéria přístupnosti webového obsahu: https://www.w3.org/TR/wcag/
+- European Commission: Web Accessibility Directive standards and harmonisation — kontext EN 301 549 jako harmonizovaného evropského standardu pro ICT přístupnost: https://digital-strategy.ec.europa.eu/en/policies/web-accessibility-directive-standards-and-harmonisation
+
 ## Pracovní log
+
+- 2026-08-26: Přidána příloha CZ „Design systém pro malý SaaS bez komponentového blešího trhu“ s inventářem opakování, tokeny, prioritou komponent, přístupností, copy pravidly, kartou komponenty, checklistem, hodinovým auditem a ověřenými zdroji.
 
 - 2026-08-26: Přidána příloha CY „Produktová telemetrie bez šmírovací továrny“ s rozhodovacím návrhem eventů, event slovníkem, minimalizací identity, provozní hygienou, kartou telemetrie, checklistem, hodinovým auditem a ověřenými zdroji.
 
