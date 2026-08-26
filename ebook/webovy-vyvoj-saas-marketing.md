@@ -23571,7 +23571,182 @@ Výstupem není „AI strategie“. Výstupem je konkrétní seznam funkcí, jed
 - EDPB Guidelines 01/2025 k pseudonymizaci ukazují, proč samotné „odstranění jména“ nestačí a proč je potřeba řešit kontext, propojení a zbytkové riziko: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-012025-pseudonymisation_en
 - OWASP GenAI Security Project uvádí aktuální Top 10 rizik pro LLM a generativní AI aplikace, včetně prompt injection, úniku citlivých informací, nadměrné agentní pravomoci, špatného zacházení s výstupy a misinformation: https://genai.owasp.org/llm-top-10/
 
+
+## CQ. Tajemství, API klíče a konfigurace bez sdíleného `.env` folklóru
+
+Každý malý SaaS jednou doroste do fáze, kdy má víc tajemství než týmových členů. Databázové heslo, SMTP token, platební webhook secret, klíč k analytice, přístup do object storage, podpisový klíč pro JWT, CI token, staging heslo, produkční heslo, integrační token od klienta a někde bokem ještě „dočasný“ API klíč, který přežil tři refaktory, dvě dovolené a jednu změnu názvu firmy. Kdyby se tajemství rozmnožovala hlukem, typická `.env` složka by zněla jako chovná stanice papoušků.
+
+Problém není samotná existence tajemství. Problém je, když nikdo neví, kde jsou, kdo je používá, kdy se mají měnit, jak se pozná únik a co se stane při offboardingu člověka nebo dodavatele. Sdílený `.env` v chatu je rychlý jen do chvíle, než potřebujete zjistit, komu všemu jste právě poslali produkční přístup. Pak je najednou velmi pomalý. A drahý. A trochu trapný.
+
+Privacy-first SaaS bere tajemství jako součást datové hygieny. Nejde jen o bezpečnost aplikace, ale i o kontrolu nad provozem v Evropě: kde jsou klíče uložené, jestli k nim má přístup dodavatel mimo tým, jestli se tajemství nedostávají do logů, build artefaktů, screenshotů, support ticketů nebo AI promptů. Tajemství mají být krátká, omezená, auditovatelná a nahraditelná. Ne magické heslo napsané v poznámce „NEZTRATIT!!!“.
+
+*Codyho komentář: `.env.example` je dokumentace. `.env` v repozitáři je kriminální román. Hlavní postava je API klíč a spoiler je, že na konci pláčou všichni.*
+
+### CQ.1 Nejdřív udělejte inventář tajemství
+
+Bez inventáře nevíte, co chráníte. Začněte jednoduše: projděte aplikaci, hosting, CI/CD, databáze, integrační služby, analytiku, e-mailing, platební bránu a interní skripty. U každého tajemství napište, k čemu slouží, kde je uložené, kdo ho spravuje, kdo ho může použít a co by se stalo, kdyby uniklo.
+
+Praktické kategorie:
+
+| Kategorie | Příklad | Riziko | Doporučené pravidlo |
+|---|---|---|---|
+| Aplikační secrets | `DATABASE_URL`, `JWT_SECRET`, session key | převzetí účtů, únik dat, neplatné session | oddělit podle prostředí, rotovat při incidentu, nezobrazovat v UI |
+| Integrační tokeny | platební brána, e-mailing, CRM, monitoring | akce jménem firmy nebo zákazníka | scope jen na potřebné akce, samostatný token pro každé prostředí |
+| CI/CD credentials | deploy token, registry token, SSH klíč | převzetí pipeline nebo produkčního releasu | chráněné proměnné, omezené větve, audit přístupů |
+| Klientské secrets | token od zákazníka, SFTP přístup, webhook secret | odpovědnost za cizí data | oddělené uložení, jasný vlastník, smluvní účel |
+| Lokální vývoj | testovací `.env`, seed data, dev účty | nechtěný commit nebo screenshot | syntetická data, lokální secrets mimo repo, automatická detekce |
+
+Inventář má být krátký, ale živý. Pokud si tým nedokáže za 10 minut říct, kde se konkrétní klíč používá, tajemství není spravované. Jen existuje. To je rozdíl mezi trezorem a krabicí od bot.
+
+### CQ.2 Tajemství nepatří do kódu, historie ani screenshotů
+
+Základní pravidlo zní nudně: tajemství necommitujte. Prakticky to ale nestačí. Tajemství se do systému nedostávají jen přes soubor `config.js`. Objevují se v test fixtures, dump souborech, CI logách, debug hláškách, error reportech, obrazovkách v dokumentaci, nahrávkách z callů, issue komentářích a v ukázkách pro AI asistenta. Únik přes „nevinný“ support screenshot je pořád únik. Jen má lepší kostým.
+
+Minimální obrana:
+
+- používejte `.env.example` s názvy proměnných, ale bez hodnot,
+- přidejte `.env`, dumpy a lokální override soubory do `.gitignore`,
+- zapněte secret scanning a push protection tam, kde to platforma umožňuje,
+- maskujte hodnoty v CI logách a error reportech,
+- nedávejte produkční hodnoty do dokumentace, videí ani demo prostředí,
+- při podezření na commit tajemství rotujte klíč, ne jen mažte commit.
+
+Mazání commitu z historie je dobrý úklid, ale není to řešení incidentu. Jakmile tajemství opustilo kontrolované prostředí, chovejte se k němu jako ke kompromitovanému. Prakticky: zneplatnit, nahradit, zkontrolovat logy použití, doplnit prevenci a zapsat incidentní poznámku. Ano, i když to byl jen staging klíč. Staging často vidí víc reálných dat, než si tým přizná.
+
+### CQ.3 Rozdělte tajemství podle prostředí a dopadu
+
+Produkce, staging a lokální vývoj nesmí sdílet stejné hodnoty. Pokud jeden testovací skript může omylem smazat produkční bucket, nemáte testovací prostředí. Máte ruletu s lepším názvem. Každé prostředí potřebuje vlastní secrets, vlastní oprávnění a vlastní limity.
+
+Dobré dělení:
+
+- `local`: syntetická data, lokální databáze, nulové oprávnění k produkci,
+- `preview`: krátkodobé tokeny, omezené testovací služby, žádné reálné osobní údaje,
+- `staging`: co nejpodobnější produkci, ale oddělené účty, oddělené klíče a anonymizovaná data,
+- `production`: nejmenší nutný rozsah, audit, omezený přístup a jasný rotační plán,
+- `break-glass`: nouzový přístup, který je vypnutý nebo silně omezený a vždy logovaný.
+
+Každé tajemství by mělo mít dopadovou třídu. Nízké riziko může být testovací token bez dat. Vysoké riziko je cokoliv, co čte osobní údaje, mění billing, posílá e-maily, podepisuje session, deployuje produkci nebo umožňuje přístup k databázi. Čím vyšší dopad, tím kratší životnost, užší scope a lepší audit.
+
+### CQ.4 Scope je důležitější než hrdinská rotace
+
+Rotace je skvělá, ale nezachrání klíč, který má oprávnění dělat všechno. Lepší je token, který může jen číst konkrétní bucket, než super token, který jednou za měsíc rituálně otočíte a pak doufáte, že se nic nestane. Tajemství má dostat jen oprávnění, která potřebuje pro konkrétní úkol.
+
+Příklady úzkého scope:
+
+- webhook podpisový secret ověřuje příchozí zprávy, ale neumí nic volat zpět,
+- e-mail token smí posílat jen z jedné domény a ideálně jen přes transakční šablony,
+- analytický token smí zapisovat anonymní eventy, ale nečíst zákaznické profily,
+- deploy token smí nasazovat jen konkrétní projekt a jen z chráněné větve,
+- support token smí číst jen údaje potřebné pro řešení ticketu a má krátkou platnost.
+
+Když služba neumí jemné scope, napište si to jako riziko do vendor review. Někdy je to akceptovatelné. Někdy je to důvod změnit nástroj. „Všechno nebo nic“ oprávnění u kritického dodavatele je pohodlné přesně do prvního incidentu.
+
+### CQ.5 Rotace musí být nacvičený postup, ne poznámka v kalendáři
+
+Rotace tajemství se často plánuje stylem „někdy bychom měli“. To je špatný rotační plán a výborný psychologický experiment. U každého důležitého tajemství napište, kdy se rotuje, kdo to dělá, jak se ověří úspěch a jaký je rollback.
+
+Spouštěče rotace:
+
+- podezření na únik nebo nechtěné zveřejnění,
+- odchod zaměstnance nebo dodavatele s přístupem,
+- změna dodavatele, prostředí nebo architektury,
+- pravidelný interval u vysoce dopadových secrets,
+- auditní zjištění, že scope nebo uložení už neodpovídá riziku.
+
+Rotace má být testovatelná. Ideální postup umožní připravit nový klíč, nasadit ho vedle starého, ověřit provoz, vypnout starý klíč a zkontrolovat, že se starý už nepoužívá. Pokud služba neumí překryv starého a nového klíče, plánujte krátké maintenance okno nebo feature flag. Nejhorší varianta je měnit klíč přímo v produkci bez metrik a doufat, že zákazníci mají dnes dobrou náladu.
+
+### CQ.6 Lokální vývoj nesmí být výjimka z pravidel
+
+Lokální vývoj je nejčastější místo, kde se pravidla ohnou, protože „to je jen u mě“. Jenže notebook je mobilní datacentrum s kávovým rizikem. Ztrácí se, sdílí obrazovku, dělá screenshoty, spouští experimentální nástroje a občas hostí adresář `Downloads`, kam se bojí i antivir.
+
+Pravidla pro lokální vývoj:
+
+- vývojář nemá mít produkční databázové heslo, pokud to není výslovně nutné,
+- lokální seed data jsou syntetická nebo anonymizovaná,
+- `.env` se nesdílí přes chat ani e-mail,
+- nové nastavení se dokumentuje v `.env.example`, ne ve zprávě „pošlu ti to bokem“,
+- secrets v terminálu, shell historii a logách se maskují nebo vůbec nevypisují,
+- onboarding vývojáře obsahuje i bezpečné získání secrets, nejen `npm install`.
+
+Privacy-first tým si lokální vývoj navrhne tak, aby běžný úkol nevyžadoval přístup k reálným datům. Když vývojář potřebuje produkční přístup, má to být výjimka s důvodem, časovým omezením a auditní stopou. Ne iniciační rituál prvního dne.
+
+### CQ.7 Šablona: karta tajemství
+
+Použijte jednu kartu pro každé důležité tajemství nebo skupinu tajemství. Ne pro každou drobnou testovací hodnotu, jinak vytvoříte katalog tak dlouhý, že ho nikdo neotevře ani pod hrozbou další retrospektivy.
+
+## Základ
+
+- Název: `[např. Production SMTP token]`
+- Účel: `[k čemu slouží]`
+- Prostředí: `[local / preview / staging / production]`
+- Vlastník: `[role nebo osoba]`
+
+## Uložení
+
+- Kde je tajemství uložené: `[secrets manager / hosting env / CI secret / jiný trezor]`
+- Kdo má přístup ke čtení: `[role]`
+- Kdo může měnit nebo rotovat: `[role]`
+- Zobrazuje se někde v UI nebo logách: `[ano/ne + kde]`
+
+## Oprávnění
+
+- Scope: `[co přesně smí]`
+- Co výslovně nesmí: `[omezení]`
+- Dopad při úniku: `[nízký / střední / vysoký / kritický]`
+- Navázaná data: `[osobní údaje / billing / e-mail / produkční deploy / žádná]`
+
+## Rotace
+
+- Spouštěče rotace: `[incident, offboarding, interval, změna dodavatele]`
+- Postup rotace: `[kroky]`
+- Ověření: `[metrika, log, health check]`
+- Rollback: `[jak vrátit službu do provozu]`
+
+## Incident
+
+- Jak poznáme únik: `[alert, secret scanning, audit log, vendor alert]`
+- První krok: `[zneplatnit / omezit / zablokovat]`
+- Koho informovat: `[interně, zákazník, DPO, dodavatel]`
+- Kde se zapíše výsledek: `[incident log / postmortem / vendor review]`
+
+### CQ.8 Checklist: tajemství bez folklóru
+
+- [ ] Máme inventář produkčních a vysoce dopadových secrets.
+- [ ] Každé důležité tajemství má vlastníka, účel, prostředí a dopadovou třídu.
+- [ ] Produkce, staging, preview a lokální vývoj nesdílí stejné klíče.
+- [ ] Secrets nejsou v repozitáři, historii, dokumentaci, logách ani support screenshotech.
+- [ ] `.env.example` dokumentuje názvy proměnných bez skutečných hodnot.
+- [ ] CI/CD používá chráněné secrets a maskuje hodnoty v logách.
+- [ ] Tokeny mají nejmenší praktický scope.
+- [ ] Vysoce dopadové secrets mají popsaný rotační postup.
+- [ ] Secret scanning nebo obdobná kontrola běží před mergem nebo pushem.
+- [ ] Únik tajemství má jasný incident postup: zneplatnit, nahradit, ověřit, zapsat.
+- [ ] Offboarding lidí a dodavatelů zahrnuje revizi přístupů a rotaci sdílených secrets.
+- [ ] Lokální vývoj nepoužívá reálná osobní data, pokud to není zdůvodněná výjimka.
+
+### Mini cvičení: secrets audit za 60 minut
+
+1. 10 minut: sepište všechna tajemství z produkčního hostingu, CI/CD a hlavních integrací.
+2. 10 minut: označte prostředí, vlastníka a dopad při úniku.
+3. 10 minut: najděte všechna místa, kde se tajemství může objevit mimo trezor — logy, docs, screenshoty, issue, lokální soubory.
+4. 10 minut: vyberte tři nejrizikovější secrets a napište jejich scope.
+5. 10 minut: napište rotační postup pro jedno kritické tajemství a určete ověření úspěchu.
+6. 10 minut: doplňte `.env.example`, `.gitignore` a pravidlo pro onboarding nového vývojáře.
+
+Po hodině nemusíte mít dokonalý secrets management. Máte ale mapu, první rotační postup a jasný zákaz sdíleného `.env` folklóru. To je výrazně lepší než bezpečnostní politika založená na větě „prosím neposílejte hesla do Slacku“. I když oceňuji optimismus.
+
+### Zdroje k příloze CQ
+
+- OWASP Secrets Management Cheat Sheet shrnuje centralizované ukládání, audit, rotaci a omezení přístupu k tajemstvím: https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html
+- OWASP Logging Cheat Sheet upozorňuje, že logy nemají obsahovat citlivé údaje, autentizační tokeny ani jiné hodnoty, které by po úniku rozšířily dopad incidentu: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+- GitHub dokumentace k secret scanning popisuje detekci tajemství a push protection v repozitářích: https://docs.github.com/en/code-security/secret-scanning/introduction/about-secret-scanning
+- GitHub dokumentace k rozsahu secret scanning vysvětluje limity detekce a proč automatická ochrana nenahrazuje vlastní správu tajemství: https://docs.github.com/en/code-security/reference/secret-security/secret-scanning-scope
+- NIST SP 800-57 Part 1 Rev. 5 popisuje obecný rámec správy kryptografických klíčů včetně životního cyklu a cryptoperiods: https://csrc.nist.gov/pubs/sp/800/57/pt1/r5/final
+- GDPR článek 5 definuje zásady integrity, důvěrnosti, minimalizace a omezení účelu, které se dotýkají i návrhu provozní konfigurace a přístupů: https://eur-lex.europa.eu/eli/reg/2016/679/oj
+
 ## Pracovní log
+
+- 2026-08-26: Přidána příloha CQ „Tajemství, API klíče a konfigurace bez sdíleného `.env` folklóru“ s inventářem secrets, pravidly pro repo/logy/screenshoty, dělením prostředí, scope a rotací, lokálním vývojem, kartou tajemství, checklistem, 60minutovým auditem a ověřenými OWASP/GitHub/NIST/GDPR zdroji.
 
 - 2026-08-26: Přidána příloha CP „AI gramotnost v týmu bez compliance divadla“ s inventářem AI funkcí, role-based školením, oddělením prompt a datových pravidel, kontrolou nespolehlivých výstupů, agentními oprávněními, AI gramotnostní kartou, checklistem, hodinovým review cvičením a ověřenými EU/GDPR/EDPB/OWASP zdroji.
 
