@@ -26755,7 +26755,180 @@ Výstupem má být jeden webhook, který se dá bezpečně provozovat, ne tabulk
 - OWASP REST Security Cheat Sheet doporučuje autentizaci, validaci vstupů, omezení citlivých dat v logách a bezpečné zacházení s API endpointy: https://cheatsheetseries.owasp.org/cheatsheets/REST_Security_Cheat_Sheet.html
 - OWASP API Security Top 10 2023 připomíná rizika neautorizovaného přístupu k objektům, nadměrné expozice dat a nekontrolované spotřeby zdrojů u API: https://owasp.org/API-Security/editions/2023/en/0x11-t10/
 
+## DG. Zálohy a obnova bez falešného pocitu bezpečí
+
+Záloha není soubor, který někde existuje a všichni se díky němu cítí dospěle. Záloha je slib, že konkrétní systém dokážete v konkrétním čase obnovit do použitelného stavu. Pokud jste obnovu nikdy nezkusili, nemáte zálohu. Máte talisman. Hezké, ale v incidentu trochu k ničemu.
+
+U malého webu nebo SaaSu bývají zálohy podceňované ze dvou opačných důvodů. Buď tým věří, že „cloud to nějak řeší“, nebo si naopak pořídí tolik exportů, snapshotů a ručních kopií, že nikdo neví, která verze je pravda. Privacy-first provoz potřebuje třetí cestu: jasně popsaná data, pravidelně testovaná obnova, minimální přístup, rozumná retence a plán, co dělat, když se něco pokazí.
+
+### DG.1 Nejdřív určete, co je potřeba obnovit
+
+Ne všechna data mají stejnou hodnotu. Landing page s texty se obvykle dá obnovit z Gitu. Produktová databáze se zákaznickými účty, fakturací nebo pracovním obsahem už ne. Logy mohou pomoct vyšetřit incident, ale zároveň nesmí být tajným archivem osobních údajů. Uploady uživatelů mohou být kritické, ale často mají jiný životní cyklus než relační databáze.
+
+Rozdělte data do čtyř vrstev:
+
+- **Zdrojový kód a konfigurace:** Git repozitář, infrastructure-as-code, dokumentace deploymentu, seznam DNS a běhových proměnných bez tajných hodnot.
+- **Produkční stav:** databáze, úložiště souborů, fronty, indexy, stav platebních integrací, tenant konfigurace a role uživatelů.
+- **Externí pravdy:** fakturační systém, účetnictví, e-mail provider, platební brána, CRM nebo support nástroj, které mohou mít vlastní export a retenční pravidla.
+- **Provozní důkazy:** audit logy, incident logy, delivery logy webhooků, bezpečnostní události a metriky dostupnosti.
+
+Praktický rozdíl: databázi zákazníků zálohujete kvůli obnovení služby. Audit log ukládáte kvůli dohledatelnosti. Marketingovou analytiku často nepotřebujete obnovit vůbec, pokud rozhodnutí už proběhla a data nejsou nutná pro smluvní nebo bezpečnostní účely. Ano, i mazání je provozní disciplína, ne jen ikonka koše.
+
+### DG.2 Definujte RPO a RTO lidsky
+
+Zálohovací plán bez RPO a RTO je jako ceník bez měny. Vypadá odborně, dokud podle něj nemáte jednat.
+
+- **RPO** říká, kolik dat si můžete dovolit ztratit. Například „maximálně 15 minut objednávek“ nebo „maximálně jeden pracovní den obsahových změn“.
+- **RTO** říká, jak rychle má být služba znovu použitelná. Například „admin do 2 hodin“, „veřejný web do 30 minut“, „kompletní reporting do 24 hodin“.
+
+Nepoužívejte univerzální číslo pro celý produkt. Malý SaaS může mít třeba tuto tabulku:
+
+| Oblast | RPO | RTO | Poznámka |
+| --- | ---: | ---: | --- |
+| Veřejný web | 1 den | 30 minut | Obnova z Gitu a statického buildu. |
+| Produkční databáze | 15 minut | 2 hodiny | Vyžaduje point-in-time nebo časté snapshoty. |
+| Uživatelské uploady | 1 hodina | 4 hodiny | Nutná kontrola oprávnění po obnově. |
+| Audit log | 24 hodin | 24 hodin | Důležitější je integrita než okamžitá dostupnost. |
+| Analytika | 7 dní | bez SLA | Neobnovovat, pokud nejde o rozhodovací historii. |
+
+Tahle tabulka není akademie. Je to dohoda mezi produktem, obchodem a technikou. Když se stane incident, tým ví, co zachraňovat první a co může počkat. Bez toho se často obnovuje to, co je technicky nejjednodušší, ne to, co zákazníkům nejvíc pomůže.
+
+### DG.3 Záloha musí být oddělená od havárie
+
+Nejčastější chyba: záloha žije ve stejné infrastruktuře, pod stejným účtem a se stejnými oprávněními jako systém, který má zachránit. Když útočník získá admin přístup, smaže produkci i zálohy. Když dodavatel zablokuje účet, zmizí aplikace i možnost obnovy. Když někdo pustí destruktivní skript se širokým tokenem, záloha se tváří statečně jen do chvíle, než se také poslušně smaže.
+
+Privacy-first a resilience plán by měl mít minimálně:
+
+- oddělený účet nebo projekt pro dlouhodobé zálohy,
+- samostatná oprávnění pro čtení, zápis a mazání záloh,
+- šifrování při přenosu i v klidu,
+- chráněnou retenci nebo neměnné verze u kritických dat,
+- monitoring poslední úspěšné zálohy,
+- alert, pokud záloha neproběhne v očekávaném okně,
+- postup obnovy uložený mimo primární systém.
+
+U evropského provozu navíc hlídejte, kam se zálohy fyzicky ukládají. Nestačí říct „máme EU hosting“, pokud snapshoty, support exporty nebo diagnostické balíčky končí v jiném regionu bez vědomého rozhodnutí. Data necestují jen přes aplikaci. Cestují přes zálohy, logy, support, monitoring a „dočasné“ exporty, které dočasně přežijí tři reorganizace firmy.
+
+### DG.4 Test obnovy je součást release hygieny
+
+Záloha, která nejde obnovit, je horší než žádná záloha, protože vytváří falešný klid. Test obnovy nemusí být hned dramatické cvičení s kouřem a hudbou. Stačí pravidelný, opakovatelný postup:
+
+1. Vytvořte izolované testovací prostředí bez přístupu skutečných uživatelů.
+2. Obnovte poslední zálohu databáze a souborů.
+3. Spusťte migrační skripty, pokud se mezi zálohou a aktuální verzí změnilo schéma.
+4. Ověřte přihlášení testovacím účtem, základní business workflow a oprávnění.
+5. Zkontrolujte, že obnovené prostředí neposílá e-maily, webhooky ani platební akce ven.
+6. Zapište reálný čas obnovy, chyby v postupu a rozhodnutí, co zlepšit.
+7. Testovací kopii po kontrole bezpečně smažte podle pravidel retence.
+
+Pro malý tým je rozumný rytmus jednou měsíčně pro kritickou databázi a po každé větší změně schématu nebo storage vrstvy. U méně kritických systémů stačí kvartální test. Důležité je, aby výsledek nebyl „někdo to nějak zkusil“, ale konkrétní záznam: datum, verze, zdroj zálohy, čas obnovy, zjištěné problémy a vlastník nápravy.
+
+### DG.5 Obnova nesmí porušit soukromí ani bezpečnost
+
+Obnovovací prostředí je nebezpečně podceňovaná zóna. Najednou máte kopii produkčních dat, často bez běžných produkčních kontrol, někdy s přístupem více lidí „protože testujeme“. Přesně tady vznikají úniky, které se pak vysvětlují větou „to byla jen testovací databáze“. Gratuluju, osobní údaje v testu jsou pořád osobní údaje. GDPR nemá tlačítko „ale my jsme to mysleli interně“.
+
+Dodržujte tato pravidla:
+
+- produkční data do testu obnovy pouštějte jen tehdy, když je to nutné,
+- testovací přístupy časově omezte a logujte,
+- obnovu dělejte v izolované síti nebo projektu,
+- všechny outbound integrace nastavte do safe módu,
+- po testu smažte kopii a zapište čas smazání,
+- citlivá pole maskujte, pokud nepotřebujete ověřit přesnou hodnotu,
+- nikdy nepoužívejte obnovu jako pohodlný způsob, jak dát vývojářům „trochu produkčních dat“.
+
+Pokud aplikace pracuje s tenanty, test obnovy musí ověřit izolaci tenantů. Nestačí, že se databáze spustí. Musíte vědět, že uživatel po obnově neuvidí cizí organizaci, dokumenty, faktury ani auditní události. Obnova má vrátit důvěru, ne vyrobit nový incident s lepším timestampem.
+
+### DG.6 Šablona: karta zálohování a obnovy
+
+```markdown
+## Základ
+- Systém / služba:
+- Vlastník:
+- Kritičnost:
+- Kde běží produkce:
+- Kde jsou zálohy:
+
+## Rozsah dat
+- Databáze:
+- Soubory / uploady:
+- Konfigurace:
+- Audit a provozní logy:
+- Externí systémy:
+
+## Cíle obnovy
+- RPO:
+- RTO:
+- Priorita při incidentu:
+- Co se neobnovuje a proč:
+
+## Bezpečnost
+- Šifrování:
+- Kdo může číst zálohy:
+- Kdo může mazat zálohy:
+- Jak se chrání tajemství:
+- Jak se odděluje test obnovy:
+
+## Provoz
+- Frekvence záloh:
+- Retence:
+- Monitoring poslední zálohy:
+- Alerty:
+- Datum posledního testu obnovy:
+- Výsledek posledního testu:
+
+## Privacy-first kontrola
+- Region uložení:
+- Právní důvod uchování:
+- Postup smazání testovací kopie:
+- Maskování / pseudonymizace:
+- Kontrola tenant izolace:
+```
+
+Tuhle kartu držte vedle incident playbooku a dokumentace deploymentu. Když je v Git repozitáři, neukládejte do ní tajné hodnoty. Když je v interní dokumentaci, nastavte přístup podle toho, že popisuje kritickou infrastrukturu. Backup plán není marketingový leták pro celou firmu.
+
+### DG.7 Checklist: zálohy bez falešného klidu
+
+- [ ] Víme, která data jsou kritická pro obnovu služby.
+- [ ] Každá kritická datová vrstva má vlastní RPO a RTO.
+- [ ] Zálohy jsou oddělené od produkčního účtu nebo mají oddělená oprávnění.
+- [ ] Mazání záloh není dostupné stejnému tokenu, který běžně spravuje produkci.
+- [ ] Zálohy jsou šifrované a region uložení je vědomé rozhodnutí.
+- [ ] Monitoring hlídá nejen chybu, ale i zastaralou poslední úspěšnou zálohu.
+- [ ] Test obnovy proběhl v posledním měsíci nebo kvartálu podle kritičnosti.
+- [ ] Obnovovací prostředí neposílá reálné e-maily, webhooky ani platby.
+- [ ] Testovací kopie produkčních dat se po ověření maže.
+- [ ] Postup obnovy je srozumitelný i člověku, který ho nepsal.
+- [ ] Dokumentace obsahuje kontakty, pořadí kroků a rollback rozhodnutí.
+- [ ] Po každém incidentu nebo větší migraci se karta zálohování aktualizuje.
+
+### Mini cvičení: restore drill za 60 minut
+
+1. Vyberte jednu kritickou databázi nebo úložiště souborů.
+2. Zapište aktuální RPO a RTO. Pokud je neznáte, napište realistický odhad a vlastníka rozhodnutí.
+3. Najděte poslední úspěšnou zálohu a ověřte, kde fyzicky leží.
+4. Připravte izolované testovací prostředí bez outbound integrací.
+5. Obnovte data a změřte reálný čas od začátku do použitelného stavu.
+6. Ověřte tři základní scénáře: přihlášení, hlavní workflow, oprávnění.
+7. Zkontrolujte logy, zda test nevytvořil reálné e-maily, webhooky nebo platební události.
+8. Smažte testovací kopii a zapište výsledek do karty zálohování.
+
+Výstupem není dokonalý disaster recovery manuál na 40 stran. Výstupem je jedno ověřené poznání: „tuhle část systému umíme obnovit za X minut a víme, kde to bolí“. To je mnohem lepší než uklidňující věta „zálohy máme“, která v překladu často znamená „doufáme, že někde něco je“.
+
+### Codyho komentář
+
+Můj pohled: malé týmy by měly brát test obnovy stejně vážně jako deploy. Deploy ukazuje, že umíte změnu dostat ven. Restore ukazuje, že umíte přežít vlastní chybu, selhání dodavatele nebo útok. Jedno bez druhého je jen polovina provozní dospělosti. A ta horší polovina má obvykle lepší marketing.
+
+### Zdroje k příloze DG
+
+- ENISA ve svých materiálech ke cloudové bezpečnosti dlouhodobě řadí zálohování, obnovu, kontinuitu provozu a řízení přístupu mezi klíčové bezpečnostní kontroly: https://www.enisa.europa.eu/topics/cloud-and-big-data/cloud-security
+- Směrnice NIS2 v článku 21 pracuje s řízením kybernetických rizik, kontinuitou provozu, zálohami, disaster recovery a krizovým řízením jako součástí bezpečnostních opatření: https://eur-lex.europa.eu/eli/dir/2022/2555/oj
+- EDPB uvádí v pokynech k DPIA, že posouzení rizik má zohlednit povahu, rozsah, kontext a účely zpracování i opatření ke zmírnění rizik: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/data-protection-impact-assessment-dpia_en
+- Evropská komise popisuje Data Act jako rámec posilující přístup k datům, sdílení dat a snazší přechod mezi cloudovými službami: https://digital-strategy.ec.europa.eu/en/policies/data-act
+
 ## Pracovní log
+
+- 2026-08-26: Přidána příloha DG „Zálohy a obnova bez falešného pocitu bezpečí“ s rozdělením datových vrstev, RPO/RTO tabulkou, oddělením záloh od produkční havárie, restore drillem, privacy-first pravidly, kartou zálohování, checklistem, hodinovým cvičením a ověřenými ENISA/NIS2/EDPB/EU zdroji.
 
 - 2026-08-26: Přidána příloha DF „Webhooky a integrační eventy bez tichého požáru“ s kontraktem webhooku, ověřením podpisu, idempotencí, frontovým zpracováním, privacy-first pravidly, kartou webhooku, checklistem, hodinovým auditem a ověřenými GitHub/Stripe/OWASP zdroji.
 
