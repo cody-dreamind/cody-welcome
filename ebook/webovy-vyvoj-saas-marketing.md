@@ -23744,7 +23744,232 @@ Po hodině nemusíte mít dokonalý secrets management. Máte ale mapu, první r
 - NIST SP 800-57 Part 1 Rev. 5 popisuje obecný rámec správy kryptografických klíčů včetně životního cyklu a cryptoperiods: https://csrc.nist.gov/pubs/sp/800/57/pt1/r5/final
 - GDPR článek 5 definuje zásady integrity, důvěrnosti, minimalizace a omezení účelu, které se dotýkají i návrhu provozní konfigurace a přístupů: https://eur-lex.europa.eu/eli/reg/2016/679/oj
 
+## CR. Auditní logy bez šmírovacího deníčku
+
+Auditní log není tajný román o každém kliknutí uživatele. Je to provozní a bezpečnostní důkazní vrstva: pomáhá odpovědět, kdo provedl citlivou akci, kdy se to stalo, z jakého oprávnění, s jakým výsledkem a co se má udělat dál. Pokud logy sbírají všechno, rychle se z nich stane datová skládka. Pokud nesbírají nic důležitého, incident se vyšetřuje archeologicky: lopatka, štěteček, tichá panika.
+
+Privacy-first auditování má jednoduchou ambici: zaznamenat dost pro bezpečnost, podporu, odpovědnost a vyšetření incidentu, ale neukládat obsah, osobní údaje a tajemství jen proto, že je technicky snadné je přibalit.
+
+### CR.1 Rozlišujte auditní log, aplikační log a analytiku
+
+První chyba je házet všechny události do jednoho pytle. Malý SaaS často začne jedním `console.log`, pak přidá monitoring, potom produktovou analytiku a nakonec se diví, že nikdo neví, kde hledat odpověď na jednoduchou otázku: „Kdo exportoval data zákazníka?“
+
+Praktické rozdělení:
+
+- **Auditní log** zaznamenává citlivé akce a změny stavu: přihlášení, změnu oprávnění, export, smazání, změnu fakturačních údajů, úpravu bezpečnostního nastavení, přístup podpory k účtu zákazníka.
+- **Aplikační log** pomáhá vývojářům řešit chyby: selhání jobu, timeout API, validační chyba, výjimka, stav fronty.
+- **Bezpečnostní log** sleduje podezřelé nebo rizikové události: opakované neúspěšné přihlášení, odmítnutý přístup, změny tokenů, neobvyklý export.
+- **Produktová analytika** měří agregované chování: aktivace, dokončení onboardingu, používání funkcí, konverze.
+
+Tyto vrstvy se mohou technicky potkávat ve stejném systému, ale nemají mít stejnou retenci, přístupová práva ani účel. Auditní log má být spíš účetní kniha než Google Analytics v montérkách.
+
+### CR.2 Začněte seznamem auditovatelných akcí
+
+Nejlepší auditní log nevznikne tím, že „zapneme logování“. Vznikne rozhodnutím, které akce jsou tak důležité, že u nich musí existovat ověřitelná stopa.
+
+Začněte tabulkou se sloupci:
+
+- akce,
+- proč je citlivá,
+- kdo ji může provést,
+- jaký objekt mění,
+- jaký výsledek logovat,
+- komu se má zobrazit,
+- jak dlouho log držet,
+- jestli vyvolává alert.
+
+Příklad pro malý B2B SaaS:
+
+| Akce | Proč logovat | Minimální záznam |
+| --- | --- | --- |
+| Přihlášení uživatele | Bezpečnost účtu | čas, uživatel, tenant, výsledek, hrubá síťová informace, metoda |
+| Změna role | Dopad na oprávnění | kdo změnil, komu, stará role, nová role, tenant |
+| Export dat | Riziko úniku | kdo exportoval, rozsah, formát, tenant, výsledek |
+| Smazání projektu | Nevratná změna | kdo smazal, objekt, tenant, potvrzení, výsledek |
+| Přístup podpory | Důvěra zákazníka | pracovník, důvod, zákazník, časové okno, schvalovatel |
+| Změna integrace | Riziko toku dat | kdo změnil, typ integrace, cílová služba, výsledek |
+
+Codyho komentář: pokud v tabulce neumíte vysvětlit „proč logovat“, pravděpodobně logujete ze strachu, ne z potřeby. Strach je skvělý alarm, ale mizerný datový architekt.
+
+### CR.3 Logujte událost, ne obsah zákazníka
+
+Auditní záznam má odpovědět na otázku „co se stalo“, ne kopírovat vše, co uživatel napsal. U exportu tedy typicky nepotřebujete uložit samotný export. U změny dokumentu nepotřebujete uložit celý dokument. U chyby formuláře nepotřebujete opsat všechna pole včetně telefonu, poznámky a rodného čísla, které tam zákazník neměl psát, ale napsal, protože lidé jsou kreativní i proti vlastnímu zájmu.
+
+Bezpečnější vzor záznamu:
+
+```json
+{
+  "event_id": "evt_01h...",
+  "event_type": "data_export.created",
+  "occurred_at": "2026-08-26T05:20:00Z",
+  "actor_type": "user",
+  "actor_id": "usr_123",
+  "tenant_id": "ten_456",
+  "target_type": "contacts",
+  "target_id": "segment_789",
+  "result": "success",
+  "reason": "monthly_reporting",
+  "ip_prefix": "203.0.113.0/24",
+  "user_agent_family": "Firefox",
+  "request_id": "req_abc"
+}
+```
+
+Co do auditního logu obvykle nepatří:
+
+- hesla, API klíče, recovery kódy a session tokeny,
+- celé payloady požadavků,
+- obsah zpráv, dokumentů a poznámek,
+- platební údaje mimo nezbytné reference,
+- přesné osobní údaje, pokud stačí interní identifikátor,
+- raw cookies a autorizační hlavičky,
+- stack trace obsahující konfiguraci nebo tajemství.
+
+Pokud potřebujete porovnat změnu, preferujte strukturovaný diff bezpečných polí: `role: member -> admin`, `status: active -> suspended`, `plan: trial -> pro`. U citlivých hodnot stačí zaznamenat, že se změnily, ne jakou přesnou hodnotu mají.
+
+### CR.4 Retence a přístup jsou součást návrhu
+
+Auditní logy samy mohou být osobními údaji nebo bezpečnostně citlivými daty. Proto nestačí říct „budeme je držet navždy, kdyby náhodou“. Náhoda není retenční politika. Je to výmluva v reflexní vestě.
+
+Nastavte minimálně tři úrovně:
+
+- **Krátká provozní retence** pro detailní technické logy, například dny až týdny podle potřeby ladění a incident response.
+- **Střední bezpečnostní retence** pro auditní události, které pomáhají řešit zneužití účtu, spory nebo interní kontrolu.
+- **Dlouhodobé záznamy** jen tam, kde existuje jasný smluvní, právní nebo bezpečnostní důvod.
+
+Přístup držte užší než k běžné administraci. Auditní log má typicky číst bezpečnostní role, technický lead, vybraný support nebo administrátor zákaznického účtu. Nemá být volně dostupný každému, kdo má přístup do databáze nebo BI nástroje.
+
+Praktické zásady:
+
+- čtení auditního logu je také auditovatelná akce,
+- export auditního logu má být omezený a schvalovaný,
+- produkční logy se neposílají do nástrojů bez jasného místa provozu a smluv,
+- přístup se reviduje společně s ostatními privilegovanými účty,
+- retenční pravidla se dokumentují vedle datové mapy.
+
+### CR.5 Integrita je důležitější než hezký dashboard
+
+Auditní log má smysl jen tehdy, když mu tým může věřit. Pokud ho může běžný administrátor upravit, smazat nebo přepsat při každém deployi, je to spíš dekorace. Hezká dekorace, ale pořád dekorace.
+
+Pro malý SaaS stačí praktický základ:
+
+- události zapisujte strukturovaně a konzistentně,
+- používejte serverový čas a synchronizované časové zdroje,
+- každá událost má stabilní `event_id` a `request_id`,
+- auditní záznamy nemažte běžnou aplikační cestou,
+- u citlivých systémů zvažte append-only úložiště nebo oddělený log sink,
+- změny retenční politiky logujte jako vlastní auditní událost,
+- testujte, že kritické akce opravdu záznam vytvoří.
+
+Dashboard je užitečný pro provoz, ale integrita záznamu je důležitější. Při incidentu nepotřebujete nejhezčí graf v kanceláři. Potřebujete vědět, jestli export proběhl, kdo ho spustil a zda se záznamu dá věřit.
+
+### CR.6 Auditní log patří i do produktu
+
+U B2B SaaSu je auditní log často produktová funkce, ne jen interní bezpečnostní nástroj. Administrátor zákazníka chce vidět, kdo pozval nového uživatele, kdo změnil oprávnění, kdo stáhl export nebo kdo upravil integraci. To zvyšuje důvěru a snižuje support.
+
+Zákaznické zobrazení ale musí být opatrné:
+
+- neukazujte interní technické detaily, které by pomohly útočníkovi,
+- nepřidávejte osobní údaje navíc jen kvůli pohodlí,
+- u podpůrných zásahů ukažte důvod, čas a rozsah,
+- umožněte filtrovat podle typu události, osoby a období,
+- export zákaznického auditního logu omezte podle role,
+- vysvětlete retenci přímo v administraci nebo dokumentaci.
+
+Dobrá formulace v produktu:
+
+> Auditní log uchovává bezpečnostní a administrátorské události vašeho workspace. Neobsahuje obsah dokumentů ani citlivé hodnoty polí. Export je dostupný pouze vlastníkům workspace a sám se zapisuje jako auditní událost.
+
+To je věta, která buduje důvěru. A zároveň nenutí právníka sáhnout po kávě velikosti hasicího přístroje.
+
+### CR.7 Šablona: karta auditní události
+
+Použijte ji pro každou citlivou událost, než ji začnete implementovat.
+
+## Událost
+
+- Název události:
+- Typ: bezpečnostní / administrační / datová / billing / support
+- Proč ji logujeme:
+- Kdo ji může vyvolat:
+- Kdy vzniká: před akcí / po akci / při selhání / při schválení
+
+## Rozsah
+
+- Actor:
+- Tenant nebo workspace:
+- Cílový objekt:
+- Výsledek:
+- Bezpečná metadata:
+- Co se výslovně nesmí logovat:
+
+## Přístup
+
+- Kdo ji vidí interně:
+- Kdo ji vidí u zákazníka:
+- Lze exportovat: ano / ne / jen po schválení
+- Čtení události se loguje: ano / ne
+
+## Retence
+
+- Výchozí doba uchování:
+- Důvod retence:
+- Kdy se anonymizuje nebo maže:
+- Výjimky:
+
+## Alerty
+
+- Spouští alert:
+- Závažnost:
+- Vlastník reakce:
+- Očekávaný první krok:
+
+## Test
+
+- Jak ověříme, že se událost zapisuje:
+- Jak ověříme, že neobsahuje citlivá data:
+- Jak ověříme export a oprávnění:
+
+### CR.8 Checklist: auditní logy bez šmírování
+
+- [ ] Máme oddělený účel pro auditní, aplikační, bezpečnostní a produktové logy.
+- [ ] Existuje seznam auditovatelných akcí s vlastníkem.
+- [ ] Každá kritická událost má `event_id`, čas, aktora, tenant, cíl, výsledek a korelační ID.
+- [ ] Do logů neukládáme tajemství, tokeny, celé payloady ani obsah zákaznických dokumentů.
+- [ ] Citlivé změny logujeme jako bezpečný diff nebo informaci o změně, ne jako kompletní hodnoty.
+- [ ] Retence logů je zdokumentovaná a odlišná podle účelu.
+- [ ] Přístup k auditním logům je omezený a sám auditovaný.
+- [ ] Export auditních logů je řízený oprávněním a zapisuje vlastní auditní událost.
+- [ ] Kritické akce mají automatizovaný test, že auditní záznam vznikne.
+- [ ] Logy mají ochranu proti nepozorované úpravě nebo běžnému smazání.
+- [ ] Zákaznické zobrazení neprozrazuje interní bezpečnostní detaily.
+- [ ] Incident playbook říká, kde auditní log hledat a kdo ho smí číst.
+
+### Mini cvičení: auditní návrh za 55 minut
+
+1. **10 minut:** Sepište deset nejcitlivějších akcí v produktu.
+2. **10 minut:** Označte, které z nich mění data, oprávnění, integrace, billing nebo bezpečnost.
+3. **10 minut:** Pro každou napište minimální auditní záznam bez payloadu.
+4. **10 minut:** Vyberte tři události, které mají vyvolat alert nebo ruční kontrolu.
+5. **10 minut:** Zkontrolujte, kdo logy vidí a jak dlouho se drží.
+6. **5 minut:** Zapište jednu implementační akci do backlogu: nejdřív tu, která nejvíc sníží riziko.
+
+Výsledek nemusí být krásný. Musí být použitelný. Krásu necháme design systému; auditní log ať hlavně nelže.
+
+### Codyho komentář
+
+Auditní logy jsou místo, kde se dobře pozná dospělost SaaSu. Junior produkt sbírá všechno, protože „třeba se to bude hodit“. Dospělejší produkt ví, co potřebuje dokazovat, co nesmí ukládat a komu má dát kontrolu. Privacy-first přístup tady není brzda. Je to způsob, jak mít méně balastu a víc důvěryhodných důkazů.
+
+### Zdroje k příloze CR
+
+- OWASP Logging Cheat Sheet — praktické doporučení pro aplikační a bezpečnostní logování, včetně ochrany před citlivými daty a log injection: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+- OWASP Authorization Cheat Sheet — připomíná, že nadměrné logování může znamenat zbytečné ukládání citlivých dat a že logy mají být konzistentní: https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html
+- NIST SP 800-92 Guide to Computer Security Log Management — starší, ale pořád užitečný rámec pro sběr, ochranu, analýzu a likvidaci bezpečnostních logů: https://www.nist.gov/publications/guide-computer-security-log-management
+- EDPB SME guide: Data breaches — přehled pro malé organizace k řešení porušení zabezpečení osobních údajů a související odpovědnosti: https://www.edpb.europa.eu/sme/assess-the-risks/data-breaches_en
+
 ## Pracovní log
+- 2026-08-26: Přidána příloha CR „Auditní logy bez šmírovacího deníčku“ s rozdělením typů logů, seznamem auditovatelných akcí, minimalizací dat, retencí, integritou, zákaznickým zobrazením, šablonou, checklistem a ověřenými zdroji.
+
 
 - 2026-08-26: Přidána příloha CQ „Tajemství, API klíče a konfigurace bez sdíleného `.env` folklóru“ s inventářem secrets, pravidly pro repo/logy/screenshoty, dělením prostředí, scope a rotací, lokálním vývojem, kartou tajemství, checklistem, 60minutovým auditem a ověřenými OWASP/GitHub/NIST/GDPR zdroji.
 
