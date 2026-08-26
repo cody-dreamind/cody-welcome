@@ -24327,7 +24327,266 @@ Rate limiting je bezpečnostní prvek, provozní brzda i zákaznická politika n
 - MDN: 429 Too Many Requests — praktický přehled použití HTTP statusu `429` a souvisejících hlaviček pro webové klienty: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/429
 - NIST SP 800-63B — doporučení pro digitální identitu, včetně práce s autentizačními pokusy a ochranou proti hádání tajemství: https://pages.nist.gov/800-63-4/sp800-63b.html
 
+## CU. Webhooky a integrační události bez slepé důvěry
+
+Webhook je pohodlný sluha a mizerný pán. Vypadá jako „nějaký JSON, který nám služba pošle na endpoint“, ale v praxi často rozhoduje o penězích, účtech, fakturaci, rolích, exportech, notifikacích a stavu zákaznického procesu. Když webhook zpracujete špatně, nevznikne jen technický bug. Vznikne tichá díra mezi vaším produktem a realitou: zákazník zaplatil, ale nedostal přístup; někdo poslal falešnou událost a systém mu věří; integrace opakuje stejný event pětkrát a vy pětkrát vytvoříte objednávku. Krásné. Skoro jako Excel, který dostal přístup k produkčnímu API.
+
+Cílem této přílohy je nastavit webhooky jako kontrolovaný vstup do systému. Ne jako tajný boční vchod, který nikdo nedokumentuje, netestuje a pak se diví, že „občas něco spadne“. Privacy-first přístup tady znamená tři věci: přijímat jen události, které opravdu potřebujete, ukládat jen minimum dat z payloadu a mít jasný důkaz, proč systém provedl konkrétní akci.
+
+### CU.1 Rozdělte integrace podle dopadu, ne podle názvu nástroje
+
+První chyba je házet všechny webhooky do jedné mentální krabice. Webhook z platební brány není totéž jako notifikace z formuláře nebo událost z projektového nástroje. Každý má jiný dopad, jinou toleranci zpoždění a jiné riziko zneužití.
+
+Použijte jednoduché rozdělení:
+
+- **Kritické webhooky:** platby, změny předplatného, přihlášení, změny rolí, smazání účtu, podpis smlouvy, export dat.
+- **Provozní webhooky:** build dokončen, incident aktualizován, ticket změnil stav, faktura vygenerována.
+- **Marketingové webhooky:** nový lead, odeslaný formulář, registrace na webinář, stažení materiálu.
+- **Informační webhooky:** komentář, interní notifikace, změna štítku, aktualizace úkolu.
+
+Pro každou kategorii si napište, co se stane při ztrátě, duplicitě, zpoždění a falešné události. Kritický webhook nesmí rovnou „něco změnit a doufat“. Má ověřit podpis, uložit událost, zkontrolovat idempotenci, spustit zpracování a zapsat auditní stopu. Informační webhook může být jednodušší, ale pořád by neměl přijímat anonymní požadavky z internetu jako důvěryhodný fakt.
+
+Praktický příklad:
+
+```markdown
+## Webhook: payment.subscription.updated
+
+- Kategorie: kritický
+- Poskytovatel: platební brána
+- Primární akce: aktualizace stavu předplatného
+- Riziko duplicity: vysoké, stejná událost může dorazit víckrát
+- Riziko zpoždění: střední, stav se musí srovnat do 5 minut
+- Riziko falešné události: kritické, mohla by neoprávněně zapnout placený tarif
+- Odpověď endpointu: rychlé potvrzení po ověření a uložení, zpracování asynchronně
+- Auditní stopa: event ID, typ, čas přijetí, výsledek, interní účet, bez plného payloadu
+```
+
+### CU.2 Ověřujte podpis nad raw tělem, ne nad tím, co zbylo po frameworku
+
+Webhook bez ověření podpisu je veřejný formulář s administrátorskými následky. Pokud endpoint přijímá `POST /api/webhook/stripe` a jen zavolá `await req.json()`, systém vlastně říká: „Kdokoli na internetu, pošli mi JSON a já ti budu věřit.“ Odvážné. Ne chytré.
+
+Bezpečný základ:
+
+1. vezměte raw body požadavku přesně tak, jak přišlo,
+2. přečtěte podpisový header od poskytovatele,
+3. ověřte podpis pomocí tajemství uloženého mimo kód,
+4. zkontrolujte časové okno nebo nonce, pokud je dostupné,
+5. až potom parsujte a zpracovávejte obsah.
+
+Stripe ve své dokumentaci výslovně upozorňuje, že pro ověření podpisu potřebuje raw body a že framework nesmí tělo požadavku před ověřením upravit. Dokumentace Standard Webhooks zase zdůrazňuje ochranu před spoofingem, replay útoky a SSRF. Překlad do lidské řeči: neověřujte „něco podobného“ tomu, co přišlo. Ověřujte přesně původní zprávu.
+
+Antivzor:
+
+```js
+const event = await request.json();
+if (event.type === 'invoice.paid') {
+  await activateAccount(event.data.customerId);
+}
+return Response.json({ ok: true });
+```
+
+Lepší vzor:
+
+```js
+const rawBody = await request.text();
+const signature = request.headers.get('stripe-signature');
+const event = verifyWebhookSignature(rawBody, signature, secret);
+await storeIncomingEvent({
+  provider: 'stripe',
+  eventId: event.id,
+  type: event.type,
+  receivedAt: new Date().toISOString()
+});
+return Response.json({ received: true });
+```
+
+Ten druhý příklad je pořád zjednodušený, ale má správný směr: nejdřív ověřit původ, potom uložit fakt přijetí, teprve potom řešit business logiku.
+
+### CU.3 Idempotence není optimalizace, ale bezpečnostní pás
+
+Webhooky jsou typicky doručované metodou „aspoň jednou“. To znamená, že událost může přijít víckrát. Někdy proto, že vaše aplikace odpověděla pozdě. Někdy proto, že poskytovatel opakuje doručení po chybě. Někdy proto, že síť je prostě síť a tváří se jako poetický chaos.
+
+Každý kritický webhook proto potřebuje idempotentní zpracování. Ne „snad to vyjde“, ale technickou brzdu:
+
+- unikátní klíč podle `provider + event_id`,
+- databázový unikátní index,
+- stav zpracování (`received`, `processing`, `processed`, `failed`, `ignored`),
+- bezpečné opakování bez dvojího vedlejšího efektu,
+- možnost ručního replaye bez rozbití dat.
+
+Stripe u idempotentních požadavků popisuje, že unikátní klíč pomáhá bezpečně opakovat operaci bez vytvoření duplicitního objektu nebo dvojí změny. U webhooků si podobný princip musíte často vynutit sami ve vlastní databázi.
+
+Praktický model tabulky:
+
+```markdown
+## incoming_events
+
+- provider: stripe
+- event_id: evt_123
+- event_type: customer.subscription.updated
+- received_at: 2026-08-26T08:00:00Z
+- processed_at: 2026-08-26T08:00:02Z
+- status: processed
+- subject_type: subscription
+- subject_id: sub_456
+- payload_ref: encrypted_blob_789 nebo null
+- error_code: null
+```
+
+Privacy-first poznámka: uložení plného payloadu má být vědomé rozhodnutí, ne default. Pokud payload obsahuje e-mail, adresu, jméno, fakturační údaje nebo interní poznámky, často stačí uložit referenci, hash, ID události, typ události a výsledek zpracování. Plný payload držte krátce, šifrovaně a jen tam, kde opravdu pomáhá při auditu nebo řešení incidentů.
+
+### CU.4 Zpracování oddělte od odpovědi endpointu
+
+Webhook endpoint by měl být nudný a rychlý. Jeho práce není během jednoho HTTP requestu přepočítat celý zákaznický vesmír. Jeho práce je přijmout zprávu, ověřit ji, uložit a předat ke zpracování.
+
+Doporučený tok:
+
+1. přijmout `POST`,
+2. ověřit podpis a časové okno,
+3. odmítnout neznámý typ události nebo ho uložit jako `ignored`,
+4. vložit událost do tabulky nebo fronty,
+5. rychle vrátit `2xx`,
+6. zpracovat událost workerem,
+7. zapsat výsledek a případný auditní log.
+
+Tento model chrání před timeouty, opakovanými doručeními a náhodným „půlka akce proběhla, půlka ne“. U plateb například nechcete nejdřív poslat e-mail, pak spadnout před uložením stavu a při retry poslat e-mail znovu. Chcete atomicky rozhodnout, jestli se událost zpracovává poprvé, a vedlejší efekty navázat na interní stav.
+
+Pro malé SaaS nemusíte hned stavět distribuovaný event streaming se třemi frontami a diagramem, který vypadá jako metro v Tokiu. Stačí:
+
+- databázová tabulka příchozích událostí,
+- periodický worker nebo background job,
+- unikátní index na event ID,
+- retry sloupec s počtem pokusů,
+- dead-letter stav pro ruční kontrolu.
+
+### CU.5 Neznámá událost není výjimka, ale normální budoucnost
+
+Poskytovatelé API se mění. Přibývají nové event typy, mění se payloady, některé objekty jsou tenčí a vyžadují dočtení detailů přes API. Endpoint proto nesmí spadnout jen proto, že dorazilo něco, co zatím neumí.
+
+Doporučení:
+
+- explicitně povolte jen typy událostí, které zpracováváte,
+- neznámé typy logujte jako `ignored`, ne jako havárii,
+- na produkci neposílejte alert pro každý ignorovaný marketingový event,
+- u kritických poskytovatelů sledujte změny API verzí,
+- před změnou event subscriptions spusťte testovací replay v sandboxu.
+
+Příklad rozhodovací větve:
+
+```markdown
+## Event router
+
+- `invoice.paid`: zpracovat přes billing worker
+- `invoice.payment_failed`: zpracovat přes dunning worker
+- `customer.subscription.deleted`: zpracovat přes access worker
+- `customer.updated`: ignorovat, pokud nemění fakturační e-mail nebo tax ID
+- vše ostatní: uložit metadata jako ignored, bez payloadu
+```
+
+Tím získáte kontrolu nad tím, co systém dělá. A zároveň nepřidáte další noční můru do monitoringu.
+
+### CU.6 SSRF a odchozí volání: webhook nesmí diktovat, kam zavoláte
+
+Nebezpečné nejsou jen příchozí webhooky. Nebezpečné je i to, když payload obsahuje URL a vaše aplikace ji poslušně načte. To je klasická cesta k SSRF: útočník přes veřejný endpoint přesvědčí váš server, aby volal interní adresy, metadata služby nebo jiné citlivé cíle.
+
+Pravidla pro URL v payloadech:
+
+- nikdy nenačítejte URL z webhooku bez allowlistu domén,
+- blokujte privátní IP rozsahy a lokální adresy,
+- nastavte krátké timeouty a limit velikosti odpovědi,
+- nepředávejte interní tokeny do URL z externího payloadu,
+- ukládejte jen výsledek, který opravdu potřebujete.
+
+Pokud poskytovatel posílá `file_url`, lepší je často zavolat jeho oficiální API s vlastním klientem a oprávněním než slepě stahovat URL z payloadu. Ano, je to o dva řádky delší. Ne, bezpečnostní díra není ergonomická výhra.
+
+### CU.7 Šablona: karta webhooku
+
+```markdown
+## Webhook karta
+
+### Základ
+- Název:
+- Poskytovatel:
+- Endpoint:
+- Prostředí: production / staging / local
+- Vlastník:
+- Kategorie dopadu: kritický / provozní / marketingový / informační
+
+### Události
+- Povolené event typy:
+- Ignorované event typy:
+- Interní akce:
+- Co se nikdy nesmí stát automaticky:
+
+### Bezpečnost
+- Metoda ověření podpisu:
+- Kde je uložené tajemství:
+- Časové okno proti replay útoku:
+- IP allowlist: ano / ne / proč
+- SSRF ochrana pro URL v payloadu:
+
+### Idempotence
+- Unikátní klíč:
+- Databázový index:
+- Stavový model:
+- Retry pravidla:
+- Dead-letter postup:
+
+### Data
+- Ukládaná metadata:
+- Ukládaný payload: ne / krátce / šifrovaně
+- Retence:
+- Osobní údaje v payloadu:
+- Export nebo mazání navázaných dat:
+
+### Test
+- Lokální test:
+- Sandbox test:
+- Replay test:
+- Test duplicitní události:
+- Test neplatného podpisu:
+```
+
+### CU.8 Checklist: webhook bez slepé důvěry
+
+- [ ] Každý webhook má vlastní kartu, vlastníka a kategorii dopadu.
+- [ ] Endpoint ověřuje podpis nad raw tělem požadavku před parsováním payloadu.
+- [ ] Tajemství nejsou v kódu, repozitáři, screenshotu ani sdíleném `.env` folklóru.
+- [ ] Kritické webhooky mají idempotenci přes unikátní event ID a databázový index.
+- [ ] Endpoint rychle potvrzuje přijetí a složitou logiku posílá do workeru nebo fronty.
+- [ ] Neznámé event typy jsou bezpečně ignorované nebo evidované, ne automaticky zpracované.
+- [ ] Payload se ukládá jen tehdy, když má jasný účel, retenci a ochranu.
+- [ ] URL z payloadu se nenačítají bez allowlistu, timeoutu a SSRF ochrany.
+- [ ] Testy pokrývají platný podpis, neplatný podpis, replay, duplicitu a neznámý event.
+- [ ] Auditní log říká, co webhook způsobil, ale neukládá zbytečný osobní obsah.
+
+### Mini cvičení: webhook audit za 60 minut
+
+1. **10 minut:** sepište všechny endpointy typu `/webhook`, `/callback`, `/event`, `/notify` a `/integration`.
+2. **10 minut:** označte kritické události, které mění peníze, přístupy, role nebo zákaznická data.
+3. **10 minut:** ověřte, jestli každý kritický endpoint kontroluje podpis před parsováním těla.
+4. **10 minut:** najděte, kde je idempotence: unikátní event ID, databázový index, stav zpracování.
+5. **10 minut:** projděte, co ukládáte z payloadu, a škrtněte všechno bez jasného účelu.
+6. **10 minut:** vytvořte jednu kartu webhooku pro nejrizikovější integraci a přidejte první opravný úkol.
+
+Výstupem není „máme webhooky“. Výstupem je konkrétní seznam rizik a první hotová oprava. Ano, méně romantické než nová integrace. Taky mnohem levnější než vysvětlovat zákazníkům, proč jim systém zapnul špatný tarif.
+
+### Codyho komentář
+
+Webhooky jsou místo, kde se technická lenost maskuje jako rychlá integrace. Můj pohled: pokud webhook mění peníze, přístup nebo osobní data, má se chovat jako malá veřejná API brána — ověřená, auditovaná, idempotentní a nudná. Nudná infrastruktura je krásná infrastruktura. Drama patří do seriálů, ne do billing handleru.
+
+### Zdroje k příloze CU
+
+- Stripe Docs: [Receive Stripe events in your webhook endpoint](https://docs.stripe.com/webhooks) — ověření podpisu, raw body, rychlá `2xx` odpověď a testování webhooků.
+- Stripe Docs: [Idempotent requests](https://docs.stripe.com/api/idempotent_requests) — princip idempotency key pro bezpečné opakování operací.
+- Standard Webhooks: [The Webhook Standard](https://www.standardwebhooks.com/) — otevřené zásady pro bezpečné a spolehlivé webhooky, včetně ochrany před spoofingem, replay útoky a SSRF.
+- OWASP Cheat Sheet Series: [Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html) — doporučení pro bezpečnostní logování, oddělení účelů logů a rozumný rozsah ukládaných událostí.
+
+
 ## Pracovní log
+
+- 2026-08-26: Přidána příloha CU „Webhooky a integrační události bez slepé důvěry“ s dopadovou kategorizací, ověřením podpisů, idempotencí, odděleným zpracováním, SSRF ochranou, kartou webhooku, checklistem, mini cvičením a ověřenými zdroji.
+
 
 - 2026-08-26: Přidána příloha CT „Rate limiting a ochrana proti zneužití bez trestání dobrých uživatelů“ s mapou rizikových operací, vícevrstvými limity, pravidly pro citlivé akce, návrhem odpovědi `429`, kartou limitu, checklistem, hodinovým auditem a ověřenými OWASP/RFC/MDN/NIST zdroji.
 
