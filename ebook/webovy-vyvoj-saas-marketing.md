@@ -22752,7 +22752,223 @@ Výstupem není „musíme to někdy optimalizovat“. Výstupem je konkrétní 
 - Your Europe shrnuje pravidla pro ukládání a zpracování neosobních dat v EU a upozorňuje, že od ledna 2027 má být switching a přesun dat z cloudové služby pro zákazníky zdarma: https://europa.eu/youreurope/business/governance-and-sustainability/digital-and-data-compliance/free-flow-non-personal-data/index_en.htm
 
 
+## CM. Bezpečnostní hlavičky bez cargo cult konfigurace
+
+Bezpečnostní hlavičky jsou levná ochrana, která často zůstane ve stavu „někdo to kdysi nastavil podle blogpostu a od té doby se bojíme na to sáhnout“. To je přesně ten druh technického folklóru, který vypadá profesionálně, dokud první integrace, iframe nebo externí skript nezačne dělat věci, které nikdo neumí vysvětlit.
+
+Cílem téhle přílohy není opsat nejpřísnější konfiguraci z internetu. Cílem je nastavit hlavičky tak, aby odpovídaly konkrétnímu produktu, neblokovaly legitimní funkce a zároveň snižovaly riziko XSS, clickjackingu, úniku refererů, MIME sniffingu a neřízeného přístupu k prohlížečovým schopnostem.
+
+*Codyho komentář: bezpečnostní hlavičky nejsou talisman. Když aplikace dovolí uložit škodlivý HTML obsah nebo posílá session tokeny do logů, žádná hlavička vás magicky nespasí. Ale jako základní bezpečnostní pás v autě? Ano. Zapnout. Bez debaty.*
+
+### CM.1 Začněte inventářem, ne kopírováním konfigurace
+
+Než napíšete první `Content-Security-Policy`, sepište, co web opravdu používá. Bez toho skončíte buď s příliš volnou politikou, nebo s rozbitou produkcí a výmluvou, že „CSP nejde nasadit“. Jde. Jen nesnáší chaos, což je docela férový postoj.
+
+Minimum inventáře:
+
+| Oblast | Otázka | Privacy-first poznámka |
+|---|---|---|
+| Skripty | Odkud se načítá JavaScript? | Preferujte vlastní doménu a minimum třetích stran. |
+| Styly | Jsou inline styly nutné? | Inline výjimky zdokumentujte, neoslavujte. |
+| Obrázky | Odkud se načítají obrázky a avatary? | Externí CDN může odhalovat chování návštěvníků. |
+| Fonty | Používáte lokální fonty nebo cizí font CDN? | Lokální fonty jsou jednodušší pro soukromí i výkon. |
+| Formuláře | Kam mohou formuláře odesílat data? | `form-action` má být krátký seznam, ne wildcard festival. |
+| Embedy | Potřebujete iframe? | Každý embed je dodavatel v převleku za UI prvek. |
+| API | Na které domény frontend volá? | Oddělte produkci, staging a analytiku. |
+
+Praktické pravidlo: pokud neumíte vysvětlit, proč je doména v bezpečnostní politice povolená, nemá tam být. Výjimky nejsou problém. Nezdokumentované výjimky jsou problém.
+
+### CM.2 Content-Security-Policy nastavujte postupně
+
+`Content-Security-Policy` je nejsilnější a zároveň nejčastěji pokažená hlavička. MDN ji popisuje jako mechanismus, kterým server říká prohlížeči, jaké zdroje se smějí načítat pro danou stránku. Prakticky tím omezujete škody při XSS, nechtěném vložení skriptu nebo kompromitované externí závislosti.
+
+Rozumný postup pro malý web nebo SaaS:
+
+1. nejdřív sepište inventář zdrojů,
+2. nasaďte politiku v report-only režimu, pokud ho infrastruktura podporuje,
+3. opravte reálná porušení nebo odstraňte zbytečné zdroje,
+4. zapněte vynucování,
+5. po každé větší změně integrací politiku znovu projděte.
+
+Startovací šablona pro běžný obsahový web bez externího JavaScriptového cirkusu:
+
+```http
+Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; frame-ancestors 'none'; form-action 'self'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests
+```
+
+Pro SaaS bývá potřeba přidat API domény, payment providera, status page, support widget nebo analytiku. Přidávejte je konkrétně:
+
+```http
+connect-src 'self' https://api.example.eu https://analytics.example.eu
+```
+
+Ne takhle:
+
+```http
+connect-src *
+```
+
+Wildcard je bezpečnostní ekvivalent „všichni jste admini, hlavně se nechovejte divně“. Občas to někdo myslí dobře, ale produkce není tábor důvěry.
+
+### CM.3 Clickjacking řešte `frame-ancestors`, ne jen starou hlavičkou
+
+Pokud stránku nikdo nemá vkládat do iframe, nastavte:
+
+```http
+Content-Security-Policy: frame-ancestors 'none'
+```
+
+Pokud potřebujete vkládání jen v administraci partnera nebo konkrétní zákaznické doméně, povolte jen tu. Starší `X-Frame-Options: DENY` nebo `SAMEORIGIN` může být pořád užitečná jako kompatibilní vrstva, ale moderní návrh patří do CSP přes `frame-ancestors`.
+
+Typické rozhodnutí:
+
+| Scénář | Doporučení |
+|---|---|
+| Marketingový web | `frame-ancestors 'none'` |
+| SaaS aplikace bez embedů | `frame-ancestors 'none'` |
+| Widget vložitelný u zákazníků | oddělená doména a konkrétní povolené originy |
+| Interní admin | žádné veřejné embedování, raději samostatná autentizace |
+
+Privacy-first detail: pokud poskytujete widget, nepoužívejte ho jako skrytý tracker. Dokumentujte, jaká data widget posílá, jak dlouho se ukládají a jak ho zákazník může vypnout.
+
+### CM.4 Referrer a permissions politika omezují tiché úniky
+
+`Referrer-Policy` rozhoduje, kolik informací odejde v HTTP refereru při přechodu na jinou stránku. Bez rozumného nastavení můžete nechtěně posílat cizím službám celé URL včetně citlivých parametrů. Ano, parametry v URL nemají obsahovat tokeny ani osobní údaje. Ne, svět bohužel není ideální, jinak by neexistovaly pondělní incident review.
+
+Dobrý default:
+
+```http
+Referrer-Policy: strict-origin-when-cross-origin
+```
+
+Ještě přísnější varianta pro citlivé části aplikace:
+
+```http
+Referrer-Policy: no-referrer
+```
+
+`Permissions-Policy` zase omezuje, které prohlížečové schopnosti může stránka používat: kameru, mikrofon, geolokaci, fullscreen a další. Pro běžný SaaS je lepší explicitně zakázat vše, co nepotřebujete.
+
+Příklad:
+
+```http
+Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
+```
+
+Pokud aplikace opravdu potřebuje kameru, napište proč, kde a pro koho. Permission bez produktového důvodu je budoucí support ticket s horším PR oddělením.
+
+### CM.5 Doplňte základní transportní a MIME ochrany
+
+Bezpečnostní hlavičky nejsou jen CSP. Praktické minimum:
+
+```http
+Strict-Transport-Security: max-age=31536000; includeSubDomains
+X-Content-Type-Options: nosniff
+Referrer-Policy: strict-origin-when-cross-origin
+Permissions-Policy: camera=(), microphone=(), geolocation=()
+Content-Security-Policy: default-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'
+```
+
+Pozor na `Strict-Transport-Security` s `includeSubDomains`: zapínejte ho až ve chvíli, kdy víte, že všechny subdomény běží správně přes HTTPS. U produkční domény je to správný směr. U domény plné historických experimentů je to nejdřív archeologie, potom konfigurace.
+
+`X-Content-Type-Options: nosniff` je jednoduchá ochrana proti tomu, aby prohlížeč hádal typ souboru jinak, než říká server. `object-src 'none'` v CSP zase blokuje staré pluginové objekty, které moderní web většinou nepotřebuje.
+
+### CM.6 Testujte hlavičky jako součást releasu
+
+Hlavičky se rozbíjejí nenápadně: nový CDN provider, nový obrázkový proxy endpoint, nový payment redirect, nový preview režim. Proto je netestujte jednou ročně v bezpečnostním sprintu, ale jako součást změn infrastruktury a integrací.
+
+Jednoduchý lokální check:
+
+```bash
+curl -I https://example.com
+```
+
+Co hledat:
+
+- jestli se hlavička vůbec vrací,
+- jestli ji nepřepisuje CDN nebo reverse proxy,
+- jestli produkce a staging nemají omylem stejné výjimky,
+- jestli CSP nepovoluje domény, které už nepoužíváte,
+- jestli citlivé části aplikace neposílají zbytečný referer,
+- jestli reporty z CSP neobsahují osobní data.
+
+Pro ruční audit se hodí Mozilla Observatory nebo OWASP Secure Headers jako kontrolní pomůcka. Neberte skóre jako náboženství. Berte ho jako seznam otázek. Cílem není zelený odznáček do prezentace, ale menší reálné riziko.
+
+### CM.7 Šablona: karta bezpečnostních hlaviček
+
+```markdown
+# Karta bezpečnostních hlaviček: [doména / aplikace]
+
+## Rozsah
+- Doména:
+- Prostředí:
+- Vlastník:
+- Poslední revize:
+- Další revize:
+
+## Zdroje
+- Skripty:
+- Styly:
+- Obrázky:
+- Fonty:
+- API / connect:
+- Form action:
+- Povolené iframe scénáře:
+
+## Hlavičky
+- Content-Security-Policy:
+- Strict-Transport-Security:
+- Referrer-Policy:
+- Permissions-Policy:
+- X-Content-Type-Options:
+- X-Frame-Options, pokud se používá:
+
+## Výjimky
+- Doména / direktiva / důvod / vlastník / datum revize:
+
+## Testy
+- curl kontrola:
+- prohlížečová konzole:
+- Observatory nebo Secure Headers výsledek:
+- známé akceptované varování:
+```
+
+### CM.8 Checklist: hlavičky bez cargo cultu
+
+- [ ] Máte inventář všech externích zdrojů na stránce.
+- [ ] CSP začíná od `default-src 'self'`, ne od wildcardů.
+- [ ] Každá externí doména má důvod, vlastníka a datum revize.
+- [ ] `frame-ancestors` odpovídá skutečné potřebě embedování.
+- [ ] `form-action` nepovoluje odesílání formulářů kamkoliv.
+- [ ] `Referrer-Policy` omezuje únik detailních URL na cizí domény.
+- [ ] `Permissions-Policy` zakazuje schopnosti prohlížeče, které produkt nepotřebuje.
+- [ ] HSTS je zapnuté až po kontrole HTTPS na subdoménách.
+- [ ] CSP reporty neobsahují osobní data a mají omezenou retenci.
+- [ ] Hlavičky kontrolujete po změně CDN, proxy, plateb, analytiky nebo embedů.
+
+### Mini cvičení: security headers audit za 45 minut
+
+1. 5 minut: spusťte `curl -I` na homepage, login a jednu interní aplikaci.
+2. 10 minut: zapište všechny externí domény z HTML, konzole a síťového panelu.
+3. 10 minut: označte domény jako nutné, dočasné, historické nebo neznámé.
+4. 10 minut: navrhněte CSP bez wildcardů a s minimem externích zdrojů.
+5. 5 minut: zkontrolujte `Referrer-Policy`, `Permissions-Policy` a HSTS.
+6. 5 minut: založte jednu konkrétní akci — odstranit zdroj, zpřísnit direktivu nebo doplnit kartu výjimky.
+
+Výstupem má být malá změna, ne bezpečnostní epos. Nejlepší první výhra bývá odstranění nepoužívané externí domény a zpřísnění `frame-ancestors`. Není to dramatické, ale přesně takhle vypadá dobrý provoz: nudně, opakovaně, účinně.
+
+### Zdroje k příloze CM
+
+- MDN dokumentace `Content-Security-Policy` popisuje direktivy, způsob omezení načítaných zdrojů a použití CSP proti útokům typu XSS: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy
+- MDN dokumentace `Referrer-Policy` vysvětluje, jak řídit množství informací posílaných v refereru při navigaci a načítání zdrojů: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy
+- MDN dokumentace `Permissions-Policy` popisuje omezení přístupu ke schopnostem prohlížeče pro stránku a vložené rámce: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Permissions-Policy
+- OWASP Secure Headers Project shrnuje doporučené bezpečnostní hlavičky, jejich účel a časté konfigurační chyby: https://owasp.org/www-project-secure-headers/
+- Mozilla HTTP Observatory slouží jako praktická kontrola bezpečnostních hlaviček a dalších webových bezpečnostních nastavení: https://developer.mozilla.org/en-US/observatory
+
+
 ## Pracovní log
+
+- 2026-08-26: Přidána příloha CM „Bezpečnostní hlavičky bez cargo cult konfigurace“ s inventářem zdrojů, postupným CSP, ochranou proti clickjackingu, referrer a permissions politikou, HSTS/MIME minimem, testováním, kartou hlaviček, checklistem, 45minutovým auditem a ověřenými MDN/OWASP/Mozilla zdroji.
 
 - 2026-08-25: Přidána příloha CL „FinOps pro malý SaaS bez cloudového šoku“ s jednotkovou ekonomikou, vlastnictvím nákladů, štítkováním, rozdělením rychlých úklidů a architektonických rozhodnutí, budget alerty, EU exit náklady, měsíční FinOps kartou, checklistem, 60minutovým cvičením a ověřenými FinOps/CNCF/EU zdroji.
 
