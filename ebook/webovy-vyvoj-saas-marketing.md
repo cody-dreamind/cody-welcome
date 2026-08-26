@@ -350,6 +350,7 @@ CE. Postmortem bez hledání viníka a bez ztráty paměti
 CF. AI asistenti v SaaS bez datového chaosu
 CG. Prompt injection a agentní nástroje bez bezpečnostní loterie
 CH. Dodavatelský due diligence bez tabulkového očistce
+DI. Bezpečnostní dotazníky a trust odpovědi bez copy-paste rizika
 
 ## 1. Web jako obchodní systém
 
@@ -27092,7 +27093,176 @@ Výstupem není divadlo pro audit. Výstupem je schopnost během reálného prob
 - ENISA — incident response a kybernetická odolnost v evropském kontextu: https://www.enisa.europa.eu/topics/incident-response
 - OWASP Incident Response Project — praktické bezpečnostní postupy pro přípravu a reakci: https://owasp.org/www-project-incident-response/
 
+## DI. Bezpečnostní dotazníky a trust odpovědi bez copy-paste rizika
+
+Jakmile se malý SaaS začne prodávat firmám, dřív nebo později přijde bezpečnostní dotazník. Někdy má 20 rozumných otázek. Někdy má 280 buněk, tři záložky, dvě skryté makra a tón, jako kdyby vás vyslýchal compliance oddíl s kávou bez kofeinu. Přesto to není nepřítel. Je to prodejní i provozní moment: zákazník se ptá, jestli vám může svěřit data, proces a reputaci.
+
+Chyba malých týmů je odpovídat dotazník pokaždé od nuly, nebo ještě hůř, kopírovat starou odpověď bez ověření. Tím vzniká trust dluh: sliby v sales procesu se postupně odpojí od reality produktu. A to je přesně ten typ dluhu, který se neukáže v CI, ale ukáže se v incidentu, auditu nebo při renewal hovoru.
+
+### DI.1 Udělejte z dotazníku knihovnu odpovědí, ne jednorázovou brigádu
+
+Každý vyplněný dotazník má skončit ve znalostní bázi. Ne jako příloha `security_questionnaire_final_really_final.xlsx`, ale jako sada schválených odpovědí podle témat. Cílem není mít marketingovou brožuru. Cílem je mít pravdivé, opakovatelné a snadno aktualizovatelné odpovědi.
+
+Rozdělte odpovědi minimálně do oblastí:
+
+- **Organizace:** kdo vlastní bezpečnost, privacy, incidenty a zákaznickou komunikaci.
+- **Data:** jaké typy dat zpracováváte, kde jsou uložena, jak dlouho je držíte a jak probíhá export nebo smazání.
+- **Přístupy:** role, MFA, offboarding, support přístup a pravidelné revize oprávnění.
+- **Provoz:** hosting, zálohy, monitoring, deploy proces, incident response a obnova.
+- **Aplikace:** autentizace, autorizace, logování, rate limiting, bezpečnostní hlavičky a práce se soubory.
+- **Dodavatelé:** subprocesoři, datová rezidence, DPA, exit plán a kontakt pro bezpečnostní otázky.
+- **AI funkce:** jaká data vstupují do modelů, zda se používají k tréninku, kde běží zpracování a jak se omezuje kontext.
+
+Praktické pravidlo: pokud odpověď použijete dvakrát, patří do knihovny. Pokud ji použijete třikrát a pořád ji někdo upravuje ručně, máte malý interní procesní požár. Zatím jen kouří, takže je ideální čas ho uhasit.
+
+### DI.2 Každá odpověď musí mít vlastníka a datum pravdy
+
+Bezpečnostní odpověď není copywriting. Je to závazek. Proto u každé odpovědi evidujte:
+
+- kdo ji vlastní,
+- kdy byla naposledy ověřena,
+- podle čeho byla ověřena,
+- pro jaký typ zákazníka se smí použít,
+- jestli obsahuje obchodně citlivou nebo neveřejnou informaci,
+- kdy má proběhnout další revize.
+
+Ukázka:
+
+```markdown
+## Otázka: Kde jsou uložena zákaznická data?
+
+- Schválená odpověď: Produkční zákaznická data ukládáme v evropském regionu. Konkrétní subprocesory a role jsou uvedené v aktuálním seznamu subprocesorů.
+- Vlastník: technický lead + privacy owner
+- Ověřeno: 2026-08-26 podle produkční infrastruktury a registru dodavatelů
+- Použití: běžné B2B dotazníky, sales RFP, trust centrum
+- Neveřejná příloha: detailní architektura pouze po NDA
+- Další revize: kvartálně nebo při změně hostingu/subprocesora
+```
+
+Datum pravdy je důležitější než datum dokumentu. Starý dokument může být pořád pravdivý. Nový dokument může být jen čerstvě natřená nepravda. Technologie je v tomhle demokratická: lže v Excelu i Notionu stejně ochotně.
+
+### DI.3 Odpovídejte podle úrovně citlivosti
+
+Ne každá otázka si zaslouží stejnou detailnost. Zákazník potřebuje dost informací k rozhodnutí, ale vy nemusíte posílat interní architekturu každému, kdo umí napsat „security assessment“ do předmětu e-mailu.
+
+Rozumné úrovně odpovědí:
+
+1. **Veřejná odpověď:** vhodná pro trust centrum, web, obchodní materiály a základní dotazník.
+2. **Zákaznická odpověď:** konkrétnější informace pro aktivní obchodní jednání nebo existujícího zákazníka.
+3. **Důvěrná odpověď:** detailní architektura, procesy, interní kontrolní mechanismy nebo výsledky testů; sdílet jen po ověření příjemce a případně NDA.
+4. **Nesdílet:** secrets, interní tokeny, přesné bezpečnostní mezery, osobní data, neveřejné incidentní detaily nebo informace o jiném zákazníkovi.
+
+Příklad:
+
+- Veřejně: „Používáme vícefaktorové ověřování pro interní administrativní přístupy.“
+- Zákazníkovi: „Administrativní přístupy vyžadují individuální účty, MFA a pravidelnou access review.“
+- Důvěrně: „Detailní seznam administrátorských rolí a konkrétních systémů můžeme sdílet v rámci bezpečnostního review.“
+- Nesdílet: screenshot interní administrace s e-maily zákazníků. Ano, tohle by nemělo být potřeba říkat. A přesto jsme tady.
+
+### DI.4 Trust centrum má být pravdivé, stručné a udržované
+
+Malý SaaS nemusí mít enterprise trust portál se šesti animacemi štítu. Stačí stránka nebo dokument, který odpoví na opakované otázky a ukáže, že provoz není improvizovaná magie.
+
+Minimální trust centrum:
+
+- kontaktní e-mail pro bezpečnost a privacy,
+- stručný popis hostingu a datové rezidence,
+- seznam hlavních subprocesorů,
+- odkaz na DPA nebo postup, jak ji získat,
+- přehled bezpečnostních opatření bez zbytečně citlivých detailů,
+- informace o zálohách a obnově na rozumné úrovni,
+- postup pro hlášení zranitelností,
+- status page nebo odkaz na provozní komunikaci,
+- datum poslední aktualizace.
+
+Privacy-first verze trust centra zdůrazňuje i to, co záměrně neděláte: žádné reklamní trackery v produktu, minimum osobních dat v logách, agregované metriky místo profilování jednotlivců, evropské provozní preference a jasná cesta k exportu nebo smazání dat.
+
+### DI.5 AI odpovědi držte odděleně od obecné bezpečnosti
+
+AI funkce dnes vyvolávají vlastní sadu otázek. Nestačí odpovědět „používáme AI bezpečně“. To je věta s nutriční hodnotou mokrého ubrousku.
+
+U AI funkcí mějte samostatný blok:
+
+- jaké typy vstupů AI zpracovává,
+- zda se posílají osobní, zákaznická nebo důvěrná data,
+- kde se zpracování odehrává,
+- zda dodavatel používá vstupy k tréninku nebo zlepšování služby,
+- jak se odděluje kontext mezi zákazníky,
+- jak se logují prompty, výstupy a chyby,
+- jak se řeší prompt injection a nedůvěryhodný obsah,
+- kdo schvaluje zapnutí AI funkce pro zákazníka,
+- jak může zákazník AI funkci vypnout nebo omezit.
+
+Pokud odpověď neznáte, napište „ověřujeme“ a vytvořte úkol. Nehádejte. U bezpečnosti a privacy je přesná nevědomost lepší než sebevědomá pohádka. Pohádky patří dětem, investorům v seed decku a občas keynote prezentacím. Ne do DPA.
+
+### DI.6 Šablona: trust odpověď
+
+```markdown
+# Trust odpověď
+
+## Otázka
+- Původní dotaz zákazníka:
+- Téma: data / přístupy / provoz / aplikace / dodavatelé / AI / incidenty
+- Citlivost odpovědi: veřejná / zákaznická / důvěrná / nesdílet
+
+## Schválená odpověď
+- Krátká odpověď:
+- Delší odpověď:
+- Odkazy na veřejné dokumenty:
+- Přílohy jen po schválení:
+
+## Ověření
+- Vlastník:
+- Ověřeno dne:
+- Ověřeno podle:
+- Platí pro produkt/verzi:
+- Další revize:
+
+## Privacy-first kontrola
+- Zmiňujeme jen data, která opravdu zpracováváme:
+- Neprozrazujeme informace o jiném zákazníkovi:
+- Neuvádíme secrets, interní URL ani zbytečně detailní topologii:
+- Pokud je v odpovědi AI zpracování, uvádíme hranice dat a opt-out:
+```
+
+### DI.7 Checklist: dotazník bez copy-paste rizika
+
+- [ ] Máme knihovnu schválených bezpečnostních a privacy odpovědí.
+- [ ] Každá odpověď má vlastníka, datum ověření a datum další revize.
+- [ ] Odpovědi rozlišují veřejnou, zákaznickou, důvěrnou a nesdílenou úroveň.
+- [ ] Trust centrum obsahuje datovou rezidenci, subprocesory, DPA postup, bezpečnostní kontakt a datum aktualizace.
+- [ ] AI funkce mají samostatné odpovědi o datech, tréninku, logování, izolaci kontextu a vypnutí.
+- [ ] Odpovědi se porovnávají s realitou produktu před každým větším RFP nebo renewalem.
+- [ ] Neodesíláme interní architekturu, screenshoty ani zranitelnosti bez jasného důvodu a schválení.
+- [ ] Po každém novém dotazníku doplníme knihovnu místo dalšího ručního kopírování.
+
+### Mini cvičení: trust knihovna za 60 minut
+
+1. Vezměte poslední dva bezpečnostní dotazníky od zákazníků.
+2. Vyberte 20 otázek, které se opakují nebo budou opakovat.
+3. Rozdělte je do témat: data, přístupy, provoz, aplikace, dodavatelé, AI, incidenty.
+4. Ke každé napište krátkou odpověď a označte citlivost.
+5. U pěti nejrizikovějších odpovědí ověřte realitu v systému, ne jen v dokumentaci.
+6. Vytvořte jednu veřejnou trust stránku nebo interní trust dokument s datem aktualizace.
+7. Zapište tři mezery, které dotazníky odhalily, jako backlog položky.
+
+Výsledek není „vyplněný dotazník“. Výsledek je prodejní a provozní paměť, která šetří čas a snižuje riziko, že tým slíbí něco, co produkt neumí. Což je v B2B překvapivě dobrý trik: nelhat omylem.
+
+### Codyho komentář
+
+Můj pohled: bezpečnostní dotazníky jsou nepříjemné hlavně tehdy, když nemáte jasno. Jakmile máte datovou mapu, registr dodavatelů, access review, incident proces a pravdivé trust odpovědi, dotazník se změní z hororu na nudnou administrativu. A nudná administrativa je v bezpečnosti často známka zdraví. Nikdo nikdy neřekl „ten audit byl vzrušující“ a myslel tím něco dobrého.
+
+### Zdroje k příloze DI
+
+- GDPR, zejména čl. 5, 28, 32, 33 a 34 — zásady zpracování, zpracovatelé, bezpečnost, oznamování porušení zabezpečení a komunikace subjektům údajů: https://eur-lex.europa.eu/eli/reg/2016/679/oj
+- Směrnice NIS2, čl. 21 — řízení kybernetických rizik, kontinuita provozu, bezpečnost dodavatelského řetězce a incident handling: https://eur-lex.europa.eu/eli/dir/2022/2555/oj
+- ENISA — cloud security a praktické oblasti řízení bezpečnosti, přístupů, provozu a dodavatelů: https://www.enisa.europa.eu/topics/cloud-and-big-data/cloud-security
+- OWASP Top 10 for LLM Applications — rizika jako prompt injection, sensitive information disclosure a agentní oprávnění u AI funkcí: https://owasp.org/www-project-top-10-for-large-language-model-applications/
+- Evropská komise — AI Act jako evropský rámec pro důvěryhodné a bezpečné používání AI systémů: https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai
+
 ## Pracovní log
+
+- 2026-08-26: Přidána příloha DI „Bezpečnostní dotazníky a trust odpovědi bez copy-paste rizika“ s knihovnou schválených odpovědí, vlastníky a datem ověření, úrovněmi citlivosti, trust centrem, AI blokem, šablonou odpovědi, checklistem, hodinovým cvičením a ověřenými zdroji.
 
 - 2026-08-26: Přidána příloha DH „Incidentní komunikace bez paniky, mlžení a právnického kouře“ s klasifikací incidentů podle dopadu, šablonami prvních zpráv, GDPR rozhodovací stopou, status page/RSS přístupem, post-incident shrnutím, checklistem, drillem a ověřenými zdroji.
 
