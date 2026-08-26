@@ -26926,7 +26926,175 @@ Můj pohled: malé týmy by měly brát test obnovy stejně vážně jako deploy
 - EDPB uvádí v pokynech k DPIA, že posouzení rizik má zohlednit povahu, rozsah, kontext a účely zpracování i opatření ke zmírnění rizik: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/data-protection-impact-assessment-dpia_en
 - Evropská komise popisuje Data Act jako rámec posilující přístup k datům, sdílení dat a snazší přechod mezi cloudovými službami: https://digital-strategy.ec.europa.eu/en/policies/data-act
 
+## DH. Incidentní komunikace bez paniky, mlžení a právnického kouře
+
+Zálohy řeší, jak systém znovu postavit na nohy. Incidentní komunikace řeší, jak u toho neztratit důvěru lidí. A to je často těžší než technická oprava. Server se dá obnovit ze snapshotu. Důvěra zákazníka ze snapshotu bohužel ne, i když by to byla velmi populární SaaS funkce.
+
+Malý tým nepotřebuje krizové komunikační oddělení s pěti barevnými prezentacemi. Potřebuje předem domluvený postup: kdo rozhoduje, kdo píše, komu se píše, co se smí říct hned, co musí počkat na ověření a kde se uchovává stopa rozhodnutí. Cílem není vypadat dokonale. Cílem je být rychlý, přesný, srozumitelný a férový.
+
+### DH.1 Rozdělte incidenty podle publika, ne podle interního stresu
+
+Interně vypadá každý incident dramaticky, protože někdo kouká na červený alert, někdo na logy a někdo na chatu píše „tohle se ještě nikdy nestalo“. Z pohledu zákazníka ale existují hlavně tři otázky: funguje mi služba, jsou moje data v bezpečí a mám něco udělat?
+
+Proto incidenty komunikujte podle dopadu:
+
+- **Provozní výpadek:** služba nejde, je pomalá nebo část funkcí nefunguje. Zákazník potřebuje vědět stav, rozsah, obcházení problému a další update.
+- **Datový incident:** mohlo dojít ke ztrátě, neoprávněnému přístupu, změně nebo zveřejnění osobních či firemních dat. Zákazník potřebuje vědět, co je potvrzené, jaké typy dat jsou dotčené, jaké kroky děláte a jestli má jednat.
+- **Bezpečnostní slabina:** našli jste zranitelnost, chybnou konfiguraci nebo kompromitovaný přístup, ale dopad se teprve ověřuje. Zákazník nepotřebuje detektivku po minutách, ale potřebuje vědět, zda je vystaven riziku.
+- **Tichý interní incident:** chyba byla zachycena před dopadem na zákazníka. Ne vždy vyžaduje externí komunikaci, ale vždy vyžaduje interní zápis a poučení.
+
+Praktické pravidlo: nepište podle toho, jak moc tým panikaří. Pište podle toho, co se změnilo pro uživatele, data a důvěru.
+
+### DH.2 První zpráva má přiznat problém, ne vyhrát literární cenu
+
+První update nemusí znát příčinu. Musí ale dát najevo, že problém vidíte, řešíte a řeknete další update v konkrétním čase. Mlčení vytváří prostor pro spekulace. Přehnaná jistota vytváří budoucí opravu vlastního tvrzení. Ani jedno není sexy.
+
+Dobrá první zpráva má pět částí:
+
+1. **Co se děje:** stručný popis dopadu bez interního žargonu.
+2. **Koho se to týká:** všichni zákazníci, konkrétní region, konkrétní funkce, konkrétní integrace.
+3. **Co už víme:** jen ověřená fakta.
+4. **Co děláme:** aktuální zásah, vyšetření, dočasné omezení, kontakt s dodavatelem.
+5. **Kdy bude další update:** čas nebo interval, ne neurčité „brzy“.
+
+Ukázka pro výpadek:
+
+> Od 10:35 řešíme zvýšenou chybovost při přihlašování. Dotýká se části uživatelů v EU instanci. Data zákazníků podle aktuálního stavu nejsou dotčená. Pracujeme na obnově přihlašovací služby a další update dáme v 11:15.
+
+Ukázka pro datový incident, kde ještě není potvrzený rozsah:
+
+> Prověřujeme bezpečnostní událost související s přístupem k administraci. Zatím nemáme potvrzený neoprávněný export dat. Preventivně jsme zneplatnili dotčené přístupy, kontrolujeme auditní logy a připravujeme další kroky. Další update pošleme dnes do 16:00.
+
+### DH.3 Datový incident má vlastní rozhodovací stopu
+
+GDPR definuje porušení zabezpečení osobních údajů široce: nejde jen o únik tabulky do internetu, ale i o ztrátu, změnu, neoprávněné zpřístupnění nebo nedostupnost osobních údajů. U incidentu proto nestačí říct „asi dobrý“. Potřebujete doložit, jak jste rozhodli.
+
+Minimální rozhodovací stopa:
+
+- kdy byl incident zjištěn,
+- kdo ho klasifikoval,
+- jaké systémy a typy dat mohou být dotčené,
+- jestli jde o osobní údaje,
+- jestli hrozí riziko pro práva a svobody lidí,
+- zda a kdy byla kontaktována dozorová autorita,
+- zda a kdy byli informováni dotčení lidé,
+- jaká opatření byla provedena,
+- proč tým rozhodl právě takto.
+
+Pokud je porušení zabezpečení osobních údajů pravděpodobně rizikové pro práva a svobody lidí, GDPR počítá s oznámením dozorovému úřadu bez zbytečného odkladu a pokud možno do 72 hodin od okamžiku, kdy se o něm správce dozvěděl. Pokud je pravděpodobné vysoké riziko pro lidi, řeší se i komunikace dotčeným osobám jasným a jednoduchým jazykem. To není část, kde improvizujete v pátek v 17:58, protože „ono to nějak dopadne“. Ono dopadne. Jen ne nutně dobře.
+
+### DH.4 Status page a přímé kanály jsou lepší než sociální chaos
+
+Privacy-first komunikace znamená, že zákazník nemusí sledovat cizí sociální síť, aby zjistil, jestli váš produkt funguje. Status stránka, RSS/Atom feed incidentů, e-mail pro administrátory účtu a přímý odkaz v aplikaci jsou civilizovanější než honit lidi na platformu, která si z jejich úzkosti udělá engagement.
+
+Minimální komunikační sada pro malý SaaS:
+
+- veřejná nebo zákaznická status stránka bez invazivního trackingu,
+- e-mailový distribuční seznam pro administrátory účtů,
+- interní incident kanál s jasným vlastníkem,
+- šablony pro první update, průběžný update a závěrečné shrnutí,
+- RSS/Atom feed změn a incidentů, pokud to váš status nástroj umí,
+- kontaktní adresa pro bezpečnostní hlášení, například `security@firma.cz`.
+
+Codyho komentář: sociální sítě mohou být doplňkový megafon, ale nemají být jediný zdroj pravdy. Když produkt spadne a status je jen v postu mezi memy, není to transparentnost. Je to únik informací do cirkusu.
+
+### DH.5 Závěrečné shrnutí pište jako produktový dokument
+
+Incident nekončí tím, že alert zezelená. Končí až tehdy, když tým ví, co se stalo, co se změnilo a co se udělá, aby stejný problém nebyl rutinní repríza. Závěrečné shrnutí má být konkrétní, ale nemá odhalovat detaily, které by zbytečně pomohly útočníkům.
+
+Struktura post-incident shrnutí:
+
+- **Dopad:** co bylo nedostupné, zpomalené, chybné nebo rizikové.
+- **Časová osa:** začátek, detekce, mitigace, obnova, ukončení.
+- **Příčina:** ověřená technická nebo procesní příčina, pokud je známa.
+- **Data:** zda byla dotčená osobní nebo zákaznická data, případně jaká kategorie.
+- **Opatření:** co už bylo opraveno a co má termín.
+- **Poučení:** změny v monitoringu, testech, dokumentaci, oprávněních nebo dodavatelích.
+
+Vyhněte se formulacím typu „bereme bezpečnost velmi vážně“, pokud za nimi není konkrétní krok. Každý to píše. Někteří to dokonce myslí vážně. Čtenář to ale pozná až podle toho, jestli přidáte konkrétní změnu, termín a odpovědnost.
+
+### DH.6 Šablona: incidentní komunikační karta
+
+## Základ
+
+- Název incidentu:
+- Datum a čas zjištění:
+- Vlastník incidentu:
+- Technický lead:
+- Komunikační lead:
+- Právní/privacy kontakt:
+
+## Dopad
+
+- Dotčená služba nebo funkce:
+- Dotčení zákazníci nebo region:
+- Aktuální stav: vyšetřujeme / mitigujeme / obnoveno / uzavřeno
+- Dopad na dostupnost:
+- Dopad na integritu dat:
+- Dopad na důvěrnost dat:
+
+## Komunikace
+
+- První interní update:
+- První externí update:
+- Další plánovaný update:
+- Kanály: status page / e-mail / aplikace / přímý kontakt
+- Co říkáme zákazníkům, aby udělali:
+- Co zatím nevíme a nesmíme tvrdit:
+
+## GDPR a privacy
+
+- Jsou dotčené osobní údaje?
+- Jaké kategorie údajů?
+- Jaké kategorie subjektů údajů?
+- Je pravděpodobné riziko pro práva a svobody lidí?
+- Je pravděpodobné vysoké riziko?
+- Je potřeba oznámení dozorovému úřadu?
+- Je potřeba komunikace dotčeným osobám?
+- Kde je uložené rozhodnutí a důvody?
+
+## Uzavření
+
+- Co bylo opraveno:
+- Co zůstává jako následná práce:
+- Vlastník následných úkolů:
+- Termín review:
+- Odkaz na post-incident shrnutí:
+
+### DH.7 Checklist: komunikace bez mlhy
+
+- [ ] Máme jednoho vlastníka incidentu a jednoho vlastníka komunikace.
+- [ ] První update popisuje dopad na uživatele, ne interní chaos.
+- [ ] Každé tvrzení v externí komunikaci je ověřené.
+- [ ] Další update má konkrétní čas nebo interval.
+- [ ] Status stránka a e-mail fungují bez invazivních trackerů.
+- [ ] Datový incident má samostatnou rozhodovací stopu.
+- [ ] U osobních údajů je posouzené riziko podle GDPR.
+- [ ] Komunikace zákazníkům říká, jestli mají něco udělat.
+- [ ] Závěrečné shrnutí obsahuje dopad, časovou osu, příčinu a opatření.
+- [ ] Následné úkoly mají vlastníka, termín a prioritu v backlogu.
+
+### Mini cvičení: incidentní komunikační drill za 45 minut
+
+1. Vyberte realistický scénář: výpadek přihlášení, chybný e-mail zákazníkům, uniklý API token nebo podezření na neoprávněný admin přístup.
+2. Za 10 minut napište první externí update podle šablony v DH.2.
+3. Za 10 minut vyplňte privacy část incidentní karty.
+4. Za 10 minut rozhodněte, jaké kanály použijete a kdo je vlastní.
+5. Za 10 minut napište osnovu závěrečného shrnutí.
+6. Posledních 5 minut zapište tři mezery v procesu, které opravíte před skutečným incidentem.
+
+Výstupem není divadlo pro audit. Výstupem je schopnost během reálného problému nemyslet na formát, ale na rozhodnutí. Formát už máte připravený. Gratuluju, právě jste si koupili trochu klidu do budoucího průšvihu.
+
+### Zdroje k příloze DH
+
+- GDPR, čl. 4 odst. 12, čl. 32, čl. 33 a čl. 34 — definice porušení zabezpečení osobních údajů, bezpečnost zpracování, oznámení dozorovému úřadu a komunikace subjektům údajů: https://eur-lex.europa.eu/eli/reg/2016/679/oj
+- EDPB — Guidelines 01/2021 on Examples regarding Personal Data Breach Notification: https://www.edpb.europa.eu/documents/guideline/guidelines-012021-on-examples-regarding-personal-data-breach-notification_en
+- ENISA — incident response a kybernetická odolnost v evropském kontextu: https://www.enisa.europa.eu/topics/incident-response
+- OWASP Incident Response Project — praktické bezpečnostní postupy pro přípravu a reakci: https://owasp.org/www-project-incident-response/
+
 ## Pracovní log
+
+- 2026-08-26: Přidána příloha DH „Incidentní komunikace bez paniky, mlžení a právnického kouře“ s klasifikací incidentů podle dopadu, šablonami prvních zpráv, GDPR rozhodovací stopou, status page/RSS přístupem, post-incident shrnutím, checklistem, drillem a ověřenými zdroji.
 
 - 2026-08-26: Přidána příloha DG „Zálohy a obnova bez falešného pocitu bezpečí“ s rozdělením datových vrstev, RPO/RTO tabulkou, oddělením záloh od produkční havárie, restore drillem, privacy-first pravidly, kartou zálohování, checklistem, hodinovým cvičením a ověřenými ENISA/NIS2/EDPB/EU zdroji.
 
