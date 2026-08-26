@@ -26168,7 +26168,225 @@ Výstupem má být jedna schvalovací karta, ne desetistránková politika. Mal�
 - NIST AI Risk Management Framework a Generative AI Profile poskytují rámec pro mapování, měření a řízení rizik AI systémů: https://www.nist.gov/itl/ai-risk-management-framework
 - Evropská komise: Principles of the GDPR připomíná zásady minimalizace dat, účelového omezení, omezení uložení a odpovědnosti: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
 
+## DD. Exporty dat a portabilita bez rukojmí v databázi
+
+Každý SaaS jednou zažije větu: „Potřebujeme export všech dat.“ Někdy je to audit, někdy migrace, někdy nespokojený zákazník, někdy právo subjektu údajů na přenositelnost podle GDPR. Špatně navržený produkt v tu chvíli začne panikařit: ruční SQL, zip v příloze, heslo poslané v dalším e-mailu a někde v koutě pláče člověk, který ví, že v exportu omylem skončily interní poznámky supportu.
+
+Privacy-first SaaS má export jako normální produktovou funkci. Ne jako nouzovou akci pro seniorního vývojáře s přístupem do produkční databáze. Data patří zákazníkovi v rozsahu, ve kterém je do systému vložil nebo v něm vznikla jeho používáním. Vaše práce je udělat z odchodu, auditu nebo interní zálohy řízený proces, ne datovou rukojmí situaci.
+
+GDPR v článku 20 řeší právo na přenositelnost osobních údajů a mluví o strukturovaném, běžně používaném a strojově čitelném formátu. EDPB k tomu vysvětluje praktické hranice: nejde o libovolnou kopii všeho, ale o data poskytnutá subjektem údajů, typicky zpracovávaná na základě souhlasu nebo smlouvy a automatizovanými prostředky. Evropský Data Act pak posouvá téma i do cloud switchingu a vendor lock-inu: zákazník nemá být uvězněný jen proto, že export bolí.
+
+*Codyho komentář:* SaaS, ze kterého nejde rozumně odejít, není „sticky“. Je to hotel bez požárního východu. Možná v něm lidé zůstanou déle, ale ne proto, že vás milují.
+
+### DD.1 Rozdělte exporty podle účelu
+
+Jeden univerzální export většinou skončí jako chaos. Někdo chce účetní doklady, někdo seznam projektů, někdo osobní data konkrétního uživatele, někdo kompletní migrační balík pro jiný systém. Každý účel má jiné oprávnění, jiný formát, jinou retenci a jiné riziko.
+
+Použijte čtyři základní typy exportů:
+
+| Typ exportu | Kdo ho typicky potřebuje | Obsah | Riziko |
+|---|---|---|---|
+| Uživatelský export | konkrétní uživatel | profil, nastavení, vlastní obsah, historie akcí v přiměřeném rozsahu | únik osobních údajů |
+| Admin export | zákaznický admin | projekty, členové, konfigurace, fakturační metadata | únik dat celé organizace |
+| Migrační export | zákazník nebo partner | strukturovaná data pro import jinam | vendor lock-in, nekompletní mapování |
+| Auditní export | compliance, bezpečnost, vedení | logy, přístupy, změny konfigurace, doklady | příliš široký přístup k citlivým záznamům |
+
+Praktické pravidlo: export nemá být „stáhni databázi“. Export má být produktový kontrakt. Musí mít název, účel, oprávnění, formát, rozsah, časový limit dostupnosti a auditní stopu.
+
+Příklad dobrého produktového popisu:
+
+```text
+Export: Workspace migration package
+Účel: přenos aktivních projektů do jiného systému
+Kdo smí spustit: owner workspace
+Formát: ZIP obsahující manifest.json + CSV + JSONL přílohy
+Co obsahuje: projekty, členství, role, štítky, veřejné poznámky
+Co neobsahuje: interní support poznámky, systémové trace logy, tajné tokeny
+Dostupnost odkazu: 24 hodin
+Audit: kdo export spustil, kdy, pro jaký workspace, velikost, hash balíku
+```
+
+### DD.2 Exportní formát navrhněte pro čtení i import
+
+PDF je hezké pro člověka, ale mizerné pro migraci. Screenshot je důkaz zoufalství. Pokud má export sloužit portabilitě, použijte formáty, které se dají otevřít, verzovat a zpracovat bez vašeho proprietárního klienta.
+
+Doporučený základ:
+
+- **CSV** pro tabulková data, která bude číst člověk nebo účetní nástroj.
+- **JSON** pro hierarchické objekty menšího rozsahu.
+- **JSONL** pro dlouhé seznamy událostí, logů nebo záznamů.
+- **ZIP** jako kontejner pro více souborů, manifest a přílohy.
+- **README.md** uvnitř balíku s popisem polí, časových zón, verzí schématu a omezení.
+
+Každý export by měl mít manifest:
+
+```json
+{
+  "export_type": "workspace_migration",
+  "schema_version": "2026-08-26.1",
+  "workspace_id": "ws_123",
+  "created_at": "2026-08-26T17:30:00Z",
+  "requested_by": "user_456",
+  "files": [
+    { "path": "projects.csv", "records": 42, "sha256": "..." },
+    { "path": "members.csv", "records": 8, "sha256": "..." },
+    { "path": "activity.jsonl", "records": 1204, "sha256": "..." }
+  ],
+  "exclusions": [
+    "internal_support_notes",
+    "secrets",
+    "raw_request_logs"
+  ]
+}
+```
+
+Manifest je nudný, ale zachraňuje nervy. Když zákazník řekne „export je nekompletní“, máte společný jazyk: jaká verze schématu, kolik souborů, kolik záznamů, jaký hash a co bylo úmyslně vynecháno.
+
+### DD.3 Portabilita neznamená exportovat cizí data
+
+Nejčastější chyba: tým si řekne, že „uživatel chce svá data“, a pošle mu i data jiných lidí, interní komentáře, systémové skóre nebo bezpečnostní logy. To není vstřícnost. To je únik v dárkovém balení.
+
+Před každým exportem si položte tři otázky:
+
+1. **Komu data patří z hlediska účelu?** Uživatel, workspace, zákaznická organizace, provozovatel?
+2. **Kdo je oprávněný export získat?** Běžný člen, admin, owner, DPO, billing kontakt?
+3. **Která data mohou poškodit jiné osoby nebo bezpečnost?** Poznámky supportu, interní rizikové skóre, IP adresy, tokeny, session metadata, antifraud signály?
+
+Příklad rozdílu:
+
+| Datový prvek | Uživatelský export | Admin export | Auditní export |
+|---|---:|---:|---:|
+| jméno a e-mail uživatele | ano | ano | ano |
+| vlastní dokumenty uživatele | ano | podle role | ne vždy |
+| role ve workspace | ano | ano | ano |
+| interní support poznámka | ne | ne | jen omezeně a oprávněně |
+| raw access log | ne | ne | agregovaně nebo časově omezeně |
+| API token | nikdy | nikdy | nikdy |
+
+Exporty navrhujte s minimem dat. Když si nejste jistí, vytvořte oddělené balíky místo jednoho obřího. Je lepší mít `user-data.zip`, `workspace-config.zip` a `audit-summary.zip` než jeden „everything-final-final.zip“, který nikdo nechce právně vlastnit.
+
+### DD.4 Export musí být bezpečná asynchronní operace
+
+Malý export profilu může vzniknout hned. Export workspace s tisíci položkami má být job, ne HTTP request čekající pět minut za load balancerem. Asynchronní export je bezpečnější, škálovatelnější a lépe auditovatelný.
+
+Minimální flow:
+
+1. Uživatel zvolí typ exportu a rozsah.
+2. Aplikace ověří oprávnění v okamžiku žádosti.
+3. Systém vytvoří export job se stavem `queued`.
+4. Worker načte data přes aplikační vrstvu, ne přes ad-hoc SQL bokem.
+5. Export se uloží šifrovaně do dočasného úložiště v EU regionu.
+6. Uživatel dostane odkaz s krátkou platností.
+7. Stažení se zaloguje bez ukládání obsahu exportu.
+8. Po expiraci se soubor smaže a job zůstane jako metadata.
+
+Bezpečnostní minimum:
+
+- Exportní odkaz nesmí být veřejný permanentní soubor.
+- URL má mít krátkou platnost a ideálně vyžadovat přihlášeného uživatele.
+- Velké exporty mají mít rate limit a notifikaci vlastníkovi workspace.
+- Exportní job má uložit důvod, typ, rozsah, žadatele a výsledek.
+- Soubor se po expiraci fyzicky maže nebo přechází do řízené retenční fronty.
+- Support nemá ručně posílat export jako e-mailovou přílohu.
+
+### DD.5 Exit plán je součást důvěry
+
+Vendor lock-in často nevzniká zlým úmyslem. Vzniká odkládáním. Nejdřív nemáte export, protože MVP. Pak nemáte export, protože by to trvalo. Pak máte enterprise zákazníka a export je najednou politická otázka. Gratuluju, právě jste z technického dluhu vyrobili obchodní riziko.
+
+Exit plán pro zákazníka má odpovědět:
+
+- Jak získá kopii svých aktivních dat?
+- Jak získá faktury a smluvní dokumenty?
+- Jak dlouho po ukončení účtu data držíte?
+- Jak požádá o výmaz nebo omezení zpracování?
+- Co zůstává v účetních, bezpečnostních nebo právních záznamech?
+- Jaký formát exportu dostane?
+- Jak ověří, že export je kompletní?
+
+Privacy-first positioning tady funguje výborně. Místo „nebojte, vaše data jsou u nás bezpečně“ řekněte konkrétně: „Vaše data umíte vyexportovat v otevřeném formátu, exportní odkazy expirují, interní poznámky nikdy nemícháme do zákaznického balíku a retenční pravidla jsou popsaná.“ To je důvěra, ne kouř z marketingového stroje.
+
+### DD.6 Šablona: exportní karta
+
+```markdown
+# Exportní karta
+
+## Základ
+- Název exportu:
+- Účel:
+- Typ: uživatelský / admin / migrační / auditní
+- Vlastník v týmu:
+- Schéma verze:
+
+## Oprávnění
+- Kdo smí export spustit:
+- Kdo dostane notifikaci:
+- Je potřeba druhý signál:
+- Jak se řeší odebraný přístup během běžícího jobu:
+
+## Rozsah dat
+- Obsahuje:
+- Neobsahuje:
+- Speciální citlivá pole:
+- Data třetích osob:
+- Retenční omezení:
+
+## Formát
+- Soubory:
+- Kódování:
+- Časová zóna:
+- Identifikátory:
+- README / datový slovník:
+
+## Provoz
+- Maximální velikost:
+- Expirace odkazu:
+- Úložiště a region:
+- Mazání po expiraci:
+- Audit log:
+- Test obnovy/importu:
+```
+
+### DD.7 Checklist: export bez rukojmí a úniku
+
+- [ ] Každý export má jasný účel a vlastníka.
+- [ ] Export není přímý dump produkční databáze.
+- [ ] Oprávnění se ověřují při žádosti i při stažení.
+- [ ] Formát je otevřený, zdokumentovaný a strojově čitelný.
+- [ ] Balík obsahuje manifest a verzi schématu.
+- [ ] Export neobsahuje tajné tokeny, interní support poznámky ani zbytečné logy.
+- [ ] Data třetích osob jsou vyloučená, omezená nebo agregovaná podle účelu.
+- [ ] Exportní odkazy expirují a soubory se mažou podle retenčního pravidla.
+- [ ] Stažení se loguje jako metadata, ne jako kopie obsahu.
+- [ ] Existuje test, který ověří, že export jde znovu načíst nebo smysluplně importovat.
+- [ ] Exit plán je popsaný v dokumentaci pro zákazníka.
+
+### Mini cvičení: export audit za 60 minut
+
+1. Vyberte jeden nejžádanější export ve vašem produktu.
+2. Napište jeho exportní kartu podle šablony výše.
+3. Seznamte všechna pole, která dnes export obsahuje nebo by obsahovat mohl.
+4. Označte osobní údaje, data třetích osob, tajemství a interní poznámky.
+5. Rozhodněte, co do exportu nepatří, i kdyby to bylo technicky snadné přidat.
+6. Přidejte manifest se schéma verzí, počty záznamů a seznamem vyloučení.
+7. Nastavte expiraci odkazu a pravidlo mazání exportního souboru.
+8. Otestujte obnovu: umí člověk bez přístupu do vašeho kódu pochopit obsah balíku?
+
+Výstupem má být jeden bezpečnější export, ne univerzální datová apokalypsa. Jakmile máte jeden dobře navržený export, další se staví rychleji: stejný manifest, stejné oprávnění, stejný auditní model, jen jiný rozsah dat.
+
+### Codyho komentář
+
+Nejlepší důkaz, že respektujete zákaznická data, je možnost je důstojně vrátit. Ne až po třech ticketech, NDA, ručním SQL a omluvě „kolega je na dovolené“. Export je produktová funkce důvěry. Když zákazník ví, že může odejít, paradoxně má méně důvodů utíkat.
+
+### Zdroje k příloze DD
+
+- GDPR článek 20 definuje právo na přenositelnost osobních údajů ve strukturovaném, běžně používaném a strojově čitelném formátu: https://gdpr-info.eu/art-20-gdpr/
+- EDPB Guidelines on the right to data portability WP242 rev.01 vysvětlují praktické hranice a doporučení k právu na portabilitu: https://www.edpb.europa.eu/documents/guideline/guidelines-on-the-right-to-data-portability-under-regulation-2016679-wp242_en
+- Evropská komise — Data Act explained popisuje pravidla pro přístup k datům, cloud switching, interoperabilitu a postupné odstranění switching poplatků včetně data egress: https://digital-strategy.ec.europa.eu/en/factpages/data-act-explained
+
 ## Pracovní log
+
+- 2026-08-26: Přidána příloha DD „Exporty dat a portabilita bez rukojmí v databázi“ s typy exportů, otevřenými formáty, manifestem, oprávněními, ochranou dat třetích osob, asynchronním exportním flow, exit plánem, exportní kartou, checklistem, hodinovým auditem a ověřenými GDPR/EDPB/EU Data Act zdroji.
+
 
 - 2026-08-26: Přidána příloha DC „Schvalovací brány pro AI akce bez klikacího divadla“ s dopadovými úrovněmi, preview před/po, druhým signálem pro kritické akce, oddělením rolí, approval logem, odmítáním návrhů, šablonou, checklistem, 45minutovým auditem a ověřenými OWASP/NIST/EU zdroji.
 
