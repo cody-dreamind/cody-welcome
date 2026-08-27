@@ -27714,7 +27714,167 @@ Můj pohled — Cody: náklady nejsou nudná účetní kapitola po produktu. Jso
 - Google Cloud Architecture Framework: principy cost optimization, včetně měření, řízení spotřeby a optimalizace zdrojů: https://cloud.google.com/architecture/framework/cost-optimization
 - EDPB: Guidelines 4/2019 on Article 25 Data Protection by Design and by Default, včetně minimalizace dat a omezení účelu: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-42019-article-25-data-protection-design-and_en
 
+## DM. Retence a mazání dat bez digitálního syslení
+
+Malé SaaSy mají zvláštní talent ukládat všechno „pro jistotu“. Staré logy, opuštěné účty, nedokončené importy, support přílohy, preview exporty, webhook payloady, testovací databáze, analytické události a tři zálohy záloh, o kterých už nikdo neví. Vypadá to jako opatrnost. Ve skutečnosti je to často jen digitální syslení s právním kloboukem.
+
+Privacy-first provoz začíná jednoduchou větou: data mají mít důvod existovat. Když důvod skončí, má existovat plán, jak data omezit, anonymizovat, archivovat nebo smazat. Ne až „jednou při úklidu“. Automaticky, ověřitelně a tak, aby tým věděl, co se stane.
+
+GDPR pracuje mimo jiné se zásadou omezení uložení: osobní údaje nemají být v identifikovatelné podobě déle, než je nutné pro účel zpracování. Vedle toho existuje právo na výmaz v situacích podle čl. 17 GDPR. Praktický překlad pro SaaS: nestačí mít tlačítko „smazat účet“. Musíte vědět, která data mizí hned, která se drží kvůli právní povinnosti, která se anonymizují a která zůstávají v auditní stopě s omezeným rozsahem.
+
+### DM.1 Začněte účelem, ne tabulkou
+
+Retenční politika napsaná podle databázových tabulek bývá přesná a zároveň k ničemu. Uživatel se neptá, co je v `user_events_archive_v2`. Ptá se, proč jeho data pořád máte. Proto začněte kategoriemi podle účelu.
+
+Příklad kategorií:
+
+| Kategorie dat | Účel | Typická retenční otázka |
+|---|---|---|
+| Účet a identita | přihlášení, správa organizace, bezpečnost | co zůstává po zrušení účtu? |
+| Fakturace | účetnictví, platby, daňové povinnosti | co musíme držet kvůli dokladům? |
+| Produktová data | hlavní hodnota produktu | co patří do exportu a co do výmazu? |
+| Support | řešení problémů a incidentů | kdy smažeme přílohy a citlivý kontext? |
+| Provozní logy | bezpečnost, debugging, monitoring | jak dlouho potřebujeme identifikovat uživatele? |
+| Analytika | agregované rozhodování o produktu | jde to anonymizovat nebo agregovat dřív? |
+| AI kontext | návrhy, sumarizace, audit AI akcí | ukládáme obsah, nebo jen metadata akce? |
+
+U každé kategorie napište tři věci: účel, retenční dobu a akci po uplynutí doby. Akce nemusí být vždy smazání. Někdy je správně anonymizace, agregace, omezení přístupu nebo archivace kvůli právní povinnosti. Ale musí to být vědomé rozhodnutí, ne archeologická vrstva v databázi.
+
+### DM.2 Rozlišujte smazání, anonymizaci a archivaci
+
+„Smažeme data“ je hezká věta do marketingu. V provozu je moc hrubá. Potřebujete přesnější slovník.
+
+- **Smazání** znamená, že data už nejsou dostupná v běžném systému ani obnovitelná jako samostatný záznam mimo přiměřený technický doběh záloh.
+- **Anonymizace** znamená, že záznam už nejde rozumně přiřadit ke konkrétní osobě. Nestačí jen přejmenovat e-mail na `deleted@example.com`, pokud zbytek dat pořád osobu prozradí.
+- **Pseudonymizace** snižuje riziko, ale data zůstávají osobními údaji, pokud existuje klíč nebo rozumná cesta zpět.
+- **Archivace** znamená oddělené uložení s omezeným přístupem a jasným důvodem, typicky právním, účetním nebo bezpečnostním.
+- **Agregace** znamená převod na souhrn, například měsíční počet aktivních týmů bez individuálních událostí.
+
+Praktický příklad: po zrušení účtu můžete smazat profilové údaje a produktový obsah, držet fakturační doklady podle účetních povinností, anonymizovat produktové metriky pro historické grafy a nechat omezený bezpečnostní audit log bez obsahu dokumentů. To je úplně jiný systém než jedno magické tlačítko, které buď nesmaže skoro nic, nebo smaže i to, co smazat nesmíte.
+
+### DM.3 Retence musí být vidět v produktu
+
+Retenční pravidla nejsou jen interní dokument. Mají se promítnout do UX, administrace a supportu. Pokud uživatel nahrává soubor pro jednorázový import, řekněte mu, kdy zmizí. Pokud export platí sedm dní, ukažte expiraci. Pokud support příloha obsahuje citlivá data, nabídněte bezpečný kanál a automatické smazání.
+
+Dobré produktové vzory:
+
+- u importu zobrazit „zdrojový soubor smažeme po 7 dnech“,
+- u exportu ukázat datum expirace odkazu,
+- v administraci nabídnout přehled aktivních exportů a API klíčů,
+- u zrušení účtu vysvětlit, co se smaže hned a co zůstává kvůli povinnostem,
+- u supportu oddělit interní poznámky od zákaznického obsahu,
+- u AI funkcí zobrazit, jestli se vstup ukládá, nebo jen zpracuje pro odpověď,
+- v nastavení organizace ukázat datové regiony a retenční principy lidskou řečí.
+
+Privacy-first produkt nemusí uživatele zasypat právní mlhou. Stačí být konkrétní. „Importní soubor smažeme automaticky po dokončení nebo nejpozději do 7 dnů“ je lepší než tři odstavce o oprávněném zájmu, které by neuspal jen právník na espressu.
+
+### DM.4 Výmaz musí být workflow, ne heroický ruční zásah
+
+Když výmaz závisí na tom, že si někdo vzpomene spustit SQL skript, nemáte proces. Máte rituál. A rituály v produkční databázi jsou zábava jen do prvního incidentu.
+
+Výmazové workflow má mít:
+
+1. **Příjem žádosti nebo systémový trigger.** Uživatel zruší účet, administrátor smaže organizaci, vyprší trial, doběhne retenční lhůta nebo přijde žádost podle práv subjektu údajů.
+2. **Ověření identity a oprávnění.** Než smažete data, ověřte, že požadavek dává osoba nebo role, která na to má právo.
+3. **Rozhodnutí podle kategorie dat.** Produktová data, fakturace, audit logy a zálohy nemají vždy stejný režim.
+4. **Provedení přes job nebo stavový proces.** U větších účtů může výmaz trvat. Uživatel má vidět stav, ne prázdnou obrazovku.
+5. **Auditní záznam bez přebytečných dat.** Logujte, že výmaz proběhl, kdo ho spustil, jaký rozsah měl a zda skončil úspěšně. Nelogujte znovu celý obsah, který jste právě mazali. Ano, to se opravdu stává. Software je kreativní.
+6. **Propagace do navázaných systémů.** CRM, billing, support, analytika, mailing, storage, vyhledávací index a AI cache musí mít vlastní krok.
+7. **Zacházení se zálohami.** Zálohy mají technický doběh. Dokumentujte, jak dlouho mohou data zůstat v neaktivních zálohách a jak zabráníte jejich návratu do běžného provozu.
+
+Tým by měl mít runbook pro dvě situace: běžný automatický výmaz a ruční právní žádost. Běžný výmaz má být produktový proces. Právní žádost má mít vlastníka, termín, evidenci a kontrolu výjimek.
+
+### DM.5 Logy a analytika potřebují kratší paměť než produktová data
+
+Produktová data často potřebujete držet tak dlouho, dokud zákazník službu používá. Provozní logy a analytické události ale většinou nepotřebují žít věčně. Čím detailnější jsou, tím kratší by měla být jejich identifikovatelná životnost.
+
+Praktický návrh:
+
+| Datová vrstva | Doporučený princip |
+|---|---|
+| Debug logy | krátká retence, masking citlivých hodnot, přístup jen pro provoz |
+| Bezpečnostní logy | delší retence podle rizika, ale bez obsahu dokumentů a promptů |
+| Produktová analytika | agregace co nejdříve, minimum identifikátorů |
+| Webová analytika | cookieless nebo consent-aware měření, agregované reporty |
+| AI observabilita | metadata akce a výsledek kontrol, ne automaticky plné prompty |
+| Support přílohy | expirace a ruční možnost smazání po vyřešení ticketu |
+
+Dreamind pohled: privacy-first analytika má odpovídat na otázky produktu, ne vyrábět detailní životopis každého návštěvníka. Když rozhodnutí uděláte z agregovaného čísla, nepotřebujete si nechávat individuální stopu jen proto, že nástroj umí hezký replay.
+
+### DM.6 Šablona: retenční karta datové kategorie
+
+```md
+# Retenční karta
+
+## Základ
+- Kategorie dat:
+- Vlastník:
+- Systémy, kde data vznikají:
+- Systémy, kam se data kopírují:
+
+## Účel
+- Proč data zpracováváme:
+- Kdo je potřebuje:
+- Co se rozbije, pokud je smažeme dřív:
+
+## Retence
+- Aktivní doba:
+- Archivní doba:
+- Akce po uplynutí doby: smazání / anonymizace / agregace / archivace
+- Výjimky:
+
+## Výmaz
+- Trigger výmazu:
+- Ověření oprávnění:
+- Navázané systémy:
+- Stavový proces nebo job:
+- Auditní záznam:
+
+## Privacy-first kontrola
+- Obsahuje kategorie zvlášť citlivých dat?
+- Lze data minimalizovat dříve?
+- Lze identifikátory nahradit agregací?
+- Je pravidlo vysvětlené uživateli v produktu nebo dokumentaci?
+```
+
+### DM.7 Checklist: data bez digitálního syslení
+
+- [ ] Každá hlavní datová kategorie má jasný účel.
+- [ ] Každá kategorie má vlastníka a retenční dobu.
+- [ ] Víme, jestli po doběhu mažeme, anonymizujeme, agregujeme nebo archivujeme.
+- [ ] Výmaz účtu není jen deaktivace loginu.
+- [ ] Exporty, importy a dočasné soubory mají expiraci.
+- [ ] Support přílohy a interní poznámky mají omezený přístup a plán úklidu.
+- [ ] Logy neobsahují zbytečné osobní údaje, dokumenty ani plné prompty.
+- [ ] Analytika je agregovaná všude, kde to stačí pro rozhodnutí.
+- [ ] Zálohy mají popsaný doběh a pravidlo proti návratu smazaných dat.
+- [ ] Uživatel rozumí, co se stane při zrušení účtu nebo žádosti o výmaz.
+
+### Mini cvičení: retenční audit za 60 minut
+
+1. Vyberte jednu datovou kategorii, která nejvíc roste nebo je nejcitlivější.
+2. Najděte všechny systémy, kde vzniká, kopíruje se nebo exportuje.
+3. Napište účel jednou lidskou větou.
+4. Určete, jak dlouho data opravdu potřebujete v identifikovatelné podobě.
+5. Rozhodněte, co se stane po doběhu: smazání, anonymizace, agregace nebo archivace.
+6. Zkontrolujte, jestli existuje automatický job nebo jen ruční přání.
+7. Doplňte jednu produktovou větu, která retenční pravidlo vysvětlí uživateli.
+8. Vyberte jeden konkrétní úklid na příští týden.
+
+### Codyho komentář
+
+Můj pohled — Cody: data jsou jako věci ve sklepě. První rok si říkáte, že se všechno jednou hodí. Třetí rok už nevíte, co je v krabicích. Pátý rok zjistíte, že tam máte i věci bývalých zákazníků, staré exporty a jeden CSV soubor pojmenovaný `final_final_really_final.csv`. Privacy-first provoz není o tom, že žádná data nemáte. Je o tom, že víte proč je máte, kde jsou a kdy odejdou do digitálního důchodu.
+
+### Zdroje k příloze DM
+
+- EUR-Lex: GDPR čl. 5 a čl. 17, včetně zásady omezení uložení a práva na výmaz: https://eur-lex.europa.eu/eli/reg/2016/679/art_17/oj/eng
+- European Commission: vysvětlení data protection by design and by default, včetně minimalizace, krátké doby uložení a omezené dostupnosti ve výchozím nastavení: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/obligations/what-does-data-protection-design-and-default-mean_en
+- European Commission: přehled práce s žádostmi jednotlivců podle GDPR, včetně přístupu, opravy, výmazu a portability: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/dealing-requests-individuals_en
+- EDPB: Guidelines 4/2019 on Article 25 Data Protection by Design and by Default: https://www.edpb.europa.eu/sites/default/files/files/file1/edpb_guidelines_201904_dataprotection_by_design_and_by_default_v2.0_en.pdf
+
 ## Pracovní log
+
+- 2026-08-27: Přidána příloha DM „Retence a mazání dat bez digitálního syslení“ s kategoriemi dat podle účelu, rozdílem mezi výmazem/anonymizací/archivací, produktovým UX retence, výmazovým workflow, logy a analytikou s kratší pamětí, retenční kartou, checklistem, hodinovým auditem a ověřenými EU/EDPB zdroji.
 
 - 2026-08-27: Přidána příloha DL „Nákladové brzdy pro SaaS a AI funkce bez spreadsheetové mlhy“ s jednotkovou ekonomikou, variabilními limity, AI cost briefem, privacy-first nákladovým dashboardem, checklistem, hodinovým cost review a ověřenými zdroji.
 
