@@ -31201,7 +31201,167 @@ Webhooky mám rád, když jsou nudné. Nudný webhook je podepsaný, malý, verz
 - GDPR, článek 25: data protection by design and by default pro návrh technických a organizačních opatření: https://gdpr-info.eu/art-25-gdpr/
 - EDPB Guidelines 07/2020 on the concepts of controller and processor: vztahy správců, zpracovatelů a smluvní odpovědnost při předávání zpracování dodavatelům: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-072020-concepts-controller-and-processor-gdpr_en
 
+## Příloha FF — Status page a incident komunikace bez panického divadla
+
+Když web nebo SaaS spadne, tým má dvě práce najednou: opravit problém a udržet důvěru. Začátečnická chyba je dělat jen tu první část, protože „komunikace počká, až budeme vědět víc“. Nepočká. Zákazník mezitím nevidí váš interní incident kanál, nezná stav databáze a netuší, jestli má čekat, zkusit akci znovu, nebo poslat vlastní omluvný e-mail svému šéfovi.
+
+Status page není PR vitrína. Je to provozní rozhraní mezi službou a lidmi, kteří na ni spoléhají. Má být stručná, pravdivá, pravidelně aktualizovaná a technicky oddělená od systému, který může selhat. Pokud běží na stejné infrastruktuře jako hlavní aplikace, je to trochu jako mít nouzové východy zamčené ve skladu, který právě hoří. Kreativní, ale nepomáhá.
+
+### Co má status page řešit
+
+Dobrá status page odpovídá na pět jednoduchých otázek:
+
+1. **Co je ovlivněné:** aplikace, API, přihlášení, platby, e-mailové notifikace, exporty, administrace, konkrétní region nebo konkrétní integrace.
+2. **Jak moc je to rozbité:** úplný výpadek, degradace výkonu, zvýšená chybovost, zpoždění fronty, plánovaná údržba.
+3. **Co má uživatel dělat:** čekat, nezkoušet akci opakovaně, použít náhradní postup, kontaktovat podporu, stáhnout export později.
+4. **Kdy přijde další update:** ne „brzy“, ale konkrétní interval, třeba do 30 minut.
+5. **Jestli jsou dotčená data:** žádné mlžení. Pokud se incident týká dostupnosti, řekněte to. Pokud se prověřuje dopad na osobní údaje, řekněte i to a oddělte provozní incident od bezpečnostního šetření.
+
+Pro malý tým bohatě stačí jednoduchá veřejná stránka, RSS/Atom feed a možnost odběru e-mailem bez marketingového trackingu. Není nutné nasazovat korporátní incident portál s jedenácti workflow stavy, pokud na konci stejně někdo ručně kopíruje větu do chatu. Cílem je rychlá, konzistentní a dohledatelná komunikace.
+
+### Minimální komponenty pro malý SaaS
+
+Navrhněte status page jako samostatný produktový prvek:
+
+- **Komponenty služby:** `Web`, `API`, `Přihlášení`, `Platby`, `E-mailové notifikace`, `Integrace`, `Datové exporty`.
+- **Stavy:** `Operational`, `Degraded performance`, `Partial outage`, `Major outage`, `Maintenance`.
+- **Incident záznam:** začátek, poslední update, ovlivněné komponenty, dopad, aktuální stav, další update, závěr.
+- **Historie:** alespoň 90 dní veřejně, delší interně podle provozní potřeby.
+- **Odběr:** RSS/Atom jako výchozí varianta; e-mail jen s jasným účelem a bez pixelů.
+- **Vlastník:** kdo status page aktualizuje, kdo schvaluje bezpečnostní formulace a kdo komunikuje s enterprise zákazníky.
+
+Privacy-first detail: status page nesmí prozrazovat zbytečné interní informace. Nepište názvy interních serverů, IP adresy, přesné verze zranitelných knihoven, osobní údaje zákazníků ani citlivé názvy tenantů. Uživatel potřebuje dopad a doporučený postup, ne vaši kompletní mapu infrastruktury zabalenou jako dárek pro útočníka.
+
+### Incident zpráva ve třech vrstvách
+
+Jedna zpráva pro všechny situace nefunguje. Jinak komunikujete pomalé API, jinak podezření na bezpečnostní incident a jinak plánovanou údržbu. Prakticky si připravte tři vrstvy:
+
+**1. Veřejný update na status page**
+
+Krátký, věcný, bez spekulací:
+
+```text
+Vyšetřujeme zvýšenou chybovost API. Ovlivňuje vytváření nových exportů dat; přihlášení a čtení existujících projektů funguje. Doporučujeme exporty zatím neopakovat, aby nevznikly duplicitní úlohy. Další update zveřejníme do 30 minut.
+```
+
+**2. Přímá zpráva zákazníkům s dopadem**
+
+Použijte jen tam, kde incident reálně ovlivňuje konkrétní zákazníky nebo smluvní SLA:
+
+```text
+Dobrý den, dnes mezi 09:20 a 10:05 UTC jsme evidovali zpoždění ve zpracování exportů ve vašem účtu. Data nebyla ztracena; některé exporty doběhly později. Pokud jste během incidentu spustili stejný export vícekrát, doporučujeme ponechat jen poslední výsledek. Postmortem pošleme po dokončení analýzy.
+```
+
+**3. Interní technický zápis**
+
+Sem patří detaily pro poučení: časová osa, detekce, rozhodnutí, příčina, dopad, co se změnilo a co se záměrně nemění. Interní zápis může být technický. Veřejný update má být srozumitelný.
+
+### Časová osa komunikace
+
+Použijte jednoduchý rytmus, který jde udržet i v malém týmu:
+
+- **0–10 minut:** potvrdit incident interně, určit velitele incidentu a komunikačního vlastníka.
+- **Do 15 minut:** publikovat první status, pokud je dopad viditelný pro uživatele nebo trvá déle než pár minut.
+- **Každých 30–60 minut:** aktualizovat status i ve chvíli, kdy se nic zásadního nezměnilo. „Stále vyšetřujeme“ je lepší než ticho.
+- **Po mitigaci:** říct, co je obnoveno, co se ještě dobíhá a jaké akce má uživatel případně udělat.
+- **Po uzavření:** zveřejnit stručné shrnutí dopadu a slíbit postmortem jen tehdy, pokud ho opravdu dodáte.
+
+U plánované údržby zveřejněte oznámení předem, ideálně s dopadem a časovým oknem. Technicky vraťte správné HTTP odpovědi: u dočasné nedostupnosti dává smysl `503 Service Unavailable` a podle situace `Retry-After`, aby klienti věděli, kdy zkusit požadavek opakovat.
+
+### Kdy už nejde jen o provozní incident
+
+Pokud incident může zahrnovat osobní údaje, oddělte provozní komunikaci od právního a bezpečnostního posouzení. GDPR pracuje s pojmem porušení zabezpečení osobních údajů a článek 33 řeší oznámení dozorovému úřadu bez zbytečného odkladu a pokud možno do 72 hodin od okamžiku, kdy se správce o porušení dozvěděl. Článek 34 se týká komunikace subjektům údajů při vysokém riziku pro jejich práva a svobody.
+
+Prakticky to znamená:
+
+- nepište veřejně, že „data jsou určitě v bezpečí“, pokud to ještě nevíte,
+- zaznamenejte čas, kdy jste se o incidentu dozvěděli,
+- určete, zda šlo o důvěrnost, integritu nebo dostupnost osobních údajů,
+- zapojte DPO nebo právní odpovědnou osobu, pokud ji máte,
+- udržujte rozhodnutí a důkazy v incident složce,
+- nečekejte na kompletní forenzní román, pokud povinnost oznámení běží.
+
+### Privacy-first status page
+
+Status page má podporovat důvěru, ne přidávat další tracking. Doporučený návrh:
+
+- žádné reklamní pixely, behaviorální remarketing ani social share skripty,
+- analytika jen agregovaně a ideálně bez cookies,
+- RSS/Atom feed pro odběr incidentů,
+- e-mailové notifikace oddělené od marketingového seznamu,
+- jasná retenční doba e-mailů pro odběr statusu,
+- veřejná historie incidentů bez osobních údajů,
+- evropský hosting nebo alespoň jasně zdokumentované umístění dat.
+
+Status page je součást trust vrstvy. Pokud říkáte, že jste privacy-first, ale status odběr posíláte přes nástroj, který automaticky profiluje čtenáře pro marketing, tak si protiřečíte tak hlasitě, že to slyší i právník přes zavřené dveře.
+
+### Šablona incident karty
+
+```markdown
+## Incident: [krátký název]
+
+- Začátek incidentu:
+- Detekováno:
+- Stav:
+- Ovlivněné komponenty:
+- Odhadovaný dopad na zákazníky:
+- Dopad na osobní údaje: žádný / prověřuje se / potvrzený
+- Komunikační vlastník:
+- Technický vlastník:
+- Další veřejný update nejpozději:
+
+## Časová osa
+- HH:MM — Detekce
+- HH:MM — První veřejný update
+- HH:MM — Mitigace
+- HH:MM — Obnova služby
+
+## Závěr
+- Příčina:
+- Co jsme opravili:
+- Co ještě sledujeme:
+- Preventivní opatření:
+- Zda vzniká povinnost podle GDPR článků 33/34:
+```
+
+### Checklist: status page připravená na realitu
+
+- [ ] Status page běží mimo hlavní produkční aplikaci.
+- [ ] Komponenty odpovídají tomu, co zákazník reálně používá.
+- [ ] První incident update lze publikovat do 15 minut.
+- [ ] Existují předpřipravené texty pro výpadek, degradaci, údržbu a bezpečnostní šetření.
+- [ ] Každý update říká dopad, doporučenou akci a čas dalšího updatu.
+- [ ] Odběr statusu je oddělený od marketingu a neobsahuje tracking pixely.
+- [ ] Incident karta obsahuje i posouzení dopadu na osobní údaje.
+- [ ] Interní postmortem vede ke konkrétním opatřením, ne k poetické větě „zlepšíme monitoring“.
+
+### Mini cvičení: status page za 45 minut
+
+1. Vypište pět komponent služby, které zákazníci opravdu vnímají.
+2. Ke každé komponentě napište jeden možný incident a jeho zákaznický dopad.
+3. Připravte první veřejný update pro nejpravděpodobnější incident.
+4. Určete, kde status page poběží, kdo ji aktualizuje a kdo má náhradní přístup.
+5. Zkontrolujte, jestli odběr incidentů nespadá do marketingového nástroje s trackingem.
+6. Nanečisto publikujte interní test incidentu a změřte čas od detekce po první update.
+
+### Codyho komentář
+
+Status page není přiznání slabosti. Je to důkaz, že víte, že software občas spadne, síť občas zakašle a databáze občas připomene, že i ona má city. Důvěru nezískáte tvrzením „nikdy nemáme incidenty“. Důvěru získáte tím, že když se něco pokazí, mluvíte jasně, opravujete rychle a po incidentu nezametete učení pod koberec s logem firmy.
+
+### Zdroje k příloze FF
+
+- NCSC: Effective communications in a cyber incident — příprava komunikační strategie, rolí, šablon a konzistentních sdělení během bezpečnostního incidentu: https://www.ncsc.gov.uk/guidance/effective-communications-in-a-cyber-incident
+- NCSC: Incident management — doporučení k incident managementu, rolím, testování reakce a jasné komunikaci během incidentu: https://www.ncsc.gov.uk/collection/10-steps/incident-management
+- NCSC: Recovering from a highly disruptive cyber attack — doporučení k řízeným komunikačním kanálům a práci se stakeholdery po vážném narušení: https://www.ncsc.gov.uk/collection/what-to-do-when-cyber-attacks-disrupt-your-organisation/recovering/immediate-activities
+- ENISA: Incident Response Plan — základní rámec pro plán reakce na incidenty a návaznost na kontinuitu provozu: https://tools.enisa.europa.eu/topics/risk-management/current-risk/bcm-resilience/bc-plan/incident-response-plan
+- GDPR, článek 33: oznámení porušení zabezpečení osobních údajů dozorovému úřadu bez zbytečného odkladu a pokud možno do 72 hodin: https://gdpr-info.eu/art-33-gdpr/
+- GDPR, článek 34: komunikace porušení zabezpečení subjektům údajů při vysokém riziku pro jejich práva a svobody: https://gdpr-info.eu/art-34-gdpr/
+- EDPB Guidelines 9/2022 on personal data breach notification under GDPR: výklad k posuzování a oznamování porušení zabezpečení osobních údajů: https://www.edpb.europa.eu/documents/guideline/guidelines-92022-on-personal-data-breach-notification-under-gdpr_en
+- RFC 9110 HTTP Semantics: definice `503 Service Unavailable` a hlavičky `Retry-After` pro dočasnou nedostupnost a opakování požadavků: https://www.rfc-editor.org/rfc/rfc9110.html
+
 ## Pracovní log
+
+- 2026-08-27: Přidána příloha FF „Status page a incident komunikace bez panického divadla“ s návrhem veřejné status page, incident komunikačními vrstvami, časovou osou, GDPR rozlišením, privacy-first odběrem, incident kartou, checklistem, 45minutovým cvičením a ověřenými NCSC/ENISA/GDPR/EDPB/RFC zdroji.
 
 - 2026-08-27: Přidána příloha EE „Webhooky a integrace bez tajného tunelu do firmy“ s návrhem integračního toku, payload smlouvou, ověřením podpisů, idempotencí, retry politikou, privacy-first hranicemi, kartou webhooku, checklistem, hodinovým auditem a ověřenými OWASP/RFC/GDPR/EDPB zdroji.
 
