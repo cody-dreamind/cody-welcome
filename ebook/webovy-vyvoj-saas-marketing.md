@@ -27872,7 +27872,228 @@ Můj pohled — Cody: data jsou jako věci ve sklepě. První rok si říkáte, 
 - European Commission: přehled práce s žádostmi jednotlivců podle GDPR, včetně přístupu, opravy, výmazu a portability: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/dealing-requests-individuals_en
 - EDPB: Guidelines 4/2019 on Article 25 Data Protection by Design and by Default: https://www.edpb.europa.eu/sites/default/files/files/file1/edpb_guidelines_201904_dataprotection_by_design_and_by_default_v2.0_en.pdf
 
+
+## DN. Trust centrum pro malý SaaS bez bezpečnostního divadla
+
+Trust centrum je místo, kde zákazník, partner nebo auditor rychle pochopí, jak zacházíte s daty, bezpečností, dostupností, dodavateli a incidenty. Není to marketingový oltář se slovy „enterprise-grade“, „military-grade“ a „we take security seriously“. Tyhle fráze už by měly mít vlastní sběrný dvůr.
+
+Pro malý SaaS má trust centrum hlavně jednu roli: zkrátit cestu od obavy k rozhodnutí. Když zákazník řeší, jestli vám může svěřit data, nechce lovit odpovědi v patičce, starém PDF, sales e-mailu a jedné zapomenuté stránce dokumentace. Chce jasně vidět, kde data běží, kdo k nim má přístup, jak řešíte bezpečnost, jak reagujete na incident a co umíte doložit.
+
+Privacy-first trust centrum není slib dokonalosti. Je to kontrolovaný soubor důkazů. Říká: víme, co provozujeme, známe hranice, neděláme zbytečné datové eskapády a umíme odpovědět bez paniky.
+
+### DN.1 Začněte otázkami, které zákazník opravdu řeší
+
+Trust centrum nezačínejte designem stránky. Začněte seznamem otázek, které se opakují v obchodu, supportu, bezpečnostních dotaznících a procurementu.
+
+Typické otázky:
+
+- Kde jsou data uložena a kdo je zpracovává?
+- Jsou data zákazníků oddělená podle účtů nebo tenantů?
+- Kdo z vašeho týmu má přístup k produkčním datům?
+- Jak řešíte zálohy, obnovu a dostupnost?
+- Jak dlouho držíte logy, exporty, přílohy a smazaná data?
+- Jak oznamujete incidenty?
+- Jaké externí nástroje používáte a proč?
+- Umí zákazník získat export dat a ukončit službu bez rukojmí v databázi?
+
+Každá otázka má mít odpověď ve třech vrstvách:
+
+1. **Krátká odpověď pro rozhodnutí:** jedna až tři věty bez právnického kouře.
+2. **Detail pro technický nebo právní tým:** konkrétnější proces, role, kontrola, odkaz na dokument.
+3. **Důkaz nebo artefakt:** datová mapa, seznam zpracovatelů, incident playbook, retenční karta, bezpečnostní přehled, auditní log politika.
+
+Pokud neumíte dodat třetí vrstvu, nevadí. Zapište mezeru jako úkol. Horší je tvářit se, že důkaz existuje, protože „to máme někde v hlavě“. Hlava je špatný compliance systém. Navíc se špatně verzí.
+
+### DN.2 Rozdělte veřejné, chráněné a interní informace
+
+Ne všechno v trust centru má být veřejné. Privacy-first neznamená ukázat světu architekturu, přístupy, přesné názvy interních systémů a screenshoty nastavení. Znamená dát správné informace správným lidem.
+
+Použijte tři úrovně:
+
+| Úroveň | Co obsahuje | Příklad | Přístup |
+|---|---|---|---|
+| Veřejné | obecné informace pro důvěru | region provozu, základní bezpečnostní principy, kontaktní cesta pro incident | bez loginu |
+| Zákaznické | detail pro aktivní nebo vážné zájemce | seznam zpracovatelů, DPA odkazy, dostupnostní přehled, exportní pravidla | po přihlášení nebo na vyžádání |
+| Interní | citlivé provozní detaily | přesná síťová konfigurace, interní playbooky, zranitelnosti, detailní auditní logy | jen oprávněný tým |
+
+Praktické pravidlo: veřejná stránka má odpovědět na „můžeme vám důvěřovat?“, ne na „jak přesně vás obejít?“. U bezpečnosti je transparentnost dobrá, ale ne sebevražedně doslovná. To je rozdíl mezi trust centrem a návodem pro útočníka.
+
+### DN.3 Minimální obsah trust centra
+
+Začněte malou verzí. Jedna dobrá stránka je lepší než rozpadlý portál se sedmi prázdnými sekcemi.
+
+Minimální struktura:
+
+```md
+# Trust centrum
+
+## Jak přemýšlíme o datech
+- Jaký typ dat zpracováváme:
+- Co nesbíráme:
+- Kde data běží:
+- Jak data oddělujeme:
+
+## Bezpečnost a přístupy
+- Přístup týmu k produkci:
+- MFA a role:
+- Auditní stopa:
+- Práce se zranitelnostmi:
+
+## Provoz a dostupnost
+- Monitoring:
+- Zálohy a obnova:
+- Incident komunikace:
+- Status page nebo RSS:
+
+## Dodavatelé a zpracovatelé
+- Hlavní zpracovatelé:
+- Regiony provozu:
+- Proč je používáme:
+- Jak je revidujeme:
+
+## Práva zákazníka
+- Export dat:
+- Výmaz a retence:
+- Kontaktní místo:
+- DPA nebo smluvní dokumenty:
+```
+
+Tohle není náhrada právních dokumentů. Je to přístupná mapa. Právní texty často odpovídají přesně, ale pomalu. Trust centrum má odpovědět rychle a odkázat na přesný dokument tam, kde je potřeba.
+
+### DN.4 Odpovědi pište jako provozní sliby
+
+Slabá odpověď zní: „Data chráníme podle nejlepších standardů.“ To je věta, která nevysvětluje nic, ale tváří se u toho slavnostně.
+
+Silnější odpověď:
+
+```text
+Produkční přístup mají jen lidé, kteří ho potřebují pro provoz nebo support.
+Přístupy revidujeme pravidelně a po odchodu člověka z týmu je rušíme.
+Support nepoužívá produkční data pro školení marketingových nástrojů ani AI modelů bez samostatného schválení a jasného účelu.
+```
+
+Dobrá odpověď má čtyři vlastnosti:
+
+- popisuje konkrétní proces,
+- říká, kdo nebo co je omezené,
+- nezní absolutně, pokud absolutní není,
+- jde ověřit interním artefaktem.
+
+Vyhněte se slovům, která nejdou obhájit: „vždy“, „nikdy“, „plně“, „100% bezpečné“, „nulové riziko“. Bezpečnost a soukromí jsou řízení rizik, ne kouzelnický trik. Pokud někdo slibuje nulové riziko, pravděpodobně prodává buď pohádku, nebo špatně nastavený firewall.
+
+### DN.5 Bezpečnostní dotazníky napojte na knihovnu odpovědí
+
+Jakmile začnete prodávat B2B, přijdou bezpečnostní dotazníky. Někdy krátké. Někdy tak dlouhé, že by se daly používat jako zarážka dveří. Trust centrum má snížit počet ručních odpovědí.
+
+Vytvořte knihovnu schválených odpovědí:
+
+| Oblast | Otázka | Krátká odpověď | Detail | Vlastník | Poslední ověření |
+|---|---|---|---|---|---|
+| Data | Kde jsou data uložena? | V evropském provozním prostředí podle aktuální datové mapy. | Odkaz na seznam zpracovatelů a regionů. | Provoz | 2026-08-27 |
+| Přístupy | Kdo má přístup k produkci? | Jen omezené role podle potřeby. | Odkaz na přístupovou politiku a revize. | Security/Tech lead | 2026-08-27 |
+| Incidenty | Jak oznamujete incident? | Podle dopadu, smluv a právních povinností. | Odkaz na incident playbook. | Provoz | 2026-08-27 |
+
+Každá odpověď má mít datum ověření. Staré odpovědi jsou horší než žádné, protože budí jistotu tam, kde už možná není pravda. A falešná jistota je compliance verze banánové slupky.
+
+### DN.6 Privacy-first pravidla pro trust centrum
+
+- Nezveřejňujte přesné interní názvy systémů, pokud to nepřináší zákazníkovi jasnou hodnotu.
+- Neuvádějte zákaznické reference k bezpečnosti bez výslovného schválení.
+- Nesdílejte screenshoty z administrace jako důkaz, pokud obsahují metadata, účty nebo konfigurace.
+- U seznamu zpracovatelů uvádějte účel, kategorii dat a region, ne jen logo dodavatele.
+- U AI funkcí jasně oddělte, co je součást produktu, co je interní asistence a co se nepoužívá pro trénování bez právního a smluvního základu.
+- U incidentů zveřejňujte dopad a stav, ne interní detaily, které zvyšují riziko.
+- U certifikací a auditů napište přesný rozsah. Certifikovaný dodavatel neznamená automaticky certifikovaný celý váš produkt.
+- U každé veřejné informace mějte interního vlastníka, který ji reviduje.
+
+Privacy-first trust centrum má být pravdivé i v detailech. Když používáte evropský provoz jen pro část dat, napište to. Když některý dodavatel běží mimo EHP, popište účel a smluvní kontrolu. Mlžení možná zkrátí jeden sales call, ale prodlouží každý budoucí audit.
+
+### DN.7 Metriky trust centra
+
+Trust centrum má pomáhat, ne jen zdobit patičku. Sledujte jednoduché signály:
+
+- kolik bezpečnostních dotazů se dá vyřešit odkazem na trust centrum,
+- které otázky zákazníci stále posílají ručně,
+- kolik odpovědí je starších než poslední revize,
+- kolik dodavatelů nemá popsaný účel nebo region,
+- kolik incidentních nebo provozních dokumentů nemá vlastníka,
+- kolik sales cyklů se zkrátilo díky připraveným odpovědím.
+
+Měřte agregovaně. Nepotřebujete sledovat každého návštěvníka trust centra po celém webu. Stačí vědět, které sekce se používají a jaké otázky pořád chybí. Pokud z metriky nevznikne rozhodnutí, smažte ji. Trust centrum nemá potřebovat vlastní trust centrum.
+
+### DN.8 Šablona revize trust centra
+
+Jednou měsíčně nebo před větším obchodním jednáním projděte krátkou revizi:
+
+```md
+## Revize trust centra
+
+- Datum:
+- Reviewer:
+- Důvod revize: pravidelná / nový zákazník / nový dodavatel / incident / změna produktu
+
+## Změny od poslední revize
+- Nové datové toky:
+- Noví dodavatelé:
+- Nové AI funkce:
+- Změny v retenci nebo exportu:
+- Incidenty nebo významné provozní události:
+
+## Kontrola obsahu
+- Veřejná stránka odpovídá realitě:
+- Zákaznické dokumenty jsou aktuální:
+- Knihovna dotazníkových odpovědí má ověřené datum:
+- Odkazy fungují:
+- Vlastníci dokumentů jsou platní:
+
+## Rozhodnutí
+- Co aktualizujeme:
+- Co stáhneme nebo skryjeme:
+- Co potřebuje právní, bezpečnostní nebo provozní review:
+- Termín:
+```
+
+Revize má být nudná a rychlá. Pokud při ní objevíte tři neznámé dodavatele, neaktuální DPA a status page, kterou nikdo rok neotevřel, není problém v revizi. Revize jen rozsvítila světlo ve sklepě.
+
+### Checklist: trust centrum bez divadla
+
+- [ ] Trust centrum odpovídá na skutečné zákaznické a bezpečnostní otázky.
+- [ ] Veřejné, zákaznické a interní informace jsou oddělené.
+- [ ] Každé tvrzení má vlastníka a ověřitelný interní důkaz.
+- [ ] Odpovědi nepoužívají absolutní sliby typu „100% bezpečné“.
+- [ ] Seznam zpracovatelů uvádí účel, kategorii dat a region.
+- [ ] Incident komunikace má jasný kontakt a pravidla podle dopadu.
+- [ ] Knihovna bezpečnostních odpovědí má datum posledního ověření.
+- [ ] AI funkce a interní AI používání jsou popsány odděleně.
+- [ ] Metriky trust centra jsou agregované a vedou k rozhodnutí.
+- [ ] Trust centrum má pravidelnou revizi a plán stažení neaktuálních informací.
+
+### Mini cvičení: trust centrum za 60 minut
+
+1. Vezměte posledních deset bezpečnostních, právních nebo procurement otázek od zákazníků.
+2. Seskupte je do pěti oblastí: data, přístupy, provoz, dodavatelé, práva zákazníka.
+3. Ke každé oblasti napište jednu veřejnou odpověď a jeden interní důkaz.
+4. Označte informace jako veřejné, zákaznické nebo interní.
+5. Najděte tři tvrzení, která dnes neumíte doložit, a přepište je na přesnější formulaci.
+6. Doplňte vlastníka a datum revize.
+7. Vyberte jednu sekci, kterou publikujete nebo připravíte jako první.
+
+### Codyho komentář
+
+Můj pohled — Cody: trust centrum není místo, kde malý SaaS předstírá, že je nadnárodní banka s oddělením pro každou zkratku. Je to místo, kde se chová dospěle: říká pravdu, ukazuje důkazy, nesbírá zbytečná data a přiznává hranice. Důvěra nevzniká tím, že tvrdíte „věřte nám“. Vzniká tím, že zákazník nemusí hádat.
+
+### Zdroje k příloze DN
+
+- European Commission: informace, které mají organizace poskytovat lidem o zpracování osobních údajů, navazuje zejména na transparentnost podle GDPR: https://commission.europa.eu/law/law-topic/data-protection/information-individuals_en
+- EUR-Lex: GDPR, zejména čl. 5, 13, 14, 25, 28 a 32 — zásady zpracování, transparentnost, zpracovatelé, návrh ochrany dat a bezpečnost: https://eur-lex.europa.eu/eli/reg/2016/679/oj
+- ENISA: evropský rámec kyberbezpečnostní certifikace a role certifikací pro důvěru v ICT produkty, služby a procesy: https://www.enisa.europa.eu/topics/product-security-and-certification/cybersecurity-certification-framework
+- European Commission: European cybersecurity certification framework a přehled evropských certifikačních schémat včetně cloudových služeb: https://digital-strategy.ec.europa.eu/en/policies/cybersecurity-certification-framework
+- Cloud Security Alliance STAR: CAIQ a STAR jako praktické zdroje pro dokumentaci cloudových bezpečnostních kontrol: https://cloudsecurityalliance.org/star/
+- OWASP SAMM: rámec pro systematické zlepšování softwarové bezpečnosti podle oblastí řízení, návrhu, implementace, ověřování a provozu: https://owaspsamm.org/
+
 ## Pracovní log
+
+- 2026-08-27: Přidána příloha DN „Trust centrum pro malý SaaS bez bezpečnostního divadla“ s otázkami zákazníků, rozdělením veřejných/zákaznických/interních informací, minimální strukturou trust centra, knihovnou bezpečnostních odpovědí, privacy-first pravidly, revizní šablonou, checklistem, hodinovým cvičením a ověřenými EU/ENISA/CSA/OWASP zdroji.
 
 - 2026-08-27: Přidána příloha DM „Retence a mazání dat bez digitálního syslení“ s kategoriemi dat podle účelu, rozdílem mezi výmazem/anonymizací/archivací, produktovým UX retence, výmazovým workflow, logy a analytikou s kratší pamětí, retenční kartou, checklistem, hodinovým auditem a ověřenými EU/EDPB zdroji.
 
