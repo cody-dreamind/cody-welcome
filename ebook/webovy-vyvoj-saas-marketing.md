@@ -31521,7 +31521,152 @@ Nejlepší cookie lišta je často ta, kterou skoro nepotřebujete, protože jst
 - GDPR, článek 25: data protection by design and by default jako princip návrhu služeb s minimalizací dat: https://gdpr-info.eu/art-25-gdpr/
 - Směrnice 2002/58/ES o soukromí a elektronických komunikacích: právní kontext ukládání informací a přístupu k informacím v zařízení uživatele v EU: https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=CELEX:32002L0058
 
+## Příloha FH — Retence dat bez digitálního skladu na věčné časy
+
+Retence dat je elegantní slovo pro otázku: „Jak dlouho držíme věci, které bychom možná už dávno měli smazat?“ V malém SaaSu se na to často zapomíná, protože data přibývají potichu. Formuláře, logy, support zprávy, faktury, exporty, onboardingové e-maily, analytické eventy, webhook payloady, zálohy. Každá vrstva si něco nechá „pro jistotu“ a po roce máte místo produktu menší archeologický park.
+
+Privacy-first provoz není o tom, že smažete všechno hned a pak se tváříte překvapeně, když nejde vyřešit reklamace, audit nebo incident. Je o tom, že u každého typu dat znáte účel, právní nebo provozní důvod, délku uložení, místo uložení, vlastníka a způsob smazání nebo anonymizace. Retence není právní poznámka pod čarou. Je to produktová a provozní funkce.
+
+### FH.1 Začněte datovými kategoriemi, ne jedním magickým číslem
+
+Špatný retenční plán říká: „Data mažeme po dvou letech.“ Hezké, kulaté, a často úplně k ničemu. Různá data mají různé účely. Fakturační doklady se řeší jinak než marketingové eventy, bezpečnostní logy jinak než demo data a support přílohy jinak než anonymizované produktové metriky.
+
+Praktické kategorie pro malý web nebo SaaS:
+
+- **Účet a identita:** e-mail, jméno, role, organizace, přihlašovací metadata, MFA nastavení.
+- **Produktová data:** projekty, záznamy, soubory, nastavení, historie změn, exporty.
+- **Fakturace:** objednávky, faktury, daňové údaje, platební stav, dunning komunikace.
+- **Support:** e-maily, chaty, přílohy, interní poznámky, stav požadavku.
+- **Bezpečnost a audit:** audit log, přístupové události, administrátorské akce, změny oprávnění.
+- **Technické logy:** request logy, chyby, výkonové signály, deploy události.
+- **Marketing a analytika:** UTM agregace, kampaně, formulářové leady, newsletter preference.
+- **Dočasná data:** importy, exportní balíčky, staging kopie, demo účty, cache, fronty.
+
+Ke každé kategorii napište účel jednou větou. Pokud účel zní „pro jistotu“, není to účel. Je to datová panika v teplákách.
+
+### FH.2 Retenční pravidlo má mít spouštěč a konec
+
+Retence bez spouštěče se nedá automatizovat. Nestačí říct „po 90 dnech“. Po 90 dnech od čeho? Od vytvoření účtu? Posledního přihlášení? Uzavření support ticketu? Zrušení předplatného? Vyřešení incidentu? Poslední faktury?
+
+Používejte jednoduchý vzorec:
+
+```text
+[Kategorie dat] držíme [doba] od [spouštěč], protože [účel]. Potom data [smažeme/anonymizujeme/archivujeme], pokud neexistuje konkrétní právní nebo bezpečnostní důvod držet je déle.
+```
+
+Příklady:
+
+- Technické request logy držíme 30 dní od vzniku záznamu kvůli diagnostice incidentů. Potom je mažeme nebo agregujeme.
+- Exportní balíček držíme 7 dní od vytvoření kvůli stažení uživatelem. Potom soubor smažeme a necháme jen auditní záznam o provedení exportu.
+- Support přílohy držíme 90 dní od uzavření ticketu, pokud nejsou součástí aktivní reklamace, bezpečnostního incidentu nebo smluvního sporu.
+- Produktové analytické eventy agregujeme měsíčně a surové eventy mažeme po krátké technické retenční době.
+- Demo prostředí resetujeme automaticky každých 24 hodin nebo po skončení obchodní ukázky.
+
+Konkrétní délky si nastavte podle účelu, rizika a právních povinností. Codyho komentář: kratší retence je default, delší retence je rozhodnutí, které musí někdo podepsat vlastním jménem. „Dashboard by byl hezčí“ se jako důvod nepočítá, i kdyby měl gradient.
+
+### FH.3 Nezapomeňte na zálohy, exporty a stínové kopie
+
+Týmy často nastaví mazání v databázi a pak zapomenou, že stejná data žijí ještě v zálohách, log pipeline, BI nástroji, support systému, e-mailové schránce, stagingu a lokálních CSV souborech. To je jako uklidit pokoj tak, že všechno nacpete pod koberec. Koberec se jmenuje `backup_final_2026.zip` a jednoho dne vás kousne.
+
+Retenční plán musí pokrýt alespoň:
+
+- **Primární databázi:** aktivní produktová data a jejich smazání/anonymizace.
+- **Zálohy:** jak dlouho existují, kdo k nim má přístup, jak se řeší právo na výmaz v kombinaci s obnovou.
+- **Exporty:** dočasné balíčky, odkazy ke stažení, šifrování a expirace.
+- **Logy:** aplikační, infrastrukturní, bezpečnostní a auditní záznamy.
+- **Staging a demo:** zákaz reálných produkčních kopií bez jasného důvodu a ochrany.
+- **Třetí strany:** support, billing, e-mail, analytika, incident nástroje a jejich vlastní retenční nastavení.
+
+Praktické pravidlo: když smažete zákazníka v produktu, otevřete retenční mapu a zkontrolujte, kde ještě může existovat jeho osobní údaj. Ne kvůli dokonalosti. Kvůli tomu, aby výmaz nebyl divadelní tlačítko.
+
+### FH.4 Navrhněte mazání jako bezpečnou produktovou operaci
+
+Mazání má být opakovatelné, auditovatelné a bezpečné. Ruční SQL příkaz poslaný ve stresu v pátek odpoledne je sice adrenalinový sport, ale špatná provozní praxe. V produktu i administraci potřebujete jasné akce: deaktivovat, pozastavit, anonymizovat, smazat, archivovat, obnovit ze zákonného důvodu.
+
+Dobré mazání má tyto vlastnosti:
+
+- kontroluje oprávnění a vyžaduje vyšší jistotu u destruktivních akcí,
+- ukazuje dopad před potvrzením: účty, projekty, soubory, integrace, billing, webhooky,
+- odděluje okamžité vypnutí přístupu od pozdějšího fyzického smazání,
+- zapisuje auditní stopu bez zbytečného obsahu osobních dat,
+- řeší závislosti: sdílené týmy, faktury, komentáře, audit logy, právní hold,
+- má retry mechanismus a stav: čeká, běží, dokončeno, selhalo, vyžaduje ruční kontrolu.
+
+Pro malé týmy stačí jednoduchý retenční worker, který denně projde expirované položky podle pravidel, provede akce a zapíše souhrn. Důležité je, aby existoval report selhání. Tiché selhání mazání je jako tichý požární alarm. Technicky zajímavé, prakticky k ničemu.
+
+### FH.5 Retenční karta datové kategorie
+
+Použijte jednu kartu pro každou významnou kategorii dat. Ne jako právní román, ale jako provozní smlouvu mezi produktem, vývojem, marketingem a supportem.
+
+```markdown
+## Retenční karta: [kategorie]
+
+### Účel
+- Proč data sbíráme:
+- Jaké rozhodnutí nebo funkci podporují:
+- Co se stane, když je nebudeme mít:
+
+### Rozsah
+- Konkrétní pole nebo typy záznamů:
+- Kde data vznikají:
+- Kde se ukládají:
+- Kdo k nim má přístup:
+
+### Retence
+- Spouštěč začátku lhůty:
+- Délka aktivní retence:
+- Co se děje po konci lhůty:
+- Výjimky a právní hold:
+
+### Provoz
+- Vlastník pravidla:
+- Automatizace mazání:
+- Kontrola selhání:
+- Poslední review:
+```
+
+Tuhle kartu dejte vedle datové mapy a integračního inventáře. Pokud nový nástroj neumí retenci nastavit nebo exportovat, je to rozhodovací signál. Ne „malá nepříjemnost“. Malé nepříjemnosti mají v SaaSu zvláštní schopnost dorůst do dospělého incidentu.
+
+### FH.6 Checklist: retence bez datového skladu
+
+- [ ] Každá hlavní datová kategorie má účel, vlastníka a retenční pravidlo.
+- [ ] Retenční pravidla mají jasný spouštěč, délku a konečnou akci.
+- [ ] Rozlišujeme smazání, anonymizaci, archivaci a právní hold.
+- [ ] Technické logy, support přílohy, exporty a demo data mají krátkou výchozí retenci.
+- [ ] Zálohy mají popsanou retenci, přístupy a obnovovací dopady.
+- [ ] Třetí strany mají zkontrolované retenční nastavení a exportní možnosti.
+- [ ] Mazání běží automatizovaně nebo podle opakovatelného runbooku, ne ručně z paměti.
+- [ ] Selhání retenčního workeru vytváří alert nebo viditelný report.
+- [ ] Privacy policy a interní dokumentace neříkají něco jiného než skutečný provoz.
+- [ ] Kvartálně mažeme nebo zkracujeme data, která už nepodporují konkrétní rozhodnutí nebo povinnost.
+
+### Mini cvičení: retenční detox za 60 minut
+
+1. Vyberte jednu oblast: support, logy, exporty, leady nebo produktové eventy.
+2. Sepište všechny systémy, kde se tahle data mohou objevit.
+3. U každého systému doplňte účel, vlastníka, současnou retenci a způsob smazání.
+4. Najděte tři místa, kde držíte data déle než potřebujete.
+5. Zkraťte jedno pravidlo hned, jedno dejte do backlogu a jedno eskalujte kvůli právní nebo účetní kontrole.
+6. Přidejte kontrolu do měsíčního nebo kvartálního review.
+
+Hotový výstup není tabulka s dvaceti sloupci. Hotový výstup je konkrétní změna: kratší logy, expirované exporty, vyčištěné demo účty nebo support přílohy s pravidlem mazání. Tabulky jsou fajn. Samy od sebe ale nic nesmažou, překvapivě.
+
+### Codyho komentář
+
+Retence je jedna z nejvíc podceňovaných produktových disciplín. Všichni chtějí sbírat „data pro budoucí AI“, „historii pro lepší insighty“ a „logy pro jistotu“. Skvělé. A kdo za rok vysvětlí, proč máte v support systému staré přílohy s osobními údaji, v exportním bucketu zapomenuté ZIPy a ve stagingu kopii produkce? Přesně. Nikdo. Proto je nejlepší retenční strategie nudná, automatizovaná a napsaná dřív, než ji potřebujete.
+
+### Zdroje k příloze FH
+
+- GDPR, článek 5: principy minimalizace dat, omezení uložení a odpovědnosti správce za prokázání souladu: https://gdpr-info.eu/art-5-gdpr/
+- GDPR, článek 25: ochrana údajů již od návrhu a ve výchozím nastavení jako základ pro kratší výchozí retenci: https://gdpr-info.eu/art-25-gdpr/
+- EDPB Guidelines 4/2019 on Article 25 Data Protection by Design and by Default: výklad k privacy by design/default a nastavení ochrany už při návrhu produktu: https://www.edpb.europa.eu/documents/guideline/guidelines-42019-on-article-25-data-protection-by-design-and-by-default_en
+- CNIL: Limiting data retention periods — praktické vodítko, že osobní údaje nelze držet neomezeně a po konci účelu mají být smazány, anonymizovány nebo archivovány podle pravidel: https://www.cnil.fr/fr/passer-laction/les-durees-de-conservation-des-donnees
+- CNIL: Sheet n°7 Minimize the data collection — doporučení spojit kategorie dat s retenčními lhůtami a nezapomenout ani na logy: https://www.cnil.fr/en/sheet-ndeg7-minimize-data-collection
+- CNIL: Informing data subjects — připomíná, že informace pro subjekty údajů má zahrnovat retenční dobu nebo kritéria jejího určení: https://www.cnil.fr/en/informing-data-subjects
+
 ## Pracovní log
+
+- 2026-08-27: Přidána příloha FH „Retence dat bez digitálního skladu na věčné časy“ s kategorizací dat, retenčními spouštěči, pravidly pro zálohy/exporty/logy, návrhem bezpečného mazání, retenční kartou, checklistem, hodinovým detoxem a ověřenými GDPR/EDPB/CNIL zdroji.
 
 - 2026-08-27: Přidána příloha FG „Consent management bez cookie lišty jako vánočního stromku“ s cookie/script inventářem, oddělením nutných a volitelných kategorií, férovým UI souhlasu, úsporným consent logem, privacy-first architekturou, šablonou inventáře, detox cvičením a ověřenými EDPB/GDPR/ePrivacy zdroji.
 
