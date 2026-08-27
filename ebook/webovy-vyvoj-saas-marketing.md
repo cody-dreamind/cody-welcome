@@ -357,6 +357,8 @@ DL. Nákladové brzdy pro SaaS a AI funkce bez spreadsheetové mlhy
 DM. Retence a mazání dat bez digitálního syslení
 DN. Trust centrum pro malý SaaS bez bezpečnostního divadla
 DO. Provozní changelog bez firemní ztráty paměti
+DP. Doménová a DNS hygiena bez firemního single point of failure
+DQ. Závislosti a balíčky bez dodavatelského minového pole
 
 ## 1. Web jako obchodní systém
 
@@ -28477,7 +28479,189 @@ Můj pohled — Cody: doména je jako klíče od kanceláře, trezoru a dodávky
 - CISA DMARC guidance: vysvětlení SPF, DKIM a DMARC pro ověřování e-mailů a ochranu domén před zneužitím: https://www.cisa.gov/sites/default/files/publications/cisa-dmarc.pdf
 - ENISA Security and Privacy for Public DNS Resolvers: evropský pohled na bezpečnostní a soukromostní dopady DNS resolverů: https://www.enisa.europa.eu/sites/default/files/publications/ENISA%20Report%20-%20Security%20and%20Privacy%20for%20public%20DNS%20Resolvers.pdf
 
+
+## DQ. Závislosti a balíčky bez dodavatelského minového pole
+
+Moderní webový vývoj je krásná věc. Napíšete tři řádky kódu, nainstalujete sto dvacet balíčků a najednou máte funkci, kterou by před deseti lety stavěl menší tým s kávovarem v režimu bojové pohotovosti. Jenže každá závislost je zároveň malá smlouva s někým, koho často neznáte. Přináší kód, transitive dependencies, build skripty, licenční podmínky, bezpečnostní riziko, údržbový rytmus a občas i překvapení typu „balíček už nikdo nespravuje, ale drží nám checkout“. Mňam.
+
+Cílem této přílohy není zakázat open source ani udělat z každého `npm install` soudní proces. Cílem je mít jednoduchý systém, který malému SaaS týmu dovolí používat knihovny rychle, ale ne slepě. Privacy-first pohled k tomu přidává ještě jednu otázku: neposílá tahle závislost data někam, kam bychom je neposlali vědomě?
+
+### DQ.1 Závislost není jen balíček, ale provozní závazek
+
+Když do projektu přidáte balíček, nepřidáváte jen funkci. Přidáváte budoucí aktualizace, bezpečnostní upozornění, kompatibilitu s frameworkem, případné licence, riziko supply-chain útoku a rozhodnutí, kdo bude problém řešit v pátek večer. Pokud to zní jako romantika, tak jen v žánru provozní horor.
+
+U každé významné závislosti si položte pět otázek:
+
+- Co přesně nám šetří a proč si to nechceme napsat sami?
+- Běží jen při buildu, jen na serveru, nebo i v prohlížeči zákazníka?
+- Pracuje s osobními, obchodními nebo bezpečnostně citlivými daty?
+- Je aktivně udržovaná a má rozumnou historii releasů?
+- Jak ji odstraníme, když začne být problém?
+
+Ne každá drobná utilita potřebuje vlastní složku v dokumentaci. Ale každá závislost, která sedí v autentizaci, platbách, editoru obsahu, analytice, e-mailu, souborech, AI workflow nebo build pipeline, už není drobnost. Tam chcete vědět, kdo ji schválil a jaký je plán B.
+
+### DQ.2 Rozdělte závislosti podle dopadu, ne podle nálady
+
+Malý tým nepotřebuje enterprise komisi na každou knihovnu. Potřebuje jednoduché třídění rizika. Doporučuji čtyři úrovně:
+
+| Úroveň | Příklad | Schvalování |
+|---|---|---|
+| Nízký dopad | formátování data, čistě lokální helper | běžné code review |
+| Střední dopad | UI komponenta, parser, validace formuláře | code review + kontrola údržby |
+| Vysoký dopad | auth, platby, soubory, e-mail, analytika | technický owner + privacy kontrola |
+| Kritický dopad | build systém, deployment, secrets, agentní nástroje | explicitní rozhodnutí + rollback plán |
+
+Důležité je, aby se úroveň neurčovala podle popularity balíčku. Populární balíček může být pořád rizikový, pokud běží v citlivé části systému. A malý balíček může být v pohodě, pokud je izolovaný, auditovatelný a dá se snadno nahradit.
+
+Codyho komentář: hvězdičky na GitHubu nejsou bezpečnostní certifikát. Jsou to spíš potlesk publika. Hezké, ale firewall z toho nepostavíte.
+
+### DQ.3 Před přidáním nové závislosti udělejte pětiminutovou kontrolu
+
+Než se balíček dostane do hlavní větve, stačí krátký rituál. Žádné procesní divadlo, jen pár kontrol, které zabrání nejtrapnějším budoucím incidentům.
+
+Minimum před přidáním:
+
+- přečíst README a zjistit, jestli balíček dělá opravdu jen to, co potřebujete,
+- zkontrolovat poslední aktivitu projektu a otevřené bezpečnostní problémy,
+- podívat se na počet a povahu transitive dependencies,
+- ověřit licenci,
+- zkontrolovat, zda balíček nespouští postinstall skripty bez dobrého důvodu,
+- zjistit, zda balíček neposílá telemetrii nebo externí požadavky,
+- u browser knihoven ověřit velikost dopadu na bundle,
+- u serverových knihoven ověřit, s jakými daty pracují.
+
+Pokud kontrola odhalí nejistotu, neznamená to automaticky zákaz. Znamená to rozhodnutí: přijímáme riziko, izolujeme použití, hledáme alternativu, nebo funkci zjednodušíme.
+
+### DQ.4 Aktualizace závislostí mají mít rytmus
+
+Nejhorší strategie je ignorovat aktualizace půl roku a pak v panice spustit hromadný upgrade všeho, protože někde svítí červený alert. To není údržba. To je archeologický výkop s adrenalinem.
+
+Rozumný rytmus pro malý SaaS:
+
+- **Týdně:** projít bezpečnostní alerty a malé patch aktualizace.
+- **Měsíčně:** sloučit běžné minor aktualizace po testech.
+- **Čtvrtletně:** naplánovat větší framework/runtime aktualizace.
+- **Před releasem:** zkontrolovat, zda nové balíčky nepřidaly citlivé datové toky.
+- **Po incidentu v ekosystému:** ověřit, zda se problém týká přímých i nepřímých závislostí.
+
+Automatické PR od nástrojů typu Dependabot nebo Renovate jsou užitečné, ale nejsou náhrada za úsudek. Dobré pravidlo: automatizace smí otevřít PR, spustit testy a ukázat changelog. Člověk pořád rozhoduje, jestli změna patří do produkce.
+
+### DQ.5 Lockfile je provozní dokument, ne šum v commitu
+
+`package-lock.json`, `pnpm-lock.yaml`, `yarn.lock`, `Cargo.lock` nebo jiné lockfile mechanismy nejsou otravný vedlejší efekt. Jsou to záznamy o tom, co se opravdu instaluje. Bez nich neumíte spolehlivě reprodukovat build a těžko dokazujete, co běželo v produkci.
+
+Pravidla pro lockfile:
+
+- commitovat ho u aplikací a služeb,
+- neměnit ho ručně bez jasného důvodu,
+- nenechávat v PR obří lockfile změny bez vysvětlení,
+- porovnat změnu lockfile při přidání nové knihovny,
+- držet instalaci v CI deterministickou,
+- při incidentu vědět, který commit obsahoval kterou verzi.
+
+Pokud PR mění jen jednu malou knihovnu a lockfile přepíše polovinu ekosystému, zastavte se. Možná je to v pořádku. Možná jste právě pozvali do projektu menší město transitive dependencies.
+
+### DQ.6 Privacy-first kontrola klientských knihoven
+
+Nejcitlivější jsou závislosti, které běží v prohlížeči. Mají přístup k URL, DOM, cookies podle nastavení, lokálnímu storage, formulářovým interakcím a často i k chování uživatele. U marketingových skriptů, widgetů, chatů, heatmap, analytiky a A/B testovacích knihoven proto platí přísnější režim.
+
+Před nasazením klientské knihovny ověřte:
+
+- jaké požadavky odesílá po načtení stránky,
+- zda se načítá z evropského nebo mimoevropského endpointu,
+- jestli běží před souhlasem uživatele,
+- zda umí fungovat bez cookies,
+- zda sbírá IP adresu, user agent, URL parametry nebo obsah formulářů,
+- zda má dokumentované vypnutí telemetrie,
+- jestli je možné ji self-hostovat nebo nahradit server-side integrací,
+- jak se chová při odhlášení a výmazu dat.
+
+Privacy-first default: co nepotřebuje běžet v prohlížeči, ať tam neběží. Pokud něco stačí vyřešit server-side, přes RSS, přes přímý odkaz, přes vlastní event endpoint nebo ručním exportem, je to často lepší než další univerzální skript. Univerzální skripty jsou jako univerzální klíče. Praktické, dokud je někdo neztratí.
+
+### DQ.7 Šablona: karta nové závislosti
+
+Použijte ji u středního, vysokého a kritického dopadu. Nízký dopad stačí řešit v PR popisu.
+
+## Závislost
+
+- Název:
+- Verze nebo rozsah verzí:
+- Ekosystém:
+- Přímá nebo nepřímá závislost:
+- Produkční, vývojová nebo build-time:
+
+## Důvod
+
+- Jaký problém řeší:
+- Proč nestačí existující kód:
+- Jaká alternativa byla zvažována:
+- Co se stane, když ji nepřidáme:
+
+## Riziko
+
+- Dopadová úroveň:
+- Kde běží:
+- S jakými daty pracuje:
+- Licence:
+- Údržba projektu:
+- Známá omezení:
+
+## Privacy-first kontrola
+
+- Posílá externí požadavky:
+- Sbírá telemetrii:
+- Běží v prohlížeči:
+- Vyžaduje cookies nebo identifikátory:
+- Lze ji vypnout, izolovat nebo self-hostovat:
+
+## Provoz
+
+- Owner:
+- Testy pokrývající použití:
+- Rollback postup:
+- Datum další revize:
+- Exit plán:
+
+### DQ.8 Checklist: závislosti bez supply-chain rulety
+
+- [ ] Nová závislost má jasný účel a nejde jen o pohodlný reflex.
+- [ ] Dopadová úroveň odpovídá tomu, kde běží a s jakými daty pracuje.
+- [ ] Licence je ověřená před mergem.
+- [ ] Lockfile změna odpovídá očekávání.
+- [ ] CI instaluje závislosti deterministicky.
+- [ ] Bezpečnostní alerty mají vlastníka a reakční rytmus.
+- [ ] Klientské knihovny neběží před souhlasem, pokud nejsou nezbytné.
+- [ ] Externí požadavky z prohlížeče jsou známé a zdokumentované.
+- [ ] Kritické závislosti mají rollback nebo exit plán.
+- [ ] Nepoužívané balíčky se pravidelně odstraňují.
+- [ ] Automatické update PR nejsou slepě slučované.
+- [ ] Změny ve vysokém dopadu se zapisují do provozního changelogu.
+
+### DQ.9 Hodinové cvičení: dependency detox
+
+Vezměte jeden aktivní projekt a udělejte rychlý audit:
+
+1. **10 minut:** vypište přímé produkční závislosti.
+2. **10 minut:** označte ty, které běží v prohlížeči nebo pracují s citlivými daty.
+3. **10 minut:** najděte tři balíčky, u kterých tým neví, proč existují.
+4. **10 minut:** projděte bezpečnostní alerty a otevřené update PR.
+5. **10 minut:** vyberte jednu závislost k odstranění, aktualizaci nebo dokumentaci.
+6. **10 minut:** zapište rozhodnutí do dependency karty nebo provozního changelogu.
+
+Výstup není „máme všechno perfektní“. Výstup je jeden konkrétní zlepšený bod. Třeba odstraněný starý widget, schválený update, zavřený falešný alert, nebo karta kritické knihovny. Malé vítězství, žádné slavnostní přestřižení pásky.
+
+### Zdroje k příloze DQ
+
+- OWASP Software Component Verification Standard: rámec pro aktivity, kontroly a dobré praktiky při snižování rizik v softwarovém dodavatelském řetězci: https://owasp.org/www-project-software-component-verification-standard/
+- GitHub Docs — Securing your supply chain: přehled funkcí pro správu závislostí, bezpečnostní upozornění, provenance a integritu artefaktů: https://docs.github.com/en/code-security/dependabot
+- OpenSSF Scorecard: automatizované kontroly bezpečnostních praktik open source projektů, včetně údržby, pinned dependencies, CI a zranitelností: https://securityscorecards.dev/
+- NIST SP 800-218 Secure Software Development Framework: doporučení pro bezpečný vývoj softwaru a snižování rizika zranitelností v průběhu SDLC: https://csrc.nist.gov/pubs/sp/800/218/final
+
+
 ## Pracovní log
+
+- 2026-08-27: Přidána příloha DQ „Závislosti a balíčky bez dodavatelského minového pole“ s dopadovým tříděním závislostí, pětiminutovou kontrolou před přidáním balíčku, rytmem aktualizací, lockfile pravidly, privacy-first kontrolou klientských knihoven, kartou nové závislosti, checklistem, hodinovým dependency detoxem a ověřenými OWASP/GitHub/OpenSSF/NIST zdroji.
+
 
 - 2026-08-27: Přidána příloha DP „Doménová a DNS hygiena bez firemního single point of failure“ s vlastnictvím domén, úklidem DNS zóny, SPF/DKIM/DMARC základem, subdoménovou architekturou, release postupem DNS změn, privacy-first auditem, doménovou kartou, checklistem, hodinovým cvičením a ověřenými ICANN/NIST/CISA/ENISA zdroji.
 
