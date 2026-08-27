@@ -31359,7 +31359,171 @@ Status page není přiznání slabosti. Je to důkaz, že víte, že software ob
 - EDPB Guidelines 9/2022 on personal data breach notification under GDPR: výklad k posuzování a oznamování porušení zabezpečení osobních údajů: https://www.edpb.europa.eu/documents/guideline/guidelines-92022-on-personal-data-breach-notification-under-gdpr_en
 - RFC 9110 HTTP Semantics: definice `503 Service Unavailable` a hlavičky `Retry-After` pro dočasnou nedostupnost a opakování požadavků: https://www.rfc-editor.org/rfc/rfc9110.html
 
+## Příloha FG — Consent management bez cookie lišty jako vánočního stromku
+
+Cookie lišta není dekorace, právní amulet ani UX minihra „najdi odmítnutí mezi sedmi tlačítky“. Je to rozhraní pro rozhodnutí člověka. Pokud návštěvníka tlačíte do souhlasu barvou, textem, skrytým odmítnutím nebo nekonečným seznamem partnerů, nevypadá to jako moderní marketing. Vypadá to jako zoufalství v modálním okně.
+
+Privacy-first přístup je jednodušší: co nepotřebujete, nesbírejte. Co je nutné pro fungování služby, jasně vysvětlete. Co je volitelné, nechte vypnuté, dokud člověk opravdu nesouhlasí. A pokud nejste schopní vysvětlit, proč konkrétní cookie nebo event potřebujete, pravděpodobně ho nepotřebujete. Ano, i když dashboard potom nebude mít tak barevný graf. Grafy to zvládnou, jsou dospělé.
+
+### FG.1 Nezačínejte nástrojem, začněte inventářem
+
+Než vyberete consent management platformu, udělejte inventář toho, co web nebo produkt reálně spouští:
+
+- **Nutné funkce:** session cookie, CSRF token, jazyk, košík, bezpečnostní ochrana, přihlášení.
+- **Preferenční nastavení:** téma, jazyk, zobrazení tabulek, uložené filtry.
+- **Agregovaná analytika:** pageviews, referrery, technické chyby, konverzní události bez osobního profilu.
+- **Marketingové měření:** reklamní pixely, remarketing, cross-site identifikátory, affiliate parametry.
+- **Třetí strany:** vložená videa, mapy, chat widgety, platební prvky, CDN, fonty, formulářové služby.
+
+Výstupem nemá být „máme cookie lištu“. Výstupem má být tabulka: název, účel, kategorie, provozovatel, kde běží data, retence, právní základ, kdy se spouští a jak ho vypnout. Pokud v tabulce najdete položku „nevíme“, berte ji jako produkční bug. Ne jako prostor pro kreativní právničinu.
+
+### FG.2 Nutné a volitelné věci držte tvrdě odděleně
+
+Častý problém: tým dá do jedné krabice všechno, co se mu hodí, a nazve ji „nezbytné“. To je špatně. Nutné je to, bez čeho služba nemůže bezpečně a technicky fungovat podle očekávání uživatele. Není nutné vědět, že se někdo potřetí vrátil z reklamy na konkrétní landing page, aby se mu zobrazil formulář.
+
+Praktické dělení:
+
+- **Vždy aktivní bez souhlasu:** autentizace, bezpečnost, load balancing, košík, antifraud u platby, preferenční nastavení vyžádané uživatelem.
+- **Aktivní jen po souhlasu nebo jasné volbě:** marketingové pixely, remarketing, personalizace reklam, nahrávání session, heatmapy, sdílení dat s reklamními partnery.
+- **Lepší privacy-first alternativa:** agregovaná analytika bez cookies, serverové technické logy s krátkou retencí, UTM vyhodnocení na úrovni kampaně, RSS a přímé odkazy místo social share skriptů.
+
+Můj default pro malý evropský SaaS: začít bez reklamních trackerů, použít jednoduchou agregovanou analytiku v EU, měřit konverze přes vlastní události a marketing vyhodnocovat přes kampaně, ne přes individuální šmírovací román každého návštěvníka.
+
+### FG.3 Souhlas musí být stejně snadné odmítnout jako přijmout
+
+EDPB dlouhodobě zdůrazňuje, že souhlas podle GDPR má být svobodný, konkrétní, informovaný a jednoznačný. V praxi to pro rozhraní znamená několik nepříjemně jednoduchých věcí:
+
+- tlačítko pro odmítnutí má být dostupné ve stejné vrstvě jako přijetí,
+- text nesmí vyvolávat falešný dojem, že bez marketingových cookies web nefunguje,
+- předem zaškrtnuté volby jsou špatný nápad,
+- barvy a velikosti tlačítek nemají manipulovat k souhlasu,
+- odvolání souhlasu má být stejně jednoduché jako jeho udělení,
+- nastavení musí být dostupné i později, ne jen při první návštěvě.
+
+Dobré minimum pro první vrstvu lišty:
+
+```text
+Používáme nutné cookies pro fungování webu. Volitelně nám můžete povolit agregovanou analytiku, která nám pomáhá zlepšovat obsah a produkt. Nepoužíváme reklamní pixely ani cross-site tracking.
+
+[Odmítnout volitelné] [Nastavit] [Povolit analytiku]
+```
+
+Pokud používáte reklamní technologie, nebalte je do věty „zlepšování služeb“. Řekněte narovinu, komu se data předávají a k čemu. Pokud to zní ošklivě, problém není v copywritingu. Problém je v tom, co děláte.
+
+### FG.4 Consent log má dokazovat proces, ne sbírat další profil
+
+Ano, potřebujete vědět, jaká volba byla udělena a podle jaké verze textu. Ne, nepotřebujete z toho vyrábět další behaviorální profil. Consent log navrhněte úsporně:
+
+| Pole | Doporučení |
+| --- | --- |
+| `consent_id` | Náhodný identifikátor volby, ne e-mail ani interní user ID, pokud to není nutné. |
+| `version` | Verze consent textu a kategorií. |
+| `categories` | Povolené kategorie, např. `analytics=true`, `marketing=false`. |
+| `timestamp` | Čas udělení, změny nebo odvolání. |
+| `source` | Web, aplikace, administrace, mobilní obrazovka. |
+| `locale` | Jazyk zobrazeného textu. |
+| `proof` | Hash nebo odkaz na verzi textu, ne nekonečný dump UI. |
+| `retention` | Doba uchování podle právní a provozní potřeby. |
+
+U přihlášeného produktu můžete souhlas navázat na účet, pokud to dává smysl pro použití napříč zařízeními. U běžného veřejného webu často stačí lokální nastavení v prohlížeči a agregované měření bez cookie. Nezakládejte centrální profil jen proto, abyste si pamatovali, že člověk odmítl sledování. To je krásně absurdní, ale pořád absurdní.
+
+### FG.5 Consent není náhrada za minimalizaci dat
+
+Největší trik špatného consent managementu je používat souhlas jako univerzální omluvenku: „Klikl, takže můžeme všechno.“ Ne. Souhlas neřeší špatný datový návrh, příliš dlouhou retenci, zbytečné předávání třetím stranám ani chybějící bezpečnost.
+
+Před každou novou kategorií si položte pět otázek:
+
+1. Jaké rozhodnutí díky těmto datům uděláme?
+2. Umíme stejné rozhodnutí udělat z agregovaných nebo anonymizovaných dat?
+3. Běží zpracování v Evropě a víme, kdo je zpracovatel?
+4. Jak dlouho data opravdu potřebujeme?
+5. Co se rozbije, když uživatel řekne ne?
+
+Pokud odpověď na poslední otázku zní „rozbije se nám atribuce v reklamním nástroji“, není to problém uživatele. Je to váš business trade-off.
+
+### FG.6 Praktická architektura pro malý privacy-first web
+
+Jednoduchý evropský setup může vypadat takto:
+
+- **Bez souhlasu:** server doručí stránku, nutné bezpečnostní cookies, RSS, formulář s CSRF ochranou, technické logy s krátkou retencí.
+- **Po povolení analytiky:** zapne se agregované měření pageviews a několika vlastních událostí bez reklamních identifikátorů.
+- **Bez marketingových pixelů:** kampaně se vyhodnocují přes UTM parametry, landing page, formuláře a obchodní kvalitu poptávky.
+- **Preference:** uživatel může kdykoli změnit volbu přes odkaz „Nastavení soukromí“ v patičce.
+- **Dokumentace:** veřejná privacy stránka popisuje kategorie, účel, dodavatele, retenci a kontakt.
+
+Tento model není ideologická póza. Je provozně jednodušší, levnější na audit a často obchodně důvěryhodnější. Zvlášť v Evropě, kde zákazníci ve firmách čím dál častěji řeší, kam data tečou a kdo k nim má přístup.
+
+### FG.7 Šablona consent inventáře
+
+```markdown
+# Consent inventář
+
+## Kontext
+- Web nebo produkt:
+- Vlastník:
+- Datum revize:
+- Další revize:
+
+## Kategorie
+| Kategorie | Výchozí stav | Účel | Právní základ | Odvolání |
+| --- | --- | --- | --- | --- |
+| Nutné | zapnuto | bezpečný provoz služby | plnění služby / oprávněný provozní účel podle kontextu | nelze vypnout bez ztráty funkce |
+| Preferenční | podle volby uživatele | zapamatování nastavení | souhlas nebo uživatelem vyžádaná funkce | nastavení soukromí |
+| Analytické | vypnuto | agregované zlepšování webu | souhlas, pokud není zvolen režim bez identifikátorů podle místních pravidel | nastavení soukromí |
+| Marketingové | vypnuto | reklama a atribuce | souhlas | nastavení soukromí |
+
+## Položky
+| Název | Dodavatel | Kategorie | Data | Region | Retence | Spouštění | Poznámka |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+
+## UI kontrola
+- Je odmítnutí ve stejné vrstvě jako přijetí?
+- Jsou volby předem vypnuté?
+- Je text konkrétní a bez manipulace?
+- Je možné souhlas později změnit?
+- Je dokumentovaná verze textu?
+```
+
+### Checklist: cookie lišta bez vánočního stromku
+
+- [ ] Máme inventář všech cookies, skriptů, pixelů a vložených služeb.
+- [ ] Nutné a volitelné kategorie jsou oddělené podle skutečné potřeby, ne podle přání marketingu.
+- [ ] Volitelné sledování se nespouští před souhlasem.
+- [ ] Odmítnutí je stejně snadné jako přijetí.
+- [ ] Texty jsou konkrétní, bez nátlaku a bez předem zaškrtnutých voleb.
+- [ ] Souhlas lze jednoduše odvolat nebo změnit později.
+- [ ] Consent log neobsahuje zbytečné osobní údaje.
+- [ ] Každý dodavatel má jasný region provozu, účel a retenci.
+- [ ] Privacy stránka odpovídá reálnému technickému chování webu.
+- [ ] Při každé nové integraci se aktualizuje inventář i consent UI.
+
+### Mini cvičení: consent detox za 60 minut
+
+1. Otevřete web v anonymním okně a zapište, co se načte před jakoukoli volbou.
+2. Vypište všechny externí domény a skripty.
+3. Označte každou položku jako nutnou, preferenční, analytickou nebo marketingovou.
+4. U každé volitelné položky napište jedno rozhodnutí, které díky ní uděláte.
+5. Odstraňte vše, kde neumíte rozhodnutí obhájit.
+6. Přepište první vrstvu consent UI tak, aby odmítnutí bylo stejně snadné jako přijetí.
+7. Přidejte do patičky odkaz na nastavení soukromí.
+8. Zapište verzi textu a datum revize do consent inventáře.
+
+### Codyho komentář
+
+Nejlepší cookie lišta je často ta, kterou skoro nepotřebujete, protože jste produkt navrhli rozumně. Privacy-first není soutěž v tom, kdo má nejdelší právní text. Je to disciplína: méně dat, jasnější účely, evropský provoz, férové rozhraní. Uživatelé nejsou klikací surovina. Jsou lidi. Překvapivý koncept, já vím.
+
+### Zdroje k příloze FG
+
+- EDPB Guidelines 05/2020 on consent under Regulation 2016/679: výklad požadavků na svobodný, konkrétní, informovaný a jednoznačný souhlas: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-052020-consent-under-regulation-2016679_en
+- EDPB Guidelines 03/2022 on deceptive design patterns in social media platform interfaces: doporučení k rozpoznání manipulativních návrhových vzorů a férovějším rozhraním: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-032022-deceptive-design-patterns-social-media_en
+- EDPB Opinion 08/2024 on valid consent in the context of consent or pay models: aktuální stanovisko k tomu, kdy může být souhlas v digitálních modelech považován za platný: https://www.edpb.europa.eu/our-work-tools/our-documents/opinion-board-art-64/opinion-082024-valid-consent-context-consent-or-pay-models_en
+- GDPR, článek 7: podmínky souhlasu včetně doložitelnosti a práva souhlas odvolat: https://gdpr-info.eu/art-7-gdpr/
+- GDPR, článek 25: data protection by design and by default jako princip návrhu služeb s minimalizací dat: https://gdpr-info.eu/art-25-gdpr/
+- Směrnice 2002/58/ES o soukromí a elektronických komunikacích: právní kontext ukládání informací a přístupu k informacím v zařízení uživatele v EU: https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=CELEX:32002L0058
+
 ## Pracovní log
+
+- 2026-08-27: Přidána příloha FG „Consent management bez cookie lišty jako vánočního stromku“ s cookie/script inventářem, oddělením nutných a volitelných kategorií, férovým UI souhlasu, úsporným consent logem, privacy-first architekturou, šablonou inventáře, detox cvičením a ověřenými EDPB/GDPR/ePrivacy zdroji.
 
 - 2026-08-27: Přidána příloha FF „Status page a incident komunikace bez panického divadla“ s návrhem veřejné status page, incident komunikačními vrstvami, časovou osou, GDPR rozlišením, privacy-first odběrem, incident kartou, checklistem, 45minutovým cvičením a ověřenými NCSC/ENISA/GDPR/EDPB/RFC zdroji.
 
