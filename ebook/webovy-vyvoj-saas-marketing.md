@@ -30983,7 +30983,227 @@ Výstupem má být karta privacy centra a jeden implementační úkol. Ne komple
 - EDPB: Guidelines 4/2019 on Article 25 vysvětlují praktický přístup k ochraně údajů již v návrhu a ve výchozím nastavení: https://www.edpb.europa.eu/documents/guideline/guidelines-42019-on-article-25-data-protection-by-design-and-by-default_en
 - EDPB: Guidelines on transparency under Regulation 2016/679 řeší srozumitelnost, dostupnost a životní cyklus informování subjektů údajů: https://www.edpb.europa.eu/system/files/2023-09/wp260rev01_en.pdf
 
+## Příloha EE: Webhooky a integrace bez tajného tunelu do firmy
+
+Webhook vypadá nevinně: „když se něco stane, pošli HTTP požadavek sem“. Jenže v malém SaaSu se z webhooků rychle stane neviditelná dopravní síť mezi fakturací, CRM, e-mailingem, supportem, analytikou, interním Slackem, AI automaty a jednou službou, kterou kdysi někdo přidal „jen na test“. Romantika. Taková ta, u které po roce nikdo neví, proč se zákaznická data objevují v pěti systémech.
+
+Integrace mají být produktová infrastruktura, ne sbírka tajných hadiček. Každý webhook má mít účel, vlastníka, datový rozsah, bezpečnostní model, retry pravidla, logování a plán vypnutí. Pokud to zní moc formálně, je to proto, že opačná varianta se jmenuje „proč nám fakturační event založil tři duplicitní účty a poslal osobní údaje do testovacího nástroje“.
+
+### EE.1 Nejdřív popište tok, potom pište endpoint
+
+Před implementací webhooku napište jednu větu:
+
+> Když nastane událost X v systému A, systém B potřebuje udělat Y, aby vznikla hodnota Z.
+
+Pokud se do věty nevejde hodnota pro zákazníka, provoz nebo tým, webhook nejspíš není integrace, ale digitální nutkání. Malý tým nepotřebuje automatizovat každé zakašlání aplikace. Potřebuje automatizovat opakované kroky, kde ruční práce vytváří zpoždění, chyby nebo bezpečnostní riziko.
+
+Praktický příklad:
+
+- špatně: „Pošli všechny user eventy do CRM.“
+- lépe: „Když zákazník dokončí aktivaci účtu, CRM vytvoří úkol pro obchodníka jen u placených B2B workspace účtů.“
+- privacy-first verze: „CRM dostane jen workspace ID, firmu, plán a kontaktní e-mail správce; produktové chování zůstává v agregované analytice.“
+
+Tok integrace popisujte jako malou mapu:
+
+- zdrojový systém,
+- cílový systém,
+- spouštěcí událost,
+- minimální payload,
+- citlivost dat,
+- očekávaná akce,
+- co se stane při chybě,
+- kdo integraci vlastní.
+
+Tahle mapa je levnější než incident. A méně trapná než věta „myslel jsem, že to nikdo nepoužívá“.
+
+### EE.2 Payload má být smlouva, ne batoh náhodných polí
+
+Webhook payload navrhujte jako veřejné API. I když je jen interní. Hlavně když je jen interní, protože interní věci mají zvláštní schopnost přežít pět let bez dokumentace.
+
+Dobrá payload pravidla:
+
+- používejte stabilní názvy polí,
+- přidejte `event_id`, `event_type`, `occurred_at` a verzi schématu,
+- neposílejte celé objekty, když stačí identifikátor a pár stavových polí,
+- rozlišujte technický identifikátor od e-mailu nebo jména člověka,
+- přidejte `workspace_id` nebo tenant kontext, pokud produkt pracuje s organizacemi,
+- neposílejte tokeny, session, interní poznámky, IP adresy ani volný text, pokud nejsou nezbytné.
+
+Ukázka rozumného payloadu:
+
+```json
+{
+  "event_id": "evt_01H...",
+  "event_type": "subscription.payment_failed",
+  "schema_version": "2026-08-27",
+  "occurred_at": "2026-08-27T20:00:00Z",
+  "workspace_id": "wrk_123",
+  "customer_id": "cus_456",
+  "plan": "team",
+  "amount_cents": 2900,
+  "currency": "EUR"
+}
+```
+
+Co tam není? Celá faktura, adresa, seznam uživatelů workspace, posledních deset kliknutí a poznámka obchodníka. Přesně tak. Minimalizace dat není právní dekorace, ale provozní hygiena.
+
+### EE.3 Podepisujte požadavky a ověřujte původ
+
+Webhook endpoint bez ověření je pozvánka do systému. Ne taková ta hezká pozvánka na kafe. Spíš cedule „zkuste poslat JSON, třeba něco rozbijete“.
+
+Minimální bezpečnostní základ:
+
+- každý webhook má vlastní tajemství nebo klíč,
+- příchozí požadavek se ověřuje podpisem těla zprávy,
+- podpis se počítá nad přesným raw body, ne nad už přepsaným JSON objektem,
+- požadavek obsahuje timestamp a krátké okno platnosti,
+- staré podpisy se odmítají kvůli replay útokům,
+- klíče se dají rotovat bez výpadku,
+- endpoint nevrací zbytečné detaily o interní chybě.
+
+Pokud integrace používá standardizované HTTP Message Signatures nebo podobný mechanismus dodavatele, držte se dokumentace konkrétní služby. Pokud podpis řešíte sami, buďte nudní: HMAC, timestamp, konstantní porovnání podpisu, krátké časové okno, rotace secretu a testy pro neplatný podpis. Kreativní kryptografie patří do muzea špatných nápadů, hned vedle „heslo v query stringu“.
+
+### EE.4 Idempotence chrání peníze, data i nervy
+
+Webhook se může doručit dvakrát. Nebo pětkrát. Nebo přijde později než jiný event. Síť není smluvní partner s dobrým time managementem.
+
+Každý přijímač webhooku proto musí umět:
+
+- poznat duplicitní `event_id`,
+- zpracovat stejný event opakovaně bez dvojitého účinku,
+- uložit stav zpracování,
+- vrátit úspěch, pokud už event bezpečně proběhl,
+- oddělit validaci, uložení a vedlejší efekty,
+- mít dead-letter frontu nebo ruční review pro opakovaně chybující eventy.
+
+Příklad: `invoice.paid` nesmí při druhém doručení znovu prodloužit tarif o další měsíc. `trial.ended` nesmí poslat tři e-maily. `user.deleted` nesmí spustit nekonečné mazání věcí, které už neexistují.
+
+Praktické pravidlo: nejdřív uložte `event_id` a rozhodnutí, potom proveďte akci. Když akce selže, stav musí být čitelný pro retry nebo ruční zásah. „Někde to spadlo“ není stav. To je nálada.
+
+### EE.5 Retry pravidla napište dřív, než je potřebujete
+
+Integrace bez retry politiky funguje přesně do prvního výpadku cílové služby. Potom se tým učí distribuované systémy v přímém přenosu, ideálně v pátek v 16:58.
+
+Nastavte pro každý webhook:
+
+- které HTTP statusy znamenají úspěch,
+- které chyby se mají zkusit znovu,
+- maximální počet pokusů,
+- exponenciální backoff,
+- čas, po kterém event jde do ručního review,
+- jak se pozná trvalá chyba schématu,
+- koho upozornit a kde.
+
+Typicky: `2xx` znamená přijato, `4xx` znamená problém v požadavku nebo oprávnění, `5xx` znamená dočasný problém cíle. Ale nespoléhejte na „typicky“ bez dokumentace konkrétní integrace. Zapište si to.
+
+U citlivých akcí nepouštějte retry donekonečna. Opakovaný pokus o vytvoření objednávky, refundaci nebo smazání účtu musí být idempotentní a auditovatelný. Jinak jste nevytvořili integraci, ale generátor účetních dobrodružství.
+
+### EE.6 Privacy-first integrační hranice
+
+Každá integrace je nové místo, kde mohou data opustit původní kontext. Proto nestačí říct „dodavatel je známý“. Potřebujete vědět, co přesně odchází, kam, proč a na jak dlouho.
+
+Privacy-first pravidla:
+
+- neposílejte osobní údaje, pokud stačí interní ID,
+- neposílejte obsah uživatelských zpráv do nástrojů, které ho nepotřebují,
+- oddělte marketingové integrace od produktového provozu,
+- pro evropské zákazníky preferujte EU provoz a jasné zpracovatelské podmínky,
+- do logů integrací ukládejte metadata, ne celé payloady,
+- nastavte retenci integračních logů,
+- mějte seznam aktivních webhook endpointů a jejich vlastníků,
+- při vypnutí dodavatele smažte secret, endpoint, dokumentaci i historická testovací data podle retenčních pravidel.
+
+Codyho praktická hranice: pokud integrace neumí vysvětlit, kde data končí a kdo k nim má přístup, nepatří do defaultního stacku. Možná patří do izolovaného experimentu. Možná nepatří nikam. I to je architektura.
+
+### EE.7 Karta webhook integrace
+
+Použijte ji pro každou novou integraci a u starých alespoň pro ty, které pracují s platbami, účty, osobními údaji nebo supportem.
+
+## Integrace
+
+- Název:
+- Vlastník:
+- Zdrojový systém:
+- Cílový systém:
+- Produkční endpoint:
+- Testovací endpoint:
+- Datum poslední revize:
+
+## Událost
+
+- `event_type`:
+- Proč existuje:
+- Kdo používá výsledek:
+- Co se stane, když event nedorazí:
+- Co se stane, když dorazí dvakrát:
+
+## Data
+
+- Povolená pole:
+- Zakázaná pole:
+- Osobní údaje:
+- Citlivá nebo obchodní data:
+- Retence logů:
+
+## Bezpečnost
+
+- Ověření podpisu:
+- Časové okno podpisu:
+- Rotace secretu:
+- Rate limit:
+- Povolené metody:
+- Chování při neplatném podpisu:
+
+## Provoz
+
+- Retry pravidla:
+- Idempotency klíč:
+- Monitoring:
+- Alert:
+- Ruční review:
+- Postup vypnutí:
+
+### EE.8 Checklist: integrace bez tajného tunelu
+
+- [ ] Každý webhook má vlastníka a popsaný účel.
+- [ ] Payload obsahuje jen minimální potřebná data.
+- [ ] Event má stabilní `event_id`, typ, timestamp a verzi schématu.
+- [ ] Příchozí požadavky se ověřují podpisem nebo rovnocenným mechanismem.
+- [ ] Ověření používá raw body, timestamp a ochranu proti replay útoku.
+- [ ] Zpracování je idempotentní a testované na duplicitní event.
+- [ ] Retry politika má limit, backoff a ruční review.
+- [ ] Integrační logy neukládají celé payloady s osobními údaji.
+- [ ] Existuje seznam aktivních endpointů, secretů a dodavatelů.
+- [ ] Vypnutí integrace má konkrétní postup včetně smazání secretů.
+
+### Mini cvičení: webhook audit za 60 minut
+
+1. **10 minut:** napište seznam všech webhooků a integračních endpointů v produktu.
+2. **10 minut:** označte ty, které pracují s platbami, účty, supportem nebo osobními údaji.
+3. **15 minut:** u tří nejrizikovějších doplňte kartu integrace.
+4. **10 minut:** zkontrolujte podpis, retry a idempotenci.
+5. **10 minut:** zkraťte payload nebo logy u jedné integrace.
+6. **5 minut:** založte úkol na vypnutí nebo revizi všeho, co nemá vlastníka.
+
+Výstupem má být mapa webhooků, jedna vyplněná integrační karta a jeden konkrétní cleanup úkol. Ne nový integrační framework. Ne osmihodinový meeting o event-driven architektuře. Jeden menší tunel zasypat, jeden důležitý tunel popsat.
+
+### Codyho komentář
+
+Webhooky mám rád, když jsou nudné. Nudný webhook je podepsaný, malý, verzovaný, idempotentní, zalogovaný bez datového bordelu a někdo ví, proč existuje. Všechno ostatní je firemní špagetový portál. Občas funguje. Častěji jen čeká na incident s dramatickou hudbou.
+
+### Zdroje k příloze EE
+
+- OWASP API Security Top 10 2023: rizika API včetně nefunkční autorizace, nadměrného vystavení dat, bezpečnostní konfigurace a neomezeného přístupu k citlivým business tokům: https://owasp.org/API-Security/editions/2023/en/0x00-header/
+- OWASP Webhook Security Guidelines: praktická doporučení pro ověření původu, podpisy, replay ochranu, validaci payloadu, rate limiting a logování webhooků: https://cheatsheetseries.owasp.org/cheatsheets/Webhook_Security_Guidelines_Cheat_Sheet.html
+- RFC 9421 HTTP Message Signatures: standard pro podepisování HTTP zpráv a ověřování jejich integrity: https://www.rfc-editor.org/rfc/rfc9421.html
+- RFC 9110 HTTP Semantics: definice HTTP metod, stavových kódů a idempotentních metod jako základ pro návrh API chování: https://www.rfc-editor.org/rfc/rfc9110.html
+- GDPR, článek 5: zásady zpracování včetně minimalizace údajů, omezení účelu a omezení uložení: https://gdpr-info.eu/art-5-gdpr/
+- GDPR, článek 25: data protection by design and by default pro návrh technických a organizačních opatření: https://gdpr-info.eu/art-25-gdpr/
+- EDPB Guidelines 07/2020 on the concepts of controller and processor: vztahy správců, zpracovatelů a smluvní odpovědnost při předávání zpracování dodavatelům: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-072020-concepts-controller-and-processor-gdpr_en
+
 ## Pracovní log
+
+- 2026-08-27: Přidána příloha EE „Webhooky a integrace bez tajného tunelu do firmy“ s návrhem integračního toku, payload smlouvou, ověřením podpisů, idempotencí, retry politikou, privacy-first hranicemi, kartou webhooku, checklistem, hodinovým auditem a ověřenými OWASP/RFC/GDPR/EDPB zdroji.
 
 - 2026-08-27: Přidána příloha ED „Privacy centrum v produktu bez schovaného labyrintu“ s návrhem samoobslužných sekcí, bezpečnostním třením podle rizika, komunikačními preferencemi, stavem žádostí, kartou privacy centra, checklistem, hodinovým cvičením a ověřenými GDPR/EDPB zdroji.
 
