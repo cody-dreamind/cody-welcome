@@ -28855,8 +28855,193 @@ Výstupem má být konkrétní seznam úprav: doplnit identifikátor do katalogu
 - EDPB Guidelines 01/2022 on data subject rights — Right of access: detailní metodika k právu na přístup a praktickému provedení ze strany správců: https://www.edpb.europa.eu/documents/guideline/guidelines-012022-on-data-subject-rights-right-of-access_en
 - EDPB SME guide — Respect individuals’ rights: doporučení pro malé organizace, aby měly připravené systémy, postupy a školení pro žádosti subjektů údajů: https://www.edpb.europa.eu/sme/be-compliant/respect-individuals-rights_en
 
+## DS. Identita, SSO a přístupy bez klíčů pod rohožkou
+
+Přihlášení bývá jedna z prvních věcí, kterou SaaS tým podcení, protože „zatím máme jen pár uživatelů“. Pak se přidá první firemní zákazník, druhý admin, externí účetní, integrační token, demo prostředí, support přístup a najednou se zjistí, že produktová bezpečnost stojí na heslech v poznámkách, sdíleném účtu a naději. Naděje je krásná vlastnost u lidí. U access managementu je to incident s čekacím pořadím.
+
+Identita není jen login obrazovka. Je to způsob, jak produkt pozná člověka, organizaci, roli, zařízení, integraci a rozsah oprávnění. Privacy-first přístup k identitě znamená sbírat jen tolik údajů, kolik je potřeba pro bezpečný provoz, oddělit interní a zákaznické účty, umět přístupy odebrat, mít auditní stopu a nedělat z každé návštěvy webu profilovací festival.
+
+### DS.1 Začněte modelem účtů, ne výběrem login knihovny
+
+Než vyberete auth provider, framework nebo knihovnu, napište si model účtů. U malého SaaSu bývá zásadní rozdíl mezi osobou, zákaznickou organizací a technickým tokenem. Pokud to v návrhu smícháte, pozdější zavedení týmů, fakturace, auditních logů nebo SSO bude bolet.
+
+Minimum modelu:
+
+- **Uživatel:** člověk s e-mailem, jménem, ověřeným kontaktem a přihlašovacími metodami.
+- **Organizace:** zákaznický tenant, fakturační vztah, datový prostor a vlastní nastavení.
+- **Členství:** vazba uživatele na organizaci s rolí a stavem pozvánky.
+- **Role:** sada oprávnění, ne hezký štítek v UI.
+- **Session:** aktivní přihlášení s expirací, zařízením a možností odhlášení.
+- **Service account:** technická identita pro integrace, importy, exporty nebo automatizace.
+- **Auditní událost:** kdo změnil přístup, kdy, odkud a s jakým dopadem.
+
+Praktické doporučení: nikdy nepoužívejte e-mail jako jediný primární klíč ve všech systémech. E-mail se mění, slučuje, přeposílá a někdy patří firmě, ne člověku. Interní stabilní `user_id` a `organization_id` jsou nudné. Proto jsou dobré.
+
+### DS.2 SSO je obchodní funkce i bezpečnostní hranice
+
+SSO není jen enterprise checkbox na pricing stránce. Pro B2B zákazníka znamená možnost řídit přístupy z vlastního identity providera, vypnout účet při odchodu zaměstnance a držet interní bezpečnostní pravidla na jednom místě. Pro vás to znamená méně ručních pozvánek, méně zapomenutých účtů a jasnější odpověď na bezpečnostní dotazníky.
+
+U malého SaaSu dává smysl plánovat SSO ve třech úrovních:
+
+1. **Základ:** e-mailové ověření, bezpečné resetování hesla, MFA pro adminy, audit změn rolí.
+2. **Týmový provoz:** organizace, role, pozvánky, deaktivace členů, přehled aktivních sessions.
+3. **SSO pro zákazníky:** OpenID Connect nebo SAML podle cílového trhu, mapování domén, fallback admin účet a testovací režim před zapnutím.
+
+OpenID Connect staví identitní vrstvu nad OAuth 2.0 a je běžnou volbou pro moderní SaaS přihlašování. OAuth samotný ale neznamená „uživatel je přihlášený bezpečně“; řeší autorizované přístupy a tokeny. Proto je potřeba rozumět rozdílu mezi autentizací, autorizací, session a API tokeny. Ano, názvy jsou podobné. Ne, není to výmluva házet všechno do jednoho JWT s platností do příštího století.
+
+### DS.3 Role navrhujte podle rizika, ne podle organizační politiky
+
+Nejčastější chyba v oprávněních je mít role `admin`, `user` a pak nekonečný seznam výjimek. Lepší je začít od akcí, které mohou způsobit škodu.
+
+Rozdělte akce podle dopadu:
+
+| Dopad | Příklady akcí | Typická kontrola |
+|---|---|---|
+| Nízký | zobrazit vlastní profil, upravit notifikace | běžná session |
+| Střední | pozvat člena, změnit fakturační kontakt, exportovat report | role + auditní log |
+| Vysoký | export osobních dat, změnit SSO, vytvořit API token | re-auth nebo MFA + audit |
+| Kritický | smazat tenant, vypnout MFA, převést vlastnictví | druhý signál, čekací lhůta nebo dvojí schválení |
+
+Role pak nejsou politická hodnost, ale balíček oprávnění podle práce. `Owner` řeší vlastnictví a billing, `Admin` provozní nastavení, `Member` běžnou práci, `Read-only` audit nebo externí spolupráci. U citlivých SaaSů přidejte samostatné oprávnění pro exporty a integrace, protože člověk, který umí upravit text v projektu, nemá automaticky potřebovat přístup k hromadnému exportu osobních dat.
+
+### DS.4 MFA chraňte tam, kde opravdu mění riziko
+
+MFA má největší hodnotu u účtů s vysokým dopadem: vlastníci organizací, administrátoři, interní support, billing, produkční přístupy a účty s možností exportu nebo změny integrací. Pro běžné uživatele může být MFA volitelné nebo vyžadované podle politiky organizace.
+
+Dobrá pravidla:
+
+- vyžadujte MFA pro interní adminy a zákaznické ownery,
+- nabídněte obnovovací kódy a jasný recovery proces,
+- nedovolte změnu MFA faktorů bez re-auth nebo další kontroly,
+- logujte zapnutí, vypnutí a reset MFA,
+- support nesmí MFA jen tak vypnout po hezkém e-mailu,
+- u rizikových akcí vyžadujte čerstvé přihlášení.
+
+NIST i OWASP dlouhodobě zdůrazňují, že autentizace není jen heslo. Zároveň ale platí, že špatně navržené MFA umí vytvořit nový support a recovery problém. Privacy-first verze MFA proto nesbírá zbytečné biometrické nebo telefonní údaje jako povinný default, pokud stejný účel splní bezpečnější a méně invazivní metoda.
+
+### DS.5 Session a tokeny musí mít životní cyklus
+
+Přihlášení nekončí vydáním session cookie. Musíte vědět, jak session vzniká, jak dlouho žije, kdy se obnovuje, kdy zaniká a kdo ji může zrušit. Totéž platí pro API tokeny a service účty.
+
+U session řešte:
+
+- `HttpOnly`, `Secure` a rozumné `SameSite` nastavení cookies,
+- krátkou životnost citlivých potvrzení,
+- rotaci session po přihlášení a zvýšení oprávnění,
+- možnost odhlásit všechna zařízení,
+- zneplatnění při změně hesla, MFA nebo SSO politiky,
+- záznam posledního použití bez ukládání zbytečných detailů.
+
+U API tokenů řešte:
+
+- scope podle konkrétních akcí,
+- expiraci nebo pravidelnou rotaci,
+- prefix nebo identifikátor pro bezpečné vyhledání bez ukládání plaintext tokenu,
+- poslední použití, vlastník a účel,
+- oddělení produkce, stagingu a vývoje,
+- okamžité zneplatnění při incidentu nebo odchodu vlastníka.
+
+OAuth 2.0 Security Best Current Practice v RFC 9700 posouvá důraz na bezpečné redirect flow, přesné redirect URI, ochranu tokenů a modernější profily. Pro malý tým je praktický závěr jednoduchý: nelepte OAuth ručně podle blogpostu z roku 2017. Používejte udržované knihovny, držte flow co nejjednodušší a testujte chybové scénáře.
+
+### DS.6 Interní a zákaznická identita patří oddělit
+
+Interní tým potřebuje jiné kontroly než zákazníci. Support může někdy potřebovat nahlédnout do zákaznického účtu, ale nemá mít tichý neomezený přístup. Administrace produktu nemá používat stejné přihlášení jako běžné zákaznické UI bez další vrstvy ochrany.
+
+Privacy-first support přístup:
+
+- vyžaduje samostatnou interní roli,
+- zaznamená důvod nahlédnutí,
+- ukáže zákazníkovi nebo internímu auditu, kdo přístup použil,
+- maskuje citlivá pole, pokud nejsou nutná,
+- má časové omezení nebo break-glass režim pro incidenty,
+- nepoužívá sdílený účet `support@firma.cz`.
+
+Pokud produkt umožňuje impersonaci uživatele, berte ji jako vysoce citlivou funkci. V lepším případě ji nahraďte diagnostickým pohledem: support vidí konfiguraci, stav, logické chyby a poslední systémové události, ale neprivatizuje si uživatelskou session jako kouzelný plášť.
+
+### DS.7 Šablona: karta identity a přístupů
+
+```markdown
+## Karta identity a přístupů
+
+### Základ
+- Produkt / tenant:
+- Vlastník identity modelu:
+- Auth provider / knihovna:
+- Primární identifikátory:
+- Podporované přihlašovací metody:
+
+### Účty a role
+- Typy účtů:
+- Role:
+- Citlivá oprávnění:
+- Kdo může měnit role:
+- Jak se řeší odchod člověka:
+
+### SSO a MFA
+- Podporované SSO:
+- Povinné MFA pro:
+- Recovery proces:
+- Fallback admin účet:
+- Testovací postup před zapnutím SSO:
+
+### Session a tokeny
+- Délka session:
+- Re-auth pro citlivé akce:
+- Odhlášení všech zařízení:
+- API token scopes:
+- Rotace a expirace tokenů:
+
+### Privacy-first kontrola
+- Jaká identitní data sbíráme:
+- Kde běží identity provider:
+- Kdo má admin přístup:
+- Co logujeme při přístupu:
+- Co nesbíráme záměrně:
+```
+
+### DS.8 Checklist: přístupy bez klíčů pod rohožkou
+
+- [ ] Máme oddělený model uživatele, organizace, členství, role a service účtů.
+- [ ] E-mail není jediný stabilní identifikátor napříč systémy.
+- [ ] Citlivé akce jsou rozdělené podle dopadu a vyžadují přiměřenou kontrolu.
+- [ ] Interní admin účty mají MFA a nejsou sdílené.
+- [ ] Zákaznické organizace umí odebrat člena a zkontrolovat aktivní přístupy.
+- [ ] SSO má testovací režim, fallback admina a jasný rollback.
+- [ ] Session se rotují po přihlášení a změně oprávnění.
+- [ ] API tokeny mají scope, vlastníka, účel, expiraci nebo rotační pravidlo.
+- [ ] Support přístup je auditovaný, omezený a nevychází ze sdíleného účtu.
+- [ ] Identity provider i logy odpovídají privacy-first slibu o kontrole nad daty.
+
+### Mini cvičení: access review za 60 minut
+
+Vyberte jednu zákaznickou organizaci nebo interní admin prostředí a projděte přístupy.
+
+1. **10 minut:** sepište všechny role a service účty.
+2. **10 minut:** označte akce s vysokým a kritickým dopadem.
+3. **10 minut:** zkontrolujte MFA, recovery a poslední aktivitu adminů.
+4. **10 minut:** projděte API tokeny, integrace a jejich scope.
+5. **10 minut:** ověřte, jestli support umí pracovat bez impersonace.
+6. **10 minut:** napište tři změny, které sníží riziko do příštího týdne.
+
+Výstupem má být krátký access review zápis: co odebrat, co zpřísnit, co dokumentovat a kde je potřeba produktová úprava. Ne tabulka se 17 barvami a nulovým rozhodnutím. Tabulky jsou fajn. Samy ale ještě nikoho neodhlásily.
+
+### Codyho komentář
+
+Můj pohled — Cody: nejbezpečnější auth systém není ten, který má nejvíc zkratek v architektuře. Je to ten, u kterého tým přesně ví, kdo se může přihlásit, co může udělat, jak se mu přístup odebere a co se zapíše do auditu. Všechno ostatní je cosplay bezpečnosti s hezkým login tlačítkem.
+
+### Zdroje k příloze DS
+
+- RFC 9700 — Best Current Practice for OAuth 2.0 Security: aktuální IETF doporučení pro bezpečnější OAuth 2.0 flow, redirect URI, tokeny a klientskou konfiguraci: https://datatracker.ietf.org/doc/html/rfc9700
+- OpenID Connect Core 1.0: specifikace identitní vrstvy nad OAuth 2.0, včetně tokenů, claims a standardních flow pro ověření uživatele: https://openid.net/specs/openid-connect-core-1_0-final.html
+- OWASP Authentication Cheat Sheet: praktická doporučení k autentizaci, citlivým účtům, heslům, chybovým hláškám a navazujícím kontrolám: https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html
+- OWASP Session Management Cheat Sheet: doporučení pro bezpečné session identifikátory, cookies, expiraci, rotaci a ukončení sessions: https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html
+- OWASP Multifactor Authentication Cheat Sheet: doporučení k MFA, obnově přístupu, změnám faktorů a ochraně proti převzetí účtu: https://cheatsheetseries.owasp.org/cheatsheets/Multifactor_Authentication_Cheat_Sheet.html
+- NIST SP 800-63B Digital Identity Guidelines — Authentication and Authenticator Lifecycle Management: technická doporučení pro autentizaci a životní cyklus autentizátorů: https://pages.nist.gov/800-63-4/sp800-63b.html
+
 
 ## Pracovní log
+
+- 2026-08-27: Přidána příloha DS „Identita, SSO a přístupy bez klíčů pod rohožkou“ s modelem účtů, SSO úrovněmi, rolemi podle rizika, MFA pravidly, session a API token lifecycle, oddělením interní/zákaznické identity, kartou přístupů, checklistem, hodinovým access review a ověřenými RFC/OpenID/OWASP/NIST zdroji.
 
 - 2026-08-27: Přidána příloha DR „Žádosti subjektů údajů bez paniky a ruční archeologie“ s workflow pro GDPR žádosti, interní SLA, přiměřeným ověřením identity, datovým katalogem, lidskou odpovědí, bezpečným provedením exportů/výmazů, kartou žádosti, checklistem, DSAR drillem a ověřenými EU/EDPB zdroji.
 
