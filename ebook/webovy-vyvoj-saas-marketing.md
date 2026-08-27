@@ -359,6 +359,13 @@ DN. Trust centrum pro malý SaaS bez bezpečnostního divadla
 DO. Provozní changelog bez firemní ztráty paměti
 DP. Doménová a DNS hygiena bez firemního single point of failure
 DQ. Závislosti a balíčky bez dodavatelského minového pole
+DR. Žádosti subjektů údajů bez paniky a ruční archeologie
+DS. Identita, SSO a přístupy bez klíčů pod rohožkou
+DT. Observabilita a logování bez datového vysavače
+DU. A/B testování bez sledovacího cirkusu
+DV. Lead scoring bez black-boxu a obchodního šmírování
+DW. Obchodní follow-up bez spamového autopilota
+DX. Demo a sandbox prostředí bez úniku produkčních dat
 
 ## 1. Web jako obchodní systém
 
@@ -29735,7 +29742,171 @@ Výstupem má být jedna upravená sekvence, jedna uklizená karta kontaktu a je
 - ÚOOÚ: základní příručka k ochraně údajů pro veřejnost a práva subjektů údajů: https://uoou.gov.cz/pro-verejnost/zakladni-prirucka-k-ochrane-udaju
 - European Commission: ePrivacy pravidla pro elektronické komunikace a důvěrnost komunikace: https://digital-strategy.ec.europa.eu/en/policies/eprivacy-directive
 
+## DX. Demo a sandbox prostředí bez úniku produkčních dat
+
+Demo prostředí je skvělé. Pomáhá prodeji ukázat hodnotu bez dlouhého vysvětlování, supportu reprodukovat problém, vývojářům testovat integrace a zákazníkům osahat si produkt před ostrým nasazením. Jenže demo se umí velmi rychle změnit v datový horor: kopie produkční databáze, reálné e-maily zákazníků, exporty ve sdíleném disku, testovací heslo `demo123` a screenshoty, které putují obchodním deckem ještě tři roky.
+
+Privacy-first demo má jednoduchou ambici: ukázat realistický produkt bez reálných osobních údajů, obchodních tajemství a produkčních oprávnění. Realistické neznamená pravé. Realistické znamená, že scénář odpovídá životu zákazníka, ale data jsou syntetická, anonymizovaná nebo schválně vytvořená pro ukázku.
+
+*Codyho komentář: pokud v demu vidíte e-mail skutečného zákazníka, není to „rychlý workaround“. Je to malá datová siréna s blikajícím nápisem „někdo zítra bude psát omluvný e-mail“.*
+
+### DX.1 Rozdělte demo, sandbox a staging podle účelu
+
+Ne každé neprodukční prostředí slouží ke stejné věci. Když všechno nazvete „test“, lidé do toho začnou dávat všechno: testovací data, produkční exporty, zákaznické požadavky, interní poznámky a občas i své naděje. Ty tam většinou nevydrží.
+
+| Prostředí | Účel | Kdo má přístup | Data |
+|---|---|---|---|
+| demo | obchodní a onboardingová ukázka | sales, support, vybraní zákazníci | syntetická nebo kurátorsky připravená data |
+| sandbox | bezpečné zkoušení funkcí zákazníkem | konkrétní zákazník nebo trial uživatel | zákazníkem vložená testovací data, odděleně od produkce |
+| staging | technické ověření před releasem | interní tým | anonymizovaná nebo generovaná testovací data |
+| lokální vývoj | vývoj a ladění | konkrétní vývojář | seed data, malé anonymní vzorky, žádné produkční tajnosti |
+
+Každé prostředí má mít vlastní pravidla přístupu, vlastní retenci a vlastní způsob resetu. Nejhorší varianta je jedna „demo“ instance, kam má přístup půl firmy a kde se časem objeví všechno, co se nevešlo jinam. Takové prostředí není demo. Je to digitální šuplík hanby.
+
+### DX.2 Produkční data nekopírujte bez opravdu dobrého důvodu
+
+GDPR staví na principech minimalizace, omezení účelu a omezení uložení. Přeloženo z právničtiny do provozu: když data nepotřebujete, netahejte je do dalšího prostředí jen proto, že je to pohodlné. Demo nepotřebuje skutečnou historii objednávek. Staging obvykle nepotřebuje reálné e-maily. Lokální notebook rozhodně nepotřebuje plnou kopii produkční databáze.
+
+Bezpečnější pořadí možností:
+
+1. **Syntetická data:** vytvořte realistické, ale smyšlené zákazníky, objednávky, faktury, projekty a události.
+2. **Šablonová demo data:** připravte několik scénářů, které ukazují typické use-casy produktu.
+3. **Anonymizovaný vzorek:** použijte jen tehdy, když syntetická data nestačí, a ověřte, že anonymizace není jen přejmenování sloupce.
+4. **Pseudonymizovaná produkční data:** jen pro omezené interní testy, s jasným účelem, přístupem a retencí.
+5. **Reálná produkční data:** pouze výjimečně, zdokumentovaně a s bezpečnostními opatřeními odpovídajícími produkci.
+
+Praktické pravidlo: pokud nevíte, proč přesně potřebujete produkční data, nepotřebujete je. Pokud víte proč, zapište to do karty prostředí a určete datum smazání.
+
+### DX.3 Demo scénáře pište jako produktový příběh
+
+Dobré demo není náhodné klikání po aplikaci. Je to krátký příběh, který odpovídá problému zákazníka. Díky tomu nepotřebujete tahat reálná data, protože víte, jaká data mají příběh nést.
+
+Ukázkový demo scénář pro B2B SaaS:
+
+```markdown
+## Demo scénář: schválení zákaznického požadavku
+
+- Persona: Petra, provozní manažerka malé B2B firmy
+- Problém: požadavky zákazníků se ztrácejí mezi e-mailem a tabulkou
+- Cíl ukázky: Petra založí požadavek, přidá prioritu, kolega ho schválí a zákazník dostane stručné potvrzení
+- Demo data: fiktivní firma Měděná Liška s.r.o., tři fiktivní kontakty, pět požadavků
+- Zakázaná data: reálné e-maily, skutečné smlouvy, produkční přílohy, interní poznámky z CRM
+- Reset: po každé veřejné ukázce obnovit seed dat
+```
+
+Scénář držte krátký. Demo má ukázat cestu k hodnotě, ne encyklopedii všech edge-casů. Když zákazník položí konkrétní otázku, můžete mít navazující scénář. Ale základní ukázka má být čistá, opakovatelná a bezpečná.
+
+### DX.4 Přístupy v demu nesmí být slabší než v produktu
+
+Častá chyba: produkční aplikace má SSO, role, audit log a omezené přístupy, zatímco demo běží pod sdíleným účtem `demo@firma.cz`, který zná celý obchodní tým. To je bezpečnostní cosplay v opačném gardu.
+
+Minimum pro demo a sandbox:
+
+- žádné sdílené účty pro interní tým,
+- samostatné role pro sales, support, zákazníka a administrátora,
+- automatická expirace externích demo přístupů,
+- zákaz přístupu k produkčním integracím a tajemstvím,
+- auditní log pro přihlášení, změny dat a exporty,
+- možnost rychle resetovat nebo deaktivovat demo tenant,
+- oddělené API klíče, webhooky, e-mailové domény a platební režimy.
+
+Pokud demo posílá e-maily, používejte jasně testovací doménu nebo zachytávací mailbox. Pokud demo volá integrace, používejte sandbox režimy dodavatelů. Pokud dodavatel sandbox nemá, napište si to jako riziko do vendor karty. „Nějak to pošleme do produkce a dáme si pozor“ není kontrola. To je modlitba s HTTP requestem.
+
+### DX.5 Reset a retence jsou součást návrhu, ne úklid po večírku
+
+Demo data časem hnijí. Lidé do nich dopisují poznámky, importují soubory, zkouší hraniční scénáře a nechávají otevřené účty. Proto musí mít každé demo prostředí resetovací rytmus.
+
+Praktický model:
+
+- veřejné demo se resetuje po každé prezentaci nebo každý den,
+- trial sandbox se maže nebo anonymizuje po skončení trialu a retenční lhůtě,
+- zákaznický sandbox má vlastníka na straně zákazníka i dodavatele,
+- staging data se obnovují ze seed skriptů, ne z ručně upravené databáze,
+- exporty z demo prostředí mají krátkou expiraci,
+- nahrávky demo callů se ukládají jen při jasném účelu a se souhlasem účastníků.
+
+Reset musí být testovaný. Nestačí věřit, že tlačítko „obnovit demo“ něco udělá. Ověřte, že maže uživatele, nahrané soubory, tokeny, webhooky, poznámky i fronty e-mailů. Ano, i fronty. Ty umí poslat minulost do budoucnosti s přesností, kterou byste jinak od softwaru marně čekali.
+
+### DX.6 Karta demo nebo sandbox prostředí
+
+Použijte jednu kartu pro každé prostředí. Je nudná, ale právě proto funguje.
+
+```markdown
+## Prostředí
+- Název:
+- Typ: demo / sandbox / staging / lokální vývoj
+- URL:
+- Vlastník:
+- Účel:
+- Publikum: interní / zákaznické / veřejné
+
+## Data
+- Zdroj dat: syntetická / šablonová / anonymizovaná / jiná
+- Povolené datové typy:
+- Zakázané datové typy:
+- Obsahuje osobní údaje: ano / ne / nejisté
+- Retence:
+- Resetovací postup:
+
+## Přístupy
+- Interní role:
+- Externí role:
+- Expirace přístupů:
+- Auditované akce:
+- Sdílené účty zakázány: ano / ne
+
+## Integrace
+- E-mailový režim:
+- Platební režim:
+- Webhooky:
+- API klíče:
+- Externí dodavatelé:
+
+## Kontrola
+- Poslední revize:
+- Zjištěná rizika:
+- Rozhodnutí:
+- Další kontrola:
+```
+
+Karta má být vedle technické dokumentace a obchodního demo playbooku. Sales tým tak ví, co smí ukazovat. Vývojáři vědí, co nesmí napojit. Support ví, kdy prostředí resetovat. A privacy člověk nemusí každý měsíc hrát detektiva v aplikaci, kterou někdo pojmenoval `temporary-demo-final`.
+
+### DX.7 Checklist: demo bez produkčního úniku
+
+- [ ] Víme, jestli jde o demo, sandbox, staging nebo lokální vývoj.
+- [ ] Prostředí má jasného vlastníka a účel.
+- [ ] Demo scénáře používají syntetická nebo kurátorsky připravená data.
+- [ ] Produkční data se nekopírují bez zdokumentovaného důvodu, kontroly a data smazání.
+- [ ] Reálné e-maily, smlouvy, přílohy, poznámky a tokeny jsou v demu zakázané.
+- [ ] Externí přístupy mají expiraci a jdou rychle deaktivovat.
+- [ ] Interní tým nepoužívá sdílené demo účty.
+- [ ] E-maily, platby, webhooky a API běží v testovacím režimu.
+- [ ] Reset prostředí maže i soubory, fronty, tokeny a auditně citlivé zbytky.
+- [ ] Retence demo a sandbox dat je kratší než produkční retence.
+- [ ] Každé prostředí má kartu a datum další revize.
+
+### Mini cvičení: demo detox za 60 minut
+
+1. **10 minut:** sepište všechna neprodukční prostředí, která tým používá.
+2. **10 minut:** označte, kde se mohou nacházet produkční osobní údaje nebo zákaznické soubory.
+3. **10 minut:** vyberte jedno nejrizikovější prostředí a napište pro něj kartu.
+4. **10 minut:** navrhněte syntetický demo scénář, který nahradí reálná data.
+5. **10 minut:** zkontrolujte přístupy, sdílené účty, API klíče a e-mailový režim.
+6. **10 minut:** proveďte nebo naplánujte reset a zapište datum další revize.
+
+Výstupem má být jedna karta prostředí, jeden bezpečný demo scénář a jeden konkrétní úklidový úkol. Pokud během auditu najdete produkční export v demu, nepanikařte. Smažte ho, zapište rozhodnutí a opravte proces, který ho tam dostal. Panika má mizerné API.
+
+### Zdroje k příloze DX
+
+- EUR-Lex: GDPR článek 5 popisuje principy minimalizace dat, omezení účelu a omezení uložení: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
+- European Commission: pravidla GDPR pro organizace a povinnosti při práci s osobními údaji: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations_en
+- CNIL: bezpečnostní příručka doporučuje oddělit vývoj/testování od produkce a používat fiktivní nebo anonymizovaná data: https://cnil.fr/sites/default/files/2024-03/cnil_guide_securite_personnelle_ven_0.pdf
+- OWASP Web Security Testing Guide: testování aplikací má probíhat kontrolovaně a bez zbytečného vystavení citlivých dat: https://owasp.org/www-project-web-security-testing-guide/
+- NIST SP 800-53 Rev. 5: bezpečnostní kontroly pro oddělení prostředí, přístupy, audit a ochranu testovacích dat: https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final
+
 ## Pracovní log
+
+- 2026-08-27: Přidána příloha DX „Demo a sandbox prostředí bez úniku produkčních dat“ s rozlišením demo/sandbox/staging, pravidly pro syntetická data, přístupy, reset, kartou prostředí, checklistem, demo detoxem a ověřenými zdroji.
 
 - 2026-08-27: Přidána příloha DW „Obchodní follow-up bez spamového autopilota“ s rozdělením follow-upu podle vztahu, pravidlem konkrétního důvodu oslovení, nudným datovým modelem kontaktu, bezpečnou automatizací, tříkrokovou B2B sekvencí, checklistem, 45minutovým auditem a ověřenými EU/EDPB/ÚOOÚ zdroji.
 
