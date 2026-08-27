@@ -28296,7 +28296,190 @@ Můj pohled — Cody: dobrý changelog je nudný ve správném smyslu. Žádné 
 - EUR-Lex: GDPR, zejména zásady odpovědnosti a integrity podle čl. 5, záznamy o činnostech podle čl. 30 a bezpečnost zpracování podle čl. 32: https://eur-lex.europa.eu/eli/reg/2016/679/oj
 - ENISA: materiály k incident response a kyberbezpečnostním postupům v Evropě, užitečné pro navázání changelogu na provozní a incidentní procesy: https://www.enisa.europa.eu/topics/incident-response
 
+## DP. Doménová a DNS hygiena bez firemního single point of failure
+
+Doména je nenápadný kousek infrastruktury, dokud funguje. Pak vypadá jako nudná položka v účetnictví za pár stovek ročně. Ve chvíli, kdy expiruje, někdo ji převede, rozbije DNS záznamy nebo špatně nastaví e-mailovou autentizaci, zjistíte, že drží pohromadě web, aplikaci, e-mail, fakturaci, support, přihlášení, analytiku i důvěru zákazníků. Taková malá levná věc. Co by se asi mohlo pokazit, že ano.
+
+Doménová hygiena není jen IT úklid. Je to provozní kontrola nad identitou firmy. Pro SaaS a marketing je doména hlavní důkaz, že zákazník komunikuje s vámi, ne s napodobeninou. Privacy-first přístup k doménám znamená hlavně: mít jasné vlastnictví, minimum zbytečných záznamů, bezpečné přístupy, evropsky rozumný provoz a dokumentovanou změnovou stopu.
+
+### DP.1 Vlastnictví domény nesmí být v hlavě jednoho člověka
+
+První otázka není „kde máme DNS“. První otázka je „kdo doménu právně a provozně ovládá“. U malých firem bývá doména často registrovaná na zakladatele, externího vývojáře, agenturu nebo historický e-mail, který už nikdo nečte. To je roztomilé asi jako zapomenutý root účet s heslem `summer2021`.
+
+U každé důležité domény si zapište:
+
+- registrátora,
+- vlastníka účtu u registrátora,
+- administrátorský kontakt,
+- fakturační kontakt,
+- e-mail pro obnovu účtu,
+- datum expirace,
+- zapnutou automatickou obnovu,
+- stav transfer locku,
+- kdo smí měnit DNS,
+- kde je uložený nouzový postup.
+
+Praktické doporučení: registrační účet držte mimo hlavní doménu. Pokud vlastníte `example.com`, nedávejte jako jediný kontakt `admin@example.com`. Při únosu domény nebo výpadku e-mailu si tím sami odříznete cestu zpět. ICANN ve svých materiálech pro registranty zdůrazňuje, že doménové účty a kontakty jsou bezpečnostně kritické aktivum, ne administrativní detail.
+
+### DP.2 DNS zóna má být čitelná, krátká a vysvětlitelná
+
+DNS zóna není místo pro archeologii. Každý starý `TXT`, `CNAME`, `A` nebo `MX` záznam může znamenat zapomenutou službu, neplatný vendor access, rozbitou validaci, nebo horší variantu: někdo může převzít opuštěný subdoménový cíl.
+
+U každého záznamu evidujte:
+
+- účel,
+- vlastníka,
+- službu nebo dodavatele,
+- datum přidání,
+- datum poslední revize,
+- dopad při odstranění,
+- zda obsahuje identifikátor třetí strany,
+- zda je nutný pro produkci, staging, e-mail nebo ověření domény.
+
+Dobrá zóna se dá vysvětlit za deset minut. Pokud nevíte, proč existuje záznam `google-site-verification`, starý `CNAME` na marketingový nástroj nebo `TXT` pro službu, kterou už nepoužíváte, nejde o dokumentační drobnost. Je to otevřená otázka v infrastruktuře.
+
+### DP.3 E-mailová důvěryhodnost patří do doménové hygieny
+
+Marketing a SaaS support často řeší doručitelnost až ve chvíli, kdy e-maily padají do spamu. Jenže SPF, DKIM a DMARC nejsou kosmetika pro newsletter. Jsou to základní prvky, které příjemcům pomáhají ověřit, jestli zpráva opravdu souvisí s vaší doménou.
+
+Minimální sada pro produkční doménu:
+
+- **SPF:** explicitně uvádí, které služby mohou posílat e-mail za doménu.
+- **DKIM:** podepisuje zprávy kryptograficky na úrovni odesílající služby.
+- **DMARC:** říká příjemcům, co dělat, když SPF nebo DKIM neprojdou, a umožňuje sbírat reporty.
+- **Oddělení toků:** transakční e-maily, marketing a interní pošta mají mít jasně popsané služby a zodpovědnosti.
+- **Revize vendorů:** když odejde nástroj pro newsletter nebo support, pryč musí i jeho DNS záznamy.
+
+Privacy-first poznámka: DMARC reporty mohou obsahovat technické informace o toku e-mailů. Neposílejte je bez rozmyslu do nástroje, u kterého nevíte, kde data končí. Pro malý tým je často lepší začít konzervativně: zapnout reportování, pochopit legitimní odesílatele a teprve potom zpřísňovat politiku.
+
+### DP.4 Subdomény navrhujte jako produktovou architekturu
+
+Subdomény nejsou jen estetika. Říkají, kde běží produkt, dokumentace, status page, support, API, staging nebo kampaně. Chaotické subdomény zvyšují riziko chyb, phishingu i špatného nastavování cookies.
+
+Rozumný základ:
+
+| Subdoména | Účel | Typická pravidla |
+|---|---|---|
+| `www` | veřejný web | minimum externích skriptů, jasné canonical URL |
+| `app` | aplikace | přísnější cookies, přihlášení, bezpečnostní hlavičky |
+| `api` | veřejné nebo interní API | oddělené limity, monitoring, dokumentace |
+| `docs` | dokumentace | přímé odkazy, dobré indexování, žádné zbytečné trackery |
+| `status` | stav služeb | nezávislost na hlavní aplikaci, RSS nebo e-mail odběr |
+| `go` nebo `links` | kampaně | krátká retence, transparentní přesměrování |
+
+Nedělejte staging jako `staging.example.com` veřejně dostupný bez autentizace a indexace jen proto, že „to nikdo nenajde“. Najde. Internet je plný botů s lepší pracovní morálkou než průměrný člověk před druhou kávou.
+
+### DP.5 Změny DNS dělejte jako release, ne jako klikání v pátek večer
+
+DNS má cache, TTL, různé resolvery a nepříjemný talent rozbíjet věci se zpožděním. Každá významná změna má mít mini release postup:
+
+1. Zapište, co měníte a proč.
+2. Snižte TTL před plánovanou migrací, pokud to dává smysl.
+3. Připravte rollback záznamy.
+4. Ověřte produkční, e-mailové a integrační dopady.
+5. Proveďte změnu mimo rizikové obchodní okno.
+6. Zkontrolujte propagaci z více sítí nebo resolverů.
+7. Zapište výsledek do provozního changelogu.
+
+U kritických domén zvažte DNSSEC, ale ne jako rituální checkbox. DNSSEC musí umět správně provozovat váš DNS provider i tým. Špatně spravované klíče dokážou dostupnost poškodit podobně elegantně, jako ji mají chránit. NIST ve svém DNS deployment guide řeší DNS jako vrstvu obrany do hloubky, ne jako jednorázové nastavení.
+
+### DP.6 Privacy-first audit domén a DNS
+
+Domény prozrazují hodně: jaké nástroje používáte, kde měříte kampaně, jaké máte e-mailové služby, někdy i staré testovací systémy. To není důvod panikařit. Je to důvod dělat pravidelný úklid.
+
+Při auditu se ptejte:
+
+- Které záznamy odkazují na mimoevropské služby?
+- Které záznamy patří marketingovým nebo analytickým nástrojům?
+- Které subdomény jsou veřejně dostupné, ale nemají jasný účel?
+- Které ověřovací TXT záznamy už nejsou potřeba?
+- Které služby mají právo posílat e-mail za naši doménu?
+- Kdo má přístup k registrátorovi a DNS providerovi?
+- Jak rychle umíme převést DNS při incidentu nebo výpadku dodavatele?
+
+Privacy-first hodnota Dreamindu tady není v tom, že se tváříme tajemně. Je v tom, že umíme vysvětlit, proč daný záznam existuje, kdo ho provozuje, jaká data přes službu tečou a kdy ho smažeme, pokud přestane dávat smysl.
+
+### DP.7 Šablona: doménová karta
+
+```markdown
+# Doménová karta
+
+## Základ
+- Doména:
+- Účel:
+- Registrátor:
+- DNS provider:
+- Vlastník:
+- Datum expirace:
+- Automatická obnova: ano / ne
+- Transfer lock: ano / ne
+
+## Přístupy
+- Primární administrátor:
+- Záložní administrátor:
+- MFA zapnuto: ano / ne
+- Nouzový kontakt mimo hlavní doménu:
+- Kde je uložený recovery postup:
+
+## DNS zóna
+- Produkční záznamy:
+- E-mailové záznamy:
+- Ověřovací TXT záznamy:
+- Staging / test záznamy:
+- Záznamy k odstranění:
+
+## E-mail
+- SPF:
+- DKIM:
+- DMARC politika:
+- Legitimní odesílatelé:
+- Kdo kontroluje reporty:
+
+## Privacy-first kontrola
+- Služby mimo Evropu:
+- Záznamy spojené s analytikou nebo marketingem:
+- Data, která mohou přes služby téct:
+- Datum další revize:
+```
+
+### DP.8 Checklist: doména bez provozní ruletky
+
+- [ ] Víme, kdo je registrant a kdo má přístup k registrátorovi.
+- [ ] Registrační účet má silné ověření a záložní recovery mimo hlavní doménu.
+- [ ] Doména má zapnutou obnovu a hlídané datum expirace.
+- [ ] DNS zóna má popsané účely záznamů a vlastníky.
+- [ ] Staré vendor, ověřovací a staging záznamy jsou odstraněné nebo označené k revizi.
+- [ ] SPF, DKIM a DMARC odpovídají skutečným odesílatelům.
+- [ ] Staging a interní subdomény nejsou veřejně indexované bez kontroly.
+- [ ] Kritické DNS změny mají plán, rollback a záznam v changelogu.
+- [ ] Víme, které DNS a e-mailové služby provozují data mimo Evropu.
+- [ ] Doménová karta se reviduje alespoň kvartálně.
+
+### Mini cvičení: DNS úklid za 60 minut
+
+1. Vypište všechny domény a subdomény používané pro web, SaaS, e-mail, support a marketing.
+2. U každé hlavní domény ověřte registrátora, expiraci, transfer lock a recovery e-mail.
+3. Exportujte DNS zónu a označte záznamy podle účelu: produkce, e-mail, ověření, staging, historické.
+4. Najděte tři záznamy, u kterých nikdo neumí říct důvod existence.
+5. Zkontrolujte SPF, DKIM a DMARC proti reálným odesílajícím službám.
+6. Označte všechny subdomény napojené na marketingové, analytické nebo mimoevropské služby.
+7. Zapište jednu doménovou kartu a jednu změnu do provozního changelogu.
+
+### Codyho komentář
+
+Můj pohled — Cody: doména je jako klíče od kanceláře, trezoru a dodávky najednou. Jen je lidi často spravují stylem „to kdysi nastavoval někdo z agentury“. Pokud má firma privacy-first ambici, musí vědět nejen kde běží aplikace, ale i kdo drží její internetovou identitu. Jinak nestavíte důvěru. Jen doufáte, že DNS bohové dneska nemají náladu na komedii.
+
+### Zdroje k příloze DP
+
+- ICANN Registrant Program: přehled práv, odpovědností a bezpečnostních doporučení pro držitele domén: https://www.icann.org/registrants
+- ICANN SSAC SAC044: doporučení pro ochranu registračních účtů a snížení rizika ztráty nebo zneužití domény: https://www.icann.org/en/groups/ssac/documents/sac-044-en.pdf
+- NIST SP 800-81 Rev. 3: bezpečné nasazení DNS, obrana do hloubky, DNSSEC, logování a provozní role DNS infrastruktury: https://csrc.nist.gov/pubs/sp/800/81/r3/final
+- CISA DMARC guidance: vysvětlení SPF, DKIM a DMARC pro ověřování e-mailů a ochranu domén před zneužitím: https://www.cisa.gov/sites/default/files/publications/cisa-dmarc.pdf
+- ENISA Security and Privacy for Public DNS Resolvers: evropský pohled na bezpečnostní a soukromostní dopady DNS resolverů: https://www.enisa.europa.eu/sites/default/files/publications/ENISA%20Report%20-%20Security%20and%20Privacy%20for%20public%20DNS%20Resolvers.pdf
+
 ## Pracovní log
+
+- 2026-08-27: Přidána příloha DP „Doménová a DNS hygiena bez firemního single point of failure“ s vlastnictvím domén, úklidem DNS zóny, SPF/DKIM/DMARC základem, subdoménovou architekturou, release postupem DNS změn, privacy-first auditem, doménovou kartou, checklistem, hodinovým cvičením a ověřenými ICANN/NIST/CISA/ENISA zdroji.
 
 - 2026-08-27: Přidána příloha DO „Provozní changelog bez firemní ztráty paměti“ s rozlišením commit historie/release notes/provozního changelogu, šablonou záznamu změny, privacy-first kontrolou, pravidly pro dočasné výjimky, incidentní čitelností, checklistem, 50minutovým cvičením a ověřenými OWASP/NIST/GDPR/ENISA zdroji.
 
