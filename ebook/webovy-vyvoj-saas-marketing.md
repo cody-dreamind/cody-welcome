@@ -29039,7 +29039,190 @@ Můj pohled — Cody: nejbezpečnější auth systém není ten, který má nejv
 - NIST SP 800-63B Digital Identity Guidelines — Authentication and Authenticator Lifecycle Management: technická doporučení pro autentizaci a životní cyklus autentizátorů: https://pages.nist.gov/800-63-4/sp800-63b.html
 
 
+## DT. Observabilita a logování bez datového vysavače
+
+Malý SaaS nepotřebuje hned vesmírnou observability platformu, kde každé kliknutí uživatele skončí ve třech dashboardech, pěti vendor nástrojích a jednom datovém skladu, který nikdo nechce vlastnit. Potřebuje vědět tři věci: jestli služba funguje, proč nefunguje a zda se neděje něco bezpečnostně divného. Všechno ostatní je bonus. Někdy drahý bonus s exportem osobních údajů, ehm.
+
+Privacy-first observabilita znamená, že měříte provoz systému, ne životopis uživatele. Sbíráte signály, které pomáhají opravit chybu, vyšetřit incident a zlepšit spolehlivost, ale nepoužíváte logy jako pohodlný odpadkový koš pro request body, tokeny, e-maily, IP adresy a celé JSON payloady „pro jistotu“. Pro jistotu je hezká fráze. V logování často znamená „jednou to budeme vysvětlovat právníkovi“.
+
+### DT.1 Definujte otázky, na které má observabilita odpovídat
+
+Začněte otázkami, ne nástrojem. Pokud tým neví, co chce z logů zjistit, bude logovat všechno a stejně v incidentu nic nenajde.
+
+Praktické otázky pro malý SaaS:
+
+- Funguje hlavní uživatelský workflow právě teď?
+- Kde vznikají chyby: frontend, API, databáze, queue, externí integrace?
+- Které release nebo konfigurace změnily chování systému?
+- Kolik požadavků selhává a jaký mají dopad na zákazníky?
+- Došlo k neobvyklému přístupu, eskalaci role nebo použití tokenu?
+- Máme dost informací pro incident review bez otevírání produkční databáze?
+
+Z těchto otázek vznikne mapa signálů. Metriky ukazují trend a zdraví služby, logy dávají kontext konkrétní události a trace pomáhají sledovat cestu požadavku přes služby. OpenTelemetry tyto signály popisuje jako standardizovaný způsob sběru a předávání telemetrie; není to ale kouzelný vysavač, kterému můžete svěřit všechno bez filtru.
+
+### DT.2 Logujte události, ne cizí soukromí
+
+Dobrý log je strukturovaný záznam události. Špatný log je kopie celé reality, jen hůř zabezpečená.
+
+U každé logované události si napište:
+
+| Pole | Doporučení | Proč |
+|---|---|---|
+| `event_name` | stabilní název typu události | hledání a agregace |
+| `timestamp` | serverový čas v UTC | korelace incidentu |
+| `request_id` / `trace_id` | technický identifikátor toku | spojení logů bez PII |
+| `organization_id` | interní tenant ID, ne název firmy | dopad bez zbytečného textu |
+| `actor_id` | interní uživatel nebo service account | auditní stopa |
+| `outcome` | `success`, `failure`, `denied`, `timeout` | rychlé filtrování |
+| `error_code` | stabilní aplikační kód | méně stack trace archeologie |
+| `risk_level` | nízký, střední, vysoký | alerting podle dopadu |
+
+Do běžných aplikačních logů naopak nepatří hesla, session tokeny, API klíče, celé autorizační hlavičky, reset odkazy, platební údaje, celé request body s osobními údaji, dokumenty nahrané uživatelem ani dlouhé stack traces s konfigurací prostředí. Pokud něco potřebujete pro debug, zaveďte časově omezený debug režim s vlastníkem, schválením a automatickým vypnutím.
+
+### DT.3 Oddělte provozní logy, auditní logy a produktovou analytiku
+
+Jedna tabulka `logs` pro všechno je rychlá cesta k chaosu. Různé typy záznamů mají jiný účel, retenci, přístupová práva a publikum.
+
+Rozumné rozdělení:
+
+- **Provozní logy:** chyby, latence, timeouts, queue, externí API, deployment souvislosti.
+- **Bezpečnostní logy:** login pokusy, MFA změny, access denied, role změny, token lifecycle, exporty.
+- **Auditní logy:** zákaznicky viditelné akce s dopadem: kdo změnil nastavení, pozval uživatele, spustil export nebo smazal data.
+- **Produktová analytika:** agregované eventy pro zlepšování produktu, ideálně bez identifikace jednotlivce.
+- **Support kontext:** omezený výřez nutný k řešení ticketu, ne permanentní kopie zákaznického prostředí.
+
+Privacy-first pravidlo: pokud log slouží bezpečnosti, nemá se používat jako marketingový dataset. Pokud event slouží produktové analytice, nemá obsahovat tajemství z API. Pokud auditní log ukazuje zákazníkovi jeho vlastní historii, nesmí odhalit interní poznámky supportu. Ano, hranice jsou nudné. Proto chrání lidi i tým.
+
+### DT.4 Retence logů musí být kratší než vaše fantazie
+
+GDPR principy minimalizace a omezení uložení znamenají, že osobní údaje mají být přiměřené účelu a uchovávané jen po nutnou dobu. U logů je to obzvlášť důležité, protože často vznikají automaticky a lidé je zapomínají uklízet.
+
+Praktický start:
+
+| Typ záznamu | Typická retence | Poznámka |
+|---|---:|---|
+| Debug logy | hodiny až dny | jen dočasně, vypínat automaticky |
+| Aplikační provozní logy | 7–30 dní | podle incidentní potřeby a objemu |
+| Bezpečnostní logy | 90–180 dní | podle rizika, smluv a compliance potřeb |
+| Zákaznický audit log | podle tarifu/smlouvy | viditelně popsat zákazníkovi |
+| Agregované metriky | déle | pokud už nejde o identifikovatelné osoby |
+
+Retence není jen nastavení TTL v databázi. Musíte vědět, zda se data kopírují do záloh, exportů, error monitoringu, datového skladu a lokálních dumpů vývojářů. Jinak jste jen přesunuli problém do sklepa. Digitálního sklepa. Tam bývají pavouci a staré access tokeny.
+
+### DT.5 Alertujte podle dopadu, ne podle hlučnosti
+
+Alert, který nikdo neřeší, není monitoring. Je to firemní budík v místnosti, kde už všichni nosí sluchátka.
+
+Začněte malou sadou alertů:
+
+- hlavní workflow neprojde syntetickým testem,
+- chybovost API překročí domluvený práh,
+- fronta roste déle než několik minut,
+- opakovaně selhává externí kritická integrace,
+- vznikl nový admin nebo změna vlastníka organizace,
+- došlo k vypnutí MFA, rotaci SSO nebo vytvoření citlivého tokenu,
+- logging nebo monitoring přestal posílat data.
+
+Ke každému alertu dopište runbook: co zkontrolovat, kde jsou dashboardy, jaký je fallback, koho informovat a kdy incident eskalovat. Alert bez runbooku je jen pasivně agresivní notifikace.
+
+### DT.6 Privacy-first log pipeline
+
+U evropského provozu je lepší filtrovat citlivá data co nejblíž zdroji. Nespoléhejte na to, že vendor někde na konci pipeline všechno zázračně zamaskuje. Nejlepší osobní údaj v logovacím systému je ten, který tam nikdy neodešel.
+
+Jednoduchá pipeline:
+
+1. **Aplikace:** loguje strukturované události s povolenými poli.
+2. **Redakce na vstupu:** maskuje tokeny, e-maily, phone čísla, hlavičky a známé citlivé klíče.
+3. **Collector:** přidává technický kontext, filtruje debug hluk a posílá signály dál.
+4. **Úložiště:** má EU region, omezené přístupy, retenci a audit přístupů.
+5. **Dashboardy:** ukazují agregace a technické identifikátory, ne osobní profily.
+6. **Incident export:** má vlastní schválení, expiraci a bezpečné sdílení.
+
+Pokud používáte OpenTelemetry Collector nebo podobnou vrstvu, berte ji jako kontrolní bod pro normalizaci a filtraci. Ne jako omluvu posílat do něj všechno a „pak se uvidí“. Pak se většinou uvidí fakt hodně.
+
+### DT.7 Šablona: logovací karta události
+
+```markdown
+# Logovací karta události
+
+## Základ
+- Název události:
+- Vlastník:
+- Účel logování:
+- Typ: provozní / bezpečnostní / auditní / produktový
+- Dopad při chybě:
+
+## Povolená pole
+- Technické ID:
+- Tenant ID:
+- Actor ID:
+- Stav výsledku:
+- Error code:
+- Trace/request ID:
+
+## Zakázaná pole
+- Tokeny:
+- Hesla/reset odkazy:
+- Celé request body:
+- Dokumenty uživatele:
+- Citlivé hlavičky:
+
+## Retence a přístup
+- Retence:
+- Kdo smí číst:
+- Kdo smí exportovat:
+- Kde běží úložiště:
+- Jak se log maže:
+
+## Alerting
+- Má alert: ano/ne
+- Prahová hodnota:
+- Runbook:
+- Eskalace:
+```
+
+### DT.8 Checklist: observabilita bez datového vysavače
+
+- [ ] Máme napsané otázky, na které má observabilita odpovídat.
+- [ ] Rozlišujeme provozní logy, bezpečnostní logy, auditní logy a produktovou analytiku.
+- [ ] Každá citlivá událost má stabilní `event_name`, `request_id` nebo `trace_id` a interní identifikátory.
+- [ ] Do logů se nedostávají tokeny, hesla, reset odkazy, celé request body ani zákaznické dokumenty.
+- [ ] Debug režim je časově omezený, vlastněný a automaticky vypínaný.
+- [ ] Retence logů je popsaná podle účelu a kontroluje i zálohy a exporty.
+- [ ] Alerty mají runbook, vlastníka a jasný dopad.
+- [ ] Logovací úložiště běží v EU nebo má výslovně zdůvodněný a schválený režim.
+- [ ] Přístupy k logům se auditují a pravidelně revidují.
+- [ ] Produktová analytika neslouží jako skrytý profilovací systém.
+
+### Mini cvičení: log audit za 60 minut
+
+1. Vyberte tři nejhlučnější a tři nejcitlivější logovací místa v aplikaci.
+2. U každého napište účel, povolená pole a zakázaná pole.
+3. Najděte jeden příklad tokenu, e-mailu, payloadu nebo stack trace, který v logu být nemá.
+4. Přidejte redakční pravidlo nebo změňte logování u zdroje.
+5. Nastavte retenci pro debug logy a provozní logy.
+6. Vyberte jeden alert, který tým opravdu bude řešit, a napište k němu runbook.
+
+Výsledek po hodině: méně šumu, menší riziko a větší šance, že při incidentu najdete příčinu bez toho, aby logy samy byly další incident.
+
+### Codyho komentář
+
+Observabilita má být lupa, ne vysavač. Nejlepší týmy nepoznáte podle počtu dashboardů, ale podle toho, že při výpadku umí rychle odpovědět: co se stalo, koho se to týká, co jsme změnili a jak to opravíme. A ideálně přitom neotevřou zákaznické soukromí jako konzervu fazolí.
+
+### Zdroje k příloze DT
+
+- OWASP Logging Cheat Sheet: praktická doporučení k aplikačnímu logování, událostem, ochraně integrity logů a tomu, co do logů nepatří: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+- OWASP Session Management Cheat Sheet: upozorňuje mimo jiné na logování životního cyklu sessions a současně na riziko zapisování citlivých session identifikátorů do logů: https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html
+- OpenTelemetry Concepts: přehled signálů, komponent a konceptů pro metriky, logy a traces v moderní observabilitě: https://opentelemetry.io/docs/concepts/
+- OpenTelemetry Logs specification: popis log data modelu, korelace logů s trace/span identifikátory a role collector pipeline: https://opentelemetry.io/docs/specs/otel/logs/
+- GDPR Art. 5: principy minimalizace, omezení účelu, omezení uložení, integrity a odpovědnosti správce: https://gdpr-info.eu/art-5-gdpr/
+- GDPR Art. 25: data protection by design and by default, včetně omezení množství dat, rozsahu zpracování, doby uložení a dostupnosti: https://gdpr-info.eu/art-25-gdpr/
+- ENISA Technical implementation guidance on cybersecurity risk-management measures: doporučení k ochraně logů, monitoringu, retenci a provoznímu řízení bezpečnostních opatření: https://www.enisa.europa.eu/sites/default/files/2025-06/ENISA_Technical_implementation_guidance_on_cybersecurity_risk_management_measures_version_1.0.pdf
+
+
 ## Pracovní log
+
+- 2026-08-27: Přidána příloha DT „Observabilita a logování bez datového vysavače“ s praktickým modelem signálů, strukturovanými logovacími poli, oddělením provozních/auditních/bezpečnostních/produktových záznamů, retenčními pravidly, alertingem podle dopadu, privacy-first log pipeline, kartou logované události, checklistem, hodinovým auditem a ověřenými OWASP/OpenTelemetry/GDPR/ENISA zdroji.
 
 - 2026-08-27: Přidána příloha DS „Identita, SSO a přístupy bez klíčů pod rohožkou“ s modelem účtů, SSO úrovněmi, rolemi podle rizika, MFA pravidly, session a API token lifecycle, oddělením interní/zákaznické identity, kartou přístupů, checklistem, hodinovým access review a ověřenými RFC/OpenID/OWASP/NIST zdroji.
 
