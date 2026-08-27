@@ -29219,8 +29219,204 @@ Observabilita má být lupa, ne vysavač. Nejlepší týmy nepoznáte podle poč
 - GDPR Art. 25: data protection by design and by default, včetně omezení množství dat, rozsahu zpracování, doby uložení a dostupnosti: https://gdpr-info.eu/art-25-gdpr/
 - ENISA Technical implementation guidance on cybersecurity risk-management measures: doporučení k ochraně logů, monitoringu, retenci a provoznímu řízení bezpečnostních opatření: https://www.enisa.europa.eu/sites/default/files/2025-06/ENISA_Technical_implementation_guidance_on_cybersecurity_risk_management_measures_version_1.0.pdf
 
+## DU. A/B testování bez sledovacího cirkusu
+
+A/B test je dobrý sluha a mizerný král. Pomůže ověřit, jestli nová hero sekce, pricing karta nebo onboardingový krok opravdu zlepšuje rozhodnutí uživatele. Ale když se z něj stane výmluva pro nekonečné experimenty, session replay, fingerprinting, reklamní publika a hromadění událostí „pro jistotu“, není to optimalizace. Je to datový cirkus s tabulkou výsledků.
+
+Privacy-first A/B testování začíná skromně: malá hypotéza, malý dopad, krátké okno, agregované vyhodnocení a jasné rozhodnutí. Cílem není sledovat každého člověka přes celý web. Cílem je zjistit, jestli konkrétní změna pomohla konkrétnímu kroku.
+
+*Codyho komentář: pokud experiment potřebuje deset nástrojů, čtyři pixely a vysvětlení delší než samotná landing page, možná netestujete variantu. Možná testujete trpělivost návštěvníků.*
+
+### DU.1 Testujte rozhodnutí, ne barvy pro dobrý pocit
+
+Než vytvoříte variantu B, napište hypotézu v jedné větě:
+
+```text
+Věříme, že změna [konkrétní části]
+pomůže [konkrétnímu člověku]
+udělat [konkrétní akci]
+protože [důvod z výzkumu, supportu, metrik nebo obchodu].
+```
+
+Příklady:
+
+- Změna textu CTA na pricing stránce pomůže majitelům agentur domluvit konzultaci, protože současné „Kontaktujte nás“ neříká, co se stane dál.
+- Kratší registrační formulář pomůže novým SaaS uživatelům vytvořit první projekt, protože telefon a velikost firmy nepotřebujeme před aktivací.
+- Nový blok s důkazem hodnoty pomůže B2B návštěvníkům pochopit výsledek služby, protože v rozhovorech opakovaně zaznívá námitka „nevím, co přesně dostanu“.
+
+Špatná hypotéza zní: „Zkusíme zelené tlačítko, třeba to konvertuje.“ Třeba ano. Třeba ne. Ale tým se z toho nic nenaučí, kromě toho, že zelená má dobré PR.
+
+### DU.2 Rozhodněte, jestli A/B test vůbec potřebujete
+
+Malý web často nemá dost návštěv na statisticky silný test. To neznamená, že nemůžete zlepšovat. Znamená to, že nemáte předstírat vědeckou jistotu tam, kde máte spíš signály.
+
+Použijte jednoduché rozhodování:
+
+| Situace | Lepší přístup |
+|---|---|
+| Málo návštěv a jasná chyba v textu | změnu nasaďte rovnou a sledujte kvalitativní reakce |
+| Hodně support dotazů ke stejné věci | upravte obsah a vyhodnoťte pokles dotazů |
+| Dvě možné nabídky s obchodním dopadem | spusťte omezený experiment nebo pilot pro segment |
+| Kritický onboardingový krok | testujte opatrně, s rollbackem a monitoringem chyb |
+| Právní, bezpečnostní nebo privacy text | netestujte manipulativně; držte jasnost a férovost |
+
+A/B test není náhrada za přemýšlení. Pokud varianta B jen opravuje zmatek, který sami vidíte, nepotřebujete měsíc měřit chaos. Opravte ho.
+
+### DU.3 Minimalizujte datový model experimentu
+
+Experiment většinou nepotřebuje jméno, e-mail, IP adresu, celý profil uživatele ani historii všech návštěv. Potřebuje vědět, že anonymní nebo pseudonymní návštěva viděla variantu a zda dokončila cílovou akci.
+
+Minimální experimentální událost:
+
+```json
+{
+  "experiment": "pricing_cta_2026_08",
+  "variant": "B",
+  "event": "consultation_cta_clicked",
+  "page": "/pricing",
+  "timestamp_day": "2026-08-27"
+}
+```
+
+Co vynechat, pokud to není opravdu nutné:
+
+- celé URL s citlivými query parametry,
+- e-mail, telefon, jméno firmy nebo jméno člověka,
+- session replay a záznam formulářových polí,
+- dlouhodobý cross-device identifikátor,
+- reklamní identifikátory a publika,
+- texty zpráv z formuláře.
+
+Privacy-first pravidlo: varianta má být stabilní pro uživatelský zážitek, ale identita člověka nemá být trofej. Pokud potřebujete konzistenci varianty, preferujte krátkodobý první-party mechanismus s jasným účelem a retencí. Nenapojujte experiment automaticky na reklamní profily.
+
+### DU.4 Consent a cookies řešte před implementací
+
+Evropská praxe kolem cookies a podobných technologií stojí na jednoduché otázce: ukládáte nebo čtete něco v zařízení uživatele a je to opravdu nezbytné pro službu, kterou si vyžádal? Pokud ne, řešte informování, právní základ a souhlas podle konkrétního použití a jurisdikce.
+
+CNIL u měření návštěvnosti připouští určité výjimky ze souhlasu jen za omezených podmínek a výslovně upozorňuje, že mnoho běžných analytických nabídek do výjimky nespadá. U experimentů proto nepředpokládejte automaticky, že „je to jen A/B test, takže pohoda“. Záleží na účelu, datech, nástroji, retenci, sdílení s dodavatelem a možnosti sledovat uživatele napříč kontexty.
+
+Praktický postup:
+
+1. Napište, co experiment ukládá do zařízení nebo čte z prohlížeče.
+2. Oddělte technicky nutné nastavení varianty od analytiky a marketingu.
+3. Zkontrolujte, zda se data posílají dodavateli jako samostatnému správci nebo zpracovateli.
+4. Nastavte retenci experimentálních dat před spuštěním.
+5. Ověřte, že odmítnutí volitelných cookies nespustí experimentální tracking.
+6. Zapište rozhodnutí do datové karty nebo rozhodovacího deníku.
+
+Tohle není právní rada. Je to provozní brzda proti implementaci stylem „nejdřív pustíme skript a pak se zeptáme právníka“. Tenhle styl má překvapivě špatné recenze.
+
+### DU.5 Navrhněte experiment jako krátký release
+
+A/B test by měl mít stejnou disciplínu jako release malé funkce. Má vlastníka, rozsah, metriky, rollback a datum ukončení.
+
+Experimentální karta:
+
+```md
+# Experiment: [název]
+
+## Hypotéza
+- Věříme, že:
+- Pro koho:
+- Na základě čeho:
+
+## Rozsah
+- Stránka nebo flow:
+- Varianta A:
+- Varianta B:
+- Co záměrně netestujeme:
+
+## Měření
+- Primární metrika:
+- Kvalitativní signál:
+- Minimální délka testu:
+- Datum ukončení:
+
+## Privacy-first kontrola
+- Jaká data sbíráme:
+- Jaká data nesbíráme:
+- Cookie / storage dopad:
+- Dodavatel a region:
+- Retence:
+
+## Provoz
+- Vlastník:
+- Rollback postup:
+- Co uděláme po výsledku:
+```
+
+Nejdůležitější řádek je „co uděláme po výsledku“. Pokud test vyhraje, nasadíte vítěze a smažete experimentální kód. Pokud nevyhraje, vrátíte změnu nebo přepíšete hypotézu. Nenechávejte staré experimenty žít v kódu jako digitální strašidla.
+
+### DU.6 Vyhodnocujte poctivě a bez rituální statistiky
+
+U malých týmů je největší riziko falešná jistota. Graf ukáže rozdíl, někdo řekne „varianta B vyhrála“ a nikdo se nezeptá, jestli byl vzorek dostatečný, období férové, traffic srovnatelný a metrika opravdu odpovídá hodnotě.
+
+Při vyhodnocení projděte:
+
+- běžel test dost dlouho na běžné týdenní cykly,
+- nebyla během testu kampaň, incident, svátek nebo změna cen,
+- nepřesměroval se traffic z jiného kanálu,
+- nezlepšila se jen klikací metrika na úkor kvality leadů,
+- nezvýšila varianta počet support dotazů nebo chyb,
+- nevyžadovala varianta víc osobních dat než původní flow.
+
+Rozhodnutí nemusí být „B vyhrálo“. Může být:
+
+- nasadíme B,
+- necháme A,
+- vytvoříme variantu C podle naučeného signálu,
+- experiment rušíme, protože metrika neodpovídala problému,
+- před dalším testem uděláme tři rozhovory se zákazníky.
+
+Poctivé „nevíme“ je lepší než sebevědomé „vyhrálo to o 3 %“ bez kontextu. Tým, který umí přiznat nejistotu, má větší šanci dělat lepší rozhodnutí.
+
+### DU.7 Privacy-first alternativy k A/B testu
+
+Někdy je šetrnější a rychlejší použít jinou metodu:
+
+- **Pětisekundový test s lidmi:** ukažte stránku třem lidem ze segmentu a zeptejte se, co firma nabízí a co mají udělat dál.
+- **Support syntéza:** projděte posledních 20 dotazů a najděte opakovanou námitku.
+- **Sales poznámky:** anonymizujte časté otázky z obchodních hovorů a přepište podle nich stránku.
+- **Jednorázový rozhovor:** ověřte positioning u jednoho ideálního zákazníka.
+- **Agregovaná cesta:** sledujte jen počet návštěv stránky, kliknutí na CTA a kvalitu poptávek.
+
+Tyhle metody nejsou méně profesionální. Jsou přiměřené. A přiměřenost je u malého týmu produktová super schopnost, jen bohužel nemá vlastní konferenční stánek.
+
+### DU.8 Checklist A/B testu bez datového smogu
+
+- [ ] Test má jednu konkrétní hypotézu.
+- [ ] Víme, proč A/B test potřebujeme místo přímé úpravy.
+- [ ] Primární metrika odpovídá hodnotě, ne jen kliknutí.
+- [ ] Sbíráme minimum dat potřebných pro vyhodnocení.
+- [ ] Experiment nepřidává reklamní tracking ani session replay bez samostatného rozhodnutí.
+- [ ] Consent a storage dopad jsou zkontrolované před spuštěním.
+- [ ] Máme vlastníka, datum ukončení a rollback.
+- [ ] Po testu smažeme experimentální kód nebo zapíšeme důvod pokračování.
+- [ ] Výsledek končí rozhodnutím, ne jen screenshotem grafu.
+
+### Mini cvičení: experimentální karta za 35 minut
+
+1. **5 minut:** vyberte jednu stránku nebo onboardingový krok.
+2. **5 minut:** napište hypotézu podle šablony.
+3. **5 minut:** rozhodněte, jestli opravdu potřebujete A/B test.
+4. **5 minut:** navrhněte minimální datový model události.
+5. **5 minut:** projděte cookie, consent a dodavatelský dopad.
+6. **5 minut:** určete primární metriku a kvalitativní signál.
+7. **5 minut:** napište datum ukončení a co uděláte s výsledkem.
+
+Výstupem má být jedna karta. Pokud po 35 minutách nemáte jasnou hypotézu, netestujte. Jděte se zeptat zákazníků nebo opravte nejviditelnější zmatek.
+
+### Zdroje k příloze DU
+
+- CNIL: pravidla pro analytiku webů a aplikací, včetně podmínek pro omezené výjimky ze souhlasu a zmínky o A/B testování: https://www.cnil.fr/en/sheet-ndeg16-use-analytics-your-websites-and-applications
+- EDPB: pokyny ke consentu podle GDPR, včetně požadavků na svobodný, konkrétní, informovaný a jednoznačný souhlas: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-052020-consent-under-regulation-2016679_en
+- EDPB: zpráva Cookie Banner Taskforce k odpovědnosti webů za seznam a nezbytnost cookies: https://www.edpb.europa.eu/system/files/2023-01/edpb_20230118_report_cookie_banner_taskforce_en.pdf
+- ICO: guidance ke cookies a podobným technologiím, včetně analytických cookies a souhlasu: https://ico.org.uk/for-organisations/direct-marketing-and-privacy-and-electronic-communications/guide-to-pecr/cookies-and-similar-technologies/
+
 
 ## Pracovní log
+
+- 2026-08-27: Přidána příloha DU „A/B testování bez sledovacího cirkusu“ s hypotézami, rozhodnutím kdy testovat a kdy rovnou upravit, minimálním datovým modelem, consent/storage kontrolou, experimentální kartou, férovým vyhodnocením, privacy-first alternativami, checklistem, 35minutovým cvičením a ověřenými CNIL/EDPB/ICO zdroji.
 
 - 2026-08-27: Přidána příloha DT „Observabilita a logování bez datového vysavače“ s praktickým modelem signálů, strukturovanými logovacími poli, oddělením provozních/auditních/bezpečnostních/produktových záznamů, retenčními pravidly, alertingem podle dopadu, privacy-first log pipeline, kartou logované události, checklistem, hodinovým auditem a ověřenými OWASP/OpenTelemetry/GDPR/ENISA zdroji.
 
