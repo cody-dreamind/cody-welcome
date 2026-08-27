@@ -30802,7 +30802,190 @@ Výstupem má být jedna vyplněná restore drill karta a maximálně tři prior
 - NCSC: guidance k ransomware obnově doporučuje před obnovou ověřit, že záloha neobsahuje malware, a mít aktuální offline backup nejdůležitějších dat: https://www.ncsc.gov.uk/section/respond-recover/sole-ransomware-attack
 - NCSC: článek Offline backups in an online world vysvětluje význam offline oddělení záloh i u cloudových scénářů: https://www.ncsc.gov.uk/blog-post/offline-backups-in-an-online-world
 
+
+## Příloha ED: Privacy centrum v produktu bez schovaného labyrintu
+
+Privacy centrum je místo, kde uživatel vidí a ovládá nejdůležitější rozhodnutí o svých datech: profil, bezpečnost, komunikační preference, export, mazání, připojené integrace a historii citlivých akcí. Není to stránka „aby právník nebrečel“. Je to produktová funkce důvěry.
+
+Malý SaaS často řeší soukromí až přes support: „Napište nám, pokud chcete změnit e-mail, stáhnout data, odhlásit marketing nebo zrušit účet.“ To je na začátku pochopitelné, ale rychle se z toho stane ruční archeologie. Uživatel čeká, support dohledává, vývojář loví SQL, někdo omylem pošle export špatné osobě a všichni se tváří, že je to škálovatelný proces. Není. Je to excelový escape room.
+
+Privacy centrum nemusí být velké. První verze může být jedna stránka v nastavení účtu. Důležité je, aby měla jasné sekce, bezpečné ověření a aby každá akce odpovídala skutečnému datovému toku v produktu.
+
+### ED.1 Začněte inventářem uživatelských akcí
+
+Nejdřív sepište, co má uživatel umět sám udělat. Ne podle toho, co umí váš framework, ale podle toho, co snižuje support, zvyšuje důvěru a omezuje zbytečné zpracování dat.
+
+Praktické minimum pro B2B SaaS:
+
+- **Profil:** změna jména, role v organizaci, fakturačního kontaktu a pracovního e-mailu podle oprávnění.
+- **Bezpečnost:** změna hesla, MFA/passkeys, aktivní session, zařízení, API tokeny a odhlášení ze všech zařízení.
+- **Preference:** produktové notifikace, marketingové zprávy, release notes, bezpečnostní oznámení a jazyk komunikace.
+- **Data:** export vlastních dat, žádost o opravu, žádost o smazání, přehled hlavních kategorií dat.
+- **Integrace:** seznam připojených nástrojů, rozsah přístupu, datum poslední synchronizace a možnost odpojení.
+- **Organizace:** členové týmu, role, audit citlivých akcí a pravidla pro smazání workspace.
+
+Příklad: pokud produkt umožňuje nahrávat dokumenty zákazníků, privacy centrum nemá ukazovat jen e-mail a tlačítko „Delete account“. Má ukázat i kategorie dokumentů, kdo k nim má přístup, jak dlouho zůstávají po zrušení účtu a jak probíhá export.
+
+*Codyho komentář:* dobré privacy centrum je jako vypínač světla. Člověk nemusí vědět, jak vede elektřina ve zdi, ale musí vědět, co se stane, když na něj sáhne.
+
+### ED.2 Oddělte nastavení od právních textů
+
+Privacy centrum není náhrada zásad zpracování osobních údajů. Právní text říká, jak zpracování funguje. Produktové nastavení umožňuje uživateli něco udělat.
+
+Častá chyba je schovat všechno do jednoho dlouhého dokumentu a doufat, že tím vznikla transparentnost. Jenže transparentnost není PDF, které nikdo nečte. V produktu potřebujete krátké vysvětlení přímo u akce.
+
+Lepší mikrotexty:
+
+- „Export obsahuje vaše projekty, komentáře a nastavení účtu. Neobsahuje data ostatních členů workspace.“
+- „Bezpečnostní oznámení nejde vypnout, protože je používáme pro ochranu účtu.“
+- „Odpojením integrace zastavíte nové synchronizace. Dříve synchronizovaná data smažete v sekci Data.“
+- „Smazání účtu je po 14 dnech nevratné. Fakturační záznamy uchováme odděleně podle zákonných povinností.“
+
+Horší mikrotexty:
+
+- „Kliknutím souhlasíte se vším.“
+- „Vaše data můžeme používat ke zlepšení služeb.“
+- „Kontaktujte podporu.“
+- „Tato akce může mít dopady.“
+
+Pokud akce vyžaduje právní detail, dejte vedle ní odkaz na konkrétní část zásad. Ne na homepage dokumentace, ne na generické „Privacy Policy“. Přímý odkaz. Ano, je to malá věc. Právě proto ji lze udělat hned.
+
+### ED.3 Navrhněte bezpečnostní tření podle rizika
+
+Privacy centrum obsahuje citlivé akce. Nesmí být tak snadné, že útočník po převzetí session smaže účet za tři sekundy. Zároveň nesmí být tak otravné, že uživatel radši napíše supportu a vyrobí ještě horší riziko.
+
+Rizikové vrstvy:
+
+| Akce | Doporučené tření | Poznámka |
+| --- | --- | --- |
+| Změna jména nebo jazyka | žádné nebo lehké potvrzení | Nízké riziko, rychlá použitelnost. |
+| Změna marketingových preferencí | okamžitá změna + potvrzení e-mailem | Nevyžadujte login navíc jen kvůli odhlášení. |
+| Export dat | re-auth nebo potvrzení přes aktivní session | Export může obsahovat citlivý obsah. |
+| Změna e-mailu | potvrzení starého i nového e-mailu podle rizika | Pozor na převzetí účtu. |
+| Odpojení integrace | potvrzení + dopad na synchronizace | Ukažte, co se zastaví. |
+| Smazání účtu/workspace | re-auth, čekací lhůta, jasný dopad | Chraňte i ostatní členy organizace. |
+| Zrušení API tokenu | okamžitě + audit log | Tady je rychlost bezpečnostní výhoda. |
+
+Nejlepší pravidlo: u každé akce napište jednu větu „co se může pokazit“. Podle ní navrhněte potvrzení, čekací lhůtu, notifikaci a audit log.
+
+Příklad: u smazání workspace není problém jen ztráta dat jednoho člověka. Problém je, že workspace může obsahovat práci celého týmu, fakturační historii, auditní stopu a data zákazníků. Proto má mít smazání vlastní flow, informování správců a možnost zrušení během grace period.
+
+### ED.4 Preference nesmí být temný vzorec v obleku
+
+Nastavení preferencí je místo, kde se často láme důvěra. Pokud uživatel otevře centrum soukromí a najde deset přepínačů s názvy „Personalizované zkušenosti“ a „Relevantní obchodní komunikace“, produkt říká: „Nevěříme, že poznáte reklamu, tak ji přejmenujeme.“ To není moc elegantní. Je to growth s falešným knírem.
+
+Pište preference podle účelu:
+
+- **Produktové notifikace:** změny v projektech, komentáře, úkoly, pozvánky.
+- **Bezpečnostní oznámení:** nové přihlášení, změna hesla, změna role, reset MFA.
+- **Fakturační zprávy:** faktury, neúspěšné platby, změny tarifu.
+- **Release notes:** důležité změny produktu, nové funkce, plánované odstávky.
+- **Marketing:** vzdělávací obsah, akce, nabídky a obchodní novinky.
+- **Výzkum:** pozvánky na rozhovor, beta testy, dotazníky.
+
+U každé kategorie uveďte příklad zprávy a frekvenci. „Maximálně 1× měsíčně“ je konkrétnější než „občas“. Pokud frekvenci nevíte, nejdřív ji nastavte interně. Produkt nemá slibovat mlhu.
+
+Privacy-first default:
+
+- marketing vypnutý, pokud nemáte platný důvod nebo souhlas,
+- bezpečnostní a transakční zprávy oddělené od marketingu,
+- odhlášení jedním kliknutím tam, kde to dává smysl,
+- žádné tracking pixely jako podmínka měření úspěchu,
+- RSS nebo veřejný changelog jako alternativa k newsletteru.
+
+### ED.5 Export, oprava a smazání potřebují stav požadavku
+
+Některé akce vyřešíte okamžitě. Jiné potřebují zpracování, ověření nebo koordinaci s organizací. V takovém případě uživatel nesmí spadnout do ticha.
+
+Stavy žádosti:
+
+1. **Přijato:** systém ví, kdo žádost podal, kdy a jaký je rozsah.
+2. **Ověřujeme:** kontroluje se identita, oprávnění a dopad na ostatní osoby.
+3. **Zpracováváme:** probíhá export, oprava, omezení nebo mazání.
+4. **Čekáme na doplnění:** uživatel nebo správce musí potvrdit rozsah.
+5. **Dokončeno:** akce proběhla a uživatel dostal výsledek nebo potvrzení.
+6. **Zamítnuto nebo omezeno:** uživatel dostal srozumitelné vysvětlení a další možnosti.
+
+I když první verzi děláte ručně, použijte stav. Stačí interní tabulka nebo ticket s jasnými poli. Hlavně žádné „Pepa to má v hlavě“. Pepa má i dovolenou, nemoc a občas vypnutý Slack. Systém nemá stát na Pepově mozku.
+
+### ED.6 Karta privacy centra
+
+Použijte ji před implementací nové stránky v nastavení účtu.
+
+## Účel
+
+- Jaké otázky má privacy centrum uživateli zodpovědět?
+- Které akce má uživatel zvládnout bez supportu?
+- Které akce musí zůstat ruční kvůli riziku nebo právnímu posouzení?
+
+## Sekce
+
+- Profil a kontaktní údaje:
+- Bezpečnost a session:
+- Preference komunikace:
+- Export a přenositelnost:
+- Oprava nebo doplnění údajů:
+- Smazání účtu nebo workspace:
+- Integrace a sdílení dat:
+- Audit citlivých akcí:
+
+## Rizika
+
+- Která akce může poškodit účet, tým nebo zákaznická data?
+- Kde je potřeba re-auth, MFA, potvrzení e-mailem nebo čekací lhůta?
+- Kdo dostane notifikaci při citlivé změně?
+
+## Data
+
+- Jaké tabulky, úložiště a externí nástroje se každé akce týkají?
+- Jaké údaje jsou v exportu a v jakém formátu?
+- Co se maže okamžitě, co po lhůtě a co zůstává kvůli zákonné povinnosti?
+
+## UX
+
+- Je každá akce popsaná lidsky a konkrétně?
+- Má uživatel potvrzení, stav a historii požadavku?
+- Existuje bezpečný návrat, pokud akci spustil omylem?
+
+### ED.7 Checklist: privacy centrum bez labyrintu
+
+- [ ] Uživatel najde privacy centrum z nastavení účtu maximálně na dvě kliknutí.
+- [ ] Profil, bezpečnost, preference, export, mazání a integrace jsou oddělené sekce.
+- [ ] Každá citlivá akce má popsaný dopad před potvrzením.
+- [ ] Export neobsahuje data ostatních lidí bez jasného oprávnění.
+- [ ] Smazání účtu řeší osobní účet i týmový workspace rozdílně.
+- [ ] Marketingové preference jsou oddělené od bezpečnostních a transakčních zpráv.
+- [ ] Odhlášení z marketingu není schované za přihlášení, pokud to není nutné.
+- [ ] Integrace ukazují rozsah přístupu, poslední synchronizaci a možnost odpojení.
+- [ ] Citlivé změny se zapisují do audit logu bez zbytečného obsahu.
+- [ ] Ruční požadavky mají stav, vlastníka, termín a srozumitelné odpovědi.
+- [ ] Mikrotexty odkazují na konkrétní části dokumentace nebo zásad.
+- [ ] Privacy centrum je testované stejně jako onboarding nebo fakturace.
+
+### Mini cvičení: privacy centrum za 60 minut
+
+1. **10 minut:** vypište všechny akce, které dnes uživatel řeší přes support.
+2. **10 minut:** označte tři akce s největším dopadem na důvěru nebo riziko.
+3. **15 minut:** pro každou akci napište dopad, potřebné ověření a stav po dokončení.
+4. **15 minut:** navrhněte první obrazovku privacy centra jen jako textovou strukturu.
+5. **10 minut:** určete jednu akci, kterou můžete převést do samoobsluhy během příštího sprintu.
+
+Výstupem má být karta privacy centra a jeden implementační úkol. Ne kompletní redesign nastavení, ne nový právní portál, ne dvanáctipatrová compliance katedrála. Jedna funkce, která sníží ruční práci a zvýší kontrolu uživatele.
+
+### Zdroje k příloze ED
+
+- GDPR, článek 12: informace a komunikace k právům subjektu údajů mají být stručné, transparentní, srozumitelné a snadno dostupné: https://gdpr-info.eu/art-12-gdpr/
+- GDPR, článek 15: právo subjektu údajů na přístup k osobním údajům a informacím o zpracování: https://gdpr-info.eu/art-15-gdpr/
+- GDPR, článek 16: právo na opravu nepřesných osobních údajů: https://gdpr-info.eu/art-16-gdpr/
+- GDPR, článek 17: právo na výmaz a jeho podmínky: https://gdpr-info.eu/art-17-gdpr/
+- GDPR, článek 20: právo na přenositelnost údajů ve strukturovaném, běžně používaném a strojově čitelném formátu: https://gdpr-info.eu/art-20-gdpr/
+- GDPR, článek 25: data protection by design and by default jako návrhový princip pro technická a organizační opatření: https://gdpr-info.eu/art-25-gdpr/
+- EDPB: Guidelines 4/2019 on Article 25 vysvětlují praktický přístup k ochraně údajů již v návrhu a ve výchozím nastavení: https://www.edpb.europa.eu/documents/guideline/guidelines-42019-on-article-25-data-protection-by-design-and-by-default_en
+- EDPB: Guidelines on transparency under Regulation 2016/679 řeší srozumitelnost, dostupnost a životní cyklus informování subjektů údajů: https://www.edpb.europa.eu/system/files/2023-09/wp260rev01_en.pdf
+
 ## Pracovní log
+
+- 2026-08-27: Přidána příloha ED „Privacy centrum v produktu bez schovaného labyrintu“ s návrhem samoobslužných sekcí, bezpečnostním třením podle rizika, komunikačními preferencemi, stavem žádostí, kartou privacy centra, checklistem, hodinovým cvičením a ověřenými GDPR/EDPB zdroji.
 
 - 2026-08-27: Přidána příloha EC „Restore drill záloh bez falešného pocitu bezpečí“ s RPO/RTO rámcem, scénáři obnovy, bezpečným návrhem záloh, postupem restore drillu, ověřením po obnově, kartou cvičení, checklistem, hodinovým cvičením a ověřenými NIST/CISA/NCSC zdroji.
 
