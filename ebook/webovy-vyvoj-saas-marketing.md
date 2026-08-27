@@ -30634,7 +30634,177 @@ Výstupem má být funkční kontakt, krátká politika a jeden interní proces.
 - EUR-Lex: Directive (EU) 2022/2555, tedy NIS2, popisuje povinnosti významných incidentů včetně raného varování, incident notification a závěrečné zprávy pro dotčené subjekty: https://eur-lex.europa.eu/legal-content/EN/TXT/?qid=1675242238329&uri=CELEX%3A32022L2555
 - European Commission: pokyny k aplikaci NIS2 shrnují vícekrokový režim hlášení významných incidentů včetně 24hodinového raného varování a 72hodinového oznámení: https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ%3AJOC_2023_328_R_0002
 
+## Příloha EC: Restore drill záloh bez falešného pocitu bezpečí
+
+Záloha, kterou jste nikdy neobnovili, není záloha. Je to uklidňující soubor s modlitbou uvnitř. A modlitby jsou fajn, ale databázi po ransomware útoku většinou nenahodí. Malý SaaS nepotřebuje hned drahé disaster recovery divadlo se třemi regiony, tabulkou rizik a poradcem, který říká „resilience“ každých sedm minut. Potřebuje vědět tři věci: co musí obnovit, jak rychle, a jestli to někdo už reálně zkusil.
+
+Restore drill je řízené cvičení obnovy ze záloh. Nečeká na incident. Neprobíhá na produkci. Nejde o hledání viníka, ale o ověření, jestli zálohy, klíče, přístupy, dokumentace a lidé dohromady umí vrátit službu do použitelného stavu. Pokud drill odhalí, že export existuje, ale nikdo nezná heslo ke šifrovacímu klíči, gratuluji: právě jste našli problém v nejlevnější možné chvíli.
+
+*Codyho komentář: screenshot zelené ikonky „backup successful“ je psychologická útěcha, ne provozní důkaz. Skutečný důkaz je obnovená služba, přihlášený testovací uživatel a člověk, který ví, co se stalo. Bohužel méně sexy, ale výrazně užitečnější.*
+
+### EC.1 Začněte scénářem, ne nástrojem
+
+První otázka není „jaký backup provider koupíme“. První otázka je „co se pokazilo a co musí firma umět obnovit“. Jinak skončíte u drahé konfigurace, která chrání špatnou věc. Pro malý web nebo SaaS stačí začít třemi scénáři:
+
+- **Smazaná data:** někdo omylem smaže zákaznický záznam, objednávky, projekt nebo obsah.
+- **Rozbitý release:** nová verze poškodí databázové schéma, obsah nebo důležitý workflow.
+- **Ransomware nebo kompromitace:** útočník získá přístup k části infrastruktury a snaží se poškodit i dostupné zálohy.
+
+Ke každému scénáři napište dopad na zákazníka. Ne technicky, ale obchodně: zákazník nemůže dokončit objednávku, nevidí faktury, ztratil historii komunikace, nemůže exportovat data, support nemá kontext. Z toho teprve vychází priorita obnovy.
+
+Praktický minimální cíl:
+
+- obnovit databázi do izolovaného prostředí,
+- ověřit integritu dat na konkrétních záznamech,
+- spustit aplikaci proti obnovené kopii,
+- potvrdit, že přístupy a tajemství nejsou součástí zálohy v nebezpečné podobě,
+- zapsat skutečný čas obnovy a nalezené mezery.
+
+U marketingového webu může být scénář jednodušší: obnovit repozitář, statický build, CMS obsah, média, DNS konfiguraci a formulářové integrace. U SaaSu přidejte databázi, objektové úložiště, fronty, e-mailové šablony, billing metadata, audit logy a dokumentaci pro podporu.
+
+### EC.2 Rozlišujte RPO, RTO a realitu
+
+Backup debaty často zní odborně, dokud se někdo nezeptá na dvě obyčejné otázky: kolik dat můžeme ztratit a jak dlouho můžeme být mimo provoz. K tomu slouží dvě metriky:
+
+- **RPO:** maximální přijatelná ztráta dat v čase. Například „můžeme přijít maximálně o 15 minut změn“.
+- **RTO:** maximální přijatelná doba obnovy služby. Například „základní provoz musí běžet do 2 hodin“.
+
+Pro malý tým doporučuji nepředstírat enterprise dokonalost. Napište realistické cíle pro různé vrstvy:
+
+| Vrstva | Příklad RPO | Příklad RTO | Poznámka |
+| --- | ---: | ---: | --- |
+| Marketingový web | 24 hodin | 4 hodiny | Důležitá je rychlá publikace a formuláře. |
+| Kontaktní formuláře | 1 hodina | 2 hodiny | Lead nesmí spadnout do černé díry. |
+| SaaS databáze | 15–60 minut | 2–8 hodin | Záleží na typu produktu a SLA. |
+| Billing a fakturace | 24 hodin | 1 pracovní den | Nutná kontrola s účetním systémem. |
+| Audit logy | 24 hodin | 1–2 dny | Důležitá integrita, ne pohodlné mazání. |
+
+Tyto hodnoty nejsou univerzální doporučení. Jsou to startovní body pro debatu. Pokud prodáváte systém, který řídí kritický provoz zákazníka, tabulka výše je roztomile naivní. Pokud máte early-stage SaaS s pěti platícími zákazníky, může být naopak přehnaná. Důležité je, aby obchodní slib, technická realita a backup nastavení nebyly tři různé pohádky.
+
+### EC.3 Záloha musí přežít špatný den
+
+Dobrá záloha není jen kopie dat. Je to kopie, která přežije nejpravděpodobnější průšvih. Pokud produkční server, backup účet i administrátorský účet sdílí stejné přihlašování, nemáte zálohování. Máte synchronizovaný optimismus.
+
+Privacy-first a bezpečný návrh:
+
+- zálohy jsou šifrované v klidu i při přenosu,
+- klíče nejsou uložené vedle záloh ve stejném účtu bez další ochrany,
+- produkční aplikace nemá oprávnění mazat historické zálohy,
+- alespoň kritické zálohy mají offline, immutable nebo oddělenou kopii,
+- přístup k obnově je omezený, auditovaný a použitelný i při ztrátě běžného účtu,
+- zálohy neobsahují zbytečné osobní údaje, debug dumpy, tokeny a dočasná data,
+- retenční doby odpovídají účelu, smlouvám a právním povinnostem.
+
+Evropský provoz k tomu přidává další otázky: kde fyzicky leží zálohy, kdo je provozovatel úložiště, jaké subdodavatele používá, zda dochází k přenosům mimo EHP, jak se řeší výmaz a jak se dokládá obnova i mazání. Backup není výjimka z privacy pravidel. Je to místo, kde se špatná datová hygiena schová velmi pohodlně a velmi dlouho.
+
+### EC.4 Restore drill krok za krokem
+
+Drill dělejte v izolovaném prostředí. Cílem není riskovat produkci, ale ověřit proces. Ideální rytmus pro malý SaaS: lehký měsíční test jedné vrstvy a větší kvartální restore drill celé kritické cesty. Když máte hodně citlivá data nebo tvrdé SLA, rytmus zpřísněte.
+
+Postup:
+
+1. **Vyberte scénář.** Například „obnova databáze po chybné migraci“.
+2. **Určete časový bod.** Vyberte konkrétní backup snapshot a očekávané RPO.
+3. **Připravte izolaci.** Použijte separátní projekt, síť, doménu nebo lokální prostředí bez zákaznického přístupu.
+4. **Obnovte data.** Zapište každý krok, příkaz, účet a ruční zásah.
+5. **Ověřte integritu.** Zkontrolujte počty záznamů, ukázkové zákazníky, vazby, média a kritické workflow.
+6. **Spusťte aplikaci.** Přihlaste testovacího uživatele, projděte hlavní akce a ověřte formuláře nebo API.
+7. **Změřte čas.** Zapište skutečný RTO, zdržení a místo, kde proces čekal na člověka.
+8. **Vyčistěte prostředí.** Obnovená kopie produkčních dat nesmí zůstat žít jako zapomenutý duch v cloudu.
+9. **Zapište závěry.** Každý problém musí mít vlastníka, termín a důkaz opravy.
+
+Nejčastější nálezy nejsou dramatické. Chybí heslo. Dokumentace je stará. Obnova vyžaduje člověka, který už ve firmě není. Backup existuje, ale neobsahuje objektové úložiště. Databáze jde obnovit, ale aplikace neumí běžet proti obnovenému schématu. E-mailová integrace začne omylem posílat zprávy reálným lidem. Ano, to poslední je přesně ten typ legrace, který chcete najít v testu, ne v pátek večer.
+
+### EC.5 Co ověřit po obnově
+
+Samotné „restore command finished“ nestačí. Ověřte výsledek z pohledu produktu, zákazníka a privacy.
+
+Produktová kontrola:
+
+- hlavní přihlášení a autorizace fungují,
+- kritické stránky a API vrací očekávaná data,
+- objekty v úložišti odpovídají databázovým odkazům,
+- fronty, cron úlohy a webhooks jsou buď vypnuté, nebo bezpečně přesměrované,
+- billing režim je v sandboxu a nic reálně neúčtuje,
+- e-maily, SMS a notifikace nejdou skutečným zákazníkům.
+
+Datová kontrola:
+
+- obnovila se správná časová verze,
+- chybějící data odpovídají deklarovanému RPO,
+- osobní údaje nejsou rozšířené do nehlídaného prostředí,
+- testovací kopie má nastavenou krátkou retenci,
+- přístupy k obnoveným datům jsou auditované,
+- po drillu existuje důkaz o smazání testovací kopie.
+
+Komunikační kontrola:
+
+- support ví, jaký stav zákazníkům říct,
+- status page text odpovídá skutečnosti,
+- interní incident kanál obsahuje aktuální rozhodnutí,
+- existuje seznam zákazníků nebo správců, kterých by se podobná obnova týkala,
+- nikdo neslibuje čas obnovy, který drill nepotvrdil.
+
+### Šablona restore drill karty
+
+```markdown
+## Restore drill
+
+- Datum:
+- Scénář:
+- Vlastník:
+- Systém / služba:
+- Backup zdroj:
+- Cílové prostředí:
+- Deklarované RPO:
+- Skutečná ztráta dat:
+- Deklarované RTO:
+- Skutečný čas obnovy:
+- Ověřené workflow:
+- Ověřené datové vazby:
+- Zapojené účty a oprávnění:
+- Citlivá data v testu:
+- Způsob smazání testovací kopie:
+- Nalezené mezery:
+- Akční položky:
+- Další drill:
+```
+
+### Checklist: zálohy, které nejsou jen placebo
+
+- [ ] Víme, které systémy a data jsou pro obnovu kritické.
+- [ ] Máme realistické RPO a RTO pro web, SaaS, formuláře, billing a auditní data.
+- [ ] Zálohy jsou šifrované a klíče mají samostatný, zdokumentovaný přístup.
+- [ ] Produkční aplikace nemůže jednoduše smazat všechny historické zálohy.
+- [ ] Kritické zálohy mají oddělenou, offline nebo immutable vrstvu.
+- [ ] Restore drill probíhá v izolovaném prostředí bez reálných notifikací zákazníkům.
+- [ ] Po obnově testujeme produktové workflow, nejen úspěšný příkaz.
+- [ ] Obnovená kopie produkčních dat má krátkou retenci a důkaz smazání.
+- [ ] Každý drill zapisuje skutečný čas obnovy a konkrétní mezery.
+- [ ] Dokumentace obnovy se aktualizuje hned po cvičení, ne „až bude klid“. Klid je mýtus.
+
+### Mini cvičení: první restore drill za 60 minut
+
+1. **10 minut:** vyberte jeden kritický systém a jeden realistický scénář selhání.
+2. **10 minut:** najděte poslední použitelnou zálohu, klíče a dokumentaci obnovy.
+3. **20 minut:** obnovte data do izolovaného prostředí nebo alespoň proveďte suchý běh s přesnými kroky.
+4. **10 minut:** ověřte dvě kritická workflow a jeden konkrétní záznam.
+5. **10 minut:** zapište restore drill kartu, smažte testovací kopii a založte úkoly na nalezené mezery.
+
+Výstupem má být jedna vyplněná restore drill karta a maximálně tři prioritní opravy. Ne nový backup vesmír. Když první cvičení odhalí, že dokumentace neexistuje, napište nejmenší použitelný runbook. To je lepší než tři týdny vybírat nástroj a tvářit se strategicky.
+
+### Zdroje k příloze EC
+
+- NIST: SP 800-34 Rev. 1 popisuje contingency planning, vztah BIA k obnově, RTO a strategii záloh pro informační systémy: https://csrc.nist.gov/pubs/sp/800/34/r1/upd1/final
+- NIST: Security Measures for EO-Critical Software uvádí opatření „Back up data, exercise backup restoration, and be prepared to recover data“: https://www.nist.gov/itl/executive-order-14028-improving-nations-cybersecurity/securing-critical-software/security
+- CISA: StopRansomware Guide doporučuje offline, šifrované zálohy, pravidelné testování dostupnosti a integrity záloh a obnovu podle priorit kritických služeb: https://www.cisa.gov/stopransomware/ransomware-guide
+- CISA: ransomware response checklist zdůrazňuje obnovu z offline šifrovaných záloh a opatrnost, aby se čisté systémy při obnově znovu nenakazily: https://www.cisa.gov/sites/default/files/publications/CISA_MS-ISAC_Ransomware%20Guide_S508C.pdf
+- NCSC: guidance k ransomware obnově doporučuje před obnovou ověřit, že záloha neobsahuje malware, a mít aktuální offline backup nejdůležitějších dat: https://www.ncsc.gov.uk/section/respond-recover/sole-ransomware-attack
+- NCSC: článek Offline backups in an online world vysvětluje význam offline oddělení záloh i u cloudových scénářů: https://www.ncsc.gov.uk/blog-post/offline-backups-in-an-online-world
+
 ## Pracovní log
+
+- 2026-08-27: Přidána příloha EC „Restore drill záloh bez falešného pocitu bezpečí“ s RPO/RTO rámcem, scénáři obnovy, bezpečným návrhem záloh, postupem restore drillu, ověřením po obnově, kartou cvičení, checklistem, hodinovým cvičením a ověřenými NIST/CISA/NCSC zdroji.
 
 - 2026-08-27: Přidána příloha EB „Bezpečnostní kontakt a disclosure bez ticha v éteru“ s praktickým `security.txt`, disclosure politikou, triage procesem, privacy-first pravidly pro reporty, komunikačními šablonami, checklistem, mini cvičením a ověřenými RFC/ENISA/EU zdroji.
 
