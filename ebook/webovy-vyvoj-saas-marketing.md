@@ -30258,7 +30258,224 @@ Výsledek má být menší katalog, jasnější dashboardy a klidnější svědo
 - CNIL: doporučení pro používání analytiky na webech a v aplikacích, včetně podmínek pro omezené měření návštěvnosti bez souhlasu: https://www.cnil.fr/fr/node/677
 - EDPB: Guidelines 8/2020 upozorňují na rizika targetingu, profilování a online sledování v kontextu sociálních platforem: https://www.edpb.europa.eu/documents/guideline/guidelines-82020-on-the-targeting-of-social-media-users_ga
 
+## Příloha EA: Export dat bez zamčených dveří a ručního kouzlení
+
+Export dat je jedna z nejlepších zkoušek dospělosti SaaSu. Ne proto, že by CSV soubor byl vrchol technologické civilizace. Ale protože export ukáže, jestli produkt opravdu ví, jaká data drží, komu patří, jak spolu souvisí a co se smí bezpečně předat dál.
+
+Privacy-first produkt nemá uživatele držet jako rukojmí. Když zákazník odejde, potřebuje svoje data dostat ven v rozumném formátu, bez ticketového divadla, bez tří týdnů čekání a bez skrytého trestu v podobě nepoužitelného souboru. Dobře navržený export zároveň chrání ostatní lidi, obchodní tajemství, auditní stopu a bezpečnost systému. Ano, jde dělat obojí. Jen to chce přemýšlet dřív než v den, kdy přijde první žádost.
+
+*Codyho komentář: pokud je váš export jen tlačítko „Kontaktujte podporu“, není to export. Je to úniková místnost pro zákaznická data. A ne ta zábavná, kde na konci dostanete týmovou fotku.*
+
+### EA.1 Rozlišujte export produktu, přístup k osobním údajům a přenositelnost
+
+Ne každý export je stejný právně ani produktově. Malý tým si často všechno hodí do jednoho pytle: „někdo chce data“. Jenže požadavek zákazníka na export projektů, žádost člověka o přístup k osobním údajům a právo na přenositelnost podle GDPR mají jiný účel, rozsah i rizika.
+
+Praktické rozdělení:
+
+| Typ požadavku | Co typicky obsahuje | Kdo žádá | Hlavní riziko |
+|---|---|---|---|
+| produktový export | projekty, faktury, nastavení, obsah, reporty | admin týmu nebo vlastník účtu | vynechaná obchodní data |
+| přístup k osobním údajům | informace, zda a jak zpracováváte osobní údaje, kopie relevantních údajů | konkrétní fyzická osoba | předání dat někoho jiného |
+| přenositelnost dat | údaje poskytnuté subjektem údajů ve strukturovaném, běžně používaném a strojově čitelném formátu | konkrétní fyzická osoba | záměna za kompletní databázový dump |
+| administrativní audit | audit logy, historie změn, bezpečnostní přehledy | oprávněný správce zákaznického účtu | únik citlivých provozních informací |
+
+U každého typu si napište vlastní odpověď na tři otázky:
+
+- kdo má právo export spustit,
+- co přesně do exportu patří,
+- co do exportu nepatří, i kdyby to bylo technicky snadné.
+
+Důležité je neslibovat víc, než umíte bezpečně splnit. „Exportujeme všechno“ zní hezky, dokud tím nepošlete osobní údaje dalších členů týmu, interní poznámky supportu, neveřejné auditní záznamy nebo cizí soubory v komentářích. Export má být přehledný, ne bezhlavý.
+
+### EA.2 Navrhněte export jako produktovou funkci, ne jako support skript
+
+První verze exportu může být jednoduchá, ale nesmí být tajná magie v terminálu jednoho vývojáře. Pokud export vyžaduje ruční SQL dotaz, ruční zipování a posílání přes e-mail, máte provozní riziko v převleku za „zatím to stačí“.
+
+Minimální produktový export pro B2B SaaS:
+
+- uživatel vidí, jaké oblasti dat export zahrne,
+- systém ukáže odhad velikosti nebo alespoň typy souborů,
+- export spouští jen role s odpovídajícím oprávněním,
+- každý export se zapíše do audit logu,
+- soubor má omezenou dobu dostupnosti,
+- odkaz na stažení není veřejný a vyžaduje autentizaci,
+- export neobsahuje tajné klíče, tokeny, hesla, interní support poznámky ani technické identifikátory bez významu pro zákazníka,
+- dokumentace říká, co v exportu je a co v něm není.
+
+Dobrá produktová obrazovka exportu může být nudná. To je pochvala. Uživatel si vybere rozsah, potvrdí dopad, počká na zpracování a stáhne výsledek. Žádné ohňostroje, žádný „growth hack“ před odchodem, žádný formulář „řekněte nám, proč nás opouštíte“ jako povinný výkupný mechanismus.
+
+### EA.3 Formát dat musí být použitelný bez vašeho produktu
+
+Export, který jde otevřít jen ve vaší aplikaci, není skutečný export. Je to datový suvenýr. Cílem je dát zákazníkovi data ve formátu, se kterým dokáže pracovat i mimo vás.
+
+Rozumný základ:
+
+- tabulková data jako CSV nebo XLSX podle cílové skupiny,
+- strukturovaná data jako JSON s dokumentovaným schématem,
+- textový obsah jako Markdown, HTML nebo běžné dokumentové formáty,
+- soubory v původních formátech, pokud to dává smysl,
+- metadata v samostatném `manifest.json`, aby bylo jasné, co export obsahuje,
+- datové časy v ISO 8601 s časovou zónou,
+- stabilní identifikátory tam, kde pomáhají napojení mezi soubory,
+- kódování UTF-8 bez překvapení typu „česká diakritika šla na výlet“.
+
+Ukázka jednoduchého manifestu:
+
+```json
+{
+  "exported_at": "2026-08-27T16:00:00Z",
+  "workspace": "acme-demo",
+  "format_version": "1.0",
+  "files": [
+    { "path": "projects.csv", "description": "Seznam projektů" },
+    { "path": "tasks.csv", "description": "Úkoly napojené na projekty" },
+    { "path": "attachments/", "description": "Nahrané soubory" }
+  ],
+  "excluded": [
+    "interní support poznámky",
+    "bezpečnostní audit logy",
+    "tajné integrační tokeny"
+  ]
+}
+```
+
+Verzujte formát exportu stejně jako API. Když za rok přidáte nové pole, starší integrace zákazníka se nesmí rozpadnout jen proto, že někdo v pátek přejmenoval `customer_id` na `client_uuid_final`. Pátek už tak má dost problémů.
+
+### EA.4 Chraňte data ostatních lidí
+
+Největší chyba exportů není chybějící sloupec. Největší chyba je předat data lidí, kteří o export nežádali nebo k němu nedali oprávnění. V týmových SaaSech se osobní údaje míchají s týmovým obsahem velmi snadno: komentáře, zmínky, jména členů, e-maily, auditní stopy, nahrané dokumenty, přiřazení úkolů, support komunikace.
+
+Pravidla bezpečného exportu:
+
+- export pracovní oblasti smí spustit jen ověřený admin nebo vlastník,
+- export osobních údajů člověka oddělte od týmového exportu,
+- údaje ostatních členů týmu minimalizujte na nezbytný kontext,
+- interní poznámky supportu nikdy neposílejte automaticky,
+- audit logy exportujte jen jako samostatný privilegovaný výstup,
+- soubory před exportem kontrolujte podle vlastnictví a oprávnění,
+- u sdílených objektů jasně určete, kdo je oprávněný příjemce.
+
+Příklad: pokud si admin exportuje projekty workspace, může dávat smysl uvést, kdo byl vlastníkem úkolu. Nemusí ale dávat smysl přidat kompletní historii přihlášení každého člena, IP adresy, user agenty a support poznámky. Kontext ano, šmírovací příloha ne.
+
+### EA.5 Automatizujte lhůty a stav požadavku
+
+U právních žádostí nestačí export vyrobit. Musíte umět ukázat, kdy žádost přišla, jak byla ověřena, kdo ji zpracoval, jaké systémy byly zkontrolovány a kdy byla odpověď odeslána. Bez toho se z každé žádosti stane archeologická expedice přes e-mail, Slack a paměť vývojáře, který je zrovna na dovolené.
+
+Minimální workflow žádosti:
+
+1. přijetí a klasifikace požadavku,
+2. ověření identity přiměřené riziku,
+3. určení typu požadavku,
+4. kontrola datových zdrojů,
+5. sestavení exportu nebo odpovědi,
+6. bezpečné předání,
+7. zápis výsledku a data uzavření,
+8. krátká retrospektiva, pokud něco trvalo zbytečně dlouho.
+
+Provozní karta požadavku:
+
+```markdown
+# Export nebo žádost o data
+
+## Základ
+- Datum přijetí:
+- Žadatel:
+- Typ požadavku:
+- Odpovědná osoba:
+- Termín odpovědi:
+
+## Ověření
+- Metoda ověření:
+- Riziková poznámka:
+
+## Rozsah
+- Zahrnuté systémy:
+- Vyloučené systémy a důvod:
+- Formát výstupu:
+
+## Předání
+- Způsob předání:
+- Expirace odkazu:
+- Auditní záznam:
+
+## Uzavření
+- Datum odpovědi:
+- Co zlepšit příště:
+```
+
+Tahle karta není byrokratická rozkoš. Je to pojistka proti panice, až přijde druhá, třetí a desátá žádost. A taky proti situaci, kdy každý v týmu odpovídá trochu jinak, protože „minule jsme to nějak udělali“.
+
+### EA.6 Export po zrušení účtu není pomsta zákazníkovi
+
+Odchod zákazníka není selhání morálky. Je to běžná součást životního cyklu produktu. Privacy-first SaaS má mít jasný offboarding: co si zákazník může stáhnout, jak dlouho zůstane účet dostupný, kdy se data mažou, co zůstává kvůli účetnictví nebo právním povinnostem a koho kontaktovat, když je potřeba obnovit přístup.
+
+Dobrý offboarding:
+
+- nabídne export před smazáním pracovního prostoru,
+- jasně vysvětlí retenční lhůty,
+- oddělí produktová data od fakturačních záznamů,
+- nezdržuje export obchodním nátlakem,
+- po smazání nezachovává aktivní integrační tokeny,
+- po ukončení přístupů potvrdí, co bylo vypnuto,
+- nechá zákazníkovi dokumentaci formátu exportu.
+
+Špatný offboarding:
+
+- smaže účet okamžitě bez možnosti exportu,
+- nechá data v zálohách „navždycky, protože co kdyby“,
+- odmítne export bez vysvětlení,
+- pošle data jako přílohu běžným e-mailem,
+- ponechá aktivní webhooky a API klíče,
+- nutí zákazníka volat obchodníkovi, aby získal vlastní data.
+
+Pokud export a výmaz navrhnete společně, máte méně hran. Uživatel chápe, co se stane, support má jasný postup a produktový tým vidí, kde jsou datové vazby příliš zamotané.
+
+### EA.7 Checklist: export bez zamčených dveří
+
+- [ ] Máme oddělený produktový export, žádost o přístup a přenositelnost dat.
+- [ ] Každý typ exportu má vlastníka, rozsah a oprávněné role.
+- [ ] Exportní formát je běžně použitelný mimo náš produkt.
+- [ ] Součástí exportu je manifest nebo dokumentace obsahu.
+- [ ] Export neobsahuje hesla, tokeny, interní poznámky ani zbytečné osobní údaje.
+- [ ] U týmových dat chráníme údaje ostatních lidí.
+- [ ] Odkazy na export mají expiraci a vyžadují autentizaci.
+- [ ] Každý export je auditovatelný.
+- [ ] Offboarding nabízí export před smazáním dat.
+- [ ] Retence exportních souborů je krátká a zdokumentovaná.
+- [ ] Support ví, co dělat při právní žádosti i běžném produktovém exportu.
+- [ ] Formát exportu má verzi a změny se zapisují do changelogu.
+
+### Mini cvičení: export audit za 60 minut
+
+Vyberte jeden hlavní objekt produktu: projekt, zákazníka, fakturu, dokument, kampaň nebo workspace. Pak během hodiny odpovězte:
+
+1. Jak by zákazník tento objekt dostal ven z produktu?
+2. V jakém formátu by export dával smysl?
+3. Která pole jsou opravdu zákaznická data?
+4. Která pole patří vynechat kvůli bezpečnosti nebo soukromí ostatních?
+5. Jak dlouho by byl exportní soubor dostupný?
+6. Kdo by viděl auditní záznam o exportu?
+7. Co by se stalo, kdyby zákazník účet zrušil zítra?
+
+Výstupem má být jedna exportní karta, ne reorganizace celé databáze. Pokud během hodiny zjistíte, že nikdo neví, kde všude data objektu žijí, právě jste našli důležitější problém než chybějící tlačítko `Export`.
+
+### Codyho komentář
+
+Export dat je dobrý test férovosti produktu. Když zákazníkovi pomáháte data dostat ven, paradoxně zvyšujete důvěru, že u vás může zůstat. Zamčené dveře možná krátkodobě sníží churn. Dlouhodobě ale říkají: „nevěříme vlastní hodnotě, tak držíme data jako rukojmí“. To není SaaS strategie. To je digitální lepicí páska.
+
+### Zdroje k příloze EA
+
+- EUR-Lex: GDPR článek 12 popisuje transparentní komunikaci a pravidla pro výkon práv subjektů údajů: https://eur-lex.europa.eu/eli/reg/2016/679/art_12/oj/eng
+- EUR-Lex: GDPR článek 15 upravuje právo subjektu údajů na přístup k osobním údajům a kopii zpracovávaných údajů: https://eur-lex.europa.eu/eli/reg/2016/679/art_15/oj/eng
+- EUR-Lex: GDPR článek 20 upravuje právo na přenositelnost údajů ve strukturovaném, běžně používaném a strojově čitelném formátu: https://eur-lex.europa.eu/eli/reg/2016/679/art_20/oj/eng
+- European Commission: praktický přehled pro organizace, jak pracovat s žádostmi jednotlivců podle GDPR: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/dealing-requests-individuals_en
+- EDPB: Guidelines on the right to data portability WP242 rev.01 vysvětlují rozsah a limity práva na přenositelnost údajů: https://www.edpb.europa.eu/documents/guideline/guidelines-on-the-right-to-data-portability-under-regulation-2016679-wp242_en
+
+
 ## Pracovní log
+
+- 2026-08-27: Přidána příloha EA „Export dat bez zamčených dveří a ručního kouzlení“ s rozlišením produktového exportu, práva na přístup a přenositelnosti, pravidly pro použitelné formáty, ochranou dat ostatních lidí, workflow žádostí, offboardingem, checklistem, hodinovým auditem a ověřenými EU/EDPB zdroji.
+
 
 - 2026-08-27: Přidána příloha DZ „Produktová telemetrie bez osobních profilů“ s rozhodovacím přístupem k eventům, event katalogem, agregacemi, oddělením marketingového trackingu, release review, telemetrickou kartou, checklistem, úklidovým cvičením a ověřenými GDPR/CNIL/EDPB zdroji.
 
