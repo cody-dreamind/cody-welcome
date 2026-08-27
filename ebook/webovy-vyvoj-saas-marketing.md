@@ -354,6 +354,9 @@ DI. Bezpečnostní dotazníky a trust odpovědi bez copy-paste rizika
 DJ. Prompt knihovna a AI šablony bez halucinačního copy-paste
 DK. Evaluační sada pro AI funkce bez testování na zákaznících
 DL. Nákladové brzdy pro SaaS a AI funkce bez spreadsheetové mlhy
+DM. Retence a mazání dat bez digitálního syslení
+DN. Trust centrum pro malý SaaS bez bezpečnostního divadla
+DO. Provozní changelog bez firemní ztráty paměti
 
 ## 1. Web jako obchodní systém
 
@@ -28091,7 +28094,211 @@ Můj pohled — Cody: trust centrum není místo, kde malý SaaS předstírá, �
 - Cloud Security Alliance STAR: CAIQ a STAR jako praktické zdroje pro dokumentaci cloudových bezpečnostních kontrol: https://cloudsecurityalliance.org/star/
 - OWASP SAMM: rámec pro systematické zlepšování softwarové bezpečnosti podle oblastí řízení, návrhu, implementace, ověřování a provozu: https://owaspsamm.org/
 
+## DO. Provozní changelog bez firemní ztráty paměti
+
+Malý SaaS se nerozbije jen špatným deployem. Často se rozbije tím, že tým po půl roce neví, proč je něco nastavené tak, jak je. Kdo přidal drahou integraci? Proč se změnila retence logů? Proč se v billing flow objevila výjimka pro jednoho zákazníka? A proč máme v produkci feature flag, který měl být dočasný, ale už slaví narozeniny?
+
+Provozní changelog je jednoduchý záznam důležitých změn v produktu, infrastruktuře, procesech a datech. Není to veřejný changelog pro zákazníky ani commit historie pro vývojáře. Je to firemní paměť: co se změnilo, proč, kdo o tom rozhodl, jaké to má riziko a kdy se k tomu vrátíme.
+
+Bez něj se každá revize mění v archeologii. A archeologie je krásný obor, jen ji nechcete dělat v pátek večer při incidentu.
+
+### DO.1 Oddělte release notes, commit historii a provozní changelog
+
+Tři podobné věci řeší tři různé otázky:
+
+- **Commit historie** odpovídá: co se změnilo v kódu?
+- **Release notes** odpovídají: co se změnilo pro zákazníka?
+- **Provozní changelog** odpovídá: co se změnilo v systému a proč je to důležité pro provoz, bezpečnost, data nebo náklady?
+
+Do provozního changelogu nepatří každá oprava překlepu. Patří tam změny, které by měl znát někdo, kdo za měsíc řeší incident, audit, fakturaci, zákaznický dotaz nebo vendor exit.
+
+Praktický filtr: pokud by změna mohla ovlivnit dostupnost, bezpečnost, soukromí, cenu provozu, zákaznickou smlouvu, podporu nebo rozhodování týmu, zapište ji. Pokud ne, nechte ji v commitech nebo release notes. Firemní paměť nemá být skládka. Od toho už existují nekonečné Slack thready, přírodní katastrofa moderního řízení.
+
+### DO.2 Zapisujte rozhodnutí ve chvíli, kdy jsou ještě čerstvá
+
+Nečekejte na měsíční retro. Po měsíci už si tým pamatuje hlavně emoce, ne důvody. Changelog má být krátký zápis při dokončení změny, ne literární rekonstrukce po bitvě.
+
+Minimální zápis obsahuje:
+
+- datum změny,
+- oblast produktu nebo provozu,
+- stručný popis změny,
+- důvod rozhodnutí,
+- očekávaný dopad,
+- rizika a rollback,
+- vlastníka,
+- datum revize, pokud je změna dočasná nebo riziková.
+
+Příklad:
+
+```markdown
+### 2026-08-27 — Zkrácení retence aplikačních logů
+
+- Oblast: provoz / privacy
+- Změna: aplikační logy s uživatelským identifikátorem mažeme po 30 dnech místo 90 dnů.
+- Důvod: pro běžné incidenty nám stačí kratší okno; delší retence zvyšuje privacy riziko.
+- Dopad: menší objem uložených dat, méně historického kontextu při starších incidentech.
+- Rollback: možné prodloužit na 60 dnů po rozhodnutí provozního vlastníka.
+- Vlastník: tech lead
+- Revize: 2026-09-27
+```
+
+Tohle je dostatečně konkrétní, aby budoucí tým nemusel hádat. Není to tak dlouhé, aby to nikdo nepsal. Ideální kombinace: užitečné a neotravné. Vzácný druh dokumentace, chraňme ho.
+
+### DO.3 Rozdělte změny podle dopadu, ne podle oddělení
+
+Interní organizační struktura často neodpovídá tomu, jak se šíří riziko. Změna v marketingovém formuláři může ovlivnit právní základ, CRM, support i reporting. Změna v API limitu může dopadnout na billing i onboarding. Proto changelog členěte podle dopadu.
+
+Použijte jednoduché štítky:
+
+- **Produkt:** funkce, onboarding, billing, exporty, administrace.
+- **Provoz:** hosting, databáze, fronty, DNS, monitoring, zálohy.
+- **Bezpečnost:** přístupy, audit logy, secrets, rate limiting, zranitelnosti.
+- **Privacy:** datové kategorie, retence, souhlasy, zpracovatelé, exporty.
+- **Marketing:** landing pages, měření, formuláře, e-mail, RSS, kampaně.
+- **Náklady:** nové placené služby, limity, objem dat, AI spotřeba.
+- **Proces:** support workflow, incident reakce, schvalování, revize.
+
+Jedna změna může mít více štítků. To není problém. Problém je, když změna žádný štítek nemá a žije jen v hlavě člověka, který zrovna odchází na dovolenou.
+
+### DO.4 Privacy-first changelog chrání i před dobrými úmysly
+
+Privacy průšvihy často nevznikají ze zlého úmyslu. Vznikají z „jen si to uložíme pro jistotu“, „možná se to bude hodit“ a „nástroj to sbírá automaticky“. Provozní changelog má tyhle věty zachytit dřív, než se z nich stane standard.
+
+Každá změna s dopadem na data má mít krátkou privacy kontrolu:
+
+- Jaká nová data začínáme sbírat nebo ukládat?
+- Z jakého důvodu je potřebujeme?
+- Kde data fyzicky a smluvně končí?
+- Jak dlouho je držíme?
+- Kdo k nim má přístup?
+- Umíme je exportovat, opravit nebo smazat?
+- Je změna viditelná v dokumentaci, DPA, trust centru nebo privacy policy?
+
+Pokud tým neumí odpovědět, změna není připravená. Ne proto, že by právníci měli řídit produkt, ale protože produkt bez datové disciplíny si vyrábí budoucí dluh. Jen místo technického dluhu má horší název a dražší poradce.
+
+### DO.5 Změny s expirací musí mít datum návratu
+
+Dočasné změny jsou nejnebezpečnější druh permanentních změn. „Na chvíli vypneme kontrolu“, „dočasně prodloužíme export“, „zatím necháme starý endpoint“, „flag smažeme příští sprint“. Jasně. A jednorožec už sedí v backlogu a odhaduje story pointy.
+
+Každá dočasná změna musí mít:
+
+- datum expirace,
+- podmínku ukončení,
+- vlastníka,
+- riziko, pokud zůstane zapnutá,
+- připomínku v pracovním systému.
+
+Příklad zápisu:
+
+```markdown
+### 2026-08-27 — Dočasné zvýšení limitu exportu pro zákazníka A
+
+- Štítky: produkt, provoz, privacy, náklady
+- Změna: limit exportu zvýšen z 50 000 na 250 000 řádků pro jeden tenant.
+- Důvod: migrace zákazníka z původního systému.
+- Riziko: vyšší zatížení databáze a větší soubory s osobními údaji.
+- Ochrana: export běží asynchronně, odkaz expiruje po 24 hodinách, audit log zapisuje stažení.
+- Expirace: 2026-09-10 nebo po dokončení migrace.
+- Vlastník: customer success + tech lead
+```
+
+Tím z dočasné výjimky uděláte řízenou výjimku. Pořád je to výjimka, ale už nemá masku běžného provozu.
+
+### DO.6 Changelog musí být čitelný při incidentu
+
+Při incidentu nikdo nechce hledat v dokumentu pojmenovaném `final_final_ops_notes_v3`. Provozní changelog má být dostupný, vyhledatelný a čitelný i ve stresu.
+
+Praktická pravidla:
+
+- Udržujte jeden primární soubor nebo databázi, ne pět kanálů.
+- Záznamy pište chronologicky od nejnovějšího.
+- Používejte stabilní štítky, ne kreativní interní slang.
+- U každé rizikové změny odkazujte na pull request, ticket nebo rozhodovací záznam.
+- Neukládejte secrets, tokeny, osobní údaje ani plné zákaznické exporty.
+- Changelog zálohujte stejně jako další provozní dokumentaci.
+- Při incidentu kontrolujte poslední změny jako jeden z prvních kroků.
+
+Changelog není audit log aplikace. Nemá dokazovat každý klik uživatele. Má dát týmu kontext, co se v systému měnilo. Audit log patří do produktu a bezpečnostní architektury; provozní changelog patří do týmové paměti.
+
+### DO.7 Šablona: provozní záznam změny
+
+```markdown
+## YYYY-MM-DD — Název změny
+
+### Základ
+
+- Štítky:
+- Systém / oblast:
+- Vlastník:
+- Odkazy: PR / ticket / rozhodovací záznam
+
+### Co se změnilo
+
+- Před změnou:
+- Po změně:
+- Viditelné pro zákazníka: ano/ne + jak
+
+### Proč
+
+- Důvod:
+- Alternativy, které jsme odmítli:
+- Co by se stalo, kdybychom změnu neudělali:
+
+### Dopad
+
+- Dostupnost:
+- Bezpečnost:
+- Privacy:
+- Náklady:
+- Support:
+
+### Kontrola
+
+- Jak poznáme, že změna funguje:
+- Rollback nebo vypnutí:
+- Datum revize:
+```
+
+Šablona může být v repozitáři, knowledge base nebo interním dokumentu. Důležitější než nástroj je disciplína: pokud změna má provozní dopad, záznam vznikne před uzavřením úkolu.
+
+### DO.8 Checklist: provozní changelog bez ztráty paměti
+
+- [ ] Máme jedno jasné místo pro provozní changelog.
+- [ ] Víme, které změny do něj patří a které ne.
+- [ ] Každý záznam obsahuje důvod, dopad, vlastníka a rollback.
+- [ ] Změny s dopadem na data mají privacy kontrolu.
+- [ ] Dočasné výjimky mají expiraci a připomínku.
+- [ ] Changelog neobsahuje secrets ani zbytečné osobní údaje.
+- [ ] Rizikové změny odkazují na PR, ticket nebo rozhodnutí.
+- [ ] Při incidentu tým kontroluje poslední relevantní změny.
+- [ ] Jednou měsíčně smažeme nebo uzavřeme zastaralé výjimky.
+- [ ] Trust centrum a zákaznická dokumentace se aktualizují, pokud změna mění slib zákazníkovi.
+
+### Mini cvičení: provozní paměť za 50 minut
+
+1. Vezměte posledních deset změn v produktu, infrastruktuře nebo marketingovém měření.
+2. Označte, které měly dopad na provoz, bezpečnost, privacy, náklady nebo support.
+3. Vyberte tři nejrizikovější a napište zpětně krátký provozní záznam.
+4. Najděte jednu dočasnou výjimku bez expirace.
+5. Doplňte vlastníka, datum revize a rollback.
+6. Rozhodněte, kde bude changelog uložený a kdo ho kontroluje.
+7. Přidejte pravidlo „bez provozního záznamu se riziková změna neuzavírá“ do Definition of Done.
+
+### Codyho komentář
+
+Můj pohled — Cody: dobrý changelog je nudný ve správném smyslu. Žádné drama, žádné firemní romány, žádné „kdo si má pamatovat, proč jsme to udělali“. Jen krátká stopa rozhodnutí, která budoucímu týmu ušetří incident, auditní kocovinu nebo drahý meeting o ničem. A to je, přátelé, jeden z nejlepších druhů produktivity.
+
+### Zdroje k příloze DO
+
+- OWASP Logging Cheat Sheet: doporučení, jak navrhovat bezpečné logování, vybírat relevantní bezpečnostní události a neukládat citlivá data do logů: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+- NIST SP 800-92: průvodce správou počítačových bezpečnostních logů, včetně plánování, provozu, analýzy a ochrany logovacích dat: https://csrc.nist.gov/publications/detail/sp/800-92/final
+- EUR-Lex: GDPR, zejména zásady odpovědnosti a integrity podle čl. 5, záznamy o činnostech podle čl. 30 a bezpečnost zpracování podle čl. 32: https://eur-lex.europa.eu/eli/reg/2016/679/oj
+- ENISA: materiály k incident response a kyberbezpečnostním postupům v Evropě, užitečné pro navázání changelogu na provozní a incidentní procesy: https://www.enisa.europa.eu/topics/incident-response
+
 ## Pracovní log
+
+- 2026-08-27: Přidána příloha DO „Provozní changelog bez firemní ztráty paměti“ s rozlišením commit historie/release notes/provozního changelogu, šablonou záznamu změny, privacy-first kontrolou, pravidly pro dočasné výjimky, incidentní čitelností, checklistem, 50minutovým cvičením a ověřenými OWASP/NIST/GDPR/ENISA zdroji.
 
 - 2026-08-27: Přidána příloha DN „Trust centrum pro malý SaaS bez bezpečnostního divadla“ s otázkami zákazníků, rozdělením veřejných/zákaznických/interních informací, minimální strukturou trust centra, knihovnou bezpečnostních odpovědí, privacy-first pravidly, revizní šablonou, checklistem, hodinovým cvičením a ověřenými EU/ENISA/CSA/OWASP zdroji.
 
