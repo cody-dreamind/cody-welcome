@@ -353,6 +353,7 @@ CH. Dodavatelský due diligence bez tabulkového očistce
 DI. Bezpečnostní dotazníky a trust odpovědi bez copy-paste rizika
 DJ. Prompt knihovna a AI šablony bez halucinačního copy-paste
 DK. Evaluační sada pro AI funkce bez testování na zákaznících
+DL. Nákladové brzdy pro SaaS a AI funkce bez spreadsheetové mlhy
 
 ## 1. Web jako obchodní systém
 
@@ -27575,7 +27576,147 @@ Můj pohled — Cody: AI evaly nejsou brzda inovace. Jsou bezpečnostní pás. N
 - NIST: AI Risk Management Framework a materiály k řízení rizik AI systémů: https://www.nist.gov/itl/ai-risk-management-framework
 - OWASP: Top 10 for Large Language Model Applications, včetně prompt injection, úniku citlivých informací, nadměrné autonomie a overreliance: https://owasp.org/www-project-top-10-for-large-language-model-applications/
 
+
+## DL. Nákladové brzdy pro SaaS a AI funkce bez spreadsheetové mlhy
+
+SaaS náklady většinou neutečou jedním dramatickým výbuchem. Spíš odkapávají po malých kapkách: zapomenuté preview prostředí, logy bez retence, AI volání bez limitu, exporty generované pořád dokola, databázové dotazy bez indexu, obrázky servírované v původní velikosti a tým, který si říká „to vyřešíme, až budeme větší“. Gratuluji, právě jste založili budoucí požár s měsíční fakturací.
+
+Dobrá nákladová kontrola není o tom, že všechno brutálně ořežete. Je o tom, že víte, která jednotka hodnoty stojí kolik, kde máte limity a kdy systém raději zpomalí, než aby potichu propálil rozpočet. U privacy-first SaaSu je navíc důležité, aby nákladová optimalizace neznamenala poslat všechna data do dalšího sledovacího nástroje jen proto, že má hezký dashboard.
+
+### DL.1 Měřte náklady podle jednotky hodnoty
+
+První otázka není „kolik stojí infrastruktura?“. První otázka je: „kolik stojí obsloužit jednu užitečnou zákaznickou jednotku?“ Podle produktu to může být aktivní účet, projekt, objednávka, vygenerovaný report, zpracovaný dokument, AI odpověď, odeslaný transakční e-mail nebo gigabajt uložených dat.
+
+Příklad pro B2B SaaS:
+
+| Jednotka | Co zahrnout | Proč na tom záleží |
+|---|---|---|
+| Aktivní zákaznický účet | databáze, soubory, e-maily, support, monitoring | ukáže, jestli tarif pokrývá běžný provoz |
+| AI odpověď | model, retrieval, embeddingy, cache, moderation/eval logika | ukáže, jestli „AI zdarma v každém tarifu“ není finanční past |
+| Import souboru | upload, validace, preview, fronta, storage, chybové reporty | ukáže, jestli velcí zákazníci neplatí stejně jako malí, ale nestojí 20× víc |
+| Export dat | dotazy, balení archivu, dočasné úložiště, notifikace | ukáže, kde potřebujete limity a expiraci |
+
+FinOps principy pracují s viditelností, odpovědností a optimalizací nákladů napříč týmy. Pro malý SaaS z toho stačí jednoduchý překlad: každá drahá schopnost musí mít vlastníka, metriku, limit a rozhodnutí, co se stane při překročení.
+
+### DL.2 Dejte limity tam, kde vzniká variabilní spotřeba
+
+Nejrizikovější nejsou fixní náklady, které vidíte v ceníku. Nejrizikovější jsou náklady, které se násobí používáním, chybou nebo útokem. AI tokeny, OCR, video processing, fulltext indexace, scraping, e-mailové dávky, webhook retry smyčky a exporty jsou krásné příklady. Krásné jako medúza. Z dálky zajímavé, zblízka bolí.
+
+Praktické limity:
+
+- limit na uživatele, účet, organizaci a API klíč,
+- denní a měsíční rozpočtový limit pro AI funkce,
+- maximální velikost importu a počet souběžných jobů,
+- expirace dočasných souborů a exportních archivů,
+- retry limit pro webhooky a fronty,
+- sampling nebo agregace pro provozní logy,
+- circuit breaker pro externí služby s variabilní cenou.
+
+Důležitý detail: limit musí mít lidskou hlášku. „Usage quota exceeded“ je technicky pravda, ale obchodně nešikovné. Lepší je: „Dnes jste vyčerpali limit pro AI sumarizace v tarifu Team. Další sumarizace budou dostupné zítra, nebo můžete požádat správce o navýšení limitu.“
+
+### DL.3 AI funkce potřebují rozpočet už v návrhu
+
+AI náklad nevzniká jen samotným voláním modelu. Vzniká celým workflow: příprava vstupu, retrieval, embeddingy, více pokusů, validace výstupu, evaly, ukládání kontextu, auditní stopa a případné lidské schválení. Když návrh UI říká „uživatel může klikat neomezeně“, technický návrh musí říct „a kdo platí účet, když si toho všimne první automatický skript?“
+
+Pro každou AI funkci si napište mini rozpočet:
+
+```md
+# AI cost brief
+
+## Funkce
+- Název: sumarizace support vlákna
+- Uživatel: support agent
+- Hodnota: rychlejší pochopení kontextu před odpovědí
+
+## Jednotka nákladu
+- 1 sumarizace jednoho vlákna
+- Vstup: posledních N zpráv, metadata bez citlivých polí navíc
+- Výstup: krátké shrnutí, rizika, návrh dalšího kroku
+
+## Limity
+- Max. zpráv ve vstupu: 30
+- Max. sumarizací na ticket za den: 5
+- Max. sumarizací na organizaci za měsíc: podle tarifu
+- Cache: ano, dokud se vlákno nezmění
+
+## Kontroly
+- Neodesílat přílohy ani interní poznámky bez explicitního důvodu
+- Logovat pouze ID akce, velikost vstupu, výsledek a chybový stav
+- Při překročení limitu nabídnout ruční workflow
+```
+
+Privacy-first pravidlo: nákladový monitoring nesmí být záminka k ukládání plných promptů, odpovědí a zákaznických dokumentů navždy. Pro řízení spotřeby často stačí agregace: počet volání, velikost vstupu, typ funkce, tarif, stav a anonymizovaná nebo interní technická identifikace účtu.
+
+### DL.4 Rozlišujte úsporu, škrt a produktové rozhodnutí
+
+Ne každé snížení nákladů je dobrá optimalizace. Když vypnete monitoring, ušetříte. Také si zavážete oči a jdete běhat po schodech. Když snížíte kvalitu AI odpovědí tak, že support musí všechno opravovat ručně, jen jste přesunuli účet z infrastruktury do lidí.
+
+Tři typy rozhodnutí:
+
+- **Úspora:** stejná hodnota levněji. Například cache výsledků, menší obrázky, lepší index, retence logů.
+- **Škrt:** méně hodnoty, méně nákladů. Například odstranění málo používané drahé funkce.
+- **Produktové rozhodnutí:** jiná hodnota pro jiný tarif. Například pokročilé AI analýzy jen ve vyšším tarifu, protože mají reálnou variabilní cenu.
+
+Když tým tyto kategorie míchá, vznikají špatné debaty. Vývojář mluví o nákladu, obchod o hodnotě, zákazník o výsledku a finance o faktuře. Všichni mají pravdu, což je nejhorší druh porady.
+
+### DL.5 Privacy-first nákladový dashboard
+
+Malý tým nepotřebuje monstrózní BI skladiště. Potřebuje dashboard, který jednou týdně odpoví na pět otázek:
+
+1. Které tři části produktu stojí nejvíc?
+2. Který náklad roste rychleji než aktivní zákazníci?
+3. Které účty nebo tarify jsou provozně ztrátové?
+4. Kde máme riziko nekontrolované spotřeby?
+5. Jakou jednu optimalizaci uděláme tento týden?
+
+Minimum metrik:
+
+| Metrika | Segment | Rozhodnutí |
+|---|---|---|
+| Náklad na aktivní účet | tarif, region, typ zákazníka | pricing, limity, kapacita |
+| Náklad na AI akci | funkce, tarif, stav cache | limity, UX, model routing |
+| Storage na organizaci | tarif, typ dat | retence, archivace, upsell |
+| Frontové joby | typ jobu, výsledek | výkon, retry, incidenty |
+| Log volume | služba, prostředí | retence, sampling, bezpečnost |
+
+Nedávejte do dashboardu osobní údaje, plné texty promptů, e-maily ani obsah dokumentů. Nákladový dashboard má řídit systém, ne rekonstruovat život zákazníka po minutách.
+
+### DL.6 Checklist: náklady bez spreadsheetové mlhy
+
+- [ ] Máme definovanou hlavní jednotku hodnoty produktu.
+- [ ] Víme, které funkce mají variabilní náklad podle používání.
+- [ ] Každá drahá AI nebo integrační funkce má limit a vlastníka.
+- [ ] Uživatel vidí srozumitelnou hlášku při překročení limitu.
+- [ ] Preview prostředí, dočasné soubory a exporty mají expiraci.
+- [ ] Logy mají retenci, sampling nebo agregaci podle účelu.
+- [ ] Nákladový dashboard nepoužívá osobní údaje, pokud nejsou opravdu nutné.
+- [ ] Pricing tým ví, které funkce jsou provozně drahé.
+- [ ] Máme týdenní review jedné konkrétní optimalizace.
+- [ ] Víme, co se stane při náhlém nárůstu spotřeby.
+
+### Mini cvičení: cost review za 60 minut
+
+1. Vyberte jednu drahou nebo rychle rostoucí funkci.
+2. Popište její jednotku hodnoty a všechny kroky, které vytváří náklad.
+3. Najděte jednu fixní a jednu variabilní část nákladu.
+4. Doplňte současné limity, retenci a chybovou hlášku.
+5. Zkontrolujte, jestli monitoring neukládá zbytečně citlivá data.
+6. Navrhněte jednu úsporu, jeden možný škrt a jedno pricing rozhodnutí.
+7. Vyberte pouze jednu změnu na příští týden a zapište její očekávaný dopad.
+
+### Codyho komentář
+
+Můj pohled — Cody: náklady nejsou nudná účetní kapitola po produktu. Jsou produktový design v převleku. Pokud funkce stojí hodně při každém kliknutí, musí to být vidět v UX, tarifu i architektuře. Jinak nestavíte SaaS, ale automat na faktury dodavatelům. A ten má bohužel velmi dobré retention metriky.
+
+### Zdroje k příloze DL
+
+- FinOps Foundation: FinOps Framework a principy viditelnosti, odpovědnosti a optimalizace cloudových nákladů: https://www.finops.org/framework/
+- Google Cloud Architecture Framework: principy cost optimization, včetně měření, řízení spotřeby a optimalizace zdrojů: https://cloud.google.com/architecture/framework/cost-optimization
+- EDPB: Guidelines 4/2019 on Article 25 Data Protection by Design and by Default, včetně minimalizace dat a omezení účelu: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-42019-article-25-data-protection-design-and_en
+
 ## Pracovní log
+
+- 2026-08-27: Přidána příloha DL „Nákladové brzdy pro SaaS a AI funkce bez spreadsheetové mlhy“ s jednotkovou ekonomikou, variabilními limity, AI cost briefem, privacy-first nákladovým dashboardem, checklistem, hodinovým cost review a ověřenými zdroji.
 
 - 2026-08-27: Přidána příloha DK „Evaluační sada pro AI funkce bez testování na zákaznících“ s dopadovou mapou, testovacími scénáři, zlatou a regresní sadou, privacy-first pravidly, šablonou karty, checklistem, mini cvičením a ověřenými zdroji.
 
