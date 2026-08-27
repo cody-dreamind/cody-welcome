@@ -30087,7 +30087,180 @@ Výstupem má být kratší sekvence, jasnější aktivační metrika a méně e
 - IETF RFC 8058: standard pro one-click unsubscribe v e-mailových seznamech: https://www.rfc-editor.org/rfc/rfc8058
 - IETF RFC 2369: hlavičky pro správu mailing listů včetně `List-Unsubscribe`: https://www.rfc-editor.org/rfc/rfc2369
 
+## Příloha DZ: Produktová telemetrie bez osobních profilů
+
+Produktová telemetrie je užitečná, když pomáhá zlepšit službu. Je toxická, když se z ní stane tichý dohled nad každým klikem, scrollnutím, váháním a omylem uživatele. Malý SaaS nepotřebuje vědět, že konkrétní člověk třikrát otevřel nastavení fakturace ve 22:41. Potřebuje vědět, že noví zákazníci nerozumí prvnímu kroku fakturačního nastavení a že kvůli tomu nedokončí aktivaci.
+
+Privacy-first telemetrie proto nezačíná nástrojem. Začíná otázkou: které produktové rozhodnutí chceme udělat a jak málo dat k tomu stačí? Pokud neumíte odpovědět, event zatím nemá v produktu co dělat. Datový sklad není kouzelná půda, kde se z hromady signálů časem narodí strategie. Většinou se tam narodí jen dražší chaos.
+
+*Codyho komentář: nejnebezpečnější věta v analytice je „sbírejme to pro jistotu“. Pro jistotu si dejte zálohy, dvoufaktor a dobrý čaj. Ne behaviorální profil člověka, který se jen snaží kliknout na správné tlačítko.*
+
+### DZ.1 Měřte rozhodnutí, ne zvědavost
+
+Každý produktový event musí mít jasné využití. Když event neumíte spojit s rozhodnutím, experimentem, support otázkou nebo provozním alarmem, pravděpodobně je to jen digitální suvenýr.
+
+Dobré otázky pro telemetrii:
+
+- dokončí nový uživatel první hodnotný workflow do tří dnů,
+- kde se nejčastěji rozpadá onboarding,
+- které integrační kroky vyžadují support,
+- jestli nová obrazovka zkrátila cestu k hotovému úkolu,
+- zda výkon nebo chyba brání dokončení důležité akce,
+- které funkce používají platící týmy pravidelně a které jsou jen dekorace v menu.
+
+Špatné otázky pro telemetrii:
+
+- co všechno jeden konkrétní uživatel dělal celý den,
+- kolikrát někdo pohnul myší nad ceníkem,
+- jak přesně vypadá individuální cesta každého leadu napříč webem, e-mailem a produktem,
+- jestli můžeme později najít „nějaký zajímavý segment“,
+- jak z eventů postavit automatické skóre člověka bez vysvětlitelného pravidla.
+
+Rozdíl je jednoduchý: první sada pomáhá zlepšovat produkt, druhá sada vyrábí dohled. A dohled je drahý nejen právně, ale i kulturně. Jakmile tým začne přemýšlet „co o uživateli ještě víme“, přestane se ptát „jak mu zjednodušíme práci“.
+
+### DZ.2 Navrhněte event katalog jako produktové API
+
+Event katalog není vedlejší tabulka pro analytika. Je to součást produktu. Má názvy, pravidla, vlastníky, verze a životní cyklus. Bez katalogu vznikne za půl roku směs `button_clicked`, `btnClick`, `pricing_interaction`, `new_new_signup` a jeden event, který nikdo nemaže, protože „možná ho používá dashboard“. Samozřejmě ho nepoužívá nikdo. Jen straší.
+
+Minimální pravidla katalogu:
+
+- název eventu popisuje dokončenou akci, ne technický detail tlačítka,
+- vlastnosti eventu neobsahují volný text od uživatele,
+- žádný event neposílá e-mail, jméno, telefon, IP adresu ani obsah dokumentů,
+- každý event má vlastníka, účel a retenční dobu,
+- nové eventy se přidávají přes review, ne náhodně při implementaci,
+- staré eventy se mažou nebo archivují podle revizního rytmu.
+
+Lepší názvy eventů:
+
+| Slabý název | Lepší název | Proč |
+|---|---|---|
+| `click_save` | `project_settings_saved` | popisuje výsledek, ne klik |
+| `modal_open` | `billing_upgrade_prompt_viewed` | má produktový kontext |
+| `submit` | `support_request_created` | říká, co vzniklo |
+| `user_action_12` | `team_member_invited` | dá se číst bez archeologie |
+| `error` | `integration_connection_failed` | pomáhá najít problém |
+
+U každého eventu si položte nepříjemnou otázku: kdyby zákazník požádal o vysvětlení, proč tento signál sbíráme, umíme odpovědět jednou normální větou? Pokud ne, event je kandidát na škrtnutí.
+
+### DZ.3 Sbírejte agregace dřív než profily
+
+Malý tým často nepotřebuje individuální časovou osu uživatele. Potřebuje agregovaný pohled na průchod workflow, chyby, aktivaci, retenci a využití klíčových funkcí. Agregace snižuje riziko, zjednodušuje reporting a nutí tým formulovat produktové otázky přesněji.
+
+Praktické privacy-first úrovně měření:
+
+| Úroveň | Příklad | Kdy stačí | Riziko |
+|---|---|---|---|
+| provozní počty | počet vytvořených projektů za den | sledování adopce funkce | nízké |
+| funnel po kohortách | registrace → workspace → první export | onboarding a aktivace | nízké až střední |
+| týmová agregace | počet aktivních workspace za týden | B2B produktové zdraví | střední |
+| pseudonymní uživatel | interní ID bez přímých identifikátorů | debug konkrétního support problému | střední až vyšší |
+| individuální profil | detailní chování osoby napříč kanály | většinou nepotřebné pro malý SaaS | vysoké |
+
+Začněte nahoře a dolů sestupujte jen tehdy, když k tomu máte jasný důvod. Debug support incidentu může krátkodobě potřebovat pseudonymní stopu. Produktový dashboard obvykle ne. A marketingový report už vůbec nemusí znát celý životopis prohlížeče.
+
+### DZ.4 Oddělte produktovou telemetrii od marketingového trackingu
+
+Produktová telemetrie měří, jestli služba funguje a pomáhá. Marketingový tracking často měří akviziční kanály, kampaně a chování před registrací. Když obě vrstvy slepíte do jednoho profilu, rychle vznikne datový koktejl, který je těžké vysvětlit, těžké udržet a ještě těžší bezpečně smazat.
+
+Privacy-first architektura:
+
+- webová analytika běží agregovaně a bez invazivních identifikátorů,
+- produktová telemetrie používá interní pseudonymní identifikátory a minimální vlastnosti,
+- CRM obsahuje obchodní kontext, ne detailní clickstream,
+- support nástroj vidí jen data potřebná k řešení konkrétní žádosti,
+- data z e-mailů, webu a produktu se nespojují do osobního profilu bez silného důvodu,
+- export a výmaz dat mají jasnou mapu napříč všemi vrstvami.
+
+Tahle separace je trochu méně pohodlná než velká datová roura „všechno do všeho“. Což je přesně pointa. Pohodlí interního týmu není vyšší hodnota než kontrola zákazníka nad daty.
+
+### DZ.5 Udělejte telemetrický review před releasem
+
+Nová funkce by měla mít stejný review pro data jako pro UI, výkon nebo bezpečnost. Stačí krátký blok v release checklistu. Cílem není brzdit vývoj, ale zabránit tomu, aby se eventy přidávaly stylem „ještě to tam pošleme, co kdyby“.
+
+Otázky před releasem:
+
+- Jaké produktové rozhodnutí bude event podporovat?
+- Dá se otázka zodpovědět agregovaně?
+- Obsahuje event osobní údaj nebo citlivý kontext?
+- Je vlastnost eventu omezená na enum/ID, nebo bere volný text?
+- Kde bude event uložen a v jakém regionu?
+- Kdo má k datům přístup?
+- Jak dlouho data držíme?
+- Jak event smažeme, až přestane být užitečný?
+- Objeví se event v dokumentaci pro zákazníky nebo trust centru?
+
+Jedna stránka review ušetří desítky hodin pozdějšího úklidu. A ano, úklid analytiky je horší než úklid kabelů za monitorem. Aspoň kabely se netváří, že jsou business intelligence.
+
+### DZ.6 Telemetrická karta eventu
+
+Pro každý důležitý event použijte malou kartu. Ne kvůli byrokracii, ale kvůli společné řeči mezi vývojem, produktem, supportem a privacy odpovědností.
+
+```markdown
+## Event
+- Název:
+- Stav: návrh / aktivní / deprecated / smazaný
+- Vlastník:
+- Produktová oblast:
+- Datum poslední revize:
+
+## Účel
+- Jaké rozhodnutí podporuje:
+- Který dashboard/report ho používá:
+- Kdy event přestane být potřeba:
+
+## Data
+- Spouštěč eventu:
+- Povolené vlastnosti:
+- Zakázané vlastnosti:
+- Identifikátor: žádný / workspace ID / pseudonymní user ID / jiný
+- Obsahuje osobní údaje: ano / ne / nejisté
+
+## Provoz
+- Nástroj a datová rezidence:
+- Přístupové role:
+- Retence:
+- Export/výmaz:
+- Testovací scénář:
+```
+
+Karta má být krátká. Pokud se nevejde do jedné obrazovky, event je možná moc široký. Rozdělte ho nebo škrtněte vlastnosti, které vypadají chytře jen do chvíle, než je někdo musí vysvětlit zákazníkovi.
+
+### DZ.7 Checklist: telemetrie, která pomáhá a nešmíruje
+
+- [ ] Každý event má jasný produktový účel a vlastníka.
+- [ ] Eventy měří dokončené akce nebo provozní stavy, ne náhodné klikání.
+- [ ] Výchozí reporting používá agregace a kohorty, ne individuální profily.
+- [ ] Do eventů neposíláme volný uživatelský text, obsah dokumentů ani přímé identifikátory.
+- [ ] Produktová telemetrie je oddělená od marketingového trackingu a CRM profilů.
+- [ ] Nové eventy prochází release review stejně jako změny UI nebo API.
+- [ ] Každý event má retenční dobu a plán odstranění.
+- [ ] Přístupy k analytickým datům jsou omezené podle role.
+- [ ] Zákazníkům umíme srozumitelně vysvětlit, co měříme a proč.
+- [ ] Dashboardy bez rozhodnutí mažeme, místo abychom je uctívali jako datové památky.
+
+### Mini cvičení: telemetrický úklid za 60 minut
+
+1. **10 minut:** exportujte seznam produktových eventů za posledních 30 dnů.
+2. **10 minut:** označte u každého eventu vlastníka, dashboard a rozhodnutí, které podporuje.
+3. **10 minut:** vyberte eventy s volným textem, přímými identifikátory nebo podezřelými vlastnostmi typu `metadata`.
+4. **10 minut:** navrhněte agregovanou alternativu pro tři nejrizikovější eventy.
+5. **10 minut:** označte eventy bez známého využití jako `deprecated`.
+6. **10 minut:** dopište nebo aktualizujte telemetrické karty u pěti nejdůležitějších eventů.
+
+Výsledek má být menší katalog, jasnější dashboardy a klidnější svědomí. Pokud po cvičení zmizí polovina grafů, není to datová tragédie. To jen přestaly svítit kontrolky, které nikdy nebyly připojené k motoru.
+
+### Zdroje k příloze DZ
+
+- EUR-Lex: GDPR článek 5 uvádí principy zákonnosti, transparentnosti, omezení účelu, minimalizace dat a omezení uložení: https://eur-lex.europa.eu/eli/reg/2016/679/art_5/oj/eng
+- European Commission: přehled principů GDPR včetně minimalizace dat a odpovědnosti organizace za prokazatelné dodržování pravidel: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
+- European Commission: praktické informace pro firmy a organizace, které pracují s osobními údaji podle GDPR: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations_en
+- CNIL: doporučení pro používání analytiky na webech a v aplikacích, včetně podmínek pro omezené měření návštěvnosti bez souhlasu: https://www.cnil.fr/fr/node/677
+- EDPB: Guidelines 8/2020 upozorňují na rizika targetingu, profilování a online sledování v kontextu sociálních platforem: https://www.edpb.europa.eu/documents/guideline/guidelines-82020-on-the-targeting-of-social-media-users_ga
+
 ## Pracovní log
+
+- 2026-08-27: Přidána příloha DZ „Produktová telemetrie bez osobních profilů“ s rozhodovacím přístupem k eventům, event katalogem, agregacemi, oddělením marketingového trackingu, release review, telemetrickou kartou, checklistem, úklidovým cvičením a ověřenými GDPR/CNIL/EDPB zdroji.
 
 - 2026-08-27: Přidána příloha DY „Onboardingové e-maily bez tracking pixelů“ s aktivačním momentem, rozdělením typů zpráv, vypnutím open trackingu jako výchozím stavem, sekvencí s koncem, datovou kartou, checklistem, detox cvičením a ověřenými GDPR/IETF zdroji.
 
