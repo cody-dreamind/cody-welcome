@@ -29565,7 +29565,179 @@ Výstupem není dokonalý model. Výstupem je obchodní filtr, který tým cháp
 - EDPB: Guidelines 1/2024 k oprávněnému zájmu podle Article 6(1)(f) GDPR jsou užitečné pro dokumentaci testu proporcionality: https://www.edpb.europa.eu/public-consultations/guidelines-12024-on-processing-of-personal-data-based-on-article-61f-gdpr_en
 
 
+
+## DW. Obchodní follow-up bez spamového autopilota
+
+Follow-up je normální součást obchodu. Zákazník se ptá, vy odpovíte, pošlete slíbené materiály, připomenete další krok a pomůžete rozhodnutí dozrát. Problém začíná ve chvíli, kdy se z lidského navázání stane automatická kulometná sekvence, která posílá každé dva dny „jen jemné připomenutí“ a po pátém e-mailu už připomíná spíš digitálního dluhového vymahače než partnera.
+
+Privacy-first follow-up má jednoduché pravidlo: navazujte na konkrétní kontext, který člověk sám vytvořil, a sbírejte jen tolik dat, kolik potřebujete pro další užitečný krok. Ne pro nekonečnou personalizaci, prediktivní skóre nálady a třináct polí v CRM, která nikdo neumí vysvětlit.
+
+*Codyho komentář: dobrý follow-up zní jako „slíbil jsem vám poslat srovnání možností“. Špatný follow-up zní jako „náš systém detekoval vaši rostoucí nákupní intentivitu“. Pokud e-mail potřebuje slovník korporátní telepatie, raději ho neposílejte.*
+
+### DW.1 Rozdělte follow-up podle vztahu, ne podle nástroje
+
+Než otevřete CRM nebo marketingovou automatizaci, rozdělte kontakty podle toho, proč s vámi vůbec komunikují. Každý typ vztahu má jiný tón, jiný účel a jinou hranici přijatelnosti.
+
+| Situace | Vhodný follow-up | Co už smrdí spamem |
+|---|---|---|
+| člověk vyplnil poptávkový formulář | odpověď na dotaz, návrh dalšího kroku, slíbený materiál | přidání do newsletteru bez jasného souhlasu |
+| proběhl obchodní call | shrnutí, rozhodnutí, další kroky, otevřené otázky | automatická desetidílná sekvence bez ohledu na výsledek callu |
+| stáhl si veřejný checklist | jednorázové doručení a volitelná možnost navázat | skryté lead nurturing kampaně napojené na profilování |
+| je zákazník | provozní informace, release notes, bezpečnostní změny | reklamní sdělení zabalené jako „důležitá aktualizace“ |
+| starý kontakt v CRM | krátká relevantní zpráva s důvodem oslovení | reaktivace databáze bez kontroly stáří, účelu a souhlasu |
+
+Tímhle rozdělením snížíte dvě rizika najednou: obchodní trapnost a datový chaos. Když víte, proč kontakt existuje, víte také, co mu můžete férově poslat a kdy je lepší přestat.
+
+### DW.2 Každý follow-up musí mít konkrétní důvod
+
+Před odesláním si položte otázku: kdyby se mě příjemce zeptal „proč mi to posíláte?“, odpovím jednou větou bez marketingové mlhy?
+
+Dobré důvody:
+
+- posílám slíbený výstup z hovoru,
+- doplňuji odpověď na konkrétní otázku,
+- navrhuji termín, o kterém jsme mluvili,
+- upozorňuji na změnu, která se týká používané služby,
+- posílám relevantní case study k problému, který člověk sám popsal,
+- uzavírám otevřenou komunikaci a dávám možnost se vrátit později.
+
+Slabé důvody:
+
+- „nechci, aby lead vychladl“,
+- „automat říká, že je čas na touchpoint“,
+- „někdo klikl na článek“,
+- „máme novou kampaň a databáze se sama nevyspamuje“,
+- „konkurence to dělá taky“.
+
+Follow-up bez konkrétního důvodu je jen přerušená práce příjemce. A lidé si velmi rychle všimnou, jestli jim pomáháte, nebo jen lovíte odpověď.
+
+### DW.3 Datový model follow-upu držte nudný
+
+Nudný datový model je tady kompliment. Malý B2B tým nepotřebuje o kontaktu vědět, kolik sekund strávil na každém článku, jestli otevřel e-mail v 7:42 a jaký prediktivní sentiment mu přidělil nástroj v cloudu bůhvíkde.
+
+Minimální užitečná karta kontaktu:
+
+```markdown
+## Kontakt
+- Jméno:
+- Firma:
+- Role:
+- E-mail:
+- Zdroj kontaktu:
+- Datum prvního kontaktu:
+- Důvod komunikace:
+
+## Kontext
+- Popsaný problém:
+- Slíbené materiály:
+- Domluvený další krok:
+- Stav: nový / čeká na odpověď / aktivní / uzavřeno / neoslovovat
+
+## Privacy-first kontrola
+- Účel uložení kontaktu:
+- Retence nebo datum revize:
+- Souhlas s marketingem: ano / ne / není potřeba pro tento provozní follow-up
+- Poznámka k výmazu nebo omezení kontaktování:
+```
+
+Do CRM nepište soukromé dohady, citlivé informace, osobní poznámky bez obchodního významu ani emocionální diagnózy typu „vypadá zoufale, upsell později“. Jednak je to trapné. Hlavně je to zbytečné osobní datové bláto, které se špatně vysvětluje při exportu, výmazu nebo interním auditu.
+
+### DW.4 Automatizace smí pomáhat, ne rozhodovat za vztah
+
+Automatizace je dobrá na připomenutí úkolu, sestavení návrhu shrnutí, vytvoření fronty čekajících odpovědí nebo kontrolu, že nikdo nezapomněl slíbený materiál. Není dobrá jako nehlídaný autopilot, který ignoruje kontext poslední zprávy.
+
+Bezpečný model:
+
+1. Automat vytvoří interní úkol nebo draft.
+2. Člověk zkontroluje kontext.
+3. Zpráva obsahuje konkrétní důvod oslovení.
+4. Příjemce má jednoduchou možnost říct „teď ne“ nebo „už mi nepište“.
+5. CRM respektuje stav „neoslovovat“ i mimo marketingové kampaně.
+
+Rizikový model:
+
+1. Každý lead spadne do stejné sekvence.
+2. Otevření e-mailu nebo klik změní skóre bez jasného vysvětlení.
+3. Systém posílá další zprávy bez kontroly poslední odpovědi.
+4. Unsubscribe řeší jen newsletter, ale obchodník píše dál „ručně“.
+5. Nikdo neví, kdy se kontakt smaže nebo zreviduje.
+
+Pokud automatizace zvyšuje počet zpráv rychleji než jejich kvalitu, není to produktivita. Je to jen rychlejší cesta k tomu, aby vás lidé začali ignorovat.
+
+### DW.5 Praktická follow-up sekvence pro malý B2B tým
+
+Použijte krátkou sekvenci, která má konec. Konec je důležitý. Nekonečný follow-up je obchodní verze zombie procesu.
+
+**Den 0 — reakce na kontakt**
+
+Předmět: `Navazuji na váš dotaz k [téma]`
+
+Obsah:
+
+- poděkování za konkrétní kontext,
+- jednověté pochopení problému,
+- odpověď nebo návrh dalšího kroku,
+- jasná otázka: „Dává smysl krátký call v úterý nebo středu?“
+
+**Den 3–5 — připomenutí s hodnotou**
+
+Předmět: `Ještě doplňuji [konkrétní materiál]`
+
+Obsah:
+
+- jeden užitečný odkaz, checklist nebo příklad,
+- krátké vysvětlení, proč se váže k jejich problému,
+- jedna jednoduchá otázka,
+- žádné citové vydírání typu „jen se jemně připomínám“.
+
+**Den 10–14 — uzavření smyčky**
+
+Předmět: `Mám to nechat otevřené?`
+
+Obsah:
+
+- stručné shrnutí, proč jste psali,
+- možnost pokračovat později,
+- informace, že bez odpovědi nebudete dál nahánět,
+- interní nastavení stavu `uzavřeno` nebo `revize za X měsíců`.
+
+Tohle není agresivní growth hacking. Je to slušnost s procesem. Divné, že?
+
+### DW.6 Checklist: follow-up bez spamového autopilota
+
+- [ ] U každého kontaktu víme, proč ho máme a odkud přišel.
+- [ ] Follow-up navazuje na konkrétní dotaz, call, akci nebo domluvu.
+- [ ] Newsletter nebo marketingová sdělení nejsou přimíchaná do obchodního follow-upu bez jasného základu.
+- [ ] CRM obsahuje jen údaje potřebné pro další obchodní nebo provozní krok.
+- [ ] Automatizace vytváří úkoly nebo drafty, ne nekontrolované nekonečné sekvence.
+- [ ] Stav `neoslovovat` respektují lidé, CRM i automatizace.
+- [ ] Každá sekvence má maximální délku a pravidlo ukončení.
+- [ ] Staré kontakty mají datum revize nebo retence.
+- [ ] Příjemce může jednoduše říct, že teď nemá zájem nebo nechce další zprávy.
+- [ ] Obchodní tým umí vysvětlit, jaká data používá pro priorizaci kontaktů.
+
+### Mini cvičení: follow-up audit za 45 minut
+
+1. **5 minut:** vyberte jednu aktuální obchodní sekvenci nebo typický ruční follow-up.
+2. **10 minut:** napište, jaký vztah a účel má každý kontakt v sekvenci.
+3. **10 minut:** projděte datová pole v CRM a označte zbytečná, nejasná nebo citlivá pole.
+4. **10 minut:** zkraťte sekvenci na maximálně tři zprávy s jasným koncem.
+5. **5 minut:** přidejte stav `neoslovovat` nebo ověřte, že se opravdu propisuje do procesů.
+6. **5 minut:** zapište vlastníka sekvence a datum měsíční revize.
+
+Výstupem má být jedna upravená sekvence, jedna uklizená karta kontaktu a jedno pravidlo ukončení. Pokud máte po auditu chuť přidat další automatizaci, dejte si kafe a nejdřív smažte jednu zbytečnou větev. Tým vám poděkuje. Možná potichu, ale poděkuje.
+
+### Zdroje k příloze DW
+
+- European Commission: pravidla GDPR pro organizace, včetně principů zpracování osobních údajů: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations_en
+- European Commission: automatizované individuální rozhodování a profilování podle GDPR: https://commission.europa.eu/law/law-topic/data-protection/reform/rules-business-and-organisations/dealing-citizens/automated-individual-decision-making-and-profiling_en
+- EDPB: pokyny ke consentu podle GDPR: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-052020-consent-under-regulation-2016679_en
+- ÚOOÚ: základní příručka k ochraně údajů pro veřejnost a práva subjektů údajů: https://uoou.gov.cz/pro-verejnost/zakladni-prirucka-k-ochrane-udaju
+- European Commission: ePrivacy pravidla pro elektronické komunikace a důvěrnost komunikace: https://digital-strategy.ec.europa.eu/en/policies/eprivacy-directive
+
 ## Pracovní log
+
+- 2026-08-27: Přidána příloha DW „Obchodní follow-up bez spamového autopilota“ s rozdělením follow-upu podle vztahu, pravidlem konkrétního důvodu oslovení, nudným datovým modelem kontaktu, bezpečnou automatizací, tříkrokovou B2B sekvencí, checklistem, 45minutovým auditem a ověřenými EU/EDPB/ÚOOÚ zdroji.
 
 - 2026-08-27: Přidána příloha DV „Lead scoring bez black-boxu a obchodního šmírování“ s definicí kvalitního leadu, vysvětlitelným bodováním, minimalizací behaviorálních signálů, oddělením priorizace od automatického rozhodnutí, scoring kartou, měsíční kontrolou férovosti, checklistem, mini cvičením a ověřenými GDPR/EDPB zdroji.
 
