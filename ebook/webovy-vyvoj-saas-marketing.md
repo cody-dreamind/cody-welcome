@@ -28658,7 +28658,207 @@ Výstup není „máme všechno perfektní“. Výstup je jeden konkrétní zlep
 - NIST SP 800-218 Secure Software Development Framework: doporučení pro bezpečný vývoj softwaru a snižování rizika zranitelností v průběhu SDLC: https://csrc.nist.gov/pubs/sp/800/218/final
 
 
+## DR. Žádosti subjektů údajů bez paniky a ruční archeologie
+
+Privacy-first SaaS se nepozná podle toho, že má v patičce odkaz na zásady zpracování osobních údajů. To je hezké, ale samo o sobě asi stejně uklidňující jako cedulka „pozor schod“ u díry do sklepa. Pozná se podle toho, že když člověk požádá o přístup, opravu, výmaz, omezení, přenositelnost nebo námitku proti zpracování, tým ví, co má dělat, kde data hledat a kdo může odpověď schválit.
+
+Žádosti subjektů údajů nejsou jen právní agenda. Jsou testem architektury. Pokud neumíte najít, co o člověku držíte, neumíte dobře provozovat ani support, exporty, retenci, onboarding a incidentní komunikaci. A jestli odpověď závisí na jednom člověku, který „ví, kde to asi je“, nemáte proces. Máte lidský cache server s dovolenou.
+
+### DR.1 Udělejte z práv lidí produktový workflow
+
+GDPR práva subjektů údajů berte jako normální provozní požadavky, ne jako právní výjimku. Produkt by měl mít interní workflow podobné support ticketu: přijetí, ověření identity, klasifikace požadavku, mapování dat, rozhodnutí, odpověď, záznam a případné technické provedení.
+
+Praktické členění žádostí:
+
+- **Přístup:** člověk chce vědět, zda a jaká osobní data zpracováváte.
+- **Oprava:** některá data jsou nepřesná nebo neúplná.
+- **Výmaz:** data už nejsou potřeba, zpracování je nezákonné nebo člověk odvolal relevantní souhlas.
+- **Omezení zpracování:** data se dočasně nemají používat určitým způsobem.
+- **Přenositelnost:** člověk chce svá data ve strukturovaném, běžně používaném a strojově čitelném formátu tam, kde to právo dopadá.
+- **Námitka:** člověk nesouhlasí například s přímým marketingem nebo zpracováním na základě oprávněného zájmu.
+- **Automatizované rozhodování:** člověk se ptá na rozhodnutí s právním nebo podobně významným dopadem.
+
+Nejdůležitější pravidlo: nenechte první odpověď psát právníkem do prázdna. Nejdřív musí být jasné, jaká data existují, v jakých systémech, z jakého důvodu a jestli žádost nemá dopad na práva dalších lidí.
+
+### DR.2 Lhůta začíná běžet dřív, než tým dopije kafe
+
+U žádostí podle GDPR je základní očekávání odpovědět bez zbytečného odkladu a zpravidla do jednoho měsíce od přijetí žádosti. U složitých nebo početných žádostí může být reakční doba prodloužena o další dva měsíce, ale člověka je potřeba včas informovat a říct proč. Prakticky: interní SLA nemá být „do měsíce“. Interní SLA má být kratší, třeba 10 pracovních dnů na shromáždění podkladů a 15 pracovních dnů na schválenou odpověď.
+
+Malý tým může používat tento rytmus:
+
+1. **Den 0:** žádost dorazí, vzniká ticket a vlastník.
+2. **Den 1–2:** ověření identity a typu požadavku.
+3. **Den 3–7:** export mapy dat ze systémů, supportu, billing nástroje a analytiky.
+4. **Den 8–12:** rozhodnutí, co lze splnit přímo, co má výjimku a co vyžaduje ruční kontrolu.
+5. **Den 13–18:** příprava odpovědi a případných exportů.
+6. **Den 19–22:** kontrola druhým člověkem.
+7. **Den 23–25:** odeslání odpovědi, technické provedení a záznam do logu žádostí.
+
+Rezervu si necháváte proto, že realita miluje drobné srandy: člověk napíše z jiné e-mailové adresy, export obsahuje data další osoby, billing běží u dodavatele, starý CRM field nikdo neumí vysvětlit a jeden integrační log má delší retenci než produktová databáze. Samozřejmě úplnou náhodou.
+
+### DR.3 Ověření identity nesmí být záminka ke sběru dalších dat
+
+Když člověk požádá o data, musíte mít přiměřenou jistotu, že odpovídáte správné osobě. To ale neznamená automaticky posílat sken občanky. Privacy-first přístup hledá nejméně invazivní ověření, které odpovídá riziku.
+
+Příklady přiměřeného ověření:
+
+- žádost z přihlášeného účtu v aplikaci,
+- potvrzovací odkaz na e-mail vedený u účtu,
+- ověření přes existující zákaznický portál,
+- doplňující otázka, kterou už v systému oprávněně máte,
+- vyšší ověření jen pro citlivé exporty nebo administrátorské účty.
+
+Co nedělat jako default:
+
+- chtít kopii dokladu u každé banální opravy e-mailové preference,
+- ukládat ověřovací dokumenty déle, než je nutné,
+- posílat exporty osobních dat běžným e-mailem bez další ochrany,
+- odpovídat na žádost jen proto, že někdo zná fakturační adresu firmy,
+- přidávat do procesu nové datové body „pro jistotu“.
+
+*Codyho komentář:* nejlepší ověření je často to, které už produkt má. Pokud musíte kvůli každé žádosti vymýšlet ruční identifikační rituál, problém není v GDPR. Problém je v tom, že produkt nemá důvěryhodný účetní a přístupový model.
+
+### DR.4 Mapa dat je rychlejší než detektivka ve Slacku
+
+Každá žádost se zasekne ve chvíli, kdy tým neví, kde všude osobní data jsou. Proto se vyplatí mít jednoduchý katalog systémů a kategorií dat. Nemusí to být obří GRC platforma s cenou menšího traktoru. Stačí udržovaný seznam, který odpoví na praktické otázky.
+
+Minimum pro katalog:
+
+- **Systém:** aplikace, databáze, support nástroj, billing, analytika, e-mailing, logy.
+- **Kategorie dat:** účet, profil, fakturace, aktivita, support, marketing, technická diagnostika.
+- **Identifikátor:** e-mail, user ID, customer ID, invoice ID, session ID.
+- **Účel:** proč data existují a jaké rozhodnutí podporují.
+- **Právní základ:** smlouva, oprávněný zájem, souhlas, právní povinnost nebo jiný relevantní základ.
+- **Retence:** jak dlouho data držíte a kde je výjimka.
+- **Export:** kdo umí data vytáhnout a v jakém formátu.
+- **Výmaz:** jestli jde o hard delete, anonymizaci, odpojení identifikátorů nebo povinnou archivaci.
+- **Dodavatel:** kde služba běží, kdo má přístup a jestli je zpracovatel.
+
+Privacy-first verze katalogu navíc označuje, jestli systém běží v Evropě, jestli posílá data mimo EHP, jestli obsahuje trackery v prohlížeči a jestli má vlastní administrátorský audit log. Ne proto, aby dokument vypadal dospěle. Protože při žádosti potřebujete vědět, komu vlastně věříte.
+
+### DR.5 Odpověď má být srozumitelná, ne obranná
+
+Odpověď člověku nemá působit jako právní kouřová clona. U přístupu k datům je cílem umožnit člověku pochopit, jaká data se zpracovávají a proč. U výmazu nebo opravy zase jasně říct, co bylo provedeno, co provedeno být nemůže a z jakého důvodu.
+
+Dobrá odpověď má obsahovat:
+
+- potvrzení typu žádosti,
+- stručný popis ověření identity,
+- seznam systémů nebo kategorií dat, které byly zkontrolovány,
+- výsledek pro každou kategorii dat,
+- export nebo odkaz na bezpečné stažení, pokud je relevantní,
+- vysvětlení případných omezení nebo zákonných důvodů pro uchování,
+- kontakt pro doplňující dotaz,
+- informaci, jak může člověk podat stížnost u dozorového úřadu, pokud s odpovědí nesouhlasí.
+
+Příklad lidské formulace:
+
+> Zkontrolovali jsme účet, fakturaci, support komunikaci a produktové logy spojené s e-mailem `jana@example.cz`. Profilová data jsme opravili podle vašeho požadavku. Faktury za poslední účetní období uchováváme z důvodu právní povinnosti. Diagnostické logy starší než 30 dní už v systému nemáme, protože používáme krátkou retenci.
+
+Tohle je lepší než třístránková odpověď plná článků, odstavců a pasivních vět. Právo není soutěž v mlžení.
+
+### DR.6 Privacy-first pravidla pro provedení žádosti
+
+Žádost nekončí odpovědí. Končí až ve chvíli, kdy je technická změna opravdu provedena, zdokumentována a ověřena.
+
+Pravidla pro bezpečné provedení:
+
+- exporty generujte dočasně a s krátkou expirací,
+- exporty šifrujte nebo chraňte jednorázovým přístupem,
+- do exportu nedávejte data jiných osob bez právního důvodu,
+- výmaz dělejte přes opakovatelný skript nebo produktové workflow, ne ručním SQL kouzelnictvím,
+- u anonymizace ověřte, že zbylá data opravdu nejdou snadno znovu spojit s člověkem,
+- u systémů dodavatelů evidujte, kdy byla žádost předána a kdy potvrzena,
+- po provedení zkontrolujte vedlejší systémy: indexy, cache, vyhledávání, support profily, analytiku a logy.
+
+U SaaS produktu se vyplatí mít interní stav žádosti: `received`, `identity_check`, `data_mapping`, `decision`, `execution`, `review`, `answered`, `closed`. Ne kvůli procesnímu fetiši. Kvůli tomu, aby bylo jasné, kdo drží míč a jestli neleží pod gaučem.
+
+### DR.7 Šablona: karta žádosti subjektu údajů
+
+```markdown
+## Žádost subjektu údajů
+
+### Základ
+- ID žádosti:
+- Datum přijetí:
+- Kanál:
+- Vlastník:
+- Typ žádosti:
+- Deadline odpovědi:
+
+### Identita
+- Primární identifikátor:
+- Způsob ověření:
+- Potřebujeme doplňující ověření? Ano/Ne
+- Sbíráme nové ověřovací dokumenty? Pokud ano, proč a na jak dlouho?
+
+### Zkontrolované systémy
+- Produktová databáze:
+- Billing:
+- Support:
+- E-mailing/RSS:
+- Analytika:
+- Logy:
+- Integrace a dodavatelé:
+
+### Rozhodnutí
+- Co splníme:
+- Co nesplníme nebo omezíme:
+- Důvod omezení:
+- Potřebná právní/provozní kontrola:
+
+### Provedení
+- Export vytvořen:
+- Oprava provedena:
+- Výmaz/anonymizace provedena:
+- Dodavatelé informováni:
+- Cache/indexy ověřeny:
+- Interní záznam uzavřen:
+
+### Odpověď
+- Datum odpovědi:
+- Kanál odpovědi:
+- Bezpečný způsob předání exportu:
+- Další kontakt:
+```
+
+### DR.8 Checklist: žádosti bez ruční archeologie
+
+- [ ] Máme jeden vstupní kanál pro privacy žádosti a ví o něm support.
+- [ ] Každá žádost dostane vlastníka, deadline a interní ID.
+- [ ] Umíme ověřit identitu bez zbytečného sběru nových dokladů.
+- [ ] Máme katalog systémů, kde mohou být osobní data.
+- [ ] Víme, jak hledat podle e-mailu, user ID a customer ID.
+- [ ] Exporty mají krátkou expiraci a bezpečný způsob předání.
+- [ ] Výmaz, anonymizace a archivace jsou rozlišené v retenčních pravidlech.
+- [ ] Odpovědi jsou srozumitelné a neobsahují data třetích osob.
+- [ ] Dodavatelé mají jasný postup pro součinnost.
+- [ ] Po uzavření žádosti vznikne auditní záznam bez nadbytečných osobních dat.
+
+### Mini cvičení: DSAR drill za 60 minut
+
+Vyberte jeden testovací účet a nasimulujte žádost o přístup k osobním datům.
+
+1. **10 minut:** založte ticket a vyplňte kartu žádosti.
+2. **10 minut:** ověřte, podle čeho účet najdete v hlavní databázi.
+3. **10 minut:** projděte billing, support a e-mailové systémy.
+4. **10 minut:** zkontrolujte analytiku, logy, cache a případné integrace.
+5. **10 minut:** připravte návrh odpovědi v lidské češtině.
+6. **10 minut:** zapište tři mezery, které by při reálné žádosti bolely nejvíc.
+
+Výstupem má být konkrétní seznam úprav: doplnit identifikátor do katalogu, zkrátit retenci logů, přidat exportní skript, upravit support postup nebo zlepšit šablonu odpovědi. Ne „musíme se tím někdy zabývat“. To je jen elegantnější forma prokrastinace v košili.
+
+### Zdroje k příloze DR
+
+- European Commission — Dealing with requests from individuals: praktický přehled pro organizace včetně základní měsíční lhůty a možnosti prodloužení u složitých nebo početných žádostí: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/dealing-requests-individuals_en
+- European Commission — Information for individuals: přehled práv lidí podle GDPR, včetně přístupu, opravy, výmazu, omezení, přenositelnosti a námitky: https://commission.europa.eu/law/law-topic/data-protection/information-individuals_en
+- EDPB Guidelines 01/2022 on data subject rights — Right of access: detailní metodika k právu na přístup a praktickému provedení ze strany správců: https://www.edpb.europa.eu/documents/guideline/guidelines-012022-on-data-subject-rights-right-of-access_en
+- EDPB SME guide — Respect individuals’ rights: doporučení pro malé organizace, aby měly připravené systémy, postupy a školení pro žádosti subjektů údajů: https://www.edpb.europa.eu/sme/be-compliant/respect-individuals-rights_en
+
+
 ## Pracovní log
+
+- 2026-08-27: Přidána příloha DR „Žádosti subjektů údajů bez paniky a ruční archeologie“ s workflow pro GDPR žádosti, interní SLA, přiměřeným ověřením identity, datovým katalogem, lidskou odpovědí, bezpečným provedením exportů/výmazů, kartou žádosti, checklistem, DSAR drillem a ověřenými EU/EDPB zdroji.
 
 - 2026-08-27: Přidána příloha DQ „Závislosti a balíčky bez dodavatelského minového pole“ s dopadovým tříděním závislostí, pětiminutovou kontrolou před přidáním balíčku, rytmem aktualizací, lockfile pravidly, privacy-first kontrolou klientských knihoven, kartou nové závislosti, checklistem, hodinovým dependency detoxem a ověřenými OWASP/GitHub/OpenSSF/NIST zdroji.
 
