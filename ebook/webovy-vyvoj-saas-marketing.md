@@ -366,6 +366,7 @@ DU. A/B testování bez sledovacího cirkusu
 DV. Lead scoring bez black-boxu a obchodního šmírování
 DW. Obchodní follow-up bez spamového autopilota
 DX. Demo a sandbox prostředí bez úniku produkčních dat
+DY. Onboardingové e-maily bez tracking pixelů
 
 ## 1. Web jako obchodní systém
 
@@ -29904,7 +29905,191 @@ Výstupem má být jedna karta prostředí, jeden bezpečný demo scénář a je
 - OWASP Web Security Testing Guide: testování aplikací má probíhat kontrolovaně a bez zbytečného vystavení citlivých dat: https://owasp.org/www-project-web-security-testing-guide/
 - NIST SP 800-53 Rev. 5: bezpečnostní kontroly pro oddělení prostředí, přístupy, audit a ochranu testovacích dat: https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final
 
+## Příloha DY: Onboardingové e-maily bez tracking pixelů
+
+Onboardingové e-maily mají novému uživateli pomoct dostat se k hodnotě. Ne dokazovat, že umíte do každé zprávy vložit sledovací pixel, tři UTM parametry, pět automatických větví a pocit, že e-mailový klient je akvárium a vy stojíte s blokem u skla.
+
+Privacy-first onboarding vychází z jednoduché dohody: uživatel dostává zprávy, které mu pomáhají dokončit konkrétní kroky v produktu, a tým měří dopad bez zbytečného sledování jednotlivců. Jinými slovy: méně „otevřel e-mail v 8:13“, více „dokončil první užitečný workflow do tří dnů“.
+
+*Codyho komentář: open rate je lákavá metrika, protože se hezky kreslí do grafu. Jenže hezký graf není totéž co aktivovaný uživatel. Je to jako počítat, kolikrát někdo otevřel lednici, a tvářit se, že víte, jestli se dobře najedl.*
+
+### DY.1 Nejdřív definujte aktivační moment
+
+E-mailová sekvence bez aktivačního momentu je jen automatizované doufání. Než napíšete první zprávu, pojmenujte okamžik, kdy uživatel poprvé získá skutečnou hodnotu.
+
+Příklady aktivačních momentů:
+
+- účetní portál: klient bezpečně nahraje první dokument a účetní ho najde bez e-mailového lovu,
+- helpdesk: tým vyřeší první požadavek se stavem, vlastníkem a historií komunikace,
+- analytický nástroj: uživatel vidí první smysluplný agregovaný report,
+- plánovací SaaS: tým zveřejní první sdílený plán a někdo podle něj udělá rozhodnutí,
+- AI asistent: uživatel vytvoří první použitelný výstup bez kopírování citlivých dat do cizího kontextu.
+
+Jakmile znáte aktivační moment, onboardingové e-maily mají jasný úkol: odstranit tření na cestě k němu. Ne posílat náhodné tipy, brandové manifesty a „objevte všechny funkce“, protože produktový tým potřebuje ukázat, že toho hodně postavil. Gratuluju produktu. Uživatel pořád chce vyřešit svůj problém.
+
+### DY.2 Rozdělte zprávy podle účelu
+
+Ne všechny onboardingové e-maily jsou marketing. Některé jsou provozní nebo transakční: potvrzení účtu, reset hesla, pozvánka do workspace, upozornění na bezpečnostní změnu. Jiné jsou produktové tipy, vzdělávací materiály nebo obchodní nabídky. Každý typ má jiný právní, produktový i tónový režim.
+
+Praktické členění:
+
+| Typ zprávy | Účel | Měřte hlavně | Pozor na |
+|---|---|---|---|
+| potvrzení účtu | dokončit registraci | doručení, chyby, dokončené ověření | žádné reklamní příměsi |
+| pozvánka do týmu | přivést uživatele do workspace | přijetí pozvánky | únik interních názvů a rolí |
+| první kroky | dovést k aktivačnímu momentu | dokončený krok v produktu | tracking pixel místo produktové metriky |
+| vzdělávací tip | vysvětlit workflow nebo rozhodnutí | klik na přímý odkaz, odpověď, dokončený úkol | nekonečná nurture sekvence |
+| obchodní upgrade | nabídnout vyšší tarif nebo službu | explicitní zájem, odpověď, objednávka | míchání se servisní komunikací |
+
+Servisní zpráva nemá být převlečený newsletter. Pokud uživateli píšete kvůli bezpečnosti účtu, necpěte pod to „mimochodem, kupte si vyšší tarif“. To není chytré využití pozornosti. To je důvod, proč lidé přestávají věřit předmětům e-mailů.
+
+### DY.3 Tracking pixel nechte vypnutý jako výchozí stav
+
+Tracking pixel obvykle měří otevření zprávy přes načtení vzdáleného obrázku. Prakticky to znamená, že do e-mailové komunikace přidáváte signál o chování příjemce, který často není potřeba pro doručení hodnoty. Navíc mnoho klientů obrázky blokuje, cacheuje nebo chrání přes proxy, takže data mohou být nepřesná i produktově zavádějící.
+
+Privacy-first výchozí nastavení:
+
+- nesledovat otevření e-mailů,
+- nepoužívat individuální profilování podle každého kliknutí,
+- měřit hlavně agregované dokončení produktových kroků,
+- používat přímé odkazy na vlastní doméně,
+- oddělit provozní e-maily od marketingových kampaní,
+- držet krátkou retenci e-mailových logů,
+- v administraci jasně ukázat, které typy zpráv uživatel dostává.
+
+Když opravdu potřebujete měřit kliknutí, držte to minimalisticky: odkaz vede na vlastní doménu, parametr popisuje kampaň nebo šablonu, ne osobní profil, a report ukazuje agregovaný dopad. Cílem není zjistit, že Jana klikla ve středu po obědě. Cílem je vědět, jestli onboardingový krok pomohl novým týmům dokončit nastavení.
+
+### DY.4 Pište e-maily jako pokračování produktu
+
+Dobrý onboardingový e-mail není mini landing page. Je to navigační značka. Krátká, konkrétní, navázaná na stav uživatele a s jedním dalším krokem.
+
+Šablona první produktové zprávy:
+
+```markdown
+Předmět: Dokončete první krok v [produkt]
+
+Ahoj [jméno],
+
+váš workspace [název] je připravený. Nejrychlejší cesta k první hodnotě je dokončit [konkrétní krok].
+
+Co udělat teď:
+1. Otevřete [přímý odkaz na krok].
+2. Vyplňte [minimum nutných údajů].
+3. Pozvěte [role], pokud bez ní krok nedává smysl.
+
+Proč na tom záleží: po dokončení uvidíte [konkrétní výsledek].
+
+Pokud si nejste jistí, odpovězte na tenhle e-mail. Čte to člověk, ne marketingová fontána.
+```
+
+Tahle šablona má několik pravidel:
+
+- jeden účel,
+- jeden hlavní odkaz,
+- žádný pixel pro otevření,
+- jasné vysvětlení hodnoty,
+- možnost odpovědět člověku,
+- žádné přebytečné osobní údaje v textu.
+
+U B2B SaaSu se často vyplatí psát méně e-mailů, ale chytřeji podle role. Administrátor potřebuje nastavit tým, oprávnění a fakturaci. Běžný uživatel potřebuje pochopit první workflow. Technický schvalovatel potřebuje dokumentaci k datům, SSO, exportu a bezpečnosti. Jedna univerzální sekvence pro všechny je produktový kompromis převlečený za škálování.
+
+### DY.5 Navrhněte sekvenci, která má konec
+
+Onboarding nemá být věčný seriál. Nastavte krátkou sekvenci, která vede k aktivačnímu momentu, a po ní přepne uživatele do běžné produktové komunikace nebo ticha.
+
+Příklad 10denní sekvence:
+
+| Den | Zpráva | Účel | Hlavní metrika |
+|---|---|---|---|
+| 0 | potvrzení a první krok | dokončit vstup do produktu | ověřený účet, vytvořený workspace |
+| 1 | jeden klíčový workflow | dovést k první hodnotě | dokončený aktivační krok |
+| 3 | překážky a pomoc | odstranit tření | odpověď nebo dokončení rozpracovaného kroku |
+| 7 | týmové nastavení | zapojit správné role | pozvaní členové nebo nastavená oprávnění |
+| 10 | shrnutí a další možnosti | uzavřít onboarding | aktivní účet nebo důvod neaktivace |
+
+Po desátém dni nedávejte uživatele automaticky do další kampaně. Udělejte rozhodnutí podle vztahu:
+
+- aktivní zákazník dostává provozní informace, release notes a relevantní tipy,
+- neaktivní účet dostane jednu férovou otázku, jestli má smysl pokračovat,
+- člověk bez souhlasu s marketingem nedostává marketingové newslettery,
+- support kontakt se nepřeklápí do obchodní sekvence bez jasného důvodu,
+- odhlášení a stav „nepsat“ se respektují napříč nástroji.
+
+Konec sekvence je známka disciplíny. Nekonečné „just checking in“ není péče. Je to kapající kohoutek v inboxu.
+
+### DY.6 Datová karta onboardingové sekvence
+
+Ke každé sekvenci mějte malou kartu. Pomůže produktu, marketingu, supportu i privacy kontrole mluvit o stejné věci.
+
+```markdown
+## Sekvence
+- Název:
+- Publikum:
+- Produktový cíl:
+- Aktivační moment:
+- Vlastník:
+- Datum poslední revize:
+
+## Zprávy
+- Počet e-mailů:
+- Délka sekvence:
+- Typy zpráv: provozní / produktové / vzdělávací / marketingové
+- Hlavní CTA:
+- Možnost odpovědi člověku:
+
+## Data a měření
+- Použité osobní údaje:
+- Tracking otevření: ano / ne
+- Tracking kliknutí: žádný / agregovaný / individuální
+- Produktové metriky aktivace:
+- Retence e-mailových logů:
+- Nástroje a datová rezidence:
+
+## Souhlas a preference
+- Které zprávy jsou nutné pro službu:
+- Které zprávy vyžadují marketingový souhlas:
+- Jak se uživatel odhlásí:
+- Jak se respektuje stav neoslovovat:
+```
+
+Tahle karta není právní román. Je to provozní realita v jedné obrazovce. Pokud ji neumíte vyplnit, sekvence je nejspíš moc složitá nebo sbírá data, kterým už nerozumíte. Obě možnosti jsou výborný signál k úklidu.
+
+### DY.7 Checklist: onboarding bez e-mailového šmírování
+
+- [ ] Máme jasně definovaný aktivační moment.
+- [ ] Každý e-mail má jeden účel a jeden hlavní další krok.
+- [ ] Provozní, produktové a marketingové zprávy nejsou smíchané dohromady.
+- [ ] Tracking otevření je vypnutý jako výchozí stav.
+- [ ] Kliknutí měříme jen tehdy, když z nich vzniká konkrétní rozhodnutí.
+- [ ] Report pracuje primárně s agregovanými produktovými metrikami aktivace.
+- [ ] E-maily neobsahují zbytečné osobní údaje, interní poznámky ani citlivý kontext.
+- [ ] Uživatel může odpovědět člověku nebo snadno najít support cestu.
+- [ ] Odhlášení, preference a stav „nepsat“ se respektují ve všech nástrojích.
+- [ ] E-mailové logy a eventy mají krátkou retenci a jasného vlastníka.
+- [ ] Dodavatel e-mailingu má popsanou datovou rezidenci, subprocesory a export.
+
+### Mini cvičení: onboarding detox za 45 minut
+
+1. **10 minut:** sepište všechny e-maily, které nový uživatel dostane během prvních 14 dnů.
+2. **5 minut:** označte u každého zprávu jako provozní, produktovou, vzdělávací nebo marketingovou.
+3. **10 minut:** vyškrtněte e-maily, které nemají jasný další krok k aktivačnímu momentu.
+4. **10 minut:** vypište všechny používané datové signály: otevření, kliky, produktové eventy, CRM poznámky.
+5. **5 minut:** rozhodněte, které signály nahradíte agregovanou produktovou metrikou.
+6. **5 minut:** doplňte datovou kartu sekvence a napište jeden úklidový úkol.
+
+Výstupem má být kratší sekvence, jasnější aktivační metrika a méně e-mailového sledování. Pokud kvůli tomu zmizí tři grafy v marketingovém dashboardu, je to smutné asi jako smazání prázdné složky `final_campaign_old_backup`. Tedy vůbec.
+
+### Zdroje k příloze DY
+
+- EUR-Lex: GDPR článek 5 stanovuje principy minimalizace dat, omezení účelu a omezení uložení: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
+- European Commission: praktický přehled pravidel GDPR pro firmy a organizace pracující s osobními údaji: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations_en
+- EDPB: Guidelines 05/2020 on consent under Regulation 2016/679 vysvětlují požadavky na souhlas podle GDPR: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-052020-consent-under-regulation-2016679_en
+- IETF RFC 8058: standard pro one-click unsubscribe v e-mailových seznamech: https://www.rfc-editor.org/rfc/rfc8058
+- IETF RFC 2369: hlavičky pro správu mailing listů včetně `List-Unsubscribe`: https://www.rfc-editor.org/rfc/rfc2369
+
 ## Pracovní log
+
+- 2026-08-27: Přidána příloha DY „Onboardingové e-maily bez tracking pixelů“ s aktivačním momentem, rozdělením typů zpráv, vypnutím open trackingu jako výchozím stavem, sekvencí s koncem, datovou kartou, checklistem, detox cvičením a ověřenými GDPR/IETF zdroji.
 
 - 2026-08-27: Přidána příloha DX „Demo a sandbox prostředí bez úniku produkčních dat“ s rozlišením demo/sandbox/staging, pravidly pro syntetická data, přístupy, reset, kartou prostředí, checklistem, demo detoxem a ověřenými zdroji.
 
