@@ -30472,7 +30472,171 @@ Export dat je dobrý test férovosti produktu. Když zákazníkovi pomáháte da
 - EDPB: Guidelines on the right to data portability WP242 rev.01 vysvětlují rozsah a limity práva na přenositelnost údajů: https://www.edpb.europa.eu/documents/guideline/guidelines-on-the-right-to-data-portability-under-regulation-2016679-wp242_en
 
 
+
+## Příloha EB: Bezpečnostní kontakt a disclosure bez ticha v éteru
+
+Bezpečnostní chyba se občas objeví i v dobrém produktu. To není ostuda. Ostuda je, když ji někdo chce nahlásit a narazí na formulář „Obecný dotaz“, chatbota bez mozku, obchodní e-mail, který odpoví za čtyři týdny, nebo tiket, kde první reakce zní: „zkuste vymazat cache“. Gratuluji, právě jste z bezpečnostního výzkumníka udělali člověka s pokušením napsat veřejný thread.
+
+Malý SaaS nepotřebuje hned bug bounty program s tričky, žebříčkem a právním oddělením v pozoru. Potřebuje ale jasný bezpečnostní kontakt, základní pravidla pro hlášení zranitelností, odpovědnost uvnitř týmu a jednoduchý postup, co se stane po přijetí reportu. To je levná pojistka proti chaosu.
+
+*Codyho komentář: bezpečnostní kontakt není marketingová dekorace v patičce. Je to hasicí přístroj. Taky ho nechcete hledat až ve chvíli, kdy už voní toast trochu moc intenzivně.*
+
+### EB.1 Zveřejněte `security.txt` a člověka na druhé straně
+
+Standard `security.txt` popisuje strojově čitelný soubor, který má výzkumníkům usnadnit nalezení správného kanálu pro nahlášení zranitelnosti. Pro webové služby patří na známou cestu `/.well-known/security.txt` a má být dostupný přes HTTPS. Není to náhrada kompletní bezpečnostní politiky, ale dobrý vstupní bod.
+
+Minimální varianta pro malý SaaS:
+
+```txt
+Contact: mailto:security@example.com
+Expires: 2027-08-27T00:00:00.000Z
+Preferred-Languages: cs, en
+Canonical: https://example.com/.well-known/security.txt
+Policy: https://example.com/security
+```
+
+Praktická pravidla:
+
+- `Contact` vede na schránku, kterou někdo opravdu sleduje.
+- `Expires` má datum v budoucnu a je součástí kalendářové kontroly.
+- `Preferred-Languages` říká, v jakých jazycích zvládnete komunikovat.
+- `Canonical` odpovídá přesné URL souboru.
+- `Policy` vede na lidsky čitelnou stránku s rozsahem testování, očekáváním a kontaktem.
+
+Nedávejte do `security.txt` osobní adresu jednoho vývojáře, pokud nemáte plán pro dovolenou, nemoc a odchod z firmy. Lepší je role-based adresa typu `security@firma.cz`, napojená na interní frontu, alias nebo bezpečný helpdesk. A ano, tu schránku je potřeba testovat. Automatická odpověď, která se posílá z neexistující adresy, je velmi poetický způsob, jak říct „nemáme proces“.
+
+### EB.2 Definujte disclosure politiku bez právnického strašení
+
+Disclosure politika má výzkumníkovi říct, co je v rozsahu, co už je za hranou a jak budete komunikovat. Nemá znít jako výhrůžný dopis z právního oddělení. Pokud začnete textem „jakýkoli test je zakázán“, lidé chyby buď nenahlásí, nebo je nahlásí jinde. Ani jedna varianta vám nepomůže.
+
+Dobrá politika obsahuje:
+
+- **Rozsah:** domény, aplikace, API, mobilní aplikace, testovací prostředí a výslovné výjimky.
+- **Bezpečné chování:** zákaz destruktivních testů, DoS útoků, sociálního inženýrství, fyzických pokusů a přístupu k cizím datům.
+- **Co poslat:** popis dopadu, kroky reprodukce, URL, screenshoty bez citlivých dat, čas nálezu, doporučený kontakt.
+- **Co slíbíte vy:** potvrzení přijetí, průběžnou komunikaci, férové posouzení a informaci po opravě.
+- **Co neslibujete:** automatickou odměnu, právní stanovisko, podporu pro běžné bugy nebo okamžitou opravu každé nízké priority.
+
+Ukázka krátkého textu:
+
+> Pokud najdete zranitelnost v našich službách, napište na `security@example.com`. Prosíme, neprovádějte destruktivní testy, nepřistupujte k datům jiných uživatelů a neposílejte citlivá data e-mailem. Report potvrdíme do dvou pracovních dnů a budeme vás informovat o dalším postupu.
+
+U B2B SaaSu doporučuji doplnit jednu větu k zákaznickým datům: pokud výzkumník narazí na data jiného zákazníka, má test zastavit a poslat jen minimální důkaz bez kopírování obsahu. To chrání zákazníky i výzkumníka. A chrání to i váš tým před tím, aby musel rozplétat, jestli někdo „jen testoval“, nebo už si udělal soukromý export cizí firmy.
+
+### EB.3 Nastavte interní triage jako provozní proces
+
+Bezpečnostní report není běžný support tiket. Potřebuje rychlé potvrzení, vlastníka, odhad dopadu a rozhodnutí, jestli jde o incident, zranitelnost k opravě, nebo falešný poplach. Tohle nemusí být složité. Stačí, aby první hodina nebyla improvizace.
+
+První triage otázky:
+
+1. Dotýká se report produkčních dat, autentizace, oprávnění, plateb, osobních údajů nebo dostupnosti služby?
+2. Je chyba reprodukovatelná bez přístupu k interním systémům?
+3. Má výzkumník důkaz, který neobsahuje cizí citlivá data?
+4. Existuje jednoduché omezení dopadu: vypnutí endpointu, změna konfigurace, rate limit, rotace klíče, rollback?
+5. Potřebujeme informovat zákazníka, správce údajů, dozorový orgán, CSIRT nebo dodavatele?
+
+Vnitřní workflow:
+
+| Krok | Vlastník | Výstup |
+|---|---|---|
+| přijetí reportu | support nebo bezpečnostní alias | potvrzení přijetí a interní tiket |
+| triage | technický lead | závažnost, dotčené systémy, první mitigace |
+| rozhodnutí o incidentu | provozní vlastník | incident ano/ne, komunikační plán |
+| oprava | vývojář nebo dodavatel | patch, test, rollout |
+| uzavření | technický lead + support | odpověď výzkumníkovi, zápis, poučení |
+
+U významných incidentů může evropská regulace vyžadovat vícekrokové hlášení. NIS2 pracuje pro dotčené typy organizací s raným varováním bez zbytečného odkladu a v každém případě do 24 hodin od zjištění významného incidentu, následným oznámením do 72 hodin a závěrečnou zprávou později. Ne každý malý SaaS do NIS2 spadá, ale procesní ponaučení platí i mimo povinné subjekty: první den potřebujete vědět, co se stalo, koho se to týká, co jste omezili a kdo komunikuje.
+
+### EB.4 Chraňte data i při samotném hlášení
+
+Security proces může paradoxně vytvořit nový únik dat. Výzkumník pošle screenshot administrace, log s tokenem, část databázového záznamu nebo video s osobními údaji. Pak to tým přepošle do chatu, vloží do projektového nástroje, pošle dodavateli a uloží do znalostní báze. Gratuluji, z jedné zranitelnosti jsou čtyři datové kopie a jeden velmi smutný audit.
+
+Privacy-first pravidla pro příjem reportů:
+
+- reporty přijímejte v kanálu, kde máte kontrolu nad přístupy a retencí,
+- výzkumníky požádejte, aby neposílali cizí osobní údaje, tajné klíče ani celé databázové výpisy,
+- screenshoty a logy ukládejte jen v interním bezpečnostním tiketu,
+- citlivé přílohy po vyřešení smažte nebo zredukujte na anonymizovaný důkaz,
+- do běžného changelogu nepište detaily, které by pomohly útok zopakovat,
+- pokud je potřeba zapojit dodavatele, sdílejte minimální reprodukci bez zákaznických dat.
+
+Zvláštní pozor na AI nástroje. Kopírovat bezpečnostní report s tokeny, URL interních panelů nebo zákaznickými daty do obecného AI chatu je přesně ten typ „rychlé pomoci“, který pak vytvoří pomalý problém. Pokud AI použijete, pošlete jí anonymizovaný technický vzor, ne reálný incidentový materiál.
+
+### EB.5 Připravte odpovědi pro výzkumníka i zákazníka
+
+Dobrá komunikace snižuje riziko eskalace. Výzkumník chce vědět, že report nezmizel v černé díře. Zákazník chce vědět, jestli se ho problém týká a co má udělat. Tým chce vědět, kdo smí co říct. Pokud tyto věty píšete poprvé během incidentu, budou zbytečně nervózní.
+
+Šablona potvrzení výzkumníkovi:
+
+```text
+Dobrý den,
+
+díky za nahlášení. Report jsme přijali a předali technickému vlastníkovi k triage.
+Interní reference: SEC-2026-001.
+
+Prosíme, neposílejte další citlivá data ani nepokračujte v testování mimo popsaný rozsah.
+Ozveme se s dalším stavem nejpozději do [termín].
+
+Cody / security tým
+```
+
+Šablona interního rozhodnutí:
+
+```markdown
+## Security report
+
+- Reference:
+- Datum přijetí:
+- Kontakt reportéra:
+- Dotčený systém:
+- Typ problému:
+- Reprodukovatelnost:
+- Dopad na osobní údaje:
+- Dopad na zákaznická data:
+- První mitigace:
+- Incident ano/ne:
+- Vlastník opravy:
+- Komunikační vlastník:
+- Termín další aktualizace:
+```
+
+Šablona zákaznické zprávy musí být ještě nudnější: co se stalo, koho se to týká, co jste udělali, co má udělat zákazník, kde dostane aktualizace. Bez dramatických slov, bez přiznání většího rozsahu, než víte, a bez schovávání faktů za „mohlo dojít“. Když něco nevíte, napište, že to ověřujete, a dejte čas další aktualizace.
+
+### Checklist: disclosure připravenost
+
+- [ ] Máme `/.well-known/security.txt` dostupný přes HTTPS.
+- [ ] `security.txt` obsahuje funkční kontakt, expiraci, jazyk, kanonickou URL a odkaz na politiku.
+- [ ] Bezpečnostní schránku sleduje role, ne jeden nešťastník s dovolenou.
+- [ ] Disclosure politika jasně říká rozsah, zakázané testy a očekávaný obsah reportu.
+- [ ] Reporty mají interní frontu s omezenými přístupy a retenčním pravidlem.
+- [ ] Triage rozlišuje zranitelnost, incident, nízkou prioritu a nereprodukovatelný nález.
+- [ ] Máme připravené šablony pro výzkumníka, interní rozhodnutí a zákaznickou komunikaci.
+- [ ] Víme, kdy zapojit dodavatele, CSIRT, právníka nebo zákazníka jako správce údajů.
+- [ ] Citlivé důkazy z reportů nemažeme chaoticky, ale podle dokumentovaného pravidla.
+- [ ] Po každém uzavřeném reportu aktualizujeme buď kód, test, monitoring, dokumentaci nebo politiku.
+
+### Mini cvičení: bezpečnostní kontakt za 45 minut
+
+1. **10 minut:** zjistěte, jestli vaše hlavní doména má `/.well-known/security.txt`.
+2. **10 minut:** ověřte, kdo čte bezpečnostní kontakt a co se stane mimo pracovní dobu.
+3. **10 minut:** napište pět vět disclosure politiky: rozsah, bezpečné chování, co poslat, kdy odpovíte, co neslibujete.
+4. **10 minut:** vytvořte interní šablonu `Security report` a určete vlastníka triage.
+5. **5 minut:** založte úkol na revizi za 6 měsíců, protože `Expires` není okrasný šperk.
+
+Výstupem má být funkční kontakt, krátká politika a jeden interní proces. Ne kompletní bezpečnostní program v brožuře s fotkou zámku. Ten zámek stejně nikdy nikoho nezachránil.
+
+### Zdroje k příloze EB
+
+- RFC Editor: RFC 9116 definuje formát `security.txt`, jeho umístění pod `/.well-known/`, povinný HTTPS přístup a doporučená pole pro disclosure kontakt: https://www.rfc-editor.org/rfc/rfc9116.html
+- RFC Editor: informační stránka RFC 9116 shrnuje účel souboru `security.txt` jako pomoc při nalezení správného kanálu pro nahlášení zranitelností: https://www.rfc-editor.org/info/rfc9116/
+- ENISA: Good Practice Guide on Vulnerability Disclosure popisuje stakeholdery, výzvy a doporučení pro koordinované zveřejňování zranitelností: https://www.enisa.europa.eu/publications/vulnerability-disclosure
+- ENISA: přehled Coordinated Vulnerability Disclosure v EU popisuje CVD jako spolupráci nálezců zranitelností, výrobců a provozovatelů ICT infrastruktury: https://www.enisa.europa.eu/publications/coordinated-vulnerability-disclosure-policies-in-the-eu
+- EUR-Lex: Directive (EU) 2022/2555, tedy NIS2, popisuje povinnosti významných incidentů včetně raného varování, incident notification a závěrečné zprávy pro dotčené subjekty: https://eur-lex.europa.eu/legal-content/EN/TXT/?qid=1675242238329&uri=CELEX%3A32022L2555
+- European Commission: pokyny k aplikaci NIS2 shrnují vícekrokový režim hlášení významných incidentů včetně 24hodinového raného varování a 72hodinového oznámení: https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ%3AJOC_2023_328_R_0002
+
 ## Pracovní log
+
+- 2026-08-27: Přidána příloha EB „Bezpečnostní kontakt a disclosure bez ticha v éteru“ s praktickým `security.txt`, disclosure politikou, triage procesem, privacy-first pravidly pro reporty, komunikačními šablonami, checklistem, mini cvičením a ověřenými RFC/ENISA/EU zdroji.
 
 - 2026-08-27: Přidána příloha EA „Export dat bez zamčených dveří a ručního kouzlení“ s rozlišením produktového exportu, práva na přístup a přenositelnosti, pravidly pro použitelné formáty, ochranou dat ostatních lidí, workflow žádostí, offboardingem, checklistem, hodinovým auditem a ověřenými EU/EDPB zdroji.
 
