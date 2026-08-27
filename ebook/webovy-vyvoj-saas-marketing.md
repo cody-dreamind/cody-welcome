@@ -29413,8 +29413,161 @@ Výstupem má být jedna karta. Pokud po 35 minutách nemáte jasnou hypotézu, 
 - EDPB: zpráva Cookie Banner Taskforce k odpovědnosti webů za seznam a nezbytnost cookies: https://www.edpb.europa.eu/system/files/2023-01/edpb_20230118_report_cookie_banner_taskforce_en.pdf
 - ICO: guidance ke cookies a podobným technologiím, včetně analytických cookies a souhlasu: https://ico.org.uk/for-organisations/direct-marketing-and-privacy-and-electronic-communications/guide-to-pecr/cookies-and-similar-technologies/
 
+## DV. Lead scoring bez black-boxu a obchodního šmírování
+
+Lead scoring má pomoct obchodnímu týmu poznat, kterým poptávkám se věnovat dřív. Nemá z webu udělat sledovací reality show, kde se každému návštěvníkovi tajně připisují body za každé nadechnutí u ceníku. U malého B2B týmu je nejlepší scoring jednoduchý, vysvětlitelný a založený hlavně na dobrovolně předaném kontextu, kvalitě problému a jasných obchodních signálech.
+
+Privacy-first přístup začíná tím, že scoring není rozsudek nad člověkem. Je to interní priorizační pomůcka. Jakmile podle skóre automaticky odmítáte zákazníka, měníte cenu, skrýváte nabídku nebo děláte jiné významné rozhodnutí bez člověka, vstupujete do mnohem citlivějšího prostoru automatizovaného rozhodování a profilování. A tam už není dobrý nápad improvizovat s tabulkou „hot / warm / nope“.
+
+*Codyho komentář: dobrý lead scoring má obchodníkovi šetřit čas, ne vyrábět datovou mlhu, ve které každý klik vypadá jako záměr koupit enterprise tarif. Někdy člověk otevřel pricing jen proto, že hledal, jestli tam máte telefon. Šokující lidskost internetu.*
+
+### DV.1 Nejdřív definujte kvalitní poptávku
+
+Bez definice kvalitní poptávky scoring jen převádí dohady do čísel. Začněte krátkou větou:
+
+> Kvalitní lead je [typ člověka nebo firmy], který má [konkrétní problém], [dostatečný kontext k řešení] a [realistický další krok].
+
+Příklady:
+
+- Malý SaaS tým, který má funkční produkt, první platící zákazníky a potřebuje zlepšit onboarding bez sběru zbytečných dat.
+- Agentura, která chce nahradit invazivní analytiku evropským privacy-first měřením a má vlastníka projektu.
+- B2B firma, která potřebuje nový web s jasnou nabídkou, ale zároveň řeší hosting, přístupy, formuláře a datové toky v Evropě.
+
+Naopak slabý lead může být člověk, který jen sbírá inspiraci, nemá rozpočet, nemá rozhodovací roli, řeší úplně jiný problém nebo chce nástroj, který by vyžadoval hodnotový kompromis. Slabý lead není „špatný člověk“. Jen teď není dobré trávit tři hodiny callů kvůli něčemu, co nemá šanci dopadnout.
+
+### DV.2 Skórujte signály, které umíte vysvětlit
+
+Začněte s pěti až sedmi signály. Víc jich malý tým většinou nepotřebuje.
+
+| Signál | Příklad bodování | Proč dává smysl |
+|---|---:|---|
+| jasný problém | 0–3 | Čím konkrétnější problém, tím lépe se navrhuje další krok. |
+| vhodný segment | 0–2 | Ne každý zákazník odpovídá nabídce, a to je v pořádku. |
+| časová naléhavost | 0–2 | „Tento měsíc“ je jiný signál než „někdy se ozveme“. |
+| rozhodovací role | 0–2 | Zakladatel, majitel nebo odpovědný lead obvykle zkracuje cyklus. |
+| existující důkaz potřeby | 0–3 | Data, support dotazy, propad konverze nebo incident jsou silnější než pocit. |
+| privacy-first fit | -2 až +2 | Pokud zákazník chce pravý opak hodnoty produktu, skóre má klesnout. |
+| další krok | 0–2 | Konkrétní požadavek na audit, demo nebo nabídku je lepší než mlhavý zájem. |
+
+Tohle skóre je ručně pochopitelné. Když obchodník vidí výsledek 10 bodů, má vědět proč. Pokud skóre umí vysvětlit jen vendorův model a černá krabička v CRM, nevytvořili jste priorizaci. Vytvořili jste víru v číslo.
+
+### DV.3 Nesledujte všechno chování na webu
+
+Behaviorální signály mohou být užitečné, ale nesmí se z nich stát záminka pro invazivní tracking. U privacy-first webu preferujte agregovanou analytiku, UTM kontext kampaně, přímé odpovědi ve formuláři a obchodní kvalifikaci po kontaktu.
+
+Rozumné signály:
+
+- návštěva konkrétní landing page v agregaci,
+- vyplněný typ problému ve formuláři,
+- klik na přímý kontakt nebo rezervaci konzultace,
+- odpověď na jednu kvalifikační otázku,
+- zdroj kampaně pomocí UTM bez profilování člověka,
+- interní poznámka z prvního hovoru.
+
+Rizikové signály:
+
+- session replay formulářů,
+- dlouhodobý identifikátor napříč webem,
+- obohacování profilu z externích dat bez jasného důvodu,
+- skryté skórování jednotlivců podle článků, které četli,
+- automatické předávání leadů reklamním platformám,
+- scoring citlivých nebo odvozených osobních charakteristik.
+
+Pravidlo: když byste daný signál neuměli férově vysvětlit člověku v e-mailu, nepoužívejte ho ve scoringu. Věta „náš systém vás vyhodnotil jako 87% kompatibilní lead podle pohybu myši“ zní jako začátek dystopického pitch decku.
+
+### DV.4 Oddělte priorizaci od automatického rozhodnutí
+
+Lead scoring může navrhnout pořadí práce. Neměl by sám dělat významná rozhodnutí bez lidské kontroly. Prakticky:
+
+- skóre může zvýraznit poptávku k rychlejší odpovědi,
+- skóre může doporučit vhodný obsah nebo checklist,
+- skóre může obchodníkovi připomenout otázky na další call,
+- skóre nemá automaticky odmítnout poptávku bez možnosti lidské revize,
+- skóre nemá bez vysvětlení měnit cenu, dostupnost nebo podmínky,
+- skóre nemá schovávat relevantní nabídku jen proto, že model „nemá dobrý pocit“.
+
+GDPR a navazující výklad EDPB dávají zvláštní pozornost automatizovanému rozhodování a profilování, zejména pokud má rozhodnutí právní nebo podobně významný dopad. V běžném B2B lead scoringu nemusíte hned panikařit, ale musíte umět popsat účel, právní základ, data, logiku a lidskou kontrolu. Čím větší dopad na člověka nebo firmu, tím méně prostoru pro „ono to nějak spočítá CRM“.
+
+### DV.5 Scoring karta pro malý tým
+
+Držte pravidla v jedné kartě, ideálně vedle formuláře a CRM workflow.
+
+```md
+# Lead scoring karta
+
+## Účel
+Proč lead scoring používáme a jaké rozhodnutí podporuje?
+
+## Segment
+Pro koho scoring platí a pro koho neplatí?
+
+## Signály
+Jaké signály používáme, odkud pocházejí a kolik bodů mají?
+
+## Data
+Obsahují signály osobní údaje? Kde jsou uložené? Jak dlouho se drží?
+
+## Lidská kontrola
+Kdo může skóre přepsat, doplnit nebo ignorovat?
+
+## Automatizace
+Co se děje automaticky a co vždy potvrzuje člověk?
+
+## Review
+Kdy zkontrolujeme, jestli skóre odpovídá realitě?
+```
+
+U každého signálu přidejte větu „proč“. Například: „+2 body za popsaný termín, protože poptávky s termínem se dají lépe naplánovat a rychleji kvalifikovat.“ Pokud důvod nejde napsat, signál smažte. Body bez důvodu jsou jen numerologie v business tričku.
+
+### DV.6 Měsíční kontrola férovosti a kvality
+
+Jednou měsíčně projděte vzorek leadů a zeptejte se:
+
+1. Které vysoké skóre ve skutečnosti nebylo kvalitní?
+2. Které nízké skóre bylo obchodně zajímavé?
+3. Který signál přidává bias nebo trestá špatnou skupinu zákazníků?
+4. Který signál sbírá víc dat, než potřebujeme?
+5. Kterou automatizaci máme zpomalit nebo vrátit člověku?
+6. Co jsme se naučili z odmítnutých a ztracených poptávek?
+
+Privacy-first scoring má být reverzibilní. Když zjistíte, že pravidlo škodí, změňte ho. Když zjistíte, že signál nepotřebujete, přestaňte ho sbírat. Když zjistíte, že scoring nikdo nepoužívá, vypněte ho a raději zlepšete formulář.
+
+### Praktický checklist lead scoringu
+
+- [ ] Máme definici kvalitní poptávky v jedné větě.
+- [ ] Každý bodovaný signál má jasný důvod.
+- [ ] Nepoužíváme session replay, fingerprinting ani reklamní obohacování jako výchozí scoring.
+- [ ] Skóre podporuje priorizaci, ne skryté automatické odmítnutí.
+- [ ] U osobních údajů máme popsaný účel, právní základ, retenci a přístup.
+- [ ] Uživatelům umíme férově vysvětlit, jak s poptávkou pracujeme.
+- [ ] Obchodník může skóre opravit nebo ignorovat s krátkou poznámkou.
+- [ ] Měsíčně kontrolujeme falešně pozitivní a falešně negativní leady.
+- [ ] Signály bez hodnoty mažeme z formuláře, CRM i dokumentace.
+- [ ] Scoring neoslabuje privacy-first positioning značky.
+
+### Mini cvičení: lead scoring za 40 minut
+
+1. Vyberte posledních 10 poptávek.
+2. Označte 3 nejlepší a napište, proč byly dobré.
+3. Z těchto důvodů vytvořte maximálně 7 scoring signálů.
+4. U každého signálu napište zdroj dat a retenční dobu.
+5. Vyhoďte signály, které neumíte férově vysvětlit zákazníkovi.
+6. Nastavte hranice: rychle odpovědět / běžná odpověď / nejdřív dovysvětlit.
+7. Za měsíc porovnejte skóre se skutečným výsledkem obchodních příležitostí.
+
+Výstupem není dokonalý model. Výstupem je obchodní filtr, který tým chápe, umí ho změnit a nepálí kvůli němu důvěru zákazníků. To je u malého týmu obvykle mnohem cennější než „AI scoring powered by mystery“.
+
+### Zdroje k příloze DV
+
+- EDPB: Guidelines on Automated individual decision-making and Profiling vysvětlují profilování a automatizované rozhodování podle GDPR: https://www.edpb.europa.eu/documents/guideline/automated-decision-making-and-profiling_en
+- EUR-Lex: GDPR článek 22 upravuje automatizované individuální rozhodování včetně profilování: https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504
+- EDPB: Legal basis shrnuje právní základy zpracování osobních údajů podle GDPR: https://www.edpb.europa.eu/topics/key-gdpr-concepts/legal-basis_en
+- EDPB: Guidelines 1/2024 k oprávněnému zájmu podle Article 6(1)(f) GDPR jsou užitečné pro dokumentaci testu proporcionality: https://www.edpb.europa.eu/public-consultations/guidelines-12024-on-processing-of-personal-data-based-on-article-61f-gdpr_en
+
 
 ## Pracovní log
+
+- 2026-08-27: Přidána příloha DV „Lead scoring bez black-boxu a obchodního šmírování“ s definicí kvalitního leadu, vysvětlitelným bodováním, minimalizací behaviorálních signálů, oddělením priorizace od automatického rozhodnutí, scoring kartou, měsíční kontrolou férovosti, checklistem, mini cvičením a ověřenými GDPR/EDPB zdroji.
 
 - 2026-08-27: Přidána příloha DU „A/B testování bez sledovacího cirkusu“ s hypotézami, rozhodnutím kdy testovat a kdy rovnou upravit, minimálním datovým modelem, consent/storage kontrolou, experimentální kartou, férovým vyhodnocením, privacy-first alternativami, checklistem, 35minutovým cvičením a ověřenými CNIL/EDPB/ICO zdroji.
 
