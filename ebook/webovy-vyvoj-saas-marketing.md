@@ -128,6 +128,148 @@ Pokud máš u poloviny bodů mlhu, nevadí. To není selhání, to je mapa prác
 
 ---
 
+## 2. Web jako prodejní systém: ne digitální vizitka
+
+Web malé firmy nebo SaaS produktu často vznikne jako kompromis mezi tím, co se líbí zakladateli, co umí šablona a co se zrovna vejde do rozpočtu. Výsledek pak sice existuje, ale nepracuje. Lidé přijdou, chvíli koukají, nepochopí nabídku, odejdou — a analytika jen smutně mává kapesníčkem.
+
+Prodejní web má jiný úkol: co nejrychleji propojit správného návštěvníka se správnou akcí. Nemusí být agresivní. Nemusí blikat. Nemusí mít deset popupů, které vypadají jako zoufalý stánek na pouti. Musí být jasný, důvěryhodný a měřitelný.
+
+### 2.1 Homepage musí odpovědět do pěti vteřin
+
+První obrazovka webu není místo pro poetickou mlhu. Návštěvník si má během pár vteřin odpovědět na tři otázky:
+
+- **Co nabízíš?** Produkt, službu nebo výsledek pojmenuj lidsky.
+- **Pro koho to je?** Dej jasný signál, jestli je návštěvník na správném místě.
+- **Co mám udělat dál?** Nabídni jednu hlavní akci a jednu bezpečnou alternativu.
+
+Slabý hero text:
+
+> Inovativní digitální řešení pro moderní firmy.
+
+Lepší hero text:
+
+> Stavíme rychlé privacy-first weby pro B2B firmy, které chtějí získávat poptávky bez reklamního sledování.
+
+Pod tím může následovat krátké vysvětlení:
+
+> Od strategie přes design po provoz v EU. Pomůžeme vám zpřehlednit nabídku, spustit měření bez cookies chaosu a udělat z webu obchodní kanál.
+
+Hlavní tlačítko: „Domluvit konzultaci“. Vedlejší odkaz: „Podívat se na postup“ nebo „Přečíst případový příklad“.
+
+*Codyho komentář:* Jestli návštěvník po první obrazovce neví, co děláš, není to jeho chyba. Web není hádanka z únikové hry. I když uznávám, že některé homepage by si zasloužily vlastní escape room soundtrack.
+
+### 2.2 Jedna stránka, jedna hlavní akce
+
+Každá důležitá stránka má mít jeden primární cíl. Ne pět rovnocenných cílů, protože „třeba si někdo vybere“. Když dáš návštěvníkovi moc možností, často neudělá žádnou.
+
+Příklady cílů:
+
+- Homepage: poslat správné lidi na konzultaci, demo nebo detail služby.
+- Landing page: vysvětlit jednu konkrétní nabídku a získat poptávku.
+- Pricing: pomoct vybrat tarif a snížit nejistotu před platbou.
+- Blogový článek: vybudovat důvěru a nabídnout další relevantní krok.
+- Dokumentace: snížit počet dotazů na podporu a zrychlit aktivaci uživatele.
+
+U každé stránky si napiš:
+
+1. Kdo na stránku přichází?
+2. Co už pravděpodobně ví?
+3. Co potřebuje pochopit?
+4. Jaká je jedna hlavní akce?
+5. Co je bezpečná alternativa pro člověka, který ještě není připravený?
+
+Bezpečná alternativa není slabost. U dražších B2B služeb nebo nového SaaS produktu lidé často nekoupí hned. Můžeš jim nabídnout ukázku procesu, technický článek, auditní checklist, RSS odběr nebo možnost položit otázku přímo. Důležité je nehonit je přes remarketingové laso, ale dát jim důvod se vrátit.
+
+### 2.3 Důvěra se skládá z detailů
+
+Design může udělat první dojem, ale důvěru vytváří konkrétní důkazy. Čím větší riziko zákazník vnímá, tím víc potřebuje vidět, že víš, co děláš.
+
+Na web přidej hlavně:
+
+- **Konkrétní výsledky:** „Zkrátili jsme načítání homepage z 4,8 s na 1,2 s“ je lepší než „optimalizujeme výkon“.
+- **Proces:** Ukaž kroky spolupráce, aby zákazník věděl, co se bude dít po odeslání formuláře.
+- **Ukázky práce:** Screenshoty, krátké rozbory, veřejné reference nebo anonymizované příklady.
+- **Technické hranice:** Napiš, co neděláš. Paradoxně to zvyšuje důvěru, protože nepůsobíš jako agentura na všechno.
+- **Kontakt na člověka:** Firma bez tváře působí levně, i když má drahý gradient.
+
+Pro privacy-first značku je důvěra i otázka provozu. Vysvětli jednoduše:
+
+- kde běží hosting,
+- jaké analytické nástroje používáš,
+- jestli používáš cookies a proč,
+- jak dlouho držíš poptávková data,
+- komu data neposíláš.
+
+Nemusí z toho být právnický román. Stačí stránka „Soukromí stručně“, která mluví lidsky a odkazuje na plné zásady zpracování. U evropských zákazníků je to obchodní argument, ne jen povinnost schovaná v patičce.
+
+### 2.4 Landing page není zmenšená homepage
+
+Landing page má řešit jednu konkrétní nabídku, segment nebo problém. Když člověk klikne z článku o rychlosti webu, nemá dopadnout na obecnou stránku „Služby“, kde jsou weby, aplikace, SEO, automatizace a trochu brandingu navrch. Má dopadnout na stránku o zrychlení webu.
+
+Dobrá struktura landing page:
+
+1. **Nadpis:** pojmenuje výsledek pro konkrétní cílovku.
+2. **Problém:** ukáže situace, které návštěvník poznává.
+3. **Řešení:** vysvětlí, jak pomáháš a co je součástí.
+4. **Důkaz:** reference, čísla, screenshoty, postup nebo mini případovka.
+5. **Námitky:** cena, čas, migrace, bezpečnost, vlastnictví dat.
+6. **Akce:** jasné CTA s očekáváním, co se stane po kliknutí.
+
+Příklad pro SaaS:
+
+- Nadpis: „Jednoduchý zákaznický portál pro servisní firmy v EU.“
+- Problém: „Požadavky mizí v e-mailech, klienti se ptají na stav a tým přepisuje data ručně.“
+- Řešení: „Portál pro zadání požadavku, stav řešení, interní poznámky a měsíční report.“
+- Důkaz: „První verze do 4 týdnů, provoz na evropské infrastruktuře, export dat bez vendor lock-inu.“
+- Akce: „Probrat portál na 30 minut.“
+
+Landing page nemusí být dlouhá. Musí být přesná. Dlouhá stránka s vatou je horší než krátká stránka, která trefí bolest a vysvětlí další krok.
+
+### 2.5 Měř jen to, podle čeho budeš rozhodovat
+
+Měření má pomáhat rozhodování, ne uspokojovat zvědavost. Privacy-first přístup neznamená, že budeš web řídit poslepu. Znamená, že nebudeš sbírat víc dat, než potřebuješ.
+
+Praktické minimum:
+
+- návštěvy klíčových stránek,
+- zdroje návštěvnosti na rozumné úrovni,
+- kliknutí na hlavní CTA,
+- odeslané formuláře,
+- nejčtenější články,
+- chyby formulářů a technické problémy.
+
+Co většinou nepotřebuješ na začátku:
+
+- nahrávání každého pohybu myši,
+- agresivní fingerprinting,
+- reklamní pixely na všech stránkách,
+- deset nástrojů, které se navzájem měří a navzájem si překážejí,
+- osobní profily návštěvníků bez jasného důvodu.
+
+Místo otázky „Co všechno můžeme měřit?“ použij lepší otázku:
+
+> Jaké rozhodnutí uděláme jinak, když tu metriku uvidíme?
+
+Pokud odpověď neexistuje, metriku zatím nepotřebuješ. Ušetříš výkon, právní riziko i mentální prostor. A možná i pár meetingů, což je nejčistší forma produktivity.
+
+### 2.6 Checklist: web jako obchodní nástroj
+
+Před spuštěním nebo redesignem webu si projdi:
+
+- [ ] První obrazovka jasně říká, co nabízím, komu a proč.
+- [ ] Každá klíčová stránka má jednu hlavní akci.
+- [ ] CTA říká konkrétně, co se stane dál.
+- [ ] Nabídka je napsaná jazykem zákazníka, ne interním žargonem.
+- [ ] Web obsahuje důkazy: výsledky, proces, ukázky nebo reference.
+- [ ] Stránka soukromí vysvětluje měření a práci s daty lidsky.
+- [ ] Nepoužívám zbytečné trackery ani reklamní skripty jen ze zvyku.
+- [ ] Měřím jen metriky, podle kterých budu opravdu rozhodovat.
+- [ ] Formuláře jsou krátké a ptají se jen na nutná data.
+- [ ] Existuje bezpečný další krok pro lidi, kteří ještě nejsou připraveni koupit.
+
+Web není hotový ve chvíli, kdy se nasadí. Je hotový až ve chvíli, kdy víš, co na něm funguje, co návštěvníky mate a co budeš zlepšovat příště. Spuštění je začátek učení, ne cílová páska.
+
 ## Pracovní log
 
+- 2026-08-28 13:00 UTC — Doplněna druhá kapitola o webu jako prodejním systému: homepage, CTA, důvěra, landing pages, privacy-first měření a checklist.
 - 2026-08-28 12:00 UTC — Založena struktura e-booku, doplněna pracovní osnova a hotová první kapitola o produktovém základu SaaS/webového projektu.
