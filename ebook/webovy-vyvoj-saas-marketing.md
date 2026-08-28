@@ -551,8 +551,154 @@ Než označíš technický základ za hotový, projdi si:
 Technický stack má být tichý společník. Když funguje, nikdo o něm moc nemluví. Když nefunguje, sežere produkt, roadmapu i náladu v týmu. Proto vybírej technologie podle provozní reality, ne podle toho, co zrovna vypadá nejlépe na screenshotu z prezentace.
 
 
+## 5. Marketing bez šmírování: růst, který neničí důvěru
+
+Marketing má přivádět správné lidi ke správné nabídce. Nemá z každého návštěvníka udělat složku v databázi, kterou nikdo nepotřebuje, ale všichni se jí pak bojí smazat. Privacy-first marketing není marketing bez dat. Je to marketing s menším množstvím lepších dat, jasným účelem a respektem k tomu, že zákazník není chodící reklamní cookie.
+
+U malých firem a SaaS projektů je to často výhoda. Nemáš rozpočet ani tým na nekonečné reklamní experimenty, takže potřebuješ kanály, které staví důvěru dlouhodobě: obsah, doporučení, přímé odkazy, partnerství, komunita, RSS, e-mail na základě souhlasu a produkt, který si lidé pamatují.
+
+*Codyho komentář:* Pokud tvůj marketing funguje jen tehdy, když o uživateli víš skoro všechno, možná nemáš marketingový systém. Možná máš jen velmi drahý dalekohled.
+
+### 5.1 Začni poptávkou, ne kanálem
+
+Častá chyba je začít otázkou: „Máme dělat LinkedIn, SEO, newsletter, reklamy nebo video?“ Správnější otázka zní: „Kde už dnes vzniká poptávka po problému, který řešíme?“ Kanál je až odpověď na chování zákazníka.
+
+Pro každou cílovou skupinu si napiš:
+
+- Kdy si poprvé všimne problému?
+- Jak ho pojmenuje vlastními slovy?
+- Kde hledá řešení?
+- Komu věří?
+- Co potřebuje vidět, aby udělal první krok?
+- Jaké riziko ho brzdí před poptávkou nebo nákupem?
+
+Příklad pro B2B SaaS:
+
+- Problém: obchodní tým ztrácí poptávky mezi e-mailem, tabulkami a poznámkami.
+- Slova zákazníka: „Nemáme přehled, kdo co řeší“ nebo „lead zapadne, když je kolega na dovolené“.
+- Místo hledání: doporučení od známých, odborné články, komunitní skupiny, Google dotazy typu „CRM pro malou firmu“.
+- Důkaz: krátká ukázka workflow, reference podobné firmy, jasné vysvětlení migrace.
+
+Z toho vyjde lepší marketing než z generického plánu „budeme postovat třikrát týdně“. Frekvence bez jasné poptávky je jen kardio pro obsahový kalendář.
+
+### 5.2 Obsah má odpovídat na nákupní otázky
+
+Dobrý obsah není jen „top 10 trendů“ a motivační moudra. Má pomáhat zákazníkovi projít rozhodnutím. Rozděl si obsah podle fáze:
+
+- **Uvědomění:** zákazník ještě neví, že problém má jméno. Piš o symptomech, chybách a dopadech.
+- **Zvažování:** zákazník porovnává přístupy. Piš srovnání, postupy, ukázky řešení a rozhodovací kritéria.
+- **Důvěra:** zákazník se bojí rizika. Piš případové studie, bezpečnostní postupy, provozní principy a odpovědi na námitky.
+- **Akce:** zákazník chce udělat krok. Dej mu checklist, kalkulačku, audit, demo, konzultaci nebo jednoduchý kontakt.
+
+Praktická sada pro menší web nebo SaaS:
+
+1. Jeden pilířový článek, který vysvětluje problém a možnosti řešení.
+2. Tři podpůrné články odpovídající na konkrétní otázky zákazníků.
+3. Jedna stránka s příklady použití pro úzký segment.
+4. Jedna reference nebo modelový příběh „před a po“.
+5. Jedna jednoduchá nabídka dalšího kroku.
+
+Když nevíš, co napsat, otevři posledních deset obchodních konverzací a vypiš otázky, které se opakovaly. Každá opakovaná otázka je kandidát na článek, FAQ nebo část landing page.
+
+### 5.3 Distribuce je práce, ne tlačítko „publikovat“
+
+Publikovat článek a čekat je romantické. Bohužel taky pomalé. Každý kvalitní obsah potřebuje distribuční plán, ideálně bez závislosti na platformách, které mění pravidla podle nálady algoritmu.
+
+U každého většího článku si připrav:
+
+- krátký souhrn pro LinkedIn nebo komunitu,
+- přímý odkaz pro zákazníky a partnery,
+- interní odkazy z relevantních starších článků,
+- položku do RSS feedu,
+- stručnou verzi pro e-mail lidem, kteří si komunikaci vyžádali,
+- jednu praktickou ukázku nebo checklist, který se dá sdílet samostatně.
+
+Privacy-first distribuce znamená, že nesázíš všechno na skryté sledovací pixely. UTM parametry používej střídmě a čitelně. Nepřidávej do URL osobní identifikátory, e-mailové adresy ani interní ID kontaktů. Pokud potřebuješ měřit zdroj návštěvnosti, většinou stačí rozlišit kampaň, kanál a obsah.
+
+Příklad rozumného odkazu:
+
+`/clanky/privacy-first-analytika?utm_source=newsletter&utm_medium=email&utm_campaign=saas-audit`
+
+Příklad, který si koleduje o datový problém:
+
+`/clanky/privacy-first-analytika?email=jana@example.com&customer_id=12345`
+
+To druhé nedělej. Internet má dlouhou paměť a logy mají ještě delší.
+
+### 5.4 Měř méně věcí, ale rozhoduj podle nich
+
+Marketingová analytika má pomoct rozhodnout, co zlepšit. Pokud jen vyrábí grafy, které nikdo nepoužívá, je to dekorace. Začni několika otázkami:
+
+- Které stránky přivádějí relevantní návštěvníky?
+- Kde lidé přecházejí na kontakt, demo nebo registraci?
+- Který obsah pomáhá obchodním konverzacím?
+- Které zdroje přivádějí návštěvy s vysokým záměrem?
+- Které formuláře nebo CTA lidé ignorují?
+
+Pro menší firmu často stačí měřit:
+
+- návštěvy klíčových stránek,
+- zdroj návštěvy na úrovni referreru nebo kampaně,
+- kliknutí na hlavní CTA,
+- odeslané formuláře,
+- registrace nebo objednávky,
+- technické chyby bránící konverzi.
+
+Nepotřebuješ nahrávat obrazovku každého návštěvníka, sbírat otisky zařízení ani lepit na web pět reklamních skriptů. Pokud neumíš vysvětlit, jak konkrétní údaj použiješ k rozhodnutí, pravděpodobně ho nemáš sbírat.
+
+*Codyho komentář:* Nejlepší metrika je ta, po které někdo změní rozhodnutí. Nejhorší metrika je ta, která jen uklidňuje ego, že graf míří nahoru.
+
+### 5.5 Důvěra je marketingový kanál
+
+V evropském privacy-first provozu není soukromí jen právní povinnost. Je to součást značky. Když zákazník vybírá dodavatele pro web, SaaS nebo interní nástroj, často řeší i riziko: kdo uvidí data, kde poběží aplikace, co se stane při incidentu a jestli bude možné službu opustit bez rukojmí v podobě exportu.
+
+Na webu proto jasně vysvětli:
+
+- kde služba běží,
+- jaká data sbíráš a proč,
+- jak dlouho je držíš,
+- jak fungují zálohy a přístupy,
+- jak lze data exportovat nebo smazat,
+- jaké externí služby používáš.
+
+Nemusí to být nudná právničina schovaná v patičce. Udělej z toho čitelnou stránku „Jak chráníme vaše data“ nebo část v nabídce. Pro B2B zákazníka to může být důvod, proč se ozve právě tobě.
+
+Důvěru posilují i malé věci: rychlý web bez zbytečných skriptů, čitelný kontakt, konkrétní lidé za firmou, otevřené vysvětlení limitů a jednoduché odmítnutí dark patternů. Když formulář slibuje „nezávaznou konzultaci“, nemá po odeslání spustit tři automatické sekvence a honit člověka po internetu reklamou na službu, o které si chtěl jen promluvit.
+
+### 5.6 Marketingový rytmus pro malý tým
+
+Malý tým nepotřebuje redakční impérium. Potřebuje rytmus, který vydrží. Doporučený měsíční cyklus:
+
+1. Vyber jedno obchodní téma podle reálných dotazů zákazníků.
+2. Napiš jeden hlubší článek nebo případovou studii.
+3. Rozděl ho na tři menší výstupy: post, checklist, krátký e-mail.
+4. Přidej interní odkazy na související stránky.
+5. Po dvou týdnech zkontroluj, jestli přinesl návštěvy, poptávky nebo lepší konverzace.
+6. Uprav nadpis, CTA nebo doplň chybějící odpovědi podle toho, co lidé řešili.
+
+Tento rytmus je méně sexy než „virální růst“. Zato je proveditelný. A proveditelný marketing poráží ambiciózní plán, který po třech týdnech umře v tabulce.
+
+### 5.7 Checklist: privacy-first marketing
+
+Před spuštěním kampaně, článku nebo landing page si projdi:
+
+- [ ] Víme, jakou nákupní otázku obsah řeší.
+- [ ] Nadpis používá jazyk zákazníka, ne interní buzzwordy.
+- [ ] Stránka má jeden hlavní další krok.
+- [ ] Distribuce nespoléhá jen na jeden algoritmický kanál.
+- [ ] UTM parametry neobsahují osobní údaje ani interní identifikátory.
+- [ ] Analytika měří jen údaje, které umíme použít k rozhodnutí.
+- [ ] Web nepoužívá zbytečné reklamní skripty, pixely ani session replay.
+- [ ] Máme RSS nebo jiný přímý způsob odběru obsahu.
+- [ ] Uživatel chápe, co se stane po odeslání formuláře.
+- [ ] Umíme jednoduše vysvětlit, kde jsou data a kdo k nim má přístup.
+
+Marketing bez šmírování není pomalejší marketing. Je to marketing, který se víc opírá o užitečnost, důvěru a přímý vztah. Místo aby ses snažil každého návštěvníka dohnat reklamou, postavíš systém, ve kterém správní lidé snáz pochopí, proč se s tebou mají bavit.
+
+
 ## Pracovní log
 
+- 2026-08-28 16:00 UTC — Doplněna pátá kapitola o privacy-first marketingu: poptávka, obsah, distribuce, měření, důvěra, měsíční rytmus a checklist.
 - 2026-08-28 15:00 UTC — Doplněna čtvrtá kapitola o technickém stacku: provozní slib, nudné technologie, architektura, opakovatelné nasazení, monitoring, zálohy a checklist.
 - 2026-08-28 14:00 UTC — Doplněna třetí kapitola o SaaS MVP: rozhodnutí místo backlogu, hlavní workflow, ruční validace, onboarding, pricing, měření a checklist.
 - 2026-08-28 13:00 UTC — Doplněna druhá kapitola o webu jako prodejním systému: homepage, CTA, důvěra, landing pages, privacy-first měření a checklist.
