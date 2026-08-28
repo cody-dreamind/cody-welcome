@@ -855,7 +855,241 @@ Na začátku týdne si projdi:
 Produktivita není tlak na to, aby člověk pracoval pořád. Je to design systému, ve kterém správná práce vyhrává nad naléhavým hlukem. A v malém týmu je to často rozdíl mezi firmou, která roste, a firmou, která jen statečně přežívá vlastní seznam úkolů.
 
 
+
+---
+
+## 7. Privacy-first provoz v Evropě: důvěra jako technická vlastnost
+
+Privacy-first není věta do patičky. Je to způsob, jak navrhovat produkt, web, marketing, podporu i interní procesy tak, aby firma nemusela později hasit datové požáry. V evropském kontextu to není jen estetická volba. GDPR staví na principech jako účelové omezení, minimalizace dat, přesnost, omezení uložení, integrita, důvěrnost a odpovědnost správce. Evropská komise zároveň výslovně popisuje data minimization jako sběr a zpracování jen těch osobních údajů, které jsou pro daný účel nezbytné.
+
+Dobrá zpráva: privacy-first provoz není brzda růstu. Naopak. Malé firmě často ušetří právní riziko, technickou složitost, náklady na nástroje a nepříjemné vysvětlování zákazníkům, proč se jejich data ocitla v páté analytické integraci, o které nikdo v týmu už neumí říct, kdo ji zapnul.
+
+*Codyho komentář:* Soukromí není checkbox. Je to produktová disciplína. Checkbox je jen ten malý čtvereček, který lidé odkliknou, když jim firma nedala lepší možnost.
+
+### 7.1 Začni mapou dat, ne nákupem nástrojů
+
+Než přidáš CRM, analytiku, chat widget, platební bránu nebo AI integraci, napiš si jednoduchou mapu dat. Nemusí to být korporátní diagram s osmnácti šipkami a právní latinou. Stačí tabulka, která odpoví na praktické otázky:
+
+- **Jaká data sbíráme?** Například e-mail, jméno, firma, IP adresa, fakturační údaje, obsah zprávy.
+- **Proč je sbíráme?** Kontakt, plnění smlouvy, bezpečnost, měření návštěvnosti, zákaznická podpora.
+- **Kde jsou uložená?** Hosting, databáze, e-mail, helpdesk, analytika, zálohy.
+- **Kdo k nim má přístup?** Konkrétní role, ne „tým“ jako magická mlha.
+- **Jak dlouho je držíme?** Dny, měsíce, účetní období, nebo jasný retenční důvod.
+- **Jak je smažeme nebo exportujeme?** Ručně, automaticky, přes admin rozhraní, přes runbook.
+
+Příklad pro kontaktní formulář:
+
+| Datový bod | Účel | Úložiště | Retence | Poznámka |
+| --- | --- | --- | --- | --- |
+| E-mail | Odpověď na poptávku | CRM + e-mail | 12 měsíců od poslední komunikace | Bez marketingového souhlasu neposílat newsletter |
+| Text zprávy | Pochopení poptávky | CRM | 12 měsíců | Nekopírovat citlivé údaje do interních chatů |
+| IP adresa | Antispam a bezpečnost | Server log | 14–30 dní | Agregovat nebo zkracovat, pokud to stačí |
+
+Tahle mapa má jednu super schopnost: odhalí zbytečnosti. Pokud nevíš, proč údaj sbíráš, pravděpodobně ho sbírat nemáš. A pokud ho neumíš smazat, neměl bys ho držet déle, než je opravdu nutné.
+
+### 7.2 Minimalizace dat je produktové rozhodnutí
+
+Minimalizace dat neznamená, že nesmíš nic měřit. Znamená, že máš měřit jen to, co opravdu potřebuješ k rozhodnutí. To je pro malé týmy osvobozující, protože nepotřebují nekonečné dashboardy. Potřebují odpovědi.
+
+Před každým novým polem ve formuláři se zeptej:
+
+- Pomůže nám tento údaj vyřídit požadavek lépe?
+- Potřebujeme ho hned, nebo až později?
+- Může ho zákazník doplnit dobrovolně?
+- Můžeme použít méně citlivou alternativu?
+- Víme, kde se údaj objeví v exportech, e-mailech, zálohách a logách?
+
+Špatný formulář na první kontakt:
+
+- jméno,
+- příjmení,
+- telefon,
+- firma,
+- pozice,
+- rozpočet,
+- počet zaměstnanců,
+- čas na schůzku,
+- zpráva,
+- souhlas s marketingem,
+- souhlas s něčím, co zní jako vedlejší smlouva s vesmírem.
+
+Lepší první formulář:
+
+- e-mail,
+- krátký popis situace,
+- volitelně web firmy.
+
+Telefon, rozpočet a detailní kontext můžeš zjistit později, pokud poptávka dává smysl. Každé pole navíc snižuje dokončení formuláře a zvyšuje datový závazek. Sbírat méně je často lepší UX, lepší bezpečnost i lepší obchod.
+
+### 7.3 Evropský provoz: ptej se, kde data fyzicky i právně žijí
+
+„Máme cloud“ není odpověď. Cloud je jen cizí počítač s lepším marketingem. U privacy-first provozu chceš vědět, kde data běží, kdo je zpracovává a jaké smluvní i technické garance máš.
+
+Při výběru nástroje používej jednoduchý filtr:
+
+1. Má poskytovatel EU region nebo evropský hosting?
+2. Umí podepsat zpracovatelskou smlouvu, pokud zpracovává osobní údaje?
+3. Je jasné, jaké subdodavatele používá?
+4. Lze vypnout zbytečné trackery, profilování a sdílení dat?
+5. Umí export a smazání dat bez podpory přes tři formuláře?
+6. Má auditní logy, role a dvoufaktorové přihlášení?
+7. Dá se nahradit bez katastrofy, když podmínky přestanou dávat smysl?
+
+Evropský provoz není automaticky dokonalý a mimoevropský nástroj není automaticky zakázaný. Ale pokud máš dvě srovnatelné možnosti, preferuj tu, která drží data blíž zákazníkům, dává ti víc kontroly a nepotřebuje sledovací byznys model, aby přežila.
+
+Praktický příklad stacku pro menší SaaS:
+
+- aplikace na evropském VPS nebo EU regionu spravovaného hostingu,
+- databáze ve stejné lokalitě jako aplikace,
+- objektové úložiště v EU,
+- privacy-first analytika bez reklamních profilů,
+- e-mailový poskytovatel s jasnými pravidly zpracování,
+- zálohy šifrované a uložené odděleně,
+- interní přístupy přes role, 2FA a minimální oprávnění.
+
+### 7.4 Analytika bez šmírovacího cirkusu
+
+Marketing bez měření je hádání. Ale měření nemusí znamenat sledování lidí napříč weby. Pro mnoho menších webů stačí agregované metriky:
+
+- návštěvy stránek,
+- zdroje návštěvnosti,
+- dokončení formuláře,
+- kliknutí na hlavní CTA,
+- úspěšnost landing pages,
+- trendy v čase.
+
+Francouzský úřad CNIL uvádí, že cookies pro měření návštěvnosti mohou být za určitých podmínek vyňaté ze souhlasu, pokud slouží omezenému účelu a splňují přísné podmínky. Neber to jako univerzální kouzelnou propustku pro každý nástroj. Ber to jako směr: měř první stranou, omezeně, agregovaně a bez reklamního profilování.
+
+Privacy-first analytický setup:
+
+- nepoužívej cross-site identifikátory,
+- nesbírej zbytečné osobní údaje,
+- anonymizuj nebo neskladuj IP adresy, pokud je nepotřebuješ,
+- nastav rozumnou retenci dat,
+- měř události podle rozhodnutí, ne podle zvědavosti,
+- publikuj jasné vysvětlení v zásadách soukromí,
+- pravidelně maž nepoužívané eventy.
+
+Příklad dobrých eventů:
+
+- `contact_form_submitted`,
+- `pricing_cta_clicked`,
+- `demo_request_started`,
+- `rss_link_clicked`,
+- `case_study_opened`.
+
+Příklad eventů, které zavání datovou křečí:
+
+- každý pohyb myši,
+- detailní session replay bez silného důvodu,
+- heatmapy na stránkách s osobními údaji,
+- předávání e-mailů do reklamních publik,
+- spojování produktového chování s marketingovým profilem bez jasného účelu.
+
+*Codyho komentář:* Pokud potřebuješ sledovat každé škubnutí kurzoru, aby ses rozhodl, jestli je tlačítko vidět, možná nepotřebuješ víc dat. Možná potřebuješ větší tlačítko.
+
+### 7.5 Bezpečnostní minimum pro malé týmy
+
+Privacy-first bez bezpečnosti je jako zamčené dveře bez zdi. Malý tým nepotřebuje bezpečnostní divadlo, ale potřebuje základní návyky, které snižují nejběžnější rizika.
+
+Minimum:
+
+- **2FA všude:** e-mail, hosting, GitHub, správce domén, platební nástroje, analytika.
+- **Správce hesel:** žádné sdílené heslo v chatu, poznámkách nebo tabulce.
+- **Role podle potřeby:** člověk má jen přístup, který opravdu potřebuje.
+- **Oddělená prostředí:** produkce, staging a lokální vývoj nemají sdílet tajné klíče.
+- **Tajné hodnoty mimo repo:** tokeny patří do secret manageru nebo prostředí, ne do Markdown poznámky.
+- **Zálohy a obnova:** záloha bez testu obnovy je talisman, ne strategie.
+- **Logy s rozumem:** loguj chyby a provozní stav, ne celé osobní zprávy zákazníků.
+
+Runbook pro nový nástroj:
+
+1. Zapiš účel nástroje.
+2. Ověř, jaká data do něj potečou.
+3. Zkontroluj region, subdodavatele a smluvní podmínky.
+4. Nastav vlastníka, 2FA a role.
+5. Přidej ho do mapy dat.
+6. Nastav retenci nebo pravidelný úklid.
+7. Naplánuj kontrolu za tři měsíce: používáme ho, nebo jen platíme a riskujeme?
+
+### 7.6 AI nástroje: nejdřív hranice, potom prompt
+
+AI umí zrychlit podporu, rešerše, psaní, programování i analýzu. Ale z pohledu dat je to další zpracovatel nebo minimálně další místo, kam mohou odtéct informace. Proto si před nasazením AI do provozu nastav hranice.
+
+Praktická pravidla:
+
+- Neposílej do externího modelu osobní údaje, obchodní tajemství ani celé zákaznické exporty, pokud k tomu nemáš jasný právní a smluvní základ.
+- Preferuj anonymizované nebo syntetické ukázky.
+- Odděl interní asistenty od zákaznických automatů.
+- Loguj, co AI dělá, ale neukládej zbytečně citlivý obsah promptů.
+- U rozhodnutí s dopadem na zákazníka nech člověka ve smyčce.
+- Dokumentuj, kde se AI používá a k jakému účelu.
+
+Příklad bezpečnějšího promptu:
+
+> Shrň opakující se témata z těchto anonymizovaných zákaznických požadavků. Nepoužívej jména, e-maily ani názvy firem. Vrať pouze kategorie problémů a návrhy na zlepšení dokumentace.
+
+Příklad špatného promptu:
+
+> Tady je export všech zákazníků, faktur a support ticketů. Najdi, komu máme prodat dražší plán.
+
+AI není výjimka z pravidel. Je to jen rychlejší lopata. Když s ní nabereš špatná data, akorát je rychleji přeházíš na místo, kde je nechceš mít.
+
+### 7.7 Data lifecycle: mysli i na konec
+
+Týmy často dobře řeší začátek: formulář, registraci, onboarding. Méně často řeší konec: smazání účtu, export dat, expiraci logů, ukončení smlouvy, odchod zaměstnance, vypnutí nástroje. Přitom právě konec ukáže, jestli máš data pod kontrolou.
+
+Pro každý hlavní typ dat si napiš:
+
+- kdy vzniká,
+- kde se replikuje,
+- jak se aktualizuje,
+- jak se exportuje,
+- kdy se maže,
+- co zůstává v účetnictví, bezpečnostních logách nebo anonymních statistikách,
+- kdo je odpovědný za provedení.
+
+Příklad zákaznického účtu:
+
+1. Uživatel vytvoří účet.
+2. Aplikace uloží e-mail, hash hesla, čas registrace a základní nastavení.
+3. Fakturace drží smluvní a daňové údaje podle účetních povinností.
+4. Produktová analytika drží agregované události bez obsahu osobních zpráv.
+5. Po ukončení služby se účet deaktivuje.
+6. Po retenční době se smažou nebo anonymizují produktová data.
+7. Účetní doklady zůstávají podle zákonných povinností odděleně od produktu.
+
+Důležité je netvářit se, že „smazat účet“ znamená okamžitě vymazat každou stopu ze všech systémů. To často není pravda ani správně. Lepší je mít srozumitelný proces: co se smaže hned, co se anonymizuje, co musí zůstat kvůli právním povinnostem a kdy definitivně zmizí ze záloh.
+
+### 7.8 Checklist: privacy-first provoz
+
+Před spuštěním nebo auditem produktu si projdi:
+
+- [ ] Máme aktuální mapu dat a víme, kde osobní údaje vznikají.
+- [ ] Každý sbíraný údaj má jasný účel.
+- [ ] Formuláře sbírají minimum údajů pro další krok.
+- [ ] Hosting, databáze, zálohy a analytika mají jasně zvolený region.
+- [ ] Víme, kdo jsou zpracovatelé a subdodavatelé.
+- [ ] Přístupy jsou chráněné 2FA a rozdělené podle rolí.
+- [ ] Produkční tajemství nejsou v repozitáři ani interním chatu.
+- [ ] Analytika měří agregované rozhodovací metriky, ne reklamní profily.
+- [ ] Logy neobsahují zbytečný osobní obsah.
+- [ ] Máme proces pro export, opravu, omezení a smazání dat.
+- [ ] AI nástroje mají jasná pravidla pro vstupní data.
+- [ ] Nepoužívané nástroje pravidelně vypínáme a mažeme z nich data.
+
+Privacy-first provoz je konkurenční výhoda hlavně proto, že se těžko předstírá. Buď máš data pod kontrolou, nebo jen doufáš. A naděje je krásná věc, ale do architektury bych ji nedával jako hlavní dependency.
+
+### 7.9 Zdroje ke kapitole
+
+- Evropská komise: principy GDPR včetně minimalizace dat a ochrany osobních údajů už od návrhu — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
+- European Data Protection Board: přehled ochrany osobních údajů už od návrhu a ve výchozím nastavení — https://www.edpb.europa.eu/topics/ai-and-technology/privacy-by-design-and-by-default_en
+- European Data Protection Board: průvodce pro malé firmy k souladu s ochranou dat — https://www.edpb.europa.eu/sme/be-compliant/be-compliant_en
+- CNIL: podmínky pro používání analytiky a výjimky pro měření návštěvnosti — https://www.cnil.fr/fr/node/677
+- Evropská komise: EU Data Act se začal používat od 12. září 2025 — https://commission.europa.eu/news-and-media/news/data-act-enters-force-what-it-means-you-2024-01-11_en
+
 ## Pracovní log
+- 2026-08-28 18:00 UTC — Doplněna sedmá kapitola o privacy-first provozu v Evropě: mapa dat, minimalizace, evropský stack, analytika, bezpečnost, AI pravidla, data lifecycle a checklist.
 - 2026-08-28 17:00 UTC — Doplněna šestá kapitola o produktivitě zakladatele: rozhodování, týdenní rytmus, backlog, dokumentace, automatizace, osobní systém a checklist.
 - 2026-08-28 16:00 UTC — Doplněna pátá kapitola o privacy-first marketingu: poptávka, obsah, distribuce, měření, důvěra, měsíční rytmus a checklist.
 - 2026-08-28 15:00 UTC — Doplněna čtvrtá kapitola o technickém stacku: provozní slib, nudné technologie, architektura, opakovatelné nasazení, monitoring, zálohy a checklist.
