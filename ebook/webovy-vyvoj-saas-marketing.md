@@ -1343,7 +1343,314 @@ Když si z toho odneseš jednu věc, tak tuhle: dobrý web, SaaS nebo marketingo
 
 *Codyho komentář:* A pokud se někdy ztratíš, vrať se k uživateli. Ne k dashboardu, ne k feedu trendů, ne k nástroji s novým logem. K člověku, kterému máš pomoct. Tam většinou leží odpověď. Jen nemá tak pěkný onboarding.
 
+
+---
+
+## Příloha A: 30denní akční plán pro web nebo SaaS
+
+E-book je mapa. Akční plán je kalendář, který tě donutí udělat další krok místo dalšího přemýšlení o dalším kroku. Třicet dní nestačí na vybudování dokonalého produktu, ale úplně stačí na to, aby ses přestal/a točit v mlze a měl/a jasnější nabídku, lepší web, první signály z trhu a rozumnější provoz.
+
+Princip je jednoduchý: každý týden má jedno hlavní téma a každý den jednu konkrétní dokončitelnou akci. Pokud máš jen pár hodin týdně, dělej denní úkoly jako bloky. Důležité je neskákat mezi strategií, designem, kódem, reklamou a právními texty každých patnáct minut. To není agilita. To je mixér.
+
+### Týden 1: Vyjasni produkt a zákazníka
+
+Cíl prvního týdne není vytvořit krásnou prezentaci. Cíl je zjistit, jestli umíš jednoduše vysvětlit, komu pomáháš, s čím a proč by tomu měl věnovat pozornost.
+
+**Den 1 — Produktová věta**
+
+Napiš jednu větu podle šablony:
+
+```text
+Pomáháme [konkrétní cílovka] dosáhnout [měřitelný výsledek] bez [hlavní bolest/riziko].
+```
+
+Potom napiš tři varianty. Ne proto, že potřebuješ copywriterské cvičení, ale protože první varianta bývá často moc široká. Vyber tu, která je nejkonkrétnější, i kdyby zněla méně „velkolepě“.
+
+**Den 2 — Segment a situace**
+
+Popiš jednoho ideálního zákazníka:
+
+- jakou má roli,
+- jaký problém řeší tento měsíc,
+- co ho problém stojí,
+- jak to řeší dnes,
+- proč současné řešení nestačí.
+
+Vyhni se popisu „malé a střední firmy“. To je účetní kolonka, ne člověk s problémem.
+
+**Den 3 — Rozhovory místo domněnek**
+
+Sepiš pět lidí, kterým můžeš napsat. Neposílej jim prodejní pitch. Pošli krátkou žádost o 20 minut zpětné vazby k problému.
+
+Dobrá otázka:
+
+> Jak dnes řešíte [konkrétní situaci] a co je na tom nejotravnější?
+
+Špatná otázka:
+
+> Líbila by se vám naše platforma?
+
+Lidé jsou zdvořilí. Realita méně.
+
+**Den 4 — Mapa výsledků**
+
+Ke každé plánované funkci napiš výsledek pro zákazníka. Pokud výsledek neumíš popsat, funkce zatím nepatří do první verze.
+
+```text
+Funkce:
+Výsledek pro zákazníka:
+Jak poznáme, že funguje:
+Co se stane, když ji neuděláme:
+```
+
+**Den 5 — Stop seznam**
+
+Sepiš, co teď vědomě neděláš:
+
+- segmenty, které nebudeš oslovovat,
+- funkce mimo MVP,
+- marketingové kanály mimo fokus,
+- integrace, které počkají,
+- metriky, které zatím nepotřebuješ.
+
+Stop seznam je ochrana před nadšením. Nadšení je skvělé palivo, ale mizerný volant.
+
+### Týden 2: Přestav web na prodejní systém
+
+Ve druhém týdnu vezmeš produktovou jasnost a přepíšeš ji do webu. Neřeš zatím pixelovou dokonalost. Řeš pochopení, důvěru a další krok.
+
+**Den 6 — Audit první obrazovky**
+
+Otevři homepage a bez scrollování odpověz:
+
+- Je jasné, co nabízíme?
+- Je jasné, komu to pomáhá?
+- Je jasné, jaký výsledek slibujeme?
+- Je jasné, co má návštěvník udělat dál?
+- Je tam něco, co jen zní hezky, ale nic neříká?
+
+Přepiš hero text tak, aby odpověděl na první tři otázky jednou větou.
+
+**Den 7 — Jedna hlavní akce**
+
+Vyber primární CTA. Pro B2B služby to může být konzultace, pro SaaS demo, registrace nebo pilot. Vedlejší akce může existovat, ale nesmí soupeřit s hlavní.
+
+Příklad:
+
+```text
+Primární CTA: Domluvit 30minutovou konzultaci
+Sekundární CTA: Projít postup spolupráce
+Co se stane po kliknutí: Krátký formulář, odpověď do 1 pracovního dne
+```
+
+**Den 8 — Důkazy a námitky**
+
+Doplň na web alespoň tři důkazy:
+
+- konkrétní výsledek,
+- krátký postup práce,
+- ukázku nebo screenshot,
+- odpověď na častou námitku,
+- vysvětlení, kde běží data a jak se s nimi pracuje.
+
+Pokud ještě nemáš reference, použij proces a transparentnost. „Takhle pracujeme“ je pořád lepší než prázdné „jsme profesionální“.
+
+**Den 9 — Landing page pro jednu nabídku**
+
+Vyber jednu službu, segment nebo use-case a napiš samostatnou landing page. Neopisuj homepage. Piš pro konkrétní situaci.
+
+Minimální struktura:
+
+- výsledek,
+- problém,
+- řešení,
+- důkaz,
+- postup,
+- námitky,
+- CTA,
+- privacy poznámka.
+
+**Den 10 — Formulář bez tření**
+
+Zkontroluj kontaktní formulář. Nech jen pole, která opravdu potřebuješ pro první odpověď. U každého pole si řekni: „Když tohle nevím, nemůžu odpovědět?“ Pokud můžeš, pole pryč.
+
+Privacy-first minimum:
+
+- napiš, proč data sbíráš,
+- řekni, kdo je uvidí,
+- neposílej formulářová data do zbytečných nástrojů,
+- nemaž právní texty do patičky jako tajnou bonusovou úroveň.
+
+### Týden 3: Ověř MVP a provozní základ
+
+Třetí týden je o tom, aby produkt nebyl jen nápad v pěkném kabátu. Potřebuješ první funkční tok, provozní jistotu a jednoduché měření.
+
+**Den 11 — Jedno hlavní workflow**
+
+Popiš nejdůležitější cestu uživatele od začátku do hodnoty:
+
+```text
+Uživatel přijde z:
+Chce udělat:
+První hodnota nastane, když:
+Největší riziko v cestě:
+Co zatím uděláme ručně:
+```
+
+MVP není o tom, že všechno automatizuješ. MVP je o tom, že ověříš hodnotu bez zbytečné stavby labyrintu.
+
+**Den 12 — Ruční concierge verze**
+
+Najdi část produktu, kterou můžeš dočasně dělat ručně. Ruční práce není selhání. Je to výzkum v pracovním oblečení.
+
+Příklady:
+
+- ručně založený účet pro první zákazníky,
+- ruční import dat,
+- ruční měsíční report,
+- osobní onboarding přes videohovor,
+- ruční kontrola kvality výstupu.
+
+Automatizuj až to, co se opakuje a má jasnou hodnotu.
+
+**Den 13 — Provozní slib**
+
+Sepiš krátký provozní slib produktu:
+
+```text
+Kde běží aplikace:
+Kde jsou data:
+Jak zálohujeme:
+Jak poznáme výpadek:
+Kdo má přístup:
+Jak rychle reagujeme na problém:
+Jak zákazník získá export dat:
+```
+
+Nemusí to být veřejná stránka hned první den. Ale tým to má vědět dřív, než se zeptá první větší zákazník.
+
+**Den 14 — Minimální měření**
+
+Vyber 5–8 událostí, které opravdu ovlivní rozhodování. Ke každé napiš, jaké rozhodnutí podle ní uděláš.
+
+Příklad:
+
+```text
+Událost: onboarding_completed
+Rozhodnutí: Pokud dokončení klesne, upravíme první kroky a nápovědu.
+Potřebná data: čas, zdroj, anonymizovaný stav průchodu.
+Nepotřebujeme: osobní profil návštěvníka ani záznam obrazovky.
+```
+
+**Den 15 — Záloha a obnova**
+
+Neříkej „máme zálohy“, dokud jsi nezkusil/a obnovu. Udělej testovací obnovu do bezpečného prostředí a zapiš postup.
+
+Checklist:
+
+- [ ] Víme, kde zálohy jsou.
+- [ ] Víme, jak často vznikají.
+- [ ] Víme, kdo k nim má přístup.
+- [ ] Umíme obnovit data bez paniky.
+- [ ] Obnova nevyžaduje jednoho člověka, který je zrovna na horách.
+
+### Týden 4: Spusť rytmus růstu bez šmírování
+
+Čtvrtý týden nastaví opakovatelný rytmus. Cílem není jednorázový launch ohňostroj. Cílem je systém, který každý týden přidá trochu důvěry, trochu učení a trochu lepší produkt.
+
+**Den 16 — Obsahový pilíř**
+
+Vyber jedno téma, ve kterém chceš být dlouhodobě užitečný/á. Napiš seznam deseti otázek, které zákazníci řeší před nákupem.
+
+Dobré otázky:
+
+- Kolik práce nás stojí současný proces?
+- Jak poznáme, že web opravdu přináší poptávky?
+- Jak provozovat analytiku bez reklamního sledování?
+- Co musí SaaS splnit, než ho ukážeme zákazníkům?
+
+Z každé otázky může být článek, checklist, krátké video, demo nebo interní prodejní materiál.
+
+**Den 17 — Jeden užitečný článek**
+
+Napiš článek, který řeší jednu konkrétní otázku. Nepiš „kompletní průvodce vším“. Piš text, po kterém čtenář udělá konkrétní krok.
+
+Struktura:
+
+- situace,
+- chyba,
+- doporučený postup,
+- příklad,
+- checklist,
+- další krok.
+
+**Den 18 — Distribuce přes přímé kanály**
+
+Rozhodni, kde článek pošleš bez závislosti na reklamním sledování:
+
+- RSS,
+- e-mail lidem, kteří o to stojí,
+- osobní zpráva relevantním kontaktům,
+- komunitní fórum,
+- partnerský newsletter,
+- interní obchodní follow-up.
+
+Sociální sítě mohou pomoct, ale nemají být jediným kanálem. Pronajaté publikum je fajn, dokud pronajímatel nezmění zámky.
+
+**Den 19 — Produktové review**
+
+Udělej první týdenní review podle šablony z kapitoly 8.5. Vyber maximálně tři úkoly na další týden. Pokud máš víc než tři priority, nemáš priority. Máš sbírku přání.
+
+**Den 20 — Privacy kontrola nástrojů**
+
+Sepiš všechny služby, které používáš pro web, produkt a marketing. Ke každé doplň:
+
+```text
+Nástroj:
+K čemu slouží:
+Jaká data zpracovává:
+Kde jsou data:
+Kdo má přístup:
+Umíme data exportovat:
+Umíme nástroj vypnout:
+```
+
+Nepoužívané nástroje vypni. Nejlepší tracker je ten, který vůbec neběží. Krásně škáluje na nulu.
+
+### Posledních 10 dní: opakuj, zmenšuj, zlepšuj
+
+Zbývajících deset dní použij jako druhou smyčku, ne jako hon na nové nápady. Vrať se k tomu, co ukázalo největší tření.
+
+Vyber každý den jednu akci:
+
+- přepiš jednu nejasnou sekci webu,
+- doplň jednu námitku do landing page,
+- zkrať formulář,
+- oprav jednu chybu v onboardingu,
+- napiš jeden krátký článek,
+- pošli jeden osobní follow-up,
+- smaž jednu zbytečnou metriku,
+- vypni jeden nepoužívaný nástroj,
+- otestuj obnovu jedné zálohy,
+- promluv si s jedním zákazníkem.
+
+Na konci třiceti dní bys měl/a mít:
+
+- jasnější produktovou větu,
+- konkrétnější web,
+- jednu landing page,
+- první rozhovory nebo poptávky,
+- jednoduché privacy-first měření,
+- provozní minimum,
+- týdenní rytmus review,
+- seznam věcí, které vědomě neděláš.
+
+To není málo. To je základ, ze kterého se dá stavět bez toho, aby se každý další nápad stal požárem.
+
+*Codyho komentář:* Když 30denní plán selže, většinou neselže proto, že byl málo ambiciózní. Selže proto, že byl moc široký. Zmenši rozsah, nech rytmus. Malé hotové věci poráží velké rozpracované věci s krásným názvem v Notionu.
+
 ## Pracovní log
+- 2026-08-28 20:00 UTC — Doplněna příloha A s 30denním akčním plánem pro vyjasnění produktu, web jako prodejní systém, MVP/provoz a privacy-first růstový rytmus.
 - 2026-08-28 19:00 UTC — Doplněna osmá kapitola s praktickými checklisty a šablonami pro audit nápadu, launch, landing page, privacy-first měření, týdenní review a bezpečnostní minimum.
 - 2026-08-28 18:00 UTC — Doplněna sedmá kapitola o privacy-first provozu v Evropě: mapa dat, minimalizace, evropský stack, analytika, bezpečnost, AI pravidla, data lifecycle a checklist.
 - 2026-08-28 17:00 UTC — Doplněna šestá kapitola o produktivitě zakladatele: rozhodování, týdenní rytmus, backlog, dokumentace, automatizace, osobní systém a checklist.
