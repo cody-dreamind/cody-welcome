@@ -31664,7 +31664,156 @@ Retence je jedna z nejvíc podceňovaných produktových disciplín. Všichni ch
 - CNIL: Sheet n°7 Minimize the data collection — doporučení spojit kategorie dat s retenčními lhůtami a nezapomenout ani na logy: https://www.cnil.fr/en/sheet-ndeg7-minimize-data-collection
 - CNIL: Informing data subjects — připomíná, že informace pro subjekty údajů má zahrnovat retenční dobu nebo kritéria jejího určení: https://www.cnil.fr/en/informing-data-subjects
 
+## Příloha FI — Lehké DPIA pro malé SaaS bez právního mramoru
+
+DPIA zní jako dokument, který vzniká v místnosti bez oken a končí v šanonu, kam se bojí i pavouci. Ve skutečnosti je to velmi praktická otázka: „Může tahle změna někomu ublížit, pokud ji navrhneme špatně?“ U webu nebo SaaSu se to netýká jen velkých bank a nemocnic. Stačí nová produktová telemetrie, AI asistent nad zákaznickými daty, integrace s CRM, automatické rozhodování o leadu, změna retenční doby nebo import citlivějších příloh.
+
+Lehké DPIA není náhrada za právní posouzení, když jde o vysoké riziko. Je to pracovní filtr pro malé týmy, aby riziko našly dřív než v produkci. Cílem není vyrobit nejdelší dokument. Cílem je rozhodnout: spustit, upravit, odložit, nebo eskalovat.
+
+### FI.1 Nejdřív rozhodněte, jestli DPIA vůbec potřebujete
+
+GDPR vyžaduje posouzení vlivu na ochranu osobních údajů zejména tehdy, když je zpracování pravděpodobně vysoce rizikové pro práva a svobody lidí. Prakticky: pokud kombinujete nové technologie, větší rozsah dat, systematické monitorování, profilování, citlivé údaje nebo automatizované rozhodování, nespoléhejte na pocit „to je jen malá funkce“.
+
+Pro malý SaaS si udělejte jednoduchý vstupní test před každou výraznější změnou:
+
+- Bude funkce zpracovávat nové osobní údaje?
+- Změní se účel dat, která už máme?
+- Přidáváme nového dodavatele, integraci nebo datové centrum?
+- Sledujeme chování uživatele podrobněji než dřív?
+- Děláme scoring, doporučení, segmentaci nebo automatické rozhodnutí?
+- Dotýká se změna dětí, zaměstnanců, zdravotních, finančních nebo jinak citlivých situací?
+- Může chyba vést k odmítnutí služby, úniku dat, diskriminaci nebo ztrátě kontroly nad účtem?
+
+Pokud je odpověď „ano“ u jedné běžné otázky, stačí lehké privacy review. Pokud je „ano“ u více otázek nebo u citlivého dopadu, udělejte plnější DPIA a zapojte právní nebo bezpečnostní odpovědnost. Codyho komentář: když tým začne větu „tohle asi nemusíme řešit, protože…“, často právě našel věc, kterou řešit má. Gratuluju, compliance bingo.
+
+### FI.2 Popište tok dat jako mapu, ne jako zaklínadlo
+
+Nejčastější chyba v privacy review je začít právními odstavci místo reality. Nejdřív nakreslete tok dat od člověka až po smazání. Stačí tabulka nebo jednoduchý diagram. Každý řádek má mít konkrétní místo v systému.
+
+Praktická mapa:
+
+- **Vstup:** odkud data přicházejí — formulář, import, API, e-mail, webhook, log, AI prompt.
+- **Účel:** proč data potřebujeme právě pro tuto funkci.
+- **Rozsah:** která pole se ukládají a která se jen dočasně zpracují.
+- **Systém:** databáze, fronta, objektové úložiště, log pipeline, analytika, e-mail, CRM.
+- **Přístup:** role lidí a služeb, které se k datům dostanou.
+- **Předání:** třetí strany, země provozu, subdodavatelé, support nástroje.
+- **Retence:** kdy a jak data mažeme, anonymizujeme nebo agregujeme.
+- **Důkaz:** kde je rozhodnutí zaznamenané — issue, ADR, privacy karta, changelog.
+
+Malý tým nepotřebuje akademický diagram. Potřebuje mapu, podle které vývojář ví, co implementovat, support ví, co může vidět, a zakladatel ví, za co nese odpovědnost.
+
+### FI.3 Riziko hodnoťte podle dopadu na člověka
+
+Riziko není jen „může nám spadnout aplikace“. Privacy riziko je dopad na uživatele: ztráta důvěrnosti, ztráta kontroly, špatné rozhodnutí, nemožnost opravy, diskriminace, manipulace, bezpečnostní ohrožení nebo prostě situace, ve které někdo musí vysvětlovat vlastní data cizímu helpdesku. Romantika digitálního věku.
+
+Použijte matici se dvěma otázkami:
+
+- **Pravděpodobnost:** jak snadno se riziko může stát při běžném provozu, chybě nebo incidentu?
+- **Dopad:** jak nepříjemné, nákladné nebo nevratné to bude pro dotčeného člověka?
+
+Příklady rizik a opatření:
+
+- Produktová telemetrie ukládá celé názvy projektů. Opatření: ukládat typ akce a agregaci, ne obsah zákaznické práce.
+- AI asistent posílá support tickety do externí služby. Opatření: redakce osobních údajů, EU zpracování, jasná smlouva, vypínač a audit log.
+- Lead scoring penalizuje malé firmy podle domény nebo lokality. Opatření: vysvětlitelné signály, lidská kontrola, pravidelný fairness review.
+- Demo prostředí používá kopii produkce. Opatření: syntetická data, automatický reset, oddělené přístupy.
+- Administrátor vidí příliš mnoho zákaznických dat. Opatření: just-in-time přístup, maskování, důvod přístupu a audit.
+
+Dobré opatření je konkrétní. „Budeme opatrní“ není opatření. To je firemní amulet.
+
+### FI.4 Privacy-first opatření pište jako akceptační kritéria
+
+DPIA nesmí skončit jako hezký dokument mimo vývoj. Přepište opatření do akceptačních kritérií v issue nebo release checklistu. Když je nejde ověřit, nejsou hotová.
+
+Příklady akceptačních kritérií:
+
+- Funkce neukládá obsah uživatelských dokumentů do analytiky ani logů.
+- Každý administrátorský přístup k zákaznickému účtu vyžaduje důvod a zapisuje se do audit logu.
+- Exportní soubor expiruje po 7 dnech a je uložen odděleně od veřejných assetů.
+- AI požadavek obsahuje jen minimalizovaný kontext a nepřenáší fakturační údaje.
+- Uživatel v nastavení vidí, jaká volitelná data se používají pro doporučení, a může je vypnout.
+- Nový dodavatel má ověřené místo zpracování, smluvní podmínky a retenční nastavení.
+
+Tady privacy-first přestává být slogan a začíná být inženýrská práce. Nudná? Trochu. Užitečná? Hodně. A pořád lepší než incident postmortem s větou „to nás nenapadlo“.
+
+### FI.5 Šablona: lehká DPIA karta
+
+```markdown
+# Lehká DPIA karta
+
+## Změna
+- Název funkce:
+- Vlastník:
+- Datum:
+- Odkaz na issue/ADR:
+
+## Účel
+- Jaký problém řešíme:
+- Pro koho:
+- Proč nestačí menší rozsah dat:
+
+## Tok dat
+- Vstupní data:
+- Ukládaná data:
+- Dočasně zpracovaná data:
+- Systémy a integrace:
+- Země/region provozu:
+- Retence:
+
+## Rizika
+- Riziko 1:
+  - Pravděpodobnost:
+  - Dopad:
+  - Opatření:
+- Riziko 2:
+  - Pravděpodobnost:
+  - Dopad:
+  - Opatření:
+
+## Rozhodnutí
+- Spustit / upravit / odložit / eskalovat:
+- Podmínky spuštění:
+- Kdo schválil:
+- Datum další kontroly:
+```
+
+Udržujte kartu krátkou. Pokud má lehká DPIA karta deset stran, není lehká. Pokud má tři věty, není DPIA. Zlatá střední cesta existuje, jen nemá tak dobré PR jako chaos.
+
+### FI.6 Checklist: DPIA bez právního mramoru
+
+- [ ] Víme, zda změna zavádí nové osobní údaje, nový účel nebo nového dodavatele.
+- [ ] Máme stručnou mapu toku dat od vstupu po smazání.
+- [ ] Popsali jsme rizika podle dopadu na člověka, ne jen podle dopadu na firmu.
+- [ ] Každé riziko má konkrétní technické, procesní nebo produktové opatření.
+- [ ] Privacy-first opatření jsou propsaná do akceptačních kritérií.
+- [ ] Retence, přístupy a logování jsou součástí návrhu.
+- [ ] Víme, kdy je potřeba plnější DPIA nebo právní/security eskalace.
+- [ ] Rozhodnutí je uložené tam, kde ho tým najde při příští podobné změně.
+
+### Mini cvičení: privacy risk review za 50 minut
+
+1. Vyberte jednu plánovanou funkci nebo integraci.
+2. Za 10 minut napište účel a datový tok.
+3. Za 15 minut najděte pět možných dopadů na uživatele.
+4. Za 15 minut navrhněte opatření, která se dají ověřit v kódu, procesu nebo UI.
+5. Za 5 minut rozhodněte: spustit, upravit, odložit, nebo eskalovat.
+6. Za 5 minut přepište opatření do issue jako akceptační kritéria.
+
+Výstupem není dokonalý dokument. Výstupem je lepší rozhodnutí před tím, než se riziko zabetonuje do produktu.
+
+### Zdroje k příloze FI
+
+- GDPR, článek 35: posouzení vlivu na ochranu osobních údajů a situace, kdy může být DPIA vyžadované: https://gdpr-info.eu/art-35-gdpr/
+- GDPR, článek 25: data protection by design and by default jako základ pro návrh funkcí s minimalizací dat: https://gdpr-info.eu/art-25-gdpr/
+- EDPB: Guidelines on Data Protection Impact Assessment, kritéria vysokého rizika a metodika posuzování: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/data-protection-impact-assessment-dpia_en
+- EDPB: Guidelines 4/2019 on Article 25 Data Protection by Design and by Default: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-42019-article-25-data-protection-design-and_en
+- CNIL: praktické materiály k PIA/DPIA a řízení privacy rizik: https://www.cnil.fr/en/privacy-impact-assessment-pia
+
+
 ## Pracovní log
+
+- 2026-08-28: Přidána příloha FI „Lehké DPIA pro malé SaaS bez právního mramoru“ s rozhodovacím testem, mapou toku dat, rizikovou maticí, akceptačními kritérii, šablonou karty, checklistem a ověřenými zdroji.
 
 - 2026-08-27: Přidána příloha FH „Retence dat bez digitálního skladu na věčné časy“ s kategorizací dat, retenčními spouštěči, pravidly pro zálohy/exporty/logy, návrhem bezpečného mazání, retenční kartou, checklistem, hodinovým detoxem a ověřenými GDPR/EDPB/CNIL zdroji.
 
