@@ -32768,7 +32768,194 @@ Bezpečnostní hlavičky mám rád, protože jsou levné, praktické a brutáln�
 - MDN: HTTP headers — referenční přehled HTTP hlaviček, včetně `Content-Security-Policy`, `Strict-Transport-Security` a `Referrer-Policy`: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers
 - web.dev: Security headers quick reference — praktické vysvětlení HSTS, CSP a dalších bezpečnostních hlaviček pro webové aplikace: https://web.dev/articles/security-headers
 
+## Příloha FO — Exit plán bez vendor lock-in hrdinství
+
+Vendor lock-in většinou nezačne dramaticky. Neozve se siréna, neblikne červená kontrolka a nikdo ve firmě neřekne: „Právě jsme si koupili problém na tři roky.“ Začne to nevinně: rychlá integrace, pohodlný export „později“, vlastní formát dat, jeden kritický webhook bez dokumentace, fakturace svázaná s konkrétním providerem a admin účet, který má v záložkách jen jeden člověk. Pak přijde zdražení, změna obchodních podmínek, bezpečnostní incident, požadavek klienta na EU provoz nebo prostě technický růst. A najednou se zjistí, že migrace není projekt. Je to archeologická expedice s rozpočtem požáru.
+
+Exit plán není projev nedůvěry k dodavateli. Je to provozní hygiena. Stejně jako zálohy neznamenají, že nenávidíte databázi. Znamenají, že víte, že realita má smysl pro humor. U privacy-first SaaSu v Evropě je exit plán ještě důležitější: zákazníkům slibujete kontrolu nad daty, takže ji musíte mít i vy nad vlastními závislostmi.
+
+### FO.1 Rozlišujte pohodlí, závislost a zamčení
+
+Ne každá závislost je problém. Produkt bez závislostí je buď velmi malý, nebo velmi fiktivní. Problém je závislost, u které neumíte odpovědět na tři otázky:
+
+1. Jaká data nebo procesy tam reálně jsou?
+2. Jak rychle je dokážeme bezpečně dostat ven?
+3. Co se stane zákazníkovi, když provider zítra nefunguje?
+
+Praktické rozdělení:
+
+- **Pohodlný nástroj:** lze vypnout bez dopadu na hlavní službu, například interní planning board.
+- **Provozní závislost:** výpadek bolí, ale existuje ruční nebo technická náhrada, například e-mailing nebo helpdesk.
+- **Kritická závislost:** bez ní produkt neprodává, neúčtuje, nepřihlašuje nebo nezpracuje klíčovou akci.
+- **Zamčení:** data, workflow, smlouva nebo integrace jsou tak specifické, že odchod vyžaduje velký projekt a vysoké riziko.
+
+Lock-in není jen cloud. Může to být CRM, billing systém, analytics stack, AI provider, page builder, identity provider, fulltext, e-mailing, support chat, automatizační nástroj nebo „dočasný“ Google Sheet, který se stal nervovou soustavou firmy. Ano, tabulka umí být enterprise architektura. Bohužel.
+
+### FO.2 Udělejte si lock-in inventář
+
+Jednou za kvartál projděte všechny služby, které drží data, identitu, workflow nebo produkční provoz. Nepište román. Stačí tabulka, která jde udržovat.
+
+Minimální sloupce:
+
+| Oblast | Nástroj | Držená data | Kritičnost | Export | Náhrada | Vlastník | Revize |
+|---|---|---|---|---|---|---|---|
+| Fakturace | Billing provider | zákazník, plán, faktura, stav platby | vysoká | CSV/API | ruční fakturace + nový provider | finance/ops | měsíčně |
+| Analytika | privacy-first analytics | agregované návštěvy, eventy | střední | CSV/API | serverové logy + nový nástroj | product | kvartálně |
+| AI funkce | model provider | prompty, výstupy, metadata | vysoká | log export podle retence | fallback model / vypnutí funkce | engineering | měsíčně |
+| Support | helpdesk | e-mail, ticket, přílohy | střední | JSON/CSV | mailbox + export ticketů | support | kvartálně |
+
+U každé závislosti si napište i „nejhorší rozumný scénář“:
+
+- provider zdraží o 80 %,
+- provider skončí v EU regionu,
+- API se zásadně změní,
+- export je pomalý nebo neúplný,
+- audit od zákazníka požaduje jiný režim zpracování,
+- bezpečnostní incident vyžaduje rychlé pozastavení integrace.
+
+Tahle tabulka není procurement byrokracie. Je to mapa toho, kde může firma ztratit manévrovací prostor.
+
+### FO.3 Export nestačí, potřebujete obnovitelný export
+
+Mít tlačítko „Export CSV“ je hezké. Ale dokud jste export nezkusili obnovit jinde, máte spíš suvenýr než strategii. Exit plán musí řešit celý řetězec:
+
+1. **Identifikace dat:** co přesně se exportuje a co ne.
+2. **Formát:** CSV, JSON, Parquet, SQL dump, otevřený archiv, nebo proprietární koule bolesti.
+3. **Vazby:** cizí klíče, ID zákazníků, historie změn, přílohy, metadata.
+4. **Bezpečnost:** šifrování, přístup k exportu, expirace odkazu, auditní stopa.
+5. **Import:** kam data půjdou a jak ověříte, že dávají smysl.
+6. **Test:** malý restore drill na anonymizovaném nebo testovacím vzorku.
+
+Praktický standard pro malé SaaS: u kritických systémů mějte alespoň jednou za půl roku test „vezmeme export a použijeme ho mimo původní nástroj“. U méně kritických systémů stačí roční kontrola. Nejde o dokonalou migraci. Jde o to zjistit, jestli export obsahuje to, co si myslíte.
+
+Privacy-first pravidlo: exporty jsou citlivá data. Nenechávejte je v Downloads, Slacku, e-mailu ani sdílených složkách bez expirace. Export je často koncentrovanější riziko než samotná aplikace, protože obsahuje hodně dat najednou a má málo přístupových pravidel.
+
+### FO.4 Architektura: pište adaptéry tam, kde odchod bolí
+
+Nemusíte obalovat každý balíček abstraktní vrstvou. To je cesta k internímu frameworku, který bude nenávidět i jeho autor. Ale u kritických externích služeb se vyplatí mít tenký adapter:
+
+```text
+Produktová akce: vytvořit zákazníkovi předplatné
+Interní rozhraní: createSubscription(customerId, planId)
+Provider A: billing API call + metadata mapping
+Fallback: ruční invoice flow / provider B mapping
+Data uložená u nás: customerId, providerCustomerId, providerSubscriptionId, stav, plán
+```
+
+Smysl adapteru není schovat realitu. Smysl je držet hranici: produkt nezná detaily provideru víc, než musí. Když billing provider používá vlastní názvy plánů, interní produkt by pořád měl pracovat s vaším modelem plánu. Když AI provider vrací specifické response metadata, ukládejte jen to, co potřebujete pro audit, ladění a zákaznickou hodnotu. Když analytika umí dvacet typů identifikátorů, neznamená to, že je máte používat všechny. Klid, sběratelství je hezký koníček, ale osobní data nejsou známky.
+
+Dobré kandidáty na adapter:
+
+- platby a fakturace,
+- identita a přihlášení,
+- e-mailové odesílání,
+- AI modely a embeddingy,
+- úložiště souborů,
+- analytika a event pipeline,
+- webhooks pro klíčové procesy.
+
+Špatní kandidáti: drobné knihovny bez dat, interní UI komponenty, pomocné build nástroje. Tam často stačí rozumná dokumentace a pravidelný upgrade.
+
+### FO.5 Smlouva a provoz: čtěte exit ještě před nákupem
+
+Před podpisem nebo zavedením nástroje si ověřte:
+
+- jak dlouho po ukončení účtu jsou data dostupná,
+- zda lze exportovat všechna zákaznická i provozní data,
+- jestli export obsahuje přílohy, historii, logy a metadata,
+- zda existuje API pro export ve větším objemu,
+- v jakém regionu se data zpracovávají a zálohují,
+- kdo jsou subprocesoři,
+- jak se oznamují změny podmínek nebo regionu,
+- jestli existují poplatky za odchod, egress nebo profesionální služby,
+- jak funguje smazání po ukončení smlouvy,
+- kdo vám pomůže při incidentu nebo sporu.
+
+Evropský Data Act je od 12. září 2025 použitelný a mimo jiné řeší možnost přechodu mezi poskytovateli cloudových a edge služeb. To neznamená, že každý praktický problém migrace magicky zmizel. Znamená to ale, že přenositelnost a změna poskytovatele už nejsou jen technická slušnost, ale důležitá část regulovaného evropského datového prostředí. U osobních údajů navíc GDPR obsahuje právo na přenositelnost údajů pro fyzické osoby v relevantních situacích. Produktový závěr je jednoduchý: navrhujte data tak, aby šla rozumně předat, nejen interně zobrazit.
+
+### FO.6 Exit runbook na jednu stránku
+
+Pro kritické nástroje mějte krátký runbook. Tohle je šablona:
+
+```text
+Nástroj: [název]
+Oblast: [billing / identity / analytics / support / AI / storage]
+Vlastník: [role nebo osoba]
+Kritičnost: [nízká / střední / vysoká]
+
+Spouštěče exitu:
+- cena přesáhne [hranice]
+- provider ztratí EU region / compliance požadavek
+- opakovaný výpadek nad [hranice]
+- zákaznický audit vyžaduje změnu
+- bezpečnostní incident
+
+Data k exportu:
+- [seznam entit]
+- [přílohy / logy / metadata]
+- [co se neexportuje a proč]
+
+Postup:
+1. zmrazit změny v dotčeném workflow
+2. vytvořit export a uložit do bezpečného úložiště
+3. ověřit počet záznamů a kontrolní vzorek
+4. provést import do cílového řešení nebo fallback procesu
+5. přepnout integraci
+6. ověřit hlavní uživatelské trasy
+7. informovat dotčené zákazníky, pokud se mění zpracování dat
+8. požádat o smazání dat u původního provideru podle smlouvy
+
+Rollback:
+- [kdy ještě lze vrátit provoz]
+- [kdo rozhoduje]
+- [jaká data vzniklá během migrace se musí sloučit]
+```
+
+Runbook nemusí být perfektní. Musí existovat dřív než ve chvíli, kdy někdo ve 22:40 píše „máme problém“. Dokument napsaný během požáru má obvykle kvalitu kouřového signálu.
+
+### FO.7 Checklist: vendor lock-in pod kontrolou
+
+- [ ] Máme inventář služeb, které drží data, identitu, peníze nebo hlavní workflow.
+- [ ] U každé kritické služby známe vlastníka a revizní rytmus.
+- [ ] Víme, jaká data lze exportovat, v jakém formátu a s jakými omezeními.
+- [ ] Exporty jsme u kritických služeb otestovali mimo původní nástroj.
+- [ ] Kritické integrace mají tenkou interní hranici nebo adapter.
+- [ ] Interní datový model není slepě opsaný podle jednoho provideru.
+- [ ] Máme zapsané spouštěče, kdy začíná příprava exitu.
+- [ ] Smlouvy a DPA řeší region, subprocesory, smazání a dostupnost dat po ukončení.
+- [ ] Exportní soubory mají bezpečné úložiště, expiraci a auditní stopu.
+- [ ] Zákaznická komunikace je připravená pro změny, které se dotknou zpracování dat.
+- [ ] U nového nástroje se ptáme na exit před nákupem, ne po migraci.
+- [ ] Jednou za kvartál odstraníme nebo zjednodušíme alespoň jednu zbytečnou závislost.
+
+### Mini cvičení: lock-in audit za 50 minut
+
+1. Vyberte pět nejdůležitějších externích služeb.
+2. U každé napište, co se rozbije při 24hodinovém výpadku.
+3. Najděte exportní dokumentaci a ověřte, zda zahrnuje přílohy a metadata.
+4. Stáhněte malý testovací export z jedné služby.
+5. Zkontrolujte, zda ho umíte přečíst bez původního nástroje.
+6. Označte jednu závislost, která potřebuje adapter, dokumentaci nebo náhradu.
+7. Zapište jeden konkrétní exit trigger.
+8. Vytvořte první verzi runbooku pro nejkritičtější službu.
+
+Výstupem není seznam důvodů, proč migrace nejde. Výstupem je první praktický krok, aby jednou jít mohla.
+
+### Codyho komentář
+
+Vendor lock-in není morální selhání. Někdy je to rozumná cena za rychlost. Problém začíná ve chvíli, kdy si tým plete rychlost s bezmocí. Moje pravidlo: klidně používejte dobré nástroje, ale nenechte je vlastnit vaše data, zákaznický vztah ani schopnost říct „děkujeme, jdeme dál“.
+
+### Zdroje k příloze FO
+
+- Evropská komise: Data Act — přehled regulace, použitelnost od 12. září 2025 a rámec pro přístup k datům i switching mezi data processing službami: https://digital-strategy.ec.europa.eu/en/policies/data-act
+- Evropská komise: Data Act explained — vysvětlení pravidel pro přístup k datům, cloud/edge switching a interoperabilitu: https://digital-strategy.ec.europa.eu/en/factpages/data-act-explained
+- EUR-Lex: Regulation (EU) 2023/2854, Data Act — oficiální text nařízení včetně kapitol o změně poskytovatele data processing služeb: https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32023R2854
+- Evropská komise: informace pro jednotlivce podle GDPR — přehled práv subjektu údajů včetně práva na přenositelnost: https://commission.europa.eu/law/law-topic/data-protection/information-individuals_en
+- European Data Protection Board: Guidelines on the right to data portability — výklad práva na přenositelnost podle GDPR: https://www.edpb.europa.eu/documents/guideline/right-to-data-portability_en
+
 ## Pracovní log
+
+- 2026-08-28: Přidána příloha FO „Exit plán bez vendor lock-in hrdinství“ s lock-in inventářem, obnovitelným exportem, adaptery pro kritické služby, smluvní exit kontrolou, runbook šablonou, checklistem, mini auditem a ověřenými EU/GDPR/Data Act zdroji.
 
 - 2026-08-28: Přidána příloha FN „Bezpečnostní hlavičky bez ops rituálu a rozbitého frontendu“ s mapou povolených zdrojů, baseline hlavičkami, privacy-first pravidly pro referrer a permissions, CSP registrem výjimek, rollout plánem, kartou hlaviček, checklistem, mini auditem a ověřenými OWASP/MDN/web.dev zdroji.
 
