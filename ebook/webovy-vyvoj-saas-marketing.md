@@ -32204,7 +32204,166 @@ Výstupem má být jednoduchá tabulka limitů a tři konkrétní změny. Ne „
 - RFC 9110 popisuje hlavičku `Retry-After` a její použití v HTTP odpovědích: https://www.rfc-editor.org/rfc/rfc9110.html#name-retry-after
 - EDPB Guidelines 1/2024 k oprávněnému zájmu podle čl. 6(1)(f) GDPR jako užitečný rámec pro bezpečnostní zpracování osobních údajů s testem nezbytnosti a vyvážení: https://www.edpb.europa.eu/system/files/2024-10/edpb_guidelines_202401_legitimateinterest_en.pdf
 
+## Příloha FL — Žádosti subjektů údajů bez supportového požáru
+
+Malý SaaS často řeší práva lidí až ve chvíli, kdy přijde první e-mail typu „pošlete mi všechna moje data“ nebo „smažte mě“. Pak začne interní archeologie: kdo má přístup do databáze, co je v zálohách, jestli máme export, zda uživatel patří do workspace, co říct zákazníkovi a jestli se do toho počítají i logy. Výsledek? Hodina právní paniky, tři Slack vlákna a jeden vývojář, který právě zjistil, že `deleted_at` není totéž co smazání. Kouzelné.
+
+Privacy-first přístup je jednodušší: žádosti subjektů údajů navrhujte jako běžný provozní proces. Ne jako mimořádnou událost, kterou umí vyřešit jen člověk s přístupem do produkční databáze a vysokou tolerancí k riziku. Cílem není dělat z každé žádosti právní festival, ale mít jasný, bezpečný a opakovatelný postup.
+
+Evropská komise shrnuje, že lidé mohou podle GDPR uplatnit práva jako přístup, opravu, výmaz, omezení zpracování, přenositelnost, námitku a práva související s automatizovaným rozhodováním. Pro firmy je důležitý hlavně provozní detail: odpovědět bez zbytečného odkladu a v principu do jednoho měsíce. To není deadline pro začátek hledání, ale pro odpověď. Au.
+
+### FL.1 Udělejte z práv produktové akce
+
+Největší chyba je schovat práva subjektů údajů do patičky privacy policy a doufat, že se nikdo nezeptá. Pokud produkt pracuje s osobními údaji, měl by umět alespoň čtyři akce bez ručního dolování:
+
+- **export:** uživatel nebo zákazník dostane strukturovaný přehled vlastních dat,
+- **oprava:** nepřesná data se dají změnit bez zásahu do historie, která má zůstat auditovatelná,
+- **omezení:** zpracování se dočasně zastaví nebo označí tam, kde je spor,
+- **výmaz:** data se smažou, anonymizují nebo odpojí podle právního důvodu a provozního kontextu.
+
+To neznamená, že všechno musí být samoobslužné od prvního dne. Znamená to, že tým ví, kde data jsou, kdo rozhoduje, co se smí udělat automaticky a co vyžaduje ruční kontrolu. U B2B SaaSu navíc často nejde jen o koncového uživatele, ale také o zákazníka jako organizaci. Proto rozlišujte:
+
+- osobní účet uživatele,
+- data ve workspace nebo tenantovi,
+- fakturační a smluvní data,
+- auditní logy a bezpečnostní záznamy,
+- support komunikaci,
+- marketingové kontakty a souhlasy.
+
+Příklad: když člen zákaznického workspace požádá o smazání, možná můžete smazat jeho profilovou fotku a kontaktní preference, ale nemůžete bez dalšího odstranit auditní záznamy, které dokládají akce v účtu firmy. Správná odpověď není „nejde“, ale „tuhle část smažeme, tuhle anonymizujeme, tuhle musíme po omezenou dobu ponechat kvůli oprávněnému účelu“. A hlavně to musíte umět vysvětlit lidsky.
+
+### FL.2 Identitu ověřujte přiměřeně, ne paranoidně
+
+Když někdo žádá o kopii dat nebo výmaz účtu, musíte vědět, že jedná oprávněná osoba. Zároveň nesmíte kvůli ověření identity sbírat absurdní množství dalších údajů. Posílat sken občanky kvůli exportu newsletterových preferencí? To je privacy-first asi jako zamčené dveře, které otevřete sběrem otisků všech sousedů.
+
+Praktické pravidlo:
+
+- u přihlášeného uživatele potvrďte akci v účtu nebo přes existující ověřený e-mail,
+- u administrátora workspace vyžadujte přihlášení a případně druhý potvrzovací krok,
+- u e-mailové žádosti porovnejte adresu s evidovaným kontaktem,
+- u citlivých dat nepoužívejte odpověď na stejný e-mail jako jediný důkaz identity,
+- pokud si nejste jistí, vyžádejte jen minimální doplňující informaci potřebnou k ověření.
+
+EDPB ve svých pokynech k právu na přístup zdůrazňuje praktickou implementaci práva na přístup a přiměřené zacházení s žádostmi. Pro malý tým z toho plyne jednoduchý návrhový princip: ověření identity má chránit člověka před únikem dat, ne vytvářet nový datový sklad dokladů.
+
+### FL.3 Export navrhujte jako produktovou funkci
+
+Export není „dump databáze pošleme v ZIPu“. Export má být srozumitelný, strukturovaný a bezpečný. Uživatel nechce číst interní ID sloupců, ale pochopit, jaká data o něm držíte a proč. Zákazník v B2B SaaSu zase může potřebovat export projektů, členů, faktur, nastavení a historie aktivit.
+
+Minimální exportní balíček:
+
+- `profile.json` — identifikační a kontaktní údaje,
+- `preferences.json` — jazyk, notifikace, souhlasy, marketingové volby,
+- `workspace-memberships.json` — členství a role v pracovních prostorech,
+- `content.json` nebo CSV — obsah vytvořený uživatelem,
+- `billing-summary.pdf` nebo CSV — jen pokud k němu má uživatel oprávnění,
+- `audit-summary.json` — srozumitelný přehled vlastních relevantních akcí, ne interní bezpečnostní log plný citlivých signálů.
+
+Privacy-first export má tři ochrany:
+
+1. generuje se jen po ověření oprávnění,
+2. má omezenou dostupnost v čase,
+3. nezahrnuje data jiných osob bez důvodu a kontroly.
+
+Pokud export obsahuje více lidí v jednom workspace, rozlišujte export „moje osobní data“ a export „data organizace“. To jsou dvě různé věci. Smíchat je dohromady je výborný způsob, jak z jednoduché žádosti udělat compliance escape room.
+
+### FL.4 Výmaz není jedno tlačítko `DELETE FROM users`
+
+Výmaz má být navržený podle kategorií dat a právních důvodů. Některá data smažete hned, některá anonymizujete, některá musíte ještě ponechat kvůli účetnictví, smlouvě, bezpečnosti nebo právním nárokům. Důležité je nemluvit o „smazání všeho“, pokud realita znamená „část smažeme, část minimalizujeme a část ponecháme po definovanou dobu“.
+
+Praktická mapa výmazu:
+
+- **profilová data:** obvykle smazat nebo anonymizovat,
+- **marketingové kontakty:** odhlásit, odstranit volitelné údaje a ponechat jen nezbytný suppression záznam, pokud je potřeba zabránit opětovnému oslovení,
+- **obsah vytvořený uživatelem:** smazat, převést vlastnictví nebo anonymizovat podle smlouvy a role,
+- **fakturační doklady:** ponechat podle zákonné povinnosti a omezit přístup,
+- **auditní logy:** minimalizovat, pseudonymizovat nebo ponechat po omezenou dobu podle bezpečnostního účelu,
+- **zálohy:** neprohledávat ručně každou pásku jako archeolog, ale mít politiku expirace a obnovy, která výmaz nezvrátí bez kontroly.
+
+Nejbezpečnější produktový pattern je stavový proces:
+
+```markdown
+Žádost přijata → identita ověřena → rozsah potvrzen → dopad zkontrolován → akce provedena → odpověď odeslána → retenční follow-up zapsán
+```
+
+Tím chráníte uživatele i tým. Nikdo nemusí improvizovat v produkci a nikdo nemusí předstírat, že ví, co přesně se stalo.
+
+### FL.5 Karta žádosti subjektu údajů
+
+```markdown
+# Karta žádosti subjektu údajů
+
+## Žádost
+- Datum přijetí:
+- Kanál:
+- Typ práva: přístup / oprava / výmaz / omezení / přenositelnost / námitka / jiné
+- Žadatel:
+- Týká se účtu / workspace / marketingu / fakturace / supportu:
+
+## Ověření
+- Jak byla ověřena identita:
+- Je žadatel oprávněn jednat za workspace nebo organizaci:
+- Potřebujeme doplňující informaci:
+
+## Rozsah dat
+- Systémy a databáze:
+- Dodavatelé nebo procesory:
+- Zálohy a logy:
+- Data dalších osob:
+
+## Rozhodnutí
+- Co provedeme:
+- Co neprovedeme a proč:
+- Právní nebo smluvní důvod ponechání dat:
+- Termín odpovědi:
+
+## Provedení
+- Vlastník:
+- Datum dokončení:
+- Důkaz provedení:
+- Odpověď odeslána:
+- Follow-up revize:
+```
+
+### FL.6 Checklist: DSAR bez požáru
+
+- [ ] Privacy policy říká jasně, kam může člověk žádost poslat.
+- [ ] Support ví, jak poznat žádost subjektu údajů i bez právních slovíček.
+- [ ] Existuje interní vlastník, který žádost převezme a hlídá lhůtu.
+- [ ] Ověření identity je přiměřené citlivosti dat.
+- [ ] Tým rozlišuje osobní data uživatele a data zákaznické organizace.
+- [ ] Export je strukturovaný, čitelný a časově omezeně dostupný.
+- [ ] Výmaz má pravidla pro profil, obsah, marketing, fakturaci, auditní logy a zálohy.
+- [ ] Odpověď vysvětluje, co bylo provedeno, co ponecháno a proč.
+- [ ] Žádost se loguje bez ukládání zbytečně citlivých údajů.
+- [ ] Proces se jednou kvartálně testuje na fiktivní žádosti.
+
+### Mini cvičení: první DSAR drill za 60 minut
+
+1. Vezměte fiktivní žádost: „Chci kopii všech dat a pak účet smazat.“
+2. Najděte všechna místa, kde o uživateli držíte data.
+3. Rozdělte je na profil, obsah, workspace, fakturaci, support, logy a marketing.
+4. Napište, jak ověříte identitu bez sběru nových zbytečných údajů.
+5. Navrhněte exportní balíček a určete, co nesmí obsahovat.
+6. Rozhodněte, co smažete, anonymizujete, ponecháte a kdy expiruje zbytek.
+7. Připravte krátkou odpověď uživateli v lidské češtině.
+
+Výstupem má být jedna karta žádosti a seznam tří produktových úprav. Typicky: přidat admin export, upravit mazání marketingových preferencí a dopsat interní support makro. Ne zakládat „GDPR transformační program“. Ten se malému SaaSu nevejde ani do kalendáře, ani do nervové soustavy.
+
+### Codyho komentář
+
+Práva subjektů údajů nejsou otrava z Bruselu. Jsou to uživatelská práva, která odhalují, jestli produkt opravdu ví, kde má data. Když neumíte člověku vysvětlit, co o něm držíte, problém není v člověku. Problém je v systému. A systém, který nerozumí vlastním datům, jednoho dne překvapí i vás. Spoiler: nebude to romantické překvapení.
+
+### Zdroje k příloze FL
+
+- Evropská komise: přehled práv jednotlivců podle GDPR, včetně přístupu, opravy, výmazu, omezení, přenositelnosti a námitky: https://commission.europa.eu/law/law-topic/data-protection/information-individuals_en
+- Evropská komise: doporučení pro organizace, jak vyřizovat žádosti jednotlivců, včetně principu odpovědi bez zbytečného odkladu a zpravidla do jednoho měsíce: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/dealing-requests-individuals_en
+- EDPB: Guidelines 01/2022 on data subject rights — Right of access, finální verze k praktické implementaci práva na přístup: https://www.edpb.europa.eu/documents/guideline/guidelines-012022-on-data-subject-rights-right-of-access_ga
+- GDPR, kapitola III — práva subjektu údajů v článcích 12 až 23: https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=CELEX%3A32016R0679
+
 ## Pracovní log
+
+- 2026-08-28: Přidána příloha FL „Žádosti subjektů údajů bez supportového požáru“ s DSAR procesem pro přístup, export, opravu a výmaz, přiměřeným ověřením identity, exportním balíčkem, mapou výmazu, kartou žádosti, checklistem, drill cvičením a ověřenými EU/EDPB/GDPR zdroji.
 
 - 2026-08-28: Přidána příloha FK „Rate limiting a ochrana proti zneužití bez fingerprintingu“ s mapou chráněných zdrojů, vrstvenými limity, privacy-first pravidly bez fingerprintingu, návrhem odpovědi `429`, kartou ochrany endpointu, checklistem, abuse review cvičením a ověřenými OWASP/RFC/EDPB zdroji.
 
