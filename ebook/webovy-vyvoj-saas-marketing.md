@@ -32361,7 +32361,169 @@ Práva subjektů údajů nejsou otrava z Bruselu. Jsou to uživatelská práva, 
 - EDPB: Guidelines 01/2022 on data subject rights — Right of access, finální verze k praktické implementaci práva na přístup: https://www.edpb.europa.eu/documents/guideline/guidelines-012022-on-data-subject-rights-right-of-access_ga
 - GDPR, kapitola III — práva subjektu údajů v článcích 12 až 23: https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=CELEX%3A32016R0679
 
+
+## Příloha FM — Registr subprocesorů bez compliance schovávané za odkaz
+
+Malý SaaS často začne nevinně: hosting, databáze, e-mailing, support chat, analytika, platební brána, error tracking, AI API, formulářový nástroj. Každá služba „jen pomáhá“. Jenže jakmile zpracovává osobní údaje vašich zákazníků vaším jménem, není to jen nástroj v záložkách. Je to článek v řetězci zpracování dat. A řetěz, který nikdo nemá zmapovaný, se při prvním enterprise dotazníku změní v archeologickou expedici s lehkou příchutí paniky.
+
+Registr subprocesorů nemá být právnický plakát na webu. Má být provozní seznam: kdo se dat dotýká, proč, kde, jak dlouho, podle jaké smlouvy a jak zákazníkům oznámíte změnu. Když ho vedete dobře, pomůže obchodníkům odpovídat na bezpečnostní dotazy, vývojářům nepřidávat nástroje naslepo a zákazníkům ukazuje, že privacy-first není jen hezká věta u patičky.
+
+### FM.1 Nejdřív rozlišujte role, ne loga dodavatelů
+
+Ne každý nástroj je subprocesor. Některý dodavatel je samostatný správce, některý zpracovatel, některý jen technická infrastruktura bez přístupu k osobním údajům a některý se tváří jako nevinný widget, ale ve skutečnosti posílá data přes půl internetu. Ano, marketingové skripty, koukám na vás.
+
+Praktické rozdělení:
+
+- **Zpracovatel:** služba zpracovává osobní údaje podle vašich pokynů, typicky hosting, databáze, e-mailová rozesílka, helpdesk nebo monitoring.
+- **Subprocesor:** dodavatel vašeho zpracovatele, který pomáhá zpracování pro vaše zákazníky. Pokud vy jste procesor vůči klientovi, vaši další dodavatelé jsou pro klienta subprocesoři.
+- **Samostatný správce:** služba určuje vlastní účely zpracování, typicky některé platební, reklamní nebo identitní služby podle konkrétního nastavení.
+- **Bez osobních údajů:** nástroj nemá přístup k osobním datům ani metadatům, která by šla přiřadit člověku. Pozor: tohle si ověřte, nepřejte si to.
+
+Cílem není nalepit všem stejný štítek. Cílem je umět vysvětlit, proč daný štítek dává smysl. EDPB ve svých pokynech ke konceptům správce a zpracovatele zdůrazňuje, že rozhodují faktické účely a prostředky zpracování, ne název smlouvy nebo marketingový text dodavatele: https://www.edpb.europa.eu/documents/guideline/guidelines-072020-on-the-concepts-of-controller-and-processor-in-the-gdpr_en
+
+### FM.2 Registr má být krátký, ale nepříjemně konkrétní
+
+Veřejný registr subprocesorů nemusí ukazovat interní architekturu do posledního log streamu. Musí ale zákazníkovi dát dost informací, aby věděl, komu se data mohou dostat, za jakým účelem a v jakém regionu. Interní registr může být detailnější; veřejná verze má být čitelná, stabilní a aktualizovaná.
+
+Minimální pole registru:
+
+- **Název dodavatele:** právní nebo běžně rozpoznatelný název služby.
+- **Účel:** hosting, doručování e-mailů, platby, support, monitoring, analytika, AI zpracování, zálohy.
+- **Kategorie dat:** účetní údaje, kontakty, obsah workspace, technické logy, fakturační údaje, support zprávy.
+- **Místo zpracování:** EHP, konkrétní země, případně přenos mimo EHP.
+- **Právní a smluvní základ:** DPA, standardní smluvní doložky, interní posouzení přenosu, bezpečnostní dokumentace.
+- **Dopad:** nízký, střední, vysoký podle citlivosti dat a možnosti ovlivnit zákazníka.
+- **Datum poslední kontroly:** kdy někdo ověřil, že záznam pořád odpovídá realitě.
+
+Evropská komise popisuje, že vztah správce a zpracovatele má být upraven smlouvou nebo jiným právním aktem a že zpracovatel musí mimo jiné pomáhat s bezpečností, důvěrností a právy jednotlivců: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/obligations/controllerprocessor/can-someone-else-process-data-my-organisations-behalf_en
+
+### FM.3 Schvalování změn nesmí být tajný release notes odstavec
+
+Článek 28 GDPR počítá s tím, že zpracovatel nemá zapojit dalšího zpracovatele bez předchozího konkrétního nebo obecného písemného povolení správce. U obecného povolení má správce dostat informaci o plánovaných změnách tak, aby měl možnost vznést námitku. Prakticky: pokud vašim B2B zákazníkům slibujete seznam subprocesorů, změna v něm není drobný detail. Je to provozní změna s komunikačním dopadem.
+
+Rozumný proces pro malý SaaS:
+
+1. Nový nástroj nejdřív vyplní interní vendor kartu.
+2. Technický vlastník popíše datový tok a minimalizaci dat.
+3. Provoz nebo privacy vlastník ověří DPA, regiony, přenosy a retenční pravidla.
+4. Pokud jde o zákaznická data, aktualizuje se interní registr.
+5. Pokud je nástroj subprocesor, připraví se veřejná změna a oznámení zákazníkům podle smluvních podmínek.
+6. Změna se pustí až po uplynutí oznámené lhůty nebo po vyřešení námitek, pokud vaše smlouvy takový režim mají.
+
+Codyho praktické pravidlo: u nástrojů s nízkým dopadem stačí jednoduché interní schválení a měsíční publikace změn. U nástrojů s přístupem k obsahu zákazníků, support zprávám, identitě, platebním datům nebo AI zpracování dejte změnu do samostatného review. Když dodavatel může pokazit důvěru zákazníka, nepatří do „jen jsem přidal balíček“ kategorie.
+
+### FM.4 Veřejná stránka má být čitelná pro zákazníka
+
+Veřejný registr pište tak, aby mu rozuměl security člověk u zákazníka, právník i founder, který řeší nákup ve čtvrtek večer po třetí kávě. Nepište jen tabulku plnou názvů firem bez kontextu. Přidejte vysvětlení, jak změny oznamujete, jak se zákazník může ptát a kde najde navazující DPA nebo bezpečnostní informace.
+
+Dobrý veřejný blok:
+
+```markdown
+## Subprocesoři
+
+Níže uvádíme služby, které mohou zpracovávat osobní údaje zákazníků naším jménem. Používáme je pouze pro uvedené účely a pravidelně kontrolujeme, zda odpovídají našim privacy-first požadavkům.
+
+| Dodavatel | Účel | Kategorie dat | Region | Poznámka |
+|---|---|---|---|---|
+| [název] | Hosting aplikace | Účet, obsah workspace, technické logy | EHP | Primární infrastruktura |
+| [název] | Transakční e-maily | E-mail, jméno, systémové zprávy | EHP | Bez marketingového trackingu |
+| [název] | Error monitoring | Technické chyby, omezené logy | EHP / mimo EHP podle plánu | PII se filtruje před odesláním |
+
+O plánovaných změnách subprocesorů informujeme zákazníky předem podle smluvních podmínek. Dotazy posílejte na [privacy kontakt].
+```
+
+Nejlepší registr je ten, kde se nemusíte stydět za sloupec „účel“. Pokud tam máte „growth optimization intelligence platform“, přepište to lidsky. A potom se zeptejte, jestli ten nástroj opravdu potřebujete.
+
+### FM.5 Interní kontrola přenosů mimo EHP
+
+Privacy-first evropský provoz neznamená, že nikdy nesmíte použít službu mimo EHP. Znamená to, že z toho neděláte default, tajemství ani pohodlnou zkratku. Pokud data míří mimo EHP, registr má ukázat minimálně důvod, typ dat, smluvní mechanismus, bezpečnostní opatření a alternativy.
+
+Interní otázky před schválením:
+
+- Jde službu provozovat v EHP nebo nahradit evropskou alternativou?
+- Posíláme jen nezbytná data, nebo celý payload „protože se to hodí“?
+- Je přenos jednorázový, provozní, podpůrný, nebo trvalá součást produktu?
+- Máme DPA a případné standardní smluvní doložky?
+- Umíme data filtrovat, pseudonymizovat nebo držet v regionu?
+- Co řekneme zákazníkovi, když se na přenos zeptá v bezpečnostním dotazníku?
+
+Evropská komise má samostatné standardní smluvní doložky pro vztahy správce–zpracovatel v EU/EHP i doložky pro přenosy mimo EHP; pro malé týmy je to dobrý výchozí bod pro kontrolu smluvní vrstvy: https://commission.europa.eu/publications/standard-contractual-clauses-controllers-and-processors-eueea_en a https://commission.europa.eu/law/law-topic/data-protection/international-dimension-data-protection/new-standard-contractual-clauses-questions-and-answers-overview_en
+
+### FM.6 Šablona vendor záznamu
+
+```markdown
+## Vendor / subprocesor: [název]
+
+### Základ
+- Vlastník v týmu:
+- Účel použití:
+- Typ role: zpracovatel / subprocesor / samostatný správce / bez osobních údajů
+- Kritičnost pro produkt: nízká / střední / vysoká
+
+### Data
+- Kategorie osobních údajů:
+- Kategorie subjektů údajů:
+- Datový tok:
+- Minimalizace před odesláním:
+- Retence u vendora:
+
+### Provoz a smlouvy
+- Region zpracování:
+- Přenos mimo EHP: ano / ne / nejasné
+- DPA: ano / ne / odkaz
+- SCC nebo jiný mechanismus přenosu:
+- Bezpečnostní dokumentace:
+- Datum poslední kontroly:
+
+### Změny
+- Patří do veřejného registru: ano / ne / proč
+- Vyžaduje oznámení zákazníkům: ano / ne
+- Lhůta pro oznámení:
+- Exit plán:
+```
+
+Tuhle kartu vyplňte dřív, než nástroj dostane produkční klíč. Ne po třech měsících, kdy už běží v pěti workflow, dvou cron jobech a jednom „dočasném“ skriptu. Dočasné skripty jsou jako domácí sušenky: mizí rychle, následky zůstávají.
+
+### FM.7 Checklist: subprocesoři bez schovávané compliance
+
+- [ ] Máme interní registr všech nástrojů, které se mohou dotknout osobních údajů.
+- [ ] U každého záznamu víme, jestli jde o zpracovatele, subprocesora, správce nebo nástroj bez osobních údajů.
+- [ ] Veřejný registr obsahuje účel, kategorie dat a region zpracování v lidské řeči.
+- [ ] Nový vendor se neschvaluje bez datového toku, DPA kontroly a vlastníka.
+- [ ] Změny subprocesorů oznamujeme podle smlouvy a s možností dotazů nebo námitek.
+- [ ] Přenosy mimo EHP mají samostatné posouzení, ne jen „mají pěkný dashboard“.
+- [ ] Error tracking, analytika, AI služby a support nástroje filtrují zbytečná osobní data.
+- [ ] Registr kontrolujeme alespoň kvartálně a po každé větší změně architektury.
+- [ ] Exit plán existuje pro všechny vendory s vysokým dopadem.
+- [ ] Obchod, support i vývoj vědí, kde najdou aktuální odpověď pro zákazníka.
+
+### Mini cvičení: subprocessor audit za 55 minut
+
+1. Vezměte seznam produkčních služeb z infrastruktury, billing účtů, repozitáře a marketingových nástrojů.
+2. Označte, které služby mohou vidět osobní údaje nebo identifikovatelná metadata.
+3. U každé napište účel jednou větou bez buzzwordů.
+4. Rozdělte služby podle dopadu: nízký, střední, vysoký.
+5. Najděte tři služby, u kterých nevíte region, DPA nebo retenční pravidla.
+6. Vyberte jednu službu s nejvyšším rizikem a vyplňte vendor kartu.
+7. Připravte návrh veřejného řádku do registru subprocesorů.
+
+Výstupem není dokonalý compliance portál. Výstupem je první pravdivý seznam a tři úkoly: doplnit smlouvu, omezit data, nebo nástroj nahradit. To je mimochodem mnohem užitečnější než další tabulka s názvem „Vendor Review Final Really Final“.
+
+### Codyho komentář
+
+Registr subprocesorů je test dospělosti produktu. Ne proto, že by tabulka sama chránila soukromí. Ale protože nutí tým přiznat, kolik cizích služeb drží jeho produkt pohromadě. Když to víte, můžete řídit riziko. Když to nevíte, řídíte jen naději. A naděje bohužel nemá SLA.
+
+### Zdroje k příloze FM
+
+- GDPR, článek 28 — pravidla pro zpracovatele, další zpracovatele, smlouvy a odpovědnost: https://eur-lex.europa.eu/eli/reg/2016/679/art_28/oj/eng
+- EDPB: Guidelines 07/2020 on the concepts of controller and processor in the GDPR: https://www.edpb.europa.eu/documents/guideline/guidelines-072020-on-the-concepts-of-controller-and-processor-in-the-gdpr_en
+- Evropská komise: přehled vztahu správce a zpracovatele a povinností při zpracování jménem organizace: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/obligations/controllerprocessor/can-someone-else-process-data-my-organisations-behalf_en
+- Evropská komise: standardní smluvní doložky pro správce a zpracovatele v EU/EHP: https://commission.europa.eu/publications/standard-contractual-clauses-controllers-and-processors-eueea_en
+- Evropská komise: otázky a odpovědi ke standardním smluvním doložkám, včetně přenosů mimo EHP: https://commission.europa.eu/law/law-topic/data-protection/international-dimension-data-protection/new-standard-contractual-clauses-questions-and-answers-overview_en
+
 ## Pracovní log
+
+- 2026-08-28: Přidána příloha FM „Registr subprocesorů bez compliance schovávané za odkaz“ s rozlišením rolí dodavatelů, minimálním veřejným i interním registrem, procesem oznamování změn, kontrolou přenosů mimo EHP, vendor kartou, checklistem, hodinovým auditem a ověřenými EU/EDPB/GDPR zdroji.
 
 - 2026-08-28: Přidána příloha FL „Žádosti subjektů údajů bez supportového požáru“ s DSAR procesem pro přístup, export, opravu a výmaz, přiměřeným ověřením identity, exportním balíčkem, mapou výmazu, kartou žádosti, checklistem, drill cvičením a ověřenými EU/EDPB/GDPR zdroji.
 
