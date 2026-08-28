@@ -31811,7 +31811,219 @@ Výstupem není dokonalý dokument. Výstupem je lepší rozhodnutí před tím,
 - CNIL: praktické materiály k PIA/DPIA a řízení privacy rizik: https://www.cnil.fr/en/privacy-impact-assessment-pia
 
 
+
+## Příloha FJ — AI asistenti v produktu bez datového vysavače
+
+AI asistent v SaaSu může být skvělý sluha: vysvětlí další krok, navrhne text, najde dokumentaci, zkrátí support a pomůže zákazníkovi dokončit práci. Může být ale také dokonale elegantní datový vysavač, který posílá osobní údaje, interní poznámky a obchodní tajemství do míst, o kterých tým vlastně nic neví. A pak se všichni tváří překvapeně. Klasika: chatbot s kravatou, governance v pyžamu.
+
+Privacy-first AI funkce nezačíná promptem. Začíná rozhodnutím, co asistent smí vědět, co smí dělat, komu odpovídá a jak se dá jeho vliv zastavit. Model není produktová strategie. Je to komponenta s riziky, cenou, provozem, logy, smlouvou a chováním, které musíte průběžně kontrolovat.
+
+### FJ.1 Nejdřív pojmenujte úlohu asistenta
+
+Neimplementujte „AI do produktu“. To je stejně přesné jako „dejme tam internet“. Popište konkrétní úlohu, kterou má asistent řešit.
+
+Dobré formulace:
+
+- „Navrhne první verzi odpovědi na support ticket podle interní znalostní báze.“
+- „Shrne dlouhý projektový zápis do tří rozhodnutí a otevřených úkolů.“
+- „Pomůže uživateli nastavit účet podle veřejné dokumentace a jeho vlastních nastavení.“
+- „Zkontroluje, jestli landing page obsahuje jasnou nabídku, důkaz hodnoty a privacy-first formulář.“
+
+Špatné formulace:
+
+- „AI zlepší onboarding.“
+- „AI bude odpovídat zákazníkům.“
+- „AI nahradí support.“
+- „AI bude mít přístup ke všemu, ať je chytrá.“
+
+U každé AI funkce napište jednu větu: **Asistent pomáhá uživateli udělat [konkrétní úkol] pomocí [konkrétní data/zdroje] a nikdy sám neprovádí [citlivá akce].**
+
+Příklad:
+
+```markdown
+Asistent pomáhá zákazníkovi připravit návrh odpovědi na poptávku pomocí textu poptávky, veřejného popisu služeb a schválených šablon; nikdy sám neposílá e-mail, nemění CRM stav a nezobrazuje finanční údaje bez explicitního oprávnění uživatele.
+```
+
+### FJ.2 Data rozdělte podle citlivosti, ne podle pohodlí vývoje
+
+Nejhorší architektura je jedna velká funkce `askAi(anything)`, která bere libovolný text, metadata, historii účtu, interní poznámky a možná ještě tajný token, protože „se to hodilo pro debug“. Gratuluji, právě jste postavili datový mlýnek.
+
+Rozdělte vstupy minimálně do čtyř tříd:
+
+1. **Veřejná data:** dokumentace, veřejné stránky, ceník, help centrum, release notes.
+2. **Uživatelská pracovní data:** text, který uživatel právě upravuje, vybraný ticket, jedna konkrétní zakázka.
+3. **Citlivá provozní data:** interní poznámky, fakturace, audit log, bezpečnostní události, přístupová historie.
+4. **Zakázaná data:** hesla, API klíče, recovery kódy, celé databázové exporty, produkční logy bez redakce, data jiných zákazníků mimo aktuální oprávnění.
+
+Privacy-first default: asistent dostane jen data nezbytná pro daný úkol a jen na dobu vyřízení požadavku. Pokud potřebuje víc, produkt má uživateli vysvětlit proč. Ne skrytě rozšířit kontext, protože „větší prompt = víc magie“. Větší prompt často znamená jen větší účet a větší průšvih.
+
+### FJ.3 RAG není výmluva pro chaos v dokumentaci
+
+Retrieval augmented generation zní hezky. V praxi často znamená: vezmeme rozházenou dokumentaci, interní poznámky, staré PDF a doufáme, že model vyrobí pravdu. Nevyrobí. Vyrobí sebevědomý koktejl z toho, co jste mu dali.
+
+Než připojíte vyhledávání nad dokumenty, udělejte malý obsahový audit:
+
+- Které dokumenty jsou schválené jako zdroj pravdy?
+- Které dokumenty jsou historické, interní nebo jen pracovní poznámky?
+- Kdo může dokumenty aktualizovat?
+- Jak poznáme zastaralý obsah?
+- Jak asistent v odpovědi ukáže zdroj nebo alespoň název dokumentu?
+- Co udělá, když nemá dostatek informací?
+
+Praktické pravidlo: asistent má raději říct „nevím, tady je nejbližší relevantní zdroj“ než vymýšlet. V produktovém UX to napište normálně lidsky:
+
+```text
+Nemám dost podkladů pro jistou odpověď. Našel jsem ale tyto zdroje: [dokument A], [dokument B]. Chcete z nich připravit návrh odpovědi, nebo požádat tým o doplnění?
+```
+
+### FJ.4 Tool access navrhujte jako oprávnění, ne jako dobrodružství
+
+Jakmile AI asistent volá nástroje, API nebo interní funkce, už to není jen generátor textu. Je to uživatel s rukama. A uživatel s rukama potřebuje oprávnění, limity a auditní stopu.
+
+Rozdělte nástroje podle rizika:
+
+- **Read-only:** vyhledání dokumentace, načtení veřejného článku, přečtení vlastního nastavení účtu.
+- **Draft-only:** vytvoření návrhu e-mailu, návrhu úkolu, návrhu odpovědi, návrhu SQL dotazu bez spuštění.
+- **User-confirmed write:** vytvoření ticketu, odeslání e-mailu, změna stavu zakázky po potvrzení.
+- **Forbidden:** mazání účtů, změny plateb, přístupy k tajným hodnotám, hromadné exporty, změny oprávnění bez samostatného bezpečnostního toku.
+
+U každého nástroje si napište:
+
+- kdo ho smí použít,
+- jaká data přijímá,
+- jaký je maximální rozsah akce,
+- jestli je potřeba potvrzení člověkem,
+- co se loguje,
+- jak se akce vrací zpět,
+- kdy se nástroj vypne.
+
+OWASP Top 10 pro LLM aplikace opakovaně upozorňuje na rizika kolem prompt injection, úniku citlivých informací, nejistého zacházení s výstupem a příliš široké agentní pravomoci. Překlad do řeči malého SaaSu: modelu nevěřte víc než neznámému uživatelskému vstupu. Jen má lepší slovník.
+
+### FJ.5 AI Act a GDPR berte jako návrhový vstup, ne dodatečnou brzdu
+
+V Evropě nestačí říct „to řeší dodavatel modelu“. AI Act rozlišuje role v AI ekosystému a Evropská komise průběžně publikuje pokyny pro poskytovatele general-purpose AI modelů. GDPR pořád platí tam, kde pracujete s osobními údaji; EDPB k AI a osobním údajům zdůrazňuje odpovědnost správce, právní základ, transparentnost, minimalizaci a technická a organizační opatření.
+
+Pro malý SaaS je praktický postup jednoduchý:
+
+- určete, jestli jste jen uživatel hotového modelu, integrátor AI funkce do produktu, nebo poskytovatel vlastního AI systému,
+- popište účel zpracování a právní základ pro osobní údaje,
+- minimalizujte vstupy posílané modelu,
+- informujte uživatele, kdy komunikuje s AI nebo kdy AI ovlivňuje výstup,
+- držte člověka v rozhodnutí u citlivých dopadů,
+- mějte možnost AI funkci vypnout nebo obejít,
+- dokumentujte testy, známá omezení a změny chování.
+
+Codyho komentář: compliance není nálepka na konci release. Je to design constraint. Stejně jako rozpočet, výkon nebo to, že produkční databázi nemažeme v pátek večer. Tedy ideálně nikdy, ale známe lidi.
+
+### FJ.6 Logování AI požadavků držte užitečné a střídmé
+
+AI logy jsou lákavé. Obsahují otázky, odpovědi, často i kontext, metadata a chyby. Přesně proto jsou citlivé. Nechte si to, co potřebujete pro bezpečnost, kvalitu a reklamaci výstupu; zbytek neukládejte.
+
+Doporučené minimum:
+
+- ID požadavku,
+- čas,
+- typ úlohy,
+- použitý model nebo služba,
+- verze prompt šablony,
+- délka vstupu a výstupu,
+- použité zdroje nebo dokumenty,
+- stav bezpečnostních filtrů,
+- výsledek: úspěch, odmítnutí, chyba,
+- uživatel nebo účet jen tam, kde je to opravdu nutné.
+
+Co raději neukládat jako výchozí stav:
+
+- celé prompty s osobními údaji,
+- celé odpovědi obsahující zákaznická data,
+- tajné hodnoty,
+- interní poznámky supportu,
+- dlouhodobou konverzační historii bez jasného účelu.
+
+Pokud potřebujete vzorky pro zlepšování kvality, udělejte review režim: krátká retence, redakce citlivých dat, jasné oprávnění, audit přístupu a možnost vypnutí. Netrénujte interní pohodlí na cizím soukromí. Je to špatný obchod i špatná vizitka.
+
+### FJ.7 Šablona AI feature karty
+
+```markdown
+# AI feature karta
+
+## Účel
+- Jaký konkrétní úkol asistent řeší:
+- Kdo je uživatel:
+- Jak poznáme úspěch:
+
+## Data
+- Veřejné zdroje:
+- Uživatelská pracovní data:
+- Citlivá data zakázaná pro prompt:
+- Retence vstupů/výstupů:
+
+## Model a provoz
+- Dodavatel nebo vlastní model:
+- Region/provozní poznámka:
+- Smluvní a bezpečnostní kontrola:
+- Fallback bez AI:
+
+## Nástroje
+- Read-only nástroje:
+- Draft-only nástroje:
+- Akce vyžadující potvrzení:
+- Zakázané akce:
+
+## UX a transparentnost
+- Jak uživatel pozná AI výstup:
+- Jak uvidí zdroje nebo omezení:
+- Jak výstup upraví, odmítne nebo nahlásí:
+
+## Kontrola
+- Testovací scénáře:
+- Prompt injection test:
+- Privacy review:
+- Vlastník:
+- Datum další revize:
+```
+
+### FJ.8 Checklist: AI asistent bez datového vysavače
+
+- [ ] AI funkce má jednu jasnou úlohu, ne obecné „zlepšení produktu“.
+- [ ] Vstupní data jsou rozdělena podle citlivosti.
+- [ ] Zakázaná data se do promptu nedostanou ani omylem přes debug nebo logy.
+- [ ] RAG používá schválené zdroje pravdy a ukazuje zdroje odpovědi.
+- [ ] Asistent umí říct, že neví.
+- [ ] Tool access je rozdělený na read-only, draft-only, potvrzené akce a zakázané akce.
+- [ ] Citlivé akce vyžadují potvrzení člověkem a mají auditní stopu.
+- [ ] AI logy mají krátkou retenci a neukládají celé citlivé konverzace jako výchozí stav.
+- [ ] Uživatel pozná, kdy čte AI výstup a jak ho může opravit nebo odmítnout.
+- [ ] Existuje fallback cesta bez AI.
+- [ ] Dodavatel modelu má zkontrolovaný datový režim, region, smlouvu a subprocesory.
+- [ ] Tým má naplánované pravidelné testy prompt injection, úniku dat a nepřiměřené agentní pravomoci.
+
+### Mini cvičení: AI feature review za 60 minut
+
+1. Vyberte jednu existující nebo plánovanou AI funkci.
+2. Napište jednu větu účelu podle FJ.1.
+3. Vypište všechna data, která funkce dnes posílá nebo by mohla posílat modelu.
+4. Označte červeně vše, co je citlivé, tajné, zbytečné nebo patří jinému zákazníkovi.
+5. Rozdělte nástroje asistenta podle rizika.
+6. Přidejte jednu situaci, kdy má asistent odmítnout odpověď.
+7. Zkontrolujte, co se loguje a jak dlouho.
+8. Doplňte fallback bez AI.
+9. Zapište tři úpravy do backlogu: jednu datovou, jednu UX a jednu bezpečnostní.
+
+Výstupem není „AI strategie“. Výstupem je konkrétní rozhodnutí, které zabrání tomu, aby z dobrého nápadu vznikl supportní chatbot s přístupem k půlce firmy. Což je mimochodem přesně ten typ dobrodružství, který vypadá inovativně jen do prvního incidentu.
+
+### Zdroje k příloze FJ
+
+- European Commission: AI Act a jeho rizikový rámec, povinnosti pro vývojáře a nasazovatele AI systémů — https://commission.europa.eu/news-and-media/news/ai-act-enters-force-2024-08-01_en
+- European Commission: pokyny a FAQ k povinnostem poskytovatelů general-purpose AI modelů — https://digital-strategy.ec.europa.eu/en/policies/guidelines-gpai-providers a https://digital-strategy.ec.europa.eu/en/faqs/guidelines-obligations-general-purpose-ai-providers
+- EDPB: tematická stránka k umělé inteligenci a ochraně osobních údajů — https://www.edpb.europa.eu/topics/ai-and-technology/artificial-intelligence_en
+- EDPB: zpráva ChatGPT Taskforce s důrazem na odpovědnost správců podle GDPR při zpracování osobních údajů v kontextu LLM — https://www.edpb.europa.eu/system/files/2024-05/edpb_20240523_report_chatgpt_taskforce_en.pdf
+- OWASP: Top 10 for LLM Applications jako praktický bezpečnostní rámec pro LLM aplikace — https://owasp.org/www-project-top-10-for-large-language-model-applications/
+- ENISA: Artificial Intelligence Cybersecurity Challenges jako evropský pohled na bezpečnostní rizika AI systémů — https://www.enisa.europa.eu/sites/default/files/publications/ENISA%20Report%20-%20Artificial%20Intelligence%20Cybersecurity%20Challenges.pdf
+
 ## Pracovní log
+
+- 2026-08-28: Přidána příloha FJ „AI asistenti v produktu bez datového vysavače“ s vymezením úlohy asistenta, tříděním dat podle citlivosti, RAG pravidly, tool access modelem, AI Act/GDPR kontrolou, logováním, AI feature kartou, checklistem, mini cvičením a ověřenými zdroji.
 
 - 2026-08-28: Přidána příloha FI „Lehké DPIA pro malé SaaS bez právního mramoru“ s rozhodovacím testem, mapou toku dat, rizikovou maticí, akceptačními kritérii, šablonou karty, checklistem a ověřenými zdroji.
 
