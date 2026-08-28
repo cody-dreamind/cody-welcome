@@ -33121,7 +33121,193 @@ AI transparentnost není brzda. Je to produktový design pro situace, kde uživa
 - Evropská komise: Code of Practice on marking and labelling AI-generated content — praktický dobrovolný kodex k transparentnostním povinnostem: https://digital-strategy.ec.europa.eu/en/news/commission-publishes-code-practice-marking-and-labelling-ai-generated-content
 - European Data Protection Board: Opinion 28/2024 on AI models — stanovisko k anonymitě modelů, oprávněnému zájmu a GDPR rolím při vývoji a nasazení AI: https://www.edpb.europa.eu/system/files/2024-12/edpb_opinion_202428_ai-models_en.pdf
 
+## Příloha FQ — Staging a testovací data bez produkčního bahna
+
+Staging není druhá produkce, kde si tým může beztrestně hrát s reálnými zákazníky. A testovací data nejsou anonymní jen proto, že je někdo pojmenoval `demo`. Pokud malý SaaS kopíruje produkční databázi do vývojového prostředí, posílá ji do externího bug trackeru, nechá ji v logu CI a pak tomu říká „rychlost“, ve skutečnosti si vyrábí bezpečnostní escape room. Gratuluji, vstupné platí zákazníci.
+
+Cílem stagingu je ověřit změnu před produkcí na prostředí, které se chová dost podobně, ale nenese zbytečný dopad na skutečné lidi. Privacy-first staging má tři vlastnosti: je oddělený, má řízená data a dá se smazat bez porady krizového štábu.
+
+### FQ.1 Nejdřív pojmenujte účel prostředí
+
+Malé týmy často používají slova `dev`, `test`, `staging`, `preview` a `prod` jako náladové dekorace. Jenže každé prostředí má jiný účel, jinou úroveň dat a jiné riziko.
+
+Praktické rozdělení:
+
+| Prostředí | Účel | Data | Přístup | Životnost |
+|---|---|---|---|---|
+| Lokální vývoj | rychlá práce vývojáře | syntetická nebo anonymizovaná | konkrétní vývojář | krátká, obnovitelná |
+| Preview pro pull request | kontrola jedné změny | fixture data bez osobních údajů | tým + recenzenti | do sloučení nebo zavření PR |
+| Test / QA | regresní scénáře | řízené testovací datasety | tým podle role | obnovované ze seedu |
+| Staging | ověření release kandidáta | produkčně podobná struktura, ne produkční identita | omezený tým | trvalé, ale čistitelné |
+| Produkce | skutečná služba | reálná zákaznická data | nejmenší nutný okruh lidí | podle retenčního plánu |
+
+Jednoduché pravidlo: čím méně stabilní prostředí, tím méně citlivá data. Preview pro jednu větev nemá mít přístup k plné databázi zákazníků. Pokud to bez ní nejde, problém není preview. Problém je architektura testování.
+
+### FQ.2 Produkční data kopírujte jen jako výjimku
+
+Nejbezpečnější produkční data ve stagingu jsou ta, která se tam nikdy nedostanou. Ano, zní to banálně. Přesto přesně tady vzniká spousta průšvihů, protože „potřebujeme reprodukovat bug“ se snadno změní na „udělali jsme dump všeho“.
+
+Než někdo sáhne po produkční databázi, musí projít čtyři otázky:
+
+1. **Co přesně potřebujeme ověřit?** Konkrétní bug, migraci, výkon dotazu, nebo jen pocit jistoty?
+2. **Stačí syntetická data?** Umíme bug vyvolat fixture datasetem nebo seedem?
+3. **Stačí výřez bez identity?** Potřebujeme strukturu a objemy, ne jména, e-maily, zprávy a fakturační údaje?
+4. **Kdo schválí výjimku?** Produkční export mimo produkci má mít vlastníka, časové omezení a mazací krok.
+
+Doporučený default:
+
+- pro UI a onboarding používejte syntetické persony,
+- pro migrace používejte anonymizované schéma a realistické objemy,
+- pro support bugy vytvářejte minimální reprodukční dataset,
+- pro výkon testujte objem, kardinalitu a indexy, ne skutečné osoby,
+- pro integrace používejte sandbox účty a testovací API klíče.
+
+Pokud už výjimečně potřebujete produkční výřez, zapište důvod, rozsah, schvalovatele, dobu platnosti a mazací důkaz. „Někde v notebooku u Karla“ není důkaz. Je to začátek detektivky.
+
+### FQ.3 Anonymizace není přejmenování uživatelů na Jan Novák
+
+Anonymizace má odstranit možnost identifikace člověka v daném kontextu. Pseudonymizace jen nahradí přímé identifikátory, ale vazba může zůstat obnovitelná. Pro testování je často praktičtější kombinace: syntetická data pro většinu scénářů, maskované výřezy pro úzké technické testy a žádná citlivá volná textová pole mimo produkci.
+
+Co typicky nestačí:
+
+- přepsat e-mail na `test@example.com`, ale nechat unikátní objednávky a poznámky,
+- odstranit jméno, ale nechat adresu, telefon, firmu a historii komunikace,
+- hashovat e-mail bez soli a tvářit se, že nejde spojit zpět,
+- kopírovat support zprávy, protože „tam přece nejsou citlivá data“,
+- maskovat jen hlavní tabulku a zapomenout na audit logy, přílohy, eventy a fulltext indexy.
+
+Lepší postup:
+
+1. Udělejte seznam tabulek a polí podle citlivosti.
+2. Oddělte strukturální data od identitních dat.
+3. Volná textová pole raději generujte znovu než maskujte.
+4. Zachovejte vztahy a objemy, které test potřebuje.
+5. Zničte původní dump hned po vytvoření testovacího datasetu.
+6. Otestujte, že v datasetu nezůstaly e-maily, telefony, tokeny, adresy, přílohy ani interní poznámky.
+
+Codyho praktické pravidlo: pokud anonymizační proces neumíte zopakovat skriptem, nemáte proces. Máte ruční kouzlení. A ruční kouzlení má v bezpečnosti přibližně stejnou reputaci jako Excel makro od neznámého dodavatele.
+
+### FQ.4 Staging oddělte technicky i oprávněními
+
+Staging má být podobný produkci v architektuře, ne v riziku. Oddělení neznamená jen jinou URL. Znamená jiné secrets, jiné účty, jiné databáze, jiné bucket storage, jiné webhook endpointy a jasné oprávnění, kdo smí co dělat.
+
+Minimální baseline:
+
+- **Samostatné secrets:** staging nikdy nepoužívá produkční API klíče, SMTP hesla, platební webhook secrets ani administrační tokeny.
+- **Oddělené databáze a úložiště:** žádné sdílené buckety typu `uploads-prod-and-staging`, protože co by se mohlo stát, že.
+- **Omezený e-mail:** staging neposílá zákazníkům; používá sink, allowlist nebo testovací domény.
+- **Testovací platby:** platební brány běží v sandboxu a faktury se neodesílají skutečným zákazníkům.
+- **Zákaz indexace:** staging a preview mají `noindex`, autentizaci nebo síťové omezení.
+- **Logy bez identity:** nižší prostředí nelogují osobní údaje jen proto, že „debugujeme“.
+- **Mazatelnost:** preview prostředí se po uzavření změny automaticky ruší včetně dat.
+
+Dobrý staging kopíruje produkční konfiguraci tam, kde ověřuje chování: runtime verzi, migrace, build, feature flagy, cache, fronty a integrace. Nekopíruje produkční moc tam, kde by stačila simulace.
+
+### FQ.5 Seed data jsou produktová infrastruktura
+
+Testovací data nejsou vedlejší soubor, který někdo aktualizuje, když si vzpomene. Jsou součást produktu. Když jsou špatná, tým testuje šťastnou cestu, která v reálném světě existuje asi tak často jako formulář bez edge casů.
+
+Dobrý seed dataset obsahuje:
+
+- nového uživatele bez dat,
+- aktivního zákazníka se základním tarifem,
+- zákazníka s vypršelou platbou,
+- účet s více rolemi,
+- účet čekající na pozvánku,
+- smazaného nebo anonymizovaného uživatele,
+- historická data pro export,
+- chybové stavy integrací,
+- dlouhé texty, diakritiku, emoji a hraniční hodnoty,
+- různé časové zóny a jazyky, pokud produkt míří do Evropy.
+
+Seed data by měla být verzovaná a obnovitelná jedním příkazem. Pokud QA potřebuje půl dne klikat demo účet do správného stavu, netestujete produkt. Testujete trpělivost QA. Ta obvykle není škálovatelná.
+
+### FQ.6 Karta testovacího prostředí
+
+```markdown
+## Prostředí: [název]
+
+### Účel
+- K čemu slouží:
+- Co se zde nesmí testovat:
+- Kdo je vlastník:
+
+### Data
+- Typ dat:
+- Zdroj dat:
+- Obsahuje osobní údaje: ano/ne
+- Maskování nebo syntetický seed:
+- Retence:
+- Mazací postup:
+
+### Přístup
+- Kdo má přístup:
+- Jak se přístup schvaluje:
+- Jak se přístup odebírá:
+- Jsou zapnuté auditní logy:
+
+### Integrace
+- E-mail:
+- Platby:
+- Webhooky:
+- Externí API:
+- Analytika:
+
+### Bezpečnost
+- Oddělené secrets:
+- Zákaz indexace:
+- Omezení veřejného přístupu:
+- Logování citlivých údajů:
+- Poslední revize:
+```
+
+Tahle karta má být krátká, ale nepříjemně konkrétní. Pokud u prostředí neumíte vyplnit zdroj dat a mazací postup, prostředí není pod kontrolou. Je to jen server s nadějí.
+
+### FQ.7 Checklist: testování bez produkčního bahna
+
+- [ ] Každé prostředí má jasný účel, vlastníka a životnost.
+- [ ] Preview prostředí nemají přístup k produkčním datům ani produkčním secrets.
+- [ ] Staging používá oddělené databáze, úložiště, API klíče a webhooky.
+- [ ] E-maily ze stagingu nejdou skutečným zákazníkům.
+- [ ] Platby, fakturace a notifikace používají sandbox nebo bezpečný sink.
+- [ ] Testovací datasety jsou syntetické nebo maskované podle dokumentovaného skriptu.
+- [ ] Volná textová pole, přílohy a logy nejsou slepě kopírované z produkce.
+- [ ] Produkční export mimo produkci je výjimka se schválením, retencí a mazacím důkazem.
+- [ ] Seed data pokrývají prázdné stavy, role, chyby, platby, exporty a edge casy.
+- [ ] Staging a preview nejsou indexované vyhledávači.
+- [ ] Přístupy do nižších prostředí se revidují stejně jako produkční přístupy.
+- [ ] CI logy a screenshoty neobsahují osobní údaje, tokeny ani zákaznický obsah.
+
+### Mini cvičení: staging detox za 55 minut
+
+1. Sepište všechna prostředí, která existují mimo produkci.
+2. Ke každému napište účel a vlastníka.
+3. Zjistěte, odkud bere data.
+4. Najděte jeden produkční secret nebo produkční dataset, který tam nemá být.
+5. Nahraďte ho sandboxem, syntetickým seedem nebo maskovaným výřezem.
+6. Zkontrolujte e-mailové a webhookové výstupy.
+7. Doplňte `noindex`, autentizaci nebo síťové omezení tam, kde chybí.
+8. Zapište mazací postup pro preview a dočasné datasety.
+9. Přidejte jednu testovací personu nebo edge case do seedu.
+
+Výstupem má být jedno bezpečnější prostředí, ne prezentace o tom, že prostředí jsou důležitá. Prostředí jsou důležitá. Teď je udělejte méně děravá.
+
+### Codyho komentář
+
+Můj pohled: staging je nejlepší místo, kde malý tým pozná, jestli má opravdu provozní disciplínu. Ne podle toho, jestli má hezké dashboardy, ale podle toho, jestli dokáže testovat bez kopírování zákaznického života do každého rohu vývoje. Privacy-first produkt se nepozná podle prohlášení v patičce. Pozná se podle toho, že i testovací prostředí ví, co nesmí vědět.
+
+### Zdroje k příloze FQ
+
+- Evropská komise: Principles of the GDPR — přehled zásad včetně minimalizace dat a omezení uložení: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
+- EUR-Lex: Regulation (EU) 2016/679, GDPR — oficiální text článku 5 k minimalizaci, omezení účelu a omezení uložení: https://eur-lex.europa.eu/legal-content/EN/TXT/?toc=OJ%3AL%3A2016%3A119%3ATOC&uri=uriserv%3AOJ.L_.2016.119.01.0001.01.ENG
+- OWASP Web Security Testing Guide — metodika bezpečnostního testování webových aplikací v průběhu SDLC: https://owasp.org/www-project-web-security-testing-guide/stable/2-Introduction/README
+- OWASP WSTG: Test Application Platform Configuration — kontrola konfigurace, odstranění zbytečných součástí a ověření, že v produkci nezůstaly debug prvky: https://owasp.org/www-project-web-security-testing-guide/stable/4-Web_Application_Security_Testing/02-Configuration_and_Deployment_Management_Testing/02-Test_Application_Platform_Configuration
+- NIST SP 800-53 Rev. 5 — katalog bezpečnostních a privacy kontrol včetně řízení konfigurace, testování změn a oddělených vývojových/testovacích prostředí: https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final
+
+
 ## Pracovní log
+
+- 2026-08-28: Přidána příloha FQ „Staging a testovací data bez produkčního bahna“ s rozdělením prostředí, pravidly pro produkční data, anonymizací, oddělením secrets a integrací, seed datasety, kartou prostředí, checklistem, staging detox cvičením a ověřenými GDPR/OWASP/NIST zdroji.
 
 - 2026-08-28: Přidána příloha FP „AI transparentnost bez nápisu nalepeného na chaos“ s AI inventářem, UI disclosure pravidly, GDPR kontrolou promptů a logů, release gate, checklistem, mini cvičením a ověřenými zdroji k AI Actu a EDPB stanovisku.
 
