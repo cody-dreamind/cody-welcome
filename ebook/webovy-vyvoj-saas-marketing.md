@@ -33510,7 +33510,208 @@ Preview prostředí je jako zkušební kabinka produktu. Má být užitečné, r
 - OWASP Cheat Sheet Series — Secrets Management: bezpečné ukládání, rotace a správa tajemství mimo zdrojový kód: https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html
 - GDPR, článek 5: zásady minimalizace údajů, omezení účelu, přesnosti, omezení uložení, integrity a důvěrnosti: https://gdpr-info.eu/art-5-gdpr/
 
+## Příloha FS — Aplikační logy bez osobního deníčku zákazníka
+
+Logy jsou paměť systému. Když se něco rozbije, chcete vědět kdy, kde, komu a proč. Jenže špatně navržené logy se rychle změní v osobní deníček zákazníka: celé request body, e-mailové adresy, tokeny, IP adresy, chybové stack traces, payloady z webhooků a občas i heslo v plaintextu, protože někdo „jen dočasně“ zapnul debug. Dočasně je v IT oblíbené slovo pro „najdeme to za tři roky v incidentu“.
+
+Privacy-first logování neznamená nelogovat nic. Znamená logovat účelně, strukturovaně, s retencí a s jasným rozhodnutím, co do logu nikdy nesmí. OWASP připomíná, že aplikační logování má zachytit bezpečnostně relevantní události a dost kontextu pro analýzu, ale zároveň výslovně varuje před ukládáním session identifikátorů, access tokenů, hesel, connection stringů, šifrovacích klíčů a citlivých osobních údajů. GDPR k tomu přidává starou dobrou evropskou brzdu: přiměřenost, minimalizaci, integritu, důvěrnost a bezpečnost zpracování. Ano, i log je zpracování dat. Překvapení pouze pro lidi, kteří nikdy neviděli produkční debug výpis.
+
+### FS.1 Nejdřív napište, k čemu log slouží
+
+Log bez účelu je jen drahý textový šum. Každý typ logu má mít vlastní důvod, vlastníka a retenční pravidlo. Ne všechno patří do stejného potrubí a ne každý v týmu potřebuje vidět všechno.
+
+Rozdělte logy alespoň takto:
+
+| Typ logu | Primární účel | Typický přístup | Privacy-first poznámka |
+|---|---|---|---|
+| Aplikační události | ladění chování produktu | vývoj a provoz | bez celých payloadů a bez citlivých polí |
+| Bezpečnostní události | detekce útoků a zneužití | security/provoz | více integrity, méně obsahu |
+| Auditní log | kdo provedl citlivou akci | admin/provoz/compliance | nemá nahrazovat analytiku chování |
+| Přístupové logy | provoz, kapacita, incidenty | infrastruktura | IP adresa je osobní údaj v kontextu |
+| Chybové logy | oprava bugů a regresí | vývoj | stack trace bez tokenů, requestů a osobního obsahu |
+
+Praktické pravidlo: ke každému log streamu napište jednu větu „Tento log používáme k rozhodnutí X.“ Pokud věta zní „kdyby náhodou“, logujete pro budoucí archeology, ne pro provoz.
+
+### FS.2 Logujte událost, ne celý životopis requestu
+
+Dobrá logovací událost říká dost na to, aby šla vyšetřit, ale ne tolik, aby se z ní stal datový sklad. OWASP Logging Cheat Sheet doporučuje u událostí zachytit kontext typu kdy, kde, kdo a co. To neznamená uložit kompletní HTTP request, všechny hlavičky, celé tělo formuláře a bonusově cookie, protože proč si rovnou nepřipravit compliance escape room.
+
+Rozumná strukturovaná událost:
+
+```json
+{
+  "timestamp": "2026-08-28T10:15:30Z",
+  "service": "billing-api",
+  "environment": "production",
+  "event": "invoice.create.failed",
+  "severity": "warning",
+  "request_id": "req_7f3c...",
+  "actor_type": "authenticated_user",
+  "actor_id_hash": "usrh_2a91...",
+  "tenant_id_hash": "tenh_8bb2...",
+  "object_type": "invoice",
+  "object_id": "inv_12345",
+  "reason_code": "payment_provider_timeout"
+}
+```
+
+Co je na tom důležité:
+
+- `request_id` umožní spojit události napříč službami bez ukládání celého requestu.
+- `actor_id_hash` a `tenant_id_hash` pomáhají vyšetřování, ale neukazují rovnou e-mail nebo jméno.
+- `reason_code` je lepší než dlouhá volná zpráva s interními detaily.
+- `object_id` se používá jen tam, kde je nutný pro provozní dohled.
+- `environment` brání míchání produkce, stagingu a preview.
+
+Codyho komentář: pokud potřebujete do logu napsat „celý objekt user“, většinou nepotřebujete lepší logger. Potřebujete lepší otázku.
+
+### FS.3 Redakce musí být u zdroje, ne až v panice po incidentu
+
+Maskování v log platformě je užitečná pojistka, ale nemá být první a jediná obrana. Citlivá data nemají opustit aplikaci směrem do logů vůbec. Redakce má probíhat co nejblíž místu, kde log vzniká: v logovacím wrapperu, serializéru, middleware nebo doménových typech.
+
+Do logu běžně nepatří:
+
+- hesla, password reset tokeny, session ID, API klíče a OAuth tokeny,
+- celé cookies a autorizační hlavičky,
+- čísla platebních karet, IBANy a fakturační dokumenty,
+- obsah zpráv, ticketů, komentářů a souborů,
+- zdravotní, právní, mzdové a jiné citlivé údaje,
+- celé webhook payloady bez výslovného provozního důvodu,
+- URL query stringy s e-maily, tokeny nebo UTM chaosem.
+
+Praktický pattern pro malý tým:
+
+```text
+log.info("user.login.failed", {
+  request_id,
+  actor_id_hash,
+  tenant_id_hash,
+  reason_code: "invalid_password",
+  ip_prefix: "203.0.113.0/24"
+})
+```
+
+Místo:
+
+```text
+log.info("login failed", { email, password, ip, userAgent, headers, body })
+```
+
+Ano, druhý příklad je bezpečnostní horor v teplákách. A ano, někde v produkci přesně takový žije.
+
+### FS.4 Retence logů má být krátká, zdůvodněná a vrstvená
+
+Logy nejsou historický archiv firmy. Čím déle je držíte, tím větší máte riziko, náklady a rozsah při žádostech subjektů údajů nebo incidentech. CNIL ve svém bezpečnostním průvodci doporučuje pro mnoho bezpečnostních a aplikačních logů průběžnou retenci v řádu šesti měsíců až jednoho roku, pokud delší dobu nevyžaduje zákon, spor, interní kontrola nebo konkrétní post-incident potřeba. Neberte to jako univerzální právní radu, ale jako užitečný mantinel: „navždy“ není retenční politika, jen rezignace s velkým diskem.
+
+Doporučený model:
+
+- **Debug logy:** hodiny až dny, v produkci výjimečně a se schválením.
+- **Aplikační provozní logy:** typicky 14–90 dní podle potřeby podpory a incidentů.
+- **Bezpečnostní logy:** delší období podle rizika, často měsíce až rok.
+- **Auditní log citlivých akcí:** podle smluv, regulace a potřeby dokazování.
+- **Incidentní výřez:** samostatně označený, omezený a po uzavření znovu revidovaný.
+
+Každá výjimka má mít důvod, vlastníka a datum revize. „Možná se to někdy bude hodit“ není důvod. To je sběratelství.
+
+### FS.5 Přístup k logům je produkční přístup
+
+Logy často obsahují víc pravdy než databáze, protože vznikají v chybách, integracích a okrajových stavech. Přístup do log platformy proto není nevinný vývojářský bonus. Je to přístup k provozním a někdy osobním datům.
+
+Minimum:
+
+- oddělte produkční, staging a preview logy,
+- používejte role podle potřeby: vývojář, provoz, security, support,
+- zapněte audit přístupu do logovací platformy,
+- zakažte sdílené účty,
+- omezte exporty logů do lokálních souborů,
+- nastavte automatické mazání exportů a incidentních výřezů,
+- dokumentujte, kdo smí vyhledávat podle identifikátoru uživatele.
+
+Support typicky nepotřebuje vidět stack trace, tokeny, hlavičky a interní payloady. Vývojář typicky nepotřebuje hledat podle jména zákazníka. Security typicky potřebuje korelaci a integritu, ne obsah formulářů. Když všichni vidí všechno, není to transparentnost. Je to absence designu.
+
+### FS.6 Karta logovacího streamu
+
+```markdown
+# Karta logovacího streamu
+
+## Kontext
+
+- Název streamu:
+- Služba / aplikace:
+- Prostředí:
+- Vlastník:
+- Účel logu:
+
+## Události
+
+- Hlavní event typy:
+- Severity pravidla:
+- Korelační ID:
+- Vazba na alerty:
+- Vazba na auditní log:
+
+## Data
+
+- Povolená pole:
+- Zakázaná pole:
+- Maskování / hashování:
+- Práce s IP adresou:
+- Logování query stringů:
+
+## Přístup a retence
+
+- Kdo smí číst:
+- Kdo smí exportovat:
+- Retence:
+- Výjimky:
+- Datum další revize:
+```
+
+Tuhle kartu vyplňte pro každý hlavní stream. Ne proto, že milujeme šablony. Protože bez ní budete při prvním incidentu hádat, co vlastně logujete a proč to vidí půlka firmy.
+
+### FS.7 Checklist: logy bez osobního deníčku
+
+- [ ] Každý log stream má účel, vlastníka a retenční pravidlo.
+- [ ] Produkční debug logování je vypnuté nebo časově omezené.
+- [ ] Logy jsou strukturované a používají stabilní event názvy.
+- [ ] Request a correlation ID propojují události bez ukládání celého requestu.
+- [ ] Hesla, tokeny, session ID, cookies, API klíče a connection stringy se nikdy nelogují.
+- [ ] Osobní údaje jsou minimalizované, maskované, hashované nebo nahrazené interním identifikátorem.
+- [ ] Query stringy a webhook payloady se logují jen po redakci nebo jako shrnutí.
+- [ ] Přístup k produkčním logům je role-based a auditovaný.
+- [ ] Exporty logů mají vlastní retenci a mazací postup.
+- [ ] Security logy chrání integritu a nejdou snadno přepsat aplikací.
+- [ ] Staging a preview logy nepoužívají produkční data ani produkční log projekt.
+- [ ] Privacy notice, interní ROPA nebo bezpečnostní dokumentace odpovídá reálnému logování.
+
+### Mini cvičení: log detox za 60 minut
+
+1. **10 minut:** vyberte jeden produkční log stream, který vývojáři používají nejčastěji.
+2. **10 minut:** najděte tři nejčastější eventy a napište, k jakému rozhodnutí slouží.
+3. **10 minut:** vyhledejte výskyty slov jako `password`, `token`, `cookie`, `authorization`, `email`, `phone`, `body` a `payload`.
+4. **10 minut:** rozhodněte, která pole odstranit, maskovat nebo nahradit hashem.
+5. **10 minut:** nastavte nebo ověřte retenci streamu.
+6. **10 minut:** vytvořte kartu logovacího streamu a jeden úkol do backlogu na logovací wrapper nebo test proti úniku tajemství.
+
+Výstupem má být jeden bezpečnější log stream. Ne nový observability stack za cenu menšího elektromobilu. Jeden stream, menší riziko, jasnější pravidla.
+
+### Codyho komentář
+
+Můj pohled: dobré logy jsou jako palubní přístroje. Ukazují rychlost, teplotu a varování. Špatné logy jsou kamera namířená na všechny pasažéry, kufr a platební kartu v přihrádce. Když k řešení incidentu potřebujete vědět všechno o člověku, často jste si jen nenavrhli lepší technické signály.
+
+### Zdroje k příloze FS
+
+- OWASP Cheat Sheet Series — Logging Cheat Sheet: doporučení k událostem, atributům logů, ochraně integrity, datům k vyloučení a bezpečnému logování: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+- OWASP Cheat Sheet Series — Logging Vocabulary Cheat Sheet: slovník bezpečnostních eventů a upozornění, že volitelná pole je potřeba posuzovat podle hodnoty a odpovědnosti za data: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Vocabulary_Cheat_Sheet.html
+- OWASP Cheat Sheet Series — Session Management Cheat Sheet: upozornění, že session ID a podobné citlivé údaje nemají být součástí logů: https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html
+- OWASP Developer Guide — Implement Security Logging and Monitoring: checklist pro bezpečnostní logování a monitoring v aplikačním vývoji: https://devguide.owasp.org/en/04-design/02-web-app-checklist/09-logging-monitoring/
+- EUR-Lex — GDPR článek 32: oficiální text k bezpečnosti zpracování a přiměřeným technickým a organizačním opatřením: https://eur-lex.europa.eu/eli/reg/2016/679/art_32/oj/eng
+- CNIL — Practice guide: GDPR security of personal data 2024: doporučení k logování akcí, anomálií a bezpečnostních událostí včetně typické průběžné retence šest měsíců až jeden rok podle kontextu: https://www.cnil.fr/sites/cnil/files/2024-03/cnil_guide_securite_personnelle_ven_0.pdf
+
+
 ## Pracovní log
+
+- 2026-08-28: Přidána příloha FS „Aplikační logy bez osobního deníčku zákazníka“ s návrhem log streamů, strukturovanými událostmi, redakcí citlivých dat, retenčními pravidly, řízením přístupů, kartou logovacího streamu, checklistem, log detox cvičením a ověřenými OWASP/GDPR/CNIL zdroji.
 
 - 2026-08-28: Přidána příloha FR „Preview prostředí bez zapomenutých dveří do firmy“ s pravidly pro přístup, noindex, oddělené secrets, karanténu formulářů a webhooků, životní cyklus branch preview, kartou prostředí, checklistem, mini auditem a ověřenými zdroji.
 
