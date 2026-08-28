@@ -269,7 +269,143 @@ Před spuštěním nebo redesignem webu si projdi:
 
 Web není hotový ve chvíli, kdy se nasadí. Je hotový až ve chvíli, kdy víš, co na něm funguje, co návštěvníky mate a co budeš zlepšovat příště. Spuštění je začátek učení, ne cílová páska.
 
+---
+
+## 3. SaaS od nápadu k MVP: méně funkcí, víc důkazů
+
+SaaS projekt svádí k tomu, aby člověk začal architekturou, dashboardem, nastavením rolí, billingem, notifikacemi, integracemi a krásným prázdným stavem pro každou obrazovku. To všechno může být jednou důležité. Jenže první otázka nezní „kolik toho umíme postavit?“. První otázka zní: „Dokážeme opakovaně doručit jednu konkrétní hodnotu lidem, kteří za ni mají důvod platit?“
+
+MVP není ošizený produkt. MVP je nejmenší důvěryhodný experiment, který ověří, jestli se kolem problému dá postavit byznys. Má být dost malý na rychlé spuštění, dost užitečný na reálné použití a dost měřitelný na jasné rozhodnutí, co dál.
+
+### 3.1 MVP začíná rozhodnutím, ne backlogem
+
+Než napíšeš první user story, napiš si rozhodnutí, které má MVP umožnit:
+
+> Po první verzi budeme vědět, jestli **[cílovka]** použije **[hlavní workflow]** k dosažení **[výsledku]** a jestli má smysl do produktu investovat další měsíc.
+
+Příklady:
+
+- Servisní firma zadá a uzavře aspoň deset zákaznických požadavků bez e-mailového chaosu.
+- B2B konzultant vytvoří tři nabídky z šablony a pošle je klientům bez ručního kopírování.
+- Malý SaaS tým uvidí, které onboardingové kroky lidé dokončí, bez nasazení agresivní analytiky.
+
+Tahle věta chrání produkt před „ještě přidáme“ epidemií. Když se objeví nápad na štítky, exporty, barevné motivy nebo veřejné API, zeptej se: pomůže nám to udělat výše uvedené rozhodnutí? Pokud ne, počká to. Backlog není skládka úzkostí.
+
+### 3.2 Vyber jedno hlavní workflow
+
+SaaS produkt obvykle není jedna funkce, ale řetěz kroků. MVP má ověřit hlavně ten řetěz, který nese hodnotu.
+
+Příklad zákaznického portálu pro servisní firmu:
+
+1. Klient zadá požadavek.
+2. Tým ho přiřadí odpovědné osobě.
+3. Řešitel změní stav a doplní poznámku.
+4. Klient vidí aktuální stav.
+5. Manažer na konci týdne vidí přehled otevřených věcí.
+
+Tohle je hlavní workflow. V MVP nepotřebuješ složitý editor oprávnění, barevné štítky podle oddělení ani sedm typů notifikací. Potřebuješ, aby požadavek bezpečně prošel systémem a všichni zúčastnění pochopili, co se děje.
+
+Dobré hlavní workflow má tři vlastnosti:
+
+- **Začíná reálnou situací:** uživatel má problém teď, ne hypoteticky v budoucnu.
+- **Končí viditelnou hodnotou:** někdo něco ušetřil, získal, vyřešil nebo pochopil.
+- **Dá se sledovat bez šmírování:** stačí stav, čas, počet dokončení nebo jednoduchá zpětná vazba.
+
+Privacy-first poznámka: už v MVP odděl provozní data od analytiky. Provozní data jsou to, co uživatel do produktu vložil, aby služba fungovala. Analytika je to, co sleduješ kvůli zlepšování. Když tyhle dvě věci smícháš, později se špatně vysvětluje, proč vlastně existují.
+
+### 3.3 Manuální práce není ostuda
+
+Zakladatelé se často bojí, že MVP musí být plně automatizované. Nemusí. Pokud zákazník dostane hodnotu, část procesu může být zpočátku ruční. Důležité je vědět, co je produktový slib a co je interní provizorium.
+
+Příklady rozumného ručního MVP:
+
+- Report se generuje jednou denně ručně z databáze, dokud nevíš, jaký formát lidé opravdu chtějí.
+- Import zákaznických dat dělá tým přes skript, než postavíš samoobslužný importér.
+- Onboarding probíhá přes krátký call, protože tím získáš lepší otázky než z anonymního formuláře.
+- Fakturace běží zpočátku mimo produkt, pokud potřebuješ ověřit hlavně používání, ne komplexní billing.
+
+Ručně ale nedělej věci, které ohrožují důvěru: bezpečnost, zálohy, přístupy, auditní stopu u citlivých dat nebo mazání dat na žádost zákazníka. Tam provizorium rychle smrdí průšvihem, a ne tím romantickým startupovým způsobem.
+
+*Codyho komentář:* Manuální MVP je jako stánek s kávou před kavárnou. Ověříš, jestli lidé chodí, co si objednávají a kolik jsou ochotní zaplatit. Jen do toho stánku nedávej papírovou krabici místo trezoru.
+
+### 3.4 Onboarding je součást produktu
+
+První verze SaaS často selže ne proto, že neumí dost funkcí, ale protože uživatel nepochopí první krok. Onboarding není jen uvítací obrazovka. Je to cesta od „mám účet“ k „aha, už mi to pomohlo“.
+
+Pro MVP si definuj aktivační moment:
+
+- U portálu: první založený a uzavřený požadavek.
+- U nástroje na nabídky: první odeslaná nabídka klientovi.
+- U analytiky: první dashboard s reálnými návštěvami a jedním sledovaným cílem.
+- U interní automatizace: první úspěšně dokončený proces bez ručního předávání.
+
+Pak odstraň všechno, co stojí mezi registrací a tímto momentem:
+
+- neptej se na zbytečné údaje,
+- nevysvětluj pět modulů najednou,
+- nepouštěj uživatele do prázdného dashboardu bez příkladu,
+- nabídni ukázková data, šablonu nebo průvodce,
+- pošli krátký e-mail s jedním dalším krokem, ne román s patnácti odkazy.
+
+Privacy-first onboarding znamená, že uživateli férově řekneš, jaká data potřebuješ a proč. „Potřebujeme název firmy, aby se zobrazil na nabídce“ je lepší než formulář, který se ptá na telefon, obrat a velikost týmu jen proto, že marketing má hlad.
+
+### 3.5 Pricing testuj dřív, než je pohodlné
+
+Cena není dekorace, která se přidá na konec webu. Je to součást produktu. Pokud se o ceně bojíš mluvit, často to znamená, že ještě nemáš dost jasně pojmenovanou hodnotu.
+
+V MVP nemusíš mít dokonalý ceník. Potřebuješ ale otestovat, jestli zákazník chápe jednotku hodnoty:
+
+- platí za uživatele,
+- za firmu,
+- za počet požadavků,
+- za objem dat,
+- za projekt,
+- za úsporu času nebo provozní jistotu.
+
+U menších B2B SaaS projektů bývá lepší začít jednoduše:
+
+- jeden pilotní tarif,
+- jasný rozsah,
+- férový limit,
+- možnost ukončit spolupráci,
+- export dat bez vydírání.
+
+Do první verze nedávej cenové triky, kterým nerozumíš ani ty po druhé kávě. Transparentní cena buduje důvěru. A pokud produkt stojí na evropském provozu, podpoře a kontrole nad daty, klidně to v ceně pojmenuj. Není to náklad navíc. Je to část hodnoty.
+
+### 3.6 Co měřit po spuštění MVP
+
+Po spuštění první verze si neotevírej dvacet grafů. Vyber pár signálů, které odpovídají hlavnímu workflow.
+
+Užitečné MVP metriky:
+
+- **Aktivace:** kolik lidí dokončí první hodnotný krok.
+- **Dokončení workflow:** kolik rozběhnutých procesů dojde do konce.
+- **Frekvence použití:** jestli se uživatelé vrací v rytmu, který odpovídá problému.
+- **Ruční zásahy:** co tým musí pořád zachraňovat nebo vysvětlovat.
+- **Kvalitativní zpětná vazba:** co uživatelé popisují vlastními slovy jako přínos nebo tření.
+- **Ochota platit:** jestli se rozhovor posouvá od „zajímavé“ k „pošli fakturu“.
+
+Technicky často stačí kombinace aplikačních událostí, serverových logů, jednoduché privacy-first analytiky a rozhovorů. Nepotřebuješ identifikovat každý pohyb člověka. Potřebuješ pochopit, kde se láme hodnota.
+
+### 3.7 Checklist: SaaS MVP bez přepálení
+
+Před tím, než začneš stavět první verzi, projdi si:
+
+- [ ] Umím jednou větou říct, jaké rozhodnutí má MVP umožnit.
+- [ ] Mám vybranou jednu cílovku a jeden hlavní problém.
+- [ ] Znám hlavní workflow od vstupu po viditelnou hodnotu.
+- [ ] Vím, které části mohou být zpočátku ruční a které musí být robustní hned.
+- [ ] Mám definovaný aktivační moment uživatele.
+- [ ] Onboarding vede k jednomu konkrétnímu prvnímu výsledku.
+- [ ] Pricing testuje jednotku hodnoty, ne jen náhodnou částku.
+- [ ] Uživatel může získat svá data ven bez vendor lock-inu.
+- [ ] Sbírám jen analytiku, podle které udělám rozhodnutí.
+- [ ] Vím, co po pilotu znamená pokračovat, změnit směr nebo projekt zastavit.
+
+MVP má být konec dohadů, ne začátek nekonečného vývoje. Když první verze ukáže, že lidé workflow používají, chápou hodnotu a jsou ochotní platit, máš důvod přidávat další vrstvu. Když to neukáže, získal jsi levnou lekci. A levná lekce je pořád lepší než drahý dashboard, do kterého se nikdo nepřihlásí.
+
 ## Pracovní log
 
+- 2026-08-28 14:00 UTC — Doplněna třetí kapitola o SaaS MVP: rozhodnutí místo backlogu, hlavní workflow, ruční validace, onboarding, pricing, měření a checklist.
 - 2026-08-28 13:00 UTC — Doplněna druhá kapitola o webu jako prodejním systému: homepage, CTA, důvěra, landing pages, privacy-first měření a checklist.
 - 2026-08-28 12:00 UTC — Založena struktura e-booku, doplněna pracovní osnova a hotová první kapitola o produktovém základu SaaS/webového projektu.
