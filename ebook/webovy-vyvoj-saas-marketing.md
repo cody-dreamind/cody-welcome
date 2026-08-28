@@ -1649,7 +1649,180 @@ To není málo. To je základ, ze kterého se dá stavět bez toho, aby se každ
 
 *Codyho komentář:* Když 30denní plán selže, většinou neselže proto, že byl málo ambiciózní. Selže proto, že byl moc široký. Zmenši rozsah, nech rytmus. Malé hotové věci poráží velké rozpracované věci s krásným názvem v Notionu.
 
+
+## Příloha B: Jak vést zákaznický rozhovor, který není skrytý prodej
+
+Zákaznický rozhovor není demo převlečené za výzkum. Pokud člověku po třech minutách ukazuješ svůj produkt a čekáš pochvalu, neděláš validaci. Děláš prezentaci s publikem, které je příliš slušné na to, aby ti řeklo, že ho to nezajímá.
+
+Cíl rozhovoru je zjistit, jak zákazník dnes pracuje, co ho stojí čas nebo peníze a jak se rozhoduje, když má problém vyřešit. Produkt může přijít později. Nejdřív musíš pochopit realitu.
+
+### B.1 Koho pozvat na rozhovor
+
+Nesháněj „kohokoliv z cílovky“. Pozvi lidi, kteří už problém reálně řešili nebo ho řeší právě teď. Rozhovor s člověkem, kterého problém možná někdy potká, je většinou hezká teorie. Rozhovor s člověkem, který minulý týden ručně kopíroval data mezi třemi systémy, je zlato. Trochu ulepené, ale zlato.
+
+Dobří kandidáti:
+
+- zákazník, který už za řešení platí,
+- člověk, který používá nepohodlnou náhražku,
+- tým, který problém řeší tabulkou, e-mailem nebo ručním postupem,
+- firma, která už zkoušela nástroj a opustila ho,
+- kontakt, který dokáže popsat konkrétní poslední situaci.
+
+Slabí kandidáti:
+
+- známí, kteří chtějí být milí,
+- lidé mimo rozhodovací proces,
+- „možná jednou“ zájemci,
+- publikum, které chce jen bezplatnou konzultaci,
+- respondenti, kteří mluví obecně a nedokážou uvést příklad.
+
+### B.2 Pozvánka bez tlaku
+
+Pozvánka má být krátká, konkrétní a férová. Neslibuj, že nic neprodáváš, pokud v hlavě už prodáváš. Napiš raději, že sbíráš zkušenosti a rozhovor není obchodní call.
+
+Šablona:
+
+```text
+Ahoj [jméno],
+
+stavím/ověřuji řešení pro [konkrétní cílovku], které se týká [problém].
+Nechci ti nic prezentovat; rád bych pochopil, jak to dnes řešíte u vás.
+
+Měl/a bys 25 minut příští týden?
+Zajímá mě hlavně konkrétní poslední situace, co fungovalo, co bolelo a co jste zvažovali.
+
+Díky,
+[jméno]
+```
+
+Pokud chceš být privacy-first už v pozvánce, doplň jednoduchou větu:
+
+```text
+Nebudu rozhovor nahrávat bez výslovného souhlasu a poznámky použiju jen pro ověření produktu.
+```
+
+To není právnická poezie. Je to obyčejná slušnost, což je překvapivě dobrý growth hack.
+
+### B.3 Otázky, které odhalí skutečné chování
+
+Neptej se: „Používali byste náš produkt?“ Lidé často řeknou ano, protože je to levné slovo. Ptej se na minulost, konkrétní situace a rozhodnutí.
+
+Dobré otázky:
+
+- Kdy jste tenhle problém řešili naposledy?
+- Co se přesně stalo?
+- Kdo všechno do toho byl zapojený?
+- Jak jste to vyřešili teď?
+- Kolik času nebo peněz vás to stálo?
+- Co jste už zkusili předtím?
+- Proč předchozí řešení nefungovalo?
+- Kdo by musel schválit změnu nástroje nebo procesu?
+- Co by muselo být pravda, abyste řešení nasadili?
+- Čeho byste se při nasazení báli?
+
+Špatné otázky:
+
+- Líbí se vám tenhle nápad?
+- Dali byste za to 500 Kč měsíčně?
+- Myslíte, že by to firmy používaly?
+- Chcete modernější řešení?
+- Je pro vás produktivita důležitá?
+
+Špatné otázky svádí k lichotce. Dobré otázky nutí vytáhnout konkrétní vzpomínku. A konkrétní vzpomínka je v produktovém výzkumu lepší než deset obecně nadšených přikývnutí.
+
+### B.4 Jak poznat silný signál
+
+Po rozhovoru nehledáš, jestli byl člověk „pozitivní“. Hledáš důkazy, že problém je dost bolestivý na změnu chování.
+
+Silné signály:
+
+- člověk už za řešení platí,
+- tým má vlastní workaround,
+- problém se opakuje každý týden nebo měsíc,
+- selhání má konkrétní dopad na peníze, zákazníky nebo reputaci,
+- respondent sám navrhne dalšího člověka k rozhovoru,
+- ptá se na další krok, pilot nebo cenu,
+- popisuje námitky tak konkrétně, že z nich můžeš udělat roadmapu.
+
+Slabé signály:
+
+- „To zní zajímavě.“
+- „Určitě dej vědět, až to bude.“
+- „To by se někomu mohlo hodit.“
+- „Teď na to není čas, ale možná později.“
+- „Pošli mi prezentaci.“
+
+Neznamená to, že slabý signál je k ničemu. Jen ho nepočítej jako validaci. Je to spíš zdvořilé mávnutí z druhé strany ulice.
+
+### B.5 Poznámky, které se dají použít
+
+Po každém rozhovoru zapiš poznámky do stejné šablony. Nečekej do večera. Mozek má po třech hovorech tendenci vyrábět elegantní fikci a říkat tomu souhrn.
+
+```text
+Kontakt:
+Role:
+Typ firmy:
+Datum rozhovoru:
+
+Poslední konkrétní situace:
+Současné řešení:
+Největší bolest:
+Dopad na čas/peníze/riziko:
+Používané nástroje:
+Kdo rozhoduje:
+Námitky:
+Přesná slova zákazníka:
+Síla signálu: silný / střední / slabý
+Další krok:
+```
+
+Položka „přesná slova zákazníka“ je důležitá. Marketingové texty se často zlepší ne tím, že vymyslíš chytřejší frázi, ale tím, že přestaneš překládat zákaznický jazyk do agenturní mlhy.
+
+### B.6 Co udělat po pěti rozhovorech
+
+Pět rozhovorů není definitivní pravda. Je to první mapa terénu. Po pěti hovorech udělej malý synthesis sprint:
+
+1. Vypiš opakující se situace.
+2. Označ věty, které zazněly skoro stejně vícekrát.
+3. Seřaď problémy podle bolesti, ne podle toho, co chceš stavět.
+4. Odděl kupujícího, uživatele a technického schvalovatele.
+5. Napiš jednu upravenou produktovou větu.
+6. Rozhodni, jestli další krok je landing page, prototyp, ruční služba nebo další rozhovory.
+
+Praktický výstup může vypadat takhle:
+
+```text
+Nejčastější situace:
+Servisní firmy ztrácí požadavky mezi e-mailem, telefonem a tabulkou.
+
+Nejbolestivější dopad:
+Zákazník čeká na odpověď, tým neví kdo co slíbil a majitel hasí eskalace.
+
+Nová produktová věta:
+Pomáháme malým servisním týmům udržet zákaznické požadavky na jednom místě bez zavádění těžkého helpdesku.
+
+Další krok:
+Jednostránková landing page + ruční pilot se třemi týmy.
+```
+
+### B.7 Privacy-first pravidla pro rozhovory
+
+Výzkum zákazníků není výmluva pro sběr všeho, co jde. I tady platí: sbírej minimum, drž kontrolu nad daty a vysvětli, co děláš.
+
+Checklist:
+
+- [ ] Předem řekni, proč rozhovor děláš.
+- [ ] Nahrávej jen se souhlasem.
+- [ ] Ukládej jen poznámky, které opravdu použiješ.
+- [ ] Citace anonymizuj, pokud nemáš svolení ke zveřejnění.
+- [ ] Neposílej syrové zápisy do nástrojů, u kterých nevíš, kde končí data.
+- [ ] Po skončení validace smaž nahrávky, které už nepotřebuješ.
+- [ ] Do CRM nedávej citlivé detaily, které nesouvisí s obchodním vztahem.
+
+*Codyho komentář:* Zákaznický výzkum má zvýšit porozumění, ne vytvořit složku „lidé nám řekli osobní věci a my nevíme, proč je pořád máme“. Data jsou jako sušenky v klávesnici: čím míň jich tam nasypeš, tím líp se ti bude pracovat.
+
 ## Pracovní log
+- 2026-08-28 21:00 UTC — Doplněna příloha B o zákaznických rozhovorech: výběr respondentů, pozvánka, otázky, signály, poznámky, synthesis sprint a privacy-first pravidla.
 - 2026-08-28 20:00 UTC — Doplněna příloha A s 30denním akčním plánem pro vyjasnění produktu, web jako prodejní systém, MVP/provoz a privacy-first růstový rytmus.
 - 2026-08-28 19:00 UTC — Doplněna osmá kapitola s praktickými checklisty a šablonami pro audit nápadu, launch, landing page, privacy-first měření, týdenní review a bezpečnostní minimum.
 - 2026-08-28 18:00 UTC — Doplněna sedmá kapitola o privacy-first provozu v Evropě: mapa dat, minimalizace, evropský stack, analytika, bezpečnost, AI pravidla, data lifecycle a checklist.
