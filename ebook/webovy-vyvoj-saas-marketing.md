@@ -32521,7 +32521,256 @@ Registr subprocesorů je test dospělosti produktu. Ne proto, že by tabulka sam
 - Evropská komise: standardní smluvní doložky pro správce a zpracovatele v EU/EHP: https://commission.europa.eu/publications/standard-contractual-clauses-controllers-and-processors-eueea_en
 - Evropská komise: otázky a odpovědi ke standardním smluvním doložkám, včetně přenosů mimo EHP: https://commission.europa.eu/law/law-topic/data-protection/international-dimension-data-protection/new-standard-contractual-clauses-questions-and-answers-overview_en
 
+## Příloha FN — Bezpečnostní hlavičky bez ops rituálu a rozbitého frontendu
+
+Bezpečnostní HTTP hlavičky jsou jedna z těch věcí, které vypadají jako drobný detail v konfiguraci web serveru. Pak ale zjistíte, že určují, jestli prohlížeč dovolí načíst nečekaný skript, poslat plnou URL jako `Referer`, otevřít stránku v cizím rámu nebo hádat MIME typ souboru. Jinými slovy: pár řádků konfigurace může snížit riziko útoků i úniku metadat. Pár špatných řádků konfigurace zase může rozbít půlku aplikace. Takže žádné „zkopírujeme nejlepší CSP z blogu a modlíme se“. To je DevOps verze běhu se zavázanýma očima a notebookem v ruce.
+
+Praktický přístup je jednoduchý: začněte konzervativním baseline, měřte dopad, zpřísňujte po částech a každou výjimku zapište. Bezpečnostní hlavičky nejsou jednorázová dekorace do auditu. Jsou součást architektury frontendu, integrací, analytiky, formulářů, CDN, fontů, obrázků a platebních flow.
+
+### FN.1 Začněte mapou povolených zdrojů, ne seznamem hlaviček
+
+Nejdřív si napište, co web opravdu načítá:
+
+- vlastní HTML, CSS, JS a obrázky,
+- fonty a ikony,
+- API endpointy,
+- analytiku,
+- formuláře a CAPTCHA nebo antispam,
+- platební bránu,
+- embedovaný obsah,
+- media soubory,
+- administraci a interní nástroje.
+
+Teprve potom navrhujte hlavičky. Nejčastější chyba je opačný postup: tým najde „secure headers checklist“, nastaví ho globálně a pak v pátek večer zjistí, že checkout neumí načíst platební iframe. Ano, bezpečnost je důležitá. Ale bezpečnost, která potichu zabije tržby, bude za týden vypnutá. A vypnutá bezpečnost je poněkud suboptimální bezpečnost. Technický termín.
+
+Příklad mapy:
+
+```text
+Oblast: veřejný web
+Skripty: vlastní bundle, žádné třetí strany
+Styly: vlastní CSS
+Fonty: self-hosted WOFF2
+Obrázky: vlastní doména, produktové screenshoty
+API: api.example.eu
+Analytika: self-hosted nebo EU region, bez cross-site identifikace
+Embeds: žádné
+Riziko: nízké
+```
+
+```text
+Oblast: checkout
+Skripty: vlastní bundle, platební provider
+Frames: platební provider
+API: vlastní API, billing endpoint
+Data: e-mail, fakturační údaje, platební tokenizace mimo aplikaci
+Riziko: vysoké
+```
+
+Taková mapa vám řekne, kde můžete být přísní hned a kde potřebujete postupný rollout. Privacy-first bonus: pokud zjistíte, že kvůli jedné marketingové vychytávce musíte povolit půl internetu, možná ta vychytávka není vychytávka, ale datový konfety kanón.
+
+### FN.2 Minimální baseline pro běžný SaaS web
+
+Pro veřejný web a jednoduchou SaaS aplikaci má smysl mít aspoň tento baseline:
+
+```http
+Strict-Transport-Security: max-age=31536000; includeSubDomains
+X-Content-Type-Options: nosniff
+Referrer-Policy: strict-origin-when-cross-origin
+X-Frame-Options: DENY
+Permissions-Policy: camera=(), microphone=(), geolocation=()
+Content-Security-Policy: default-src 'self'; base-uri 'self'; frame-ancestors 'none'; object-src 'none'
+```
+
+Není to univerzální recept. Je to startovní bod. `Strict-Transport-Security` říká prohlížeči, že má doménu používat přes HTTPS. `X-Content-Type-Options: nosniff` omezuje hádání MIME typu. `Referrer-Policy` pomáhá omezit, kolik informací o URL odchází na jiné weby. `X-Frame-Options` nebo modernější `frame-ancestors` v CSP brání nechtěnému vkládání stránky do rámu. `Permissions-Policy` vypíná browser API, která běžný web nepotřebuje.
+
+U `Content-Security-Policy` buďte nejopatrnější. CSP je výborný nástroj, ale rozbíjí věci přesně tam, kde jste zapomněli na starý inline skript, externí font, obrázky z CMS, blob URL pro export nebo iframe platební brány. Proto ji nasazujte po vrstvách:
+
+1. napište CSP podle mapy zdrojů,
+2. nejdřív ji otestujte v report-only režimu,
+3. opravte porušení, která jsou legitimní,
+4. odstraňte zdroje, které legitimní nejsou,
+5. teprve potom přepněte do vynuceného režimu.
+
+Pro administraci může být baseline přísnější než pro marketingovou landing page. Pro checkout může být jiný než pro blog. Bezpečnostní hlavičky nejsou náboženství. Jsou konfigurace podle rizika.
+
+### FN.3 Privacy-first nastavení není jen o útocích
+
+Bezpečnostní hlavičky často řeší útoky, ale některé pomáhají i se soukromím. Typický příklad je `Referrer-Policy`. Když uživatel klikne z detailu účtu, resetu hesla, pozvánky nebo neveřejného odkazu na externí URL, nechcete posílat víc informací, než je nutné. Výchozí politika moderních prohlížečů bývá rozumnější než dřív, ale produkt by na ni neměl slepě spoléhat.
+
+Praktická pravidla:
+
+- Neposílejte celou cestu a query parametry na cizí domény, pokud k tomu není dobrý důvod.
+- Citlivé tokeny nikdy nedávejte do URL, protože URL končí v historii, logu, refereru, screenshotu i podivné support zprávě „nějak mi to nejde“.
+- Pro interní administraci používejte přísnější referrer politiku než pro veřejný blog.
+- Nepovolujte geolokaci, kameru a mikrofon globálně „pro jistotu“.
+- Self-hostujte fonty a statická aktiva, pokud tím snížíte volání na třetí strany.
+- U externích embedů pište výjimky vědomě a jen pro konkrétní stránky.
+
+Privacy-first provoz v Evropě není jen otázka právních dokumentů. Je to i otázka toho, co pošle prohlížeč při běžném kliknutí. Malé úniky metadat jsou jako drobky na stole: jeden nevadí, po měsíci máte snídani i v klávesnici.
+
+### FN.4 CSP pište jako produktovou politiku
+
+Špatná CSP vypadá takhle:
+
+```http
+Content-Security-Policy: default-src * 'unsafe-inline' 'unsafe-eval' data: blob:
+```
+
+To je méně bezpečnostní politika a více diplomatická kapitulace. Ano, stránka možná funguje. Ale povolili jste tolik věcí, že smysl CSP je skoro pryč.
+
+Lepší postup:
+
+- `default-src 'self'` jako základ,
+- `script-src` jen pro vlastní doménu a nezbytné služby,
+- žádné `unsafe-eval`, pokud k tomu nemáte tvrdý technický důvod,
+- inline skripty nahrazovat nonce nebo hash strategií,
+- `img-src` rozšířit jen o skutečné zdroje obrázků,
+- `connect-src` držet na konkrétních API a analytice,
+- `frame-src` povolit jen tam, kde iframe opravdu používáte,
+- `frame-ancestors 'none'` nebo konkrétní povolené předky podle produktu.
+
+U SaaSu doporučuji vést CSP výjimky jako malý registr:
+
+```text
+Zdroj: https://payments.example
+Direktiva: frame-src, script-src
+Použití: checkout
+Vlastník: product/billing
+Data: platební tok, bez ukládání karet v aplikaci
+Alternativa: redirect checkout
+Revize: kvartálně
+```
+
+Když výjimka nemá vlastníka, časem se z ní stane archeologický nález. Nikdo neví, proč tam je, všichni se bojí ji smazat a bezpečnostní politika postupně bobtná jako backlog po workshopu.
+
+### FN.5 Rollout dělejte po trasách uživatele
+
+Hlavičky netestujte jen na homepage. Testujte hlavní trasy:
+
+- první návštěva landing page,
+- odeslání formuláře,
+- registrace a login,
+- reset hesla,
+- onboarding,
+- checkout,
+- administrace týmu,
+- export dat,
+- otevření dokumentace,
+- stránka s embedem nebo externím médiem.
+
+U každé trasy sledujte:
+
+- chyby v konzoli,
+- blokované requesty,
+- nefunkční obrázky/fonty,
+- problémy s redirecty,
+- chybné iframe načítání,
+- výpadky analytiky,
+- odesílání reportů CSP,
+- serverové logy pro statická aktiva a API.
+
+Rollout plán může být jednoduchý:
+
+```text
+Týden 1: inventář zdrojů a report-only CSP na stagingu
+Týden 2: oprava legitimních porušení a odstranění zbytečných třetích stran
+Týden 3: report-only na produkci pro veřejný web
+Týden 4: vynucení baseline pro veřejný web, checkout zatím zvlášť
+Týden 5: samostatná politika pro aplikaci a administraci
+```
+
+Ano, jde to udělat rychleji. Taky jde debugovat rozbitý login v produkci v 22:47. Každý máme nějaké koníčky.
+
+### FN.6 Karta bezpečnostních hlaviček
+
+Použijte tuhle kartu pro každou významnou oblast webu nebo aplikace:
+
+```markdown
+# Karta bezpečnostních hlaviček
+
+## Oblast
+- Název:
+- URL vzory:
+- Vlastník:
+- Riziko: nízké / střední / vysoké
+
+## Povolené zdroje
+- Skripty:
+- Styly:
+- Obrázky:
+- Fonty:
+- API/connect:
+- Frames:
+- Media:
+
+## Hlavičky
+- HSTS:
+- CSP:
+- Referrer-Policy:
+- X-Content-Type-Options:
+- Frame ochrana:
+- Permissions-Policy:
+
+## Výjimky
+- Zdroj:
+- Důvod:
+- Data:
+- Alternativa:
+- Datum revize:
+
+## Testování
+- Staging ověřen:
+- Produkce report-only:
+- Produkce enforced:
+- Hlavní user flows:
+- Známá rizika:
+```
+
+Karta není náhrada za automatické testy. Je to dohoda týmu, proč hlavičky vypadají tak, jak vypadají. A dohody, které nejsou nikde napsané, mají životnost zhruba do dalšího refaktoru.
+
+### FN.7 Checklist: bezpečnostní hlavičky bez rozbitého webu
+
+- [ ] Máme mapu zdrojů pro veřejný web, aplikaci, administraci a checkout.
+- [ ] HSTS zapínáme jen tam, kde máme jistotu správného HTTPS provozu i pro subdomény.
+- [ ] `Referrer-Policy` neposílá zbytečně citlivou cestu ani query parametry na cizí domény.
+- [ ] `X-Content-Type-Options: nosniff` je nastavené pro běžné odpovědi.
+- [ ] Ochrana proti vkládání do rámu je řešená přes `frame-ancestors` nebo `X-Frame-Options` podle podpory a potřeby.
+- [ ] `Permissions-Policy` vypíná browser API, která produkt nepotřebuje.
+- [ ] CSP byla nejdřív testovaná v report-only režimu.
+- [ ] CSP výjimky mají vlastníka, důvod a datum revize.
+- [ ] Hlavní uživatelské trasy jsou otestované, ne jen homepage.
+- [ ] Externí skripty jsou minimalizované a mají privacy-first odůvodnění.
+- [ ] Checkout, login a reset hesla mají samostatnou kontrolu.
+- [ ] Nastavení se kontroluje po každé změně hostingu, reverse proxy, CDN nebo frameworku.
+
+### Mini cvičení: header audit za 45 minut
+
+1. Vyberte tři URL: homepage, login nebo formulář, a jednu stránku v aplikaci.
+2. Zapište aktuální response headers přes DevTools, `curl -I` nebo interní monitoring.
+3. Označte chybějící baseline hlavičky.
+4. Sepište všechny externí domény, které by CSP musela povolit.
+5. U každé externí domény napište účel a vlastníka.
+6. Najděte jednu třetí stranu, kterou lze odstranit nebo self-hostovat.
+7. Připravte report-only CSP pro nejméně rizikovou oblast.
+8. Zapište rollback krok pro případ, že se něco rozbije.
+
+Výstupem není „máme A+ ve scanneru“. Výstupem je politika, které rozumí vývoj, produkt i provoz. Scanner je užitečný sluha. Jako šéf má sklony k divným prioritám.
+
+### Codyho komentář
+
+Bezpečnostní hlavičky mám rád, protože jsou levné, praktické a brutálně upřímné. Když vám CSP nejde napsat bez `*`, často to není problém CSP. Je to produktová mapa závislostí, která se rozhodla zakřičet. Poslouchejte ji. Jen ji nenechte křičet přímo na zákazníky v produkci.
+
+### Zdroje k příloze FN
+
+- OWASP Secure Headers Project — přehled bezpečnostních HTTP hlaviček a doporučení pro obranu v prohlížeči: https://owasp.org/www-project-secure-headers/
+- OWASP HTTP Headers Cheat Sheet — praktický souhrn bezpečnostních hlaviček, včetně `X-Content-Type-Options`, HSTS, CSP a dalších: https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Headers_Cheat_Sheet.html
+- MDN: Referrer-Policy — popis hodnot hlavičky a dopadů na odesílání `Referer` informací: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Referrer-Policy
+- MDN: HTTP headers — referenční přehled HTTP hlaviček, včetně `Content-Security-Policy`, `Strict-Transport-Security` a `Referrer-Policy`: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers
+- web.dev: Security headers quick reference — praktické vysvětlení HSTS, CSP a dalších bezpečnostních hlaviček pro webové aplikace: https://web.dev/articles/security-headers
+
 ## Pracovní log
+
+- 2026-08-28: Přidána příloha FN „Bezpečnostní hlavičky bez ops rituálu a rozbitého frontendu“ s mapou povolených zdrojů, baseline hlavičkami, privacy-first pravidly pro referrer a permissions, CSP registrem výjimek, rollout plánem, kartou hlaviček, checklistem, mini auditem a ověřenými OWASP/MDN/web.dev zdroji.
 
 - 2026-08-28: Přidána příloha FM „Registr subprocesorů bez compliance schovávané za odkaz“ s rozlišením rolí dodavatelů, minimálním veřejným i interním registrem, procesem oznamování změn, kontrolou přenosů mimo EHP, vendor kartou, checklistem, hodinovým auditem a ověřenými EU/EDPB/GDPR zdroji.
 
