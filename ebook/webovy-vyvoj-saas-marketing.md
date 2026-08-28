@@ -32021,7 +32021,192 @@ Výstupem není „AI strategie“. Výstupem je konkrétní rozhodnutí, které
 - OWASP: Top 10 for LLM Applications jako praktický bezpečnostní rámec pro LLM aplikace — https://owasp.org/www-project-top-10-for-large-language-model-applications/
 - ENISA: Artificial Intelligence Cybersecurity Challenges jako evropský pohled na bezpečnostní rizika AI systémů — https://www.enisa.europa.eu/sites/default/files/publications/ENISA%20Report%20-%20Artificial%20Intelligence%20Cybersecurity%20Challenges.pdf
 
+## Příloha FK — Rate limiting a ochrana proti zneužití bez fingerprintingu
+
+Každý SaaS dřív nebo později zjistí, že „uživatel“ nemusí být člověk, ale skript, bot, špatně napsaná integrace, crawler, rozbitý cron nebo konkurenční zvědavost v mikině. Někdy nejde o sofistikovaný útok. Stačí endpoint bez limitu, vyhledávání bez stropu, formulář bez ochrany nebo AI funkce účtovaná po tokenech. A najednou máte místo produktu menší topírnu na faktury.
+
+Privacy-first ochrana proti zneužití ale neznamená nasadit agresivní fingerprinting, nekonečné CAPTCHA peklo a externí skripty, které poznají uživatele podle barvy ponožek. Cílem je férově omezit škodlivé nebo drahé chování, aniž by se z běžných návštěvníků stali podezřelí objekti v detektivce.
+
+### FK.1 Nejdřív pojmenujte, co chráníte
+
+Rate limiting není jedno číslo nalepené před celou aplikaci. Limit `100 requestů za minutu` může být pro veřejnou stránku směšně nízký, pro reset hesla nebezpečně vysoký a pro AI endpoint finanční sebevražda s hezkým HTTP statusem.
+
+Začněte mapou chráněných zdrojů:
+
+- **dostupnost:** aby web, API a administrace nepadaly kvůli nárazům provozu,
+- **peníze:** aby někdo nevyčerpal e-mail, SMS, AI, storage nebo externí API kredit,
+- **účty:** aby přihlášení, registrace a reset hesla nešlo zkoušet donekonečna,
+- **data:** aby scraping, exporty a vyhledávání neodnášely víc, než mají,
+- **kvalita metrik:** aby bot provoz nedeformoval produktová a marketingová rozhodnutí.
+
+OWASP API Security Top 10 řadí chybějící limity spotřeby zdrojů mezi typické API slabiny: nejde jen o počet requestů, ale také o velikost payloadu, počet operací v jednom požadavku, délku běhu, uploady a náklady externích služeb. To je důležitá lekce: limitujte chování, které má dopad, ne jen provoz, který je snadno spočítatelný.
+
+### FK.2 Limity vrstvěte podle rizika
+
+Jedna ochranná vrstva bude buď moc slabá, nebo bude otravovat legitimní uživatele. Lepší je kombinace malých, čitelných limitů.
+
+Praktické vrstvy:
+
+- **globální limit na infrastrukturu:** ochrana proti náhlému přetížení serveru nebo reverse proxy,
+- **IP nebo subnet limit:** hrubá brzda pro anonymní provoz, ale ne jediný identifikátor,
+- **uživatelský limit:** limity pro přihlášený účet podle tarifu, role nebo rizika akce,
+- **endpoint limit:** přísnější pravidla pro login, reset hesla, export, vyhledávání a AI,
+- **nákladový limit:** denní/měsíční stropy pro SMS, e-mail, OCR, AI a externí API,
+- **payload limit:** velikost requestu, počet položek v poli, maximální stránkování, délka dotazu,
+- **konkurenční limit:** kolik drahých operací může běžet současně.
+
+Příklad pro malý B2B SaaS:
+
+```markdown
+Login:
+- 5 pokusů za 10 minut na účet
+- 20 pokusů za 10 minut na IP/subnet
+- po překročení zobrazit bezpečnou zprávu a nabídnout reset hesla
+
+Export dat:
+- pouze přihlášený uživatel s oprávněním
+- 3 exporty za den na workspace
+- jeden běžící export na workspace
+- audit log s uživatelem, časem, typem exportu a rozsahem
+
+AI návrh odpovědi:
+- 30 požadavků za den na uživatele v základním tarifu
+- max délka vstupu 8 000 znaků
+- odmítnout tajné hodnoty a velké logy
+- nákladový alarm při neobvyklém růstu
+```
+
+### FK.3 Nepoužívejte fingerprinting jako výchozí kladivo
+
+Fingerprinting často vypadá lákavě: když uživatel smaže cookie, poznáme ho podle kombinace prohlížeče, zařízení, fontů, IP, canvasu a dalších signálů. Technicky chytré. Eticky a právně bahnité. Navíc to snadno rozbije důvěru, přístupnost a legitimní anonymní používání.
+
+Privacy-first default:
+
+- u anonymního provozu začněte serverovými signály s krátkou retencí,
+- u přihlášených účtů preferujte účet, workspace, API token a konkrétní endpoint,
+- u drahých akcí přidejte potvrzení, frontu nebo ruční schválení,
+- citlivé bezpečnostní signály držte odděleně od marketingové analytiky,
+- automatické blokace pište tak, aby šly vysvětlit a vrátit zpět,
+- pokud potřebujete osobní údaje pro bezpečnostní účel, zapište právní základ, účel, retenci a přístupová práva.
+
+Codyho komentář: dobrá ochrana proti botům není soutěž v tom, kdo nasbírá víc podivných signálů o zařízení. Dobrá ochrana je nudná, vrstvená, měřitelná a uživateli zbytečně nekomplikuje život. Ano, nudná bezpečnost zase vyhrála. Jak nečekané.
+
+### FK.4 Odpověď 429 má být užitečná, ne pasivně agresivní
+
+Když limit zastaví legitimního klienta, odpověď musí říct, co se stalo a kdy to může zkusit znovu. HTTP status `429 Too Many Requests` je pro to určený a může být doplněný hlavičkou `Retry-After`. Pro API klienty je to rozdíl mezi slušným backoffem a nekonečným bušením do dveří.
+
+Dobrá API odpověď:
+
+```http
+HTTP/1.1 429 Too Many Requests
+Content-Type: application/json
+Retry-After: 120
+
+{
+  "error": "rate_limit_exceeded",
+  "message": "Limit pro exporty byl dočasně vyčerpán. Zkuste to znovu za 2 minuty.",
+  "retry_after_seconds": 120,
+  "support_reference": "rl_2026_08_28_export_workspace"
+}
+```
+
+U veřejného webu stačí lidská zpráva. U API dokumentujte limity přímo v dokumentaci a přidejte doporučený backoff. Pokud používáte rate-limit hlavičky, držte je konzistentní a netvařte se, že klienti umí číst vaše myšlenky. Neumí. Někteří neumí ani číst dokumentaci, ale to už je jiná tragikomedie.
+
+### FK.5 Bot ochrana nesmí zničit dobré roboty
+
+Ne každý bot je nepřítel. Vyhledávače, validátory, monitoring, RSS čtečky, uptime kontroly, integrační klienti nebo nástroje pro přístupnost mohou být legitimní. Blokovat všechno automatické je jako zavřít obchod, protože někdo jednou vešel moc rychle.
+
+Rozlišujte minimálně:
+
+- veřejné crawlování obsahu,
+- přihlášené API klienty,
+- formulářový spam,
+- credential stuffing,
+- scraping privátních dat,
+- nákladové útoky na AI/SMS/e-mail,
+- rozbité integrace vlastních zákazníků.
+
+Pro každý typ nastavte jinou reakci. Formulářový spam může dostat honeypot a časovou brzdu. Login potřebuje limity, MFA signály a bezpečnou komunikaci. API klient potřebuje hlavičky, dokumentaci a možnost požádat o vyšší limit. AI endpoint potřebuje nákladový strop a kontrolu velikosti vstupu. Scraping privátních dat potřebuje audit a pravděpodobně zásah člověka.
+
+### FK.6 Karta ochrany endpointu
+
+```markdown
+# Karta ochrany endpointu
+
+## Endpoint
+- Název a URL:
+- Veřejný / přihlášený / interní:
+- Vlastník:
+
+## Dopad
+- Co se stane při zneužití:
+- Náklad na jeden požadavek:
+- Obsahuje osobní nebo citlivá data:
+
+## Limity
+- Počet requestů:
+- Payload velikost:
+- Maximální stránkování / počet položek:
+- Konkurenční operace:
+- Denní nebo měsíční nákladový strop:
+
+## Identifikátor limitu
+- Anonymní provoz:
+- Přihlášený uživatel:
+- Workspace / tenant:
+- API token / integrace:
+
+## Reakce
+- Varování:
+- 429 odpověď:
+- Backoff / Retry-After:
+- Kdy blokovat:
+- Kdy eskalovat člověku:
+
+## Privacy-first kontrola
+- Jaké signály sbíráme:
+- Retence signálů:
+- Kdo má přístup:
+- Co se nesmí spojit s marketingovou analytikou:
+```
+
+### FK.7 Checklist: ochrana bez datového cirkusu
+
+- [ ] Každý drahý nebo citlivý endpoint má vlastní limit, ne jen globální limit aplikace.
+- [ ] Limity pokrývají počet requestů, velikost payloadu, stránkování, souběh a externí náklady.
+- [ ] Přihlášené akce se limitují podle uživatele, workspace a oprávnění, ne pouze podle IP.
+- [ ] Anonymní ochrana používá krátkou retenci a nesbírá fingerprinting jako výchozí mechanismus.
+- [ ] Login, reset hesla, registrace a API tokeny mají zvláštní pravidla.
+- [ ] Drahé AI, SMS, e-mailové a exportní funkce mají nákladové stropy a alarmy.
+- [ ] Odpověď `429` je srozumitelná a u API obsahuje doporučení pro opakování.
+- [ ] Bezpečnostní signály jsou oddělené od marketingové analytiky.
+- [ ] Existuje proces pro odblokování legitimního zákazníka nebo zvýšení limitu.
+- [ ] Tým jednou měsíčně kontroluje falešné pozitivy, nákladové špičky a nově přidané endpointy.
+
+### Mini cvičení: abuse review za 50 minut
+
+1. Vyberte pět endpointů: login, formulář, vyhledávání, export a jednu drahou funkci.
+2. U každého napište nejhorší realistické zneužití.
+3. Spočítejte, co stojí jeden požadavek v penězích, datech nebo provozním riziku.
+4. Doplňte limit na requesty, payload, souběh a denní náklady.
+5. Navrhněte odpověď `429` pro člověka i API klienta.
+6. Zkontrolujte, jestli ochrana nepotřebuje fingerprinting nebo externí tracker.
+7. Zapište jednu úpravu do kódu, jednu do dokumentace a jednu do provozního monitoringu.
+
+Výstupem má být jednoduchá tabulka limitů a tři konkrétní změny. Ne „bot management strategie“. Když se strategie nevejde na jednu stránku, malý tým ji stejně nebude používat. Bude na ni jen pyšně odkazovat v Notionu, kde odpočívá vedle dalších artefaktů civilizace.
+
+### Zdroje k příloze FK
+
+- OWASP API Security Top 10 — API4:2023 Unrestricted Resource Consumption k limitům spotřeby zdrojů, payloadů, operací a nákladů: https://owasp.org/API-Security/editions/2023/en/0xa4-unrestricted-resource-consumption/
+- OWASP Bot Management and Anti-Automation Cheat Sheet k architektuře obrany proti automatizovanému zneužití bez blokování legitimních botů: https://cheatsheetseries.owasp.org/cheatsheets/Bot_Management_and_Anti-Automation_Cheat_Sheet.html
+- OWASP Automated Threats to Web Applications jako slovník typů automatizovaného zneužití webových aplikací: https://owasp.org/www-project-automated-threats-to-web-applications/
+- RFC 6585 definuje HTTP status `429 Too Many Requests`: https://www.rfc-editor.org/info/rfc6585/
+- RFC 9110 popisuje hlavičku `Retry-After` a její použití v HTTP odpovědích: https://www.rfc-editor.org/rfc/rfc9110.html#name-retry-after
+- EDPB Guidelines 1/2024 k oprávněnému zájmu podle čl. 6(1)(f) GDPR jako užitečný rámec pro bezpečnostní zpracování osobních údajů s testem nezbytnosti a vyvážení: https://www.edpb.europa.eu/system/files/2024-10/edpb_guidelines_202401_legitimateinterest_en.pdf
+
 ## Pracovní log
+
+- 2026-08-28: Přidána příloha FK „Rate limiting a ochrana proti zneužití bez fingerprintingu“ s mapou chráněných zdrojů, vrstvenými limity, privacy-first pravidly bez fingerprintingu, návrhem odpovědi `429`, kartou ochrany endpointu, checklistem, abuse review cvičením a ověřenými OWASP/RFC/EDPB zdroji.
 
 - 2026-08-28: Přidána příloha FJ „AI asistenti v produktu bez datového vysavače“ s vymezením úlohy asistenta, tříděním dat podle citlivosti, RAG pravidly, tool access modelem, AI Act/GDPR kontrolou, logováním, AI feature kartou, checklistem, mini cvičením a ověřenými zdroji.
 
