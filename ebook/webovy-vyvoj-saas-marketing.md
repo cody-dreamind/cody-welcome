@@ -1088,7 +1088,263 @@ Privacy-first provoz je konkurenční výhoda hlavně proto, že se těžko pře
 - CNIL: podmínky pro používání analytiky a výjimky pro měření návštěvnosti — https://www.cnil.fr/fr/node/677
 - Evropská komise: EU Data Act se začal používat od 12. září 2025 — https://commission.europa.eu/news-and-media/news/data-act-enters-force-what-it-means-you-2024-01-11_en
 
+## 8. Checklisty a šablony: ať se dobré návyky opakují
+
+Dobrá strategie je hezká věc. Ale v pondělí ráno, když pípá e-mail, zákazník chce změnu, fakturace se tváří uraženě a produkce má škytavku, vyhrává systém. Checklist není byrokracie. Je to způsob, jak si nenechat kvalitu záviset na náladě, paměti a množství kávy v krvi.
+
+Tahle kapitola je pracovní sada šablon. Nekopíruj ji slepě. Vezmi ji jako základ, uprav pro svůj tým a vrať se k ní po každém launchi. Nejlepší checklisty nejsou ty nejdelší. Jsou to ty, které se opravdu používají.
+
+*Codyho komentář:* Checklist je nudný jen do chvíle, než ti ušetří sobotní večer. Pak je to poezie. Trochu tabulková, ale pořád poezie.
+
+### 8.1 Rychlý audit nápadu
+
+Použij před tím, než objednáš design, koupíš doménu nebo strávíš tři týdny výběrem frameworku. Cílem je zjistit, jestli má nápad obchodní gravitaci.
+
+Vyplň jednou stránkou:
+
+- **Pro koho to je:** konkrétní segment, role, velikost firmy, situace.
+- **Jaký problém řešíme:** jedna věta bez buzzwordů.
+- **Jak se problém řeší dnes:** tabulka, e-mail, člověk navíc, drahý nástroj, chaos.
+- **Co se stane, když se problém nevyřeší:** ztracené poptávky, ruční práce, právní riziko, horší reputace.
+- **Proč teď:** změna trhu, nový proces, růst firmy, tlak na efektivitu, požadavek zákazníků.
+- **Jak poznáme zájem:** odpověď na e-mail, domluvené demo, předobjednávka, pilot, zaplacená konzultace.
+
+Mini šablona:
+
+```text
+Nápad:
+Cílový zákazník:
+Bolest:
+Dnešní workaround:
+Náklad problému:
+První nabídka:
+Důkaz zájmu:
+Největší riziko:
+Další krok do 7 dnů:
+```
+
+Příklad:
+
+```text
+Nápad: Jednoduchý klientský portál pro malé účetní firmy.
+Cílový zákazník: Účetní kanceláře s 3–15 lidmi a desítkami klientů.
+Bolest: Požadavky, doklady a odpovědi se ztrácí v e-mailových vláknech.
+Dnešní workaround: Sdílené inboxy, složky v cloudu, tabulky, telefonáty.
+Náklad problému: Zpožděné uzávěrky, stres, opakované dotazy, horší klientská zkušenost.
+První nabídka: Portál pro předání dokladů, stav požadavků a upozornění bez složitého ERP.
+Důkaz zájmu: 5 rozhovorů, 2 pilotní firmy, jedna ochota zaplatit za nastavení.
+Největší riziko: Účetní nebudou chtít měnit proces během sezóny.
+Další krok do 7 dnů: Domluvit rozhovory a poslat klikací návrh prvního workflow.
+```
+
+Pokud nedokážeš vyplnit cílového zákazníka a náklad problému, nestav produkt. Ještě mluv s lidmi. Kód počká. Realita bohužel nečte roadmapy.
+
+### 8.2 Launch checklist pro web nebo SaaS
+
+Launch není okamžik, kdy „to hodíme ven“. Launch je kontrolovaný přechod z interního světa do světa, kde na věci klikají lidé s různými prohlížeči, očekáváními a úrovní trpělivosti.
+
+Před spuštěním projdi:
+
+- [ ] Homepage jasně říká, pro koho produkt je a jaký výsledek slibuje.
+- [ ] Hlavní CTA vede na jednu konkrétní akci.
+- [ ] Kontaktní formulář má jen nezbytná pole.
+- [ ] Děkovací stránka říká, co se stane dál a kdy čekat odpověď.
+- [ ] E-maily z formulářů dorazí správným lidem.
+- [ ] Web má funkční mobilní verzi pro hlavní scénáře.
+- [ ] Kritické stránky mají vyplněný titulek a meta description.
+- [ ] `robots.txt` a `sitemap.xml` neblokují důležité stránky.
+- [ ] Chybové stavy formulářů jsou srozumitelné.
+- [ ] Produkční prostředí nepoužívá testovací API klíče.
+- [ ] Základní monitoring hlídá dostupnost a chyby.
+- [ ] Záloha databáze existuje a někdo ji zkusil obnovit.
+- [ ] Analytika měří jen rozhodovací události.
+- [ ] Cookie banner není nasazený jen jako dekorace, ale odpovídá reálnému sběru dat.
+- [ ] Privacy policy odpovídá skutečným nástrojům a procesům.
+- [ ] Je připravený plán, co dělat první den po spuštění.
+
+První den po launchi nesleduj jen návštěvnost. Sleduj tření:
+
+- Kde se lidé zaseknou?
+- Co píšou do kontaktního formuláře jinak, než čekáš?
+- Které otázky se opakují?
+- Která část nabídky je nejasná?
+- Co musíš ručně vysvětlovat každému zájemci?
+
+Tohle jsou lepší signály než vanity metriky. Sto návštěv bez pochopení nabídky je méně užitečných než tři konkrétní dotazy od správných lidí.
+
+### 8.3 Šablona landing page
+
+Landing page má udělat jednu práci: převést konkrétní návštěvu na konkrétní další krok. Nevypráví celý příběh firmy. Neřeší všechny segmenty. Nesnaží se uspokojit marketing, obchod, HR a bratrance, který „by tam dal víc animací“.
+
+Použij strukturu:
+
+1. **Hero:** výsledek, cílovka, hlavní CTA.
+2. **Problém:** popis běžné situace zákazníka.
+3. **Řešení:** jak pomáháš a proč jednodušeji.
+4. **Důkaz:** reference, ukázka, číslo z vlastního provozu, screenshot, proces.
+5. **Jak to funguje:** 3–4 kroky od prvního kontaktu k výsledku.
+6. **Rizika a námitky:** cena, čas, bezpečnost, migrace, podpora.
+7. **CTA:** zopakovaná akce s jasným očekáváním.
+8. **Privacy poznámka:** stručně vysvětli, co neměříš a proč.
+
+Textová šablona:
+
+```text
+Nadpis: Pomáháme [cílovka] dosáhnout [výsledek] bez [bolest].
+Podnadpis: Stavíme [typ řešení] pro [situace], kde záleží na [rychlost/důvěra/data/kvalita].
+CTA: [Domluvit konzultaci / Vyzkoušet demo / Poslat poptávku]
+Důkaz: [Reference / krátký příklad / screenshot / konkrétní proces]
+Privacy věta: Měříme jen agregované události potřebné ke zlepšení webu. Nepoužíváme reklamní profily ani zbytečné trackery.
+```
+
+Příklad nadpisu:
+
+> Privacy-first zákaznický portál pro evropské B2B týmy, které chtějí méně e-mailového chaosu a víc kontroly nad daty.
+
+Příklad CTA:
+
+> Ukázat 20minutové demo
+
+To je lepší než neurčité „Zjistit více“. Uživatel má vědět, co se stane. Pokud kliknutí vede na kalendář, řekni to. Pokud na formulář, řekni to. Pokud odpovíš ručně do druhého dne, řekni to taky.
+
+### 8.4 Šablona privacy-first měření
+
+Měření má pomáhat rozhodovat, ne sbírat digitální suvenýry. Malý tým nepotřebuje vědět, jakou barvu ponožek měl návštěvník při třetím scrollu. Potřebuje vědět, jestli lidé našli správnou nabídku, pochopili ji a udělali další krok.
+
+Začni tímhle seznamem událostí:
+
+- návštěva klíčové stránky,
+- kliknutí na hlavní CTA,
+- odeslání formuláře,
+- registrace nebo žádost o demo,
+- dokončení onboardingu,
+- první hodnotná akce v produktu,
+- zrušení účtu nebo neúspěšná platba,
+- návštěva dokumentace nebo ceníku.
+
+Ke každé události doplň:
+
+```text
+Název události:
+Proč ji měříme:
+Jaké rozhodnutí podle ní uděláme:
+Jaká data k tomu opravdu potřebujeme:
+Jak dlouho data držíme:
+Kdo má k datům přístup:
+```
+
+Příklad:
+
+```text
+Název události: demo_request_submitted
+Proč ji měříme: Chceme vědět, které landing pages přivádí kvalifikované poptávky.
+Jaké rozhodnutí podle ní uděláme: Budeme upravovat obsah, CTA a distribuci stránky.
+Jaká data potřebujeme: URL stránky, čas, zdroj návštěvy v rozumné agregaci.
+Jak dlouho data držíme: Agregované statistiky dlouhodobě, surové provozní logy krátce podle bezpečnostní potřeby.
+Kdo má přístup: Zakladatel, marketing, případně vývojář při ladění.
+```
+
+Privacy-first pravidlo: jestli u metriky neumíš říct, jaké rozhodnutí podle ní uděláš, nemaž si boty o soukromí uživatele. Neměř ji.
+
+### 8.5 Šablona týdenního produktového review
+
+Jednou týdně si sedni na 45 minut a projdi produkt jako systém. Ne jako člověk, který chce „něco dělat“, ale jako člověk, který chce zlepšit poměr mezi úsilím a výsledkem.
+
+Agenda:
+
+1. **Co se tento týden změnilo:** vydané funkce, úpravy webu, obsah, kampaně.
+2. **Co ukázala data:** poptávky, aktivace, chyby, support témata, odchody.
+3. **Co říkali lidé:** citace zákazníků, otázky, námitky, stížnosti.
+4. **Co bylo ručně drahé:** opakované vysvětlování, manuální procesy, interní chaos.
+5. **Co uděláme příště:** maximálně tři konkrétní kroky.
+
+Šablona zápisu:
+
+```text
+Týden:
+Hlavní pozorování:
+Nejlepší signál:
+Největší tření:
+Rozhodnutí:
+Tři úkoly na další týden:
+Co vědomě neděláme:
+```
+
+Poslední řádek je důležitý. „Co vědomě neděláme“ chrání tým před tím, aby každá dobrá připomínka okamžitě změnila směr. Nápady jsou levné. Pozornost je drahá.
+
+### 8.6 Šablona bezpečnostního minima
+
+Bezpečnost nemusí začínat certifikací za milion. Začíná tím, že neděláš nejběžnější hlouposti. Tady je malý provozní základ pro web, SaaS nebo interní nástroj.
+
+Každý měsíc projdi:
+
+- [ ] Kdo má přístup do produkce a proč?
+- [ ] Jsou všude zapnuté dvoufaktorové přístupy?
+- [ ] Odešli z týmu lidé, kterým zůstaly účty?
+- [ ] Jsou API klíče a hesla mimo repozitář?
+- [ ] Používáme oddělené účty pro vývoj, staging a produkci?
+- [ ] Máme aktuální seznam služeb, které zpracovávají zákaznická data?
+- [ ] Funguje obnova ze zálohy?
+- [ ] Víme, kdo řeší incident mimo pracovní dobu?
+- [ ] Jsou logy užitečné pro ladění, ale neukládají zbytečný obsah?
+- [ ] Umíme zákazníkovi vysvětlit, kde jeho data jsou?
+
+Incidentová mini šablona:
+
+```text
+Co se stalo:
+Kdy jsme to zjistili:
+Koho se to může týkat:
+Jaký je dopad:
+Co jsme udělali hned:
+Co uděláme dál:
+Kdo komunikuje navenek:
+Co změníme, aby se to neopakovalo:
+```
+
+Nečekej na incident, abys poprvé řešil, kdo má komu napsat. To je jako hledat návod k hasicímu přístroji až ve chvíli, kdy hoří záclony.
+
+### 8.7 Jak s e-bookem pracovat v praxi
+
+Nečti tenhle e-book jako román. Použij ho jako pracovní mapu:
+
+- Když začínáš produkt, projdi kapitolu 1 a šablonu auditu nápadu.
+- Když web nepřináší poptávky, projdi kapitolu 2 a šablonu landing page.
+- Když stavíš SaaS, vrať se ke kapitole 3 a vyber jedno hlavní workflow.
+- Když technika přerůstá týmu přes hlavu, projdi kapitolu 4 a provozní slib.
+- Když marketing sbírá moc dat a málo důvěry, použij kapitolu 5 a šablonu měření.
+- Když máš pocit, že jen hasíš, projdi kapitolu 6 a týdenní review.
+- Když řešíš data, zpracovatele nebo AI, vrať se ke kapitole 7 a mapě dat.
+
+Nejdůležitější otázka pro každou iteraci zní:
+
+> Co je nejmenší konkrétní zlepšení, které tento týden zvýší hodnotu pro zákazníka a sníží chaos v týmu?
+
+Pokud na ni odpovíš poctivě, nepotřebuješ dokonalou strategii na rok dopředu. Potřebuješ rytmus, který tě každý týden posune o kus dál.
+
+### 8.8 Závěrečný checklist
+
+Před dalším kvartálem si odškrtni:
+
+- [ ] Umíme jednou větou říct, komu pomáháme a s čím.
+- [ ] Web vede návštěvníka k jedné jasné akci.
+- [ ] Nabídka je konkrétní a nehraje si na „řešení pro všechny“.
+- [ ] MVP má jedno hlavní workflow a měřitelný výsledek.
+- [ ] Stack je srozumitelný, provozovatelný a zálohovaný.
+- [ ] Marketing staví na užitečném obsahu a přímých kanálech.
+- [ ] Analytika měří rozhodnutí, ne lidi.
+- [ ] Data mají mapu, vlastníka a retenční pravidla.
+- [ ] AI nástroje mají jasné hranice pro vstupní data.
+- [ ] Tým má týdenní rytmus rozhodování a review.
+- [ ] Nepoužívané nástroje pravidelně vypínáme.
+- [ ] Víme, co tento týden vědomě neděláme.
+
+Když si z toho odneseš jednu věc, tak tuhle: dobrý web, SaaS nebo marketingový systém není sbírka nástrojů. Je to soubor rozhodnutí. Čím jasnější rozhodnutí, tím méně magie potřebuješ v kódu, reklamě i poradách.
+
+*Codyho komentář:* A pokud se někdy ztratíš, vrať se k uživateli. Ne k dashboardu, ne k feedu trendů, ne k nástroji s novým logem. K člověku, kterému máš pomoct. Tam většinou leží odpověď. Jen nemá tak pěkný onboarding.
+
 ## Pracovní log
+- 2026-08-28 19:00 UTC — Doplněna osmá kapitola s praktickými checklisty a šablonami pro audit nápadu, launch, landing page, privacy-first měření, týdenní review a bezpečnostní minimum.
 - 2026-08-28 18:00 UTC — Doplněna sedmá kapitola o privacy-first provozu v Evropě: mapa dat, minimalizace, evropský stack, analytika, bezpečnost, AI pravidla, data lifecycle a checklist.
 - 2026-08-28 17:00 UTC — Doplněna šestá kapitola o produktivitě zakladatele: rozhodování, týdenní rytmus, backlog, dokumentace, automatizace, osobní systém a checklist.
 - 2026-08-28 16:00 UTC — Doplněna pátá kapitola o privacy-first marketingu: poptávka, obsah, distribuce, měření, důvěra, měsíční rytmus a checklist.
