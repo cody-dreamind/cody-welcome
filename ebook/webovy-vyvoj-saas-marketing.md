@@ -1821,7 +1821,162 @@ Checklist:
 
 *Codyho komentář:* Zákaznický výzkum má zvýšit porozumění, ne vytvořit složku „lidé nám řekli osobní věci a my nevíme, proč je pořád máme“. Data jsou jako sušenky v klávesnici: čím míň jich tam nasypeš, tím líp se ti bude pracovat.
 
+## Příloha C: Obsahový systém bez závislosti na algoritmech
+
+Obsahový marketing často vypadá jako závod v krmení sociálních sítí. Každý den něco postnout, rychle reagovat, sledovat reach, řešit proč se video nechytlo a večer mít pocit, že člověk pracoval, i když web nezískal jediný kvalitní lead. Pro malý SaaS tým nebo studio je lepší stavět obsah jako aktivum: články, návody, případovky a produktové stránky, které se dají najít, sdílet přímým odkazem a znovu použít v obchodě.
+
+Privacy-first obsahový systém stojí na jednoduché myšlence: nejdřív vlastněné kanály, potom půjčené platformy. Web, blog, dokumentace, RSS a e-mail se souhlasem jsou základ. Sociální sítě jsou distribuce, ne archiv tvého podnikání.
+
+### C.1 Pilíře obsahu podle nákupní cesty
+
+Nezačínej otázkou „co máme publikovat tento týden?“. Začni otázkou „jaké rozhodnutí zákazník právě řeší?“. Obsah pak rozděl do čtyř pilířů:
+
+1. **Problém:** zákazník ještě neví, jak přesně pojmenovat bolest.
+2. **Možnosti:** zákazník porovnává přístupy, nástroje nebo dodavatele.
+3. **Důvěra:** zákazník chce vidět důkaz, proces, reference nebo konkrétní zkušenost.
+4. **Použití:** zákazník už produkt má nebo ho testuje a potřebuje rychle uspět.
+
+Příklad pro SaaS, který pomáhá servisním firmám řídit požadavky:
+
+```text
+Problém:
+- Proč servisní týmy ztrácí požadavky mezi e-mailem a telefonem
+- Jak poznat, že tabulka přestává stačit
+
+Možnosti:
+- Helpdesk vs. jednoduchý zákaznický portál
+- Kdy stavět vlastní řešení a kdy koupit hotový nástroj
+
+Důvěra:
+- Jak vypadá pilot během prvních 14 dnů
+- Případovka: méně ztracených požadavků bez těžkého CRM
+
+Použití:
+- Šablona stavů požadavku pro malý servisní tým
+- Checklist migrace z inboxu do portálu
+```
+
+Tahle mapa pomáhá i prodejně. Když lead napíše „nevíme, jestli potřebujeme helpdesk“, neposíláš obecnou homepage, ale článek z pilíře Možnosti. Když se ptá na bezpečnost, pošleš konkrétní stránku o provozu a datech. Obsah tím přestane být ozdoba a začne být obchodní nástroj.
+
+### C.2 Jedna myšlenka, tři formáty
+
+Malý tým nemá kapacitu vyrábět deset různých témat týdně. Má ale kapacitu vzít jednu dobrou myšlenku a převést ji do více formátů bez ztráty kvality.
+
+Praktický postup:
+
+1. Napiš hlavní článek nebo návod na web.
+2. Z článku udělej krátký checklist pro zákazníka.
+3. Vyber jednu ostrou myšlenku pro krátký post na síť.
+4. Přidej odkaz do relevantní produktové stránky.
+5. Po měsíci článek uprav podle otázek, které přišly v obchodních hovorech.
+
+Příklad:
+
+- Hlavní článek: „Jak vybrat privacy-first analytiku pro B2B web.“
+- Checklist: „7 otázek před nasazením analytiky.“
+- Krátký post: „Měř věci, podle kterých budeš rozhodovat. Zbytek je digitální šum.“
+- Produktová vazba: sekce na stránce služby „Analytika bez šmírování“.
+- Aktualizace: doplnění odpovědi na námitku „uvidíme méně dat než v běžném nástroji?“.
+
+*Codyho komentář:* Recyklace obsahu není lenost. Lenost je napsat dobrý článek, zakopat ho v blogu a tvářit se, že algoritmus má povinnost ho najít. Algoritmus nemá povinnosti. Má nálady.
+
+### C.3 Editorial backlog bez skládky nápadů
+
+Backlog obsahu se snadno změní v hřbitov titulků. Každý nápad proto drž v jednoduché šabloně:
+
+```text
+Název pracovně:
+Cílový čtenář:
+Situace, ve které článek pomůže:
+Hlavní otázka:
+Jaké rozhodnutí má čtenář udělat po přečtení:
+Vazba na nabídku nebo produkt:
+Důkaz / příklad / zkušenost:
+Distribuce:
+Stav: nápad / ověřit / psát / publikováno / aktualizovat
+```
+
+Nápad bez cílového čtenáře a rozhodnutí nepatří do aktivního plánu. Může zůstat v parkovišti, ale netvař se, že je to práce na marketingu. Aktivní editorial backlog by měl mít maximálně 10 položek. Když je jich 80, není to strategie, ale textový koberec přes nerozhodnost.
+
+### C.4 Publikační rytmus pro malý tým
+
+Konzistence neznamená publikovat pořád. Znamená mít rytmus, který tým dlouhodobě unese. Pro malý B2B tým stačí jednoduchý měsíční cyklus:
+
+**Týden 1: Výběr tématu**
+
+- projdi obchodní hovory, support a vyhledávací dotazy,
+- vyber jednu nákupní otázku,
+- rozhodni pilíř obsahu,
+- napiš osnovu a konkrétní příklad.
+
+**Týden 2: Draft**
+
+- napiš první verzi bez ladění každé věty,
+- doplň screenshoty, šablony nebo checklist,
+- označ tvrzení, která vyžadují zdroj,
+- přidej jasné CTA.
+
+**Týden 3: Publikace a distribuce**
+
+- publikuj na webu s čitelným URL,
+- přidej článek do RSS,
+- pošli ho relevantním kontaktům, pokud jim opravdu pomůže,
+- zkrať hlavní myšlenku pro sociální sítě bez sledovacích parametrů navíc.
+
+**Týden 4: Údržba**
+
+- zkontroluj, jestli článek někdo čte a odkud přichází,
+- zapiš otázky, které vyvolal,
+- doplň chybějící část,
+- rozhodni, jestli vznikne další článek, landing page nebo produktová úprava.
+
+Tenhle rytmus je schválně klidný. Obsah má podporovat obchod, ne sežrat celý tým a pak si říct o dezert v podobě „ještě natočíme reels“.
+
+### C.5 Měření obsahu bez sledovacího cirkusu
+
+U obsahu nepotřebuješ vědět, že anonymní návštěvník z Plzně scrolloval 63 % stránky na zařízení s rozlišením, které by potěšilo kriminalistu. Potřebuješ vědět, jestli obsah pomáhá rozhodování.
+
+Sleduj raději:
+
+- které články přivádí kvalitní návštěvy,
+- které články posíláš v obchodních hovorech,
+- po kterých článcích lidé píšou konkrétní dotaz,
+- které články snižují opakované námitky,
+- které návody používají zákazníci po nákupu,
+- které stránky nemají žádnou jasnou další akci.
+
+Privacy-first měření může být jednoduché: agregované pageviews, referrery bez osobních profilů, události typu `cta_click` nebo `rss_subscribe`, a ruční poznámka v CRM, že konkrétní obsah pomohl v obchodním procesu. Kombinace lehké analytiky a lidského kontextu bývá užitečnější než hromada grafů, které nikdo nepoužije.
+
+### C.6 Distribuce přes přímé kanály
+
+Distribuce není jen sociální síť. Pro evropský privacy-first provoz dávej přednost kanálům, kde má uživatel kontrolu:
+
+- **RSS:** lidé mohou sledovat web bez účtu a bez algoritmu.
+- **Přímé odkazy:** posílej konkrétní článek konkrétním lidem.
+- **Dokumentace:** dobrý návod patří i do knowledge base.
+- **Komunity:** odpovídej tam, kde je téma přirozené, ne spamově.
+- **E-mail se souhlasem:** posílej jen lidem, kteří o to stojí.
+- **Partnerské odkazy:** domluv se s firmami, které řeší sousední problém.
+
+Na sociální sítě dávej ochutnávku, ne celé know-how. Plná hodnota má žít na tvém webu. Když platforma změní pravidla, dosah nebo API, nepřijdeš o vlastní knihovnu obsahu.
+
+### C.7 Checklist: obsah jako dlouhodobé aktivum
+
+- [ ] Každé téma má cílového čtenáře a nákupní situaci.
+- [ ] Každý článek odpovídá na konkrétní otázku.
+- [ ] Každý článek má příklad, šablonu, checklist nebo rozhodovací rámec.
+- [ ] Každý článek má jednu jasnou další akci.
+- [ ] Web nabízí RSS nebo jiný přímý způsob sledování obsahu.
+- [ ] Distribuce nestojí jen na jedné platformě.
+- [ ] Měření je agregované a nevytváří zbytečné profily.
+- [ ] Starší obsah má termín revize.
+- [ ] Obchodní tým ví, které články posílat k častým námitkám.
+- [ ] Nápady bez vazby na produkt nebo zákaznické rozhodnutí nejsou v aktivním plánu.
+
+Obsahový systém má být nudně spolehlivý. Publikuj méně věcí, ale takových, které zákazníkovi opravdu pomůžou udělat další krok. Když se z článku stane odpověď, kterou používáš v prodeji, supportu i onboardingu, vyhrál jsi. Ne virálně, ale prakticky — což je v podnikání podezřele často lepší.
+
 ## Pracovní log
+- 2026-08-28 22:00 UTC — Doplněna příloha C o obsahovém systému bez závislosti na algoritmech: pilíře obsahu, recyklace formátů, editorial backlog, publikační rytmus, privacy-first měření a distribuce přes přímé kanály.
 - 2026-08-28 21:00 UTC — Doplněna příloha B o zákaznických rozhovorech: výběr respondentů, pozvánka, otázky, signály, poznámky, synthesis sprint a privacy-first pravidla.
 - 2026-08-28 20:00 UTC — Doplněna příloha A s 30denním akčním plánem pro vyjasnění produktu, web jako prodejní systém, MVP/provoz a privacy-first růstový rytmus.
 - 2026-08-28 19:00 UTC — Doplněna osmá kapitola s praktickými checklisty a šablonami pro audit nápadu, launch, landing page, privacy-first měření, týdenní review a bezpečnostní minimum.
