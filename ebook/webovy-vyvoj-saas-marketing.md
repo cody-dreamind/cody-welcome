@@ -696,8 +696,167 @@ Před spuštěním kampaně, článku nebo landing page si projdi:
 Marketing bez šmírování není pomalejší marketing. Je to marketing, který se víc opírá o užitečnost, důvěru a přímý vztah. Místo aby ses snažil každého návštěvníka dohnat reklamou, postavíš systém, ve kterém správní lidé snáz pochopí, proč se s tebou mají bavit.
 
 
-## Pracovní log
+## 6. Produktivita zakladatele: méně sprintů do zdi
 
+Produktivita zakladatele, freelancera nebo malého týmu není soutěž v tom, kdo má barevnější kalendář a víc nástrojů na řízení práce. Skutečná produktivita je schopnost dělat opakovaně správné věci ve správném pořadí, aniž by se z firmy stal permanentní požární sbor. Pokud každý den jen hasíš, možná jsi velmi vytížený. Ale vytíženost není strategie, jen dražší forma chaosu.
+
+V digitálním produktu se práce dělí na čtyři typy:
+
+- **Tvorba hodnoty** — vývoj, design, obsah, prodejní stránka, onboarding, zákaznická podpora.
+- **Rozhodování** — prioritizace, pricing, segmentace zákazníků, výběr stacku.
+- **Údržba systému** — monitoring, zálohy, aktualizace, dokumentace, účetnictví.
+- **Šum** — schůzky bez výsledku, nejasné nápady, metriky bez rozhodnutí, nástroje pro nástroje.
+
+Cíl není odstranit vše kromě tvorby. Cíl je vědět, kdy děláš co. Zakladatel, který neumí rozlišit strategické rozhodnutí od šumu, bude optimalizovat logo ve chvíli, kdy mu padá onboarding.
+
+### 6.1 Jedno rozhodnutí denně, ne dvacet nedokončených debat
+
+Malý tým se často nezasekne proto, že nemá dost nápadů. Zasekne se proto, že žádný nápad nepřejde do jasného rozhodnutí. Každé otevřené rozhodnutí vytváří mentální dluh: lidé nevědí, co platí, práce se větví a komunikace bobtná.
+
+Zaveď jednoduchý formát rozhodnutí:
+
+- **Otázka:** Co přesně rozhodujeme?
+- **Možnosti:** Jaké realistické varianty máme?
+- **Dopad:** Co se stane, když se spleteme?
+- **Termín:** Kdy musí být jasno?
+- **Majitel:** Kdo rozhodnutí udělá?
+- **Výsledek:** Co platí odteď dál?
+
+Příklad:
+
+- Otázka: Budeme pro MVP podporovat týmové účty?
+- Možnosti: Ne; ano jen ručně; ano s plným self-service onboardingem.
+- Dopad: Plný self-service zpozdí MVP, ruční režim pomůže validovat poptávku.
+- Termín: Pátek 12:00.
+- Majitel: zakladatel produktu.
+- Výsledek: Pro první tři zákazníky zakládáme týmové účty ručně a měříme, kolik práce to stojí.
+
+Takové rozhodnutí nemusí být dokonalé. Musí být zapsané. Dokonalost bez zápisu se za týden změní v archeologii Slacku.
+
+### 6.2 Týdenní rytmus místo permanentního sprintu
+
+Sprinty jsou užitečné, když má tým jasno, co chce dodat. Jsou škodlivé, když slouží jen jako obřad k přesouvání nejasných úkolů z minulého týdne do dalšího. Pro malý SaaS nebo webový projekt často stačí jednoduchý týdenní rytmus:
+
+1. **Pondělí dopoledne:** vybrat jeden hlavní výsledek týdne.
+2. **Pondělí odpoledne:** rozbít výsledek na malé dokončitelné kroky.
+3. **Úterý až čtvrtek:** chránit hlubokou práci, vývoj, psaní a obchod.
+4. **Pátek dopoledne:** dokončit, otestovat, publikovat nebo předat.
+5. **Pátek odpoledne:** krátká retrospektiva: co přineslo hodnotu, co byl šum, co se příště zjednoduší.
+
+Hlavní výsledek týdne má být věta, ne seznam:
+
+- Spustíme novou landing page pro segment účetních firem.
+- Zkrátíme registraci z pěti kroků na dva.
+- Doplníme export dat a otestujeme ho se dvěma zákazníky.
+- Napíšeme a rozešleme článek odpovídající na nejčastější námitku z prodeje.
+
+Když je hlavní výsledek moc velký, rozpadne se. Když je moc malý, nic nezmění. Dobrý týdenní cíl je takový, který jde v pátek ukázat někomu mimo tým.
+
+*Codyho komentář:* Pokud výsledek týdne nejde poznat bez interní prezentace, možná to nebyl výsledek. Možná to byl jen rituální tanec kolem backlogu.
+
+### 6.3 Backlog není skládka nápadů
+
+Backlog má pomáhat vybírat práci. Pokud obsahuje stovky položek bez kontextu, je to skládka s vyhledáváním. Každý nápad by měl mít důvod, zdroj a další krok. Bez toho je levnější ho smazat než ho navždy přenášet.
+
+Použij tři úrovně:
+
+- **Teď:** práce na nejbližší týden, jasný majitel a definice hotovo.
+- **Brzy:** důležité věci s ověřeným důvodem, ale bez kapacity právě teď.
+- **Možná:** nápady, které zní dobře, ale nemají důkaz ani naléhavost.
+
+Jednou měsíčně projdi „Možná“ a většinu položek smaž. Ne archivuj, opravdu smaž. Nápad, který je důležitý, se vrátí přes zákazníka, obchod nebo provozní bolest. Nápad, který se nikdy nevrátí, pravděpodobně nepotřeboval vlastní životní pojištění v projektovém nástroji.
+
+Každá položka v aktivním backlogu by měla mít:
+
+- proč ji řešíme,
+- pro koho je důležitá,
+- jak poznáme, že je hotová,
+- co se stane, když ji neuděláme,
+- nejmenší rozumnou verzi.
+
+Příklad špatné položky:
+
+> Vylepšit dashboard.
+
+Příklad použitelné položky:
+
+> Přidat do dashboardu přehled nových leadů za posledních 7 dní, aby obchodník viděl, komu se má ozvat jako první. Hotovo: karta zobrazuje počet leadů, trend oproti předchozímu týdnu a odkaz na filtrovaný seznam.
+
+### 6.4 Dokumentace jako opora, ne román
+
+Dokumentace má zmenšit závislost na paměti lidí. Nemusí být dlouhá. Musí být dostupná, aktuální a psaná pro konkrétní situaci. Malý tým potřebuje hlavně čtyři typy dokumentů:
+
+- **Rozhodnutí:** proč jsme něco zvolili a co jsme odmítli.
+- **Runbooky:** co dělat, když něco spadne nebo se opakuje.
+- **Produktové poznámky:** komu slouží funkce, jaký problém řeší a kde jsou limity.
+- **Zákaznické poznatky:** opakované otázky, námitky, citace a příklady použití.
+
+Runbook pro incident může být velmi krátký:
+
+1. Zkontroluj stav hostingu a poslední deploy.
+2. Podívej se na aplikační logy a monitoring.
+3. Ověř, zda problém dopadá na všechny uživatele nebo jen část.
+4. Pokud je poslední deploy podezřelý, připrav rollback.
+5. Zapiš čas, dopad, příčinu a prevenci.
+
+Privacy-first poznámka: do dokumentace nekopíruj osobní údaje zákazníků, tokeny, celé e-maily ani interní logy se zbytečnými detaily. Dokumentuj vzor problému a rozhodnutí, ne soukromý obsah. I interní wiki je datový systém, ne kouzelná šuplíková dimenze mimo GDPR.
+
+### 6.5 Automatizuj až opakovaný problém
+
+Automatizace je skvělá, když nahrazuje opakovanou ruční práci. Je mizerná, když automatizuje proces, kterému ještě nerozumíš. Nejdřív udělej věc ručně několikrát, zapiš kroky a zjisti, kde vzniká chyba nebo zdržení. Teprve potom automatizuj.
+
+Dobří kandidáti na automatizaci:
+
+- pravidelné zálohy a kontrola obnovitelnosti,
+- nasazení aplikace po schváleném merge,
+- generování fakturačních podkladů,
+- upozornění na selhané formuláře nebo platby,
+- publikace RSS položek a interní notifikace o novém obsahu,
+- anonymizované produktové reporty bez osobních profilů.
+
+Špatní kandidáti:
+
+- nejasný prodejní proces,
+- onboarding, který ještě nikdo nedokončil ručně,
+- zákaznická komunikace bez pochopení opakovaných dotazů,
+- „AI agent“, který má rozhodovat místo majitele procesu, protože nikdo nechce napsat pravidla.
+
+Automatizace by měla mít vlastníka, log a bezpečné selhání. Když automat posílá e-maily, mění data nebo spouští deploy, musí být jasné, kdo ho kontroluje a jak se zastaví. Robot bez vypínače je jen dražší chaos s API klíčem.
+
+### 6.6 Osobní operační systém zakladatele
+
+Zakladatel potřebuje jednoduchý systém, který unese chaos, ale nevyrábí ho. Základ:
+
+- **Inbox:** jedno místo pro nové nápady, úkoly a poznámky.
+- **Kalendář:** chráněné bloky pro hlubokou práci a schůzky dávkované do menšího počtu dnů.
+- **Týdenní review:** výběr priorit, zavření rozhodnutí, úklid backlogu.
+- **Denní start:** tři nejdůležitější kroky dne, ne dvacet přání.
+- **Denní konec:** krátký zápis, co je hotovo, co blokuje další práci a co se nesmí zapomenout.
+
+Praktické pravidlo: pokud se úkol nevejde do jedné věty s výsledkem, není připravený. „Řešit marketing“ není úkol. „Dopsat sekci o evropském hostingu na landing page a přidat CTA na konzultaci“ už úkol je.
+
+Důležité je i říkat ne. Každé „ano“ na vedlejší věc bere čas hlavnímu výsledku. To platí pro funkce, schůzky, nové nástroje i partnerství. Zakladatel nemusí být nedostupný asketa v jeskyni s poznámkovým blokem. Ale musí chránit pozornost jako produkční databázi: zálohovat, omezit přístupy a nepouštět dovnitř náhodné skripty.
+
+### 6.7 Checklist: týden zakladatele bez chaosu
+
+Na začátku týdne si projdi:
+
+- [ ] Máme jeden hlavní výsledek týdne, který jde ukázat zákazníkovi nebo trhu.
+- [ ] Každý aktivní úkol má majitele, důvod a definici hotovo.
+- [ ] Otevřená rozhodnutí mají termín a člověka, který je zavře.
+- [ ] Backlog je rozdělený na Teď, Brzy a Možná.
+- [ ] V kalendáři jsou bloky na hlubokou práci bez schůzek.
+- [ ] Neautomatizujeme proces, který ještě neumíme popsat ručně.
+- [ ] Dokumentujeme rozhodnutí a runbooky, ne soukromý šum.
+- [ ] Měříme jen metriky, podle kterých opravdu rozhodujeme.
+- [ ] V pátek víme, co se dodalo, co se naučilo a co se příště zjednoduší.
+- [ ] Aspoň jedna věc byla vědomě odmítnuta, aby se hlavní práce dokončila.
+
+Produktivita není tlak na to, aby člověk pracoval pořád. Je to design systému, ve kterém správná práce vyhrává nad naléhavým hlukem. A v malém týmu je to často rozdíl mezi firmou, která roste, a firmou, která jen statečně přežívá vlastní seznam úkolů.
+
+
+## Pracovní log
+- 2026-08-28 17:00 UTC — Doplněna šestá kapitola o produktivitě zakladatele: rozhodování, týdenní rytmus, backlog, dokumentace, automatizace, osobní systém a checklist.
 - 2026-08-28 16:00 UTC — Doplněna pátá kapitola o privacy-first marketingu: poptávka, obsah, distribuce, měření, důvěra, měsíční rytmus a checklist.
 - 2026-08-28 15:00 UTC — Doplněna čtvrtá kapitola o technickém stacku: provozní slib, nudné technologie, architektura, opakovatelné nasazení, monitoring, zálohy a checklist.
 - 2026-08-28 14:00 UTC — Doplněna třetí kapitola o SaaS MVP: rozhodnutí místo backlogu, hlavní workflow, ruční validace, onboarding, pricing, měření a checklist.
