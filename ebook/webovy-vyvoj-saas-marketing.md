@@ -404,8 +404,156 @@ Před tím, než začneš stavět první verzi, projdi si:
 
 MVP má být konec dohadů, ne začátek nekonečného vývoje. Když první verze ukáže, že lidé workflow používají, chápou hodnotu a jsou ochotní platit, máš důvod přidávat další vrstvu. Když to neukáže, získal jsi levnou lekci. A levná lekce je pořád lepší než drahý dashboard, do kterého se nikdo nepřihlásí.
 
+
+---
+
+## 4. Technický stack bez cirkusu
+
+Technický stack není náboženství. Je to sada rozhodnutí, která má pomáhat produktu růst, týmu pracovat rychleji a zákazníkům věřit, že jejich data neskončí někde v temném datovém sklepě. Začínající projekty se často zaseknou na debatě, jestli použít ten nejnovější framework, databázi s kosmickým maskotem nebo deployment platformu, která má hezčí landing page než jejich vlastní produkt. To je lákavé, ale nebezpečné.
+
+Dobrá technologie je ta, kterou tým umí provozovat, vysvětlit a v krizové situaci opravit. Pokud stack vyžaduje tři seniorní specialisty, aby se změnil text v patičce, možná nestavíš SaaS, ale malý chrám úzkosti.
+
+### 4.1 Začni provozním slibem
+
+Než vybereš technologie, napiš si provozní slib. Ten říká, co musí být pravda, aby zákazník mohl produktu důvěřovat.
+
+Příklad pro B2B SaaS v Evropě:
+
+> Produkt běží na evropské infrastruktuře, ukládá jen nutná data, má pravidelné zálohy, jednoduchý export, monitoring dostupnosti a jasný postup při incidentu.
+
+Z takového slibu se stack vybírá snáz. Nepotřebuješ „nejlepší“ databázi obecně. Potřebuješ databázi, kterou umíš zálohovat, obnovit, škálovat v rozumném rozsahu a provozovat tam, kde dávají smysl tvoje datové závazky.
+
+Minimum provozního slibu:
+
+- **Region:** kde fyzicky běží aplikace, databáze, soubory a zálohy.
+- **Vlastnictví dat:** kdo má přístup k zákaznickým datům a jak se data exportují.
+- **Dostupnost:** jak rychle poznáš výpadek a kdo ho řeší.
+- **Obnova:** jak často zálohuješ a jak rychle dokážeš obnovit službu.
+- **Změny:** jak nasazuješ nové verze bez zbytečného rizika.
+
+Privacy-first přístup začíná už tady. Když si region, zálohy a přístupy necháš „vyřešit později“, později zjistíš, že jsou zapletené do každé části systému. A rozmotávání datových špaget není zrovna disciplína, kterou chceš dělat v pátek večer.
+
+### 4.2 Vyber nudné technologie pro důležité části
+
+Nudné technologie nejsou urážka. Jsou výhoda. U kritických částí produktu chceš věci, které mají dokumentaci, komunitu, nástroje pro debugování a dost lidí na trhu, kteří jim rozumí.
+
+Typický rozumný základ pro malý web nebo SaaS:
+
+- **Frontend:** jeden hlavní framework, který tým opravdu zná.
+- **Backend:** jednoduché API, jasná autentizace a minimum magických vrstev.
+- **Databáze:** relační databáze pro obchodní data, pokud nemáš dobrý důvod pro něco jiného.
+- **Úložiště souborů:** oddělené od aplikace, s jasnými pravidly přístupu.
+- **E-mail:** transakční e-maily přes službu, která umožňuje rozumné doručování a správu domény.
+- **Monitoring:** dostupnost, chyby a základní výkon, ne špionážní panel každého kliknutí.
+
+Není ostuda začít monolitem. Naopak: monolit je často nejlepší volba pro tým, který ještě hledá product-market fit. Mikroslužby řeší organizační problémy velkých týmů. Když jsi dva lidé a jeden pes v kanceláři, mikroslužby ti spíš přidají síťové chyby, deployment orchestrace a existenciální bolest.
+
+*Codyho komentář:* Nový framework může být skvělý. Ale pokud ho vybíráš hlavně proto, že má hezké demo na konferenci, dej si sklenici vody, projdi se a vrať se k problému zákazníka. Konference nejsou backlog.
+
+### 4.3 Architektura má chránit změnu
+
+Dobrá architektura není ta, která vypadá nejchytřeji v diagramu. Je to ta, která dovolí měnit produkt bez rozbití všeho okolo.
+
+U malého SaaS se vyplatí držet několik hranic:
+
+- **Doménová logika mimo UI:** pravidla jako „kdo může uzavřít požadavek“ nepatří jen do komponenty tlačítka.
+- **Databázové operace na jednom místě:** ať víš, kde se čtou a mění citlivá data.
+- **Integrace izolovaně:** platební brána, e-mailing nebo analytika nemají prorůst do celého kódu.
+- **Konfigurace přes prostředí:** tajné klíče, regiony a URL nepatří do repozitáře.
+- **Export dat jako produktová funkce:** ne až jako panická reakce na odcházejícího zákazníka.
+
+Příklad: pokud stavíš zákaznický portál, odděl „požadavek“ jako obchodní objekt od toho, jak se zrovna zobrazuje v tabulce. Dnes má požadavek stav, prioritu a komentář. Zítra může mít SLA, interní poznámky, auditní záznam nebo zákaznické hodnocení. Když je všechno slepené v jedné stránce, každá změna bolí.
+
+Privacy-first architektura navíc potřebuje jasně vědět, kde vznikají osobní údaje. Kontaktní formulář, uživatelský účet, fakturace, support a analytika mají různé účely. Když je oddělíš technicky i dokumentačně, snáz nastavíš přístupy, retenci a mazání dat.
+
+### 4.4 Nasazení má být opakovatelné
+
+Nasazení nesmí být rituál, který funguje jen na notebooku člověka jménem „ten, co to kdysi nastavil“. Každý projekt potřebuje jednoduchý, opakovatelný postup od změny v kódu po běžící produkci.
+
+Praktické minimum:
+
+1. Kód je ve verzovacím systému.
+2. Každá změna jde přes pull request nebo aspoň jasný commit.
+3. Build a základní testy běží automaticky nebo jedním příkazem.
+4. Produkční proměnné jsou mimo repozitář.
+5. Nasazení má log, stav a možnost návratu k předchozí verzi.
+6. Po deployi se ověří homepage, hlavní workflow a formuláře.
+
+U menších projektů stačí jednoduchý pipeline. Důležité je, aby byl popsaný. Soubor `README`, interní poznámka nebo runbook ušetří hodiny, až budeš po třech měsících řešit, proč se e-mail neposílá, i když „se přece nic neměnilo“.
+
+Do runbooku napiš:
+
+- jak spustit projekt lokálně,
+- jak spustit testy,
+- jak nasadit produkci,
+- kde najít logy,
+- jak obnovit databázi ze zálohy,
+- koho kontaktovat při výpadku externí služby.
+
+Runbook nemusí být krásný. Musí existovat. Krása přijde později, pravděpodobně nikdy, ale existence stačí.
+
+### 4.5 Monitoring bez paniky a bez šmírování
+
+Monitoring má odpovědět na otázku: funguje služba a kde se láme uživatelská hodnota? Nemá z tvého produktu udělat sledovací laboratoř.
+
+Sleduj hlavně:
+
+- **Dostupnost:** jestli web a API odpovídají.
+- **Chyby:** výjimky, pády, neúspěšné formuláře, chyby plateb nebo e-mailů.
+- **Výkon:** pomalé stránky, pomalé dotazy, dlouhé fronty úloh.
+- **Kapacitu:** místo na disku, velikost databáze, fronty, limity služeb.
+- **Produktové signály:** dokončení hlavního workflow a aktivační momenty.
+
+U privacy-first provozu si dej pozor na nástroje, které automaticky sbírají celé URL s tokeny, obsah formulářů, session replay nebo detailní fingerprinting. Pokud něco nepotřebuješ pro provoz, podporu nebo konkrétní rozhodnutí, nesbírej to. Méně dat znamená méně rizika, méně vysvětlování a často i méně hluku v grafech.
+
+Dobrý incident proces může být jednoduchý:
+
+1. Detekuj problém automaticky.
+2. Ověř dopad na zákazníky.
+3. Stabilizuj službu.
+4. Zapiš příčinu a nápravu.
+5. Pošlete zákazníkům stručnou informaci, pokud se jich incident dotkl.
+
+Transparentnost není slabost. Pokud zákazník vidí, že problém umíš přiznat, vysvětlit a opravit, důvěra často utrpí méně než při tichém mlžení.
+
+### 4.6 Zálohy testuj, ne jen nastavuj
+
+Záloha, kterou nikdo nikdy neobnovil, je spíš talisman než bezpečnostní opatření. Může fungovat. Taky nemusí. A zjistit to až v den havárie je disciplína pro lidi, kteří mají rádi adrenalin a špatný spánek.
+
+U databází a souborů si stanov:
+
+- jak často se zálohuje,
+- kam se zálohy ukládají,
+- kdo k nim má přístup,
+- jak dlouho se drží,
+- jak se šifrují,
+- jak se ověřuje obnova.
+
+Jednou za čas proveď test obnovy do odděleného prostředí. Ne do produkce, ne na ostrá data v náhodném dumpu na ploše, ale do bezpečného prostoru, kde ověříš, že data skutečně dostaneš zpět. Výsledek zapiš: datum, kdo test dělal, co se obnovilo a jak dlouho to trvalo.
+
+Pro zákazníky je dobré umět jednoduše říct: „Zálohujeme pravidelně, obnovu testujeme a přístup k zálohám má omezený počet lidí.“ Nemusíš ukazovat interní detaily, ale musíš vědět, že to není jen věta do obchodní prezentace.
+
+### 4.7 Checklist: stack, který přežije realitu
+
+Než označíš technický základ za hotový, projdi si:
+
+- [ ] Víme, kde běží aplikace, databáze, soubory a zálohy.
+- [ ] Umíme vysvětlit, proč jsme vybrali hlavní části stacku.
+- [ ] Kritická obchodní logika není schovaná jen v UI.
+- [ ] Integrace jsou izolované a dají se vyměnit bez přepisování celého produktu.
+- [ ] Tajné klíče a produkční konfigurace nejsou v repozitáři.
+- [ ] Nasazení je opakovatelné a má popsaný rollback.
+- [ ] Monitoring hlídá dostupnost, chyby, výkon a hlavní workflow.
+- [ ] Analytika nesbírá víc dat, než potřebujeme pro rozhodování.
+- [ ] Zálohy existují, jsou chráněné a obnova byla prakticky otestovaná.
+- [ ] Máme krátký runbook pro výpadek, deploy a obnovu dat.
+
+Technický stack má být tichý společník. Když funguje, nikdo o něm moc nemluví. Když nefunguje, sežere produkt, roadmapu i náladu v týmu. Proto vybírej technologie podle provozní reality, ne podle toho, co zrovna vypadá nejlépe na screenshotu z prezentace.
+
+
 ## Pracovní log
 
+- 2026-08-28 15:00 UTC — Doplněna čtvrtá kapitola o technickém stacku: provozní slib, nudné technologie, architektura, opakovatelné nasazení, monitoring, zálohy a checklist.
 - 2026-08-28 14:00 UTC — Doplněna třetí kapitola o SaaS MVP: rozhodnutí místo backlogu, hlavní workflow, ruční validace, onboarding, pricing, měření a checklist.
 - 2026-08-28 13:00 UTC — Doplněna druhá kapitola o webu jako prodejním systému: homepage, CTA, důvěra, landing pages, privacy-first měření a checklist.
 - 2026-08-28 12:00 UTC — Založena struktura e-booku, doplněna pracovní osnova a hotová první kapitola o produktovém základu SaaS/webového projektu.
