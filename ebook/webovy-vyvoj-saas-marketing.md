@@ -1975,7 +1975,181 @@ Na sociální sítě dávej ochutnávku, ne celé know-how. Plná hodnota má ž
 
 Obsahový systém má být nudně spolehlivý. Publikuj méně věcí, ale takových, které zákazníkovi opravdu pomůžou udělat další krok. Když se z článku stane odpověď, kterou používáš v prodeji, supportu i onboardingu, vyhrál jsi. Ne virálně, ale prakticky — což je v podnikání podezřele často lepší.
 
+## Příloha D: Cenotvorba a balíčky bez věštění z křišťálové koule
+
+Cena není jen číslo v tabulce. Je to produktové rozhodnutí, obchodní filtr a signál, jakou hodnotu slibuješ. U webových služeb i SaaS projektů se často řeší pozdě, protože je nepříjemná. Tým raději ladí hero sekci, přidává integraci nebo přepisuje tlačítko z „Začít“ na „Vyzkoušet zdarma“. Cena ale mezitím potichu rozhoduje, jestli má projekt ekonomiku, nebo jen hezký backlog.
+
+Dobrá cenotvorba nevznikne tím, že okopíruješ konkurenci. Vznikne kombinací hodnoty pro zákazníka, nákladů na provoz, složitosti podpory a odvahy říct, pro koho produkt není. Ano, i odmítnutý zákazník je někdy úspora. Obzvlášť ten, který chce enterprise podporu za cenu svačiny.
+
+### D.1 Začni hodnotou, ne náklady
+
+Náklady jsou důležité, ale zákazník nekupuje tvůj hosting, čas na vývoj ani počet řádků kódu. Kupuje výsledek. Proto si u každé nabídky napiš:
+
+- jaký problém řeší,
+- jak často se problém opakuje,
+- kolik stojí, když zůstane nevyřešený,
+- kdo z řešení získá největší užitek,
+- jak rychle se hodnota projeví,
+- jaké riziko zákazník sníží.
+
+Příklad pro B2B SaaS:
+
+- **Problém:** obchodní poptávky padají do více inboxů a nikdo neví, kdo odpověděl.
+- **Dopad:** ztracené leady, pomalé reakce, horší reputace.
+- **Hodnota:** jeden přehled, odpovědnost, rychlejší follow-up.
+- **Cenový signál:** účtování podle počtu obchodních týmů nebo aktivních leadů dává větší smysl než podle počtu kliknutí.
+
+Když cenu stavíš jen na nákladech, snadno skončíš příliš nízko. Když ji stavíš jen na dojmu hodnoty, můžeš přehlédnout podporu, infrastrukturu a onboarding. Praktická cena potřebuje oboje: zákaznický přínos nahoře, provozní realitu dole.
+
+### D.2 Vyber metrickou jednotku, které zákazník rozumí
+
+Cenová metrika je jednotka, podle které zákazník platí. U SaaS to může být uživatel, tým, projekt, zpracovaný dokument, počet objednávek, aktivní kontakt nebo objem dat. Dobrá metrika má tři vlastnosti:
+
+- roste spolu s hodnotou pro zákazníka,
+- zákazník ji dokáže předvídat,
+- nejde snadno vnímat jako trest za úspěch.
+
+Špatný příklad: účtovat malému týmu podle počtu interních událostí v aplikaci, kterým nikdo mimo vývoj nerozumí. Zákazník pak nemá pocit kontroly. Dobrý příklad: účtovat podle počtu aktivních projektů, protože každý projekt odpovídá konkrétní práci a hodnotě.
+
+U privacy-first produktů mysli ještě na jednu věc: cenová metrika by neměla motivovat ke zbytečnému sběru dat. Pokud můžeš účtovat podle účtů, týmů nebo jasně definovaných pracovních objektů, je to často čistší než stavět pricing na detailním sledování uživatelského chování.
+
+*Codyho komentář:* Cena má zákazníkovi pomoct říct „to dává smysl“, ne „musím zavolat analytika, právníka a malého šamana přes faktury“.
+
+### D.3 Tři balíčky nejsou povinnost, ale často pomůžou
+
+Klasické tři balíčky fungují, pokud každý z nich odpovídá jiné úrovni potřeby. Ne pokud jsou to jen tři náhodné sloupce, kde prostřední dostal nálepku „Nejoblíbenější“, protože grafický design potřeboval trochu dramatu.
+
+Praktický model:
+
+**Start**
+
+- pro jednotlivce nebo malý tým,
+- řeší jeden hlavní use case,
+- má jednoduchý onboarding,
+- omezuje rozsah, ne důležitou hodnotu.
+
+**Growth**
+
+- pro tým, který už produkt používá pravidelně,
+- přidává spolupráci, automatizace, role nebo integrace,
+- má vyšší limity tam, kde skutečně rostou potřeby,
+- je hlavní balíček, který chceš prodávat.
+
+**Custom nebo Business**
+
+- pro složitější provoz,
+- obsahuje individuální nastavení, pokročilou bezpečnost, auditní požadavky nebo SLA,
+- vyžaduje obchodní rozhovor,
+- nemá být levná cesta k nekonečným požadavkům.
+
+U webových služeb můžeš balíčky postavit podobně:
+
+- **Audit:** rychlé zjištění problému a priorit.
+- **Launch:** návrh, obsah, vývoj a spuštění jedné konkrétní verze.
+- **Růst:** dlouhodobá péče, obsah, měření, experimenty a technická údržba.
+
+Rozdíl mezi balíčky musí být vysvětlitelný jednou větou. Pokud potřebuješ poznámku pod čarou ke každému řádku, pricing tabulka se mění v daňové přiznání. To nechceme. Nikdo nechce.
+
+### D.4 Free trial, freemium nebo demo?
+
+Ne každý produkt potřebuje free trial. Volba záleží na tom, jak rychle zákazník uvidí hodnotu a kolik podpory potřebuje.
+
+**Free trial dává smysl, když:**
+
+- uživatel zvládne začít bez osobního vysvětlování,
+- hodnota se ukáže během pár dnů,
+- onboarding je dobře připravený,
+- riziko zneužití je nízké.
+
+**Freemium dává smysl, když:**
+
+- produkt má přirozenou virální nebo týmovou smyčku,
+- bezplatní uživatelé nezničí provozní náklady,
+- limit zdarma vede k placené hodnotě,
+- tým má kapacitu obsloužit větší množství malých účtů.
+
+**Demo nebo konzultace dává smysl, když:**
+
+- zákazník řeší citlivá data, interní procesy nebo integrace,
+- nákup vyžaduje více rozhodovatelů,
+- hodnota závisí na konkrétním workflow,
+- špatné nastavení by vytvořilo víc škody než užitku.
+
+Privacy-first B2B produkty často lépe fungují s krátkým kvalifikačním hovorem než s anonymním freemiem. Ne proto, že by demo bylo luxusnější, ale protože můžeš zjistit datové hranice, právní požadavky, evropský provoz a skutečný use case dřív, než zákazník někam nahraje citlivé údaje.
+
+### D.5 Co má být na pricing stránce
+
+Pricing stránka není jen tabulka. Je to místo, kde zákazník kontroluje, jestli nabídce rozumí, jestli se jí dá věřit a jestli ho po nákupu nečeká nepříjemné překvapení.
+
+Minimum dobré pricing stránky:
+
+- jasné pojmenování balíčků,
+- komu je každý balíček určený,
+- hlavní výsledek, ne jen seznam funkcí,
+- viditelné limity a férové podmínky,
+- informace o fakturaci a zrušení,
+- odpovědi na časté námitky,
+- kontakt pro větší nebo citlivější provoz,
+- krátká zmínka o zpracování dat a provozní lokalitě.
+
+U evropského privacy-first produktu přidej samostatný blok „Data a provoz“:
+
+- kde jsou data hostovaná,
+- kdo má k datům přístup,
+- jaké typy dat produkt potřebuje,
+- jak lze data exportovat nebo smazat,
+- jestli produkt používá externí subprocessory,
+- jak se řeší analytika bez profilování.
+
+Tenhle blok není právní román. Je to důvěryhodná odpověď na otázku, kterou si seriózní zákazník stejně položí. Když ji zodpovíš dopředu, zkrátíš obchodní kolečko a vypadáš jako dospělá firma. Což je příjemný upgrade oproti „napište nám a možná něco najdeme v Notionu“.
+
+### D.6 Jak cenu testovat bez chaosu
+
+Cenotvorba se testuje rozhovory, nabídkami a reálným chováním. Ne nekonečným přebarvováním tabulky.
+
+Praktický postup:
+
+1. Napiš jednu jasnou nabídku pro jeden segment.
+2. Připrav jednoduchou pricing stránku nebo PDF nabídku.
+3. Ukaž ji pěti až deseti relevantním lidem.
+4. Ptej se, co je nejasné, co působí draze a co naopak levně.
+5. Sleduj, jestli se baví o hodnotě, nebo jen o slevě.
+6. Uprav balíčky podle opakovaných námitek.
+7. Neměň cenu po každém jednotlivém rozhovoru.
+
+Signály, že je cena moc nízko:
+
+- zákazníci se ptají málo a kupují okamžitě, ale podpora je zahlcená,
+- tým musí prodávat velký objem, aby ekonomika dávala smysl,
+- zákazníci neberou produkt jako strategický,
+- větší firmy očekávají služby, které cena nemůže pokrýt.
+
+Signály, že je cena špatně vysvětlená:
+
+- lidé nechápou rozdíl mezi balíčky,
+- ptají se na funkce, které už jsou v tabulce,
+- srovnávají tě s nástrojem pro úplně jiný use case,
+- nevědí, co se stane po kliknutí na CTA.
+
+Signál, že cena může být moc vysoko, je slabý zájem i po jasném vysvětlení hodnoty u zákazníků, kteří problém opravdu mají. Jedna námitka „je to drahé“ nestačí. Někdy znamená jen „nevidím hodnotu“, „nejsem správný zákazník“ nebo „zkouším, jestli dostanu slevu, protože trh mě to naučil“.
+
+### D.7 Checklist: pricing, který pomáhá prodávat
+
+- [ ] Cena vychází z hodnoty pro zákazníka, ne jen z interních nákladů.
+- [ ] Cenová metrika je srozumitelná a předvídatelná.
+- [ ] Balíčky odpovídají rozdílným úrovním potřeby.
+- [ ] Každý balíček má jasnou cílovou situaci.
+- [ ] Pricing stránka vysvětluje limity, fakturaci a zrušení.
+- [ ] Nabídka nevyžaduje zbytečný sběr osobních dat.
+- [ ] U citlivějších B2B scénářů existuje cesta přes demo nebo konzultaci.
+- [ ] Větší zákazníci nemají tajně schovaný enterprise support v nejlevnějším balíčku.
+- [ ] Námitky z rozhovorů se zapisují a vyhodnocují po vzorech, ne po jednom dojmu.
+- [ ] Sekce „Data a provoz“ odpovídá na privacy-first otázky před nákupem.
+
+Cílem pricingu není trefit magickou částku napoprvé. Cílem je vytvořit nabídku, která zákazníkovi srozumitelně ukáže hodnotu, týmu dovolí produkt udržet a firmě dá ekonomiku, která neunaví všechny zúčastněné. Cena je živá část produktu. Zacházej s ní stejně vážně jako s onboardingem, bezpečností a obsahem.
+
 ## Pracovní log
+- 2026-08-28 23:00 UTC — Doplněna příloha D o cenotvorbě a balíčcích: hodnota, cenové metriky, tři úrovně nabídky, trial/freemium/demo, pricing stránka, testování ceny a privacy-first checklist.
 - 2026-08-28 22:00 UTC — Doplněna příloha C o obsahovém systému bez závislosti na algoritmech: pilíře obsahu, recyklace formátů, editorial backlog, publikační rytmus, privacy-first měření a distribuce přes přímé kanály.
 - 2026-08-28 21:00 UTC — Doplněna příloha B o zákaznických rozhovorech: výběr respondentů, pozvánka, otázky, signály, poznámky, synthesis sprint a privacy-first pravidla.
 - 2026-08-28 20:00 UTC — Doplněna příloha A s 30denním akčním plánem pro vyjasnění produktu, web jako prodejní systém, MVP/provoz a privacy-first růstový rytmus.
