@@ -32953,7 +32953,177 @@ Vendor lock-in není morální selhání. Někdy je to rozumná cena za rychlost
 - Evropská komise: informace pro jednotlivce podle GDPR — přehled práv subjektu údajů včetně práva na přenositelnost: https://commission.europa.eu/law/law-topic/data-protection/information-individuals_en
 - European Data Protection Board: Guidelines on the right to data portability — výklad práva na přenositelnost podle GDPR: https://www.edpb.europa.eu/documents/guideline/right-to-data-portability_en
 
+## Příloha FP — AI transparentnost bez nápisu nalepeného na chaos
+
+AI transparentnost není jen věta „používáme AI“ schovaná v patičce. To je asi stejně užitečné jako cedule „někde tady je voda“ u bazénu. U SaaSu a webových produktů potřebujete vědět, kde AI vstupuje do uživatelské zkušenosti, co rozhoduje, co jen navrhuje, jaká data dostává a kdy má člověk jasně poznat, že komunikuje se systémem, ne s kolegou z podpory po třetí kávě.
+
+Od 2. srpna 2026 se v EU naplno prosazují některé části AI Actu včetně transparentnostních povinností podle článku 50. Prakticky to znamená hlavně jednoduché pravidlo: pokud uživatel interaguje s AI systémem, má to vědět; pokud obsah vznikl nebo byl podstatně upraven generativní AI, má to být vhodně označené. Vedle toho pořád platí GDPR: osobní data v AI workflow nejsou kouzelně méně osobní jen proto, že prošla promptem.
+
+### FP.1 Nejdřív udělejte AI inventář
+
+Malý tým nepotřebuje padesátistránkovou compliance bibli. Potřebuje inventář, který ukáže, kde AI reálně běží a jaké riziko nese. Začněte každou funkcí, ne každým modelem.
+
+Minimální tabulka:
+
+| Funkce | Typ AI použití | Vidí to uživatel? | Data v promptu | Výstup | Člověk v kontrole | Označení |
+|---|---|---|---|---|---|---|
+| Chat v nápovědě | interaktivní AI asistent | ano | dotaz, kontext stránky, případně účet | odpověď a odkazy | uživatel ověřuje, support eskaluje | badge „AI asistent“ |
+| Shrnutí ticketu | interní asistence | ne přímo | text ticketu, metadata účtu | interní shrnutí | support agent schvaluje odpověď | interní audit stopa |
+| Generování popisku produktu | generativní návrh | ano, pokud publikováno | produktová data | text na webu | editor schvaluje | poznámka v redakčním logu |
+| Lead scoring | predikční doporučení | nepřímo | firemní údaje a aktivita | skóre priority | obchodník rozhoduje | vysvětlení v interním procesu |
+
+U každého řádku doplňte, jestli jde o:
+
+- **asistenci:** AI připraví návrh, člověk rozhodne,
+- **automatizaci:** AI provede akci podle pravidel,
+- **interakci:** uživatel komunikuje přímo s AI,
+- **generovaný obsah:** AI vytváří nebo mění text, obrázek, audio nebo video,
+- **rizikové rozhodnutí:** AI ovlivňuje přístup, cenu, hodnocení, prioritu nebo práva člověka.
+
+Pokud tým neumí říct, do které kategorie funkce patří, funkce není připravená na produkci. Ne proto, že by byla nutně nelegální. Protože ji neumíte vysvětlit.
+
+### FP.2 Označení dejte do okamžiku rozhodnutí
+
+Transparentnost funguje jen tam, kde ovlivní očekávání uživatele. Text v podmínkách je důležitý, ale nestačí pro produktový moment, kdy uživatel píše citlivý dotaz nebo čte automaticky vytvořenou odpověď.
+
+Dobré vzory:
+
+- u chatu zobrazit „AI asistent“ přímo u vstupu a první odpovědi,
+- u automaticky navrženého textu ukázat „Návrh vytvořený AI, zkontrolujte před publikací“,
+- u generovaného obrázku nebo videa uložit informaci o AI původu do redakčního záznamu,
+- u interního scoringu vysvětlit obchodníkovi, podle jakých signálů je záznam zvýrazněný,
+- u supportu odlišit koncept odpovědi od odeslané lidské odpovědi.
+
+Špatné vzory:
+
+- obecné „můžeme používat AI“ bez vazby na konkrétní funkci,
+- označení až po dokončení akce,
+- badge tak malý, že ho najde jen auditor s lupou a kávou,
+- falešný lidský tón u bota, který se tváří jako člověk,
+- tvrzení „AI je jen interní“, když výstup ovlivňuje zákaznické rozhodnutí.
+
+Privacy-first pravidlo: transparentnost nemá být právní štít proti uživateli. Má být součást důvěry. Když uživatel rozumí, co systém dělá, méně se bojí a častěji zadá kvalitnější vstup.
+
+### FP.3 Oddělte AI disclosure od marketingové omáčky
+
+AI označení má být krátké, konkrétní a testovatelné. Nepište „využíváme nejmodernější umělou inteligenci ke zlepšení zákaznické zkušenosti“. To neříká nic, kromě toho, že někdo objevil prezentace z roku 2019.
+
+Použitelné texty:
+
+```text
+AI asistent odpovídá automaticky. Neposílejte mu hesla, platební údaje ani jiné citlivé informace.
+```
+
+```text
+Tento návrh vytvořila AI z vašich podkladů. Před publikací zkontrolujte fakta, tón značky a osobní údaje.
+```
+
+```text
+Toto shrnutí je AI návrh pro interní tým. Finální odpověď zákazníkovi schvaluje člověk.
+```
+
+```text
+Obrázek byl vytvořen nebo výrazně upraven generativní AI.
+```
+
+Disclosure karta pro jednu AI funkci:
+
+```text
+Název funkce:
+Kde se zobrazí označení:
+Co uživatel musí vědět před použitím:
+Jaká data nemá zadávat:
+Kdo schvaluje výstup:
+Jak se řeší chyba nebo škodlivý výstup:
+Kde je zapsaný auditní záznam:
+Datum poslední revize:
+```
+
+U B2B SaaSu přidejte i odpověď pro zákaznický security nebo privacy dotaz: kde běží model, kdo je poskytovatel, zda se data používají k tréninku, jaká je retence promptů a výstupů, jak lze funkci vypnout a jaké subprocesory se jí týkají.
+
+### FP.4 GDPR kontrola: prompt je zpracování dat
+
+Nejčastější omyl: „Do AI posíláme jen text, takže to není databáze.“ Pokud text obsahuje osobní údaje, obchodní tajemství nebo zákaznická data, pořád jde o zpracování. EDPB ve stanovisku k AI modelům řeší mimo jiné anonymitu modelů, oprávněný zájem a následky nezákonně zpracovaných osobních dat. Pro malý SaaS z toho plyne jednoduchý provozní závěr: před AI funkcí musíte znát účel, právní základ, role stran, minimalizaci a retenci.
+
+Kontrolní otázky:
+
+- Jaký je konkrétní účel AI funkce?
+- Jaká osobní data vstupují do promptu, kontextu, embeddingů a logů?
+- Je poskytovatel modelu zpracovatel, samostatný správce, nebo jiná role?
+- Používají se vstupy nebo výstupy k tréninku či zlepšování služby?
+- Jak dlouho se ukládají prompty, odpovědi, metadata a chybové logy?
+- Umíme data najít při žádosti o přístup, export nebo výmaz?
+- Lze funkci vypnout pro zákazníka, workspace nebo citlivý typ dat?
+
+Praktická minimalizace:
+
+- do promptu posílejte identifikátory místo plných osobních údajů, pokud stačí,
+- oddělte systémové instrukce od zákaznických dat,
+- redigujte tajemství, tokeny, hesla a platební údaje před odesláním,
+- ukládejte jen diagnostiku potřebnou k opravě a bezpečnosti,
+- nastavte kratší retenci pro prompty než pro hlavní produktová data,
+- u citlivých případů preferujte evropské zpracování a smluvně ověřené subprocesory.
+
+### FP.5 Připravte malý AI release gate
+
+AI funkce by neměla jít do produkce jen proto, že demo vypadalo chytře. Demo je divadlo. Produkce je místo, kde uživatel vloží reálná data a systém se potká s kreativními způsoby, jak realita rozbije váš krásný flow.
+
+Release gate pro malý tým:
+
+1. **Use-case karta:** co funkce dělá, pro koho a jaké rozhodnutí podporuje.
+2. **Risk level:** interní asistence, uživatelská interakce, generovaný obsah, automatizované rozhodnutí.
+3. **Data karta:** vstupy, výstupy, logy, retence, subprocesory, region.
+4. **Transparentnost:** konkrétní texty a místa, kde se zobrazí.
+5. **Bezpečnost:** prompt injection testy, omezené nástroje, rate limiting, auditní log.
+6. **Human control:** kdo schvaluje výstup nebo řeší eskalaci.
+7. **Fallback:** co se stane, když model neodpoví, odpoví špatně nebo musí být vypnutý.
+8. **Zákaznická dokumentace:** co se změní v privacy centru, subprocesorech a nápovědě.
+
+AI release gate nemusí blokovat inovaci. Naopak ji zrychluje, protože tým přestane pokaždé znovu vymýšlet, kdo má kontrolovat data, označení, bezpečnost a dokumentaci.
+
+### FP.6 Checklist: AI transparentnost připravená na provoz
+
+- [ ] Máme inventář všech AI funkcí podle uživatelského dopadu.
+- [ ] U každé funkce víme, zda jde o asistenci, automatizaci, interakci nebo generovaný obsah.
+- [ ] Uživatel pozná interakci s AI v okamžiku, kdy na tom záleží.
+- [ ] Generovaný nebo podstatně upravený obsah má vhodné označení nebo redakční záznam.
+- [ ] Disclosure texty jsou konkrétní, krátké a nejsou schované jen v právních dokumentech.
+- [ ] Prompt, kontext, embeddingy i logy prošly GDPR kontrolou.
+- [ ] Víme, zda se data používají k tréninku nebo zlepšování modelu.
+- [ ] Retence AI logů je zdokumentovaná a kratší, pokud není důvod držet data déle.
+- [ ] Zákazník může dostat srozumitelnou odpověď na otázky k modelu, regionu a subprocesorům.
+- [ ] AI funkce má fallback, vypínač a vlastníka.
+- [ ] Před releasem prošla bezpečnostním a privacy review.
+- [ ] Po releasu sledujeme chyby a stížnosti bez invazivního profilování uživatelů.
+
+### Mini cvičení: AI transparentnost za 60 minut
+
+1. Sepište všechny funkce, kde AI čte vstup, generuje výstup nebo ovlivňuje prioritu.
+2. Vyberte jednu uživatelsky viditelnou funkci.
+3. Napište disclosure text do 180 znaků.
+4. Určete přesné místo v UI, kde se zobrazí.
+5. Zkontrolujte, jaká data se posílají do modelu a logů.
+6. Vyškrtněte jeden údaj, který funkce nepotřebuje.
+7. Doplňte vlastníka, fallback a datum další revize.
+8. Přidejte změnu do privacy centra nebo interní AI karty.
+
+Výstupem má být jedna konkrétní upravená funkce, ne „AI strategie“. Strategie bez upraveného UI je často jen drahý screenshot z workshopu.
+
+### Codyho komentář
+
+AI transparentnost není brzda. Je to produktový design pro situace, kde uživatel může snadno přecenit systém nebo mu svěřit víc dat, než je rozumné. Můj pohled: nejlepší AI funkce se nechlubí tím, že jsou AI. Chlubí se tím, že jsou užitečné, vysvětlitelné a vypnutelné. To poslední slovo bolí nejvíc dodavatele, a proto je tak zdravé.
+
+### Zdroje k příloze FP
+
+- Evropská komise: AI Act — přehled nařízení a aplikační harmonogram včetně 2. srpna 2026, 2. prosince 2027 a 2. srpna 2028: https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai
+- Evropská komise: Enforcement framework of the AI Act — vymahatelnost od 2. srpna 2026, role AI Office a národních autorit: https://digital-strategy.ec.europa.eu/en/policies/enforcement-ai-act
+- Evropská komise: Transparency obligations under Article 50 of the AI Act — FAQ k označování interakcí s AI a AI-generovaného obsahu: https://digital-strategy.ec.europa.eu/en/faqs/transparency-obligations-under-article-50-ai-act
+- Evropská komise: Code of Practice on marking and labelling AI-generated content — praktický dobrovolný kodex k transparentnostním povinnostem: https://digital-strategy.ec.europa.eu/en/news/commission-publishes-code-practice-marking-and-labelling-ai-generated-content
+- European Data Protection Board: Opinion 28/2024 on AI models — stanovisko k anonymitě modelů, oprávněnému zájmu a GDPR rolím při vývoji a nasazení AI: https://www.edpb.europa.eu/system/files/2024-12/edpb_opinion_202428_ai-models_en.pdf
+
 ## Pracovní log
+
+- 2026-08-28: Přidána příloha FP „AI transparentnost bez nápisu nalepeného na chaos“ s AI inventářem, UI disclosure pravidly, GDPR kontrolou promptů a logů, release gate, checklistem, mini cvičením a ověřenými zdroji k AI Actu a EDPB stanovisku.
 
 - 2026-08-28: Přidána příloha FO „Exit plán bez vendor lock-in hrdinství“ s lock-in inventářem, obnovitelným exportem, adaptery pro kritické služby, smluvní exit kontrolou, runbook šablonou, checklistem, mini auditem a ověřenými EU/GDPR/Data Act zdroji.
 
