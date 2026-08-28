@@ -367,6 +367,25 @@ DV. Lead scoring bez black-boxu a obchodního šmírování
 DW. Obchodní follow-up bez spamového autopilota
 DX. Demo a sandbox prostředí bez úniku produkčních dat
 DY. Onboardingové e-maily bez tracking pixelů
+DZ. Produktová telemetrie bez osobních profilů
+EA. Export dat bez zamčených dveří a ručního kouzlení
+EB. Bezpečnostní kontakt a disclosure bez ticha v éteru
+EC. Restore drill záloh bez falešného pocitu bezpečí
+ED. Privacy centrum v produktu bez schovaného labyrintu
+EE. Webhooky a integrace bez tajného tunelu do firmy
+FF. Status page a incident komunikace bez panického divadla
+FG. Consent management bez cookie lišty jako vánočního stromku
+FH. Retence dat bez digitálního skladu na věčné časy
+FI. Lehké DPIA pro malé SaaS bez právního mramoru
+FJ. AI asistenti v produktu bez datového vysavače
+FK. Rate limiting a ochrana proti zneužití bez fingerprintingu
+FL. Žádosti subjektů údajů bez supportového požáru
+FM. Registr subprocesorů bez compliance schovávané za odkaz
+FN. Bezpečnostní hlavičky bez ops rituálu a rozbitého frontendu
+FO. Exit plán bez vendor lock-in hrdinství
+FP. AI transparentnost bez nápisu nalepeného na chaos
+FQ. Staging a testovací data bez produkčního bahna
+FR. Preview prostředí bez zapomenutých dveří do firmy
 
 ## 1. Web jako obchodní systém
 
@@ -33305,7 +33324,196 @@ Můj pohled: staging je nejlepší místo, kde malý tým pozná, jestli má opr
 - NIST SP 800-53 Rev. 5 — katalog bezpečnostních a privacy kontrol včetně řízení konfigurace, testování změn a oddělených vývojových/testovacích prostředí: https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final
 
 
+
+## Příloha FR — Preview prostředí bez zapomenutých dveří do firmy
+
+Preview prostředí je skvělý vynález: každá změna má vlastní URL, obchod může kliknout na nový formulář, designér vidí reálný layout a vývojář nemusí posílat screenshot s omluvou „u mě to funguje“. Jenže preview má i temnou stránku. Je to dočasný web, který se velmi snadno začne chovat jako veřejná produkce bez pravidel, bez vlastníka a s přístupem k věcem, které tam nikdy neměly být.
+
+Cílem preview není ukázat celému internetu polotovar. Cílem je bezpečně zkontrolovat konkrétní změnu před releasem. Privacy-first preview je krátkodobé, oddělené, neindexované, chráněné přiměřeným přístupem a pracuje s daty, která byste se nestyděli ukázat v demo režimu. Což je mimochodem dobrý test. Pokud by vás preview URL vyděsila v cizím Slacku, máte problém. Ne Slack. Preview.
+
+### FR.1 Preview URL je produktová plocha, ne interní tajemství
+
+Spousta týmů se chová, jako by náhodná preview adresa byla bezpečnostní opatření. Není. Je to maximálně slabá překážka pro náhodné návštěvníky a naprosto žádná strategie pro odkazy sdílené v komentářích, issue trackerech, e-mailech, analytice, logách nebo chatu.
+
+Každé preview prostředí si proto zaslouží vlastní pravidla:
+
+- kdo ho smí otevřít,
+- jak dlouho existuje,
+- jaká data používá,
+- jaké integrace má vypnuté,
+- jestli může posílat e-maily nebo webhooky,
+- jestli je viditelné pro vyhledávače,
+- kdo ho smaže po sloučení nebo zavření změny.
+
+Praktické minimum: preview pro běžný pull request má být chráněné alespoň jednoduchou autentizací, allowlistem, Sign in with SSO nebo jiným access gate. Pokud je preview veřejné, nesmí obsahovat osobní údaje, interní informace, neveřejné ceny, zákaznické reference před schválením ani formuláře napojené na produkční pipeline.
+
+Codyho pravidlo: když preview používá produkční doménu, produkční data nebo produkční integrace, chovejte se k němu jako k produkci. Jen bez falešného optimismu, že „to nikdo nenajde“.
+
+### FR.2 Noindex je pojistka, ne zámek
+
+Preview stránky nemají končit ve vyhledávání. Google dokumentuje použití robots meta tagu a HTTP hlavičky `X-Robots-Tag` pro pravidlo `noindex`; pro ne-HTML soubory je vhodná právě hlavička. To je dobrý základ, ale není to přístupové řízení. Vyhledávač může pravidlo respektovat, uživatel s odkazem ne.
+
+Doporučený baseline pro preview:
+
+```http
+X-Robots-Tag: noindex, nofollow
+```
+
+A v HTML:
+
+```html
+<meta name="robots" content="noindex, nofollow">
+```
+
+K tomu přidejte:
+
+- zákaz zahrnutí preview URL do `sitemap.xml`,
+- oddělený hostname typu `preview.example.eu`, ne podstránku produkčního webu,
+- jasný vizuální banner „Preview / testovací prostředí“,
+- krátkou životnost podle pull requestu nebo release větve,
+- pravidelný cleanup starých náhledů.
+
+Pozor na past: `robots.txt` může zabránit crawleru stránku načíst, ale pak crawler nemusí vidět `noindex` v HTML. Pro citlivé preview je lepší přístup omezit autentizací a `noindex` brát jako dodatečnou pojistku pro omylem dostupné stránky. Ano, bezpečnostní pás i brzdy. Auto taky neřídíte jen s vírou v kobereček pod pedálem.
+
+### FR.3 Preview secrets nejsou produkční secrets s jiným názvem
+
+Dočasné prostředí potřebuje dočasné nebo omezené přístupy. Preview by nikdy nemělo používat produkční databázové heslo, produkční platební webhook secret, ostrý SMTP účet, ostré API klíče do CRM ani storage bucket se zákaznickými soubory.
+
+Rozumné rozdělení:
+
+| Typ secretu | Preview default | Důvod |
+|---|---|---|
+| Databáze | separátní preview nebo seed DB | žádný přímý dopad na zákazníky |
+| E-mail | sink, sandbox nebo allowlist | žádné omylem odeslané zprávy |
+| Platby | testovací režim brány | žádné reálné platby a faktury |
+| Webhooky | vypnuto nebo test endpoint | žádné akce v produkčních systémech |
+| AI nástroje | omezený klíč a testovací datasety | žádný únik zákaznického kontextu |
+| Analytics | vypnuto nebo oddělený projekt | žádné míchání testů s produkčními metrikami |
+
+Secrets mají mít nejmenší nutná oprávnění, možnost rotace a jasné místo správy. OWASP doporučuje neukládat tajemství přímo do kódu a držet je v bezpečném úložišti; v preview to platí dvojnásob, protože dočasná prostředí mívají horší disciplínu než produkce. A právě proto bývají zábavná. Pro útočníky. Pro vás méně.
+
+### FR.4 Formuláře a webhooky v preview držte v karanténě
+
+Preview formulář, který posílá leady do produkčního CRM, je malý generátor bordelu. Preview webhook, který mění stav účtu, je ještě horší. Testovací kliknutí pak vypadá jako skutečný zákaznický signál a tým řeší, proč se do pipeline dostal „Test Testovič“ s e-mailem `asdf@example.com`. Klasika českého B2B folklóru.
+
+Bezpečné preview chování:
+
+- formuláře posílají data do testovacího inboxu nebo vůbec,
+- CRM integrace běží jen v sandboxu,
+- webhooky mají oddělený endpoint a secret,
+- externí notifikace se přepisují na interní allowlist,
+- platební a fakturační akce jsou v testovacím režimu,
+- produkční analytika ignoruje preview hostname,
+- preview logy neukládají celé payloady s osobními údaji.
+
+U každého formuláře si napište jednu větu: „Když někdo odešle preview formulář, stane se X a nikam jinam data nejdou.“ Pokud větu neumíte napsat, netestujete formulář. Testujete trpělivost budoucího supportu.
+
+### FR.5 Branch preview má mít vlastní životní cyklus
+
+Dočasné prostředí bez mazání není dočasné. Je to archiv překvapení. Po pár měsících se v něm hromadí staré UI, neplatné texty, zapomenuté feature flags, testovací účty a linky, které někdo kdysi poslal klientovi „jen pro rychlý náhled“.
+
+Nastavte životní cyklus podle stavu změny:
+
+1. **Vytvoření:** preview vznikne automaticky pro pull request nebo release větev.
+2. **Označení:** stránka má banner, commit, větev, autora a datum expirace.
+3. **Omezení:** přístup je omezený podle účelu kontroly.
+4. **Test:** tým ověří UI, obsah, formuláře, techniku, noindex a integrace.
+5. **Sloučení:** po merge se preview smaže nebo archivuje bez běžící infrastruktury.
+6. **Zavření:** po zavření PR se preview smaže vždy.
+7. **Revize:** jednou týdně běží cleanup starých preview prostředí.
+
+U dražších preview prostředí přidejte i nákladový limit. Není nic poetičtějšího než zapomenutý branch s vlastním databázovým clusterem, který tiše pálí rozpočet, zatímco všichni řeší barvu tlačítka.
+
+### FR.6 Karta preview prostředí
+
+Použijte ji pro každý typ preview: pull request, klientský náhled, staging release kandidát nebo interní demo.
+
+## Preview: [název / typ]
+
+### Účel
+
+- Proč existuje:
+- Kdo ho používá:
+- Jaká změna se ověřuje:
+- Kdy se smaže:
+
+### Přístup
+
+- URL vzor:
+- Ochrana přístupu:
+- Povolené role nebo lidé:
+- Může se sdílet mimo tým:
+- Viditelný banner:
+
+### Data
+
+- Databáze:
+- Seed nebo syntetická data:
+- Zakázaná produkční data:
+- Retence logů:
+- Mazací postup:
+
+### Integrace
+
+- E-mail:
+- Formuláře:
+- Webhooky:
+- Platby:
+- Analytics:
+- AI nástroje:
+
+### Kontroly
+
+- `noindex` / `X-Robots-Tag`:
+- Není v sitemapě:
+- Secrets nejsou produkční:
+- Preview se smaže po PR:
+- Vlastník:
+
+### FR.7 Checklist: preview bez zapomenutých dveří
+
+- [ ] Preview má jasný účel a vlastníka.
+- [ ] URL není považovaná za bezpečnostní opatření.
+- [ ] Přístup je omezený podle citlivosti obsahu.
+- [ ] Stránky mají `noindex, nofollow` a nejsou v sitemapě.
+- [ ] Preview nepoužívá produkční databázi ani produkční storage.
+- [ ] Secrets jsou oddělené, omezené a rotovatelné.
+- [ ] E-mail, platby, CRM a webhooky běží v sandboxu nebo jsou vypnuté.
+- [ ] Formuláře neposílají testovací data do produkční pipeline.
+- [ ] Analytics odděluje preview od produkčních metrik.
+- [ ] Preview se maže po merge, zavření změny nebo expiraci.
+- [ ] Staré preview prostředí kontroluje pravidelný cleanup.
+- [ ] Klientský náhled neobsahuje neschválené reference, osobní údaje ani interní poznámky.
+
+### Mini cvičení: preview audit za 45 minut
+
+1. **10 minut:** sepište všechny typy preview URL, které tým používá.
+2. **10 minut:** u každého napište, jaká data a integrace má k dispozici.
+3. **10 minut:** otevřete jedno aktuální preview a zkontrolujte banner, `noindex`, formuláře a analytics.
+4. **10 minut:** najděte nejstarší stále běžící preview a rozhodněte, jestli se smaže.
+5. **5 minut:** založte jeden úkol na oddělení secretů, sandbox integrací nebo automatický cleanup.
+
+Výstupem má být jedna vyplněná karta preview prostředí a jeden konkrétní bezpečnostní cleanup. Ne reorganizace celého CI/CD. Ne heroická migrace všech platforem do čtyř nových nástrojů. Jen zavřít jedny dveře, které zůstaly pootevřené.
+
+### Codyho komentář
+
+Preview prostředí je jako zkušební kabinka produktu. Má být užitečné, rychlé a dočasné. Nemá mít klíče od skladu, přístup k účetnictví a ceduli do ulice. Když preview umí poslat e-mail zákazníkovi, změnit CRM, vytvořit fakturu a uložit osobní data, není to preview. Je to produkce v mikině s nápisem „jen test“.
+
+### Zdroje k příloze FR
+
+- Google Search Central — Robots `meta` tag and `X-Robots-Tag`: dokumentace pravidel `noindex`, `nofollow` a použití HTTP hlavičky pro ne-HTML zdroje: https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag
+- Google Search Central — JavaScript SEO basics: upozornění, že `noindex` v původním HTML může ovlivnit rendering a že robotická pravidla je potřeba používat opatrně: https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics
+- GitHub Docs — Best practices for using webhooks: doporučení pro rychlou odpověď webhook endpointu, validaci, zpracování na pozadí a redelivery při výpadku: https://docs.github.com/en/webhooks/using-webhooks/best-practices-for-using-webhooks
+- GitHub Docs — Validating webhook deliveries: ověřování webhook podpisu přes HMAC, bezpečné uložení secretu a konstantní porovnání podpisu: https://docs.github.com/en/webhooks/using-webhooks/validating-webhook-deliveries
+- Stripe Docs — Receive Stripe events in your webhook endpoint: ověřování podpisu webhooků a ochrana proti replay útokům pomocí timestampu a tolerance: https://docs.stripe.com/webhooks
+- OWASP Cheat Sheet Series — Webhook Security Guidelines: doporučení pro podpisy, replay ochranu, validaci payloadu, rate limiting, SSRF a logování webhooků: https://cheatsheetseries.owasp.org/cheatsheets/Webhook_Security_Guidelines_Cheat_Sheet.html
+- OWASP Cheat Sheet Series — Secrets Management: bezpečné ukládání, rotace a správa tajemství mimo zdrojový kód: https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html
+- GDPR, článek 5: zásady minimalizace údajů, omezení účelu, přesnosti, omezení uložení, integrity a důvěrnosti: https://gdpr-info.eu/art-5-gdpr/
+
 ## Pracovní log
+
+- 2026-08-28: Přidána příloha FR „Preview prostředí bez zapomenutých dveří do firmy“ s pravidly pro přístup, noindex, oddělené secrets, karanténu formulářů a webhooků, životní cyklus branch preview, kartou prostředí, checklistem, mini auditem a ověřenými zdroji.
+
 
 - 2026-08-28: Přidána příloha FQ „Staging a testovací data bez produkčního bahna“ s rozdělením prostředí, pravidly pro produkční data, anonymizací, oddělením secrets a integrací, seed datasety, kartou prostředí, checklistem, staging detox cvičením a ověřenými GDPR/OWASP/NIST zdroji.
 
