@@ -5293,7 +5293,123 @@ Jednou měsíčně udělej úklid: projdi integrace, odstraň nepoužívané vě
 
 *Codyho komentář:* Performance není asketismus. Neříkám, že web má vypadat jako faktura z roku 2007. Říkám, že každá vizuální nebo analytická paráda má zaplatit nájem: musí pomoct prodeji, pochopení, důvěře nebo provozu. Když neplatí, ven s ní. Digitální minimalismus není nuda. Je to respekt k času lidí a k datům, která ti svěřují.
 
+## Příloha AA: Referral a partnerský růst bez sledovacích pixelů
+
+Referral program zní často jako něco, co se spustí až ve chvíli, kdy má firma perfektní produkt, velký marketingový tým a právní oddělení s vlastní kávovarovou kulturou. Ve skutečnosti je doporučení jeden z nejstarších růstových kanálů vůbec. Jen se v digitálním světě často zbytečně převléká za komplikovanou mašinu plnou cookies, fingerprintingu, affiliate sítí a dashboardů, kde polovina čísel vypadá přesněji, než jaká doopravdy jsou.
+
+Pro malý SaaS nebo webovou agenturu je lepší začít jednoduše: kdo nás může doporučit, komu tím pomůže a jak férově poznáme, že doporučení vedlo k výsledku? Privacy-first referral není o tom, že rezignuješ na měření. Je o tom, že měříš obchodní vztah, ne každý pohyb člověka po internetu.
+
+### AA.1 Doporučení potřebuje jasný důvod
+
+Lidé nedoporučují produkt jen proto, že máš na webu stránku „partnerský program“. Doporučují, když umí jednou větou vysvětlit, komu pomůžeš a proč je bezpečné tě někomu poslat.
+
+Než vytvoříš odměny, napiš si tři věty:
+
+- **Komu nás má smysl doporučit:** například B2B firmám, které chtějí privacy-first web nebo interní SaaS bez chaosu v datech.
+- **Jaký problém typicky řešíme:** například poptávky z webu, jednoduchý zákaznický portál, produktová analytika nebo provoz v Evropě.
+- **Proč je doporučení bezpečné:** například jasný rozsah, kontrola nad daty, dokumentace, férová komunikace a žádné agresivní sales nahánění.
+
+Když doporučující člověk neví, co má říct, bude mlčet. Ne proto, že ti nefandí. Prostě nechce poslat známého do mlhy. Referral začíná tím, že mu dáš mapu.
+
+### AA.2 Začni ručním programem
+
+První verze referral programu nemusí mít portál, trackovací odkaz ani automatické výplaty. Může to být stránka v dokumentaci, jednoduchý formulář nebo e-mailová šablona.
+
+Minimální postup:
+
+1. Partner pošle úvod e-mailem nebo přes formulář.
+2. Ty potvrdíš přijetí doporučení a vysvětlíš další krok.
+3. Lead označíš interně jako doporučený konkrétním partnerem.
+4. Po uzavření obchodu ručně zapíšeš výsledek do referral tabulky.
+5. Partnerovi pošleš domluvenou odměnu nebo jinou formu poděkování.
+
+Tohle zní nudně. Výborně. Nudný systém je často nejlepší první systém, protože přesně vidíš, kde se proces láme. Automatizuj až chvíli, kdy máš opakovaný objem a jasná pravidla. Automatizace špatného procesu je jen rychlejší chaos s hezčí ikonou.
+
+### AA.3 Odměna nemusí být jen provize
+
+Peníze jsou jasné a často férové, ale nejsou jediná možnost. U B2B služeb a SaaS produktů může fungovat víc typů hodnoty:
+
+- jednorázová provize za uzavřeného zákazníka,
+- kredit na vlastní používání služby,
+- společný obsah nebo případová studie,
+- prioritní support pro partnera,
+- doporučení opačným směrem, pokud dává obchodní smysl,
+- workshop, audit nebo konzultace jako poděkování.
+
+Důležité je, aby odměna nevytvářela špatnou motivaci. Partner nemá posílat kohokoli jen proto, že z toho něco kápne. Má doporučit člověka nebo firmu, kterým skutečně pomůžeš. Kvalitní doporučení je obchodní důvěra půjčená na chvíli. Chovej se k ní jako k porcelánu, ne jako k lead listu.
+
+### AA.4 Měř vztah, ne stopu uživatele
+
+Privacy-first referral může používat jednoduché identifikátory bez invazivního sledování. Často stačí:
+
+- pole „doporučil/a nás“ ve formuláři,
+- interní kód partnera zadaný ručně,
+- specifická landing page bez externích trackerů,
+- zápis v CRM nebo jednoduché tabulce,
+- e-mailový úvod, který slouží jako jasný obchodní kontext.
+
+Vyhni se tomu, aby ses snažil dokazovat každý klik. U menších objemů je přesnější a férovější sledovat obchodní události: přišlo doporučení, proběhla kvalifikace, vznikla nabídka, obchod se uzavřel, zákazník byl onboardován. To jsou kroky, které mají hodnotu i bez toho, aby ses díval lidem přes rameno.
+
+Pokud potřebuješ unikátní odkazy, použij je střídmě. Krátký parametr v URL může pomoct poznat zdroj, ale neměl by se měnit v profilování návštěvníka napříč webem. Referral není výmluva pro sledovací cirkus.
+
+### AA.5 Partnerům dej jasný balíček
+
+Partner často nechce vymýšlet, jak tě představit. Dej mu materiál, který může použít bez trapného copywriterského aerobiku.
+
+Referral balíček může obsahovat:
+
+- jednu krátkou větu, co děláš,
+- tři typické situace, kdy tě doporučit,
+- odkaz na konkrétní landing page,
+- krátký e-mailový text pro představení,
+- seznam věcí, které neděláš,
+- informaci, jak pracuješ s daty a soukromím,
+- stručné pravidlo odměny.
+
+Příklad e-mailového úvodu:
+
+```text
+Ahoj [jméno],
+
+napadlo mě vás propojit s Codym / Dreamindem. Řeší privacy-first weby a jednoduché SaaS nástroje pro evropské B2B týmy, hlavně když firma nechce stavět růst na zbytečném sledování uživatelů.
+
+Myslím, že by vám mohli pomoct s [konkrétní problém]. Nechávám vás v kopii, ať si případně domluvíte krátký úvod.
+```
+
+Čím konkrétnější je úvod, tím lepší je první konverzace. „Možná byste se měli potkat“ je slabé. „Řešíte poptávky z webu a oni staví privacy-first lead flow“ je použitelné.
+
+### AA.6 Nastav hranice, aby referral nepoškodil značku
+
+Referral program je rozšíření reputace. Proto potřebuje pravidla. Ne kvůli byrokracii, ale kvůli důvěře.
+
+Dobré hranice:
+
+- Neposílat hromadné nevyžádané zprávy jménem firmy.
+- Neslibovat funkce, cenu ani termín bez potvrzení.
+- Nepoužívat klamavé slevy nebo falešnou urgenci.
+- Nepředávat osobní údaje bez jasného důvodu a souhlasu.
+- Neoznačovat doporučení jako partnerství, pokud jde jen o jednorázový úvod.
+- Přiznat odměnu, pokud může ovlivnit doporučení.
+
+Tohle je nudná část, která chrání všechny zúčastněné. Partner ví, co je v pořádku. Zákazník ví, proč dostal kontakt. Ty víš, že růst nepodkopává hodnoty značky. Krásná věc: etický marketing se nemusí tvářit jako kazatelna. Stačí, když se nechová jako pochybný stánek na veletrhu.
+
+### AA.7 Checklist: referral bez šmírování
+
+- [ ] Umíme jednou větou říct, koho nám má smysl doporučit.
+- [ ] Máme popsané situace, ve kterých je doporučení užitečné.
+- [ ] První verze programu funguje ručně bez složitého trackingu.
+- [ ] Partner ví, jaká je odměna a kdy vzniká nárok.
+- [ ] Doporučení evidujeme podle obchodních událostí, ne podle detailní stopy návštěvníka.
+- [ ] Landing page pro partnery neobsahuje zbytečné externí skripty.
+- [ ] Referral balíček obsahuje text pro úvod, typické problémy a privacy-first vysvětlení.
+- [ ] Pravidla zakazují spam, přehnané sliby a předávání údajů bez jasného důvodu.
+- [ ] Jednou měsíčně vyhodnocujeme kvalitu doporučení, nejen jejich počet.
+- [ ] Neúspěšná doporučení používáme jako zpětnou vazbu pro nabídku a positioning.
+
+*Codyho komentář:* Nejlepší referral program není ten, který umí připsat každou korunu ke každému kliknutí. Nejlepší referral program je ten, po kterém se všichni cítí čistě: partner doporučil něco užitečného, zákazník nedostal spam a firma získala obchod bez toho, aby z internetu dělala detektivní seriál.
+
 ## Pracovní log
+- 2026-08-29 22:00 UTC — Doplněna příloha AA o referral a partnerském růstu bez sledovacích pixelů: jasný důvod doporučení, ruční první program, férové odměny, měření obchodních událostí, partner balíček, hranice a privacy-first checklist.
 - 2026-08-29 21:00 UTC — Doplněna příloha Z o rychlosti webu bez honby za skóre: performance budget, obrázky, fonty, třetí strany, pravidelný review rytmus a privacy-first checklist.
 - 2026-08-29 20:00 UTC — Doplněna příloha Y o rozhodovacím deníku a produktové paměti: co dokumentovat, karta rozhodnutí, struktura dokumentace, převod chatových dohod, ochrana před slibovým dluhem, privacy-first životní cyklus a checklist.
 - 2026-08-29 19:01 UTC — Doplněna příloha X o exit plánu a přenositelnosti dat: datový model, exportní formáty, bezpečnost exportů, rozdíl mezi portabilitou, backupem a zákaznickým exportem, import a checklist.
