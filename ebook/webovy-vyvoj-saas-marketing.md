@@ -2754,7 +2754,128 @@ Bez konce se pilot mění v trvalé provizorium. A trvalé provizorium je nejdra
 
 Dobře vybraný nástroj zmenšuje tření. Špatně vybraný nástroj jen přesune chaos z inboxu do dražšího rozhraní. Audit před nákupem není brzda růstu; je to způsob, jak růst bez toho, aby se z produktového týmu stal správce cizích dashboardů.
 
+## Příloha I: Lead magnet a poptávkový formulář bez datového hamounění
+
+Lead magnet má být užitečná zkratka pro správného člověka, ne líbivá past na e-mail. Poptávkový formulář má otevřít rozhovor, ne se tvářit jako imigrační dotazník pro vstup do země „Možná vám někdy zavoláme“. Privacy-first přístup tady není brzda konverzí. Naopak: když se ptáš jen na věci, které dávají smysl, působíš důvěryhodněji a lidem se odpovídá snáz.
+
+U webu, SaaS nebo B2B služby často stačí jeden kvalitní vstupní materiál a jeden dobře navržený formulář. Smyslem není získat co nejvíc kontaktů. Smyslem je získat správné kontakty, pochopit jejich situaci a rychle navázat férovou komunikaci.
+
+### I.1 Lead magnet má řešit malý konkrétní problém
+
+Slabý lead magnet slibuje „kompletní průvodce digitální transformací“. To zní velkolepě, ale člověk netuší, jestli mu to pomůže dnes odpoledne. Silný lead magnet řeší úzkou situaci:
+
+- checklist před spuštěním landing page,
+- šablonu briefu pro nový web,
+- mini audit pricing stránky,
+- tabulku pro porovnání SaaS nástrojů,
+- 30minutový scénář zákaznického rozhovoru,
+- ukázkový plán migrace z invazivní analytiky na privacy-first měření.
+
+Dobrá otázka před tvorbou zní: „Co si má člověk po stažení odškrtnout, rozhodnout nebo zjednodušit?“ Pokud je odpověď mlhavá, materiál bude pravděpodobně jen brožura převlečená za hodnotu.
+
+Příklad pro webové studio:
+
+- **Název:** Checklist před redesignem B2B webu.
+- **Pro koho:** Zakladatel nebo marketingový manažer, který ví, že web neprodává, ale nechce začít chaotickým výběrem šablony.
+- **Výsledek:** Do 30 minut má seznam slabých míst homepage, nabídky, důvěryhodnosti, měření a soukromí.
+- **Další krok:** Možnost poslat vyplněný checklist a domluvit krátký rozbor.
+
+### I.2 Formulář sbírá jen data potřebná pro další krok
+
+Minimalizace dat není filozofická ozdoba. Je to praktické pravidlo: každé pole ve formuláři musí pomoct buď návštěvníkovi, nebo týmu, který odpovídá. Pokud nepomáhá, pryč s ním. Formulář není sbírka suvenýrů.
+
+Pro stažení jednoduchého materiálu často stačí:
+
+- e-mail,
+- volitelně jméno,
+- volitelně jedna otázka typu „co teď řešíte?“.
+
+Pro poptávku služby může dávat smysl:
+
+- jméno,
+- pracovní e-mail,
+- firma nebo web,
+- stručný popis situace,
+- přibližný typ projektu,
+- preferovaný způsob odpovědi.
+
+Naopak opatrně s poli jako telefon, rozpočet, velikost firmy, role, adresa, marketingový souhlas, povinný výběr termínu nebo deset otázek „abychom vás lépe poznali“. Některé mohou být užitečné, ale ne všechny musí být v prvním kontaktu. Čím víc se ptáš, tím víc musíš vysvětlit proč.
+
+Dobré pravidlo: pokud by ses na danou věc styděl zeptat člověka při prvním podání ruky, formulář by ji neměl vyžadovat bez jasného důvodu.
+
+### I.3 Vysvětli, co se stane po odeslání
+
+Formulář bez očekávání vytváří nejistotu. Člověk klikne na „odeslat“ a netuší, jestli přijde automatická sekvence, obchodní telefonát, nebo ticho tak hluboké, že by v něm šel natáčet dokument o oceánu.
+
+Pod formulář napiš krátce:
+
+- kdo zprávu dostane,
+- kdy obvykle odpovídáte,
+- jestli posíláte automatické marketingové e-maily,
+- jak lze data opravit nebo smazat,
+- jestli používáte data jen pro odpověď na dotaz, nebo i pro další komunikaci.
+
+Příklad lidského textu:
+
+> Odpovíme obvykle do jednoho pracovního dne. Zpráva jde přímo týmu Dreamind, nepřidáme vás automaticky do newsletteru a data použijeme jen k vyřízení poptávky. Pokud budete chtít údaje smazat, napište nám na stejný e-mail.
+
+Tohle není právní dokument. Je to srozumitelné očekávání. Plné zásady zpracování mohou být odkazem pod textem, ale návštěvník by neměl muset luštit právničtinu, aby pochopil základní chování firmy.
+
+### I.4 Lead magnet nemusí být za e-mailovou zdí
+
+Ne každý užitečný materiál musí být zamčený za formulářem. Někdy je lepší dát checklist veřejně, nechat ho indexovat, sdílet přes přímý odkaz a nabídnout kontakt až ve chvíli, kdy člověk potřebuje pomoc. To je pomalejší než agresivní sběr kontaktů, ale buduje důvěru.
+
+Možné varianty:
+
+- **Veřejný checklist:** nejlepší pro SEO, sdílení a dlouhodobou důvěru.
+- **Stažení bez e-mailu:** dobré pro značku, když chceš ukázat štědrost a neměřit všechno jako hon na leady.
+- **Stažení za e-mail:** použij jen když následná komunikace dává jasný smysl a člověk ví, k čemu se hlásí.
+- **Interaktivní audit:** užitečný, pokud odpovědi okamžitě vytvoří personalizovaný výstup.
+
+Privacy-first marketing si zaslouží vlastní větu: přímý kontakt je cenný, ale důvěra je cennější. Když člověk získá hodnotu bez nátlaku, často se vrátí dobrovolně. A dobrovolný návrat je lepší signál než kontakt ulovený za PDF, které si nikdo nepřečetl.
+
+*Codyho komentář:* Pokud je tvůj nejlepší argument pro e-mailovou zeď „všichni to tak dělají“, slyším v dálce plakat malý spreadsheet s konverzemi. Ne všechno, co jde měřit, stojí za to dělat.
+
+### I.5 Jednoduchý lead flow pro malý tým
+
+Funkční lead flow nepotřebuje hned enterprise CRM, automatizace na třech kontinentech a dashboard s 48 grafy. Začni takhle:
+
+1. Návštěvník přijde na článek, checklist nebo landing page.
+2. Dostane konkrétní užitek bez manipulativního nátlaku.
+3. Pokud chce pokračovat, vyplní krátký formulář s jasným očekáváním.
+4. Tým dostane zprávu do jednoho místa, ne do pěti inboxů.
+5. Každá poptávka má vlastníka, stav a další krok.
+6. Po vyřízení se nepotřebná data smažou nebo zůstanou jen tam, kde mají jasný důvod.
+
+Minimum stavů v jednoduché pipeline:
+
+- **Nové:** přišlo a čeká na první reakci.
+- **Čekáme na zákazníka:** odpověděli jsme, další krok je na něm.
+- **V řešení:** probíhá konzultace, nabídka nebo technický rozbor.
+- **Vyhráno:** vznikla spolupráce, účet nebo zakázka.
+- **Uzavřeno bez spolupráce:** nesedí timing, rozpočet, potřeba nebo fit.
+
+Ke každému leadu stačí poznámka: „proč přišel, co potřebuje, co jsme slíbili, kdy se vrátíme“. Žádné detektivní mapy vztahů, pokud prodáváš malý audit webu. Malý tým má chránit energii, ne krmit databázi.
+
+### I.6 Checklist: poptávka bez zbytečného sběru dat
+
+- [ ] Lead magnet řeší jeden konkrétní problém, ne obecnou mlhu.
+- [ ] Návštěvník ví, co získá a komu je materiál určený.
+- [ ] Formulář má jen pole potřebná pro další krok.
+- [ ] Každé citlivější pole má jasné vysvětlení, proč ho potřebujeme.
+- [ ] Text pod formulářem říká, kdo odpoví, kdy a co se bude dít dál.
+- [ ] Automatický marketing není schovaný jako překvapení v patičce.
+- [ ] Veřejná nebo bezbariérová varianta materiálu byla férově zvážena.
+- [ ] Poptávky končí v jednom místě a mají vlastníka.
+- [ ] Pipeline má jednoduché stavy a neztrácí kontext.
+- [ ] Nepotřebná data se pravidelně mažou nebo anonymizují.
+- [ ] Nepoužíváme reklamní pixely, invazivní fingerprinting ani remarketingové pasti.
+- [ ] Úspěch měříme podle kvality rozhovorů a obchodního posunu, ne jen podle počtu e-mailů.
+
+Lead magnet a formulář jsou první ochutnávka toho, jak firma přemýšlí. Pokud už tady tlačí, mate a sbírá víc dat, než potřebuje, zákazník právem čeká podobný chaos i později. Když naopak dostane jasnou hodnotu, krátký formulář a férové očekávání, začínáš vztah lépe: s respektem místo s trikem.
+
 ## Pracovní log
+- 2026-08-29 04:00 UTC — Doplněna příloha I o privacy-first lead magnetu a poptávkovém formuláři: úzký užitek, datová minimalizace, očekávání po odeslání, veřejné alternativy, jednoduchý lead flow a checklist.
 - 2026-08-29 03:01 UTC — Doplněna příloha H o auditu nástrojů a dodavatelů před nákupem: karta potřeby, datová mapa, evropský provoz, bezpečnostní minimum, celkové náklady, rozhodovací matice a checklist.
 - 2026-08-29 03:00 UTC — Doplněna příloha G o interním playbooku pro malé webové a SaaS týmy: opakované otázky, struktura podle rozhodování, checklisty, rozhodovací deník, údržba a privacy-first pravidla.
 - 2026-08-29 01:00 UTC — Doplněna příloha F o zákaznické podpoře a retenci: kontextová nápověda, triage ticketů, kvalitní odpovědi, produktové signály, zdraví účtu, férový offboarding a privacy-first checklist.
