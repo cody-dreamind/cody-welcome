@@ -2876,7 +2876,130 @@ Ke každému leadu stačí poznámka: „proč přišel, co potřebuje, co jsme 
 
 Lead magnet a formulář jsou první ochutnávka toho, jak firma přemýšlí. Pokud už tady tlačí, mate a sbírá víc dat, než potřebuje, zákazník právem čeká podobný chaos i později. Když naopak dostane jasnou hodnotu, krátký formulář a férové očekávání, začínáš vztah lépe: s respektem místo s trikem.
 
+## Příloha J: Přechod z náhodného stacku na privacy-first provoz
+
+Většina malých firem nezačíná s dokonale navrženým stackem. Začíná s tím, co bylo po ruce: formulář z jednoho nástroje, analytika z druhého, newsletter z třetího, CRM v tabulce, soubory v osobních účtech a pár automatizací, které kdysi nastavil někdo „jen na chvíli“. Na chvíli je v digitálním provozu nejnebezpečnější časová jednotka. Často vydrží roky.
+
+Privacy-first přechod neznamená, že všechno okamžitě zahodíš a začneš od nuly. To by byl hezký chaos s lepším logem. Cílem je postupně snížit riziko, zjednodušit provoz a přesunout důležitá data tam, kde jim rozumíš a kde nad nimi máš kontrolu.
+
+### J.1 Nejdřív inventura, potom migrace
+
+Nezačínej výběrem nového nástroje. Začni mapou současného stavu. Otevři dokument a napiš si:
+
+- **Nástroj:** co používáme.
+- **Účel:** proč to používáme.
+- **Data:** jaká data tam ukládáme nebo posíláme.
+- **Vlastník:** kdo za nástroj odpovídá.
+- **Přístup:** kdo má účet, admin práva nebo exporty.
+- **Riziko:** co se stane, když služba vypadne, zdraží nebo účet ztratíme.
+- **Rozhodnutí:** nechat, omezit, nahradit, vypnout.
+
+Příklad řádku:
+
+| Nástroj | Účel | Data | Vlastník | Riziko | Rozhodnutí |
+| --- | --- | --- | --- | --- | --- |
+| Starý formulářový builder | Poptávky z webu | jméno, e-mail, zpráva, příloha | marketing | data mimo hlavní CRM, nejasné mazání | nahradit formulářem napojeným na interní inbox |
+
+Tahle tabulka obvykle během první hodiny odhalí víc než dlouhá debata o „digitální transformaci“. Hlavně ukáže, které služby existují jen proto, že se na ně zapomnělo.
+
+### J.2 Rozděl stack podle kritičnosti
+
+Ne každý nástroj má stejnou prioritu. Rozděl je do tří skupin:
+
+1. **Kritické systémy:** web, aplikace, databáze, platby, e-mailové doručování, zákaznická podpora.
+2. **Obchodní systémy:** CRM, formuláře, fakturace, dokumenty, schůzky, reporting.
+3. **Pomocné systémy:** grafika, plánování obsahu, interní poznámky, jednorázové exporty.
+
+Začni kritickými systémy, ale ne nutně největší migrací. Někdy má nejrychlejší dopad vypnout jeden zapomenutý tracker, zrušit veřejně sdílenou složku nebo sjednotit formuláře. Malé snížení rizika dnes je lepší než dokonalý migrační plán, který čeká na „volnější měsíc“. Ten mimochodem v SaaS kalendáři žije hned vedle jednorožce.
+
+### J.3 Vyber migrační strategii podle bolesti
+
+Existují tři rozumné strategie:
+
+- **Omezení:** nástroj necháš, ale snížíš data a přístupy. Hodí se, když migrace teď nedává ekonomicky smysl.
+- **Nahrazení:** najdeš privacy-first alternativu a přesuneš workflow. Hodí se pro formuláře, analytiku, jednoduché CRM nebo interní dokumentaci.
+- **Konsolidace:** místo pěti malých nástrojů použiješ jeden provozně zvládnutelný systém. Hodí se, když tým tráví víc času přepínáním než prací.
+
+Příklad:
+
+- Starý nástroj pro heatmapy sbírá příliš mnoho detailů o návštěvnících.
+- Reálná otázka není „čím heatmapy nahradíme“, ale „jaké rozhodnutí nám heatmapy pomáhaly dělat“.
+- Pokud odpověď zní „občas jsme se podívali“, první krok je vypnout nástroj a sledovat jen agregované metriky, scroll chování přes anonymní signály nebo kvalitativní zpětnou vazbu.
+
+*Codyho komentář:* Nejlevnější privacy-first alternativa je často žádná alternativa. Když nástroj nepomáhá rozhodovat, není to nástroj. Je to drahý suvenýr v levém menu.
+
+### J.4 Migruj po tocích, ne po aplikacích
+
+Místo otázky „jak převedeme nástroj X“ se ptej „jak funguje tok dat od začátku do konce“. Typické toky:
+
+- návštěvník webu → formulář → odpověď týmu → obchodní příležitost,
+- nový zákazník → účet → onboarding → fakturace → podpora,
+- článek → RSS/přímá návštěva → měření zájmu → obchodní rozhovor,
+- incident → interní upozornění → stavová komunikace → postmortem.
+
+U každého toku napiš:
+
+1. Kde data vznikají.
+2. Kam se posílají.
+3. Kde se ukládají.
+4. Kdo je čte.
+5. Kdy se mažou.
+6. Co se pokazí, když jeden krok vypadne.
+
+Tím zabráníš klasické pasti: vyměníš jeden nástroj, ale necháš tři staré exporty, dva webhooks a jednu tabulku s osobními daty v rohu. Migrace je hotová až ve chvíli, kdy je starý tok vypnutý, ne když nový nástroj vypadá hezky.
+
+### J.5 Pilot bez velkého třesku
+
+U kritických částí se vyhni velkému přepnutí v pátek odpoledne. Udělej pilot:
+
+- Vyber jeden formulář, jednu landing page, jeden typ zákaznického požadavku nebo jednu část onboardingu.
+- Nastav nový tok vedle starého.
+- Otestuj interní upozornění, export, odpověď zákazníkovi a mazání dat.
+- Nech běžet krátké kontrolní období.
+- Sepiš, co se zlepšilo a co se rozbilo.
+- Teprve potom rozšiřuj.
+
+Pilot musí mít jasné kritérium úspěchu. Ne „uvidíme, jestli se nám to bude líbit“, ale třeba:
+
+- žádná poptávka se neztratila,
+- tým odpověděl do jednoho pracovního dne,
+- data skončila jen v určeném systému,
+- starý nástroj už nedostává nové záznamy,
+- zákazník dostal srozumitelné potvrzení.
+
+### J.6 Ukončení starého nástroje je samostatný úkol
+
+Vypnutí starého nástroje není kliknutí na „cancel“. Udělej ho jako kontrolovaný mini projekt:
+
+1. Exportuj data, která máš právní nebo obchodní důvod zachovat.
+2. Zkontroluj, jestli export opravdu jde otevřít a použít.
+3. Smaž data, která už nepotřebuješ.
+4. Odeber integrace, API klíče, webhooks a skripty z webu.
+5. Zruš přístupy lidem, kteří je nepotřebují.
+6. Ulož potvrzení o zrušení nebo smazání do interní dokumentace.
+7. Aktualizuj privacy policy, pokud se změnil způsob zpracování dat.
+
+To poslední je důležité: provozní realita a veřejný slib musí sedět. Když web tvrdí, že používáš privacy-first analytiku, ale v šabloně pořád leží starý reklamní pixel, není to strategie. Je to nášlapná mina s UTM parametrem.
+
+### J.7 Checklist: migrace bez zbytečných datových duchů
+
+- [ ] Máme inventuru nástrojů, účelů, dat, vlastníků a přístupů.
+- [ ] Každý nástroj má rozhodnutí: nechat, omezit, nahradit, vypnout.
+- [ ] Kritické systémy jsou oddělené od pomocných experimentů.
+- [ ] Migrujeme podle toků dat, ne podle oblíbenosti aplikací.
+- [ ] U každého toku víme, kde data vznikají, kam tečou a kdy se mažou.
+- [ ] Nový nástroj má ověřený evropský provoz nebo jasně popsané riziko.
+- [ ] Pilot má konkrétní kritéria úspěchu.
+- [ ] Starý tok je po migraci opravdu vypnutý.
+- [ ] Nepotřebné exporty, webhooks, skripty a API klíče jsou odstraněné.
+- [ ] Přístupy odpovídají reálným rolím v týmu.
+- [ ] Privacy policy a interní dokumentace odpovídají skutečnému provozu.
+- [ ] Tým ví, komu hlásit problém po migraci.
+
+Privacy-first stack není jednorázový nákup. Je to pravidelný úklid digitální dílny. Čím menší tým, tím důležitější je, aby nástroje nesoutěžily o pozornost, data netekla náhodně a každý nový systém měl jasný důvod existovat. Dobře udělaná migrace není vidět jako ohňostroj. Je vidět tak, že zákazník nic nepozná, tým má méně ruční práce a firma lépe ví, kde jsou její data.
+
 ## Pracovní log
+- 2026-08-29 05:10 UTC — Doplněna příloha J o přechodu z náhodného stacku na privacy-first provoz: inventura nástrojů, kritičnost systémů, migrační strategie, datové toky, pilot, vypnutí starých nástrojů a checklist.
 - 2026-08-29 04:00 UTC — Doplněna příloha I o privacy-first lead magnetu a poptávkovém formuláři: úzký užitek, datová minimalizace, očekávání po odeslání, veřejné alternativy, jednoduchý lead flow a checklist.
 - 2026-08-29 03:01 UTC — Doplněna příloha H o auditu nástrojů a dodavatelů před nákupem: karta potřeby, datová mapa, evropský provoz, bezpečnostní minimum, celkové náklady, rozhodovací matice a checklist.
 - 2026-08-29 03:00 UTC — Doplněna příloha G o interním playbooku pro malé webové a SaaS týmy: opakované otázky, struktura podle rozhodování, checklisty, rozhodovací deník, údržba a privacy-first pravidla.
