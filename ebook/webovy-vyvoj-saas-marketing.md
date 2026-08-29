@@ -4145,7 +4145,164 @@ Záznam nemá být román. Má zabránit tomu, aby se stejná věc řešila znov
 
 Dobré zákaznické review je kombinace péče, produktového výzkumu a obchodní disciplíny. Neprodává za každou cenu. Zjišťuje, jestli zákazník opravdu vyhrává. A když vyhrává, nabízí další krok tak, aby dával smysl pro obě strany — bez nátlaku, bez šmírování a bez prezentace o padesáti slajdech, kterou nikdo dobrovolně nepřežije.
 
+## Příloha S: Renewal a pokračování spolupráce bez poslední minutové paniky
+
+První zákaznické review ukáže, jestli zákazník dostal slíbenou hodnotu. Renewal — tedy rozhodnutí pokračovat, prodloužit tarif, rozšířit spolupráci nebo uzavřít další období — ukáže, jestli z té hodnoty vznikl zdravý obchodní vztah. Není to jeden e-mail poslaný tři dny před koncem smlouvy. Je to průběžná disciplína: vědět, co zákazník používá, co mu pomáhá, co ho brzdí a jak férově otevřít další krok.
+
+Malý SaaS tým nebo agentura často dělá chybu, že renewal začne řešit až ve chvíli, kdy se blíží fakturace. Pak z toho vznikne hon na podpis, sleva ze strachu nebo trapná zpráva ve stylu „jen připomínáme, že končí období“. Zákazník ale neprodlužuje proto, že mu to připomeneš. Prodlužuje proto, že má důkaz, že by bez tebe přišel o něco užitečného.
+
+*Codyho komentář:* Renewal není administrativní datum. Je to test, jestli tvůj produkt přežil kontakt s realitou. A realita, ta potvora, neumí číst pitch deck.
+
+### S.1 Renewal začíná při podpisu
+
+Už při startu spolupráce si napiš, podle čeho bude pokračování dávat smysl. Nemusí to být právnický román. Stačí krátká dohoda:
+
+- jaký výsledek má být po prvním období vidět,
+- kdo u zákazníka pozná, že se to povedlo,
+- jaká data nebo signály budou stačit jako důkaz,
+- kdy se k tomu společně vrátíte,
+- co se stane, pokud výsledek nenastane.
+
+Příklad pro webový projekt:
+
+> Po třech měsících chceme vědět, jestli nový poptávkový proces přináší kvalitnější dotazy a jestli obchodník tráví méně času dohledáváním kontextu.
+
+Příklad pro SaaS:
+
+> Po prvním kvartálu chceme potvrdit, že tým pravidelně používá hlavní workflow, že se snížil počet ručních předávek a že administrátor zvládne základní správu bez dodavatele.
+
+Tím si chráníš obě strany. Ty víš, co máš sledovat. Zákazník ví, že pokračování nebude založené na dojmu, ale na pozorovatelném posunu.
+
+### S.2 Vytvoř renewal kartu zákazníka
+
+Renewal karta je jednoduchý dokument, který drží kontext pohromadě. Nemá být CRM monstrum se čtyřiceti poli. Má odpovědět na otázku: „Kdybych měl za deset minut mluvit se zákazníkem o pokračování, co musím vědět?“
+
+Minimální struktura:
+
+- **Zákazník:** název, hlavní kontakt, rozhodovatel, interní vlastník vztahu.
+- **Slib:** jaký výsledek jsme slíbili při startu.
+- **Použití:** které části produktu nebo služby zákazník opravdu využívá.
+- **Hodnota:** konkrétní pozorované přínosy, příklady, citace nebo čísla, pokud je máme.
+- **Rizika:** ticho, nízké používání, nevyřešený problém, změna rozhodovatele, rozpočtový tlak.
+- **Další krok:** pokračovat beze změny, upravit rozsah, rozšířit, zlevnit jen s jasným důvodem, nebo férově ukončit.
+
+Kartu aktualizuj průběžně po větších interakcích: onboarding, support ticket, review, incident, školení, změna kontaktní osoby. Když to necháš na konec období, budeš psát archeologickou zprávu z popela Slacku, e-mailů a matných vzpomínek. Nedoporučuju, prach je špatný datový sklad.
+
+### S.3 Sleduj signály pokračování, ne mikromanagement lidí
+
+Privacy-first přístup neznamená, že nic neměříš. Znamená, že měříš jen to, co pomáhá rozhodovat, a neděláš z uživatelů laboratorní myši.
+
+Dobré signály pro renewal:
+
+- zákazník se pravidelně vrací k hlavnímu workflow,
+- více lidí v týmu chápe, kdy produkt použít,
+- support dotazy se přesouvají od „jak to zapnu“ k „můžeme tím řešit i tohle“,
+- zákazník sám zmiňuje výsledek, který chtěl,
+- rozhodovatel dostává jednoduchý přehled hodnoty,
+- problémy se řeší otevřeně a nezůstávají v tichu.
+
+Rizikové signály:
+
+- hlavní kontakt přestal reagovat,
+- produkt používá jen jeden nadšenec bez podpory týmu,
+- zákazník se ptá jen na cenu a nikdy na výsledek,
+- onboarding skončil, ale aktivační moment nenastal,
+- support opakovaně řeší stejnou překážku,
+- ve firmě zákazníka se změnil rozpočet, vlastník nebo priorita.
+
+Měř agregovaně a účelově. U malého B2B SaaS často stačí vědět, jestli účet jako celek používá klíčovou funkci, ne kdo přesně v úterý v 9:43 klikl na modré tlačítko. Pokud potřebuješ detailnější auditní stopu kvůli bezpečnosti, odděl ji od marketingové nebo produktové analytiky a nastav jasnou retenci.
+
+### S.4 Renewal konverzace má být konkrétní
+
+Dobrá renewal schůzka není prezentace nových funkcí. Je to strukturovaný rozhovor o hodnotě a dalším období.
+
+Jednoduchá agenda na 30 minut:
+
+1. **Původní cíl:** „Na začátku jsme chtěli dosáhnout X. Platí to pořád?“
+2. **Co se povedlo:** ukaž konkrétní výsledek, procesní zlepšení nebo příklad použití.
+3. **Co drhne:** pojmenuj problémy dřív, než je zákazník použije jako argument pro odchod.
+4. **Co se změnilo:** nové priority, lidé, procesy, trh, interní omezení.
+5. **Další období:** pokračovat, upravit rozsah, doplnit onboarding, rozšířit nebo ukončit.
+6. **Dohoda:** kdo udělá co a dokdy.
+
+Ukázková formulace:
+
+> „Nechci dnes jen řešit prodloužení faktury. Chci si ověřit, jestli služba pořád pomáhá s tím, kvůli čemu jste ji pořizovali. Pokud ano, navrhneme další období. Pokud ne, pojďme si říct, co změnit.“
+
+Tohle je mnohem silnější než „máte zájem pokračovat?“. Tím dáváš zákazníkovi signál, že nehledáš jen podpis, ale funkční vztah.
+
+### S.5 Sleva není strategie
+
+Když zákazník váhá, první reakce nemá být sleva. Sleva bez diagnózy je přiznání, že nevíš, kde je hodnota. Nejdřív zjisti, co se opravdu děje.
+
+Možné důvody váhání:
+
+- zákazník hodnotu dostal, ale nemá ji interně komu ukázat,
+- hodnota existuje, ale používání je příliš úzké,
+- produkt řeší problém, který už není priorita,
+- služba je užitečná, ale rozsah je větší než potřeba,
+- zákazník měl nerealistické očekávání,
+- konkurence nabízí levnější, ale rizikovější variantu.
+
+Podle důvodu vyber reakci:
+
+- chybí důkaz hodnoty → připrav stručný value recap,
+- nízká adopce → nabídni cílené školení nebo zjednodušení workflow,
+- příliš velký rozsah → navrhni menší balíček,
+- jiná priorita → domluv pauzu nebo ukončení bez pálení mostů,
+- tlak na cenu → porovnej hodnotu, rizika a dopady, ne jen měsíční částku.
+
+Sleva dává smysl jen tehdy, když má jasnou protihodnotu: delší závazek, menší rozsah, reference, případová studie, platba předem nebo pilot s přesně omezeným cílem. Jinak učíš zákazníka, že stačí počkat do konce období a tvá cena začne měknout jako rohlík v dešti.
+
+### S.6 Připrav value recap
+
+Value recap je krátké shrnutí, které zákazník může poslat dál interně. Nepiš ho jako reklamu. Piš ho jako pracovní důkaz.
+
+Struktura:
+
+- **Cíl období:** co jsme chtěli zlepšit.
+- **Dodané změny:** co vzniklo nebo se nastavilo.
+- **Pozorovaná hodnota:** konkrétní dopady, příklady, úspory času, lepší proces, méně rizik.
+- **Otevřené body:** co ještě není ideální.
+- **Návrh pokračování:** proč dává smysl další období a s jakým zaměřením.
+
+Příklad:
+
+> Za první období jsme zjednodušili poptávkový formulář, nastavili interní předání leadů a odstranili zbytečné kopírování do tří nástrojů. Tým má teď jedno místo pro nové dotazy a méně ručních kroků při prvním kontaktu. Další období doporučujeme zaměřit na kvalifikaci poptávek a lepší obsah pro rozhodovací fázi.
+
+Value recap pomáhá hlavně tam, kde člověk, který produkt používá, není jediný rozhodovatel. Dáš mu munici pro interní rozhovor, ale bez manipulace a nafouknutých metrik.
+
+### S.7 Privacy-first pravidla pro renewal
+
+Renewal proces pracuje s citlivým kontextem: používání produktu, problémy zákazníka, interní překážky, rozpočty, někdy i nespokojenost konkrétních lidí. Proto nastav jasná pravidla.
+
+- Nesbírej osobní detail, pokud stačí úroveň účtu, týmu nebo procesu.
+- Odděl auditní logy od obchodních poznámek.
+- Do renewal karty nepiš drby ani hodnocení lidí.
+- Citace zákazníka používej externě jen se souhlasem.
+- Interní value recap anonymizuj, pokud ho sdílíš mimo původní tým.
+- Po ukončení spolupráce smaž nebo archivuj data podle domluvené retence.
+- Pokud používáš AI asistenta pro shrnutí poznámek, neposílej mu tajná nebo identifikující data bez právního a bezpečnostního důvodu.
+
+Privacy-first renewal není slabší obchod. Je to obchod, který zákazníkovi říká: „Rozumíme hodnotě, ale nepotřebujeme kvůli tomu rozebrat vaši firmu na šroubky.“
+
+### S.8 Checklist: renewal bez paniky
+
+- [ ] U každého zákazníka je jasné, podle čeho se bude hodnotit pokračování.
+- [ ] Renewal karta obsahuje slib, použití, hodnotu, rizika a další krok.
+- [ ] Rizikové signály se řeší průběžně, ne týden před koncem období.
+- [ ] Renewal schůzka začíná původním cílem a reálnou hodnotou.
+- [ ] Pro rozhodovatele existuje krátký value recap.
+- [ ] Sleva má důvod a protihodnotu, není to reflex ze strachu.
+- [ ] Návrh pokračování může znamenat i menší rozsah nebo férové ukončení.
+- [ ] Produktová analytika je agregovaná a přiměřená účelu.
+- [ ] Obchodní poznámky neobsahují zbytečné osobní detaily.
+- [ ] Retence dat po ukončení spolupráce je předem domluvená.
+
+Renewal je nejlepší, když nepůsobí jako renewal. Když celý vztah průběžně ukazuje hodnotu, konec období není dramatický cliffhanger. Je to jen přirozený bod, kde si obě strany řeknou: dává to smysl, víme proč a víme, co dál.
+
 ## Pracovní log
+- 2026-08-29 14:00 UTC — Doplněna příloha S o renewalu a pokračování spolupráce: začátek už při podpisu, renewal karta, signály pokračování, konkrétní konverzace, práce se slevou, value recap, privacy-first pravidla a checklist.
 - 2026-08-29 13:00 UTC — Doplněna příloha R o prvním zákaznickém review: práce se slíbenou hodnotou, agenda, zpracování kritiky, férové rozšíření, etické reference, rytmus review a checklist.
 - 2026-08-29 12:00 UTC — Doplněna příloha Q o onboardingu prvního zákazníka: aktivační moment, vstupní data, tříkrokový onboarding, zákaznická karta, pracovní školení, měření adopce a checklist.
 - 2026-08-29 11:01 UTC — Doplněna příloha P o poptávkovém procesu: minimální sběr dat, potvrzení po odeslání, kvalifikace, interní předání, retence a privacy-first checklist.
