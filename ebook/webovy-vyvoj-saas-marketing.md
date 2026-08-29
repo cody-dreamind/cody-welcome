@@ -2998,7 +2998,171 @@ To poslední je důležité: provozní realita a veřejný slib musí sedět. Kd
 
 Privacy-first stack není jednorázový nákup. Je to pravidelný úklid digitální dílny. Čím menší tým, tím důležitější je, aby nástroje nesoutěžily o pozornost, data netekla náhodně a každý nový systém měl jasný důvod existovat. Dobře udělaná migrace není vidět jako ohňostroj. Je vidět tak, že zákazník nic nepozná, tým má méně ruční práce a firma lépe ví, kde jsou její data.
 
+## Příloha K: Produktový backlog, který nepožírá firmu
+
+Backlog je užitečný sluha a velmi protivný šéf. Když do něj házíš každý nápad, každou poznámku ze schůzky a každé „jednou by se hodilo“, rychle vznikne digitální půda plná krabic bez popisků. Malý tým pak netrpí nedostatkem nápadů, ale nedostatkem jasnosti: co má opravdu posunout zákazníka, co jen uspokojuje naši nervozitu a co je převlečená prokrastinace s hezkou ikonou.
+
+Dobře vedený backlog není seznam přání. Je to rozhodovací nástroj. Pomáhá říct: „Tohle teď ano, tohle později, tohle ne a tohle nejdřív ověříme.“
+
+### K.1 Backlog začíná produktem, ne nástrojem
+
+Nejdřív si vyjasni, jaké typy položek do backlogu vůbec patří. Pokud máš jeden seznam pro nové funkce, bugy, obchodní nápady, texty na web, interní automatizace a právní úkoly, bude se ti prioritizovat špatně. Každá položka bude křičet jiným jazykem.
+
+Praktické rozdělení pro malý SaaS nebo webový tým:
+
+- **Zákaznická hodnota:** funkce, zlepšení a obsah, které přímo pomáhají uživateli dosáhnout výsledku.
+- **Obchodní růst:** věci, které zvyšují důvěru, konverzi, retenci nebo schopnost prodávat.
+- **Provozní zdraví:** monitoring, zálohy, incidenty, výkon, bezpečnost a dokumentace.
+- **Datová a privacy stopa:** úkoly, které snižují sběr dat, zpřehledňují zpracování nebo opravují rizikové integrace.
+- **Experimenty:** hypotézy, které ještě nejsou připravené jako funkce.
+
+Každá položka má patřit do jedné hlavní kategorie. Pokud nevíš kam, pravděpodobně není dost jasná. A pokud je „všechno důležité“, nemáš backlog. Máš požární poplach s kalendářem.
+
+### K.2 Každá položka potřebuje důvod
+
+Položka typu „přidat dashboard“ je nebezpečně vágní. Dashboard pro koho? K jakému rozhodnutí? Co se stane, když ho nepřidáme? Jak poznáme, že funguje?
+
+Lepší šablona:
+
+> Jako **[typ uživatele]** potřebuji **[akce nebo informace]**, abych mohl **[konkrétní výsledek]**. Poznáme to podle **[signál nebo metrika]**.
+
+Příklad:
+
+> Jako správce účtu potřebuji vidět posledních deset neúspěšných importů, abych mohl rychle zjistit, jestli problém řeší zákazník, nebo naše integrace. Poznáme to podle menšího počtu support ticketů k importům a rychlejší triage chyb.
+
+U marketingového úkolu:
+
+> Jako návštěvník pricing stránky potřebuji pochopit rozdíl mezi balíčky bez hovoru s obchodníkem, abych mohl vybrat vhodnou variantu nebo se kvalifikovaně zeptat. Poznáme to podle kvalitnějších poptávek a menšího počtu základních dotazů na cenu.
+
+U privacy-first úkolu:
+
+> Jako provozovatel služby potřebuji odstranit nepotřebný skript třetí strany z kontaktní stránky, abych snížil datovou stopu poptávkového formuláře. Poznáme to podle čistší inventury skriptů a jednoduššího vysvětlení v zásadách soukromí.
+
+Nemusíš psát román. Stačí, aby položka obsahovala uživatele, výsledek a ověřitelný signál. Bez toho se v plánování snadno vyhrává podle hlasitosti, ne podle hodnoty.
+
+### K.3 Priorita není pocit, ale porovnání
+
+Malé týmy často prioritizují podle toho, kdo naposledy mluvil nejpřesvědčivěji. To je lidské, ale drahé. Potřebuješ jednoduchý rámec, který oddělí naléhavost od důležitosti.
+
+U každé větší položky si dej rychlé skóre 1–5:
+
+- **Dopad:** Jak moc to pomůže zákazníkovi, prodeji nebo provozu?
+- **Důkaz:** Jak silný signál máme, že to někdo opravdu potřebuje?
+- **Riziko neudělání:** Co se zhorší, když to necháme být další měsíc?
+- **Náročnost:** Kolik práce, koordinace a údržby to přinese?
+- **Privacy dopad:** Snižuje to datovou stopu, nebo ji zvyšuje?
+
+Jednoduchá interpretace:
+
+- vysoký dopad, silný důkaz, nízká náročnost: pravděpodobně dělat brzy,
+- vysoký dopad, slabý důkaz: nejdřív ověřit menším experimentem,
+- nízký dopad, vysoká náročnost: odložit nebo zahodit,
+- zhoršení privacy bez silného důvodu: stopka a nové řešení,
+- vysoké provozní riziko: řešit i tehdy, když to není sexy.
+
+Nesnaž se ze skórování udělat matematickou vědu. Cílem není přesnost na dvě desetinná místa. Cílem je zpomalit reflex „tohle prostě musíme mít“ a donutit tým pojmenovat důvody.
+
+*Codyho komentář:* Prioritizační tabulka tě nespasí, pokud do ní všichni píšou přání jako fakta. Ale pořád je lepší než strategická metoda „nejvíc emoji v komentáři vyhrává“.
+
+### K.4 Backlog pravidelně prořezávej
+
+Backlog, který jen roste, přestává být důvěryhodný. Lidé do něj přestanou koukat, protože vědí, že většina věcí se nikdy nestane. Pak vznikne druhý tajný backlog v hlavě zakladatele, třetí v chatu a čtvrtý v poznámkách po schůzkách. Gratuluji, právě jsi vynalezl distribuovaný chaos.
+
+Jednou týdně projdi nové položky:
+
+1. Slouč duplicity.
+2. Doplň chybějící důvod a signál.
+3. Vyhoď položky bez jasného výsledku.
+4. Označ věci, které potřebují ověření.
+5. Přesuň provozní rizika mimo běžný „feature“ seznam, aby nezapadla.
+
+Jednou měsíčně udělej hlubší úklid:
+
+- smaž položky, které už neodpovídají strategii,
+- zavři nápady bez vlastníka,
+- aktualizuj priority podle nových signálů,
+- zkontroluj, jestli backlog neobsahuje úkoly zvyšující datovou stopu bez důvodu,
+- vyber několik věcí, které vědomě neděláš, a napiš proč.
+
+„Ne“ je produktová práce. Když ho neříkáš, říkáš „ano“ všemu trochu. A „ano všemu trochu“ je nejrychlejší cesta k produktu, který vypadá jako kompromis mezi šesti poradami a jedním panickým víkendem.
+
+### K.5 Odděl experiment od závazku
+
+Ne každý nápad má jít rovnou do vývoje. Pokud nemáš důkaz, začni levnějším ověřením.
+
+Příklady ověření:
+
+- text na landing page místo hotové funkce,
+- ruční concierge proces místo automatizace,
+- prototyp v interním nástroji místo produkční integrace,
+- rozhovor se zákazníky místo týdenního brainstormingu,
+- ukázkové PDF nebo video místo plné dokumentace,
+- jednorázový audit datového toku místo nákupu nové platformy.
+
+Experiment má mít tři části:
+
+1. **Hypotézu:** Co si myslíme, že je pravda.
+2. **Test:** Jak to ověříme s co nejmenší prací.
+3. **Rozhodnutí:** Co uděláme, když signál bude silný, slabý nebo nejasný.
+
+Příklad:
+
+> Hypotéza: Menší B2B týmy chtějí jednoduchý audit privacy-first analytiky. Test: zveřejníme stránku s popisem auditu a nabídneme 5 konzultací. Rozhodnutí: pokud přijdou kvalifikované poptávky, připravíme balíček; pokud přijdou jen obecné dotazy, upravíme cílovku nebo problém.
+
+Tím chráníš tým před stavěním funkcí, které ve skutečnosti měly být jen otázkou položenou zákazníkovi.
+
+### K.6 Definition of Done pro malé týmy
+
+Hotovo neznamená „merge prošel“. Hotovo znamená, že věc může bezpečně žít v provozu.
+
+Pro funkci:
+
+- uživatel ji najde a pochopí,
+- základní chybové stavy mají lidskou odpověď,
+- data mají jasný účel a dobu života,
+- měření sbírá jen rozhodovací minimum,
+- dokumentace nebo nápověda vysvětluje očekávané chování,
+- support ví, co odpovědět na první dotazy,
+- existuje plán, jak poznat úspěch nebo problém.
+
+Pro marketingovou stránku:
+
+- nadpis říká výsledek a cílovku,
+- CTA má jasné očekávání,
+- stránka neobsahuje zbytečné skripty,
+- formulář sbírá minimum dat,
+- meta title a description odpovídají obsahu,
+- existuje další krok pro lidi, kteří ještě nejsou připraveni koupit.
+
+Pro provozní úkol:
+
+- je jasné, co se změnilo,
+- monitoring nebo kontrola potvrdí výsledek,
+- tajné klíče nejsou v dokumentaci ani logu,
+- tým ví, koho kontaktovat při problému,
+- starý postup je odstraněný nebo označený jako neplatný.
+
+Definition of Done nemusí být dlouhá, ale musí být společná. Jinak každý dokončuje jiný produkt ve své hlavě. To zní poeticky, ale v produkci je to drahý koníček.
+
+### K.7 Checklist: backlog, který pomáhá rozhodovat
+
+- [ ] Backlog je rozdělený podle typu práce, ne jen podle data přidání.
+- [ ] Každá větší položka má uživatele, výsledek a ověřitelný signál.
+- [ ] Položky bez jasného důvodu se doplňují, ověřují nebo mažou.
+- [ ] Priorita vzniká porovnáním dopadu, důkazu, rizika, náročnosti a privacy dopadu.
+- [ ] Provozní rizika nezapadají mezi běžnými funkcemi.
+- [ ] Experimenty jsou označené jako experimenty, ne jako slib zákazníkům.
+- [ ] Každý experiment má hypotézu, test a rozhodnutí předem.
+- [ ] Backlog se týdně třídí a měsíčně prořezává.
+- [ ] Tým vědomě dokumentuje, co nedělá a proč.
+- [ ] Definition of Done zahrnuje uživatele, data, měření, podporu a provoz.
+- [ ] Nové nápady nezvyšují datovou stopu bez silného obchodního důvodu.
+- [ ] Backlog je dost malý na to, aby mu tým věřil.
+
+Backlog má firmě vracet soustředění. Pokud místo toho vytváří vinu, šum a nekonečné „měli bychom“, je čas ho zmenšit. Malý, čistý a pravidelně udržovaný backlog je konkurenční výhoda: tým ví, proč něco dělá, zákazník cítí rychlejší posun a provoz zůstává bezpečnější. V privacy-first SaaS je to dvojnásob důležité, protože každá funkce není jen kód. Je to i nový datový tok, nový slib a nová odpovědnost.
+
 ## Pracovní log
+- 2026-08-29 06:01 UTC — Doplněna příloha K o produktovém backlogu: kategorie práce, šablona položky, prioritizační rámec, pravidelný úklid, experimenty, Definition of Done a checklist.
 - 2026-08-29 05:10 UTC — Doplněna příloha J o přechodu z náhodného stacku na privacy-first provoz: inventura nástrojů, kritičnost systémů, migrační strategie, datové toky, pilot, vypnutí starých nástrojů a checklist.
 - 2026-08-29 04:00 UTC — Doplněna příloha I o privacy-first lead magnetu a poptávkovém formuláři: úzký užitek, datová minimalizace, očekávání po odeslání, veřejné alternativy, jednoduchý lead flow a checklist.
 - 2026-08-29 03:01 UTC — Doplněna příloha H o auditu nástrojů a dodavatelů před nákupem: karta potřeby, datová mapa, evropský provoz, bezpečnostní minimum, celkové náklady, rozhodovací matice a checklist.
