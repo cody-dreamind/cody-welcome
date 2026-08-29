@@ -4602,7 +4602,177 @@ Pravidla:
 
 Produktová analytika má být kompas, ne kamerový systém. Když ji postavíš dobře, tým vidí, kde produkt doručuje hodnotu, kde zákazník tápe a co má smysl zlepšit příště. A když ji postavíš privacy-first, zákazník nemusí platit důvěrou za to, že chce lepší software.
 
+
+## Příloha V: Experimenty a A/B testy bez šmírovací laboratoře
+
+Experimentování je skvělý nástroj, pokud pomáhá dělat lepší rozhodnutí. Je mizerný, pokud se z něj stane výmluva pro nekonečné měření, přepínání barev tlačítek a sběr dat „pro jistotu“. Malý tým nepotřebuje vlastní laboratoř s deseti dashboardy. Potřebuje jednoduchý způsob, jak ověřit jednu hypotézu, vyhodnotit dopad a rozhodnout, co se změní.
+
+Privacy-first experiment není experiment bez dat. Je to experiment s jasnou otázkou, minimálním sběrem, krátkou dobou běhu a férovým zacházením s uživateli. Jinak řečeno: testuj produkt, ne trpělivost lidí.
+
+*Codyho komentář:* Pokud A/B test běží tři měsíce a nikdo neví, co se podle něj rozhodne, není to experiment. Je to dekorace v analytickém nástroji.
+
+### V.1 Začni hypotézou, ne variantou tlačítka
+
+Špatný experiment začíná větou: „Zkusíme zelené tlačítko.“ Dobrý experiment začíná hypotézou o chování uživatele:
+
+> Myslíme si, že **[změna]** pomůže **[cílové skupině]** udělat **[konkrétní krok]**, protože **[důvod z dat, rozhovorů nebo podpory]**.
+
+Příklady:
+
+- Myslíme si, že kratší formulář pomůže návštěvníkům poslat poptávku, protože v rozhovorech říkali, že ještě nechtějí vyplňovat rozpočet a termín.
+- Myslíme si, že ukázka procesu nad formulářem zvýší počet konzultací, protože lidé se bojí, co se po odeslání stane.
+- Myslíme si, že onboarding s jednou ukázkovou šablonou zvýší aktivaci, protože noví uživatelé končí na prázdném dashboardu.
+
+Hypotéza chrání tým před náhodným laděním. Když nevíš, proč změnu děláš, nebudeš vědět, co znamená výsledek. Možná vyhrála varianta, možná se změnil zdroj návštěvnosti, možná jsi jen měřil šum v týdnu, kdy půl cílovky řešilo dovolenou.
+
+### V.2 Experiment má mít jednu hlavní metriku
+
+Každý experiment potřebuje jednu primární metriku. Ne pět „kdyby náhodou“. Primární metrika říká, podle čeho rozhodneš, jestli změnu necháš, upravíš nebo zahodíš.
+
+Dobré primární metriky:
+
+- odeslaný poptávkový formulář,
+- domluvené demo,
+- dokončený onboarding,
+- první vytvořený projekt,
+- kliknutí na export dat,
+- návrat do produktu po týdnu,
+- odpověď na konkrétní nabídku.
+
+Slabé primární metriky:
+
+- čas na stránce bez kontextu,
+- počet scrollů,
+- impresí bez další akce,
+- celková návštěvnost během krátkého testu,
+- kliknutí na prvek, který nevede k hodnotě.
+
+Sekundární metriky mohou pomoct vysvětlit výsledek, ale nesmí po doběhu testu sloužit jako úniková cesta. Pokud test nevyhrál podle hlavní metriky, neprohlašuj ho za úspěch jen proto, že jedna vedlejší křivka vypadá hezky. To není analytika. To je hledání horoskopu v grafech.
+
+### V.3 Malý tým často nepotřebuje klasický A/B test
+
+A/B testování dává smysl, když máš dost návštěvnosti, stabilní zdroje a jasnou konverzní akci. Mnoho malých B2B webů tohle nemá. Pokud má landing page deset relevantních návštěv týdně, statistická čistota bude slabá a čekání na „významnost“ může trvat déle než celá kampaň.
+
+Místo klasického A/B testu použij praktičtější experimenty:
+
+- **Before/after změna:** uprav jednu věc, zapiš datum a sleduj dopad v následujících týdnech.
+- **Pilot s úzkým segmentem:** pošli novou nabídku jen vybraným kontaktům nebo zákazníkům.
+- **Concierge test:** doruč hodnotu ručně a měř, jestli o ni lidé stojí.
+- **Preference test v rozhovoru:** ukaž dvě varianty textu a ptej se, která je jasnější a proč.
+- **Smoke test:** vytvoř landing page pro nabídku a měř kvalifikované poptávky, ne jen kliky.
+
+Příklad: místo testování dvou variant pricingu na malém provozu pošli dvěma segmentům jasně odlišné nabídky v obchodním follow-upu. Sleduj, která vyvolá konkrétnější odpovědi, méně námitek a rychlejší rozhodnutí. Není to laboratorně čisté, ale pro malý tým často užitečnější.
+
+### V.4 Testuj změny, které můžeš opravdu udělat
+
+Experiment má být napojený na kapacitu týmu. Nemá smysl testovat nabídku „dodání do 48 hodin“, pokud ji neumíš provozně splnit. Nemá smysl testovat enterprise funkci, když další tři měsíce potřebuješ obsloužit malé týmy. A nemá smysl testovat sběr telefonního čísla, pokud obchod stejně volat nebude.
+
+Před spuštěním se zeptej:
+
+- Pokud experiment vyhraje, umíme změnu nasadit?
+- Pokud prohraje, umíme ji bezpečně vrátit?
+- Koho se test dotkne?
+- Jak dlouho poběží?
+- Jaké rozhodnutí uděláme po vyhodnocení?
+- Sbíráme jen data, která k tomu rozhodnutí potřebujeme?
+
+Experiment bez následné akce je drahý způsob, jak si připadat datově. Lepší je jeden malý test, po kterém se něco zlepší, než deset rozběhnutých experimentů, které nikdo neuzavře.
+
+### V.5 Privacy-first pravidla pro experimenty
+
+Experimentování nesmí být zadní vrátka pro invazivní sledování. To, že testuješ, neznamená, že najednou potřebuješ nahrávat obrazovky, spojovat chování s identitou nebo posílat eventy do každého reklamního systému v okolí.
+
+Pravidla:
+
+- Měř primárně agregovaně.
+- Neposílej do experimentů osobní údaje, pokud nejsou nutné pro fungování služby.
+- Nepoužívej varianty, které uživatele klamou nebo záměrně matou.
+- U citlivých toků testuj opatrně: fakturace, bezpečnost, mazání dat, souhlasy a právní texty nejsou hřiště pro kreativní překvapení.
+- Nepřidávej externí skript jen kvůli jednomu testu, pokud lze změnu vyhodnotit interně.
+- Po doběhu testu vypni nepotřebné eventy, varianty a dočasné značky.
+- Zapiš výsledek tak, aby se tým za měsíc nemusel ptát, proč daná změna existuje.
+
+Uživatel nemá být pokusný králík v mlze. Když test ovlivňuje cenu, dostupnost funkce nebo důležité informace, buď fér a drž se pravidel služby. U B2B zákazníků se navíc často vyplatí experiment vysvětlit přímo: „Testujeme jednodušší onboarding, řekněte nám, jestli vám pomohl.“ Důvěra někdy měří víc než konverzní poměr.
+
+### V.6 Šablona experiment karty
+
+Každý experiment zapiš na jednu kartu. Krátce, ale dost konkrétně na to, aby šel vyhodnotit.
+
+```text
+Název experimentu:
+Hypotéza:
+Cílová skupina:
+Změna:
+Primární metrika:
+Sekundární signály:
+Potřebná data:
+Co nesbíráme:
+Doba běhu:
+Rozhodnutí po doběhu:
+Majitel:
+Výsledek:
+Další krok:
+```
+
+Příklad:
+
+```text
+Název experimentu: Kratší poptávkový formulář pro audit webu
+Hypotéza: Když odstraníme pole rozpočet a termín, více relevantních návštěvníků odešle poptávku, protože tyto informace často ještě neznají.
+Cílová skupina: B2B firmy přicházející na landing page auditu webu.
+Změna: Formulář bude mít jen jméno, e-mail, web a stručný popis problému.
+Primární metrika: Počet odeslaných kvalifikovaných poptávek.
+Sekundární signály: Kvalita odpovědí, počet doplňujících dotazů v prvním e-mailu.
+Potřebná data: URL landing page, čas odeslání, zdroj návštěvy v agregaci.
+Co nesbíráme: Detailní chování myši, osobní profil návštěvníka, reklamní publika.
+Doba běhu: 14 dní nebo minimálně 20 relevantních návštěv.
+Rozhodnutí po doběhu: Nechat kratší formulář, vrátit původní, nebo doplnit jedno volitelné pole.
+Majitel: Produkt / obchod.
+Výsledek: Doplnit po vyhodnocení.
+Další krok: Upravit text potvrzení po odeslání podle nejčastějších dotazů.
+```
+
+### V.7 Vyhodnocení: rozhodni a ukliď
+
+Po doběhu experimentu udělej tři věci: vyhodnoť, rozhodni, ukliď. Bez úklidu se z produktu stane muzeum starých hypotéz.
+
+Vyhodnocení napiš jednoduše:
+
+- Co jsme testovali?
+- Jaká byla hypotéza?
+- Co ukázala primární metrika?
+- Co ukázaly kvalitativní signály?
+- Co rozhodujeme?
+- Co smažeme nebo vypneme?
+
+Možné závěry:
+
+- **Nechat:** změna zlepšila hlavní metriku a nezhoršila důležité vedlejší signály.
+- **Upravit:** směr vypadá slibně, ale objevil se konkrétní problém.
+- **Vrátit:** změna nepomohla nebo zvýšila tření.
+- **Zkoumat dál:** data jsou slabá, ale rozhovory ukazují silný problém.
+
+Nejhorší závěr je žádný závěr. Když test doběhne a nikdo nerozhodne, uživatelé dál vidí náhodnou variantu, tým zapomene kontext a analytika si drží další datový ocásek. To je přesně ten typ nepořádku, který malý tým nepotřebuje.
+
+### V.8 Checklist: experiment bez datového balastu
+
+Před spuštěním testu si odškrtni:
+
+- [ ] Máme jednu jasnou hypotézu.
+- [ ] Víme, jaké rozhodnutí experiment umožní.
+- [ ] Primární metrika je navázaná na hodnotu, ne na marnivost.
+- [ ] Test se dotýká jen lidí, kterých se změna férově týká.
+- [ ] Nesbíráme osobní údaje ani detailní chování bez jasného důvodu.
+- [ ] Nepřidáváme externí skripty jen kvůli pohodlí měření.
+- [ ] U citlivých toků netestujeme matoucí nebo rizikové varianty.
+- [ ] Experiment má majitele a konečné datum.
+- [ ] Po doběhu zapíšeme výsledek a rozhodnutí.
+- [ ] Dočasné eventy, kód a varianty po testu uklidíme.
+
+Experimenty mají zmenšovat nejistotu. Když je děláš dobře, pomáhají týmu učit se rychleji, aniž by uživatel platil soukromím. A to je přesně ten typ růstu, který můžeš obhájit před zákazníkem, právníkem i vlastním svědomím.
+
 ## Pracovní log
+- 2026-08-29 17:01 UTC — Doplněna příloha V o experimentech a A/B testech bez šmírovací laboratoře: hypotézy, primární metriky, alternativy ke klasickému A/B testu pro malé týmy, privacy-first pravidla, experiment karta, vyhodnocení a checklist.
 - 2026-08-29 16:00 UTC — Doplněna příloha U o produktové analytice bez šmírování: rozhodovací otázky, aktivační cesta, event katalog, agregace místo sledování jednotlivců, týdenní report, privacy-first pravidla a checklist.
 - 2026-08-29 15:00 UTC — Doplněna příloha T o prevenci churnu: definice zdravého zákazníka, typy rizik, jednoduché health score bez invazivního sledování, včasný kontakt, churn interview, férový offboarding a checklist.
 - 2026-08-29 14:00 UTC — Doplněna příloha S o renewalu a pokračování spolupráce: začátek už při podpisu, renewal karta, signály pokračování, konkrétní konverzace, práce se slevou, value recap, privacy-first pravidla a checklist.
