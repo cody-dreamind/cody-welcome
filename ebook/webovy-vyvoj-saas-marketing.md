@@ -4922,7 +4922,134 @@ Před zapojením AI do běžné práce si odškrtni:
 
 Dobře nastavený AI asistent nezrychluje chaos. Zrychluje práci, která už má směr, hranice a odpovědnost. A přesně tam dává malému týmu největší smysl: méně rutiny, víc soustředění a žádná zbytečná datová stopa navíc.
 
+## Příloha X: Exit plán a přenositelnost dat bez dramatu
+
+Vendor lock-in není problém až ve chvíli, kdy chceš odejít. Je to problém už ve chvíli, kdy neumíš říct, co by odchod stál, kdo by ho udělal a jak dlouho by zákazník čekal na svá data. Malý SaaS tým často řeší export až tehdy, když přijde první větší zákazník s bezpečnostním dotazníkem nebo když se ruší účet. To je pozdě. V tu chvíli už se improvizuje, ručně se tahají CSV soubory z databáze a někdo v pátek večer vysvětluje, proč „export dat“ znamená screenshot administrace. Romantika jak z DevOps telenovely.
+
+Exit plán není pesimismus. Je to důkaz, že svůj produkt provozuješ dospěle. Když zákazník ví, že se z produktu může rozumně dostat, snáz do něj vstoupí. U privacy-first SaaS je to navíc obchodní argument: data nejsou rukojmí, ale aktivum zákazníka.
+
+### X.1 Přenositelnost začíná datovým modelem
+
+Nejdřív si ujasni, jaká data v produktu vlastně existují. Ne podle tabulek v databázi, ale podle toho, co znamenají pro zákazníka.
+
+Rozděl je na:
+
+- **zákaznická data:** účty, projekty, objednávky, požadavky, dokumenty, poznámky,
+- **provozní metadata:** čas vytvoření, stav, autor změny, interní ID, vazby mezi záznamy,
+- **systémová data:** logy, fronty, cache, technické události,
+- **odvozená data:** skóre, souhrny, automatické štítky, doporučení,
+- **data třetích stran:** fakturace, e-mailing, analytika, support, úložiště souborů.
+
+Pro export jsou nejdůležitější první dvě kategorie. Zákazník obvykle nepotřebuje interní cache, ale potřebuje pochopit, jak na sebe záznamy navazují. Export bez vazeb je jako vysypat šuplík na zem a říct: „Tady máte organizaci.“
+
+Praktické pravidlo: každá hlavní entita v produktu má mít stabilní ID, lidsky čitelný název, časové údaje a jasně popsané vztahy. Když exportuješ projekty a úkoly, úkol musí nést vazbu na projekt. Když exportuješ poptávky a přílohy, musí být zřejmé, která příloha patří ke které poptávce.
+
+### X.2 Export navrhni pro člověka i stroj
+
+Jeden exportní formát málokdy stačí. Člověk chce rychle otevřít tabulku. Vývojář chce strojově zpracovat strukturu. Účetní chce soubory, které přežijí archivaci.
+
+Rozumné minimum:
+
+- **CSV** pro jednoduché tabulkové seznamy,
+- **JSON** pro vztahy, vnořené objekty a import do jiného systému,
+- **ZIP archiv** pro kombinaci dat, příloh a manifestu,
+- **README v exportu** s popisem obsahu, času vytvoření a verzí schématu,
+- **kontrolní součty** u větších souborů, pokud export používáš pro důležitá data.
+
+Do exportu přidej manifest, například:
+
+```text
+export-version: 1
+created-at: 2026-08-29T19:01:00Z
+account-id: acme-demo
+files:
+  - projects.csv
+  - tasks.csv
+  - attachments/
+  - schema.json
+```
+
+Manifest je malý detail, ale při migraci šetří hodiny. Zákazník i technik vidí, co balík obsahuje, kdy vznikl a podle jaké verze schématu. Když časem změníš datový model, staré exporty zůstanou srozumitelné.
+
+### X.3 Export nesmí být bezpečnostní díra
+
+Export je citlivá funkce. Pokud ji uděláš ledabyle, vytvoříš tlačítko „stáhnout firmu“. Proto export patří jen do rukou správné role a musí mít rozumné ochrany.
+
+Minimum pro SaaS:
+
+- export může spustit jen vlastník účtu nebo role s výslovným oprávněním,
+- systém před spuštěním ukáže, jaké typy dat export obsahuje,
+- větší exporty běží na pozadí a mají omezenou platnost odkazu,
+- odkaz vyžaduje přihlášení, ne tajnou URL poslanou do chatu,
+- systém zapíše auditní záznam: kdo export spustil, kdy a jaký rozsah,
+- po vypršení se balík smaže z dočasného úložiště.
+
+Privacy-first princip je jednoduchý: export má dát kontrolu oprávněnému zákazníkovi, ne komukoli, kdo najde link. Pokud export posíláš e-mailem, posílej notifikaci, ne samotný soubor. E-mail je komunikační kanál, ne trezor s veselým předmětem „data_final_final.zip“.
+
+### X.4 Právo na portabilitu není totéž co obecný backup
+
+U osobních údajů v EU existuje právo na přenositelnost dat. Evropská komise ho vysvětluje jako možnost získat osobní data ve strukturovaném, strojově čitelném formátu a za určitých podmínek je předat jinému správci; EDPB k tomu má samostatné pokyny k právu na přenositelnost. Zdroje: Evropská komise k žádostem jednotlivců — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/dealing-requests-individuals_en a EDPB guidelines — https://www.edpb.europa.eu/documents/guideline/right-to-data-portability_en.
+
+Pro produktový tým z toho plyne praktická věc: nepleť dohromady tři různé potřeby.
+
+- **Zákaznický export účtu:** obchodní a provozní funkce pro firmu, která chce svá data.
+- **Žádost subjektu údajů:** právní proces pro konkrétní osobu a její osobní údaje.
+- **Interní backup:** technická obnova systému po chybě nebo incidentu.
+
+Tyhle tři věci se potkávají, ale nejsou stejné. Backup obvykle není vhodný výstup pro zákazníka. Zákaznický export nemusí automaticky řešit všechny právní žádosti. A právní žádost nemá znamenat, že někomu pošleš celou firemní databázi jen proto, že se v ní objevuje jeho e-mail.
+
+*Codyho komentář:* Nejlepší je navrhnout produkt tak, aby právní a technická realita nebyly dva oddělené vesmíry. Když data už v produktu držíš čistě, export a žádosti se řeší normálně. Když máš v jedné tabulce zákazníky, poznámky, logy a náladu developera z úterý, čeká tě archeologie.
+
+### X.5 Připrav exit proces dřív než první enterprise dotazník
+
+Exit plán napiš jako krátký interní postup. Nemusí mít třicet stran. Musí být použitelný ve chvíli, kdy zákazník řekne: „Chceme odejít“ nebo „Pošlete nám export.“
+
+Jednoduchý exit proces:
+
+1. Ověř, kdo o export žádá a jaké má oprávnění.
+2. Potvrď rozsah: celý účet, konkrétní projekt, časové období, přílohy.
+3. Vysvětli formát a očekávaný čas přípravy.
+4. Vytvoř export přes standardní nástroj, ne ruční SQL improvizaci.
+5. Předej odkaz bezpečným způsobem a s expirací.
+6. Zapiš auditní záznam a interní poznámku k účtu.
+7. Pokud účet končí, potvrď retenci, mazání a případné zákonné důvody pro uchování části dat.
+
+Tento proces pomůže i v prodeji. Když se zákazník zeptá na přenositelnost dat, můžeš odpovědět konkrétně: jaké formáty podporuješ, kdo export spouští, jak chráníš odkaz a jak dlouho data držíš po ukončení. To zní výrazně lépe než „nějak to vytáhneme z databáze“.
+
+### X.6 Import je druhá polovina důvěry
+
+Když umíš data exportovat, časem budeš chtít umět i importovat. Ne nutně všechno hned. Ale pokud produkt nahrazuje starý systém, import je často rozdíl mezi „zajímavé“ a „kdy můžeme začít“.
+
+Začni podporou jednoduchého importu:
+
+- vzorové CSV pro hlavní entitu,
+- validace před uložením,
+- náhled chyb po řádcích,
+- možnost import zrušit před potvrzením,
+- log importu pro podporu,
+- jasné limity velikosti a polí.
+
+Import neznamená, že musíš slíbit migraci z každého historického systému na planetě. Znamená to, že umíš přijmout strukturovaná data bez ručního pekla. Pro malý tým je dobrý kompromis: standardní šablona zdarma, složitá migrace jako placená služba.
+
+### X.7 Checklist: data nejsou rukojmí
+
+Před tím, než export označíš za hotový, zkontroluj:
+
+- [ ] Víme, které typy zákaznických dat produkt obsahuje.
+- [ ] Hlavní entity mají stabilní ID a popsané vazby.
+- [ ] Export podporuje alespoň CSV pro tabulky a JSON pro strukturu.
+- [ ] Archiv obsahuje manifest a popis schématu.
+- [ ] Export může spustit jen oprávněná role.
+- [ ] Odkaz na export má expiraci a vyžaduje přihlášení.
+- [ ] Export se loguje pro audit.
+- [ ] Dočasné exportní soubory se po čase mažou.
+- [ ] Máme oddělený postup pro zákaznický export, právní žádost a backup.
+- [ ] Umíme zákazníkovi lidsky vysvětlit, co dostane při odchodu.
+
+Dobře navržený exit plán paradoxně pomáhá růstu. Zákazník se méně bojí začít, protože ví, že ho nebudeš držet za data. A ty získáš lepší architekturu, čistší model a méně paniky při každé migraci. To je win-win, což je manažerský výraz pro „tentokrát to fakt dává smysl“.
+
 ## Pracovní log
+- 2026-08-29 19:01 UTC — Doplněna příloha X o exit plánu a přenositelnosti dat: datový model, exportní formáty, bezpečnost exportů, rozdíl mezi portabilitou, backupem a zákaznickým exportem, import a checklist.
 - 2026-08-29 18:01 UTC — Doplněna příloha W o interním AI asistentovi bez úniku know-how: vhodné úlohy, datový semafor, šablony promptů, review výstupů, práce s interním kontextem, privacy-first pravidla a checklist.
 - 2026-08-29 17:01 UTC — Doplněna příloha V o experimentech a A/B testech bez šmírovací laboratoře: hypotézy, primární metriky, alternativy ke klasickému A/B testu pro malé týmy, privacy-first pravidla, experiment karta, vyhodnocení a checklist.
 - 2026-08-29 16:00 UTC — Doplněna příloha U o produktové analytice bez šmírování: rozhodovací otázky, aktivační cesta, event katalog, agregace místo sledování jednotlivců, týdenní report, privacy-first pravidla a checklist.
