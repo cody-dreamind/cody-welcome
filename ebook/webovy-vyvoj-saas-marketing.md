@@ -3436,7 +3436,136 @@ U citlivějších B2B produktů preferuj evropský provoz, vlastní kontrolu nad
 
 Dobrý monitoring má dvě vlastnosti: včas tě upozorní na skutečný problém a zbytečně ti neleze do života. Malý tým nepotřebuje vědět všechno. Potřebuje vědět to, podle čeho udělá lepší rozhodnutí, rychleji opraví zákaznický dopad a nevyrobí si z provozních dat další privacy dluh.
 
+## Příloha N: Zálohy a obnova bez falešného klidu
+
+Záloha, kterou nikdo nikdy nezkusil obnovit, není záloha. Je to optimistická povídka uložená někde vedle faktur. V malém webovém nebo SaaS týmu se přitom nejčastěji nepadá na tom, že by zálohy vůbec neexistovaly. Padá se na tom, že nikdo přesně neví, co se zálohuje, jak stará data jsou přijatelná, kdo má přístup, jak dlouho obnova trvá a jestli se při obnově omylem nepřepíše produkce.
+
+Dobrá strategie záloh není heroický dokument pro enterprise audit. Je to praktický provozní návyk: víš, která data jsou kritická, jak často je ukládáš, kde leží, kdo je umí obnovit a jak ověříš, že se po obnově aplikace opravdu chová správně. Privacy-first přístup k tomu přidává ještě jednu zásadní otázku: držíš v zálohách jen data, která opravdu potřebuješ, a umíš je po čase rozumně smazat?
+
+### N.1 Nejdřív rozděl data podle hodnoty
+
+Ne všechno si zaslouží stejnou péči. Když zálohuješ všechno stejně, platíš víc, obnovuješ pomaleji a zvyšuješ objem citlivých dat, která musíš chránit. Začni jednoduchou mapou dat:
+
+- **Produkční databáze:** zákazníci, účty, objednávky, licence, nastavení, obsah a auditní stopy.
+- **Uživatelské soubory:** přílohy, nahrané dokumenty, exporty, obrázky a importní soubory.
+- **Konfigurace:** proměnné prostředí, DNS, deploy nastavení, integrační pravidla, plánované úlohy.
+- **Zdrojový kód:** repozitář, tagy releasů, migrační skripty a dokumentace provozu.
+- **Analytika a logy:** metriky, aplikační logy, incidentní záznamy a debug data.
+- **Marketingový obsah:** články, landing pages, šablony e-mailů, media knihovna a formuláře.
+
+Ke každé skupině si napiš dvě věty:
+
+1. Co se stane, když o tahle data přijdeme?
+2. Jak stará kopie je ještě přijatelná?
+
+Tím získáš základ pro RPO a RTO, aniž by z toho byla akademická rozcvička v zkratkách. RPO říká, kolik dat můžeš maximálně ztratit. RTO říká, jak dlouho může služba běžet v omezeném režimu, než se z problému stane obchodní průšvih s vlastním soundtrackem.
+
+### N.2 Urči obnovovací cíle podle dopadu
+
+Malý tým často nastaví zálohy podle technické pohodlnosti: databáze jednou denně, soubory občas, konfigurace „někde v hlavě“. Lepší je začít dopadem.
+
+Příklad jednoduché tabulky:
+
+| Oblast | Maximální ztráta dat | Cílová obnova | Poznámka |
+| --- | --- | --- | --- |
+| Platby a objednávky | 15 minut | 1 hodina | Potřebuje časté snapshoty nebo event log. |
+| Uživatelský obsah | 1 hodina | 4 hodiny | Ověř i soubory, ne jen DB řádky. |
+| Marketingový web | 24 hodin | 2 hodiny | Repozitář + export CMS obvykle stačí. |
+| Analytické agregace | 24–72 hodin | 1 den | Nezálohuj detailní stopování navždy. |
+| Debug logy | podle retence | bez obnovy | Slouží diagnostice, ne historickému muzeu. |
+
+Tahle tabulka má být jednoduchá, ale konkrétní. Když tým neví, jestli je přijatelná ztráta jedné hodiny objednávek, nemá problém se zálohovacím nástrojem. Má problém s prioritami.
+
+*Codyho komentář:* „Máme denní backup“ zní uklidňujícím způsobem přesně do chvíle, kdy zjistíš, že posledních 23 hodin obsahovalo největší kampaň roku. Backup plán bez obchodního kontextu je jako deštník zapomenutý doma — technicky existuje, prakticky prší na hlavu.
+
+### N.3 Zálohuj víc než databázi
+
+Databáze je srdce produktu, ale sama o sobě často nestačí. Po havárii potřebuješ obnovit provozní celek:
+
+- **Schéma a migrace:** umíš spustit aplikaci nad obnovenou DB bez ruční magie?
+- **Objektové úložiště:** sedí soubory s databázovými záznamy?
+- **Konfigurace prostředí:** máš bezpečně uložené hodnoty, které aplikace potřebuje?
+- **DNS a domény:** víš, kde změnit záznamy při přesunu služby?
+- **Webhooky a integrace:** umíš znovu nastavit cílové URL a podpisové klíče?
+- **Crony a fronty:** nespustí se po obnově staré úlohy dvakrát?
+
+Obnova často selže na nudném detailu. Chybí jeden bucket, jeden env var, jeden webhook secret, jedna fronta s nevyřízenými úlohami. Proto piš recovery postup jako recept, ne jako motivační frázi.
+
+Minimální recovery karta pro každou kritickou službu:
+
+```text
+Služba: Poptávkový formulář
+Kritická data: submissions DB, email queue, soubory příloh
+Záloha: DB každých 30 minut, soubory každou hodinu, konfigurace v secrets manageru
+Obnova: obnovit DB do nového prostředí, připojit bucket, ověřit SMTP, poslat testovací poptávku
+Riziko: duplicitní e-maily při znovuspuštění fronty
+Kontrola: testovací lead dorazí do CRM a zákazník dostane potvrzení
+Vlastník: provozní správce / technický lead
+```
+
+### N.4 Test obnovy je součást zálohy
+
+Aspoň jednou měsíčně udělej malý restore drill. Nemusí to být celodenní válečná hra s helmami. Stačí vybrat jednu kritickou oblast a projít obnovu do izolovaného prostředí.
+
+Praktický postup:
+
+1. Vyber konkrétní scénář: smazaná tabulka, rozbitá migrace, ztracený soubor, chybné nasazení.
+2. Obnov data do testovacího prostředí, nikdy přímo do produkce.
+3. Spusť aplikaci nad obnovenými daty.
+4. Ověř hlavní workflow: přihlášení, čtení dat, zápis, e-mail, export nebo platbu podle produktu.
+5. Změř reálný čas obnovy a porovnej ho s cílem.
+6. Zapiš, co chybělo, co bylo pomalé a co by v incidentu zmátlo tým.
+
+Po testu aktualizuj runbook. Pokud obnova trvá dvě hodiny místo slíbených třiceti minut, není to ostuda. Ostuda je zjistit to poprvé v pátek večer, kdy zrovna zákazník posílá screenshot s červenou chybou a káva už přestala fungovat jako infrastruktura.
+
+### N.5 Chraň zálohy jako produkci
+
+Zálohy často obsahují kompletní kopii nejcitlivějších dat. Proto musí mít podobnou ochranu jako produkční systémy, někdy dokonce přísnější. Útočník nepotřebuje prolomit aplikaci, když může stáhnout databázový dump z nehlídaného bucketu.
+
+Základní pravidla:
+
+- Šifruj zálohy při uložení i při přenosu.
+- Odděl přístupy k produkci a k zálohám.
+- Používej vícefaktorové přihlášení pro účty, které spravují backupy.
+- Neposílej dumpy přes chat, e-mail ani sdílené odkazy bez expirace.
+- Omez počet lidí, kteří mohou stáhnout kompletní kopii dat.
+- Loguj přístupy k zálohám a občas je kontroluj.
+- Měj kopii mimo hlavní provozní účet nebo server, aby jedna chyba nesmazala všechno.
+
+Privacy-first provoz znamená také mazání. Když zákazník odejde nebo vyprší retenční doba, promysli, jak se jeho data chovají v zálohách. U některých systémů nedává smysl okamžitě přepisovat všechny historické snapshoty, ale musíš mít jasnou politiku: jak dlouho zálohy držíš, kdo k nim má přístup a kdy se definitivně mažou.
+
+### N.6 Připrav režim částečné obnovy
+
+Ne každý incident vyžaduje návrat celé databáze o několik hodin zpět. Někdy je potřeba obnovit jen jeden účet, jeden dokument nebo jednu dávku importu. Pokud umíš jen „vrátit celý svět do včerejška“, můžeš opravit jednu chybu a vyrobit deset nových.
+
+Připrav si tři úrovně obnovy:
+
+- **Jednotlivý záznam:** omylem smazaný kontakt, objednávka, nastavení nebo článek.
+- **Část systému:** konkrétní zákazník, projekt, workspace, tabulka nebo bucket složka.
+- **Celé prostředí:** kompletní obnova po havárii infrastruktury nebo zásadní chybě releasu.
+
+Pro SaaS produkty je částečná obnova často nejcennější. Zákazník nechce slyšet, že kvůli jeho jednomu smazanému exportu vrátíš celou aplikaci o dvě hodiny zpět. To je jako opravovat rozbitou židli demolicí domu. Efektní, ale špatný žánr.
+
+### N.7 Checklist: zálohy, kterým se dá věřit
+
+- [ ] Kritická data jsou rozdělená podle obchodního dopadu.
+- [ ] Každá důležitá oblast má definované RPO a RTO.
+- [ ] Zálohují se databáze, soubory, konfigurace i integrační nastavení.
+- [ ] Zálohy jsou uložené mimo hlavní produkční server nebo účet.
+- [ ] Přístupy k zálohám jsou omezené, chráněné a auditované.
+- [ ] Kompletní dumpy se neposílají přes chat, e-mail ani náhodné sdílené odkazy.
+- [ ] Existuje postup pro obnovu do izolovaného prostředí.
+- [ ] Tým testuje obnovu aspoň u jedné kritické oblasti v pravidelném rytmu.
+- [ ] Po testu obnovy se aktualizuje runbook a měří reálný čas obnovy.
+- [ ] Retence záloh odpovídá skutečné potřebě, ne sběratelskému instinktu.
+- [ ] Privacy pravidla řeší i data uložená v historických zálohách.
+- [ ] Existuje plán částečné obnovy pro jeden účet, projekt nebo dokument.
+- [ ] Alert upozorní nejen na pád aplikace, ale i na selhanou nebo podezřele malou zálohu.
+
+Zálohy nejsou pojištění proti všemu. Jsou pojistka proti tomu, aby jedna chyba, jeden bug nebo jeden unavený večerní deploy zničil důvěru, kterou jsi budoval měsíce. Dobrá záloha je nudná, pravidelná a ověřená. Přesně ten typ nudy, který chceš mít ve firmě víc než dramatický Slack thread s názvem „má někdo dump z úterý?“.
+
 ## Pracovní log
+- 2026-08-29 09:01 UTC — Doplněna příloha N o zálohách a obnově: mapa dat, RPO/RTO podle dopadu, obnova konfigurace a souborů, restore drill, ochrana záloh, částečná obnova a checklist.
 - 2026-08-29 08:01 UTC — Doplněna příloha M o monitoringu a alertech: zákaznický slib, čtyři vrstvy monitoringu, akční alerty, privacy-first logování, runbooky, první praktické alerty a checklist.
 - 2026-08-29 07:00 UTC — Doplněna příloha L o status page a komunikaci incidentů: komponenty služby, úrovně incidentů, první update, interní incident karta, postmortem, privacy-first pravidla a checklist.
 - 2026-08-29 06:01 UTC — Doplněna příloha K o produktovém backlogu: kategorie práce, šablona položky, prioritizační rámec, pravidelný úklid, experimenty, Definition of Done a checklist.
