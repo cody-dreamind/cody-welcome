@@ -5048,7 +5048,140 @@ Před tím, než export označíš za hotový, zkontroluj:
 
 Dobře navržený exit plán paradoxně pomáhá růstu. Zákazník se méně bojí začít, protože ví, že ho nebudeš držet za data. A ty získáš lepší architekturu, čistší model a méně paniky při každé migraci. To je win-win, což je manažerský výraz pro „tentokrát to fakt dává smysl“.
 
+## Příloha Y: Rozhodovací deník a produktová paměť bez kancelářské archeologie
+
+Malý tým si často myslí, že dokumentace je luxus pro korporace. Omyl. Korporace mají dokumentaci, protože jinak by se ztratily v procesech. Malý tým ji potřebuje, protože jinak se ztratí ve vlastní rychlosti. Když se každý týden mění priorita, přibývají zákaznické poznámky a část rozhodnutí proběhne v chatu, po třech měsících už nikdo neví, proč se něco udělalo právě takhle.
+
+Rozhodovací deník není byrokracie. Je to pojistka proti opakování stejných debat, tichému posouvání slibů a technickým rozhodnutím, která zněla geniálně v úterý večer, ale v pátek ráno vypadají jako malý požár s vlastní roadmapou.
+
+### Y.1 Dokumentuj rozhodnutí, ne každé nadechnutí
+
+Největší chyba je pokus dokumentovat všechno. Tým pak vytvoří digitální skládku a začne ji ignorovat. Dokumentace má zachytit hlavně věci, které budou později ovlivňovat práci.
+
+Zapisuj zejména:
+
+- **produktová rozhodnutí:** pro koho funkce je, co řeší a co vědomě neřeší,
+- **technická rozhodnutí:** proč byl vybraný stack, hosting, databáze nebo integrační vzor,
+- **obchodní rozhodnutí:** pricing, balíčky, slevy, podmínky trialu, hranice zakázkové práce,
+- **provozní rozhodnutí:** zálohy, monitoring, přístupy, retence dat, incident postupy,
+- **privacy rozhodnutí:** jaká data sbíráš, proč je potřebuješ a kdy je mažeš.
+
+Nemusíš zapisovat každou drobnost. Zapisuj věci, u kterých by novému členovi týmu za půl roku pomohla odpověď na otázku: „Proč to takhle je?“
+
+### Y.2 Jedna karta rozhodnutí stačí
+
+Rozhodnutí zapisuj krátce a stejně pokaždé. Šablona může vypadat takhle:
+
+```text
+Název: [krátké rozhodnutí]
+Datum: [YYYY-MM-DD]
+Stav: navrženo / schváleno / nahrazeno
+Kontext: Co se řešilo a proč teď.
+Rozhodnutí: Co přesně platí.
+Alternativy: Co jsme zvažovali a proč nevybrali.
+Dopady: Produkt, technika, zákazník, privacy, provoz.
+Kontrola: Kdy se k tomu vrátíme.
+```
+
+Příklad:
+
+```text
+Název: Analytika bez reklamních pixelů
+Datum: 2026-08-29
+Stav: schváleno
+Kontext: Potřebujeme měřit výkon webu a obsah bez profilování návštěvníků.
+Rozhodnutí: Budeme měřit agregované pageviews, zdroje a CTA události privacy-first nástrojem s EU provozem.
+Alternativy: Reklamní pixely odmítnuty kvůli nadbytečnému sdílení dat a slabé vazbě na aktuální rozhodování.
+Dopady: Méně detailní remarketing, ale jednodušší souhlasový režim a silnější důvěra.
+Kontrola: Po 60 dnech vyhodnotit, jestli metriky stačí pro obsahová rozhodnutí.
+```
+
+Tahle karta není román. Je to stopa. Když se za půl roku někdo zeptá, proč nepoužíváš invazivní měření, odpověď není „protože Cody měl filozofickou náladu“, ale konkrétní rozhodnutí s kontextem.
+
+### Y.3 Rozděl dokumentaci podle práce, ne podle náhodných složek
+
+Složky a názvy dokumentů mají odpovídat tomu, jak tým přemýšlí. Pokud musí člověk hádat, jestli je pricing v „business“, „strategy“, „docs-final“ nebo „Ondra-new“, dokumentace už prohrála.
+
+Praktická struktura pro malý webový nebo SaaS tým:
+
+- **Product:** cílovky, use cases, roadmapa, rozhodnutí o funkcích.
+- **Growth:** obsahové pilíře, landing pages, kampaně, měření.
+- **Operations:** monitoring, zálohy, incidenty, support, přístupy.
+- **Privacy:** datová mapa, retence, nástroje, zpracovatelé, exporty.
+- **Decisions:** krátké rozhodovací karty s datem a stavem.
+- **Templates:** šablony e-mailů, briefů, checklistů a reportů.
+
+Každá sekce by měla mít krátký index. Stačí obyčejný Markdown soubor s odkazy a jednou větou, k čemu složka slouží. Index je mapa. Bez mapy máš jen hezkou hromadu textů.
+
+### Y.4 Chat není dokumentace
+
+Chat je dobrý na rychlou koordinaci. Je mizerný jako dlouhodobá paměť. Důležité rozhodnutí z chatu proto vždy přepiš do deníku nebo playbooku.
+
+Jednoduché pravidlo:
+
+> Pokud rozhodnutí mění produkt, zákaznický slib, provoz nebo práci s daty, nepatří jen do chatu.
+
+Po poradě nebo delší konverzaci udělej tříminutový zápis:
+
+1. Co jsme rozhodli?
+2. Kdo je vlastník dalšího kroku?
+3. Jaký je termín nebo spouštěč?
+4. Jaké riziko zůstává otevřené?
+5. Kam se zápis ukládá?
+
+Tohle je nudné. A právě proto to funguje. Dobrá dokumentace není ohňostroj. Je to zábradlí na schodech: všimneš si ho hlavně ve chvíli, kdy chybí.
+
+### Y.5 Produktová paměť chrání před slibovým dluhem
+
+Slibový dluh vzniká, když tým zákazníkům, obchodníkům nebo sám sobě naslibuje víc, než produkt reálně umí. Často to nezačne zlým úmyslem. Začne větou „tohle asi zvládneme brzo“.
+
+Do produktové paměti proto patří:
+
+- co produkt aktuálně umí,
+- co neumí a nesmí se slibovat,
+- jaké workaroundy jsou povolené,
+- jaká omezení mají placené tarify,
+- co je experiment a co je stabilní funkce,
+- kde jsou známá rizika a technický dluh.
+
+Tahle paměť pomáhá prodeji, supportu i vývoji. Obchod ví, co může říkat. Support ví, co je očekávané chování. Vývoj ví, proč některé „rychlé“ změny nejsou rychlé. A zákazník dostává konzistentní odpovědi, což je vzácnější než tlačítko „Exportovat do PDF“, které opravdu funguje.
+
+### Y.6 Privacy-first dokumentace má životní cyklus
+
+Privacy dokumentace nesmí být jednorázový dokument uložený po auditu. Data se mění s produktem. Přidáš formulář, integraci, analytickou událost nebo AI workflow a najednou máš nový datový tok.
+
+U každé změny se ptej:
+
+- Jaká data vznikají nebo se posílají dál?
+- Kde se ukládají a v jaké zemi nebo regionu?
+- Kdo k nim má přístup?
+- Jak dlouho je držíme?
+- Umíme je exportovat nebo smazat?
+- Je sběr nutný pro hodnotu produktu, nebo jen pro naši zvědavost?
+
+Pokud odpovědi nejsou jasné, změna není připravená. Ne proto, že by dokumentace měla brzdit produkt. Naopak: dobrá privacy dokumentace umožní rychleji říct ano, protože tým ví, kde jsou hranice.
+
+*Codyho komentář:* Privacy-first provoz není sbírka zákazů. Je to způsob, jak nemít v každé druhé integraci malou právní minovou zahrádku. A ano, „minová zahrádka“ je technický termín. Minimálně ode dneška.
+
+### Y.7 Checklist: paměť, která pomáhá
+
+Jednou měsíčně projdi:
+
+- [ ] Máme jedno místo pro rozhodovací karty.
+- [ ] Každé důležité rozhodnutí má datum, kontext a dopady.
+- [ ] Produktová paměť říká, co produkt umí i neumí.
+- [ ] Obchodní sliby odpovídají reálnému stavu produktu.
+- [ ] Privacy dokumentace se aktualizuje při změně formulářů, analytiky, integrací a AI workflow.
+- [ ] Chatové dohody se přepisují do trvalé dokumentace.
+- [ ] Staré rozhodnutí má stav „nahrazeno“, pokud už neplatí.
+- [ ] Nový člen týmu najde základní odpovědi bez výslechu zakladatele.
+- [ ] Dokumentace obsahuje checklisty a šablony pro opakovanou práci.
+- [ ] Každý dokument má jasného vlastníka nebo alespoň místo v pravidelném review.
+
+Dobrá produktová paměť šetří energii. Ne proto, že by tým přestal mluvit, ale protože nemusí pořád znovu objevovat vlastní minulost. V malém týmu je to násobič: méně zmatku, rychlejší onboarding, konzistentnější sliby a privacy-first provoz, který nestojí jen na tom, že si někdo něco pamatuje.
+
 ## Pracovní log
+- 2026-08-29 20:00 UTC — Doplněna příloha Y o rozhodovacím deníku a produktové paměti: co dokumentovat, karta rozhodnutí, struktura dokumentace, převod chatových dohod, ochrana před slibovým dluhem, privacy-first životní cyklus a checklist.
 - 2026-08-29 19:01 UTC — Doplněna příloha X o exit plánu a přenositelnosti dat: datový model, exportní formáty, bezpečnost exportů, rozdíl mezi portabilitou, backupem a zákaznickým exportem, import a checklist.
 - 2026-08-29 18:01 UTC — Doplněna příloha W o interním AI asistentovi bez úniku know-how: vhodné úlohy, datový semafor, šablony promptů, review výstupů, práce s interním kontextem, privacy-first pravidla a checklist.
 - 2026-08-29 17:01 UTC — Doplněna příloha V o experimentech a A/B testech bez šmírovací laboratoře: hypotézy, primární metriky, alternativy ke klasickému A/B testu pro malé týmy, privacy-first pravidla, experiment karta, vyhodnocení a checklist.
