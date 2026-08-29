@@ -5180,7 +5180,121 @@ Jednou měsíčně projdi:
 
 Dobrá produktová paměť šetří energii. Ne proto, že by tým přestal mluvit, ale protože nemusí pořád znovu objevovat vlastní minulost. V malém týmu je to násobič: méně zmatku, rychlejší onboarding, konzistentnější sliby a privacy-first provoz, který nestojí jen na tom, že si někdo něco pamatuje.
 
+## Příloha Z: Rychlost webu bez honby za zeleným kolečkem
+
+Rychlý web není soutěž v tom, kdo má nejhezčí screenshot z měřicího nástroje. Rychlý web je obchodní a produktová vlastnost: člověk přijde, pochopí nabídku, udělá další krok a nemusí čekat, až se načte karusel, který nikdo nechtěl, ale všichni ho nějak přežili.
+
+U malého webu nebo SaaS landing page je performance hlavně disciplína. Ne magická optimalizace na konci projektu. Pokud rychlost řešíš až po designu, obsahu, měření, animacích a pěti externích skriptech, hasíš už hotový požár. A hasicí přístroj se jmenuje „odstranit věci“, což je ve firmách často politicky složitější než přepsat backend.
+
+### Z.1 Rychlost začíná rozhodnutím, co na stránce nebude
+
+Nejlevnější optimalizace je neposlat do prohlížeče zbytečnost. Každý blok na stránce by měl mít práci. Pokud ji nemá, je to dekorace. Dekorace může být v pořádku, ale nesmí se tvářit jako strategie.
+
+Před přidáním nového prvku se zeptej:
+
+- Pomáhá to návštěvníkovi pochopit nabídku?
+- Zvyšuje to důvěru nebo snižuje nejistotu?
+- Vede to ke konkrétní akci?
+- Dá se stejná hodnota říct textem místo skriptem?
+- Kolik to stojí v načítání, údržbě a soukromí?
+
+Typický problém není jedna velká chyba. Typický problém je dvacet malých „tohle tam ještě dáme“. Chat widget, heatmapa, A/B nástroj, reklamní pixel, font z cizího CDN, video na pozadí, tři knihovny pro animace a formulář, který se načítá jako malý vesmírný program. Výsledek: stránka má víc zavazadel než zakladatel na konferenci v Lisabonu.
+
+### Z.2 Nastav performance budget jako produktové pravidlo
+
+Performance budget je jednoduchý limit, který chrání stránku před postupným tloustnutím. Nemusí být dokonalý. Musí být srozumitelný.
+
+Pro malý marketingový web stačí začít takhle:
+
+- Homepage má mít jen nezbytné skripty.
+- Obrázky musí mít jasný účel a rozumnou velikost.
+- Formulář se načítá bez externího balastu.
+- Animace nesmí blokovat hlavní obsah.
+- Třetí strany se přidávají jen po privacy a performance kontrole.
+- Každá nová integrace má vlastníka a důvod existence.
+
+Rozpočet nemusí být hned číselný. Na začátku stačí pravidlo „bez nové třetí strany bez schválení“. Později můžeš přidat technické limity: maximální velikost obrázků, počet externích requestů, velikost JavaScriptu nebo čas potřebný k zobrazení hlavního sdělení. Důležité je, aby limit nebyl jen přání v dokumentaci, ale součást review před nasazením.
+
+### Z.3 Obrázky optimalizuj podle rozhodování, ne podle galerie
+
+Obrázky prodávají, když ukazují realitu: produkt, tým, výsledek, diagram, ukázku rozhraní nebo konkrétní kontext. Obrázky škodí, když jen vyplňují prázdno.
+
+Praktický postup:
+
+1. Nejdřív napiš, co má návštěvník pochopit.
+2. Pak rozhodni, jestli tomu obrázek opravdu pomůže.
+3. Pokud ano, připrav správný výřez pro konkrétní místo na stránce.
+4. Neposílej obří originál, když se zobrazuje jako malá karta.
+5. Přidej popisný alternativní text tam, kde obrázek nese informaci.
+
+U SaaS produktu často fungují lépe malé konkrétní ukázky než obří hero screenshot. Detail workflow, před/po stav, ukázka reportu nebo krátký diagram vysvětlí hodnotu rychleji než generický monitor s rozmazaným dashboardem. A pokud musí být screenshot rozmazaný kvůli citlivým datům, udělej raději anonymizovanou demo verzi. Privacy-first a srozumitelnost se nemusí prát. Jen je nenech sedět vedle sebe bez mediátora.
+
+### Z.4 Fonty: značka ano, cirkus ne
+
+Typografie umí web výrazně zlepšit. Umí ho ale taky zpomalit a rozbít první dojem. Pokud web čeká na vzdálený font, aby mohl ukázat základní text, je to špatný obchod: branding dostal přednost před pochopením nabídky.
+
+Rozumný přístup:
+
+- Používej málo řezů a vah písma.
+- Preferuj lokální hostování fontů, pokud dávají smysl licenčně i provozně.
+- Nastav fallback fonty tak, aby stránka zůstala čitelná.
+- Nepoužívej zvláštní font pro každý druhý nadpis.
+- Testuj stránku i ve chvíli, kdy se vlastní font nenačte.
+
+Značka není jen font. Značka je tón, jasnost nabídky, konzistence a důvěra. Když návštěvník kvůli fontu čeká, značka mu právě řekla: „Moje estetika je důležitější než tvůj čas.“ To je silné sdělení. Jen asi jiné, než bylo v brand manuálu.
+
+### Z.5 Třetí strany jsou technický, právní i obchodní závazek
+
+Každý externí skript je malá outsourcingová smlouva. I když není podepsaná právníkem, pořád někomu dovoluje běžet v prohlížeči tvého návštěvníka. To má dopad na rychlost, bezpečnost, dostupnost i soukromí.
+
+Před přidáním třetí strany vyplň mini kartu:
+
+```markdown
+## Integrace: [název]
+
+- Účel:
+- Jaká data vidí nebo sbírá:
+- Kde běží / kde se zpracovávají data:
+- Co se stane, když integrace vypadne:
+- Dá se nahradit server-side řešením nebo agregovaným měřením:
+- Vlastník:
+- Datum příští kontroly:
+```
+
+U privacy-first webu je výchozí odpověď jednoduchá: pokud integrace nepotřebuješ, nepřidávej je. Pokud je potřebuješ, minimalizuj data, dokumentuj účel a ideálně preferuj evropský provoz nebo vlastní hostování. Přímé odkazy, RSS, serverové logy s rozumnou retencí a agregovaná analytika často vyřeší víc než invazivní marketingový kokpit, který ukazuje krásná čísla a potichu vyrábí riziko.
+
+### Z.6 Rychlost kontroluj v rytmu, ne v panice
+
+Performance se zhoršuje postupně. Jeden nový obrázek. Jedna knihovna. Jedna sekce. Jedna kampaňová vložka. Proto potřebuje pravidelný rytmus stejně jako zálohy, monitoring nebo obsah.
+
+Jednou týdně projdi:
+
+- změnily se hlavní stránky viditelně pro uživatele?
+- přibyly externí skripty nebo styly?
+- nejsou na stránce dočasné kampaně, které už měly zmizet?
+- nejsou obrázky větší, než potřebují?
+- funguje web bez cookies, reklamních blokátorů a pomalé sítě?
+- je hlavní CTA dostupné bez čekání na doplňkové prvky?
+
+Jednou měsíčně udělej úklid: projdi integrace, odstraň nepoužívané věci, zkontroluj formuláře, proklikni hlavní cestu od landing page po kontakt nebo trial. Nehledej jen skóre. Hledej tření. Skóre je metrika. Tření je důvod, proč člověk odejde.
+
+### Z.7 Checklist: rychlý a štíhlý web
+
+- [ ] Každý blok na stránce má jasný účel.
+- [ ] Homepage nepoužívá externí skripty bez konkrétního důvodu.
+- [ ] Obrázky jsou oříznuté a připravené pro místo, kde se zobrazují.
+- [ ] Důležité sdělení a CTA jsou dostupné bez čekání na doplňky.
+- [ ] Fonty mají rozumný počet řezů, fallback a neblokují čitelnost.
+- [ ] Nové integrace mají kartu s účelem, daty, vlastníkem a review datem.
+- [ ] Privacy kontrola je součástí performance review.
+- [ ] Dočasné kampaně a experimenty se po skončení odstraňují.
+- [ ] Web se pravidelně testuje i na pomalejším připojení a menším zařízení.
+- [ ] Tým chápe, že nejrychlejší prvek je ten, který vůbec nemusí existovat.
+
+*Codyho komentář:* Performance není asketismus. Neříkám, že web má vypadat jako faktura z roku 2007. Říkám, že každá vizuální nebo analytická paráda má zaplatit nájem: musí pomoct prodeji, pochopení, důvěře nebo provozu. Když neplatí, ven s ní. Digitální minimalismus není nuda. Je to respekt k času lidí a k datům, která ti svěřují.
+
 ## Pracovní log
+- 2026-08-29 21:00 UTC — Doplněna příloha Z o rychlosti webu bez honby za skóre: performance budget, obrázky, fonty, třetí strany, pravidelný review rytmus a privacy-first checklist.
 - 2026-08-29 20:00 UTC — Doplněna příloha Y o rozhodovacím deníku a produktové paměti: co dokumentovat, karta rozhodnutí, struktura dokumentace, převod chatových dohod, ochrana před slibovým dluhem, privacy-first životní cyklus a checklist.
 - 2026-08-29 19:01 UTC — Doplněna příloha X o exit plánu a přenositelnosti dat: datový model, exportní formáty, bezpečnost exportů, rozdíl mezi portabilitou, backupem a zákaznickým exportem, import a checklist.
 - 2026-08-29 18:01 UTC — Doplněna příloha W o interním AI asistentovi bez úniku know-how: vhodné úlohy, datový semafor, šablony promptů, review výstupů, práce s interním kontextem, privacy-first pravidla a checklist.
