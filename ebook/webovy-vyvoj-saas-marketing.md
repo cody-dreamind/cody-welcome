@@ -2288,7 +2288,147 @@ Tohle shrnutí nemusí být veřejné vždy. Ale interně by existovat mělo. Ji
 
 Provozní rytmus má malému týmu dát klid. Ne další schůzky pro schůzky, ne tabulkovou posilovnu, ne dashboard na každý nádech serveru. Jen opakovatelný způsob, jak si udržet přehled, chránit zákaznickou důvěru a dělat lepší rozhodnutí, i když produkt roste rychleji než původní plán.
 
+## Příloha F: Zákaznická podpora, která zvyšuje retenci
+
+Podpora není oddělení pro hašení nespokojenosti. U malého SaaS týmu je to jeden z nejlepších zdrojů produktové pravdy. Lidé ti v podpoře říkají, kde se produkt míjí s realitou, co jim není jasné, čeho se bojí před nákupem a proč by mohli odejít. Pokud tyhle signály jen odškrtáváš jako tickety, zahazuješ mapu k lepšímu produktu.
+
+Dobrá podpora má dvě role najednou: pomáhá konkrétnímu člověku dnes a zlepšuje systém pro další lidi zítra. Retence nevzniká tím, že zákazníka zamkneš ve složitém účtu bez exportu. Vzniká tím, že produkt opakovaně doručuje hodnotu, tým komunikuje srozumitelně a zákazník má pocit, že kontroluje vlastní data i rozhodnutí.
+
+### F.1 Podpora začíná ještě před prvním ticketem
+
+Nejlevnější ticket je ten, který nikdy nevznikne, protože uživatel našel odpověď v rozhraní, nápovědě nebo onboardingovém e-mailu. To neznamená schovat člověka za labyrint FAQ. Znamená navrhnout produkt tak, aby se běžné otázky řešily na správném místě.
+
+U každé důležité obrazovky si polož:
+
+1. Co tu uživatel zkouší udělat?
+2. Jaký výraz by použil, kdyby se zasekl?
+3. Jaká je nejčastější chyba nebo nejistota?
+4. Jak mu pomůžeme bez odvádění pryč z práce?
+5. Kdy už má být vidět kontakt na člověka?
+
+Příklad: pokud zákazník nastavuje fakturační údaje, nepotřebuje obecný článek „Jak funguje účet“. Potřebuje krátkou nápovědu přímo u pole, jasný příklad formátu DIČ, informaci kdy se změna projeví a možnost napsat, pokud fakturu potřebuje upravit ručně.
+
+*Codyho komentář:* FAQ s padesáti otázkami často není znalostní báze. Je to hřbitov problémů, které se nikomu nechtělo opravit v produktu. Náhrobky jsou sice seřazené abecedně, ale pořád je to hřbitov.
+
+### F.2 Triage: každá zpráva potřebuje kontext
+
+Když přijde dotaz, neřeš jen text zprávy. Doplň si kontext, aby odpověď nebyla mechanická a aby tým později viděl vzory.
+
+U každého ticketu si zapiš:
+
+- **Typ:** otázka, chyba, požadavek, fakturace, bezpečnost, odchod.
+- **Dopad:** blokuje práci, zpomaluje práci, jen mate, nebo je to nápad.
+- **Segment:** nový uživatel, aktivní zákazník, admin, účetní, vývojář, rozhodovatel.
+- **Fáze:** před nákupem, onboarding, běžné používání, rozšíření, rušení.
+- **Citlivost dat:** týká se osobních dat, přístupů, exportu, fakturace nebo smluv?
+
+Triage nemusí být těžký proces. Stačí štítek, jedna věta a jasná priorita. Důležité je neházet všechno do jedné hromady „podpora“. Dotaz na zapomenuté heslo, opakovaná nejasnost v onboardingu a varování o špatném přístupu k datům nejsou stejný typ práce.
+
+Praktické pravidlo:
+
+- **P0:** bezpečnost, únik dat, nefunkční platby, výpadek klíčového workflow.
+- **P1:** zákazník nemůže dokončit důležitou práci.
+- **P2:** zákazník práci dokončí, ale s třením nebo nejistotou.
+- **P3:** nápad, kosmetika, individuální preference.
+
+Priority nejsou o tom, kdo křičí nejhlasitěji. Jsou o dopadu. Hlasitý P3 je pořád P3. Tichý P0 je pořád důvod přestat dělat hezké kartičky v backlogu a začít jednat.
+
+### F.3 Odpověď má vyřešit problém, ne jen poslat odkaz
+
+Dobrá odpověď v podpoře má jednoduchou strukturu:
+
+1. Potvrď, že rozumíš problému.
+2. Dej konkrétní řešení nebo další krok.
+3. Řekni, co se stane potom.
+4. Přidej odkaz jen jako doplněk, ne jako náhradu odpovědi.
+5. Pokud je problém na tvé straně, přiznej to bez mlhy.
+
+Slabá odpověď:
+
+> Dobrý den, více najdete v dokumentaci zde.
+
+Lepší odpověď:
+
+> Dobrý den, problém je v tom, že import očekává datum ve formátu RRRR-MM-DD. U vašeho souboru vidím formát DD.MM.RRRR, proto import spadl na validaci. Upravte prosím sloupec „datum“ nebo nám soubor pošlete zpět a pomůžeme s převodem. Do dokumentace přidávám konkrétní příklad, aby to příště nebyla detektivka.
+
+Ještě lepší je opravit produkt: import může nabídnout mapování formátu, ukázat chybový řádek a vysvětlit problém před odesláním. Každá odpověď v podpoře by měla obsahovat otázku: má to zůstat lidská odpověď, nebo to má být lepší produktové chování?
+
+### F.4 Z podpory dělej produktové signály
+
+Jednotlivý ticket je událost. Opakovaný ticket je signál. Malý tým by měl jednou týdně převést podporu do produktových rozhodnutí.
+
+Použij jednoduché pravidlo tří:
+
+- Pokud se stejná otázka objeví třikrát, přidej nápovědu nebo uprav text.
+- Pokud se stejná chyba objeví třikrát, vytvoř produktový úkol.
+- Pokud se stejná námitka objeví třikrát před nákupem, uprav web, pricing nebo demo.
+- Pokud se stejný požadavek objeví třikrát u správných zákazníků, zvaž roadmapu.
+- Pokud se stejný problém týká dat nebo přístupů, nečekej na třetí výskyt.
+
+Týdenní zápis může vypadat takhle:
+
+- **Top otázka:** Jak exportovat data po zrušení účtu?
+- **Top tření:** Lidé nerozumí rozdílu mezi rolí admin a člen týmu.
+- **Top riziko:** Dva zákazníci žádali ruční úpravu oprávnění přes podporu.
+- **Akce:** doplnit export do nápovědy, upravit onboarding rolí, zakázat ruční změny bez interního záznamu.
+
+Tím se podpora nestane jen nákladovým centrem. Stane se radarem. A radar je užitečný hlavně tehdy, když podle něj občas otočíš kormidlem.
+
+### F.5 Retence není spamovací kalendář
+
+Retence se často zaměňuje za sérii automatických e-mailů: den 1 uvítání, den 3 tip, den 7 případovka, den 14 „chybíte nám“, den 30 sleva. Automatizace může pomoct, ale sama o sobě neudrží zákazníka, který nedostal hodnotu.
+
+Sleduj raději signály zdraví účtu:
+
+- zákazník dokončil první hodnotný výsledek,
+- opakovaně používá hlavní workflow,
+- přidal týmového člena nebo další projekt,
+- exportuje reporty nebo sdílí výstupy,
+- ptá se na pokročilejší scénáře,
+- dlouho se nevrátil po aktivaci,
+- narazil na opakovanou chybu,
+- blíží se limit tarifu nebo konec zkušebního období.
+
+Na každý signál navrhni lidsky užitečnou reakci. Když účet dlouho spí, neposílej jen „Podívejte se, co je nového“. Napiš: „Vidím, že jste založili projekt, ale nedošlo k prvnímu importu. Chcete poslat ukázkový soubor nebo krátký postup?“ To je pomoc. Masový newsletter s ohňostrojem emoji je konfety ve větru.
+
+Privacy-first hranice: signály zdraví účtu sbírej jen na úrovni potřebné pro podporu a produktové rozhodování. Nepotřebuješ nahrávat obrazovku, profilovat každé kliknutí ani obohacovat kontakty z cizích databází. Zákazník má vědět, co sleduješ a proč.
+
+### F.6 Odchod zákazníka je rozhovor, ne past
+
+Když chce zákazník odejít, nech ho odejít důstojně. Zrušení účtu nemá být escape room se schovaným tlačítkem „pokračovat“. Férový offboarding paradoxně zvyšuje důvěru. Člověk, který odejde bez boje, se může vrátit. Člověk, kterého uvězníš, se vrátí maximálně v naštvaném tweetu. A to nechceš, ani když tweet neposíláš.
+
+Offboarding by měl obsahovat:
+
+- jasné zrušení bez nutnosti psát na podporu,
+- export vlastních dat ve srozumitelném formátu,
+- informaci, kdy data smažeš nebo anonymizuješ,
+- možnost uvést důvod odchodu dobrovolně,
+- potvrzení změny e-mailem,
+- cestu zpět bez trestání zákazníka.
+
+Krátký dotaz při odchodu může stačit:
+
+> Co byl hlavní důvod zrušení? Chyběla hodnota, cena, funkce, důvěra, výkon, podpora, nebo jde jen o pauzu?
+
+Nenuť odpověď. Nezdržuj zrušení. Nepoužívej temné vzory. Data z odchodů vyhodnocuj po vzorech, ne jako osobní prohru. Pokud pět dobrých zákazníků odchází kvůli nejasné hodnotě po prvním měsíci, není problém v tom, že špatně klikli. Problém je v aktivaci, komunikaci hodnoty nebo cílovce.
+
+### F.7 Checklist: podpora a retence bez manipulace
+
+- [ ] U klíčových obrazovek existuje krátká kontextová nápověda.
+- [ ] Ticket má typ, dopad, segment, fázi a datovou citlivost.
+- [ ] Priority vycházejí z dopadu, ne z hlasitosti zákazníka.
+- [ ] Odpovědi obsahují konkrétní další krok, ne jen odkaz na dokumentaci.
+- [ ] Opakované dotazy se mění v úpravy produktu, obsahu nebo onboardingu.
+- [ ] Týdenní review podpory hledá vzory a maximálně tři akce.
+- [ ] Retence se měří podle dosažené hodnoty, ne podle počtu odeslaných e-mailů.
+- [ ] Automatizace pomáhá ve správný moment a nesbírá zbytečná osobní data.
+- [ ] Zrušení účtu je férové, srozumitelné a bez temných vzorů.
+- [ ] Export a mazání dat jsou popsané předem, ne až po hádce s podporou.
+
+Podpora je hlas reality v systému, který si tým snadno začne vysvětlovat přes roadmapu, dashboardy a interní domněnky. Když ji bereš vážně, zlepšuje produkt, marketing i důvěru. Když ji bereš jako nutné zlo, bude se realita připomínat sama — obvykle v pátek odpoledne, protože má smysl pro humor horší než já.
+
 ## Pracovní log
+- 2026-08-29 01:00 UTC — Doplněna příloha F o zákaznické podpoře a retenci: kontextová nápověda, triage ticketů, kvalitní odpovědi, produktové signály, zdraví účtu, férový offboarding a privacy-first checklist.
 - 2026-08-29 00:00 UTC — Doplněna příloha E o provozním rytmu malého SaaS týmu: denní kontrola, týdenní review, měsíční audit slibů, kanban incidentů, komunikace při problému a privacy-first checklist.
 - 2026-08-28 23:00 UTC — Doplněna příloha D o cenotvorbě a balíčcích: hodnota, cenové metriky, tři úrovně nabídky, trial/freemium/demo, pricing stránka, testování ceny a privacy-first checklist.
 - 2026-08-28 22:00 UTC — Doplněna příloha C o obsahovém systému bez závislosti na algoritmech: pilíře obsahu, recyklace formátů, editorial backlog, publikační rytmus, privacy-first měření a distribuce přes přímé kanály.
