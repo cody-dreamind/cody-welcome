@@ -3161,7 +3161,133 @@ Definition of Done nemusí být dlouhá, ale musí být společná. Jinak každ�
 
 Backlog má firmě vracet soustředění. Pokud místo toho vytváří vinu, šum a nekonečné „měli bychom“, je čas ho zmenšit. Malý, čistý a pravidelně udržovaný backlog je konkurenční výhoda: tým ví, proč něco dělá, zákazník cítí rychlejší posun a provoz zůstává bezpečnější. V privacy-first SaaS je to dvojnásob důležité, protože každá funkce není jen kód. Je to i nový datový tok, nový slib a nová odpovědnost.
 
+## Příloha L: Status page a komunikace incidentů bez divadla
+
+Každý SaaS jednou spadne, zpomalí se, pošle divnou chybovou hlášku nebo přestane dělat přesně to, co měl dělat. Rozdíl mezi důvěryhodným a nedůvěryhodným týmem není v tom, že první tým nikdy nemá incident. Rozdíl je v tom, že první tým ví, co se děje, řekne to včas a po opravě se z toho poučí.
+
+Status page není marketingová nástěnka. Je to veřejný slib: když něco ovlivní zákazníky, nebudeme čekat, až se zeptají pětkrát. Řekneme, co víme, co ještě nevíme, co děláme a kdy dáme další update. Pro malé týmy je to jeden z nejlevnějších způsobů, jak působit profesionálněji než firmy s deseti poradami a nulovou odpovědností.
+
+### L.1 Kdy status page potřebuješ
+
+Status page dává smysl, pokud produkt splňuje aspoň jednu z těchto podmínek:
+
+- zákazníci na něm dělají práci, která nejde jednoduše odložit,
+- výpadek může ovlivnit tržby, podporu, objednávky nebo interní provoz,
+- máš více integračních bodů: API, web, e-mail, platby, importy, exporty,
+- zákazníci se opakovaně ptají „je problém u nás, nebo u vás?“,
+- produkt prodáváš firmám, které potřebují důvěru před nákupem.
+
+Nemusíš začít složitým systémem. Na začátku stačí jednoduchá stránka mimo hlavní aplikaci, kde jsou vidět komponenty služby, aktuální stav, poslední incidenty a kontakt na podporu. Důležité je, aby status page neběžela na stejném křehkém místě jako aplikace. Když spadne hlavní hosting i status page, působí to jako hasičák zamčený v hořící místnosti. Kreativní, ale ne užitečné.
+
+### L.2 Rozděl službu na komponenty, kterým zákazník rozumí
+
+Status page nemá kopírovat interní architekturu. Zákazníka nezajímá, že „worker-eu-central-2b“ má potíže s frontou. Zajímá ho, jestli se přihlásí, odešle formulář, stáhne fakturu nebo zavolá API.
+
+Praktické komponenty mohou být například:
+
+- **Webová aplikace** — přihlášení, hlavní UI, zákaznický účet.
+- **Veřejný web** — landing pages, blog, dokumentace, formuláře.
+- **API** — dostupnost endpointů, latence, chybovost.
+- **E-mailové zprávy** — potvrzení, notifikace, pozvánky, reset hesla.
+- **Platby a fakturace** — checkout, faktury, změny tarifu.
+- **Importy a exporty** — dávkové úlohy, synchronizace, reporty.
+
+U každé komponenty si interně napiš, jak poznáš její stav. Ne „asi funguje“, ale konkrétní signál: HTTP kontrola, testovací přihlášení, počet chyb, délka fronty, poslední úspěšné odeslání e-mailu nebo ruční ověření. Status page je jen výkladní skříň. Důvěra vzniká v tom, že za ní existuje skutečná kontrola.
+
+### L.3 Incident má mít úrovně, ne paniku
+
+Bez úrovní se každý problém tváří jako konec světa, nebo se naopak všechno bagatelizuje. Obojí ničí tým i zákaznickou důvěru.
+
+Jednoduchá škála pro malý SaaS:
+
+- **Monitoring** — vidíme nestandardní signál, dopad na zákazníky zatím nepotvrzen.
+- **Částečný výpadek** — část funkcí nefunguje nebo je výrazně pomalejší.
+- **Významný výpadek** — hlavní workflow je pro část zákazníků nedostupné.
+- **Bezpečnostní incident** — může jít o neoprávněný přístup, únik dat nebo porušení izolace.
+- **Vyřešeno** — služba je stabilní a tým doplňuje shrnutí nebo postmortem.
+
+U bezpečnostních incidentů buď opatrný: veřejně komunikuj stav a další kroky, ale nezveřejňuj technické detaily, které by zvyšovaly riziko. Zároveň neslibuj, že „data jsou určitě v bezpečí“, pokud to ještě nevíš. Lepší je přesná věta: „Zatím nemáme potvrzený neoprávněný přístup k zákaznickým datům; audit logů pokračuje a další update dáme v 15:00.“ To je méně sexy než marketingový klid, ale výrazně poctivější.
+
+### L.4 První update pošli rychle, i když nevíš všechno
+
+Největší chyba při incidentu je čekat na dokonalé informace. Zákazník mezitím neví, jestli má restartovat router, volat IT, nebo přepsat proces ručně. První update má snížit nejistotu, ne vyřešit celý svět.
+
+Šablona prvního update:
+
+> Evidujeme problém s **[komponenta]**, který může ovlivnit **[dopad pro zákazníky]**. Tým problém vyšetřuje. Další update dáme do **[čas]**.
+
+Příklad:
+
+> Evidujeme problém s odesíláním potvrzovacích e-mailů, který může zpozdit nové registrace a reset hesla. Tým problém vyšetřuje. Další update dáme do 30 minut.
+
+Když dopad znáš, napiš ho konkrétně. Když ho neznáš, napiš, že ho ověřuješ. Nikdy nevyplňuj mlhu frázemi typu „u některých uživatelů se může objevovat nestandardní chování“. To je firemní verze věty „něco se nějak děje“. Nikomu nepomůže.
+
+### L.5 Interní incident karta šetří nervy
+
+Veřejná komunikace bude klidnější, když tým nepátrá v chatu, kdo co udělal. Pro každý incident založ krátkou interní kartu:
+
+- **Čas detekce:** kdy jsme problém poprvé viděli.
+- **Detekoval:** monitoring, zákazník, podpora, vývojář.
+- **Dopad:** koho se problém týká a co nemůže udělat.
+- **Komponenty:** které části produktu jsou ovlivněné.
+- **Vlastník incidentu:** jeden člověk, který drží koordinaci.
+- **Komunikační vlastník:** jeden člověk, který píše update zákazníkům.
+- **Aktuální hypotéza:** co si myslíme, že je příčina.
+- **Kroky:** co jsme už zkusili a s jakým výsledkem.
+- **Další update:** kdy se ozveme interně i veřejně.
+
+U malého týmu může vlastník incidentu a komunikace být stejný člověk, ale role musí být pojmenované. Jinak všichni „něco řeší“ a nikdo neví, jestli zákazníci dostali odpověď. To je přesně ten typ chaosu, který vypadá pracovně, ale vyrábí jen další incident: komunikační.
+
+### L.6 Postmortem bez hledání viníka
+
+Po opravě si nenech incident zmizet v historii chatu. Krátké postmortem pomáhá zlepšit systém, dokumentaci i prioritizaci backlogu. Cílem není najít člověka, který „to pokazil“. Cílem je najít slabé místo, které systém dovolil.
+
+Dobré postmortem odpoví na otázky:
+
+- Co se stalo zákazníkovi, ne jen serveru?
+- Jak jsme problém zjistili?
+- Proč jsme ho nezjistili dřív?
+- Co zafungovalo při řešení?
+- Co bylo pomalé, nejasné nebo ruční?
+- Jaký jeden preventivní krok uděláme teď?
+- Co zatím vědomě neřešíme a proč?
+
+Postmortem nemusí být román. Pro menší incident stačí deset řádků. Důležité je, aby z něj vznikla jedna nebo dvě konkrétní položky: lepší kontrola, úprava alertu, doplnění runbooku, změna fallbacku, oprava formulace v nápovědě. Pokud postmortem končí jen větou „musíme být opatrnější“, právě jste napsali firemní poezii. Hezké, nepoužitelné.
+
+### L.7 Privacy-first pravidla pro incidenty
+
+Incidenty svádí k tomu zapnout všechno měření, nasypat logy do cizího nástroje a „rychle to nějak vyřešit“. Právě v krizi se ale ukáže, jestli privacy-first provoz myslíš vážně.
+
+Drž se těchto pravidel:
+
+- Loguj dost na diagnostiku, ale ne citlivý obsah formulářů, tokeny, hesla ani celé zákaznické dokumenty.
+- Sdílej interně jen výřezy logů, které jsou potřebné k řešení.
+- Neposílej zákaznická data do externích nástrojů jen proto, že se tam dobře hledá.
+- U incidentů s osobními údaji odděl technickou opravu od právního a komunikačního posouzení.
+- Připrav si předem šablonu pro zákazníky, ale konkrétní fakta doplň až po ověření.
+- Po incidentu zkontroluj, jestli dočasné debug logy nezůstaly zapnuté navždy.
+
+Privacy-first incident management není pomalejší. Je klidnější, protože tým už předem ví, co nesmí udělat ani pod tlakem. A to je přesně chvíle, kdy se hodnoty přestávají tvářit jako plakát na zdi a začínají být provozní výhodou.
+
+### L.8 Checklist: status page, která buduje důvěru
+
+- [ ] Status page běží mimo hlavní aplikaci a je dostupná i při výpadku produktu.
+- [ ] Komponenty jsou pojmenované podle zákaznických funkcí, ne interních serverů.
+- [ ] Každá komponenta má interně definovaný signál zdraví.
+- [ ] Tým má jednoduché úrovně incidentů a ví, kdy je použít.
+- [ ] První veřejný update vznikne rychle i bez kompletní příčiny.
+- [ ] Každý update říká dopad, aktuální stav a čas další zprávy.
+- [ ] Existuje interní incident karta s vlastníkem, dopadem a dalšími kroky.
+- [ ] Bezpečnostní incidenty se komunikují přesně, bez falešného uklidňování.
+- [ ] Postmortem vede ke konkrétním preventivním úkolům.
+- [ ] Dočasné debug logy se po incidentu vypínají nebo mažou podle pravidel.
+- [ ] Zákaznická data se při řešení neposílají do zbytečných externích nástrojů.
+- [ ] Tým pravidelně testuje, jestli status page a kontaktní kanály opravdu fungují.
+
+Status page není přiznání slabosti. Je to důkaz dospělosti. Zákazníci většinou nečekají dokonalost; čekají orientaci, férovost a rychlou reakci. Když jim ji dáš, incident nemusí důvěru zničit. Někdy ji naopak posílí, protože zákazník uvidí, že za produktem stojí tým, který se neschovává pod koberec. Koberec je mimochodem mizerný monitoring.
+
 ## Pracovní log
+- 2026-08-29 07:00 UTC — Doplněna příloha L o status page a komunikaci incidentů: komponenty služby, úrovně incidentů, první update, interní incident karta, postmortem, privacy-first pravidla a checklist.
 - 2026-08-29 06:01 UTC — Doplněna příloha K o produktovém backlogu: kategorie práce, šablona položky, prioritizační rámec, pravidelný úklid, experimenty, Definition of Done a checklist.
 - 2026-08-29 05:10 UTC — Doplněna příloha J o přechodu z náhodného stacku na privacy-first provoz: inventura nástrojů, kritičnost systémů, migrační strategie, datové toky, pilot, vypnutí starých nástrojů a checklist.
 - 2026-08-29 04:00 UTC — Doplněna příloha I o privacy-first lead magnetu a poptávkovém formuláři: úzký užitek, datová minimalizace, očekávání po odeslání, veřejné alternativy, jednoduchý lead flow a checklist.
