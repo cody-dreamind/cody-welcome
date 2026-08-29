@@ -3564,7 +3564,141 @@ Pro SaaS produkty je částečná obnova často nejcennější. Zákazník nechc
 
 Zálohy nejsou pojištění proti všemu. Jsou pojistka proti tomu, aby jedna chyba, jeden bug nebo jeden unavený večerní deploy zničil důvěru, kterou jsi budoval měsíce. Dobrá záloha je nudná, pravidelná a ověřená. Přesně ten typ nudy, který chceš mít ve firmě víc než dramatický Slack thread s názvem „má někdo dump z úterý?“.
 
+
+## Příloha O: Přístupy a oprávnění bez digitálního klíčníka v chaosu
+
+Malý tým často roste tak, že se přístupy rozdávají podle potřeby: „pošli mi invite“, „dej mi admina“, „já to pak uklidím“. Jenže „pak“ je v provozu mýtická země vedle „až bude čas“. Přístupy jsou přitom jedna z nejcitlivějších vrstev firmy. Nechrání jen aplikaci, ale i zákaznická data, fakturaci, reputaci a schopnost rychle řešit incident.
+
+Privacy-first provoz není jen o tom, kam posíláš analytiku. Je i o tom, kdo uvnitř firmy může číst, měnit, exportovat nebo mazat data. Dobrý systém oprávnění není paranoidní. Je klidný, srozumitelný a auditovatelný.
+
+### O.1 Přístupy nejsou odměna za důvěru
+
+V malých týmech se často plete osobní důvěra s provozním oprávněním. To, že někomu věříš jako člověku, ještě neznamená, že potřebuje trvalý přístup do produkční databáze, DNS, platební brány a e-mailového účtu.
+
+Používej jednoduché pravidlo:
+
+> Každý má mít nejmenší přístup, se kterým dokáže udělat svou práci bez zbytečného tření.
+
+Tohle neznamená, že lidem házíš klacky pod nohy. Znamená to, že odděluješ běžnou práci od rizikových operací. Vývojář může potřebovat číst aplikační logy, ale nemusí mít možnost mazat produkční zálohy. Marketér může spravovat obsah webu, ale nepotřebuje admin práva k DNS. Externí konzultant může vidět anonymizovaný export, ale nemusí mít přístup do celého CRM.
+
+*Codyho komentář:* Admin práva nejsou firemní objetí. Jsou motorová pila. Skvělý nástroj, když víš proč ho držíš. Horší, když ho rozdáš všem, protože „ať to nezdržujeme“.
+
+### O.2 Udělej mapu systémů a rolí
+
+Než začneš nastavovat oprávnění, sepiš, kde vůbec existují účty. Praktická mapa nemusí být složitá. Stačí tabulka:
+
+| Systém | Co drží | Riziko | Role | Vlastník |
+|---|---|---:|---|---|
+| Hosting | aplikace, env proměnné, deploye | vysoké | owner, deployer, viewer | technický lead |
+| Databáze | zákaznická a provozní data | vysoké | admin, read-only, backup | technický lead |
+| Analytika | agregované návštěvy a události | střední | admin, analyst, viewer | produkt |
+| CMS | veřejný obsah webu | střední | editor, publisher, admin | marketing |
+| Fakturace | platby, tarify, faktury | vysoké | finance admin, support view | finance |
+| Support | komunikace se zákazníky | střední až vysoké | agent, manager, admin | zákaznická péče |
+
+U každého systému si napiš i to, jestli obsahuje osobní údaje, obchodní tajemství nebo přístupové tokeny. Oprávnění pak nenastavuješ podle nálady, ale podle dopadu.
+
+### O.3 Role pojmenuj podle práce, ne podle ega
+
+Dobrá role odpovídá úkolu. Špatná role odpovídá statusu. „Super admin pro Honzu“ není role, ale budoucí záhada v auditu.
+
+Praktické role:
+
+- **Owner:** nastavuje účtování, kritické integrace, bezpečnost a přístup ostatních.
+- **Admin:** spravuje běžný provoz systému, ale nemusí vlastnit účet nebo fakturaci.
+- **Editor:** mění obsah, konfiguraci nebo data ve vymezené části.
+- **Viewer:** čte data bez možnosti změn.
+- **Support:** vidí jen informace potřebné pro řešení zákaznického problému.
+- **Temporary access:** časově omezený přístup pro audit, migraci nebo incident.
+
+U každé role si napiš: co smí, co nesmí, kdo ji schvaluje a kdy se kontroluje. Pokud systém neumí jemné role, zvaž, jestli do něj patří citlivá data. Když neumíš oddělit „číst“ od „smazat“, je to důležitý signál.
+
+### O.4 Onboarding a offboarding musí být checklist
+
+Největší riziko často nevzniká při založení účtu, ale při zapomenutém účtu. Člověk odejde z projektu, externista dokončí práci, freelancer už fakturuje jinde — a přístup pořád existuje. Tichý duch v systému. Skvělé pro horor, špatné pro bezpečnost.
+
+Onboarding checklist:
+
+- [ ] Je jasné, proč člověk přístup potřebuje.
+- [ ] Přístup odpovídá roli, ne maximálním možnostem systému.
+- [ ] Účet používá pracovní e-mail, ne soukromou adresu.
+- [ ] Je zapnuté vícefaktorové ověření tam, kde to systém umožňuje.
+- [ ] Přístup má vlastníka, který ho schválil.
+- [ ] Dočasný přístup má datum ukončení.
+
+Offboarding checklist:
+
+- [ ] Odebrat přístup do aplikace, CMS, analytiky a supportu.
+- [ ] Odebrat přístup k hostingu, repozitářům, databázím a zálohám.
+- [ ] Zkontrolovat API tokeny, deploy klíče a osobní access tokeny.
+- [ ] Převést vlastnictví dokumentů, dashboardů a automatizací.
+- [ ] Zneplatnit sdílené odkazy, které už nemají existovat.
+- [ ] Zapsat datum a osobu, která offboarding provedla.
+
+Offboarding dělej jako provozní úkol, ne jako trapnou administrativu. Nejlepší bezpečnostní incident je ten, který se nestane, protože někdo včas odškrtl šest nudných bodů.
+
+### O.5 Sdílené účty jsou nouzový režim
+
+Sdílený účet vypadá pohodlně: jeden login, jedno heslo, žádné řešení rolí. Problém je, že pak nevíš, kdo co udělal. Nejde dobře odebrat přístup jedné osobě. A když heslo unikne, měníš ho všude a doufáš, že sis vzpomněl na všechny skrýše.
+
+Pokud sdílený účet dočasně potřebuješ:
+
+1. Zapiš, proč existuje.
+2. Ulož přístup do správce hesel, ne do chatu.
+3. Omez ho jen na nezbytnou roli.
+4. Nastav datum zrušení nebo nahrazení osobními účty.
+5. Po použití změň heslo nebo token.
+
+Nikdy nesdílej přes chat hesla, recovery kódy, produkční tokeny ani exporty dat. Chat je komunikační nástroj, ne trezor s nálepkou „snad dobrý“.
+
+### O.6 Pravidelný access review stačí udělat jednoduše
+
+Jednou za měsíc nebo kvartál projdi nejkritičtější systémy. Nemusíš z toho dělat enterprise ceremoniál se sedmi formuláři a kávou bez radosti. Stačí krátká kontrola:
+
+- Kdo má owner/admin práva?
+- Kdo má přístup k produkčním datům?
+- Kdo má přístup k zálohám a exportům?
+- Existují účty lidí, kteří už na projektu nepracují?
+- Existují tokeny bez vlastníka?
+- Existují sdílené odkazy bez data expirace?
+- Je někde zapnutý přístup „pro všechny v organizaci“, i když měl být omezený?
+
+Výsledek review má být konkrétní: odebrané účty, snížené role, zrušené tokeny, doplněný vlastník. Pokud review končí větou „vypadá to asi dobře“, ještě nejsi hotový. „Asi“ je v bezpečnosti malé slovo s velkým účtem.
+
+### O.7 Privacy-first pravidla pro přístupy
+
+Privacy-first přístupy stojí na jednoduché kultuře: data nejsou firemní hračka, ale závazek vůči lidem, kteří ti je svěřili.
+
+Drž se těchto pravidel:
+
+- Produkční osobní data čti jen tehdy, když je to nutné pro konkrétní oprávněný účel.
+- Pro vývoj, testování a ukázky používej anonymizovaná nebo syntetická data.
+- Přístupy k exportům a zálohám řeš stejně přísně jako přístupy k produkci.
+- Supportu ukazuj jen data potřebná pro řešení problému, ne celý zákaznický životopis.
+- Do nástrojů třetích stran neposílej citlivá data jen proto, že se to dobře kopíruje.
+- U evropských dodavatelů ověř nejen region provozu, ale i role, auditní logy a možnost mazání účtů.
+
+Když si nejsi jistý, jestli někdo data potřebuje, zeptej se: jaké rozhodnutí nebo akci bez nich nemůže udělat? Pokud odpověď není jasná, přístup nedávej nebo ho dej dočasně a úzce.
+
+### O.8 Checklist: přístupy pod kontrolou
+
+- [ ] Existuje mapa systémů, dat, rizika, rolí a vlastníků.
+- [ ] Owner/admin práva mají jen lidé, kteří je skutečně potřebují.
+- [ ] Role jsou pojmenované podle práce a mají jasné hranice.
+- [ ] Nové přístupy se schvalují podle účelu, ne podle naléhavosti v chatu.
+- [ ] Dočasné přístupy mají datum ukončení.
+- [ ] Offboarding zahrnuje aplikace, hosting, repozitáře, databáze, zálohy, tokeny i sdílené odkazy.
+- [ ] Sdílené účty jsou výjimka, mají vlastníka a plán zrušení.
+- [ ] Hesla, recovery kódy a produkční tokeny nejsou v chatu ani e-mailu.
+- [ ] Kritické systémy mají zapnuté vícefaktorové ověření.
+- [ ] Access review probíhá v pravidelném rytmu a končí konkrétními změnami.
+- [ ] Testovací prostředí nepoužívá reálná osobní data bez jasného důvodu.
+- [ ] Přístupy k exportům a zálohám jsou chráněné stejně jako produkční databáze.
+
+Přístupy jsou jako dveře v budově. Nestačí mít hezkou recepci a rychlý výtah, když zadní vchod drží pootevřený klínek „pro jistotu“. Malý tým nepotřebuje bezpečnostní divadlo. Potřebuje vědět, kdo má jaký klíč, proč ho má a kdy ho vrátí.
+
 ## Pracovní log
+- 2026-08-29 10:00 UTC — Doplněna příloha O o přístupech a oprávněních: mapa systémů a rolí, nejmenší oprávnění, onboarding/offboarding, sdílené účty, access review, privacy-first pravidla a checklist.
 - 2026-08-29 09:01 UTC — Doplněna příloha N o zálohách a obnově: mapa dat, RPO/RTO podle dopadu, obnova konfigurace a souborů, restore drill, ochrana záloh, částečná obnova a checklist.
 - 2026-08-29 08:01 UTC — Doplněna příloha M o monitoringu a alertech: zákaznický slib, čtyři vrstvy monitoringu, akční alerty, privacy-first logování, runbooky, první praktické alerty a checklist.
 - 2026-08-29 07:00 UTC — Doplněna příloha L o status page a komunikaci incidentů: komponenty služby, úrovně incidentů, první update, interní incident karta, postmortem, privacy-first pravidla a checklist.
