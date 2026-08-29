@@ -3840,7 +3840,163 @@ Privacy-first není jen o tom, co nesbíráš. Je i o tom, co nenecháš ležet 
 
 Poptávkový proces má být krátký most mezi zájmem a užitečným rozhovorem. Když je moc dlouhý, lidé odpadnou. Když je moc chaotický, tým zapomene. Když sbírá moc dat, přidává riziko. Nejlepší proces je ten, který působí jednoduše navenek a drží pořádek uvnitř.
 
+## Příloha Q: Onboarding prvního zákazníka bez chaosu
+
+První zákazník není jen „další účet v systému“. Je to zkouška, jestli produkt, komunikace, podpora, fakturace a provoz drží pohromadě i mimo bezpečný svět interních poznámek. Onboarding proto nemá být jednorázové kliknutí na tlačítko „vytvořit účet“. Má to být řízený přechod od slibu k první skutečné hodnotě.
+
+U malého SaaS nebo webového produktu je největší riziko, že zákazník sice podepíše, ale nikdy nezačne produkt používat naplno. Pak tým slaví prodej, zatímco reálná hodnota nikde. Onboarding tomu má zabránit: zmenší nejistotu, nastaví očekávání a ukáže první výsledek co nejdřív.
+
+*Codyho komentář:* První zákazník je trochu jako první palačinka. Ne vždycky je nejhezčí, ale hodně rychle ukáže, jestli máš správně rozpálenou pánev. A jestli vůbec víš, kde máš obracečku.
+
+### Q.1 Definuj aktivační moment
+
+Aktivace není „uživatel se přihlásil“. To je jen návštěva v předsíni. Aktivační moment je první situace, kdy zákazník zažije slíbenou hodnotu.
+
+Příklady aktivačního momentu:
+
+- U poptávkového nástroje: první poptávka má stav, majitele a další krok.
+- U analytiky: zákazník vidí první použitelný přehled návštěvnosti bez invazivního trackingu.
+- U rezervačního systému: první klient si úspěšně vytvoří rezervaci a tým dostane potvrzení.
+- U interního dashboardu: manažer najde odpověď na pravidelnou otázku bez psaní někomu do chatu.
+- U webového projektu: zákazník umí sám publikovat první aktualitu nebo upravit klíčový obsah.
+
+Onboarding stav kolem tohohle bodu. Všechno ostatní je podpůrné. Pokud aktivační moment neznáš, budeš zákazníkovi ukazovat menu, nastavení, exporty a „ještě tady máme integrace“. To je demo turistika, ne onboarding.
+
+Dobrá otázka pro tým:
+
+> Co musí zákazník udělat, vidět nebo získat během prvních 30 minut, aby si řekl: „Aha, kvůli tomuhle jsme to chtěli“?
+
+### Q.2 Před startem sbírej jen data, která něco nastaví
+
+Před onboardingem často vzniká chuť poslat zákazníkovi obří dotazník. Název firmy, procesy, cílovky, integrace, seznam lidí, fakturační údaje, barva tlačítek, oblíbený druh kávy. Poslední položka je sice lidská, ale pořád zbytečná.
+
+Lepší je rozdělit vstupní informace podle účelu:
+
+- **Nutné pro účet:** název organizace, hlavní kontaktní osoba, fakturační kontakt, doména nebo pracovní URL.
+- **Nutné pro první hodnotu:** jeden konkrétní use case, první sada dat, první workflow nebo první cílová stránka.
+- **Nutné pro bezpečnost:** kdo má být administrátor, kdo má mít běžný přístup, jak se budou rušit účty.
+- **Volitelné později:** pokročilé integrace, vlastní reporty, detailní segmentace, automatizace navíc.
+
+Praktické pravidlo: pokud informace nezmění první nastavení nebo první výsledek, neptej se na ni předem. Dej ji do pozdějšího kroku. Každá otázka navíc zvyšuje šanci, že onboarding zůstane viset v půlce.
+
+Privacy-first varianta je ještě přísnější: u každého pole si napiš, proč ho potřebuješ, kde se uloží, kdo ho uvidí a kdy ho smažeš. Jestli odpověď neexistuje, pole neexistuje taky. Kruté, ale férové.
+
+### Q.3 Rozděl onboarding na tři malé kroky
+
+Onboarding má být tak krátký, aby šel dokončit i v běžném pracovním dni, kdy zákazníkovi mezitím někdo zavolá, přijde faktura a rozbije se tiskárna. Ano, tiskárna pořád existuje jako finální boss kancelářského života.
+
+Použij tři kroky:
+
+1. **Nastavení minima** — vytvoření účtu, role, základní konfigurace a první bezpečný přístup.
+2. **První hodnota** — jeden praktický scénář, který zákazník opravdu potřebuje.
+3. **Další rytmus** — dohoda, jak se bude produkt používat, kontrolovat a zlepšovat.
+
+Příklad pro B2B SaaS:
+
+- Den 0: zákazník dostane potvrzení, co bude potřeba a kdo je zodpovědný za start.
+- Den 1: proběhne nastavení účtu a import jen nezbytných dat.
+- Den 2: tým projde první reálný workflow na konkrétním příkladu.
+- Den 7: krátká kontrola, co funguje, co brzdí adopci a co se nemá řešit vůbec.
+- Den 30: rozhodnutí, jestli zákazník získává slíbený výsledek a jaké další kroky mají smysl.
+
+Důležité: onboarding nesmí být katalog všech funkcí. Zákazník nepotřebuje znát celou mapu lesa. Potřebuje dojít k první studánce a nezabloudit.
+
+### Q.4 Vytvoř onboardingovou kartu zákazníka
+
+Každý nový zákazník by měl mít jednu jednoduchou kartu. Ne proto, aby tým vyráběl byrokracii, ale aby se neztratil kontext. Karta může být v interním CRM, projektovém nástroji nebo bezpečné tabulce. Hlavní je, aby měla vlastníka a nebyla rozhozená po e-mailech.
+
+Šablona karty:
+
+```text
+Zákazník:
+Hlavní kontakt:
+Interní vlastník:
+Slíbený výsledek:
+Aktivační moment:
+Startovní use case:
+Nutná data:
+Zapojené systémy:
+Uživatelé a role:
+Rizika:
+Další krok:
+Datum kontroly po 7 dnech:
+Datum kontroly po 30 dnech:
+Retenční pravidlo pro onboardingová data:
+```
+
+Dobrá karta odpovídá na otázku: „Kdyby zítra onemocněl člověk, který zákazníka zaváděl, dokáže někdo jiný pokračovat bez detektivní práce?“ Pokud ne, karta je moc slabá nebo vůbec neexistuje.
+
+### Q.5 První školení má být pracovní, ne divadelní
+
+Školení často sklouzne do prezentace: tady je menu, tady nastavení, tady export, tady roletka, kterou zatím nepotřebujete, ale podívejte, jak pěkně roluje. Jenže lidé si z toho odnesou málo. Mnohem lepší je pracovní školení nad jejich reálným scénářem.
+
+Struktura prvního školení:
+
+- Připomeňte slíbený výsledek a dnešní konkrétní cíl.
+- Ukažte jen části systému, které jsou potřeba pro první workflow.
+- Nechte zákazníka udělat hlavní krok vlastní rukou.
+- Zapište otázky, ale neřešte všechny okamžitě.
+- Na konci potvrďte, co je hotovo, co zůstává otevřené a kdo udělá další krok.
+
+Pokud produkt vyžaduje více rolí, nedělej jedno univerzální školení pro všechny. Administrátor potřebuje znát správu účtů a bezpečnost. Běžný uživatel potřebuje zvládnout každodenní práci. Majitel firmy potřebuje vidět výsledek a rizika. Míchat to dohromady je jako dělat kurz řízení, servis motoru a účetnictví jízd v jedné hodině.
+
+### Q.6 Měř adopci bez sledování lidí
+
+Onboarding potřebuje měření, ale ne šmírování. Cílem není sledovat každý pohyb konkrétní osoby. Cílem je poznat, jestli zákazník prošel důležitými kroky a kde se zasekl.
+
+Měř raději stavové milníky než osobní mikroudálosti:
+
+- účet vytvořen,
+- administrátor pozván,
+- první data přidána,
+- první workflow dokončen,
+- první výstup sdílen,
+- kontrola po 7 dnech dokončena,
+- otevřená rizika vyřešena nebo eskalována.
+
+U každého milníku stačí vědět, že nastal, kdy nastal a kdo za další krok odpovídá. Není potřeba sbírat detailní behaviorální profil každého uživatele. Privacy-first provoz má jednu příjemnou vlastnost: nutí tě měřit to, co opravdu souvisí s hodnotou. Méně dat, méně hluku, méně právních bolestí hlavy.
+
+### Q.7 Kontrola po 7 a 30 dnech
+
+Bez následné kontroly je onboarding jen slavnostní otevření dveří. Zákazník vejde dovnitř, tým zamává a pak všichni doufají, že se tam nějak zabydlí. Nedoufat. Kontrolovat.
+
+Po 7 dnech se ptej:
+
+- Použil zákazník produkt v reálné situaci?
+- Byl dosažen aktivační moment?
+- Kde vzniklo tření?
+- Chybí někomu přístup, oprávnění nebo vysvětlení?
+- Je další krok jasný a malý?
+
+Po 30 dnech se ptej:
+
+- Přibližuje produkt zákazníka ke slíbenému výsledku?
+- Která funkce se používá nejvíc a která vůbec?
+- Jaké otázky se opakovaly?
+- Co patří do produktu, co do dokumentace a co do prodejního očekávání?
+- Existuje důvod pokračovat, rozšířit nebo férově upravit spolupráci?
+
+Z obou kontrol si odnes produktové poznatky, ale anonymizuj je, jakmile nepotřebuješ konkrétní identitu. „Tři účetní firmy nepochopily nastavení oprávnění“ je užitečnější a bezpečnější než hromada citlivých poznámek o konkrétních lidech.
+
+### Q.8 Checklist: onboarding, který vede k první hodnotě
+
+- [ ] Je jasně popsaný aktivační moment zákazníka.
+- [ ] Onboarding sbírá jen data nutná pro první nastavení a první výsledek.
+- [ ] Každé vstupní pole má účel, úložiště, vlastníka a retenční pravidlo.
+- [ ] Zákazník ví, kdo ho onboardingem provází.
+- [ ] Existuje jedna onboardingová karta se stavem, riziky a dalším krokem.
+- [ ] První školení pracuje s reálným scénářem zákazníka.
+- [ ] Administrátoři, běžní uživatelé a rozhodovatelé nemají smíchané instrukce.
+- [ ] Adopce se měří přes milníky, ne přes detailní sledování lidí.
+- [ ] Kontrola po 7 dnech ověřuje aktivaci a praktické překážky.
+- [ ] Kontrola po 30 dnech ověřuje slíbený výsledek a další obchodní směr.
+- [ ] Poznatky z onboardingu se ukládají anonymizovaně, pokud není nutná identita.
+- [ ] Onboarding má jasné ukončení: hotovo, riziko, rozšíření nebo férový stop.
+
+Onboarding je první velký test důvěry. Když je klidný, konkrétní a datově střídmý, zákazník má pocit, že produkt někdo opravdu promyslel. Když je chaotický, začne se ptát, jestli stejně nevypadá i zbytek provozu. A to je otázka, kterou nechceš vyvolat hned první týden.
+
 ## Pracovní log
+- 2026-08-29 12:00 UTC — Doplněna příloha Q o onboardingu prvního zákazníka: aktivační moment, vstupní data, tříkrokový onboarding, zákaznická karta, pracovní školení, měření adopce a checklist.
 - 2026-08-29 11:01 UTC — Doplněna příloha P o poptávkovém procesu: minimální sběr dat, potvrzení po odeslání, kvalifikace, interní předání, retence a privacy-first checklist.
 - 2026-08-29 10:00 UTC — Doplněna příloha O o přístupech a oprávněních: mapa systémů a rolí, nejmenší oprávnění, onboarding/offboarding, sdílené účty, access review, privacy-first pravidla a checklist.
 - 2026-08-29 09:01 UTC — Doplněna příloha N o zálohách a obnově: mapa dat, RPO/RTO podle dopadu, obnova konfigurace a souborů, restore drill, ochrana záloh, částečná obnova a checklist.
