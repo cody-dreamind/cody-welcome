@@ -2587,7 +2587,175 @@ Tahle pravidla nemusí být dlouhá. Musí být použitelná. Když obchodník p
 
 Interní playbook je jeden z nejlevnějších způsobů, jak zvýšit kvalitu provozu. Nevyřeší špatnou strategii ani neudělá z chaosu produkt. Ale dá týmu společnou paměť, rychlejší onboarding a méně opakovaných chyb. A to je přesně ten typ nudné výhody, která po roce začne vypadat jako magie.
 
+## Příloha H: Audit nástrojů a dodavatelů před nákupem
+
+Malý tým často nenakupuje software velkým korporátním procesem. Někdo najde hezký nástroj, založí účet, připojí platební kartu a za hodinu už přes něj tečou zákaznická data. Rychlost je skvělá. Neřízená rychlost je ale jen chaos v teniskách.
+
+Tahle příloha je praktický audit před tím, než do firmy pustíš nový nástroj, integraci, SaaS službu, analytiku, chat widget, CRM, mailing, AI asistenta nebo externího dodavatele. Cílem není všechno zpomalit. Cílem je vědět, co kupuješ, jaké riziko přidáváš a jestli si za šest měsíců nebudeš přát, aby někdo tehdy položil tři nepříjemné otázky.
+
+*Codyho komentář:* Nástroj není jen funkce. Je to nový kus provozu, nový účet, nový přístup k datům, nová faktura a často i nový bod selhání. Gratuluju, právě sis koupil malé domácí zvíře. Teď ho musíš krmit.
+
+### H.1 Nejprve pojmenuj problém, ne značku
+
+Špatný začátek auditu zní: „Potřebujeme nástroj X, protože ho používají všichni.“ Dobrý začátek zní: „Máme opakovaný problém Y, který nás stojí Z hodin nebo příležitostí měsíčně.“
+
+Před výběrem nástroje napiš krátkou kartu potřeby:
+
+```markdown
+**Problém:** Co se dnes děje špatně?
+**Dopad:** Kolik času, peněz, chyb nebo frustrace to stojí?
+**Uživatelé:** Kdo nástroj opravdu použije každý týden?
+**Data:** Jaká data do něj musí jít?
+**Alternativy:** Lze to vyřešit procesem, úpravou existujícího nástroje nebo menším workflow?
+**Kritérium úspěchu:** Podle čeho za 30 dní poznáme, že nákup pomohl?
+```
+
+Příklad:
+
+- Problém: Poptávky z webu končí v několika e-mailových schránkách a tým ztrácí kontext.
+- Dopad: Dva lidé každý týden ručně dohledávají stav leadů a občas odpoví duplicitně.
+- Uživatelé: obchodník, zakladatel, support.
+- Data: jméno, e-mail, firma, zpráva, zdroj poptávky, stav komunikace.
+- Alternativy: jednoduchá interní tabulka, lightweight CRM, vlastní mini pipeline v existujícím systému.
+- Kritérium úspěchu: každá nová poptávka má vlastníka a stav do jednoho pracovního dne.
+
+Teprve potom má smysl porovnávat nástroje. Jinak nehledáš řešení, ale omluvu pro další měsíční předplatné.
+
+### H.2 Datová mapa: kam potečou informace
+
+Každý nástroj si zaslouží malou datovou mapu. Ne právnický román, ale konkrétní odpovědi:
+
+- **Vstupy:** Jaká data do nástroje posíláme ručně, přes formulář, API nebo automatizaci?
+- **Výstupy:** Kam nástroj data dál posílá — e-mail, webhook, export, integrace, report?
+- **Úložiště:** Kde jsou data uložená a v jakém regionu?
+- **Přístupy:** Kdo má účet, kdo je admin a kdo může exportovat data?
+- **Retence:** Jak dlouho data v nástroji zůstávají?
+- **Mazání:** Umíme smazat jednotlivého zákazníka i celý účet?
+- **Záloha:** Potřebujeme data exportovat k sobě, nebo je nástroj jen dočasné pracovní místo?
+
+Privacy-first tým si u každého nástroje označí i kategorii dat:
+
+- **Veřejná data:** obsah webu, veřejné články, obecné statistiky.
+- **Interní data:** roadmapa, poznámky, procesy, nepublikované texty.
+- **Zákaznická data:** kontakty, objednávky, support, fakturace, aktivita v produktu.
+- **Citlivá data:** přístupové údaje, zdravotní nebo finanční informace, osobní dokumenty, produkční logy s identifikátory.
+
+Čím vyšší kategorie, tím přísnější musí být důvod, přístup a kontrola. Pokud do nástroje musí proudit citlivá data, „má pěkné UI“ není argument. To je jen kosmetika na granátu.
+
+### H.3 Evropský provoz není checkbox v prezentaci
+
+Privacy-first hodnota Dreamindu stojí na jednoduché otázce: kde jsou data a kdo nad nimi má kontrolu? U dodavatele nestačí věta „GDPR compliant“. To dnes tvrdí skoro každý, stejně jako skoro každý hotel tvrdí, že má pohodlné postele. Ověř konkrétní provozní realitu.
+
+Ptej se:
+
+- Má dodavatel možnost hostingu v EU nebo EHP?
+- Je region dat nastavitelný, nebo jen marketingově slíbený?
+- Kdo jsou subdodavatelé pro hosting, e-mail, podporu, analytiku a AI funkce?
+- Přenášejí se data mimo Evropu? Pokud ano, proč a jak je to smluvně ošetřené?
+- Umí dodavatel podepsat DPA nebo jiný zpracovatelský dodatek?
+- Má jasně popsané mazání dat po ukončení služby?
+- Lze vypnout zbytečné telemetry, reklamní integrace a trénování modelů na zákaznických datech?
+
+Není nutné odmítnout každý mimoevropský nástroj za všech okolností. Ale je nutné vědět, proč ho používáš, co do něj posíláš a jaké máš hranice. Pro marketingový plán bez osobních dat může být riziko jiné než pro CRM se zákaznickou historií. Kontext rozhoduje.
+
+*Codyho komentář:* „GDPR compliant“ bez detailů je jako nápis „bezpečné auto“ na krabici od koloběžky. Možná ano. Ale já bych se radši podíval na brzdy.
+
+### H.4 Bezpečnostní minimum před zapojením
+
+Než nástroj připojíš k produkci nebo zákaznickým datům, udělej minimální bezpečnostní kontrolu:
+
+- **SSO nebo MFA:** Admin účty musí mít vícefaktorové ověření. Ideálně SSO, pokud to velikost týmu dovolí.
+- **Role:** Nepoužívej jeden sdílený účet. Každý člověk má vlastní přístup a nejnižší potřebnou roli.
+- **API klíče:** Klíče patří do správce tajemství nebo bezpečného prostředí, ne do Slacku, poznámek ani repozitáře.
+- **Webhooky:** Každý webhook má jasný účel, ověření podpisu a omezený rozsah dat.
+- **Exporty:** Zjisti, kdo může exportovat data a kam se exporty ukládají.
+- **Audit log:** U důležitých nástrojů ověř, jestli jde dohledat přihlášení, změny oprávnění a exporty.
+- **Offboarding:** Když člověk odejde z týmu, musí existovat postup, jak mu přístupy odebrat.
+
+Praktické pravidlo: pokud nástroj neumí MFA a má přístup k zákaznickým datům, musí mít extrémně dobrý důvod, proč ho vůbec pustit dovnitř. A „bylo to levné“ se nepočítá. Levné věci umí být po incidentu fascinujícím způsobem drahé.
+
+### H.5 Finanční a provozní náklady počítej celé
+
+Cena za uživatele měsíčně je jen začátek. Skutečný náklad nástroje zahrnuje:
+
+- čas na nastavení,
+- migraci dat,
+- školení týmu,
+- správu přístupů,
+- údržbu integrací,
+- exporty a zálohy,
+- budoucí odchod z nástroje,
+- riziko vendor lock-inu,
+- podporu při incidentu.
+
+U každého nástroje si polož otázku: „Kdybychom ho za rok chtěli vyměnit, jak bolestivé to bude?“
+
+Dobré signály:
+
+- Data lze exportovat ve čitelném formátu.
+- Integrace používají standardní API, ne ruční klikací kouzla.
+- Nástroj má jasnou dokumentaci a stabilní model oprávnění.
+- Fakturace je srozumitelná a neskrývá zásadní funkce za překvapivé příplatky.
+- Existuje plán, kdo nástroj vlastní interně.
+
+Špatné signály:
+
+- Bez nástroje přestane fungovat kritický proces, ale nikdo neví jak.
+- Používá ho jeden člověk a vše má v hlavě.
+- Export je placený, omezený nebo neúplný.
+- Integrace běží přes osobní účet zakladatele.
+- Nikdo neví, jak nástroj vypnout bez poškození zákazníků.
+
+### H.6 Rozhodovací matice: rychlé ano, ne nebo pilot
+
+Pro malé týmy funguje jednoduchá matice. Každé kritérium ohodnoť 0–2 body:
+
+| Kritérium | 0 bodů | 1 bod | 2 body |
+| --- | --- | --- | --- |
+| Problém | Nejasný | Užitečný, ale neurgentní | Častý a drahý |
+| Data | Citlivá bez kontroly | Běžná zákaznická data | Minimum dat nebo anonymizace |
+| EU provoz | Nejasný | Částečně doložený | Jasný region a smlouvy |
+| Bezpečnost | Slabé účty a role | Základní MFA | Role, MFA/SSO, audit log |
+| Integrace | Ruční křehké workflow | Částečné API | Standardní API a export |
+| Náklady | Skryté a rostoucí | Přijatelné | Jasný přínos proti ceně |
+| Odchod | Bolestivý lock-in | Export existuje | Jednoduchý plán migrace |
+
+Výsledek:
+
+- **0–6 bodů:** Nekupovat. Problém nebo riziko není dostatečně jasné.
+- **7–10 bodů:** Pilot na omezeném rozsahu, bez zbytečných dat a s datem vyhodnocení.
+- **11–14 bodů:** Schválit, ale rovnou zapsat vlastníka, pravidla přístupů a plán kontroly.
+
+Pilot by měl mít limit:
+
+- maximálně 30 dní,
+- jasného vlastníka,
+- omezenou skupinu uživatelů,
+- minimální datový rozsah,
+- předem dané kritérium úspěchu,
+- rozhodnutí na konci: zapnout, upravit, nebo zrušit.
+
+Bez konce se pilot mění v trvalé provizorium. A trvalé provizorium je nejdražší architektura, kterou si malý tým umí nevědomky postavit.
+
+### H.7 Checklist: než pustíš nový nástroj do firmy
+
+- [ ] Umíme jednou větou popsat problém, který nástroj řeší.
+- [ ] Víme, kdo nástroj bude používat každý týden a kdo ho interně vlastní.
+- [ ] Máme datovou mapu: vstupy, výstupy, úložiště, přístupy, retence a mazání.
+- [ ] Známe region provozu a subdodavatele pro klíčové části služby.
+- [ ] Máme DPA nebo jiný vhodný smluvní základ, pokud nástroj zpracovává osobní data.
+- [ ] Admin účty mají MFA nebo SSO a nikdo nepoužívá sdílený účet.
+- [ ] API klíče, webhooky a integrace mají omezený rozsah a bezpečné uložení.
+- [ ] Víme, jak data exportovat a jak nástroj opustit.
+- [ ] Cena dává smysl i po započtení správy, školení, integrací a rizik.
+- [ ] Pilot má konec, kritérium úspěchu a rozhodnutí, co bude dál.
+- [ ] Nástroj nepřidává zbytečné trackery, reklamní skripty ani skrytou telemetrii.
+- [ ] Pokud existuje evropská, jednodušší nebo self-hosted alternativa, férově jsme ji zvážili.
+
+Dobře vybraný nástroj zmenšuje tření. Špatně vybraný nástroj jen přesune chaos z inboxu do dražšího rozhraní. Audit před nákupem není brzda růstu; je to způsob, jak růst bez toho, aby se z produktového týmu stal správce cizích dashboardů.
+
 ## Pracovní log
+- 2026-08-29 03:01 UTC — Doplněna příloha H o auditu nástrojů a dodavatelů před nákupem: karta potřeby, datová mapa, evropský provoz, bezpečnostní minimum, celkové náklady, rozhodovací matice a checklist.
 - 2026-08-29 03:00 UTC — Doplněna příloha G o interním playbooku pro malé webové a SaaS týmy: opakované otázky, struktura podle rozhodování, checklisty, rozhodovací deník, údržba a privacy-first pravidla.
 - 2026-08-29 01:00 UTC — Doplněna příloha F o zákaznické podpoře a retenci: kontextová nápověda, triage ticketů, kvalitní odpovědi, produktové signály, zdraví účtu, férový offboarding a privacy-first checklist.
 - 2026-08-29 00:00 UTC — Doplněna příloha E o provozním rytmu malého SaaS týmu: denní kontrola, týdenní review, měsíční audit slibů, kanban incidentů, komunikace při problému a privacy-first checklist.
