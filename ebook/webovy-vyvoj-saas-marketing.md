@@ -3286,7 +3286,158 @@ Privacy-first incident management není pomalejší. Je klidnější, protože t
 
 Status page není přiznání slabosti. Je to důkaz dospělosti. Zákazníci většinou nečekají dokonalost; čekají orientaci, férovost a rychlou reakci. Když jim ji dáš, incident nemusí důvěru zničit. Někdy ji naopak posílí, protože zákazník uvidí, že za produktem stojí tým, který se neschovává pod koberec. Koberec je mimochodem mizerný monitoring.
 
+## Příloha M: Monitoring a alerty, které pomáhají místo paniky
+
+Monitoring je jako dobrý noční hlídač. Neřeší za tebe produktovou strategii, ale řekne ti včas, že se něco děje. Špatný monitoring naopak budí tým kvůli každému šustnutí, posílá červené notifikace bez kontextu a po třech týdnech ho všichni ignorují. To není bezpečnost. To je digitální kouřový alarm připálený k toastovači.
+
+Malý webový nebo SaaS tým nepotřebuje hned observability katedrálu. Potřebuje vědět, jestli zákazník může používat hlavní funkce, jestli se nehromadí chyby, jestli se blíží kapacitní problém a jestli někde neutíkají citlivá data do logů. Dobrý monitoring má být jednoduchý, akční a privacy-first.
+
+### M.1 Nejdřív monitoruj zákaznický slib
+
+Začni otázkou:
+
+> Co jsme zákazníkovi slíbili, že bude fungovat?
+
+Nejčastější chyba je monitorovat jen servery. Server může být „zelený“, ale uživatel se nepřihlásí, formulář neodešle poptávku nebo platební webhook padá do prázdna. Technická metrika bez zákaznického dopadu je užitečná až ve druhé vrstvě.
+
+První vrstva monitoringu má pokrýt hlavní sliby:
+
+- **Dostupnost webu:** homepage a klíčové landing pages vrací správnou odpověď.
+- **Přihlášení:** uživatel se může přihlásit nebo založit účet.
+- **Hlavní workflow:** poptávka, objednávka, export, import nebo vytvoření záznamu funguje.
+- **E-mailové doručení:** potvrzení, pozvánky a reset hesla odcházejí.
+- **Integrace:** platby, API, webhooky a naplánované úlohy neběží potichu do zdi.
+- **Data:** databáze odpovídá a zálohy se skutečně dokončují.
+
+Teprve potom přidej metriky infrastruktury: CPU, paměť, disk, fronty, latence databáze nebo počet restartů kontejneru. Ty jsou důležité, ale mají sloužit diagnóze, ne zakrývat skutečný produktový dopad.
+
+### M.2 Rozděl monitoring na čtyři vrstvy
+
+Praktický monitoring pro malý tým může mít čtyři vrstvy:
+
+1. **Externí dostupnost** — nezávislá kontrola zvenku: web odpovídá, certifikát platí, DNS vede kam má.
+2. **Aplikační zdraví** — interní health endpoint, který ověří databázi, frontu a základní konfiguraci.
+3. **Produktové signály** — počet odeslaných formulářů, chyb plateb, neúspěšných importů nebo nedoručených e-mailů.
+4. **Provozní rizika** — disk, zálohy, expirace certifikátů, rate limity, podezřelé chybové špičky.
+
+Každá vrstva odpovídá na jinou otázku:
+
+- „Je služba dosažitelná?“
+- „Je aplikace uvnitř zdravá?“
+- „Dělají uživatelé to, co potřebují?“
+- „Blíží se problém, který ještě není incident?“
+
+Když tyto vrstvy smícháš dohromady, vznikne notifikační guláš. Když je oddělíš, tým rychleji pozná, jestli řeší výpadek, bug, pomalý provoz, nebo jen špatně nastavený alert.
+
+### M.3 Alert musí mít vlastníka a akci
+
+Alert bez akce je jen drahý stres. Před zapnutím každého alertu si napiš:
+
+- **Co přesně znamená?** Například „poptávkový formulář vrací chybu déle než 3 minuty“.
+- **Koho budí?** Jeden primární vlastník, ne deset lidí pro jistotu.
+- **Jak rychle se musí reagovat?** Minuty, hodiny, nebo další pracovní den.
+- **Jaký je první krok?** Odkaz na runbook, logy, dashboard nebo příkaz.
+- **Kdy se eskaluje?** Po jaké době nebo při jakém dopadu.
+
+Příklad dobrého alertu:
+
+> Poptávkový formulář na produkci má 5 po sobě jdoucích chyb. Dopad: noví zákazníci nemohou odeslat poptávku. Vlastník: on-call produktový vývojář. První krok: zkontrolovat aplikační log pro endpoint formuláře a poslední deploy.
+
+Příklad špatného alertu:
+
+> Error rate high.
+
+To je jako kdyby ti auto napsalo „něco je divné“. Díky, aute. Velmi transformační vhled.
+
+### M.4 Měř méně, ale lépe
+
+Privacy-first přístup neznamená ignorovat problémy. Znamená měřit s jasným účelem a bez zbytečného sběru osobních dat.
+
+U provozních metrik většinou nepotřebuješ vědět, kdo konkrétně chybu způsobil. Potřebuješ vědět:
+
+- kdy chyba nastala,
+- jaký endpoint nebo workflow selhal,
+- jaký byl typ chyby,
+- kolikrát se opakovala,
+- jestli ovlivnila zákaznický výsledek,
+- jaký deploy nebo konfigurace tomu předcházely.
+
+Do logů proto neposílej:
+
+- hesla, tokeny, session cookies ani API klíče,
+- celé požadavky s osobními údaji,
+- obsah zpráv, dokumentů nebo formulářů,
+- kompletní platební údaje,
+- dlouhodobé identifikátory bez jasného důvodu.
+
+Místo toho používej technické korelační ID, typ události, stav a minimální metadata. Když potřebuješ dohledat konkrétní případ, udělej to přes interní administraci s přístupovými právy, ne přes veřejně dostupný log agregátor.
+
+*Codyho komentář:* Logy jsou lákavé smetiště. Na začátku tam vývojář pošle „jen pro debug“ skoro všechno. O rok později se z toho stane archeologické naleziště citlivých dat. Indiana Jones by měl radost, DPO už méně.
+
+### M.5 Runbook je důležitější než hezký dashboard
+
+Dashboard je užitečný, když víš, co s ním. Runbook říká, co dělat. Pro každý důležitý alert vytvoř krátký návod:
+
+1. **Co alert znamená.** Jedna věta lidsky.
+2. **Jak ověřit dopad.** Kterou stránku, API nebo metriku zkontrolovat.
+3. **První tři kroky.** Konkrétní postup bez přemýšlení pod tlakem.
+4. **Rollback nebo workaround.** Jak službu rychle vrátit do použitelného stavu.
+5. **Koho informovat.** Interně, zákaznicky, případně na status page.
+6. **Co zapsat po incidentu.** Čas, dopad, příčina, prevence.
+
+Runbook nemusí být dokonalý. Stačí, když sníží paniku v prvních deseti minutách. Po každém incidentu ho uprav. Pokud tým při řešení udělal jiný krok, než runbook říkal, buď byl tým kreativní, nebo byl runbook zastaralý. Obě možnosti stojí za aktualizaci.
+
+### M.6 Tři praktické alerty pro začátek
+
+Když začínáš od nuly, nastav nejdřív tyto tři typy alertů:
+
+**1. Klíčová cesta nefunguje**
+
+Externí kontrola každých pár minut ověří, že hlavní web, přihlášení nebo formulář vrací očekávaný výsledek. U formuláře nemusíš posílat skutečnou poptávku; můžeš mít testovací endpoint nebo syntetickou kontrolu, která neukládá osobní data.
+
+**2. Chyby rostou nad běžnou hladinu**
+
+Aplikace sleduje počet 5xx chyb, neúspěšných jobů nebo odmítnutých webhooků. Alert se spouští až po krátkém okně nebo opakování, aby tým nebudila jedna náhodná chyba.
+
+**3. Záloha se nedokončila**
+
+Záloha bez kontroly je jen dobrý pocit v YAML souboru. Alertuj, když záloha neproběhla, je podezřele malá, nebo se nepodařil test obnovy v dohodnutém intervalu.
+
+Tyto tři alerty pokrývají dostupnost, kvalitu provozu a schopnost návratu po problému. To je pro malý tým mnohem hodnotnější než dvacet grafů, na které se nikdo nedívá.
+
+### M.7 Privacy-first pravidla pro monitoring
+
+Monitoring sám může být riziko, pokud posílá provozní data do nástroje, kterému tým nerozumí. Před nasazením se zeptej:
+
+- Kde jsou logy a metriky uložené?
+- Kdo k nim má přístup?
+- Jak dlouho se drží?
+- Obsahují osobní údaje nebo obchodně citlivá data?
+- Lze nastavit redakci citlivých hodnot před odesláním?
+- Umíme data exportovat nebo smazat?
+- Potřebujeme externí službu, nebo stačí jednodušší evropský/self-hosted nástroj?
+
+U citlivějších B2B produktů preferuj evropský provoz, vlastní kontrolu nad retention politikou a minimální počet dodavatelů. Když už používáš externí nástroj, měj zapsané, jaká data dostává a proč. Ne proto, že dokumentace je sexy večerní program. Protože až se někdo zeptá, odpověď „asi tam něco teče“ není úplně vítězný sales argument.
+
+### M.8 Checklist: monitoring bez zbytečného hluku
+
+- [ ] Monitoring začíná zákaznickým slibem, ne seznamem serverů.
+- [ ] Hlavní workflow mají externí nebo syntetickou kontrolu.
+- [ ] Health endpoint ověřuje skutečné závislosti, ne jen že proces dýchá.
+- [ ] Každý důležitý alert má vlastníka, dopad a první akci.
+- [ ] Alerty mají prahy nastavené tak, aby tým nebudila náhodná jednorázová chyba.
+- [ ] Existuje runbook pro dostupnost, formuláře, platby, e-maily a zálohy.
+- [ ] Logy neobsahují hesla, tokeny, cookies ani kompletní osobní data.
+- [ ] Retence logů a metrik je nastavená podle potřeby, ne „navždy, protože disk je levný“.
+- [ ] Monitoringový nástroj má jasně popsané umístění dat a přístupy.
+- [ ] Zálohy mají samostatný alert a občasný test obnovy.
+- [ ] Status page a incident komunikace vycházejí ze stejných signálů jako interní monitoring.
+- [ ] Po incidentu se upravují alerty i runbook, ne jen nálada v týmu.
+
+Dobrý monitoring má dvě vlastnosti: včas tě upozorní na skutečný problém a zbytečně ti neleze do života. Malý tým nepotřebuje vědět všechno. Potřebuje vědět to, podle čeho udělá lepší rozhodnutí, rychleji opraví zákaznický dopad a nevyrobí si z provozních dat další privacy dluh.
+
 ## Pracovní log
+- 2026-08-29 08:01 UTC — Doplněna příloha M o monitoringu a alertech: zákaznický slib, čtyři vrstvy monitoringu, akční alerty, privacy-first logování, runbooky, první praktické alerty a checklist.
 - 2026-08-29 07:00 UTC — Doplněna příloha L o status page a komunikaci incidentů: komponenty služby, úrovně incidentů, první update, interní incident karta, postmortem, privacy-first pravidla a checklist.
 - 2026-08-29 06:01 UTC — Doplněna příloha K o produktovém backlogu: kategorie práce, šablona položky, prioritizační rámec, pravidelný úklid, experimenty, Definition of Done a checklist.
 - 2026-08-29 05:10 UTC — Doplněna příloha J o přechodu z náhodného stacku na privacy-first provoz: inventura nástrojů, kritičnost systémů, migrační strategie, datové toky, pilot, vypnutí starých nástrojů a checklist.
