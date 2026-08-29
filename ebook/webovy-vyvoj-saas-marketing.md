@@ -3995,7 +3995,158 @@ Z obou kontrol si odnes produktové poznatky, ale anonymizuj je, jakmile nepotř
 
 Onboarding je první velký test důvěry. Když je klidný, konkrétní a datově střídmý, zákazník má pocit, že produkt někdo opravdu promyslel. Když je chaotický, začne se ptát, jestli stejně nevypadá i zbytek provozu. A to je otázka, kterou nechceš vyvolat hned první týden.
 
+## Příloha R: První zákaznické review a rozšíření bez nátlaku
+
+Když první zákazník projde onboardingem, práce nekončí. Naopak začíná část, která často rozhodne, jestli produkt zůstane jednorázový experiment, nebo se z něj stane opakovatelný byznys. První review není formální schůzka na téma „tak co, dobrý?“. Je to řízené ověření, jestli zákazník opravdu získal hodnotu, jaké překážky zůstaly a jestli dává smysl vztah rozšířit.
+
+Malé týmy tady často udělají jednu ze dvou chyb. Buď se zákazníka bojí ptát, protože nechtějí slyšet kritiku. Nebo hned tlačí upgrade, reference, case study a další zakázku. Obojí je krátkozraké. Review má nejdřív zlepšit porozumění. Teprve potom může nabídnout další krok.
+
+*Codyho komentář:* Zákaznické review není výslech ani obchodní přepadení v zasedačce. Je to servisní kontrolka. Když svítí, nelepíš přes ni samolepku „enterprise opportunity“.
+
+### R.1 Review plánuj podle slíbené hodnoty
+
+Review nemá začínat otázkou, jestli je zákazník „spokojený“. Spokojenost je měkká, náladová a často zdvořilá. Lepší je vrátit se ke slibu, kvůli kterému zákazník produkt koupil.
+
+Před schůzkou si napiš:
+
+- Jaký výsledek jsme zákazníkovi slíbili?
+- Jaký aktivační moment měl nastat?
+- Jaký konkrétní problém měl zmizet nebo se zmenšit?
+- Jak poznáme, že se to povedlo?
+- Jaké důkazy máme bez invazivního sledování?
+
+Příklad pro zákaznický portál:
+
+- Slib: méně ztracených požadavků v e-mailu.
+- Aktivační moment: první klient zadal požadavek přes portál a tým ho vyřešil bez kopírování do tabulky.
+- Důkaz: počet požadavků se stavem, průměrný čas první reakce, méně interních dotazů „kde to je?“.
+- Kvalitativní signál: tým ví, kde najde kontext a kdo má další krok.
+
+Takové review je konkrétní. Zákazník nemusí přemýšlet abstraktně, jestli se mu „líbí řešení“. Mluví o práci, kterou opravdu dělá.
+
+### R.2 Použij jednoduchou agendu
+
+První review by mělo být krátké a dobře připravené. Ideálně 30 až 45 minut. Delší schůzka často sklouzne k debatě o všech možných nápadech, které nemají stejnou prioritu.
+
+Praktická agenda:
+
+1. **Připomenutí cíle:** proč jsme produkt nasadili a jaký výsledek měl přinést.
+2. **Co funguje:** konkrétní situace, kde zákazník vidí hodnotu.
+3. **Co drhne:** překážky, nejasnosti, ruční obcházky a chybějící informace.
+4. **Důkazy:** milníky, jednoduché metriky, anonymizované poznatky z podpory.
+5. **Další krok:** oprava, zlepšení procesu, školení, rozšíření nebo vědomé zastavení.
+
+Předem pošli zákazníkovi krátkou přípravu:
+
+> Na review projdeme, jestli řešení plní původní cíl, co lidem v týmu pomáhá a kde zůstává tření. Není potřeba chystat prezentaci. Stačí přinést dva konkrétní příklady: jeden, kde produkt pomohl, a jeden, kde něco zdržovalo.
+
+Tím snížíš tření a zároveň dáš schůzce jasný rámec. Lidé přijdou s příklady, ne s pocitem, že mají vyplnit školní test.
+
+### R.3 Kritiku překládej na práci, ne na obranu
+
+Když zákazník řekne „je to složité“, není to osobní útok na tým, designéra ani framework. Je to signál, že někde existuje tření. Tvůj úkol není obhájit rozhodnutí, ale pochopit situaci.
+
+Místo obranných odpovědí používej doplňující otázky:
+
+- „Kdy přesně se to stalo?“
+- „Co jste chtěli v tu chvíli udělat?“
+- „Co jste čekali, že systém nabídne?“
+- „Jak jste to nakonec obešli?“
+- „Kdo další na to naráží?“
+
+Pak kritiku přepiš do pracovního formátu:
+
+- **Pozorování:** obchodník při změně stavu nevidí poslední poznámku klienta.
+- **Dopad:** před odpovědí musí otevřít detail požadavku a ztrácí kontext.
+- **Návrh:** zobrazit poslední poznámku v seznamu aktivních požadavků.
+- **Priorita:** vysoká, protože se děje denně u hlavního workflow.
+
+Tím se z kritiky stane produktový vstup. Ne každý vstup musí skončit funkcí. Někdy stačí lepší text, školení, šablona nebo úprava procesu. Ale každý důležitý vstup má mít majitele a další krok.
+
+### R.4 Rozšíření nabídni až po potvrzené hodnotě
+
+Upsell nebo rozšíření služby má být přirozený důsledek hodnoty, ne náplast na nejistotu. Pokud zákazník ještě nedosáhl původního výsledku, netlač další modul. Nejdřív oprav základ.
+
+Dobré signály pro rozšíření:
+
+- zákazník používá produkt opakovaně,
+- aktivace proběhla a tým chápe hlavní workflow,
+- zákazník sám zmiňuje další související problém,
+- existuje jasný obchodní dopad,
+- rozšíření nepřidá zbytečnou datovou nebo procesní složitost.
+
+Špatné signály:
+
+- zákazník nerozumí základnímu použití,
+- tým používá produkt jen proto, že ho někdo nařídil,
+- podpora řeší pořád stejné onboardingové potíže,
+- rozšíření by vyžadovalo sběr dat, která nejsou potřeba,
+- prodejní tlak nahrazuje chybějící hodnotu.
+
+Příklad nenátlakového dalšího kroku:
+
+> Vidíme, že portál už řeší většinu servisních požadavků. Další úzké místo je měsíční reporting pro klienty. Můžeme ho nechat zatím ručně, nebo připravit malou automatizaci, která z existujících stavů vygeneruje přehled bez dalšího sledování lidí.
+
+Takhle zákazník dostává volbu a kontext. Ne pocit, že se mu někdo snaží prodat další krabici funkcí jen proto, že existuje ceník.
+
+### R.5 Reference sbírej eticky a konkrétně
+
+Reference je silná, když je konkrétní. „Skvělá spolupráce“ potěší ego, ale obchodně moc nepomůže. Lepší reference ukazuje situaci před, změnu a výsledek.
+
+Šablona žádosti:
+
+> Pomohlo by nám popsat spolupráci jednou krátkou referencí. Stačí tři věty: jaký problém jste řešili, co se po nasazení změnilo a komu byste podobné řešení doporučili. Text vám pošleme ke schválení a bez vašeho souhlasu ho nikde nezveřejníme.
+
+Privacy-first pravidla pro reference:
+
+- Nezveřejňuj jméno, logo ani čísla bez výslovného souhlasu.
+- U anonymizovaných příkladů odstraň identifikující detaily.
+- Neposílej zákaznická data do generických marketingových nástrojů bez potřeby.
+- Uchovej schválení reference u daného zákaznického záznamu.
+- Nabídni zákazníkovi možnost referenci později upravit nebo stáhnout.
+
+Reference není kořist. Je to důvěra půjčená od zákazníka. Chovej se k ní tak, aby ji nelitoval.
+
+### R.6 Z review udělej opakovatelný rytmus
+
+Jedno review pomůže. Rytmus review buduje retenci. Pro malé SaaS a B2B webové produkty stačí jednoduchý model:
+
+- **Po 7 dnech:** ověřit aktivaci a odstranit první blokery.
+- **Po 30 dnech:** zkontrolovat slíbený výsledek a hlavní workflow.
+- **Po 90 dnech:** vyhodnotit dopad, rozšíření, procesní změny a referenci.
+- **Každé čtvrtletí:** projít cíle, změny v týmu, data, přístupy a další priority.
+
+Po každém review ulož krátký záznam:
+
+- datum a účastníci,
+- původní cíl,
+- co funguje,
+- co brzdí hodnotu,
+- domluvené kroky,
+- owner a termín,
+- jestli vzniká anonymizovaný produktový poznatek.
+
+Záznam nemá být román. Má zabránit tomu, aby se stejná věc řešila znovu od nuly. Pokud se z review opakovaně vrací stejný problém, není to „zákaznický požadavek“. Je to systémový signál.
+
+### R.7 Checklist: review, retence a férové rozšíření
+
+- [ ] Review vychází z původního zákaznického slibu.
+- [ ] Před schůzkou jsou připravené konkrétní milníky a pozorování.
+- [ ] Agenda odděluje hodnotu, tření, důkazy a další kroky.
+- [ ] Kritika se zapisuje jako pozorování, dopad a návrh práce.
+- [ ] Každý důležitý problém má majitele a další krok.
+- [ ] Rozšíření se nabízí až po potvrzené hodnotě.
+- [ ] Upsell nepřidává zbytečný sběr dat ani procesní složitost.
+- [ ] Reference vzniká jen se souhlasem a schváleným textem.
+- [ ] Anonymizované case studies neobsahují identifikující detaily.
+- [ ] Review má rytmus po 7, 30 a 90 dnech.
+- [ ] Poznatky z review se promítají do backlogu nebo playbooku.
+- [ ] Staré akční kroky se na dalším review kontrolují, ne zapomínají.
+
+Dobré zákaznické review je kombinace péče, produktového výzkumu a obchodní disciplíny. Neprodává za každou cenu. Zjišťuje, jestli zákazník opravdu vyhrává. A když vyhrává, nabízí další krok tak, aby dával smysl pro obě strany — bez nátlaku, bez šmírování a bez prezentace o padesáti slajdech, kterou nikdo dobrovolně nepřežije.
+
 ## Pracovní log
+- 2026-08-29 13:00 UTC — Doplněna příloha R o prvním zákaznickém review: práce se slíbenou hodnotou, agenda, zpracování kritiky, férové rozšíření, etické reference, rytmus review a checklist.
 - 2026-08-29 12:00 UTC — Doplněna příloha Q o onboardingu prvního zákazníka: aktivační moment, vstupní data, tříkrokový onboarding, zákaznická karta, pracovní školení, měření adopce a checklist.
 - 2026-08-29 11:01 UTC — Doplněna příloha P o poptávkovém procesu: minimální sběr dat, potvrzení po odeslání, kvalifikace, interní předání, retence a privacy-first checklist.
 - 2026-08-29 10:00 UTC — Doplněna příloha O o přístupech a oprávněních: mapa systémů a rolí, nejmenší oprávnění, onboarding/offboarding, sdílené účty, access review, privacy-first pravidla a checklist.
