@@ -5408,7 +5408,139 @@ Tohle je nudná část, která chrání všechny zúčastněné. Partner ví, co
 
 *Codyho komentář:* Nejlepší referral program není ten, který umí připsat každou korunu ke každému kliknutí. Nejlepší referral program je ten, po kterém se všichni cítí čistě: partner doporučil něco užitečného, zákazník nedostal spam a firma získala obchod bez toho, aby z internetu dělala detektivní seriál.
 
+## Příloha AB: Bezpečnostní minimum před prvním větším zákazníkem
+
+Bezpečnost se v malém SaaS týmu často odkládá do chvíle, kdy přijde první větší zákazník a pošle dotazník. Najednou se řeší hesla, zálohy, přístupy, logy, incidenty, subdodavatelé, šifrování, retenční lhůty a otázka, proč má produkční databázi stále v záložkách člověk, který na projektu dělal před půl rokem. Romantika startupu, akorát s potem na čele.
+
+Dobrá zpráva: před prvním enterprise dotazníkem nepotřebuješ mít armádu compliance konzultantů. Potřebuješ mít základní bezpečnostní hygienu, důkazy, že ji opravdu děláš, a jasný plán, co ještě není hotové. Větší zákazník většinou nechce dokonalost. Chce vědět, jestli víš, kde jsou rizika, kdo je vlastní a jak rychle umíš reagovat.
+
+### AB.1 Začni mapou aktiv, ne seznamem nástrojů
+
+Bezpečnostní minimum nezačíná otázkou „jaký nástroj koupíme“. Začíná otázkou „co vlastně chráníme“. Bez mapy aktiv budeš kupovat zámky na dveře, o kterých nevíš, jestli vedou do serverovny, skladu nebo kumbálu s vánoční výzdobou.
+
+Sepiš jednoduchou tabulku:
+
+```markdown
+| Aktivum | Příklad | Vlastník | Riziko | Ochrana | Kontrola |
+| --- | --- | --- | --- | --- | --- |
+| Produkční databáze | zákaznické účty, fakturační údaje | CTO / founder | únik, smazání | omezené přístupy, zálohy | měsíční review |
+| Zdrojový kód | aplikace, infrastruktura | tech lead | únik know-how, škodlivá změna | 2FA, review, chráněná větev | týdenní kontrola PR |
+| Poptávkový inbox | kontaktní údaje leadů | sales owner | ztráta, zbytečná retence | štítky, mazání, omezené role | měsíční úklid |
+| Analytika | agregované návštěvy a eventy | product owner | nadměrný sběr | privacy-first nastavení | kvartální audit |
+```
+
+Mapa aktiv nemusí být krásná. Musí být použitelná. Když přijde otázka od zákazníka, chceš otevřít dokument a říct: „Ano, víme, kde jsou data, kdo za ně odpovídá a jak je chráníme.“ To zní mnohem lépe než „zeptám se kolegy, který je zrovna na dovolené a možná to má v hlavě“.
+
+### AB.2 Přístupy nastav podle nejmenšího oprávnění
+
+Nejmenší oprávnění znamená, že člověk má přístup jen k tomu, co potřebuje pro práci. Ne k tomu, co by se jednou mohlo hodit. V malém týmu je lákavé dát všem admina, protože to šetří pět minut. Jenže těch pět minut se jednou může změnit v dlouhý večer vysvětlování, proč interní účet viděl produkční data bez důvodu.
+
+Praktický základ:
+
+- všude zapnout vícefaktorové ověření,
+- nepoužívat sdílené účty tam, kde lze mít osobní účty,
+- rozdělit role na admin, provoz, support, finance a externista,
+- produkční databázi zpřístupnit jen lidem, kteří ji opravdu spravují,
+- externistům dávat časově omezené přístupy,
+- po odchodu člověka projít offboarding checklist ještě ten samý den.
+
+U privacy-first provozu je důležité i vysvětlit, že přístup k datům není status. Není to medaile za senioritu. Je to pracovní nástroj s rizikem. Kdo ho nepotřebuje, tomu ho nedávej. Kdo ho potřebuje jen občas, tomu vytvoř řízený proces místo trvalého univerzálního klíče.
+
+### AB.3 Logy mají pomáhat, ne sbírat všechno
+
+Logování je bezpečnostní i provozní nástroj. Bez logů nevíš, co se stalo. Se špatnými logy víš až příliš mnoho o lidech, ale pořád nevíš, proč systém spadl. Cílem není zaznamenat každý detail života uživatele. Cílem je umět odpovědět na otázky: co se pokazilo, kdy, kde, jaký účet nebo systém byl dotčen a kdo má reagovat.
+
+Do logů typicky patří:
+
+- technická chyba a její kontext,
+- čas události,
+- anonymizovaný nebo interní identifikátor účtu,
+- služba nebo komponenta, kde se problém stal,
+- výsledek akce, například úspěch, odmítnutí nebo chyba,
+- request ID pro dohledání souvislostí.
+
+Do logů typicky nepatří:
+
+- hesla, tokeny a API klíče,
+- celé platební údaje,
+- obsah soukromých zpráv, pokud není nezbytný,
+- kompletní osobní údaje ve volném textu,
+- dlouhodobé ukládání všeho „pro jistotu“.
+
+Retence logů má být vědomé rozhodnutí. Některé technické logy můžeš držet krátce. Auditní logy důležitých administrátorských akcí mohou potřebovat delší životnost. Rozdíl si napiš. Když je všechno navždy, není to bezpečnostní strategie. Je to digitální sklep.
+
+### AB.4 Incident plán napiš dřív, než ho potřebuješ
+
+Incident plán nemusí být tlustý dokument. Musí být použitelný ve chvíli, kdy lidé nejsou klidní. Tedy přesně ve chvíli, kdy se dlouhé dokumenty čtou asi tak dobře jako daňové přiznání v tramvaji.
+
+Minimální incident karta:
+
+```markdown
+## Incident: [název]
+
+- Čas zjištění:
+- Kdo incident vede:
+- Dotčená služba:
+- Předpokládaný dopad:
+- První kroky izolace:
+- Kdo komunikuje zákazníkům:
+- Kde běží interní koordinace:
+- Co už víme:
+- Co zatím nevíme:
+- Další update nejpozději:
+```
+
+Důležité je rozdělit role. Jeden člověk nemá současně opravovat databázi, psát zákazníkům, sbírat důkazy a uklidňovat tým. U malého týmu to někdy nejde dokonale, ale i dvě role jsou lepší než chaos: incident lead drží přehled, technický vlastník opravuje, komunikační vlastník připravuje zprávy.
+
+*Codyho komentář:* Incident není chvíle pro kreativní improvizaci. Improvizace patří do jazzu. U produkčních dat je lepší mít noty.
+
+### AB.5 Připrav odpovědi na zákaznický bezpečnostní dotazník
+
+Větší zákazník se často ptá na podobné oblasti. Když budeš odpovídat pokaždé od nuly, ztratíš čas a zvýšíš riziko nekonzistentních slibů. Připrav si živý dokument „Security FAQ“, který aktualizuješ po každé nové otázce.
+
+Začni těmito bloky:
+
+- **Data:** jaké typy dat zpracováváš, kde běží, kdo k nim má přístup a jak dlouho je držíš.
+- **Přístupy:** MFA, role, offboarding, administrátorské účty a přístupy externistů.
+- **Infrastruktura:** hosting, zálohy, monitoring, nasazování a oddělení prostředí.
+- **Aplikace:** review změn, správa tajemství, chybové logy, ochrana formulářů a rate limiting.
+- **Incidenty:** kontaktní osoba, interní postup, komunikační rytmus a postmortem.
+- **Subdodavatelé:** kdo zpracovává data, proč je používáš a kde najde zákazník přehled.
+
+Piš pravdivě. Pokud něco ještě nemáš, napiš stav a plán. „Nemáme formální penetrační test, ale máme pravidelné dependency review, omezené produkční přístupy a plánujeme externí test před enterprise rolloutem“ je lepší než mlhavé „bezpečnost bereme vážně“. Vážně ji berou všichni. Alespoň v prezentaci.
+
+### AB.6 Privacy-first bezpečnost je méně dat a jasnější odpovědnost
+
+Bezpečnost a soukromí nejsou dvě oddělené disciplíny. Čím méně zbytečných osobních dat sbíráš, tím méně jich musíš chránit, vysvětlovat, exportovat, mazat a zachraňovat při incidentu. Data minimization je bezpečnostní opatření, ne jen právní fráze.
+
+Pro každý nový sběr dat si napiš:
+
+- proč data potřebujeme,
+- jaké rozhodnutí nebo funkci umožní,
+- kdo je vlastník,
+- kde se ukládají,
+- jak dlouho je držíme,
+- kdo k nim má přístup,
+- jak je zákazník může získat nebo smazat.
+
+Pokud na některou otázku neumíš odpovědět, sběr dat ještě není připravený. Možná ho potřebuješ. Možná ne. Ale rozhodnutí má vzniknout před implementací, ne při incidentu, auditu nebo nepříjemném zákaznickém callu.
+
+### AB.7 Checklist: bezpečnostní minimum pro malý SaaS
+
+- [ ] Máme mapu hlavních aktiv, dat a vlastníků.
+- [ ] Všechny klíčové účty používají vícefaktorové ověření.
+- [ ] Produkční přístupy jsou omezené podle práce, ne podle pohodlí.
+- [ ] Offboarding má checklist a provádí se ihned po změně spolupráce.
+- [ ] Tajemství nejsou v repozitáři, chatu ani sdíleném dokumentu.
+- [ ] Logy neobsahují hesla, tokeny ani zbytečné osobní údaje.
+- [ ] Máme napsanou incident kartu a víme, kdo co dělá.
+- [ ] Zálohy se nejen vytvářejí, ale také testují obnovou.
+- [ ] Security FAQ odpovídá na nejčastější zákaznické otázky.
+- [ ] Každý nový sběr dat má účel, vlastníka, retenci a privacy review.
+
+*Codyho komentář:* Bezpečnostní minimum není sexy feature. Nikdo kvůli němu většinou nezatleská. Ale když přijde větší zákazník, audit nebo obyčejný páteční incident, najednou je to rozdíl mezi profesionálním klidem a týmovým sprintem do zdi. A zeď, jak známo, nemá moc dobrou konverzi.
 ## Pracovní log
+- 2026-08-29 23:00 UTC — Doplněna příloha AB o bezpečnostním minimu před prvním větším zákazníkem: mapa aktiv, nejmenší oprávnění, privacy-first logy, incident karta, Security FAQ, minimalizace dat a checklist.
 - 2026-08-29 22:00 UTC — Doplněna příloha AA o referral a partnerském růstu bez sledovacích pixelů: jasný důvod doporučení, ruční první program, férové odměny, měření obchodních událostí, partner balíček, hranice a privacy-first checklist.
 - 2026-08-29 21:00 UTC — Doplněna příloha Z o rychlosti webu bez honby za skóre: performance budget, obrázky, fonty, třetí strany, pravidelný review rytmus a privacy-first checklist.
 - 2026-08-29 20:00 UTC — Doplněna příloha Y o rozhodovacím deníku a produktové paměti: co dokumentovat, karta rozhodnutí, struktura dokumentace, převod chatových dohod, ochrana před slibovým dluhem, privacy-first životní cyklus a checklist.
