@@ -4771,7 +4771,159 @@ Před spuštěním testu si odškrtni:
 
 Experimenty mají zmenšovat nejistotu. Když je děláš dobře, pomáhají týmu učit se rychleji, aniž by uživatel platil soukromím. A to je přesně ten typ růstu, který můžeš obhájit před zákazníkem, právníkem i vlastním svědomím.
 
+## Příloha W: Interní AI asistent bez úniku know-how
+
+AI asistent může malému týmu ušetřit hodiny týdně. Může připravit první verzi e-mailu, shrnout ticket, navrhnout strukturu článku, zkontrolovat edge cases v produktu nebo pomoct s dokumentací. Jenže stejný asistent se snadno stane nenápadnou dírou do firemních dat, pokud do něj všichni sypou smlouvy, exporty zákazníků a interní strategie bez pravidel.
+
+Cílem není AI zakázat. To by bylo asi stejně praktické jako zakázat lidem používat vyhledávač, protože někdo kdysi klikl na špatný výsledek. Cílem je nastavit jednoduchý pracovní režim: co do asistenta patří, co ne, jak kontrolovat výstupy a jak z AI udělat pomocníka místo nekontrolovaného externího kolegy.
+
+### W.1 Začni typy úloh, ne konkrétním nástrojem
+
+Nejdřív si napiš, kde má AI opravdu pomáhat. Malý tým nepotřebuje „AI strategii“ na třicet slidů. Potřebuje seznam opakovaných úloh, které žerou pozornost a dají se bezpečně zrychlit.
+
+Dobré první kandidáty:
+
+- návrhy blogových osnov a pracovních checklistů,
+- přeformulování technického textu do lidské řeči,
+- první návrhy odpovědí na běžné dotazy,
+- shrnutí anonymizovaných poznámek z rozhovorů,
+- kontrola konzistence landing page,
+- návrhy testovacích scénářů pro novou funkci,
+- tvorba interních šablon a postupů.
+
+Špatní první kandidáti:
+
+- rozhodování o zákazníkovi bez lidské kontroly,
+- práce s kompletní databází osobních údajů,
+- automatické odpovědi v citlivé podpoře,
+- právní, účetní nebo bezpečnostní závěry bez odborného review,
+- generování veřejných slibů, které nikdo v týmu neumí ověřit.
+
+AI má být páka na jasnou práci, ne magická náhrada úsudku. Když nevíš, jak by úlohu udělal dobrý člověk, AI ti jen rychleji vyrobí sebevědomý zmatek.
+
+### W.2 Udělej datový semafor
+
+Nejjednodušší pravidlo pro tým je semafor. Každý typ vstupu patří do jedné barvy.
+
+**Zelená:** lze používat běžně.
+
+- veřejné texty z webu,
+- vlastní drafty bez citlivých údajů,
+- anonymní technické popisy,
+- obecné produktové otázky,
+- fiktivní příklady a syntetická data.
+
+**Oranžová:** použít jen po úpravě nebo se schválením.
+
+- anonymizované poznámky ze zákaznického hovoru,
+- interní procesy bez obchodních tajemství,
+- části kódu bez tajných klíčů a zákaznických dat,
+- agregované metriky bez identifikace lidí,
+- nabídky a e-maily po odstranění jmen, cen nebo neveřejných detailů.
+
+**Červená:** nevkládat do externího asistenta.
+
+- hesla, tokeny, API klíče a recovery kódy,
+- kompletní exporty zákazníků,
+- zdravotní, finanční nebo jiné vysoce citlivé údaje,
+- neveřejné smlouvy bez výslovného rozhodnutí,
+- bezpečnostní incidenty s identifikovatelnými osobami,
+- data, která zákazník svěřil jen pro konkrétní účel.
+
+Semafor dej do interního playbooku a připomeň ho přímo v šablonách promptů. Lidé ve spěchu nepřemýšlí v odstavcích zásad. Přemýšlí stylem: „můžu to sem vložit, nebo je to červené?“
+
+### W.3 Šablony promptů chrání kvalitu i soukromí
+
+Když každý píše prompty od nuly, kvalita lítá a pravidla se zapomínají. Vytvoř pár interních šablon pro opakované úlohy.
+
+Příklad pro shrnutí zákaznického rozhovoru:
+
+```text
+Jsi produktový asistent. Shrň anonymizované poznámky z rozhovoru.
+Nepřidávej fakta, která v poznámkách nejsou.
+Rozděl výstup na: problém, kontext, citace bez identifikace, signály hodnoty, rizika, další otázky.
+Pokud narazíš na osobní údaj nebo tajemství, označ ho jako [ODSTRANIT] místo opakování.
+
+Poznámky:
+[vložit anonymizovaný text]
+```
+
+Příklad pro kontrolu landing page:
+
+```text
+Zkontroluj text landing page pro B2B SaaS.
+Hledej nejasnou nabídku, slabé CTA, chybějící důkaz, přehnané sliby a zbytečný sběr dat.
+Výstup dej jako seznam konkrétních úprav. Neřeš design, pokud text přímo nebrání pochopení.
+
+Text stránky:
+[vložit text]
+```
+
+Šablona má tři výhody: zrychlí práci, sjednotí výstupy a připomene hranice. To je nudné. Nudné je dobré. Nudné procesy totiž obvykle nepřekvapí právníka v pátek večer.
+
+### W.4 Výstup AI ber jako návrh, ne autoritu
+
+AI umí znít přesvědčivě i ve chvíli, kdy si elegantně vymýšlí. Proto musí mít každý typ výstupu jasné review.
+
+Praktická pravidla:
+
+- Veřejný text vždy čte člověk, který rozumí nabídce.
+- Technický návrh kontroluje někdo, kdo zná systém a dopady na provoz.
+- Právní, bezpečnostní a finanční tvrzení se buď ověří ze zdroje, nebo se smažou.
+- Citace, statistiky a aktuální tvrzení musí mít odkaz na zdroj.
+- AI nesmí sama poslat zákazníkovi citlivou odpověď bez kontroly.
+
+Do workflow přidej krátkou otázku: „Co by se stalo, kdyby byl tenhle výstup špatně?“ Pokud odpověď zní „trochu trapas“, stačí lehké review. Pokud odpověď zní „ztratíme zákazníka, porušíme slib nebo zveřejníme interní data“, review musí být důkladné.
+
+### W.5 Interní znalosti dávej AI po malých dávkách
+
+Velké firmy často sní o obří znalostní bázi napojené na všechno. Malý tým by měl začít opačně: dát asistentovi jen kontext potřebný pro konkrétní úkol.
+
+Místo nahrávání celé dokumentace použij pracovní balíček:
+
+- cíl úkolu,
+- relevantní část produktu,
+- tón komunikace,
+- omezení a zakázané sliby,
+- příklady dobrých odpovědí,
+- anonymizovaný vstup.
+
+Tím snížíš riziko úniku a zároveň dostaneš lepší výsledek. AI nepotřebuje vědět všechno. Potřebuje vědět správné věci pro aktuální práci. Stejně jako člověk na poradě, jen s menší spotřebou kávy.
+
+### W.6 Privacy-first pravidla pro AI provoz
+
+Pro Dreamind styl bych nastavil minimum takhle:
+
+- Preferuj evropský provoz nebo alespoň jasně popsané zpracování dat.
+- Vypni ukládání vstupů pro trénování, pokud to daný nástroj umožňuje.
+- Neposílej do AI tajné klíče, osobní exporty ani kompletní zákaznické databáze.
+- Pro zákaznická data používej anonymizaci a datovou minimalizaci.
+- Veřejné texty ověřuj proti reálné nabídce a zdrojům.
+- Udržuj seznam schválených AI nástrojů a účelů použití.
+- Pravidelně maž historii, která už není potřeba pro práci.
+- Odděl experimentování od produkčního používání.
+
+*Codyho komentář:* AI nástroj bez pravidel je jako sdílený Google Sheet s názvem „final_final_new_copy_2“. Chvíli to funguje, potom už jen doufáš, že se toho nikdo nezeptá při auditu.
+
+### W.7 Checklist: AI asistent, kterému se dá věřit
+
+Před zapojením AI do běžné práce si odškrtni:
+
+- [ ] Máme vybrané konkrétní úlohy, kde AI pomáhá.
+- [ ] Máme datový semafor pro zelené, oranžové a červené vstupy.
+- [ ] Tým ví, že tajné klíče a osobní exporty do AI nepatří.
+- [ ] Pro opakované úlohy existují šablony promptů.
+- [ ] Veřejné výstupy prochází lidskou kontrolou.
+- [ ] Aktuální tvrzení, čísla a právní závěry se ověřují ze zdrojů.
+- [ ] Víme, kde se historie a vstupy ukládají.
+- [ ] Máme seznam schválených nástrojů a účelů.
+- [ ] Citlivé případy mají přísnější review.
+- [ ] Pravidla jsou v playbooku, ne jen v hlavě zakladatele.
+
+Dobře nastavený AI asistent nezrychluje chaos. Zrychluje práci, která už má směr, hranice a odpovědnost. A přesně tam dává malému týmu největší smysl: méně rutiny, víc soustředění a žádná zbytečná datová stopa navíc.
+
 ## Pracovní log
+- 2026-08-29 18:01 UTC — Doplněna příloha W o interním AI asistentovi bez úniku know-how: vhodné úlohy, datový semafor, šablony promptů, review výstupů, práce s interním kontextem, privacy-first pravidla a checklist.
 - 2026-08-29 17:01 UTC — Doplněna příloha V o experimentech a A/B testech bez šmírovací laboratoře: hypotézy, primární metriky, alternativy ke klasickému A/B testu pro malé týmy, privacy-first pravidla, experiment karta, vyhodnocení a checklist.
 - 2026-08-29 16:00 UTC — Doplněna příloha U o produktové analytice bez šmírování: rozhodovací otázky, aktivační cesta, event katalog, agregace místo sledování jednotlivců, týdenní report, privacy-first pravidla a checklist.
 - 2026-08-29 15:00 UTC — Doplněna příloha T o prevenci churnu: definice zdravého zákazníka, typy rizik, jednoduché health score bez invazivního sledování, včasný kontakt, churn interview, férový offboarding a checklist.
