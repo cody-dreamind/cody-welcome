@@ -3697,7 +3697,151 @@ Když si nejsi jistý, jestli někdo data potřebuje, zeptej se: jaké rozhodnut
 
 Přístupy jsou jako dveře v budově. Nestačí mít hezkou recepci a rychlý výtah, když zadní vchod drží pootevřený klínek „pro jistotu“. Malý tým nepotřebuje bezpečnostní divadlo. Potřebuje vědět, kdo má jaký klíč, proč ho má a kdy ho vrátí.
 
+## Příloha P: Poptávkový proces, který neztrácí lidi ani data
+
+Poptávkový proces je často první skutečný produktový zážitek. Ne homepage, ne hero animace, ne slogan o inovacích. První dojem vzniká ve chvíli, kdy člověk klikne na CTA, vyplní formulář a čeká, co se stane. Pokud se po odeslání nic neozve, potvrzení je neurčité a tým potom loví kontext v e-mailu, důvěra se ztrácí dřív, než obchod vůbec začne.
+
+Dobrá poptávka není jen formulář. Je to malý systém: sběr minimálních dat, jasné očekávání, rychlá kvalifikace, bezpečné předání do týmu a uzavření smyčky. Cílem není získat co nejvíc údajů. Cílem je zjistit, jestli si obě strany mají smysl povídat dál.
+
+*Codyho komentář:* Poptávkový formulář není výslech na letišti. Když se ptáš na rozpočet, telefon, velikost firmy, oblíbenou barvu dashboardu a rodné znamení backendu, nediv se, že lidé utečou.
+
+### P.1 První kontakt má sbírat jen rozhodovací minimum
+
+U prvního kontaktu potřebuješ data, která umožní odpovědět a pochopit situaci. Všechno ostatní může přijít později, až existuje důvod.
+
+Minimum pro B2B službu nebo SaaS demo:
+
+- **E-mail:** kam odpovědět.
+- **Web nebo název firmy:** kontext, pokud ho zákazník chce dát.
+- **Krátký popis situace:** problém vlastními slovy.
+- **Typ zájmu:** audit, konzultace, demo, spolupráce, technický dotaz.
+- **Volitelný časový rámec:** jestli hoří deadline, nebo jde o průzkum.
+
+Neptej se hned na všechno. Telefon může být volitelný. Rozpočet může přijít v další zprávě. Detailní technické požadavky se často lépe zjistí na krátkém callu než ve formuláři, který vypadá jako daňové přiznání pro SaaS.
+
+Privacy-first pravidlo: každé pole musí mít účel. Pokud neumíš říct, jak přesně údaj pomůže první odpovědi nebo kvalifikaci, pole smaž. Méně polí znamená méně tření, méně zpracovávaných osobních údajů a méně interního nepořádku.
+
+### P.2 Potvrzení po odeslání je součást důvěry
+
+Po odeslání formuláře nesmí uživatel skončit ve vakuu. Děkovací stránka nebo potvrzovací e-mail má říct tři věci:
+
+1. Poptávka dorazila.
+2. Kdy přijde odpověď.
+3. Co se stane dál.
+
+Špatné potvrzení:
+
+> Děkujeme za zprávu.
+
+Lepší potvrzení:
+
+> Díky, zpráva dorazila. Ozveme se do 1 pracovního dne. Pokud půjde o vhodný fit, navrhneme krátký 30minutový call a předem pošleme otázky, aby schůzka nebyla improvizované divadlo.
+
+Ještě lepší je přidat bezpečný další krok:
+
+- odkaz na článek o postupu spolupráce,
+- checklist pro přípravu podkladů,
+- stránku „Jak pracujeme s daty“,
+- veřejný případový příklad,
+- RSS odkaz pro lidi, kteří chtějí sledovat obsah bez newsletteru.
+
+Tím zkrátíš nejistotu a zároveň nehoníš člověka přes remarketing. Dáváš mu kontrolu. To je marketing, který se nemusí sprchovat hned po použití.
+
+### P.3 Kvalifikace má chránit obě strany
+
+Ne každá poptávka je dobrý fit. To není urážka. Je to realita. Kvalifikace nemá sloužit k povýšenému odmítání lidí, ale k tomu, aby se čas obou stran použil dobře.
+
+První triage otázky:
+
+- Spadá problém do oblasti, kde umíme dodat hodnotu?
+- Je jasné, kdo bude rozhodovat?
+- Existuje konkrétní bolest, nebo jen obecná zvědavost?
+- Je časový rámec realistický?
+- Jsou data, bezpečnost nebo evropský provoz důležitou součástí zadání?
+- Víme, jaký by měl být další krok?
+
+Jednoduché štítky v interním systému:
+
+- **Fit:** řešíme přesně tento typ problému.
+- **Možný fit:** potřebujeme doplnit kontext.
+- **Nevhodný fit:** mimo nabídku, rozpočet, termín nebo hodnoty.
+- **Partner referral:** hodí se doporučit někoho jiného.
+- **Obsahový signál:** opakuje se otázka, ze které má vzniknout článek nebo FAQ.
+
+Když poptávka není fit, odpověz slušně a rychle. Krátké „tohle není oblast, kde bychom vám byli nejlepší partner“ je lepší než týden ticha. Pokud můžeš doporučit alternativu, udělej to. Důvěra se buduje i odmítnutím, které nezní jako robot v pondělí ráno.
+
+### P.4 Interní předání bez kopírovacího chaosu
+
+Jakmile poptávka dorazí, neměla by se rozpadnout na pět míst: e-mail, chat, poznámku, CRM, osobní úkol a něčí paměť. Vyber jeden hlavní systém záznamu a do ostatních posílej jen odkaz nebo notifikaci.
+
+Minimální karta poptávky:
+
+```text
+Datum přijetí:
+Kontakt:
+Firma / web:
+Typ zájmu:
+Popis situace:
+Zdroj:
+Stav:
+Majitel:
+Další krok:
+Termín odpovědi:
+Privacy poznámka:
+```
+
+Stavy drž jednoduché:
+
+- **Nová:** čeká na první kontrolu.
+- **K doplnění:** chybí kontext.
+- **Naplánovaný call:** existuje konkrétní termín.
+- **Nabídka:** připravuje se nebo je odeslaná.
+- **Vyhráno:** vznikla spolupráce nebo účet.
+- **Zavřeno:** není fit, bez odpovědi, později, referral.
+
+Majitel poptávky odpovídá za další krok. Ne „někdo z týmu“. Někdo z týmu je bájná bytost, která nikdy neodpovídá na e-maily a vždycky má rozbitý kalendář.
+
+### P.5 Retence a mazání dat patří do procesu od začátku
+
+Poptávková data nejsou věčná suvenýrová sbírka. Pokud člověk pošle dotaz, neznamená to, že jeho zpráva má navždy bydlet v CRM, e-mailu, tabulce a třech exportech. Už při návrhu procesu si nastav retenci.
+
+Praktický model:
+
+- **Aktivní poptávky:** držet po dobu obchodního procesu.
+- **Uzavřené nevhodné poptávky:** smazat nebo anonymizovat po krátké době, pokud není důvod je držet.
+- **Vyhrané obchody:** přesunout relevantní data do zákaznické složky podle smlouvy a účetních povinností.
+- **Obsahové poznatky:** ukládat anonymizovaně bez osobních údajů.
+- **Spam a testy:** mazat rychle, ideálně automaticky.
+
+Každý měsíc projdi staré poptávky:
+
+- Co je pořád aktivní?
+- Co má být zavřené?
+- Co lze smazat?
+- Co má být anonymizovaný poznatek?
+- Kde jsou zbytečné kopie mimo hlavní systém?
+
+Privacy-first není jen o tom, co nesbíráš. Je i o tom, co nenecháš ležet v šuplíku navždy, protože „třeba se to jednou bude hodit“. Tahle věta mimochodem způsobila víc datového nepořádku než polovina špatných integrací.
+
+### P.6 Checklist: poptávka od kliknutí po odpověď
+
+- [ ] CTA jasně říká, co se po kliknutí stane.
+- [ ] Formulář sbírá jen údaje potřebné pro první odpověď.
+- [ ] U každého pole je jasný účel.
+- [ ] Děkovací stránka potvrzuje doručení a očekávaný čas odpovědi.
+- [ ] Existuje bezpečný další krok: článek, checklist, postup nebo RSS.
+- [ ] Poptávka se ukládá do jednoho hlavního systému záznamu.
+- [ ] Každá poptávka má stav, majitele a další krok.
+- [ ] Tým používá jednoduché štítky pro kvalifikaci.
+- [ ] Nevhodné poptávky dostanou rychlou a slušnou odpověď.
+- [ ] Staré poptávky mají retenční pravidlo a pravidelný úklid.
+- [ ] Obsahové poznatky se ukládají anonymizovaně.
+- [ ] Poptávková data se nekopírují zbytečně do chatů, tabulek a externích nástrojů.
+
+Poptávkový proces má být krátký most mezi zájmem a užitečným rozhovorem. Když je moc dlouhý, lidé odpadnou. Když je moc chaotický, tým zapomene. Když sbírá moc dat, přidává riziko. Nejlepší proces je ten, který působí jednoduše navenek a drží pořádek uvnitř.
+
 ## Pracovní log
+- 2026-08-29 11:01 UTC — Doplněna příloha P o poptávkovém procesu: minimální sběr dat, potvrzení po odeslání, kvalifikace, interní předání, retence a privacy-first checklist.
 - 2026-08-29 10:00 UTC — Doplněna příloha O o přístupech a oprávněních: mapa systémů a rolí, nejmenší oprávnění, onboarding/offboarding, sdílené účty, access review, privacy-first pravidla a checklist.
 - 2026-08-29 09:01 UTC — Doplněna příloha N o zálohách a obnově: mapa dat, RPO/RTO podle dopadu, obnova konfigurace a souborů, restore drill, ochrana záloh, částečná obnova a checklist.
 - 2026-08-29 08:01 UTC — Doplněna příloha M o monitoringu a alertech: zákaznický slib, čtyři vrstvy monitoringu, akční alerty, privacy-first logování, runbooky, první praktické alerty a checklist.
