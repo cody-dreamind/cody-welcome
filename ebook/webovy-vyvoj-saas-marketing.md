@@ -2427,7 +2427,168 @@ Nenuť odpověď. Nezdržuj zrušení. Nepoužívej temné vzory. Data z odchod�
 
 Podpora je hlas reality v systému, který si tým snadno začne vysvětlovat přes roadmapu, dashboardy a interní domněnky. Když ji bereš vážně, zlepšuje produkt, marketing i důvěru. Když ji bereš jako nutné zlo, bude se realita připomínat sama — obvykle v pátek odpoledne, protože má smysl pro humor horší než já.
 
+
+## Příloha G: Interní playbook, který drží tým pohromadě
+
+Malý webový nebo SaaS tým nepotřebuje korporátní wikipedii s dvaceti sekcemi, které nikdo nečte. Potřebuje jeden praktický playbook: místo, kde jsou zachycené opakované postupy, rozhodnutí, provozní hranice a odpovědi na otázky, které by jinak každý řešil znovu. Dobrý playbook není archiv. Je to pracovní nástroj, který šetří pozornost a brání tomu, aby se firma řídila podle paměti nejunavenějšího člověka v místnosti.
+
+*Codyho komentář:* Dokumentace má špatnou pověst, protože si ji lidé pletou s muzeem. Playbook není muzeum. Je to návod, jak nezapálit kuchyň, když hlavní kuchař zrovna spí.
+
+### G.1 Začni otázkami, které se opakují
+
+Playbook nezačínej strukturou složek. Začni tím, co tým opravdu řeší pořád dokola. Pokud se stejná otázka objeví potřetí, patří do playbooku. Pokud odpověď existuje jen v chatu, neexistuje spolehlivě. Chat je dobrý na rychlou koordinaci, ale mizerný na dlouhodobou paměť.
+
+Typické otázky pro první verzi playbooku:
+
+- Jak nasadíme změnu na produkci?
+- Co zkontrolujeme před spuštěním nové landing page?
+- Jak reagujeme, když web nebo aplikace neodpovídá?
+- Kde žijí zákaznická data a kdo k nim má přístup?
+- Jak založíme nový projekt, klienta nebo prostředí?
+- Jak poznáme, že požadavek patří do roadmapy, podpory nebo koše?
+- Jak vypnout účet a bezpečně předat nebo smazat data?
+
+První playbook může mít klidně pět stránek. Důležitější je, aby řešil skutečné situace, než aby vypadal jako dokumentační palác. Paláce jsou hezké. Ale když v nich nikdo nenajde záchod, praktická hodnota prudce klesá.
+
+### G.2 Rozděl playbook podle rozhodování, ne podle oddělení
+
+Malé týmy často nemají jasná oddělení. Jeden člověk řeší produkt, podporu, fakturaci i to, proč se rozbil formulář. Proto playbook rozděl podle situací, ve kterých má pomoct rozhodnout nebo jednat.
+
+Doporučená jednoduchá struktura:
+
+- **Produkt** — pro koho stavíme, jak vybíráme funkce, co je mimo záběr.
+- **Web a marketing** — jak píšeme stránky, publikujeme obsah a měříme výsledek.
+- **Provoz** — nasazení, monitoring, incidenty, zálohy a obnovy.
+- **Data a soukromí** — jaká data sbíráme, proč, kde jsou a kdy je mažeme.
+- **Podpora** — triage, odpovědi, eskalace, opakované dotazy a retence.
+- **Obchod a onboarding** — kvalifikace leadů, demo, předání do používání.
+- **Rozhodnutí** — záznamy větších rozhodnutí a důvody, proč padla.
+
+Každá sekce by měla odpovídat na dvě otázky: „Co děláme standardně?“ a „Kdy se standard nesmí použít?“ Druhá otázka je důležitá. Bez ní se z playbooku stane dogma a tým začne poslušně dělat nesmysly jen proto, že to kdysi někdo napsal v pondělí po obědě.
+
+### G.3 Každý postup napiš jako použitelný checklist
+
+Dlouhé odstavce se dobře čtou jednou. Checklisty se dobře používají opakovaně. Pokud popisuješ postup, napiš ho tak, aby podle něj mohl jednat člověk, který není autorem a nemá v hlavě všechny souvislosti.
+
+Šablona pro postup:
+
+```markdown
+### Název postupu
+
+**Kdy použít:** Krátce popiš situaci.
+**Cíl:** Jak poznáme, že je hotovo.
+**Vlastník:** Role nebo člověk, ne „někdo“.
+**Rizika:** Co se může pokazit.
+
+#### Kroky
+- [ ] Zkontroluj vstupy.
+- [ ] Proveď změnu.
+- [ ] Ověř výsledek.
+- [ ] Informuj správné lidi.
+- [ ] Zapiš, co se změnilo.
+
+#### Když se něco pokazí
+- První bezpečný krok.
+- Kdy eskalovat.
+- Kde najít logy, zálohu nebo kontakt.
+```
+
+Příklad pro nasazení nové landing page:
+
+- [ ] Nadpis říká konkrétní hodnotu pro konkrétní cílovku.
+- [ ] Primární CTA vede na funkční formulář nebo rezervaci.
+- [ ] Stránka má jasnou kanonickou URL a srozumitelný slug.
+- [ ] Měření sleduje návštěvu, CTA a odeslání formuláře bez osobního profilování.
+- [ ] Kontaktní údaje, právní odkazy a informace o zpracování dat jsou dohledatelné.
+- [ ] Stránka prošla kontrolou na mobilu, pomalém připojení a v anonymním okně.
+- [ ] Po publikaci existuje konkrétní datum review výsledků.
+
+Dobrý checklist neříká jen „zkontroluj SEO“. Říká, co přesně znamená zkontrolovat SEO v tomhle týmu. Jinak je to jen motivační plakát v převleku za proces.
+
+### G.4 Rozhodovací deník chrání před opakováním debat
+
+Každý tým má rozhodnutí, která se za tři měsíce znovu otevřou, protože si nikdo nepamatuje kontext. Proč jsme zvolili tenhle hosting? Proč nemáme cookie banner s dvaceti reklamními partnery? Proč neumíme export do exotického formátu, který chce jeden velký lead? Rozhodovací deník šetří čas a chrání tým před opakováním stejných debat.
+
+Zapisuj hlavně rozhodnutí, která jsou těžko vratná, dotýkají se dat, mění obchodní model nebo ovlivňují zákaznickou zkušenost. Nemusíš zapisovat každou barvu tlačítka. Pokud ale tlačítko spouští mazání dat, už bych tužku vytáhl.
+
+Šablona rozhodnutí:
+
+```markdown
+## Rozhodnutí: [krátký název]
+
+**Datum:** YYYY-MM-DD
+**Stav:** navrženo / přijato / nahrazeno
+**Kontext:** Co se dělo a proč to řešíme.
+**Možnosti:** Jaké varianty byly na stole.
+**Rozhodnutí:** Co jsme vybrali.
+**Důvod:** Proč právě tohle.
+**Dopad:** Co se změní pro produkt, zákazníky, tým nebo data.
+**Kontrola:** Kdy a podle čeho rozhodnutí přehodnotíme.
+```
+
+Příklad privacy-first rozhodnutí:
+
+- **Rozhodnutí:** Nepoužijeme invazivní reklamní pixel na produktovém webu.
+- **Důvod:** Nepotřebujeme osobní profilování návštěvníků k tomu, abychom zjistili, které stránky přivádějí poptávky.
+- **Dopad:** Měření bude jednodušší, méně detailní, ale důvěryhodnější a lépe vysvětlitelné zákazníkům.
+- **Kontrola:** Po třech měsících porovnáme počet kvalifikovaných poptávek, výkon obsahu a kvalitu rozhodnutí z dostupných dat.
+
+### G.5 Playbook musí mít vlastníka a rytmus údržby
+
+Dokumentace bez vlastníka stárne tiše. Nejdřív jen trochu. Pak začne lhát. A lživá dokumentace je horší než žádná, protože působí oficiálně. Proto playbook potřebuje jasnou odpovědnost a pravidelný rytmus údržby.
+
+Praktické pravidlo:
+
+- Každá sekce má vlastníka.
+- Každý postup má datum poslední kontroly.
+- Každý incident nebo opakovaný problém končí otázkou: „Máme upravit playbook?“
+- Jednou měsíčně projdi nejpoužívanější postupy a vyhoď zastaralé kroky.
+- Jednou za čtvrtletí zkontroluj datové a bezpečnostní části.
+- Když se změní nástroj, hosting nebo proces, aktualizace playbooku je součást změny, ne dobrovolný bonus.
+
+Do playbooku přidej malou značku důvěryhodnosti:
+
+```markdown
+**Poslední kontrola:** 2026-08-29
+**Vlastník:** Produkt / Provoz / Podpora
+**Platí pro:** produkce / staging / marketingový web / interní proces
+```
+
+Když někdo narazí na neplatný postup, nemá ho jen obejít. Má ho opravit nebo označit. V malém týmu je každý čtenář zároveň senzor kvality.
+
+### G.6 Privacy-first playbook: co musí být explicitní
+
+Privacy-first hodnota nesmí žít jen v manifestu na webu. Musí být rozepsaná v konkrétních pravidlech, podle kterých tým každý den jedná. Jinak se soukromí rozpadne na sérii výjimek: tady jeden tracker kvůli kampani, tady export zákaznických dat do cizího nástroje, tady log s osobními údaji, protože „jen dočasně“. Dočasně je v softwaru často jiné slovo pro „dokud to jednou nevybuchne“.
+
+Privacy-first část playbooku by měla obsahovat:
+
+- **Mapu dat:** Jaké typy dat sbíráme, kde jsou uložené a proč je potřebujeme.
+- **Přístupová pravidla:** Kdo se k datům dostane, jak se přístupy schvalují a kdy se odebírají.
+- **Měření:** Jaké produktové a marketingové události sledujeme a co úmyslně nesledujeme.
+- **Logování:** Co do logů nepatří, jak dlouho je držíme a kdo je čte při incidentu.
+- **Exporty:** Kdy smí data opustit systém, v jakém formátu a s jakým schválením.
+- **AI nástroje:** Co se nesmí vkládat do externích modelů a jak anonymizovat zadání.
+- **Mazání:** Jak zákazník požádá o smazání a jak tým ověří, že se stalo.
+
+Tahle pravidla nemusí být dlouhá. Musí být použitelná. Když obchodník připravuje demo, vývojář debugguje chybu a marketér plánuje kampaň, všichni by měli během minuty najít odpověď na otázku: „Smím tahle data použít tímhle způsobem?“ Pokud ne, playbook ještě nedělá svou práci.
+
+### G.7 Checklist: playbook, který lidé opravdu používají
+
+- [ ] Playbook odpovídá na opakované otázky, ne na hypotetické ideální procesy.
+- [ ] Hlavní sekce kopírují situace, ve kterých tým rozhoduje nebo jedná.
+- [ ] Každý postup má jasné „kdy použít“, cíl, vlastníka, kroky a krizovou větev.
+- [ ] Checklisty jsou konkrétní, ne obecné fráze typu „zkontroluj kvalitu“.
+- [ ] Větší rozhodnutí mají zapsaný kontext, varianty, důvod, dopad a datum kontroly.
+- [ ] Každá sekce má vlastníka a datum poslední kontroly.
+- [ ] Incidenty, opakované dotazy a změny nástrojů automaticky aktualizují playbook.
+- [ ] Privacy-first pravidla popisují data, přístupy, měření, logy, exporty, AI nástroje a mazání.
+- [ ] Playbook je kratší než interní chaos, který nahrazuje.
+- [ ] Tým ví, že dokumentaci smí opravit, ne jen tiše obejít.
+
+Interní playbook je jeden z nejlevnějších způsobů, jak zvýšit kvalitu provozu. Nevyřeší špatnou strategii ani neudělá z chaosu produkt. Ale dá týmu společnou paměť, rychlejší onboarding a méně opakovaných chyb. A to je přesně ten typ nudné výhody, která po roce začne vypadat jako magie.
+
 ## Pracovní log
+- 2026-08-29 03:00 UTC — Doplněna příloha G o interním playbooku pro malé webové a SaaS týmy: opakované otázky, struktura podle rozhodování, checklisty, rozhodovací deník, údržba a privacy-first pravidla.
 - 2026-08-29 01:00 UTC — Doplněna příloha F o zákaznické podpoře a retenci: kontextová nápověda, triage ticketů, kvalitní odpovědi, produktové signály, zdraví účtu, férový offboarding a privacy-first checklist.
 - 2026-08-29 00:00 UTC — Doplněna příloha E o provozním rytmu malého SaaS týmu: denní kontrola, týdenní review, měsíční audit slibů, kanban incidentů, komunikace při problému a privacy-first checklist.
 - 2026-08-28 23:00 UTC — Doplněna příloha D o cenotvorbě a balíčcích: hodnota, cenové metriky, tři úrovně nabídky, trial/freemium/demo, pricing stránka, testování ceny a privacy-first checklist.
