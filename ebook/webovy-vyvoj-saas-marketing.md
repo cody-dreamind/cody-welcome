@@ -4434,7 +4434,176 @@ Pokud zákazník odchází kvůli špatné zkušenosti, nebraň se reflexi. Krá
 
 Prevence churnu není trik, jak zákazníka udržet za každou cenu. Je to disciplína, která ti říká, jestli produkt opravdu pomáhá. Když pomáhá, signály zdraví jsou vidět. Když nepomáhá, dobrý systém tě upozorní dřív, než se z nespokojenosti stane tichý odchod.
 
+## Příloha U: Produktová analytika bez šmírování
+
+Produktová analytika má odpovědět na jednoduchou otázku: pomáhá produkt lidem dělat práci lépe? Nemá z týmu udělat partu detektivů, kteří v přímém přenosu sledují každé kliknutí. To je drahé, nepříjemné a často to ani nevede k lepším rozhodnutím. Malý SaaS tým potřebuje méně grafů, ale lepší otázky.
+
+Dobrá privacy-first analytika stojí na třech věcech: jasný produktový cíl, pár smysluplných událostí a pravidelný rytmus interpretace. Bez interpretace je dashboard jen barevný spořič obrazovky pro lidi, kteří mají moc rádi čáry.
+
+*Codyho komentář:* Když se tým ptá „kolik máme eventů?“, je to obvykle špatná otázka. Lepší otázka je: „které rozhodnutí díky těm datům uděláme jinak?“ Pokud žádné, event může jít pryč. Ano, i eventy mají právo na důstojný odchod.
+
+### U.1 Začni rozhodnutím, ne nástrojem
+
+Než vybereš analytický nástroj, napiš si seznam rozhodnutí, která chceš dělat lépe. Produktová analytika není inventář všeho, co se dá změřit. Je to podpora konkrétních rozhodnutí.
+
+Příklady dobrých rozhodovacích otázek:
+
+- Dokončí nový zákazník první hodnotnou akci během prvního týdne?
+- Který krok onboardingu nejčastěji blokuje aktivaci?
+- Používají zákazníci hlavní workflow opakovaně, nebo jen jednou ze zvědavosti?
+- Která funkce pomáhá udržet zákazníka a která je jen hezká dekorace v menu?
+- Kde zákazníci potřebují podporu, protože produkt není dost jasný?
+- Jaký typ účtu má nejvyšší šanci dostat se k placené hodnotě?
+
+Špatná otázka zní: „Co všechno můžeme trackovat?“ Technicky skoro všechno. Produktově skoro nic. Pokud data nevedou k rozhodnutí o onboardingu, UX, ceně, komunikaci, podpoře nebo prioritě ve vývoji, pravděpodobně je nepotřebuješ.
+
+Praktický postup:
+
+1. Vyber jeden produktový problém na tento měsíc.
+2. Napiš rozhodnutí, které chceš na konci měsíce udělat.
+3. Vyber maximálně tři metriky, které k rozhodnutí opravdu pomůžou.
+4. Doplň kvalitativní kontext ze zákaznických rozhovorů, podpory a review.
+5. Po rozhodnutí smaž nebo archivuj metriky, které už nejsou užitečné.
+
+### U.2 Měř aktivační cestu, ne každé kliknutí
+
+Aktivace je okamžik, kdy zákazník poprvé zažije slíbenou hodnotu. U každého produktu vypadá jinak, ale vždy by měla být konkrétní. „Uživatel se přihlásil“ není aktivace. To je jen digitální zaklepání na dveře.
+
+Příklady aktivačních momentů:
+
+- CRM: uživatel založil první obchodní příležitost a přiřadil vlastníka.
+- Portál pro klienty: zákazník zadal první požadavek a vidí jeho stav.
+- Analytika webu: tým vidí první týdenní přehled návštěvnosti a ví, co upravit.
+- Fakturační nástroj: firma vystavila první fakturu a odeslala ji klientovi.
+- Projektový nástroj: tým dokončil první úkol přes nový workflow, ne mimo něj.
+
+K aktivační cestě si nakresli jednoduchý funnel:
+
+1. účet vytvořen,
+2. základní nastavení dokončeno,
+3. první data nebo obsah vložený,
+4. první užitečná akce dokončena,
+5. hodnota potvrzená zákazníkem nebo opakovaným použitím.
+
+Nemusíš měřit každý meziklik. Stačí události, které říkají, jestli se zákazník přibližuje k hodnotě. Pokud někdo třikrát otevře nastavení, není to nutně signál. Pokud nastaví roli, importuje data a pozve kolegu, signál to je.
+
+### U.3 Události pojmenuj lidsky a stabilně
+
+Názvy událostí jsou malá věc, dokud se nerozrostou do chaosu typu `btn_click_2_final_real_new`. Pak už nikdo neví, co graf znamená, a tým začne věřit hlavně pocitům. To je rychlá cesta zpátky k věštění z křišťálové koule, jen s dražším softwarem.
+
+Dobrá událost má jasný význam:
+
+- `account_created` — vznikl účet nebo workspace,
+- `onboarding_completed` — zákazník dokončil domluvené minimum nastavení,
+- `project_created` — vznikl první pracovní projekt,
+- `invite_sent` — administrátor pozval dalšího člověka,
+- `report_viewed` — zákazník otevřel hodnotový report,
+- `billing_plan_changed` — změnil se tarif nebo rozsah.
+
+Ke každé události si udržuj malý event katalog:
+
+- **Název události:** stabilní technický název.
+- **Popis:** co přesně znamená a kdy se posílá.
+- **Vlastník:** kdo rozhoduje o změně definice.
+- **Důvod:** k jakému rozhodnutí událost slouží.
+- **Vlastnosti:** jen nezbytné parametry, ideálně bez osobních dat.
+- **Retence:** jak dlouho má smysl událost držet.
+
+Příklad:
+
+> `report_viewed` — zákazník otevřel měsíční report v aplikaci. Slouží k ověření, jestli se report dostává k hodnotě. Vlastnosti: typ reportu, plán zákazníka, anonymizovaná velikost účtu. Neposílat jméno uživatele, e-mail ani obsah reportu.
+
+Stabilita je důležitější než dokonalost. Když událost přejmenuješ každé dva týdny, ztratíš možnost porovnání. Když změníš význam události bez poznámky, starý graf začne lhát. A graf, který lže, je horší než žádný graf, protože vypadá sebevědomě.
+
+### U.4 Agregace porazí sledování jednotlivců
+
+Privacy-first přístup neznamená, že nesmíš měřit nic. Znamená, že měříš přiměřeně, s jasným účelem a bez zbytečného osobního detailu. U produktového rozhodování často nepotřebuješ identitu konkrétního člověka. Potřebuješ vidět vzor.
+
+Místo:
+
+- „Jana Nováková klikla pětkrát na export v 10:43.“
+
+Lepší:
+
+- „42 % účtů v tarifu Team použilo export alespoň jednou za posledních 30 dní.“
+
+Místo:
+
+- „Konkrétní obchodník nedokončil krok tři.“
+
+Lepší:
+
+- „Největší propad v onboardingu je mezi importem dat a pozváním týmu.“
+
+Individuální úroveň může dávat smysl u podpory, bezpečnosti nebo explicitně domluvené zákaznické péče. I tam ale platí: sbírej jen to, co pomáhá vyřešit problém, a vysvětli to v dokumentaci nebo podmínkách služby. Pokud by ses styděl zákazníkovi říct, že danou věc sleduješ, je to silný signál, že ji sledovat nemáš.
+
+### U.5 Kombinuj čísla s rozhovory
+
+Čísla ukazují, co se děje. Neříkají sama od sebe proč. Když vidíš propad v onboardingu, může to znamenat špatný UX, nejasný text, chybějící oprávnění, interní odpor zákazníka nebo úplně jiný problém. Bez rozhovoru jen hádáš elegantněji.
+
+Dobrá analytická iterace:
+
+1. Najdi vzor v agregovaných datech.
+2. Vyber několik zákazníků nebo situací, kde je vzor vidět.
+3. Ověř příčinu krátkým rozhovorem, podporou nebo review.
+4. Navrhni jednu změnu v produktu nebo komunikaci.
+5. Předem urči, jak poznáš, že změna pomohla.
+
+Příklad:
+
+Data ukážou, že hodně účtů vytvoří projekt, ale nepozve tým. Rozhovory ukážou, že administrátoři nechtějí kolegy pozvat, dokud nemají připravené šablony. Řešení není agresivnější e-mail „pozvěte tým“. Řešení je nabídnout tři výchozí šablony a teprve potom pozvánku.
+
+### U.6 Týdenní produktový report pro malý tým
+
+Malý tým nepotřebuje deset dashboardů. Potřebuje jeden týdenní report, který jde přečíst za deset minut a vede k rozhodnutí.
+
+Struktura reportu:
+
+- **Aktivace:** kolik nových účtů došlo k první hodnotě.
+- **Adopce:** kolik aktivních účtů použilo hlavní workflow.
+- **Retence:** kolik účtů se vrátilo k hlavní hodnotě opakovaně.
+- **Tření:** kde lidé končí, žádají podporu nebo obcházejí systém.
+- **Kvalitativní signály:** tři poznámky z podpory, prodeje nebo review.
+- **Rozhodnutí týdne:** jedna věc, kterou tým změní.
+
+Ukázka rozhodnutí týdne:
+
+> Tento týden upravíme onboarding: před pozváním týmu nabídneme výběr šablony. Úspěch poznáme tak, že větší podíl nových účtů po vytvoření projektu pozve aspoň jednoho kolegu do sedmi dnů.
+
+Report bez rozhodnutí je jen kronika. Hezká, ale pasivní. Každý report by měl skončit jednou akcí: změnit text, upravit krok, zavolat zákazníkovi, smazat zbytečnou metriku, doplnit nápovědu nebo odložit nápad, který data nepodporují.
+
+### U.7 Privacy-first pravidla pro produktovou analytiku
+
+Produktová data patří mezi nejcitlivější provozní signály. Ukazují, jak zákazníci pracují, kde se zasekávají a jak produkt zapadá do jejich firmy. Proto s nimi zacházej jako s důvěrou, ne jako s hračkou pro dashboardy.
+
+Pravidla:
+
+- Měř jen události, které mají jasný produktový nebo provozní účel.
+- Preferuj agregované údaje před sledováním jednotlivců.
+- Neposílej do analytiky e-maily, jména, obsah dokumentů, zprávy ani zákaznická tajemství.
+- U každé události měj vlastníka, popis a důvod existence.
+- Nastav retenci podle užitečnosti, ne podle toho, kolik se vejde do databáze.
+- Odděl produktovou analytiku od marketingového sledování.
+- Vysvětli zákazníkům srozumitelně, co měříš a proč.
+- Evropský provoz, kontrola nad daty a možnost exportu jsou výhoda, ne nepříjemná administrativní vsuvka.
+
+### U.8 Checklist: analytika, která pomáhá produktu
+
+- [ ] Máme napsané rozhodnutí, které má analytika podpořit.
+- [ ] Známe aktivační moment produktu nebo služby.
+- [ ] Měříme hlavní kroky k hodnotě, ne každý pohyb myší.
+- [ ] Každá událost má popis, vlastníka a důvod.
+- [ ] Do eventů neposíláme osobní údaje ani obsah zákaznické práce.
+- [ ] Preferujeme agregované metriky před individuálním sledováním.
+- [ ] Kombinujeme čísla s rozhovory, podporou a zákaznickým review.
+- [ ] Týdenní report končí jedním rozhodnutím nebo akcí.
+- [ ] Staré a nepoužívané metriky pravidelně mažeme nebo archivujeme.
+- [ ] Retence produktových dat odpovídá jejich účelu.
+
+Produktová analytika má být kompas, ne kamerový systém. Když ji postavíš dobře, tým vidí, kde produkt doručuje hodnotu, kde zákazník tápe a co má smysl zlepšit příště. A když ji postavíš privacy-first, zákazník nemusí platit důvěrou za to, že chce lepší software.
+
 ## Pracovní log
+- 2026-08-29 16:00 UTC — Doplněna příloha U o produktové analytice bez šmírování: rozhodovací otázky, aktivační cesta, event katalog, agregace místo sledování jednotlivců, týdenní report, privacy-first pravidla a checklist.
 - 2026-08-29 15:00 UTC — Doplněna příloha T o prevenci churnu: definice zdravého zákazníka, typy rizik, jednoduché health score bez invazivního sledování, včasný kontakt, churn interview, férový offboarding a checklist.
 - 2026-08-29 14:00 UTC — Doplněna příloha S o renewalu a pokračování spolupráce: začátek už při podpisu, renewal karta, signály pokračování, konkrétní konverzace, práce se slevou, value recap, privacy-first pravidla a checklist.
 - 2026-08-29 13:00 UTC — Doplněna příloha R o prvním zákaznickém review: práce se slíbenou hodnotou, agenda, zpracování kritiky, férové rozšíření, etické reference, rytmus review a checklist.
