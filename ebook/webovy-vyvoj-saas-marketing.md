@@ -4301,7 +4301,141 @@ Privacy-first renewal není slabší obchod. Je to obchod, který zákazníkovi 
 
 Renewal je nejlepší, když nepůsobí jako renewal. Když celý vztah průběžně ukazuje hodnotu, konec období není dramatický cliffhanger. Je to jen přirozený bod, kde si obě strany řeknou: dává to smysl, víme proč a víme, co dál.
 
+## Příloha T: Prevence churnu dřív, než zákazník potichu odejde
+
+Renewal řeší pokračování spolupráce. Churn — tedy odchod zákazníka, zrušení tarifu nebo tiché vyhasnutí používání — řeší opačnou stranu stejné mince. Největší chyba je čekat, až zákazník napíše „rušíme“. V tu chvíli už často neřešíš problém. Řešíš důsledek problému, který byl vidět týdny nebo měsíce předem.
+
+U malého SaaS nebo webové služby není cílem vybudovat sledovací centrálu, která ví, kdo si v úterý v 9:43 pohnul kurzorem. Cílem je včas poznat, že zákazník nedostává slíbenou hodnotu, a férově zasáhnout. Privacy-first prevence churnu stojí na jednoduchých signálech, lidském kontextu a jasném rytmu péče.
+
+*Codyho komentář:* Churn je málokdy blesk z čistého nebe. Spíš je to pomalé zhasínání světel. Jenže když máš v ruce jen faktury a dobrý pocit, všimneš si až ve chvíli, kdy je v místnosti tma a někdo odnesl židle.
+
+### T.1 Nejdřív si definuj zdravého zákazníka
+
+Než začneš řešit rizika, napiš si, jak vypadá zdravý zákazník. Ne obecně, ale pro konkrétní produkt, službu nebo tarif. Zdraví účtu se nemá měřit počtem kliknutí. Má se měřit tím, jestli zákazník opakovaně dělá činnosti, které vedou ke slíbenému výsledku.
+
+Příklad pro zákaznický portál:
+
+- zákazník má nastavené hlavní kontakty a role,
+- tým zadává požadavky do portálu místo e-mailu,
+- požadavky mají stav a vlastníka,
+- klienti vidí průběh řešení bez dotazů navíc,
+- jednou měsíčně vzniká přehled pro vedení.
+
+Příklad pro webovou službu:
+
+- zákazník schvaluje obsah a rozhodnutí včas,
+- web sbírá relevantní poptávky,
+- obchod ví, odkud poptávky přichází na rozumné úrovni,
+- technické incidenty se řeší podle domluveného postupu,
+- zákazník rozumí tomu, co se mění a proč.
+
+Zdravý zákazník nemusí používat každou funkci. Často je to naopak. Zdravý zákazník používá pár důležitých věcí pravidelně a chápe jejich hodnotu. Pokud někdo používá dvacet funkcí chaoticky, nemusí být zdravější než zákazník, který používá tři funkce dobře.
+
+### T.2 Rizikové signály rozděl podle typu
+
+Churn signály nejsou jen „nepřihlásil se“. U B2B produktů a služeb může být riziko technické, obchodní, vztahové i strategické. Když je hodíš do jednoho pytle, budeš posílat špatné zprávy ve špatný čas.
+
+Praktické typy signálů:
+
+- **Aktivační riziko:** zákazník nedokončil první klíčový krok, nemá importovaná data nebo neví, kde začít.
+- **Adopční riziko:** první člověk produkt chápe, ale tým ho nepoužívá.
+- **Hodnotové riziko:** produkt se používá, ale zákazník neumí pojmenovat výsledek.
+- **Vztahové riziko:** hlavní kontakt neodpovídá, mění se rozhodovatel nebo se komunikace přesune do ticha.
+- **Technické riziko:** opakují se chyby, pomalost, ruční workaroundy nebo integrační problémy.
+- **Rozpočtové riziko:** zákazník začíná řešit cenu bez diskuse o hodnotě.
+- **Strategické riziko:** změnila se priorita firmy, tým, trh nebo interní systém.
+
+Ke každému typu rizika si napiš vhodnou reakci. Aktivační riziko řeší krátký call a odstranění blokace. Hodnotové riziko řeší value recap. Technické riziko řeší incidentní kartu nebo backlog. Rozpočtové riziko řeší rozhovor o rozsahu, ne automatická sleva.
+
+### T.3 Udělej jednoduchý health score bez šmírování
+
+Health score má být pomůcka pro rozhodování, ne falešně přesný dashboard. Začni kvalitativně a postupně přidej jen metriky, které opravdu pomáhají.
+
+Jednoduchá stupnice:
+
+- **Zelená:** zákazník používá hlavní workflow, chápe hodnotu a komunikace funguje.
+- **Žlutá:** je vidět tření, nízká adopce, otevřené otázky nebo slabý důkaz hodnoty.
+- **Červená:** zákazník mlčí, nepoužívá klíčovou část, má nevyřešený problém nebo otevřeně zpochybňuje pokračování.
+
+Ke skóre přidej krátké zdůvodnění:
+
+> Žlutá — administrátor používá systém, ale servisní tým dál posílá požadavky e-mailem. Potřebujeme školení na reálných případech a upravit šablonu zadání.
+
+Privacy-first pravidlo: skóre nesmí stát na invazivním sledování jednotlivců. Většinou stačí agregované používání hlavních funkcí, support signály, stav onboardingu, obchodní kontext a poznámky z review. Nepotřebuješ vědět, kdo přesně kdy kam klikl, pokud podle toho neděláš férové a užitečné rozhodnutí.
+
+### T.4 Kontaktuj dřív, než začne záchranná akce
+
+Když zákazník zčervená v tabulce, nepiš panicky: „Vidíme, že už produkt nepoužíváte.“ To působí jako kombinace výčitky a kamerového systému. Lepší je navázat na domluvený cíl a otevřít konkrétní pomoc.
+
+Příklad zprávy:
+
+> Ahoj, při posledním review jsme řešili, že cílem je dostat servisní požadavky mimo e-mail. Vidím, že zatím zůstává část týmu u původního procesu. Dává smysl dát si 25 minut a projít, kde je největší tření? Připravím dva konkrétní návrhy, jak onboarding zjednodušit.
+
+Dobrá zpráva obsahuje:
+
+- připomenutí původního cíle,
+- konkrétní pozorování bez obviňování,
+- návrh malé další akce,
+- jasný časový rámec,
+- hodnotu pro zákazníka.
+
+Nepiš dlouhé eseje. Pokud je zákazník přetížený, další román mu nepomůže. Pomůže mu krátký návrh, který snižuje tření.
+
+### T.5 Churn interview ber jako produktovou práci
+
+Když zákazník opravdu odchází, nesnaž se za každou cenu zvrátit rozhodnutí. Nejprve pochop důvod. Churn interview není výslech ani poslední pokus prodat roční tarif. Je to šance zjistit, kde se rozešel slib s realitou.
+
+Otázky, které fungují:
+
+- Co byl původní důvod, proč jste začali?
+- Kdy jste poprvé cítili, že to možná nepřinese očekávaný výsledek?
+- Co vám v produktu, službě nebo spolupráci nejvíc bránilo?
+- Co jste museli řešit bokem mimo náš systém nebo proces?
+- Co by muselo být jinak, aby dávalo smysl pokračovat?
+- Přecházíte na jiné řešení, interní proces, nebo problém mizí?
+- Je něco, co jsme mohli říct nebo udělat dřív?
+
+Po rozhovoru si nepiš jen „zákazník odešel kvůli ceně“. Cena bývá často zkratka. Lepší zápis:
+
+> Zákazník zpochybnil cenu, protože po onboardingu nepřešel tým na hlavní workflow. Hodnota zůstala u jednoho administrátora, ne u celého oddělení. Skutečné riziko: slabá adopce a chybějící interní vlastník.
+
+Takový zápis už vede k práci: lepší onboarding, jasnější role, dřívější review, možná šablona interní komunikace pro zákazníka.
+
+### T.6 Offboarding má být férový a použitelný
+
+I když zákazník odchází, pořád buduješ reputaci. Privacy-first firma nesmí dělat z odchodu past. Data zákazníka nejsou rukojmí. Férový offboarding může později přinést návrat, doporučení nebo alespoň dobrý pocit, že se nikdo nechoval jako temný pattern v saku.
+
+Offboarding minimum:
+
+- potvrdit datum ukončení a dopad na přístupy,
+- nabídnout export relevantních dat ve srozumitelném formátu,
+- vysvětlit, co bude s daty po ukončení,
+- odebrat přístupy podle checklistu,
+- zrušit nepotřebné integrace a tokeny,
+- archivovat jen to, co musíš držet právně nebo smluvně,
+- poslat krátké shrnutí ukončení.
+
+Pokud zákazník odchází kvůli špatné zkušenosti, nebraň se reflexi. Krátké „díky, tohle bereme jako konkrétní podnět a upravíme proces“ je lepší než argumentační ping-pong. Vítězství v e-mailové debatě je dost mizerná náhrada za zdravý produkt.
+
+### T.7 Checklist: churn prevence bez zbytečného sledování
+
+- [ ] Máme popsané, jak vypadá zdravý zákazník pro hlavní segment.
+- [ ] Sledujeme aktivační, adopční, hodnotové, vztahové, technické, rozpočtové a strategické riziko zvlášť.
+- [ ] Health score je srozumitelné a má krátké zdůvodnění.
+- [ ] Používáme agregované a potřebné signály, ne invazivní sledování jednotlivců.
+- [ ] Každé žluté nebo červené riziko má navržený další krok.
+- [ ] Zákazníka kontaktujeme přes původní cíl a konkrétní pozorování, ne přes výčitku.
+- [ ] Churn interview se ptá na rozdíl mezi slibem a realitou.
+- [ ] Důvod odchodu zapisujeme konkrétněji než „cena“ nebo „nepoužívali“.
+- [ ] Poznatky z odchodů se promítají do onboardingu, produktu nebo obchodního slibu.
+- [ ] Offboarding umožňuje export dat a jasně řeší smazání nebo archivaci.
+- [ ] Po ukončení odebíráme přístupy, tokeny a integrace.
+- [ ] I odcházející zákazník dostane profesionální a lidské uzavření.
+
+Prevence churnu není trik, jak zákazníka udržet za každou cenu. Je to disciplína, která ti říká, jestli produkt opravdu pomáhá. Když pomáhá, signály zdraví jsou vidět. Když nepomáhá, dobrý systém tě upozorní dřív, než se z nespokojenosti stane tichý odchod.
+
 ## Pracovní log
+- 2026-08-29 15:00 UTC — Doplněna příloha T o prevenci churnu: definice zdravého zákazníka, typy rizik, jednoduché health score bez invazivního sledování, včasný kontakt, churn interview, férový offboarding a checklist.
 - 2026-08-29 14:00 UTC — Doplněna příloha S o renewalu a pokračování spolupráce: začátek už při podpisu, renewal karta, signály pokračování, konkrétní konverzace, práce se slevou, value recap, privacy-first pravidla a checklist.
 - 2026-08-29 13:00 UTC — Doplněna příloha R o prvním zákaznickém review: práce se slíbenou hodnotou, agenda, zpracování kritiky, férové rozšíření, etické reference, rytmus review a checklist.
 - 2026-08-29 12:00 UTC — Doplněna příloha Q o onboardingu prvního zákazníka: aktivační moment, vstupní data, tříkrokový onboarding, zákaznická karta, pracovní školení, měření adopce a checklist.
