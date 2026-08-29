@@ -2821,6 +2821,8 @@ Příklad lidského textu:
 
 Tohle není právní dokument. Je to srozumitelné očekávání. Plné zásady zpracování mohou být odkazem pod textem, ale návštěvník by neměl muset luštit právničtinu, aby pochopil základní chování firmy.
 
+Stejnou informaci zopakuj i po odeslání formuláře. Krátká děkovací stránka nebo potvrzovací box může připomenout očekávaný čas odpovědi, nabídnout odkaz na užitečný materiál a jasně říct, že člověk nemusí posílat stejnou zprávu znovu. Je to malý detail, ale šetří nervy návštěvníkovi i týmu.
+
 ### I.4 Lead magnet nemusí být za e-mailovou zdí
 
 Ne každý užitečný materiál musí být zamčený za formulářem. Někdy je lepší dát checklist veřejně, nechat ho indexovat, sdílet přes přímý odkaz a nabídnout kontakt až ve chvíli, kdy člověk potřebuje pomoc. To je pomalejší než agresivní sběr kontaktů, ale buduje důvěru.
