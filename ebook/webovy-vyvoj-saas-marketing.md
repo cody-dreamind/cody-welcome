@@ -2148,7 +2148,148 @@ Signál, že cena může být moc vysoko, je slabý zájem i po jasném vysvětl
 
 Cílem pricingu není trefit magickou částku napoprvé. Cílem je vytvořit nabídku, která zákazníkovi srozumitelně ukáže hodnotu, týmu dovolí produkt udržet a firmě dá ekonomiku, která neunaví všechny zúčastněné. Cena je živá část produktu. Zacházej s ní stejně vážně jako s onboardingem, bezpečností a obsahem.
 
+## Příloha E: Provozní rytmus pro malý SaaS tým
+
+SaaS není hotový projekt. Je to živý provoz. I když máš malý tým, potřebuješ rytmus, který drží produkt, zákazníky, marketing, bezpečnost a finance pohromadě. Bez rytmu se firma začne řídit tím, co zrovna nejhlasitěji hoří. A protože oheň má v kalendáři vždycky volno, brzy vyhraje.
+
+Provozní rytmus není korporátní ceremonie. Je to jednoduchý systém opakovaných kontrol, díky kterému víš, co je důležité dnes, co počká a co se nesmí rozbít potichu. U privacy-first produktu je navíc rytmus i způsob, jak udržet sliby o datech v praxi, ne jen v patičce webu.
+
+### E.1 Denní kontrola: víme, jestli produkt dýchá
+
+Každý pracovní den by měl mít krátkou provozní kontrolu. Nemusí to být meeting. Často stačí pět až deset minut a jeden sdílený zápis.
+
+Zkontroluj hlavně:
+
+- dostupnost aplikace a hlavních domén,
+- poslední chyby v aplikaci a serverových logách,
+- průchod hlavním workflow,
+- nové zákaznické zprávy a blokery,
+- platební nebo fakturační výjimky,
+- neobvyklé výkyvy v návštěvnosti, registracích nebo používání.
+
+Smyslem není vyrobit si každé ráno mini incident review. Smyslem je rychle poznat, jestli produkt běží normálně. Pokud ano, pokračuješ v plánované práci. Pokud ne, má prioritu oprava nebo jasné rozhodnutí, že problém počká.
+
+Praktický formát zápisu:
+
+- **Stav:** zelená, žlutá nebo červená.
+- **Důvod:** jedna věta, co se děje.
+- **Akce:** kdo co udělá a do kdy.
+- **Dopad:** koho se problém týká.
+
+Příklad:
+
+> Stav: žlutá. Formulář na demo funguje, ale potvrzovací e-mail se odesílá se zpožděním. Dopad: noví leady dostávají odpověď později. Akce: zkontrolovat frontu a SMTP limit do 10:30.
+
+Tohle je nudné. Výborně. Nudný provoz je luxus, který si člověk začne vážit přesně ve chvíli, kdy ho nemá.
+
+### E.2 Týdenní review: rozhoduj podle vzorů, ne podle posledního pingnutí
+
+Jednou týdně si sedni nad produkt, obchod a provoz najednou. Neřeš jen počet úkolů v backlogu. Řeš, jestli se produkt posouvá správným směrem.
+
+Týdenní review by mělo odpovědět na otázky:
+
+1. Co zákazníkům tento týden nejvíc pomohlo?
+2. Kde se lidé zasekli?
+3. Jaké tři dotazy nebo námitky se opakovaly?
+4. Co jsme slíbili a ještě nedodali?
+5. Která metrika se změnila tak, že podle ní má smysl jednat?
+6. Jaké riziko se tiše zvětšuje?
+7. Co příští týden záměrně nebudeme dělat?
+
+Poslední otázka je důležitá. Malý tým se neutopí jen v problémech, ale i v dobrých nápadech. Každý dobrý nápad, který spustíš ve špatný čas, se umí tvářit jako strategie a chovat jako dluh.
+
+Výstupem týdenního review mají být maximálně tři priority:
+
+- jedna produktová,
+- jedna obchodní nebo marketingová,
+- jedna provozní nebo bezpečnostní.
+
+Když jich je víc, nejsou to priority. Je to nákupní seznam v převleku za plán.
+
+### E.3 Měsíční provozní audit: zkontroluj sliby
+
+Jednou měsíčně si projdi sliby, které dáváš zákazníkům: rychlost, dostupnost, bezpečnost, evropský provoz, export dat, férové měření a podporu. Cílem není hledat chybu za každou cenu. Cílem je ověřit, že realita pořád odpovídá tomu, co říká web, obchodní nabídka a dokumentace.
+
+Měsíční audit může být krátký:
+
+- Prošli jsme zálohy a víme, že obnova funguje?
+- Odpovídá seznam subprocessors tomu, co skutečně používáme?
+- Nepřibyl nástroj, který sbírá víc dat, než potřebujeme?
+- Má každý aktivní účet správná oprávnění?
+- Jsou staré přístupy, tokeny a testovací účty uklizené?
+- Odpovídá dokumentace aktuálnímu produktu?
+- Máme přehled o otevřených bezpečnostních a provozních rizicích?
+
+Privacy-first provoz se nerozbije jedním velkým rozhodnutím. Často se rozpadá po malých výjimkách: „tenhle skript jen dočasně“, „tenhle export si necháme bokem“, „tenhle tracker přidáme kvůli kampani“. Proto audit hledej hlavně v drobných odchylkách od pravidel.
+
+*Codyho komentář:* Dočasné řešení je nejodolnější materiál ve vesmíru. Přežije kvartální plán, redesign i tři změny roadmapy. Proto ho musíš pravidelně lovit.
+
+### E.4 Kanban incidentů a dluhů
+
+Provozní problémy potřebují jiné zacházení než produktové nápady. Když do jednoho backlogu hodíš bug, bezpečnostní riziko, zákaznickou prosbu, marketingový experiment a nápad na redesign dashboardu, prioritizace se změní v hádání počasí.
+
+Vytvoř jednoduchý provozní kanban:
+
+- **Nové:** problém je zachycený, ale ještě není roztříděný.
+- **Vyhodnoceno:** známe dopad, prioritu a vlastníka.
+- **V řešení:** někdo na tom aktivně pracuje.
+- **Čeká:** blokuje nás externí odpověď, zákazník nebo plánované okno.
+- **Hotovo:** opraveno, ověřeno a zapsáno.
+
+Každá položka by měla mít:
+
+- popis dopadu na zákazníka nebo provoz,
+- závažnost,
+- vlastníka,
+- datum další kontroly,
+- odkaz na související log, issue nebo rozhodnutí.
+
+U privacy-first témat přidej ještě jednu otázku: týká se problém osobních dat, přístupů nebo exportů? Pokud ano, položka nesmí zapadnout mezi běžné kosmetické úpravy. Data nemají ráda, když se s nimi zachází jako s položkou „až bude čas“.
+
+### E.5 Komunikace při problému: rychle, klidně, bez mlhy
+
+Když se něco pokazí, zákazníci nepotřebují román. Potřebují vědět, co se děje, koho se to týká, co mají dělat a kdy dostanou další informaci.
+
+Dobrá incident komunikace má čtyři části:
+
+1. **Stav:** co je rozbité nebo omezené.
+2. **Dopad:** koho se problém týká.
+3. **Akce:** co tým dělá.
+4. **Další update:** kdy bude další informace.
+
+Příklad:
+
+> Dnes mezi 9:10 a 9:35 měly některé účty zpožděné odesílání notifikací. Data zůstala uložená, problém se týkal jen doručení e-mailů. Frontu jsme obnovili a ověřujeme doběhnutí zpráv. Další update pošleme v 10:15.
+
+Neříkej „někteří uživatelé mohli zaznamenat potíže“, pokud víš přesněji, co se stalo. Mlžení šetří ego, ne důvěru. Zároveň neslibuj detaily, které ještě nemáš ověřené. Přesnost je lepší než dramatická rychlost.
+
+Po incidentu napiš krátké shrnutí:
+
+- co se stalo,
+- proč se to stalo,
+- jaký byl dopad,
+- co se změnilo, aby se problém neopakoval,
+- jestli se problém týkal dat nebo bezpečnosti.
+
+Tohle shrnutí nemusí být veřejné vždy. Ale interně by existovat mělo. Jinak tým zaplatí stejnou lekci znovu, jen s horším timingem.
+
+### E.6 Checklist: provozní rytmus bez chaosu
+
+- [ ] Každý pracovní den má krátkou kontrolu dostupnosti, chyb a hlavního workflow.
+- [ ] Provozní stav má jednoduché označení: zelená, žlutá, červená.
+- [ ] Týdenní review končí maximálně třemi prioritami.
+- [ ] Opakované zákaznické dotazy se mění v obsah, produktové úpravy nebo dokumentaci.
+- [ ] Měsíční audit kontroluje zálohy, přístupy, subprocessory a datové sliby.
+- [ ] Incidenty a provozní dluhy nejsou ve stejné hromadě jako běžné nápady.
+- [ ] Každý vážnější problém má vlastníka, dopad a datum další kontroly.
+- [ ] Komunikace při incidentu říká stav, dopad, akci a další update.
+- [ ] Privacy-first výjimky se zapisují a pravidelně ruší nebo formalizují.
+- [ ] Dokumentace odpovídá aktuálnímu produktu, ne historické fantazii.
+
+Provozní rytmus má malému týmu dát klid. Ne další schůzky pro schůzky, ne tabulkovou posilovnu, ne dashboard na každý nádech serveru. Jen opakovatelný způsob, jak si udržet přehled, chránit zákaznickou důvěru a dělat lepší rozhodnutí, i když produkt roste rychleji než původní plán.
+
 ## Pracovní log
+- 2026-08-29 00:00 UTC — Doplněna příloha E o provozním rytmu malého SaaS týmu: denní kontrola, týdenní review, měsíční audit slibů, kanban incidentů, komunikace při problému a privacy-first checklist.
 - 2026-08-28 23:00 UTC — Doplněna příloha D o cenotvorbě a balíčcích: hodnota, cenové metriky, tři úrovně nabídky, trial/freemium/demo, pricing stránka, testování ceny a privacy-first checklist.
 - 2026-08-28 22:00 UTC — Doplněna příloha C o obsahovém systému bez závislosti na algoritmech: pilíře obsahu, recyklace formátů, editorial backlog, publikační rytmus, privacy-first měření a distribuce přes přímé kanály.
 - 2026-08-28 21:00 UTC — Doplněna příloha B o zákaznických rozhovorech: výběr respondentů, pozvánka, otázky, signály, poznámky, synthesis sprint a privacy-first pravidla.
