@@ -8099,7 +8099,146 @@ Jak jsme minimalizovali práci s osobními údaji a co zlepšíme v logování, 
 Postmortem je kultura v miniaturní podobě. Buď ukáže, že tým umí mluvit o realitě bez paniky, nebo ukáže, že každý problém končí mlčením a osobní obranou. Pro privacy-first SaaS je první varianta zásadní: důvěra zákazníků stojí nejen na tom, že chyby nevznikají, ale hlavně na tom, že když vzniknou, tým je umí přiznat, opravit a proměnit v lepší systém.
 
 
+---
+
+## Příloha AS: Provozní dluh, který se splácí dřív než se promění v incident
+
+Provozní dluh je všechno, co v produktu „nějak funguje“, ale tým ví, že to stojí na příliš tenkém ledě. Chybějící monitoring. Ruční deploy krok. Starý přístup bývalého dodavatele. Záloha, kterou nikdo dlouho neobnovil. Dokumentace, která popisuje svět před třemi architekturami.
+
+Technický dluh se často řeší jako kvalita kódu. Provozní dluh je širší: týká se dostupnosti, bezpečnosti, dat, podpory, komunikace a schopnosti týmu rychle se rozhodnout, když se něco rozbije. Malý SaaS tým ho nemůže ignorovat, protože nemá nekonečnou směnu lidí, kteří budou v noci ručně držet produkt pohromadě lepicí páskou a optimismem.
+
+Dobrá zpráva: provozní dluh nemusíš splatit najednou. Potřebuješ ho vidět, třídit podle rizika a pravidelně ukrajovat. Ne jako heroický refaktor kvartálu, ale jako součást běžného provozu.
+
+*Codyho komentář:* Provozní dluh je jako prach v serverovně. Jeden den vypadá neškodně, druhý den zjistíš, že tvůj disaster recovery plán je „Petr si snad pamatuje heslo“.
+
+### AS.1 Udělej inventuru věcí, které tým nechce vidět
+
+Začni jednoduše: sepiš seznam provozních slabin, o kterých už tým stejně ví. Nepotřebuješ workshop s dvanácti tabulemi. Stačí jedna stránka a otázka: „Co by nás bolelo, kdyby se to pokazilo dnes odpoledne?“
+
+Hledej hlavně:
+
+- části systému bez monitoringu,
+- ruční kroky v deployi a obnově,
+- neověřené zálohy,
+- nejasné vlastnictví služeb,
+- staré přístupy a sdílené účty,
+- dokumentaci, které tým nevěří,
+- dodavatele bez jasné alternativy,
+- místa, kde se ukládají osobní údaje bez dobrého důvodu.
+
+Každou položku napiš jako konkrétní riziko. Ne „monitoring je špatný“, ale „nevíme, jestli poptávkový formulář skutečně doručuje zprávy“. Ne „dokumentace je stará“, ale „nový člověk podle runbooku nenasadí hotfix bez pomoci autora systému“.
+
+### AS.2 Rozliš dluh podle dopadu, ne podle hlučnosti
+
+Nejhlasitější problém nemusí být nejnebezpečnější. Tým často řeší to, co ho otravuje každý den, ale přehlédne věci, které jednou spadnou a udělají největší škodu.
+
+U každé položky si dej rychlé skóre:
+
+- **Dopad na zákazníka:** co uživatel nebude moct udělat?
+- **Dopad na data:** může dojít ke ztrátě, úniku nebo zbytečnému zpracování dat?
+- **Dopad na tým:** kolik lidí musí zasáhnout a jak rychle?
+- **Pravděpodobnost:** jak často se podobná situace může stát?
+- **Obnova:** víme přesně, jak se vrátit do stabilního stavu?
+
+Stačí škála 1–3. Cílem není matematická elegance. Cílem je přestat rozhodovat podle pocitu „tohle mě dneska štve“ a začít rozhodovat podle skutečného rizika.
+
+Příklad: otravná ruční úprava textu v administraci má možná nízký dopad. Neověřená obnova databáze má vysoký dopad, i když měsíc potichu sedí v koutě a tváří se slušně.
+
+### AS.3 Zaveď provozní debt register
+
+Debt register je jednoduchý seznam provozních rizik. Nemusí to být nový nástroj. Může to být Markdown soubor, tabulka nebo položky v backlogu. Důležité je, aby každá položka měla stejný tvar.
+
+Minimální šablona:
+
+- **Název:** krátký popis rizika.
+- **Oblast:** monitoring, zálohy, security, data, deploy, support, dokumentace.
+- **Dopad:** co se stane zákazníkovi nebo týmu.
+- **Signál:** jak poznáme, že se riziko začíná projevovat.
+- **Dočasné opatření:** co děláme do vyřešení.
+- **Trvalá oprava:** co má být hotovo.
+- **Vlastník:** konkrétní člověk nebo role.
+- **Review datum:** kdy položku znovu otevřeme.
+
+Ukázka:
+
+```md
+## Riziko: ruční kontrola doručení poptávek
+
+- Oblast: monitoring / obchodní cesta
+- Dopad: nové poptávky mohou tiše nedorazit
+- Signál: pokles nových poptávek bez vysvětlení, chyba v mail logu
+- Dočasné opatření: denní ruční kontrola testovací poptávky
+- Trvalá oprava: syntetický test formuláře s alertem do provozního kanálu
+- Vlastník: vývoj
+- Review datum: 2026-09-15
+```
+
+Takový zápis není byrokracie. Je to paměť týmu. Bez ní se provozní dluh vrací v každém planningu jako duch s Jira účtem.
+
+### AS.4 Každý sprint nebo týden splať malou část
+
+Provozní dluh se neřeší jen tehdy, když hoří. Pokud čekáš na „klidnější období“, gratuluju: právě jsi vynalezl nekonečný backlog.
+
+Nastav jednoduché pravidlo: každý týden nebo sprint musí obsahovat alespoň jednu malou provozní opravu. Nemusí to být velký projekt. Často stačí:
+
+- přidat jeden smoke test,
+- odstranit jeden sdílený účet,
+- ověřit jednu zálohu,
+- doplnit jeden runbook,
+- zjednodušit jeden ruční krok v deployi,
+- smazat jednu zbytečně uloženou kategorii osobních dat.
+
+Důležité je, aby oprava měla jasný důkaz dokončení. „Podíváme se na zálohy“ není splátka. „Obnova databáze do testovacího prostředí proběhla a postup je zapsaný“ splátka je.
+
+### AS.5 Privacy-first dluh má přednost před kosmetikou
+
+Privacy-first provoz není jen právní checkbox. Je to návrhové rozhodnutí, že firma nebude sbírat víc dat, než potřebuje, a nebude si vytvářet závislosti, které později ztíží kontrolu nad daty.
+
+Proto dávej vyšší prioritu dluhu, který se týká:
+
+- zbytečného ukládání osobních údajů,
+- dlouhé retence bez důvodu,
+- nejasného exportu nebo mazání dat,
+- dodavatelů mimo evropský provoz bez dobrého vysvětlení,
+- trackerů a skriptů třetích stran,
+- logů s citlivými hodnotami,
+- chybějících pravidel pro AI nástroje a zákaznická data.
+
+Kosmetická úprava administrace může počkat. Nejasný tok osobních dat ne. Pokud má tým omezenou kapacitu, ptej se: „Která položka nejvíc zvyšuje kontrolu nad daty a snižuje budoucí riziko?“
+
+### AS.6 Provozní dluh uzavírej zápisem, ne jen pocitem
+
+Když položku opravíš, dopiš krátký závěr. Co se změnilo? Jak se to ověřilo? Co zůstává jako další riziko?
+
+Příklad uzavření:
+
+```md
+### Uzavření
+
+- Přidán syntetický test poptávkového formuláře každých 5 minut.
+- Alert jde do provozního kanálu a obsahuje jen typ chyby, ne obsah zprávy.
+- Test selhání ověřen ručně 2026-08-30.
+- Další riziko: formulář zatím nemá samostatný dashboard trendu úspěšných odeslání.
+```
+
+Tohle je důležité hlavně pro budoucí tým. Za tři měsíce nebude nikdo přesně vědět, proč se rozhodlo právě takhle. Krátký závěr ušetří archeologii v commitech, Slacku a paměti lidí, kteří zrovna odjeli na dovolenou.
+
+### AS.7 Checklist: provozní dluh pod kontrolou
+
+- Máme seznam konkrétních provozních rizik, ne jen vágní pocit „něco je staré“.
+- Každá položka popisuje dopad na zákazníka, data nebo tým.
+- Rizika třídíme podle dopadu, pravděpodobnosti a obtížnosti obnovy.
+- Privacy-first položky mají prioritu, pokud se týkají osobních dat, retence, logů nebo dodavatelů.
+- Každý týden nebo sprint splácíme alespoň jednu malou provozní položku.
+- Hotová oprava má důkaz: test, runbook, záznam obnovy, odstraněný přístup nebo změnu konfigurace.
+- Uzavřené položky obsahují krátké poučení a případné další riziko.
+- Debt register se pravidelně čistí, aby z něj nebyl hřbitov dobrých úmyslů.
+
+---
+
 ## Pracovní log
+
+- 2026-08-30 16:00 UTC — Doplněna příloha AS o provozním dluhu: inventura rizik, prioritizace podle dopadu, debt register, pravidelné splácení, privacy-first priority, uzavírací zápis a checklist.
 
 - 2026-08-30 15:00 UTC — Doplněna příloha AR o postmortem po incidentu: fakta místo dojmů, příčiny bez hledání viníka, zákaznický dopad, akční kroky, komunikace, knihovna poučení a checklist.
 - 2026-08-30 14:00 UTC — Doplněna příloha AQ o incident drillu: výběr scénáře, rozhodování během incidentu, ověření runbooku a přístupů, samostatný datový incident drill, zápis zjištění a checklist.
