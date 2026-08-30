@@ -5539,7 +5539,169 @@ Pokud na některou otázku neumíš odpovědět, sběr dat ještě není připra
 - [ ] Každý nový sběr dat má účel, vlastníka, retenci a privacy review.
 
 *Codyho komentář:* Bezpečnostní minimum není sexy feature. Nikdo kvůli němu většinou nezatleská. Ale když přijde větší zákazník, audit nebo obyčejný páteční incident, najednou je to rozdíl mezi profesionálním klidem a týmovým sprintem do zdi. A zeď, jak známo, nemá moc dobrou konverzi.
+
+## Příloha AC: Důvěryhodná komunikace a doručitelnost bez marketingového cirkusu
+
+Web, SaaS i dobrý obsah nakonec narazí na velmi obyčejnou otázku: dostane se tvoje zpráva ke správnému člověku a bude jí věřit? Můžeš mít skvělý onboarding, promyšlený pricing a krásnou landing page, ale pokud potvrzovací e-mail padá do spamu, newsletter vypadá jako výprodej vysavačů z roku 2009 a zákazník neví, kdo mu vlastně píše, důvěra mizí rychleji než rozpočet na „malou kampaň“.
+
+Důvěryhodná komunikace není jen copywriting. Je to kombinace technického nastavení, rytmu, souhlasu, jasného odesílatele a respektu k inboxu. Privacy-first přístup tady není brzda. Naopak: když neposíláš zbytečnosti, nesbíráš data pro parádu a dáváš lidem kontrolu, roste šance, že tě budou číst i za půl roku.
+
+### AC.1 Každý typ zprávy má mít vlastní účel
+
+Nejdřív rozděl komunikaci podle toho, proč existuje. Smíchat všechno do jednoho seznamu je pohodlné, ale rychle to vede k chaosu. Člověk, který čeká fakturu nebo obnovovací upozornění, nemá dostat stejným kanálem „pět žhavých tipů pro růst“. Inbox není odkladiště pro růstové nápady.
+
+Praktické typy zpráv:
+
+- **Transakční** — potvrzení registrace, reset hesla, faktura, změna tarifu, bezpečnostní upozornění.
+- **Produktové** — změny ve funkci, plánovaná odstávka, nové nastavení, důležité provozní novinky.
+- **Vzdělávací** — newsletter, návody, případové studie, checklisty, pozvánky na webinář.
+- **Obchodní** — follow-up po poptávce, nabídka, renewal, návrh rozšíření spolupráce.
+- **Interní** — alerty, reporty, provozní shrnutí, zákaznické handovery.
+
+Pro každý typ si napiš vlastní pravidla: kdo je příjemce, kdo je odesílatel, jaký je účel, jak často zpráva chodí, jak se dá odhlásit nebo změnit preference a jaká data se kvůli ní ukládají. U transakčních zpráv řeš hlavně spolehlivost a jasnost. U marketingu řeš souhlas, očekávání a hodnotu. U obchodních follow-upů řeš kontext a lidskost.
+
+### AC.2 Odesílatel musí být rozpoznatelný
+
+Častá chyba malých týmů: každý e-mail chodí z jiné adresy, s jiným tónem a jiným podpisem. Jednou `info@`, podruhé osobní Gmail, potřetí automat z nástroje, který má v patičce logo dodavatele větší než tvoje značka. Výsledek? Zákazník neví, jestli komunikuje s firmou, člověkem nebo robotem, který si právě založil kariéru v salesu.
+
+Nastav jednoduchý systém:
+
+- `hello@` nebo `ahoj@` pro první kontakt a obecné dotazy,
+- `support@` pro podporu,
+- `billing@` pro fakturaci,
+- `security@` nebo jasně uvedený bezpečnostní kontakt pro incidenty a zranitelnosti,
+- osobní adresy pro obchodní vztahy, kde je důležitý konkrétní člověk.
+
+Každý veřejný kontakt by měl mít jasnou roli na webu. Pokud používáš osobní follow-up, napiš v první větě kontext: proč píšeš, odkud se znáte a co má člověk udělat dál. Důvěra často stojí na drobnostech. „Navazuji na poptávku z formuláře k privacy-first analytice“ je lepší než „jen se připomínám“.
+
+### AC.3 Technické minimum pro e-mail neodkládej
+
+E-mailová doručitelnost není magie, i když se tak občas tváří. Základ je mít správně nastavenou doménu, autentizaci odesílání a oddělené role. Pokud to odložíš, zjistíš problém typicky ve chvíli, kdy zákazník tvrdí, že mu nepřišla faktura, reset hesla ani odpověď na poptávku. Ideální okamžik pro stres? Samozřejmě pátek odpoledne.
+
+Základní technický checklist:
+
+- nastav odesílání přes doménu, kterou vlastníš a kontroluješ,
+- ověř SPF, DKIM a DMARC podle dokumentace svého poskytovatele,
+- neposílej transakční a marketingové zprávy ze stejného improvizovaného zdroje,
+- hlídej návratové adresy a bounce zprávy,
+- testuj důležité e-maily v běžných schránkách před spuštěním,
+- udržuj jednoduché HTML a čitelnou textovou alternativu,
+- neposílej přílohy tam, kde stačí bezpečný odkaz nebo zákaznický portál.
+
+Privacy-first detail: pokud používáš externí e-mailingový nástroj, zkontroluj, jaká data do něj posíláš. Často stačí e-mail, jazyk, preferovaný typ obsahu a stav souhlasu. Nepotřebuješ do marketingové databáze kopírovat celý CRM příběh zákazníka, fakturační poznámky ani interní štítky typu „možná problémový“. To není segmentace. To je budoucí trapas v exportu dat.
+
+### AC.4 Newsletter má být slib, ne past
+
+Newsletter funguje, když člověk ví, co dostane, jak často a proč se mu to vyplatí číst. Nefunguje, když je to odpadní kanál pro všechno, co se nevešlo na blog, LinkedIn a do Slacku. Přihlášení k newsletteru je malá půjčka důvěry. Nesplácej ji spamem.
+
+Dobrá přihlašovací věta říká:
+
+- téma,
+- frekvenci,
+- praktický přínos,
+- kdo zprávy píše,
+- že se lze jednoduše odhlásit.
+
+Příklad:
+
+> Jednou za dva týdny posílám praktické poznámky o webovém vývoji, SaaS provozu a privacy-first marketingu v Evropě. Bez šmírovacích triků, bez denního spamu. Odhlášení jedním klikem.
+
+Obsah drž v rytmu:
+
+- jeden hlavní nápad,
+- jeden praktický příklad,
+- jeden odkaz na hlubší zdroj nebo vlastní článek,
+- jedna jasná výzva k akci,
+- žádné falešné urgence.
+
+U menšího týmu je lepší poslat kvalitní newsletter dvakrát měsíčně než každý týden lovit téma a nakonec napsat „v tomto dynamickém světě digitální transformace“. Pokud tu větu někde vidíš, zavři editor, uvař kafe a začni znovu.
+
+### AC.5 Preference centrum porazí dramatické odhlášení
+
+Odhlášení není zrada. Je to signál. Možná člověk nechce marketing, ale chce produktové novinky. Možná nechce týdenní shrnutí, ale chce kvartální checklist. Možná už není cílovka. Všechno v pořádku. Horší je, když mu nedáš kontrolu a on místo úpravy preference klikne na spam.
+
+Jednoduché preference centrum může obsahovat:
+
+- produktové novinky,
+- vzdělávací obsah,
+- obchodní nabídky,
+- pozvánky na akce,
+- frekvenci zasílání,
+- jazyk komunikace,
+- úplné odhlášení.
+
+Nemusí to být velká aplikace. U malého projektu může stačit formulář nebo odkaz v patičce, který vede na jasnou stránku: co dostávám, proč, jak to změním. Důležité je, aby změna opravdu fungovala. Preference, které nikdo nečte a nepromítá do odesílání, jsou dekorace. A dekorace v databázi neumí nic, kromě toho, že jednou spadne na compliance audit.
+
+### AC.6 Měř engagement bez osobního honu na čtenáře
+
+Marketingové nástroje často lákají na detailní sledování otevření, kliknutí, zařízení, lokality a individuální historie. Něco z toho může být technicky užitečné, ale malý privacy-first tým by měl začít agregovaně a opatrně. Nepotřebuješ vědět, že konkrétní Jana otevřela e-mail v 7:43 a potom třikrát klikla na cenovou stránku. Potřebuješ vědět, jestli téma pomáhá správným lidem udělat další krok.
+
+Rozumné metriky:
+
+- počet přihlášení podle zdroje,
+- počet odhlášení po kampani,
+- agregované kliknutí na hlavní odkaz,
+- odpovědi a konkrétní reakce,
+- konverze na poptávku nebo demo podle dobrovolně uvedeného kontextu,
+- kvalita rozhovorů, které obsah spustil.
+
+Pokud používáš trackované odkazy, buď střídmý a transparentní. U důvěryhodných B2B vztahů často vyhraje přímý odkaz na vlastní web, RSS, veřejný archiv a možnost odpovědět člověku. Ne všechno musí být atribučně dokonalé. Někdy stačí vědět, že obsah přivádí správné otázky.
+
+### AC.7 Šablona komunikační karty
+
+Pro každý opakovaný typ zprávy si vytvoř kartu. Ušetří ti rozhodování, sjednotí tón a zabrání tomu, aby se marketingové nápady nenápadně nastěhovaly do transakčních e-mailů.
+
+```markdown
+## Komunikační karta: [název zprávy]
+
+- Typ: transakční / produktová / vzdělávací / obchodní / interní
+- Spouštěč: [co zprávu vyvolá]
+- Příjemce: [kdo ji dostane]
+- Odesílatel: [adresa a jméno]
+- Hlavní účel: [jedna věta]
+- Další krok pro příjemce: [co má udělat]
+- Frekvence nebo limit: [kdy a jak často]
+- Data použitá pro personalizaci: [minimum]
+- Odhlášení nebo preference: [jak se mění]
+- Retence záznamu: [jak dlouho držíme informaci o odeslání]
+- Kontrola kvality: [kdo a kdy reviduje]
+```
+
+Příklad pro onboarding:
+
+```markdown
+## Komunikační karta: první onboardingový e-mail
+
+- Typ: produktová
+- Spouštěč: zákazník má aktivovaný účet
+- Příjemce: hlavní kontaktní osoba zákazníka
+- Odesílatel: Cody z Dreamindu
+- Hlavní účel: dovést zákazníka k první hodnotě
+- Další krok pro příjemce: vybrat termín krátkého nastavení nebo projít tříkrokový návod
+- Frekvence nebo limit: jednou po aktivaci, jeden připomínací follow-up po 3 pracovních dnech
+- Data použitá pro personalizaci: jméno, firma, zvolený plán, aktivační stav
+- Odhlášení nebo preference: produktové zprávy lze upravit v nastavení účtu
+- Retence záznamu: evidence odeslání podle provozní retence
+- Kontrola kvality: kvartální review podle odpovědí a dokončení onboardingu
+```
+
+### AC.8 Checklist: komunikace, která buduje důvěru
+
+- [ ] Každý typ zprávy má jasný účel a vlastní pravidla.
+- [ ] Transakční e-maily nejsou míchány s marketingem.
+- [ ] Veřejné odesílací adresy mají jasnou roli a jsou uvedené na webu.
+- [ ] Doména má zkontrolované SPF, DKIM a DMARC podle poskytovatele.
+- [ ] Důležité e-maily mají textovou alternativu a jednoduché HTML.
+- [ ] Newsletter jasně říká téma, frekvenci, autora a možnost odhlášení.
+- [ ] Preference nebo odhlášení opravdu mění budoucí odesílání.
+- [ ] Do e-mailingového nástroje posíláme jen data, která jsou nutná pro komunikaci.
+- [ ] Engagement vyhodnocujeme hlavně agregovaně a podle obchodního dopadu.
+- [ ] Opakované zprávy mají komunikační kartu a pravidelný review rytmus.
+
+*Codyho komentář:* Doručitelnost není trik, jak protlačit víc hluku do cizího inboxu. Je to disciplína, jak posílat méně věcí, lépe načasovaných, jasně podepsaných a užitečných. Inbox není bitevní pole. Je to cizí pracovní prostor. Chovej se tam jako host, ne jako konfety kanón.
+
 ## Pracovní log
+- 2026-08-30 00:00 UTC — Doplněna příloha AC o důvěryhodné komunikaci a doručitelnosti: typy zpráv, rozpoznatelný odesílatel, e-mailové technické minimum, newsletter, preference centrum, agregované měření, komunikační karta a checklist.
 - 2026-08-29 23:00 UTC — Doplněna příloha AB o bezpečnostním minimu před prvním větším zákazníkem: mapa aktiv, nejmenší oprávnění, privacy-first logy, incident karta, Security FAQ, minimalizace dat a checklist.
 - 2026-08-29 22:00 UTC — Doplněna příloha AA o referral a partnerském růstu bez sledovacích pixelů: jasný důvod doporučení, ruční první program, férové odměny, měření obchodních událostí, partner balíček, hranice a privacy-first checklist.
 - 2026-08-29 21:00 UTC — Doplněna příloha Z o rychlosti webu bez honby za skóre: performance budget, obrázky, fonty, třetí strany, pravidelný review rytmus a privacy-first checklist.
