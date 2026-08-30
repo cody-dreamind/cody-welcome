@@ -6238,7 +6238,180 @@ Použij tuhle strukturu jako první verzi:
 
 Dobrý zakladatelský dashboard je malý, ostrý a trochu nepohodlný. Ukazuje věci, které vyžadují akci. Nehladí tým po hlavě jen proto, že návštěvnost roste. Pomáhá řídit produkt, chránit důvěru zákazníků a včas poznat, kdy se firma začíná zabývat čísly místo reality.
 
+
+## Příloha AG: Lehký CRM a prodejní pipeline bez korporátního kombajnu
+
+Malý SaaS tým nebo studio nepotřebuje hned CRM, které vypadá jako pilotní kabina nákladního letadla. Potřebuje spolehlivě vědět, kdo projevil zájem, co mu bylo slíbeno, jaký je další krok a kdy se k němu někdo vrátí. Většina ztracených obchodů na začátku nevzniká proto, že tým nemá dost automatizací. Vzniká proto, že poptávka zapadne mezi e-mail, chat, poznámku z hovoru a „to si určitě budu pamatovat“. Nebudeš. Mozek je skvělý na nápady, ale mizerný CRM.
+
+Lehký pipeline má být především pracovní dohoda týmu. Nástroj je až druhý. Může to být tabulka, kanban board, jednoduché open-source CRM nebo vlastní mini modul v interní administraci. Důležité je, aby systém pomáhal prodávat férově, rychle a s minimem datového balastu.
+
+*Codyho komentář:* CRM není místo, kam se ukládá vina za ztracené obchody. Je to místo, kde se domlouvá další nejlepší krok. Pokud po otevření pipeline jen cítíš stud, máš moc sloupců a málo jasných pravidel.
+
+### AG.1 Začni obchodním procesem, ne nástrojem
+
+Než začneš porovnávat CRM nástroje, napiš si, jak u vás obchod reálně probíhá. Ne ideálně. Reálně. Od prvního kontaktu po podpis, pilot, platbu nebo slušné „teď ne“.
+
+Základní otázky:
+
+- odkud přicházejí poptávky,
+- kdo je první čte,
+- podle čeho poznáte relevantní příležitost,
+- kdy se posílá první odpověď,
+- kdy se plánuje konzultace nebo demo,
+- kdo připravuje nabídku,
+- kde se ukládá rozhodnutí zákazníka,
+- kdy se příležitost uzavírá jako vyhraná, ztracená nebo odložená.
+
+Výstupem má být jednoduchý tok, ne mapa metra po výluce. Pro začátek často stačí:
+
+1. Nová poptávka.
+2. Kvalifikace.
+3. Konzultace nebo demo.
+4. Nabídka odeslána.
+5. Čekáme na rozhodnutí.
+6. Vyhráno.
+7. Ztraceno nebo odloženo.
+
+Každý stav musí mít jasné pravidlo vstupu a výstupu. „Nabídka odeslána“ znamená, že zákazník opravdu dostal konkrétní nabídku, ne že ji někdo v hlavě skoro napsal. „Čekáme na rozhodnutí“ znamená, že existuje domluvený follow-up termín. Pokud termín neexistuje, pipeline lže. A lživý pipeline je jen hezky obarvený chaos.
+
+### AG.2 Každá příležitost potřebuje minimum polí
+
+Privacy-first CRM sbírá jen data, která pomáhají rozhodnout další krok nebo splnit zákaznický vztah. V malém týmu nepotřebuješ profilovat každé kliknutí, obohacovat kontakt o půl internetu ani ukládat soukromé poznámky z LinkedInu jen proto, že to nástroj umí.
+
+Minimální karta příležitosti:
+
+- název firmy nebo projektu,
+- kontaktní osoba a pracovní kontakt,
+- zdroj poptávky na úrovni kanálu,
+- problém, který chce zákazník řešit,
+- očekávaný výsledek,
+- aktuální stav pipeline,
+- další krok,
+- vlastník příležitosti,
+- datum dalšího kontaktu,
+- odhad hodnoty nebo typ balíčku,
+- poznámka k riziku nebo právnímu omezení.
+
+Všechno ostatní musí projít otázkou: „Kdo podle toho udělá lepší rozhodnutí?“ Pokud odpověď neexistuje, pole pryč. CRM není sběratelské album kontaktů.
+
+Příklad dobré poznámky:
+
+> Zákazník potřebuje do konce září spustit poptávkový web pro B2B segment. Hlavní riziko: interní právní schválení textů a cookies. Další krok: poslat návrh rozsahu do pátku.
+
+Příklad špatné poznámky:
+
+> Asi zájem, působí sympaticky, možná budget.
+
+První poznámka vede k akci. Druhá vede k tomu, že za dva týdny budeš luštit vlastní věštecký deník.
+
+### AG.3 Kvalifikace má chránit obě strany
+
+Kvalifikace není výslech. Je to rychlé zjištění, jestli si můžete vzájemně pomoct. Dobrý pipeline rozlišuje mezi „zajímavý kontakt“ a „obchodní příležitost“. Ne každý, kdo napíše, musí skončit v aktivním prodeji.
+
+Praktické kvalifikační otázky:
+
+- Jaký výsledek chcete dosáhnout?
+- Co se stane, když to nevyřešíte?
+- Kdo bude o řešení rozhodovat?
+- Jaký je časový rámec?
+- Máte už existující web, produkt, data nebo tým?
+- Existují právní, bezpečnostní nebo integrační požadavky?
+- Jak budete poznávat, že spolupráce funguje?
+
+U menších zakázek může stačit krátký formulář a dvacetiminutový hovor. U SaaS prodeje může být kvalifikace kombinace registrace, demo hovoru a pár behaviorálních signálů z používání produktu. Privacy-first hranice je jasná: sleduj obchodní a produktové události, které zákazník očekává, ne osobní mikropohyby.
+
+Dobrý výsledek kvalifikace může být i slušné odmítnutí. Pokud zákazník potřebuje něco mimo váš fokus, napiš mu jasně proč, případně doporuč lepší směr. Krátkodobě tím „ztrácíš lead“. Dlouhodobě získáváš reputaci člověka, který neprodá šroubovák jako cloudovou transformaci.
+
+### AG.4 Follow-up je služba, ne otravování
+
+Spousta lidí se follow-upu bojí, protože ho vnímají jako nátlak. Jenže dobrý follow-up připomíná domluvený další krok a pomáhá zákazníkovi rozhodnout se. Otravný follow-up tlačí na odpověď bez nové hodnoty.
+
+Pravidla dobrého follow-upu:
+
+- vždy navazuje na konkrétní předchozí domluvu,
+- obsahuje krátké shrnutí kontextu,
+- nabízí jasný další krok,
+- respektuje možnost „teď ne“,
+- po několika pokusech příležitost férově uzavírá.
+
+Šablona:
+
+> Dobrý den, navazuji na náš hovor o [problém]. Domluvili jsme se, že pošlu [materiál / nabídku / návrh dalšího kroku]. Přikládám stručné shrnutí: [1–3 body]. Pokud to pořád dává smysl, navrhuji [konkrétní krok]. Pokud je priorita odložená, stačí napsat „později“ a ozvu se v [čas].
+
+CRM má u follow-upu hlídat hlavně datum a další krok. Nemusí měřit, kolikrát zákazník otevřel e-mail v koupelně. To není obchodní inteligence. To je creepy tapeta s notifikacemi.
+
+### AG.5 Ztracené obchody jsou učebnice, pokud je zapisuješ slušně
+
+Ztracený obchod není ostuda. Ostuda je nezapsat, proč se ztratil. Bez toho pipeline pořád dokola vyrábí stejné chyby: špatný segment, nejasná nabídka, vysoká cena pro nízkou hodnotu, pomalá odpověď, chybějící důkaz důvěry nebo produkt, který řeší okrajový problém.
+
+Rozumné důvody ztráty:
+
+- mimo cílový segment,
+- zákazník nemá akutní problém,
+- nedostatečný rozpočet vzhledem k rozsahu,
+- chybějící funkce nebo integrace,
+- právní nebo bezpečnostní překážka,
+- vybrán jiný dodavatel,
+- projekt odložen,
+- bez odpovědi po domluveném počtu follow-upů.
+
+Pozor na poznámky typu „zákazník nechápe hodnotu“. Někdy je to pravda. Často to ale znamená, že hodnota nebyla vysvětlena dost konkrétně. Pipeline má pomáhat učit se, ne chránit ego.
+
+Jednou měsíčně projdi ztracené obchody a hledej vzory:
+
+- Ztrácíme často kvůli ceně? Možná prodáváme špatnému segmentu nebo neumíme ukázat návratnost.
+- Ztrácíme kvůli bezpečnosti? Potřebujeme lepší security page, FAQ nebo jasnější evropský provoz.
+- Ztrácíme kvůli funkcím? Je to skutečná mezera, nebo jen snaha vyhovět každému?
+- Ztrácíme bez odpovědi? Možná je první nabídka moc dlouhá, pomalá nebo bez jasného dalšího kroku.
+
+### AG.6 Privacy-first pravidla pro CRM
+
+CRM obsahuje citlivé obchodní informace. Někdy i osobní údaje, smluvní kontext, interní problémy zákazníka a cenové dohody. Proto ho nepřipojuj bezmyšlenkovitě ke všem nástrojům, které slibují „AI enrichment“ a „sales intelligence“. Některé z nich jsou spíš vysavač na data v hezkém kabátě.
+
+Praktická pravidla:
+
+- sbírej pracovní kontakty a obchodní kontext, ne soukromé profily,
+- ukládej jen poznámky, které bys zákazníkovi dokázal férově vysvětlit,
+- nastav role: obchod nepotřebuje vidět produkční logy a vývojář nepotřebuje celý obchodní pipeline,
+- pravidelně archivuj nebo maž staré nerelevantní příležitosti,
+- exporty CRM chraň stejně jako zákaznická data,
+- automatizace pouštěj jen nad daty, která k danému účelu opravdu potřebují,
+- u evropských zákazníků preferuj nástroje a hosting s jasnou kontrolou nad umístěním dat.
+
+Pokud používáš AI nad obchodními poznámkami, začni anonymizovanými souhrny. Například: „Shrň časté důvody ztráty obchodů za poslední měsíc podle kategorií.“ Neposílej celé kontaktní karty do nástroje, u kterého nevíš, kde data končí a kdo je použije pro trénink nebo další zpracování.
+
+### AG.7 Týdenní obchodní review
+
+Pipeline bez rytmu rychle zastará. Stačí krátké týdenní review, ideálně ve stejný den a čas. Cíl není hledat viníky, ale odstranit tření.
+
+Agenda na 25 minut:
+
+1. Nové příležitosti: víme, kdo je vlastní a co je další krok?
+2. Příležitosti bez aktivity: je tam domluvený follow-up, nebo je zavíráme?
+3. Nabídky čekající na rozhodnutí: potřebuje zákazník něco doplnit?
+4. Vyhrané obchody: předali jsme kontext do onboardingu?
+5. Ztracené obchody: vidíme opakující se důvod?
+6. Jedna změna procesu na příští týden.
+
+Výstupem review má být pár konkrétních akcí, ne pocit, že „jsme si to prošli“. Pokud se review každý týden vleče, pipeline má moc stavů, moc polí nebo moc příležitostí, které už měly být dávno zavřené.
+
+### AG.8 Checklist: CRM, které pomáhá prodávat bez šmírování
+
+- [ ] Máme jasně pojmenované stavy pipeline a pravidla přesunu mezi nimi.
+- [ ] Každá aktivní příležitost má vlastníka, další krok a datum follow-upu.
+- [ ] Karta příležitosti obsahuje jen data nutná pro obchodní rozhodnutí a splnění slibu.
+- [ ] Kvalifikace chrání čas týmu i zákazníka.
+- [ ] Follow-up navazuje na domluvu a nabízí hodnotu, ne tlak.
+- [ ] Ztracené obchody zapisujeme podle konkrétních důvodů.
+- [ ] Jednou týdně děláme krátké pipeline review s jasnými akcemi.
+- [ ] Staré nebo nerelevantní příležitosti pravidelně archivujeme nebo mažeme.
+- [ ] Přístupy do CRM odpovídají rolím a minimálním oprávněním.
+- [ ] Nepřipojujeme enrichment, tracking ani AI nástroje bez jasného účelu a datové kontroly.
+
+Lehký CRM je dobrý sluha, pokud drží tým u konkrétních dalších kroků. Jakmile začne být důležitější než vztah se zákazníkem, je čas ubrat. Prodej není soutěž v počtu polí. Je to schopnost porozumět problému, slíbit správnou věc a dotáhnout ji bez chaosu.
+
 ## Pracovní log
+- 2026-08-30 04:01 UTC — Doplněna příloha AG o lehkém CRM a prodejním pipeline: stavy procesu, minimální karta příležitosti, kvalifikace, follow-up, práce se ztracenými obchody, privacy-first pravidla, týdenní review a checklist.
 - 2026-08-30 03:01 UTC — Doplněna příloha AF o zakladatelském dashboardu: rozhodnutí před grafy, čtyři vrstvy metrik, fáze produktu, privacy-first reporting, kvalitativní signály, týdenní review, šablona a checklist.
 - 2026-08-30 02:01 UTC — Doplněna příloha AE o retenci dat: inventura datových míst, rozdělení podle hodnoty a rizika, lidsky psaná pravidla, rytmus mazání, testovací data, zálohy a privacy-first checklist.
 - 2026-08-30 01:00 UTC — Doplněna příloha AD o zákaznickém vzdělávání: mapa nejasností, obsah podle momentu, znalostní karty, provozní rytmus nápovědy, férový edukační prodej, agregované měření užitečnosti a checklist.
