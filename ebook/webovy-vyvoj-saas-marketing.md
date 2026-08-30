@@ -8721,7 +8721,153 @@ Když chceš zpětnou vazbu přímo v článku, použij jednoduchou otázku „P
 
 ---
 
+## Příloha AW: Support metriky, které zlepšují produkt a nedělají ze zákazníků laboratorní myši
+
+Podpora se dá měřit dvěma způsoby. První způsob hledá viníka: kolik ticketů kdo odbavil, jak rychle zavřel konverzaci, kolikrát zákazník klikl, kde přesně se zasekl a kdo „spotřebovává“ nejvíc pozornosti. Vypadá to manažersky, ale často to vede k rychlému zavírání problémů místo jejich řešení.
+
+Druhý způsob hledá systémové učení: jaké problémy se opakují, kde produkt mate, co chybí v nápovědě, které zákaznické cesty vytvářejí zbytečné tření a jak rychle umíme obnovit důvěru, když se něco pokazí. Tenhle přístup je užitečnější pro SaaS, webové služby i malé B2B týmy. A hlavně se dá dělat privacy-first: s agregovanými daty, jasnou retencí a bez pocitu, že zákazník vstoupil do sledovacího akvária.
+
+*Codyho komentář:* Support metrika má být kompas, ne bič. Jakmile podle čísla začneš trestat lidi, začnou lidé optimalizovat číslo. A číslo pak vypadá skvěle, zatímco zákazník mezitím tiše odchází do digitální divočiny.
+
+### AW.1 Začni otázkou, co chceš zlepšit
+
+Než nastavíš dashboard, napiš si jednu větu:
+
+> Support měříme proto, abychom zlepšili **[konkrétní část produktu nebo provozu]**.
+
+Příklady dobrých cílů:
+
+- snížit počet dotazů k prvnímu nastavení účtu,
+- zrychlit řešení fakturačních nejasností,
+- odhalit obrazovky, kde zákazníci nejčastěji chybují,
+- rozpoznat, kdy onboarding nevede k první hodnotě,
+- zlepšit kvalitu odpovědí u bezpečnostních a datových dotazů.
+
+Špatný cíl je „měřit podporu“. To není cíl, to je začátek tabulky. Dobrý cíl vede k rozhodnutí: upravit onboarding, přepsat článek nápovědy, změnit text v aplikaci, přidat validační hlášku, doplnit export nebo zjednodušit tarifní pravidla.
+
+### AW.2 Měř témata, ne osobní detektivku
+
+U malého týmu většinou nepotřebuješ znát každý detail chování jednotlivého zákazníka. Potřebuješ vědět, jaké typy problémů se opakují a jaký mají dopad.
+
+Praktické kategorie ticketů:
+
+- **Onboarding:** přihlášení, pozvání týmu, import dat, první nastavení.
+- **Používání produktu:** nejasné workflow, chyba v očekávání, chybějící funkce.
+- **Technický problém:** výkon, dostupnost, e-mail, integrace, export.
+- **Billing:** faktura, tarif, platba, změna údajů, zrušení.
+- **Data a soukromí:** export, smazání, oprávnění, audit, dotaz na zpracování.
+- **Obchodní dotaz:** demo, rozšíření účtu, poptávka, renewal.
+
+Každý ticket označ jednou hlavní kategorií a případně jedním doplňkovým štítkem. Když máš deset štítků na jeden dotaz, vznikne spíš moderní herbář než přehled. Kategorie musí být dost jednoduché, aby je tým používal stejně.
+
+### AW.3 Sleduj několik metrik, které vedou k akci
+
+Support dashboard nemusí mít třicet grafů. Na začátku stačí malé jádro:
+
+- **Počet dotazů podle kategorie:** ukazuje, kde vzniká opakované tření.
+- **Čas do první užitečné odpovědi:** ne jen automatická reakce, ale odpověď, která zákazníka posune.
+- **Podíl vyřešených dotazů bez eskalace:** ukazuje, jestli má support dost informací a nástrojů.
+- **Opakované dotazy ke stejné věci:** signál pro zlepšení produktu nebo nápovědy.
+- **Dotazy po releasu:** kontrola, jestli změna byla srozumitelná a dobře oznámená.
+- **Datové a bezpečnostní dotazy:** zvláštní kategorie, protože ovlivňují důvěru.
+
+Vyhni se metrikám, které tlačí tým k horšímu chování. Například samotný „čas do uzavření“ může motivovat k zavírání ticketů dřív, než zákazník opravdu pokračuje. Lepší je doplnit ho kvalitativní kontrolou: vyřešilo se původní rozhodnutí nebo úkol?
+
+### AW.4 Zaveď týdenní support review
+
+Metriky nemají smysl, když je nikdo nepřeklápí do práce. Jednou týdně udělej krátké review. Nemusí to být schůzka pro deset lidí. U malého SaaS stačí třicet minut s podporou, produktem a někým technickým.
+
+Agenda:
+
+1. Jaké tři kategorie měly největší nárůst?
+2. Který dotaz se opakoval a proč?
+3. Co šlo vyřešit jen odpovědí a co ukazuje na problém v produktu?
+4. Který článek nápovědy je potřeba přepsat nebo vytvořit?
+5. Je některý problém datově nebo bezpečnostně citlivý?
+6. Jaký jeden konkrétní úkol uděláme do příštího review?
+
+Výstupem nemá být dlouhý zápis. Stačí tři položky: zjištění, rozhodnutí, úkol. Pokud se review končí větou „to je zajímavé“, něco se pokazilo. Zajímavé je hezké slovo pro konferenci, ne pro provozní zlepšení.
+
+### AW.5 Spoj support data s nápovědou a roadmapou
+
+Support je jeden z nejlepších zdrojů produktových insightů, ale jen pokud neskončí jako archiv stížností. Každý opakovaný dotaz musí mít cestu do jedné ze tří krabiček:
+
+- **Nápověda:** zákazník potřebuje lepší vysvětlení nebo postup.
+- **Produkt:** workflow je matoucí, chybí validace, text nebo funkce.
+- **Provoz:** problém je v dostupnosti, výkonu, integraci, fakturaci nebo datech.
+
+Příklad:
+
+> Dotaz: „Nevím, proč kolega nevidí export.“
+
+Možné řešení v nápovědě: článek „Jak nastavit exportní oprávnění“.
+
+Možné řešení v produktu: jasnější hláška u zakázaného tlačítka.
+
+Možné řešení v roadmapě: přehled rolí s vysvětlením dopadů.
+
+Možné privacy-first zlepšení: auditní zápis změny oprávnění bez ukládání zbytečného obsahu exportovaných dat.
+
+Takové rozdělení zabrání tomu, aby se z každého ticketu stal požadavek na novou funkci. Někdy stačí jeden lepší text. Někdy je text jen náplast na špatné workflow.
+
+### AW.6 Privacy-first pravidla pro support analytiku
+
+Support často obsahuje citlivější informace než produktová analytika. Zákazníci posílají screenshoty, faktury, osobní údaje, interní názvy projektů, popisy problémů a někdy i věci, které posílat neměli. Proto musí mít support data jasná pravidla.
+
+Minimum:
+
+- sbírej jen údaje nutné k vyřešení dotazu,
+- nepoužívej support konverzace jako neomezený tréninkový materiál,
+- nastav retenci příloh a citlivých konverzací,
+- interní štítky piš tak, aby neobsahovaly osobní údaje,
+- do roadmapy přenášej anonymizované shrnutí, ne celé konverzace,
+- přístupy k support nástroji pravidelně kontroluj,
+- zákazníkovi srozumitelně vysvětli, jak může požádat o export nebo smazání dat.
+
+Pokud používáš AI asistenta pro návrhy odpovědí, drž ho na krátkém vodítku: žádné posílání citlivých dat do nástroje bez jasného právního a technického základu, žádné automatické odpovědi u bezpečnostních incidentů a žádné halucinované sliby. AI může pomoct shrnout problém nebo navrhnout strukturu odpovědi. Odpovědnost ale zůstává u týmu. Robot nemá podepisovat šeky, incidenty ani omluvy. Zatím.
+
+### AW.7 Šablona týdenního support review
+
+```markdown
+## Support review: [týden]
+
+### Nejčastější témata
+- [Kategorie] — [počet / trend] — [co to znamená]
+
+### Opakované dotazy
+- [Dotaz] — [pravděpodobná příčina] — [nápověda / produkt / provoz]
+
+### Citlivé nebo datové dotazy
+- [Téma] — [dopad] — [opatření]
+
+### Produktová zjištění
+- [Zjištění] — [navržená úprava] — [vlastník]
+
+### Úkol do dalšího týdne
+- [Konkrétní úkol] — [vlastník] — [důkaz dokončení]
+
+### Privacy-first kontrola
+- [Co jsme anonymizovali, smazali nebo přestali sbírat]
+```
+
+### AW.8 Checklist: support metriky bez šmírování
+
+- Víme, jaké rozhodnutí mají support metriky zlepšit.
+- Tickety mají jednoduché kategorie, které tým používá konzistentně.
+- Sledujeme opakovaná témata, ne detailní chování jednotlivců.
+- Časové metriky podporují užitečnou odpověď, ne rychlé zavření.
+- Každý týden vznikne alespoň jedno konkrétní zlepšení nápovědy, produktu nebo provozu.
+- Datové a bezpečnostní dotazy mají zvláštní pozornost a jasné eskalační pravidlo.
+- Do roadmapy přenášíme anonymizované shrnutí, ne celé konverzace.
+- Přílohy, screenshoty a citlivé zprávy mají nastavenou rozumnou retenci.
+- AI návrhy odpovědí nepoužívají zbytečná osobní nebo zákaznická data.
+- Support analytika zlepšuje důvěru, ne tlak na tým.
+
+---
+
 ## Pracovní log
+
+- 2026-08-30 20:00 UTC — Doplněna příloha AW o support metrikách bez sledování jednotlivců: cíle měření, kategorie ticketů, akční metriky, týdenní review, propojení s nápovědou a roadmapou, privacy-first pravidla, šablona a checklist.
 
 - 2026-08-30 19:00 UTC — Doplněna příloha AV o znalostní bázi a nápovědě: struktura podle zákaznických situací, články s jedním úkolem, propojení se supportem, údržba dokumentace, privacy-first datové poznámky, střídmé měření, šablona článku a checklist.
 
