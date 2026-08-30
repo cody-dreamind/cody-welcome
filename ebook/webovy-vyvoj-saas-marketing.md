@@ -8865,7 +8865,148 @@ Pokud používáš AI asistenta pro návrhy odpovědí, drž ho na krátkém vod
 
 ---
 
+
+## Příloha AX: Feedback loop, který mění názory zákazníků na lepší produkt
+
+Zpětná vazba je palivo produktu, ale jen pokud ji tým umí zpracovat. Jinak se z ní stane hlučný šuplík: pár hlasitých požadavků, screenshoty z podpory, poznámky z demo callů, interní dojmy a jeden excel, který se tváří jako strategie. Malý SaaS tým nepotřebuje obří výzkumné oddělení. Potřebuje jednoduchý feedback loop, který pravidelně mění konkrétní poznatky na lepší rozhodnutí.
+
+Dobrá zpětná vazba neznamená „uděláme všechno, co zákazník řekl“. Znamená „pochopíme situaci, najdeme vzorec a rozhodneme, co zlepší výsledek pro správné zákazníky“. To je rozdíl mezi produktem a jukeboxem na přání.
+
+### AX.1 Odděl vstupy podle zdroje a spolehlivosti
+
+Ne každá zpětná vazba má stejnou váhu. Jeden rozčilený e-mail může být důležitý bezpečnostní signál, ale také nemusí reprezentovat běžné použití. Naopak tichý opakovaný dotaz v supportu může ukazovat na problém, který stojí konverze každý týden.
+
+Rozlišuj aspoň tyto zdroje:
+
+- **Support:** co lidem nejde, co nechápou a kde se zasekávají.
+- **Demo cally:** co lidé očekávají před nákupem a jak popisují problém.
+- **Onboarding:** kde nový zákazník ztrácí energii před prvním výsledkem.
+- **Produktová data:** které kroky se dokončují, kde vzniká tření a co se nepoužívá.
+- **Renewal a churn rozhovory:** proč zákazník pokračuje, váhá nebo odchází.
+- **Interní pozorování:** co vidí tým při implementaci, provozu a podpoře.
+
+Ke každému vstupu si napiš nejen „co zákazník chce“, ale hlavně „v jaké situaci to řekl“. Požadavek bez kontextu je jako GPS bez mapy: působí technicky, ale stejně tě pošle do pole.
+
+### AX.2 Zapisuj problém, ne hotové řešení
+
+Zákazníci často popisují řešení, protože chtějí být praktičtí. Řeknou „potřebujeme export do Excelu“, „chceme Slack integraci“ nebo „přidejte roli koordinátor“. Tým má ale zjistit, jaký problém se pod tím schovává.
+
+Překlad do produktového poznatku:
+
+- Požadavek: „Chceme export do Excelu.“
+- Kontext: manažer každý pátek ručně skládá report pro vedení.
+- Problém: v produktu chybí jednoduché týdenní shrnutí stavu práce.
+- Možná řešení: export, automatický e-mail, uložený report, API, dashboard pro vedení.
+
+Kdyby tým rovnou postavil export, možná vyřeší jen první verzi bolesti. Když pochopí problém, může navrhnout řešení, které zákazníkovi ušetří celý páteční rituál. A páteční rituály mají patřit kávě, ne kopírování tabulek.
+
+### AX.3 Vytvoř malý feedback inbox
+
+Feedback inbox není backlog. Backlog obsahuje práci, kterou tým zvažuje nebo plánuje. Feedback inbox obsahuje pozorování, citace, situace a signály, které ještě musí projít interpretací.
+
+Jednoduchý záznam může vypadat takhle:
+
+```markdown
+## Feedback: [krátký název]
+
+- Zdroj: [support / demo / onboarding / review / churn / interní]
+- Segment: [typ zákazníka]
+- Situace: [kdy problém vznikl]
+- Citace nebo shrnutí: [bez zbytečných osobních údajů]
+- Dopad: [čas / peníze / riziko / frustrace / konverze]
+- Frekvence: [jednorázové / opakované / rostoucí]
+- Možný vzorec: [co se za tím může skrývat]
+- Další krok: [ověřit / spojit s tématem / vytvořit úkol / ignorovat]
+```
+
+Důležité je, aby inbox někdo pravidelně čistil. Když feedback jen ukládáš, ale nikdy ho nepřekládáš do rozhodnutí, máš archiv pocitů. Ten sice vypadá pracovitě, ale produkt z něj sám nevyroste.
+
+### AX.4 Hledej vzorce, ne nejhlasitější hlasy
+
+Jedna z největších pastí malých týmů je přecenit zákazníka, který píše nejčastěji. Aktivní zákazník je cenný, ale produkt nemá být jen jeho privátní roadmapa. Sleduj, jestli se podobný problém objevuje napříč segmentem.
+
+Ptej se:
+
+- Říkají to lidé ze stejného typu firmy?
+- Objevuje se problém ve stejné fázi zákaznické cesty?
+- Blokuje aktivaci, platbu, obnovu nebo každodenní použití?
+- Jde o problém, který tým už interně pozoroval?
+- Je požadavek v souladu s positioningem produktu?
+- Pomůže řešení více správným zákazníkům, nebo jen jednomu extrému?
+
+Praktický rytmus: jednou týdně vyber tři až pět nejsilnějších vzorců z podpory, onboardingů a obchodních rozhovorů. Ke každému napiš doporučení: opravit text, upravit nápovědu, změnit workflow, udělat experiment, nebo zatím nedělat nic. „Nedělat nic“ je legitimní rozhodnutí, pokud víš proč.
+
+### AX.5 Uzavírej smyčku se zákazníkem
+
+Feedback loop končí až ve chvíli, kdy se poznatek vrátí do produktu, komunikace nebo zákaznického vztahu. Pokud zákazník nahlásil problém a ty ho vyřešíš, dej mu vědět. Pokud ho nevyřešíš, férově vysvětli proč.
+
+Krátká odpověď může znít:
+
+> Díky za detailní popis. Zjistili jsme, že podobný problém řeší i další týmy při týdenním reportu. V první verzi nepřidáme obecný export všeho, ale připravujeme uložené týdenní shrnutí, které má řešit hlavní scénář bez ručního kopírování.
+
+Tím ukazuješ dvě věci: že zákazníka posloucháš a že produkt neřídíš chaoticky. To je důležité hlavně u B2B SaaS, kde zákazník nekupuje jen funkce, ale důvěru, že tým bude službu rozumně rozvíjet.
+
+### AX.6 Privacy-first pravidla pro zpětnou vazbu
+
+Zpětná vazba často obsahuje osobní údaje, názvy klientů, screenshoty, interní procesy nebo citlivé obchodní informace. Proto s ní pracuj jako s produkčními daty, ne jako s volným materiálem na porady.
+
+Pravidla:
+
+- ukládej jen části konverzace nutné pro pochopení problému,
+- anonymizuj citace před sdílením mimo úzký tým,
+- screenshoty a přílohy maž nebo maskuj, pokud nejsou potřeba,
+- nepřepisuj celé support vlákno do roadmapy,
+- u citlivých segmentů zapisuj typ situace místo jména zákazníka,
+- nastav retenci feedback inboxu,
+- nepoužívej zákaznické texty jako trénovací data bez výslovného základu,
+- při sdílení poznatků s dodavateli posílej shrnutí, ne raw konverzace.
+
+*Codyho komentář:* Nejlepší insight je ten, který pomůže produktu a zároveň neudělá ze zákazníka exponát v interním muzeu screenshotů. Ano, to muzeum existuje skoro v každé firmě. Ne, nepotřebujeme další patro.
+
+### AX.7 Šablona měsíčního feedback review
+
+```markdown
+## Feedback review: [měsíc]
+
+### Největší vzorce
+- [Téma] — [segment] — [dopad] — [počet signálů]
+
+### Co opravíme hned
+- [Úprava textu / nápovědy / nastavení / drobný bug] — [vlastník]
+
+### Co ověříme experimentem
+- Hypotéza: [co si myslíme]
+- Test: [jak to ověříme]
+- Důkaz: [co musí nastat]
+
+### Co jde do roadmapy
+- [Problém] — [proč teď] — [jak poznáme úspěch]
+
+### Co zatím neděláme
+- [Požadavek] — [důvod odmítnutí nebo odložení]
+
+### Privacy-first úklid
+- [Co anonymizujeme, mažeme nebo přestáváme sbírat]
+```
+
+### AX.8 Checklist: feedback loop, který vede k rozhodnutí
+
+- Máme jedno místo pro sběr zpětné vazby z podpory, obchodu, onboardingu a produktu.
+- Zapisujeme situaci a dopad, ne jen požadované řešení.
+- Feedback inbox pravidelně třídíme a nepoužíváme ho jako roadmapu.
+- Hledáme opakované vzorce napříč správnými zákaznickými segmenty.
+- Každý silný vzorec končí rozhodnutím: opravit, ověřit, naplánovat, nebo nedělat.
+- Zákazníkům dáváme vědět, když jejich zpětná vazba vedla ke změně.
+- Citace, screenshoty a přílohy anonymizujeme nebo mažeme, pokud nejsou nutné.
+- Roadmapa obsahuje problém, očekávaný dopad a důkaz úspěchu.
+- Nejsilnější hlas v inboxu automaticky nevyhrává nad strategií produktu.
+- Feedback loop zlepšuje produkt i důvěru, ne jen počet položek v backlogu.
+
+---
+
 ## Pracovní log
+
+- 2026-08-30 21:00 UTC — Doplněna příloha AX o feedback loopu: zdroje zpětné vazby, zápis problémů místo hotových řešení, feedback inbox, hledání vzorců, uzavření smyčky se zákazníkem, privacy-first pravidla, šablona review a checklist.
 
 - 2026-08-30 20:00 UTC — Doplněna příloha AW o support metrikách bez sledování jednotlivců: cíle měření, kategorie ticketů, akční metriky, týdenní review, propojení s nápovědou a roadmapou, privacy-first pravidla, šablona a checklist.
 
