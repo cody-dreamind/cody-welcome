@@ -8236,7 +8236,177 @@ Tohle je důležité hlavně pro budoucí tým. Za tři měsíce nebude nikdo p�
 
 ---
 
+## Příloha AT: SLO a provozní sliby, kterým rozumí zákazník i tým
+
+SLO zní jako věc, kterou někdo vymyslel proto, aby se startupy cítily méně zábavně. Ve skutečnosti je to jednoduchý provozní slib: co má služba zvládat, jak poznáme problém a kdy už nejde o „menší nepříjemnost“, ale o situaci, která vyžaduje akci.
+
+Malý webový nebo SaaS tým nepotřebuje hned velkolepou observability platformu s dashboardem jak z řídicího střediska rakety. Potřebuje hlavně sladit očekávání. Zákazník chce vědět, jestli se může na službu spolehnout. Tým chce vědět, kdy má přerušit plánovanou práci a řešit provoz. Zakladatel chce vědět, kdy už produkt nedoručuje hodnotu, za kterou si nechává platit.
+
+Dobré SLO proto není interní magie. Je to most mezi obchodním slibem, technickou realitou a podporou. Pokud prodáváš „spolehlivý poptávkový web“, musíš vědět, jestli funguje formulář. Pokud prodáváš „SaaS pro každodenní práci týmu“, musíš vědět, jestli se uživatelé dostanou k hlavnímu workflow. Pokud prodáváš privacy-first provoz, musíš vědět, jestli kvůli monitoringu nesbíráš víc dat, než je nutné.
+
+*Codyho komentář:* SLO není slib, že nikdy nespadneš. To by byl spíš marketingový cosplay. SLO je slib, že víš, co je důležité, měříš to rozumně a když to přestane fungovat, nechováš se překvapeně jako tiskárna v pondělí ráno.
+
+### AT.1 Začni zákaznickou cestou, ne technickou metrikou
+
+Nejčastější chyba je začít otázkou: „Jakou dostupnost má server?“ To je užitečné, ale ne úplné. Server může běžet a zákazník přesto nedokončí platbu, neodešle formulář nebo neotevře dashboard. Provozní slib má začínat tím, co zákazník opravdu potřebuje udělat.
+
+Vyber tři až pět hlavních cest:
+
+- návštěvník otevře homepage nebo landing page,
+- návštěvník odešle poptávkový formulář,
+- uživatel se přihlásí do aplikace,
+- uživatel dokončí hlavní workflow,
+- administrátor zpracuje požadavek,
+- zákazník najde nápovědu nebo kontakt na podporu,
+- billing nebo fakturace proběhne bez ručního zachraňování.
+
+Ke každé cestě napiš jednoduchý slib. Například:
+
+- „Kontaktní formulář přijme a předá poptávku obchodnímu týmu.“
+- „Přihlášený uživatel otevře svůj pracovní přehled do několika sekund.“
+- „Zákazník může exportovat svá data bez kontaktování podpory.“
+
+Teprve potom hledej technické metriky. Jinak skončíš s krásným grafem CPU, zatímco zákazník ti píše, že tlačítko „Odeslat“ funguje jako dekorace.
+
+### AT.2 Rozliš SLI, SLO a akční hranici
+
+Stačí tři pojmy:
+
+- **SLI:** signál, který měříš. Například úspěšnost odeslání formuláře, dostupnost hlavní stránky nebo doba načtení dashboardu.
+- **SLO:** cílová úroveň služby. Například „99 % testovacích odeslání formuláře za měsíc skončí úspěchem“.
+- **Akční hranice:** moment, kdy někdo musí něco udělat. Například „pokud dva syntetické testy po sobě selžou, vzniká incident“.
+
+Pro malý tým je akční hranice často důležitější než dokonalé procento. Když nastavíš SLO, ale nikdo neví, co se má stát při porušení, máš jen drahý budík bez zvonku.
+
+Praktický příklad pro poptávkový web:
+
+- **SLI:** syntetický test odešle testovací poptávku a ověří doručení.
+- **SLO:** test uspěje minimálně v 99 % pokusů za posledních 30 dní.
+- **Akční hranice:** dvě selhání po sobě spouští kontrolu formuláře, e-mailové fronty a CRM zápisu.
+- **Vlastník:** člověk nebo role, která má právo rozhodnout o opravě a komunikaci.
+
+Privacy-first poznámka: takový test nepotřebuje sledovat konkrétní návštěvníky. Měří schopnost systému splnit slib, ne chování jednotlivých lidí.
+
+### AT.3 Neslibuj víc, než umíš provozně unést
+
+SLO je závazek vůči realitě. Když malý tým slíbí enterprise dostupnost bez odpovídající infrastruktury, monitoringu a podpory, kupuje si stres na splátky.
+
+Před veřejným slibem si polož otázky:
+
+- Máme monitoring pro danou cestu?
+- Víme, kdo reaguje mimo pracovní dobu?
+- Máme obnovu nebo náhradní postup?
+- Umíme zákazníkovi říct pravdu rychle a srozumitelně?
+- Máme historická data, nebo jen přání?
+- Nevyžaduje slib takový sběr dat, který je proti našim privacy-first zásadám?
+
+Pokud na většinu odpovědí říkáš „ehm“, slib zatím drž interně. Můžeš napsat: „Službu aktivně monitorujeme a incidenty komunikujeme individuálně.“ To je poctivější než marketingová věta o garantované dostupnosti, kterou při prvním výpadku drží pohromadě jen modlitba a refresh produkce.
+
+### AT.4 Error budget pomáhá rozhodnout mezi vývojem a stabilitou
+
+Error budget je jednoduchá myšlenka: když má služba povolenou malou míru selhání, tým ví, kolik rizika si může dovolit. Pokud se provoz drží v mezích, můžeš pokračovat v rychlejším vývoji. Pokud se rozpočet chyb vyčerpá, je čas zpomalit nové funkce a opravit stabilitu.
+
+Pro malý tým to nemusí být matematická disciplína. Stačí pravidlo:
+
+- Pokud hlavní zákaznická cesta překročí akční hranici dvakrát za týden, další plánovaná práce se přehodnotí.
+- Pokud stejný typ incidentu nastane opakovaně, nejde o náhodu, ale o provozní dluh.
+- Pokud release zhorší SLO, rollback nebo hotfix má přednost před kosmetickými úpravami.
+- Pokud zákazníci dopad incidentu ani nepoznají, zapiš poučení, ale nedělej z toho divadlo.
+
+Smyslem není trestat tým za každou chybu. Smyslem je mít objektivní brzdu, která řekne: „Teď už další funkce nepomůžou, protože základní slib produktu praská.“
+
+### AT.5 Interní a veřejné sliby odděl
+
+Ne každý provozní slib patří na veřejnou stránku. Interní SLO může být přísnější, detailnější a praktičtější. Veřejný slib má být stručný, srozumitelný a splnitelný.
+
+Interně si můžeš držet například:
+
+- úspěšnost hlavního workflow,
+- rychlost odpovědi podpory,
+- čas do prvního incident updatu,
+- dobu obnovy po výpadku,
+- úspěšnost záloh a restore drillů,
+- dobu zpracování žádosti o export nebo smazání dat.
+
+Veřejně můžeš komunikovat:
+
+- kde zákazník uvidí stav služby,
+- jak hlásit problém,
+- jak rychle typicky reaguješ v pracovní době,
+- jak řešíš datové incidenty,
+- jak zákazník získá svá data,
+- jaké principy používáš pro minimalizaci dat a evropský provoz.
+
+Tím chráníš dvě věci najednou: zákazník dostane jasná očekávání a tým si nechá dost prostoru pro praktické řízení provozu.
+
+### AT.6 SLO review patří do měsíčního rytmu
+
+SLO není dokument, který jednou napíšeš a pak ho uložíš vedle zapomenutých OKR. Jednou měsíčně si dej krátké provozní review:
+
+1. Které zákaznické cesty měly problém?
+2. Který slib jsme nedodrželi nebo málem nedodrželi?
+3. Co byl skutečný dopad na zákazníky?
+4. Jaká oprava sníží riziko opakování?
+5. Máme příliš přísné, příliš měkké nebo špatně zvolené SLO?
+6. Sbíráme kvůli měření zbytečná data?
+7. Co se má změnit v runbooku, monitoringu nebo zákaznické komunikaci?
+
+Výstupem nemá být dlouhý report. Stačí tři odstavce: co se stalo, co upravujeme, kdo to vlastní. Pokud z review nevznikne žádná akce, pravděpodobně jsi právě uspořádal provozní karaoke.
+
+### AT.7 Šablona SLO karty
+
+Použij jednoduchou kartu pro každý důležitý slib:
+
+```md
+## SLO karta: [název zákaznické cesty]
+
+- Zákaznický slib: [co má uživatel dokázat]
+- SLI: [jaký signál měříme]
+- SLO: [cílová úroveň]
+- Akční hranice: [kdy vzniká úkol nebo incident]
+- Vlastník: [role / člověk]
+- Zákaznický dopad: [co zákazník pozná]
+- Dočasný postup: [co uděláme při selhání]
+- Trvalá oprava: [jak snížíme riziko opakování]
+- Privacy-first kontrola: [jak měříme bez zbytečného sběru osobních dat]
+- Review rytmus: [týdně / měsíčně / po incidentu]
+```
+
+Ukázka pro SaaS dashboard:
+
+```md
+## SLO karta: otevření hlavního dashboardu
+
+- Zákaznický slib: přihlášený uživatel se dostane k pracovnímu přehledu
+- SLI: syntetický login a načtení dashboardu bez chyby
+- SLO: 99 % testů za posledních 30 dní uspěje
+- Akční hranice: tři selhání během 15 minut spouští incident kontrolu
+- Vlastník: provoz / vývoj
+- Zákaznický dopad: uživatel nemůže začít práci nebo ztrácí důvěru ve službu
+- Dočasný postup: ověřit login, databázi, poslední release a cache
+- Trvalá oprava: podle příčiny doplnit test, alert, rollback krok nebo optimalizaci
+- Privacy-first kontrola: syntetický účet bez zákaznických dat, agregovaný provozní log
+- Review rytmus: měsíční provozní review a po každém incidentu
+```
+
+### AT.8 Checklist: provozní sliby pod kontrolou
+
+- Máme vybrané tři až pět hlavních zákaznických cest.
+- Každá cesta má popsaný zákaznický slib lidskou větou.
+- Pro hlavní sliby existuje měřitelný SLI.
+- SLO je realistické vzhledem k velikosti týmu, infrastruktuře a podpoře.
+- Akční hranice říká, kdy vzniká incident, úkol nebo eskalace.
+- Vlastník ví, co má dělat při porušení slibu.
+- Interní SLO jsou praktičtější a detailnější než veřejná komunikace.
+- Monitoring měří službu, ne zbytečné profily jednotlivých uživatelů.
+- SLO review probíhá pravidelně a vytváří konkrétní provozní úkoly.
+- Opakované porušení SLO se zapisuje jako provozní dluh nebo priorita stability.
+
+---
+
 ## Pracovní log
+
+- 2026-08-30 17:00 UTC — Doplněna příloha AT o SLO a provozních slibech: zákaznické cesty, SLI/SLO/akční hranice, realistické závazky, error budget, interní vs. veřejné sliby, měsíční review, SLO karta a privacy-first checklist.
 
 - 2026-08-30 16:00 UTC — Doplněna příloha AS o provozním dluhu: inventura rizik, prioritizace podle dopadu, debt register, pravidelné splácení, privacy-first priority, uzavírací zápis a checklist.
 
