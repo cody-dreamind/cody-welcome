@@ -7173,7 +7173,195 @@ Privacy-first pravidlo: do demo karty nepiš drby, osobní poznámky ani citliv�
 
 Demo je úspěšné, když po něm nevznikne jen dobrý pocit, ale jasnější rozhodnutí. Buď zákazník ví, proč pokračovat, nebo obě strany vědí, proč nepokračovat. Obojí je lepší než tři týdny zdvořilého follow-up ping-pongu.
 
+
+## Příloha AM: Pilotní projekt před velkou implementací bez falešné jistoty
+
+Pilot není levnější verze celého projektu. Je to řízený test rizika: ověříš, jestli řešení opravdu přináší hodnotu, jestli spolupráce funguje a jestli technické i datové předpoklady stojí na zemi. Když se pilot navrhne špatně, vznikne jen malý chaos před velkým chaosem. Když se navrhne dobře, ušetří měsíce práce, rozpočet i nervy lidí, kteří už mají v kalendáři dost bolesti.
+
+*Codyho komentář:* Pilot má být jako ochutnávka v dobré restauraci. Malá, poctivá a dost konkrétní na to, aby člověk poznal, jestli chce celé menu. Nemá to být plastová fotka jídla nalepená na dveřích.
+
+### AM.1 Pilot začíná otázkou, co se má rozhodnout
+
+Nejhorší pilotní zadání zní: „Zkusíme si to a uvidíme.“ To je hezké, ale manažersky stejně přesné jako horoskop pro databázi. Pilot musí mít rozhodovací otázku.
+
+Příklady dobrých otázek:
+
+- Dokáže nový zákaznický portál snížit počet ručních e-mailů v servisu?
+- Umí privacy-first analytika dát týmu dost signálů pro rozhodování bez osobního sledování uživatelů?
+- Zvládne integrace s účetním systémem pokrýt hlavní workflow bez ručního přepisování?
+- Pomůže nový onboarding dostat zákazníka k první hodnotě během prvního týdne?
+- Je interní tým schopný používat nový proces bez každodenní asistence dodavatele?
+
+Naopak slabé otázky jsou:
+
+- Líbí se nám nové řešení?
+- Je to moderní?
+- Dokáže to časem nahradit všechno?
+- Nešlo by do pilotu přidat ještě pět dalších oddělení?
+
+Pilot má odpovědět na jednu až tři zásadní otázky. Jakmile jich má deset, už to není pilot. Je to projekt převlečený za pilot, aby se všichni méně báli podpisu.
+
+### AM.2 Rozsah musí být malý, ale skutečný
+
+Pilot nemá být prezentace bez kontaktu s realitou. Potřebuje živý, i když omezený scénář. Ideální rozsah je takový, kde se objeví skutečné tření, ale případné selhání neohrozí provoz firmy.
+
+Dobré pilotní řezy:
+
+- jeden tým místo celé firmy,
+- jeden typ zákaznického požadavku místo všech procesů,
+- jedna landing page místo kompletního redesignu webu,
+- jeden segment uživatelů místo celé databáze kontaktů,
+- jeden reportovací rytmus místo kompletní BI vrstvy.
+
+U každého řezu si napiš:
+
+- co je uvnitř pilotu,
+- co je mimo pilot,
+- kdo smí rozsah měnit,
+- co by znamenalo pilot zastavit,
+- co se stane s daty po skončení pilotu.
+
+Privacy-first poznámka: pilot je časté místo, kde se z pohodlnosti kopírují reálná data do testovacích systémů. Nedělej to automaticky. Použij anonymizovaný vzorek, syntetická data nebo jen minimální sadu reálných záznamů s jasným účelem, přístupem a termínem smazání.
+
+### AM.3 Úspěch definuj před startem, ne při závěrečné prezentaci
+
+Když kritéria úspěchu řešíš až na konci, každý si najde vlastní interpretaci. Dodavatel ukáže hezké screenshoty, zákazník řekne, že „to ještě není ono“, a finance se zeptají, proč se za experiment platilo. Romantika jako z enterprise telenovely.
+
+Pilot potřebuje tři typy kritérií:
+
+- **Hodnotová kritéria:** jaký výsledek má být vidět pro zákazníka nebo tým.
+- **Provozní kritéria:** jestli řešení funguje v běžném rytmu, ne jen na demo callu.
+- **Riziková kritéria:** co se musí ověřit kolem bezpečnosti, dat, výkonu nebo integrací.
+
+Příklad pro zákaznický portál:
+
+- Hodnota: servisní tým zvládne 20 vybraných požadavků bez ručního přeposílání e-mailů.
+- Provoz: dva interní lidé umí požadavek přijmout, doplnit stav a uzavřít bez asistence vývojáře.
+- Riziko: data zákazníků zůstávají v evropském provozu, přístupy jsou oddělené podle rolí a export funguje.
+
+Čísla jsou užitečná, ale nesmí být falešně přesná. U malého pilotu může být lepší sledovat kombinaci konkrétního výsledku a kvalitativní zpětné vazby než se tvářit, že deset uživatelů vytvořilo vědecký benchmark.
+
+### AM.4 Pilotní tým potřebuje vlastníka, ne jen účastníky
+
+Pilot bez vlastníka se rozpadne v kalendářích. Lidé sice „jsou u toho“, ale nikdo nerozhoduje, nikdo nepřipomíná vstupy a nikdo neřekne, jestli výsledek stačí pro další krok.
+
+Role v pilotu:
+
+- **Business vlastník:** říká, proč pilot existuje a jaké rozhodnutí se čeká.
+- **Provozní garant:** hlídá každodenní realitu týmu a sbírá praktické překážky.
+- **Technický garant:** řeší integrace, přístupy, data a limity infrastruktury.
+- **Dodavatel / produktový tým:** dodává řešení, dokumentuje poznatky a navrhuje další krok.
+- **Uživatelé pilotu:** zkouší konkrétní scénáře a dávají zpětnou vazbu k práci, ne k abstraktní představě.
+
+U malého týmu může jedna osoba držet víc rolí. Důležité je, aby byly role vyslovené. „Nějak to pohlídáme“ není role. To je kouzelnická formule, která většinou vyvolá tabulku plnou nedodělků.
+
+### AM.5 Pilot má mít krátký rytmus kontroly
+
+Pilot nepotřebuje velký steering committee s prezentací na 47 slajdů. Potřebuje pravidelný rytmus, který včas zachytí, že lidé řešení nepoužívají, chybí vstupní data nebo se rozsah nenápadně nafukuje.
+
+Praktický rytmus pro čtyřtýdenní pilot:
+
+1. **Den 0:** potvrzení cíle, rozsahu, dat, rolí a kritérií úspěchu.
+2. **Týden 1:** kontrola přístupů, prvních scénářů a největších tření.
+3. **Týden 2:** úprava drobných překážek, bez změny hlavního cíle.
+4. **Týden 3:** sběr důkazů hodnoty, poznámek uživatelů a otevřených rizik.
+5. **Týden 4:** rozhodnutí: pokračovat, upravit, zastavit nebo rozšířit.
+
+Na každé kontrole stačí tři otázky:
+
+- Co jsme se naučili od posledně?
+- Co blokuje rozhodnutí?
+- Co uděláme do další kontroly?
+
+Výstupem nemá být pocit, že jsme se potkali. Výstupem má být aktualizovaná pilotní karta a jasné akce.
+
+### AM.6 Data z pilotu nesmí zůstat jako zapomenutý kufr
+
+Pilot často vytvoří zvláštní datový mezistav: testovací účty, exporty, dočasné tabulky, sdílené složky, screenshoty a poznámky z rozhovorů. Když se neuklidí, zůstane po něm datový binec. A datový binec je přesně ten typ suvenýru, který nechceš.
+
+Před startem stanov:
+
+- jaká data se použijí,
+- kde budou uložena,
+- kdo k nim bude mít přístup,
+- jestli jde o osobní nebo citlivá data,
+- kdy se smažou nebo převedou do produkčního systému,
+- kdo potvrdí úklid po pilotu.
+
+Po skončení pilotu udělej datový závěr:
+
+- smaž dočasné účty a tokeny,
+- zruš sdílení složek,
+- odstraň exporty, které už nejsou potřeba,
+- ponech jen agregované poznatky a schválenou dokumentaci,
+- pokud se pokračuje do produkce, převeď data řízeně, ne kopírováním přes náhodný soubor.
+
+Privacy-first pilot není pomalejší. Je jen méně líný v místech, kde se později špatně uklízí.
+
+### AM.7 Šablona pilotní karty
+
+```markdown
+## Pilotní karta: [název pilotu]
+
+Datum startu:
+Datum ukončení:
+Business vlastník:
+Provozní garant:
+Technický garant:
+
+### Rozhodovací otázka
+- Co má pilot potvrdit nebo vyvrátit:
+
+### Rozsah
+- Uvnitř pilotu:
+- Mimo pilot:
+- Zapojený tým / segment:
+- Omezení:
+
+### Kritéria úspěchu
+- Hodnotová:
+- Provozní:
+- Riziková:
+
+### Data a přístupy
+- Použitá data:
+- Osobní údaje ano/ne:
+- Úložiště:
+- Přístupy:
+- Termín smazání / převodu:
+
+### Rytmus kontroly
+- Kontrolní schůzky:
+- Kde zapisujeme poznatky:
+- Kdo rozhoduje změny rozsahu:
+
+### Výsledek
+- Pokračovat / upravit / zastavit / rozšířit:
+- Důvody:
+- Další krok:
+```
+
+Kartu drž krátkou. Když má pilotní karta deset stran, někdo se bojí rozhodnutí a maskuje to dokumentací. Dokumentace je skvělá věc, ale nemá sloužit jako kouřostroj.
+
+### AM.8 Checklist: pilot, který pomáhá rozhodnout
+
+- [ ] Pilot má jednu až tři jasné rozhodovací otázky.
+- [ ] Rozsah je malý, ale pracuje se skutečným scénářem.
+- [ ] Je jasně napsané, co je mimo pilot.
+- [ ] Kritéria úspěchu jsou definovaná před startem.
+- [ ] Pilot má business vlastníka, provozního garanta a technický kontakt.
+- [ ] Zapojení uživatelé vědí, co mají vyzkoušet a jak dát zpětnou vazbu.
+- [ ] Datová sada je minimalizovaná, anonymizovaná nebo jinak vědomě omezená.
+- [ ] Přístupy, exporty a testovací účty mají plán úklidu.
+- [ ] Kontrolní rytmus zachytí problémy dřív než závěrečná schůzka.
+- [ ] Výsledek pilotu vede ke konkrétnímu rozhodnutí, ne k nekonečnému „ještě to promyslíme“.
+- [ ] Pokud pilot neuspěje, zapíšeme poučení bez hledání viníka.
+- [ ] Pokud pilot uspěje, další fáze má nový rozsah, rozpočet a provozní pravidla.
+
+Dobrý pilot není trik, jak zákazníka nenápadně dotlačit k velké smlouvě. Je to férový způsob, jak společně snížit nejistotu. Když po pilotu obě strany vědí víc než na začátku, splnil svůj účel — i kdyby výsledek byl „teď ještě nepokračovat“.
+
 ## Pracovní log
+- 2026-08-30 10:00 UTC — Doplněna příloha AM o pilotním projektu před větší implementací: rozhodovací otázka, omezený rozsah, kritéria úspěchu, role, kontrolní rytmus, úklid dat, šablona pilotní karty a checklist.
 - 2026-08-30 09:01 UTC — Doplněna příloha AL o demo callu: úvodní discovery otázky, scénáře podle zákazníka, prodej hodnoty místo obrazovek, privacy-first část dema, jasný závěr, shrnutí po demu, interní demo karta a checklist.
 - 2026-08-30 08:00 UTC — Doplněna příloha AK o auditu homepage před kampaní: test první obrazovky, CTA, důkazy, formulář s datovou minimalizací, privacy-first měření, mobilní použitelnost a checklist.
 - 2026-08-30 07:00 UTC — Doplněna příloha AJ o případových studiích a referencích bez vyzrazování zákaznického zákulisí: průběžný sběr důkazů, rozhodovací struktura, anonymizace, souhlas, kvalitativní výsledky, CTA, šablona a checklist.
