@@ -7497,7 +7497,180 @@ Výstupem mají být tři seznamy: ponechat, opravit, nerozšiřovat. „Ponecha
 
 Přechod do produkce je místo, kde se ukáže, jestli byl pilot opravdu přípravou na reálný provoz, nebo jen hezkou ukázkou. Dobrá produkce nemusí být velká. Musí být srozumitelná, udržitelná a fér k lidem i datům.
 
+---
+
+## Příloha AO: Release proces bez pátečního adrenalinu
+
+Když produkt začne používat víc lidí, každá změna má větší dosah. To neznamená, že máš přestat nasazovat často. Znamená to, že změny musí mít jasný rytmus, odpovědnost a cestu zpět. Malý SaaS tým nepotřebuje těžkopádný enterprise release board, kde se schvaluje i změna textu v tlačítku. Potřebuje jednoduchý systém, který snižuje překvapení.
+
+Release proces je dohoda o tom, jak se nápady mění v bezpečně dodanou hodnotu. Když tahle dohoda chybí, tým začne spoléhat na paměť, štěstí a větu „tohle je jen malá změna“. Ta věta mimochodem historicky předchází překvapivě velkému množství malých požárů.
+
+*Codyho komentář:* Nejlepší release proces není ten, který umí zastavit všechno. Je to ten, který umí pustit dobré změny rychle a rizikové změny pomalu. Jinak řečeno: semafor, ne betonová zeď.
+
+### AO.1 Rozděl změny podle rizika
+
+Ne každá změna potřebuje stejnou kontrolu. Oprava překlepu v nápovědě a migrace platebního workflow nejsou stejná liga, i když obě skončí v produkci.
+
+Praktické rozdělení:
+
+- **Nízké riziko:** texty, malé vizuální úpravy, dokumentace, interní štítky, drobné opravy bez dopadu na data.
+- **Střední riziko:** změny formulářů, nové eventy v analytice, úprava onboardingu, menší změna oprávnění nebo e-mailových šablon.
+- **Vysoké riziko:** platby, přihlašování, migrace dat, mazání dat, změny rolí, integrace třetích stran, exporty a veřejné API.
+
+Ke každé kategorii si napiš minimální bránu:
+
+- nízké riziko: kontrola druhým člověkem nebo aspoň náhled před nasazením,
+- střední riziko: test scénáře, kontrola datového dopadu a krátká poznámka v changelogu,
+- vysoké riziko: plán rollbacku, záloha nebo export před změnou, jasné okno nasazení a připravená komunikace.
+
+Tím se vyhneš dvěma extrémům: buď všechno pouštět bez rozmyslu, nebo všechno brzdit tak dlouho, až tým začne proces obcházet.
+
+### AO.2 Changelog piš pro lidi, ne pro archeology
+
+Changelog není skládka commit message. Je to stručná paměť produktu. Má pomoct týmu, podpoře i zákazníkům pochopit, co se změnilo a proč.
+
+U každého releasu stačí:
+
+- co se změnilo,
+- komu to pomáhá,
+- jestli se mění chování uživatele,
+- jestli se mění práce s daty,
+- jestli je potřeba něco udělat ručně.
+
+Příklad špatně:
+
+> Refactor lead form validation and update event names.
+
+Příklad lépe:
+
+> U poptávkového formuláře jsme zpřesnili validaci telefonu a sjednotili názvy měřených událostí. Uživatelé vidí jasnější chybu při neplatném čísle. Do analytiky neposíláme žádná nová osobní data.
+
+Changelog nemusí být veřejný pro každou interní drobnost. Ale tým musí mít jedno místo, kde najde historii důležitých změn. Jinak se za tři měsíce řeší detektivka „kdy se to rozbilo“ a všichni najednou vypadají jako podezřelí v levném krimi.
+
+### AO.3 Feature flag není omluva pro chaos
+
+Feature flag umí snížit riziko, protože oddělí nasazení kódu od zapnutí funkce. Ale když se s nimi nepracuje disciplinovaně, vznikne z produktu šuplík plný napůl zapnutých realit.
+
+Používej flagy hlavně pro:
+
+- postupné zapnutí nové funkce malé skupině uživatelů,
+- bezpečné vypnutí problematické části bez rollbacku celé aplikace,
+- interní test před veřejným uvedením,
+- oddělení technického releasu od marketingového oznámení.
+
+Ke každému flagu napiš:
+
+- kdo je vlastník,
+- komu je zapnutý,
+- jak poznáš, že funguje,
+- kdy se odstraní,
+- co se stane, když ho vypneš.
+
+Flag bez data úklidu je technický dluh s vypínačem. Ze začátku působí elegantně, později se ho všichni bojí zmáčknout.
+
+### AO.4 Rollback plán piš před nasazením
+
+Rollback není pesimistický scénář. Je to známka dospělého provozu. U nízkorizikové změny může být rollback prostý: vrátit předchozí verzi. U změn dat, přístupů nebo plateb musí být plán konkrétnější.
+
+Před rizikovým releasem si odpověz:
+
+- Jak poznáme, že release selhal?
+- Kdo rozhoduje o rollbacku?
+- Co přesně vracíme: kód, konfiguraci, data, nebo jen vypínáme flag?
+- Jsou data po změně kompatibilní se starší verzí?
+- Máme zálohu nebo export před migrací?
+- Koho musíme informovat, pokud rollback proběhne?
+
+Nejhorší rollback je ten, který začne větou „nějak to vrátíme“. To je technický ekvivalent hasicího přístroje namalovaného na zdi.
+
+### AO.5 Nasazovací okna chrání tým i zákazníky
+
+Malý tým často nasazuje kdykoliv, protože může. To je skvělé pro rychlost, ale ne každá změna patří do pátečního večera nebo před důležitou zákaznickou prezentaci.
+
+Jednoduché pravidlo:
+
+- běžné nízkorizikové releasy nasazuj průběžně,
+- střední změny dávej do hodin, kdy je tým dostupný pro podporu,
+- vysoké riziko plánuj mimo špičku a s jasným rozhodovacím člověkem online,
+- nikdy nenasazuj zásadní změnu těsně před odchodem všech lidí od klávesnice.
+
+Pokud máš zákazníky v různých zemích Evropy, mysli i na jejich pracovní dobu. Privacy-first provoz není jen o tom, kde leží server. Je to i respekt k tomu, že zákazník nemá být testerem překvapení.
+
+### AO.6 Privacy-first release kontroluje datový dopad
+
+Každý release by měl mít malou datovou otázku:
+
+> Mění tahle změna, jaká data sbíráme, kam je posíláme, kdo k nim má přístup nebo jak dlouho je držíme?
+
+Pokud ne, stačí poznámka „bez datového dopadu“. Pokud ano, je potřeba zkontrolovat:
+
+- zda sbíráš jen nezbytná data,
+- zda je změna popsaná v interní datové mapě,
+- zda není potřeba upravit text u formuláře nebo zásady zpracování,
+- zda nová integrace neposílá data mimo domluvený evropský provoz,
+- zda se nové eventy měří agregovaně a bez zbytečné identifikace lidí,
+- zda má změna retenční pravidlo.
+
+Tohle nemusí zabít rychlost. Naopak. Když se datový dopad řeší jako součást releasu, nevznikají pozdější právní a technické úklidy, které bolí víc než deset minut prevence.
+
+### AO.7 Šablona release karty
+
+```markdown
+## Release karta: [název / datum]
+
+### Cíl změny
+- Co chceme zlepšit:
+- Pro koho:
+- Jak poznáme úspěch:
+
+### Rozsah
+- Součástí releasu:
+- Mimo release:
+- Riziková oblast: nízká / střední / vysoká
+
+### Test scénáře
+- Hlavní uživatelský scénář:
+- Okrajové stavy:
+- Kdo kontroloval:
+
+### Datový dopad
+- Nová data:
+- Nové integrace:
+- Změna přístupů:
+- Retence / mazání:
+
+### Nasazení a rollback
+- Kdy nasazujeme:
+- Kdo je dostupný:
+- Jak poznáme problém:
+- Jak vracíme zpět:
+
+### Komunikace
+- Interní poznámka:
+- Zákaznický changelog:
+- Support upozornění:
+```
+
+Release kartu nepoužívej na každou kosmetickou drobnost. Používej ji tam, kde změna může ovlivnit zákazníka, data, peníze nebo důvěru. To jsou přesně oblasti, kde „já jsem myslel“ nepatří mezi provozní procesy.
+
+### AO.8 Checklist: release bez zbytečného dramatu
+
+- [ ] Změna je zařazená podle rizika.
+- [ ] Víme, komu release pomáhá a jaký výsledek má přinést.
+- [ ] Hlavní uživatelský scénář byl ověřený před nasazením.
+- [ ] U rizikových změn existuje konkrétní rollback plán.
+- [ ] Datový dopad je označený jako žádný, nebo popsaný a zkontrolovaný.
+- [ ] Feature flagy mají vlastníka, cílovou skupinu a datum úklidu.
+- [ ] Changelog je srozumitelný pro tým, podporu i zákazníky.
+- [ ] Nasazení probíhá v době, kdy je dostupný člověk schopný reagovat.
+- [ ] Po releasu někdo zkontroluje klíčový scénář v produkci.
+- [ ] Opakované problémy z releasů se vrací do procesu, ne jen do povzdechů v chatu.
+- [ ] Zákazník není překvapený změnou, která ovlivňuje jeho workflow, data nebo fakturaci.
+
+Dobrý release proces má být lehký, ale viditelný. Pomáhá týmu posílat hodnotu často, bez toho aby se z každého nasazení stal malý survival kurz. Rychlost je výhoda jen tehdy, když si za ní nemusíš pokaždé uklízet spálené obočí.
+
 ## Pracovní log
+- 2026-08-30 12:00 UTC — Doplněna příloha AO o release procesu pro malé SaaS týmy: rozdělení změn podle rizika, changelog, feature flagy, rollback plán, nasazovací okna, datový dopad, release karta a checklist.
 - 2026-08-30 11:01 UTC — Doplněna příloha AN o přechodu z pilotu do produkce: rozhodnutí co škálovat, produkční minimum, migrace dat, odpovědnosti, rollout po vlnách, podpora jako zpětná vazba, 30denní review a checklist.
 - 2026-08-30 10:00 UTC — Doplněna příloha AM o pilotním projektu před větší implementací: rozhodovací otázka, omezený rozsah, kritéria úspěchu, role, kontrolní rytmus, úklid dat, šablona pilotní karty a checklist.
 - 2026-08-30 09:01 UTC — Doplněna příloha AL o demo callu: úvodní discovery otázky, scénáře podle zákazníka, prodej hodnoty místo obrazovek, privacy-first část dema, jasný závěr, shrnutí po demu, interní demo karta a checklist.
