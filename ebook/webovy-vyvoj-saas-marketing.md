@@ -7935,7 +7935,173 @@ Drill drž malý. Jeden scénář, jeden vlastník, jedna stránka poznámek, p�
 Incident drill není pojištění proti všem problémům. Je to způsob, jak snížit počet překvapení a zrychlit reakci, když se něco pokazí. A v SaaS i webovém provozu často nerozhoduje, jestli se problém nikdy nestane. Rozhoduje, jestli ho poznáš, omezíš dopad a zákazníkovi ukážeš, že máš věci pod kontrolou.
 
 
+
+---
+
+## Příloha AR: Postmortem, které opraví systém místo hledání viníka
+
+Postmortem je krátký zápis po incidentu, chybě nebo nepovedeném releasu. Jeho účel není najít člověka, na kterého se ukáže prstem. Účel je pochopit, proč systém dovolil, aby problém vznikl, nebyl včas vidět nebo se řešil složitěji, než bylo nutné.
+
+Malý tým často postmortem přeskočí, protože „už je opraveno“. Jenže opravený symptom není totéž jako opravený proces. Pokud se rozbil formulář a někdo ho ručně nahodil, zákazník je možná spokojený dnes. Ale bez zápisu nevíš, proč to monitoring nechytil, proč rollback trval dlouho a proč se stejná chyba za měsíc nevrátí v kostýmu s falešným knírem.
+
+Dobré postmortem má být krátké, konkrétní a bezpečné pro tým. Pokud z něj uděláš soudní síň, lidé začnou schovávat informace. Pokud z něj uděláš praktický pracovní dokument, začne tým zlepšovat provoz s každým problémem.
+
+*Codyho komentář:* Incident bez postmortem je drahé školení bez poznámek. Zaplatíš bolestí, stresem a reputací — a pak si z hodiny odneseš jen „příště budeme opatrnější“. To je plán asi jako hasit server kropicí konví.
+
+### AR.1 Sepiš fakta dřív než dojmy
+
+Začni časovou osou. Ne interpretací, ne pocity, ne větou „někdo něco pokazil“. Prostě fakta:
+
+- kdy problém začal,
+- kdy ho tým poprvé zaznamenal,
+- kdo ho nahlásil,
+- jaký byl dopad na zákazníky,
+- jaké kroky tým udělal,
+- kdy byla služba stabilní,
+- jak se ověřilo, že je hotovo.
+
+Časová osa nemusí být dokonalá. Stačí pracovní přesnost. Pokud nevíš, kdy problém začal, napiš interval: „mezi 09:40 a 10:05“. Pokud nevíš, kolik uživatelů bylo zasaženo, napiš, co víš a co ověřit nejde. Nejhorší je vymyslet si jistotu jen proto, aby dokument vypadal hezky.
+
+Privacy-first poznámka: při sběru faktů nepřepisuj do postmortem zbytečné osobní údaje. Nepotřebuješ celé e-maily zákazníků, IP adresy ani obsah zpráv. Většinou stačí agregace, interní ID případu nebo anonymizovaný popis.
+
+### AR.2 Odděl příčinu od spouštěče
+
+Spouštěč je událost, po které problém vybuchl. Příčina je důvod, proč systém nebyl odolnější.
+
+Příklad:
+
+- **Spouštěč:** nasadili jsme změnu formuláře.
+- **Příčina:** neměli jsme automatickou kontrolu odeslání formuláře po deployi.
+- **Další příčina:** alert sledoval jen dostupnost stránky, ne dokončení hlavní akce.
+- **Systémová příčina:** release checklist neobsahoval kritické zákaznické cesty.
+
+Kdyby postmortem skončilo u věty „chybu způsobil release“, tým se moc nenaučí. Release je normální součást provozu. Lepší otázka zní: proč mohla běžná změna projít tak, že poškodila hlavní hodnotu pro zákazníka?
+
+Používej otázku „proč“ několikrát, ale ne jako výslech. Cílem není člověka zatlačit do kouta. Cílem je dostat se od povrchu ke změně procesu, testu, monitoringu nebo dokumentace.
+
+### AR.3 Dopad popiš jazykem zákazníka
+
+Technický dopad je důležitý, ale sám o sobě nestačí. „Endpoint vracel 500“ je pro vývojáře jasné. Pro podnikání je důležitější věta: „Noví zákazníci nemohli 43 minut odeslat poptávku.“
+
+U každého incidentu zkus popsat tři vrstvy dopadu:
+
+- **Uživatelský dopad:** co zákazník nemohl udělat.
+- **Obchodní dopad:** co tým mohl ztratit nebo zpozdit.
+- **Důvěrový dopad:** jestli problém mohl narušit pocit bezpečí, spolehlivosti nebo kontroly nad daty.
+
+Ne každý incident má dramatický obchodní dopad. To je v pořádku. Důležité je nepodceňovat malé signály. Pokud zákazník opakovaně narazí na drobnou chybu v onboardingovém flow, nemusí napsat stížnost. Prostě odejde. Tiché ztráty jsou oblíbený sport špatně měřených produktů.
+
+### AR.4 Akční kroky musí mít vlastníka a důkaz dokončení
+
+Postmortem bez úkolů je jen kronika bolesti. Úkoly ale musí být malé, ověřitelné a přiřazené. „Zlepšit monitoring“ není úkol. „Přidat kontrolu úspěšného odeslání formuláře každých 5 minut a alert do provozního kanálu“ už úkol je.
+
+Dobré akční kroky mají čtyři části:
+
+- **Co:** konkrétní změna.
+- **Kdo:** vlastník, ne „tým“.
+- **Kdy:** termín nebo nejbližší review.
+- **Důkaz:** jak poznáme, že je hotovo.
+
+Příklady:
+
+- Přidat smoke test kontaktního formuláře po deployi; vlastník: vývoj; důkaz: test běží v release checklistu.
+- Upravit runbook pro restart workeru; vlastník: provoz; důkaz: nový člen týmu podle něj projde postup.
+- Zkrátit status update šablonu pro zákazníky; vlastník: support; důkaz: šablona je dostupná v incident složce.
+- Omezit logování vstupních hodnot formuláře; vlastník: backend; důkaz: logy obsahují jen typ události a interní ID.
+
+Raději tři hotové kroky než dvanáct krásných úkolů, které zestárnou v backlogu jako jogurt za monitorem.
+
+### AR.5 Sdílej poučení bez zbytečného divadla
+
+Ne každý incident potřebuje veřejný román. Ale každý vážnější problém potřebuje interní sdílení a někdy i krátkou zprávu zákazníkům. Rozhoduj podle dopadu, ne podle ega.
+
+Interně sdílej:
+
+- co se stalo,
+- koho se to dotklo,
+- co už je opravené,
+- co se mění do budoucna,
+- kde je detailní zápis.
+
+Externě komunikuj jednoduše:
+
+> Dnes mezi 10:05 a 10:48 nebylo možné odeslat poptávkový formulář. Problém jsme opravili, nové poptávky znovu chodí a doplnili jsme automatickou kontrolu odeslání po každém nasazení.
+
+Pokud šlo o data, buď opatrnější a přesnější. Neimprovizuj právní závěry z pocitu. Drž se faktů, zapoj odpovědnou osobu a připrav komunikaci tak, aby zákazník rozuměl dopadu i dalším krokům.
+
+### AR.6 Udělej z postmortem knihovnu provozní inteligence
+
+Jedno postmortem pomůže jednomu incidentu. Série postmortem ukáže vzorce. Po pár měsících se začnou opakovat témata: chybějící testy, slabé alerty, nejasné vlastnictví, příliš ruční release, neuklizené datové toky, závislost na jednom člověku.
+
+Jednou měsíčně projdi poslední zápisy a hledej:
+
+- které typy incidentů se vracejí,
+- které úkoly zůstávají otevřené,
+- kde tým pořád improvizuje,
+- které systémy jsou nejkřehčí,
+- zda se zkracuje čas detekce a obnovy,
+- jestli se snižuje množství dat v logách a nástrojích.
+
+Tím se postmortem změní z administrativy na mapu investic. Možná zjistíš, že nepotřebuješ nový framework, ale lepší smoke test. Možná nepotřebuješ další dashboard, ale jasnější ownership. A možná nepotřebuješ víc meetingů, jen kratší a pravidelnější provozní review.
+
+### AR.7 Šablona krátkého postmortem
+
+```markdown
+# Postmortem: [název incidentu]
+
+## Shrnutí
+Jednou větou: co se stalo, koho se to dotklo a jaký byl výsledek.
+
+## Časová osa
+- [čas] Problém pravděpodobně začal.
+- [čas] Detekce / hlášení.
+- [čas] První reakce.
+- [čas] Stabilizace.
+- [čas] Ověření opravy.
+
+## Dopad
+- Uživatelský dopad:
+- Obchodní dopad:
+- Důvěrový nebo datový dopad:
+
+## Příčiny
+- Spouštěč:
+- Technická příčina:
+- Procesní příčina:
+- Co chybělo v monitoringu / testech / dokumentaci:
+
+## Co fungovalo dobře
+-
+
+## Co zlepšíme
+| Úkol | Vlastník | Termín | Důkaz dokončení |
+|---|---|---|---|
+| | | | |
+
+## Privacy-first poznámka
+Jak jsme minimalizovali práci s osobními údaji a co zlepšíme v logování, přístupech nebo retenci dat.
+```
+
+Šablonu drž krátkou. Pokud má tým problém vyplnit ji do 30 minut, je buď incident opravdu velký, nebo je šablona moc těžká. V obou případech ses něco naučil.
+
+### AR.8 Checklist: postmortem bez hledání viníka
+
+- [ ] Postmortem popisuje fakta, ne dojmy.
+- [ ] Časová osa obsahuje detekci, reakci, stabilizaci a ověření.
+- [ ] Dopad je popsaný jazykem zákazníka.
+- [ ] Příčina je oddělená od spouštěče.
+- [ ] Úkoly mají vlastníka, termín a důkaz dokončení.
+- [ ] Zápis neobsahuje zbytečné osobní údaje ani citlivé detaily.
+- [ ] Poučení se propsalo do testů, monitoringu, runbooku nebo release procesu.
+- [ ] Interní nebo externí komunikace odpovídá skutečnému dopadu.
+- [ ] Otevřené úkoly se kontrolují v pravidelném provozním review.
+
+Postmortem je kultura v miniaturní podobě. Buď ukáže, že tým umí mluvit o realitě bez paniky, nebo ukáže, že každý problém končí mlčením a osobní obranou. Pro privacy-first SaaS je první varianta zásadní: důvěra zákazníků stojí nejen na tom, že chyby nevznikají, ale hlavně na tom, že když vzniknou, tým je umí přiznat, opravit a proměnit v lepší systém.
+
+
 ## Pracovní log
+
+- 2026-08-30 15:00 UTC — Doplněna příloha AR o postmortem po incidentu: fakta místo dojmů, příčiny bez hledání viníka, zákaznický dopad, akční kroky, komunikace, knihovna poučení a checklist.
 - 2026-08-30 14:00 UTC — Doplněna příloha AQ o incident drillu: výběr scénáře, rozhodování během incidentu, ověření runbooku a přístupů, samostatný datový incident drill, zápis zjištění a checklist.
 - 2026-08-30 13:00 UTC — Doplněna příloha AP o první hodině po releasu: vlastník post-release kontroly, ověření hlavních cest, provozní signály, stop signály, interní komunikace, závěrečný zápis a privacy-first checklist.
 - 2026-08-30 12:00 UTC — Doplněna příloha AO o release procesu pro malé SaaS týmy: rozdělení změn podle rizika, changelog, feature flagy, rollback plán, nasazovací okna, datový dopad, release karta a checklist.
