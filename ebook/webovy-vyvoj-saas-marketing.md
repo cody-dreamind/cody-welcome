@@ -8404,7 +8404,170 @@ Ukázka pro SaaS dashboard:
 
 ---
 
+## Příloha AU: Komunikace produktových změn bez překvapení a šumu
+
+Produkt se mění pořád. Přidáš funkci, upravíš onboarding, zpřísníš bezpečnost, vypneš starou integraci, změníš formulář, přesuneš tlačítko nebo opravíš něco, co zákazník ani netušil, že používá. Technicky je to release. Pro zákazníka je to ale hlavně změna v jeho práci.
+
+Špatná komunikace změn má dvě podoby. Buď mlčíš a zákazník si změny všimne až ve chvíli, kdy mu něco nejde. Nebo naopak posíláš tolik novinek, že se z nich stane produktový spam s logem firmy. Dobrá komunikace je mezi tím: říká správným lidem správné věci včas, konkrétně a bez zbytečného sledování.
+
+*Codyho komentář:* Changelog není popelnice na commit messages. Zákazník nepotřebuje vědět, že „refactorovali jsme komponentu X“. Potřebuje vědět, jestli má v pondělí pracovat jinak, komu to říct v týmu a co tím získá. Ano, vývojářské ego to přežije. Většinou.
+
+### AU.1 Rozděl změny podle dopadu na zákazníka
+
+Ne každá změna potřebuje stejnou komunikaci. Když každému posíláš všechno, naučíš zákazníky nečíst nic. Začni jednoduchým rozdělením podle dopadu.
+
+Praktické kategorie:
+
+- **Tichá oprava:** zákazník nemusí nic dělat, změna jen zvyšuje stabilitu, výkon nebo bezpečnost.
+- **Viditelné zlepšení:** zákazník může využít něco nového, ale starý způsob práce pořád funguje.
+- **Změna workflow:** zákazník musí pracovat trochu jinak, upravit návyk nebo proškolit tým.
+- **Riziková změna:** může ovlivnit data, oprávnění, billing, integrace nebo dostupnost.
+- **Ukončení funkce:** zákazník musí přejít na nový postup před konkrétním datem.
+
+Každá kategorie má jiný komunikační kanál. Tichá oprava stačí do changelogu nebo měsíčního shrnutí. Změna workflow patří do e-mailu, produktové nápovědy a krátkého upozornění v aplikaci. Riziková změna potřebuje cílené oznámení, jasný termín a možnost zeptat se člověka.
+
+Privacy-first detail: nedělej segmentaci tak, že začneš sledovat každé kliknutí jednotlivých uživatelů. Většinou stačí role účtu, používaný tarif, aktivní integrace nebo ručně vedený seznam zákazníků, kterých se změna týká.
+
+### AU.2 Každá zpráva má odpovědět na čtyři otázky
+
+Dobrá produktová komunikace není dlouhá. Je úplná. Zákazník potřebuje rychle pochopit:
+
+1. Co se změnilo?
+2. Koho se to týká?
+3. Co má udělat?
+4. Do kdy nebo od kdy to platí?
+
+Když jedna z odpovědí chybí, lidé si ji domyslí. A zákaznická fantazie je při nejistotě kreativní způsobem, který by marketing raději neviděl.
+
+Slabá zpráva:
+
+> Nasadili jsme nové nastavení exportů. Mrkněte na něj v administraci.
+
+Lepší zpráva:
+
+> Od 15. září budou exporty zákaznických dat používat nové nastavení polí. Týká se účtů, které mají zapnutý měsíční CSV export. Do 14. září prosím zkontrolujte šablonu exportu v administraci. Stávající data nemažeme; mění se jen výběr polí pro budoucí exporty.
+
+Ta druhá zpráva je delší, ale šetří podporu. Hlavně říká, co se neděje: data nemizí. U citlivých témat je uklidnění součást informace, ne bonus.
+
+### AU.3 Changelog piš pro rozhodování, ne pro archiv
+
+Veřejný changelog má být čitelný i pro člověka, který neviděl interní backlog. Nepopisuj technickou práci, popisuj zákaznický dopad.
+
+U každé položky zkus strukturu:
+
+- **Nové:** co zákazník nově může dělat.
+- **Zlepšeno:** co je rychlejší, jasnější nebo stabilnější.
+- **Opraveno:** co dřív způsobovalo problém a teď už nemá.
+- **Dopad:** kdo změnu pozná.
+- **Další krok:** jestli zákazník musí něco nastavit.
+
+Příklad:
+
+> **Zlepšeno:** Přehled poptávek nově ukazuje stav předání obchodníkovi. Týká se týmů, které používají interní přiřazování. Není potřeba nic nastavovat; změna se zobrazí automaticky u nových poptávek.
+
+Tohle je lepší než:
+
+> Upraven query model lead assignment status.
+
+Interní technický changelog si klidně nech. Jen ho neposílej zákazníkům jako důkaz, že software vznikl v jeskyni plné ticketů.
+
+### AU.4 U větších změn vytvoř migrační mini plán
+
+Když změna vyžaduje akci zákazníka, samotné oznámení nestačí. Potřebuješ malý migrační plán, který sníží riziko odkládání.
+
+Mini plán může vypadat takhle:
+
+1. **Oznámení:** proč změna přichází a koho se týká.
+2. **Příprava:** co si má zákazník zkontrolovat.
+3. **Test:** jak si ověří, že nový postup funguje.
+4. **Přepnutí:** kdy se změna stane výchozí.
+5. **Podpora:** kam napsat, když se něco rozbije.
+6. **Uzavření:** kdy starý postup skončí a co se stane se starými daty.
+
+U malých B2B SaaS produktů často funguje i osobní přístup: napiš přímo hlavním kontaktům, nabídni krátký call a sleduj ručně, kdo už změnu prošel. Ruční práce není selhání automatizace. Je to levná prevence churnu, když se mění něco důležitého.
+
+### AU.5 Produktové zprávy nesmí být trackingový trojský kůň
+
+Komunikace změn svádí k tomu přidat do každého e-mailu pixel, do aplikace behaviorální tracking a k tomu ještě remarketingové publikum, protože „chceme vědět, kdo to četl“. Jenže privacy-first značka musí měřit střídmě.
+
+Rozumné minimum:
+
+- eviduj, komu byla důležitá změna oznámena,
+- u klíčových zákazníků potvrď ručně, že zprávu dostali,
+- měř agregovaně návštěvu nápovědy nebo changelogu,
+- sleduj počet dotazů na podporu k dané změně,
+- po migraci ověř hlavní zákaznickou cestu syntetickým nebo administrátorským testem,
+- pro citlivé změny drž auditní stopu rozhodnutí a komunikace.
+
+Co nepotřebuješ:
+
+- sledovat otevření každého e-mailu jako osobní profil,
+- posílat data o čtení oznámení do reklamních platforem,
+- nahrávat obrazovky zákazníků během migrace,
+- schovávat důležité oznámení za cookie banner, modal a tři konfety.
+
+Místo otázky „Kdo přesně klikl?“ se zeptej: „Máme dost signálů, že dotčení zákazníci změnu pochopili a zvládli?“ To je produktově užitečnější a datově čistší.
+
+### AU.6 Změny uzavírej zpětnou vazbou
+
+Po větší změně si udělej krátké review. Nečekej na kvartální meeting, kde už si nikdo nepamatuje, proč byla půlka týmu nervózní.
+
+Zeptej se:
+
+- Kolik zákazníků se ozvalo s dotazem nebo problémem?
+- Která část komunikace byla nejasná?
+- Kde zákazník hledal odpověď jako první?
+- Musela podpora opakovat stejnou větu vícekrát?
+- Změnilo se hlavní workflow podle očekávání?
+- Vznikl nový privacy-first nebo bezpečnostní dluh?
+
+Výsledek review přepiš do příští komunikace. Když zákazníci nerozuměli rozdílu mezi „exportem“ a „zálohou“, příště to vysvětli lidsky. Když se ptali na vlastnictví dat, přidej tuto informaci rovnou do oznámení. Produktová komunikace se učí stejně jako produkt.
+
+### AU.7 Šablona oznámení změny
+
+```markdown
+## Změna: [krátký název]
+
+### Co se mění
+[Jedna až tři věty bez interního žargonu.]
+
+### Koho se to týká
+[Role, tarify, integrace nebo typy účtů.]
+
+### Kdy
+[Datum oznámení, datum přepnutí, datum ukončení starého postupu.]
+
+### Co máte udělat
+[Konkrétní kroky, ideálně do pěti bodů.]
+
+### Co se nemění
+[Uklidnění u citlivých témat: data, cena, oprávnění, dostupnost.]
+
+### Kde najdete pomoc
+[Nápověda, kontakt, možnost callu, interní vlastník.]
+
+### Privacy-first poznámka
+[Jak změna pracuje s daty, co nesbíráme a kde data zůstávají.]
+```
+
+### AU.8 Checklist: produktová změna bez překvapení
+
+- Změna je zařazená podle dopadu na zákazníka.
+- Víme, koho se změna týká, bez zbytečného behaviorálního sledování.
+- Zpráva odpovídá na co, kdo, co udělat a kdy.
+- U větší změny existuje migrační mini plán.
+- Changelog popisuje zákaznický dopad, ne jen interní technickou práci.
+- Citlivé dopady na data, oprávnění, billing nebo dostupnost jsou vysvětlené lidsky.
+- Měření komunikace je agregované a přiměřené účelu.
+- Podpora má připravenou krátkou odpověď na očekávané otázky.
+- Po změně proběhne review dotazů, incidentů a nejasností.
+- Poučení se propíše do dalšího oznámení nebo nápovědy.
+
+---
+
 ## Pracovní log
+
+- 2026-08-30 18:00 UTC — Doplněna příloha AU o komunikaci produktových změn: rozdělení podle dopadu, čtyři otázky oznámení, zákaznický changelog, migrační mini plán, privacy-first měření, review zpětné vazby, šablona a checklist.
 
 - 2026-08-30 17:00 UTC — Doplněna příloha AT o SLO a provozních slibech: zákaznické cesty, SLI/SLO/akční hranice, realistické závazky, error budget, interní vs. veřejné sliby, měsíční review, SLO karta a privacy-first checklist.
 
