@@ -6835,7 +6835,164 @@ Co má čtenář udělat, pokud řeší podobný problém.
 
 Dobrá případová studie prodává tím, že ukazuje skutečnou práci. Nevyužívá zákazníka jako rekvizitu. Když ji napíšeš poctivě, získáš důkaz, který pomáhá obchodu, marketingu i budoucím zákazníkům pochopit, jak přemýšlíš. A hlavně: nezničíš důvěru, kterou ses celou spolupráci snažil vybudovat.
 
+
+## Příloha AK: Audit homepage před kampaní, aby rozpočet neutekl komínem
+
+Spustit kampaň na web, který neumí rychle vysvětlit nabídku, je drahý způsob, jak zjistit, že lidé neumí číst myšlenky. Návštěvnost sama o sobě nic nezachrání. Když homepage neodpovídá na základní otázky, reklama, partnerský odkaz i dobrý článek jen přivedou víc lidí do stejného zmatku.
+
+Audit homepage před kampaní není redesign. Je to praktická kontrola, jestli stránka zvládne převést pozornost na další krok. Cílem není dokonalost, ale odstranění největších úniků důvěry, jasnosti a měřitelnosti.
+
+*Codyho komentář:* Marketingový rozpočet je jako voda. Když máš děravý trychtýř, nepomůže lít rychleji. Pomůže nejdřív zalepit díry. Ano, zní to méně sexy než „growth hack“, ale zato to funguje i v pondělí ráno.
+
+### AK.1 První obrazovka musí projít testem pěti vteřin
+
+Návštěvník by měl z první obrazovky pochopit tři věci:
+
+- co nabízíš,
+- komu to pomáhá,
+- jaký další krok má udělat.
+
+To neznamená, že musí pochopit celý produkt. Znamená to, že ví, jestli má zůstat. Pětivteřinový test můžeš udělat ručně: ukaž screenshot homepage člověku mimo projekt, po pěti vteřinách ho zavři a zeptej se:
+
+1. Co podle tebe firma nabízí?
+2. Pro koho to je?
+3. Co bys udělal dál?
+
+Když odpoví neurčitě, problém často není v designu, ale v textu. „Digitální řešení pro moderní firmy“ je sice bezpečná fráze, ale bezpečně neříká nic. Lepší je věta, která nese segment, výsledek a rozdíl:
+
+> Stavíme privacy-first weby a SaaS nástroje pro evropské B2B týmy, které chtějí získávat poptávky bez reklamního sledování.
+
+Taková věta není pro každého. A právě proto funguje. Správný člověk se pozná, špatný člověk se sám odfiltruje. To je levnější než dlouhé obchodní hovory s lidmi, kteří nikdy neměli být lead.
+
+### AK.2 CTA musí slibovat konkrétní následný krok
+
+Tlačítko „Kontaktujte nás“ je použitelné, ale slabé. Neříká, co se stane po kliknutí. Návštěvník netuší, jestli dostane formulář, kalendář, obchodníka s excelovou palicí, nebo ticho.
+
+Lepší CTA popisuje očekávání:
+
+- „Domluvit 30minutovou konzultaci“
+- „Poslat projekt k rychlému posouzení“
+- „Získat návrh prvního kroku“
+- „Probrat migraci na evropský provoz“
+- „Nechat si zkontrolovat homepage“
+
+Vedle hlavního CTA může být bezpečná alternativa pro lidi, kteří ještě nejsou připravení mluvit:
+
+- přečíst případovou studii,
+- stáhnout checklist,
+- projít postup spolupráce,
+- otevřít technické FAQ,
+- přidat RSS zdroj.
+
+Důležité je, aby hlavní a vedlejší akce nebojovaly o stejnou pozornost. Jedna cesta má být obchodní, druhá vzdělávací. Když na homepage dáš pět rovnocenných tlačítek, nevytváříš svobodu. Vytváříš malé letiště bez odletové tabule.
+
+### AK.3 Důkaz musí být blízko slibu
+
+Když homepage slibuje rychlost, ukaž výkonový příklad. Když slibuje evropský provoz, ukaž datový tok nebo krátké vysvětlení stacku. Když slibuje lepší poptávky, ukaž strukturu formuláře, ukázku procesu nebo anonymizovaný výsledek.
+
+Dobré důkazy:
+
+- krátká reference s kontextem,
+- anonymizovaná mini případovka,
+- screenshot dashboardu nebo workflow,
+- konkrétní provozní pravidlo,
+- ukázka procesu spolupráce,
+- číslo s vysvětlením výchozího stavu.
+
+Slabé důkazy:
+
+- obecné logo bez popisu práce,
+- „máme dlouholeté zkušenosti“,
+- ikonky technologií bez vysvětlení přínosu,
+- falešná naléhavost,
+- přehnané sliby bez hranic.
+
+Důkaz má být co nejblíž místu, kde vzniká pochybnost. Pokud píšeš „bez vendor lock-inu“, hned vysvětli export dat, vlastnictví účtů a dokumentaci. Pokud píšeš „privacy-first“, hned napiš, co nesbíráš a jaké třetí strany nepoužíváš. Nenechávej důvěru až do patičky. Patička je dobrá na IČO, ne na záchranu prodejní argumentace.
+
+### AK.4 Formulář má kvalifikovat, ne vysávat osobní data
+
+Před kampaní zkontroluj, jestli formulář sbírá jen to, co opravdu potřebuješ pro první reakci. Čím víc polí, tím větší tření. Čím citlivější pole, tím větší odpovědnost.
+
+Pro první B2B poptávku často stačí:
+
+- jméno,
+- e-mail,
+- firma nebo web,
+- krátký popis situace,
+- typ zájmu,
+- volitelné časové očekávání.
+
+Co bych na začátku nesbíral bez silného důvodu:
+
+- telefon jako povinné pole,
+- přesný rozpočet jako povinné pole,
+- interní dokumenty,
+- osobní údaje koncových zákazníků,
+- souhlasy s marketingem schované pod hlavním odesláním.
+
+Privacy-first formulář má také říct, co se stane po odeslání: kdo odpoví, za jak dlouho, k čemu data použijete a jak dlouho je přibližně držíte. Nemusí to být dlouhé. Stačí lidská věta pod formulářem:
+
+> Údaje použijeme jen pro odpověď na poptávku. Neposíláme je do reklamních platforem a nemažeme je až při archeologickém nálezu, ale podle interní retenční lhůty.
+
+Dobře, tu druhou půlku můžeš napsat trochu méně Codyovsky. Ale princip drž.
+
+### AK.5 Měření kampaně nastav před spuštěním
+
+Kampaň bez měření skončí debatou podle pocitu. To je drahý sport. Před spuštěním si napiš, jak poznáš, že návštěvnost měla smysl.
+
+Praktické minimum:
+
+- návštěvy kampaní cílené stránky,
+- kliknutí na hlavní CTA,
+- odeslané formuláře,
+- zdroj návštěvy na agregované úrovni,
+- nejčastější vstupní a odchodové stránky,
+- technické chyby formuláře.
+
+Pro privacy-first provoz preferuj agregované měření bez tvorby osobních profilů. UTM parametry používej střídmě a čitelně. Nepotřebuješ do URL nacpat celý marketingový rodokmen. Stačí vědět, která kampaň, kanál nebo partner přivedl užitečný provoz.
+
+Příklad jednoduchého značení:
+
+```text
+utm_source=partner
+utm_medium=referral
+utm_campaign=homepage-audit-2026
+```
+
+Před kampaní si také ověř, že měření funguje prakticky: otevři stránku, klikni na CTA, odešli testovací formulář a zkontroluj, že interní tým vidí správný výsledek. Test po spuštění je také test, jen má navíc publikum. Publikum má rádo divadlo, ale ne v analytice.
+
+### AK.6 Rychlost a mobil nejsou technický detail
+
+Kampaň často přivede lidi z mobilu, z horší sítě nebo z krátkého okna pozornosti. Homepage proto nesmí být krásná jen na velkém monitoru v kanceláři autora. Zkontroluj:
+
+- jestli se první obrazovka načte rychle,
+- jestli nadpis a CTA nejsou pod obřím obrázkem,
+- jestli formulář funguje na mobilu,
+- jestli texty nejsou příliš drobné,
+- jestli se cookie lišta nechová jako únosce obrazovky,
+- jestli stránka funguje i bez externích skriptů, které se mohou načíst pozdě.
+
+U privacy-first webu má rychlost ještě jednu výhodu: méně trackerů, méně reklamních knihoven a méně zbytečných embedů často znamená rychlejší stránku. Soukromí a výkon nejsou nepřátelé. Spíš dobře sehraná dvojka, která odmítá nosit marketingový batoh plný šutrů.
+
+### AK.7 Checklist: homepage připravená na kampaň
+
+- [ ] První obrazovka jasně říká, co nabízíme, komu a s jakým výsledkem.
+- [ ] Hlavní CTA popisuje konkrétní následný krok.
+- [ ] Vedlejší akce je vzdělávací nebo důvěryhodnostní, ne konkurenční chaos.
+- [ ] Klíčový slib má poblíž konkrétní důkaz.
+- [ ] Homepage ukazuje proces, hranice nabídky nebo příklad výsledku.
+- [ ] Formulář sbírá jen údaje potřebné pro první odpověď.
+- [ ] U formuláře je lidsky vysvětlené, k čemu data slouží.
+- [ ] Měříme návštěvy, CTA a odeslání formuláře na agregované úrovni.
+- [ ] Testovací kliknutí a testovací poptávka se správně propíší do interního procesu.
+- [ ] Stránka je použitelná na mobilu a neblokuje ji cookie nebo reklamní vrstva.
+- [ ] UTM parametry jsou jednoduché a čitelné.
+- [ ] Po kampani víme, jaké rozhodnutí podle výsledků uděláme.
+
+Homepage nemusí být před kampaní dokonalá. Musí být srozumitelná, důvěryhodná a měřitelná bez šmírování. Když návštěvník ví, proč je na stránce, co získá a co se stane po kliknutí, rozpočet pracuje pro tebe. Když ne, jen sponzoruješ internetový průvan.
+
 ## Pracovní log
+- 2026-08-30 08:00 UTC — Doplněna příloha AK o auditu homepage před kampaní: test první obrazovky, CTA, důkazy, formulář s datovou minimalizací, privacy-first měření, mobilní použitelnost a checklist.
 - 2026-08-30 07:00 UTC — Doplněna příloha AJ o případových studiích a referencích bez vyzrazování zákaznického zákulisí: průběžný sběr důkazů, rozhodovací struktura, anonymizace, souhlas, kvalitativní výsledky, CTA, šablona a checklist.
 - 2026-08-30 06:00 UTC — Doplněna příloha AI o prvních 30 dnech po onboardingu: první úspěch, adopční signály bez sledování jednotlivců, 7denní a 30denní kontrola, vlastník zákazníka, práce se zpětnou vazbou, privacy-first pravidla a checklist.
 - 2026-08-30 05:05 UTC — Obnovena plná verze e-booku po placeholderu a doplněna příloha AH o předání zákazníka z obchodu do realizace: karta předání, slíbená hodnota, interní handoff, zákaznický kickoff, rozsah, privacy-first práce s daty, první týden a checklist.
