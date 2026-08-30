@@ -5848,7 +5848,148 @@ Poslední otázka je nejdůležitější. Nápověda nemá omlouvat špatný pro
 
 Zákaznické vzdělávání je tichá infrastruktura růstu. Když funguje, zákazníci se rychleji aktivují, podpora méně hasí stejné dotazy a obchod nemusí pořád dokola vysvětlovat základní věci. A když je navržené privacy-first, učí zákazníka nejen používat produkt, ale taky věřit tomu, jak s jeho daty zacházíš.
 
+## Příloha AE: Retence dat bez digitálního syslení
+
+Data se v malém SaaS nebo webovém projektu často hromadí nenápadně. Formulářové odpovědi, logy, exporty, staré účty, přílohy v podpoře, testovací databáze, analytické události, screenshoty z bug reportů. Každý jednotlivý kus vypadá neškodně. Dohromady z toho ale vznikne sklad, ve kterém nikdo neví, co je potřeba, co je riziko a co už mělo být dávno pryč.
+
+Privacy-first provoz neznamená „nesbírat nikdy nic“. Znamená sbírat méně, vědět proč, držet data jen přiměřeně dlouho a umět je smazat bez archeologické expedice.
+
+*Codyho komentář:* Nejlevnější osobní data jsou ta, která vůbec nemáš. Nejde je leaknout, exportovat omylem, zapomenout v testovací tabulce ani vysvětlovat v půlnočním bezpečnostním dotazníku. Skoro poezie, jen s méně právníky.
+
+### AE.1 Začni inventurou datových míst
+
+Než nastavíš retenční pravidla, musíš vědět, kde data leží. Nesnaž se hned vytvořit dokonalý katalog. Stačí praktická mapa, kterou pochopí produkt, vývoj, podpora i obchod.
+
+Pro každý systém si napiš:
+
+- jaký typ dat obsahuje,
+- kdo k nim má přístup,
+- proč je potřebuješ,
+- jak dlouho mají dávat hodnotu,
+- kde vznikají kopie,
+- kdo rozhoduje o mazání,
+- jak se data obnovují ze záloh.
+
+Příklad:
+
+```markdown
+## Datové místo: kontaktní formulář
+
+- Data: jméno, e-mail, firma, zpráva, technické metadata o odeslání
+- Účel: odpověď na poptávku a kvalifikace obchodní příležitosti
+- Přístup: obchod, pověřený zakladatel, technická podpora při incidentu
+- Kopie: e-mailová notifikace, CRM karta, záloha databáze
+- Retence: aktivní poptávka podle obchodního procesu, neaktivní poptávky pravidelně čistit
+- Mazání: owner obchodu, technická kontrola jednou měsíčně
+- Poznámka: do formuláře nedávat citlivé údaje, pokud nejsou pro nabídku nutné
+```
+
+Mapa má ukázat realitu. Když zjistíš, že se stejná poptávka ukládá do databáze, e-mailu, tabulky, CRM a ještě do exportu na ploše, není to selhání mapy. Je to mapa, která konečně přestala lhát.
+
+### AE.2 Rozděl data podle hodnoty a rizika
+
+Ne všechna data potřebují stejný režim. Užitečné je rozdělit je do čtyř praktických skupin:
+
+- **Provozní data:** účty, role, nastavení, fakturační stav, aktivní zákaznické záznamy.
+- **Obchodní data:** poptávky, nabídky, komunikace, poznámky z discovery, renewal signály.
+- **Produktová data:** agregované eventy, používání funkcí, chybové stavy, feedback.
+- **Technická data:** logy, monitoring, zálohy, auditní záznamy, crash reporty.
+
+Ke každé skupině přiřaď dvě otázky:
+
+1. Co se rozbije, když data smažeme příliš brzy?
+2. Co riskujeme, když data držíme příliš dlouho?
+
+Příklad: technické logy pomáhají řešit incidenty, ale dlouhé držení detailních logů s identifikátory uživatelů zvyšuje bezpečnostní i soukromostní riziko. Řešení není „logy nikdy nemít“. Řešení je logovat méně osobních detailů, držet je kratší dobu a dlouhodobě ukládat hlavně agregované metriky.
+
+### AE.3 Retenční pravidlo napiš lidsky
+
+Retence nemá být jen právnická tabulka. Tým musí vědět, co se děje v praxi. Dobré pravidlo má tři části:
+
+- **Kdy data vznikají:** formulář, registrace, platba, support ticket, měření události.
+- **Proč je držíme:** odpověď, provoz služby, účetnictví, bezpečnost, produktové rozhodování.
+- **Kdy a jak se mažou nebo anonymizují:** automaticky, ručně při review, po uzavření procesu, po exportu.
+
+Špatně:
+
+> Data uchováváme v souladu s platnými právními předpisy.
+
+Lépe:
+
+> Neaktivní obchodní poptávky jednou měsíčně projdeme. Pokud z nich nevznikla spolupráce ani otevřená navazující komunikace, smažeme interní pracovní poznámky a ponecháme jen nezbytný záznam o tom, že poptávka byla vyřízena.
+
+Ještě lepší je, když pravidlo podporuje produkt sám: stav poptávky, datum poslední aktivity, vlastník a tlačítko pro uzavření bez ručního lovení v pěti systémech.
+
+### AE.4 Mazání musí být proces, ne hrdinský úklid
+
+Jednorázový úklid dat je fajn, ale nestačí. Za měsíc se sklad naplní znovu. Potřebuješ rytmus, který je nudný, opakovatelný a dost jednoduchý, aby ho tým neignoroval.
+
+Praktický rytmus:
+
+- **Týdně:** zkontrolovat otevřené poptávky, support tickety a zbytečné exporty.
+- **Měsíčně:** projít neaktivní obchodní a produktové pracovní záznamy.
+- **Kvartálně:** ověřit přístupy, datovou mapu, retenční pravidla a testovací prostředí.
+- **Při odchodu zákazníka:** nabídnout export, uzavřít účet, odstranit nepotřebná provozní data a zkontrolovat integrace.
+- **Po incidentu:** zkontrolovat, jestli logování nebylo příliš detailní nebo retenčně zbytečné.
+
+U každého úklidu si nech krátký záznam: datum, rozsah, kdo provedl, co zůstalo záměrně a proč. Ne kvůli byrokracii. Kvůli tomu, aby další člověk nemusel hádat, jestli se něco zapomnělo, nebo bylo rozhodnuto vědomě.
+
+### AE.5 Testovací data nejsou odpadkový koš reality
+
+Malé týmy často kopírují produkční data do vývoje, protože je to rychlé. Rychlé to je. Bezpečné a dlouhodobě rozumné většinou ne. Testovací prostředí bývá méně hlídané, má širší přístupy, slabší monitoring a data v něm žijí déle, než kdokoli plánoval.
+
+Lepší pravidla:
+
+- používej syntetická data pro běžný vývoj,
+- produkční kopii ber jako výjimku s konkrétním důvodem,
+- před použitím data anonymizuj nebo minimalizuj,
+- nastav krátkou životnost testovacích dumpů,
+- ukládej exporty jen do schváleného místa,
+- po dokončení práce dump smaž a zaznamenej to.
+
+Příklad syntetických dat pro B2B SaaS:
+
+- firmy s realistickými, ale smyšlenými názvy,
+- uživatelé jako `ana.novakova@example.test`,
+- objednávky a tickety s běžnými scénáři,
+- chybové stavy, které chceš testovat opakovaně,
+- žádné reálné e-maily, zprávy zákazníků ani přílohy.
+
+Testovací data mají pomáhat ověřit chování systému. Nemají být tajný archiv produkce v mikině a falešném kníru.
+
+### AE.6 Zálohy mají vlastní retenční logiku
+
+Mazání v aplikaci neznamená, že data okamžitě zmizí ze všech záloh. To je normální, ale musíš tomu rozumět a umět to vysvětlit. Zálohy chrání dostupnost, nefungují jako pohodlný důvod držet všechno navždy.
+
+U záloh si definuj:
+
+- jak často vznikají,
+- jak dlouho se drží,
+- kdo k nim má přístup,
+- jak jsou šifrované,
+- jak se testuje obnova,
+- co se stane s daty smazanými v produkci,
+- jak se řeší obnova jen části zákaznických dat.
+
+Praktický kompromis: produkční data smaž nebo anonymizuj podle procesu, zálohy drž po omezenou dobu podle provozního rizika a po expiraci je nech přirozeně odrotovat. Pokud zákazník žádá mazání, komunikuj jasně rozdíl mezi aktivními systémy a dočasnými zálohami. Mlžit tady je horší než přiznat technickou realitu.
+
+### AE.7 Checklist: data držíme jen tak dlouho, jak dávají smysl
+
+- [ ] Máme mapu hlavních datových míst v produktu, marketingu, obchodu, podpoře a provozu.
+- [ ] U každého datového místa víme účel, přístupy, kopie, vlastníka a retenční logiku.
+- [ ] Data jsou rozdělená podle hodnoty a rizika, ne podle náhodných tabulek.
+- [ ] Retenční pravidla jsou napsaná tak, aby jim rozuměl i člověk mimo právní tým.
+- [ ] Mazání a anonymizace mají pravidelný rytmus, ne jen jednorázový úklid před auditem.
+- [ ] Testovací prostředí nepoužívá produkční data jako výchozí pohodlnou možnost.
+- [ ] Exporty a databázové dumpy mají krátkou životnost a jasné místo uložení.
+- [ ] Zálohy mají vlastní retenční pravidla, přístupová omezení a ověřenou obnovu.
+- [ ] Při offboardingu zákazníka řešíme export, uzavření účtu, integrace a zbylá pracovní data.
+- [ ] Dlouhodobě ukládáme raději agregace a rozhodnutí než osobní detail bez jasného účelu.
+
+Retence dat je úklidová služba důvěry. Když ji nemáš, produkt se pomalu mění v půdu plnou krabic bez popisků. Když ji máš, víš, co vlastníš, proč to vlastníš a kdy se toho s klidným svědomím zbavit.
+
 ## Pracovní log
+- 2026-08-30 02:01 UTC — Doplněna příloha AE o retenci dat: inventura datových míst, rozdělení podle hodnoty a rizika, lidsky psaná pravidla, rytmus mazání, testovací data, zálohy a privacy-first checklist.
 - 2026-08-30 01:00 UTC — Doplněna příloha AD o zákaznickém vzdělávání: mapa nejasností, obsah podle momentu, znalostní karty, provozní rytmus nápovědy, férový edukační prodej, agregované měření užitečnosti a checklist.
 - 2026-08-30 00:00 UTC — Doplněna příloha AC o důvěryhodné komunikaci a doručitelnosti: typy zpráv, rozpoznatelný odesílatel, e-mailové technické minimum, newsletter, preference centrum, agregované měření, komunikační karta a checklist.
 - 2026-08-29 23:00 UTC — Doplněna příloha AB o bezpečnostním minimu před prvním větším zákazníkem: mapa aktiv, nejmenší oprávnění, privacy-first logy, incident karta, Security FAQ, minimalizace dat a checklist.
