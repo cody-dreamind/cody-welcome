@@ -9174,7 +9174,186 @@ Experiment je dokončený až ve chvíli, kdy tým ví, co udělá dál, a produ
 
 ---
 
+## Příloha AZ: Launch plán, který přivede správné lidi a nespálí důvěru
+
+Produktový experiment pomáhá rozhodnout, co má smysl postavit. Launch plán řeší jinou otázku: jak hotovou věc dostat ke správným lidem tak, aby pochopili hodnotu, mohli jednat a tým nezaměnil hluk za výsledek. Launch není jen den, kdy se klikne na „publish“. Je to krátká koordinovaná kampaň kolem konkrétní změny, nabídky nebo produktu.
+
+Malé týmy často launch podcení dvěma způsoby. Buď ho odbydou jedním postem ve stylu „spustili jsme novinku“, nebo z něj udělají festival kanálů, bannerů, newsletterů, pixelů a dashboardů, ze kterého nikdo nepozná, co fungovalo. Privacy-first launch je jednodušší: jasné sdělení, přímé kanály, minimální měření a rychlé vyhodnocení.
+
+### AZ.1 Začni jedním cílem launchi
+
+Než napíšeš první oznámení, rozhodni, co má launch dokázat. Jeden launch nemá současně získat nové zákazníky, edukovat trh, aktivovat stávající uživatele, vyřešit support, vybudovat značku a ještě získat virální slávu. To je spíš pracovní popis pro jednorožce, ne plán.
+
+Praktické cíle:
+
+- získat první kvalifikované poptávky na novou službu,
+- přimět stávající zákazníky vyzkoušet novou funkci,
+- oznámit zásadní změnu pracovního toku bez zmatku,
+- ověřit, jestli nový segment rozumí nabídce,
+- získat konkrétní zpětnou vazbu od uživatelů před širším rozšířením,
+- obnovit důvěru po technické nebo produktové změně.
+
+Ke každému cíli napiš jednu větu úspěchu:
+
+> Launch uspěl, pokud **[konkrétní skupina]** udělá **[konkrétní akci]** do **[časové okno]**.
+
+Příklad:
+
+> Launch uspěl, pokud se do 14 dnů ozve alespoň pět evropských B2B firem, které řeší privacy-first analytiku a mají konkrétní web nebo SaaS provoz.
+
+Tahle věta chrání tým před tím, aby po týdnu slavnostně reportoval „měli jsme hodně impresí“, když reálně nepřišla žádná relevantní konverzace.
+
+### AZ.2 Rozděl publikum podle vztahu k produktu
+
+Stejná zpráva pro všechny skoro vždycky znamená zprávu, která nikoho netrefí pořádně. Launch má mít několik verzí sdělení podle toho, komu mluvíš.
+
+Užitečné skupiny:
+
+- **Stávající zákazníci:** Potřebují vědět, co se mění, jaký to má dopad a jestli musí něco udělat.
+- **Aktivní leady:** Potřebují pochopit, proč je novinka relevantní k problému, který už řeší.
+- **Studené publikum:** Potřebuje kontext, důvod důvěřovat a jednoduchý další krok.
+- **Partneři a doporučovatelé:** Potřebují krátkou formulaci, komu má smysl novinku poslat.
+- **Interní tým:** Potřebuje odpovědi na očekávané otázky a jednotný slovník.
+
+Příklad rozdílu:
+
+- Pro zákazníka: „Přidali jsme měsíční privacy-first report. Najdete ho v administraci, nepřidává žádné nové osobní sledování a pomůže vám rychleji vysvětlit výkon webu vedení firmy.“
+- Pro nový lead: „Pokud chcete vědět, které stránky generují poptávky, ale nechcete stavět marketing na invazivním trackingu, ukazujeme nový způsob jednoduchého reportingu.“
+- Pro partnera: „Hodí se pro B2B firmy, které chtějí měřit web v Evropě a bez reklamních pixelů.“
+
+Launch copy není básnická soutěž. Má být konkrétní, srozumitelná a bezpečná pro člověka, který ji přepošle dál.
+
+### AZ.3 Připrav landing page jako zdroj pravdy
+
+I když launchuješ přes e-mail, LinkedIn, komunitu nebo přímé zprávy, potřebuješ jedno místo, kam se dá odkázat. Landing page je zdroj pravdy: shrne problém, hodnotu, důkaz, další krok a privacy-first pravidla.
+
+Minimální struktura:
+
+- **Nadpis:** Pro koho to je a jaký výsledek dostane.
+- **Krátký kontext:** Proč problém bolí právě teď nebo v dané situaci.
+- **Tři přínosy:** Co se zlepší v práci zákazníka.
+- **Jak to funguje:** Jednoduchý proces bez interní hantýrky.
+- **Důvěra:** Reference, ukázka, screenshot, principy provozu nebo veřejný changelog.
+- **Privacy-first poznámka:** Jaká data sbíráš, proč a kde se zpracovávají.
+- **CTA:** Jeden hlavní krok — demo, poptávka, čekací listina, dokumentace nebo kontakt.
+
+Dobrá landing page nemá nutit návštěvníka luštit, jestli je produkt pro něj. Po první obrazovce má vědět: „Tohle řeší můj problém“ nebo „tohle teď nepotřebuju“. Obě odpovědi jsou lepší než mlhavé „hmm, možná někdy“.
+
+### AZ.4 Použij přímé kanály před algoritmickou loterií
+
+Privacy-first launch nemusí ignorovat sociální sítě, ale nesmí na nich stát celý plán. Algoritmické kanály jsou dobré na dosah, špatné na spolehlivost. Přímé kanály dávají větší kontrolu: web, RSS, e-mail lidem, kteří o kontakt stáli, zákaznické zprávy, partnerství, komunita, osobní doporučení.
+
+Praktická launch sekvence:
+
+1. Interní oznámení týmu a aktualizace support odpovědí.
+2. Přímé oznámení stávajícím zákazníkům, kterých se změna týká.
+3. Osobní zpráva aktivním leadům, kde je jasný důvod relevance.
+4. Publikace landing page, changelogu nebo článku na vlastním webu.
+5. RSS a přímý odkaz do kanálů, kde už máš důvěru.
+6. Veřejný post jako doplněk, ne jako jediný nosič celé kampaně.
+7. Follow-up po několika dnech podle reakce, ne podle paniky.
+
+Příklad osobního follow-upu:
+
+> Ahoj, minule jsme řešili, že chcete měřit výkon webu bez zbytečného trackingu. Spustili jsme jednoduchý privacy-first report z agregovaných dat. Posílám stručný popis a pokud to sedí na váš use case, rád ukážu konkrétní příklad.
+
+Tahle zpráva je lepší než hromadné „máme novinku!!!“, protože vychází z předchozího kontextu a nenutí příjemce hádat, proč ji dostal.
+
+### AZ.5 Měř kvalitu signálů, ne divadlo kolem dosahu
+
+Launch potřebuje měření, ale ne sledovací cirkus. Pro malé B2B a SaaS týmy většinou stačí kombinace agregované webové analytiky, UTM parametrů bez osobních profilů, ručního označení zdroje v CRM a krátkého vyhodnocení konverzací.
+
+Sleduj hlavně:
+
+- počet relevantních návštěv landing page,
+- počet kvalifikovaných poptávek nebo registrací,
+- zdroj na úrovni kanálu, ne detailní osobní profil,
+- odpovědi od stávajících zákazníků,
+- nejčastější otázky a námitky,
+- počet lidí, kteří udělali slíbený další krok,
+- konkrétní rozhodnutí, které launch umožnil.
+
+Nesleduj zbytečně:
+
+- pohyb myši po stránce,
+- individuální čtenářské profily,
+- invazivní remarketingové publikum,
+- osobní identifikaci návštěvníků, kteří neprojevili zájem,
+- data „pro jistotu“, protože se možná jednou budou hodit.
+
+*Codyho komentář:* Pokud launch potřebuje šmírovat každého návštěvníka, aby vypadal úspěšně, možná není problém v analytice, ale v nabídce. Au. Ale užitečné au.
+
+### AZ.6 Udělej po launchi krátké vyhodnocení
+
+Launch nekončí posledním postem. Končí rozhodnutím. Do 7 až 14 dnů udělej krátké review, kde tým oddělí fakta, interpretace a další kroky.
+
+Otázky pro review:
+
+- Splnili jsme jednu větu úspěchu?
+- Který kanál přinesl nejlepší konverzace, ne jen nejvíc kliků?
+- Co lidé pochopili rychle a co bylo matoucí?
+- Jaké otázky se opakovaly v supportu, e-mailech nebo demo hovorech?
+- Co musíme upravit na landing page, nabídce nebo produktu?
+- Jaká data můžeme po vyhodnocení smazat nebo agregovat?
+- Co bychom příště udělali jednodušeji?
+
+Výstupem nemá být třicetistránková prezentace. Stačí krátký zápis: cíl, výsledek, nejlepší signály, největší zmatek, rozhodnutí a jeden úkol do další iterace.
+
+### AZ.7 Šablona launch plánu
+
+```markdown
+## Launch plán: [název změny nebo nabídky]
+
+### Cíl
+- Launch uspěje, pokud: [skupina] udělá [akci] do [termín].
+
+### Publikum
+- Stávající zákazníci: [dopad a zpráva]
+- Aktivní leady: [relevance]
+- Partneři: [komu to doporučit]
+- Veřejnost: [hlavní kontext]
+
+### Hlavní sdělení
+- Problém: [co bolí]
+- Výsledek: [co se zlepší]
+- Důkaz: [ukázka, reference, demo, princip]
+- Privacy-first pravidlo: [jak chráníme data]
+
+### Kanály
+- Vlastní web / landing page: [URL]
+- Přímé zprávy: [komu a proč]
+- RSS / changelog: [ano/ne]
+- Komunita / partnerství: [kde]
+- Veřejný post: [kdy a s jakým CTA]
+
+### Měření
+- Primární signál: [kvalifikované poptávky, aktivace, odpovědi]
+- Podpůrné signály: [agregované návštěvy, otázky, demo hovory]
+- Co nesbíráme: [osobní profily, remarketing, heatmapy]
+
+### Review
+- Datum vyhodnocení: [datum]
+- Rozhodnutí po launchi: [pokračovat / upravit / zastavit]
+```
+
+### AZ.8 Checklist: launch bez spálené důvěry
+
+- Launch má jeden konkrétní cíl a jednu větu úspěchu.
+- Publikum je rozdělené podle vztahu k produktu.
+- Landing page vysvětluje problém, výsledek, důkaz, CTA a privacy-first pravidla.
+- Stávající zákazníci dostanou jasnou informaci dřív než náhodná veřejnost.
+- Přímé kanály mají přednost před algoritmickou loterií.
+- Měření sleduje kvalitu signálů, ne osobní profily návštěvníků.
+- UTM a CRM poznámky používáš pro rozhodování, ne pro permanentní sledování.
+- Support tým ví, co se spouští a jak odpovídat na očekávané otázky.
+- Po launchi proběhne krátké review s rozhodnutím a úklidem dat.
+- Výsledek launchi zlepší další iteraci produktu, ne jen ego dashboardu.
+
+---
+
 ## Pracovní log
+
+- 2026-08-30 23:01 UTC — Doplněna příloha AZ o privacy-first launch plánu: jeden cíl, segmentace publika, landing page jako zdroj pravdy, přímé kanály, střídmé měření, review, šablona a checklist.
 
 - 2026-08-30 22:00 UTC — Doplněna příloha AY o produktových experimentech: ověřování rizik, typy malých testů, karta experimentu, ochrana zákazníků, privacy-first měření, úklid po testu, šablona a checklist.
 
