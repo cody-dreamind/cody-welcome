@@ -6530,7 +6530,152 @@ První viditelný krok nemusí být velká funkce. Může to být mapa procesu, 
 - [ ] Po prvním týdnu víme, jestli zákazník pořád míří ke slíbené hodnotě.
 
 Dobré předání zákazníka je nudná disciplína s obrovským dopadem. Nevyhraje ocenění za kreativitu, ale ušetří desítky hodin vysvětlování, omluv a „aha, to jsme nevěděli“. A přesně takové věci dělají z malého týmu profesionální partnerství.
+
+## Příloha AI: Prvních 30 dní po onboardingu bez tichého churnu
+
+První onboarding zákazníka je začátek vztahu, ne důkaz úspěchu. Skutečný test přichází v dalších třiceti dnech: používá zákazník řešení, vidí slíbenou hodnotu, ví koho se ptát a nemá pocit, že po podpisu smlouvy spadl do podpůrného sklepa bez oken?
+
+Tichý churn často nezačíná zrušením účtu. Začíná tím, že zákazník přestane klást otázky, přestane dokončovat hlavní workflow, přestane posílat podklady a v týmu se objeví věta „asi to zatím nepotřebují“. Možná nepotřebují. Častěji ale jen nikdo včas nezjistil, kde se ztratila hodnota.
+
+*Codyho komentář:* Prvních 30 dní je jako zalévání nové rostliny. Nepotřebuješ na ni svítit reflektorem každou hodinu, ale když ji měsíc ignoruješ, nemůžeš se divit, že vypadá jako roadmapa po špatném kvartálu.
+
+### AI.1 Definuj první úspěch dřív než první report
+
+Ještě při onboardingu si se zákazníkem potvrď, co má být po třiceti dnech vidět. Ne obecně „lepší přehled“ nebo „větší efektivita“, ale konkrétní známka posunu.
+
+Příklady prvního úspěchu:
+
+- zákaznický portál obsahuje prvních 20 reálných požadavků,
+- obchodní tým přes nový formulář zpracoval 10 kvalifikovaných poptávek,
+- zákazník poslal první měsíční report bez ručního kopírování dat,
+- tým vyřešil první incident podle nového runbooku,
+- landing page přivedla první tři relevantní dotazy,
+- interní AI asistent pomohl připravit pět odpovědí bez vložení citlivých zákaznických dat.
+
+První úspěch má být malý, viditelný a dosažitelný. Když ho nastavíš moc vysoko, zákazník bude mít pocit, že se nic nepovedlo. Když ho nenastavíš vůbec, bude každý hodnotit spolupráci podle vlastního dojmu, což je oblíbený zdroj chaosu s prémiovým předplatným.
+
+Šablona:
+
+```text
+První úspěch po 30 dnech:
+Proč na něm zákazníkovi záleží:
+Jak poznáme, že nastal:
+Co k tomu musí dodat zákazník:
+Co k tomu musí dodat náš tým:
+Největší riziko:
+```
+
+### AI.2 Sleduj adopční signály, ne každý pohyb uživatele
+
+Po onboardingu potřebuješ vědět, jestli zákazník opravdu míří k hodnotě. Nepotřebuješ sledovat každé kliknutí, každé přejetí myší a každý povzdech nad klávesnicí. Adopce se dá číst z jednoduchých signálů.
+
+U SaaS sleduj například:
+
+- dokončení prvního hlavního workflow,
+- počet aktivních účtů v zákaznickém týmu,
+- opakované použití klíčové funkce,
+- import nebo vytvoření reálných dat,
+- počet otevřených podpůrných dotazů podle tématu,
+- čas od založení účtu k první hodnotné akci.
+
+U služby nebo webového projektu sleduj:
+
+- dodané podklady od zákazníka,
+- schválené rozhodnutí bez dlouhého čekání,
+- počet vyřešených blokérů,
+- první měřitelný výsledek na webu,
+- opakované otázky, které ukazují nejasnost procesu.
+
+Privacy-first pravidlo: adopční signál má být co nejvíc agregovaný a účelový. Tým potřebuje vědět, že „zákazník nedokončil import“, ne nutně přehrávat záznam konkrétní relace. Pokud problém vyřeší kratší formulář, lepší nápověda nebo osobní call, nezačínej session replayem.
+
+### AI.3 Udělej 7denní a 30denní kontrolu
+
+Po předání zákazníka nastav dvě jednoduché kontroly. Sedmidenní kontrola hlídá start. Třicetidenní kontrola hlídá hodnotu.
+
+**Po 7 dnech se ptej:**
+
+- Má zákazník jasný další krok?
+- Dodal podklady, které byly nutné?
+- Proběhl první viditelný posun?
+- Objevilo se nové riziko?
+- Ví zákazník, kde se ptát?
+
+**Po 30 dnech se ptej:**
+
+- Nastal první úspěch, který jsme definovali?
+- Kdo produkt nebo výstup opravdu používá?
+- Co se opakovaně vysvětluje?
+- Jaká námitka nebo obava nezmizela?
+- Co zjednodušíme v dalším měsíci?
+
+Tyhle kontroly nemusí být dlouhé meetingy. Někdy stačí dobře napsaný e-mail, krátký call nebo interní review s konkrétní následnou akcí. Důležité je nenechat prvních třicet dní rozpustit v běžném provozu.
+
+### AI.4 Zákazník potřebuje vlastníka, ne frontu naděje
+
+V malém týmu se často stane, že zákazníka „má na starosti všichni“. To zní hezky týmově, ale prakticky to znamená, že vlastník není nikdo. Po onboardingu musí být jasné, kdo sleduje první úspěch, kdo komunikuje další krok a kdo zavírá otevřené otázky.
+
+Role vlastníka po onboardingu:
+
+- drží kartu zákazníka aktuální,
+- kontroluje 7denní a 30denní signály,
+- hlídá slíbenou hodnotu,
+- překládá zpětnou vazbu do backlogu,
+- rozlišuje support, změnový požadavek a obchodní příležitost,
+- včas eskaluje riziko churnu.
+
+Vlastník nemusí dělat všechnu práci. Musí ale vědět, jestli se práce děje. To je rozdíl mezi odpovědností a hrdinským multitaskingem.
+
+### AI.5 Zpětná vazba patří do produktu, ne jen do chatu
+
+Prvních 30 dní vygeneruje spoustu drobných signálů: zákazník nerozumí názvu funkce, hledá tlačítko jinde, ptá se na stejný export, bojí se migrace nebo používá produkt jinak, než sis kreslil v hlavě. Tyhle signály mají skončit ve strukturovaném zápisu.
+
+Použij jednoduché třídění:
+
+- **Nejasnost:** zákazník nerozumí textu, procesu nebo dalšímu kroku.
+- **Tření:** zákazník ví, co chce udělat, ale cesta je zbytečně těžká.
+- **Riziko:** problém může ohrozit hodnotu, bezpečnost, termín nebo důvěru.
+- **Rozšíření:** zákazník chce další hodnotu nad původní rozsah.
+- **Důkaz:** zákazník popsal výsledek, citaci nebo příklad pro budoucí marketing.
+
+Každý signál potřebuje vlastníka a rozhodnutí: opravit hned, dát do backlogu, vysvětlit v nápovědě, nabídnout jako rozšíření, nebo vědomě nedělat. Signál bez rozhodnutí je jen dekorace v chatu.
+
+### AI.6 Privacy-first pravidla pro prvních 30 dní
+
+Po onboardingu se snadno sbírá víc dat „pro jistotu“. Právě proto nastav hranice hned.
+
+Pravidla:
+
+- zákaznickou kartu drž stručnou a účelovou,
+- neukládej osobní dojmy, které nepomáhají dodat hodnotu,
+- odděl obchodní poznámky, support, technické logy a produktovou analytiku,
+- citace používej veřejně jen se souhlasem nebo v anonymizované podobě,
+- do AI nástrojů neposílej syrové zákaznické exporty bez jasného právního a smluvního základu,
+- po skončení pilotu smaž dočasné soubory, exporty a přístupy,
+- zákazníkovi uměj říct, jaká data v prvním měsíci sleduješ a proč.
+
+Dobrá věta do zákaznické komunikace:
+
+> V prvním měsíci budeme sledovat hlavně dokončení domluvených kroků, otevřené otázky a agregované používání klíčových funkcí. Nesbíráme osobní profily ani záznamy relací bez samostatného důvodu a souhlasu.
+
+Tohle zní možná méně sexy než „data-driven customer success platform“. Ale je to srozumitelné, férové a zákazník díky tomu ví, že není pokusný králík v grafu.
+
+### AI.7 Checklist: prvních 30 dní bez tichého churnu
+
+- [ ] Máme definovaný první úspěch po 30 dnech.
+- [ ] Víme, jak poznáme, že zákazník míří k hodnotě.
+- [ ] Sledujeme adopční signály bez zbytečného sledování jednotlivců.
+- [ ] Po 7 dnech kontrolujeme start, podklady, rizika a další krok.
+- [ ] Po 30 dnech hodnotíme slíbenou hodnotu, tření a další zjednodušení.
+- [ ] Každý zákazník má vlastníka po onboardingu.
+- [ ] Zpětná vazba má strukturu, vlastníka a rozhodnutí.
+- [ ] Dočasné přístupy, exporty a soubory mají datum úklidu.
+- [ ] Citace a důkazy používáme eticky a s respektem k soukromí.
+- [ ] Riziko churnu řešíme včas, ne až ve chvíli, kdy zákazník přestane odpovídat.
+
+Prvních třicet dní má ukázat, že zákazník nekoupil jen slib, ale začal se posouvat k výsledku. Když tenhle úsek dobře navrhneš, další měsíce nejsou boj o pozornost. Jsou pokračování důvěry.
+
 ## Pracovní log
+- 2026-08-30 06:00 UTC — Doplněna příloha AI o prvních 30 dnech po onboardingu: první úspěch, adopční signály bez sledování jednotlivců, 7denní a 30denní kontrola, vlastník zákazníka, práce se zpětnou vazbou, privacy-first pravidla a checklist.
 - 2026-08-30 05:05 UTC — Obnovena plná verze e-booku po placeholderu a doplněna příloha AH o předání zákazníka z obchodu do realizace: karta předání, slíbená hodnota, interní handoff, zákaznický kickoff, rozsah, privacy-first práce s daty, první týden a checklist.
 - 2026-08-30 04:01 UTC — Doplněna příloha AG o lehkém CRM a prodejním pipeline: stavy procesu, minimální karta příležitosti, kvalifikace, follow-up, práce se ztracenými obchody, privacy-first pravidla, týdenní review a checklist.
 - 2026-08-30 03:01 UTC — Doplněna příloha AF o zakladatelském dashboardu: rozhodnutí před grafy, čtyři vrstvy metrik, fáze produktu, privacy-first reporting, kvalitativní signály, týdenní review, šablona a checklist.
