@@ -6674,7 +6674,169 @@ Tohle zní možná méně sexy než „data-driven customer success platform“.
 
 Prvních třicet dní má ukázat, že zákazník nekoupil jen slib, ale začal se posouvat k výsledku. Když tenhle úsek dobře navrhneš, další měsíce nejsou boj o pozornost. Jsou pokračování důvěry.
 
+
+## Příloha AJ: Případová studie bez vyzrazování cizího zákulisí
+
+Případová studie je jeden z nejsilnějších prodejních materiálů pro web, SaaS i službu. Ne proto, že by měla hezké logo zákazníka v karuselu. Ale proto, že ukazuje cestu: problém, rozhodnutí, práci, výsledek a poučení. Dobrá případovka pomáhá budoucímu zákazníkovi říct: „Tohle je podobné našemu chaosu. Tihle lidé asi vědí, co dělají.“
+
+Privacy-first háček: případová studie nesmí být výměna důvěry za marketing. Pokud zákazník svěří data, interní proces nebo slabé místo, není to automaticky munice do veřejného obsahu. Důkaz se dá ukázat i bez toho, aby ses chlubil něčím, co mělo zůstat v zasedačce.
+
+*Codyho komentář:* Nejlepší reference není nejhlasitější. Je to ta, po které si zákazník řekne: „Jo, takhle bych chtěl, aby někdo mluvil i o našem projektu.“ To je marketing i etika v jedné větě. Praktické, nudné, krásné. Skoro jako dobře napsaná faktura.
+
+### AJ.1 Sbírej důkazy už během spolupráce
+
+Případovka se nepíše až tři měsíce po projektu z mlhavé paměti a dvou screenshotů v chatu. Důkazy sbírej průběžně, ale slušně a účelově.
+
+U každého projektu si veď jednoduchý seznam:
+
+- původní problém a jeho dopad,
+- hlavní rozhodnutí během spolupráce,
+- stav před změnou,
+- stav po změně,
+- konkrétní výsledek nebo pozorovatelný posun,
+- citace zákazníka, které máš povoleno použít,
+- věci, které se veřejně zmiňovat nesmí.
+
+Rozdíl mezi interní poznámkou a veřejným důkazem musí být jasný. Interně si můžeš napsat: „Formulář posílal poptávky do špatného e-mailu a tým je řešil ručně.“ Veřejně může být lepší: „Zpřehlednili jsme příjem poptávek a snížili ruční předávání mezi webem a obchodem.“ Smysl zůstane, zbytečná citlivost zmizí.
+
+### AJ.2 Případovka má ukazovat rozhodování, ne jen výsledek
+
+Slabá případová studie říká: „Udělali jsme nový web a zákazník byl spokojený.“ To je milé, ale budoucímu zákazníkovi to moc nepomůže. Silná případovka ukazuje, proč jste se rozhodli právě takhle.
+
+Struktura:
+
+1. **Kontext:** kdo zákazník je, v jaké situaci byl a co bylo v sázce.
+2. **Problém:** co nefungovalo, koho to bolelo a jak se to projevovalo.
+3. **Cíl:** jaký výsledek měl projekt dodat.
+4. **Rozhodnutí:** co jste zjednodušili, odmítli, přestavěli nebo změřili.
+5. **Realizace:** jaké kroky byly nejdůležitější.
+6. **Výsledek:** co se změnilo prakticky, obchodně nebo provozně.
+7. **Poučení:** co byste příště udělali stejně a co jinak.
+
+Nejzajímavější bývá část „rozhodnutí“. Tam je vidět seniorita. Každý umí napsat, že použil moderní stack. Méně týmů umí vysvětlit, proč nepřidaly pět integrací, proč zkrátily formulář, proč vyhodily cookie bannerový cirkus nebo proč zákazníkovi doporučily jednodušší první verzi.
+
+### AJ.3 Anonymizovaná případovka není horší, když je konkrétní
+
+Ne každý zákazník může nebo chce být jmenovaný. To nevadí. Anonymizovaná případovka může fungovat skvěle, pokud nezůstane v mlze.
+
+Místo:
+
+> Pomohli jsme jedné firmě zlepšit procesy.
+
+Použij:
+
+> Pomohli jsme menší B2B servisní firmě v Česku sjednotit příjem poptávek z webu, e-mailu a telefonu do jednoho procesu, aby obchod nemusel ručně dohledávat stav každého požadavku.
+
+Konkrétnost nemusí znamenat identifikovatelnost. Můžeš popsat segment, velikost, typ problému, rozsah řešení a výsledek. Vynecháš název firmy, přesná interní čísla, unikátní detaily a cokoli, co by zákazníka zbytečně odhalilo.
+
+Bezpečná anonymizace:
+
+- „menší B2B výrobce na Moravě“ místo názvu firmy,
+- „desítky poptávek měsíčně“ místo přesného objemu,
+- „zákaznický portál“ místo interního názvu systému,
+- „evropský hosting“ místo konkrétní infrastruktury, pokud by to odhalovalo architekturu,
+- „zkrácení ruční práce“ místo interních nákladových detailů.
+
+### AJ.4 Souhlas řeš před publikací, ne po ní
+
+Reference a případovky potřebují souhlas. Ne jen právně, ale vztahově. Zákazník nemá zjistit z LinkedInu, že se jeho projekt stal tvým marketingovým exponátem.
+
+Praktický postup:
+
+1. Už ve spolupráci řekni, že by po dokončení mohl vzniknout veřejný nebo anonymizovaný příklad.
+2. Pošli zákazníkovi návrh případovky před publikací.
+3. Vyznač části, kde používáš citaci, logo, screenshot nebo konkrétní číslo.
+4. Dej mu jednoduchou možnost schválit, upravit nebo odmítnout.
+5. Ulož si schválenou verzi a datum souhlasu.
+6. Když se případovka později výrazně mění, nech schválit nové citlivé části znovu.
+
+Krátká věta do e-mailu:
+
+> Připravil jsem návrh krátké případové studie. Veřejně bychom použili jen části, které výslovně schválíte. Pokud chcete, můžeme ji zveřejnit anonymizovaně nebo ji nepoužít vůbec.
+
+Tohle je fér. A fér komunikace má tu příjemnou vlastnost, že se po ní nemusíš potit při každém notifikačním zvuku.
+
+### AJ.5 Výsledek může být kvalitativní, ale nesmí být vágní
+
+Ne každý projekt má krásné číslo typu „+37 % konverzí“. Někdy je výsledek procesní, bezpečnostní nebo strategický. I tak se dá napsat konkrétně.
+
+Příklady výsledků:
+
+- zákazník má jasnou nabídku a jednu hlavní akci na homepage,
+- obchod dostává poptávky s potřebným kontextem,
+- tým ví, kdo odpovídá za další krok,
+- web běží na evropské infrastruktuře s jednodušším měřením,
+- formulář sbírá méně údajů, ale posílá kvalitnější poptávky,
+- support má méně opakovaných dotazů díky lepší nápovědě,
+- vedení má týdenní dashboard místo deseti roztříštěných reportů.
+
+Když uvádíš čísla, napiš i kontext. „Konverze vzrostla z 1,2 % na 1,8 % za šest týdnů“ je užitečnější než „konverze vzrostla o 50 %“. Druhá věta zní efektněji, ale první pomáhá rozhodovat. Marketing bez kontextu je kulturistika grafů.
+
+### AJ.6 Případovka má vést k dalšímu kroku
+
+Případová studie není muzeum hotové práce. Má vést čtenáře k akci. Po přečtení by měl vědět, co může udělat dál.
+
+Dobré návazné kroky:
+
+- „Chci podobně zpřehlednit poptávkový proces.“
+- „Poslat mi checklist pro audit homepage.“
+- „Přečíst postup migrace na privacy-first analytiku.“
+- „Domluvit 30minutovou konzultaci.“
+- „Podívat se na technický rozbor řešení.“
+
+CTA má odpovídat teplotě čtenáře. Člověk, který teprve zkoumá problém, možná nechce hned demo. Ale může si stáhnout checklist, přečíst detailnější rozbor nebo poslat jednu konkrétní otázku. Přímý kanál je lepší než nahánění přes remarketing. Ano, remarketingové pixely by se tu nabízely. Ne, nedáme jim sušenku.
+
+### AJ.7 Šablona případové studie
+
+Použij tuhle jednoduchou kostru:
+
+```md
+# [Výsledek] pro [typ zákazníka]
+
+## Kontext
+Kdo zákazník je a proč situaci řešil.
+
+## Problém
+Co nefungovalo, koho to bolelo a jaký mělo riziko nebo náklad.
+
+## Cíl
+Jaký posun měl projekt přinést.
+
+## Co jsme udělali
+- Rozhodnutí 1:
+- Rozhodnutí 2:
+- Rozhodnutí 3:
+
+## Výsledek
+Co se změnilo prakticky, obchodně nebo provozně.
+
+## Privacy-first poznámka
+Jak jsme minimalizovali data, omezili třetí strany nebo posílili kontrolu nad provozem.
+
+## Poučení
+Co fungovalo a co by šlo příště zlepšit.
+
+## Další krok
+Co má čtenář udělat, pokud řeší podobný problém.
+```
+
+### AJ.8 Checklist: případovka, která prodává bez porušení důvěry
+
+- [ ] Máme jasně popsaný kontext, problém, cíl, rozhodnutí a výsledek.
+- [ ] Víme, co je veřejné, anonymizované a interní.
+- [ ] Používáme jen schválené citace, loga, screenshoty a čísla.
+- [ ] Zákazník viděl návrh před publikací.
+- [ ] Anonymizace je konkrétní, ale neidentifikuje zákazníka.
+- [ ] Výsledky mají kontext a nejsou nafouknuté marketingovou mlhou.
+- [ ] Případovka obsahuje privacy-first poznámku o datech, nástrojích nebo provozu.
+- [ ] Na konci je jeden jasný další krok.
+- [ ] Interní poznámky a citlivé podklady nejsou součástí veřejného textu.
+- [ ] Po publikaci víme, kde je případovka použitá a kdo za ni odpovídá.
+
+Dobrá případová studie prodává tím, že ukazuje skutečnou práci. Nevyužívá zákazníka jako rekvizitu. Když ji napíšeš poctivě, získáš důkaz, který pomáhá obchodu, marketingu i budoucím zákazníkům pochopit, jak přemýšlíš. A hlavně: nezničíš důvěru, kterou ses celou spolupráci snažil vybudovat.
+
 ## Pracovní log
+- 2026-08-30 07:00 UTC — Doplněna příloha AJ o případových studiích a referencích bez vyzrazování zákaznického zákulisí: průběžný sběr důkazů, rozhodovací struktura, anonymizace, souhlas, kvalitativní výsledky, CTA, šablona a checklist.
 - 2026-08-30 06:00 UTC — Doplněna příloha AI o prvních 30 dnech po onboardingu: první úspěch, adopční signály bez sledování jednotlivců, 7denní a 30denní kontrola, vlastník zákazníka, práce se zpětnou vazbou, privacy-first pravidla a checklist.
 - 2026-08-30 05:05 UTC — Obnovena plná verze e-booku po placeholderu a doplněna příloha AH o předání zákazníka z obchodu do realizace: karta předání, slíbená hodnota, interní handoff, zákaznický kickoff, rozsah, privacy-first práce s daty, první týden a checklist.
 - 2026-08-30 04:01 UTC — Doplněna příloha AG o lehkém CRM a prodejním pipeline: stavy procesu, minimální karta příležitosti, kvalifikace, follow-up, práce se ztracenými obchody, privacy-first pravidla, týdenní review a checklist.
