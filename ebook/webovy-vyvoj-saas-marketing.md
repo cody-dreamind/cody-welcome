@@ -9004,7 +9004,179 @@ Pravidla:
 
 ---
 
+## Příloha AY: Produktové experimenty, které ověřují riziko místo toho, aby jen vyráběly práci
+
+Feedback loop je užitečný až ve chvíli, kdy z něj vznikne rozhodnutí. Jenže malé SaaS týmy často skočí z věty „zákazníci chtějí X“ rovnou do vývoje. To je rychlé, dramatické a občas drahé jako espresso na letišti. Produktový experiment má opačný cíl: ověřit největší nejistotu co nejmenším bezpečným krokem.
+
+Experiment není alibi pro nekonečné testování. Je to krátký způsob, jak zjistit, jestli má smysl investovat do větší změny, nové funkce, kampaně nebo procesu. Když je dobře navržený, šetří vývojový čas, chrání důvěru zákazníků a snižuje šanci, že tým bude půl roku pilovat něco, co nikdo nepotřebuje.
+
+### AY.1 Začni rizikem, ne nápadem
+
+Každý experiment má začít otázkou: „Co musí být pravda, aby tenhle nápad dával smysl?“
+
+Příklady:
+
+- Pokud chceme přidat týmové role, musí být pravda, že zákazníci mají opakovaný problém s předáváním přístupů.
+- Pokud chceme nabídnout vyšší tarif, musí být pravda, že část zákazníků už naráží na limity současné nabídky.
+- Pokud chceme spustit nový lead magnet, musí být pravda, že přitahuje správný typ poptávky, ne jen lovce PDF zdarma.
+- Pokud chceme přepsat onboarding, musí být pravda, že současné tření brzdí aktivaci a nejde vyřešit menší úpravou.
+
+Nápad popiš jednou větou, ale experiment navrhni kolem rizika. Když nevíš, jaké riziko ověřuješ, pravděpodobně neděláš experiment, ale převlečený mini projekt.
+
+### AY.2 Používej malé typy experimentů podle fáze
+
+Ne každý experiment potřebuje kód. Čím dřív jsi ve fázi nejistoty, tím víc se vyplatí použít jednodušší metodu.
+
+Praktické typy:
+
+- **Rozhovor:** Ověří, jestli zákazník problém poznává a jak ho řeší dnes.
+- **Klikatelný prototyp:** Ověří, jestli zákazník chápe navržený tok bez vývoje backendu.
+- **Concierge test:** Tým službu doručí ručně a sleduje, jestli výsledek stojí za automatizaci.
+- **Wizard-of-Oz test:** Zákazník vidí jednoduché rozhraní, ale část procesu běží ručně za scénou.
+- **Landing page test:** Ověří jasnost nabídky, zájem o téma a kvalitu poptávek.
+- **Beta pro omezenou skupinu:** Ověří funkci v reálném provozu, ale s malým dopadem při chybě.
+
+Vyber nejlevnější metodu, která ještě dá použitelný důkaz. Pokud chceš ověřit formulaci nabídky, nepotřebuješ sprint vývoje. Pokud chceš ověřit výkon nové synchronizace dat, samotná anketa tě nespasí. Ano, i tady platí nudná magie: metoda má odpovídat otázce.
+
+### AY.3 Každý experiment musí mít stopku
+
+Experiment bez hranice úspěchu je jen aktivita, kterou bude tým interpretovat podle nálady. Předem si napiš, co znamená pokračovat, upravit nebo zastavit.
+
+Dobrá karta experimentu obsahuje:
+
+- **Hypotézu:** Co si myslíme, že je pravda.
+- **Riziko:** Co ověřujeme, protože by nás omyl stál čas nebo peníze.
+- **Metodu:** Jak ověření proběhne.
+- **Vzorek:** S kým nebo na jaké části provozu testujeme.
+- **Délku:** Kdy experiment skončí.
+- **Signál úspěchu:** Co musí nastat, abychom pokračovali.
+- **Stop signál:** Co znamená, že nápad zatím nedává smysl.
+- **Rozhodnutí:** Co uděláme po vyhodnocení.
+
+Příklad:
+
+- Hypotéza: B2B zákazníci chtějí měsíční export provozních metrik pro vedení firmy.
+- Riziko: Vyvineme reporting, který bude hezký, ale nikdo ho nebude používat.
+- Metoda: Tři zákazníkům připravíme ruční měsíční PDF z agregovaných dat.
+- Vzorek: Zákazníci s aktivním provozem alespoň 60 dní.
+- Délka: Jeden měsíční cyklus.
+- Signál úspěchu: Nejméně dva zákazníci pošlou konkrétní požadavek na pokračování nebo sdílení reportu v týmu.
+- Stop signál: Report jen pochválí, ale nikdo ho nepoužije k rozhodnutí.
+- Rozhodnutí: Buď vytvoříme jednoduchou exportní šablonu, nebo téma přesuneme do pozdějšího backlogu.
+
+### AY.4 Chraň zákazníky před experimentálním chaosem
+
+Experiment nesmí znamenat, že každý týden měníš produkt pod rukama lidem, kteří za něj platí. Zákazník má chápat, kdy je v betě, co se může změnit a jak se z testu dostane ven.
+
+Pravidla pro férový experiment:
+
+- Testuj nejdřív na interním prostředí, pak na dobrovolnících, až potom na širší skupině.
+- Viditelně označ beta funkce a neslibuj je jako hotovou součást tarifu.
+- U změn pracovního toku nabídni návrat k původní variantě, pokud to jde.
+- Neexperimentuj na kritických zákaznických datech bez zálohy a jasného rollbacku.
+- Nepřidávej sledovací skripty jen proto, že „experiment potřebuje data“.
+- Po testu zákazníkům řekni, co se změnilo, co zůstává a co se vypíná.
+
+Privacy-first produktový experiment se pozná tak, že i kdyby zákazník viděl interní plán testu, nepůsobilo by to trapně. To je překvapivě dobrý morální kompas. A levnější než krizová PR agentura.
+
+### AY.5 Měř rozhodnutí, ne mikropohyby lidí
+
+U experimentů často svádí měřit všechno: scroll, hover, čas na poli, počet návratů, počet kliků na každý pixel. Pro malé B2B a SaaS týmy je většinou důležitější zjistit, jestli experiment vede k rozhodnutí.
+
+Místo detailního sledování jednotlivců sleduj:
+
+- počet kvalifikovaných lidí, kteří experiment viděli,
+- počet lidí, kteří dokončili hlavní akci,
+- počet ručních dotazů nebo odpovědí,
+- opakované motivy ve zpětné vazbě,
+- obchodní dopad na konkrétní segment,
+- provozní náročnost pro tým,
+- rizika pro podporu, bezpečnost a data.
+
+Když potřebuješ produktovou analytiku, drž ji agregovanou, omezenou časem a navázanou na konkrétní rozhodnutí. Nepotřebuješ vědět, že uživatel čtyřikrát zaváhal nad tlačítkem. Potřebuješ vědět, jestli zákazník pochopil hodnotu a udělal krok, který dává obchodně smysl.
+
+### AY.6 Po experimentu ukliď, jinak z něj bude trvalý bordel
+
+Největší riziko experimentů není neúspěch. Neúspěch je levná informace. Větší problém je poloviční úspěch, který zůstane v produktu jako nedokumentovaná výjimka.
+
+Po každém experimentu udělej krátký úklid:
+
+- smaž dočasné formuláře, segmenty, exporty a interní tabulky,
+- vypni feature flagy, které už nemají vlastníka,
+- přepiš nápovědu, pokud se změnil tok,
+- přesuň rozhodnutí do roadmapy nebo zavři nápad,
+- anonymizuj nebo smaž citlivé poznámky z rozhovorů,
+- zapiš, co bys příště ověřil jinak,
+- informuj zákazníky, kteří se testu účastnili.
+
+Experiment je dokončený až ve chvíli, kdy tým ví, co udělá dál, a produkt po sobě nemá drobné odpadky. Digitální odpadky jsou zákeřné: netlejí, jen potichu komplikují každý další release.
+
+### AY.7 Šablona produktového experimentu
+
+## Experiment: [krátký název]
+
+### Proč to řešíme
+
+- Jaký problém nebo příležitost jsme viděli?
+- Z jakých zdrojů vstup pochází?
+- Kterého segmentu se týká?
+
+### Hypotéza
+
+- Věříme, že [segment] potřebuje [výsledek], protože [důkaz nebo signál].
+
+### Největší riziko
+
+- Co by z nápadu udělalo zbytečnou investici?
+- Co nevíme a musíme ověřit jako první?
+
+### Metoda
+
+- Jak experiment provedeme?
+- Kdo je vlastník?
+- Jak dlouho poběží?
+- Kdo se účastní?
+
+### Data a soukromí
+
+- Jaká data sbíráme?
+- Proč jsou nutná?
+- Kdy je smažeme nebo anonymizujeme?
+- Kdo k nim má přístup?
+
+### Signály
+
+- Co znamená pokračovat?
+- Co znamená upravit?
+- Co znamená zastavit?
+
+### Rozhodnutí
+
+- Co jsme zjistili?
+- Co uděláme dál?
+- Kdo provede úklid?
+- Koho informujeme?
+
+### AY.8 Checklist: experiment, který vede k rozhodnutí
+
+- Experiment ověřuje konkrétní riziko, ne jen oblíbený nápad.
+- Hypotéza je napsaná před spuštěním, ne zpětně podle výsledků.
+- Metoda je nejmenší použitelný způsob ověření.
+- Délka experimentu je omezená a má jasný konec.
+- Úspěch, úprava i zastavení mají předem popsané signály.
+- Zákazníci vědí, když se účastní bety nebo omezeného testu.
+- Kritická data mají zálohu, rollback a jasného vlastníka.
+- Měření je agregované a navázané na rozhodnutí.
+- Dočasná data, tabulky a feature flagy se po experimentu uklidí.
+- Výsledek experimentu končí rozhodnutím v roadmapě, ne mlhavým „uvidíme“.
+- Tým zákazníkům uzavře smyčku, pokud jejich účast vedla ke změně.
+- Neúspěšný experiment se bere jako levně získaná informace, ne jako ostuda.
+
+---
+
 ## Pracovní log
+
+- 2026-08-30 22:00 UTC — Doplněna příloha AY o produktových experimentech: ověřování rizik, typy malých testů, karta experimentu, ochrana zákazníků, privacy-first měření, úklid po testu, šablona a checklist.
 
 - 2026-08-30 21:00 UTC — Doplněna příloha AX o feedback loopu: zdroje zpětné vazby, zápis problémů místo hotových řešení, feedback inbox, hledání vzorců, uzavření smyčky se zákazníkem, privacy-first pravidla, šablona review a checklist.
 
