@@ -7802,8 +7802,141 @@ Tahle minuta dokumentace šetří příští měsíc spoustu dohadů. A hlavně 
 
 První hodina po releasu je malý návyk s velkým efektem. Nedělá z týmu pomalou korporaci. Dělá z něj tým, který umí nasazovat často, pozorovat realitu a chránit důvěru zákazníků i vlastní nervovou soustavu.
 
+---
+
+## Příloha AQ: Incident drill, který najde díry dřív než zákazník
+
+Incident drill je krátké cvičení, při kterém tým nasimuluje provozní problém a ověří, jestli ho umí poznat, rozhodnout se a bezpečně vyřešit. Nejde o divadlo pro enterprise prezentaci. Jde o obyčejnou otázku: když se v úterý v 10:17 rozbije přihlášení, formulář, platba nebo export dat, víme co dělat?
+
+Malé týmy incident drill často odkládají, protože „na to není čas“. Jenže přesně malé týmy mají nejmíň prostoru na improvizaci. Když všechno stojí na jednom člověku a jeho paměti, provoz funguje jen do chvíle, než ten člověk spí, řídí auto nebo má zrovna ruce plné něčeho důležitějšího než další červený log.
+
+Dobré cvičení nemusí shodit produkci. Naopak: začni bezpečně. Projdi hypotetický scénář, ověř monitoring, otevři runbook, najdi přístupy, zkontroluj zálohy a napiš, kde se tým zasekl. Cílem není dokázat, že jste dokonalí. Cílem je najít slabá místa levně, dřív než je najde realita s kladivem.
+
+*Codyho komentář:* Incident drill je jako požární cvičení pro SaaS. Nikdo ho nemiluje, dokud poprvé nezjistí, že dveře s nápisem „únikový východ“ vedou do skladu starých bannerů.
+
+### AQ.1 Vyber malý, ale realistický scénář
+
+Nezačínej katastrofou typu „shořel region, zmizela databáze a účetní systém mluví latinsky“. První drill má být konkrétní a pravděpodobný. Tým se má naučit postup, ne hrát technologický survival.
+
+Dobré první scénáře:
+
+- kontaktní formulář přestal posílat e-maily,
+- uživatelé se nemohou přihlásit přes běžný prohlížeč,
+- nová verze rozbila hlavní CTA na landing page,
+- databázový dotaz zpomalil klíčový dashboard,
+- transakční e-maily padají do chyby,
+- externí integrace vrací opakovaně timeout,
+- zákazník požádal o export nebo smazání dat a tým neví, kde všude data jsou.
+
+Každý scénář popiš jednou větou:
+
+> Zákazníci nemohou dokončit hlavní akci, protože **[co se rozbilo]**, a tým to musí poznat, obejít nebo opravit do **[rozumný časový rámec]**.
+
+Časový rámec ber jako pracovní slib, ne jako právní přísahu. Pokud nevíš, jestli zvládneš obnovu do 30 minut nebo 4 hodin, právě proto drill děláš.
+
+### AQ.2 Cvič rozhodování, ne hrdinství
+
+Incident není soutěž o to, kdo nejrychleji napíše příkaz do terminálu. Dobrý drill ověřuje, jestli tým ví, kdy problém jen sledovat, kdy zapnout workaround, kdy rollbackovat a kdy informovat zákazníky.
+
+Při scénáři si polož tyhle otázky:
+
+- Jak problém poznáme bez zprávy od zákazníka?
+- Kdo je vlastník incidentu?
+- Jak zjistíme dopad na zákazníky?
+- Jaký je nejbezpečnější první krok?
+- Máme workaround, nebo rovnou rollback?
+- Kdo komunikuje interně a kdo externě?
+- Jak poznáme, že je hotovo?
+
+U malého SaaS je často nejlepší nejdřív stabilizovat hodnotu pro zákazníka a až potom hledat elegantní opravu. Když nefunguje automatické potvrzení poptávky, můžeš dočasně kontrolovat nové záznamy ručně. Když nefunguje nová část dashboardu, můžeš vypnout feature flag. Když release rozbil přihlášení, rollback je obchodně lepší než dvouhodinové ladění v produkci.
+
+Hrdinství v incidentu zní efektně, ale proces je levnější. Hrdina zachrání den jednou. Proces zachrání tým opakovaně a bez toho, aby někdo usínal s notebookem na hrudi.
+
+### AQ.3 Ověř runbook a přístupy
+
+Runbook vypadá užitečně, dokud ho někdo nezkusí použít pod tlakem. Incident drill je nejlepší chvíle zjistit, že odkaz na logy vede do starého nástroje, produkční dashboard má jiný název, přístup má jen bývalý kolega a heslo v trezoru se jmenuje „nové-nové-final“.
+
+Při cvičení ověř:
+
+- kde je aktuální runbook,
+- jestli podle něj projekt spustíš nebo zkontroluješ,
+- kde jsou produkční logy a alerty,
+- kdo má právo restartovat službu nebo vrátit release,
+- kde najdeš poslední úspěšnou zálohu,
+- jak ověříš obnovení hlavního workflow,
+- kdo může poslat zákaznickou komunikaci.
+
+Privacy-first provoz přidává ještě jednu vrstvu: přístupy musí být dostatečné pro řešení incidentu, ale ne zbytečně široké. Incident není omluva pro sdílený administrátorský účet bez stopy. Pokud někdo potřebuje nouzový přístup, měl by být časově omezený, zapsaný a po incidentu zkontrolovaný.
+
+### AQ.4 Simuluj datový incident zvlášť
+
+Technický výpadek a datový problém nejsou totéž. Když web hodinu neodpovídá, řešíš dostupnost. Když se osobní údaje dostanou k nesprávnému příjemci, řešíš důvěru, právo, komunikaci a často i povinnost eskalace. Proto si aspoň občas udělej samostatný drill pro datový incident.
+
+Bezpečné scénáře k procvičení:
+
+- e-mail s exportem odešel špatnému kontaktu,
+- interní log obsahuje osobní údaj, který tam nepatří,
+- starý nástroj pořád drží data po migraci,
+- zaměstnanec po odchodu z týmu má stále přístup,
+- zákazník žádá smazání a tým neví, kde jsou kopie.
+
+U každého scénáře si zapiš:
+
+1. Jak incident zjistíme.
+2. Jak zastavíme další šíření dat.
+3. Koho interně zapojíme.
+4. Jaké systémy zkontrolujeme.
+5. Jaké důkazy uložíme.
+6. Kdy a jak komunikujeme zákazníkovi.
+7. Jak zabráníme opakování.
+
+Neřeš právní detail z hlavy, pokud jde o reálný incident. Měj ale připravený kontakt na člověka, který ho řešit umí, a interní postup, aby první hodina nebyla jen panické hledání „co se vlastně musí“.
+
+### AQ.5 Zapiš výsledky jako úkoly, ne jako ostudu
+
+Po drillu nesmí zůstat jen pocit „nějak jsme to prošli“. Výstupem mají být konkrétní úpravy procesu, dokumentace nebo systému.
+
+Použij jednoduchou tabulku:
+
+```markdown
+| Zjištění | Dopad | Náprava | Vlastník | Termín |
+|---|---|---|---|---|
+| Alert ukazuje jen chybu serveru, ne rozbitý formulář | Poptávky mohou padat bez upozornění | Přidat syntetický test odeslání formuláře | Cody | Pátek |
+| Runbook odkazuje na starý dashboard | Tým ztratí čas při incidentu | Aktualizovat odkazy a screenshoty | Ondřej | Zítra |
+```
+
+Zjištění formuluj neutrálně. Ne „Petr zapomněl“. Lepší je „Runbook neobsahuje aktuální postup pro rollback“. Incident kultura, která hledá viníka, rychle skončí u toho, že lidé problémy schovávají. Incident kultura, která hledá opravitelný systém, postupně zrychluje.
+
+### AQ.6 Dělej drill pravidelně, ale lehce
+
+Incident drill nemusí být měsíční divadelní představení. Pro malý tým stačí krátký rytmus:
+
+- **Každý měsíc:** 30 minut nad jedním scénářem.
+- **Po větším releasu:** ověř hlavní rollback a kontakty.
+- **Po změně dodavatele:** projdi přístupy, datové toky a monitoring.
+- **Po reálném incidentu:** proměň poučení v nový scénář.
+- **Jednou za kvartál:** zkus obnovu zálohy nebo export dat nanečisto.
+
+Drill drž malý. Jeden scénář, jeden vlastník, jedna stránka poznámek, pár úkolů. Když z toho uděláš tříhodinovou poradu, tým si k tomu vytvoří alergii. A alergický tým není zrovna ideální základ pro odolný provoz.
+
+### AQ.7 Checklist: incident drill bez paniky
+
+- [ ] Scénář je konkrétní, pravděpodobný a bezpečný pro cvičení.
+- [ ] Víme, jak by se problém měl detekovat automaticky.
+- [ ] Je určený vlastník incidentu a komunikační kanál.
+- [ ] Runbook obsahuje aktuální odkazy na logy, monitoring, zálohy a rollback.
+- [ ] Přístupy jsou dostatečné pro zásah, ale ne zbytečně široké.
+- [ ] U datového scénáře víme, jak zastavit šíření a koho zapojit.
+- [ ] Po cvičení vzniknou konkrétní úkoly s vlastníkem a termínem.
+- [ ] Zjištění se zapisují jako slabiny systému, ne jako osobní selhání.
+- [ ] Další drill vychází z reálných rizik, ne z abstraktní katastrofické fantazie.
+- [ ] Proces zůstává lehký, aby ho tým opravdu opakoval.
+
+Incident drill není pojištění proti všem problémům. Je to způsob, jak snížit počet překvapení a zrychlit reakci, když se něco pokazí. A v SaaS i webovém provozu často nerozhoduje, jestli se problém nikdy nestane. Rozhoduje, jestli ho poznáš, omezíš dopad a zákazníkovi ukážeš, že máš věci pod kontrolou.
+
 
 ## Pracovní log
+- 2026-08-30 14:00 UTC — Doplněna příloha AQ o incident drillu: výběr scénáře, rozhodování během incidentu, ověření runbooku a přístupů, samostatný datový incident drill, zápis zjištění a checklist.
 - 2026-08-30 13:00 UTC — Doplněna příloha AP o první hodině po releasu: vlastník post-release kontroly, ověření hlavních cest, provozní signály, stop signály, interní komunikace, závěrečný zápis a privacy-first checklist.
 - 2026-08-30 12:00 UTC — Doplněna příloha AO o release procesu pro malé SaaS týmy: rozdělení změn podle rizika, changelog, feature flagy, rollback plán, nasazovací okna, datový dopad, release karta a checklist.
 - 2026-08-30 11:01 UTC — Doplněna příloha AN o přechodu z pilotu do produkce: rozhodnutí co škálovat, produkční minimum, migrace dat, odpovědnosti, rollout po vlnách, podpora jako zpětná vazba, 30denní review a checklist.
