@@ -7360,7 +7360,145 @@ Kartu drž krátkou. Když má pilotní karta deset stran, někdo se bojí rozho
 
 Dobrý pilot není trik, jak zákazníka nenápadně dotlačit k velké smlouvě. Je to férový způsob, jak společně snížit nejistotu. Když po pilotu obě strany vědí víc než na začátku, splnil svůj účel — i kdyby výsledek byl „teď ještě nepokračovat“.
 
+---
+
+## Příloha AN: Přechod z pilotu do produkce bez skoku do mlhy
+
+Úspěšný pilot svádí k rychlému vítěznému kolečku: „Funguje to, tak to pusťme všem.“ Jenže pilot a produkce nejsou stejná disciplína. Pilot ověřuje hodnotu v omezeném prostoru. Produkce musí dlouhodobě unést lidi, data, podporu, změny, odpovědnosti a nudné provozní věci, které se na demo callu tváří, že neexistují.
+
+Přechod do produkce není brzda. Je to pojistka, aby dobrý nápad neskončil jako interní nástroj, který používají tři nadšenci a zbytek firmy ho obchází přes e-mail.
+
+*Codyho komentář:* Největší riziko po povedeném pilotu není nedostatek nadšení. Je to nadšení bez provozního plánu. To je jako otevřít restauraci, protože se povedla jedna večeře pro kamarády.
+
+### AN.1 Nejdřív rozhodni, co přesně se škáluje
+
+Po pilotu se často řekne „škálujeme řešení“. To je moc široké. Škálovat můžeš různé věci:
+
+- stejný workflow pro víc uživatelů,
+- stejný workflow pro víc týmů,
+- stejný produkt pro jiný segment zákazníků,
+- stejný provozní model pro větší objem dat,
+- stejnou nabídku jako opakovatelný balíček.
+
+Každá varianta má jiné riziko. Rozšířit portál z pěti servisních techniků na patnáct je něco jiného než přidat externí partnery, fakturaci, nové typy požadavků a reporty pro management. Jedno je růst. Druhé je nový projekt převlečený za „jen to rozšíříme“.
+
+Napiš si produkční větu:
+
+> Do produkce převádíme **[konkrétní workflow]** pro **[konkrétní skupinu uživatelů]**, aby dosáhli **[výsledek]**, při jasných pravidlech pro **[data, provoz a podporu]**.
+
+Když větu nejde napsat bez tří odstavců vysvětlování, rozsah ještě není připravený.
+
+### AN.2 Produkční minimum je jiné než MVP minimum
+
+MVP může mít ruční kroky. Produkce musí mít jasně dané hranice. Neznamená to, že všechno musí být automatizované a dokonalé. Znamená to, že tým ví, co je podporované, co je provizorní a co je zakázané.
+
+Produkční minimum obvykle zahrnuje:
+
+- stabilní přihlašování a správu přístupů,
+- popsaný onboarding nových uživatelů,
+- základní monitoring dostupnosti a chyb,
+- zálohy a otestovanou obnovu kritických dat,
+- jasný kontakt pro podporu,
+- dokumentované limity řešení,
+- postup pro změny, incidenty a odchod zákazníka.
+
+U interních nástrojů přidej ještě vlastníka procesu. U SaaS produktu přidej vlastníka zákaznické komunikace. Produkce bez vlastníka se tváří levně, dokud se něco nerozbije. Pak je najednou velmi drahá.
+
+### AN.3 Převod dat udělej jako migraci, ne jako kopírovací folklór
+
+Data z pilotu mají často zvláštní původ: část je reálná, část testovací, část ručně opravená a část vznikla jen proto, aby demo vypadalo hezky. Než je pustíš do produkce, rozhodni, co s nimi.
+
+Praktický postup:
+
+1. Sepiš datové zdroje z pilotu.
+2. Označ, co je reálné, testovací, duplicitní nebo neaktuální.
+3. Rozhodni, která data se převádějí, která mažou a která zůstávají jen jako agregované poznatky.
+4. Připrav migrační skript nebo kontrolovaný import, ne ruční přetahování přes náhodné CSV.
+5. Udělej zkušební migraci mimo produkční prostředí.
+6. Nech vlastníka potvrdit, že data po migraci dávají smysl.
+7. Smaž dočasné exporty, tokeny a sdílené složky.
+
+Privacy-first pravidlo: do produkce nepřenášej data jen proto, že už existují. Přenes jen ta, která jsou nutná pro službu, zákaznický vztah nebo jasně domluvený provozní účel. Zbytek je digitální nepořádek s právním parfémem.
+
+### AN.4 Odpovědnosti musí být vidět dřív než první incident
+
+V pilotu často stačí napsat dodavateli nebo jednomu nadšenému člověku. V produkci potřebuješ odpovědnosti, které přežijí dovolenou, nemoc i pátek odpoledne.
+
+Minimum odpovědností:
+
+- kdo rozhoduje o změnách rozsahu,
+- kdo schvaluje nové uživatele a role,
+- kdo řeší podporu první úrovně,
+- kdo eskaluje technické chyby,
+- kdo komunikuje zákazníkům nebo interním týmům výpadek,
+- kdo hlídá zálohy, obnovu a bezpečnostní události,
+- kdo jednou měsíčně kontroluje, jestli řešení pořád doručuje hodnotu.
+
+Nemusí z toho být korporátní RACI tabulka vytesaná do mramoru. Stačí krátká provozní karta. Ale musí být napsaná. V krizi mozek rád šetří energii a začne hledat viníka místo dalšího kroku. Karta mu s tím trochu pomůže, chudákovi přetíženému.
+
+### AN.5 Rollout dělej po vlnách
+
+Velký přepínač „ode dneška všichni“ zní rozhodně. Často je ale zbytečně riskantní. Lepší je rollout po vlnách, kde každá vlna ověří jiný předpoklad.
+
+Příklad tří vln:
+
+1. **Produkční jádro:** původní pilotní tým používá ostrou verzi s reálnou podporou a monitoringem.
+2. **Rozšířený tým:** přidáš podobné uživatele, kteří ověří onboarding bez osobní asistence zakladatele.
+3. **Nový segment:** přidáš tým nebo zákazníky s lehce jiným scénářem a sleduješ, kde se produkt láme.
+
+Pro každou vlnu si napiš:
+
+- koho přidáváš,
+- jaký scénář má proběhnout,
+- co nesmí selhat,
+- jaký signál znamená stopku,
+- kdy rozhodneš o další vlně.
+
+Rollout po vlnách není opatrnost pro opatrnost. Je to způsob, jak se učit bez toho, aby se z každé chyby stal veřejný ohňostroj.
+
+### AN.6 Podpora je produktová zpětná vazba, ne odpadní kanál
+
+Po přechodu do produkce se objeví otázky, chyby a drobná tření. Neber podporu jen jako něco, co je potřeba rychle odbavit. Je to nejkratší cesta k poznání, kde produkt není dost jasný.
+
+U každého opakovaného dotazu si polož:
+
+- Je problém v textu, onboardingu, UI, dokumentaci nebo samotném workflow?
+- Dá se dotaz vyřešit změnou produktu místo další odpovědí v chatu?
+- Potřebujeme šablonu odpovědi, nápovědu nebo úpravu procesu?
+- Jde o individuální výjimku, nebo signál širšího problému?
+
+Privacy-first podpora sbírá jen nutný kontext. Neposílej screenshoty s osobními údaji do náhodných nástrojů, nepřeposílej exporty do osobních e-mailů a neptej se zákazníka na přístupy, které nepotřebuješ. Když potřebuješ citlivý detail, domluv bezpečný způsob předání a po vyřešení ho ukliď.
+
+### AN.7 Produkční review po 30 dnech
+
+Třicet dní po spuštění si udělej krátké review. Nečekej na čtvrtletní poradu, kde už si nikdo nepamatuje, co přesně se slibovalo.
+
+Agenda na 45 minut:
+
+1. Jaký výsledek měl produkční rollout doručit?
+2. Kolik lidí nebo zákazníků prošlo hlavním workflow?
+3. Kde se opakovala podpora nebo ruční obcházení systému?
+4. Jaké incidenty, chyby nebo výkonnostní problémy se objevily?
+5. Jaká data jsme sbírali a co můžeme přestat sbírat?
+6. Co upravíme v produktu, dokumentaci nebo procesu během dalšího měsíce?
+
+Výstupem mají být tři seznamy: ponechat, opravit, nerozšiřovat. „Ponechat“ chrání funkční věci před neustálým přepisováním. „Opravit“ dává týmu konkrétní práci. „Nerozšiřovat“ je zdravé připomenutí, že každá možnost v produktu jednou někomu zavolá v neděli večer.
+
+### AN.8 Checklist: z pilotu do produkce
+
+- [ ] Víme, co přesně převádíme do produkce a pro koho.
+- [ ] Produkční minimum zahrnuje přístupy, monitoring, zálohy, podporu a limity.
+- [ ] Data z pilotu jsou roztříděná na převést, smazat nebo ponechat agregovaně.
+- [ ] Migrace je kontrolovaná a ověřená, ne ruční kopírování naslepo.
+- [ ] Odpovědnosti za změny, podporu, incidenty a data jsou napsané.
+- [ ] Rollout probíhá po vlnách s jasnými stop signály.
+- [ ] Podpora se pravidelně překlápí do produktových zlepšení.
+- [ ] Po 30 dnech proběhne review hodnoty, provozu a privacy-first pravidel.
+
+Přechod do produkce je místo, kde se ukáže, jestli byl pilot opravdu přípravou na reálný provoz, nebo jen hezkou ukázkou. Dobrá produkce nemusí být velká. Musí být srozumitelná, udržitelná a fér k lidem i datům.
+
 ## Pracovní log
+- 2026-08-30 11:01 UTC — Doplněna příloha AN o přechodu z pilotu do produkce: rozhodnutí co škálovat, produkční minimum, migrace dat, odpovědnosti, rollout po vlnách, podpora jako zpětná vazba, 30denní review a checklist.
 - 2026-08-30 10:00 UTC — Doplněna příloha AM o pilotním projektu před větší implementací: rozhodovací otázka, omezený rozsah, kritéria úspěchu, role, kontrolní rytmus, úklid dat, šablona pilotní karty a checklist.
 - 2026-08-30 09:01 UTC — Doplněna příloha AL o demo callu: úvodní discovery otázky, scénáře podle zákazníka, prodej hodnoty místo obrazovek, privacy-first část dema, jasný závěr, shrnutí po demu, interní demo karta a checklist.
 - 2026-08-30 08:00 UTC — Doplněna příloha AK o auditu homepage před kampaní: test první obrazovky, CTA, důkazy, formulář s datovou minimalizací, privacy-first měření, mobilní použitelnost a checklist.
