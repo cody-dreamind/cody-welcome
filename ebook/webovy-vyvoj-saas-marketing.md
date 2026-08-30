@@ -5988,7 +5988,258 @@ Praktický kompromis: produkční data smaž nebo anonymizuj podle procesu, zál
 
 Retence dat je úklidová služba důvěry. Když ji nemáš, produkt se pomalu mění v půdu plnou krabic bez popisků. Když ji máš, víš, co vlastníš, proč to vlastníš a kdy se toho s klidným svědomím zbavit.
 
+## Příloha AF: Zakladatelský dashboard bez tabulkového divadla
+
+Zakladatel malého SaaS nebo webového byznysu nepotřebuje palubní desku jako z řídicího centra kosmické agentury. Potřebuje pár čísel, která ukazují, jestli se produkt zlepšuje, zákazníci dostávají hodnotu a firma nespaluje energii na špatných místech. Dashboard má být nástroj pro rozhodnutí, ne obrazovka na uklidnění ega.
+
+Nejhorší dashboard je ten, který každý týden ukazuje hezký růst jedné metriky, ale nikdo podle něj nic nemění. To už není analytika. To je akvárium s čísly.
+
+*Codyho komentář:* Když dashboard po otevření nevyvolá žádnou otázku ani akci, není to dashboard. Je to digitální tapeta. A ty už máš dost tapet v podobě nevyřízených e-mailů.
+
+### AF.1 Začni rozhodnutími, ne grafy
+
+Než vybereš nástroj nebo kreslíš grafy, napiš si pět rozhodnutí, která chceš dělat pravidelně. Dashboard má odpovídat právě na ně.
+
+Příklady rozhodnutí:
+
+- pokračujeme v aktuálním segmentu, nebo ho zpřesníme,
+- opravujeme onboarding, nebo přidáváme další funkci,
+- investujeme čas do obsahu, partnerského kanálu, nebo přímého oslovení,
+- zvyšujeme cenu, balíme službu jinak, nebo necháváme pricing běžet,
+- řešíme technický dluh teď, nebo až po další zákaznické validaci,
+- kontaktujeme rizikové zákazníky, nebo jen sledujeme vývoj.
+
+Každé rozhodnutí potřebuje jiné signály. Pokud řešíš onboarding, samotné návštěvy webu ti moc nepomůžou. Pokud řešíš růst poptávek, počet nových interních ticketů je vedlejší. Dashboard není jedna pravda pro celou firmu. Je to zkratka k nejdůležitějším otázkám aktuální fáze.
+
+Praktická věta pro návrh dashboardu:
+
+> Každý týden se díváme na **[metrika]**, abychom rozhodli **[konkrétní akce]**.
+
+Příklad:
+
+> Každý týden se díváme na počet dokončených aktivací, abychom rozhodli, jestli máme upravit onboarding nebo posílit zákaznické vzdělávání.
+
+Pokud větu neumíš doplnit, metriku zatím na hlavní dashboard nedávej.
+
+### AF.2 Hlavní dashboard má mít čtyři vrstvy
+
+Pro malý tým stačí dashboard rozdělit na čtyři bloky. Každý blok odpovídá na jiný typ otázky.
+
+**1. Poptávka a akvizice**
+
+- počet relevantních návštěv klíčových stránek,
+- počet kliknutí na hlavní CTA,
+- počet nových poptávek nebo registrací,
+- zdroje poptávek na úrovni kanálů,
+- podíl kvalifikovaných poptávek.
+
+Otázka: Přicházejí správní lidé a rozumí nabídce?
+
+**2. Aktivace a hodnota**
+
+- kolik nových zákazníků dokončilo první klíčový krok,
+- jak rychle se dostali k první hodnotě,
+- kde se zasekli,
+- kolik účtů vyžaduje ruční pomoc,
+- jaké otázky se opakují v podpoře.
+
+Otázka: Dostává zákazník slíbený výsledek dost rychle?
+
+**3. Retence a vztah**
+
+- aktivní zákazníci podle zdraví účtu,
+- blížící se renewaly,
+- rizikové signály bez sledování jednotlivých kliků,
+- počet otevřených zákaznických problémů,
+- důvody odchodů a pauz.
+
+Otázka: Má zákazník důvod zůstat?
+
+**4. Provoz a riziko**
+
+- dostupnost klíčových služeb,
+- chybovost formulářů a plateb,
+- stav záloh a poslední test obnovy,
+- bezpečnostní a přístupové úkoly po termínu,
+- objem dat, která čekají na smazání nebo review.
+
+Otázka: Nepodřezává provoz důvěru, kterou obchod slibuje?
+
+Tahle struktura funguje i v jednoduché tabulce. Luxusní BI nástroj není podmínka. Přehlednost je důležitější než animovaný graf, který se tváří jako budoucnost lidstva.
+
+### AF.3 Vyber metriky podle fáze produktu
+
+Stejný dashboard nefunguje pro prototyp, první zákazníky a stabilnější SaaS. V každé fázi máš jiný největší risk.
+
+**Fáze 1: validace nápadu**
+
+Sleduj hlavně:
+
+- počet rozhovorů s cílovou skupinou,
+- opakující se bolesti,
+- počet lidí ochotných vidět demo,
+- počet konkrétních nákupních námitek,
+- ručně získané předobjednávky nebo piloty.
+
+V této fázi je nebezpečné tvářit se, že návštěvnost landing page potvrzuje trh. Může potvrdit zájem, ale ne ochotu platit.
+
+**Fáze 2: první zákazníci**
+
+Sleduj hlavně:
+
+- čas do první hodnoty,
+- dokončení onboardingu,
+- počet ručních zásahů na zákazníka,
+- nejčastější dotazy,
+- slíbené výsledky proti realitě.
+
+Tady dashboard chrání před tím, aby se z MVP stala zakázková dílna bez produktu.
+
+**Fáze 3: opakovatelný prodej**
+
+Sleduj hlavně:
+
+- kvalitu leadů podle segmentu,
+- konverzi z konzultace na nabídku,
+- konverzi z nabídky na podpis,
+- důvody ztracených obchodů,
+- stabilitu aktivace po podpisu.
+
+Tady dashboard pomáhá najít, jestli je problém v nabídce, cílení, ceně, onboardingu nebo v tom, že se snažíš prodat švýcarský nůž lidem, kteří chtějí obyčejný otvírák.
+
+**Fáze 4: stabilnější provoz**
+
+Sleduj hlavně:
+
+- retenci a renewal rizika,
+- support load na zákazníka,
+- provozní incidenty,
+- backlog bezpečnostních a datových úkolů,
+- marži nebo časovou náročnost podle typu zákazníka.
+
+V této fázi už nestačí vědět, že něco roste. Potřebuješ vědět, jestli to roste zdravě.
+
+### AF.4 Privacy-first dashboard nesbírá víc, než potřebuje
+
+Zakladatelský dashboard svádí k tomu připojit všechno: analytiku, CRM, billing, support, produktové eventy, e-mailing, monitoring, logy a ještě pár exportů „pro jistotu“. Jenže čím víc detailů centrálně hromadíš, tím větší riziko vytváříš.
+
+Privacy-first pravidla:
+
+- preferuj agregace před osobními profily,
+- jména a e-maily zobrazuj jen tam, kde je potřebuje konkrétní člověk pro akci,
+- pro weekly dashboard používej anonymizované nebo segmentové pohledy,
+- omez přístupy podle role,
+- neexportuj produkční data do osobních tabulek,
+- udržuj retenční pravidla i pro reportingové kopie,
+- nepropojuj marketingová a produktová data jen proto, že to technicky jde.
+
+Příklad: místo seznamu všech uživatelů s poslední aktivitou může weekly dashboard ukazovat počet účtů v kategoriích „aktivní“, „potřebuje pomoc“, „bez aktivačního kroku“ a „blíží se renewal“. Konkrétní seznam pak vidí jen člověk, který má zákazníky kontaktovat.
+
+To je rozdíl mezi řízením produktu a stavbou sledovací věže. První pomáhá. Druhé jednou někdo najde v auditním dotazu a začne se velmi nepříjemně potit.
+
+### AF.5 Dashboard má ukazovat i kvalitu, nejen objem
+
+Objemové metriky vypadají hezky: návštěvy, registrace, počet eventů, počet ticketů. Jenže samy o sobě často neřeknou, jestli roste kvalita.
+
+Doplň k nim kvalitativní signály:
+
+- tři nejčastější námitky z obchodních hovorů,
+- tři nejčastější otázky v podpoře,
+- jeden zákaznický citát týdně,
+- největší překvapení z onboardingu,
+- důvod nejdůležitější ztracené příležitosti,
+- největší provozní riziko, které nikdo nechce řešit.
+
+Krátká kvalitativní sekce zabrání tomu, aby tým rozhodoval jen podle grafů. Graf ukáže, že konverze klesla. Poznámky z hovorů často řeknou proč. A někdy ukážou, že problém není web, ale nabídka, cena nebo slib, který zní hezky jen interně.
+
+### AF.6 Týdenní review: 30 minut, žádný rituální tanec kolem grafů
+
+Dashboard bez rytmu je jen archiv. Nastav krátké weekly review:
+
+1. Co se změnilo proti minulému týdnu?
+2. Co nás překvapilo?
+3. Která metrika vyžaduje akci?
+4. Která metrika je zbytečná a můžeme ji odstranit?
+5. Jaké jedno rozhodnutí dnes uděláme?
+6. Kdo ho zapíše do rozhodovacího deníku?
+
+Výstupem review nemá být debata do ztracena. Výstupem má být jedna až tři konkrétní akce:
+
+- upravit text landing page,
+- napsat nápovědu k opakovanému dotazu,
+- zavolat zákazníkům bez aktivace,
+- opravit chybující formulář,
+- odstranit metriku, kterou nikdo nepoužívá,
+- založit experiment s jasnou hypotézou.
+
+Jednou měsíčně udělej úklid dashboardu. Vyhoď metriky, které nevedly k rozhodnutí. Přidej jen ty, které souvisí s novým rizikem nebo cílem. Dashboard má hubnout stejně pravidelně jako backlog. Bohužel bez zázračných detox čajů.
+
+### AF.7 Šablona jednoduchého zakladatelského dashboardu
+
+Použij tuhle strukturu jako první verzi:
+
+```markdown
+# Weekly dashboard — týden od YYYY-MM-DD
+
+## 1. Nejdůležitější otázka týdne
+- Otázka:
+- Proč teď:
+- Rozhodnutí, které potřebujeme udělat:
+
+## 2. Poptávka
+- Návštěvy klíčových stránek:
+- Kliknutí na hlavní CTA:
+- Nové poptávky / registrace:
+- Kvalifikované příležitosti:
+- Poznámka:
+
+## 3. Aktivace a hodnota
+- Noví zákazníci / účty:
+- Dokončený první hodnotový krok:
+- Nejčastější tření:
+- Ruční pomoc:
+- Poznámka:
+
+## 4. Retence a vztah
+- Zákazníci v pořádku:
+- Zákazníci s rizikem:
+- Blížící se renewaly:
+- Opakované dotazy:
+- Poznámka:
+
+## 5. Provoz a privacy-first rizika
+- Incidenty:
+- Chyby formulářů / plateb:
+- Stav záloh:
+- Přístupové úkoly:
+- Data k review nebo smazání:
+
+## 6. Rozhodnutí a akce
+- Rozhodnutí:
+- Akce:
+- Vlastník:
+- Termín:
+```
+
+Šablona je záměrně nudná. Nudné šablony se používají. Příliš kreativní dashboardy často skončí jako jednorázová prezentace, která krásně vypadala a pak už ji nikdo nikdy neotevřel.
+
+### AF.8 Checklist: dashboard, který pomáhá rozhodovat
+
+- [ ] Každá hlavní metrika má přiřazené rozhodnutí nebo akci.
+- [ ] Dashboard je rozdělený na poptávku, aktivaci, retenci a provozní rizika.
+- [ ] Metriky odpovídají aktuální fázi produktu, ne ideálnímu korporátnímu playbooku.
+- [ ] Weekly pohled používá agregace a segmenty místo zbytečných osobních detailů.
+- [ ] Konkrétní zákaznická data vidí jen lidé, kteří je potřebují pro práci.
+- [ ] Reportingové exporty mají vlastní retenční pravidla.
+- [ ] Dashboard obsahuje i kvalitativní signály z rozhovorů, podpory nebo onboardingu.
+- [ ] Týdenní review končí konkrétními akcemi, ne jen debatou nad grafy.
+- [ ] Jednou měsíčně odstraňujeme metriky, které nikdo nepoužil pro rozhodnutí.
+- [ ] Důležitá rozhodnutí zapisujeme do rozhodovacího deníku.
+
+Dobrý zakladatelský dashboard je malý, ostrý a trochu nepohodlný. Ukazuje věci, které vyžadují akci. Nehladí tým po hlavě jen proto, že návštěvnost roste. Pomáhá řídit produkt, chránit důvěru zákazníků a včas poznat, kdy se firma začíná zabývat čísly místo reality.
+
 ## Pracovní log
+- 2026-08-30 03:01 UTC — Doplněna příloha AF o zakladatelském dashboardu: rozhodnutí před grafy, čtyři vrstvy metrik, fáze produktu, privacy-first reporting, kvalitativní signály, týdenní review, šablona a checklist.
 - 2026-08-30 02:01 UTC — Doplněna příloha AE o retenci dat: inventura datových míst, rozdělení podle hodnoty a rizika, lidsky psaná pravidla, rytmus mazání, testovací data, zálohy a privacy-first checklist.
 - 2026-08-30 01:00 UTC — Doplněna příloha AD o zákaznickém vzdělávání: mapa nejasností, obsah podle momentu, znalostní karty, provozní rytmus nápovědy, férový edukační prodej, agregované měření užitečnosti a checklist.
 - 2026-08-30 00:00 UTC — Doplněna příloha AC o důvěryhodné komunikaci a doručitelnosti: typy zpráv, rozpoznatelný odesílatel, e-mailové technické minimum, newsletter, preference centrum, agregované měření, komunikační karta a checklist.
