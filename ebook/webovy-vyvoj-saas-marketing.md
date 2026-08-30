@@ -8565,7 +8565,165 @@ Výsledek review přepiš do příští komunikace. Když zákazníci nerozuměl
 
 ---
 
+## Příloha AV: Znalostní báze, která šetří podporu a nepůsobí jako sklad výmluv
+
+Dobrá nápověda není místo, kam se odkládají odpovědi, aby už s nimi tým nemusel nic dělat. Je to součást produktu. Když zákazník hledá odpověď, je pořád uprostřed práce: chce dokončit nastavení, pochopit fakturu, opravit integraci, exportovat data nebo přesvědčit kolegu, že nový nástroj není další administrativní mučicí zařízení.
+
+Znalostní báze proto nemá být encyklopedie funkcí. Má být mapa rozhodnutí a konkrétních úkonů. U malého SaaS nebo webové služby často stačí dvacet dobrých článků, které pokryjí nejčastější situace. Tisíc poloprázdných stránek v helpdesku vypadá impozantně jen do chvíle, než zákazník zadá do hledání „změna e-mailu“ a dostane článek o historii SMTP.
+
+*Codyho komentář:* Nápověda je tichý obchodník i tichý support. Když je dobrá, zákazník má pocit, že produkt myslí dopředu. Když je špatná, má pocit, že firma napsala dokumentaci jako trest pro někoho, kdo prohrál sprint planning.
+
+### AV.1 Začni situacemi, ne seznamem funkcí
+
+Nejčastější chyba znalostní báze je struktura podle interní navigace produktu: Dashboard, Nastavení, Uživatelé, Integrace, Fakturace. To sice odpovídá menu, ale ne vždy odpovídá otázce zákazníka.
+
+Lepší je začít situacemi:
+
+- **Chci začít:** první nastavení, pozvání týmu, import dat, doporučený postup.
+- **Chci něco změnit:** tarif, fakturační údaje, oprávnění, doména, integrace.
+- **Něco nefunguje:** přihlášení, doručení e-mailů, synchronizace, export, pomalé načítání.
+- **Chci rozumět datům:** co se ukládá, kde data běží, jak funguje export, jak požádat o smazání.
+- **Chci pracovat lépe:** osvědčené workflow, šablony, doporučené rutiny, časté chyby.
+
+Navigaci podle funkcí klidně nech jako druhou vrstvu. Hlavní vstup ale stav na tom, co chce člověk dokončit. Zákazník většinou nehledá „modul uživatelských rolí“. Hledá „jak kolegovi povolit faktury, ale ne databázi kontaktů“.
+
+### AV.2 Každý článek má mít jeden jasný úkol
+
+Článek nápovědy by neměl být všechno o všem. Jeden článek, jeden úkol, jeden výsledek. Když se snažíš pokrýt pět scénářů najednou, čtenář neví, která část se týká jeho situace.
+
+Dobrá struktura článku:
+
+1. **Kdy článek použít:** jedna věta, pro koho a pro jakou situaci je určený.
+2. **Co bude výsledkem:** co bude po dokončení fungovat.
+3. **Než začneš:** požadovaná role, přístup, data nebo rozhodnutí.
+4. **Postup:** krátké kroky, ideálně s názvy obrazovek a polí.
+5. **Ověření:** jak poznáš, že je hotovo.
+6. **Časté chyby:** co se plete a jak to opravit.
+7. **Privacy-first poznámka:** jaká data se používají a co se zbytečně nesbírá.
+
+Příklad úvodu:
+
+> Tento postup použijte, když chcete pozvat nového člena týmu a dát mu přístup jen k poptávkám. Výsledkem bude účet s omezeným oprávněním bez přístupu k fakturaci a exportům.
+
+To je mnohem lepší než:
+
+> V této sekci se dozvíte vše o uživatelích.
+
+„Vše“ je ve znalostní bázi podezřelé slovo. Většinou znamená, že autor neměl sílu rozhodnout, co je skutečně důležité.
+
+### AV.3 Nápověda má být propojená s podporou
+
+Znalostní báze nesmí žít odděleně od podpory. Každý opakovaný dotaz je kandidát na nový článek nebo úpravu existujícího. Pokud support třikrát týdně vysvětluje stejnou věc, není to „uživatelé nečtou“. Je to signál, že informace není ve správný čas na správném místě.
+
+Zaveď jednoduchý rytmus:
+
+- jednou týdně projdi nejčastější dotazy,
+- označ odpovědi, které se opakují,
+- rozhodni, jestli chybí článek, screenshot, příklad nebo lepší text v produktu,
+- aktualizuj článek a přidej datum poslední revize,
+- pošlete supportu krátkou poznámku, co se změnilo,
+- sleduj, jestli počet dotazů klesl nebo se jen přesunul jinam.
+
+Někdy není řešením delší článek. Někdy je řešením upravit prázdný stav, popisek pole nebo validační hlášku v aplikaci. Nápověda má odhalovat, kde produkt nemluví dost jasně.
+
+### AV.4 Piš tak, aby text přežil změny produktu
+
+Dokumentace stárne rychleji než marketingová slova na konferenčním rollupu. Proto je dobré psát tak, aby se nemusela přepisovat při každém drobném redesignu.
+
+Praktická pravidla:
+
+- používej názvy polí a akcí, ale neopírej celý postup o přesnou polohu tlačítka,
+- nepiš „klikněte na zelené tlačítko vpravo nahoře“, pokud může být za měsíc modré a vlevo,
+- screenshoty používej tam, kde opravdu snižují nejistotu,
+- u screenshotů zakrývej osobní údaje a interní data,
+- přidej vlastníka článku nebo tým, který za něj odpovídá,
+- u citlivých článků nastav pravidelnou revizi.
+
+U SaaS produktů bývají citlivé hlavně články o fakturaci, oprávněních, bezpečnosti, exportech, mazání dat, integracích a migracích. Ty nesmí zůstat jako zaprášený návod z doby, kdy se produkt jmenoval ještě pracovně „projekt-final-v3“.
+
+### AV.5 Privacy-first nápověda buduje důvěru
+
+Privacy-first provoz není jen právní stránka v patičce. Je to způsob, jak odpovídáš na praktické otázky zákazníka. Dobrá znalostní báze má jasně vysvětlit, co se s daty děje při běžných operacích.
+
+U článků o datech přidej krátkou sekci:
+
+- jaká data jsou potřeba pro daný úkon,
+- kde se data zpracovávají nebo ukládají,
+- kdo k nim má přístup,
+- jak dlouho jsou potřeba,
+- co se stane při exportu, smazání nebo odpojení integrace,
+- co produkt nedělá, například neposílá data do reklamních systémů.
+
+Tahle část nemusí být dlouhá. Stačí konkrétnost. Když zákazník vidí, že umíš jednoduše popsat datový tok, věří ti víc než firmě, která schová všechno za větu „bereme bezpečnost vážně“. To je mimochodem fráze tak unavená, že by měla mít vlastní dovolenou.
+
+### AV.6 Měř užitečnost nápovědy střídmě
+
+Nápověda se dá zlepšovat i bez detailního sledování jednotlivců. Nepotřebuješ vědět, který konkrétní uživatel četl článek ve 23:14 a pak dvakrát zaváhal nad tlačítkem. Potřebuješ vědět, jestli články pomáhají lidem dokončit práci.
+
+Stačí sledovat:
+
+- nejnavštěvovanější články,
+- vyhledávané dotazy bez výsledku,
+- články, po kterých často vzniká ticket,
+- témata s opakovanými dotazy,
+- počet interních odkazů ze support odpovědí,
+- datum poslední aktualizace důležitých článků.
+
+Když chceš zpětnou vazbu přímo v článku, použij jednoduchou otázku „Pomohlo vám to?“ a volitelné textové pole. Nesbírej víc, než potřebuješ. A pokud zákazník napíše konkrétní problém, ber to jako support signál, ne jako anonymní datový bod do nekonečné tabulky smutku.
+
+### AV.7 Šablona článku znalostní báze
+
+```markdown
+# [Konkrétní úkol zákazníka]
+
+## Kdy tento návod použít
+[Jedna věta: situace, role, typ účtu nebo integrace.]
+
+## Co bude výsledkem
+[Konkrétní výsledek po dokončení postupu.]
+
+## Než začnete
+- [Potřebná role nebo oprávnění]
+- [Potřebná data nebo rozhodnutí]
+- [Dopad na tým, fakturaci, integraci nebo data]
+
+## Postup
+1. [Krátký krok]
+2. [Krátký krok]
+3. [Krátký krok]
+
+## Jak ověřit, že je hotovo
+[Jednoduchý test z pohledu zákazníka.]
+
+## Časté chyby
+- [Chyba] — [jak ji opravit]
+- [Chyba] — [jak ji opravit]
+
+## Privacy-first poznámka
+[Jaká data jsou potřeba, kde zůstávají a co se zbytečně nesleduje.]
+
+## Kdy kontaktovat podporu
+[Jasná hranice, kdy už zákazník nemá ztrácet čas.]
+```
+
+### AV.8 Checklist: znalostní báze, která opravdu pomáhá
+
+- Články jsou organizované podle situací zákazníka, ne jen podle interního menu.
+- Každý článek řeší jeden konkrétní úkol a jasný výsledek.
+- Úvod říká, pro koho návod je a kdy ho použít.
+- Postup obsahuje ověření, ne jen seznam kliknutí.
+- Opakované support dotazy se pravidelně převádějí do článků nebo zlepšení produktu.
+- Citlivé články mají vlastníka a datum poslední revize.
+- Screenshoty neobsahují osobní ani zákaznická data.
+- Privacy-first poznámky vysvětlují datový dopad běžných operací.
+- Měření nápovědy je agregované a přiměřené účelu.
+- Články vedou zákazníka k dokončení práce, ne k dalšímu hledání.
+
+---
+
 ## Pracovní log
+
+- 2026-08-30 19:00 UTC — Doplněna příloha AV o znalostní bázi a nápovědě: struktura podle zákaznických situací, články s jedním úkolem, propojení se supportem, údržba dokumentace, privacy-first datové poznámky, střídmé měření, šablona článku a checklist.
 
 - 2026-08-30 18:00 UTC — Doplněna příloha AU o komunikaci produktových změn: rozdělení podle dopadu, čtyři otázky oznámení, zákaznický changelog, migrační mini plán, privacy-first měření, review zpětné vazby, šablona a checklist.
 
