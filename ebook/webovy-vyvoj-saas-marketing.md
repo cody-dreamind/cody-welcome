@@ -7669,7 +7669,142 @@ Release kartu nepoužívej na každou kosmetickou drobnost. Používej ji tam, k
 
 Dobrý release proces má být lehký, ale viditelný. Pomáhá týmu posílat hodnotu často, bez toho aby se z každého nasazení stal malý survival kurz. Rychlost je výhoda jen tehdy, když si za ní nemusíš pokaždé uklízet spálené obočí.
 
+---
+
+## Příloha AP: První hodina po releasu bez slepého optimismu
+
+Release nekončí ve chvíli, kdy pipeline zezelená. To je jen okamžik, kdy se změna dostane do reality, kde existují staré prohlížeče, unavení uživatelé, zvláštní kombinace oprávnění a zákazník, který klikne přesně tam, kam se při testování nikdo nepodíval. První hodina po nasazení proto není čas na vítězný oběd. Je to krátká provozní směna, která ověří, jestli nová hodnota opravdu dorazila bezpečně.
+
+Malý tým nepotřebuje válečnou místnost s pěti obrazovkami a dramatickou hudbou. Potřebuje jasný checklist, vlastníka a pár signálů, které se dají zkontrolovat rychle. Cílem není sedět u grafů jako věštec nad křišťálovou koulí. Cílem je včas poznat, že něco drhne, a rozhodnout, jestli pokračovat, opravit, vypnout flag nebo vrátit změnu.
+
+*Codyho komentář:* Nejnebezpečnější věta po releasu je „zatím nikdo nepsal, takže dobrý“. Absence stížností není monitoring. Je to jen ticho před Slackem plným screenshotů.
+
+### AP.1 Urči vlastníka první hodiny
+
+Každý střední nebo rizikový release má mít jednoho člověka, který po nasazení drží dohled. Nemusí všechno řešit osobně, ale ví, kdo co ověřuje, kde jsou metriky a kdy se rozhoduje o zásahu.
+
+Vlastník první hodiny hlídá:
+
+- zda deployment opravdu běží v očekávané verzi,
+- zda hlavní uživatelské cesty fungují,
+- zda nepřibývají chyby v logách,
+- zda se nezhoršil výkon kritických stránek,
+- zda support nebo obchod nehlásí opakovaný problém,
+- zda je potřeba komunikovat zákazníkům změnu nebo incident.
+
+U malého týmu může být vlastník vývojář, produktový člověk nebo zakladatel. Důležité je, že role existuje. Když ji nemá nikdo, má ji ve skutečnosti náhoda. A náhoda je sice levná, ale fakt špatně píše postmortemy.
+
+### AP.2 Ověř hlavní cesty jako zákazník
+
+Automatické testy jsou skvělé, ale po releasu se vyplatí ručně projít několik nejdůležitějších cest přes produkční prostředí. Ne kvůli tomu, že by ruční klikání bylo ušlechtilejší. Kvůli tomu, že kombinuje reálnou konfiguraci, reálné domény, reálné cookies, reálné e-maily a reálnou integraci s okolním světem.
+
+Vyber maximálně tři až pět cest:
+
+- nový návštěvník odešle poptávku,
+- uživatel se přihlásí a dokončí hlavní akci,
+- administrátor provede běžný provozní úkon,
+- zákazník dostane e-mail nebo notifikaci,
+- platba, objednávka nebo export proběhne až do potvrzení.
+
+U každé cesty si napiš očekávaný výsledek. Nestačí „funguje formulář“. Lepší je:
+
+> Po odeslání poptávky se zobrazí potvrzení, do interního systému vznikne nový lead, zákazník dostane potvrzovací e-mail a v analytice se zapíše agregovaná událost bez osobních dat.
+
+Tahle formulace hned ukáže, že jeden klik může mít čtyři dopady. Právě tam se často schovává problém.
+
+### AP.3 Sleduj malé množství signálů
+
+Po releasu nepotřebuješ sledovat všechno. Když otevřeš patnáct dashboardů, pravděpodobně neuvidíš víc reality, jen víc barev. Zvol pár signálů, které odpovídají riziku změny.
+
+Praktické minimum:
+
+- **Dostupnost:** web nebo aplikace odpovídá zvenku, nejen ze serveru.
+- **Chyby:** nepřibývají nové 4xx/5xx chyby na změněných cestách.
+- **Aplikační logy:** nevzniká opakovaná chyba po běžné akci.
+- **Výkon:** kritická stránka se nenačítá výrazně pomaleji než před releasem.
+- **Hlavní event:** měřená agregovaná událost stále vzniká tam, kde má.
+- **Support signál:** tým ví, kam nahlásit problém z produkce.
+
+Nesleduj jednotlivé uživatele, pokud to není nutné pro konkrétní bezpečnostní nebo supportní incident. Většina post-release kontroly jde dělat agregovaně: počty chyb, počty úspěšných akcí, stav front, doručení e-mailů, dostupnost endpointů. Privacy-first provoz neznamená slepotu. Znamená to dívat se na systém bez zbytečného šmírování lidí.
+
+### AP.4 Rozhodni předem, co je stop signál
+
+Nejhorší čas na definování průšvihu je během průšvihu. Před releasem si napiš, co už není jen kosmetická chyba, ale důvod k zásahu.
+
+Příklady stop signálů:
+
+- zákazník se nemůže přihlásit,
+- poptávky se odesílají uživateli, ale nevznikají v interním systému,
+- platba projde, ale objednávka nemá potvrzení,
+- role nebo oprávnění ukazují data nesprávným lidem,
+- nová verze posílá do analytiky osobní údaje,
+- chybovost kritické akce skokově naroste,
+- zákaznická data se ukládají do špatného regionu nebo nástroje.
+
+Ke každému stop signálu přiřaď akci:
+
+- vypnout feature flag,
+- vrátit předchozí verzi,
+- zastavit rollout další skupině,
+- opravit konfiguraci,
+- informovat dotčené zákazníky,
+- spustit incident proces.
+
+Když je rozhodnutí napsané předem, tým nemusí v tlaku vymýšlet morální filozofii rollbacku. Prostě udělá, co si slíbil v klidnějším stavu mozku.
+
+### AP.5 Komunikuj i malé problémy interně
+
+Ne každý problém po releasu musí být veřejný incident. Ale každý opakovaný nebo zákaznicky viditelný problém má být vidět interně. Jinak se stane, že obchod, support a vývoj řeší tři verze stejné reality.
+
+Krátká interní zpráva stačí:
+
+```markdown
+Release: [název / čas]
+Stav: sledujeme / opraveno / rollback / bez problému
+Dopad: [koho se to týká]
+Co víme: [fakta, ne dojmy]
+Co děláme: [další krok]
+Vlastník: [jméno]
+Další update: [čas nebo podmínka]
+```
+
+Piš konkrétně a klidně. Věta „něco je rozbité“ zvedá tlak a nesnižuje počet chyb. Věta „u nových registrací neodchází potvrzovací e-mail, přihlášení funguje, oprava jde do 20 minut“ pomáhá všem rozhodovat.
+
+### AP.6 Uzavři release krátkým zápisem
+
+První hodina má mít konec. Po kontrole napiš krátký zápis do release karty nebo changelogu. Nemusí být dlouhý, ale musí zachytit, jestli se něco naučilo.
+
+Zapiš:
+
+- kdy byla změna nasazena,
+- kdo dělal post-release kontrolu,
+- které cesty byly ověřené,
+- jaké signály byly v normě,
+- jaké problémy se objevily,
+- co se opravilo hned,
+- co jde do backlogu,
+- jestli se má upravit checklist pro příště.
+
+Tahle minuta dokumentace šetří příští měsíc spoustu dohadů. A hlavně chrání tým před opakováním stejného trapasu v luxusnějším provedení.
+
+### AP.7 Checklist: první hodina po releasu
+
+- [ ] Release má určeného vlastníka post-release kontroly.
+- [ ] V produkci je ověřená správná verze aplikace nebo webu.
+- [ ] Jsou ručně projité tři až pět hlavních zákaznických cest.
+- [ ] Kontrolujeme dostupnost, chyby, výkon, hlavní eventy a support signály.
+- [ ] Stop signály a odpovídající akce jsou napsané před nasazením.
+- [ ] Feature flagy mají jasné pravidlo zapnutí, vypnutí a úklidu.
+- [ ] Kontrola se opírá o agregované signály, ne o sledování jednotlivců.
+- [ ] Interní tým ví, kde najde stav releasu a kdo je vlastník.
+- [ ] Po první hodině vznikne krátký zápis s výsledkem kontroly.
+- [ ] Poznatky se přenesou do release checklistu nebo backlogu.
+
+První hodina po releasu je malý návyk s velkým efektem. Nedělá z týmu pomalou korporaci. Dělá z něj tým, který umí nasazovat často, pozorovat realitu a chránit důvěru zákazníků i vlastní nervovou soustavu.
+
+
 ## Pracovní log
+- 2026-08-30 13:00 UTC — Doplněna příloha AP o první hodině po releasu: vlastník post-release kontroly, ověření hlavních cest, provozní signály, stop signály, interní komunikace, závěrečný zápis a privacy-first checklist.
 - 2026-08-30 12:00 UTC — Doplněna příloha AO o release procesu pro malé SaaS týmy: rozdělení změn podle rizika, changelog, feature flagy, rollback plán, nasazovací okna, datový dopad, release karta a checklist.
 - 2026-08-30 11:01 UTC — Doplněna příloha AN o přechodu z pilotu do produkce: rozhodnutí co škálovat, produkční minimum, migrace dat, odpovědnosti, rollout po vlnách, podpora jako zpětná vazba, 30denní review a checklist.
 - 2026-08-30 10:00 UTC — Doplněna příloha AM o pilotním projektu před větší implementací: rozhodovací otázka, omezený rozsah, kritéria úspěchu, role, kontrolní rytmus, úklid dat, šablona pilotní karty a checklist.
