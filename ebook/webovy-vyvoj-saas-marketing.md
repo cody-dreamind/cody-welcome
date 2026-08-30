@@ -5700,7 +5700,156 @@ Příklad pro onboarding:
 
 *Codyho komentář:* Doručitelnost není trik, jak protlačit víc hluku do cizího inboxu. Je to disciplína, jak posílat méně věcí, lépe načasovaných, jasně podepsaných a užitečných. Inbox není bitevní pole. Je to cizí pracovní prostor. Chovej se tam jako host, ne jako konfety kanón.
 
+## Příloha AD: Zákaznické vzdělávání bez nekonečné akademie
+
+Zákaznické vzdělávání není jen „dáme na web nápovědu“. Je to způsob, jak snížit nejistotu, urychlit první hodnotu a postupně naučit zákazníka používat produkt nebo službu tak, aby z ní opravdu něco měl. U webového vývoje, SaaS i marketingu je to často rozdíl mezi zákazníkem, který produkt zkusí a zmizí, a zákazníkem, který pochopí principy, vrací se a doporučuje tě dál.
+
+Malý tým ale nepotřebuje obří akademii s desítkami videí, certifikací a portálem, který se sám stane dalším produktem k údržbě. Potřebuje jasně pojmenované momenty, ve kterých se zákazník zasekává, a krátký obsah, který mu pomůže pokračovat.
+
+*Codyho komentář:* Nejlepší nápověda není ta nejdelší. Nejlepší nápověda je ta, kterou uživatel najde dvě minuty před tím, než začne psát na podporu větu „asi jsem úplně blbej“. Nejsi, Karle. Jen UI zase předstíralo, že je telepat.
+
+### AD.1 Začni mapou nejasností
+
+Nejdřív nesepisuj kurz. Sepiš situace, kdy zákazník neví, co dál. Vezmi podporu, obchodní hovory, onboardingové poznámky a posledních pár interních debat. Hledej opakované otázky, ne jednorázové výjimky.
+
+Typické nejasnosti:
+
+- co produkt nebo služba vlastně řeší,
+- jak vypadá první úspěšné nastavení,
+- jaká data jsou potřeba a proč,
+- co má dělat zákazník a co dodavatel,
+- jak se pozná, že spolupráce funguje,
+- co se stane při změně plánu, migraci nebo ukončení.
+
+Ke každé nejasnosti napiš jednu větu:
+
+> Zákazník se zasekne, když **[situace]**, protože neví **[chybějící informace]**.
+
+Příklad:
+
+> Zákazník se zasekne při prvním nastavení analytiky, protože neví, které cíle má měřit bez zbytečného sběru osobních dat.
+
+Tahle věta je zadání pro vzdělávací obsah. Ne „natočit video o analytice“. Ale „vysvětlit tři cíle, které dávají smysl pro první měsíc privacy-first měření“.
+
+### AD.2 Vzdělávej podle momentu, ne podle vnitřní struktury firmy
+
+Interně můžeš mít týmy, moduly a procesy. Zákazník ale řeší konkrétní moment. Potřebuje odpověď tam, kde stojí, ne učebnici podle tvého organizačního diagramu.
+
+Rozděl obsah podle situací:
+
+- **Před nákupem:** rozhodovací články, srovnání přístupů, vysvětlení rizik, ukázky výsledků.
+- **Při startu:** checklist prvního nastavení, onboardingový průvodce, ukázková data, krátké video nebo screenshotový návod.
+- **Při běžném používání:** kontextová nápověda, FAQ, šablony, příklady dobré praxe.
+- **Při problému:** troubleshooting, status page, známé limity, jasný kontakt na podporu.
+- **Při růstu:** pokročilé workflow, bezpečnostní a provozní doporučení, exporty, týmové role.
+- **Při odchodu:** export dat, vypnutí účtu, retence, co zůstává a co se maže.
+
+Když obsah odpovídá momentu, zákazník nemusí přemýšlet, do které škatulky patří. Prostě najde další krok. To je UX, jen bez drahého workshopu a lepicích papírků.
+
+### AD.3 Jedna znalostní karta porazí deset rozbitých poznámek
+
+Pro opakované otázky používej krátké znalostní karty. Každá karta má řešit jednu věc, ne být skladištěm všeho, co se tématu kdy týkalo.
+
+```markdown
+## Znalostní karta: [název otázky]
+
+- Situace: [kdy zákazník kartu potřebuje]
+- Krátká odpověď: [2-4 věty]
+- Doporučený postup: [3-7 kroků]
+- Příklad: [konkrétní ukázka]
+- Častá chyba: [na co si dát pozor]
+- Privacy-first poznámka: [data, souhlasy, retence, přístupy]
+- Další krok: [odkaz, kontakt nebo navazující karta]
+- Vlastník: [kdo kartu udržuje]
+- Review: [datum nebo rytmus kontroly]
+```
+
+Příklad:
+
+```markdown
+## Znalostní karta: Jak vybrat první cíle pro webovou analytiku
+
+- Situace: zákazník spouští nový B2B web a chce měřit výkon bez reklamních trackerů
+- Krátká odpověď: začni 3-5 cíli, podle kterých budeš dělat rozhodnutí. Neměř osobní historii návštěvníků, pokud k tomu nemáš jasný důvod.
+- Doporučený postup: vyber klíčové stránky, hlavní CTA, odeslání formuláře, nejčtenější obsah a technické chyby formuláře
+- Příklad: konzultační web měří návštěvy služby, kliknutí na konzultaci, odeslané poptávky a čtenost případových studií
+- Častá chyba: nasadit pět nástrojů jen proto, že každý ukazuje trochu jiné grafy
+- Privacy-first poznámka: UTM nepoužívají osobní identifikátory a data se vyhodnocují agregovaně
+- Další krok: projít checklist privacy-first měření
+- Vlastník: produktový nebo marketingový owner
+- Review: jednou za kvartál
+```
+
+Výhoda karet je jednoduchá: dají se použít v nápovědě, onboardingu, článku, interním playbooku i odpovědi podpory. Jeden kvalitní kus znalosti se recykluje, místo aby se pokaždé psal znovu trochu jinak.
+
+### AD.4 Nápověda má mít vlastní provozní rytmus
+
+Nápověda stárne. Produkt se mění, screenshoty přestávají sedět, pricing dostane novou logiku, integrace změní názvy polí a starý článek najednou radí něco, co už nejde udělat. To není detail. Zastaralá nápověda vyrábí podporu, frustraci a nedůvěru.
+
+Nastav jednoduchý rytmus:
+
+- nová funkce nemá být hotová bez krátké nápovědy nebo poznámky v changelogu,
+- každá karta má vlastníka a datum review,
+- podpora označuje otázky, které se opakují,
+- produktový tým jednou měsíčně projde nejhledanější dotazy a neúspěšné výsledky hledání,
+- starý obsah se buď aktualizuje, spojí s lepším článkem, nebo archivuje.
+
+Malý tým si vystačí s tabulkou nebo jednoduchým repozitářem Markdown souborů. Důležité je, aby nápověda nebyla vedlejší skládka. Je to součást produktu a prodeje.
+
+### AD.5 Vzdělávání může prodávat, ale nesmí manipulovat
+
+Edukační obsah přirozeně podporuje prodej. Když zákazník pochopí problém, rizika a možné cesty, snáz si vybere. To je fér. Není fér maskovat reklamu jako nezávislý návod, tlačit falešnou urgentnost nebo záměrně zamlčet limity vlastního řešení.
+
+Dobré zásady:
+
+- přiznej, pro koho řešení není vhodné,
+- odděl návod od obchodní nabídky,
+- u srovnání napiš kritéria, ne jen vítěze,
+- nevyžaduj e-mail za každou základní odpověď,
+- u lead magnetu jasně napiš, co člověk dostane a co mu budeš posílat,
+- nech část znalostí veřejně dostupnou přes přímé URL a ideálně i indexovatelnou.
+
+Privacy-first značka může vzděláváním ukázat, že respektuje zákazníka ještě před podpisem smlouvy. Veřejný checklist, jasný vysvětlovací článek nebo otevřený postup často prodají víc důvěry než agresivní formulář „stáhněte si PDF po zadání telefonu, firmy, rozpočtu a krevní skupiny“.
+
+### AD.6 Měř užitečnost nápovědy bez sledování jednotlivců
+
+U vzdělávacího obsahu nemusíš vědět, který konkrétní člověk četl kterou větu. Potřebuješ vědět, jestli obsah snižuje tření a pomáhá lidem pokračovat.
+
+Rozumné signály:
+
+- počet zobrazení klíčových karet,
+- nejhledanější dotazy v nápovědě,
+- dotazy bez výsledku,
+- pokles opakovaných ticketů po publikaci návodu,
+- kliknutí na navazující krok,
+- odpovědi zákazníků typu „tohle mi pomohlo“ nebo „tady pořád tápu“.
+
+Jednou měsíčně si vyber tři největší tření a rozhodni:
+
+1. Vysvětlíme to lépe v produktu?
+2. Doplníme kartu nebo checklist?
+3. Změníme onboarding?
+4. Je problém ve funkci samotné, ne v nápovědě?
+
+Poslední otázka je nejdůležitější. Nápověda nemá omlouvat špatný produkt. Když musíš napsat třístránkový návod na jednoduchou akci, možná nemáš problém s dokumentací. Možná máš problém s návrhem.
+
+### AD.7 Checklist: vzdělávání, které šetří čas a buduje důvěru
+
+- [ ] Máme seznam opakovaných zákaznických nejasností.
+- [ ] Obsah je řazený podle situace zákazníka, ne interní struktury firmy.
+- [ ] Každá znalostní karta řeší jednu konkrétní otázku.
+- [ ] Důležité návody obsahují postup, příklad a častou chybu.
+- [ ] Privacy-first poznámky vysvětlují data, přístupy, retenci nebo souhlasy tam, kde je to relevantní.
+- [ ] Nápověda má vlastníka a pravidelný review rytmus.
+- [ ] Nové funkce nejsou hotové bez aktualizace nápovědy nebo changelogu.
+- [ ] Základní odpovědi nejsou schované za zbytečný formulář.
+- [ ] Užitečnost měříme agregovaně a podle dopadu na podporu, onboarding nebo konverzi.
+- [ ] Když nápověda vysvětluje příliš složitý postup, řešíme i produktový problém.
+
+Zákaznické vzdělávání je tichá infrastruktura růstu. Když funguje, zákazníci se rychleji aktivují, podpora méně hasí stejné dotazy a obchod nemusí pořád dokola vysvětlovat základní věci. A když je navržené privacy-first, učí zákazníka nejen používat produkt, ale taky věřit tomu, jak s jeho daty zacházíš.
+
 ## Pracovní log
+- 2026-08-30 01:00 UTC — Doplněna příloha AD o zákaznickém vzdělávání: mapa nejasností, obsah podle momentu, znalostní karty, provozní rytmus nápovědy, férový edukační prodej, agregované měření užitečnosti a checklist.
 - 2026-08-30 00:00 UTC — Doplněna příloha AC o důvěryhodné komunikaci a doručitelnosti: typy zpráv, rozpoznatelný odesílatel, e-mailové technické minimum, newsletter, preference centrum, agregované měření, komunikační karta a checklist.
 - 2026-08-29 23:00 UTC — Doplněna příloha AB o bezpečnostním minimu před prvním větším zákazníkem: mapa aktiv, nejmenší oprávnění, privacy-first logy, incident karta, Security FAQ, minimalizace dat a checklist.
 - 2026-08-29 22:00 UTC — Doplněna příloha AA o referral a partnerském růstu bez sledovacích pixelů: jasný důvod doporučení, ruční první program, férové odměny, měření obchodních událostí, partner balíček, hranice a privacy-first checklist.
