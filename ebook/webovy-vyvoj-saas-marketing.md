@@ -6991,7 +6991,190 @@ U privacy-first webu má rychlost ještě jednu výhodu: méně trackerů, mén�
 
 Homepage nemusí být před kampaní dokonalá. Musí být srozumitelná, důvěryhodná a měřitelná bez šmírování. Když návštěvník ví, proč je na stránce, co získá a co se stane po kliknutí, rozpočet pracuje pro tebe. Když ne, jen sponzoruješ internetový průvan.
 
+## Příloha AL: Demo call, který prodává hodnotu místo hodinového bloudění
+
+Demo call je zvláštní disciplína. Na papíře jde o ukázku produktu nebo služby. Ve skutečnosti je to test, jestli obě strany chápou problém stejně, jestli existuje reálný obchodní dopad a jestli další krok dává smysl. Když demo začne klikáním přes menu, často skončí zdvořilým „ozveme se“. A to je obchodní verze uspávanky.
+
+Dobré demo není prezentace všech funkcí. Je to řízený rozhovor s důkazem hodnoty.
+
+### AL.1 Demo nezačíná sdílením obrazovky
+
+Než ukážeš produkt, ověř kontext. Prvních deset minut má odpovědět na otázky:
+
+- proč zákazník vůbec přišel,
+- co se stane, když problém nevyřeší,
+- kdo další bude rozhodovat,
+- podle čeho pozná, že řešení funguje,
+- jaký další krok je realistický.
+
+Jednoduchá úvodní struktura:
+
+1. „Co vás přimělo řešit to právě teď?“
+2. „Jak to dnes děláte bez nás?“
+3. „Kde v tom vzniká největší ztráta času, peněz nebo důvěry?“
+4. „Kdybychom se za měsíc bavili znovu, co by se muselo změnit, abyste řekli, že to stálo za to?“
+
+Teprve potom má smysl ukazovat obrazovku. Jinak předvádíš funkce naslepo a doufáš, že některá trefí zákazníkovu bolest. To je méně obchod a víc digitální rybolov dynamitem.
+
+### AL.2 Připrav si demo podle scénáře zákazníka
+
+Univerzální demo je pohodlné pro tým, ale často nudné pro zákazníka. Lepší je mít několik krátkých scénářů podle hlavních typů situací.
+
+Příklad pro SaaS analytiku:
+
+- **Zakladatel:** chce vědět, zda produkt roste správným směrem.
+- **Marketing:** chce zjistit, odkud přichází kvalitní poptávky.
+- **Provoz:** chce mít jistotu, že data nejsou rozházená v pěti nástrojích.
+- **Privacy/IT:** chce vědět, co se sbírá, kde to běží a kdo má přístup.
+
+Každý scénář má mít:
+
+- vstupní problém,
+- jednu hlavní cestu v produktu,
+- konkrétní výsledek,
+- větu, která propojí ukázku s obchodním dopadem.
+
+Například: „Tady nejde o to mít další graf. Jde o to, aby tým každý týden viděl, jestli se obsah mění v poptávky — bez sledování jednotlivých lidí.“
+
+### AL.3 Neprodávej obrazovky, prodávej rozhodnutí
+
+Při demu se ptej: „Jaké rozhodnutí díky tomu zákazník udělá?“ Pokud žádné, funkce pravděpodobně do ukázky nepatří.
+
+Slabá ukázka:
+
+- „Tady máme dashboard.“
+- „Tady si můžete filtrovat data.“
+- „Tady je export.“
+
+Silnější ukázka:
+
+- „Tady vidíte, jestli kampaň přivádí správné typy poptávek.“
+- „Tady zjistíte, kterou landing page upravit jako první.“
+- „Tady si jednou týdně stáhnete seznam obchodních příležitostí pro follow-up.“
+
+Funkce sama o sobě je jen technický předmět. Hodnota vzniká ve chvíli, kdy pomáhá člověku udělat lepší rozhodnutí nebo odstranit zbytečnou práci.
+
+*Codyho komentář:* Když zákazník po demu umí vlastními slovy říct „tohle nám zkrátí X“ nebo „tohle nám zpřehlední Y“, jsi blízko. Když říká jen „vypadá to moderně“, jsi pořád v kosmetickém salonu funkcí.
+
+### AL.4 Privacy-first část ukaž jako výhodu, ne omluvu
+
+Pokud stavíš evropský a privacy-first produkt, nečekej, až se zákazník zeptá na data. Zařaď to přímo do dema, ale krátce a prakticky.
+
+Ukázka může obsahovat:
+
+- jaká data systém potřebuje a proč,
+- co se záměrně nesbírá,
+- kde zákazník nastavuje oprávnění,
+- jak vypadá export nebo smazání dat,
+- jak se pracuje s agregovanými metrikami místo sledování jednotlivců.
+
+Dobrá formulace:
+
+> „Tuhle část jsme navrhli tak, aby obchodní tým dostal odpověď na otázku, která kampaň funguje, ale aby kvůli tomu nebylo nutné stavět detailní sledovací profil návštěvníka.“
+
+Privacy-first přístup není brzda pro obchod. Je to argument pro firmy, které nechtějí vysvětlovat zákazníkům, proč jejich data cestují přes nástroje, kterým samy pořádně nerozumí.
+
+### AL.5 Demo musí mít jasný konec
+
+Nejčastější chyba je nechat demo vyšumět. Posledních deset minut si chraň stejně jako začátek. Cílem je shrnout, co jste zjistili, a domluvit další krok.
+
+Závěr může mít tuto strukturu:
+
+1. „Slyšel jsem, že hlavní problém je…“
+2. „Ukázali jsme si, jak by šlo řešit…“
+3. „Zůstávají otevřené otázky…“
+4. „Dává smysl jako další krok…“
+5. „Kdo všechno u toho má být?“
+
+Další krok nemusí být vždy nabídka. Může to být technická konzultace, pilot, workshop, bezpečnostní dotazník, ukázka pro dalšího rozhodovatele nebo slušné ukončení, pokud fit není dobrý.
+
+Dobré demo šetří čas i tím, že umí říct „ne“. Ne každý zájemce je zákazník a ne každý zákazník je dobrý zákazník.
+
+### AL.6 Po demu pošli krátké shrnutí, ne román
+
+Shrnutí po demu má zákazníkovi pomoct pokračovat interně. Nemá být literární pomník tvé produktové genialitě.
+
+Šablona:
+
+```markdown
+Předmět: Shrnutí dema: [téma / firma]
+
+Dobrý den,
+
+díky za dnešní demo. Zapsal jsem si:
+
+1. Hlavní problém: [jedna až dvě věty]
+2. Cíl: [co má být lepší]
+3. Ukázané řešení: [konkrétní části]
+4. Otevřené otázky: [body]
+5. Další krok: [kdo, co, kdy]
+
+Privacy-first poznámka: [co se sbírá / nesbírá / kde běží data]
+
+Hezký den
+[podpis]
+```
+
+Shrnutí posílej ideálně ten samý den. Ne kvůli magické obchodní poučce, ale protože kontext rychle chladne. A studený kontext se ohřívá hůř než káva zapomenutá u klávesnice.
+
+### AL.7 Interní demo karta
+
+Pro každé významnější demo si nech jednoduchý interní záznam. Pomůže ti zlepšovat produkt, obchod i onboarding.
+
+```markdown
+## Demo karta: [firma / kontakt]
+
+Datum:
+Účastníci:
+Typ zákazníka:
+
+### Kontext
+- Proč se ozvali:
+- Jak to řeší dnes:
+- Hlavní bolest:
+
+### Hodnota
+- Co je zaujalo:
+- Co bylo nejasné:
+- Jaký výsledek hledají:
+
+### Rizika
+- Rozhodovatelé:
+- Technické otázky:
+- Privacy/security otázky:
+- Rozpočtové nebo časové hranice:
+
+### Další krok
+- Akce:
+- Vlastník:
+- Termín:
+
+### Poučení pro produkt / web
+- Co zlepšit v demu:
+- Co doplnit do webu nebo nápovědy:
+```
+
+Privacy-first pravidlo: do demo karty nepiš drby, osobní poznámky ani citlivé interní informace zákazníka, které nepotřebuješ pro další krok. Zapisuj pracovní kontext, ne psychologický profil. Sherlock Holmes by možná nesouhlasil, ale právník a slušnost ano.
+
+### AL.8 Checklist: demo, které vede k rozhodnutí
+
+- [ ] Před demem víme, kdo přijde a proč.
+- [ ] Máme připravený scénář podle situace zákazníka.
+- [ ] Prvních deset minut ověřuje problém, neukazuje menu.
+- [ ] Každá ukázaná funkce je propojená s konkrétním rozhodnutím nebo výsledkem.
+- [ ] Neříkáme „umíme všechno“, když zákazník potřebuje tři věci dobře.
+- [ ] Privacy-first část vysvětluje, co sbíráme, nesbíráme a proč.
+- [ ] Máme prostor na otázky rozhodovatelů, IT nebo provozu.
+- [ ] Posledních deset minut shrnuje fit, rizika a další krok.
+- [ ] Po demu posíláme stručné shrnutí s termínem další akce.
+- [ ] Interně zapisujeme poučení pro produkt, web a obchod.
+- [ ] Nesbíráme do poznámek osobní ani citlivé informace, které nepotřebujeme.
+- [ ] Umíme férově ukončit proces, pokud řešení není dobrý fit.
+
+Demo je úspěšné, když po něm nevznikne jen dobrý pocit, ale jasnější rozhodnutí. Buď zákazník ví, proč pokračovat, nebo obě strany vědí, proč nepokračovat. Obojí je lepší než tři týdny zdvořilého follow-up ping-pongu.
+
 ## Pracovní log
+- 2026-08-30 09:01 UTC — Doplněna příloha AL o demo callu: úvodní discovery otázky, scénáře podle zákazníka, prodej hodnoty místo obrazovek, privacy-first část dema, jasný závěr, shrnutí po demu, interní demo karta a checklist.
 - 2026-08-30 08:00 UTC — Doplněna příloha AK o auditu homepage před kampaní: test první obrazovky, CTA, důkazy, formulář s datovou minimalizací, privacy-first měření, mobilní použitelnost a checklist.
 - 2026-08-30 07:00 UTC — Doplněna příloha AJ o případových studiích a referencích bez vyzrazování zákaznického zákulisí: průběžný sběr důkazů, rozhodovací struktura, anonymizace, souhlas, kvalitativní výsledky, CTA, šablona a checklist.
 - 2026-08-30 06:00 UTC — Doplněna příloha AI o prvních 30 dnech po onboardingu: první úspěch, adopční signály bez sledování jednotlivců, 7denní a 30denní kontrola, vlastník zákazníka, práce se zpětnou vazbou, privacy-first pravidla a checklist.
