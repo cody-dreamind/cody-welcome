@@ -13272,7 +13272,173 @@ Příklad:
 
 Dobrá nabídka není ta, která vypadá nejdražší. Dobrá nabídka je ta, která zákazníkovi snižuje nejistotu a tobě chrání schopnost dodat slíbený výsledek. Když se po přečtení ví, proč projekt dává smysl, co přesně začne, co nezačne a jak se bude rozhodovat dál, nabídka splnila práci. Zbytek už je obchodní řemeslo — a trochu disciplíny neposílat osm příloh, protože „třeba se budou hodit“.
 
+## Příloha BW: Předávka projektu, po které zákazník nezůstane s magickou krabičkou
+
+Předávka webu nebo SaaS projektu není poslední e-mail s větou „hotovo, fakturu posíláme v příloze“. Je to chvíle, kdy se projekt mění z dodavatelské práce na provozní realitu zákazníka. A právě tady se často ukáže, jestli jsi postavil nástroj, nebo jen krásnou magickou krabičku, do které se nikdo nechce podívat, protože se bojí, že z ní vyskočí konfigurace z roku 2017.
+
+Dobrá předávka má jeden cíl: zákazník ví, co vlastní, kde to běží, jak se to upravuje, co se měří, kdo má přístup a co dělat, když se něco pokazí. Nemusí z něj být vývojář. Musí ale rozumět provozním rozhodnutím natolik, aby nebyl rukojmím dodavatele ani vlastního chaosu.
+
+### BW.1 Předávej systém, ne jen výsledek
+
+Když předáváš pouze odkaz na nový web, zákazník vidí hotový výsledek. Když předáš systém, vidí i způsob, jak s výsledkem pracovat dál. To je rozdíl mezi „máme web“ a „máme obchodní kanál, který umíme rozvíjet“.
+
+Minimum předávky:
+
+- **účel projektu:** co měl projekt změnit a podle čeho se pozná úspěch,
+- **rozsah:** co je součástí, co je mimo a co zůstalo jako doporučený další krok,
+- **provoz:** hosting, domény, DNS, databáze, úložiště, monitoring a zálohy,
+- **obsah:** kde se upravují texty, obrázky, metadata a články,
+- **měření:** co sledujeme, proč a jak často to vyhodnocovat,
+- **přístupy:** kdo má jakou roli a kdo je vlastníkem účtů,
+- **podpora:** kam psát při incidentu, změně obsahu nebo strategickém dotazu.
+
+Předávka nemá být román. Má být mapa. Když zákazník za tři měsíce otevře dokument a do pěti minut pochopí, kde změnit telefonní číslo, kdo spravuje doménu a kde najde poslední zálohu, vyhrál jsi. Tedy pokud mezitím nezapomněl heslo do správce hesel. Ale to už je jiná opera.
+
+### BW.2 Vlastnictví účtů vyřeš před posledním dnem
+
+Nejhorší předávky začínají větou: „To běží u nás, pak vám to nějak převedeme.“ Slovo „nějak“ je v provozu digitálních produktů malý červený maják.
+
+Zákazník by měl vlastnit nebo mít jasně smluvně ošetřené hlavně:
+
+- doménu a DNS,
+- hosting nebo aplikační platformu,
+- repozitář se zdrojovým kódem,
+- analytiku,
+- e-mailovou infrastrukturu,
+- platební účty, pokud jde o SaaS,
+- databáze a zálohy,
+- účty pro monitoring, support a dokumentaci.
+
+Dodavatel může mít přístup jako správce nebo technický partner, ale neměl by být jediným člověkem, přes kterého jde změnit základní věci. U malých firem to často vypadá pohodlně: „Nechte to na nás.“ Jenže pohodlí bez vlastnictví je budoucí riziko v převleku za službu.
+
+Privacy-first pravidlo: zákazník má vědět, kde jsou data a kdo k nim má přístup. Pokud provozuješ projekt evropsky, napiš to konkrétně: ve kterém regionu běží hosting, jaké externí služby se používají, co se do nich neposílá a jak se řeší přístup dodavatele.
+
+### BW.3 Dokumentace musí odpovídat rolím
+
+Jedna obří technická dokumentace obvykle nepomůže nikomu. Obchodník nechce číst deployment pipeline. Vývojář nechce luštit, proč se landing page jmenuje „nová finální 2“. Zakladatel chce vědět, co je kritické a koho zavolat.
+
+Rozděl předávku podle rolí:
+
+- **Majitel nebo zakladatel:** co vlastníme, kolik to stojí, kdo má přístup, jaká jsou rizika, jaký je další plán.
+- **Marketing nebo obsah:** jak upravit stránku, publikovat článek, změnit CTA, zkontrolovat metadata a vyhodnotit základní metriky.
+- **Support nebo obchod:** jak přijde poptávka, kde se řeší, jaké údaje sbírat a jak dlouho je držet.
+- **Technický správce:** repozitář, prostředí, nasazení, logy, monitoring, zálohy, incident postup.
+
+Každá role má dostat krátký návod na svoje nejčastější úkoly. Ne obecný popis systému, ale pracovní postupy:
+
+1. Chci změnit text na homepage.
+2. Chci přidat článek.
+3. Chci zjistit, odkud přišla poptávka.
+4. Chci vypnout přístup bývalému kolegovi.
+5. Chci obnovit obsah po omylu.
+
+Tohle jsou situace, které se opravdu stanou. Dokumentace má stát u nich, ne u diagramu komponent, který všichni obdivují a nikdo nepoužije.
+
+### BW.4 Předávací schůzka má být praktický test
+
+Předávací schůzka není prezentace, kde dodavatel kliká a zákazník přikyvuje. Má to být malý provozní test. Ideálně takový, kde zákazník drží myš a dodavatel jen pomáhá, když se zasekne.
+
+Praktický scénář:
+
+- zákazník změní jeden krátký text,
+- zákazník najde poslední poptávku,
+- zákazník otevře analytiku a vysvětlí jednu metriku,
+- zákazník najde stránku se zásadami soukromí,
+- zákazník ukáže, kde jsou spravované přístupy,
+- zákazník popíše, co udělá při výpadku webu.
+
+Když něco nejde vysvětlit bez dvacetiminutové odbočky, je to signál. Buď je systém zbytečně složitý, nebo chybí návod, nebo má zákazník jiný mentální model, než sis myslel. Všechny tři možnosti jsou užitečné vědět před koncem projektu, ne až ve chvíli, kdy přijde páteční e-mail „prosím rychle změnit ceník“.
+
+*Codyho komentář:* Předávací schůzka, kde zákazník nic neudělá sám, je jako autoškola, ve které instruktor odřídí celou jízdu a pak ti slavnostně předá klíčky od kamionu. Odvážné, ale krátkozraké.
+
+### BW.5 Přístupový úklid udělej hned po spuštění
+
+Po launchi často zůstávají otevřené účty, testovací přístupy, dočasné tokeny a lidé, kteří „tam možná ještě něco doladí“. To je normální během práce. Není normální to tak nechat.
+
+Do předávky dej přístupový úklid:
+
+- zrušit dočasné účty,
+- odebrat zbytečná administrátorská práva,
+- ověřit vlastníky klíčových systémů,
+- uložit recovery kódy do správce hesel,
+- zkontrolovat, že nejsou sdílená hesla v e-mailu nebo chatu,
+- přejmenovat testovací API klíče a odstranit nepoužité,
+- nastavit pravidelný access review.
+
+U privacy-first provozu je přístupový úklid stejně důležitý jako vizuální polish. Krásný web s otevřenými admin účty je jako luxusní kancelář s klíčem pod rohožkou. Působí to mile, dokud se někdo nerozhodne být kreativní.
+
+### BW.6 Prvních třicet dní po předávce má mít rytmus
+
+Projekt nekončí spuštěním. Prvních třicet dní je stabilizační období, kde se ukáže, co zákazník opravdu používá, co mu chybí a kde dokumentace neodpovídá realitě.
+
+Navrhni jednoduchý rytmus:
+
+- **1. týden:** kontrola technického stavu, formulářů, měření a prvních dotazů.
+- **2. týden:** drobné úpravy textů, CTA, interních postupů a nejčastějších nejasností.
+- **3. týden:** review dat bez zbytečného pitvání jednotlivců — stránky, CTA, poptávky, obsah.
+- **4. týden:** rozhodnutí, co má jít do další iterace, co se odloží a co se smaže.
+
+Tady se hodí oddělit chyby od nových nápadů. Chyba znamená, že slíbená věc nefunguje. Nový nápad znamená, že zákazník po spuštění vidí další příležitost. Obojí je legitimní, ale nepatří do stejné fronty. Jinak se z podpory stane guláš s prioritou „všechno včera“.
+
+### BW.7 Šablona: předávací karta projektu
+
+```markdown
+## Předávka projektu: [název]
+
+### Účel
+- Hlavní obchodní nebo provozní cíl:
+- Jak poznáme, že projekt funguje:
+- Co není cílem první fáze:
+
+### Vlastnictví
+- Doména a DNS:
+- Hosting / aplikace:
+- Repozitář:
+- Analytika:
+- Databáze a zálohy:
+- Kontaktní osoba za zákazníka:
+
+### Běžná práce
+- Jak upravit obsah:
+- Jak publikovat novinku nebo článek:
+- Jak zkontrolovat poptávky:
+- Jak vyhodnotit základní metriky:
+
+### Přístupy
+- Kdo má admin práva:
+- Kdo má editor práva:
+- Které dočasné přístupy se ruší:
+- Kdy proběhne další access review:
+
+### Provoz
+- Monitoring:
+- Zálohy:
+- Incident kontakt:
+- Postup při výpadku:
+
+### Další iterace
+- Doporučené úpravy do 30 dnů:
+- Odložené nápady:
+- Rizika ke sledování:
+```
+
+### BW.8 Checklist: předávka bez magické krabičky
+
+- [ ] Zákazník ví, co přesně vlastní a kde to běží.
+- [ ] Doména, hosting, repozitář a analytika mají jasného vlastníka.
+- [ ] Dokumentace je rozdělená podle rolí, ne podle ega architektury.
+- [ ] Zákazník si na předávací schůzce sám vyzkoušel běžné úkoly.
+- [ ] Existuje krátký postup pro výpadek, obnovu a urgentní změnu obsahu.
+- [ ] Dočasné účty, testovací klíče a zbytečná admin práva jsou uklizené.
+- [ ] Je jasně popsáno, jaká data se sbírají, proč a jak dlouho se drží.
+- [ ] Prvních třicet dní po spuštění má domluvený rytmus kontroly.
+- [ ] Chyby, změnové požadavky a nové nápady mají oddělené trasy.
+- [ ] Další iterace vychází z rozhodnutí, ne z paniky po launchi.
+
+Dobrá předávka zvyšuje hodnotu projektu, protože snižuje závislost a nejistotu. Zákazník se nebojí systém používat, tým ví, kdo za co odpovídá, a dodavatel nemusí být navždy jediný člověk, který rozumí „tomu jednomu nastavení někde“. To je zdravý vztah. A zdravý vztah je lepší než vendor lock-in s hezkým logem.
+
 ## Pracovní log
+- 2026-08-31 22:01 UTC — Doplněna příloha BW o předávce projektu: vlastnictví účtů, dokumentace podle rolí, praktický předávací test, přístupový úklid, třicetidenní stabilizační rytmus, předávací karta a privacy-first checklist.
 - 2026-08-31 21:00 UTC — Doplněna příloha BV o nabídce po discovery: kontext zákazníka, výstupy a rozhodnutí, férové varianty, hranice rozsahu, vysvětlení ceny hodnotou, konkrétní další krok, šablona nabídky a privacy-first checklist.
 - 2026-08-31 20:00 UTC — Doplněna příloha BU o discovery hovoru bez nahrávacího vysavače: příprava hypotéz, souhlas s poznámkami a nahráváním, otázky od dopadu k řešení, rozhodovací poznámky, follow-up, pět možných výstupů, šablona a privacy-first checklist.
 
