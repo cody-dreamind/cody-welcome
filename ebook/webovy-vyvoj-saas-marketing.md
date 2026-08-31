@@ -12309,7 +12309,179 @@ Použij ji před cvičením a doplň ji po něm.
 Incident drill je malá investice do klidu. Nezaručí, že se nic nerozbije. Zaručí ale, že tým nebude v první půlhodině vymýšlet abecedu krizového řízení za běhu. A to je přesně rozdíl mezi profesionálním provozem a improvizovanou noční bojovkou s produkční databází.
 
 
+## Příloha BQ: Exit plán z dodavatele dřív, než se z něj stane rukojmí drama
+
+Dodavatel, nástroj nebo platforma nejsou problém samy o sobě. Problém vzniká ve chvíli, kdy bez nich neumíš odejít. Malý SaaS tým často řeší výběr nástroje podle toho, jak rychle jde začít. To je rozumné. Jenže stejnou otázku je potřeba položit i opačně: jak rychle půjde přestat?
+
+Exit plán není paranoidní dokument pro lidi, kteří nevěří světu a mají doma tři záložní routery. Je to provozní hygiena. Když zdraží služba, změní podmínky, zhorší se support, přestane sedět privacy režim nebo dodavatel prostě odejde do produktového nebe, nechceš teprve zjišťovat, kde máš data, exporty, integrace a oprávnění.
+
+Codyho komentář: dodavatelský lock-in není hřích. Hřích je tvářit se, že neexistuje. Někdy se vyplatí vzít pohodlnou platformu, protože zrychlí validaci. Ale i tehdy máš vědět, kolik stojí úniková cesta. Když to nevíš, nekupuješ nástroj. Kupuješ budoucí překvapení s fakturou.
+
+### BQ.1 U každého kritického dodavatele napiš, co by se stalo při odchodu
+
+Nezačínej tabulkou všech nástrojů, které tým kdy otevřel. Začni kritickými dodavateli. Kritický dodavatel je ten, jehož výpadek, změna nebo ztráta přístupu ovlivní zákazníka, peníze, data nebo schopnost týmu pracovat.
+
+Typické kritické oblasti:
+
+- hosting a deployment,
+- databáze a úložiště souborů,
+- e-mailová infrastruktura,
+- platby a fakturace,
+- analytika a produktové eventy,
+- zákaznická podpora,
+- autentizace a identity,
+- monitoring, logy a incident komunikace,
+- AI nástroje s přístupem k internímu kontextu.
+
+Pro každý kritický nástroj si polož čtyři otázky:
+
+1. Co přestane fungovat pro zákazníka?
+2. Jaká data tam máme a v jakém formátu je umíme získat zpět?
+3. Jak dlouho bychom dokázali fungovat bez této služby?
+4. Jaký je nejjednodušší náhradní režim na první týden?
+
+Nemusíš hned budovat plnou migraci. Stačí vědět, jestli máš plán A, plán B, nebo jen plán „snad nám to nikdy nikdo nevypne“. Ten třetí je sice populární, ale operačně dost dietní.
+
+### BQ.2 Rozliš export dat, export konfigurace a export znalostí
+
+Když se řekne „data export“, většina lidí myslí CSV. To je dobrý začátek, ale špatný konec. Z dodavatele často potřebuješ dostat tři různé věci.
+
+**Export dat** znamená zákazníky, objednávky, eventy, dokumenty, ticket historii, faktury, soubory nebo záznamy, které tvoří skutečný obsah služby.
+
+**Export konfigurace** znamená pravidla, workflow, webhooky, šablony, role, oprávnění, segmenty, automatizace, DNS záznamy, šifrovací nastavení, retenční pravidla a integrační klíče. Tohle bývá zrádnější než samotná data, protože konfigurace často žije jen v klikacím UI.
+
+**Export znalostí** znamená kontext, proč je něco nastavené právě takhle. Když nevíš, proč existuje konkrétní webhook nebo filtr, migrace se mění na archeologii. A archeologie je krásná věda, ale mizerný deployment plán.
+
+Praktické minimum:
+
+- jednou za kvartál ověř, že export opravdu funguje,
+- ulož ukázkový export do interní dokumentace nebo bezpečného úložiště,
+- popiš, jak se export načítá zpět do náhradního systému,
+- u kritických konfigurací měj screenshot nebo textový popis,
+- u webhooků a API klíčů eviduj vlastníka, účel a dopad vypnutí.
+
+Privacy-first poznámka: export není skládka. Pokud kvůli testu exportu stáhneš osobní data, zacházej s nimi jako s produkčními daty. Omez přístup, neukládej je do náhodné složky „tmp-final-v2“, smaž je po ověření a do dokumentace raději dávej vzorek anonymizované struktury než skutečný obsah.
+
+### BQ.3 Vytvoř náhradní režim, ne dokonalou migraci
+
+Malý tým často nemá čas připravit plnou alternativu ke každému nástroji. To nevadí. Exit plán nemusí říkat „do 24 hodin přepneme celý svět na nový systém“. Může říkat „do 24 hodin udržíme zákaznický slib v omezeném režimu“.
+
+Příklady náhradního režimu:
+
+- když vypadne ticketing, nové žádosti padají do sdílené e-mailové schránky se štítky,
+- když selže analytika, kritické produktové události zapisuje backend do jednoduchého auditního logu,
+- když se rozbije platební portál, nové objednávky sbírá formulář a fakturace se řeší ručně,
+- když nefunguje newsletter nástroj, produktové oznámení jde přes přímý e-mail zákazníkům, kteří ho opravdu potřebují,
+- když zmizí AI nástroj, tým používá lokální šablony promptů a interní knowledge base.
+
+Náhradní režim má být nudný, krátký a bezpečný. Není to příležitost stavět nový produkt přes víkend. Je to provizorní most, po kterém přejdeš z problému do kontrolovaného rozhodování.
+
+Dobrá otázka pro každého dodavatele zní: „Jak obsloužíme zákazníka příštích sedm dní, kdybychom od zítřka nemohli službu používat?“ Pokud odpověď neexistuje, napiš ji. Pokud existuje jen v hlavě jednoho člověka, napiš ji taky. Mozek seniorního vývojáře není vysoce dostupná databáze, i když se tak někdy tváří.
+
+### BQ.4 Smluvní a privacy otázky převeď do rozhodovací karty
+
+U právních a smluvních věcí si dej pozor na amatérské sebevědomí. E-book není advokát v mikině. Smyslem není vykládat konkrétní povinnosti, ale mít v týmu otázky, které se dají předat právníkovi, účetní nebo bezpečnostnímu člověku.
+
+Do karty dodavatele si ulož:
+
+- kdo je vlastníkem účtu a kdo má admin přístup,
+- jaké typy dat dodavatel zpracovává,
+- kde data typicky leží podle nastavení účtu,
+- jestli existuje smlouva, objednávka nebo DPA a kde je uložená,
+- jaké jsou výpovědní lhůty a exportní možnosti,
+- co se stane s daty po ukončení služby,
+- jak se žádá o smazání nebo potvrzení smazání,
+- kdo schvaluje změnu dodavatele.
+
+Tahle karta není náhrada právního posouzení. Je to mapa, aby právní posouzení nebylo lovení faktů po Slacku, e-mailu a paměti člověka, který zrovna běhá po letišti.
+
+Privacy-first pravidlo: pokud dodavatel zpracovává osobní nebo citlivá provozní data, exit plán musí obsahovat i data exit. Nestačí přepnout funkcionalitu. Musíš vědět, co se stane se starými daty, logy, zálohami, exporty a přístupy.
+
+### BQ.5 Testuj exit plán malým cvičením
+
+Jednou za čas vyber jeden dodavatelský scénář a projdi ho jako suchý test. Nemigruj hned produkci. Jen ověř, že víš, kde jsou data, kdo má přístup, jak se dělá export a jaký je první náhradní režim.
+
+Jednoduchý test na 45 minut:
+
+1. Vyber jednoho kritického dodavatele.
+2. Najdi vlastníka účtu, adminy, smlouvu a fakturační kontakt.
+3. Ověř, kde se dělá export dat a konfigurace.
+4. Popiš náhradní režim na sedm dní.
+5. Sepiš tři největší mezery a dej jim vlastníka.
+
+Nejčastější překvapení:
+
+- admin účet patří bývalému externistovi,
+- export existuje, ale neobsahuje všechna potřebná pole,
+- webhooky jsou pojmenované jako „test2-final-new“, což je mezinárodní jazyk zoufalství,
+- faktury chodí na osobní e-mail zakladatele,
+- data jsou v pořádku, ale chybí konfigurace,
+- nikdo neví, jestli lze starý účet po migraci bezpečně smazat.
+
+Tohle jsou přesně problémy, které chceš najít v klidný čtvrtek, ne v pondělí ráno poté, co dodavatel změnil podmínky a zákazník se ptá, proč mu nejde export.
+
+### BQ.6 Šablona: karta dodavatelského exit plánu
+
+Použij jednu kartu pro každý kritický nástroj.
+
+## Exit plán: [název dodavatele / nástroje]
+
+### Role v provozu
+
+- K čemu nástroj slouží:
+- Který zákaznický slib podporuje:
+- Kritičnost: nízká / střední / vysoká
+- Interní vlastník:
+
+### Data a konfigurace
+
+- Typy dat v nástroji:
+- Kritická konfigurace:
+- Export dat: kde / jak / kdo umí spustit
+- Export konfigurace: kde / jak / co chybí
+- Retence po ukončení:
+
+### Přístupy a smlouvy
+
+- Admin účty:
+- Fakturační kontakt:
+- Smlouva / objednávka / DPA uložená zde:
+- Výpovědní nebo změnové podmínky:
+
+### Náhradní režim
+
+- Co uděláme první den:
+- Jak obsloužíme zákazníky první týden:
+- Jaká omezení musíme komunikovat:
+- Který nástroj nebo ruční proces použijeme dočasně:
+
+### Rizika a další kroky
+
+- Největší lock-in:
+- Největší datové riziko:
+- Opravný úkol 1:
+- Opravný úkol 2:
+- Datum další kontroly:
+
+### BQ.7 Checklist: exit plán bez rukojmí pocitu
+
+- [ ] Máme seznam kritických dodavatelů podle dopadu na zákazníka, peníze, data a týmovou práci.
+- [ ] U každého kritického nástroje víme, kdo je interní vlastník a kdo má admin přístup.
+- [ ] Umíme odlišit export dat, export konfigurace a export znalostí.
+- [ ] U nástrojů s osobními daty víme, co se děje s daty po ukončení služby.
+- [ ] Máme popsaný náhradní režim alespoň na prvních sedm dní.
+- [ ] Exporty testujeme bez ukládání produkčních osobních dat do náhodných míst.
+- [ ] Kritické webhooky, API klíče a automatizace mají popsaný účel a dopad vypnutí.
+- [ ] Smlouvy, objednávky a relevantní datové dokumenty jsou dohledatelné bez pátrací akce.
+- [ ] Jednou za kvartál vybereme jednoho dodavatele a uděláme malý exit drill.
+- [ ] Každý nalezený lock-in má rozhodnutí: přijímáme ho vědomě, snižujeme ho, nebo plánujeme migraci.
+
+Exit plán neznamená, že musíš všechno provozovat sám a psát vlastní platební bránu na koleni. Znamená, že vztah s dodavatelem je vědomé rozhodnutí, ne past. Dobré nástroje ti mají zrychlit práci. Nemají držet tvůj produkt za límec pokaždé, když chceš udělat rozumnou změnu.
+
+
 ## Pracovní log
+
+- 2026-08-31 16:01 UTC — Doplněna příloha BQ o exit plánu z dodavatele: kritičnost nástrojů, export dat a konfigurace, náhradní režim, smluvní a privacy otázky, exit drill, šablona karty a checklist.
 
 - 2026-08-31 15:00 UTC — Doplněna příloha BP o incident drillu pro malý SaaS tým: realistický scénář, role, rozhodovací rychlost, komunikační šablony, privacy-first kontrola, opravný backlog, šablona drillu a checklist.
 
