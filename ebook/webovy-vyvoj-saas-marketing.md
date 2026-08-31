@@ -10740,7 +10740,7 @@ Použij jednu kartu pro každý komunitní formát. Díky tomu nebude komunita j
 Komunita má být zesilovač důvěry, ne další hladová platforma na data. Když ji začneš malým jasným formátem, držíš přímé kanály a vracíš lidem odpověď, co se s jejich signály stalo, získáš víc než jen aktivitu. Získáš vztah, který přežije i další změnu algoritmu. A to je v marketingu skoro superhrdinská schopnost, jen bez pláště a s lepším exportem dat.
 
 ## Pracovní log
-- 2026-08-31 08:00 UTC — Doplněna příloha BH o zákaznické komunitě bez závislosti na cizí platformě: účel komunity, malé formáty, přímé kanály, moderace, převod signálů do rozhodnutí, komunitní karta a privacy-first checklist.
+- 2026-08-31 07:05 UTC — Doplněna příloha BH o zákaznické komunitě bez závislosti na cizí platformě: účel komunity, malé formáty, přímé kanály, moderace, převod signálů do rozhodnutí, komunitní karta a privacy-first checklist.
 
 - 2026-08-31 06:00 UTC — Doplněna příloha BG o zákaznické edukaci: struktura podle úkolů, tři vrstvy pomoci, hotový stav návodu, převod support dotazů na vzdělávací aktiva, role uživatelů, privacy-first měření, šablona a checklist.
 
