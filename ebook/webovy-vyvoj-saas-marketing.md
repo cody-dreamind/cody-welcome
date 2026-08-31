@@ -11369,7 +11369,192 @@ Použij ji před spuštěním nové spolupráce nebo integrace.
 
 Partnerství má rozšiřovat dosah bez toho, aby rozmazalo tvůj produktový slib. Když držíš úzké zaměření, jasné role a datovou střídmost, může být partner silný distribuční kanál i kvalitní servisní vrstva. Když to pustíš bez pravidel, vznikne jen další systém, který potřebuje systém na správu systému. A to už je SaaS matroška, ze které se špatně utíká.
 
+## Příloha BL: Produktová dokumentace, která přežije první chaos
+
+Dokumentace není složka, kam se odkládají texty po deadline. Dobrá dokumentace je provozní paměť produktu: pomáhá novému člověku pochopit, proč věci existují, zákazníkovi najít odpověď bez čekání a zakladateli nedělat stejné rozhodnutí třikrát jen proto, že si poprvé nic nenapsal.
+
+U malého webového nebo SaaS týmu dokumentace často prohrává s vývojem. Dává to smysl — zákazník neplatí za krásný interní wiki strom. Jenže bez základní dokumentace se rychle objeví jiný účet: pomalejší onboarding lidí, opakované dotazy, horší support, křehké nasazování a rozhodnutí schovaná v chatu, který už nikdo nedohledá.
+
+*Codyho komentář:* Dokumentace nemusí být chrám. Stačí dobře označená garáž, kde víš, ve které krabici je prodlužovačka, hesla tam nejsou a nikdo tam neskladuje mokré dřevo. Ambice přiměřená, užitek obrovský.
+
+### BL.1 Dokumentuj rozhodnutí, ne jen výsledný stav
+
+Největší hodnota dokumentace není popis „jak to dnes je“. Ten se dá často vyčíst z aplikace, konfigurace nebo kódu. Cennější je vysvětlit, proč to tak je.
+
+U každého důležitého rozhodnutí si zapiš:
+
+- jaký problém se řešil,
+- jaké možnosti byly na stole,
+- proč vyhrála konkrétní varianta,
+- jaké kompromisy tým vědomě přijal,
+- kdy se má rozhodnutí znovu otevřít,
+- kdo má kontext, pokud bude potřeba detail.
+
+Příklad:
+
+- Rozhodnutí: první verze zákaznického portálu nebude mít mobilní aplikaci.
+- Důvod: hlavní workflow probíhá u administrátorů na desktopu, mobilní použití je jen kontrolní.
+- Kompromis: mobilní web musí pohodlně zobrazit stav požadavku, ale nebude mít pokročilé nastavení.
+- Revisit: po 20 aktivních zákaznících nebo pokud víc než 30 % support dotazů souvisí s mobilem.
+
+Takový zápis je krátký, ale za půl roku ušetří hodinu debat typu „proč jsme to tehdy vlastně neudělali“. A hodina porad je jednotka utrpení, kterou by měl moderní SaaS redukovat stejně pečlivě jako dobu načítání stránky.
+
+### BL.2 Rozděl dokumentaci podle cílové role
+
+Jedna univerzální dokumentace pro všechny obvykle nefunguje. Vývojář hledá jiný detail než zákazník, obchodník nebo nový kolega na supportu. Když všechno hodíš do jedné wiki, vznikne informační guláš. Výživný možná, ale nikdo neví, kde je lžíce.
+
+Praktické rozdělení:
+
+- **Produktová dokumentace:** co produkt řeší, pro koho je, jaké má balíčky, omezení a roadmapu.
+- **Technická dokumentace:** architektura, služby, nasazení, proměnné prostředí, zálohy, integrace a runbooky.
+- **Zákaznická nápověda:** návody podle úkolů, onboarding, FAQ a vysvětlení limitů.
+- **Support dokumentace:** typické problémy, diagnostické kroky, šablony odpovědí a eskalace.
+- **Obchodní dokumentace:** segmenty, kvalifikační otázky, námitky, case studies a pravidla nabídky.
+- **Privacy dokumentace:** mapa dat, účely zpracování, retence, dodavatelé, práva uživatelů a interní pravidla přístupů.
+
+Nemusíš mít šest nástrojů ani šedesát složek. Klidně začni jedním repozitářem nebo složkou `docs/`. Důležité je, aby každá stránka měla jasného čtenáře. Pokud text neví, pro koho je, nebude ho číst nikdo. Ani autor po druhé kávě.
+
+### BL.3 U každého návodu začni úkolem uživatele
+
+Špatný návod kopíruje menu aplikace:
+
+1. Klikněte na Nastavení.
+2. Klikněte na Integrace.
+3. Klikněte na Export.
+
+Lepší návod začíná cílem:
+
+> Potřebujete jednou měsíčně předat účetní přehled faktur? Tady je bezpečný export bez sdílení přístupu do administrace.
+
+Struktura praktického návodu:
+
+1. **Kdy ho použít:** situace, kterou uživatel pozná.
+2. **Co budete potřebovat:** role, oprávnění, vstupní data.
+3. **Postup:** krátké kroky s konkrétními názvy tlačítek.
+4. **Hotový stav:** jak poznám, že se to povedlo.
+5. **Časté chyby:** co dělat, když to nevyjde.
+6. **Bezpečnost a data:** co se exportuje, kdo to uvidí, kdy soubor smazat.
+
+Privacy-first produkt má v návodech jednu extra povinnost: nevychovávat uživatele k nebezpečným zkratkám. Pokud je nejrychlejší cesta „pošli celé CSV všem v kopii“, návod má ukázat lepší cestu. Třeba export jen potřebných polí, časově omezený odkaz nebo anonymizovanou ukázku.
+
+### BL.4 Udržuj dokumentaci blízko práce
+
+Dokumentace umírá, když je daleko od změny. Když vývojář upraví onboarding, ale návod žije v samostatném nástroji bez připomínky v review, starý text zůstane viset jako fosilie. Uživatel pak následuje návod, který popisuje tlačítko, jež už dva releasy neexistuje. To je archeologie, ne customer success.
+
+Praktická pravidla:
+
+- změna v UI kontroluje odpovídající nápovědu,
+- změna v API kontroluje integrační dokumentaci,
+- změna v ceně kontroluje web, obchodní materiály a FAQ,
+- změna v datech kontroluje privacy dokumentaci,
+- incident kontroluje runbook a status komunikační šablony,
+- support dotaz opakovaný třikrát zakládá nový návod nebo úpravu existujícího.
+
+Do Definition of Done přidej jednoduchou otázku:
+
+> Mění tahle práce něco, co musí vědět zákazník, support, obchod nebo provoz?
+
+Pokud ano, dokumentace je součást změny, ne přílepek na „až bude čas“. Čas nebude. Čas je mýtické zvíře, které se v SaaS objevuje pouze ve fakturaci.
+
+### BL.5 Piš stručně, ale s příklady
+
+Dobrá dokumentace není dlouhá. Je použitelná. Nejlepší text často kombinuje krátké pravidlo, praktický příklad a jednu hranici.
+
+Příklad interního pravidla:
+
+- Pravidlo: zákaznická data neposíláme do sdílených chatů.
+- Příklad: místo screenshotu celé objednávky pošli interní ID a popis problému.
+- Hranice: pokud je potřeba osobní údaj pro diagnostiku, vlož ho jen do ticketu s omezeným přístupem a po vyřešení ho odstraň podle retenčního pravidla.
+
+Příklad zákaznické nápovědy:
+
+- Pravidlo: do exportu vybírej jen pole, která příjemce opravdu potřebuje.
+- Příklad: účetní obvykle potřebuje číslo faktury, datum, částku a stav úhrady; nepotřebuje interní poznámky obchodníka.
+- Hranice: export neposílej jako veřejný odkaz bez expirace.
+
+Tohle je praktičtější než obecné „dbejte na bezpečnost“. Věta „dbejte na bezpečnost“ je literární ekvivalent cedule „buďte hodní“. Hezké. Nedostatečné. Lehce bezradné.
+
+### BL.6 Měř zdraví dokumentace podle opakovaných tření
+
+Dokumentace nepotřebuje vlastní analytický cirkus. Stačí sledovat, kde se opakuje tření.
+
+Signály, že dokumentace nefunguje:
+
+- support dostává stejnou otázku každý týden,
+- nový člen týmu potřebuje opakované vysvětlení stejného procesu,
+- zákazník po návodu stále neví, jak poznat hotový stav,
+- obchod slibuje něco, co produkt neumí,
+- incident odhalí, že runbook neodpovídá realitě,
+- privacy otázky se řeší ad hoc v chatu.
+
+Jednou za měsíc udělej krátké review:
+
+1. Top 5 opakovaných zákaznických dotazů.
+2. Top 3 interní nejasnosti.
+3. Jedna stránka, kterou smažeme nebo sloučíme.
+4. Jedna stránka, kterou doplníme o příklad.
+5. Jedno rozhodnutí, které zapíšeme zpětně.
+
+Méně dokumentace, která se používá, je lepší než rozsáhlá wiki, která slouží jen jako digitální skladiště výčitek.
+
+### BL.7 Šablona: dokumentační karta
+
+Použij ji pro nový návod, interní pravidlo nebo produktové rozhodnutí.
+
+## Dokumentace: [název stránky]
+
+### Čtenář
+
+- Primární role:
+- Co už pravděpodobně ví:
+- Jaké rozhodnutí nebo úkol má po přečtení zvládnout:
+
+### Kontext
+
+- Problém nebo situace:
+- Kdy se stránka používá:
+- Kdy se stránka nepoužívá:
+
+### Praktický obsah
+
+- Krátké pravidlo nebo závěr:
+- Postup / doporučení:
+- Konkrétní příklad:
+- Častá chyba:
+- Hotový stav:
+
+### Data a bezpečnost
+
+- Jakých dat se postup týká:
+- Kdo k nim má mít přístup:
+- Co se nesmí sdílet:
+- Retence nebo mazání:
+
+### Údržba
+
+- Vlastník stránky:
+- Kdy ji kontrolujeme:
+- Co ji musí aktualizovat:
+- Poslední ověřená změna:
+
+### BL.8 Checklist: dokumentace, která pomáhá místo překážení
+
+- [ ] Každá důležitá stránka má jasného čtenáře a konkrétní úkol.
+- [ ] Zapisujeme důvody rozhodnutí, ne jen výsledný stav.
+- [ ] Návody začínají situací uživatele, ne strukturou menu.
+- [ ] U postupů ukazujeme hotový stav a časté chyby.
+- [ ] Privacy pravidla obsahují konkrétní příklady bezpečného chování.
+- [ ] Změny v produktu kontrolují související zákaznickou, supportní a technickou dokumentaci.
+- [ ] Opakované support dotazy převádíme na návody nebo FAQ.
+- [ ] Měsíčně mažeme, slučujeme nebo zjednodušujeme zastaralé stránky.
+- [ ] Dokumentace je dost blízko práci, aby ji tým aktualizoval při změně.
+- [ ] Interní texty neobsahují zbytečné osobní údaje, tajné klíče ani citlivé exporty.
+
+Dokumentace je jeden z nejlevnějších způsobů, jak škálovat kvalitu. Neprodá produkt sama, ale snižuje chaos, chrání rozhodnutí a dává týmu společnou paměť. A společná paměť je fajn — zvlášť když alternativa je „myslím, že to někdo řešil v nějakém vlákně někdy v dubnu“.
+
 ## Pracovní log
+
+- 2026-08-31 11:00 UTC — Doplněna příloha BL o produktové dokumentaci: rozhodovací záznamy, rozdělení podle rolí, návody podle úkolu, údržba blízko změn, privacy-first příklady, měření tření a dokumentační karta.
 
 - 2026-08-31 10:01 UTC — Doplněna příloha BK o partnerstvích a integracích bez ztráty kontroly: typy partnerů, pilotní kroky, společný slib, datová minimalizace, integrační rozhodování, měření kvality a partnerská karta.
 - 2026-08-31 09:00 UTC — Doplněna příloha BJ o referral programu bez spamování kontaktů: validace doporučitelnosti, typy odměn, referral cesta bez importu adresářů, pravidla proti zneužití, privacy-first měření, šablona a checklist.
