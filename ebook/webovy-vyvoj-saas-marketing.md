@@ -12798,7 +12798,139 @@ Nepotřebuješ osobní profily ani sledování napříč weby. Pro obsahový sys
 Dobrá recyklace obsahu snižuje tlak na tým a zvyšuje hodnotu práce, která už proběhla. Místo honby za dalším postem vzniká znalostní systém: web, dokumentace, checklisty a přímé odkazy, které pomáhají zákazníkům i internímu týmu. A bonus? Méně trackerů, méně závislosti na platformách, méně marketingového dusna. To zní skoro podezřele rozumně.
 
 
+
+## Příloha BT: Kvalifikace poptávek po obsahovém marketingu bez CRM věštírny
+
+Obsahový marketing má jednu zvláštní vlastnost: dobrý článek může přivést člověka, který je připravený koupit, i člověka, který si jen odkládá práci čtením praktických textů. Oba jsou v pořádku. Problém začne ve chvíli, kdy s nimi zacházíš stejně. Pak obchodní tým honí slabé signály, dobré poptávky čekají a marketing se hádá s prodejem, jestli „leadů bylo dost“. Krásná firemní klasika, skoro folklór.
+
+Kvalifikace poptávek není o tom, že každému návštěvníkovi přiřadíš tajné skóre podle deseti sledovacích skriptů. Je to jednoduchý systém, který rozpozná záměr, kontext a další krok. Privacy-first varianta sbírá méně dat, ale pokládá lepší otázky.
+
+### BT.1 Nejdřív rozliš signál od šumu
+
+Ne každý kontakt je poptávka. Ne každý download je obchodní příležitost. A ne každý člověk, který přečetl tři články, chce zítra podepsat smlouvu. Základní rozdělení může být jednoduché:
+
+- **Nízký signál:** čtení článku, návštěva checklistu, kliknutí na související text.
+- **Střední signál:** odpověď na e-mail, dotaz k postupu, stažení praktické šablony, opakovaná návštěva nabídky.
+- **Vysoký signál:** vyplněný poptávkový formulář, žádost o audit, rezervace konzultace, konkrétní dotaz na cenu nebo termín.
+
+Nízký signál patří do obsahového rytmu. Střední signál si zaslouží nenucený další krok. Vysoký signál potřebuje rychlou a konkrétní odpověď. Když všechno hodíš do stejné kolonky „lead“, systém ztratí citlivost a lidé začnou ignorovat i dobré příležitosti.
+
+*Codyho komentář:* Lead scoring, který nikdo neumí vysvětlit, je horoskop v kravatě. Vypadá manažersky, ale stejně ti řekne hlavně to, co už chceš slyšet.
+
+### BT.2 Formulář má kvalifikovat, ne vyslýchat
+
+Poptávkový formulář má získat dost informací pro první smysluplnou reakci. Nemá suplovat discovery call ani vytáhnout z člověka polovinu obchodního tajemství. U privacy-first webu je dobrý formulář krátký, účelový a srozumitelný.
+
+Praktické minimum:
+
+- jméno nebo firma,
+- pracovní e-mail,
+- typ potřeby,
+- krátký popis situace,
+- preferovaný další krok,
+- volitelně rozpočet nebo časový rámec, pokud to pomáhá kvalifikaci.
+
+Místo dvaceti polí použij několik chytrých voleb. Například:
+
+- „Chci nový web“
+- „Chci zlepšit existující web“
+- „Chci MVP SaaS produktu“
+- „Chci privacy-first audit nástrojů nebo analytiky“
+- „Nejsem si jistý, potřebuji se zorientovat“
+
+Poslední možnost je důležitá. Část dobrých zákazníků nepřichází s přesnou specifikací. Přichází s problémem. Když je donutíš vybrat špatnou kategorii, začne spolupráce nepřesností hned v prvním kroku. To je produktový ekvivalent šlápnutí do louže před schůzkou.
+
+### BT.3 Každá odpověď má mít jasnou trasu
+
+Po odeslání formuláře by se nemělo stát ticho. Zákazník má vědět, co bude následovat, kdy a od koho. Interně má tým vědět, kdo poptávku převezme a jak rychle.
+
+Nastav jednoduché trasy:
+
+- **Vysoký fit, vysoká naléhavost:** odpověď osobně do jednoho pracovního dne, návrh termínu hovoru, stručné potvrzení pochopení problému.
+- **Vysoký fit, nízká naléhavost:** nabídka konzultace nebo auditního checklistu, uložení kontextu pro pozdější návrat.
+- **Nízký fit, slušná poptávka:** férové odmítnutí, doporučení jiného směru nebo veřejného zdroje.
+- **Nejasný fit:** jedna doplňující otázka, ne pětistránkový formulář ve druhém kole.
+
+Důležité je poptávky neodkládat do „až bude čas“. U B2B služeb a SaaS pilotů bývá rychlost reakce sama o sobě signálem profesionality. Nemusíš slíbit řešení hned. Stačí rychle potvrdit, že rozumíš situaci a víš, jaký bude další krok.
+
+### BT.4 Zdroj poptávky zapisuj lidsky
+
+Marketing potřebuje vědět, co přivádí kvalitní poptávky. To ale neznamená, že musíš člověka sledovat napříč internetem. Často stačí kombinace jednoduché analytiky, UTM parametrů bez osobních identifikátorů a jedné otázky ve formuláři.
+
+Do interní karty poptávky zapisuj:
+
+- odkud člověk přišel, pokud to víš bez invazivního sledování,
+- který obsah nebo stránka pravděpodobně pomohla,
+- jaký problém popsal vlastními slovy,
+- jaký další krok zvolil,
+- jak kvalifikovaná poptávka po prvním kontaktu skutečně byla.
+
+U otázky „Jak jste se o nás dozvěděli?“ nech volné pole nebo jednoduché možnosti. Lidé často napíšou věci, které analytika nikdy neukáže: „doporučil vás kolega“, „četl jsem článek před měsícem“, „viděl jsem checklist v komunitě“. To jsou cenné signály bez sledovacího cirkusu.
+
+### BT.5 Vyhodnocuj kvalitu, ne jen počet
+
+Měsíční report poptávek nemá být soutěž v tom, kolik lidí kliklo na tlačítko. Důležitější je, kolik poptávek mělo jasný problém, správný segment a realistický další krok.
+
+Sleduj třeba:
+
+- počet kvalifikovaných poptávek podle segmentu,
+- nejčastější problémové věty zákazníků,
+- obsah, který se objevuje u dobrých poptávek,
+- důvody odmítnutí nebo špatného fitu,
+- čas první odpovědi,
+- poměr poptávek, které přešly do hovoru, pilotu nebo nabídky.
+
+Nejde o přesnou atribuci na desetinná místa. Jde o rozhodnutí: jaký obsah posílit, jakou landing page upravit, kde chybí důkaz, jakou nabídku zpřesnit a jaké dotazy mají dostat vlastní článek nebo FAQ.
+
+### BT.6 Šablona: karta kvalifikované poptávky
+
+```markdown
+## Poptávka: [firma / jméno]
+
+### Kontext
+- Datum:
+- Segment:
+- Zdroj nebo pravděpodobná cesta:
+- Obsah / stránka, která mohla pomoct:
+
+### Problém zákazníka
+- Vlastními slovy zákazníka:
+- Naléhavost:
+- Dopad na byznys:
+
+### Fit
+- Nabídka, která sedí nejlépe:
+- Co zatím nevíme:
+- Rizika nebo nejasnosti:
+
+### Další krok
+- Vlastník odpovědi:
+- Termín reakce:
+- Navržený krok:
+- Výsledek po prvním kontaktu:
+
+### Privacy poznámka
+- Jaká data držíme:
+- Proč je držíme:
+- Kdy je smažeme nebo anonymizujeme:
+```
+
+### BT.7 Checklist: kvalifikace bez šmírování
+
+- [ ] Rozlišujeme nízký, střední a vysoký signál.
+- [ ] Formulář sbírá jen data potřebná pro první reakci.
+- [ ] Každá poptávka má jasného vlastníka a termín odpovědi.
+- [ ] Umíme slušně odmítnout poptávky mimo fit.
+- [ ] Zdroj poptávky zapisujeme bez osobních sledovacích identifikátorů.
+- [ ] Ptáme se zákazníků, jak nás našli, protože ne všechno ukáže analytika.
+- [ ] Měsíčně vyhodnocujeme kvalitu poptávek, ne jen jejich počet.
+- [ ] Opakované otázky převádíme do článků, FAQ nebo lepších landing pages.
+- [ ] U poptávkových dat máme účel, vlastníka a retenční pravidlo.
+
+Kvalifikace poptávek má chránit čas týmu i zákazníka. Dobrý systém nehoní každého kolemjdoucího. Pozná, kdy má pomoct, kdy se zeptat a kdy férově říct: „Tohle nejsme my.“ V dlouhodobém marketingu je taková upřímnost skoro nefér výhoda.
+
 ## Pracovní log
+- 2026-08-31 19:01 UTC — Doplněna příloha BT o kvalifikaci poptávek po obsahovém marketingu: rozlišení signálů, krátký formulář, trasy odpovědí, lidský zápis zdroje, vyhodnocení kvality, šablona a privacy-first checklist.
 
 - 2026-08-31 18:00 UTC — Doplněna příloha BS o recyklaci obsahu bez digitálního smogu: zdroje ze skutečné práce, mapa formátů, obsahová karta, rozlišení evergreen/aktualita/provozní poznámka, přímá distribuce, privacy-first měření a checklist.
 
