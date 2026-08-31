@@ -10565,7 +10565,182 @@ Před tím, než prohlásíš zákaznickou edukaci za hotovou, projdi:
 
 Zákaznická edukace je tichý obchodník, support specialista a produktový průvodce v jednom. Když funguje, zákazník má méně nejistoty, tým má méně opakované práce a produkt působí dospěleji. Ne proto, že všechno vysvětluje do posledního pixelu, ale proto, že lidem pomáhá udělat další správný krok.
 
+## Příloha BH: Zákaznická komunita bez závislosti na cizí platformě
+
+Komunita kolem produktu není jen Slack plný emoji, Discord s dvaceti kanály nebo LinkedIn skupina, kde jednou za měsíc někdo napíše „super post“. Dobrá zákaznická komunita je místo, kde se zákazníci rychleji učí, dávají lepší zpětnou vazbu, vidí směr produktu a mají pocit, že nejsou sami s problémem. Špatná komunita je další inbox, který musí někdo živit, moderovat a omlouvat, proč tam už tři týdny nikdo nic nenapsal.
+
+Pro malý SaaS nebo B2B službu je nejbezpečnější začít úzce: nebudovat „velkou komunitu“, ale vytvořit opakovatelný rytmus kontaktu se správnými lidmi. Cílem není počet členů. Cílem je kvalitnější adopce, lepší produktová rozhodnutí a vyšší důvěra.
+
+*Codyho komentář:* Komunita není růstový hack. Je to vztahová infrastruktura. A jako každá infrastruktura se rozbije, když ji postavíš jen proto, že konkurence má taky nějaký kanál s hezkou ikonou.
+
+### BH.1 Nejdřív rozhodni, k čemu komunita slouží
+
+Než vybereš nástroj, napiš si jednu větu:
+
+> Komunita pomáhá **[konkrétní skupině zákazníků]** dosáhnout **[praktický výsledek]** pomocí **[typ interakce]**.
+
+Příklady:
+
+- Pomáháme novým administrátorům rychleji nastavit zákaznický portál pomocí měsíčního Q&A a krátkých návodů.
+- Pomáháme zakladatelům B2B SaaS sdílet zkušenosti s privacy-first provozem pomocí uzavřených kulatých stolů.
+- Pomáháme power userům ovlivnit roadmapu pomocí strukturovaných feedback sessions a veřejného changelogu.
+
+Bez této věty komunita sklouzne do náhodných příspěvků. Jeden týden tip na funkci, druhý týden anketa, třetí týden ticho. Lidé nevědí, proč tam chodit, tým neví, co publikovat, a zakladatel má pocit, že „komunita nefunguje“. Ona často funguje přesně tak, jak byla navržena: nijak.
+
+Dobré účely komunity:
+
+- zrychlit onboarding,
+- zlepšit adopci složitější funkce,
+- sbírat kvalitativní zpětnou vazbu,
+- budovat důvěru u větších zákazníků,
+- sdílet praktické postupy mezi podobnými firmami,
+- snížit opakované support dotazy pomocí veřejných odpovědí.
+
+Špatné účely komunity:
+
+- „ať máme taky komunitu“,
+- nahrazení supportu bez jasných pravidel,
+- levný kanál pro reklamu,
+- místo pro neřízené feature requesty,
+- nástroj na sběr co nejvíc osobních signálů.
+
+### BH.2 Začni malým formátem, který umíš dlouhodobě držet
+
+Komunita nemusí začít permanentním chatem. Permanentní chat je provozní závazek: někdo musí odpovídat, moderovat, přesouvat věci do supportu, řešit očekávání a hlídat, aby se z kanálu nestal druhý ticket systém bez SLA.
+
+Pro první fázi často stačí jeden z těchto formátů:
+
+- **Měsíční zákaznické Q&A:** 45 minut, předem sbírané otázky, po callu krátké shrnutí.
+- **Uzavřený kulatý stůl:** 5 až 8 podobných zákazníků, jedno téma, konkrétní výstup.
+- **Veřejný changelog s komentářem:** co se změnilo, proč, komu to pomůže, co bude dál.
+- **RSS / e-mail digest:** přehled nových návodů, změn a doporučení bez sociálního algoritmu.
+- **Feedback panel:** malá skupina zákazníků, která jednou za měsíc reaguje na konkrétní otázky.
+
+Vyber formát podle energie týmu. Pokud nemáš kapacitu odpovídat denně, nezačínej denním kanálem. Pokud máš silné know-how, začni pravidelným digestem a Q&A. Pokud produkt prochází změnami, začni changelogem a feedback panelem.
+
+Praktické pravidlo: nový komunitní formát musí mít vlastníka, rytmus a konec. Například „Q&A každé první úterý v měsíci po dobu tří měsíců, potom review“. Bez konce se experiment maskuje jako trvalý závazek. To je produktový cosplay s kalendářem.
+
+### BH.3 Drž přímé kanály jako primární zdroj vztahu
+
+Sociální sítě a velké komunikační platformy mohou pomoct s dosahem, ale neměly by být jediným místem, kde komunita žije. Když je vztah se zákazníkem uzamčený v cizím algoritmu, nemáš kontrolu nad dosahem, pravidly ani daty.
+
+Privacy-first komunitní stack může vypadat takto:
+
+- veřejné články, návody a changelog na vlastním webu,
+- RSS feed pro všechny důležité aktualizace,
+- e-mail pouze pro lidi, kteří ho chtějí, s jasným odhlášením,
+- malé uzavřené workshopy pro zákazníky,
+- jednoduchý formulář na otázky a návrhy s minimem polí,
+- interní evidence feedbacku oddělená od marketingových profilů.
+
+Když používáš externí komunitní nástroj, polož si předem otázky:
+
+1. Kde jsou uložena data a metadata členů?
+2. Lze exportovat historii, členy a obsah?
+3. Může člen smazat účet nebo obsah rozumným způsobem?
+4. Jaké notifikace nástroj posílá a kdo nad nimi má kontrolu?
+5. Potřebujeme skutečně chat, nebo stačí periodický formát?
+
+Cílem není být technologický poustevník v jeskyni s vlastním SMTP serverem a lucernou. Cílem je nenechat nejcennější vztah — vztah se zákazníkem — viset na platformě, kterou neumíš opustit.
+
+### BH.4 Moderace je produktová funkce, ne dodatek
+
+Jakmile do jedné místnosti pustíš více zákazníků, potřebuješ pravidla. Ne kvůli byrokracii, ale kvůli bezpečí a kvalitě diskuze. Dobrá pravidla jsou krátká, viditelná a vymahatelná.
+
+Minimální pravidla komunity:
+
+- žádné sdílení osobních nebo citlivých dat zákazníků,
+- žádné screenshoty produkčních dat bez anonymizace,
+- support incidenty patří do support kanálu, ne do obecné diskuze,
+- kritika je vítaná, útoky na lidi ne,
+- obchodní nabídky a spam se mažou,
+- tým má právo přesunout téma do soukromého řešení, pokud obsahuje citlivý kontext.
+
+Pro B2B zákazníky je důležité i to, kdo v komunitě vidí koho. Některé firmy nechtějí být veřejně spojované s konkrétním nástrojem. Nabídni proto rozumné varianty: anonymizovanou účast v feedback panelu, neveřejné Q&A otázky nebo možnost poslat návrh přímo.
+
+Moderace má mít vlastníka. Ne „tým se na to podívá“, ale konkrétní člověk nebo role. Když je vlastníkem každý, vlastníkem není nikdo. A to je stav, ve kterém se spam množí rychleji než backlog po investorském callu.
+
+### BH.5 Převáděj komunitní signály na produktová rozhodnutí
+
+Komunitní diskuze je užitečná jen tehdy, když z ní něco vzniká. Ne každá zpráva musí skončit ticketem, ale opakující se signály by měly mít cestu do produktu, supportu nebo edukace.
+
+Jednoduchý tok signálu:
+
+1. Zákazník položí otázku, popíše problém nebo navrhne zlepšení.
+2. Vlastník komunity označí typ signálu: onboarding, chyba, námitka, feature request, edukace, pricing, bezpečnost.
+3. Jednou týdně se projdou nové signály a vyberou se opakující se vzory.
+4. Každý vzor dostane rozhodnutí: odpovědět návodem, opravit, přidat do backlogu, odmítnout, ověřit rozhovorem.
+5. Komunitě se vrátí stručná odpověď, co se s tématem stalo.
+
+Tahle zpětná smyčka je důležitější než samotný nástroj. Lidé nepotřebují vidět, že každý návrh bude splněn. Potřebují vidět, že je někdo čte, chápe a rozhoduje o nich férově.
+
+Měř komunitu střídmě:
+
+- počet smysluplných dotazů za měsíc,
+- počet témat převedených do návodu nebo changelogu,
+- počet zákazníků, kteří se vrací na Q&A,
+- kvalitativní signály adopce,
+- support dotazy, které díky edukaci ubyly,
+- obchodní rozhovory vzniklé z důvěry, ne ze sledování.
+
+Nepotřebuješ měřit, kdo přesně četl každou větu a kde měl kurzor. U komunity je často cennější vědět, jaké téma se opakuje, než který konkrétní člověk na něj koukal ve 22:17. Ano, i analytika může mít večerku.
+
+### BH.6 Šablona: komunitní karta
+
+Použij jednu kartu pro každý komunitní formát. Díky tomu nebude komunita jen pocit, ale řízený experiment.
+
+## Komunitní formát: [název]
+
+### Účel
+
+- Komu pomáhá:
+- Jaký výsledek má zrychlit:
+- Jak poznáme, že je formát užitečný:
+
+### Formát
+
+- Typ: Q&A / digest / kulatý stůl / feedback panel / changelog / jiný
+- Rytmus:
+- Vlastník:
+- Délka experimentu:
+
+### Pravidla
+
+- Co do formátu patří:
+- Co do formátu nepatří:
+- Kam se přesouvá support nebo citlivý kontext:
+
+### Privacy-first kontrola
+
+- Jaká data sbíráme:
+- Proč je potřebujeme:
+- Kde jsou uložena:
+- Kdy je mažeme nebo anonymizujeme:
+- Jak mohou lidé odejít nebo změnit preference:
+
+### Výstup
+
+- Co po každém běhu publikujeme nebo sdílíme:
+- Jak se signály dostanou do produktu/supportu/edukace:
+- Kdy formát vyhodnotíme:
+
+### BH.7 Checklist: komunita, která pomáhá a nesbírá zbytečnosti
+
+- [ ] Umím jednou větou říct, komu komunita pomáhá a proč.
+- [ ] Formát odpovídá kapacitě týmu, ne jen ambici značky.
+- [ ] Primární obsah a důležité výstupy jsou dostupné přes vlastní web, RSS nebo přímý kanál.
+- [ ] Externí nástroj má zkontrolovaný export, datové umístění a pravidla mazání.
+- [ ] Komunita nenahrazuje support bez jasného předání a očekávání.
+- [ ] Pravidla zakazují sdílení citlivých dat a produkčních screenshotů bez anonymizace.
+- [ ] Existuje vlastník moderace a týdenní review signálů.
+- [ ] Opakující se dotazy se mění na návody, changelog nebo produktová rozhodnutí.
+- [ ] Měřím hlavně kvalitu signálů a dopad na adopci, ne detailní sledování jednotlivců.
+- [ ] Lidé mají možnost odejít, změnit preference a poslat zpětnou vazbu soukromě.
+
+Komunita má být zesilovač důvěry, ne další hladová platforma na data. Když ji začneš malým jasným formátem, držíš přímé kanály a vracíš lidem odpověď, co se s jejich signály stalo, získáš víc než jen aktivitu. Získáš vztah, který přežije i další změnu algoritmu. A to je v marketingu skoro superhrdinská schopnost, jen bez pláště a s lepším exportem dat.
+
 ## Pracovní log
+- 2026-08-31 08:00 UTC — Doplněna příloha BH o zákaznické komunitě bez závislosti na cizí platformě: účel komunity, malé formáty, přímé kanály, moderace, převod signálů do rozhodnutí, komunitní karta a privacy-first checklist.
 
 - 2026-08-31 06:00 UTC — Doplněna příloha BG o zákaznické edukaci: struktura podle úkolů, tři vrstvy pomoci, hotový stav návodu, převod support dotazů na vzdělávací aktiva, role uživatelů, privacy-first měření, šablona a checklist.
 
