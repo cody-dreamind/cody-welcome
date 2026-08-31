@@ -13437,7 +13437,152 @@ Tady se hodí oddělit chyby od nových nápadů. Chyba znamená, že slíbená 
 
 Dobrá předávka zvyšuje hodnotu projektu, protože snižuje závislost a nejistotu. Zákazník se nebojí systém používat, tým ví, kdo za co odpovídá, a dodavatel nemusí být navždy jediný člověk, který rozumí „tomu jednomu nastavení někde“. To je zdravý vztah. A zdravý vztah je lepší než vendor lock-in s hezkým logem.
 
+## Příloha BX: Servisní režim po spuštění, který není jen čekárna na požár
+
+Po předávce přichází nenápadná fáze, která rozhoduje o tom, jestli web nebo SaaS produkt zůstane živý, bezpečný a obchodně užitečný. Říká se jí servis, maintenance, podpora, péče, retainer nebo „prosím tě, můžeš se na to rychle kouknout“. Název není důležitý. Důležité je, aby to nebyla nejasná skříňka plná drobných úkolů, které nikdo neprioritizuje, dokud něco nezačne hořet.
+
+Dobrý servisní režim není pojištění proti všemu. Je to domluvený rytmus péče: co se kontroluje, jak rychle se reaguje, které změny patří do podpory, které už jsou nová práce, jak se evidují rozhodnutí a kdo má právo říct „tohle teď nebudeme dělat“. Bez toho se ze zdravého projektu postupně stane sklad výjimek, dočasných řešení a přístupů, které měly být vypnuté minulý kvartál. Klasika. Digitální půda, jen bez pavučin a s více API klíči.
+
+### BX.1 Servis začíná definicí slibu
+
+Nejdřív si napiš, co vlastně zákazník kupuje. Ne „podporu“. To je moc široké. Kupuje si dostupnost, klid, reakční čas, pravidelnou péči, drobné úpravy, dohled nad bezpečností nebo produktové vedení? Každá z těchto věcí znamená jiný způsob práce.
+
+Praktické servisní sliby:
+
+- **Provozní dohled:** pravidelně kontrolujeme dostupnost, formuláře, chyby, zálohy a základní metriky.
+- **Bezpečnostní údržba:** řešíme aktualizace, oprávnění, závislosti, přístupy a konfiguraci.
+- **Obsahová podpora:** pomáháme s úpravami stránek, článků, landing pages a metadat.
+- **Produktové iterace:** každý měsíc navrhujeme a realizujeme malé zlepšení podle dat a zpětné vazby.
+- **Incidentní reakce:** při výpadku nebo chybě máme jasný kontakt, prioritu a postup.
+
+Když slib není napsaný, zákazník očekává všechno a dodavatel doufá, že se nikdo nezeptá v pátek v 16:58. To je velmi odvážný operační model, pokud tvým cílem není sbírat šediny jako achievementy.
+
+### BX.2 Odděl incidenty, drobné změny a rozvoj
+
+V servisním režimu se nejčastěji míchají tři typy práce. Pokud je nerozdělíš, tým bude buď panikařit nad maličkostmi, nebo odkládat důležité opravy jako „někdy v rámci balíčku“.
+
+Rozděl práci takhle:
+
+1. **Incident:** něco nefunguje a má to dopad na uživatele, prodej, bezpečnost nebo data.
+2. **Drobné změny:** text, obrázek, CTA, metadata, menší úprava formuláře, oprava překlepu.
+3. **Rozvoj:** nová funkce, nová landing page, větší integrace, změna procesu, experiment.
+
+Každý typ má mít vlastní pravidla. Incident má prioritu podle dopadu. Drobné změny se sbírají do krátké fronty a řeší se v dávkách. Rozvoj se plánuje jako mini projekt s cílem, odhadem a rozhodnutím. Jinak se stane, že nová ikonka soutěží o pozornost s nefunkčním formulářem. Ikonka může být krásná, ale zatím nikdy neposlala poptávku sama od sebe.
+
+### BX.3 Reakční čas není totéž co vyřešení
+
+SLA nebo servisní dohoda často selhává na slovíčku „do“. „Opravíme do čtyř hodin“ zní hezky, dokud chyba nezávisí na třetí straně, DNS propagaci, platební bráně nebo datové migraci. Férovější je oddělit reakci, diagnostiku a řešení.
+
+Popiš tři časy:
+
+- **První reakce:** kdy zákazník dostane potvrzení, že někdo problém převzal.
+- **První diagnóza:** kdy tým řekne, co pravděpodobně selhalo a jaký je další krok.
+- **Cílové řešení nebo workaround:** kdy bude problém opravený, obejitý nebo eskalovaný.
+
+Příklad pro menší B2B web:
+
+- Kritický výpadek: reakce do 1 pracovní hodiny, diagnóza do 2 hodin, workaround co nejdřív podle dopadu.
+- Nefunkční poptávkový formulář: reakce do 1 pracovní hodiny, kontrola logů a testovací odeslání jako první krok.
+- Běžná obsahová změna: zařazení do nejbližší servisní dávky, například jednou týdně.
+
+Tím chráníš obě strany. Zákazník ví, kdy se mu někdo ozve. Dodavatel neslibuje fyzikálně nemožné věci jen proto, že tabulka vypadala sebevědomě.
+
+### BX.4 Měsíční servisní report má být krátký a rozhodovací
+
+Report není místo, kam vysypeš všechny grafy, protože analytika umí export do PDF. Report má odpovědět: co se stalo, co to znamená a co uděláme dál.
+
+Dobrý měsíční report obsahuje:
+
+- **Stav provozu:** dostupnost, incidenty, chyby formulářů, zálohy, aktualizace.
+- **Obchodní signály:** poptávky, hlavní stránky, CTA kliknutí, obsah s největším zájmem.
+- **Změny:** co bylo upraveno, proč a jaký byl očekávaný dopad.
+- **Rizika:** technický dluh, zastaralý obsah, přístupová rizika, slabá místa funnelu.
+- **Doporučení:** jedna až tři konkrétní akce na další měsíc.
+
+Privacy-first report neobsahuje seznam jednotlivých návštěvníků, fingerprintingové detaily ani detektivní rekonstrukci cizího chování. K rozhodnutí obvykle stačí agregovaná data, trend a konkrétní dopad. Pokud chce někdo víc, polož nudnou, ale mocnou otázku: „Jaké rozhodnutí díky tomu uděláme?“ Když žádné, nesbírej to.
+
+### BX.5 Servisní backlog udržuj menší než ambice
+
+Servisní backlog je užitečný, dokud z něj není hřbitov nápadů. Každá položka by měla mít vlastníka, typ, dopad a další krok. Když položka tři měsíce jen existuje, pravděpodobně není důležitá — nebo se jí všichni bojí. Obě varianty si zaslouží rozhodnutí.
+
+Jednoduché sloupce:
+
+- **Nové:** zachycené požadavky bez rozhodnutí.
+- **Připravené:** jasný rozsah, dopad a odhad.
+- **Tento měsíc:** vybrané položky pro aktuální servisní cyklus.
+- **Hotovo:** dokončené změny s krátkou poznámkou.
+- **Zahodit nebo později:** věci, které teď nemají dostatečný přínos.
+
+U každé položky napiš jednu větu: „Děláme to, protože…“ Pokud ta věta nejde napsat lidsky, požadavek ještě není připravený. „Protože to konkurence má“ je mimochodem slabý argument. Konkurence má často i chaos v administraci, a ten kopírovat nemusíme.
+
+### BX.6 Privacy-first servis má vlastní hygienu
+
+Servisní tým má často široký přístup: administrace webu, repozitář, hosting, analytika, support, někdy i databáze. To znamená, že privacy-first režim nekončí předáním. Naopak. Dlouhodobá podpora je místo, kde se ukáže, jestli jsou hodnoty jen text na webu, nebo běžná práce.
+
+Servisní hygienu postav na těchto pravidlech:
+
+- používej osobní účty místo sdílených přístupů,
+- zapni vícefaktorové ověření všude, kde to jde,
+- drž nejmenší potřebná oprávnění,
+- do ticketů nekopíruj celé exporty zákaznických dat,
+- logy sdílej jen v nezbytném rozsahu,
+- po incidentu uklízej dočasné přístupy a tokeny,
+- pravidelně kontroluj, jestli externí nástroje stále odpovídají účelu.
+
+Servisní režim by měl mít také jasnou větu pro zákazníka: pokud pro vyřešení problému potřebujeme přístup k citlivějším datům, řekneme proč, na jak dlouho a co po dokončení smažeme. To je malá věc, ale buduje důvěru víc než deset odstavců o „maximální bezpečnosti“.
+
+### BX.7 Šablona: měsíční servisní karta
+
+```markdown
+## Servisní karta: [měsíc / projekt]
+
+### 1. Stav provozu
+- Dostupnost a incidenty:
+- Formuláře a klíčové akce:
+- Zálohy a obnovitelnost:
+- Aktualizace a bezpečnost:
+
+### 2. Hotové změny
+- Změna:
+- Důvod:
+- Očekávaný dopad:
+- Jak ověříme výsledek:
+
+### 3. Signály z webu nebo produktu
+- Nejvýraznější pozitivní signál:
+- Největší tření:
+- Obsah nebo stránka k úpravě:
+- Poptávky / aktivace / důležité konverze:
+
+### 4. Rizika
+- Technické riziko:
+- Obsahové riziko:
+- Datové nebo přístupové riziko:
+- Rozhodnutí, které potřebujeme od zákazníka:
+
+### 5. Doporučení na další měsíc
+- Priorita 1:
+- Priorita 2:
+- Co vědomě neděláme:
+```
+
+### BX.8 Checklist: servis bez požárního divadla
+
+- [ ] Servisní dohoda říká, jaký konkrétní slib zákazník kupuje.
+- [ ] Incidenty, drobné změny a rozvoj mají oddělené trasy.
+- [ ] Reakční čas, diagnóza a cílové řešení nejsou zaměněné do jedné magické věty.
+- [ ] Existuje jasný kontakt a postup pro kritický problém.
+- [ ] Běžné obsahové změny se řeší v dávkách, ne náhodným pingáním.
+- [ ] Měsíční report odpovídá na otázku „co uděláme dál?“.
+- [ ] Servisní backlog má vlastníka, dopad a pravidelný úklid.
+- [ ] Přístupy jsou osobní, omezené a pravidelně kontrolované.
+- [ ] Do podpory se neposílají zbytečné osobní údaje ani celé exporty.
+- [ ] Každý měsíc vznikne alespoň jedno rozhodnutí: zlepšit, odložit, smazat nebo nechat být.
+
+Servisní režim je dobrý tehdy, když není slyšet jen při katastrofě. Web nebo SaaS produkt se mění spolu s trhem, zákazníky i týmem. Potřebuje pravidelnou péči, ale ne nekonečnou improvizaci. Když nastavíš rytmus, hranice a privacy-first hygienu, servis přestane být nákladová položka s nejistým koncem a začne být systém pro dlouhodobou hodnotu.
+
 ## Pracovní log
+- 2026-08-31 23:00 UTC — Doplněna příloha BX o servisním režimu po spuštění: servisní slib, rozlišení incidentů a drobných změn, reakční časy, měsíční report, servisní backlog, privacy-first hygienu, servisní kartu a checklist.
 - 2026-08-31 22:01 UTC — Doplněna příloha BW o předávce projektu: vlastnictví účtů, dokumentace podle rolí, praktický předávací test, přístupový úklid, třicetidenní stabilizační rytmus, předávací karta a privacy-first checklist.
 - 2026-08-31 21:00 UTC — Doplněna příloha BV o nabídce po discovery: kontext zákazníka, výstupy a rozhodnutí, férové varianty, hranice rozsahu, vysvětlení ceny hodnotou, konkrétní další krok, šablona nabídky a privacy-first checklist.
 - 2026-08-31 20:00 UTC — Doplněna příloha BU o discovery hovoru bez nahrávacího vysavače: příprava hypotéz, souhlas s poznámkami a nahráváním, otázky od dopadu k řešení, rozhodovací poznámky, follow-up, pět možných výstupů, šablona a privacy-first checklist.
