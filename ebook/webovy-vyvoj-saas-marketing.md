@@ -12635,7 +12635,172 @@ Výstupem mají být maximálně tři úkoly. Pokud audit vyrobí patnáct úkol
 Marketing má přivádět správné lidi ke správné nabídce. Nemá za sebou tahat stopařský batoh plný dat, která nikdo nepotřebuje, ale všichni by je museli vysvětlovat, kdyby se něco pokazilo. Čím menší datová stopa, tím snazší provoz, lepší výkon a čistší důvěra.
 
 
+## Příloha BS: Recyklace obsahu bez továrny na prázdné příspěvky
+
+Malý tým většinou nepotřebuje víc obsahu. Potřebuje víc užitku z obsahu, který už stejně vzniká: z konzultací, zákaznických dotazů, interních rozhodnutí, supportu, changelogu, dokumentace a prodejních rozhovorů. Recyklace obsahu není trik, jak jeden nápad pětkrát převléct a tvářit se, že pracuje marketingové oddělení. Je to systém, jak z jedné dobré myšlenky udělat několik užitečných vstupních bodů pro různé lidi.
+
+Privacy-first přístup tady dává krásný smysl. Když nejsi závislý na algoritmickém krmení sociálních sítí, nemusíš chrlit dvacet krátkých věcí denně jen proto, aby tě platforma náhodou pustila před publikum. Můžeš raději stavět knihovnu evergreen textů, přímých odkazů, RSS, dokumentace, checklistů a e-mailů, které zákazníkům pomáhají i za půl roku.
+
+*Codyho komentář:* Recyklace obsahu není „Ctrl+C, Ctrl+V, přidej emoji“. Je to spíš kompostér. Vezmeš odpadní teplo z každodenní práce a uděláš z něj něco, co živí důvěru. Ano, právě jsem přirovnal marketing ke kompostu. Překvapivě sedí.
+
+### BS.1 Začni zdroji, které už v týmu existují
+
+Nejlevnější obsah je ten, který už vznikl jako vedlejší produkt skutečné práce. Místo otázky „co máme publikovat?“ se ptej: „co jsme tento týden vysvětlovali, rozhodovali nebo opravovali?“
+
+Dobré zdroje:
+
+- **Zákaznické otázky:** opakované dotazy z callů, e-mailů a supportu.
+- **Rozhodnutí v projektu:** proč jste zvolili určitý stack, integraci, hosting nebo rozsah MVP.
+- **Interní checklisty:** kroky před launchí, kontrola formuláře, migrace DNS, nastavení záloh.
+- **Mini incidenty:** co se rozbilo, jak se to poznalo a jak se tomu příště vyhnout.
+- **Případové detaily:** anonymizovaný problém, postup a výsledek bez odhalení citlivých dat.
+- **Dokumentace:** návody, limity, FAQ a vysvětlení pojmů, které se dají přepsat lidsky.
+
+Praktický postup: jednou týdně projdi posledních 5–10 zákaznických interakcí a označ věty, které by pomohly i dalším lidem. Nepublikuj soukromé informace, jména, screenshoty ani přesné obchodní detaily. Vytáhni princip, anonymizuj kontext a přidej doporučení.
+
+### BS.2 Z jedné myšlenky udělej mapu formátů
+
+Každé téma nemusí být hned dlouhý článek. Některé myšlenky fungují jako checklist, jiné jako rozbor, jiné jako krátká poznámka v dokumentaci. Recyklace začíná tím, že nerozhoduješ podle kanálu, ale podle uživatelské situace.
+
+Příklad tématu: „Jak poznat, že SaaS MVP sbírá příliš mnoho dat.“
+
+Z toho může vzniknout:
+
+- dlouhá kapitola v e-booku o datové minimalizaci,
+- blogový článek s příklady z formulářů a onboardingu,
+- checklist pro produktový tým před launchí,
+- interní šablona pro návrh nového eventu v analytice,
+- krátká FAQ odpověď pro zákazníka,
+- odstavec do nabídky služby jako důkaz přístupu,
+- poznámka do changelogu, když se datový sběr zjednoduší.
+
+Nejde o kopírování stejného textu. Každý formát má jiný úkol. Článek vysvětluje, checklist vede k akci, FAQ snižuje nejistotu, nabídka prodává důvěru a dokumentace pomáhá týmu držet standard.
+
+### BS.3 Vytvoř obsahovou kartu místo chaotického brainstormingu
+
+Pro každé nosné téma si založ jednoduchou kartu. Díky tomu se z nápadu nestane volně plovoucí poznámka, která se za tři týdny najde v souboru „final_final_uz_fakt.md“.
+
+Karta tématu má obsahovat:
+
+- **Téma:** jedna konkrétní otázka nebo problém.
+- **Cílový čtenář:** zakladatel, marketér, vývojář, provozní člověk nebo zákazník.
+- **Bolest:** co ho trápí právě teď.
+- **Hlavní doporučení:** jedna věta, kterou si má odnést.
+- **Důkaz:** příklad, mini case, screenshot procesu, číslo z vlastní analytiky nebo odkaz na dokumentaci.
+- **Formáty:** článek, checklist, sekce dokumentace, onboarding e-mail, interní playbook.
+- **Privacy kontrola:** jaké údaje se nesmí publikovat a co musí být anonymizované.
+- **Další krok:** kam má čtenář pokračovat.
+
+Tahle karta šetří čas hlavně při opakované práci. Když se k tématu vrátíš později, nemusíš znovu vymýšlet, proč existuje. Jen vybereš další formát a upravíš tón.
+
+### BS.4 Rozliš evergreen, aktualitu a provozní poznámku
+
+Ne každý obsah má stejnou životnost. Když to nerozlišíš, začneš spravovat staré články jako sklad prošlých jogurtů. Některé texty mají vydržet roky, jiné jsou užitečné jen v týdnu vydání.
+
+Používej tři typy:
+
+- **Evergreen:** principy, checklisty, metodiky, rozhodovací rámce a stabilní návody.
+- **Aktualita:** změna v nástroji, regulaci, ceně, trhu nebo technologii.
+- **Provozní poznámka:** changelog, krátké vysvětlení incidentu, upgrade, údržba nebo migrace.
+
+Evergreen piš nadčasově a aktualizuj jen při změně praxe. Aktuality vždy zdrojuj a přidej datum ověření. Provozní poznámky drž stručné a konkrétní: co se změnilo, koho se to týká a co má člověk udělat.
+
+Privacy-first pravidlo: u aktualit a nástrojů neslibuj víc, než víš. Když se mění podmínky, ceny nebo datové zpracování, ověř primární zdroj. Když zdroj nemáš, napiš to jako hypotézu nebo Codyho komentář, ne jako fakt.
+
+### BS.5 Distribuce má být přímá, ne závislá na náladě algoritmu
+
+Recyklovaný obsah má největší hodnotu, když ho lidé najdou i mimo den publikace. Proto stav distribuci na kanálech, které máš pod kontrolou.
+
+Praktická distribuční vrstva:
+
+- **Web:** hlavní archiv s kanonickými URL.
+- **RSS:** tichý, spolehlivý kanál pro lidi, kteří chtějí číst bez algoritmů.
+- **Dokumentace:** místo pro návody, FAQ a technické vysvětlení.
+- **E-mail jen s respektem:** žádné skryté trackovací pixely, jasné odhlášení, minimální segmentace.
+- **Přímé odkazy:** sdílení v obchodních e-mailech, supportu, komunitách a partnerské komunikaci.
+- **Sociální sítě volitelně:** krátké výtahy, ale ne jako jediné místo, kde obsah existuje.
+
+Když publikuješ jen na platformě, kde nemáš archiv, export ani kontrolu nad dosahem, nestavíš knihovnu. Pronajímáš si nástěnku v cizí hale. Může fungovat, ale nesmí to být jediný plán.
+
+### BS.6 Měř výkon obsahu podle rozhodnutí, ne podle ega
+
+Obsahové metriky umí být zrádné. Zobrazení vypadá hezky, ale samo o sobě neříká, jestli text pomohl obchodu nebo produktu. U malého týmu měř hlavně signály, podle kterých něco změníš.
+
+Smysluplné metriky:
+
+- které články dlouhodobě přivádějí relevantní návštěvy,
+- odkud přicházejí lidé, kteří pošlou poptávku,
+- které checklisty se používají v supportu nebo prodeji,
+- které otázky po publikaci ubývají,
+- které stránky lidé posílají dál přímým odkazem,
+- kde lidé klikají na další praktický krok.
+
+Nepotřebuješ osobní profily ani sledování napříč weby. Pro obsahový systém často stačí agregovaná analytika, serverové logy s krátkou retencí, UTM parametry bez osobních údajů a kvalitní poznámky z obchodních rozhovorů.
+
+### BS.7 Šablona: karta recyklace obsahu
+
+## Obsahová karta: [téma]
+
+### Výchozí situace
+
+- Kde téma vzniklo:
+- Kdo se na něj ptal:
+- Proč je důležité:
+- Co se stane, když ho nevysvětlíme:
+
+### Hlavní sdělení
+
+- Jedna věta:
+- Praktické doporučení:
+- Příklad z praxe:
+- Co není cílem textu:
+
+### Formáty
+
+- Evergreen článek:
+- Checklist:
+- Dokumentace / FAQ:
+- Obchodní e-mail:
+- Interní playbook:
+- Krátký výtah pro sociální síť:
+
+### Distribuce
+
+- Kanonická URL:
+- RSS / archiv:
+- Přímé odkazy pro support a sales:
+- Komunity nebo partneři:
+- Datum další revize:
+
+### Privacy kontrola
+
+- Osobní údaje odstraněny:
+- Zákazník anonymizován:
+- Screenshoty bez citlivých dat:
+- Nástroje a tvrzení ověřené:
+- Retence poznámek nastavena:
+
+### BS.8 Checklist: recyklace obsahu bez digitálního smogu
+
+- [ ] Téma vychází ze skutečné otázky, rozhodnutí nebo zákaznické situace.
+- [ ] Má jednu jasnou cílovou skupinu a jeden hlavní užitek.
+- [ ] Existuje obsahová karta s bolestí, doporučením, důkazem a dalším krokem.
+- [ ] Z jednoho tématu vznikají různé formáty, ne jen kopie stejného textu.
+- [ ] Evergreen texty jsou oddělené od aktualit a provozních poznámek.
+- [ ] Aktuality mají datum ověření a odkazy na zdroje, pokud obsahují proměnlivá fakta.
+- [ ] Publikace má kanonickou URL na vlastním webu.
+- [ ] RSS nebo jiný přímý kanál funguje bez sledovacích skriptů.
+- [ ] Citlivé údaje, zákaznické detaily a interní data jsou anonymizované nebo vynechané.
+- [ ] Metriky jsou agregované a slouží ke konkrétním rozhodnutím.
+- [ ] Staré výtahy na sociálních sítích odkazují zpět na vlastní archiv.
+- [ ] Každý měsíc se vybere nejvýše pár témat k aktualizaci, ne nekonečný obsahový úklid.
+
+Dobrá recyklace obsahu snižuje tlak na tým a zvyšuje hodnotu práce, která už proběhla. Místo honby za dalším postem vzniká znalostní systém: web, dokumentace, checklisty a přímé odkazy, které pomáhají zákazníkům i internímu týmu. A bonus? Méně trackerů, méně závislosti na platformách, méně marketingového dusna. To zní skoro podezřele rozumně.
+
+
 ## Pracovní log
+
+- 2026-08-31 18:00 UTC — Doplněna příloha BS o recyklaci obsahu bez digitálního smogu: zdroje ze skutečné práce, mapa formátů, obsahová karta, rozlišení evergreen/aktualita/provozní poznámka, přímá distribuce, privacy-first měření a checklist.
 
 - 2026-08-31 17:00 UTC — Doplněna příloha BR o měsíčním auditu marketingových dat: inventura kontaktů, oddělení metrik od osobních údajů, kontrola nástrojů a kampaní, datový rozpočet, krátká agenda a checklist.
 
