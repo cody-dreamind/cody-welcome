@@ -11785,7 +11785,202 @@ Použij ji pro každý opakovaný způsob práce s AI.
 - [ ] Špatný výstup vede k úpravě workflow, ne jen k otrávenému povzdechu.
 
 AI v SaaS týmu není samostatná strategie. Je to zesilovač. Když zesílíš dobrý proces, tým působí větší a klidnější. Když zesílíš chaos, dostaneš chaos ve vysokém rozlišení. A ten bohužel pořád nejde dát do roadmapy jako feature.
+
+## Příloha BN: Zákaznický portál, který šetří support a neotvírá datový trezor
+
+Zákaznický portál zní jako velká produktová funkce. Ve skutečnosti je to často jen dobře navržené místo, kde zákazník najde odpověď, dokument, stav požadavku a další krok. Největší chyba je začít portál jako „všechno pro všechny“: dashboard, faktury, ticketing, notifikace, nastavení, nápověda, analytics a ještě malý ohňostroj, protože bez něj přece B2B SaaS nepůsobí enterprise. Výsledek bývá těžký systém, který nikdo nepoužívá rád a tým se ho bojí měnit.
+
+Dobrý portál má být nudně užitečný. Má snížit počet zbytečných e-mailů, zpřehlednit spolupráci a dát zákazníkovi pocit kontroly bez toho, aby firma sbírala víc dat, než opravdu potřebuje.
+
+*Codyho komentář:* Portál není interní admin v hezčí košili. Jestli zákazník vidí dvacet stavů, osm filtrů a tři prázdné grafy, právě jsi mu prodal malý ERP útok na nervy.
+
+### BN.1 Začni třemi zákaznickými otázkami
+
+Nejdřív si napiš, jaké otázky zákazník opakovaně posílá e-mailem nebo přes podporu. Portál má začít tam, kde je skutečné tření, ne tam, kde se vývojáři chtějí vyřádit na novém menu.
+
+Typické otázky:
+
+- „V jakém stavu je náš požadavek?“
+- „Kde najdu poslední dokument, smlouvu nebo export?“
+- „Co po nás teď potřebujete?“
+- „Kdo u nás má přístup?“
+- „Jak změním fakturační údaje?“
+- „Kde je návod k té věci, kterou používáme jednou za měsíc a pokaždé zapomeneme jak?“
+
+Z každé otázky udělej jednoduchý portálový use case:
+
+- Otázka: „Co po nás teď potřebujete?“
+- Funkce: karta otevřených úkolů zákazníka.
+- Minimální verze: seznam tří položek se stavem, vlastníkem a termínem.
+- Privacy-first pravidlo: žádné sledování aktivity konkrétní osoby, jen stav úkolu a audit změn.
+
+První verze portálu nemusí mít deset modulů. Může mít jen tři dobře pojmenované sekce: „Požadavky“, „Dokumenty“ a „Nastavení přístupů“. Pokud tyhle tři sekce vyřeší 60 % opakovaných dotazů, je to lepší než lesklý dashboard, který ukazuje všechno kromě odpovědi.
+
+### BN.2 Navrhni portál jako pracovní prostor, ne jako vitrínu
+
+Marketingový web přesvědčuje. Produktové rozhraní pomáhá pracovat. Zákaznický portál je někde mezi: má budovat důvěru, ale hlavně má zkrátit cestu k výsledku.
+
+Každá stránka portálu by měla odpovědět na čtyři otázky:
+
+1. Kde jsem?
+2. Co je tady důležité?
+3. Co můžu udělat teď?
+4. Co se stane po kliknutí?
+
+Praktický layout pro malý B2B portál:
+
+- nahoře jasný název zákaznického účtu nebo projektu,
+- pod tím blok „Vyžaduje akci“,
+- vedle nebo níž poslední změny bez zbytečného feedu,
+- samostatná sekce pro dokumenty a výstupy,
+- jednoduché nastavení účtu a přístupů,
+- nápověda navázaná na konkrétní stránku.
+
+Nepotřebuješ gamifikaci, konfety ani animovaný graf zdraví účtu. Potřebuješ, aby zákazník do 30 sekund poznal, jestli má něco udělat, co se změnilo a kde najde důležitý materiál.
+
+### BN.3 Oprávnění řeš dřív než design ikonek
+
+Portál pracuje s citlivým kontextem: projekty, fakturace, smlouvy, interní komentáře, možná i produkční data. Proto se nesmí stavět stylem „nejdřív obrazovky, role nějak doplníme“. Role nejsou detail. Role jsou součást produktu.
+
+Minimální role pro začátek:
+
+- **Vlastník účtu** — spravuje fakturaci, členy týmu a zásadní nastavení.
+- **Administrátor** — řeší běžný provoz, požadavky a dokumenty.
+- **Člen týmu** — vidí jen relevantní pracovní obsah.
+- **Externí host** — má časově nebo projektově omezený přístup.
+
+U každé akce si napiš matici oprávnění:
+
+| Akce | Vlastník | Administrátor | Člen | Host |
+|---|---:|---:|---:|---:|
+| Zobrazit požadavky | ano | ano | ano podle projektu | omezeně |
+| Přidat komentář | ano | ano | ano | podle pozvánky |
+| Stáhnout smlouvu | ano | podle nastavení | ne | ne |
+| Změnit fakturaci | ano | ne | ne | ne |
+| Pozvat uživatele | ano | podle nastavení | ne | ne |
+
+Tohle není byrokracie. Je to prevence trapných e-mailů typu „proč náš externí dodavatel viděl fakturační údaje“. Takové e-maily mají zvláštní schopnost zestárnout celý tým o pět let během jednoho dopoledne.
+
+### BN.4 Zákaznická data zobrazuj s kontextem a limitem
+
+Portál často svádí k tomu ukázat co nejvíc dat: aktivitu uživatelů, logy, historii akcí, exporty, metriky, tabulky. Jenže víc dat neznamená víc důvěry. Často to znamená víc nejasností, víc podpory a větší riziko.
+
+Drž tři pravidla:
+
+- **Ukazuj data, která vedou k rozhodnutí.** Pokud zákazník podle metriky nic neudělá, možná do portálu nepatří.
+- **Agreguj, kde to stačí.** „12 dokončených úkolů tento měsíc“ je často lepší než detailní aktivita každého uživatele.
+- **Vysvětli původ dat.** U každého reportu napiš, odkud data jsou, jak často se aktualizují a co v nich není.
+
+Příklad dobrého bloku:
+
+> Stav projektu: 8 z 11 položek dokončeno. Poslední aktualizace: 31. 8. 2026 09:20 UTC. Čekáme na schválení textů homepage a fakturační údaje. Detailní osobní aktivitu uživatelů nezobrazujeme; pro řízení projektu stačí stav položek a odpovědnost týmu.
+
+Tohle je praktické a férové. Zákazník ví, kde stojí, ale portál se nemění ve sledovací kabinu.
+
+### BN.5 Dokumenty a exporty dělej jako produktovou funkci
+
+Dokumenty v portálu nejsou odkladiště příloh. Jsou součást zákaznické zkušenosti. Když zákazník neví, který export je aktuální, pošle dotaz. Když dokumenty nejsou popsané, stáhne špatný soubor. Když staré verze vypadají stejně jako nové, koleduješ si o chaos s přílohou `final_v7_opravdu_final.pdf`.
+
+U každého dokumentu ukládej minimum smysluplných metadat:
+
+- název, který popisuje účel,
+- typ dokumentu: smlouva, výstup, export, faktura, návod,
+- datum vytvoření nebo aktualizace,
+- stav: návrh, ke schválení, finální, archiv,
+- vlastník nebo kontaktní osoba,
+- viditelnost podle role,
+- krátká poznámka „k čemu se používá“.
+
+Praktický příklad názvu:
+
+- špatně: `export.csv`,
+- lépe: `Leady z landing page — srpen 2026`,
+- ještě lépe: `Leady z landing page — srpen 2026 — finální export pro obchod`.
+
+A hlavně: staré dokumenty nemaž potichu. Archivuj je, označ stavem a ukaž, proč už nejsou primární. Mazání bez stopy je rychlé jen do chvíle, než někdo začne hledat kontext rozhodnutí.
+
+### BN.6 Notifikace posílej podle naléhavosti, ne podle ega systému
+
+Portál může snadno začít produkovat notifikační mlhu. Každý komentář, změna stavu, nový dokument, přihlášení, export, připomínka, interní štítek — a zákazník po týdnu nastaví filtr do složky „ignorovat navždy“. Gratuluju, komunikace byla úspěšně pohřbena.
+
+Rozděl notifikace do tří tříd:
+
+- **Okamžité:** bezpečnostní událost, požadavek na schválení, blokující dotaz.
+- **Denní souhrn:** menší změny, nové komentáře, dokončené úkoly.
+- **Týdenní přehled:** stav projektu, otevřené body, dokončené výstupy, další kroky.
+
+U každé notifikace napiš:
+
+- proč ji zákazník dostává,
+- co má udělat,
+- do kdy je to potřeba,
+- kde si může frekvenci upravit,
+- jaké informace se neposílají e-mailem kvůli bezpečnosti.
+
+Privacy-first detail: do e-mailu neposílej citlivý obsah dokumentů nebo interní data. Pošli stručný kontext a odkaz do portálu. E-mail je dobrý poslíček, ale špatný trezor.
+
+### BN.7 Šablona: karta zákaznického portálu
+
+Použij ji před tím, než začneš kreslit další sekci portálu.
+
+## Portálová sekce: [název]
+
+### Zákaznická otázka
+
+- Jakou opakovanou otázku sekce řeší:
+- Jak často se dnes objevuje:
+- Kdo ji typicky pokládá:
+
+### Hlavní práce
+
+- Co má zákazník udělat nebo zjistit:
+- Jaký je hotový stav:
+- Jaká je jedna primární akce:
+
+### Data
+
+- Jaká data sekce zobrazuje:
+- Odkud data pochází:
+- Jak dlouho je uchováváme:
+- Co záměrně nezobrazujeme:
+
+### Oprávnění
+
+- Kdo sekci vidí:
+- Kdo může měnit obsah:
+- Kdo může exportovat nebo stahovat:
+- Jak se přístup odebírá:
+
+### Notifikace
+
+- Kdy zákazník dostane upozornění:
+- Jaký kanál používáme:
+- Jak může frekvenci změnit:
+
+### Měření
+
+- Jak poznáme, že sekce snížila support:
+- Jaké dotazy se pořád opakují:
+- Co odstraníme, pokud se nepoužívá:
+
+### BN.8 Checklist: portál, který pomáhá a nezvyšuje riziko
+
+- [ ] Portál začíná konkrétními zákaznickými otázkami, ne interním seznamem funkcí.
+- [ ] První verze řeší nejčastější tření: stav požadavků, dokumenty, další kroky nebo přístupy.
+- [ ] Každá stránka má jasnou primární akci.
+- [ ] Role a oprávnění jsou navržené před implementací citlivých sekcí.
+- [ ] Externí hosté mají omezený a snadno odvolatelný přístup.
+- [ ] Dokumenty mají stav, účel, datum a viditelnost podle role.
+- [ ] E-mailové notifikace neobsahují citlivé přílohy ani detailní interní data.
+- [ ] Metriky v portálu vedou k rozhodnutí, ne k voyeuristickému scrollování.
+- [ ] Zbytečné osobní aktivity agregujeme nebo vůbec nezobrazujeme.
+- [ ] Pravidelně kontrolujeme, které sekce snižují support a které jen překážejí.
+
+Zákaznický portál má být tiché centrum spolupráce. Když funguje, zákazník nepotřebuje psát „jak to vypadá?“ a tým nemusí lovit poslední verzi dokumentu v e-mailové archeologii. To je nenápadný luxus: méně dotazů, méně chyb, víc důvěry a výrazně méně situací, kdy někdo pošle citlivou přílohu na špatnou adresu.
+
 ## Pracovní log
+
+- 2026-08-31 13:00 UTC — Doplněna příloha BN o zákaznickém portálu: zákaznické otázky, pracovní layout, role a oprávnění, kontext dat, dokumenty, notifikace, portálová karta a privacy-first checklist.
 
 - 2026-08-31 12:00 UTC — Doplněna příloha BM o AI asistentovi v malém SaaS týmu: mapování práce, rizikové úrovně, interní prompty, minimalizace dat, knihovna vzorů, měření přínosu a karta AI use casu.
 
