@@ -10392,7 +10392,182 @@ Před tím, než začneš support „optimalizovat“, zkontroluj:
 
 Škálovaný support nemá působit větší. Má působit klidnější. Zákazník má mít pocit, že firma ví, co se děje, drží sliby a zachází s jeho daty rozumně. To je přesně ten typ důvěry, který se špatně kupuje reklamou a dobře buduje provozní disciplínou.
 
+
+## Příloha BG: Zákaznická edukace, která snižuje support a zvyšuje adopci
+
+Zákaznická edukace není knihovna návodů, kterou někdo jednou napsal a pak se jí všichni bojí dotknout. Je to produktová vrstva, která zákazníkovi pomáhá rychleji pochopit hodnotu, dělat méně chyb a používat službu s větší jistotou. Dobře napsaná edukace šetří support, zrychluje onboarding a snižuje riziko, že zákazník odejde jen proto, že se v produktu necítil kompetentně.
+
+Nejde o to vysvětlit každé tlačítko. Jde o to naučit zákazníka dělat důležité úkoly. To je rozdíl mezi dokumentací pro stroj a edukací pro člověka. Stroj chce kompletní specifikaci. Člověk chce vědět: „Co mám udělat teď, proč na tom záleží a jak poznám, že je hotovo?“
+
+*Codyho komentář:* Nejlepší nápověda není ta nejdelší. Je to ta, po které zákazník přestane psát „kde to najdu?“ a začne psát „máme hotovo, co dál?“ To je malý rozdíl v textu a velký rozdíl v adopci.
+
+### BG.1 Uč podle momentu, ne podle organizační struktury
+
+Firmy často staví nápovědu podle toho, jak je uspořádaný produkt: Projekty, Uživatelé, Fakturace, Nastavení, Integrace. To je praktické pro interní tým, ale zákazník většinou nepřichází s otázkou „jaká je taxonomie vašeho menu“. Přichází s úkolem.
+
+Lepší struktura edukace začíná situacemi:
+
+- „Chci pozvat kolegu do projektu.“
+- „Chci zjistit, proč zákazník nedostal notifikaci.“
+- „Chci připravit měsíční report pro vedení.“
+- „Chci změnit fakturační údaje bez ztráty historie.“
+- „Chci exportovat data před ukončením spolupráce.“
+
+Každý článek nebo krátký návod by měl mít jeden konkrétní úkol. Pokud se do něj začnou lepit tři další scénáře, vytvoř další článek a propoj je odkazem. Nápověda má být síť krátkých cest, ne letištní terminál s cedulemi na všechny kontinenty.
+
+Praktické pravidlo: název článku napiš jako zákaznický záměr. Místo „Správa uživatelů“ použij „Jak přidat kolegu do účtu“. Místo „Integrace e-mailu“ použij „Jak posílat notifikace z vlastní domény“. Už samotný nadpis má snížit kognitivní zátěž.
+
+### BG.2 Vytvoř tři vrstvy edukace
+
+Ne každý zákazník potřebuje stejnou hloubku. Začátečník chce bezpečný postup. Pokročilý uživatel chce rychlou odpověď. Administrátor chce znát dopady na tým, data a oprávnění.
+
+Rozděl edukaci na tři vrstvy:
+
+- **Rychlá pomoc v produktu:** krátký text u formuláře, tooltip, prázdný stav nebo inline vysvětlení.
+- **Praktický návod:** samostatný článek s kroky, očekávaným výsledkem a častými chybami.
+- **Rozhodovací průvodce:** delší text pro nastavení procesů, rolí, bezpečnosti nebo migrace.
+
+Příklad u pozvání uživatele:
+
+- Inline pomoc: „Pozvánka odejde na e-mail a platí do konce týdne.“
+- Návod: „Jak přidat kolegu, změnit mu roli a ověřit přístup.“
+- Průvodce: „Jak nastavit role pro obchod, support a administrátory.“
+
+Tahle struktura brání dvěma extrémům. První extrém je produkt bez vysvětlení, kde support supluje chybějící texty. Druhý extrém je dokumentace tak obsáhlá, že ji nikdo nečte, protože se bojí zestárnout už při otevření první stránky.
+
+### BG.3 U každého návodu ukaž hotový stav
+
+Mnoho návodů popisuje kroky, ale neříká, jak poznat úspěch. Zákazník pak postup dokončí a stejně si není jistý, jestli udělal správnou věc. To zvyšuje support dotazy a snižuje důvěru.
+
+Každý praktický návod zakonči částí „Jak poznáš, že je hotovo“:
+
+- v účtu se objeví nový člen s rolí „editor“,
+- zákazník dostane potvrzovací e-mail,
+- export se stáhne jako soubor ve formátu CSV,
+- notifikace se zapíše do historie událostí,
+- změna se projeví až u nových faktur, ne zpětně.
+
+Dobré je doplnit i část „Kdy kontaktovat support“:
+
+- pozvánka nedorazila ani po kontrole spamu,
+- role nejde změnit kvůli vlastnictví účtu,
+- export se nespustil do několika minut,
+- změna má dopad na fakturaci nebo smlouvu,
+- zákazník potřebuje výmaz nebo omezení zpracování dat.
+
+Privacy-first poznámka: u datových operací vždy vysvětli, co se stane s daty. Když zákazník exportuje, maže, anonymizuje nebo sdílí údaje, nemá hádat, jestli vznikne kopie někde bokem. V Evropě je srozumitelnost součást důvěry, ne dekorace k právním dokumentům.
+
+### BG.4 Převáděj support dotazy na vzdělávací aktiva
+
+Support je nejlevnější výzkum edukace, pokud ho nebereš jako rušivý šum. Každý opakovaný dotaz je kandidát na zlepšení produktu, nápovědy nebo onboardingu.
+
+Jednou týdně projdi support dotazy a označ:
+
+- otázky, které se opakují,
+- kroky, kde lidé chybují,
+- pojmy, kterým nerozumí,
+- místa, kde zákazník očekával jiné chování,
+- situace, kde si není jistý datovým dopadem.
+
+Pak u každého vzorce rozhodni:
+
+- **Produktová úprava:** jde problém odstranit přímo v rozhraní?
+- **Inline vysvětlení:** stačí krátký text ve správném místě?
+- **Návod:** potřebuje zákazník postup krok za krokem?
+- **Školení nebo video:** jde o širší proces, který se lépe vysvětluje na příkladu?
+- **Obchodní komunikace:** vzniká problém už při prodeji kvůli špatnému očekávání?
+
+Nevytvářej článek na všechno. Pokud se lidé ptají na stejnou věc, protože je rozhraní matoucí, lepší edukace je oprava rozhraní. Nápověda nemá být náplast na produktovou ránu, která stále krvácí do supportu. Fuj, metafora ostrá, ale sedí.
+
+### BG.5 Edukuj i administrátory a rozhodovatele
+
+U B2B SaaS často produkt denně používá jeden typ lidí, ale o pokračování rozhoduje jiný typ lidí. Pokud edukuješ jen koncové uživatele, může se stát, že produkt má dobrou adopci, ale slabě vysvětlenou hodnotu pro vedení.
+
+Připrav proto obsah pro tři role:
+
+- **Uživatel:** jak dokončit práci rychleji a bez chyb.
+- **Administrátor:** jak nastavit tým, role, oprávnění, integrace a bezpečnost.
+- **Rozhodovatel:** jak poznat hodnotu, číst reporty a vyhodnotit návratnost.
+
+Příklad pro zákaznický portál:
+
+- Uživatel: „Jak zadat požadavek a doplnit chybějící informace.“
+- Administrátor: „Jak nastavit typy požadavků, odpovědné osoby a SLA.“
+- Rozhodovatel: „Jak po měsíci vyhodnotit objem požadavků a úsporu času.“
+
+Rozhodovatelský obsah nemusí být marketingová pohádka s grafem stoupajícím doprava nahoru. Má být praktický: co sledovat, jak často, jak poznat riziko a jaké otázky položit týmu. Pokud produkt šetří čas, ukaž, kde se čas ztrácí a jak se změna projeví v procesu.
+
+### BG.6 Měř edukaci bez sledovacího cirkusu
+
+Edukaci můžeš měřit privacy-first způsobem. Nepotřebuješ sledovat každého uživatele po minutách, nahrávat session replay nebo stavět profil toho, kdo si v nápovědě četl článek o fakturaci v 22:47. Potřebuješ vědět, jestli edukace pomáhá lidem dokončit práci.
+
+Praktické metriky:
+
+- počet návštěv klíčových návodů,
+- kliknutí z produktu do nápovědy,
+- pokles opakovaných support dotazů k tématu,
+- počet ticketů vyřešených odkazem na návod,
+- dokončení onboardingového kroku po zobrazení nápovědy,
+- počet článků označených k revizi.
+
+Metriky drž agregované a krátkodobě použitelné. Pokud nepotřebuješ identitu konkrétního člověka, nesbírej ji. Pokud potřebuješ propojit edukaci se supportem, pracuj spíš s tématy a účty než s detailním sledováním jednotlivých kliků. Cílem je zlepšit systém, ne udělat z nápovědy výslechovou lampu.
+
+### BG.7 Šablona: edukační karta tématu
+
+Použij tuhle kartu pro každý větší onboardingový nebo supportní vzorec:
+
+```md
+## Edukační téma: [název]
+
+### Situace zákazníka
+- Co se snaží udělat:
+- Kdy na problém narazí:
+- Jakými slovy problém popisuje:
+
+### Cílová role
+- Uživatel / administrátor / rozhodovatel:
+- Co už pravděpodobně ví:
+- Co se musí naučit:
+
+### Doporučená forma
+- Inline text:
+- Praktický návod:
+- Průvodce / školení:
+
+### Hotový stav
+- Jak zákazník pozná, že uspěl:
+- Jaký další krok doporučíme:
+
+### Privacy-first kontrola
+- Jaká data se v postupu používají:
+- Co nesmí být ve screenshotu nebo příkladu:
+- Je potřeba zmínit export, retenci nebo oprávnění:
+
+### Měření
+- Jak poznáme, že edukace pomohla:
+- Kdy článek zkontrolujeme znovu:
+```
+
+### BG.8 Checklist: edukace, která se používá
+
+Před tím, než prohlásíš zákaznickou edukaci za hotovou, projdi:
+
+- [ ] Nápověda je strukturovaná podle zákaznických úkolů, ne jen podle menu produktu.
+- [ ] Každý praktický návod řeší jeden konkrétní úkol.
+- [ ] Články obsahují očekávaný výsledek a jasný hotový stav.
+- [ ] U rizikových kroků je uvedeno, kdy kontaktovat support.
+- [ ] Datové operace vysvětlují dopad na export, sdílení, retenci nebo výmaz.
+- [ ] Support dotazy se každý týden převádějí na zlepšení produktu, nápovědy nebo onboardingu.
+- [ ] Existuje obsah pro uživatele, administrátory i rozhodovatele.
+- [ ] Měření edukace používá agregované signály a minimum osobních dat.
+- [ ] Screenshoty a příklady neobsahují reálná zákaznická data.
+- [ ] Každý důležitý článek má vlastníka a datum další revize.
+
+Zákaznická edukace je tichý obchodník, support specialista a produktový průvodce v jednom. Když funguje, zákazník má méně nejistoty, tým má méně opakované práce a produkt působí dospěleji. Ne proto, že všechno vysvětluje do posledního pixelu, ale proto, že lidem pomáhá udělat další správný krok.
+
 ## Pracovní log
+
+- 2026-08-31 06:00 UTC — Doplněna příloha BG o zákaznické edukaci: struktura podle úkolů, tři vrstvy pomoci, hotový stav návodu, převod support dotazů na vzdělávací aktiva, role uživatelů, privacy-first měření, šablona a checklist.
 
 - 2026-08-31 05:04 UTC — Doplněna příloha BF o škálování supportu bez ztráty osobního kontextu: zákaznická karta, typy dotazů, předávání vývoji, automatizace, knowledge loop a privacy-first checklist.
 
