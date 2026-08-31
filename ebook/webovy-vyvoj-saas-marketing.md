@@ -11978,7 +11978,175 @@ Použij ji před tím, než začneš kreslit další sekci portálu.
 
 Zákaznický portál má být tiché centrum spolupráce. Když funguje, zákazník nepotřebuje psát „jak to vypadá?“ a tým nemusí lovit poslední verzi dokumentu v e-mailové archeologii. To je nenápadný luxus: méně dotazů, méně chyb, víc důvěry a výrazně méně situací, kdy někdo pošle citlivou přílohu na špatnou adresu.
 
+## Příloha BO: Retenční plán dat, který uklízí dřív, než vznikne problém
+
+Data v malém SaaS týmu často nepřibývají dramaticky. Přibývají nenápadně: staré exporty, testovací databáze, logy, formulářové přílohy, nahrávky hovorů, analytické eventy, debug soubory, fakturační metadata, dávno neaktivní účty. Každý kousek sám o sobě nevypadá nebezpečně. Dohromady z toho ale vznikne datová půda, na které roste riziko jako plevel po dešti.
+
+Retenční plán není právnická dekorace do šuplíku. Je to provozní pravidlo, které říká: co držíme, proč to držíme, jak dlouho to držíme, kdo to může vidět a kdy to bezpečně smažeme nebo anonymizujeme. Privacy-first tým tím neztrácí paměť. Jen odmítá skladovat všechno navždy, protože „co kdyby se to někdy hodilo“. Tohle je mimochodem věta, která už pohřbila víc databází než špatný SQL dotaz bez `WHERE`.
+
+### BO.1 Začni inventurou datových hromádek
+
+Nejdřív nepotřebuješ dokonalý datový katalog. Potřebuješ projít místa, kde se data reálně válejí. U každého zdroje si napiš krátkou kartu:
+
+- **Systém:** kde data vznikají nebo končí.
+- **Typ dat:** účet, kontakt, poptávka, fakturace, support, analytika, log, soubor.
+- **Účel:** proč data vůbec potřebujeme.
+- **Vlastník:** kdo rozhoduje o použití a mazání.
+- **Riziko:** nízké, střední, vysoké.
+- **Retence:** jak dlouho data držíme v aktivním systému.
+- **Ukončení:** smazání, anonymizace, agregace nebo archivace.
+
+Praktická místa ke kontrole:
+
+- databáze aplikace,
+- CRM nebo tabulky s leady,
+- e-mailové schránky a přílohy,
+- support nástroj,
+- analytika a eventy,
+- aplikační a serverové logy,
+- zálohy,
+- sdílené disky,
+- testovací prostředí,
+- nástroje pro AI asistenci a automatizace.
+
+První verze inventury může být obyčejná tabulka. Důležité je, aby nepopisovala ideální svět, ale skutečný provoz. Když někdo jednou měsíčně ručně exportuje zákazníky do CSV a posílá si je do počítače, patří to do mapy. Ano, i když je to trapné. Hlavně tehdy.
+
+### BO.2 Každému typu dat dej důvod existence
+
+Data bez účelu jsou drahý suvenýr. Platíš za úložiště, zálohování, zabezpečení, vysvětlování a případný incident. U každé kategorie si proto polož tři otázky:
+
+1. Jaké rozhodnutí nebo službu tahle data podporují?
+2. Co se rozbije, když je smažeme dřív?
+3. Stačí nám anonymizovaná nebo agregovaná verze?
+
+Příklad:
+
+- **Surové analytické eventy:** potřebujeme je krátce pro ladění funnelu a kontrolu chyb v měření.
+- **Agregované měsíční statistiky:** stačí dlouhodobě pro trend návštěvnosti, konverzí a obsahu.
+- **Individuální historie klikání:** většinou ji nepotřebujeme vůbec, pokud nestavíme produkt, kde je přímo součástí služby.
+
+U zákaznických účtů rozlišuj provozní a historickou hodnotu. Aktivní účet potřebuje kontakty, role, nastavení, fakturační stav a support kontext. Uzavřený účet často nepotřebuje plný pracovní detail navždy. Hodnota se přesouvá z osobních dat do agregované zkušenosti: proč zákazníci odcházejí, které funkce používali, jaké typy problémů se opakovaly.
+
+*Codyho komentář:* Nejlepší retenční otázka není „můžeme si to nechat?“ ale „umíme obhájit, proč to ještě potřebujeme?“ To první hledá výmluvu. To druhé vede k dobrému produktu.
+
+### BO.3 Navrhni retenční vrstvy místo jedné magické lhůty
+
+Jedna retenční lhůta pro všechno je pohodlná jen na papíře. V praxi má každý typ dat jiný rytmus. Rozumný plán pracuje s vrstvami:
+
+- **Krátká provozní retence:** debug logy, dočasné exporty, importní soubory, chybové záznamy.
+- **Střední zákaznická retence:** support tickety, onboardingové poznámky, aktivní nastavení, pracovní dokumenty.
+- **Dlouhá účetní nebo smluvní retence:** faktury, smlouvy, objednávky, auditní stopa potřebná pro obhajobu služby.
+- **Trvalá agregace bez identifikace:** metriky produktu, poučení z incidentů, obsahové trendy, anonymizované statistiky.
+
+Místo přesných čísel si v první verzi napiš rozhodovací pravidlo. Například:
+
+- dočasné exporty mažeme po dokončení účelu,
+- technické logy držíme jen tak dlouho, aby šly řešit běžné incidenty,
+- neaktivní účty pravidelně označujeme a připravujeme k uzavření,
+- osobní data nahrazujeme agregací, jakmile už nepotřebujeme individuální detail,
+- zálohy mají vlastní kratší cyklus a nejsou náhradou za archiv.
+
+Když do textu doplňuješ konkrétní zákonné lhůty, ověř je pro danou zemi, typ dokumentu a účetní režim. Tady e-book záměrně drží principy, ne univerzální právní radu. Právní univerzální rada je obvykle jen dražší verze věty „záleží“.
+
+### BO.4 Mazání musí být proces, ne hrdinský ruční zásah
+
+Retenční plán bez mazacího procesu je jen přání. Nestačí napsat „data smažeme“. Musíš vědět, kdo spouští kontrolu, kde se mazání provede a jak poznáš, že nezůstala kopie v koutě.
+
+Minimální proces:
+
+1. **Označení kandidátů:** systém nebo pravidelný audit najde data po účelu.
+2. **Kontrola výjimky:** ověří se, jestli neexistuje otevřený spor, aktivní smlouva nebo technický důvod držení.
+3. **Akce:** smazání, anonymizace, agregace nebo přesun do omezeného archivu.
+4. **Záznam:** uloží se auditní stopa akce bez kopírování původního citlivého obsahu.
+5. **Kontrola záloh:** víš, kdy data přirozeně zmizí i ze záložních cyklů.
+
+U malého týmu může první verze fungovat jako měsíční checklist. Později automatizuj nejčastější případy: expiraci dočasných exportů, mazání starých logů, anonymizaci neaktivních analytických detailů, upozornění na zákaznické účty bez aktivity.
+
+Pozor na falešný klid: když smažeš data v aplikaci, ale zůstanou v e-mailové příloze, sdíleném disku a testovací databázi, nesmazal jsi data. Jen jsi vypnul jednu lampičku v místnosti plné reflektorů.
+
+### BO.5 Testovací prostředí nesmí být datový kompost
+
+Testovací databáze bývá největší tichý průšvih. Produkční data se zkopírují „jen na chvíli“, pak se něco ladí, někdo přidá externího dodavatele, zapomene se snapshot, změní se tým a najednou má staré osobní údaje prostředí, které nikdo nehlídá stejně přísně jako produkci.
+
+Pravidla pro testovací data:
+
+- preferuj syntetická data,
+- pokud potřebuješ reálný tvar dat, anonymizuj nebo maskuj identifikátory,
+- nikdy nekopíruj citlivé přílohy jen kvůli layoutu,
+- omez přístupy stejně vědomě jako v produkci,
+- nastav automatické expirace snapshotů,
+- zapisuj, kdo a proč výjimku povolil.
+
+Dobrá testovací data mají vypadat realisticky, ale nemají být reální lidé. Jméno „Jan Testovací“ je nudné, ale pořád lepší než skutečný zákazník v logu screenshotu na Slacku. A ano, screenshoty jsou taky data. Bohužel neumí předstírat, že nejsou.
+
+### BO.6 Retenci komunikuj jako důvěru, ne jako výmluvu
+
+Privacy-first přístup se dá dobře vysvětlit i zákazníkům. Nemusíš z toho dělat právní román. Stačí lidsky popsat princip:
+
+- sbíráme jen data, která potřebujeme pro službu,
+- citlivá data držíme co nejkratší smysluplnou dobu,
+- stará data mažeme nebo anonymizujeme,
+- zákazník má vědět, kde jsou jeho data a kdo k nim má přístup,
+- export a ukončení spolupráce řešíme férově a předvídatelně.
+
+Tohle patří do obchodní komunikace, bezpečnostní stránky i interního onboardingu. Retence není jen IT úklid. Je to součást značky. Když zákazník vidí, že nepovažuješ jeho data za surovinu k nekonečnému skladování, posiluje to důvěru víc než další stock fotka týmu u notebooku.
+
+### BO.7 Šablona: karta retenčního pravidla
+
+Použij ji pro každý významný typ dat.
+
+## Retenční pravidlo: [typ dat]
+
+### Účel
+
+- Proč data vznikají:
+- Jakou službu nebo rozhodnutí podporují:
+- Kdo je vlastníkem pravidla:
+
+### Umístění
+
+- Primární systém:
+- Kopie nebo exporty:
+- Zálohy:
+- Testovací prostředí:
+
+### Retence
+
+- Aktivní držení:
+- Archivace:
+- Mazání nebo anonymizace:
+- Výjimky:
+
+### Přístupy
+
+- Kdo data vidí:
+- Kdo je může exportovat:
+- Kdo schvaluje výjimku:
+
+### Kontrola
+
+- Jak často pravidlo revidujeme:
+- Jak poznáme, že funguje:
+- Kde je auditní stopa:
+
+### BO.8 Checklist: retenční plán bez chaosu
+
+- [ ] Máme inventuru hlavních míst, kde vznikají a končí zákaznická data.
+- [ ] Každý typ dat má jasný účel a vlastníka.
+- [ ] Rozlišujeme krátkou provozní, zákaznickou, účetní/smluvní a anonymizovanou agregovanou vrstvu.
+- [ ] Dočasné exporty a importní soubory mají pravidlo mazání.
+- [ ] Logy neobsahují zbytečný osobní obsah a mají omezenou retenci.
+- [ ] Neaktivní účty mají proces uzavření, exportu, anonymizace nebo smazání.
+- [ ] Testovací prostředí nepoužívá produkční data bez schválené a časově omezené výjimky.
+- [ ] Zálohy mají jasný cyklus a nejsou považované za archiv pro běžnou práci.
+- [ ] Mazání nebo anonymizace má auditní stopu bez kopírování původních citlivých dat.
+- [ ] Retenční principy umíme stručně vysvětlit zákazníkovi.
+
+Retenční plán je nenápadná disciplína, která chrání produkt před vlastní minulostí. Čím déle SaaS běží, tím víc starých dat se snaží tvářit jako aktivum. Někdy jím opravdu jsou. Často jsou ale jen riziko s nostalgickým názvem souboru. Privacy-first tým pozná rozdíl a má odvahu uklidit.
+
 ## Pracovní log
+
+- 2026-08-31 14:00 UTC — Doplněna příloha BO o retenčním plánu dat: inventura datových hromádek, účel držení, retenční vrstvy, proces mazání, testovací data, zákaznická komunikace, šablona pravidla a privacy-first checklist.
 
 - 2026-08-31 13:00 UTC — Doplněna příloha BN o zákaznickém portálu: zákaznické otázky, pracovní layout, role a oprávnění, kontext dat, dokumenty, notifikace, portálová karta a privacy-first checklist.
 
