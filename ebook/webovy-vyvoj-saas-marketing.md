@@ -9877,7 +9877,201 @@ Prvních 30 dní po launchi je most mezi nadšením a opakovatelností. Když ho
 
 ---
 
+## Příloha BD: Čtvrtletní review po prvních zákaznících
+
+Po prvních týdnech už máš víc než dojmy z launche. Máš opakované otázky, první platby, první odmítnutí, první support konverzace a několik momentů, kdy si tým řekl: „Aha, tohle jsme si představovali trochu moc optimisticky.“ Výborně. To není selhání, to je začátek reálného produktu.
+
+Čtvrtletní review má jednu hlavní úlohu: oddělit produkt, který jen přežil start, od produktu, který má šanci růst. Nejde o korporátní prezentaci s třiceti slidy a třemi grafy, které nikdo nepoužije. Jde o pracovní rozhodnutí: co posílit, co zjednodušit, co přestat dělat a jak ochránit důvěru zákazníků, než začneš škálovat.
+
+*Codyho komentář:* První kvartál je chvíle, kdy se hezké hypotézy potkají s realitou. Realita občas přijde v botách od bláta, ale aspoň nelže.
+
+### BD.1 Začni otázkou, ne dashboardem
+
+Dashboard je užitečný až ve chvíli, kdy víš, co se chceš rozhodnout. Jinak jen soutěžíš v tom, kdo najde zajímavější číslo. Čtvrtletní review proto začni třemi otázkami:
+
+1. **Komu dnes pomáháme nejlépe?**
+2. **Jakou hodnotu umíme dodat opakovaně?**
+3. **Co nám brání dodat ji rychleji, bezpečněji nebo ziskověji?**
+
+Teprve potom vytáhni data. U malého SaaS nebo služby ti většinou stačí jednoduchý balík důkazů:
+
+- počet nových zákazníků a poptávek,
+- počet aktivovaných zákazníků,
+- nejčastější důvody nákupu,
+- nejčastější důvody odmítnutí,
+- typické support problémy,
+- čas od prvního kontaktu k hodnotě,
+- manuální práce, která se opakuje.
+
+Nesnaž se ze začátku vypadat jako analytické oddělení banky. Lepší je pět čísel, která mění rozhodnutí, než padesát čísel, která vypadají dospěle a nikdo podle nich nic neudělá.
+
+### BD.2 Rozděl zákazníky podle signálu, ne podle ega
+
+První zákazníci nejsou všichni stejně užiteční pro další směr. Někteří ukážou ideální segment. Někteří přinesou peníze, ale také tolik výjimek, že by kvůli nim produkt zmutoval v interní ERP hydru. Někteří jsou nadšení, ale nikdy nezaplatí. V review je rozděl do čtyř skupin:
+
+- **Jasný fit:** zákazník má častý problém, rozumí hodnotě, platí nebo chce platit a nepotřebuje extrémní úpravy.
+- **Možný fit:** problém existuje, ale chybí rozpočet, timing, rozhodovatel nebo jasný aktivační moment.
+- **Zakázková past:** zákazník zaplatí, ale chce tolik výjimek, že bys postavil produkt jen pro něj.
+- **Šum:** zajímavé rozhovory, komplimenty, dlouhé e-maily a nulový pohyb k rozhodnutí.
+
+Ke každému segmentu napiš konkrétní příklady. Ne „menší firmy reagují dobře“, ale „účetní kanceláře s 5–20 lidmi chtějí hlavně ztracené požadavky a stav řešení“. Tohle je rozdíl mezi marketingem a mlhou v krabici.
+
+Praktická tabulka:
+
+```md
+| Segment | Problém | Signál hodnoty | Námitka | Doporučení |
+|---|---|---|---|---|
+| Servisní firmy 10–50 lidí | Stav požadavků v e-mailech | Ptají se na demo a workflow | Migrace historie | Vytvořit landing page pro servis |
+| Velké enterprise týmy | Integrace do interních systémů | Chtějí bezpečnostní dotazník | Dlouhý nákup | Neprioritizovat teď |
+```
+
+### BD.3 Najdi opakovatelnou hodnotu
+
+V prvním kvartálu nesmíš hodnotit jen tržby. Musíš zjistit, jestli umíš dodat hodnotu opakovaně bez heroického výkonu pokaždé od nuly. Polož si otázky:
+
+- Který výsledek se u zákazníků opakuje?
+- Jak rychle se k němu dostanou?
+- Kde potřebují ruční pomoc?
+- Co se dá převést do produktu, šablony nebo dokumentace?
+- Co je pořád individuální konzultace a má tak i zůstat?
+
+Příklad: Pokud každý zákazník potřebuje ručně nastavit stejných pět kategorií, není to nutně problém. Může to být onboarding šablona. Pokud ale každý zákazník potřebuje tři týdny vlastního vývoje, aby pochopil základní hodnotu, nemáš ještě škálovatelný SaaS. Máš službu v kostýmu produktu. Někdy je to v pořádku, ale musíš to vědět.
+
+Zapisuj hodnotu ve formátu:
+
+```md
+Zákazník: [typ zákazníka]
+Původní stav: [konkrétní bolest]
+Nový stav: [co je lepší]
+Důkaz: [citace, číslo, chování, platba]
+Co se opakuje: [část procesu]
+Co bylo ruční: [část, kterou je třeba zjednodušit]
+```
+
+### BD.4 Vyčísli provozní tření
+
+Malý tým často netrpí tím, že má málo nápadů. Trpí tím, že každý zákazník přidá jeden drobný ruční krok a po třech měsících vznikne provozní kompost. Proto do review zahrň i tření, které zákazník nemusí vidět:
+
+- ruční nastavování účtů,
+- kopírování dat mezi systémy,
+- opakované vysvětlování stejné věci,
+- nejasné odpovědnosti v supportu,
+- chyby kvůli chybějícím checklistům,
+- výjimky v cenách, smlouvách nebo oprávněních.
+
+Každému tření dej jednoduché skóre:
+
+- **Dopad na zákazníka:** nízký / střední / vysoký.
+- **Dopad na tým:** nízký / střední / vysoký.
+- **Četnost:** jednou / občas / pořád.
+- **Řešení:** automatizovat / zdokumentovat / odstranit / vědomě nechat ručně.
+
+Neautomatizuj všechno. Automatizace špatného procesu je jen rychlejší chaos. Nejdřív proces pojmenuj, zkrať a teprve potom přemýšlej, jestli ho má dělat software.
+
+### BD.5 Privacy-first škálování: zkontroluj, co se mezitím nasbíralo
+
+Po prvním kvartálu už nejde jen o krásné zásady. V systému jsou reálná data: poptávky, poznámky, účty, logy, support zprávy, fakturační informace, možná i importy od zákazníků. Review musí obsahovat datový úklid.
+
+Projdi minimálně:
+
+- **Formuláře:** Sbíráme pořád jen data, která opravdu potřebujeme?
+- **CRM nebo evidence poptávek:** Máme u každého kontaktu důvod a stav?
+- **Support:** Neleží v ticketech citlivé přílohy déle, než musí?
+- **Logy:** Neukládáme do logů e-maily, tokeny, osobní poznámky nebo celé payloady?
+- **Analytika:** Umíme rozhodovat z agregovaných dat bez identifikace jednotlivců?
+- **Přístupy:** Odešli lidé nebo dodavatelé, kteří mají pořád přístup?
+- **Retence:** Víme, kdy která data mažeme nebo anonymizujeme?
+
+Privacy-first provoz není jednorázová stránka v patičce. Je to opakovaný návyk. Čím dřív ho dáš do review rytmu, tím méně bude bolet pozdější audit, enterprise dotazník nebo nepříjemná otázka od zákazníka.
+
+### BD.6 Rozhodni, co bude další kvartál hlavní sázka
+
+Na konci review nesmí vzniknout dvacet priorit. To je jen backlog s kravatou. Vyber jednu hlavní sázku pro další kvartál a maximálně dvě podpůrné věci.
+
+Možné typy sázek:
+
+- **Zúžit segment:** soustředit web, obsah a prodej na zákazníky s nejsilnějším signálem.
+- **Zrychlit aktivaci:** dostat zákazníka k první hodnotě za polovinu času.
+- **Zjednodušit provoz:** odstranit největší ruční tření v onboardingu nebo supportu.
+- **Zvýšit důvěru:** doplnit case study, bezpečnostní stránku, privacy dokumentaci nebo status page.
+- **Ověřit cenu:** upravit balíčky podle skutečné hodnoty a nákupního procesu.
+
+Dobré rozhodnutí vypadá takhle:
+
+```md
+Hlavní sázka: Zrychlit aktivaci servisních firem.
+Proč: 4 z 6 platících zákazníků mají stejný problém a onboarding trvá ručně 6–8 hodin.
+Co uděláme: Připravíme šablonu kategorií, importní checklist a onboarding e-mailovou sekvenci bez trackerů.
+Co nebudeme dělat: Nebudeme teď stavět enterprise integrace ani nový reporting modul.
+Měřítko úspěchu: První hodnota do 3 pracovních dnů od dodání vstupů.
+Privacy kontrola: Importní data smažeme po potvrzení nastavení, pokud zákazník nechce jinak.
+```
+
+### BD.7 Šablona kvartálního review
+
+```md
+# Kvartální review produktu
+
+Období:
+Datum review:
+Účastníci:
+Autor zápisu:
+
+## 1. Zákaznický signál
+- Počet nových poptávek:
+- Počet platících zákazníků:
+- Počet aktivovaných zákazníků:
+- Nejsilnější segment:
+- Segmenty, které zatím neprioritizujeme:
+
+## 2. Hodnota
+- Nejčastější původní bolest:
+- Nejčastější nový stav po použití produktu/služby:
+- Důkaz hodnoty:
+- Kde je hodnota pořád moc pomalá:
+
+## 3. Provozní tření
+- Největší ruční práce:
+- Nejčastější support téma:
+- Nejrizikovější výjimka:
+- Co zjednodušíme:
+
+## 4. Privacy-first kontrola
+- Data, která už nepotřebujeme:
+- Data v logách nebo supportu ke kontrole:
+- Přístupy k odebrání:
+- Retenční pravidlo ke zpřesnění:
+
+## 5. Rozhodnutí pro další kvartál
+- Hlavní sázka:
+- Proč právě teď:
+- Co uděláme:
+- Co vědomě neděláme:
+- Měřítko úspěchu:
+- Vlastník:
+- První termín kontroly:
+```
+
+### BD.8 Checklist: kvartální review po prvních zákaznících
+
+- [ ] Review začíná rozhodovacími otázkami, ne procházením všech dostupných grafů.
+- [ ] Zákazníci jsou rozdělení podle síly signálu, ne podle toho, kdo nejhlasitěji píše.
+- [ ] Tým ví, komu produkt dnes pomáhá nejlépe a koho zatím neprioritizuje.
+- [ ] Hodnota je popsaná jako posun zákazníka z původního do nového stavu.
+- [ ] Opakované ruční kroky jsou zapsané jako kandidáti na šablonu, dokumentaci nebo automatizaci.
+- [ ] Provozní tření má skóre podle dopadu, četnosti a typu řešení.
+- [ ] Datový úklid zahrnuje formuláře, CRM, support, logy, analytiku, přístupy a retenci.
+- [ ] Privacy-first rozhodnutí jsou součástí produktového směru, ne oddělená právní poznámka.
+- [ ] Další kvartál má jednu hlavní sázku a jasně pojmenované věci, které se teď dělat nebudou.
+- [ ] Výsledek review je krátké memo, které tým opravdu použije při plánování práce.
+
+Čtvrtletní review je brzda proti náhodnému růstu. Pomůže ti nezaměnit první tržby za product-market fit, hlasité zákazníky za ideální segment a automatizaci za strategii. Když ho uděláš poctivě, další kvartál nezačne pocitem „měli bychom něco vymyslet“, ale jasnou odpovědí, co má největší šanci posunout produkt dál.
+
+---
+
 ## Pracovní log
+
+- 2026-08-31 03:01 UTC — Doplněna příloha BD o kvartálním review po prvních zákaznících: rozhodovací otázky, segmentace podle signálu, opakovatelná hodnota, provozní tření, privacy-first datový úklid, hlavní sázka dalšího kvartálu, šablona a checklist.
 
 - 2026-08-31 02:00 UTC — Doplněna příloha BC o prvních 30 dnech po launchi: stabilizační rytmus, krátký hlídací panel, třídění oprav a sázek, práce s prvními zákazníky, segmentové vyhodnocení, rozhodovací memo a privacy-first checklist.
 
