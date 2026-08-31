@@ -10069,7 +10069,173 @@ Autor zápisu:
 
 ---
 
+## Příloha BE: Kdy přestat stavět nové funkce a začít zjednodušovat
+
+Po prvních zákaznících je lákavé přidávat další a další funkce. Každý rozhovor přinese nový nápad, každý větší zákazník chce jednu výjimku a backlog vypadá jako důkaz, že produkt žije. Jenže produkt často neumře proto, že má málo funkcí. Umře proto, že se v něm už nikdo nevyzná: zákazník, support ani zakladatel.
+
+Zjednodušování není brzda růstu. Je to údržba trakce. Když odstraníš zbytečné volby, mrtvé obrazovky, matoucí nastavení a poloviční automatizace, zrychlíš onboarding, snížíš podporu a uděláš prostor pro funkce, které skutečně nesou hodnotu.
+
+*Codyho komentář:* Přidat funkci je jednoduché. Vysvětlit ji zákazníkovi, udržovat ji, testovat ji, hlídat její data a jednou ji odstranit — tam začíná skutečný účet. Software není bufet. Není cílem mít od všeho trochu.
+
+### BE.1 Poznej moment, kdy backlog začíná škodit
+
+Backlog je užitečný, dokud pomáhá rozhodovat. Jakmile se z něj stane sběrné místo pro všechno, co někdo někdy zmínil, začne vytvářet falešný pocit pokroku. Typické signály:
+
+- zákazníci se ptají, co mají udělat jako první,
+- onboarding potřebuje stále víc vysvětlování,
+- support opakovaně řeší stejné nejasnosti,
+- tým se bojí upravit staré části produktu,
+- nové funkce používá jen jeden zákazník nebo nikdo,
+- dokumentace nestíhá produkt,
+- jednoduchá otázka vyžaduje tři interní vysvětlení.
+
+V tu chvíli není další sprint na nové funkce automaticky nejlepší odpověď. Často je lepší jeden sprint na odstranění tření. Prakticky: vyber jednu zákaznickou cestu, například registraci, první nastavení nebo vytvoření prvního projektu, a projdi ji bez znalosti interní logiky. Každé místo, kde musíš říct „to je trochu historické“, je kandidát na zjednodušení.
+
+### BE.2 Rozliš čtyři typy produktového nepořádku
+
+Ne všechno složité je špatné. Některé složité věci řeší složitý problém. Problém je nepojmenovaný nepořádek. Rozděl ho do čtyř kategorií:
+
+- **Mrtvé funkce:** existují, ale zákazníci je nepoužívají nebo nikdo neumí říct, proč jsou důležité.
+- **Poloviční funkce:** používají se, ale jen s ruční pomocí, workaroundem nebo interním vysvětlením.
+- **Duplicitní cesty:** stejný výsledek jde udělat více způsoby a každý má trochu jiné chování.
+- **Datové bahno:** funkce sbírá, ukládá nebo zobrazuje data, která už nejsou potřeba nebo nejsou jasně vlastněná.
+
+Ke každé položce přidej rozhodnutí: ponechat, zjednodušit, spojit, skrýt, odstranit, nebo převést do služby. Poslední možnost je důležitá. Pokud něco potřebují jen dva velcí zákazníci a vyžaduje to lidský úsudek, možná to nepatří do produktu. Možná je to placená konzultační nebo integrační služba.
+
+Příklad zápisu:
+
+```md
+Funkce: Vlastní štítky u kontaktů
+Použití: 3 z 28 aktivních účtů
+Problém: zákazníci nerozumí rozdílu mezi štítkem a stavem pipeline
+Dopad na support: 6 dotazů za měsíc
+Datové riziko: občas se do štítků píší osobní poznámky
+Rozhodnutí: sjednotit se stavem pipeline a přidat řízené volby
+```
+
+### BE.3 Udělej zjednodušovací sprint jako normální produktovou práci
+
+Zjednodušení nesmí být „až bude čas“. Čas nebude. Backlog mezitím sní další polici v lednici a začne se tvářit jako strategická roadmapa. Dej zjednodušení stejnou váhu jako nové funkci:
+
+1. Vyber jednu oblast produktu.
+2. Napiš, jaký zákaznický výsledek má být jednodušší.
+3. Sesbírej důkazy: support dotazy, nahrávky rozhovorů, interní poznámky, analytiku používání, ruční kroky.
+4. Navrhni nejmenší změnu, která sníží tření.
+5. Předem urči, co po sprintu už nebude existovat.
+6. Po vydání uprav dokumentaci, šablony, onboarding a support odpovědi.
+
+Dobré cíle zjednodušovacího sprintu zní konkrétně:
+
+- „Nový zákazník vytvoří první projekt bez callu.“
+- „Obchodník uvidí stav poptávky bez ručního filtrování.“
+- „Support odpoví na dotaz k fakturaci z jedné obrazovky.“
+- „Z formuláře odstraníme tři pole, která nepoužíváme k rozhodnutí.“
+
+Špatný cíl zní: „Vyčistit UX.“ To je hezké, ale neurčité. A neurčité cíle mají tendenci skončit jako nová ikonka a dvě nekonečné debaty o odstínu šedé.
+
+### BE.4 Maž opatrně, ale opravdu maž
+
+Odstranění funkce je citlivé, protože i málo používaná věc může být pro někoho důležitá. Proto nemaž naslepo. Ale pokud po ověření zjistíš, že funkce nepřináší hodnotu, nemaž ji jen v hlavě. Odstraň ji i z produktu, dokumentace, nápovědy, obchodních slibů a interních checklistů.
+
+Bezpečný postup:
+
+- **Změř použití:** kolik účtů funkci používá, jak často a v jakém kontextu.
+- **Ověř dopad:** kontaktuj aktivní zákazníky, pokud by změna mohla zasáhnout jejich workflow.
+- **Nabídni alternativu:** přesměruj na jednodušší cestu nebo export.
+- **Dej přechodné období:** hlavně u B2B procesů, kde změna může ovlivnit interní návyky.
+- **Komunikuj důvod:** ne „rušíme funkci“, ale „zjednodušujeme cestu k výsledku a stará funkce způsobovala zmatek“.
+
+Mini šablona oznámení:
+
+```md
+Od [datum] zjednodušujeme část [oblast]. Starou možnost [název] nahradí [nová cesta], protože zákazníkům umožní [konkrétní výsledek] s menším množstvím ruční práce. Pokud tuto možnost aktivně používáte, napište nám do [datum] — pomůžeme s převodem nebo exportem.
+```
+
+### BE.5 Zjednodušuj i data, nejen obrazovky
+
+Privacy-first produkt se nezjednodušuje jen vizuálně. Musí se zjednodušovat i datově. Každá stará funkce za sebou může nechat tabulky, exporty, oprávnění, logy, webhooky a dokumentaci. Když odstraníš obrazovku, ale necháš data bez vlastníka, neuklidil jsi. Jen jsi zavřel dveře do skladu.
+
+Při každém zjednodušení projdi:
+
+- jaká data funkce sbírala,
+- kde jsou uložená,
+- kdo k nim má přístup,
+- jestli jsou ještě potřeba pro zákazníka, fakturaci, bezpečnost nebo zákonnou povinnost,
+- zda je lze smazat, anonymizovat nebo agregovat,
+- zda se neobjevují v zálohách, logách, exportech nebo integracích.
+
+Praktické pravidlo: pokud data neumíš spojit s jasným účelem, retencí a vlastníkem, nemají v produktu co dělat. A pokud je důvod držet jen „možná se to někdy hodí“, pravděpodobně se to někdy hodí hlavně auditorovi jako otázka, proč to tam pořád je. To není typ radosti, který chceš sbírat.
+
+### BE.6 Měř úspěch zjednodušení podle chování
+
+Zjednodušení není jen pocit, že produkt vypadá čistěji. Mělo by změnit chování nebo provozní náklady. Vyber dvě až čtyři metriky podle oblasti:
+
+- čas k první hodnotě,
+- počet kroků v onboardingové cestě,
+- počet support dotazů k dané části,
+- podíl zákazníků, kteří dokončí hlavní úkol,
+- počet ručních zásahů týmu,
+- počet polí nebo datových objektů bez jasného účelu,
+- počet výjimek v procesu.
+
+Nepotřebuješ sledovat jednotlivce. Stačí agregace za týden nebo měsíc, doplněná o konkrétní rozhovory. Pokud po zjednodušení klesnou support dotazy a víc zákazníků dokončí hlavní úkol, vyhráváš. Pokud se jen změnila navigace a nikdo neví proč, právě jsi provedl designovou gymnastiku. Efektní, ale trochu zbytečnou.
+
+### BE.7 Šablona: zjednodušovací karta
+
+```md
+## Zjednodušovací karta: [oblast produktu]
+
+### Proč to řešíme
+- Jaké tření dnes zákazník nebo tým zažívá?
+- Který zákaznický výsledek tím trpí?
+
+### Důkazy
+- Support dotazy:
+- Rozhovory:
+- Použití funkce:
+- Ruční kroky týmu:
+
+### Rozhodnutí
+- Ponechat:
+- Zjednodušit:
+- Spojit:
+- Skrýt:
+- Odstranit:
+
+### Datová kontrola
+- Jaká data oblast sbírá?
+- Kde jsou uložená?
+- Co smažeme, anonymizujeme nebo agregujeme?
+- Kdo je vlastník retence?
+
+### Komunikace
+- Koho změna zasáhne?
+- Jakou alternativu nabízíme?
+- Kdy změna proběhne?
+
+### Měření po změně
+- Primární signál:
+- Support signál:
+- Provozní signál:
+- Datum review:
+```
+
+### BE.8 Checklist: produkt, který umí uklízet po sobě
+
+- Má každá nová funkce jasný zákaznický výsledek?
+- Víme, které funkce se posledních 90 dní reálně používaly?
+- Máme seznam polovičních funkcí, které vyžadují ruční vysvětlení?
+- Umíme odstranit funkci včetně dat, dokumentace a obchodních slibů?
+- Kontrolujeme při zjednodušení také logy, exporty, integrace a zálohy?
+- Komunikujeme změny zákazníkům dřív, než jim rozbijí workflow?
+- Měříme úspěch zjednodušení podle dokončených úkolů, supportu a provozního tření?
+- Máme v kvartálním review místo pro rozhodnutí „teď nic nového, nejdřív uklidit“?
+
+Zralý produkt není ten, který má odpověď na každý okrajový scénář. Zralý produkt je ten, který ví, co nedělá, a umí to říct bez omluvy. Tím šetří zákazníkům pozornost, týmu energii a firmě riziko. A pozornost je v SaaS dražší než další položka v menu.
+
 ## Pracovní log
+
+- 2026-08-31 04:00 UTC — Doplněna příloha BE o zjednodušování produktu: signály škodícího backlogu, typy produktového nepořádku, zjednodušovací sprint, bezpečné mazání funkcí, datový úklid, měření dopadu, šablona a checklist.
 
 - 2026-08-31 03:01 UTC — Doplněna příloha BD o kvartálním review po prvních zákaznících: rozhodovací otázky, segmentace podle signálu, opakovatelná hodnota, provozní tření, privacy-first datový úklid, hlavní sázka dalšího kvartálu, šablona a checklist.
 
