@@ -13101,7 +13101,179 @@ Nejhorší stav je „ozveme se nějak“. To není další krok, to je digitál
 
 Discovery hovor má zákazníkovi ukázat, že umíš přemýšlet, ne jen prodávat. Když se ptáš na dopad, rozhodování a data, působíš méně jako dodavatel šablon a víc jako partner, který chápe realitu provozu. A když u toho nevysaješ z hovoru všechno, co mikrofon unese, získáš bonus navíc: důvěru.
 
+
+## Příloha BV: Nabídka po discovery, která prodává rozhodnutí místo PDF dekorace
+
+Nabídka po discovery hovoru není literární žánr „firemní prezentace s hezkou titulní stránkou“. Je to rozhodovací dokument. Má zákazníkovi pomoct pochopit, jestli se vyplatí pokračovat, jaký výsledek kupuje, co bude muset dodat a jaká rizika tím společně snižujete.
+
+Když nabídka jen opakuje seznam funkcí, zákazník ji porovnává podle ceny. Když nabídka pojmenuje problém, dopad, rozsah, hranice a další krok, zákazník porovnává hlavně důvěru. To je mnohem lepší hřiště — pokud tedy opravdu víš, co děláš. Pokud ne, nabídka tě prozradí rychleji než přepálený stock obrázek rukou nad notebookem.
+
+### BV.1 Začni situací zákazníka, ne vlastním životopisem
+
+První stránka nabídky má ukázat, že jsi poslouchal. Ne že máš deset let zkušeností, pět certifikátů a tým, který „kombinuje kreativitu s technologiemi“. To může být později. Nejdřív napiš situaci zákazníka jeho jazykem.
+
+Dobré zahájení:
+
+> Z hovoru jsme pochopili, že poptávky z webu dnes chodí do několika kanálů, obchodník je ručně přepisuje a vedení neumí rychle poznat, které zdroje přinášejí kvalitní leady. Cílem první fáze není kompletní CRM, ale spolehlivý poptávkový tok, jasné měření konverzí a provoz bez zbytečných trackerů.
+
+Slabé zahájení:
+
+> Jsme digitální studio specializované na moderní webové aplikace, UX, branding, SEO a inovativní technologická řešení.
+
+Zákazník už ví, kdo jsi. Pokud ne, pravděpodobně by s tebou discovery hovor neměl. Nabídka má potvrdit, že rozumíš jeho problému a umíš ho přeložit do bezpečného projektu.
+
+### BV.2 Přelož rozsah na výstupy a rozhodnutí
+
+Rozsah typu „vytvoříme nový web“ je příliš gumový. Gumový rozsah se při první změně natáhne přes rozpočet, termín i nervovou soustavu všech zúčastněných. Místo toho rozděl práci na konkrétní výstupy a rozhodnutí, která zákazník dostane.
+
+Příklad pro privacy-first web:
+
+- **Produktové sdělení:** jedna hlavní nabídka, tři podpůrné argumenty, návrh struktury homepage.
+- **Webová implementace:** homepage, stránka služby, kontaktní cesta, základní blog nebo znalostní sekce.
+- **Měření:** návštěvnost klíčových stránek, kliknutí na CTA, odeslané formuláře, bez reklamních pixelů.
+- **Soukromí:** stručná stránka o práci s daty, minimální formulář, jasná retence poptávek.
+- **Předání:** krátký návod na úpravy obsahu, technický přehled a seznam doporučených dalších kroků.
+
+U každého výstupu napiš, jaké rozhodnutí umožní. Například měření neexistuje proto, aby bylo „nastavené“. Existuje proto, aby za měsíc šlo rozhodnout, které stránky zlepšit, které články rozšířit a jestli CTA vede správným směrem.
+
+### BV.3 Ukaž varianty bez falešné volby
+
+Tři varianty nabídky jsou užitečné, pokud každá řeší jinou míru rizika. Ne pokud je prostřední jen psychologický trik a levná varianta je naschvál zmrzačená.
+
+Praktická struktura:
+
+- **Start:** nejmenší bezpečná verze, která řeší hlavní problém a dá se spustit rychle.
+- **Standard:** doporučená varianta s lepším pokrytím rizik, měřením, obsahem nebo automatizací.
+- **Rozšíření:** větší varianta pro tým, který má kapacitu na širší změnu a chce řešit i navazující procesy.
+
+Příklad:
+
+- Start: audit stávajícího webu, návrh messagingu, landing page a základní privacy-first měření.
+- Standard: k tomu nový web, obsahový základ, formulářový tok, technické předání a měsíční vyhodnocení.
+- Rozšíření: k tomu zákaznický portál, interní dashboard a migrace z náhodných nástrojů do evropského stacku.
+
+Každá varianta má mít jasně napsané, pro koho je vhodná a co v ní není. Zákazník pak nevybírá mezi „levné, normální, drahé“, ale mezi úrovněmi jistoty.
+
+### BV.4 Hranice chrání obě strany
+
+Nabídka bez hranic vypadá vstřícně, ale často je nefér. Zákazník neví, co přesně kupuje, a dodavatel tajně doufá, že se nic nerozpadne. Hranice nejsou neochota. Jsou ochrana projektu.
+
+Do nabídky dej hlavně:
+
+- co je součástí první fáze,
+- co je mimo rozsah,
+- kolik kol připomínek je zahrnuto,
+- jaké vstupy musí dodat zákazník,
+- jak se řeší změny rozsahu,
+- kdo schvaluje klíčová rozhodnutí,
+- co se stane, když se vstupy zpozdí.
+
+Privacy-first projekty potřebují ještě jednu hranici navíc: jaká data vůbec nebudete sbírat nebo přesouvat. Například: „Do analytiky nebudeme posílat osobní údaje z formulářů“ nebo „Zákaznické dokumenty nebudeme vkládat do externích AI nástrojů bez samostatného souhlasu.“ Tohle není právnická paranoia. Tohle je provozní hygiena s helmou.
+
+### BV.5 Cena má být vysvětlená hodnotou, ne omluvená hodinami
+
+Hodinová sazba může být užitečná pro interní odhad, ale zákazníka zajímá hlavně výsledek, riziko a návratnost. Když cenu obhajuješ jen počtem hodin, zveš zákazníka k tomu, aby škrtal práci podle dojmu. „Tohle trvá fakt tři hodiny?“ je potom nevyhnutelná otázka.
+
+Lepší je cenu spojit s hodnotou a jistotou:
+
+- co se díky projektu zlepší,
+- jaké ruční činnosti odpadnou,
+- jaká rizika se sníží,
+- jak rychle bude možné vyhodnotit dopad,
+- jaké provozní náklady nebo závislosti se tím omezí.
+
+Příklad formulace:
+
+> Cena první fáze pokrývá nejen implementaci landing page, ale i vyjasnění nabídky, nastavení měření bez reklamních trackerů, formulářový tok, předání správy obsahu a měsíční vyhodnocení. Cílem je, aby tým po spuštění věděl, které zdroje přinášejí relevantní poptávky a co zlepšit dál.
+
+Nemusíš tvrdit, že projekt „garantovaně vydělá desetkrát tolik“. To je obvykle marketingová mlha v obleku. Stačí poctivě ukázat, jak se investice promění v rozhodnutí, úsporu času, vyšší důvěru nebo menší datové riziko.
+
+### BV.6 Další krok musí být nudně konkrétní
+
+Nabídka nemá končit větou „Těšíme se na spolupráci“. To je hezké, ale procesně slabé. Nabídka má končit jasným dalším krokem.
+
+Napiš:
+
+- do kdy nabídka platí,
+- kdo ji schvaluje,
+- jak vypadá potvrzení,
+- kdy může začít první krok,
+- co potřebuješ před startem,
+- jaký bude první výstup a kdy ho zákazník uvidí.
+
+Příklad:
+
+> Pokud varianta Standard dává smysl, stačí potvrdit odpovědí do pátku 11. září. Následně pošleme jednoduchou objednávku, založíme sdílený projektový prostor a během prvního týdne dodáme návrh messagingu a struktury homepage. Před startem potřebujeme přístup ke stávajícímu webu, seznam hlavních služeb a kontakt na člověka, který bude schvalovat obsah.
+
+Čím konkrétnější další krok, tím méně nabídka zapadne do složky „probereme interně“. Interní probírání je místo, kde dobré projekty často tiše umírají mezi dvěma kalendářovými pozvánkami.
+
+### BV.7 Šablona: nabídka po discovery
+
+```markdown
+# Nabídka: [název projektu]
+
+## 1. Kontext
+- Co jsme pochopili z discovery:
+- Hlavní problém:
+- Dopad na tým / obchod / provoz:
+- Co není cílem první fáze:
+
+## 2. Doporučený směr
+- Doporučená varianta:
+- Proč právě tato varianta:
+- Jaké riziko snižuje:
+- Jak poznáme, že se povedla:
+
+## 3. Rozsah
+- Výstup 1:
+- Výstup 2:
+- Výstup 3:
+- Měření a vyhodnocení:
+- Privacy-first pravidla:
+
+## 4. Varianty
+- Start: rozsah, cena, vhodné pro koho
+- Standard: rozsah, cena, vhodné pro koho
+- Rozšíření: rozsah, cena, vhodné pro koho
+
+## 5. Hranice a předpoklady
+- Co je mimo rozsah:
+- Počet kol připomínek:
+- Vstupy od zákazníka:
+- Schvalování:
+- Pravidla pro změny rozsahu:
+
+## 6. Cena a harmonogram
+- Cena:
+- Platební milníky:
+- Začátek:
+- První výstup:
+- Spuštění / předání:
+
+## 7. Další krok
+- Do kdy nabídka platí:
+- Jak potvrdit:
+- Co se stane po potvrzení:
+- Kontaktní osoba:
+```
+
+### BV.8 Checklist: nabídka, která jde schválit
+
+- [ ] První stránka shrnuje situaci zákazníka jeho jazykem.
+- [ ] Nabídka popisuje výstupy a rozhodnutí, ne jen seznam prací.
+- [ ] Doporučená varianta je jasně označená a zdůvodněná.
+- [ ] Každá varianta řeší jinou úroveň rizika, ne jen jinou psychologickou cenu.
+- [ ] Rozsah obsahuje hranice, vstupy, schvalování a pravidla změn.
+- [ ] Privacy-first pravidla říkají, jaká data se sbírají, nesbírají a kam se neposílají.
+- [ ] Cena je vysvětlená hodnotou, jistotou a provozním dopadem.
+- [ ] Nabídka má konkrétní další krok, termín platnosti a první výstup po schválení.
+- [ ] Dokument je dost krátký na přečtení a dost konkrétní na rozhodnutí.
+- [ ] Po odeslání je naplánovaný follow-up, ne pasivní čekání na zázrak.
+
+Dobrá nabídka není ta, která vypadá nejdražší. Dobrá nabídka je ta, která zákazníkovi snižuje nejistotu a tobě chrání schopnost dodat slíbený výsledek. Když se po přečtení ví, proč projekt dává smysl, co přesně začne, co nezačne a jak se bude rozhodovat dál, nabídka splnila práci. Zbytek už je obchodní řemeslo — a trochu disciplíny neposílat osm příloh, protože „třeba se budou hodit“.
+
 ## Pracovní log
+- 2026-08-31 21:00 UTC — Doplněna příloha BV o nabídce po discovery: kontext zákazníka, výstupy a rozhodnutí, férové varianty, hranice rozsahu, vysvětlení ceny hodnotou, konkrétní další krok, šablona nabídky a privacy-first checklist.
 - 2026-08-31 20:00 UTC — Doplněna příloha BU o discovery hovoru bez nahrávacího vysavače: příprava hypotéz, souhlas s poznámkami a nahráváním, otázky od dopadu k řešení, rozhodovací poznámky, follow-up, pět možných výstupů, šablona a privacy-first checklist.
 
 - 2026-08-31 19:01 UTC — Doplněna příloha BT o kvalifikaci poptávek po obsahovém marketingu: rozlišení signálů, krátký formulář, trasy odpovědí, lidský zápis zdroje, vyhodnocení kvality, šablona a privacy-first checklist.
