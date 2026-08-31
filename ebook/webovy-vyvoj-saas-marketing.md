@@ -12479,7 +12479,165 @@ Použij jednu kartu pro každý kritický nástroj.
 Exit plán neznamená, že musíš všechno provozovat sám a psát vlastní platební bránu na koleni. Znamená, že vztah s dodavatelem je vědomé rozhodnutí, ne past. Dobré nástroje ti mají zrychlit práci. Nemají držet tvůj produkt za límec pokaždé, když chceš udělat rozumnou změnu.
 
 
+## Příloha BR: Měsíční audit marketingových dat bez stopařského batohu
+
+Marketing se umí tvářit nevinně. Přidáš formulář, měření kliknutí, kampaně, UTM parametry, e-mailový nástroj, jeden embed, jeden pixel „jen pro jistotu“ a za půl roku nikdo přesně neví, kam data tečou. Měsíční audit marketingových dat je krátká brzda před tím, než se z růstu stane datový bleší trh.
+
+Cílem není zastavit marketing. Cílem je udržet ho použitelný, měřitelný a důvěryhodný. Malý tým nepotřebuje dokonalý compliance rituál. Potřebuje pravidelně vidět, co sbírá, proč to sbírá, kdo se k tomu dostane a jestli to pořád pomáhá rozhodování.
+
+### BR.1 Začni seznamem míst, kde vzniká kontakt
+
+Nejdřív si napiš všechna místa, kde člověk může zanechat stopu nebo osobní údaj. Nejen formuláře. Opravdu všechna místa, protože marketingová data často neutíkají velkými dveřmi, ale malou škvírou v embedovaném widgetu.
+
+Typická místa:
+
+- kontaktní formulář,
+- poptávkový formulář,
+- demo booking,
+- stažení materiálu,
+- komentář nebo odpověď v komunitě,
+- odpověď na e-mail,
+- kliknutí na CTA,
+- návštěva landing page,
+- referral odkaz,
+- support dotaz, který se později používá jako marketingový signál.
+
+U každého místa si napiš tři věci:
+
+1. Jaký údaj vzniká.
+2. Proč ho potřebuješ.
+3. Kam se ukládá nebo posílá.
+
+Příklad:
+
+- Místo: formulář „Domluvit konzultaci“.
+- Údaje: jméno, e-mail, firma, stručný popis problému.
+- Účel: odpovědět na poptávku a připravit první rozhovor.
+- Uložení: e-mailová schránka, interní CRM, záloha formulářového systému.
+- Poznámka: po 12 měsících bez spolupráce smazat nebo anonymizovat.
+
+Tohle je obyčejná inventura. A právě proto funguje. Když nevíš, že data existují, nemůžeš je dobře chránit ani mazat.
+
+### BR.2 Odděl marketingovou metriku od osobního údaje
+
+Ne každé měření potřebuje identitu člověka. Ve skutečnosti ji většinou nepotřebuje. Pro rozhodnutí typu „která landing page přivádí lepší poptávky“ často stačí agregovaná data: zdroj, stránka, počet konverzí, kvalita poptávek a časové období.
+
+Ptej se:
+
+- Potřebujeme znát konkrétního člověka, nebo stačí souhrn?
+- Pomůže nám identita udělat lepší rozhodnutí, nebo jen uklidňuje zvědavost?
+- Umíme metriku měřit bez dlouhodobého profilu návštěvníka?
+- Dá se údaj zkrátit, zaokrouhlit, agregovat nebo zahodit dřív?
+
+Příklad: u článků nepotřebuješ vědět, že jeden konkrétní návštěvník četl tři texty v určitém pořadí a pak se vrátil z telefonu. Pro obsahové rozhodování ti často stačí vědět, které články dlouhodobě přivádí návštěvy, které vedou k dalšímu kliknutí a které téma generuje kvalitní dotazy.
+
+Privacy-first marketing není neměřený marketing. Je to marketing, který si umí říct: „Tahle metrika stačí.“ To je vzácná schopnost. V tabulkách totiž platí zvláštní fyzika: čím víc sloupců, tím víc lidí předstírá jistotu.
+
+### BR.3 Projdi nástroje podle datového dopadu
+
+Jednou měsíčně projdi marketingové nástroje a rozděl je podle dopadu:
+
+- **Nízký dopad:** nástroj pracuje jen s veřejným obsahem nebo anonymními souhrny.
+- **Střední dopad:** nástroj má kontaktní údaje, e-maily nebo historii komunikace.
+- **Vysoký dopad:** nástroj kombinuje osobní údaje, chování, segmenty, automatizace nebo citlivé obchodní informace.
+
+U každého nástroje zkontroluj:
+
+- kdo má přístup,
+- jestli ho pořád používáte,
+- jaké údaje drží,
+- jestli existuje export,
+- jak se mažou stará data,
+- jestli je popsaný účel v interní dokumentaci,
+- zda nástroj neposílá data dalším službám bez jasného důvodu.
+
+Praktické pravidlo: nástroj, který má vysoký datový dopad a nízkou užitečnost, patří na seznam k vypnutí. Nástroj, který nikdo tři měsíce neotevřel, ale pořád sbírá data, není „rezerva“. Je to zapomenutá hadice puštěná do sklepa.
+
+### BR.4 Zkontroluj kampaně, které zůstaly běžet
+
+Marketingové kampaně mají nepříjemný talent přežívat svůj smysl. Landing page už není aktuální, formulář vede do starého inboxu, automatický e-mail slibuje dávno změněnou nabídku a UTM tagy se dál hromadí jako archeologická vrstva.
+
+Měsíční kontrola kampaní:
+
+1. Seznam aktivních landing pages.
+2. Seznam běžících formulářů a CTA.
+3. Seznam automatických e-mailů.
+4. Seznam veřejných materiálů ke stažení.
+5. Seznam měřených konverzí.
+
+U každé položky rozhodni:
+
+- **Nechat:** pořád podporuje aktuální nabídku.
+- **Upravit:** obsah sedí částečně, ale potřebuje opravit slib, CTA nebo data.
+- **Vypnout:** už nemá jasný účel nebo sbírá data bez přínosu.
+
+Příklad: starý lead magnet o výběru nástroje může pořád přivádět návštěvy, ale pokud po stažení spouští automatizaci s neaktuální nabídkou, nevyrábí důvěru. Vyrábí zmatek s pěknou grafikou.
+
+### BR.5 Zaveď datový rozpočet pro nové marketingové nápady
+
+Než přidáš nový formulář, nástroj nebo automatizaci, dej mu datový rozpočet. Je to krátký limit, který říká, kolik dat smí nápad sebrat, na jak dlouho a proč.
+
+Šablona datového rozpočtu:
+
+- Nápad:
+- Cílové rozhodnutí:
+- Potřebná metrika:
+- Potřebné osobní údaje:
+- Údaje, které výslovně nesbíráme:
+- Doba uchování:
+- Místo uložení:
+- Vlastník:
+- Datum kontroly:
+
+Příklad:
+
+- Nápad: landing page pro audit privacy-first analytiky.
+- Cílové rozhodnutí: zjistit, jestli firmy poptávají audit měření před redesignem webu.
+- Potřebná metrika: počet kvalifikovaných poptávek a nejčastější typ problému.
+- Potřebné osobní údaje: jméno, pracovní e-mail, firma, popis situace.
+- Nesbíráme: telefon povinně, velikost rozpočtu, seznam používaných nástrojů před prvním souhlasem.
+- Doba uchování: 12 měsíců u neaktivních poptávek.
+- Vlastník: obchod nebo zakladatel.
+- Datum kontroly: první pracovní den dalšího měsíce.
+
+Datový rozpočet nutí marketing přemýšlet předem. A to je přesně ten typ nudy, který šetří budoucí víkendy.
+
+### BR.6 Měsíční meeting drž krátký
+
+Audit marketingových dat nemá být dvouhodinový compliance festival. Pro malý tým stačí 30 minut a jedna stránka poznámek.
+
+Agenda:
+
+1. Co nového sbíráme?
+2. Co už nepotřebujeme?
+3. Který nástroj má největší datový dopad?
+4. Která kampaň potřebuje vypnout nebo opravit?
+5. Jaké jedno rozhodnutí uděláme podle dat z minulého měsíce?
+6. Jakou jednu datovou stopu smažeme, zkrátíme nebo agregujeme?
+
+Výstupem mají být maximálně tři úkoly. Pokud audit vyrobí patnáct úkolů, tým je pravděpodobně neudělá. Lepší je každý měsíc odstranit jednu reálnou datovou zbytečnost než jednou ročně sepsat heroický seznam, který zemře v projektovém nástroji.
+
+*Codyho komentář:* Privacy-first provoz není póza v patičce webu. Je to série malých rozhodnutí, která opakuješ i ve chvíli, kdy by bylo pohodlnější přidat další skript a doufat, že si toho nikdo nevšimne. Což je mimochodem špatná strategie i pro lidi, kteří neumí otevřít DevTools.
+
+### BR.7 Checklist: měsíční audit marketingových dat
+
+- [ ] Máme seznam všech míst, kde vzniká kontakt, poptávka nebo marketingový signál.
+- [ ] U každého místa víme, jaký údaj vzniká, proč a kam se ukládá.
+- [ ] Rozlišujeme agregovanou metriku od osobního údaje.
+- [ ] Nové marketingové nápady mají datový rozpočet před spuštěním.
+- [ ] Aktivní landing pages, formuláře a automatizace odpovídají aktuální nabídce.
+- [ ] Nepoužívané kampaně nesbírají data „pro jistotu“.
+- [ ] Každý marketingový nástroj má vlastníka a známý datový dopad.
+- [ ] Nástroje s vysokým dopadem mají zkontrolované přístupy a export.
+- [ ] Staré poptávky, testovací seznamy a jednorázové exporty se mažou podle pravidla.
+- [ ] Měsíční audit končí nejvýše třemi konkrétními úkoly.
+
+Marketing má přivádět správné lidi ke správné nabídce. Nemá za sebou tahat stopařský batoh plný dat, která nikdo nepotřebuje, ale všichni by je museli vysvětlovat, kdyby se něco pokazilo. Čím menší datová stopa, tím snazší provoz, lepší výkon a čistší důvěra.
+
+
 ## Pracovní log
+
+- 2026-08-31 17:00 UTC — Doplněna příloha BR o měsíčním auditu marketingových dat: inventura kontaktů, oddělení metrik od osobních údajů, kontrola nástrojů a kampaní, datový rozpočet, krátká agenda a checklist.
 
 - 2026-08-31 16:01 UTC — Doplněna příloha BQ o exit plánu z dodavatele: kritičnost nástrojů, export dat a konfigurace, náhradní režim, smluvní a privacy otázky, exit drill, šablona karty a checklist.
 
