@@ -12929,7 +12929,181 @@ Nejde o přesnou atribuci na desetinná místa. Jde o rozhodnutí: jaký obsah p
 
 Kvalifikace poptávek má chránit čas týmu i zákazníka. Dobrý systém nehoní každého kolemjdoucího. Pozná, kdy má pomoct, kdy se zeptat a kdy férově říct: „Tohle nejsme my.“ V dlouhodobém marketingu je taková upřímnost skoro nefér výhoda.
 
+
+## Příloha BU: Discovery hovor bez nahrávacího vysavače a obchodní mlhy
+
+Discovery hovor je jeden z nejdůležitějších momentů mezi obsahem, poptávkou a placenou spoluprací. Zákazník už věnoval pozornost, popsal problém a souhlasil s rozhovorem. Teď se rozhoduje, jestli mu pomůžeš zpřesnit situaci, nebo ho jen protáhneš obchodním trychtýřem, který vypadá jako formulář s hlasem.
+
+Privacy-first discovery neznamená, že si nesmíš dělat poznámky. Znamená to, že sbíráš jen kontext potřebný pro rozhodnutí, jasně říkáš proč a nenecháváš po každém hovoru ležet hodiny nahrávek, přepisů a interních komentářů bez vlastníka. Obchodní informace nejsou konfety. Nerozhazovat.
+
+### BU.1 Před hovorem si napiš hypotézu, ne scénář výslechu
+
+Na hovor nejdeš „něco zjistit“. Jdeš ověřit pár konkrétních hypotéz:
+
+- zákazník má problém, který opravdu bolí,
+- problém spadá do segmentu, kde umíš dodat hodnotu,
+- existuje realistický další krok,
+- rozhodovací proces není úplně mimo tvůj model spolupráce,
+- data, integrace a provozní očekávání nejsou neřešitelné riziko.
+
+Před hovorem si připrav krátkou kartu:
+
+- Co už víme z formuláře nebo e-mailu?
+- Jaký výsledek zákazník pravděpodobně hledá?
+- Které tři otázky musí být zodpovězené, aby šlo navrhnout další krok?
+- Co by byl jasný signál, že nejsme dobrý fit?
+- Jaká data nesmíme chtít zbytečně?
+
+Tím se vyhneš hovoru, kde se dvacet minut povídá o „digitální transformaci“ a na konci nikdo neví, jestli se má stavět landing page, SaaS MVP, nebo jen vypnout tři zbytečné nástroje. Konzultační mlha je pořád mlha, i když má hezký kalendářový odkaz.
+
+### BU.2 Začni kontextem a souhlasem
+
+První dvě minuty nastaví tón celého hovoru. Řekni jednoduše:
+
+- proč jste na hovoru,
+- co chceš zjistit,
+- jak dlouho to bude trvat,
+- jestli si děláš poznámky,
+- jestli se hovor nahrává, a pokud ano, proč a jak dlouho nahrávku držíš.
+
+Privacy-first default je nenahrávat všechno automaticky. U většiny prvních discovery hovorů stačí ruční poznámky. Pokud nahrávka dává smysl — třeba kvůli přesné technické specifikaci nebo více účastníkům — požádej o souhlas a vysvětli účel. Souhlas nesmí být malá věta schovaná mezi „tak jdeme na to“ a „sdílejte obrazovku“.
+
+Praktická věta:
+
+> Budu si dělat stručné interní poznámky, abychom po hovoru neztratili kontext. Hovor standardně nenahrávám. Pokud by se ukázalo, že nahrávka pomůže technickému zadání, nejdřív se vás výslovně zeptám.
+
+Taková věta udělá dvě věci najednou: uklidní zákazníka a donutí tým přemýšlet, co opravdu potřebuje uchovat.
+
+### BU.3 Otázky veď od dopadu k řešení
+
+Špatný discovery hovor začíná otázkou: „Jaké funkce chcete?“ Dobrá discovery začíná dopadem: „Co se stane, když to nevyřešíte?“ Funkce jsou až pozdější překlad problému do produktu.
+
+Použij pořadí:
+
+1. **Situace:** Co se děje teď?
+2. **Dopad:** Kolik času, peněz, energie nebo příležitostí to stojí?
+3. **Dosavadní pokusy:** Co už zkoušeli a proč to nestačilo?
+4. **Rozhodování:** Kdo musí souhlasit a podle čeho se rozhodne?
+5. **Omezení:** Jaké jsou termíny, rozpočet, interní kapacity, technická a právní omezení?
+6. **Další krok:** Co by po hovoru mělo být jasné?
+
+Příklady dobrých otázek:
+
+- „Kdy jste naposledy narazili na tenhle problém v praxi?“
+- „Co kvůli tomu dnes děláte ručně?“
+- „Jak poznáte za tři měsíce, že se projekt povedl?“
+- „Která data by se v řešení vůbec neměla sbírat?“
+- „Kdo bude systém používat každý týden a kdo ho bude jen schvalovat?“
+
+Otázka na data patří do discovery stejně jako otázka na cenu. Když ji necháš až na konec implementace, privacy se změní z hodnoty na požární cvičení. A požární cvičení v produkci je obvykle dražší než deset minut přemýšlení na začátku.
+
+### BU.4 Poznámky piš jako rozhodovací podklad
+
+Poznámky z hovoru nejsou stenografický záznam. Nemají obsahovat každý detail, vtip, interní jméno ani větu vytrženou z kontextu. Mají umožnit rozhodnutí: pokračovat, odmítnout, poslat návrh, položit doplňující otázku nebo doporučit jinou cestu.
+
+Dobrá struktura poznámek:
+
+- hlavní problém vlastními slovy zákazníka,
+- konkrétní dopad,
+- současný workaround,
+- rozhodovací kritéria,
+- rizika a nejasnosti,
+- datové a integrační požadavky,
+- domluvený další krok,
+- retenční poznámka: co držíme a kdy to uklidíme.
+
+Co do poznámek nepatří:
+
+- osobní detaily bez vztahu k projektu,
+- interní politika zákazníka, pokud není nutná pro rozhodnutí,
+- citlivé technické údaje, které lze řešit později bezpečným kanálem,
+- spekulace o lidech,
+- kompletní přepisy jen proto, že nástroj má tlačítko „AI summary“.
+
+*Codyho komentář:* Automatický přepis každého hovoru je jako nahrávat si ledničku, protože jednou možná řekne něco důležitého. Technicky fascinující, provozně podezřelé.
+
+### BU.5 Po hovoru pošli shrnutí, které posouvá rozhodnutí
+
+Největší chyba po dobrém discovery hovoru je ticho. Druhá největší chyba je poslat dlouhý e-mail, který zní jako generický zápis z porady. Shrnutí má potvrdit pochopení, ukázat doporučený směr a dát zákazníkovi jednoduchou možnost opravy.
+
+Krátká struktura follow-upu:
+
+- „Takhle rozumím vaší situaci…“
+- „Hlavní dopad je…“
+- „Doporučil bych začít tímto krokem…“
+- „Potřebujeme doplnit jen tyto informace…“
+- „Další krok: termín / návrh / audit / odmítnutí s doporučením.“
+
+Když posíláš shrnutí, neposílej citlivé detaily širšímu seznamu lidí jen proto, že byli v pozvánce. Ověř, kdo má být v kopii. U B2B projektů se snadno stane, že v kalendáři sedí konzultant, externista, agentura a někdo, kdo už ve firmě za měsíc nebude. Raději nudná kontrola příjemců než elegantní únik kontextu.
+
+### BU.6 Z discovery musí vzniknout jedna z pěti akcí
+
+Každý discovery hovor by měl skončit jedním jasným stavem:
+
+- **Nabídka:** problém sedí, zákazník má motivaci a další krok je placený nebo předprodejní návrh.
+- **Audit:** problém je reálný, ale nejdřív je potřeba zjistit stav webu, dat, stacku nebo procesu.
+- **Mini-workshop:** je více stakeholderů a je nutné srovnat cíle, rozhodovací kritéria a omezení.
+- **Obsahový follow-up:** zákazník zatím není připravený, ale má dostat praktický zdroj, checklist nebo pozvánku k pozdějšímu návratu.
+- **Férové odmítnutí:** problém není fit, rozpočet je mimo realitu, riziko je příliš vysoké nebo by řešení bylo nepoctivé.
+
+Nejhorší stav je „ozveme se nějak“. To není další krok, to je digitální čekárna. Každý hovor by měl mít vlastníka, datum a konkrétní výstup. I odmítnutí je výstup, pokud je rychlé, slušné a užitečné.
+
+### BU.7 Šablona: karta discovery hovoru
+
+```markdown
+## Discovery hovor: [zákazník / projekt]
+
+### Před hovorem
+- Datum a účastníci:
+- Co už víme:
+- Hlavní hypotéza:
+- Tři otázky k ověření:
+- Privacy hranice:
+
+### Problém
+- Situace vlastními slovy zákazníka:
+- Dopad:
+- Jak to řeší dnes:
+- Co už zkoušeli:
+
+### Rozhodování
+- Kdo rozhoduje:
+- Kritéria úspěchu:
+- Termín / naléhavost:
+- Rozpočet nebo kapacitní rámec:
+
+### Data a provoz
+- Jaká data by řešení zpracovávalo:
+- Kde data ideálně zůstávají:
+- Integrace:
+- Bezpečnostní nebo právní omezení:
+
+### Další krok
+- Stav: nabídka / audit / workshop / obsahový follow-up / odmítnutí
+- Vlastník:
+- Termín:
+- Co posíláme zákazníkovi:
+- Kdy poznámky smažeme nebo anonymizujeme:
+```
+
+### BU.8 Checklist: discovery bez datového luxování
+
+- [ ] Před hovorem máme hypotézu a tři klíčové otázky.
+- [ ] Na začátku říkáme účel hovoru, délku, práci s poznámkami a pravidla nahrávání.
+- [ ] Hovor standardně nenahráváme bez výslovného důvodu a souhlasu.
+- [ ] Otázky vedou od situace a dopadu k řešení, ne od seznamu funkcí.
+- [ ] Ptáme se na data, integrace a provozní omezení už v discovery fázi.
+- [ ] Poznámky jsou rozhodovací podklad, ne kompletní osobní profil zákazníka.
+- [ ] Citlivé údaje neposíláme do AI nástrojů ani do sdílených dokumentů bez důvodu.
+- [ ] Follow-up shrnuje pochopení, doporučení a konkrétní další krok.
+- [ ] Každý hovor končí jedním z pěti stavů: nabídka, audit, workshop, obsahový follow-up nebo odmítnutí.
+- [ ] Poznámky mají vlastníka, účel a retenční pravidlo.
+
+Discovery hovor má zákazníkovi ukázat, že umíš přemýšlet, ne jen prodávat. Když se ptáš na dopad, rozhodování a data, působíš méně jako dodavatel šablon a víc jako partner, který chápe realitu provozu. A když u toho nevysaješ z hovoru všechno, co mikrofon unese, získáš bonus navíc: důvěru.
+
 ## Pracovní log
+- 2026-08-31 20:00 UTC — Doplněna příloha BU o discovery hovoru bez nahrávacího vysavače: příprava hypotéz, souhlas s poznámkami a nahráváním, otázky od dopadu k řešení, rozhodovací poznámky, follow-up, pět možných výstupů, šablona a privacy-first checklist.
+
 - 2026-08-31 19:01 UTC — Doplněna příloha BT o kvalifikaci poptávek po obsahovém marketingu: rozlišení signálů, krátký formulář, trasy odpovědí, lidský zápis zdroje, vyhodnocení kvality, šablona a privacy-first checklist.
 
 - 2026-08-31 18:00 UTC — Doplněna příloha BS o recyklaci obsahu bez digitálního smogu: zdroje ze skutečné práce, mapa formátů, obsahová karta, rozlišení evergreen/aktualita/provozní poznámka, přímá distribuce, privacy-first měření a checklist.
