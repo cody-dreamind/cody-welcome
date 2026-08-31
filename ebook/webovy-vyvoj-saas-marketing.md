@@ -11150,7 +11150,228 @@ Použij ji pro návrh nebo revizi programu.
 
 Referral program má být zdvořilý most mezi spokojeným zákazníkem a člověkem, kterému můžeš opravdu pomoct. Pokud z něj uděláš spamovací mašinu, možná získáš pár kliků. Pokud ho postavíš na reputaci, jasné hodnotě a datové střídmosti, získáš něco lepšího: doporučení, za které se nikdo nemusí stydět.
 
+## Příloha BK: Partnerství a integrace, které rozšiřují dosah bez ztráty kontroly
+
+Referral program stojí na spokojených zákaznících. Partnerství jde o krok dál: zapojíš firmy, freelancery, konzultanty, komunity nebo technologické nástroje, které už mají důvěru u lidí, kterým chceš pomoct. Správně postavené partnerství není „pošli nám lead a my ti něco dáme“. Je to společná cesta, kde všichni ví, komu pomáhají, co slibují a jak se zachází s daty.
+
+Špatné partnerství přidá chaos: nejasné sliby, nekvalitní poptávky, ruční tabulky, přístupy do cizích systémů a pocit, že každý zákazník je jen položka v provizním katalogu. Dobré partnerství přidá kontext, důvěru a distribuci, aniž bys musel rozbíjet vlastní privacy-first pravidla.
+
+*Codyho komentář:* Partnerství má být zesilovač hodnoty, ne externí obchodní tým s powerbankou a nulovým svědomím. Pokud partner nerozumí tomu, co nechceš dělat, bude dřív nebo později prodávat přesně to.
+
+### BK.1 Nejdřív pojmenuj typ partnera
+
+Ne každý partner má stejnou roli. Když je všechny hodíš do jednoho kýble, skončíš s programem, který je moc složitý pro malé partnery a moc vágní pro větší spolupráce.
+
+Praktické typy partnerů:
+
+- **Doporučující partner:** zná vhodné firmy a umí tě představit ve správný moment.
+- **Implementační partner:** pomáhá zákazníkovi s nasazením, migrací, obsahem nebo interním procesem.
+- **Technologický partner:** má nástroj, se kterým tvoje služba nebo SaaS dává větší smysl.
+- **Obsahový partner:** společně tvoříte články, webináře, checklisty nebo případové studie.
+- **Komunitní partner:** spravuje komunitu, akci nebo odborný prostor, kde je tvoje téma relevantní.
+
+U každého typu si napiš jednu větu:
+
+> Partner typu **[role]** pomáhá zákazníkům dosáhnout **[výsledek]** tím, že přidává **[konkrétní hodnota]**.
+
+Příklad:
+
+> Implementační partner pomáhá B2B firmám rychleji spustit zákaznický portál tím, že převede jejich současný e-mailový proces do jednoduchého workflow a připraví tým na první měsíc provozu.
+
+Taková věta zabrání tomu, aby se partnerství změnilo v neurčitý „strategický vztah“. Strategický vztah je často jen meeting, který se naučil nosit sako.
+
+### BK.2 Partnerství začínej malým společným výsledkem
+
+Nezačínej dlouhou partnerskou smlouvou, pokud ještě nevíte, jestli spolupráce funguje. Začni malým výsledkem, který má jasný konec.
+
+Dobré první kroky:
+
+- společný článek s praktickým checklistem,
+- jeden kvalifikovaný intro call se zákazníkem,
+- mini audit pro konkrétní segment,
+- veřejný webinář bez agresivního sběru kontaktů,
+- technická ukázka integrace na testovacích datech,
+- společná šablona nebo kalkulačka, kterou lze sdílet přímým odkazem.
+
+Po prvním kroku vyhodnoť:
+
+- Přivedlo partnerství správné lidi?
+- Bylo jasné, kdo co slibuje?
+- Rozuměl partner tvé pozici a hranicím?
+- Nevznikl zbytečný sběr dat?
+- Byla spolupráce lehká, nebo vyžadovala permanentní ruční hašení?
+
+Pokud malý krok nefunguje, velký program to většinou nezachrání. Jen mu dá lepší logo, sdílený Slack a tabulku s barevnými buňkami. Gratuluji, chaos má brandbook.
+
+### BK.3 Definuj společný slib zákazníkovi
+
+Partnerství musí zákazníkovi dávat smysl rychle. Neříkej jen „spolupracujeme“. Řekni, co z toho zákazník má.
+
+Slabé formulace:
+
+- „Navázali jsme strategické partnerství.“
+- „Náš ekosystém se rozšiřuje.“
+- „Společně přinášíme inovativní řešení.“
+
+Lepší formulace:
+
+- „Pomůžeme vám převést poptávky z e-mailů do zákaznického portálu a zároveň nastavit privacy-first měření bez reklamních pixelů.“
+- „Spojujeme technickou implementaci webu s obsahovou strategií, aby landing page nebyla jen hezká, ale opravdu získávala kvalifikované poptávky.“
+- „Zákazník dostane SaaS provozovaný v Evropě a k tomu lokální podporu pro migraci dat a školení týmu.“
+
+Společný slib má obsahovat:
+
+- cílového zákazníka,
+- problém nebo příležitost,
+- výsledek,
+- hranice odpovědnosti,
+- datový a provozní princip.
+
+Hranice odpovědnosti jsou důležité. Pokud partner slíbí migraci dat a ty provozuješ produkt, zákazník musí vědět, kdo řeší import, kdo kontrolu kvality, kdo podporu a kdo právní dokumentaci. Jinak se první problém promění v ping-pong, kde míček je zákazníkova důvěra.
+
+### BK.4 Sdílej minimum dat a preferuj ruční kontext
+
+Partnerství často svádí k tomu, že si firmy začnou posílat exporty kontaktů, seznamy leadů a poznámky z obchodních hovorů. Privacy-first varianta je jednodušší: sdílej jen data, která jsou nutná pro konkrétní další krok.
+
+Praktické pravidlo:
+
+> Partner dostane jen tolik informací, aby mohl udělat domluvený krok, ne aby si postavil vlastní kopii zákaznického vztahu.
+
+Příklady střídmého sdílení:
+
+- místo exportu všech kontaktů pošli jedno potvrzené intro,
+- místo sdíleného CRM použij krátkou partnerskou kartu pro konkrétní příležitost,
+- místo přístupu do produkce připrav testovací prostředí nebo anonymizovaný dataset,
+- místo detailní analytiky sdílej agregovaný výsledek kampaně,
+- místo automatického předávání leadů používej souhlas zákazníka u konkrétního předání.
+
+Partnerská karta může vypadat takhle:
+
+- Firma:
+- Kontaktní osoba:
+- Problém, který řeší:
+- Proč dává partnerství smysl:
+- Co zákazník výslovně odsouhlasil sdílet:
+- Kdo navazuje další krok:
+- Do kdy se ozveme:
+
+Tohle není byrokracie. Je to brzda proti tomu, aby z dobrého vztahu vznikl datový bleší trh.
+
+### BK.5 Integrace stav podle uživatelského workflow, ne podle loga partnera
+
+Technologické integrace vypadají dobře v marketingu. Logo v sekci „Integrations“ umí potěšit ego. Zákazník ale neplatí za logo. Platí za méně ruční práce, méně chyb a rychlejší výsledek.
+
+Před integrací si odpověz:
+
+1. Jaký konkrétní krok zákazník dnes dělá ručně?
+2. Kolikrát týdně nebo měsíčně se krok opakuje?
+3. Co se stane, když integrace selže?
+4. Jaká data musí proudit mezi systémy?
+5. Umí zákazník data exportovat nebo odpojit bez trestu?
+6. Lze integraci spustit jen pro zákazníky, kteří ji opravdu potřebují?
+
+Začni nejmenší verzí:
+
+- ruční export/import,
+- jednosměrný webhook,
+- naplánovaný CSV export,
+- API propojení pro jednu událost,
+- jednoduchý konektor bez obousměrné synchronizace.
+
+Obousměrná synchronizace je užitečná, ale je to taky malý drak. Má konflikty, retry logiku, mapování polí, bezpečnostní dopady a zákaznickou podporu v ceně. Než ho pozveš domů, ujisti se, že opravdu hlídá poklad, a ne jen zapaluje koberec.
+
+### BK.6 Měř partnerství podle kvality a provozního dopadu
+
+Partnerský program neměř jen počtem partnerů. Velký seznam partnerů může vypadat hezky v prezentaci, ale pokud nepřináší kvalitní zákazníky ani lepší výsledky, je to jen sbírka log.
+
+Sleduj:
+
+- počet kvalifikovaných příležitostí podle typu partnera,
+- podíl příležitostí, které se posunuly do reálného projektu nebo aktivního účtu,
+- čas potřebný na zpracování partnerské příležitosti,
+- spokojenost zákazníka po společném dodání,
+- počet support incidentů spojených s integrací nebo partnerem,
+- počet případů, kdy bylo potřeba vysvětlovat hranice odpovědnosti,
+- retenci zákazníků získaných přes partnerství.
+
+K měření často stačí měsíční partnerské review:
+
+- Které partnerství přineslo nejlepší kontext?
+- Kde vzniklo nejvíc tření?
+- Který slib zákazník pochopil nejrychleji?
+- Která integrace šetří skutečnou práci?
+- Kde sbíráme nebo sdílíme víc dat, než je nutné?
+- Co příští měsíc pozastavíme, zjednodušíme nebo zdokumentujeme?
+
+Privacy-first přístup neznamená, že partnerství nemá být obchodně měřené. Znamená, že nepotřebuješ tajně sledovat každého člověka přes pět domén, abys poznal, jestli spolupráce funguje.
+
+### BK.7 Šablona: partnerská karta
+
+Použij ji před spuštěním nové spolupráce nebo integrace.
+
+## Partnerství: [název partnera]
+
+### Typ partnera
+
+- Doporučující / implementační / technologický / obsahový / komunitní:
+- Pro koho společně vytváříme hodnotu:
+- Jaký konkrétní výsledek zákazník získá:
+
+### Společný slib
+
+- Jedna věta pro zákazníka:
+- Co slibujeme my:
+- Co slibuje partner:
+- Co výslovně neslibujeme:
+
+### První malý krok
+
+- Formát pilotu:
+- Kdo je cílový zákazník nebo segment:
+- Jak poznáme úspěch:
+- Do kdy pilot vyhodnotíme:
+
+### Data a přístupy
+
+- Jaká data sdílíme:
+- Jaká data nesdílíme:
+- Jak získáme souhlas zákazníka s předáním:
+- Kdo má přístup k čemu:
+- Kdy data mažeme nebo archivujeme:
+
+### Integrace
+
+- Jaký workflow integrace zjednodušuje:
+- Minimální technická verze:
+- Riziko při výpadku:
+- Export nebo odpojení pro zákazníka:
+
+### Vyhodnocení
+
+- Kvalifikované příležitosti:
+- Dokončené projekty nebo aktivní účty:
+- Provozní tření:
+- Zákaznická zpětná vazba:
+- Rozhodnutí pro další měsíc:
+
+### BK.8 Checklist: partnerství bez chaosu a datového výprodeje
+
+- [ ] Víme, jaký typ partnera řešíme a jakou hodnotu přidává.
+- [ ] Máme jednu společnou větu, která zákazníkovi vysvětlí výsledek.
+- [ ] První krok je malý, měřitelný a má jasný konec.
+- [ ] Partner rozumí tomu, co neděláme a komu nepomáháme.
+- [ ] Nesdílíme seznamy kontaktů bez konkrétního důvodu a souhlasu.
+- [ ] Přístupy do systémů nahrazujeme testovacím prostředím, exportem nebo omezenou rolí, kdykoli to jde.
+- [ ] Technologická integrace řeší opakovaný workflow, ne jen touhu mít logo v katalogu.
+- [ ] Umíme integraci vypnout nebo zákazníkovi data vyexportovat.
+- [ ] Měříme kvalitu příležitostí, zákaznický výsledek a provozní tření.
+- [ ] Každý měsíc kontrolujeme, jestli partnerství pořád posiluje důvěru, ne jen plní tabulku.
+
+Partnerství má rozšiřovat dosah bez toho, aby rozmazalo tvůj produktový slib. Když držíš úzké zaměření, jasné role a datovou střídmost, může být partner silný distribuční kanál i kvalitní servisní vrstva. Když to pustíš bez pravidel, vznikne jen další systém, který potřebuje systém na správu systému. A to už je SaaS matroška, ze které se špatně utíká.
+
 ## Pracovní log
+
+- 2026-08-31 10:01 UTC — Doplněna příloha BK o partnerstvích a integracích bez ztráty kontroly: typy partnerů, pilotní kroky, společný slib, datová minimalizace, integrační rozhodování, měření kvality a partnerská karta.
 - 2026-08-31 09:00 UTC — Doplněna příloha BJ o referral programu bez spamování kontaktů: validace doporučitelnosti, typy odměn, referral cesta bez importu adresářů, pravidla proti zneužití, privacy-first měření, šablona a checklist.
 - 2026-08-31 08:00 UTC — Doplněna příloha BI o e-mailovém onboardingu bez newsletterového kombajnu: rozdělení typů zpráv, aktivační moment, segmenty, očekávání, privacy-first měření, šablona a checklist.
 - 2026-08-31 07:05 UTC — Doplněna příloha BH o zákaznické komunitě bez závislosti na cizí platformě: účel komunity, malé formáty, přímé kanály, moderace, převod signálů do rozhodnutí, komunitní karta a privacy-first checklist.
