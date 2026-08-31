@@ -9541,7 +9541,159 @@ Takové ukončení není ztracený obchod. Je to investice do důvěry. A taky �
 
 ---
 
+## Příloha BB: Vyhodnocení launch týdne bez tabulkové halucinace
+
+Launch není hotový ve chvíli, kdy odejde poslední oznámení. První týden po spuštění je nejcennější část celého experimentu, protože ukazuje rozdíl mezi tím, co tým čekal, a tím, co lidé opravdu udělali. Právě tady se často rozhodne, jestli se produkt posune dál, upraví nabídka, změní cílovka, nebo se slušně přizná, že jsme zatím netrefili dost bolestivý problém.
+
+Vyhodnocení launch týdne nemá být rituál, kde se v pondělí ráno všichni tváří vážně nad grafem návštěvnosti. Má odpovědět na jednoduchou otázku:
+
+> Co jsme se naučili, co změní naše další rozhodnutí?
+
+Když odpověď není jasná, nemáš vyhodnocení. Máš jen datový ohňostroj. Hezké, barevné, krátce uspokojivé — a pak je všude kouř.
+
+### BB.1 Nejdřív odděl výkon kampaně od kvality nabídky
+
+První chyba po launchi je hodit všechno do jednoho pytle. „Launch fungoval“ nebo „launch nefungoval“ je moc hrubé. Potřebuješ oddělit alespoň čtyři vrstvy:
+
+- **Dosah:** kolik správných lidí se vůbec dozvědělo, že něco existuje.
+- **Relevance:** jestli lidé poznali problém a zůstali u vysvětlení.
+- **Důvěra:** jestli viděli dost důvodů udělat další krok.
+- **Akce:** jestli opravdu klikli, napsali, objednali, vyzkoušeli nebo doporučili.
+
+Příklad: landing page může mít nízký počet poptávek, ale vysoký podíl relevantních odpovědí od lidí, kteří dorazili z přímého doporučení. To neznamená, že nabídka je špatná. Možná je problém v distribuci. Naopak vysoká návštěvnost bez jediného kvalifikovaného signálu může znamenat, že kanál přivedl špatné publikum, nadpis sliboval něco jiného, nebo stránka neumí bezpečně vysvětlit další krok.
+
+Praktická otázka pro tým:
+
+> Kde přesně se řetěz zlomil — lidé nepřišli, nepochopili, nevěřili, nebo nejednali?
+
+Každá odpověď vede k jiné práci. Když nepřišli, opravuješ distribuci. Když nepochopili, opravuješ positioning. Když nevěřili, doplňuješ důkazy. Když nejednali, zjednodušuješ CTA, proces nebo nabídku.
+
+### BB.2 Použij malé množství metrik, které mají vlastníka
+
+Pro launch týden stačí jednoduchý panel. Ne proto, že by se nedalo měřit víc, ale protože tým má omezenou pozornost. Každá metrika má mít vlastníka a rozhodnutí, které podle ní uděláš.
+
+Rozumné minimum:
+
+- počet návštěv launch stránky podle kanálu,
+- kliknutí na hlavní CTA,
+- odeslané formuláře nebo přímé odpovědi,
+- počet kvalifikovaných obchodních rozhovorů,
+- počet jasných námitek nebo opakovaných otázek,
+- technické chyby, které bránily akci,
+- první aktivace u SaaS produktu nebo dokončení hlavního workflow.
+
+Vedle čísel si zapisuj i kvalitativní signály. Jedna věta od správného zákazníka někdy vysvětlí víc než graf se třemi desetinnými místy. Typicky hledej formulace typu:
+
+- „Tohle řešíme ručně každý týden.“
+- „Líbí se mi to, ale nevím, kdo by to u nás spravoval.“
+- „Máte to i pro firmy s evropským provozem dat?“
+- „Nechci další nástroj, potřebuji vyřešit předání mezi týmy.“
+
+Privacy-first pravidlo: pro vyhodnocení nepotřebuješ identitu každého návštěvníka. Potřebuješ agregované chování, kvalifikované odpovědi od lidí, kteří komunikaci zahájili, a bezpečně uložené obchodní poznámky. Pokud nějaké pole ve formuláři nepomáhá follow-upu ani rozhodnutí o produktu, nemá tam být.
+
+### BB.3 Vyhodnocuj námitky jako produktová data
+
+Námitky nejsou jen překážky pro obchod. Jsou to data o tom, kde zákazník vidí riziko. Po launchi je rozděl do kategorií:
+
+- **Cena:** zákazník nevidí dostatečnou hodnotu, nemá rozpočet, nebo nerozumí rozsahu.
+- **Čas:** změna působí náročně, onboarding je nejasný, migrace straší.
+- **Důvěra:** chybí reference, bezpečnostní vysvětlení, proces nebo tvář firmy.
+- **Fit:** problém je podobný, ale segment potřebuje jiný workflow.
+- **Provoz:** zákazník řeší integrace, přístupy, datové hranice, podporu nebo SLA.
+- **Soukromí:** zákazník chce vědět, kde data běží, kdo je zpracovává a jak se mažou.
+
+U každé časté námitky si napiš, jestli patří do produktu, webu, nabídky, nebo obchodní komunikace. Ne všechno se řeší funkcí. Někdy stačí lepší odstavec na landing page, ukázka procesu, krátká bezpečnostní stránka nebo jasnější e-mail po poptávce.
+
+Příklad:
+
+- Námitka: „Nevíme, jak by probíhala migrace ze současné tabulky.“
+- Špatná reakce: „Postavíme univerzální importér pro všechny formáty.“
+- Lepší první reakce: přidat na stránku mini postup migrace, nabídnout ukázkový import při onboardingu a u prvních zákazníků držet import jako řízenou službu.
+
+*Codyho komentář:* Námitka není urážka produktu. Je to zákazník, který ti zdarma říká, kde se bojí spadnout. A to je o dost levnější než zjistit to po tříměsíčním refaktoru.
+
+### BB.4 Udělej rozhodnutí, ne jen report
+
+Každé vyhodnocení launch týdne má skončit jedním z konkrétních rozhodnutí:
+
+1. **Pokračujeme ve stejném směru:** signály potvrzují cílovku, problém i nabídku.
+2. **Zpřesníme positioning:** problém existuje, ale text nebo cílovka jsou moc široké.
+3. **Upravíme nabídku:** lidé chtějí výsledek, ale balíček, cena nebo další krok nesedí.
+4. **Opravíme aktivační cestu:** zájem existuje, ale onboarding nebo první workflow brzdí použití.
+5. **Změníme distribuční kanál:** nabídka dává smysl, ale nedostala se ke správným lidem.
+6. **Zastavíme nebo odložíme:** signály jsou slabé a další práce by byla jen drahé doufání.
+
+Dobré rozhodnutí má vlastníka, termín a malý další experiment. Ne „budeme víc komunikovat hodnotu“, ale například:
+
+> Do pátku upravíme hero text pro servisní firmy, přidáme odstavec o migraci a pošleme stránku pěti kontaktům, kteří během launch týdne zmínili chaos v požadavcích.
+
+Tohle je akční výstup. Dá se udělat, ověřit a znovu vyhodnotit. Report bez dalšího kroku je jen produktová archeologie.
+
+### BB.5 Šablona: launch week review
+
+```markdown
+# Launch week review: [produkt / nabídka]
+
+## Kontext
+- Datum launch týdne:
+- Hlavní cíl:
+- Cílový segment:
+- Hlavní CTA:
+
+## Co jsme čekali
+- Předpoklad o cílovce:
+- Předpoklad o problému:
+- Předpoklad o kanálu:
+- Předpoklad o hlavní námitce:
+
+## Co se stalo
+- Návštěvy podle kanálu:
+- Kliknutí na CTA:
+- Poptávky / odpovědi / registrace:
+- Kvalifikované rozhovory:
+- Dokončené hlavní workflow:
+- Technické problémy:
+
+## Kvalitativní signály
+- Opakované otázky:
+- Námitky:
+- Přesné věty zákazníků:
+- Překvapení:
+
+## Privacy-first kontrola
+- Jaká data jsme sbírali:
+- Která data už nepotřebujeme:
+- Co smažeme nebo anonymizujeme:
+- Co musíme lépe vysvětlit zákazníkům:
+
+## Rozhodnutí
+- Pokračujeme / zpřesníme / upravíme / opravíme / změníme kanál / zastavíme:
+- Proč:
+- Další experiment:
+- Vlastník:
+- Termín:
+```
+
+### BB.6 Checklist: vyhodnocení po launchi
+
+- [ ] Vyhodnocení odděluje dosah, relevanci, důvěru a akci.
+- [ ] Každá klíčová metrika má vlastníka a rozhodnutí, ke kterému slouží.
+- [ ] Kvalitativní signály jsou zapsané vedle čísel, ne schované v hlavách lidí.
+- [ ] Námitky jsou rozdělené podle typu rizika.
+- [ ] Tým ví, jestli problém řeší produkt, web, nabídka, onboarding nebo distribuce.
+- [ ] Privacy-first kontrola určila, která data se smažou nebo anonymizují.
+- [ ] Výstupem je konkrétní rozhodnutí, ne jen dokument do archivu.
+- [ ] Další experiment má vlastníka, termín a jasné kritérium úspěchu.
+- [ ] Poučení se promítne do landing page, obchodních zpráv, produktu nebo podpory.
+- [ ] Slabé signály nejsou maskované optimismem jen proto, že launch dal práci.
+
+Launch týden je drahý hlavně pozorností. Když ho jen přežiješ, získáš pár čísel a trochu hluku. Když ho dobře vyhodnotíš, získáš jasnější produkt, lepší nabídku a méně práce, která by jen elegantně minula zákazníka.
+
+---
+
 ## Pracovní log
+
+- 2026-08-31 01:00 UTC — Doplněna příloha BB o vyhodnocení launch týdne: oddělení výkonu kampaně od kvality nabídky, malé množství akčních metrik, práce s námitkami, rozhodnutí po review, šablona a privacy-first checklist.
 
 - 2026-08-31 00:01 UTC — Doplněna příloha BA o prvním follow-upu po launchi: třídění signálů, rychlá odpověď, šablony zpráv, kvalifikace, centrální inbox, uzavírání konverzací, follow-up karta a privacy-first checklist.
 
