@@ -10233,7 +10233,168 @@ Nepotřebuješ sledovat jednotlivce. Stačí agregace za týden nebo měsíc, do
 
 Zralý produkt není ten, který má odpověď na každý okrajový scénář. Zralý produkt je ten, který ví, co nedělá, a umí to říct bez omluvy. Tím šetří zákazníkům pozornost, týmu energii a firmě riziko. A pozornost je v SaaS dražší než další položka v menu.
 
+
+## Příloha BF: Škálování supportu bez ztráty osobního kontextu
+
+Support se po prvních zákaznících často tváří jako jednoduchá věc: někdo napíše, ty odpovíš, problém zmizí. Jenže jakmile přibude víc účtů, více typů dotazů a pár interních lidí, začne se lámat jedna důležitá věc: kontext. Zákazník nechce při každé odpovědi vysvětlovat, kdo je, co používá a proč je problém důležitý. Tým zase nechce lovit historii ve třech inboxech, chatu a hlavě kolegy, který je zrovna na dovolené.
+
+Cílem škálování supportu není udělat z pomoci neosobní automat. Cílem je zajistit, aby každý zákazník dostal odpověď s kontextem, i když ji neposílá zakladatel osobně ve dvě ráno s hrnkem kafe a lehkým tikem v oku.
+
+*Codyho komentář:* Support není jen nákladové centrum. Je to místo, kde produkt naráží na realitu. A realita je nejlepší produktový manažer, jen má mizerný kalendář.
+
+### BF.1 Definuj, co musí support vždy vědět
+
+Než začneš řešit helpdesk, automatizace a SLA, napiš si minimální zákaznický kontext. To je sada informací, bez které se nedá dobře odpovědět.
+
+Pro B2B SaaS nebo webovou službu obvykle stačí:
+
+- název zákazníka nebo účtu,
+- tarif, balíček nebo rozsah spolupráce,
+- hlavní cíl zákazníka,
+- aktuální stav onboardingu nebo projektu,
+- poslední důležitá změna,
+- otevřené problémy a slíbené termíny,
+- kontaktní osoba a preferovaný kanál,
+- citlivost dat nebo speciální omezení.
+
+Tohle nemusí být obří CRM. Může to být karta účtu v helpdesku, interní poznámka nebo jednoduchý soubor v dokumentaci. Důležité je, aby existoval jeden zdroj pravdy. Pokud má obchod jiné poznámky než support a vývoj řeší třetí realitu v issue trackeru, zákazník brzy pozná, že firma funguje jako improvizovaný orchestr bez dirigenta.
+
+### BF.2 Rozděl dotazy podle práce, kterou vyžadují
+
+Ne každý support dotaz je stejný. Když všechny zprávy padají do jedné hromady, tým buď přepaluje energii na drobnosti, nebo podcení problém, který ohrožuje důvěru zákazníka.
+
+Použij čtyři základní typy:
+
+- **Rychlá odpověď:** zákazník potřebuje vysvětlení, odkaz, návod nebo potvrzení.
+- **Provozní problém:** něco nefunguje, je potřeba ověřit dopad a případně zapojit technika.
+- **Produktový signál:** zákazník naráží na tření, které se může opakovat i u dalších.
+- **Obchodní nebo vztahový signál:** zákazník zvažuje rozšíření, renewal, pauzu nebo odchod.
+
+Každý typ má jiného vlastníka a jiný další krok. Rychlá odpověď patří do znalostní báze. Provozní problém patří do incidentního nebo bug procesu. Produktový signál patří do feedback loopu. Vztahový signál patří k člověku, který drží obchodní kontext.
+
+Příklad:
+
+```md
+Dotaz: „Nedaří se nám přidat dalšího kolegu do projektu.“
+Typ: provozní problém + možný produktový signál
+Dopad: blokuje tým zákazníka při onboardingu
+První reakce: potvrdit přijetí, zjistit roli uživatele a název projektu
+Vlastník: support pro triage, vývoj pokud jde o chybu oprávnění
+Zápis do znalostní báze: ano, pokud se opakuje
+```
+
+### BF.3 Vytvoř pravidla pro předávání bez šumu
+
+Škálování supportu se často rozbije na předávání. Zákazník něco nahlásí, support to přepošle vývoji, vývoj se zeptá na detaily, support se vrátí k zákazníkovi, zákazník mezitím ztratí trpělivost a někdo v týmu řekne „tohle musíme zautomatizovat“. Nejdřív ale stačí lepší předávací karta.
+
+Každý předaný problém by měl obsahovat:
+
+- co zákazník očekával,
+- co se skutečně stalo,
+- jaký je dopad,
+- kde se problém projevil,
+- jestli jde o jednoho zákazníka nebo širší vzorec,
+- co už bylo ověřeno,
+- jaká data jsou potřeba a jaká se nesmí kopírovat.
+
+Privacy-first pravidlo: do interních ticketů nekopíruj víc osobních nebo zákaznických dat, než je nutné k vyřešení problému. Pokud musíš předat ukázku, anonymizuj ji nebo použij testovací reprodukci. Screenshot plný jmen, e-mailů a fakturačních údajů je sice rychlý, ale taky je to datová konfeta. A konfety se špatně sbírají.
+
+### BF.4 Automatizuj opakování, ne vztah
+
+Automatizace v supportu je užitečná, když odstraňuje opakovanou administrativu. Je nebezpečná, když předstírá porozumění tam, kde je potřeba lidský úsudek.
+
+Automatizuj například:
+
+- potvrzení přijetí dotazu,
+- směrování podle tématu,
+- připomenutí neuzavřených ticketů,
+- šablony odpovědí pro běžné postupy,
+- vytvoření úkolu pro vývoj z ověřeného bugu,
+- měsíční export anonymizovaných témat do produktového review.
+
+Neautomatizuj slepě:
+
+- odpovědi na citlivé datové incidenty,
+- komunikaci při výpadku,
+- cenové výjimky,
+- hrozící churn,
+- právní nebo bezpečnostní dotazy,
+- konfliktní situace se zákazníkem.
+
+Šablona odpovědi není robotická, pokud ji člověk upraví podle kontextu. Naopak: dobrá šablona pomáhá držet kvalitu, tón a úplnost. Špatná šablona jen rychleji posílá obecné věty, které zákazník už stejně četl v nápovědě. To není efektivita. To je ping-pong s frustrací.
+
+### BF.5 Udržuj support knowledge loop
+
+Každý opakovaný dotaz by měl skončit jedním ze tří výsledků:
+
+1. Zlepší se nápověda.
+2. Zlepší se produkt.
+3. Zlepší se onboarding nebo obchodní očekávání.
+
+Pokud se otázka opakuje, neznamená to automaticky, že zákazníci nečtou. Možná je nápověda špatně pojmenovaná. Možná produkt používá interní slovník. Možná obchod slíbil něco, co produkt dělá jinak. Support má tyhle třecí plochy vytahovat na světlo.
+
+Jednou týdně projdi:
+
+- tři nejčastější dotazy,
+- jeden dotaz, který byl zbytečně složitý,
+- jeden dotaz, který odhalil produktové tření,
+- jednu odpověď, kterou lze proměnit v článek nápovědy,
+- jednu věc, kterou je potřeba říct obchodně jasněji.
+
+Důležité je uzavírat smyčku. Pokud support jen zapisuje poznatky a nikdo podle nich nic nemění, vzniká archiv bolesti. Archiv bolesti je sice hezky dramatický název pro metalovou kapelu, ale mizerný provozní systém.
+
+### BF.6 Šablona: karta support kontextu
+
+```md
+## Support karta: [zákazník / účet]
+
+### Základ
+- Hlavní kontakt:
+- Tarif nebo rozsah:
+- Hlavní cíl zákazníka:
+- Stav onboardingu nebo spolupráce:
+
+### Provozní kontext
+- Kritická workflow:
+- Poslední důležitá změna:
+- Otevřené problémy:
+- Slíbené termíny:
+
+### Komunikační preference
+- Preferovaný kanál:
+- Kdo musí být v kopii:
+- Citlivá témata:
+
+### Data a soukromí
+- Jaká data zákazník v systému drží:
+- Co se nesmí posílat mimo schválené kanály:
+- Retence nebo speciální požadavky:
+
+### Poslední support signály
+- Opakované dotazy:
+- Produktové tření:
+- Riziko churnu nebo rozšíření:
+```
+
+### BF.7 Checklist: support, který škáluje a zůstává lidský
+
+Před tím, než začneš support „optimalizovat“, zkontroluj:
+
+- [ ] Každý zákazník má krátkou kartu s aktuálním kontextem.
+- [ ] Dotazy jsou rozdělené podle typu práce, kterou vyžadují.
+- [ ] Předání vývoji obsahuje očekávání, realitu, dopad a ověřené kroky.
+- [ ] Interní tickety nekopírují zbytečná osobní nebo citlivá data.
+- [ ] Šablony odpovědí se upravují podle konkrétní situace.
+- [ ] Automatizace zrychluje administrativu, ne nahrazuje úsudek u citlivých situací.
+- [ ] Opakované dotazy se mění v nápovědu, produktové úpravy nebo lepší onboarding.
+- [ ] Jednou týdně probíhá krátké review support vzorců.
+- [ ] Zákazník nemusí při každé odpovědi znovu vysvětlovat celý příběh.
+
+Škálovaný support nemá působit větší. Má působit klidnější. Zákazník má mít pocit, že firma ví, co se děje, drží sliby a zachází s jeho daty rozumně. To je přesně ten typ důvěry, který se špatně kupuje reklamou a dobře buduje provozní disciplínou.
+
 ## Pracovní log
+
+- 2026-08-31 05:04 UTC — Doplněna příloha BF o škálování supportu bez ztráty osobního kontextu: zákaznická karta, typy dotazů, předávání vývoji, automatizace, knowledge loop a privacy-first checklist.
 
 - 2026-08-31 04:00 UTC — Doplněna příloha BE o zjednodušování produktu: signály škodícího backlogu, typy produktového nepořádku, zjednodušovací sprint, bezpečné mazání funkcí, datový úklid, měření dopadu, šablona a checklist.
 
