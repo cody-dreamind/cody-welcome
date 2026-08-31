@@ -11552,7 +11552,242 @@ Použij ji pro nový návod, interní pravidlo nebo produktové rozhodnutí.
 
 Dokumentace je jeden z nejlevnějších způsobů, jak škálovat kvalitu. Neprodá produkt sama, ale snižuje chaos, chrání rozhodnutí a dává týmu společnou paměť. A společná paměť je fajn — zvlášť když alternativa je „myslím, že to někdo řešil v nějakém vlákně někdy v dubnu“.
 
+## Příloha BM: AI asistent v malém SaaS týmu bez úniku know-how
+
+AI asistent má v malém týmu nejlepší návratnost tam, kde zkracuje opakovanou práci a zlepšuje kvalitu rozhodování. Ne tam, kde se z něj stane kouzelná krabička na všechno. Kouzelné krabičky mají nepříjemný zvyk požírat kontext, rozpočet a občas i zdravý rozum.
+
+Privacy-first přístup tady znamená jednoduché pravidlo: než AI něco dostane, víme proč, jaká data posíláme, kdo je zpracuje a co z výstupu smí ovlivnit zákazníka.
+
+### BM.1 Začni mapou práce, ne výběrem nástroje
+
+Nejdřív napiš deset činností, které tým dělá opakovaně. Pak u každé označ tři věci:
+
+- jak často se opakuje,
+- jak moc bolí, když se udělá špatně,
+- jak citlivá data při ní používáš.
+
+Typické kandidáty pro AI asistenta:
+
+- návrh první verze support odpovědi,
+- shrnutí zákaznického hovoru z vlastních poznámek,
+- převod rozhovoru na produktové signály,
+- kontrola srozumitelnosti landing page,
+- návrh struktury článku nebo dokumentace,
+- příprava checklistu pro launch,
+- vysvětlení technického rozhodnutí obchodnímu týmu.
+
+Špatní kandidáti pro první iteraci:
+
+- autonomní mazání dat,
+- přímé odesílání citlivých e-mailů bez kontroly,
+- automatické rozhodování o ceně pro konkrétního zákazníka,
+- právní závěry bez lidské revize,
+- bezpečnostní změny v produkci bez schválení.
+
+Codyho komentář: AI má být nejdřív chytrý praktikant s checklistem, ne CEO v mikině. Praktikant pomůže. CEO v mikině občas nakoupí kryptoměnu za firemní kartu.
+
+### BM.2 Rozděl úlohy podle rizika
+
+Každý AI use case zařaď do jedné ze tří úrovní.
+
+**Nízké riziko:** AI pracuje s veřejným nebo neosobním obsahem a výstup kontroluje člověk.
+
+Příklady:
+
+- návrh osnovy článku,
+- úprava interního checklistu,
+- shrnutí obecné produktové strategie,
+- generování variant nadpisů pro landing page.
+
+**Střední riziko:** AI vidí interní kontext nebo zákaznické informace, ale výstup nejde ven bez člověka.
+
+Příklady:
+
+- shrnutí anonymizovaných support ticketů,
+- návrh odpovědi zákazníkovi,
+- analýza důvodů churnu,
+- převod poznámek z onboardingu na úkoly.
+
+**Vysoké riziko:** AI může ovlivnit zákazníka, peníze, bezpečnost, právní postavení nebo osobní údaje.
+
+Příklady:
+
+- automatické posílání nabídek,
+- rozhodování o refundaci,
+- změny oprávnění,
+- hodnocení zaměstnanců,
+- práce se zdravotními, finančními nebo velmi citlivými daty.
+
+První měsíc automatizuj jen nízké riziko. Střední riziko používej jako asistovanou práci s ruční kontrolou. Vysoké riziko nejdřív popiš, omez a nech člověku poslední slovo.
+
+### BM.3 Piš interní prompty jako provozní postup
+
+Dobrý prompt není básnička. Je to malý pracovní postup.
+
+Měl by obsahovat:
+
+- roli asistenta,
+- vstupní data,
+- cíl práce,
+- omezení a hranice,
+- formát výstupu,
+- pravidla pro nejistotu,
+- pravidla pro citlivá data.
+
+Příklad interního promptu pro support:
+
+```text
+Jsi asistent support týmu pro B2B SaaS.
+Cíl: navrhni stručnou odpověď zákazníkovi.
+Vstup: anonymizovaný popis problému a stav účtu.
+Nesmíš: slibovat termín opravy, nabízet slevu, žádat heslo ani citovat interní poznámky.
+Musíš: napsat návrh odpovědi česky, přidat interní poznámku pro support a označit nejasnosti.
+Pokud chybí důležitý kontext, polož maximálně tři otázky.
+Výstup: 1) odpověď zákazníkovi, 2) interní poznámka, 3) rizika.
+```
+
+Tohle se dá verzovat stejně jako dokumentace. Když se změní produkt, upravíš prompt. Když support zjistí častou chybu, doplníš hranici. Když AI vyrobí nesmysl, neopravíš jen výstup; opravíš zadání.
+
+### BM.4 Minimalizuj data před odesláním do AI
+
+Privacy-first AI workflow má před každým voláním malou bránu: opravdu musí model vidět všechno?
+
+Praktická pravidla:
+
+- jméno zákazníka nahraď rolí nebo segmentem,
+- e-mail nahraď interním ID,
+- odstraň přístupové tokeny, URL s tajnými parametry a interní poznámky,
+- neposílej celé exporty, když stačí pět relevantních řádků,
+- odděl fakta od domněnek,
+- nepřikládej screenshot celé administrace kvůli jedné chybové hlášce.
+
+Příklad před úpravou:
+
+```text
+Firma Novák & synové, novak@example.cz, účet 39482, tarif Growth, faktura po splatnosti, chyba v exportu objednávek...
+```
+
+Lepší vstup:
+
+```text
+B2B zákazník, tarif Growth, účet ID 39482. Problém: export objednávek vrací chybu při filtrování podle období. Kontext: účet má nevyřešenou platbu, ale problém se týká technické funkce.
+```
+
+AI pořád dostane kontext pro práci. Nedostane zbytečný balík osobních údajů. To je rozdíl mezi „pomáháme si“ a „hážeme data do studny a doufáme, že studna má DPA“.
+
+### BM.5 Udržuj knihovnu ověřených vzorů
+
+Jakmile tým používá AI častěji, začne vznikat promptový folklór. Někdo má v poznámkách skvělý prompt, někdo posílá do modelu půlku CRM, někdo používá starou verzi pravidel. Výsledek je nekonzistentní kvalita.
+
+Místo toho vytvoř malou knihovnu vzorů:
+
+- support odpověď,
+- shrnutí zákaznického rozhovoru,
+- převod poznámek na backlog item,
+- revize landing page,
+- příprava incident update,
+- kontrola privacy dopadu,
+- návrh dokumentace.
+
+U každého vzoru udržuj:
+
+- účel,
+- povolené vstupy,
+- zakázané vstupy,
+- povinný výstup,
+- kdo výstup schvaluje,
+- poslední změnu,
+- příklad dobrého použití.
+
+Knihovna nemusí být složitá. Stačí složka v repozitáři nebo interní dokumentace. Důležité je, aby tým nepoužíval AI jako individuální improvizaci, ale jako sdílený pracovní systém.
+
+### BM.6 Měř přínos podle času, kvality a rizika
+
+AI projekt se nemá hodnotit podle počtu promptů. To je jako hodnotit kuchaře podle počtu špinavých hrnců. Něco se dělo, ale večeře z toho ještě neplyne.
+
+Měř tři jednoduché věci:
+
+1. **Čas:** kolik minut práce se reálně ušetřilo nebo přesunulo na kvalitnější rozhodnutí.
+2. **Kvalita:** kolik výstupů člověk použil téměř beze změny, kolik vyžadovalo velkou opravu a kolik bylo nepoužitelných.
+3. **Riziko:** kolikrát AI navrhla slib, fakt, právní závěr nebo práci s daty, kterou musel člověk zastavit.
+
+Týdenní mini report může vypadat takhle:
+
+```text
+Týden: [datum]
+Use case: support drafty
+Počet použití: 18
+Odhad úspory: 3 hodiny
+Použitelné beze změny: 7
+Použitelné po úpravě: 10
+Nepoužitelné: 1
+Rizikové návrhy: 2
+Co upravíme v promptu: zakázat slib termínu opravy bez odkazu na issue.
+```
+
+Po měsíci se rozhodni:
+
+- rozšířit use case,
+- upravit pravidla,
+- přesunout ho do jiné rizikové úrovně,
+- nebo ho zrušit, protože víc práce vyrábí než šetří.
+
+### BM.7 Šablona: karta AI use casu
+
+Použij ji pro každý opakovaný způsob práce s AI.
+
+## AI use case: [název]
+
+### Účel
+
+- Jakou práci má AI zrychlit:
+- Pro koho je výstup:
+- Jak poznáme dobrý výsledek:
+
+### Riziko
+
+- Úroveň rizika: nízké / střední / vysoké
+- Jaká data vstupují do AI:
+- Co se před odesláním anonymizuje nebo odstraňuje:
+- Co AI nesmí rozhodnout:
+
+### Workflow
+
+- Kdo spouští AI:
+- Kde je uložený ověřený prompt:
+- Kdo kontroluje výstup:
+- Co se děje při nejistotě:
+
+### Měření
+
+- Jak často use case používáme:
+- Kolik času šetří:
+- Jak často výstup opravujeme:
+- Jaká rizika se objevila:
+
+### Údržba
+
+- Vlastník:
+- Poslední revize:
+- Co spustí mimořádnou revizi:
+
+### BM.8 Checklist: AI asistent, který pomáhá a nekrade kontext
+
+- [ ] Máme sepsané konkrétní práce, které má AI zrychlit.
+- [ ] Každý use case má rizikovou úroveň.
+- [ ] Nízkorizikové úlohy řešíme první, vysokorizikové držíme pod lidskou kontrolou.
+- [ ] Prompty jsou uložené jako sdílené vzory, ne jen v osobních poznámkách.
+- [ ] U každého promptu máme povolené a zakázané vstupy.
+- [ ] Před odesláním minimalizujeme osobní, obchodní a technická tajemství.
+- [ ] AI nesmí sama slibovat termíny, slevy, právní závěry ani bezpečnostní změny.
+- [ ] Výstupy pro zákazníka kontroluje člověk.
+- [ ] Měříme čas, kvalitu a rizikové návrhy, ne počet promptů.
+- [ ] Špatný výstup vede k úpravě workflow, ne jen k otrávenému povzdechu.
+
+AI v SaaS týmu není samostatná strategie. Je to zesilovač. Když zesílíš dobrý proces, tým působí větší a klidnější. Když zesílíš chaos, dostaneš chaos ve vysokém rozlišení. A ten bohužel pořád nejde dát do roadmapy jako feature.
 ## Pracovní log
+
+- 2026-08-31 12:00 UTC — Doplněna příloha BM o AI asistentovi v malém SaaS týmu: mapování práce, rizikové úrovně, interní prompty, minimalizace dat, knihovna vzorů, měření přínosu a karta AI use casu.
 
 - 2026-08-31 11:00 UTC — Doplněna příloha BL o produktové dokumentaci: rozhodovací záznamy, rozdělení podle rolí, návody podle úkolu, údržba blízko změn, privacy-first příklady, měření tření a dokumentační karta.
 
