@@ -10957,7 +10957,201 @@ Použij jednu kartu pro každou zprávu. Pomůže ti oddělit užitečný e-mail
 
 E-mailový onboarding má být krátký most mezi registrací a první hodnotou. Když je napsaný dobře, zákazník má pocit, že ho produkt vede. Když je napsaný špatně, má pocit, že se přihlásil do mini call centra. Stav první je produkt. Stav druhý je důvod hledat tlačítko „unsubscribe“ rychleji než fakturu v účetnictví.
 
+
+## Příloha BJ: Referral program, který nestaví růst na spamování kontaktů
+
+Referral je lákavý, protože zní jako růst zadarmo: spokojení zákazníci doporučí produkt dalším lidem a křivka se rozjede sama. Jenže špatně navržený referral program se rychle změní v otravný stroj na vynucené pozvánky, slevové lovce a podivné formuláře na import kontaktů. To není růst. To je důvěra v mixéru.
+
+Dobrý referral program vychází z jednoduchého předpokladu: člověk doporučuje jen tehdy, když tím neriskuje vlastní reputaci. Proto musí být nabídka jasná, férová, snadno vysvětlitelná a použitelná bez toho, aby produkt sbíral cizí adresáře nebo tlačil uživatele do trapných automatických zpráv.
+
+*Codyho komentář:* Referral není „hack“. Je to formalizované doporučení. Když zákazníkovi nedáváš dost hodnoty, žádný bonus to dlouhodobě nezachrání. Jen k tomu přidáš účetní položku a trochu marketingového kouře.
+
+### BJ.1 Nejdřív zjisti, jestli máš co doporučovat
+
+Než začneš kreslit referral banner, odpověz si na tvrdší otázku: existuje skupina zákazníků, která by tě doporučila i bez odměny?
+
+Signály, že ano:
+
+- zákazníci spontánně posílají nové kontakty,
+- v supportu nebo review říkají „tohle by se hodilo i kolegovi“,
+- zákazníci sdílí tvoje návody, šablony nebo případové studie,
+- nová poptávka přichází s větou „doporučil vás…“,
+- lidé se ptají, jestli existuje partnerský nebo agenturní režim.
+
+Pokud tyhle signály nemáš, referral program nezačínej jako první růstovou aktivitu. Nejdřív zlepši produktový výsledek, onboarding, support a jasnost nabídky. Doporučení je zesilovač. Když zesiluje slabý signál, dostaneš jen hlasitější šum.
+
+Praktický test:
+
+> Vyber deset nejspokojenějších zákazníků a zeptej se jich: „Komu by podle vás náš produkt dával smysl a proč?“
+
+Když neumí říct konkrétní situaci, referral copy zatím nevymýšlej. Máš problém s pozicí produktu, ne s mechanikou odměny.
+
+### BJ.2 Vyber odměnu podle typu vztahu
+
+Odměna nemusí být vždycky sleva. U B2B SaaS a služeb často fungují lépe výhody, které zvyšují hodnotu spolupráce, ne jen snižují cenu.
+
+Možné typy odměn:
+
+- **Kredit do služby:** vhodný pro SaaS s jasnou měsíční fakturací.
+- **Rozšířená kapacita:** víc projektů, uživatelů, exportů nebo konzultací.
+- **Servis navíc:** audit, onboarding session, školení týmu, prioritní review.
+- **Dvojitá odměna:** něco dostane doporučující i nový zákazník.
+- **Partnerská provize:** vhodná pro agentury, konzultanty a integrátory.
+- **Neplacená reputační výhoda:** zmínka v case study, přístup k beta funkcím, společný webinář.
+
+Příklad pro privacy-first webové studio:
+
+> Pokud nám přivedete firmu, se kterou začne placený projekt, uděláme vám zdarma roční privacy-first audit webu a nové firmě přidáme úvodní konzultaci k datové mapě.
+
+To je lepší než sleva bez kontextu, protože odměna posiluje stejnou hodnotu, kterou firma prodává: důvěru, data pod kontrolou a lepší provoz.
+
+### BJ.3 Udělej doporučení snadné bez importu kontaktů
+
+Největší privacy-first chyba referral programů je import adresáře. „Nahrajte kontakty a my jim napíšeme“ je pohodlné pro růstový tým a nepříjemné pro všechny ostatní. Uživatel často nemá souhlas lidí v adresáři, aby jejich e-mail předal další službě. A i kdyby ho měl, pocitově to působí jako levný trik.
+
+Lepší mechaniky:
+
+- osobní referral odkaz, který si zákazník zkopíruje,
+- předpřipravený text, který si může upravit a poslat sám,
+- krátká veřejná stránka „pro koho je produkt vhodný“,
+- PDF nebo Markdown one-pager pro interní předání,
+- možnost napsat ručně e-mail na partnerský kontakt,
+- formulář „doporučil mě zákazník X“ bez sběru dat třetích osob předem.
+
+Předpřipravený text může vypadat takhle:
+
+> Ahoj, používáme [produkt] na [konkrétní výsledek]. Myslím, že by vám mohl dávat smysl, pokud teď řešíte [situace]. Tady je odkaz: [URL].
+
+Všimni si, že zpráva není automaticky odeslaná systémem. Zákazník ji může upravit, neposlat nebo přidat vlastní zkušenost. To je méně „growth engine“, ale víc lidské. A překvapivě právě proto to často funguje lépe.
+
+### BJ.4 Nastav pravidla proti slevovým turistům
+
+Referral program potřebuje jednoduché podmínky. Ne proto, abys zákazníky dusil právnickou mlhou, ale aby bylo jasné, co se počítá jako kvalitní doporučení.
+
+Minimální pravidla:
+
+- odměna vzniká až po zaplacení první faktury nebo po dokončení domluvené fáze,
+- doporučení musí být nové a relevantní,
+- vlastní účty a fiktivní firmy se nepočítají,
+- odměna má rozumný strop za období,
+- partner nesmí používat klamavé sliby nebo agresivní spam,
+- zákazník ví, jak a kdy se odměna připíše.
+
+U služeb můžeš použít kvalifikační hranici:
+
+> Referral odměna platí pro projekty od určité velikosti nebo pro firmy, které odpovídají našemu zaměření.
+
+To není arogance. To je ochrana programu před tím, aby se z něj stal výprodej pozornosti. Pokud firma staví na důvěře, nesmí růst přes kanály, které důvěru poškozují.
+
+### BJ.5 Měř kvalitu doporučení, ne jen počet odkazů
+
+Referral dashboard svádí ke sledování kliků, sdílení a registrací. To může být užitečné, ale hlavní otázka je jiná: přivádí program správné lidi?
+
+Sleduj raději tyhle signály:
+
+- počet doporučení od aktivních zákazníků,
+- podíl doporučení, která vedla ke kvalifikovanému rozhovoru,
+- podíl doporučení, která se stala zákazníkem,
+- první hodnota nového zákazníka po doporučení,
+- retence a spokojenost doporučených zákazníků,
+- nejčastější věta, kterou zákazníci při doporučení používají.
+
+Privacy-first měření stačí držet agregovaně. Nepotřebuješ stavět detailní graf sociálních vztahů. Stačí vědět, že doporučení přišlo od zákazníka nebo partnera, jaký typ firmy přišel, jaký problém řešil a jak dopadl další krok.
+
+Jednoduchý měsíční report:
+
+- Kolik doporučení přišlo?
+- Od koho typově přišla?
+- Která byla kvalitní a proč?
+- Co lidé při doporučení slibovali?
+- Sedí to s naší pozicí produktu?
+- Musíme upravit referral stránku, odměnu nebo pravidla?
+
+### BJ.6 Referral stránka má vysvětlit komu pomáháš
+
+Dobrá referral stránka není jen formulář a bonus. Je to malá prodejní stránka pro člověka, který tě chce doporučit, ale nechce u toho vypadat jako amatérský affiliate leták.
+
+Měla by obsahovat:
+
+- pro koho je produkt nebo služba ideální,
+- jaký problém řešíš,
+- jak vypadá dobré doporučení,
+- co dostane doporučující a nový zákazník,
+- kdy odměna vzniká,
+- jaká data se sbírají a proč,
+- jednoduchý text ke zkopírování,
+- kontakt pro ruční domluvu.
+
+Příklad krátkého vysvětlení:
+
+> Doporučte nás firmě, která chce web nebo SaaS provozovat s větší kontrolou nad daty. Nejlépe pomáháme B2B týmům v Evropě, které potřebují jasnější web, menší závislost na reklamních platformách a privacy-first měření bez zbytečných trackerů.
+
+Tahle formulace pomáhá doporučujícímu vybrat správného člověka. A zároveň snižuje počet poptávek, které jsou mimo záběr.
+
+### BJ.7 Šablona: referral karta
+
+Použij ji pro návrh nebo revizi programu.
+
+## Referral program: [název]
+
+### Pro koho je vhodný
+
+- Ideální doporučující:
+- Ideální nový zákazník:
+- Situace, ve které doporučení dává smysl:
+- Situace, ve které doporučení nechceme:
+
+### Hodnota doporučení
+
+- Co zákazník díky produktu získal:
+- Jak to může popsat jednou větou:
+- Jaký důkaz nebo příklad může sdílet:
+
+### Odměna
+
+- Odměna pro doporučujícího:
+- Odměna pro nového zákazníka:
+- Kdy nárok vzniká:
+- Jaký je strop nebo omezení:
+
+### Referral cesta
+
+- Kde zákazník najde odkaz nebo text:
+- Jak může doporučení poslat bez importu kontaktů:
+- Jak nový zákazník uvede doporučujícího:
+- Kdo interně referral zpracuje:
+
+### Privacy-first kontrola
+
+- Jaká data sbíráme:
+- Jaká data nesbíráme:
+- Jak dlouho referral záznam držíme:
+- Kdo má k záznamům přístup:
+- Jak zákazník zjistí stav odměny:
+
+### Vyhodnocení
+
+- Jak poznáme kvalitní doporučení:
+- Jak často program revidujeme:
+- Kdy program upravíme nebo pozastavíme:
+
+### BJ.8 Checklist: referral bez spamu a divných triků
+
+- [ ] Máme důkaz, že zákazníci produkt doporučují nebo by ho doporučili i bez bonusu.
+- [ ] Referral program popisuje konkrétní situaci, ve které doporučení dává smysl.
+- [ ] Odměna posiluje hodnotu produktu, není jen náhodná sleva.
+- [ ] Doporučení funguje bez importu kontaktů a bez automatického obesílání adresáře.
+- [ ] Zákazník má text ke zkopírování, ale může ho snadno upravit.
+- [ ] Pravidla jasně říkají, kdy vzniká nárok na odměnu.
+- [ ] Program chrání značku před spamem, klamavými sliby a nerelevantními leady.
+- [ ] Měříme kvalitu doporučení, kvalifikované rozhovory a retenci, ne jen kliky.
+- [ ] Referral záznamy držíme jen tak dlouho, jak dávají obchodní a účetní smysl.
+- [ ] Každý měsíc kontrolujeme, jestli program přivádí správné zákazníky.
+
+Referral program má být zdvořilý most mezi spokojeným zákazníkem a člověkem, kterému můžeš opravdu pomoct. Pokud z něj uděláš spamovací mašinu, možná získáš pár kliků. Pokud ho postavíš na reputaci, jasné hodnotě a datové střídmosti, získáš něco lepšího: doporučení, za které se nikdo nemusí stydět.
+
 ## Pracovní log
+- 2026-08-31 09:00 UTC — Doplněna příloha BJ o referral programu bez spamování kontaktů: validace doporučitelnosti, typy odměn, referral cesta bez importu adresářů, pravidla proti zneužití, privacy-first měření, šablona a checklist.
 - 2026-08-31 08:00 UTC — Doplněna příloha BI o e-mailovém onboardingu bez newsletterového kombajnu: rozdělení typů zpráv, aktivační moment, segmenty, očekávání, privacy-first měření, šablona a checklist.
 - 2026-08-31 07:05 UTC — Doplněna příloha BH o zákaznické komunitě bez závislosti na cizí platformě: účel komunity, malé formáty, přímé kanály, moderace, převod signálů do rozhodnutí, komunitní karta a privacy-first checklist.
 
