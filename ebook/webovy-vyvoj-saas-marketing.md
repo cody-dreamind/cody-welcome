@@ -15263,7 +15263,172 @@ Nedělej z toho sledování jednotlivců. Stačí agregovaný přehled a krátk�
 *Codyho komentář:* Win-back není nekromancie zákaznických vztahů. Je to slušná otázka: „Změnilo se něco, kvůli čemu si znovu máme co říct?“ Pokud odpověď zní ne, poděkuj v duchu za lekci a běž zlepšovat produkt pro lidi, kteří teď opravdu potřebují pomoct.
 
 
+## Příloha CJ: Retence a mazání dat po skončení účtu bez digitálního sklepa
+
+SaaS produkt často dobře řeší registraci, aktivaci a platbu, ale konec vztahu nechá někde v mlze. Účet se deaktivuje, fakturace se zastaví, ale data zůstanou v produkční databázi, zálohách, support nástroji, exportech, tabulkách a někdy i v hlavách lidí, kteří „si to radši nechali pro jistotu“. To není privacy-first provoz. To je digitální sklep, ve kterém časem začne strašit compliance, bezpečnost i obyčejný zdravý rozum.
+
+Retenční pravidla nejsou jen právní formalita. Jsou součástí produktu. Zákazník má vědět, co se stane s jeho daty, když skončí trial, zruší předplatné, smaže projekt nebo požádá o export. Tým má vědět, co držet kvůli účetnictví, co anonymizovat kvůli metrikám a co bez sentimentu smazat.
+
+### CJ.1 Rozděl data podle důvodu držení
+
+Nezačínej otázkou „Jak dlouho všechno necháme?“. Začni otázkou „Proč daný typ dat vůbec držíme?“ Každý důvod má jinou logiku a jinou hranici.
+
+Praktické skupiny:
+
+- **Účetní a smluvní data:** faktury, objednávky, souhlasy, smluvní historie a platební záznamy.
+- **Produktová data zákazníka:** projekty, soubory, nastavení, importy, komentáře, úkoly a výstupy.
+- **Provozní data:** logy, chybové události, bezpečnostní záznamy a auditní stopa.
+- **Support kontext:** tikety, e-maily, interní poznámky a přiložené soubory.
+- **Marketingový kontext:** zdroj poptávky, preference komunikace, souhlas s odběrem a historie oslovení.
+- **Agregované poznatky:** anonymizované metriky, trendové přehledy a produktové lekce bez vazby na konkrétní osobu.
+
+Ke každé skupině napiš jednu větu: „Držíme to proto, aby…“ Pokud věta zní jako „protože by se to někdy mohlo hodit“, data nemají dost dobrý důvod. Hodit se může i stará nabíječka k telefonu z roku 2011. To neznamená, že má bydlet v produkční databázi.
+
+### CJ.2 Udělej retenční tabulku, kterou pochopí i obchod
+
+Retenční politika nesmí žít jen v právním dokumentu. Potřebuješ interní tabulku, podle které dokáže rozhodnout support, obchod i vývojář při úklidu databáze.
+
+Minimální sloupce:
+
+- typ dat,
+- kde data fyzicky leží,
+- vlastník v týmu,
+- důvod držení,
+- retenční doba,
+- co spouští mazání,
+- metoda mazání nebo anonymizace,
+- výjimky,
+- jak ověříme, že mazání proběhlo.
+
+Příklad:
+
+| Typ dat | Kde leží | Důvod | Retence | Akce po retenci |
+|---|---|---|---|---|
+| Projekty zákazníka | Produkční DB + souborové úložiště | Poskytování služby | Po dobu aktivního účtu + krátké ochranné okno po zrušení | Export nabídnout, poté smazat |
+| Faktury | Fakturační systém | Účetnictví a daňová evidence | Podle účetních pravidel firmy | Držet odděleně od produktových dat |
+| Aplikační logy | Monitoring / log storage | Diagnostika chyb a bezpečnost | Krátká provozní retence | Rotovat, agregovat, mazat detaily |
+| Support tikety | Helpdesk / e-mail | Řešení požadavků a historie dohody | Jen po dobu užitečnou pro podporu a obranu oprávněného zájmu | Smazat přílohy, zkrátit kontext |
+
+Čísla do tabulky nedávej od oka. Nastav je podle typu firmy, smluv, účetních povinností a rizik. Důležité je, aby každá položka měla jasný důvod a aby produktová data nebyla držena jen proto, že faktura musí zůstat v účetnictví. To jsou dvě různé věci.
+
+### CJ.3 Offboarding musí nabídnout export před smazáním
+
+Když zákazník ruší účet, má dostat jasnou cestu ven. Férový SaaS se pozná podle toho, jak se chová, když už mu zákazník neposílá peníze.
+
+Offboardingový tok by měl říct:
+
+- kdy skončí přístup,
+- co se stane s projekty a soubory,
+- do kdy lze stáhnout export,
+- v jakém formátu export dostane,
+- která data zůstanou kvůli účetnictví nebo bezpečnosti,
+- jak může požádat o dřívější smazání,
+- koho kontaktovat, když export selže.
+
+Export má být použitelný bez tvého produktu. U strukturovaných dat preferuj CSV, JSON nebo jiné čitelné formáty. U dokumentů a souborů zachovej původní soubory, názvy a základní metadata. Pokud exportuješ jen „magický ZIP“, který bez tvé aplikace nikdo nerozchodí, je to spíš rukojmí než export.
+
+Privacy-first detail: export negeneruj automaticky pro každého navždy. Vytvoř ho na žádost, zabezpeč krátkodobým odkazem, loguj stažení jen v minimálním rozsahu a po expiraci balíček smaž. Export je služba pro zákazníka, ne další archiv pro tvoji sběratelskou vitrínu.
+
+### CJ.4 Zálohy nejsou výmluva pro věčné držení dat
+
+Mazání v produkční databázi je jen půlka práce. Druhá půlka jsou zálohy, staging prostředí, lokální dumpy a analytické kopie. Pokud neumíš vysvětlit, kde se data po smazání ještě mohou objevit, retenční pravidlo není hotové.
+
+Praktický přístup:
+
+- zálohy drž jen tak dlouho, jak odpovídá obnově služby,
+- odděl obnovitelnost systému od věčného archivu zákaznických dat,
+- staging plň anonymizovanými nebo syntetickými daty,
+- lokální databázové dumpy povol jen výjimečně a s expirací,
+- exporty a dočasné soubory pravidelně maž automaticky,
+- restore postup musí počítat s tím, že některá data už byla po právu smazána.
+
+Když obnovuješ starší zálohu, potřebuješ proces, který znovu aplikuje smazání nebo anonymizaci provedenou po datu zálohy. Jinak můžeš omylem vrátit data, která už neměla existovat. To je nepříjemný typ zombie. Ne takový ten filmový, spíš auditní.
+
+### CJ.5 Anonymizace musí být nevratná, jinak je to jen přezdívka
+
+Někdy nechceš mazat všechno, protože agregovaná data pomáhají řídit produkt. To je v pořádku, pokud už nejde poznat konkrétní člověk nebo firma.
+
+Rozlišuj:
+
+- **Smazání:** data odstraníš a nejsou dál použitelná.
+- **Pseudonymizace:** nahradíš identifikátor, ale někde existuje klíč nebo cesta zpět.
+- **Anonymizace:** rozumně nejde data spojit zpět s konkrétním subjektem.
+- **Agregace:** držíš souhrny bez jednotlivých záznamů.
+
+Pro produktové metriky často stačí agregace: počet aktivací za týden, počet dokončených exportů, počet chyb importu, průměrná doba do první hodnoty. Nepotřebuješ navždy držet, že přesně Jana z firmy X klikla před třemi lety na třetí tlačítko v nastavení. Jana má důležitější věci na práci. Třeba nečíst tvoje logy.
+
+### CJ.6 Automatizuj úklid jako provozní rutinu
+
+Retence nefunguje, když závisí na tom, že si někdo jednou za rok vzpomene a ručně smaže složku „old_exports_final2“. Udělej z úklidu běžnou součást provozu.
+
+Jednoduchá rutina:
+
+1. Každý týden proběhne job pro dočasné exporty, neaktivní pozvánky a prošlé tokeny.
+2. Každý měsíc se zkontrolují zrušené účty po ochranném okně.
+3. Každé čtvrtletí proběhne review retenční tabulky a míst, kde data leží.
+4. Každý nový nástroj musí mít před spuštěním vyplněnou retenční položku.
+5. Každý incident nebo restore test ověří, zda se nevrací data, která měla být smazaná.
+
+Výstup nemusí být román. Stačí krátký interní záznam: co se mazalo, kolik záznamů, jestli byly chyby a kdo je řeší. Pokud úklid selže, musí existovat alert. Tiché selhání retenčního jobu je přesně ten typ nenápadného problému, který po dvou letech vypadá jako archeologická expedice.
+
+### CJ.7 Šablona retenční položky
+
+```markdown
+## Retenční položka: [typ dat]
+
+### Popis
+- Jaká data sem patří:
+- Typičtí uživatelé nebo zákazníci:
+- Obsahuje osobní údaje / obchodní tajemství / citlivé přílohy:
+
+### Umístění
+- Produkční systém:
+- Zálohy:
+- Externí nástroje:
+- Exporty / dočasné soubory:
+- Lokální kopie povoleny: ano/ne, za jakých podmínek
+
+### Důvod držení
+- Primární účel:
+- Právní / smluvní / provozní důvod:
+- Co se rozbije, když data smažeme:
+
+### Retence
+- Začátek retenční lhůty:
+- Délka retence:
+- Co spouští mazání:
+- Výjimky:
+
+### Mazání nebo anonymizace
+- Metoda:
+- Automatizace / ruční krok:
+- Jak ověřujeme výsledek:
+- Kdo řeší chyby:
+
+### Komunikace zákazníkovi
+- Zobrazujeme v produktu:
+- Popis v zásadách soukromí:
+- Kontakt pro žádost o export nebo smazání:
+```
+
+### CJ.8 Checklist: data bez digitálního sklepa
+
+- Každý typ dat má napsaný důvod držení.
+- Produktová data jsou oddělená od účetních a smluvních záznamů.
+- Zákazník při zrušení ví, kdy přijde o přístup a jak získá export.
+- Export je v použitelném formátu a má krátkou expiraci.
+- Retenční tabulka obsahuje umístění dat, vlastníka, lhůtu a metodu mazání.
+- Zálohy mají vlastní retenci a restore postup respektuje pozdější smazání.
+- Staging a lokální vývoj nepoužívají živá osobní data bez silného důvodu.
+- Dočasné soubory, tokeny a exporty uklízí automatický job.
+- Anonymizace je opravdu nevratná, ne jen přejmenovaná tabulka.
+- Selhání mazací rutiny vytváří alert a někdo ho vlastní.
+
+*Codyho komentář:* Dobrá retenční politika je jako pravidelný úklid kanceláře. Nikdo kvůli ní netleská ve stoje, ale když ji neděláš, jednou najdeš pod stolem věci, které měly být pryč dávno před posledním redesignem loga.
+
+
 ## Pracovní log
+- 2026-09-01 10:01 UTC — Doplněna příloha CJ o retenci a mazání dat po skončení účtu: rozdělení dat podle důvodu držení, retenční tabulku, offboarding s exportem, práci se zálohami, anonymizaci, automatizovaný úklid, šablonu položky a privacy-first checklist.
 - 2026-09-01 09:01 UTC — Doplněna příloha CI o win-backu odcházejících zákazníků: rozlišení důvodů odchodu, návrat s konkrétní změnou místo slevy, respektující zpráva, malý seznam účtů, vyhodnocení učení, šablona karty a privacy-first checklist.
 - 2026-09-01 08:00 UTC — Doplněna příloha CH o férové expanzi zákaznického účtu: potvrzení hodnoty, typy rozšíření, expanzní hypotézu, konzultativní nabídku, privacy-first měření, šablonu karty a checklist.
 - 2026-09-01 07:00 UTC — Doplněna příloha CG o customer success pro malé SaaS: slíbená hodnota, vrstvy péče, jednoduché health score, smysluplné automatizace, review zakončené rozhodnutím, šablona karty a privacy-first checklist.
