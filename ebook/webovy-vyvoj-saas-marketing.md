@@ -16268,9 +16268,186 @@ Takhle reference nejsou galerie trofejí. Jsou součást rozhodovací cesty.
 
 Dobrá reference neříká „podívej, jak jsme úžasní“. Říká: „Tady je situace podobná té tvé, tady bylo rozhodnutí, tady je výsledek a tady je důvod, proč nám můžeš věřit.“ To je mnohem silnější než řada log bez kontextu. A taky podstatně méně nafoukané, což webům obecně svědčí.
 
+
+---
+
+## Příloha CP: Referral kanál bez provizního cirkusu a sledovacích pastí
+
+Referral kanál je jednoduchá myšlenka: spokojení zákazníci, partneři nebo lidé z oboru tě doporučí někomu, komu můžeš pomoct. V praxi se z toho ale často stane divný mix affiliate odkazů, provizních slibů, agresivních newsletterů a tabulek, ve kterých nikdo neví, kdo komu co slíbil. To je cesta k trapasu, ne k důvěryhodnému růstu.
+
+Dobrý referral program nemusí být velký. Pro malý webový nebo SaaS tým často stačí jasně říct, komu umíš pomoct, jak vypadá dobré doporučení, co se stane po předání kontaktu a jak chráníš vztah doporučujícího člověka. Protože referral není „levný lead“. Je to půjčená důvěra. A půjčená důvěra se nebere do ruky jako reklamní kreditka po firemním večírku.
+
+### CP.1 Začni tím, koho chceš dostávat doporučeného
+
+Než začneš prosit o doporučení, napiš si profil ideálního doporučení. Čím přesnější budeš, tím snazší bude pro druhé lidi poznat vhodnou příležitost.
+
+Popiš hlavně:
+
+- typ firmy nebo týmu,
+- typ problému,
+- typický spouštěč rozhodnutí,
+- minimální rozpočet nebo velikost projektu,
+- situace, které nechceš řešit,
+- důvod, proč jsi pro daný případ dobrá volba.
+
+Slabá prosba zní:
+
+> Kdybys věděl o někom, kdo potřebuje web, dej mi vědět.
+
+Lepší prosba zní:
+
+> Kdybys narazil na menší B2B firmu, která má web bez jasné nabídky, sbírá poptávky přes chaotické formuláře a chce privacy-first provoz v EU, rád se s nimi potkám na krátkém callu.
+
+Rozdíl je obrovský. První věta hází práci na doporučujícího člověka. Druhá mu dává konkrétní radar.
+
+*Codyho komentář:* „Znáš někoho, kdo potřebuje web?“ je skoro tak široké jako „Znáš někoho, kdo má internet?“ Technicky ano. Obchodně meh.
+
+### CP.2 Referral není studený lead, ale vztahový most
+
+Když někdo doporučí tvou službu, riskuje vlastní reputaci. Proto musíš chránit nejen potenciálního zákazníka, ale i člověka, který doporučení udělal.
+
+Domluv si jednoduchý postup:
+
+1. Doporučující člověk nejdřív ověří, jestli druhá strana o úvod stojí.
+2. Pokud ano, pošle krátké představení oběma stranám.
+3. Ty odpovíš stručně, bez prodejního románu.
+4. Na první schůzce vysvětlíš, že kontakt vznikl přes doporučení.
+5. Po schůzce dáš doporučujícímu jen bezpečný stav: „potkali jsme se / dává smysl / nedává smysl“.
+
+Neposílej zpět detaily z obchodního rozhovoru, pokud k tomu nemáš souhlas. Referral není reality show. Doporučující člověk nepotřebuje znát rozpočet, interní bolest ani důvod, proč zákazník váhá. Stačí, že ví, že ses o kontakt postaral slušně.
+
+### CP.3 Odměnu nastav tak, aby nekazila motivaci
+
+Referral může být bez odměny, se symbolickým poděkováním nebo s jasně nastavenou provizí. Všechny varianty jsou v pořádku, pokud jsou průhledné.
+
+Praktické modely:
+
+- **Poděkování bez provize:** dobré pro komunitu, bývalé klienty a neformální síť.
+- **Fixní odměna:** jednoduchá částka po zaplacené první faktuře.
+- **Kredit na služby:** vhodné u SaaS nebo dlouhodobé spolupráce.
+- **Partnerská dohoda:** vhodná tam, kde partner aktivně pomáhá s kvalifikací nebo implementací.
+
+Vyhni se modelu, ve kterém odměna motivuje doporučovat kohokoliv. Špatný referral stojí čas všem třem stranám. Je lepší mít pět přesných doporučení za rok než padesát kontaktů, které sis mohl rovnou koupit jako databázi pochybné kvality a špatné karmy.
+
+Pokud provizi používáš, napiš pravidla předem:
+
+- kdy vzniká nárok na odměnu,
+- jestli se počítá z první faktury nebo opakovaných plateb,
+- co se stane při refundu nebo zrušení projektu,
+- jestli musí být doporučení registrované před prvním kontaktem,
+- jak dlouho platí ochranná lhůta.
+
+### CP.4 Měř referral jednoduše a bez profilování
+
+Referral kanál se dá měřit bez sledovacích pixelů a agresivních affiliate cookies. U menších B2B služeb je často přesnější obyčejná poznámka v CRM než sofistikovaný tracking, který sbírá víc dat než dává rozhodnutí.
+
+Stačí evidovat:
+
+- kdo doporučil,
+- koho doporučil,
+- datum úvodu,
+- segment a problém,
+- stav příležitosti,
+- výsledek: nevhodné / schůzka / nabídka / uzavřeno / ztraceno,
+- případná odměna a její stav.
+
+Na webu můžeš přidat volitelné pole „Kdo vás na nás nasměroval?“ nebo krátkou otázku v poptávkovém formuláři. Nedělej z toho povinné pole. Návštěvník nemusí znát interní název partnera a nechce řešit, jestli napsal „Petr“, „Péťa“ nebo „ten člověk z konference“.
+
+Privacy-first pravidlo: pokud používáš referral odkazy, drž je krátké, srozumitelné a bez zbytečných identifikátorů. Nepotřebuješ vědět, že konkrétní člověk navštívil pricing ve 23:41 z mobilu. Potřebuješ vědět, jestli doporučení přivádí správný typ poptávek.
+
+### CP.5 Připrav doporučujícím lidem malý balíček
+
+Lidé doporučují raději, když jim usnadníš práci. Připrav jim krátký balíček, který mohou použít bez dlouhého přemýšlení.
+
+Balíček může obsahovat:
+
+- jednu větu, komu pomáháš,
+- tři typické problémy, které řešíš,
+- odkaz na relevantní landing page,
+- krátký příklad výsledku,
+- e-mailovou šablonu pro představení,
+- jasnou informaci, co se stane po úvodu.
+
+Příklad intro šablony:
+
+```text
+Ahoj [jméno],
+
+napadlo mě propojit tě s Codym / týmem Dreamind. Řeší privacy-first weby a jednoduché SaaS nástroje pro evropské B2B firmy, hlavně když web nebo interní systém potřebuje začít měřitelně pomáhat obchodu bez zbytečného sběru dat.
+
+Cody, [jméno] řeší [stručný kontext]. Nechám na vás, jestli dává smysl krátký úvodní call.
+```
+
+Tahle šablona je záměrně neagresivní. Dává kontext, ale netlačí. Dobré doporučení má otevřít dveře, ne někoho nacpat do výtahu a mačkat za něj tlačítko „koupit“.
+
+### CP.6 Referral pravidelně uklízej
+
+Jednou měsíčně projdi referral příležitosti a udělej malý úklid:
+
+- poděkuj za nová doporučení,
+- uzavři staré nerozhodnuté kontakty,
+- doplň stav odměn,
+- zapiš, které typy doporučení byly kvalitní,
+- aktualizuj profil ideálního doporučení,
+- smaž nebo anonymizuj zbytečné osobní údaje.
+
+Referral kanál má růst z důvěry, ne z chaosu. Když někdo doporučí kontakt a tři měsíce neví, jestli ses ozval, příště už si tě rozmyslí. A právem. Důvěra se neškáluje tím, že ji necháš ležet v inboxu pod newsletterem o deseti tipech na produktivitu.
+
+### CP.7 Šablona referral karty
+
+```markdown
+## Referral: [název firmy / kontakt]
+
+### Doporučení
+- Doporučil/a:
+- Datum úvodu:
+- Souhlas s propojením: ano / ne / čeká
+- Kontext doporučení:
+
+### Fit
+- Segment:
+- Problém:
+- Očekávaný výsledek:
+- Proč dává smysl:
+- Proč může nedávat smysl:
+
+### Stav
+- Aktuální fáze: úvod / schůzka / nabídka / uzavřeno / ztraceno
+- Další krok:
+- Odpovědná osoba:
+- Datum další kontroly:
+
+### Odměna
+- Typ odměny:
+- Podmínka vzniku:
+- Stav:
+
+### Privacy poznámka
+- Jaké osobní údaje držíme:
+- Kde jsou uložené:
+- Kdy je smažeme nebo anonymizujeme:
+- Co smíme sdílet zpět doporučujícímu:
+```
+
+### CP.8 Checklist: referral bez trapasu
+
+- [ ] Máš jasně popsaný profil ideálního doporučení.
+- [ ] Doporučující člověk ví, koho hledáš a koho nehledáš.
+- [ ] Úvod vzniká až po souhlasu doporučené strany.
+- [ ] Po prvním kontaktu sdílíš zpět jen bezpečný stav, ne citlivé detaily.
+- [ ] Odměna je domluvená předem a má jednoduchá pravidla.
+- [ ] Referral evidence obsahuje jen data, která opravdu potřebuješ.
+- [ ] Referral odkazy nepoužívají invazivní tracking ani dlouhé identifikátory.
+- [ ] Doporučující lidé mají krátkou šablonu pro představení.
+- [ ] Jednou měsíčně uklízíš staré příležitosti a osobní údaje.
+- [ ] Kvalitu kanálu hodnotíš podle vhodnosti poptávek, ne podle počtu nasbíraných kontaktů.
+
+Referral je jeden z nejhezčích růstových kanálů, pokud se dělá slušně. Spojuje lidi přes důvěru, ne přes algoritmus. Funguje pomaleji než reklama, ale často přináší lepší rozhovory, kratší rozhodování a méně vysvětlování základů. Jen s ním zacházej jako s komunitním aktivem, ne jako s provizním automatem.
+
 ---
 
 ## Pracovní log
+- 2026-09-01 16:00 UTC — Doplněna příloha CP o referral kanálu bez provizního cirkusu: profil ideálního doporučení, vztahový úvod, férová odměna, privacy-first měření, doporučovací balíček, měsíční úklid, šablona referral karty a checklist.
 
 - 2026-09-01 15:00 UTC — Doplněna příloha CO o referencích a důkazech důvěry: průběžný sběr, kontext citací, privacy-first sociální důkaz bez trackerů, knihovna důkazů, rozmístění referencí podle rozhodovací cesty, šablona a checklist.
 - 2026-09-01 14:01 UTC — Doplněna příloha CN o případové studii po úspěšném nasazení: ověřený posun, interní karta příběhu, férový souhlas zákazníka, citace, anonymizace screenshotů a čísel, distribuce bez trackerů, šablona a privacy-first checklist.
