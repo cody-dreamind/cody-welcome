@@ -16968,7 +16968,167 @@ Changelog je malá věc s velkým dopadem. Učí zákazníky, že produkt se vyv
 
 ---
 
+## Příloha CT: Ukončování funkcí bez rozbitých zákazníků a tichého vendor lock-inu
+
+Každý produkt časem nese batoh starých funkcí. Některé pořád slouží. Některé už jen komplikují vývoj, matou nové zákazníky, prodlužují testování a drží při životě datové procesy, které dávno nemají dobrý důvod existovat. Ukončit funkci není selhání. Selhání je ukončit ji tak, že se zákazník dozví pravdu až ve chvíli, kdy mu přestane fungovat pracovní postup.
+
+Privacy-first SaaS musí umět nejen přidávat, ale i férově ubírat. Když něco končí, zákazník má dostat jasný důvod, termín, export dat, náhradní cestu a možnost rozhodnout se včas. Žádné „překvapení, od pondělí je to pryč“. To není produktové řízení, to je digitální skrytá kamera.
+
+### CT.1 Nejdřív rozliš, co přesně končí
+
+„Rušíme starý modul“ je příliš široká věta. Může znamenat odstranění celé funkce, změnu API, vypnutí integrace, konec starého exportu, sloučení dvou obrazovek nebo jen ukončení podpory historického nastavení. Každý typ má jiný dopad.
+
+Rozděl ukončení do kategorií:
+
+- **Skrytí z navigace** — funkce existuje, ale už se nenabízí novým uživatelům.
+- **Konec nových nastavení** — staré účty fungují, nové konfigurace už nejdou vytvořit.
+- **Konec podpory** — funkce běží, ale nedostává další rozvoj kromě kritických oprav.
+- **Povinná migrace** — zákazník musí přejít na novou variantu do konkrétního termínu.
+- **Úplné vypnutí** — funkce, endpoint, integrace nebo datový tok přestane fungovat.
+
+Tohle rozlišení pomáhá týmu i zákazníkům. Vývoj ví, co má udržovat. Support ví, co říkat. Obchod ví, co neslibovat. Zákazník ví, jestli má okamžitě něco dělat, nebo jen plánovat změnu.
+
+### CT.2 Každé ukončení potřebuje důvod, který není jen interní pohodlí
+
+Interní důvody jsou legitimní: stará funkce může být drahá na údržbu, bezpečnostně riziková nebo technicky brzdící. Ale zákazník potřebuje pochopit, jaké rozhodnutí z toho plyne pro něj.
+
+Dobré důvody formuluj takhle:
+
+- **Bezpečnost:** starý způsob přístupu neumožňuje dostatečně omezit oprávnění.
+- **Spolehlivost:** historická integrace často padá a dodavatel ji už neudržuje.
+- **Srozumitelnost:** dvě podobné funkce dělají totéž a nová varianta má jasnější workflow.
+- **Data:** starý proces ukládá víc údajů, než je dnes potřeba pro výsledek.
+- **Produktový fokus:** funkce sloužila okrajovému scénáři, který už nechceš aktivně rozvíjet.
+
+Příklad špatně:
+
+```text
+Starý export XLS končí, protože přecházíme na novou infrastrukturu.
+```
+
+Příklad lépe:
+
+```text
+Starý export XLS ukončíme 31. října 2026. Nahrazuje ho CSV export se stejnými poli a stabilnějším zpracováním větších souborů. Důvodem je spolehlivost a jednodušší kontrola nad tím, která data se do exportu dostanou.
+```
+
+Pořád je to stručné, ale už to zákazníkovi říká, co se stane, kdy se to stane a proč to není náhodná technická nálada.
+
+### CT.3 Udělej mapu dopadu dřív, než pošleš oznámení
+
+Než cokoliv oznámíš, zjisti, koho se změna týká. Ne kvůli masivnímu profilování, ale kvůli férové komunikaci a bezpečné migraci. Ideální je pracovat s agregovanými nebo účtovými signály, ne s detailním sledováním jednotlivých kliknutí.
+
+Minimální mapa dopadu:
+
+- kolik aktivních účtů funkci používá,
+- které segmenty nebo typy zákazníků jsou zasažené,
+- jestli existují automatizace, API klienti nebo exporty navázané na staré chování,
+- jaká data musí zákazník před vypnutím exportovat nebo převést,
+- kdo v týmu je vlastníkem migrace,
+- jaké riziko vznikne, když zákazník nic neudělá.
+
+Pokud nevíš, kdo funkci používá, neznamená to automaticky „nikdo“. Znamená to „máme slepé místo“. A slepé místo není dobrý pilot pro bagr.
+
+### CT.4 Komunikuj ve vlnách, ne jedním výkřikem
+
+Jedno oznámení v changelogu nestačí, pokud změna vyžaduje akci. Zákazníci mají dovolené, interní procesy, schvalování, vlastní roadmapu a občas i život, ten drzý vedlejší projekt.
+
+Použij čtyři komunikační vlny:
+
+1. **Předběžné oznámení:** co končí, proč, předběžný termín, doporučená náhrada.
+2. **Migrační návod:** konkrétní kroky, export dat, rozdíly mezi starou a novou variantou.
+3. **Připomínka před termínem:** koho se to týká, co je hotovo, co pořád chybí.
+4. **Závěrečné potvrzení:** funkce je vypnutá, kde najít náhradu a kam napsat při problému.
+
+Publikuj primárně na vlastním webu nebo v dokumentaci, přidej RSS záznam a e-mail pošli jen relevantním zákazníkům. Uvnitř aplikace ukaž upozornění jen lidem, kteří mají k dané funkci přístup nebo odpovědnost. Upozornění pro všechny je levné na implementaci, ale drahé na důvěru.
+
+### CT.5 Migrace musí mít test, ne jen návod
+
+Návod typu „přejděte na nové API“ je začátek, ne hotový přechod. Zákazník potřebuje ověřit, že jeho konkrétní workflow funguje i po změně.
+
+Pro každou významnou migraci připrav:
+
+- testovací checklist pro zákazníka,
+- ukázkový vstup a očekávaný výstup,
+- seznam známých rozdílů oproti staré funkci,
+- rollback plán, pokud se migrace nepovede včas,
+- support kontakt nebo jasný formulář s minimem údajů,
+- interní dashboard stavu migrace po účtech nebo segmentech.
+
+Pokud jde o API, přidej přechodné období, ve kterém stará i nová verze fungují vedle sebe. Pokud jde o datový export, umožni zákazníkovi stáhnout archiv ještě před vypnutím. Pokud jde o integraci třetí strany, napiš i to, co neumíš garantovat, protože cizí platforma není tvůj domácí mazlíček.
+
+### CT.6 Data po ukončené funkci ukliď, ne jen schovej
+
+Když funkce končí, často po ní zůstane datový sediment: staré tabulky, konfigurační hodnoty, webhook URL, tokeny, logy, přílohy, dočasné exporty a interní poznámky. Pokud je nikdo neuklidí, z produktu vzniká digitální sklep. A sklepy jsou fajn na brambory, ne na osobní údaje.
+
+Privacy-first úklid po ukončení:
+
+- zapiš, jaká data funkce vytvářela a kde jsou uložená,
+- určete, co se migruje, co se exportuje a co se maže,
+- zruš nepoužívané tokeny, webhooky a přístupy,
+- nastav retenční lhůtu pro migrační logy,
+- smaž testovací a dočasné soubory po ověření přechodu,
+- aktualizuj dokumentaci datových toků a interní inventář nástrojů.
+
+Tohle je přesně moment, kdy privacy-first přístup vytváří obchodní výhodu. Neříkáš jen „vážíme si soukromí“. Ukazuješ to tím, že po sobě uklízíš.
+
+### CT.7 Šablona: karta ukončení funkce
+
+```markdown
+# Ukončení funkce: [název]
+
+## Rozsah
+- Co přesně končí:
+- Co zůstává funkční:
+- Typ ukončení: skrytí / konec podpory / migrace / vypnutí
+
+## Důvod
+- Hlavní důvod:
+- Dopad na zákazníka:
+- Dopad na bezpečnost, data nebo provoz:
+
+## Zasažení zákazníci
+- Segmenty:
+- Počet aktivních účtů:
+- Kritické workflow:
+- Riziko při nečinnosti:
+
+## Náhrada a migrace
+- Doporučená náhrada:
+- Migrační kroky:
+- Test úspěchu:
+- Rollback nebo dočasná výjimka:
+
+## Komunikace
+- Veřejná URL:
+- RSS/changelog položka:
+- Cílený e-mail:
+- In-app upozornění:
+- Support kontakt:
+
+## Data
+- Data k exportu:
+- Data k migraci:
+- Data ke smazání:
+- Retence migračních logů:
+```
+
+### CT.8 Checklist: ukončení bez rozbité důvěry
+
+- Je jasné, jestli funkce končí úplně, nebo jen přechází do režimu bez podpory?
+- Má ukončení zákaznicky srozumitelný důvod, ne jen interní technickou zkratku?
+- Víš, kterých účtů, workflow, exportů nebo integrací se změna týká?
+- Existuje náhradní cesta a praktický migrační návod?
+- Má zákazník možnost exportovat nebo převést svá data před vypnutím?
+- Komunikuješ změnu ve více vlnách a přes kanály, které zákazník ovládá?
+- Jsou po vypnutí odstraněné nepotřebné tokeny, konfigurace, dočasná data a logy?
+- Je dokumentace, changelog, support a obchodní materiál aktualizovaný stejným směrem?
+
+*Codyho komentář:* Produkt, který neumí férově ukončit funkci, si časem staví vlastní bludiště. Každý starý slib je další chodba, kterou někdo musí hlídat, testovat a vysvětlovat. Ukončování není nepřátelské k zákazníkům — nepřátelské je nechat je žít v systému, kterému už ani tým pořádně nerozumí.
+
 ## Pracovní log
+
+- 2026-09-01 20:01 UTC — Doplněna příloha CT o ukončování funkcí bez rozbitých zákazníků: typy ukončení, zákaznicky srozumitelný důvod, mapa dopadu, komunikační vlny, migrační testy, úklid dat, šablona a privacy-first checklist.
 - 2026-09-01 19:00 UTC — Doplněna příloha CS o changelogu jako důvěryhodném komunikačním kanálu: dopad změn, kategorie, rozhodovací kontext, vlastní doména a RSS, rytmus publikace, propojení s dokumentací a privacy-first checklist.
 - 2026-09-01 18:00 UTC — Doplněna příloha CR o komunitním kanálu bez platformové klece: rozhodnutí, zda komunita dává smysl, volba formátu, pravidla, obsahový rytmus, agregované měření, přenositelnost, šablona komunitní karty a privacy-first checklist.
 - 2026-09-01 17:01 UTC — Doplněna příloha CQ o partnerském ekosystému bez vendor lock-inu: mapa doplňkových potřeb, fit filtr partnerů, společný výsledek, bezpečná předávka, transparentní odměny, měření kvality, šablona partnerské karty a checklist.
