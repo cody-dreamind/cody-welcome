@@ -17277,9 +17277,212 @@ Test:
 
 Export dat je jedna z nejméně efektních funkcí, dokud ji zákazník nepotřebuje. Pak se z ní během pěti minut stane test charakteru celé firmy. Když funguje, zvyšuje důvěru i u lidí, kteří nikdy neodejdou. Vědí totiž, že by mohli. A právě tahle možnost svobodného odchodu je nejlepší opak vendor lock-inu.
 
+---
+
+## Příloha CV: Import dat a migrace bez černé magie v tabulce
+
+Export říká zákazníkovi: „Když budeš chtít odejít, nebudeš rukojmí.“ Import říká: „Když budeš chtít přijít, nebudeš trestaný za minulost.“ U webových projektů, interních nástrojů i SaaS produktů je migrace často okamžik, kdy se krásná prodejní prezentace potká s realitou starých excelů, duplicitních kontaktů a poznámek typu „tady to radši nemažte, nikdo neví proč“.
+
+Import dat není jen technický převod souboru. Je to řízený přechod z jednoho pracovního režimu do druhého. Když ho podceníš, zákazník sice podepíše smlouvu, ale první týden stráví lovem chyb, ručním přepisováním a tichým podezřením, že nový systém je jen dražší způsob, jak mít chaos v hezčím kabátku.
+
+### CV.1 Nezačínej uploadem, začni rozhodnutím
+
+První otázka nemá být „Jaký formát umíte poslat?“ ale „Co se má po migraci změnit v práci lidí?“ Import bez cíle jen přesune starý nepořádek do nové databáze. A starý nepořádek v nové databázi je pořád nepořádek, jen má lepší indexy.
+
+Před importem si napiš:
+
+- která data jsou nutná pro spuštění,
+- která data jsou užitečná, ale počkají,
+- která data jsou historická a patří spíš do archivu,
+- která data se vůbec nemají migrovat,
+- kdo po importu ověří, že výsledek dává smysl.
+
+Příklad u zákaznického portálu:
+
+- Nutné: aktivní zákazníci, otevřené požadavky, odpovědné osoby, smluvní stav.
+- Užitečné: historie posledních šesti měsíců, štítky, priorita, interní poznámky.
+- Archiv: staré uzavřené požadavky starší než dva roky.
+- Nemigrovat: duplicitní kontakty, neověřené poznámky, osobní komentáře bez obchodního důvodu.
+
+*Codyho komentář:* Import všeho „pro jistotu“ je datová verze stěhování krabice označené „kabely 2009“. Nikdo ji nechce otevřít, ale všichni se bojí ji vyhodit.
+
+### CV.2 Udělej mapu polí, ne jen slib „nějak to převedeme“
+
+Každý import potřebuje mapu polí. Je to jednoduchý dokument, který říká, odkud kam se data přesouvají, jak se mění a co se stane s výjimkami.
+
+Minimální mapa:
+
+| Zdrojové pole | Cílové pole | Povinné? | Transformace | Poznámka |
+| --- | --- | --- | --- | --- |
+| `company_name` | `organization.name` | ano | oříznout mezery | sloučit duplicity podle IČO nebo domény |
+| `email` | `contact.email` | ano | převést na malá písmena | neplatný e-mail jde do chybového reportu |
+| `status` | `request.state` | ano | mapování hodnot | `done` → `closed`, `new` → `open` |
+| `note` | `request.internal_note` | ne | bez změny | zkontrolovat citlivý obsah |
+
+Dobrá mapa polí pomáhá třem lidem najednou:
+
+- vývojář ví, co má napsat,
+- zákazník ví, co potvrzuje,
+- budoucí support ví, proč se něco převedlo právě takhle.
+
+U složitější migrace si ke každému poli přidej vlastníka rozhodnutí. Když se objeví otázka „co s prázdnou hodnotou u fakturačního kontaktu“, nemá ji řešit náhodný vývojář ve 23:40 s kávou a existenciální únavou. Má ji řešit člověk, který rozumí procesu.
+
+### CV.3 Importuj nejdřív vzorek a ukaž rozdíly
+
+Nejhorší migrace je ta, která se poprvé spustí nad ostrými daty a všichni drží palce jako u losování tomboly. Správný postup je menší, nudnější a mnohem zdravější.
+
+Postup:
+
+1. Vezmi reprezentativní vzorek dat.
+2. Spusť import do testovacího prostředí.
+3. Vygeneruj report rozdílů a chyb.
+4. Nech zákazníka projít konkrétní záznamy.
+5. Uprav mapování a pravidla.
+6. Teprve potom plánuj ostrý import.
+
+Vzorek nemá být jen prvních sto řádků z tabulky. Má obsahovat normální případy, hraniční případy i známé ošklivosti:
+
+- zákazník bez e-mailu,
+- dvě firmy se stejným názvem,
+- kontakt patřící do více organizací,
+- starý požadavek bez odpovědné osoby,
+- text s diakritikou a speciálními znaky,
+- nečekaně dlouhá poznámka,
+- stav, který v novém systému neexistuje.
+
+Report rozdílů by měl ukázat počet importovaných záznamů, počet přeskočených záznamů, chyby validace, změny hodnot a pravidla sloučení duplicit. Bez reportu se migrace mění v dojmologii. A dojmologie je skvělá disciplína pro hospodu, ne pro zákaznická data.
+
+### CV.4 Chyby mají být produktový výstup, ne výjimka v logu
+
+Import selže. Ne celý, ale nějaká část skoro vždycky. To není problém, pokud s tím počítáš. Problém je, když chyba skončí jen v technickém logu, kterému rozumí jeden člověk a ten je zrovna na dovolené.
+
+Chybový report má být čitelný:
+
+- řádek nebo identifikátor zdrojového záznamu,
+- pole, kde problém vznikl,
+- stručný důvod,
+- doporučená oprava,
+- závažnost,
+- informace, jestli byl záznam přeskočen, nebo importován částečně.
+
+Příklad:
+
+| Záznam | Pole | Problém | Doporučená oprava | Stav |
+| --- | --- | --- | --- | --- |
+| `row 148` | `email` | Neplatný formát | Ověřit adresu u zákazníka | přeskočeno |
+| `row 203` | `status` | Neznámá hodnota `waiting-client-old` | Namapovat na `waiting_for_customer` nebo archiv | čeká na rozhodnutí |
+| `row 411` | `company_id` | Duplicitní firma | Potvrdit sloučení podle IČO | neimportováno |
+
+U privacy-first provozu je důležité, aby chybový report sám nebyl bezpečnostní incident v převleku. Neposílej ho volně e-mailem jako přílohu plnou osobních údajů. Lepší je uložit ho do zabezpečeného účtu, omezit přístup a po dokončení migrace ho smazat nebo anonymizovat podle retenčního pravidla.
+
+### CV.5 Ostrý import potřebuje plán návratu
+
+Každý ostrý import má mít plán: kdy začne, kdo je u toho, co se vypne, co se ověří a co se stane, když se objeví problém. Migrace bez rollbacku je dobrodružství. Dobrodružství patří do hor, ne do produkční databáze.
+
+Minimální plán ostrého importu:
+
+- **Okno migrace:** kdy se data zmrazí a kdy se systém znovu otevře.
+- **Záloha:** přesný bod obnovy před importem.
+- **Komunikace:** kdo zákazníkovi oznámí začátek, průběh a konec.
+- **Ověření:** konkrétní kontrolní scénáře po importu.
+- **Rollback:** kdy se rozhodne o návratu a kdo má právo rozhodnout.
+- **Úklid:** odstranění dočasných souborů, tokenů a testovacích exportů.
+
+Kontrolní scénáře musí být praktické. Ne „aplikace běží“, ale:
+
+- obchodník najde tři známé zákazníky,
+- support otevře posledních deset aktivních požadavků,
+- fakturační kontakt má správný e-mail,
+- historická poznámka se zobrazuje jen oprávněné roli,
+- export po migraci obsahuje stejný počet aktivních zákazníků jako importní report.
+
+Když se import nepovede, není ostuda rollback. Ostuda je dělat, že se povedl, a nechat zákazníka další měsíc opravovat data ručně. To je jen outsourcing bolesti s horší fakturou.
+
+### CV.6 Po migraci ukliď dočasná data
+
+Migrace vytváří hromadu dočasných stop: exportní soubory, importní archivy, logy, mapovací tabulky, testovací databáze, sdílené odkazy, dočasné účty. Každá z těchto věcí může být později riziko.
+
+Po dokončení si projdi:
+
+- zdrojové soubory v úložišti,
+- dočasné importní tabulky,
+- logy s osobními údaji,
+- přístupové tokeny a hesla,
+- testovací prostředí,
+- chybové reporty,
+- sdílené odkazy v interním chatu,
+- lokální kopie na počítačích týmu.
+
+U každé položky rozhodni: ponechat, anonymizovat, archivovat, nebo smazat. Pokud něco ponecháš, musí to mít důvod, vlastníka a datum další revize. Jinak jen zakládáš datový sklep, do kterého za rok spadne auditor s baterkou a špatnou náladou.
+
+### CV.7 Šablona migrační karty
+
+```md
+# Migrace: [zákazník / systém]
+
+## Cíl migrace
+- Co má zákazník po migraci umět dělat?
+- Která data jsou nutná pro spuštění?
+
+## Zdroj dat
+- Systém / soubor:
+- Formát:
+- Vlastník na straně zákazníka:
+- Datum zmrazení dat:
+
+## Rozsah
+- Migrujeme:
+- Nemigrujeme:
+- Archivujeme mimo aplikaci:
+
+## Mapa polí
+- Odkaz na mapovací tabulku:
+- Otevřená rozhodnutí:
+- Pravidla pro duplicity:
+
+## Testovací import
+- Vzorek dat:
+- Počet záznamů:
+- Chyby:
+- Potvrzeno zákazníkem:
+
+## Ostrý import
+- Migrační okno:
+- Záloha před importem:
+- Odpovědná osoba:
+- Rollback hranice:
+
+## Ověření po importu
+- Scénář 1:
+- Scénář 2:
+- Scénář 3:
+
+## Úklid
+- Dočasné soubory:
+- Logy:
+- Testovací prostředí:
+- Datum smazání / anonymizace:
+```
+
+### CV.8 Checklist: migrace bez černé magie
+
+- [ ] Je jasné, jaký pracovní posun má migrace umožnit.
+- [ ] Data jsou rozdělena na nutná, užitečná, archivní a nemigrovaná.
+- [ ] Existuje mapa polí se zdrojovým polem, cílovým polem, transformací a pravidlem výjimek.
+- [ ] Duplicitní a neplatné záznamy mají předem domluvené řešení.
+- [ ] Testovací import běžel na reprezentativním vzorku, ne jen na pěkných datech.
+- [ ] Chybový report je čitelný pro zákazníka i tým.
+- [ ] Ostrý import má migrační okno, zálohu, ověřovací scénáře a rollback rozhodnutí.
+- [ ] Dočasné soubory, logy a přístupy mají plán smazání nebo anonymizace.
+- [ ] Citlivá data se neposílají volně v přílohách a sdílených odkazech.
+- [ ] Po migraci někdo ověřil skutečné pracovní scénáře, ne jen počet řádků v databázi.
+
+Dobrá migrace není show pro techniky. Je to služba zákazníkovi, který se rozhodl přejít na lepší způsob práce. Když mu pomůžeš přenést jen to, co dává smysl, vysvětlíš výjimky a po sobě uklidíš, získáš důvěru ještě předtím, než začne používat první novou funkci.
+
 
 ## Pracovní log
 
+- 2026-09-01 22:00 UTC — Doplněna příloha CV o importu dat a migracích bez černé magie: rozhodnutí před uploadem, mapa polí, testovací import, čitelné chybové reporty, ostrý plán s rollbackem, úklid dočasných dat, šablona migrační karty a checklist.
 - 2026-09-01 21:00 UTC — Doplněna příloha CU o exportu dat jako důkazu, že zákazník není rukojmí: návrh exportu už při modelování dat, nudné formáty, rozdělení účelů exportu, řízený přístup, test obnovitelnosti, propojení s retencí, šablona exportní karty a privacy-first checklist.
 - 2026-09-01 20:01 UTC — Doplněna příloha CT o ukončování funkcí bez rozbitých zákazníků: typy ukončení, zákaznicky srozumitelný důvod, mapa dopadu, komunikační vlny, migrační testy, úklid dat, šablona a privacy-first checklist.
 - 2026-09-01 19:00 UTC — Doplněna příloha CS o changelogu jako důvěryhodném komunikačním kanálu: dopad změn, kategorie, rozhodovací kontext, vlastní doména a RSS, rytmus publikace, propojení s dokumentací a privacy-first checklist.
