@@ -13747,7 +13747,160 @@ Poslední bod je nejdůležitější. Strategie není jen výběr směru. Je to 
 Roční obnova je nejlepší, když nepůsobí jako drama. Žádné „všechno zahodíme“, žádné „musíme být modernější“, žádné „přidáme nový nástroj, protože má hezký onboarding“. Jen poctivé rozhodnutí, co má dál nést hodnotu, co se má uklidit a kde malý tým získá největší klid, důvěru a obchodní dopad.
 
 
+
+## Příloha BZ: Provozní model produktu, který nečeká na chaos
+
+Když web nebo SaaS začne fungovat, objeví se nový typ problému: už nejde jen něco postavit, ale udržet to živé, užitečné a bezpečné. Přicházejí požadavky od zákazníků, nápady z marketingu, technické dluhy, drobné incidenty, nové obchodní příležitosti a pravidelné „jen malá úprava, fakt“. Bez provozního modelu se z produktu stane společný šuplík na všechno.
+
+Provozní model není korporátní komise s logem v PowerPointu. Je to jednoduchá dohoda, kdo o čem rozhoduje, podle čeho se práce vybírá, jak často se kontroluje stav a kde jsou hranice. Malý tým nepotřebuje byrokracii. Potřebuje rytmus, vlastnictví a schopnost říct: „Tohle teď neděláme.“
+
+*Codyho komentář:* Produkt bez provozního modelu je jako restaurace, kde každý host může vběhnout do kuchyně a přidat vlastní ingredienci do polévky. Možná vznikne inovace. Spíš vznikne bramborový incident.
+
+### BZ.1 Napiš, kdo je za produkt odpovědný
+
+První otázka nezní „kdo má názor“, ale „kdo nese odpovědnost“. U malého webu to může být zakladatel. U SaaS produktu produktový vlastník. U klientského projektu kontaktní osoba na straně zákazníka a technický správce na straně dodavatele. Důležité je, aby existoval někdo, kdo dokáže říct ano, ne, později nebo potřebujeme víc informací.
+
+Role nemusí být složité:
+
+- **Produktový vlastník:** drží směr, priority a obchodní dopad.
+- **Technický vlastník:** hlídá architekturu, bezpečnost, provoz a realistický rozsah.
+- **Obsahový vlastník:** odpovídá za sdělení, stránky, jazyk a konzistenci nabídky.
+- **Datový vlastník:** ví, jaká data se sbírají, proč, kde jsou a kdy se mažou.
+- **Support nebo zákaznický hlas:** přináší skutečné problémy z provozu, ne jen dojmy z porad.
+
+V malém týmu může jedna osoba držet více rolí. To je v pořádku. Nebezpečné je, když roli nedrží nikdo, ale všichni předpokládají, že „to někdo řeší“. Někdo je mimochodem nejvytíženější neexistující kolega v digitálním byznysu.
+
+### BZ.2 Rozhodnutí rozděl podle dopadu
+
+Ne každá změna potřebuje stejnou pozornost. Změna textu v patičce, úprava onboardingového e-mailu, nový billing model a přesun databáze nejsou stejná liga. Když všechno prochází stejným procesem, buď se tým zadusí schvalováním, nebo začne důležité věci dělat neformálně bokem.
+
+Použij čtyři úrovně rozhodnutí:
+
+- **Rutinní úprava:** malá změna bez dopadu na data, cenu, právní závazky nebo hlavní workflow. Stačí vlastník a krátký zápis.
+- **Produktová změna:** mění chování uživatele, onboarding, nabídku nebo konverzní cestu. Potřebuje důvod, očekávaný výsledek a ověření.
+- **Provozní riziko:** dotýká se dostupnosti, bezpečnosti, záloh, přístupů nebo dat. Potřebuje technické posouzení a rollback plán.
+- **Strategické rozhodnutí:** mění segment, pricing, zásadní integraci, dodavatele nebo datový režim. Potřebuje explicitní rozhodnutí vedení.
+
+Pravidlo pro rychlost: čím menší dopad a menší riziko, tím rychleji rozhoduj. Čím větší dopad na zákazníky, data nebo peníze, tím víc potřebuješ důkazů a klidnou hlavu. Rychlost je skvělá, dokud není jen elegantní cesta do zdi.
+
+### BZ.3 Každá iniciativa musí mít vlastní kartu
+
+Backlog bez karet je jen seznam přání. Provozní model potřebuje jednotný způsob, jak popsat práci. Ne proto, aby bylo víc administrativy, ale aby se tým nehádal nad nejasnými nápady.
+
+Dobrá karta iniciativy odpovídá na sedm otázek:
+
+1. Jaký problém řešíme?
+2. Pro koho je to důležité?
+3. Jak poznáme, že se situace zlepšila?
+4. Co je nejmenší užitečná verze?
+5. Jaká data, nástroje nebo přístupy budou potřeba?
+6. Jaké je riziko, když to uděláme špatně?
+7. Co teď kvůli tomu nebudeme dělat?
+
+To poslední je provozní pojistka. Každé ano má schované náklady. Když je nenapíšeš, zaplatíš je později v podobě rozpracovaných věcí, večerních oprav a pocitu, že tým „pořád něco dělá“, ale produkt se moc neposouvá.
+
+### BZ.4 Provozní rytmus drž krátký a pravidelný
+
+Provozní model funguje jen tehdy, když má rytmus. Jednorázový workshop udělá hezký dokument. Pravidelný rytmus udělá lepší produkt.
+
+Praktický rytmus pro malý tým:
+
+- **Denně nebo průběžně:** kontrola incidentů, kritických chyb, formulářů a plateb.
+- **Týdně:** krátké rozhodovací review backlogu, support signálů a aktuálních priorit.
+- **Měsíčně:** servisní report, kontrola metrik, obsahový plán, technická rizika a datová hygiena.
+- **Čtvrtletně:** větší produktové rozhodnutí, pricing signály, segmenty, dodavatelé a kapacita týmu.
+- **Ročně:** obnova strategie, úklid nástrojů, audit datových toků a jedna hlavní sázka.
+
+Týdenní review by nemělo být statusové divadlo. Otázky stačí čtyři: co hoří, co přináší hodnotu, co blokuje rozhodnutí a co smažeme nebo odložíme. Když schůzka končí bez rozhodnutí, byla to možná jen společenská událost s kalendářovou ikonou.
+
+### BZ.5 Měř jen to, co pomáhá rozhodovat
+
+Provozní model svádí k dashboardům. Každý chce „přehled“. Jenže přehled bez rozhodnutí je dekorace. U privacy-first produktu navíc platí, že měření má být úsporné: sbírej jen taková data, která mají jasný účel a přiměřenou dobu života.
+
+Začni třemi typy signálů:
+
+- **Obchodní signály:** poptávky, kvalita leadů, aktivace, trial-to-paid, renewal, důvody ztráty.
+- **Produktové signály:** dokončení hlavního workflow, opakované používání, support dotazy, třecí místa.
+- **Provozní signály:** dostupnost, chyby, rychlost, zálohy, bezpečnostní události, stav přístupů.
+
+Ke každému signálu napiš rozhodnutí, které podle něj děláš. Například: „Když roste počet nedokončených onboardingů, upravíme první krok a zkontrolujeme vysvětlení hodnoty.“ Nebo: „Když se stejný support dotaz objeví třikrát za měsíc, doplníme nápovědu nebo změníme UI.“
+
+Privacy-first verze tohoto přístupu nepoužívá data jako mikroskop na jednotlivce. Stačí agregace, časové trendy, dobrovolná zpětná vazba a kvalitní poznámky ze supportu. Cílem není vědět, co dělal každý člověk v každé vteřině. Cílem je pochopit, kde systém pomáhá a kde překáží.
+
+### BZ.6 Rozhodnutí zapisuj jako provozní paměť
+
+Malý tým často netrpí nedostatkem inteligence, ale ztrátou kontextu. Po třech měsících už nikdo neví, proč se vybral konkrétní nástroj, proč se nezavedla integrace, proč se odstranilo pole z formuláře nebo proč se pricing nerozšířil o další tarif.
+
+Rozhodovací deník nemusí být dlouhý. Stačí:
+
+- datum,
+- rozhodnutí,
+- důvod,
+- alternativy,
+- očekávaný dopad,
+- kdy se k tomu vrátíme.
+
+Tento deník chrání tým před opakováním debat. Také pomáhá novým lidem pochopit produkt bez archeologického průzkumu Slacku, e-mailů a starých issue komentářů. A v privacy-first provozu má ještě jednu výhodu: ukazuje, proč se některá data nesbírají, i když by technicky šla sbírat.
+
+### BZ.7 Šablona: provozní karta produktu
+
+```markdown
+## Provozní karta produktu: [název]
+
+### 1. Směr
+- Komu produkt slouží:
+- Hlavní hodnota:
+- Aktuální obchodní priorita:
+- Co teď vědomě neděláme:
+
+### 2. Role
+- Produktový vlastník:
+- Technický vlastník:
+- Obsahový vlastník:
+- Datový vlastník:
+- Kdo přináší hlas zákazníků:
+
+### 3. Rozhodovací úrovně
+- Rutinní úpravy může schválit:
+- Produktové změny schvaluje:
+- Provozní rizika posuzuje:
+- Strategická rozhodnutí patří na:
+
+### 4. Rytmus
+- Týdenní review:
+- Měsíční report:
+- Čtvrtletní rozhodnutí:
+- Roční obnova:
+
+### 5. Signály
+- Obchodní signály:
+- Produktové signály:
+- Provozní signály:
+- Signály, které záměrně nesbíráme:
+
+### 6. Rozhodovací deník
+- Poslední důležité rozhodnutí:
+- Proč:
+- Kdy ho znovu ověříme:
+```
+
+### BZ.8 Checklist: provozní model bez chaosu
+
+- [ ] Produkt má jasně pojmenovaného vlastníka rozhodnutí.
+- [ ] Technická, obsahová, datová a zákaznická odpovědnost nejsou „někde mezi lidmi“.
+- [ ] Změny jsou rozdělené podle dopadu a rizika.
+- [ ] Každá větší iniciativa má kartu s problémem, výsledkem, riziky a nejmenší užitečnou verzí.
+- [ ] Týdenní review končí rozhodnutím, ne jen výměnou dojmů.
+- [ ] Měsíční report řeší provoz, obchodní signály, rizika a další krok.
+- [ ] Měří se jen signály, které pomáhají rozhodovat.
+- [ ] U každého datového sběru je jasný účel, vlastník a retenční pravidlo.
+- [ ] Rozhodnutí se zapisují do krátkého deníku.
+- [ ] Backlog obsahuje i věci, které tým vědomě nedělá.
+
+Provozní model nemusí být těžký. Naopak: dobrý model zjednodušuje život, protože odstraňuje hádání, kdo má co rozhodnout, kdy se k čemu vrátit a proč se některé nápady nebudou dělat. Produkt pak neroste jako náhodný keř u plotu, ale jako systém, který má směr, odpovědnost a dostatek klidu na kvalitní práci.
+
 ## Pracovní log
+- 2026-09-01 01:00 UTC — Doplněna příloha BZ o provozním modelu produktu: role a odpovědnosti, úrovně rozhodnutí, karta iniciativy, provozní rytmus, rozhodovací měření, deník rozhodnutí, šablona a privacy-first checklist.
 - 2026-09-01 00:00 UTC — Doplněna příloha BY o roční obnově webu a SaaS: změny reality, oddělení kosmetiky od obchodních problémů, obsahový a technický audit, privacy-first úklid, hlavní sázka na další rok, šablona a checklist.
 - 2026-08-31 23:00 UTC — Doplněna příloha BX o servisním režimu po spuštění: servisní slib, rozlišení incidentů a drobných změn, reakční časy, měsíční report, servisní backlog, privacy-first hygienu, servisní kartu a checklist.
 - 2026-08-31 22:01 UTC — Doplněna příloha BW o předávce projektu: vlastnictví účtů, dokumentace podle rolí, praktický předávací test, přístupový úklid, třicetidenní stabilizační rytmus, předávací karta a privacy-first checklist.
