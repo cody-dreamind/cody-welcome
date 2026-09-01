@@ -16646,7 +16646,180 @@ Partnerství má být síť důvěry, ne pavučina závislostí. Když zákazní
 
 ---
 
+
+## Příloha CR: Komunitní kanál bez platformové klece
+
+Komunita je jedno z těch slov, které marketing rád používá tak dlouho, až začne znít jako nafukovací hrad na B2B konferenci. Všichni ho vidí, pár lidí do něj vleze, ale málokdo ví, proč tam vlastně je. Pro malé SaaS týmy, konzultanty a webové studio ale komunitní kanál může být velmi praktický: pomáhá slyšet zákazníky dřív, než z problému vznikne churn, šíří know-how bez závislosti na reklamě a buduje důvěru dlouho před první poptávkou.
+
+Privacy-first komunita není skupina, kde sbíráš co nejvíc dat o členech, aby šel později každý komentář proměnit na „lead scoring signál“. Je to prostor, kde lidé dobrovolně sdílí otázky, zkušenosti a zpětnou vazbu, protože z toho mají hodnotu. Když z komunity uděláš sledovací akvárium, možná získáš metriky. Ale ztratíš důvod, proč tam lidé byli ochotní mluvit otevřeně.
+
+### CR.1 Nejdřív rozhodni, jestli komunita opravdu dává smysl
+
+Komunita není univerzální lék. Pokud prodáváš jednorázovou službu s krátkým rozhodovacím cyklem a zákazníci spolu nemají žádné společné téma, může být lepší investovat do kvalitního obsahu, dokumentace nebo osobního follow-upu. Komunita dává smysl hlavně tehdy, když zákazníci řeší opakované problémy, učí se podobné postupy nebo jim pomáhá vidět, jak to řeší ostatní.
+
+Polož si pět otázek:
+
+- Mají lidé kolem produktu společný problém, který se vyvíjí v čase?
+- Pomůže jim slyšet zkušenosti dalších uživatelů, ne jen tvoje oficiální odpovědi?
+- Umíš pravidelně přinášet hodnotu bez toho, aby každé vlákno končilo prodejním CTA?
+- Máš kapacitu komunitu moderovat, uklízet a chránit před spamem?
+- Dokážeš provozovat kanál tak, aby respektoval soukromí členů?
+
+Pokud odpověď na většinu otázek zní „ne“, nezačínej komunitu. Začni menším formátem: veřejným FAQ, měsíčním office hours, RSS blogem, otevřeným roadmapovým changelogem nebo sérií praktických návodů. Komunita bez péče je jen další mrtvý kanál, který na webu smutně bliká jako zapomenutá kontrolka v serverovně.
+
+### CR.2 Vyber formát podle chování lidí, ne podle módní platformy
+
+Nezačínej otázkou „máme založit Discord, Slack, LinkedIn skupinu nebo fórum?“. Začni otázkou, jak se tvoje publikum reálně učí, ptá a rozhoduje.
+
+Praktické formáty:
+
+- **Veřejné fórum:** dobré pro otázky, které mají dlouhodobou hodnotu a dají se dohledat přes vyhledávače.
+- **Uzavřená skupina pro zákazníky:** dobrá pro citlivější provozní témata, sdílení zkušeností a rychlé odpovědi.
+- **Měsíční online setkání:** dobré pro zakladatele, B2B zákazníky a témata, kde se hodí živý kontext.
+- **RSS a otevřený changelog:** dobré pro lidi, kteří chtějí sledovat vývoj bez registrace a algoritmického šumu.
+- **E-mailový digest:** použitelný, pokud je dobrovolný, stručný a nevyžaduje sledovací pixely.
+- **Malý advisory kruh:** dobrý pro prvních deset až dvacet zákazníků, kteří pomáhají tvarovat produkt.
+
+Každý formát má jiný závazek. Fórum potřebuje vyhledatelnost, moderaci a jasnou strukturu. Uzavřená skupina potřebuje pravidla a bezpečné hranice sdílení. Živé setkání potřebuje agendu a zápis. Changelog potřebuje disciplínu. Advisory kruh potřebuje férovost, protože lidé ti dávají čas a zkušenost.
+
+*Codyho komentář:* Nejhorší důvod pro výběr komunitní platformy je „všichni tam jsou“. Všichni jsou taky občas v koloně na dálnici, a přesto z toho neděláme produktovou strategii.
+
+### CR.3 Nastav pravidla dřív, než je budeš potřebovat
+
+Komunita bez pravidel je zpočátku roztomilá. Pak přijde první agresivní komentář, první self-promo lavina, první sdílení citlivých dat a najednou řešíš požár, který šel uhasit cedulkou na dveřích.
+
+Minimální pravidla napiš veřejně a lidsky:
+
+1. Co je účel prostoru.
+2. Jaké typy příspěvků jsou vítané.
+3. Co do komunity nepatří.
+4. Jak se řeší citlivé informace.
+5. Jak může člen nahlásit problém.
+6. Kdy a proč může být příspěvek odstraněn.
+
+Příklad krátkých pravidel:
+
+```text
+Tahle komunita pomáhá malým týmům stavět weby a SaaS produkty privacy-first v Evropě.
+
+Vítáme konkrétní otázky, zkušenosti z praxe, ukázky řešení a férovou kritiku.
+Nevítáme spam, agresivní prodej, sdílení osobních dat třetích stran a screenshoty bez souhlasu.
+Když řešíš zákaznický problém, anonymizuj firmu, lidi i citlivé provozní detaily.
+Moderátor může upravit nebo odstranit příspěvek, který ohrožuje soukromí nebo bezpečnost.
+```
+
+Pravidla nejsou byrokracie. Jsou bezpečnostní zábradlí. Čím víc chceš, aby lidé sdíleli opravdové provozní zkušenosti, tím víc musí věřit, že prostor není divoký západ s hezčím logem.
+
+### CR.4 Obsah plánuj jako servis, ne jako kampaň
+
+Komunitní kanál se nesmí živit jen oznámeními typu „spustili jsme novou funkci“. To je broadcast, ne komunita. Potřebuješ opakovatelný rytmus, který lidem pomáhá něco udělat.
+
+Jednoduchý měsíční rytmus:
+
+- první týden: praktický návod nebo teardown konkrétního problému,
+- druhý týden: otázka pro členy a sběr zkušeností,
+- třetí týden: krátké office hours nebo živé Q&A,
+- čtvrtý týden: shrnutí naučených poznatků, changelog a další kroky.
+
+Pro SaaS můžeš přidat produktové formáty:
+
+- „Jak to používá malý tým“ bez zveřejnění citlivých údajů,
+- „Jedna chyba v onboarding flow a jak ji opravit“,
+- „Měsíční privacy-first provozní checklist“,
+- „Co jsme nezavedli, protože by to sbíralo zbytečná data“,
+- „Otázky z podpory, které stojí za veřejnou odpověď“.
+
+Každý komunitní obsah by měl mít praktický výstup: checklist, rozhodovací otázku, šablonu, příklad, mini audit nebo odkaz na dokumentaci. Lidé nepotřebují další proud inspirace. Potřebují méně mlhy.
+
+### CR.5 Měř zdraví komunity bez sledování lidí
+
+Komunitu nemusíš měřit podle toho, kdo přesně klikl na který odkaz ve 14:03 a pak si třikrát otevřel pricing. To už není komunitní analytika, to je detektivka pro lidi, kteří mají moc rádi tabulky a málo rádi souhlas.
+
+Stačí sledovat agregované signály:
+
+- počet nových užitečných vláken za měsíc,
+- počet odpovědí od členů, ne jen od týmu,
+- opakující se témata otázek,
+- počet nápadů, které se promítly do dokumentace nebo produktu,
+- počet vyřešených problémů bez individuální podpory,
+- subjektivní kvalitu diskuse při měsíčním review.
+
+K tomu si veď jednoduchý komunitní deník:
+
+```text
+Měsíc: [YYYY-MM]
+Hlavní téma:
+Nejčastější otázky:
+Co jsme změnili v produktu nebo dokumentaci:
+Co se opakovalo zbytečně:
+Rizika pro soukromí nebo bezpečnost:
+Další komunitní experiment:
+```
+
+Takové měření ti řekne, jestli komunita pomáhá. Nepotřebuješ k tomu profilovat jednotlivce. Pokud někdo aktivně chce navázat obchodní rozhovor, ať to udělá vědomě přes formulář, e-mail nebo domluvený call. Komunita nemá být skrytý trychtýř, který se tváří jako poradna.
+
+### CR.6 Chraň přenositelnost a přímý kontakt
+
+Platformy se mění. Algoritmy se mění. Pravidla se mění. Někdy se změní i nálada vlastníka platformy, což je technicky vzato strategie, ale většinou ne tvoje. Proto komunitní kanál nestav tak, aby veškerá hodnota zůstala zamčená v cizí aplikaci.
+
+Privacy-first pravidla pro přenositelnost:
+
+- důležité návody publikuj i na vlastním webu,
+- shrnutí diskusí převáděj do znalostní báze nebo FAQ,
+- nabídni RSS pro novinky a changelog,
+- exportuj seznam témat a rozhodnutí do vlastního úložiště,
+- nespoléhej na trackingové pixely pro měření dosahu,
+- členům jasně řekni, kde komunita běží a co se ukládá.
+
+Pokud používáš cizí platformu, napiš si plán úniku. Ne dramatický evakuační plán s houkačkou, ale praktický dokument: co exportujeme, kam přesuneme dokumentaci, jak členům dáme vědět a které odkazy se musí přesměrovat. Vendor lock-in není problém až ve chvíli, kdy ho bolí. V tu chvíli už jen zjišťuješ, kolik stojí svoboda, kterou sis měl koupit dřív.
+
+### CR.7 Šablona komunitní karty
+
+```text
+Komunitní kanál: [název]
+
+Účel:
+- Proč kanál existuje a komu pomáhá.
+
+Cíloví členové:
+- Kdo sem patří a kdo ne.
+
+Formát:
+- Fórum / skupina / office hours / advisory kruh / RSS / digest.
+
+Pravidla:
+- Co je vítané, co je zakázané a jak se řeší moderace.
+
+Obsahový rytmus:
+- Týdenní nebo měsíční opakující se formáty.
+
+Privacy režim:
+- Jaká data se sbírají, kde běží platforma, jak se řeší export a mazání.
+
+Měření:
+- Agregované signály zdraví komunity bez profilování členů.
+
+Review:
+- Kdy vyhodnotíme, jestli komunita plní účel.
+```
+
+### CR.8 Checklist: komunita bez platformové klece
+
+- [ ] Máš jasně napsané, proč komunita existuje a komu konkrétně pomáhá.
+- [ ] Zvolil jsi formát podle chování lidí, ne podle módnosti platformy.
+- [ ] Pravidla řeší spam, self-promo, citlivá data, moderaci a nahlášení problému.
+- [ ] Každý měsíc má komunitní obsah praktický výstup: checklist, příklad, šablonu nebo rozhodnutí.
+- [ ] Důležité know-how končí na vlastním webu, ve znalostní bázi nebo v exportovatelném archivu.
+- [ ] Měříš agregované signály kvality, ne detailní profily jednotlivých členů.
+- [ ] Členové ví, kde komunita běží, co se ukládá a jak mohou odejít.
+- [ ] Máš jednoduchý plán migrace, pokud platforma přestane dávat smysl.
+
+Komunita je dobrá tehdy, když lidem pomáhá dělat lepší rozhodnutí i mimo tvoje prodejní hovory. Když ji postavíš na důvěře, přenositelnosti a praktické hodnotě, stane se z ní dlouhodobý kanál. Když ji postavíš na platformovém růstu a skrytém trackingu, stane se z ní jen další marketingový sklep. A těch už má internet dost.
+
+---
+
 ## Pracovní log
+- 2026-09-01 18:00 UTC — Doplněna příloha CR o komunitním kanálu bez platformové klece: rozhodnutí, zda komunita dává smysl, volba formátu, pravidla, obsahový rytmus, agregované měření, přenositelnost, šablona komunitní karty a privacy-first checklist.
 - 2026-09-01 17:01 UTC — Doplněna příloha CQ o partnerském ekosystému bez vendor lock-inu: mapa doplňkových potřeb, fit filtr partnerů, společný výsledek, bezpečná předávka, transparentní odměny, měření kvality, šablona partnerské karty a checklist.
 - 2026-09-01 16:00 UTC — Doplněna příloha CP o referral kanálu bez provizního cirkusu: profil ideálního doporučení, vztahový úvod, férová odměna, privacy-first měření, doporučovací balíček, měsíční úklid, šablona referral karty a checklist.
 
