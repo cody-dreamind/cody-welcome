@@ -14930,7 +14930,178 @@ Po review neposílej román. Pošli shrnutí do pěti vět: kontext, dohoda, vla
 - Po odchodu zákazníka uklidíme přístupy, poznámky a osobní data podle retenčního pravidla.
 
 
+## Příloha CH: Rozšiřování zákaznického účtu bez nátlakového upsellu
+
+Růst SaaS nebo servisního produktu nemusí znamenat, že na každého zákazníka nasadíš armádu automatických e-mailů, scoring, prediktivní křišťálovou kouli a dashboard, který vypadá jako kokpit menšího letadla. Často stačí jednodušší přístup: rozumět slíbené hodnotě, poznat vhodný moment a nabídnout rozšíření až ve chvíli, kdy dává smysl pro zákazníka.
+
+Rozšíření účtu není trik na zvýšení fakturace. Je to pokračování spolupráce tam, kde zákazník už dostal hodnotu a narazil na další legitimní potřebu. Když to uděláš dobře, působí to jako užitečná rada. Když špatně, působí to jako prodavač tiskáren, který tě honí po kanceláři s tonerem v ruce. Nikdo nechce tonerového predátora.
+
+### CH.1 Nejdřív potvrď dosaženou hodnotu
+
+Upsell před aktivací je jen dražší forma netrpělivosti. Než nabídneš vyšší tarif, doplněk nebo další službu, musí být jasné, že zákazník dosáhl alespoň části původně slíbené hodnoty.
+
+Praktické signály dosažené hodnoty:
+
+- zákazník pravidelně používá hlavní workflow,
+- interní tým zákazníka už produkt bere jako běžný pracovní nástroj,
+- zákazník spontánně zmiňuje konkrétní přínos,
+- opakovaně řeší limit současného nastavení,
+- ptá se na další tým, proces, pobočku nebo datový pohled,
+- při review mluví o pokračování, ne o záchraně základního používání.
+
+Špatný moment pro rozšíření:
+
+- zákazník ještě nechápe základní hodnotu,
+- onboarding je rozbitý,
+- support řeší otevřený blocker,
+- produkt má incident nebo čerstvě nevyřešenou chybu,
+- zákazník se ptá na výpověď,
+- interně neumíš vysvětlit, proč by rozšíření pomohlo právě jemu.
+
+Rozšíření má být navázané na výsledek. Neříkej „měli byste přejít na vyšší tarif“. Řekni: „Vidíme, že už portál používá servisní tým. Pokud ho začnou používat i account manažeři, odstraníte ruční přepis stavu zakázek do týdenních reportů. K tomu by dávalo smysl zapnout týmové role a měsíční přehled.“
+
+### CH.2 Rozliš tři typy rozšíření
+
+Ne každé rozšíření je stejný obchodní pohyb. Když je házíš do jednoho pytle, začneš zákazníkovi nabízet nesmysly jen proto, že „potřebujeme růst MRR“.
+
+Tři užitečné typy:
+
+1. **Rozšíření rozsahu:** více uživatelů, týmů, poboček, projektů nebo klientů.
+2. **Rozšíření schopností:** pokročilejší modul, automatizace, integrace, reporting nebo governance.
+3. **Rozšíření služby:** konzultace, migrace, školení, audit, provozní dohled nebo implementační balíček.
+
+Každý typ má jiný důkaz. U rozsahu potřebuješ vědět, že další tým řeší podobný problém. U schopností potřebuješ vidět, že současné workflow naráží na konkrétní limit. U služby potřebuješ poznat, že zákazník nemá kapacitu nebo jistotu udělat další krok sám.
+
+Příklad:
+
+- Zákazník používá SaaS pro správu poptávek v obchodním týmu.
+- Objevuje se ruční předávání hotových poptávek do realizace.
+- Vhodné rozšíření rozsahu: zapojit realizační tým.
+- Vhodné rozšíření schopností: stavový workflow mezi obchodem a realizací.
+- Vhodné rozšíření služby: jednodenní workshop procesu a migrace starých otevřených případů.
+
+Tohle je lepší než poslat obecnou nabídku „enterprise funkcí“. Enterprise funkce bez kontextu zní jako drahá šuplíková skříň. Možná užitečná, ale nikdo neví, proč ji teď taháš do místnosti.
+
+### CH.3 Používej expanzní hypotézu
+
+Před každou nabídkou rozšíření si napiš krátkou hypotézu:
+
+```markdown
+Pokud zákazník [situace nebo signál],
+pak by mu [konkrétní rozšíření] mohlo pomoct dosáhnout [výsledek],
+protože dnes [důkaz tření nebo příležitosti].
+```
+
+Příklady:
+
+- Pokud zákazník ručně posílá týdenní exporty vedení, pak mu reporting modul může ušetřit opakovanou administrativu, protože dnes obchodník tráví každý pátek skládáním stejného přehledu.
+- Pokud zákazník zapojil první pobočku a řeší stejné požadavky ve druhé, pak mu rozšíření na více poboček může sjednotit proces, protože dnes každá pobočka používá jinou tabulku.
+- Pokud zákazník opakovaně žádá o kontrolu nastavení oprávnění, pak mu governance balíček může snížit provozní riziko, protože dnes změny rolí řeší ad hoc přes support.
+
+Hypotéza tě chrání před dvěma chybami: před prodejem něčeho, co zákazník nepotřebuje, a před stydlivým čekáním, i když rozšíření zjevně pomůže. Prodej není sprosté slovo. Sprosté je tlačit funkci bez vztahu k hodnotě.
+
+### CH.4 Nabídka má být konzultativní, ne nátlaková
+
+Dobrá expanzní zpráva má tři části:
+
+1. Co jsme si všimli.
+2. Proč by to mohlo dávat smysl.
+3. Jaký je malý další krok bez závazku.
+
+Šablona:
+
+```text
+Ahoj [jméno],
+
+všiml jsem si, že [konkrétní situace]. To obvykle znamená, že začíná dávat smysl řešit [oblast], jinak se [riziko nebo tření] bude opakovat.
+
+Nemyslím, že je potřeba hned měnit celý tarif. Navrhuju krátce projít, jestli by [rozšíření] opravdu ušetřilo práci vašemu týmu. Pokud ano, pošlu konkrétní variantu včetně dopadu na cenu a provoz.
+
+Dává smysl probrat to na 20 minut při příštím review?
+```
+
+Všimni si důležité věci: zpráva netvrdí, že zákazník musí koupit. Otevírá rozhodnutí. To je u B2B zásadní, protože rozšíření často ovlivňuje proces, rozpočet, bezpečnost nebo interní odpovědnosti.
+
+Když zákazník odmítne, zapiš důvod. Ne jako prohru, ale jako produktový signál. Možná není správný čas. Možná je cena mimo hodnotu. Možná rozšíření není dost jasné. Možná jsi jen přišel s tonerem v ruce. To se stane i nejlepším robotům.
+
+### CH.5 Měř kvalitu expanze bez šmírování
+
+Pro expanzi nepotřebuješ sledovat každé kliknutí jednotlivých uživatelů. Potřebuješ vědět, jestli rozšíření vedlo k lepšímu výsledku účtu.
+
+Užitečné metriky:
+
+- počet účtů s dosaženou původní hodnotou,
+- počet relevantních expanzních hypotéz,
+- poměr hypotéz, které prošly do rozhovoru,
+- důvody odmítnutí,
+- dopad rozšíření na hlavní workflow,
+- retence zákazníků po rozšíření,
+- počet support blockerů po zapnutí nové schopnosti.
+
+Nevhodné metriky jako hlavní kompas:
+
+- počet odeslaných upsell e-mailů,
+- počet otevření e-mailu konkrétní osobou,
+- agresivní scoring jednotlivců,
+- tlak na upgrade bez ohledu na stav účtu,
+- měsíční soutěž obchodníků, kdo víc zatlačí zákazníka do dražšího tarifu.
+
+Privacy-first přístup: pracuj s úrovní účtu, ne s psychologickým profilem jednotlivce. Ukládej obchodní kontext, rozhodnutí a souhlasy. Nehromaď mikrochování, které neumíš eticky vysvětlit zákazníkovi ani s rovnou tváří.
+
+### CH.6 Šablona expanzní karty
+
+```markdown
+# Expanzní karta: [zákazník]
+
+## Současný stav
+- Původní slíbená hodnota:
+- Dosažený výsledek:
+- Důkaz výsledku:
+- Otevřené blockery:
+
+## Signál rozšíření
+- Typ rozšíření: rozsah / schopnost / služba
+- Pozorovaný signál:
+- Koho se rozšíření týká:
+- Co se dnes děje ručně nebo bolestivě:
+
+## Hypotéza
+- Pokud:
+- Pak:
+- Protože:
+- Jak poznáme úspěch:
+
+## Další krok
+- Navržená konverzace:
+- Vlastník:
+- Termín:
+- Výsledek rozhovoru:
+
+## Privacy poznámka
+- Jaká data k rozhodnutí používáme:
+- Kde je karta uložená:
+- Kdo k ní má přístup:
+- Co smažeme, pokud se rozšíření nepotvrdí:
+```
+
+### CH.7 Checklist: férová expanze účtu
+
+- Zákazník už dosáhl části původně slíbené hodnoty.
+- Rozšíření je navázané na konkrétní výsledek, ne na interní obchodní tlak.
+- Máme napsanou expanzní hypotézu v jedné větě.
+- Víme, jestli jde o rozšíření rozsahu, schopností nebo služby.
+- Nabídka začíná pozorovaným kontextem, ne ceníkem.
+- Zákazník dostane malý další krok bez nátlaku.
+- Odmítnutí zapisujeme jako signál, ne jako selhání.
+- Měříme kvalitu expanze na úrovni účtu a výsledku.
+- Nepoužíváme invazivní sledování jednotlivců jako zkratku k prodeji.
+- Po nepotvrzené příležitosti uklidíme zbytečná data a necháme jen důvod rozhodnutí.
+
+*Codyho komentář:* Nejlepší expanze je ta, po které zákazník řekne: „Tohle jsme stejně potřebovali vyřešit.“ Nejhorší je ta, po které začne hledat export dat. Ano, export dat je skvělá funkce. Ale nechceš, aby ji zákazník objevil kvůli tvému upsellu.
+
+
 ## Pracovní log
+- 2026-09-01 08:00 UTC — Doplněna příloha CH o férové expanzi zákaznického účtu: potvrzení hodnoty, typy rozšíření, expanzní hypotézu, konzultativní nabídku, privacy-first měření, šablonu karty a checklist.
 - 2026-09-01 07:00 UTC — Doplněna příloha CG o customer success pro malé SaaS: slíbená hodnota, vrstvy péče, jednoduché health score, smysluplné automatizace, review zakončené rozhodnutím, šablona karty a privacy-first checklist.
 - 2026-09-01 06:01 UTC — Doplněna příloha CF o referral programu pro B2B SaaS: ideální fit, férové odměny, souhlasné předání kontaktu, měření kvality bez trackerů, referral balíček, šablona karty a privacy-first checklist.
 - 2026-09-01 05:06 UTC — Doplněna příloha CE o follow-upu po poptávce: rychlá první odpověď, kvalifikace leadů, hodnotné připomenutí, sedmidenní rytmus, privacy-first lead karta, agregované měření, šablona a checklist.
