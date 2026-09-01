@@ -15100,7 +15100,171 @@ Privacy-first přístup: pracuj s úrovní účtu, ne s psychologickým profilem
 *Codyho komentář:* Nejlepší expanze je ta, po které zákazník řekne: „Tohle jsme stejně potřebovali vyřešit.“ Nejhorší je ta, po které začne hledat export dat. Ano, export dat je skvělá funkce. Ale nechceš, aby ji zákazník objevil kvůli tvému upsellu.
 
 
+## Příloha CI: Win-back odcházejících zákazníků bez zoufalého nahánění
+
+Každý SaaS nebo servisní produkt občas ztratí zákazníka. Někdy je to chyba produktu, někdy změna priorit, někdy rozpočet, někdy interní politika zákazníka a někdy prostě realita. Win-back není magie, která vrátí všechny zpět. Je to disciplinovaný způsob, jak poznat, koho má smysl znovu oslovit, s jakou hodnotou a kde je lepší důstojně zavřít dveře bez digitálního dupání na rohožce.
+
+Nejhorší win-back je generická kampaň „chybíte nám“ poslaná všem, kdo odešli. Zákazník většinou nechybí tobě jako člověk. Chybí ti jeho faktura. A on to pozná rychleji než bot pozná cookie banner. Dobrý win-back začíná pochopením důvodu odchodu a pokračuje konkrétní změnou, která dává zákazníkovi nový důvod se bavit.
+
+### CI.1 Ne každý odchod je win-back příležitost
+
+Než někoho znovu oslovíš, rozděl odchody podle důvodu. Bez toho budeš míchat lidi, kteří měli technický blocker, s lidmi, kterým produkt nikdy neseděl. To vede k hloupým zprávám a ještě hloupějším metrikám.
+
+Užitečné kategorie odchodu:
+
+- **Nedosáhli hodnoty:** onboarding selhal, aktivační moment nenastal nebo zákazník nepochopil první krok.
+- **Narazili na limit produktu:** chyběla funkce, integrace, oprávnění, reporting nebo výkon.
+- **Změnila se situace:** nový tým, rozpočet, akvizice, interní nástroj nebo jiná priorita.
+- **Byli nespokojení se službou:** support, komunikace, incident, špatné očekávání nebo slabá předávka.
+- **Nebyl fit:** zákazník potřeboval jiný typ řešení, větší enterprise proces nebo naopak jednodušší nástroj.
+
+Win-back má smysl hlavně u zákazníků, kde se změnila překážka. Pokud odešli kvůli chybějícímu exportu a export už existuje, máš důvod. Pokud odešli, protože nikdy nepotřebovali problém řešit, nemáš win-back. Máš poučení pro kvalifikaci.
+
+### CI.2 Vrať se s konkrétní změnou, ne se slevou
+
+Sleva může pomoct, ale nesmí být první argument. Pokud zákazník odešel kvůli hodnotě, sleva jen zlevní nevyřešený problém. Pokud odešel kvůli důvěře, sleva působí jako náplast na prasklou trubku.
+
+Lepší důvody k oslovení:
+
+- opravili jsme blocker, který jste tehdy popisovali,
+- zjednodušili jsme onboarding pro váš typ týmu,
+- přidali jsme integraci, bez které vám workflow nedávalo smysl,
+- změnili jsme provozní model a umíme jasněji garantovat podporu,
+- vytvořili jsme menší balíček, který lépe odpovídá vašemu rozsahu,
+- máme nový postup migrace, který snižuje riziko návratu.
+
+Šablona myšlenky před zprávou:
+
+```markdown
+Oslovujeme [zákazník], protože odešel kvůli [důvod].
+Od té doby se změnilo [konkrétní změna].
+Nová konverzace dává smysl, pokud zákazník stále řeší [problém].
+Nechceme tlačit návrat, chceme ověřit fit.
+```
+
+Tohle tě nutí mít důvod. Pokud do šablony neumíš nic napsat, neposílej zprávu. Ticho je někdy nejlepší marketingový nástroj, protože aspoň nic nerozbije.
+
+### CI.3 Zpráva má být krátká a respektující
+
+Win-back e-mail nebo zpráva nemá znít jako automatický detektor zoufalství. Měl by být osobní, konkrétní a snadno odmítnutelný.
+
+Příklad:
+
+```text
+Ahoj [jméno],
+
+vím, že jste od nás odešli hlavně kvůli [důvod]. Od té doby jsme změnili [konkrétní věc] a myslím, že by to mohlo řešit část problému, který jste tehdy popisovali.
+
+Pokud je [problém] pořád aktuální, rád pošlu krátké shrnutí nebo to projdu na 20 minutách. Pokud už to máte vyřešené jinak, v pohodě — jen jsem nechtěl, aby tahle změna zapadla.
+
+Cody
+```
+
+Co v takové zprávě nedělat:
+
+- nevyčítej odchod,
+- netvař se, že sleva řeší všechno,
+- neposílej dlouhý seznam release notes,
+- nepředstírej osobní vztah, pokud šlo o jednorázový trial,
+- nevkládej sledovací pixely jen proto, abys viděl, jestli e-mail otevřeli,
+- neposílej pět připomínek za sebou, protože „sekvence“.
+
+Jedna dobrá zpráva a případně jeden slušný follow-up stačí. Pokud člověk nereaguje, respektuj to. Důvěra se buduje i tím, že umíš přestat.
+
+### CI.4 Win-back seznam drž malý
+
+U malého SaaS týmu nepotřebuješ obří automatizaci. Potřebuješ malý seznam zákazníků, u kterých existuje konkrétní důvod k návratu.
+
+Do seznamu zařaď jen účty, které splňují aspoň dvě podmínky:
+
+- dříve měly jasný use case,
+- odešly z důvodu, který se od té doby změnil,
+- měly férový vztah a žádný otevřený konflikt,
+- zákazník odpovídal ideálnímu profilu,
+- návrat by byl dobrý pro obě strany, ne jen pro metriky,
+- máš legální a legitimní důvod kontaktovat konkrétní osobu.
+
+Ke každému účtu napiš:
+
+- původní slib hodnoty,
+- důvod odchodu,
+- co se změnilo,
+- proč by návrat mohl dávat smysl,
+- kdo kontakt schválil,
+- datum posledního oslovení,
+- výsledek.
+
+Privacy-first pravidlo: nepřenášej staré zákaznické poznámky do nových nástrojů jen proto, že chceš „obohatit CRM“. Použij minimum kontextu, který potřebuješ k férovému oslovení. Staré citlivé detaily, interní frustrace a nepotřebné osobní poznámky do win-back seznamu nepatří.
+
+### CI.5 Vyhodnocuj učení, ne jen návraty
+
+Win-back není úspěšný jen tehdy, když zákazník znovu zaplatí. Úspěch může být i zjištění, že starý problém už neexistuje, že trh šel jinam, nebo že tvůj nový modul řeší špatnou překážku.
+
+Sleduj prakticky:
+
+- kolik účtů mělo jasný důvod k oslovení,
+- kolik odpovědělo,
+- jaké důvody návratu nebo odmítnutí se opakovaly,
+- které produktové změny opravdu otevřely konverzaci,
+- jestli se vracejí správní zákazníci, ne jen ti nejlevnější,
+- zda nový onboarding zabránil opakování stejného churn důvodu.
+
+Nedělej z toho sledování jednotlivců. Stačí agregovaný přehled a krátké poznámky k účtům, kde existuje obchodní vztah. Pokud někdo jasně řekne, že nechce být kontaktován, zapiš to a respektuj. „Ještě jednou pro jistotu“ není obchodní strategie. Je to způsob, jak se dostat do složky, kam chodí newslettery a digitální zoufalství.
+
+### CI.6 Šablona win-back karty
+
+```markdown
+## Win-back karta: [firma / účet]
+
+### Kontext
+- Původní use case:
+- Původní slíbená hodnota:
+- Období spolupráce:
+- Stav vztahu při odchodu:
+
+### Důvod odchodu
+- Hlavní důvod:
+- Důkaz / citace ze zákaznické komunikace:
+- Co jsme tehdy neuměli vyřešit:
+
+### Co se změnilo
+- Produktová změna:
+- Procesní změna:
+- Provozní nebo privacy změna:
+- Proč je to relevantní právě teď:
+
+### Oslovení
+- Kontaktní osoba:
+- Legitimní důvod kontaktu:
+- Navržená zpráva:
+- Datum odeslání:
+- Follow-up nejpozději:
+
+### Výsledek
+- Reakce:
+- Další krok:
+- Poučení pro produkt / onboarding / kvalifikaci:
+- Data k úklidu:
+```
+
+### CI.7 Checklist: win-back bez trapného nahánění
+
+- Víme, proč zákazník odešel.
+- Od odchodu se změnilo něco konkrétního a relevantního.
+- Oslovení je navázané na hodnotu, ne na slevu.
+- Zpráva je krátká, osobní a snadno odmítnutelná.
+- Nepoužíváme sledovací pixely ani invazivní e-mailovou analytiku.
+- Každý účet má napsaný legitimní důvod kontaktu.
+- Win-back seznam je malý a průběžně uklízený.
+- Odmítnutí respektujeme a dál nekontaktujeme bez nového důvodu.
+- Vyhodnocujeme i poučení, ne jen návrat k platbě.
+- Staré poznámky a osobní data mažeme podle retenčního pravidla.
+
+*Codyho komentář:* Win-back není nekromancie zákaznických vztahů. Je to slušná otázka: „Změnilo se něco, kvůli čemu si znovu máme co říct?“ Pokud odpověď zní ne, poděkuj v duchu za lekci a běž zlepšovat produkt pro lidi, kteří teď opravdu potřebují pomoct.
+
+
 ## Pracovní log
+- 2026-09-01 09:01 UTC — Doplněna příloha CI o win-backu odcházejících zákazníků: rozlišení důvodů odchodu, návrat s konkrétní změnou místo slevy, respektující zpráva, malý seznam účtů, vyhodnocení učení, šablona karty a privacy-first checklist.
 - 2026-09-01 08:00 UTC — Doplněna příloha CH o férové expanzi zákaznického účtu: potvrzení hodnoty, typy rozšíření, expanzní hypotézu, konzultativní nabídku, privacy-first měření, šablonu karty a checklist.
 - 2026-09-01 07:00 UTC — Doplněna příloha CG o customer success pro malé SaaS: slíbená hodnota, vrstvy péče, jednoduché health score, smysluplné automatizace, review zakončené rozhodnutím, šablona karty a privacy-first checklist.
 - 2026-09-01 06:01 UTC — Doplněna příloha CF o referral programu pro B2B SaaS: ideální fit, férové odměny, souhlasné předání kontaktu, měření kvality bez trackerů, referral balíček, šablona karty a privacy-first checklist.
