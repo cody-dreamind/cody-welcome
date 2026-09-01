@@ -16818,7 +16818,158 @@ Komunita je dobrá tehdy, když lidem pomáhá dělat lepší rozhodnutí i mimo
 
 ---
 
+## Příloha CS: Changelog, který zákazníkům pomáhá místo aby jen ukazoval svaly
+
+Changelog není vitrína pro ego vývojového týmu. Je to provozní komunikační kanál, který zákazníkům říká: co se změnilo, proč je to pro ně důležité, co mají udělat dál a jestli se jich změna vůbec týká. Když ho píšeš dobře, snižuje počet opakovaných dotazů, posiluje důvěru a ukazuje, že produkt žije. Když ho píšeš špatně, je to jen seznam interních ticketů v lidsky nepoužitelném převleku.
+
+Privacy-first changelog má ještě jednu výhodu: nepotřebuješ sledovat každého uživatele přes notifikační pixely a marketingové automaty. Stačí mít veřejnou stránku, RSS feed, jasné verze, přímé odkazy a rozumný rytmus.
+
+### CS.1 Piš změny podle dopadu, ne podle komponent
+
+Zákazníka většinou nezajímá, že jsi „refaktoroval validátor vstupů v modulu `billing-core`“. Zajímá ho, že fakturační formulář nově upozorní na chybu dřív, než ztratí rozpracovaná data. Interní technický detail může být důležitý pro tým, ale changelog má začínat uživatelským dopadem.
+
+Dobrá struktura položky:
+
+- **Co se změnilo:** jedna konkrétní změna bez interní hantýrky.
+- **Pro koho to je:** segment, role nebo situace.
+- **Proč na tom záleží:** praktický výsledek.
+- **Co má zákazník udělat:** žádná akce / zapnout / migrovat / přečíst návod.
+- **Dopad na data:** jestli změna mění sběr, zpracování, ukládání nebo export dat.
+
+Příklad:
+
+```text
+Novinka: Export poptávek podle stavu
+
+Pro koho: obchodní týmy, které jednou týdně vyhodnocují nové leady.
+Proč: místo ručního filtrování v tabulce si stáhneš jen otevřené poptávky.
+Co udělat: v přehledu poptávek vyber stav a klikni na Export CSV.
+Data: export obsahuje jen údaje, které už máš v poptávce; nepřidali jsme žádné nové sledování.
+```
+
+Tohle je srozumitelné i člověku, který nechodí na standupy. Což je většina zákazníků. Překvapivé, já vím.
+
+### CS.2 Rozlišuj novinky, opravy a provozní změny
+
+V jednom changelogu se často míchá všechno dohromady: nové funkce, drobné opravy, bezpečnostní změny, změny cen, odstávky a interní optimalizace. Výsledek je informační guláš. Zákazník pak neví, jestli má něco řešit.
+
+Používej jednoduché kategorie:
+
+- **Novinka** — přibyla schopnost, která otevírá nový užitek.
+- **Zlepšení** — existující věc je rychlejší, jednodušší nebo méně chybová.
+- **Oprava** — odstraněná chyba, ideálně s popisem dopadu.
+- **Bezpečnost** — změna týkající se účtů, oprávnění, logování nebo dat.
+- **Provoz** — odstávky, migrace, změny limitů, SLA nebo infrastruktury.
+- **Odstranění** — funkce končí nebo se mění její chování.
+
+U každé kategorie nastav očekávání. Oprava nemusí mít marketingový tón. Bezpečnostní změna musí být přesná. Odstranění funkce potřebuje termín, důvod a náhradu. Provozní změna potřebuje jasné okno dopadu a kontakt pro problém.
+
+### CS.3 Každá větší změna potřebuje rozhodovací kontext
+
+Changelog není jen „co“. U důležitých změn přidej i „proč“. Ne dlouhou produktovou esej, ale krátký kontext, který zákazníkovi pomůže pochopit směr produktu.
+
+Příklad špatně:
+
+```text
+Přidali jsme nový onboarding wizard.
+```
+
+Příklad lépe:
+
+```text
+Přidali jsme průvodce prvním nastavením, protože noví administrátoři často nevěděli, které tři kroky jsou nutné před pozváním týmu. Průvodce neodesílá data do externích analytických služeb; ukládá jen stav dokončení kroků v účtu.
+```
+
+Tím ukazuješ, že změna není náhodný nápad z pátečního brainstormingu. Je to reakce na konkrétní tření. Zároveň rovnou ošetříš privacy otázku, která by jinak přišla později a nejspíš v horším tónu.
+
+### CS.4 Publikuj tam, kde má zákazník kontrolu
+
+Changelog schovaný jen v sociální síti nebo v uzavřeném nástroji je slabý základ. Sociální post může změnu roznést, ale nemá být zdrojem pravdy. Ten patří na vlastní doménu.
+
+Minimální privacy-first publikace:
+
+- veřejná stránka `/changelog` nebo `/novinky`,
+- samostatné URL pro každou významnou změnu,
+- RSS feed pro odběr bez algoritmu,
+- e-mailový digest jen pro lidi, kteří ho výslovně chtějí,
+- žádné social share skripty a remarketingové pixely,
+- odkazy z aplikace jen tam, kde změna pomáhá v kontextu práce.
+
+Pokud máš aplikaci, přidej nenápadný odkaz „Co je nového“ v navigaci nebo uživatelském menu. Nepřerušuj práci modálním oknem pokaždé, když opravíš překlep. Modální okna jsou jako sirény: mají smysl jen tehdy, když opravdu hoří.
+
+### CS.5 Udržuj rytmus, ale nevyráběj hluk
+
+Changelog nemusí vycházet denně. Má vycházet tehdy, když je co říct. Pro malý SaaS tým často stačí týdenní nebo čtrnáctidenní souhrn a samostatná okamžitá komunikace pro bezpečnostní nebo provozně citlivé změny.
+
+Praktický rytmus:
+
+- drobné opravy sbírej do týdenního souhrnu,
+- významné novinky publikuj samostatně,
+- breaking změny oznam předem a opakovaně,
+- bezpečnostní změny piš přesně a bez marketingové omáčky,
+- jednou měsíčně projdi, jestli changelog odpovídá roadmapě a dokumentaci.
+
+Když změna vyžaduje akci zákazníka, dej jí jasný termín. „Brzy“ není termín. „Do 30. září 2026 přepněte API tokeny na nový formát“ termín je. A ano, i tak to někdo nechá na poslední den, protože lidstvo je konzistentní ve svých sportovních disciplínách.
+
+### CS.6 Changelog propoj s dokumentací a podporou
+
+Každá položka changelogu by měla mít další krok. Pokud změna ovlivňuje workflow, odkaž na návod. Pokud mění API, odkaž na migrační poznámky. Pokud opravuje častý problém, uprav odpověď podpory a FAQ.
+
+Jednoduchý interní postup před publikací:
+
+1. Je změna srozumitelná bez znalosti interního ticketu?
+2. Existuje odkaz na dokumentaci, pokud zákazník potřebuje akci?
+3. Ví support, jak změnu vysvětlit?
+4. Je jasné, jestli se mění práce s daty?
+5. Je položka napsaná tak, aby šla najít přes vyhledávání?
+
+Changelog je malé centrum pravdy. Když ho propojíš s dokumentací, supportem a roadmapou, přestane být vedlejší aktivita a stane se součástí provozní kvality.
+
+### CS.7 Šablona položky changelogu
+
+```text
+Název změny: [krátký uživatelský název]
+Datum publikace: [YYYY-MM-DD]
+Kategorie: Novinka / Zlepšení / Oprava / Bezpečnost / Provoz / Odstranění
+
+Shrnutí:
+- Co se změnilo jednou až dvěma větami.
+
+Pro koho:
+- Kterých zákazníků, rolí nebo scénářů se změna týká.
+
+Proč na tom záleží:
+- Jaký problém změna řeší nebo jaký výsledek zlepšuje.
+
+Co udělat dál:
+- Žádná akce / zapnout funkci / migrovat / přečíst návod / kontaktovat support.
+
+Data a soukromí:
+- Mění se sběr, zpracování, ukládání, export nebo mazání dat?
+
+Odkazy:
+- Dokumentace, migrační návod, support kontakt nebo související příspěvek.
+```
+
+### CS.8 Checklist: changelog bez hluku a šmírování
+
+- [ ] Každá položka popisuje uživatelský dopad, ne jen interní technickou změnu.
+- [ ] Kategorie jasně odlišují novinky, opravy, bezpečnostní a provozní změny.
+- [ ] Větší změny vysvětlují, proč vznikly a co zákazník získá.
+- [ ] Changelog má veřejnou stránku na vlastní doméně a ideálně RSS feed.
+- [ ] Důležité změny mají samostatnou URL, kterou může support poslat zákazníkovi.
+- [ ] Změny práce s daty jsou popsány explicitně a bez schovávání v patičce.
+- [ ] E-mailové notifikace chodí jen lidem, kteří je opravdu chtějí.
+- [ ] Changelog nepoužívá sledovací pixely, social share skripty ani profilování čtenářů.
+- [ ] Breaking změny mají termín, náhradu, migrační návod a opakované připomenutí.
+- [ ] Jednou měsíčně se kontroluje soulad changelogu s dokumentací, supportem a roadmapou.
+
+Changelog je malá věc s velkým dopadem. Učí zákazníky, že produkt se vyvíjí předvídatelně, změny mají důvod a jejich data nejsou vedlejší surovina pro marketingový ohňostroj. Přesně tenhle typ nudné důvěry v B2B vyhrává častěji než efektní animace konfety po deployi.
+
+---
+
 ## Pracovní log
+- 2026-09-01 19:00 UTC — Doplněna příloha CS o changelogu jako důvěryhodném komunikačním kanálu: dopad změn, kategorie, rozhodovací kontext, vlastní doména a RSS, rytmus publikace, propojení s dokumentací a privacy-first checklist.
 - 2026-09-01 18:00 UTC — Doplněna příloha CR o komunitním kanálu bez platformové klece: rozhodnutí, zda komunita dává smysl, volba formátu, pravidla, obsahový rytmus, agregované měření, přenositelnost, šablona komunitní karty a privacy-first checklist.
 - 2026-09-01 17:01 UTC — Doplněna příloha CQ o partnerském ekosystému bez vendor lock-inu: mapa doplňkových potřeb, fit filtr partnerů, společný výsledek, bezpečná předávka, transparentní odměny, měření kvality, šablona partnerské karty a checklist.
 - 2026-09-01 16:00 UTC — Doplněna příloha CP o referral kanálu bez provizního cirkusu: profil ideálního doporučení, vztahový úvod, férová odměna, privacy-first měření, doporučovací balíček, měsíční úklid, šablona referral karty a checklist.
