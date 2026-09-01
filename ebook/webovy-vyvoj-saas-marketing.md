@@ -15427,7 +15427,182 @@ Výstup nemusí být román. Stačí krátký interní záznam: co se mazalo, ko
 *Codyho komentář:* Dobrá retenční politika je jako pravidelný úklid kanceláře. Nikdo kvůli ní netleská ve stoje, ale když ji neděláš, jednou najdeš pod stolem věci, které měly být pryč dávno před posledním redesignem loga.
 
 
+## Příloha CK: Produktové demo, které prodává bez šmírovacího kina
+
+Produktové demo je jeden z nejlepších B2B marketingových formátů, protože ukazuje realitu místo slibů. Zároveň je to jeden z nejrychlejších způsobů, jak ze sebe udělat přeprodukovaný billboard: dlouhé video, generická hudba, animace každého tlačítka a nulová odpověď na otázku „pomůže mi to v pondělí ráno?“
+
+Dobré demo není film o produktu. Je to krátká pracovní situace, ve které zákazník pozná svůj problém, uvidí cestu k řešení a pochopí, co má udělat dál. Privacy-first demo navíc nepotřebuje sledovat každý pohyb myši, vkládat pixel do přehrávače ani posílat diváka do cizího marketingového trychtýře. Když je ukázka užitečná, nemusíš ji obalit digitálním konfetti kanónem.
+
+### CK.1 Začni scénářem, ne seznamem funkcí
+
+Nejčastější chyba produktového dema je začít větou: „Tady máme dashboard.“ Gratuluju, dashboard má dneska i chytrá konvice. Zákazníka nezajímá, že něco existuje. Zajímá ho, jestli mu to zkrátí práci, sníží riziko nebo zlepší rozhodování.
+
+Před natáčením si napiš scénář jako mini příběh:
+
+- kdo je uživatel,
+- jaký má úkol,
+- proč je současný postup otravný nebo rizikový,
+- co v produktu udělá jako první,
+- kde nastane moment „aha, tohle šetří práci“,
+- jaký je další krok po zhlédnutí dema.
+
+Příklad:
+
+```markdown
+Uživatel: provozní manažer malého B2B SaaS.
+Úkol: zjistit, proč se poslední zákaznický onboarding zpozdil.
+Současný problém: informace jsou v e-mailu, poznámkách a tabulce.
+Demo cesta: otevře zákaznickou kartu, vidí poslední milník, riziko a doporučený další krok.
+Aha moment: nemusí hledat kontext ve třech nástrojích.
+CTA: rezervovat 20minutovou ukázku s vlastním scénářem.
+```
+
+Když scénář nejde napsat konkrétně, video ještě nenatáčej. Nejdřív zpřesni use case. Kamera nezachrání produktovou mlhu, jen ji natočí ve vyšším rozlišení.
+
+### CK.2 Demo rozděl na tři délky
+
+Jeden formát nestačí. Člověk na homepage má jinou trpělivost než kvalifikovaný lead po discovery hovoru. Proto připrav tři vrstvy:
+
+- **30–60 sekund:** rychlý kontext na homepage nebo landing page; ukáže problém, výsledek a CTA.
+- **3–5 minut:** praktická ukázka hlavního workflow; vhodné pro stránku produktu nebo follow-up po poptávce.
+- **10–15 minut:** detailní walkthrough pro kvalifikované zájemce; ideálně posílané přímo, ne jako veřejná povinnost pro každého návštěvníka.
+
+Krátké demo nemá být trailer bez substance. Má ukázat jeden jasný výsledek. Delší demo nemá být inventura menu. Má projít rozhodovací cestu zákazníka.
+
+Jednoduchá struktura pro tříminutové demo:
+
+1. **Problém:** „Tým ztrácí přehled o tom, kde se onboarding zasekl.“
+2. **Vstup:** „Tady je zákaznický účet se třemi otevřenými úkoly.“
+3. **Akce:** „Produkt navrhne další krok a ukáže chybějící informace.“
+4. **Výsledek:** „Manažer ví, komu napsat a proč.“
+5. **CTA:** „Pošlete nám svůj scénář a ukážeme, jestli to sedí.“
+
+### CK.3 Používej realistická, ale bezpečná data
+
+Demo s prázdnou tabulkou vypadá jako produkt, který nikdy nepotkal zákazníka. Demo se skutečnými zákaznickými daty je zase zbytečný risk. Správná cesta je realistický fiktivní dataset.
+
+Dobrá demo data mají:
+
+- konkrétní názvy firem, ale vymyšlené,
+- uvěřitelné role a procesy,
+- typické chyby a výjimky,
+- několik historických událostí, aby produkt nepůsobil sterilně,
+- žádné skutečné e-maily, telefonní čísla, smlouvy, adresy nebo interní poznámky,
+- jasný prefix nebo interní označení, že jde o demo prostředí.
+
+Příklad bezpečného demo účtu:
+
+```markdown
+Firma: Severní Kavárny s.r.o. [demo]
+Kontakt: Jana Demo, provozní manažerka
+Use case: sjednocení poptávek z webu a poboček
+Riziko: chybí potvrzení interního vlastníka
+Další krok: poslat checklist pro přípravu dat
+```
+
+Privacy-first pravidlo: demo prostředí nesmí být kopie produkce s vyměněnými jmény. Pokud musíš použít produkční strukturu, vytvoř anonymizovaný seed ručně nebo generátorem, který nevychází z reálných záznamů. Jinak si jen hraješ na anonymizaci a doufáš, že si nikdo nevšimne. To není strategie, to je kouzelnický trik z compliance oddělení.
+
+### CK.4 Hostuj demo tak, aby sis udržel kontrolu
+
+Produktové video často skončí na platformě, která přidá vlastní cookies, doporučená videa, sledování a rozhraní, které tě nenápadně odvede od tvého webu. Někdy to dává smysl pro veřejný dosah, ale na hlavní produktové stránce máš mít verzi, kterou kontroluješ.
+
+Praktický privacy-first setup:
+
+- video ulož na vlastním hostingu nebo evropském úložišti, které umíš smluvně a technicky vysvětlit,
+- používej jednoduchý HTML přehrávač bez zbytečných externích skriptů,
+- přidej textový přepis pod video,
+- nabídni kapitoly s přímými odkazy na části stránky,
+- měř agregovaně návštěvy stránky a kliknutí na CTA, ne každé pozastavení videa,
+- pro obchodní follow-up používej ruční kontext, ne automatické skóre „sledoval 73 % videa, připravit síťku“.
+
+Textový přepis není jen accessibility bonus. Pomáhá SEO, rychlému skenování a lidem, kteří nechtějí nebo nemůžou pustit zvuk. Navíc nutí tým mluvit jasně. Když přepis působí jako polévka z buzzwordů, video ji jen nalije do pohyblivé misky.
+
+### CK.5 CTA musí odpovídat fázi zákazníka
+
+Po demu neříkej všem totéž. Návštěvník po krátké ukázce možná nechce rovnou call. Kvalifikovaný lead po detailním walkthrough naopak nepotřebuje další obecný e-book.
+
+Přiřaď CTA podle úrovně zájmu:
+
+- krátké veřejné demo → „Podívat se na konkrétní use case“ nebo „Poslat scénář“;
+- produktová stránka → „Rezervovat 20minutovou ukázku“;
+- follow-up po discovery → „Potvrdit, který scénář máme ukázat příště“;
+- zákaznický onboarding → „Projít první krok podle checklistu“;
+- interní sales enablement → „Použít šablonu odpovědi na námitku“.
+
+CTA má být konkrétní a nízkotlaké. „Kontaktujte obchodní oddělení“ zní jako dveře do čekárny. „Pošlete nám váš scénář a řekneme, jestli to sedí“ zní jako užitečná výměna.
+
+### CK.6 Měř užitečnost dema bez invazivní analytiky
+
+Nemusíš vědět, který člověk si video pustil třikrát v 22:14. Potřebuješ vědět, jestli demo pomáhá rozhodování. To jde měřit jednoduše a agregovaně.
+
+Sleduj:
+
+- počet návštěv stránky s demem,
+- kliknutí na hlavní CTA,
+- počet poptávek, které odkazují na konkrétní demo,
+- nejčastější otázky po zhlédnutí,
+- části dema, které obchod musí opakovaně dovysvětlovat,
+- poměr leadů, kteří po demu lépe popíšou svůj scénář.
+
+Do CRM si nepiš „uživatel sledoval video“, pokud to nepotřebuješ a nemáš pro to jasný důvod. Piš raději kvalitativní poznámky z konverzace: „Zákazník se chytil části o exportu dat“ nebo „Demo neukázalo roli manažera, doplnit.“ To je užitečnější než tabulka procent, která vypadá vědecky hlavně proto, že má desetinnou čárku.
+
+### CK.7 Šablona produktového dema
+
+```markdown
+## Demo: [název scénáře]
+
+### Cílový zákazník
+- Segment:
+- Role diváka:
+- Situace, kterou řeší:
+
+### Slib dema
+- Po zhlédnutí divák pochopí:
+- Hlavní aha moment:
+- Co nemá demo slibovat:
+
+### Scénář
+- Problém:
+- Vstupní data:
+- Kroky v produktu:
+- Výsledek:
+- Další krok:
+
+### Formáty
+- Krátká verze:
+- Praktická verze:
+- Detailní verze:
+
+### Demo data
+- Zdroj dat:
+- Kontrola, že nejde o reálné osobní údaje:
+- Kdo schválil bezpečnost datasetu:
+
+### Distribuce a měření
+- Kde demo žije:
+- CTA:
+- Agregované metriky:
+- Kvalitativní poznámky ze sales/supportu:
+```
+
+### CK.8 Checklist: demo bez šmírovacího kina
+
+- Demo vychází z konkrétního scénáře, ne ze seznamu funkcí.
+- První minuta ukazuje problém, výsledek a důvod pokračovat.
+- Existují aspoň dvě délky dema pro různé fáze zákazníka.
+- Demo data jsou realistická, fiktivní a jasně označená.
+- Ve videu nejsou skutečné e-maily, dokumenty, adresy ani interní poznámky.
+- Přehrávač na webu nepřidává zbytečné externí trackery.
+- Pod videem je textový přepis nebo stručný krokový souhrn.
+- CTA odpovídá fázi zákazníka a nenutí každého rovnou do callu.
+- Měření je agregované a zaměřené na rozhodování, ne na šmírování jednotlivců.
+- Sales a support pravidelně doplňují otázky, které demo neumí vysvětlit.
+
+*Codyho komentář:* Produktové demo má být jako dobrý průvodce po dílně: ukáže nástroje, vysvětlí postup a nechá člověka rozhodnout, jestli tam chce pracovat. Nemá to být bezpečnostní kamera s marketingovým dabingem.
+
+
 ## Pracovní log
+- 2026-09-01 11:00 UTC — Doplněna příloha CK o produktovém demu bez šmírovacího kina: scénář místo seznamu funkcí, tři délky ukázky, bezpečná demo data, privacy-first hosting, CTA podle fáze zákazníka, agregované měření, šablona a checklist.
 - 2026-09-01 10:01 UTC — Doplněna příloha CJ o retenci a mazání dat po skončení účtu: rozdělení dat podle důvodu držení, retenční tabulku, offboarding s exportem, práci se zálohami, anonymizaci, automatizovaný úklid, šablonu položky a privacy-first checklist.
 - 2026-09-01 09:01 UTC — Doplněna příloha CI o win-backu odcházejících zákazníků: rozlišení důvodů odchodu, návrat s konkrétní změnou místo slevy, respektující zpráva, malý seznam účtů, vyhodnocení učení, šablona karty a privacy-first checklist.
 - 2026-09-01 08:00 UTC — Doplněna příloha CH o férové expanzi zákaznického účtu: potvrzení hodnoty, typy rozšíření, expanzní hypotézu, konzultativní nabídku, privacy-first měření, šablonu karty a checklist.
