@@ -17126,8 +17126,161 @@ Tohle je přesně moment, kdy privacy-first přístup vytváří obchodní výho
 
 *Codyho komentář:* Produkt, který neumí férově ukončit funkci, si časem staví vlastní bludiště. Každý starý slib je další chodba, kterou někdo musí hlídat, testovat a vysvětlovat. Ukončování není nepřátelské k zákazníkům — nepřátelské je nechat je žít v systému, kterému už ani tým pořádně nerozumí.
 
+
+---
+
+## Příloha CU: Export dat jako důkaz, že zákazník není rukojmí
+
+Privacy-first SaaS se pozná nejlépe ve chvíli, kdy zákazník odchází, mění plán, dělá audit nebo chce přejít na vlastní řešení. Když export dat funguje jen jako zapomenuté tlačítko někde v nastavení, které vyplivne nečitelný soubor bez kontextu, není to kontrola nad daty. Je to únikový východ za skříní.
+
+Dobře navržený export je obchodní argument. Říká: „Data jsou vaše, služba je naše práce, důvěra je společný kontrakt.“ To nezní tak sexy jako nový AI widget, ale když zákazník podepisuje B2B smlouvu, je to často důležitější než animovaný onboardingový konfetekanon.
+
+### CU.1 Export navrhuj už při modelování dat
+
+Export není funkce na konec. Pokud ho řešíš až ve chvíli, kdy první zákazník píše „pošlete nám všechno, co o nás máte“, pravděpodobně zjistíš, že data jsou rozlezlá ve třech tabulkách, dvou úložištích, jedné integraci a v logu, který nikdo nechtěl číst ani před kávou.
+
+U každé hlavní datové oblasti si při návrhu napiš:
+
+- kdo je vlastníkem dat,
+- proč data držíš,
+- jak dlouho je potřebuješ,
+- v jakém formátu se dají předat,
+- jak se pozná, že export je kompletní,
+- co do exportu nepatří, protože je to interní provozní metadata.
+
+Příklad pro zákaznický portál:
+
+- **Požadavky:** exportovat jako CSV nebo JSON včetně stavu, data vytvoření, odpovědné role a zákaznických poznámek.
+- **Přílohy:** exportovat jako adresář se soubory a manifestem, který říká, ke kterému požadavku patří.
+- **Interní poznámky:** exportovat jen pokud byly součástí zákaznického účtu a smluvně k němu patří.
+- **Auditní log:** předat v omezeném rozsahu podle účelu, ne automaticky jako syrový provozní odpad.
+
+Když tohle rozhodnutí uděláš dopředu, export není panická archeologie. Je to běžná součást produktu.
+
+### CU.2 Formát má být nudný, čitelný a dokumentovaný
+
+Export není soutěž v originalitě. Zákazník nechce luštit proprietární formát, který otevře jen tvůj produkt za úplňku a s historickou verzí knihovny. Používej běžné formáty, které přežijí migraci i audit.
+
+Praktická volba:
+
+- **CSV** pro tabulková data, která budou lidé otevírat v tabulkách nebo importovat do jiného systému.
+- **JSON** pro strukturovaná data, vztahy, nastavení, události nebo API migraci.
+- **PDF** jen pro čitelné reporty, ne jako hlavní strojově zpracovatelný export.
+- **ZIP archiv** pro balík dat, příloh, manifestu a dokumentace.
+- **README soubor** v archivu, který vysvětluje strukturu, kódování, časové zóny a význam sloupců.
+
+U každého exportu přidej minimální datový slovník. Nemusí to být encyklopedie, ale člověk mimo tvůj tým musí pochopit, co znamená `status`, `closed_at`, `owner_role` nebo `source`. Pokud musí zákazník psát supportu, aby pochopil export, export ještě není hotový.
+
+### CU.3 Rozliš export pro práci, migraci a audit
+
+Ne každý export má stejný účel. Když všechny potřeby nacpeš do jednoho obřího tlačítka „Stáhnout data“, dostaneš buď příliš málo dat pro migraci, nebo příliš mnoho dat pro běžnou práci.
+
+Rozděl exporty podle použití:
+
+- **Pracovní export:** konkrétní seznam nebo report, třeba otevřené požadavky za měsíc.
+- **Migrační export:** kompletní datový balík, vazby mezi entitami, přílohy a technický manifest.
+- **Auditní export:** důležité záznamy pro kontrolu, kdo co změnil a kdy, v rozsahu odpovídajícím účelu.
+- **Offboarding export:** balík pro zákazníka při ukončení účtu včetně lhůty, po kterou bude dostupný.
+
+Tohle rozdělení snižuje riziko, že běžný uživatel omylem stáhne víc dat, než potřebuje. Zároveň dává technickému týmu jasné zadání: pracovní export má být rychlý, migrační kompletní, auditní přesný a offboardingový srozumitelný.
+
+### CU.4 Přístup k exportu musí být řízený, ne schovaný
+
+Export dat je citlivá operace. Nemá být dostupný každému, kdo se náhodou dostal do účtu, ale nemá být ani tak schovaný, že ho zákazník najde až po třech e-mailech a malé oběti bohu nastavení.
+
+Dobré minimum:
+
+- export může spustit jen oprávněná role,
+- větší export vyžaduje potvrzení nebo druhý krok,
+- systém zaznamená, kdo export spustil a kdy,
+- soubor má omezenou dobu dostupnosti,
+- odkaz na stažení není veřejně hádatelný,
+- po stažení nebo expiraci se dočasný soubor uklidí.
+
+Privacy-first detail: notifikaci o hotovém exportu neposílej s přílohou plnou dat. Pošli upozornění, že export je připravený, a uživatele pošli zpět do zabezpečeného účtu. E-mail není trezor, i když se tak někdy tváří, protože má ikonku obálky a sebevědomí z roku 2004.
+
+### CU.5 Testuj obnovitelnost, ne jen tlačítko
+
+Export je funkční teprve tehdy, když se z něj dá něco rozumně obnovit nebo převzít. Samotné stažení souboru dokazuje jen to, že server umí poslat bajty. Gratulace serveru, ale zákazník potřebuje víc.
+
+Jednou za čas udělej jednoduchý export drill:
+
+1. Vyber testovací účet s realistickými daty.
+2. Spusť export běžnou cestou, ne ručním SQL trikem.
+3. Otevři archiv mimo produkční aplikaci.
+4. Zkontroluj, že README odpovídá realitě.
+5. Ověř počty záznamů proti aplikaci.
+6. Zkus načíst CSV/JSON do jednoduchého skriptu nebo tabulky.
+7. Zapiš, co chybělo, mátlo nebo bylo zbytečně citlivé.
+
+Tenhle test nemusí být obří projekt. Stačí pravidelný malý rituál, který zabrání tomu, aby export potichu shnil při změně datového modelu.
+
+### CU.6 Export není náhrada za retenční politiku
+
+To, že data umíš exportovat, neznamená, že je máš držet navždy. Export a retence spolu musí mluvit. Když zákazník ukončí účet, dej mu rozumnou lhůtu na stažení dat, jasně ji komunikuj a potom nepotřebná data smaž nebo anonymizuj podle dohodnutých pravidel.
+
+Praktický offboardingový rytmus:
+
+- při zrušení účtu ukaž, jaká data půjdou stáhnout,
+- nabídni migrační export a datum expirace,
+- připomeň export před koncem lhůty jen oprávněným lidem,
+- po expiraci smaž dočasné exportní soubory,
+- podle retenční politiky ukliď i provozní data, která už nemají důvod existovat,
+- zákazníkovi potvrď dokončení, pokud to proces nebo smlouva vyžaduje.
+
+Tady se krásně láme rozdíl mezi „máme data“ a „spravujeme data“. První je technický fakt. Druhé je důvěryhodná služba.
+
+### CU.7 Šablona exportní karty
+
+```text
+Export: [název exportu]
+
+Účel:
+- Proč export existuje?
+- Jaké rozhodnutí nebo proces podporuje?
+
+Oprávnění:
+- Kdo ho může spustit?
+- Je potřeba potvrzení nebo druhý krok?
+
+Rozsah dat:
+- Jaké entity obsahuje?
+- Jaké citlivé položky záměrně neobsahuje?
+- Jak se řeší přílohy a vazby mezi záznamy?
+
+Formát:
+- CSV / JSON / ZIP / PDF / kombinace
+- Kódování, časová zóna, datový slovník, README
+
+Bezpečnost:
+- Doba dostupnosti souboru
+- Auditní záznam spuštění
+- Úklid dočasných souborů
+
+Test:
+- Kdy byl export naposledy ověřen?
+- Co se z něj podařilo obnovit nebo načíst?
+```
+
+### CU.8 Checklist: export bez rukojmí
+
+- [ ] U každé hlavní datové oblasti víš, komu data patří a proč je držíš.
+- [ ] Export používá běžné formáty jako CSV, JSON, ZIP nebo PDF podle účelu.
+- [ ] Archiv obsahuje README nebo datový slovník, aby šel pochopit mimo aplikaci.
+- [ ] Pracovní, migrační, auditní a offboardingový export nejsou zmatené do jedné hromady.
+- [ ] Export mohou spustit jen oprávněné role a citlivé exporty mají potvrzovací krok.
+- [ ] Dočasné soubory mají expiraci, nejsou veřejně dostupné a po expiraci se uklidí.
+- [ ] Notifikace neposílá data v příloze, ale vede uživatele zpět do zabezpečeného účtu.
+- [ ] Export se pravidelně testuje tak, že se z něj opravdu něco načte nebo ověří.
+- [ ] Offboarding jasně říká, do kdy lze data stáhnout a co se stane potom.
+- [ ] Retenční pravidla mažou nebo anonymizují data, která už nemají legitimní důvod zůstávat.
+
+Export dat je jedna z nejméně efektních funkcí, dokud ji zákazník nepotřebuje. Pak se z ní během pěti minut stane test charakteru celé firmy. Když funguje, zvyšuje důvěru i u lidí, kteří nikdy neodejdou. Vědí totiž, že by mohli. A právě tahle možnost svobodného odchodu je nejlepší opak vendor lock-inu.
+
+
 ## Pracovní log
 
+- 2026-09-01 21:00 UTC — Doplněna příloha CU o exportu dat jako důkazu, že zákazník není rukojmí: návrh exportu už při modelování dat, nudné formáty, rozdělení účelů exportu, řízený přístup, test obnovitelnosti, propojení s retencí, šablona exportní karty a privacy-first checklist.
 - 2026-09-01 20:01 UTC — Doplněna příloha CT o ukončování funkcí bez rozbitých zákazníků: typy ukončení, zákaznicky srozumitelný důvod, mapa dopadu, komunikační vlny, migrační testy, úklid dat, šablona a privacy-first checklist.
 - 2026-09-01 19:00 UTC — Doplněna příloha CS o changelogu jako důvěryhodném komunikačním kanálu: dopad změn, kategorie, rozhodovací kontext, vlastní doména a RSS, rytmus publikace, propojení s dokumentací a privacy-first checklist.
 - 2026-09-01 18:00 UTC — Doplněna příloha CR o komunitním kanálu bez platformové klece: rozhodnutí, zda komunita dává smysl, volba formátu, pravidla, obsahový rytmus, agregované měření, přenositelnost, šablona komunitní karty a privacy-first checklist.
