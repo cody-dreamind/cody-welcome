@@ -16446,7 +16446,208 @@ Referral je jeden z nejhezčích růstových kanálů, pokud se dělá slušně.
 
 ---
 
+## Příloha CQ: Partnerský ekosystém bez vendor lock-in divadla
+
+Partnerství zní vznešeně. V praxi ale často skončí jako výměna log, jeden společný post na LinkedInu a tiché čekání, jestli se z vesmíru snese lead. Nesnese. Vesmír má plné ruce práce s rozpínáním a na tvůj co-marketingový banner nemá čas.
+
+Dobré partnerství není dekorace. Je to opakovatelný způsob, jak dvě firmy společně doručí zákazníkovi lepší výsledek, než kdyby každá prodávala sama. U webového vývoje, SaaS a privacy-first provozu v Evropě to může být velmi silný kanál: agentura doporučí bezpečný hosting, účetní firma doporučí interní portál, konzultant doporučí analytiku bez sledovacího cirkusu, vývojářský tým doporučí specialistu na obsah.
+
+Podmínka je jednoduchá: partnerství musí být užitečné pro zákazníka, nejen pohodlné pro tebe. Jakmile začneš partnera tlačit jako „preferovaného dodavatele“ bez ohledu na fit, vyrábíš si malé vendor lock-in divadlo. Krátkodobě to může přinést provizi. Dlouhodobě to žere důvěru jako hladový jezevec kabely ve sklepě.
+
+### CQ.1 Začni mapou doplňkových potřeb
+
+Nejdřív si napiš, co zákazník obvykle potřebuje před, během a po spolupráci s tebou. Ne z pohledu tvého katalogu služeb, ale z pohledu jeho cesty.
+
+Příklad pro privacy-first web nebo SaaS:
+
+- před projektem potřebuje vyjasnit nabídku, positioning a právní rámec,
+- během projektu potřebuje obsah, design, implementaci, hosting, analytiku a bezpečnost,
+- po spuštění potřebuje provoz, podporu, měření, další obsah, automatizace a školení týmu.
+
+Z toho vznikne mapa partnerů:
+
+- právník nebo DPO pro smlouvy, souhlasy a datové toky,
+- brand nebo obsahový stratég pro formulaci nabídky,
+- evropský hostingový nebo DevOps partner,
+- specialista na accessibility a UX výzkum,
+- bezpečnostní konzultant pro audit přístupů,
+- obchodní konzultant pro práci s pipeline,
+- účetní nebo finanční poradce pro cenotvorbu a fakturaci.
+
+Nemusíš mít partnera pro všechno. Naopak: začni třemi oblastmi, kde často narážíš na hranici vlastní expertizy. Partnerství má doplnit schopnosti, ne nafouknout ego.
+
+### CQ.2 Partner musí projít fit filtrem
+
+Ne každý šikovný dodavatel je dobrý partner. Partnerství znamená, že ho částečně půjčuješ svojí reputaci. Proto nestačí „umí hezké věci“ nebo „známe se z konference“.
+
+Použij jednoduchý fit filtr:
+
+- **Hodnoty:** respektuje zákazníka, data a realistické sliby?
+- **Kvalita:** umí doložit výsledky bez přehnaného marketingového kouře?
+- **Provoz:** odpovídá spolehlivě, dokumentuje práci a drží termíny?
+- **Privacy:** sbírá jen data, která opravdu potřebuje?
+- **Evropa:** dokáže rozumně vysvětlit, kde data běží a kdo k nim má přístup?
+- **Konflikt:** nehrozí, že bude zákazníkovi tlačit vlastní uzavřený ekosystém proti jeho zájmu?
+
+Když partner neprojde privacy filtrem, neznamená to, že je zlý. Znamená to, že se nehodí pro značku, která chce stát na kontrole nad daty. To je v pořádku. Partnerství není charita pro dodavatelské kontakty.
+
+*Codyho komentář:* Nejrychlejší způsob, jak zničit důvěru, je doporučit nástroj, který pak zákazníkovi vysaje data, rozbije export a pošle mu tři follow-up e-maily denně. Ano, i když měl hezký web a maskota v pastelových barvách.
+
+### CQ.3 Definuj společný výsledek, ne jen společný seznam služeb
+
+Slabé partnerství říká:
+
+> My děláme weby, oni dělají marketing, spolu umíme všechno.
+
+Lepší partnerství říká:
+
+> Pomáháme evropským B2B firmám spustit poptávkový web s jasnou nabídkou, privacy-first měřením a provozem pod kontrolou.
+
+Rozdíl je v tom, že druhá věta popisuje výsledek. Zákazník nepotřebuje vědět, že máš síť kamarádů s fakturačními údaji. Potřebuje pochopit, co společně vyřešíte.
+
+Pro každé partnerství si napiš:
+
+1. Pro koho společná nabídka je.
+2. Jaký problém řeší.
+3. Jak poznáme dobrý výsledek.
+4. Kdo vlastní kterou část práce.
+5. Co si zákazník může koupit samostatně.
+6. Kde jsou hranice doporučení.
+
+Příklad:
+
+```text
+Partnerství: Dreamind + obsahový stratég
+
+Pro koho: B2B firmy, které redesignují web, ale nemají jasně formulovanou nabídku.
+Výsledek: Homepage a landing page mají konkrétní positioning, privacy-first měření a jasný poptávkový tok.
+Dreamind: web, technická architektura, analytika, provoz.
+Partner: positioning workshop, texty, struktura argumentů.
+Samostatně: zákazník může koupit jen strategii, jen web, nebo společný balíček.
+Hranice: netvrdíme, že vyřešíme celý marketingový systém firmy.
+```
+
+Tohle je mnohem užitečnější než logo v patičce. Logo samo o sobě nic neřídí. Dobře popsané partnerství ano.
+
+### CQ.4 Udělej předávku jako proces, ne jako přeposlání e-mailu
+
+Předání zákazníka partnerovi je citlivý moment. Pokud ho odbydeš větou „napiš Pavlovi, on ti pomůže“, zahodíš kontext a zákazník začne znovu vysvětlovat svůj problém. To je otravné a neprofesionální.
+
+Dobrá předávka obsahuje:
+
+- souhlas zákazníka s propojením,
+- stručný kontext problému,
+- očekávaný výsledek,
+- relevantní omezení a termíny,
+- informaci, co se už řešilo,
+- jasný další krok.
+
+Bezpečná intro zpráva:
+
+```text
+Ahoj [partner],
+
+se souhlasem propojuji s [zákazník]. Řeší [stručný problém] a hledá pomoc hlavně s [konkrétní oblast]. My jsme zatím řešili [kontext] a nechceme, aby museli všechno vysvětlovat od nuly.
+
+[Zákazník], [partner] má zkušenost s [relevantní fit]. Navrhuju krátký úvodní call, kde si ověříte rozsah a jestli dává smysl pokračovat.
+```
+
+Pozor na sdílení detailů. Partner nepotřebuje vidět celé interní poznámky, přístupy, obchodní čísla ani osobní údaje lidí z týmu. Předávej minimum potřebné pro smysluplný první krok.
+
+### CQ.5 Provize a odměny řekni nahlas
+
+Partnerská odměna není problém. Problém je, když o ní nikdo neví. Pokud dostáváš provizi, success fee, slevu, barter nebo jinou výhodu, mělo by být jasné, jestli to ovlivňuje doporučení.
+
+Praktické pravidlo:
+
+- u interní evidence si zapiš, jaký typ odměny existuje,
+- zákazníkovi řekni, pokud má doporučení obchodní motivaci,
+- partnerovi řekni, co smí a nesmí slibovat tvým jménem,
+- nikdy nedoporučuj horší variantu jen proto, že má lepší provizi,
+- umožni zákazníkovi zvolit i jiného dodavatele.
+
+Transparentní formulace může být krátká:
+
+> S tímto partnerem máme domluvenou doporučovací odměnu, ale doporučujeme ho hlavně proto, že se hodí na váš typ projektu a splňuje naše požadavky na práci s daty. Pokud chcete porovnat i jinou variantu, řekneme vám, na co se při výběru dívat.
+
+Tohle možná sníží krátkodobou agresivitu prodeje. Výborně. Agresivní prodej není ctnost, jen drahá forma nervozity.
+
+### CQ.6 Měř partnerství podle kvality, ne podle počtu log
+
+Partnerský ekosystém se snadno změní ve sbírku log a „strategických spoluprací“, které nikdo nepoužívá. Měř proto jen několik praktických signálů:
+
+- kolik předávek vedlo k užitečnému rozhovoru,
+- kolik zákazníků dostalo rychlejší nebo kvalitnější řešení,
+- kolik předávek se vrátilo jako špatný fit,
+- jak zákazník hodnotil navazující spolupráci,
+- zda partner dodržel datová a komunikační pravidla,
+- zda partnerství přineslo učení pro produkt, web nebo obsah.
+
+Nepotřebuješ sledovat jednotlivé lidi napříč weby, kampaněmi a inboxy. Stačí jednoduchá evidence předávek, ruční poznámka po review a agregovaný měsíční pohled. Privacy-first partnerství má měřit kvalitu vztahů, ne lovit stopu každého kliknutí jako detektiv v levném seriálu.
+
+### CQ.7 Šablona partnerské karty
+
+```markdown
+## Partner: [název / osoba]
+
+### Fit
+- Oblast expertizy:
+- Pro koho je vhodný:
+- Pro koho není vhodný:
+- Důvod partnerství:
+
+### Společný výsledek
+- Typický problém zákazníka:
+- Slibovaný výsledek:
+- Co děláme my:
+- Co dělá partner:
+- Hranice nabídky:
+
+### Privacy a provoz
+- Jaká data partner typicky potřebuje:
+- Kde data zpracovává:
+- Jak řeší přístupy:
+- Jak řeší mazání nebo vrácení dat:
+- Rizika / poznámky:
+
+### Předávka
+- Kdo může iniciovat intro:
+- Jak získáváme souhlas zákazníka:
+- Co smíme sdílet:
+- Standardní další krok:
+
+### Obchodní pravidla
+- Typ odměny / provize:
+- Kdy vzniká nárok:
+- Co říkáme zákazníkovi:
+- Co partner nesmí slibovat naším jménem:
+
+### Review
+- Poslední kontrola:
+- Kvalita předávek:
+- Zákaznická zpětná vazba:
+- Rozhodnutí: pokračovat / upravit / ukončit
+```
+
+### CQ.8 Checklist: partnerství bez zamčených dveří
+
+- [ ] Víš, jakou doplňkovou potřebu partner řeší.
+- [ ] Partner prošel filtrem hodnot, kvality, provozu a privacy.
+- [ ] Společná nabídka popisuje výsledek, ne jen seznam služeb.
+- [ ] Zákazník může koupit části samostatně a není tlačen do balíčku bez důvodu.
+- [ ] Předávka probíhá až po souhlasu zákazníka.
+- [ ] Partner dostává jen minimum kontextu potřebné pro další krok.
+- [ ] Provize, barter nebo jiná motivace jsou interně zapsané a férově komunikované.
+- [ ] Partner neslibuje nic tvým jménem bez dohody.
+- [ ] Kvalitu partnerství měříš podle výsledků a zpětné vazby, ne podle počtu log.
+- [ ] Jednou za kvartál projdeš partnerské karty a ukončíš mrtvé nebo rizikové vztahy.
+
+Partnerství má být síť důvěry, ne pavučina závislostí. Když zákazníkovi pomůžeš najít správného specialistu, aniž bys ho zamykal do neprůhledného ekosystému, posiluješ vlastní pozici. Ne proto, že ovládáš všechno. Ale proto, že umíš vybrat, co je pro zákazníka nejlepší. A to je v B2B světě mnohem vzácnější než další certifikát na landing page.
+
+---
+
 ## Pracovní log
+- 2026-09-01 17:01 UTC — Doplněna příloha CQ o partnerském ekosystému bez vendor lock-inu: mapa doplňkových potřeb, fit filtr partnerů, společný výsledek, bezpečná předávka, transparentní odměny, měření kvality, šablona partnerské karty a checklist.
 - 2026-09-01 16:00 UTC — Doplněna příloha CP o referral kanálu bez provizního cirkusu: profil ideálního doporučení, vztahový úvod, férová odměna, privacy-first měření, doporučovací balíček, měsíční úklid, šablona referral karty a checklist.
 
 - 2026-09-01 15:00 UTC — Doplněna příloha CO o referencích a důkazech důvěry: průběžný sběr, kontext citací, privacy-first sociální důkaz bez trackerů, knihovna důkazů, rozmístění referencí podle rozhodovací cesty, šablona a checklist.
