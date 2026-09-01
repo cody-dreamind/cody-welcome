@@ -13581,7 +13581,174 @@ Servisní režim by měl mít také jasnou větu pro zákazníka: pokud pro vyř
 
 Servisní režim je dobrý tehdy, když není slyšet jen při katastrofě. Web nebo SaaS produkt se mění spolu s trhem, zákazníky i týmem. Potřebuje pravidelnou péči, ale ne nekonečnou improvizaci. Když nastavíš rytmus, hranice a privacy-first hygienu, servis přestane být nákladová položka s nejistým koncem a začne být systém pro dlouhodobou hodnotu.
 
+## Příloha BY: Obnova webu a SaaS po roce bez velkého přepisovacího rituálu
+
+Po roce provozu už web ani SaaS nejsou nový projekt. Jsou to živé systémy, do kterých se promítly zákaznické otázky, rychlé opravy, obchodní změny, obsahové nápady, nové integrace a pár rozhodnutí typu „teď to uděláme jednoduše a později se k tomu vrátíme“. Později samozřejmě přišlo. Jen si nevzalo kalendář.
+
+Roční obnova nemá být automatický redesign, přepis stacku nebo slavnostní spálení původního backlogu. Má to být klidné review: co pořád slouží, co jen zabírá prostor, kde produkt nebo web ztrácí peníze, důvěru nebo čas týmu a co má smysl zlepšit v dalším období. Cílem není dokonalost. Cílem je vrátit systému směr.
+
+*Codyho komentář:* Nejhorší důvod pro redesign je věta „už se nám to okoukalo“. Zákazníkovi je většinou jedno, že tým už třistakrát viděl stejný hero block. Zajímá ho, jestli chápe nabídku, věří ti a dostane se k hodnotě bez bloudění v designové galerii.
+
+### BY.1 Začni tím, co se změnilo v realitě
+
+Než otevřeš Figma soubor nebo začneš mazat komponenty, napiš si, co se za poslední rok změnilo mimo web. Produkt se často nerozbije proto, že by byl technicky špatně, ale protože už neodpovídá realitě firmy.
+
+Projdi hlavně:
+
+- **Zákazníky:** kdo dnes opravdu kupuje, kdo zůstává a kdo odpadá.
+- **Nabídku:** které služby, balíčky nebo funkce se prodávají a které jsou jen historická dekorace.
+- **Prodejní proces:** jak lidé přicházejí, co se ptají, kde váhají a co potřebují před rozhodnutím.
+- **Produktový slib:** jestli stále odpovídá tomu, co tým umí dodat opakovatelně.
+- **Provoz:** které části systému jsou stabilní a které vyžadují příliš mnoho ruční péče.
+- **Rizika:** kde vznikly nové datové, bezpečnostní nebo dodavatelské závislosti.
+
+Výstupem není dokument o třiceti stranách. Stačí stránka s názvem „Co je dnes pravda“. Pokud tahle stránka neexistuje, roční obnova bude jen estetická loterie. Hezká, barevná, ale pořád loterie.
+
+### BY.2 Odděl kosmetiku od obchodního problému
+
+Roční review často začne seznamem vizuálních pocitů: stránka je dlouhá, tlačítka jsou nudná, fotky jsou staré, sekce působí těžce. To může být pravda, ale nejdřív potřebuješ vědět, jestli jde o problém obchodní, produktový, technický nebo jen vkusový.
+
+Použij jednoduché třídění:
+
+1. **Brání to nákupu nebo poptávce?** Například nejasná nabídka, chybějící důkaz, slabé CTA, starý pricing.
+2. **Zvyšuje to náklady týmu?** Například ruční úpravy, rozbitý CMS proces, nejasná dokumentace, těžké nasazení.
+3. **Zvyšuje to riziko?** Například zbytečné skripty, neznámé datové toky, staré přístupy, závislost na jednom dodavateli.
+4. **Jen nám to vadí esteticky?** I to může být validní, ale nemá to předbíhat věci s dopadem.
+
+Příklad: „Homepage působí zastarale“ je pocit. „Homepage stále komunikuje službu pro startupy, ale 70 % poptávek dnes chodí od zavedených B2B firem“ je obchodní problém. Ten už se dá řešit konkrétně: změnou pozicování, důkazů, případových ukázek a CTA.
+
+### BY.3 Udělej obsahový audit podle zákaznických otázek
+
+Obsah po roce často připomíná sklep: něco je užitečné, něco nostalgické, něco se tam dostalo omylem a nikdo se nechce ptát proč. Nezačínej tím, že spočítáš stránky. Začni otázkami, které zákazníci skutečně mají.
+
+Vytvoř čtyři seznamy:
+
+- **Otázky před prvním kontaktem:** co potřebují pochopit, aby vůbec napsali.
+- **Otázky před nákupem:** cena, rozsah, rizika, čas, odpovědnost, reference.
+- **Otázky během používání:** jak začít, co dělat při problému, kde najít postup.
+- **Otázky při obnově spolupráce:** co se zlepšilo, jaký byl přínos, co dál.
+
+Pak ke každé otázce přiřaď existující stránku, článek, dokumentaci nebo odpověď v supportu. Kde nic není, vzniká obsahová mezera. Kde je pět podobných odpovědí, vzniká obsahový nepořádek. Obojí stojí peníze: první kvůli nejistotě zákazníka, druhé kvůli údržbě.
+
+Praktická mini akce na jeden den: vyber deset nejčastějších otázek z prodeje a supportu a ověř, jestli na ně web odpovídá bez nutnosti kontaktovat člověka. Pokud ne, nepiš hned deset článků. Nejprve uprav existující stránky, FAQ, onboarding nebo dokumentaci.
+
+### BY.4 Technický audit drž při zemi
+
+Roční technický audit není soutěž o nejmodernější stack. Je to kontrola, jestli systém stále bezpečně, rychle a opakovatelně plní svůj účel.
+
+Minimum pro web:
+
+- zkontroluj hlavní formuláře a potvrzovací e-maily,
+- projdi stav indexace, sitemap a kanonických URL,
+- ověř výkon klíčových stránek na mobilu,
+- odstraň nepoužívané skripty a měřicí značky,
+- zkontroluj zálohy, obnovu a přístupy,
+- projdi expirace domén, certifikátů a důležitých účtů.
+
+Minimum pro SaaS:
+
+- otestuj hlavní zákaznické workflow od registrace po hodnotu,
+- zkontroluj chybové logy a opakované incidenty,
+- projdi závislosti, aktualizace a bezpečnostní upozornění,
+- ověř obnovu ze zálohy nebo alespoň restore postup,
+- zkontroluj role, admin účty a odchody lidí z týmu,
+- sepiš tři nejrizikovější části provozu.
+
+Výstupem má být krátký technický backlog rozdělený na: opravit hned, naplánovat, sledovat, ignorovat. Kategorie „ignorovat“ je důležitá. Bez ní se z auditu stane adventní kalendář úzkosti, kde za každým okénkem čeká nový dependency update.
+
+### BY.5 Privacy-first obnova znamená méně, ne víc
+
+Po roce bývá největší datové riziko v nenápadném vrstvení nástrojů. Jeden chat widget, jeden heatmap experiment, jeden reklamní pixel, jeden export pro partnera, jedna integrační zkratka. Každá věc možná dávala smysl samostatně. Dohromady ale vznikne provoz, kterému nikdo nerozumí.
+
+Privacy-first review se ptej:
+
+- Jaká osobní data dnes sbíráme a proč?
+- Které nástroje dostávají data návštěvníků, leadů nebo zákazníků?
+- Běží některé skripty jen proto, že je kdysi někdo testoval?
+- Má každý datový tok vlastníka a retenční pravidlo?
+- Umíme zákazníkovi jednoduše vysvětlit, kde jeho data jsou?
+- Existuje jednodušší evropská nebo self-hosted varianta pro kritickou část provozu?
+
+Roční obnova je skvělý moment pro smazání. Nejen dat, ale i integrací, exportů, starých segmentů, nepotřebných polí ve formuláři a dokumentů, které přežily vlastní účel. Menší datová stopa znamená menší právní, bezpečnostní i reputační riziko. A taky méně tabulek, což lidstvo pořád nedoceňuje dostatečně.
+
+### BY.6 Vyber jednu hlavní sázku na další rok
+
+Po auditu bude pokušení otevřít patnáct iniciativ. Odolej. Roční obnova má skončit jednou hlavní sázkou a několika podpůrnými úklidy.
+
+Příklady hlavní sázky:
+
+- přepsat messaging pro nový zákaznický segment,
+- zjednodušit onboarding a zvýšit aktivaci,
+- vytvořit obsahový hub pro nejčastější předprodejní otázky,
+- odstranit závislost na rizikovém dodavateli,
+- zrychlit klíčové stránky a opravit technický dluh ve funnelu,
+- převést analytiku a provoz do čistšího evropského privacy-first režimu.
+
+Dobrá sázka má mít:
+
+- jasný důvod,
+- vlastníka,
+- měřitelný nebo pozorovatelný výsledek,
+- první krok do dvou týdnů,
+- seznam věcí, které kvůli ní nebudeš dělat.
+
+Poslední bod je nejdůležitější. Strategie není jen výběr směru. Je to i odmítnutí dalších lákavých směrů, které by ti sežraly kapacitu a pak se tvářily, že za nic nemůžou.
+
+### BY.7 Šablona: roční obnovovací karta
+
+## Roční obnova: [web / SaaS / projekt]
+
+### Co je dnes pravda
+
+- Hlavní zákazník:
+- Hlavní nabídka:
+- Největší změna za poslední rok:
+- Největší provozní nebo obchodní riziko:
+
+### Co funguje
+
+- Stránky, funkce nebo procesy, které stále nesou hodnotu:
+- Důkazy z prodeje, supportu nebo používání:
+
+### Co brzdí
+
+- Nejasný obsah:
+- Technický dluh:
+- Datové nebo dodavatelské riziko:
+- Ruční práce, která se opakuje:
+
+### Privacy-first úklid
+
+- Data nebo pole ke smazání:
+- Skripty a nástroje ke kontrole:
+- Přístupy k odebrání:
+- Retenční pravidla k doplnění:
+
+### Hlavní sázka na další rok
+
+- Rozhodnutí:
+- Proč právě teď:
+- První krok:
+- Vlastník:
+- Co teď vědomě neděláme:
+
+### BY.8 Checklist: obnova bez přepisovací horečky
+
+- [ ] Máme napsané, co se za poslední rok změnilo v zákaznících, nabídce a provozu.
+- [ ] Každý návrh změny je označený jako obchodní problém, provozní náklad, riziko nebo kosmetika.
+- [ ] Web odpovídá na nejčastější otázky zákazníků před kontaktem i před nákupem.
+- [ ] Technický audit končí prioritami, ne nekonečným seznamem vin.
+- [ ] Nepoužívané skripty, měření, exporty a přístupy jsou kandidáti na odstranění.
+- [ ] Datové toky mají vlastníka, účel a retenční pravidlo.
+- [ ] Je vybraná jedna hlavní sázka na další rok.
+- [ ] První krok obnovy se dá udělat do dvou týdnů.
+- [ ] Je jasně řečeno, co se teď dělat nebude.
+
+Roční obnova je nejlepší, když nepůsobí jako drama. Žádné „všechno zahodíme“, žádné „musíme být modernější“, žádné „přidáme nový nástroj, protože má hezký onboarding“. Jen poctivé rozhodnutí, co má dál nést hodnotu, co se má uklidit a kde malý tým získá největší klid, důvěru a obchodní dopad.
+
+
 ## Pracovní log
+- 2026-09-01 00:00 UTC — Doplněna příloha BY o roční obnově webu a SaaS: změny reality, oddělení kosmetiky od obchodních problémů, obsahový a technický audit, privacy-first úklid, hlavní sázka na další rok, šablona a checklist.
 - 2026-08-31 23:00 UTC — Doplněna příloha BX o servisním režimu po spuštění: servisní slib, rozlišení incidentů a drobných změn, reakční časy, měsíční report, servisní backlog, privacy-first hygienu, servisní kartu a checklist.
 - 2026-08-31 22:01 UTC — Doplněna příloha BW o předávce projektu: vlastnictví účtů, dokumentace podle rolí, praktický předávací test, přístupový úklid, třicetidenní stabilizační rytmus, předávací karta a privacy-first checklist.
 - 2026-08-31 21:00 UTC — Doplněna příloha BV o nabídce po discovery: kontext zákazníka, výstupy a rozhodnutí, férové varianty, hranice rozsahu, vysvětlení ceny hodnotou, konkrétní další krok, šablona nabídky a privacy-first checklist.
