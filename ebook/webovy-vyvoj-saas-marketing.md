@@ -15966,7 +15966,180 @@ Nesleduj jednotlivé lidi víc, než je nutné pro provoz a bezpečnost. Pro pro
 Přechod z pilotu do provozu není místo pro heroický chaos. Je to místo pro klidné zavírání smyček: co jsme slíbili, co jsme ověřili, co teď provozujeme a jak poznáme, že to pořád funguje. Když to zvládneš, pilot se neztratí v mlze. Stane se začátkem produktu, který zákazník opravdu používá.
 
 
+## Příloha CN: Případová studie po úspěšném nasazení bez vytěžování zákazníka
+
+Úspěšné nasazení je skvělý moment pro marketing. Zákazník má čerstvou zkušenost, tým si pamatuje původní problém a výsledky začínají být vidět. Jenže právě tady se dá snadno udělat chyba: proměnit spokojeného zákazníka v těžební lom na citace, loga, čísla a screenshoty.
+
+Dobrá případová studie není lov na pochvalu. Je to férový příběh o změně: kde zákazník začínal, co se společně rozhodlo, co se zlepšilo, co bylo těžké a jak se výsledek provozuje dál. Pokud ji uděláš dobře, pomůže novým zákazníkům pochopit hodnotu a současnému zákazníkovi neubere důvěru ani kontrolu nad daty.
+
+### CN.1 Nečekej na dokonalý výsledek, čekej na ověřený posun
+
+Případová studie nemusí vzniknout až ve chvíli, kdy produkt zachránil firmu, zvýšil obrat o tři galaxie a přinesl kávovar do každé kanceláře. Stačí, když existuje jasný, ověřitelný posun.
+
+Dobré signály pro případovku:
+
+- zákazník používá řešení opakovaně,
+- původní problém se viditelně zmenšil,
+- tým zákazníka umí popsat, co se změnilo,
+- existuje konkrétní před/po ukázka,
+- dopad lze popsat číslem, časem, snížením tření nebo kvalitativní změnou,
+- zákazník je ochotný říct, co mu spolupráce přinesla.
+
+Nemusíš mít hned tvrdé metriky. U malých B2B projektů často stačí kombinace: „poptávky už nepadají mezi e-maily“, „servisní tým má jeden přehled“, „měsíční report se připravuje za 20 minut místo půl dne“. Důležité je nepřifukovat realitu. Když je výsledek zatím provozní, neříkej mu strategická transformace. Marketingová pěna vypadá efektně jen do chvíle, než si ji někdo přečte nahlas.
+
+### CN.2 Začni interní kartou, ne rozhovorem s diktafonem
+
+Než oslovíš zákazníka, připrav si interní kartu příběhu. Ušetříš mu čas a nebudeš se ptát na věci, které už víš z projektu.
+
+Karta by měla obsahovat:
+
+- původní situaci zákazníka,
+- hlavní rozhodovací důvod spolupráce,
+- rozsah řešení,
+- důležité kompromisy,
+- měřitelné nebo pozorovatelné výsledky,
+- části, které nesmí ven,
+- návrh bezpečných screenshotů nebo anonymizovaných ukázek,
+- otázku, kterou má případovka pomoct zodpovědět budoucím zákazníkům.
+
+Teprve potom zákazníkovi napiš krátce a lidsky:
+
+> Rádi bychom z nasazení připravili krátkou případovou studii. Nechceme po vás velkou časovou investici ani zveřejňovat citlivé údaje. Připravíme první návrh z toho, co už víme, a pošleme vám ho ke schválení. Bez vašeho výslovného souhlasu nic nepublikujeme.
+
+Tahle zpráva říká tři důležité věci: vážíš si jeho času, chráníš jeho data a nebereš souhlas jako samozřejmost. Přesně takhle se buduje dlouhodobá důvěra, ne jen další položka do sekce „Naši klienti“.
+
+### CN.3 Příběh stav na rozhodnutí, ne na heroické legendě
+
+Slabá případovka zní jako firemní pohádka: „Klient měl problém, my jsme přišli, všechno vyřešili a od té doby svítí slunce.“ Jenže reálné projekty mají omezení, kompromisy a rozhodnutí. Právě ta jsou pro čtenáře nejcennější.
+
+Dobrá struktura:
+
+1. **Kontext:** kdo je zákazník a jaký měl problém.
+2. **Riziko:** co by se stalo, kdyby problém neřešil.
+3. **Rozhodnutí:** proč se zvolil tento směr.
+4. **Řešení:** co se postavilo nebo změnilo.
+5. **Provoz:** jak se výsledek používá v běžném dni.
+6. **Dopad:** co se zlepšilo a jak to poznáme.
+7. **Poučení:** co by tým udělal příště stejně nebo jinak.
+
+Příklad formulace:
+
+> Servisní firma měla poptávky rozdělené mezi e-mail, telefon a tabulky. Cílem nebylo postavit velký CRM systém, ale zkrátit cestu od nové poptávky k první odpovědi. Proto jsme začali jednoduchým portálem pro příjem a stav požadavků, napojeným na existující provozní rytmus týmu.
+
+Tohle je lepší než „implementovali jsme moderní platformu“, protože čtenář chápe problém, omezení i logiku řešení.
+
+*Codyho komentář:* Nejlepší případové studie nejsou oslavné plakáty. Jsou to dobře napsané provozní pitvy — jen bez strašidelné hudby a s menším množstvím latexových rukavic.
+
+### CN.4 Citace používej jako důkaz, ne jako dekoraci
+
+Citace zákazníka má potvrdit konkrétní zkušenost. Nemá znít jako věta vygenerovaná oddělením pro univerzální nadšení.
+
+Slabá citace:
+
+> Spolupráce byla skvělá a profesionální.
+
+Lepší citace:
+
+> Po nasazení portálu vidíme stav požadavků na jednom místě a nemusíme dohledávat poslední odpověď v pěti e-mailových vláknech.
+
+Když zákazník neumí dodat hotovou citaci, můžeš mu nabídnout návrh ke schválení. Ale pozor: nesmíš mu vložit do úst něco, co neřekl nebo s čím by nesouhlasil. Férový postup je:
+
+- po rozhovoru pošli krátký návrh citace,
+- označ ji jako návrh,
+- požádej o úpravu nebo potvrzení,
+- zveřejni jen finální schválenou verzi,
+- ulož si datum souhlasu a schválený text.
+
+Privacy-first detail: schválení citace je také datový a reputační souhlas. Neposílej interní poznámky z rozhovoru do nástrojů, které nepotřebují vidět zákaznický kontext. Jestli používáš AI pro úpravu textu, pracuj s anonymizovanou verzí nebo s lokálním procesem, kde máš kontrolu nad daty.
+
+### CN.5 Screenshoty a čísla anonymizuj dřív, než je někdo uvidí
+
+Případovky často lákají ke screenshotům. A screenshoty jsou malí špióni v pěkném kabátku. Umí nechtěně ukázat jména klientů, interní komentáře, e-maily, URL adresy, ceny, obraty, metadata nebo testovací účty.
+
+Bezpečný postup:
+
+1. Vytvoř demo dataset nebo anonymizovanou kopii.
+2. Odstraň osobní údaje, interní poznámky a identifikátory.
+3. Zkontroluj adresní řádek, názvy souborů a otevřené záložky.
+4. Nepoužívej ostré přístupy pro marketingové snímky.
+5. Nech screenshot schválit zákazníkem stejně jako text.
+
+U čísel platí podobné pravidlo. Pokud přesná metrika odhaluje citlivý objem byznysu, použij rozsah, relativní zlepšení nebo kvalitativní formulaci. Místo „získali 143 poptávek od konkrétních firem“ může být bezpečnější „počet kvalifikovaných poptávek se ve sledovaném období zvýšil o desítky procent“. Ano, zní to méně hollywoodsky. Ale důvěra je víc než marketingový ohňostroj.
+
+### CN.6 Udělej z případovky obchodní aktivum, ne jednorázový článek
+
+Případová studie nemá žít jen jako stránka, kterou jednou sdílíš a pak zapadne do archivu. Připrav z ní několik použitelných aktiv:
+
+- krátký výtah pro nabídky,
+- odstavec pro landing page,
+- anonymizovaný diagram před/po,
+- interní sales poznámku s námitkami,
+- checklist „pro koho je podobné řešení vhodné“,
+- FAQ vycházející z otázek, které zákazník během projektu řešil.
+
+Distribuci drž přímo a slušně. Dej případovku do relevantní části webu, odkaž ji z článků, přidej ji do odpovědi na poptávku a nabídni RSS čtenářům nový praktický rozbor. Nepotřebuješ k tomu remarketingový pixel, sociální špehovací widget ani šestnáct externích skriptů. Stačí dobrý text, stabilní URL a jasný další krok.
+
+### CN.7 Mini šablona případové studie
+
+```markdown
+# Případová studie: [název výsledku]
+
+## Zákazník
+- Segment:
+- Velikost týmu:
+- Kontext bez citlivých detailů:
+
+## Výchozí situace
+- Co nefungovalo:
+- Jaký byl dopad:
+- Proč to zákazník řešil teď:
+
+## Rozhodnutí
+- Zvolený směr:
+- Co jsme vědomě nedělali:
+- Hlavní kompromis:
+
+## Řešení
+- Co vzniklo:
+- Jak zapadá do běžného provozu:
+- Jak jsou chráněna data:
+
+## Výsledek
+- Tvrdý signál:
+- Kvalitativní signál:
+- Citace schválená zákazníkem:
+
+## Poučení
+- Co fungovalo:
+- Co bychom příště upravili:
+- Pro koho je podobný postup vhodný:
+
+## Souhlas a publikace
+- Schváleno kým:
+- Datum schválení:
+- Co nesmí být zveřejněno:
+```
+
+### CN.8 Checklist: případová studie bez ztráty důvěry
+
+- [ ] Případovka popisuje konkrétní posun, ne obecnou chválu.
+- [ ] Zákazník předem ví, co chceš publikovat a proč.
+- [ ] Text, citace, logo, čísla i screenshoty jsou výslovně schválené.
+- [ ] Screenshoty neobsahují osobní údaje, interní poznámky ani ostrá data.
+- [ ] Čísla neodhalují citlivé obchodní informace bez souhlasu.
+- [ ] Příběh ukazuje rozhodnutí a kompromisy, ne jen heroickou legendu.
+- [ ] Případovka má jasný další krok pro podobného zákazníka.
+- [ ] Distribuce stojí na přímých odkazech, RSS a relevantních stránkách, ne na sledovacích skriptech.
+- [ ] Interní poznámky zůstávají oddělené od veřejného textu.
+- [ ] Existuje záznam, kdo a kdy publikaci schválil.
+
+Případová studie je jeden z nejsilnějších B2B marketingových formátů, protože spojuje důkaz, příběh a provozní realitu. Jen nesmíš zapomenout, že zákazník není rekvizita. Je to partner. Když mu dáš kontrolu nad tím, co o spolupráci říkáš veřejně, dostaneš nejen lepší text, ale i větší šanci, že s tebou bude chtít napsat další kapitolu.
+
+---
+
 ## Pracovní log
+
+- 2026-09-01 14:01 UTC — Doplněna příloha CN o případové studii po úspěšném nasazení: ověřený posun, interní karta příběhu, férový souhlas zákazníka, citace, anonymizace screenshotů a čísel, distribuce bez trackerů, šablona a privacy-first checklist.
 - 2026-09-01 13:00 UTC — Doplněna příloha CM o přechodu z pilotu do ostrého provozu: ukončení nekonečného pilotu, pojmenování pilotních zkratek, provozní slib, migrace dat, support před startem, měření prvního měsíce, šablona přechodové karty a checklist.
 - 2026-09-01 12:00 UTC — Doplněna příloha CL o pilotním projektu: rozhodnutí po pilotu, omezení na jeden hodnotový tok, vstupy a odpovědnosti, kombinaci tvrdých a kvalitativních signálů, bezpečný datový režim, závěrečné vyhodnocení, šablonu pilotní karty a checklist.
 - 2026-09-01 11:00 UTC — Doplněna příloha CK o produktovém demu bez šmírovacího kina: scénář místo seznamu funkcí, tři délky ukázky, bezpečná demo data, privacy-first hosting, CTA podle fáze zákazníka, agregované měření, šablona a checklist.
