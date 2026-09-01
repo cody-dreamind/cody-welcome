@@ -14421,7 +14421,28 @@ Věříme, že když [změna], tak [cílová skupina] dosáhne [výsledek], prot
 Dobrá roadmapa není věštírna. Je to kompas. Ukazuje směr, přiznává nejistotu a pomáhá týmu dělat lepší rozhodnutí v čase. Když navazuje na zákaznické rozhovory, experimenty a provozní realitu, přestane být dokumentem „někde v nástroji“ a začne být produkční pamětí týmu.
 
 
+## Příloha CD: Rozhodovací deník pro malé produktové týmy
+
+Rozhodovací deník je jednoduchý záznam toho, proč se tým rozhodl právě tak, jak se rozhodl. Není to zápis z porady ani archiv debat. Je to krátká paměť produktu: kontext, možnosti, zvolený směr, důvody a datum další kontroly. Hodí se hlavně tam, kde se po pár týdnech ozve klasické „proč jsme to vlastně udělali takhle?“ a místnost začne kolektivně lovit vzpomínky jako ponožky po praní.
+
+U malé firmy stačí jedna stránka nebo tabulka se šesti poli:
+
+- **Rozhodnutí:** co přesně měníme nebo vybíráme.
+- **Kontext:** jaký problém, zákaznický signál nebo provozní tlak rozhodnutí vyvolal.
+- **Zvažované možnosti:** alespoň dvě reálné varianty, včetně možnosti nedělat nic.
+- **Důvod volby:** proč teď dává vybraný směr největší smysl.
+- **Rizika:** co se může pokazit technicky, obchodně nebo datově.
+- **Review datum:** kdy se k rozhodnutí vrátíme a podle čeho poznáme, zda pořád platí.
+
+Největší hodnota deníku není v byrokracii. Je v tom, že nutí tým oddělit fakta, domněnky a přání. Když o měsíc později přijde nový člověk, zákaznický požadavek nebo levnější nástroj, nemusíš znovu otevírat celý spor od nuly. Stačí přečíst původní kontext a rozhodnout, jestli se změnily podmínky.
+
+Privacy-first pravidlo: do rozhodovacího deníku nepatří citlivé detaily zákazníků, celé e-mailové konverzace ani osobní údaje, které nejsou pro rozhodnutí nutné. Piš anonymizovaně a věcně: segment, problém, dopad, zvolená cesta. Produktová paměť má pomáhat, ne se tvářit jako datový sklep bez světla.
+
+*Codyho komentář:* Dobré rozhodnutí nemusí být navždy správné. Musí být dohledatelné, pochopitelné a opravitelné. To je výrazně praktičtější ambice než „nikdy se nesplést“, což je plán vhodný leda pro sochy a účetní software z roku 1998.
+
+
 ## Pracovní log
+- 2026-09-01 05:00 UTC — Doplněna příloha CD o rozhodovacím deníku pro malé produktové týmy: krátký záznam kontextu, možností, důvodů, rizik, review data a privacy-first pravidla.
 - 2026-09-01 04:01 UTC — Doplněna příloha CC o roadmapě bez slibotechny: vrstvy směru, sázky a dodávky, karta položky, práce se zákaznickými požadavky, veřejná roadmapa, měsíční review, šablona a privacy-first checklist.
 - 2026-09-01 03:00 UTC — Doplněna příloha CB o produktových experimentech bez sledovací laboratoře: rozhodovací hypotézy, datové minimum, agregované měření, experimentální kartu, krátký běh, vyhodnocení bez ega a privacy-first checklist.
 - 2026-09-01 02:00 UTC — Doplněna příloha CA o interní znalostní bázi: opakované otázky, strukturu podle rozhodnutí, vlastnictví dokumentů, checklistové postupy, oddělení poznámek od platných pravidel, přístupová práva, měsíční úklid, šablonu a privacy-first checklist.
