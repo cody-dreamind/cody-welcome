@@ -16137,8 +16137,142 @@ Případová studie je jeden z nejsilnějších B2B marketingových formátů, p
 
 ---
 
+## Příloha CO: Reference a důkazy důvěry bez logostěny z nafukovacího hradu
+
+Reference nejsou dekorace pod hero sekcí. Jsou to malé důkazy, které pomáhají návštěvníkovi překonat přirozenou nedůvěru: „Umí tenhle tým vyřešit problém jako ten můj?“ Když je reference obecná, anonymní nebo přehnaně naleštěná, často působí slaběji než žádná reference. Když je konkrétní, férová a zasazená do kontextu, může být rozdílem mezi „možná někdy“ a „pošlu poptávku“.
+
+*Codyho komentář:* Loga zákazníků bez příběhu jsou jako medaile v šuplíku. Hezké, ale nikdo neví, za co přesně byly. A pokud je vytáhneš bez souhlasu, tak navíc trochu smrdí průšvihem.
+
+### CO.1 Sbírej důkazy průběžně, ne až při redesignu
+
+Nejhorší čas na shánění referencí je týden před spuštěním nové homepage. V tu chvíli už tým většinou loví v paměti, dohledává staré e-maily a píše zákazníkům zprávy typu „ahoj, mohl bys nám do zítřka napsat jednu větu?“ To není strategie, to je marketingový požární poplach.
+
+Místo toho si vytvoř jednoduchý rytmus sběru důkazů:
+
+- po dokončení implementace se zeptej, co se zákazníkovi reálně zlepšilo,
+- po prvním měsíci provozu si poznamenej konkrétní výsledky a reakce,
+- po supportním incidentu zaznamenej, co pomohlo obnovit důvěru,
+- po rozšíření účtu se vrať k tomu, proč zákazník pokračoval,
+- jednou měsíčně projdi komunikaci a vytáhni schváleníhodné momenty.
+
+Důkaz nemusí být hned veřejná citace. Může to být interní poznámka, anonymizovaný pattern, číslo, screenshot bez citlivých dat, poznámka ze schůzky nebo krátký výrok, ke kterému se později vrátíš se žádostí o souhlas.
+
+### CO.2 Každá reference potřebuje kontext
+
+Věta „Skvělá spolupráce, doporučujeme“ neurazí, ale moc neprodá. Chybí jí kontext. Návštěvník neví, jestli šlo o redesign webu, migraci SaaS, krizový zásah, měření kampaní nebo tříleté partnerství.
+
+Lepší reference odpoví aspoň na tři otázky:
+
+- **Kdo mluví:** typ firmy, role člověka, velikost týmu nebo segment.
+- **Co řešil:** konkrétní problém, riziko nebo obchodní cíl.
+- **Co se změnilo:** rychlejší proces, lepší konverze, méně ruční práce, čistší data, stabilnější provoz.
+
+Příklad slabé reference:
+
+> Cody nám pomohl s webem a byli jsme spokojení.
+
+Příklad použitelné reference:
+
+> Potřebovali jsme zjednodušit poptávkový web pro B2B klienty a zároveň nemigrovat analytiku do invazivních nástrojů. Cody nám pomohl zpřehlednit nabídku, nastavit privacy-first měření a zkrátit cestu od návštěvy k poptávce.
+
+Všimni si, že druhá verze nemusí obsahovat bombastická čísla. Stačí, že čtenář pozná situaci.
+
+### CO.3 Nepleť si sociální důkaz s datovým vysavačem
+
+Reference na webu nemají vyžadovat externí widgety, sledovací skripty ani embedované nástroje, které posílají návštěvnická data třetím stranám. Pokud chceš ukázat důvěryhodnost, zvládneš to i staticky: text, logo se souhlasem, odkaz na veřejnou případovku, anonymizovaná čísla, PDF ke stažení bez povinného e-mailu.
+
+Privacy-first varianta je často i rychlejší a spolehlivější:
+
+- loga hostuj jako vlastní optimalizované obrázky nebo SVG,
+- citace ukládej v repozitáři nebo CMS pod vlastní kontrolou,
+- odkazy veď přímo na případové studie, ne přes zkracovače,
+- měření dělej agregovaně podle URL sekcí,
+- nepřidávej „social proof“ plugin jen proto, že bliká a slibuje růst.
+
+Když už používáš externí recenzní platformu, odděl veřejný odkaz od automatického embedování. Návštěvník má mít možnost ověřit si zdroj, ale nemusíš kvůli tomu jeho prohlížeč proměnit v konferenci cizích skriptů.
+
+### CO.4 Vytvoř si knihovnu důkazů
+
+Místo toho, aby reference žily náhodně v e-mailu, prezentaci a hlavě obchodníka, založ si jednoduchou knihovnu důkazů. Nemusí to být složitý systém. Stačí Markdown soubor, tabulka v interní znalostní bázi nebo malé CRM pole.
+
+U každého důkazu eviduj:
+
+- název zákazníka nebo anonymizovaný segment,
+- typ důkazu: citace, logo, číslo, screenshot, případovka, interní poznámka,
+- téma: výkon webu, onboarding, support, privacy, konverze, automatizace,
+- stav souhlasu: interní, čeká na schválení, schváleno veřejně, expirováno,
+- kde se smí použít: homepage, sales deck, případovka, nabídka, neveřejná schůzka,
+- datum poslední kontroly.
+
+To poslední je důležité. Reference stárnou. Pokud na webu visí citace k verzi produktu, která už neexistuje, nebo logo firmy po změně spolupráce, důvěru to neposiluje. Jen to říká, že nikdo neuklízí vitrínu.
+
+### CO.5 Reference rozmísti podle rozhodnutí zákazníka
+
+Jedna sekce „Naši klienti“ nestačí. Důkazy patří tam, kde zákazník řeší konkrétní pochybnost.
+
+Praktické rozmístění:
+
+- **Hero sekce:** krátké potvrzení hlavního slibu, ideálně z podobného segmentu.
+- **Stránka služby:** reference k výsledku dané služby, ne obecná pochvala týmu.
+- **Pricing:** důkaz návratnosti, úspory času nebo důvodu, proč zákazník pokračuje.
+- **FAQ:** krátká odpověď na obavu doplněná zkušeností zákazníka.
+- **Poptávkový formulář:** uklidnění, co se stane po odeslání a jak málo dat sbíráš.
+- **Sales deck:** kombinace citace, čísla a stručného kontextu problému.
+
+Takhle reference nejsou galerie trofejí. Jsou součást rozhodovací cesty.
+
+### CO.6 Šablona knihovny referencí
+
+```markdown
+## Důkaz důvěry: [název / segment]
+
+### Kontext
+- Typ zákazníka:
+- Řešený problém:
+- Nabídka nebo produkt:
+
+### Důkaz
+- Typ: citace / číslo / logo / screenshot / případovka / interní poznámka
+- Znění nebo popis:
+- Navázaná případová studie:
+
+### Použití
+- Kde pomáhá v rozhodování:
+- Povolené kanály:
+- Zakázané použití:
+
+### Souhlas
+- Stav souhlasu:
+- Schválil/a:
+- Datum schválení:
+- Datum další kontroly:
+
+### Privacy poznámka
+- Obsahuje osobní údaje nebo citlivá obchodní data?
+- Byla data anonymizována?
+- Kde je uložen originál?
+```
+
+### CO.7 Checklist: reference bez šmírování a trapného chlubení
+
+- [ ] Každá reference má jasný kontext: kdo, co řešil a co se změnilo.
+- [ ] Veřejné použití citace, loga, screenshotu i čísla má výslovný souhlas.
+- [ ] Reference nejsou závislé na embedovaných widgetech s cizími trackery.
+- [ ] Citace jsou rozmístěné podle pochybností zákazníka, ne jen v jedné logostěně.
+- [ ] Screenshoty neobsahují osobní údaje, interní poznámky ani ostrá data.
+- [ ] Knihovna důkazů eviduje stav souhlasu, povolené použití a datum kontroly.
+- [ ] Staré reference se pravidelně revidují nebo stahují.
+- [ ] Sales tým ví, které důkazy může použít veřejně a které jen interně.
+- [ ] Měření dopadu referencí je agregované a neprofiluje konkrétní návštěvníky.
+- [ ] Reference podporují konkrétní rozhodnutí zákazníka, ne ego dodavatele.
+
+Dobrá reference neříká „podívej, jak jsme úžasní“. Říká: „Tady je situace podobná té tvé, tady bylo rozhodnutí, tady je výsledek a tady je důvod, proč nám můžeš věřit.“ To je mnohem silnější než řada log bez kontextu. A taky podstatně méně nafoukané, což webům obecně svědčí.
+
+---
+
 ## Pracovní log
 
+- 2026-09-01 15:00 UTC — Doplněna příloha CO o referencích a důkazech důvěry: průběžný sběr, kontext citací, privacy-first sociální důkaz bez trackerů, knihovna důkazů, rozmístění referencí podle rozhodovací cesty, šablona a checklist.
 - 2026-09-01 14:01 UTC — Doplněna příloha CN o případové studii po úspěšném nasazení: ověřený posun, interní karta příběhu, férový souhlas zákazníka, citace, anonymizace screenshotů a čísel, distribuce bez trackerů, šablona a privacy-first checklist.
 - 2026-09-01 13:00 UTC — Doplněna příloha CM o přechodu z pilotu do ostrého provozu: ukončení nekonečného pilotu, pojmenování pilotních zkratek, provozní slib, migrace dat, support před startem, měření prvního měsíce, šablona přechodové karty a checklist.
 - 2026-09-01 12:00 UTC — Doplněna příloha CL o pilotním projektu: rozhodnutí po pilotu, omezení na jeden hodnotový tok, vstupy a odpovědnosti, kombinaci tvrdých a kvalitativních signálů, bezpečný datový režim, závěrečné vyhodnocení, šablonu pilotní karty a checklist.
