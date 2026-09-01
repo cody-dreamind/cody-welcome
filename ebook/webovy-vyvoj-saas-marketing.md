@@ -14441,7 +14441,160 @@ Privacy-first pravidlo: do rozhodovacího deníku nepatří citlivé detaily zá
 *Codyho komentář:* Dobré rozhodnutí nemusí být navždy správné. Musí být dohledatelné, pochopitelné a opravitelné. To je výrazně praktičtější ambice než „nikdy se nesplést“, což je plán vhodný leda pro sochy a účetní software z roku 1998.
 
 
+## Příloha CE: Follow-up po poptávce, který nepůsobí jako hladový robot
+
+Poptávkový formulář není konec marketingu. Je to začátek vztahu, kde se ukáže, jestli firma umí pracovat s pozorností člověka, který právě zvedl ruku. Malé týmy často řeší hlavně to, jak poptávky získat, ale méně už to, co se stane prvních sedm dní po odeslání formuláře. Výsledek? Lead přijde, někdo mu odpoví pozdě, chybí kontext, další krok není jasný a obchodní příležitost se vypaří jako motivace po třetím status meetingu.
+
+Dobře navržený follow-up nemusí být agresivní. Naopak. Nejlepší follow-up je klidný, konkrétní a užitečný. Ukazuje, že jsi poptávku pochopil, víš, co potřebuješ doplnit, a respektuješ čas i data druhé strany.
+
+### CE.1 Odpověz rychle, ale ne panicky
+
+První reakce má hlavně potvrdit, že poptávka dorazila, a snížit nejistotu. Nemusíš hned posílat nabídku. Často je lepší poslat krátké shrnutí a jasný další krok.
+
+Dobrá první odpověď obsahuje:
+
+- poděkování bez korporátního divadla,
+- jednu větu, jak poptávce rozumíš,
+- informaci, kdy se ozveš s dalším krokem,
+- případně jednu až tři doplňující otázky,
+- odkaz na relevantní případ, článek nebo postup, pokud opravdu pomůže.
+
+Příklad:
+
+> Díky za poptávku. Chápu to tak, že chcete z webu získávat víc kvalifikovaných B2B poptávek a zároveň nechcete stavět měření na reklamních pixelech. Projdu si kontext a do zítřka pošlu návrh dalšího kroku. Abych to trefil přesněji: máte dnes nějaké měření konverzí, nebo začínáme od nuly?
+
+Tohle je lepší než automatické „Váš požadavek byl přijat pod číslem #48291“. Pokud nejsi banka, nedělej ze zákazníka položku v archivu.
+
+### CE.2 Rozděl follow-up podle kvality poptávky
+
+Ne každá poptávka potřebuje stejný režim. Když všem posíláš stejnou dlouhou odpověď, plýtváš energií a zároveň působíš nepřesně.
+
+Použij tři jednoduché kategorie:
+
+- **Jasná příležitost:** konkrétní problém, správná cílovka, rozumný rozpočet nebo silný dopad.
+- **Potřebuje doplnit:** zajímavý směr, ale chybí kontext, rozhodovatel, termín nebo rozsah.
+- **Mimo zaměření:** požadavek neodpovídá nabídce, hodnotám, technickému směru nebo privacy-first pravidlům.
+
+Pro jasnou příležitost nabídni rychlý hovor nebo krátký discovery krok. Pro nejasnou poptávku pošli doplňující otázky a jednu užitečnou možnost. Pro poptávku mimo zaměření odpověz slušně, stručně a případně doporuč obecný zdroj. I odmítnutí je součást značky.
+
+Privacy-first poznámka: kvalifikace leadu není licence k tomu, aby sis o člověku posbíral půl internetu. Stačí data, která přímo pomáhají rozhodnout, jestli si umíte pomoct. LinkedIn archeologie ve tři ráno není obchodní proces, ale digitální špionáž s kávou.
+
+### CE.3 Každý follow-up musí nést hodnotu
+
+„Jen se připomínám“ je nejslabší možná věta. Nepřináší hodnotu, jen vytváří tlak. Lepší follow-up vždy přidá něco konkrétního:
+
+- shrnutí problému vlastními slovy,
+- návrh dvou možných cest,
+- krátký checklist pro přípravu hovoru,
+- upozornění na riziko, které zákazník možná nevidí,
+- příklad podobné situace bez citlivých detailů,
+- jasnou otázku, na kterou se dá odpovědět za minutu.
+
+Příklad druhého follow-upu po třech dnech:
+
+> Ještě doplňuji jednu věc k webu pro B2B poptávky: před návrhem řešení bych ověřil hlavně tři body — kdo je ideální zákazník, jak dnes vzniká důvěra před kontaktem a jaké minimum měření stačí pro rozhodování. Pokud chcete, můžeme to projít na 30min hovoru; pokud ne, pošlu vám krátký checklist pro interní audit.
+
+Tón je důležitý. Neprosíš, netlačíš, nevyhrožuješ poslední šancí. Jen pomáháš udělat další rozumné rozhodnutí.
+
+### CE.4 Nastav jednoduchý sedmidenní rytmus
+
+Malý tým nepotřebuje složitou automatizační mašinu. Stačí rytmus, který jde držet ručně nebo v jednoduchém CRM.
+
+Praktický plán:
+
+1. **Den 0:** potvrzení přijetí, shrnutí poptávky, očekávání dalšího kroku.
+2. **Den 1:** konkrétní návrh dalšího kroku, typicky hovor, audit nebo krátké doplnění.
+3. **Den 3:** hodnotný follow-up s otázkou, checklistem nebo mini rozborem.
+4. **Den 7:** slušné uzavření smyčky s možností se vrátit později.
+
+Uzavírací zpráva může znít:
+
+> Nechci vás zahlcovat, takže tímhle follow-up pro teď uzavírám. Pokud bude téma webu, SaaS nebo privacy-first měření znovu aktuální, napište mi. Mezitím doporučuji projít si hlavně první obrazovku webu, hlavní CTA a to, jaká data opravdu potřebujete měřit.
+
+Tahle zpráva je praktická a lidská. Zákazník nemá pocit, že ho systém bude pronásledovat do konce věků, případně do další změny obchodního ředitele.
+
+### CE.5 Uchovej kontext, ne celý životopis
+
+Follow-up funguje lépe, když má tým stručný záznam. Ale záznam má sloužit komunikaci, ne hromadění osobních dat.
+
+Do lead karty stačí:
+
+- firma nebo projekt,
+- kontaktní osoba a pracovní kontakt,
+- zdroj poptávky na obecné úrovni,
+- popsaný problém,
+- požadovaný výsledek,
+- stav dalšího kroku,
+- datum posledního kontaktu,
+- rozhodnutí: pokračovat, čekat, odmítnout, archivovat.
+
+Nepatří tam osobní dojmy, zbytečné profilování, citlivé interní informace ani kopie všeho, co zákazník kdy napsal. Pokud potřebuješ poznámku, piš ji tak, aby ji mohl vidět i zákazník a nebylo ti trapně. To je mimochodem velmi dobrý etický test, protože trapnost je levný compliance nástroj.
+
+### CE.6 Měř kvalitu follow-upu bez šmírování
+
+Nemusíš sledovat každý otevřený e-mail ani vkládat trackovací pixel do každé odpovědi. Pro rozhodování často stačí jednodušší metriky:
+
+- kolik poptávek dostalo první odpověď do slíbeného času,
+- kolik jasných příležitostí přešlo do hovoru,
+- kolik hovorů přešlo do nabídky,
+- kolik nabídek přešlo do spolupráce,
+- proč byly poptávky odmítnuté nebo ztracené,
+- které zdroje přinášejí nejlépe připravené lidi.
+
+Tahle čísla můžeš vést agregovaně jednou týdně. Cílem není vědět, jestli konkrétní člověk otevřel e-mail v 22:14 na telefonu. Cílem je zjistit, jestli tvůj proces pomáhá správným lidem udělat další krok.
+
+*Codyho komentář:* Dobrý obchod není nahánění. Je to dobře načasovaná pomoc. Když zákazník po follow-upu ví víc, cítí menší riziko a má jasnější další krok, pracuješ správně — i když nekoupí hned.
+
+### CE.7 Šablona: privacy-first follow-up karta
+
+```markdown
+## Follow-up karta: [firma / projekt]
+
+### Kontext
+- Zdroj poptávky:
+- Problém vlastními slovy zákazníka:
+- Požadovaný výsledek:
+- Co už víme:
+- Co potřebujeme doplnit:
+
+### Kvalifikace
+- Kategorie: jasná příležitost / potřebuje doplnit / mimo zaměření
+- Důvod:
+- Rizika:
+- Privacy poznámka: jaká data opravdu potřebujeme držet?
+
+### Další krok
+- Navržená akce:
+- Odpovědná osoba:
+- Termín odpovědi:
+- Stav: čeká / odesláno / domluveno / uzavřeno / archivováno
+
+### Follow-up historie
+- Den 0:
+- Den 1:
+- Den 3:
+- Den 7:
+
+### Vyhodnocení
+- Výsledek:
+- Co zlepšit v nabídce, webu nebo formuláři:
+- Datum archivace nebo dalšího review:
+```
+
+### CE.8 Checklist: follow-up, který drží důvěru
+
+- [ ] První odpověď potvrzuje přijetí a jasně říká další krok.
+- [ ] Poptávky jsou rozdělené podle kvality a vhodnosti.
+- [ ] Každý follow-up přináší konkrétní hodnotu, ne jen připomenutí.
+- [ ] Sedmidenní rytmus má začátek, pokračování i slušné uzavření.
+- [ ] Lead karta drží jen data potřebná pro obchodní rozhodnutí.
+- [ ] E-maily neobsahují zbytečné trackovací pixely ani nátlakové triky.
+- [ ] Tým jednou týdně vyhodnocuje úzká místa procesu agregovaně.
+- [ ] Odmítnuté nebo staré poptávky mají jasné retenční pravidlo.
+
+
 ## Pracovní log
+- 2026-09-01 05:06 UTC — Doplněna příloha CE o follow-upu po poptávce: rychlá první odpověď, kvalifikace leadů, hodnotné připomenutí, sedmidenní rytmus, privacy-first lead karta, agregované měření, šablona a checklist.
 - 2026-09-01 05:00 UTC — Doplněna příloha CD o rozhodovacím deníku pro malé produktové týmy: krátký záznam kontextu, možností, důvodů, rizik, review data a privacy-first pravidla.
 - 2026-09-01 04:01 UTC — Doplněna příloha CC o roadmapě bez slibotechny: vrstvy směru, sázky a dodávky, karta položky, práce se zákaznickými požadavky, veřejná roadmapa, měsíční review, šablona a privacy-first checklist.
 - 2026-09-01 03:00 UTC — Doplněna příloha CB o produktových experimentech bez sledovací laboratoře: rozhodovací hypotézy, datové minimum, agregované měření, experimentální kartu, krátký běh, vyhodnocení bez ega a privacy-first checklist.
