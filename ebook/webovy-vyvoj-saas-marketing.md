@@ -15601,7 +15601,199 @@ Do CRM si nepiš „uživatel sledoval video“, pokud to nepotřebuješ a nemá
 *Codyho komentář:* Produktové demo má být jako dobrý průvodce po dílně: ukáže nástroje, vysvětlí postup a nechá člověka rozhodnout, jestli tam chce pracovat. Nemá to být bezpečnostní kamera s marketingovým dabingem.
 
 
+## Příloha CL: Pilotní projekt, který ověří hodnotu místo nekonečného čekání na jistotu
+
+Pilot je most mezi „to zní zajímavě“ a „tohle chceme používat“. U webového vývoje, SaaS i automatizací je nebezpečné přeskočit rovnou do velké implementace jen proto, že první schůzka dopadla nadšeně. Nadšení je fajn, ale faktury se neplatí potleskem. Pilot má ukázat, jestli produkt nebo služba opravdu řeší konkrétní situaci zákazníka, jestli tým umí spolupracovat a jestli se z experimentu dá udělat opakovatelná nabídka.
+
+Dobře navržený pilot není levná verze celého projektu. Je to omezená zkouška jedné hodnotové hypotézy. Má jasný začátek, konec, rozsah, odpovědnosti, data, měřítka úspěchu a rozhodnutí, které po něm přijde. Když tohle chybí, pilot se snadno změní v šedou zónu: dodavatel pořád něco ladí, zákazník pořád něco chce a nikdo přesně neví, kdy už je hotovo. To není pilot, to je projektový aquapark bez plavčíka.
+
+### CL.1 Začni rozhodnutím po pilotu
+
+Nejdřív si napiš, jaké rozhodnutí má pilot umožnit. Ne „otestovat systém“. To je příliš vágní. Rozhodnutí musí být konkrétní:
+
+- pokračovat do placené implementace,
+- nasadit SaaS pro jednu roli nebo jeden tým,
+- vyhodit funkci z roadmapy,
+- upravit nabídku pro jiný segment,
+- zastavit spolupráci, protože problém není dost bolestivý.
+
+Dobrá formulace:
+
+> Po čtyřech týdnech rozhodneme, jestli nový poptávkový workflow zkrátil reakci na relevantní leady natolik, že dává smysl přejít do ostrého provozu pro celý obchodní tým.
+
+Špatná formulace:
+
+> Vyzkoušíme si platformu a uvidíme.
+
+„Uvidíme“ je v projektech často jen zdvořilé synonymum pro „nikdo nechce nést odpovědnost“. Pilot potřebuje otázku, na kterou se dá odpovědět ano, ne, nebo „ano, ale za těchto podmínek“.
+
+### CL.2 Omez rozsah na jeden hodnotový tok
+
+Pilot nemá ověřit celý produkt. Má ověřit jeden důležitý tok práce. U webu to může být cesta od landing page k poptávce. U SaaS to může být onboarding jednoho zákaznického segmentu. U interní automatizace to může být předání poptávky z formuláře do obchodního procesu.
+
+Vyber tok, který splňuje tři podmínky:
+
+- zákazník ho používá pravidelně,
+- výsledek se dá poznat bez velké analytické vědy,
+- v omezeném rozsahu se dá bezpečně otestovat.
+
+Příklady vhodných pilotů:
+
+- jedna landing page pro jeden typ služby a měření kvality poptávek,
+- onboarding pěti zákazníků přes nový SaaS workflow,
+- interní dashboard pro týdenní rozhodování jednoho týmu,
+- privacy-first analytika na hlavních produktových stránkách,
+- automatické potvrzení poptávky a interní kvalifikační karta.
+
+Příklady špatných pilotů:
+
+- „přestavíme celý web a uvidíme, co to udělá“,
+- „zapojíme všechny oddělení najednou“,
+- „otestujeme deset segmentů v jedné kampani“,
+- „uděláme pilot bez přístupu k datům, která jsou pro výsledek nutná“.
+
+Pilot má být malý, ale skutečný. Když je příliš umělý, neověří chování. Když je příliš široký, neověří nic, protože se utopíš v interpretacích.
+
+### CL.3 Definuj vstupy a odpovědnosti před startem
+
+Nejčastější důvod, proč pilot selže, není technologie. Je to čekání: na přístupy, data, obsah, kontakt na člověka, který „určitě pošle podklady zítra“. Zítřek je největší neplacený dodavatel v dějinách internetu.
+
+Před startem pilotu sepiš minimální vstupy:
+
+- kdo je vlastník na straně zákazníka,
+- kdo dává zpětnou vazbu a v jakém rytmu,
+- jaká data nebo obsah jsou potřeba,
+- jaké přístupy budou vytvořené,
+- co se nesmí použít kvůli citlivosti nebo právům,
+- kdo rozhoduje o pokračování,
+- kdy přesně pilot končí.
+
+Praktické pravidlo: pilot nezačíná podpisem nabídky, ale splněním startovacích podmínek. Pokud zákazník nemá připravené vstupy, posuň start. Jinak začne běžet čas, tým se tváří zaneprázdněně a první týden zmizí v honbě za jedním exportem. To je drahá forma rozcvičky.
+
+### CL.4 Měř úspěch kombinací čísel a pozorování
+
+Pilot má mít metriky, ale ne každá metrika musí být číselný ohňostroj. U malého pilotu často stačí několik tvrdých signálů a kvalitativní poznámky.
+
+Tvrdé signály mohou být:
+
+- počet dokončených hlavních workflow,
+- čas od vstupu k výsledku,
+- počet ručních kroků odstraněných z procesu,
+- počet relevantních poptávek,
+- počet chyb nebo opakovaných dotazů,
+- počet lidí, kteří se k řešení vrací bez připomínání.
+
+Kvalitativní signály mohou být:
+
+- zákazník dokáže vysvětlit hodnotu vlastními slovy,
+- tým přestane používat starou náhradní tabulku,
+- support dostává méně základních dotazů,
+- obchod používá výstup pilotu při reálné konverzaci,
+- rozhodovatel se ptá na další krok místo na další ukázku.
+
+Privacy-first měření u pilotu znamená: sbírej jen signály potřebné pro rozhodnutí. Nepotřebuješ nahrávat obrazovky, tvořit detailní profily uživatelů ani sledovat každý klik. U malého B2B pilotu je často cennější krátký rozhovor po použití než invazivní analytika, která jen přesně změří, že lidé byli zmatení.
+
+### CL.5 Nastav bezpečný datový režim
+
+Pilot je lákavý moment pro špatné zkratky: „Pošlete nám export databáze, my si to nějak nahrajeme.“ Ne. Takhle vzniká datový nepořádek, který přežije déle než původní projekt.
+
+Před pilotem určete:
+
+- jaké typy dat budou použité,
+- kde budou uložené,
+- kdo k nim bude mít přístup,
+- jestli obsahují osobní nebo obchodně citlivé údaje,
+- jak dlouho se budou držet,
+- jak se po pilotu smažou nebo převedou do ostrého provozu,
+- co se bude logovat a proč.
+
+Preferuj testovací, anonymizovaná nebo ručně připravená data. Pokud pilot opravdu potřebuje reálná data, použij minimální rozsah: jen konkrétní účty, konkrétní období, konkrétní pole. Přístupy dej na jména, ne sdíleným účtem. Po skončení pilotu udělej access review a úklid exportů. Ano, je to méně pohodlné. Ale pohodlí je často jen bezpečnostní dluh v mikině.
+
+### CL.6 Závěr pilotu musí být schůzka s rozhodnutím
+
+Pilot nesmí skončit větou „ještě se ozveme“. Na konci má být krátké vyhodnocení a jedno ze čtyř rozhodnutí:
+
+1. **Pokračujeme:** pilot splnil podmínky a je jasný další placený krok.
+2. **Pokračujeme upraveně:** hodnota existuje, ale rozsah, segment nebo proces se musí změnit.
+3. **Prodlužujeme cíleně:** chybí jeden konkrétní důkaz a prodloužení má jasnou otázku i termín.
+4. **Končíme:** hypotéza se nepotvrdila nebo problém nemá dostatečnou prioritu.
+
+Na závěrečné schůzce projdi:
+
+- původní hypotézu,
+- co bylo skutečně nasazeno,
+- signály úspěchu a selhání,
+- co se zákazník naučil,
+- co se naučil dodavatel nebo produktový tým,
+- doporučený další krok,
+- datový úklid po pilotu.
+
+Výsledek pošli písemně do 24 hodin. Krátce, bez románu. Jedna stránka stačí. Když pilot dopadne dobře, tenhle zápis se stane základem nabídky. Když dopadne špatně, stane se základem pro lepší rozhodnutí příště. Obojí je výhra proti mlhavému „asi to bylo zajímavé“.
+
+### CL.7 Šablona pilotní karty
+
+```markdown
+## Pilot: [název]
+
+### Rozhodnutí po pilotu
+- Jaké rozhodnutí má pilot umožnit:
+- Kdo rozhoduje:
+- Datum vyhodnocení:
+
+### Hypotéza
+- Věříme, že:
+- Pro koho:
+- Jak poznáme, že to má hodnotu:
+
+### Rozsah
+- Jeden hodnotový tok:
+- Co je součástí:
+- Co není součástí:
+- Délka pilotu:
+
+### Vstupy a odpovědnosti
+- Vlastník zákazníka:
+- Vlastník dodavatele / produktu:
+- Potřebná data a obsah:
+- Přístupy:
+- Rytmus zpětné vazby:
+
+### Měření
+- Tvrdé signály:
+- Kvalitativní signály:
+- Co záměrně neměříme:
+
+### Privacy režim
+- Typy dat:
+- Umístění dat:
+- Přístupy:
+- Retence po pilotu:
+- Mazání nebo převod do ostrého provozu:
+
+### Výsledek
+- Rozhodnutí:
+- Doporučený další krok:
+- Co jsme se naučili:
+```
+
+### CL.8 Checklist: pilot bez mlhy a datového nepořádku
+
+- Pilot odpovídá na jednu konkrétní rozhodovací otázku.
+- Rozsah je omezený na jeden hodnotový tok.
+- Start pilotu závisí na připravených vstupech, ne jen na podpisu.
+- Je jasné, kdo dává zpětnou vazbu a kdo rozhoduje o pokračování.
+- Úspěch má tvrdé i kvalitativní signály.
+- Měření nesbírá data jen proto, že to nástroj umí.
+- Demo nebo testovací data neobsahují zbytečné osobní údaje.
+- Reálná data se používají jen v minimálním nutném rozsahu.
+- Přístupy jsou osobní, časově omezené a po pilotu zkontrolované.
+- Pilot končí písemným vyhodnocením a jasným dalším krokem.
+
+*Codyho komentář:* Dobrý pilot je jako ochutnávka v restauraci: má ukázat kvalitu kuchyně, ne tě zamknout na víkend do skladu s cibulí. Malý rozsah, jasný výsledek, čistý úklid po sobě.
+
+
 ## Pracovní log
+- 2026-09-01 12:00 UTC — Doplněna příloha CL o pilotním projektu: rozhodnutí po pilotu, omezení na jeden hodnotový tok, vstupy a odpovědnosti, kombinaci tvrdých a kvalitativních signálů, bezpečný datový režim, závěrečné vyhodnocení, šablonu pilotní karty a checklist.
 - 2026-09-01 11:00 UTC — Doplněna příloha CK o produktovém demu bez šmírovacího kina: scénář místo seznamu funkcí, tři délky ukázky, bezpečná demo data, privacy-first hosting, CTA podle fáze zákazníka, agregované měření, šablona a checklist.
 - 2026-09-01 10:01 UTC — Doplněna příloha CJ o retenci a mazání dat po skončení účtu: rozdělení dat podle důvodu držení, retenční tabulku, offboarding s exportem, práci se zálohami, anonymizaci, automatizovaný úklid, šablonu položky a privacy-first checklist.
 - 2026-09-01 09:01 UTC — Doplněna příloha CI o win-backu odcházejících zákazníků: rozlišení důvodů odchodu, návrat s konkrétní změnou místo slevy, respektující zpráva, malý seznam účtů, vyhodnocení učení, šablona karty a privacy-first checklist.
