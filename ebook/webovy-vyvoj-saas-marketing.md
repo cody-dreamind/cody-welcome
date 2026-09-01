@@ -14593,7 +14593,181 @@ Tahle čísla můžeš vést agregovaně jednou týdně. Cílem není vědět, j
 - [ ] Odmítnuté nebo staré poptávky mají jasné retenční pravidlo.
 
 
+
+## Příloha CF: Referral program pro B2B SaaS bez affiliate cirkusu
+
+Referral je jedna z nejpříjemnějších růstových cest, protože staví na důvěře místo na aukci pozornosti. Jenže v B2B SaaS a službách často dopadne divně: tým rychle slíbí provizi, přidá univerzální formulář, nikdo neví, kdo má nárok na odměnu, a po třech měsících vznikne tabulka plná „možná leadů“. To není referral program. To je CRM escape room.
+
+Dobrý referral program má být malý, srozumitelný a férový. Nemusí z něj být veřejný affiliate stroj s cookies, trackery a motivačními bannery. Pro malé evropské firmy často funguje lépe jednoduchý systém doporučení: kdo může doporučit, co je dobrý fit, jak se doporučení předává, jak se odměňuje a jak se chrání data všech zúčastněných.
+
+*Codyho komentář:* Nejlepší referral nevypadá jako marketingový trik. Vypadá jako věta: „Znám někoho, komu byste fakt mohli pomoct.“ To je méně sexy než dashboard s osmi grafy, ale kupodivu to prodává.
+
+### CF.1 Nejdřív si ujasni, koho chceš dostat
+
+Referral program nezačínej otázkou „kolik dáme za doporučení“. Začni otázkou: „Jaký typ zákazníka nám má doporučení přivést?“ Pokud to neuděláš, odměníš lidi za kontakty, které neumíš obsloužit, nejsou pro tebe dobrý fit a budou tě stát víc energie než přinesou hodnoty.
+
+Napiš si jednoduchý profil doporučení:
+
+- **Ideální zákazník:** typ firmy, velikost týmu, země, jazyk, rozpočet, rozhodovací role.
+- **Typický problém:** co řeší dost často a dost bolestivě.
+- **Dobrý timing:** kdy má smysl se ozvat — například před redesignem, po růstu týmu, při migraci nástrojů nebo před expanzí.
+- **Nevhodný fit:** koho nechceš, i kdyby přišel přes kamaráda.
+- **První výstup:** co má následovat po doporučení — krátký call, audit, demo, mini workshop nebo nabídka.
+
+Příklad pro privacy-first SaaS tým:
+
+> Hledáme evropské B2B firmy s 5–50 lidmi, které chtějí sbírat poptávky a měřit web bez agresivních trackerů. Dobrý timing je redesign webu, audit marketingu, změna CRM nebo tlak zákazníků na transparentnější práci s daty. Nehodí se projekty, které chtějí hlavně levný lead scraping a masové cold e-maily.
+
+Tohle napiš tak, aby to šlo poslat zákazníkovi nebo partnerovi. Když musíš referral vysvětlovat desetiminutovou prezentací, není ještě dost jednoduchý.
+
+### CF.2 Odměna nemusí být jen provize
+
+Provize funguje, ale není jediný způsob. V B2B často doporučují lidé, kterým je trapné brát peníze za kontakt, nebo firmy, které interně nesmí přijímat affiliate odměny. Proto nabídni několik férových možností.
+
+Praktické varianty:
+
+- **Kredit pro doporučujícího:** sleva na další měsíc, servisní hodiny, audit zdarma nebo rozšíření balíčku.
+- **Kredit pro doporučeného:** první workshop, onboarding nebo setup za zvýhodněnou cenu.
+- **Společná hodnota:** dar na vybraný projekt, vzdělávací materiál, otevřená šablona, konzultace pro oba týmy.
+- **Pevná odměna:** jednoduchá částka po zaplacení první faktury, bez procentního kouzlení.
+- **Bez odměny, ale s poděkováním:** veřejné poděkování, reference, pozvánka na interní akci nebo přednostní přístup k novince.
+
+Důležité je říct pravidla dopředu. Kdy vzniká nárok? Po podepsání smlouvy? Po první uhrazené faktuře? Po třech měsících aktivního používání? Čím později odměna vzniká, tím lépe chráníš ekonomiku. Čím jasnější je pravidlo, tím méně vzniká trapných konverzací.
+
+Jednoduché pravidlo:
+
+> Odměna vzniká po uhrazení první faktury doporučeným zákazníkem. Pokud už jsme s firmou byli v aktivním obchodním kontaktu v posledních 90 dnech, doporučení nezakládá nárok na odměnu, ale pořád za něj poděkujeme.
+
+Tohle není nedůvěra. To je prevence chaosu. Chaos je nejdražší marketingový kanál, jen nemá hezkou ikonku.
+
+### CF.3 Referral předání má být lidské a souhlasné
+
+Privacy-first referral nezačíná tím, že někdo bez souhlasu pošle cizí e-mail do tvého CRM. Začíná souhlasem. Doporučující by měl nejdřív ověřit, že doporučený člověk o kontakt stojí.
+
+Nejčistší předání je dvojitý opt-in v lidské podobě:
+
+1. Doporučující napíše doporučenému: „Myslím, že by ti mohl pomoct Cody/Dreamind s [problém]. Chceš, ať vás propojím?“
+2. Doporučený souhlasí.
+3. Doporučující pošle společný e-mail nebo zprávu oběma stranám.
+4. Ty odpovíš s jasným dalším krokem a minimem otázek.
+
+Šablona pro doporučujícího:
+
+> Ahoj [jméno], napadlo mě propojit tě s Codym/Dreamindem. Řeší privacy-first weby, SaaS a marketingové systémy pro evropské firmy. Podle toho, co jsi říkal o [problém], by vám mohli pomoct s [konkrétní výsledek]. Chceš, ať vás propojím v krátkém e-mailu?
+
+Šablona úvodního propojení:
+
+> Ahoj oba, propojuji vás kvůli [konkrétní téma]. [Doporučený] řeší [situace] a [Cody/Dreamind] má zkušenost s [relevantní výsledek]. Nechám vás domluvit další krok.
+
+Takové předání je lepší než formulář „dej nám e-mail kamaráda a my ho překvapíme“. Překvapení patří do narozeninového dortu, ne do zpracování osobních údajů.
+
+### CF.4 Měř kvalitu doporučení, ne počet vizitek
+
+Referral program se dá měřit bez osobních profilů, cross-site sledování a affiliate cookies na půl internetu. Pro rozhodování většinou stačí jednoduchá evidence v lead kartě.
+
+U každého doporučení si zapiš:
+
+- kdo doporučil,
+- kdy přišlo,
+- jaký problém zákazník řeší,
+- zda existoval souhlas s propojením,
+- fit podle tvých kritérií,
+- další krok,
+- výsledek po 30/60/90 dnech.
+
+Metriky drž krátké:
+
+- počet doporučení za měsíc,
+- podíl doporučení s dobrým fitem,
+- podíl doporučení, která vedla k hovoru,
+- podíl doporučení, která vedla k placené spolupráci,
+- průměrný čas od propojení k rozhodnutí,
+- nejčastější důvod odmítnutí.
+
+Tohle stačí k rozhodnutí, jestli program funguje. Nepotřebuješ sledovat chování doporučeného člověka na webu napříč návštěvami. Nepotřebuješ tajné identifikátory. Nepotřebuješ marketingový detektivní seriál. Potřebuješ vědět, jestli doporučení přivádějí správné zákazníky.
+
+### CF.5 Partnerům dej jednoduchý balíček
+
+Pokud chceš, aby tě někdo doporučoval opakovaně, usnadni mu práci. Nečekej, že si bude pamatovat tvoje positioningové nuance, pricingové hranice a rozdíl mezi „privacy-first analytikou“ a „GDPR pluginem zdarma“. Připrav malý referral balíček.
+
+Balíček může obsahovat:
+
+- jednu větu, co děláš,
+- tři typické problémy, se kterými pomáháš,
+- signály, kdy má doporučení smysl,
+- koho nechceš jako lead,
+- ukázkový text pro propojení,
+- pravidla odměny,
+- kontakt a preferovaný další krok.
+
+Příklad krátké věty:
+
+> Dreamind pomáhá evropským B2B firmám stavět weby, SaaS a marketingové systémy, které prodávají bez zbytečných trackerů a bez ztráty kontroly nad daty.
+
+Příklad signálů:
+
+- Firma redesignuje web a chce měřit poptávky lépe než pocitem v žaludku.
+- SaaS tým řeší onboarding, pricing nebo první zákaznický růst.
+- Zakladatel chce omezit závislost na reklamních platformách.
+- Tým potřebuje evropský provoz, menší datové riziko a jasnější dokumentaci.
+
+Balíček nemusí být veřejná stránka. Klidně to může být jedna Markdown stránka, PDF nebo e-mail. Hlavní je, aby člověk nemusel vymýšlet, jak tě popsat. Když to necháš na něm, může z tebe vzniknout „něco s webama a AI“. Což je sice technicky možné, ale strategicky asi jako prodávat kávovar větou „dělá mokré teplo“.
+
+### CF.6 Šablona: referral karta
+
+```markdown
+## Referral: [firma / kontakt]
+
+### Doporučující
+- Jméno:
+- Vztah k nám:
+- Preferovaná odměna:
+
+### Doporučený zákazník
+- Firma:
+- Role kontaktu:
+- Země / trh:
+- Souhlas s propojením: ano/ne
+
+### Problém a fit
+- Popis situace:
+- Proč je to dobrý fit:
+- Proč to může být špatný fit:
+- Očekávaný výsledek:
+
+### Další krok
+- První odpověď odeslána:
+- Domluvený call / audit / demo:
+- Vlastník na naší straně:
+
+### Výsledek
+- Stav po 30 dnech:
+- Stav po 60 dnech:
+- Stav po 90 dnech:
+- Vznik nároku na odměnu:
+
+### Privacy poznámka
+- Jaký souhlas máme:
+- Kde je karta uložená:
+- Kdy ji smažeme nebo anonymizujeme:
+```
+
+### CF.7 Checklist: referral bez trackerů a trapna
+
+- Máme napsané, jaký zákazník je dobrý fit.
+- Umíme jednou větou vysvětlit, koho nám má partner doporučit.
+- Pravidla odměny jsou jasná předem.
+- Doporučený člověk souhlasí s propojením dřív, než ukládáme jeho kontakt.
+- Evidence doporučení obsahuje jen data potřebná pro obchodní rozhodnutí.
+- Nesledujeme doporučené lidi napříč webem pomocí affiliate cookies.
+- Partner má šablonu zprávy a ví, jaký další krok očekáváme.
+- Jednou měsíčně vyhodnocujeme kvalitu doporučení, ne jen jejich počet.
+- Po uzavření nebo odmítnutí uklidíme data podle retenčního pravidla.
+- Referral program působí jako důvěryhodné doporučení, ne jako slevový cirkus.
+
+
 ## Pracovní log
+- 2026-09-01 06:01 UTC — Doplněna příloha CF o referral programu pro B2B SaaS: ideální fit, férové odměny, souhlasné předání kontaktu, měření kvality bez trackerů, referral balíček, šablona karty a privacy-first checklist.
 - 2026-09-01 05:06 UTC — Doplněna příloha CE o follow-upu po poptávce: rychlá první odpověď, kvalifikace leadů, hodnotné připomenutí, sedmidenní rytmus, privacy-first lead karta, agregované měření, šablona a checklist.
 - 2026-09-01 05:00 UTC — Doplněna příloha CD o rozhodovacím deníku pro malé produktové týmy: krátký záznam kontextu, možností, důvodů, rizik, review data a privacy-first pravidla.
 - 2026-09-01 04:01 UTC — Doplněna příloha CC o roadmapě bez slibotechny: vrstvy směru, sázky a dodávky, karta položky, práce se zákaznickými požadavky, veřejná roadmapa, měsíční review, šablona a privacy-first checklist.
