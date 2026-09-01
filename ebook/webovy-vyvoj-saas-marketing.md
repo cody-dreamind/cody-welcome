@@ -15792,7 +15792,182 @@ Výsledek pošli písemně do 24 hodin. Krátce, bez románu. Jedna stránka sta
 *Codyho komentář:* Dobrý pilot je jako ochutnávka v restauraci: má ukázat kvalitu kuchyně, ne tě zamknout na víkend do skladu s cibulí. Malý rozsah, jasný výsledek, čistý úklid po sobě.
 
 
+## Příloha CM: Přechod z pilotu do ostrého provozu bez rozbitého slibu
+
+Pilot může dopadnout skvěle a stejně se z něj nestane dobrý produktový provoz. Proč? Protože pilot často stojí na ručních zkratkách, extra péči, improvizovaných exportech a lidech, kteří všechno drží v hlavě. To je v pilotu v pořádku. V ostrém provozu je to tichá past.
+
+Přechod z pilotu do placené služby proto není jen obchodní formalita. Je to samostatná fáze, ve které musíš převést ověřenou hodnotu do opakovatelného, bezpečného a srozumitelného provozu.
+
+### CM.1 Neprodlužuj pilot jen proto, že se bojíš říct cenu
+
+Po úspěšném pilotu přichází nepříjemný moment: musíš říct, co bude dál a kolik to stojí. Mnoho týmů místo toho navrhne „ještě měsíc testování“, protože se bojí, že zákazník uteče. Jenže nekonečný pilot rozmazává hodnotu a učí obě strany, že reálný závazek se dá odkládat donekonečna.
+
+Dobré pravidlo:
+
+- Pokud pilot splnil rozhodovací otázku, přejdi na nabídku.
+- Pokud ji nesplnil, definuj jednu konkrétní chybějící věc.
+- Pokud zákazník nechce rozhodnout, pojmenuj to jako obchodní riziko, ne jako produktový problém.
+
+V praxi můžeš říct:
+
+> Pilot ukázal, že portál snižuje počet stavových e-mailů a tým ho reálně používá. Navrhujeme přejít do ostrého provozu s rozsahem A, B, C a měsíčním režimem podpory. Pokud ještě potřebujete ověřit jednu věc, pojďme ji jasně pojmenovat a dát jí termín.
+
+Tahle věta je klidná, konkrétní a nedělá z tebe prodejce kouzelných hrnců. Což je dobré, protože SaaS hrnce jsou velmi špatný segment.
+
+### CM.2 Rozděl pilotní zkratky od produkčního standardu
+
+Před ostrým provozem si udělej seznam věcí, které byly v pilotu ruční nebo dočasné. Ne proto, abys všechno hned přepsal do dokonalé architektury, ale aby sis nelhal.
+
+Typické pilotní zkratky:
+
+- ruční import dat,
+- jednorázové opravy přímo v databázi,
+- ruční e-mailové notifikace,
+- jeden interní člověk jako „živé API“,
+- dočasné účty nebo sdílené přístupy,
+- logování více údajů, než bude dlouhodobě vhodné,
+- chybějící auditní stopa,
+- nejasná odpovědnost za support.
+
+Ke každé zkratce napiš rozhodnutí:
+
+- **Odstranit před startem:** bez toho nelze bezpečně prodávat.
+- **Nechat krátkodobě s kontrolou:** víme o riziku, máme vlastníka a datum revize.
+- **Převést na proces:** nemusí být automatizace, stačí opakovatelný postup.
+- **Zahodit:** pilotní věc, která pro ostrý provoz nemá hodnotu.
+
+Největší nebezpečí nejsou zkratky samotné. Největší nebezpečí jsou zkratky, které se tváří jako standard.
+
+### CM.3 Ostrý provoz potřebuje provozní slib
+
+Zákazník nemusí znát interní architekturu. Potřebuje ale vědět, co může očekávat. Provozní slib je krátká sada odpovědí na otázky, které by jinak dřív nebo později dopadly do supportu.
+
+Minimální provozní slib:
+
+- kdy je služba dostupná a kdy se dělá plánovaná údržba,
+- jak rychle reaguješ na kritické problémy,
+- jak zákazník hlásí chybu nebo požadavek,
+- kde jsou data uložená,
+- jak fungují zálohy a obnova,
+- jak se řeší export dat,
+- kdo je kontaktní osoba pro provozní otázky,
+- jak často probíhá review hodnoty.
+
+Pro malý SaaS nemusíš hned psát třicetistránkové SLA. Stačí jednostránkový „provozní režim“, který je pravdivý. Neslibuj dostupnost, kterou neumíš měřit. Neslibuj reakční časy, které neumíš držet. Neslibuj evropský provoz, pokud ti kritická část dat odtéká přes třetí službu mimo kontrolu.
+
+*Codyho komentář:* Nejlepší SLA není to s největším procentem devítek. Je to to, které odpovídá realitě a nenechá zákazníka hádat, co se stane, když něco spadne. Devítky jsou hezké. Pravda je levnější.
+
+### CM.4 Převod dat udělej jako malý migrační projekt
+
+Pokud pilot používal testovací nebo omezená data, ostrý provoz často vyžaduje migraci. Tu nepouštěj jako „to nějak nahrajeme v pátek večer“. Převod dat je citlivý moment, protože se v něm potkává důvěra, bezpečnost a první reálný dojem z produktu.
+
+Praktický postup:
+
+1. Sepiš, jaká data se převádí a odkud.
+2. Zkontroluj, která pole jsou opravdu nutná pro ostrý provoz.
+3. Dohodni okno migrace a vlastníka na obou stranách.
+4. Připrav zálohu původního stavu nebo bezpečný export.
+5. Proveď test na malém vzorku.
+6. Po migraci ověř několik reálných scénářů.
+7. Smaž dočasné exporty a pracovní kopie.
+
+Privacy-first detail: nepřeváděj historická data jen proto, že existují. Často stačí aktivní zákazníci, otevřené případy, poslední období nebo jen agregovaný souhrn. Starý nepořádek nepřestane být nepořádek tím, že ho přesuneš do nového systému s hezčím UI.
+
+### CM.5 Support před startem, ne až po prvním požáru
+
+Ostrý provoz potřebuje jasnou podporu. Ne až ve chvíli, kdy zákazník napíše „nejde mi to“ a tým začne hledat, kdo vlastně ví, jak systém funguje.
+
+Před spuštěním si připrav:
+
+- jednu adresu nebo kanál pro požadavky,
+- interní pravidla triage,
+- seznam typických dotazů z pilotu,
+- krátké odpovědi na opakované otázky,
+- postup pro kritické chyby,
+- vlastníka zákaznické komunikace,
+- jednoduchý způsob, jak z podpory vznikají produktové poznatky.
+
+Dobrá podpora není jen hašení. Je to zpětná vazba z reality. Když se stejný dotaz objeví třikrát, není to problém uživatelů. Je to pravděpodobně problém onboardingového textu, názvu funkce nebo chybějícího stavu v rozhraní.
+
+### CM.6 První měsíc měř stabilitu a hodnotu, ne vanity metriky
+
+Po přechodu do ostrého provozu je lákavé sledovat všechno. Kolik kliknutí, kolik obrazovek, kolik otevření, kolik miniaturních grafů, které vypadají manažersky, ale neříkají nic. První měsíc potřebuješ hlavně ověřit dvě věci: služba drží a zákazník dostává slíbenou hodnotu.
+
+Sleduj:
+
+- počet kritických chyb,
+- dobu do první reakce na problém,
+- dokončení hlavního workflow,
+- počet ručních zásahů týmu,
+- opakované dotazy na podporu,
+- dosažení původně slíbeného výsledku,
+- subjektivní spokojenost hlavního uživatele.
+
+Nesleduj jednotlivé lidi víc, než je nutné pro provoz a bezpečnost. Pro produktové rozhodování často stačí agregované eventy, support tagy a krátké zákaznické review. Pokud potřebuješ podrobnější diagnostiku, zapni ji dočasně, cíleně a transparentně.
+
+### CM.7 Šablona přechodové karty
+
+```markdown
+## Přechod z pilotu do provozu: [zákazník / produkt]
+
+### Rozhodnutí
+- Výsledek pilotu:
+- Schválený další krok:
+- Datum startu ostrého provozu:
+- Obchodní model / tarif:
+
+### Rozsah ostrého provozu
+- Co je součástí:
+- Co není součástí:
+- Hlavní workflow:
+- Kritické závislosti:
+
+### Pilotní zkratky
+- Zkratka:
+- Riziko:
+- Rozhodnutí: odstranit / kontrolovat / převést na proces / zahodit
+- Vlastník:
+- Datum revize:
+
+### Data a migrace
+- Převáděná data:
+- Nepřeváděná data:
+- Migrační okno:
+- Kontrola po migraci:
+- Mazání dočasných exportů:
+
+### Provozní slib
+- Dostupnost a údržba:
+- Support kanál:
+- Reakce na kritické problémy:
+- Zálohy a obnova:
+- Export dat:
+
+### První měsíc
+- Metriky stability:
+- Metriky hodnoty:
+- Review datum:
+- Rozhodnutí po prvním měsíci:
+```
+
+### CM.8 Checklist: z pilotu do provozu bez chaosu
+
+- Pilot má písemné vyhodnocení a jasné rozhodnutí.
+- Zákazník dostal konkrétní nabídku dalšího kroku.
+- Všechny pilotní zkratky jsou pojmenované a mají rozhodnutí.
+- Kritické zkratky jsou odstraněné před ostrým startem.
+- Provozní slib je pravdivý, krátký a zákazník ho viděl.
+- Migrace dat má vlastníka, okno, test a kontrolu výsledku.
+- Dočasné exporty a pracovní kopie se po migraci mažou.
+- Support kanál a triage existují před spuštěním.
+- První měsíc se měří stabilita a slíbená hodnota.
+- Diagnostika a logování jsou přiměřené, cílené a časově omezené.
+
+Přechod z pilotu do provozu není místo pro heroický chaos. Je to místo pro klidné zavírání smyček: co jsme slíbili, co jsme ověřili, co teď provozujeme a jak poznáme, že to pořád funguje. Když to zvládneš, pilot se neztratí v mlze. Stane se začátkem produktu, který zákazník opravdu používá.
+
+
 ## Pracovní log
+- 2026-09-01 13:00 UTC — Doplněna příloha CM o přechodu z pilotu do ostrého provozu: ukončení nekonečného pilotu, pojmenování pilotních zkratek, provozní slib, migrace dat, support před startem, měření prvního měsíce, šablona přechodové karty a checklist.
 - 2026-09-01 12:00 UTC — Doplněna příloha CL o pilotním projektu: rozhodnutí po pilotu, omezení na jeden hodnotový tok, vstupy a odpovědnosti, kombinaci tvrdých a kvalitativních signálů, bezpečný datový režim, závěrečné vyhodnocení, šablonu pilotní karty a checklist.
 - 2026-09-01 11:00 UTC — Doplněna příloha CK o produktovém demu bez šmírovacího kina: scénář místo seznamu funkcí, tři délky ukázky, bezpečná demo data, privacy-first hosting, CTA podle fáze zákazníka, agregované měření, šablona a checklist.
 - 2026-09-01 10:01 UTC — Doplněna příloha CJ o retenci a mazání dat po skončení účtu: rozdělení dat podle důvodu držení, retenční tabulku, offboarding s exportem, práci se zálohami, anonymizaci, automatizovaný úklid, šablonu položky a privacy-first checklist.
