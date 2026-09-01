@@ -14766,7 +14766,172 @@ Balíček nemusí být veřejná stránka. Klidně to může být jedna Markdown
 - Referral program působí jako důvěryhodné doporučení, ne jako slevový cirkus.
 
 
+## Příloha CG: Customer success pro malé SaaS bez mikromanažerského radaru
+
+Customer success není luxus pro firmy s velkým týmem a dashboardem přes celou zeď. U malého SaaS je to hlavně jednoduchý systém, který včas pozná, jestli zákazník opravdu dostává slíbenou hodnotu. Nejde o to sledovat každý klik jako detektiv v béčkovém seriálu. Jde o to mít pár signálů, pravidelný rytmus a lidskou komunikaci, která předchází tichému odchodu.
+
+Malý tým má výhodu: je blízko produktu i zákazníkům. Nevýhoda je, že všechno stojí na paměti zakladatele. A paměť zakladatele po třetím incidentu, dvou sales callechech a jednom rozbitém formuláři připomíná nákupní seznam po dešti. Proto potřebuješ lehký customer success systém.
+
+### CG.1 Začni slíbenou hodnotou, ne interními metrikami
+
+První otázka nezní: „Kolik máme aktivních uživatelů?“ Zní: „Jaký výsledek jsme zákazníkovi slíbili a podle čeho poznáme, že se k němu blíží?“
+
+Příklady slíbené hodnoty:
+
+- servisní firma má méně ztracených požadavků,
+- účetní tým rychleji odpovídá klientům,
+- marketingový tým vidí funkční obsah bez invazivní analytiky,
+- zakladatel má přehled o trialech bez ručního honění v tabulce,
+- B2B zákazník umí předat data bez vendor lock-inu.
+
+Ke každé hodnotě si napiš jeden až tři pozorovatelné signály. Nemusí být všechny automaticky měřené. U prvních zákazníků je často lepší kombinace produktových událostí, support poznámek a krátkého lidského review.
+
+Praktický zápis:
+
+- **Slíbená hodnota:** zákazník neztrácí příchozí požadavky.
+- **Signál v produktu:** vznikají nové požadavky a mění se jejich stav.
+- **Signál v komunikaci:** zákazník se neptá, kde požadavek je.
+- **Signál v businessu:** tým zvládne týdenní report bez ručního lovení v e-mailu.
+
+*Codyho komentář:* Metrika bez slíbené hodnoty je jen číslo s drahým účesem. Vypadá manažersky, ale rozhodnutí z ní nevypadne.
+
+### CG.2 Rozděl zákazníky podle péče, ne podle ega
+
+Ne každý zákazník potřebuje stejný rytmus péče. Chyba je buď ignorovat všechny, nebo se snažit dělat high-touch success pro každý malý účet. To druhé zní hezky, dokud zjistíš, že tvůj produkt má marži a kalendář má fyziku.
+
+Jednoduché vrstvy:
+
+- **Zakládající zákazníci:** osobní péče, časté rozhovory, hluboká zpětná vazba.
+- **Strategické účty:** pravidelné review, jasný vlastník, individuální kontext.
+- **Standardní zákazníci:** dobrý onboarding, automatické připomínky, snadný kontakt.
+- **Nízkorizikové samoobslužné účty:** kvalitní nápověda, status komunikace, produktové tipy.
+- **Rizikové účty:** krátký zásah podle konkrétního signálu, ne nekonečný rescue režim.
+
+Vrstvy neznamenají, že někoho odbudeš. Znamenají, že čas dáváš tam, kde má největší dopad. U malého SaaS je férové říct: nejdražší forma péče musí odpovídat hodnotě účtu nebo strategickému učení.
+
+### CG.3 Health score udělej tak jednoduché, aby ho tým opravdu používal
+
+Health score může být užitečné, ale nemusí to být algoritmus, který předstírá jasno na základě dvaceti signálů. Pro malý tým stačí tři barvy a pár důvodů.
+
+Navržený model:
+
+- **Zelený:** zákazník používá klíčový workflow, rozumí hodnotě, nemá otevřené zásadní blokery.
+- **Žlutý:** používání je nepravidelné, chybí aktivační krok, objevují se opakované otázky nebo nejistota.
+- **Červený:** zákazník neaktivoval hlavní hodnotu, má nevyřešený problém, blíží se renewal nebo otevřeně zvažuje odchod.
+
+Ke každému stavu přidej důvod. Bez důvodu je barva jen nálada člověka, který měl ráno slabou kávu.
+
+Příklad záznamu:
+
+```markdown
+Zákazník: Alfa Servis
+Stav: žlutý
+Důvod: používají zadávání požadavků, ale ne interní stavy; klienti se proto stále ptají e-mailem.
+Další krok: poslat krátký návod a nabídnout 20min školení pro dispečera.
+Datum kontroly: 2026-09-08
+Vlastník: Cody
+```
+
+### CG.4 Automatizuj připomínky, ne vztah
+
+Automatizace má hlídat rytmus, ne nahrazovat důvěru. V customer success se hodí hlavně tam, kde zabraňuje zapomenutí.
+
+Dobré automatizace:
+
+- připomenutí, že trial neudělal aktivační krok,
+- upozornění na zákazníka bez používání hlavního workflow,
+- měsíční úkol na review strategických účtů,
+- interní kontrola otevřených blockerů,
+- připomenutí před renewalem,
+- odeslání užitečného návodu po konkrétním kroku.
+
+Špatné automatizace:
+
+- generické „checking in“ e-maily bez kontextu,
+- falešně osobní zprávy, které prozradí, že je nikdo nečetl,
+- scoring založený na invazivním sledování jednotlivců,
+- automatický tlak na upgrade bez dosažené hodnoty,
+- nekonečné sekvence, ze kterých nejde rozumně vystoupit.
+
+Privacy-first pravidlo: pro připomínku nepotřebuješ vědět všechno. Často stačí agregovaný stav účtu, datum poslední důležité akce a ručně zapsaná poznámka z komunikace. Méně dat znamená méně rizika a méně vysvětlování, proč máš v systému digitální herbář uživatelských stop.
+
+### CG.5 Review má skončit rozhodnutím
+
+Customer success review není společenská návštěva v kalendáři. Má skončit jedním z rozhodnutí:
+
+- pokračujeme beze změny,
+- pomůžeme s konkrétním blockerem,
+- zákazník potřebuje školení nebo lepší nápovědu,
+- produkt má jasný opakovaný problém,
+- účet je rizikový a potřebuje plán,
+- spolupráce nedává smysl a připravíme férový offboarding.
+
+Krátká agenda pro 25 minut:
+
+1. Co se od posledně změnilo u zákazníka.
+2. Jestli používá hlavní workflow.
+3. Kde vzniká tření.
+4. Jaký je jeden další krok.
+5. Kdy se k tomu vrátíme.
+
+Po review neposílej román. Pošli shrnutí do pěti vět: kontext, dohoda, vlastník, termín a odkaz na nápovědu nebo ticket. Zákazník má vědět, že jsi poslouchal, ne že jsi objevil funkci „export do PDF“.
+
+### CG.6 Šablona customer success karty
+
+```markdown
+# Customer success karta: [zákazník]
+
+## Kontext
+- Segment:
+- Tarif / smlouva:
+- Hlavní kontakt:
+- Interní vlastník:
+- Datum startu:
+
+## Slíbená hodnota
+- Co jsme slíbili:
+- Jak zákazník pozná úspěch:
+- Co je pro zákazníka největší riziko:
+
+## Aktivace
+- Hlavní workflow používaný: ano/ne
+- Chybějící krok:
+- Nejbližší doporučená akce:
+
+## Stav účtu
+- Health: zelený/žlutý/červený
+- Důvod:
+- Otevřené blockery:
+- Datum další kontroly:
+
+## Komunikace
+- Poslední kontakt:
+- Shrnutí poslední dohody:
+- Co neslibovat:
+
+## Privacy poznámka
+- Jaká osobní data držíme:
+- Kde je karta uložená:
+- Kdo k ní má přístup:
+- Retenční pravidlo po ukončení spolupráce:
+```
+
+### CG.7 Checklist: customer success bez datového vysavače
+
+- Každý zákazník má napsanou slíbenou hodnotu.
+- Health score má maximálně tři stavy a vždy obsahuje důvod.
+- Strategické účty mají pravidelný review rytmus.
+- Automatizace hlídají zapomenuté kroky, ne nahrazují vztah.
+- Rizikový účet má konkrétní další akci a vlastníka.
+- Support poznámky se vrací do produktového backlogu, pokud se problém opakuje.
+- Trialy se hodnotí podle aktivace, ne podle počtu náhodných kliků.
+- Renewal začíná value recapem, ne slevovým panikařením.
+- Evidence obsahuje jen data potřebná pro péči o zákazníka.
+- Po odchodu zákazníka uklidíme přístupy, poznámky a osobní data podle retenčního pravidla.
+
+
 ## Pracovní log
+- 2026-09-01 07:00 UTC — Doplněna příloha CG o customer success pro malé SaaS: slíbená hodnota, vrstvy péče, jednoduché health score, smysluplné automatizace, review zakončené rozhodnutím, šablona karty a privacy-first checklist.
 - 2026-09-01 06:01 UTC — Doplněna příloha CF o referral programu pro B2B SaaS: ideální fit, férové odměny, souhlasné předání kontaktu, měření kvality bez trackerů, referral balíček, šablona karty a privacy-first checklist.
 - 2026-09-01 05:06 UTC — Doplněna příloha CE o follow-upu po poptávce: rychlá první odpověď, kvalifikace leadů, hodnotné připomenutí, sedmidenní rytmus, privacy-first lead karta, agregované měření, šablona a checklist.
 - 2026-09-01 05:00 UTC — Doplněna příloha CD o rozhodovacím deníku pro malé produktové týmy: krátký záznam kontextu, možností, důvodů, rizik, review data a privacy-first pravidla.
