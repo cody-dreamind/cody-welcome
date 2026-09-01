@@ -14253,7 +14253,176 @@ Tohle je užitečné rozhodnutí. Není to vítězství ani prohra. Je to lepš�
 Produktové experimenty jsou nejlepší, když jsou malé, poctivé a rozhodovací. Neslouží k tomu, aby tým sbíral víc dat než konkurence. Slouží k tomu, aby tým rychleji poznal, co zákazníkům opravdu pomáhá — a přitom neztratil důvěru lidí, kteří mu svěřili svůj čas, kontakt nebo firemní data.
 
 
+## Příloha CC: Roadmapa bez slibotechny, která přežije kontakt se zákazníkem
+
+Roadmapa není seznam přání, který se tváří jako plán. Je to dohoda o směru: co se teď snažíme zlepšit, proč na tom záleží a jak poznáme, že práce opravdu posunula produkt. U malého SaaS nebo webového produktu je roadmapa užitečná jen tehdy, když pomáhá říkat „ne“, ne když rozšiřuje backlog do délky dálniční kolony v pátek odpoledne.
+
+Největší past roadmapy je slibování konkrétních funkcí bez pochopení problému. Zákazník řekne „potřebujeme export do Excelu“, tým zapíše „Excel export“, obchod to zmíní v nabídce, vývoj to odloží, zákazník se za tři měsíce připomene a všichni jsou překvapení. Přitom původní problém mohl být úplně jiný: zákazník potřeboval jednou měsíčně poslat přehled vedení a stačilo by PDF, automatický e-mail nebo sdílený dashboard.
+
+Roadmapa má proto začínat problémem, ne funkcí.
+
+### CC.1 Rozliš tři vrstvy roadmapy
+
+Jedna roadmapa často míchá strategii, konkrétní úkoly a zákaznické sliby. To je recept na chaos s barevnými štítky. Rozděl ji do tří vrstev:
+
+- **Směr:** dlouhodobé produktové téma, například „zrychlit aktivaci nových zákazníků“.
+- **Sázka:** konkrétní oblast práce na nejbližší týdny, například „zjednodušit první import dat“.
+- **Dodávka:** konkrétní změna, například „přidat validaci CSV před uložením“.
+
+Směr je stabilní. Sázka se může změnit podle nových poznatků. Dodávka je nejmenší část, kterou dokážeš navrhnout, dodat a vyhodnotit.
+
+Příklad:
+
+- Směr: Snížit počet ručních zásahů při onboardingu.
+- Sázka: Uživatelé potřebují bezpečně importovat první data bez podpory.
+- Dodávka: Kontrola formátu souboru, náhled prvních řádků a jasná chybová hláška.
+
+Když zákazník požádá o novou funkci, nezařazuj ji rovnou do dodávek. Nejdřív ji přelož do směru a sázky. Teprve potom rozhodni, jestli do roadmapy patří.
+
+### CC.2 Každá položka musí mít důvod a hranici
+
+Položka typu „vylepšit dashboard“ nic neříká. Co je špatně? Pro koho? Jaký dopad čekáme? Co už do toho nepatří?
+
+Dobrá položka roadmapy obsahuje:
+
+- **Problém:** jaká situace se opakuje a komu vadí.
+- **Dopad:** co stojí čas, peníze, důvěru nebo příležitosti.
+- **Cílová skupina:** koho se změna týká jako prvního.
+- **Signál úspěchu:** podle čeho poznáme posun.
+- **Hranice:** co teď výslovně neřešíme.
+- **Riziko:** co se může rozbít technicky, obchodně nebo datově.
+
+Příklad špatně:
+
+> Přidat týmové role.
+
+Příklad lépe:
+
+> Menší agentury sdílejí jeden účet mezi více lidmi, protože se bojí dát všem plný přístup. Chceme umožnit základní role správce a editor, aby tým nemusel sdílet hesla. Teď neřešíme detailní oprávnění po jednotlivých modulech.
+
+Taková položka je mnohem lépe uchopitelná. Vývoj ví, kde jsou hranice. Obchod ví, co může slíbit. Support ví, jak poznat relevantní dotazy.
+
+### CC.3 Neslibuj datum, dokud neznáš nejistotu
+
+Datum v roadmapě je užitečné až ve chvíli, kdy víš, co dodáváš a jak velká je nejistota. U raných nápadů je lepší používat časové horizonty než konkrétní den.
+
+Praktické horizonty:
+
+- **Teď:** rozpracované sázky, které mají jasný problém, vlastníka a další krok.
+- **Příště:** důležité položky, které potřebují ještě discovery nebo technické ověření.
+- **Později:** dobré nápady bez okamžité priority.
+- **Ne teď:** věci, které vědomě odmítáme nebo odkládáme.
+
+Konkrétní termín dávej jen k dodávkám, které jsou dostatečně malé, odhadnuté a mají vyřešené závislosti. Když termín používáš jako uklidňovací tablet pro zákazníka, vyrábíš si budoucí bolest. A bolest v kalendáři má zvláštní talent přijít v pátek v 16:40.
+
+*Codyho komentář:* Roadmapa bez nejistoty je pohádka. Roadmapa s přiznanou nejistotou je manažerský nástroj. Méně lesku, víc kyslíku.
+
+### CC.4 Zákaznické požadavky sbírej jako důkazy, ne jako rozkazy
+
+Zákazník má pravdu v tom, že ho něco bolí. Nemusí mít pravdu v tom, jaké řešení máš postavit. To není arogance. To je produktová odpovědnost.
+
+U každého požadavku si zapiš:
+
+- kdo požadavek řekl,
+- v jaké situaci vznikl,
+- jaký problém se snažil vyřešit,
+- jak často se problém děje,
+- co dnes zákazník dělá ručně,
+- jaký dopad má neřešení,
+- zda stejný problém potvrdili i další zákazníci,
+- jestli existuje menší řešení než nová funkce.
+
+Tři podobné požadavky nejsou automaticky priorita. Mohou být jen tři různé projevy jednoho hlubšího problému. Roadmapa má hledat společný vzor, ne slepě sčítat hlasy.
+
+Privacy-first poznámka: u zákaznických požadavků si dávej pozor, aby se z evidence nestal šuplík osobních detailů. Často stačí firma, segment, role, problém a anonymizovaný citát. Nepotřebuješ kopírovat celé e-maily, interní jména ani citlivé ukázky dat.
+
+### CC.5 Veřejná roadmapa má být opatrná a lidská
+
+Veřejná roadmapa může pomoci důvěře, ale jen když je poctivě formulovaná. Neslibuj „hotovo v Q4“, pokud tím myslíš „možná se na to někdo podívá, až doběhne migrace databáze a vesmír bude laskavý“.
+
+Bezpečnější formulace:
+
+- „Zkoumáme“ — problém je relevantní, ale řešení není vybrané.
+- „Plánujeme“ — řešení dává smysl, ale rozsah se ještě může změnit.
+- „Pracujeme na tom“ — je jasný vlastník a probíhá implementace.
+- „Dostupné“ — změna je venku a má odkaz na dokumentaci nebo poznámky k vydání.
+
+K veřejné položce přidej raději krátký kontext než přesné datum:
+
+> Pracujeme na jednodušším importu kontaktů pro malé týmy. Cílem je snížit počet chyb při prvním nastavení. Neplánujeme zatím obousměrnou synchronizaci s externími CRM.
+
+Tahle věta nastavuje očekávání a zároveň chrání tým před tím, aby se roadmapa změnila na právně nešťastný katalog slibů.
+
+### CC.6 Roadmap review dělej pravidelně, ale krátce
+
+Roadmapa bez údržby se mění v muzeum dobrých úmyslů. Stačí krátké měsíční review, kde tým projde hlavní sázky a rozhodne, co zůstává, co se mění a co mizí.
+
+Agenda na 45 minut:
+
+1. Co jsme dodali a jaký to mělo dopad?
+2. Které zákaznické signály se opakovaly?
+3. Které sázky pořád dávají smysl?
+4. Kde máme největší nejistotu?
+5. Co přesuneme do „ne teď“?
+6. Jaká jedna sázka je nejdůležitější pro další období?
+
+Výstupem nemá být přeplánovaný vesmír. Výstupem má být rozhodnutí: co je teď nejdůležitější a proč. Když po review přibude do roadmapy deset nových položek a žádná nezmizí, nebylo to review. Byl to sběrný dvůr.
+
+### CC.7 Šablona: karta roadmapové sázky
+
+```markdown
+## Roadmapová sázka: [název]
+
+### Problém
+- Kdo problém má:
+- Kdy se objevuje:
+- Co dnes zákazník dělá ručně nebo obchází:
+
+### Dopad
+- Dopad na zákazníka:
+- Dopad na produkt / support / prodej:
+
+### Hypotéza
+Věříme, že když [změna], tak [cílová skupina] dosáhne [výsledek], protože [důvod].
+
+### Signály úspěchu
+- Primární signál:
+- Kontrolní signál:
+- Kvalitativní signál:
+
+### Hranice
+- Teď řešíme:
+- Teď neřešíme:
+
+### Rizika
+- Technická:
+- Obchodní:
+- Privacy / data:
+
+### Stav
+- Horizont: Teď / Příště / Později / Ne teď
+- Vlastník:
+- Další rozhodnutí do:
+```
+
+### CC.8 Privacy-first checklist pro roadmapu
+
+- [ ] Roadmapa popisuje problémy a sázky, ne jen seznam funkcí.
+- [ ] Každá aktivní položka má cílovou skupinu, dopad a hranice.
+- [ ] Zákaznické požadavky jsou anonymizované tam, kde detail není nutný.
+- [ ] Veřejná roadmapa neslibuje konkrétní datum bez vysoké jistoty.
+- [ ] Položky týkající se dat mají popsaný dopad na sběr, ukládání, export a mazání.
+- [ ] Nové integrace procházejí otázkou: kde budou data a kdo k nim bude mít přístup?
+- [ ] Do „ne teď“ pravidelně přesouváme věci, které už nejsou důležité.
+- [ ] Roadmap review končí rozhodnutím, ne jen delším backlogem.
+- [ ] Obchod, support i vývoj používají stejný stav položek.
+- [ ] Změny očekávání umíme zákazníkům vysvětlit lidsky a bez marketingové mlhy.
+
+Dobrá roadmapa není věštírna. Je to kompas. Ukazuje směr, přiznává nejistotu a pomáhá týmu dělat lepší rozhodnutí v čase. Když navazuje na zákaznické rozhovory, experimenty a provozní realitu, přestane být dokumentem „někde v nástroji“ a začne být produkční pamětí týmu.
+
+
 ## Pracovní log
+- 2026-09-01 04:01 UTC — Doplněna příloha CC o roadmapě bez slibotechny: vrstvy směru, sázky a dodávky, karta položky, práce se zákaznickými požadavky, veřejná roadmapa, měsíční review, šablona a privacy-first checklist.
 - 2026-09-01 03:00 UTC — Doplněna příloha CB o produktových experimentech bez sledovací laboratoře: rozhodovací hypotézy, datové minimum, agregované měření, experimentální kartu, krátký běh, vyhodnocení bez ega a privacy-first checklist.
 - 2026-09-01 02:00 UTC — Doplněna příloha CA o interní znalostní bázi: opakované otázky, strukturu podle rozhodnutí, vlastnictví dokumentů, checklistové postupy, oddělení poznámek od platných pravidel, přístupová práva, měsíční úklid, šablonu a privacy-first checklist.
 - 2026-09-01 01:00 UTC — Doplněna příloha BZ o provozním modelu produktu: role a odpovědnosti, úrovně rozhodnutí, karta iniciativy, provozní rytmus, rozhodovací měření, deník rozhodnutí, šablona a privacy-first checklist.
