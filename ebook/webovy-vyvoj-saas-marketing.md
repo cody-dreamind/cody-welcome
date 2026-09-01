@@ -13899,7 +13899,183 @@ Tento deník chrání tým před opakováním debat. Také pomáhá novým lidem
 
 Provozní model nemusí být těžký. Naopak: dobrý model zjednodušuje život, protože odstraňuje hádání, kdo má co rozhodnout, kdy se k čemu vrátit a proč se některé nápady nebudou dělat. Produkt pak neroste jako náhodný keř u plotu, ale jako systém, který má směr, odpovědnost a dostatek klidu na kvalitní práci.
 
+## Příloha CA: Interní znalostní báze, která nehnije v rohu cloudu
+
+Každý webový nebo SaaS projekt časem vyrobí znalosti: proč je formulář krátký, kdo schvaluje texty, jak obnovit zálohu, co zákazníci nechápou v onboardingu, proč se nepoužívá určitý tracker, kde běží produkce a co se nesmí pokazit před kampaní. Když tyhle znalosti zůstanou jen v hlavách, chatech a starých e-mailech, tým začne platit daň z opakovaného zapomínání.
+
+Znalostní báze není muzeum dokumentů. Je to provozní nástroj, který pomáhá lidem dělat správná rozhodnutí bez toho, aby pokaždé vyvolávali duchy minulých meetingů. U malého týmu stačí velmi jednoduchý systém. Důležité je, aby se používal, měl vlastníka a obsahoval věci, které opravdu šetří čas nebo snižují riziko.
+
+*Codyho komentář:* Nejhorší dokumentace není ta krátká. Nejhorší je ta, která vypadá důležitě, ale nikdo jí nevěří. To je pak firemní fantasy literatura, jen bez draků a s horší navigací.
+
+### CA.1 Začni otázkami, ne nástrojem
+
+Nejdřív neřeš, jestli znalostní báze poběží v Notionu, Git repozitáři, wiki, Markdownu, intranetu nebo sdílené složce. Nástroj je až druhý krok. První krok je zjistit, jaké otázky se v týmu opakují.
+
+Typické otázky:
+
+- Jak se nasazuje nová verze?
+- Kdo má přístup do produkce?
+- Jaký je postup při výpadku formuláře?
+- Jak vzniká nový blogový článek nebo landing page?
+- Kde jsou brand podklady a tone of voice?
+- Jaké metriky sledujeme a proč?
+- Jaká data sbíráme, jak dlouho je držíme a komu je posíláme?
+- Co se zákazníkovi slíbilo v nabídce nebo během onboardingu?
+
+Každá opakovaná otázka je kandidát na krátký dokument. Pokud se otázka objeví potřetí, už není „rychle se zeptám“. Je to chybějící provozní paměť.
+
+### CA.2 Rozděl znalosti podle rozhodnutí
+
+Dobrá znalostní báze se neorganizuje podle toho, kdo dokument napsal, ale podle toho, k jakému rozhodnutí nebo akci slouží. Malý SaaS tým může začít pěti složkami:
+
+- **Produkt:** cílové segmenty, hlavní hodnota, roadmapa, rozhodovací deník, zákaznické signály.
+- **Web a marketing:** nabídka, landing pages, obsahový plán, SEO poznámky, distribuční kanály, brand hlas.
+- **Provoz:** nasazení, monitoring, zálohy, incidenty, servisní rytmus, technické kontakty.
+- **Data a soukromí:** mapa dat, retenční pravidla, dodavatelé, souhlasy, cookies, export a mazání dat.
+- **Zákazníci:** onboarding, support postupy, šablony odpovědí, review, renewal, časté námitky.
+
+Tahle struktura není svatá. Je jen dost dobrá na start. Pokud má tým víc projektů, může mít každý projekt vlastní kartu a sdílené šablony bokem. Pokud je tým malý, nedělej z toho korporátní katedrálu. Pět složek, jasné názvy a rozumné vyhledávání udělají víc než dvacet podkategorií, které zná jen člověk, který je v pátek večer vytvořil.
+
+### CA.3 Každý dokument musí mít účel, vlastníka a datum obnovy
+
+Dokument bez vlastníka začne stárnout už při uložení. Ne proto, že by byl špatný, ale protože realita je drzá a průběžně se mění. Proto ke každé důležité stránce přidej jednoduchou hlavičku:
+
+- **Účel:** k čemu dokument slouží.
+- **Vlastník:** kdo ručí za správnost.
+- **Poslední kontrola:** kdy se dokument naposledy ověřil.
+- **Další kontrola:** kdy se k němu tým vrátí.
+- **Citlivost:** veřejné, interní, důvěrné, nebo omezené na konkrétní role.
+
+Příklad:
+
+```markdown
+Účel: Postup pro obnovu databáze ze zálohy.
+Vlastník: Technický vlastník produktu.
+Poslední kontrola: 2026-09-01.
+Další kontrola: 2026-12-01.
+Citlivost: Důvěrné, bez tajných hodnot v dokumentu.
+```
+
+U privacy-first provozu je položka citlivosti zásadní. Znalostní báze nesmí být skladiště hesel, tokenů, osobních údajů a exportů zákaznických dat. Dokumentace má říkat, kde se bezpečně spravují tajné hodnoty a kdo má přístup, ne opisovat tajemství přímo do textu. Ano, je to méně pohodlné než „hodím to do wiki“. Přesně o to jde. Pohodlí je často jen bezpečnostní dluh v teplákách.
+
+### CA.4 Piš postupy jako checklisty, ne jako romány
+
+Provozní dokumentace se čte často ve stresu: něco nefunguje, zákazník čeká, kampaň běží, fakturace zlobí, nový člověk neví, kde začít. V tu chvíli nikdo nechce číst tři obrazovky filozofie.
+
+U každého postupu používej strukturu:
+
+1. **Kdy postup použít.**
+2. **Co předem ověřit.**
+3. **Kroky v pořadí.**
+4. **Jak poznat, že je hotovo.**
+5. **Co dělat při chybě.**
+6. **Kam zapsat výsledek.**
+
+Příklad pro vydání nové landing page:
+
+- Kdy použít: při spuštění nové nabídky, kampaně nebo segmentové stránky.
+- Ověřit předem: cílovka, hlavní CTA, meta title, meta description, kanonická URL, měření CTA, odkaz ze sitemap.
+- Kroky: připravit text, zkontrolovat důkazní prvky, ověřit mobil, projít rychlost, publikovat, zapsat do obsahového logu.
+- Hotovo: stránka je dostupná, indexovatelná, měření funguje a obchod ví, kam odkazovat.
+- Při chybě: vrátit poslední stabilní verzi nebo stránku dočasně stáhnout z navigace.
+- Zápis: datum spuštění, vlastník, očekávaný výsledek, kontrola za 30 dní.
+
+Krátké checklisty s jasným „hotovo“ jsou lepší než dlouhé dokumenty s mlhavým „mělo by se“. Dokumentace má snižovat nejistotu, ne vytvářet nový interpretační sport.
+
+### CA.5 Rozlišuj trvalé znalosti a pracovní poznámky
+
+Ne všechno patří do znalostní báze. Pracovní poznámky, brainstorming, výstřižky a rychlé nápady jsou užitečné, ale nemají stejnou hodnotu jako ověřený postup nebo rozhodnutí. Když se všechno smíchá dohromady, lidé přestanou vědět, čemu věřit.
+
+Používej dvě vrstvy:
+
+- **Pracovní prostor:** poznámky z meetingů, návrhy, rešerše, otevřené otázky, surové nápady.
+- **Znalostní báze:** platné postupy, rozhodnutí, šablony, pravidla, mapy systémů, provozní checklisty.
+
+Přesun z pracovní poznámky do znalostní báze má být vědomý krok. Někdo musí text zkrátit, ověřit a doplnit vlastníka. Jinak se z wiki stane půda plná krabic, na kterých je fixou napsáno „důležité asi“.
+
+### CA.6 Přístupová práva nastav podle potřeby, ne podle pohodlnosti
+
+Znalostní báze často obsahuje mapu firmy: systémy, dodavatele, zákaznické procesy, incidenty, bezpečnostní postupy a rozhodovací logiku. To všechno je cenné. Nemusí to být tajné jako plán ponorky, ale rozhodně to nemá být veřejně dostupné jen proto, že odkaz „nikdo nezná“.
+
+Privacy-first pravidla:
+
+- Veřejné mohou být jen materiály určené pro veřejnost: dokumentace produktu, blogové šablony, brand zásady nebo transparentní stránka o soukromí.
+- Interní dokumenty mají být dostupné lidem, kteří je potřebují pro práci.
+- Důvěrné provozní postupy mají mít omezený přístup a pravidelné review.
+- Tajné hodnoty patří do správce tajemství, ne do dokumentu.
+- Při odchodu člověka se ruší přístupy i do znalostní báze.
+- Externí dodavatel dostane jen konkrétní prostor nebo export, ne celou firemní paměť.
+
+Praktický test: kdyby se dokument omylem poslal zákazníkovi, vadilo by to? Pokud ano, nastav mu citlivost a přístup podle reality. Pokud ne, možná může být otevřenější a pomůže důvěře.
+
+### CA.7 Měsíční úklid je levnější než roční archeologie
+
+Znalostní báze stárne potichu. Odkazy přestanou platit, nástroje se vymění, postupy se obejdou „jen jednou“, vlastník odejde a dokument zůstane jako provozní zombie. Proto potřebuje krátký rytmus údržby.
+
+Jednou měsíčně projdi:
+
+- dokumenty s prošlou další kontrolou,
+- postupy používané při incidentech nebo supportu,
+- nové opakované otázky z týmu,
+- změny nástrojů a dodavatelů,
+- dokumenty bez vlastníka,
+- stránky s citlivými informacemi,
+- šablony, které lidé ignorují.
+
+Údržba nemusí trvat dlouho. Stačí vybrat tři až pět dokumentů, které mají nejvyšší dopad. Cílem není dokonalá knihovna. Cílem je, aby lidé věděli, kde najít aktuální odpověď, když ji potřebují.
+
+### CA.8 Šablona: stránka znalostní báze
+
+```markdown
+# [Název dokumentu]
+
+Účel:
+Vlastník:
+Poslední kontrola:
+Další kontrola:
+Citlivost:
+
+## Kdy dokument použít
+- 
+
+## Rychlé shrnutí
+- 
+
+## Postup / pravidlo
+1. 
+2. 
+3. 
+
+## Jak poznáme, že je hotovo
+- 
+
+## Co dělat při problému
+- 
+
+## Související dokumenty
+- 
+
+## Změny
+- [datum] — [co se změnilo a proč]
+```
+
+### CA.9 Checklist: znalostní báze, která pomáhá
+
+- [ ] Znalostní báze odpovídá na opakované otázky týmu.
+- [ ] Dokumenty jsou uspořádané podle rozhodnutí a akcí, ne podle autorů.
+- [ ] Každá důležitá stránka má účel, vlastníka, datum kontroly a citlivost.
+- [ ] Provozní postupy jsou napsané jako checklisty s jasným stavem „hotovo“.
+- [ ] Pracovní poznámky jsou oddělené od platných postupů.
+- [ ] Tajné hodnoty, tokeny a osobní údaje nejsou uložené v dokumentaci.
+- [ ] Přístupy odpovídají rolím a pravidelně se kontrolují.
+- [ ] Externí dodavatelé nevidí víc, než potřebují.
+- [ ] Měsíčně se aktualizují nejdůležitější nebo prošlé dokumenty.
+- [ ] Nové rozhodnutí se zapisuje tam, kde ho lidé příště opravdu najdou.
+
+Znalostní báze má být druhý mozek produktu, ne digitální skládka. Když je krátká, aktuální a bezpečně spravovaná, pomáhá rychleji onboardovat lidi, méně opakovat chyby a držet privacy-first provoz i ve chvílích, kdy je tým pod tlakem. A přesně tehdy se pozná, jestli dokumentace žije, nebo jen zabírá hezké místo v navigaci.
+
 ## Pracovní log
+- 2026-09-01 02:00 UTC — Doplněna příloha CA o interní znalostní bázi: opakované otázky, strukturu podle rozhodnutí, vlastnictví dokumentů, checklistové postupy, oddělení poznámek od platných pravidel, přístupová práva, měsíční úklid, šablonu a privacy-first checklist.
 - 2026-09-01 01:00 UTC — Doplněna příloha BZ o provozním modelu produktu: role a odpovědnosti, úrovně rozhodnutí, karta iniciativy, provozní rytmus, rozhodovací měření, deník rozhodnutí, šablona a privacy-first checklist.
 - 2026-09-01 00:00 UTC — Doplněna příloha BY o roční obnově webu a SaaS: změny reality, oddělení kosmetiky od obchodních problémů, obsahový a technický audit, privacy-first úklid, hlavní sázka na další rok, šablona a checklist.
 - 2026-08-31 23:00 UTC — Doplněna příloha BX o servisním režimu po spuštění: servisní slib, rozlišení incidentů a drobných změn, reakční časy, měsíční report, servisní backlog, privacy-first hygienu, servisní kartu a checklist.
