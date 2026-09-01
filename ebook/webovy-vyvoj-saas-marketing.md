@@ -14074,7 +14074,187 @@ Citlivost:
 
 Znalostní báze má být druhý mozek produktu, ne digitální skládka. Když je krátká, aktuální a bezpečně spravovaná, pomáhá rychleji onboardovat lidi, méně opakovat chyby a držet privacy-first provoz i ve chvílích, kdy je tým pod tlakem. A přesně tehdy se pozná, jestli dokumentace žije, nebo jen zabírá hezké místo v navigaci.
 
+
+## Příloha CB: Produktové experimenty bez sledovací laboratoře
+
+Produktový experiment má být krátká cesta od otázky k rozhodnutí. Ne výmluva pro nekonečné měření všeho, co se na webu pohne. Malý SaaS tým nepotřebuje sledovat každý kurzor, nahrávat obrazovky a skládat psychologický profil návštěvníka. Potřebuje vědět, jestli konkrétní změna pomohla konkrétnímu obchodnímu nebo uživatelskému výsledku.
+
+Experiment bez jasné otázky je jen dražší forma hádání. A experiment s příliš agresivním sběrem dat je zase krásná ukázka toho, jak si kvůli jedné metrice vyrobit zbytečné právní, technické a reputační riziko. Privacy-first přístup neznamená, že neměříš. Znamená, že měříš úsporně, vysvětlitelně a s respektem.
+
+*Codyho komentář:* Když někdo říká „potřebujeme víc dat“, často tím myslí „nechce se nám rozhodnout“. Data jsou super. Datový močál už méně. Tam se pak topí roadmapa i zdravý rozum.
+
+### CB.1 Začni rozhodnutím, které chceš udělat
+
+Nejdřív si napiš, jaké rozhodnutí budeš po experimentu schopný udělat. Bez toho nemá smysl experiment spouštět.
+
+Dobré experimentální otázky:
+
+- Zlepší kratší poptávkový formulář počet kvalitních odeslání?
+- Pomůže jasnější pricing karta zvýšit počet domluvených demo hovorů?
+- Sníží checklist v onboardingu počet support dotazů v prvním týdnu?
+- Přivede technický článek více relevantních poptávek než obecný trendový článek?
+- Zlepší viditelnější privacy-first vysvětlení důvěru u B2B návštěvníků?
+
+Slabé otázky:
+
+- Funguje nový design lépe?
+- Líbí se lidem naše stránka?
+- Máme přidat AI funkci?
+- Je newsletter dobrý nápad?
+
+Slabé otázky jsou příliš široké. Neříkají, co změnit, co měřit ani jaké rozhodnutí udělat. Přepiš je na konkrétní hypotézu:
+
+> Pokud na stránku pricingu přidáme krátké vysvětlení, pro koho je každý balíček vhodný, zvýší se počet kliknutí na „Domluvit demo“ u návštěvníků z B2B obsahu.
+
+Tahle věta má změnu, cílový segment, očekávaný výsledek i měřitelný signál. Najednou nejde o „pocit z designu“, ale o rozhodnutí: nechat, upravit, nebo zahodit.
+
+### CB.2 Měř jen signály, které ovlivní rozhodnutí
+
+Před spuštěním experimentu si napiš tři typy signálů:
+
+- **Primární signál:** hlavní metrika, podle které rozhodneš.
+- **Kontrolní signál:** metrika, která hlídá, že sis nepomohl na jednom místě a nerozbil jiné.
+- **Kvalitativní signál:** poznámky ze supportu, obchodních hovorů nebo odpovědí zákazníků.
+
+Příklad pro zjednodušení formuláře:
+
+- Primární signál: počet relevantních odeslaných poptávek za týden.
+- Kontrolní signál: podíl poptávek, které musí obchod dodatečně dovysvětlovat.
+- Kvalitativní signál: poznámky lidí, kteří formulář vyplnili nebo nedokončili během hovoru.
+
+Příklad pro nový onboarding checklist:
+
+- Primární signál: počet účtů, které dokončí první hodnotnou akci do sedmi dnů.
+- Kontrolní signál: počet support ticketů k nastavení.
+- Kvalitativní signál: tři nejčastější věty nových uživatelů během onboarding hovoru.
+
+Privacy-first pravidlo: když metrika neovlivní rozhodnutí, nesbírej ji. Pokud chceš jen „možná se bude hodit“, většinou se nehodí. Jen nafukuje datový batoh, komplikuje vysvětlení uživatelům a vytváří další místo, které musíš zabezpečit.
+
+### CB.3 Nepotřebuješ sledovat člověka, stačí sledovat cestu
+
+U webu a SaaS často stačí agregované události. Nemusíš vědět, že konkrétní osoba ve 14:03 najela myší na tlačítko a pak se vrátila na pricing. Často stačí vědět:
+
+- kolik lidí navštívilo stránku,
+- kolik kliklo na hlavní CTA,
+- kolik dokončilo formulář,
+- kolik začalo onboarding,
+- kolik dokončilo aktivační krok,
+- kolik přišlo z přímého odkazu, RSS, vyhledávání nebo partnerské stránky.
+
+U SaaS produktu můžeš měřit stav účtu místo chování jednotlivce:
+
+- účet má vytvořený první projekt,
+- účet pozval prvního kolegu,
+- účet připojil integraci,
+- účet dokončil import,
+- účet za poslední týden použil klíčovou funkci,
+- účet má otevřený kritický support problém.
+
+Tohle je praktičtější i bezpečnější. Produktový tým vidí, kde cesta drhne, ale nevyrábí si detailní sledovací kroniku každého uživatele. Pokud opravdu potřebuješ individuální kontext pro support, drž ho omezený, vysvětlený a přístupný jen lidem, kteří ho potřebují.
+
+### CB.4 Malý experiment navrhni jako kartu
+
+Každý experiment zapiš do krátké karty. Stačí jedna obrazovka.
+
+```markdown
+# Experiment: [název]
+
+Rozhodnutí:
+Hypotéza:
+Cílová skupina:
+Změna:
+Primární signál:
+Kontrolní signál:
+Kvalitativní signál:
+Doba běhu:
+Datové minimum:
+Rizika:
+Výsledek:
+Rozhodnutí po experimentu:
+```
+
+Vyplněný příklad:
+
+```markdown
+# Experiment: Kratší formulář na B2B landing page
+
+Rozhodnutí: Nechat kratší formulář, nebo se vrátit k původní verzi.
+Hypotéza: Kratší formulář zvýší počet relevantních poptávek bez poklesu kvality.
+Cílová skupina: Návštěvníci z článků o privacy-first SaaS provozu.
+Změna: Formulář bude chtít jen jméno, e-mail, firmu a krátký popis potřeby.
+Primární signál: Počet relevantních poptávek za 14 dní.
+Kontrolní signál: Kolik poptávek vyžaduje dodatečné základní dovysvětlení.
+Kvalitativní signál: Poznámky z prvních pěti follow-up odpovědí.
+Doba běhu: 14 dní nebo minimálně 20 poptávek.
+Datové minimum: Bez session replaye, bez reklamních pixelů, bez obohacování kontaktů.
+Rizika: Méně kontextu pro obchod, více krátkých nekvalitních zpráv.
+Výsledek: [doplnit po doběhu]
+Rozhodnutí po experimentu: [nechat / upravit / zahodit]
+```
+
+Karta chrání tým před dvěma častými zlozvyky: měnit experiment uprostřed běhu podle nálady a po doběhu se tvářit, že jsme vlastně měřili něco jiného. Ano, i roadmapa někdy umí dělat gymnastiku. Karta jí trochu narovná záda.
+
+### CB.5 Drž experiment krátký, ale ne hysterický
+
+Experiment nemá běžet věčně. Zároveň nemá končit po třech hodinách jen proto, že první číslo vypadá hezky. U menších webů a SaaS projektů si předem nastav:
+
+- minimální dobu běhu,
+- minimální počet relevantních událostí,
+- kdo vyhodnocuje výsledek,
+- kdy se změna vrátí zpět, pokud škodí,
+- kam se zapíše rozhodnutí.
+
+Praktické rámce:
+
+- **Landing page:** 14 až 30 dní, pokud má nízkou návštěvnost.
+- **Onboarding krok:** alespoň jedna až dvě nové vlny uživatelů.
+- **E-mailová sekvence:** alespoň jeden celý cyklus od přihlášení po požadovanou akci.
+- **Support změna:** minimálně týden běžného provozu a několik reálných dotazů.
+- **Pricing vysvětlení:** měřit nejen kliknutí, ale i kvalitu následných hovorů.
+
+U malých čísel nehledej falešnou statistickou jistotu. Ber experiment jako řízené učení. Když výsledek není jasný, další krok nemusí být „měřit déle“. Často je lepší udělat pět zákaznických rozhovorů, projít support dotazy a vylepšit hypotézu.
+
+### CB.6 Vyhodnocuj rozhodnutí, ne ego autora
+
+Experimenty bolí, když jsou svázané s tím, kdo nápad přinesl. Proto už při zápisu odděl nápad od člověka. Neříkej „Petrova varianta nefungovala“. Řekni „hypotéza se nepotvrdila v tomto segmentu a za těchto podmínek“.
+
+Vyhodnocení má obsahovat:
+
+- co jsme změnili,
+- jak dlouho experiment běžel,
+- jaké signály jsme sledovali,
+- co se zlepšilo,
+- co se zhoršilo,
+- co neumíme z dat vyčíst,
+- jaké rozhodnutí děláme,
+- co se zapíše do znalostní báze.
+
+Příklad závěru:
+
+> Kratší formulář zvýšil počet odeslání, ale snížil kvalitu poptávek. Necháváme kratší formulář, ale přidáváme jednu povinnou otázku na typ projektu. Za 14 dní zkontrolujeme, jestli se kvalita vrátila bez výrazného poklesu objemu.
+
+Tohle je užitečné rozhodnutí. Není to vítězství ani prohra. Je to lepší mapa.
+
+### CB.7 Privacy-first checklist pro experimenty
+
+- [ ] Experiment má jasné rozhodnutí, které po doběhu uděláme.
+- [ ] Hypotéza obsahuje cílovou skupinu, změnu a očekávaný výsledek.
+- [ ] Primární metrika přímo souvisí s rozhodnutím.
+- [ ] Kontrolní metrika hlídá vedlejší škody.
+- [ ] Kvalitativní signál doplňuje čísla lidským kontextem.
+- [ ] Nesbíráme data „pro jistotu“.
+- [ ] Nepoužíváme reklamní pixely, session replay ani skryté obohacování kontaktů.
+- [ ] Pokud měříme uživatelské události, preferujeme agregace a stav účtu před osobním profilem.
+- [ ] Přístupy k experimentálním datům má jen tým, který je potřebuje.
+- [ ] Po vyhodnocení smažeme nebo agregujeme dočasná pracovní data.
+- [ ] Výsledek je zapsaný v rozhodovacím deníku nebo znalostní bázi.
+- [ ] Zákazníkům umíme jednoduše vysvětlit, co a proč měříme.
+
+Produktové experimenty jsou nejlepší, když jsou malé, poctivé a rozhodovací. Neslouží k tomu, aby tým sbíral víc dat než konkurence. Slouží k tomu, aby tým rychleji poznal, co zákazníkům opravdu pomáhá — a přitom neztratil důvěru lidí, kteří mu svěřili svůj čas, kontakt nebo firemní data.
+
+
 ## Pracovní log
+- 2026-09-01 03:00 UTC — Doplněna příloha CB o produktových experimentech bez sledovací laboratoře: rozhodovací hypotézy, datové minimum, agregované měření, experimentální kartu, krátký běh, vyhodnocení bez ega a privacy-first checklist.
 - 2026-09-01 02:00 UTC — Doplněna příloha CA o interní znalostní bázi: opakované otázky, strukturu podle rozhodnutí, vlastnictví dokumentů, checklistové postupy, oddělení poznámek od platných pravidel, přístupová práva, měsíční úklid, šablonu a privacy-first checklist.
 - 2026-09-01 01:00 UTC — Doplněna příloha BZ o provozním modelu produktu: role a odpovědnosti, úrovně rozhodnutí, karta iniciativy, provozní rytmus, rozhodovací měření, deník rozhodnutí, šablona a privacy-first checklist.
 - 2026-09-01 00:00 UTC — Doplněna příloha BY o roční obnově webu a SaaS: změny reality, oddělení kosmetiky od obchodních problémů, obsahový a technický audit, privacy-first úklid, hlavní sázka na další rok, šablona a checklist.
