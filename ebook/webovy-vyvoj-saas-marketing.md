@@ -20575,8 +20575,167 @@ Tento drill často odhalí drobnosti, které zákazníkovi kazí důvěru: nejas
 
 ---
 
+## Příloha DP: Import dat bez rozbitého účtu a tichého chaosu
+
+Import dat vypadá jako pohodlná funkce: nahraješ CSV, klikneš na tlačítko a hotovo. V realitě je to malá migrace, která se tváří jako formulář. Umí vytvořit duplicity, přepsat správná data, rozbít vazby, obejít validační pravidla a zanést do produktu osobní údaje, které tam vůbec neměly být. Privacy-first SaaS proto bere import jako řízený proces, ne jako magickou díru do databáze.
+
+### DP.1 Import začíná účelem, ne souborem
+
+Nejdřív si napiš, proč import existuje. „Zákazník chce nahrát data“ je slabá odpověď. Lepší je: zákazník chce převést kontakty ze starého systému, připravit katalog produktů, založit uživatele pro pilot nebo doplnit historická obchodní data. Každý účel má jiný rozsah, jiná oprávnění a jiné riziko.
+
+Příklad rozdělení:
+
+- **Kontakty:** vysoké riziko osobních údajů, silná kontrola duplicity.
+- **Produkty nebo položky katalogu:** nižší privacy riziko, ale vysoké riziko obchodního chaosu.
+- **Uživatelé:** bezpečnostní riziko, nutné pozvánky a role.
+- **Historické objednávky:** účetní a analytické dopady, často lepší read-only režim.
+- **Konfigurace účtu:** malý objem, vysoký dopad na provoz.
+
+Když účel není jasný, import se rychle změní na skládku: „nahrajeme všechno a pak uvidíme“. To je strategie, která zní pružně jen do chvíle, než někdo omylem importuje sloupec `private_notes` do sdíleného pohledu.
+
+### DP.2 Přidej náhled, mapování a suchý běh
+
+Bezpečný import má mít mezikroky. Uživatel nahraje soubor, systém ukáže náhled, člověk namapuje sloupce, systém udělá validaci a teprve potom se data zapíšou. Ano, je to o dvě kliknutí víc. Ale je to pořád levnější než tři dny čištění databáze a omluvný e-mail zákazníkovi.
+
+Praktický tok:
+
+1. Nahrání souboru.
+2. Detekce formátu, kódování a oddělovače.
+3. Náhled prvních řádků bez uložení do produkčních tabulek.
+4. Mapování sloupců na produktová pole.
+5. Validace povinných polí, typů, limitů a oprávnění.
+6. Dry-run report: kolik záznamů se vytvoří, aktualizuje, přeskočí nebo odmítne.
+7. Potvrzení zápisu s jasným shrnutím dopadu.
+
+Dry-run report by měl být čitelný i pro člověka mimo vývoj. Ne `row 17 failed constraint fk_customer_42`, ale „Řádek 17: kontakt nemá e-mail ani telefon, nelze ho jednoznačně založit.“ Databáze si může mumlat svoje zaklínadla interně, ale uživateli má produkt říct, co má opravit.
+
+### DP.3 Duplicitám dej pravidla předem
+
+Největší importní bolest nejsou úplně špatná data. Jsou to data skoro správná. Kontakt už existuje, ale má jiné velké písmeno v e-mailu. Firma má nový název. Produkt má stejné SKU, ale jiné mezery. Uživatel omylem nahraje stejný soubor dvakrát. Gratuluji, právě vznikla organická farma duplicit.
+
+Před importem si určete:
+
+- které pole je stabilní identifikátor,
+- kdy se záznam vytvoří jako nový,
+- kdy se aktualizuje existující záznam,
+- která pole se nikdy nepřepisují automaticky,
+- jak se řeší konflikt dvou možných shod,
+- jestli je import idempotentní při opakovaném spuštění.
+
+Příklad pravidla pro kontakty:
+
+| Situace | Akce | Poznámka |
+| --- | --- | --- |
+| Stejný e-mail v rámci účtu | aktualizovat povolená pole | e-mail normalizovat na malá písmena |
+| Stejné jméno, jiný e-mail | vytvořit návrh ke kontrole | nehádat automaticky |
+| Chybí e-mail i telefon | odmítnout řádek | bez stabilního kontaktu |
+| Sloupec `notes` obsahuje citlivé údaje | upozornit a vyžádat potvrzení nebo vynechat | privacy-first výchozí volba je vynechat |
+
+Tahle pravidla patří do dokumentace importu, ne jen do hlavy vývojáře, který je zrovna na dovolené. Protože samozřejmě bude na dovolené přesně ve chvíli, kdy se import rozbije.
+
+### DP.4 Neimportuj citlivý obsah jen proto, že je ve sloupci
+
+Privacy-first import musí umět říct „tohle sem nepatří“. Soubor od zákazníka může obsahovat osobní poznámky, zdravotní údaje, interní komentáře, rodná čísla, staré tokeny, exporty z CRM nebo texty, které původní systém dovolil, ale nový produkt je vůbec nepotřebuje.
+
+U každého importního pole rozliš:
+
+- povolená pole,
+- volitelná pole,
+- zakázaná pole,
+- pole vyžadující ruční potvrzení,
+- pole ukládaná jen do dočasného importního prostoru,
+- pole, která se agregují nebo zahodí.
+
+Praktické pravidlo: importní mapa má být whitelist, ne blacklist. Tedy „tato pole bereme“, ne „bereme všechno kromě pár zakázaných názvů“. Blacklist prohraje hned ve chvíli, kdy někdo pojmenuje sloupec `private comment`, `poznámka`, `poznamka`, `note_2` nebo kreativně `x`.
+
+### DP.5 Import potřebuje rollback a stop tlačítko
+
+Import může selhat uprostřed. Může projít validací a stejně vytvořit špatný výsledek. Může ho spustit správný uživatel se špatným souborem. Proto musí být dopředu jasné, jak se import zastaví, zruší nebo opraví.
+
+Minimální provozní pravidla:
+
+- každý import má vlastní `import_id`,
+- všechny vytvořené nebo změněné záznamy znají původní import,
+- import běží v dávkách a umí bezpečně pokračovat,
+- uživatel vidí stav: čeká, validuje se, zapisuje se, hotovo, chyba, zrušeno,
+- support umí import najít podle účtu, času a souboru,
+- existuje plán, jak vrátit změny nebo vytvořit opravný import.
+
+Rollback nemusí vždy znamenat „vrať databázi do minulosti“. Často stačí reverzní operace: smazat nově vytvořené položky, obnovit předchozí hodnoty jen u polí změněných importem, nebo označit import jako neplatný a schovat jeho výsledky do doby ruční kontroly. Důležité je, aby se to nevymýšlelo až poté, co zákazník volá a v aplikaci má 12 000 kontaktů jménem Test Testovič.
+
+### DP.6 Odděl importní soubor od produkčních dat
+
+Nahraný soubor není automaticky produktové aktivum. Je to dočasný pracovní materiál. Měl by mít krátkou retenci, omezený přístup a jasné mazání. Produkční data jsou až výsledek schváleného importu, ne samotný upload.
+
+Privacy-first pravidla pro soubory:
+
+- ukládej originál jen pokud je opravdu potřeba,
+- nastav krátkou dobu uchování importního souboru,
+- šifruj soubor v úložišti a omez přístup podpory,
+- nezobrazuj citlivé hodnoty v logu validace,
+- po dokončení drž spíš report než celý soubor,
+- při chybě neodesílej celý soubor e-mailem ani do chatu.
+
+Importní report může zůstat déle než soubor, pokud obsahuje jen bezpečný souhrn: počet řádků, počet chyb, typy chyb, kdo import spustil a jaký byl výsledek. To supportu obvykle stačí. Kompletní soubor ať neleží v systému jako časovaná CSV bomba.
+
+### DP.7 Šablona importní karty
+
+## Importní karta: [název importu]
+
+### Účel
+
+- Proč import existuje:
+- Kdo ho používá:
+- Jaký zákaznický proces nahrazuje:
+
+### Rozsah
+
+- Povolené objekty:
+- Povolená pole:
+- Zakázaná pole:
+- Maximální velikost souboru nebo dávky:
+
+### Mapování a validace
+
+- Stabilní identifikátor:
+- Povinná pole:
+- Pravidla duplicit:
+- Chybové hlášky pro uživatele:
+
+### Bezpečnost a privacy
+
+- Kdo smí import spustit:
+- Kde se drží originální soubor:
+- Jak dlouho se drží originální soubor:
+- Co se zapisuje do auditní stopy:
+
+### Provoz
+
+- Jak funguje dry-run:
+- Jak se import zastaví:
+- Jak se opraví špatný import:
+- Kdo vlastní formát a změny:
+
+### DP.8 Checklist: import bez tiché katastrofy
+
+- Má import jasný účel, vlastníka a dokumentovaný rozsah?
+- Probíhá před zápisem náhled, mapování a dry-run report?
+- Jsou pravidla duplicit popsaná předem?
+- Používá se whitelist povolených polí místo importu všeho?
+- Umí systém odmítnout citlivá nebo nepatřičná data?
+- Má každý import vlastní identifikátor a auditní stopu?
+- Je jasné, jak import zastavit nebo opravit?
+- Ukládá se originální soubor jen po nezbytnou dobu?
+- Neobsahují validační logy celé osobní údaje nebo tajemství?
+- Testuje se import opakovaným nahráním stejného souboru?
+
+*Codyho komentář:* Import je jako stěhování do nového bytu. Neznamená to vysypat všechny krabice doprostřed obýváku a prohlásit „migrace dokončena“. Nejdřív popisky, pak kontrola, potom vybalování — a věci bez účelu rovnou do tříděného odpadu.
+
+---
+
 ## Pracovní log
 
+- 2026-09-02 18:01 UTC — Doplněna příloha DP o bezpečném importu dat: účel importu, náhled a dry-run, pravidla duplicit, whitelist polí, privacy-first zacházení s citlivým obsahem, rollback, retence uploadů, šablona importní karty a checklist.
 - 2026-09-02 17:01 UTC — Doplněna příloha DO o exportu zákaznických dat: rozdíl mezi exportem a zálohou, mapa exportovatelných dat, nudné dokumentované formáty, oprávnění, minimalizace rozsahu, exportní drill, šablona exportní karty a privacy-first checklist.
 - 2026-09-02 16:01 UTC — Doplněna příloha DN o auditní stopě bez šmírování: rozdíl mezi auditem a debug logy, minimalizace polí, viditelnost pro podporu a zákazníka, retence, katalog událostí, šablona auditní karty a privacy-first checklist.
 - 2026-09-02 15:00 UTC — Doplněna příloha DM o retenci dat: účely uchování, retenční matice, automatizované mazání, anonymizace vs. pseudonymizace, zálohy, komunikace se zákazníkem, šablona retenční karty, privacy-first checklist a odkazy na oficiální EU/EDPB zdroje.
