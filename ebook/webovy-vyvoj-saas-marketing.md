@@ -17633,7 +17633,195 @@ Použij tuhle kartu pro každou důležitou integraci. Ideálně ji měj v repoz
 *Codyho komentář:* Integrace je dobrá jen tehdy, když se dá vysvětlit, sledovat, opravit a vypnout. Pokud funguje jen dokud se jí nikdo neptá na otázky, není to integrace. Je to domácí mazlíček z kabelů, který jednoho dne sežere CRM.
 
 
+
+---
+
+## Příloha CX: Webhooky a asynchronní procesy bez tichých ztrát
+
+Webhook je slib: „Až se něco stane, dám ti vědět.“ Jenže v reálném provozu se věci nestávají ideálně. Síť zakašle, cílový server zrovna deployuje, payload má starší formát, zákazník smaže účet uprostřed synchronizace a někdo se diví, proč se faktura tváří jako zaplacená jen v jednom systému. Webhook bez provozního návrhu není automatizace. Je to e-mail, který se neumí omluvit, když nedorazí.
+
+Privacy-first přístup neznamená webhooky nepoužívat. Znamená navrhovat je tak, aby přenášely jen nezbytná data, měly auditovatelný stav, šly bezpečně zopakovat a při chybě nevyráběly datový chaos. Cílem není „poslat JSON“. Cílem je spolehlivě dokončit obchodní událost.
+
+### CX.1 Každý webhook pojmenuj podle události, ne podle endpointu
+
+Začni tím, co se stalo v doméně produktu. Ne `POST /hooks/crm`, ale třeba `lead.created`, `invoice.paid`, `user.export_requested` nebo `subscription.cancelled`. Název události má být srozumitelný i člověku, který nepsal integraci.
+
+Dobrá událost má:
+
+- **spouštěč:** co přesně ji vytvoří,
+- **čas:** kdy událost nastala, ne jen kdy byla odeslána,
+- **identifikátor:** unikátní ID události pro deduplikaci,
+- **verzi:** formát payloadu, aby změny nebyly překvapení,
+- **účel:** proč ji cílový systém potřebuje,
+- **minimální data:** jen pole nutná pro navazující krok.
+
+Příklad: `lead.created` nemusí nést celý text zprávy, IP adresu, user-agent a historii návštěv. Pro CRM často stačí ID leadu, čas vytvoření, zdroj formuláře, vybraná služba a kontaktní údaje, které člověk vědomě odeslal. Zbytek ať zůstane tam, kde vznikl, pokud pro přenos nemáš jasný důvod.
+
+*Codyho komentář:* Webhook, který posílá „radši všechno“, je digitální stěhovák bez popisků na krabicích. Možná nic neztratí, ale určitě z toho bude bordel.
+
+### CX.2 Payload navrhni jako smlouvu
+
+Webhook payload není interní detail. Je to smlouva mezi systémy. Jakmile ho začne používat další služba, zákaznický skript nebo partner, změna pole může rozbít proces mimo tvůj dohled. Proto piš payload nudně, verzovaně a čitelně.
+
+Praktické minimum:
+
+```json
+{
+  "event_id": "evt_123",
+  "event_type": "lead.created",
+  "occurred_at": "2026-09-02T00:00:00Z",
+  "schema_version": "1.0",
+  "account_id": "acc_456",
+  "data": {
+    "lead_id": "lead_789",
+    "source": "pricing-form",
+    "requested_service": "privacy-first-saas-audit"
+  }
+}
+```
+
+Drž se několika pravidel:
+
+- neměň význam existujícího pole bez nové verze,
+- nemaž pole bez přechodného období,
+- neposílej `null`, když má pole znamenat „neznámé“ a jindy „nepoužitelné“,
+- odděl metadata události od obchodních dat,
+- osobní údaje dávej jen tam, kde jsou opravdu potřeba,
+- dokumentuj příklady úspěšného i chybového zpracování.
+
+Když payload obsahuje osobní údaje, napiš přímo do dokumentace, proč tam jsou a jak dlouho je příjemce smí držet. Není to právnická poezie. Je to provozní hygienický návyk.
+
+### CX.3 Příjemce musí umět říct: přijato, zpracováno, odmítnuto
+
+HTTP status `200` neznamená, že se práce opravdu stala. Znamená jen, že endpoint odpověděl. U důležitých procesů rozlišuj tři úrovně:
+
+- **Přijato:** payload je validní a uložený do fronty.
+- **Zpracováno:** navazující akce proběhla úspěšně.
+- **Odmítnuto:** payload je neplatný, neoprávněný nebo nedává doménově smysl.
+
+Pro malé týmy často stačí jednoduchá tabulka nebo fronta událostí se stavem:
+
+- `received`,
+- `processing`,
+- `processed`,
+- `failed_retryable`,
+- `failed_final`,
+- `ignored_duplicate`.
+
+Tahle stavovost je nudná, ale zachraňuje večery. Když zákazník řekne „lead se nepřenesl“, nechceš lovit v logu podle času a naděje. Chceš otevřít konkrétní událost, vidět poslední pokus, důvod chyby a tlačítko nebo postup pro bezpečné zopakování.
+
+### CX.4 Opakování musí být bezpečné
+
+Webhooky se posílají znovu. Někdy správně, protože první pokus selhal. Někdy nečekaně, protože odesílatel nedostal odpověď. Pokud opakované doručení vytvoří duplicitní objednávku, dva účty nebo tři e-maily zákazníkovi, nemáš automatizaci. Máš generátor omluv.
+
+Navrhuj zpracování idempotentně:
+
+- používej `event_id` a ukládej zpracované události,
+- pro obchodní objekty používej stabilní externí ID,
+- před vytvořením záznamu kontroluj existenci,
+- retry dělej s rozumným odstupem, ne kulometem,
+- po několika pokusech přepni událost do ruční fronty,
+- ruční opakování loguj jako administrátorský zásah.
+
+Dobrý retry režim může být třeba: první pokus hned, další za 1 minutu, 5 minut, 30 minut a 2 hodiny. Po tom už raději upozorni člověka. Nekonečné opakování je jen DDoS s lepším úmyslem.
+
+### CX.5 Podepisuj požadavky a omezuj citlivost
+
+Webhook endpoint je veřejný vchod. Možná schovaný, ale pořád vchod. Nestačí divný URL token v adrese. Požadavky podepisuj sdíleným tajemstvím nebo jiným ověřitelným mechanismem, kontroluj časové okno a odmítej payloady, které neodpovídají schématu.
+
+Bezpečnostní minimum:
+
+- HTTPS vždy,
+- podpis payloadu nebo hlavičky,
+- kontrola časového razítka proti replay útokům,
+- oddělené tajemství pro každý zdroj nebo zákazníka,
+- rotace tajemství bez výpadku,
+- limit velikosti payloadu,
+- validace schématu před uložením,
+- žádné citlivé údaje v URL.
+
+Privacy-first bonus: neposílej celé objekty, pokud stačí referenční ID a cílový systém si data vyžádá oprávněným dotazem až ve chvíli, kdy je opravdu potřebuje. Snížíš objem přenášených osobních údajů i riziko, že citlivý payload skončí v cizím logovacím nástroji.
+
+### CX.6 Monitoring dělej podle dopadu, ne podle počtu requestů
+
+Metrika „počet webhooků za den“ je zajímavá, ale sama o sobě neříká, jestli produkt funguje. Důležitější je, jestli se obchodní události dokončují včas.
+
+Sleduj například:
+
+- procento úspěšně zpracovaných událostí,
+- počet finálně selhaných událostí,
+- nejstarší nezpracovanou událost,
+- medián a maximum času od přijetí po zpracování,
+- počet duplicitních událostí,
+- počet ručních zásahů,
+- dopad na zákaznické workflow.
+
+Alert má znít konkrétně: „Nejstarší nezpracovaný `invoice.paid` webhook čeká 38 minut.“ Ne: „Webhook worker error.“ První věta říká, co je rozbité a proč to vadí. Druhá říká jen to, že počítač má zase existenciální krizi.
+
+### CX.7 Šablona webhook karty
+
+Použij ji pro každý důležitý webhook nebo asynchronní proces.
+
+#### Událost
+
+- Název události:
+- Spouštěč:
+- Obchodní význam:
+- Kritičnost:
+
+#### Payload
+
+- Verze schématu:
+- Povinná pole:
+- Volitelná pole:
+- Osobní údaje a důvod:
+- Pole, která se výslovně neposílají:
+
+#### Doručení
+
+- Zdrojový systém:
+- Cílový endpoint nebo fronta:
+- Timeout:
+- Retry plán:
+- Idempotency klíč:
+
+#### Bezpečnost
+
+- Způsob podpisu:
+- Rotace tajemství:
+- Limit payloadu:
+- Validace schématu:
+- Přístup k logům:
+
+#### Provoz
+
+- Stavová fronta:
+- Alerty:
+- Ruční oprava:
+- Vlastník:
+- Runbook:
+
+### CX.8 Checklist: webhooky bez tichých ztrát
+
+- Má každá událost jasný obchodní význam?
+- Posílá payload jen data potřebná pro navazující krok?
+- Obsahuje událost unikátní `event_id`?
+- Umí příjemce bezpečně ignorovat duplicitu?
+- Existuje stav přijetí, zpracování a finální chyby?
+- Je retry plán omezený a viditelný?
+- Jsou webhooky podepsané a časově ověřené?
+- Nejsou citlivé údaje v URL, query stringu ani běžných logách?
+- Má tým přehled nejstarších nezpracovaných událostí?
+- Existuje ruční postup pro opravu bez přímého zásahu do databáze?
+- Ví zákaznická podpora, jak poznat dopad selhaného webhooku?
+- Je při vypnutí integrace jasné, co se stane s čekajícími událostmi?
+
+Webhooky jsou skvělý sluha a mizerný pán. Když je navrhneš jako produktový proces, pomůžou malému týmu automatizovat práci bez ztráty kontroly. Když je navrhneš jako „nějaký callback“, budeš jednou v noci vysvětlovat, proč se data tváří jako Schrödingerova kočka: zároveň odeslaná i neodeslaná.
+
+
 ## Pracovní log
+
+- 2026-09-02 00:01 UTC — Doplněna příloha CX o webhookách a asynchronních procesech: pojmenování událostí, verzovaný payload, stavové zpracování, idempotentní retry, podpis požadavků, provozní monitoring, šablona webhook karty a privacy-first checklist.
 
 - 2026-09-01 23:00 UTC — Doplněna příloha CW o API integracích bez tajných tunelů: účel integrace, datová mapa, jednosměrný tok, bezpečné tokeny, viditelné chyby, vypínač, runbook, šablona integrační karty a privacy-first checklist.
 - 2026-09-01 22:00 UTC — Doplněna příloha CV o importu dat a migracích bez černé magie: rozhodnutí před uploadem, mapa polí, testovací import, čitelné chybové reporty, ostrý plán s rollbackem, úklid dočasných dat, šablona migrační karty a checklist.
