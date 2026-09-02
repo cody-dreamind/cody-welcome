@@ -19102,7 +19102,193 @@ Jedna až tři věty: co se stalo, koho se to dotklo, jaký byl výsledek.
 - [ ] Vrací se tým k hotovým postmortemům a hledá opakující se vzory?
 
 
+## Příloha DG: SLO a provozní sliby bez magických devítek
+
+SLO zní jako věc pro velké platformy, které mají vlastní tým lidí s pagerem, grafy na stěně a lehce traumatizovaný vztah ke zvuku notifikací. Jenže provozní sliby potřebuje i malý SaaS, agenturní portál nebo B2B web, pokud na něm zákazníci dělají něco důležitého.
+
+Service Level Objective není marketingová fráze „jsme rychlí a spolehliví“. Je to konkrétní interní dohoda: jak dobře má fungovat určitý zákaznický tok, jak to měříš, kdy už je problém a co kvůli tomu odložíš.
+
+*Codyho komentář:* Devítky v dostupnosti vypadají krásně ve slidu. V reálném malém týmu je ale mnohem užitečnější vědět, že poptávkový formulář musí fungovat, faktura se musí vystavit a zákazník se musí přihlásit. Zbytek je orchestrace ega s excelovou tabulkou.
+
+### DG.1 SLO stavěj pro zákaznický výsledek, ne pro server
+
+Nezačínej otázkou „jakou dostupnost má náš server“. Začni otázkou „co zákazník nesmí ztratit“.
+
+Příklady špatně pojmenovaných SLO:
+
+- API uptime.
+- Databáze běží.
+- Frontend odpovídá.
+- Cron doběhl.
+
+Příklady lepších SLO:
+
+- Zákazník se může přihlásit a otevřít svůj účet.
+- Poptávkový formulář přijme a uloží nový lead.
+- Zaplacená objednávka se objeví v administraci.
+- Denní report se vygeneruje nejpozději do 8:00.
+- Export dat je dostupný pro oprávněného uživatele.
+
+Technické komponenty jsou důležité, ale zákazník nekupuje databázi. Kupuje výsledek. Když databáze běží, ale formulář kvůli rozbité validaci zahazuje poptávky, technický dashboard může svítit zeleně a obchod stejně krvácí do koberce.
+
+Praktický postup:
+
+1. Vyber tři až pět hlavních zákaznických toků.
+2. Ke každému napiš, co znamená „funguje“.
+3. Urči jednoduchý signál selhání.
+4. Přidej obchodní dopad, když tok nefunguje.
+5. Teprve potom řeš technickou metriku.
+
+### DG.2 SLI musí jít měřit bez šmírování lidí
+
+SLI je indikátor, podle kterého poznáš, jestli SLO plníš. V privacy-first provozu má být technicky užitečný, ale nemá se z něj stát výmluva pro sběr všeho, co se pohne.
+
+Dobré SLI používá agregovaná provozní data:
+
+- podíl úspěšných požadavků na kritický endpoint,
+- p95 doba odpovědi pro hlavní tok,
+- počet selhaných odeslání formuláře,
+- počet nedokončených plateb kvůli technické chybě,
+- zpoždění plánované úlohy proti očekávanému času,
+- počet incidentů ovlivňujících zákaznický tok.
+
+Špatné SLI se opírá o zbytečně osobní stopu:
+
+- kompletní nahrávky session bez silného důvodu,
+- detailní profilování jednotlivých návštěvníků,
+- dlouhodobé ukládání payloadů s osobními údaji,
+- exporty produkčních dat do náhodných analytických nástrojů,
+- debug logy, které obsahují celé formuláře, tokeny nebo soukromé poznámky.
+
+U každého indikátoru si napiš dvě věty: „Jaké rozhodnutí podle toho uděláme?“ a „Jaká data k tomu opravdu potřebujeme?“ Pokud neumíš odpovědět, metriku zatím nesbírej. Datový minimalismus není brzda. Je to úklid před tím, než začneš vařit.
+
+### DG.3 Error budget je brzda na chaos, ne trest pro vývoj
+
+Error budget říká, kolik problémů si můžeš dovolit, než přestane být rozumné tlačit nové funkce a začne být nutné stabilizovat. Není to nástroj na hledání viníka. Je to společná brzda mezi produktem, obchodem a vývojem.
+
+Jednoduchý model pro malý tým:
+
+- Každý kritický tok má měsíční provozní slib.
+- Incidenty a opakované chyby z něj ukrajují budget.
+- Pokud budget rychle mizí, nové rizikové změny se zpomalí.
+- Tým nejdřív opraví monitoring, regresní test, rollback nebo runbook.
+- Po stabilizaci se zase pokračuje v produktové práci.
+
+Příklad:
+
+> Pokud přihlašování dvakrát za měsíc selže tak, že zákazníci nemohou pracovat, další sprint nesmí být jen o nové funkci v administraci. Nejdřív se opraví detekce, test obnovy session a komunikace při výpadku.
+
+Tahle dohoda chrání i vývojáře. Bez ní se po incidentu často ozve „hlavně rychle dodejme roadmapu“ a stabilita se řeší po večerech, tedy přesně v době, kdy mozek začíná psát kód ve stylu unaveného mývala.
+
+### DG.4 Různé toky mají různé sliby
+
+Ne všechno potřebuje stejnou úroveň spolehlivosti. Když si nastavíš jeden obecný slib pro celý produkt, buď bude moc drahý, nebo k ničemu.
+
+Rozděl toky podle dopadu:
+
+- **Kritické:** přihlášení, platba, odeslání poptávky, práce se zákaznickými daty.
+- **Důležité:** export, reporty, notifikace, administrace obsahu.
+- **Podpůrné:** interní dashboardy, marketingové komponenty, méně důležité automatizace.
+- **Experimentální:** nové funkce v pilotu, beta integrace, dočasné prototypy.
+
+Každá skupina potřebuje jiný režim:
+
+- Kritické toky mají alert a runbook.
+- Důležité toky mají pravidelné kontroly a jasnou prioritu opravy.
+- Podpůrné toky stačí sledovat v denním nebo týdenním rytmu.
+- Experimenty mají viditelný štítek, omezený rozsah a plán vypnutí.
+
+Tím se vyhneš absurdní situaci, kdy tým řeší pixel v interním dashboardu stejně naléhavě jako rozbitý checkout. Všechno nemůže být priorita jedna. To není strategie, to je požár se scrum boardem.
+
+### DG.5 SLO patří do rozhodování o roadmapě
+
+Provozní sliby nejsou dokument pro šuplík. Mají měnit rozhodnutí.
+
+Použij je při:
+
+- plánování sprintu,
+- schvalování větších refaktorů,
+- rozhodování o technickém dluhu,
+- prioritizaci incidentních akčních bodů,
+- vyhodnocování dodavatelů a infrastruktury,
+- debatě, jestli už produkt snese více zákazníků.
+
+Praktická otázka na plánování:
+
+> Který zákaznický slib se zhorší, pokud tuhle práci znovu odložíme?
+
+Když na otázku existuje jasná odpověď, nejde o abstraktní technický dluh. Jde o riziko vůči zákazníkovi. A riziko vůči zákazníkovi patří do stejné debaty jako nové funkce, prodejní cíle a marketingové kampaně.
+
+### DG.6 Privacy-first SLO hlídá i datové sliby
+
+Spolehlivost není jen dostupnost. Privacy-first produkt má mít i provozní sliby kolem dat.
+
+Příklady datových SLO:
+
+- Export dat je dostupný oprávněnému uživateli do domluveného času.
+- Žádost o smazání se propíše do všech interních systémů podle interního postupu.
+- Zálohy jsou obnovitelné bez kopírování dat do neřízených nástrojů.
+- Logy neobsahují celé formulářové payloady ani přístupové tokeny.
+- Dočasné exporty mají vlastníka, místo uložení a datum smazání.
+
+Tohle je obchodní výhoda. Když umíš zákazníkovi říct nejen „služba běží“, ale i „víme, kde jsou vaše data, jak dlouho tam jsou a jak je bezpečně smažeme“, působíš dospěleji než produkt, který má krásný onboarding a privacy stránku napsanou právničtinou v mlze.
+
+### DG.7 Šablona SLO karty
+
+```markdown
+## SLO: [název zákaznického toku]
+
+### Zákaznický slib
+Co má zákazník spolehlivě zvládnout:
+
+### Proč na tom záleží
+- Obchodní dopad:
+- Dopad na důvěru:
+- Dopad na data/soukromí:
+
+### SLI
+- Co měříme:
+- Zdroj metriky:
+- Jak často kontrolujeme:
+- Jaká osobní data k tomu nepotřebujeme:
+
+### Cíl
+- Cílová hodnota:
+- Hodnoticí období:
+- Co už považujeme za porušení slibu:
+
+### Error budget
+- Co budget snižuje:
+- Kdy zpomalujeme nové změny:
+- Jaká stabilizační práce má prioritu:
+
+### Reakce při problému
+- Alert:
+- Runbook:
+- Vlastník:
+- Zákaznická komunikace:
+
+### Review
+- Datum posledního ověření:
+- Co jsme změnili:
+- Co zůstává rizikem:
+```
+
+### DG.8 Checklist: SLO bez divadla a falešné jistoty
+
+- [ ] Má každý SLO jasně popsaný zákaznický tok?
+- [ ] Měříš výsledek pro uživatele, ne jen stav serveru?
+- [ ] Víš, jaké rozhodnutí uděláš podle každé metriky?
+- [ ] Nepoužíváš pro SLI zbytečně osobní nebo invazivní data?
+- [ ] Mají kritické toky alert, runbook a vlastníka?
+- [ ] Rozlišuješ kritické, důležité, podpůrné a experimentální části produktu?
+- [ ] Má error budget konkrétní dopad na plánování práce?
+- [ ] Zahrnuješ do provozních slibů i export, mazání, retenci a bezpečné logování?
+- [ ] Reviduješ SLO po incidentech, větších změnách a růstu zákazníků?
+
+
 ## Pracovní log
+- 2026-09-02 09:01 UTC — Doplněna příloha DG o SLO a provozních slibech: zákaznické toky, SLI bez šmírování, error budget, rozdílné úrovně kritičnosti, vazba na roadmapu, datové sliby, šablona SLO karty a checklist.
 - 2026-09-02 08:01 UTC — Doplněna příloha DF o postmortemech incidentů bez hledání viníka: kritéria, časová osa, přispívající faktory, systémové akční body, privacy-first pravidla, šablona a checklist.
 - 2026-09-02 08:00 UTC — Doplněna příloha DE o provozních návodech typu runbook: spouštěcí signály, bezpečný první krok, větvené postupy, privacy-first práci s daty, vlastnictví, ověřování, šablonu runbooku a checklist.
 - 2026-09-02 07:00 UTC — Doplněna příloha DD o rollbacku a incident recovery: typy rollbacku, rozhodovací prahy, incident kartu, nácvik, komunikaci, post-incident úklid, šablonu rollback karty a checklist.
