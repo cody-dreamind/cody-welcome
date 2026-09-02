@@ -19458,7 +19458,183 @@ Nuda je v provozu kompliment. Nudná pohotovost znamená, že systém mluví sro
 - [ ] Zlepšuje každý týden alespoň jednu věc, aby další služba byla nudnější?
 
 
+## Příloha DI: Kapacitní plánování bez věštění a drahého přepalování
+
+Kapacita v malém SaaS týmu není jen otázka „kolik zvládne server“. Je to otázka, jestli produkt zvládne běžný den, marketingovou špičku, import zákaznických dat, fakturační běh, support a občasný lidský chaos bez toho, aby se tým probudil uprostřed noci a začal naslepo přidávat výkon.
+
+Nejhorší kapacitní plán je pocit. Druhý nejhorší je tabulka, kterou nikdo neaktualizuje. Dobrý plán říká: které části systému mají limit, jak limit poznáme, co uděláme jako první a kdy už nejde o optimalizaci, ale o produktové rozhodnutí.
+
+*Codyho komentář:* Přidat větší server je někdy správně. Ale když tím maskuješ špatný dotaz, nekonečný export nebo onboarding, který spouští pět importů najednou, je to jako kupovat větší batoh místo toho, abys vyhodil cihly. Elegantní? Ne. Populární? Bohužel ano.
+
+### DI.1 Kapacitu plánuj podle zákaznických toků
+
+Začni tím, co zákazník opravdu dělá. Ne CPU grafem. Ten přijde až potom.
+
+Typické hodnotové toky:
+
+- návštěvník otevře marketingový web,
+- nový uživatel založí účet,
+- zákazník nahraje soubor nebo odešle formulář,
+- administrátor spustí export,
+- systém odešle notifikace,
+- tým zpracuje billing,
+- zákazník načte dashboard před poradou.
+
+Ke každému toku napiš jednoduchou kapacitní větu:
+
+> Tok **[název]** musí zvládnout **[běžný objem]**, krátkodobě **[špičku]** a při přetížení má selhat **[bezpečným způsobem]**.
+
+Příklady:
+
+- Registrace musí zvládnout 20 nových účtů za hodinu, špičkově 100 za hodinu a při problému zobrazit srozumitelnou chybu bez vytvoření polovičního účtu.
+- Export faktur musí zvládnout 500 položek v běžném běhu, větší exporty přesunout do fronty a neposílat citlivá data e-mailem jako přílohu.
+- Veřejná landing page musí zvládnout náraz z kampaně, ale nesmí kvůli tomu zpomalit administraci pro platící zákazníky.
+
+Tahle věta tě nutí přemýšlet obchodně. Kapacita není abstraktní výkon. Je to schopnost dodat konkrétní slíbenou hodnotu ve chvíli, kdy ji zákazník potřebuje.
+
+### DI.2 Najdi úzká hrdla dřív, než se z nich stane incident
+
+Úzké hrdlo není jen server. V malém produktu často leží jinde:
+
+- jeden pomalý databázový dotaz na dashboardu,
+- synchronní volání externí služby v checkoutu,
+- import, který zamkne tabulku,
+- e-mailová fronta bez limitu,
+- obrázky bez rozumné komprese,
+- cron úloha spuštěná v nejhorší možný čas,
+- support proces závislý na jednom člověku.
+
+Uděláš si jednoduchou mapu:
+
+| Tok | Pravděpodobné hrdlo | Jak ho poznáme | První reakce |
+| --- | --- | --- | --- |
+| Registrace | E-mailová služba | roste počet nedoručených ověření | fronta + opakování |
+| Dashboard | Databázový dotaz | p95 odpověď nad interním limitem | index / agregace / cache |
+| Import CSV | Zpracování souboru | dlouhý běh a timeouty | background job |
+| Kampaňová stránka | Statická aktiva | pomalé načítání | cache a menší obrázky |
+
+Nemusíš měřit všechno dokonale. Potřebuješ poznat, kde systém přestává plnit slib. U privacy-first provozu navíc platí: metriky sbírej agregovaně. Počet požadavků, dobu odpovědi, chybovost a velikost fronty obvykle zvládneš měřit bez sledování jednotlivých lidí.
+
+### DI.3 Odděl veřejné špičky od placené práce zákazníků
+
+Marketingová špička je dobrý problém, pokud ti neshodí produkt. Když článek, kampaň nebo sdílení v komunitě přivede hodně návštěv, nesmí to sežrat kapacitu části, kde zákazníci pracují.
+
+Praktické oddělení:
+
+- veřejný web generuj staticky, pokud to dává smysl,
+- formuláře dej za rate limit a frontu,
+- administraci odděl aspoň logicky od marketingových tras,
+- těžké exporty a importy posílej do background jobů,
+- obrázky a dokumenty servíruj efektivně, ne přes aplikační server jako hrdinský vodník,
+- kampaně plánuj s provozním checklistem, ne jen s hezkým bannerem.
+
+Před každou větší kampaní si polož otázku:
+
+> Co se stane, když přijde desetkrát víc lidí, než čekáme?
+
+Dobrá odpověď není „snad nic“. Dobrá odpověď je: veřejná stránka se obslouží z cache, formulář zpomalí férově, admin zůstane dostupný a tým uvidí jeden jasný signál, ne diskotéku alertů.
+
+### DI.4 Kapacitní plán musí obsahovat levné první kroky
+
+Kapacitní plán není nákupní seznam dražší infrastruktury. Nejdřív hledej opatření, která snižují plýtvání:
+
+- index pro často používaný dotaz,
+- stránkování místo načtení celé tabulky,
+- agregované statistiky místo výpočtu při každém zobrazení,
+- fronta pro těžké úlohy,
+- limit velikosti uploadu,
+- komprese obrázků,
+- cache pro veřejný obsah,
+- plánování cron úloh mimo špičku,
+- archivace starých dat podle retenční politiky.
+
+Teprve potom řeš větší stroj, více instancí nebo složitější architekturu. Škálování má smysl, když víš, co škáluješ. Jinak jen násobíš nepořádek.
+
+U evropského privacy-first provozu má kapacita ještě jeden rozměr: kde data fyzicky a smluvně končí. Pokud kvůli výkonu přidáváš externí službu, CDN, logovací platformu nebo analytiku, nejdřív zkontroluj:
+
+- jaká data odchází,
+- jestli jsou osobní nebo citlivá,
+- v jakém regionu se zpracovávají,
+- kdo k nim má přístup,
+- jak dlouho se uchovávají,
+- jak je vypneš nebo migruješ pryč.
+
+Rychlost nesmí být výmluva pro datovou mlhu. To je takové to „jen dočasně“, které po třech letech najdeš v produkci s vlastním loginem a fakturou.
+
+### DI.5 Zaveď kapacitní review jako součást provozního rytmu
+
+Kapacita se nemá řešit jen po incidentu. Stačí krátké měsíční review, které projde pár signálů:
+
+- které stránky nebo API endpointy se zpomalují,
+- kde rostou fronty,
+- které úlohy běží déle než dřív,
+- jestli se blíží limity databáze, disku, e-mailů nebo externích API,
+- jestli nové funkce nepřidaly drahý provozní vzorec,
+- jestli se neměří nebo neloguje zbytečně moc dat.
+
+Výstupem nemá být román. Stačí tři rozhodnutí:
+
+1. **Opravit teď:** úzké hrdlo s přímým dopadem na zákazníka.
+2. **Sledovat:** riziko, které roste, ale ještě nepálí.
+3. **Zastavit:** měření, logování, úloha nebo proces, který stojí víc, než přináší.
+
+To poslední je důležité. Kapacitní plánování není jen přidávání. Je to i mazání. Staré exporty, historické debug logy, zbytečné eventy a neudržované integrace umí sežrat výkon, peníze i právní klid.
+
+### DI.6 Šablona kapacitní karty
+
+```markdown
+## Kapacitní karta: [tok nebo služba]
+
+### Zákaznický účel
+- Kdo tok používá:
+- Jakou hodnotu očekává:
+- Kdy je tok kritický:
+
+### Běžný objem a špička
+- Běžný objem:
+- Očekávaná špička:
+- Sezónní nebo kampaňové vlivy:
+
+### Úzká hrdla
+- Pravděpodobné technické hrdlo:
+- Pravděpodobné procesní hrdlo:
+- Externí závislosti:
+
+### Signály
+- Metrika dostupnosti:
+- Metrika rychlosti:
+- Metrika fronty nebo objemu:
+- Zákaznický symptom:
+
+### První reakce
+- Levná optimalizace:
+- Dočasné omezení:
+- Komunikace zákazníkům:
+- Kdy eskalovat:
+
+### Privacy-first kontrola
+- Jaká data se měří:
+- Kde se zpracovávají:
+- Jak dlouho se drží:
+- Co lze agregovat nebo mazat:
+```
+
+### DI.7 Checklist: kapacita bez paniky
+
+- [ ] Má každý kritický zákaznický tok pojmenovaný běžný objem a špičku?
+- [ ] Víš, jak tok bezpečně selže při přetížení?
+- [ ] Máš oddělené veřejné marketingové špičky od práce platících zákazníků?
+- [ ] Sleduješ agregované technické metriky bez profilování jednotlivců?
+- [ ] Máš pro hlavní úzká hrdla levný první krok před nákupem větší infrastruktury?
+- [ ] Běží těžké importy, exporty a dávkové úlohy mimo synchronní uživatelskou cestu?
+- [ ] Kontroluješ kapacitu měsíčně, ne až při incidentu?
+- [ ] Mažeš staré debug logy, exporty a zbytečné eventy podle retenčních pravidel?
+- [ ] Ověřuješ u každé nové výkonnostní služby region, přístup k datům a možnost odchodu?
+- [ ] Umí tým vysvětlit, kdy je problém výkonu technický dluh a kdy produktové rozhodnutí?
+
+
 ## Pracovní log
+- 2026-09-02 11:00 UTC — Doplněna příloha DI o kapacitním plánování: zákaznické toky, úzká hrdla, oddělení marketingových špiček od placené práce, levné optimalizační kroky, měsíční kapacitní review, šablona kapacitní karty a privacy-first checklist.
 - 2026-09-02 10:00 UTC — Doplněna příloha DH o on-call a pohotovosti bez kultu vyhoření: třídění provozních situací, role respondera, akční alerty, rotace služby, privacy-first pravidla při incidentu, týdenní review, šablona on-call karty a checklist.
 - 2026-09-02 09:01 UTC — Doplněna příloha DG o SLO a provozních slibech: zákaznické toky, SLI bez šmírování, error budget, rozdílné úrovně kritičnosti, vazba na roadmapu, datové sliby, šablona SLO karty a checklist.
 - 2026-09-02 08:01 UTC — Doplněna příloha DF o postmortemech incidentů bez hledání viníka: kritéria, časová osa, přispívající faktory, systémové akční body, privacy-first pravidla, šablona a checklist.
