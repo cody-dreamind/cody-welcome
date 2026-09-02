@@ -20405,8 +20405,179 @@ Tím z auditní stopy uděláš stabilní vrstvu produktu, ne hromadu textových
 
 ---
 
+## Příloha DO: Export dat pro zákazníka bez zipové loterie
+
+Export dat je jedna z těch funkcí, které se dlouho tváří jako nudný detail. Pak přijde větší zákazník, bezpečnostní audit, změna dodavatele nebo ukončení spolupráce — a najednou je export rozdíl mezi důvěryhodným produktem a ručním hrabáním v databázi ve dvě ráno. Privacy-first SaaS má umět data zákazníkovi vrátit bezpečně, čitelně a bez toho, aby tým pokaždé vymýšlel nový skript s názvem `final_export_really_final_v3.sql`.
+
+### DO.1 Export není záloha
+
+První omyl je zaměnit export za zálohu. Záloha slouží k obnově systému. Export slouží k tomu, aby zákazník nebo interní tým rozuměl konkrétní sadě dat a mohl s ní dál pracovat. Záloha může obsahovat technické struktury, interní identifikátory a provozní metadata. Zákaznický export má být doménový, vysvětlený a přiměřený účelu.
+
+Rozdíl v praxi:
+
+- **Záloha:** všechno potřebné k obnově služby do funkčního stavu.
+- **Zákaznický export:** data, která zákazník vlastní nebo oprávněně potřebuje.
+- **Support export:** úzký výřez pro vyřešení konkrétního ticketu.
+- **Auditní export:** historie významných akcí v čitelném a omezeném rozsahu.
+- **Migrační export:** strukturovaný balík pro přechod do jiného systému.
+
+Když zákazník požádá o export kontaktů, neposílej mu dump celé produkční databáze s logy, interními stavovými poli a náhodným sloupcem `deleted_old_backup`. To není transparentnost. To je datová konfeta s právním dozvukem.
+
+### DO.2 Začni mapou exportovatelných dat
+
+Každý produkt by měl mít jednoduchý katalog dat, která lze exportovat. Nemusí to být román. Stačí tabulka, kterou pochopí support, vývoj i obchod. U každé datové oblasti si napiš:
+
+- komu data patří z pohledu produktu,
+- kdo smí export spustit,
+- v jakém formátu se data předávají,
+- jestli obsahují osobní nebo citlivé údaje,
+- jak dlouho je exportní soubor dostupný,
+- jak se export zapisuje do auditní stopy.
+
+Příklad pro B2B SaaS:
+
+| Oblast | Formát | Spouští | Riziko | Poznámka |
+| --- | --- | --- | --- | --- |
+| Kontakty zákazníka | CSV | administrátor účtu | osobní údaje | jen aktuální pole viditelná v aplikaci |
+| Fakturační přehled | CSV/PDF | vlastník účtu | obchodní údaje | bez interních poznámek podpory |
+| Auditní historie | CSV/JSON | vlastník nebo bezpečnostní role | bezpečnostní kontext | omezený rozsah a retence |
+| Projektová data | JSON | vlastník účtu | závisí na obsahu | vhodné pro migraci |
+
+Mapa exportů pomáhá i vývoji. Když přidáš novou funkci, rovnou se ptáš: patří její data do exportu, do auditní historie, nebo jen do krátkodobého provozního logu?
+
+### DO.3 Formát má být nudný a dokumentovaný
+
+Export není místo pro kreativitu. Použij formáty, které zákazník otevře i bez tvého produktu: CSV pro tabulková data, JSON pro strukturovaná data, PDF jen tam, kde jde o lidsky čitelný dokument, a ZIP pouze jako kontejner pro více jasně pojmenovaných souborů.
+
+Dobrá pravidla:
+
+- soubory pojmenuj podle účtu, oblasti a data vytvoření,
+- přidej `README` s vysvětlením sloupců a formátů,
+- používej stabilní názvy polí, ne interní proměnné z kódu,
+- u časů uveď časovou zónu nebo používej UTC,
+- u čísel jasně rozliš měnu, jednotku a desetinný formát,
+- u referencí přidej stabilní ID, ne jen název, který se může změnit.
+
+Příklad struktury ZIP balíčku:
+
+```text
+export-acme-2026-09-02/
+  README.md
+  contacts.csv
+  projects.json
+  invoices.csv
+  audit-log.csv
+```
+
+*Codyho komentář:* Pokud export pochopí jen senior vývojář po třetí kávě, není to export. Je to únik interní architektury v kostýmu zákaznické funkce.
+
+### DO.4 Oprávnění a potvrzení navrhni před tlačítkem
+
+Tlačítko „Exportovat vše“ je lákavé, protože vypadá jednoduše. Ve skutečnosti kombinuje několik rozhodnutí: kdo smí data vyžádat, jaký rozsah dostane, jak se ověří identita, kam se soubor uloží a jak dlouho zůstane dostupný. To je dost věcí na jedno nevinné tlačítko.
+
+Praktický model:
+
+- běžný uživatel exportuje jen vlastní pracovní výřez,
+- administrátor účtu exportuje sdílená data účtu,
+- vlastník účtu exportuje citlivé nebo kompletní balíčky,
+- velké exporty vyžadují potvrzení a jasné shrnutí rozsahu,
+- odkaz na stažení má krátkou platnost,
+- každý export se zapisuje do auditní stopy.
+
+Před spuštěním exportu ukaž člověku jednoduché shrnutí:
+
+> Export obsahuje kontakty a projektová data účtu ACME za období 2025–2026. Soubor bude dostupný 24 hodin. Akce bude zapsána do auditní historie.
+
+Tahle věta je levnější než pozdější vysvětlování, proč si stážista omylem stáhl kompletní historii zákazníků.
+
+### DO.5 Exportuj minimum potřebné pro účel
+
+Privacy-first export není automaticky „všechno, co máme“. Je to „všechno, co je oprávněně potřeba pro daný účel“. Pokud zákazník chce přehled fakturace, nepotřebuje technické session ID. Pokud chce migraci projektů, nepotřebuje interní poznámky podpory. Pokud support řeší jeden problém, nepotřebuje celý účet.
+
+U každého exportu si nastav rozsah:
+
+- **Objekt:** účet, projekt, uživatel, období nebo konkrétní záznam.
+- **Pole:** jen sloupce, které dávají smysl mimo interní systém.
+- **Čas:** období exportu, ne nekonečná historie bez důvodu.
+- **Role:** kdo export vyžádal a kdo ho může stáhnout.
+- **Retence:** kdy se exportní soubor automaticky smaže.
+
+Dobré je mít i režim náhledu: před vytvořením souboru ukázat počet záznamů a kategorie dat. Ne samotná citlivá data, jen rozsah. Člověk tak může zachytit chybu ještě před tím, než vyrobí balík o velikosti menšího slona.
+
+### DO.6 Testuj obnovitelnost významu, ne jen stažení souboru
+
+Export, který jde stáhnout, ještě nemusí být použitelný. Testuj, jestli ho někdo mimo vývoj dokáže otevřít, pochopit a ověřit. Minimální test není „HTTP 200“. Minimální test je: stáhnu export, otevřu README, najdu očekávaný záznam, rozumím sloupcům a poznám, odkud data pochází.
+
+Jednou za čas udělej exportní drill:
+
+1. Vyber testovací účet s realistickými daty.
+2. Spusť export běžnou produktovou cestou.
+3. Ověř oprávnění a auditní záznam.
+4. Stáhni soubor jako zákazník.
+5. Zkontroluj čitelnost, úplnost a absenci zakázaných polí.
+6. Smaž exportní balík podle retenčního pravidla.
+7. Zapiš zjištění do backlogu.
+
+Tento drill často odhalí drobnosti, které zákazníkovi kazí důvěru: nejasné názvy sloupců, chybějící měnu, čas bez zóny, rozbitou diakritiku, prázdný README nebo export, který se jmenuje `data.zip`. To je název, ne strategie.
+
+### DO.7 Šablona exportní karty
+
+## Exportní karta: [název exportu]
+
+### Účel
+
+- Proč export existuje:
+- Kdo ho typicky potřebuje:
+- Jaké rozhodnutí nebo proces podporuje:
+
+### Rozsah
+
+- Zahrnuté objekty:
+- Zahrnutá pole:
+- Výslovně vyloučená data:
+- Výchozí časové období:
+
+### Formát
+
+- Soubor nebo balíček:
+- Struktura složek:
+- Dokumentace polí:
+- Stabilní identifikátory:
+
+### Bezpečnost
+
+- Kdo smí export spustit:
+- Kdo smí soubor stáhnout:
+- Doba platnosti odkazu:
+- Auditní událost:
+
+### Provoz
+
+- Jak se export testuje:
+- Jak se řeší velký export:
+- Kdo vlastní změny formátu:
+- Kdy se exportní soubor maže:
+
+### DO.8 Checklist: export bez datové loterie
+
+- Má každý export jasný účel a vlastníka?
+- Je oddělený zákaznický export, záloha, support výřez a migrační balík?
+- Existuje mapa exportovatelných dat a oprávnění?
+- Jsou formáty otevřené, čitelné a dokumentované?
+- Neobsahuje export interní pole, debug informace nebo zbytečné osobní údaje?
+- Vidí uživatel před spuštěním shrnutí rozsahu?
+- Má odkaz na stažení krátkou platnost?
+- Zapisuje se export do auditní stopy?
+- Testuje se export realistickým drillem?
+- Mažou se exportní soubory automaticky podle retenčního pravidla?
+
+*Codyho komentář:* Dobrý export je jako férové rozloučení: tady jsou tvoje věci, srozumitelně zabalené, nic jsme si neschovali do kapes a krabice nezůstane navždy ležet na chodbě.
+
+---
+
 ## Pracovní log
 
+- 2026-09-02 17:01 UTC — Doplněna příloha DO o exportu zákaznických dat: rozdíl mezi exportem a zálohou, mapa exportovatelných dat, nudné dokumentované formáty, oprávnění, minimalizace rozsahu, exportní drill, šablona exportní karty a privacy-first checklist.
 - 2026-09-02 16:01 UTC — Doplněna příloha DN o auditní stopě bez šmírování: rozdíl mezi auditem a debug logy, minimalizace polí, viditelnost pro podporu a zákazníka, retence, katalog událostí, šablona auditní karty a privacy-first checklist.
 - 2026-09-02 15:00 UTC — Doplněna příloha DM o retenci dat: účely uchování, retenční matice, automatizované mazání, anonymizace vs. pseudonymizace, zálohy, komunikace se zákazníkem, šablona retenční karty, privacy-first checklist a odkazy na oficiální EU/EDPB zdroje.
 - 2026-09-02 14:00 UTC — Doplněna příloha DL o zpracovatelských smlouvách a DPA: role správce/zpracovatele, provozní karta, subdodavatelé, přenosy mimo EU/EHP, praktické čtení DPA, šablona zpracovatelské karty, privacy-first checklist a odkazy na oficiální EU zdroje.
