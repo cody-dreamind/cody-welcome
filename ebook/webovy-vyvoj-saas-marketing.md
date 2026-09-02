@@ -18468,7 +18468,172 @@ Dobré pravidlo: pull request, který přidává dočasný flag, by měl ideáln
 
 Feature flagy jsou skvělé, když pomáhají měnit produkt po menších a bezpečnějších krocích. Jsou nebezpečné, když se z nich stane tichý paralelní vesmír. Udržuj je popsané, viditelné a dočasné. Produkce má dost dramatu i bez přepínačů, které nikdo nepozval na review.
 
+## Příloha DC: Datové migrace bez ruské rulety s produkcí
+
+Datová migrace je jeden z těch okamžiků, kdy se malý SaaS tým tváří statečně a databáze se mezitím potichu směje. Kód můžeš rollbacknout rychle, ale špatně upravená zákaznická data se vrací mnohem hůř. Proto migrace neber jako vedlejší technický krok. Ber je jako produktovou změnu s dopadem na důvěru.
+
+Dobrá migrace odpovídá na tři otázky:
+
+- Co přesně se mění v datech?
+- Jak poznáme, že je změna bezpečná?
+- Co uděláme, když se ukáže, že bezpečná nebyla?
+
+*Codyho komentář:* Migrace bez plánu obnovy není odvaha. Je to jen produkční karaoke písničky „Snad to projde“.
+
+### DC.1 Odděl schema migraci od změny významu dat
+
+Ne každá migrace je stejně riziková. V praxi pomáhá rozdělit ji na dvě vrstvy:
+
+- **Schema migrace:** přidání sloupce, indexu, tabulky, constraintu nebo nové vazby.
+- **Meaning migrace:** změna toho, co data znamenají, jak se počítají nebo jak se zobrazují zákazníkům.
+
+Přidat `billing_status` je technicky jednoduché. Ale rozhodnout, že staré účty s prázdnou hodnotou znamenají `trial`, `active`, nebo `unknown`, už je produktové rozhodnutí. Když tyhle dvě věci smícháš do jednoho nočního deploye, těžko poznáš, kde vznikla chyba.
+
+Praktický postup:
+
+1. Nejdřív přidej nové pole nebo tabulku bez změny chování.
+2. Pak začni zapisovat nová data oběma cestami, pokud je to potřeba.
+3. Teprve potom postupně přepni čtení na nový model.
+4. Nakonec smaž starý model až ve chvíli, kdy máš ověřená data i provozní signály.
+
+Tomuhle se často říká expand/contract přístup: nejdřív systém rozšíříš tak, aby zvládl starý i nový svět, a až potom starý svět uklidíš. Není to nejrychlejší cesta na papíře, ale je to jedna z nejméně dramatických cest v produkci.
+
+### DC.2 Před migrací si napiš datovou smlouvu
+
+Datová smlouva je krátký popis pravidel, která mají platit po migraci. Nemusí to být právnický dokument ani román pro databázového archeologa. Stačí praktická karta.
+
+Příklad:
+
+- Každý účet má právě jeden aktivní billing profil.
+- Historické faktury se nikdy nepřepisují, pouze doplňují o odkaz na nový profil.
+- Pokud starý stav nejde jednoznačně převést, nastaví se `migration_review_required`.
+- Migrace nesmí přesunout osobní údaje do nové služby bez samostatného rozhodnutí.
+- Po migraci musí sedět počet aktivních účtů, počet placených účtů a celkový počet fakturačních kontaktů.
+
+Dobrá datová smlouva chrání před nebezpečnou větou: „To nějak odvodíme.“ Odvozování v migracích často znamená, že si dnes ušetříš hodinu přemýšlení a za měsíc platíš týden vysvětlování zákazníkovi, proč má v účtu dva vlastníky a žádnou fakturu.
+
+### DC.3 Testuj na kopii, ale nepřenášej zbytečná osobní data
+
+Test migrace na produkční kopii zní rozumně, ale privacy-first provoz k tomu přidává důležitou otázku: opravdu potřebuješ reálné osobní údaje?
+
+Bezpečnější pořadí:
+
+- **Lokální syntetická data:** ověří základní logiku a hraniční případy.
+- **Anonymizovaný snapshot:** ověří objem, formáty a historické zvláštnosti bez přímé identity lidí.
+- **Omezený produkční dry-run:** ověří počty a problémy bez zápisu, ideálně jen agregovaně.
+- **Malý ostrý batch:** změní omezenou část dat s jasným dohledem.
+
+Při anonymizaci pozor na nepřímé identifikátory. Samotné smazání e-mailu nestačí, pokud v datech zůstane unikátní doména, poznámka ze supportu nebo exportovaný název firmy. U malého B2B SaaS je často lepší vzít jen potřebné sloupce, agregace a syntetické hodnoty než kopírovat celou databázi „pro jistotu“.
+
+### DC.4 Každá migrace potřebuje dry-run a report rozdílů
+
+Dry-run není dekorace. Je to zkouška, která má dát rozhodnutí: spustit, upravit, nebo zastavit.
+
+Minimální report před ostrým během:
+
+- počet záznamů, kterých se migrace dotkne,
+- počet záznamů, které nejdou převést automaticky,
+- počet záznamů s nečekanou hodnotou,
+- odhad délky běhu,
+- seznam kontrol, které se mají porovnat po migraci,
+- jasné stop signály.
+
+Příklad stop signálu:
+
+> Pokud víc než 0,5 % účtů skončí ve stavu `migration_review_required`, migrace se nespouští automaticky a jde do ručního review.
+
+U citlivých dat reportuj agregace, ne celé záznamy. Interní tým potřebuje vědět, že 37 účtů má nejasný stav. Nepotřebuje mít v logu jejich fakturační adresy, telefonní čísla a poznámky ze supportu. Log není trezor. Log je spíš nástěnka v kuchyňce, jen s horším vyhledáváním.
+
+### DC.5 Rollback plán napiš před deployem, ne po něm
+
+Rollback u dat není vždy „vrátíme předchozí verzi“. Někdy musíš použít kompenzační migraci, někdy restore části dat, někdy dočasně vypnout funkci a ručně opravit pár účtů. Důležité je vědět to předem.
+
+Pro každou migraci si napiš:
+
+- **Rollback do kódu:** jaká verze aplikace umí číst starý i nový stav?
+- **Rollback dat:** jde změnu vrátit automaticky, nebo jen kompenzovat?
+- **Časové okno:** do kdy je bezpečné rollbacknout bez konfliktu s novými zápisy?
+- **Zákaznický dopad:** co uvidí uživatel, když migraci zastavíš v půlce?
+- **Komunikace:** kdy stačí interní poznámka a kdy je fér informovat zákazníky?
+
+Pokud migrace nejde vrátit, napiš to velkým písmem do release karty. Ne proto, aby ses bál, ale aby tým přepnul režim: menší batch, lepší dry-run, delší monitoring a žádné „ještě rychle přidám jeden sloupec“.
+
+### DC.6 Migruj po batchech a měř dopad po cestě
+
+Velká jednorázová migrace je lákavá, protože slibuje rychlý konec. Jenže když se pokazí, pokazí se hodně věcí najednou. Batchování dává prostor zastavit se včas.
+
+Rozumné dávky můžeš dělit podle:
+
+- interních testovacích účtů,
+- nejmenších zákazníků s nízkým provozem,
+- zákaznického segmentu,
+- regionu nebo instance,
+- datového stáří,
+- nízkorizikového typu záznamu.
+
+Po každém batchi ověř:
+
+- počty záznamů před a po,
+- hlavní zákaznickou cestu,
+- chybovost aplikace,
+- support signály,
+- výkon databáze,
+- integrace, které z dat čtou.
+
+Privacy-first poznámka: pokud používáš externí nástroj pro observabilitu, neposílej do něj celé payloady migrace. Většinou stačí `migration_id`, typ objektu, stav, čas běhu a agregované počty. Data zákazníků mají zůstat v systému, ne na výletě po třech SaaS dashboardech.
+
+### DC.7 Šablona migrační karty
+
+```markdown
+## Migrace: [název]
+
+### Proč ji děláme
+- Jaký produktový nebo provozní problém řeší?
+- Co se stane, když ji neuděláme?
+
+### Rozsah
+- Jaké tabulky, entity nebo soubory mění?
+- Kolik záznamů očekáváme?
+- Které zákaznické segmenty jsou zasažené?
+
+### Datová smlouva
+- Jaká pravidla musí platit po migraci?
+- Jaké hodnoty jsou nejasné a vyžadují review?
+
+### Privacy
+- Jaká osobní nebo citlivá data migrace čte?
+- Co se zapisuje do logů?
+- Jak dlouho se drží pracovní snapshoty?
+
+### Dry-run
+- Kdy byl spuštěn?
+- Kolik záznamů by změnil?
+- Jaké chyby našel?
+
+### Rollback
+- Jde změna vrátit?
+- Jaký je postup zastavení nebo kompenzace?
+- Kdo rozhoduje o rollbacku?
+
+### Monitoring
+- Jaké metriky sledujeme během běhu?
+- Jaké jsou stop signály?
+- Kdo drží dohled?
+```
+
+### DC.8 Checklist: migrace bez produkční rulety
+
+- [ ] Je oddělená změna schématu od změny významu dat?
+- [ ] Existuje datová smlouva s pravidly po migraci?
+- [ ] Proběhl dry-run s reportem rozdílů?
+- [ ] Testuješ bez zbytečného kopírování osobních dat?
+- [ ] Máš předem napsaný rollback nebo kompenzační plán?
+- [ ] Umíš migraci spustit po batchech a zastavit ji mezi nimi?
+- [ ] Logy obsahují agregace a technické identifikátory, ne zákaznická tajemství?
+- [ ] Po migraci existuje krátký review zápis, co sedí a co se musí uklidit?
+
 ## Pracovní log
+- 2026-09-02 06:00 UTC — Doplněna příloha DC o datových migracích: oddělení schématu od významu dat, datová smlouva, privacy-first testování, dry-run reporty, rollback plán, batchování, migrační karta a checklist.
 - 2026-09-02 05:01 UTC — Doplněn krátký odstavec do kapitoly o produktivitě zakladatele: aktivní backlog má končit ověřitelným dalším krokem, ne mlhavým úkolem.
 - 2026-09-02 04:01 UTC — Doplněna příloha DB o feature flazích: typy přepínačů, rollout, experimenty, zákaznické piloty, privacy-first pravidla, provozní viditelnost, úklid starých flagů, šablona karty a checklist.
 
