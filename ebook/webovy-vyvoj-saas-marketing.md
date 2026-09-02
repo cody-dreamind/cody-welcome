@@ -19933,9 +19933,164 @@ Tahle část bývá nudná, což je přesně důvod, proč ji mít napsanou pře
 - [ ] Umíš zákazníkovi vysvětlit, kde jeho data jsou a jak by proběhl odchod?
 - [ ] Máš pro kritické dodavatele datum dalšího review, ne jen dobrý pocit?
 
+## Příloha DL: Zpracovatelské smlouvy bez právního kouře
+
+Privacy-first SaaS nemůže stát jen na hezké větě „data jsou v bezpečí“. Ve chvíli, kdy používáš hosting, CRM, helpdesk, analytiku, e-mailing, účetnictví nebo AI nástroj, často někomu svěřuješ část dat zákazníků. A tehdy nestačí mít dobrý pocit z webu dodavatele. Potřebuješ vědět, kdo je správce, kdo zpracovatel, co se zpracovává, kde, proč, jak dlouho a podle jakých pravidel.
+
+Právní rámec není dekorace do patičky webu. Je to provozní mapa odpovědnosti. GDPR v článku 28 říká, že zpracování zpracovatelem má být upravené smlouvou nebo jiným právním aktem, který mimo jiné popíše předmět, dobu, povahu, účel zpracování, typ osobních údajů, kategorie subjektů údajů a povinnosti správce i zpracovatele: [GDPR čl. 28 na EUR-Lexu](https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CONSIL%3APE_17_2016_INIT). Evropský sbor pro ochranu osobních údajů k rolím správce a zpracovatele vydal samostatné vodítko: [EDPB Guidelines 07/2020](https://www.edpb.europa.eu/documents/guideline/guidelines-072020-on-the-concepts-of-controller-and-processor-in-the-gdpr_en).
+
+Tohle není právní rada. Je to praktický pracovní rámec pro zakladatele a malé týmy, aby věděly, co si pohlídat dřív, než do nástroje nasypou kontakty, logy a zákaznické tickety.
+
+### DL.1 Nejdřív role, potom smlouva
+
+Než začneš řešit DPA, napiš si k danému nástroji jednu větu:
+
+> V této službě jsme **[správce / zpracovatel / společný správce / nejisté]**, protože rozhodujeme o **[účelu]** a služba dělá **[konkrétní zpracování]**.
+
+Příklady:
+
+- Webová analytika pro vlastní web: typicky jsi správce, analytický nástroj je zpracovatel.
+- Hosting aplikace: typicky jsi správce dat zákazníků, hosting je zpracovatel infrastruktury.
+- Účetní systém pro faktury: role záleží na konkrétním nastavení, povinnostech a smlouvě.
+- Marketplace, který sám určuje část pravidel práce s uživateli: může jít o složitější vztah, ne jen obyčejného zpracovatele.
+
+Praktické pravidlo: když nevíš, kdo rozhoduje o účelu zpracování, nemáš ještě vybraný nástroj. Máš jen rozjeté riziko s pěkným onboardingem.
+
+### DL.2 DPA nesmí být jen odkaz v patičce
+
+U každého důležitého dodavatele si ulož:
+
+- aktuální zpracovatelskou smlouvu nebo odkaz na její platnou verzi,
+- datum stažení nebo odsouhlasení,
+- seznam služeb, kterých se týká,
+- typy dat, které přes službu tečou,
+- region zpracování a ukládání dat,
+- subdodavatele nebo odkaz na jejich seznam,
+- kontakt pro bezpečnostní incidenty a žádosti subjektů údajů,
+- datum dalšího review.
+
+Nestačí vědět, že „nějaké DPA existuje“. Potřebuješ vědět, jestli se vztahuje právě na tvůj tarif, tvůj use-case a tvůj datový tok. Některé nástroje mají různé podmínky pro free, self-hosted, cloud, enterprise nebo AI funkce. A ano, přesně tady se skrývají malé právní ninjové s velkým mečem.
+
+### DL.3 Co má být v praktické zpracovatelské kartě
+
+Vedle právního dokumentu si udělej provozní kartu. Ta má být čitelná i pro člověka, který nechce v pátek večer luštit odstavce s pěti závorkami.
+
+Minimální karta:
+
+- **Služba:** název nástroje a vlastník účtu.
+- **Účel:** proč službu používáme.
+- **Datové kategorie:** kontakty, obsah zpráv, faktury, logy, metadata, technické identifikátory.
+- **Subjekty údajů:** zákazníci, návštěvníci webu, zaměstnanci, dodavatelé.
+- **Region:** kde jsou data uložena a zpracována.
+- **Subdodavatelé:** kde je seznam a jak se oznamují změny.
+- **Retence:** jak dlouho data zůstávají ve službě.
+- **Export a smazání:** jak dostaneme data ven a jak ověříme výmaz.
+- **Incidenty:** kam dodavatel hlásí problém a kdo to u nás řeší.
+
+Karta nenahrazuje smlouvu. Karta zajišťuje, že smlouva žije v provozu.
+
+### DL.4 Subdodavatelé jsou datový řetězec, ne poznámka pod čarou
+
+Když nástroj používá další poskytovatele, nejsou to abstraktní firmy někde v mlze. Jsou to další místa, kam se může dostat část tvých dat nebo metadat. U privacy-first provozu si u každé kritické služby ověř:
+
+- jestli má veřejný seznam subdodavatelů,
+- jestli se změny oznamují předem,
+- jestli můžeš změnu odmítnout nebo službu ukončit,
+- jestli subdodavatelé sídlí nebo zpracovávají data mimo EHP,
+- jestli se subdodavatelé týkají všech funkcí, nebo jen volitelných modulů.
+
+Příklad: Helpdesk běží v EU, ale volitelná AI sumarizace posílá obsah ticketu jinam. Pro marketing to může vypadat jako „smart feature“. Pro privacy-first provoz je to nové zpracování, které musí být vidět v mapě dat.
+
+### DL.5 Přenos mimo EHP řeš předem
+
+Pokud osobní údaje odcházejí mimo EU/EHP, nestačí říct „dodavatel je známý“. Evropská komise uvádí standardní smluvní doložky jako předem schválené modelové doložky pro některé přenosy osobních údajů mimo EU/EHP: [Standard Contractual Clauses — European Commission](https://commission.europa.eu/law/law-topic/data-protection/international-dimension-data-protection/standard-contractual-clauses-scc_de). Prováděcí rozhodnutí Komise (EU) 2021/914 je dostupné na EUR-Lexu: [Decision 2021/914](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex%3A32021D0914). EDPB zároveň doporučuje posuzovat, jestli zvolený transferový nástroj v konkrétních okolnostech opravdu zajišťuje odpovídající úroveň ochrany: [Recommendations 01/2020](https://www.edpb.europa.eu/documents/recommendation/recommendations-012020-on-measures-that-supplement-transfer-tools-to_en).
+
+Prakticky si polož tři otázky:
+
+1. Musí tahle data vůbec opustit EHP?
+2. Lze funkci provozovat v EU regionu nebo self-hosted?
+3. Pokud přenos nejde odstranit, máme popsaný důvod, rozsah, ochranné opatření a alternativu?
+
+Privacy-first preference není „nikdy žádný mimoevropský nástroj“. Je to tvrdší laťka: mimoevropský přenos musí mít dobrý důvod, minimální rozsah a jasně popsané riziko. Pohodlí samo o sobě není dobrý důvod. Pohodlí je jen riziko v mikině.
+
+### DL.6 Jak číst DPA bez právní migrény
+
+Při rychlém review nečti dokument od začátku do konce jako román. DPA není detektivka, spoiler je vždycky „záleží“. Hledej konkrétní odpovědi:
+
+- Jaké zpracování dodavatel provádí?
+- Jak dlouho zpracování trvá?
+- Jaké kategorie osobních údajů jsou uvedené?
+- Jaké subjekty údajů jsou uvedené?
+- Může dodavatel zapojit subdodavatele a za jakých podmínek?
+- Kde jsou data ukládána a zpracovávána?
+- Jak pomáhá při žádostech subjektů údajů?
+- Jak oznamuje bezpečnostní incident?
+- Co se stane s daty po ukončení služby?
+- Jak se řeší audit nebo doložení souladu?
+
+Když na otázku nejde odpovědět během pár minut, napiš ji do rozhodovací karty jako otevřený bod. Neznámé riziko není automaticky stopka. Ale nesmí zmizet jen proto, že onboarding už ukazuje zelené tlačítko „Continue“.
+
+### DL.7 Šablona zpracovatelské karty
+
+```markdown
+## Zpracovatelská karta: [název služby]
+
+### Základ
+- Vlastník služby:
+- Účel použití:
+- Role našeho týmu:
+- Role dodavatele:
+- Odkaz na DPA / smlouvu:
+- Datum posledního review:
+
+### Data
+- Kategorie osobních údajů:
+- Kategorie subjektů údajů:
+- Citlivá data nebo zvláštní kategorie údajů:
+- Produkční / testovací data:
+- Retence:
+
+### Provoz a přenosy
+- Region uložení:
+- Region zpracování:
+- Přenos mimo EU/EHP:
+- Transferový mechanismus, pokud existuje:
+- Subdodavatelé a oznámení změn:
+
+### Bezpečnost a práva
+- Incident kontakt:
+- Doba oznámení incidentu podle smlouvy:
+- Pomoc při žádostech subjektů údajů:
+- Export dat:
+- Smazání dat po ukončení:
+
+### Rozhodnutí
+- Schváleno pro jaký typ dat:
+- Zakázané použití:
+- Otevřené otázky:
+- Další review:
+```
+
+### DL.8 Checklist: DPA a privacy-first dodavatel
+
+- [ ] Máš u služby jasně popsanou roli správce/zpracovatele?
+- [ ] Víš, jaký účel zpracování služba plní?
+- [ ] Máš uloženou aktuální DPA nebo smluvní dokument?
+- [ ] Sedí uvedené datové kategorie na reálné používání služby?
+- [ ] Znáš region uložení i region zpracování dat?
+- [ ] Víš, jestli dochází k přenosu mimo EU/EHP?
+- [ ] Máš zapsané subdodavatele nebo odkaz na jejich seznam?
+- [ ] Víš, jak dodavatel oznamuje změny subdodavatelů?
+- [ ] Máš popsaný export, retenci a smazání po ukončení?
+- [ ] Má služba vlastníka a datum dalšího review?
+- [ ] Nepoužíváš AI, analytiku nebo support nástroj pro data, která v něm být nemají?
+
+*Codyho komentář:* DPA není papírový štít proti všem problémům. Je to minimální vstupenka do dospělého provozu. Skutečná ochrana vzniká až kombinací dobré architektury, omezeného sběru dat, rozumných dodavatelů a lidí, kteří vědí, co kam posílají.
+
 
 ## Pracovní log
 
+- 2026-09-02 14:00 UTC — Doplněna příloha DL o zpracovatelských smlouvách a DPA: role správce/zpracovatele, provozní karta, subdodavatelé, přenosy mimo EU/EHP, praktické čtení DPA, šablona zpracovatelské karty, privacy-first checklist a odkazy na oficiální EU zdroje.
 - 2026-09-02 13:00 UTC — Doplněna příloha DK o exit plánech dodavatelů a vendor lock-inu: odchod už při výběru nástroje, rozlišení rizika, přenositelný export dat, náhradní provozní scénář, pravidelné testy exportu, smluvní podmínky, šablona exit karty a privacy-first checklist.
 - 2026-09-02 12:00 UTC — Doplněna příloha DJ o rozpočtu provozu SaaS: fixní, proměnné a skryté náklady, vlastnictví nástrojů, rozpočtové guardraily, jednotková ekonomika, privacy-first datové riziko, měsíční cost review, šablona rozpočtové karty a checklist.
 - 2026-09-02 11:00 UTC — Doplněna příloha DI o kapacitním plánování: zákaznické toky, úzká hrdla, oddělení marketingových špiček od placené práce, levné optimalizační kroky, měsíční kapacitní review, šablona kapacitní karty a privacy-first checklist.
