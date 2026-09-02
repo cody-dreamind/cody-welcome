@@ -17988,7 +17988,168 @@ Pro každý důležitý background proces si vyplň krátkou kartu:
 *Codyho komentář:* Background job je dobrý sluha, když víš, co dělá, proč to dělá a kdy má přestat. Jakmile jen „někde běží worker“, produkt připomíná restauraci, kde kuchyně nemá lístky objednávek, ale všichni tvrdí, že polévka určitě dorazí.
 
 
+## Příloha CZ: Crony a plánované úlohy bez půlnočních překvapení
+
+Každý SaaS časem zjistí, že některé věci se nemají stát hned po kliknutí, ale pravidelně: denní report, měsíční fakturace, úklid starých session, kontrola expirujících trialů, synchronizace kurzů, připomenutí úkolů, archivace logů nebo ověření, že zálohy opravdu proběhly. A protože se to opakuje samo, tým má tendenci tomu věnovat méně pozornosti než viditelným funkcím. Přesně tam začíná zábava. Tedy „zábava“ ve smyslu: pondělí 8:03, zákazník píše, že mu systém poslal tři stejné faktury.
+
+Plánovaná úloha není jen řádek v crontabu. Je to produktový závazek v čase. Musí mít vlastníka, účel, bezpečný rozsah, záznam o běhu, chování při selhání a retenční pravidla. Privacy-first přístup navíc říká: nespouštěj periodické vysavače dat jen proto, že to jde. Každá pravidelná úloha má dělat konkrétní práci s minimem dat a s jasným důvodem.
+
+### CZ.1 Každý cron pojmenuj podle výsledku, ne podle skriptu
+
+Název `script-17.sh` je volání o pomoc. Za měsíc nikdo neví, jestli posílá report, maže cache, synchronizuje objednávky nebo obětuje YAML bohům. Plánovanou úlohu pojmenuj podle výsledku, který má dodat.
+
+Lepší názvy:
+
+- `send_daily_account_summary`,
+- `close_expired_trials`,
+- `generate_monthly_invoices`,
+- `purge_old_export_files`,
+- `verify_backup_completion`,
+- `refresh_public_sitemap`.
+
+Ke každé úloze si napiš jednu větu: „Tahle úloha existuje proto, aby…“ Pokud věta nejde dokončit bez mlhy, úloha není připravená. Například: „Tahle úloha každý den v 06:00 UTC připraví agregovaný provozní souhrn pro administrátory účtů, které mají tuto funkci zapnutou.“ To je konkrétní. „Tahle úloha posílá nějaké statistiky“ je pozvánka do chaosu.
+
+### CZ.2 Čas spuštění je produktové rozhodnutí
+
+Cron `0 0 * * *` je klasika. Bohužel taky znamená, že půlka internetu se snaží dělat všechno přesně o půlnoci. U vlastního produktu se ptej: kdy má práce nejmenší dopad, kdy jsou data kompletní a kdy je tým schopný reagovat, pokud se něco pokazí?
+
+Rozhodovací otázky:
+
+- Potřebuje zákazník výsledek ráno, během dne, nebo jen někdy před koncem měsíce?
+- Závisí úloha na datech z externího systému, který může mít vlastní zpoždění?
+- Poběží úloha přes více časových pásem?
+- Co se stane při změně letního času?
+- Kolik účtů se spustí najednou a dá se práce rozložit?
+- Je v době běhu někdo dostupný pro zásah?
+
+U zákaznických úloh je často lepší ukládat plán v UTC a zobrazovat ho zákazníkovi v jeho zvoleném časovém pásmu. U interních provozních úloh bývá praktičtější držet jednotný UTC rytmus a explicitně ho napsat do dokumentace. Hlavně nemíchej „server time“, „lokální čas administrátora“ a „čas zákazníka“ v jedné větě. To není plánování, to je horoskop.
+
+### CZ.3 Plánovaná úloha musí být idempotentní
+
+Cron se může spustit dvakrát. Server se restartuje. Deploy se trefí doprostřed běhu. Scheduler po výpadku dožene zmeškané intervaly. Člověk klikne na ruční spuštění, protože „to asi neběží“. Pokud opakovaný běh rozbije data, posílá duplicity nebo přemaže výsledek novější práce, máš problém.
+
+Pravidla bezpečného opakování:
+
+- používej unikátní klíč běhu, například `task_name + period_start + account_id`,
+- před vytvořením výstupu ověř, jestli už neexistuje,
+- faktury, e-maily a exporty vytvářej s explicitním stavem,
+- ruční spuštění loguj jako samostatný zásah,
+- při souběhu použij lock s expirací,
+- po pádu uměj pokračovat po dávkách, ne od nuly naslepo.
+
+Příklad: měsíční fakturace nemá říkat „vytvoř faktury pro všechny“. Má říkat „pro každého zákazníka vytvoř fakturu za období 2026-08, pokud faktura za toto období ještě neexistuje nebo není ve finálním stavu“. Rozdíl vypadá malý. V provozu je to rozdíl mezi klidem a Excel archeologií.
+
+### CZ.4 Každý běh potřebuje auditní stopu
+
+Když plánovaná úloha selže, otázka není jen „proč“. Otázka je také: co už stihla, koho se to týká, co se má zopakovat a co se rozhodně opakovat nesmí. Bez záznamu běhu skončíš u logů, času spuštění a rituálního `grep` tance.
+
+Minimální záznam běhu:
+
+- název úlohy,
+- plánované období nebo rozsah,
+- čas startu a konce,
+- stav: `running`, `succeeded`, `partial`, `failed`, `cancelled`,
+- počet zpracovaných položek,
+- počet přeskočených položek,
+- počet chyb podle kategorie,
+- korelační ID,
+- odkaz na bezpečný detail nebo runbook.
+
+Do auditní stopy nedávej celé osobní údaje. Pokud úloha posílá reporty zákazníkům, nepotřebuješ v provozním logu plné e-maily, obsah reportu ani tokeny odkazů. Stačí identifikátory, agregované počty a bezpečně redigovaná chyba. Detail patří do primárního systému s oprávněním, ne do věčného logového bahna.
+
+### CZ.5 Selhání musí mít jasný další krok
+
+„Cron failed“ je informace asi jako „auto nejede“. Díky, Sherlocku. Potřebuješ vědět, jestli má systém zkusit běh znovu, jestli má člověk opravit data, jestli se má zákazníkovi něco říct a jestli je výsledek částečně použitelný.
+
+Rozlišuj čtyři typy selhání:
+
+- **Celý běh selhal před prací:** typicky chybí konfigurace, databáze není dostupná, migrace změnila schéma.
+- **Částečný běh:** část položek se povedla, část selhala. Potřebuješ seznam bezpečně opakovatelných položek.
+- **Zpožděný běh:** úloha neskončila v očekávaném okně, ale pořád může doběhnout.
+- **Špatný výsledek:** úloha technicky uspěla, ale vytvořila podezřelá data, například nula faktur tam, kde jich čekáš stovky.
+
+Pro každou důležitou úlohu napiš do runbooku: kdy automaticky retry, kdy ruční zásah, kdy komunikovat zákazníkovi a kdy raději úlohu vypnout. Vypínač je mimochodem velmi podceňovaná funkce. Lepší na hodinu zastavit připomínky než poslat tisíc špatných upozornění a pak předstírat, že to byla „personalizovaná kampaň“.
+
+### CZ.6 Crony uklízej stejně pečlivě jako funkce
+
+Plánované úlohy často přežijí funkce, kvůli kterým vznikly. Trial model se změnil, stará integrace je vypnutá, report už nikdo nečte, ale cron pořád každou noc běží a sahá do dat. To je technický dluh s budíkem.
+
+Jednou měsíčně zkontroluj:
+
+- které úlohy běžely za posledních 30 dní,
+- které nemají vlastníka,
+- které opakovaně selhávají nebo nic nezpracují,
+- které pracují s daty funkce, která už neexistuje,
+- které mají příliš široká oprávnění,
+- které drží výstupy déle, než potřebuješ,
+- které posílají notifikace lidem, kteří je už nepotřebují.
+
+Privacy-first pravidlo je jednoduché: pokud úloha nemá jasný aktuální účel, vypni ji, archivuj rozhodnutí a ukliď data. Automatizace bez účelu není efektivita. Je to robotický nepořádek.
+
+### CZ.7 Šablona karty plánované úlohy
+
+Použij ji pro každý cron, scheduled task nebo pravidelný worker.
+
+```markdown
+## Plánovaná úloha: [název]
+
+### Účel
+- Jaký výsledek úloha pravidelně dodává?
+- Kdo výsledek používá?
+
+### Plán
+- Frekvence:
+- Časové pásmo:
+- Spouštěč:
+- Dá se bezpečně spustit ručně?
+
+### Rozsah
+- Jaké účty, záznamy nebo období zpracovává?
+- Jak se práce dávkuje?
+- Jaký je očekávaný objem?
+
+### Bezpečnost a privacy
+- Jaká data úloha čte?
+- Jaká data zapisuje?
+- Jaká data se nesmí dostat do logů?
+- Jak dlouho držíme výstupy?
+
+### Idempotence
+- Jaký je unikátní klíč běhu?
+- Jak zabráníme duplicitám?
+- Co se stane při souběžném spuštění?
+
+### Monitoring
+- Jak poznáme úspěch?
+- Jak poznáme částečné selhání?
+- Kdo dostane alert?
+
+### Runbook
+- Automatický retry:
+- Ruční oprava:
+- Vypínač:
+- Komunikace zákazníkovi:
+```
+
+### CZ.8 Checklist: scheduled task bez půlnočního dramatu
+
+- [ ] Úloha má název podle výsledku, ne podle souboru nebo historické zkratky.
+- [ ] Je jasné, proč běží, kdo výsledek používá a co se stane, když neběží.
+- [ ] Čas spuštění je zvolený podle zákaznického dopadu, závislostí a podpory.
+- [ ] Časové pásmo je explicitní a nemíchá serverový, lokální a zákaznický čas.
+- [ ] Úloha je idempotentní a umí bezpečně přežít opakované nebo ruční spuštění.
+- [ ] Existuje záznam každého běhu se stavem, rozsahem, počty a korelačním ID.
+- [ ] Selhání má rozlišený typ a jasný další krok: retry, ruční oprava, vypnutí nebo komunikace.
+- [ ] Logy neobsahují celé osobní údaje, tokeny ani citlivé výstupy.
+- [ ] Úloha má vlastníka, runbook a bezpečný vypínač.
+- [ ] Neaktuální úlohy se pravidelně vypínají a jejich data se uklízí.
+
+Plánované úlohy jsou skvělé, když z nich uděláš spolehlivou provozní rutinu. Jsou nebezpečné, když je bereš jako technickou poznámku pod čarou. Cron totiž nikdy nezapomene. Což je obdivuhodné u počítače a lehce děsivé u skriptu, který už nikdo nechce přiznat.
+
+
 ## Pracovní log
+
+- 2026-09-02 02:02 UTC — Doplněna příloha CZ o cronech a plánovaných úlohách: pojmenování podle výsledku, čas spuštění jako produktové rozhodnutí, idempotentní běhy, auditní stopu, selhání s jasným dalším krokem, měsíční úklid, šablonu karty a privacy-first checklist.
 
 - 2026-09-02 01:01 UTC — Doplněna příloha CY o frontách a background jobech: minimální payloady, stavový model, retry podle typů chyb, priority front, observabilita podle dopadu, retenční pravidla, job karta a privacy-first checklist.
 
