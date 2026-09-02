@@ -20088,8 +20088,159 @@ Když na otázku nejde odpovědět během pár minut, napiš ji do rozhodovací 
 *Codyho komentář:* DPA není papírový štít proti všem problémům. Je to minimální vstupenka do dospělého provozu. Skutečná ochrana vzniká až kombinací dobré architektury, omezeného sběru dat, rozumných dodavatelů a lidí, kteří vědí, co kam posílají.
 
 
+## Příloha DM: Retence dat bez digitálního harampádí
+
+Retence dat je nudné téma jen do chvíle, než někdo požádá o výmaz, obnovíš starou zálohu nebo zjistíš, že v CRM pořád leží osobní údaje člověka, který se ozval jednou před pěti lety a nikdy se nestal zákazníkem. Malé webové a SaaS týmy často neukládají data navždy proto, že by měly ďábelský plán. Ukládají je navždy proto, že nikdo nenapsal, kdy mají zmizet.
+
+Privacy-first provoz potřebuje jednoduché pravidlo: každá datová kategorie musí mít účel, vlastníka, retenční dobu a způsob smazání nebo anonymizace. Bez toho není databáze aktivum. Je to půda plná krabic bez štítků, jen s vyšší pravděpodobností právní migrény.
+
+Oficiální evropský rámec mluví jasně: Evropská komise u principů GDPR vysvětluje, že osobní údaje se mají uchovávat jen po dobu nezbytnou pro účel, pro který byly získány, a GDPR v čl. 5 odst. 1 písm. e pracuje se zásadou omezení uložení. EDPB v pokynech k data protection by design and by default zároveň připomíná, že ochrana dat má být zabudovaná do návrhu systému, ne přilepená až po incidentu. Zdroje: Evropská komise k principům GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en, Evropská komise k podmínkám zpracování — https://commission.europa.eu/law/law-topic/data-protection/reform/rules-business-and-organisations/principles-gdpr/overview-principles/what-data-can-we-process-and-under-which-conditions_en a EDPB Guidelines 4/2019 — https://www.edpb.europa.eu/documents/guideline/guidelines-42019-on-article-25-data-protection-by-design-and-by-default_en.
+
+### DM.1 Retenci neřeš podle tabulky, ale podle účelu
+
+Nejhorší retenční politika je věta „data mažeme podle potřeby“. To většinou znamená „nemažeme nikdy, ale zníme pružně“. Lepší je začít mapou účelů:
+
+- **Poptávky z webu** — potřebuješ je pro obchodní reakci, navazující komunikaci a případně doložení kontextu nabídky.
+- **Zákaznický účet** — potřebuješ ho pro poskytování služby, fakturaci, podporu a bezpečnost.
+- **Produktové eventy** — potřebuješ je pro zlepšování produktu, ideálně agregovaně a bez identifikace konkrétních lidí.
+- **Logy** — potřebuješ je pro bezpečnost, ladění chyb a audit kritických operací.
+- **Marketingové kontakty** — potřebuješ je jen tam, kde máš jasný důvod a jasné očekávání člověka.
+- **Dočasné importy** — potřebuješ je na zpracování, kontrolu a opravu chyb, ne jako druhý stínový sklad.
+
+U každé kategorie si polož otázku: „Co přesně se rozbije, když to smažeme za 30, 90 nebo 365 dní?“ Pokud odpověď zní „možná se to někdy bude hodit“, není to účel. To je datové syslení v kravatě.
+
+### DM.2 Vytvoř retenční matici, kterou pochopí i člověk mimo vývoj
+
+Retenční pravidla nemají žít jen v hlavě CTO nebo v komentáři nad SQL jobem. Potřebuješ matici, kterou umí přečíst support, obchod i zakladatel.
+
+Praktický formát:
+
+| Kategorie dat | Účel | Typická retence | Co se stane potom | Vlastník |
+| --- | --- | --- | --- | --- |
+| Nevyřízená poptávka | Obchodní reakce | 90 dní od posledního kontaktu | Smazání nebo přesun do anonymního souhrnu | Obchod |
+| Aktivní účet | Poskytování služby | Po dobu smluvního vztahu | Přechod do ukončovacího režimu | Produkt |
+| Aplikační logy | Bezpečnost a diagnostika | 14–90 dní podle rizika | Rotace a smazání | Tech |
+| Importní soubor | Jednorázové zpracování | 7–30 dní | Smazání zdrojového souboru | Support/Tech |
+| Agregovaná analytika | Produktové rozhodování | Dlouhodobě, pokud nejde o osobní data | Ponechání agregátu | Produkt |
+
+Tyto doby nejsou univerzální právní rada. Jsou pracovní výchozí bod. Reálná doba závisí na účelu, smlouvách, účetních povinnostech, oboru a riziku. Důležité je, že každé číslo má důvod. Číslo bez důvodu je jen dekorace s kalendářem.
+
+### DM.3 Mazání musí být funkce produktu, ne ruční rituál
+
+Pokud data mažou lidé ručně jednou za rok, nebude se to dít spolehlivě. Retence musí být součást produktu a provozu:
+
+- databázový sloupec `delete_after` nebo `retention_until`,
+- pravidelný job, který vybírá položky po lhůtě,
+- auditní záznam, že mazání proběhlo,
+- bezpečný dry-run před ostrým mazáním,
+- report počtu smazaných a přeskočených záznamů,
+- alert, pokud mazací job neběží nebo podezřele nic nemaže.
+
+Jednoduché pravidlo pro vývoj: kdykoliv přidáš novou tabulku s osobními údaji, musíš zároveň odpovědět, jak se data smažou, anonymizují nebo exportují. Pokud odpověď neexistuje, feature není hotová. Má jen hezkou masku a datový ocas.
+
+### DM.4 Anonymizace není přejmenování sloupce na `anonymous_user`
+
+Anonymizace znamená, že z dat už nejde rozumně poznat konkrétní člověk. Pseudonymizace znamená, že identifikátor nahradíš jiným identifikátorem, ale pořád existuje cesta zpět nebo možnost propojení. To je užitečné bezpečnostní opatření, ale není to kouzelné zmizení osobních údajů.
+
+Prakticky:
+
+- Pokud potřebuješ trend návštěvnosti, drž agregace po dnech nebo týdnech.
+- Pokud potřebuješ chování účtů, preferuj úroveň organizace před úrovní jednotlivce.
+- Pokud potřebuješ debug, drž krátkou retenci detailních logů a delší retenci anonymních metrik.
+- Pokud potřebuješ důkaz o zpracování požadavku, ulož minimum: typ požadavku, čas, výsledek a interní referenci.
+- Pokud mažeš uživatele, neuchovávej jeho e-mail v analytice jen proto, že „dashboard by jinak měl díru“.
+
+Privacy-first analytika se neptá „kolik detailů dokážeme nasbírat“. Ptá se „jak málo detailů stačí na dobré rozhodnutí“.
+
+### DM.5 Zálohy potřebují vlastní retenční pravidla
+
+Zálohy jsou častá past. Produkční databáze už může mít smazaný účet, ale stará záloha ho pořád obsahuje. To neznamená, že máš přestat zálohovat. Znamená to, že zálohy musí mít jasný režim:
+
+- jak dlouho se drží denní, týdenní a měsíční zálohy,
+- kdo k nim má přístup,
+- jestli jsou šifrované,
+- kde fyzicky a právně leží,
+- jak se řeší obnova po výmazu dat,
+- jak se po restore znovu aplikují výmazy a anonymizace.
+
+Dobrá praxe pro malé týmy: vést seznam „deletion events“, které se po obnově starší zálohy znovu přehrají. Když obnovíš databázi ze včerejška, systém musí vědět, že některá data byla mezitím smazána a nemají se vrátit jako zombie účet. Zombie účty jsou zábavné jen v hororu, ne v GDPR provozu.
+
+### DM.6 Retence patří do supportu i do komunikace se zákazníkem
+
+Retenční pravidla nejsou jen interní technická tabulka. Zákazník by měl rozumět, co se děje s jeho daty po ukončení služby, po smazání účtu nebo po poslání importu.
+
+Do zákaznické komunikace dej jednoduše:
+
+- jak dlouho držíš účet po ukončení,
+- jak může zákazník získat export,
+- co se smaže hned a co až po provozní lhůtě,
+- jak fungují zálohy,
+- komu napsat kvůli žádosti o přístup, opravu nebo výmaz,
+- které údaje musíš držet kvůli smluvním, účetním nebo bezpečnostním důvodům.
+
+Nemusíš z toho dělat právní román. Stačí přesný, lidský text. „Po ukončení účtu držíme provozní data 30 dní kvůli obnově omylem zrušeného účtu, potom je smažeme nebo anonymizujeme. Fakturační doklady uchováváme podle zákonných povinností.“ To je lepší než patička o třiceti odstavcích, kterou nečetl ani její autor.
+
+### DM.7 Šablona retenční karty
+
+```md
+## Retenční karta: [kategorie dat]
+
+### Účel
+- Proč tato data sbíráme:
+- Který zákaznický nebo provozní proces podporují:
+
+### Rozsah
+- Konkrétní pole nebo dokumenty:
+- Obsahuje osobní údaje: ano/ne
+- Obsahuje citlivé nebo vysoce rizikové údaje: ano/ne
+
+### Retence
+- Aktivní doba uchování:
+- Co spouští začátek lhůty:
+- Co se stane po konci lhůty: smazání/anonymizace/agregace/archivace
+
+### Systémy
+- Kde data leží:
+- Kde jsou zálohy:
+- Kteří dodavatelé se dat dotýkají:
+
+### Přístup
+- Interní role s přístupem:
+- Zákaznický export:
+- Postup při žádosti o výmaz:
+
+### Automatizace
+- Mazací nebo anonymizační job:
+- Dry-run:
+- Report a alert:
+
+### Review
+- Vlastník:
+- Poslední kontrola:
+- Další kontrola:
+```
+
+### DM.8 Checklist: retence bez harampádí
+
+- [ ] Má každá hlavní datová kategorie jasný účel?
+- [ ] Víš, které údaje jsou osobní a které jsou už bezpečně agregované?
+- [ ] Má každá kategorie vlastníka?
+- [ ] Má každá kategorie retenční dobu s důvodem?
+- [ ] Je jasné, co se po konci lhůty stane?
+- [ ] Umí systém data mazat nebo anonymizovat automaticky?
+- [ ] Existuje dry-run mazání před ostrým spuštěním?
+- [ ] Máš report, že retenční job skutečně běží?
+- [ ] Řeší retenční pravidla i importy, exporty, přílohy a logy?
+- [ ] Mají zálohy vlastní dobu uchování a restore postup?
+- [ ] Umíš po obnově zálohy znovu aplikovat výmazy?
+- [ ] Je zákazníkům lidsky vysvětleno, co se s daty děje po ukončení?
+
+*Codyho komentář:* Retence je úklidová služba pro databázi. Když ji ignoruješ, systém sice pořád běží, ale každý další měsíc vozí batoh plný starých rizik. A ano, batoh může mít i pěkné UI. Pořád je to batoh.
+
+
 ## Pracovní log
 
+- 2026-09-02 15:00 UTC — Doplněna příloha DM o retenci dat: účely uchování, retenční matice, automatizované mazání, anonymizace vs. pseudonymizace, zálohy, komunikace se zákazníkem, šablona retenční karty, privacy-first checklist a odkazy na oficiální EU/EDPB zdroje.
 - 2026-09-02 14:00 UTC — Doplněna příloha DL o zpracovatelských smlouvách a DPA: role správce/zpracovatele, provozní karta, subdodavatelé, přenosy mimo EU/EHP, praktické čtení DPA, šablona zpracovatelské karty, privacy-first checklist a odkazy na oficiální EU zdroje.
 - 2026-09-02 13:00 UTC — Doplněna příloha DK o exit plánech dodavatelů a vendor lock-inu: odchod už při výběru nástroje, rozlišení rizika, přenositelný export dat, náhradní provozní scénář, pravidelné testy exportu, smluvní podmínky, šablona exit karty a privacy-first checklist.
 - 2026-09-02 12:00 UTC — Doplněna příloha DJ o rozpočtu provozu SaaS: fixní, proměnné a skryté náklady, vlastnictví nástrojů, rozpočtové guardraily, jednotková ekonomika, privacy-first datové riziko, měsíční cost review, šablona rozpočtové karty a checklist.
