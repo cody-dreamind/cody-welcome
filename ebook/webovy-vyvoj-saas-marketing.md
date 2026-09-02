@@ -17819,7 +17819,178 @@ Použij ji pro každý důležitý webhook nebo asynchronní proces.
 Webhooky jsou skvělý sluha a mizerný pán. Když je navrhneš jako produktový proces, pomůžou malému týmu automatizovat práci bez ztráty kontroly. Když je navrhneš jako „nějaký callback“, budeš jednou v noci vysvětlovat, proč se data tváří jako Schrödingerova kočka: zároveň odeslaná i neodeslaná.
 
 
+## Příloha CY: Fronty a background joby bez černé skříňky v rohu serveru
+
+Ne všechno v SaaS produktu patří do okamžité odpovědi webového requestu. Odeslání e-mailu, generování PDF, import dat, synchronizace s účetnictvím, přepočet reportů nebo zpracování webhooku může trvat déle, selhat a potřebovat opakování. Jakmile takovou práci schováš do „nějakého background procesu“, máš dvě možnosti: buď z toho bude spolehlivá provozní vrstva, nebo malý démon, který občas polkne fakturu a tváří se, že obědval salát.
+
+Fronta není jen technická optimalizace. Je to dohoda o tom, co se má stát později, jak poznáš úspěch, co uděláš při selhání a jak zabráníš tomu, aby jeden problémový úkol zastavil celý produkt. Privacy-first přístup k frontám znamená hlavně minimalizovat payloady, mít jasnou retenci jobů, neukládat do fronty citlivá data bez důvodu a umět zákazníkovi vysvětlit, co se s jeho akcí děje.
+
+### CY.1 Do fronty dávej úkol, ne celé zákaznické tajemství
+
+Nejčastější chyba je poslat do jobu všechno, co máš právě po ruce: celý formulář, profil uživatele, interní poznámky, tokeny, snapshot objednávky a trochu logovacího koření navrch. Funguje to rychle při vývoji, ale v provozu tím vyrábíš datový sklad bez pravidel.
+
+Lepší model je jednoduchý:
+
+- **Job říká, co se má udělat.** Například `send_welcome_email`, `generate_invoice_pdf`, `sync_customer_to_crm`.
+- **Job nese stabilní identifikátory.** Například `account_id`, `user_id`, `invoice_id`, `request_id`.
+- **Job si data načte až při zpracování.** Díky tomu pracuje s aktuálním stavem a nemusíš držet kopie osobních údajů ve frontě.
+- **Job má minimální metadata.** Prioritu, čas vytvoření, počet pokusů, poslední chybu a korelační ID.
+
+Příklad lepšího payloadu:
+
+```json
+{
+  "job_id": "job_123",
+  "job_type": "generate_invoice_pdf",
+  "created_at": "2026-09-02T01:00:00Z",
+  "account_id": "acc_456",
+  "invoice_id": "inv_789",
+  "request_id": "req_abc"
+}
+```
+
+Tohle je nudné. Přesně proto je to dobré. Nudný payload se dá auditovat, opakovat a bezpečně mazat. Payload s půlkou databáze uvnitř je naproti tomu časovaná GDPR pinata.
+
+### CY.2 Každý job potřebuje stavový model
+
+„Běží to na pozadí“ není stav. Je to věta, kterou říká člověk, když doufá, že se ho nikdo nezeptá na detail. U důležitých jobů si navrhni malý stavový model, který umí odpovědět na otázky podpory, vývoje i zákazníka.
+
+Praktické stavy:
+
+- `queued` — úkol čeká na zpracování,
+- `processing` — worker ho právě zpracovává,
+- `succeeded` — práce skončila úspěšně,
+- `retry_scheduled` — selhalo to, ale dává smysl pokus opakovat,
+- `failed_final` — automatické pokusy skončily,
+- `cancelled` — úkol byl zrušen před dokončením,
+- `superseded` — úkol nahradila novější verze.
+
+U každého stavu si napiš, kdo ho může nastavit a co se potom smí stát. Například job v `failed_final` by neměl donekonečna sám vstávat z mrtvých. Má mít ruční rozhodnutí: opravit vstupní data, spustit znovu, ignorovat, nebo eskalovat zákazníkovi.
+
+*Codyho komentář:* Stav `processing` starý tři dny není processing. To je digitální mumie. Vystav ji v muzeu technického dluhu a pak napiš watchdog.
+
+### CY.3 Retry není kladivo, ale léčba podle diagnózy
+
+Ne každé selhání se má opakovat. Když selže požadavek kvůli dočasnému výpadku sítě, retry pomůže. Když chybí povinné pole, retry jen desetkrát zopakuje stejný průšvih a přidá hluk do logů.
+
+Rozlišuj chyby podle povahy:
+
+- **Dočasné chyby:** timeout, nedostupná externí služba, rate limit. Retry dává smysl.
+- **Vstupní chyby:** neplatný e-mail, chybějící faktura, špatný formát. Retry bez opravy nepomůže.
+- **Oprávnění:** expirovaný token, odebraný přístup, zakázaná operace. Potřebuje zásah správce nebo zákazníka.
+- **Doménový konflikt:** zákazník mezitím zrušil účet, faktura už byla stornovaná, importovaný záznam existuje. Potřebuje rozhodnutí podle pravidel produktu.
+
+Dobrý retry plán může vypadat třeba takto:
+
+1. první pokus hned,
+2. druhý pokus za 1 minutu,
+3. třetí pokus za 5 minut,
+4. čtvrtý pokus za 30 minut,
+5. po posledním pokusu stav `failed_final` a viditelný záznam pro podporu.
+
+Nepouštěj retry bez limitu. Nekonečný retry je jako kolega, který posílá stejný e-mail každých pět minut a pokaždé doufá, že tentokrát bude realita jiná.
+
+### CY.4 Priorita chrání zákaznickou hodnotu
+
+V jedné frontě se snadno potká všechno: onboardingový e-mail, noční report, import sta tisíc řádků a drobný webhook z platební brány. Pokud nemáš priority nebo oddělené fronty, může nízkohodnotná práce zablokovat kritický proces.
+
+Rozděl práci podle dopadu:
+
+- **Kritické joby:** platby, bezpečnostní upozornění, reset hesla, dokončení registrace.
+- **Důležité joby:** zákaznické notifikace, synchronizace obchodních dat, generování dokumentů.
+- **Dávkové joby:** reporty, agregace analytiky, úklid starých dat, přepočty statistik.
+- **Volitelné joby:** doporučení, interní enrichment, kosmetické aktualizace.
+
+Pro malé SaaS často stačí dvě až tři fronty: `critical`, `default`, `batch`. Důležité je, aby kritická fronta nebyla rukojmím nočního importu. Když se něco zpomalí, zákazník má pořád dostat účet, přihlášení a potvrzení akce.
+
+Privacy-first poznámka: priorita nesmí být výmluva pro větší sběr dat. Kritický job má být rychlý, malý a dobře dohledatelný, ne „pošleme všechno do workeru a uvidíme“.
+
+### CY.5 Observabilita má říkat dopad, ne jen počet jobů
+
+Dashboard s počtem zpracovaných jobů vypadá hezky, ale při incidentu potřebuješ znát dopad. Zákazníka nezajímá, že frontou prošlo 12 000 položek. Zajímá ho, jestli jeho export, faktura nebo import skončil správně.
+
+Měř hlavně:
+
+- počet čekajících jobů podle typu a priority,
+- stáří nejstaršího čekajícího jobu,
+- počet finálních selhání za poslední hodinu a den,
+- průměrnou a hraniční dobu zpracování,
+- počet opakování podle příčiny,
+- dopad na zákaznické workflow.
+
+Do logů neukládej celé payloady, pokud obsahují osobní nebo obchodně citlivá data. Ukládej raději identifikátor jobu, typ, účet, korelační ID, stav, chybovou kategorii a bezpečně zkrácenou zprávu. Když potřebuješ detail, dohledáš ho v primárním systému podle oprávnění, ne v logovacím skladišti.
+
+### CY.6 Joby potřebují úklid a retenční pravidla
+
+Fronta není archiv. To, že systém umí držet historii jobů, neznamená, že ji má držet navždy. Staré úspěšné joby jsou užitečné pro krátkodobý audit a debugging. Po nějaké době jsou to jen data navíc, která někdo musí chránit.
+
+Nastav si retenční vrstvy:
+
+- úspěšné joby drž krátce, například pro provozní kontrolu,
+- selhané joby drž déle, dokud se nevyřeší nebo neuzavřou,
+- payloady maž rychleji než metadata,
+- citlivé chyby rediguj hned při zápisu,
+- exportovatelné auditní záznamy odděl od technických logů,
+- testovací joby pravidelně maž nebo izoluj od produkce.
+
+Retence má být součást návrhu, ne úklidová akce po dvou letech. Pokud nevíš, proč konkrétní job historii držíš, pravděpodobně ji držíš moc dlouho.
+
+### CY.7 Šablona job karty
+
+Pro každý důležitý background proces si vyplň krátkou kartu:
+
+```markdown
+## Job: [název]
+
+### Účel
+- Jaký zákaznický nebo provozní výsledek job dokončuje?
+
+### Spouštěč
+- Co job vytváří?
+- Je spouštěč uživatelská akce, webhook, cron, nebo interní proces?
+
+### Payload
+- Jaká ID job nese?
+- Jaká data si načítá až při zpracování?
+- Jaká citlivá data ve frontě nesmí být?
+
+### Stav a retry
+- Jaké stavy job používá?
+- Které chyby se opakují?
+- Po kolika pokusech končí automatika?
+
+### Priorita
+- Do jaké fronty patří?
+- Co se stane, když se fronta zpomalí?
+
+### Observabilita
+- Jak poznáme úspěch?
+- Jak poznáme zákaznický dopad selhání?
+- Kde najde podporák bezpečný detail?
+
+### Retence
+- Jak dlouho držíme metadata?
+- Jak dlouho držíme payload?
+- Kdo může job ručně zopakovat nebo zrušit?
+```
+
+### CY.8 Checklist: background joby bez černé skříňky
+
+- [ ] Každý důležitý job má jasný účel navázaný na zákaznický nebo provozní výsledek.
+- [ ] Payload obsahuje hlavně identifikátory, ne zbytečné kopie osobních a obchodních dat.
+- [ ] Job má čitelný stavový model a viditelný důvod posledního selhání.
+- [ ] Retry režim rozlišuje dočasné chyby, vstupní chyby, oprávnění a doménové konflikty.
+- [ ] Kritické procesy nejsou blokované dávkovými importy nebo reporty.
+- [ ] Monitoring ukazuje stáří fronty, finální selhání a dopad na workflow, ne jen technické počty.
+- [ ] Logy neobsahují celé citlivé payloady a používají korelační ID.
+- [ ] Úspěšné, selhané i testovací joby mají retenční pravidla a pravidelný úklid.
+
+*Codyho komentář:* Background job je dobrý sluha, když víš, co dělá, proč to dělá a kdy má přestat. Jakmile jen „někde běží worker“, produkt připomíná restauraci, kde kuchyně nemá lístky objednávek, ale všichni tvrdí, že polévka určitě dorazí.
+
+
 ## Pracovní log
+
+- 2026-09-02 01:01 UTC — Doplněna příloha CY o frontách a background jobech: minimální payloady, stavový model, retry podle typů chyb, priority front, observabilita podle dopadu, retenční pravidla, job karta a privacy-first checklist.
 
 - 2026-09-02 00:01 UTC — Doplněna příloha CX o webhookách a asynchronních procesech: pojmenování událostí, verzovaný payload, stavové zpracování, idempotentní retry, podpis požadavků, provozní monitoring, šablona webhook karty a privacy-first checklist.
 
