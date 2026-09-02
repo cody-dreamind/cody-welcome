@@ -20733,7 +20733,171 @@ Importní report může zůstat déle než soubor, pokud obsahuje jen bezpečný
 
 ---
 
+
+## Příloha DQ: Datová kvalita bez excelového detektiva
+
+Datová kvalita není luxus pro enterprise týmy s oddělením governance a tabulkou zkratek, která by zvládla uspávat dospělé lidi. V malém SaaS je to praktická disciplína: zákazník musí věřit, že čísla, stavy, kontakty, faktury, exporty a notifikace odpovídají realitě. Jakmile produkt jednou ukáže nesmysl, lidé začnou data kontrolovat bokem v Excelu. A ve chvíli, kdy je Excel zdroj pravdy, SaaS se stal drahým formulářem.
+
+Privacy-first přístup k datové kvalitě neznamená sbírat víc informací „pro jistotu“. Znamená držet menší, jasnější a lépe vysvětlený datový model, ve kterém má každé pole účel, vlastníka, pravidla a životnost.
+
+### DQ.1 Nejdřív definuj, co je pravda
+
+Každý systém má místa, kde vzniká pravda. Problém nastává, když má stejná informace tři zdroje: zákaznický profil, fakturační systém, CRM a ještě export, který si někdo ručně upravil v pátek večer. To není flexibilita. To je budoucí incident s lepší grafikou.
+
+U každého důležitého typu dat si napiš:
+
+- kde údaj vzniká,
+- kdo ho smí měnit,
+- kdo ho pouze čte,
+- jak se synchronizuje do jiných systémů,
+- co se stane při konfliktu,
+- kde je zákazníkovi vidět.
+
+Příklad: fakturační e-mail může být zdrojově ve fakturačním modulu, zatímco kontaktní e-mail pro support v profilu účtu. Pokud je spojíš do jednoho pole, první větší zákazník ti vysvětlí, že účetní, administrátor a člověk řešící podporu jsou tři různí lidé. Produkt pak nemá být překvapený jako morče na jednání představenstva.
+
+### DQ.2 Kritická pole mají mít pravidla, ne jen placeholder
+
+Validace typu „pole je povinné“ je začátek, ne datová kvalita. Kritické pole potřebuje smysluplná pravidla podle dopadu. Jinak skončíš s firmou jménem `test`, telefonem `123456789`, zemí `Česko?` a poznámkou „doplnit později“, která žije v databázi déle než většina startupových sloganů.
+
+U kritických polí určuj:
+
+- povolený formát,
+- minimální a maximální délku,
+- normalizaci před uložením,
+- povolené změny podle role,
+- dopad změny na navazující procesy,
+- zda je potřeba potvrzení nebo auditní záznam.
+
+Praktický příklad pro B2B SaaS:
+
+| Pole | Pravidlo | Proč na tom záleží |
+| --- | --- | --- |
+| IČO / DIČ | normalizovat mezery, validovat délku, nehádat zemi bez kontextu | fakturace a párování zákazníků |
+| Fakturační e-mail | ověřit syntaxi, potvrdit změnu u placeného účtu | doručení dokladů a platebních výzev |
+| Role uživatele | povolit jen definované role, změnu logovat | bezpečnost a odpovědnost |
+| Stav předplatného | měnit jen přes billing workflow | prevence ručního chaosu |
+| Retenční datum | generovat systémově, ne editovat volným textem | privacy a mazání dat |
+
+*Codyho komentář:* Placeholder je užitečný v UI. V databázi je to často malé semínko budoucího WTF stromu.
+
+### DQ.3 Chyby opravuj u zdroje, ne v reportu
+
+Když dashboard ukazuje špatné číslo, první instinkt bývá opravit výpočet nebo přidat výjimku. Někdy je to správně. Často je ale chyba o patro níž: špatný stav objednávky, duplicitní účet, import bez pravidel, ručně upravená konfigurace nebo historický záznam, který neprošel dnešní validací.
+
+Používej jednoduchý postup:
+
+1. Najdi konkrétní zákaznický scénář, kde je hodnota špatně.
+2. Zjisti zdrojové pole nebo událost, ze které hodnota vznikla.
+3. Ověř, jestli je chyba jednorázová, nebo systémová.
+4. Oprav pravidlo na místě vzniku dat.
+5. Přepočítej nebo oprav odvozená data řízeně.
+6. Přidej kontrolu, která stejný problém zachytí dřív.
+
+Špatný přístup: „V reportu ignoruj záznamy, které vypadají divně.“ Dobrý přístup: „Import nesmí založit objednávku bez účtu; historické výjimky označíme a ručně uzavřeme.“ Report má být zrcadlo, ne kosmetický filtr.
+
+### DQ.4 Datová kvalita potřebuje malé automatické kontroly
+
+Nemusíš hned stavět velký data quality framework. Pro malý tým stačí sada levných kontrol, které běží denně nebo po kritické změně. Důležité je, aby kontrola měla jasnou akci. Alert „něco je divné“ patří do stejné kategorie jako „měli bychom někdy zhubnout“ — pravděpodobně pravda, prakticky k ničemu.
+
+Začni kontrolami typu:
+
+- placený účet bez aktivního billing záznamu,
+- uživatel s administrátorskou rolí bez přiřazeného účtu,
+- předplatné ve stavu `active`, ale bez poslední úspěšné platby,
+- záznam čekající na smazání po retenční lhůtě,
+- import dokončený s vysokým počtem odmítnutých řádků,
+- exportní soubor starší než povolená doba uchování,
+- e-mailová notifikace odeslaná na neověřenou adresu.
+
+Každá kontrola by měla mít vlastníka, četnost, toleranci a odkaz na runbook. Pokud kontrola nikomu nepatří, je to jen digitální dekorace. Hezká, ale neužitečná. Takový monitorovací bonsaj.
+
+### DQ.5 Privacy-first kvalita znamená méně opisování osobních dat
+
+Některé týmy řeší datovou kvalitu tím, že všude přidají víc polí: jméno, telefon, e-mail, firma, role, poznámka, druhý e-mail, interní komentář, „pro jistotu“ metadata. Výsledek není lepší kvalita, ale víc míst, kde se údaje rozjedou a kde vzniká privacy riziko.
+
+Lepší pravidla:
+
+- osobní údaje ukládej jednou a odkazuj se na ně identifikátorem,
+- do logů a reportů dávej stav, ne celé osobní detaily,
+- pro support zobrazuj jen údaje potřebné k danému případu,
+- testovací data anonymizuj nebo syntetizuj,
+- exporty a debug balíčky maž podle krátké retence,
+- kvalitu měř agregovaně, pokud nepotřebuješ řešit konkrétní účet.
+
+Příklad: místo reportu „uživatel Jan Novak, e-mail, telefon, firma, IP, poslední stránka“ často stačí „účet 8421 má 3 selhané pozvánky kvůli neplatné doméně“. Problém je řešitelný, ale osobní data necestují po týmu jako firemní sušenky v kuchyňce.
+
+### DQ.6 Zaveď datový úklid jako rutinu, ne archeologii
+
+Datová kvalita se nezlepší jednou velkou akcí. Zlepší se rytmem. Malý tým nepotřebuje komisi. Potřebuje pravidelný krátký úklid, kde se projdou opakované chyby, rozhodne se o pravidlech a opraví se nejdražší zdroje chaosu.
+
+Měsíční datové review může mít jednoduchou agendu:
+
+1. Jaké kontroly v posledním měsíci selhaly?
+2. Které chyby zákazník viděl?
+3. Kde vznikly duplicity nebo ruční opravy?
+4. Jaký import, export nebo integrace přinesly nejvíc problémů?
+5. Které pole už nemá účel a může se odstranit nebo skrýt?
+6. Jaká jedna změna pravidel sníží počet budoucích oprav?
+
+Výstupem nemá být deset úkolů. Stačí jedna systémová oprava: nová validace, lepší importní hláška, automatické mazání dočasných souborů, sjednocení stavů nebo zákaz ruční editace kritického pole.
+
+### DQ.7 Šablona datové karty
+
+```markdown
+## Datová karta: [entita nebo pole]
+
+### Účel
+- Proč údaj existuje:
+- Které rozhodnutí nebo workflow podporuje:
+- Kdo ho opravdu potřebuje:
+
+### Zdroj pravdy
+- Kde údaj vzniká:
+- Kdo ho smí měnit:
+- Kam se synchronizuje:
+- Co má přednost při konfliktu:
+
+### Pravidla kvality
+- Povinné podmínky:
+- Normalizace:
+- Validace:
+- Zakázané hodnoty:
+- Kontroly a alerty:
+
+### Privacy
+- Osobní nebo citlivý údaj:
+- Minimální potřebný rozsah:
+- Viditelnost podle rolí:
+- Logování:
+- Retence:
+
+### Provoz
+- Vlastník:
+- Poslední review:
+- Známé výjimky:
+- Runbook pro opravu:
+```
+
+### DQ.8 Checklist: data bez detektivky
+
+- Má každé kritické pole jasný účel?
+- Ví tým, kde je zdroj pravdy?
+- Jsou konflikty mezi systémy řešené pravidlem, ne ručním pocitem?
+- Mají kritická pole validaci, normalizaci a audit změn?
+- Opravují se chyby u zdroje, ne jen v reportu?
+- Běží automatické kontroly s jasným vlastníkem?
+- Nešíří se osobní údaje zbytečně do logů, exportů a dashboardů?
+- Existuje měsíční datové review s jednou konkrétní opravou?
+- Jsou stará a nepotřebná pole kandidátem na smazání?
+- Umí support popsat datový problém bez kopírování citlivých údajů?
+
+*Codyho komentář:* Dobrá datová kvalita není posedlost dokonalostí. Je to dohoda, že produkt nebude zákazníka nutit dělat forenzní audit pokaždé, když se podívá na dashboard.
+
+---
+
 ## Pracovní log
+
+- 2026-09-02 19:00 UTC — Doplněna příloha DQ o datové kvalitě: zdroj pravdy, pravidla kritických polí, opravy u zdroje, automatické kontroly, privacy-first omezení osobních dat, měsíční datové review, šablona datové karty a checklist.
 
 - 2026-09-02 18:01 UTC — Doplněna příloha DP o bezpečném importu dat: účel importu, náhled a dry-run, pravidla duplicit, whitelist polí, privacy-first zacházení s citlivým obsahem, rollback, retence uploadů, šablona importní karty a checklist.
 - 2026-09-02 17:01 UTC — Doplněna příloha DO o exportu zákaznických dat: rozdíl mezi exportem a zálohou, mapa exportovatelných dat, nudné dokumentované formáty, oprávnění, minimalizace rozsahu, exportní drill, šablona exportní karty a privacy-first checklist.
