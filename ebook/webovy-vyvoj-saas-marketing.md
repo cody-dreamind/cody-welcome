@@ -21377,7 +21377,169 @@ Do týdenního reportu nedávej jen návštěvy podle kampaní. Přidej jednoduc
 
 ---
 
+## Příloha DU: A/B testování bez sledovacího cirkusu
+
+A/B testování má jednoduchý slib: ukázat, která varianta funguje lépe. V praxi se z něj často stane malý šmírovací lunapark — identifikátory v prohlížeči, profilování návštěvníků, nekonečné experimenty na každém tlačítku a reporty, které vypadají vědecky hlavně proto, že mají dvě desetinná místa. Malý web nebo SaaS tým ale většinou nepotřebuje laboratorní komplexitu. Potřebuje zjistit, jestli nová nabídka, headline, CTA nebo onboarding krok pomáhá zákazníkovi udělat smysluplný další krok.
+
+Privacy-first A/B testování začíná otázkou: co nejmenšího musíme změřit, abychom se mohli lépe rozhodnout? Ne „jak poznáme každého člověka napříč návštěvami“, ale „která varianta lépe podporuje konkrétní akci“. To je rozdíl mezi produktovým učením a datovým hromaděním. První pomáhá byznysu. Druhé pomáhá hlavně budoucímu úklidu.
+
+### DU.1 Testuj jen rozhodnutí, které opravdu uděláš
+
+Než spustíš experiment, napiš si rozhodnutí, které po něm přijde. Pokud žádné rozhodnutí neexistuje, experiment je jen dražší anketa.
+
+Dobré rozhodovací otázky:
+
+- Má homepage jasněji vést na konzultaci, nebo na samostatný auditní checklist?
+- Zvyšuje kratší onboarding počet účtů, které dokončí první hodnotový krok?
+- Funguje konkrétní nabídka pro menší B2B firmy lépe než obecná formulace „digitální řešení na míru“?
+- Přivádí případová studie kvalitnější poptávky než technický článek?
+- Snižuje vysvětlení privacy-first provozu obavy zákazníků před odesláním formuláře?
+
+Špatná otázka: „Co kdybychom otestovali barvu tlačítka?“ Pokud tlačítko nikdo nevidí, barva není problém. Pokud nabídce nikdo nerozumí, barva je make-up na mlze.
+
+### DU.2 Hypotéza musí mít chování, ne jen názor
+
+Experiment potřebuje hypotézu ve tvaru:
+
+> Věříme, že **[změna]** pomůže **[konkrétním lidem]** udělat **[konkrétní akci]**, protože **[důvod z pozorování]**.
+
+Příklady:
+
+- Věříme, že headline zaměřený na „více poptávek bez reklamní závislosti“ pomůže menším servisním firmám kliknout na audit webu, protože v rozhovorech opakovaně řešily nestabilní placenou reklamu.
+- Věříme, že první onboarding krok „nahrajte vzorek dat“ pomůže SaaS uživatelům rychleji vidět hodnotu, protože prázdný dashboard působí jako účetní závěrka po zemětřesení.
+- Věříme, že samostatný blok o evropském provozu zvýší kvalitu B2B poptávek, protože zákazníci se před podpisem ptají na umístění dat a subdodavatele.
+
+Hypotéza drží tým při zemi. Bez ní se bude po výsledku hledat příběh, který se hodí do nálady. A to už není experiment, to je horoskop s grafem.
+
+### DU.3 Jedna primární metrika stačí
+
+Každý test musí mít jednu primární metriku. Ne pět. Ne „uvidíme v dashboardu“. Jednu. Když jich máš víc, po testu si skoro vždycky vybereš tu, která potvrzuje oblíbený názor.
+
+Příklady primární metriky:
+
+- kliknutí na hlavní CTA,
+- odeslaný poptávkový formulář,
+- dokončený aktivační krok,
+- založený projekt,
+- rezervovaný termín konzultace,
+- otevřená dokumentace po registraci,
+- přechod z pricingu na kontakt.
+
+Sekundární metriky mohou pomoct vysvětlit kontext, ale nesmí potichu změnit vítěze. Pokud byl cíl zvýšit dokončený onboarding, varianta s větším počtem náhodných kliků na homepage není vítěz. Je to jen společensky aktivní poražený.
+
+### DU.4 Randomizace nemusí znamenat identifikaci člověka
+
+U jednoduchých webových testů často nepotřebuješ dlouhodobě poznávat návštěvníka. Stačí rozdělit provoz podle anonymního pravidla a měřit agregovaný výsledek variant.
+
+Praktické možnosti:
+
+- rozdělit variantu serverově podle náhodného čísla pro konkrétní zobrazení,
+- použít krátkodobou technickou hodnotu jen pro udržení konzistence během jedné návštěvy,
+- testovat varianty po časových blocích, pokud je provoz stabilní a sezónnost nízká,
+- testovat na landing page s odlišnou URL a porovnávat agregované výsledky,
+- u malého provozu použít kvalitativní test: pět až deset rozhovorů a pozorování průchodu stránkou.
+
+Čemu se vyhnout bez opravdu dobrého důvodu:
+
+- trvalým identifikátorům v prohlížeči,
+- spojování experimentu s e-mailem nebo CRM profilem,
+- předávání varianty do reklamních systémů,
+- ukládání celé cesty jednotlivce pro „pozdější analýzu“,
+- exportům surových eventů tam, kde stačí agregace.
+
+Privacy-first pravidlo: pokud experiment dokážeš vyhodnotit na úrovni varianty a počtu dokončených akcí, nepotřebuješ znát osobní příběh každého návštěvníka. Produkt se může učit i bez dalekohledu v obýváku.
+
+### DU.5 Malý provoz potřebuje trpělivost a úsudek
+
+Ne každý web má dost návštěv na čisté statistické testování. To není selhání. Selhání je tvářit se, že 27 návštěv a dvě konverze jsou kosmická pravda.
+
+U malého provozu pomáhá:
+
+- testovat větší změny, ne kosmetiku,
+- měřit blíž k obchodní hodnotě,
+- neukončovat test po prvním dobrém dni,
+- kombinovat čísla s rozhovory a nahranými poznámkami ze salesu,
+- předem určit minimální dobu běhu,
+- rozhodovat podle trendu, kvality poptávek a opakovaných signálů.
+
+Když má web nízký provoz, často je lepší udělat jasnější nabídku a ověřit ji s konkrétními lidmi než týdny čekat, jestli drobná změna v hero sekci překoná šum. Statistika je fajn sluha, ale mizerný alibista.
+
+### DU.6 Experiment má mít datum konce a vlastníka
+
+Každý experiment potřebuje kartu, vlastníka a konec. Jinak se z něj stane permanentní produkční stav, kterému nikdo nerozumí. Varianta B běží už čtyři měsíce, nikdo neví proč, dashboard má rozbité filtry a nový člověk v týmu se bojí cokoliv vypnout. Klasika. Ne hezká, ale klasika.
+
+Minimální provozní pravidla:
+
+- jeden vlastník experimentu,
+- datum spuštění a plánované vyhodnocení,
+- primární metrika,
+- seznam dotčených stránek nebo obrazovek,
+- informace, jestli test používá cookies, local storage nebo serverovou logiku,
+- rollback plán,
+- rozhodnutí po ukončení: ponechat, vrátit, upravit, zahodit.
+
+Po vyhodnocení test ukliď. Odstraň mrtvý kód, staré texty, nepoužívané eventy i poznámky v analytice. Experiment, který nikdo neuklidí, je budoucí technický dluh převlečený za učení.
+
+### DU.7 Šablona experimentální karty
+
+```markdown
+## Experiment: [název]
+
+### Rozhodnutí
+- Co po experimentu změníme, pokud varianta vyhraje?
+- Co uděláme, pokud výsledek bude nejasný?
+
+### Hypotéza
+- Věříme, že:
+- Pro koho:
+- Protože:
+
+### Varianty
+- Varianta A:
+- Varianta B:
+- Dotčené stránky / kroky:
+
+### Měření
+- Primární metrika:
+- Sekundární signály:
+- Minimální doba běhu:
+- Kde se výsledek vyhodnotí:
+
+### Privacy kontrola
+- Používáme cookies nebo local storage?
+- Ukládáme osobní údaje? Pokud ano, proč je nejde odstranit?
+- Stačí agregované vyhodnocení?
+- Kdo má přístup k výsledkům?
+- Kdy smažeme dočasná experimentální data?
+
+### Ukončení
+- Datum vyhodnocení:
+- Rozhodnutí:
+- Co se nasadí:
+- Co se smaže:
+- Poučení pro další práci:
+```
+
+### DU.8 Checklist: experiment bez šmírování
+
+- Má experiment jasné rozhodnutí?
+- Je hypotéza napsaná před spuštěním?
+- Má test jednu primární metriku?
+- Testujeme změnu, která může reálně ovlivnit chování?
+- Nepoužíváme osobní údaje tam, kde stačí agregace?
+- Nelepíme identitu uživatele do URL, eventů ani experimentálních názvů?
+- Víme, kde se ukládají data o variantách a výsledcích?
+- Má experiment vlastníka a datum vyhodnocení?
+- Umíme test bezpečně vypnout?
+- Smažeme po ukončení nepoužívaný kód, eventy a dočasná data?
+- Zapíšeme rozhodnutí tak, aby ho pochopil i člověk, který u testu nebyl?
+
+Privacy-first experimentování není odmítnutí měření. Je to odmítnutí zbytečného sběru dat, který se tváří jako profesionalita. Dobrý test má pomoct zákazníkovi rychleji pochopit hodnotu a týmu lépe se rozhodnout. Když k tomu nepotřebuješ osobní profil, neber si ho. Internet už má dost lidí, kteří sbírají všechno „pro jistotu“. Jistota je mimochodem nejčastější přezdívka budoucího incidentu.
+
+---
+
 ## Pracovní log
+- 2026-09-02 23:00 UTC — Doplněna příloha DU o A/B testování bez sledovacího cirkusu: rozhodovací otázky, hypotéza, primární metrika, anonymní rozdělení variant, práce s malým provozem, ukončení experimentu, experimentální karta a privacy-first checklist.
 - 2026-09-02 22:00 UTC — Doplněna příloha DT o UTM značení bez datového smogu: rozhodovací otázky, slovník zdrojů a médií, názvy kampaní, zákaz osobních údajů v URL, vlastnictví odkazů, vyhodnocení dopadu, UTM karta a privacy-first checklist.
 
 - 2026-09-02 21:01 UTC — Doplněna příloha DS o cookie liště bez dark patterns: audit cookies před nasazením, technické cookies bez zbytečné lišty, férový souhlas, kategorie, kontrola externích skriptů, analytika bez cookies, cookie karta, checklist a odkazy na ÚOOÚ, Evropskou komisi a EDPB.
