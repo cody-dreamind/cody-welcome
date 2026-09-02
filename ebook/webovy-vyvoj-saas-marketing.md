@@ -18301,7 +18301,173 @@ Výjimka musí sama vypršet. Ruční výjimky bez expirace jsou technické teto
 Rate limiting má chránit kvalitu služby, ne maskovat špatně navržený produkt. Když ho nastavíš dobře, zákazník ho většinu času vůbec nepozná. A když ho pozná, pochopí proč. To je přesně ta neviditelná provozní práce, která nevypadá sexy na keynote, ale zachraňuje pondělí ráno.
 
 
+
+## Příloha DB: Feature flagy bez chaosu v produkci
+
+Feature flag je malý přepínač s velkou mocí. Umí zpřístupnit novou funkci jen vybraným zákazníkům, vypnout rizikový tok bez deploye, otestovat nový onboarding na části účtů nebo bezpečně rozdělit velkou změnu na menší kroky. Když se ale nechá růst bez pravidel, promění se v druhou skrytou aplikaci: nikdo přesně neví, kdo co vidí, proč se něco chová jinak a který zapomenutý přepínač drží starý kód při životě.
+
+Feature flag není omluva pro nedokončenou práci. Je to provozní nástroj pro řízenou změnu. Dobře použitý snižuje riziko. Špatně použitý přidává další vrstvu nejistoty mezi produkt, support a zákazníka. A nejistota v produkci je drahá, i když má hezké UI a říká si „experimentální rollout“.
+
+*Codyho komentář:* Feature flag je jako vypínač ve sklepě. Skvělý, když je popsaný. Horor, když jich je padesát a jeden z nich vypíná fakturaci.
+
+### DB.1 Každý flag musí mít účel a konec
+
+Než přidáš nový přepínač, napiš si jednu větu:
+
+> Tento flag existuje proto, abychom bezpečně **[změnili/co ověřili]** pro **[koho]** do **[kdy]**.
+
+Příklady:
+
+- Zapnout nový onboarding pro tři pilotní účty a ověřit, že dokončí první konfiguraci bez ruční pomoci.
+- Nasadit nový export faktur nejdřív interně, potom pro jeden účet a nakonec pro všechny zákazníky.
+- Umět okamžitě vypnout drahou synchronizaci, pokud začne zatěžovat databázi.
+
+Špatný flag má název `new_ui` a žije tři roky. Dobrý flag má název `billing_export_v2_rollout`, vlastníka, plán odstranění a jasné kritérium úspěchu. Pokud neumíš říct, kdy flag smažeš, pravděpodobně nevytváříš flag, ale trvalou produktovou variantu. A ta potřebuje dokumentaci, podporu a obchodní rozhodnutí.
+
+Praktické minimum pro každý flag:
+
+- **Vlastník** — člověk, který rozhoduje o zapnutí, vypnutí a smazání.
+- **Typ** — rollout, experiment, provozní pojistka, zákaznická výjimka nebo interní režim.
+- **Rozsah** — účty, role, prostředí nebo procento provozu.
+- **Kritérium dokončení** — co musí být pravda, aby se flag odstranil.
+- **Datum review** — kdy se rozhodne, jestli pokračuje, končí nebo se mění na produktovou variantu.
+
+### DB.2 Rozliš rollout, experiment a provozní pojistku
+
+Všechny přepínače nevznikají ze stejného důvodu. Když je házíš do jedné hromady, skončíš s tím, že produktový experiment má dopad jako incident a bezpečnostní pojistka se používá jako obchodní konfigurace.
+
+Rozumné typy flagů:
+
+- **Release flag** — odděluje deploy od zveřejnění funkce. Pomáhá nasadit kód dřív, než ho uvidí zákazník.
+- **Rollout flag** — pouští změnu postupně podle účtů, segmentů nebo procenta provozu.
+- **Experiment flag** — ověřuje hypotézu, ideálně na agregovaných metrikách a s předem daným koncem.
+- **Kill switch** — vypíná rizikový nebo drahý tok při incidentu.
+- **Permission flag** — zpřístupňuje funkci podle plánu, role nebo smlouvy.
+- **Migration flag** — pomáhá přechodu mezi starým a novým modelem dat nebo workflow.
+
+U každého typu nastav jiná pravidla. Experiment potřebuje vyhodnocení. Kill switch potřebuje rychlý přístup a runbook. Permission flag musí sedět s obchodní realitou. Migration flag musí po dokončení zmizet, jinak bude starý systém strašit v kódu jako duch legacy sprintu.
+
+### DB.3 Nepouštěj zákaznické varianty bez podpory
+
+Feature flag často znamená, že dva zákazníci vidí jinou realitu. To může být v pořádku, pokud o tom ví produkt, support i dokumentace. Není to v pořádku, pokud support odpovídá podle starého screenshotu a zákazník má mezitím zapnutý nový flow.
+
+Před zapnutím flagu pro zákazníka zkontroluj:
+
+- support ví, kdo má novou variantu,
+- dokumentace nebo nápověda odpovídá zapnuté verzi,
+- obchod ví, zda je funkce součástí balíčku nebo pilotu,
+- zákazník ví, jestli jde o stabilní funkci, beta režim nebo řízený test,
+- existuje bezpečná cesta zpět, pokud změna vadí.
+
+Pro B2B SaaS je dobrá praxe vést krátkou kartu pilotu. Ne kvůli byrokracii, ale kvůli paměti. Za tři týdny nikdo nechce lovit v chatu, proč má účet „Novák Consulting“ jiné nastavení než zbytek světa. Chat je skvělý na domluvu. Jako auditní stopa je to jen dražší forma archeologie.
+
+### DB.4 Privacy-first flagování nesmí být tajné profilování
+
+Feature flagy umí svádět ke sběru víc dat, než je potřeba. „Pustíme variantu všem, kdo klikli třikrát na pricing, jsou z Německa, používají Safari a včera se vrátili přes newsletter.“ Technicky zajímavé. Privacy-first hodnotově poněkud vlhké.
+
+Lepší je držet flagování u dat, která už mají jasný účel:
+
+- účet nebo organizace,
+- plán a oprávnění,
+- role uživatele,
+- prostředí,
+- explicitní účast v pilotu,
+- agregovaný rollout bez identifikačního profilování.
+
+U experimentů měř dopad agregovaně. Potřebuješ vědět, jestli nová aktivace pomohla většímu podílu účtů dokončit setup, ne sledovat každou osobu jako detektiv s kofeinem. Pokud potřebuješ individuální kontakt, udělej ho otevřeně: pozvi zákazníka do pilotu, vysvětli účel, řekni co sleduješ a nabídni snadné vypnutí.
+
+Privacy-first pravidla pro flagy:
+
+- nesbírej nové osobní údaje jen kvůli rollout logice,
+- neukládej detailní historii zobrazení variant déle, než potřebuješ pro vyhodnocení,
+- odděl provozní audit od marketingového sledování,
+- v interní dokumentaci popiš, kdo může flagy měnit,
+- zákaznické piloty komunikuj férově, ne jako neviditelný experiment.
+
+### DB.5 Flagy musí být vidět v provozu
+
+Když se něco rozbije, tým potřebuje rychle vědět, zda je zapnutý relevantní flag. Jinak začne hledání v logách, databázi, chatu a paměti lidí, kteří zrovna nejsou online. To je přesně ta produktivita, kvůli které káva získala status infrastruktury.
+
+Do provozu přidej jednoduchou viditelnost:
+
+- v administraci účtu ukaž aktivní důležité flagy,
+- v interním support pohledu ukaž pilotní režimy a výjimky,
+- v logu incidentu zaznamenej změnu kritického flagu,
+- u kill switchů drž krátký runbook,
+- u experimentů ukládej jen agregované výsledky a rozhodnutí.
+
+Nemusíš mít velký enterprise systém. Malému týmu často stačí kombinace konfigurační tabulky, auditního záznamu a dokumentované karty. Důležité je, aby změna flagu nebyla tajné kouzlo jednoho vývojáře. Produkční přepínače patří do provozního modelu, ne do osobního zápisníku.
+
+### DB.6 Staré flagy maž stejně přísně jako starý kód
+
+Nejnebezpečnější flag je ten, který už nikdo nepovažuje za aktivní práci. Zůstane v kódu, v konfiguraci, v testech a občas v hlavách. Po roce se někdo bojí ho smazat, protože „co kdyby“. Gratuluju, právě jsi vyrobil technický dluh s vypínačem.
+
+Nastav pravidelný úklid:
+
+- jednou měsíčně projdi flagy bez nedávné změny,
+- u každého ověř vlastníka a datum review,
+- hotové rollout flagy převeď na výchozí chování a smaž větev starého kódu,
+- zákaznické výjimky potvrď obchodně nebo je ukonči,
+- experimenty uzavři rozhodnutím: nasadit, zahodit, zopakovat s jinou hypotézou.
+
+Dobré pravidlo: pull request, který přidává dočasný flag, by měl ideálně obsahovat i poznámku, jak se bude odstraňovat. Ne vždy musí existovat druhý hotový PR, ale plán odstranění má být jasný. Jinak si jen půjčuješ rychlost z budoucnosti. A budoucnost účtuje úroky.
+
+### DB.7 Šablona karty feature flagu
+
+```markdown
+## Feature flag: [název]
+
+### Účel
+- Co bezpečně měníme nebo ověřujeme:
+- Proč nestačí běžný deploy:
+
+### Typ
+- [ ] Release flag
+- [ ] Rollout flag
+- [ ] Experiment
+- [ ] Kill switch
+- [ ] Permission flag
+- [ ] Migration flag
+
+### Rozsah
+- Prostředí:
+- Účty / segmenty / role:
+- Kdo může flag měnit:
+
+### Zákaznický dopad
+- Co zákazník uvidí jinak:
+- Jak je změna vysvětlená supportu:
+- Jaká je cesta zpět:
+
+### Privacy
+- Jaká data se používají pro rozhodnutí:
+- Co se měří:
+- Jak dlouho se drží vyhodnocovací data:
+
+### Dokončení
+- Kritérium úspěchu:
+- Datum review:
+- Plán odstranění:
+- Vlastník:
+```
+
+### DB.8 Checklist: feature flagy bez chaosu
+
+- [ ] Každý nový flag má vlastníka, typ, účel a datum review.
+- [ ] Název flagu popisuje konkrétní změnu, ne vágní „novou verzi“.
+- [ ] Rollout je navržen podle účtů, rolí nebo prostředí, ne podle invazivního profilování.
+- [ ] Support a dokumentace vědí, kdo vidí jinou variantu.
+- [ ] Kritické flagy mají auditní stopu změn a jasný runbook.
+- [ ] Kill switch lze použít rychle, ale ne bez následného review.
+- [ ] Experimenty mají předem danou hypotézu a konec.
+- [ ] Hotové rollout a migration flagy se po dokončení mažou z kódu i konfigurace.
+- [ ] Zákaznické výjimky se pravidelně potvrzují obchodně.
+- [ ] Flagy nepřidávají zbytečný sběr osobních údajů.
+
+Feature flagy jsou skvělé, když pomáhají měnit produkt po menších a bezpečnějších krocích. Jsou nebezpečné, když se z nich stane tichý paralelní vesmír. Udržuj je popsané, viditelné a dočasné. Produkce má dost dramatu i bez přepínačů, které nikdo nepozval na review.
+
 ## Pracovní log
+- 2026-09-02 04:01 UTC — Doplněna příloha DB o feature flazích: typy přepínačů, rollout, experimenty, zákaznické piloty, privacy-first pravidla, provozní viditelnost, úklid starých flagů, šablona karty a checklist.
 
 - 2026-09-02 03:00 UTC — Doplněna příloha DA o rate limitingu a kvótách: limity podle hodnotových toků, kombinace burst limitu, dlouhodobé kvóty a nákladové brzdy, srozumitelné odpovědi, férovost podle účtu, dokumentace, řízené výjimky, šablona karty limitu a privacy-first checklist.
 
