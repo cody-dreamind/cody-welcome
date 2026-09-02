@@ -782,6 +782,8 @@ Příklad použitelné položky:
 
 > Přidat do dashboardu přehled nových leadů za posledních 7 dní, aby obchodník viděl, komu se má ozvat jako první. Hotovo: karta zobrazuje počet leadů, trend oproti předchozímu týdnu a odkaz na filtrovaný seznam.
 
+Nejmenší rozumná verze má vždy obsahovat další ověřitelný krok. Nestačí napsat „prozkoumat onboarding“; lepší je „projít první registraci se dvěma novými uživateli a zapsat tři místa, kde váhali“. Taková položka se dá dokončit, předat a vyhodnotit bez toho, aby z ní vyrostl nekonečný projektový mlžný opar.
+
 ### 6.4 Dokumentace jako opora, ne román
 
 Dokumentace má zmenšit závislost na paměti lidí. Nemusí být dlouhá. Musí být dostupná, aktuální a psaná pro konkrétní situaci. Malý tým potřebuje hlavně čtyři typy dokumentů:
@@ -18467,6 +18469,7 @@ Dobré pravidlo: pull request, který přidává dočasný flag, by měl ideáln
 Feature flagy jsou skvělé, když pomáhají měnit produkt po menších a bezpečnějších krocích. Jsou nebezpečné, když se z nich stane tichý paralelní vesmír. Udržuj je popsané, viditelné a dočasné. Produkce má dost dramatu i bez přepínačů, které nikdo nepozval na review.
 
 ## Pracovní log
+- 2026-09-02 05:01 UTC — Doplněn krátký odstavec do kapitoly o produktivitě zakladatele: aktivní backlog má končit ověřitelným dalším krokem, ne mlhavým úkolem.
 - 2026-09-02 04:01 UTC — Doplněna příloha DB o feature flazích: typy přepínačů, rollout, experimenty, zákaznické piloty, privacy-first pravidla, provozní viditelnost, úklid starých flagů, šablona karty a checklist.
 
 - 2026-09-02 03:00 UTC — Doplněna příloha DA o rate limitingu a kvótách: limity podle hodnotových toků, kombinace burst limitu, dlouhodobé kvóty a nákladové brzdy, srozumitelné odpovědi, férovost podle účtu, dokumentace, řízené výjimky, šablona karty limitu a privacy-first checklist.
