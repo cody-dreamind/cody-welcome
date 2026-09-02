@@ -19287,7 +19287,179 @@ Co má zákazník spolehlivě zvládnout:
 - [ ] Reviduješ SLO po incidentech, větších změnách a růstu zákazníků?
 
 
+## Příloha DH: On-call a pohotovost bez kultu vyhoření
+
+On-call v malém týmu často začíná nevinně: „Když něco spadne, někdo si toho všimne.“ Přeloženo do češtiny: všichni mají v hlavě neurčitý pocit viny, nikdo přesně neví, kdo reaguje, a první incident se řeší v chatu stylem digitálního hasicího přístroje hozeného do tmy.
+
+Dobrá pohotovost není hrdinství. Je to dohoda, která chrání zákazníka, produkt i lidi v týmu. Nemusí být složitá. Musí být jasná: co se hlídá, kdo reaguje, kdy se budí člověk, co se dělá jako první a kdy se incident přesune do běžné pracovní fronty.
+
+*Codyho komentář:* Pokud je tvůj provozní plán „Pepa to nějak pozná“, nemáš on-call. Máš Pepu jako lidský monitoring s horším spánkem. To není strategie, to je pomalé smažení seniorního mozku.
+
+### DH.1 On-call začíná definicí, co opravdu hoří
+
+Ne každý problém má právo probudit člověka. Pokud budeš posílat noční alert na každou drobnost, tým si buď vypne notifikace, nebo si vypěstuje krásný tik v oku. Oboje je špatně.
+
+Rozděl provozní situace do tří režimů:
+
+- **Okamžitá reakce:** zákazník nemůže udělat kritickou akci, hrozí ztráta dat, bezpečnostní problém, nefunkční platba, nefunkční přihlášení pro většinu uživatelů.
+- **První pracovní blok:** chyba má workaround, postihuje menší část uživatelů, report se zpozdil, integrace selhala bez dopadu na data.
+- **Backlog:** kosmetická chyba, neprioritní interní nástroj, experimentální funkce, jednorázové varování bez opakování.
+
+Praktické pravidlo:
+
+> Budí se jen problém, který má jasný zákaznický nebo datový dopad a u kterého noční reakce skutečně zkrátí škodu.
+
+Pokud nedokážeš vysvětlit, proč musí člověk reagovat teď, alert nepatří do pohotovosti. Patří do denního provozního review.
+
+### DH.2 Jeden vlastník reakce je lepší než pět přihlížejících
+
+Při incidentu nepotřebuješ dav. Potřebuješ jasnou roli.
+
+Minimální role pro malý tým:
+
+- **Responder:** drží incident, provede první diagnostiku, rozhodne o eskalaci.
+- **Komunikátor:** pokud je dopad zákaznický, připraví stručný update pro status page, support nebo konkrétní zákazníky.
+- **Expert na oblast:** připojí se jen tehdy, když responder narazí na konkrétní část systému.
+- **Vlastník follow-upu:** po incidentu dotáhne akční body, aby se stejná věc nevrátila v paruce.
+
+U malého SaaS týmu může jedna osoba pokrývat více rolí. Důležité je, aby se v daný moment vědělo, kdo rozhoduje. Chat plný otázek „může se na to někdo podívat?“ je symptom chybějícího vlastnictví.
+
+### DH.3 Alert musí říkat, co má člověk udělat
+
+Špatný alert oznamuje, že něco možná není v pořádku. Dobrý alert pomáhá začít.
+
+Alert má obsahovat:
+
+- název zákaznického toku,
+- stručný dopad,
+- čas začátku nebo první detekce,
+- odkaz na dashboard nebo log,
+- odkaz na runbook,
+- první bezpečný krok,
+- kritérium, kdy eskalovat.
+
+Příklad špatně:
+
+> High error rate on API.
+
+Příklad lépe:
+
+> Poptávkový formulář má 18 % selhání za posledních 10 minut. Zkontroluj validaci endpointu, stav databáze a frontu e-mailových notifikací. Runbook: „Lead intake failure“. Eskaluj, pokud chyba trvá déle než 15 minut nebo se týká ukládání osobních údajů.
+
+Dobrý alert šetří minuty i nervy. A hlavně snižuje šanci, že první reakce bude náhodný restart všeho, což je technická verze kopnutí do automatu na kávu.
+
+### DH.4 Pohotovost bez rotace je skrytý dluh
+
+Pokud provoz drží pořád jeden člověk, není to efektivní. Je to riziko. Ten člověk se stává jediným místem znalosti, jediným místem rozhodnutí a často i jediným místem únavy.
+
+I malý tým může mít jednoduchou rotaci:
+
+- týdenní služba pro hlavního respondera,
+- záložník pro eskalaci,
+- jasné předání na začátku týdne,
+- seznam aktuálních rizik,
+- zmrazení vysoce rizikových změn, pokud není dostupný člověk schopný rollbacku.
+
+Předání pohotovosti nemusí být ceremonie. Stačí krátká karta:
+
+- Co je tento týden citlivé?
+- Jaké změny šly do produkce?
+- Které alerty byly hlučné?
+- Co se má ignorovat jen dočasně a proč?
+- Kdo je záloha?
+
+Tím se z pohotovosti stane systém, ne závislost na tom, jestli má jeden člověk zapnutý telefon.
+
+### DH.5 Privacy-first on-call chrání data i při stresu
+
+Incident je moment, kdy lidé dělají zkratky. Právě proto musí být privacy-first pravidla napsaná předem.
+
+Pravidla pro pohotovost:
+
+- Nekopíruj produkční osobní data do chatu, screenshotů ani externích poznámek.
+- Pokud potřebuješ příklad záznamu, použij ID a citlivé hodnoty rediguj.
+- Debug logy zapínej na omezený čas a jen pro konkrétní oblast.
+- Dočasné exporty pojmenuj, ulož na řízené místo a nastav datum smazání.
+- Přístupy pro externí pomoc dávej časově omezeně a po incidentu je odeber.
+- Po zásahu zkontroluj, jestli nevznikly nové kopie dat mimo běžnou retenci.
+
+Příklad dobré věty v incident kanálu:
+
+> Uživatel `user_1842` má selhání exportu kvůli chybě oprávnění. E-mail a název firmy neposílám do chatu; detail je v administraci pod řízeným přístupem.
+
+Tohle může znít jako formalita, dokud první screenshot s osobními údaji neskončí ve vlákně, které se za tři měsíce exportuje do nástroje třetí strany. Pak už je pozdě dělat chytrého. Chytrý se dělá předem, což je méně dramatické a levnější.
+
+### DH.6 Po každé službě udělej mini review
+
+On-call se zlepšuje po malých krocích. Nemusíš psát velký postmortem po každém varování, ale jednou týdně se vyplatí krátké provozní review.
+
+Otázky:
+
+- Který alert byl užitečný?
+- Který alert byl šum?
+- Co responder musel hledat ručně?
+- Který runbook chyběl nebo byl zastaralý?
+- Jaký zákaznický dopad jsme zachytili pozdě?
+- Vznikla při řešení nějaká datová výjimka?
+- Co zlepšíme tento týden, aby příští služba byla nudnější?
+
+Nuda je v provozu kompliment. Nudná pohotovost znamená, že systém mluví srozumitelně, lidé vědí, co dělat, a zákazník nemusí poznat, že uvnitř produktu proběhla menší bouřka.
+
+### DH.7 Šablona on-call karty
+
+```markdown
+## On-call karta: [týden / služba]
+
+### Rozsah služby
+- Od:
+- Do:
+- Hlavní responder:
+- Záložník:
+- Komunikační kontakt:
+
+### Co budí člověka
+- Kritické zákaznické toky:
+- Datová a bezpečnostní rizika:
+- Prahy pro eskalaci:
+
+### Aktuální rizika
+- Nedávné změny v produkci:
+- Křehké integrace:
+- Známé dočasné výjimky:
+
+### První kroky
+- Dashboard:
+- Logy:
+- Runbooky:
+- Rollback postup:
+
+### Privacy-first pravidla
+- Co se nesmí kopírovat do chatu:
+- Kde se řeší citlivá data:
+- Kdy se smažou dočasné exporty:
+
+### Předání a review
+- Co se stalo:
+- Co bylo šum:
+- Co upravit před další službou:
+```
+
+### DH.8 Checklist: pohotovost bez vyhoření
+
+- [ ] Máš jasně definované, co patří do okamžité reakce?
+- [ ] Budí alerty jen problémy se zákaznickým, datovým nebo bezpečnostním dopadem?
+- [ ] Obsahuje každý alert odkaz na runbook nebo první bezpečný krok?
+- [ ] Ví responder, kdo je záložník a kdo komunikuje se zákazníky?
+- [ ] Existuje jednoduché týdenní předání služby?
+- [ ] Nezávisí pohotovost pořád na jednom člověku?
+- [ ] Má incident kanál pravidla proti sdílení osobních dat?
+- [ ] Mají dočasné exporty a zvýšené logování vlastníka a datum ukončení?
+- [ ] Děláš po službě krátké review alertů, runbooků a datových výjimek?
+- [ ] Zlepšuje každý týden alespoň jednu věc, aby další služba byla nudnější?
+
+
 ## Pracovní log
+- 2026-09-02 10:00 UTC — Doplněna příloha DH o on-call a pohotovosti bez kultu vyhoření: třídění provozních situací, role respondera, akční alerty, rotace služby, privacy-first pravidla při incidentu, týdenní review, šablona on-call karty a checklist.
 - 2026-09-02 09:01 UTC — Doplněna příloha DG o SLO a provozních slibech: zákaznické toky, SLI bez šmírování, error budget, rozdílné úrovně kritičnosti, vazba na roadmapu, datové sliby, šablona SLO karty a checklist.
 - 2026-09-02 08:01 UTC — Doplněna příloha DF o postmortemech incidentů bez hledání viníka: kritéria, časová osa, přispívající faktory, systémové akční body, privacy-first pravidla, šablona a checklist.
 - 2026-09-02 08:00 UTC — Doplněna příloha DE o provozních návodech typu runbook: spouštěcí signály, bezpečný první krok, větvené postupy, privacy-first práci s daty, vlastnictví, ověřování, šablonu runbooku a checklist.
