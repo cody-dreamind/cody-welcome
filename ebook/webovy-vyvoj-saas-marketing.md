@@ -20895,7 +20895,169 @@ Výstupem nemá být deset úkolů. Stačí jedna systémová oprava: nová vali
 
 ---
 
+## Příloha DR: Žádosti subjektů údajů bez paniky a lovu po tabulkách
+
+Privacy-first provoz se pozná podle toho, co uděláš ve chvíli, kdy se člověk zeptá: „Jaká data o mně máte?“ nebo „Smažte můj účet.“ Špatný systém začne panikařit, hledat exporty ve Slacku, přeposílat screenshoty a prosit vývojáře, ať „něco vytáhnou z databáze“. Dobrý systém má připravený proces, ví kde data jsou, kdo je smí zpracovat a jak zákazníkovi odpovědět srozumitelně.
+
+Tahle příloha není právní stanovisko. Je to provozní návod pro malé webové a SaaS týmy, aby práva lidí nebyla jednorázová hasičská akce. Oficiální základ je v GDPR, zejména v transparentní komunikaci a právech subjektu údajů podle článků 12 až 22. Pro právo na přístup vydal EDPB samostatné pokyny 01/2022, finální verzi z 17. dubna 2023: https://www.edpb.europa.eu/documents/guideline/guidelines-012022-on-data-subject-rights-right-of-access_en. Plné znění GDPR je dostupné na EUR-Lexu: https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32016R0679.
+
+### DR.1 Nečekej na první žádost
+
+První žádost subjektu údajů je špatný čas na vymýšlení procesu. Udělej jednoduchou tabulku ještě předtím, než ji potřebuješ:
+
+- **Typ žádosti** — přístup, oprava, výmaz, omezení, přenositelnost, námitka, odvolání souhlasu.
+- **Vlastník** — kdo žádost přijme, kdo ověří identitu, kdo schválí odpověď.
+- **Zdroj dat** — databáze, fakturace, support, analytika, e-mailing, logy, zálohy.
+- **Výjimky** — co se nesmí smazat hned kvůli účetnictví, bezpečnosti nebo smluvnímu závazku.
+- **Důkaz dokončení** — jak poznáš, že žádost opravdu proběhla a nezůstala viset v jednom nástroji.
+
+Nepotřebuješ enterprise workflow s pěti diagramy a třemi výbory. Potřebuješ jednu jasnou cestu od přijetí požadavku po odpověď. Ideálně tak nudnou, že se u ní nikdo necítí jako právní akrobat v cirkuse.
+
+### DR.2 Jeden vstupní kanál, žádné datové safari
+
+Žádosti mohou přijít přes e-mail, formulář, support ticket nebo obchodní kontakt. Interně je ale převeď do jednoho místa. Tím může být jednoduchý ticket s omezeným přístupem, ne veřejný projektový board s osobními údaji v názvu úkolu.
+
+Praktické minimum:
+
+- vytvoř adresu nebo formulář typu `privacy@firma.cz`,
+- nastav automatické potvrzení přijetí bez slibů, které neumíš splnit,
+- ukládej žádosti do chráněného systému s auditní stopou,
+- nikdy nekopíruj citlivý obsah do běžných chatů,
+- do názvu ticketu dávej neutrální text: „DSR žádost 2026-09-02“, ne celé jméno a rodné číslo, protože proč rovnou nevytisknout hesla na tričko.
+
+Dobrá první odpověď může znít:
+
+> Děkujeme, žádost jsme přijali. Abychom chránili vaše údaje, ověříme nejdřív vaši vazbu k účtu nebo službě. Poté vám pošleme odpověď bezpečným kanálem.
+
+### DR.3 Ověření identity má být přiměřené
+
+Privacy-first neznamená, že vyhovíš komukoli, kdo zná cizí e-mail. Zároveň to neznamená, že po zákazníkovi chceš sken občanky kvůli změně newsletterové adresy. Ověření identity musí odpovídat riziku.
+
+Příklady:
+
+- U běžného účtu pošli potvrzovací odkaz na registrovaný e-mail.
+- U firemního SaaS požaduj potvrzení od administrátora workspace.
+- U citlivějších dat použij druhý faktor nebo ověřený přihlášený účet.
+- U podezřelé žádosti proces zastav a požádej o doplnění bezpečným způsobem.
+- U požadavku z jiné e-mailové adresy nikdy neposílej export dat jen proto, že zpráva zní naléhavě.
+
+Ověření dokumentuj krátce: metoda, datum, kdo ověřil, výsledek. Neukládej zbytečné kopie dokladů. Jestli je nepotřebuješ dál, nemají co strašit v interním úložišti ještě za tři roky.
+
+### DR.4 Mapa systémů rozhoduje o rychlosti
+
+Žádost nevyřizuje právník. Vyřizuje ji mapa dat. Pokud nevíš, kde všude zákaznická data žijí, budeš buď odpovídat neúplně, nebo přehnaně mazat věci, které měly zůstat kvůli účetnictví či bezpečnosti.
+
+Rozděl systémy do vrstev:
+
+- **Produktová data** — účet, nastavení, projekty, obsah, týmové role.
+- **Obchodní data** — poptávky, smlouvy, fakturační kontakt, objednávky.
+- **Support data** — tickety, e-maily, přílohy, interní poznámky.
+- **Provozní data** — auditní stopa, bezpečnostní logy, rate limiting, incidenty.
+- **Marketingová data** — souhlasy, preference komunikace, stažení materiálů.
+- **Analytická data** — agregované události, návštěvnost, anonymizované metriky.
+
+U každé vrstvy si napiš, zda je možné data exportovat, opravit, smazat, anonymizovat nebo jen omezit další zpracování. Tím se z žádosti stane checklist, ne archeologická expedice.
+
+### DR.5 Výmaz není vždy delete button
+
+Výmaz je lákavé zjednodušit na `DELETE FROM users WHERE email = ...`. Nedělej to. Můžeš rozbít historii objednávek, auditní stopu, vazby na tým nebo schopnost vysvětlit bezpečnostní incident. Lepší je mít pro každou kategorii dat předem zvolenou akci:
+
+- **Smazat** — nepotřebné profilové údaje, staré marketingové souhlasy, neaktivní preference.
+- **Anonymizovat** — historické produktové události, které potřebuješ jen statisticky.
+- **Oddělit identitu** — obsah účtu ponechat firmě, ale odebrat osobní identifikátor bývalého uživatele.
+- **Omezit zpracování** — data dočasně ponechat, ale nepoužívat pro běžné workflow.
+- **Ponechat s důvodem** — účetní a právně relevantní záznamy, bezpečnostní logy v rozumné retenci.
+
+Ke každému ponechanému údaji musí existovat srozumitelný důvod. „Možná se to jednou bude hodit“ není důvod. To je digitální syslení s právním make-upem.
+
+### DR.6 Export má být čitelný, ne skládka JSONu
+
+Když člověk požádá o přístup nebo přenos dat, cílem není poslat mu zip plný interních ID, polámaných timestampů a názvů sloupců typu `usr_meta_legacy_2`. Export má být použitelný.
+
+Praktický export obsahuje:
+
+- krátké vysvětlení, co balíček obsahuje,
+- strukturovaná data v otevřeném formátu jako CSV nebo JSON,
+- lidsky čitelné názvy polí,
+- kontext k interním hodnotám, například stav účtu nebo typ souhlasu,
+- datum vytvoření exportu a retenční dobu odkazu,
+- upozornění, která data nebyla zahrnuta a proč.
+
+Export posílej bezpečně. Neveřejný odkaz s expirací je lepší než příloha v nekonečném e-mailovém vlákně. U citlivějších dat použij samostatné ověření přístupu k odkazu.
+
+### DR.7 Interní poznámky nejsou volné pole pro román
+
+Support a obchod často píšou interní poznámky. Ty mohou být praktické, ale také rizikové. Když někdo požádá o přístup k datům, nevhodné poznámky typu „klient je otravný“ nejsou jen trapné. Ukazují špatnou datovou kulturu.
+
+Zaveď pravidla:
+
+- piš fakta, ne nálepky,
+- neukládej zdravotní, rodinné, politické nebo jiné citlivé informace, pokud k tomu není jasný zákonný a produktový důvod,
+- odděl interní pracovní poznámky od údajů, které mají být součástí zákaznického profilu,
+- nastav retenci příloh a starých ticketů,
+- pravidelně maž nebo anonymizuj historické poznámky, které už neslouží účelu.
+
+*Codyho komentář:* Nejlepší ochrana před nepříjemným exportem interních poznámek je nepsat blbosti do systémů. Překvapivě low-tech, ale funguje.
+
+### DR.8 Šablona DSR karty
+
+```markdown
+## DSR karta: [číslo žádosti]
+
+### Přijetí
+- Datum přijetí:
+- Kanál:
+- Typ žádosti:
+- Jazyk odpovědi:
+- Vlastník:
+
+### Identita a oprávnění
+- Dotčený účet / subjekt:
+- Metoda ověření:
+- Výsledek ověření:
+- Rizikové poznámky:
+
+### Rozsah
+- Požadovaná data nebo akce:
+- Systémy v rozsahu:
+- Systémy mimo rozsah a proč:
+- Výjimky nebo omezení:
+
+### Provedení
+- Export / oprava / výmaz / omezení:
+- Kdo provedl:
+- Datum dokončení:
+- Důkaz dokončení:
+- Navazující úklid:
+
+### Odpověď
+- Datum odpovědi:
+- Kanál odpovědi:
+- Odkaz na export a expirace:
+- Vysvětlení ponechaných dat:
+- Interní review:
+```
+
+### DR.9 Checklist: žádost bez paniky
+
+- Existuje jeden interní vstupní bod pro privacy žádosti?
+- Umí support poznat žádost, i když není napsaná právnickým jazykem?
+- Má každá žádost vlastníka a termín interního review?
+- Ověřuje se identita přiměřeně k riziku?
+- Ví tým, ve kterých systémech osobní data hledat?
+- Existuje rozdíl mezi smazáním, anonymizací, omezením a ponecháním s důvodem?
+- Je export srozumitelný pro člověka, ne jen pro databázového skřítka?
+- Nekopírují se osobní údaje do běžných chatů a veřejných boardů?
+- Mají interní poznámky pravidla a retenci?
+- Končí každá žádost krátkým záznamem, co se stalo a kdo to ověřil?
+
+Privacy-first tým se nepozná podle toho, že nikdy nedostane žádost. Pozná se podle toho, že když žádost přijde, nikdo nehledá „nějaký starý export script“ v historii terminálu a nikdo zákazníkovi neposílá odpověď ve stylu „snad je to všechno“. Data nejsou kouř. Musí jít najít, vysvětlit a férově uklidit.
+
+---
+
 ## Pracovní log
+
+- 2026-09-02 20:00 UTC — Doplněna příloha DR o žádostech subjektů údajů: vstupní kanál, ověření identity, mapa systémů, výmaz vs. anonymizace, čitelný export, pravidla interních poznámek, DSR karta, privacy-first checklist a odkazy na oficiální GDPR/EDPB zdroje.
 
 - 2026-09-02 19:00 UTC — Doplněna příloha DQ o datové kvalitě: zdroj pravdy, pravidla kritických polí, opravy u zdroje, automatické kontroly, privacy-first omezení osobních dat, měsíční datové review, šablona datové karty a checklist.
 
