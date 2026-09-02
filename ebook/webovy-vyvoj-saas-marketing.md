@@ -21055,7 +21055,177 @@ Privacy-first tým se nepozná podle toho, že nikdy nedostane žádost. Pozná 
 
 ---
 
+
+## Příloha DS: Cookie lišta, která nepůsobí jako vydírací plakát
+
+Cookie lišta je zvláštní žánr webového designu. Má chránit volbu člověka, ale často skončí jako překážka přes půl obrazovky, kde zelené tlačítko křičí „Přijmout vše“ a odmítnutí se schovává za tři kliky, šedý text a drobný pocit viny. Privacy-first web tohle nedělá. Ne proto, že se bojí úřadu, ale protože respektuje návštěvníka už na prvním kontaktu.
+
+U českých webů je dobrý výchozí rámec jednoduchý: ÚOOÚ vysvětluje, že technické cookies potřebné pro fungování webu souhlas nepotřebují, zatímco netechnické cookies pro analytiku, preference nebo marketing zpravidla vyžadují předchozí souhlas podle zákona o elektronických komunikacích. ÚOOÚ také připomíná, že pokud web používá jen technické cookies, není potřeba zavádět cookie lištu, ale informační povinnost zůstává. Evropská komise u GDPR souhlasu zdůrazňuje, že má být svobodný, konkrétní, informovaný a jednoznačný; EDPB má samostatné pokyny k souhlasu a také finální pokyny k deceptive design patterns. Zdroje: ÚOOÚ Cookies — https://uoou.gov.cz/verejnost/qa-otazky-a-odpovedi/cookies, ÚOOÚ k opt-in režimu od 1. ledna 2022 — https://uoou.gov.cz/media-publikace/tiskove-zpravy/cookies-od-zacatku-roku-2022-pouze-se-souhlasem, Evropská komise k právním důvodům zpracování — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/legal-grounds-processing-data_en, EDPB Guidelines 05/2020 on consent — https://www.edpb.europa.eu/documents/guideline/guidelines-052020-on-consent-under-regulation-2016679_en a EDPB Guidelines 03/2022 on deceptive design patterns — https://www.edpb.europa.eu/documents/guideline/guidelines-032022-on-deceptive-design-patterns-in-social-media-platform_en.
+
+### DS.1 Nejlepší cookie lišta je často žádná cookie lišta
+
+Než začneš vybírat CMP nástroj, zeptej se nudnou, ale velmi výdělečnou otázku:
+
+> Potřebujeme vůbec ukládat něco, co vyžaduje souhlas?
+
+Spousta malých firem a SaaS webů nasazuje cookie lištu jen proto, že ji mají všichni. Výsledek: horší první dojem, další JavaScript, složitější právní dokumentace a měření, kterému stejně nikdo nevěří. Pokud web používá jen technické cookies pro session, bezpečnost, košík, přihlášení nebo ochranu formuláře, často stačí srozumitelná stránka „Cookies a soukromí“ v patičce.
+
+Praktický postup:
+
+1. Otevři web v čistém profilu prohlížeče.
+2. Zkontroluj cookies a local storage před jakýmkoli kliknutím.
+3. Rozděl záznamy na technické, analytické, preferenční a marketingové.
+4. U každé položky napiš účel, expiraci, poskytovatele a zda jde o osobní údaj.
+5. Odstraň vše, co nemá jasný účel pro uživatele nebo rozhodování týmu.
+6. Teprve potom řeš, zda potřebuješ souhlasové rozhraní.
+
+*Codyho komentář:* Cookie lišta není dekorace důvěryhodnosti. Je to přiznání, že web chce dělat něco navíc v prohlížeči návštěvníka. Když nic navíc nepotřebuješ, neinstaluj digitální semafor jen proto, že konkurence bliká.
+
+### DS.2 Technické cookies popiš lidsky
+
+Technické cookies nejsou tajná výjimka, o které se mlčí. I když pro ně nepotřebuješ souhlas, návštěvník má vědět, co web používá a proč.
+
+Dobrá tabulka pro technické cookies obsahuje:
+
+- **Název:** například `session`, `csrf_token`, `cart_id`.
+- **Účel:** přihlášení, ochrana formuláře, zapamatování obsahu košíku.
+- **Expirace:** konec relace, 2 hodiny, 30 dní.
+- **Poskytovatel:** vlastní web nebo konkrétní služba.
+- **Kategorie:** nezbytné pro provoz.
+- **Poznámka k datům:** zda cookie obsahuje jen náhodný identifikátor, nebo přímo čitelný údaj.
+
+Nepopisuj technickou cookie stylem „zajišťuje optimální uživatelský zážitek“. To je marketingová mlha. Napiš: „Chrání formulář proti podvrženému odeslání“ nebo „udržuje přihlášení uživatele během návštěvy“.
+
+### DS.3 Souhlas musí být stejně snadno odmítnutelný
+
+Pokud používáš netechnické cookies, dej člověku férovou volbu. Prakticky to znamená:
+
+- žádné předem zaškrtnuté kategorie,
+- žádné cookies před souhlasem,
+- stejné vizuální zacházení s přijetím a odmítnutím,
+- možnost nastavit účely samostatně,
+- jasné vysvětlení, kdo data zpracovává,
+- možnost souhlas později odvolat,
+- žádné blokování obsahu jen proto, že člověk odmítl analytiku nebo marketing.
+
+Dobrý první řádek lišty:
+
+> Používáme nezbytné cookies pro fungování webu. Volitelně nám můžete povolit jednoduchou analytiku, abychom věděli, které stránky pomáhají.
+
+Dobrá tlačítka:
+
+- „Odmítnout volitelné“
+- „Povolit vybrané“
+- „Povolit vše“
+
+Špatná tlačítka:
+
+- „Souhlasím“ a vedle toho neviditelný text „nastavení“
+- „Přijmout pohodlí“ a „Pokračovat s omezením“
+- „Ano, chci lepší web“ a „Ne, nechci pomáhat“
+
+Souhlas není test loajality. Je to právní a etická volba. Když z odmítnutí uděláš psychologickou překážku, možná krátkodobě zvýšíš opt-in rate, ale dlouhodobě učíš lidi, že tvému webu nejde věřit.
+
+### DS.4 Kategorie drž krátké a účelové
+
+Malý web nepotřebuje deset kategorií. Čím víc kategorií, tím víc údržby a tím větší riziko, že nikdo netuší, co se kam vejde.
+
+Rozumné minimum:
+
+- **Nezbytné:** přihlášení, bezpečnost, formuláře, košík, základní nastavení služby.
+- **Analytické:** agregované měření návštěvnosti a používání bez reklamního profilování.
+- **Preferenční:** volby jako jazyk nebo rozhraní, pokud nejsou nezbytné pro službu.
+- **Marketingové:** reklamní pixely, remarketing a personalizace kampaní.
+
+Privacy-first SaaS by měl začínat s nezbytnými cookies a případně s jednoduchou analytikou, která respektuje data minimization. Marketingové pixely nech jako výjimku, ne default. Pokud neumíš vysvětlit, jak přesně díky nim uděláš lepší rozhodnutí, nejspíš jen platíš výkonem webu a důvěrou návštěvníků za iluzi kontroly.
+
+### DS.5 Consent mode není omluva pro nepořádek
+
+Některé nástroje slibují, že „řeší cookies automaticky“. Ber to jako technickou pomůcku, ne jako odpovědnost přenesenou na vendor. Vlastník webu pořád musí vědět:
+
+- co se načítá před souhlasem,
+- co se načte po přijetí konkrétní kategorie,
+- kam data odcházejí,
+- jak dlouho se drží,
+- jak se souhlas odvolá,
+- kdo udržuje seznam služeb aktuální.
+
+Praktické pravidlo: žádný externí skript nesmí být přidán jen přes marketingový tag manager bez záznamu v interní „cookie kartě“. Pokud marketing potřebuje nový pixel, musí napsat účel, kategorii, poskytovatele, datové toky, retenci a alternativu bez pixelu. Ano, je to otravné. Přesně proto to funguje.
+
+### DS.6 Analytika bez cookies často stačí
+
+U mnoha B2B webů nepotřebuješ znát konkrétního člověka. Potřebuješ vědět, které stránky přivádějí relevantní návštěvy a co lidé čtou před poptávkou. To jde často řešit agregovaně, bez reklamních identifikátorů a bez cross-site profilování.
+
+Začni otázkami:
+
+- Které tři stránky mají podporovat obchod?
+- Které články mají přivádět správnou cílovku?
+- Kde lidé opouštějí poptávkový formulář?
+- Kolik návštěv přichází z přímých odkazů, RSS, vyhledávání a referral partnerů?
+- Které měření opravdu ovlivní příští měsíc práce?
+
+Pokud odpovědi zvládne jednoduchá privacy-first analytika, nepotřebuješ reklamní aparát. Pokud potřebuješ hlubší měření v produktu, odděl produktovou analytiku od veřejného marketingového webu a navrhni ji s vlastní datovou mapou, retencí a přístupovými pravidly.
+
+### DS.7 Cookie karta
+
+```markdown
+## Cookie / lokální úložiště: [název]
+
+### Základ
+- Název:
+- Typ: cookie / localStorage / sessionStorage / jiná technologie
+- Kategorie: nezbytná / analytická / preferenční / marketingová
+- Poskytovatel:
+- Doména:
+- Expirace:
+
+### Účel
+- Proč existuje:
+- Co se rozbije bez ní:
+- Je účel srozumitelný pro návštěvníka:
+
+### Data
+- Ukládaná hodnota:
+- Obsahuje osobní údaj nebo identifikátor:
+- Kam se data odesílají:
+- Přenos mimo EU/EHP:
+
+### Souhlas
+- Vyžaduje souhlas:
+- Kategorie v liště:
+- Spouští se až po souhlasu:
+- Jak lze souhlas odvolat:
+
+### Údržba
+- Vlastník:
+- Datum poslední kontroly:
+- Test před souhlasem:
+- Test po odmítnutí:
+- Poznámky:
+```
+
+### DS.8 Checklist: cookie rozhraní bez triků
+
+- Používáme jen cookies a podobné technologie, které mají jasný účel?
+- Umíme oddělit technické cookies od netechnických?
+- Pokud používáme jen technické cookies, nemáme zbytečnou lištu?
+- Má stránka „Cookies a soukromí“ viditelný odkaz v patičce?
+- Netechnické cookies se nespouští před souhlasem?
+- Lze volitelné cookies odmítnout stejně snadno jako přijmout?
+- Nejsou kategorie předem zaškrtnuté?
+- Nejsou texty manipulativní, strašící nebo schválně nejasné?
+- Je souhlas rozdělený podle účelů, ne schovaný v jedné větě?
+- Existuje snadná cesta k pozdější změně nebo odvolání souhlasu?
+- Má každý externí skript vlastní cookie kartu?
+- Kontrolujeme web po každé nové marketingové nebo analytické integraci?
+
+Privacy-first cookie praxe není o tom, že web vypadá právnicky. Je o tom, že návštěvník nemusí bojovat s rozhraním, aby si zachoval soukromí. Férová volba je dobrý UX pattern, dobrý právní návyk a dobrý obchodní signál v jednom. Vzácná kombinace — skoro jako meeting, který skončí dřív.
+
+---
+
 ## Pracovní log
+- 2026-09-02 21:01 UTC — Doplněna příloha DS o cookie liště bez dark patterns: audit cookies před nasazením, technické cookies bez zbytečné lišty, férový souhlas, kategorie, kontrola externích skriptů, analytika bez cookies, cookie karta, checklist a odkazy na ÚOOÚ, Evropskou komisi a EDPB.
+
 
 - 2026-09-02 20:00 UTC — Doplněna příloha DR o žádostech subjektů údajů: vstupní kanál, ověření identity, mapa systémů, výmaz vs. anonymizace, čitelný export, pravidla interních poznámek, DSR karta, privacy-first checklist a odkazy na oficiální GDPR/EDPB zdroje.
 
