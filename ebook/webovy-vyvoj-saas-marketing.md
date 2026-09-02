@@ -20238,8 +20238,176 @@ Nemusíš z toho dělat právní román. Stačí přesný, lidský text. „Po u
 *Codyho komentář:* Retence je úklidová služba pro databázi. Když ji ignoruješ, systém sice pořád běží, ale každý další měsíc vozí batoh plný starých rizik. A ano, batoh může mít i pěkné UI. Pořád je to batoh.
 
 
+## Příloha DN: Auditní stopa bez šmírovacího deníku
+
+Auditní stopa je záznam toho, co se v systému stalo, kdo to spustil a proč to může být důležité. V dobrém SaaS produktu pomáhá vysvětlit změny, dohledat chyby, řešit support a uklidnit zákazníka, že kritické akce nejsou černá skříňka. Ve špatném provedení se z ní stane nekonečný sklad osobních detailů, IP adres, request payloadů a dat, která nikdo nepotřebuje — až do chvíle, kdy uniknou. To je samozřejmě přesně ten typ ohňostroje, který privacy-first provoz nechce pořádat.
+
+### DN.1 Auditní log není debug log
+
+První pravidlo: odděl auditní stopu od technického logování. Debug log odpovídá na otázku „proč kód spadl“. Auditní log odpovídá na otázku „jaká významná akce proběhla“. Když tyhle dvě věci smícháš, vznikne nepřehledný šuplík, ve kterém support hledá rozhodnutí zákazníka mezi stack trace a výpisem HTTP hlaviček.
+
+Do auditního logu patří například:
+
+- změna tarifu,
+- pozvánka nového uživatele do účtu,
+- odebrání oprávnění,
+- export dat,
+- smazání projektu,
+- změna fakturačních údajů,
+- přepnutí integrace,
+- ruční zásah administrátora nebo podpory.
+
+Naopak tam běžně nepatří každý pageview, každé otevření modalu, kompletní těla formulářů nebo obsah zpráv. Pokud chceš měřit produktové používání, použij agregovanou produktovou analytiku. Pokud chceš ladit chybu, použij technický log s krátkou retencí. Auditní stopa má být úzká, významová a čitelná.
+
+### DN.2 Zapisuj rozhodnutí, ne digitální drby
+
+Každý auditní záznam by měl odpovědět na několik praktických otázek:
+
+- **Kdo:** uživatel, systémová úloha nebo podpora.
+- **Co:** konkrétní akce v doménovém jazyce produktu.
+- **Kdy:** čas v jednotném formátu.
+- **Kde:** účet, projekt nebo objekt, kterého se změna týká.
+- **Výsledek:** úspěch, selhání nebo částečné dokončení.
+- **Kontext:** jen tolik informací, aby šlo akci pochopit.
+
+Příklad špatného záznamu:
+
+> `POST /api/settings/update 200 payload={...}`
+
+Příklad lepšího záznamu:
+
+> Uživatel Petra Nováková změnila retenční pravidlo projektu „Klientský portál“ z 24 měsíců na 12 měsíců. Akce proběhla úspěšně.
+
+Technicky si samozřejmě můžeš držet identifikátory místo celých jmen, ale produktově musí být záznam přeložitelný do lidského jazyka. Auditní log, kterému rozumí jen autor endpointu, je budoucí incident s kalendářovou připomínkou.
+
+### DN.3 Minimalizuj citlivý obsah už při návrhu
+
+Privacy-first auditní stopa nestojí na tom, že citlivá data později někdo opatrně vyfiltruje. Stojí na tom, že je do záznamu vůbec neposíláš. V praxi to znamená navrhnout whitelist polí, ne blacklist. Blacklist typu „ulož všechno kromě hesla“ je pozvánka pro budoucí průšvih, protože nová pole časem přibývají rychleji než disciplína týmu.
+
+Praktické pravidlo:
+
+- ukládej ID objektu, ne celý objekt,
+- ukládej typ změny, ne kompletní předchozí a nový obsah,
+- u citlivých hodnot ukládej informaci „změněno“, ne samotnou hodnotu,
+- u exportů ukládej rozsah a účel, ne exportovaná data,
+- u podpory ukládej důvod přístupu a ticket, ne opis zákaznického obsahu.
+
+Příklad: pokud uživatel změní e-mailovou adresu, auditní záznam nemusí obsahovat starý i nový e-mail v čitelné podobě. Často stačí: „kontaktní e-mail změněn“, identifikátor uživatele, čas, způsob ověření a výsledek. Pokud opravdu potřebuješ hodnotu kvůli provozu nebo bezpečnosti, napiš si k tomu jasný účel a retenční pravidlo.
+
+### DN.4 Podpora potřebuje vlastní režim viditelnosti
+
+Auditní stopa je užitečná hlavně ve chvíli, kdy zákazník napíše: „Kdo nám změnil nastavení?“ nebo „Proč zmizel export?“ Support ale nemá automaticky vidět všechno. Malý SaaS tým často začíná jedním administrátorským panelem, kde je lákavé ukázat celou historii. To je pohodlné. A pohodlí je častý převlek rizika.
+
+Rozumný model:
+
+- běžná podpora vidí jen záznamy potřebné k řešení ticketu,
+- citlivé akce vyžadují vyšší oprávnění,
+- přístup podpory k zákaznickému účtu se zapisuje také do auditní stopy,
+- interní poznámky jsou oddělené od zákaznicky viditelného logu,
+- zákazník může vidět historii zásadních akcí ve svém účtu.
+
+Když zákazník vidí vlastní auditní stopu, posiluje to důvěru. Nemusí psát na podporu kvůli každé změně. Zároveň ale neukazuj interní diagnostiku, bezpečnostní signály nebo technické detaily, které by pomohly útočníkovi.
+
+### DN.5 Auditní záznam musí přežít chybu, ale ne věčnost
+
+U kritických akcí zapisuj auditní stopu tak, aby se neztratila při selhání vedlejšího procesu. Když se uživateli podaří smazat projekt, ale následný e-mail o potvrzení selže, auditní záznam o smazání má existovat. Zároveň auditní log není muzeum. Potřebuje vlastní retenci podle účelu.
+
+Praktický přístup:
+
+- pro každou kategorii záznamu stanov účel,
+- rozděl provozní audit, bezpečnostní audit a zákaznicky viditelnou historii,
+- urči, kdo smí záznamy číst,
+- nastav automatické mazání nebo agregaci,
+- testuj, že mazání opravdu běží,
+- dokumentuj výjimky, například probíhající spor nebo incident.
+
+Auditní stopa má pomoci vysvětlit minulost. Nemá vytvářet nekonečný profil chování uživatele. Pokud záznam po určité době už neslouží jasnému účelu, je to digitální harampádí v obleku.
+
+### DN.6 Navrhni auditní události jako produktové API
+
+Nejlepší auditní logy vznikají, když se s nimi zachází jako s produktem. Každá událost má jméno, význam, povolená pole a vlastníka. Ne jako náhodný `console.log`, který jednou někdo přidal v pátek odpoledne mezi kávou a rezignací.
+
+Příklad katalogu událostí:
+
+- `user.invited` — do účtu byl pozván nový člen,
+- `role.changed` — změnila se role uživatele,
+- `data.export_requested` — uživatel požádal o export,
+- `integration.disabled` — integrace byla vypnuta,
+- `project.deleted` — projekt byl smazán,
+- `support.access_granted` — podpora získala dočasný přístup.
+
+U každé události si napiš:
+
+- kdy vzniká,
+- kdo je aktér,
+- jaký objekt se mění,
+- která pole se ukládají,
+- kdo ji smí číst,
+- jak dlouho se drží,
+- jestli je viditelná zákazníkovi.
+
+Tím z auditní stopy uděláš stabilní vrstvu produktu, ne hromadu textových hlášek, které se rozbijí při prvním refaktoru.
+
+### DN.7 Šablona auditní karty
+
+## Auditní karta: [název události]
+
+### Účel
+
+- Proč záznam vzniká:
+- Jaké rozhodnutí nebo vysvětlení má umožnit:
+
+### Spouštěč
+
+- Akce uživatele, systému nebo podpory:
+- Kritéria, kdy se záznam nevytváří:
+
+### Povolená pole
+
+- Aktér:
+- Objekt:
+- Výsledek:
+- Bezpečný kontext:
+- Pole výslovně zakázaná:
+
+### Viditelnost
+
+- Vidí zákazník:
+- Vidí podpora:
+- Vyžaduje vyšší oprávnění:
+
+### Retence
+
+- Standardní doba uchování:
+- Důvod výjimky:
+- Způsob mazání nebo agregace:
+
+### Provoz
+
+- Jak se ověří zápis:
+- Jak se hledá při supportu:
+- Kdo vlastní změny události:
+
+### DN.8 Checklist: auditní stopa bez šmírování
+
+- Má každá auditní událost jasný účel?
+- Je oddělená auditní stopa od debug logů a produktové analytiky?
+- Ukládají se jen povolená pole podle whitelistu?
+- Neobsahuje záznam citlivý obsah, který stačí nahradit informací „změněno“?
+- Je jasné, kdo auditní záznamy vidí interně a co vidí zákazník?
+- Zapisuje se i přístup podpory k zákaznickému účtu?
+- Má každá kategorie záznamů retenční pravidlo?
+- Existuje katalog událostí s vlastníkem?
+- Testuje se, že kritické akce auditní stopu opravdu vytvoří?
+- Umí support najít odpověď bez exportování celé historie účtu?
+
+*Codyho komentář:* Auditní stopa má být jako dobrý svědek: řekne, co se stalo, kdy a v jakém kontextu. Nemá být jako soused za záclonou, který si zapisuje úplně všechno a tváří se, že je to „pro bezpečnost“.
+
+---
+
 ## Pracovní log
 
+- 2026-09-02 16:01 UTC — Doplněna příloha DN o auditní stopě bez šmírování: rozdíl mezi auditem a debug logy, minimalizace polí, viditelnost pro podporu a zákazníka, retence, katalog událostí, šablona auditní karty a privacy-first checklist.
 - 2026-09-02 15:00 UTC — Doplněna příloha DM o retenci dat: účely uchování, retenční matice, automatizované mazání, anonymizace vs. pseudonymizace, zálohy, komunikace se zákazníkem, šablona retenční karty, privacy-first checklist a odkazy na oficiální EU/EDPB zdroje.
 - 2026-09-02 14:00 UTC — Doplněna příloha DL o zpracovatelských smlouvách a DPA: role správce/zpracovatele, provozní karta, subdodavatelé, přenosy mimo EU/EHP, praktické čtení DPA, šablona zpracovatelské karty, privacy-first checklist a odkazy na oficiální EU zdroje.
 - 2026-09-02 13:00 UTC — Doplněna příloha DK o exit plánech dodavatelů a vendor lock-inu: odchod už při výběru nástroje, rozlišení rizika, přenositelný export dat, náhradní provozní scénář, pravidelné testy exportu, smluvní podmínky, šablona exit karty a privacy-first checklist.
