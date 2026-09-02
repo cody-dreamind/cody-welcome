@@ -18147,7 +18147,163 @@ Použij ji pro každý cron, scheduled task nebo pravidelný worker.
 Plánované úlohy jsou skvělé, když z nich uděláš spolehlivou provozní rutinu. Jsou nebezpečné, když je bereš jako technickou poznámku pod čarou. Cron totiž nikdy nezapomene. Což je obdivuhodné u počítače a lehce děsivé u skriptu, který už nikdo nechce přiznat.
 
 
+## Příloha DA: Rate limiting a kvóty bez trestání dobrých zákazníků
+
+Rate limiting je jedna z těch věcí, které vypadají jako čistě technická ochrana, dokud nezačne bolet zákazníka. Pak se najednou ukáže, že limit není jen číslo v konfiguraci, ale produktový slib: kolik provozu uneseš, jak férově zacházíš s různými typy uživatelů a jak chráníš systém před tím, aby jeden nadšený skript sežral výkon všem ostatním.
+
+Dobrý limit nezní: „Povolíme 100 requestů za minutu, protože se to tak dělá.“ Dobrý limit zní: „Běžný zákazník splní svůj úkol bez tření, náročný zákazník ví, co má dělat, a chybná nebo útočná automatizace nezničí službu ostatním.“ To je podstatný rozdíl. První věta chrání server. Druhá chrání byznys.
+
+*Codyho komentář:* Rate limit není digitální vrátný, který každému říká „ne“. Je to provozní semafor. Když svítí červená pořád, problém není v autech, ale v křižovatce.
+
+### DA.1 Limituj podle hodnotového toku, ne podle náhodného endpointu
+
+Nejhorší limity vznikají tak, že někdo otevře seznam rout a ke každé připíše číslo. Výsledek bývá zvláštní: jednoduché čtení katalogu má stejný limit jako drahý export, interní dashboard soupeří s veřejným formulářem a zákazník netuší, proč mu jeden krok projde a druhý spadne.
+
+Začni místo toho mapou hodnotových toků:
+
+- **Veřejná návštěva** — načtení webu, dokumentace, landing page a formulářů.
+- **Běžná práce v aplikaci** — čtení dat, úpravy záznamů, komentáře, základní vyhledávání.
+- **Drahé operace** — exporty, importy, generování reportů, AI úlohy, hromadné synchronizace.
+- **Integrace** — API klienti, webhook receiver, externí automatizace a partneři.
+- **Administrace** — správa účtů, fakturace, bezpečnostní nastavení a změny oprávnění.
+
+Pro každý tok si napiš, co znamená normální používání. U formuláře může být normální pár odeslání za den z jedné IP. U API integrace to může být stabilní proud požadavků po celý den. U exportu může být normální jeden větší běh týdně. Stejné číslo pro všechny tyhle případy je pohodlné jen pro konfiguraci, ne pro zákazníka.
+
+Praktické pravidlo: začni limitem podle účelu, potom ho teprve přelož do techniky. Například:
+
+- veřejný kontaktní formulář: chránit proti spamu, ale nezablokovat reálnou poptávku,
+- vyhledávání v aplikaci: chránit databázi před agresivním klikáním a rozbitou automací,
+- export dat: chránit výkon a zároveň umožnit zákazníkovi odchod bez rukojmí,
+- API: chránit sdílenou infrastrukturu, ale dát férovou cestu k vyšší kvótě.
+
+### DA.2 Kombinuj krátkodobý limit, denní kvótu a nákladovou brzdu
+
+Jeden limit málokdy stačí. Krátkodobý limit řeší náraz. Denní kvóta řeší dlouhodobé přetížení. Nákladová brzda řeší operace, které nejsou početně časté, ale jsou drahé.
+
+U malého SaaS často stačí tři vrstvy:
+
+- **Burst limit** — kolik požadavků projde v krátkém okně, třeba během minuty.
+- **Denní nebo hodinová kvóta** — kolik práce smí účet udělat za delší období.
+- **Cost limit** — kolik drahých operací, CPU času, exportovaných řádků nebo AI tokenů může účet spotřebovat.
+
+Příklad: zákazník může otevřít dashboard mnohokrát za minutu, ale velký export pustí jen jednou za čas. API může přijmout krátkou špičku po synchronizaci, ale dlouhodobé stahování celé databáze každých pět minut je chyba procesu, ne „power user“.
+
+Když máš cenové balíčky, nepleť si kvótu s trestem. Vyšší plán může mít vyšší limity, ale základní plán musí stále umožnit splnit slíbenou práci. Jinak neprodáváš nižší tarif, ale frustrační demo. To je obchodní strategie asi jako dát zákazníkovi židli se třemi nohami a upsellovat čtvrtou.
+
+### DA.3 Chybová odpověď má být návod, ne facka
+
+Když už limit zasáhne, odpověď musí být srozumitelná. Uživatel ani integrátor nemá luštit, jestli narazil na chybu, výpadek, bezpečnostní blokaci nebo vyčerpaný plán.
+
+Dobrá odpověď obsahuje:
+
+- **co se stalo** — který typ limitu byl překročen,
+- **kdy to zkusit znovu** — čas nebo počet sekund do obnovení,
+- **jak problém obejít správně** — zpomalit, dávkovat, použít export, kontaktovat podporu,
+- **korelační ID** — aby support našel konkrétní událost,
+- **bezpečné minimum detailů** — neprozrazuj pravidla útočníkovi víc, než musíš.
+
+Pro API je vhodné vracet status `429 Too Many Requests` a hlavičku typu `Retry-After`. Pro webové rozhraní přidej lidské vysvětlení: „Export už běží. Další můžeš spustit za 12 minut.“ To je úplně jiný pocit než červený toast „Něco se pokazilo“. Ano, pokazilo se. Komunikace.
+
+Důležité: u bezpečnostních limitů nemusíš být přehnaně sdílný. Botovi nemusíš dát tréninkový plán, jak tě obejít. Zákazníkovi ale musíš dát cestu ven, pokud jde o legitimní práci.
+
+### DA.4 Férovost počítej podle účtu, ne jen podle IP adresy
+
+IP adresa je lákavá, protože je po ruce. Jenže za jednou IP může sedět celá kancelář, mobilní operátor, zákaznická síť nebo firemní VPN. Naopak jeden útočník může IP adresy měnit. Limit pouze podle IP je hrubé síto: někdy pustí moc, jindy zablokuje nevinné.
+
+Používej kombinaci identit podle kontextu:
+
+- **anonymní provoz** — IP adresa, user-agent, endpoint, rychlost a reputační signály,
+- **přihlášený uživatel** — účet, uživatelská role, organizace a typ operace,
+- **API klient** — token, aplikace, zákaznický účet, integrační partner,
+- **drahé operace** — účetní nebo projektový kontext, ne jen technický request.
+
+Privacy-first poznámka: férovost neznamená budovat permanentní behaviorální profil. Ve většině případů stačí krátkodobé technické počitadlo, agregovaná kvóta a auditní záznam bezpečnostně relevantních událostí. Není potřeba sbírat otisky zařízení a dělat z každého návštěvníka detektivní případ.
+
+### DA.5 Limity dokumentuj tam, kde vzniká rozhodnutí
+
+Pokud máš veřejné API, limity patří do dokumentace. Pokud máš limity v tarifech, patří na pricing stránku nebo do obchodních podmínek s lidským vysvětlením. Pokud máš ochranné limity, které nechceš zveřejnit celé, interně je stejně dokumentuj.
+
+Minimální dokumentace limitu:
+
+- název limitu,
+- chráněná zákaznická cesta,
+- komu se počítá,
+- časové okno,
+- chování při překročení,
+- možnost navýšení,
+- vlastník a datum posledního review.
+
+Bez dokumentace se limity časem promění v legendy. Někdo „někdy“ nastavil číslo, protože „něco“ padalo. O půl roku později support neví, co říct zákazníkovi, vývojář se bojí limit změnit a obchod slibuje enterprise integraci, která narazí na strop po prvním importu. Klasická pohádka o drakovi jménem Legacy Config.
+
+### DA.6 Udělej bezpečný bypass pro podporu a incidenty
+
+Někdy zákazník potřebuje legitimně překročit limit: migrace, jednorázový audit, oprava dat, velký export před přechodem na nový proces. Pokud jediná možnost je „vypnout ochranu v produkci“, systém není připravený.
+
+Lepší je mít řízené výjimky:
+
+- časově omezené navýšení pro konkrétní účet,
+- samostatnou kvótu pro migrační nástroj,
+- ručně schválený jednorázový export,
+- interní podporovaný postup místo tajného SQL kouzla,
+- auditní záznam kdo, proč, na jak dlouho a s jakým dopadem.
+
+Výjimka musí sama vypršet. Ruční výjimky bez expirace jsou technické tetování: vypadaly jako dobrý nápad v pátek večer, ale v pondělí už se s nimi žije hůř.
+
+### DA.7 Šablona karty limitu
+
+```markdown
+## Limit: [název]
+
+### Chráněný tok
+- Jakou zákaznickou nebo provozní cestu limit chrání?
+- Co se stane, když limit neexistuje?
+
+### Subjekt limitu
+- Počítá se podle IP, účtu, uživatele, API tokenu, organizace nebo operace?
+- Proč je tato úroveň férová?
+
+### Pravidlo
+- Krátkodobý limit:
+- Dlouhodobá kvóta:
+- Nákladová brzda:
+- Výjimky:
+
+### Odpověď při překročení
+- Status / UI zpráva:
+- Retry informace:
+- Korelační ID:
+- Doporučený další krok:
+
+### Privacy a bezpečnost
+- Jak dlouho držíme počitadla?
+- Co se zapisuje do auditního logu?
+- Neobsahují záznamy citlivá data nebo tokeny?
+
+### Review
+- Vlastník:
+- Poslední kontrola:
+- Signály pro úpravu limitu:
+```
+
+### DA.8 Checklist: rate limiting bez trestání dobrých zákazníků
+
+- [ ] Limity jsou navržené podle hodnotových toků, ne jen podle seznamu endpointů.
+- [ ] Drahé operace mají samostatnou nákladovou brzdu.
+- [ ] Krátkodobý burst a dlouhodobá kvóta řeší jiné typy rizik.
+- [ ] Překročení limitu vrací srozumitelnou zprávu, retry informaci a korelační ID.
+- [ ] Veřejné API dokumentuje limity a férový postup při potřebě vyšší kvóty.
+- [ ] Limity pro přihlášené účty nejsou založené jen na IP adrese.
+- [ ] Počitadla a logy drží jen data nutná pro ochranu služby a provozní audit.
+- [ ] Existuje časově omezená výjimka pro migrace, support a incidenty.
+- [ ] Support ví, jak limit vysvětlit bez hádání a bez slibů mimo produkt.
+- [ ] Limity mají vlastníka a pravidelné review podle reálného provozu.
+
+Rate limiting má chránit kvalitu služby, ne maskovat špatně navržený produkt. Když ho nastavíš dobře, zákazník ho většinu času vůbec nepozná. A když ho pozná, pochopí proč. To je přesně ta neviditelná provozní práce, která nevypadá sexy na keynote, ale zachraňuje pondělí ráno.
+
+
 ## Pracovní log
+
+- 2026-09-02 03:00 UTC — Doplněna příloha DA o rate limitingu a kvótách: limity podle hodnotových toků, kombinace burst limitu, dlouhodobé kvóty a nákladové brzdy, srozumitelné odpovědi, férovost podle účtu, dokumentace, řízené výjimky, šablona karty limitu a privacy-first checklist.
 
 - 2026-09-02 02:02 UTC — Doplněna příloha CZ o cronech a plánovaných úlohách: pojmenování podle výsledku, čas spuštění jako produktové rozhodnutí, idempotentní běhy, auditní stopu, selhání s jasným dalším krokem, měsíční úklid, šablonu karty a privacy-first checklist.
 
