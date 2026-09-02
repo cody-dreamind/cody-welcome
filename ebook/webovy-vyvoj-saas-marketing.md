@@ -19633,7 +19633,162 @@ To poslední je důležité. Kapacitní plánování není jen přidávání. Je
 - [ ] Umí tým vysvětlit, kdy je problém výkonu technický dluh a kdy produktové rozhodnutí?
 
 
+## Příloha DJ: Rozpočet provozu SaaS bez finanční mlhy
+
+Technický provoz SaaS není jen položka „hosting“. Je to soubor drobných rozhodnutí, která se tiše skládají do měsíční faktury: databáze, úložiště, e-maily, logy, zálohy, monitoring, domény, transakční poplatky, API volání, podpůrné nástroje a čas lidí, kteří to celé drží pohromadě. Pokud rozpočet řešíš až ve chvíli, kdy přijde překvapivá faktura, už neřídíš produkt. Jen sleduješ, jak ti produkt řídí kartu.
+
+Dobrá zpráva: malý tým nepotřebuje finanční oddělení, aby měl náklady pod kontrolou. Potřebuje jednoduchou provozní mapu, pár limitů a pravidelný rytmus kontroly. Rozpočet má být praktický nástroj pro rozhodování, ne tabulka, kterou jednou vyplníš a pak ji pohřbíš vedle starých OKR.
+
+### DJ.1 Rozliš fixní, proměnné a skryté náklady
+
+První chyba je házet všechny provozní výdaje do jednoho pytle. Pytel pak vypadá levně, dokud se neroztrhne. Rozděl náklady aspoň do tří skupin:
+
+- **Fixní náklady:** domény, základní server, minimální plán databáze, účetnictví, e-mailová schránka, základní monitoring.
+- **Proměnné náklady:** objem úložiště, přenos dat, počet e-mailů, velikost logů, počet API volání, platby podle uživatelů nebo týmů.
+- **Skryté náklady:** čas podpory, ruční opravy dat, investigace incidentů, právní kontrola dodavatele, migrace při odchodu od služby.
+
+Fixní náklady řešíš při startu. Proměnné náklady musíš svázat s používáním produktu. Skryté náklady musíš dostat do diskuse dřív, než se z nich stane „tohle nějak doděláme po večerech“. Po večerech se dá doladit text na landing page. Ne dlouhodobě nést špatně navržený provozní model.
+
+Příklad: analytika za pár eur měsíčně může vypadat levně. Pokud ale sbírá příliš detailní data, tým pak řeší cookie lištu, právní texty, přístupy, retenční pravidla a vysvětlování zákazníkům. Celkový náklad není jen faktura. Je to i provozní tření.
+
+### DJ.2 Každá položka má mít vlastníka a důvod
+
+U každého nástroje si napiš dvě věty:
+
+1. **Proč to platíme?** Jaké rozhodnutí, zákaznický tok nebo provozní riziko nástroj podporuje.
+2. **Kdo to vlastní?** Kdo sleduje využití, limity, přístupy a rozhoduje o změně.
+
+Bez vlastníka nástroj postupně ztrácí kontext. Lidé nevědí, jestli ho používají, bojí se ho vypnout a faktura běží dál. Tomu říkám SaaS archeologie: každý měsíc platíš za vykopávky po bývalých nápadech.
+
+Praktická inventura může mít jednoduchý formát:
+
+- Název služby.
+- Účel.
+- Měsíční náklad.
+- Typ dat, která do ní posíláš.
+- Region provozu a zpracování.
+- Vlastník.
+- Signál, podle kterého poznáš, že služba má pořád smysl.
+- Podmínka pro vypnutí nebo nahrazení.
+
+U privacy-first provozu je důležité, aby položka „typ dat“ nebyla prázdná. Pokud do nástroje odchází zákaznická data, logy, e-maily nebo identifikátory uživatelů, nejde jen o cenu. Jde o důvěru, bezpečnost a schopnost vysvětlit zákazníkovi, kde jeho data končí.
+
+### DJ.3 Nastav rozpočtové guardraily, ne jen cílové číslo
+
+„Chceme utrácet maximálně 300 eur měsíčně“ je užitečný strop, ale nestačí. Rozpočet potřebuje guardraily — pravidla, která zabrání nečekanému růstu dřív, než se objeví v účetnictví.
+
+Příklady guardrailů:
+
+- Žádný nový placený nástroj bez uvedení účelu, vlastníka a datové mapy.
+- Žádný nástroj s proměnlivou cenou bez limitu, alertu nebo ručního schválení vyššího tarifu.
+- Žádné ukládání debug logů déle, než odpovídá provoznímu účelu.
+- Žádné placené účty pro lidi, kteří je nepoužili posledních 30 dní.
+- Žádné automatické navyšování kapacity bez jednoduchého vysvětlení zákaznického dopadu.
+
+Guardrail nemá brzdit růst. Má zabránit tomu, aby růst probíhal potmě. Když kampaň přivede hodně lidí, je v pořádku zaplatit za vyšší provoz. Ale tým má vědět proč, kolik to stojí a co se stane, když se výsledek nedostaví.
+
+*Codyho komentář:* Náklady nejsou problém. Problém jsou náklady bez příběhu. Když víš, že každých 100 eur navíc přináší 20 kvalifikovaných poptávek nebo stabilnější onboarding, je to investice. Když jen doufáš, že se „něco děje v cloudu“, je to drahá mlha s fakturačním oddělením.
+
+### DJ.4 Sleduj jednotkovou ekonomiku už před škálováním
+
+Jednotková ekonomika nezajímá jen investory. Zajímá každého, kdo nechce prodávat produkt se ztrátou a radovat se z růstu, který ho pomalu kouše do kotníku.
+
+Nemusíš mít dokonalý finanční model. Stačí jednoduché otázky:
+
+- Kolik stojí obsloužit jeden aktivní účet měsíčně?
+- Které náklady rostou s počtem zákazníků?
+- Které náklady rostou s objemem dat?
+- Které náklady rostou s počtem interních lidí?
+- Který tarif nebo typ zákazníka vytváří nečekaně drahou podporu?
+
+Příklad pro malý B2B SaaS:
+
+- Tarif stojí 49 eur měsíčně.
+- Zákazník běžně vytvoří 2 GB dat, 300 e-mailových notifikací a 20 požadavků na podporu za měsíc.
+- Přímý technický náklad je nízký, ale podpora zabere dvě hodiny.
+- Skutečný problém není server. Problém je onboarding, který zákazníka nenaučí základní workflow.
+
+Bez jednotkové ekonomiky by tým řešil infrastrukturu. S jednotkovou ekonomikou vidí, že levnější je zlepšit onboarding, dokumentaci a prázdné stavy v aplikaci. Technicky elegantní optimalizace je fajn, ale někdy je nejlevnější „výkonnostní fix“ lepší text a méně zmatený zákazník.
+
+### DJ.5 Privacy-first rozpočet počítá i cenu datového rizika
+
+Některé nástroje jsou levné jen proto, že nepočítáš cenu rizika. Když služba sbírá víc dat, než potřebuješ, ukládá je mimo Evropu, míchá je s reklamním ekosystémem nebo nemá jasnou cestu exportu, může být měsíční cena příjemná a celkový náklad mizerný.
+
+Do rozpočtového rozhodnutí proto přidej datové otázky:
+
+- Jaká data služba dostává?
+- Potřebuje opravdu osobní data, nebo stačí agregace?
+- Běží služba v Evropě a umí to smluvně doložit?
+- Kdo má k datům přístup?
+- Jak data smažeme, když službu vypneme?
+- Umíme odejít bez ztráty historie, konfigurace nebo zákaznické důvěry?
+
+Nástroj, který je o trochu dražší, ale umožní menší sběr dat, jednodušší vysvětlení zákazníkům a čistý export, může být ve skutečnosti levnější. Privacy-first není romantika. Je to provozní strategie: méně dat znamená méně povinností, méně incidentních scénářů a méně míst, kde se může něco pokazit.
+
+### DJ.6 Zaveď měsíční cost review
+
+Jednou měsíčně projdi náklady stejně jako backlog. Ne jako účetní výslech, ale jako produktové rozhodování.
+
+Agenda na 30 minut:
+
+1. **Co zdražilo?** Najdi položky s největší změnou proti minulému měsíci.
+2. **Proč zdražilo?** Rozliš růst zákaznické hodnoty, technický dluh, chybu konfigurace a zapomenutý experiment.
+3. **Co můžeme vypnout?** Hledej nepoužívané účty, staré testovací služby, duplicitní monitoring a historické exporty.
+4. **Co musíme omezit?** Nastav limity pro logy, API, notifikace, ukládání souborů a trial účty.
+5. **Co je dobrá investice?** U položek, které rostou se zákaznickou hodnotou, nepanikař. Jen je připoj k metrice výsledku.
+
+Výstupem mají být maximálně tři akce. Pokud cost review vyrobí dvacet úkolů, jen jsi přesunul chaos z faktury do backlogu. Vyber největší riziko, nejrychlejší úsporu a jednu investici, která zlepší zákaznickou hodnotu.
+
+### DJ.7 Šablona rozpočtové karty služby
+
+```markdown
+## Rozpočtová karta: [název služby]
+
+### Účel
+- Proč službu používáme:
+- Jaké rozhodnutí nebo tok podporuje:
+- Co by se stalo při vypnutí:
+
+### Náklad
+- Aktuální měsíční cena:
+- Typ ceny: fixní / podle uživatelů / podle objemu / podle volání
+- Co cenu nejvíc zvyšuje:
+- Nastavený limit nebo alert:
+
+### Data a privacy
+- Jaká data služba zpracovává:
+- Je možné data agregovat nebo minimalizovat:
+- Region provozu a zpracování:
+- Retence a mazání:
+- Export a odchod:
+
+### Vlastnictví
+- Vlastník služby:
+- Kdo schvaluje vyšší tarif:
+- Datum poslední kontroly:
+
+### Rozhodnutí
+- Ponechat / omezit / nahradit / vypnout:
+- Další krok:
+- Datum kontroly:
+```
+
+### DJ.8 Checklist: SaaS rozpočet bez mlhy
+
+- [ ] Máš rozdělené fixní, proměnné a skryté provozní náklady?
+- [ ] Má každá placená služba vlastníka a jasný účel?
+- [ ] Víš, které náklady rostou s počtem zákazníků, dat, e-mailů nebo API volání?
+- [ ] Máš u proměnlivých cen nastavené limity, alerty nebo ruční schválení?
+- [ ] Kontroluješ nepoužívané účty a testovací služby aspoň jednou měsíčně?
+- [ ] Počítáš do rozhodování i datové riziko, region provozu a možnost exportu?
+- [ ] Umíš vysvětlit, proč dražší privacy-first služba může být celkově levnější?
+- [ ] Máš pravidlo, že nový nástroj potřebuje účel, vlastníka a datovou mapu?
+- [ ] Rozlišuješ náklad, který roste se zákaznickou hodnotou, od nákladu způsobeného chaosem?
+- [ ] Končí cost review třemi konkrétními akcemi, ne dalším nekonečným seznamem?
+
+
 ## Pracovní log
+- 2026-09-02 12:00 UTC — Doplněna příloha DJ o rozpočtu provozu SaaS: fixní, proměnné a skryté náklady, vlastnictví nástrojů, rozpočtové guardraily, jednotková ekonomika, privacy-first datové riziko, měsíční cost review, šablona rozpočtové karty a checklist.
 - 2026-09-02 11:00 UTC — Doplněna příloha DI o kapacitním plánování: zákaznické toky, úzká hrdla, oddělení marketingových špiček od placené práce, levné optimalizační kroky, měsíční kapacitní review, šablona kapacitní karty a privacy-first checklist.
 - 2026-09-02 10:00 UTC — Doplněna příloha DH o on-call a pohotovosti bez kultu vyhoření: třídění provozních situací, role respondera, akční alerty, rotace služby, privacy-first pravidla při incidentu, týdenní review, šablona on-call karty a checklist.
 - 2026-09-02 09:01 UTC — Doplněna příloha DG o SLO a provozních slibech: zákaznické toky, SLI bez šmírování, error budget, rozdílné úrovně kritičnosti, vazba na roadmapu, datové sliby, šablona SLO karty a checklist.
