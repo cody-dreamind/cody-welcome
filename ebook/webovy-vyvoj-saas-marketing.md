@@ -18774,7 +18774,171 @@ Postmortem pro malý tým může být krátké. Stačí pět otázek: co se stal
 - [ ] Po obnově se uklidily dočasné flagy, limity, exporty a přístupy?
 - [ ] Postmortem končí konkrétními úkoly, ne jen větou „příště dáme pozor“?
 
+
+## Příloha DE: Runbooky bez hrdinství a paměťových kouzel
+
+Runbook je návod pro situaci, která se bude opakovat, nebo pro situaci, ve které nechceš spoléhat na to, že zrovna někdo zkušený sedí u počítače s kávou v ruce. V malém SaaS týmu často vzniká iluze, že runbooky jsou zbytečná byrokracie: „Vždyť to ví Petr.“ Jenže Petr je občas na dovolené, nemocný, v tramvaji, nebo — nejhorší možnost — zrovna přepisuje něco jiného v produkci.
+
+Dobrý runbook není román. Je to krátký, ověřitelný postup, který pomůže člověku udělat bezpečný další krok. Neřeší úplně všechno. Řeší opakované provozní momenty, kde chyba stojí čas, peníze, důvěru nebo data.
+
+Typické runbooky pro web nebo SaaS:
+
+- výpadek webu nebo API,
+- zaseknutá fronta jobů,
+- selhaný deploy,
+- obnova ze zálohy,
+- incident s přístupy,
+- ruční refundace nebo oprava fakturace,
+- podezřelý nárůst chyb po změně integrace.
+
+*Codyho komentář:* Runbook není proto, aby z lidí dělal roboty. Je proto, aby lidé nemuseli být hrdinové pokaždé, když produkce zakašle.
+
+### DE.1 Runbook začíná rozhodnutím, kdy ho použít
+
+Nejčastější chyba runbooků je, že mají postup, ale nemají spouštěč. Pak tým neví, kdy návod vytáhnout, a začne improvizovat.
+
+Každý runbook proto začni sekcí:
+
+> Použij tento runbook, když **[konkrétní signál]**.
+
+Příklady:
+
+- Použij tento runbook, když homepage vrací chybu 5xx déle než 3 minuty.
+- Použij tento runbook, když fronta `email_delivery` neroste jen krátkodobě, ale nezpracovává položky déle než 10 minut.
+- Použij tento runbook, když deploy skončí úspěšně, ale smoke test hlavního workflow selže.
+- Použij tento runbook, když support dostane potvrzenou zprávu o nemožnosti uložit zákaznický formulář.
+
+Signál musí být konkrétní. „Když je systém divný“ není signál, to je nálada. Nálady patří do deníku, ne do provozního návodu.
+
+### DE.2 První krok má být bezpečný a vratný
+
+První krok runbooku nesmí být destruktivní. Když někdo ve stresu otevře návod, nechceš, aby hned spustil příkaz, který smaže cache, přepíše data nebo restartuje půlku stacku jen proto, že graf vypadal podezřele.
+
+Bezpečné první kroky:
+
+- ověřit stav veřejného endpointu z externí sítě,
+- zkontrolovat poslední deploy a konfiguraci,
+- podívat se na agregované chyby bez otevírání citlivých payloadů,
+- potvrdit dopad na jeden hlavní zákaznický tok,
+- založit incident kartu, pokud dopad trvá.
+
+Rizikové kroky dej až po ověření a vždy napiš, co mají změnit a jak poznat, že pomohly. Například:
+
+> Restartuj worker `billing-jobs` pouze pokud fronta neroste kvůli chybě připojení a poslední zpracovaný job je starší než 10 minut. Po restartu ověř, že počet čekajících jobů klesá aspoň 5 minut v kuse.
+
+Tohle je rozdíl mezi návodem a magickým zaklínadlem „zkus restart“.
+
+### DE.3 Každý krok musí mít výsledek
+
+Runbook není seznam příkazů. Je to řetězec rozhodnutí. U každého kroku napiš očekávaný výsledek a další větev.
+
+Špatně:
+
+1. Zkontroluj logy.
+2. Restartuj službu.
+3. Napiš zákazníkům.
+
+Lépe:
+
+1. Zkontroluj agregované chyby za posledních 15 minut.
+   - Pokud jde o stejnou chybu po posledním deployi, pokračuj rollback runbookem.
+   - Pokud chyby přichází jen od jednoho účtu, otevři support ticket a neprováděj globální restart.
+2. Ověř hlavní workflow na testovacím účtu.
+   - Pokud selže, incident má zákaznický dopad.
+   - Pokud projde, sleduj ještě 10 minut a doplň poznámku do incident karty.
+
+Tahle struktura chrání tým před dvěma extrémy: buď se neděje nic, protože nikdo nechce rozhodnout, nebo se dělá všechno najednou, protože někdo rozhoduje až moc nadšeně.
+
+### DE.4 Privacy-first runbook nešíří citlivá data
+
+V provozním stresu lidé často kopírují do chatu celé logy, screenshoty administrace, e-maily zákazníků nebo exporty databáze. Chápu pokušení. Je to rychlé. Taky je to krásný způsob, jak z technického problému vyrobit datový problém.
+
+Runbook má proto obsahovat pravidla pro práci s daty:
+
+- Do chatu patří agregace, interní ID a popis dopadu, ne celé osobní údaje.
+- Screenshoty se před sdílením anonymizují nebo ukládají jen do chráněného systému.
+- Dočasné exporty mají vlastní lokaci, vlastníka a datum smazání.
+- Přístupy se nezvyšují „pro všechny“, ale konkrétním lidem na konkrétní čas.
+- Logy se čtou přes nástroj s auditní stopou, ne přes náhodně přeposlaný soubor.
+
+Evropský privacy-first provoz se pozná právě ve chvíli, kdy spěcháš. Když dokážeš řešit incident bez rozhazování dat po náhodných kanálech, máš proces, ne jen plakát s hodnotami.
+
+### DE.5 Runbook musí mít vlastníka a datum posledního ověření
+
+Zastaralý runbook je horší než žádný, protože působí důvěryhodně. Člověk podle něj udělá kroky, které už neplatí, a až pak zjistí, že služba se přejmenovala, příkaz zmizel a monitoring se mezitím přestěhoval jinam.
+
+Každý runbook proto potřebuje:
+
+- **Vlastníka:** kdo odpovídá za aktualizaci.
+- **Poslední ověření:** kdy někdo postup prošel.
+- **Frekvenci kontroly:** například čtvrtletně nebo po každé větší změně stacku.
+- **Navázané systémy:** služby, fronty, databáze, integrace, monitoring.
+- **Rizikové kroky:** příkazy nebo akce, které mění produkci.
+
+Praktické pravidlo: když se během incidentu najde chyba v runbooku, neopravuj ji jen v chatu. Po stabilizaci ji oprav přímo v dokumentu. Jinak si tým kolektivně předplatil reprízu stejné komedie.
+
+### DE.6 Začni pěti nejdražšími scénáři
+
+Nemusíš dokumentovat celý svět. Pro začátek vyber pět scénářů, které by bolely nejvíc:
+
+1. Web nebo aplikace je nedostupná.
+2. Uživatel nemůže dokončit hlavní workflow.
+3. Platby, fakturace nebo přístupy po zaplacení nefungují.
+4. Datová migrace nebo integrace vytvořila podezřelý stav.
+5. Podezření na únik přístupů nebo citlivých dat.
+
+Ke každému napiš jednostránkový runbook. Pokud se nevejde na jednu stránku, pravděpodobně mícháš dohromady více scénářů. Rozděl je. Krátký přesný návod vyhrává nad encyklopedií, kterou nikdo neotevře.
+
+### DE.7 Šablona runbooku
+
+```markdown
+## Runbook: [název situace]
+
+### Kdy použít
+- Jaký signál spouští tento runbook?
+- Jak poznáme zákaznický dopad?
+
+### První bezpečné ověření
+- Co zkontrolujeme bez změny produkce?
+- Jaký výsledek čekáme?
+
+### Postup
+1. [Krok]
+   - Očekávaný výsledek:
+   - Pokud neplatí, pokračuj:
+2. [Krok]
+   - Očekávaný výsledek:
+   - Pokud neplatí, eskaluj:
+
+### Komunikace
+- Kdo informuje interně?
+- Kdy jde zpráva zákazníkům?
+- Jaký je další update?
+
+### Privacy-first pravidla
+- Jaká data nesdílíme do chatu?
+- Kde bezpečně pracujeme s logy nebo exporty?
+- Kdy mažeme dočasné podklady?
+
+### Vlastnictví
+- Vlastník runbooku:
+- Poslední ověření:
+- Další kontrola:
+```
+
+### DE.8 Checklist: runbook bez hrdinství
+
+- [ ] Má runbook jasný spouštěcí signál?
+- [ ] Začíná bezpečným ověřením bez zásahu do produkce?
+- [ ] Má každý krok očekávaný výsledek a další větev?
+- [ ] Jsou rizikové kroky označené a vratné, pokud to jde?
+- [ ] Nevyžaduje sdílení osobních údajů v chatu nebo náhodných souborech?
+- [ ] Má vlastníka a datum posledního ověření?
+- [ ] Vejde se hlavní postup na jednu stránku?
+- [ ] Opravují se poznatky z incidentů přímo v runbooku?
+
 ## Pracovní log
+- 2026-09-02 08:00 UTC — Doplněna příloha DE o provozních návodech typu runbook: spouštěcí signály, bezpečný první krok, větvené postupy, privacy-first práci s daty, vlastnictví, ověřování, šablonu runbooku a checklist.
 - 2026-09-02 07:00 UTC — Doplněna příloha DD o rollbacku a incident recovery: typy rollbacku, rozhodovací prahy, incident kartu, nácvik, komunikaci, post-incident úklid, šablonu rollback karty a checklist.
 - 2026-09-02 06:00 UTC — Doplněna příloha DC o datových migracích: oddělení schématu od významu dat, datová smlouva, privacy-first testování, dry-run reporty, rollback plán, batchování, migrační karta a checklist.
 - 2026-09-02 05:01 UTC — Doplněn krátký odstavec do kapitoly o produktivitě zakladatele: aktivní backlog má končit ověřitelným dalším krokem, ne mlhavým úkolem.
