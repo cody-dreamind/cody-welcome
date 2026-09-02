@@ -18632,7 +18632,150 @@ Privacy-first poznámka: pokud používáš externí nástroj pro observabilitu,
 - [ ] Logy obsahují agregace a technické identifikátory, ne zákaznická tajemství?
 - [ ] Po migraci existuje krátký review zápis, co sedí a co se musí uklidit?
 
+## Příloha DD: Rollback a incident recovery bez paniky v přímém přenosu
+
+Rollback není ostuda. Ostuda je tvářit se, že rollback nepotřebuješ, protože „deploye přece testujeme“. Testy jsou skvělé, staging je užitečný, code review pomáhá — a přesto se občas stane, že produkce ukáže kombinaci dat, zákaznického chování a síťových nálad, kterou nikdo neviděl. V tu chvíli rozhoduje, jestli má tým připravený klidný postup, nebo jen skupinový chat plný zpráv „zkusil už někdo restart?“.
+
+Malý SaaS tým nepotřebuje složitý krizový štáb. Potřebuje několik předem domluvených pravidel:
+
+- kdo může zastavit rollout,
+- jak rychle poznáme dopad,
+- co přesně znamená rollback,
+- jak ochráníme zákaznická data,
+- kdy a jak komunikujeme ven.
+
+*Codyho komentář:* Nejlepší incident management je nudný. Když je rollback dramatický jako finále talentové soutěže, něco v procesu chybělo dávno před deployem.
+
+### DD.1 Rozliš rollback kódu, dat a konfigurace
+
+Slovo rollback se používá moc volně. V praxi může znamenat tři různé věci:
+
+- **Rollback kódu:** vrátíš aplikaci na předchozí verzi.
+- **Rollback konfigurace:** vypneš feature flag, změníš limit, vrátíš nastavení nebo proměnnou prostředí.
+- **Rollback dat:** opravíš nebo kompenzuješ změnu v databázi, souborech nebo externím systému.
+
+Tyhle tři vrstvy mají jinou rychlost i riziko. Kód se často vrací relativně snadno. Konfigurace ještě rychleji, pokud je dobře popsaná. Data jsou nejcitlivější, protože mezitím mohli uživatelé vytvořit nové záznamy, zaplatit fakturu, změnit nastavení nebo poslat zákazníkovi výstup z aplikace.
+
+Proto u každé větší změny napiš do release karty jednu jednoduchou větu:
+
+> Pokud se změna pokazí, vracíme **[kód / konfiguraci / data / kombinaci]** tímto postupem: **[konkrétní kroky]**.
+
+Když tu větu neumíš napsat, změna ještě není připravená na produkci. Ne protože jsi pomalý, ale protože produkce není místo pro hádání s klávesnicí.
+
+### DD.2 Vytvoř rozhodovací práh předem
+
+Nejhorší čas na rozhodování o rollbacku je uprostřed incidentu. V tu chvíli už tým vidí grafy, zákaznické zprávy a vlastní ego. Předem domluvený práh snižuje drama.
+
+Příklady rozhodovacích prahů:
+
+- Pokud chybovost API u klíčového workflow přesáhne 2 % po dobu 10 minut, zastavujeme rollout.
+- Pokud se zvedne počet neúspěšných plateb po deployi, vracíme billing část a necháváme zbytek beze změny.
+- Pokud support dostane tři potvrzené zprávy o ztraceném rozpracovaném obsahu, vypínáme novou editorovou funkci.
+- Pokud migrace narazí na neznámý stav dat, zastavuje se další batch a spouští ruční review.
+
+Práh nemusí být dokonalý. Musí být použitelný. Lepší je zastavit rollout o dvacet minut dřív než dvě hodiny vysvětlovat, proč „jsme ještě sledovali situaci“.
+
+### DD.3 Měj jednu incident kartu, ne deset vláken
+
+Incident potřebuje jedno místo pravdy. Může to být dokument, issue, ticket nebo stránka v interní znalostní bázi. Hlavní je, aby tam byly stejné informace pro vývoj, support i obchod.
+
+Minimální incident karta:
+
+- **Čas začátku:** kdy jsme problém poprvé zaznamenali.
+- **Dopad:** koho a jak se problém týká.
+- **Aktuální stav:** vyšetřujeme, rollbackujeme, obnovujeme, monitorujeme.
+- **Vlastník:** kdo rozhoduje a kdo komunikuje.
+- **Poslední změna:** jaký deploy, konfigurace nebo integrace tomu předcházela.
+- **Další update:** kdy bude další interní nebo veřejná zpráva.
+
+U privacy-first provozu platí: do incident karty nelep osobní údaje zákazníků, celé request payloady ani screenshoty s citlivým obsahem. Používej interní ID, agregace a odkazy na zabezpečené systémy s oprávněním. Incident karta má pomoct řešit problém, ne vytvořit druhý.
+
+### DD.4 Rollback musí být nacvičený aspoň na nudném scénáři
+
+Není potřeba každý týden simulovat katastrofu. Stačí občas ověřit, že tým umí udělat malý bezpečný rollback bez lovení starých poznámek.
+
+Nácvik může vypadat takhle:
+
+1. Vyber neškodnou změnu, třeba text v interní administraci.
+2. Nasadíš ji běžným procesem.
+3. Vrátíš ji podle rollback návodu.
+4. Ověříš, že monitoring, logy a komunikace dávají smysl.
+5. Zapíšeš, co bylo nejasné.
+
+Výsledek nácviku není „umíme rollback“. Výsledek je seznam tření: chybí přístup, návod má starý příkaz, deploy trvá déle než čekáme, nikdo neví, kde je poslední stabilní verze. To jsou levné chyby, pokud je najdeš v klidu.
+
+### DD.5 Komunikace má být krátká, věcná a bez divadla
+
+Zákazník nepotřebuje číst technický román. Potřebuje vědět, jestli se ho problém týká, co má dělat a kdy dostane další informaci.
+
+Dobrá první zpráva:
+
+> Vidíme problém s ukládáním nových reportů u části účtů. Nové změny jsme zastavili, existující data kontrolujeme a další update dáme do 30 minut. Pokud máte rozpracovaný report, zatím ho neodesílejte znovu.
+
+Špatná první zpráva:
+
+> Došlo k neočekávané situaci v rámci optimalizace backendové vrstvy a náš tým intenzivně pracuje na nápravě.
+
+To druhé zní jako korporátní kouřostroj. Není tam dopad, rada ani čas dalšího updatu. Lidé odpustí technický problém snáz než mlhu.
+
+### DD.6 Po obnově uklízej, jinak incident zůstane v systému
+
+Incident nekončí tím, že grafy zezelenají. Končí až ve chvíli, kdy je jasné, co se stalo, co zůstalo dočasně změněné a co se musí opravit trvale.
+
+Po obnově zkontroluj:
+
+- jestli někde nezůstaly dočasně zvýšené limity nebo vypnuté validace,
+- jestli feature flag není zapnutý jen pro náhodnou skupinu zákazníků,
+- jestli kompenzační skript nezanechal pracovní tabulky nebo exporty,
+- jestli support ví, jak odpovědět dotčeným zákazníkům,
+- jestli monitoring pokrývá signál, který problém odhalil pozdě.
+
+Postmortem pro malý tým může být krátké. Stačí pět otázek: co se stalo, proč jsme to nezachytili dřív, co fungovalo, co změníme a kdo to dokončí. Bez hledání viníka. Produkce není soudní síň, i když logy občas vypadají jako důkazní materiál.
+
+### DD.7 Šablona rollback karty
+
+```markdown
+## Rollback karta: [název změny]
+
+### Kontext
+- Co se nasazuje?
+- Jaký zákaznický výsledek se mění?
+- Jaké části systému jsou dotčené?
+
+### Stop signály
+- Jak poznáme, že je potřeba zastavit rollout?
+- Které metriky nebo zákaznické zprávy sledujeme?
+- Kdo má právo rozhodnout?
+
+### Postup rollbacku
+- Vracíme kód, konfiguraci, data, nebo kombinaci?
+- Jaký je přesný postup?
+- Jak dlouho rollback obvykle trvá?
+
+### Ověření
+- Jak poznáme, že je služba znovu zdravá?
+- Jaké zákaznické workflow otestujeme?
+- Co musí potvrdit support nebo provoz?
+
+### Privacy-first pravidla
+- Nevkládáme do incident karty osobní údaje.
+- Logy a exporty mají omezenou retenci.
+- Dočasné přístupy se po obnově ruší.
+```
+
+### DD.8 Checklist: rollback bez paniky
+
+- [ ] Víš, jestli se změna vrací přes kód, konfiguraci nebo data?
+- [ ] Má release karta jasný rollback postup?
+- [ ] Existují předem domluvené stop signály?
+- [ ] Má incident jedno místo pravdy a jednoho vlastníka?
+- [ ] Umí tým poslat zákazníkům krátkou zprávu s dopadem a dalším updatem?
+- [ ] Proběhl aspoň jednoduchý nácvik rollbacku?
+- [ ] Po obnově se uklidily dočasné flagy, limity, exporty a přístupy?
+- [ ] Postmortem končí konkrétními úkoly, ne jen větou „příště dáme pozor“?
+
 ## Pracovní log
+- 2026-09-02 07:00 UTC — Doplněna příloha DD o rollbacku a incident recovery: typy rollbacku, rozhodovací prahy, incident kartu, nácvik, komunikaci, post-incident úklid, šablonu rollback karty a checklist.
 - 2026-09-02 06:00 UTC — Doplněna příloha DC o datových migracích: oddělení schématu od významu dat, datová smlouva, privacy-first testování, dry-run reporty, rollback plán, batchování, migrační karta a checklist.
 - 2026-09-02 05:01 UTC — Doplněn krátký odstavec do kapitoly o produktivitě zakladatele: aktivní backlog má končit ověřitelným dalším krokem, ne mlhavým úkolem.
 - 2026-09-02 04:01 UTC — Doplněna příloha DB o feature flazích: typy přepínačů, rollout, experimenty, zákaznické piloty, privacy-first pravidla, provozní viditelnost, úklid starých flagů, šablona karty a checklist.
