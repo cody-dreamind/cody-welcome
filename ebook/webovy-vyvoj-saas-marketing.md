@@ -19787,7 +19787,156 @@ Výstupem mají být maximálně tři akce. Pokud cost review vyrobí dvacet úk
 - [ ] Končí cost review třemi konkrétními akcemi, ne dalším nekonečným seznamem?
 
 
+## Příloha DK: Exit plán dodavatelů bez paniky a rukojmí
+
+Vendor lock-in nevzniká jen tím, že používáš jeden konkrétní cloud, platební bránu nebo CRM. Vzniká hlavně tím, že tým nikdy nenapsal, jak by od služby odešel. Dokud je všechno v pořádku, vypadá nástroj jako zkratka. Jakmile zdraží, změní podmínky, zhorší podporu, přesune data do nevhodného regionu nebo přestane sedět produktu, zkratka se může změnit v zamčené dveře s fakturou na druhé straně.
+
+Exit plán není výraz nedůvěry k dodavateli. Je to provozní hygiena. Stejně jako záloha neznamená, že nenávidíš databázi, exit plán neznamená, že zítra všechno migruješ. Znamená, že víš, jaká data máš kde uložená, jak je dostaneš ven, co se musí přepojit, kdo rozhoduje a jak zákazník pozná co nejméně bolesti.
+
+### DK.1 Exit plán piš už při výběru nástroje
+
+Nejlevnější chvíle na návrh odchodu je před nákupem. V té chvíli ještě nejsi citově ani technicky připoutaný k systému, nemáš v něm roky dat a nikdo neříká „teď už to přece nepředěláme“. U každého důležitého nástroje si předem odpověz:
+
+- Jaká data do služby posíláme?
+- Umíme je exportovat ve srozumitelném formátu?
+- Umíme export spustit bez podpory dodavatele?
+- Jak dlouho by trvalo službu nahradit?
+- Které části produktu by při odchodu bolely nejvíc?
+- Kdo má právo rozhodnout, že službu vypneme nebo nahradíme?
+
+U malého týmu nemusí být odpověď dokonalá. Stačí, když existuje. Pokud ji nemáš, dodavatel není jen nástroj. Je to černá skříňka, ve které máš část firmy.
+
+Příklad: u transakčního e-mailu není exit plán jen „najdeme jiného poskytovatele“. Potřebuješ vědět, kde jsou šablony, DNS záznamy, seznamy potlačených adres, bounce logy, webhooky, reputace domény a auditní stopa o doručení kritických e-mailů. To všechno je provozní kontext, ne dekorace.
+
+### DK.2 Rozliš pohodlný lock-in od nebezpečného lock-inu
+
+Ne každý lock-in je automaticky špatný. Některá specializovaná služba ti ušetří měsíce vývoje a dává smysl ji používat. Problém nastává, když lock-in zasahuje do dat, zákaznického vztahu nebo kritického provozu tak silně, že už nemáš realistickou možnost volby.
+
+Praktické rozlišení:
+
+- **Nízké riziko:** nástroj drží jen veřejný obsah, jednoduché nastavení nebo snadno obnovitelnou konfiguraci.
+- **Střední riziko:** nástroj drží provozní data, ale umíš je exportovat a produkt bez něj dočasně funguje.
+- **Vysoké riziko:** nástroj drží zákaznická data, identitu, billing, primární workflow nebo komunikaci a odchod by znamenal výpadek služby.
+- **Kritické riziko:** nástroj drží data i proces tak pevně, že bez dodavatele neumíš splnit vlastní zákaznický slib.
+
+Podle rizika nastav hloubku exit plánu. U nízkého rizika stačí poznámka v inventáři. U kritického rizika potřebuješ testovaný export, náhradní scénář, vlastníka, časový odhad a pravidelný review. Ano, zní to méně sexy než nové UI. Ale nové UI ti nepomůže, když neumíš dostat ven vlastní zákaznická data. Smutný konfety moment.
+
+### DK.3 Data musí být přenositelná, čitelná a oddělená od kouzel dodavatele
+
+Export dat je užitečný jen tehdy, když ho umíš použít. Soubor plný interních ID, proprietárních stavů a nezdokumentovaných vazeb je sice export, ale spíš ve smyslu „tady máš puzzle bez obrázku na krabici“.
+
+U důležitých dat si hlídej:
+
+- **Formát:** CSV, JSON, SQL dump nebo jiný běžně zpracovatelný formát.
+- **Schéma:** popis polí, význam stavů, časová pásma, měny, jednotky a vazby mezi tabulkami.
+- **Identifikátory:** stabilní ID, která dávají smysl i mimo původní systém.
+- **Historii:** rozhodnutí, změny stavu, logy a vazby, které jsou potřeba pro podporu nebo audit.
+- **Přílohy:** soubory, obrázky, faktury, podepsané dokumenty a metadata k nim.
+
+Privacy-first pravidlo: export nemá být automaticky co největší. Má být dostatečný pro legitimní účel. Pokud děláš test migrace, anonymizuj nebo zmenši dataset. Pokud děláš reálný odchod, přenášej jen data, která potřebuješ dál provozovat, splnit smlouvu nebo dodržet retenční povinnost. Všechno ostatní je zbytečná zátěž a potenciální riziko.
+
+### DK.4 Připrav náhradní provozní scénář, ne jen náhradní nástroj
+
+Když odcházíš od dodavatele, nejde jen o to vybrat alternativu. Jde o to udržet zákaznický tok. Proto exit plán popisuj podle výsledku, ne podle loga služby.
+
+Místo:
+
+> Nahradit nástroj X nástrojem Y.
+
+Piš:
+
+> Zákazník musí dál dostat potvrzení objednávky, tým musí vidět stav zpracování a účetnictví musí mít export faktur.
+
+To ti otevře víc možností. Někdy není potřeba hned nasadit plnohodnotnou náhradu. Pro krátké přechodné období může stačit jednodušší proces:
+
+- dočasný ruční export jednou denně,
+- statická stránka místo dynamického portálu,
+- interní tabulka s jasným vlastníkem,
+- omezený režim jen pro placené zákazníky,
+- vypnutí nepodstatných automatizací, dokud neběží hlavní workflow.
+
+Takový scénář není ostuda. Ostuda je předstírat, že systém je nezávislý, když ve skutečnosti stojí na jednom webhooku, o kterém ví jen člověk, který je zrovna na dovolené a právem ignoruje Slack.
+
+### DK.5 Pravidelně testuj malý odchod
+
+Exit plán, který nikdy nikdo nezkusil, je literární žánr. Hezký, ale při incidentu podezřele tichý. Jednou za čas udělej malý test:
+
+- stáhni export dat,
+- ověř, že jde otevřít a zpracovat,
+- zkus obnovit malý vzorek do testovacího prostředí,
+- projdi seznam integrací a webhooků,
+- zkontroluj, kdo má administrátorský přístup,
+- ověř, jak dlouho trvá získat podporu nebo auditní informace.
+
+Test nemusí znamenat skutečnou migraci. Cílem je zjistit, jestli plán pořád odpovídá realitě. Pokud export nejde spustit, schéma se změnilo nebo nikdo neví, kde je API token, máš skvělou zprávu: právě jsi našel problém levně, bez zákaznického incidentu.
+
+### DK.6 Smlouvy a proces odchodu patří do provozní mapy
+
+U nástrojů s vyšším rizikem si nehlídej jen technickou stránku. Potřebuješ znát i procesní podmínky:
+
+- výpovědní lhůtu,
+- způsob ukončení účtu,
+- dostupnost dat po ukončení,
+- mazání dat po odchodu,
+- možnost získat potvrzení o smazání,
+- export faktur a auditních záznamů,
+- kontaktní cestu pro podporu při migraci.
+
+Tahle část bývá nudná, což je přesně důvod, proč ji mít napsanou předem. Ve stresu nechceš číst podmínky, hledat majitele účtu a hádat, jestli vypnutí tarifu smaže data okamžitě. Provozní mapa má obsahovat aspoň odkaz na smlouvu, vlastníka, datum poslední kontroly a stručné shrnutí odchodových pravidel.
+
+*Codyho komentář:* Dobrý dodavatel se nebojí toho, že máš exit plán. Naopak. Když někdo staví důvěru na tom, že od něj neumíš odejít, není to partnerství. Je to hotel bez kliky zevnitř.
+
+### DK.7 Šablona exit karty dodavatele
+
+```markdown
+## Exit karta: [název služby]
+
+### Účel služby
+- Jaký zákaznický tok nebo interní proces služba podporuje:
+- Co se stane, když služba neběží:
+
+### Data
+- Typy dat ve službě:
+- Osobní nebo citlivá data:
+- Region provozu / zpracování:
+- Retence ve službě:
+
+### Export
+- Dostupný formát exportu:
+- Kdo může export spustit:
+- Co export neobsahuje:
+- Datum posledního testu exportu:
+
+### Náhradní scénář
+- Krátkodobý workaround:
+- Preferovaná náhrada:
+- Integrace, které se musí přepojit:
+- Odhad času odchodu:
+
+### Rozhodnutí a vlastnictví
+- Vlastník služby:
+- Rozhodovací práh pro odchod:
+- Výpovědní lhůta nebo smluvní omezení:
+- Datum dalšího review:
+```
+
+### DK.8 Checklist: dodavatel bez rukojmí
+
+- [ ] Víš, jaká zákaznická nebo provozní data dodavatel drží?
+- [ ] Umíš exportovat data bez ručního zásahu podpory?
+- [ ] Má export popsané schéma, časová pásma, měny a vazby?
+- [ ] Máš krátkodobý workaround pro hlavní zákaznický tok?
+- [ ] Znáš výpovědní lhůtu, dostupnost dat po ukončení a proces smazání?
+- [ ] Má služba vlastníka, který sleduje náklady, přístupy a rizika?
+- [ ] Testoval jsi export nebo obnovu aspoň na malém vzorku?
+- [ ] Nepřenášíš při testech zbytečná osobní data?
+- [ ] Umíš zákazníkovi vysvětlit, kde jeho data jsou a jak by proběhl odchod?
+- [ ] Máš pro kritické dodavatele datum dalšího review, ne jen dobrý pocit?
+
+
 ## Pracovní log
+
+- 2026-09-02 13:00 UTC — Doplněna příloha DK o exit plánech dodavatelů a vendor lock-inu: odchod už při výběru nástroje, rozlišení rizika, přenositelný export dat, náhradní provozní scénář, pravidelné testy exportu, smluvní podmínky, šablona exit karty a privacy-first checklist.
 - 2026-09-02 12:00 UTC — Doplněna příloha DJ o rozpočtu provozu SaaS: fixní, proměnné a skryté náklady, vlastnictví nástrojů, rozpočtové guardraily, jednotková ekonomika, privacy-first datové riziko, měsíční cost review, šablona rozpočtové karty a checklist.
 - 2026-09-02 11:00 UTC — Doplněna příloha DI o kapacitním plánování: zákaznické toky, úzká hrdla, oddělení marketingových špiček od placené práce, levné optimalizační kroky, měsíční kapacitní review, šablona kapacitní karty a privacy-first checklist.
 - 2026-09-02 10:00 UTC — Doplněna příloha DH o on-call a pohotovosti bez kultu vyhoření: třídění provozních situací, role respondera, akční alerty, rotace služby, privacy-first pravidla při incidentu, týdenní review, šablona on-call karty a checklist.
