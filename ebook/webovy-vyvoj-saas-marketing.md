@@ -21223,7 +21223,163 @@ Privacy-first cookie praxe není o tom, že web vypadá právnicky. Je o tom, ž
 
 ---
 
+## Příloha DT: UTM značení bez datového smogu
+
+Marketingové měření často nezačne špatným nástrojem, ale špatným pojmenováním. Někdo pošle newsletter s `utm_source=email`, někdo jiný použije `utm_source=newsletter`, třetí dá do kampaně název „Q3 super launch FINAL fakt už poslední“ a za měsíc nikdo neví, co vlastně fungovalo. Výsledek? Dashboard plný barevných grafů a rozhodnutí podle pocitu. To je drahý způsob, jak si vyrobit iluzi kontroly.
+
+UTM parametry mají být jednoduchý štítek na odkazu, ne druhý CRM systém. Jejich úkol je odpovědět na praktické otázky: odkud návštěva přišla, přes který kanál, z jaké kampaně a případně z jakého konkrétního umístění. Privacy-first přístup znamená, že měříš výkon kanálů a obsahu, ne že do URL lepíš e-mail, jméno firmy nebo interní poznámku obchodníka. URL není trezor. URL je pohlednice.
+
+### DT.1 Nejdřív rozhodnutí, potom parametry
+
+Než začneš přidávat UTM ke všemu, napiš si, jaké rozhodnutí má měření podpořit. Jinak skončíš s dvaceti parametry, které nikdo nepoužívá, ale všichni se bojí je smazat.
+
+Dobré rozhodovací otázky:
+
+- Které obsahové kanály přivádějí relevantní návštěvy na obchodní stránky?
+- Fungují lépe přímé odkazy z partnerství, RSS, newsletter nebo organické vyhledávání?
+- Který typ kampaně vede k poptávce, ne jen ke kliknutí?
+- Má smysl opakovat konkrétní launch, webinář, checklist nebo případovou studii?
+- Kde má tým příští měsíc strávit čas: psaním, partnerstvím, zlepšením landing page nebo follow-upem?
+
+Špatná otázka je: „Kolik máme všech kliků ze všeho?“ To je metrika pro uklidnění ega. Dobrá otázka je: „Které tři odkazy přivedly lidi, kteří udělali další smysluplný krok?“
+
+### DT.2 Vytvoř slovník zdrojů a médií
+
+Největší chaos v UTM vzniká tím, že každý používá vlastní názvy. Proto si vytvoř krátký slovník. Ne tabulku o čtyřiceti sloupcích, ale jednu stránku, kterou pochopí člověk před kávou i po třetím meetingu.
+
+Praktické minimum:
+
+- `utm_source` říká konkrétní místo nebo platformu: `rss`, `linkedin`, `partner-nazev`, `newsletter`, `github`, `seznam`, `google`.
+- `utm_medium` říká typ kanálu: `organic`, `referral`, `email`, `paid`, `social`, `community`, `direct-partner`.
+- `utm_campaign` říká obchodní nebo obsahovou iniciativu: `saas-checklist-2026-09`, `privacy-webinar-2026-10`, `launch-audit-webu`.
+- `utm_content` rozlišuje variantu odkazu: `header-cta`, `footer-link`, `case-study-button`, `text-link-1`.
+- `utm_term` používej jen tehdy, když má jasný účel; u malého B2B týmu bývá často zbytečný.
+
+Drž se malých písmen, pomlček a bez diakritiky. Ne proto, že čeština je problém, ale protože budoucí exporty, filtry a integrace mají rády nudu. A nuda je v datech ctnost, ne diagnóza.
+
+### DT.3 Kampaň pojmenuj podle účelu, ne nálady
+
+Název kampaně má přežít měsíc, kvartál i výměnu člověka v týmu. Když někdo otevře report za půl roku, musí poznat, co se měřilo.
+
+Použitelný vzor:
+
+```text
+[tema-nebo-nabidka]-[format]-[rok-mesic]
+```
+
+Příklady:
+
+- `audit-webu-checklist-2026-09`
+- `privacy-saas-webinar-2026-10`
+- `mvp-produktu-serie-2026-09`
+- `retence-zakazniku-pripadovka-2026-11`
+
+Vyhni se názvům jako `summer`, `test`, `campaign1`, `final`, `new-new-final` nebo `ondrej-napad`. Lidsky chápu, projektově neodpouštím.
+
+Dobré pravidlo: název kampaně nesmí obsahovat interní emoce. Může obsahovat téma, formát, měsíc a účel. Emoce patří do retrospektivy, ne do URL.
+
+### DT.4 Neposílej osobní údaje v URL
+
+Do UTM parametrů nikdy nedávej osobní údaje ani citlivý obchodní kontext. Ne proto, že by to bylo elegantnější, ale protože URL se může objevit v analytice, serverových lozích, referrer hlavičkách, support ticketech, screenshotech, historii prohlížeče nebo sdíleném chatu. Jedna špatná URL umí cestovat rychleji než pondělní panika.
+
+Do parametrů nepatří:
+
+- e-mail zákazníka,
+- jméno osoby,
+- název konkrétního leadu, pokud není veřejný a záměrný,
+- interní obchodní poznámka,
+- segment typu `high-value-client`,
+- informace o zdravotním, finančním nebo jinak citlivém kontextu,
+- tokeny, ID relace, slevové kódy navázané na konkrétní osobu.
+
+Pokud potřebuješ měřit personalizovanou komunikaci, odděl identitu od veřejné URL. Použij interní systém, který eviduje odeslání kampaně bezpečně, a do URL dej jen obecný štítek varianty. Marketing nemusí znát člověka do detailu, aby poznal, že třetí CTA funguje lépe než první.
+
+### DT.5 Každý odkaz má mít vlastníka
+
+UTM disciplína se nerozbije tím, že lidé jsou líní. Rozbije se tím, že nikdo neví, kdo má poslední slovo. Proto si pro kampaně určete vlastníka značení. Nemusí to být manažer. Může to být člověk, který před publikací zkontroluje odkazy a slovník.
+
+Kontrola před publikací:
+
+- odpovídá `source` schválenému slovníku,
+- odpovídá `medium` typu kanálu,
+- název kampaně je čitelný i za půl roku,
+- v URL nejsou osobní údaje,
+- odkaz vede na správnou landing page,
+- stránka má jasné další CTA,
+- analytika umí parametry zobrazit v reportu,
+- po kliknutí funguje stránka bez rozbitých redirectů.
+
+U malého týmu stačí pravidlo: kdo posílá odkaz ven, ten ručí za jeho čistotu. Když odkaz připravuje někdo jiný, vlastník kampaně dělá finální kontrolu. Není to byrokracie. Je to bezpečnostní pás pro marketing.
+
+### DT.6 Měř dopad po cestě, ne jen vstup
+
+UTM ti řekne začátek cesty. Neřekne ti sám o sobě, jestli návštěva měla hodnotu. Proto si ke kampani předem napiš, jaký další krok má dávat smysl.
+
+Příklady podle cíle:
+
+- Článek má vést na související checklist nebo případovou studii.
+- Checklist má vést k odběru RSS, poptávce nebo konzultaci.
+- Webinář má vést ke stažení materiálu, odpovědi na follow-up nebo domluvě schůzky.
+- Partnerství má vést na dedikovanou landing page s jasným kontextem.
+- Produktový launch má vést k aktivaci konkrétní funkce, ne jen k návštěvě homepage.
+
+Do týdenního reportu nedávej jen návštěvy podle kampaní. Přidej jednoduchý komentář: „Co jsme se dozvěděli a co uděláme dál.“ Bez toho je report jen drahý spořič obrazovky.
+
+### DT.7 Šablona UTM karty
+
+```markdown
+## UTM karta: [název kampaně]
+
+### Základ
+- Vlastník:
+- Cíl kampaně:
+- Cílová stránka:
+- Období:
+- Hlavní rozhodnutí, které má měření podpořit:
+
+### Parametry
+- utm_source:
+- utm_medium:
+- utm_campaign:
+- utm_content varianty:
+- Nepoužité parametry a proč:
+
+### Privacy kontrola
+- Obsahuje URL osobní údaje: ano / ne
+- Obsahuje URL interní obchodní informace: ano / ne
+- Jsou parametry obecné a agregovatelné:
+- Kde se URL může objevit v lozích nebo reportech:
+
+### Vyhodnocení
+- Primární metrika:
+- Sekundární metrika:
+- Co bude úspěch:
+- Kdy proběhne review:
+- Jaké rozhodnutí padlo po review:
+```
+
+### DT.8 Checklist: UTM bez chaosu
+
+- Existuje jeden slovník pro `source`, `medium` a názvy kampaní?
+- Používáme malá písmena, pomlčky a konzistentní formát?
+- Má každá kampaň jasný účel a vlastníka?
+- Víme, jaké rozhodnutí má měření podpořit?
+- Neobsahuje žádný odkaz osobní údaje, e-maily, tokeny ani interní poznámky?
+- Rozlišujeme kanál, zdroj, kampaň a variantu odkazu?
+- Testujeme odkazy před publikací včetně redirectů?
+- Umí analytika zobrazit kampaně bez ručního čištění v tabulce?
+- Vyhodnocujeme i další krok po návštěvě, ne jen kliknutí?
+- Mažeme nebo opravujeme staré chybné vzory místo jejich kopírování?
+- Má tým ukázkové odkazy pro newsletter, RSS, partnerství a sociální posty?
+- Obsahuje týdenní report jednu větu „co z toho plyne“?
+
+*Codyho komentář:* UTM parametry jsou jako štítky na krabicích při stěhování. Když je popíšeš dobře, najdeš rychle hrnek. Když je popíšeš špatně, otevřeš deset krabic s nápisem „věci“ a začneš pochybovat o civilizaci.
+
+---
+
 ## Pracovní log
+- 2026-09-02 22:00 UTC — Doplněna příloha DT o UTM značení bez datového smogu: rozhodovací otázky, slovník zdrojů a médií, názvy kampaní, zákaz osobních údajů v URL, vlastnictví odkazů, vyhodnocení dopadu, UTM karta a privacy-first checklist.
+
 - 2026-09-02 21:01 UTC — Doplněna příloha DS o cookie liště bez dark patterns: audit cookies před nasazením, technické cookies bez zbytečné lišty, férový souhlas, kategorie, kontrola externích skriptů, analytika bez cookies, cookie karta, checklist a odkazy na ÚOOÚ, Evropskou komisi a EDPB.
 
 
