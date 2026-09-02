@@ -18937,7 +18937,173 @@ Ke každému napiš jednostránkový runbook. Pokud se nevejde na jednu stránku
 - [ ] Vejde se hlavní postup na jednu stránku?
 - [ ] Opravují se poznatky z incidentů přímo v runbooku?
 
+
+## Příloha DF: Postmortem bez hledání viníka a bez zametání stop
+
+Incident skončil, web zase běží, zákazníci se dostali ke své práci a tým si konečně může vydechnout. Přesně v téhle chvíli vzniká největší riziko: všichni chtějí jít dál, protože oprava bolela. Jenže když se z incidentu nestane učení, zaplatíš stejnou lekci znovu. Jen s horším načasováním, protože produkce má smysl pro humor asi jako výtah zaseknutý mezi patry.
+
+Postmortem není soudní síň. Je to pracovní dokument, který odpoví na čtyři otázky:
+
+- Co se stalo?
+- Jaký to mělo dopad na zákazníky a provoz?
+- Proč systém dovolil, aby se to stalo nebo aby to trvalo tak dlouho?
+- Co konkrétně změníme, aby se pravděpodobnost nebo dopad příště snížily?
+
+Dobré čtení k tématu je kapitola [Postmortem Culture: Learning from Failure](https://sre.google/sre-book/postmortem-culture/) z Google SRE knihy. Důležitá inspirace pro malý evropský SaaS tým: postmortem má být „blameless“, tedy bez hledání obětního beránka, ale ne bez odpovědnosti. Odpovědnost se přesouvá z osoby na systém, proces, automatizaci, dokumentaci a rozhodovací kontext.
+
+*Codyho komentář:* Pokud postmortem skončí větou „Pepa si dá příště pozor“, nevzniklo učení. Vznikla jen drahá připomínka v lidském kalendáři.
+
+### DF.1 Předem urči, kdy postmortem píšeš
+
+Když se tým rozhoduje až po incidentu, bude mít tendenci postmortem přeskočit u všeho, co bylo nepříjemné. Proto si kritéria napiš předem.
+
+Postmortem piš minimálně, když nastane něco z toho:
+
+- zákazník viděl výpadek, chybu nebo ztrátu funkčnosti hlavního workflow,
+- došlo k podezření na ztrátu, poškození nebo nechtěné zpřístupnění dat,
+- incident vyžadoval rollback, ruční zásah do dat nebo nouzové zvýšení oprávnění,
+- monitoring selhal a problém nahlásil zákazník dřív než systém,
+- oprava trvala déle, než odpovídá provoznímu slibu,
+- tým opakovaně řeší stejný typ chyby.
+
+U malého produktu nemusí mít každý incident desetistránkový dokument. Stačí lehká verze na jednu stránku. Důležité je, aby existovala stopa: časová osa, dopad, příčina, rozhodnutí a navazující úkoly.
+
+### DF.2 Časová osa má být nudná a přesná
+
+Nezačínej emocemi. Začni časovou osou. Ta týmu pomůže oddělit skutečnost od pocitu, že „to bylo asi kolem oběda“.
+
+Praktická struktura:
+
+- **První signál:** kdy systém nebo člověk problém poprvé zaznamenal.
+- **Potvrzení dopadu:** kdy bylo jasné, že nejde jen o šum v monitoringu.
+- **První zmírnění:** kdy se podařilo snížit dopad, i kdyby problém ještě nebyl vyřešen.
+- **Úplná obnova:** kdy hlavní zákaznický tok znovu fungoval.
+- **Komunikace:** kdy šel interní nebo zákaznický update.
+- **Následná kontrola:** kdy tým ověřil, že se problém nevrací.
+
+Do časové osy piš odkazy na incident kartu, deploy, alert, support ticket nebo interní rozhodnutí. Nelep tam celé logy a screenshoty s osobními údaji. Postmortem má být dohledatelný, ne datově radioaktivní.
+
+### DF.3 Root cause není jedna věta, ale řetěz podmínek
+
+„Chybu způsobil deploy“ není root cause. Deploy byl spouštěč. Hlubší otázka zní: proč mohl deploy rozbít hlavní tok a proč jsme to nezachytili dřív?
+
+Ptej se postupně:
+
+- Jaká změna spustila problém?
+- Jaký předpoklad byl chybný?
+- Který test, kontrola nebo review chyběly?
+- Proč monitoring neukázal dopad dřív?
+- Proč rollback nebo oprava trvaly daný čas?
+- Která část dokumentace, vlastnictví nebo komunikace byla nejasná?
+
+Cílem není najít jednu magickou příčinu. Cílem je najít nejlevnější místa, kde systém zpevnit: test, limit, alert, migraci, runbook, feature flag, lepší copy v administraci, nebo prostě jasnější odpovědnost.
+
+### DF.4 Akční body musí měnit systém, ne náladu
+
+Postmortem bez follow-up úkolů je jen literární žánr. Každý akční bod musí mít vlastníka, termín a důvod.
+
+Slabé akční body:
+
+- „Dávat větší pozor při deployi.“
+- „Lépe komunikovat.“
+- „Zvážit monitoring.“
+
+Silnější akční body:
+
+- Přidat smoke test pro odeslání poptávkového formuláře do CI.
+- Nastavit alert, když chybovost hlavního endpointu překročí domluvený práh po dobu 5 minut.
+- Doplnit rollback krok do release checklistu.
+- Omezit produkční token integrace jen na potřebné scope.
+- Přidat do status page komponentu pro zákaznické API.
+
+Každý úkol si označ typem: prevence, detekce, zmírnění dopadu, komunikace, privacy, dokumentace. Díky tomu po čase uvidíš vzor. Pokud máš dvacet úkolů typu „dokumentace“, možná nemáš problém v lidech, ale v tom, že systém žije jen v hlavách.
+
+### DF.5 Privacy-first postmortem chrání zákazníka i tým
+
+Incidenty často pracují s citlivým kontextem: účty, objednávky, e-maily, IP adresy, faktury, payloady integrací. Postmortem musí být užitečný, ale nesmí zbytečně šířit data.
+
+Pravidla:
+
+- Používej interní ID a agregace místo jmen, e-mailů a celých záznamů.
+- Screenshoty anonymizuj, nebo je nahraď popisem dopadu.
+- Pokud potřebuješ příklad payloadu, vytvoř syntetický vzorek.
+- Odkazy na logy dávej jen do nástroje s řízeným přístupem.
+- Dočasné exporty označ vlastníkem a datem smazání.
+- Do veřejné komunikace dávej dopad a stav, ne interní detaily infrastruktury.
+
+Privacy-first provoz není o tom, že se o incidentech mlčí. Naopak. Je o tom, že umíš transparentně vysvětlit dopad bez toho, aby ses při vysvětlování dopustil dalšího problému.
+
+### DF.6 Postmortem zavři až po ověření změn
+
+Nezavírej postmortem ve chvíli, kdy je napsaný. Zavři ho ve chvíli, kdy jsou nejdůležitější akční body hotové nebo vědomě odmítnuté.
+
+Jednoduchý rytmus:
+
+1. Do 24 hodin napiš hrubou časovou osu a dopad.
+2. Do 3 pracovních dnů doplň příčiny a návrh akcí.
+3. Na týdenním provozním review potvrď priority a vlastníky.
+4. Po dokončení akcí ověř, že změny opravdu chrání hlavní tok.
+5. Jednou měsíčně projdi postmortemy a hledej opakující se vzory.
+
+Když se akční body jen přesunou do backlogu bez priority, incident se ve skutečnosti neuzavřel. Jen se převlékl za budoucí překvapení.
+
+### DF.7 Šablona postmortem karty
+
+```markdown
+## Postmortem: [název incidentu]
+
+### Shrnutí
+Jedna až tři věty: co se stalo, koho se to dotklo, jaký byl výsledek.
+
+### Dopad
+- Zasažený zákaznický tok:
+- Doba dopadu:
+- Viditelnost pro zákazníky:
+- Datový dopad:
+
+### Časová osa
+- [čas] První signál:
+- [čas] Potvrzení dopadu:
+- [čas] První zmírnění:
+- [čas] Obnova:
+- [čas] Zákaznický/interní update:
+
+### Příčiny a přispívající faktory
+- Spouštěč:
+- Chybný předpoklad:
+- Chybějící kontrola:
+- Proč detekce trvala:
+- Proč obnova trvala:
+
+### Co fungovalo
+-
+
+### Co nefungovalo
+-
+
+### Akční body
+- [ ] Úkol / vlastník / termín / typ:
+
+### Privacy-first poznámky
+- Jaká citlivá data jsme nepřenášeli do dokumentu:
+- Kde jsou uloženy potřebné důkazy:
+- Kdy se smažou dočasné exporty:
+```
+
+### DF.8 Checklist: postmortem bez hledání viníka
+
+- [ ] Máš předem jasná kritéria, kdy se postmortem píše?
+- [ ] Obsahuje časová osa konkrétní časy a odkazy na zdroje pravdy?
+- [ ] Popisuje dokument zákaznický dopad, nejen technickou chybu?
+- [ ] Hledáš přispívající faktory místo jednoho viníka?
+- [ ] Má každý akční bod vlastníka, termín a typ zlepšení?
+- [ ] Neobsahuje postmortem zbytečné osobní údaje, celé payloady ani náhodné exporty?
+- [ ] Jsou důkazy uložené v řízeném systému s auditní stopou?
+- [ ] Vrací se tým k hotovým postmortemům a hledá opakující se vzory?
+
+
 ## Pracovní log
+- 2026-09-02 08:01 UTC — Doplněna příloha DF o postmortemech incidentů bez hledání viníka: kritéria, časová osa, přispívající faktory, systémové akční body, privacy-first pravidla, šablona a checklist.
 - 2026-09-02 08:00 UTC — Doplněna příloha DE o provozních návodech typu runbook: spouštěcí signály, bezpečný první krok, větvené postupy, privacy-first práci s daty, vlastnictví, ověřování, šablonu runbooku a checklist.
 - 2026-09-02 07:00 UTC — Doplněna příloha DD o rollbacku a incident recovery: typy rollbacku, rozhodovací prahy, incident kartu, nácvik, komunikaci, post-incident úklid, šablonu rollback karty a checklist.
 - 2026-09-02 06:00 UTC — Doplněna příloha DC o datových migracích: oddělení schématu od významu dat, datová smlouva, privacy-first testování, dry-run reporty, rollback plán, batchování, migrační karta a checklist.
