@@ -23105,7 +23105,174 @@ Pilot není trik, jak zákazníka nenápadně dotlačit do velkého kontraktu. J
 *Codyho komentář:* Dobrý pilot má začátek, konec a důvod. Špatný pilot má Slack kanál, pět „malých“ požadavků týdně a větu „ještě počkáme na feedback od kolegy“. Hádej, který z nich umí sežrat měsíc života bez jediného rozhodnutí.
 
 
+
+## Příloha EE: Zakázkové úpravy SaaS bez rozbití roadmapy
+
+Pilot často dopadne dobře a zákazník řekne větu, která zní jako hudba i siréna najednou: „Tohle nám dává smysl, jen bychom potřebovali ještě pár úprav.“ Gratuluju, máš validaci. Zároveň pozor — právě tady se z malého produktu snadno stane zakázkový systém pro jednoho klienta, který se tváří jako SaaS, ale uvnitř nosí montérky a fakturuje duši.
+
+Zakázková úprava není špatně. U prvních zákazníků je často nejlepší zdroj učení, příjmů a důvěry. Problém nastává, když každé „jen malé přizpůsobení“ obejde produktovou strategii, bezpečnostní pravidla a provozní realitu. Cílem není říkat automaticky ne. Cílem je rozlišit, kdy úprava posune produkt pro celý segment a kdy jen vyrábí drahou výjimku.
+
+### EE.1 Každý požadavek přelož na produktovou otázku
+
+Zákazník většinou nepřijde s problémem, ale s řešením:
+
+> Potřebujeme vlastní export s těmito pěti sloupci a tlačítko jen pro regionální manažery.
+
+Než otevřeš editor, přelož požadavek zpět na otázku:
+
+- Jaké rozhodnutí díky exportu dělají?
+- Kdo ho používá a jak často?
+- Co dnes kopírují ručně?
+- Je problém specifický pro jednoho zákazníka, nebo ho budou mít i další firmy v segmentu?
+- Jde o chybějící produktovou funkci, integrační potřebu, reporting, oprávnění, nebo compliance?
+
+Praktický překlad:
+
+- **Požadavek:** „Chceme export pro regionální manažery.“
+- **Produktová otázka:** „Potřebují zákazníci bezpečně sdílet omezený pohled na data podle role?“
+- **Možné produktové řešení:** role-based report, uložené pohledy nebo omezený export, ne jednorázový CSV Frankenstein.
+
+*Codyho komentář:* Když zákazník navrhne řešení, ber ho vážně, ale ne doslova. Je expert na svůj problém. Ty máš být expert na to, jak z problému neudělat technický nábytek na míru, který nejde vystěhovat.
+
+### EE.2 Rozliš tři typy zakázkových úprav
+
+Ne všechny úpravy mají stejnou váhu. Pomáhá je dát do tří kategorií:
+
+1. **Produktové jádro** — funkce, která zlepší produkt pro většinu cílového segmentu.
+2. **Konfigurovatelná varianta** — rozdíl v nastavení, textu, workflow nebo oprávnění, který můžeš udržet bez větvení kódu.
+3. **Jednorázová výjimka** — speciální logika jen pro jednoho zákazníka, často s vlastním procesem, daty nebo integrací.
+
+Rozumné rozhodnutí podle typu:
+
+- Produktové jádro patří do roadmapy a má mít normální produktový návrh.
+- Konfigurovatelná varianta patří do nastavení, šablon nebo administrace.
+- Jednorázová výjimka má mít vyšší cenu, jasnou údržbu a datum revize — nebo slušné „ne“.
+
+Příklad:
+
+- „Chceme vlastní barvu portálu“ může být konfigurace brandingu.
+- „Chceme vlastní schvalovací krok pro všechny servisní požadavky“ může být obecný workflow modul.
+- „Chceme posílat data do interního systému přes nestandardní soubor na FTP každou středu v 17:20“ je pravděpodobně výjimka s provozním rizikem. Ano, i když se tváří jako maličkost. Obvykle má na sobě reflexní vestu a v kapse pager.
+
+### EE.3 Zakázková práce musí mít vlastní obchodní model
+
+Jedna z nejčastějších chyb: tým slíbí úpravu v rámci běžného tarifu, protože „zákazník je důležitý“. Jenže vývoj, testování, dokumentace, podpora a dlouhodobá údržba nejsou zdarma. Když se cena schová do měsíčního předplatného, produkt začne dotovat zakázkový vývoj.
+
+Použij jednoduché pravidlo:
+
+- **Malé nastavení:** součást tarifu, pokud ho zvládne zákazník nebo support bez vývoje.
+- **Produktová funkce:** součást roadmapy, ale zákazník nekupuje exkluzivitu a neřídí prioritu zadarmo.
+- **Zakázková implementace:** samostatná jednorázová cena plus případný měsíční poplatek za údržbu.
+- **Riziková integrace:** placená analýza před závazkem, protože nikdo nechce zjistit uprostřed sprintu, že „API“ znamená posílání Excelu e-mailem.
+
+Do nabídky napiš i to, co cena neobsahuje: migrace historických dat, provoz třetího systému, ruční opravy exportů, garance dostupnosti cizího API nebo nekonečné změny zadání.
+
+### EE.4 Technicky preferuj konfiguraci před forkem
+
+Fork produktu pro jednoho zákazníka je lákavý, protože krátkodobě vypadá rychle. Dlouhodobě vytváří druhý produkt, který má vlastní bugy, vlastní nasazení a vlastní smutnou budoucnost.
+
+Bezpečnější pořadí řešení:
+
+1. **Nastavení:** hodnoty v administraci, feature flags, šablony textů, role a oprávnění.
+2. **Rozšíření obecného modelu:** nová entita, stav, typ reportu nebo událost použitelná i jinde.
+3. **Integrace přes standardní rozhraní:** API, webhooky, exporty s dokumentovaným formátem.
+4. **Ruční workaround:** jen dočasně a s termínem ukončení.
+5. **Fork:** až jako poslední možnost, ideálně vůbec.
+
+U každé úpravy si polož provozní otázky:
+
+- Půjde změna vypnout bez zásahu do databáze?
+- Je jasné, kdo ji používá?
+- Má test nebo aspoň kontrolovatelný akceptační scénář?
+- Je popsaná v dokumentaci nebo interní kartě zákazníka?
+- Co se stane při odchodu zákazníka?
+
+Privacy-first pohled je jednoduchý: konfigurace nesmí znamenat „přidáme ještě jedno pole s osobními údaji, protože se hodí“. Každé nové pole má mít účel, vlastníka, retenci a odpověď na otázku, jestli ho opravdu potřebuješ.
+
+### EE.5 Smluvně odděl vlastnictví, podporu a data
+
+U zakázkových úprav vzniká citlivá šedá zóna: kdo vlastní výsledek, kdo ho může používat dál a kdo odpovídá za provoz. Nepotřebuješ právnický beton na tři stránky pro každé tlačítko, ale základní pravidla musí být jasná před vývojem.
+
+Do dohody dej minimálně:
+
+- **Rozsah:** co přesně se dodává a co je mimo.
+- **Akceptace:** jak zákazník pozná, že je úprava hotová.
+- **Vlastnictví:** zda je úprava součástí produktu a může být dostupná i jiným zákazníkům.
+- **Údržba:** kdo platí opravy po změně cizího API, legislativy nebo procesu zákazníka.
+- **Data:** jaké nové datové položky vznikají, kde jsou uložené a jak dlouho.
+- **Ukončení:** co se stane s konfigurací, exporty, tokeny a daty po skončení spolupráce.
+
+Dobrá věta do nabídky:
+
+> Úprava bude implementována jako konfigurovatelná součást produktu. Zákazník získává právo ji používat v rámci svého účtu, Dreamind si ponechává možnost funkci dále rozvíjet a nabídnout ji dalším zákazníkům.
+
+Tím chráníš SaaS model. Neprodáváš exkluzivní software, pokud to není výslovně domluvené a zaplacené.
+
+### EE.6 Zakázková karta
+
+Pro každou větší úpravu použij krátkou kartu. Stačí jedna stránka.
+
+```markdown
+## Zakázková úprava: [název]
+
+### Kontext
+- Zákazník:
+- Segment:
+- Navazuje na pilot / tarif:
+- Popis situace:
+
+### Problém
+- Co zákazník potřebuje rozhodnout nebo udělat:
+- Jak to řeší dnes:
+- Dopad problému:
+- Frekvence použití:
+
+### Klasifikace
+- Typ: produktové jádro / konfigurovatelná varianta / jednorázová výjimka
+- Přínos pro další zákazníky:
+- Riziko technického dluhu:
+- Dopad na podporu:
+
+### Rozsah
+- Dodáme:
+- Nedodáme:
+- Akceptační kritéria:
+- Termín review:
+
+### Privacy-first provoz
+- Nová data:
+- Data, která se nesbírají:
+- Přístupy a role:
+- Retence:
+- Export / výmaz:
+
+### Obchodní dohoda
+- Jednorázová cena:
+- Měsíční údržba:
+- Vlastnictví řešení:
+- Podmínky ukončení:
+```
+
+### EE.7 Checklist: ano, ne, nebo později
+
+- [ ] Je požadavek přeložený z řešení zpět na problém?
+- [ ] Víme, jestli jde o produktové jádro, konfiguraci nebo výjimku?
+- [ ] Má úprava jasnou cenu nebo roadmapové rozhodnutí?
+- [ ] Nezakládá skrytý fork produktu pro jednoho zákazníka?
+- [ ] Dá se změna vypnout, upravit nebo odstranit bez chirurgického zákroku v produkci?
+- [ ] Má akceptační kritéria a vlastníka rozhodnutí?
+- [ ] Jsou nová data opravdu nutná a popsaná?
+- [ ] Je jasné, kdo platí údržbu a změny třetích systémů?
+- [ ] Je zákazník férově informovaný, že obecná funkce může být dostupná i jiným?
+- [ ] Existuje varianta „později“, pokud požadavek není teď kritický?
+
+Zakázkové úpravy jsou dobrý sluha a mizerný šéf. Když je řídíš kartou, cenou, datovým minimem a technickými hranicemi, můžou financovat růst produktu. Když je bereš jako samozřejmý bonus ke každému zákazníkovi, pomalu ti sežerou roadmapu, support i klidné spaní. A klidné spaní je mimochodem nejpodceňovanější SaaS metrika.
+
+*Codyho komentář:* Nejlepší věta po úspěšném pilotu není „jasně, všechno doděláme“. Je to „pojďme rozlišit, co má být produkt, co konfigurace a co placená výjimka“. Není to tak sexy jako konfety, ale účetnictví i budoucí já ti zatleskají.
+
+
 ## Pracovní log
+- 2026-09-03 09:01 UTC — Doplněna příloha EE o zakázkových úpravách SaaS po pilotu: překlad požadavků na produktové otázky, rozlišení produktového jádra, konfigurace a výjimek, obchodní model úprav, technické hranice, vlastnictví, datová pravidla, zakázková karta a privacy-first checklist.
 - 2026-09-03 08:01 UTC — Doplněna příloha ED o pilotním projektu: rozhodovací otázka, omezení rozsahu, měřitelné i lidsky ověřitelné signály, datová minimalizace, cena pilotu, plánované ukončení, pilotní karta a privacy-first checklist.
 - 2026-09-03 07:01 UTC — Doplněna příloha EC o produktovém demu: příprava podle kontextu zákazníka, scénář místo klikací prohlídky, vrstvy hodnoty/práce/důvěry, práce s námitkami, konkrétní další krok, bezpečná demo data, demo karta a privacy-first checklist.
 - 2026-09-03 21:00 UTC — Doplněna příloha EB o obchodním follow-upu bez nátlaku a stalkingu: jasná dohoda po schůzce, nová hodnota v navázání, konečný rytmus, prodej bez sledovacích pixelů, práce s námitkami, krátká CRM paměť, follow-up karta a privacy-first checklist.
