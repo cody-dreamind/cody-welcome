@@ -23271,7 +23271,167 @@ Zakázkové úpravy jsou dobrý sluha a mizerný šéf. Když je řídíš karto
 *Codyho komentář:* Nejlepší věta po úspěšném pilotu není „jasně, všechno doděláme“. Je to „pojďme rozlišit, co má být produkt, co konfigurace a co placená výjimka“. Není to tak sexy jako konfety, ale účetnictví i budoucí já ti zatleskají.
 
 
+
+---
+
+## Příloha EF: SLA a provozní sliby bez právnické mlhy
+
+SLA se často tváří jako dokument pro právníky, ale pro malé SaaS a webové týmy je to hlavně dohoda o očekáváních. Zákazník chce vědět, kdy může službě věřit, co se stane při problému a jak rychle dostane informaci. Tým zase potřebuje hranice, aby neslíbil nepřetržitý enterprise provoz s rozpočtem na dva servery, jednu kávu a optimismus.
+
+Dobré SLA není soutěž v největším počtu devítek. Je to srozumitelný provozní slib, který odpovídá hodnotě produktu, ceně, riziku a technickým možnostem. Když ho napíšeš dobře, pomáhá prodeji, supportu i rozhodování o infrastruktuře.
+
+### EF.1 Nejdřív popiš službu, ne procento dostupnosti
+
+Než napíšeš „99,9 % dostupnost“, pojmenuj, co přesně má být dostupné. U SaaS produktu může být rozdíl mezi veřejným marketingovým webem, přihlášenou aplikací, API, exporty, e-mailovými notifikacemi a administrací. Všechno nemusí mít stejný provozní slib.
+
+Praktické rozdělení:
+
+- **Kritické jádro:** funkce, bez kterých zákazník nemůže dělat hlavní práci.
+- **Podpůrné funkce:** reporty, exporty, pozvánky, nastavení účtu nebo administrace.
+- **Komunikační vrstva:** e-maily, status page, dokumentace a zákaznická podpora.
+- **Marketingový web:** veřejné stránky, blog, landing pages a formuláře.
+
+Příklad: u zákaznického portálu je kritické založení a zobrazení požadavku. Týdenní export reportu může mít delší obnovu. Marketingový blog může být chvíli mimo provoz bez stejného dopadu jako aplikace. Když všechno označíš jako kritické, nic není opravdu kritické.
+
+### EF.2 Dostupnost přelož do dopadu
+
+Procenta dostupnosti jsou užitečná pro technický model, ale zákazník potřebuje pochopit dopad. Místo izolovaného čísla přidej lidský popis:
+
+- co se počítá jako výpadek,
+- co se nepočítá jako výpadek,
+- jak se výpadek měří,
+- jaké jsou komunikační kroky,
+- jaký je plán obnovy.
+
+Špatně:
+
+> Garantujeme vysokou dostupnost služby.
+
+Lépe:
+
+> Za dostupnou službu považujeme stav, kdy se přihlášený uživatel dostane k hlavnímu workflow: vytvoření, zobrazení a aktualizaci požadavku. Plánovanou údržbu oznamujeme předem. Při neplánovaném výpadku zveřejníme první informaci na status page a průběžně aktualizujeme stav obnovy.
+
+Tím neříkáš méně. Říkáš to užitečněji. A jako bonus snížíš počet nervózních e-mailů typu „funguje vám to?“ během incidentu.
+
+### EF.3 Podpora má mít reakční čas i odpovědnost
+
+SLA často zaměňuje reakční čas za vyřešení. „Odpovíme do 4 hodin“ neznamená „opravíme do 4 hodin“. To je v pořádku, pokud je to napsané jasně.
+
+Rozděl podporu podle závažnosti:
+
+- **S1 — kritický výpadek:** hlavní workflow nefunguje většině zákazníků.
+- **S2 — významné omezení:** část služby funguje špatně, existuje omezená náhradní cesta.
+- **S3 — běžná chyba:** problém ovlivňuje jednotlivé účty nebo nekritickou funkci.
+- **S4 — dotaz nebo změnový požadavek:** nejde o incident, ale o pomoc, vysvětlení nebo nápad.
+
+Ke každé úrovni napiš:
+
+- kdo ji může vyhlásit,
+- kde se komunikuje,
+- kdy přijde první reakce,
+- jak často se posílá update,
+- jak se incident uzavírá.
+
+Pro malý tým je lepší slíbit méně a doručovat spolehlivě než si hrát na korporátní NOC. Pokud nemáš noční službu, nepiš, že máš 24/7 podporu. Napiš pracovní dobu, urgentní kanál a jaké typy problémů se řeší mimo běžný režim.
+
+### EF.4 Plánovaná údržba není selhání, když je viditelná
+
+Každá služba potřebuje údržbu: aktualizace, migrace, změny infrastruktury, bezpečnostní opravy, test obnovy. Problém není údržba. Problém je překvapení.
+
+Rozumná pravidla:
+
+- plánovanou údržbu oznamuj dopředu na předvídatelném místě,
+- vybírej okno podle reálného používání zákazníků,
+- napiš, čeho se údržba dotkne,
+- přidej očekávanou délku a jednoduchý rollback plán,
+- po skončení potvrď výsledek.
+
+Privacy-first provoz má ještě jednu výhodu: méně externích služeb znamená méně cizích údržbových oken, méně status pages k hlídání a méně překvapení z druhé strany planety. Ne vždy jde všechno provozovat vlastní cestou, ale každý nástroj navíc má provozní cenu.
+
+### EF.5 Kredit za výpadek není náhrada důvěry
+
+SLA může obsahovat servisní kredity, slevu nebo jiné vyrovnání. To ale nesmí být hlavní komunikační strategie. Zákazníkovi většinou nepomůže pár procent z faktury, když nevěděl, co se děje, a musel situaci vysvětlovat vlastním klientům.
+
+Při incidentu se soustřeď na čtyři věci:
+
+1. **Rychle přiznat stav:** „Vidíme problém a řešíme ho.“
+2. **Vymezit dopad:** koho a čeho se problém týká.
+3. **Dávat průběžné updaty:** i když ještě není hotovo.
+4. **Uzavřít incident poučením:** co se změnilo, aby se problém neopakoval.
+
+Kredity řeš až potom. Transparentní komunikace je levnější než ztracená důvěra a má výrazně lepší návratnost než tiché doufání, že si toho nikdo nevšiml. Spoiler: všiml.
+
+### EF.6 Privacy-first SLA řeší i data
+
+Provozní slib nemá být jen o dostupnosti. U evropského SaaS a webového provozu musí zahrnovat i datové hranice. Zákazník má vědět, co se děje s jeho daty při incidentu, ukončení účtu, obnově ze zálohy nebo zásahu podpory.
+
+Do provozních pravidel přidej:
+
+- kde jsou data provozována a zálohována,
+- kdo má přístup k produkčním datům,
+- jak se schvaluje dočasný supportní přístup,
+- jak se logují zásahy do účtu,
+- jak se oznamuje bezpečnostní incident,
+- jak funguje export a mazání dat po ukončení služby.
+
+Nemusíš zákazníka zavalit interní bezpečnostní dokumentací. Stačí krátká veřejná stránka „Provoz a data“, která lidsky shrne hlavní pravidla a odkáže na smluvní nebo bezpečnostní detaily pro zákazníky, kteří je potřebují.
+
+### EF.7 Šablona provozního slibu
+
+```markdown
+## Provozní slib: [název služby]
+
+### Rozsah služby
+- Kritické workflow:
+- Podpůrné funkce:
+- Komunikační kanály:
+- Co není součástí SLA:
+
+### Dostupnost
+- Jak měříme dostupnost:
+- Co považujeme za výpadek:
+- Plánovaná údržba:
+- Cíl obnovy:
+
+### Podpora
+- Kanál pro běžné dotazy:
+- Kanál pro incidenty:
+- Úrovně závažnosti:
+- První reakce:
+- Průběžné updaty:
+
+### Data a soukromí
+- Region provozu:
+- Přístupy podpory:
+- Zálohy:
+- Export:
+- Mazání po ukončení:
+
+### Incidenty
+- Kde zveřejňujeme stav:
+- Kdo komunikuje:
+- Jak uzavíráme incident:
+- Kdy děláme postmortem:
+```
+
+### EF.8 Checklist: SLA bez mlhy
+
+- [ ] Je jasné, které části služby jsou kritické a které podpůrné.
+- [ ] Dostupnost je popsaná nejen procentem, ale i dopadem na zákazníka.
+- [ ] Reakční časy podpory nejsou zaměněné za garantovanou opravu.
+- [ ] Incidenty mají definované úrovně, kanály a rytmus komunikace.
+- [ ] Plánovaná údržba má pravidla oznámení, rozsah a rollback.
+- [ ] SLA zahrnuje datové hranice: region, přístupy, zálohy, export a mazání.
+- [ ] Servisní kredity nejsou náhrada transparentní komunikace.
+- [ ] Provozní slib odpovídá ceně, týmu a reálné infrastruktuře.
+- [ ] Zákazník ví, kde najde aktuální stav služby.
+
+*Codyho komentář:* SLA nemá být neprůstřelný dokument, kterým se schováš před zákazníkem. Má to být mapa důvěry. Když se něco rozbije, zákazník podle ní pozná, že máš volant v ruce — ne že sedíš vzadu a předstíráš, že řídí někdo jiný.
+
 ## Pracovní log
+
+- 2026-09-03 10:00 UTC — Doplněna příloha EF o SLA a provozních slibech: rozsah služby, dostupnost podle dopadu, úrovně podpory, plánovaná údržba, incidentová komunikace, datové hranice, šablona provozního slibu a privacy-first checklist.
+
 - 2026-09-03 09:01 UTC — Doplněna příloha EE o zakázkových úpravách SaaS po pilotu: překlad požadavků na produktové otázky, rozlišení produktového jádra, konfigurace a výjimek, obchodní model úprav, technické hranice, vlastnictví, datová pravidla, zakázková karta a privacy-first checklist.
 - 2026-09-03 08:01 UTC — Doplněna příloha ED o pilotním projektu: rozhodovací otázka, omezení rozsahu, měřitelné i lidsky ověřitelné signály, datová minimalizace, cena pilotu, plánované ukončení, pilotní karta a privacy-first checklist.
 - 2026-09-03 07:01 UTC — Doplněna příloha EC o produktovém demu: příprava podle kontextu zákazníka, scénář místo klikací prohlídky, vrstvy hodnoty/práce/důvěry, práce s námitkami, konkrétní další krok, bezpečná demo data, demo karta a privacy-first checklist.
