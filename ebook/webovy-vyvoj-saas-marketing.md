@@ -25001,7 +25001,164 @@ Použij kartu pro největší rizika jako první: poptávky, support přílohy, 
 
 Retence je jeden z nejlevnějších způsobů, jak snížit riziko. Nepotřebuješ hromadit všechno, abys byl datově chytrý. Potřebuješ držet správná data dost dlouho na správný účel — a pak je umět pustit. I databáze si zaslouží občas vyvětrat.
 
+
+## Příloha EP: Datový katalog pro malý SaaS tým bez korporátního muzejnictví
+
+Datový katalog zní jako něco, co vzniká v zasedačce s deseti konzultanty, třemi enterprise licencemi a jedním flipchartem, který nikdy nikdo nevyhodí. V malém SaaS týmu ale katalog nemusí být těžkopádný. Stačí jednoduchý seznam datových sad, jejich účelu, vlastníka, citlivosti a pravidel použití. Cíl není vyrobit krásný dokument. Cíl je vědět, kde máš data, proč je máš a co by se stalo, kdyby unikla, zestárla nebo zmizela.
+
+Privacy-first provoz v Evropě stojí na schopnosti odpovědět na jednoduché otázky: jaká data sbíráme, kde leží, kdo k nim má přístup, jak dlouho je držíme a jak je umíme vysvětlit zákazníkovi. Bez katalogu se tyhle odpovědi mění v detektivku. A detektivka je super v knihkupectví, ne při incidentu v pátek v 16:47.
+
+### EP.1 Katalog není datový sklad, ale mapa odpovědnosti
+
+Nepleť si datový katalog s místem, kam se data kopírují. Katalog nemá obsahovat samotná zákaznická data. Má obsahovat metadata o datech: popis, umístění, účel, vlastníka a pravidla. Díky tomu může být bezpečný, stručný a použitelný i bez toho, aby se z něj stal další citlivý systém.
+
+Minimální záznam v katalogu:
+
+- **Název datové sady:** například uživatelské účty, fakturační údaje, support tikety, aplikační logy nebo produktové eventy.
+- **Účel:** proč data existují a jaké rozhodnutí nebo proces podporují.
+- **Systém:** kde data primárně vznikají a kde se zpracovávají.
+- **Vlastník:** konkrétní role nebo člověk, který za datovou sadu odpovídá.
+- **Citlivost:** veřejná, interní, zákaznická, osobní, bezpečnostně citlivá.
+- **Přístup:** kdo data potřebuje pro práci a kdo je jen historicky vidí.
+- **Retence:** jak dlouho data držíš a co se děje potom.
+- **Export a mazání:** jak data dostaneš ven a jak je odstraníš.
+
+Dobrý katalog nepůsobí jako auditní svitek. Působí jako provozní mapa, kterou otevřeš při změně produktu, nákupu nástroje, onboardingu nového člověka nebo bezpečnostní otázce od zákazníka.
+
+### EP.2 Začni pěti datovými sadami, ne celým vesmírem
+
+Nejčastější chyba je snaha popsat všechno najednou. Tým se nadchne, otevře tabulku, pojmenuje třicet kategorií a po týdnu z katalogu zůstane digitální fosilie. Začni tam, kde je největší dopad.
+
+První pětice pro většinu SaaS projektů:
+
+- **Účty a organizace:** uživatelé, role, e-maily, stav účtu, pozvánky.
+- **Zákaznický obsah:** data, která zákazník vloží do produktu a bez kterých produkt nedává smysl.
+- **Billing a smlouvy:** fakturační kontakty, objednávky, předplatné, daňové podklady.
+- **Support a komunikace:** tikety, e-maily, screenshoty, diagnostické přílohy.
+- **Provozní logy a analytika:** chyby, auditní události, agregované produktové metriky.
+
+U každé sady si polož otázku: kdybychom ji ztratili, co se stane? Kdyby unikla, koho to poškodí? Kdybychom ji drželi zbytečně dlouho, jaké riziko tím vyrábíme? Tohle je praktičtější než abstraktní štítky typu „data governance“. Ano, i tahle fráze si zaslouží malý timeout.
+
+### EP.3 Citlivost popiš podle dopadu, ne podle pocitu
+
+Štítek „citlivé“ je k ničemu, když není jasné proč. Rozděl data podle dopadu na zákazníka a firmu.
+
+Jednoduchá škála:
+
+- **Veřejné:** informace určené k publikaci, například veřejná dokumentace nebo marketingový text.
+- **Interní:** provozní informace, které nejsou tajné, ale nepatří ven, například interní roadmapa.
+- **Zákaznické:** data patřící zákazníkovi nebo jeho pracovnímu procesu.
+- **Osobní:** data vztahující se ke konkrétním lidem, například e-mail, jméno, role nebo komunikační historie.
+- **Bezpečnostně citlivé:** tokeny, přístupové údaje, auditní logy, interní incidentové poznámky.
+
+Ke každé úrovni napiš pravidlo použití. Například osobní data nepoužíváš v demo prostředí, support přílohy se nestahují na osobní zařízení, exporty mají omezenou dobu života a tokeny nikdy neleží v poznámkovém dokumentu. Tohle není paranoia. To je normální digitální hygiena, jen bez gumových rukavic.
+
+*Codyho komentář:* Pokud tým neumí vysvětlit, proč je datová sada citlivá, začne ji buď chránit málo, nebo nesmyslně moc. Obojí zpomaluje. Dobrá klasifikace má chránit práci, ne ji omotat izolepou.
+
+### EP.4 Každá datová sada potřebuje vlastníka
+
+„To řeší technický tým“ není vlastnictví. „To je v CRM“ taky ne. Vlastník datové sady je osoba nebo role, která umí rozhodnout:
+
+- zda se data mají dál sbírat,
+- kdo k nim má mít přístup,
+- jak se mění při úpravě produktu,
+- co se děje při exportu nebo smazání,
+- jak odpovědět zákazníkovi při dotazu,
+- kdy záznam v katalogu zkontrolovat.
+
+V malém týmu může jeden člověk vlastnit více datových sad. To je v pořádku. Horší je, když datovou sadu nevlastní nikdo a všichni doufají, že ji magicky spravuje platforma. Platformy neumí nést odpovědnost. Umí maximálně poslat hezkou fakturu.
+
+Praktický rytmus: jednou měsíčně projdi nové funkce, integrace a datové exporty. Pokud vznikla nová datová sada, přidej ji do katalogu. Pokud se změnil účel nebo přístup, aktualizuj záznam. Pokud nikdo neví, proč data existují, dej je do fronty na smazání nebo anonymizaci.
+
+### EP.5 Datové toky kresli obyčejně
+
+Nemusíš mít sofistikovaný diagram. Stačí napsat tok jako větu:
+
+> Uživatel odešle formulář → aplikace uloží záznam do databáze → notifikace jde do e-mailu podpory → agregovaný počet poptávek se zobrazí v interním reportu.
+
+U takového toku hned vidíš slabá místa:
+
+- e-mail podpory může obsahovat víc osobních údajů, než je nutné,
+- interní report možná nepotřebuje detail konkrétní osoby,
+- notifikace může vytvářet další kopii dat mimo hlavní systém,
+- export do tabulky může obejít retenční pravidla,
+- testovací prostředí může omylem dostat produkční data.
+
+Datový katalog by měl u důležitých sad obsahovat alespoň hlavní vstupy a výstupy. Když přidáš novou integraci, uvidíš, zda posíláš celý objekt jen proto, že je to technicky snadné. Privacy-first pravidlo je jednoduché: neposílej celý kufr, když partner potřebuje jen číslo rezervace.
+
+### EP.6 Katalog používej při nákupu nástrojů
+
+Před nákupem nového SaaS nástroje otevři katalog a napiš, které datové sady do něj potečou. Pokud odpověď zní „asi všechno“, zpomal. Nový nástroj má dostat jen data potřebná pro jasný účel.
+
+Příklad:
+
+- Nástroj pro podporu nepotřebuje kompletní billing historii, pokud support řeší jen technické dotazy.
+- Marketingový nástroj nepotřebuje detailní produktové události konkrétního uživatele, když stačí agregované metriky kampaní.
+- Interní reporting nepotřebuje e-maily zákazníků, pokud rozhodnutí funguje nad firmami, segmenty nebo anonymními počty.
+
+Do katalogu si poznamenej i dodavatele, region provozu, způsob exportu a postup ukončení. Tím propojíš katalog s exit plánem, retenčními pravidly i bezpečnostními dotazníky. Jeden malý dokument pak odpovídá na tři velké otázky. To je přesně ten typ lenosti, který schvaluji.
+
+### EP.7 Šablona: karta datové sady
+
+```markdown
+## Datová sada: [název]
+
+### Základ
+- Účel:
+- Vlastník:
+- Primární systém:
+- Další kopie nebo exporty:
+
+### Obsah
+- Hlavní pole nebo typy údajů:
+- Obsahuje osobní data: ano / ne / částečně
+- Obsahuje zákaznický obsah: ano / ne
+- Citlivost: veřejná / interní / zákaznická / osobní / bezpečnostně citlivá
+
+### Přístup
+- Role s přístupem:
+- Důvod přístupu:
+- Jak často přístup kontrolujeme:
+
+### Toky
+- Odkud data přichází:
+- Kam data odchází:
+- Externí dodavatelé:
+- Exporty:
+
+### Životní cyklus
+- Kdy data vznikají:
+- Kdy se aktualizují:
+- Retence:
+- Mazání nebo anonymizace:
+- Obnova ze záloh:
+
+### Poznámky
+- Rizika:
+- Otevřené otázky:
+- Datum poslední kontroly:
+```
+
+Šablonu nedělej perfektní. Vyplň ji pro prvních pět datových sad a postupně zpřesňuj. Katalog, který je hotový na 70 % a používaný, je lepší než katalog, který je hotový na 100 % v představách a na 0 % v realitě.
+
+### EP.8 Checklist: datový katalog, který nezapadne prachem
+
+- [ ] Máme seznam hlavních datových sad bez kopírování samotných zákaznických dat.
+- [ ] Každá datová sada má jasný účel, vlastníka a primární systém.
+- [ ] U každé sady víme, zda obsahuje osobní data, zákaznický obsah nebo bezpečnostně citlivé informace.
+- [ ] Přístupy jsou popsané podle rolí a důvodu, ne podle historické náhody.
+- [ ] U důležitých sad známe hlavní vstupy, výstupy, exporty a externí dodavatele.
+- [ ] Katalog propojujeme s retenčními pravidly, exit plánem a bezpečnostními odpověďmi.
+- [ ] Nový nástroj nebo integrace se do katalogu doplní před ostrým spuštěním.
+- [ ] Support a obchod vědí, kde najít lidské vysvětlení práce s daty.
+- [ ] Katalog kontrolujeme aspoň měsíčně nebo při větší změně produktu.
+- [ ] Pokud datová sada nemá jasný účel, řešíme omezení sběru, anonymizaci nebo smazání.
+
+Datový katalog je tichá infrastruktura důvěry. Zákazník ho neuvidí celý, ale pozná jeho existenci v každé přesné odpovědi, bezpečném exportu, rychlém incident review a rozumném rozhodnutí neposílat data tam, kam nemusí. A přesně tak má privacy-first provoz fungovat: méně dramat, víc kontroly.
+
 ## Pracovní log
+
+- 2026-09-03 21:01 UTC — Doplněna příloha EP o datovém katalogu pro malé SaaS týmy: mapa odpovědnosti, prvních pět datových sad, klasifikace citlivosti podle dopadu, vlastnictví, jednoduché datové toky, využití při nákupu nástrojů, šablona karty a privacy-first checklist.
 
 - 2026-09-03 20:01 UTC — Doplněna příloha EO o retenčních pravidlech a mazání dat: mapa datových míst, rozdíl mezi mazáním/anonymizací/archivací, provozní tabulka, automatizace úklidu, zálohy, zákaznická komunikace, šablona retenční karty a privacy-first checklist.
 
