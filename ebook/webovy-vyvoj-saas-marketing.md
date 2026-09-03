@@ -25156,7 +25156,180 @@ Do katalogu si poznamenej i dodavatele, region provozu, způsob exportu a postup
 
 Datový katalog je tichá infrastruktura důvěry. Zákazník ho neuvidí celý, ale pozná jeho existenci v každé přesné odpovědi, bezpečném exportu, rychlém incident review a rozumném rozhodnutí neposílat data tam, kam nemusí. A přesně tak má privacy-first provoz fungovat: méně dramat, víc kontroly.
 
+
+## Příloha EQ: Registr subdodavatelů bez tajemna, paniky a právnické mlhy
+
+Jakmile malý SaaS tým používá hosting, e-mailing, helpdesk, analytiku, platební bránu, monitoring nebo AI nástroj, už většinou není na data sám. To není automaticky špatně. Špatně je tvářit se, že „to nějak řeší dodavatel“, a pak při zákaznickém dotazu lovit odpovědi ve fakturách, Slacku a dávno zavřených tabech prohlížeče. Registr subdodavatelů je jednoduchý seznam lidí a služeb, kterým něco svěřuješ nebo přes které něco teče.
+
+Nejde o dokument pro vitrínu. Je to provozní mapa důvěry. Pomáhá odpovědět na tři otázky: kdo se může dostat k jakým datům, proč je to potřeba a co uděláme, když se dodavatel změní, zdraží, vypadne nebo přestane dávat smysl pro evropský privacy-first provoz.
+
+*Codyho komentář:* Subdodavatel bez zápisu v registru je jako klíč od kanceláře, o kterém nikdo neví. Možná ho má správný člověk. Možná leží pod rohožkou. Ani jedna varianta není strategie.
+
+### EQ.1 Nejdřív rozliš nástroj, dodavatele a datový tok
+
+Začni obyčejně. Nepiš hned složitý právní dokument. Ke každému systému si odpověz:
+
+- **Nástroj:** konkrétní služba nebo software, který používáš.
+- **Dodavatel:** firma nebo provozovatel, který nástroj poskytuje.
+- **Účel:** proč ho používáš a jaké rozhodnutí nebo práci podporuje.
+- **Data:** jaké kategorie dat do něj vstupují.
+- **Tok:** odkud data přichází a kam odchází.
+- **Přístup:** kdo z týmu nebo dodavatele se k datům může dostat.
+
+Příklad:
+
+- Nástroj: helpdesk.
+- Dodavatel: provozovatel helpdeskové služby.
+- Účel: odpovídat na zákaznické požadavky a držet historii řešení.
+- Data: kontaktní údaje, obsah ticketů, technické informace k problému.
+- Tok: zákaznický e-mail → helpdesk → interní odpověď → zákazník.
+- Přístup: support, vybraní vývojáři při eskalaci, administrátor účtu.
+
+Tahle jednoduchá tabulka rychle ukáže, kde máš skutečné riziko. E-mailing s veřejnými newsletterovými adresami je jiná úroveň než nástroj, kam posíláš zákaznické exporty, logy s identifikátory nebo interní obchodní poznámky.
+
+### EQ.2 Ne každý dodavatel je stejně kritický
+
+Registr má pomáhat prioritizovat. Proto si dodavatele rozděl podle dopadu, ne podle toho, kdo má nejhezčí logo.
+
+Praktické úrovně:
+
+- **Kritický:** výpadek nebo ztráta dat zastaví službu, prodej, podporu nebo billing.
+- **Důležitý:** výpadek bolí, ale existuje ruční nebo dočasná náhrada.
+- **Pomocný:** nástroj zlepšuje pohodlí, ale neblokuje hlavní provoz.
+- **Experimentální:** testuje se a nemá dostávat ostrá zákaznická data bez schválení.
+
+U kritických dodavatelů potřebuješ víc než odkaz na homepage. Potřebuješ vědět, kdo má přístup, jak získáš export, jak obnovíš provoz, jak vypadá ukončení spolupráce a kdo rozhoduje o změně. U pomocných nástrojů stačí stručnější zápis, ale i tam musí být jasné, proč existují a kdy se uklidí.
+
+Dobrý test: kdyby dodavatel dnes večer přestal fungovat, kdo se to dozví, jaký zákaznický dopad vznikne a jak dlouho potrvá náhradní postup? Pokud odpověď zní „někdo by to asi řešil“, registr ještě není hotový.
+
+### EQ.3 Privacy-first hodnocení začíná otázkou „musí tam ta data vůbec být?“
+
+Nejlepší ochrana dat je neposílat je tam, kam nemusí. Před přidáním nového nástroje projdi minimální privacy-first filtr:
+
+1. Jakou práci má nástroj zrychlit nebo zlepšit?
+2. Dá se stejný výsledek získat bez osobních dat?
+3. Dá se použít agregace, pseudonymizace nebo testovací data?
+4. Musí data opustit evropský provoz?
+5. Kdo u dodavatele může data technicky nebo organizačně vidět?
+6. Jak dlouho tam data zůstanou?
+7. Jak je smažeme nebo exportujeme při odchodu?
+
+Tímhle filtrem projdou některé nástroje bez potíží. Jiné vypadnou hned, protože chtějí víc dat, než je pro daný účel rozumné. To není tragédie. To je přesně práce filtru. Nástroj, který potřebuje kompletní zákaznickou historii jen proto, aby poslal jednoduchou notifikaci, si říká o malou datovou dietu.
+
+Privacy-first neznamená „nikdy nepoužij externí službu“. Znamená to, že každá externí služba má jasný účel, omezený rozsah a vysvětlitelné místo v architektuře.
+
+### EQ.4 U každého dodavatele drž jednu odpovědnou osobu
+
+Dodavatel bez vlastníka časem zaroste. Nikdo neví, jestli ho ještě potřebujeme, jestli má správná oprávnění, jestli se změnily podmínky nebo jestli už existuje lepší evropská alternativa.
+
+V registru proto uveď:
+
+- interního vlastníka,
+- technického správce,
+- obchodní nebo provozní účel,
+- datum poslední kontroly,
+- datum další kontroly,
+- rozhodnutí: ponechat, omezit, nahradit, vypnout.
+
+Vlastník nemusí být právník ani bezpečnostní mág v plášti. Má být člověk, který rozumí tomu, proč nástroj existuje a jaký dopad by mělo jeho omezení. U malého týmu to klidně bude zakladatel, produktový člověk nebo technický lead. Důležité je, aby vlastnictví nebylo kolektivní mlha.
+
+Jednou měsíčně si projdi nové nástroje. Jednou čtvrtletně kritické dodavatele. Jednou ročně celý registr. Když tým přidá nástroj mimo tento rytmus, musí se do registru dostat před ostrým použitím se zákaznickými daty.
+
+### EQ.5 Registr propojuje nákup, bezpečnost i podporu
+
+Dobře vedený registr není dokument navíc. Je to zkratka pro několik opakovaných situací:
+
+- **Nákup nástroje:** víš, jaká data do něj půjdou a podle čeho ho posoudit.
+- **Bezpečnostní dotazník:** máš připravenou odpověď, které služby se podílejí na provozu.
+- **Incident:** rychle zjistíš, kterých dat a zákazníků se může problém týkat.
+- **Exit plán:** víš, kde vzít export a co po ukončení smazat.
+- **Support:** zákazníkovi odpovíš lidsky, ne stylem „předáme na příslušné oddělení“, což v malém týmu zní obzvlášť komicky.
+
+Propoj registr s datovým katalogem, retenčními pravidly a exit plánem. Nemusí to být jeden obří systém. Stačí konzistentní odkazy: u datové sady je uvedeno, který dodavatel ji zpracovává; u dodavatele je uvedeno, jaké datové sady se ho týkají; u retenčního pravidla je uvedeno, kde se mazání musí projevit.
+
+Tak vznikne provozní síť, která drží pohromadě. Ne proto, že má krásné diagramy, ale proto, že při praktické otázce dovedeš rychle najít odpověď.
+
+### EQ.6 Nezapomeň na stínové nástroje
+
+Největší riziko často nejsou oficiální systémy. Ty bývají aspoň někde zmíněné. Horší jsou stínové nástroje: osobní účty, dočasné tabulky, AI chaty, exporty v lokálních složkách, screenshoty poslané do komunikátoru nebo „jen na chvilku“ nahrané soubory do externí služby.
+
+Najdeš je tak, že se neptáš „jaké dodavatele máme?“, ale:
+
+- Kam si lidé ukládají exporty?
+- Přes co si posíláme screenshoty zákaznických problémů?
+- Kde ladíme texty e-mailů, smluv nebo support odpovědí?
+- Kam nahráváme logy, když hledáme chybu?
+- Kdo má vlastní pomocné tabulky mimo hlavní systém?
+- Jaké nástroje používáme jen proto, že byly po ruce?
+
+Cílem není tým nachytat. Cílem je snížit tření tak, aby bezpečná cesta byla zároveň pohodlná. Pokud lidé používají stínový nástroj, většinou tím říkají, že oficiální proces je pomalý, nejasný nebo otravný. Oprav proces, ne jen člověka.
+
+### EQ.7 Šablona: karta subdodavatele
+
+```markdown
+## Subdodavatel: [název]
+
+### Základ
+- Nástroj / služba:
+- Dodavatel / provozovatel:
+- Interní vlastník:
+- Kritičnost: kritický / důležitý / pomocný / experimentální
+- Stav: aktivní / test / nahrazujeme / vypínáme
+
+### Účel
+- Jakou práci podporuje:
+- Proč nestačí interní řešení nebo jednodušší alternativa:
+- Jak poznáme, že nástroj pořád přináší hodnotu:
+
+### Data
+- Kategorie dat:
+- Obsahuje osobní data: ano / ne / nejisté
+- Obsahuje zákaznický obsah: ano / ne / nejisté
+- Posíláme jen nezbytné minimum: ano / ne / k ověření
+- Testovací nebo anonymizovaná data lze použít: ano / ne
+
+### Provoz a přístup
+- Kdo má interní přístup:
+- Kdy se přístup kontroluje:
+- Kde běží provoz nebo ukládání dat:
+- Jak se řeší výpadek:
+- Jak získáme export:
+
+### Životní cyklus
+- Datum zavedení:
+- Poslední kontrola:
+- Další kontrola:
+- Retence nebo mazání po ukončení:
+- Exit plán:
+
+### Rozhodnutí
+- Ponechat / omezit / nahradit / vypnout:
+- Důvod:
+- Další krok:
+- Vlastník dalšího kroku:
+```
+
+Šablonu drž krátkou. Když karta naroste na tři stránky, nikdo ji nebude aktualizovat. Lepší je malý živý záznam než dokonalý dokument, který se naposledy otevřel v době, kdy někdo ještě říkal „digitální transformace“ bez ironie.
+
+### EQ.8 Checklist: registr subdodavatelů, který chrání provoz
+
+- [ ] Máme seznam aktivních nástrojů a dodavatelů, přes které tečou zákaznická nebo provozní data.
+- [ ] Každý dodavatel má účel, interního vlastníka a úroveň kritičnosti.
+- [ ] U každého dodavatele víme, jaké datové kategorie zpracovává.
+- [ ] U kritických dodavatelů máme popsaný výpadkový scénář, export a exit plán.
+- [ ] Nové nástroje neostřílíme zákaznickými daty bez zápisu do registru.
+- [ ] Stínové tabulky, exporty, AI nástroje a dočasné služby pravidelně hledáme a uklízíme.
+- [ ] Přístupy k dodavatelským nástrojům kontrolujeme podle rolí a potřeby.
+- [ ] Retenční pravidla zahrnují i data u dodavatelů, nejen v naší aplikaci.
+- [ ] Zákazníkům umíme lidsky vysvětlit, proč konkrétní dodavatele používáme.
+- [ ] Pokud dodavatel nemá jasný účel nebo bere moc dat, omezíme ho, nahradíme nebo vypneme.
+
+Registr subdodavatelů není byrokratický trest za to, že tým používá moderní nástroje. Je to způsob, jak moderní nástroje používat bez ztráty kontroly. Malý tým tím získá rychlejší rozhodování, lepší odpovědi zákazníkům a menší šanci, že se z jednoho „dočasného“ nástroje stane trvalá díra v datové mapě.
+
 ## Pracovní log
+
+- 2026-09-03 22:01 UTC — Doplněna příloha EQ o registru subdodavatelů pro malý SaaS tým: rozlišení nástrojů, dodavatelů a datových toků, kritičnost, privacy-first filtr, vlastnictví, propojení s nákupem a podporou, stínové nástroje, šablona karty a checklist.
+
 
 - 2026-09-03 21:01 UTC — Doplněna příloha EP o datovém katalogu pro malé SaaS týmy: mapa odpovědnosti, prvních pět datových sad, klasifikace citlivosti podle dopadu, vlastnictví, jednoduché datové toky, využití při nákupu nástrojů, šablona karty a privacy-first checklist.
 
