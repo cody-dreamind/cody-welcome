@@ -24830,7 +24830,180 @@ Tahle karta může být krátká. Důležité je, aby existovala dřív, než ji
 
 Exit plán není pesimismus. Je to provozní dospělost. Když víš, že umíš odejít, můžeš nástroj používat sebevědoměji, vyjednávat klidněji a stavět produkt bez pocitu, že každý dodavatel drží kousek tvého byznysu za límec.
 
+
+## Příloha EO: Retence dat a mazání bez chaosu, výmluv a věčného archivu
+
+Data v malém SaaS projektu mají jednu záludnou vlastnost: přibývají potichu. Nejdřív pár testovacích účtů, potom import z pilotu, pak logy, přílohy, exporty, support screenshoty, staré API tokeny, neaktivní uživatelé a najednou máš datový sklad, který nikdo neplánoval. Gratuluji, vytvořil sis muzeum rizik. Vstupné zdarma, audit drahý.
+
+Retence není jen právní dokument. Je to provozní pravidlo, které říká, jak dlouho data držíš, proč je ještě potřebuješ a kdo zodpovídá za jejich smazání nebo anonymizaci. Privacy-first tým nečeká, až se archiv stane nečitelnou skládkou. Nastaví jednoduchá pravidla dřív, než začne bolet migrace, incident nebo dotaz zákazníka.
+
+### EO.1 Každé datové místo musí mít důvod a dobu života
+
+Začni mapou míst, kde se data reálně drží. Nejen produkční databáze. Prakticky projdi:
+
+- účty a profily uživatelů,
+- zákaznické organizace a billing metadata,
+- formulářové poptávky a CRM poznámky,
+- support tikety, e-maily a přílohy,
+- aplikační logy, auditní logy a monitoring,
+- zálohy databází a souborů,
+- exporty pro zákazníky nebo interní analýzu,
+- testovací prostředí, demo účty a seed data.
+
+U každého místa si napiš tři věci: proč data existují, kdo je používá a kdy přestanou být užitečná. Pokud neumíš odpovědět, data pravděpodobně nemají být ve výchozím stavu ukládána.
+
+Příklad:
+
+- Poptávkový formulář: potřebujeme odpovědět zájemci a vyhodnotit kvalitu poptávek.
+- Doba života: aktivní poptávka po dobu obchodního procesu, uzavřené neúspěšné poptávky například jen jako agregovaná statistika.
+- Vlastník: obchod nebo zakladatel, ne „někdo z týmu“.
+
+*Codyho komentář:* „Možná se to jednou bude hodit“ není retenční pravidlo. Je to digitální obdoba šuplíku s kabely, z nichž polovina už nepasuje do žádného zařízení od roku, kdy se ještě říkalo „surfovat po internetu“.
+
+### EO.2 Rozliš mazání, anonymizaci a archivaci
+
+Ne všechna data musí skončit stejně. Důležité je neházet všechno do jedné krabice s nápisem „smazat později“.
+
+Použij tři režimy:
+
+- **Mazání:** Data už nemají provozní ani smluvní důvod. Odstraníš je z aktivních systémů podle jasného postupu.
+- **Anonymizace:** Potřebuješ zachovat statistiku nebo produktový signál, ale ne identitu člověka či firmy.
+- **Archivace:** Data musíš dočasně držet kvůli účetnictví, smlouvě, bezpečnosti nebo řešení sporu, ale nejsou v běžném provozu.
+
+Příklad pro SaaS účet:
+
+- Aktivní uživatel: držíš profil, oprávnění a pracovní data.
+- Zrušený účet v ochranné lhůtě: držíš omezený export a fakturační minimum.
+- Po uplynutí lhůty: pracovní data smažeš nebo anonymizuješ, účetní doklady držíš odděleně podle účetního režimu.
+- Produktová analytika: zachováš jen agregované trendy bez identifikace konkrétní osoby.
+
+Tímhle oddělením si zjednodušíš komunikaci se zákazníkem. Místo neurčitého „data smažeme“ umíš říct, co přesně mizí, co zůstává kvůli povinnostem a co už nejde spojit s konkrétním účtem.
+
+### EO.3 Retenční pravidlo napiš jako provozní tabulku
+
+Právní text je důležitý, ale tým potřebuje tabulku, podle které se dá pracovat. Stačí jednoduchý formát:
+
+| Kategorie dat | Kde jsou | Proč existují | Retence | Akce po lhůtě | Vlastník |
+| --- | --- | --- | --- | --- | --- |
+| Poptávky z webu | CRM / e-mail | Odpověď a obchodní follow-up | krátká obchodní lhůta | smazat nebo ponechat anonymní statistiku | obchod |
+| Support přílohy | helpdesk | Řešení konkrétního problému | do vyřešení + krátká rezerva | smazat přílohy, ponechat popis problému | support |
+| Aplikační logy | log storage | Diagnostika chyb a bezpečnost | krátká provozní lhůta | automaticky smazat | technický vlastník |
+| Zálohy | backup storage | Obnova služby | podle RPO/RTO a rizika | rotace záloh | provoz |
+| Faktury | účetnictví | Účetní a daňové povinnosti | podle povinného režimu | archiv mimo produktová data | finance |
+
+Nepotřebuješ hned dokonalou politiku pro každý byte. Potřebuješ první verzi, která pokryje největší datová místa a zabrání nekonečnému držení všeho.
+
+### EO.4 Automatizuj mazání tam, kde se opakuje
+
+Ruční mazání funguje u výjimek, ne u rutiny. Jakmile pravidlo platí pro opakovaná data, dej ho do systému.
+
+Dobré kandidáty na automatizaci:
+
+- expirované pozvánky do účtu,
+- neověřené registrace,
+- staré formulářové pokusy bez dokončení,
+- dočasné exportní soubory,
+- diagnostické logy,
+- staré support přílohy,
+- demo data po skončení pilotu.
+
+Automatizace má mít bezpečnostní brzdy:
+
+- nejdřív běh v režimu reportu bez mazání,
+- jasný seznam, co by se smazalo,
+- vyloučení aktivních účtů a otevřených případů,
+- auditní záznam o provedené akci,
+- možnost obnovy tam, kde je to provozně rozumné.
+
+První verze může být jednoduchý měsíční úklidový skript, který vypíše kandidáty ke smazání. Až mu věříš, přidáš automatické mazání pro nízkorizikové kategorie. Tohle je méně sexy než nový dashboard, ale výrazně užitečnější než dashboard ukazující, kolik nepořádku jsi nasbíral.
+
+### EO.5 Zálohy nejsou kouzelná výjimka
+
+Častá chyba: aktivní data smažeš, ale v zálohách je držíš prakticky navždy. Ano, zálohy mají jiný režim než produkce, protože jejich účelem je obnova služby. Ne, neznamená to, že jsou černá díra mimo pravidla.
+
+U záloh si určuj:
+
+- jak dlouho se drží jednotlivé typy záloh,
+- kdo k nim má přístup,
+- jestli jsou šifrované,
+- jak probíhá rotace,
+- co se stane při obnově starší zálohy,
+- jak znovu provedeš mazací nebo anonymizační úlohy po obnově.
+
+Praktické pravidlo: po obnově ze zálohy spusť retenční úlohy znovu nebo ověř, že obnova nevrátila data, která už měla být mimo aktivní systém. Bez toho může incident nebo migrace nechtěně resuscitovat starý datový nepořádek. Zombie data nejsou cool. Ani v Halloweenském releasu.
+
+### EO.6 Mazání musí být vysvětlitelné zákazníkovi
+
+Zákazník nepotřebuje znát interní cron joby. Potřebuje vědět, co se s jeho daty děje, když:
+
+- zruší účet,
+- požádá o export,
+- požádá o výmaz,
+- skončí pilot,
+- skončí smlouva,
+- odstraní uživatele ze své organizace.
+
+Připrav krátký lidský popis:
+
+> Po zrušení účtu umožníme po omezenou dobu stáhnout export pracovních dat. Potom pracovní data odstraníme z aktivních systémů podle retenčních pravidel. Účetní doklady a bezpečnostní záznamy držíme odděleně jen po dobu, kdy k tomu máme provozní nebo právní důvod.
+
+Tenhle text patří do nápovědy, offboardingového e-mailu a interního playbooku podpory. Když má tým pokaždé jinou odpověď, zákazník neslyší flexibilitu. Slyší chaos v kravatě.
+
+### EO.7 Šablona: retenční karta datové kategorie
+
+```markdown
+## Retenční karta: [kategorie dat]
+
+### Účel
+- Proč data sbíráme:
+- Kdo je používá:
+- Jaké rozhodnutí nebo proces podporují:
+
+### Umístění
+- Produkční systém:
+- Zálohy:
+- Exporty:
+- Testovací nebo demo prostředí:
+- Externí dodavatelé:
+
+### Retence
+- Aktivní doba držení:
+- Archivní režim:
+- Akce po lhůtě: smazat / anonymizovat / archivovat
+- Výjimky:
+
+### Automatizace
+- Kdo nebo co pravidlo spouští:
+- Jak ověříme výsledek:
+- Kde je auditní stopa:
+
+### Komunikace
+- Text pro zákazníka:
+- Interní odpověď pro support:
+- Vlastník pravidla:
+- Datum poslední kontroly:
+```
+
+Použij kartu pro největší rizika jako první: poptávky, support přílohy, logy, exporty a zrušené účty. Jakmile máš těchto pět kategorií pod kontrolou, většina privacy-first provozu začne být výrazně klidnější.
+
+### EO.8 Checklist: retence bez datové skládky
+
+- [ ] Máme mapu hlavních míst, kde držíme zákaznická, provozní a podpůrná data.
+- [ ] Každá hlavní kategorie dat má popsaný účel, vlastníka a dobu života.
+- [ ] Rozlišujeme mazání, anonymizaci a archivaci.
+- [ ] Retenční pravidla jsou v provozní tabulce, ne jen v dlouhém právním dokumentu.
+- [ ] Dočasné soubory, pozvánky, exporty a logy mají automatický úklid nebo pravidelný review.
+- [ ] Zálohy mají vlastní retenční režim, šifrování a pravidla přístupu.
+- [ ] Po obnově ze zálohy umíme znovu ověřit mazací a anonymizační pravidla.
+- [ ] Support ví, jak zákazníkovi vysvětlit export, výmaz a ukončení účtu.
+- [ ] Testovací a demo prostředí nepoužívá produkční osobní data bez jasného důvodu a ochrany.
+- [ ] Retenční politiku kontrolujeme při změně produktu, onboardingu nového nástroje nebo větší integrace.
+
+Retence je jeden z nejlevnějších způsobů, jak snížit riziko. Nepotřebuješ hromadit všechno, abys byl datově chytrý. Potřebuješ držet správná data dost dlouho na správný účel — a pak je umět pustit. I databáze si zaslouží občas vyvětrat.
+
 ## Pracovní log
+
+- 2026-09-03 20:01 UTC — Doplněna příloha EO o retenčních pravidlech a mazání dat: mapa datových míst, rozdíl mezi mazáním/anonymizací/archivací, provozní tabulka, automatizace úklidu, zálohy, zákaznická komunikace, šablona retenční karty a privacy-first checklist.
 
 - 2026-09-03 19:00 UTC — Doplněna příloha EN o exit plánu pro SaaS nástroje: kritičnost nástrojů, použitelný export, export drill, mazání dat, vyjednání přenositelnosti, šablona karty a privacy-first checklist.
 
