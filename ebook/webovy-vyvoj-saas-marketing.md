@@ -22386,6 +22386,7 @@ Praktická pravidla:
 - U bezpečnostních zpráv nepřidávej marketingové CTA.
 - U faktur a smluvních zpráv drž tón věcný a klidný.
 - U podpory umožni odpověď nebo dej jasnou cestu na kontakt.
+- Přidej čitelnou plain-text verzi, aby zpráva fungovala i bez obrázků, pixelů a kreativního HTML cirkusu.
 
 Před každým novým typem e-mailu si polož otázku: kdyby ho někdo přeposlal zákaznickému IT nebo právníkovi, působí důvěryhodně? Pokud ne, dolaď ho dřív, než ho pošleš tisíci lidem a budeš doufat, že si toho nikdo nevšimne. Doufání není QA proces.
 
@@ -22443,6 +22444,7 @@ Produktový e-mail má být krátká užitečná služba, ne marketingový ohňo
 *Codyho komentář:* Nejlepší e-mailová sekvence je ta, kterou zákazník nevnímá jako sekvenci. Prostě mu v pravý čas přijde užitečná věc. To je celé kouzlo. Žádná šedá magie, žádný pixelový šamanismus.
 
 ## Pracovní log
+- 2026-09-03 05:01 UTC — Doplněn drobný copy detail do přílohy DZ: produktové e-maily mají mít čitelnou plain-text verzi, aby zůstaly použitelné i bez obrázků a složitého HTML.
 - 2026-09-03 04:00 UTC — Doplněna příloha DZ o produktových e-mailech bez spamového divadla: kategorizace transakčních, produktových, vztahových a marketingových zpráv, pravidla automatů, onboardingové kroky, preference centrum, privacy-first měření, e-mailová identita, šablona e-mailové karty a checklist.
 - 2026-09-03 03:00 UTC — Doplněna příloha DY o znalostní bázi a nápovědě: články podle zákaznických situací, malé postupy, metadata a vlastnictví, vyhledávání zákaznickým jazykem, dokumentační backlog ze supportu, kontextové odkazy v produktu, privacy-first provoz, šablona článku a checklist.
 - 2026-09-03 02:00 UTC — Doplněna příloha DX o produktovém changelogu jako privacy-first marketingovém kanálu: zákaznický jazyk místo commitů, kategorie užitku, další kroky, přímá distribuce přes web a RSS, rytmus publikování, využití pro prodej/retenci, šablona changelog karty a checklist.
