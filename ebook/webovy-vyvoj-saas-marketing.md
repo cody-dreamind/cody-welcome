@@ -24173,7 +24173,175 @@ Tahle komunikace buduje důvěru. Zákazník vidí, že feedback nekončí v če
 
 *Codyho komentář:* Zpětná vazba není hlasování o tom, kdo dostane největší funkci. Je to sonar. Pomáhá zjistit, kde produkt naráží na realitu. A realita je sice občas protivná, ale aspoň nemá account na LinkedInu, kde by z toho udělala motivační post.
 
+
+## Příloha EK: Zákaznický advisory board bez divadla a datového přejídání
+
+Advisory board zní velkolepě, skoro jako místnost s mahagonovým stolem, kde někdo dramaticky pokládá složku na stůl. V malém SaaS nebo webovém studiu to ale může být mnohem jednodušší: pravidelný, dobře vedený kruh několika zákazníků, kteří pomáhají ověřovat směr produktu ještě předtím, než tým spálí měsíc práce na funkci, kterou nikdo nepotřebuje.
+
+Dobrý advisory board není anketa popularity ani tajný klub pro nejhlasitější zákazníky. Je to produktový nástroj. Pomáhá pochopit kontext, odhalit slepá místa a rozhodovat s lepšími signály. Privacy-first verze navíc drží jasné hranice: sbírá minimum osobních dat, nepoužívá nahrávky jako datový sklad a zákazníkům transparentně říká, jak bude jejich zpětná vazba použita.
+
+### EK.1 Nezvi fanoušky, zvědavé kritiky ani náhodný mix
+
+Výběr lidí je důležitější než hezká pozvánka. Když pozveš jen největší fanoušky, uslyšíš příjemné věci, ale nemusíš objevit problém. Když pozveš jen nejhlasitější kritiky, board se změní v support skupinu s občerstvením. Potřebuješ malé, vyvážené složení.
+
+Praktický výběr pro B2B SaaS:
+
+- **2 aktivní zákazníci:** používají jádro produktu pravidelně a znají provozní realitu.
+- **1 nový zákazník:** má čerstvou zkušenost s onboardingem a ještě nezapomněl, co bylo matoucí.
+- **1 téměř-zákazník:** řeší stejný problém, ale zatím nekoupil; často pojmenuje bariéry lépe než platící účet.
+- **1 interní pozorovatel:** člověk z produktu, supportu nebo obchodu, který zapisuje vzory, ne obhajobu.
+
+Nesnaž se mít dvacet lidí. U malého produktu často stačí pět až sedm účastníků, protože cílem není statistická reprezentativnost. Cílem je kvalitní kontext. Statistiky si nech na metriky, rozhovory na porozumění.
+
+### EK.2 Dej boardu konkrétní mandát
+
+Advisory board bez mandátu skončí jako volná diskuze o všem: trochu roadmapa, trochu support, trochu stížnost na cenu, trochu přání, aby tlačítko bylo víc vlevo. To může být zajímavé, ale špatně se podle toho rozhoduje.
+
+Na začátku napiš jednu větu:
+
+> Tento advisory board nám pomáhá lépe rozhodovat o **[oblast produktu]** pro **[typ zákazníka]**, zejména o prioritách, použitelnosti a důvěře v práci s daty.
+
+Příklady mandátu:
+
+- Pomoci zlepšit onboarding zákaznického portálu pro servisní firmy.
+- Ověřit, které reporty mají pro majitele B2B firmy skutečnou rozhodovací hodnotu.
+- Najít hranici mezi automatizací a kontrolou uživatele u workflow, které pracuje s citlivými daty.
+- Ověřit, jak transparentně vysvětlit evropský provoz a privacy-first analytiku na pricing stránce.
+
+Mandát chrání obě strany. Tým ví, na co se ptát. Zákazník ví, proč tam je. A když někdo začne řešit úplně jiné téma, můžeš ho slušně zaparkovat: „Tohle je dobrý bod, ale nepatří do dnešního mandátu. Dáme ho do feedback inboxu.“ Elegantní, klidné, žádné drama s flipchartem.
+
+### EK.3 Agenda má být kratší než chuť mluvit
+
+Největší chyba advisory boardu je přeplněná agenda. Tým chce využít vzácný čas zákazníků, tak přinese deset témat, čtyři prototypy a strategickou otázku na konec. Výsledek: všechno se jen olízne, nikdo nejde do hloubky a zápis připomíná degustaci chaosu.
+
+Pro jednu hodinovou schůzku stačí:
+
+1. **5 minut:** připomenutí cíle a pravidel.
+2. **10 minut:** krátký kontext od týmu — co řešíme a proč.
+3. **25 minut:** jedna hlavní otázka nebo prototyp.
+4. **10 minut:** rizika, námitky a slepá místa.
+5. **10 minut:** shrnutí rozhodovacích signálů a další krok.
+
+Příklad hlavní otázky:
+
+> Když by měl portál ukázat zákazníkovi stav jeho požadavku jen na jedné obrazovce, které tři informace jsou opravdu nezbytné?
+
+To je lepší než „Co si myslíte o dashboardu?“ Dashboard je moc široký. Jedna obrazovka, tři informace, konkrétní situace — to už je materiál pro rozhodnutí.
+
+### EK.4 Neprodávej roadmapu, testuj předpoklady
+
+Advisory board není prezentace hotové roadmapy s prosbou o potlesk. Když zákazníkům ukážeš plán jako hotovou věc, často budou zdvořilí. Když jim ukážeš předpoklad, začnou přemýšlet.
+
+Místo:
+
+> V Q4 chceme přidat pokročilý modul reportingu. Líbí se vám?
+
+Zkus:
+
+> Myslíme si, že manažeři potřebují každý pátek rychle vidět tři rizika: zpožděné požadavky, nejasné vlastníky a zákazníky bez odpovědi. Kdy by vám takový přehled pomohl a kdy by byl jen další e-mail?
+
+Hledej hlavně:
+
+- jestli zákazník problém opravdu poznává,
+- jak dnes situaci řeší,
+- kdo by informaci použil,
+- jaké rozhodnutí by podle ní udělal,
+- co by z přehledu nesmělo uniknout,
+- co by bylo zbytečné nebo rušivé.
+
+Tím se vyhneš falešnému souhlasu. Lidé často říkají „ano, to by bylo užitečné“, protože nechtějí brzdit. Lepší otázka zní: „Kdy jste to naposledy potřebovali a co jste tehdy udělali?“ Minulost lže méně než hypotetická budoucnost. Ne vždycky, ale má horší marketingové oddělení.
+
+### EK.5 Privacy-first pravidla nastav před první schůzkou
+
+Advisory board pracuje s obchodním kontextem zákazníků, interními procesy a někdy i citlivými příklady. Proto musíš předem říct, jak s informacemi naložíš. Ne proto, aby text vypadal právně. Proto, aby se lidé nebáli mluvit konkrétně.
+
+Minimum pravidel:
+
+- **Účel:** zpětná vazba slouží ke zlepšení produktu a služeb, ne k veřejnému marketingu bez souhlasu.
+- **Zápis:** ukládá se shrnutí signálů, rozhodnutí a anonymizované příklady; ne nekonečný přepis všeho.
+- **Nahrávání:** používej jen s výslovným souhlasem a jasnou retencí; často stačí ruční poznámky.
+- **Citace:** veřejně používej jen schválené citace nebo anonymizované parafráze.
+- **Retence:** poznámky pravidelně čistěte; starý kontext může být zavádějící i zbytečně rizikový.
+- **Přístupy:** zápisy patří jen lidem, kteří podle nich rozhodují nebo realizují změny.
+
+Pokud řešíš evropský B2B produkt, můžeš z privacy-first přístupu udělat součást pozvánky. Napiš jednoduše: „Nebudeme vás nahrávat bez souhlasu, nebudeme sdílet citace bez schválení a ze schůzky si odneseme jen rozhodovací poznámky.“ To je mnohem důvěryhodnější než tři odstavce mlhy.
+
+### EK.6 Výstupem musí být rozhodnutí, ne zápis pro archivní skřítky
+
+Po každém advisory boardu vytvoř krátké shrnutí do 24 hodin. Když čekáš týden, zůstane jen dojem. A dojmy jsou v produktu nebezpečné: tváří se jako fakta, ale nosí falešný knírek.
+
+Shrnutí rozděl takto:
+
+- **Tři nejsilnější signály:** co se opakovalo nebo mělo vysoký dopad.
+- **Jedno překvapení:** co tým nečekal.
+- **Jedna věc, kterou neděláme:** vědomé odmítnutí nebo odložení.
+- **Jedno rozhodnutí:** co se mění v roadmapě, prototypu, copy nebo procesu.
+- **Jedna otázka na příště:** co zůstává nejasné.
+
+Neposílej zákazníkům interní zápis plný úvah, priorit a technických detailů. Pošli jim krátké poděkování a lidské shrnutí: „Slyšeli jsme hlavně X, Y a Z. V nejbližším kroku ověříme A. Téma B zatím neplánujeme, protože by komplikovalo C.“ Tím ukážeš, že zpětná vazba nezmizela v černé díře backlogu.
+
+### EK.7 Šablona advisory board karty
+
+```markdown
+## Advisory board: [téma / datum]
+
+### Mandát
+- Oblast produktu:
+- Cílový typ zákazníka:
+- Rozhodnutí, které potřebujeme udělat:
+
+### Účastníci
+- Segmenty / role:
+- Aktivní zákazníci:
+- Noví zákazníci:
+- Téměř-zákazníci:
+- Interní vlastník:
+
+### Agenda
+- Kontext:
+- Hlavní otázka:
+- Prototyp nebo scénář:
+- Rizika a námitky:
+- Shrnutí:
+
+### Signály
+- Opakované vzory:
+- Překvapení:
+- Silné námitky:
+- Nepotvrzené předpoklady:
+
+### Rozhodnutí
+- Co uděláme:
+- Co neuděláme:
+- Co ověříme příště:
+- Vlastník:
+- Datum kontroly:
+
+### Privacy-first pravidla
+- Nahrávání:
+- Retence poznámek:
+- Citace a souhlasy:
+- Přístupy k zápisu:
+- Osobní údaje odstraněné ze shrnutí:
+```
+
+### EK.8 Checklist: advisory board, který pomáhá produktu
+
+- [ ] Board má jasný mandát a jednu hlavní rozhodovací otázku.
+- [ ] Účastníci pokrývají aktivní, nové i potenciální zákazníky.
+- [ ] Agenda řeší jedno hlavní téma, ne celý produktový vesmír.
+- [ ] Tým testuje předpoklady, neprodává hotovou roadmapu.
+- [ ] Otázky míří na minulé situace, konkrétní dopad a současné workaroundy.
+- [ ] Zápis odděluje signály, interpretace a rozhodnutí.
+- [ ] Nahrávání, citace a retence poznámek mají jasný souhlas a pravidla.
+- [ ] Do 24 hodin vznikne shrnutí s rozhodnutím a dalším krokem.
+- [ ] Zákazníci dostanou krátkou zpětnou vazbu, co se s jejich vstupem stane.
+- [ ] Staré poznámky se pravidelně čistí, aby z boardu nebyl archivní kombajn na osobní data.
+
+*Codyho komentář:* Advisory board má být lepší uši produktu, ne divadlo pro zákazníky. Když po schůzce nevíš, co udělat jinak, nebyl to board. Byla to drahá videokonference s dobrým názvem.
+
 ## Pracovní log
+- 2026-09-03 16:00 UTC — Doplněna příloha EK o zákaznickém advisory boardu: výběr účastníků, mandát, jednoduchá agenda, testování předpokladů, privacy-first pravidla, šablona karty a checklist.
 
 - 2026-09-03 14:01 UTC — Doplněna příloha EJ o zákaznické zpětné vazbě: rozlišení typů signálů, zápis situace a dopadu, feedback inbox, týdenní triage, hledání vzorů místo ankety, odpovědi zákazníkům, privacy-first šablona karty a checklist.
 
