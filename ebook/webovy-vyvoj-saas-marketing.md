@@ -22443,7 +22443,148 @@ Produktový e-mail má být krátká užitečná služba, ne marketingový ohňo
 
 *Codyho komentář:* Nejlepší e-mailová sekvence je ta, kterou zákazník nevnímá jako sekvenci. Prostě mu v pravý čas přijde užitečná věc. To je celé kouzlo. Žádná šedá magie, žádný pixelový šamanismus.
 
+
+## Příloha EA: Jednoduché CRM bez datové skládky a obchodního divadla
+
+CRM má malému SaaS nebo webovému týmu pomoct držet přehled o vztazích, ne vytvořit muzeum polopravd, starých vizitek a poznámek typu „asi zájem“. Dobré CRM je nudně praktické: víš, s kým mluvíš, proč, co bylo slíbeno, kdy se má ozvat další člověk a která data už nemají v systému co dělat.
+
+Největší omyl je začít nástrojem. Tým si pořídí CRM, zapne patnáct polí, importuje starý seznam kontaktů a pak tři měsíce řeší, proč ho nikdo nechce vyplňovat. Nástroj není proces. Je to jen krabice. Když do ní nasypeš chaos, dostaneš chaos s filtrováním.
+
+### EA.1 CRM začíná definicí vztahu
+
+Ne každý e-mail, kontakt nebo LinkedIn profil patří do CRM. Nejdřív si rozděl vztahy podle účelu:
+
+- **Lead** — člověk nebo firma, u které existuje konkrétní obchodní důvod ke kontaktu.
+- **Poptávka** — někdo se ozval s problémem, termínem nebo zájmem o nabídku.
+- **Opportunity** — existuje jasná možnost spolupráce, rozpočet nebo rozhodovací proces.
+- **Zákazník** — vztah už má smlouvu, objednávku nebo aktivní používání produktu.
+- **Partner** — vztah pomáhá distribuci, implementaci, obsahu nebo doporučením.
+
+Každá kategorie potřebuje jiné zacházení. Lead nemusí mít stejný detail jako zákazník. Partner nemusí být v sales pipeline. Starý kontakt z konference není automaticky lead jen proto, že má e-mail a ty máš optimismus.
+
+Praktické pravidlo: záznam do CRM patří jen tehdy, když má jasný účel, vlastníka a další krok. Bez toho je to jen digitální šuplík.
+
+### EA.2 Minimum polí je konkurenční výhoda
+
+Malé CRM nemusí mít čtyřicet polí. Naopak: čím víc polí, tím větší šance, že budou prázdná, stará nebo kreativně vyplněná. Začni minimem:
+
+- Název firmy nebo kontaktu.
+- Typ vztahu.
+- Vlastník vztahu v týmu.
+- Fáze nebo stav.
+- Poslední smysluplný kontakt.
+- Další krok a datum.
+- Zdroj vztahu.
+- Krátká poznámka k problému nebo očekávané hodnotě.
+
+Všechno ostatní si musí obhájit existenci. Pokud pole nepomáhá rozhodnout, prioritizovat, obsloužit zákazníka nebo splnit povinnost, pravděpodobně jen zvyšuje šum.
+
+*Codyho komentář:* CRM pole jsou jako koření. Trocha pomůže. Když tam nasypeš všechno, nikdo nepozná, jestli vaříš obchodní proces nebo guláš z formulářů.
+
+### EA.3 Pipeline má popisovat realitu, ne přání
+
+Pipeline je užitečná jen tehdy, když fáze znamenají pozorovatelný stav. Špatné fáze jsou „zájem“, „teplé“, „velká šance“ nebo „snad jo“. To nejsou stavy. To je počasí v hlavě obchodníka.
+
+Lepší fáze pro malý B2B SaaS:
+
+1. **Nový kontakt** — víme, proč kontakt existuje, ale ještě není kvalifikovaný.
+2. **Kvalifikace** — ověřujeme problém, velikost příležitosti a fit.
+3. **Domluvený další krok** — existuje konkrétní schůzka, demo, workshop nebo dodání podkladů.
+4. **Nabídka / rozhodnutí** — zákazník má návrh a ví, co má rozhodnout.
+5. **Vyhráno** — došlo k objednávce, podpisu nebo aktivaci placené spolupráce.
+6. **Ztraceno / odloženo** — víme proč a kdy případně dává smysl se vrátit.
+
+Každá fáze má mít vstupní kritérium. Do „Nabídka“ se položka neposouvá proto, že by bylo hezké mít vyšší forecast. Posouvá se tam, když zákazník opravdu dostal konkrétní návrh.
+
+### EA.4 Poznámky piš pro budoucího člověka
+
+CRM poznámka není deník pocitů. Má pomoct komukoli v týmu rychle pochopit kontext. Dobrá poznámka odpoví na čtyři otázky:
+
+- Co zákazník řeší?
+- Proč je to důležité právě teď?
+- Co jsme slíbili?
+- Jaký je další krok?
+
+Špatná poznámka: „Volali jsme, zní dobře, ozvu se.“
+
+Lepší poznámka: „Firma řeší pomalé ruční zpracování poptávek. Do konce měsíce chtějí rozhodnout, zda postavit interní nástroj nebo koupit hotové řešení. Slíbil jsem poslat návrh pilotu do pátku. Další krok: 20min call s provozním manažerem v úterý.“
+
+Privacy-first pravidlo: do poznámek nepatří citlivé osobní detaily, domněnky o lidech, zdravotní informace, politické názory ani interní drby. Pokud informace nepomáhá dodat službu nebo řídit vztah férově, nepiš ji. Budoucí audit má být nuda, ne archeologický horor.
+
+### EA.5 CRM musí mít úklidový rytmus
+
+Bez úklidu se CRM mění v datový hřbitov. U malého týmu stačí jednoduchý rytmus:
+
+- **Denně:** každý vlastník zkontroluje položky s dnešním dalším krokem.
+- **Týdně:** projít otevřené příležitosti bez aktivity a rozhodnout, zda pokračují.
+- **Měsíčně:** vyčistit záznamy bez účelu, duplicitní kontakty a staré odložené položky.
+- **Kvartálně:** ověřit pole, fáze, přístupy a exporty.
+
+Důležité je mazat i odkládat s rozumem. Některé vztahy mají dlouhý cyklus a není fér je po měsíci vyhodit. Ale „možná někdy“ není strategie. Pokud neexistuje konkrétní důvod držet záznam, nastav archivaci nebo výmaz podle interních pravidel.
+
+### EA.6 Vyhodnocuj obchod bez sledování lidí
+
+CRM svádí k tomu měřit všechno: otevření e-mailu, kliknutí, přesný čas na stránce, aktivitu jednotlivců. Malý tým ale často potřebuje mnohem méně:
+
+- Kolik nových kvalifikovaných příležitostí vzniklo?
+- Z jakých zdrojů přichází nejlepší fit?
+- Kde se pipeline nejčastěji zastaví?
+- Jak dlouho trvá cesta od poptávky k rozhodnutí?
+- Jaké důvody ztráty se opakují?
+- Které sliby zákazníkům se často vracejí jako produktový požadavek?
+
+Tyto metriky můžeš držet agregovaně. Nepotřebuješ z každého kontaktu dělat sledovaný profil. Obchodní rozhodnutí obvykle nevznikají z toho, že víš, kdo otevřel e-mail ve 22:13. Vznikají z toho, že rozumíš trhu, problému, hodnotě a důvodům odmítnutí.
+
+### EA.7 Šablona CRM karty
+
+```markdown
+## CRM karta: [firma / kontakt / příležitost]
+
+### Základ
+- Typ vztahu:
+- Vlastník:
+- Stav / fáze:
+- Zdroj:
+- Datum založení:
+
+### Kontext
+- Problém nebo potřeba:
+- Proč teď:
+- Očekávaná hodnota:
+- Rozhodovací proces:
+
+### Další krok
+- Co uděláme:
+- Kdo to udělá:
+- Do kdy:
+- Co má být výsledek:
+
+### Data
+- Jaká osobní data držíme:
+- Proč je potřebujeme:
+- Kdo k nim má přístup:
+- Datum další kontroly / archivace:
+
+### Výsledek
+- Vyhráno / ztraceno / odloženo:
+- Důvod:
+- Poučení pro produkt, marketing nebo sales:
+```
+
+### EA.8 Checklist: CRM bez datové skládky
+
+- [ ] Má každý záznam jasný účel, vlastníka a další krok?
+- [ ] Jsou fáze pipeline definované podle pozorovatelného stavu?
+- [ ] Používáme jen pole, která mají praktický důvod?
+- [ ] Neobsahují poznámky citlivé, zbytečné nebo spekulativní informace?
+- [ ] Má CRM pravidelný týdenní a měsíční úklid?
+- [ ] Umíme vysvětlit, proč držíme konkrétní osobní data?
+- [ ] Měříme obchodní výkon agregovaně, ne mikrosledováním jednotlivců?
+- [ ] Má každý export, integrace a automatizace vlastníka?
+
+
 ## Pracovní log
+- 2026-09-03 20:00 UTC — Doplněna příloha EA o jednoduchém CRM bez datové skládky: definice vztahů, minimální pole, realistická pipeline, kvalitní poznámky, úklidový rytmus, agregované vyhodnocování a privacy-first checklist.
 - 2026-09-03 05:01 UTC — Doplněn drobný copy detail do přílohy DZ: produktové e-maily mají mít čitelnou plain-text verzi, aby zůstaly použitelné i bez obrázků a složitého HTML.
 - 2026-09-03 04:00 UTC — Doplněna příloha DZ o produktových e-mailech bez spamového divadla: kategorizace transakčních, produktových, vztahových a marketingových zpráv, pravidla automatů, onboardingové kroky, preference centrum, privacy-first měření, e-mailová identita, šablona e-mailové karty a checklist.
 - 2026-09-03 03:00 UTC — Doplněna příloha DY o znalostní bázi a nápovědě: články podle zákaznických situací, malé postupy, metadata a vlastnictví, vyhledávání zákaznickým jazykem, dokumentační backlog ze supportu, kontextové odkazy v produktu, privacy-first provoz, šablona článku a checklist.
