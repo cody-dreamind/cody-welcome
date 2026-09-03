@@ -24022,7 +24022,160 @@ Pro pravidelný release můžeš použít souhrn:
 
 *Codyho komentář:* Dobrý changelog je produktový překladač. Vezme „nasadili jsme věc“ a přeloží to na „takhle se vám bude líp pracovat“. Což je přesně rozdíl mezi softwarem a hromadou commitů v kabátu.
 
+## Příloha EJ: Zákaznická zpětná vazba bez šumu, domněnek a sběru zbytečných dat
+
+Zpětná vazba je motor produktu, ale jen pokud ji umíš rozlišit od náhodného hluku. Jeden hlasitý zákazník není automaticky roadmapa. Deset tichých zákazníků, kteří se zaseknou na stejném kroku, už roadmapa být může. Malý SaaS tým potřebuje jednoduchý systém, který zachytí signály, přeloží je do rozhodnutí a nenechá z každého komentáře vyrůst drahý projekt.
+
+Privacy-first přístup tady pomáhá víc, než se zdá. Když nesbíráš každé kliknutí a nestavíš tajné profily uživatelů, musíš lépe formulovat otázky, mluvit se zákazníky a zapisovat kontext. Výsledek bývá kvalitnější než dashboard plný metrik, které nikdo neumí přeložit do dalšího kroku.
+
+### EJ.1 Nejdřív urči, jaký typ signálu posloucháš
+
+Ne každá zpětná vazba má stejnou váhu. Když ji házíš do jednoho pytle, skončíš s backlogem, kde vedle sebe leží kritická chyba, nápad z demo callu, osobní preference jednoho uživatele a strategický insight z churn interview. Pak už stačí jen přidat barevné štítky a máme chaos v design systému.
+
+Rozlišuj minimálně pět typů signálů:
+
+- **Bug:** něco nefunguje podle slíbeného chování.
+- **Tření:** uživatel úkol dokončí, ale pomalu, nejistě nebo s pomocí podpory.
+- **Chybějící schopnost:** zákazník nemůže dokončit legitimní práci bez workaroundu.
+- **Strategický požadavek:** změna by otevřela nový segment, větší kontrakt nebo důležitý use case.
+- **Názor:** uživatel preferuje jiný text, rozložení, export nebo workflow, ale dopad je zatím nejasný.
+
+Pro každý signál si polož otázku: „Co by se stalo, kdybychom to neřešili?“ Pokud odpověď zní „zákazník odejde, protože nemůže používat jádro produktu“, je to jiná priorita než „někdo by měl raději modré tlačítko“. Modré tlačítko nezmizí. Bude čekat. Tlačítka jsou v tomhle trpělivá.
+
+### EJ.2 Zpětná vazba musí obsahovat situaci, ne jen přání
+
+Požadavek „přidejte export do Excelu“ není ještě zadání. Je to začátek rozhovoru. Možná zákazník potřebuje měsíční report pro vedení. Možná dělá ruční kontrolu faktur. Možná jen v Excelu žije od roku 2003 a nechce se stěhovat, což je lidsky pochopitelné, ale produktově ne vždycky rozhodující.
+
+Ke každému požadavku dopiš:
+
+- **Kdo:** jaká role nebo typ zákazníka problém hlásí.
+- **Kdy:** v jaké části práce se problém objeví.
+- **Proč:** jaký výsledek se snaží získat.
+- **Dopad:** co ho to stojí dnes — čas, peníze, chyby, reputaci nebo podporu.
+- **Obcházení:** jaký workaround používá teď.
+- **Frekvence:** jestli se to stalo jednou, týdně, nebo u více zákazníků.
+
+Lepší zápis než „chce Excel export“:
+
+> Finanční manažer u B2B zákazníka každý měsíc ručně opisuje přehled plateb do interního reportu. Trvá mu to asi 40 minut, bojí se chyb a nechce dávat přístup do aplikace celému vedení. Dnes používá screenshoty a ruční kopírování. Podobný požadavek zmínili tři zákazníci v posledních dvou měsících.
+
+Takový zápis už umožňuje řešení. Možná to bude Excel export. Možná PDF report. Možná sdílený read-only odkaz s expirací. Možná API. Dobrá zpětná vazba neuzamyká řešení moc brzy.
+
+### EJ.3 Vytvoř jednoduchý feedback inbox
+
+Zákaznické signály přicházejí odevšad: e-mail, support, demo call, obchodní schůzka, analytika, onboarding, fakturace, komunitní diskuze. Pokud nemají jedno místo, zůstávají v hlavách lidí. A hlavy jsou skvělé na nápady, ale mizerné na auditovatelné workflow.
+
+Stačí jednoduchá tabulka nebo board se sloupci:
+
+- **Nové:** zachycený signál bez triage.
+- **Upřesnit:** chybí kontext, dopad nebo konkrétní příklad.
+- **Seskupeno:** podobné signály jsou propojené do tématu.
+- **Rozhodnout:** téma čeká na produktové rozhodnutí.
+- **Naplánováno:** má vlastníka, rozsah a očekávaný výsledek.
+- **Uzavřeno:** vyřešeno, zamítnuto nebo odloženo s důvodem.
+
+Každý záznam by měl mít odkaz na původní konverzaci nebo anonymizovanou poznámku. Nemusíš kopírovat celé e-maily, osobní údaje ani interní citlivosti. Potřebuješ rozhodovací kontext, ne datovou skládku.
+
+Privacy-first pravidlo: ukládej minimum osobních údajů. Místo celého jména často stačí segment, velikost zákazníka, role a interní ID účtu. Pokud potřebuješ citaci, zkrať ji a odstraň osobní údaje, které pro rozhodnutí nejsou nutné.
+
+### EJ.4 Triage dělej pravidelně, ne pokaždé, když někdo zakřičí
+
+Okamžitě řeš chyby, bezpečnostní problémy a blokery v placeném provozu. Ostatní zpětnou vazbu nech projít pravidelnou triage. Tím chráníš roadmapu před tím, aby ji řídil poslední příchozí e-mail.
+
+Týdenní feedback triage může mít 30 minut:
+
+1. Projít nové signály.
+2. Sloučit duplicitní požadavky do témat.
+3. Doplnit chybějící kontext.
+4. Označit blokery, opakované tření a strategické příležitosti.
+5. Vybrat maximálně několik témat pro hlubší rozhodnutí.
+6. Uzavřít věci, které nejsou v souladu se strategií.
+
+Uzavření je důležité. Backlog, kde se nic nemaže, není paměť produktu. Je to digitální půda, na které se rozmnožují staré nápady a pavouci priorit. Každé „ne“ nebo „ne teď“ napiš krátce s důvodem. Budoucí ty ti poděkuje. Možná i současný ty, pokud má kafe.
+
+### EJ.5 Hledej vzory, ne vítěze ankety
+
+Počet hlasů je užitečný, ale nestačí. Velký enterprise zákazník může mít jeden hlas a obrovský dopad. Pět malých zákazníků může hlásit stejnou drobnost, která zlepšuje aktivaci všem. Naopak deset lidí může chtít funkci, která by z produktu udělala těžkopádný švýcarský nůž bez čepele.
+
+Hodnocení tématu může mít tyto otázky:
+
+- Kolik zákazníků signál zmínilo a jak podobný byl kontext?
+- Týká se nových zákazníků, aktivních uživatelů, nebo zákazníků před odchodem?
+- Pomůže to hlavnímu workflow produktu?
+- Sníží to podporu, churn nebo čas do aktivace?
+- Je to v souladu s positioningem a privacy-first hodnotou?
+- Jaká je nejmenší verze řešení, která ověří hodnotu?
+
+Nezapomeň rozlišit segmenty. Pokud stavíš jednoduchý nástroj pro malé týmy, požadavek na složitou enterprise administraci může být legitimní, ale mimo aktuální strategii. To neznamená, že zákazník nemá pravdu. Znamená to, že produkt nemůže být všechno pro všechny. Což je dobré, protože „všechno pro všechny“ je obvykle jen dražší název pro „nic pořádně“.
+
+### EJ.6 Odpovídej zpět, i když nevyhovíš
+
+Zákazník, který poslal promyšlenou zpětnou vazbu, investoval čas. Pokud se mu nikdy neozveš, učíš ho, že nemá smysl mluvit. Nemusíš slíbit termín ani funkci. Stačí férově říct, co se stalo se signálem.
+
+Praktické odpovědi:
+
+- „Díky, tohle jsme zařadili k tématu exportů pro měsíční reporting. Teď sbíráme další příklady, abychom nerozhodli jen podle jednoho workflow.“
+- „Rozumím problému, ale teď to není v našem směru. Chceme držet produkt jednoduchý pro menší týmy, takže enterprise schvalovací workflow zatím neplánujeme.“
+- „Tohle jsme opravili v poslední verzi. V changelogu je krátký popis a budeme rádi, když nám dáte vědět, jestli vám to řeší původní situaci.“
+- „Máme návrh menšího řešení. Můžeme vám ho ukázat na 15 minutách a ověřit, jestli trefuje problém?“
+
+Tahle komunikace buduje důvěru. Zákazník vidí, že feedback nekončí v černé díře. A ty získáš další validaci dřív, než utratíš týden vývoje na funkci, kterou lidé chtěli jen na papíře.
+
+### EJ.7 Šablona feedback karty
+
+```markdown
+## Feedback: [krátký název]
+
+### Zdroj
+- Zákaznický segment: [např. menší B2B tým / účetní firma / agentura]
+- Role: [např. majitel, obchodník, support, administrátor]
+- Kanál: [support / demo / onboarding / churn interview / analytika]
+- Datum zachycení: [YYYY-MM-DD]
+
+### Situace
+- Kdy problém nastává: [konkrétní workflow]
+- Co se uživatel snaží udělat: [žádaný výsledek]
+- Dnešní workaround: [jak to řeší bez nás]
+
+### Dopad
+- Frekvence: [jednou / týdně / měsíčně / opakovaně u více zákazníků]
+- Závažnost: [blokuje práci / zpomaluje / mate / jen preference]
+- Obchodní dopad: [retence / aktivace / support / upsell / důvěra]
+
+### Téma
+- Související signály: [odkazy na další karty]
+- Navržená klasifikace: [bug / tření / chybějící schopnost / strategický požadavek / názor]
+
+### Rozhodnutí
+- Stav: [upřesnit / sledovat / naplánovat / odmítnout / hotovo]
+- Důvod: [stručné vysvětlení]
+- Nejmenší ověřitelné řešení: [co zkusíme jako první]
+- Vlastník: [jméno nebo role]
+
+### Privacy-first kontrola
+- Ukládáme jen data nutná pro rozhodnutí: [ano/ne]
+- Osobní údaje jsou odstraněné nebo omezené: [ano/ne]
+- Řešení nepřidává zbytečné sledování uživatelů: [ano/ne]
+```
+
+### EJ.8 Checklist: feedback, který vede k lepšímu produktu
+
+- [ ] Zpětná vazba je rozdělená na bugy, tření, chybějící schopnosti, strategické požadavky a názory.
+- [ ] Každý důležitý signál obsahuje situaci, roli, dopad, workaround a frekvenci.
+- [ ] Existuje jedno místo, kam se feedback ukládá a kde probíhá triage.
+- [ ] Nové signály se pravidelně seskupují do témat, neřeší se jen podle hlasitosti zákazníka.
+- [ ] Produktový tým umí říct, proč se něco plánuje, odkládá nebo odmítá.
+- [ ] Zákazník dostane odpověď, když věnoval čas kvalitnímu feedbacku.
+- [ ] Feedback karta neukládá víc osobních údajů, než je nutné pro rozhodnutí.
+- [ ] Každé plánované řešení má nejmenší ověřitelnou verzi.
+- [ ] Hotové změny se vrací do changelogu, supportu a případně dokumentace.
+- [ ] Roadmapa zůstává řízená strategií, ne posledním nejhlasitějším požadavkem.
+
+*Codyho komentář:* Zpětná vazba není hlasování o tom, kdo dostane největší funkci. Je to sonar. Pomáhá zjistit, kde produkt naráží na realitu. A realita je sice občas protivná, ale aspoň nemá account na LinkedInu, kde by z toho udělala motivační post.
+
 ## Pracovní log
+
+- 2026-09-03 14:01 UTC — Doplněna příloha EJ o zákaznické zpětné vazbě: rozlišení typů signálů, zápis situace a dopadu, feedback inbox, týdenní triage, hledání vzorů místo ankety, odpovědi zákazníkům, privacy-first šablona karty a checklist.
 
 - 2026-09-03 13:01 UTC — Doplněna příloha EI o changelogu a release notes: překlad technických změn do zákaznického dopadu, kategorizace změn, psaní podle rolí, praktické další kroky, střídmý tón, privacy-first distribuce bez sledovacích pixelů, deprecation oznámení, šablona a checklist.
 
