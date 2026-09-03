@@ -24681,7 +24681,158 @@ Po každém větším nasazení si polož jednu otázku: „Změnila tahle úpra
 Bezpečnostní dotazník může být brzda, nebo výhoda. Brzda je tehdy, když tým neví, co je pravda. Výhoda je tehdy, když umíš rychle, klidně a přesně ukázat, že produkt nestojí na improvizaci. A v privacy-first Evropě je tahle důvěryhodnost často lepší než další animace na pricing stránce.
 
 
+
+## Příloha EN: Exit plán pro SaaS nástroje bez dramatu, rukojmí a ztracených dat
+
+Každý nový nástroj vypadá při nákupu jako zkratka. Má hezký onboarding, rychlé demo a slib, že tým konečně přestane lepit procesy v tabulkách. Jenže nástroj není jen funkce. Je to budoucí závislost: na datovém modelu, cenách, dostupnosti exportu, podpoře, integracích a ochotě dodavatele nedělat z odchodu zákazníka olympijskou disciplínu.
+
+Exit plán neznamená, že dodavateli nevěříš. Znamená, že vlastníš svůj provoz dost na to, aby změna nástroje nebyla existenční krize. U privacy-first evropského provozu je to navíc součást důvěry: zákazníkům můžeš férově říct, kde data jsou, jak je dostaneš ven a co se stane, když nástroj vyměníš.
+
+*Codyho komentář:* Vendor lock-in většinou nezačne zlým úmyslem. Začne větou „export dořešíme později“. Později je technický termín pro „až to bude bolet“.
+
+### EN.1 Exit plán piš před nákupem, ne při požáru
+
+Nejlepší chvíle na otázku „jak odejdeme?“ je před podpisem, kdy máš ještě vyjednávací sílu a čistou hlavu. Jakmile je nástroj plný dat, napojený na procesy a tým v něm žije každý den, mění se jednoduchá otázka v migrační projekt.
+
+U každého důležitého nástroje si předem napiš:
+
+- jaká data do něj půjdou,
+- kdo je vlastníkem dat,
+- jak často bude potřeba export,
+- v jakém formátu export dostaneš,
+- jak dlouho trvá smazání dat po ukončení,
+- kdo interně rozhoduje o změně nebo vypnutí nástroje.
+
+Nástroj nemusí být dokonalý. Ale pokud neumí rozumně vrátit tvoje vlastní data, není to partner. Je to digitální sklad s jednosměrnými dveřmi.
+
+### EN.2 Rozděl nástroje podle kritičnosti
+
+Ne každý nástroj potřebuje stejně detailní exit plán. Poznámková aplikace pro osobní nápady má jiný dopad než billing, CRM nebo databáze zákaznických dat. Proto si nástroje rozděl podle toho, co by se stalo při výpadku nebo nucené migraci.
+
+Jednoduché třídění:
+
+- **Kritické:** nástroj drží zákaznická data, platby, provoz produktu, přístupy nebo právně významné záznamy.
+- **Důležité:** nástroj ovlivňuje obchod, marketing, podporu, reporting nebo interní koordinaci.
+- **Pomocné:** nástroj zrychluje práci, ale jeho ztráta neohrozí zákaznickou službu ani právní povinnosti.
+
+Pro kritické nástroje potřebuješ pravidelný export, dokumentovaný datový model, záložní postup a jasného vlastníka. U pomocných nástrojů často stačí vědět, kde je export a jak se ruší účet.
+
+### EN.3 Export musí být použitelný, ne jen existovat
+
+Dodavatelé rádi říkají „export podporujeme“. To ale nestačí. Export je užitečný jen tehdy, když se dá opravdu použít pro obnovu, migraci nebo audit.
+
+Při testu exportu si ověř:
+
+- jestli obsahuje všechna potřebná pole,
+- jestli zachovává vazby mezi záznamy,
+- jestli jde stáhnout bez podpory dodavatele,
+- jestli formát otevřeš běžnými nástroji,
+- jestli export obsahuje metadata jako čas vytvoření, stav, autor nebo historii změn,
+- jestli přílohy, soubory a komentáře nejsou schované v samostatném procesu.
+
+Příklad: CSV kontaktů z CRM je hezký začátek, ale pokud ztratíš historii komunikace, souhlasy, štítky, obchodní fáze a vazbu na firmy, nemáš migraci. Máš adresář s amnézií.
+
+### EN.4 Dělej pravidelný export drill
+
+Stejně jako zálohy nejsou hotové, dokud neotestuješ obnovu, ani export není hotový, dokud nezkusíš data použít. U kritických nástrojů si nastav jednoduchý rytmus: jednou za čtvrtletí stáhni export a ověř, že dává smysl.
+
+Export drill může být malý:
+
+1. Stáhni aktuální export dat.
+2. Ulož ho do zabezpečeného interního úložiště s datem.
+3. Otevři ho mimo původní nástroj.
+4. Vyber tři náhodné záznamy a zkontroluj, zda mají potřebné vazby.
+5. Zapiš, co chybí nebo co by při migraci bolelo.
+6. Rozhodni, jestli je potřeba upravit proces, smlouvu nebo výběr nástroje.
+
+Nemusíš každý kvartál dělat plnou migraci. Stačí pravidelně dokazovat, že nejsi zamčený uvnitř systému jen proto, že exportní tlačítko na demu vypadalo důvěryhodně.
+
+### EN.5 Privacy-first exit řeší i mazání
+
+Odchod z nástroje není jen „stáhli jsme data“. Je to i „co se stalo s kopiemi, zálohami, logy a přístupy“. U evropského provozu je fér držet se principu minimální retence: co už nepotřebuješ, to nemaž za rok při jarním úklidu, ale podle domluveného procesu.
+
+Do exit plánu přidej:
+
+- kdo vypne uživatelské účty,
+- kdo stáhne poslední export,
+- kdo ověří import do náhradního systému,
+- kdo požádá o smazání dat u dodavatele,
+- kde se uloží potvrzení o ukončení a smazání,
+- jak dlouho držíš interní archiv exportu a proč.
+
+Pozor na integrace. Když vypneš aplikaci, ale necháš aktivní API token, webhook nebo servisní účet, neodešel jsi. Jen jsi nechal otevřené boční dveře a doufáš, že si jich nikdo nevšimne. To je strategie, ale špatná.
+
+### EN.6 Vyjednávej přenositelnost jako součást ceny
+
+Cena nástroje není jen měsíční faktura. Je to i cena odchodu. Levný nástroj může být drahý, pokud při migraci ztratíš data, musíš zaplatit konzultanty nebo ručně rekonstruovat historii.
+
+Před nákupem se ptej:
+
+- Je export dostupný ve všech tarifech, nebo jen v enterprise balíčku?
+- Existuje API pro čtení vlastních dat?
+- Jsou datové struktury dokumentované?
+- Lze export automatizovat?
+- Jak dlouho po ukončení účtu jsou data dostupná?
+- Je smazání dat samoobslužné, nebo přes support?
+- Jaké náklady vzniknou při migraci ven?
+
+U větších B2B nástrojů se vyplatí dostat přenositelnost do smlouvy nebo alespoň do objednávky. Ne proto, že plánuješ odejít. Protože když jednou odejít musíš, nechceš zjišťovat, že slib z obchodního callu byl jen ústní folklor.
+
+### EN.7 Šablona: karta exit plánu
+
+```markdown
+## Exit plán: [název nástroje]
+
+### Účel
+- K čemu nástroj používáme:
+- Kritičnost: kritický / důležitý / pomocný
+- Interní vlastník:
+
+### Data
+- Typy ukládaných dat:
+- Osobní údaje: ano / ne / omezeně
+- Nejcitlivější datová pole:
+- Hlavní integrace:
+
+### Export
+- Dostupný formát:
+- Frekvence testu exportu:
+- Kdo export umí spustit:
+- Co export neobsahuje:
+
+### Náhradní postup
+- Krátkodobý workaround při výpadku:
+- Možný náhradní nástroj:
+- Odhad migrační práce:
+
+### Ukončení
+- Kdo vypíná přístupy:
+- Kdo ověřuje import:
+- Kdo žádá o smazání dat:
+- Kde uložíme potvrzení:
+- Retence interního exportu:
+```
+
+Tahle karta může být krátká. Důležité je, aby existovala dřív, než ji potřebuješ. Krizové psaní dokumentace je totiž speciální druh adrenalinu, který si normální člověk dobrovolně neobjednává.
+
+### EN.8 Checklist: nástroj bez rukojmí
+
+- [ ] Víme, jaká data do nástroje ukládáme a proč.
+- [ ] Nástroj má jasného interního vlastníka.
+- [ ] Kritické nástroje mají popsaný exit plán.
+- [ ] Export jsme reálně stáhli a otevřeli mimo původní systém.
+- [ ] Export obsahuje vazby, metadata, soubory a historii, pokud jsou pro provoz důležité.
+- [ ] Víme, které integrace a API tokeny vypnout při ukončení.
+- [ ] Máme popsaný postup smazání dat u dodavatele.
+- [ ] Přenositelnost dat je zohledněná v nákupu, ceně nebo smlouvě.
+- [ ] Interní archiv exportů má jasnou retenci a přístupová pravidla.
+- [ ] U kritických nástrojů děláme pravidelný export drill.
+
+Exit plán není pesimismus. Je to provozní dospělost. Když víš, že umíš odejít, můžeš nástroj používat sebevědoměji, vyjednávat klidněji a stavět produkt bez pocitu, že každý dodavatel drží kousek tvého byznysu za límec.
+
 ## Pracovní log
+
+- 2026-09-03 19:00 UTC — Doplněna příloha EN o exit plánu pro SaaS nástroje: kritičnost nástrojů, použitelný export, export drill, mazání dat, vyjednání přenositelnosti, šablona karty a privacy-first checklist.
 
 - 2026-09-03 18:00 UTC — Doplněna příloha EM o bezpečnostních dotaznících v B2B prodeji: třídění otázek podle vlastníků, knihovna schválených odpovědí, poctivé hranice slibů, privacy-first argumentace přes minimalizaci dat, bezpečnostní balíček, čtvrtletní kontrola, šablona odpovědi a checklist.
 - 2026-09-03 17:00 UTC — Doplněna příloha EL o integracích a API partnerstvích: pracovní situace, datový tok, zdroj pravdy, jednosměrné MVP, API kontrakt, privacy-first datové brzdy, monitoring, úniková cesta, integrační karta a checklist.
