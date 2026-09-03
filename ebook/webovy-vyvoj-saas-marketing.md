@@ -24340,7 +24340,191 @@ Neposílej zákazníkům interní zápis plný úvah, priorit a technických det
 
 *Codyho komentář:* Advisory board má být lepší uši produktu, ne divadlo pro zákazníky. Když po schůzce nevíš, co udělat jinak, nebyl to board. Byla to drahá videokonference s dobrým názvem.
 
+
+## Příloha EL: Integrace a API partnerství bez lock-inu, chaosu a datového přejídání
+
+Integrace často vypadají jako zkratka k růstu. „Napojíme se na CRM, účetnictví, e-mailing, kalendáře a všichni nás budou milovat.“ Možná. Ale taky si můžeš do produktu přinést cizí výpadky, nejasnou odpovědnost, drahou údržbu a datové toky, kterým po třech měsících nerozumí ani ten původní vývojář, protože odešel pěstovat olivy a v repu nechal jen komentář `TODO: handle edge cases`.
+
+Dobrá integrace není technická dekorace. Je to obchodní a produktový závazek. Musí řešit konkrétní pracovní situaci, mít jasného vlastníka, bezpečné hranice dat a plán, co se stane, když druhá strana změní API, zdraží, spadne nebo přestane dávat smysl.
+
+### EL.1 Nejdřív pojmenuj práci, kterou integrace zrychlí
+
+Integrace se nemá stavět proto, že zákazník vyslovil název populárního nástroje. Má se stavět proto, že bez ní musí člověk opakovaně dělat konkrétní ruční práci: kopírovat údaje, přepisovat stav, exportovat tabulku, kontrolovat duplicitní data nebo honit informaci ve dvou systémech.
+
+Před návrhem integrace napiš jednu větu:
+
+> Tato integrace pomůže **[role]** udělat **[pracovní krok]** bez **[ruční tření / riziko chyby]**.
+
+Příklady:
+
+- Obchodník automaticky založí příležitost z webové poptávky bez kopírování kontaktu z e-mailu.
+- Účetní uvidí stav platby v zákaznickém portálu bez ručního dotazu na podporu.
+- Projektový manažer pošle schválený požadavek do backlogu bez ztráty kontextu z klientského vlákna.
+- Zakladatel získá agregovaný přehled o zdroji poptávek bez profilování konkrétních návštěvníků.
+
+Když věta nejde napsat konkrétně, integrace je pravděpodobně jen „nice to have“. A „nice to have“ je slušné označení pro budoucí support ticket s lepším PR.
+
+### EL.2 Každou integraci rozděl na tok, stav a odpovědnost
+
+Spousta integračních problémů nevznikne v samotném napojení, ale v nejasnosti, kdo je zdroj pravdy. Pokud má stejný údaj žít ve dvou systémech, musíš vědět, odkud kam teče a kdo vyhrává při konfliktu.
+
+Pro každou integraci si napiš tři vrstvy:
+
+- **Tok:** Jaká data odcházejí, jaká přicházejí a kdy se přenášejí.
+- **Stav:** Který systém je zdroj pravdy pro kontakt, objednávku, platbu, tiket nebo dokument.
+- **Odpovědnost:** Kdo řeší chybu — tvůj tým, zákazník, nebo dodavatel druhého systému.
+
+Příklad pro webovou poptávku do CRM:
+
+- Tok: web pošle jméno firmy, kontaktní e-mail, popis potřeby, zdroj kampaně a čas odeslání.
+- Stav: CRM je zdroj pravdy pro obchodní fázi; web drží jen potvrzení o odeslání.
+- Odpovědnost: když CRM odmítne požadavek, vznikne interní alert a poptávka se uloží do bezpečné fronty.
+
+Bez téhle mapy se z integrace stane tichá roura. A tiché roury jsou v softwaru nebezpečné: všichni věří, že něco teče, dokud zákazník nezavolá, že neteče nic.
+
+### EL.3 Začni jednosměrným napojením, pokud to stačí
+
+Obousměrná synchronizace zní profesionálně, ale je to malá distribuovaná válka v kabátě pohodlí. Musíš řešit konflikty, duplicity, mazání, retry, pořadí událostí a otázku, kdo má pravdu, když oba systémy tvrdí něco jiného.
+
+První verze integrace často může být jednodušší:
+
+- odeslat poptávku z webu do CRM,
+- vytvořit tiket ze zákaznického formuláře,
+- poslat agregovaný denní export,
+- načíst jednou za den stav plateb,
+- ručně potvrdit import před zápisem do hlavního systému.
+
+Jednosměrná integrace je skvělá pro MVP, protože ověří hodnotu bez okamžitého závazku k plné synchronizaci. Když se ukáže, že workflow opravdu šetří čas, můžeš přidat druhý směr s lepší znalostí reality.
+
+Praktické pravidlo: pokud chyba v integraci může přepsat důležitá zákaznická data, nezačínej plnou automatizací. Začni návrhem, potvrzením nebo frontou ke kontrole. Automatizace má odstraňovat nudnou práci, ne vytvářet tajemný stroj na drahé překvapení.
+
+### EL.4 API kontrakt je produktová dokumentace, ne vývojářská poznámka
+
+Jakmile integraci používá zákazník nebo partner, API přestává být interní detail. Je to slib. A sliby bez dokumentace mají krátkou životnost a dlouhý ocas supportu.
+
+Minimální API kontrakt obsahuje:
+
+- **Účel endpointu:** Jakou práci řeší a kdy se má použít.
+- **Datová pole:** Povinná, volitelná a zakázaná pole včetně významu.
+- **Chybové stavy:** Co znamená odmítnutí, timeout, duplicita nebo limit.
+- **Idempotence:** Jak se chovat při opakovaném odeslání stejné události.
+- **Verzování:** Jak poznat změnu kontraktu a jak dlouho běží stará verze.
+- **Datové hranice:** Co se nikdy neposílá, i kdyby to druhý systém uměl uložit.
+
+U malého týmu nemusíš mít velký developerský portál. Stačí stránka v dokumentaci, ukázkový payload, seznam chyb a kontakt na technickou odpovědnost. Hlavně ať se integrace nedědí ústně. Ústní API dokumentace je folklór, ne provozní systém.
+
+### EL.5 Privacy-first integrace má datovou brzdu
+
+Největší pokušení integrací je posílat „raději všechno, kdyby se to hodilo“. To je přesně ta chvíle, kdy se z praktického napojení stane datová skládka. Privacy-first přístup začíná opačně: pošli jen to, co je nutné pro konkrétní pracovní krok.
+
+Před každým polem se zeptej:
+
+- Potřebuje druhý systém tenhle údaj k provedení práce?
+- Dá se poslat méně přesná nebo agregovaná verze?
+- Musí údaj opustit evropský provoz, nebo existuje evropská alternativa?
+- Jak dlouho má druhý systém údaj držet?
+- Kdo může údaj vidět po přenosu?
+- Jak zákazník zjistí, že k přenosu dochází?
+
+Příklad: pro základní předání leadu do CRM často stačí firma, pracovní e-mail, popis potřeby, souhlas s kontaktováním a interní ID zdroje. Není nutné posílat kompletní historii návštěvy webu, fingerprint zařízení, všechny UTM parametry ani poznámky, které obchodník napsal po telefonu a zapomněl vyčistit.
+
+Privacy-first integrace není pomalejší. Je srozumitelnější. Méně polí znamená méně rizik, méně konfliktů, méně mapování a méně věcí, které bude někdo za půl roku vysvětlovat tónem „historicky se to tak vyvinulo“.
+
+### EL.6 Sleduj zdraví integrace, ne každý pohyb uživatele
+
+Integrace potřebuje monitoring, ale ne šmírovací dalekohled. Cílem není vědět, co přesně dělal konkrétní člověk v každé sekundě. Cílem je poznat, jestli pracovní tok funguje.
+
+Stačí několik provozních signálů:
+
+- počet úspěšných přenosů za den,
+- počet chyb podle typu,
+- průměrné zpoždění mezi událostí a zpracováním,
+- velikost fronty čekajících položek,
+- počet ručních zásahů,
+- nejčastější validační problém.
+
+Když se něco pokazí, loguj korelační ID, čas, typ chyby a technický kontext. Osobní údaje do logů nepatří, pokud nejsou opravdu nutné pro diagnostiku. A když už jsou nutné, musí mít krátkou retenci a jasný přístup jen pro lidi, kteří chybu řeší.
+
+Dobrá integrační hláška pro podporu nevypadá takhle:
+
+> Integrace selhala.
+
+Vypadá spíš takhle:
+
+> Poptávku se nepodařilo předat do CRM, protože chyběl povinný e-mail. Položka zůstala ve frontě a čeká na opravu.
+
+Tohle je rozdíl mezi „něco je rozbité“ a „víme, co udělat dál“.
+
+### EL.7 Partnerství má mít únikovou cestu
+
+Každá závislost potřebuje plán B. Ne proto, že partnerovi nevěříš, ale protože produkt nemá stát na jedné cizí klikací krabičce bez dveří ven.
+
+Před spuštěním partnerské integrace si ujasni:
+
+- Jak zákazník pozná, že integrace je volitelná a co funguje bez ní.
+- Jak exportuje vlastní data, když integraci vypne.
+- Co se stane při výpadku druhé služby.
+- Jak rychle umíš integraci vypnout bez pádu hlavního produktu.
+- Jak oznámíš breaking změny, limity nebo ukončení podpory.
+- Kdo nese náklady na údržbu, když partner změní pravidla.
+
+Technicky pomáhá integrační vrstva: vlastní interní model událostí, fronta, retry pravidla a mapování do konkrétních partnerů. Produkt pak není slepený přímo s jedním dodavatelem. Když dodavatel odejde do západu slunce, nevytahuje s sebou polovinu tvé architektury.
+
+### EL.8 Šablona integrační karty
+
+```markdown
+## Integrace: [název]
+
+### Pracovní situace
+- Kdo integraci používá:
+- Jakou ruční práci nahrazuje:
+- Jaký výsledek má být vidět:
+
+### Datový tok
+- Zdrojový systém:
+- Cílový systém:
+- Směr přenosu:
+- Spouštěč události:
+- Zdroj pravdy:
+
+### Datová pole
+- Povinná pole:
+- Volitelná pole:
+- Zakázaná pole:
+- Retence a přístupy:
+
+### Provoz
+- Chybové stavy:
+- Retry pravidla:
+- Fronta / ruční kontrola:
+- Monitoring:
+- Vlastník integrace:
+
+### Partnerství
+- Obchodní důvod:
+- Náklady na údržbu:
+- Plán B při výpadku:
+- Postup při vypnutí:
+```
+
+### EL.9 Checklist: integrace, která pomáhá místo svazuje
+
+- [ ] Integrace má jasnou pracovní větu a konkrétní roli uživatele.
+- [ ] Je určený zdroj pravdy pro každý důležitý objekt.
+- [ ] První verze je tak jednoduchá, jak dovoluje reálný workflow.
+- [ ] Obousměrná synchronizace má pravidla pro konflikty, duplicity a mazání.
+- [ ] API kontrakt popisuje pole, chyby, idempotenci, verzování a datové hranice.
+- [ ] Do druhého systému odchází jen data nutná pro daný pracovní krok.
+- [ ] Logy neobsahují zbytečné osobní údaje a mají omezenou retenci.
+- [ ] Monitoring sleduje zdraví toku, frontu a typy chyb, ne chování jednotlivců.
+- [ ] Zákazník ví, jak integraci vypnout a exportovat vlastní data.
+- [ ] Existuje plán B pro výpadek, změnu API nebo konec partnerství.
+
+*Codyho komentář:* Integrace je dobrý sluha a výborný generátor skrytých závazků. Stav ji jako most, ne jako tetování na architektuře. Most se dá opravit, obejít nebo zavřít. Tetování s logem cizího SaaSu už se vysvětluje hůř.
+
 ## Pracovní log
+- 2026-09-03 17:00 UTC — Doplněna příloha EL o integracích a API partnerstvích: pracovní situace, datový tok, zdroj pravdy, jednosměrné MVP, API kontrakt, privacy-first datové brzdy, monitoring, úniková cesta, integrační karta a checklist.
+
 - 2026-09-03 16:00 UTC — Doplněna příloha EK o zákaznickém advisory boardu: výběr účastníků, mandát, jednoduchá agenda, testování předpokladů, privacy-first pravidla, šablona karty a checklist.
 
 - 2026-09-03 14:01 UTC — Doplněna příloha EJ o zákaznické zpětné vazbě: rozlišení typů signálů, zápis situace a dopadu, feedback inbox, týdenní triage, hledání vzorů místo ankety, odpovědi zákazníkům, privacy-first šablona karty a checklist.
