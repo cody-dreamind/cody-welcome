@@ -24522,7 +24522,168 @@ Technicky pomáhá integrační vrstva: vlastní interní model událostí, fron
 
 *Codyho komentář:* Integrace je dobrý sluha a výborný generátor skrytých závazků. Stav ji jako most, ne jako tetování na architektuře. Most se dá opravit, obejít nebo zavřít. Tetování s logem cizího SaaSu už se vysvětluje hůř.
 
+## Příloha EM: Bezpečnostní dotazník v B2B prodeji bez paniky a nekonečného ping-pongu
+
+Čím víc se SaaS dostává do firemního provozu, tím častěji před podpisem přijde bezpečnostní dotazník. Někdy má deset rozumných otázek. Někdy má dvě stě řádků, tři záložky, pět opakujících se formulací a atmosféru, jako kdyby se zákazník chystal auditovat jadernou elektrárnu provozovanou na Raspberry Pi pod stolem.
+
+Bezpečnostní dotazník není nepřítel. Je to signál, že zákazník bere riziko vážně. Problém nastává, když tým odpovídá pokaždé od nuly, loví údaje v chatu, slibuje věci, které produkt neumí, nebo pošle zpátky mlhavé „ano, máme zabezpečení“. To není bezpečnost. To je marketing v helmě.
+
+Dobře připravený B2B tým má pro dotazníky jednoduchý systém: zná hranice produktu, má ověřené odpovědi, ví kdo smí co slíbit a umí zákazníkovi vysvětlit privacy-first provoz bez právnického dýmu.
+
+### EM.1 Dotazník rozděl podle rozhodnutí, ne podle strachu
+
+Bezpečnostní otázky často vypadají stejně důležitě, ale nejsou. Některé ověřují základní hygienu, jiné řeší smluvní riziko, další jen kopírují šablonu z velké korporace. Neodpovídej mechanicky. Nejdřív otázky roztřiď.
+
+Praktické kategorie:
+
+- **Identita a přístupy:** přihlašování, role, administrátoři, offboarding, MFA, sdílené účty.
+- **Data:** jaká data systém zpracovává, kde leží, kdo k nim má přístup a jak dlouho se drží.
+- **Infrastruktura:** hosting, region, izolace prostředí, zálohy, monitoring, incidenty.
+- **Vývoj:** změnové řízení, review, testování, secrets, dependency management.
+- **Právní rámec:** role správce a zpracovatele, DPA, subdodavatelé, přenosy mimo EU/EHP.
+- **Provozní sliby:** dostupnost, support, reakční doby, obnova, komunikace při incidentu.
+
+Ke každé kategorii přiřaď vlastníka. Obchodník může vyplnit popis produktu, ale nemá sám rozhodovat o šifrování záloh. Vývojář může popsat logování, ale nemá sám slibovat právní závazky. Každá odpověď má mít člověka, který ji umí obhájit.
+
+### EM.2 Vytvoř knihovnu schválených odpovědí
+
+Nejhorší způsob práce je odpovídat na každý dotazník jako na kreativní psaní. Bezpečnostní odpovědi nemají být originální. Mají být pravdivé, konzistentní a aktuální.
+
+Vytvoř interní knihovnu odpovědí, která obsahuje:
+
+- krátkou odpověď pro formulářové pole,
+- delší vysvětlení pro zákazníka,
+- interní poznámku, co odpověď přesně znamená,
+- datum poslední kontroly,
+- vlastníka odpovědi,
+- odkaz na dokument, runbook nebo nastavení, které odpověď dokládá.
+
+Příklad:
+
+- Otázka: „Kde jsou zákaznická data uložena?“
+- Krátká odpověď: „Produkční zákaznická data ukládáme v infrastruktuře provozované v EU.“
+- Vysvětlení: „Služba je navržená pro evropský provoz; subdodavatele evidujeme v samostatném seznamu a nové datové toky posuzujeme před nasazením.“
+- Interní poznámka: „Nepřidávat konkrétní region bez ověření aktuální konfigurace.“
+
+Knihovna odpovědí chrání tým před dvěma extrémy: před přehnanými sliby a před zbytečně slabou odpovědí. Když něco neumíš, napiš to přesně. „Nepodporujeme SAML v základním tarifu“ je lepší než mlhavé „identity management řešíme individuálně“.
+
+### EM.3 Neříkej ano na věci, které nejsou hotové
+
+Bezpečnostní dotazník umí vyvolat obchodní tlak: „Když odpovíme ano, deal projde rychleji.“ Jenže nepravdivé ano je drahé. Zákazník podle něj podepisuje smlouvu, tvůj tým podle něj nese odpovědnost a budoucí incident podle něj bude vypadat hůř.
+
+Používej čtyři typy odpovědí:
+
+- **Ano:** Funkce, proces nebo kontrola existuje a je ověřitelná.
+- **Částečně:** Existuje omezeně, jen pro některé tarify, prostředí nebo typy dat.
+- **Ne:** Neexistuje a není správné předstírat opak.
+- **Plánováno:** Je v roadmapě, ale musí mít realistický termín a podmínky.
+
+U odpovědi „částečně“ vždy doplň hranici. Například: „MFA podporujeme pro administrátorské účty; vynucení MFA pro všechny uživatele účtu je plánované jako rozšíření enterprise nastavení.“ Taková odpověď je férová a dává zákazníkovi možnost rozhodnout, jestli je současný stav přijatelný.
+
+*Codyho komentář:* Bezpečnostní dotazník není karaoke, kde se dá text domyslet podle melodie. Když zpíváš „ano“ na věc, která neexistuje, publikum si toho všimne přesně ve chvíli, kdy to bude nejdražší.
+
+### EM.4 Privacy-first odpověď má ukázat limity sběru dat
+
+Mnoho týmů se snaží v dotazníku působit bezpečně tak, že vyjmenuje co nejvíc kontrol. Privacy-first přístup má ještě jednu silnou kartu: můžeš ukázat, že některá rizika vůbec nevznikají, protože data nesbíráš.
+
+U každé datové otázky se ptej:
+
+- Potřebujeme tento typ osobních údajů pro hlavní funkci?
+- Lze údaj nahradit agregací, pseudonymem nebo interním identifikátorem?
+- Je údaj viditelný v běžném supportu, nebo jen při řízené eskalaci?
+- Jak dlouho je údaj potřeba držet?
+- Je exportovatelný a odstranitelný bez ruční archeologie?
+
+Příklad dobré odpovědi:
+
+> Produktová analytika pracuje primárně s agregovanými metrikami. Nesestavujeme marketingové profily návštěvníků a nepoužíváme sledovací pixely třetích stran. Události navrhujeme podle rozhodovacích otázek, ne podle maximálního sběru dat.
+
+Tohle je obchodní argument. Zákazník nemusí věřit jen tomu, že data ochráníš. Vidí, že se snažíš, aby citlivá data do systému vůbec nevlezla v gumákách.
+
+### EM.5 Připrav bezpečnostní balíček předem
+
+Když dotazník přijde až v závěru prodeje, čas běží proti tobě. Proto se vyplatí mít bezpečnostní balíček, který může obchod poslat hned po prvním vážném zájmu.
+
+Minimální balíček:
+
+- stručný popis architektury bez citlivých detailů,
+- mapa hlavních datových toků,
+- seznam subdodavatelů a účelů,
+- zásady retence a mazání dat,
+- popis záloh a obnovy,
+- proces incidentové komunikace,
+- kontaktní místo pro bezpečnostní otázky,
+- odkaz na privacy-first principy produktu.
+
+Balíček nemá prozradit interní zranitelnosti ani konfigurace, které by útočníkovi pomohly. Má zákazníkovi dát jistotu, že bezpečnost není improvizace na poslední pátek v měsíci.
+
+### EM.6 Zaveď rytmus kontroly odpovědí
+
+Bezpečnostní odpovědi stárnou. Změní se hosting, přibude subdodavatel, upraví se retence, vznikne nový administrátorský nástroj. Odpověď, která byla pravdivá v lednu, může být v září jen hezká vzpomínka.
+
+Jednou za čtvrtletí projdi:
+
+- odpovědi označené jako kritické,
+- subdodavatele a datové toky,
+- přístupová pravidla a role,
+- incidentní postupy,
+- zálohy a restore testy,
+- plánované bezpečnostní závazky z obchodních jednání.
+
+Po každém větším nasazení si polož jednu otázku: „Změnila tahle úprava některou odpověď v bezpečnostní knihovně?“ Pokud ano, aktualizuj ji hned. Dotazníky pak nejsou panika, ale recyklace pravdy. Což zní méně sexy než AI automat, ale funguje to podezřele dobře.
+
+### EM.7 Šablona: karta bezpečnostní odpovědi
+
+```markdown
+## Bezpečnostní odpověď: [téma]
+
+### Kategorie
+- Identita / Data / Infrastruktura / Vývoj / Právní rámec / Provoz:
+
+### Standardní otázka
+- Jak se zákazník typicky ptá:
+
+### Krátká odpověď
+- Odpověď do formuláře:
+
+### Delší vysvětlení
+- Kontext pro zákazníka:
+
+### Stav
+- Ano / Částečně / Ne / Plánováno:
+- Hranice odpovědi:
+
+### Důkaz nebo interní zdroj
+- Dokument / nastavení / runbook / vlastník:
+
+### Privacy-first poznámka
+- Jak minimalizujeme data nebo riziko:
+
+### Kontrola
+- Vlastník:
+- Poslední ověření:
+- Další kontrola:
+```
+
+### EM.8 Checklist: bezpečnostní dotazník bez chaosu
+
+- [ ] Dotazník je rozdělený podle kategorií a vlastníků.
+- [ ] Tým používá knihovnu schválených odpovědí místo psaní od nuly.
+- [ ] Každá odpověď „ano“ je ověřitelná existující funkcí, procesem nebo dokumentem.
+- [ ] Odpovědi „částečně“ jasně popisují hranice a dostupnost.
+- [ ] Obchod neslibuje bezpečnostní závazky bez technického a právního ověření.
+- [ ] Privacy-first odpovědi vysvětlují nejen ochranu dat, ale i minimalizaci sběru.
+- [ ] Bezpečnostní balíček je připravený předem a neobsahuje citlivé interní detaily.
+- [ ] Subdodavatelé, datové toky a retence jsou pravidelně kontrolované.
+- [ ] Knihovna odpovědí má vlastníky a datum poslední revize.
+- [ ] Po větší změně produktu tým ověří, jestli se nezměnily bezpečnostní odpovědi.
+
+Bezpečnostní dotazník může být brzda, nebo výhoda. Brzda je tehdy, když tým neví, co je pravda. Výhoda je tehdy, když umíš rychle, klidně a přesně ukázat, že produkt nestojí na improvizaci. A v privacy-first Evropě je tahle důvěryhodnost často lepší než další animace na pricing stránce.
+
+
 ## Pracovní log
+
+- 2026-09-03 18:00 UTC — Doplněna příloha EM o bezpečnostních dotaznících v B2B prodeji: třídění otázek podle vlastníků, knihovna schválených odpovědí, poctivé hranice slibů, privacy-first argumentace přes minimalizaci dat, bezpečnostní balíček, čtvrtletní kontrola, šablona odpovědi a checklist.
 - 2026-09-03 17:00 UTC — Doplněna příloha EL o integracích a API partnerstvích: pracovní situace, datový tok, zdroj pravdy, jednosměrné MVP, API kontrakt, privacy-first datové brzdy, monitoring, úniková cesta, integrační karta a checklist.
 
 - 2026-09-03 16:00 UTC — Doplněna příloha EK o zákaznickém advisory boardu: výběr účastníků, mandát, jednoduchá agenda, testování předpokladů, privacy-first pravidla, šablona karty a checklist.
