@@ -22937,7 +22937,176 @@ Demo má zákazníkovi ušetřit přemýšlení, ne ho unavit. Když po něm roz
 *Codyho komentář:* Demo není maturita z produktu. Nemusíš ukázat všechno, co umíš. Stačí ukázat přesně to, kvůli čemu si zákazník řekne: „Jo, takhle by náš den vypadal líp.“ To je mnohem silnější než hodinový sprint přes nastavení notifikací.
 
 
+## Příloha ED: Pilotní projekt, který ověří hodnotu bez nekonečného závazku
+
+Pilot je most mezi hezkým demem a plnou implementací. Zákazník už chápe, co slibuješ, ale ještě potřebuje vidět, jestli to bude fungovat v jeho realitě: s jeho lidmi, daty, omezeními, termíny a interní politikou, která občas připomíná šachy hrané v mlze. Dobře navržený pilot snižuje riziko pro obě strany. Špatně navržený pilot se změní v levný projekt bez konce, kde všichni „ještě něco zkusí“ a nikdo neví, kdy se rozhoduje.
+
+Pilot nemá být zmenšená verze celé budoucí spolupráce. Má ověřit jeden konkrétní obchodní nebo provozní předpoklad. Když se to podaří, přirozeně naváže placená implementace, rozšíření nebo dlouhodobý provoz. Když se to nepodaří, pořád získáš čisté učení místo rozmazaného pocitu, že „trh asi nebyl připravený“. Trh bývá připravený častěji než naše briefy.
+
+### ED.1 Pilot začni rozhodovací otázkou
+
+Nejhorší zadání pilotu zní: „Vyzkoušíme si to.“ Co přesně si vyzkoušíte? Kdo pozná, že to dopadlo dobře? Jaké rozhodnutí z toho má vzniknout? Bez odpovědí je pilot jen zdvořilé odložení nákupu.
+
+Lepší formulace:
+
+> Během pilotu ověříme, jestli **[konkrétní tým]** dokáže pomocí **[jedno workflow / jedna služba]** dosáhnout **[výsledek]** za **[časový rámec]**, aby zákazník mohl rozhodnout o **[další spolupráce / nasazení / ukončení]**.
+
+Příklady:
+
+- Obchodní tým zpracuje deset nových poptávek přes nový CRM postup bez přepisování z e-mailu.
+- Servisní tým uzavře dvacet požadavků přes zákaznický portál a sníží počet dotazů „v jakém je to stavu?“.
+- Marketing ověří jednu landing page a tři přímé distribuční kanály bez reklamních pixelů a bez budování osobních profilů návštěvníků.
+- Zakladatel zjistí, jestli privacy-first analytika dává dost informací pro týdenní rozhodování o webu.
+
+Rozhodovací otázka musí být dost úzká, aby se dala vyhodnotit. „Zlepšíme zákaznickou zkušenost“ je přání. „Klient po zadání požadavku dostane potvrzení, vidí stav a nemusí psát druhý e-mail“ už je pilotovatelný scénář.
+
+### ED.2 Omez rozsah dřív, než začne práce
+
+Pilot bez hranic je past. Zákazník přidává výjimky, tým doplňuje „ještě jeden malý formulář“ a po třech týdnech už nikdo neví, jestli ověřujete hodnotu, nebo stavíte neveřejnou produkční verzi. Rozsah pilotu proto napiš lidsky, ale tvrdě.
+
+Urči hlavně:
+
+- **Jedno hlavní workflow:** co přesně projde od začátku do konce.
+- **Počet uživatelů:** kdo se účastní a kdo ne.
+- **Počet datových zdrojů:** odkud se berou vstupy a co se záměrně nepřipojuje.
+- **Časové okno:** kdy pilot začíná, kdy končí a kdy se hodnotí.
+- **Podporu:** jak rychle reaguješ a jakým kanálem.
+- **Mimo rozsah:** co se v pilotu určitě nedělá.
+
+Věta „není součástí pilotu“ není nepříjemnost. Je to ochrana kvality. Když zákazník potřebuje něco navíc, může to být placené rozšíření, další fáze nebo důvod změnit pilot ještě před startem. Jen to nesmí potichu proklouznout do práce jako mokrý pes do kanceláře.
+
+### ED.3 Úspěch musí být měřitelný i lidsky ověřitelný
+
+Pilot nevyhodnocuj jen čísly ani jen pocitem. Čísla bez kontextu lžou slušně oblečená. Pocity bez čísla zase umí udělat z jednoho hlasitého názoru strategii firmy.
+
+Zkombinuj tři typy signálů:
+
+- **Použití:** kolikrát proběhlo hlavní workflow, kolik lidí se zapojilo, kde se proces zasekl.
+- **Výsledek:** co se zrychlilo, zpřehlednilo, ušetřilo nebo přestalo padat mezi židle.
+- **Zpětná vazba:** co lidé pochopili hned, co je mátlo, co by jim bránilo pokračovat.
+
+Příklad vyhodnocení pro zákaznický portál:
+
+- Cíl použití: alespoň dvacet reálných požadavků během dvou týdnů.
+- Cíl výsledku: u každého požadavku je viditelný stav a odpovědná osoba.
+- Cíl zpětné vazby: koordinátor a dva řešitelé umí pojmenovat, jestli portál snižuje e-mailový chaos.
+- Rozhodnutí: pokračovat do produkční verze, upravit workflow, nebo pilot ukončit.
+
+Privacy-first měření stačí držet na úrovni účtu, týmu, stavu a workflow. Nepotřebuješ sledovat každé kliknutí konkrétního člověka, čas nad polem ani to, jestli se někdo ve 23:14 díval na nastavení. Pokud chceš vědět, proč se zasekl, zeptej se ho. Revoluční technologie jménem rozhovor pořád funguje.
+
+### ED.4 Data pro pilot připrav jako dočasný provoz, ne skládku
+
+Pilot často pracuje s reálnými daty, protože jinak neověříš skutečný proces. To ale neznamená, že do něj máš nasypat kompletní export firmy „pro jistotu“. V pilotu platí ještě přísnější minimalizace než v běžném provozu, protože procesy, odpovědnosti a retence teprve vznikají.
+
+Před startem si napiš datovou kartu:
+
+- Jaká data jsou nutná pro ověření workflow.
+- Která pole lze anonymizovat, zkrátit nebo nahradit syntetickými hodnotami.
+- Kdo má k pilotním datům přístup.
+- Kde jsou data uložená a jestli zůstávají v Evropě.
+- Kdy se data po pilotu smažou, anonymizují nebo převedou do produkce.
+- Jak zákazník získá export, pokud pilot skončí.
+
+U interních poznámek buď opatrný. Do pilotního nástroje nepatří osobní soudy typu „pan Novák je problémový“. Patří tam provozní fakta: „čeká se na doplnění podkladů“, „technický tým potřebuje rozhodnutí do pátku“, „zákazník chce export CSV“. Budoucí audit ti poděkuje. Možná ne nahlas, audity nejsou známé vděčností, ale poděkuje.
+
+### ED.5 Cena pilotu má chránit vážnost práce
+
+Bezplatný pilot může dávat smysl jen výjimečně: když máš extrémně krátké ověření, vysokou strategickou hodnotu nebo jasně daný reciproční přínos. Jinak je lepší pilot zpoplatnit, i kdyby symbolicky. Cena nastavuje očekávání, že nejde o demo na steroidech, ale o reálnou práci s výsledkem.
+
+Dobré modely:
+
+- **Fixní pilotní balíček:** jasný rozsah, termín, výstup a cena.
+- **Pilot odečitatelný z implementace:** zákazník platí ověření, ale při pokračování se část započítá.
+- **Workshop plus prototyp:** nejdřív placené vyjasnění procesu, pak technické ověření.
+- **Limitovaný provoz:** omezený počet uživatelů, dat nebo workflow za pevnou měsíční cenu.
+
+Špatné modely:
+
+- „Uděláme to zdarma a pak se uvidí.“ Většinou se uvidí hlavně únava.
+- „Pilot bude bez rozsahu, ale rychlý.“ Překlad: nikdo neví, co kupuje.
+- „Zákazník nám dá feedback místo peněz.“ Feedbackem nezaplatíš hosting, vývoj ani kávu. A bez kávy vznikají tabulky, které neměly vzniknout.
+
+Codyho praktické pravidlo: pokud pilot zákazníkovi šetří práci, snižuje riziko nebo ověřuje interní rozhodnutí, má hodnotu. A hodnota má mít cenu.
+
+### ED.6 Konec pilotu naplánuj už při startu
+
+Pilot musí mít závěrečné review v kalendáři ještě před tím, než začne. Jinak se snadno rozplizne do „ještě to chvíli necháme běžet“. To je oblíbená věta projektů, které nechtějí říct, že nemají rozhodnutí.
+
+Závěrečné review má mít jednoduchou strukturu:
+
+1. Co jsme chtěli ověřit.
+2. Co se opravdu stalo.
+3. Které signály podporují pokračování.
+4. Které signály ukazují riziko nebo nutnou změnu.
+5. Co se stane s daty, přístupy a prostředím.
+6. Jaké jsou možnosti dalšího kroku.
+
+Možné výsledky pilotu:
+
+- **Pokračovat:** hodnota je potvrzená a následuje implementace nebo rozšíření.
+- **Upravit:** problém je reálný, ale workflow, cílovka nebo forma služby potřebuje změnu.
+- **Zastavit:** pilot nepotvrdil dostatečný přínos nebo zákazník nemá kapacitu pokračovat.
+- **Odložit:** rozhodnutí má konkrétní podmínku a datum návratu, ne mlhavé „ozveme se“.
+
+U každého výsledku uzavři i provozní věci: odebrání přístupů, export, smazání testovacích dat, archivace poznámek, ukončení integračních tokenů a vypnutí dočasných notifikací. Pilot končí až úklidem, ne posledním callem.
+
+### ED.7 Šablona pilotní karty
+
+```markdown
+## Pilotní karta: [zákazník / workflow]
+
+### Rozhodovací otázka
+- Co ověřujeme:
+- Jaké rozhodnutí má vzniknout:
+- Kdo rozhoduje:
+
+### Rozsah
+- Hlavní workflow:
+- Uživatelé:
+- Data a zdroje:
+- Co není součástí:
+- Časové okno:
+
+### Kritéria úspěchu
+- Použití:
+- Výsledek:
+- Zpětná vazba:
+- Minimální signál pro pokračování:
+
+### Privacy-first provoz
+- Nutná data:
+- Data mimo rozsah:
+- Přístupy:
+- Uložení a lokalita:
+- Retence po pilotu:
+- Export nebo výmaz:
+
+### Review
+- Datum závěrečného review:
+- Možné další kroky:
+- Vlastník rozhodnutí:
+```
+
+### ED.8 Checklist: pilot bez nekonečného závazku
+
+- [ ] Má pilot jednu jasnou rozhodovací otázku?
+- [ ] Je hlavní workflow popsané od reálného spouštěče po výsledek?
+- [ ] Víme, kdo se pilotu účastní a kdo je mimo rozsah?
+- [ ] Jsou kritéria úspěchu měřitelná i ověřitelná rozhovorem?
+- [ ] Je jasně napsané, která data jsou nutná a která se nesbírají?
+- [ ] Zůstává pilotní provoz v evropském a kontrolovaném prostředí?
+- [ ] Má pilot cenu, termín, podporu a hranice?
+- [ ] Je závěrečné review v kalendáři už před startem?
+- [ ] Víme, co se po pilotu stane s daty, přístupy, tokeny a prostředím?
+- [ ] Existují tři férové výsledky: pokračovat, upravit, zastavit?
+
+Pilot není trik, jak zákazníka nenápadně dotlačit do velkého kontraktu. Je to férový způsob, jak spolu ověřit hodnotu s omezeným rizikem. Když ho dobře ohraničíš, získáš lepší zákazníky, lepší produktové učení a méně projektů, které se tváří jako příležitost, ale ve skutečnosti jsou jen supportní oddělení bez fakturace.
+
+*Codyho komentář:* Dobrý pilot má začátek, konec a důvod. Špatný pilot má Slack kanál, pět „malých“ požadavků týdně a větu „ještě počkáme na feedback od kolegy“. Hádej, který z nich umí sežrat měsíc života bez jediného rozhodnutí.
+
+
 ## Pracovní log
+- 2026-09-03 08:01 UTC — Doplněna příloha ED o pilotním projektu: rozhodovací otázka, omezení rozsahu, měřitelné i lidsky ověřitelné signály, datová minimalizace, cena pilotu, plánované ukončení, pilotní karta a privacy-first checklist.
 - 2026-09-03 07:01 UTC — Doplněna příloha EC o produktovém demu: příprava podle kontextu zákazníka, scénář místo klikací prohlídky, vrstvy hodnoty/práce/důvěry, práce s námitkami, konkrétní další krok, bezpečná demo data, demo karta a privacy-first checklist.
 - 2026-09-03 21:00 UTC — Doplněna příloha EB o obchodním follow-upu bez nátlaku a stalkingu: jasná dohoda po schůzce, nová hodnota v navázání, konečný rytmus, prodej bez sledovacích pixelů, práce s námitkami, krátká CRM paměť, follow-up karta a privacy-first checklist.
 - 2026-09-03 20:00 UTC — Doplněna příloha EA o jednoduchém CRM bez datové skládky: definice vztahů, minimální pole, realistická pipeline, kvalitní poznámky, úklidový rytmus, agregované vyhodnocování a privacy-first checklist.
