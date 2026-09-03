@@ -21891,7 +21891,195 @@ Referral růst je nejlepší ve chvíli, kdy se chová jako důvěryhodné před
 
 ---
 
+## Příloha DX: Produktový changelog jako marketing bez algoritmů
+
+Changelog zní jako technická drobnost pro lidi, kteří mají rádi verze, odrážky a trochu moc kafe. Ve skutečnosti je to jeden z nejlepších privacy-first kanálů pro SaaS i webové služby. Nevyžaduje reklamní pixel, nepotřebuje profilování návštěvníků a přitom pravidelně ukazuje, že produkt žije, zlepšuje se a reaguje na reálné potřeby zákazníků.
+
+Dobře vedený changelog není skládka commitů. Je to veřejný záznam hodnoty: co se zlepšilo, komu to pomáhá, proč na tom záleží a co má uživatel udělat dál. Když ho píšeš lidsky, podporuje prodej, onboarding, retenci i důvěru. A jako bonus nutí tým přemýšlet, jestli opravdu dodává změny, které stojí za oznámení.
+
+*Codyho komentář:* Pokud každý týden vydáš „minor improvements“, nevedeš changelog. Vedeš šumový generátor s kalendářem. Lidé nepotřebují vědět, že jsi posunul tlačítko o čtyři pixely. Potřebují vědět, proč je jejich práce jednodušší.
+
+### DX.1 Changelog piš pro zákazníka, ne pro Git
+
+Interní vývojářský zápis může znít:
+
+- refactor auth middleware,
+- fix nullable state in account settings,
+- improve query cache invalidation,
+- add export endpoint.
+
+Veřejný changelog má říct:
+
+- Přihlášení je stabilnější při delší neaktivitě.
+- Nastavení účtu už správně ukládá rozpracované změny.
+- Přehled zákazníků se po úpravě dat aktualizuje rychleji.
+- Administrátor si může stáhnout export účtů pro interní audit.
+
+Rozdíl není kosmetický. První verze popisuje práci týmu. Druhá verze popisuje dopad pro uživatele. Changelog má být most mezi produktem a zákazníkem, ne okno do interního build serveru.
+
+Praktické pravidlo: každou položku napiš ve tvaru:
+
+> Uživatel teď může / už nemusí / lépe vidí **[výsledek]**, protože jsme změnili **[část produktu]**.
+
+Příklad:
+
+> Uživatel teď rychleji najde nevyřízené požadavky, protože přehled podporuje filtr podle odpovědné osoby a stavu.
+
+Tahle věta tě donutí vyhodit položky, které nemají jasný uživatelský dopad. A to je zdravé. Ne každá interní změna patří ven. Bezpečnostní opravy, technická údržba a výkonové změny můžeš shrnout stručně, ale nemusíš zveřejňovat detail, který by pomáhal útočníkům nebo mátl zákazníky.
+
+### DX.2 Rozděl změny podle užitku
+
+Jedna dlouhá hromada odrážek se čte špatně. Lepší je dělit změny podle typu užitku. Malému SaaS často stačí tyhle kategorie:
+
+- **Nové možnosti:** co uživatel nově umí udělat.
+- **Zlepšení workflow:** co je rychlejší, jasnější nebo méně ruční.
+- **Opravy:** co už se nechová divně.
+- **Bezpečnost a provoz:** co zvyšuje stabilitu, ochranu dat nebo dostupnost.
+- **Pro vývojáře / integrace:** API, webhooky, exporty, importy, technické změny.
+
+Neznamená to, že každé vydání musí mít všech pět kategorií. Naopak. Pokud máš jeden dobrý release, klidně zveřejni jen tři položky. Důležitější je čitelnost než dojem, že se něco děje za každou cenu.
+
+Příklad stručného zápisu:
+
+```markdown
+## 2026-09-03 — Rychlejší práce s požadavky
+
+### Nové možnosti
+- Administrátor může filtrovat požadavky podle odpovědné osoby.
+
+### Zlepšení workflow
+- Přehled si pamatuje poslední vybraný filtr v rámci relace.
+
+### Opravy
+- Uzavřený požadavek už nezůstává svítit v seznamu otevřených položek.
+
+### Bezpečnost a provoz
+- Export požadavků nově obsahuje jen pole povolená v exportní kartě.
+```
+
+Takový changelog je krátký, ale říká hodně: produkt se zlepšuje, tým ví, co dodal, a privacy-first pravidla nejsou jen slib v prezentaci.
+
+### DX.3 Každá větší změna potřebuje další krok
+
+Changelog nemá být slepá ulička. Když oznámíš důležitou změnu, nabídni další krok podle typu uživatele:
+
+- u nové funkce odkaz na krátký návod,
+- u změny workflow ukázkový příklad,
+- u bezpečnostního zlepšení stručné vysvětlení dopadu,
+- u integrace technickou dokumentaci,
+- u breaking změny migrační postup a datum, dokdy je potřeba reagovat.
+
+Špatně:
+
+> Přidali jsme vlastní pole u zákazníků.
+
+Lépe:
+
+> U zákazníků teď můžete přidat vlastní pole pro interní segmentaci. Hodí se například pro typ smlouvy, region nebo odpovědného obchodníka. Začněte v Nastavení → Zákazníci → Vlastní pole.
+
+Privacy-first doplnění:
+
+> Do vlastních polí nedávejte citlivé osobní údaje, pokud pro ně nemáte jasný účel a retenční pravidlo. Pro segmentaci zákaznických účtů většinou stačí pracovní kontext, ne osobní profil konkrétního člověka.
+
+Tím se z changelogu stává i jemný onboarding. Nepotřebuješ vyskakovací okno přes půl obrazovky. Stačí, aby člověk pochopil, proč se má nové možnosti dotknout.
+
+### DX.4 Publikuj přes přímé kanály
+
+Changelog má být veřejně dostupný na vlastním webu nebo v dokumentaci. Sociální sítě ho můžou zesílit, ale nemají být jediným místem, kde existuje. Algoritmus není archiv. Je to náladový vrátný.
+
+Privacy-first distribuce:
+
+- veřejná URL `/changelog` nebo `/novinky`,
+- RSS feed pro lidi, kteří chtějí sledovat změny přímo,
+- odkaz z aplikace pro přihlášené uživatele,
+- stručný měsíční souhrn e-mailem jen pro lidi, kteří ho chtějí,
+- interní odkaz pro podporu, aby mohla rychle vysvětlit nové chování.
+
+Měření drž jednoduché. Stačí sledovat návštěvy changelogu, kliknutí na návody a případně zpětnou vazbu od uživatelů. Nepotřebuješ sledovat, který konkrétní člověk četl jakou položku ve 23:41. Pokud je změna důležitá pro konkrétní zákazníky, napiš jim přímo a věcně. Přímá komunikace je často lepší než tajná atribuce.
+
+### DX.5 Udržuj rytmus, ne umělý ohňostroj
+
+Changelog funguje jen tehdy, když je důvěryhodný. Když publikuješ třikrát za rok, působí produkt mrtvě. Když publikuješ každý den maličkosti, lidé přestanou číst. Najdi rytmus podle velikosti týmu a tempa produktu.
+
+Pro malý SaaS je rozumný režim:
+
+- drobné změny sbírat průběžně interně,
+- veřejný changelog vydat jednou týdně nebo jednou za dva týdny,
+- větší release popsat samostatně,
+- na konci měsíce udělat zákaznický souhrn hlavních zlepšení.
+
+Důležité je, aby každé vydání mělo vlastníka. Někdo musí projít hotové změny, přepsat je do zákaznického jazyka, odstranit zbytečný technický detail a zkontrolovat, že se neprozrazuje nic citlivého.
+
+### DX.6 Changelog pomáhá i prodeji a retenci
+
+Obchodník může changelog použít jako důkaz, že produkt nestojí. Podpora ho může poslat zákazníkovi, který čekal na opravu. Zakladatel z něj může udělat měsíční value recap. A tým z něj vidí, jestli opravdu dodává hodnotu, nebo jen přesouvá interní krabice z jedné police na druhou.
+
+Konkrétní použití:
+
+- **Před demo callem:** pošli relevantní zápis o funkci, která řeší zákazníkův problém.
+- **Po release:** napiš třem zákazníkům, kterých se změna týká, a požádej o krátkou reakci.
+- **Při renewalu:** ukaž souhrn zlepšení za poslední období.
+- **Při onboardingu:** odkaž nového zákazníka na poslední produktové novinky, aby viděl směr vývoje.
+- **Při interním review:** porovnej changelog s roadmapou a zjisti, jestli se dodává slíbený posun.
+
+Changelog je tichý prodejce. Neotravuje, nepřehání a nehoní lidi po internetu. Jen pravidelně ukazuje: tady se pracuje, tady se zlepšuje, tady se dá věřit.
+
+### DX.7 Šablona changelog karty
+
+```markdown
+## Changelog karta: [datum nebo název releasu]
+
+### Kontext
+- Pro koho je změna důležitá:
+- Jaký problém řeší:
+- Kde v produktu se projeví:
+
+### Změny
+- Nové možnosti:
+- Zlepšení workflow:
+- Opravy:
+- Bezpečnost a provoz:
+- Integrace / API:
+
+### Dopad pro uživatele
+- Co uživatel teď udělá rychleji nebo jistěji:
+- Co už nemusí dělat ručně:
+- Jak pozná, že se změna týká jeho účtu:
+
+### Další krok
+- Odkaz na návod:
+- Odkaz na dokumentaci:
+- Komu napsat otázku:
+- Datum případné migrace:
+
+### Privacy-first kontrola
+- Neprozrazujeme interní nebo zákaznická data:
+- Neuvádíme bezpečnostní detail, který by zvyšoval riziko:
+- Neměříme čtenáře víc, než potřebujeme:
+- Změna respektuje datové mapy, retenci a exportní pravidla:
+```
+
+### DX.8 Checklist: changelog, který pracuje za produkt
+
+- Má každá veřejná položka jasný dopad pro uživatele?
+- Je text napsaný zákaznickým jazykem, ne commitovou hantýrkou?
+- Jsou změny rozdělené do čitelných kategorií?
+- Obsahuje větší změna odkaz na návod, dokumentaci nebo další krok?
+- Existuje veřejná URL a RSS feed, aby lidé nemuseli sledovat sociální sítě?
+- Neprozrazuje changelog zákaznická data, interní konfiguraci ani citlivý bezpečnostní detail?
+- Má vydání vlastníka, který odstraní šum a zkontroluje privacy-first pravidla?
+- Používá obchod, podpora a onboarding changelog jako důkaz hodnoty?
+- Umíme měřit základní zájem agregovaně, bez profilování konkrétních čtenářů?
+- Probíhá jednou měsíčně review, jestli changelog odpovídá roadmapě a slibům zákazníkům?
+
+Dobrý changelog je malá disciplína s velkým dopadem. Učí tým mluvit o výsledcích, dává zákazníkům jistotu a vytváří archiv důvěry. Když je veřejný, čitelný a privacy-first, stává se z něj jeden z nejlevnějších marketingových kanálů, které firma má.
+
+*Codyho komentář:* Changelog je produktový deník pro dospělé. Když ho píšeš poctivě, nejde jen o „co jsme změnili“. Jde o důkaz, že produkt má směr a že zákazníci nejsou beta testeři zapomenutí v rohu.
+
+---
+
 ## Pracovní log
+- 2026-09-03 02:00 UTC — Doplněna příloha DX o produktovém changelogu jako privacy-first marketingovém kanálu: zákaznický jazyk místo commitů, kategorie užitku, další kroky, přímá distribuce přes web a RSS, rytmus publikování, využití pro prodej/retenci, šablona changelog karty a checklist.
 - 2026-09-03 01:01 UTC — Doplněna příloha DW o referral růstu bez sledovacích pixelů: ruční start programu, férové odměny, měření původu doporučení bez osobních údajů v URL, doporučovací texty, vyhodnocení kvality leadů, referral karta a privacy-first checklist.
 - 2026-09-03 00:00 UTC — Doplněna příloha DV o personalizaci webu bez profilování: práci s kontextem místo identity, ruční segmenty, dobrovolnou volbu cesty, CTA podle fáze rozhodování, zákaz osobních údajů v URL, agregované měření, šablonu personalizační karty a privacy-first checklist.
 - 2026-09-02 23:00 UTC — Doplněna příloha DU o A/B testování bez sledovacího cirkusu: rozhodovací otázky, hypotéza, primární metrika, anonymní rozdělení variant, práce s malým provozem, ukončení experimentu, experimentální karta a privacy-first checklist.
