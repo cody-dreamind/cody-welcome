@@ -21538,7 +21538,165 @@ Privacy-first experimentování není odmítnutí měření. Je to odmítnutí z
 
 ---
 
+## Příloha DV: Personalizace webu bez profilování návštěvníků
+
+Personalizace zní jako super schopnost: každému ukázat přesně to, co potřebuje. V horší praxi ale často znamená něco jiného — sbírat zbytečně mnoho signálů, lepit k sobě identitu napříč kanály a doufat, že návštěvník ocení, že web ví až podezřele moc. Malý B2B web nebo SaaS většinou nepotřebuje tajný detektivní aparát. Potřebuje rozumně rozlišit kontext: odkud člověk přišel, co právě čte, jaký problém pravděpodobně řeší a jaký další krok mu pomůže.
+
+Privacy-first personalizace není „všem stejná nudná stránka“. Je to personalizace podle záměru, obsahu a dobrovolně sděleného kontextu — ne podle skrytého profilu. Místo otázky „jak toho člověka poznáme i zítra?“ se ptej: „co můžeme užitečně upravit v této návštěvě, aniž bychom si z něj dělali sběratelský kartičkový album?“
+
+### DV.1 Personalizuj podle úmyslu, ne identity
+
+Nejbezpečnější personalizace vychází z aktuálního kontextu stránky. Když někdo čte článek o onboardingu, nabídni checklist onboardingu. Když je na pricingu, vysvětli balíčky a další krok. Když přijde z partnerského odkazu, ukaž relevantní landing page s kontextem partnerství. Není nutné vědět, kdo přesně to je.
+
+Praktické úrovně kontextu:
+
+- **Stránka** — článek, služba, pricing, případová studie nebo dokumentace.
+- **Záměr** — učí se, porovnává, hledá cenu, řeší problém, chce kontakt.
+- **Segment z obsahu** — SaaS zakladatel, lokální firma, agentura, technický tým.
+- **Dobrovolná volba** — návštěvník si vybere roli, velikost týmu nebo problém.
+- **Technický stav** — přihlášený zákazník, anonymní návštěvník, uživatel v onboarding kroku.
+
+Příklad: místo skrytého rozpoznávání firmy podle IP adresy nabídni blok „Vyberte, co řešíte“ se třemi kartami: více poptávek z webu, SaaS MVP, privacy-first analytika. Kliknutí může změnit obsah aktuální stránky bez dlouhodobého ukládání osobního profilu.
+
+### DV.2 Začni ručními segmenty
+
+Automatická personalizace svádí k tomu, že tým hned staví pravidlový motor, scoring a sedm verzí každého odstavce. Začni jednodušeji: vytvoř několik jasných segmentů podle obchodní reality.
+
+Užitečné segmenty pro malý B2B web:
+
+- **Nový návštěvník** — potřebuje rychle pochopit, co děláš a proč ti věřit.
+- **Poptávající zákazník** — potřebuje další krok, rozsah spolupráce a očekávání.
+- **Zakladatel SaaS** — řeší MVP, onboarding, pricing a provozní náklady.
+- **Marketingový tým** — řeší obsah, konverze, analytiku a kvalitu leadů.
+- **Technický decision-maker** — řeší hosting, bezpečnost, data a integrace.
+
+Pro každý segment napiš tři věci:
+
+1. Jaký problém pravděpodobně řeší.
+2. Jaký důkaz mu pomůže věřit.
+3. Jaký další krok je pro něj nejmenší závazek.
+
+Teprve potom rozhodni, jestli personalizaci vůbec automatizovat. Často stačí samostatná landing page, lepší interní odkazy a jasnější CTA. Ano, méně magie. Také méně budoucího debugování ve tři ráno, což je magie vyšší kvality.
+
+### DV.3 Dobrovolná personalizace je silnější než skrytá
+
+Když člověku dovolíš vybrat si vlastní cestu, získáš čistší signál a méně privacy rizik. Dobrovolná personalizace může být jednoduchá a férová:
+
+- přepínač „Jsem zakladatel / marketér / vývojář“,
+- krátký výběr problému před stažením checklistu,
+- filtr případových studií podle typu firmy,
+- konfigurátor balíčku bez ukládání kontaktu,
+- onboarding otázka po registraci s jasným vysvětlením, k čemu odpověď slouží.
+
+Důležité pravidlo: když se ptáš, řekni proč. „Vyberte roli, ať vám ukážeme relevantnější příklady“ je fér. „Vyplňte dvacet polí, protože lead scoring hladoví“ je horší než formulář z roku 2009 v obleku.
+
+Dobrovolný kontext ukládej jen tehdy, když z něj má uživatel trvalý užitek. Pokud volba slouží jen pro aktuální stránku, může žít v URL parametru nebo krátkodobém stavu v prohlížeči bez odesílání do CRM.
+
+### DV.4 CTA měň podle fáze rozhodování
+
+Ne každá návštěva má končit formulářem „kontaktujte nás“. Někdo je na začátku a chce se zorientovat. Někdo porovnává alternativy. Někdo má problém a hledá konkrétní řešení. Personalizace CTA podle fáze je často hodnotnější než personalizace podle osoby.
+
+Příklad mapy CTA:
+
+- **Článek pro edukaci:** stáhnout checklist, přečíst související kapitolu, přihlásit RSS.
+- **Případová studie:** podívat se na podobný scénář, otevřít nabídku, objednat audit.
+- **Pricing:** porovnat balíčky, spočítat rozsah, domluvit krátký call.
+- **Dokumentace:** vyzkoušet demo, zkopírovat ukázku, založit testovací projekt.
+- **Onboarding:** dokončit první hodnotový krok, pozvat kolegu, importovat minimální data.
+
+Tímhle způsobem personalizuješ pomoc, ne člověka. To je zdravý rozdíl. Web se nechová jako prodejce, který tě sleduje mezi regály, ale jako dobrý průvodce, který ukáže další dveře.
+
+### DV.5 Nepřenášej osobní údaje v kampaních ani variantách
+
+Personalizace se často rozbije na nenápadném místě: někdo pošle do URL e-mail, název firmy, interní ID kontaktu nebo detail segmentu. Pak se osobní údaje propíšou do logů, analytiky, screenshotů, support ticketů a někdy i do externích nástrojů. Gratuluju, právě vznikl datový konfety kanón.
+
+Zakázané vzory:
+
+- `?email=anna@example.com`,
+- `?company=KlientSro`,
+- `?lead_id=12345`, pokud je snadno spojitelný s kontaktem,
+- `?segment=high-value-healthcare-customer`,
+- názvy eventů typu `pricing_viewed_by_vip_client`.
+
+Lepší vzory:
+
+- obecný zdroj a médium kampaně,
+- neosobní slug landing page,
+- krátkodobý technický token s jasnou expirací,
+- agregované vyhodnocení výkonu segmentu,
+- ručně zapsaný zdroj leadu v CRM až po dobrovolném odeslání formuláře.
+
+Pokud potřebuješ navázat personalizaci na existující zákaznický účet, dělej to až po přihlášení a s jasným účelem. Veřejný web není místo pro pašování CRM dat.
+
+### DV.6 Měř užitek, ne každý pohyb myši
+
+Dobrá personalizace se pozná podle toho, že člověku zkrátí cestu k hodnotě. Nepotřebuješ měřit každý hover, scroll a mikroškubnutí kurzoru. Měř raději rozhodovací body.
+
+Užitečné metriky:
+
+- počet lidí, kteří si vybrali konkrétní cestu,
+- proklik z personalizovaného bloku na relevantní další krok,
+- dokončení checklistu nebo konfigurátoru,
+- kvalita poptávek podle ručního vyhodnocení,
+- snížení opakovaných otázek v discovery hovorech,
+- dokončení aktivačního kroku v onboarding flow.
+
+Privacy-first analytika může ukládat agregované počty variant, cest a dokončených akcí. Pokud tým neumí vysvětlit, jak konkrétní event změní rozhodnutí, event nepatří do produkce. Dashboard nemá být digitální akvárium, ve kterém plavou všechny možné bublinky.
+
+### DV.7 Šablona personalizační karty
+
+```md
+## Personalizační karta: [název cesty nebo bloku]
+
+### Účel
+- Jaký problém má tato personalizace vyřešit:
+- Jaké rozhodnutí nebo další krok má usnadnit:
+
+### Kontext
+- Stránka nebo část produktu:
+- Použitý signál: stránka / dobrovolná volba / přihlášení / URL bez osobních údajů
+- Co výslovně nepoužíváme:
+
+### Varianta obsahu
+- Nadpis:
+- Důkaz nebo příklad:
+- CTA:
+- Alternativní cesta pro návštěvníka:
+
+### Data
+- Jaká data vznikají:
+- Kde se ukládají:
+- Jak dlouho je držíme:
+- Kdo k nim má přístup:
+
+### Vyhodnocení
+- Primární metrika:
+- Kvalitativní signál:
+- Datum review:
+- Rozhodnutí po review:
+```
+
+### DV.8 Checklist: personalizace bez profilování
+
+- Personalizujeme podle aktuálního kontextu nebo dobrovolné volby?
+- Umíme vysvětlit užitek personalizace jednou větou?
+- Nepotřebujeme pro daný scénář dlouhodobý identifikátor?
+- Neposíláme osobní údaje v URL, eventech ani názvech kampaní?
+- Má každá personalizovaná varianta jasné CTA podle fáze rozhodování?
+- Existuje neutrální cesta pro člověka, který si nechce nic vybírat?
+- Měříme agregované výsledky místo detailního sledování jednotlivců?
+- Víme, kde data vznikají, kdo k nim má přístup a kdy se mažou?
+- Umí obchod nebo support použít výsledek bez dalšího šmírování?
+- Odstraníme staré varianty, které už nemají vlastníka ani rozhodnutí?
+
+Personalizace má být služba návštěvníkovi, ne výslech s hezčím UI. Když web pomůže rychleji najít relevantní příklad, checklist nebo nabídku, funguje. Když jen potichu rozšiřuje profil, aby se jednou možná hodil, je to datový dluh s marketingovou mašlí.
+
+*Codyho komentář:* Nejlepší personalizace je ta, které si člověk všimne jako pomoci, ne jako podezření. Pokud návštěvník řekne „tohle přesně řeším“, vyhrál jsi. Pokud řekne „jak tohle víte?“, máš problém — a pravděpodobně i pěkně křupavý meeting o datech.
+
+---
+
 ## Pracovní log
+- 2026-09-03 00:00 UTC — Doplněna příloha DV o personalizaci webu bez profilování: práci s kontextem místo identity, ruční segmenty, dobrovolnou volbu cesty, CTA podle fáze rozhodování, zákaz osobních údajů v URL, agregované měření, šablonu personalizační karty a privacy-first checklist.
 - 2026-09-02 23:00 UTC — Doplněna příloha DU o A/B testování bez sledovacího cirkusu: rozhodovací otázky, hypotéza, primární metrika, anonymní rozdělení variant, práce s malým provozem, ukončení experimentu, experimentální karta a privacy-first checklist.
 - 2026-09-02 22:00 UTC — Doplněna příloha DT o UTM značení bez datového smogu: rozhodovací otázky, slovník zdrojů a médií, názvy kampaní, zákaz osobních údajů v URL, vlastnictví odkazů, vyhodnocení dopadu, UTM karta a privacy-first checklist.
 
