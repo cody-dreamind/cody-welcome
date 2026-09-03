@@ -23611,7 +23611,219 @@ Akce bez vlastníka a termínu neexistuje. Je to jen přání převlečené za z
 
 *Codyho komentář:* Dobrý support není ten, který nikdy neeskaluje. Dobrý support ví, kdy eskalovat, komu, s jakými daty a jak zákazníkovi nevysílat interní operu o třech dějstvích.
 
+## Příloha EH: Postmortem po incidentu bez honu na viníka
+
+Incident končí až ve chvíli, kdy se tým naučil něco použitelného. Ne když se zavře ticket, ne když zákazník přestane psát a už vůbec ne když někdo do chatu pošle „fixed“. To je jen konec akutní bolesti. Skutečný konec je krátké, konkrétní postmortem: co se stalo, proč se to stalo, jaký to mělo dopad a co příště uděláme jinak.
+
+Malé týmy postmortemy často vynechávají, protože „není čas“. Jenže bez nich se stejné chyby vrací v levném převleku. Jednou jako výpadek formuláře, podruhé jako rozbitý webhook, potřetí jako zákaznický export, který někdo omylem spustí dvakrát. Postmortem není firemní terapie. Je to pojistka proti opakování drahých překvapení.
+
+### EH.1 Postmortem není soudní síň
+
+Cíl postmortemu není najít člověka, který „to pokazil“. Cíl je najít systémové slabiny, které umožnily, aby se problém dostal k zákazníkovi nebo trval zbytečně dlouho.
+
+Špatné otázky:
+
+- Kdo to rozbil?
+- Proč si toho nikdo nevšiml?
+- Jak je možné, že jsi to neotestoval?
+- Kdo za to může před zákazníkem?
+
+Lepší otázky:
+
+- Jaká změna nebo stav incident spustil?
+- Který signál jsme měli vidět dřív?
+- Kde proces závisel na paměti jednoho člověka?
+- Co chybělo v testu, monitoringu, dokumentaci nebo checklistu?
+- Jak poznáme, že se stejný typ problému blíží znovu?
+
+Bezpečné prostředí neznamená, že nikdo nenese odpovědnost. Znamená to, že odpovědnost vede k opravě systému, ne k veřejnému grilování. Pokud se lidé bojí říct pravdu, postmortem vyrobí hezký dokument a nulové zlepšení. Což je elegantní způsob, jak proměnit incident v literární žánr.
+
+### EH.2 Piš fakta odděleně od interpretací
+
+Postmortem má mít časovou osu a ta má být nudně přesná. Nesmí začínat dojmem typu „ráno to nějak začalo zlobit“. Začni tím, co víš.
+
+Praktická osa:
+
+- **První příznak:** kdy se problém poprvé projevil.
+- **Detekce:** kdo nebo co problém zachytilo.
+- **Triage:** kdy tým pochopil dopad.
+- **Eskalace:** kdy se přidal další člověk nebo dodavatel.
+- **Mitigace:** kdy se snížil dopad na zákazníky.
+- **Oprava:** kdy byla příčina odstraněna.
+- **Komunikace:** kdy šel zákazníkům první a následný update.
+- **Uzavření:** kdy bylo ověřeno, že služba funguje normálně.
+
+Ke každé položce napiš konkrétní čas v UTC nebo lokálním čase, ale nemíchej oboje. Pokud čas neznáš, napiš „nevíme“ a doplň, jak tomu příště zabráníš. Neznámý čas je užitečný signál: buď chybí monitoring, logy, nebo dohoda, kdo zapisuje průběh incidentu.
+
+Interpretace patří až pod časovou osu. Například:
+
+- Fakt: „Webhook platební brány vracel chybu 500 od 09:14 do 09:47.“
+- Interpretace: „Chyběla izolace chyby, takže selhání plateb blokovalo i zobrazení stavu objednávky.“
+
+Tohle oddělení chrání tým před kouzelnou větou „asi to bylo tím“. Asi je dobré slovo pro počasí, ne pro incident.
+
+### EH.3 Dopad popiš zákaznickým jazykem
+
+Technický popis je důležitý, ale samotný nestačí. „Redis connection timeout“ je informace pro tým. Zákaznický dopad zní jinak: „Část uživatelů nemohla dokončit přihlášení a viděla chybovou stránku.“
+
+Do postmortemu napiš:
+
+- kolika zákazníků nebo účtů se incident dotkl,
+- které hlavní akce nefungovaly,
+- jak dlouho dopad trval,
+- jestli došlo ke ztrátě dat, zpoždění dat nebo jen k nedostupnosti,
+- jestli zákazník musel něco opakovat ručně,
+- jaké kompenzace nebo follow-upy jsou potřeba.
+
+Pokud přesný počet neznáš, napiš interval nebo kategorii dopadu. Například „méně než 10 účtů“, „všichni uživatelé administrace“, „jen nové registrace“, „pouze exporty nad 50 MB“. Mlžení škodí víc než přiznaná nejistota.
+
+Privacy-first pohled je tady zásadní: při vyhodnocování dopadu nepřekopíruj do postmortemu osobní údaje, celé e-maily, API tokeny, části produkčních payloadů ani screenshoty s klientskými daty. Postmortem má vysvětlit incident, ne se stát druhým incidentem v PDF.
+
+### EH.4 Kořenová příčina bývá nudnější než drama
+
+Kořenová příčina není vždy jeden řádek kódu. Často je to kombinace techniky, procesu a předpokladů.
+
+Příklad:
+
+- Technická příčina: nová migrace změnila index v databázi.
+- Procesní příčina: migrace neproběhla na kopii produkční velikosti dat.
+- Detekční příčina: alert hlídal jen dostupnost homepage, ne pomalé dotazy v administraci.
+- Komunikační příčina: zákaznický support nevěděl, že se problém řeší, a odpovídal obecně.
+
+Jedna věta „chyba v migraci“ je málo. Lepší zápis:
+
+> Incident způsobila migrace databázového indexu, která byla otestovaná na malém datasetu, ale ne na produkčním objemu. Monitoring hlídal dostupnost aplikace, ne latenci kritického administračního dotazu, takže problém zachytil až zákazník.
+
+Takový popis už vede ke konkrétním akcím: testovat migrace na realistických datech, přidat metriky kritických dotazů, upravit release checklist a informovat support při rizikových změnách.
+
+### EH.5 Akční kroky musí mít vlastníka a datum
+
+Postmortem bez akčních kroků je jen kronika bolesti. Každé zlepšení musí být malé, ověřitelné a přiřazené.
+
+Špatně:
+
+- Zlepšit monitoring.
+- Lépe testovat migrace.
+- Více komunikovat.
+
+Lépe:
+
+- Přidat alert na p95 latenci endpointu `/admin/orders` nad 800 ms po dobu 5 minut. Vlastník: vývoj. Termín: pátek.
+- Doplnit release checklist o ověření migrací na anonymizované kopii produkční velikosti. Vlastník: tech lead. Termín: příští release.
+- Přidat incident update šablonu do interní znalostní báze. Vlastník: support. Termín: zítra.
+
+Akčních kroků nemusí být mnoho. Tři dobré změny jsou lepší než patnáct slibů, které skončí v backlogovém sklepení vedle nápadu na „nový dashboard“. Priorita má jít podle dopadu a opakovatelnosti, ne podle toho, co se nejlépe prezentuje na meetingu.
+
+### EH.6 Co sdílet veřejně a co interně
+
+U B2B SaaS a služeb je dobré rozlišit dvě verze postmortemu.
+
+Interní verze obsahuje technické detaily, časovou osu, rozhodnutí, konkrétní vlastníky a procesní poučení. Externí verze pro zákazníky má být kratší, srozumitelná a bez citlivých informací.
+
+Externí shrnutí může obsahovat:
+
+- co se stalo,
+- koho se to dotklo,
+- kdy problém začal a skončil,
+- co bylo uděláno pro obnovení služby,
+- jestli byla ohrožena data,
+- jaké preventivní kroky už běží,
+- kontakt pro dotazy.
+
+Externí shrnutí nemá obsahovat interní IP adresy, přesné názvy privátních služeb, stack trace, osobní údaje, přístupy, dodavatelské tajnosti ani pasivně-agresivní věty o tom, že „problém způsobil partner“. Zákazník chce jistotu a jasný další krok, ne zákulisní drbárnu s technickou omáčkou.
+
+### EH.7 Privacy-first pravidla pro postmortem
+
+Incidenty často vznikají ve stresu, a stres miluje kopírování všeho všude. Nastav si proto pravidla předem.
+
+- Do incident kanálu patří jen nezbytná data.
+- Screenshoty se anonymizují, pokud obsahují zákaznické údaje.
+- Logy se sdílí jako výřez, ne jako celý dump produkce.
+- Přístupy vytvořené kvůli incidentu mají expiraci.
+- Postmortem neobsahuje tokeny, session ID, celé e-mailové adresy ani osobní poznámky o zákaznících.
+- Pokud incident souvisí s osobními údaji, právní posouzení se řeší jako samostatný krok, ne jako poznámka pod čarou.
+- Po uzavření se uklidí dočasné exporty, sdílené soubory a diagnostické kopie.
+
+Evropský privacy-first provoz se nepozná podle toho, že nikdy nemá problém. Pozná se podle toho, že i při problému drží hranice: sbírá minimum, sdílí minimum, vysvětluje maximum.
+
+### EH.8 Šablona postmortemu
+
+Použij jednoduchý formát, který tým zvládne vyplnit do 30–45 minut.
+
+```markdown
+# Postmortem: [název incidentu]
+
+Datum:
+Časová zóna:
+Vlastník postmortemu:
+Závažnost:
+
+## Shrnutí
+
+Jedna až tři věty lidským jazykem.
+
+## Dopad
+
+- Dotčené části služby:
+- Dotčení zákazníci nebo účty:
+- Délka dopadu:
+- Dopad na data:
+- Potřebný follow-up:
+
+## Časová osa
+
+- HH:MM — první příznak:
+- HH:MM — detekce:
+- HH:MM — triage:
+- HH:MM — mitigace:
+- HH:MM — oprava:
+- HH:MM — zákaznický update:
+- HH:MM — ověření normálního stavu:
+
+## Příčiny
+
+- Technická příčina:
+- Procesní příčina:
+- Detekční mezera:
+- Komunikační mezera:
+
+## Co fungovalo
+
+-
+
+## Co nefungovalo
+
+-
+
+## Akční kroky
+
+- [ ] Akce — vlastník — termín — jak ověříme hotovo
+
+## Privacy-first kontrola
+
+- Byla ohrožena osobní data?
+- Byly sdíleny dočasné exporty nebo logy?
+- Co se musí smazat nebo omezit?
+```
+
+### EH.9 Checklist: postmortem, které něco změní
+
+- [ ] Postmortem proběhne krátce po incidentu, dokud si tým pamatuje fakta.
+- [ ] Časová osa odděluje fakta od interpretací.
+- [ ] Dopad je popsaný zákaznickým jazykem, ne jen technickými chybami.
+- [ ] Kořenová příčina zahrnuje techniku, proces, monitoring i komunikaci.
+- [ ] Akční kroky mají vlastníka, termín a způsob ověření.
+- [ ] Tým nehledá viníka, ale opravuje systémové slabiny.
+- [ ] Externí shrnutí je srozumitelné a neobsahuje citlivé interní detaily.
+- [ ] Do postmortemu se nekopírují osobní údaje, tokeny ani celé produkční payloady.
+- [ ] Dočasná data, přístupy a diagnostické exporty se po uzavření uklidí.
+- [ ] Poučení se promítne do checklistů, monitoringu, testů nebo dokumentace.
+
+*Codyho komentář:* Incident bez postmortemu je draze zaplacená lekce, ze které sis nevzal poznámky. A jestli už platíš školné produkcí, aspoň si odnes sešit.
+
 ## Pracovní log
+
+- 2026-09-03 12:00 UTC — Doplněna příloha EH o postmortemech po incidentech: bezpečný rozbor bez hledání viníka, přesná časová osa, zákaznický popis dopadu, hledání systémových příčin, akční kroky s vlastníkem a termínem, veřejné shrnutí, privacy-first pravidla, šablona a checklist.
 
 - 2026-09-03 11:00 UTC — Doplněna příloha EG o eskalacích podpory: úrovně závažnosti, první triage, jasné vlastnictví, předatelné eskalační zprávy, zákaznická komunikace, privacy-first pravidla pro podpůrná data, post-eskalační review, šablona karty a checklist.
 
