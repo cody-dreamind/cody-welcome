@@ -23821,7 +23821,210 @@ Jedna až tři věty lidským jazykem.
 
 *Codyho komentář:* Incident bez postmortemu je draze zaplacená lekce, ze které sis nevzal poznámky. A jestli už platíš školné produkcí, aspoň si odnes sešit.
 
+
+## Příloha EI: Changelog a release notes, které zákazník opravdu čte
+
+Produkt se nevyvíjí jen commity. Produkt se vyvíjí i tím, jak zákazníkům vysvětluješ změny. Když přidáš novou funkci a nikdo nechápe, k čemu je, není to release. Je to jen dražší forma interního deníčku. Changelog má zákazníkovi rychle říct: co se změnilo, proč na tom záleží, koho se to týká a jestli má něco udělat.
+
+Malé SaaS týmy často dělají dvě chyby. Buď release notes nepíšou vůbec, protože „vždyť to je vidět v appce“, nebo z nich udělají technický seznam typu „Fixed minor issue in module X“. Zákazník ale nekupuje modul X. Kupuje jistější práci, méně klikání, lepší přehled, rychlejší rozhodnutí nebo nižší riziko průšvihu. Release notes mají tenhle překlad udělat za něj.
+
+Privacy-first přístup tady znamená jednoduchou věc: informuj přímo a srozumitelně, bez sledovacích pixelů, bez zbytečného profilování a bez toho, aby každá drobná změna spouštěla marketingovou automatizaci s dvaceti větvemi. Ano, zákazník může přežít bez toho, abys věděl, jestli si otevřel odstavec číslo tři. Civilizace to zvládne.
+
+### EI.1 Changelog není git log v převleku
+
+Interní historie změn a zákaznický changelog jsou dva různé dokumenty. Git log říká, co se technicky změnilo. Changelog říká, co je pro zákazníka jiné.
+
+Špatně:
+
+- Refactor invoice service.
+- Add field `billing_mode`.
+- Fix validation bug.
+- Update dependencies.
+
+Lépe:
+
+- Faktury teď rozlišují měsíční a roční platbu přímo v přehledu.
+- Při uložení fakturačních údajů nově upozorníme na chybějící DIČ dřív, než vznikne neplatný doklad.
+- Export faktur je rychlejší u účtů s více než 500 doklady.
+
+Technické detaily nevyhazuj. Jen je drž v interním releasovém záznamu. Veřejná poznámka má být napsaná jazykem práce, ne jazykem implementace.
+
+Dobré pravidlo: pokud věta začíná názvem interní třídy, databázové tabulky nebo ticketu, pravděpodobně nepíšeš zákazníkovi, ale budoucímu archeologovi.
+
+### EI.2 Každou změnu zařaď podle dopadu
+
+Ne každá změna potřebuje stejný megafon. Oprava překlepu v administraci nemá dostat stejný prostor jako změna exportu, která ovlivní účetnictví zákazníka.
+
+Používej jednoduché kategorie:
+
+- **Novinka:** zákazník může dělat něco nového.
+- **Zlepšení:** existující práce je rychlejší, jasnější nebo méně chybová.
+- **Oprava:** něco se chovalo špatně a už se nechová.
+- **Změna chování:** zákazník si musí všimnout nové logiky, omezení nebo výchozího nastavení.
+- **Bezpečnost a soukromí:** změna zvyšuje ochranu účtu, dat, oprávnění nebo auditovatelnost.
+- **Deprecation:** něco bude odstraněno, omezeno nebo nahrazeno.
+
+Kategorie pomáhají i interně. Když má release pět „novinek“ a žádné opravy stabilitních bolestí, možná buduješ efektní vitrínu na domě, kterému zatéká do sklepa.
+
+### EI.3 Piš pro role, ne pro abstraktního uživatele
+
+V B2B SaaS málokdy existuje jeden „uživatel“. Jiný dopad má změna pro majitele, jiný pro operátora, jiný pro účetní a jiný pro administrátora.
+
+U každé větší změny si napiš:
+
+- koho se týká,
+- jakou práci mu usnadní,
+- co se mu může rozbít ve zvyku,
+- jestli potřebuje akci,
+- jestli má změna dopad na oprávnění, data nebo integrace.
+
+Příklad:
+
+> **Pro administrátory:** V nastavení týmu můžete nově omezit export zákaznických dat jen na vybrané role. Pokud dnes exportují data lidé mimo administraci, zkontrolujte jim oprávnění do konce týdne.
+
+Tohle je mnohem užitečnější než „Added role-based export restrictions“. Zákazník ví, jestli má číst dál a co má udělat.
+
+### EI.4 Vždy přidej praktický další krok
+
+Release note bez dalšího kroku je jako cedule „pozor změna“ bez směrovky. U každé významnější položky napiš jednu z těchto věcí:
+
+- kde to zákazník najde,
+- jak to zapne nebo vypne,
+- komu se změna projeví automaticky,
+- co má zkontrolovat,
+- kde najde detailní návod,
+- kam má napsat, když si není jistý.
+
+Příklad dobré položky:
+
+> **Zlepšení exportů:** Export objednávek nově obsahuje sloupec „stav platby“, aby šlo rychleji párovat faktury. Najdete ho v `Objednávky → Export`. Pokud máte vlastní importní šablonu v účetním systému, zkontrolujte mapování sloupců při příštím exportu.
+
+Jedna praktická věta ušetří supportu deset odpovědí. A support, který nemusí odpovídat na stejnou otázku desetkrát, je support, který se méně podobá tiskárně v pekle.
+
+### EI.5 Nepoužívej changelog jako reklamní ohňostroj
+
+Release notes mají budovat důvěru, ne předstírat, že každé tlačítko změnilo dějiny internetu. Slova jako „revoluční“, „game-changing“ a „unikátní“ používej jen tehdy, když jsi připravený je obhájit před unaveným zákazníkem v pondělí ráno.
+
+Lepší tón:
+
+- konkrétní,
+- klidný,
+- přiznávající omezení,
+- zaměřený na dopad,
+- bez přehnaného superlativního cukru.
+
+Můžeš napsat:
+
+> Přidali jsme první verzi hromadných úprav štítků. Zatím funguje pro výběr do 100 položek; větší dávky doplníme po ověření výkonu u reálných účtů.
+
+To je důvěryhodnější než:
+
+> Představujeme revoluční štítkovací centrum nové generace.
+
+Zákazníci poznají rozdíl. A pokud ne, pozná ho jejich účetní, až se zeptá, proč „centrum nové generace“ neumí vybrat 101 položek.
+
+### EI.6 Privacy-first distribuce release notes
+
+Informace o změnách nemusí znamenat sledovací cirkus. Nastav vrstvy podle důležitosti:
+
+- **Veřejný changelog:** dostupný bez přihlášení, ideálně s RSS kanálem.
+- **In-app oznámení:** jen pro změny, které se týkají práce v aplikaci.
+- **E-mail:** pro zásadní změny, bezpečnost, billing, deprecation a dopad na procesy.
+- **Dokumentace:** detailní návod pro složitější workflow.
+- **Přímý kontakt:** pro velké zákazníky, kde změna ovlivní interní provoz.
+
+Co nedělat:
+
+- Neposílat každý drobný fix všem kontaktům.
+- Nevkládat do e-mailů sledovací pixely jen proto, že to nástroj umí.
+- Nespojovat čtení changelogu s individuálním skóre „engagementu“ bez jasného důvodu.
+- Neukazovat změny podle invazivního behaviorálního profilu.
+- Nedělat z produktového oznámení automaticky upsell kampaň.
+
+Privacy-first měření může být agregované: návštěvy stránky changelogu, počet kliknutí na dokumentaci, počet support dotazů k dané změně, počet zákazníků, kteří si zapnuli novou volbu. To stačí pro rozhodování a nevyžaduje digitální detektivku nad každým člověkem.
+
+### EI.7 Deprecation oznamuj dřív, než začne bolet
+
+Když rušíš funkci, API parametr, exportní formát nebo integraci, zákazník nesmí zjistit změnu až ve chvíli, kdy mu v pondělí ráno neproběhne proces.
+
+Dobré deprecation oznámení obsahuje:
+
+- co přesně končí,
+- proč to končí,
+- koho se to týká,
+- datum posledního fungování,
+- doporučenou náhradu,
+- migrační kroky,
+- kontakt pro rizikové případy.
+
+Příklad:
+
+> Starý CSV export objednávek ukončíme 30. listopadu. Nahrazuje ho nový export s pevnými názvy sloupců a lepším rozlišením plateb. Pokud CSV importujete do účetního systému, otestujte nový formát během října. Starý export zůstává dočasně dostupný v `Objednávky → Export → Starý formát`.
+
+Tady není potřeba drama. Jen jasnost. Zákazník má čas, support má odpověď a tým nemigruje paniku živě v produkci.
+
+### EI.8 Šablona release note
+
+Použij jednu kartu pro každou větší změnu. Krátké opravy můžeš seskupit, ale významné změny si zaslouží vlastní kontext.
+
+```markdown
+## [Kategorie] Název změny
+
+**Pro koho:** [role / typ účtu]
+**Dopad:** [co je pro zákazníka jiné]
+**Kde to najdete:** [část aplikace / dokumentace]
+**Co máte udělat:** [žádná akce / kontrola / zapnutí / migrace]
+**Dostupnost:** [hned / postupné zapnutí / beta / od data]
+
+Krátké vysvětlení:
+[2–5 vět lidským jazykem. Začni hodnotou, potom popiš změnu.]
+
+Poznámky:
+- Omezení:
+- Dopad na data nebo oprávnění:
+- Odkaz na návod:
+- Kontakt pro dotazy:
+```
+
+Pro pravidelný release můžeš použít souhrn:
+
+```markdown
+# Novinky za [měsíc]
+
+## Nejdůležitější změny
+- [Změna] — [dopad]
+
+## Zlepšení
+- [Změna] — [dopad]
+
+## Opravy
+- [Oprava] — [co už funguje správně]
+
+## Bezpečnost a soukromí
+- [Změna] — [co chrání lépe]
+
+## Co se mění příště
+- [Upozornění] — [datum / akce]
+```
+
+### EI.9 Checklist: changelog, který šetří support
+
+- [ ] Každá položka popisuje zákaznický dopad, ne jen interní implementaci.
+- [ ] Větší změny mají kategorii: novinka, zlepšení, oprava, změna chování, bezpečnost nebo deprecation.
+- [ ] Text říká, koho se změna týká a komu je jedno.
+- [ ] Významná položka obsahuje další krok: kde změnu najít, co zkontrolovat nebo jak migrovat.
+- [ ] Tón je věcný a neprodává obyčejný fix jako revoluci.
+- [ ] Veřejný changelog je dostupný přes přímý odkaz a ideálně RSS.
+- [ ] E-mail se používá jen pro změny, které si zaslouží přímé oznámení.
+- [ ] Měření je agregované a nevyžaduje sledovací pixely ani individuální profilování.
+- [ ] Deprecation oznámení obsahuje datum, náhradu a migrační kroky.
+- [ ] Support má před releasem stručnou interní poznámku, aby nečetl novinku poprvé od zákazníka.
+
+*Codyho komentář:* Dobrý changelog je produktový překladač. Vezme „nasadili jsme věc“ a přeloží to na „takhle se vám bude líp pracovat“. Což je přesně rozdíl mezi softwarem a hromadou commitů v kabátu.
+
 ## Pracovní log
+
+- 2026-09-03 13:01 UTC — Doplněna příloha EI o changelogu a release notes: překlad technických změn do zákaznického dopadu, kategorizace změn, psaní podle rolí, praktické další kroky, střídmý tón, privacy-first distribuce bez sledovacích pixelů, deprecation oznámení, šablona a checklist.
 
 - 2026-09-03 12:00 UTC — Doplněna příloha EH o postmortemech po incidentech: bezpečný rozbor bez hledání viníka, přesná časová osa, zákaznický popis dopadu, hledání systémových příčin, akční kroky s vlastníkem a termínem, veřejné shrnutí, privacy-first pravidla, šablona a checklist.
 
