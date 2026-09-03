@@ -22583,7 +22583,177 @@ Tyto metriky můžeš držet agregovaně. Nepotřebuješ z každého kontaktu d�
 - [ ] Má každý export, integrace a automatizace vlastníka?
 
 
+## Příloha EB: Obchodní follow-up bez nátlaku a bez stalkingu
+
+Follow-up je jedna z nejvíc podceňovaných částí prodeje. Ne proto, že by lidé neuměli poslat e-mail. Protože neumí navázat tak, aby to zákazník vnímal jako pomoc, ne jako připomínku cizího obchodního plánu. Malý SaaS nebo webový tým nepotřebuje agresivní sekvence, falešnou urgenci ani sledování každého otevření e-mailu. Potřebuje jasný důvod, správný okamžik, konkrétní další krok a respekt k tomu, že na druhé straně sedí člověk s vlastním kalendářem, prioritami a právem říct „teď ne“.
+
+Dobře vedený follow-up má tři cíle: udržet kontext, odstranit tření a pomoct k rozhodnutí. Když nesplňuje ani jeden, je to jen hluk. A hluk je drahý — stojí reputaci, energii týmu a někdy i vztah, který mohl dozrát později.
+
+### EB.1 Follow-up začíná už během první konverzace
+
+Nejhorší follow-up je ten, který se snaží zachránit špatně ukončenou schůzku. Pokud hovor končí větou „nějak se ozveme“, právě sis vyrobil mlhu. A mlha se v CRM tváří jako pipeline, ale ve skutečnosti je to jen počasí.
+
+Na konci každé obchodní konverzace si potvrď:
+
+- Jaký problém zákazník řeší.
+- Jestli dává smysl pokračovat.
+- Kdo další musí být u rozhodnutí.
+- Jaký konkrétní materiál, návrh nebo odpověď máš dodat.
+- Kdy a jak navážeš.
+
+Praktická věta:
+
+> „Abychom to nenechali viset ve vzduchu: pošlu vám do pátku návrh pilotu se dvěma variantami rozsahu. Pokud bude dávat smysl, navážeme v úterý krátkým hovorem a rozhodneme, jestli jdeme do přípravy. Sedí?“
+
+Tahle věta není manipulace. Je to dohoda. Zákazník ví, co přijde, kdy to přijde a proč. Ty víš, co máš udělat. CRM ví, co má hlídat. Všichni jsou spokojení, dokonce i kalendář, a ten bývá protivný tvor.
+
+### EB.2 Každý follow-up musí nést novou hodnotu
+
+E-mail „jen připomínám“ je nouzové řešení, ne strategie. Když navazuješ, přidej něco, co zákazníkovi pomůže rozhodnout se:
+
+- shrnutí jeho problému vlastními slovy,
+- odpověď na otázku, která zůstala otevřená,
+- návrh dalšího kroku,
+- jednoduché srovnání možností,
+- relevantní příklad použití,
+- odkaz na dokumentaci, ceník, checklist nebo případovou studii,
+- férové vysvětlení rizika, limitu nebo kompromisu.
+
+Špatně:
+
+> „Dobrý den, připomínám se k naší nabídce. Budu rád za reakci.“
+
+Lépe:
+
+> „Dobrý den, navazuji na naši debatu o ručním třídění poptávek. Připravil jsem krátké srovnání dvou variant pilotu: rychlé zavedení formuláře s interním přehledem, nebo širší pilot s napojením na CRM. Doporučil bych začít první variantou, protože ověří hodnotu bez zbytečné integrace. Pokud chcete, projdeme to v úterý za 20 minut.“
+
+Rozdíl je jednoduchý: první e-mail žádá o pozornost, druhý snižuje námahu rozhodování.
+
+### EB.3 Rytmus má být čitelný a konečný
+
+Automatické sekvence často selhávají tím, že nemají konec. Pošlou sedm zpráv, pak „poslední zprávu“, potom „opravdu poslední zprávu“ a nakonec ještě jednu, která se tváří jako rozchod. To není follow-up. To je telenovela s horším copywritingem.
+
+Pro malý B2B tým stačí jednoduchý rytmus:
+
+1. **Shrnutí do 24 hodin** — potvrzení kontextu, slíbené materiály a další krok.
+2. **První navázání podle dohody** — obvykle za 2 až 5 pracovních dnů, pokud zákazník nereaguje.
+3. **Druhé navázání s novou hodnotou** — krátké doplnění, příklad, odpověď na námitku nebo jednodušší alternativa.
+4. **Uzavírací zpráva** — férové ukončení aktivního follow-upu a možnost vrátit se později.
+
+Uzavírací zpráva může znít:
+
+> „Nechci vás zahlcovat, takže to za mě teď uzavřu. Pokud se k tématu poptávkového procesu vrátíte, stačí odpovědět na tenhle e-mail a navážeme. Poznámku si nechám u nás jako odloženou do dalšího kvartálu, pokud s tím souhlasíte.“
+
+Tahle zpráva je důležitá i privacy-first: jasně říká, co s kontextem uděláš. Pokud zákazník nechce, aby sis ho nechal v odložených příležitostech, má mít jednoduchou možnost to říct.
+
+### EB.4 Bez sledovacích pixelů se dá prodávat normálně
+
+Otevření e-mailu není souhlas, zájem ani nákupní úmysl. Může znamenat, že mail otevřel náhled, bezpečnostní proxy, asistentka, mobilní klient nebo člověk, který hledal tlačítko „smazat“. Stavět follow-up na mikrosledování otevření je nepřesné a zbytečně invazivní.
+
+Privacy-first follow-up měří obchodní události, ne tajné signály:
+
+- zákazník odpověděl,
+- domluvil se další krok,
+- požádal o úpravu nabídky,
+- poslal podklady,
+- zapojil dalšího člověka,
+- rozhodl se pokračovat,
+- rozhodl se nepokračovat,
+- požádal o pozdější návrat.
+
+Tohle jsou signály, podle kterých může tým jednat. Nepotřebuje vědět, jestli někdo otevřel e-mail třikrát v neděli večer. Potřebuje vědět, jestli existuje dohoda, překážka nebo rozhodnutí.
+
+Praktické pravidlo: pokud by ses styděl zákazníkovi říct, že daný signál sbíráš, pravděpodobně ho sbírat nemáš. Ano, je to nepříjemně jednoduché. Proto funguje.
+
+### EB.5 Námitky ukládej jako učební materiál, ne jako munici
+
+Každý follow-up odhaluje námitky. Malý tým by je neměl schovávat jen v inboxu. Z námitky může vzniknout lepší FAQ, jasnější pricing, přesnější landing page nebo produktové rozhodnutí.
+
+Rozděl námitky do kategorií:
+
+- **Hodnota** — zákazník nechápe přínos nebo prioritu.
+- **Cena** — nevidí návratnost, má jiný rozpočet nebo srovnává nesrovnatelné.
+- **Riziko** — bojí se migrace, bezpečnosti, změny procesu nebo závislosti na dodavateli.
+- **Čas** — problém existuje, ale není teď na řadě.
+- **Fit** — zákazník má jiný segment, potřebu nebo zralost, než pro kterou produkt stavíš.
+
+U každé opakované námitky si napiš odpověď, která pomáhá rozhodnout, ne tlačit. Například u ceny nepíš jen „jsme levnější než interní vývoj“. Ukaž, co přesně je v ceně, jaké riziko odpadá a kde jsou hranice řešení. Férová odpověď může klidně říct: „Pokud potřebujete plně custom workflow pro pět oddělení, náš pilot není správný první krok.“ Důvěra někdy vzniká právě tím, že neprodáš za každou cenu.
+
+### EB.6 Follow-up patří do CRM, ale s krátkou pamětí
+
+Po každém navázání ulož jen to, co bude budoucímu týmu užitečné:
+
+- datum kontaktu,
+- stručný obsah zprávy,
+- slíbený další krok,
+- reakci nebo nereakci,
+- důvod odložení či ztráty,
+- datum kontroly nebo archivace.
+
+Do CRM nepatří kopie celé osobní korespondence, pokud k tomu nemáš jasný důvod. Nepatří tam ani domněnky typu „asi nemá rozpočet, působil nervózně“. Piš fakta a obchodní kontext. Když potřebuješ citovat část e-mailu, cituj jen nutný kus a bez citlivých detailů.
+
+Privacy-first minimum pro follow-up:
+
+- Nepoužívej osobní data v URL parametrech kampaní.
+- Neposílej zákaznický kontext do nástrojů, které nepotřebují znát obsah vztahu.
+- U exportů leadů nastav vlastníka a datum smazání.
+- Odložené příležitosti pravidelně archivuj nebo maž.
+- Pokud člověk řekne „nepište mi“, respektuj to napříč nástroji, ne jen v jednom seznamu.
+
+### EB.7 Šablona follow-up karty
+
+```markdown
+## Follow-up karta: [firma / příležitost]
+
+### Kontext
+- Poslední kontakt:
+- Řešený problém:
+- Slíbená hodnota:
+- Kdo rozhoduje:
+
+### Dohoda
+- Co jsme slíbili dodat:
+- Do kdy:
+- Jaký je navržený další krok:
+- Kdy aktivní follow-up končí:
+
+### Zprávy
+- Shrnutí po schůzce:
+- První navázání:
+- Druhé navázání:
+- Uzavírací zpráva:
+
+### Signály
+- Odpověď / bez odpovědi:
+- Námitka:
+- Další účastník:
+- Rozhodnutí:
+
+### Data
+- Jaká data držíme:
+- Proč je držíme:
+- Kde jsou uložena:
+- Datum archivace nebo výmazu:
+```
+
+### EB.8 Checklist: follow-up bez nátlaku
+
+- [ ] Končí každá obchodní konverzace jasnou dohodou o dalším kroku?
+- [ ] Nese každý follow-up novou hodnotu nebo snižuje námahu rozhodnutí?
+- [ ] Má follow-up sekvence konec a čitelný rytmus?
+- [ ] Nepoužíváme sledovací pixely ani mikrosignály jako náhradu za skutečný zájem?
+- [ ] Ukládáme námitky tak, aby pomáhaly zlepšit produkt, web nebo nabídku?
+- [ ] Zapisujeme do CRM fakta, ne osobní domněnky?
+- [ ] Respektujeme odmítnutí, odhlášení a žádosti o nekontaktování napříč nástroji?
+- [ ] Má každá odložená příležitost datum kontroly, archivace nebo výmazu?
+
+Follow-up není o tom být hlasitější než konkurence. Je o tom být užitečnější, konkrétnější a čitelnější. Když zákazník cítí, že mu pomáháš rozhodnout se — i kdyby rozhodnutí bylo „teď ne“ — buduješ vztah, který může přežít jeden ztracený deal. A to je v B2B často cennější než agresivní sekvence, která možná vynutí odpověď, ale spálí důvěru.
+
+*Codyho komentář:* Nejlepší follow-up je jako dobrý číšník. Přijde ve správný moment, ví, proč přišel, nepřerušuje každé tři minuty a když řekneš „děkuju, zatím nic“, nezaloží si na tebe sedmidílnou automatizovanou kampaň.
+
+
 ## Pracovní log
+- 2026-09-03 21:00 UTC — Doplněna příloha EB o obchodním follow-upu bez nátlaku a stalkingu: jasná dohoda po schůzce, nová hodnota v navázání, konečný rytmus, prodej bez sledovacích pixelů, práce s námitkami, krátká CRM paměť, follow-up karta a privacy-first checklist.
 - 2026-09-03 20:00 UTC — Doplněna příloha EA o jednoduchém CRM bez datové skládky: definice vztahů, minimální pole, realistická pipeline, kvalitní poznámky, úklidový rytmus, agregované vyhodnocování a privacy-first checklist.
 - 2026-09-03 05:01 UTC — Doplněn drobný copy detail do přílohy DZ: produktové e-maily mají mít čitelnou plain-text verzi, aby zůstaly použitelné i bez obrázků a složitého HTML.
 - 2026-09-03 04:00 UTC — Doplněna příloha DZ o produktových e-mailech bez spamového divadla: kategorizace transakčních, produktových, vztahových a marketingových zpráv, pravidla automatů, onboardingové kroky, preference centrum, privacy-first měření, e-mailová identita, šablona e-mailové karty a checklist.
