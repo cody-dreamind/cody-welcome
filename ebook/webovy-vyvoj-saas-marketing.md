@@ -22752,7 +22752,193 @@ Follow-up není o tom být hlasitější než konkurence. Je o tom být užiteč
 *Codyho komentář:* Nejlepší follow-up je jako dobrý číšník. Přijde ve správný moment, ví, proč přišel, nepřerušuje každé tři minuty a když řekneš „děkuju, zatím nic“, nezaloží si na tebe sedmidílnou automatizovanou kampaň.
 
 
+## Příloha EC: Produktové demo, které prodává hodnotu místo klikací prohlídky
+
+Demo je nebezpečný formát. Na papíře vypadá jednoduše: ukážeš produkt, zákazník pochopí hodnotu a všichni odcházejí šťastní jako z reklamy na týmovou spolupráci. V praxi se ale demo často změní v katalog obrazovek, funkcí, nastavení a drobných vychytávek, které zajímají hlavně člověka, který je stavěl. Zákazník mezitím v hlavě řeší úplně jiné otázky: „Vyřeší to náš problém? Kolik práce bude zavedení? Kdo to bude používat? Co se stane s daty? A proč bych měl věřit zrovna vám?“
+
+Dobré demo není prohlídka aplikace. Je to řízený rozhovor o změně, kterou zákazník potřebuje udělat. Produkt je důkaz, ne hlavní hrdina. Hlavní hrdina je zákazník a jeho cesta z aktuálního chaosu do lepšího stavu. Ano, bolí to ego produktu. Ale produkt, který unese nebýt středem vesmíru, má větší šanci vydělávat.
+
+### EC.1 Demo začíná před hovorem
+
+Nejlepší demo se připravuje z kontextu, který už máš: poptávkový formulář, discovery poznámky, předchozí e-maily, typ firmy, role účastníků a důvod, proč se vůbec chtějí dívat. Pokud přijdeš na demo s univerzální prezentací pro „všechny firmy“, zákazník rychle pozná, že jen hledáš někoho, komu odříkáš scénář.
+
+Před demem si napiš krátkou kartu:
+
+- Kdo je na hovoru a jakou má roli v rozhodnutí.
+- Jaký problém zákazník popsal vlastními slovy.
+- Jaký výsledek by mu stál za změnu nástroje nebo procesu.
+- Jaké má pravděpodobné námitky: cena, migrace, bezpečnost, čas týmu, integrace.
+- Které tři části produktu jsou relevantní právě pro něj.
+- Co po demu potřebuje rozhodnout.
+
+Když nevíš, co ukázat, nepřidávej víc funkcí. Zeptej se předem. Krátká věta typu „Aby demo nebylo obecné, pošlete mi prosím dvě situace, které dnes řešíte nejčastěji“ udělá víc než třicet slidů o vizi platformy.
+
+### EC.2 Začni scénářem zákazníka, ne menu položkami
+
+Špatné demo začíná větou: „Tady nahoře máme dashboard, vlevo menu, tady nastavení a tady uživatelé.“ To je jako kdyby kuchař místo večeře vysvětloval, kde má šuplíky. Zákazník nepotřebuje mapu kuchyně. Potřebuje vědět, že dostane jídlo včas a nebude po něm uklízet požár.
+
+Lepší začátek:
+
+> „Podle toho, co jste popisovali, dnes ztrácíte požadavky mezi e-maily a tým nevidí, co má prioritu. Ukážu vám tedy jeden typický průchod: klient zadá požadavek, koordinátor ho zařadí, technik doplní stav a manažer na konci týdne vidí přehled bez ručního reportu.“
+
+Tím zákazníkovi říkáš tři důležité věci:
+
+- rozumíš jeho situaci,
+- nebudeš ukazovat zbytečnosti,
+- každá obrazovka má důvod.
+
+Demo stav podle pracovního příběhu. Například:
+
+1. **Spouštěč:** Co se stane v reálném světě.
+2. **První akce:** Kdo udělá první krok v systému.
+3. **Koordinace:** Jak se práce posune mezi lidmi.
+4. **Kontrola:** Jak tým pozná stav a rizika.
+5. **Výsledek:** Co je na konci jednodušší, rychlejší nebo bezpečnější.
+
+Tahle struktura funguje pro SaaS, interní portál i službu kolem webu. Neprodáváš tlačítka. Prodáváš menší tření.
+
+### EC.3 Ukazuj jen tři vrstvy: hodnotu, práci a důvěru
+
+Každé demo by mělo pokrýt tři vrstvy. Když některá chybí, zákazník si ji domyslí. A zákaznická fantazie bývá kreativní hlavně v katastrofických scénářích.
+
+**Vrstva hodnoty:**
+
+- Jaký konkrétní problém se řeší.
+- Jak vypadá lepší stav.
+- Co se zrychlí, zpřehlední nebo zlevní.
+- Která práce zmizí úplně.
+
+**Vrstva práce:**
+
+- Kdo systém používá.
+- Jak často do něj sahá.
+- Co musí tým změnit v procesu.
+- Co je potřeba připravit před spuštěním.
+
+**Vrstva důvěry:**
+
+- Kde jsou data uložená.
+- Kdo má přístup.
+- Jak funguje export nebo odchod.
+- Co se loguje a co záměrně ne.
+- Jak se řeší podpora, incidenty a změny.
+
+Privacy-first demo má důvěru ukazovat normálně, ne jako dodatek po dotazu právníka. Když máš evropský provoz, datovou minimalizaci, rozumné logování a žádné sledovací pixely, řekni to. Ne jako moralizování. Jako praktickou výhodu: méně rizik, méně nejasností, lepší kontrola.
+
+### EC.4 Neodpovídej funkcí na každou námitku
+
+Když zákazník položí otázku, není vždycky potřeba okamžitě otevřít další obrazovku. Někdy se ptá na proces, riziko nebo rozhodovací jistotu. Funkční odpověď může znít přesvědčivě, ale minout skutečnou obavu.
+
+Příklad:
+
+> „Umí to schvalování?“
+
+Průměrná odpověď:
+
+> „Ano, tady je schvalovací modul.“
+
+Lepší odpověď:
+
+> „Záleží, co přesně potřebujete schvalovat. Je to kontrola ceny, právní text, technické řešení, nebo jen interní potvrzení před odesláním klientovi?“
+
+Teprve potom ukazuj funkci. Jinak riskuješ, že předvedeš složitý modul člověku, který potřeboval jen jednoduchý stav „čeká na potvrzení“. Demo není soutěž v tom, kolik toho produkt umí. Je to hledání nejkratší bezpečné cesty k výsledku.
+
+Užitečný postup u námitek:
+
+1. Zopakuj otázku vlastními slovy.
+2. Zeptej se na kontext nebo dopad.
+3. Odpověz krátce.
+4. Ukaž jen relevantní část.
+5. Zapiš, jestli je námitka vyřešená, otevřená nebo blokující.
+
+### EC.5 Demo musí skončit rozhodnutím o dalším kroku
+
+Konec dema je kritický. Když se rozplyne do „ozveme se“, vracíš se do mlhy z předchozí přílohy. Demo má skončit malým rozhodnutím, ne nutně prodejem.
+
+Možné výstupy:
+
+- **Pokračujeme do nabídky:** zákazník chce konkrétní rozsah, cenu a termín.
+- **Potřebujeme technické ověření:** chybí jistota u dat, integrace, migrace nebo bezpečnosti.
+- **Potřebujeme zapojit další lidi:** rozhodnutí závisí na vedení, IT, provozu nebo financích.
+- **Není fit:** produkt neřeší hlavní problém dost dobře.
+- **Později:** problém existuje, ale není priorita.
+
+Praktická závěrečná věta:
+
+> „Dává mi smysl, že hlavní otázka teď není funkce, ale migrace dat a práce týmu v prvním měsíci. Navrhuji další krok: pošlu krátký návrh pilotu, kde bude rozsah, rizika, datové toky a kritéria úspěchu. Ve čtvrtek se rozhodneme, jestli pilot spustíme, nebo téma odložíme. Souhlasí?“
+
+Tohle je prodej bez nátlaku. Zákazník ví, co dostane. Ty víš, co máš dodat. A obchodní pipeline přestane být sbírkou optimistických pocitů.
+
+### EC.6 Demo data nesmí být odpadkový koš osobních údajů
+
+Ukázková data jsou často přehlížené riziko. V demu nikdy nepoužívej reálné zákaznické osobní údaje, interní poznámky, exporty z produkce ani screenshoty, které odhalují víc, než je nutné. „Jen na chvíli“ je přesně ta věta, po které někde vznikne screenshot, záznam hovoru a velmi dlouhý povzdech.
+
+Bezpečnější pravidla:
+
+- Používej syntetická data, která vypadají realisticky, ale nepatří skutečným lidem.
+- Nezobrazuj produkční administraci, pokud to není výslovně domluvené a bezpečné.
+- U anonymizovaných příkladů ověř, že nejdou zpětně přiřadit ke konkrétní firmě nebo osobě.
+- Pokud se demo nahrává, řekni předem proč, kde záznam bude, kdo k němu má přístup a kdy se smaže.
+- Po demu nemaž jen kalendářovou událost; ukliď i sdílené soubory, dočasné účty a poznámky bez dalšího účelu.
+
+Privacy-first demo není pomalejší. Je profesionálnější. Ukazuje, že tým zachází s daty opatrně i ve chvíli, kdy by si mohl říct, že „tohle je jen obchod“. Právě obchodní fáze často rozhoduje, jestli ti zákazník později svěří citlivější procesy.
+
+### EC.7 Šablona demo karty
+
+```markdown
+## Demo karta: [firma / produkt / scénář]
+
+### Kontext
+- Účastníci a role:
+- Popsaný problém:
+- Očekávaný výsledek:
+- Hlavní obavy:
+
+### Scénář dema
+- Spouštěč v reálném světě:
+- První krok uživatele:
+- Koordinace týmu:
+- Kontrola stavu:
+- Výsledek:
+
+### Co ukázat
+- Funkce 1 a proč:
+- Funkce 2 a proč:
+- Funkce 3 a proč:
+- Co záměrně neukazovat:
+
+### Důvěra a data
+- Jaká ukázková data použijeme:
+- Kde běží provoz:
+- Kdo má přístup:
+- Jak funguje export / odchod:
+- Co se po demu smaže nebo archivuje:
+
+### Výsledek dema
+- Rozhodnutí:
+- Otevřené otázky:
+- Další krok:
+- Termín follow-upu:
+```
+
+### EC.8 Checklist: demo bez klikací mlhy
+
+- [ ] Víme předem, kdo je na demu a co potřebuje rozhodnout?
+- [ ] Má demo scénář podle zákaznické situace, ne podle menu aplikace?
+- [ ] Ukazujeme jen části produktu, které souvisí s popsaným problémem?
+- [ ] Vysvětlujeme hodnotu, práci týmu i důvěru v provoz?
+- [ ] Odpovídáme na námitky kontextem, ne automatickým výletem do další funkce?
+- [ ] Používáme bezpečná syntetická nebo dostatečně anonymizovaná data?
+- [ ] Má nahrávání dema jasný souhlas, účel, přístup a dobu uchování?
+- [ ] Končí demo konkrétním dalším krokem, technickým ověřením, odložením nebo férovým „není fit“?
+
+Demo má zákazníkovi ušetřit přemýšlení, ne ho unavit. Když po něm rozumí vlastnímu problému lépe než před ním, vyhráls půlku obchodu. Když navíc ví, že kvůli tomu nemusí obětovat kontrolu nad daty, vyhráváš důvěru. A důvěra je v SaaS lepší konverzní nástroj než jakýkoli blikající badge „AI powered“.
+
+*Codyho komentář:* Demo není maturita z produktu. Nemusíš ukázat všechno, co umíš. Stačí ukázat přesně to, kvůli čemu si zákazník řekne: „Jo, takhle by náš den vypadal líp.“ To je mnohem silnější než hodinový sprint přes nastavení notifikací.
+
+
 ## Pracovní log
+- 2026-09-03 07:01 UTC — Doplněna příloha EC o produktovém demu: příprava podle kontextu zákazníka, scénář místo klikací prohlídky, vrstvy hodnoty/práce/důvěry, práce s námitkami, konkrétní další krok, bezpečná demo data, demo karta a privacy-first checklist.
 - 2026-09-03 21:00 UTC — Doplněna příloha EB o obchodním follow-upu bez nátlaku a stalkingu: jasná dohoda po schůzce, nová hodnota v navázání, konečný rytmus, prodej bez sledovacích pixelů, práce s námitkami, krátká CRM paměť, follow-up karta a privacy-first checklist.
 - 2026-09-03 20:00 UTC — Doplněna příloha EA o jednoduchém CRM bez datové skládky: definice vztahů, minimální pole, realistická pipeline, kvalitní poznámky, úklidový rytmus, agregované vyhodnocování a privacy-first checklist.
 - 2026-09-03 05:01 UTC — Doplněn drobný copy detail do přílohy DZ: produktové e-maily mají mít čitelnou plain-text verzi, aby zůstaly použitelné i bez obrázků a složitého HTML.
