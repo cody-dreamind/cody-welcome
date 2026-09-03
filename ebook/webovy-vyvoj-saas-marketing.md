@@ -22076,9 +22076,204 @@ Dobrý changelog je malá disciplína s velkým dopadem. Učí tým mluvit o vý
 
 *Codyho komentář:* Changelog je produktový deník pro dospělé. Když ho píšeš poctivě, nejde jen o „co jsme změnili“. Jde o důkaz, že produkt má směr a že zákazníci nejsou beta testeři zapomenutí v rohu.
 
+
+---
+
+## Příloha DY: Znalostní báze, která šetří podporu a nezamyká know-how v cizím systému
+
+Znalostní báze není odkladiště textů, které nikdo nečte. Je to provozní vrstva produktu: pomáhá zákazníkům dokončit práci bez čekání na podporu, obchodníkům vysvětlovat hodnotu stejnými slovy a týmu nezodpovídat pořád dokola otázku, kterou už někdo dávno vyřešil. Když je napsaná dobře, snižuje počet ticketů. Když je napsaná špatně, jen vytváří další místo, kde se dá ztratit. Internet už měl dost bludišť, děkujeme.
+
+Privacy-first znalostní báze má ještě jednu výhodu: know-how zůstává pod tvojí kontrolou. Nevisí celé v nástroji, ze kterého nejde rozumně exportovat, a nepotřebuje sledovat každé pohnutí myší návštěvníka jen proto, aby ses dozvěděl, že článek „Jak změnit heslo“ je populární. To je překvapení asi jako pondělí po víkendu.
+
+### DY.1 Piš podle skutečných situací, ne podle menu v aplikaci
+
+Nejčastější chyba dokumentace je struktura podle interní architektury: „Uživatelé“, „Nastavení“, „Integrace“, „Reporty“. To se týmu píše pohodlně, ale zákazník většinou nehledá název obrazovky. Hledá výsledek.
+
+Lepší členění:
+
+- „Jak pozvat kolegu do týmu“ místo „Uživatelé“.
+- „Jak zjistit, odkud přišla poptávka“ místo „Analytika“.
+- „Jak připravit export pro účetní“ místo „Exporty“.
+- „Jak bezpečně ukončit účet zákazníka“ místo „Administrace“.
+
+Každý článek začni větou, která potvrzuje situaci uživatele:
+
+> Tento postup použij, když potřebuješ předat přístup novému kolegovi, ale nechceš mu dávat sdílené heslo.
+
+Tím čtenáři hned řekneš, jestli je na správném místě. Pokud není, nabídni odkaz na lepší článek. Dobrá dokumentace nevyhrává tím, že uživatele udrží co nejdéle. Vyhrává tím, že ho co nejrychleji dostane pryč — s vyřešeným problémem.
+
+### DY.2 Jeden článek má řešit jeden úkol
+
+Článek typu „Kompletní průvodce administrací“ vypadá hodnotně, dokud v něm člověk nehledá jednu konkrétní věc. Pak je to textový escape room. V produktové nápovědě drž články malé a dokončitelné.
+
+Dobrá jednotka článku:
+
+- má jasný cíl,
+- má předpoklady,
+- obsahuje postup krok za krokem,
+- ukazuje výsledek,
+- říká, co dělat, když to nevyjde.
+
+Příklad struktury:
+
+1. Kdy postup použít.
+2. Co musíš mít připravené.
+3. Kroky v produktu.
+4. Jak poznáš, že je hotovo.
+5. Časté chyby.
+6. Související odkazy.
+
+Když potřebuješ vysvětlit širší kontext, odděl ho do průvodce. Operativní článek má být šroubovák, ne celá dílna.
+
+### DY.3 Dokumentace musí mít vlastníka a datum kontroly
+
+Neaktuální nápověda je horší než žádná nápověda, protože působí důvěryhodně a vede špatným směrem. U každého článku proto drž minimální metadata:
+
+- vlastník článku,
+- datum poslední věcné kontroly,
+- oblast produktu,
+- typ čtenáře,
+- stav: návrh, publikováno, vyžaduje kontrolu, archivováno.
+
+Praktické pravidlo: když se mění UI, permission model, pricing, onboarding, export dat nebo integrace, součástí Definition of Done je kontrola související nápovědy. Ne „až bude čas“. Čas nebude. Čas se musí chytit za límec a posadit ke stolu.
+
+Pro malý tým stačí jednoduchá tabulka:
+
+| Článek | Oblast | Vlastník | Poslední kontrola | Stav |
+|---|---|---|---|---|
+| Jak pozvat kolegu | Přístupy | Support | 2026-09-03 | Publikováno |
+| Jak exportovat data | Data | Produkt | 2026-09-03 | Vyžaduje kontrolu |
+
+### DY.4 Hledej podle slov zákazníků
+
+Interní slovník bývá jiný než zákaznický. Tým říká „tenant“, zákazník říká „firma“. Tým říká „credential“, zákazník říká „přístup“. Tým říká „event“, zákazník říká „akce“. Pokud znalostní báze hledá jen podle interních pojmů, selže přesně ve chvíli, kdy má pomoci.
+
+U každého důležitého článku si napiš:
+
+- oficiální název funkce,
+- běžná zákaznická slova,
+- časté překlepy nebo zkratky,
+- otázku, kterou by člověk napsal do vyhledávání.
+
+Příklad:
+
+- Funkce: „Pozvánky členů týmu“.
+- Zákaznická slova: „přidat kolegu“, „nový uživatel“, „poslat přístup“, „pozvat účetní“.
+- Vyhledávací otázka: „Jak přidám kolegu do účtu?“
+
+Pokud máš interní vyhledávání, měř jen agregovaně: nejhledanější dotazy bez ukládání identity hledajícího. Zákazník hledající „jak smazat účet“ nepotřebuje, aby sis z toho udělal dramatický profil jeho duše.
+
+### DY.5 Podpora je nejlepší zdroj backlogu dokumentace
+
+Každý opakovaný ticket je kandidát na článek. Ne každý článek ale musí vzniknout hned. Drž jednoduchý dokumentační backlog se třemi signály:
+
+- kolikrát se otázka objevila,
+- jak moc blokuje zákazníka,
+- jestli odpověď snižuje riziko nebo náklady podpory.
+
+Prioritu mají témata, která:
+
+- brání aktivaci nového zákazníka,
+- souvisí s přístupy, účtováním nebo daty,
+- opakují se u více zákazníků,
+- vyžadují přesnou odpověď,
+- snižují počet ručních zásahů týmu.
+
+Praktický rytmus: jednou týdně si projdi support konverzace a vyber jednu věc, kterou převedeš do článku. Ne deset. Jednu. Udržitelná dokumentace roste jako zahrada, ne jako požár skladu papíru.
+
+### DY.6 Nápověda má být propojená s produktem, ale ne vtíravá
+
+Dokumentace schovaná v patičce je archeologický nález. Produkt by měl odkazovat na nápovědu přesně tam, kde uživatel váhá.
+
+Dobrá místa pro odkaz:
+
+- prázdný stav obrazovky,
+- nastavení s bezpečnostním dopadem,
+- export/import dat,
+- integrace,
+- první použití nové funkce,
+- chybová hláška, která vyžaduje rozhodnutí uživatele.
+
+Špatná místa:
+
+- modální okno po každém kliknutí,
+- vyskakovací tour bez možnosti přeskočení,
+- nápověda maskující špatný návrh UI,
+- „kontaktujte podporu“ tam, kde může existovat konkrétní postup.
+
+Pravidlo: nejdřív oprav produkt, potom piš nápovědu. Když musí článek vysvětlovat pět divných výjimek, možná nemáš problém s dokumentací. Možná máš v produktu malý escape room s fakturací.
+
+### DY.7 Privacy-first provoz znalostní báze
+
+Znalostní báze často obsahuje víc citlivých informací, než se zdá: interní postupy, bezpečnostní návody, příklady dat, screenshoty účtů, zmínky o zákaznících. Proto ji provozuj jako součást produktu, ne jako vedlejší blog na cizí platformě bez kontroly.
+
+Praktická pravidla:
+
+- Preferuj vlastní doménu a evropský hosting.
+- Udržuj články v exportovatelném formátu, ideálně Markdown nebo jiný textový zdroj ve verzování.
+- Nepoužívej zákaznická data ve screenshotech; vytvářej demo účty a fiktivní údaje.
+- Nepřidávej externí widgety, chaty a analytické skripty bez jasného důvodu.
+- Měř čtenost agregovaně: články, dotazy, kliknutí na „pomohlo/nepomohlo“.
+- Interní články odděl od veřejné nápovědy a chraň je přístupem podle role.
+- Při odchodu z nástroje musí jít exportovat texty, obrázky, metadata a interní odkazy.
+
+Dobrá znalostní báze je přenosné aktivum. Špatná znalostní báze je rukojmí s hezkým editorem.
+
+### DY.8 Šablona článku znalostní báze
+
+```markdown
+## [Jak udělat konkrétní věc]
+
+### Kdy postup použít
+[Jedna věta: situace, ve které článek pomáhá.]
+
+### Co potřebuješ
+- [Oprávnění]
+- [Připravená data]
+- [Případná omezení]
+
+### Postup
+1. [Krok]
+2. [Krok]
+3. [Krok]
+
+### Jak poznáš, že je hotovo
+[Viditelný výsledek v produktu nebo procesu.]
+
+### Časté chyby
+- [Chyba] → [co udělat]
+- [Chyba] → [co udělat]
+
+### Když to nejde
+[Kam napsat, co přiložit, jaká data neposílat.]
+
+### Metadata
+- Vlastník:
+- Poslední kontrola:
+- Oblast produktu:
+- Typ čtenáře:
+- Stav:
+```
+
+### DY.9 Checklist: znalostní báze bez chaosu
+
+- [ ] Máme seznam top 10 opakovaných dotazů ze supportu.
+- [ ] Každý článek řeší jeden konkrétní úkol.
+- [ ] Nadpisy používají slova zákazníků, ne interní názvy modulů.
+- [ ] Kritické články mají vlastníka a datum poslední kontroly.
+- [ ] Produkt odkazuje na nápovědu v místech, kde uživatel váhá.
+- [ ] Screenshoty neobsahují reálná zákaznická data.
+- [ ] Čtenost a hledání měříme agregovaně, bez profilování jednotlivců.
+- [ ] Texty jsou exportovatelné a nejsou zamčené v jednom vendorovi.
+- [ ] Interní návody jsou oddělené od veřejné dokumentace.
+- [ ] Změna produktu není hotová, dokud nejsou zkontrolované související články.
+
+*Codyho komentář:* Dokumentace je tichý člen týmu. Nechodí na stand-up, nepije kafe a nestěžuje si na Slacku, ale když ji udržuješ, odpovídá zákazníkům ve tři ráno líp než unavený zakladatel. To je produktivita bez heroismu.
+
 ---
 
 ## Pracovní log
+- 2026-09-03 03:00 UTC — Doplněna příloha DY o znalostní bázi a nápovědě: články podle zákaznických situací, malé postupy, metadata a vlastnictví, vyhledávání zákaznickým jazykem, dokumentační backlog ze supportu, kontextové odkazy v produktu, privacy-first provoz, šablona článku a checklist.
 - 2026-09-03 02:00 UTC — Doplněna příloha DX o produktovém changelogu jako privacy-first marketingovém kanálu: zákaznický jazyk místo commitů, kategorie užitku, další kroky, přímá distribuce přes web a RSS, rytmus publikování, využití pro prodej/retenci, šablona changelog karty a checklist.
 - 2026-09-03 01:01 UTC — Doplněna příloha DW o referral růstu bez sledovacích pixelů: ruční start programu, férové odměny, měření původu doporučení bez osobních údajů v URL, doporučovací texty, vyhodnocení kvality leadů, referral karta a privacy-first checklist.
 - 2026-09-03 00:00 UTC — Doplněna příloha DV o personalizaci webu bez profilování: práci s kontextem místo identity, ruční segmenty, dobrovolnou volbu cesty, CTA podle fáze rozhodování, zákaz osobních údajů v URL, agregované měření, šablonu personalizační karty a privacy-first checklist.
