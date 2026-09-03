@@ -22270,9 +22270,180 @@ Dobrá znalostní báze je přenosné aktivum. Špatná znalostní báze je ruko
 
 *Codyho komentář:* Dokumentace je tichý člen týmu. Nechodí na stand-up, nepije kafe a nestěžuje si na Slacku, ale když ji udržuješ, odpovídá zákazníkům ve tři ráno líp než unavený zakladatel. To je produktivita bez heroismu.
 
+
 ---
 
+## Příloha DZ: Produktové e-maily bez spamového divadla a datové skládky
+
+Produktový e-mail je pořád jeden z nejsilnějších přímých kanálů, které malý SaaS nebo webová služba má. Umí potvrdit registraci, dovést člověka k první hodnotě, upozornit na důležitou změnu, zachránit ztracený krok v onboardingu a připomenout fakturu bez dramatického orchestru. Problém začíná ve chvíli, kdy se z něj stane automatizovaná palba: deset triggerů, tři nástroje, pět segmentačních pravidel a nikdo přesně neví, komu co chodí. Gratuluji, právě vznikl malý e-mailový Mordor.
+
+Privacy-first přístup neznamená, že nebudeš posílat žádné e-maily. Znamená, že každý e-mail má jasný účel, minimální data, férové očekávání a jednoduchý způsob kontroly. Zákazník nemá být sledovaný terč. Má být člověk, kterému posíláš užitečnou zprávu ve správný okamžik.
+
+### DZ.1 Rozděl e-maily podle vztahu, ne podle nástroje
+
+Nejdřív si udělej mapu e-mailů podle toho, proč existují. Nástroj je až druhá otázka. Jinak skončíš s tím, že „něco posílá aplikace“, „něco marketing“ a „něco účetnictví“, ale zákazník to všechno vnímá jako jednu značku. Když mu stejný den přijde bezpečnostní upozornění, promo akce a pasivně-agresivní připomínka trialu, neřekne si: „Aha, různé systémy.“ Řekne si: „Tahle firma je trochu unavená diskotéka.“
+
+Základní kategorie:
+
+- **Transakční e-maily** — registrace, reset hesla, pozvánka do týmu, potvrzení akce, faktura.
+- **Produktové e-maily** — onboarding, aktivace, upozornění na nedokončený krok, změna funkcí, provozní informace.
+- **Vztahové e-maily** — customer success, review účtu, renewal, shrnutí hodnoty, osobní follow-up.
+- **Marketingové e-maily** — novinky, vzdělávací obsah, launch, případová studie, pozvánka na webinář.
+
+Ke každé kategorii napiš pravidla: kdo ji vlastní, jaký má účel, jak se dá odhlásit nebo upravit preference, jak dlouho držíš související události a které údaje opravdu potřebuješ. Transakční e-mail často nepotřebuje marketingový souhlas, ale to neznamená, že do něj máš pašovat prodejní ohňostroj. Reset hesla není billboard.
+
+### DZ.2 Každý automat má mít stopku a důvod
+
+Automatizace je dobrý sluha a velmi otravný robotický soused. Než nastavíš sekvenci, napiš si její spouštěč, účel a ukončení.
+
+Špatně:
+
+> Když se někdo zaregistruje, pošli mu sedm e-mailů během čtrnácti dní.
+
+Lépe:
+
+> Když se nový uživatel zaregistruje, ale do 48 hodin nevytvoří první projekt, pošli mu jeden praktický e-mail s nejkratším postupem a odkazem na nápovědu. Jakmile projekt vytvoří, automat se zastaví.
+
+U každé sekvence drž tyhle otázky:
+
+- Jaký konkrétní problém e-mail řeší?
+- Jak poznáme, že už není potřeba?
+- Kolikrát maximálně může člověk zprávu dostat?
+- Které jiné e-maily mají přednost?
+- Co se stane, když zákazník odpoví?
+
+Když nemáš odpověď na poslední otázku, neposílej e-mail z adresy typu `no-reply`. Produktová komunikace má být obousměrná alespoň tam, kde dává smysl. „Neodpovídejte na tuto zprávu“ je někdy nutnost, ale často jen lenost v kravatě.
+
+### DZ.3 Onboardingový e-mail má vést k jednomu dalšímu kroku
+
+Nový uživatel nepotřebuje dostat encyklopedii produktu. Potřebuje vědět, co má udělat teď. Každý onboardingový e-mail by měl mít jeden hlavní cíl a jedno hlavní CTA.
+
+Příklad pro SaaS nástroj:
+
+- Den 0: potvrzení účtu a první krok — „Vytvoř první projekt“.
+- Po 48 hodinách bez aktivity: pomoc s překážkou — „Tady je 3minutový postup“.
+- Po první hodnotě: rozšíření užitku — „Pozvi kolegu, ať nemusíte sdílet přístupy“.
+- Před koncem trialu: rozhodnutí — „Co se podařilo a co potřebuješ dořešit?“
+
+Text piš prakticky:
+
+> Ahoj, účet máš připravený. Nejrychlejší cesta k první hodnotě je vytvořit projekt a přidat jeden zdroj dat. Zabere to zhruba pět minut. Pokud chceš, můžeš začít tady: [Vytvořit projekt].
+
+To je lepší než:
+
+> Jsme nadšeni, že ses stal součástí naší revoluční platformy s robustní sadou funkcí.
+
+Robustní sada funkcí je věta, kterou napsal někdo, kdo má rád beton.
+
+### DZ.4 Preference centrum je lepší než jedno velké odhlášení
+
+Když posíláš víc než čistě provozní zprávy, dej lidem možnost řídit, co chtějí dostávat. Ne každý chce newsletter, ale může chtít bezpečnostní upozornění. Ne každý chce produktové tipy, ale může chtít informace o fakturaci. Jedno velké „odhlásit vše“ je sice jednoduché, ale často zbytečně pálí mosty.
+
+Minimální preference centrum:
+
+- produktové novinky,
+- vzdělávací obsah,
+- pozvánky na akce,
+- obchodní nabídky,
+- provozní a bezpečnostní informace,
+- fakturace a smluvní zprávy.
+
+U každé položky krátce vysvětli, co bude chodit a jak často. Nepoužívej manipulativní texty typu „Nechci růst svoje podnikání“. Tlačítko pro odhlášení nemá čtenáři nadávat. To zvládne internet i bez tebe.
+
+Privacy-first detail: preference drž jako účelové nastavení účtu, ne jako tajný profil zájmů. Pokud někdo vypne marketing, respektuj to napříč nástroji. Nestačí vypnout jeden seznam v jednom systému a nechat druhý automat běžet dál jako zombie newsletter.
+
+### DZ.5 Měř doručitelnost a hodnotu, ne osobní mikrosledování
+
+E-mailová analytika svádí k měření všeho: otevření, kliknutí, zařízení, poloha, čas čtení, opakované otevření, pohyb myši, fáze měsíce a pravděpodobně i nálada křečka. V praxi ti pro dobré rozhodování často stačí méně.
+
+Rozumné metriky:
+
+- doručitelnost a bounces,
+- odpovědi na důležité e-maily,
+- kliknutí na hlavní CTA agregovaně,
+- dokončení navazující produktové akce,
+- počet odhlášení podle typu komunikace,
+- počet support dotazů po e-mailu.
+
+Místo otázky „Který konkrétní člověk otevřel e-mail třikrát?“ se ptej:
+
+- Pomáhá e-mail dokončit konkrétní krok?
+- Neposíláme ho příliš brzy nebo příliš často?
+- Rozumí příjemce dalšímu kroku?
+- Nevytváří e-mail víc supportu než hodnoty?
+
+Pokud používáš tracking pixel nebo přesměrovací click tracking, musíš vědět proč, jaká data vznikají, kde se ukládají a jak dlouho. Codyho doporučení: u citlivých B2B produktů začni bez invazivního sledování a měř hlavně produktový výsledek. E-mail má být most k hodnotě, ne mikroskop na člověka.
+
+### DZ.6 E-mailová identita je součást důvěry
+
+Produktové e-maily nejsou jen text. Jsou to signály důvěry: odesílatel, doména, podpis, tón, odkazy a konzistence. Když faktura přijde z jiné domény než aplikace a reset hesla vypadá jako leták na kryptoměnový zázrak, zákazník váhá. A váhání je u bezpečnosti zdravé.
+
+Praktická pravidla:
+
+- Používej jasné odesílatele: `Cody od Dreamindu`, `Dreamind Support`, `Dreamind Fakturace`.
+- Důležité odkazy veď na vlastní doménu, ne přes zbytečné zkracovače.
+- V patičce uveď, proč člověk e-mail dostal.
+- U bezpečnostních zpráv nepřidávej marketingové CTA.
+- U faktur a smluvních zpráv drž tón věcný a klidný.
+- U podpory umožni odpověď nebo dej jasnou cestu na kontakt.
+
+Před každým novým typem e-mailu si polož otázku: kdyby ho někdo přeposlal zákaznickému IT nebo právníkovi, působí důvěryhodně? Pokud ne, dolaď ho dřív, než ho pošleš tisíci lidem a budeš doufat, že si toho nikdo nevšimne. Doufání není QA proces.
+
+### DZ.7 Šablona e-mailové karty
+
+```md
+## E-mailová karta: [název e-mailu]
+
+### Účel
+- Proč e-mail existuje:
+- Jaký zákaznický problém řeší:
+- Kategorie: transakční / produktový / vztahový / marketingový
+
+### Spouštěč a ukončení
+- Kdy se posílá:
+- Kdy se už neposílá:
+- Maximální frekvence:
+- Co má přednost:
+
+### Obsah
+- Hlavní zpráva:
+- Jedno primární CTA:
+- Alternativní cesta:
+- Odesílatel:
+- Odpovědní adresa:
+
+### Data a preference
+- Použitá data:
+- Nutný souhlas nebo právní základ:
+- Preference / odhlášení:
+- Retence souvisejících událostí:
+
+### Měření
+- Primární metrika:
+- Sekundární signály:
+- Jak poznáme, že e-mail škodí:
+- Datum review:
+```
+
+### DZ.8 Checklist: produktové e-maily bez otravy inboxu
+
+- [ ] Má každý e-mail jasnou kategorii a vlastníka?
+- [ ] Víme, proč příjemce e-mail dostává?
+- [ ] Má zpráva jeden hlavní další krok?
+- [ ] Zastaví se automat, když uživatel dokončí cílovou akci?
+- [ ] Respektují všechny systémy stejné preference a odhlášení?
+- [ ] Nepřidáváme marketing do bezpečnostních, fakturačních a čistě transakčních zpráv?
+- [ ] Používáme vlastní doménu a důvěryhodné odesílatele?
+- [ ] Měříme hodnotu agregovaně a nesbíráme zbytečné osobní signály?
+- [ ] Má zákazník jasnou cestu, jak odpovědět nebo získat pomoc?
+- [ ] Probíhá pravidelné review frekvence, odhlášení, odpovědí a support dopadu?
+
+Produktový e-mail má být krátká užitečná služba, ne marketingový ohňostroj maskovaný jako péče. Když ho navrhneš podle účelu, omezíš data, dáš lidem kontrolu a budeš měřit skutečný dopad, získáš kanál, který pomáhá obchodu i zákazníkům. A hlavně: inbox zůstane místem komunikace, ne skládkou automatizovaných dobrých úmyslů.
+
+*Codyho komentář:* Nejlepší e-mailová sekvence je ta, kterou zákazník nevnímá jako sekvenci. Prostě mu v pravý čas přijde užitečná věc. To je celé kouzlo. Žádná šedá magie, žádný pixelový šamanismus.
+
 ## Pracovní log
+- 2026-09-03 04:00 UTC — Doplněna příloha DZ o produktových e-mailech bez spamového divadla: kategorizace transakčních, produktových, vztahových a marketingových zpráv, pravidla automatů, onboardingové kroky, preference centrum, privacy-first měření, e-mailová identita, šablona e-mailové karty a checklist.
 - 2026-09-03 03:00 UTC — Doplněna příloha DY o znalostní bázi a nápovědě: články podle zákaznických situací, malé postupy, metadata a vlastnictví, vyhledávání zákaznickým jazykem, dokumentační backlog ze supportu, kontextové odkazy v produktu, privacy-first provoz, šablona článku a checklist.
 - 2026-09-03 02:00 UTC — Doplněna příloha DX o produktovém changelogu jako privacy-first marketingovém kanálu: zákaznický jazyk místo commitů, kategorie užitku, další kroky, přímá distribuce přes web a RSS, rytmus publikování, využití pro prodej/retenci, šablona changelog karty a checklist.
 - 2026-09-03 01:01 UTC — Doplněna příloha DW o referral růstu bez sledovacích pixelů: ruční start programu, férové odměny, měření původu doporučení bez osobních údajů v URL, doporučovací texty, vyhodnocení kvality leadů, referral karta a privacy-first checklist.
