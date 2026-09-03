@@ -25326,7 +25326,192 @@ Cílem není tým nachytat. Cílem je snížit tření tak, aby bezpečná cesta
 
 Registr subdodavatelů není byrokratický trest za to, že tým používá moderní nástroje. Je to způsob, jak moderní nástroje používat bez ztráty kontroly. Malý tým tím získá rychlejší rozhodování, lepší odpovědi zákazníkům a menší šanci, že se z jednoho „dočasného“ nástroje stane trvalá díra v datové mapě.
 
+## Příloha ER: DPIA bez paniky aneb posouzení vlivu jako produktový nástroj
+
+DPIA, tedy posouzení vlivu na ochranu osobních údajů, zní jako dokument, který někdo vytiskne, podepíše a uloží do složky „GDPR — neotvírat, kouše“. Jenže pro malý SaaS tým je to ve skutečnosti praktický způsob, jak si včas všimnout, že nová funkce bere příliš citlivá data, kombinuje je zbytečně agresivně nebo přidává riziko, které neumíš rozumně vysvětlit zákazníkovi.
+
+Ne každé zpracování osobních údajů automaticky potřebuje DPIA. ÚOOÚ vysvětluje, že povinnost se týká hlavně zpracování s vysokým rizikem pro práva a svobody lidí a že správce má nejdřív vyhodnotit, zda se ho povinnost týká: [ÚOOÚ — Posouzení vlivu na ochranu osobních údajů](https://uoou.gov.cz/profesional/posouzeni-vlivu-na-ochranu-osobnich-udaju-dpia). EDPB zároveň dlouhodobě bere DPIA jako nástroj pro identifikaci a řízení rizik pro osobní data: [EDPB — Data protection impact assessment](https://www.edpb.europa.eu/topics/accountability-and-compliance-tools/data-protection-impact-assessment_en). V roce 2026 EDPB zveřejnil i konzultovaný evropský DPIA template, který ukazuje směr ke sjednocenějším šablonám: [EDPB DPIA Template](https://www.edpb.europa.eu/our-work-tools/documents/public-consultations/2026/edpb-dpia-template_en).
+
+*Codyho komentář:* DPIA není právnická dekorace. Je to produktové brzdové světlo. Neříká „nikdy nejezdi“, ale říká „tady radši zpomal, protože za zatáčkou může být strom, regulátor nebo naštvaný zákazník“.
+
+### ER.1 Nezačínej formulářem, začni změnou v produktu
+
+Nejhorší začátek DPIA je otevřít šablonu a mechanicky vyplňovat kolonky. Lepší je popsat změnu lidsky:
+
+- Co chceme spustit?
+- Komu to pomůže?
+- Jaká osobní data se nově sbírají, kombinují, zobrazují nebo předávají?
+- Kdo bude výsledek používat?
+- Co se stane, když funkce selže, unikne nebo bude špatně pochopena?
+
+Příklad:
+
+> Chceme přidat automatické skóre rizika odchodu zákazníka. Systém bude kombinovat aktivitu v aplikaci, historii podpory, platební stav a poznámky account managera. Výstup uvidí sales a customer success tým.
+
+Tohle už je materiál pro rozhodování. Vidíš, že nejde jen o technickou funkci. Kombinuješ behaviorální data, interní poznámky a obchodní rozhodování. I kdyby DPIA nakonec nebyla povinná, minimálně potřebuješ slušný risk review.
+
+### ER.2 Udělej rychlý screening vysokého rizika
+
+Screening není náhrada DPIA. Je to vstupní filtr, který rozhodne, jestli pokračovat plným posouzením, upravit návrh nebo jen zapsat důvod, proč vysoké riziko nevzniká.
+
+U SaaS produktů zbystři hlavně u těchto situací:
+
+- systematické hodnocení lidí, skórování, profiling nebo automatizované doporučování zásahů,
+- citlivé nebo velmi soukromé údaje, například zdraví, finance, identita, poloha nebo komunikace,
+- sledování chování ve velkém rozsahu,
+- kombinování dat z více zdrojů, které původně sloužily jinému účelu,
+- nový datový tok k dodavateli nebo mimo EU/EHP,
+- funkce, která může člověku zablokovat službu, změnit cenu, prioritu podpory nebo obchodní zacházení,
+- dlouhá retence detailních událostí bez jasného důvodu.
+
+ÚOOÚ má k dispozici metodiky a seznamy operací, které pomáhají rozhodnout, zda zpracování DPIA podléhá: [ÚOOÚ — metodiky a doporučení k DPIA](https://uoou.gov.cz/profesional/metodiky-a-doporuceni-pro-spravce/posouzeni-vlivu-na-ochranu-osobnich-udaju). Prakticky: když si u tří bodů říkáš „tohle bych zákazníkovi vysvětloval nerad“, nečekej na právní požár a posouzení udělej.
+
+### ER.3 Privacy-first varianta má být součást návrhu, ne dodatečný nátěr
+
+DPIA se často zvrhne v otázku: „Jak obhájíme, že sbíráme všechno?“ Privacy-first přístup se ptá obráceně: „Jak dosáhneme stejného výsledku s menším množstvím dat?“
+
+Příklad u churn skóre:
+
+- Místo ukládání detailního klikacího deníku použij agregované signály za účet: poslední aktivita, počet dokončených klíčových akcí, počet otevřených ticketů.
+- Místo automatického rozhodnutí „kontaktovat rizikového uživatele“ vytvoř pouze interní doporučení pro člověka.
+- Místo osobních poznámek z CRM použij strukturované štítky s omezenou retencí.
+- Místo exportu dat do externího nástroje drž výpočet ve vlastní evropské infrastruktuře.
+
+Dobré opatření není jen šifrování a role. Dobré opatření může být i rozhodnutí data vůbec nesbírat, neukládat detailně, anonymizovat dřív nebo funkci navrhnout tak, aby pracovala na úrovni účtu, ne jednotlivce.
+
+### ER.4 Riziko popiš jako dopad na člověka
+
+Technické týmy mají tendenci psát rizika stylem „neoprávněný přístup k tabulce events“. To je pravda, ale pro rozhodování málo. Popiš, co by to znamenalo pro člověka nebo firmu.
+
+Lepší formulace:
+
+- Zákaznický admin uvidí aktivitu lidí, kterou nepotřebuje k řízení účtu.
+- Obchodník může mylně označit zákazníka jako rizikového a spustit nevhodný nátlakový follow-up.
+- Interní poznámka z podpory se dostane do reportu, kde ji uvidí širší tým.
+- Dodavatel analytiky získá data, která neodpovídají původnímu účelu měření.
+- Při exportu se smíchají aktivní a historická data, která měla být podle retence smazána.
+
+Pak ke každému riziku napiš tři věci: pravděpodobnost, dopad a opatření. Nepotřebuješ falešnou přesnost na dvě desetinná místa. Stačí stupnice nízké / střední / vysoké a jasný důvod.
+
+### ER.5 Opatření musí jít ověřit v produktu
+
+„Budeme dbát na bezpečnost“ není opatření. To je přání, a přání nepatří do architektury, maximálně na narozeninový dort.
+
+Ověřitelná opatření vypadají takhle:
+
+- Role `owner` vidí agregované metriky účtu, role `member` nevidí aktivitu ostatních lidí.
+- Detailní eventy se mažou po 30 dnech, agregace zůstává bez přímého identifikátoru.
+- Export obsahuje jen pole uvedená v datovém katalogu a má test proti nečekaným sloupcům.
+- Dodavatel dostává pouze anonymizovanou agregaci, ne surový proud událostí.
+- Produkční support nemůže číst obsah zákaznických poznámek bez dočasného schválení.
+- Každý přístup k citlivému pohledu zapisuje auditní událost bez ukládání obsahu dat.
+
+U každého opatření si napiš, kde se ověřuje: test, admin obrazovka, log, konfigurace, runbook, review přístupů nebo retenční job. Pokud opatření nejde ověřit, časem se z něj stane legenda. A legendy jsou krásné v hospodě, ne v compliance.
+
+### ER.6 DPIA má mít vlastníka a datum návratu
+
+Posouzení vlivu není jednorázové razítko. ÚOOÚ v Q&A zdůrazňuje, že technická a organizační opatření je potřeba revidovat a aktualizovat podle změn hrozeb, technologií nebo samotného zpracování: [ÚOOÚ — Q&A k DPIA](https://uoou.gov.cz/profesional/qa-otazky-a-odpovedi/posouzeni-vlivu-na-ochranu-osobnich-udaju).
+
+Do každé DPIA proto přidej:
+
+- vlastníka zpracování,
+- vlastníka technických opatření,
+- datum poslední kontroly,
+- spouštěče revize,
+- odkaz na datový katalog, registr subdodavatelů a retenční kartu,
+- stav: návrh / schváleno / čeká na opatření / pozastaveno / ukončeno.
+
+Spouštěče revize mohou být jednoduché: nový dodavatel, nová datová kategorie, změna účelu, rozšíření na nový segment, incident, změna právního základu, přesun dat mimo EU/EHP nebo zásadní změna algoritmu.
+
+### ER.7 Kdy raději zastavit launch
+
+Někdy DPIA neříká „doplň checkbox“. Říká „tuhle verzi nepouštěj“. To je nepříjemné, ale pořád levnější než veřejně vysvětlovat, proč produkt dělal něco, čemu tým sám nerozuměl.
+
+Launch zastav nebo omez, když:
+
+- neumíš popsat účel zpracování jednou větou,
+- sbíráš citlivá data jen proto, že „by se mohla hodit“,
+- opatření existují jen v dokumentu, ne v produktu,
+- výsledek může zásadně ovlivnit člověka a není tam lidská kontrola,
+- dodavatel nebo infrastruktura nedávají odpověď na umístění dat a přístupy,
+- retence není definovaná,
+- zákaznická komunikace by musela mlžit.
+
+Privacy-first značka tím neztrácí rychlost. Získává brzdy, které jí dovolí jet rychleji tam, kde je cesta rovná.
+
+### ER.8 Šablona: lehká DPIA karta pro SaaS funkci
+
+```markdown
+## DPIA karta: [název funkce nebo zpracování]
+
+### Změna
+- Co spouštíme:
+- Pro koho:
+- Produktový přínos:
+- Stav: návrh / test / produkce / pozastaveno / ukončeno
+
+### Data
+- Kategorie osobních údajů:
+- Citlivé nebo zvlášť rizikové údaje:
+- Zdroj dat:
+- Příjemci nebo dodavatelé:
+- Umístění dat:
+- Retence:
+
+### Screening
+- Může jít o vysoké riziko: ano / ne / nejisté
+- Důvod:
+- Potřebujeme plnou DPIA: ano / ne / konzultovat
+- Odkaz na metodiku nebo seznam ÚOOÚ:
+
+### Rizika
+- Riziko 1:
+  - Dopad na člověka:
+  - Pravděpodobnost:
+  - Závažnost:
+  - Opatření:
+- Riziko 2:
+  - Dopad na člověka:
+  - Pravděpodobnost:
+  - Závažnost:
+  - Opatření:
+
+### Opatření
+- Minimalizace dat:
+- Omezení přístupu:
+- Retence a mazání:
+- Auditní stopa:
+- Test nebo ověření:
+- Komunikace zákazníkovi:
+
+### Rozhodnutí
+- Spustit / upravit / pozastavit:
+- Podmínky spuštění:
+- Vlastník:
+- Datum další revize:
+- Spouštěče revize:
+```
+
+Kartu nepiš pro právníka do vitríny. Piš ji tak, aby podle ní produkt, vývoj, support i obchod pochopili, co smí systém dělat a kde jsou hranice.
+
+### ER.9 Checklist: DPIA, která pomáhá rozhodovat
+
+- [ ] Víme, jakou produktovou změnu nebo zpracování posuzujeme.
+- [ ] Máme popsaný účel, cílové uživatele a očekávaný přínos.
+- [ ] Vyhodnotili jsme, zda zpracování může znamenat vysoké riziko.
+- [ ] Zkontrolovali jsme relevantní metodiku nebo seznamy ÚOOÚ.
+- [ ] Popsali jsme datové kategorie, zdroje, příjemce, umístění a retenci.
+- [ ] Rizika jsou formulovaná jako dopad na člověka, ne jen jako technická závada.
+- [ ] U každého rizika existuje konkrétní a ověřitelné opatření.
+- [ ] Privacy-first varianta byla součást návrhu, ne dodatečná omluva.
+- [ ] Víme, kdo kartu vlastní a kdy se má revidovat.
+- [ ] Pokud riziko zůstává vysoké, launch se nezametá pod koberec jen proto, že už je v kalendáři.
+
+DPIA je užitečná hlavně ve chvíli, kdy ještě může změnit produkt. Jakmile je funkce hotová, obchod ji slíbil a zákazníci ji používají, každé opatření bolí víc. Malý SaaS tým má výhodu: může posouzení udělat rychle, věcně a blízko produktu. Bez korporátního rituálu, ale s dostatečnou disciplínou, aby data zákazníků nezmizela v mlze dobrých úmyslů.
+
 ## Pracovní log
+
+- 2026-09-03 23:01 UTC — Doplněna příloha ER o DPIA jako praktickém produktovém nástroji: screening vysokého rizika, privacy-first varianty návrhu, popis dopadů na člověka, ověřitelná opatření, revize, stop signály před launchem, šablona DPIA karty, checklist a odkazy na ÚOOÚ a EDPB.
 
 - 2026-09-03 22:01 UTC — Doplněna příloha EQ o registru subdodavatelů pro malý SaaS tým: rozlišení nástrojů, dodavatelů a datových toků, kritičnost, privacy-first filtr, vlastnictví, propojení s nákupem a podporou, stínové nástroje, šablona karty a checklist.
 
