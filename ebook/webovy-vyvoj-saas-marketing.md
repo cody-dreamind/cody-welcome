@@ -21695,7 +21695,204 @@ Personalizace má být služba návštěvníkovi, ne výslech s hezčím UI. Kdy
 
 ---
 
+## Příloha DW: Referral růst bez sledovacích pixelů a šedé magie
+
+Referral program je jednoduchá myšlenka: spokojení lidé doporučí produkt dalším lidem. V praxi se z toho často stane temná bažina s unikátními odkazy, cross-device trackingem, automatickým importem kontaktů, skrytými odměnami a dashboardem, který vypadá přesně tak složitě, aby nikdo nepoznal, jestli program opravdu funguje.
+
+Privacy-first referral nemusí být slabší. Naopak. Když doporučení stojí na důvěře, jasné hodnotě a férovém procesu, nepotřebuješ z návštěvníků dělat sledované figurky na marketingové šachovnici.
+
+### DW.1 Doporučení není náhrada za produkt
+
+Referral program nevyřeší slabý onboarding, zmatenou nabídku ani produkt, který lidé používají jen proto, že už zaplatili fakturu. Nejdřív musí existovat důvod doporučovat.
+
+Praktické signály, že má smysl referral řešit:
+
+- zákazníci sami posílají známé na tvůj web,
+- v hovorech slyšíš „tohle by se hodilo i kolegovi“,
+- support dostává otázky od firem ze stejné sítě,
+- lidé sdílí tvoje checklisty nebo články bez pobídky,
+- zákazník umí jednou větou říct, komu by tě doporučil.
+
+Špatný signál je snaha „nakopnout růst“ jen odměnou. Pokud produkt nikdo nechce doporučit bez odměny, sleva problém jen nalakuje. A lak na rozbitém kole moc nepomůže, pokud řetěz leží v příkopu.
+
+Než vytvoříš program, zeptej se tří zákazníků:
+
+1. Komu by dávalo smysl nás doporučit?
+2. Jak bys nás popsal vlastními slovy?
+3. Co by ti doporučení usnadnilo — text, odkaz, případovka, sleva, nebo jen jasnější stránka?
+
+Odpovědi často ukážou, že první verzí referral programu není software, ale lepší věta, krátký e-mailový text a stránka „Pro koho jsme dobrá volba“.
+
+### DW.2 Začni ručně a čitelně
+
+První referral systém může být velmi jednoduchý:
+
+- jedna veřejná doporučovací stránka,
+- krátký text, který zákazník může zkopírovat,
+- volitelné pole „Kdo vám nás doporučil?“ ve formuláři,
+- interní tabulka nebo CRM štítek,
+- ruční poděkování doporučujícímu člověku.
+
+Tohle není primitivní. Je to výhoda. Ruční provoz tě donutí pochopit, jak doporučení vznikají, kdo je posílá a jaké typy zákazníků přivádí. Automatizace dává smysl až ve chvíli, kdy znáš proces. Jinak jen rychleji škáluješ chaos, což je sice moderní, ale pořád chaos.
+
+Příklad pro B2B SaaS:
+
+> Pokud znáte tým, který řeší podobný problém s poptávkami nebo zákaznickým portálem, pošlete mu tuto stránku. Když z doporučení vznikne placená spolupráce, pošleme vám kredit na další měsíc nebo podpoříme vámi vybraný neziskový projekt.
+
+To je srozumitelné, férové a nevyžaduje sledovat každého návštěvníka přes tři domény a čtyři zařízení.
+
+### DW.3 Odměna má podporovat důvěru, ne tlačit na spam
+
+Odměna mění chování. To je její pointa i riziko. Když nastavíš program špatně, vytvoříš armádu lidí, kteří budou doporučovat bez kontextu, protože chtějí bonus. Výsledkem jsou horší leady, vyšší nedůvěra a zákazník, který se cítí jako položka v affiliate tabulce.
+
+Dobré odměny:
+
+- jsou jasné předem,
+- nevyžadují skryté podmínky,
+- nejsou tak vysoké, aby motivovaly k manipulaci,
+- dávají smysl oběma stranám,
+- lze je jednoduše vysvětlit zákazníkovi i účetnímu.
+
+Příklady:
+
+- měsíc služby navíc pro doporučujícího i nového zákazníka,
+- jednorázový kredit na fakturu po první uhrazené platbě,
+- rozšířený onboarding nebo konzultace zdarma,
+- dar na předem vybraný veřejně prospěšný projekt,
+- prioritní přístup k nové funkci pro aktivní zákazníky.
+
+U služeb s vyšší cenou bývá často silnější nefinanční odměna: pozornost, péče, lepší materiál, společná případová studie nebo přístup k expertnímu review. Peníze nejsou vždy nejlepší lepidlo. Někdy jsou jen nejhlasitější.
+
+### DW.4 Nepotřebuješ sledovat člověka, stačí sledovat původ doporučení
+
+Referral měření má odpovědět na obchodní otázku: přivádí doporučení relevantní zákazníky? Nemusí odpovědět na otázku: co přesně dělal konkrétní člověk mezi prvním klikem a třetím návratem o půlnoci z mobilu.
+
+Privacy-first minimum:
+
+- samostatná URL pro referral stránku nebo partnera,
+- jednoduchý parametr kampaně bez osobních údajů,
+- dobrovolné pole ve formuláři,
+- interní poznámka u obchodní příležitosti,
+- měsíční souhrn počtu doporučení, kvality leadů a uzavřených obchodů.
+
+Co raději nedělat:
+
+- importovat adresáře zákazníků,
+- generovat odkazy s e-mailem nebo jménem v URL,
+- posílat osobní údaje do analytiky,
+- automaticky spojovat návštěvy napříč zařízeními,
+- odměňovat doporučení bez kontroly kvality.
+
+Příklad bezpečnějšího značení:
+
+```text
+/doporuceni?ref=partner-servisni-firmy
+/doporuceni?ref=zakaznicka-komunita
+/doporuceni?ref=ucetni-workshop
+```
+
+Příklad špatného značení:
+
+```text
+/doporuceni?ref=jan.novak@example.com
+/doporuceni?customer_id=938471&email=...
+```
+
+Referral kód má popisovat zdroj nebo program, ne člověka. Pokud potřebuješ vyplatit odměnu konkrétnímu zákazníkovi, vyřeš to interně po odeslání formuláře nebo po obchodním hovoru. Veřejná URL není trezor. Je to pohlednice.
+
+### DW.5 Doporučovací materiály piš pro příjemce, ne pro ego značky
+
+Zákazník nedoporučuje tvůj produkt proto, aby šířil tvoji „brand narrative“. Doporučuje ho, protože chce někomu pomoct. Dej mu materiály, které se dají poslat bez trapného marketingového parfému.
+
+Připrav tři krátké varianty:
+
+**Krátká zpráva pro známého:**
+
+> Ahoj, řešili jsme podobný problém s [oblast] a pomohl nám [produkt/služba]. Tady je stránka s postupem: [odkaz]. Myslím, že by se vám to mohlo hodit hlavně kvůli [konkrétní důvod].
+
+**E-mail pro interní předání:**
+
+> Posílám tip na řešení pro [problém]. Zaujalo mě, že staví na evropském provozu, jasném vlastnictví dat a jednoduchém měření bez reklamních trackerů. Relevantní je hlavně část o [konkrétní use case].
+
+**Text pro partnera:**
+
+> Doporučujeme pro týmy, které chtějí z webu nebo zákaznického portálu udělat obchodní nástroj, ale nechtějí přitom posílat data do zbytečných marketingových systémů.
+
+Čím méně buzzwordů, tím vyšší šance, že to člověk opravdu pošle. Doporučení má znít jako užitečný tip, ne jako tisková zpráva, která utekla z korporátní lednice.
+
+### DW.6 Kvalita referral leadů je důležitější než počet
+
+Měř hlavně kvalitu, ne jen objem. Deset náhodných doporučení může sežrat víc času než jedno přesné. U malých týmů je pozornost nejdražší měna.
+
+Jednoduché měsíční vyhodnocení:
+
+- kolik poptávek přišlo přes doporučení,
+- kdo je doporučil nebo z jaké komunity přišly,
+- jaký problém poptávka řešila,
+- jestli odpovídá ideálnímu zákaznickému profilu,
+- kolik poptávek prošlo do hovoru,
+- kolik skončilo placenou spoluprací,
+- jaká byla zpětná vazba od doporučujícího i nového zákazníka.
+
+Nesnaž se referral vyhodnocovat jen jako reklamní kampaň. Doporučení často posiluje důvěru i tam, kde obchod nevznikne hned. Někdo si uloží odkaz, přihlásí RSS, přečte dvě případovky a ozve se za tři měsíce. To neznamená, že potřebuješ tři měsíce sledovat jeho chování. Znamená to, že máš mít dobrý obsah, jasné kontakty a trpělivost.
+
+### DW.7 Šablona referral karty
+
+```markdown
+## Referral karta: [název programu]
+
+### Účel
+- Komu program pomáhá:
+- Jaký typ zákazníka chceme získat:
+- Jaký typ doporučení nechceme:
+
+### Nabídka
+- Co dostane nový zákazník:
+- Co dostane doporučující:
+- Kdy odměna vzniká:
+- Jaké jsou hranice programu:
+
+### Materiály
+- Hlavní doporučovací URL:
+- Krátký text ke zkopírování:
+- Případovka nebo důkaz:
+- Kontakt pro otázky:
+
+### Data
+- Jak poznáme zdroj doporučení:
+- Jaká data ukládáme:
+- Kde se ukládají:
+- Jak dlouho je držíme:
+- Co výslovně nesbíráme:
+
+### Vyhodnocení
+- Primární metrika kvality:
+- Měsíční kontrola:
+- Vlastník programu:
+- Datum další úpravy:
+```
+
+### DW.8 Checklist: referral bez šmírování
+
+- Má produkt nebo služba jasný důvod k doporučení?
+- Umí zákazník jednou větou vysvětlit, komu se hodíme?
+- Existuje veřejná doporučovací stránka bez nutnosti registrace?
+- Neobsahují referral odkazy e-mail, jméno ani jiné osobní údaje?
+- Je odměna jasná, férová a odolná proti spamu?
+- Má nový zákazník z doporučení skutečný užitek, nejen marketingový tlak?
+- Umíme doporučení evidovat i ručně, když automatizace selže?
+- Měříme kvalitu leadů, ne jen počet kliknutí?
+- Víme, kde referral data vznikají, kdo k nim má přístup a kdy se mažou?
+- Má program vlastníka, který jednou měsíčně odstraní nefunkční odkazy a staré materiály?
+
+Referral růst je nejlepší ve chvíli, kdy se chová jako důvěryhodné předání mezi lidmi. Ne jako sledovací stroj s bonusovým kuponem. Pokud zákazník doporučuje, protože chce pomoct druhému člověku, chraň tu důvěru. Je cennější než přesnější atribuce.
+
+*Codyho komentář:* Doporučení je půjčená reputace. Zacházej s ní jemně. Jakmile z ní uděláš agresivní affiliate hru, reputace se urazí, sbalí si kufřík a odejde bydlet ke konkurenci.
+
+---
+
 ## Pracovní log
+- 2026-09-03 01:01 UTC — Doplněna příloha DW o referral růstu bez sledovacích pixelů: ruční start programu, férové odměny, měření původu doporučení bez osobních údajů v URL, doporučovací texty, vyhodnocení kvality leadů, referral karta a privacy-first checklist.
 - 2026-09-03 00:00 UTC — Doplněna příloha DV o personalizaci webu bez profilování: práci s kontextem místo identity, ruční segmenty, dobrovolnou volbu cesty, CTA podle fáze rozhodování, zákaz osobních údajů v URL, agregované měření, šablonu personalizační karty a privacy-first checklist.
 - 2026-09-02 23:00 UTC — Doplněna příloha DU o A/B testování bez sledovacího cirkusu: rozhodovací otázky, hypotéza, primární metrika, anonymní rozdělení variant, práce s malým provozem, ukončení experimentu, experimentální karta a privacy-first checklist.
 - 2026-09-02 22:00 UTC — Doplněna příloha DT o UTM značení bez datového smogu: rozhodovací otázky, slovník zdrojů a médií, názvy kampaní, zákaz osobních údajů v URL, vlastnictví odkazů, vyhodnocení dopadu, UTM karta a privacy-first checklist.
