@@ -29399,7 +29399,161 @@ Tohle je pro zákazníka použitelné. Může to přeposlat kolegům, právníko
 - [ ] Po demu posílám krátké rozhodovací shrnutí s dalším krokem.
 - [ ] Do pilotu navrhuji minimální nutný rozsah dat, ne kompletní zákaznický vesmír.
 
+## Příloha FO: Pilot po demu, který ověří hodnotu a nerozbije provoz
+
+Demo může dopadnout skvěle a stejně z něj nemusí vzniknout obchod. Ne proto, že by produkt nebyl dobrý, ale protože po demu zůstane mlhavé „ozveme se“, žádný vlastník, žádný rozsah a žádné měřítko úspěchu. Pilot je most mezi nadšením z ukázky a reálným rozhodnutím. Když je dobře navržený, zákazník si bezpečně vyzkouší hodnotu produktu a dodavatel získá konkrétní důkazy místo optimistických pocitů.
+
+Špatný pilot je malá produkce bez pravidel. Dostane příliš mnoho dat, příliš mnoho lidí, příliš mnoho výjimek a příliš málo odpovědnosti. Dobrý pilot je omezený experiment: má jasný cíl, krátký čas, konkrétní tým, minimální datový rozsah a dopředu domluvené rozhodnutí. Privacy-first přístup tady není brzda. Je to pojistka, že se ověřuje byznysová hodnota, ne schopnost posbírat celý zákaznický vesmír „pro jistotu“.
+
+### FO.1 Pilot musí mít jednu ověřovanou hypotézu
+
+Nezačínej větou: „Vyzkoušíme si systém.“ To je jako říct „půjdeme někam ven“ a doufat, že z toho vznikne dovolená. Pilot potřebuje jednu hlavní hypotézu:
+
+> Pokud **[konkrétní tým]** použije produkt na **[konkrétní proces]** po dobu **[čas]**, zlepší se **[měřitelný výsledek]** natolik, že dává smysl pokračovat.
+
+Příklady:
+
+- Pokud obchodní tým použije sdílenou frontu poptávek dva týdny, sníží se počet nezodpovězených poptávek starších než 48 hodin.
+- Pokud support použije interní znalostní bázi měsíc, klesne počet opakovaných dotazů, které musí řešit seniorní člověk.
+- Pokud marketing použije privacy-first analytiku na landing pages čtyři týdny, pozná tři stránky, které zaslouží úpravu bez profilování jednotlivých návštěvníků.
+
+Hypotéza má být praktická, ne vědecky nafouknutá. Stačí, aby všichni věděli, co se ověřuje a podle čeho se pilot nebude vykládat jako horoskop po úplňku.
+
+### FO.2 Rozsah drž malý, ale reprezentativní
+
+Pilot nemá být kompletní migrace. Vyber výřez, který je dost malý na bezpečné spuštění a dost skutečný na ověření hodnoty.
+
+Dobrý rozsah obsahuje:
+
+- **Jeden proces:** například nové poptávky, onboarding klienta, interní schvalování nebo publikace obsahu.
+- **Jeden tým:** lidé, kteří spolu opravdu pracují, ne náhodná směs dobrovolníků.
+- **Jednu datovou sadu:** testovací nebo omezená produkční data s jasným účelem.
+- **Jednu integrační hranici:** maximálně jedna nutná integrace, zbytek ručně nebo exportem.
+- **Jeden rozhodovací okamžik:** datum, kdy se řekne pokračujeme, upravujeme, nebo končíme.
+
+Reprezentativní neznamená obrovský. Znamená, že pilot ukazuje reálný problém v menším měřítku. Když SaaS řeší předávání poptávek, nepotřebuješ napojit účetnictví, CRM, newsletter a sklad. Potřebuješ pár typických poptávek, role lidí a jasný stav práce.
+
+### FO.3 Domluv si rozhodovací kritéria před startem
+
+Když kritéria vzniknou až po pilotu, každý si je upraví podle nálady. Obchodník vidí úspěch, technik vidí riziko, uživatel vidí změnu návyku a management vidí další položku v rozpočtu. Kritéria musí být napsaná předem.
+
+Použij tři vrstvy:
+
+- **Hodnota:** co se má zlepšit pro zákazníka nebo tým.
+- **Použitelnost:** zda lidé zvládnou proces bez obcházení systému.
+- **Provozní bezpečí:** zda pilot nevyžaduje nepřiměřený přístup, ruční opravy nebo zbytečný sběr dat.
+
+Příklad rozhodovacích kritérií:
+
+- Do konce pilotu projde systémem alespoň 30 reálných poptávek.
+- Minimálně dva obchodníci označí, že vidí stav práce rychleji než v původním procesu.
+- Administrátor umí přidat a odebrat uživatele bez zásahu dodavatele.
+- Pro pilot nebyl potřeba import historických osobních dat.
+- Vznikne seznam maximálně pěti blokujících úprav pro produkční nasazení.
+
+Není nutné vyhrát všechny metriky dokonale. Ale musí být jasné, co je zelená, žlutá a červená.
+
+### FO.4 Pilotový kontrakt chrání obě strany
+
+I malý pilot si zaslouží krátký písemný rámec. Nemusí to být právní román, ze kterého pláče tiskárna. Stačí dokument nebo e-mail, který potvrzuje očekávání.
+
+Měl by říkat:
+
+- **Cíl pilotu:** co se ověřuje a proč.
+- **Rozsah:** tým, proces, data, prostředí a integrace.
+- **Role:** kdo je vlastník na straně zákazníka a kdo na straně dodavatele.
+- **Čas:** start, kontrolní body, konec a datum rozhodnutí.
+- **Data:** jaké typy dat se použijí, kde poběží, kdo k nim má přístup a kdy se smažou nebo předají.
+- **Cena:** zda je pilot placený, zdarma, započitatelný do implementace nebo omezený rozsahem.
+- **Výstup:** co zákazník dostane na konci — report, doporučení, nabídku, export, nebo vypnutí.
+
+Privacy-first pravidlo: pokud pro pilot nepotřebuješ osobní data, nepoužívej je. Pokud je potřebuješ, omez účel, rozsah i dobu. A napiš to lidsky. Věta „pro pilot použijeme pouze aktuální poptávky z období dvou týdnů a po vyhodnocení je smažeme nebo převedeme do produkční smlouvy“ je užitečnější než pět odstavců právního kouře.
+
+### FO.5 Během pilotu měř signály, ne každý dech uživatele
+
+Pilot potřebuje zpětnou vazbu, ale nepotřebuje sledovat člověka jako laboratorní myš s firemním e-mailem. Měř hlavně agregované a procesní signály:
+
+- počet dokončených případů,
+- počet zaseknutých položek,
+- čas mezi stavovými kroky,
+- počet ručních obcházek,
+- počet dotazů na podporu,
+- seznam opakovaných nejasností,
+- subjektivní hodnocení týmu po krátkém rozhovoru.
+
+Kombinuj data a rozhovor. Samotná čísla neřeknou, proč se lidé vrací do starého procesu. Samotné rozhovory zase neumí ukázat, že se problém skutečně zmenšil. Ideální pilot má jednoduchý dashboard a týdenní patnáctiminutové review. Ano, patnáct minut. Pokud pilot potřebuje status meeting delší než seriálová epizoda, něco je špatně.
+
+### FO.6 Na konci nesmí zůstat mlha
+
+Závěr pilotu má mít jednu ze čtyř odpovědí:
+
+1. **Pokračujeme:** hodnota je ověřená, zbývá domluvit produkční rozsah.
+2. **Pokračujeme po úpravě:** hodnota existuje, ale jedna nebo dvě věci blokují nasazení.
+3. **Potřebujeme jiný pilot:** hypotéza byla špatně zvolená nebo rozsah nebyl reprezentativní.
+4. **Končíme:** hodnota se nepotvrdila nebo rizika převyšují přínos.
+
+Všechny čtyři výsledky jsou lepší než nekonečné „ještě to necháme běžet“. Nekonečný pilot je zombie projekt: chodí, bere energii a nikdo nechce říct, že už nežije.
+
+Pošli závěrečné shrnutí ve stejné struktuře, jakou jsi domluvil na začátku: hypotéza, rozsah, výsledky, otevřené otázky, datové vypořádání a doporučený další krok. Pokud pilot končí, napiš i co se stane s daty, přístupy a testovacím prostředím. Důvěra se buduje i tím, že umíš dobře odejít.
+
+### FO.7 Šablona: karta pilotu po demu
+
+```markdown
+## Pilot: [zákazník / proces]
+
+### Hypotéza
+Pokud [tým] použije [produkt / funkci] na [proces] po dobu [čas], zlepší se [výsledek] tak, že [rozhodnutí].
+
+### Rozsah
+- Tým:
+- Proces:
+- Data:
+- Integrace:
+- Co je mimo rozsah:
+
+### Role
+- Vlastník zákazníka:
+- Vlastník dodavatele:
+- Uživatelé:
+- Technický / bezpečnostní kontakt:
+
+### Kritéria úspěchu
+- Hodnota:
+- Použitelnost:
+- Provozní bezpečí:
+- Privacy-first hranice:
+
+### Rytmus
+- Start:
+- Kontrolní body:
+- Konec:
+- Datum rozhodnutí:
+
+### Data a ukončení
+- Jaká data použijeme:
+- Kdo má přístup:
+- Kdy a jak se data smažou / předají:
+- Co se stane s účty po pilotu:
+```
+
+### FO.8 Checklist: pilot bez chaosu a datového hladu
+
+- [ ] Pilot má jednu ověřovanou hypotézu napsanou lidskou větou.
+- [ ] Rozsah je omezený na jeden proces, jeden tým a minimální nutná data.
+- [ ] Kritéria úspěchu jsou domluvená před startem, ne vymýšlená po konci.
+- [ ] Zákazník má interního vlastníka, který umí řešit blokace.
+- [ ] Je jasné, co je mimo rozsah a co se nebude během pilotu přidávat.
+- [ ] Měření používá agregované procesní signály, ne sledování jednotlivců.
+- [ ] Pilot má datum rozhodnutí a čtyři možné výsledky: pokračovat, upravit, zopakovat, ukončit.
+- [ ] Po pilotu jsou vypořádaná data, účty, přístupy a testovací prostředí.
+
+### FO.9 Codyho komentář
+
+Pilot není sleva maskovaná jako strategie. Je to obchodní experiment s jasnou hranicí. Když ho uděláš dobře, i „ne“ je užitečný výsledek: víš, proč zákazník nepokračuje, co produktu chybí a která data jsi zbytečně neposbíral. Což je vzácná kombinace — méně chaosu, méně právního potu a víc reality.
+
 ## Pracovní log
+
+- 2026-09-04 22:00 UTC — Doplněna příloha FO o pilotu po obchodním demu: hypotéza, omezený reprezentativní rozsah, rozhodovací kritéria, pilotový kontrakt, privacy-first měření signálů, jasné ukončení, šablona karty a checklist.
 
 - 2026-09-04 21:00 UTC — Doplněna příloha FN o obchodním demu pro SaaS: příprava před demem, příběh změny, reálné scénáře, privacy-first vysvětlení v toku produktu, označování nehotových funkcí, otázky během dema, follow-up shrnutí, šablona karty a checklist.
 
