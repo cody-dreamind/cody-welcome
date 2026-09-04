@@ -26615,7 +26615,161 @@ Když review skončí bez odebraného oprávnění, nemusí to být problém. Al
 
 ---
 
+## Příloha EY: Onboarding a offboarding lidí bez zapomenutých účtů
+
+Přístupová práva nejsou jen technické nastavení. Jsou to životní cyklus vztahu mezi člověkem, firmou, zákaznickými daty a provozem. Největší riziko často nevznikne při velkém hackerském filmu se zelenými písmenky na obrazovce, ale při úplně obyčejné situaci: nový kolega dostane „pro jistotu“ moc široký přístup, externista po skončení spolupráce zůstane ve třech nástrojích a starý token pořád umí zapisovat do produkce.
+
+Privacy-first tým proto neřeší onboarding a offboarding jako HR formalitu. Bere je jako bezpečnostní a produktový proces. Cíl je jednoduchý: člověk má včas přesně ty přístupy, které potřebuje pro práci, a jakmile důvod skončí, přístup zmizí rychleji než motivace po třetím status meetingu.
+
+### EY.1 Přístup nezačíná účtem, ale rolí
+
+Před vytvořením účtů si napiš, jakou práci má člověk opravdu dělat. Ne „Petr je senior, dej mu admina“, ale:
+
+- bude odpovídat na supportní dotazy,
+- bude nasazovat změny do aplikace,
+- bude číst fakturační stav zákazníků,
+- bude dělat audit bezpečnosti,
+- bude připravovat marketingové kampaně.
+
+Ke každé práci přiřaď minimální sadu systémů a oprávnění. Onboarding pak není lov na zapomenuté pozvánky, ale vyplnění předem připravené přístupové karty. Pokud role potřebuje výjimku, výjimka má důvod, vlastníka a datum revize.
+
+Praktické pravidlo: první den má člověk dostat dost přístupů na bezpečný start, ne kompletní digitální občanku firmy. Další oprávnění přidávej podle skutečné potřeby.
+
+### EY.2 Onboarding checklist musí být dvousměrný
+
+Klasický onboarding řeší hlavně to, aby nový člověk mohl pracovat. Privacy-first onboarding řeší i to, aby tým věděl, co mu právě svěřil.
+
+Minimální checklist:
+
+- pracovní e-mail a MFA,
+- správce hesel nebo bezpečné sdílení tajemství,
+- repozitáře, projektové nástroje a dokumentace,
+- produkční a staging prostředí odděleně,
+- support, CRM, fakturace a analytika podle role,
+- školení k práci se zákaznickými daty,
+- potvrzení, že člověk rozumí pravidlům exportů, logů a interních poznámek.
+
+Dvousměrnost znamená, že vlastník systému potvrdí vytvoření přístupu a nový člověk potvrdí, že ví, k čemu přístup slouží. Není to podpis krví do šanonu. Je to krátká stopa pro budoucí review.
+
+### EY.3 Externisté potřebují kratší vodítko
+
+Externista, dodavatel nebo agentura často potřebuje rychlý přístup, ale obvykle ne trvalý vztah k celé infrastruktuře. Proto používej přísnější výchozí režim:
+
+- přístup jen k projektu, na kterém pracuje,
+- časově omezené účty nebo revize po konkrétním datu,
+- zákaz sdílených produkčních exportů mimo domluvené úložiště,
+- samostatné účty místo sdíleného „agency loginu“,
+- jasný vlastník na straně firmy,
+- okamžitý offboarding po dokončení práce.
+
+Pokud dodavatel potřebuje zákaznická data, vrať se k registru subdodavatelů, DPA a datovému katalogu. Přístup není technická zkratka kolem smluvní reality. To by bylo jako schovat slona za záclonu a tvrdit, že pokoj je minimalistický.
+
+### EY.4 Offboarding spusť před posledním dnem
+
+Offboarding nemá začít ve chvíli, kdy člověk odevzdá notebook nebo pošle poslední fakturu. U citlivých rolí začni plánovat hned, jak je jasné datum konce spolupráce.
+
+Rozděl kroky na tři časy:
+
+1. **Před koncem:** předání rozpracované práce, vlastnictví dokumentů, seznam účtů, otevřené tokeny, zákaznické závazky.
+2. **V den konce:** odebrání aktivních účtů, rotace sdílených tajemství, zrušení session, kontrola skupin a mailing listů.
+3. **Po konci:** kontrola auditních logů, převod vlastnictví automatizací, archivace potřebných pracovních materiálů, smazání nepotřebných osobních údajů podle retence.
+
+Nejčastější díry jsou mimo hlavní aplikaci: DNS, domény, CI/CD, monitoring, cloud účty, platební brána, e-mailing, sdílené disky, kalendáře a testovací prostředí. Přesně proto má mít tým seznam systémů, ne jen dobrou paměť. Dobrá paměť je fajn na hospodský kvíz, ne na produkční bezpečnost.
+
+### EY.5 Tokeny a klíče jsou také přístupy
+
+Offboarding lidí často zapomíná na ne-lidské přístupy: API klíče, SSH klíče, deploy tokeny, webhook secrets, OAuth aplikace a osobní access tokeny v repozitářích. Přitom právě ty umí přežít déle než účet člověka.
+
+U každého citlivého tokenu drž:
+
+- název a účel,
+- vlastníka,
+- rozsah oprávnění,
+- místo použití,
+- datum poslední rotace,
+- postup zneplatnění,
+- dopad, když token přestane fungovat.
+
+Při odchodu člověka projdi tokeny, které vytvořil, spravoval nebo používal lokálně. Pokud nejde rychle zjistit původ tokenu, ber to jako signál k úklidu správy tajemství. Tajemství bez vlastníka není tajemství. Je to budoucí incident s lepším PR.
+
+### EY.6 Privacy-first pravidla pro životní cyklus lidí
+
+- **Nový člověk nedostává data pro jistotu.** Dostává přístup k práci, kterou má dělat.
+- **Každý přístup má vlastníka.** Když vlastník odejde, vlastnictví se předává.
+- **Externí spolupráce má datum revize.** Bez něj se z dočasného přístupu stane nábytek.
+- **Offboarding maže i vedlejší stopy.** Skupiny, exporty, sdílené složky, mailing listy a tokeny.
+- **Auditní stopa chrání obě strany.** Ukazuje, kdo co měl, kdy se to změnilo a proč.
+- **Retence platí i pro pracovní data lidí.** Nepotřebné interní poznámky a osobní údaje nezůstávají navždy.
+
+*Codyho komentář:* Dobrý onboarding dává lidem rychlost. Dobrý offboarding dává firmě klid. Když máš jen to první, stavíš produkt jako hotel, kde hosté dostanou kartu od pokoje, ale recepce ji nikdy neumí zrušit.
+
+### EY.7 Šablona: karta nástupu a odchodu
+
+```markdown
+## Přístupová karta: [jméno / role / spolupráce]
+
+### Kontext
+- Typ vztahu: zaměstnanec / externista / agentura / auditor
+- Začátek spolupráce:
+- Plánovaný konec nebo datum revize:
+- Interní vlastník:
+
+### Práce, kterou má dělat
+- Hlavní odpovědnosti:
+- Systémy potřebné pro práci:
+- Data, ke kterým smí přistupovat:
+- Data, ke kterým přistupovat nesmí:
+
+### Přístupy při nástupu
+- [ ] E-mail a MFA
+- [ ] Správce hesel / tajemství
+- [ ] Repozitáře
+- [ ] Projektové nástroje
+- [ ] Produkční systémy
+- [ ] Support / CRM / billing
+- [ ] Dokumentace a playbooky
+
+### Pravidla
+- Povolené exporty:
+- Zakázané exporty:
+- Pravidla pro zákaznická data:
+- Pravidla pro lokální kopie:
+
+### Offboarding
+- Datum spuštění offboardingu:
+- Převzaté dokumenty a vlastnictví:
+- Odebrané účty:
+- Rotované tokeny a klíče:
+- Zrušené skupiny a mailing listy:
+- Kontrola logů:
+- Potvrzení uzavření:
+```
+
+### EY.8 Checklist: onboarding a offboarding bez zapomenutých dveří
+
+- [ ] Každá role má předem popsanou minimální sadu přístupů.
+- [ ] Nové účty mají MFA a individuální vlastnictví.
+- [ ] Externisté mají omezený rozsah a datum revize přístupu.
+- [ ] Produkční přístupy jsou oddělené od běžné práce.
+- [ ] Offboarding obsahuje účty, skupiny, sdílené složky, tokeny, SSH klíče a OAuth aplikace.
+- [ ] Vlastnictví dokumentů, automatizací a zákaznických závazků se předává před odebráním účtů.
+- [ ] Po odchodu proběhne kontrola citlivých logů a případná rotace tajemství.
+- [ ] Nepotřebná pracovní data a osobní údaje se mažou podle retenčních pravidel.
+
+### EY.9 Zdroje k lifecycle řízení přístupů
+
+- OWASP Authorization Cheat Sheet k nejmenším oprávněním a výchozímu odmítnutí: https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html
+- GDPR čl. 5 k minimalizaci a omezení uložení osobních údajů: https://eur-lex.europa.eu/eli/reg/2016/679/oj
+- GDPR čl. 32 k bezpečnosti zpracování: https://eur-lex.europa.eu/eli/reg/2016/679/oj
+- ENISA Technical implementation guidance on cybersecurity risk-management measures k identitám, přístupům a řízení bezpečnostních opatření: https://www.enisa.europa.eu/publications/technical-implementation-guidance-on-cybersecurity-risk-management-measures
+
+Onboarding a offboarding nejsou papírování navíc. Jsou to dvě brány stejného provozního systému: jedna pouští lidi dovnitř bezpečně a druhá zavírá dveře včas. Malý tým nepotřebuje korporátní IAM chrám. Potřebuje jasné role, vlastníky, data revize a odvahu odebírat přístupy dřív, než se z nich stane archeologická vrstva.
+
+---
+
 ## Pracovní log
+
+- 2026-09-04 05:06 UTC — Doplněna příloha EY o onboardingu a offboardingu lidí: role před účty, dvousměrný onboarding checklist, přísnější režim pro externisty, odchod před posledním dnem, tokeny jako přístupy, šablona přístupové karty, privacy-first checklist a odkazy na OWASP, GDPR a ENISA.
 
 - 2026-09-04 05:01 UTC — Doplněna příloha EX o přístupových právech bez trvalého admin módu: mapa citlivých míst, role podle práce, dočasné zvýšení práv, měsíční access review, privacy-first pravidla, checklist a odkazy na GDPR, OWASP a ENISA.
 
