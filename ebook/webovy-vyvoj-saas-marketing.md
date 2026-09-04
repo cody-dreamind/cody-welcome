@@ -29551,7 +29551,179 @@ Pokud [tým] použije [produkt / funkci] na [proces] po dobu [čas], zlepší se
 
 Pilot není sleva maskovaná jako strategie. Je to obchodní experiment s jasnou hranicí. Když ho uděláš dobře, i „ne“ je užitečný výsledek: víš, proč zákazník nepokračuje, co produktu chybí a která data jsi zbytečně neposbíral. Což je vzácná kombinace — méně chaosu, méně právního potu a víc reality.
 
+## Příloha FP: Přechod z pilotu do produkce bez rozbité důvěry
+
+Pilot skončil dobře. Zákazník kývl, tým je nadšený, obchodník už mentálně utratil první fakturu a produktový člověk si konečně dovolil spát víc než šest hodin. Teď přichází nebezpečná část: převést ověřený pilot do produkčního provozu tak, aby se z něj nestal nezdokumentovaný slepenec výjimek.
+
+Přechod do produkce není „zapneme to všem a uvidíme“. Je to samostatná fáze s rozhodnutím, migračním plánem, provozní odpovědností a datovým vypořádáním. Právě tady se ukáže, jestli privacy-first nebyl jen hezký odstavec v nabídce.
+
+### FP.1 Nejdřív uzavři pilot jako experiment
+
+Než začne produkční rollout, napiš závěr pilotu. Krátce, věcně a ideálně ve stejném dokumentu, kde byla pilotní hypotéza. Cílem není vyhrát literární soutěž „Nejdojemnější shrnutí Q3“, ale mít společnou realitu.
+
+Závěr pilotu má obsahovat:
+
+- **Původní hypotézu:** co se mělo ověřit.
+- **Skutečný rozsah:** kdo systém používal, jak dlouho, na jakých datech a v jakém prostředí.
+- **Výsledky:** co se zlepšilo, co se nepotvrdilo a co zůstalo nejasné.
+- **Blokace:** věci, které musí být vyřešené před produkcí.
+- **Datové vypořádání:** co se stane s pilotními daty, účty, logy a testovacím prostředím.
+- **Rozhodnutí:** pokračujeme, pokračujeme s úpravou, opakujeme pilot, nebo končíme.
+
+Bez toho hrozí, že produkční projekt zdědí všechny pilotní kompromisy. Pilotní výjimka „zatím to importujeme ručně“ se pak po roce tváří jako integrační strategie. To je přesně ten typ technického dluhu, který nosí falešný knír a říká si „dočasné řešení“.
+
+### FP.2 Produkční rozsah napiš znovu, nezkopíruj ho z pilotu
+
+Pilot je úzký záměrně. Produkce má jiné otázky: kdo všechno bude systém používat, jaké procesy přibudou, jaký objem dat poteče dovnitř, kdo bude řešit podporu a co se stane při výpadku.
+
+Rozliš minimálně čtyři vrstvy rozsahu:
+
+- **Uživatelé:** role, týmy, oprávnění, onboarding a offboarding.
+- **Data:** typy dat, zdroje, importy, exporty, retence a mazání.
+- **Integrace:** systémy, které budou napojené hned, později nebo vůbec.
+- **Provoz:** SLA očekávání, monitoring, zálohy, incidenty, support a vlastník změn.
+
+Příklad: v pilotu může stačit jeden administrátor a deset reálných poptávek. V produkci už řešíš, jestli obchodníci uvidí jen své zákazníky, kdo smí exportovat seznamy, jak se zruší účet člověku, který odešel, a kde zákazník najde historii změn.
+
+Privacy-first pravidlo: rozšíření rozsahu nesmí automaticky znamenat rozšíření sběru osobních dat. Každý nový datový typ musí mít důvod. „Mohlo by se hodit“ není důvod, to je vstupenka do datového smogu.
+
+### FP.3 Převod dat řeš jako migraci, ne jako přílohu v e-mailu
+
+Při přechodu z pilotu do produkce jsou tři běžné scénáře:
+
+1. **Pilotní data se smažou a produkce začíná čistě.** Nejbezpečnější varianta, pokud data nebyla nutná pro pokračování.
+2. **Pilotní data se převedou do produkce.** Dává smysl, když se pilot stal skutečným začátkem provozu.
+3. **Pilotní data se anonymizují nebo agregují.** Hodí se pro vyhodnocení bez držení identifikovatelných údajů.
+
+U každého scénáře si napiš:
+
+- co přesně se převádí,
+- kdo převod schvaluje,
+- kdo ho technicky provede,
+- jak se ověří správnost,
+- jak se řeší chyby,
+- kdy se smažou nepotřebné kopie.
+
+Nikdy neposílej produkční export osobních dat jako náhodnou přílohu v nekonečném vlákně. Pokud potřebuješ předat data, použij řízený kanál, omezený přístup, šifrování tam, kde dává smysl, a jasnou expiraci. Evropské GDPR dlouhodobě stojí na principech minimalizace, zabezpečení a ochrany osobních údajů již od návrhu; prakticky to znamená, že migrace nemá být datový bleší trh, kde si každý odnese, co unese.
+
+### FP.4 Produkční slib musí být menší než ambice
+
+Po úspěšném pilotu často přijde pokušení slíbit plnou platformu, všechny integrace a reporty „v další fázi“. Pozor. Produkční start má být spolehlivý, ne heroický.
+
+Rozděl roadmapu na:
+
+- **Start produkce:** minimum nutné pro bezpečné používání.
+- **Stabilizace:** opravy, UX drobnosti, dokumentace, monitoring a supportní rytmus.
+- **Rozšíření:** nové týmy, integrace, automatizace, reporty a další use-casy.
+
+Produkční start může být menší než pilotní nadšení. To není slabost. Je lepší spustit úzký stabilní proces než široký systém, který první týden vyrábí podporu, incidenty a pasivně-agresivní zprávy v chatu.
+
+Praktická věta do dohody:
+
+> Produkční spuštění pokrývá ověřený proces z pilotu, role administrátora a uživatelů, převod schválených dat a základní provozní podporu. Další integrace budou řešené po stabilizačním období.
+
+### FP.5 Přístupy a role nastav před prvním produkčním importem
+
+U malých týmů se přístupy často řeší až ve chvíli, kdy někdo napíše: „Hele, já vidím zákazníky, které vidět nemám.“ To je špatný monitoring. Tedy monitoring existuje, ale jmenuje se panika.
+
+Před produkcí připrav:
+
+- seznam rolí a jejich oprávnění,
+- vlastníka zákaznického účtu,
+- pravidlo pro schvalování nových uživatelů,
+- pravidlo pro odchod uživatele,
+- administrátorský účet oddělený od běžné práce,
+- log důležitých změn bez zbytečného sledování obsahu.
+
+Používej princip nejmenšího oprávnění: člověk má mít přístup k tomu, co potřebuje pro práci, ne k celé databázi, protože „je to jednodušší“. Jednodušší pro vývojáře dnes často znamená dražší pro firmu při prvním incidentu.
+
+### FP.6 První produkční týden má mít vlastní rytmus
+
+Rollout nekončí nasazením. První týden je stabilizační období. Naplánuj ho jako mini provozní režim:
+
+- **Den 0:** nasazení, kontrola základních toků, ověření přístupů, potvrzení zákazníkovi.
+- **Den 1:** rychlé review blokací a první drobné opravy.
+- **Den 3:** kontrola adopce, supportních dotazů a technických signálů.
+- **Den 7:** rozhodnutí, co jde do stabilizačního backlogu a co může počkat.
+
+Měř hlavně to, co ukáže, jestli zákazník skutečně pracuje:
+
+- dokončené klíčové akce,
+- chyby formulářů nebo importů,
+- počet supportních dotazů podle tématu,
+- ruční obcházení systému,
+- aktivované účty a role,
+- stav otevřených blokací.
+
+Nemusíš sledovat každý klik. Potřebuješ vědět, jestli produkt doručuje slíbený pracovní tok. Rozdíl mezi těmito dvěma věcmi je rozdíl mezi produktovou analytikou a digitálním slídilstvím v obleku.
+
+### FP.7 Šablona: produkční přechodová karta
+
+```markdown
+## Přechod do produkce: [zákazník / produkt]
+
+### Rozhodnutí z pilotu
+- Hypotéza:
+- Výsledek:
+- Blokace před produkcí:
+- Co nepřenášíme z pilotu:
+
+### Produkční rozsah
+- Uživatelé a role:
+- Procesy:
+- Data:
+- Integrace:
+- Co je mimo první produkční verzi:
+
+### Migrace dat
+- Zdroj dat:
+- Cílové prostředí:
+- Schvalovatel:
+- Kontrola správnosti:
+- Mazání pilotních kopií:
+
+### Provoz
+- Vlastník zákazníka:
+- Vlastník dodavatele:
+- Supportní kanál:
+- Monitoring:
+- Zálohy a obnova:
+- Incidentní kontakt:
+
+### První týden
+- Den 0:
+- Den 1:
+- Den 3:
+- Den 7:
+- Stabilizační backlog:
+```
+
+### FP.8 Checklist: z pilotu do produkce bez ztráty kontroly
+
+- [ ] Pilot má uzavřené písemné vyhodnocení a jasné rozhodnutí.
+- [ ] Produkční rozsah je napsaný znovu a neobsahuje automaticky všechny pilotní kompromisy.
+- [ ] Je jasné, která pilotní data se smažou, převedou nebo anonymizují.
+- [ ] Převod dat má schvalovatele, kontrolu správnosti a plán pro odstranění nepotřebných kopií.
+- [ ] Role a oprávnění jsou nastavené před prvním produkčním importem.
+- [ ] Produkční slib je omezený na ověřený proces a stabilizační období.
+- [ ] První týden má konkrétní kontrolní body a vlastníky reakce.
+- [ ] Zákazník ví, kde najde dokumentaci, podporu, export a pravidla pro data.
+- [ ] Privacy-first hranice jsou součástí provozu, ne jen poznámka v obchodní prezentaci.
+
+### FP.9 Codyho komentář
+
+Přechod do produkce je chvíle, kdy se z „tohle by mohlo fungovat“ stává „na tomhle někdo pracuje každý den“. Buď nudně pečlivý. Nuda v produkci je kompliment. Znamená to, že uživatelé řeší svou práci, ne tvůj deployment, oprávnění a datovou improvizaci.
+
+### FP.10 Zdroje k datové ochraně při přechodu do produkce
+
+- GDPR, článek 25 — ochrana osobních údajů již od návrhu a ve výchozím nastavení: https://eur-lex.europa.eu/eli/reg/2016/679/oj
+- GDPR, článek 32 — zabezpečení zpracování: https://eur-lex.europa.eu/eli/reg/2016/679/oj
+- Evropská komise — pravidla ochrany osobních údajů pro podniky a organizace: https://commission.europa.eu/law/law-topic/data-protection/reform/rules-business-and-organisations_en
+- EDPB — pokyny k pojmům správce a zpracovatele podle GDPR: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-072020-concepts-controller-and-processor-gdpr_en
+
 ## Pracovní log
+
+- 2026-09-04 23:01 UTC — Doplněna příloha FP o přechodu z pilotu do produkce: uzavření pilotu, nový produkční rozsah, řízená migrace dat, menší produkční slib, role a oprávnění, rytmus prvního týdne, přechodová karta, privacy-first checklist a odkazy na GDPR/EDPB zdroje.
 
 - 2026-09-04 22:00 UTC — Doplněna příloha FO o pilotu po obchodním demu: hypotéza, omezený reprezentativní rozsah, rozhodovací kritéria, pilotový kontrakt, privacy-first měření signálů, jasné ukončení, šablona karty a checklist.
 
