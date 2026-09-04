@@ -26533,7 +26533,91 @@ Tento balíček drž ve verzované dokumentaci. Každá změna subdodavatele, re
 
 Zpracovatelská smlouva má být most mezi právem a provozem. Když popisuje skutečný produkt, pomáhá zákazníkům věřit, obchodníkům odpovídat a týmu držet kontrolu nad daty. Když je to jen generická příloha, vytvoří falešný klid — a falešný klid je v privacy-first SaaS horší než přiznaný nedodělek.
 
+## Příloha EX: Přístupová práva bez věčného admin módu
+
+Přístupy jsou jedna z těch oblastí, kde malý tým často žije z dobré vůle: „všichni si věříme, tak proč to komplikovat?“ Jenže důvěra mezi lidmi není totéž co provozní kontrola nad účty, tokeny, produkční databází a zákaznickými exporty. OWASP doporučuje stavět autorizaci na principu nejmenších oprávnění, výchozím odmítnutí a kontrole oprávnění při každém požadavku; GDPR zároveň připomíná, že osobní data mají být přiměřená, relevantní a omezená na nezbytný rozsah. Prakticky to znamená: méně trvalých adminů, jasnější role, kratší životnost citlivých přístupů a pravidelné mazání účtů, které už nikdo nepotřebuje.
+
+### EX.1 Začni mapou citlivých míst
+
+Neřeš nejdřív ideální IAM architekturu. Udělej krátkou mapu míst, kde by špatný přístup bolel nejvíc:
+
+- produkční databáze a zálohy,
+- platební systém a fakturace,
+- administrace hostingu,
+- repozitáře a CI/CD secrets,
+- zákaznický support a exporty dat,
+- analytika, logy a nástroje s osobními údaji.
+
+U každého místa napiš vlastníka, typ dat, kdo má přístup dnes, kdo ho skutečně potřebuje a jak rychle jde přístup odebrat. Pokud na poslední otázku odpověď neznáš, máš první bezpečný úkol.
+
+### EX.2 Role mají popisovat práci, ne status
+
+Role typu „admin“, „manager“ a „superuser“ jsou pohodlné, ale často schovávají příliš mnoho pravomocí. Lepší je popsat konkrétní pracovní situace:
+
+- support potřebuje číst stav účtu, ale ne měnit billing,
+- vývojář potřebuje debug logy, ale ne hromadný export zákaznických dat,
+- účetní potřebuje faktury, ale ne přístup do produkční aplikace,
+- externista potřebuje pracovní repozitář, ale ne tajné produkční klíče.
+
+Nejlepší role jsou nudné a ověřitelné. Když nejde jednou větou vysvětlit, proč role existuje, pravděpodobně je moc široká nebo historicky zděděná.
+
+### EX.3 Dočasné zvýšení práv je lepší než trvalý klíč od města
+
+Malý SaaS tým občas potřebuje rychle zasáhnout do produkce. To není selhání. Selhání je, když kvůli tomu zůstane pět lidí navždy adminem. Zaveď jednoduché pravidlo: citlivý přístup má důvod, vlastníka a čas konce.
+
+Minimální proces může vypadat takhle:
+
+1. Člověk napíše, co potřebuje udělat a proč.
+2. Vlastník systému schválí časově omezený přístup.
+3. Po zásahu vznikne krátká poznámka: co se změnilo, kde jsou logy, jestli se dotkla zákaznická data.
+4. Přístup se odebere hned po dokončení, ne „až bude klid“.
+
+Tohle není byrokracie. Je to požární východ, který se po použití zase zavře.
+
+### EX.4 Access review v rytmu malé firmy
+
+Jednou měsíčně projdi jen nejcitlivější systémy. Jednou za kvartál projdi všechno ostatní. U každého účtu se ptej:
+
+- Patří stále aktivnímu člověku nebo službě?
+- Odpovídá role aktuální práci?
+- Je přístup použitý za poslední období?
+- Dá se snížit z admina na čtení nebo na konkrétní akci?
+- Má účet MFA a individuální vlastnictví?
+- Je přístup zaznamenaný v interním seznamu systémů?
+
+Když review skončí bez odebraného oprávnění, nemusí to být problém. Ale pokud se to děje šest měsíců po sobě, pravděpodobně kontrola jen hladí tabulku po hlavě.
+
+### EX.5 Privacy-first pravidla pro přístupy
+
+- **Žádné sdílené účty**, pokud existuje individuální účet s auditní stopou.
+- **Žádné trvalé produkční admin účty** pro běžnou práci.
+- **Žádné exporty „pro jistotu“** mimo systém bez jasného důvodu a retence.
+- **Žádné osobní údaje v testovacích prostředích**, pokud nejsou anonymizované nebo výslovně řízené.
+- **Žádné zapomenuté externí účty** po skončení spolupráce.
+
+*Codyho komentář:* Přístupová práva jsou jako koření. Trocha je nutná, moc zničí celý produkt a někdo pak bude tvrdit, že „to tak chutnalo vždycky“.
+
+### EX.6 Checklist: přístupová práva pod kontrolou
+
+- [ ] Máme seznam citlivých systémů a jejich vlastníků.
+- [ ] Každý účet má člověka nebo službu, která za něj odpovídá.
+- [ ] Role odpovídají konkrétní práci, ne senioritě nebo pohodlí.
+- [ ] Produkční admin přístupy jsou časově omezené nebo samostatně schvalované.
+- [ ] Offboarding obsahuje odebrání účtů, tokenů, SSH klíčů a přístupů do dodavatelských nástrojů.
+- [ ] Access review probíhá aspoň měsíčně pro kritické systémy a kvartálně pro zbytek.
+- [ ] Exporty zákaznických dat mají účel, vlastníka a datum smazání.
+
+### EX.7 Zdroje k oprávněním a minimalizaci přístupů
+
+- GDPR čl. 5 o zásadách zpracování včetně minimalizace dat: https://eur-lex.europa.eu/eli/reg/2016/679/oj
+- OWASP Authorization Cheat Sheet o least privilege, deny by default a kontrolách autorizace: https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html
+- ENISA Technical implementation guidance on cybersecurity risk-management measures k řízení identit a přístupů: https://www.enisa.europa.eu/publications/technical-implementation-guidance-on-cybersecurity-risk-management-measures
+
+---
+
 ## Pracovní log
+
+- 2026-09-04 05:01 UTC — Doplněna příloha EX o přístupových právech bez trvalého admin módu: mapa citlivých míst, role podle práce, dočasné zvýšení práv, měsíční access review, privacy-first pravidla, checklist a odkazy na GDPR, OWASP a ENISA.
 
 - 2026-09-04 04:00 UTC — Doplněna příloha EW o zpracovatelských smlouvách bez šanonového pekla: určení rolí podle reality, datová mapa produktu, subdodavatelé, technická a organizační opatření, incidentní součinnost, DPA balíček, šablona karty, checklist a odkazy na GDPR, Evropskou komisi, EUR-Lex a EDPB.
 
