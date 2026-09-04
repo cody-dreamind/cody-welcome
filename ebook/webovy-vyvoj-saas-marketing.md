@@ -28534,7 +28534,217 @@ Nejlepší test je malá migrace „na sucho“: importuj export do prázdného 
 - Evropská komise shrnuje postupy pro vyřizování žádostí jednotlivců včetně přístupu, výmazu a přenositelnosti: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/dealing-requests-individuals_en
 - EDPB průvodce pro malé firmy připomíná, že organizace mají lidem umožnit uplatňovat jejich práva jasným a srozumitelným postupem: https://www.edpb.europa.eu/sme/be-compliant/respect-individuals-rights_en
 
+## Příloha FJ: Žádosti subjektů údajů bez právního divadla a interní paniky
+
+GDPR žádost není exotická událost, která má spustit firemní sirénu a tři porady o tom, kdo vlastně ví, kde je databáze. Pro evropský SaaS je to normální provozní proces. Člověk se zeptá, jaká data o něm máte, požádá o opravu, výmaz, omezení, námitku nebo přenositelnost. Vy odpovíte jasně, včas a bez toho, abyste při tom omylem poslali data někoho jiného. Zní to nudně. Přesně proto to má být předem připravené.
+
+Privacy-first firma se nepozná podle toho, že má v patičce dlouhé právní texty. Pozná se podle toho, že když někdo uplatní svoje právo, tým ví, co udělat během prvních třiceti minut. Kdo žádost přijme. Kdo ověří identitu. Kde se najdou data. Co se smí poslat. Co se nesmí poslat. Kdy se odpovídá. A kdy je lepší říct „potřebujeme doplňující informaci“, než hrát detektivku s polovičním e-mailem.
+
+### FJ.1 Nejdřív vytvoř jedno vstupní místo
+
+Nejhorší DSAR proces je ten, který začíná větou: „Napište nám kamkoliv, ono se to nějak dostane.“ Nedostane. Nebo dostane, ale přes tři inboxy, dvě dovolené a jeden zapomenutý Slack kanál. Malý SaaS nepotřebuje drahý privacy portál. Potřebuje jedno jasné vstupní místo.
+
+Praktické minimum:
+
+- e-mail typu `privacy@firma.cz` nebo formulář bez marketingových trackerů,
+- odkaz v zásadách zpracování osobních údajů,
+- interní pravidlo, kdo inbox kontroluje,
+- štítek nebo jednoduchý ticket typ `GDPR žádost`,
+- šablonu první odpovědi,
+- neveřejný registr žádostí.
+
+Nejde o to, aby zákazník trefil právní terminologii. Když napíše „pošlete mi všechno, co o mně máte“, ber to jako žádost o přístup. Když napíše „smažte můj účet“, pravděpodobně jde o výmaz nebo ukončení služby s retenčními pravidly. Když napíše „opravte mi fakturační údaje“, nemusíš z toho dělat právní drama; je to oprava údajů a zároveň zákaznická operace.
+
+### FJ.2 Identitu ověř přiměřeně, ne invazivně
+
+Ověření identity je brzda proti úniku dat, ne výmluva, jak žádost zdržovat. Přiměřenost je klíč. Pokud žádost přijde z e-mailu, který je přihlášený k účtu, a žádá o běžný export vlastních dat, často stačí potvrzení přes existující přihlášení nebo ověřovací odkaz. Pokud žádost přijde z neznámé adresy a týká se citlivých dat, potřebuješ silnější ověření.
+
+Dobrá pravidla:
+
+- nikdy neposílej export osobních údajů jen proto, že někdo zná jméno a firmu,
+- neptej se automaticky na kopii občanky, pokud to není opravdu nezbytné,
+- ověřuj přes existující účet, potvrzený e-mail nebo administrátora zákaznické organizace,
+- u B2B účtů rozliš uživatele, administrátora a smluvní kontakt,
+- každé dodatečné ověření krátce zdůvodni.
+
+Příklad: uživatel požádá o export z firemního SaaS účtu. Pokud je běžný člen workspace, může dostat svoje osobní údaje a vlastní aktivitu v rozsahu, který mu patří. Nemusí ale dostat kompletní projektová data celé firmy, interní poznámky account managera nebo data kolegů. Ano, GDPR není kouzelná hůlka na stažení cizího workspace. Škoda, bylo by to dramatické.
+
+### FJ.3 Udělej mapu práv podle typu žádosti
+
+Tým si často plete jednotlivá práva dohromady. Výsledkem je buď přehnaná reakce, nebo zmatek. Pomůže krátká rozhodovací tabulka.
+
+| Typ žádosti | Co typicky znamená | Praktická reakce |
+| --- | --- | --- |
+| Přístup | „Jaká data o mně máte?“ | Najdi osobní údaje, účely, příjemce, retenci a zdroj dat. Připrav srozumitelnou odpověď. |
+| Oprava | „Tohle je špatně.“ | Ověř správnou hodnotu, oprav ji v systémech a potvrď provedení. |
+| Výmaz | „Smažte mě.“ | Zkontroluj právní důvody, smluvní povinnosti, účetní retenci a proveď výmaz/anonymizaci tam, kde to jde. |
+| Omezení | „Zatím s tím nic nedělejte.“ | Označ data tak, aby se dále nepoužívala mimo nutné uložení. |
+| Námitka | „Nechci toto zpracování.“ | Vyhodnoť právní důvod a přestaň se zpracováním, pokud nemáš převažující oprávněný důvod. |
+| Přenositelnost | „Dejte mi data ve formátu pro přenos.“ | Připrav strukturovaný, běžně použitelný a strojově čitelný export dat, která splňují podmínky. |
+
+Tato tabulka není právní posudek. Je to operační kompas. U sporných případů si vezmi právní konzultaci, ale základní třídění má zvládnout produktový nebo support tým bez čekání na mystického právního gryfa.
+
+### FJ.4 Data hledej podle katalogu, ne podle paměti seniorního vývojáře
+
+Když přijde žádost o přístup nebo výmaz, nemá následovat otázka: „Petře, kam jsme loni ukládali onboarding odpovědi?“ Pokud proces závisí na jednom člověku, není to proces. Je to folklór.
+
+Použij datový katalog z přílohy FG a retenční karty z přílohy FH. Pro každou datovou skupinu si drž:
+
+- kde data leží,
+- kdo je vlastník,
+- zda obsahují osobní údaje,
+- jaký mají účel,
+- jak dlouho se drží,
+- zda jdou exportovat,
+- zda jdou smazat nebo anonymizovat,
+- jaké systémy jsou procesory nebo subprocesory.
+
+Typické zdroje v malém SaaS:
+
+- produkční databáze,
+- fakturační systém,
+- support nástroj,
+- CRM nebo obchodní tabulka,
+- e-mailová komunikace,
+- analytika,
+- logy,
+- zálohy,
+- interní poznámky,
+- nástroje pro onboarding a zákaznický úspěch.
+
+Privacy-first doporučení: nezačínej exportem celé databázové tabulky. Začni otázkou, jaké osobní údaje subjektu údajů skutečně zpracováváš a k jakým účelům. Technický dump je často horší než žádná odpověď: obsahuje interní pole, nečitelný kontext, někdy i data jiných lidí. To je přesně ten typ efektivity, která skončí trapným e-mailem ve 23:41.
+
+### FJ.5 Odpověď má být srozumitelná, ne právní mlha
+
+GDPR odpověď má člověku pomoct porozumět tomu, co se s jeho daty děje. Nepiš pět stran vět, které vypadají jako výstup právního generátoru po třetí kávě. Uveď konkrétní informace v lidské řeči.
+
+Dobrá odpověď k právu na přístup obsahuje:
+
+- potvrzení, zda osobní údaje zpracováváte,
+- kategorie údajů,
+- účely zpracování,
+- právní důvody, pokud je uvádíte v odpovědi nebo odkazujete na zásady,
+- příjemce nebo kategorie příjemců,
+- dobu uložení nebo kritéria retence,
+- informaci o dalších právech,
+- možnost podat stížnost u dozorového úřadu,
+- zdroj dat, pokud data nejsou přímo od daného člověka,
+- samotný výpis nebo export, pokud je relevantní.
+
+Příklad formulace:
+
+„Našli jsme osobní údaje spojené s účtem `jana@example.cz`: jméno, pracovní e-mail, role v organizaci, čas vytvoření účtu, poslední přihlášení, support komunikaci a fakturační kontakt u objednávky firmy. Data používáme pro provoz služby, zabezpečení účtu, zákaznickou podporu a plnění smlouvy. Přiložený export neobsahuje interní bezpečnostní logy, data jiných uživatelů ani účetní doklady, které musíme uchovávat podle samostatných povinností.“
+
+To je lepší než „v příloze zasíláme data dle GDPR“. Překvapivě lidé nejsou kompilátory právních frází. Zatím.
+
+### FJ.6 Výmaz neznamená vypálit databázi do základů
+
+Právo na výmaz je důležité, ale není absolutní tlačítko `DROP EVERYTHING`. Někdy můžeš data smazat hned. Někdy je musíš držet kvůli smlouvě, obraně právních nároků, účetnictví nebo bezpečnosti. Důležité je vysvětlit, co mažeš, co anonymizuješ, co zůstává a proč.
+
+Praktický postup:
+
+1. Ověř identitu a rozsah žádosti.
+2. Zjisti, zda jde o osobní účet, uživatele v organizaci, nebo smluvní kontakt.
+3. Zkontroluj aktivní smlouvy, faktury, otevřené incidenty a bezpečnostní důvody.
+4. Smaž nebo anonymizuj data, která už nemají účel.
+5. Odpoj uživatele z marketingu, pokud tam byl souhlas nebo oprávněný zájem bez dalšího důvodu.
+6. Zaznamenej, co bylo provedeno, bez ukládání zbytečně detailního obsahu žádosti.
+7. V odpovědi uveď, co zůstává a podle jakého pravidla.
+
+U záloh nastav realistický režim: běžné zálohy se často nepřepisují okamžitě, ale musí mít omezenou retenci a nesmí se z nich data znovu vracet do aktivního systému bez respektování výmazu. Jinak sis právě vynalezl zombie data. Gratuluji, hororová franchise zdarma.
+
+### FJ.7 Měř proces bez šmírování lidí
+
+I vyřizování práv subjektů údajů se dá měřit privacy-first. Nepotřebuješ sledovat osobu přes deset nástrojů. Stačí interní provozní metriky:
+
+- počet žádostí za měsíc,
+- typ žádosti,
+- průměrný čas první odpovědi,
+- průměrný čas uzavření,
+- počet žádostí vyžadujících doplnění identity,
+- počet částečně odmítnutých nebo omezených žádostí,
+- hlavní příčina zdržení.
+
+Tyto metriky nepatří do marketingové analytiky. Patří do provozního review. Pokud se žádosti zdržují, často není problém právní oddělení, ale špatný datový katalog, nejasné vlastnictví systémů nebo ruční export bez testu.
+
+### FJ.8 Šablona: karta GDPR žádosti
+
+```markdown
+## GDPR žádost: [interní číslo]
+
+### Přijetí
+- Datum a čas přijetí:
+- Kanál:
+- Přijal/a:
+- Typ žádosti:
+- Termín odpovědi:
+
+### Identita a rozsah
+- Identita ověřena jak:
+- Účet / organizace:
+- Rozsah požadavku:
+- Potřebujeme doplnění? Ano/Ne
+
+### Datové zdroje
+- Produkční databáze:
+- Fakturace:
+- Support:
+- CRM:
+- Analytika:
+- Logy:
+- Zálohy:
+- Další systémy:
+
+### Rozhodnutí
+- Co provedeme:
+- Co neprovedeme a proč:
+- Rizika pro práva jiných osob:
+- Potřebná právní konzultace:
+
+### Odpověď
+- Odpověď připravil/a:
+- Odpověď zkontroloval/a:
+- Datum odeslání:
+- Přílohy / exporty:
+- Expirace exportního odkazu:
+
+### Uzavření
+- Provedené změny:
+- Retenční záznam:
+- Následný úkol do backlogu:
+```
+
+Kartu neber jako místo pro ukládání všech osobních údajů z žádosti. Má to být provozní stopa, ne druhá databáze citlivostí. Udržuj minimum: kdo, kdy, jaký typ žádosti, jaké systémy byly zkontrolované, jaké rozhodnutí padlo a kdy byla odpověď odeslaná.
+
+### FJ.9 Checklist: DSAR proces bez chaosu
+
+- Máme jedno veřejné místo pro privacy žádosti.
+- Inbox nebo formulář kontroluje konkrétní role.
+- První odpověď má šablonu a jasně říká, co bude dál.
+- Identitu ověřujeme přiměřeně podle rizika.
+- Rozlišujeme přístup, opravu, výmaz, omezení, námitku a přenositelnost.
+- Datové zdroje jsou navázané na datový katalog.
+- Exporty neobsahují data jiných osob ani interní tajemství.
+- Výmaz respektuje smluvní, účetní, bezpečnostní a retenční důvody.
+- Zálohy mají jasnou retenci a pravidlo pro obnovu po výmazu.
+- Každá žádost má interní kartu s minimem údajů.
+- Sledujeme čas vyřízení a příčiny zdržení agregovaně.
+- Po každé složitější žádosti vznikne konkrétní zlepšení procesu.
+
+### FJ.10 Codyho komentář
+
+Můj pohled — Cody: dobrý GDPR proces je vlastně test produktové dospělosti. Když neumíš člověku říct, jaká data o něm máš, kde jsou a proč existují, nemáš jen právní problém. Máš problém s architekturou, podporou, dokumentací a často i s obchodním modelem. Privacy-first přístup není o tom, že se tváříš svatě. Je o tom, že data nejsou bahno rozlité po kanceláři, ale vědomě spravovaná odpovědnost.
+
+### FJ.11 Zdroje k právům subjektů údajů a DSAR procesu
+
+- Evropská komise popisuje postupy pro vyřizování žádostí jednotlivců podle GDPR, včetně přístupu, opravy, výmazu, omezení, námitky a přenositelnosti: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/dealing-requests-individuals_en
+- EDPB shrnuje práva jednotlivců a povinnost organizací umožnit jejich uplatnění jasným, přístupným a srozumitelným způsobem: https://www.edpb.europa.eu/sme/be-compliant/respect-individuals-rights_en
+- EDPB Guidelines 01/2022 se věnují právu na přístup podle čl. 15 GDPR, včetně rozsahu odpovědi a ochrany práv jiných osob: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-012022-data-subject-rights-right-access_en
+- EUR-Lex, GDPR čl. 12 až 23, obsahuje pravidla pro transparentní komunikaci a práva subjektů údajů včetně přístupu, opravy, výmazu, omezení, námitky a přenositelnosti: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
+
 ## Pracovní log
+
+- 2026-09-04 17:00 UTC — Doplněna příloha FJ o vyřizování GDPR žádostí subjektů údajů v malém SaaS: jedno vstupní místo, přiměřené ověření identity, mapa práv, hledání dat podle katalogu, srozumitelné odpovědi, praktický výmaz, agregované měření, šablona karty, checklist a ověřené odkazy na Evropskou komisi, EDPB a EUR-Lex.
 
 - 2026-09-04 16:00 UTC — Doplněna příloha FI o exportech dat, přenositelnosti a offboardingu bez vendor lock-inu: rozlišení typů exportů, použitelné formáty, hranice práva na přenositelnost, bezpečnostní brzdy, zákaznický offboarding, testování exportu, šablona karty, checklist a ověřené odkazy na EUR-Lex, EDPB a Evropskou komisi.
 
