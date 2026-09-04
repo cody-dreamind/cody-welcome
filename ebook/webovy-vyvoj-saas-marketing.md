@@ -29248,7 +29248,160 @@ Dokumentace je tichý obchodník a první linie podpory. Když je dobrá, nikdo 
 - Publications Office of the EU shrnuje plain-language principy pro jasný, stručný a dobře uspořádaný text vhodný pro cílové publikum: https://op.europa.eu/documents/d/accessibility/accessible-publishing-plain-language-guidelines
 - Evropská komise má veřejnou stránku k plain language a srozumitelnému psaní, která zdůrazňuje jasnost textů pro občany i organizace: https://translation.ec.europa.eu/languages-and-translation-european-commission/plain-language-making-european-commission-texts-clear_en
 
+## Příloha FN: Obchodní demo, které prodává výsledek a neslibuje kouzla
+
+Demo není divadelní představení pro funkce. Je to řízený rozhovor, ve kterém zákazník uvidí, jak se z jeho dnešního problému stane jednodušší pracovní postup. Když demo sklouzne do klikací prohlídky typu „tady máme menu, tady filtr, tady export“, zákazník si odnese dojem, že produkt je možná schopný, ale neví, proč by ho měl chtít zrovna teď.
+
+Dobré demo má scénář, otázky, hranice a jasný další krok. U privacy-first SaaS má navíc jednu speciální roli: ukazuje, že produkt není jen užitečný, ale také důvěryhodný. Ne proto, že na posledním slidu svítí zámeček, ale proto, že během dema přirozeně vysvětlíš, jak se pracuje s daty, kdo k nim má přístup, co se neměří a jak zákazník zůstává pánem vlastního provozu.
+
+### FN.1 Demo začíná před demem
+
+Nejhorší demo je to, které začne otázkou: „Tak co byste chtěli vidět?“ To je sice zdvořilé, ale zároveň to říká: „Nemám scénář a doufám, že mě zachráníš.“ Před demem potřebuješ krátkou přípravu.
+
+Zeptej se předem na pět věcí:
+
+- **Role účastníků:** kdo rozhoduje, kdo bude produkt používat a kdo se bojí dopadu na procesy.
+- **Aktuální stav:** jak dnes řeší daný problém, v jakých nástrojích a s jakým třením.
+- **Dopad problému:** kolik času, chyb, ztracených poptávek nebo nervů to stojí.
+- **Úspěch dema:** co musí zákazník vidět, aby řekl „tohle dává smysl“.
+- **Datové hranice:** jaká data jsou citlivá, kdo je spravuje a zda existují interní pravidla pro cloud, EU provoz nebo externí dodavatele.
+
+Stačí krátký e-mail nebo tříminutový pre-call. Cílem není udělat konzultační projekt před prodejem. Cílem je nepředvádět účetní firmě marketingový dashboard, když ji ve skutečnosti pálí předávání dokladů klientům. Ano, tohle se děje. Software umí být kreativně mimo.
+
+### FN.2 Postav demo jako příběh změny
+
+Demo by mělo mít jednoduchou dramaturgii:
+
+1. **Dnešní bolest:** „Teď vám poptávky chodí do e-mailu, část končí u obchodníka, část u podpory a nikdo neví, co čeká na odpověď.“
+2. **Nový pracovní tok:** „Tady vidíte jednu frontu poptávek, jasný stav a odpovědnou osobu.“
+3. **První hodnota:** „Do pěti minut poznáte, které tři poptávky mají obchodní prioritu.“
+4. **Kontrola a bezpečnost:** „Administrátor vidí přístupy, exporty a auditní záznamy bez čtení obsahu soukromých poznámek.“
+5. **Další krok:** „Pokud to sedí, vybereme jeden tým a otestujeme to na omezeném rozsahu dat.“
+
+Tahle struktura funguje lépe než seznam obrazovek, protože zákazník sleduje posun. Neprodáváš tlačítko. Prodáváš kratší cestu od problému k rozhodnutí.
+
+### FN.3 Ukazuj reálný scénář, ne ideální katalog
+
+Demo data by měla připomínat skutečný život. Ne dokonale uklizený účet s pěti položkami, kde se nikdy nic nerozbije. Ukaž běžné situace:
+
+- novou poptávku bez všech informací,
+- duplicitní kontakt,
+- člověka bez oprávnění,
+- chybu v importu,
+- zákazníka, který chce export,
+- úkol, který čeká na kolegu.
+
+Reálný scénář buduje důvěru. Zákazník se neptá jen „umí to šťastnou cestu?“, ale „co se stane, když se do toho opře pondělí ráno?“ Pokud ukážeš, že produkt počítá s nepořádkem, působíš dospěleji než konkurence s krásnou, ale sterilní ukázkou.
+
+*Codyho komentář:* Demo bez edge casů je jako fotka hotelu bez koupelny. Vypadá dobře, ale člověk tuší, že důležité věci jsou někde mimo záběr.
+
+### FN.4 Privacy-first část neodkládej na právní přílohu
+
+Soukromí a bezpečnost nemají být samostatný desetiminutový blok na konci, kdy už všichni myslí na další schůzku. Vkládej je přímo do toku dema.
+
+Příklady vět, které působí přirozeně:
+
+- „Tady měříme dokončení kroku, ne chování konkrétního zaměstnance po minutách.“
+- „Export je dostupný jen administrátorům a každý export má časové omezení.“
+- „Do podpory neposíláme celý obsah účtu, jen technický kontext nutný k řešení chyby.“
+- „Tahle integrace je volitelná, protože posílá data mimo hlavní evropský provoz.“
+- „Auditní log pomáhá dohledat změnu nastavení, ne sledovat pracovní tempo lidí.“
+
+Tím dáváš najevo, že privacy-first není marketingová nálepka. Je to návrhový princip. A hlavně: zákazník nemusí být právník, aby pochopil, že jsi nad daty přemýšlel dřív než večer před podpisem smlouvy.
+
+### FN.5 Nepředstírej hotové funkce
+
+V demu je lákavé říct „tohle půjde“, „to doděláme“ nebo „integrace je jednoduchá“. Některé věty pak v obchodním zápisu záhadně zmutují na závazek. Aby nevznikl chaos, rozlišuj tři stavy:
+
+- **Hotovo:** funkce existuje, je v produkci a zákazník ji může použít.
+- **Pilot:** funkce existuje omezeně, potřebuje jasný rozsah a zpětnou vazbu.
+- **Nápad:** funkce je možná, ale není slíbená bez odhadu, priority a dohody.
+
+U každé nehotové věci řekni stav nahlas. Například: „Tohle zatím není produkční funkce. Umíme to ověřit v pilotu, ale nedával bych to do smlibu pro první měsíc.“ Krátkodobě to může působit méně efektně. Dlouhodobě to šetří support, vztah i reputaci.
+
+### FN.6 Otázky během dema jsou lepší než aplaus na konci
+
+Demo není monolog. Po každé větší části se ptej:
+
+- „Kde by se tohle ve vašem procesu zaseklo?“
+- „Kdo by musel změnit svůj návyk?“
+- „Jak dnes poznáte, že je tenhle úkol hotový?“
+- „Jaká data byste do toho nechtěli posílat?“
+- „Co by vám bránilo spustit pilot jen pro jeden tým?“
+
+Odpovědi jsou obchodní zlato. Když zákazník popíše překážku, máš šanci ji řešit. Když mlčí a jen kývá, možná se nudí, možná je zdvořilý a možná právě v duchu píše konkurenci. Ani jedna možnost není skvělá.
+
+### FN.7 Po demu pošli krátké rozhodovací shrnutí
+
+Po dobrém demu nemá následovat román. Pošli stručné shrnutí, které pomůže zákazníkovi interně prodat další krok.
+
+Struktura:
+
+- **Co jsme řešili:** jedna až dvě věty o problému.
+- **Co demo ukázalo:** tři konkrétní výsledky, ne seznam funkcí.
+- **Otevřené otázky:** datové hranice, integrace, role, migrace, cena.
+- **Navržený další krok:** pilot, technická konzultace, nabídka, nebo férové ukončení.
+- **Privacy poznámka:** jaký rozsah dat by byl pro další krok potřeba a co zatím nepotřebujete.
+
+Příklad:
+
+> Navrhujeme dvoutýdenní pilot na jedné produktové linii a omezeném vzorku poptávek. Pro pilot nepotřebujeme historická zákaznická data ani přístup do účetnictví. Stačí testovací fronta, dvě role a tři scénáře: nová poptávka, předání obchodníkovi a export výsledků.
+
+Tohle je pro zákazníka použitelné. Může to přeposlat kolegům, právníkovi i šéfovi. A nikdo nemusí luštit, co přesně se na callu slíbilo.
+
+### FN.8 Šablona: karta obchodního dema
+
+```markdown
+## Demo: [zákazník / segment]
+
+### Cíl dema
+- Jaký problém má zákazník po demu lépe pochopit?
+- Jaký další krok chceme férově navrhnout?
+
+### Účastníci
+- Rozhodovatel:
+- Budoucí uživatel:
+- Technický / bezpečnostní člověk:
+- Interní vlastník:
+
+### Scénář
+1. Dnešní bolest:
+2. Nový pracovní tok:
+3. První hodnota:
+4. Kontrola, role a data:
+5. Další krok:
+
+### Datové hranice
+- Jaká data ukážeme:
+- Jaká data nepotřebujeme:
+- Jaké integrace jsou mimo demo:
+- Jak vysvětlíme privacy-first provoz:
+
+### Nehotové věci
+- Hotovo:
+- Pilot:
+- Nápady bez závazku:
+
+### Follow-up
+- Shrnutí poslat do:
+- Další krok:
+- Otevřené otázky:
+```
+
+### FN.9 Checklist: demo bez kouzel a bez šmírování
+
+- [ ] Před demem znám roli účastníků a jejich aktuální problém.
+- [ ] Demo má jeden hlavní scénář, ne turistickou prohlídku produktu.
+- [ ] Ukazuji reálné situace včetně chyb, rolí a omezení.
+- [ ] Privacy-first principy vysvětluji přímo v pracovním toku.
+- [ ] Nehotové funkce jasně označuji jako pilot nebo nápad.
+- [ ] Během dema kladu otázky na proces, data a překážky pilotu.
+- [ ] Po demu posílám krátké rozhodovací shrnutí s dalším krokem.
+- [ ] Do pilotu navrhuji minimální nutný rozsah dat, ne kompletní zákaznický vesmír.
+
 ## Pracovní log
+
+- 2026-09-04 21:00 UTC — Doplněna příloha FN o obchodním demu pro SaaS: příprava před demem, příběh změny, reálné scénáře, privacy-first vysvětlení v toku produktu, označování nehotových funkcí, otázky během dema, follow-up shrnutí, šablona karty a checklist.
 
 - 2026-09-04 20:00 UTC — Doplněna příloha FM o produktové dokumentaci pro SaaS: mapa zákaznických otázek, rozdělení podle úkolu čtenáře, struktura návodu, dokumentování hranic produktu, údržba, prodejní využití veřejné dokumentace, šablona, checklist a ověřené zdroje k Diátaxis, Write the Docs a plain language.
 
