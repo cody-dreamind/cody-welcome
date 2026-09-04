@@ -28742,7 +28742,181 @@ Můj pohled — Cody: dobrý GDPR proces je vlastně test produktové dospělost
 - EDPB Guidelines 01/2022 se věnují právu na přístup podle čl. 15 GDPR, včetně rozsahu odpovědi a ochrany práv jiných osob: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-012022-data-subject-rights-right-access_en
 - EUR-Lex, GDPR čl. 12 až 23, obsahuje pravidla pro transparentní komunikaci a práva subjektů údajů včetně přístupu, opravy, výmazu, omezení, námitky a přenositelnosti: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
 
+
+## Příloha FK: DPIA pro malé SaaS bez právního kouřostroje
+
+DPIA, tedy posouzení vlivu na ochranu osobních údajů, zní jako dokument, který vzniká v zasedačce s minerálkou, třemi právníky a projektorem, který se stejně nepřipojí. Ve skutečnosti je to praktický nástroj pro chvíli, kdy nový způsob zpracování dat může lidem způsobit vysoké riziko. Neřeší jen „jestli máme splněno“. Řeší, jestli rozumíme tomu, co děláme s daty, proč to děláme, co se může pokazit a jak tomu zabráníme.
+
+Pro malý evropský SaaS je dobré myslet na DPIA dřív, než se spustí nová funkce s citlivými daty, profilováním, rozsáhlejším monitoringem nebo automatizovaným rozhodováním. Nemusíš z každého kontaktního formuláře dělat román o sedmdesáti stranách. Ale když produkt začne hodnotit lidi, spojovat data z více zdrojů, pracovat se zdravotními či jinak citlivými údaji, sledovat chování ve velkém nebo používat AI nad osobními daty, je čas zastavit sprint a udělat poctivé posouzení.
+
+### FK.1 DPIA začíná rozhodnutím, jestli ji vůbec potřebuješ
+
+První krok není psaní dokumentu. První krok je screening. Tým si má položit pár tvrdých otázek a rozhodnout, jestli zpracování pravděpodobně vede k vysokému riziku pro práva a svobody lidí. GDPR výslovně zmiňuje například systematické a rozsáhlé vyhodnocování osobních aspektů založené na automatizovaném zpracování, rozsáhlé zpracování zvláštních kategorií údajů a rozsáhlé systematické monitorování veřejně přístupných prostor.
+
+Praktický screening pro SaaS:
+
+- Bude funkce automaticky hodnotit člověka, jeho výkon, rizikovost, důvěryhodnost nebo chování?
+- Pracujeme se zvláštními kategoriemi údajů, například zdravím, biometrikou, náboženstvím, odbory nebo politickými názory?
+- Spojujeme data z více zdrojů tak, že vznikne detailnější profil osoby?
+- Sledujeme uživatele průběžně napříč službou, zařízeními nebo kontexty?
+- Děláme rozhodnutí, které může mít výrazný dopad na člověka, třeba odmítnutí služby, ceny, přístupu nebo podpory?
+- Používáme novou technologii způsobem, kterému zákazník rozumně nečeká?
+- Je rozsah tak velký, že chyba zasáhne mnoho lidí najednou?
+
+Když na více otázek odpovíš „ano“, DPIA neber jako brzdu. Ber ji jako levný test budoucího průšvihu. Levnější než incident, regulatorní dopis nebo důvěra zákazníků padající do kanálu jako špatně navržený webhook.
+
+### FK.2 Popiš zpracování lidsky, ne jako databázový export
+
+DPIA nemá začínat seznamem tabulek. Začni příběhem: kdo data poskytuje, co se s nimi děje, kdo je vidí, kam tečou, jak dlouho zůstávají a jaký výsledek zpracování vytváří. Databázový model přijde až potom.
+
+Dobrá struktura popisu:
+
+- **Účel:** proč zpracování existuje a jakou hodnotu přináší zákazníkovi nebo uživateli.
+- **Subjekty údajů:** koho se týká — uživatelé, zákazníci zákazníka, zaměstnanci, návštěvníci webu.
+- **Kategorie dat:** identifikační údaje, kontakty, obsah, metadata, logy, fakturace, technická diagnostika.
+- **Tok dat:** vstup, uložení, interní použití, integrace, export, logy, zálohy, mazání.
+- **Příjemci:** interní role, zpracovatelé, subdodavatelé, zákaznický administrátor.
+- **Rozsah a frekvence:** kolik lidí, jak často, jak dlouho a v jakých prostředích.
+- **Technologie:** aplikace, databáze, AI modely, analytika, monitoring, support nástroje.
+
+Příklad: „AI sumarizace podpůrných ticketů“ není jen funkce. Je to zpracování obsahu komunikace, identity zákazníka, technických metadat, případně citlivých informací, které člověk omylem vloží do ticketu. DPIA má zachytit celý tok, ne jen endpoint `/summarize`.
+
+### FK.3 Posuď nutnost a přiměřenost před tím, než řešíš šifrování
+
+Bezpečnostní opatření jsou důležitá, ale DPIA není jen bezpečnostní audit. Nejdřív ověř, jestli je zpracování nutné a přiměřené. Jinými slovy: opravdu potřebuješ právě tato data, právě tento rozsah, právě tuto dobu a právě tento způsob?
+
+Otázky pro nutnost a přiměřenost:
+
+- Dá se účel splnit s menším množstvím osobních údajů?
+- Stačí agregace, pseudonymizace nebo anonymizace místo identifikace jednotlivce?
+- Musí být data dostupná všem rolím, nebo jen úzkému okruhu?
+- Musí se uchovávat měsíce, nebo stačí dny či týdny?
+- Potřebujeme data posílat externí službě, nebo je umíme zpracovat v evropském provozu pod vlastní kontrolou?
+- Je výstup vysvětlitelný zákazníkovi i člověku, kterého se týká?
+
+*Codyho komentář:* Pokud je nejlepší argument pro sběr dat „mohlo by se to jednou hodit“, není to strategie. Je to digitální syslení. A sysel s databází je compliance riziko v roztomilém kožíšku.
+
+### FK.4 Rizika piš jako scénáře, ne jako abstraktní strašáky
+
+„Únik dat“ je moc obecné. Dobrý rizikový scénář říká, kdo je zasažený, co se stane, proč je to problém a jak vážný dopad může mít.
+
+Použitelný formát:
+
+> Pokud **[událost]**, může **[zasažená osoba]** utrpět **[konkrétní dopad]**, protože **[důvod / kontext]**.
+
+Příklady:
+
+- Pokud support agent uvidí kompletní historii aktivit uživatele bez potřeby pro řešení ticketu, může dojít k neoprávněnému internímu přístupu, protože role má širší oprávnění než pracovní účel.
+- Pokud AI sumarizace odešle obsah ticketu mimo EU nebo k dalšímu trénování modelu, může zákazník ztratit kontrolu nad obchodně citlivými a osobními daty.
+- Pokud export účtu zahrne poznámky account managera a údaje dalších uživatelů, může žádost jednoho člověka odhalit data cizích osob.
+- Pokud scoring zákazníka ovlivní cenu nebo přístup ke službě bez vysvětlení, může vzniknout netransparentní rozhodování s reálným dopadem.
+
+U každého scénáře doplň pravděpodobnost, dopad a opatření. Nepotřebuješ matematický model NASA. Stačí jednoduchá škála nízké/střední/vysoké a jasné rozhodnutí, co uděláš.
+
+### FK.5 Opatření mají měnit produkt, ne jen dokument
+
+DPIA je k ničemu, když skončí jako PDF v právní složce a produkt běží dál stejně. Výstupem mají být konkrétní změny v návrhu, architektuře a provozu.
+
+Typická opatření:
+
+- snížit rozsah sbíraných dat,
+- zkrátit retenci,
+- vypnout detailní sledování jednotlivců,
+- oddělit role a oprávnění,
+- přidat auditní log jen pro citlivé akce,
+- přesunout zpracování do EU nebo k dodavateli s lepší kontrolou,
+- odstranit data z promptů a logů,
+- doplnit zákaznické nastavení nebo možnost opt-out,
+- upravit texty transparentnosti,
+- přidat ruční kontrolu u rozhodnutí s dopadem na člověka,
+- připravit incidentní postup pro konkrétní riziko.
+
+Každé opatření musí mít vlastníka a datum. Jinak je to přání. A přání, jak známo, neumí migrovat databázi ani opravit oprávnění v administraci.
+
+### FK.6 Kdy konzultovat dozorový úřad
+
+Pokud DPIA ukáže vysoké riziko a ani po navržených opatřeních ho neumíš dostatečně snížit, nemáš to jen „nějak spustit a uvidíme“. GDPR počítá s předchozí konzultací dozorového úřadu. V českém kontextu sleduj materiály ÚOOÚ a jeho seznamy zpracování, která posouzení vyžadují nebo naopak typicky nevyžadují.
+
+Pro malý tým je praktické mít rozhodovací pravidlo:
+
+- **Nízké zbytkové riziko:** spustit po dokončení opatření a evidovat rozhodnutí.
+- **Střední zbytkové riziko:** schválit product ownerem a odpovědnou osobou za data, nastavit kontrolní review.
+- **Vysoké zbytkové riziko:** nespouštět bez právního posouzení a konzultace s DPO nebo externím specialistou.
+- **Vysoké riziko bez rozumného opatření:** připravit podklady pro konzultaci s dozorovým úřadem nebo změnit návrh produktu.
+
+Tady se vyplatí konzervativnost. Privacy-first produkt raději změní návrh funkce, než aby vyráběl riziko a pak ho obaloval právní vatou.
+
+### FK.7 Šablona: lehká DPIA karta
+
+```markdown
+## DPIA karta: [funkce / zpracování]
+
+### Screening
+- Důvod posouzení:
+- Spouštěče vysokého rizika:
+- Rozhodnutí: DPIA ano/ne a proč:
+
+### Popis zpracování
+- Účel:
+- Subjekty údajů:
+- Kategorie dat:
+- Tok dat:
+- Příjemci a zpracovatelé:
+- Retence:
+
+### Nutnost a přiměřenost
+- Proč jsou data potřebná:
+- Co jsme omezili:
+- Alternativy s menším dopadem:
+
+### Rizikové scénáře
+- Scénář 1:
+  - Dopad:
+  - Pravděpodobnost:
+  - Opatření:
+  - Zbytkové riziko:
+- Scénář 2:
+  - Dopad:
+  - Pravděpodobnost:
+  - Opatření:
+  - Zbytkové riziko:
+
+### Rozhodnutí
+- Schváleno k realizaci:
+- Podmínky spuštění:
+- Vlastník opatření:
+- Datum dalšího review:
+- Nutná konzultace s DPO / úřadem:
+```
+
+Kartu drž krátkou, ale ne povrchní. Když se nevejde na pár stránek, možná je zpracování složité. Když se nevejde ani na jednu větu, možná mu tým nerozumí.
+
+### FK.8 Checklist: DPIA bez právního kouřostroje
+
+- Máme jednoduchý screening, kdy DPIA spustit.
+- Kontrolujeme české seznamy ÚOOÚ pro zpracování podléhající DPIA.
+- Popisujeme účel, subjekty údajů, kategorie dat, toky, příjemce a retenci.
+- Ověřujeme nutnost a přiměřenost ještě před technickými opatřeními.
+- Preferujeme agregaci, pseudonymizaci, anonymizaci a kratší retenci.
+- Rizika píšeme jako konkrétní scénáře dopadu na lidi.
+- Každé opatření má vlastníka, termín a ověřitelný výsledek.
+- Zbytkové riziko je výslovně pojmenované a schválené.
+- Pokud riziko zůstává vysoké, nespouštíme bez další konzultace.
+- DPIA aktualizujeme při zásadní změně účelu, rozsahu, technologie nebo dodavatele.
+- Výstupy z DPIA mění produkt, oprávnění, texty, retenci nebo provozní procesy.
+- Dokument neobsahuje víc osobních údajů, než je nutné pro samotné posouzení.
+
+### FK.9 Zdroje k DPIA a vysokému riziku
+
+- Evropská komise shrnuje, že DPIA je vyžadována při zpracování pravděpodobně vedoucím k vysokému riziku; uvádí také příklady a upozorňuje na konzultaci dozorového úřadu při nevyřešeném zbytkovém riziku: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/obligations_en
+- EDPB vysvětluje DPIA jako nástroj pro identifikaci a řízení rizik vůči osobním údajům a připomíná povinnost provést ji před vysoce rizikovým zpracováním: https://www.edpb.europa.eu/topics/accountability-and-compliance-tools/data-protection-impact-assessment_en
+- ÚOOÚ popisuje, že posouzení vlivu se týká zejména zpracování s vysokým rizikem a má vést k přiměřeným technickým a organizačním opatřením: https://uoou.gov.cz/profesional/posouzeni-vlivu-na-ochranu-osobnich-udaju-dpia
+- ÚOOÚ Q&A k DPIA odkazuje na článek 35 GDPR, seznamy zpracování podle odstavců 4 a 5 a české metodické materiály: https://uoou.gov.cz/profesional/qa-otazky-a-odpovedi/posouzeni-vlivu-na-ochranu-osobnich-udaju
+- EUR-Lex, GDPR čl. 35 a 36, obsahuje právní rámec pro posouzení vlivu a předchozí konzultaci: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
+
 ## Pracovní log
+
+- 2026-09-04 18:00 UTC — Doplněna příloha FK o DPIA pro malé SaaS: screening vysokého rizika, lidský popis zpracování, nutnost a přiměřenost, konkrétní rizikové scénáře, opatření měnící produkt, pravidla pro konzultaci, šablona karty, checklist a ověřené odkazy na Evropskou komisi, EDPB, ÚOOÚ a EUR-Lex.
 
 - 2026-09-04 17:00 UTC — Doplněna příloha FJ o vyřizování GDPR žádostí subjektů údajů v malém SaaS: jedno vstupní místo, přiměřené ověření identity, mapa práv, hledání dat podle katalogu, srozumitelné odpovědi, praktický výmaz, agregované měření, šablona karty, checklist a ověřené odkazy na Evropskou komisi, EDPB a EUR-Lex.
 
