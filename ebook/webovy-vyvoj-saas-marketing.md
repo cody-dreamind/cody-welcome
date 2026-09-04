@@ -26363,7 +26363,179 @@ Retence bez mazacího mechanismu je jen přání. A přání nejsou architektura
 
 Auditní stopa má být paměť produktu, ne špehovací aparát. Když ji navrhneš dobře, pomůže supportu, bezpečnosti, zákazníkům i compliance. Když ji navrhneš špatně, vyrobíš drahou datovou skládku, kterou se tým bojí otevřít. Privacy-first přístup není logování vypnout. Je to logovat přesně to, co pomáhá nést odpovědnost — a nic navíc.
 
+## Příloha EW: Zpracovatelská smlouva bez šanonového pekla a falešného klidu
+
+Zpracovatelská smlouva je dokument, který spousta malých SaaS týmů podepíše jednou, uloží do složky „Legal“ a pak se tváří, že tím skončila odpovědnost za data. Hezký pokus. Bohužel ne. Smlouva sama o sobě nechrání žádného zákazníka, pokud neodpovídá realitě produktu, subdodavatelů, integrací, podpory, záloh a mazání.
+
+Dobrá zpracovatelská smlouva není právnická tapeta. Je to provozní mapa: kdo komu co předává, proč, kde to běží, jak dlouho se to drží, kdo k tomu může, co se stane při incidentu a jak se data vrátí nebo smažou po ukončení služby. Pokud ji nejde vysvětlit vývojáři, supportu a obchodníkovi, je pravděpodobně napsaná spíš pro pocit bezpečí než pro bezpečný provoz.
+
+GDPR v článku 28 řeší situaci, kdy zpracovatel zpracovává osobní údaje pro správce na základě smlouvy nebo jiného právního aktu. Evropská komise zároveň vydala standardní smluvní doložky pro vztah správce–zpracovatel v EU/EHP podle článku 28(7). EDPB ve finálních pokynech 07/2020 připomíná, že role správce a zpracovatele se neurčují podle názvu ve smlouvě, ale podle skutečné kontroly nad účely a prostředky zpracování.
+
+*Codyho komentář:* DPA není kouzelné razítko „GDPR hotovo“. Je to jako checklist před letem. Když ho podepíše pilot, který netuší, kde je motor, letadlo z toho pořád nebude bezpečnější. Ale papír bude mít krásnou hlavičku, to zas jo.
+
+### EW.1 Nejdřív určete role podle reality, ne podle přání
+
+První chyba je automaticky říct: „My jsme zpracovatel, zákazník je správce.“ Často to tak bude, ale ne vždy. U SaaS produktu může tým v jedné části služby vystupovat jako zpracovatel zákaznických dat, v jiné jako samostatný správce vlastních provozních údajů, billing údajů, bezpečnostních logů nebo marketingové komunikace.
+
+Praktické otázky:
+
+- **Kdo rozhoduje, proč se data sbírají?** Pokud účel určuje zákazník, často půjde o jeho správu a tvé zpracování.
+- **Kdo rozhoduje, jak produkt funguje?** Technické prostředky obvykle volí SaaS dodavatel, ale to samo z něj nedělá správce účelu.
+- **Sbíráš data pro vlastní účel?** Například fakturace, bezpečnost účtu, obrana proti zneužití nebo vlastní obchodní komunikace mohou být samostatné účely dodavatele.
+- **Může zákazník reálně říct, co máš s daty dělat?** Pokud ne, role může být složitější.
+- **Používáš data k trénování, benchmarkům nebo vlastní analytice?** Pak pozor: to už nemusí být běžné zpracování pro zákazníka.
+
+Do interní karty si napiš jednu větu:
+
+> Pro zákaznická data v modulu **[název]** vystupujeme jako **[role]**, protože účel určuje **[kdo]** a my provádíme **[konkrétní operace]**.
+
+Pokud u jedné služby existuje víc rolí, nesnaž se je schovat pod jednu větu. Rozděl je podle účelů. Právník bude méně nadšený z délky dokumentu, ale více nadšený z toho, že dává smysl. A to je vzácná výhra.
+
+### EW.2 DPA musí odpovídat datovému toku produktu
+
+Zpracovatelská smlouva má obsahovat předmět a dobu zpracování, povahu a účel zpracování, typ osobních údajů, kategorie subjektů údajů a povinnosti i práva správce. V praxi to znamená: nestačí opsat obecnou formulaci z internetu a doufat, že se realita neurazí.
+
+Začni jednoduchou datovou mapou:
+
+- **Vstup:** jaká data zákazník do služby zadává nebo posílá přes API.
+- **Zpracování:** co s nimi aplikace dělá, včetně workerů, AI funkcí, exportů a notifikací.
+- **Uložení:** kde jsou databáze, soubory, zálohy, cache a logy.
+- **Přístup:** kdo k datům může — tým, support, administrátoři, subdodavatelé.
+- **Výstup:** exporty, integrace, webhooks, reporty a zákaznická zobrazení.
+- **Konec:** mazání, anonymizace, export po ukončení účtu a retence v zálohách.
+
+Teprve z této mapy piš smlouvu. Pokud v DPA stojí „data jsou zpracována v EU“, ale monitoring posílá celé error payloady do nástroje mimo EU, dokument popisuje alternativní vesmír. Alternativní vesmíry jsou fajn ve sci-fi, ne v compliance.
+
+### EW.3 Subdodavatelé nejsou poznámka pod čarou
+
+Každý malý SaaS stojí na dalších službách: hosting, e-mail, platby, logování, support, analytika, repozitář, CI/CD, CDN, AI API, zálohy. Některé z nich mohou být subdodavatelé pro zpracování osobních údajů. DPA musí jasně říct, jak se subdodavatelé zapojují a jak se zákazník dozví o změnách.
+
+Minimum pro registr subdodavatelů:
+
+- název dodavatele,
+- účel použití,
+- kategorie dat,
+- země nebo region zpracování,
+- odkaz na bezpečnostní a privacy dokumentaci,
+- typ smluvního krytí,
+- datum poslední kontroly,
+- plán odchodu nebo náhrady u kritických dodavatelů.
+
+Privacy-first přístup tady není „nikdy žádný dodavatel“. To by malý tým skončil u ručního přepisování paketů na papír a asi by z toho nebyl moc dobrý SaaS. Privacy-first znamená: víme, koho používáme, proč ho používáme, kde jsou data, jaké máme alternativy a jak změnu oznámíme zákazníkům.
+
+Praktické pravidlo: veřejný seznam subdodavatelů udržuj jako jednoduchou stránku nebo dokument, který jde odkázat ze smlouvy i z administrace produktu. Ne jako PDF pohřbené tři kliky pod patičkou, protože compliance schovávaná v patičce je jen schovávaná práce.
+
+### EW.4 Bezpečnostní opatření napiš konkrétně, ale ne jako zbraň proti sobě
+
+Smlouva má popsat technická a organizační opatření. Tým často udělá jednu ze dvou chyb: buď napíše vágní „přijímáme odpovídající opatření“, což neříká nic, nebo slíbí třicet konkrétních věcí, které nikdo neprovozuje.
+
+Lepší je vrstvený model:
+
+- **Identita a přístupy:** MFA pro administrátory, nejmenší oprávnění, pravidelné access review.
+- **Aplikace:** řízené deploymenty, code review, závislosti, oddělení prostředí.
+- **Data:** šifrování při přenosu, řízený přístup k databázi, zálohy, restore drill.
+- **Logy:** redakce citlivých polí, omezená retence, audit přístupů.
+- **Incidenty:** postup hlášení, role, časová osa, evidence a zákaznická komunikace.
+- **Lidé:** onboarding, offboarding, školení a pravidla pro práci s produkčními daty.
+
+Piš jen to, co umíš splnit a ověřit. Pokud chceš slib zlepšit, dej ho do roadmapy bezpečnosti, ne do smlouvy jako hotový stav. Zákazníci nepotřebují divadlo. Potřebují vědět, co opravdu děláš a co se stane, když něco selže.
+
+### EW.5 Incident, audit a zákaznická součinnost musí být provozně použitelné
+
+DPA má řešit, jak zpracovatel pomáhá správci plnit jeho povinnosti: žádosti subjektů údajů, bezpečnost zpracování, incidenty, audity, mazání, exporty. Pokud je ve smlouvě věta „poskytneme přiměřenou součinnost“, přelož ji do provozního postupu.
+
+Příklad provozního překladu:
+
+- **Žádost subjektu údajů:** zákazník pošle identifikátor účtu nebo záznamu, support ověří roli žadatele, připraví export nebo mazací akci a zapíše rozhodnutí do DSR karty.
+- **Incident:** tým do 24 hodin interně rozhodne, zda incident může zahrnovat osobní údaje, eviduje dopad, připraví zákaznické shrnutí a pomůže zákazníkovi s jeho vlastním posouzením.
+- **Audit:** zákazník dostane dokumentaci bezpečnostních opatření, seznam subdodavatelů a odpovědi na rozumný dotazník; přístup do interních systémů není výchozí režim.
+- **Ukončení služby:** zákazník má možnost exportu, po skončení účtu běží mazací plán a zálohy mají popsanou retenci.
+
+Tahle část je důležitá hlavně pro obchod. Dobře připravený DPA balíček zkracuje bezpečnostní dotazníky, uklidní enterprise zákazníka a zabrání tomu, aby zakladatel v pátek večer lovil odpověď na otázku „kde přesně běží vaše zálohy?“ To je otázka, která dokáže zkazit i dobré víno.
+
+### EW.6 Praktický DPA balíček pro malý SaaS
+
+Místo jednoho osamělého dokumentu připrav balíček, který jde poslat zákazníkovi i použít interně:
+
+- **Hlavní zpracovatelská smlouva:** role, účely, typy dat, práva a povinnosti.
+- **Příloha technických a organizačních opatření:** konkrétní bezpečnostní vrstvy.
+- **Registr subdodavatelů:** aktuální seznam s účely a regiony.
+- **Datová mapa:** stručný provozní diagram nebo tabulka.
+- **Retenční pravidla:** co se maže, kdy a jak.
+- **Incidentní postup:** komu zákazník píše, co tým udělá a jak rychle.
+- **Export a offboarding:** jak zákazník získá data a co se stane po ukončení.
+
+Tento balíček drž ve verzované dokumentaci. Každá změna subdodavatele, regionu, AI funkce, logování nebo retenčního pravidla má projít malým review: mění se smlouva, seznam subdodavatelů, bezpečnostní příloha nebo zákaznická komunikace?
+
+### EW.7 Šablona: karta zpracovatelské smlouvy
+
+```markdown
+## DPA karta: [název produktu / zákaznický segment]
+
+### Role a rozsah
+- Zákazník vystupuje jako:
+- My vystupujeme jako:
+- Účely zpracování:
+- Co je mimo zpracovatelský režim:
+
+### Data a subjekty údajů
+- Kategorie osobních údajů:
+- Kategorie subjektů údajů:
+- Citlivá nebo zvláštní data: ano/ne
+- Zakázané vstupy do produktu:
+
+### Provoz
+- Hlavní systémy:
+- Regiony zpracování:
+- Zálohy a retence:
+- Logy a auditní stopy:
+
+### Subdodavatelé
+- Veřejný seznam:
+- Způsob oznámení změny:
+- Kritičtí dodavatelé:
+- Exit plán:
+
+### Součinnost
+- DSR postup:
+- Incidentní postup:
+- Auditní režim:
+- Export a smazání po ukončení:
+
+### Revize
+- Vlastník dokumentu:
+- Datum poslední kontroly:
+- Co se od minula změnilo:
+```
+
+### EW.8 Checklist: DPA, která popisuje realitu
+
+- [ ] Role správce, zpracovatele a případně samostatného správce jsou určené podle reality, ne podle marketingového přání.
+- [ ] DPA vychází z aktuální datové mapy produktu.
+- [ ] Jsou popsané účely, typy dat, kategorie subjektů údajů a doba zpracování.
+- [ ] Bezpečnostní opatření jsou konkrétní a skutečně provozovaná.
+- [ ] Registr subdodavatelů je aktuální, veřejně nebo zákaznicky dostupný a obsahuje účel i region.
+- [ ] Změna subdodavatele má oznamovací proces.
+- [ ] Incidentní součinnost je přeložená do konkrétního interního postupu.
+- [ ] Žádosti subjektů údajů mají jasný support a produktový workflow.
+- [ ] Ukončení služby řeší export, smazání, retenci záloh a potvrzení zákazníkovi.
+- [ ] DPA balíček je verzovaný a má vlastníka.
+- [ ] Obchod ví, kde balíček najde, a neposílá zákazníkům staré PDF z digitálního hřbitova.
+- [ ] Každá nová integrace, AI funkce, analytika nebo logování spouští privacy review smluvních dopadů.
+
+### EW.9 Zdroje ke zpracovatelským smlouvám a rolím
+
+- GDPR, článek 28 na EUR-Lexu: Processor — https://eur-lex.europa.eu/legal-content/EN/TXT/?qid=1494678401079&uri=CELEX%3A32016R0679
+- Evropská komise: Application of the GDPR, část k povinnostem zpracovatele vůči správci — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/application-gdpr_en
+- Evropská komise: Standard contractual clauses for controllers and processors in the EU/EEA — https://commission.europa.eu/publications/standard-contractual-clauses-controllers-and-processors-eueea_en
+- EUR-Lex: Commission Implementing Decision (EU) 2021/915 ke standardním doložkám podle článku 28(7) — https://eur-lex.europa.eu/eli/dec_impl/2021/915/oj
+- EDPB: Guidelines 07/2020 on the concepts of controller and processor in the GDPR, finální verze — https://www.edpb.europa.eu/documents/guideline/guidelines-072020-on-the-concepts-of-controller-and-processor-in-the-gdpr_en
+
+Zpracovatelská smlouva má být most mezi právem a provozem. Když popisuje skutečný produkt, pomáhá zákazníkům věřit, obchodníkům odpovídat a týmu držet kontrolu nad daty. Když je to jen generická příloha, vytvoří falešný klid — a falešný klid je v privacy-first SaaS horší než přiznaný nedodělek.
+
 ## Pracovní log
+
+- 2026-09-04 04:00 UTC — Doplněna příloha EW o zpracovatelských smlouvách bez šanonového pekla: určení rolí podle reality, datová mapa produktu, subdodavatelé, technická a organizační opatření, incidentní součinnost, DPA balíček, šablona karty, checklist a odkazy na GDPR, Evropskou komisi, EUR-Lex a EDPB.
 
 - 2026-09-04 03:01 UTC — Doplněna příloha EV o auditních stopách bez šmírování: rozlišení auditních, technických a produktových logů, minimální schéma události, prioritizace podle rizika, zákaznické zobrazení, ochrana a retence logů, šablona auditní karty, checklist a odkazy na GDPR, EDPB, OWASP a ENISA.
 
