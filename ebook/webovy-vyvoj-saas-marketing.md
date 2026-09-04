@@ -25889,7 +25889,231 @@ Privacy-first detail: incidentová evidence nesmí být novou datovou skládkou.
 
 Incidenty nejdou vynulovat. Jdou ale připravit tak, aby tým neimprovizoval pod tlakem, zákazník dostal pravdu a úřad viděl, že firma ví, co dělá. Privacy-first provoz není slib, že se nikdy nic nepokazí. Je to slib, že sbíráš méně dat, chráníš je lépe a když se něco stane, nebudeš dělat kouřovou clonu z právnických frází.
 
+## Příloha EU: Privacy-first školení týmu bez nudných slidů a bezpečnostního divadla
+
+Privacy-first provoz nevznikne tím, že jednou ročně pošleš lidem odkaz na třicetistránkové PDF a doufáš, že po kliknutí magicky přestanou posílat exporty do špatných vláken. Vznikne tím, že tým rozumí běžným rozhodnutím: jaká data sbírat, kam je ukládat, s kým je sdílet, kdy se ptát a kdy raději zpomalit.
+
+Dobré školení není compliance divadlo. Je to provozní návyk. Má lidem pomoct poznat riziko dřív, než se z něj stane incident, a má jim dát jednoduchý postup, ne pocit viny. Pokud se člověk bojí nahlásit chybu, protože „bude průšvih“, tým nemá bezpečnostní kulturu. Má jen drahou kulisu.
+
+Evropský privacy-first kontext stojí na principu ochrany údajů už v návrhu a ve výchozím nastavení. GDPR článek 25 mluví o data protection by design and by default; EDPB k tomu vydal pokyny, které zdůrazňují, že ochrana údajů se nemá přilepit na hotový produkt až před launchem. Praktický překlad pro malý SaaS tým: školení nemá být oddělené od produktu, podpory, marketingu a obchodu. Má být součástí toho, jak se práce opravdu dělá.
+
+*Codyho komentář:* Nejlepší bezpečnostní školení je tak praktické, že si ho lidé ani nepamatují jako školení. Prostě příště nepošlou zákaznický export do Slacku, protože vědí, kam patří. Gratuluju, nudná prevence vyhrála nad dramatem. To se v technologiích stává podezřele málo.
+
+### EU.1 Škol podle situací, ne podle paragrafů
+
+Paragrafy jsou důležité, ale člověk v běžném provozu řeší situace. Když support dostane screenshot s osobními údaji, nepotřebuje nejdřív recitovat definici správce a zpracovatele. Potřebuje vědět, co s tím screenshotem udělat hned teď.
+
+Začni pěti typickými scénáři:
+
+- **Support:** zákazník posílá export, screenshot, log nebo nahrávku obrazovky.
+- **Obchod:** prospect se ptá na bezpečnost, subdodavatele, hosting nebo DPA.
+- **Marketing:** tým chce měřit kampaň, spustit formulář nebo publikovat referenci.
+- **Produkt:** vzniká nová funkce, která sbírá další data nebo propojuje nový nástroj.
+- **Provoz:** někdo potřebuje přístup do databáze, analytiky, CRM nebo admin panelu.
+
+U každé situace napiš tři věci:
+
+1. Co je normální bezpečný postup.
+2. Kdy se musí zastavit a zeptat.
+3. Kam se incident nebo pochybnost zapisuje.
+
+Příklad pro support:
+
+- Zákazník pošle screenshot s e-mailem a fakturačními údaji.
+- Support odpoví v ticket systému, nepřeposílá obrázek do chatu bez důvodu.
+- Pokud je potřeba eskalace, vytvoří interní odkaz na ticket a do eskalační zprávy dá jen nutný kontext.
+- Po vyřešení se příloha smaže nebo ponechá podle retenčního pravidla pro support data.
+
+Tohle je užitečnější než obecná věta „chraňte osobní údaje“. Ta je sice pravdivá, ale asi stejně praktická jako cedule „nezakopněte“ u serverového racku.
+
+### EU.2 Vytvoř minimální osnovu pro každý tým
+
+Jeden univerzální kurz pro všechny bývá buď moc obecný, nebo moc dlouhý. Lepší je mít společné minimum a krátké moduly podle role.
+
+Společné minimum pro celý tým:
+
+- co jsou osobní údaje v kontextu vašeho produktu,
+- proč sbíráte méně dat a proč je to obchodní výhoda,
+- kde je zdroj pravdy pro zákaznická data,
+- jak se žádá o přístup a jak se přístup ruší,
+- jak nahlásit podezření na incident,
+- jak se rozhoduje o novém nástroji nebo integraci.
+
+Role-specific moduly:
+
+- **Support:** práce s přílohami, screenshoty, impersonací, eskalací a mazáním dat.
+- **Sales:** bezpečnostní odpovědi, sliby v nabídce, DPA, subdodavatelé a hranice toho, co lze slíbit.
+- **Marketing:** souhlasy, preference, reference, analytika bez profilování a měření bez sledovacích pixelů.
+- **Vývoj:** data minimization, logging, testovací data, přístupy, pull request checklist a bezpečné defaulty.
+- **Ops:** zálohy, obnova, monitoring, rotace tajemství, incident runbook a audit přístupů.
+
+Každý modul drž do třiceti minut. Když téma potřebuje víc, rozděl ho. Lidé si lépe zapamatují tři konkrétní scénáře než hodinovou přednášku, kde třicátý slide oznamuje, že „bezpečnost je společná odpovědnost“. Ano. A voda je mokrá. Pokračujeme.
+
+### EU.3 Udělej z nahlášení chyby bezpečný reflex
+
+Privacy-first kultura stojí na rychlém hlášení. Lidé musí vědět, že chyba nahlášená včas je lepší než chyba zametená pod koberec. Proces má být jednoduchý i pro člověka, který zrovna není bezpečnostní mág s kapucí a třemi monitory.
+
+Zaveď jeden kanál pro hlášení:
+
+- interní formulář,
+- ticket typ „Security / Privacy concern“,
+- e-mailová adresa typu privacy@ nebo security@,
+- nouzový chat kanál, pokud je jasně dané, co do něj nepatří.
+
+Do hlášení stačí minimum:
+
+- co se stalo,
+- kdy se to stalo nebo kdy si toho člověk všiml,
+- jaký systém nebo zákazník může být dotčený,
+- jaká data mohou být dotčená,
+- co už člověk udělal,
+- kde je odkaz na původní záznam.
+
+Zakázané pravidlo: „Nehlaste, dokud si nejste jistí.“ To je přesně cesta k pozdnímu zjištění. Správné pravidlo zní: „Když si nejsi jistý, napiš to jako podezření.“ Tým pak rozhodne, jestli jde o běžnou provozní věc, bezpečnostní incident, privacy incident nebo false alarm.
+
+### EU.4 Trénuj mikrodrilly místo ročního rituálu
+
+Jedno velké školení ročně rychle vyprchá. Krátké opakování v reálném rytmu funguje líp.
+
+Praktický plán:
+
+- **Onboarding:** první týden nový člověk projde společné minimum a dostane mapu nástrojů.
+- **Měsíčně:** desetiminutový scénář v týmu, například „zákazník poslal export do špatného ticketu“.
+- **Čtvrtletně:** access review a krátká připomínka pravidel pro přístupy.
+- **Po incidentu:** pětiminutové poučení v nejbližším týdenním review, bez obviňování.
+- **Před launchem nové funkce:** privacy checklist přímo v release procesu.
+
+Mikrodrill může být jednoduchý:
+
+1. Popiš situaci jednou větou.
+2. Dej týmu tři možnosti reakce.
+3. Nech lidi vybrat bezpečný postup.
+4. Ukaž správnou odpověď a proč.
+5. Přidej odkaz na interní playbook.
+
+Příklad:
+
+> Obchodník chce do CRM nahrát seznam kontaktů z konference. Co musí ověřit před importem?
+
+Dobrá odpověď: účel, zdroj kontaktů, právní základ nebo souhlas, rozsah polí, retenční dobu, možnost odhlášení a to, jestli CRM běží v dohodnutém evropském režimu. Špatná odpověď: „Importuj všechno, sales bude mít radost.“ Sales možná ano. Právník, zákazník a budoucí já už méně.
+
+### EU.5 Uč lidi rozhodovací otázky
+
+Nečekej, že každý pozná všechny hraniční situace. Dej týmu sadu otázek, které fungují jako brzda.
+
+Před sběrem dat:
+
+- Potřebujeme to pro konkrétní výsledek, nebo jen „co kdyby“?
+- Stačí agregace místo detailu o jednotlivci?
+- Můžeme pole udělat volitelné?
+- Jak dlouho data opravdu potřebujeme?
+- Kdo k nim bude mít přístup?
+
+Před sdílením dat:
+
+- Je příjemce správná osoba nebo role?
+- Stačí interní odkaz místo kopie exportu?
+- Jsou v datech osobní, citlivé nebo obchodně důvěrné informace?
+- Existuje bezpečnější cesta než e-mailová příloha?
+- Máme důvod sdílení zapsaný v ticketu, CRM nebo projektové kartě?
+
+Před nákupem nástroje:
+
+- Kde budou data fyzicky a právně provozovaná?
+- Jaký dodavatel nebo subdodavatel je uvidí?
+- Umíme exportovat a smazat data?
+- Umíme vypnout tracking, který nepotřebujeme?
+- Je nástroj nutný, nebo jen pohodlný?
+
+Tyhle otázky fungují jako produktová i bezpečnostní brzda. Nezastavují práci. Zastavují automatické klikání na „Connect account“ pokaždé, když SaaS slíbí o 12 % víc magie.
+
+### EU.6 Měř chování, ne poslušnost
+
+U školení neměř jen to, kdo klikl na dokončení kurzu. To je administrativní údaj, ne důkaz, že se tým chová líp. Sleduj praktické signály.
+
+Užitečné metriky:
+
+- kolik podezření bylo nahlášeno včas,
+- kolik nových nástrojů prošlo nákupním privacy checkem,
+- kolik přístupů bylo odebráno při kvartálním review,
+- kolik support příloh bylo smazáno podle retenčního pravidla,
+- kolik release checklistů obsahovalo privacy poznámku,
+- kolik incidentů mělo kompletní kartu a postmortem.
+
+Pozor: neměř jednotlivce způsobem, který z bezpečnostní kultury udělá sledování zaměstnanců. Cílem není vytvořit interní leaderboard „kdo nejvíc hlásí průšvihy“. Cílem je vidět, jestli proces žije.
+
+Privacy-first reporting může být agregovaný:
+
+- „Tento měsíc proběhlo 6 privacy konzultací před nákupem nástroje.“
+- „Ve dvou releasech jsme snížili rozsah sbíraných dat.“
+- „Access review odebral 14 nepotřebných oprávnění.“
+- „Tři nahlášené situace byly false alarm, ale všechny byly nahlášené správně.“
+
+Tohle je zdravý signál. False alarm není ostuda. Je to daň za systém, kde se lidé nebojí zeptat.
+
+### EU.7 Šablona: karta privacy-first školení
+
+```markdown
+## Školení: [název]
+
+### Cílová skupina
+- Role:
+- Kdy se školí:
+- Vlastník školení:
+
+### Situace z praxe
+- Scénář 1:
+- Scénář 2:
+- Scénář 3:
+
+### Klíčová pravidla
+- Co dělat vždy:
+- Kdy zastavit práci a zeptat se:
+- Kam zapisovat pochybnosti:
+
+### Nástroje a odkazy
+- Interní playbook:
+- Incident kanál:
+- Datový katalog:
+- Registr subdodavatelů:
+- Retenční pravidla:
+
+### Ověření pochopení
+- Mikrodrill:
+- Správný postup:
+- Nejčastější chyba:
+
+### Údržba
+- Datum poslední revize:
+- Co se změnilo:
+- Datum další revize:
+```
+
+### EU.8 Checklist: školení, které mění provoz
+
+- [ ] Školení vychází z reálných situací týmu, ne jen z právních definic.
+- [ ] Každá role má jasné příklady pro svoji práci.
+- [ ] Tým ví, kam hlásit podezření na bezpečnostní nebo privacy problém.
+- [ ] Proces dovoluje hlásit nejistotu, ne jen potvrzený incident.
+- [ ] Onboarding obsahuje mapu nástrojů, dat a přístupů.
+- [ ] Mikrodrilly probíhají pravidelně a krátce.
+- [ ] Release checklist obsahuje otázky na data minimization a bezpečné defaulty.
+- [ ] Nákup nového nástroje musí projít privacy-first otázkami.
+- [ ] Výsledky školení se měří agregovaně, ne jako sledování jednotlivců.
+- [ ] Po incidentu se aktualizuje playbook nebo školení, ne jen napíše omluva.
+
+### EU.9 Zdroje k privacy-first školení a by-design přístupu
+
+- GDPR, článek 25: Data protection by design and by default — https://gdpr-info.eu/art-25-gdpr/
+- EDPB: Guidelines 4/2019 on Article 25 Data Protection by Design and by Default — https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-42019-article-25-data-protection-design-and_en
+- European Commission: Data protection by design and by default — https://commission.europa.eu/law/law-topic/data-protection/reform/rules-business-and-organisations/obligations/controllerprocessor/what-does-data-protection-design-and-default-mean_en
+- ENISA: Cybersecurity culture guidelines — https://www.enisa.europa.eu/publications/cybersecurity-culture-guidelines-behavioural-aspects-of-cybersecurity
+
+Školení je dobré tehdy, když po něm lidé udělají menší, rychlejší a bezpečnější rozhodnutí bez toho, aby čekali na právní olympiádu. Malý tým nepotřebuje akademii bezpečnosti. Potřebuje sdílený jazyk, jasný kanál pro pochybnosti a odvahu říct: „Tady raději nesbírejme víc dat, než potřebujeme.“ Přesně tam se privacy-first mění z hodnoty na provozní výhodu.
+
 ## Pracovní log
+
+- 2026-09-04 02:02 UTC — Doplněna příloha EU o privacy-first školení týmu: scénářové učení podle rolí, bezpečné hlášení chyb, mikrodrilly, rozhodovací otázky pro sběr/sdílení/nákup nástrojů, agregované měření, šablona školení, checklist a odkazy na GDPR, EDPB, Evropskou komisi a ENISA.
 
 - 2026-09-04 01:00 UTC — Doplněna příloha ET o úniku osobních dat a incidentové komunikaci: rozlišení provozního incidentu a porušení zabezpečení, 72hodinové rozhodování, hodnocení dopadu na lidi, zákaznická komunikace, rozhodovací matice, evidence incidentu, šablona karty, checklist a odkazy na GDPR, EDPB a ÚOOÚ.
 
