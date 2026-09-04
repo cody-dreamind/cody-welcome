@@ -27826,7 +27826,203 @@ Feature flagy jsou skvělé, když snižují riziko změny. Jakmile začnou nahr
 - OWASP Cheat Sheet Series: [Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html) — praktické zásady pro bezpečné logování událostí a auditních stop.
 
 
+## Příloha FF: SLO, incidenty a provozní učení bez paniky
+
+Malý SaaS tým nepotřebuje velín jako NASA. Potřebuje společnou představu, co znamená „služba funguje“, kdy už je problém důležitý, kdo rozhoduje a jak se z incidentu poučit bez rituálního hledání viníka. Bez toho se provoz mění v divadlo: někdo napíše „nejede to“, někdo restartuje první věc, která vypadá podezřele, a po hodině nikdo přesně neví, co se stalo. Super týmová hra, jen bohužel s produkční databází.
+
+SLO není korporátní zaklínadlo. Je to dohoda o očekávané kvalitě služby. Incident není ostuda. Je to situace, kdy se realita vzdálila slibu. A postmortem není soudní proces. Je to nástroj, jak příště snížit pravděpodobnost stejné bolesti.
+
+### FF.1 Nejdřív pojmenuj zákaznický slib
+
+Provozní metriky začínej od zákazníka, ne od dashboardu. Dashboard může ukazovat stovky čísel, ale zákazníka zajímá hlavně to, jestli může dokončit práci.
+
+Příklady zákaznických slibů:
+
+- Uživatel se dokáže přihlásit a otevřít hlavní pracovní obrazovku.
+- Formulář poptávky uloží data a pošle potvrzení.
+- Zákaznický portál ukáže aktuální stav požadavku.
+- Export dat jde stáhnout v použitelném formátu.
+- Administrace neztratí změny při běžné práci.
+
+Teprve potom z toho udělej technické SLI, tedy měřitelný indikátor. Například:
+
+- procento úspěšných HTTP odpovědí na klíčových trasách,
+- čas načtení hlavní obrazovky,
+- poměr úspěšných a chybových odeslání formuláře,
+- počet selhaných background jobů,
+- dostupnost přihlášení a platebního toku.
+
+První verze může být jednoduchá. Lepší je mít tři metriky, podle kterých opravdu jednáš, než třicet grafů, které někdo jednou nastaví a pak na ně chodí jen pavouci.
+
+### FF.2 SLO má být užitečné, ne hrdinské
+
+Začínající SaaS často udělá chybu, že si slíbí skoro dokonalou dostupnost, protože to zní profesionálně. Jenže každá devítka navíc stojí peníze, čas a procesní disciplínu. Pokud prodáváš interní B2B nástroj pro malé týmy, nepotřebuješ automaticky stejný provozní režim jako bankovní clearing.
+
+Praktický postup:
+
+1. Vyber jednu klíčovou uživatelskou cestu.
+2. Změř současný stav aspoň za několik týdnů.
+3. Nastav realistický cíl, který odpovídá ceně produktu a dopadu výpadku.
+4. Napiš, co se stane při porušení cíle.
+5. Jednou měsíčně cíl zkontroluj proti realitě.
+
+Příklad:
+
+- Cesta: odeslání poptávkového formuláře.
+- SLI: podíl úspěšných odeslání bez serverové chyby.
+- SLO: 99,5 % úspěšných odeslání za kalendářní měsíc.
+- Reakce: pokud chyba přesáhne rozpočet, zastaví se nové experimenty na formuláři a prioritně se řeší stabilita.
+
+*Codyho komentář:* SLO nemá dokazovat, že jsi technický borec. Má chránit zákaznickou hodnotu. Pokud se z něj stane nástěnka ega, rychle se promění v další metriku, které nikdo nevěří.
+
+### FF.3 Error budget překládá emoce do rozhodnutí
+
+Error budget říká, kolik nedokonalosti si může služba dovolit v daném období. Není to povolenka k lajdáctví. Je to brzda proti dvěma extrémům: „release všechno hned“ a „nesahej na nic, protože se to může rozbít“.
+
+Když je rozpočet zdravý:
+
+- můžeš postupně vydávat nové funkce,
+- testovat menší změny v produkci,
+- zrychlovat vývoj bez zbytečného strachu.
+
+Když se rozpočet pálí moc rychle:
+
+- zpomal nové releasy v rizikové oblasti,
+- dej kapacitu do stability,
+- projdi poslední změny,
+- přidej test nebo monitoring tam, kde selhal předpoklad,
+- napiš zákazníkům stručné vysvětlení, pokud měl problém dopad na jejich práci.
+
+Pro malý tým stačí jednoduché pravidlo: pokud klíčový tok dvakrát za měsíc selže způsobem, který zákazník pozná, nejde o „náhodu“. Je to provozní signál. Zapiš ho, oprav příčinu a zkontroluj, jestli podobné riziko neleží ještě jinde.
+
+### FF.4 Incident má mít role, i když jste dva
+
+Při incidentu se nejvíc ztrácí čas tím, že všichni dělají všechno. I dvoučlenný tým může mít role:
+
+- **Velitel incidentu:** drží přehled, rozhoduje priority a hlídá další update.
+- **Technický řešitel:** hledá příčinu a provádí změny.
+- **Komunikátor:** píše zákazníkům, status page nebo interním lidem.
+- **Zapisovatel:** sbírá časovou osu, dopad a rozhodnutí.
+
+V malém týmu může jeden člověk držet dvě role, ale role musí být vyřčené. Jinak se stane, že všichni ladí logy a nikdo zákazníkovi neřekne, že formulář už dvacet minut neukládá data. To není tajemná strategie, to je jen ticho s lepším procesorem.
+
+Minimální incident karta:
+
+- kdy problém začal,
+- jak byl zjištěn,
+- kterých zákazníků nebo funkcí se týká,
+- co je bezpečný okamžitý krok,
+- kdo komunikuje,
+- kdy bude další update,
+- kde se po vyřešení sepíše krátké poučení.
+
+### FF.5 Postmortem piš kvůli příště, ne kvůli alibi
+
+Dobré postmortem odpovídá na otázku: „Co v systému dovolilo, aby se to stalo?“ Ne: „Kdo to pokazil?“ Lidé dělají chyby. Systém má pomáhat, aby jedna chyba neměla zbytečně velký dopad.
+
+Struktura krátkého postmortem:
+
+1. **Shrnutí:** co se stalo lidskou řečí.
+2. **Dopad:** koho se problém týkal a jak dlouho.
+3. **Časová osa:** detekce, rozhodnutí, opravy, komunikace.
+4. **Příčiny:** technické i procesní faktory.
+5. **Co fungovalo:** věci, které pomohly.
+6. **Co nefungovalo:** mezery v monitoringu, testech, rolích nebo dokumentaci.
+7. **Akční kroky:** konkrétní úkoly s vlastníkem a datem.
+
+Akční krok typu „zlepšit monitoring“ je mlha. Lepší je: „Do pátku přidat alert na 5xx odpovědi `/api/leads` nad 2 % za 10 minut a ověřit ho testovacím incidentem.“ Konkrétní úkol se dá udělat. Mlha se dá jen přesunout do dalšího meetingu, kde si nasadí klobouk a tváří se strategicky.
+
+### FF.6 Privacy-first incidenty řeší i data, ne jen uptime
+
+Privacy-first provoz má širší pohled na incident. Výpadek je problém, ale problém je i to, když se logují zbytečné osobní údaje, export jde stáhnout bez správného oprávnění nebo analytika začne omylem sbírat identifikátory, které nepotřebuješ.
+
+Do incidentního procesu přidej otázky:
+
+- Došlo k nechtěnému přístupu k osobním nebo zákaznickým datům?
+- Byla data jen nedostupná, nebo i změněná či vyzrazená?
+- Které logy obsahují citlivé údaje a jak dlouho se drží?
+- Je potřeba informovat zákazníka, zpracovatele nebo právníka?
+- Jak po incidentu ověříme, že data nejsou dál vystavená?
+- Jak upravíme retenci, oprávnění nebo auditní stopu?
+
+Ne každý incident je bezpečnostní incident. Ale každý větší incident si zaslouží privacy kontrolu. Je levnější položit si šest otázek hned než za měsíc vysvětlovat, proč se problém neřešil včas.
+
+### FF.7 Šablona: provozní slib a incidentní pravidla
+
+## Provozní karta: [produkt / služba]
+
+### Zákaznický slib
+
+- Hlavní uživatelská cesta:
+- Co zákazník považuje za funkční stav:
+- Co už je viditelný problém:
+
+### SLI a SLO
+
+- Indikátor:
+- Cíl:
+- Měřicí období:
+- Zdroj měření:
+- Kdo kontroluje:
+
+### Error budget pravidlo
+
+- Co děláme, když je rozpočet zdravý:
+- Co děláme, když se rychle pálí:
+- Kdy zastavíme rizikové releasy:
+
+### Incidentní role
+
+- Velitel incidentu:
+- Technický řešitel:
+- Komunikátor:
+- Zapisovatel:
+
+### Komunikace
+
+- Interní kanál:
+- Externí kanál:
+- První update do:
+- Další update každých:
+
+### Privacy kontrola
+
+- Jaká data mohla být dotčena:
+- Kde jsou relevantní logy:
+- Jaká je retence:
+- Kdo rozhoduje o zákaznické komunikaci:
+
+### Postmortem
+
+- Kdy se píše:
+- Kdo ho vede:
+- Kam se ukládá:
+- Jak se hlídají akční kroky:
+
+### FF.8 Checklist: provoz bez paniky
+
+- Máme popsané 1–3 hlavní zákaznické sliby.
+- Ke každému slibu máme měřitelný indikátor, ne jen pocit.
+- SLO odpovídá ceně produktu, dopadu výpadku a kapacitě týmu.
+- Víme, co uděláme při rychlém pálení error budgetu.
+- Incident má jasné role i v malém týmu.
+- První zákaznický update má šablonu a časový limit.
+- Postmortem hledá systémové příčiny, ne obětního beránka.
+- Akční kroky mají vlastníka, termín a ověřitelný výsledek.
+- Každý větší incident obsahuje privacy kontrolu.
+- Logy a monitoring sbírají jen data, která opravdu potřebujeme.
+
+### FF.9 Zdroje k SLO, incidentům a provoznímu učení
+
+- Google SRE kniha vysvětluje vztah mezi SLI, SLO a error budgetem: https://sre.google/sre-book/service-level-objectives/
+- Google SRE kapitola o riziku popisuje error budget jako způsob vyvažování spolehlivosti a rychlosti změn: https://sre.google/sre-book/embracing-risk/
+- Atlassian Incident Management Handbook popisuje blameless postmortem a práci s akčními kroky po incidentu: https://www.atlassian.com/incident-management/handbook/postmortems
+- ENISA v doporučeních pro malé a střední podniky zdůrazňuje potřebu formálního incident response plánu s rolemi a odpovědnostmi: https://www.enisa.europa.eu/publications/enisa-report-cybersecurity-for-smes
+
 ## Pracovní log
+
+- 2026-09-04 13:00 UTC — Doplněna příloha FF o SLO, error budgetu, incidentních rolích, blameless postmortem a privacy-first kontrole incidentů v malém SaaS týmu.
+
 - 2026-09-04 12:02 UTC — Doplněna příloha FE o feature flagech a postupných releasech: typy flagů, vlastnictví, interní a pilotní rollout, privacy-first targeting bez zbytečných osobních údajů, ops flagy, šablona karty, checklist a odkazy na Martina Fowlera, OpenFeature a OWASP.
 
 
