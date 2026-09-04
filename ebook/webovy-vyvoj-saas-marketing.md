@@ -27480,7 +27480,154 @@ Použij ji pro každou citlivou a kritickou závislost. Jedna karta má být kr�
 - OWASP Developer Guide popisuje Dependency-Track jako platformu pro analýzu komponent pomocí SBOM: https://devguide.owasp.org/en/05-implementation/02-dependencies/02-dependency-track/
 - ENISA Good Practice Guide on Vulnerability Disclosure shrnuje principy a role při oznamování zranitelností: https://www.enisa.europa.eu/publications/vulnerability-disclosure
 
+## Příloha FD: Tajemství, API klíče a konfigurace bez digitálních papírků na monitoru
+
+Každý SaaS má tajemství. Databázové heslo, API klíč platební brány, SMTP přístup, webhook podpis, deploy token, privátní klíč, recovery kód, produkční cookie secret, přístup do analytiky. Problém není v tom, že existují. Problém je, když jsou rozházené po repozitáři, chatech, `.env` souborech, starých CI proměnných a poznámkách s názvem „dočasně“. Dočasně je v IT jednotka času přibližně mezi „zítra to smažu“ a „proč to uniklo v logu“.
+
+Privacy-first provoz bere tajemství jako samostatný životní cyklus. Tajemství vznikne, dostane vlastníka, účel, rozsah, bezpečné uložení, plán rotace a jasný konec. Ne proto, že tabulka sama o sobě chrání data. Ale protože bez evidence se nedá poznat, co se má odebrat, otočit nebo vysvětlit zákazníkovi při incidentu.
+
+### FD.1 Nejdřív odděl konfiguraci, tajemství a veřejné hodnoty
+
+Malý tým často hází všechno do jedné hromady: env var je env var, hotovo, další ticket. Jenže `PUBLIC_APP_URL`, `FEATURE_BETA_ENABLED` a `STRIPE_SECRET_KEY` nejsou stejná věc. Potřebují jiný režim.
+
+Rozliš tři vrstvy:
+
+- **Veřejná konfigurace:** hodnoty, které mohou být v klientském kódu nebo dokumentaci — URL aplikace, název prostředí, veřejný identifikátor projektu.
+- **Interní konfigurace:** netajné, ale provozně důležité hodnoty — limity, názvy front, regiony, přepínače funkcí, kontakty pro alerty.
+- **Tajemství:** hodnota, která při úniku umožní přístup, podpis, obcházení kontroly, impersonaci nebo čtení dat.
+
+Praktické pravidlo: pokud by zveřejnění hodnoty změnilo bezpečnostní situaci, je to tajemství. Pokud by zveřejnění jen ukázalo, jak je služba nastavená, je to interní konfigurace. Pokud je hodnota určená pro prohlížeč, nedávej jí do názvu `SECRET`, protože si akorát pleteš tým i budoucí audit.
+
+### FD.2 Každé tajemství má mít vlastníka a účel
+
+Tajemství bez vlastníka je jako klíč nalezený pod rohožkou. Možná otevírá sklad, možná produkci, možná už nic. A přesně to je problém: nikdo neví, jestli se smí smazat.
+
+U každého citlivého klíče si napiš minimálně:
+
+- **Název:** čitelný název podle služby a prostředí, například `prod-email-smtp-password`.
+- **Účel:** k čemu slouží a jaký zákaznický tok by bez něj nefungoval.
+- **Vlastník:** člověk nebo role, která schvaluje změny a rotaci.
+- **Rozsah:** jaká oprávnění klíč má a zda jsou omezená jen na potřebné akce.
+- **Umístění:** kde je uložený — secret manager, hosting platforma, CI, lokální vývoj.
+- **Rotace:** kdy se má otočit a co se musí po rotaci ověřit.
+
+Nejde o byrokracii. Jde o to, aby při odchodu externisty, migraci hostingu nebo podezření na únik nevznikla detektivka s pracovním názvem „Kdo má vlastně ten token?“.
+
+### FD.3 Nepoužívej jeden klíč pro všechno
+
+Sdílený klíč vypadá pohodlně. Jeden token do CI, lokálu, stagingu i produkce. Jedna SMTP identita pro aplikaci, podporu i marketing. Jeden administrátorský API klíč, protože „jinak to nešlo“. Šlo. Jen to někdo nechtěl rozdělit.
+
+Bezpečnější provoz stojí na oddělení:
+
+- **Prostředí:** produkce, staging a lokální vývoj mají jiné klíče.
+- **Účel:** transakční e-maily, marketingové e-maily a support nemají sdílet stejný přístup.
+- **Oprávnění:** klíč pro čtení reportu nemá umět mazat zákazníky.
+- **Lidé a stroje:** osobní přístup vývojáře není servisní účet aplikace.
+- **Dočasnost:** jednorázový import dat nemá používat trvalý produkční token.
+
+Když klíč unikne, chceš otočit malý rozsah, ne vypnout půl firmy. Segmentace tajemství je nudná, dokud ji nepotřebuješ. Pak je to rozdíl mezi kontrolovaným incidentem a improvizovaným požárem s tabulkou v ruce.
+
+### FD.4 Lokální vývoj nesmí být černá díra tajemství
+
+Lokální `.env` soubor je praktický nástroj, ne trezor. Patří do `.gitignore`, nesmí se kopírovat do chatu a nemá obsahovat produkční hodnoty, pokud pro to není opravdu silný důvod. U malého týmu je dobrý standard:
+
+1. V repozitáři drž jen `.env.example` s názvy proměnných a bezpečnými ukázkovými hodnotami.
+2. Lokální tajemství generuj pro vývojové prostředí, neber je z produkce.
+3. Pokud vývojář potřebuje produkční přístup, řeš to dočasně a auditovatelně.
+4. Po párování, debugování nebo externí pomoci ověř, že klíče neskončily ve sdílených poznámkách.
+5. Screenshoty terminálu a chybové výpisy kontroluj stejně jako logy.
+
+*Codyho komentář:* Nejrychlejší cesta k úniku tajemství je věta „pošli mi ten `.env`, jen to rychle rozchodím“. Druhá nejrychlejší je „tohle je jen staging“, který omylem posílá reálné zákaznické e-maily.
+
+### FD.5 CI/CD potřebuje krátké a omezené přístupy
+
+Build pipeline je oblíbené místo pro tajemství, protože umí všechno: stáhnout kód, spustit testy, vytvořit image, nasadit aplikaci, pustit migrace a poslat notifikaci. Právě proto je nebezpečné nacpat do ní dlouhodobý admin token.
+
+Praktický CI/CD režim:
+
+- **Odděl build a deploy:** build nemusí mít přístup k produkční databázi.
+- **Omez scope tokenů:** deploy klíč má nasazovat konkrétní službu, ne spravovat celou organizaci.
+- **Chraň výpisy:** pipeline nesmí tisknout env vars, hlavičky s tokeny ani celé konfigurační objekty.
+- **Používej chráněná prostředí:** produkční deploy vyžaduje jasnou větev, review nebo schválený release proces.
+- **Rotuj po incidentu i po změně lidí:** když odejde člověk s přístupem k CI tajemstvím, zvaž rotaci kritických hodnot.
+
+U menšího SaaS často stačí začít tím, že projdeš všechny CI proměnné a u každé odpovíš: co dělá, kde se používá, kdo ji vlastní, jestli je produkční a jak ji otočíme. Pokud u poloviny řádků odpověď zní „netuším“, gratuluji, právě jsi našel levný bezpečnostní sprint.
+
+### FD.6 Rotace není hrdinství, ale nacvičený postup
+
+Rotace tajemství se nemá dělat poprvé během incidentu. Každý kritický klíč potřebuje postup, který tým už alespoň jednou prošel v klidu. U SaaS to platí hlavně pro databázi, e-mail, platby, úložiště souborů, webhooky a deploy přístupy.
+
+Jednoduchý rotační postup:
+
+1. **Připrav nový klíč** s co nejmenším rozsahem oprávnění.
+2. **Nasaď ho vedle starého**, pokud služba podporuje překryvné období.
+3. **Ověř kritické flow** — přihlášení, platba, odeslání e-mailu, webhook, import/export.
+4. **Vypni starý klíč** a zkontroluj logy na chyby.
+5. **Aktualizuj kartu tajemství** včetně data, vlastníka a důvodu rotace.
+6. **Smaž dočasné kopie** z poznámek, ticketů a lokálních souborů.
+
+Pokud služba neumí překryvné období, naplánuj krátké okno a jasný rollback. Hlavně nečekej, že si uprostřed incidentu vzpomeneš, kde všude se token používá. Mozek pod tlakem je skvělý na přežití, horší na přesnou inventuru webhooků.
+
+### FD.7 Šablona: karta tajemství
+
+```markdown
+## Tajemství: [název]
+
+### Účel
+- K čemu slouží:
+- Zákaznický tok, který ovlivňuje:
+- Prostředí: produkce / staging / vývoj
+
+### Vlastnictví
+- Vlastník:
+- Kdo smí hodnotu měnit:
+- Kdo smí hodnotu použít:
+
+### Rozsah
+- Služba / systém:
+- Oprávnění:
+- Omezení podle IP, prostředí nebo role:
+- Může číst osobní údaje: ano / ne / nepřímo
+
+### Uložení
+- Kde je uložené:
+- Kde se injektuje do aplikace nebo pipeline:
+- Kde se nesmí objevit:
+
+### Rotace a konec
+- Rotační interval nebo spouštěč:
+- Postup rotace:
+- Ověření po rotaci:
+- Kdy se zruší:
+```
+
+### FD.8 Checklist: tajemství pod kontrolou
+
+- [ ] Repozitář obsahuje `.env.example`, ale ne skutečné tajné hodnoty.
+- [ ] Produkce, staging a lokální vývoj nepoužívají stejné klíče.
+- [ ] Každé kritické tajemství má vlastníka, účel, rozsah a rotační postup.
+- [ ] CI/CD proměnné jsou omezené na konkrétní účel a netisknou se do logů.
+- [ ] Externisté nedostávají trvalé produkční tokeny „pro jistotu“.
+- [ ] Při odchodu člověka nebo dodavatele se kontrolují i servisní účty, deploy klíče a webhook secrets.
+- [ ] Incidentní postup obsahuje rotaci nejdůležitějších klíčů včetně ověření zákaznických flow.
+- [ ] Tajemství se neposílají přes chat, e-mail, screenshoty ani zákaznické tickety.
+- [ ] Staré, nepoužité a nepojmenované klíče se mažou, ne archivují do digitální půdy.
+- [ ] Zákazníkům umíme vysvětlit, jak chráníme přístupy k jejich datům bez mlžení a bez bezpečnostního divadla.
+
+### FD.9 Zdroje k secrets managementu a správě klíčů
+
+- OWASP Secrets Management Cheat Sheet shrnuje centralizaci, řízení přístupu, automatizaci, auditování, životní cyklus tajemství, rotaci, revokaci a obnovu: https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html
+- OWASP Key Management Cheat Sheet doplňuje principy pro práci s kryptografickými klíči a odkazuje na širší secrets management: https://cheatsheetseries.owasp.org/cheatsheets/Key_Management_Cheat_Sheet.html
+- OWASP Cryptographic Storage Cheat Sheet doporučuje pro citlivé klíče dedikované secret nebo key management systémy, pokud to odpovídá velikosti a složitosti aplikace: https://cheatsheetseries.owasp.org/cheatsheets/Cryptographic_Storage_Cheat_Sheet.html
+- NIST SP 800-57 Part 1 Rev. 5 poskytuje obecná doporučení pro správu kryptografických klíčů: https://csrc.nist.gov/projects/key-management/key-management-guidelines
+- CISA Secure by Design materiály zdůrazňují mimo jiné odstranění výchozích hesel a bezpečné výchozí nastavení produktů: https://www.cisa.gov/sites/default/files/2023-04/principles_approaches_for_security-by-design-default_508_0.pdf
+
+Tajemství nejsou jen technický detail. Jsou to malé průchody do systémů, přes které tečou peníze, důvěra, osobní údaje a reputace. Když je pojmenuješ, omezíš, uložíš rozumně a naučíš se je otáčet, získáš jednu z nejlevnějších forem bezpečnosti: méně překvapení.
+
+
 ## Pracovní log
+
+- 2026-09-04 11:00 UTC — Doplněna příloha FD o tajemstvích, API klíčích a konfiguraci: rozlišení veřejné konfigurace a tajemství, vlastnictví a účel klíčů, oddělení prostředí, bezpečný lokální vývoj, CI/CD přístupy, rotační postup, šablona karty, privacy-first checklist a odkazy na OWASP, NIST a CISA.
 
 - 2026-09-04 10:00 UTC — Doplněna příloha FC o závislostech a supply chainu: inventář podle dopadu, klasifikace běžných/citlivých/kritických závislostí, nudný update proces, praktické použití SBOM, kontrola externích služeb jako datových dodavatelů, karta závislosti, privacy-first checklist a odkazy na OWASP SCVS, Dependency-Track a ENISA.
 
