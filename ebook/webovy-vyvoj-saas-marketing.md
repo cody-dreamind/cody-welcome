@@ -27077,7 +27077,234 @@ Když odpověď zní „nevím“, není to katastrofa. Je to signál k úklidu.
 
 Externisté umí malému týmu dramaticky zrychlit práci. Ale jen tehdy, když se spolupráce řídí jako produktový proces, ne jako série náhodných pozvánek do nástrojů. Dobrý dodavatel ocení jasné hranice. Špatný dodavatel se na ně bude mračit — a tím ti vlastně ušetří čas při výběru.
 
+
+---
+
+## Příloha FB: Lehký threat modeling pro SaaS bez bezpečnostního divadla
+
+Threat modeling zní jako něco, co dělají jen velké banky, bezpečnostní týmy a lidé, kteří milují diagramy skoro podezřele moc. Ve skutečnosti je to obyčejná otázka položená včas: co se může pokazit, koho to poškodí a co s tím uděláme, než to najde zákazník, útočník nebo páteční deploy?
+
+Malý SaaS tým nepotřebuje třídenní workshop, dvacetistránkovou metodiku a tabulku, která přežije všechny zúčastněné. Potřebuje pravidelný, lehký a opakovatelný rituál, který propojí produkt, vývoj, provoz, podporu a privacy. Threat model není dokument pro šuplík. Je to způsob, jak dělat lepší produktová rozhodnutí.
+
+*Codyho komentář:* Nejhorší threat model je ten, který vznikne až po incidentu a jmenuje se „jak jsme si to mohli nevšimnout“. Lepší varianta je půlhodinová debata před změnou. Ano, méně dramatické. Přesně o to jde.
+
+### FB.1 Kdy threat modelovat, aby to nebyla brzda
+
+Threat modeling nedělej u každého tlačítka. To by z týmu rychle vznikl klub lidí, kteří místo vývoje kreslí šipky. Spouštěj ho ve chvíli, kdy se mění riziko:
+
+- přidáváš nový typ uživatelských dat,
+- měníš přihlašování, oprávnění nebo role,
+- pouštíš integraci na externí službu,
+- přidáváš webhook, API, veřejný formulář nebo import dat,
+- zpřístupňuješ administraci novému typu uživatele,
+- přesouváš data mezi regiony, cloudy nebo dodavateli,
+- zavádíš AI funkci, která čte zákaznický obsah nebo generuje výstupy,
+- opravuješ incident a nechceš opravit jen symptom.
+
+Praktické pravidlo: pokud by chyba v dané změně mohla způsobit únik dat, neoprávněnou akci, ztrátu důvěry nebo drahý provozní problém, dej tomu minimálně třicet minut threat modelingu. Ne proto, že to nařídil vesmír. Protože třicet minut teď je levnější než tři dny vysvětlování později.
+
+### FB.2 Použij čtyři otázky místo bezpečnostního slovníku
+
+OWASP Threat Modeling Cheat Sheet staví proces kolem čtyř jednoduchých otázek: na čem pracujeme, co se může pokazit, co s tím uděláme a jestli jsme udělali dost. To je přesně úroveň, kterou malý tým potřebuje. Přeloženo do produktového jazyka:
+
+1. **Co měníme?** Popiš funkci jednou větou a nakresli tok dat.
+2. **Kde jsou hranice důvěry?** Kdo posílá data, kdo je ukládá, kdo je čte a kdo může měnit stav systému?
+3. **Co by šlo zneužít?** Nehledej sci-fi. Hledej nudné chyby: špatné oprávnění, neověřený webhook, veřejný export, příliš široký token.
+4. **Jaké opatření je přiměřené?** Kontrola role, limit, auditní záznam, schválení, validace vstupu, anonymizace, test, alert.
+5. **Co zůstává jako vědomé riziko?** Některé věci nevyřešíš hned. Zapiš je, přiřaď vlastníka a datum revize.
+
+Tohle není náhrada za bezpečnostní audit. Je to způsob, jak nedělat zbytečně hloupé chyby při běžném vývoji. A upřímně, zbytečně hloupé chyby mají v produkci neuvěřitelně dobrý marketing. Vždycky si najdou publikum.
+
+### FB.3 Začni tokem dat, ne seznamem strašáků
+
+Nejdřív si nakresli cestu dat. Klidně textově, žádná galerie moderního umění:
+
+```markdown
+Uživatel → webový formulář → API → databáze → interní notifikace → administrace → export pro zákazníka
+```
+
+Ke každému kroku dopiš:
+
+- jaká data tečou přes hranici,
+- kdo je může poslat,
+- kdo je může přečíst,
+- kdo je může změnit,
+- kde se ukládají,
+- jak dlouho zůstávají,
+- co se loguje.
+
+U privacy-first SaaS je tahle mapa zlato. Pomůže ti zjistit, že e-mail z formuláře zbytečně končí v pěti nástrojích, že debug log obsahuje osobní údaje, že exporty nemají expiraci nebo že marketingová integrace dostává víc dat, než potřebuje.
+
+Důležitá otázka zní: kdyby zákazník požádal o vysvětlení, umíme říct, kde jeho data jsou a proč? Pokud ne, threat model právě splnil účel. Nenašel chybu v kódu, našel chybu v provozním příběhu.
+
+### FB.4 Hledej konkrétní zneužití podle rolí
+
+Abstraktní riziko typu „někdo může systém napadnout“ je k ničemu. Nahraď ho konkrétními scénáři:
+
+- **Anonymní návštěvník:** odešle formulář s cizím e-mailem, zahlcuje API, zkouší injekce do polí, hádá veřejné identifikátory.
+- **Běžný uživatel:** otevře cizí záznam změnou ID v URL, stáhne export jiné organizace, pozve nechtěného člena, obchází limit tarifu.
+- **Admin zákazníka:** omylem zveřejní citlivý report, nastaví příliš široká oprávnění, exportuje data bez účelu.
+- **Interní člen týmu:** vidí víc produkčních dat, než potřebuje, používá osobní účet, nechává token v lokálním skriptu.
+- **Externí dodavatel:** dostane trvalý přístup, ukládá pracovní data mimo schválené místo, nevrátí zdrojové soubory.
+- **Automatická integrace:** pošle data špatnému endpointu, opakuje webhook donekonečna, nemá podpis, ukládá tajný klíč do logu.
+
+U každého scénáře napiš dopad a jedno opatření. Ne „zlepšíme bezpečnost“. Konkrétně: `ověřit organizaci u každého dotazu`, `podepisovat webhook`, `expirace exportu po 7 dnech`, `nezapisovat obsah zprávy do aplikačního logu`, `oddělit support roli od billing admina`.
+
+### FB.5 Přidej privacy hrozby, nejen bezpečnostní hrozby
+
+Klasický bezpečnostní pohled se často ptá, jak zabránit útoku. Privacy-first pohled se ptá i na to, jak zabránit zbytečnému sběru, nepřiměřenému sdílení a nejasnému účelu. To je rozdíl mezi „data nikdo neukradl“ a „data jsme vůbec neměli sbírat“.
+
+Do threat modelu přidej tyhle otázky:
+
+- Sbíráme jen data, která potřebujeme pro slíbenou hodnotu?
+- Umíme funkci dodat s agregací, anonymizací nebo kratší retencí?
+- Vidí interní tým osobní údaje jen tehdy, když to potřebuje pro podporu nebo provoz?
+- Má zákazník rozumnou kontrolu nad exportem, smazáním a pozvánkami?
+- Je zřejmé, který dodavatel data zpracovává a proč?
+- Máme jednoduchý způsob, jak vysvětlit datový tok bez právnického kouře?
+
+U AI funkcí přidej ještě dvě kontroly: jaká data vstupují do modelu a kde se ukládá výstup. Pokud uživatel nahraje citlivý dokument, není jedno, jestli se text posílá do externí služby, ukládá do prompt logů nebo používá pro ladění. Privacy-first AI není „AI, ale s hezčím bannerem“. Je to konkrétní datová mapa, omezení účelu a rozumné výchozí nastavení.
+
+### FB.6 Udělej z modelu backlog, ne muzeum rizik
+
+Po krátké debatě musí vzniknout něco, co jde udělat. Ideální výstup má tři seznamy:
+
+- **Blokery před releasem:** bez nich funkci nepouštíme.
+- **Úkoly po releasu:** riziko je přijatelné krátkodobě, ale má vlastníka a termín.
+- **Vědomě přijatá rizika:** víme o nich, umíme je vysvětlit a máme důvod, proč je teď neřešíme.
+
+Příklad:
+
+```markdown
+Riziko: Uživatel může zkusit stáhnout export jiné organizace změnou ID v URL.
+Dopad: Únik zákaznických dat.
+Opatření: Kontrola organizace u každého export requestu + integrační test.
+Stav: Bloker před releasem.
+Vlastník: Backend.
+```
+
+Nebo:
+
+```markdown
+Riziko: Export obsahuje e-mailové adresy, i když zákazník potřebuje jen souhrn.
+Dopad: Zbytečný přenos osobních údajů.
+Opatření: Přidat anonymizovaný souhrnný export jako výchozí volbu.
+Stav: Úkol po releasu, termín příští sprint.
+Vlastník: Produkt.
+```
+
+Takový zápis se dá vložit do issue, pull requestu, produktové karty nebo rozhodovacího deníku. Hlavně nesmí zmizet v chatu. Chat je dobrý sluha a příšerný archiv. Má paměť zlaté rybky a sebevědomí účetního systému.
+
+### FB.7 Třicetiminutový rituál pro malý tým
+
+Použij tento formát při větší změně:
+
+**0–5 minut: Kontext**
+- Co stavíme?
+- Pro koho?
+- Jaký je hlavní uživatelský tok?
+- Jaká data se dotýkají změny?
+
+**5–12 minut: Tok dat a hranice**
+- Kde data vstupují?
+- Kde se ukládají?
+- Kdo je čte?
+- Jaké externí služby se zapojují?
+- Kde se mění oprávnění nebo vlastnictví?
+
+**12–22 minut: Scénáře zneužití**
+- Co může udělat anonymní člověk?
+- Co může udělat přihlášený uživatel?
+- Co může pokazit admin?
+- Co může pokazit integrace?
+- Co může pokazit interní člověk nebo externista?
+
+**22–28 minut: Opatření**
+- Co je bloker?
+- Co stačí zapsat jako úkol?
+- Co otestujeme?
+- Co budeme logovat nebo alertovat?
+
+**28–30 minut: Rozhodnutí**
+- Kdo je vlastník?
+- Kdy se vrátíme k otevřeným rizikům?
+- Co se napíše do release poznámky nebo dokumentace?
+
+Když se tým zasekne, neřeš metodiku. Vrať se k otázce: co by nám bylo trapné vysvětlovat zákazníkovi? Tam často leží nejdůležitější riziko.
+
+### FB.8 Šablona: karta lehkého threat modelu
+
+```markdown
+## Threat model: [funkce / změna]
+
+### Kontext
+- Co měníme:
+- Pro koho:
+- Proč teď:
+- Vlastník rozhodnutí:
+
+### Tok dat
+- Vstupy:
+- Ukládání:
+- Výstupy a exporty:
+- Externí služby:
+- Retence:
+
+### Hranice důvěry
+- Anonymní uživatelé:
+- Přihlášení uživatelé:
+- Admin role:
+- Interní tým:
+- Externisté a integrace:
+
+### Scénáře rizik
+- Scénář:
+- Dopad:
+- Pravděpodobnost:
+- Opatření:
+- Test nebo kontrola:
+
+### Privacy kontrola
+- Jsou data minimální:
+- Existuje agregovaná/anonymizovaná varianta:
+- Kdo data vidí:
+- Jak zákazník získá kontrolu:
+- Co se vysvětlí v dokumentaci:
+
+### Rozhodnutí
+- Blokery před releasem:
+- Úkoly po releasu:
+- Přijatá rizika:
+- Datum revize:
+```
+
+### FB.9 Checklist: threat modeling bez těžké metodiky
+
+- [ ] Threat model spouštíme při změně rizika, ne u každé kosmetické úpravy.
+- [ ] Funkce má popsaný tok dat a hranice důvěry.
+- [ ] Rizika jsou napsaná jako konkrétní scénáře, ne obecné strašení.
+- [ ] Každé významné riziko má opatření, vlastníka a stav.
+- [ ] Privacy otázky jsou součástí modelu, ne dodatek po vývoji.
+- [ ] Externí integrace mají jasný účel, rozsah dat a plán výpadku.
+- [ ] Blokery před releasem jsou oddělené od pozdějších úkolů.
+- [ ] Přijatá rizika jsou vědomá, vysvětlitelná a mají datum revize.
+- [ ] Důležité závěry jsou uložené v issue, dokumentaci nebo rozhodovacím deníku.
+- [ ] Threat model se aktualizuje při zásadní změně toku dat, rolí nebo dodavatelů.
+
+### FB.10 Zdroje k threat modelingu, datovým tokům a privacy by design
+
+- OWASP Threat Modeling Cheat Sheet popisuje lehký postup založený na otázkách „na čem pracujeme, co se může pokazit, co s tím uděláme a zda jsme udělali dost“: https://cheatsheetseries.owasp.org/cheatsheets/Threat_Modeling_Cheat_Sheet.html
+- OWASP Threat Modeling Project zdůrazňuje, že threat modeling pomáhá rozhodovat o aplikačním bezpečnostním riziku v kontextu chráněné hodnoty: https://owasp.org/www-project-threat-modeling/
+- OWASP Developer Guide shrnuje výstupy threat modelingu jako dokumentaci datových toků, hrozeb a vhodných bezpečnostních kontrol: https://owasp.org/www-project-developer-guide/release/design/threat_modeling/
+- GDPR článek 5 pracuje mimo jiné s principy účelového omezení, minimalizace údajů a omezení uložení: https://eur-lex.europa.eu/eli/reg/2016/679/oj
+- GDPR článek 25 zavádí ochranu osobních údajů již od návrhu a ve výchozím nastavení: https://eur-lex.europa.eu/eli/reg/2016/679/oj
+
+Threat modeling není záruka, že se nikdy nic nestane. Je to praktický způsob, jak zvýšit šanci, že tým uvidí riziko dřív než produkce. A to je přesně typ nudy, kterou mám rád: nudná bezpečnost, nudné releasy, nudné incidentní pondělí bez incidentu.
+
 ## Pracovní log
+
+- 2026-09-04 08:00 UTC — Doplněna příloha FB o lehkém threat modelingu pro SaaS: kdy ho spouštět, čtyři praktické otázky, mapa datových toků, konkrétní scénáře rizik, privacy hrozby, backlog opatření, třicetiminutový rituál, šablona a checklist.
+
 
 - 2026-09-04 07:02 UTC — Doplněna příloha FA o externistech, agenturách a subdodávkách: karta spolupráce, vlastnictví, bezpečné sdílení kontextu, dočasné přístupy, přenositelné výstupy, offboarding a privacy-first checklist.
 
