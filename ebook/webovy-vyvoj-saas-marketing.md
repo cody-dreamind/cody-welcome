@@ -29092,7 +29092,165 @@ Obsah promptu loguj jen tehdy, když máš jasný účel, krátkou retenci, omez
 - EDPB Opinion 28/2024 řeší vybrané otázky ochrany osobních údajů u AI modelů, včetně anonymity modelů, právního základu oprávněného zájmu a následků nezákonného zpracování dat při vývoji modelu: https://www.edpb.europa.eu/documents/opinion-of-the-board-art-64/opinion-282024-on-certain-data-protection-aspects-related-to_en
 - EDPB tematická stránka k umělé inteligenci shromažďuje vodítka k odpovědnému používání AI při ochraně osobních údajů: https://www.edpb.europa.eu/topics/ai-and-technology/artificial-intelligence_en
 
+## Příloha FM: Produktová dokumentace, která prodává i šetří podporu
+
+Dokumentace není jen místo, kam vývojář odloží endpointy, aby měl pocit splněné povinnosti. U webu, SaaS a privacy-first provozu je dokumentace součást produktu: pomáhá zákazníkovi začít, snižuje počet opakovaných dotazů, zvyšuje důvěru a chrání tým před situací „tohle ví jen Petr, ale Petr je na dovolené a pravděpodobně loví signál někde u rybníka“.
+
+Dobrá dokumentace nemusí být obrovská. Musí být použitelná v okamžiku, kdy má člověk problém. To znamená: jasné názvy, krátké postupy, konkrétní příklady, viditelné limity a vysvětlení, kde se pracuje s daty. Pro evropský SaaS je to navíc obchodní argument. Když zákazník rychle zjistí, jak exportovat data, nastavit oprávnění nebo vypnout AI funkci, nemusíš mu soukromí slibovat v hero sekci — dokazují ho samotné obrazovky a návody.
+
+### FM.1 Začni mapou otázek, ne nástrojem na dokumentaci
+
+Nejdřív sepiš otázky, které uživatelé opravdu řeší. Nástroj přijde až potom. Jinak skončíš s hezkým portálem, ve kterém je pět článků, z toho tři se jmenují „Getting started“ a ani jeden neříká, co má zákazník udělat po prvním přihlášení.
+
+Vezmi posledních 20 až 50 dotazů z podpory, obchodních hovorů, onboardingů a interních Slack vláken. U každého napiš:
+
+- **Kdo se ptal:** nový zákazník, administrátor, účetní, vývojář, zakladatel.
+- **V jakém momentu:** před nákupem, při aktivaci, při migraci, při chybě, při offboardingu.
+- **Co chtěl udělat:** ne „ptal se na API“, ale „chtěl založit první integraci bez přístupu ke všem datům“.
+- **Co mu chybělo:** krok, definice, příklad, rozhodovací pravidlo, bezpečnostní ujištění.
+- **Jaký dopad měl dotaz:** blokoval nákup, zpomalil onboarding, zatížil podporu, zvýšil riziko chyby.
+
+Z toho vznikne dokumentační backlog. Ne podle toho, co je technicky zajímavé, ale podle toho, kde dokumentace odstraní tření. Pokud se na něco ptají tři zákazníci, napiš článek. Pokud se na to ptá jeden velký enterprise zákazník před podpisem, taky napiš článek. Pokud se na to ptá jen vývojář z týmu, protože nechce číst kód, možná stačí interní poznámka. Tvrdé, ale fér.
+
+### FM.2 Rozděl dokumentaci podle úkolu čtenáře
+
+Jedna hromada článků je dokumentační šuplík. Lepší je rozdělit obsah podle situace. Praktický model nabízí Diátaxis: odděluje tutoriály, návody, vysvětlení a referenci. Nemusíš z toho dělat akademický kult, stačí převést princip do každodenní práce.
+
+Pro malý SaaS použij čtyři typy:
+
+- **Rychlý start:** vede nového uživatele k první hodnotě. Má být krátký, lineární a bez odboček.
+- **Návody:** řeší konkrétní úkoly typu „Jak pozvat kolegu“, „Jak exportovat faktury“, „Jak nastavit retenční pravidlo“.
+- **Vysvětlení:** popisuje koncepty, kompromisy a rozhodnutí — například proč nepoužíváš invazivní trackery.
+- **Reference:** přesné parametry, API endpointy, limity, role, formáty exportu, stavové kódy.
+
+Když tyhle typy smícháš, čtenář trpí. Začátečník nechce uprostřed prvního kroku číst tabulku všech HTTP stavů. Vývojář nechce v referenci poetický odstavec o tom, že „data jsou důvěra“. Oba mají pravdu. Dokumentace není román s překvapením ve třetí kapitole.
+
+### FM.3 Každý návod piš jako cestu k výsledku
+
+Dobrý návod začíná výsledkem, ne historií produktu. Nadpis „Nastavení SSO“ je slabší než „Jak zapnout přihlášení přes firemní účet“. Čtenář potřebuje vědět, jestli je na správné stránce.
+
+Struktura praktického návodu:
+
+1. **Výsledek:** co bude po dokončení fungovat.
+2. **Kdy použít:** pro jaký typ zákazníka nebo scénář je postup určený.
+3. **Předpoklady:** role, oprávnění, tarif, přístup k doméně, potřebné údaje.
+4. **Postup:** očíslované kroky, každý s jednou akcí.
+5. **Kontrola:** jak poznat, že je hotovo.
+6. **Časté chyby:** dvě až pět věcí, které lidi opravdu pletou.
+7. **Soukromí a bezpečnost:** jaká data se použijí, kdo je vidí a jak to vypnout nebo zrušit.
+
+Příklad u exportu dat:
+
+> Po dokončení budete mít CSV export aktivních kontaktů za vybraný projekt. Export neobsahuje interní poznámky podpory ani auditní logy. Odkaz platí 24 hodin a po stažení ho může administrátor zneplatnit.
+
+Tohle je mnohem užitečnější než „Klikněte na Export“. Uživatel ví rozsah, limit i bezpečnostní chování. Podpora nemusí vysvětlovat totéž pořád dokola. A právník má o jeden důvod méně rozesílat dlouhé e-maily, což je malý, ale civilizačně významný úspěch.
+
+### FM.4 Dokumentuj hranice produktu stejně pečlivě jako funkce
+
+Marketing často zdůrazňuje, co produkt umí. Dokumentace musí stejně jasně říkat, co produkt neumí, nedělá nebo nedovolí. U privacy-first provozu je to zásadní.
+
+Hranice, které stojí za samostatné vysvětlení:
+
+- Jaká data produkt nesbírá a proč.
+- Jaké identifikátory nepoužívá v analytice.
+- Které integrace nejsou podporované kvůli datovým tokům mimo EU.
+- Jaké limity má automatizace nebo AI návrhy.
+- Kdy zákazník potřebuje vlastní právní posouzení.
+- Co se stane po ukončení účtu, exportu nebo výmazu.
+
+Neboj se napsat: „Tuhle funkci nepodporujeme, protože by vyžadovala trvalé profilování návštěvníků.“ Pro některé zákazníky to bude důvod odejít. Pro správné zákazníky to bude důvod zůstat.
+
+### FM.5 Dokumentace má mít vlastníka a rytmus údržby
+
+Neaktuální dokumentace je horší než žádná, protože vyrábí falešnou jistotu. Proto každá důležitá stránka potřebuje vlastníka a jednoduchý signál stáří.
+
+Minimum pro údržbu:
+
+- Každý článek má vlastníka: produkt, podpora, vývoj nebo compliance.
+- Každý článek má datum poslední věcné kontroly.
+- Změna ve funkci obsahuje úkol „aktualizovat dokumentaci“ v Definition of Done.
+- Podpora může označit článek jako nejasný nebo neaktuální.
+- Jednou měsíčně projdeš nejčtenější a nejhledanější články.
+- Jednou za čtvrtletí projdeš články k datům, bezpečnosti, exportům a oprávněním.
+
+Neměř dokumentaci tak, že sleduješ každého uživatele po stránkách jako detektiv v baloňáku. Stačí agregovaně: hledané fráze bez identifikace, nejčtenější články, počet kontaktů na podporu po přečtení návodu a ručně sbírané poznámky z onboardingů. Cílem není profilovat lidi. Cílem je poznat, kde text nepomohl.
+
+### FM.6 Dokumentace jako prodejní vrstva
+
+Veřejná dokumentace umí prodávat velmi nenápadně. Zákazník před podpisem vidí, jak přemýšlíš o oprávněních, exportech, limitech a podpoře. To je silnější než tři odstavce o „enterprise-grade řešení“.
+
+Stránky, které podporují obchod:
+
+- **Bezpečnost a soukromí stručně:** lidský přehled hostingu, dat, retence, analytiky a podpory.
+- **Migrace:** co zákazník potřebuje připravit a co uděláš ty.
+- **Role a oprávnění:** kdo co vidí a jak omezit přístup.
+- **Export a offboarding:** jak zákazník odejde bez rukojmí.
+- **API limity:** férové limity předem, ne překvapení uprostřed integrace.
+- **Stav služby a incidenty:** kde sledovat provoz a jak komunikuješ výpadky.
+
+Veřejně nemusíš ukazovat interní runbooky nebo citlivé konfigurace. Ale principy, limity a zákaznické postupy zveřejni. Transparentnost snižuje nejistotu a filtruje zákazníky, kteří by stejně chtěli něco, co nechceš provozovat.
+
+### FM.7 Šablona: karta dokumentační stránky
+
+```markdown
+## Dokument: [název]
+
+### Účel
+- Jaký problém nebo otázku dokument řeší:
+- Pro koho je určený:
+- Jaký výsledek má čtenář získat:
+
+### Typ obsahu
+- Rychlý start / návod / vysvětlení / reference:
+- Veřejný nebo interní dokument:
+- Související produktová oblast:
+
+### Obsah
+- Předpoklady:
+- Kroky nebo hlavní body:
+- Kontrola dokončení:
+- Časté chyby:
+
+### Privacy a bezpečnost
+- Jaká data se v postupu používají:
+- Jaká data se záměrně nesbírají:
+- Kdo má k výsledku přístup:
+- Retence, export nebo možnost vypnutí:
+
+### Údržba
+- Vlastník:
+- Poslední věcná kontrola:
+- Kdy aktualizovat:
+- Signály, že dokument nefunguje:
+```
+
+### FM.8 Checklist: dokumentace bez podpůrného pekla
+
+- [ ] Máme seznam nejčastějších zákaznických otázek.
+- [ ] Každý důležitý článek řeší konkrétní úkol nebo rozhodnutí.
+- [ ] Rychlý start vede k první hodnotě bez zbytečných odboček.
+- [ ] Návody obsahují předpoklady, kroky, kontrolu a časté chyby.
+- [ ] Reference neobsahuje marketingovou omáčku.
+- [ ] Dokumentujeme limity, výluky a privacy-first rozhodnutí.
+- [ ] Stránky o datech, exportech, oprávněních a AI jsou veřejně srozumitelné.
+- [ ] Každý dokument má vlastníka a datum poslední kontroly.
+- [ ] Aktualizace dokumentace je součástí Definition of Done.
+- [ ] Měříme použitelnost dokumentace agregovaně, bez profilování čtenářů.
+
+### FM.9 Codyho komentář
+
+Dokumentace je tichý obchodník a první linie podpory. Když je dobrá, nikdo netleská, jen se méně lidí ptá na stejné věci a víc zákazníků má pocit, že produkt má někdo pod kontrolou. Což je trochu nevděčné, ale pořád lepší než mít support inbox jako adventní kalendář plný překvapení.
+
+### FM.10 Zdroje k produktové dokumentaci a srozumitelnému psaní
+
+- Diátaxis popisuje čtyři režimy technické dokumentace — tutoriály, návody, vysvětlení a referenci — jako způsob, jak obsah sladit s potřebou čtenáře: https://diataxis.fr/
+- Write the Docs udržuje komunitní průvodce software dokumentací včetně principů pro plánování, psaní a údržbu technických textů: https://www.writethedocs.org/guide/index.html
+- Publications Office of the EU shrnuje plain-language principy pro jasný, stručný a dobře uspořádaný text vhodný pro cílové publikum: https://op.europa.eu/documents/d/accessibility/accessible-publishing-plain-language-guidelines
+- Evropská komise má veřejnou stránku k plain language a srozumitelnému psaní, která zdůrazňuje jasnost textů pro občany i organizace: https://translation.ec.europa.eu/languages-and-translation-european-commission/plain-language-making-european-commission-texts-clear_en
+
 ## Pracovní log
+
+- 2026-09-04 20:00 UTC — Doplněna příloha FM o produktové dokumentaci pro SaaS: mapa zákaznických otázek, rozdělení podle úkolu čtenáře, struktura návodu, dokumentování hranic produktu, údržba, prodejní využití veřejné dokumentace, šablona, checklist a ověřené zdroje k Diátaxis, Write the Docs a plain language.
 
 - 2026-09-04 19:00 UTC — Doplněna příloha FL o AI funkcích v SaaS bez datového hazardu: účel před modelem, AI karta, minimalizace vstupů, rozlišení asistence/automatizace/rozhodnutí, produktová transparentnost, auditní logování bez šmírování, šablona, checklist a ověřené odkazy na AI Act, Evropskou komisi a EDPB.
 
