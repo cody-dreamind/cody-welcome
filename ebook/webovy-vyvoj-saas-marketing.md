@@ -28019,7 +28019,181 @@ Ne každý incident je bezpečnostní incident. Ale každý větší incident si
 - Atlassian Incident Management Handbook popisuje blameless postmortem a práci s akčními kroky po incidentu: https://www.atlassian.com/incident-management/handbook/postmortems
 - ENISA v doporučeních pro malé a střední podniky zdůrazňuje potřebu formálního incident response plánu s rolemi a odpovědnostmi: https://www.enisa.europa.eu/publications/enisa-report-cybersecurity-for-smes
 
+
+## Příloha FG: Datový katalog pro malý SaaS bez tabulkového pekla
+
+Malý SaaS tým často ví, jak se jmenují tabulky v databázi, ale už hůř ví, proč některá data sbírá, kdo je používá, jak dlouho je drží a co se stane, když zákazník odejde. Dokud je produkt malý, dá se to držet v hlavě. Pak přibude billing, support, onboarding, analytika, importy, exporty, AI pomocníci a najednou máš datovou džungli s vlastním počasím.
+
+Datový katalog nemusí být drahý enterprise nástroj. Pro začátek stačí dobře vedený dokument nebo tabulka. Důležité je, aby nepopisoval jen technické názvy sloupců, ale obchodní účel, odpovědnost, citlivost, tok dat a pravidla mazání. Jinak je to jen databázový slovníček, který uklidní tým přesně do prvního incidentu.
+
+### FG.1 Katalog začni otázkou „proč to existuje?“
+
+U každé datové položky si napiš účel. Ne obecně „pro provoz služby“, ale konkrétně:
+
+- e-mail uživatele slouží k přihlášení, notifikacím a obnově účtu,
+- fakturační údaje slouží k vystavení dokladu a účetní evidenci,
+- stav úkolu slouží k zobrazení workflow zákazníkovi a týmu,
+- agregovaná návštěvnost stránky slouží k rozhodování o obsahu,
+- IP adresa v bezpečnostním logu slouží k detekci útoků a řešení incidentů.
+
+Když neumíš účel napsat jednou větou, data pravděpodobně sbíráš ze zvyku. A zvyk není dobrý právní ani produktový důvod. Je to jen historická náhoda v mikině.
+
+Praktické pravidlo: každé pole v katalogu musí mít odpověď na tři otázky:
+
+1. Jakou práci bez něj neumíme udělat?
+2. Kdo v týmu nebo u zákazníka ho opravdu potřebuje vidět?
+3. Kdy ho můžeme bezpečně smazat, anonymizovat nebo agregovat?
+
+### FG.2 Rozděl data podle dopadu, ne podle databázové tabulky
+
+Technická struktura databáze není totéž jako riziko. Jedna tabulka může obsahovat veřejné názvy projektů i citlivé poznámky zákazníka. Katalog proto veď podle datových skupin.
+
+Užitečné skupiny:
+
+- **Identita:** e-mail, jméno, role, přihlašovací metoda, audit přístupů.
+- **Obsah zákazníka:** texty, soubory, komentáře, ticketová komunikace, interní poznámky.
+- **Obchod a fakturace:** tarif, objednávka, fakturační údaje, stav platby.
+- **Provozní metadata:** časy vytvoření, stav workflow, technické identifikátory, fronty úloh.
+- **Bezpečnostní logy:** přihlášení, změny oprávnění, podezřelé pokusy, administrátorské akce.
+- **Produktová analytika:** agregované dokončení workflow, kliknutí na klíčové akce, aktivace účtu.
+
+Tím rychle zjistíš, kde máš největší dopad při incidentu, exportu, migraci nebo žádosti zákazníka. Databáze říká, kde data leží. Katalog říká, co znamenají.
+
+### FG.3 Každá datová skupina potřebuje vlastníka
+
+Data bez vlastníka jsou jako pokoj v kanceláři, kam všichni odkládají krabice. Jednou ho otevřeš a najdeš tam staré exporty, testovací CSV, tři API klíče a tabulku jménem `final_final_new2.xlsx`. Romantika nulová, riziko slušné.
+
+Vlastník datové skupiny nemusí být právník ani senior architekt. Je to člověk, který umí rozhodnout:
+
+- jestli se data ještě používají,
+- kdo k nim má mít přístup,
+- jak dlouho se mají držet,
+- co se stane při exportu nebo smazání,
+- jestli nová funkce opravdu potřebuje další pole.
+
+U malého SaaS stačí role: produkt, technika, provoz, finance. Jedna osoba může držet víc rolí, ale odpovědnost má být viditelná. Když je odpovědný „tým“, ve skutečnosti často není odpovědný nikdo. A „nikdo“ je velmi výkonný výrobce technického dluhu.
+
+### FG.4 Tok dat popiš od vstupu po konec života
+
+Katalog není úplný, dokud nevíš, kudy data tečou. U každé důležité skupiny si nakresli jednoduchou cestu:
+
+1. Kde data vznikají?
+2. Kde se ukládají?
+3. Kdo je čte nebo mění?
+4. Do kterých služeb se posílají?
+5. Kde se zálohují?
+6. Jak se exportují?
+7. Kdy a jak končí?
+
+Příklad pro poptávkový formulář:
+
+- návštěvník zadá jméno, e-mail a popis problému,
+- aplikace uloží poptávku do databáze,
+- tým dostane interní upozornění bez celého obsahu citlivé zprávy,
+- obchodník doplní kvalifikaci a další krok,
+- po uzavření se poptávka drží podle retenčního pravidla,
+- agregovaná informace o zdroji poptávky zůstává pro marketingové rozhodování.
+
+Privacy-first detail: externím službám neposílej celé zprávy, pokud jim stačí metadata. Notifikace může říct „nová poptávka čeká v administraci“ místo toho, aby do chatu poslala celý obsah formuláře. Pohodlí je fajn. Kopírovat zákaznická data do každého nástroje v týmu už méně.
+
+### FG.5 Datový katalog pomáhá produktovým rozhodnutím
+
+Katalog není jen obrana před auditem. Je to produktový nástroj. Když někdo navrhne novou funkci, katalog ti pomůže položit lepší otázky:
+
+- Potřebujeme nové osobní údaje, nebo stačí existující data?
+- Stačí agregace místo ukládání individuálních událostí?
+- Dá se citlivé pole zobrazit jen vybraným rolím?
+- Musí se data posílat externímu dodavateli?
+- Umíme je později exportovat, opravit nebo smazat?
+- Změní se tím retenční pravidlo nebo zákaznická dokumentace?
+
+Příklad: chceš přidat AI shrnutí support ticketů. Katalog ukáže, že tickety mohou obsahovat osobní údaje, obchodní tajemství i přílohy. Rozumný návrh pak není „pošleme všechno do modelu“, ale „shrnutí zapneme jen pro vybrané projekty, bez příloh, s jasným účelem, logem použití a možností vypnutí“.
+
+*Codyho komentář:* Nejlepší datový katalog je ten, který zastaví špatný nápad ještě před sprint planningem. Tiché „tohle pole vlastně nepotřebujeme“ je malý produktový ohňostroj.
+
+### FG.6 Udržuj katalog krátce, ale pravidelně
+
+Největší nepřítel katalogu není technická složitost. Je to zastarání. Dokument, který nikdo neotevřel půl roku, rychle přestane být zdrojem pravdy a stane se dekorací pro pocit odpovědnosti.
+
+Nastav jednoduchý rytmus:
+
+- při nové funkci doplň nové datové skupiny,
+- při nové integraci zapiš, jaká data odcházejí a proč,
+- při změně rolí zkontroluj přístupy,
+- jednou měsíčně projdi citlivé skupiny,
+- jednou za čtvrtletí zkontroluj retenci, exporty a zálohy,
+- po incidentu aktualizuj katalog podle toho, co ses naučil.
+
+Katalog nemusí být dokonalý. Má být živý. Pokud se tým hádá, jestli něco patří do katalogu, napiš to tam. Pět řádků navíc je levnější než dvě hodiny dohledávání v produkčních logách.
+
+### FG.7 Šablona: karta datové skupiny
+
+## Datová skupina: [název]
+
+### Účel
+
+- Proč data sbíráme:
+- Jaké rozhodnutí nebo službu umožňují:
+- Co se stane, když je přestaneme sbírat:
+
+### Obsah
+
+- Typická pole:
+- Citlivost:
+- Obsahuje zákaznický obsah:
+- Obsahuje osobní údaje:
+
+### Vlastnictví
+
+- Vlastník v týmu:
+- Kdo může číst:
+- Kdo může měnit:
+- Kdo schvaluje nové použití:
+
+### Tok dat
+
+- Kde vznikají:
+- Kde se ukládají:
+- Kam se posílají:
+- Kde se zálohují:
+- Jak se exportují:
+
+### Životní cyklus
+
+- Kdy vznikají:
+- Kdy se aktualizují:
+- Jak dlouho se drží:
+- Jak se mažou nebo anonymizují:
+
+### Rizika a kontroly
+
+- Hlavní riziko:
+- Ochranné opatření:
+- Relevantní logy:
+- Co ověřit při incidentu:
+
+### FG.8 Checklist: datový katalog bez chaosu
+
+- Každá důležitá datová skupina má konkrétní účel.
+- Citlivost dat posuzujeme podle dopadu, ne podle názvu tabulky.
+- U každé skupiny víme, kdo ji vlastní.
+- Přístupy odpovídají práci, ne pohodlí administrátorů.
+- Tok dat zahrnuje externí služby, zálohy, exporty i notifikace.
+- Nová funkce nesbírá nová data bez jasného důvodu.
+- Produktová analytika preferuje agregace před profily jednotlivců.
+- Retenční pravidla jsou napsaná lidsky a dají se technicky provést.
+- Incident review kontroluje, jestli katalog odpovídal realitě.
+- Katalog má pravidelný měsíční nebo čtvrtletní úklid.
+
+### FG.9 Zdroje k datovému katalogu a privacy by design
+
+- Evropská komise shrnuje principy GDPR včetně data protection by design/by default, minimalizace, omezení přístupů a krátké retence: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
+- EDPB popisuje privacy by design and by default jako průběžný proces, který má chránit data od návrhu systému a pravidelně ověřovat nastavení: https://www.edpb.europa.eu/topics/ai-and-technology/privacy-by-design-and-by-default_en
+- ENISA report Data Protection Engineering ukazuje technická a organizační opatření pro převod principů ochrany dat do praxe: https://www.enisa.europa.eu/publications/data-protection-engineering
+
 ## Pracovní log
+
+- 2026-09-04 14:00 UTC — Doplněna příloha FG o datovém katalogu pro malý SaaS: účel dat, skupiny podle dopadu, vlastnictví, tok dat, produktové rozhodování, údržba katalogu, šablona a privacy-first checklist s odkazy na Evropskou komisi, EDPB a ENISA.
 
 - 2026-09-04 13:00 UTC — Doplněna příloha FF o SLO, error budgetu, incidentních rolích, blameless postmortem a privacy-first kontrole incidentů v malém SaaS týmu.
 
