@@ -27625,7 +27625,210 @@ Pokud služba neumí překryvné období, naplánuj krátké okno a jasný rollb
 Tajemství nejsou jen technický detail. Jsou to malé průchody do systémů, přes které tečou peníze, důvěra, osobní údaje a reputace. Když je pojmenuješ, omezíš, uložíš rozumně a naučíš se je otáčet, získáš jednu z nejlevnějších forem bezpečnosti: méně překvapení.
 
 
+
+## Příloha FE: Feature flagy a postupné releasy bez chaosu v produkci
+
+Feature flag je obyčejný přepínač. Jenže v SaaS produktu umí být buď bezpečnostní pás, nebo krabice volně pohozených drátů. Rozdíl není v názvu nástroje, ale v disciplíně: proč flag existuje, kdo ho vlastní, jak se testuje, co se loguje a kdy zmizí.
+
+Postupné releasy jsou užitečné hlavně pro malé týmy, protože dovolí oddělit nasazení kódu od okamžitého zapnutí funkce všem zákazníkům. Díky tomu můžeš nový onboarding pustit nejdřív interně, potom jednomu pilotnímu zákazníkovi, potom menší skupině a až nakonec všem. Nejde o kouzlo. Jde o řízené riziko.
+
+*Codyho komentář:* Feature flag není omluvenka pro věčné nedodělky. Je to lešení. Pomáhá stavět bezpečně, ale nikdo nechce bydlet v domě, kde lešení zůstalo navždy, protože „možná se bude hodit“.
+
+### FE.1 Rozliš typy flagů podle účelu
+
+Ne každý přepínač má stejnou životnost a stejné riziko. Pokud je házíš do jedné tabulky bez kontextu, brzy nevíš, co můžeš smazat a co drží produkci pohromadě.
+
+Používej jednoduché kategorie:
+
+- **Release flag:** schová novou funkci, která ještě nemá být vidět všem.
+- **Experiment flag:** porovnává varianty, typicky text, flow nebo nabídku.
+- **Ops flag:** umí rychle vypnout drahou, pomalou nebo rizikovou část systému.
+- **Permission flag:** zpřístupňuje funkci konkrétním tarifům, rolím nebo zákazníkům.
+- **Migration flag:** pomáhá přechodu mezi starým a novým způsobem zpracování.
+
+Každá kategorie má jiný režim. Release flag má žít krátce. Ops flag může být dlouhodobý, ale musí mít jasný runbook. Permission flag je často součást obchodního modelu, takže patří blíž autorizaci než experimentálnímu dashboardu. Migration flag má mít datum úklidu, jinak ti v kódu zůstane archeologická vrstva, kterou se jednou bude někdo bát odmazat.
+
+Praktické pravidlo: pokud flag ovlivňuje, kdo smí vidět placenou nebo citlivou funkci, nesmí být jedinou autorizační kontrolou v prohlížeči. UI může funkci schovat, ale server musí rozhodnout, jestli má uživatel skutečně právo akci provést.
+
+### FE.2 Každý flag potřebuje vlastníka a datum úklidu
+
+Feature flag bez vlastníka je budoucí incident v převleku za flexibilitu. Ke každému flagu proto zapisuj minimálně:
+
+- název flagu,
+- účel,
+- kategorii,
+- vlastníka,
+- datum vytvoření,
+- očekávané datum odstranění,
+- výchozí bezpečnou hodnotu,
+- co se stane při vypnutí,
+- kde je flag použitý v kódu.
+
+Příklad dobrého názvu:
+
+`release_new_billing_summary`
+
+Příklad horšího názvu:
+
+`newThing2`
+
+Název má pomáhat i člověku, který se k projektu dostane za půl roku. Pokud musí kvůli každému flagu číst tři Slack vlákna a hádat, jestli je stále potřeba, systém už neřídíš. Systém řídí tebe. A ještě se u toho tváří nenápadně.
+
+Dobrá praxe je mít týdenní nebo měsíční „flag hygiene“ kontrolu. Ne jako ceremonii pro radost z tabulek, ale jako úklid technického rizika. U každého staršího flagu rozhodni: smazat, prodloužit s důvodem, nebo převést do stabilní konfigurace.
+
+### FE.3 Postupný release začni interně
+
+Bezpečný release nemusí začít procentem uživatelů. Začni interním zapnutím pro tým nebo testovací tenant. Tím ověříš základní chyby bez toho, aby se zákazníci stali QA oddělením zdarma.
+
+Doporučený postup pro menší SaaS:
+
+1. **Lokální test:** obě větve flagu prochází testy.
+2. **Staging:** funkce běží s produkčně podobnými daty bez citlivých kopií.
+3. **Interní tenant:** tým používá funkci v reálném scénáři.
+4. **Pilotní zákazník:** zapnutí pro zákazníka, který ví, že testuje novinku.
+5. **Malá skupina:** rozšíření na segment s nízkým rizikem.
+6. **Všichni:** výchozí hodnota se změní a stará větev se naplánuje ke smazání.
+
+U každého kroku si napiš stop signály. Například: zvýšený počet chyb, pomalejší dokončení workflow, nárůst ticketů, nejasnosti v onboardingu nebo ruční zásahy podpory. Když stop signály nemáš, postupný release je jen pomalejší forma hádání.
+
+### FE.4 Neřiď flagy podle osobních dat, pokud nemusíš
+
+Moderní flagovací nástroje umí cílit podle uživatele, firmy, země, tarifu, role, zařízení a dalších kontextových atributů. To je praktické, ale privacy-first otázka zní: opravdu to všechno musíš posílat do flag systému?
+
+Bezpečnější varianty:
+
+- používej interní náhodné ID místo e-mailu,
+- cíli podle tenant ID, ne podle jména konkrétní osoby,
+- neposílej do kontextu text poptávky, fakturační údaje ani citlivé atributy,
+- pro procentuální rollout používej pseudonymní klíč,
+- drž mapování mezi zákazníkem a rolloutem ve vlastním systému, pokud externí služba nemusí znát identitu.
+
+OpenFeature ve své dokumentaci upozorňuje, že evaluační kontext může obsahovat údaje používané pro rozhodování o flagu a že je potřeba přemýšlet, jak poskytovatel s osobními údaji nakládá. Praktický závěr: do kontextu patří jen atributy nezbytné pro rozhodnutí flagu. Všechno ostatní je datový balast.
+
+Příklad lepšího kontextu:
+
+```json
+{
+  "targetingKey": "tenant_8f3a",
+  "plan": "pro",
+  "region": "eu",
+  "pilotGroup": "billing_preview"
+}
+```
+
+Příklad horšího kontextu:
+
+```json
+{
+  "email": "jana@example.com",
+  "companyName": "Klient s.r.o.",
+  "lastInvoiceAmount": 42000,
+  "supportComplaint": "Vadí jim migrace"
+}
+```
+
+To druhé možná technicky funguje. Produktově je to ale pozvánka na budoucí nepříjemnou schůzku.
+
+### FE.5 Měření flagu musí mít rozhodovací otázku
+
+Experimentální flag bez rozhodovací otázky je jen A/B testování pro pocit produktového luxusu. Než něco zapneš, napiš si:
+
+> Rozhodneme se, jestli **[změnu]** ponecháme, pokud **[metrika nebo signál]** ukáže **[hranici]** bez zhoršení **[ochranná metrika]**.
+
+Příklad:
+
+> Nový onboarding ponecháme, pokud do 14 dnů zvýší dokončení prvního projektu z pilotní skupiny a zároveň nezvýší počet ticketů k nastavení účtu.
+
+U privacy-first produktu často nepotřebuješ sledovat jednotlivce krok za krokem. Stačí agregované události a zákaznická zpětná vazba:
+
+- kolik tenantů funkci zapnulo,
+- kolik workflow bylo dokončeno,
+- kolik chyb nastalo,
+- kolik ticketů se týkalo nové části,
+- co řekli pilotní zákazníci v krátkém review.
+
+Pozor na experimenty, které optimalizují jen kliknutí. Kliknutí na agresivnější CTA může růst, ale důvěra může klesat. U B2B SaaS je lepší sledovat kvalitu konverzace než jen počet lidí, kteří omylem spadli do formuláře.
+
+### FE.6 Ops flag je nouzová brzda, ne tajný ovladač chaosu
+
+Ops flag se hodí, když potřebuješ rychle vypnout část systému bez deploye: exporty, drahé AI zpracování, importy, e-mailové dávky, webhooky nebo novou integraci. Aby fungoval jako brzda, musí být připravený před incidentem.
+
+Ke každému ops flagu měj krátký runbook:
+
+- kdy ho použít,
+- kdo ho smí změnit,
+- jaká je bezpečná výchozí hodnota,
+- jak poznáš, že vypnutí pomohlo,
+- koho informovat,
+- jak flag vrátit zpět,
+- jak zkontrolovat dopad na zákazníky.
+
+Příklad: pokud AI sumarizace ticketů začne padat nebo být drahá, ops flag `ops_ai_ticket_summary_enabled=false` vypne jen sumarizaci. Zákazník dál vidí tickety, tým dál pracuje a incident se zmenší na degradaci funkce, ne výpadek produktu.
+
+### FE.7 Šablona: karta feature flagu
+
+## Feature flag: [název]
+
+### Účel
+
+- Kategorie: release / experiment / ops / permission / migration.
+- Jaké rozhodnutí nebo riziko flag řeší:
+- Co je bezpečná výchozí hodnota:
+
+### Vlastnictví
+
+- Vlastník:
+- Datum vytvoření:
+- Datum revize:
+- Datum odstranění nebo převodu do konfigurace:
+
+### Dopad
+
+- Kde je flag použitý:
+- Co se stane při zapnutí:
+- Co se stane při vypnutí:
+- Jaký zákaznický segment je ovlivněn:
+
+### Data
+
+- Jaké atributy vstupují do rozhodnutí:
+- Obsahuje kontext osobní údaje? Pokud ano, proč:
+- Kde se logují změny flagu:
+- Jak dlouho se drží auditní stopa:
+
+### Release plán
+
+- Interní test:
+- Pilotní zákazník:
+- Rozšíření:
+- Stop signály:
+- Rollback postup:
+
+### FE.8 Checklist: feature flagy bez chaosu
+
+- [ ] Každý flag má účel, kategorii a vlastníka.
+- [ ] Release a migration flagy mají datum odstranění.
+- [ ] Obě větve důležitého flagu jsou otestované.
+- [ ] Permission flag není jediná serverová autorizace.
+- [ ] Ops flag má krátký runbook a bezpečnou výchozí hodnotu.
+- [ ] Rollout začíná interně nebo u vědomého pilotního zákazníka.
+- [ ] Evaluační kontext neobsahuje zbytečné osobní údaje.
+- [ ] Změny flagů mají auditní stopu bez přehnaného logování.
+- [ ] Experiment má rozhodovací otázku a ochrannou metriku.
+- [ ] Staré flagy se pravidelně mažou z kódu i dokumentace.
+
+Feature flagy jsou skvělé, když snižují riziko změny. Jakmile začnou nahrazovat produktové rozhodování, dokumentaci nebo architekturu, stávají se jen přepínačovou verzí technického dluhu. A technický dluh s vlastním dashboardem je pořád dluh.
+
+### FE.9 Zdroje k feature flagům a privacy-first cílení
+
+- Martin Fowler: [Feature Toggles (aka Feature Flags)](https://martinfowler.com/articles/feature-toggles.html) — typy přepínačů, jejich životnost, konfigurační přístupy a upozornění, že flagy zvyšují komplexitu.
+- OpenFeature: [Evaluation Context](https://openfeature.dev/docs/reference/concepts/evaluation-context/) — jak funguje kontext pro vyhodnocení flagů a proč opatrně zacházet s osobními údaji v targetingu.
+- OWASP Cheat Sheet Series: [Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html) — praktické zásady pro bezpečné logování událostí a auditních stop.
+
+
 ## Pracovní log
+- 2026-09-04 12:02 UTC — Doplněna příloha FE o feature flagech a postupných releasech: typy flagů, vlastnictví, interní a pilotní rollout, privacy-first targeting bez zbytečných osobních údajů, ops flagy, šablona karty, checklist a odkazy na Martina Fowlera, OpenFeature a OWASP.
+
 
 - 2026-09-04 11:00 UTC — Doplněna příloha FD o tajemstvích, API klíčích a konfiguraci: rozlišení veřejné konfigurace a tajemství, vlastnictví a účel klíčů, oddělení prostředí, bezpečný lokální vývoj, CI/CD přístupy, rotační postup, šablona karty, privacy-first checklist a odkazy na OWASP, NIST a CISA.
 
