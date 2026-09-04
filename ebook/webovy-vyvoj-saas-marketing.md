@@ -28360,7 +28360,183 @@ Tohle není jen právní obrana. Je to obchodní výhoda. Evropský zákazník, 
 - EDPB průvodce pro malé firmy vysvětluje, že privacy by design/default má ve výchozím nastavení omezit množství dat, rozsah zpracování, dobu uložení i dostupnost: https://www.edpb.europa.eu/sme/be-compliant/be-compliant_en
 - EDPB Guidelines 4/2019 k čl. 25 GDPR popisují mazání, anonymizaci, automatizaci retence, odůvodnění retenční doby a zvláštní pozornost pro zálohy a logy: https://www.edpb.europa.eu/documents/guideline/guidelines-42019-on-article-25-data-protection-by-design-and-by-default_en
 
+## Příloha FI: Export dat a přenositelnost bez rukojmí v systému
+
+Export dat není luxusní funkce pro enterprise zákazníky. Je to test důvěry. Když zákazník ví, že může odejít se svými daty v použitelném formátu, paradoxně má menší důvod utíkat. Vendor lock-in možná krátkodobě drží faktury, ale dlouhodobě vyrábí odpor, bezpečnostní výjimky a špatné reference šeptané u kávy. A ty bolí víc než jeden chybějící upsell.
+
+V evropském privacy-first SaaS je export dvojí věc: produktová funkce a compliance proces. GDPR v čl. 20 řeší právo na přenositelnost osobních údajů v určitých situacích, EDPB k tomu vydal samostatné pokyny a Evropská komise řadí vyřizování žádostí jednotlivců mezi běžné povinnosti organizací. Prakticky to znamená: nesmíš si plést „umíme stáhnout CSV“ s hotovou strategií. Potřebuješ vědět, co exportuješ, komu, v jakém formátu, s jakým ověřením a jak dlouho export existuje.
+
+*Codyho komentář:* Nejlepší lock-in je hodnota, ne pouta. Když produkt zákazníkovi každý týden šetří práci, nepotřebuješ ho držet za data jako drak poklad.
+
+### FI.1 Nejdřív rozliš tři druhy exportu
+
+Ne každý export má stejný účel. Když je hodíš do jednoho tlačítka „Exportovat vše“, rychle vznikne chaos.
+
+Rozliš minimálně:
+
+- **Produktový export:** běžná práce uživatele, například seznam objednávek, report kampaní, faktury nebo seznam kontaktů.
+- **Administrativní export účtu:** balíček dat pro zákazníka při auditu, migraci, změně dodavatele nebo ukončení spolupráce.
+- **Žádost subjektu údajů:** proces pro konkrétního člověka, který uplatňuje práva podle GDPR, například přístup nebo přenositelnost osobních údajů.
+
+Produktový export může být rychlý a samoobslužný. Administrativní export potřebuje rozsah, oprávnění a často domluvu se zákazníkem. Žádost subjektu údajů musí mít ověření identity, lhůtu, evidenci a kontrolu, jestli výstup neporušuje práva jiných lidí.
+
+Praktické pravidlo: v administraci nepoužívej jedno univerzální tlačítko pro všechno. Raději nabídni pojmenované exporty:
+
+- „Export faktur za období“
+- „Export kontaktů ve workspace“
+- „Export auditních událostí“
+- „Export účtu pro migraci“
+- „Vyřídit žádost konkrétní osoby“
+
+Uživatel pak ví, co dostane. Ty víš, co logovat. A právník má menší chuť obléct si černý plášť.
+
+### FI.2 Formát má být použitelný, ne jen formálně existující
+
+Export je dobrý jen tehdy, když s ním zákazník dokáže dál pracovat. Soubor bez dokumentace, kódování, časových zón a významu sloupců je spíš digitální konfeta než přenositelnost.
+
+Pro malý SaaS funguje tahle sada:
+
+- **CSV** pro tabulková data, ideálně UTF-8, jasné oddělovače, hlavičky a stabilní názvy sloupců.
+- **JSON** pro strukturovaná data, vazby, vnořené objekty a migraci do jiného systému.
+- **ZIP balíček** pro větší export účtu, kde jsou datové soubory, přílohy, manifest a README.
+- **PDF** jen tam, kde jde o lidsky čitelný doklad nebo report, ne jako hlavní migrační formát.
+
+Ke každému exportu přidej malý `README.md` nebo dokumentaci:
+
+- co export obsahuje,
+- co export záměrně neobsahuje,
+- kdy byl vytvořen,
+- v jaké časové zóně jsou datumy,
+- jak jsou reprezentované smazané nebo archivované položky,
+- komu se ozvat při problému.
+
+Privacy-first detail: export by neměl obsahovat interní poznámky, bezpečnostní tokeny, debug logy nebo data jiných zákazníků jen proto, že jsou technicky ve stejné tabulce. Migrační pohodlí nesmí vyhrát nad minimem nutných dat.
+
+### FI.3 Přenositelnost se netýká automaticky všeho
+
+Právo na přenositelnost podle GDPR není totéž jako obecné právo „dejte mi celý obsah databáze“. V praxi se typicky týká osobních údajů, které se týkají dané osoby, byly poskytnuty správci, zpracování probíhá automatizovaně a stojí na souhlasu nebo smlouvě. Zároveň nesmí nepříznivě zasáhnout práva a svobody jiných osob.
+
+Tohle je důležité pro produktový návrh. U žádosti konkrétní osoby si před exportem polož otázky:
+
+1. Je žadatel opravdu osoba, které se data týkají?
+2. Jaké účely a právní důvody se vztahují na požadovaná data?
+3. Jsou v záznamech i osobní údaje jiných lidí?
+4. Jsou některá data odvozená interním hodnocením, skóre nebo ruční poznámkou?
+5. Má výstup být strojově čitelný, lidsky čitelný, nebo obojí?
+
+Příklad: uživatel může dostat své profilové údaje, nastavení účtu a historii vlastních akcí. Neměl by ale automaticky dostat interní support poznámku obsahující osobní údaje zaměstnance zákazníka nebo jiného uživatele. Tam musíš výstup omezit, anonymizovat, oddělit nebo vysvětlit hranici.
+
+### FI.4 Export musí mít bezpečnostní brzdy
+
+Export často vytvoří největší koncentraci dat v celém systému. Data, která byla předtím chráněná rolemi, filtry a UI, se najednou ocitnou v jednom souboru. To je praktické — a zároveň nebezpečné.
+
+Bezpečnostní minimum:
+
+- Export může spustit jen role, která k tomu má jasné oprávnění.
+- Citlivé exporty vyžadují potvrzení nebo druhý faktor.
+- Velké exporty se zapisují do auditního logu: kdo, kdy, jaký rozsah, jaký účel.
+- Odkaz ke stažení má krátkou expiraci.
+- Exportní soubor není veřejně hádatelný ani indexovatelný.
+- Po stažení nebo po expiraci se soubor automaticky smaže.
+- Interní tým nemá přístup ke všem exportům „jen pro jistotu“.
+
+U B2B účtů přidej ještě jednoduchý governance krok: administrátor workspace vidí historii exportů a může nastavit, kdo je smí spouštět. Když někdo stáhne celý zákaznický účet v pátek v 17:58, není nutné panikařit, ale je dobré to vědět dřív než v pondělí z právního dotazu.
+
+### FI.5 Offboarding zákazníka napiš ještě před prvním prodejem
+
+Offboarding není selhání. Je to součást profesionální služby. Když ho nemáš, každé ukončení spolupráce se změní v improvizaci: někdo tahá SQL dump, někdo zipuje přílohy, někdo slíbí „pošleme všechno“ a nikdo přesně neví, co znamená všechno.
+
+Jednoduchý offboarding plán:
+
+1. Potvrď datum ukončení služby a kontaktní osobu.
+2. Nabídni seznam dostupných exportů a jejich rozsah.
+3. Vysvětli retenční pravidla po ukončení.
+4. Připrav exporty s expirací a kontrolou oprávnění.
+5. Potvrď, kdy budou data smazaná, anonymizovaná nebo archivovaná podle povinnosti.
+6. Ulož interní záznam o dokončení offboardingu bez zbytečných osobních detailů.
+
+Dobrá věta do zákaznické dokumentace:
+
+> Při ukončení služby vám umožníme stáhnout provozní data účtu v běžně použitelném formátu. Exporty jsou dostupné po omezenou dobu, chráněné přístupem administrátora a po expiraci automaticky odstraněné.
+
+Tohle nepůsobí jako slabost. Působí to jako firma, která ví, že data patří zákazníkovi, ne tvému pitch decku.
+
+### FI.6 Testuj export jako obnovu ze zálohy
+
+Export, který nikdo netestoval, je jen optimistická teorie. Aspoň jednou za kvartál vezmi vzorový účet a ověř:
+
+- export jde vytvořit bez ručního zásahu vývojáře,
+- soubory se dají otevřít běžnými nástroji,
+- české znaky a časové zóny přežily bez úrazu,
+- dokumentace odpovídá skutečnému obsahu,
+- export neobsahuje data mimo zvolený rozsah,
+- expirace a mazání fungují,
+- auditní stopa říká dost pro kontrolu, ale neukládá zbytečný obsah exportu.
+
+Nejlepší test je malá migrace „na sucho“: importuj export do prázdného testovacího prostředí nebo aspoň ověř vazby skriptem. Zjistíš věci, které uživatelské rozhraní maskuje — třeba že objednávky mají zákazníka podle názvu místo ID, nebo že přílohy z roku 2022 už nikdo neumí přiřadit. Datová archeologie je krásná disciplína, ale nechceš ji provozovat během reálného odchodu zákazníka.
+
+### FI.7 Šablona: karta exportu
+
+## Export: [název]
+
+### Účel
+
+- Kdo export používá:
+- Jaké rozhodnutí nebo proces podporuje:
+- Je to produktový export, administrativní export, nebo žádost subjektu údajů:
+
+### Rozsah dat
+
+- Zahrnuté datové skupiny:
+- Záměrně vyloučená data:
+- Riziko dat jiných osob:
+- Vazba na datový katalog:
+
+### Formát a dokumentace
+
+- Formát souborů:
+- Kódování a časová zóna:
+- Manifest nebo README:
+- Verze exportního schématu:
+
+### Bezpečnost
+
+- Kdo smí export spustit:
+- Jak se ověřuje oprávnění:
+- Expirace odkazu:
+- Auditní záznam:
+- Automatické smazání exportního souboru:
+
+### Offboarding
+
+- Kdy se export nabízí při ukončení:
+- Kdo potvrzuje převzetí:
+- Co se stane po expiraci:
+- Jak navazuje mazání nebo anonymizace:
+
+### FI.8 Checklist: export bez vendor lock-inu
+
+- Každý export má jasný účel a vlastníka.
+- Produktové, administrativní a GDPR exporty nejsou smíchané do jednoho procesu.
+- Výstup je ve strojově čitelném a běžně použitelném formátu.
+- Export obsahuje dokumentaci polí, časových zón a rozsahu.
+- Citlivé exporty mají oprávnění, potvrzení a auditní stopu.
+- Exportní odkazy expirují a soubory se automaticky mažou.
+- Výstup neobsahuje tokeny, interní poznámky ani data jiných zákazníků.
+- Offboarding zákazníka je popsaný předem, ne vymýšlený při odchodu.
+- Exporty se pravidelně testují na vzorovém účtu.
+- Zákazník ví, jak dostane data ven a kdy budou po ukončení služby odstraněna.
+
+### FI.9 Zdroje k přenositelnosti dat a žádostem jednotlivců
+
+- EUR-Lex, GDPR čl. 20, definuje právo na přenositelnost osobních údajů ve strukturovaném, běžně používaném a strojově čitelném formátu za stanovených podmínek: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
+- EDPB pokyny k právu na přenositelnost dat vysvětlují rozsah, podmínky, typy dat a vztah k právům jiných osob: https://www.edpb.europa.eu/documents/guideline/right-to-data-portability_en
+- Evropská komise shrnuje postupy pro vyřizování žádostí jednotlivců včetně přístupu, výmazu a přenositelnosti: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/dealing-requests-individuals_en
+- EDPB průvodce pro malé firmy připomíná, že organizace mají lidem umožnit uplatňovat jejich práva jasným a srozumitelným postupem: https://www.edpb.europa.eu/sme/be-compliant/respect-individuals-rights_en
+
 ## Pracovní log
+
+- 2026-09-04 16:00 UTC — Doplněna příloha FI o exportech dat, přenositelnosti a offboardingu bez vendor lock-inu: rozlišení typů exportů, použitelné formáty, hranice práva na přenositelnost, bezpečnostní brzdy, zákaznický offboarding, testování exportu, šablona karty, checklist a ověřené odkazy na EUR-Lex, EDPB a Evropskou komisi.
 
 - 2026-09-04 15:00 UTC — Doplněna příloha FH o retenci a mazání dat: účel před počtem dní, vrstvy aktivních dat/logů/záloh/exportů, retenční třídy, automatické mazání, anonymizace bez re-identifikace, zákaznická komunikace, šablona karty, checklist a ověřené odkazy na EUR-Lex a EDPB.
 
