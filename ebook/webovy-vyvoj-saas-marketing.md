@@ -27301,7 +27301,189 @@ Když se tým zasekne, neřeš metodiku. Vrať se k otázce: co by nám bylo tra
 
 Threat modeling není záruka, že se nikdy nic nestane. Je to praktický způsob, jak zvýšit šanci, že tým uvidí riziko dřív než produkce. A to je přesně typ nudy, kterou mám rád: nudná bezpečnost, nudné releasy, nudné incidentní pondělí bez incidentu.
 
+## Příloha FC: Závislosti a supply chain bez slepé důvěry v balíčky z internetu
+
+Malý SaaS málokdy stojí na kódu, který tým napsal úplně sám. Používá framework, knihovny, npm balíčky, Docker image, GitHub akce, platební bránu, e-mailovou službu, fonty, mapy, analytiku a často i pár „jen dočasných“ skriptů, které přežijí déle než původní business model. To není chyba. Chyba je tvářit se, že závislosti nejsou součást produktu.
+
+Supply chain bezpečnost v malé firmě nemá začínat certifikátem, panikou ani tabulkou s padesáti sloupci. Má začít jednoduchou otázkou: *kdyby se tahle věc zítra pokazila, kompromitovala nebo přestala existovat, co se stane zákazníkovi?* Odpověď ti řekne, kolik péče si závislost zaslouží.
+
+### FC.1 Závislost není jen knihovna v `package.json`
+
+Když se řekne závislost, vývojář si obvykle představí balíček. Jenže zákaznické riziko se často schovává jinde. Typický malý SaaS má minimálně tyto vrstvy závislostí:
+
+- **Aplikační knihovny:** framework, UI knihovny, validátory, ORM, SDK třetích stran.
+- **Build a deploy nástroje:** bundler, CI akce, Docker image, deployment platforma, migrace databáze.
+- **Externí služby:** e-mail, platby, CRM, helpdesk, hosting, monitoring, AI API, úložiště souborů.
+- **Frontend zdroje:** fonty, ikony, mapové podklady, embedované widgety, CDN skripty.
+- **Lidské závislosti:** externista, agentura, maintainer open source balíčku, jediný člověk, který ví, proč je cron pojmenovaný `final-final-v2`.
+
+Praktické pravidlo: pokud bez dané věci nejde dodat zákaznický slib, je to závislost. Pokud přes ni tečou osobní údaje, je to datová závislost. Pokud ji spouštíš při buildu nebo deployi, je to provozní závislost. A pokud o ní nikdo neví, je to budoucí incident s čekacím lístkem.
+
+### FC.2 Udělej inventář podle dopadu, ne podle perfekcionismu
+
+OWASP SCVS staví inventář komponent jako základ další kontroly supply chainu a pracuje i s SBOM, tedy strojově čitelným seznamem softwarových komponent. Pro malý tým z toho neplyne povinnost pořídit si hned enterprise platformu a tři nové porady týdně. Plyne z toho jednodušší věc: bez inventáře nevíš, co máš chránit, aktualizovat nebo vyměnit.
+
+Začni minimální tabulkou. Neřeš všechno najednou. První průchod má zabrat jednu až dvě hodiny:
+
+| Závislost | Kde se používá | Typ dat | Kritičnost | Vlastník | Náhradní plán |
+|---|---|---:|---:|---|---|
+| E-mailová služba | přihlášení, faktury, onboarding | osobní údaje | vysoká | founder / backend | export kontaktů + SMTP fallback |
+| Platební brána | billing | fakturační údaje | vysoká | founder | ruční fakturace pro B2B |
+| UI knihovna | aplikace | žádná / nepřímá | střední | frontend | držet major verzi, test kritických obrazovek |
+| CDN skript | marketingový web | potenciální tracking | střední | marketing / web | self-host nebo odstranit |
+
+U každé položky si napiš hlavně dopad. „Používáme balíček X“ je technická poznámka. „Bez balíčku X se zákazník nepřihlásí“ je provozní informace. To druhé zachraňuje víkend.
+
+**Codyho komentář:** Inventář, který nikdo neudržuje, je jen drahý screenshot reality z minulého úterý. Raději malý seznam, který otevřeš každý měsíc, než dokonalý registr, který stárne rychleji než marketingové trendy na LinkedInu.
+
+### FC.3 Rozliš běžné, citlivé a kritické závislosti
+
+Ne každá závislost potřebuje stejnou kontrolu. Když se zlomí knihovna pro animaci ikonky, bolí to jinak než kompromitované SDK platební brány. Pro malý SaaS stačí tři úrovně:
+
+**Běžná závislost**
+
+- nepracuje přímo s osobními údaji,
+- není na kritické cestě přihlášení, platby nebo doručení služby,
+- lze ji rychle nahradit nebo odstranit,
+- selhání je spíš kosmetické nebo interní.
+
+**Citlivá závislost**
+
+- vidí osobní údaje nebo obchodní data,
+- ovlivňuje onboarding, podporu, komunikaci nebo reporting,
+- výpadek zhorší zákaznickou zkušenost,
+- výměna je možná, ale ne za hodinu.
+
+**Kritická závislost**
+
+- je nutná pro přihlášení, platby, hlavní workflow nebo bezpečnost,
+- má přístup k velkému objemu dat,
+- kompromitace by znamenala incident nebo porušení důvěry,
+- náhrada vyžaduje plán, test a komunikaci.
+
+Tahle klasifikace pomáhá i u aktualizací. Kritické závislosti mají mít jasného vlastníka, monitorování zranitelností, bezpečný update proces a exit plán. Běžné závislosti mají mít hlavně pořádek, aby se z projektu nestala botanická zahrada opuštěných balíčků.
+
+### FC.4 Update proces má být nudný a opakovatelný
+
+Nejnebezpečnější update je ten, který se rok odkládal a pak se dělá v panice, protože někdo našel zranitelnost s pěkným logem. Závislosti potřebují rytmus.
+
+Praktický měsíční postup:
+
+1. **Seznam změn:** projdi dostupné aktualizace balíčků, Docker image a externích SDK.
+2. **Třídění:** rozděl je na bezpečnostní, kompatibilitní, běžnou údržbu a major změny.
+3. **Dopad:** u citlivých a kritických závislostí napiš, jaké zákaznické flow se musí otestovat.
+4. **Malé dávky:** aktualizuj po menších skupinách, ne celý svět najednou.
+5. **Evidence:** do pull requestu napiš důvod, riziko a výsledek testu.
+6. **Úklid:** odstraň balíčky, které už nejsou potřeba.
+
+Pro kritické závislosti si nastav kratší reakční dobu. Nemusí to být SLA v korporátním stylu, ale musí být jasné, co se děje při bezpečnostní aktualizaci. Například:
+
+- kritická zranitelnost na veřejně dostupné části aplikace: triage tentýž pracovní den,
+- vysoké riziko v interním nástroji bez osobních údajů: triage do týdne,
+- major update frameworku bez bezpečnostního důvodu: plánovat jako normální produktovou práci.
+
+Privacy-first pointa: aktualizace nesmí potichu přidat nový datový tok. Při update SDK si vždy zkontroluj, jestli se nezměnily defaulty, telemetrie, cookies, region zpracování nebo noví subdodavatelé. „Jen jsme aktualizovali balíček“ není omluva pro nový tracker na webu. Hezký pokus, balíčku.
+
+### FC.5 SBOM je užitečný, když vede k rozhodnutí
+
+SBOM může být pro malý SaaS výborný nástroj, ale jen pokud není sbírán jako talisman. Jeho hodnota je v rychlé odpovědi na otázky:
+
+- Používáme komponentu, které se týká nová zranitelnost?
+- Ve kterých produktech a prostředích je nasazená?
+- Je komponenta přímá, nebo transitive závislost?
+- Kdo vlastní rozhodnutí o opravě?
+- Umíme zákazníkovi vysvětlit dopad bez mlžení?
+
+Nemusíš začínat draze. U menšího projektu stačí generovat seznam závislostí v CI a ukládat ho k releasu. U většího portfolia dává smysl nástroj, který umí SBOM průběžně analyzovat, propojovat projekty a upozorňovat na rizika. OWASP Dependency-Track je příklad platformy pro analýzu komponent pomocí SBOM; není to univerzální kouzelná hůlka, ale dobře ukazuje správný princip: nejdřív viditelnost, potom rozhodnutí.
+
+Do release evidence si ulož:
+
+- commit nebo tag releasu,
+- verzi aplikace,
+- export závislostí nebo SBOM,
+- výsledek bezpečnostní kontroly,
+- známé akceptované riziko,
+- odkaz na rollback postup.
+
+Když později přijde zpráva o zranitelnosti, nehledáš naslepo. Otevřeš release evidence a víš, zda se tě to týká. To je rozdíl mezi incident managementem a detektivkou pro lidi, kteří neměli dost kafe.
+
+### FC.6 Externí služby kontroluj jako datové dodavatele
+
+U knihoven řešíš verze a zranitelnosti. U externích služeb řešíš ještě data, jurisdikci, smlouvy, export a vypnutí. Privacy-first SaaS v Evropě má mít u každé citlivé služby odpovědi na pět otázek:
+
+1. **Jaká data tam posíláme?** Konkrétní pole, ne „nějaké kontakty“.
+2. **Proč je posíláme?** Účel, který umíš vysvětlit zákazníkovi.
+3. **Kde se zpracovávají?** Region provozu, subdodavatelé, případné přenosy mimo EU/EHP.
+4. **Jak dlouho tam zůstávají?** Retence, mazání testovacích dat, zálohy.
+5. **Jak odejdeme?** Export, náhradní služba, vypnutí integrace, komunikace.
+
+U marketingových nástrojů buď obzvlášť přísný. Ne proto, že marketing je zlo. Marketing je fajn. Jen má zvláštní talent přinést do webu pět skriptů, tři pixely a jedno „to je standard“, po kterém právníkovi začne tikat oko. Preferuj RSS, přímé odkazy, server-side agregované měření, vlastní newsletter a minimum třetích stran na veřejném webu.
+
+### FC.7 Šablona: karta závislosti
+
+Použij ji pro každou citlivou a kritickou závislost. Jedna karta má být krátká. Pokud má tři stránky, nikdo ji při incidentu neotevře.
+
+## Závislost: [název]
+
+### Účel
+
+- K čemu ji používáme:
+- Který zákaznický slib podporuje:
+- Co se stane při výpadku:
+
+### Data
+
+- Osobní údaje:
+- Obchodní / provozní data:
+- Region zpracování:
+- Subdodavatelé nebo navazující služby:
+
+### Technický provoz
+
+- Kde je zapojená:
+- Verze / plán aktualizací:
+- Monitoring nebo kontrola zranitelností:
+- Testy po aktualizaci:
+
+### Riziko a vlastnictví
+
+- Kritičnost: běžná / citlivá / kritická
+- Vlastník:
+- Akceptovaná rizika:
+- Kdy se karta znovu reviduje:
+
+### Exit plán
+
+- Jak získáme data ven:
+- Jak službu vypneme:
+- Náhradní postup:
+- Co řekneme zákazníkům:
+
+### FC.8 Checklist: závislosti pod kontrolou
+
+- Máme seznam citlivých a kritických závislostí, nejen náhodný výpis balíčků.
+- U každé kritické závislosti víme, jaký zákaznický tok ovlivňuje.
+- U externích služeb známe účel, data, region, retenci a exit plán.
+- Aktualizace děláme v malých dávkách a zapisujeme důvod změny.
+- Bezpečnostní aktualizace mají jasnou triage prioritu.
+- Při update SDK kontrolujeme nové datové toky, telemetrii, cookies a subdodavatele.
+- K release ukládáme verzi, commit, stav závislostí a známá rizika.
+- Nepoužívané balíčky, skripty a integrace mažeme, místo abychom je nechali „pro jistotu“.
+- Marketingové skripty posuzujeme stejně jako technické integrace, protože data neumí poznat oddělení.
+- Máme postup, jak zákazníkovi srozumitelně vysvětlit dopad zranitelnosti nebo výpadku dodavatele.
+
+### FC.9 Zdroje k supply chainu, SBOM a disclosure
+
+- OWASP Software Component Verification Standard popisuje kontrolní oblasti pro inventář, SBOM, build prostředí, package management, analýzu komponent a původ komponent: https://scvs.owasp.org/scvs/using-scvs/
+- OWASP SCVS V1 zdůrazňuje znalost přímých i transitivních komponent a strojově čitelný inventář: https://scvs.owasp.org/scvs/v1-inventory/
+- OWASP SCVS V5 shrnuje component analysis včetně známých zranitelností, zastaralých verzí a licencí: https://scvs.owasp.org/scvs/v5-component-analysis/
+- OWASP Developer Guide popisuje Dependency-Track jako platformu pro analýzu komponent pomocí SBOM: https://devguide.owasp.org/en/05-implementation/02-dependencies/02-dependency-track/
+- ENISA Good Practice Guide on Vulnerability Disclosure shrnuje principy a role při oznamování zranitelností: https://www.enisa.europa.eu/publications/vulnerability-disclosure
+
 ## Pracovní log
+
+- 2026-09-04 10:00 UTC — Doplněna příloha FC o závislostech a supply chainu: inventář podle dopadu, klasifikace běžných/citlivých/kritických závislostí, nudný update proces, praktické použití SBOM, kontrola externích služeb jako datových dodavatelů, karta závislosti, privacy-first checklist a odkazy na OWASP SCVS, Dependency-Track a ENISA.
+
 
 - 2026-09-04 08:00 UTC — Doplněna příloha FB o lehkém threat modelingu pro SaaS: kdy ho spouštět, čtyři praktické otázky, mapa datových toků, konkrétní scénáře rizik, privacy hrozby, backlog opatření, třicetiminutový rituál, šablona a checklist.
 
