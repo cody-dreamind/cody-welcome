@@ -26111,7 +26111,261 @@ Tohle je zdravý signál. False alarm není ostuda. Je to daň za systém, kde s
 
 Školení je dobré tehdy, když po něm lidé udělají menší, rychlejší a bezpečnější rozhodnutí bez toho, aby čekali na právní olympiádu. Malý tým nepotřebuje akademii bezpečnosti. Potřebuje sdílený jazyk, jasný kanál pro pochybnosti a odvahu říct: „Tady raději nesbírejme víc dat, než potřebujeme.“ Přesně tam se privacy-first mění z hodnoty na provozní výhodu.
 
+## Příloha EV: Auditní stopy bez šmírování lidí a bez logovacího smetiště
+
+Auditní stopy jsou jedna z těch nudných věcí, které nikoho nezajímají — přesně do chvíle, než zákazník tvrdí, že nic nesmazal, integrace začne posílat nesmysly, účetní export zmizí do digitální bažiny nebo se řeší bezpečnostní incident. Pak najednou všichni chtějí vědět kdo, kdy, co a proč. Ideálně včera.
+
+Dobrá auditní stopa ale není totéž jako sledování každého kliknutí každého člověka. Cílem není vyrábět panoptikum pro manažery ani ukládat všechno „kdyby náhodou“. Cílem je mít důvěryhodný záznam o důležitých změnách v systému, který pomůže vysvětlit stav účtu, obnovit kontext, vyšetřit incident a prokázat odpovědný provoz.
+
+V GDPR kontextu je důležité držet dvě věci najednou: princip odpovědnosti podle článku 5 a minimalizaci údajů. Tým musí umět doložit, že se s daty zachází rozumně, ale nemá kvůli tomu sbírat osobní údaje navíc jen proto, že logovací knihovna umí vyplivnout půl internetu do JSONu. Článek 30 k záznamům o činnostech zpracování je dobrá připomínka, že evidence má popisovat účely, kategorie dat, příjemce a retenční pravidla — ne že má produkt nahrávat každý pohyb myší jako reality show pro databázi.
+
+*Codyho komentář:* Auditní log je jako bezpečnostní kamera u skladu. Má ukázat, kdo otevřel dveře a kdy. Nemá stát zaměstnanci za ramenem a hodnotit, jestli kliká dostatečně produktivně. To už není bezpečnost, to je firemní horor s tabulkami.
+
+### EV.1 Začni otázkou, jaké rozhodnutí má log pomoct udělat
+
+Než začneš logovat, napiš si, k čemu má záznam sloužit. Pokud neumíš popsat rozhodnutí, které díky logu uděláš, pravděpodobně sbíráš šum.
+
+Dobré důvody pro auditní stopu:
+
+- **Bezpečnost:** kdo změnil oprávnění, resetoval klíč, vypnul 2FA nebo vytvořil API token.
+- **Zákaznická důvěra:** kdo upravil fakturační údaje, smazal projekt, exportoval data nebo pozval nového člena.
+- **Podpora:** kdy proběhla akce, která vysvětluje problém v účtu.
+- **Compliance:** jak doložit, že tým respektuje retenční pravidla, mazání a přístupová oprávnění.
+- **Provoz:** co se stalo před incidentem, chybou importu nebo nečekanou změnou konfigurace.
+
+Špatné důvody:
+
+- „Možná se to někdy bude hodit.“
+- „Chceme vědět, kdo pracuje nejvíc.“
+- „Konkurence má session replay, tak to taky zapneme.“
+- „Logování je levné.“ Levné úložiště není totéž jako levné riziko.
+
+Praktická věta pro návrh:
+
+> Logujeme **[událost]**, aby **[role]** mohla rozhodnout **[konkrétní rozhodnutí]** bez sběru **[zbytečná data]**.
+
+Příklad:
+
+> Logujeme změnu role uživatele, aby administrátor a support mohli ověřit, kdo udělil přístup k účtu, bez ukládání obsahu zákaznických dat nebo interních poznámek.
+
+### EV.2 Rozliš auditní log, technický log a produktovou analytiku
+
+Malý SaaS tým často nahází všechno do jednoho místa a říká tomu „logy“. Pak se v tom nedá hledat, nejde nastavit retence a každý incident začíná archeologií. Rozděl logování podle účelu.
+
+Tři základní vrstvy:
+
+- **Auditní log:** významné změny v účtu, oprávněních, datech, konfiguraci a bezpečnostních nastaveních.
+- **Technický log:** chyby, latence, stav služeb, queue jobs, integrace, deploymenty a provozní diagnostika.
+- **Produktová analytika:** agregované chování produktu, aktivace, používání funkcí a konverzní cesty.
+
+Každá vrstva má jinou citlivost, jiný přístup a jinou retenci. Auditní log má být přesný a chráněný. Technický log má být použitelný pro debugging, ale bez zbytečných payloadů. Produktová analytika má být agregovaná a navržená tak, aby nepotřebovala profilovat jednotlivce.
+
+Příklad špatné praxe:
+
+- API chyba uloží celý request body včetně jména, e-mailu, adresy, poznámky zákazníka a interního komentáře.
+- Stejný log vidí vývoj, support i externí dodavatel.
+- Retence je „dokud nedojde disk“.
+
+Příklad dobré praxe:
+
+- Technický log uloží request ID, typ chyby, endpoint, tenant ID nebo pseudonymizovaný účet, stav odpovědi a čas.
+- Citlivé pole se rediguje před uložením.
+- Support vidí zákaznicky čitelnou událost, vývoj vidí technickou chybu, admin vidí auditní záznam.
+- Retence je nastavená podle účelu.
+
+### EV.3 Definuj minimální schéma auditní události
+
+Auditní záznam má být nudně konzistentní. Když každý tým zapisuje jiný formát, vyšetřování problému připomíná skládání IKEA skříně bez návodu a s díly z jiné krabice.
+
+Minimální schéma:
+
+- **Čas:** přesný timestamp v UTC.
+- **Aktor:** uživatel, systém, API token nebo integrace, která akci provedla.
+- **Tenant / účet:** kde se akce stala.
+- **Akce:** stabilní název události, například `user.role_changed` nebo `project.deleted`.
+- **Objekt:** typ a ID objektu, kterého se změna týká.
+- **Výsledek:** úspěch, selhání, odmítnutí oprávněním nebo částečné provedení.
+- **Důvod / kontext:** stručný strojově i lidsky čitelný kontext, pokud existuje.
+- **Request ID:** propojení na technické logy.
+- **Zdroj:** web, API, worker, admin panel, integrace.
+
+Co do auditního logu obvykle nepatří:
+
+- celé texty zpráv, dokumentů, ticketů nebo zákaznických poznámek,
+- hesla, tokeny, session cookies, recovery kódy,
+- plné platební údaje,
+- kompletní request/response payload,
+- IP adresa všude automaticky, pokud pro ni nemáš jasný účel a retenční pravidlo.
+
+U některých bezpečnostních událostí může být IP adresa nebo user agent užitečný. I tam ale platí: sbírej jen to, co umíš obhájit, chránit a včas smazat. „Máme to v logu“ není argument. Je to závazek.
+
+### EV.4 Události loguj podle rizika, ne podle technické pohodlnosti
+
+Začni s událostmi, které mění bezpečnost, peníze, data nebo přístup.
+
+Priorita 1 — loguj od začátku:
+
+- přihlášení a neúspěšné pokusy v agregované nebo bezpečnostně použitelné podobě,
+- vytvoření, změna a odebrání uživatele,
+- změna role, oprávnění nebo vlastnictví účtu,
+- vytvoření, rotace a zrušení API tokenu,
+- export, import, mazání a hromadná změna dat,
+- změna fakturačních údajů, plánu, limitů a billing kontaktu,
+- změna integrační konfigurace,
+- změna retenčních pravidel a žádosti subjektů údajů,
+- přístup supportu nebo admina do zákaznického kontextu.
+
+Priorita 2 — přidej po stabilizaci:
+
+- změny šablon, automatizací a pravidel,
+- změny veřejných nastavení, domén, webhooků a callback URL,
+- změny bezpečnostních preferencí, například SSO, 2FA nebo allowlisty,
+- spuštění citlivých reportů a interních exportů,
+- odmítnuté akce kvůli oprávnění.
+
+Priorita 3 — loguj jen pokud máš důvod:
+
+- běžné kliky v UI,
+- návštěvy stránek v produktu,
+- délka práce v systému,
+- mikrointerakce typu otevření dropdownu.
+
+Tyhle věci často patří spíš do agregované produktové analytiky — a často ani tam ne v detailu. Pokud z nich nejde udělat rozhodnutí pro produkt nebo bezpečnost, nech je být. Databáze si oddechne a soukromí taky.
+
+### EV.5 Udělej log čitelný pro zákazníka i interní tým
+
+Auditní stopa má dvě publika. Interní tým potřebuje přesnost. Zákazník potřebuje srozumitelnost. Nedávej zákazníkovi interní stack trace ani technické názvy, které zní jako zaklínadlo z backendového sklepa.
+
+Interní záznam:
+
+```json
+{
+  "event": "member.role_changed",
+  "actor_type": "user",
+  "actor_id": "usr_123",
+  "tenant_id": "acc_456",
+  "object_type": "member",
+  "object_id": "mem_789",
+  "from_role": "viewer",
+  "to_role": "admin",
+  "source": "web",
+  "request_id": "req_abc",
+  "created_at": "2026-09-04T03:01:00Z"
+}
+```
+
+Zákaznický popis:
+
+> Jana Nováková změnila roli člena Petr Svoboda z „Čtenář“ na „Administrátor“ 4. září 2026 v 03:01 UTC.
+
+Rozdíl je důležitý. Interní log pomáhá stroji a týmu. Zákaznický log pomáhá člověku. Oba ale mají vycházet ze stejné události, ne ze dvou oddělených pravd.
+
+### EV.6 Chraň auditní stopu před úpravami a zvědavostí
+
+Auditní log, který může kdokoli přepsat, je spíš kreativní literatura než důkaz. Nemusíš hned stavět bankovní archiv, ale u citlivých událostí nastav základní ochranu.
+
+Minimum:
+
+- auditní záznamy jsou append-only pro běžnou aplikaci,
+- mazání má vlastní řízený proces a retenční pravidlo,
+- přístup k auditním logům je omezený podle role,
+- čtení citlivého auditního logu se samo loguje,
+- export auditních záznamů je omezený a zdůvodněný,
+- logy nejsou dostupné externím dodavatelům bez jasné potřeby,
+- testovací a vývojové prostředí nepoužívá produkční auditní data.
+
+Pokud používáš managed logovací službu, ptej se stejně jako u jiných subdodavatelů: kde data leží, kdo k nim má přístup, jaká je retence, jak se řeší mazání, export, incident a změna dodavatele. Evropský provoz neznamená jen „server někde v EU“. Znamená kontrolu nad datovým tokem.
+
+### EV.7 Nastav retenci podle účelu
+
+Retence auditních stop je kompromis mezi dohledatelností, právní potřebou, bezpečností a minimalizací. Jedna univerzální doba pro všechno bývá líná zkratka.
+
+Praktický model:
+
+- **Bezpečnostní události:** drž déle, protože pomáhají vyšetřit incidenty a vzorce útoků.
+- **Zákaznické změny v účtu:** drž po dobu aktivního vztahu a rozumnou dobu po ukončení podle smlouvy a rizika.
+- **Technické debug logy:** drž krátce, často dny až týdny, pokud neobsahují incidentní kontext.
+- **Produktová analytika:** preferuj agregace a kratší detailní okna.
+- **Support přístupy:** drž dost dlouho na audit důvěry, ale bez ukládání obsahu zákaznických dat navíc.
+
+Do retenční karty napiš:
+
+- účel logu,
+- kategorie událostí,
+- kdo má přístup,
+- doba uchování,
+- mazací mechanismus,
+- výjimky pro incident nebo právní spor,
+- kontakt vlastníka.
+
+Retence bez mazacího mechanismu je jen přání. A přání nejsou architektura, i když v backlogu vypadají krásně.
+
+### EV.8 Šablona: auditní karta události
+
+```markdown
+## Auditní událost: [název]
+
+### Účel
+- Proč událost logujeme:
+- Jaké rozhodnutí pomáhá udělat:
+- Kdo ji používá:
+
+### Spouštěč
+- Kdy vzniká:
+- Kdo může akci provést:
+- Jaký objekt mění:
+
+### Data v záznamu
+- Povinná pole:
+- Volitelná pole:
+- Zakázaná pole:
+- Pseudonymizace / redakce:
+
+### Přístup a retence
+- Kdo smí číst:
+- Kdo smí exportovat:
+- Doba uchování:
+- Mazací proces:
+
+### Zákaznický pohled
+- Zobrazit zákazníkovi: ano/ne
+- Lidský popis události:
+- Co nezobrazovat:
+
+### Kontroly
+- Test, že se citlivá data nelogují:
+- Test oprávnění ke čtení:
+- Datum poslední revize:
+```
+
+### EV.9 Checklist: auditní stopa, která pomáhá a nešmíruje
+
+- [ ] Každá auditní událost má jasný účel a vlastníka.
+- [ ] Logují se hlavně změny bezpečnosti, přístupů, dat, konfigurace a billing údajů.
+- [ ] Technické logy, auditní logy a produktová analytika mají oddělený účel i retenci.
+- [ ] Do logů se neukládají hesla, tokeny, kompletní payloady ani obsah zákaznických dat bez důvodu.
+- [ ] Citlivá pole se redigují před uložením, ne až při zobrazení.
+- [ ] Auditní log je pro běžnou aplikaci append-only.
+- [ ] Přístup k logům je omezený a pravidelně revidovaný.
+- [ ] Čtení nebo export citlivých logů se samo zaznamenává.
+- [ ] Zákaznické zobrazení auditní stopy je srozumitelné a neprozrazuje interní technické detaily.
+- [ ] Retence logů je popsaná, implementovaná a propojená s mazáním.
+- [ ] Managed logovací služba prošla kontrolou subdodavatele, datového toku a evropského provozu.
+- [ ] Tým má testy nebo kontroly, které hlídají, že se do logů nedostávají tajemství a zbytečné osobní údaje.
+
+### EV.10 Zdroje k auditním stopám, odpovědnosti a bezpečnému logování
+
+- GDPR, článek 5: Principles relating to processing of personal data — https://gdpr-info.eu/art-5-gdpr/
+- GDPR, článek 30: Records of processing activities — https://gdpr-info.eu/art-30-gdpr/
+- EDPB: Guidelines 4/2019 on Article 25 Data Protection by Design and by Default — https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-42019-article-25-data-protection-design-and_en
+- OWASP Cheat Sheet Series: Logging Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+- ENISA: Cybersecurity culture guidelines — https://www.enisa.europa.eu/publications/cybersecurity-culture-guidelines-behavioural-aspects-of-cybersecurity
+
+Auditní stopa má být paměť produktu, ne špehovací aparát. Když ji navrhneš dobře, pomůže supportu, bezpečnosti, zákazníkům i compliance. Když ji navrhneš špatně, vyrobíš drahou datovou skládku, kterou se tým bojí otevřít. Privacy-first přístup není logování vypnout. Je to logovat přesně to, co pomáhá nést odpovědnost — a nic navíc.
+
 ## Pracovní log
+
+- 2026-09-04 03:01 UTC — Doplněna příloha EV o auditních stopách bez šmírování: rozlišení auditních, technických a produktových logů, minimální schéma události, prioritizace podle rizika, zákaznické zobrazení, ochrana a retence logů, šablona auditní karty, checklist a odkazy na GDPR, EDPB, OWASP a ENISA.
 
 - 2026-09-04 02:02 UTC — Doplněna příloha EU o privacy-first školení týmu: scénářové učení podle rolí, bezpečné hlášení chyb, mikrodrilly, rozhodovací otázky pro sběr/sdílení/nákup nástrojů, agregované měření, šablona školení, checklist a odkazy na GDPR, EDPB, Evropskou komisi a ENISA.
 
