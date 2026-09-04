@@ -26767,7 +26767,165 @@ Onboarding a offboarding nejsou papírování navíc. Jsou to dvě brány stejn�
 
 ---
 
+## Příloha EZ: Zařízení, BYOD a práce na dálku bez dat v kapse každého batohu
+
+Malý webový nebo SaaS tým často funguje z notebooků, telefonů, kaváren, coworkingů a domácích Wi‑Fi. To je praktické, rychlé a přesně ten druh svobody, kvůli kterému člověk nezačal podnikat jen proto, aby si postavil vlastní minikorporát. Jenže právě zařízení jsou místo, kde se privacy-first provoz nejčastěji potká s realitou: zákaznické exporty v Downloads, přihlášený admin účet v prohlížeči, osobní telefon s pracovním e-mailem a notebook externisty, o kterém nikdo neví, jestli má šifrovaný disk.
+
+Privacy-first přístup neznamená zakázat práci z domova nebo vyžadovat bezpečnostní rituály s gongem. Znamená vědět, která zařízení mají přístup k firemním datům, jaké minimum musí splňovat a co se stane, když se zařízení ztratí, člověk odejde nebo klient požádá o vysvětlení, kde jeho data žijí.
+
+### EZ.1 Zařízení je součást datového toku
+
+Když kreslíš datovou mapu, nezačínej a nekonči u aplikace a databáze. Do toku patří i koncová zařízení:
+
+- notebook vývojáře,
+- telefon obchodníka,
+- tablet na prezentace,
+- osobní počítač externisty,
+- domácí počítač používaný „jen na rychlou fakturu“,
+- sdílené zařízení v kanceláři nebo provozovně.
+
+U každého zařízení si polož tři otázky:
+
+1. Jaká zákaznická nebo interní data se na něm mohou zobrazit?
+2. Mohou se na něm data lokálně ukládat, synchronizovat nebo exportovat?
+3. Umíme přístup odebrat, když zařízení zmizí nebo vztah s člověkem skončí?
+
+Pokud na třetí otázku odpovíš „asi jo, nějak“, máš provozní riziko, ne strategii. „Nějak“ je mimochodem nejdražší bezpečnostní nástroj na trhu. Nikdo ho nekoupil, ale všichni za něj platí.
+
+### EZ.2 Rozliš firemní zařízení, osobní zařízení a výjimky
+
+BYOD neboli používání osobního zařízení pro práci může být pro malý tým rozumné, ale jen pokud není výchozím chaosem. Rozděl zařízení do tří režimů:
+
+- **Firemní zařízení:** firma ho pořizuje, nastavuje, eviduje a umí spravovat.
+- **Osobní zařízení povolené pro práci:** člověk ho vlastní, ale musí splnit jasná pravidla.
+- **Výjimka:** dočasný přístup pro konkrétní situaci, s datem konce a vlastníkem.
+
+Pro citlivé role preferuj firemní zařízení. Patří sem administrace produkce, práce s fakturací, exporty zákaznických dat, správa DNS, CI/CD, platební brány a účetnictví. Osobní zařízení může stačit pro běžnou komunikaci nebo čtení dokumentace, ale nemělo by být neviditelnou kopií celé firmy.
+
+Praktický kompromis: povol osobní zařízení pro méně citlivé nástroje, ale produkční přístupy, správu tajemství a hromadné exporty drž na firemních zařízeních nebo přes kontrolované vzdálené prostředí.
+
+### EZ.3 Minimální bezpečnostní standard zařízení
+
+Každé zařízení, které se dostane k pracovním datům, má splnit jednoduché minimum:
+
+- aktuální operační systém a zapnuté bezpečnostní aktualizace,
+- šifrovaný disk nebo úložiště,
+- zámek obrazovky s rozumným PINem, heslem nebo biometrií,
+- samostatný pracovní účet v prohlížeči nebo systému,
+- správce hesel místo ukládání tajemství do poznámek,
+- MFA pro pracovní účty,
+- zákaz sdílení zařízení s lidmi mimo tým, pokud má aktivní pracovní session,
+- možnost vzdáleně odebrat pracovní účet, session nebo data.
+
+U mobilů přidej ještě zákaz instalace pochybných aplikací z neověřených zdrojů a pravidlo pro ztrátu zařízení: nahlásit hned, ne až po víkendu. Ztracený telefon není morální selhání. Nenahlášený ztracený telefon už je provozní problém.
+
+### EZ.4 Práce na dálku potřebuje hranice, ne paranoiu
+
+Remote práce je pro SaaS tým výhoda. Jen nesmí stát na předpokladu, že každá síť, každé místo a každý prohlížeč je bezpečný. Nastav pravidla, která lidem pomáhají pracovat bez zbytečné improvizace:
+
+- produkční administraci nedělej z veřejného počítače,
+- zákaznické exporty neukládej na plochu ani do osobního cloudu,
+- citlivé hovory neřeš v místě, kde je slyší půl kavárny,
+- interní dokumenty nesdílej přes osobní e-mail,
+- pro demo používej testovací data nebo anonymizované příklady,
+- při práci mimo bezpečné prostředí zkrať session a nepouštěj „remember me“ všude jako konfety.
+
+Pokud tým používá VPN, zero-trust přístup nebo správu zařízení, popiš to lidsky: kdy se používá, co chrání, co nedělá a koho kontaktovat při problému. Nástroj bez vysvětlení skončí jako další věc, kterou lidé obcházejí, protože „to zrovna překáželo“.
+
+### EZ.5 Lokální kopie dat mají datum spotřeby
+
+Největší nenápadný průšvih bývá adresář `Downloads`. Tam často končí CSV exporty, screenshoty, databázové dumpy, faktury, seznamy kontaktů a „dočasné“ soubory, které přežijí tři notebooky a jeden firemní rebranding.
+
+Zaveď pravidla pro lokální kopie:
+
+- exportuj jen data, která opravdu potřebuješ,
+- používej testovací nebo anonymizovaná data, když stačí pro vývoj či demo,
+- citlivé exporty ukládej jen do schváleného úložiště,
+- lokální soubory maž po dokončení úkolu,
+- databázové dumpy šifruj a drž odděleně od běžných dokumentů,
+- nikdy neposílej zákaznická data do osobních nástrojů jen proto, že firemní proces je pomalý.
+
+Do týdenního nebo měsíčního review přidej miniúklid: projít pracovní složky, smazat dočasné exporty, zavřít staré sessions a zkontrolovat, jestli se citlivá data neocitla v nesprávném cloudu.
+
+### EZ.6 Incident se zařízením musí mít rychlý scénář
+
+Když se ztratí notebook nebo telefon, tým nemá teprve vymýšlet postup. Připrav jednoduchý scénář:
+
+1. Člověk nahlásí ztrátu nebo podezření vlastníkovi bezpečnosti/provozu.
+2. Vlastník ověří, jaká data a účty mohly být dostupné.
+3. Tým zruší aktivní sessions, odebere zařízení z účtů a podle potřeby rotuje tokeny.
+4. Zkontrolují se auditní logy u nejcitlivějších systémů.
+5. Pokud mohlo dojít k porušení zabezpečení osobních údajů, použije se privacy incident karta z přílohy ET.
+6. Po vyřešení se doplní poučení: co změnit v nastavení, školení nebo pravidlech.
+
+U osobních zařízení je důležité mít dopředu domluvené, co firma smí spravovat nebo mazat. Nechceš v krizi vyjednávat, jestli je v pořádku vzdáleně smazat pracovní profil. Krize nejsou dobrý čas na právní poezii.
+
+### EZ.7 Šablona: karta zařízení
+
+```markdown
+## Zařízení: [název / vlastník]
+
+### Kontext
+- Vlastník:
+- Typ: firemní / osobní povolené / výjimka
+- Role člověka:
+- Datum zařazení:
+- Datum revize:
+
+### Přístupy
+- Pracovní e-mail:
+- Repozitáře:
+- Produkce / staging:
+- Support / CRM / billing:
+- Úložiště dokumentů:
+- Správce hesel / tajemství:
+
+### Bezpečnostní minimum
+- Aktualizace zapnuté:
+- Šifrování zapnuté:
+- Zámek obrazovky:
+- MFA:
+- Oddělený pracovní profil / účet:
+- Možnost odebrání session nebo pracovních dat:
+
+### Lokální data
+- Povolené lokální kopie:
+- Zakázané lokální kopie:
+- Pravidla pro exporty:
+- Datum posledního úklidu:
+
+### Incidentní postup
+- Komu hlásit ztrátu:
+- První účty k odpojení:
+- Tokeny k rotaci:
+- Logy ke kontrole:
+```
+
+### EZ.8 Checklist: zařízení pod kontrolou bez korporátního divadla
+
+- [ ] Tým ví, která zařízení mají přístup k pracovním datům.
+- [ ] Citlivé role používají firemní nebo jinak kontrolované zařízení.
+- [ ] Osobní zařízení mají jasná BYOD pravidla a datum revize.
+- [ ] Každé pracovní zařízení má aktualizace, šifrování, zámek obrazovky a MFA.
+- [ ] Produkční přístupy nejsou trvale otevřené na neznámých zařízeních.
+- [ ] Exporty a lokální kopie mají pravidla pro uložení, sdílení a mazání.
+- [ ] Ztráta zařízení má předem připravený scénář včetně odebrání sessions.
+- [ ] Offboarding lidí zahrnuje i zařízení, pracovní profily, sessions a lokální data.
+
+### EZ.9 Zdroje k bezpečnosti zařízení a práci na dálku
+
+- ENISA Cybersecurity guide for SMEs k praktickým krokům pro malé a střední firmy, včetně správy mobilních zařízení a vzdáleného přístupu: https://www.enisa.europa.eu/publications/cybersecurity-guide-for-smes
+- NIST SP 800-124r2 k řízení bezpečnosti mobilních zařízení v organizacích včetně osobních i firemních scénářů: https://www.nist.gov/publications/guidelines-managing-security-mobile-devices-enterprise-0
+- NIST Small Business Cybersecurity Corner k ochraně dat a zařízení v menších firmách: https://www.nist.gov/itl/smallbusinesscyber/guidance-topic/securing-data-devices
+- CISA Small and Medium-Sized Business Resources k základním návykům jako MFA, aktualizace, zálohy a ochrana dat: https://www.cisa.gov/small-and-medium-sized-business-resources
+
+Zařízení nejsou jen hardware. Jsou to malé dveře do firmy, které lidé nosí v batohu, kapse nebo na kuchyňském stole. Privacy-first tým nemusí zavádět těžkopádnou správu všeho, co má displej. Musí ale vědět, kudy mohou téct data, jak dveře zavřít a proč se lokální export nemá chovat jako suvenýr z dovolené.
+
+---
+
 ## Pracovní log
+
+- 2026-09-04 06:00 UTC — Doplněna příloha EZ o zařízeních, BYOD a práci na dálku: zařízení jako datový tok, rozlišení firemních a osobních zařízení, minimální bezpečnostní standard, pravidla pro remote práci, lokální kopie dat, incidentní scénář, karta zařízení, checklist a odkazy na ENISA, NIST a CISA.
 
 - 2026-09-04 05:06 UTC — Doplněna příloha EY o onboardingu a offboardingu lidí: role před účty, dvousměrný onboarding checklist, přísnější režim pro externisty, odchod před posledním dnem, tokeny jako přístupy, šablona přístupové karty, privacy-first checklist a odkazy na OWASP, GDPR a ENISA.
 
