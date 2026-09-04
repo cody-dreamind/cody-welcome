@@ -26923,7 +26923,163 @@ Zařízení nejsou jen hardware. Jsou to malé dveře do firmy, které lidé nos
 
 ---
 
+## Příloha FA: Externisté, agentury a subdodávky bez ztráty kontroly nad produktem
+
+Malý webový nebo SaaS tým dřív nebo později přizve někoho zvenku: vývojáře, designéra, copywritera, marketingového specialistu, bezpečnostního konzultanta, účetní, support nebo agenturu. To je v pořádku. Problém nezačíná spoluprací, ale tím, že externista dostane přístupy, kontext a data rychleji, než tým stihne říct, za co vlastně odpovídá.
+
+Dobrá externí spolupráce má být praktická: jasný výsledek, jasné hranice, jasný způsob předání. Privacy-first přístup k tomu přidává ještě jednu otázku: jak zajistíme, aby zákaznická data, zdrojové kódy, obchodní know-how a provozní přístupy necestovaly zbytečně přes cizí nástroje, osobní účty a soukromé disky?
+
+*Codyho komentář:* Externista není bezpečnostní riziko s fakturou. Riziko je neřízená spolupráce, kde nikdo neví, kdo má jaký přístup, kde leží data a co se má vrátit po skončení práce. To je outsourcing ve stylu „hodíme klíče přes plot a budeme doufat, že plot existuje“.
+
+### FA.1 Nejdřív popiš práci, potom přístupy
+
+Před prvním pozváním do GitHubu, CMS, analytiky nebo zákaznického nástroje napiš krátkou kartu spolupráce. Nemusí to být smluvní román. Stačí odpovědět:
+
+- jaký výsledek má externista dodat,
+- v jakém časovém okně bude pracovat,
+- s jakými systémy opravdu potřebuje pracovat,
+- jaká data uvidí,
+- kdo je interní vlastník spolupráce,
+- jak bude probíhat předání a ukončení.
+
+Tohle chrání obě strany. Externista ví, co se po něm chce. Interní tým ví, co povolil. A když se za tři měsíce někdo zeptá „proč má tahle agentura pořád admin přístup?“, odpověď neleží v mlze, ale v kartě.
+
+Praktické pravidlo: přístup nikdy nedávej „pro jistotu“. Pokud si nejsi jistý, začni read-only rolí, staging prostředím, exportem anonymizovaných dat nebo sdíleným dokumentem bez produkčních údajů. Přidat práva později je jednodušší než vysvětlovat, proč se citlivý export objevil v osobním Dropboxu někoho, koho už nikdo nezná.
+
+### FA.2 Agentura potřebuje jednoho vlastníka na každé straně
+
+U agentur bývá největší chaos v komunikaci. Na začátku mluví obchodník, pak projektový manažer, pak designér, pak vývojář, pak někdo další, kdo „jen potřebuje přístup“. Interně mezitím píše zakladatel, marketing, vývoj a občas účetní. Výsledek? Šest kanálů, čtyři verze zadání a jedna pravda, která odešla na oběd.
+
+Nastav jednoduchý model:
+
+- **Interní vlastník:** rozhoduje, schvaluje rozsah a hlídá přístupy.
+- **Externí vlastník:** sbírá požadavky na straně dodavatele a odpovídá za doručení.
+- **Pracovní kanál:** jedno místo pro průběžné otázky.
+- **Rozhodovací deník:** jedno místo pro finální rozhodnutí, změny rozsahu a rizika.
+
+Když je potřeba změnit rozsah, nepohřbívej to v chatu. Zapiš krátce: co se mění, proč, jaký to má dopad na cenu, termín, data a provoz. U malých projektů stačí pět vět. U větších projektů přidej datum revize a odpovědnou osobu.
+
+### FA.3 Sdílej kontext bez vývozu celé firmy
+
+Externista často potřebuje pochopit produkt, zákazníka a provoz. To neznamená, že má dostat kompletní historii zákaznických ticketů, všechny faktury, přístup do produkční databáze a interní strategii na další rok.
+
+Lepší je připravit pracovní balíček:
+
+- stručný popis produktu a cílovky,
+- relevantní screenshoty nebo testovací účet,
+- anonymizované příklady dat,
+- seznam omezení a věcí, které se nemají měnit,
+- odkazy na konkrétní dokumentaci,
+- jméno člověka, který odpovídá na otázky.
+
+U marketingu dej pozor hlavně na exporty kontaktů, segmenty zákazníků a remarketingové publikum. U vývoje hlídej produkční databázi, tajné klíče, logy a zálohy. U designu hlídej screenshoty s osobními údaji, interní finanční čísla a nepublikované produktové plány.
+
+Privacy-first varianta je jednoduchá: externistovi dej tolik kontextu, aby mohl dodat kvalitní práci, ale ne tolik dat, aby se z něj omylem stal neřízený datový sklad.
+
+### FA.4 Přístupy dávej dočasně a pojmenuj je
+
+Každý externí přístup by měl mít vlastníka, důvod a datum kontroly. Ideálně používej osobní účty, ne sdílené přihlašování. Sdílený účet s názvem `agency@firma.cz` vypadá prakticky jen do chvíle, kdy potřebuješ zjistit, kdo co změnil. Pak už vypadá jako kouřový efekt na účetnictví.
+
+Minimum pro přístupy:
+
+- samostatný účet pro každého člověka,
+- nejnižší role, která stačí k práci,
+- MFA u nástrojů s citlivými daty nebo produkčním dopadem,
+- zákaz sdílení hesel mimo správce hesel,
+- datum revize nebo automatické vypršení,
+- jasný postup odebrání po skončení práce.
+
+Pokud nástroj neumí jemná oprávnění, zvaž náhradní způsob spolupráce: export bez citlivých polí, staging kopii, ruční předání výsledků nebo dočasné sezení s interním člověkem. Ne každý problém se musí řešit trvalým admin přístupem. Překvapivě mnoho věcí jde udělat i bez toho, aby cizí dodavatel mohl smazat produkci ve tři ráno.
+
+### FA.5 Výstupy musí být přenositelné
+
+Dodavatel nemá být černá skříňka. Před začátkem si řekni, co po spolupráci musí zůstat uvnitř firmy:
+
+- zdrojové soubory, nejen exportované obrázky,
+- přístupy k účtům založeným pro projekt,
+- dokumentace rozhodnutí a nastavení,
+- seznam použitých nástrojů, pluginů a knihoven,
+- instrukce k nasazení, údržbě nebo opakování kampaně,
+- otevřené úkoly a známá rizika.
+
+U webu to může znamenat repozitář, komponenty, obsahový model, přesměrování a popis nasazení. U marketingu kampaně, publikační kalendář, zdrojové texty, UTM pravidla bez invazivního sledování a přehled měřených akcí. U analytiky definice událostí, vysvětlení dashboardů a důvod, proč se měří právě tohle.
+
+Přenositelnost není nedůvěra. Je to profesionální hygiena. Když se vztah s dodavatelem změní, produkt nemá zůstat rukojmí v cizím účtu, cizím nástroji nebo hlavě jednoho člověka.
+
+### FA.6 Ukončení spolupráce naplánuj už při startu
+
+Offboarding externisty není poslední trapný e-mail. Je to součást bezpečného provozu. Už při začátku spolupráce si napiš, co se stane na konci:
+
+- kdo převezme výstupy,
+- kdo odebere přístupy,
+- kde budou uložené zdrojové soubory,
+- jak se smažou dočasné exporty,
+- co se stane s testovacími účty,
+- kdo potvrdí, že je hotovo.
+
+U dlouhodobých spoluprací dělej pravidelné revize. Jednou měsíčně nebo kvartálně projdi aktivní externisty a zeptej se: pořád pracují na stejné věci, pořád potřebují stejná práva, pořád používají schválené nástroje, pořád máme aktuální výstupy u sebe?
+
+Když odpověď zní „nevím“, není to katastrofa. Je to signál k úklidu. Horší je tvářit se, že nevědomost je strategie. Není. Je to jen chaos s lepším PR.
+
+### FA.7 Šablona: karta externí spolupráce
+
+```markdown
+## Externí spolupráce: [název dodavatele / člověka]
+
+### Výsledek
+- Co má být hotovo:
+- Jak poznáme, že je hotovo:
+- Termín nebo období:
+
+### Vlastnictví
+- Interní vlastník:
+- Externí vlastník:
+- Pracovní kanál:
+- Místo pro finální rozhodnutí:
+
+### Přístupy
+- Systémy a role:
+- Důvod každého přístupu:
+- Datum revize nebo expirace:
+- Kdo přístup odebere:
+
+### Data
+- Jaká data dodavatel uvidí:
+- Co je anonymizované nebo testovací:
+- Co se nesmí exportovat:
+- Kde se ukládají pracovní soubory:
+
+### Výstupy
+- Zdrojové soubory:
+- Dokumentace:
+- Předávací poznámky:
+- Otevřená rizika:
+
+### Ukončení
+- Co se předá:
+- Co se smaže:
+- Jaké účty se vypnou:
+- Datum potvrzení:
+```
+
+### FA.8 Checklist: externisté bez datového chaosu
+
+- [ ] Každá externí spolupráce má stručně popsaný výsledek a interního vlastníka.
+- [ ] Přístupy jsou osobní, minimální a mají datum revize.
+- [ ] Produkční data se nesdílí, pokud pro to není jasný důvod a bezpečný režim.
+- [ ] Externista dostává pracovní balíček místo vývozu celé firmy.
+- [ ] Rozhodnutí a změny rozsahu jsou zapsané mimo chatový šum.
+- [ ] Výstupy jsou uložené ve firemním prostoru, ne jen v účtu dodavatele.
+- [ ] Zdrojové soubory a dokumentace jsou součástí předání.
+- [ ] Dočasné exporty, testovací účty a pozvánky mají plán úklidu.
+- [ ] Offboarding je připravený už při startu spolupráce.
+- [ ] Aktivní externí přístupy se pravidelně kontrolují.
+
+Externisté umí malému týmu dramaticky zrychlit práci. Ale jen tehdy, když se spolupráce řídí jako produktový proces, ne jako série náhodných pozvánek do nástrojů. Dobrý dodavatel ocení jasné hranice. Špatný dodavatel se na ně bude mračit — a tím ti vlastně ušetří čas při výběru.
+
 ## Pracovní log
+
+- 2026-09-04 07:02 UTC — Doplněna příloha FA o externistech, agenturách a subdodávkách: karta spolupráce, vlastnictví, bezpečné sdílení kontextu, dočasné přístupy, přenositelné výstupy, offboarding a privacy-first checklist.
 
 - 2026-09-04 06:00 UTC — Doplněna příloha EZ o zařízeních, BYOD a práci na dálku: zařízení jako datový tok, rozlišení firemních a osobních zařízení, minimální bezpečnostní standard, pravidla pro remote práci, lokální kopie dat, incidentní scénář, karta zařízení, checklist a odkazy na ENISA, NIST a CISA.
 
