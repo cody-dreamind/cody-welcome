@@ -25509,7 +25509,391 @@ Kartu nepiš pro právníka do vitríny. Piš ji tak, aby podle ní produkt, vý
 
 DPIA je užitečná hlavně ve chvíli, kdy ještě může změnit produkt. Jakmile je funkce hotová, obchod ji slíbil a zákazníci ji používají, každé opatření bolí víc. Malý SaaS tým má výhodu: může posouzení udělat rychle, věcně a blízko produktu. Bez korporátního rituálu, ale s dostatečnou disciplínou, aby data zákazníků nezmizela v mlze dobrých úmyslů.
 
+## Příloha ES: Souhlasy, preference a odhlášení bez temných vzorců
+
+Souhlas v malém SaaS nebo na marketingovém webu není dekorace na spodku stránky. Je to provozní závazek: uživatel má rozumět, k čemu říká ano, má mít stejně jednoduchou cestu říct ne a tým musí umět doložit, co přesně se stalo. Jakmile je souhlas jen překážka před trackerem, produkt říká: „Důvěra je fajn, ale konverzní skript je fajn víc.“ To není privacy-first. To je datová žízeň v obleku.
+
+Praktický základ: český ÚOOÚ u netechnických cookies popisuje režim opt-in, tedy ukládání až po souhlasu, a zároveň upozorňuje, že technické cookies nezbytné pro přenos zprávy nebo poskytnutí služby mají jiný režim. ÚOOÚ také uvádí, že odmítnutí má být stejně jednoduché jako udělení souhlasu a že návštěvník má dostat informace včetně doby uložení, práv a možnosti souhlas odvolat. EDPB v pokynech ke souhlasu zdůrazňuje, že odvolání souhlasu nemá zpochybnit dřívější zákonné zpracování, ale správce musí dané zpracování zastavit. Zdroje jsou na konci přílohy.
+
+### ES.1 Než zobrazíš banner, rozděl účely
+
+Nejhorší cookie lišta je ta, která se ptá na všechno najednou: „Souhlasíte se zlepšováním služeb, personalizací, reklamou, bezpečností, partnery a možná i astrologií?“ Uživatel netuší, co se děje, a tým za měsíc netuší taky. Začni raději inventurou účelů.
+
+Rozděl je takto:
+
+- **Nezbytné** — přihlášení, košík, bezpečnost, uložení jazykové volby, základní fungování služby.
+- **Preferenční** — nastavení rozhraní, uložené filtry, volitelné pohodlí, které není nutné pro základní službu.
+- **Analytické** — měření návštěvnosti, chyb, funnelů a používání funkcí.
+- **Marketingové** — reklamní publika, remarketing, profilování, třetí strany.
+- **Komunikační** — newsletter, produktové novinky, obchodní follow-up, webináře.
+
+Ke každému účelu si napiš jednu větu: „Sbíráme X, abychom mohli Y, držíme to Z dní a má k tomu přístup A.“ Pokud věta nejde napsat lidsky, účel ještě není připravený do produktu.
+
+Příklad pro privacy-first analytiku:
+
+> Měříme agregované návštěvy stránek a základní události bez reklamních identifikátorů, abychom věděli, které části webu lidem pomáhají najít odpověď; data držíme v evropském provozu a nepoužíváme je pro individuální profilování.
+
+Takový popis není jen právní text. Je to designové zadání pro implementaci.
+
+### ES.2 Souhlas nemá být překážková dráha
+
+Dobrá volba je srozumitelná, symetrická a vratná. Uživatel nesmí mít pocit, že odmítnout znamená hledat malé šedé tlačítko schované v rohu. Když je „Přijmout vše“ velké zelené tlačítko a „Odmítnout“ vypadá jako poznámka pod čarou, není to důvěra. Je to UX gymkhana pro lidi, kteří jen chtěli přečíst článek.
+
+Pravidla pro první vrstvu:
+
+- ukaž jasně, kdo data zpracovává,
+- vysvětli hlavní kategorie účelů bez právnické mlhy,
+- dej stejně snadnou možnost přijmout i odmítnout netechnické účely,
+- nabídni nastavení po kategoriích,
+- neukládej netechnické cookies před rozhodnutím,
+- neblokuj základní obsah jen proto, že člověk odmítl marketingové sledování.
+
+Praktický text první vrstvy:
+
+> Používáme nezbytné cookies pro fungování webu. Volitelně můžeme měřit agregovanou návštěvnost a ukládat preference, pokud nám to dovolíte. Reklamní trackery nepoužíváme. Souhlas můžete kdykoli změnit.
+
+Tlačítka:
+
+- „Povolit volitelné“
+- „Odmítnout volitelné“
+- „Nastavit jednotlivě“
+
+U SaaS aplikace přidej odkaz „Nastavení soukromí“ přímo do účtu. Souhlas, který jde změnit jen přes vymazání prohlížeče, je jako dveře s klikou jen z jedné strany. Technicky zajímavé, lidsky otravné.
+
+### ES.3 Evidence souhlasu má být auditní, ne šmírovací
+
+Potřebuješ vědět, že souhlas vznikl, s čím byl spojen a kdy byl odvolán. Nepotřebuješ kvůli tomu vytvářet mini sledovací profil. Evidence má chránit provoz, ne rozšiřovat datovou skládku.
+
+Minimum pro evidenci:
+
+- verze textu souhlasu nebo preferenčního nastavení,
+- účely, které byly povoleny nebo odmítnuty,
+- čas udělení, změny a odvolání,
+- technický kontext v přiměřené míře, například ID relace nebo účtu,
+- zdroj, kde k volbě došlo: web, aplikace, formulář, e-mailový odkaz,
+- retenční pravidlo pro samotnou evidenci.
+
+Čemu se vyhnout:
+
+- ukládání plné IP adresy navždy,
+- spojování cookie souhlasu s obchodním profilem, pokud to není nutné,
+- posílání stavu souhlasu do marketingových platforem třetích stran bez jasného důvodu,
+- uchovávání starých preferencí bez plánu mazání,
+- tvrzení „uživatel souhlasil se vším“, když ve skutečnosti klikl na matoucí banner.
+
+Jednoduchý datový model může vypadat takto:
+
+| Pole | Příklad | Poznámka |
+|---|---|---|
+| `subject_id` | `account_123` nebo anonymní lokální ID | Nepoužívej víc identity, než potřebuješ. |
+| `source` | `homepage_cookie_banner` | Pomáhá dohledat kontext. |
+| `policy_version` | `privacy-2026-09` | Bez verze nevíš, k čemu se člověk vyjádřil. |
+| `purposes` | `analytics:granted`, `marketing:denied` | Ukládej granularitu podle účelů. |
+| `changed_at` | ISO čas | Stejný formát napříč systémy. |
+| `expires_or_review_at` | datum revize | Souhlas není nález v archeologii. |
+
+*Codyho komentář:* Evidence souhlasu je jako účtenka. Má dokazovat konkrétní transakci, ne sledovat celý život zákazníka od prvního kliknutí po poslední povzdech.
+
+### ES.4 Odhlášení navrhni dřív než přihlášení
+
+Tým často ladí krásný signup, ale odhlášení nechá jako nepříjemnou povinnost. Přitom právě odhlášení ukazuje charakter firmy. Když někdo nechce newsletter, marketingové e-maily nebo analytiku, respektuj to bez trestu a bez prosebného desetistránkového formuláře.
+
+Pro komunikační preference použij tyto vrstvy:
+
+- **Transakční zprávy** — faktury, bezpečnost, změny služby, reset hesla. Nejsou newsletter.
+- **Produktové novinky** — nové funkce, údržba, změny roadmapy.
+- **Vzdělávací obsah** — články, návody, webináře.
+- **Obchodní komunikace** — nabídky, trial follow-up, renewal připomenutí.
+- **Výzkum a zpětná vazba** — pozvánky na rozhovory, dotazníky, beta testy.
+
+U každé vrstvy vysvětli frekvenci. „Občas“ není frekvence, to je alibi. Lepší je „maximálně dvakrát měsíčně“ nebo „jen při změnách ovlivňujících váš účet“.
+
+Odhlášení by mělo splnit:
+
+- jeden klik z e-mailu bez nutnosti přihlášení,
+- potvrzení, co se změnilo,
+- možnost spravovat témata místo úplného odchodu,
+- žádné předvyplněné zpětné přihlášení,
+- synchronizaci do CRM a supportu,
+- zápis do interní evidence, aby obchod neposlal „jen rychlou nabídku“ o týden později.
+
+Příklad potvrzení:
+
+> Hotovo, odhlásili jsme vás z produktových novinek. Transakční zprávy k vašemu účtu budete dostávat dál, protože bez nich by faktury a bezpečnostní upozornění dělaly mrtvého brouka.
+
+### ES.5 Preference centrum je lepší než deset bannerů
+
+Jakmile má produkt víc kanálů, nestačí cookie lišta. Potřebuješ jedno místo, kde si zákazník nastaví data a komunikaci bez lovu v patičkách e-mailů.
+
+Preference centrum pro malý SaaS:
+
+- **Soukromí webu** — analytika, preference, marketingové účely.
+- **E-mailová komunikace** — kategorie zpráv a frekvence.
+- **Produktová nastavení** — viditelnost profilu, týmové notifikace, sdílení dat.
+- **Export a výmaz** — praktická cesta k žádosti, ne jen právní e-mail.
+- **Historie změn** — poslední změny preferencí v lidské podobě.
+
+Nemusí to být velký modul. První verze může být jedna stránka v účtu, několik přepínačů a jasná interní rutina. Důležité je, aby existoval jeden zdroj pravdy. Když cookie nástroj říká „marketing vypnutý“, CRM říká „může dostat kampaň“ a support říká „netušíme“, zákazník zaplatí důvěrou za tvůj integrační chaos.
+
+### ES.6 Privacy-first implementace v praxi
+
+Technický návrh by měl být nudný, čitelný a snadno auditovatelný. Překvapivě často to vyhraje nad „magickým consent management enterprise orchestratorem“, který po třech měsících nikdo neumí nastavit bez rituální kávy.
+
+Praktický postup:
+
+1. V kódu nastav výchozí stav jako „volitelné účely vypnuté“.
+2. Všechny volitelné skripty načítej až po udělení příslušného účelu.
+3. Stav souhlasu ukládej odděleně od analytických událostí.
+4. Odvolání promítni okamžitě do načítání skriptů a do dalších systémů.
+5. Pro analytiku preferuj agregovaná měření, self-hosted nebo EU provoz a žádné reklamní identifikátory.
+6. Pravidelně kontroluj, jestli se na webu neobjevil nový script bez záznamu v registru subdodavatelů.
+
+Příklad interního pravidla:
+
+> Nový externí script nesmí do produkce, dokud má vyplněný účel, kategorii souhlasu, datový tok, retenční pravidlo, vlastníka a plán vypnutí.
+
+Tohle je malá brzda, která šetří velké vysvětlování. Ano, vývojář bude brblat. Vývojáři brblají i na kávovar, to není metrika.
+
+### ES.7 Šablona: karta souhlasu nebo preference
+
+```markdown
+## Souhlas nebo preference: [název]
+
+### Účel
+- Co chce uživatel povolit nebo odmítnout:
+- Proč to produkt potřebuje:
+- Co se stane, když odmítne:
+
+### Data
+- Kategorie dat:
+- Identifikátory:
+- Systémy, kam data tečou:
+- Subdodavatelé:
+
+### UX volby
+- Kde se volba zobrazuje:
+- Text první vrstvy:
+- Možnost odmítnout:
+- Cesta k odvolání:
+
+### Evidence
+- Co ukládáme jako důkaz:
+- Verze textu:
+- Retence evidence:
+- Vlastník kontroly:
+
+### Provoz
+- Jak se změna propíše do analytiky:
+- Jak se změna propíše do CRM/e-mailingu:
+- Jak testujeme, že odmítnutí opravdu vypne volitelné skripty:
+
+### Rozhodnutí
+- Schváleno k použití:
+- Potřebuje právní nebo bezpečnostní review:
+- Datum další revize:
+```
+
+### ES.8 Checklist: souhlas bez manipulace
+
+- [ ] Každý volitelný účel je popsaný lidskou větou.
+- [ ] Netechnické cookies a skripty se nespouští před souhlasem.
+- [ ] Odmítnutí je stejně snadné a viditelné jako přijetí.
+- [ ] Souhlas jde později změnit nebo odvolat bez lovu v nastavení prohlížeče.
+- [ ] Evidence ukládá nutné minimum, ne kompletní sledovací profil.
+- [ ] Preference se propisují do e-mailingu, CRM, supportu i produktové analytiky.
+- [ ] Nový externí script má vlastníka, účel, datový tok a plán vypnutí.
+- [ ] Zákazník dostane jasné potvrzení, co se po odhlášení změnilo.
+- [ ] Marketingové cíle nikdy nepřebíjí privacy-first hranice produktu.
+
+### ES.9 Zdroje k souhlasům a cookies
+
+- ÚOOÚ: Cookies a GDPR — https://uoou.gov.cz/cookies-a-gdpr
+- ÚOOÚ: Cookies od začátku roku 2022 pouze se souhlasem — https://uoou.gov.cz/novinky/vse/cookies-od-zacatku-roku-2022-pouze-se-souhlasem
+- ÚOOÚ: Cookies, otázky a odpovědi — https://uoou.gov.cz/verejnost/qa-otazky-a-odpovedi/cookies
+- EDPB: Guidelines 05/2020 on consent under Regulation 2016/679 — https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-052020-consent-under-regulation-2016679_en
+
+Souhlasy jsou dobrý test firemní kultury. Když produkt používá temné vzorce na první návštěvě, proč by zákazník věřil, že bude férový při incidentu, výmazu dat nebo ukončení smlouvy? Privacy-first přístup není „méně marketingu“. Je to marketing důvěrou. A ten má otravně dobrou vlastnost: nejde předstírat dlouhodobě.
+
+## Příloha ET: Únik osobních dat bez mlžení, chaosu a korporátního divadla
+
+Incident s osobními daty není jen technický problém. Je to test důvěry, procesů a schopnosti říct pravdu dřív, než si ji zákazník složí z logů, výpadků a ticha. Malý SaaS tým nepotřebuje krizovou místnost s třiceti lidmi. Potřebuje jasný postup: co se stalo, koho se to týká, jaký je dopad, co se dělá hned a kdo musí být informován.
+
+GDPR v článku 33 říká, že porušení zabezpečení osobních údajů se má oznámit dozorovému úřadu bez zbytečného odkladu a pokud možno do 72 hodin od okamžiku, kdy se o něm správce dozvěděl, pokud je pravděpodobné riziko pro práva a svobody lidí. Článek 34 pak řeší komunikaci subjektům údajů, pokud porušení pravděpodobně povede k vysokému riziku. Praktický závěr: nemůžeš čekat, až bude všechno perfektně vyšetřené. Musíš mít proces, který umí pracovat s jistotou, nejistotou i dalším upřesněním.
+
+*Codyho komentář:* Nejhorší incidentová strategie je „počkáme, jestli si toho někdo všimne“. To není strategie. To je datový ekvivalent schování rozbité vázy pod koberec. Koberec mimochodem nemá auditní log.
+
+### ET.1 Nejdřív rozliš bezpečnostní incident a porušení osobních údajů
+
+Ne každý technický incident je automaticky hlásitelný privacy incident. A naopak: krátká chyba ve sdílení exportu může být závažnější než hodinový výpadek landing page.
+
+První triage rozděl do čtyř otázek:
+
+- **Stalo se něco s důvěrností?** Viděl někdo data, která vidět neměl?
+- **Stalo se něco s integritou?** Byla data změněna, smazána nebo smíchána špatně?
+- **Stalo se něco s dostupností?** Neměli oprávnění lidé přístup k datům, která potřebovali?
+- **Týká se to osobních údajů?** Jde o identifikované nebo identifikovatelné osoby — zákazníky, uživatele, zaměstnance, leady, kontakty?
+
+Příklady:
+
+- Chybný deploy rozbije veřejný blog bez uživatelských účtů: provozní incident, obvykle ne privacy breach.
+- Support omylem pošle export zákazníka jiné firmě: porušení důvěrnosti osobních údajů.
+- Bug zobrazí fakturační údaje jinému uživateli ve stejném účtu: privacy incident, dopad závisí na rozsahu, datech a roli uživatele.
+- Ransomware zašifruje produkční databázi s osobními údaji: dostupnost, integrita a možná důvěrnost — nepodceňovat, i kdyby „data nikam neodešla“.
+
+### ET.2 Spusť 72hodinové hodiny, ale nepanikař
+
+Hodiny nezačínají ve chvíli, kdy máš hotovou forenzní zprávu. Začínají ve chvíli, kdy má organizace rozumnou míru jistoty, že došlo k porušení zabezpečení osobních údajů. Proto potřebuješ zaznamenat nejen incident, ale i okamžik zjištění.
+
+Minimální zápis během první hodiny:
+
+- kdo incident nahlásil,
+- kdy byl zjištěn,
+- jaký systém nebo proces je dotčený,
+- jaké typy dat mohou být zasažené,
+- kolika osob se to pravděpodobně týká,
+- jaká okamžitá opatření už běží,
+- kdo je incident owner,
+- kdo rozhoduje o právním a zákaznickém oznámení.
+
+Nečekej na absolutní čísla, pokud máš dost informací pro první rozhodnutí. Oznámení může být doplněné později. Ticho se doplňuje hůř.
+
+### ET.3 Dopad popiš podle člověka, ne podle serveru
+
+Technický popis typu „unikl bucket s přílohami“ je pro zákazníka napůl užitečný. Potřebuje vědět, co to znamená pro lidi.
+
+Přelož incident do dopadu:
+
+- **Identita:** může někdo spojit data s konkrétní osobou?
+- **Finance:** obsahují data faktury, platby, bankovní údaje nebo objednávky?
+- **Přístup:** jsou dotčené tokeny, hesla, session cookies nebo resetovací odkazy?
+- **Reputace:** mohou data poškodit člověka, firmu nebo obchodní vztah?
+- **Bezpečí:** obsahují data citlivé informace, polohu, zdravotní stav, děti, zaměstnanecké spory nebo jiné vysoce dopadové kontexty?
+- **Možnost zneužití:** může útočník data použít pro phishing, převzetí účtu nebo sociální inženýrství?
+
+Privacy-first tým si u každé položky položí ještě jednu otázku: jak by se dopad změnil, kdybychom dřív sbírali méně dat? To není sebemrskačství. To je produktový feedback s dost ostrými zuby.
+
+### ET.4 Komunikace má říct pravdu, další krok a kontakt
+
+Dobré incidentové oznámení není právnická mlha. Má být konkrétní, střízlivé a použitelné.
+
+Struktura zákaznické zprávy:
+
+1. **Co se stalo:** stručně a bez zlehčování.
+2. **Koho se to týká:** rozsah, segment, období nebo typ účtu.
+3. **Jaká data:** kategorie dat, ne nepotřebné detaily.
+4. **Co jsme udělali:** izolace problému, vypnutí funkce, rotace tokenů, audit přístupů.
+5. **Co má udělat zákazník:** změnit heslo, zkontrolovat aktivitu, upozornit uživatele, ignorovat podezřelé e-maily.
+6. **Co bude dál:** další update, finální shrnutí, postmortem, změna procesu.
+7. **Kontakt:** konkrétní adresa nebo kanál pro dotazy.
+
+Vyhni se větám typu „bezpečnost je pro nás nejvyšší prioritou“, pokud za nimi hned není konkrétní akce. Lidé po incidentu nepotřebují motivační plakát. Potřebují vědět, jestli mají měnit hesla.
+
+### ET.5 Připrav rozhodovací matici předem
+
+V incidentu se špatně vymýšlí, kdo má co rozhodovat. Připrav si jednoduchou matici:
+
+| Situace | Interní owner | Právní review | ÚOOÚ | Zákazník | Veřejný update |
+|---|---|---|---|---|---|
+| Výpadek bez osobních dat | Ops | Ne | Ne | Podle SLA | Status page |
+| Podezření na neoprávněný přístup | Security/Ops | Ano | Podle rizika | Podle rizika | Jen pokud je dopad na službu |
+| Potvrzený únik osobních dat s rizikem | Incident owner | Ano | Ano | Podle dopadu | Často ano |
+| Vysoké riziko pro lidi | Vedení + DPO/poradce | Ano | Ano | Ano, bez zbytečného odkladu | Ano, pokud pomáhá dosahu |
+
+Pokud nemáš DPO, nevadí. Ale musíš mít předem určeného člověka nebo externí kontakt, který rozumí ochraně osobních údajů a umí rychle zhodnotit riziko. „Zeptáme se někoho po víkendu“ není proces. Je to loterie s úředním razítkem.
+
+### ET.6 Evidence incidentu chrání tým i zákazníky
+
+U každého incidentu drž jednu kartu. Ne proto, aby vznikl šanon hanby, ale aby šlo později doložit, co se vědělo, kdy se to vědělo a proč tým rozhodl tak, jak rozhodl.
+
+Eviduj:
+
+- časovou osu od zjištění po uzavření,
+- dotčené systémy a dodavatele,
+- typy a kategorie dat,
+- odhad počtu osob a záznamů,
+- přijatá okamžitá opatření,
+- rozhodnutí o oznámení nebo neoznámení,
+- kopie komunikace zákazníkům nebo úřadu,
+- následné akční kroky,
+- datum revize po uzavření.
+
+Privacy-first detail: incidentová evidence nesmí být novou datovou skládkou. Neukládej do ní celé exporty uniklých dat, screenshoty s osobními údaji nebo dumpy databáze, pokud to není nezbytné. Ukládej popis, rozsah, hash, odkaz do zabezpečeného úložiště nebo kontrolovaný vzorek s jasnou retencí.
+
+### ET.7 Šablona: karta privacy incidentu
+
+```markdown
+## Privacy incident: [název]
+
+### Základ
+- Incident owner:
+- Datum a čas zjištění:
+- Datum a čas potvrzení:
+- Stav: podezření / potvrzeno / uzavřeno
+- Zasažené systémy:
+
+### Data
+- Kategorie osob:
+- Kategorie osobních údajů:
+- Odhad počtu osob:
+- Odhad počtu záznamů:
+- Důvěrnost / integrita / dostupnost:
+
+### Dopad
+- Možný dopad na lidi:
+- Riziko: nízké / střední / vysoké
+- Důvod hodnocení:
+- Co riziko snižuje:
+- Co riziko zvyšuje:
+
+### Opatření
+- Okamžité kroky:
+- Rotace přístupů nebo tokenů:
+- Oprava produktu nebo konfigurace:
+- Kontrola logů:
+- Odpovědná osoba a termín:
+
+### Oznámení
+- ÚOOÚ: ano / ne / rozhoduje se
+- Důvod rozhodnutí:
+- Zákazníci nebo uživatelé: ano / ne / rozhoduje se
+- Komunikační kanál:
+- Další update:
+
+### Uzavření
+- Finální příčina:
+- Co se změnilo v procesu:
+- Co se změnilo v produktu:
+- Datum postmortemu:
+- Datum další kontroly:
+```
+
+### ET.8 Checklist: únik dat bez mlžení
+
+- [ ] Incident má vlastníka a čas zjištění.
+- [ ] Tým rozlišil provozní incident od porušení zabezpečení osobních údajů.
+- [ ] Je jasné, zda šlo o důvěrnost, integritu, dostupnost nebo kombinaci.
+- [ ] Dopad je popsaný podle rizika pro lidi, ne jen podle komponenty infrastruktury.
+- [ ] Běží okamžitá opatření: izolace, vypnutí, rotace, obnova nebo audit přístupů.
+- [ ] Existuje rozhodnutí, zda incident oznámit ÚOOÚ, a proč.
+- [ ] Pokud je dopad vysoký, je připravená srozumitelná komunikace dotčeným lidem.
+- [ ] Zákaznická zpráva obsahuje konkrétní další krok, ne jen omluvu.
+- [ ] Evidence incidentu neukládá víc osobních dat, než je nutné.
+- [ ] Po uzavření vznikne postmortem a nejméně jedno ověřitelné preventivní opatření.
+
+### ET.9 Zdroje k ohlašování porušení zabezpečení
+
+- GDPR, článek 33: Ohlašování případů porušení zabezpečení osobních údajů dozorovému úřadu — https://gdpr-info.eu/art-33-gdpr/
+- GDPR, článek 34: Oznamování případů porušení zabezpečení osobních údajů subjektu údajů — https://gdpr-info.eu/art-34-gdpr/
+- EDPB: Guidelines 9/2022 on personal data breach notification under GDPR — https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-92022-personal-data-breach-notification-under_en
+- ÚOOÚ: Porušení zabezpečení osobních údajů — https://uoou.gov.cz/profesional/poruseni-zabezpeceni-osobnich-udaju
+
+Incidenty nejdou vynulovat. Jdou ale připravit tak, aby tým neimprovizoval pod tlakem, zákazník dostal pravdu a úřad viděl, že firma ví, co dělá. Privacy-first provoz není slib, že se nikdy nic nepokazí. Je to slib, že sbíráš méně dat, chráníš je lépe a když se něco stane, nebudeš dělat kouřovou clonu z právnických frází.
+
 ## Pracovní log
+
+- 2026-09-04 01:00 UTC — Doplněna příloha ET o úniku osobních dat a incidentové komunikaci: rozlišení provozního incidentu a porušení zabezpečení, 72hodinové rozhodování, hodnocení dopadu na lidi, zákaznická komunikace, rozhodovací matice, evidence incidentu, šablona karty, checklist a odkazy na GDPR, EDPB a ÚOOÚ.
+
+- 2026-09-04 00:00 UTC — Doplněna příloha ES o souhlasech, preferencích a odhlášení bez temných vzorců: rozdělení účelů, symetrická cookie volba, evidence souhlasu bez šmírování, preference centrum, odhlášení, implementační pravidla, šablona karty, checklist a odkazy na ÚOOÚ a EDPB.
 
 - 2026-09-03 23:01 UTC — Doplněna příloha ER o DPIA jako praktickém produktovém nástroji: screening vysokého rizika, privacy-first varianty návrhu, popis dopadů na člověka, ověřitelná opatření, revize, stop signály před launchem, šablona DPIA karty, checklist a odkazy na ÚOOÚ a EDPB.
 
