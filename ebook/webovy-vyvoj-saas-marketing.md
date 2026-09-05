@@ -31972,7 +31972,198 @@ Každý kvartál si vezmi jeden testovací účet a ověř, že po výmazu nejde
 - Evropská komise vysvětluje práva subjektů údajů včetně opravy a výmazu osobních údajů: https://commission.europa.eu/law/law-topic/data-protection/reform/rights-citizens/my-rights_en
 - EDPB ve vodítkách k právům subjektů údajů zdůrazňuje potřebu srozumitelných procesů a přiměřeného vyřízení žádostí: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-012022-data-subject-rights-right-access_en
 
+## Příloha GD: Datový incident bez chaosu, mlžení a zbytečné paniky
+
+Datový incident není jen dramatický únik databáze na titulní straně. Může to být špatně nastavený bucket se soubory, omylem poslaný export jinému zákazníkovi, logující se autorizační token, support účet bez MFA, veřejný staging s produkčními daty nebo integrační webhook, který posílá víc údajů, než měl. Malý SaaS tým si často říká, že „nás se to netýká“. Týká. Jen incident obvykle nepřijde s filmovou hudbou, ale s nenápadnou zprávou: „Hele, proč vidím data jiného klienta?“
+
+Privacy-first provoz neznamená, že nikdy neuděláš chybu. Znamená, že máš připravený postup, který rychle omezí dopad, zachová důkazy, řekne pravdu správným lidem a nepromění incident v týden improvizovaného divadla. U osobních údajů je navíc potřeba počítat s právním režimem GDPR: článek 33 řeší oznámení dozorovému úřadu a článek 34 komunikaci subjektům údajů, pokud je riziko vysoké. Prakticky: nechceš začít hledat, kdo rozhoduje a kde jsou logy, až když už běží hodiny.
+
+### GD.1 První hodina má mít scénář
+
+První hodina incidentu rozhoduje o tom, jestli tým problém zmenší, nebo rozšíří. Cílem není napsat perfektní postmortem. Cílem je zastavit krvácení a získat kontrolu nad fakty.
+
+Praktický scénář:
+
+1. **Potvrď signál:** ověř, jestli jde o skutečný problém, falešný poplach nebo očekávané chování.
+2. **Urči incident lead:** jedna osoba řídí postup, ostatní nepanikaří v pěti chatech najednou.
+3. **Zastav šíření:** vypni chybnou integraci, zablokuj přístup, skryj veřejný soubor, zneplatni token.
+4. **Zachovej důkazy:** ulož relevantní logy, časy, změny konfigurace a komunikaci.
+5. **Sepiš dopad:** jaká data, kteří zákazníci, jak dlouho, jakým kanálem.
+6. **Rozhodni o komunikaci:** kdo musí vědět hned, kdo později a kdo vůbec ne.
+
+Používej jednu incident kartu. Ne deset vláken, pět dokumentů a soukromé poznámky, které po týdnu nikdo nenajde. Incident není brainstorming o brandingu. Incident je řízený provozní proces.
+
+### GD.2 Klasifikace šetří čas i nervy
+
+Ne každý problém má stejný dopad. Když všechno označíš jako kritické, tým vyhoří. Když všechno označíš jako drobnost, probudí tě realita a ta nemá snooze tlačítko.
+
+Jednoduché úrovně:
+
+- **Level 1 — provozní drobnost:** chyba bez dopadu na osobní nebo zákaznická data, například interní alert nebo krátký výpadek neklíčové části.
+- **Level 2 — omezený datový problém:** malý rozsah, jasně omezená skupina, data nebyla veřejně dostupná nebo šlo o nízké riziko.
+- **Level 3 — významný incident:** osobní nebo obchodní data byla dostupná neoprávněné osobě, rozsah je větší nebo nejistý.
+- **Level 4 — kritický incident:** citlivá data, aktivní zneužití, veřejná expozice, kompromitovaný účet s vysokým oprávněním nebo dopad na mnoho zákazníků.
+
+Ke každé úrovni si dopředu napiš, kdo musí být zapojen: vývoj, provoz, support, vedení, právník, DPO nebo externí bezpečnostní pomoc. Malý tým nemusí mít všechny role interně. Musí ale vědět, komu zavolat. „Někdo najde právníka“ není proces. To je loterie s kalendářem.
+
+### GD.3 Incident karta musí být faktická
+
+Incident karta není místo pro dojmy, vinu ani poetické interpretace logů. Piš fakta, nejistoty a rozhodnutí.
+
+Minimální pole:
+
+- čas prvního signálu,
+- kdo incident nahlásil nebo detekoval,
+- dotčený systém,
+- pravděpodobná příčina,
+- jaká data mohla být dotčena,
+- rozsah zákazníků nebo účtů,
+- čas začátku a konce expozice,
+- okamžitá mitigace,
+- otevřené nejistoty,
+- rozhodnutí o oznámení úřadu a zákazníkům,
+- vlastník dalšího kroku.
+
+U privacy-first provozu je důležitá i negativní evidence: co dotčeno nebylo. Pokud víš, že fakturační data nebyla v systému, který selhal, napiš to. Pokud to nevíš, napiš „neověřeno“ a přiřaď úkol. Nejhorší slovo v incidentu je „asi“.
+
+### GD.4 Komunikace má být rychlá, klidná a konkrétní
+
+Zákazník nepotřebuje román o interní architektuře. Potřebuje vědět, co se stalo, jaký to má dopad, co jste udělali, co má udělat on a kdy dostane další update.
+
+Dobrá incident komunikace obsahuje:
+
+- stručný popis události,
+- časové okno,
+- typ dotčených dat,
+- rozsah dopadu,
+- kroky, které tým už provedl,
+- doporučené kroky pro zákazníka,
+- kontakt pro dotazy,
+- čas další aktualizace.
+
+Nepoužívej věty typu „bereme bezpečnost velmi vážně“ jako náhradu za fakta. Všichni to píší, i firmy, které měly hesla v tabulce pojmenované `final_final_passwords.xlsx`. Důvěru buduje konkrétnost, ne korporátní kadidlo.
+
+### GD.5 Neopravuj incident tím, že zničíš důkazy
+
+Při incidentu je přirozené chtít všechno rychle smazat. Jenže některé důkazy budeš potřebovat pro analýzu, právní posouzení, auditní stopu nebo zákaznické vysvětlení.
+
+Bezpečný postup:
+
+- izoluj problémový systém místo slepého mazání,
+- udělej snapshot relevantní konfigurace a logů,
+- zneplatni tokeny a session, které mohly uniknout,
+- ulož časovou osu změn,
+- omez přístupy jen na incident tým,
+- označ důkazy retenční lhůtou a účelem,
+- po uzavření incidentu smaž pracovní kopie, které už nejsou potřeba.
+
+Pozor na citlivé důkazy. Pokud log obsahuje tokeny, osobní údaje nebo obsah zpráv, nesdílej ho do běžného chatu. Vytvoř redigovanou verzi pro širší tým a plnou verzi drž v omezeném úložišti. I řešení incidentu musí dodržovat minimalizaci dat. Ano, i když hoří. Hlavně když hoří.
+
+### GD.6 Oznámení neřeš na poslední chvíli
+
+GDPR pracuje s rizikem pro práva a svobody lidí. Ne každý bezpečnostní problém je automaticky oznamovaný datový breach, ale každý potenciální breach potřebuje posouzení. Článek 33 GDPR uvádí oznámení dozorovému úřadu bez zbytečného odkladu a pokud možno do 72 hodin od okamžiku, kdy se správce o porušení dozvěděl. Pokud je pravděpodobné vysoké riziko pro dotčené osoby, článek 34 řeší i informování těchto lidí.
+
+Prakticky si předem připrav:
+
+- kdo rozhoduje, jestli jde o porušení zabezpečení osobních údajů,
+- kdo připraví podklady pro úřad,
+- jak se počítá čas „dozvěděli jsme se“,
+- jaké informace musí být v oznámení,
+- kdo schvaluje zákaznickou komunikaci,
+- jak dokumentuješ i rozhodnutí neoznamovat.
+
+Neber to jako právní radu od chatbota s dobrým účesem v cloudu. Ber to jako provozní připomínku: měj proces a při reálném incidentu zapoj člověka, který zná právo a konkrétní kontext firmy.
+
+### GD.7 Postmortem má zlepšit systém, ne najít obětního beránka
+
+Po stabilizaci udělej krátké postmortem. Ne proto, aby někdo dostal nálepku „ten, co to pokazil“. Proto, aby se stejný problém nevrátil v jiném kostýmu.
+
+Struktura postmortem:
+
+1. Co se stalo.
+2. Jak jsme to zjistili.
+3. Jaký byl dopad.
+4. Co fungovalo dobře.
+5. Co nefungovalo.
+6. Jaké změny uděláme.
+7. Kdo vlastní nápravné kroky a do kdy.
+
+Nápravné kroky musí být konkrétní. „Zlepšíme monitoring“ není úkol. „Přidat alert na veřejně dostupné storage objekty do 14 dnů“ už úkol je. „Budeme opatrnější“ není bezpečnostní opatření. To je motivační plakát v kuchyňce.
+
+### GD.8 Šablona: incident karta
+
+```markdown
+## Incident: [název / ID]
+
+### Základ
+- Datum a čas prvního signálu:
+- Incident lead:
+- Dotčený systém:
+- Úroveň incidentu:
+- Stav:
+
+### Fakta
+- Co se stalo:
+- Jak jsme to zjistili:
+- Časové okno:
+- Dotčená data:
+- Dotčení zákazníci / účty:
+- Co zatím nevíme:
+
+### Mitigace
+- Okamžitý krok:
+- Zneplatněné přístupy / tokeny:
+- Izolované systémy:
+- Zachované důkazy:
+
+### Posouzení
+- Jde o porušení zabezpečení osobních údajů:
+- Riziko pro dotčené osoby:
+- Rozhodnutí o oznámení úřadu:
+- Rozhodnutí o komunikaci zákazníkům:
+- Kdo rozhodnutí schválil:
+
+### Komunikace
+- Interní update:
+- Zákaznický update:
+- Další update v:
+- Kontakt:
+
+### Náprava
+- Root cause:
+- Preventivní opatření:
+- Vlastník:
+- Termín:
+```
+
+### GD.9 Checklist: incident bez chaosu
+
+- [ ] Existuje incident lead a jasný komunikační kanál.
+- [ ] První hodina má scénář: potvrdit, zastavit šíření, zachovat důkazy, sepsat dopad.
+- [ ] Incidenty mají jednoduché úrovně dopadu a předem dané role.
+- [ ] Incident karta rozlišuje fakta, nejistoty a rozhodnutí.
+- [ ] Logy a důkazy se ukládají bezpečně, s omezeným přístupem a retenční lhůtou.
+- [ ] Tokeny, session, API klíče a integrační přístupy jde rychle zneplatnit.
+- [ ] Tým má připravený proces pro posouzení GDPR oznámení.
+- [ ] Zákaznická komunikace je konkrétní: co se stalo, dopad, kroky, další update.
+- [ ] Po incidentu vznikne postmortem s vlastníky a termíny nápravných kroků.
+- [ ] Po uzavření se smažou zbytečné pracovní kopie incidentních dat.
+
+### GD.10 Codyho komentář
+
+*Codyho komentář:* Incident response je jako hasicí přístroj. Není sexy, dokud ho nepotřebuješ. Pak najednou zjistíš, že „někde by měl být“ je mizerná strategie. Privacy-first firma se nepozná podle toho, že nikdy nezakopne. Pozná se podle toho, že když zakopne, nehodí přes data zákazníků deku a neřekne „to nic nebylo“.
+
+### GD.11 Zdroje k datovým incidentům a oznámení
+
+- GDPR článek 33 upravuje oznamování porušení zabezpečení osobních údajů dozorovému úřadu: https://eur-lex.europa.eu/eli/reg/2016/679/oj
+- GDPR článek 34 řeší informování subjektů údajů při vysokém riziku: https://eur-lex.europa.eu/eli/reg/2016/679/oj
+- ÚOOÚ má české informace a formuláře k ohlašování porušení zabezpečení osobních údajů: https://uoou.gov.cz/urad/formulare/ohlaseni-poruseni-zabezpeceni-osobnich-udaju
+- EDPB vydal vodítka k oznamování porušení zabezpečení osobních údajů podle GDPR: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-92022-personal-data-breach-notification-under_en
+- ENISA publikuje doporučení a metodiky k řízení kyberbezpečnostních incidentů: https://www.enisa.europa.eu/topics/incident-response
+
 ## Pracovní log
+
+- 2026-09-05 13:00 UTC — Doplněna příloha GD o datových incidentech bez chaosu: scénář první hodiny, klasifikace dopadu, incident karta, zákaznická komunikace, práce s důkazy, GDPR posouzení, postmortem, šablona, checklist a ověřené zdroje EU/ÚOOÚ/EDPB/ENISA.
 
 - 2026-09-05 12:00 UTC — Doplněna příloha GC o mazání účtu bez falešného tlačítka: rozdíl mezi zrušením, deaktivací a výmazem, export před odchodem, stavový model mazání, datová mapa, zákaznické potvrzení, testovací scénáře, šablona, checklist a ověřené zdroje EU/EDPB.
 
