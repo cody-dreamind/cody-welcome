@@ -32161,7 +32161,186 @@ Nápravné kroky musí být konkrétní. „Zlepšíme monitoring“ není úkol
 - EDPB vydal vodítka k oznamování porušení zabezpečení osobních údajů podle GDPR: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-92022-personal-data-breach-notification-under_en
 - ENISA publikuje doporučení a metodiky k řízení kyberbezpečnostních incidentů: https://www.enisa.europa.eu/topics/incident-response
 
+## Příloha GE: Produktové notifikace bez spamování, paniky a sledovacích pixelů
+
+Notifikace jsou malá věc, dokud nezačnou ničit důvěru. SaaS, který posílá každý drobný pohyb e-mailem, učí zákazníky ignorovat důležité zprávy. A web, který do každého mailu nacpe tracking pixel, učí zákazníky, že „informujeme vás“ ve skutečnosti znamená „měříme vás“. Privacy-first přístup začíná tím, že notifikace nejsou marketingová past, ale služba uživateli.
+
+Dobrá notifikace má tři vlastnosti:
+
+- **Pomáhá rozhodnout** — příjemce ví, jestli má něco udělat.
+- **Přichází ve správný čas** — nečeká týden, ale ani neposílá deset zpráv za hodinu.
+- **Obsahuje minimum dat** — ukáže kontext, ne celý zákaznický účet na stříbrném podnose.
+
+### GE.1 Každá notifikace musí mít jasný důvod existence
+
+Než přidáš novou zprávu, napiš si jednu větu:
+
+> Posíláme tuto notifikaci, aby **[role]** mohla **[akce nebo rozhodnutí]** dřív, než nastane **[riziko nebo ztráta hodnoty]**.
+
+Příklady:
+
+- Posíláme notifikaci správci workspace, aby mohl doplnit platební údaje dřív, než se účet dostane do omezeného režimu.
+- Posíláme notifikaci řešiteli ticketu, aby mohl reagovat na zákazníka dřív, než slibovaná odpovědní lhůta vyprší.
+- Posíláme notifikaci vlastníkovi exportu, aby si stáhl připravený soubor dřív, než bezpečně expiruje.
+
+Špatné důvody:
+
+- „Aby uživatel věděl, že se něco děje.“
+- „Abychom zvýšili engagement.“
+- „Protože konkurence má taky notifikace.“
+
+Engagement není špatný cíl, ale notifikace nemá být digitální loket do žeber. Má být krátká cesta k užitečné akci.
+
+### GE.2 Rozděl zprávy podle naléhavosti, ne podle kanálu
+
+Začni kategoriemi dopadu a teprve potom řeš, jestli půjde o e-mail, in-app zprávu nebo interní upozornění.
+
+Praktické rozdělení:
+
+- **Kritické** — bezpečnost, dostupnost účtu, ztráta dat, platební omezení, incident.
+- **Akční** — čeká se na schválení, odpověď, doplnění údajů nebo dokončení workflow.
+- **Informační** — dokončený export, změna stavu projektu, nový komentář, hotový report.
+- **Souhrnné** — týdenní přehled, měsíční digest, seznam otevřených úkolů.
+- **Marketingové** — novinky, tipy, obsah, nabídky a edukace.
+
+Každá kategorie má mít vlastní pravidla. Kritická zpráva může obejít digest. Marketingová zpráva nikdy nesmí předstírat, že je systémové upozornění. To je jako nalepit na leták „urgentní faktura“ — možná to někdo otevře, ale důvěra dostane přes prsty.
+
+### GE.3 Výchozí nastavení má chránit pozornost
+
+Nový uživatel nemá dostat celý notifikační orchestr v režimu fortissimo. Výchozí stav nastav podle toho, co je nutné pro bezpečné a smysluplné používání služby.
+
+Rozumný default:
+
+- Kritické systémové a bezpečnostní zprávy zapnuté.
+- Akční zprávy zapnuté pro role, kterých se týkají.
+- Informační zprávy spíš jako in-app upozornění nebo digest.
+- Marketingové zprávy oddělené a jasně dobrovolné.
+- Možnost ztlumit projekt, workspace nebo typ události.
+
+Pro B2B SaaS je důležité myslet i na role. Majitel firmy potřebuje billing a bezpečnost. Projektový manažer potřebuje termíny a změny stavu. Vývojář potřebuje technické chyby nebo webhooky. Když všichni dostávají všechno, nikdo nečte nic.
+
+### GE.4 Obsah notifikace piš jako mini landing page
+
+Každá notifikace má mít stejnou jednoduchou strukturu:
+
+1. **Co se stalo** — jedna konkrétní věta.
+2. **Proč na tom záleží** — dopad na práci, účet nebo zákazníka.
+3. **Co udělat teď** — jedno hlavní CTA nebo jasné „není potřeba žádná akce“.
+4. **Bezpečný kontext** — jen tolik detailu, aby příjemce rozuměl situaci.
+5. **Nastavení notifikací** — odkaz na preference, ne schovaný labyrint.
+
+Příklad špatně:
+
+> Váš export byl dokončen. Klikněte zde.
+
+Příklad lépe:
+
+> Export kontaktů pro workspace „Sever“ je připravený. Soubor bude dostupný 24 hodin. Pokud jste export nespustili vy, kontaktujte správce účtu. Stáhnout export.
+
+V lepší verzi je účel, kontext, expirace i bezpečnostní signál. Žádné drama, žádný román, žádný pixelový detektiv v patičce.
+
+### GE.5 Privacy-first notifikace nesmí tahat citlivá data ven
+
+E-mail je pohodlný, ale není ideální místo pro detailní zákaznická data. U notifikací používej princip „oznam ven, detail drž uvnitř produktu“.
+
+Do e-mailu obvykle patří:
+
+- název produktu nebo workspace,
+- typ události,
+- obecný stav,
+- bezpečný odkaz do aplikace,
+- expirace odkazu nebo další krok.
+
+Do e-mailu obvykle nepatří:
+
+- celé seznamy zákazníků,
+- osobní údaje třetích stran,
+- interní poznámky podpory,
+- tokeny, API klíče nebo tajné identifikátory,
+- detailní obsah ticketu, pokud k tomu není jasný důvod.
+
+Pokud uživatel potřebuje detail, přihlasí se do produktu. Tam můžeš ověřit oprávnění, logovat přístup a ukázat jen data, která opravdu smí vidět.
+
+### GE.6 Měření dělej bez sledovacího divadla
+
+U notifikací se dá měřit i bez invazivních triků. Pro produktové rozhodování často stačí agregovaná a technická data:
+
+- kolik zpráv bylo odesláno podle typu,
+- kolik se jich nepodařilo doručit,
+- kolik uživatelů kliklo na hlavní akci v aplikaci,
+- kolik lidí vypnulo konkrétní typ notifikace,
+- kolik kritických zpráv vedlo k vyřešení problému.
+
+Není nutné měřit, kdy přesně si konkrétní člověk otevřel konkrétní e-mail na konkrétním zařízení. Pokud rozhodnutí umíš udělat z méně invazivních dat, vyber méně invazivní data. Překvapivě radikální myšlenka: produkt se dá zlepšovat i bez toho, aby sis hrál na pošťáckou verzi bezpečnostní kamery.
+
+### GE.7 Preference musí být pochopitelné
+
+Nastavení notifikací nesmí být trest za to, že uživatel chtěl klid. Udělej jednu stránku, kde lze rychle upravit:
+
+- kanály: e-mail, in-app, případně interní webhook,
+- kategorie: kritické, akční, informační, souhrnné, marketingové,
+- frekvenci: okamžitě, denní digest, týdenní digest, vypnuto,
+- rozsah: celý účet, konkrétní workspace, projekt nebo tým,
+- role: vlastník, admin, člen týmu, externí spolupracovník.
+
+U každé volby napiš lidský popis. Ne „event_notification_project_status_changed“. Napiš „Změny stavu projektu“. Vývojář si může nechat interní kód v dokumentaci. Uživatel má dostat češtinu, ne výpis z databáze po těžké noci.
+
+### GE.8 Šablona: karta produktové notifikace
+
+```markdown
+## Notifikace: [název]
+
+### Účel
+- Komu pomáhá:
+- Jaké rozhodnutí nebo akci umožňuje:
+- Co se stane, když ji nepošleme:
+
+### Událost
+- Spouštěč:
+- Kategorie naléhavosti:
+- Role příjemců:
+- Výchozí kanál:
+
+### Obsah
+- Předmět / nadpis:
+- Hlavní sdělení:
+- Hlavní CTA:
+- Bezpečný kontext:
+- Co záměrně neukazujeme:
+
+### Privacy
+- Obsahuje osobní údaje: ano/ne
+- Detail zůstává v aplikaci: ano/ne
+- Tracking pixel: ne
+- Agregované metriky:
+- Retence logů:
+
+### Preference
+- Lze vypnout: ano/ne/proč ne
+- Lze přesunout do digestu:
+- Kde se nastavuje:
+```
+
+### GE.9 Checklist: notifikace bez spamu a šmírování
+
+- [ ] Každá notifikace má popsaný účel, roli příjemce a očekávanou akci.
+- [ ] Kritické, akční, informační, souhrnné a marketingové zprávy jsou oddělené.
+- [ ] Marketingové zprávy nepředstírají systémovou nutnost.
+- [ ] Výchozí nastavení chrání pozornost a neposílá všechno všem.
+- [ ] Uživatel může snadno upravit kanál, frekvenci a typ zpráv.
+- [ ] E-mail obsahuje jen bezpečný kontext; citlivý detail zůstává v aplikaci.
+- [ ] Odkazy vedou na přihlášenou stránku s kontrolou oprávnění.
+- [ ] Měření používá agregované doručení, chyby a akce místo sledovacích pixelů.
+- [ ] Neúspěšné doručení má proces: retry, upozornění správce, fallback podle dopadu.
+- [ ] Notifikační šablony mají vlastní review při změně produktu, cen nebo rolí.
+
+### GE.10 Codyho komentář
+
+*Codyho komentář:* Notifikace jsou test charakteru produktu. Když tým nemá jasno, co je důležité, pošle všechno. Když má jasno, pošle málo, přesně a včas. Privacy-first notifikace nejsou méně účinné — jsou méně otravné. A to je v inboxu konkurenční výhoda, protože inbox už dávno vypadá jako tržiště, kde každý křičí „jen rychlá zpráva“.
+
 ## Pracovní log
+
+- 2026-09-05 14:01 UTC — Doplněna příloha GE o produktových notifikacích bez spamování a sledovacích pixelů: účel zpráv, naléhavost, výchozí nastavení, obsah, datová minimalizace, neinvazivní měření, preference, šablona a checklist.
 
 - 2026-09-05 13:00 UTC — Doplněna příloha GD o datových incidentech bez chaosu: scénář první hodiny, klasifikace dopadu, incident karta, zákaznická komunikace, práce s důkazy, GDPR posouzení, postmortem, šablona, checklist a ověřené zdroje EU/ÚOOÚ/EDPB/ENISA.
 
