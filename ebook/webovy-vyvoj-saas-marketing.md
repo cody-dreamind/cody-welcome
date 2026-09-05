@@ -31301,7 +31301,181 @@ Support access je test firemní kultury. Když je produkt malý, všichni se zna
 - [NIST SP 800-63B Digital Identity Guidelines](https://pages.nist.gov/800-63-4/sp800-63b.html) — aktuální vodítka k autentizaci, autentizátorům a správě identity.
 - [GDPR, článek 32 na EUR-Lex](https://eur-lex.europa.eu/eli/reg/2016/679/oj) — bezpečnost zpracování a přiměřená technická a organizační opatření.
 
+## Příloha FZ: Export dat a offboarding bez rukojmí v zákaznickém účtu
+
+Každý SaaS rád mluví o onboardingu. Méně rád mluví o odchodu. Přitom právě offboarding často ukáže, jestli je produkt férový partner, nebo digitální hotel California: přihlásit se můžeš kdykoli, odejít už trochu hůř. Privacy-first SaaS má zákazníkovi umožnit odejít důstojně, bezpečně a s rozumným exportem vlastních dat.
+
+Export dat není jen právní pojistka. Je to produktový slib. Zákazník ví, že se nezamyká do černé krabice. Obchodník nemusí mlžit, co se stane při ukončení spolupráce. Support neřeší chaotické SQL dumpy přes chat. A tým má menší riziko, že při odchodu zákazníka udělá přesně tu nejhorší věc: pošle moc dat, špatným kanálem a bez auditní stopy.
+
+### FZ.1 Offboarding navrhuj už při onboardingu
+
+Nejlepší export je ten, který nemusíš vymýšlet ve chvíli, kdy zákazník zrovna ruší účet. Už při návrhu datového modelu si polož otázky:
+
+- **Která data patří zákazníkovi?** Typicky vlastní obsah, kontakty, dokumenty, záznamy, nastavení, historie objednávek, projektové položky nebo konfigurační pravidla.
+- **Která data jsou provozní metadata?** Například auditní stopy, fakturační události, technické logy, bezpečnostní signály a interní poznámky podpory.
+- **Která data nemají odejít v surové podobě?** Například údaje jiných zákazníků, systémová tajemství, interní skóre, bezpečnostní indikátory nebo data, která by porušila práva dalších osob.
+- **Která data musí jít smazat odděleně od exportu?** Export a výmaz nejsou totéž. Zákazník může chtít kopii dat, ale některé záznamy můžeš kvůli účetnictví, bezpečnosti nebo právní obraně držet dál podle vlastních retenčních pravidel.
+
+Praktická věta do produktového zadání: „U každého nového objektu rozhodneme, zda je exportovatelný, mazatelný, auditovaný a komu patří.“ Zní to nudně. Výborně. Nudné datové vlastnictví je mnohem levnější než dramatická páteční migrace s ručním exportem.
+
+### FZ.2 Export nesmí být databázový vývrh
+
+Zákazník nechce databázový dump. Chce data, kterým rozumí a která může použít. Rozliš tři vrstvy exportu:
+
+- **Lidský export:** CSV, JSON, PDF nebo ZIP s čitelnou strukturou, popisem polí a datem vytvoření.
+- **Technický export:** strukturovaný JSON nebo NDJSON pro migraci do jiného systému, ideálně s verzí schématu.
+- **Regulatorní / důkazní export:** vybrané záznamy, které zákazník potřebuje pro audit, účetnictví nebo interní kontrolu.
+
+Minimum pro malý SaaS je jednoduchý ZIP: složky podle typů dat, `README.md` s vysvětlením struktury, `manifest.json` se seznamem souborů, časem exportu, ID organizace a verzí exportního formátu. Pokud export obsahuje CSV, přidej hlavičky sloupců, kódování UTF-8 a stabilní oddělovač. Pokud obsahuje JSON, nepoužívej interní názvy jako `usr_fk_legacy2`, pokud existuje lidsky pochopitelnější varianta. Databáze má právo být ošklivá. Export ne.
+
+Příklad struktury:
+
+```text
+export-acme-2026-09-05/
+  README.md
+  manifest.json
+  users.csv
+  projects.csv
+  documents/
+    document-123.md
+    document-124.md
+  audit-summary.csv
+```
+
+Do `README.md` napiš také omezení: co export obsahuje, co neobsahuje, jak dlouho je odkaz platný a koho kontaktovat při problému. Když zákazník musí hádat, co přesně dostal, export není hotový. Je to jen komprimovaný chaos.
+
+### FZ.3 Přenositelnost dat ber jako minimální důstojnost
+
+GDPR v článku 20 řeší právo na přenositelnost údajů u osobních údajů, které subjekt údajů poskytl správci, pokud jsou splněné podmínky stanovené nařízením. Pro SaaS je důležité nepřekládat si to jako „někdy možná pošleme něco e-mailem“. Prakticky to znamená, že u relevantních osobních údajů máš přemýšlet o strukturovaném, běžně používaném a strojově čitelném formátu.
+
+I když konkrétní zákaznický export často obsahuje směs osobních údajů, obchodních dat a technických metadat, dobré produktové pravidlo je jednoduché: co zákazník do systému vložil a co potřebuje pro pokračování své práce, má být možné rozumně získat ven. Ne proto, že tě někdo nutí vyplnit tabulku. Protože férový produkt nepotřebuje držet zákazníka násilím.
+
+Pozor na hranice. Přenositelnost neznamená automaticky vydat interní know-how, bezpečnostní logy, modelové váhy, tajné klíče, data jiných zákazníků nebo celé interní schéma systému. Znamená to navrhnout export tak, aby zákazník získal svá použitelná data a zároveň se nerozbila bezpečnost ani soukromí dalších lidí.
+
+### FZ.4 Exportní žádost je bezpečnostní operace
+
+Export může být největší únikový kanál v produktu. Proto ho navrhuj podobně pečlivě jako změnu hesla nebo vyplacení peněz.
+
+Dobré bezpečnostní minimum:
+
+- **Autorizace na straně serveru:** nestačí skrýt tlačítko v UI. Každý exportní požadavek musí ověřit, že uživatel smí exportovat danou organizaci nebo projekt.
+- **Potvrzení citlivé akce:** u většího exportu vyžaduj znovu ověření identity, MFA nebo alespoň potvrzení přes přihlášenou session podle rizika.
+- **Auditní záznam:** loguj kdo export spustil, jaký rozsah, kdy, odkud a jak dlouho byl odkaz dostupný.
+- **Krátká platnost odkazu:** exportní URL má expirovat. Ne má žít věčně v e-mailu jako malý datový upír.
+- **Omezený přístup:** odkaz má být vázaný na přihlášeného uživatele nebo jednorázový token s krátkou expirací. Veřejný odkaz bez kontroly je pozvánka na incident.
+- **Šifrování a bezpečný přenos:** export ukládej a posílej jen přes šifrovaný kanál, nepřikládej velké balíky dat do běžných chatů.
+
+U B2B SaaS přidej ještě schvalovací pravidlo: běžný člen týmu může exportovat vlastní položky, ale celý workspace exportuje pouze vlastník nebo administrátor. Pokud má zákazník více rolí, export je přesně ten typ akce, kde se špatná role rychle změní v drahý problém.
+
+### FZ.5 Offboarding musí mít časovou osu
+
+Odchod zákazníka není jedno tlačítko. Je to krátký proces se stavem. Navrhni ho jako jasnou časovou osu:
+
+1. **Zákazník požádá o ukončení nebo export.** Produkt vysvětlí, co se stane dál.
+2. **Systém nabídne export dostupných dat.** Ideálně ještě před finálním smazáním účtu.
+3. **Zákazník potvrdí rozsah.** Celý workspace, vybrané projekty, faktury, dokumenty, auditní souhrn.
+4. **Export se připraví asynchronně.** U větších účtů nezamykáš UI čekáním na request, který spadne po třiceti sekundách a odnese s sebou tvou duši.
+5. **Export je dostupný omezenou dobu.** Například několik dní podle rizika a velikosti dat.
+6. **Po ukončení běží retenční pravidla.** Některá data se mažou hned, některá po ochranné lhůtě, některá se drží kvůli zákonné povinnosti nebo bezpečnosti.
+7. **Zákazník dostane potvrzení.** Co bylo exportováno, co bylo smazáno, co se drží a proč.
+
+Tahle osa patří do help centra i interního playbooku. Support pak nemusí improvizovat. Zákazník ví, že se s jeho daty neděje rituál v mlze.
+
+### FZ.6 Retence po odchodu musí být konkrétní, ne „uvidíme“
+
+Privacy-first provoz neznamená mazat všechno okamžitě a pak litovat. Znamená vědět, proč data držíš, jak dlouho, kdo k nim má přístup a kdy zmizí. Pro offboarding si rozděl data na vrstvy:
+
+- **Okamžitě mazatelná data:** pracovní obsah, který zákazník sám odstranil nebo který už nemá účel.
+- **Krátká ochranná lhůta:** zálohy, fronty, dočasné soubory a cache, které se vyčistí podle technického cyklu.
+- **Smluvní a účetní data:** faktury, objednávky, smlouvy a platební metadata podle relevantních povinností.
+- **Bezpečnostní data:** omezené auditní záznamy nutné pro vyšetření incidentů, ochranu služby nebo řešení sporů.
+- **Anonymizované agregace:** statistiky bez identifikace zákazníka, pokud je opravdu nepotřebuješ spojovat zpět s konkrétním účtem.
+
+Do produktu nepiš „data můžeme uchovávat po přiměřenou dobu“ jako univerzální kouzlo. Interně měj tabulku s konkrétními kategoriemi, účelem a lhůtou. Veřejně zákazníkovi vysvětli principy srozumitelně. Právník ocení přesnost. Zákazník ocení, že to nezní jako kouřová clona.
+
+### FZ.7 Export testuj jako obnovu ze zálohy
+
+Export, který nikdo nikdy nezkusil importovat, je přání. Ne funkce. Jednou za měsíc nebo po větší změně datového modelu proveď export testovacího workspace a polož si otázky:
+
+- Dá se ZIP otevřít běžnými nástroji?
+- Sedí `manifest.json` se skutečnými soubory?
+- Jsou CSV validní, čitelné a ve správném kódování?
+- Neobsahuje export data jiné organizace?
+- Neobsahuje tajné klíče, interní poznámky nebo skrytá metadata?
+- Umí člověk z `README.md` pochopit, co dostal?
+- Umí technický partner napsat jednoduchý import bez reverzního inženýrství?
+
+Tento test dej do stejné kategorie jako restore drill záloh. Záloha je o přežití provozu. Export je o přežití důvěry.
+
+### FZ.8 Šablona: karta exportu dat
+
+Použij ji pro návrh funkce, review existujícího exportu nebo interní audit před větším zákaznickým offboardingem.
+
+## Export dat: [produkt / workspace]
+
+### Účel
+
+- Pro koho export existuje:
+- Jaké rozhodnutí nebo potřebu řeší:
+- Kdy se typicky spouští:
+
+### Rozsah dat
+
+- Exportované objekty:
+- Vyloučené objekty:
+- Osobní údaje v exportu:
+- Data jiných subjektů, která je nutné chránit:
+
+### Formát
+
+- Typ balíčku: ZIP / CSV / JSON / PDF / API
+- Verze exportního schématu:
+- Dokumentace polí:
+- Test importu nebo otevření:
+
+### Bezpečnost
+
+- Kdo smí export spustit:
+- Jak se ověřuje identita:
+- Jak dlouho platí odkaz:
+- Kde se export dočasně ukládá:
+- Co se loguje:
+
+### Retence a ukončení
+
+- Jak dlouho se export drží:
+- Co se maže po ukončení účtu:
+- Co se drží kvůli povinnostem nebo bezpečnosti:
+- Jak zákazník dostane potvrzení:
+
+### FZ.9 Checklist: export bez vendor lock-in pachu
+
+- [ ] Má každý hlavní zákaznický objekt rozhodnuté, zda je exportovatelný?
+- [ ] Obsahuje export lidsky čitelný popis struktury a polí?
+- [ ] Má export stabilní formát a verzované schéma?
+- [ ] Ověřuje export autorizaci na straně serveru pro konkrétní organizaci nebo projekt?
+- [ ] Má citlivý export potvrzení identity, MFA nebo jiné rizikové opatření?
+- [ ] Expirují exportní odkazy automaticky?
+- [ ] Logujeme spuštění, rozsah, stažení a expiraci exportu?
+- [ ] Testujeme, že export neobsahuje cizí data, secrety ani interní poznámky?
+- [ ] Má offboarding jasnou časovou osu od žádosti po potvrzení?
+- [ ] Máme konkrétní retenční pravidla pro data po ukončení účtu?
+
+### FZ.10 Codyho komentář
+
+Vendor lock-in je jako špatný vztah s fakturací. Chvíli vypadá výhodně, protože zákazník nemůže odejít. Pak ale zjistíš, že zůstává ze strachu, ne z lásky, a přesně tak o tobě mluví na trhu. Férový export je paradoxně prodejní argument: „Když budete chtít odejít, půjde to.“ Sebevědomý SaaS ví, že zákazníka si má udržet hodnotou, ne pouty z CSV pekla.
+
+### FZ.11 Zdroje k exportu dat, přenositelnosti a bezpečnému offboardingu
+
+- [GDPR, článek 20 na EUR-Lex](https://eur-lex.europa.eu/eli/reg/2016/679/oj) — právní základ práva na přenositelnost osobních údajů a požadavek na strukturovaný, běžně používaný a strojově čitelný formát za podmínek uvedených v nařízení.
+- [European Data Protection Board: Guidelines on the right to data portability](https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-right-data-portability-under-regulation-2016679_en) — výklad k rozsahu, formátům a praktickým hranicím přenositelnosti osobních údajů.
+- [European Commission: GDPR rules for businesses](https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations_en) — přehled povinností organizací při zpracování osobních údajů a práv subjektů údajů.
+- [OWASP Authorization Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html) — doporučení pro kontrolu oprávnění na straně serveru, princip nejmenších oprávnění a deny-by-default přístup.
+- [OWASP Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html) — praktické vodítko pro bezpečné logování událostí, citlivost dat v logách a auditní použitelnost.
+
 ## Pracovní log
+- 2026-09-05 09:01 UTC — Doplněna příloha FZ o exportu dat a offboardingu: datové vlastnictví už při návrhu, lidsky použitelný ZIP/CSV/JSON export, přenositelnost podle GDPR, bezpečnost exportních žádostí, časová osa odchodu, retence po ukončení, testování exportu, šablona karty, checklist a ověřené zdroje EDPB/EU/OWASP.
+
 - 2026-09-05 08:01 UTC — Doplněna příloha FY o support access bez zvědavosti: zákaz sdílení hesel, zákazníkem schvalované dočasné přístupy, rozsah a expirace session, maskování dat, break-glass režim, zákaznická auditní stopa, šablona support session, checklist a ověřené zdroje OWASP/NIST/GDPR.
 
 - 2026-09-05 07:02 UTC — Doplněna příloha FX o interní administraci SaaS: mapa rizikových admin akcí, role podle práce týmu, záměr u citlivých zásahů, pravidla impersonace, minimalizace zobrazených dat, expirace výjimek, testování adminu, šablona karty, checklist a ověřené zdroje OWASP/NIST/GDPR.
