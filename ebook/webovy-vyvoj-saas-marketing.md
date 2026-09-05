@@ -29896,7 +29896,204 @@ První incident není ostuda. Ostuda je tvářit se, že se nic nestalo, zatímc
 - EDPB — Guidelines 9/2022 on personal data breach notification under GDPR: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-92022-personal-data-breach-notification-under_en
 - ENISA — Incident handling and response resources: https://www.enisa.europa.eu/topics/incident-response
 
+## Příloha FR: Post-incident review, které skutečně zlepší produkt
+
+Incident skončil, služba běží a tým má chuť hlavně zavřít notebook. Chápu. Ale právě teď vzniká rozdíl mezi firmou, která se jen oklepe, a firmou, která se po každém problému stane o chlup odolnější. Post-incident review není soudní proces. Je to servisní prohlídka po nárazu do patníku: zjistíš, co povolilo, co drželo a co příště upravit, aby se z drobné chyby nestal festival chaosu s občerstvením.
+
+Cíl review je jednoduchý: převést incident na několik konkrétních změn v produktu, provozu, dokumentaci a komunikaci. Ne deset neurčitých předsevzetí. Dvě až pět věcí, které mají vlastníka, termín a jasný důvod.
+
+### FR.1 Review začni časovou osou, ne viníkem
+
+První část post-incident review má být rekonstrukce reality. Ne interpretace, ne emoce, ne „kdyby někdo býval“. Jen časová osa.
+
+Zapiš:
+
+- kdy vznikl první signál,
+- kdo ho zachytil a kde,
+- kdy byl incident potvrzen,
+- jaké mitigace proběhly,
+- kdy a komu se komunikovalo,
+- kdy byl dopad zastaven,
+- kdy byla služba obnovena,
+- kdy se dočasná opatření odstranila nebo převedla do standardního provozu.
+
+Praktický příklad:
+
+```text
+09:12 — monitoring hlásí nárůst chyb při importu kontaktů.
+09:17 — support potvrzuje první zákaznické hlášení.
+09:23 — incident označen jako SEV 2, vlastník Jana.
+09:31 — vypnut nový importní validátor přes feature flag.
+09:42 — zákazníkům poslán první update.
+10:08 — chybovost importu zpět na normálu.
+10:35 — vytvořen ticket na opravu testovací mezery.
+```
+
+Časová osa pomáhá týmu mluvit o stejném incidentu. Bez ní každý drží v hlavě jiný film a všichni se diví, proč se neshodnou na konci.
+
+### FR.2 Hledej přispívající faktory, ne jednu magickou příčinu
+
+„Root cause“ zní krásně, ale u malých SaaS incidentů bývá často zavádějící. Jeden bug spustí problém, ale dopad zvětší kombinace věcí: chybějící test, tichý alert, nejasný rollback, ruční import, nedokumentovaný zákaznický edge case nebo integrace, která v pátek večer změnila chování. Proto se ptej na přispívající faktory.
+
+U každé vrstvy si polož otázku:
+
+- **Produkt:** dovolil produkt rizikovou akci bez kontroly nebo náhledu?
+- **Kód:** existoval test pro běžný i hraniční scénář?
+- **Data:** mohla chyba poškodit, zamíchat nebo znečitelnit zákaznická data?
+- **Provoz:** zachytil monitoring zákaznický dopad, nebo jen technický symptom?
+- **Proces:** věděl tým, kdo rozhoduje o rollbacku a komunikaci?
+- **Komunikace:** dostal zákazník užitečné informace včas?
+
+Výsledkem nemá být věta „příčinou byla chyba ve validátoru“. Lepší závěr zní:
+
+> Incident spustila chyba ve validátoru importu. Dopad zvětšilo to, že nový validátor nebyl nasazen přes pilotní účet, alert měřil jen technickou chybu a ne počet nedokončených importů, a rollback postup nebyl v runbooku.
+
+Tohle už se dá opravit. Viník se brání. Systém se zlepšuje.
+
+### FR.3 Každé opatření musí změnit budoucí chování
+
+Slabé opatření je „budeme dávat větší pozor“. To je hezké, ale jako bezpečnostní mechanismus asi stejně pevné jako papírový zámek na datacentru. Dobré opatření změní výchozí chování systému nebo týmu.
+
+Příklady dobrých opatření:
+
+- přidat integrační test pro import s nevalidními řádky,
+- zavést feature flag pro nové importní validátory,
+- přidat alert na počet nedokončených importů za deset minut,
+- doplnit runbook pro rollback importní pipeline,
+- upravit UI tak, aby před ostrým importem ukázalo náhled změn,
+- přidat retenční pravidlo pro diagnostické exporty vytvořené během incidentu.
+
+Každé opatření napiš ve formátu:
+
+```text
+Změníme [část systému/procesu], aby [budoucí riziko] mělo [menší dopad / rychlejší detekci / jasnější reakci]. Vlastník: [jméno]. Termín: [datum]. Ověření: [jak poznáme, že je hotovo].
+```
+
+Příklad:
+
+> Přidáme alert na nedokončené importy, aby chyba v importní pipeline byla vidět podle zákaznického dopadu, ne až podle support ticketu. Vlastník: Petr. Termín: 2026-09-12. Ověření: testovací import vyvolá alert v provozním kanálu.
+
+### FR.4 Privacy-first review kontroluje i vedlejší stopy
+
+Incident často vytvoří dočasná data: exporty, logy, screenshoty, záznamy obrazovky, kopie payloadů, debug tabulky, sdílené odkazy a interní poznámky. Tyhle stopy jsou užitečné při vyšetření, ale po incidentu se z nich snadno stane nehlídaný sklad citlivých detailů.
+
+Do review proto přidej privacy blok:
+
+- Jaká diagnostická data vznikla během incidentu?
+- Obsahují osobní údaje, zákaznická data, tajemství nebo interní identifikátory?
+- Kde jsou uložená a kdo k nim má přístup?
+- Jak dlouho je opravdu potřebujeme?
+- Co se smaže, anonymizuje nebo přesune do standardního auditního úložiště?
+- Musíme aktualizovat datový katalog, retenční kartu nebo zákaznickou dokumentaci?
+
+Privacy-first hodnota se pozná hlavně po stresu. Když je všechno v klidu, minimalizaci slíbí každý. Když hoří produkce, dobrý tým stále ví, že debug export v osobním cloudu není „rychlé řešení“, ale budoucí průšvih s lepším načasováním.
+
+### FR.5 Výstup review rozděl na čtyři fronty
+
+Aby review nezůstalo jako dlouhý dokument, rozděl výstupy podle typu práce:
+
+- **Hned:** malé kroky do 24 hodin, které snižují opakování stejného problému.
+- **Sprint:** produktové nebo technické úpravy do nejbližšího plánování.
+- **Proces:** změny v runbooku, rolích, komunikaci nebo alertingu.
+- **Později / vědomě ne:** nápady, které jsou užitečné, ale nejsou přiměřené riziku.
+
+Tahle poslední kategorie je důležitá. Po incidentu vzniká chuť přidat ochrany úplně všude. Jenže malý tým musí hlídat přiměřenost. Někdy stačí lepší alert a rollback. Jindy je potřeba redesign workflow. Rozdíl poznáš podle dopadu, pravděpodobnosti a ceny prevence.
+
+*Codyho komentář:* Bez kategorie „vědomě ne“ skončí každý incident jako výmluva pro další interní proces. A pak máš sice méně bugů, ale taky méně produktu. Gratuluju, postavil jsi compliance muzeum.
+
+### FR.6 Sdílej ponaučení tak, aby posílilo důvěru
+
+Ne každé post-incident review patří veřejně celé ven. Ale zákazník by měl dostat srozumitelné uzavření, pokud se ho incident dotkl. Krátký follow-up může obsahovat:
+
+- co se stalo,
+- jaký byl skutečný dopad,
+- jestli byla dotčená data,
+- co bylo opraveno,
+- jaká prevence se zavádí,
+- kde najde další informace nebo koho kontaktovat.
+
+Příklad:
+
+```text
+Incident s importem kontaktů jsme uzavřeli. Dopad se týkal 3 importů mezi 09:20 a 10:08; existující kontakty nebyly změněny. Příčinou byla chyba v novém validátoru, který jsme vypnuli a opravili. Přidali jsme test pro částečně nevalidní soubory, alert na nedokončené importy a aktualizovali rollback runbook. Diagnostické exporty vytvořené během řešení budou smazány podle incidentní retenční karty do 7 dnů.
+```
+
+Tohle není přiznání slabosti. Je to důkaz dospělosti. Zákazník nepotřebuje dokonalého dodavatele. Potřebuje dodavatele, který nezmizí, když se něco pokazí.
+
+### FR.7 Šablona: post-incident review karta
+
+## Post-incident review: [název incidentu]
+
+### Shrnutí
+
+- Datum a čas incidentu:
+- Zákaznický dopad:
+- Dotčené funkce:
+- Dotčená data:
+- Stav: uzavřeno / sledováno / čeká na prevenci
+
+### Časová osa
+
+- První signál:
+- Potvrzení incidentu:
+- První mitigace:
+- První komunikace:
+- Obnovení služby:
+- Uzavření:
+
+### Přispívající faktory
+
+- Produkt:
+- Kód:
+- Data:
+- Monitoring:
+- Proces:
+- Komunikace:
+
+### Opatření
+
+- Opatření 1:
+- Vlastník:
+- Termín:
+- Ověření:
+
+### Privacy blok
+
+- Dočasná diagnostická data:
+- Přístupy:
+- Retence:
+- Mazání/anonymizace:
+- Aktualizace dokumentace:
+
+### Zákaznické uzavření
+
+- Komu poslat:
+- Kanál:
+- Hlavní sdělení:
+- Termín:
+
+### FR.8 Checklist: review bez alibi a bez datového nepořádku
+
+- [ ] Časová osa popisuje fakta, ne dojmy.
+- [ ] Review hledá přispívající faktory napříč produktem, kódem, daty, provozem a komunikací.
+- [ ] Každé opatření má vlastníka, termín a způsob ověření.
+- [ ] Opatření mění budoucí chování systému nebo týmu, ne jen slibuje větší opatrnost.
+- [ ] Dočasná diagnostická data mají retenční pravidlo a vlastníka.
+- [ ] Zákazník dostane stručné uzavření, pokud se ho incident dotkl.
+- [ ] Poučení se přepíše do runbooku, testu, alertu nebo produktového backlogu.
+- [ ] Tým vědomě označil, které nápady teď nedělá a proč.
+
+### FR.9 Zdroje k post-incident review a provoznímu zlepšování
+
+- NIST — Cybersecurity Framework 2.0: https://www.nist.gov/cyberframework
+- CISA — Federal Government Cybersecurity Incident and Vulnerability Response Playbooks: https://www.cisa.gov/resources-tools/resources/federal-government-cybersecurity-incident-and-vulnerability-response-playbooks
+- ENISA — Incident handling and response resources: https://www.enisa.europa.eu/topics/incident-response
+- Atlassian — Incident postmortem guide: https://www.atlassian.com/incident-management/postmortem
+
+
 ## Pracovní log
+
+- 2026-09-05 01:00 UTC — Doplněna příloha FR o post-incident review: časová osa bez hledání viníka, přispívající faktory, opatření měnící budoucí chování, privacy-first úklid diagnostických dat, zákaznické uzavření, šablona karty, checklist a zdroje k incident review.
 
 - 2026-09-05 00:02 UTC — Doplněna příloha FQ o prvním produkčním incidentu: třídění podle zákaznického dopadu, prvních patnáct minut reakce, privacy-first triage dat, srozumitelná komunikace, oddělení mitigace od prevence, ochrana diagnostických dat, incident karta, checklist a odkazy na GDPR/EDPB/ENISA zdroje.
 
