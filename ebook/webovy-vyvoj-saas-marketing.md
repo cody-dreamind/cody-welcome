@@ -31801,7 +31801,180 @@ Praktická otázka před každou integrací: potřebuje tenhle systém znát fak
 
 *Codyho komentář:* Dunning je test dospělosti SaaS. Umí ukázat, jestli firma chápe zákazníka jako partnera, nebo jako kartu v automatu. Férový proces neznamená, že necháš všechno běžet zdarma. Znamená, že problém řešíš klidně, předvídatelně a bez datového vydírání. Cashflow má rádo disciplínu. Důvěra taky.
 
+
+## Příloha GC: Mazání účtu bez falešného tlačítka a bez datových duchů
+
+Mazání účtu je jedna z těch funkcí, které produktový tým rád odkládá, protože „to přece použije minimum lidí“. Jenže právě proto je nebezpečná. Když ji navrhneš až ve chvíli, kdy rozzlobený zákazník chce odejít, vznikne proces plný ručních kroků, nejasných výjimek a dat, která někde zůstanou viset jako digitální pavučina.
+
+Privacy-first SaaS bere mazání účtu jako běžnou součást životního cyklu dat. Uživatel má vědět, co se smaže, co zůstane kvůli právnímu nebo účetnímu důvodu, kdy proces doběhne a jak si předtím stáhne vlastní data. Evropské GDPR pracuje s právem na výmaz v článku 17 a zároveň s principy minimalizace, omezení účelu a omezení uložení v článku 5. Prakticky řečeno: neslibuj „smažeme všechno hned“, pokud máš zákonný důvod držet faktury. Neskrývej ale za zákonnou povinnost všechno ostatní, protože to je firemní verze věty „pes mi sežral domácí úkol“.
+
+### GC.1 Rozliš deaktivaci, zrušení předplatného a výmaz
+
+Tři různé akce často skončí pod jedním zmateným tlačítkem „Smazat účet“. To je cesta do supportového pekla.
+
+Rozlišuj minimálně:
+
+- **Zrušení předplatného:** zákazník nechce další fakturaci, ale účet a data mohou ještě existovat.
+- **Deaktivaci uživatele:** konkrétní člověk ztratí přístup, workspace nebo firma běží dál.
+- **Uzavření workspace:** tým končí používání produktu, ale může chtít export, faktury a čas na rozloučení.
+- **Výmaz osobních dat:** žádost podle pravidel ochrany osobních údajů, která má vlastní právní režim.
+- **Anonymizaci historických záznamů:** data zůstanou pro statistiku nebo audit, ale už nejsou spojitelná s člověkem.
+
+U každé akce napiš, kdo ji smí spustit, co přesně udělá a jestli je vratná. Nejhorší varianta je tlačítko, které v UI vypadá jako výmaz, ale ve skutečnosti jen nastaví `deleted_at` a zbytek nechá na věčné časy v databázi, logách, exportech, indexech a náhodném CSV na ploše. Ano, i tenhle film už někdo natočil. Žánr: horor pro DPO.
+
+### GC.2 Před výmazem nabídni export, ne výmluvy
+
+Férový offboarding začíná tím, že zákazník není rukojmí. Před nevratným výmazem nabídni export v použitelném formátu a vysvětli, co obsahuje.
+
+Dobrá obrazovka před výmazem říká:
+
+- kdy byl poslední export vytvořen,
+- jaká data export obsahuje,
+- jak dlouho bude odkaz dostupný,
+- kdo v týmu může export stáhnout,
+- co v exportu záměrně není, například interní bezpečnostní signály nebo data jiných zákazníků,
+- co se po výmazu stane s fakturami, auditní stopou a zálohami.
+
+Export nedělej jako surový dump databáze. Uživatel nepotřebuje sloupce pojmenované podle nálady backendu v roce 2022. Potřebuje čitelné CSV pro tabulková data, JSON pro strukturovaná data, soubory ve složkách a krátký `README.md`, který vysvětlí obsah balíku.
+
+### GC.3 Mazací workflow musí mít stavový model
+
+Mazání účtu není jeden SQL příkaz. Je to workflow, které prochází aplikací, databází, soubory, frontami, cache, vyhledávacími indexy, analytikou, e-maily a zálohami.
+
+Minimální stavový model:
+
+1. **Requested:** oprávněná osoba požádala o výmaz nebo uzavření.
+2. **Verified:** ověřilo se právo žadatele a dopad na workspace.
+3. **Export window:** běží čas na stažení dat, pokud je relevantní.
+4. **Deletion scheduled:** výmaz je naplánovaný a uživatel vidí termín.
+5. **Deletion running:** systém provádí mazání a anonymizaci podle katalogu dat.
+6. **Deletion completed:** hlavní systémy jsou vyčištěné, zůstávají jen legitimní výjimky.
+7. **Backup expiry pending:** data mohou dočasně existovat v zálohách do konce retenční doby.
+
+Každý stav má mít vlastníka, časový limit a bezpečný retry. Když spadne mazání příloh, nesmí to tiše skončit „asi dobrý“. Vznikne úkol pro provoz, auditní záznam a jasný další krok.
+
+### GC.4 Ne všechno se maže stejným způsobem
+
+Pro každý typ dat rozhodni, jestli se má smazat, anonymizovat, oddělit od identity, nebo ponechat po konkrétní dobu.
+
+Příklad datové mapy:
+
+- **Profil uživatele:** smazat nebo anonymizovat jméno, e-mail, avatar a volitelné údaje.
+- **Autentizační údaje:** zneplatnit session, tokeny, recovery kódy a API klíče.
+- **Obsah vytvořený uživatelem:** podle kontextu smazat, převést na workspace, nebo anonymizovat autora.
+- **Faktury a účetní záznamy:** ponechat podle právního důvodu a oddělit od běžného produktu.
+- **Auditní logy:** minimalizovat identifikátory, zachovat bezpečnostní stopu jen po definovanou dobu.
+- **Analytika:** pracovat s agregovanými daty, ne s osobním profilem.
+- **Support konverzace:** smazat nebo redigovat osobní údaje podle retenční politiky a právního důvodu.
+- **Zálohy:** neobnovovat smazaná data zpět do produkce a nechat je doběhnout podle zvláštní retenční lhůty.
+
+Privacy-first pravidlo: výjimka musí být pojmenovaná, zdůvodněná a časově omezená. „Necháme si to pro jistotu“ není důvod. To je reflex datového křečka.
+
+### GC.5 Potvrzení má být lidské a přesné
+
+Po dokončení výmazu pošli potvrzení, které nehraje právnické bingo, ale dá člověku jasnou odpověď.
+
+Struktura potvrzení:
+
+- co bylo smazáno,
+- co bylo anonymizováno,
+- co zůstává a proč,
+- kdy vyprší data v zálohách,
+- kam se obrátit při dotazu,
+- jaké identifikační číslo má žádost nebo auditní záznam.
+
+Neposílej potvrzení plné interních ID, pokud je zákazník neumí použít. Interní stopa patří do systému, zákaznická zpráva patří člověku. Ano, jsou to dvě různé věci. Překvapivě revoluční koncept.
+
+### GC.6 Testuj mazání jako kritickou funkci
+
+Mazání účtu otestuj dřív, než ho poprvé použije skutečný zákazník. Ideálně na sandbox účtu s daty ve všech důležitých částech produktu.
+
+Testovací scénáře:
+
+- uživatel bez workspace požádá o výmaz,
+- vlastník workspace ruší celý účet po exportu,
+- zaměstnanec opouští tým, ale workspace pokračuje,
+- účet má neuhrazenou fakturu,
+- účet má aktivní API klíče a webhooky,
+- uživatel má soubory, komentáře a support tickety,
+- mazání se přeruší uprostřed a workflow se bezpečně obnoví.
+
+Každý kvartál si vezmi jeden testovací účet a ověř, že po výmazu nejde data najít běžnými produktovými cestami, ve vyhledávání, exportu, support adminu ani analytice. U záloh ověř aspoň proces: pokud se obnovuje starší snapshot, musí existovat krok, který znovu aplikuje seznam dokončených výmazů.
+
+### GC.7 Šablona: karta výmazu účtu
+
+```markdown
+## Výmaz účtu: [produkt / workspace]
+
+### Spouštěč
+- Kdo může výmaz požádat:
+- Jak ověřujeme oprávnění:
+- Je potřeba čekací doba nebo exportní okno:
+
+### Rozsah
+- Uživatelský profil:
+- Workspace data:
+- Soubory a přílohy:
+- API klíče, tokeny, session:
+- Faktury a účetní záznamy:
+- Auditní a bezpečnostní logy:
+- Support data:
+- Analytika:
+- Zálohy:
+
+### Stavový model
+- Requested:
+- Verified:
+- Export window:
+- Deletion scheduled:
+- Deletion running:
+- Deletion completed:
+- Backup expiry pending:
+
+### Výjimky
+- Data ponechaná kvůli právní povinnosti:
+- Data ponechaná kvůli bezpečnosti:
+- Retenční lhůta výjimek:
+- Kdo výjimky schvaluje:
+
+### Komunikace
+- Text před výmazem:
+- Potvrzení po výmazu:
+- Kontakt pro dotazy:
+
+### Kontrola
+- Poslední test mazání:
+- Nalezené problémy:
+- Další review:
+```
+
+### GC.8 Checklist: výmaz účtu bez datových duchů
+
+- [ ] Produkt rozlišuje zrušení předplatného, deaktivaci uživatele, uzavření workspace a výmaz osobních dat.
+- [ ] Uživatel před nevratným krokem vidí dopad, termín a možnost exportu.
+- [ ] Export je čitelný, dokumentovaný a časově omezený.
+- [ ] Mazání má stavový model, auditní stopu a bezpečný retry.
+- [ ] Každá datová kategorie má rozhodnutí: smazat, anonymizovat, ponechat s důvodem, nebo nechat doběhnout v zálohách.
+- [ ] Faktury, právní povinnosti a bezpečnostní logy jsou oddělené od běžného produktového účtu.
+- [ ] Po výmazu se ruší session, tokeny, API klíče, webhooky a integrační přístupy.
+- [ ] Zálohy mají retenční pravidlo a obnovovací postup, který znovu respektuje dokončené výmazy.
+- [ ] Potvrzení zákazníkovi říká lidsky, co se stalo a co případně zůstává.
+- [ ] Mazací proces se pravidelně testuje na účtech s realistickými daty.
+
+### GC.9 Codyho komentář
+
+*Codyho komentář:* Dobře navržené mazání účtu je zvláštní druh sebevědomí. Říká: naše služba má hodnotu, ale vaše data nejsou naše rukojmí. Když zákazník odejde fér způsobem, pořád může později doporučit firmu, která se nechovala jako sklep plný zapomenutých exportů. A to je marketing, který nepotřebuje cookie banner velký jako billboard.
+
+### GC.10 Zdroje k právu na výmaz a omezení uložení
+
+- GDPR článek 17 popisuje právo na výmaz a situace, kdy může být relevantní: https://eur-lex.europa.eu/eli/reg/2016/679/oj
+- GDPR článek 5 shrnuje principy minimalizace údajů, omezení účelu a omezení uložení: https://eur-lex.europa.eu/eli/reg/2016/679/oj
+- Evropská komise vysvětluje práva subjektů údajů včetně opravy a výmazu osobních údajů: https://commission.europa.eu/law/law-topic/data-protection/reform/rights-citizens/my-rights_en
+- EDPB ve vodítkách k právům subjektů údajů zdůrazňuje potřebu srozumitelných procesů a přiměřeného vyřízení žádostí: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-012022-data-subject-rights-right-access_en
+
 ## Pracovní log
+
+- 2026-09-05 12:00 UTC — Doplněna příloha GC o mazání účtu bez falešného tlačítka: rozdíl mezi zrušením, deaktivací a výmazem, export před odchodem, stavový model mazání, datová mapa, zákaznické potvrzení, testovací scénáře, šablona, checklist a ověřené zdroje EU/EDPB.
 
 - 2026-09-05 11:00 UTC — Doplněna příloha GB o neúspěšných platbách a grace period: stavy účtu, férová časová osa dunningu, klidná komunikace, produktové omezení bez blokování dat, expirované výjimky, oddělení billing dat od marketingu, šablona a checklist.
 
