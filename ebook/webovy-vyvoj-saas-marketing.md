@@ -32539,7 +32539,223 @@ E-mail je stará technologie, která drží internet pohromadě lepicí páskou,
 - EDPB: [Process personal data lawfully](https://www.edpb.europa.eu/sme/be-compliant/process-personal-data-lawfully_en) — praktický přehled právních základů pro malé a střední organizace.
 
 
+## Příloha GG: Webhooky a integrace bez datového ohňostroje
+
+Webhook je jednoduchý nápad s překvapivě velkým potenciálem pro chaos: „když se něco stane u nás, pošleme o tom zprávu jinam“. Zní to nevinně. Pak ale první zákazník připojí CRM, druhý fakturační systém, třetí vlastní datový sklad, čtvrtý Slack, pátý Zapier, šestý Make a najednou máš z produktu poštovní úřad pro cizí systémy. Dopisy létají všude, nikdo neví, kdo je otevřel, a jeden retry v pátek večer založí 400 duplicitních leadů. Romantika moderního SaaS.
+
+Privacy-first přístup neříká „žádné integrace“. Říká: integrace mají mít jasný účel, minimální payload, bezpečné doručení, omezenou retenci a srozumitelné chování při chybě. Webhook není datová skládka. Je to smlouva mezi dvěma systémy.
+
+### GG.1 Začni událostmi, ne seznamem integrací
+
+Nejdřív si napiš, jaké důležité věci se v produktu dějí. Teprve potom řeš, kam je posílat. Když začneš logem nástroje, snadno sklouzneš do otázky „co všechno tam umíme poslat?“ Lepší otázka je: „jaká událost má pro zákazníka provozní hodnotu mimo náš produkt?“
+
+Dobré webhook události:
+
+- `lead.created` — vznikla nová poptávka, kterou má zpracovat obchod.
+- `invoice.paid` — faktura byla uhrazena a účet se může odblokovat.
+- `export.completed` — zákaznický export je připraven ke stažení v aplikaci.
+- `user.invited` — někdo byl pozván do workspace.
+- `subscription.canceled` — předplatné skončí k určitému datu.
+
+Slabé webhook události:
+
+- `page.viewed` — často šmírovací šum, ne obchodní událost.
+- `button.clicked` — většinou analytika, ne integrace.
+- `user.seemed_interested` — věštecká koule v JSONu, děkujeme nechceme.
+- `everything.changed` — rezignace na návrh API.
+
+Praktické pravidlo: webhook má oznamovat stavovou změnu nebo dokončenou akci. Nemá nahrazovat analytiku, debug log ani interní event stream.
+
+### GG.2 Payload má být užitečný, ale štíhlý
+
+Nejčastější chyba: poslat v jednom webhooku „raději všechno, ať si zákazník vybere“. To zní vstřícně, dokud nezjistíš, že každá integrace dostává osobní údaje, interní poznámky, fakturační detaily a staré pole, které už nikdo nepoužívá, ale bojí se ho smazat.
+
+Minimální payload pro `lead.created` může vypadat takhle:
+
+```json
+{
+  "id": "evt_01J...",
+  "type": "lead.created",
+  "created_at": "2026-09-05T16:01:00Z",
+  "workspace_id": "wrk_123",
+  "data": {
+    "lead_id": "lead_456",
+    "source": "contact_form",
+    "company_name": "Příklad s.r.o.",
+    "contact_email": "kontakt@example.cz",
+    "detail_url": "https://app.example.com/leads/lead_456"
+  }
+}
+```
+
+Všimni si dvou věcí:
+
+- payload obsahuje identifikátory a bezpečný odkaz do aplikace,
+- detail zůstává v produktu, kde platí oprávnění, audit log a případná retence.
+
+Do webhooku typicky nepatří:
+
+- celé texty interních poznámek,
+- přístupové tokeny,
+- kompletní profil uživatele,
+- osobní údaje třetích osob, které příjemce nepotřebuje,
+- raw exporty a přílohy,
+- debug kontext typu stack trace nebo SQL dotaz.
+
+Když zákazník potřebuje víc detailů, nabídni navazující API endpoint s autentizací a oprávněním. Webhook má říct „něco se stalo“. Nemusí nosit celý byt i s ledničkou.
+
+### GG.3 Doručení musí počítat s neúspěchem
+
+Webhooky padají. Cílový systém má výpadek, endpoint vrátí chybu, DNS zlobí, zákazník změní URL, firewall se rozhodne být kreativní. Návrh integrací bez chybových stavů je jako deštník z ubrousku: hezký na fotce, horší v bouřce.
+
+Základní doručovací pravidla:
+
+- Každá událost má unikátní `event_id`.
+- Každý pokus o doručení má vlastní `delivery_id`.
+- Retry používá rostoucí intervaly, ne kulomet každou sekundu.
+- Po určitém počtu pokusů se doručování zastaví a událost skončí jako selhaná.
+- Zákazník vidí historii doručení bez citlivých detailů.
+- Existuje ruční opakování konkrétní události, ne magické „pošli všechno znovu“.
+
+Příklad rozumné retry politiky:
+
+- 1. pokus ihned,
+- 2. pokus za 1 minutu,
+- 3. pokus za 5 minut,
+- 4. pokus za 30 minut,
+- 5. pokus za 2 hodiny,
+- konec a upozornění správci integrace.
+
+Důležitý detail: dokumentuj, že příjemce musí zpracování stavět idempotentně. Když pošleš stejný `event_id` dvakrát, cílový systém nemá vytvořit dvě faktury, dva leady nebo dvě pozvánky. Duplicita není vzácná chyba. Je to normální provozní jev, který čeká za rohem s hrníčkem kávy.
+
+### GG.4 Bezpečnost není jen tajný token v URL
+
+Webhook endpoint je veřejná adresa, která přijímá data a často spouští automatizace. To je přesně místo, kde nechceš stavět bezpečnost na „snad to nikdo neuhodne“.
+
+Bezpečnostní minimum:
+
+- podepisuj payload sdíleným tajemstvím,
+- posílej timestamp a chraň se proti replay útokům,
+- umožni rotaci secretu bez výpadku,
+- nepoužívej secret jako query parametr v URL,
+- limituj velikost payloadu,
+- loguj technický stav doručení, ale neukládej zbytečně celé citlivé tělo zprávy,
+- zákazníkovi ukaž jen maskovanou hodnotu secretu.
+
+Praktický model podpisu:
+
+- hlavička `X-Webhook-Timestamp` obsahuje čas podpisu,
+- hlavička `X-Webhook-Signature` obsahuje HMAC z timestampu a těla zprávy,
+- příjemce odmítne zprávu, pokud je timestamp příliš starý,
+- příjemce porovná podpis konstantním časem, ne obyčejným string porovnáním.
+
+Rotace secretu má mít přechodné okno. Zákazník nastaví nový secret, systém po omezenou dobu podepisuje nebo ověřuje starý i nový a po potvrzení přepne. Bez toho uděláš z bezpečnostního zlepšení provozní minové pole. A minová pole mají v produktovém designu špatné NPS.
+
+### GG.5 Nastavení integrace má být samoobslužné a auditovatelné
+
+Každá integrace by měla mít jednoduchou kartu v administraci:
+
+- **Název integrace:** lidský název, třeba `CRM produkce`.
+- **Endpoint URL:** kam se posílá.
+- **Události:** přesný seznam povolených eventů.
+- **Stav:** aktivní, pozastavená, selhává, vypnutá.
+- **Secret:** vygenerovat, zkopírovat, rotovat, nikdy zobrazit zpět.
+- **Poslední doručení:** čas, status, stručný důvod chyby.
+- **Vlastník:** kdo integraci nastavil a kdo ji smí měnit.
+- **Audit:** vytvoření, změna URL, změna eventů, rotace secretu, vypnutí.
+
+Privacy-first detail: zákazník má mít možnost vypnout jednotlivé typy událostí. Ne každý, kdo chce `invoice.paid`, chce zároveň `user.invited`. Granularita snižuje datový tok a zvyšuje důvěru.
+
+Dobré UX pro testování:
+
+- tlačítko „odeslat testovací událost“ s jasně označenými ukázkovými daty,
+- validace URL před uložením,
+- náhled payloadu pro vybrané události,
+- dokumentace chybových stavů,
+- možnost dočasně pozastavit integraci bez smazání konfigurace.
+
+### GG.6 Retence webhooků nesmí být nekonečná kronika
+
+Webhook logy jsou užitečné pro debug, podporu a audit. Zároveň mohou obsahovat osobní údaje nebo obchodní metadata. Proto potřebují vlastní retenční pravidla.
+
+Rozumný kompromis pro malý SaaS:
+
+- metadata doručení drž déle než celé payloady,
+- plné tělo zprávy ukládej jen krátce a jen pokud je to opravdu potřeba pro podporu,
+- citlivá pole maskuj už při zápisu logu,
+- zákazníkovi zobrazuj bezpečný výřez, ne kompletní interní záznam,
+- po smazání účtu zahrň webhook logy do datového úklidu,
+- dokumentuj, co přesně v historii doručení zůstává.
+
+Příklad vrstvené retence:
+
+- `event_id`, typ události, endpoint doména, status a čas doručení: 90 dní,
+- chybová hláška bez citlivého payloadu: 30 dní,
+- plný request/response vzorek pro debug: 7 dní nebo vůbec,
+- audit změn konfigurace integrace: podle interní bezpečnostní politiky.
+
+Nejde o magická čísla. Jde o princip: drž dost informací na řešení problémů, ale ne tolik, aby se webhook historie stala druhou databází zákazníka.
+
+### GG.7 Šablona: karta webhook integrace
+
+```md
+## Webhook integrace: [název]
+
+### Účel
+- Proč integrace existuje:
+- Jaký zákaznický proces podporuje:
+- Kdo je vlastník na straně zákazníka:
+
+### Události
+- Povolené eventy:
+- Zakázané eventy:
+- Testovací event:
+
+### Payload
+- Povinná pole:
+- Pole, která se nikdy neposílají:
+- Odkaz na detail v aplikaci:
+
+### Bezpečnost
+- Podpis payloadu:
+- Rotace secretu:
+- Replay ochrana:
+- Omezení velikosti:
+
+### Doručení
+- Retry politika:
+- Kdy se integrace pozastaví:
+- Kdo dostane upozornění:
+- Jak se událost odešle znovu:
+
+### Retence
+- Metadata doručení:
+- Payload logy:
+- Audit konfigurace:
+- Mazání při offboardingu:
+```
+
+### GG.8 Checklist: webhooky bez digitální potopy
+
+- [ ] Každá webhook událost popisuje konkrétní stavovou změnu nebo dokončenou akci.
+- [ ] Payload obsahuje jen data nutná pro navazující proces.
+- [ ] Detailní data zůstávají za přihlášením v aplikaci nebo chráněném API.
+- [ ] Každá událost má `event_id` a doručení je navržené idempotentně.
+- [ ] Retry politika má limity, rostoucí intervaly a jasný konečný stav.
+- [ ] Payloady jsou podepisované a obsahují timestamp proti replay útokům.
+- [ ] Secret jde rotovat bez výpadku a nikdy se nezobrazuje zpět v plné podobě.
+- [ ] Administrace integrace ukazuje stav, poslední chyby a bezpečný audit změn.
+- [ ] Zákazník může vybrat jen potřebné eventy, ne balík „všechno všude“.
+- [ ] Retence doručovacích logů je omezená a odděluje metadata od plných payloadů.
+- [ ] Testovací událost používá ukázková data, ne reálného zákazníka jménem Pan GDPR.
+
+### GG.9 Codyho komentář
+
+*Codyho komentář:* Integrace jsou skvělé, když rozšiřují hodnotu produktu. Jsou nebezpečné, když jen exportují chaos do dalších systémů. Dobrý webhook je jako slušný kurýr: doručí přesně to, co má, ověří se u dveří, nenechá balík na chodníku a nevypráví sousedům, co bylo uvnitř.
+
 ## Pracovní log
+
+- 2026-09-05 16:01 UTC — Doplněna příloha GG o webhook integracích: návrh událostí, štíhlé payloady, retry a idempotence, podepisování, samoobslužná administrace, retence doručovacích logů, šablona karty a checklist.
 
 - 2026-09-05 15:00 UTC — Doplněna příloha GF o transakčních e-mailech bez tracking pixelů: rozdělení zpráv podle účelu, DNS základy doručitelnosti, SPF/DKIM/DMARC/MTA-STS, neinvazivní měření, datová minimalizace v šablonách, výběr poskytovatele, šablona karty e-mailu, checklist a ověřené zdroje IETF/EU/EDPB.
 
