@@ -30091,7 +30091,156 @@ Tohle není přiznání slabosti. Je to důkaz dospělosti. Zákazník nepotřeb
 - Atlassian — Incident postmortem guide: https://www.atlassian.com/incident-management/postmortem
 
 
+## Příloha FS: Trust center pro malý evropský SaaS bez korporátního divadla
+
+Trust center není jen stránka, kde visí logo ISO a tři generické věty o bezpečnosti. Pro malý SaaS je to praktické místo, které zákazníkovi rychle odpoví na otázku: „Můžu téhle službě svěřit provozní data, aniž bych otevřel datovou Pandořinu krabičku?“
+
+Dobré trust center šetří prodej, podporu i bezpečnostní dotazníky. Ještě lepší trust center říká pravdu: co už máte, co teprve budujete, kde jsou hranice služby a jak zákazník získá svoje data zpět. Žádný kouřostroj, žádné „enterprise-grade“ zaklínadlo, za kterým je jeden zapomenutý spreadsheet. Kouřostroj patří na koncert, ne do zpracování osobních údajů.
+
+### FS.1 Začni otázkami zákazníka, ne odznaky
+
+Nejhorší trust center vzniká tak, že tým otevře web většího konkurenta a začne opisovat sekce. Výsledek pak působí důležitě, ale neodpovídá na reálné nákupní otázky.
+
+Začni tím, co se zákazníci ptají před podpisem:
+
+- Kde běží aplikace a databáze?
+- Kdo má přístup k zákaznickým datům?
+- Jak řešíte zálohy a obnovu?
+- Jak se dozvíme o incidentu?
+- Jak rychle lze exportovat nebo smazat data?
+- Jaké subdodavatele používáte?
+- Jaké bezpečnostní kontroly už máte zavedené?
+
+Z těchto otázek udělej strukturu stránky. Ne naopak. Certifikace, penetrační test nebo bezpečnostní standard má být důkaz u konkrétní odpovědi, ne náhrada odpovědi.
+
+### FS.2 Rozděl veřejné, zákaznické a neveřejné informace
+
+Trust center nemusí ukazovat všechno všem. Privacy-first neznamená tajnůstkářství, ale řízené sdílení.
+
+Použij tři vrstvy:
+
+- **Veřejná vrstva:** stručný popis hostingu, datových principů, cookies, analytiky, subdodavatelských kategorií, incidentové komunikace a exportu dat.
+- **Zákaznická vrstva:** DPA, seznam subdodavatelů s účelem, technická a organizační opatření, retenční pravidla, bezpečnostní kontakt, základní odpovědi na dotazníky.
+- **Neveřejná vrstva:** detailní architektura, interní runbooky, výsledky testů s citlivými nálezy, přesné konfigurace, interní přístupové matice.
+
+Praktické pravidlo: veřejně popiš princip a zákaznický dopad, neveřejně drž exploatovatelné detaily. Například „produkční přístupy jsou omezené podle rolí a pravidelně revidované“ patří veřejně. Seznam konkrétních administrátorských účtů a přesné názvy interních systémů ne.
+
+### FS.3 Privacy-first stránka má mluvit lidsky
+
+GDPR vyžaduje srozumitelné a snadno dostupné informace o zpracování. To neznamená, že musíš každou stránku proměnit v právní beton. Vedle plných zásad zpracování vytvoř krátkou stránku „Soukromí stručně“.
+
+Měla by odpovědět na pět otázek:
+
+1. Jaká data od zákazníků potřebujeme k provozu služby?
+2. K čemu je používáme a k čemu ne?
+3. Kde data běží a kdo k nim má přístup?
+4. Jak dlouho je držíme?
+5. Jak zákazník požádá o export, opravu nebo výmaz?
+
+Piš jazykem produktu. Místo „zpracováváme identifikační a kontaktní údaje za účelem plnění smlouvy“ napiš i praktickou větu: „E-mail administrátora používáme k přihlášení, bezpečnostním oznámením a fakturační komunikaci.“ Právník se neurazí. Uživatel konečně pochopí, co se děje. Malý zázrak, skoro jako funkční tiskárna.
+
+### FS.4 Bezpečnost ukaž jako systém návyků
+
+Malý SaaS nemusí předstírat korporátní bezpečnostní aparát. Může ale ukázat, že bezpečnost není náhodná.
+
+Do trust centra dej konkrétní oblasti:
+
+- **Přístupy:** princip nejmenších oprávnění, MFA pro administraci, onboarding a offboarding účtů.
+- **Vývoj:** code review, závislosti, oddělení produkce od vývoje, práce se secrets.
+- **Provoz:** monitoring dostupnosti, zálohy, restore drill, incidentový postup.
+- **Data:** minimalizace, retence, export, mazání, šifrování tam, kde dává smysl.
+- **Dodavatelé:** proč je používáš, jaká data dostávají, jak se kontrolují.
+
+OWASP ASVS se hodí jako zdroj požadavků pro aplikace, ale zákazník nepotřebuje číst celý standard v trust centru. Potřebuje vědět, které kontroly jsi promítl do běžného provozu. Přelož bezpečnostní požadavky do lidských vět a u citlivých detailů nabídni sdílení pod NDA nebo v zákaznickém portálu.
+
+### FS.5 Trust center musí být napojené na realitu týmu
+
+Největší riziko trust centra je zastaralost. Jakmile stránka slibuje proces, který už tým nedělá, z důvěry je dluh.
+
+Každá sekce proto potřebuje vlastníka a rytmus kontroly:
+
+- Hosting a infrastruktura: měsíčně nebo při změně poskytovatele.
+- Subdodavatelé: při každém přidání nástroje a kvartálně.
+- Retence a mazání: při změně datového modelu.
+- Incidentová komunikace: po každém incidentu nebo cvičení.
+- Bezpečnostní opatření: po významné změně architektury.
+- Dokumenty pro zákazníky: při změně smluv nebo produktu.
+
+Do interního backlogu přidej typ práce „trust center update“. Když měníš analytiku, hosting, subdodavatele nebo export dat, Definition of Done není hotová, dokud není aktualizovaný i veřejný nebo zákaznický popis.
+
+### FS.6 Neprodávej jistotu, kterou nemáš
+
+Trust center má posilovat důvěru, ne vyrábět falešnou jistotu. Vyhni se absolutním slibům:
+
+- „Vaše data jsou 100% bezpečná.“
+- „Nikdy nemůže dojít k incidentu.“
+- „Jsme plně GDPR compliant“ bez vysvětlení rolí, účelů a procesů.
+- „Enterprise security“ bez konkrétních opatření.
+
+Lepší formulace:
+
+- „Používáme vícevrstvý přístup k ochraně dat a pravidelně kontrolujeme přístupy.“
+- „Incidenty řešíme podle předem připraveného postupu a zákazníky informujeme podle dopadu.“
+- „Zpracování dat popisujeme v DPA, subdodavatele držíme v aktuálním seznamu a zákazník má možnost exportu.“
+
+Poctivost není slabší marketing. V B2B je to často přesně ten signál, že za produktem sedí dospělý tým, ne generator pitch decků s přístupem do adminu.
+
+### FS.7 Šablona: karta trust centra
+
+```markdown
+## Trust center: [název produktu]
+
+### Pro koho je stránka
+- Zákazníci: [segmenty]
+- Interní vlastník: [role / jméno]
+- Poslední kontrola: [datum]
+
+### Veřejné odpovědi
+- Hosting a regiony: [kde služba běží]
+- Analytika a cookies: [co se měří a proč]
+- Subdodavatelé: [kategorie / odkaz]
+- Incidenty: [jak zákazník dostane informaci]
+- Export a výmaz: [jaký je postup]
+
+### Zákaznické materiály
+- DPA: [odkaz / dostupnost]
+- Technická a organizační opatření: [odkaz / dostupnost]
+- Bezpečnostní dotazník: [kontakt / portál]
+- Seznam subdodavatelů: [odkaz / poslední aktualizace]
+
+### Interní údržba
+- Kontrolní rytmus: [měsíčně / kvartálně]
+- Spouštěče aktualizace: [nový dodavatel, změna hostingu, incident]
+- Co nesmí být veřejně: [citlivé detaily]
+```
+
+### FS.8 Checklist: trust center bez marketingového mlžení
+
+- [ ] Stránka odpovídá na skutečné zákaznické otázky z prodeje a podpory.
+- [ ] Veřejná část vysvětluje hosting, analytiku, cookies, subdodavatele, incidenty a export dat.
+- [ ] Citlivé technické detaily nejsou veřejně dostupné bez důvodu.
+- [ ] Každá sekce má vlastníka a datum poslední kontroly.
+- [ ] Sliby jsou ověřitelné a nepoužívají absolutní formulace typu „100% bezpečné“.
+- [ ] DPA, TOMs, seznam subdodavatelů a bezpečnostní kontakt jsou zákazníkům snadno dostupné.
+- [ ] Změna hostingu, analytiky, subdodavatele nebo retence automaticky spouští aktualizaci trust centra.
+- [ ] Privacy-first hodnota je popsaná jako konkrétní provozní rozhodnutí, ne jako nálepka.
+
+### FS.9 Codyho komentář
+
+Trust center je obchodní zkratka pro týmy, které nechtějí každý měsíc znovu odpovídat na stejný bezpečnostní dotazník od nuly. Ale funguje jen tehdy, když je napojené na realitu. Pokud stránka říká „transparentnost“ a tým mezitím netuší, kdo přidal poslední tracker, není to trust center. Je to trust cosplay.
+
+### FS.10 Zdroje k trust centru, transparentnosti a bezpečnosti SaaS
+
+- GDPR, článek 12 o stručné, transparentní, srozumitelné a snadno dostupné komunikaci: https://eur-lex.europa.eu/eli/reg/2016/679/2016-05-04/eng
+- EDPB — Guidelines relevant for controllers and processors, včetně transparentnosti a accountability: https://www.edpb.europa.eu/guidelines-relevant-for-controllers-and-processors_en
+- ENISA — Cybersecurity guide for SMEs: https://www.enisa.europa.eu/publications/cybersecurity-guide-for-smes
+- ENISA — Cloud Security Guide for SMEs: https://www.enisa.europa.eu/publications/cloud-security-guide-for-smes
+- OWASP — Application Security Verification Standard: https://owasp.org/www-project-application-security-verification-standard/
+
+
 ## Pracovní log
+
+- 2026-09-05 02:00 UTC — Doplněna příloha FS o trust centru pro malý evropský SaaS: zákaznické otázky, vrstvy veřejných/zákaznických/neveřejných informací, srozumitelná privacy-first komunikace, bezpečnostní návyky, údržba, poctivé formulace, šablona karty, checklist a ověřené zdroje k GDPR, EDPB, ENISA a OWASP.
 
 - 2026-09-05 01:00 UTC — Doplněna příloha FR o post-incident review: časová osa bez hledání viníka, přispívající faktory, opatření měnící budoucí chování, privacy-first úklid diagnostických dat, zákaznické uzavření, šablona karty, checklist a zdroje k incident review.
 
