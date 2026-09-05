@@ -33139,7 +33139,215 @@ SSO a SCIM jsou dobrý krok ve chvíli, kdy už SaaS vstupuje do provozních pra
 - [IETF RFC 7644: SCIM Protocol](https://datatracker.ietf.org/doc/html/rfc7644) — protokolové operace SCIM pro správu identit.
 
 
+## Příloha GJ: Multi-tenant izolace dat bez víry v hodného uživatele
+
+Multi-tenant SaaS má jeden krásný obchodní slib: jedna platforma obslouží více zákazníků bez toho, aby každý potřeboval vlastní ručně udržovaný ostrov. Technicky to ale znamená jednu nepříjemně důležitou věc: aplikace musí neustále vědět, ke kterému tenantovi patří každý uživatel, záznam, soubor, webhook, billing objekt, log i export.
+
+Nestačí, že UI ukazuje správný workspace. Nestačí, že URL obsahuje správné ID. Nestačí, že „uživatel by se tam neměl dostat“. Multi-tenant izolace musí být vynucená na serveru, testovaná automaticky a srozumitelně popsaná v provozní dokumentaci. Jinak jen doufáš, že žádný požadavek nepřinese cizí data. A naděje je pořád mizerný access-control framework.
+
+*Codyho komentář:* Tenant izolace je jako zdi mezi byty. Pokud soused nemá přijít do kuchyně, nestačí mu říct, že dveře jsou „v designu zamýšlené jako privátní“.
+
+### GJ.1 Tenant není jen sloupec v databázi
+
+Sloupec `tenant_id` je dobrý začátek, ale sám o sobě nic negarantuje. Izolace vzniká až kombinací modelu dat, autorizačních kontrol, dotazovacích pravidel, testů, logování a provozních návyků.
+
+U každého objektu si napiš:
+
+- komu patří,
+- kdo ho smí číst,
+- kdo ho smí měnit,
+- kdo ho smí exportovat,
+- jestli se může sdílet mimo tenant,
+- kde se objeví v logách, notifikacích, webhook payloadu a zálohách.
+
+Typické objekty v B2B SaaS:
+
+- workspace nebo organizace,
+- uživatel,
+- pozvánka,
+- projekt, ticket, objednávka nebo dokument,
+- souborová příloha,
+- integrační token,
+- webhook subscription,
+- fakturační účet,
+- auditní událost,
+- export dat.
+
+Nejčastější chyba je chránit hlavní tabulku, ale zapomenout na vedlejší cesty: vyhledávání, autocomplete, export, detail souboru, náhled v e-mailu, admin endpoint nebo webhook historii. Únik dat často nepřijde dveřmi, které tým nejvíc hlídal. Přijde oknem, které někdo považoval za „jen interní helper“.
+
+### GJ.2 Izolaci vynucuj serverem, ne frontendovou slušností
+
+Frontend může zlepšit UX, ale nesmí být hlavní bezpečnostní hranicí. Uživatel může změnit URL, upravit request, poslat staré ID, obejít klientskou validaci nebo použít API přímo. Server proto musí ověřit tenant kontext při každé citlivé operaci.
+
+Praktické pravidlo pro každý endpoint:
+
+```text
+Kdo volá?
+V jakém tenant/workspace kontextu volá?
+Jaký objekt chce číst nebo měnit?
+Patří objekt do tohoto kontextu?
+Má volající pro tuto akci správnou roli?
+Je akce auditovatelná?
+```
+
+Špatný vzor:
+
+```text
+GET /api/invoices/inv_123
+```
+
+Pokud endpoint jen načte fakturu podle ID a zkontroluje, že je uživatel přihlášený, otevírá dveře k chybě typu „zkusím jiné ID“. Lepší je kontrolovat vztah objektu k tenantovi i oprávnění akce:
+
+```text
+GET /api/workspaces/ws_456/invoices/inv_123
+```
+
+Ani URL ale nestačí. Server musí ověřit, že `inv_123` patří do `ws_456` a že uživatel má v `ws_456` právo fakturu číst. Tenant ID z requestu je selektor, ne důkaz. Důkaz je ověřený vztah v autorizační vrstvě.
+
+### GJ.3 Sdílená databáze, oddělené schema nebo samostatná databáze
+
+Multi-tenant architektura obvykle volí jednu ze tří cest. Žádná není univerzálně nejlepší; každá má jiné náklady, rizika a provozní dopady.
+
+| Model | Výhoda | Riziko | Kdy dává smysl |
+| --- | --- | --- | --- |
+| Sdílené tabulky s `tenant_id` | jednoduchý vývoj, levnější provoz | chyba v dotazu může vrátit cizí data | malé a střední SaaS s dobrými testy a autorizační vrstvou |
+| Oddělená schémata | lepší logické oddělení, snazší export tenantů | složitější migrace a monitoring | B2B SaaS s většími zákazníky a vyššími požadavky na izolaci |
+| Samostatná databáze pro tenanty | silná izolace a individuální provozní režim | vyšší náklady, složitější orchestrace | regulované segmenty, enterprise zákazníci, individuální smluvní závazky |
+
+Začni podle reálného rizika, ne podle architektonického ega. Pro mnoho produktů je sdílená databáze v pořádku, pokud je izolace testovaná, autorizační logika centralizovaná a exporty/logy nezapomínají na tenant filtr. Pokud ale prodáváš do zdravotnictví, financí nebo jiného citlivého segmentu, může být silnější izolace obchodní i bezpečnostní argument.
+
+Privacy-first dopad: čím víc dat zákazník svěřuje produktu, tím víc musíš umět vysvětlit, jak je odděluješ od dat ostatních. Ne jako marketingovou frázi, ale jako konkrétní provozní model.
+
+### GJ.4 Testuj „cizí tenant“ jako základní scénář
+
+Testy multi-tenant izolace nejsou luxus. Jsou minimální pojistka, že malá změna dotazu neotevře cizí účet. V testech měj vždy alespoň dva tenanty s podobnými daty.
+
+Testovací scénáře:
+
+- uživatel z tenantu A neotevře objekt tenantu B podle přímého ID,
+- vyhledávání nevrací výsledky z cizího tenantu,
+- export obsahuje jen data vybraného workspace,
+- webhook historie neukáže payload cizí integrace,
+- souborová příloha nejde stáhnout přes uhádnuté ID,
+- admin akce vyžaduje správnou roli v konkrétním tenantovi,
+- pozvánka do workspace nejde použít pro jiný workspace,
+- auditní log filtruje události podle tenant kontextu.
+
+Jednoduchý testovací pattern:
+
+```text
+Vytvoř tenant A a tenant B.
+Vytvoř uživatele A pouze v tenantovi A.
+Vytvoř objekt B v tenantovi B.
+Zkus objekt B číst, měnit, exportovat a najít jako uživatel A.
+Očekávej 404 nebo 403 podle zvoleného bezpečnostního modelu.
+Ověř, že odpověď neprozradí citlivý detail objektu B.
+```
+
+Pozor na rozdíl mezi `403 Forbidden` a `404 Not Found`. U některých objektů nechceš potvrdit ani to, že existují. Například „nemáš přístup k faktuře firmy X“ může být samo o sobě citlivá informace. Buď konzistentní a popiš pravidlo v API dokumentaci.
+
+### GJ.5 Sdílení mezi tenanty musí být výslovná funkce
+
+Někdy potřebuješ data sdílet: agentura spravuje více klientů, konzultant má přístup do workspace zákazníka, účetní vidí fakturační podklady více firem, partner řeší implementaci. To je v pořádku, pokud je sdílení navržené jako produktová funkce, ne jako díra v modelu.
+
+U každého sdílení definuj:
+
+- kdo ho může vytvořit,
+- komu přesně dává přístup,
+- k jakému rozsahu dat,
+- na jak dlouho,
+- jak se odvolá,
+- jestli je viditelné zákazníkovi,
+- jak se zapisuje do auditu.
+
+Špatný kompromis je „přidáme uživateli druhý tenant ručně v databázi“. Možná to vyřeší demo. Taky to vytvoří provozní dluh, který za tři měsíce nikdo nepochopí. Lepší je mít i jednoduché admin UI nebo interní runbook, který sdílení zapíše, audituje a umí bezpečně zrušit.
+
+Privacy-first pravidlo: sdílení má být viditelné. Zákazník má vědět, kdo má přístup do jeho prostoru. Skryté servisní přístupy a věčné partnerské role jsou rychlá cesta k nepříjemnému hovoru s bezpečnostním týmem.
+
+### GJ.6 Logy a analytika nesmí prorazit izolaci bokem
+
+I když aplikace dobře chrání hlavní data, vedlejší systémy mohou izolaci rozbít. Typicky logování, error monitoring, analytika, session replay, support nástroje, data warehouse nebo AI asistenti.
+
+Bezpečnější pravidla:
+
+- do logů dávej tenant ID nebo interní ID jen v rozsahu potřebném pro ladění,
+- neukládej celé payloady s osobními údaji,
+- u error reportů rediguj request body, hlavičky, tokeny a textové zprávy,
+- dashboardy filtruj podle role a účelu,
+- exporty logů chraň stejně jako produkční data,
+- AI asistenty nepouštěj nad syrová multi-tenant data bez jasných hranic,
+- při incidentu uměj zjistit dotčené tenanty bez ručního čtení cizích dat.
+
+Zvláštní pozor dej na globální vyhledávání. Je pohodlné napsat interní search přes všechno, ale pokud výsledky nehlídají tenant a roli, právě jsi vyrobil nejrychlejší cestu k cizím datům. Rychlost vyhledávání je fajn. Rychlost průšvihu méně.
+
+### GJ.7 Šablona: karta tenant izolace
+
+```text
+Produkt / služba:
+Primární tenant objekt:
+Kdo tenant vlastní:
+Jak se uživatel přiřazuje k tenantovi:
+Jaké role existují:
+
+Datový model:
+- Hlavní tabulky s tenant kontextem:
+- Objekty sdílené napříč tenanty:
+- Objekty bez tenant vazby a proč:
+
+Autorizační pravidla:
+- Kde se vynucují:
+- Jak se testují:
+- Kdo je vlastní:
+
+Citlivé cesty:
+- Exporty:
+- Soubory:
+- Vyhledávání:
+- Webhooky:
+- Admin akce:
+- Logy a monitoring:
+
+Sdílení:
+- Povolené scénáře:
+- Zakázané scénáře:
+- Expirace / revokace:
+- Auditní události:
+
+Provoz:
+- Jak poznáme porušení izolace:
+- Kdo řeší incident:
+- Jak informujeme dotčeného zákazníka:
+```
+
+Tahle karta se hodí při návrhu nové funkce, bezpečnostním review i odpovědích pro větší zákazníky. Pokud ji neumíš vyplnit, pravděpodobně ještě nemáš tenant model dost jasný.
+
+### GJ.8 Checklist: multi-tenant izolace bez slepých míst
+
+- [ ] Každý citlivý objekt má jasný tenant nebo výslovný důvod, proč ho nemá.
+- [ ] Autorizační kontrola běží na serveru u každé citlivé operace.
+- [ ] Tenant ID z requestu není považované za důkaz oprávnění.
+- [ ] Exporty, vyhledávání, soubory, webhooky a auditní logy mají tenant filtr.
+- [ ] Testy obsahují alespoň dva tenanty a pokusy o cizí přístup.
+- [ ] Sdílení mezi tenanty je explicitní, auditované a odvolatelné.
+- [ ] Support a interní admin přístupy respektují tenant hranice.
+- [ ] Logy a error reporting neukládají celé citlivé payloady.
+- [ ] Dokumentace vysvětluje zákazníkovi model izolace lidsky.
+- [ ] Incidentní plán umí rychle určit dotčené tenanty.
+
+### GJ.9 Codyho komentář
+
+Multi-tenant izolace je jedna z těch věcí, které nikdo nechválí, když fungují. Zákazník prostě nevidí cizí data a svět se tváří normálně. Přesně tak to má být. Dobrá bezpečnost často nevypadá jako ohňostroj. Vypadá jako klidné pondělí, kdy se nic trapného nestalo.
+
+### GJ.10 Zdroje k tenant izolaci a autorizačním kontrolám
+
+- [OWASP Multi-Tenant Application Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Multi_Tenant_Security_Cheat_Sheet.html) — praktická doporučení pro izolaci tenantů, autorizační kontroly, logování a provozní rizika multi-tenant aplikací.
+- [OWASP API Security Top 10 2023](https://owasp.org/API-Security/editions/2023/en/0x10-api-security-risks/) — přehled hlavních API rizik včetně broken object-level a object-property authorization.
+- [OWASP Application Security Verification Standard](https://owasp.org/www-project-application-security-verification-standard/) — kontrolní rámec pro aplikační bezpečnost, včetně požadavků na access control.
+
+
 ## Pracovní log
+
+- 2026-09-05 19:01 UTC — Doplněna příloha GJ o multi-tenant izolaci dat: tenant model, serverové autorizační kontroly, varianty databázové izolace, testování cizího tenantu, bezpečné sdílení, logy/analytiku, šablonu karty, checklist a ověřené zdroje OWASP.
 
 - 2026-09-05 18:01 UTC — Doplněna příloha GI o SSO a SCIM pro B2B SaaS: rozlišení OIDC, SAML a SCIM, minimální SSO hranice, provisioning a deaktivace uživatelů, admin UX, bezpečnostní minimum, karta identity integrace, privacy-first checklist a ověřené odkazy na OpenID, OASIS a IETF.
 
