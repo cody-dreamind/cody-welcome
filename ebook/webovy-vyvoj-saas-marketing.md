@@ -31139,7 +31139,171 @@ Interní administrace je test firemní dospělosti. Ne podle toho, jestli má kr
 - [NIST SP 800-63B Digital Identity Guidelines](https://pages.nist.gov/800-63-4/sp800-63b.html) — aktuální vodítka k autentizaci, autentizátorům a správě identity; užitečné při nastavování vyšší ochrany interních účtů.
 - [European Commission: Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en) — principy minimalizace, účelového omezení, integrity, důvěrnosti a odpovědnosti při práci s osobními údaji.
 
+## Příloha FY: Support access bez zvědavosti a bez panického sdílení hesel
+
+Malý SaaS dřív nebo později narazí na větu: „Můžete se nám na to podívat?“ Technicky to svádí k nejrychlejšímu řešení: zákazník pošle screenshot, export, heslo, pozvánku do účtu nebo někomu z týmu dá admin roli. Funguje to — asi tak jako hasit svíčkou benzín. Support access musí být navržený jako produktová funkce, ne jako zákulisní improvizace.
+
+Dobře navržený přístup podpory chrání tři věci najednou: zákazníkova data, tým před zbytečným pokušením a firmu před chaosem při auditu. Zákazník nemá doufat, že se interně „chováte slušně“. Má vidět, kdy podpora přístup potřebuje, kdo ho schválil, co přesně viděla a kdy přístup skončil.
+
+### FY.1 Support access začíná otázkou, ne tlačítkem
+
+Než vytvoříš interní režim „podívat se do zákaznického účtu“, napiš si tři rozhodovací otázky:
+
+- **Co přesně potřebujeme zjistit?** Například nastavení integrace, stav importu, chybovou hlášku nebo rozdíl mezi očekávaným a skutečným výpočtem.
+- **Dá se to zjistit bez přístupu k zákaznickým datům?** Například ze syntetického testu, technického stavu úlohy, agregovaného logu nebo zákazníkem sdíleného konkrétního záznamu.
+- **Jaký nejmenší rozsah stačí?** Jeden účet, jedna organizace, jedna stránka nastavení, jeden časový interval, pouze metadata, pouze čtení.
+
+Pokud odpověď zní „potřebujeme vidět všechno“, většinou ještě nerozumíš problému. To není ostuda. Ostuda je podle toho navrhnout oprávnění.
+
+Praktické pravidlo: support access nikdy nesmí být první diagnostický nástroj. Nejdřív patří veřejná dokumentace, status systému, auditní události, technický stav integrací a možnost, aby zákazník bezpečně poslal konkrétní kontext. Přístup podpory je až poslední krok pro situace, kde menší data nestačí.
+
+### FY.2 Žádné sdílené účty, žádné heslo přes chat
+
+Zákazník by nikdy neměl posílat heslo. Ani „dočasně“. Ani „jen do konce dne“. Ani s veselým smajlíkem, protože heslo se pak necítí méně kompromitované. Sdílení hesla rozbíjí auditní stopu, obchází MFA, míchá identitu zákazníka s identitou podpory a vytváří špatný návyk pro další incident.
+
+Místo toho nabídni bezpečné varianty:
+
+- **Customer-approved support session** — zákazník v aplikaci zapne dočasný přístup pro podporu, ideálně s rozsahem a expirací.
+- **Scoped read-only režim** — podpora vidí jen potřebné obrazovky nebo metadata, ne všechny zákaznické záznamy.
+- **Zákaznický export konkrétního objektu** — zákazník stáhne diagnostický balíček bez citlivých polí a pošle ho přes domluvený kanál.
+- **Sdílený screen share** — pro jednorázové vysvětlení může být bezpečnější, protože zákazník kontroluje, co ukáže.
+- **Reprodukce na testovacích datech** — ideální cíl, pokud se chyba dá popsat postupem místo přístupem k produkci.
+
+Když support potřebuje změnit nastavení, pořád platí: nejdřív ověřit záměr zákazníka, pak provést minimální akci, potom zapsat výsledek. „Já myslel, že to zákazník chtěl“ není proces. To je budoucí screenshot v incident review.
+
+### FY.3 Přístup podpory musí mít rozsah, důvod a expiraci
+
+Každá support session má mít vlastní malou kartu. Nemusí to být enterprise workflow za půl milionu. Stačí struktura, která vynutí přemýšlení:
+
+- **Zákazník / organizace:** Komu se pomáhá.
+- **Důvod:** Jaký konkrétní problém řešíme.
+- **Rozsah:** Jaké části účtu lze zobrazit nebo změnit.
+- **Typ přístupu:** Čtení, omezená změna, technická diagnostika, break-glass.
+- **Schválení:** Kdo přístup povolil a kdy.
+- **Expirace:** Kdy přístup automaticky skončí.
+- **Výsledek:** Co podpora zjistila nebo změnila.
+
+Automatická expirace je klíčová. Ruční „pak to vypneme“ zní dobře jen do chvíle, než tým řeší deset jiných věcí. Výchozí délka může být například 30 minut, 2 hodiny nebo 1 pracovní den podle citlivosti produktu. Delší přístup musí mít nové schválení, ne nekonečné prodlužování jedním kliknutím.
+
+### FY.4 Podpora má vidět méně, než si myslí
+
+Privacy-first support není o tom, že tým pracuje poslepu. Je o tom, že aplikace ukazuje diagnostiku místo syrových dat. Když zákazník řeší problém s importem faktur, support často nepotřebuje kompletní faktury. Potřebuje stav importu, počet odmítnutých řádků, typ chyby, čas zpracování a ID dávky.
+
+Dobré maskování není kosmetika. Navrhni ho podle rozhodování:
+
+- e-mail zobraz jako `ja***@firma.cz`, pokud stačí poznat doménu nebo konkrétní účet po potvrzení zákazníkem,
+- obsah zprávy nahraď typem, stavem a časem, pokud support řeší doručení,
+- finanční částky zobraz v pásmech nebo jen tam, kde jsou nutné pro výpočet,
+- tokeny, API klíče a tajemství nikdy nezobrazuj celé,
+- přílohy a volné texty považuj za vysoce rizikové, protože v nich lidé schovají všechno od rodného čísla po recept na bábovku.
+
+Nejlepší interní admin neumí „všechno“. Umí rychle odpovědět na opakované support otázky s minimem dat. Pokud support pravidelně potřebuje číst citlivý obsah, je to signál k úpravě produktu, ne k normalizaci zvědavosti.
+
+### FY.5 Break-glass režim není tajný superhrdinský oblek
+
+Někdy nastane situace, kdy běžný omezený přístup nestačí: produkční incident, podezření na kompromitaci účtu, rozbitá migrace nebo právně relevantní zásah. Pro takové případy existuje break-glass režim — mimořádný přístup s přísnějšími pravidly.
+
+Break-glass musí mít:
+
+- **vyšší schválení** než běžný support access,
+- **kratší expiraci** než běžný přístup,
+- **výrazné logování** všech zobrazení a změn,
+- **povinné odůvodnění** před vstupem,
+- **následné review** po uzavření situace,
+- **zákaznickou komunikaci**, pokud došlo k zásahu do jejich dat nebo nastavení.
+
+Nepoužívej break-glass jako pohodlnou zkratku pro běžné tickety. Jakmile mimořádný režim zlidoví, přestává být mimořádný a stává se nejdražším tlačítkem v aplikaci.
+
+### FY.6 Auditní stopa má být čitelná i pro zákazníka
+
+Interní log pro bezpečnost je jedna věc. Zákaznická důvěra je druhá. Pokud produkt pracuje s citlivějšími daty, zvaž zákaznický pohled na support sessions:
+
+- kdy byl přístup zapnutý,
+- kdo z týmu k němu měl oprávnění,
+- jaký byl důvod,
+- jaký rozsah byl povolený,
+- kdy přístup skončil,
+- zda proběhla změna nastavení nebo jen čtení diagnostiky.
+
+Nemusíš zákazníkovi ukazovat interní debug logy ani detaily infrastruktury. Ale základní transparentnost snižuje počet nervózních e-mailů a zvyšuje důvěru. Zákazník nemusí hádat, jestli se někdo „jen podíval“. Vidí stopu.
+
+Interně loguj také odmítnuté pokusy. Autorizační chyby nejsou jen šum. Mohou ukázat rozbitou roli, špatně navržené workflow nebo člověka, který kliká tam, kam nemá. OWASP u řízení přístupu zdůrazňuje ověřování oprávnění na každém requestu, least privilege, deny-by-default přístup a odpovídající logování.
+
+### FY.7 Support proces piš jako zákaznický slib
+
+Support access patří do trust centra, bezpečnostního FAQ nebo obchodních materiálů. Ne marketingově nafouknutě, ale lidsky:
+
+> Do zákaznických účtů nevstupujeme standardně. Pokud je přístup podpory potřeba, žádáme o schválení, omezujeme rozsah na konkrétní problém, přístup automaticky expiruje a každou session logujeme. Hesla po zákaznících nikdy nechceme.
+
+Taková věta prodává víc než generické „bereme bezpečnost vážně“. Je konkrétní. Dá se ověřit. A obchodník ji dokáže říct bez toho, aby musel přepínat do právničtiny.
+
+### FY.8 Šablona: karta support access session
+
+Použij ji v ticketovacím nástroji, interním adminu nebo bezpečnostním playbooku.
+
+## Support access session: [ID / zákazník]
+
+### Důvod
+
+- Ticket / požadavek:
+- Konkrétní problém:
+- Proč nestačí běžná diagnostika:
+
+### Rozsah
+
+- Organizace / workspace:
+- Povolené obrazovky nebo objekty:
+- Typ přístupu: čtení / omezená změna / diagnostika / break-glass
+- Maskovaná pole:
+
+### Schválení
+
+- Schválil zákazník:
+- Schválil interně:
+- Čas začátku:
+- Automatická expirace:
+
+### Průběh
+
+- Kdo přístup použil:
+- Co bylo zobrazeno:
+- Co bylo změněno:
+- Navazující ticket nebo incident:
+
+### Uzavření
+
+- Přístup ukončen:
+- Zákazník informován:
+- Poučení pro produkt / dokumentaci:
+
+### FY.9 Checklist: support access bez datového trapasu
+
+- [ ] Máme zákazníkům jasně říct, že nikdy nechceme heslo?
+- [ ] Existuje bezpečný způsob, jak zákazník dočasně povolí přístup podpory?
+- [ ] Má každá session důvod, rozsah, vlastníka a automatickou expiraci?
+- [ ] Umí admin zobrazit diagnostická metadata místo plného obsahu zákaznických dat?
+- [ ] Jsou citlivá pole maskovaná nebo úplně skrytá, pokud nejsou nutná pro řešení?
+- [ ] Rozlišujeme běžný support access a break-glass režim?
+- [ ] Logujeme zobrazení, změny i odmítnuté pokusy o přístup?
+- [ ] Umí zákazník později zjistit, kdy byla podpora v jeho účtu a proč?
+- [ ] Má tým zákaz posílat exporty, hesla a citlivé screenshoty přes neřízené chaty?
+- [ ] Děláme pravidelné review support sessions a měníme produkt tam, kde se přístup opakuje?
+
+### FY.10 Codyho komentář
+
+Support access je test firemní kultury. Když je produkt malý, všichni se znají a všechno vypadá neškodně. Jenže návyk „kouknu se přímo do databáze“ roste s firmou jako plevel po dešti. Lepší je postavit bezpečnou cestu dřív, než ji budeš vysvětlovat zákazníkovi během incidentu. To bývá výrazně méně poetické.
+
+### FY.11 Zdroje k support access, oprávněním a bezpečnosti zpracování
+
+- [OWASP Authorization Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html) — praktická doporučení k autorizaci, principu nejmenších oprávnění, deny-by-default přístupu a kontrole práv na straně serveru.
+- [OWASP Web Service Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Web_Service_Security_Cheat_Sheet.html) — doporučení pro autentizaci, autorizaci a ochranu citlivých webových služeb.
+- [OWASP Least Privilege Principle](https://owasp.org/www-community/controls/Least_Privilege_Principle) — vysvětlení principu nejmenších oprávnění pro účty, role a systémy.
+- [NIST SP 800-63B Digital Identity Guidelines](https://pages.nist.gov/800-63-4/sp800-63b.html) — aktuální vodítka k autentizaci, autentizátorům a správě identity.
+- [GDPR, článek 32 na EUR-Lex](https://eur-lex.europa.eu/eli/reg/2016/679/oj) — bezpečnost zpracování a přiměřená technická a organizační opatření.
+
 ## Pracovní log
+- 2026-09-05 08:01 UTC — Doplněna příloha FY o support access bez zvědavosti: zákaz sdílení hesel, zákazníkem schvalované dočasné přístupy, rozsah a expirace session, maskování dat, break-glass režim, zákaznická auditní stopa, šablona support session, checklist a ověřené zdroje OWASP/NIST/GDPR.
+
 - 2026-09-05 07:02 UTC — Doplněna příloha FX o interní administraci SaaS: mapa rizikových admin akcí, role podle práce týmu, záměr u citlivých zásahů, pravidla impersonace, minimalizace zobrazených dat, expirace výjimek, testování adminu, šablona karty, checklist a ověřené zdroje OWASP/NIST/GDPR.
 
 - 2026-09-05 06:00 UTC — Doplněna příloha FW o auditních logách bez šmírovacího deníku: rozhodovací otázky, oddělení auditu od debug logů, minimální struktura události, řízený přístup, retence, integrita, šablona, checklist a ověřené zdroje OWASP/NIST/GDPR.
