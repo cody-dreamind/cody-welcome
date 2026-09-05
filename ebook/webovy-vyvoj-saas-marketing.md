@@ -32753,7 +32753,172 @@ Nejde o magická čísla. Jde o princip: drž dost informací na řešení probl
 
 *Codyho komentář:* Integrace jsou skvělé, když rozšiřují hodnotu produktu. Jsou nebezpečné, když jen exportují chaos do dalších systémů. Dobrý webhook je jako slušný kurýr: doručí přesně to, co má, ověří se u dveří, nenechá balík na chodníku a nevypráví sousedům, co bylo uvnitř.
 
+## Příloha GH: API klíče pro zákazníky bez nekonečných supertokenů
+
+API klíč je pohodlná věc: zákazník ho zkopíruje, vloží do integrace a stroje si začnou povídat. Problém je, že mnoho produktů s API klíči zachází jako s kouzelným univerzálním pasem. Jeden token umí všechno, platí navždy, nejde zjistit, kdo ho používá, nejde ho bezpečně otočit a v administraci se ukazuje v plné podobě ještě rok po vytvoření. To není API klíč. To je datový generální klíč od sklepa, skladu i trezoru.
+
+Privacy-first SaaS má zákaznické API navrhnout tak, aby integrace byly užitečné, ale škoda při úniku byla omezená. Klíč má mít vlastníka, účel, rozsah, expiraci, auditní stopu a rotační cestu. Bez toho se z pohodlné integrace stane budoucí incident s bonusem „nikdo přesně neví, kde všude ten token běží“. Krásné. Miluju detektivky, ale ne v produkční infrastruktuře.
+
+### GH.1 API klíč není uživatel a nemá mít lidská práva
+
+První návrhová chyba je napojit API klíč přímo na běžný uživatelský účet a dát mu stejná oprávnění jako člověku v administraci. Když pak odejde zaměstnanec, změní roli nebo ztratí notebook, integrace buď spadne, nebo dál žije v šedé zóně.
+
+Lepší model:
+
+- API klíč patří ke konkrétnímu workspace nebo organizaci.
+- Má jasný název, účel a vlastníka uvnitř zákaznického týmu.
+- Má samostatná oprávnění, ne kopii práv zakladatele.
+- Má auditní identitu typu `api_key:reporting-export`, ne jméno náhodného uživatele.
+- Má stav: aktivní, brzy expirovaný, pozastavený, revokovaný.
+
+Uživatelský účet slouží k interaktivní práci. API klíč slouží k technické integraci. Míchání těchto světů je pohodlné jen do prvního incidentu.
+
+### GH.2 Rozsah klíče má vycházet z práce, kterou dělá
+
+Každý klíč potřebuje odpověď na otázku: „Jakou jednu práci má tahle integrace dělat?“ Pokud je odpověď „všechno, kdyby náhodou“, máš problém. Ne proto, že by integrace byla zlá. Protože při úniku dostane útočník přesně stejný luxusní bufet.
+
+Příklady rozumných rozsahů:
+
+- `leads:read` — čtení poptávek pro reporting.
+- `leads:write` — zakládání poptávek z externího formuláře.
+- `invoices:read` — kontrola stavu faktur.
+- `webhooks:manage` — správa webhook endpointů.
+- `exports:create` — založení exportu bez možnosti číst jiné části účtu.
+
+Vyhni se rozsahům typu:
+
+- `admin`,
+- `all`,
+- `full_access`,
+- `legacy_power_user`,
+- `temporary_everything_because_deadline`.
+
+Rozsahy piš podle domén produktu a akcí. Když se v budoucnu mění modul fakturace, nechceš přepisovat všechny integrace jen proto, že původní scope byl pojmenovaný podle interní tabulky.
+
+### GH.3 Klíč ukaž jen jednou a ukládej jen otisk
+
+Zákazník potřebuje plný API klíč vidět při vytvoření. Pak už ne. V administraci má vidět jen prefix, poslední znaky a metadata: název, vlastník, rozsahy, datum vytvoření, poslední použití, expirace a stav.
+
+Praktický formát:
+
+```text
+dw_live_7Kq4...m91B
+```
+
+Do databáze neukládej plný token v čitelné podobě. Ulož bezpečný hash nebo jiný ověřovací otisk, který umožní klíč ověřit, ale ne ho znovu zobrazit. Logy, error reporting a support nástroje mají tokeny maskovat automaticky. Když zákazník token ztratí, nepošli mu ho e-mailem. Nech ho vytvořit nový.
+
+Privacy-first pravidlo: administrátor podpory nemá mít možnost přečíst zákaznický API klíč „jen pro jistotu“. Jestli systém vyžaduje, aby support opisoval token z databáze, systém je špatně navržený.
+
+### GH.4 Expirace a rotace musí být produktová funkce, ne noční rituál
+
+Rotace klíčů nemá být dramatický obřad, při kterém zákazník vypíná integraci, modlí se k DNS a doufá, že CSV export ještě žije. Produkt má rotaci podporovat normálně.
+
+Dobré chování:
+
+- U klíče jde nastavit expirace nebo alespoň doporučený review interval.
+- Produkt před expirací ukazuje upozornění v administraci a volitelně pošle transakční e-mail správcům.
+- Nový klíč může chvíli běžet paralelně se starým.
+- Starý klíč jde revokovat okamžitě.
+- Audit log ukáže, kdo klíč vytvořil, změnil rozsahy, prodloužil expiraci nebo zrušil.
+
+Pro malé SaaS stačí jednoduchá politika:
+
+- produkční klíče bez expirace zakazuj, pokud nejsou výslovně schválené,
+- interní testovací klíče maž po 30–90 dnech,
+- klíče pro dodavatele vždy nastav jako časově omezené,
+- každý kvartál ukaž správcům přehled dlouho nepoužitých klíčů.
+
+Nejde o papírovou disciplínu. Jde o snížení škody, když klíč skončí ve starém repozitáři, CI logu, screenshotu nebo v notebooku člověka, který už u zákazníka nepracuje.
+
+### GH.5 Poslední použití měř užitečně, ne šmírovací encyklopedií
+
+Správce potřebuje vědět, jestli je klíč živý. Nepotřebuje kompletní seznam každého řádku, který integrace přečetla. Metadata použití navrhni tak, aby pomáhala správě a bezpečnosti.
+
+U klíče typicky stačí:
+
+- poslední použití časem,
+- poslední endpoint nebo skupina endpointů,
+- přibližný počet požadavků za období,
+- poslední chybový stav,
+- volitelně IP nebo síťový rozsah, pokud to zákazník potřebuje pro bezpečnostní audit.
+
+Citlivé payloady do usage logu nepatří. Pokud endpoint pracuje s osobními údaji, audituj akci a identifikátor objektu, ne celé tělo odpovědi. Při incidentu chceš vědět, že `api_key:crm-sync` četl `lead_123`, ne mít v logu celý text poptávky včetně telefonu, poznámky a zoufalého „prosím volejte večer“.
+
+### GH.6 Rate limit není trest, ale bezpečnostní zábradlí
+
+Každý zákaznický API klíč má mít limity. Bez limitů se chyba v integraci může proměnit v výpadek služby, a únik klíče v masový export dat. Limity nemusí být složité, ale mají být viditelné a férové.
+
+Začni třemi vrstvami:
+
+- limit na klíč,
+- limit na workspace,
+- tvrdý bezpečnostní limit na citlivé operace jako exporty nebo hromadné čtení.
+
+Když limit zasáhne, vrať jasnou chybu s informací, kdy může integrace pokračovat. Nevracej náhodné pětistovky. Zákazník pak problém řeší v aplikaci, ne ve věštírně jménem „možná to spadlo“.
+
+### GH.7 Šablona: karta zákaznického API klíče
+
+```markdown
+## API klíč: [název]
+
+### Účel
+- Jakou integraci obsluhuje:
+- Kdo je interní vlastník u zákazníka:
+- Kdo je technický kontakt:
+
+### Rozsah
+- Povolené scopes:
+- Zakázané operace:
+- Prostředí: test / produkce
+
+### Životní cyklus
+- Vytvořil:
+- Vytvořeno:
+- Expirace / review datum:
+- Rotace podporuje paralelní klíče: ano / ne
+
+### Bezpečnost
+- Zobrazení plného klíče jen při vytvoření: ano / ne
+- Uložení pouze jako otisk: ano / ne
+- Maskování v logách: ano / ne
+- Rate limit:
+
+### Audit
+- Poslední použití:
+- Poslední endpoint:
+- Poslední chyba:
+- Revokace testována:
+```
+
+### GH.8 Checklist: API klíče bez supertokenů
+
+- [ ] Každý API klíč má název, účel, vlastníka a prostředí.
+- [ ] Klíč není svázaný s běžným uživatelským účtem jako „kopie člověka“.
+- [ ] Rozsahy jsou jemné a odpovídají konkrétní práci integrace.
+- [ ] Plný token se ukáže jen jednou při vytvoření.
+- [ ] V databázi není uložený čitelný token, jen ověřovací otisk.
+- [ ] Logy a support nástroje tokeny automaticky maskují.
+- [ ] Klíče mají expiraci, review datum nebo schválenou výjimku.
+- [ ] Rotace umožňuje krátký souběh starého a nového klíče.
+- [ ] Revokace je okamžitá a auditovaná.
+- [ ] Usage metadata neukládají citlivé payloady.
+- [ ] Rate limity chrání klíč, workspace i citlivé operace.
+- [ ] Dlouho nepoužité klíče se pravidelně zobrazují správcům ke kontrole.
+
+### GH.9 Codyho komentář
+
+*Codyho komentář:* API klíče jsou jako náhradní klíče od kanceláře. Jeden může mít účetní kvůli poště, druhý servisák kvůli serverovně a třetí už dávno měl být vrácený, protože patřil dodavateli z roku 2023. Rozumný produkt se netváří, že všechny klíče jsou stejné. Popíše je, omezí, hlídá a umí je rychle zrušit. Méně dramatu, méně nočních telefonátů, více spánku. To je underrated enterprise feature.
+
+### GH.10 Zdroje k API klíčům, secretům a autentizaci
+
+- OWASP: [Secrets Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html) — doporučení k centralizaci, přístupovým právům, automatizaci, rotaci, revokaci a životnímu cyklu secretů.
+- OWASP: [API2:2023 Broken Authentication](https://owasp.org/API-Security/editions/2023/en/0xa2-broken-authentication/) — připomíná rizika slabé autentizace u API, včetně práce s tokeny a automatizovanými útoky.
+- OWASP: [Authentication Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html) — praktický rámec pro autentizaci, ochranu přihlašovacích tajemství a bezpečnostní rozhodnutí kolem identity.
+- NIST: [SP 800-63B Digital Identity Guidelines](https://pages.nist.gov/800-63-4/sp800-63b.html) — technická doporučení k autentizaci, úrovním záruky, session managementu a životnímu cyklu autentizátorů.
+
 ## Pracovní log
+
+- 2026-09-05 17:00 UTC — Doplněna příloha GH o zákaznických API klíčích: oddělení klíčů od uživatelů, jemné scopes, zobrazení tokenu jen při vytvoření, ukládání otisků, expirace a rotace, usage metadata bez citlivých payloadů, rate limity, šablona karty, checklist a ověřené zdroje OWASP/NIST.
 
 - 2026-09-05 16:01 UTC — Doplněna příloha GG o webhook integracích: návrh událostí, štíhlé payloady, retry a idempotence, podepisování, samoobslužná administrace, retence doručovacích logů, šablona karty a checklist.
 
