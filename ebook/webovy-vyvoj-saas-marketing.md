@@ -32916,7 +32916,233 @@ Když limit zasáhne, vrať jasnou chybu s informací, kdy může integrace pokr
 - OWASP: [Authentication Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html) — praktický rámec pro autentizaci, ochranu přihlašovacích tajemství a bezpečnostní rozhodnutí kolem identity.
 - NIST: [SP 800-63B Digital Identity Guidelines](https://pages.nist.gov/800-63-4/sp800-63b.html) — technická doporučení k autentizaci, úrovním záruky, session managementu a životnímu cyklu autentizátorů.
 
+## Příloha GI: SSO a SCIM pro B2B SaaS bez enterprise divadla
+
+V určité chvíli začne B2B zákazník klást otázky, které znějí nudně, ale ve skutečnosti říkají: „Už tě bereme vážně.“ Chce jednotné přihlašování, centrální správu lidí, vypnutí účtů při odchodu zaměstnance, auditní stopy a jistotu, že přístupy nejsou ručně lepené přes e-mail supportu. To je dobrý signál. Jen pozor: SSO a SCIM nejsou samolepka „enterprise ready“. Jsou to provozní závazky.
+
+SSO řeší přihlašování přes identitu zákazníka. SCIM řeší životní cyklus uživatelů a skupin: vytvořit, aktualizovat, deaktivovat, přiřadit. Dohromady pomáhají zákazníkovi držet kontrolu nad přístupy bez toho, aby každý nový člověk znamenal ruční kolečko v pěti systémech.
+
+*Codyho komentář:* Enterprise funkce není enterprise proto, že má v pricingu ikonku zámku. Je enterprise ve chvíli, kdy zákazník může bezpečně spravovat lidi i v pátek v 16:47, kdy HR oznámí náhlý odchod admina. Romantika SaaS provozu, prostě.
+
+### GI.1 Nezačínej protokolem, začni zákaznickou situací
+
+Nejhorší otázka na začátku je: „Máme udělat SAML, nebo OIDC?“ Lepší otázka zní: „Jaký problém zákazník potřebuje vyřešit?“
+
+Typické situace:
+
+- zákazník nechce další hesla mimo svůj identity provider,
+- bezpečnostní tým požaduje vynucené MFA přes firemní politiku,
+- HR potřebuje při nástupu člověka automaticky založit účet,
+- při odchodu zaměstnance se má přístup vypnout bez ručního čekání na support,
+- IT chce řídit role podle skupin,
+- audit se ptá, kdo měl kdy přístup do jakého zákaznického účtu,
+- nákup nechce schválit SaaS, který neumí základní správu identity.
+
+Pro malý SaaS tým je dobré rozdělit požadavky do tří úrovní:
+
+1. **SSO login:** uživatel se přihlásí přes zákazníkův IdP, účet už existuje nebo se vytvoří při prvním přihlášení.
+2. **Just-in-time provisioning:** účet vznikne při prvním úspěšném SSO přihlášení podle e-mailu, domény nebo mapování atributů.
+3. **SCIM provisioning:** zákazník posílá změny uživatelů a skupin přes standardizované API, takže systém zná aktivní účty i bez prvního přihlášení.
+
+Nemusíš dodat všechno najednou. Naopak: bezpečnější je začít úzkým workflow pro jednoho pilotního zákazníka, který má jasného technického vlastníka a rozumí tomu, co testujete.
+
+### GI.2 OIDC, SAML a SCIM nejsou totéž
+
+Zákazník často řekne „SSO“ a myslí tím cokoliv od „přihlášení přes Google“ po „napojte nás na korporátní IdP se SAML metadaty“. Proto si pojmy drž čistě.
+
+Praktické rozlišení:
+
+- **OpenID Connect (OIDC):** moderní identitní vrstva nad OAuth 2.0. Hodí se pro webové a mobilní aplikace, pracuje s ID tokenem a claims. Oficiální specifikace OpenID Connect Core popisuje autentizaci nad OAuth 2.0 a předávání claims o uživateli.
+- **SAML 2.0:** starší, ale v enterprise světě pořád běžný XML standard pro výměnu bezpečnostních assertions mezi identity providerem a service providerem. OASIS ho popisuje jako rámec pro výměnu bezpečnostních informací mezi online partnery.
+- **SCIM 2.0:** standard pro správu identit napříč systémy. RFC 7643 definuje core schema pro uživatele a skupiny, RFC 7644 protokolové operace pro práci s těmito zdroji.
+
+Jednoduché pravidlo:
+
+- SSO odpovídá na otázku: **Kdo se právě přihlašuje a je ověřený?**
+- SCIM odpovídá na otázku: **Kdo má v systému existovat, s jakými atributy a jestli je stále aktivní?**
+
+Když je smícháš, vznikají ošklivé kompromisy. Například deaktivovaný zaměstnanec může stále existovat v aplikaci, protože se „jen dlouho nepřihlásil“. Nebo role vznikají podle posledního loginu, ale nikdo neví, jestli odpovídají realitě v IdP. To není správa identity. To je věštění z access tokenu.
+
+### GI.3 Minimální SSO implementace musí mít hranice
+
+SSO MVP nemá znamenat „nějak ověříme e-mail a doufáme“. Minimální verze potřebuje jasné hranice:
+
+- **Tenant scope:** SSO konfigurace patří ke konkrétnímu workspace, organizaci nebo zákaznickému tenantovi, ne globálně k celé aplikaci.
+- **Doménové pravidlo:** automatické připojení podle e-mailové domény používej opatrně a jen po ověření vlastnictví domény.
+- **Account linking:** existující uživatel se propojí se SSO identitou kontrolovaně, ideálně po přihlášení starou metodou nebo přes administrátora.
+- **Fallback admin:** zákazník má definovaného nouzového vlastníka nebo postup pro obnovu přístupu, ale ne tajná zadní vrátka.
+- **Role mapping:** role z IdP mapuj explicitně, ne magicky podle textu v názvu skupiny.
+- **Audit:** loguj změny konfigurace, zapnutí/vypnutí SSO, změnu certifikátu, změnu redirect URI a změnu mapování rolí.
+
+Zvlášť důležitý je režim „SSO enforced“. Když ho zákazník zapne, běžné heslové přihlášení pro jeho uživatele se má vypnout. Ale před zapnutím ověř:
+
+- alespoň jeden admin se umí přihlásit přes SSO,
+- metadata nebo OIDC discovery jsou validní,
+- redirect/callback URL odpovídají prostředí,
+- systém má plán pro expiraci certifikátu nebo klientského secretu,
+- support ví, jak pomoci bez převzetí účtu.
+
+Privacy-first detail: do aplikace nepřenášej víc claims, než potřebuješ. Pro běžný SaaS často stačí stabilní identifikátor, e-mail, jméno a případně skupiny nebo role. Datum narození, telefon, oddělení, manažer a interní HR atributy nejsou suvenýry z identity provideru. Když je nepotřebuješ, neber je.
+
+### GI.4 SCIM začni deaktivací, ne nekonečným profilem
+
+SCIM láká k tomu, že začneš mapovat každý atribut uživatele. To je zkratka do bažiny. Pro první verzi je největší hodnota v životním cyklu přístupu:
+
+- vytvořit uživatele,
+- aktualizovat základní identitu,
+- deaktivovat uživatele,
+- přiřadit nebo odebrat skupinu,
+- zobrazit chybu zákazníkovi tak, aby ji IT umělo opravit.
+
+První SCIM endpointy drž úzké:
+
+- `GET /Users` pro vyhledání a synchronizaci,
+- `POST /Users` pro založení,
+- `GET /Users/{id}` pro detail,
+- `PATCH /Users/{id}` pro změnu aktivního stavu nebo atributů,
+- `GET /Groups` a `PATCH /Groups/{id}` jen pokud opravdu podporuješ skupinové přiřazení.
+
+Klíčový atribut je `active`. Když zákazník uživatele deaktivuje v IdP, SaaS má přístup odebrat rychle a předvídatelně. Nečekat na další login. Nečekat na ruční synchronizaci „až bude čas“. A hlavně: neplést deaktivaci přístupu s okamžitým smazáním všech historických stop. Auditní záznamy, vlastnictví dokumentů a fakturační kontext často musí zůstat zachované podle jasné retenční politiky.
+
+Dobré pravidlo pro role: SCIM skupina nemá automaticky znamenat libovolnou aplikační roli. Zákazník by měl v administraci vidět mapování:
+
+- skupina z IdP,
+- cílová role nebo tým v aplikaci,
+- rozsah oprávnění,
+- poslední synchronizace,
+- poslední chyba,
+- kdo mapování vytvořil nebo změnil.
+
+### GI.5 Admin UX rozhoduje o bezpečnosti víc než checkbox
+
+Enterprise nastavení bývá technicky citlivé. Pokud ho schováš do políček bez vysvětlení, support bude dostávat screenshoty, zákazník bude hádat a bezpečnostní tým ztratí důvěru.
+
+Karta SSO konfigurace má obsahovat:
+
+- stav: nenastaveno, testovací režim, aktivní, vynucené, chyba,
+- typ: OIDC nebo SAML,
+- redirect/callback URL ke zkopírování,
+- issuer/entity ID,
+- metadata URL nebo XML upload,
+- certifikát a datum expirace,
+- mapování e-mailu a stabilního subject identifikátoru,
+- testovací tlačítko s jasným výsledkem,
+- audit změn.
+
+Karta SCIM konfigurace má obsahovat:
+
+- base URL,
+- bearer token zobrazený jen při vytvoření,
+- datum vytvoření a posledního použití tokenu,
+- scopes tokenu,
+- možnost rotace,
+- seznam podporovaných operací,
+- poslední synchronizační chyby,
+- odkaz na dokumentaci a testovací příklady.
+
+Nejlepší administrace říká nejen „nefunguje“, ale i „co přesně je špatně“. Například:
+
+- `issuer` v tokenu neodpovídá uložené konfiguraci,
+- podpis nelze ověřit aktuálním certifikátem,
+- uživatel nemá povolenou doménu,
+- IdP poslal skupinu, která není namapovaná,
+- SCIM request chybí `userName` nebo používá nepodporovaný PATCH path.
+
+Bez toho bude support půl dne překládat kryptické chyby. A kryptické chyby jsou jen technický způsob, jak říct „napiš mi prosím osm e-mailů“.
+
+### GI.6 Bezpečnostní minimum pro SSO a SCIM
+
+SSO a SCIM jsou vstupní brány k účtům. Proto potřebují přísnější režim než běžné nastavení profilu.
+
+Minimum:
+
+- změny SSO a SCIM smí dělat jen role s vysokým oprávněním,
+- kritické změny vyžadují re-autentizaci admina,
+- tokeny a secrety se ukládají jen jako hash nebo šifrované tajemství podle typu použití,
+- hodnoty secretů se nikdy nezobrazují zpět,
+- rotace má bezpečné přechodné okno,
+- testovací režim neobchází tenant izolaci,
+- auditní log ukládá změnu konfigurace, ne citlivý obsah tokenů,
+- SCIM token má rate limit a samostatné scopes,
+- neúspěšné SSO pokusy se sledují jako bezpečnostní signál, ale bez ukládání celých tokenů.
+
+Pro privacy-first provoz je důležité oddělit identitní metadata od produktových dat. To, že zákazník přes SSO pošle skupiny, neznamená, že je máš používat pro marketingovou segmentaci. To, že SCIM zná interní strukturu firmy, neznamená, že ji máš ukládat navždy. Identita je provozní nutnost, ne zlatý důl.
+
+### GI.7 Jak to prodat bez nafukování slibů
+
+SSO a SCIM mohou být silný argument v B2B prodeji, ale nesmíš z nich dělat bezpečnostní kouzlo. Správné sdělení je praktické:
+
+- „Přihlášení přes váš identity provider.“
+- „Vynucení firemních bezpečnostních politik.“
+- „Automatické odebrání přístupu při odchodu člověka.“
+- „Audit změn přístupů a konfigurace.“
+- „Datově úsporné mapování atributů.“
+
+Na pricing stránce nebo v enterprise balíčku vysvětli:
+
+- které protokoly podporuješ,
+- jestli je SCIM dostupný,
+- jestli se role mapují přes skupiny,
+- jak vypadá onboarding,
+- kdo konfiguraci spravuje,
+- jak rychle řešíš problém s přihlášením,
+- jak zákazník exportuje nebo ukončí identitní napojení.
+
+Nepoužívej větu „podporujeme všechny IdP“, pokud jsi otestoval dva. Lepší je napsat „podporujeme standardní OIDC/SAML konfiguraci a máme ověřené postupy pro tyto poskytovatele“. Poctivé hranice jsou důvěryhodnější než kouřostroj kompatibility.
+
+### GI.8 Šablona: karta identity integrace
+
+Pro každého enterprise zákazníka si drž jednu kartu:
+
+- Název zákazníka:
+- Workspace/tenant:
+- Vlastník na straně zákazníka:
+- Interní vlastník:
+- Typ SSO: OIDC / SAML / žádné
+- Stav SSO: test / aktivní / vynucené / pozastavené
+- Ověřená doména:
+- Stabilní identifikátor uživatele:
+- Povolené claims/atributy:
+- Role mapping:
+- SCIM: ano / ne
+- SCIM token vytvořen:
+- Poslední použití SCIM tokenu:
+- Podporované SCIM operace:
+- Retence identitních logů:
+- Datum posledního testu:
+- Rizika nebo ruční výjimky:
+- Plán rotace certifikátů/tokenů:
+- Odkaz na zákaznickou dokumentaci:
+
+Tahle karta není byrokracie. Je to pojistka proti situaci, kdy jediný člověk, který „věděl, jak je to napojené“, zrovna sedí ve vlaku bez signálu a produkční přihlášení má náladu jako tiskárna v účetním oddělení.
+
+### GI.9 Checklist: SSO a SCIM bez enterprise divadla
+
+- [ ] Víme, jestli zákazník potřebuje jen SSO, nebo i SCIM provisioning.
+- [ ] SSO konfigurace je scoped na konkrétní tenant/workspace.
+- [ ] Před vynucením SSO máme otestovaný login alespoň jednoho admina.
+- [ ] Automatické připojení podle domény má ověřené vlastnictví domény.
+- [ ] Sbíráme jen claims a atributy, které produkt skutečně potřebuje.
+- [ ] SCIM umí bezpečně deaktivovat uživatele bez čekání na další login.
+- [ ] Role a skupiny se mapují explicitně a auditovatelně.
+- [ ] Tokeny, certifikáty a secrety mají rotaci a bezpečné uložení.
+- [ ] Admin UI ukazuje srozumitelné chyby a testovací režim.
+- [ ] Dokumentace popisuje protokoly, limity, podporované operace a postup při incidentu.
+
+SSO a SCIM jsou dobrý krok ve chvíli, kdy už SaaS vstupuje do provozních pravidel zákazníka. Nejsou to jen technické integrace. Jsou to dohody o důvěře, odpovědnosti a životním cyklu přístupů. Když je postavíš střídmě, auditovatelně a datově úsporně, pomohou prodeji i bezpečnosti. Když je postavíš jako rychlý checkbox, jen přidáš další způsob, jak si v pondělí ráno rozbít přihlášení. A pondělí už má problémů dost.
+
+**Zdroje k příloze GI:**
+
+- [OpenID Connect Core 1.0](https://openid.net/specs/openid-connect-core-1_0.html) — specifikace OIDC jako identitní vrstvy nad OAuth 2.0.
+- [OASIS SAML 2.0 Technical Overview](https://docs.oasis-open.org/security/saml/Post2.0/sstc-saml-tech-overview-2.0.html) — vysvětlení SAML 2.0, assertions a typických SSO scénářů.
+- [IETF RFC 7643: SCIM Core Schema](https://datatracker.ietf.org/doc/html/rfc7643) — schéma uživatelů, skupin a atributů pro SCIM.
+- [IETF RFC 7644: SCIM Protocol](https://datatracker.ietf.org/doc/html/rfc7644) — protokolové operace SCIM pro správu identit.
+
+
 ## Pracovní log
+
+- 2026-09-05 18:01 UTC — Doplněna příloha GI o SSO a SCIM pro B2B SaaS: rozlišení OIDC, SAML a SCIM, minimální SSO hranice, provisioning a deaktivace uživatelů, admin UX, bezpečnostní minimum, karta identity integrace, privacy-first checklist a ověřené odkazy na OpenID, OASIS a IETF.
+
 
 - 2026-09-05 17:00 UTC — Doplněna příloha GH o zákaznických API klíčích: oddělení klíčů od uživatelů, jemné scopes, zobrazení tokenu jen při vytvoření, ukládání otisků, expirace a rotace, usage metadata bez citlivých payloadů, rate limity, šablona karty, checklist a ověřené zdroje OWASP/NIST.
 
