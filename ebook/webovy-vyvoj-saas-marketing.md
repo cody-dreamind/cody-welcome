@@ -30798,7 +30798,181 @@ Nejlepší secret je ten, který aplikace vůbec nepotřebuje. Druhý nejlepší
 
 ---
 
+## Příloha FW: Auditní logy bez šmírovacího deníku
+
+Auditní log není tajný zápisník o tom, co každý člověk dělal každou vteřinu. Je to bezpečnostní a provozní stopa, která má odpovědět na omezený počet důležitých otázek: kdo změnil citlivé nastavení, kdo exportoval data, kdy selhal přístup, jaký účet provedl rizikovou operaci a jestli se někdo nepokoušel obejít pravidla. Pokud loguješ všechno „pro jistotu“, nevzniká jistota. Vzniká drahá skládka osobních dat, kterou pak v incidentu stejně nikdo neumí rychle přečíst.
+
+OWASP připomíná, že aplikační logování má být součástí návrhu produktu, ne dodatečný výpis do konzole, a že auditní, transakční a bezpečnostní logy mohou mít různé účely. NIST popisuje log management jako celý životní cyklus: generování, přenos, ukládání, přístup, analýzu a likvidaci logů. Pro evropský privacy-first SaaS je k tomu potřeba přidat ještě jednu větu: osobní údaje v logách jsou pořád osobní údaje, takže platí minimalizace, účelové omezení a retenční pravidla podle GDPR.
+
+### FW.1 Začni rozhodovacími otázkami
+
+Nejdřív si napiš, k čemu auditní logy reálně potřebuješ. Malý SaaS většinou nepotřebuje sledovat každý klik. Potřebuje doložit a vyšetřit události, které mění bezpečnost, peníze, data nebo zákaznický vztah.
+
+Dobré otázky:
+
+- Kdo vytvořil, upravil nebo smazal účet s vyšším oprávněním?
+- Kdo změnil billing, tarif, fakturační údaje nebo limity účtu?
+- Kdo exportoval zákaznická data a v jakém rozsahu?
+- Kdo změnil integraci, webhook, API token nebo SSO nastavení?
+- Kdo se opakovaně pokoušel o přístup, na který neměl oprávnění?
+- Kdo změnil retenční pravidla, nastavení souhlasů nebo privacy konfiguraci?
+
+Slabé otázky:
+
+- Na co přesně se člověk díval během celého dne?
+- Kolikrát si otevřel každý řádek tabulky?
+- Jakou měl trajektorii myši, scrollu nebo nečinnosti?
+- Dá se z logů rekonstruovat jeho pracovní výkon?
+
+První skupina chrání zákazníka a produkt. Druhá skupina často vytváří zaměstnanecký dohled, invazivní profilování nebo budoucí právní bolest. Ano, i „jen metadata“ umí být osobní a citlivá. Metadata jsou takový ten nenápadný ninja soukromí.
+
+### FW.2 Odděl auditní log od debug logu
+
+Auditní log má být stabilní, stručný a čitelný i za rok. Debug log je dočasná technická stopa pro opravu chyby. Když je smícháš, vznikne buď audit plný stack trace bordelu, nebo debug log, který se bojíš smazat, protože možná obsahuje něco důležitého.
+
+Praktické rozdělení:
+
+- **Auditní log:** změny oprávnění, exporty, mazání, bezpečnostní nastavení, billing, přihlášení do administrace, změny integrací.
+- **Bezpečnostní log:** neúspěšné přístupy, porušení access control pravidel, rate-limit zásahy, podezřelé tokeny, změny autentizace.
+- **Provozní log:** chyby, latence, dostupnost služeb, selhání jobů, fronty, stav integrací.
+- **Debug log:** dočasné technické detaily zapnuté jen po omezenou dobu a s přísnou redakcí.
+
+Auditní log by měl přežít změnu UI. Nezapisuj „uživatel klikl na modré tlačítko“. Zapisuj „uživatel změnil roli člena z editor na admin“. Produkt se redesignuje, ale význam události zůstává.
+
+### FW.3 Navrhni minimální strukturu události
+
+Každá auditní událost má odpovědět na „kdo, co, kdy, kde a s jakým výsledkem“, ale bez zbytečného obsahu samotných dat. U exportu nepotřebuješ do logu ukládat exportovaný soubor. Potřebuješ vědět, že export proběhl, kdo ho spustil, jaký typ dat se exportoval, kolik záznamů přibližně zahrnoval a kam byl bezpečně uložen nebo doručen.
+
+Minimální pole:
+
+- **event_id:** stabilní typ události, například `workspace.member.role_changed`.
+- **occurred_at:** čas v UTC, synchronizovaný napříč systémy.
+- **actor_id:** interní ID účtu nebo systému, ne e-mail jako primární klíč.
+- **actor_type:** user, system, support, integration.
+- **workspace_id / tenant_id:** zákaznický kontext.
+- **resource_type a resource_id:** čeho se změna týkala.
+- **action:** created, updated, deleted, exported, granted, revoked, failed.
+- **result:** success, denied, failed, partial.
+- **reason nebo change_summary:** stručný důvod nebo typ změny, ne celé payloady.
+- **request_id:** vazba na technické logy pro vyšetřování.
+
+Co do auditního logu typicky nepatří:
+
+- hesla, tokeny, API klíče, session cookies,
+- celé request/response body,
+- platební údaje mimo bezpečný billing systém,
+- obsah zpráv, dokumentů a zákaznických polí,
+- IP adresa jako povinný identifikátor všude, kde stačí méně invazivní stopa,
+- osobní údaj v URL nebo query parametru.
+
+*Codyho komentář:* Auditní log má být jako dobrý svědek: řekne, co se stalo, kdy a kdo u toho byl. Nemá s sebou tahat kopii celé domácnosti.
+
+### FW.4 Přístup k logům je privilegium, ne default
+
+Logy často obsahují citlivější kombinace informací než běžná obrazovka produktu. I když jednotlivá položka nevypadá dramaticky, dohromady může odhalit obchodní proces, interní chování zákazníka nebo bezpečnostní slabinu. Proto přístup k logům nedávej každému adminovi automaticky.
+
+Rozumný model:
+
+- Produktový admin zákazníka vidí auditní log svého workspace v omezeném rozsahu.
+- Interní support vidí jen události potřebné k řešení ticketu a ideálně přes časově omezený přístup.
+- Bezpečnostní role vidí širší technické korelace, ale s důvodem přístupu.
+- Vývojář nečte produkční auditní logy pro pohodlný debugging.
+- Export auditních logů je samostatná auditovaná akce.
+
+U každého čtení citlivých auditních logů se ptej: proč je to potřeba, kdo to schválil, jak dlouho má přístup trvat a jestli existuje méně invazivní cesta. Privacy-first provoz není „nikdo nic neuvidí“. Je to „správný člověk vidí správné minimum ve správný čas“.
+
+### FW.5 Retence musí být kratší než věčnost
+
+„Budeme to držet navždy, kdyby něco“ není strategie. Je to datový sarkofág s nápisem „budoucí problém“. GDPR principy minimalizace a omezení uložení říkají, že osobní data mají být přiměřená účelu a držena jen po nezbytnou dobu. Auditní logy proto potřebují retenční tabulku.
+
+Příklad retenčního návrhu pro malý B2B SaaS:
+
+- **Debug logy:** 7–30 dní podle provozní potřeby.
+- **Aplikační chybové logy:** 30–90 dní, s redakcí osobních údajů.
+- **Bezpečnostní logy:** 6–12 měsíců podle rizika a smluvních povinností.
+- **Zákaznický auditní log:** 12–24 měsíců nebo podle smlouvy a právního důvodu.
+- **Agregované metriky:** déle, pokud už nejde o osobní údaje a nejdou rozumně zpětně přiřadit osobě.
+
+Důležité: retenční pravidlo musí být technicky vynucené. Ruční mazání jednou za rok je hezký rituál, ale systémová automatizace je lepší než kalendářní optimismus.
+
+### FW.6 Chraň integritu logů před úpravou i panikou
+
+Auditní log má hodnotu jen tehdy, když mu můžeš věřit. To neznamená, že musíš hned kupovat kosmický SIEM za cenu menšího traktoru. Znamená to, že běžný admin produktu nemá mít možnost log upravit, že mazání běží podle retenční politiky a že kritické události se ukládají mimo hlavní aplikační databázi nebo aspoň s oddělenými právy.
+
+Praktické minimum:
+
+- Logovací účet umí zapisovat, ale neumí mazat historické záznamy.
+- Administrátorské změny oprávnění se auditují samy.
+- Produkční databázové zásahy mimo aplikaci mají vlastní záznam v provozním deníku.
+- Čas serverů je synchronizovaný a ukládá se v UTC.
+- Logovací pipeline má monitoring: víš, když přestane zapisovat.
+- Zálohy a exporty logů mají stejné nebo přísnější řízení přístupu než samotné logy.
+
+A hlavně: netrestat tým za to, že logy ukážou problém. Pokud se auditní log používá jako bič, lidé začnou hledat cesty, jak se mu vyhnout. Pokud se používá jako bezpečnostní paměť, zlepšuje provoz.
+
+### FW.7 Šablona: auditní událost
+
+```markdown
+## Auditní událost: [event_id]
+
+### Účel
+- Jakou bezpečnostní, zákaznickou nebo právní otázku událost pomáhá zodpovědět:
+
+### Kdy logovat
+- Spouštěcí akce:
+- Úspěšný výsledek:
+- Neúspěšný výsledek:
+
+### Pole
+- actor_id:
+- actor_type:
+- tenant_id:
+- resource_type:
+- resource_id:
+- action:
+- result:
+- change_summary:
+- request_id:
+
+### Co nelogovat
+- Zakázané hodnoty:
+- Pole k redakci:
+
+### Přístup
+- Kdo smí číst:
+- Kdo smí exportovat:
+- Jak se čtení audituje:
+
+### Retence
+- Doba držení:
+- Mazání / anonymizace:
+- Výjimky:
+```
+
+### FW.8 Checklist: auditní logy bez datové skládky
+
+- [ ] Máme seznam událostí, které opravdu potřebujeme pro bezpečnost, odpovědnost a zákaznickou důvěru.
+- [ ] Auditní log je oddělený od debug logů a technických výpisů.
+- [ ] Každá událost má stabilní `event_id`, UTC čas, aktéra, zdroj, akci, výsledek a vazbu na `request_id`.
+- [ ] Do logů neukládáme secrety, celé payloady, obsah dokumentů ani osobní údaje v URL.
+- [ ] Přístup k logům je řízený rolí, důvodem a časem, ne pohodlím.
+- [ ] Export auditního logu je samostatně auditovaná událost.
+- [ ] Retence je napsaná, schválená a technicky vynucená.
+- [ ] Logovací pipeline má monitoring a tým ví, když přestane zapisovat.
+- [ ] Integrita logů je chráněná oddělenými právy nebo append-only přístupem tam, kde to dává smysl.
+- [ ] Zákazníkům umíme lidsky vysvětlit, co logujeme, proč a jak dlouho.
+
+### FW.9 Zdroje k auditním logům a privacy-first logování
+
+- [OWASP Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html) — praktické vodítko pro aplikační a bezpečnostní logování, volbu událostí, ochranu logů a testování logovacího mechanismu.
+- [OWASP Logging Vocabulary Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Vocabulary_Cheat_Sheet.html) — užitečná inspirace pro pojmenování typů bezpečnostních událostí.
+- [NIST SP 800-92: Guide to Computer Security Log Management](https://csrc.nist.gov/pubs/sp/800/92/final) — starší, ale pořád užitečný rámec pro životní cyklus log managementu.
+- [NIST SP 800-92 Rev. 1 Initial Public Draft](https://csrc.nist.gov/pubs/sp/800/92/r1/ipd) — novější návrh playbooku pro plánování zlepšení log managementu.
+- [European Commission: Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en) — přehled principů minimalizace dat a omezení uložení.
+- [GDPR na EUR-Lexu, článek 5](https://eur-lex.europa.eu/legal-content/EN/TXT/?toc=OJ%3AL%3A2016%3A119+%3ATOC&uri=uriserv%3AOJ.L_.2016.119.01.0001.01.ENG) — právní text principů zpracování osobních údajů v EU.
+
 ## Pracovní log
+- 2026-09-05 06:00 UTC — Doplněna příloha FW o auditních logách bez šmírovacího deníku: rozhodovací otázky, oddělení auditu od debug logů, minimální struktura události, řízený přístup, retence, integrita, šablona, checklist a ověřené zdroje OWASP/NIST/GDPR.
 
 - 2026-09-05 05:05 UTC — Doplněna příloha FV o správě secretů a konfigurace: rozlišení konfigurace a secretů, registr hodnot, oddělení prostředí, `.env.example`, CI/CD secrets, rotace, privacy-first otázky a checklist.
 
