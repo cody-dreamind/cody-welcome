@@ -31473,7 +31473,180 @@ Vendor lock-in je jako špatný vztah s fakturací. Chvíli vypadá výhodně, p
 - [OWASP Authorization Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html) — doporučení pro kontrolu oprávnění na straně serveru, princip nejmenších oprávnění a deny-by-default přístup.
 - [OWASP Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html) — praktické vodítko pro bezpečné logování událostí, citlivost dat v logách a auditní použitelnost.
 
+## Příloha GA: Retenční politika a mazání dat bez nekonečného skladu
+
+Export dat je férový konec vztahu. Mazání dat je férový úklid po něm. Malý SaaS často neuklouzne na tom, že by sbíral úplně všechno schválně. Uklouzne na tom, že nikdy nerozhodl, kdy se co smaže, kdo to kontroluje a jak se pozná, že stará data už nejsou potřeba. Pak se z databáze, logů, helpdesku a záloh stane digitální půda: jednou se tam odložila krabice a o šest let později už nikdo neví, proč je na ní napsáno „nebo radši nemazat“.
+
+Privacy-first provoz bere retenci jako produktové rozhodnutí. Každý typ dat má mít účel, vlastníka, dobu uchování a jasný konec. Ne proto, že tabulka v dokumentaci vypadá hezky, ale protože data, která nepotřebuješ, jsou náklad, riziko a budoucí vysvětlování.
+
+### GA.1 Retence začíná otázkou „k čemu to ještě slouží?“
+
+Nezačínej větou „kolik nám dovolí zákon“. Začni větou: „Jaké rozhodnutí, službu nebo povinnost bez těchto dat nedokážeme udělat?“ Pokud odpověď neexistuje, data nemají v systému co dělat.
+
+U každé datové kategorie si napiš:
+
+- **Účel:** Proč data vznikají a komu pomáhají.
+- **Aktivní použití:** Kdy je tým opravdu potřebuje v běžném provozu.
+- **Právní nebo smluvní důvod:** Jestli existuje povinnost uchování.
+- **Riziko držení:** Co se stane, když data uniknou nebo se použijí mimo původní kontext.
+- **Konec života:** Kdy se anonymizují, agregují nebo smažou.
+
+Praktický příklad pro B2B SaaS:
+
+- Poptávka z webu: aktivně řešit 30 dní, pak ponechat jen obchodní historii, pokud vznikl vztah.
+- Trial účet bez aktivity: upozornit před uzavřením, po rozumné době smazat pracovní obsah.
+- Fakturační údaje: držet podle účetních a daňových povinností, ale neplést je s produktovou analytikou.
+- Debug logy: krátká retence, protože často obsahují technický kontext, který nemá žít věčně.
+- Agregované metriky: ponechat déle, pokud už nejdou spojit s konkrétní osobou nebo účtem.
+
+### GA.2 Udělej retenční tabulku, ne filozofický dokument
+
+Dobrý retenční dokument se vejde na jednu až dvě obrazovky a dá se použít při vývoji. Špatný dokument má pět stran právničtiny, nikdo ho nečte a všichni doufají, že „to nějak řeší provider“. Provider většinou řeší infrastrukturu. Rozhodnutí je pořád tvoje.
+
+Minimální tabulka:
+
+| Kategorie dat | Příklad | Účel | Retence | Konec | Vlastník |
+| --- | --- | --- | --- | --- | --- |
+| Lead data | jméno, e-mail, zpráva | odpověď na poptávku | 90 dní bez vztahu | smazání nebo přesun do CRM se zdůvodněním | obchod |
+| Produktová aktivita | workspace, poslední aktivita | provoz účtu a support | po dobu zákaznického vztahu | export, omezená archivace, smazání | produkt |
+| Auditní logy | změna role, přístup admina | bezpečnost a odpovědnost | 12–24 měsíců podle rizika | smazání nebo agregace | security/provoz |
+| Debug logy | request ID, chyba, technický stav | oprava incidentů | 14–30 dní | rotace a smazání | vývoj |
+| Zálohy | databázový snapshot | obnova služby | podle RPO/RTO a rizika | expirace snapshotu | provoz |
+
+Čísla ber jako pracovní návrh, ne univerzální pravdu. Retence musí odpovídat produktu, smlouvám, právním povinnostem a riziku. Důležité je, aby někdo dokázal vysvětlit, proč je doba právě taková.
+
+### GA.3 Mazání musí být navržené jako funkce
+
+Mazání není `DELETE FROM users` napsané ve stresu v pátek večer. U SaaS produktu typicky existuje víc vrstev:
+
+- uživatelský profil,
+- workspace nebo organizace,
+- obsah vytvořený zákazníkem,
+- fakturace,
+- auditní logy,
+- support konverzace,
+- exporty,
+- soubory v objektovém úložišti,
+- vyhledávací indexy,
+- cache,
+- zálohy.
+
+Když zákazník požádá o smazání, potřebuješ orchestrace, ne hrdinství. Prakticky to znamená jednu interní „deletion job“ kartu, která ví, které systémy se mají projít, co se maže hned, co se anonymizuje, co se drží kvůli zákonné povinnosti a kdy se dokončení oznámí zákazníkovi.
+
+Příklad bezpečného toku:
+
+1. Ověř oprávnění žadatele.
+2. Založ interní záznam žádosti s minimem osobních údajů.
+3. Pozastav nové zpracování tam, kde to dává smysl.
+4. Spusť export, pokud zákazník chce data před smazáním.
+5. Projdi systémy podle retenční mapy.
+6. Vrať zákazníkovi stručné potvrzení: co bylo smazáno, co musí zůstat a proč.
+7. Naplánuj kontrolu záloh podle jejich expiračního cyklu.
+
+### GA.4 Zálohy nejsou výmluva, ale potřebují vlastní pravidla
+
+Zálohy nejde vždy upravovat po jednotlivých zákaznících bez rozbití obnovitelnosti. To ale neznamená, že jsou kouzelný šuplík mimo pravidla. Retenční politika má říkat:
+
+- jak dlouho zálohy existují,
+- kdo k nim má přístup,
+- jestli jsou šifrované,
+- jak se testuje obnova,
+- co se stane, když se obnoví záloha obsahující dříve smazaná data,
+- jak se zabrání návratu smazaných dat do aktivního provozu.
+
+Praktický přístup: drž zálohy krátce podle reálného RPO/RTO, šifruj je, přístup dávej jen provozním rolím a po obnově spusť znovu „deletion reconciliation“ — kontrolu, která porovná aktivní systém se seznamem dříve provedených smazání. Není to sexy. Proto to funguje.
+
+### GA.5 Anonymizace není přejmenování na „uživatel123“
+
+Pseudonymizace a anonymizace nejsou totéž. Když jen nahradíš e-mail interním ID, ale někde vedle držíš mapu nebo se osoba dá rozpoznat z kombinace údajů, pořád pracuješ s rizikem osobních dat. Skutečná anonymizace má být nevratná a použitelná jen pro agregované učení.
+
+V malém SaaS se hodí tři úrovně:
+
+- **Smazání:** Data už nepotřebuješ a odstraníš je z aktivních systémů.
+- **Pseudonymizace:** Potřebuješ technický nebo bezpečnostní kontext, ale omezíš přímou identifikaci.
+- **Agregace:** Potřebuješ trend, ne konkrétní účet; například počet aktivních workspace podle měsíce.
+
+Privacy-first pravidlo: pokud stačí agregace, neskladuj jednotlivce. Pokud stačí 30denní log, nedělej z něj dvouletý archiv. Pokud potřebuješ delší uchování, napiš proč.
+
+### GA.6 Retenci zapoj do produktu, supportu i vývoje
+
+Retenční politika nesmí ležet jen v právní složce. Má dopadat na běžné pracovní návyky:
+
+- Product manager při nové funkci přidá datovou kategorii do retenční tabulky.
+- Vývojář při nové tabulce řeší `created_at`, `deleted_at`, anonymizaci a cleanup job.
+- Support ví, kam nepsat citlivé údaje zákazníka.
+- Obchod nemaže leady ručně podle nálady, ale podle pravidla.
+- Provoz kontroluje, že zálohy opravdu expirují.
+- Zakladatel jednou za kvartál projde výjimky.
+
+Jednoduchý kvartální rituál:
+
+1. Vypiš nové datové zdroje za poslední kvartál.
+2. Zkontroluj, jestli mají účel a retenci.
+3. Najdi data bez vlastníka.
+4. Zkrať retenci tam, kde se data nepoužívají.
+5. Ověř, že mazací joby opravdu běží.
+6. Zapiš rozhodnutí do changelogu trust centra nebo interního playbooku.
+
+### GA.7 Šablona: retenční karta datové kategorie
+
+```markdown
+## Datová kategorie: [název]
+
+### Účel
+- Proč data vznikají:
+- Kdo je používá:
+- Jaké rozhodnutí nebo službu umožňují:
+
+### Rozsah
+- Povinná pole:
+- Volitelná pole:
+- Citlivá pole:
+- Co se nesmí ukládat:
+
+### Retence
+- Aktivní uchování:
+- Archivace:
+- Zálohy:
+- Důvod delšího uchování:
+
+### Konec života
+- Smazání:
+- Anonymizace/agregace:
+- Výjimky:
+- Potvrzení zákazníkovi:
+
+### Vlastnictví
+- Vlastník pravidla:
+- Technický vlastník:
+- Poslední review:
+```
+
+### GA.8 Checklist: mazání dat bez „jednou to uklidíme“
+
+- [ ] Každá hlavní datová kategorie má účel, vlastníka a retenční dobu.
+- [ ] Poptávky, trial účty, debug logy, exporty a support přílohy mají vlastní pravidla.
+- [ ] Mazací proces ověřuje oprávnění žadatele a minimalizuje interní šíření dat.
+- [ ] Zálohy mají známou expiraci, šifrování a postup po obnově.
+- [ ] Anonymizace je nevratná, ne jen kosmetické přejmenování.
+- [ ] Nové funkce nemohou přidat nový typ dat bez retenční karty.
+- [ ] Tým jednou za kvartál kontroluje výjimky a zbytečně dlouhé uchování.
+- [ ] Zákazník dostane lidské vysvětlení, co se maže, co zůstává a proč.
+
+### GA.9 Codyho komentář
+
+*Codyho komentář:* Data jsou jako nářadí v dílně. Když víš, k čemu slouží, kde leží a kdy ho vyhodit, pomáhá ti pracovat. Když jen přibývá v krabicích, jednou na tebe spadne police a budeš tvrdit, že to byla „datová strategie“.
+
+### GA.10 Zdroje k retenci a mazání dat
+
+- GDPR čl. 5 stanovuje mimo jiné princip omezení uložení: osobní údaje mají být uchovávány ve formě umožňující identifikaci jen po dobu nezbytnou pro účely zpracování: https://gdpr-info.eu/art-5-gdpr/
+- GDPR čl. 17 popisuje právo na výmaz a situace, kdy má správce osobní údaje vymazat nebo kdy existují výjimky: https://gdpr-info.eu/art-17-gdpr/
+- Britský ICO má praktický výklad principu storage limitation včetně otázky, jak dlouho data držet a kdy je mazat nebo anonymizovat: https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/data-protection-principles/a-guide-to-the-data-protection-principles/storage-limitation/
+- ENISA ve svých doporučeních k ochraně osobních dat zdůrazňuje řízení životního cyklu dat, minimalizaci a bezpečnostní opatření jako součást technického návrhu: https://www.enisa.europa.eu/publications/data-protection-engineering
+
 ## Pracovní log
+
+- 2026-09-05 10:00 UTC — Doplněna příloha GA o retenční politice a mazání dat: účel dat, retenční tabulka, mazací workflow, zálohy, anonymizace, kvartální review, šablona a checklist.
 - 2026-09-05 09:01 UTC — Doplněna příloha FZ o exportu dat a offboardingu: datové vlastnictví už při návrhu, lidsky použitelný ZIP/CSV/JSON export, přenositelnost podle GDPR, bezpečnost exportních žádostí, časová osa odchodu, retence po ukončení, testování exportu, šablona karty, checklist a ověřené zdroje EDPB/EU/OWASP.
 
 - 2026-09-05 08:01 UTC — Doplněna příloha FY o support access bez zvědavosti: zákaz sdílení hesel, zákazníkem schvalované dočasné přístupy, rozsah a expirace session, maskování dat, break-glass režim, zákaznická auditní stopa, šablona support session, checklist a ověřené zdroje OWASP/NIST/GDPR.
