@@ -33525,7 +33525,194 @@ Audit log je ideální místo, kde se ukáže charakter produktu. Buď z něj ud
 - [ENISA: Guidelines for SMEs on the security of personal data processing](https://www.enisa.europa.eu/publications/guidelines-for-smes-on-the-security-of-personal-data-processing) — evropský pohled na řízení rizik při zpracování osobních údajů v malých a středních organizacích.
 
 
+
+## Příloha GL: Session management bez věčných přihlášení a paranoidního odhlašování
+
+Přihlášení není jen formulář s e-mailem a heslem. Pro SaaS je to pracovní dohoda: uživatel se prokáže, aplikace mu na omezenou dobu věří a každá citlivá akce musí pořád dávat smysl v kontextu role, zařízení, tenantu a rizika. Špatně nastavené session jsou tichý průšvih. Buď zákazníka odhlašuješ tak agresivně, že tě proklíná při každé kávě, nebo mu necháš otevřené dveře týdny po tom, co notebook zůstal v hotelové lobby. Elegantní bezpečnost je někde mezi tím. Ano, nudnější odpověď. Bohužel často ta správná.
+
+### GL.1 Session není identita, ale dočasné oprávnění
+
+První chyba je mentální: tým začne brát aktivní session jako důkaz, že „tohle je pořád správný člověk“. Není. Session říká jen to, že před nějakou dobou proběhla autentizace a server zatím drží stav, podle kterého rozpoznává další požadavky. OWASP popisuje session jako mechanismus, kterým server udržuje stav interakce uživatele s aplikací a aplikuje na něj například přístupová práva. To je důležité slovo: stav. Stav se může změnit.
+
+V praxi to znamená:
+
+- když uživatel změní heslo, staré session musí dostat novou důvěru nebo skončit,
+- když admin odebere člověku roli, oprávnění se nemá projevit až po příštím pondělí,
+- když se zákazník odhlásí ze všech zařízení, server musí opravdu invalidovat tokeny,
+- když se mění tenant, workspace nebo organizace, nesmí se spoléhat na hodnotu poslanou z klienta,
+- když se objeví riziková akce, aplikace si má znovu ověřit, že za klávesnicí sedí oprávněný člověk.
+
+Dobré pravidlo: identita je dlouhodobý záznam, session je krátkodobá vstupenka. Vstupenka má expiraci, rozsah a pravidla zrušení.
+
+### GL.2 Odděl access session, refresh token a zařízení
+
+Malý SaaS často začne jednou cookie a pocitem, že „to nějak běží“. To je v MVP pochopitelné, ale jakmile produkt začne obsahovat zákaznická data, role a billing, potřebuješ přesnější model.
+
+Praktické rozdělení:
+
+- **Access session** — krátkodobý serverový nebo tokenový stav, který autorizuje běžné požadavky.
+- **Refresh token / remember-me** — delší oprávnění k obnovení session bez plného loginu, uložené opatrně a rotované.
+- **Device record** — popis zařízení nebo prohlížeče pro uživatelské rozhraní „kde jsem přihlášený“.
+- **Risk state** — informace, že session je čerstvě ověřená, nebo naopak potřebuje re-auth pro citlivou akci.
+- **Revocation list / session store** — serverová možnost session ukončit, nejen čekat, až sama vyhnije.
+
+Pokud používáš čistě stateless JWT bez možnosti serverové revokace, zvaž, jestli si tím nekupuješ pohodlí na úkor bezpečnostního řízení. Krátká expirace pomáhá, ale neřeší všechno: kompromitovaný token může být platný až do konce své životnosti a odebrání role se nemusí projevit hned. U B2B SaaS je často rozumnější mít serverem ověřitelný session stav nebo aspoň kombinaci krátkých access tokenů, rotovaných refresh tokenů a jasného revokačního mechanismu.
+
+*Codyho komentář:* „Stateless“ zní elegantně, dokud zákazník nezavolá, že bývalý zaměstnanec má pořád otevřený účet. Pak je stateless hlavně tvůj výraz v obličeji.
+
+### GL.3 Nastav idle timeout, absolute timeout a renewal
+
+OWASP doporučuje u session řešit několik časových hranic: nečinnost, absolutní délku a případnou obnovu identifikátoru session. NIST SP 800-63B také rozlišuje celkový timeout a timeout neaktivity; aktivita resetuje neaktivitu, úspěšné znovuověření resetuje oba typy timeoutů. Přeloženo do produktového jazyka: uživatel nemá být přihlášený navždy jen proto, že to bylo pohodlné v první verzi.
+
+Začni tabulkou podle citlivosti:
+
+| Kontext | Idle timeout | Absolute timeout | Re-auth při riziku |
+|---|---:|---:|---|
+| Veřejná administrace profilu | 30–60 minut | 8–24 hodin | změna e-mailu, hesla, MFA |
+| Běžná B2B práce s nízkým rizikem | 30–120 minut | 1–7 dní | export, billing, změna rolí |
+| Admin účet s přístupem k datům | 15–30 minut | 8–24 hodin | každá citlivá administrace |
+| Support access / break-glass | 5–15 minut | podle schválené session | vždy před vstupem |
+
+Neber čísla jako univerzální zákon vytesaný do kamene. Ber je jako startovní návrh. Pokud uživatelé pracují celý den v jedné aplikaci, agresivní odhlašování zničí produktivitu. Pokud aplikace obsahuje zdravotní, finanční nebo interně citlivá data, dlouhé tiché session jsou risk. Důležitá je vědomá volba, ne default frameworku z roku, kdy všichni nosili nízké bokovky.
+
+### GL.4 Citlivé akce chtějí čerstvé ověření
+
+Ne každá stránka potřebuje stejnou úroveň důvěry. Čtení běžného dashboardu není totéž jako export všech zákaznických dat, změna vlastníka workspace, vypnutí MFA, vytvoření API klíče nebo změna fakturační e-mailové adresy.
+
+Zaveď pojem **fresh session**: uživatel se nedávno znovu ověřil heslem, passkey, MFA nebo přes identity provider. Citlivé akce dovol jen tehdy, když je session čerstvá. Pokud není, ukaž klidnou výzvu:
+
+> Pro tuto změnu potřebujeme krátké ověření. Chráníme tím účet i data zákazníků.
+
+Dobré kandidáty na re-auth:
+
+- změna hesla, e-mailu, MFA a recovery metod,
+- změna rolí, pozvánek a vlastnictví organizace,
+- export dat, mazání účtu a hromadné operace,
+- vytvoření nebo zobrazení API klíče,
+- změny SSO/SCIM, billing údajů a platební metody,
+- vstup podpory do zákaznického účtu,
+- vypnutí bezpečnostního nastavení.
+
+Re-auth není trest. Je to bezpečnostní zpomalovací práh přesně tam, kde chyba bolí.
+
+### GL.5 Logout musí rušit serverový stav, ne jen mazat cookie v prohlížeči
+
+Tlačítko „Odhlásit“ má být akce na serveru. Nestačí smazat cookie v browseru a tvářit se, že tím vesmír zapomněl token. Server musí session označit jako neplatnou nebo odstranit ze session store. U refresh tokenů zaveď rotaci: při každém použití se vydá nový token a starý se zneplatní. Pokud se starý token objeví znovu, je to signál možného úniku.
+
+Uživatelské rozhraní by mělo mít stránku „Aktivní zařízení“:
+
+- název zařízení nebo prohlížeče,
+- přibližný čas poslední aktivity,
+- přibližnou lokaci jen pokud ji opravdu potřebuješ a umíš ji vysvětlit,
+- možnost odhlásit jedno zařízení,
+- možnost odhlásit všechna ostatní zařízení,
+- upozornění při novém přihlášení nebo významné změně.
+
+Privacy-first detail: nepřeháněj fingerprinting. Uživatel nepotřebuje vědět, že prohlížeč měl 47 vlastností a font „Papyrus“, protože ano, někdo ho pořád má. Stačí lidsky čitelný popis zařízení, čas a možnost akce. Diagnostická data drž krátce a pouze pro bezpečnostní účel.
+
+### GL.6 Session data nepatří do analytics ani marketingu
+
+Session management je bezpečnostní a produktová vrstva, ne zdroj pro stalkerský growth dashboard. Neposílej session identifikátory do analytiky, reklamních nástrojů, chat widgetů ani externích logovacích služeb bez velmi dobrého důvodu a smluvního pokrytí. Session ID, refresh token, device ID i interní user ID mohou být citlivé údaje nebo snadno spojitelné identifikátory.
+
+Privacy-first pravidla:
+
+- session tokeny nikdy neloguj v plném tvaru,
+- do audit logu ukládej událost, ne tajný token,
+- IP adresu a user-agent zvaž podle účelu a retence,
+- pro produktovou analytiku používej agregace, ne detailní replay života uživatele,
+- bezpečnostní signály drž odděleně od marketingových kampaní,
+- pro support zobrazuj minimum: stav session ano/ne, ne plné technické detaily.
+
+Pokud potřebuješ korelaci incidentu, použij interní `request_id` nebo krátkodobý hash, ne session token. Token je klíč. Klíče se nedávají do výlohy jen proto, že graf bude hezčí.
+
+### GL.7 Testuj session jako hlavní bezpečnostní funkci
+
+Session chyby často nevypadají jako bug na screenshotu. Vypadají jako „něco pořád funguje, i když už nemá“. Proto je testuj scénářově.
+
+Testovací sada pro malý tým:
+
+1. Přihlásím se, změním heslo v jiné session, původní session ztratí důvěru pro citlivé akce.
+2. Admin odebere uživateli roli, uživatel se okamžitě nedostane k chráněné akci ani přes starý tab.
+3. Uživatel se odhlásí, starý refresh token už nejde použít.
+4. Refresh token se použije dvakrát; druhé použití spustí revokaci celé token family.
+5. Idle timeout vyprší na serveru, i když klient manipuluje lokálním časem.
+6. Absolute timeout vyprší i při pravidelné aktivitě.
+7. Export dat vyžaduje fresh session.
+8. „Odhlásit všechna zařízení“ opravdu ukončí ostatní session.
+9. Session cookie má `Secure`, `HttpOnly`, rozumné `SameSite` a není dostupná JavaScriptem.
+10. Logy neobsahují session ID, refresh tokeny ani autorizační hlavičky.
+
+Automatizuj alespoň nejrizikovější scénáře. Není potřeba mít kosmickou bezpečnostní laboratoř; stačí Playwright test, pár integračních testů a disciplína nepřeskakovat je před releasem.
+
+### GL.8 Šablona: karta session politiky
+
+```markdown
+## Session politika: [produkt / prostředí]
+
+### Typy session
+- Access session:
+- Refresh / remember-me:
+- Admin session:
+- Support access session:
+
+### Timeouty
+- Idle timeout:
+- Absolute timeout:
+- Renewal / token rotation:
+- Varování před expirací:
+
+### Re-auth pravidla
+- Akce vyžadující fresh session:
+- Doba platnosti fresh session:
+- MFA / passkey / IdP pravidla:
+
+### Revokace
+- Logout jednoho zařízení:
+- Logout všech zařízení:
+- Změna hesla / MFA:
+- Odebrání role:
+- Detekce reuse refresh tokenu:
+
+### Privacy
+- Co se loguje:
+- Co se nikdy neloguje:
+- Retence device/session metadat:
+- Kdo vidí aktivní zařízení:
+
+### Testy
+- Automatické testy:
+- Manuální scénáře:
+- Poslední review:
+```
+
+### GL.9 Checklist: session management bez věčných dveří
+
+- [ ] Máme oddělené access session, refresh tokeny a záznamy zařízení.
+- [ ] Každá session má serverem vynucený idle timeout.
+- [ ] Každá session má serverem vynucený absolute timeout.
+- [ ] Citlivé akce vyžadují fresh session nebo MFA.
+- [ ] Logout ruší serverový stav, ne jen lokální cookie.
+- [ ] Uživatel vidí aktivní zařízení a umí je odhlásit.
+- [ ] Změna hesla, MFA nebo rolí invaliduje relevantní session.
+- [ ] Refresh tokeny se rotují a reuse je bezpečnostní signál.
+- [ ] Session ID, tokeny a autorizační hlavičky se nikdy nelogují.
+- [ ] Session metadata mají jasnou retenci a nejsou posílaná do marketingu.
+- [ ] Testujeme expiraci, revokaci, změnu oprávnění a re-auth scénáře.
+- [ ] Pravidla jsou popsaná v dokumentaci, ne jen v hlavě člověka, který zrovna odjel na chalupu.
+
+### GL.10 Codyho komentář
+
+Session management je přesně ten typ práce, který zákazník ocení až ve chvíli, kdy se něco pokazí. Když je špatně, vypadá to jako bezpečnostní incident. Když je dobře, vypadá to jako normální aplikace, která se chová rozumně. A to je cíl: bezpečnost, která nedělá divadlo, ale drží dveře tam, kde mají být.
+
+### GL.11 Zdroje k session managementu a re-auth
+
+- OWASP Session Management Cheat Sheet — doporučení k expiraci session, idle/absolute timeoutům, obnově session ID a bezpečnostním cookie atributům: https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html
+- OWASP Authentication Cheat Sheet — kontext autentizace, session managementu a znovuověření po rizikových událostech: https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html
+- NIST SP 800-63B — požadavky a doporučení k re-authentication, inactivity timeout a overall timeout pro digitální identitu: https://pages.nist.gov/800-63-4/sp800-63b.html
+- OWASP Web Security Testing Guide: Testing for Session Timeout — praktické testování serverově vynucené expirace session: https://owasp.org/www-project-web-security-testing-guide/stable/4-Web_Application_Security_Testing/06-Session_Management_Testing/07-Testing_Session_Timeout
+
 ## Pracovní log
+- 2026-09-05 21:00 UTC — Doplněna příloha GL o session managementu pro SaaS: rozlišení access session, refresh tokenů a zařízení, idle/absolute timeouty, fresh session pro citlivé akce, serverová revokace, privacy-first práce se session metadaty, testovací scénáře, šablona politiky, checklist a ověřené zdroje OWASP/NIST.
 
 - 2026-09-05 20:00 UTC — Doplněna příloha GK o audit logu pro B2B SaaS: rozdělení logů podle účelu, výběr auditních událostí, model actor/action/target/tenant, privacy-first minimalizace, zákaznický a interní pohled, retence, neměnnost, šablona karty, checklist a ověřené zdroje OWASP/NIST/ENISA.
 
