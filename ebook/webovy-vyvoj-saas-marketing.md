@@ -30238,7 +30238,212 @@ Trust center je obchodní zkratka pro týmy, které nechtějí každý měsíc z
 - OWASP — Application Security Verification Standard: https://owasp.org/www-project-application-security-verification-standard/
 
 
+## Příloha FT: Vulnerability disclosure pro malý SaaS bez bezpečnostního divadla
+
+Každý produkt, který je připojený k internetu, jednou narazí na bezpečnostní zjištění. Otázka není „jestli“, ale „co se stane, až někdo najde problém“. Malý SaaS často nemá bezpečnostní tým, bug bounty rozpočet ani právní oddělení připravené ve vedlejší místnosti. Může ale mít jasný, klidný a férový způsob, jak přijmout hlášení, ověřit ho, opravit a poděkovat.
+
+Vulnerability disclosure není pozvánka k chaosu. Je to domluvená cesta pro lidi, kteří chtějí upozornit na slabinu bez toho, aby museli hledat náhodný e-mail na fakturaci nebo psát zakladateli na LinkedIn ve dvě ráno. A ano, security.txt je nudný malý soubor. Přesně proto ho mám rád. Nudné věci často zachraňují víkendy.
+
+### FT.1 Nejdřív si řekni, co vlastně přijímáš
+
+Než zveřejníš bezpečnostní kontakt, napiš interně rozsah. Bez něj bude každý report dobrodružná výprava do země „možná je to bug, možná je to feature, možná nám někdo poslal screenshot produkční databáze, paráda“.
+
+Rozsah má odpovědět na otázky:
+
+- Které domény, aplikace, API a mobilní klienti do programu patří?
+- Které systémy jsou mimo rozsah, protože je provozuje zákazník, partner nebo jiný dodavatel?
+- Jaké typy testů jsou povolené bez předchozí domluvy?
+- Jaké testy jsou zakázané, protože mohou poškodit dostupnost nebo data?
+- Kam se má poslat hlášení a v jakém jazyce?
+- Jak rychle tým potvrdí přijetí?
+
+Pro malý SaaS bohatě stačí úzký start: produkční web, přihlašování, zákaznická aplikace, veřejné API a dokumentace. Interní nástroje, platební brána třetí strany nebo zákaznické instance můžeš řešit zvlášť. Hlavní je nenechat výzkumníka hádat.
+
+### FT.2 Security.txt je směrovka, ne celý proces
+
+Standard security.txt podle RFC 9116 popisuje jednoduchý strojově čitelný soubor, typicky na adrese `/.well-known/security.txt`, kde můžeš uvést kontakt, expiraci, preferovaný jazyk, odkaz na politiku a případně šifrovací klíč. Není to certifikát bezpečnosti. Je to cedule „tady hlaste bezpečnostní věci“.
+
+Praktický minimální obsah:
+
+```text
+Contact: mailto:security@example.com
+Policy: https://example.com/security
+Preferred-Languages: cs, en
+Expires: 2026-12-31T23:59:00Z
+```
+
+`Expires` není kosmetika. Nutí tě soubor udržovat. Pokud má security.txt prošlé datum, vypadá to jako cedule „bezpečnost řešíme, dokud se nám nerozbije kalendář“. Dej si připomínku minimálně jednou za kvartál.
+
+Na stránce `https://example.com/security` pak vysvětli lidsky:
+
+- co je v rozsahu,
+- co je mimo rozsah,
+- jaké testování je bezpečné,
+- co má report obsahovat,
+- jak bude tým komunikovat,
+- jak chráníš data poslaná v reportu.
+
+### FT.3 Safe harbor napiš lidsky a rozumně
+
+Výzkumník potřebuje vědět, že když postupuje v dobré víře, nebudeš na něj reagovat právním granátem. Safe harbor neznamená „dělej si co chceš“. Znamená „pokud respektuješ pravidla, budeme s tebou jednat férově“.
+
+Dobrá pravidla:
+
+- Neprováděj útoky, které narušují dostupnost služby.
+- Nepřistupuj k datům jiných uživatelů víc, než je nutné k prokázání problému.
+- Neexportuj, nemaž ani neupravuj cizí data.
+- Nepoužívej sociální inženýrství, phishing ani fyzický přístup.
+- Dej nám přiměřený čas na opravu před veřejným zveřejněním.
+- Report pošli soukromě na uvedený kontakt.
+
+K tomu přidej závazek týmu:
+
+- Potvrdíme přijetí do například tří pracovních dnů.
+- Budeme průběžně informovat o stavu podle závažnosti.
+- Nebudeme požadovat mlčení navždy, ale domluvíme odpovědné zveřejnění.
+- Pokud report nebude validní, vysvětlíme proč.
+- Pokud report pomůže, poděkujeme a po domluvě uvedeme autora.
+
+U právních formulací se vyplatí konzultace. Ale i bez drahého programu můžeš napsat férovou politiku, která snižuje tření a ukazuje, že bereš bezpečnost dospěle.
+
+### FT.4 Report musí vést k rozhodnutí, ne k nekonečné debatě
+
+Jakmile report přijde, nesmí spadnout do obecného inboxu. Vytvoř jednoduchý triage postup.
+
+První odpověď:
+
+- poděkuj,
+- potvrď přijetí,
+- přiděl interní ID,
+- řekni, kdy se ozveš znovu,
+- požádej o chybějící informace, pokud jsou nutné.
+
+Interně vyplň kartu nálezu:
+
+- **Shrnutí:** co bylo nahlášeno.
+- **Dopad:** jaký zákaznický nebo datový dopad je realistický.
+- **Rozsah:** kterých systémů se týká.
+- **Reprodukovatelnost:** zda tým problém ověřil.
+- **Závažnost:** nízká, střední, vysoká, kritická.
+- **Datová stopa:** zda se objevila osobní nebo zákaznická data.
+- **Další krok:** oprava, mitigace, odmítnutí, eskalace, právní konzultace.
+
+Závažnost neurčuj podle toho, jak dramaticky report zní. Určuj ji podle dopadu: únik dat, převzetí účtu, obejití oprávnění, možnost změnit cizí data, dostupnost služby, reputační riziko. Screenshot administrační stránky bez přístupu může být informační nález. Možnost číst cizí faktury je požár s helmou a majáčkem.
+
+### FT.5 Privacy-first triage chrání i výzkumníka
+
+Bezpečnostní report může obsahovat citlivé informace: e-maily uživatelů, tokeny, ID objednávek, screenshoty, IP adresy, logy nebo kroky, které ukazují na slabinu. S takovým reportem zacházej jako s citlivým provozním dokumentem.
+
+Praktická pravidla:
+
+- Reporty drž v interním systému s omezeným přístupem, ne ve sdíleném chatu bez retence.
+- Citlivé přílohy kopíruj jen tam, kde je opravdu potřebuješ.
+- Do veřejných issues nedávej exploatovatelné detaily.
+- Po uzavření reportu smaž diagnostická data, která už nepotřebuješ.
+- Pokud report obsahuje osobní údaje, zaznamenej účel, přístup a retenční dobu.
+- Pokud nález znamená porušení zabezpečení osobních údajů, spusť incidentový postup podle GDPR.
+
+Privacy-first přístup tady nechrání jen zákazníky. Chrání i člověka, který ti problém nahlásil. Neposílej jeho e-mail, jméno nebo technické detaily nálezu do nástrojů, které k tomu nepotřebuješ. Bezpečnostní spolupráce není lead magnet.
+
+### FT.6 Oprava není konec, dokud se nezmění systém
+
+U menší chyby může stačit patch a test. U vážnějšího nálezu se ptej: proč to prošlo?
+
+Možné systémové změny:
+
+- přidat automatický test oprávnění,
+- upravit code review checklist,
+- zpřísnit validaci vstupů,
+- oddělit role v administraci,
+- zkrátit životnost tokenů,
+- přidat alert na podezřelé chování,
+- aktualizovat dokumentaci nebo runbook,
+- doplnit bezpečnostní požadavek do Definition of Done.
+
+U každého validního reportu si napiš jednu větu: „Co uděláme, aby se stejná třída chyby neopakovala?“ Když odpověď zní „budeme opatrnější“, ještě nejsi hotový. Opatrnost není kontrolní mechanismus. Je to nálada s krátkou životností.
+
+### FT.7 Komunikace po uzavření má být stručná a férová
+
+Výzkumníkovi pošli uzavření. Ne román, ale konkrétní výsledek:
+
+- zda byl nález validní,
+- jaká byla obecná závažnost,
+- zda je opraveno nebo mitigováno,
+- jestli je potřeba zákaznická komunikace,
+- zda a kdy může být nález zveřejněn,
+- jak bude uvedeno poděkování.
+
+Pokud nález odmítáš, vysvětli důvod. Třeba: mimo rozsah, nelze reprodukovat, chybí bezpečnostní dopad, známé riziko s přijatým opatřením. I odmítnutí může budovat důvěru, když je věcné.
+
+Pro zákazníky odděl dvě roviny. Bezpečnostní detail patří do řízené komunikace. Zákaznický dopad patří do srozumitelného sdělení: co se stalo, koho se to týká, co jste udělali, co má zákazník udělat a koho kontaktovat. Žádné „došlo k situaci“. Situace je počasí. Incident je incident.
+
+### FT.8 Šablona: vulnerability disclosure politika
+
+```markdown
+## Bezpečnostní hlášení
+
+### Kontakt
+- E-mail: security@[doména]
+- Preferované jazyky: čeština, angličtina
+- Odpověď očekávejte do: [např. 3 pracovních dnů]
+
+### Rozsah
+- V rozsahu: [domény, aplikace, API]
+- Mimo rozsah: [dodavatelé, zákaznické instance, fyzická bezpečnost]
+
+### Povolené testování
+- [např. běžné ověření zranitelnosti bez narušení dostupnosti]
+- [např. test na vlastním účtu]
+
+### Zakázané testování
+- DDoS, spam, phishing, sociální inženýrství
+- Přístup, změna nebo export dat jiných uživatelů nad nutné minimum
+- Destruktivní testy a pokusy obejít platební systémy třetích stran
+
+### Co má report obsahovat
+- Kroky k reprodukci
+- Dopad
+- Důkaz v minimálním rozsahu
+- Kontakt pro doplňující otázky
+
+### Naše reakce
+- Potvrdíme přijetí
+- Ověříme dopad
+- Budeme informovat o stavu
+- Po opravě se domluvíme na zveřejnění a poděkování
+
+### Zacházení s daty
+- Reporty držíme omezeně a jen pro řešení bezpečnostního nálezu
+- Citlivé přílohy mažeme po uzavření podle retenčního pravidla
+```
+
+### FT.9 Checklist: disclosure bez chaosu
+
+- [ ] Existuje adresa `/.well-known/security.txt` s funkčním bezpečnostním kontaktem.
+- [ ] Security.txt má datum expirace a pravidelnou kontrolu v kalendáři.
+- [ ] Veřejná politika jasně popisuje rozsah, zakázané testy a očekávanou reakci.
+- [ ] Interní triage postup má vlastníka, ID reportu a pravidlo první odpovědi.
+- [ ] Každý report se hodnotí podle zákaznického, bezpečnostního a datového dopadu.
+- [ ] Citlivé důkazy z reportů mají omezený přístup a retenční pravidlo.
+- [ ] Validní nález vede nejen k opravě, ale i k prevenci stejné třídy chyby.
+- [ ] Uzavření reportu je komunikované výzkumníkovi férově a bez mlžení.
+
+### FT.10 Codyho komentář
+
+Vulnerability disclosure je jako dobrá poštovní schránka pro bezpečnostní problémy. Nikdo kvůli ní nejásá na launch party, ale když ji nemáš, lidi hází důležité věci přes plot. A pak se všichni diví, proč je v trávě hořící obálka.
+
+### FT.11 Zdroje k vulnerability disclosure a security.txt
+
+- RFC 9116 — A File Format to Aid in Security Vulnerability Disclosure: https://www.rfc-editor.org/rfc/rfc9116
+- CISA — Coordinated Vulnerability Disclosure Process: https://www.cisa.gov/resources-tools/resources/coordinated-vulnerability-disclosure-process
+- CERT/CC — The CERT Guide to Coordinated Vulnerability Disclosure: https://vuls.cert.org/confluence/display/CVD/The+CERT+Guide+to+Coordinated+Vulnerability+Disclosure
+- OWASP — Vulnerability Disclosure Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Vulnerability_Disclosure_Cheat_Sheet.html
+- GDPR, články 33 a 34 k oznamování porušení zabezpečení osobních údajů: https://eur-lex.europa.eu/eli/reg/2016/679/2016-05-04/eng
+
+
 ## Pracovní log
+
+- 2026-09-05 03:02 UTC — Doplněna příloha FT o vulnerability disclosure pro malý SaaS: security.txt podle RFC 9116, rozsah hlášení, safe harbor, triage reportů, privacy-first zacházení s důkazy, systémové opravy, férové uzavření, šablona politiky, checklist a ověřené zdroje k CVD.
 
 - 2026-09-05 02:00 UTC — Doplněna příloha FS o trust centru pro malý evropský SaaS: zákaznické otázky, vrstvy veřejných/zákaznických/neveřejných informací, srozumitelná privacy-first komunikace, bezpečnostní návyky, údržba, poctivé formulace, šablona karty, checklist a ověřené zdroje k GDPR, EDPB, ENISA a OWASP.
 
