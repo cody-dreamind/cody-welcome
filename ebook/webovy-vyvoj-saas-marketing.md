@@ -29721,7 +29721,184 @@ Přechod do produkce je chvíle, kdy se z „tohle by mohlo fungovat“ stává 
 - Evropská komise — pravidla ochrany osobních údajů pro podniky a organizace: https://commission.europa.eu/law/law-topic/data-protection/reform/rules-business-and-organisations_en
 - EDPB — pokyny k pojmům správce a zpracovatele podle GDPR: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-072020-concepts-controller-and-processor-gdpr_en
 
+## Příloha FQ: První produkční incident bez chaosu, mlžení a datové paniky
+
+Produkce běží. Zákazník pracuje. Všechno je najednou skutečné. A pak přijde první incident: import spadne na půlce, přihlašování odmítá část uživatelů, fakturační webhook se rozhodne hrát mrtvého brouka nebo support dostane zprávu „něco je špatně“ s přílohou screenshotu velikosti poštovní známky.
+
+První incident je test důvěry. Ne proto, že musíš být bezchybný. Bezchybnost je hezká pohádka, kterou si vypráví systémy před prvním DNS problémem. Test je v tom, jestli umíš rychle zjistit dopad, omezit škodu, komunikovat srozumitelně a po opravě zlepšit systém místo hledání obětního juniora.
+
+### FQ.1 Incident definuj podle dopadu na zákazníka
+
+Nezačínej technickou větou „Redis měl timeout“. Začni otázkou: co zákazník nemohl udělat?
+
+Praktické úrovně:
+
+- **SEV 1:** zákazník nemůže používat klíčový pracovní tok nebo existuje podezření na únik či neoprávněný přístup k datům.
+- **SEV 2:** významná část uživatelů má omezenou funkčnost, ale existuje bezpečná náhradní cesta.
+- **SEV 3:** chyba bolí, ale neblokuje hlavní práci.
+- **SEV 4:** kosmetika, drobná nekonzistence, dokumentační problém nebo interní varování bez zákaznického dopadu.
+
+Každý incident by měl mít jednu větu dopadu:
+
+> Od 09:20 do 09:47 nemohli administrátoři zákazníka X dokončit import kontaktů; uložená data nebyla změněna a běžní uživatelé mohli pokračovat v práci.
+
+Tahle věta pomáhá týmu i zákazníkovi. Technický detail přijde později. Nejdřív dopad, rozsah, čas a bezpečnost dat.
+
+### FQ.2 Prvních patnáct minut má mít pevný postup
+
+V incidentu nechceš vymýšlet proces. Chceš ho spustit. Prvních patnáct minut rozhoduje, jestli bude tým řešit problém, nebo řešit tým.
+
+Mini postup:
+
+1. **Potvrď incident:** reprodukce, monitoring, support hlášení nebo logy.
+2. **Urči vlastníka:** jeden člověk koordinuje, i když opravuje někdo jiný.
+3. **Zastav zhoršování:** rollback, vypnutí rizikové funkce, omezení importu, rate limit, dočasná blokace akce.
+4. **Zapiš časovou osu:** první signál, potvrzení, první opatření, komunikace.
+5. **Rozhodni o komunikaci:** komu říct co, kdy a jakým kanálem.
+
+Použij jednoduchou incident kartu. Nepotřebuješ honosný systém. Stačí sdílený dokument nebo ticket, který má vlastníka, čas a další krok. Horší než nemít dokonalý nástroj je mít pět paralelních vláken, kde každý ví „něco“ a nikdo neví „teď“.
+
+### FQ.3 Privacy-first triage začíná otázkou na data
+
+U každého produkčního incidentu si polož datové otázky hned na začátku:
+
+- Mohlo dojít k neoprávněnému přístupu k osobním údajům?
+- Mohla se data změnit, ztratit, zamíchat mezi zákazníky nebo zpřístupnit nesprávné roli?
+- Jsou v logách, exportech, screenshotech nebo podpůrných zprávách osobní údaje, které tam být nemusí?
+- Je potřeba omezit přístupy, rotovat tokeny nebo vypnout integraci?
+- Kdo rozhoduje, jestli jde o bezpečnostní incident nebo porušení zabezpečení osobních údajů?
+
+Pokud je ve hře osobní údaj, nečekej na „až budeme vědět všechno“. GDPR pracuje s pojmem porušení zabezpečení osobních údajů a správce má povinnost některá porušení oznámit dozorovému úřadu bez zbytečného odkladu, pokud možno do 72 hodin od okamžiku, kdy se o nich dozvěděl. To neznamená, že každý bug je automaticky hlášení úřadu. Znamená to, že musíš rychle a prokazatelně posoudit riziko.
+
+Privacy-first provoz není panika. Je to disciplína: víš, kde jsou data, kdo je vlastníkem rozhodnutí a jak se omezí další škoda.
+
+### FQ.4 Komunikace má být rychlá, krátká a pravdivá
+
+Incidentová komunikace není prostor pro marketingovou mlhu. Zákazník nepotřebuje slyšet „naše týmy intenzivně pracují“. To předpokládá. Pokud nepracují, máme větší problém a menší kafe.
+
+První zpráva má obsahovat:
+
+- co se děje,
+- koho se to týká,
+- co zatím víš a nevíš,
+- jestli existuje workaround,
+- kdy přijde další update.
+
+Příklad:
+
+```text
+Od 09:20 řešíme problém s importem kontaktů ve vašem účtu. Běžná práce s existujícími kontakty funguje, nové importy mohou končit chybou. Importy jsme dočasně pozastavili, aby nevznikly neúplné záznamy. Další update pošleme do 10:15.
+```
+
+Když nevíš, řekni „zatím nevíme“. Ale přidej, co děláš pro zjištění. Mlžení ničí důvěru rychleji než samotná chyba.
+
+### FQ.5 Neopravuj víc, než je nutné k zastavení dopadu
+
+V incidentu je lákavé rovnou refaktorovat půl systému. Nedělej to. Incidentní oprava má být nejmenší bezpečný krok, který obnoví službu nebo zastaví škodu.
+
+Rozliš tři typy práce:
+
+- **Mitigace:** rychlé omezení dopadu, například rollback nebo vypnutí konkrétní akce.
+- **Oprava:** změna, která odstraní bezprostřední příčinu.
+- **Prevence:** hlubší zlepšení, které patří do postmortem backlogu.
+
+Příklad: pokud nový importní validátor rozbíjí CSV s diakritikou, mitigace může být návrat na předchozí verzi validátoru. Oprava je test a úprava parseru. Prevence je sada importních fixture dat, release checklist a monitoring chyb podle typu souboru.
+
+Takhle držíš tým při zemi. Produkce není místo pro chirurgii motorovou pilou.
+
+### FQ.6 Zákaznická data v incidentu chraň ještě víc než normálně
+
+Při incidentu lidé často kopírují logy, exporty a screenshoty do chatu. Protože spěchají. A protože chat je pohodlný. A protože budoucí audit zřejmě potřeboval dramatickou zápletku.
+
+Pravidla:
+
+- Do interního chatu neposílej celé exporty osobních dat.
+- Screenshoty před sdílením anonymizuj, pokud obsahují zákaznická nebo osobní data.
+- Logy omez na relevantní čas, request ID a technický kontext.
+- Přístupy dávej dočasně a po incidentu je odeber.
+- Pokud vznikne diagnostická kopie dat, napiš účel, vlastníka a termín smazání.
+
+Incident nesmí být výmluva pro datový nepořádek. Právě naopak: stres odhalí, jestli máš privacy-first návyky opravdu v provozu.
+
+### FQ.7 Po opravě udělej krátké uzavření ještě tentýž den
+
+Nečekej týden. Dokud je kontext čerstvý, napiš krátké uzavření:
+
+- co se stalo,
+- kdy to začalo a skončilo,
+- jaký byl dopad,
+- co bylo příčinou,
+- jaká byla mitigace a oprava,
+- co se udělá preventivně,
+- jestli byla dotčena data a jak se to posoudilo.
+
+Nemusí to být velký postmortem. U menších incidentů stačí jeden odstavec pro zákazníka a interní karta pro tým. U větších incidentů naváže plnohodnotný postmortem, ale i tam je rychlé uzavření důležité: zákazník ví, že problém nezmizel jen proto, že přestal křičet monitoring.
+
+### FQ.8 Šablona: incident karta pro první produkční týdny
+
+```markdown
+## Incident: [název / zákazník / datum]
+
+### Základ
+- Závažnost:
+- Vlastník incidentu:
+- První signál:
+- Začátek dopadu:
+- Konec dopadu:
+- Dotčený zákazník / segment:
+
+### Dopad
+- Co uživatelé nemohli udělat:
+- Rozsah:
+- Workaround:
+- Stav dat:
+
+### Privacy a bezpečnost
+- Mohlo dojít k neoprávněnému přístupu?
+- Mohla být data změněna nebo ztracena?
+- Je potřeba právní / DPO posouzení?
+- Diagnostické kopie a termín smazání:
+
+### Reakce
+- Mitigace:
+- Oprava:
+- Komunikace zákazníkovi:
+- Další update:
+
+### Uzavření
+- Příčina:
+- Preventivní kroky:
+- Vlastníci:
+- Termíny:
+```
+
+### FQ.9 Checklist: první incident bez ztráty důvěry
+
+- [ ] Incident je popsaný podle zákaznického dopadu, ne jen podle technické chyby.
+- [ ] Jeden člověk vlastní koordinaci a časovou osu.
+- [ ] Prvních patnáct minut má jasný postup: potvrdit, omezit dopad, zapsat, komunikovat.
+- [ ] Tým hned posoudil, jestli jsou dotčená osobní nebo zákaznická data.
+- [ ] Zákazník dostal krátkou pravdivou zprávu s termínem dalšího updatu.
+- [ ] Mitigace je oddělená od hlubší prevence.
+- [ ] Logy, screenshoty a exporty se sdílely jen v minimálním rozsahu.
+- [ ] Dočasné přístupy a diagnostické kopie mají vlastníka a termín odstranění.
+- [ ] Po opravě vzniklo uzavření s dopadem, příčinou a preventivními kroky.
+
+### FQ.10 Codyho komentář
+
+První incident není ostuda. Ostuda je tvářit se, že se nic nestalo, zatímco zákazník mezitím vymýšlí vlastní workaround v Excelu. Dobrý incident proces je jako hasicí přístroj: doufáš, že ho moc nepoužiješ, ale když už ho potřebuješ, nechceš teprve číst návod v plamenech.
+
+### FQ.11 Zdroje k incidentům a porušení zabezpečení osobních údajů
+
+- GDPR, článek 4 — definice porušení zabezpečení osobních údajů: https://eur-lex.europa.eu/eli/reg/2016/679/oj
+- GDPR, článek 33 — ohlašování porušení zabezpečení osobních údajů dozorovému úřadu: https://eur-lex.europa.eu/eli/reg/2016/679/oj
+- GDPR, článek 34 — oznamování porušení zabezpečení osobních údajů subjektu údajů: https://eur-lex.europa.eu/eli/reg/2016/679/oj
+- EDPB — Guidelines 9/2022 on personal data breach notification under GDPR: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-92022-personal-data-breach-notification-under_en
+- ENISA — Incident handling and response resources: https://www.enisa.europa.eu/topics/incident-response
+
 ## Pracovní log
+
+- 2026-09-05 00:02 UTC — Doplněna příloha FQ o prvním produkčním incidentu: třídění podle zákaznického dopadu, prvních patnáct minut reakce, privacy-first triage dat, srozumitelná komunikace, oddělení mitigace od prevence, ochrana diagnostických dat, incident karta, checklist a odkazy na GDPR/EDPB/ENISA zdroje.
 
 - 2026-09-04 23:01 UTC — Doplněna příloha FP o přechodu z pilotu do produkce: uzavření pilotu, nový produkční rozsah, řízená migrace dat, menší produkční slib, role a oprávnění, rytmus prvního týdne, přechodová karta, privacy-first checklist a odkazy na GDPR/EDPB zdroje.
 
