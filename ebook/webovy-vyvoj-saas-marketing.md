@@ -31644,7 +31644,166 @@ Jednoduchý kvartální rituál:
 - Britský ICO má praktický výklad principu storage limitation včetně otázky, jak dlouho data držet a kdy je mazat nebo anonymizovat: https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/data-protection-principles/a-guide-to-the-data-protection-principles/storage-limitation/
 - ENISA ve svých doporučeních k ochraně osobních dat zdůrazňuje řízení životního cyklu dat, minimalizaci a bezpečnostní opatření jako součást technického návrhu: https://www.enisa.europa.eu/publications/data-protection-engineering
 
+
+## Příloha GB: Neúspěšné platby a grace period bez trestání dobrých zákazníků
+
+Neúspěšná platba není automaticky špatný zákazník. Často je to expirovaná karta, limit, změna účetního procesu, dovolená člověka s přístupem k fakturaci nebo bankovní nálada, která si dala kafe s chaosem. Pro SaaS je dunning proces místo, kde se potkává cashflow, produktová důvěra, support a reputace. Když ho uděláš tvrdě, poškodíš vztah. Když ho neuděláš vůbec, začneš dotovat provoz a ručně nahánět faktury v pátek odpoledne.
+
+Privacy-first pointa: dunning nepotřebuje sledovat každé kliknutí zákazníka ani posílat platební drama do reklamních systémů. Potřebuje jasný stav účtu, minimální billing metadata, férovou komunikaci a bezpečný způsob aktualizace platby.
+
+### GB.1 Rozliš selhání platby, zpoždění a obchodní riziko
+
+První chyba je házet všechny neuhrazené platby do stejné škatulky. Jinak řešíš kartu, která neprošla dnes ráno, jinak firmu s roční objednávkou čekající na schválení a jinak účet, který dlouhodobě nereaguje.
+
+Rozděl stavy jednoduše:
+
+- **Payment failed** — automatická platba neprošla, ale zákazník může být aktivní a spokojený.
+- **Invoice overdue** — faktura je po splatnosti, typicky u bankovního převodu nebo enterprise procesu.
+- **Billing attention needed** — chybí DIČ, fakturační kontakt, objednávka nebo schválení.
+- **Grace period** — služba stále běží, ale účet má omezený čas na nápravu.
+- **Restricted** — účet nemůže vytvářet nové placené akce, ale data a export zůstávají dostupné.
+- **Suspended** — služba je dočasně zastavená podle jasně popsaných pravidel.
+
+Dobré UI zákazníkovi neříká jen „platba selhala“. Říká: co se stalo, co má udělat, do kdy a co se stane, pokud nic neudělá. Panika je špatný produktový pattern, i když má červenou barvu a hezkou ikonku.
+
+### GB.2 Grace period je vztahový polštář, ne slabost
+
+Grace period chrání oba směry. Zákazník nedostane výpadek kvůli drobné chybě a ty nemusíš řešit rozzlobený support ticket v momentě, kdy billing systém jen kýchnul. Zároveň ale musí mít hranice. Nekonečná benevolence není customer success, je to skrytý dluh.
+
+Praktické nastavení pro malý B2B SaaS:
+
+- **Den 0:** platba selže, aplikace zobrazí klidné upozornění administrátorům a pošle e-mail billing kontaktu.
+- **Den 3:** připomenutí s jasným odkazem na aktualizaci platby nebo fakturačních údajů.
+- **Den 7:** upozornění vlastníkovi workspace, že se blíží omezení účtu.
+- **Den 10–14:** omezení nových placených akcí, ale zachování přístupu k datům, exportům a fakturám.
+- **Den 30:** pozastavení podle obchodních podmínek, pokud není domluvená výjimka.
+
+Časy nejsou dogma. U levného self-serve SaaS může být interval kratší. U B2B účtů s roční fakturací a nákupním oddělením delší. Důležité je, aby zákazník věděl pravidla předem a tým je neměnil podle nálady.
+
+### GB.3 Komunikace má pomáhat zaplatit, ne vyhrožovat
+
+Dunning e-mail má být servisní zpráva, ne malý vyděračský román. Cílem je odstranit překážku: špatná karta, chybějící fakturační údaj, nedoručená faktura, interní schválení, nejasný variabilní symbol nebo změna vlastníka účtu.
+
+Použij strukturu:
+
+1. **Co se stalo:** „Nepodařilo se nám zpracovat platbu za tarif Team.“
+2. **Dopad:** „Služba zatím běží dál, grace period končí 18. září.“
+3. **Akce:** „Aktualizujte platební metodu nebo nám napište, pokud potřebujete fakturu upravit.“
+4. **Bezpečnost:** „Nikdy po vás nechceme kartu e-mailem ani heslo.“
+5. **Kontakt:** „Pokud platbu řeší účetní, přepošlete jí tento odkaz do billing nastavení.“
+
+Příklad textu:
+
+> Dobrý den, platba za váš workspace dnes neprošla. Účet zůstává aktivní do [datum]. Prosím aktualizujte platební metodu v nastavení fakturace, případně nám odpovězte, pokud potřebujete změnit fakturační údaje nebo poslat doklad znovu. Z bezpečnostních důvodů nám neposílejte údaje ke kartě e-mailem.
+
+*Codyho komentář:* Pokud tvůj dunning e-mail zní jako poslední dopis před exekucí, možná neprodáváš SaaS, ale divadelní drama s fakturou v příloze.
+
+### GB.4 Produktové omezení navrhuj podle ochrany dat
+
+Když účet nezaplatí, nejjednodušší technické řešení je vypnout všechno. Jenže to může zákazníkovi zablokovat přístup k vlastním datům, fakturám nebo exportu. To je špatně obchodně i důvěrově. Omezení má chránit službu před dalším nákladem, ne držet data jako rukojmí.
+
+Rozumné vrstvy omezení:
+
+- **Ponechat:** přihlášení vlastníka, billing nastavení, faktury, export dat, bezpečnostní nastavení, možnost kontaktovat support.
+- **Omezit:** vytváření nových projektů, nové importy, nové automatizace, vyšší API limity, pozvánky dalších členů.
+- **Pozastavit opatrně:** veřejné publikování, placené výpočty, hromadné odesílání, funkce s přímými náklady.
+- **Nikdy nedělat potichu:** mazání dat, změna tarifu, export blokovaný bez vysvětlení, vypnutí bezpečnostních upozornění.
+
+U B2B účtů odděl billing roli od běžných uživatelů. Člověk, který každý den používá produkt, často nemá oprávnění platbu opravit. Pokud mu jen zobrazíš banner „zaplať“, vytvoříš stres, ale ne řešení. Správná cesta je upozornit billing kontakt a vlastníkům dát viditelný, ale klidný stav.
+
+### GB.5 Výjimky musí expirovat a být vidět
+
+Výjimky budou existovat. Dobrý zákazník čeká na nákupní objednávku, banka zdržela převod, účetní je nemocná, enterprise smlouva se podepisuje déle než sprint. Výjimka není problém. Problém je výjimka bez vlastníka, důvodu a konce.
+
+Každá výjimka má mít:
+
+- zákazníka a workspace,
+- důvod výjimky,
+- kdo ji schválil,
+- nový termín,
+- co se stane po termínu,
+- poznámku pro support,
+- auditní záznam změny.
+
+Nedávej týmu tajné tlačítko „prodloužit navždy“. Dej mu tlačítko „prodloužit do data“ a povinné pole „proč“. Budoucí já ti poděkuje, až nebudeš hledat, proč má jeden účet tři roky tarif zdarma, protože „to kdysi domluvil někdo na callu“.
+
+### GB.6 Billing data drž odděleně od marketingu
+
+Neúspěšná platba je citlivý obchodní signál. Neznamená, že má zákazník automaticky dostat remarketing, newsletter o slevě nebo být zařazený do segmentu „rizikový“ v nástroji, kam vidí půl internetu. Billing data používej pro billing, support a customer success — ne jako palivo pro zvědavou automatizaci.
+
+Privacy-first pravidla:
+
+- nesdílej stav plateb do analytiky návštěvnosti,
+- neposílej platební selhání do marketingových pixelů nebo behaviorálních profilů,
+- neukládej platební údaje mimo specializovaný platební systém,
+- maskuj citlivé billing údaje v adminu a supportu,
+- loguj změny tarifu, fakturačních kontaktů a grace period jako auditní události,
+- drž retenční pravidla pro billing metadata odděleně od produktové analytiky.
+
+Praktická otázka před každou integrací: potřebuje tenhle systém znát fakt, že platba selhala, nebo mu stačí obecný stav „účet vyžaduje administrativní pozornost“? Ve většině případů stačí druhá varianta. Je méně zajímavá pro dashboard, ale zdravější pro důvěru.
+
+### GB.7 Šablona: karta dunning procesu
+
+```markdown
+## Dunning proces: [produkt / tarif]
+
+### Stavy
+- Aktivní:
+- Payment failed:
+- Grace period:
+- Restricted:
+- Suspended:
+
+### Časová osa
+- Den 0:
+- Den 3:
+- Den 7:
+- Den 14:
+- Den 30:
+
+### Komunikace
+- Billing kontakt:
+- Vlastník workspace:
+- Běžný uživatel:
+- Support poznámka:
+
+### Omezení produktu
+- Co zůstává dostupné:
+- Co se omezuje:
+- Co se nikdy neblokuje bez ručního review:
+
+### Výjimky
+- Kdo smí prodloužit grace period:
+- Maximální délka:
+- Povinný důvod:
+- Auditní log:
+
+### Privacy
+- Jaká billing metadata používáme:
+- Kam se neposílají:
+- Retence:
+```
+
+### GB.8 Checklist: dunning bez zbytečného lámání vztahu
+
+- [ ] Máme jasné stavy účtu od první chyby platby po případné pozastavení.
+- [ ] Grace period má konkrétní délku, pravidla a zákaznické vysvětlení.
+- [ ] E-maily říkají co se stalo, do kdy a jak to opravit.
+- [ ] Nikdy nepožadujeme kartu, heslo ani citlivé údaje přes e-mail nebo chat.
+- [ ] Omezení účtu neblokuje export dat, faktury a bezpečnostní nastavení.
+- [ ] Billing kontakt, vlastník workspace a běžný uživatel dostávají rozdílně užitečnou informaci.
+- [ ] Výjimky mají vlastníka, důvod, datum expirace a auditní stopu.
+- [ ] Platební selhání neposíláme do marketingových trackerů ani zbytečných profilů.
+- [ ] Support vidí stav a doporučený další krok, ne celé platební detaily.
+- [ ] Jednou měsíčně kontrolujeme účty v grace period, restricted a suspended stavu.
+
+### GB.9 Codyho komentář
+
+*Codyho komentář:* Dunning je test dospělosti SaaS. Umí ukázat, jestli firma chápe zákazníka jako partnera, nebo jako kartu v automatu. Férový proces neznamená, že necháš všechno běžet zdarma. Znamená, že problém řešíš klidně, předvídatelně a bez datového vydírání. Cashflow má rádo disciplínu. Důvěra taky.
+
 ## Pracovní log
+
+- 2026-09-05 11:00 UTC — Doplněna příloha GB o neúspěšných platbách a grace period: stavy účtu, férová časová osa dunningu, klidná komunikace, produktové omezení bez blokování dat, expirované výjimky, oddělení billing dat od marketingu, šablona a checklist.
 
 - 2026-09-05 10:00 UTC — Doplněna příloha GA o retenční politice a mazání dat: účel dat, retenční tabulka, mazací workflow, zálohy, anonymizace, kvartální review, šablona a checklist.
 - 2026-09-05 09:01 UTC — Doplněna příloha FZ o exportu dat a offboardingu: datové vlastnictví už při návrhu, lidsky použitelný ZIP/CSV/JSON export, přenositelnost podle GDPR, bezpečnost exportních žádostí, časová osa odchodu, retence po ukončení, testování exportu, šablona karty, checklist a ověřené zdroje EDPB/EU/OWASP.
