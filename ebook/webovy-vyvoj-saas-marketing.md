@@ -32338,7 +32338,210 @@ U každé volby napiš lidský popis. Ne „event_notification_project_status_ch
 
 *Codyho komentář:* Notifikace jsou test charakteru produktu. Když tým nemá jasno, co je důležité, pošle všechno. Když má jasno, pošle málo, přesně a včas. Privacy-first notifikace nejsou méně účinné — jsou méně otravné. A to je v inboxu konkurenční výhoda, protože inbox už dávno vypadá jako tržiště, kde každý křičí „jen rychlá zpráva“.
 
+## Příloha GF: Transakční e-maily bez tracking pixelů a doručovací magie
+
+Transakční e-mail je provozní součást produktu, ne marketingový billboard v převleku. Potvrzení registrace, reset hesla, faktura, bezpečnostní upozornění, export dat nebo zpráva o změně tarifu mají jeden hlavní úkol: doručit důležitou informaci správnému člověku ve správný čas. Všechno ostatní je bonus — a někdy taky problém v drahém kabátku.
+
+Malý SaaS tým často začne tím, že připojí první e-mailovou službu, zkopíruje šablonu, zapne open tracking, click tracking, marketingové patičky a pak se diví, že zákazníci nerozumí rozdílu mezi fakturou a kampaní. Privacy-first provoz začíná opačně: nejdřív definuješ typ zprávy, nutná data, bezpečnostní požadavky a teprve potom vybíráš nástroj.
+
+### GF.1 Rozděl e-maily podle účelu, ne podle toho, kdo je napsal
+
+Základní typy e-mailů v SaaS produktu:
+
+- **Autentizační** — potvrzení e-mailu, magic link, reset hesla, změna MFA.
+- **Bezpečnostní** — nové přihlášení, změna role, vytvoření API klíče, export dat.
+- **Provozní** — potvrzení objednávky, faktura, upozornění na výpadek, změna plánované údržby.
+- **Produktové** — dokončení importu, pozvánka do workspace, komentář, schválení.
+- **Marketingové** — newsletter, nabídka upgradu, vzdělávací sekvence, reaktivace.
+
+Proč na tom záleží: každý typ má jinou právní logiku, jinou naléhavost a jiný vztah k souhlasu. Reset hesla nemá čekat na marketingové preference. Newsletter naopak nemá být schovaný mezi „provozními zprávami“, protože to je digitální verze falešných vousů a klobouku.
+
+Praktické pravidlo:
+
+- transakční e-mail posílej jen tehdy, když navazuje na akci, účet, smlouvu nebo bezpečnostní stav,
+- marketingový e-mail posílej jen tehdy, když máš jasný právní základ a snadné odhlášení,
+- hybridní e-mail rozděl na dvě zprávy, pokud má provozní jádro a marketingový ocásek.
+
+Příklad špatně:
+
+> „Tady je faktura. Mimochodem, mrkni na naši novou kampaň, slevu, webinář a sedm produktových tipů.“
+
+Příklad lépe:
+
+> Faktura obsahuje fakturu, datum splatnosti, odkaz na účet a kontakt na podporu. Produktové tipy jdou zvlášť jen lidem, kteří je chtějí.
+
+### GF.2 Doručitelnost začíná DNS, ne krásnou šablonou
+
+Hezký e-mail, který skončí ve spamu, je jen drahý leták v koši. Doručitelnost stojí na technickém základu:
+
+- **SPF** říká, které servery mohou posílat poštu za doménu.
+- **DKIM** podepisuje zprávu kryptograficky, aby příjemce viděl, že cestou nebyla změněna.
+- **DMARC** navazuje na SPF/DKIM a říká příjemcům, jak zacházet se zprávami, které ověřením neprojdou.
+- **MTA-STS a TLS reporting** pomáhají vynucovat a sledovat šifrovaný přenos mezi poštovními servery.
+- **Oddělené subdomény** snižují riziko, že marketingový experiment poškodí doručitelnost resetu hesla.
+
+Praktická doménová struktura:
+
+- `app.example.com` — aplikace,
+- `mail.example.com` — obecné produktové e-maily,
+- `security.example.com` — bezpečnostní upozornění,
+- `billing.example.com` — fakturace,
+- `news.example.com` — newsletter, pokud ho opravdu potřebuješ.
+
+Začni opatrně. DMARC politika může běžet nejdřív v monitorovacím režimu, potom přejít na přísnější režim až ve chvíli, kdy vidíš, že legitimní odesílání prochází. Můj oblíbený postup:
+
+1. Sepiš všechny systémy, které posílají e-mail za doménu.
+2. Nastav SPF a DKIM pro každý legitimní odesílací zdroj.
+3. Zapni DMARC reporty a sleduj, kdo se za doménu tváří.
+4. Oprav výjimky a staré integrace.
+5. Teprve potom zpřísni politiku.
+
+Aktuální poznámka: DMARC byl v květnu 2026 publikován jako RFC 9989 a nahradil starší RFC 7489/RFC 9091. Pro malý tým z toho plyne jednoduchá věc: když dnes dokumentuješ e-mailovou autentizaci, odkazuj na novější standard, ne na starý blogpost z dob, kdy ještě SaaS onboarding vypadal jako fax s tlačítkem.
+
+### GF.3 Tracking pixel do transakční pošty nepatří
+
+Open tracking obvykle funguje přes neviditelný obrázek. Click tracking často přepisuje odkazy přes měřicí doménu. Technicky užitečné? Někdy. Důvěryhodné v transakční poště? Často ne.
+
+Transakční e-mail má být auditovatelný bez sledování člověka:
+
+- loguj, že zpráva byla vygenerována,
+- loguj předání poskytovateli,
+- loguj bounces a technické chyby,
+- u bezpečnostních akcí loguj potvrzení v aplikaci,
+- nevyvozuj z otevření e-mailu, že člověk informaci opravdu pochopil.
+
+Místo „uživatel otevřel e-mail“ měř lepší signály:
+
+- reset hesla byl úspěšně dokončen,
+- faktura byla zaplacena,
+- pozvánka byla přijata,
+- export dat byl stažen po přihlášení,
+- bezpečnostní upozornění vedlo ke změně hesla nebo revizi session.
+
+Privacy-first pravidlo: pokud potřebuješ vědět, že zákazník něco opravdu udělal, měř akci v produktu. Nesnaž se hádat z pixelu, který blokují klienti, přeposílají proxy servery a kazí důvěru rychleji než „jenom krátký call“ v pátek v 16:55.
+
+### GF.4 Obsah e-mailu má chránit data i příjemce
+
+Transakční e-mail často putuje přes externí infrastrukturu, ukládá se v poštovních schránkách a může být přeposlán někam, kam už produkt nevidí. Proto do něj nepatří plná citlivá data.
+
+Do e-mailu typicky patří:
+
+- stručný důvod zprávy,
+- název produktu nebo workspace,
+- čas události,
+- jasné další kroky,
+- bezpečný odkaz do aplikace,
+- kontakt na podporu.
+
+Do e-mailu typicky nepatří:
+
+- celé exporty dat jako příloha bez ochrany,
+- tokeny a tajné klíče v plném znění,
+- osobní údaje třetích osob,
+- kompletní fakturační historie,
+- interní debug informace,
+- důvod bezpečnostního rozhodnutí napsaný tak podrobně, že pomáhá útočníkovi.
+
+Příklad resetu hesla:
+
+> Dostali jsme žádost o reset hesla pro účet `jana@example.com`. Pokud jsi to byla ty, pokračuj přes odkaz platný 15 minut. Pokud ne, heslo se nemění a doporučujeme zkontrolovat aktivní session v účtu.
+
+Příklad bezpečnostního upozornění:
+
+> V účtu byl vytvořen nový API klíč. Název klíče: `Production import`. Čas: 2026-09-05 15:00 UTC. Pokud to nebyla schválená akce, otevři bezpečnostní nastavení a klíč okamžitě zruš.
+
+Všimni si: zpráva říká dost na reakci, ale nedává e-mailem samotný secret. Děkujeme, zdravý rozume, dneska jsi zachránil další databázi.
+
+### GF.5 Poskytovatele vybírej podle datového toku, ne podle loga
+
+U e-mailového nástroje si polož stejné otázky jako u analytiky nebo supportu:
+
+- Kde se zpracovávají a ukládají metadata zpráv?
+- Jak dlouho zůstávají logy doručení, bounces a obsah zpráv?
+- Dá se vypnout open/click tracking pro transakční poštu?
+- Podporuje služba EU region nebo evropského poskytovatele?
+- Jak funguje DPA, subprocesory a bezpečnostní dokumentace?
+- Umí oddělit transakční a marketingovou reputaci?
+- Dá se exportovat konfigurace šablon a auditovat změny?
+
+Nejde o to, že musíš mít všechno vlastní. Jde o to, že rozumíš cestě dat. E-mailová adresa zákazníka, IP doručovací události, bounce důvod, obsah pozvánky do workspace a fakturační upozornění jsou provozní data. Když je necháš protékat pěti nástroji, jen aby sis mohl říct „máme lepší dashboard“, kupuješ si chaos na splátky.
+
+### GF.6 Šablony piš jako produktové rozhraní
+
+Každá transakční šablona má mít vlastní kartu:
+
+- **Název:** `Reset hesla`, `Nová faktura`, `Pozvánka do workspace`.
+- **Spouštěč:** konkrétní událost v produktu.
+- **Příjemce:** kdo zprávu dostává a proč.
+- **Právní/produktový důvod:** smlouva, bezpečnost, účetní povinnost, uživatelská akce.
+- **Data ve zprávě:** přesný seznam polí.
+- **Data mimo zprávu:** co se nikdy neposílá e-mailem.
+- **Expirace odkazů:** délka platnosti a chování po expiraci.
+- **Měření:** technické doručení, bounce, dokončení akce v aplikaci.
+- **Preference:** zda lze zprávu vypnout a proč ano/ne.
+- **Owner:** kdo šablonu udržuje.
+
+Ukázka:
+
+```md
+## E-mailová šablona: Pozvánka do workspace
+
+### Účel
+Pozvat konkrétní osobu do existujícího workspace po akci administrátora.
+
+### Spouštěč
+Admin zadá e-mail, roli a odešle pozvánku.
+
+### Data
+- název workspace,
+- jméno zvoucí osoby,
+- role,
+- odkaz s jednorázovým tokenem,
+- expirace odkazu.
+
+### Co neposílat
+- seznam členů workspace,
+- interní poznámky,
+- zákaznická data,
+- trvalý přístupový token.
+
+### Měření
+- zpráva předána poskytovateli,
+- bounce,
+- pozvánka přijata v aplikaci.
+```
+
+### GF.7 Checklist: transakční e-mail bez šmírování
+
+- [ ] Každá šablona má jasný účel a vlastníka.
+- [ ] Transakční a marketingové zprávy jsou oddělené typem, doménou nebo alespoň konfigurací.
+- [ ] SPF, DKIM a DMARC jsou nastavené pro všechny legitimní odesílací zdroje.
+- [ ] DMARC reporty někdo pravidelně kontroluje, ne jen sbírá do digitálního sklepa.
+- [ ] Open tracking a click tracking jsou u transakční pošty vypnuté, pokud k nim není výslovný a zdokumentovaný důvod.
+- [ ] Bezpečnostní a resetovací odkazy jsou krátkodobé, jednorázové a po použití invalidované.
+- [ ] E-maily neobsahují secrety, plné exporty ani zbytečná osobní data.
+- [ ] Bounces a doručovací chyby mají provozní postup: opakování, fallback, support upozornění.
+- [ ] Poskytovatel má zmapovaný datový tok, retenční pravidla, DPA a subprocesory.
+- [ ] Marketingové e-maily mají samostatný souhlas nebo jiný ověřený právní základ a snadné odhlášení.
+
+### GF.8 Codyho komentář
+
+E-mail je stará technologie, která drží internet pohromadě lepicí páskou, DNS záznamy a kolektivní vírou adminů. To ale neznamená, že k němu máme přistupovat lehkomyslně. U transakční pošty je důvěra důležitější než graf otevření. Když zákazník dostane reset hesla bez šmírovacího pixelu, fakturu bez marketingové omáčky a bezpečnostní upozornění bez úniku detailů, nevypadá to nudně. Vypadá to profesionálně.
+
+### GF.9 Zdroje k e-mailové doručitelnosti, souhlasu a privacy-first poště
+
+- IETF: [RFC 9989 — Domain-Based Message Authentication, Reporting, and Conformance (DMARC)](https://datatracker.ietf.org/doc/rfc9989/) — aktuální standard DMARC publikovaný v květnu 2026, který nahrazuje RFC 7489 a RFC 9091.
+- IETF: [RFC 9990 — DMARC Aggregate Reporting](https://datatracker.ietf.org/doc/rfc9990/) a [RFC 9991 — DMARC Failure Reporting](https://datatracker.ietf.org/doc/rfc9991/) — reportingová část DMARC ekosystému.
+- IETF: [RFC 7208 — Sender Policy Framework (SPF)](https://datatracker.ietf.org/doc/html/rfc7208) a [RFC 6376 — DomainKeys Identified Mail (DKIM)](https://datatracker.ietf.org/doc/html/rfc6376) — základní stavební kameny e-mailové autentizace.
+- IETF: [RFC 8461 — SMTP MTA Strict Transport Security](https://datatracker.ietf.org/doc/html/rfc8461) a [RFC 8460 — SMTP TLS Reporting](https://datatracker.ietf.org/doc/html/rfc8460) — ochrana a reporting šifrovaného přenosu mezi poštovními servery.
+- EUR-Lex: [Directive 2002/58/EC — ePrivacy Directive](https://eur-lex.europa.eu/eli/dir/2002/58/oj?locale=en) — evropský rámec pro elektronické komunikace včetně přímého marketingu e-mailem.
+- European Commission: [Legal grounds for processing data](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/legal-grounds-processing-data_en) — přehled právních základů zpracování a upozornění na souvislost e-mailového marketingu s ePrivacy pravidly.
+- EDPB: [Process personal data lawfully](https://www.edpb.europa.eu/sme/be-compliant/process-personal-data-lawfully_en) — praktický přehled právních základů pro malé a střední organizace.
+
+
 ## Pracovní log
+
+- 2026-09-05 15:00 UTC — Doplněna příloha GF o transakčních e-mailech bez tracking pixelů: rozdělení zpráv podle účelu, DNS základy doručitelnosti, SPF/DKIM/DMARC/MTA-STS, neinvazivní měření, datová minimalizace v šablonách, výběr poskytovatele, šablona karty e-mailu, checklist a ověřené zdroje IETF/EU/EDPB.
 
 - 2026-09-05 14:01 UTC — Doplněna příloha GE o produktových notifikacích bez spamování a sledovacích pixelů: účel zpráv, naléhavost, výchozí nastavení, obsah, datová minimalizace, neinvazivní měření, preference, šablona a checklist.
 
