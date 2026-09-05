@@ -33345,7 +33345,189 @@ Multi-tenant izolace je jedna z těch věcí, které nikdo nechválí, když fun
 - [OWASP Application Security Verification Standard](https://owasp.org/www-project-application-security-verification-standard/) — kontrolní rámec pro aplikační bezpečnost, včetně požadavků na access control.
 
 
+
+## Příloha GK: Audit log pro B2B SaaS bez detektivky po incidentu
+
+Audit log je produktová paměť. Ne ta velká datová skládka, kam aplikace hystericky zapisuje každý nádech uživatele, ale přehledný záznam důležitých akcí: kdo změnil oprávnění, kdo vytvořil API klíč, kdo exportoval data, kdo připojil integraci, kdo smazal účet a co se stalo při neúspěšné bezpečnostní kontrole.
+
+V B2B SaaS audit log často rozhoduje o důvěře. Zákazník nechce slyšet „asi to někdo změnil“. Chce vědět, která akce proběhla, kdy, pod jakým účtem, v jakém workspace, nad jakým objektem a s jakým výsledkem. Když to neumíš ukázat, řešíš incident jako detektivku s rozbitou baterkou. Atmosféra filmová, provozně peklo.
+
+*Codyho komentář:* Audit log není šmírování. Šmírování je sbírat vše „pro jistotu“. Audit log je disciplína: zapisovat jen to, co pomáhá bezpečnosti, odpovědnosti, supportu a zákaznické kontrole.
+
+### GK.1 Nejdřív si rozděl logy podle účelu
+
+Malý SaaS tým často hází všechno do jedné hromady: aplikační logy, error logy, analytiku, billing události, support poznámky a auditní stopu. Výsledkem je chaos, ve kterém se sice něco najde, ale až po třech kávách a jednom tichém zoufalství.
+
+Rozděl minimálně tyto typy záznamů:
+
+- **Aplikační log** — pomáhá vývojářům pochopit chyby, výkon a stav systému.
+- **Security log** — zachycuje přihlášení, selhání autentizace, autorizační chyby, podezřelé pokusy a změny bezpečnostních nastavení.
+- **Audit log pro zákazníka** — ukazuje důležité akce v jeho workspace a pomáhá mu řídit odpovědnost.
+- **Provozní metriky** — agregované signály o dostupnosti, frontách, latencích a kapacitě.
+- **Produktová analytika** — agregované události o používání funkcí bez profilování lidí.
+
+Audit log zákazníkovi neukazuj jako technický výpis. Ukaž ho jako časovou osu událostí, kterou pochopí admin, founder i člověk ze supportu. Technické detaily si nech pro interní pohled nebo export.
+
+### GK.2 Zapisuj události, které mění důvěru
+
+Ne každé kliknutí patří do audit logu. Pokud admin otevře dashboard, obvykle to není auditní událost. Pokud ale změní fakturační e-mail, pozve nového člena nebo exportuje zákaznická data, záznam má smysl.
+
+Události, které do B2B audit logu typicky patří:
+
+- přihlášení, odhlášení a významné selhání přihlášení,
+- zapnutí, vypnutí nebo reset MFA,
+- změna role, oprávnění nebo členství ve workspace,
+- vytvoření, použití, rotace a zrušení API klíče,
+- připojení, změna nebo odpojení integrace,
+- export dat, import dat a hromadné mazání,
+- změna billing údajů, plánu nebo fakturačního kontaktu,
+- vytvoření a použití break-glass nebo support přístupu,
+- změna retenční politiky, bezpečnostního nastavení nebo SSO konfigurace,
+- neúspěšný pokus o přístup k cizímu nebo zakázanému objektu.
+
+Naopak pozor na falešný pocit bezpečí: audit log nemá nahrazovat autorizační kontroly. To, že pokus zapíšeš, neznamená, že byl správně zablokovaný. Nejprve musí fungovat bezpečnostní hranice, potom záznam.
+
+### GK.3 Každá událost potřebuje jasnou větu
+
+Dobrá auditní událost se dá přečíst jako věta:
+
+```text
+[kdo] provedl [akci] nad [objektem] v [tenant kontextu] s výsledkem [výsledek].
+```
+
+Praktický minimální model:
+
+```text
+id: aud_...
+time: 2026-09-05T20:00:00Z
+actor_type: user | system | api_key | support
+actor_id: usr_...
+tenant_id: ws_...
+action: member.role_changed
+target_type: workspace_member
+target_id: mem_...
+result: success | failure | denied
+ip_hash: volitelné podle rizika
+user_agent_family: volitelné, zkrácené
+metadata: malé, schématované, bez tajemství
+request_id: req_... pro interní korelaci
+```
+
+V uživatelském rozhraní z toho udělej lidský zápis:
+
+```text
+5. 9. 2026 20:00 — Jana Nováková změnila roli Petra Svobody z Viewer na Admin ve workspace Acme EU. Výsledek: úspěch.
+```
+
+Pokud událost vznikla systémově, napiš to férově:
+
+```text
+Systém deaktivoval API klíč „Warehouse sync“, protože vypršela jeho platnost.
+```
+
+Tím zabráníš tomu, aby zákazník hledal člověka, který nic neudělal.
+
+### GK.4 Privacy-first audit log nesmí být druhá databáze osobních dat
+
+Audit log svádí k tomu uložit „pro jistotu“ celý request, e-mail, payload webhooku, token, IP adresu, user agent a odpověď serveru. To je přesně okamžik, kdy z bezpečnostní pomůcky vyrobíš datové riziko.
+
+Do audit logu standardně neukládej:
+
+- hesla, recovery kódy, session tokeny, API tokeny ani connection stringy,
+- celé webhook payloady a request/response bodies,
+- platební údaje, doklady, zdravotní nebo jiné citlivé osobní údaje,
+- kompletní soubory, přílohy nebo exporty,
+- dlouhé texty ze zákaznických dokumentů,
+- přesné IP adresy, pokud k tomu nemáš jasný účel a retenční pravidlo.
+
+Místo toho používej odkazy na interní ID, hashované nebo zkrácené technické identifikátory a malé schématované metadata. Například u exportu stačí typ exportu, počet záznamů, tenant, iniciátor, stav a expirace odkazu. Nepotřebuješ kopii exportu v audit logu. Fakt ne. Log není půda po babičce, kam odložíme všechno, co se „jednou může hodit“.
+
+### GK.5 Zákaznický pohled a interní pohled odděl
+
+Zákazník potřebuje odpovědnost a kontrolu. Interní tým potřebuje diagnostiku a incidentní korelaci. To jsou dvě různé potřeby.
+
+Zákaznický audit log by měl umět:
+
+- filtrovat podle času, uživatele, akce a objektu,
+- exportovat záznamy ve formátu CSV nebo JSON,
+- ukázat srozumitelný popis akce,
+- skrýt interní detaily infrastruktury,
+- respektovat tenant izolaci a role,
+- mít jasnou retenci popsanou ve smlouvě nebo dokumentaci.
+
+Interní pohled může obsahovat `request_id`, službu, verzi aplikace, výsledek bezpečnostní kontroly nebo korelační ID pro incident. I tady ale platí minimalizace. Pokud někdo v supportu potřebuje číst audit log zákazníka, čtení samotné má být auditovaná událost.
+
+### GK.6 Retence a neměnnost jsou produktová rozhodnutí
+
+Audit log nemá mizet po sedmi dnech, ale ani růst navždy bez pravidel. Retence záleží na segmentu, smlouvách a riziku. Pro malé B2B SaaS může být rozumný základ například:
+
+- 90 dní pro detailní security události s technickými identifikátory,
+- 12 měsíců pro zákaznický audit log hlavních změn,
+- delší retence jen u enterprise plánu nebo regulovaného zákazníka,
+- okamžité maskování nebo pseudonymizace údajů, které už nepotřebuješ v původní podobě.
+
+Důležité je zákazníkovi říct, co držíš, proč a jak dlouho. U kritických auditních záznamů řeš i ochranu proti úpravám: append-only model, oddělené oprávnění pro zápis a čtení, omezené mazání, monitoring změn retenčních pravidel a zálohy. Pokud admin může audit log tiše upravit, není to audit log. Je to společně psaná pohádka.
+
+### GK.7 Šablona: karta auditní události
+
+```text
+Název události:
+Akce / event key:
+Proč se zapisuje:
+Kdo ji může vyvolat:
+Kde se zobrazí:
+
+Actor:
+- Typ actoru:
+- ID / zobrazené jméno:
+- Co se maskuje:
+
+Target:
+- Typ objektu:
+- ID objektu:
+- Tenant kontext:
+
+Metadata:
+- Povolená pole:
+- Zakázaná pole:
+- Retence:
+
+Bezpečnost:
+- Kdy vzniká alert:
+- Kdo smí událost číst:
+- Jak se exportuje:
+- Jak se testuje:
+```
+
+Tuhle kartu vyplň pro každou novou citlivou funkci. Hlavně pro role, API klíče, SSO, exporty, billing, integrace a support impersonation. Pokud událost neumíš popsat bez citlivých dat, model ještě není hotový.
+
+### GK.8 Checklist: audit log bez šmírování
+
+- [ ] Audit log má oddělený účel od error logů, produktové analytiky a provozních metrik.
+- [ ] Každá událost má actor, akci, target, tenant, čas a výsledek.
+- [ ] Citlivé akce jako role, exporty, API klíče, SSO, billing a integrace se zapisují vždy.
+- [ ] Do audit logu se neukládají tokeny, hesla, celé payloady ani zbytečné osobní údaje.
+- [ ] Zákaznický pohled je srozumitelný a respektuje role v tenantovi.
+- [ ] Interní diagnostické údaje jsou oddělené od zákaznického výpisu.
+- [ ] Čtení audit logu supportem je samo auditovaná událost.
+- [ ] Retence je zdokumentovaná a odpovídá riziku i smluvnímu slibu.
+- [ ] Kritické záznamy jsou chráněné proti tiché úpravě nebo smazání.
+- [ ] Testy ověřují, že audit log neprozradí cizí tenant ani citlivý payload.
+
+### GK.9 Codyho komentář
+
+Audit log je ideální místo, kde se ukáže charakter produktu. Buď z něj uděláš užitečný bezpečnostní nástroj, nebo tajnou datovou bažinu. Privacy-first přístup neznamená logovat méně naslepo. Znamená logovat chytřeji: méně citlivého obsahu, víc kontextu, jasný účel a lepší odpovědnost.
+
+### GK.10 Zdroje k audit logům a správě bezpečnostních logů
+
+- [OWASP Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html) — doporučuje zahrnout aplikační logování do bezpečnostního návrhu, řešit typy událostí, atributy, data k vyloučení, validaci, ochranu a testování logů.
+- [NIST SP 800-92: Guide to Computer Security Log Management](https://csrc.nist.gov/pubs/sp/800/92/final) — praktický rámec pro log management, infrastrukturu, procesy a dlouhodobou správu bezpečnostních logů.
+- [ENISA: Guidelines for SMEs on the security of personal data processing](https://www.enisa.europa.eu/publications/guidelines-for-smes-on-the-security-of-personal-data-processing) — evropský pohled na řízení rizik při zpracování osobních údajů v malých a středních organizacích.
+
+
 ## Pracovní log
+
+- 2026-09-05 20:00 UTC — Doplněna příloha GK o audit logu pro B2B SaaS: rozdělení logů podle účelu, výběr auditních událostí, model actor/action/target/tenant, privacy-first minimalizace, zákaznický a interní pohled, retence, neměnnost, šablona karty, checklist a ověřené zdroje OWASP/NIST/ENISA.
 
 - 2026-09-05 19:01 UTC — Doplněna příloha GJ o multi-tenant izolaci dat: tenant model, serverové autorizační kontroly, varianty databázové izolace, testování cizího tenantu, bezpečné sdílení, logy/analytiku, šablonu karty, checklist a ověřené zdroje OWASP.
 
