@@ -30549,6 +30549,8 @@ Příklad jednoduché interní kontroly:
 curl -I https://example.com | sed -n '/strict-transport-security\|content-security-policy\|referrer-policy\|x-content-type-options/Ip'
 ```
 
+Kontroluj také finální odpověď po všech přesměrováních. Častá chyba je, že HTTP endpoint vrací správný redirect, ale cílová HTTPS stránka už některé hlavičky ztratí kvůli jiné konfiguraci aplikace, reverse proxy nebo cache vrstvy. Test má proto sledovat skutečnou zákaznickou cestu, ne jen první odpověď serveru.
+
 Tahle kontrola nenahradí penetrační test. Je to jen levná pojistka, že základní obranná vrstva nezmizela při refaktoru konfigurace.
 
 ### FU.7 Šablona: karta bezpečnostních hlaviček
@@ -30614,6 +30616,8 @@ Tahle kontrola nenahradí penetrační test. Je to jen levná pojistka, že zák
 
 
 ## Pracovní log
+
+- 2026-09-05 05:01 UTC — Doplněn krátký praktický odstavec k testování bezpečnostních hlaviček po přesměrováních, aby kontrola sledovala finální zákaznickou odpověď místo první technické reakce serveru.
 
 - 2026-09-05 04:01 UTC — Doplněna příloha FU o bezpečnostních hlavičkách pro malý SaaS: HTTPS/HSTS, CSP jako mapa zdrojů, ochrana proti embedování, referrery, permissions policy, cookie atributy, report-only režim, automatické kontroly, šablona karty, checklist a ověřené zdroje OWASP/MDN.
 
