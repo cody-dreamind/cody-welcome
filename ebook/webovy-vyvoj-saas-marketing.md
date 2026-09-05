@@ -30441,7 +30441,181 @@ Vulnerability disclosure je jako dobrá poštovní schránka pro bezpečnostní 
 - GDPR, články 33 a 34 k oznamování porušení zabezpečení osobních údajů: https://eur-lex.europa.eu/eli/reg/2016/679/2016-05-04/eng
 
 
+## Příloha FU: Bezpečnostní hlavičky pro SaaS bez cargo cultu
+
+Bezpečnostní hlavičky jsou levná obranná vrstva. Nezachrání špatnou autentizaci, rozbitá oprávnění ani databázi otevřenou do internetu, ale umí výrazně snížit dopad běžných chyb ve frontendu, embedování a transportu. Pro malý SaaS je dobrý cíl jednoduchý: mít výchozí sadu hlaviček, rozumět proč existují a průběžně je testovat při změnách produktu.
+
+Špatný přístup je zkopírovat deset hlaviček z blogpostu, pustit je do produkce a doufat, že prohlížeč ví, co básník chtěl říct. Dobrý přístup je začít od hrozeb: kdo může vložit skript, kdo může web vložit do iframe, odkud se smí načítat obrázky, jestli se vynucuje HTTPS a kolik informací odchází v refereru.
+
+*Codyho komentář:* Bezpečnostní hlavičky nejsou samolepka „secure“ na dveřích serverovny. Jsou to pravidla silničního provozu pro prohlížeč. Když je nastavíš špatně, buď se nic nechrání, nebo si sám zakážeš vlastní CSS. Krásná disciplína, skoro terapeutická.
+
+### FU.1 Začni transportem: HTTPS a HSTS
+
+První vrstva je nudná a zásadní: web má běžet jen přes HTTPS. Přesměrování z HTTP na HTTPS je minimum, ale samo o sobě nestačí, protože první návštěva může být stále zranitelná vůči downgrade scénářům. `Strict-Transport-Security` říká prohlížeči, že má doménu po určitou dobu otevírat pouze přes HTTPS.
+
+Praktické doporučení:
+
+- Pro produkční doménu používej `Strict-Transport-Security: max-age=31536000; includeSubDomains` až ve chvíli, kdy víš, že všechny subdomény podporují HTTPS.
+- Nepřidávej `preload` automaticky. HSTS preload je užitečný, ale špatně nastavená doména se z něj nedostává lusknutím prstu.
+- U stagingu a lokálního vývoje buď opatrný; bezpečnostní politika nemá blokovat běžnou práci týmu.
+- Kontroluj certifikáty, přesměrování a mixed content při každém větším deployi frontendu.
+
+Privacy-first poznámka: HTTPS není jen „zelený zámek“. Chrání i obsah URL, formuláře, session cookies a důvěru zákazníka, že jeho cesta k produktu není po cestě upravovaná nebo čtená někým dalším.
+
+### FU.2 Content Security Policy piš jako mapu zdrojů
+
+`Content-Security-Policy` je nejsilnější, ale také nejcitlivější hlavička. Pomáhá omezit, odkud se smí načítat skripty, styly, obrázky, fonty, připojení a další zdroje. Když ji nastavíš dobře, zmenšíš dopad XSS a nechtěných externích závislostí. Když ji nastavíš naslepo, rozbiješ aplikaci a tým ji za týden vypne.
+
+Začni inventurou:
+
+- Jaké skripty běží na každé veřejné stránce?
+- Odkud se načítají fonty, obrázky, videa a iframe?
+- Kam frontend posílá API požadavky?
+- Potřebuje aplikace inline skripty, nebo je lze odstranit?
+- Které externí domény jsou opravdu nutné a které jsou jen historická dekorace?
+
+Rozumný první návrh pro jednoduchý SaaS může vypadat takto:
+
+```text
+Content-Security-Policy: default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; img-src 'self' data: https:; script-src 'self'; style-src 'self'; connect-src 'self'
+```
+
+Tohle není univerzální recept. Pokud používáš externí platební bránu, mapy, video embed nebo privacy-first analytiku, musíš přidat konkrétní povolené domény. Cílem není mít nejkratší CSP, ale nejmenší pravdivý seznam zdrojů.
+
+### FU.3 Iframe, klikání a referrery řeš podle produktu
+
+Ne každý SaaS má stejné riziko. Interní administrace nepotřebuje být vložená do cizí stránky. Veřejný widget naopak možná iframe potřebuje. Proto hlavičky nastavuj podle částí produktu, ne jen globálně přes celý server.
+
+Důležité volby:
+
+- `frame-ancestors 'none'` v CSP brání vložení stránky do iframe a pomáhá proti clickjackingu.
+- `X-Frame-Options: DENY` je starší, ale stále užitečná kompatibilní brzda pro jednoduché scénáře.
+- `Referrer-Policy: strict-origin-when-cross-origin` obvykle dává dobrý kompromis: interně zachová užitečný kontext, ven neposílá celé citlivé URL.
+- `Permissions-Policy` vypíná schopnosti prohlížeče, které produkt nepotřebuje, například kameru, mikrofon nebo geolokaci.
+
+Příklad pro běžnou marketingovou a app část:
+
+```text
+Referrer-Policy: strict-origin-when-cross-origin
+X-Content-Type-Options: nosniff
+Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
+```
+
+Privacy-first komentář: dobrá `Referrer-Policy` je malá věc, která brání tomu, aby se citlivé parametry z URL staly nechtěnou poštou pro cizí služby. Nejlepší parametr je samozřejmě ten, který v URL vůbec není.
+
+### FU.4 Cookies nastav jako bezpečnostní kontrakt
+
+Session cookie je vstupenka do účtu. Proto by neměla cestovat přes nezabezpečené spojení, neměla by být dostupná JavaScriptem a měla by mít promyšlené chování mezi weby.
+
+Bezpečné výchozí nastavení pro autentizační cookie:
+
+- `Secure` — cookie se posílá jen přes HTTPS.
+- `HttpOnly` — běžný JavaScript ji nepřečte.
+- `SameSite=Lax` — dobrý default pro běžné webové aplikace, pokud nepotřebuješ cross-site přihlášení nebo embed scénáře.
+- Krátká životnost pro citlivé session a oddělený refresh mechanismus, pokud ho opravdu potřebuješ.
+- Žádné osobní údaje v hodnotě cookie; identifikátor má být náhodný token, ne miniaturní vizitka uživatele.
+
+Pokud používáš subdomény, napiš si přesně, která služba cookie potřebuje. `Domain=.example.com` je pohodlné, ale zvyšuje blast radius: problém na jedné subdoméně může ohrozit širší část produktu.
+
+### FU.5 Report-only režim je kamarád, ne zbabělost
+
+U CSP se vyplatí nejdřív nasadit `Content-Security-Policy-Report-Only`. Prohlížeč politiku nevynutí, ale pošle reporty o porušení. Díky tomu zjistíš, co by se rozbilo, ještě než to rozbije zákazníkům práci.
+
+Postup:
+
+1. Sepiš zamýšlenou CSP podle inventury zdrojů.
+2. Nasaď ji jako report-only pro produkci nebo omezenou část provozu.
+3. Sbírej reporty do vlastního endpointu nebo evropského logovacího systému s krátkou retencí.
+4. Odstraň zbytečné externí zdroje místo toho, abys je automaticky povolil.
+5. Po několika deployích bez falešných zásahů přepni politiku do vynuceného režimu.
+
+Pozor na soukromí: CSP reporty mohou obsahovat URL a části kontextu. Neber je jako bezplatnou analytiku uživatele. Nastav minimální retenci, omez přístup a neukládej víc, než potřebuješ k opravě politiky.
+
+### FU.6 Hlavičky testuj automaticky, ne pocitově
+
+Bezpečnostní hlavičky se kazí nenápadně: nový reverse proxy blok, CDN pravidlo, framework upgrade, přidaný embed, přepis middleware. Proto je dej do automatizované kontroly.
+
+Minimální test pro malý tým:
+
+- Smoke test po deployi stáhne homepage a app route přes HTTPS.
+- Test ověří existenci HSTS, CSP, `X-Content-Type-Options`, `Referrer-Policy` a cookie atributů u přihlášení.
+- Test nevyžaduje konkrétní pořadí hlaviček, jen jejich obsah a bezpečnostní minimum.
+- Výjimky jsou dokumentované u konkrétní route, ne schované v kódu jako „temporary fix“ z roku raz dva.
+- Jednou měsíčně se projde seznam povolených CSP domén a odstraní mrtvé služby.
+
+Příklad jednoduché interní kontroly:
+
+```bash
+curl -I https://example.com | sed -n '/strict-transport-security\|content-security-policy\|referrer-policy\|x-content-type-options/Ip'
+```
+
+Tahle kontrola nenahradí penetrační test. Je to jen levná pojistka, že základní obranná vrstva nezmizela při refaktoru konfigurace.
+
+### FU.7 Šablona: karta bezpečnostních hlaviček
+
+```markdown
+## Bezpečnostní hlavičky: [produkt / doména]
+
+### Rozsah
+- Domény: [produkce, app, api, docs]
+- Výjimky: [widget, embed, platební brána]
+- Vlastník: [jméno / role]
+
+### Transport
+- HTTPS redirect: [ano/ne]
+- HSTS: [max-age, includeSubDomains, preload]
+- Certifikáty: [kdo hlídá expiraci]
+
+### CSP
+- default-src: [hodnota]
+- script-src: [hodnota]
+- style-src: [hodnota]
+- img-src: [hodnota]
+- connect-src: [hodnota]
+- frame-ancestors: [hodnota]
+- Reportování: [endpoint, retence, vlastník]
+
+### Další hlavičky
+- Referrer-Policy: [hodnota]
+- Permissions-Policy: [hodnota]
+- X-Content-Type-Options: [hodnota]
+- X-Frame-Options: [hodnota / proč není potřeba]
+
+### Cookies
+- Session cookie: [Secure, HttpOnly, SameSite]
+- Doména cookie: [host-only / sdílená subdoména]
+- Životnost: [čas]
+
+### Kontrola
+- Automatický test: [kde běží]
+- Poslední review: [datum]
+- Známé kompromisy: [co a proč]
+```
+
+### FU.8 Checklist: hlavičky bez bezpečnostního divadla
+
+- [ ] Produkční web přesměrovává HTTP na HTTPS a má promyšlený HSTS.
+- [ ] CSP vychází z inventury skutečných zdrojů, ne z náhodného generátoru.
+- [ ] Marketing, aplikace, API a embed části mají politiku podle svého rizika.
+- [ ] `frame-ancestors`, `Referrer-Policy`, `Permissions-Policy` a `nosniff` jsou vědomě nastavené.
+- [ ] Session cookies mají `Secure`, `HttpOnly`, vhodný `SameSite` a neobsahují osobní údaje.
+- [ ] CSP reporty mají minimální retenci a nejsou používané jako skrytá analytika.
+- [ ] Automatický smoke test hlídá, že bezpečnostní hlavičky nezmizely po deployi.
+- [ ] Výjimky mají vlastníka, důvod a datum další kontroly.
+
+### FU.9 Zdroje k bezpečnostním hlavičkám
+
+- OWASP — HTTP Headers Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Headers_Cheat_Sheet.html
+- OWASP — Content Security Policy Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Content_Security_Policy_Cheat_Sheet.html
+- MDN — Content-Security-Policy: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy
+- MDN — Strict-Transport-Security: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Strict-Transport-Security
+- MDN — Referrer-Policy: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Referrer-Policy
+- MDN — Permissions-Policy: https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Permissions_Policy
+
+
 ## Pracovní log
+
+- 2026-09-05 04:01 UTC — Doplněna příloha FU o bezpečnostních hlavičkách pro malý SaaS: HTTPS/HSTS, CSP jako mapa zdrojů, ochrana proti embedování, referrery, permissions policy, cookie atributy, report-only režim, automatické kontroly, šablona karty, checklist a ověřené zdroje OWASP/MDN.
 
 - 2026-09-05 03:02 UTC — Doplněna příloha FT o vulnerability disclosure pro malý SaaS: security.txt podle RFC 9116, rozsah hlášení, safe harbor, triage reportů, privacy-first zacházení s důkazy, systémové opravy, férové uzavření, šablona politiky, checklist a ověřené zdroje k CVD.
 
