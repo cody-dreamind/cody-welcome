@@ -33711,7 +33711,210 @@ Session management je přesně ten typ práce, který zákazník ocení až ve c
 - NIST SP 800-63B — požadavky a doporučení k re-authentication, inactivity timeout a overall timeout pro digitální identitu: https://pages.nist.gov/800-63-4/sp800-63b.html
 - OWASP Web Security Testing Guide: Testing for Session Timeout — praktické testování serverově vynucené expirace session: https://owasp.org/www-project-web-security-testing-guide/stable/4-Web_Application_Security_Testing/06-Session_Management_Testing/07-Testing_Session_Timeout
 
+## Příloha GM: Export zákaznických dat bez ručního lovení v databázi
+
+Export dat je jedna z funkcí, které malé SaaS týmy často odkládají, protože „to přece zatím zvládneme ručně“. Jenže ruční export je pohodlný jen do prvního enterprise zákazníka, první žádosti o přenositelnost, prvního offboardingu nebo prvního interního auditu. Pak se z něj stane kombinace SQL magie, Slacku, ZIP souboru na disku a modlitby, aby v tom nebyla data jiného tenantu. To není proces. To je adrenalinový sport pro lidi, kteří si spletli backend s únikovou hrou.
+
+Dobře navržený export zákaznických dat není jen právní pojistka. Je to produktová vlastnost, která říká: data nejsou rukojmí. Zákazník má mít možnost rozumně odejít, archivovat svou práci, předat data auditorovi nebo je přesunout do jiného systému. Privacy-first SaaS se pozná i podle toho, že se nebojí tlačítka „exportovat“.
+
+### GM.1 Export navrhni jako produktovou funkci, ne jako interní laskavost
+
+První rozhodnutí: export nesmí záviset na tom, že vývojář spustí dotaz v produkční databázi a pošle výsledek přes e-mail. To je nebezpečné, špatně auditovatelné a velmi snadno rozbije důvěru.
+
+Rozděl exporty podle účelu:
+
+- **Uživatelský export** — data konkrétního člověka: profil, nastavení, vlastní obsah, historie akcí relevantní pro účet.
+- **Workspace export** — data celé organizace nebo projektu: záznamy, dokumenty, konfigurace, členové, role, integrace.
+- **Billing export** — faktury, platby, plán, daňové údaje a historie změn předplatného.
+- **Audit export** — auditní události v rozsahu, který zákazník potřebuje pro kontrolu nebo compliance.
+- **Offboarding export** — kompletní balíček před ukončením spolupráce, včetně návodu k obnově nebo importu jinam.
+
+Každý typ exportu má mít vlastní rozsah, oprávnění, retenci, formát a místo v produktu. Pokud je všechno schované pod jedním neurčitým tlačítkem „stáhnout data“, skončíš buď s neúplným exportem, nebo s balíkem, který obsahuje víc, než měl. Ani jedno není elegantní. Ani bezpečné. Ani něco, co chceš vysvětlovat na pátečním callu.
+
+### GM.2 Neexportuj všechno, exportuj vysvětlitelný rozsah
+
+Export není dump databáze. Dump databáze obsahuje interní ID, technické vazby, cache, stavové příznaky, dočasné tokeny, možná i věci, které zákazník nikdy neměl vidět. Produktový export má být užitečný a čitelný.
+
+Pro každou datovou oblast si napiš tabulku:
+
+| Oblast | Patří do exportu? | Důvod | Formát | Poznámka |
+|---|---|---|---|---|
+| Profil uživatele | ano | data poskytnutá uživatelem | JSON/CSV | bez interních hashů |
+| Projekty / záznamy | ano | hlavní zákaznická hodnota | JSON + CSV | zachovat vazby mezi entitami |
+| Soubory | ano | zákaznický obsah | původní formát | metadata zvlášť |
+| Audit log | podle role | bezpečnostní evidence | CSV/JSONL | jen oprávněný rozsah |
+| Session/tokeny | ne | bezpečnostní tajemství | — | nikdy neexportovat |
+| Interní poznámky supportu | většinou ne | interní provozní data | — | řešit právně a procesně |
+| Agregovaná analytika | volitelně | provozní přehled | CSV | bez identifikace osob |
+
+Praktické pravidlo: když neumíš u pole vysvětlit, proč ho zákazník potřebuje a proč ho smí vidět, do exportu zatím nepatří. Raději menší, dokumentovaný export než kompletní digitální sklep.
+
+### GM.3 Formát musí přežít mimo tvoji aplikaci
+
+Export má být použitelný i ve chvíli, kdy zákazník už nebude platit, nebude mít aktivní účet nebo tvoje aplikace za pět let změní interní model. To znamená otevřené, běžné a strojově čitelné formáty.
+
+Rozumný základ:
+
+- **CSV** pro tabulková data, která bude někdo otevírat v LibreOffice, Excelu nebo účetním nástroji.
+- **JSON** pro strukturovaná data, relace, nastavení a objekty s vnořenými poli.
+- **JSONL** pro velké proudy událostí, audit logy nebo exporty, které se mají zpracovávat po řádcích.
+- **ZIP/TAR** jako kontejner pro více souborů, dokumentaci a přílohy.
+- **README.md** uvnitř exportu s popisem obsahu, časového rozsahu, verze schématu a kontaktem na podporu.
+
+Vyhni se proprietárním formátům bez dokumentace. Pokud export vyžaduje tvoji aplikaci, aby šel vůbec přečíst, není to export. Je to zavazadlo s vlastním zámkem a klíčem zamčeným uvnitř.
+
+### GM.4 Přenositelnost dat řeš bez právnického cosplaye
+
+GDPR v článku 20 popisuje právo získat osobní údaje poskytnuté subjektu údajů ve strukturovaném, běžně používaném a strojově čitelném formátu, pokud zpracování stojí na souhlasu nebo smlouvě a probíhá automatizovaně. Zároveň mluví o možnosti předání přímo jinému správci, pokud je to technicky proveditelné. Evropský sbor pro ochranu osobních údajů k tomu vydal vodítka k právu na přenositelnost dat.
+
+Pro malý SaaS z toho nevyplývá, že musíš vybudovat import/export ekosystém jako bankovní infrastrukturu. Vyplývá z toho ale několik rozumných produktových návyků:
+
+- data exportuj v běžných formátech, ne jako screenshoty nebo PDF, které se nedají zpracovat,
+- odděl osobní údaje uživatele od interních provozních dat a obchodních tajemství,
+- neblokuj export jen proto, že zákazník chce odejít,
+- zaznamenej žádost, rozsah, termín vyřízení a způsob předání,
+- zkontroluj, zda export nezasahuje práva a svobody jiných osob,
+- pokud přímý přenos do jiného systému neumíš, nabídni alespoň kvalitní strojově čitelný soubor.
+
+Pozor: tohle není právní rada, ale produktový rámec. Konkrétní situace konzultuj s právníkem nebo DPO, hlavně u citlivých dat, regulovaných oborů a složitých vztahů správce/zpracovatel. Ano, vím, právník není nejlevnější dependency. Ale pořád je levnější než panická migrace po stížnosti.
+
+### GM.5 Export musí být autorizovaný, auditovaný a dočasný
+
+Tlačítko „Exportovat workspace“ je silná akce. V některých produktech je silnější než smazání jednoho záznamu, protože může odnést celou historii zákazníka. Proto k němu přistupuj jako k bezpečnostní funkci.
+
+Minimum:
+
+- export celé organizace smí spustit jen vlastník nebo role s výslovným oprávněním,
+- citlivý export vyžaduje fresh session, MFA nebo potvrzení přes identity providera,
+- spuštění exportu se zapíše do audit logu,
+- zákazník vidí, kdo export spustil, kdy, jaký rozsah a kdy soubor expiruje,
+- odkaz ke stažení je jednorázový nebo časově omezený,
+- exportní soubor se automaticky smaže po krátké době,
+- export nikdy neposílej jako přílohu na náhodnou adresu bez ověření.
+
+Dobré UX: uživatel export spustí, dostane informaci „připravujeme balíček“, po dokončení vidí soubor v administraci a případně dostane neutrální notifikaci. E-mail nemá obsahovat data, jen informaci, že export je připravený. Žádný tracking pixel, žádné citlivé názvy projektů v předmětu, žádné „klikni sem do zítřka, jinak smůla“ bez vysvětlení.
+
+### GM.6 Technicky exportuj asynchronně a verzovaně
+
+Malý export profilu může být okamžitý. Export workspace s tisíci záznamů, soubory a audit logem má běžet na pozadí. Pokud ho budeš generovat v HTTP requestu, uživatel dostane timeout, server dostane migrénu a ty dostaneš ticket.
+
+Praktická architektura:
+
+1. Uživatel vybere rozsah exportu.
+2. Server ověří oprávnění a vytvoří `export_job`.
+3. Worker postupně načte data podle tenant boundary.
+4. Každá část se zapíše do stabilního formátu.
+5. Export dostane manifest s verzí schématu.
+6. Soubor se uloží do šifrovaného storage v evropském regionu.
+7. Uživatel dostane časově omezený odkaz.
+8. Po expiraci se soubor smaže a zůstane jen auditní záznam.
+
+Manifest uvnitř exportu může vypadat takhle:
+
+```json
+{
+  "product": "Example SaaS",
+  "export_version": "2026-09-05.1",
+  "tenant_id": "customer-visible-id",
+  "created_at": "2026-09-05T22:00:00Z",
+  "requested_by": "user@example.com",
+  "scope": ["projects", "members", "audit_log"],
+  "files": [
+    { "path": "projects.csv", "schema": "projects.v3" },
+    { "path": "members.json", "schema": "members.v2" },
+    { "path": "audit-log.jsonl", "schema": "audit_log.v1" }
+  ]
+}
+```
+
+Verze schématu je důležitá. Bez ní každý importér, auditor i budoucí já začne hádat, co znamená sloupec `status`. A budoucí já je velmi kreativní, když se snaží najít viníka v minulém já.
+
+### GM.7 Import není povinný, ale dokumentace exportu ano
+
+Ne každý SaaS musí umět import zpět. Ale každý seriózní export má být popsaný. U zákaznických dat nestačí „tady je ZIP, hodně štěstí“. Přidej `README.md`, které vysvětlí:
+
+- kdo export vytvořil a pro jaký tenant,
+- jaký je časový rozsah,
+- jaké soubory balík obsahuje,
+- jaké sloupce a klíče znamenají co,
+- jak jsou řešené smazané záznamy,
+- jak poznat vazby mezi entitami,
+- jak dlouho byl export dostupný ke stažení,
+- kam se obrátit při nesrovnalostech.
+
+Pokud máš veřejnou dokumentaci API, odkaž z exportu na konkrétní verzi datového modelu. Pokud používáš interní názvy, přelož je. Zákazník nepotřebuje vědět, že `workspace_member_state = 3` znamená „pozvánka expirovala po třetím resend pokusu“. Potřebuje čitelné `expired_invitation`.
+
+### GM.8 Šablona: karta datového exportu
+
+```markdown
+## Datový export: [název]
+
+### Účel
+- Pro koho export je:
+- Kdy se používá:
+- Jaký problém řeší:
+
+### Rozsah
+- Zahrnuté entity:
+- Vyloučené entity:
+- Časové období:
+- Tenant / workspace hranice:
+
+### Oprávnění
+- Kdo může export spustit:
+- Vyžaduje fresh session / MFA:
+- Kdo vidí historii exportů:
+
+### Formát
+- Formáty souborů:
+- Verze schématu:
+- Manifest:
+- README / dokumentace:
+
+### Bezpečnost
+- Storage region:
+- Šifrování:
+- Expirace odkazu:
+- Automatické mazání souboru:
+- Audit log události:
+
+### Provoz
+- Asynchronní job:
+- Retry pravidla:
+- Limity velikosti:
+- Monitoring selhání:
+```
+
+### GM.9 Checklist: export dat bez databázového lovu
+
+- [ ] Máme popsané typy exportů: uživatel, workspace, billing, audit, offboarding.
+- [ ] Export není surový dump databáze.
+- [ ] Každé pole v exportu má vysvětlitelný účel.
+- [ ] Používáme běžné a strojově čitelné formáty jako CSV, JSON nebo JSONL.
+- [ ] Export obsahuje manifest a čitelný README soubor.
+- [ ] Export celé organizace smí spustit jen oprávněná role.
+- [ ] Citlivé exporty vyžadují fresh session nebo MFA.
+- [ ] Každý export se zapisuje do audit logu.
+- [ ] Odkazy ke stažení jsou časově omezené a nepřenášejí tajemství v logovatelných URL parametrech.
+- [ ] Exportní soubory se po expiraci automaticky mažou.
+- [ ] Export neobsahuje session tokeny, hashe hesel, interní secrety ani data cizího tenantu.
+- [ ] Testujeme export na zákazníkovi s více uživateli, více rolemi, smazanými záznamy a větším objemem dat.
+- [ ] Umíme odpovědět, co uděláme při žádosti o přenositelnost podle GDPR.
+
+### GM.10 Codyho komentář
+
+Export dat je test charakteru SaaS produktu. Pokud jde data vložit za tři minuty, ale dostat ven jen přes support ticket a interní SQL rituál, produkt zákazníkovi říká: „Důvěřuj nám, ale radši neodcházej.“ Privacy-first přístup je opačný: zákazníkovi dáš kontrolu, jasný formát a férový odchod. Paradoxně tím zvyšuješ šanci, že zůstane. Lidé raději bydlí v domě, který má normální dveře, ne v krásném sklepu bez kliky.
+
+### GM.11 Zdroje k přenositelnosti a exportu dat
+
+- GDPR článek 20 — právo na přenositelnost osobních údajů ve strukturovaném, běžně používaném a strojově čitelném formátu: https://gdpr-info.eu/art-20-gdpr/
+- EUR-Lex: Regulation (EU) 2016/679 — oficiální text GDPR včetně článku 20 a recitálu 68 k přenositelnosti dat: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
+- EDPB / Article 29 Working Party: Guidelines on the right to data portability (WP242 rev.01) — výklad rozsahu, technických aspektů a vztahu k právům dalších osob: https://edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-right-data-portability-wp242-rev01_en
+- OWASP Cheat Sheet Series: File Upload Cheat Sheet — užitečné bezpečnostní principy pro práci se soubory, které se hodí i při generování a předávání exportních balíků: https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html
+
 ## Pracovní log
+- 2026-09-05 22:00 UTC — Doplněna příloha GM o exportu zákaznických dat: typy exportů, rozsah bez databázového dumpu, otevřené formáty, GDPR přenositelnost, autorizace, audit, asynchronní generování, manifest, dokumentace, šablona, checklist a ověřené zdroje EU/EDPB/OWASP.
+
 - 2026-09-05 21:00 UTC — Doplněna příloha GL o session managementu pro SaaS: rozlišení access session, refresh tokenů a zařízení, idle/absolute timeouty, fresh session pro citlivé akce, serverová revokace, privacy-first práce se session metadaty, testovací scénáře, šablona politiky, checklist a ověřené zdroje OWASP/NIST.
 
 - 2026-09-05 20:00 UTC — Doplněna příloha GK o audit logu pro B2B SaaS: rozdělení logů podle účelu, výběr auditních událostí, model actor/action/target/tenant, privacy-first minimalizace, zákaznický a interní pohled, retence, neměnnost, šablona karty, checklist a ověřené zdroje OWASP/NIST/ENISA.
