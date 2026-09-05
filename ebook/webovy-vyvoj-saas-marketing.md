@@ -33912,7 +33912,212 @@ Export dat je test charakteru SaaS produktu. Pokud jde data vložit za tři minu
 - EDPB / Article 29 Working Party: Guidelines on the right to data portability (WP242 rev.01) — výklad rozsahu, technických aspektů a vztahu k právům dalších osob: https://edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-right-data-portability-wp242-rev01_en
 - OWASP Cheat Sheet Series: File Upload Cheat Sheet — užitečné bezpečnostní principy pro práci se soubory, které se hodí i při generování a předávání exportních balíků: https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html
 
+## Příloha GN: Import zákaznických dat bez rozbití databáze a důvěry
+
+Import dat je přesný opak exportu jen na papíře. Export říká: „Tady máš svá data venku.“ Import říká: „Pusť cizí, často špinavá a překvapivě kreativní data dovnitř našeho systému.“ A to je úplně jiná liga. Když import navrhneš jako rychlý upload CSV souboru a pár `INSERT` dotazů, možná získáš demo efekt. Taky ale získáš duplicitní zákazníky, rozbité vazby, nevalidní e-maily, data ve špatném tenantu, bezpečnostní riziko a support ticket s větou „nějak se nám to celé pomíchalo“. Ta věta mimochodem nikdy nevěstí nic levného.
+
+Dobře navržený import není jednorázová technická utilita. Je to produktový proces: zákazník ví, co může nahrát, systém mu předem ukáže, co se stane, import je auditovatelný, vratný a chrání data ostatních. Privacy-first import navíc sbírá jen data nutná k migraci a nedělá z každého nahraného souboru trvalý datový suvenýr v produkci.
+
+### GN.1 Import začni migračním scénářem, ne tlačítkem upload
+
+Nejdřív si odpověz, proč zákazník data importuje. Jinak postavíš obecný importér, který umí všechno trochu a nic bezpečně.
+
+Typické scénáře:
+
+- **Přechod z jiného nástroje** — zákazník má kontakty, projekty, úkoly, faktury nebo znalostní bázi v konkurenčním systému.
+- **První naplnění workspace** — nový zákazník chce rychle dostat do systému členy týmu, klienty, katalog služeb nebo historická data.
+- **Opakovaný provozní import** — každý týden přichází dávka dat z účetnictví, skladu, CRM nebo interního systému.
+- **Obnova po chybě** — zákazník potřebuje vrátit sadu záznamů z dřívějšího exportu nebo ruční zálohy.
+- **Partnerská integrace** — data nepřichází od člověka přes soubor, ale z API nebo webhooku jiného systému.
+
+Každý scénář má jinou míru rizika. Jednorázový onboardingový import může být částečně asistovaný supportem. Opakovaný provozní import musí být plně automatizovaný, idempotentní a monitorovaný. Obnova po chybě musí být extrémně opatrná, protože zákazník je už ve stresu a systém má sklon dokazovat, že stres lze ještě škálovat.
+
+### GN.2 Mapování polí je produktové rozhraní
+
+Nečekej, že zákaznické CSV bude mít přesně tvoje názvy sloupců. Nebude. Bude mít `E-mail`, `mail`, `email_address`, `kontakt`, `Kontakt hlavní`, někdy všechno najednou. Importér musí umět zákazníka provést mapováním bez toho, aby z něj udělal databázového archeologa.
+
+Dobré mapování obsahuje:
+
+- **Detekci hlavičky** — systém ukáže první řádky a navrhne, který řádek je hlavička.
+- **Návrhy párování** — podobné názvy sloupců se předvyberou, ale zákazník je musí vidět a potvrdit.
+- **Povinná pole** — import nejde spustit, pokud chybí minimální identifikátor nebo vazba.
+- **Transformace hodnot** — datum, měna, jazyk, stav, role, země a boolean hodnoty potřebují jasná pravidla.
+- **Preview výsledku** — zákazník vidí vzorek toho, jak budou data vypadat po importu.
+- **Uloženou šablonu** — pro opakované importy se mapování uloží jako pojmenovaný profil.
+
+Příklad: pokud zákazník importuje kontakty, systém může navrhnout mapování `Firma` → `company_name`, `E-mail` → `email`, `Telefon` → `phone`, `Poznámka` → `note`. U každého pole ale ukaž, zda je povinné, jak se validuje a co se stane s prázdnou hodnotou. „Nějak to doplníme“ není strategie. To je začátek datového folkloru.
+
+### GN.3 Validace má proběhnout před zápisem, ne po výbuchu
+
+Import rozděl na dvě fáze: **dry run** a **commit**. Dry run soubor přečte, namapuje, zvaliduje, spočítá dopady a ukáže chyby. Commit zapisuje až ve chvíli, kdy zákazník chápe výsledek.
+
+Validuj minimálně:
+
+- **Formát** — typ souboru, kódování, oddělovač, velikost, počet řádků a počet sloupců.
+- **Syntaxi polí** — e-mail vypadá jako e-mail, datum je datum, číslo je číslo, URL není náhodný výkřik.
+- **Povolené hodnoty** — role, stavy, typy, měny a země musí odpovídat známým možnostem.
+- **Vazby** — úkol nemůže odkazovat na neexistující projekt, člen týmu na neexistující workspace.
+- **Duplicity** — podle stabilního identifikátoru, e-mailu, externího ID nebo kombinace polí.
+- **Oprávnění** — uživatel smí importovat jen do vlastního tenantu a jen do oblastí, kde má roli.
+- **Limit dopadu** — import 200 řádků je jiný incidentální profil než import 2 milionů řádků.
+
+Chyby zobrazuj ve třech kategoriích:
+
+| Kategorie | Co znamená | Co má zákazník udělat |
+|---|---|---|
+| Blokující chyba | Import by poškodil data nebo porušil pravidla | opravit soubor nebo mapování |
+| Varování | Import projde, ale část dat bude upravena nebo přeskočena | vědomě potvrdit |
+| Informace | Užitečný detail bez rizika | vzít na vědomí |
+
+Nikdy nepiš jen „import selhal“. Napiš: „Řádek 42: hodnota `admin` ve sloupci `role` není povolená pro tento workspace. Povolené hodnoty: `member`, `viewer`.“ To je rozdíl mezi podporou a hádankou.
+
+### GN.4 Import musí být idempotentní, jinak vyrobíš datové konfety
+
+Idempotence znamená, že opakované spuštění stejného importu nevyrobí chaos. Pokud zákazník omylem klikne dvakrát, refreshne stránku nebo se retryne job, nemá vzniknout dvakrát stejný kontakt, dvakrát stejná faktura ani pět „nových“ projektů z jednoho řádku.
+
+Použij kombinaci:
+
+- **Import run ID** — každý import má vlastní jednoznačné ID a stav.
+- **External ID** — pokud zdrojový systém poskytuje stabilní ID, ulož ho jako vazbu.
+- **Dedup pravidla** — definuj, kdy se záznam považuje za existující.
+- **Upsert režim** — zákazník volí, zda se existující záznamy přeskočí, aktualizují nebo založí jako nové verze.
+- **Transakční dávky** — zápis rozděluj po dávkách, ale udržuj konzistentní stav.
+- **Checkpointy** — dlouhý import lze obnovit bez opakování hotových částí.
+
+Praktické nastavení pro první verzi:
+
+| Režim | Chování | Kdy použít |
+|---|---|---|
+| Pouze nové | existující záznamy přeskočit | bezpečný onboarding |
+| Aktualizovat existující | shodné záznamy přepsat podle mapování | opakovaný provozní import |
+| Vytvořit verze | změny uložit jako novou verzi záznamu | smlouvy, ceníky, auditované oblasti |
+| Náhled bez zápisu | jen validace a report | první test zákazníka |
+
+Výchozí režim by měl být konzervativní. Produkt nemá zákazníka potrestat za to, že neví, co je upsert. Upsert je krásné slovo, ale i krásná sekera.
+
+### GN.5 Soubor je nedůvěryhodný vstup, ne dárek od hodného zákazníka
+
+Každý importovaný soubor ber jako nedůvěryhodný vstup. I když ho poslal platící zákazník. I když je „jen CSV“. I když má v názvu `final_final_ok.csv`, což je mimochodem nejnebezpečnější název ve vesmíru.
+
+Bezpečnostní minimum:
+
+- povol jen nutné přípony a typy souborů,
+- ověř skutečný typ souboru, nespoléhej jen na `Content-Type`,
+- nastav limit velikosti, počtu řádků a délky jednotlivých buněk,
+- ukládej upload mimo veřejný webroot a s generovaným názvem,
+- skenuj soubory podle rizika a dostupných možností,
+- nikdy nespouštěj obsah souboru jako kód,
+- ošetři CSV injection: buňky začínající `=`, `+`, `-`, `@` nebo tabulátorem nesmí později skončit v exportu tak, aby je tabulkový procesor interpretoval jako vzorec,
+- loguj metadata importu, ne celý obsah souboru.
+
+Privacy-first detail: původní soubor po úspěšném importu nemaž až „někdy“. Nastav jasnou retenci: například 7 nebo 30 dní podle podpůrného procesu, pak automatický výmaz. Pokud potřebuješ uchovat důkaz importu, uchovej manifest, hash souboru, počty řádků, chyby a mapování — ne celý soubor s osobními údaji.
+
+### GN.6 Chyby opravuj ve staging zóně, ne přímo v produkčních datech
+
+Mezi uploadem a produkčním zápisem vytvoř **staging zónu**. Tam uložíš normalizovaný výsledek importu, chyby, varování, mapování a vazby na budoucí entity. Produkční tabulky se mění až po potvrzení.
+
+Staging zóna pomáhá řešit:
+
+- náhled dat před zápisem,
+- opravu jednotlivých řádků bez nového uploadu,
+- schválení importu druhým člověkem,
+- audit toho, kdo import připravil a kdo ho spustil,
+- bezpečné zrušení importu před commitem,
+- report zákazníkovi po dokončení.
+
+U B2B SaaS přidej schvalovací pravidlo: import členů, rolí, oprávnění, billing dat nebo velkých změn musí potvrdit admin workspace. Pokud produkt umožňuje zákazníkovi omylem naimportovat 300 lidí jako administrátory, není to „power user feature“. Je to generátor pondělních krizových meetingů.
+
+### GN.7 Po importu ukaž výsledek a další krok
+
+Import nekončí hláškou „hotovo“. Zákazník potřebuje vědět, co se stalo.
+
+Po dokončení ukaž:
+
+- kolik řádků bylo zpracováno,
+- kolik záznamů vzniklo, kolik se aktualizovalo a kolik se přeskočilo,
+- jaké chyby zůstaly a jak je stáhnout jako opravný report,
+- kde najde nové záznamy v produktu,
+- kdo import spustil a kdy,
+- jak dlouho bude dostupný původní soubor nebo report,
+- jak import vrátit nebo eskalovat na podporu.
+
+Dobrá praxe je nabídnout „opravný export“: CSV se stejnou strukturou, kde jsou jen chybné řádky a sloupec s vysvětlením. Zákazník ho opraví a nahraje znovu. Tím šetříš čas jemu i supportu. A support pak může dělat support, ne forenzní lingvistiku sloupců.
+
+### GN.8 Šablona: karta datového importu
+
+```markdown
+## Datový import: [název]
+
+### Účel
+- Proč zákazník import používá:
+- Jednorázový / opakovaný scénář:
+- Cílová oblast produktu:
+
+### Vstup
+- Povolené formáty:
+- Maximální velikost:
+- Povinné sloupce:
+- Volitelné sloupce:
+- Podporované kódování / oddělovače:
+
+### Mapování
+- Návrhy mapování:
+- Uložené šablony:
+- Transformace hodnot:
+- Výchozí režim zápisu:
+
+### Validace
+- Blokující chyby:
+- Varování:
+- Dedup pravidla:
+- Vazby na existující entity:
+
+### Bezpečnost a privacy
+- Kdo smí import připravit:
+- Kdo smí import potvrdit:
+- Retence původního souboru:
+- Auditní události:
+- Co se nikdy neukládá:
+
+### Provoz
+- Staging zóna:
+- Asynchronní job:
+- Retry / checkpointy:
+- Rollback nebo kompenzační postup:
+- Report po dokončení:
+```
+
+### GN.9 Checklist: import bez datové katastrofy
+
+- [ ] Máme jasně popsaný migrační scénář a cílovou oblast produktu.
+- [ ] Import má dry run před produkčním zápisem.
+- [ ] Zákazník vidí mapování polí a náhled výsledku.
+- [ ] Povinná pole, typy, vazby a povolené hodnoty se validují před commitem.
+- [ ] Chyby jsou konkrétní: řádek, sloupec, hodnota, důvod a návrh opravy.
+- [ ] Import je idempotentní a opakované spuštění nevytváří duplicity.
+- [ ] Existuje konzervativní výchozí režim zápisu.
+- [ ] Upload souborů má limity, validaci typu, bezpečné úložiště a retenci.
+- [ ] CSV injection a nebezpečné hodnoty jsou ošetřené při importu i pozdějším exportu.
+- [ ] Staging zóna odděluje přípravu od produkčních dat.
+- [ ] Citlivé importy vyžadují oprávněnou roli a případně schválení adminem.
+- [ ] Audit log obsahuje metadata importu, ne celý obsah osobních dat.
+- [ ] Po dokončení zákazník dostane report a opravný soubor pro chybné řádky.
+- [ ] Původní soubory se mažou podle jasné retenční politiky.
+
+### GN.10 Codyho komentář
+
+Import je místo, kde se potkává obchodní nadšení s realitou dat. Obchod chce říct „jasně, nahrajete to jedním klikem“. Vývoj ví, že zákaznické CSV může obsahovat datum jako `zítra`, cenu jako `asi 500`, e-mail v poznámce a tři různé sloupce jménem `ID`. Dobrý produkt tyhle světy smíří: nabídne jednoduchý průvodce, ale pod kapotou má validaci, staging, audit a brzdy. Privacy-first import není ten, který schová riziko za hezkou ikonku cloudu. Je to ten, který zákazníkovi férově ukáže, co se do systému pustí — a co zůstane venku.
+
+### GN.11 Zdroje k bezpečnému importu a validaci vstupů
+
+- OWASP File Upload Cheat Sheet — praktická doporučení pro povolené typy souborů, validaci obsahu, limity, bezpečné názvy a úložiště mimo webroot: https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html
+- OWASP Input Validation Cheat Sheet — principy validace syntaxe, povolených hodnot, rozsahů a nedůvěryhodných vstupů: https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html
+- OWASP CSV Injection — rizika buněk, které tabulkové procesory interpretují jako vzorce, a obrana při práci s CSV: https://owasp.org/www-community/attacks/CSV_Injection
+- NIST SP 800-53 Rev. 5, SI-10 Information Input Validation — kontrola popisující ověřování platnosti vstupních informací před jejich zpracováním: https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final
+
 ## Pracovní log
+- 2026-09-05 23:01 UTC — Doplněna příloha GN o importu zákaznických dat: migrační scénáře, mapování polí, dry run validace, idempotence, staging zóna, bezpečný upload, retence souborů, report po dokončení, šablona, checklist a ověřené zdroje OWASP/NIST.
+
 - 2026-09-05 22:00 UTC — Doplněna příloha GM o exportu zákaznických dat: typy exportů, rozsah bez databázového dumpu, otevřené formáty, GDPR přenositelnost, autorizace, audit, asynchronní generování, manifest, dokumentace, šablona, checklist a ověřené zdroje EU/EDPB/OWASP.
 
 - 2026-09-05 21:00 UTC — Doplněna příloha GL o session managementu pro SaaS: rozlišení access session, refresh tokenů a zařízení, idle/absolute timeouty, fresh session pro citlivé akce, serverová revokace, privacy-first práce se session metadaty, testovací scénáře, šablona politiky, checklist a ověřené zdroje OWASP/NIST.
