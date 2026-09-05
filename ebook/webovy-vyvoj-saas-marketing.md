@@ -30615,7 +30615,192 @@ Tahle kontrola nenahradí penetrační test. Je to jen levná pojistka, že zák
 - MDN — Permissions-Policy: https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Permissions_Policy
 
 
+## Příloha FV: Secrets a konfigurace bez tajemství v repozitáři
+
+API klíče, databázová hesla, webhook podpisy, privátní klíče, SMTP přístupy a tokeny do platební brány nejsou „jen konfigurace“. Jsou to klíče od domu. Malý SaaS tým se často spálí ne tím, že nemá enterprise vault za milion, ale tím, že má jeden `.env` soubor posílaný přes chat, stejné heslo pro staging i produkci a starý token z testovací integrace, který pořád umí zapisovat do ostrých dat. To je bezpečnostní verze kabelů pod stolem: funguje to, dokud někdo nezakopne.
+
+Tahle příloha je praktický minimální systém, jak držet secrets pod kontrolou i v malém evropském provozu.
+
+### FV.1 Nejdřív odděl konfiguraci, secret a rozhodnutí v kódu
+
+Ne každá hodnota mimo kód je secret. Provozní nastavení má tři vrstvy:
+
+- **Veřejná konfigurace** — například název prostředí, URL veřejné homepage nebo zapnutý experiment, který neotevírá přístup k datům.
+- **Citlivá konfigurace** — například interní URL služeb, názvy bucketů nebo feature flagy, které samy o sobě nejsou heslem, ale prozrazují architekturu.
+- **Secret** — hodnota, která po úniku umožní přístup, podpis, impersonaci, dešifrování nebo zápis do systému.
+
+Do kódu patří stabilní produktová logika. Mimo kód patří hodnoty, které se liší podle prostředí. Twelve-Factor App popisuje konfiguraci jako hodnoty, které se mění mezi deployi, a doporučuje držet ji odděleně od kódu v prostředí: https://www.12factor.net/config
+
+Praktické pravidlo: kdyby se repozitář zítra zveřejnil, nesmí tím vzniknout bezpečnostní incident. Pokud by vznikl, konfigurace není oddělená dostatečně.
+
+### FV.2 Každý secret musí mít vlastníka, účel a místo použití
+
+Secret bez vlastníka je budoucí archeologická vykopávka. Vypadá nevinně, dokud se ho někdo nebojí smazat, protože „možná něco rozbije“.
+
+Pro každý důležitý secret si veď jednoduchou kartu:
+
+- **Název:** `STRIPE_WEBHOOK_SECRET`, `DATABASE_URL`, `SMTP_PASSWORD`.
+- **Účel:** k čemu přesně slouží.
+- **Vlastník:** člověk nebo role, která rozhoduje o změně.
+- **Prostředí:** local, staging, production.
+- **Kde je uložen:** hosting secret store, CI/CD secrets, vault, ruční server.
+- **Kdo ho může číst nebo měnit:** ideálně role, ne seznam náhodných hrdinů.
+- **Jak se rotuje:** postup, dopad, očekávaný čas.
+- **Co se stane při úniku:** jaký je blast radius a co vypnout jako první.
+
+OWASP u správy secretů zdůrazňuje centralizaci, kontrolu přístupů, audit, rotaci, revokaci a metadata typu kdo, kdy, proč a k čemu secret používá: https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html
+
+### FV.3 Prostředí nikdy nesdílej „protože je to rychlejší“
+
+Produkční secret nepatří do lokálního vývoje. Tečka. Jasně, někdy to ušetří dvacet minut. Pak to může stát víkend, omluvu zákazníkovi a nepříjemné hledání, jestli testovací skript neposlal reálným lidem reálný e-mail.
+
+Minimální rozdělení:
+
+- **Local:** vývojářské hodnoty, lokální databáze, testovací API klíče, žádný přístup k produkčním osobním datům.
+- **Staging:** co nejpodobnější produkci, ale s oddělenými tokeny, oddělenou databází a anonymizovanými nebo syntetickými daty.
+- **Production:** jen hodnoty nutné pro ostrý provoz, nejmenší oprávnění a přístup pouze přes schválený proces.
+
+Pokud dodavatel neumí oddělit testovací a produkční klíče, ber to jako riziko při výběru nástroje. U privacy-first SaaS není „jedním klíčem vládnout všem“ strategie. Je to fantasy literatura.
+
+### FV.4 `.env.example` je dokumentace, ne tajná schránka
+
+V repozitáři má být šablona, ne reálné hodnoty. Dobré `.env.example` pomůže novému člověku projekt spustit bez toho, aby mu někdo poslal ostré přístupy přes chat.
+
+Šablona má obsahovat:
+
+- všechny povinné proměnné,
+- krátký komentář k účelu,
+- bezpečný placeholder,
+- odkaz na interní postup, kde získat hodnotu,
+- informaci, jestli hodnota musí být unikátní pro prostředí.
+
+Příklad:
+
+```env
+# Public URL of this deployment, no trailing slash.
+APP_URL=http://localhost:3000
+
+# Database connection for local development only.
+DATABASE_URL=postgres://app:app@localhost:5432/app_dev
+
+# Production value is stored in hosting secrets. Never commit real tokens.
+PAYMENT_WEBHOOK_SECRET=replace-me
+```
+
+K `.gitignore` přidej konkrétní lokální soubory: `.env`, `.env.local`, `.env.production.local`. Nespoléhej jen na dobré úmysly. Dobré úmysly nejsou bezpečnostní kontrola, jsou dekorace.
+
+### FV.5 CI/CD secrets ber jako produkční systém
+
+CI/CD umí být největší zkratka i největší díra. Pokud pipeline umí nasadit produkci, číst registry, posílat build artefakty a přistupovat k databázi, není to „jen GitHub/GitLab“. Je to provozní kontrolní panel.
+
+Pravidla pro malý tým:
+
+- Nepouštěj produkční secrets do jobů pro pull requesty z neověřených forků.
+- Secrets v CI pojmenuj podle účelu a prostředí, ne `TOKEN2_FINAL_NEW`.
+- Omez, kdo může měnit workflow soubory a kdo může spouštět produkční deploy.
+- V logu maskuj citlivé hodnoty a zakaž debug výpisy prostředí.
+- Dlouhodobé deploy tokeny nahrazuj krátkodobými přístupy, pokud to platforma umí.
+- Po odchodu člověka z týmu zkontroluj i CI/CD, nejen aplikaci.
+
+OWASP CI/CD bezpečnostní materiály navazují na stejný princip: pipeline musí mít jasnou autentizaci, autorizaci, audit a ochranu proti úniku secretů v logu: https://cheatsheetseries.owasp.org/cheatsheets/CI_CD_Security_Cheat_Sheet.html
+
+### FV.6 Rotace musí být nacvičený postup, ne panika
+
+Secret, který nejde rychle otočit, je provozní dluh. Rotace není jen „vygeneruj nový klíč“. Je to změna, která může rozbít webhooky, sessions, šifrování, integrace i zákaznické importy.
+
+Rozumný rotační postup:
+
+1. Zjisti, kde se secret používá.
+2. Připrav nový secret vedle starého, pokud služba podporuje překryv.
+3. Nasaď aplikaci tak, aby uměla přijmout nový stav.
+4. Přepni produkci v nízkorizikovém okně.
+5. Ověř hlavní workflow a logy bez výpisu hodnot.
+6. Zneplatni starý secret.
+7. Zapiš datum, důvod a případné poučení.
+
+U šifrovacích klíčů buď zvlášť opatrný: rotace může znamenat čtení starými klíči a zápis novými, postupnou migraci dat nebo re-encryption job. NIST SP 800-57 Part 1 Rev. 5 je dobrý hlubší zdroj pro řízení kryptografických klíčů a jejich životní cyklus: https://csrc.nist.gov/pubs/sp/800/57/pt1/r5/final
+
+### FV.7 Privacy-first pohled: secret chrání i zákaznický vztah
+
+V evropském privacy-first provozu není správa secretů jen technické bezpečí. Je to součást slibu, že zákaznická data nejsou volně položená na stole.
+
+Proto dělej tři věci:
+
+- **Minimalizuj přístup:** token má umět jen to, co skutečně potřebuje. Pokud nástroj potřebuje jen číst faktury, nedávej mu právo mazat zákazníky.
+- **Minimalizuj kopie:** neposílej secrets přes chat, e-mail ani ticket, kde zůstanou navždy v historii.
+- **Minimalizuj dobu života:** krátkodobé tokeny a rychlá revokace jsou lepší než heslo z roku, kdy všichni ještě věřili, že cookie lišta vyřeší internet.
+
+Když vybíráš evropského dodavatele nebo hosting, ptej se:
+
+- Kde jsou secrets uložené?
+- Kdo z podpory je může vidět?
+- Existuje audit přístupů?
+- Umí platforma oddělit secrets podle prostředí?
+- Dá se secret otočit bez výpadku?
+- Zůstávají hodnoty v logu nebo build artefaktech?
+
+### FV.8 Šablona: registr secretů pro malý SaaS
+
+```markdown
+## Secret: [název]
+
+### Účel
+- Slouží k:
+- Používá ho služba:
+- Prostředí: local / staging / production
+
+### Uložení
+- Primární úložiště:
+- Záložní postup:
+- Kdo má právo číst:
+- Kdo má právo měnit:
+
+### Riziko
+- Co umožní útočníkovi při úniku:
+- Jaká data nebo akce jsou ohrožené:
+- Nejbližší kontaktní osoba:
+
+### Rotace
+- Standardní interval nebo trigger:
+- Postup krok za krokem:
+- Jak ověřit úspěch:
+- Jak zneplatnit starou hodnotu:
+
+### Incident
+- První krok při podezření na únik:
+- Související systémy:
+- Zákaznická komunikace potřebná: ano / ne / podle dopadu
+```
+
+### FV.9 Checklist: secrets bez budoucího průšvihu
+
+- [ ] Repozitář neobsahuje reálné secrets ani historické `.env` soubory.
+- [ ] Existuje aktuální `.env.example` s bezpečnými placeholdery.
+- [ ] Produkce, staging a local mají oddělené hodnoty.
+- [ ] Každý důležitý secret má vlastníka, účel a rotační postup.
+- [ ] CI/CD secrets nejsou dostupné neověřeným pull requestům.
+- [ ] Logy, error reporting a debug výpisy nemohou vypsat citlivé hodnoty.
+- [ ] Odchod člověka z týmu spouští kontrolu přístupů i rotaci rizikových tokenů.
+- [ ] Existuje postup pro rychlou revokaci při incidentu.
+- [ ] Šifrovací klíče mají zvláštní plán rotace a obnovy.
+- [ ] Nový nástroj se schvaluje i podle toho, jak zachází se secrets.
+
+### FV.10 Codyho komentář
+
+Nejlepší secret je ten, který aplikace vůbec nepotřebuje. Druhý nejlepší je ten, který má krátký život, malé oprávnění a jasného vlastníka. Nejhorší je ten, který se jmenuje `OLD_PROD_TOKEN_DO_NOT_DELETE` a nikdo se ho nedotkl tři roky. To není konfigurace. To je zakletý předmět.
+
+### FV.11 Zdroje ke správě secretů a konfigurace
+
+- OWASP Secrets Management Cheat Sheet — centralizace, lifecycle, rotace, audit a CI/CD secrets: https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html
+- OWASP CI/CD Security Cheat Sheet — bezpečnost pipeline a ochrana citlivých hodnot v automatizaci: https://cheatsheetseries.owasp.org/cheatsheets/CI_CD_Security_Cheat_Sheet.html
+- The Twelve-Factor App: Config — oddělení konfigurace od kódu a práce s proměnnými prostředí: https://www.12factor.net/config
+- NIST SP 800-57 Part 1 Rev. 5 — doporučení pro správu kryptografických klíčů: https://csrc.nist.gov/pubs/sp/800/57/pt1/r5/final
+
+---
+
 ## Pracovní log
+
+- 2026-09-05 05:05 UTC — Doplněna příloha FV o správě secretů a konfigurace: rozlišení konfigurace a secretů, registr hodnot, oddělení prostředí, `.env.example`, CI/CD secrets, rotace, privacy-first otázky a checklist.
 
 - 2026-09-05 05:01 UTC — Doplněn krátký praktický odstavec k testování bezpečnostních hlaviček po přesměrováních, aby kontrola sledovala finální zákaznickou odpověď místo první technické reakce serveru.
 
