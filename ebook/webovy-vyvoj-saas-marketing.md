@@ -30971,7 +30971,177 @@ A hlavně: netrestat tým za to, že logy ukážou problém. Pokud se auditní l
 - [European Commission: Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en) — přehled principů minimalizace dat a omezení uložení.
 - [GDPR na EUR-Lexu, článek 5](https://eur-lex.europa.eu/legal-content/EN/TXT/?toc=OJ%3AL%3A2016%3A119+%3ATOC&uri=uriserv%3AOJ.L_.2016.119.01.0001.01.ENG) — právní text principů zpracování osobních údajů v EU.
 
+## Příloha FX: Interní administrace SaaS bez zadních vrátek do zákaznického světa
+
+Admin rozhraní je zvláštní místo. Zvenku často není vidět, v roadmapě nepůsobí sexy a zákazník za něj přímo neplatí. Přesto přes něj může malý tým udělat největší škodu: změnit cizí plán, smazat data, exportovat osobní údaje, vypnout integraci nebo omylem poslat debug odpověď někomu úplně jinému. Interní administrace proto není „jen pár tlačítek pro support“. Je to privilegovaný produkt uvnitř produktu.
+
+Privacy-first přístup tady znamená jednoduché pravidlo: interní nástroj má pomáhat týmu řešit konkrétní zákaznické situace, ale nesmí z něj dělat pohodlný tunel do všeho. Pohodlí administrace nesmí být silnější než práva zákazníka, důvěrnost dat a schopnost později vysvětlit, kdo co udělal.
+
+### FX.1 Admin není jeden panel, ale sada rizikových akcí
+
+Nezačínej návrhem menu. Začni seznamem akcí, které může někdo uvnitř firmy udělat za zákazníka nebo vůči zákazníkovi.
+
+Typické akce:
+
+- zobrazit detail účtu,
+- změnit tarif nebo fakturační stav,
+- resetovat integraci,
+- přihlásit se do režimu podpory,
+- exportovat zákaznická data,
+- upravit e-mail, roli nebo oprávnění uživatele,
+- spustit ruční synchronizaci,
+- smazat nebo anonymizovat data,
+- označit incident, refundaci nebo výjimku.
+
+Ke každé akci napiš tři věci: kdo ji smí udělat, proč ji smí udělat a jak poznáš, že byla oprávněná. Pokud odpověď zní „kdokoli z týmu, protože někdy potřebujeme pomoct“, právě jsi našel budoucí bezpečnostní průšvih v dětském pyžamu.
+
+### FX.2 Role navrhuj podle práce, ne podle hierarchie
+
+Malý SaaS často sklouzne k modelu: zakladatel má všechno, vývojář má všechno, support má skoro všechno, externista má „dočasně“ všechno a nikdo neví, kdy to skončí. Lepší je rozdělit role podle konkrétních pracovních situací.
+
+Praktické role:
+
+- **Support reader** — vidí stav účtu, technické chyby a historii komunikace, ale nemění obchodní ani bezpečnostní nastavení.
+- **Support operator** — může spustit bezpečné servisní akce, například znovu poslat pozvánku nebo restartovat synchronizaci.
+- **Billing operator** — řeší tarif, fakturaci, trial, refundaci a poznámky k platbě.
+- **Security operator** — spravuje blokace, podezřelé aktivity, reset relací a bezpečnostní incidenty.
+- **Data operator** — řeší exporty, výmazy, anonymizaci a žádosti subjektů údajů.
+- **Admin owner** — spravuje role a výjimky, ale jeho akce jsou nejvíc auditované.
+
+Jedna osoba může mít víc rolí. To je v malém týmu normální. Důležité je, aby role nebyly „všechno nebo nic“ a aby každé rozšíření práv mělo důvod, dobu platnosti a auditní stopu.
+
+### FX.3 Citlivé akce potřebují záměr, ne jen tlačítko
+
+U běžné akce stačí kliknutí. U citlivé akce má systém vyžadovat záměr. Ne proto, aby tým trpěl, ale aby se zastavil automatický autopilot.
+
+Citlivé akce typicky vyžadují:
+
+- povinný důvod zásahu,
+- vazbu na ticket, incident, zákaznickou žádost nebo interní rozhodnutí,
+- potvrzení rozsahu dopadu,
+- opakované ověření identity u vysoce rizikových změn,
+- čtyřočkový princip u destruktivních akcí,
+- automatický auditní záznam.
+
+Příklad: support chce změnit e-mail vlastníka účtu. Admin by se měl zeptat: kdo změnu žádá, jak byla ověřena identita, jaký účet se mění, kdo bude nový vlastník a jestli starý vlastník dostane upozornění. Bez toho je to sociální inženýrství s hezkým UI.
+
+### FX.4 Impersonace je poslední možnost, ne pohodlný režim práce
+
+„Přihlásit se jako zákazník“ je lákavé. Vyřeší to rychle reprodukci chyby, onboarding i podporu. Jenže je to také nejrychlejší cesta, jak rozmazat hranici mezi týmem a zákaznickým účtem.
+
+Bezpečnější pořadí je:
+
+1. Nejdřív použij technické diagnostické údaje bez obsahu zákaznických dat.
+2. Pak nabídni zákazníkovi sdílení obrazovky nebo popis kroků.
+3. Pak použij dočasný support režim s omezeným rozsahem.
+4. Až nakonec impersonaci, pokud jinak nejde problém vyřešit.
+
+Když už impersonaci potřebuješ, nastav pravidla: jen časově omezená relace, jasný důvod, zákaznické upozornění tam, kde to dává smysl, zákaz zápisu bez výslovného potvrzení a auditní log každého kroku. Impersonace bez logu je jako půjčit si cizí klíče a doufat, že si nikdo nevšimne otisků.
+
+### FX.5 Admin data zobrazuj v minimální podobě
+
+Interní tým často nepotřebuje vidět celé údaje. Potřebuje vědět, jestli je účet aktivní, jaký má stav, kde selhala integrace a co je další bezpečný krok.
+
+Minimalizační vzory:
+
+- e-mail zobrazuj celý jen tam, kde je potřeba komunikace nebo ověření,
+- telefon maskuj mimo fakturační nebo bezpečnostní kontext,
+- obsah dokumentů a zpráv nezobrazuj v support panelu defaultně,
+- tokeny, klíče a webhook secrety nikdy nezobrazuj po vytvoření,
+- exporty dat nedělej jedním univerzálním tlačítkem,
+- produkční payloady nahrazuj metadaty, stavem a `request_id`.
+
+Dobrá administrace neukazuje víc dat, aby se lidem lépe přemýšlelo. Ukazuje přesně ta data, která umožní bezpečně rozhodnout.
+
+### FX.6 Výjimky musí expirovat samy
+
+Dočasný přístup je v praxi často trvalý přístup s lepším marketingem. Proto každá výjimka v administraci potřebuje automatický konec.
+
+Příklady výjimek:
+
+- externista dostane přístup jen do konkrétního účtu na 48 hodin,
+- vývojář dostane diagnostický přístup pro jeden incident,
+- support dostane rozšířenou roli během migrace zákazníka,
+- zakladatel schválí ruční opravu dat po chybné synchronizaci.
+
+Každá výjimka má mít vlastníka, důvod, rozsah, expiraci a revizi. Po expiraci se právo odebere automaticky. Pokud ho někdo pořád potřebuje, musí vzniknout nové rozhodnutí, ne tiché prodloužení do věčnosti.
+
+### FX.7 Admin rozhraní testuj jako produkt, ne jako interní zkratku
+
+Interní nástroje často nemají testy, protože „to používáme jen my“. Jenže právě proto v nich vznikají akce bez potvrzení, chybějící autorizace a exporty bez omezení.
+
+Testuj hlavně:
+
+- jestli role nemůže provést akci mimo své oprávnění,
+- jestli citlivá akce nejde spustit bez důvodu,
+- jestli auditní log vznikne i při chybě,
+- jestli export respektuje rozsah zákazníka,
+- jestli maskování dat funguje i ve filtrech, výsledcích hledání a CSV,
+- jestli deaktivovaný interní uživatel okamžitě ztratí relace,
+- jestli administrace není indexovatelná a nemá veřejné debug endpointy.
+
+Admin testy nemusí být krásné. Musí být nemilosrdné. Tlačítko, které umí změnit cizí produkční data, si zaslouží víc respektu než animace na landing page. Ano, bolí to. Ne, zákazník ti nepoděkuje za hezký bounce efekt, když mu někdo omylem přepíše účet.
+
+### FX.8 Šablona: karta interní administrace
+
+```markdown
+## Admin akce: [název]
+
+### Účel
+- Jaký zákaznický nebo provozní problém řeší:
+- Kdy se používá:
+- Kdy se nesmí použít:
+
+### Oprávnění
+- Povolené role:
+- Nutné schválení:
+- Dočasné výjimky:
+
+### Data
+- Zobrazená data:
+- Maskovaná data:
+- Data, která se nikdy nezobrazují:
+
+### Bezpečnost
+- Potřebný důvod / ticket:
+- Potvrzení před akcí:
+- Re-auth / MFA:
+- Auditní událost:
+
+### Dopad
+- Co se změní zákazníkovi:
+- Jak se zákazník dozví o změně:
+- Jak akci vrátit zpět:
+```
+
+### FX.9 Checklist: interní admin bez zadních vrátek
+
+- [ ] Máme seznam interních admin akcí, ne jen seznam obrazovek.
+- [ ] Každá citlivá akce má vlastníka, důvod použití a auditní záznam.
+- [ ] Role jsou navržené podle práce týmu, ne podle titulů v organizační tabulce.
+- [ ] Support nevidí zákaznický obsah, pokud ho nepotřebuje pro konkrétní řešení.
+- [ ] Exporty, změny vlastníka, mazání a impersonace mají vyšší ochranu než běžné akce.
+- [ ] Impersonace je časově omezená, auditovaná a používá se až po bezpečnějších možnostech.
+- [ ] Dočasné výjimky expirují automaticky a nejdou tiše zapomenout.
+- [ ] Deaktivace interního uživatele ruší aktivní relace i přístupy přes integrace.
+- [ ] Admin rozhraní má testy autorizace pro pozitivní i negativní scénáře.
+- [ ] Zákazníkům umíme vysvětlit, kdo z týmu může k jejich datům přistupovat a proč.
+
+### FX.10 Codyho komentář
+
+Interní administrace je test firemní dospělosti. Ne podle toho, jestli má krásný sidebar, ale podle toho, jestli tým dokáže pomoct zákazníkovi bez toho, aby si ze zákaznických dat udělal interní hřiště. Nejlepší admin panel je ten, který dělá správnou věc rychlou, rizikovou věc pomalou a hloupou věc nemožnou.
+
+### FX.11 Zdroje k interní administraci a oprávněním
+
+- [OWASP Authorization Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html) — praktická doporučení k autorizaci, principu nejmenších oprávnění, deny-by-default přístupu a kontrole práv na straně serveru.
+- [OWASP Multifactor Authentication Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Multifactor_Authentication_Cheat_Sheet.html) — vodítko pro MFA, včetně ochrany účtů s vyššími oprávněními a obnovy přístupu.
+- [OWASP Session Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html) — doporučení pro správu relací, cookie atributy, ukončení relace a ochranu proti zneužití session tokenů.
+- [NIST SP 800-63B Digital Identity Guidelines](https://pages.nist.gov/800-63-4/sp800-63b.html) — aktuální vodítka k autentizaci, autentizátorům a správě identity; užitečné při nastavování vyšší ochrany interních účtů.
+- [European Commission: Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en) — principy minimalizace, účelového omezení, integrity, důvěrnosti a odpovědnosti při práci s osobními údaji.
+
 ## Pracovní log
+- 2026-09-05 07:02 UTC — Doplněna příloha FX o interní administraci SaaS: mapa rizikových admin akcí, role podle práce týmu, záměr u citlivých zásahů, pravidla impersonace, minimalizace zobrazených dat, expirace výjimek, testování adminu, šablona karty, checklist a ověřené zdroje OWASP/NIST/GDPR.
+
 - 2026-09-05 06:00 UTC — Doplněna příloha FW o auditních logách bez šmírovacího deníku: rozhodovací otázky, oddělení auditu od debug logů, minimální struktura události, řízený přístup, retence, integrita, šablona, checklist a ověřené zdroje OWASP/NIST/GDPR.
 
 - 2026-09-05 05:05 UTC — Doplněna příloha FV o správě secretů a konfigurace: rozlišení konfigurace a secretů, registr hodnot, oddělení prostředí, `.env.example`, CI/CD secrets, rotace, privacy-first otázky a checklist.
