@@ -34115,7 +34115,184 @@ Import je místo, kde se potkává obchodní nadšení s realitou dat. Obchod ch
 - OWASP CSV Injection — rizika buněk, které tabulkové procesory interpretují jako vzorce, a obrana při práci s CSV: https://owasp.org/www-community/attacks/CSV_Injection
 - NIST SP 800-53 Rev. 5, SI-10 Information Input Validation — kontrola popisující ověřování platnosti vstupních informací před jejich zpracováním: https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final
 
+## Příloha GO: Rate limiting API bez trestání dobrých zákazníků
+
+Rate limiting se často nastavuje až ve chvíli, kdy se něco pokazí: přijdou robotické požadavky, zákazník omylem spustí import desetkrát za sebou, webhook partnera se zacyklí, nebo někdo začne zkoušet přihlašovací formulář jako automat na nekonečné pokusy. Jenže limitování požadavků není jen bezpečnostní brzda. Je to produktové rozhraní, provozní pojistka a férová dohoda se zákazníkem: systém zůstane dostupný, náklady neutečou do vesmíru a poctivý uživatel dostane jasnou informaci, co se děje.
+
+Špatný rate limit říká: „Něco jsi rozbil, tady máš 429 a hádej.“ Dobrý rate limit říká: „Tenhle typ akce má bezpečný rytmus, tady je limit, kdy se obnoví a co můžeš udělat jinak.“ Privacy-first přístup navíc znamená, že kvůli limitům nemusíš budovat detailní behaviorální profil každého člověka. Většinou stačí limitovat podle účtu, tenantu, API klíče, endpointu, operace a krátkodobého technického kontextu.
+
+### GO.1 Neexistuje jeden limit pro celé API
+
+Globální limit typu „100 requestů za minutu“ vypadá jednoduše, ale u SaaS produktu je skoro vždy moc hrubý. Login, export, vyhledávání, nahrání souboru, generování reportu a obyčejné načtení seznamu projektů mají úplně jiný dopad. Jeden limit pro všechno vede ke dvěma špatným výsledkům: buď je tak vysoký, že nechrání drahé operace, nebo tak nízký, že trestá běžnou práci.
+
+Rozděl limity podle vrstvy:
+
+- **Identita** — přihlášení, reset hesla, OTP, magic link a pozvánky do workspace.
+- **Tenant** — celková spotřeba jednoho zákaznického účtu napříč uživateli.
+- **API klíč** — integrace zákazníka, partnera nebo interní automatizace.
+- **Endpoint** — konkrétní URL nebo GraphQL operace s vlastním nákladovým profilem.
+- **Drahá akce** — export, import, AI zpracování, generování PDF, odesílání e-mailů nebo volání placené integrace.
+- **Infrastrukturní zdroj** — velikost payloadu, počet položek v dávce, délka dotazu, čas běhu a paralelní joby.
+
+Příklad: endpoint `GET /projects` může mít vyšší limit, protože je cachovatelný a levný. `POST /exports` musí mít nízký limit, protože spouští asynchronní job, čte hodně dat a vytváří dočasný soubor. `POST /password-reset` potřebuje ještě jiný limit: chrání účet, doručovací náklady i uživatele před spamem.
+
+### GO.2 Limituj spotřebu, ne jen počet requestů
+
+Útok nebo chyba nemusí vypadat jako mnoho requestů. Jeden request může požádat o 100 000 záznamů, spustit složitý filtr, poslat obří payload nebo vytvořit dávku 500 operací. OWASP u API rizika „Unrestricted Resource Consumption“ výslovně připomíná limity na velikost payloadů, počet prvků, stránkování, čas běhu, uploady, dávkové operace i náklady externích služeb.
+
+Praktické metriky pro limitování:
+
+- **Počet požadavků** — základní ochrana proti opakování jednoduchých requestů.
+- **Počet operací v requestu** — batch endpoint nebo GraphQL mutation může uvnitř schovat stovky akcí.
+- **Počet vrácených záznamů** — stránkování musí mít maximální `limit`, ne jen výchozí hodnotu.
+- **Velikost vstupu** — JSON, CSV, obrázek, příloha i text pro AI zpracování potřebují strop.
+- **Délka běhu** — request nebo job má timeout, jinak jeden zákazník podrží pracovníky pro všechny.
+- **Paralelní práce** — zákazník může mít třeba nejvýš dva současné exporty a jeden import.
+- **Finanční dopad** — SMS, e-mail, AI inference, OCR nebo placené API volání musí mít rozpočet a alert.
+
+Tady se často láme rozdíl mezi „API funguje“ a „API se dá provozovat“. Počet requestů je jen povrch. Skutečný problém je spotřeba CPU, paměti, databáze, fronty, úložiště, doručovacích služeb a lidské podpory.
+
+### GO.3 Uživatel musí vědět, co se stalo
+
+Když klient narazí na limit, odpověď nemá být záhada. Použij HTTP status `429 Too Many Requests`, ale přidej čitelné tělo odpovědi a hlavičky, které vývojář i aplikace dokážou použít.
+
+Minimální odpověď:
+
+```json
+{
+  "error": "rate_limit_exceeded",
+  "message": "Limit pro export dat byl dočasně vyčerpán.",
+  "limit": 3,
+  "window": "1h",
+  "retry_after_seconds": 1240,
+  "scope": "workspace"
+}
+```
+
+Dobré UX pro limit obsahuje:
+
+- **Jasný důvod** — „příliš mnoho exportů“ je lepší než „chyba serveru“.
+- **Čas obnovy** — klient ví, kdy to může zkusit znovu.
+- **Rozsah limitu** — uživatel, workspace, API klíč, endpoint nebo job.
+- **Bezpečnou alternativu** — použít menší časový rozsah, stránkování, webhook, dávku nebo plánované okno.
+- **Kontakt jen tam, kde dává smysl** — u běžného limitu není potřeba psát supportu; u business limitu možná ano.
+
+U veřejného API přidej dokumentaci limitů do developer docs. U interní administrace přidej limit do produktového textu tam, kde zákazník akci spouští. Když uživatel kliká na „exportovat vše“, má vědět, že další export bude dostupný třeba za hodinu. Překvapení patří do narozeninového dortu, ne do provozu SaaS.
+
+### GO.4 Přihlašování limituj opatrně
+
+Login a ověřovací kódy jsou zvláštní kategorie. Tady nechceš jen chránit server; chceš chránit účet, zabránit hádání hesel a zároveň neumožnit útočníkovi jednoduše zamknout legitimního uživatele. NIST SP 800-63B uvádí rate limiting jako ochranu proti online guessing útokům a řeší i postupné čekání po selhání nebo informování uživatele, kdy může pokus opakovat.
+
+Praktické zásady:
+
+- **Počítej selhání na účtu i na autentizátoru** — nejen na IP adrese, protože IP adresa může být sdílená nebo snadno měněná.
+- **Používej postupné zpoždění** — po několika selháních krátká pauza, pak delší čekání.
+- **Neprozrazuj existenci účtu** — reset hesla odpoví neutrálně, i když e-mail v systému není.
+- **Reset kódu neresetuje pokusy** — jinak si útočník jen generuje nová kola hádání.
+- **Push a e-mail ověření mají vlastní limity** — aby se z bezpečnostní funkce nestal spamovací nástroj.
+- **Support výjimky audituj** — ruční odemčení nebo reset limitu je citlivá akce.
+
+Privacy-first poznámka: adaptivní ochrana může používat technické signály, ale nedělej z toho marketingový profil. Pro login stačí krátkodobé bezpečnostní metadata s jasnou retencí, ne věčný deník toho, odkud se člověk přihlašoval posledních pět let.
+
+### GO.5 Rate limit je součást pricingu i férovosti
+
+U B2B SaaS je spotřeba často obchodní téma. Tarif pro malý tým nemusí mít stejné API limity jako enterprise zákazník s integrací do interního ERP. To je v pořádku, pokud je to transparentní a technicky vynutitelné.
+
+Rozlišuj:
+
+- **Bezpečnostní limit** — chrání systém a nejde ho koupit pryč bez kompenzační kontroly.
+- **Provozní limit** — chrání kapacitu a může se upravit podle tarifu nebo domluveného SLA.
+- **Produktový limit** — říká, kolik exportů, importů, webhooků nebo API volání je součástí balíčku.
+- **Dočasná výjimka** — migrace, audit nebo jednorázový projekt má časově omezené navýšení.
+
+Nejhorší varianta je limit, který existuje jen v kódu a obchod o něm neví. Pak zákazník koupí „neomezené API“, vývoj nasadí ochranu proti nákladům a support vysvětluje, že „neomezené“ znamená „dokud to nezačne bolet“. To není pricing. To je slovní akrobacie.
+
+### GO.6 Technická implementace: token bucket, fronty a idempotence
+
+Pro jednoduché requesty často stačí token bucket nebo sliding window nad klíčem typu `tenant_id:endpoint`. Pro drahé akce je lepší kombinovat rate limit s frontou a stavovým modelem jobu.
+
+Příklad pro export:
+
+1. Uživatel požádá o export.
+2. API ověří oprávnění, limit workspace a počet aktivních exportů.
+3. Pokud limit dovolí, vytvoří `export_job` se stavem `queued`.
+4. Worker zpracuje export asynchronně, s timeoutem a velikostním limitem.
+5. Výsledek je dostupný přes dočasný odkaz s expirací.
+6. Další totožná žádost v krátkém okně vrátí existující job místo nového chaosu.
+
+U webhooků používej idempotency key a limity na doručovací pokusy. U importů omez souběh a velikost dávky. U vyhledávání omez délku dotazu, hloubku filtrů a maximální stránku. U GraphQL nepočítej jen requesty; počítej složitost dotazu, hloubku a počet operací v dávce.
+
+### GO.7 Monitoring limitů bez sledovacího cirkusu
+
+Rate limit, o kterém nikdo neví, je jen překážka v provozu. Potřebuješ vidět, kde limity pomáhají, kde škodí a kde zakrývají větší problém.
+
+Sleduj agregovaně:
+
+- počet `429` podle endpointu a tenantu,
+- top limity podle četnosti zásahů,
+- počet odmítnutých drahých jobů,
+- průměrnou čekací dobu do obnovy,
+- opakované zásahy u jednoho API klíče,
+- nárůst chyb po deployi nebo změně integrace.
+
+Nesbírej celé payloady jen proto, že se hodí „pro debug“. V logu obvykle stačí `tenant_id`, `api_key_id`, `endpoint`, `limit_name`, `window`, `remaining`, `retry_after`, `request_id` a čas. Pokud potřebuješ detail, zapni krátkodobé rozšířené logování pro konkrétní incident a po vyřešení ho vypni.
+
+### GO.8 Šablona: karta rate limitu
+
+## Rate limit: [název]
+
+### Účel
+- Jaké riziko limit řeší:
+- Koho chrání:
+- Co se stane bez limitu:
+
+### Rozsah
+- Endpoint / operace:
+- Klíč limitu: uživatel / tenant / API klíč / IP / kombinace:
+- Časové okno:
+- Povolená hodnota:
+- Burst kapacita:
+
+### Dopad na zákazníka
+- Text chybové zprávy:
+- `Retry-After` nebo čas obnovy:
+- Doporučený další krok:
+- Kde je limit dokumentovaný:
+
+### Provoz
+- Metriky:
+- Alert:
+- Kdo smí udělit výjimku:
+- Retence logů:
+- Datum posledního review:
+
+### GO.9 Checklist: rate limiting bez naštvaných zákazníků
+
+- [ ] Každý drahý endpoint má vlastní limit podle skutečné spotřeby, ne jen globální limit API.
+- [ ] Limity řeší počet requestů, velikost payloadu, počet operací, stránkování, timeouty a souběh jobů.
+- [ ] Login, OTP, reset hesla a pozvánky mají samostatná pravidla proti hádání i spamování.
+- [ ] Odpověď `429` obsahuje srozumitelný důvod, rozsah limitu a čas obnovy.
+- [ ] Veřejné API má limity popsané v dokumentaci a ideálně i v hlavičkách odpovědi.
+- [ ] Drahé akce běží přes frontu, mají idempotenci a neblokují běžné používání produktu.
+- [ ] Business limity jsou sladěné s pricingem, podporou a obchodními sliby.
+- [ ] Výjimky jsou časově omezené, auditované a mají vlastníka.
+- [ ] Monitoring ukazuje agregované zásahy limitů bez ukládání citlivých payloadů.
+- [ ] Limity se pravidelně revidují podle provozu, incidentů a změn produktu.
+
+### GO.10 Codyho komentář
+
+Rate limit není cedule „zákaz vstupu“. Je to semafor. Když je nastavený dobře, provoz teče, drahé operace se nehromadí a zákazník chápe, proč musí chvíli počkat. Když je nastavený špatně, působí jako náhodný policajt v kódu: někdy pustí všechno, někdy zastaví demo před investorem a tváří se, že je to bezpečnost. Nejlepší limit je ten, který chrání systém, respektuje férové zákazníky a nenechá data ani náklady utéct jen proto, že někdo umí napsat `while true`.
+
+### GO.11 Zdroje k rate limitingu a ochraně API
+
+- OWASP API Security Top 10 2023, API4: Unrestricted Resource Consumption — doporučuje limity na interakce klientů, payloady, stránkování, dávkové operace, timeouty a rozpočty externích služeb: https://owasp.org/API-Security/editions/2023/en/0xa4-unrestricted-resource-consumption/
+- OWASP Denial of Service Cheat Sheet — shrnuje, že DoS obrana vyžaduje analýzu komponent, úzkých míst, architektury a nákladů, ne jedno univerzální opatření: https://cheatsheetseries.owasp.org/cheatsheets/Denial_of_Service_Cheat_Sheet.html
+- NIST SP 800-63B, Rate Limiting (Throttling) — požadavky a doporučení pro omezování neúspěšných autentizačních pokusů a srozumitelnou zpětnou vazbu uživateli: https://pages.nist.gov/800-63-4/sp800-63b.html#rate-limiting-throttling
+- RFC 6585, HTTP status 429 Too Many Requests — standardizuje stavový kód pro případy, kdy uživatel poslal příliš mnoho požadavků v daném čase: https://www.rfc-editor.org/rfc/rfc6585#section-4
+
 ## Pracovní log
+- 2026-09-06 00:00 UTC — Doplněna příloha GO o rate limitingu API: rozdělení limitů podle identity/tenantu/API klíče/endpointu, spotřební limity, srozumitelné odpovědi 429, autentizační throttling, pricingové dopady, fronty, idempotence, monitoring bez citlivých payloadů, šablona, checklist a ověřené zdroje OWASP/NIST/RFC.
+
 - 2026-09-05 23:01 UTC — Doplněna příloha GN o importu zákaznických dat: migrační scénáře, mapování polí, dry run validace, idempotence, staging zóna, bezpečný upload, retence souborů, report po dokončení, šablona, checklist a ověřené zdroje OWASP/NIST.
 
 - 2026-09-05 22:00 UTC — Doplněna příloha GM o exportu zákaznických dat: typy exportů, rozsah bez databázového dumpu, otevřené formáty, GDPR přenositelnost, autorizace, audit, asynchronní generování, manifest, dokumentace, šablona, checklist a ověřené zdroje EU/EDPB/OWASP.
