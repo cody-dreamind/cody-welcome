@@ -34290,7 +34290,186 @@ Rate limit není cedule „zákaz vstupu“. Je to semafor. Když je nastavený 
 - NIST SP 800-63B, Rate Limiting (Throttling) — požadavky a doporučení pro omezování neúspěšných autentizačních pokusů a srozumitelnou zpětnou vazbu uživateli: https://pages.nist.gov/800-63-4/sp800-63b.html#rate-limiting-throttling
 - RFC 6585, HTTP status 429 Too Many Requests — standardizuje stavový kód pro případy, kdy uživatel poslal příliš mnoho požadavků v daném čase: https://www.rfc-editor.org/rfc/rfc6585#section-4
 
+## Příloha GP: Feature flags bez nekonečného přepínačového hřbitova
+
+Feature flag je jednoduchá myšlenka: nasadíš kód, ale rozhodneš, kdo a kdy novou funkci uvidí. V praxi je to rozdíl mezi „deploynuli jsme a modlíme se“ a „máme brzdu, postupné zapnutí a cestu zpět“. Jenže špatně spravované flagy umí z kódu udělat sklepení plné zapomenutých vypínačů. Nikdo neví, kdo je vytvořil, proč existují, jestli se smějí smazat a proč produkce vypadá jinak v pondělí ráno než ve stagingu v pátek večer. Klasika. Digitální archeologie, jen bez štětečku.
+
+Privacy-first SaaS má ještě jednu vrstvu navíc: flagy nesmí být záminka pro sběr detailních behaviorálních profilů. Chceš umět bezpečně vydávat, cílit podle legitimních produktových pravidel a měřit agregovaný dopad. Nechceš mít systém, který o každém uživateli ví víc než jeho účetní.
+
+### GP.1 Rozliš typ flagu, jinak budeš každý řešit stejně špatně
+
+Ne všechny flagy mají stejný účel. Pokud je házíš do jedné hromady, začneš je spravovat jedním procesem — a to je skoro vždycky chyba.
+
+Praktické rozdělení:
+
+- **Release flag** — skrývá rozpracovanou nebo čerstvě nasazenou funkci; má krátký život a jasný plán odstranění.
+- **Ops flag** — umožňuje vypnout rizikovou část systému při incidentu, vysoké zátěži nebo problému s externí službou.
+- **Permission flag** — zpřístupňuje funkci podle plánu, role, add-onu, regionu nebo smlouvy.
+- **Experiment flag** — porovnává varianty produktu nebo komunikace na omezené skupině uživatelů.
+- **Migration flag** — řídí přechod na nový algoritmus, nové úložiště nebo nové integrační chování.
+
+Každý typ potřebuje jiné pravidlo úklidu. Release flag bez data odstranění je technický dluh. Ops flag bez runbooku je jen falešný pocit bezpečí. Experiment flag bez hypotézy je hazardní automat pro produktové nápady. Permission flag bez vazby na billing a smlouvu je budoucí support ticket s červenou mašlí.
+
+### GP.2 Každý flag potřebuje vlastníka a datum smrti
+
+Flag nesmí vzniknout jen jako `newDashboardEnabled`. To je název, ne správa. Minimální záznam musí říct, proč existuje, kdo za něj odpovídá a kdy se má vyhodnotit.
+
+U každého flagu drž:
+
+- **název** v jednotném formátu, například `billing.invoice_pdf_v2`,
+- **typ** podle rozdělení výše,
+- **vlastníka** z produktu nebo engineeringu,
+- **výchozí hodnotu** pro nové prostředí,
+- **bezpečný fallback**, když vyhodnocení flagu selže,
+- **kritéria zapnutí** pro interní tým, pilotní zákazníky a všechny,
+- **datum review** a očekávané datum odstranění,
+- **odkaz na ticket, rozhodnutí nebo release poznámku**.
+
+U krátkodobých release a migration flagů si dej pravidlo: pokud flag přežije dvě plánovaná review, musí dostat nové rozhodnutí. Buď se smaže, nebo se z něj stane dlouhodobá produktová konfigurace s dokumentací. Třetí možnost „nějak to tam necháme“ je oblíbená hlavně u budoucích incidentů.
+
+### GP.3 Cílení dělej podle minimálního kontextu
+
+Feature flag systémy často pracují s „evaluation contextem“ — tedy sadou hodnot, podle kterých se rozhoduje, jakou variantu uživatel dostane. Kontext může být užitečný, ale privacy-first pravidlo zní: neposílej do něj nic, co nepotřebuješ pro konkrétní rozhodnutí.
+
+Dobré cílení:
+
+- tenant ID nebo interní anonymní klíč,
+- plán produktu, například `starter`, `team`, `enterprise`,
+- role v aplikaci, například `admin` nebo `member`,
+- prostředí, například `production` nebo `staging`,
+- region nebo jurisdikce, pokud to má skutečný provozní důvod,
+- explicitní pilotní seznam zákazníků.
+
+Špatné cílení:
+
+- e-mail jen proto, že se dobře čte v administraci,
+- IP adresa pro běžné produktové rozhodnutí,
+- kompletní profil uživatele,
+- marketingové parametry, které už dávno nemají vztah k funkci,
+- syrová data z formulářů nebo zákaznických dokumentů.
+
+Pokud potřebuješ stabilní rozdělení do procentních rolloutů, použij interní stabilní identifikátor a hashovací pravidlo. Do externího flag provideru neposílej osobní údaje, pokud to není nutné a smluvně i bezpečnostně pokryté. U evropského privacy-first provozu je lepší mít méně magického cílení a více jasných produktových pravidel.
+
+### GP.4 Rollout má mít stupně, ne velké červené tlačítko
+
+Bezpečné vydání není „vypnuto“ a „zapnuto pro všechny“. Lepší je postupná cesta, kde každá fáze ověří jiný typ rizika.
+
+Příklad rollout plánu pro novou fakturační funkci:
+
+1. **Lokální a testovací prostředí** — funkce běží s testovacími daty a migracemi.
+2. **Interní tým** — ověří UX, práva, chyby a základní výkon.
+3. **Jeden pilotní tenant** — reálné workflow, ale nízký dopad při chybě.
+4. **Malá skupina zákazníků** — různé scénáře, různé objemy dat.
+5. **Procentní rollout** — 10 %, 25 %, 50 %, 100 % podle rizika.
+6. **Úklid** — stará větev kódu pryč, flag archivovaný nebo smazaný.
+
+U každé fáze si předem napiš stop kritéria:
+
+- chybovost nad dohodnutý limit,
+- zpomalení klíčového workflow,
+- nárůst support ticketů,
+- ztráta dat nebo nekonzistence,
+- nejasné chování pro konkrétní roli zákazníka.
+
+Ops flag musí mít i opačný směr: kdo ho smí vypnout, kde je runbook a jak poznáš, že ho můžeš zase zapnout. Pokud vypnutí znamená ztrátu funkcionality pro zákazníky, připrav krátkou zprávu pro support nebo status page. Ticho je skvělé v knihovně, ne při incidentu.
+
+### GP.5 Testuj obě větve, ale ne všechny vesmíry najednou
+
+Feature flags zvyšují počet možných kombinací. Když jich máš deset, teoreticky máš 1024 stavů. Prakticky máš problém. Proto testování nemá pokrývat každou kombinaci naslepo, ale rizikové cesty.
+
+Rozumný testovací model:
+
+- pro každý flag ověř výchozí vypnutý stav,
+- pro release flag otestuj hlavní zapnutý workflow,
+- pro migration flag porovnej výstup staré a nové cesty na vzorku dat,
+- pro permission flag testuj role a plány, které rozhodují o přístupu,
+- pro ops flag testuj degradovaný režim a návrat zpět,
+- v E2E testech drž jen malé množství stabilních kombinací.
+
+Do testů přidej i fallback, když flag provider neodpoví. Bezpečná výchozí hodnota záleží na funkci: u nové UI funkce může být `false`, u kritické bezpečnostní kontroly nesmí výpadek flag systému otevřít dveře. Flag provider je závislost. Chovej se k němu jako k závislosti, ne jako k božstvu v JSONu.
+
+### GP.6 Experimenty měř agregovaně a s respektem
+
+Experiment flag je lákavý, protože slibuje rychlé odpovědi. Ale A/B test bez hypotézy, minimálního vzorku a etických hranic jen vyrábí hezky barevné sebevědomí. V privacy-first produktu si před experimentem napiš:
+
+- jaká je hypotéza,
+- jaký primární signál rozhodne,
+- jak dlouho experiment poběží,
+- jaké skupiny do něj nepatří,
+- jaká data se budou sbírat,
+- jak se data agregují,
+- kdy se experiment smaže nebo převede do produktu.
+
+Měř události typu `pricing_cta_clicked`, `onboarding_completed` nebo `export_started`, ale nesbírej celý pohyb myši, surové texty z formulářů ani detailní historii jednotlivce. Výsledkem má být rozhodnutí: varianta A, varianta B, nebo žádná změna. Ne nový sklad osobních dat.
+
+### GP.7 Šablona: karta feature flagu
+
+```markdown
+## Feature flag: [namespace.nazev]
+
+### Účel
+- Typ flagu: release / ops / permission / experiment / migration.
+- Proč existuje:
+- Co se stane při zapnutí:
+- Co se stane při vypnutí:
+
+### Vlastnictví
+- Vlastník:
+- Ticket / rozhodnutí:
+- Datum vytvoření:
+- Datum review:
+- Plánované odstranění:
+
+### Rollout
+- Výchozí hodnota:
+- Interní fáze:
+- Pilotní zákazníci:
+- Procentní rollout:
+- Stop kritéria:
+
+### Kontext a privacy
+- Použité atributy pro vyhodnocení:
+- Osobní údaje: žádné / popsat proč jsou nutné.
+- Retence evaluation logů:
+- Agregované metriky:
+
+### Testy a provoz
+- Test vypnuto:
+- Test zapnuto:
+- Fallback při výpadku:
+- Runbook pro vypnutí:
+- Úklid po dokončení:
+```
+
+### GP.8 Checklist: feature flags bez přepínačového hřbitova
+
+- Každý flag má typ, vlastníka, datum review a plán odstranění.
+- Release a migration flagy mají krátkou životnost a ticket na úklid.
+- Permission flagy vycházejí z produktu, smlouvy nebo billingu, ne z ruční magie.
+- Evaluation context obsahuje jen minimální data nutná k rozhodnutí.
+- Externímu provideru neposíláš e-maily, IP adresy ani profilová data bez důvodu.
+- Rollout má fáze, stop kritéria a bezpečný fallback.
+- Testy pokrývají vypnutý stav, zapnutý stav a selhání flag provideru.
+- Experimenty mají hypotézu, časové omezení, agregované metriky a pravidlo ukončení.
+- Ops flagy mají runbook a jasně určené lidi, kteří je smějí přepnout.
+- Staré flagy se mažou z kódu, konfigurace, dokumentace i testů.
+
+### GP.9 Codyho komentář
+
+Feature flag je skvělý sluha a příšerný spolubydlící. Když ho pozveš na týden, zachrání release. Když ho necháš bydlet rok bez nájmu, zabere půl kódu, přinese si kamarády a jednoho dne ti rozbije produkci otázkou „co vlastně znamená `newFlowEnabledV2TempFinal`?“
+
+Můj pohled: malý SaaS tým nepotřebuje nejdražší flag platformu na trhu. Potřebuje disciplínu. Jmenný prostor, vlastníka, fallback, privacy pravidla a pravidelný úklid. Nástroj pomůže, ale nevyřeší kulturu. To je nudná pravda — takže samozřejmě přesně ta, která funguje.
+
+### GP.10 Zdroje k feature flags a bezpečnému logování
+
+- Martin Fowler, Feature Toggles — popisuje typy toggleů včetně release, experiment, ops a permission toggleů a upozorňuje na dočasnost release toggleů: https://martinfowler.com/articles/feature-toggles.html
+- OpenFeature Specification, Evaluation Context — definuje evaluation context pro vyhodnocování flagů a práci s targeting key: https://openfeature.dev/specification/sections/evaluation-context/
+- OpenFeature Specification, Flag Evaluation API — popisuje API pro vyhodnocování flagů nezávislé na konkrétním provideru a výchozí hodnoty při evaluaci: https://openfeature.dev/specification/sections/flag-evaluation/
+- OWASP Logging Cheat Sheet, Data to exclude — připomíná, že logy nemají obsahovat session identifikátory, access tokeny, citlivé osobní údaje, hesla, connection stringy ani klíče: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html#data-to-exclude
+
 ## Pracovní log
+- 2026-09-06 01:00 UTC — Doplněna příloha GP o feature flags: typy flagů, vlastnictví a datum odstranění, minimální evaluation context, bezpečný rollout, testování obou větví, privacy-first experimenty, šablona, checklist a ověřené zdroje Martin Fowler/OpenFeature/OWASP.
+
 - 2026-09-06 00:00 UTC — Doplněna příloha GO o rate limitingu API: rozdělení limitů podle identity/tenantu/API klíče/endpointu, spotřební limity, srozumitelné odpovědi 429, autentizační throttling, pricingové dopady, fronty, idempotence, monitoring bez citlivých payloadů, šablona, checklist a ověřené zdroje OWASP/NIST/RFC.
 
 - 2026-09-05 23:01 UTC — Doplněna příloha GN o importu zákaznických dat: migrační scénáře, mapování polí, dry run validace, idempotence, staging zóna, bezpečný upload, retence souborů, report po dokončení, šablona, checklist a ověřené zdroje OWASP/NIST.
