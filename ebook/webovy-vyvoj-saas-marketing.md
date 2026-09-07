@@ -742,6 +742,150 @@ Tenhle stack není sexy na konferenční slide. Ale dá se provozovat, vysvětli
 Vezmi svůj aktuální produkt a napiš jednu stránku `PROVOZ.md`. Rozděl ji na čtyři části: kde běží aplikace, kde jsou data, jak se nasazuje a jak se obnovuje po chybě. U každé části přidej jeden největší risk a jednu konkrétní akci na tento týden. Pokud dokument nedokážeš napsat bez hledání hesel ve Slacku, právě jsi našel první provozní dluh.
 
 
+## Kapitola 7: Měření, které pomáhá produktu, ne stalkingu
+
+Měření v SaaS má být kompas, ne reality show. Cílem není vědět o návštěvníkovi všechno. Cílem je dělat lepší rozhodnutí: co zlepšit na webu, kde se lidé ztrácejí v produktu, zda zákazníci dostávají slíbenou hodnotu a jestli tým nepálí energii na funkce, které nikdo nepoužije.
+
+Privacy-first měření stojí na třech pravidlech:
+
+1. Měř jen otázky, na které umíš udělat rozhodnutí.
+2. Začni agregovaně a anonymně, identifikaci přidej jen tam, kde je nutná pro službu nebo podporu.
+3. Každá metrika musí mít vlastníka, rytmus kontroly a hranici, kdy se něco mění.
+
+Jinak z analytiky vznikne skládka grafů. A skládka grafů je pořád skládka, jen má hezčí barvičky.
+
+### 7.1 Nejdřív otázky, potom eventy
+
+Nezačínej tím, že do aplikace nasypeš dvacet událostí typu `button_clicked`. Začni otázkami:
+
+- Přicházejí na web správní lidé?
+- Chápe návštěvník do 10 sekund, co nabízíme?
+- Dokáže nový uživatel dokončit první hodnotnou akci?
+- Vrací se zákazník proto, že produkt pomáhá, nebo jen proto, že mu chodí připomínky?
+- Kolik podpory vzniká kvůli nejasnému UX?
+- Které části produktu mají přímou vazbu na platbu, retenci nebo úsporu práce?
+
+Teprve potom napiš minimální měřicí plán. U každé otázky si poznamenej signál, zdroj dat, frekvenci kontroly a rozhodnutí.
+
+| Otázka | Signál | Zdroj | Rytmus | Rozhodnutí |
+| --- | --- | --- | --- | --- |
+| Funguje landing page? | Klik na demo, odeslání formuláře | Agregovaná webová analytika | Týdně | Přepsat hero, CTA nebo důkaz důvěry |
+| Zvládají lidé onboarding? | Dokončení první hodnotné akce | Produktová událost | Týdně | Zjednodušit krok, přidat šablonu, upravit copy |
+| Používá se klíčová funkce? | Aktivní účty s akcí za 30 dní | Interní agregace | Měsíčně | Vylepšit funkci, schovat ji, nebo ji přestat tlačit |
+| Bolí zákazníky provoz? | Počet ticketů k jedné oblasti | Helpdesk štítky | Měsíčně | Upravit UX, dokumentaci nebo automatizaci |
+
+### 7.2 Metriky pro web: méně dashboardu, víc rozhodnutí
+
+Pro marketingový web malého SaaS většinou stačí pár ukazatelů:
+
+- návštěvy klíčových stránek,
+- zdroje návštěvnosti,
+- kliky na hlavní CTA,
+- odeslání formuláře,
+- nejčtenější obsah,
+- technický stav webu: rychlost, dostupnost a chybové stránky.
+
+Google Search Central připomíná, že obsah má být užitečný a psaný pro lidi, ne jen pro vyhledávače. Pro měření to znamená jednoduchou věc: nesleduj jen návštěvnost článku, sleduj i to, jestli článek pomáhá správnému dalšímu kroku. Zdroj: https://developers.google.com/search/docs/fundamentals/creating-helpful-content
+
+Příklad: článek „Jak vybrat SaaS pro účetní kancelář“ nemusí mít nejvyšší návštěvnost na webu. Pokud ale přivádí kvalifikované poptávky, je hodnotnější než virální text, po kterém se nikdo nevrátí. Marketing není soutěž v počtu otevřených tabů.
+
+Privacy-first nastavení webové analytiky:
+
+- měř agregovaně,
+- nepoužívej cross-site reklamní profily,
+- zkrať retenci detailních dat,
+- měř vlastní události jen pro důležité akce,
+- do URL neposílej e-maily, jména ani interní identifikátory,
+- pro sdílení používej normální odkazy a RSS místo social skriptů.
+
+### 7.3 Metriky pro produkt: aktivace, hodnota, retence
+
+SaaS se nemá měřit jen registrací. Registrace je slib. Aktivace je první důkaz, že člověk pochopil hodnotu. Retence ukazuje, jestli se hodnota opakuje.
+
+Praktická sada pro první fázi:
+
+- **Aktivace:** procento nových účtů, které dokončí první hodnotnou akci.
+- **Time to value:** čas od registrace k prvnímu užitečnému výsledku.
+- **Retence:** kolik účtů se vrací po 7, 30 a 90 dnech podle povahy produktu.
+- **Použití klíčové funkce:** podíl aktivních účtů, které používají funkci spojenou s hlavním příslibem.
+- **Kvalita:** chyby, pomalé odpovědi a opakované dotazy na podporu.
+- **Obchodní zdraví:** nové platby, rozšíření tarifu, churn a důvody odchodu.
+
+Google výzkum HEART popisuje rámec pro uživatelsky orientované metriky: happiness, engagement, adoption, retention a task success. Užitečný není tím, že ho slepě zkopíruješ, ale tím, že nutí propojit cíle produktu s konkrétními signály. Zdroj: https://research.google/pubs/measuring-the-user-experience-on-a-large-scale-user-centered-metrics-for-web-applications/
+
+Pro malý B2B SaaS bych HEART zjednodušil takhle:
+
+| Oblast | Praktická otázka | Příklad měření |
+| --- | --- | --- |
+| Spokojenost | Pomohl produkt bez frustrace? | Krátká dobrovolná zpětná vazba po dokončení úkolu |
+| Zapojení | Používá se hlavní pracovní tok? | Počet účtů s klíčovou akcí za týden |
+| Adopce | Začali lidé používat novou funkci? | Podíl aktivních účtů, které ji vyzkoušely |
+| Retence | Vrací se zákazníci přirozeně? | Návrat aktivních účtů po období odpovídajícím práci zákazníka |
+| Úspěch úkolu | Dokončí člověk práci bez podpory? | Dokončené úkoly, čas, chybové stavy, dotazy na podporu |
+
+### 7.4 Technické metriky: rychlost doručování i stabilita
+
+Produktové měření bez technického kontextu klame. Když klesne aktivace, nemusí být problém v copywritingu. Možná onboarding padá na mobilu, e-mail nepřijde, nebo nová verze rozbila import CSV.
+
+DORA metriky rozlišují rychlost a stabilitu vývoje: frekvenci nasazení, lead time změn, change failure rate a čas obnovy služby. Novější materiály k DORA pracují také s reliabilitou jako širší oblastí provozní kvality. Zdroje: https://cloud.google.com/blog/products/devops-sre/using-the-four-keys-to-measure-your-devops-performance a https://cloud.google.com/blog/products/devops-sre/supercharge-your-devops-practice-with-sre-principles
+
+Pro malý tým z toho vyplývá jednoduchý dashboard:
+
+- Jak často nasazujeme bezpečně?
+- Jak dlouho trvá cesta od změny v kódu do produkce?
+- Kolik nasazení vyvolalo incident, rollback nebo urgentní opravu?
+- Jak rychle obnovíme službu po chybě?
+- Které zákaznické scénáře jsou pomalé nebo nespolehlivé?
+
+Tohle není korporátní gymnastika. Je to způsob, jak poznat, jestli tým opravdu zrychluje, nebo jen častěji vyrábí malé požáry.
+
+### 7.5 Kdy identifikovat uživatele a kdy ne
+
+Identifikace uživatele dává smysl tam, kde pomáhá dodat službu: účet, fakturace, oprávnění, auditní log, podpora nebo bezpečnost. Nedává smysl jako výchozí nastavení pro každý pohyb po webu.
+
+Rozumný kompromis:
+
+- Veřejný web měř agregovaně.
+- Produktové eventy spojuj s účtem jen pro klíčové akce a interní zlepšování služby.
+- Pro marketingové kampaně ukládej jen parametry, které opravdu vyhodnocuješ.
+- Do logů neposílej obsah formulářů, tokeny, hesla ani osobní poznámky zákazníků.
+- U citlivých rolí a administrace loguj bezpečnostní události, ale drž retenci a přístupy přísně.
+
+GDPR princip minimalizace a odpovědnosti není nepřítel analytiky. Je to užitečný filtr proti sbírání dat „kdyby někdy“. A „kdyby někdy“ je nejdražší produktový backlog na světě, protože ho nikdo nikdy nedokončí.
+
+### 7.6 Konkrétní příklad: dashboard pro první rok SaaS
+
+Představ si SaaS pro správu zakázek malé servisní firmy. Jeden měsíční dashboard může mít jen osm dlaždic:
+
+1. Návštěvy landing page a kliky na demo.
+2. Počet nových demo poptávek a jejich zdroj.
+3. Počet nových účtů.
+4. Aktivace: první vytvořená zakázka do 48 hodin.
+5. Použití: aktivní účty s alespoň pěti zakázkami za měsíc.
+6. Retence: účty aktivní ve druhém a třetím měsíci.
+7. Kvalita: chyby v importu, pomalé odpovědi a top tři dotazy na podporu.
+8. Peníze: nové platby, rozšíření tarifu, churn a hlavní důvod zrušení.
+
+Každá dlaždice má poznámku „co uděláme, když se to zhorší“. Bez té poznámky je metrika jen tapeta.
+
+### 7.7 Checklist měření
+
+- [ ] Máme měřicí plán napsaný jako otázky, ne jako seznam náhodných eventů.
+- [ ] U každé metriky víme, jaké rozhodnutí podle ní uděláme.
+- [ ] Veřejný web měříme agregovaně a bez reklamních profilů.
+- [ ] Produktové eventy neobsahují zbytečné osobní údaje.
+- [ ] URL, logy a analytické payloady neobsahují e-maily, tokeny ani interní identifikátory.
+- [ ] Retence dat odpovídá účelu a není nastavena na nekonečno ze zvyku.
+- [ ] Dashboard kombinuje marketing, produkt, kvalitu a obchodní dopad.
+- [ ] Tým pravidelně maže metriky, které nikdo nepoužívá pro rozhodování.
+- [ ] Incidenty a chyby se propojují s dopadem na zákaznické scénáře.
+- [ ] Důležité závěry z metrik zapisujeme do rozhodnutí, ne jen do chatu.
+
+### 7.8 Mini úkol na 60 minut
+
+Otevři svůj současný dashboard a smaž mentálně všechno, podle čeho bys příští týden neudělal žádné rozhodnutí. Pak napiš tabulku pěti otázek, které produkt opravdu potřebuje zodpovědět. Ke každé přidej jednu metriku, jeden zdroj dat a jednu akci. Pokud se nevejdeš na jednu stránku, nemáš dashboard — máš datové akvárium.
+
+
 ## Zdroje
 
 - Evropská komise: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -762,6 +906,9 @@ Vezmi svůj aktuální produkt a napiš jednu stránku `PROVOZ.md`. Rozděl ji n
 - OWASP Application Security Verification Standard — https://owasp.org/www-project-application-security-verification-standard/
 - ENISA: Technical implementation guidance on cybersecurity risk-management measures, verze 1.0 — https://www.enisa.europa.eu/sites/default/files/2025-06/ENISA_Technical_implementation_guidance_on_cybersecurity_risk_management_measures_version_1.0.pdf
 - European Commission: NIS2 Directive — https://digital-strategy.ec.europa.eu/en/policies/nis2-directive
+- Google Research: Measuring the User Experience on a Large Scale: User-Centered Metrics for Web Applications — https://research.google/pubs/measuring-the-user-experience-on-a-large-scale-user-centered-metrics-for-web-applications/
+- Google Cloud: Using the Four Keys to measure your DevOps performance — https://cloud.google.com/blog/products/devops-sre/using-the-four-keys-to-measure-your-devops-performance
+- Google Cloud: Supercharge your DevOps practice with SRE principles — https://cloud.google.com/blog/products/devops-sre/supercharge-your-devops-practice-with-sre-principles
 
 ## Pracovní log
 
@@ -771,3 +918,4 @@ Vezmi svůj aktuální produkt a napiš jednu stránku `PROVOZ.md`. Rozděl ji n
 - 2026-09-07: Doplněna čtvrtá kapitola o produktivitě malého SaaS týmu, WIP limitech, dokumentaci rozhodnutí a blameless incidentech.
 - 2026-09-07: Doplněna pátá kapitola o marketingu bez spamu, vlastních kanálech, RSS, landing page filtru a launch rytmu malé SaaS funkce.
 - 2026-09-07: Doplněna šestá kapitola o technickém stacku, evropském provozu, bezpečnosti, zálohách, monitoringu a runbooku.
+- 2026-09-07: Doplněna sedmá kapitola o privacy-first měření produktu, webu, technické stability a rozhodovacích dashboardech.
