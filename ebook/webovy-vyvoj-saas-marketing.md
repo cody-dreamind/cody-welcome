@@ -361,6 +361,136 @@ Napiš seznam 20 konkrétních firem nebo lidí, pro které by produkt mohl být
 
 > Codyho komentář: Pokud se bojíš napsat pěti lidem, pravděpodobně ještě nevěříš vlastní nabídce. To není ostuda. To je signál, že validace má začít dřív než další sprint.
 
+---
+
+## Kapitola 4: Produktivita malého týmu bez nástrojového lunaparku
+
+Produktivita v malém SaaS týmu není soutěž o nejhezčí board, nejdražší knowledge base ani nejdelší ranní stand-up. Produktivita je schopnost pravidelně dodávat hodnotu zákazníkům, aniž by tým vyhořel, ztratil kontext nebo začal spravovat víc procesů než produktu.
+
+Agile Manifesto mezi principy zmiňuje průběžné dodávání funkčního softwaru, udržitelný rytmus a jednoduchost jako umění maximalizovat množství práce, kterou není potřeba dělat. Zdroj: https://agilemanifesto.org/principles
+
+Tohle je pro malé týmy osvobozující: nemusíš dělat „agile divadlo“. Stačí mít jasnou prioritu, krátkou zpětnou vazbu, viditelnou práci a disciplínu nedělat všechno najednou.
+
+### 4.1 Jeden zdroj pravdy pro práci
+
+Malý tým se nejrychleji ztratí ve chvíli, kdy úkoly žijí současně v chatu, e-mailu, hlavě zakladatele, poznámkách z callu a třech různých nástrojích. Nevadí, že systém není dokonalý. Vadí, když nikdo neví, kde je pravda.
+
+Vyber jeden hlavní pracovní prostor pro úkoly a rozhodnutí. Může to být GitHub Issues, Linear, Plane, Trello, Notion, Obsidian vault nebo obyčejný Markdown v repozitáři. Důležité je, aby každý úkol měl:
+
+- název, který říká výsledek, ne aktivitu;
+- vlastníka;
+- stav;
+- očekávaný dopad;
+- odkaz na relevantní kontext;
+- jasnou definici hotovo.
+
+Špatný úkol: „Landing page.“
+
+Lepší úkol: „Upravit hero na landing page tak, aby účetní firmy do 5 vteřin pochopily přínos a klikly na demo.“
+
+Ještě lepší úkol přidá měřitelné kritérium: „Po nasazení zkontrolovat 10 návštěv v analytice a ručně projít 3 poptávky, jestli odpovídají cílovému segmentu.“
+
+### 4.2 Omez rozpracovanost dřív, než začne hořet tým
+
+Work-in-progress limit není byrokracie. Je to pojistka proti tomu, aby každý dělal pět věcí a nic se nedostalo k zákazníkovi. Microsoft Learn popisuje WIP limity jako základní kanbanovou praxi, která omezuje počet položek v jednotlivých fázích práce. Zdroj: https://learn.microsoft.com/en-us/azure/devops/boards/boards/wip-limits
+
+Pro dvou až pětičlenný tým začni jednoduchým pravidlem:
+
+- nejvýše 1 hlavní priorita na člověka;
+- nejvýše 2 aktivní produktové iniciativy najednou;
+- bugy s dopadem na zákazníka mají jasný kanál a prioritu;
+- nápady jdou do backlogu, ne rovnou do rozpracováno;
+- pokud něco stojí déle než týden, rozděl to nebo zastav.
+
+WIP limit má jednu nepříjemnou, ale zdravou vlastnost: ukáže, kde se práce zasekává. Pokud se vše hromadí v review, problém není „lidi málo makají“. Problém je možná v tom, že review nemá vlastníka, změny jsou moc velké nebo chybí automatická kontrola.
+
+> Codyho komentář: Produktivita není mít otevřených 38 tabů. To je jen digitální verze kuchyňské linky, na které leží účtenky, vrtačka a půlka rohlíku.
+
+### 4.3 Dokumentuj rozhodnutí, ne každý nádech
+
+Dokumentace v malém týmu nemá suplovat zdravý rozum. Má zabránit tomu, aby se stejné rozhodnutí řešilo pětkrát. Nejdůležitější dokumenty nejsou dlouhé manuály, ale krátké záznamy typu:
+
+- proč jsme vybrali tento hosting;
+- proč nebudeme používat reklamní trackery;
+- jak zálohujeme databázi;
+- jak se nasazuje produkce;
+- jak se řeší incident;
+- jak vypadá dobrý pull request nebo změna.
+
+Použij jednoduchý formát rozhodnutí:
+
+```markdown
+## Rozhodnutí: Analytika pro web
+
+Datum: 2026-09-07
+Kontext: Potřebujeme měřit návštěvnost a konverze bez reklamních trackerů.
+Rozhodnutí: Použijeme privacy-first analytiku s EU provozem a bez osobních profilů.
+Důsledky: Nebudeme mít cross-site remarketing, ale budeme mít jednodušší souhlasy a čistší data.
+Revize: Za 3 měsíce zkontrolujeme, jestli metriky stačí pro rozhodování.
+```
+
+Privacy-first tým by měl dokumentovat hlavně datová rozhodnutí. Když za půl roku někdo navrhne „dejme tam pixel, konkurence ho má taky“, můžeš ukázat, proč jste se rozhodli jinak. Ne jako dogma, ale jako racionální stopu.
+
+### 4.4 Rytmus týmu: krátce, pravidelně, bez porady pro poradu
+
+Malý tým nepotřebuje kalendář narvaný rituály. Potřebuje rytmus, který snižuje nejistotu. Doporučený základ:
+
+- **Týdenní plánování:** vybrat 1–3 výsledky týdne a říct, co se naopak dělat nebude.
+- **Krátká denní synchronizace:** co blokuje postup, ne statusová recitace románu.
+- **Páteční uzávěrka:** co se dodalo, co se naučilo, co se přesouvá.
+- **Měsíční revize:** metriky, zákaznická zpětná vazba, technický dluh, bezpečnost a soukromí.
+
+U vzdáleného nebo hybridního týmu piš víc věcí asynchronně. Ne proto, že chat je kouzelný, ale protože dobrý zápis šetří čas lidem, kteří zrovna nejsou online. Důležité rozhodnutí nepatří jen do hovoru. Patří do úkolu, dokumentu nebo issue.
+
+### 4.5 Incidenty bez honu na viníka
+
+Každý SaaS jednou spadne, zpomalí se nebo pošle uživatele do slepé uličky. Profesionální tým se nepozná podle toho, že nikdy neudělá chybu. Pozná se podle toho, že chybu rychle zachytí, opraví a poučí se bez divadelního hledání obětní kozy.
+
+Atlassian ve svém průvodci postmortemy doporučuje blameless přístup, který se zaměřuje na příčiny, procesy a nápravná opatření místo ukazování prstem na jednotlivce. Zdroj: https://www.atlassian.com/incident-management/handbook/postmortems
+
+Pro malý tým stačí jednoduchá šablona incidentu:
+
+- co se stalo;
+- koho se to dotklo;
+- kdy jsme problém zjistili;
+- jak jsme ho opravili;
+- jaká data mohla být ovlivněna;
+- co uděláme, aby se problém neopakoval;
+- kdo ověří nápravné kroky.
+
+Privacy-first poznámka: incident není jen výpadek serveru. Incident může být i zbytečný export dat, špatně nastavený přístup, logování citlivých údajů nebo nový nástroj, který sbírá víc informací, než tým původně pochopil.
+
+### 4.6 Konkrétní příklad: týdenní režim pro tříčlenný SaaS tým
+
+Představ si tým: jeden zakladatel, jeden vývojář, jedna člověkyně na zákaznickou podporu a obsah.
+
+Praktický týden může vypadat takhle:
+
+- **Pondělí 30 minut:** vybrat hlavní výsledek týdne, například „zvýšit počet dokončených onboardingů u nových účtů“.
+- **Úterý až čtvrtek:** každý den krátká asynchronní zpráva: hotovo, blokery, dnešní fokus.
+- **Středa 45 minut:** projít 3 zákaznické konverzace a vybrat jednu produktovou úpravu.
+- **Čtvrtek:** nasadit malou změnu a zkontrolovat chyby, výkon a analytiku.
+- **Pátek 30 minut:** zapsat výsledek, rozhodnutí, otevřené otázky a jeden privacy-first postřeh.
+
+Výstupem týdne není „měli jsme pět meetingů“. Výstupem je dodaná změna, zapsané rozhodnutí a menší nejistota než v pondělí.
+
+### 4.7 Checklist produktivity malého týmu
+
+- [ ] Úkoly mají jeden hlavní zdroj pravdy.
+- [ ] Každý aktivní úkol má vlastníka, dopad a definici hotovo.
+- [ ] Tým má nastavený WIP limit a respektuje ho i při návalu nápadů.
+- [ ] Důležitá rozhodnutí jsou zapsaná krátce a dohledatelně.
+- [ ] Týdenní plán obsahuje i věci, které se záměrně dělat nebudou.
+- [ ] Incidenty se zapisují bez hledání viníka a s konkrétními nápravnými kroky.
+- [ ] Datová a privacy rozhodnutí mají vlastní stopu v dokumentaci.
+- [ ] Každý měsíc tým smaže, sloučí nebo zjednoduší alespoň jeden proces nebo nástroj.
+
+### 4.8 Mini úkol na 30 minut
+
+Otevři svůj aktuální seznam úkolů a označ tři položky: jednu, která přinese zákaznickou hodnotu tento týden; jednu, která jen vypadá naléhavě; a jednu, kterou můžeš smazat bez reálné škody. Potom nastav WIP limit na maximum dvě aktivní produktové věci a napiš týmu, proč.
+
+> Codyho komentář: Největší produktivní hack malého týmu je naučit se říkat „teď ne“ bez pocitu, že tím zabíjíš budoucnost. Většinou tím jen zachraňuješ přítomnost.
+
 ## Zdroje
 
 - Evropská komise: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -372,9 +502,13 @@ Napiš seznam 20 konkrétních firem nebo lidí, pro které by produkt mohl být
 - Paul Graham: Do Things that Don’t Scale — https://paulgraham.com/ds.html
 - Stripe: Strong Customer Authentication guide — https://stripe.com/guides/strong-customer-authentication
 - Evropská komise: VAT One Stop Shop — https://vat-one-stop-shop.ec.europa.eu/index_en
+- Principles behind the Agile Manifesto — https://agilemanifesto.org/principles
+- Microsoft Learn: Set Work in Progress Limits in Azure Boards — https://learn.microsoft.com/en-us/azure/devops/boards/boards/wip-limits
+- Atlassian: Postmortems — https://www.atlassian.com/incident-management/handbook/postmortems
 
 ## Pracovní log
 
 - 2026-09-07: Založena struktura e-booku, doplněn úvod a první kapitola o privacy-first základech webu a SaaS v Evropě.
 - 2026-09-07: Doplněna druhá kapitola o webu, který rychle vysvětlí hodnotu, důvěru, SEO, výkon a přístupnost.
 - 2026-09-07: Doplněna třetí kapitola o SaaS cestě od problému k první platbě, včetně MVP, onboardingu, SCA/DPH poznámek a checklistu.
+- 2026-09-07: Doplněna čtvrtá kapitola o produktivitě malého SaaS týmu, WIP limitech, dokumentaci rozhodnutí a blameless incidentech.
