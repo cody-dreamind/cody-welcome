@@ -26,6 +26,7 @@ Každou kapitolu ber jako pracovní checklist. Nečti ji jako román do šuplík
 7. Měření, které pomáhá: metriky produktu, prodeje a podpory.
 8. Praktické šablony: brief, landing page, launch checklist a audit soukromí.
 9. AI automatizace v evropském SaaS: užitek, governance a bezpečné nasazení.
+10. Cenotvorba a balíčky: hodnota, jednoduchost, férovost a důvěra.
 
 ---
 
@@ -1297,6 +1298,137 @@ Vyber jednu existující ruční činnost v SaaS nebo marketingu a vyplň pro ni
 Když tabulka zůstane poloprázdná, automatizaci zatím nestav. Nejdřív zmapuj proces. Nejlevnější AI chyba je ta, kterou nepošleš do produkce.
 
 
+## Kapitola 10: Cenotvorba, která neprodává mlhu v elegantním kabátu
+
+Ceník není jen finanční tabulka. Je to produktová komunikace, segmentace zákazníků a test důvěry v jednom. Když je ceník nejasný, zákazník si často neřekne „zeptám se“. Řekne si „tohle bude složité“ a odejde. A protože internet je stroj na odchody, nemusíš mu v tom pomáhat.
+
+Dobrá cenotvorba pro malý SaaS nebo webovou službu má tři cíle:
+
+- zákazník rychle pochopí, pro koho je který balíček;
+- tým dokáže cenu vysvětlit bez excelové seance s bubnem;
+- provoz, podpora a marže zůstávají zdravé i po prvních nadšených zákaznících.
+
+### 10.1 Začni hodnotou, ne pocitem „kolik si můžeme dovolit říct“
+
+Cena má vycházet z hodnoty pro zákazníka, ne jen z nákladů na server a večerní kávy. Náklady jsou spodní hranice. Hodnota je důvod, proč zákazník platí rád.
+
+Ptej se:
+
+- Jaký drahý problém zákazník řeší?
+- Kolik času, chyb, ztracených poptávek nebo administrativy mu produkt ušetří?
+- Kdo u zákazníka reálně rozhoduje o nákupu?
+- Je produkt „hezké mít“, nebo řeší bolest, která už dnes stojí peníze?
+- Jak zákazník řeší problém teď a proč mu to nestačí?
+
+Příklad: Nástroj pro rezervace schůzek u lokální služby není jen „kalendář“. Pokud sníží počet propadlých termínů a ušetří recepci hodiny telefonování, cena se nemá odvozovat od toho, že databázový záznam stojí skoro nic. Má se odvozovat od ušetřeného času a vyšší obsazenosti.
+
+Codyho komentář: „Ale konkurence je levnější“ je informace, ne rozsudek. Pokud máš stejnou hodnotu, horší značku a vyšší cenu, máš problém. Pokud máš lepší výsledek, jednodušší provoz a férovější práci s daty, máš argument.
+
+### 10.2 Tři balíčky většinou stačí
+
+Malý SaaS nepotřebuje ceník připomínající jídelní lístek v restauraci, kde se vaří všechno od sushi po svíčkovou. Pro první roky často stačí tři balíčky:
+
+| Balíček | Pro koho | Hlavní slib | Typická hranice |
+| --- | --- | --- | --- |
+| Start | Jednotlivec nebo malý tým | Rychle vyřešit základní problém | počet projektů, uživatelů nebo měsíční objem |
+| Tým | Rostoucí firma | Spolupráce, automatizace, priority | více uživatelů, integrace, pokročilé role |
+| Business | Náročnější provoz | Kontrola, bezpečnost, onboarding | audit logy, SSO, SLA, individuální podpora |
+
+Každý balíček by měl mít jednu jasnou větu. Ne „obsahuje 37 funkcí“, ale „pro malý tým, který chce mít zakázky pod kontrolou bez vlastního admina“. Funkce jsou důkaz. Slib je důvod ke kliknutí.
+
+Pravidlo: pokud zákazník musí otevřít interní wiki, aby pochopil rozdíl mezi balíčky, ceník je moc chytrý. A moc chytrý ceník bývá často jen nejistota převlečená za strategii.
+
+### 10.3 Free trial, freemium nebo demo? Vyber podle rizika a návyku
+
+Neexistuje univerzální správná vstupní cesta. Vyber ji podle toho, jak rychle zákazník pozná hodnotu a kolik podpory potřebuje.
+
+- **Free trial** se hodí, když uživatel zvládne produkt vyzkoušet sám a první hodnota přijde rychle.
+- **Freemium** dává smysl, když máš nízké provozní náklady, virální nebo síťový efekt a jasný důvod k upgradu.
+- **Demo nebo konzultace** je lepší, když produkt řeší složitější B2B proces, vyžaduje migraci dat nebo rozhoduje více lidí.
+- **Pilot** pomáhá u větších zákazníků, ale musí mít jasný konec, kritéria úspěchu a plán přechodu na placený režim.
+
+Privacy-first poznámka: i trial je vztah se zákazníkem. Nepoužívej ho jako záminku pro sběr zbytečných dat. Pokud chceš ověřit kvalitu leadu, stačí pár relevantních otázek: typ firmy, velikost týmu, problém a e-mail. Rodné číslo, oblíbený jogurt a marketingový pixel opravdu nepotřebuješ.
+
+### 10.4 Co dát do ceníku a co nechat na obchodní rozhovor
+
+Transparentní cena buduje důvěru, ale ne každá nabídka musí být veřejně rozpitvaná do poslední položky. Rozlišuj mezi standardním produktem a zakázkovým provozem.
+
+Veřejně ukaž:
+
+- komu je balíček určený;
+- cenu nebo alespoň jasný cenový rámec;
+- hlavní limity a co se stane při jejich překročení;
+- dostupné integrační a bezpečnostní funkce;
+- způsob zrušení, export dat a základní podmínky podpory.
+
+Na obchodní rozhovor nech:
+
+- individuální migrace;
+- speciální SLA;
+- právní nebo bezpečnostní požadavky většího zákazníka;
+- nestandardní integrace;
+- objemové nebo partnerské dohody.
+
+Nejhorší varianta je „kontaktujte nás“ úplně všude. U malého B2B SaaS může být „kontaktujte nás“ legitimní u enterprise balíčku, ale pokud ho dáš i na základní tarif, často tím jen říkáš: „Ani my netušíme, kolik to má stát.“
+
+### 10.5 Férové limity jsou lepší než skryté pasti
+
+Limity nejsou zlo. Pomáhají sladit cenu s reálným využitím. Zlo jsou limity, které zákazník pochopí až ve chvíli, kdy narazí na zeď.
+
+Dobré limity:
+
+- navazují na hodnotu produktu, například počet aktivních projektů, objednávek nebo týmových členů;
+- jsou snadno měřitelné a viditelné v aplikaci;
+- mají předem popsané chování po překročení;
+- nejdou proti běžnému používání produktu;
+- chrání provoz a podporu bez trestání dobrých zákazníků.
+
+Špatný limit je třeba takový, který zákazník nemůže rozumně ovlivnit nebo předvídat. Pokud účtuješ podle něčeho technického, co chápe jen vývojář, přelož to do zákaznického jazyka. „Počet API requestů“ může být pro technický produkt v pořádku. Pro řemeslníka je lepší „počet zakázek“ nebo „počet odeslaných zpráv zákazníkům“.
+
+### 10.6 Konkrétní příklad: ceník pro SaaS evidenci zakázek
+
+Představ si český B2B SaaS pro malé servisní firmy: technici, zakázky, termíny, fotky z místa a jednoduché předání podkladů k fakturaci.
+
+První verze ceníku může vypadat takto:
+
+| Balíček | Popis | Obsah | Upgrade moment |
+| --- | --- | --- | --- |
+| Start | Pro živnostníka nebo dvojici | zakázky, termíny, základní export, e-mailová podpora | přibude další technik nebo více souběžných zakázek |
+| Tým | Pro menší firmu | role, více techniků, šablony zakázek, notifikace, lepší přehledy | majitel potřebuje kontrolu nad týmem a méně telefonátů |
+| Business | Pro provoz s vyššími nároky | audit log, prioritní podpora, migrace, individuální nastavení, DPA | firma řeší bezpečnost, reporting nebo více poboček |
+
+Landing page by k tomu měla dodat dvě věci: jednoduchý výpočet hodnoty a důkaz z reality. Třeba: „Pokud ušetříte recepci 5 hodin týdně a snížíte počet zapomenutých zakázek, produkt se nemá porovnávat s cenou jednoho oběda. Má se porovnávat s chaosem, který už dnes platíte.“
+
+To není trik. To je připomenutí, že software má stát méně než problém, který řeší.
+
+### 10.7 Checklist ceníku
+
+- [ ] Každý balíček má jasné publikum a jednu větu hodnoty.
+- [ ] Zákazník pochopí rozdíl mezi balíčky bez konzultace.
+- [ ] Limity navazují na zákaznickou hodnotu, ne jen na interní technickou metriku.
+- [ ] Trial, freemium, demo nebo pilot odpovídá složitosti produktu.
+- [ ] Ceník vysvětluje zrušení, export dat a základní podmínky podpory.
+- [ ] Enterprise nebo individuální nabídka má důvod, ne jen zakrytou nejistotu.
+- [ ] Tým ví, kdy doporučit který balíček a kdy zákazníka odmítnout.
+- [ ] Privacy-first argument je popsaný jako hodnota, ne jako nudná právní poznámka.
+
+### 10.8 Mini úkol na 60 minut
+
+Vezmi svůj současný nebo plánovaný produkt a vyplň tuto tabulku:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaký problém zákazník platí, aby zmizel? |  |
+| Jak pozná hodnotu během prvního týdne? |  |
+| Jaké tři segmenty zákazníků dávají smysl? |  |
+| Jaký limit nejlépe odpovídá hodnotě? |  |
+| Kdy zákazník přirozeně upgraduje? |  |
+| Co musí být veřejně v ceníku? |  |
+| Co patří až do obchodního rozhovoru? |  |
+
+Na konci si nahlas přečti větu: „Tento balíček je pro ___, protože jim pomáhá ___.“ Pokud to zní jako věta z grantové žádosti, přepiš ji. Zákazníci nekupují grantovou žádost. Kupují klid, výsledek a méně chaosu.
+
+
 ## Zdroje
 
 - Evropská komise: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -1334,3 +1466,4 @@ Když tabulka zůstane poloprázdná, automatizaci zatím nestav. Nejdřív zmap
 - 2026-09-07: Doplněna sedmá kapitola o privacy-first měření produktu, webu, technické stability a rozhodovacích dashboardech.
 - 2026-09-07: Doplněna osmá kapitola s praktickými šablonami pro brief, landing page, launch, privacy audit, runbook a měřicí plán.
 - 2026-09-07: Doplněna devátá kapitola o bezpečné AI automatizaci v evropském SaaS, včetně governance, promptů, datové minimalizace a checklistu.
+- 2026-09-07: Doplněna desátá kapitola o SaaS cenotvorbě, balíčcích, férových limitech, trialu a praktickém checklistu.
