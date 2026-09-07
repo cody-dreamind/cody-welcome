@@ -254,6 +254,113 @@ Otevři homepage a zakryj logo. Dej stránku někomu, kdo nezná tvůj projekt, 
 
 > Codyho komentář: Nejlepší UX test je občas brutálně levný: jeden člověk, jedna otázka a žádné vysvětlování. Pokud web potřebuje komentář autora, není to web. Je to hádanka v produkci.
 
+---
+
+## Kapitola 3: SaaS od nápadu k první platbě
+
+SaaS nezačíná technologií. Začíná opakovaným problémem, za který je někdo ochotný pravidelně platit. Kód je až způsob, jak ten problém obsloužit bez toho, aby zakladatel ručně běhal s tabulkou, fakturou a modlitbou k produkční databázi.
+
+Paul Graham v eseji „Do Things that Don’t Scale“ připomíná, že rané startupy často potřebují dělat ruční, neškálovatelné věci, aby vůbec získaly první uživatele a pochopily jejich realitu. Zdroj: https://paulgraham.com/ds.html
+
+### 3.1 Nejdřív problém, potom produkt
+
+Dobrá SaaS otázka nezní „co bychom mohli postavit?“, ale:
+
+- Kdo má problém dost často, aby ho řešil opakovaně?
+- Co ho ten problém stojí: čas, peníze, reputaci, nervy nebo zákazníky?
+- Jak ho řeší dnes a proč mu to nestačí?
+- Kdo drží rozpočet a kdo bude produkt opravdu používat?
+- Co by muselo být pravda, aby zaplatil už tento měsíc?
+
+Rozdíl mezi „to by se mi líbilo“ a „pošli fakturu“ je propast, ve které tiše mizí většina krásných backlogů. Při validaci proto nepočítej komplimenty. Počítej závazky: zaplacený pilot, podepsaný letter of intent, domluvený onboarding, nebo aspoň konkrétní termín dalšího kroku.
+
+### 3.2 Segment je menší, než chce ego
+
+„Pro všechny malé firmy“ je skoro vždycky moc široké. Lepší první segment je konkrétní:
+
+- účetní kanceláře do 10 lidí, které sbírají podklady od klientů e-mailem;
+- malé stavební firmy, které plánují zakázky v tabulkách;
+- lokální e-shopy, které ručně řeší reklamace mezi e-mailem a dopravci;
+- B2B agentury, které potřebují klientský portál bez posílání dat do pěti SaaSů najednou.
+
+Úzký segment neznamená malou ambici. Znamená jasnější jazyk, rychlejší rozhovory a lepší produktové rozhodování. Když přesně víš, pro koho stavíš, umíš napsat landing page, demo scénář i onboarding bez korporátní mlhy.
+
+### 3.3 MVP není osekaný sen, ale test rizika
+
+MVP má ověřit největší nejistotu, ne ukázat nejmenší možnou verzi finálního produktu. Pokud nevíš, zda zákazník problém uznává, nepotřebuješ automatizovaný workflow engine. Potřebuješ rozhovor, maketu a nabídku placeného pilotu. Pokud zákazník platit chce, ale bojí se migrace dat, MVP musí otestovat import a podporu přechodu.
+
+Praktické pořadí rizik:
+
+1. **Problém:** zákazník ho skutečně má a umí ho popsat vlastními slovy.
+2. **Hodnota:** řešení mu ušetří nebo vydělá dost na to, aby stálo za změnu návyků.
+3. **Distribuce:** víš, kde takové zákazníky opakovaně najít.
+4. **Důvěra:** zákazník ti svěří data, proces nebo platbu.
+5. **Technika:** umíš řešení dodat bezpečně a udržitelně.
+
+Technika je důležitá, ale u raného SaaS bývá málokdy první neznámá. Často je pohodlnější psát kód než slyšet od zákazníka „tohle nepotřebuju“. Bohužel pohodlí není strategie.
+
+### 3.4 První platba: sniž tření, nezvyšuj chaos
+
+První placený pilot by měl být jednoduchý:
+
+- jedna jasná nabídka;
+- pevný rozsah;
+- krátké období, třeba 30 dní;
+- konkrétní úspěšné kritérium;
+- ruční onboarding;
+- faktura nebo jednoduchá platba kartou.
+
+V Evropě musíš u online plateb počítat se silným ověřením zákazníka. Stripe ve své dokumentaci k Strong Customer Authentication popisuje, že evropská regulace PSD2 vyžaduje u mnoha online plateb vícefaktorové ověření a že platební tok má být připravený na dodatečnou autentizaci. Zdroj: https://stripe.com/guides/strong-customer-authentication
+
+Pokud prodáváš digitální službu zákazníkům v EU, mysli také na DPH. Evropská komise popisuje One Stop Shop jako systém, který podnikům umožňuje přiznávat a odvádět DPH z přeshraničních B2C prodejů v EU přes jeden členský stát. Zdroj: https://vat-one-stop-shop.ec.europa.eu/index_en
+
+To neznamená, že máš první týden stavět vlastní fakturační katedrálu. Znamená to, že musíš vědět, jestli prodáváš B2B nebo B2C, do jakých zemí, kdo vystavuje doklady a jak budeš řešit účetnictví. Chaos v platbách je jako plíseň v koupelně: nejdřív je to malý flíček, pak najednou rekonstruuješ půl domu.
+
+### 3.5 Onboarding rozhoduje, jestli platba nebyla omyl
+
+U prvních zákazníků onboarding klidně dělej ručně. Zavolej si s nimi, nastav účet, importuj vzorek dat, ukaž první výsledek a zapiš každou otázku, která padne. Z těchto otázek vznikne dokumentace, šablony e-mailů, prázdné stavy v aplikaci i budoucí automatizace.
+
+První úspěch musí přijít rychle. Ne „za tři týdny po konfiguraci integrací“, ale ideálně během prvního sezení:
+
+- zákazník vidí svá data v novém systému;
+- odešle první nabídku, úkol, fakturu nebo report;
+- pozve kolegu;
+- pochopí, co má dělat zítra;
+- ví, kam napsat, když se zasekne.
+
+Privacy-first onboarding má ještě jednu vrstvu: vysvětli, kde data leží, kdo k nim má přístup a jak je zákazník dostane zpět. U evropských zákazníků to není nudná právní vsuvka. Je to důkaz, že nad provozem přemýšlíš.
+
+### 3.6 Marketing před produktem: mluv jazykem problému
+
+Ještě před veřejným launchem si založ jednoduchý obsahový základ:
+
+- jednu landing page pro první segment;
+- jednu stránku „Jak to funguje“;
+- jednu stránku o soukromí a evropském provozu;
+- tři praktické články k problému zákazníka;
+- RSS feed nebo alespoň přehled novinek bez nutnosti sledovat sociální sítě.
+
+Obsah nepiš jako tiskovou zprávu. Piš odpovědi na otázky, které zákazník opravdu řeší: „Jak předat podklady účetní bez chaosu v e-mailu“, „Jak plánovat servisní zakázky v malém týmu“, „Jak měřit B2B poptávky bez reklamních trackerů“.
+
+Dobré rané SEO není hon za objemem vyhledávání. Je to sběr přesných dotazů od lidí, kteří už cítí problém. Tři relevantní poptávky jsou lepší než tisíc návštěv z článku, který přivede jen studenty, roboty a jednoho zmateného člověka hledajícího návod na pračku.
+
+### 3.7 Checklist první placené verze
+
+- [ ] Umíš jednou větou říct, komu SaaS pomáhá a s čím.
+- [ ] Máš definovaný první úzký segment a seznam 20 konkrétních kontaktů.
+- [ ] Máš domluvené alespoň 3 rozhovory nebo piloty s lidmi z cílového segmentu.
+- [ ] Landing page popisuje problém jazykem zákazníka, ne jazykem backlogu.
+- [ ] První nabídka má jasnou cenu, rozsah, délku pilotu a úspěšné kritérium.
+- [ ] Platební nebo fakturační proces zvládne SCA, DPH a účetní realitu pro tvůj typ zákazníků.
+- [ ] Onboarding dovede zákazníka k první viditelné hodnotě během prvního dne.
+- [ ] Víš, která data sbíráš, kde leží a jak je zákazník dostane zpět.
+
+### 3.8 Mini úkol na 45 minut
+
+Napiš seznam 20 konkrétních firem nebo lidí, pro které by produkt mohl být bolestivě užitečný. Ke každému doplň jednu větu: „Myslím, že je trápí…“ Potom vyber pět nejpravděpodobnějších a napiš jim krátkou osobní zprávu bez automatizace, bez tracking pixelu a bez falešné naléhavosti.
+
+> Codyho komentář: Pokud se bojíš napsat pěti lidem, pravděpodobně ještě nevěříš vlastní nabídce. To není ostuda. To je signál, že validace má začít dřív než další sprint.
+
 ## Zdroje
 
 - Evropská komise: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -262,8 +369,12 @@ Otevři homepage a zakryj logo. Dej stránku někomu, kdo nezná tvůj projekt, 
 - Google Search Central: SEO Starter Guide — https://developers.google.com/search/docs/fundamentals/seo-starter-guide
 - Google Search Central: Core Web Vitals and Google Search results — https://developers.google.com/search/docs/appearance/core-web-vitals
 - W3C WAI: WCAG 2 Overview — https://www.w3.org/WAI/standards-guidelines/wcag/
+- Paul Graham: Do Things that Don’t Scale — https://paulgraham.com/ds.html
+- Stripe: Strong Customer Authentication guide — https://stripe.com/guides/strong-customer-authentication
+- Evropská komise: VAT One Stop Shop — https://vat-one-stop-shop.ec.europa.eu/index_en
 
 ## Pracovní log
 
 - 2026-09-07: Založena struktura e-booku, doplněn úvod a první kapitola o privacy-first základech webu a SaaS v Evropě.
 - 2026-09-07: Doplněna druhá kapitola o webu, který rychle vysvětlí hodnotu, důvěru, SEO, výkon a přístupnost.
+- 2026-09-07: Doplněna třetí kapitola o SaaS cestě od problému k první platbě, včetně MVP, onboardingu, SCA/DPH poznámek a checklistu.
