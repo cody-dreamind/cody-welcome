@@ -1428,6 +1428,89 @@ Vezmi svůj současný nebo plánovaný produkt a vyplň tuto tabulku:
 
 Na konci si nahlas přečti větu: „Tento balíček je pro ___, protože jim pomáhá ___.“ Pokud to zní jako věta z grantové žádosti, přepiš ji. Zákazníci nekupují grantovou žádost. Kupují klid, výsledek a méně chaosu.
 
+---
+
+## Dodatek A: 30denní plán pro menší web nebo SaaS
+
+E-book je fajn. Akce je lepší. Tohle je praktický plán na měsíc pro malý tým, freelancera nebo zakladatele, který nechce jen číst o lepším webu, ale opravdu ho posunout. Neber ho jako dogma. Ber ho jako kolejničky, které tě vytáhnou z mlhy.
+
+> Codyho komentář: Pokud máš pocit, že „nejdřív musíme všechno promyslet“, pravděpodobně potřebuješ menší krok, ne další workshop. Workshop je někdy jen tabulka, která si oblékla sako.
+
+### Týden 1: Vyjasni nabídku a data
+
+Cíl prvního týdne je pochopit, co prodáváš, komu a jaká data kvůli tomu opravdu potřebuješ. Neřeš zatím nový design. Neotevírej tržiště šablon. Neinstaluj analytiku číslo čtyři, protože měla hezký graf v reklamě.
+
+Konkrétní výstupy:
+
+- Jedna věta hodnoty: „Pomáháme ___ dosáhnout ___ bez ___.“
+- Seznam tří hlavních segmentů zákazníků.
+- Mapa dat pro web, produkt, platby, podporu a marketing.
+- Rozhodnutí, které nástroje jsou nezbytné a které jen historicky přilepené.
+- První návrh stránky „Bezpečnost a soukromí“ nebo interní poznámky k ní.
+
+Mini cvičení: projdi všechny formuláře na webu a v produktu. U každého pole napiš důvod, proč ho sbíráš. Pokud důvod neexistuje, pole smaž nebo ho přesuň do pozdějšího kroku, kde už dává smysl.
+
+### Týden 2: Oprav nejdůležitější cestu
+
+Druhý týden se soustřeď na jednu cestu, která má obchodní dopad. Typicky homepage → ceník → poptávka, článek → checklist → kontakt, nebo registrace → první hodnota v produktu.
+
+Nesnaž se opravit celý web. Vyber jednu trasu a udělej ji nudně dobrou:
+
+- Nadpisy říkají výsledek, ne interní slogan.
+- CTA popisuje další krok konkrétně.
+- Formulář sbírá minimum údajů.
+- Stránka má důkaz důvěry: proces, ukázku, referenci nebo technické vysvětlení.
+- Mobilní zobrazení je čitelné bez zoomování a lovení tlačítka palcem.
+- Externí skripty mají jasný důvod, vlastníka a plán vyhodnocení.
+
+Praktický příklad: místo obecného tlačítka „Kontaktujte nás“ použij „Poslat web k auditu“. Hned je jasné, co se stane. Pokud po kliknutí následuje formulář s deseti poli, vrať se o krok zpět a zeptej se, jestli opravdu potřebuješ telefon, obrat firmy a rodné jméno firemního křečka.
+
+### Týden 3: Změř méně, ale užitečněji
+
+Třetí týden nastav měření tak, aby pomáhalo rozhodovat. Privacy-first analytika není o slepotě. Je o tom, že nesbíráš osobní stopu každého návštěvníka jen proto, že to nástroj umí.
+
+Vyber maximálně pět událostí:
+
+- `pricing_view` — člověk řeší cenu;
+- `demo_request` — člověk chce obchodní kontakt;
+- `signup_start` — začal registraci;
+- `signup_done` — dokončil registraci;
+- `first_value_done` — zažil první skutečný přínos produktu.
+
+Ke každé události napiš rozhodnutí, které podle ní uděláš. Pokud žádné rozhodnutí neexistuje, událost nepotřebuješ. Metrika bez rozhodnutí je jen dekorace. A dekorace v dashboardu má stejnou hodnotu jako plastová palma v zasedačce: možná zvedne náladu, ale zákazníka nepřivede.
+
+### Týden 4: Zaveď rytmus a odpovědnosti
+
+Čtvrtý týden uzavři měsíc provozním rytmem. Cílem není mít dokonalý systém, ale opakovatelný způsob, jak web a SaaS zlepšovat bez heroického hašení.
+
+Nastav jednoduchý týdenní rytmus:
+
+- 30 minut: projít návštěvnost, poptávky, registrace a support otázky.
+- 30 minut: vybrat jednu prioritní úpravu s jasným očekávaným dopadem.
+- 60–120 minut: úpravu dodat, změřit nebo připravit k vydání.
+- 15 minut: zapsat rozhodnutí do changelogu nebo interní poznámky.
+- 15 minut: odstranit jednu věc, která se už nepoužívá.
+
+Odstraňování je podceňovaná produktová práce. Každý nepoužívaný skript, zapomenutý formulář, starý lead magnet nebo mrtvá integrace zvyšuje provozní šum. Malý tým nepotřebuje víc šumu. Malý tým potřebuje méně věcí, které se tváří důležitě.
+
+### 30denní checklist
+
+- [ ] Máme jednu jasnou větu hodnoty pro hlavní segment.
+- [ ] Víme, jaká data sbíráme, proč, kde leží a kdo k nim má přístup.
+- [ ] Nejdůležitější cesta na webu má konkrétní CTA a měřitelný další krok.
+- [ ] Ceník nebo nabídka vysvětluje hodnotu, limity, podporu a zrušení.
+- [ ] Analytika měří jen události, podle kterých umíme rozhodovat.
+- [ ] Web funguje bez reklamních trackerů a zbytečných třetích stran.
+- [ ] Máme jednoduchý runbook pro výpadek, obnovu a kontakt na odpovědné lidi.
+- [ ] Jednou týdně mažeme nebo zjednodušujeme něco, co už nepomáhá.
+
+### Mini úkol na 60 minut
+
+Vyber jednu položku z checklistu, která má největší dopad na důvěru zákazníka, a dokonči ji dnes. Neplánuj reorganizaci celého produktu. Nezakládej epický backlog. Dokonči jednu věc tak, aby ji zákazník nebo tým opravdu poznal.
+
+Pokud si nemůžeš vybrat, začni mapou dat. Privacy-first provoz bez mapy dat je jako vaření bez seznamu surovin: možná vznikne večeře, ale taky možná zapálíš kuchyň a budeš tomu říkat experiment.
+
+
 
 ## Zdroje
 
@@ -1467,3 +1550,4 @@ Na konci si nahlas přečti větu: „Tento balíček je pro ___, protože jim p
 - 2026-09-07: Doplněna osmá kapitola s praktickými šablonami pro brief, landing page, launch, privacy audit, runbook a měřicí plán.
 - 2026-09-07: Doplněna devátá kapitola o bezpečné AI automatizaci v evropském SaaS, včetně governance, promptů, datové minimalizace a checklistu.
 - 2026-09-07: Doplněna desátá kapitola o SaaS cenotvorbě, balíčcích, férových limitech, trialu a praktickém checklistu.
+- 2026-09-07: Doplněn praktický 30denní plán pro menší web nebo SaaS jako závěrečný akční dodatek e-booku.
