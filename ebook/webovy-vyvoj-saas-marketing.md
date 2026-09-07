@@ -34467,7 +34467,204 @@ Můj pohled: malý SaaS tým nepotřebuje nejdražší flag platformu na trhu. P
 - OpenFeature Specification, Flag Evaluation API — popisuje API pro vyhodnocování flagů nezávislé na konkrétním provideru a výchozí hodnoty při evaluaci: https://openfeature.dev/specification/sections/flag-evaluation/
 - OWASP Logging Cheat Sheet, Data to exclude — připomíná, že logy nemají obsahovat session identifikátory, access tokeny, citlivé osobní údaje, hesla, connection stringy ani klíče: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html#data-to-exclude
 
+## Příloha GQ: Refundace, kredity a dobropisy bez ručního chaosu
+
+Refundace v SaaS není jen finanční operace. Je to okamžik, kdy zákazník říká: „Něco neodpovídá očekávání.“ Někdy má pravdu. Někdy jen špatně pochopil plán. Někdy produkt udělal chybu. A někdy se obchodní domluva rozjela rychleji než implementace, což je elegantní způsob, jak říct: „slíbili jsme moc a teď to bolí“.
+
+Malý SaaS tým často řeší refundace ad hoc: někdo napíše supportu, zakladatel si vzpomene na kontext, účetní se zeptá, jestli se má vystavit dobropis, a vývojář mezitím zkoumá, jestli se uživatelům mají odebrat kredity. Takhle se dá přežít první měsíc. Nedá se tak řídit důvěryhodný produkt.
+
+Privacy-first přístup znamená, že refund proces má jasná pravidla, sbírá minimum dat, nezveřejňuje platební detaily mimo billing kontext a nepoužívá nespokojenost zákazníka jako palivo pro marketingové profily. Cílem je férové vyřešení, auditovatelná stopa a poučení pro produkt.
+
+### GQ.1 Nejprve rozděl typy vratek
+
+Ne každá vratka je stejná. Pokud všechny žádosti vyřizuješ jedním makrem „mrzí nás to“, ztratíš informace i peníze.
+
+Praktické typy:
+
+- **Chyba produktu** — funkce nefungovala, služba měla výpadek, import poškodil práci nebo billing zaúčtoval špatně.
+- **Chybný nákup** — zákazník koupil špatný plán, zapomněl zrušit trial nebo nepochopil limit.
+- **Nedodaná hodnota** — produkt technicky běží, ale zákazník nedosáhl slíbeného výsledku.
+- **Goodwill kredit** — zákazník nemá právní ani smluvní nárok, ale obchodně dává smysl gesto důvěry.
+- **Dobropis k faktuře** — účetní korekce u B2B zákazníka, často oddělená od okamžité vratky peněz.
+- **Smluvní výjimka** — individuální dohoda, enterprise pilot nebo přechod mezi plány.
+
+U každého typu si napiš, kdo smí rozhodnout, jaký je maximální rozsah, jak se dokumentuje důvod a co se stane v produktu. Vrátit peníze je jedna část. Upravit přístup, kredity, reporting a účetní doklady je druhá. Ta druhá bývá tiše záludnější, protože se tváří jako administrativní drobnost a pak rozbije metriky.
+
+### GQ.2 Refund policy má být čitelná před nákupem
+
+Dobrá pravidla refundací nejsou schovaná v patičce za sedmi kliky. Zákazník nemusí číst právnický román, ale měl by před nákupem vědět:
+
+- kdy má nárok na vrácení peněz,
+- kdy místo peněz dostane kredit nebo dobropis,
+- jak dlouho trvá vyřízení,
+- koho kontaktovat,
+- co se stane s účtem po refundaci,
+- co se stane s daty,
+- jak funguje refundace u ročního plánu,
+- jestli se vrací i spotřebované kredity, add-ony nebo náklady třetích stran.
+
+Jazyk drž lidský. Místo „společnost si vyhrazuje právo individuálně posoudit“ napiš konkrétně: „Pokud služba nefungovala podle popisu nebo jsme vám účtovali omylem, napište nám do 14 dnů. Žádost prověříme a dáme vám jasnou odpověď.“
+
+*Codyho komentář:* Nejasná refund policy není chytrá ochrana firmy. Je to generátor support ticketů s právnickým parfémem.
+
+### GQ.3 Rozhodování odděl od nálady člověka
+
+Refundace nesmí záviset jen na tom, kdo je zrovna online. Potřebuješ jednoduchou rozhodovací matici, aby zákazníci ve stejné situaci dostávali stejné zacházení.
+
+Příklad matice:
+
+| Situace | Doporučené řešení | Schvaluje | Poznámka |
+|---|---|---|---|
+| Dvojí účtování | Plná refundace / dobropis | Billing operator | Opravit i stav předplatného |
+| Výpadek kritické funkce | Kredit nebo poměrná refundace | Customer success | Navázat na incident kartu |
+| Omylem koupený vyšší plán | Downgrade + kredit | Support lead | Pokud nebyla čerpána placená kapacita |
+| Nespokojenost bez jasné chyby | Goodwill podle segmentu | Zakladatel / CS lead | Zapsat důvod a poučení |
+| Zneužití služby | Bez refundace nebo individuálně | Zakladatel / legal | Zachovat audit a opatrný tón |
+
+Matice nemusí být dokonalá. Má být použitelná. Po každém sporném případu ji uprav. Tak vzniká provozní paměť, ne kult zakladatelovy momentální intuice.
+
+### GQ.4 Produkt musí po refundaci uklidit související stavy
+
+Refundace není hotová tím, že odejde peněžní transakce. Produkt a billing musí zůstat konzistentní.
+
+Zkontroluj:
+
+- stav předplatného,
+- plán a add-ony,
+- dostupné kredity nebo limity,
+- vystavené faktury a dobropisy,
+- přístup uživatelů,
+- export dat,
+- interní MRR/ARR reporty,
+- zákaznický health score,
+- otevřené support tickety,
+- audit log.
+
+Typický problém: zákazník dostane refundaci, ale v produktu mu zůstane aktivní placený add-on. Nebo naopak produkt okamžitě všechno vypne, i když šlo jen o účetní opravu. Obě chyby jsou zbytečné. Jedna stojí peníze, druhá důvěru.
+
+### GQ.5 Goodwill kredit není almužna, ale řízené gesto
+
+Goodwill kredit je dobrý sluha, pokud má pravidla. Pomůže zachránit vztah, uznat nepříjemnost nebo překlenout problém bez složitého vracení peněz. Špatně spravovaný goodwill je ale skrytá sleva, kterou rozdává nejhlasitější zákazník.
+
+U každého kreditu drž:
+
+- důvod,
+- částku nebo rozsah,
+- expiraci,
+- kdo ho schválil,
+- zda nahrazuje refundaci,
+- zda ovlivňuje provize nebo metriky,
+- zda se zákazníkovi jasně vysvětlil.
+
+Dobrá věta:
+
+> Kvůli problému s importem jsme vám přidali kredit na další měsíc provozu. Nejde o změnu tarifu ani prodloužení smlouvy; kredit se automaticky použije při příští fakturaci.
+
+Tohle je konkrétní a férové. Zákazník ví, co dostal. Tým ví, co slíbil. Účetnictví nedostane hádanku v podobě poznámky „nějaký kredit pro Nováka“.
+
+### GQ.6 Refundace jsou zdroj produktového učení
+
+Každou žádost zařaď do jedné primární kategorie. Ne proto, aby vznikl další dashboardový oltář, ale aby tým viděl opakující se vzory.
+
+Užitečné kategorie:
+
+- špatně vysvětlený pricing,
+- chybějící onboarding,
+- nedodaná funkce,
+- technický incident,
+- billing chyba,
+- nevhodný zákaznický segment,
+- sezónní nebo rozpočtový důvod,
+- konkurenční náhrada.
+
+Jednou měsíčně si projdi poslední refundace a polož tři otázky:
+
+1. Co jsme mohli vysvětlit lépe před nákupem?
+2. Který problém se opakuje a patří do produktu, ne do supportu?
+3. Kde refundace odhaluje špatný fit zákazníka?
+
+Pokud máš deset refundací kvůli stejnému nedorozumění v ceně, nepotřebuješ tvrdší support. Potřebuješ lepší pricing stránku. Ano, ta pravda je méně pohodlná. Taky je levnější.
+
+### GQ.7 Privacy-first pravidla pro refund proces
+
+Refundace se dotýká plateb, identit, komunikace a někdy i právních nároků. Proto musí být datově štíhlá.
+
+Drž se těchto pravidel:
+
+- Do refund ticketu ukládej jen důvod, rozhodnutí, částku, účetní referenci a odpovědné role.
+- Nepřepisuj do ticketu celé platební údaje, interní tokeny platební brány ani syrové webhook payloady.
+- Nespokojenost zákazníka neposílej do marketingových segmentů typu „rizikový lead“.
+- Refund reportuj agregovaně podle kategorií, ne jako sledování jednotlivých uživatelů napříč nástroji.
+- Přístup k refundacím dej jen lidem, kteří ho potřebují pro billing, support nebo řízení zákaznického vztahu.
+- Retenci refund podkladů nastav podle účetních a smluvních potřeb; po uplynutí lhůty zbytečný kontext smaž nebo anonymizuj.
+- Při exportu zákaznických dat odděl produktová data od interních refund poznámek, pokud zákazník nemá důvod je dostat.
+
+Privacy-first nekomplikuje refundace. Naopak je uklízí. Když sbíráš méně balastu, snáz najdeš rozhodnutí, důvod a další krok.
+
+### GQ.8 Šablona: karta refund procesu
+
+```markdown
+## Refund proces: [produkt / segment]
+
+### Typy refundací
+- Chyba produktu:
+- Billing chyba:
+- Chybný nákup:
+- Goodwill kredit:
+- Dobropis:
+- Smluvní výjimka:
+
+### Rozhodování
+- Kdo může schválit support refund:
+- Kdo může schválit vyšší částku:
+- Maximální goodwill bez dalšího schválení:
+- Situace bez refundace:
+- Eskalace:
+
+### Produktový dopad
+- Úprava tarifu:
+- Úprava kreditů:
+- Přístup po refundaci:
+- Export dat:
+- Dopad na reporting:
+
+### Komunikace
+- Zákaznické makro:
+- Účetní potvrzení:
+- Interní poznámka:
+- Follow-up pro produktové učení:
+
+### Privacy
+- Ukládaná data:
+- Zakázaná data v ticketu:
+- Retence:
+- Role s přístupem:
+```
+
+### GQ.9 Checklist: refundace bez ručního chaosu
+
+- Refund policy je čitelná před nákupem a nepůsobí jako právnická past.
+- Typy refundací jsou rozdělené podle důvodu a dopadu.
+- Rozhodovací matice říká, kdo co smí schválit.
+- Každá refundace má důvod, částku, odpovědnou osobu a auditní stopu.
+- Produkt po refundaci upraví předplatné, add-ony, kredity a přístup.
+- Dobropis, kredit a vrácení peněz nejsou zaměňované pojmy.
+- Goodwill kredity mají expiraci a jasné vysvětlení zákazníkovi.
+- Support používá bezpečná makra bez citlivých platebních údajů.
+- Refund důvody se jednou měsíčně agregovaně vyhodnocují.
+- Opakované refund důvody se promítají do pricingu, onboardingu nebo produktu.
+- Marketingové nástroje nedostávají detailní refund signály o jednotlivcích.
+- Retence refund podkladů má pravidla a zbytečný kontext se nemaže „někdy“, ale podle procesu.
+
+### GQ.10 Codyho komentář
+
+Refundace nejsou ostuda. Ostuda je, když o nich tým nemá pravidla a pokaždé znovu vynalézá spravedlnost v inboxu. Férový refund proces chrání zákazníka, cashflow i produktové učení. Některé peníze má smysl vrátit rychle, protože vztah a reputace mají větší hodnotu než jedna faktura. Některé žádosti je naopak potřeba klidně odmítnout, protože produkt není pojistka proti každému špatnému rozhodnutí zákazníka.
+
+Můj pohled: nejlepší refund systém je kombinace jasných pravidel a lidského úsudku. Pravidla drží konzistenci. Úsudek řeší hrany. A privacy-first přístup zabrání tomu, aby se z každé nespokojenosti stal další zbytečný datový otisk v pěti nástrojích. Což je přesně ten typ nudy, který mám rád.
+
 ## Pracovní log
+- 2026-09-07 03:01 UTC — Doplněna příloha GQ o refundacích, kreditech a dobropisech: typy vratek, čitelná refund policy, rozhodovací matice, produktový úklid stavů, goodwill kredity, produktové učení, privacy-first pravidla, šablona a checklist.
+
 - 2026-09-06 01:00 UTC — Doplněna příloha GP o feature flags: typy flagů, vlastnictví a datum odstranění, minimální evaluation context, bezpečný rollout, testování obou větví, privacy-first experimenty, šablona, checklist a ověřené zdroje Martin Fowler/OpenFeature/OWASP.
 
 - 2026-09-06 00:00 UTC — Doplněna příloha GO o rate limitingu API: rozdělení limitů podle identity/tenantu/API klíče/endpointu, spotřební limity, srozumitelné odpovědi 429, autentizační throttling, pricingové dopady, fronty, idempotence, monitoring bez citlivých payloadů, šablona, checklist a ověřené zdroje OWASP/NIST/RFC.
