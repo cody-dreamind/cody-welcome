@@ -886,6 +886,312 @@ Každá dlaždice má poznámku „co uděláme, když se to zhorší“. Bez t�
 Otevři svůj současný dashboard a smaž mentálně všechno, podle čeho bys příští týden neudělal žádné rozhodnutí. Pak napiš tabulku pěti otázek, které produkt opravdu potřebuje zodpovědět. Ke každé přidej jednu metriku, jeden zdroj dat a jednu akci. Pokud se nevejdeš na jednu stránku, nemáš dashboard — máš datové akvárium.
 
 
+## Kapitola 8: Praktické šablony pro rychlejší rozhodování
+
+Šablony nejsou byrokracie, pokud jsou krátké a vedou k rozhodnutí. Jsou to koleje pro opakované situace: nový web, landing page, launch funkce, výběr nástroje, audit soukromí nebo incident. Malý tým nepotřebuje složitý proces. Potřebuje způsob, jak nezapomenout na důležité otázky, když ho zrovna honí termín, zákazník a realita.
+
+Dobrá šablona má tři vlastnosti:
+
+- vejde se na jednu až dvě stránky,
+- má jasného vlastníka a datum,
+- končí konkrétními dalšími kroky.
+
+Pokud šablona nevede k akci, je to kancelářský origami. Hezké možná, užitečné spíš pro test trpělivosti.
+
+### 8.1 Šablona briefu pro web nebo landing page
+
+Použij ji předtím, než začneš psát copy, kreslit wireframe nebo vybírat šablonu. Cílem je oddělit podstatu od dekorací.
+
+```md
+# Brief stránky
+
+## Kontext
+- Název stránky:
+- Vlastník:
+- Datum:
+- Proč stránka vzniká právě teď:
+
+## Publikum
+- Primární segment:
+- Co už ví:
+- Co ho trápí:
+- Jakou námitku bude mít nejspíš jako první:
+
+## Nabídka
+- Jedna věta: komu pomáháme, s čím a jaký je výsledek:
+- Hlavní důkaz důvěry:
+- Co na stránce neslibujeme:
+
+## Akce
+- Primární CTA:
+- Sekundární CTA:
+- Co se stane po kliknutí:
+
+## Soukromí a data
+- Jaká data stránka sbírá:
+- Kam se data ukládají:
+- Kdo k nim má přístup:
+- Jak dlouho je držíme:
+
+## Měření
+- Tři otázky, které chceme vyhodnotit:
+- Metriky:
+- Kdy se ke stránce vrátíme:
+```
+
+Příklad pro konzultační službu:
+
+- Primární segment: B2B SaaS tým do 15 lidí, který má první zákazníky, ale web a onboarding rostly živelně.
+- Jedna věta: Pomáháme malým SaaS týmům najít úniky v konverzi, výkonu a soukromí během praktického auditu.
+- Hlavní důkaz: ukázka anonymizovaného výstupu a jasný postup auditu.
+- Primární CTA: „Poslat web k auditu“.
+- Měření: klik na CTA, dokončený formulář, odpověď na navazující e-mail.
+
+Codyho komentář: Nejlepší brief je ten, který odhalí, že stránku vlastně nepotřebuješ. Druhá nejlepší varianta je brief, který zabrání třem týdnům debat o tom, jestli má tlačítko být „Kontaktovat“ nebo „Pojďme růst společně“. Fuj, to druhé raději ne.
+
+### 8.2 Šablona landing page, která prodává bez křiku
+
+Tuhle strukturu použij pro službu, SaaS modul, lead magnet nebo launch nové funkce. Neber ji jako dogma. Ber ji jako výchozí kostru, kterou můžeš zkrátit nebo rozšířit podle ceny, složitosti a důvěry, kterou musí zákazník získat.
+
+```md
+# Landing page
+
+## Hero
+- Nadpis s konkrétním výsledkem:
+- Podnadpis: pro koho, jak a proč teď:
+- CTA:
+- Krátký důkaz:
+
+## Problém
+- Jak problém vypadá v praxi:
+- Co stojí čas, peníze nebo nervy:
+- Proč běžné řešení nestačí:
+
+## Řešení
+- Co přesně nabízíme:
+- Jaké jsou tři hlavní přínosy:
+- Co zákazník nemusí řešit:
+
+## Jak to funguje
+1. Krok:
+2. Krok:
+3. Krok:
+
+## Důvěra
+- Reference, ukázka, metrika nebo konkrétní zkušenost:
+- Bezpečnost a privacy-first provoz:
+- Podpora a další kroky:
+
+## Cena nebo další krok
+- Tarif, orientační cena nebo vysvětlení procesu:
+- Co je zahrnuto:
+- Co není zahrnuto:
+
+## FAQ
+- Námitka 1:
+- Námitka 2:
+- Námitka 3:
+```
+
+Praktický příklad slabé části a opravy:
+
+| Slabé copy | Lepší copy |
+| --- | --- |
+| „Moderní řešení pro efektivní firmy“ | „Správa zakázek, termínů a faktur pro servisní týmy do 20 lidí“ |
+| „Kontaktujte nás“ | „Domluvit 20min ukázku“ |
+| „Dbáme na bezpečnost“ | „Data ukládáme v EU, přístupy omezujeme podle rolí a zálohy obnovujeme testem každý měsíc“ |
+| „Automatizujte procesy“ | „Z nového e-mailu se vytvoří zakázka, termín a úkol pro technika“ |
+
+Landing page má snižovat nejistotu. Pokud člověk po přečtení pořád neví, co se stane po kliknutí, stránka neprodává — jen decentně mává rukama.
+
+### 8.3 Šablona launch checklistu
+
+Launch není jeden velký výstřel z konfety kanónu. Je to série malých kontrol, které brání trapným chybám. Konfety jsou volitelné. Funkční platební webhook ne.
+
+```md
+# Launch checklist
+
+## Produkt
+- [ ] Funkce řeší konkrétní problém popsaný v jedné větě.
+- [ ] Existuje jednoduchý demo scénář.
+- [ ] Onboarding vysvětluje první hodnotnou akci.
+- [ ] Chybové stavy mají lidské texty.
+- [ ] Podpora ví, co se spouští a pro koho.
+
+## Web a obsah
+- [ ] Landing page má jasný nadpis, CTA a důkaz důvěry.
+- [ ] URL, title, meta description a interní odkazy dávají smysl.
+- [ ] Dokumentace nebo nápověda pokrývá první otázky.
+- [ ] RSS nebo vlastní kanál obsahuje oznámení bez závislosti na sociálních sítích.
+
+## Měření
+- [ ] Měříme návštěvu stránky, klik na CTA a dokončení hlavní akce.
+- [ ] Eventy neobsahují osobní údaje ani tokeny.
+- [ ] Dashboard má vlastníka a datum vyhodnocení.
+
+## Provoz
+- [ ] Nasazení má rollback plán.
+- [ ] Monitoring hlídá klíčový scénář.
+- [ ] Záloha a migrace databáze jsou ověřené.
+- [ ] Tajemství nejsou v repozitáři ani v logu.
+
+## Komunikace
+- [ ] Interní tým zná positioning a omezení funkce.
+- [ ] Zákazníci dostanou jasné vysvětlení přínosu.
+- [ ] Existuje místo pro zpětnou vazbu.
+```
+
+Pro malý SaaS stačí launch vyhodnotit po 7, 14 a 30 dnech. Nehledej hned „definitivní pravdu“. Hledej signály: kdo kliká, kdo zkouší, kdo se ptá, kde se lidé zaseknou a co bys měl upravit jako první.
+
+### 8.4 Šablona privacy-first auditu nástroje
+
+Kdykoli chce tým přidat nový nástroj, projdi krátký audit. Týká se analytiky, CRM, helpdesku, mailingových služeb, AI integrací i malých widgetů, které vypadají nevinně jako koťátko — a pak posílají data do osmi destinací.
+
+```md
+# Audit nástroje
+
+## Identita nástroje
+- Název:
+- Vlastník v týmu:
+- Účel:
+- Alternativy:
+
+## Data
+- Jaká osobní data zpracuje:
+- Jaká technická data zpracuje:
+- Potřebujeme všechna tato data?
+- Umí pseudonymizaci nebo anonymizaci?
+
+## Provoz a smlouvy
+- Kde jsou data uložená:
+- Je dostupný EU region:
+- Kdo jsou subzpracovatelé:
+- Existuje DPA nebo zpracovatelská smlouva:
+- Jak se data exportují a mažou:
+
+## Rizika
+- Co se stane při výpadku:
+- Co se stane při zdražení:
+- Jak nástroj opustíme:
+- Jaká data se dostanou do podpory nebo logů:
+
+## Rozhodnutí
+- Schválit / zamítnout / pilot:
+- Podmínky použití:
+- Datum kontroly:
+```
+
+Pravidlo pro rozhodnutí: pokud nástroj sbírá osobní data, nemá jasný účel a nejde vypnout profilování nebo nadbytečné logování, nejdřív hledej jednodušší variantu. Někdy je nejlepší integrace ta, kterou nepřidáš.
+
+### 8.5 Šablona provozního runbooku
+
+Runbook je návod pro situace, kdy se něco rozbije a mozek přepne do režimu „kde je kafe a proč svítí dashboard červeně“. Nemusí být dlouhý. Musí být použitelný ve stresu.
+
+```md
+# Runbook
+
+## Služba
+- Název:
+- Produkční URL:
+- Vlastník:
+- Repozitář:
+- Hosting:
+
+## Klíčové scénáře
+- Registrace:
+- Přihlášení:
+- Platba:
+- Odeslání e-mailu:
+- Export dat:
+
+## Nasazení
+- Jak se nasazuje:
+- Jak poznáme úspěšné nasazení:
+- Jak udělat rollback:
+
+## Monitoring
+- Kde jsou alerty:
+- Kdo je dostává:
+- Co kontrolovat jako první:
+
+## Logy
+- Kde jsou aplikační logy:
+- Kde jsou systémové logy:
+- Jak se redigují citlivé údaje:
+
+## Zálohy
+- Co se zálohuje:
+- Jak často:
+- Kde je poslední test obnovy:
+- Jak spustit obnovu:
+
+## Incident
+- První krok:
+- Koho informovat:
+- Kde zapisovat průběh:
+- Kdy udělat postmortem:
+```
+
+Největší hodnota runbooku není dokument samotný. Je to rozhovor, který vznikne při jeho psaní: „Aha, my vlastně nevíme, kdo má přístup k zálohám.“ Gratuluju, právě jsi našel problém v klidu místo ve tři ráno.
+
+### 8.6 Šablona měřicího plánu
+
+Měřicí plán drž odděleně od implementace eventů. Nejprve napiš, proč něco měříš, a až potom řeš technické názvy událostí.
+
+```md
+# Měřicí plán
+
+| Otázka | Metrika | Zdroj | Segment | Frekvence | Rozhodnutí |
+| --- | --- | --- | --- | --- | --- |
+| | | | | | |
+
+## Pravidla
+- Neměříme osobní údaje, pokud nejsou nutné pro službu nebo podporu.
+- Do URL neposíláme e-maily, tokeny ani interní ID.
+- Event má vlastníka a účel.
+- Data mažeme nebo agregujeme podle účelu.
+- Každý kvartál smažeme metriky, které nikdo nepoužívá.
+```
+
+Příklad vyplnění:
+
+| Otázka | Metrika | Zdroj | Segment | Frekvence | Rozhodnutí |
+| --- | --- | --- | --- | --- | --- |
+| Zvládne nový účet první hodnotnou akci? | Vytvořená první zakázka do 48 hodin | Interní agregace | Nové účty | Týdně | Změnit onboarding nebo připravit šablonu |
+| Přivádí obsah správné poptávky? | Poptávky z článků podle tématu | Webová analytika + formulář | B2B návštěvníci | Měsíčně | Posílit téma, přepsat CTA nebo ukončit sérii |
+| Bolí zákazníky konkrétní část produktu? | Tickety se stejným štítkem | Helpdesk | Platící účty | Měsíčně | Upravit UX, dokumentaci nebo prioritu roadmapy |
+
+### 8.7 Osobní pracovní rytmus zakladatele
+
+Produktivita není o tom, že máš víc aplikací než úkolů. Pro malý SaaS tým často stačí jednoduchý týdenní rytmus:
+
+- Pondělí: rozhodnutí týdne, největší riziko, tři priority.
+- Úterý až čtvrtek: hluboká práce na produktu, prodeji nebo obsahu.
+- Pátek: vyhodnocení metrik, zákaznická zpětná vazba, provozní dluh.
+- Jednou měsíčně: finance, retence, bezpečnost, zálohy a privacy audit.
+
+Každý týden si napiš jednu větu:
+
+> Tento týden bude úspěch, pokud dokončíme ___ pro ___, protože ___.
+
+Tahle věta je nepříjemně jednoduchá. Proto funguje. Když ji neumíš doplnit, nejspíš nemáš prioritu, ale mlhu s kalendářem.
+
+### 8.8 Checklist šablon
+
+- [ ] Pro novou stránku existuje brief s publikem, nabídkou, CTA a daty.
+- [ ] Landing page vysvětluje problém, řešení, důkaz, cenu nebo další krok.
+- [ ] Launch checklist pokrývá produkt, web, měření, provoz a komunikaci.
+- [ ] Každý nový nástroj projde privacy-first auditem.
+- [ ] Runbook obsahuje deployment, rollback, monitoring, logy, zálohy a incident postup.
+- [ ] Měřicí plán začíná otázkami a rozhodnutími, ne náhodnými eventy.
+- [ ] Šablony mají vlastníka a datum poslední kontroly.
+- [ ] Tým pravidelně maže šablony, které nikomu nepomáhají.
+
+### 8.9 Mini úkol na 60 minut
+
+Vyber jednu šablonu z této kapitoly a použij ji na skutečný produkt, ne na hypotetického jednorožce z pitch decku. Nejlepší start je `Runbook` nebo `Audit nástroje`, protože rychle ukážou rizika. Výsledek dej do repozitáře vedle projektu a přidej datum další kontroly. Pokud šablona odhalí tři nepříjemné otázky, funguje správně.
+
+
 ## Zdroje
 
 - Evropská komise: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -919,3 +1225,4 @@ Otevři svůj současný dashboard a smaž mentálně všechno, podle čeho bys 
 - 2026-09-07: Doplněna pátá kapitola o marketingu bez spamu, vlastních kanálech, RSS, landing page filtru a launch rytmu malé SaaS funkce.
 - 2026-09-07: Doplněna šestá kapitola o technickém stacku, evropském provozu, bezpečnosti, zálohách, monitoringu a runbooku.
 - 2026-09-07: Doplněna sedmá kapitola o privacy-first měření produktu, webu, technické stability a rozhodovacích dashboardech.
+- 2026-09-07: Doplněna osmá kapitola s praktickými šablonami pro brief, landing page, launch, privacy audit, runbook a měřicí plán.
