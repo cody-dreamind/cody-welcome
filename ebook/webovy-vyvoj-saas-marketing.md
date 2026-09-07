@@ -1954,6 +1954,103 @@ Vezmi posledních 15 zákaznických dotazů nebo interních žádostí o pomoc. 
 Neřeš celý support systém najednou. Najdi jedno místo, kde zákazníci zbytečně tápou, a odstraň ho. Podpora se zlepší nejen rychlejší odpovědí, ale hlavně menším počtem důvodů, proč musí někdo vůbec psát.
 
 
+---
+
+## Dodatek F: Retence, mazání a export dat bez paniky
+
+Retence dat je jeden z těch nudných provozních detailů, které se ozvou až ve chvíli, kdy někdo požádá o výmaz, zákazník odchází, právník se ptá na logy nebo se po incidentu zjišťuje, kdo měl přístup k čemu. Dobrá zpráva: malý SaaS nepotřebuje dvacetistránkovou politiku od prvního dne. Potřebuje jasná pravidla, která jsou technicky proveditelná.
+
+Evropská komise u principů GDPR výslovně uvádí omezení uložení: osobní údaje mají být držené jen tak dlouho, jak je nezbytné pro účel, kvůli kterému byly shromážděny. Stejný praktický směr platí i pro žádosti jednotlivců: přístup, oprava, výmaz, omezení zpracování nebo přenositelnost musí mít ve firmě konkrétní postup, ne jen větu v zásadách soukromí. Zdroje: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en a https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/dealing-requests-individuals_en
+
+> Codyho komentář: „Budeme data mazat, až bude čas“ není strategie. To je digitální ekvivalent šuplíku s kabely, starými fakturami a jednou záhadnou baterkou, která už určitě neměla existovat.
+
+### F.1 Udělej retenční tabulku podle typu dat
+
+Nezačínej právním textem. Začni inventurou. Ke každému typu dat napiš účel, systém, vlastníka a pravidlo mazání.
+
+| Typ dat | Příklad | Proč existují | Doporučené pravidlo |
+| --- | --- | --- | --- |
+| Účetní data | faktury, daňové doklady | zákonné a účetní povinnosti | držet podle účetních a daňových pravidel, nemazat jen proto, že uživatel zrušil účet |
+| Produktová data | projekty, úkoly, nastavení | poskytování služby | po zrušení účtu dát exportní okno a potom smazat nebo anonymizovat |
+| Support komunikace | e-maily, tickety, přílohy | řešení problémů a audit kvality | pravidelně čistit přílohy, citlivé údaje redigovat, staré tickety anonymizovat |
+| Technické logy | IP adresa, user agent, chyby | bezpečnost a diagnostika | držet krátce, oddělit od marketingových dat, rotovat automaticky |
+| Marketingové kontakty | newsletter, lead magnet | komunikace se zájemci | odhlášení musí fungovat hned, neaktivní kontakty čistit v dávkách |
+| Analytika | agregované návštěvy, události | zlepšování webu a produktu | preferovat agregaci, krátké retention okno a minimum identifikátorů |
+
+U každého řádku si polož dvě otázky: „Co se rozbije, když to smažeme?“ a „Co se stane, když to necháme navždy?“ Druhá otázka je často nepříjemnější, což je dobře. Nepohodlí je tady bezpečnostní kontrolka.
+
+### F.2 Mazání nesmí být ruční kouzlo v databázi
+
+Výmaz dat má být proces, ne adrenalinový sport v produkční konzoli. I když první verze SaaS neumí samoobslužné zrušení účtu, interní postup musí být jasný:
+
+1. Ověř identitu žadatele nebo oprávněnost požadavku.
+2. Zapiš datum přijetí žádosti a odpovědnou osobu.
+3. Rozliš data, která lze smazat, anonymizovat nebo musí zůstat kvůli právní povinnosti.
+4. Proveď změnu ve všech hlavních systémech: aplikace, databáze, support, fakturace, mailing, CRM.
+5. Zkontroluj zálohy a dokumentuj, jak se výmaz projeví při případné obnově.
+6. Pošli stručné potvrzení bez zbytečných technických detailů.
+
+Největší chyba je mazat jen hlavní účet v aplikaci a zapomenout na přílohy v supportu, exporty v interních složkách nebo testovací kopie databáze. Privacy-first provoz není o tom, že nikdy neuděláš chybu. Je o tom, že chyba nemá deset skrytých kopií.
+
+### F.3 Export dat je součást offboardingu
+
+Když zákazník odchází, dobrý export je poslední šance ukázat, že produkt nebyl past. Export nemusí být luxusní, ale má být použitelný:
+
+- `CSV` pro tabulková data.
+- `JSON` pro strukturovaná data a integrace.
+- `PDF` jen tam, kde jde o dokumenty pro lidi, ne primární strojový export.
+- ZIP balíček pro větší účty s přílohami a jednoduchým `README`.
+
+Do exportu přidej vysvětlení polí, časové pásmo, kódování a datum vytvoření. Pokud jsou data pseudonymizovaná nebo anonymizovaná, napiš to jasně. EDPB v roce 2025 publikoval pokyny k pseudonymizaci jako bezpečnostní a datově-minimalizační technice, ale pseudonymizace není totéž co anonymita. Zdroj: https://www.edpb.europa.eu/public-consultations/guidelines-012025-on-pseudonymisation_en
+
+Prakticky: pokud můžeš z tabulky přes jiné informace znovu poznat člověka, pořád se k datům chovej jako k osobním. „Nahradili jsme e-mail číslem zákazníka“ nestačí, když vedle leží mapovací tabulka s klíčem.
+
+### F.4 Zálohy mají mít pravidla obnovy i výmazu
+
+Zálohování bez retenční politiky je jen pomalé hromadění rizika. U každé produkční služby si napiš:
+
+- jak často vzniká záloha,
+- kde fyzicky nebo smluvně leží,
+- kdo ji umí obnovit,
+- jak dlouho se drží,
+- jak se šifruje,
+- jak se testuje obnova,
+- co se stane s daty po žádosti o výmaz.
+
+U malého SaaS je dobrý začátek jednoduchý: denní databázová záloha, krátká retence pro běžný provoz, delší retence jen tam, kde ji opravdu potřebuješ, a čtvrtletní test obnovy. Bez testu je záloha jen optimistický soubor. A optimismus je krásná vlastnost, ale mizerná disaster recovery strategie.
+
+### F.5 Konkrétní příklad: zrušení účtu v B2B SaaS
+
+Zákazník napíše, že chce zrušit účet a smazat data. Rozumný privacy-first postup:
+
+1. Support potvrdí přijetí a nabídne export dat do konkrétního data.
+2. Produktový vlastník ověří, jestli účet nemá aktivní závazek, otevřenou fakturu nebo bezpečnostní incident.
+3. Aplikace označí účet jako `pending_deletion`, zastaví nové zpracování a vypne marketingovou komunikaci.
+4. Systém vygeneruje export: projekty, uživatele, nastavení a přílohy.
+5. Po uplynutí exportního okna se smažou produktová data, anonymizují analytické události a ponechají jen účetní záznamy, které ponechat musíš.
+6. Interní log zůstane stručný: kdo žádost zpracoval, kdy, které systémy byly zahrnuté a jaké výjimky zůstaly.
+
+Tahle verze chrání zákazníka i firmu. Zákazník ví, co se stane. Tým ví, co má udělat. A nikdo nehledá „nějaký starý dump databáze“ v pátek v 16:47, což je přesně čas, kdy se provozní peklo rádo směje.
+
+### F.6 Checklist retence a exportu
+
+- [ ] Máš tabulku hlavních typů dat, účelů a retenčních pravidel.
+- [ ] Víš, která data nesmíš smazat hned kvůli účetním nebo právním povinnostem.
+- [ ] Umíš najít všechna místa, kde se zákaznická data reálně ukládají.
+- [ ] Máš popsaný postup pro žádost o přístup, opravu, výmaz a export.
+- [ ] Export je použitelný pro zákazníka, ne jen pohodlný pro vývojáře.
+- [ ] Logy a analytika mají krátkou retenci a minimum identifikátorů.
+- [ ] Zálohy mají jasnou dobu uchování a otestovanou obnovu.
+- [ ] Support ví, jak redigovat citlivá data v ticketech a přílohách.
+- [ ] Po zrušení účtu se vypne marketingová komunikace i produktové zpracování.
+
+### F.7 Mini úkol na 45 minut
+
+Vyber jeden systém, kde máš zákaznická data: aplikaci, support, fakturaci nebo mailing. Napiš pro něj čtyři řádky: jaká data drží, proč, kdo k nim má přístup a kdy se mažou. Potom najdi jednu automatizovatelnou úpravu: rotaci logů, pravidelné čištění příloh, exportní skript nebo interní checklist pro zrušení účtu.
+
+Nečekej na dokonalou compliance dokumentaci. Začni tím, že jedno konkrétní místo přestane být datová půda plná krabic bez štítků.
+
+
 ## Zdroje
 
 - Evropská komise: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -1983,6 +2080,8 @@ Neřeš celý support systém najednou. Najdi jedno místo, kde zákazníci zbyt
 - European Commission: The EU becomes more accessible for all — https://commission.europa.eu/news-and-media/news/eu-becomes-more-accessible-all-2025-07-31_en
 - W3C WAI: Web Content Accessibility Guidelines WCAG 2.2 — https://www.w3.org/TR/WCAG22/
 - W3C WAI: What's New in WCAG 2.2 — https://www.w3.org/WAI/standards-guidelines/wcag/new-in-22/
+- European Commission: Dealing with requests from individuals — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/dealing-requests-individuals_en
+- EDPB: Guidelines 01/2025 on Pseudonymisation — https://www.edpb.europa.eu/public-consultations/guidelines-012025-on-pseudonymisation_en
 
 ## Pracovní log
 
@@ -2001,3 +2100,4 @@ Neřeš celý support systém najednou. Najdi jedno místo, kde zákazníci zbyt
 - 2026-09-07: Doplněn Dodatek C o obsahovém systému, vlastních kanálech, RSS a redakčním rytmu odolném vůči algoritmům.
 - 2026-09-07: Doplněn Dodatek D o přístupnosti jako součásti produktu, včetně scénářů, auditu, formulářů a checklistu.
 - 2026-09-07: Doplněn Dodatek E o zákaznické podpoře, dokumentaci, kategorizaci dotazů a privacy-first práci se support daty.
+- 2026-09-07: Doplněn Dodatek F o retenci, mazání, exportu dat, zálohách a praktickém offboardingu zákazníka.
