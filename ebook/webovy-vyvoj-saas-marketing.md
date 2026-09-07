@@ -1635,6 +1635,98 @@ Vyber jeden nástroj, který ve firmě používáte často a nikdo ho poslední 
 Nezačínej největším systémem ve firmě. Začni něčím, co je dost důležité, aby na tom záleželo, ale dost malé, aby šel úklid dokončit. Privacy-first provoz se nedělá jedním velkým heroickým projektem. Dělá se stovkou malých rozhodnutí, která přestanou pouštět data ven jen proto, že „to tak bylo vždycky“.
 
 
+---
+
+## Dodatek C: Obsahový systém, který přežije algoritmy
+
+Obsahový marketing pro malý web nebo SaaS není závod v počtu příspěvků. Je to systém, který pravidelně odpovídá na skutečné otázky zákazníků, posiluje důvěru a přivádí lidi na kanály, které máš pod kontrolou. Pokud každý článek vzniká heroicky od nuly, systém se rozsype ve chvíli, kdy přijde větší zakázka, nemoc nebo účetnictví. Tedy zhruba každé druhé úterý.
+
+> Codyho komentář: Algoritmus je fajn sluha a mizerný šéf. Když celý marketing stojí na tom, že se jedna platforma ráno dobře vyspí, nemáš strategii. Máš počasí.
+
+### C.1 Začni knihovnou problémů
+
+Nejlepší obsah často nevzniká z brainstormingu, ale z podpory, prodeje a implementací. Zákazníci už ti říkají, co je zajímá. Jen to bývá schované v e-mailech, hovorech, komentářích, poznámkách z onboardingů a otázkách typu „ještě poslední drobnost“, která má tři odstavce.
+
+Založ jednoduchou knihovnu problémů:
+
+| Problém zákazníka | Kdo ho má | Kdy se objevuje | Jaký obsah pomůže | Další krok |
+| --- | --- | --- | --- | --- |
+| Neví, jestli potřebuje nový web nebo jen opravit nabídku | Majitel malé firmy | Před poptávkou | Diagnostický článek + checklist | Audit webu |
+| Bojí se předat data do další SaaS služby | Provozní manažer | Při výběru nástroje | Privacy-first nákupní checklist | Konzultace stacku |
+| Má trial, ale lidé neaktivují účet | Zakladatel SaaS | Po spuštění MVP | Návod na první hodnotu v onboardingu | Produktový workshop |
+
+Každý řádek musí mít praktický další krok. Pokud článek jen „buduje povědomí“ a neumíš říct, co má čtenář udělat potom, pravděpodobně píšeš digitální vatu. Vata je dobrá do balíku, ne do strategie.
+
+### C.2 Jeden obsah, tři formáty
+
+Malý tým nemá kapacitu vymýšlet každý týden úplně nové téma pro blog, newsletter, sociální sítě, obchodní e-mail a dokumentaci. Lepší je vzít jeden silný problém a zpracovat ho do tří vrstev:
+
+- **Hluboký zdroj:** článek, návod, případová studie nebo veřejný checklist na vlastním webu.
+- **Krátké distribuce:** e-mail, LinkedIn příspěvek, krátký tip do komunity nebo interní poznámka pro obchod.
+- **Prodejní pomůcka:** odpověď do FAQ, odstavec do nabídky, skript pro call nebo šablona pro podporu.
+
+Příklad: z tématu „Jak vybrat privacy-first analytiku“ může vzniknout dlouhý článek, krátký newsletter se třemi otázkami pro audit a interní tabulka pro hodnocení nástrojů. Téma je stejné, forma se liší podle situace. Tím šetříš čas a zároveň posiluješ konzistentní názor firmy.
+
+### C.3 Vlastní kanály mají přednost
+
+Vlastní web, newsletter, RSS feed, dokumentace a přímé odkazy jsou nudné v tom nejlepším slova smyslu. Fungují i tehdy, když sociální síť změní dosah, reklamní účet spadne do kontroly nebo si platforma řekne, že letos bude organický dosah spíš folklór než kanál.
+
+Praktická pravidla:
+
+- Každý důležitý názor nejdřív publikuj na vlastním webu.
+- Sociální sítě používej jako rozcestník, ne jako archiv znalostí.
+- Newsletter piš tak, aby šel číst bez sledovacích pixelů a agresivního profilování.
+- Přidej RSS feed pro lidi, kteří chtějí přímý odběr bez algoritmu.
+- U starších článků udržuj datum aktualizace a jasně označ zastaralé části.
+
+Privacy-first hodnota je i v distribuci. Když čtenář musí kvůli jednomu checklistu projít reklamním remarketingovým bludištěm, říkáš tím o sobě víc než samotným textem. A není to lichotka.
+
+### C.4 Redakční rytmus pro malý tým
+
+Nemusíš publikovat denně. Potřebuješ rytmus, který vydrží. Pro malý SaaS nebo konzultační tým často stačí jeden kvalitní kus obsahu za dva týdny a průběžné drobné aktualizace starších materiálů.
+
+Jednoduchý čtrnáctidenní rytmus:
+
+1. Den 1: vyber jeden problém z knihovny problémů.
+2. Den 2: napiš osnovu a konkrétní cílového čtenáře.
+3. Den 3–5: napiš první verzi bez ladění každé věty.
+4. Den 6: doplň příklad, checklist nebo šablonu.
+5. Den 7: ověř fakta, odkazy a případné právní nebo technické tvrzení.
+6. Den 8: publikuj na webu, pošli newsletter a připrav krátkou distribuci.
+7. Den 14: zkontroluj reakce, dotazy a doplň článek podle reality.
+
+Tento rytmus je schválně obyčejný. Obyčejné procesy se totiž opakují. Geniální procesy často skončí po dvou týdnech v nástroji, který někdo pojmenoval „Content Operating System Q4 Final FINAL“.
+
+### C.5 Příklad: měsíc obsahu pro privacy-first SaaS
+
+Představ si SaaS, který pomáhá menším firmám spravovat zákaznické požadavky a interní úkoly. Chce být evropský, srozumitelný a bez zbytečného trackingu.
+
+Měsíční plán může vypadat takhle:
+
+- **Týden 1:** článek „Jak poznat, že už tabulka nestačí na zákaznické požadavky“ + checklist symptomů.
+- **Týden 2:** případová studie „Jak jsme zkrátili reakční dobu podpory bez sledování zaměstnanců“.
+- **Týden 3:** technický návod „Co kontrolovat u SaaS nástroje před předáním zákaznických dat“.
+- **Týden 4:** srovnávací článek „E-mail, helpdesk nebo vlastní workflow: kdy zvolit co“.
+
+Každý kus obsahu má jasnou práci. První otevírá problém, druhý dokládá výsledek, třetí buduje důvěru a čtvrtý pomáhá při rozhodování. Dohromady tvoří cestu, ne náhodnou hromádku textů.
+
+### C.6 Checklist obsahového systému
+
+- [ ] Máme knihovnu zákaznických problémů, ne jen seznam témat.
+- [ ] Každý článek má cílového čtenáře, situaci a praktický další krok.
+- [ ] Důležité texty publikujeme nejdřív na vlastním webu.
+- [ ] Newsletter a RSS fungují jako přímé kanály bez závislosti na algoritmu.
+- [ ] U každého aktuálního tvrzení ověřujeme zdroj a přidáváme odkaz.
+- [ ] Starší obsah má plán aktualizace, sloučení nebo smazání.
+- [ ] Sociální sítě používáme k distribuci, ne jako jediné místo pravdy.
+- [ ] Každý měsíc vyhodnocujeme, které texty přinesly poptávky, registrace nebo užitečné dotazy.
+
+### C.7 Mini úkol na 45 minut
+
+Projdi posledních deset zákaznických e-mailů, support dotazů nebo obchodních poznámek. Vytáhni z nich tři opakující se otázky a u každé napiš název článku, konkrétní checklist a další krok pro čtenáře. Pak vyber jednu otázku a napiš osnovu.
+
+Nezačínej designem newsletteru. Nevybírej novou platformu. Neřeš font tlačítka „odebírat“. Nejprve najdi problém, který zákazník skutečně řeší. Obsah bez problému je jen hezky naformátované ťukání do klávesnice.
+
 
 ## Zdroje
 
@@ -1676,3 +1768,4 @@ Nezačínej největším systémem ve firmě. Začni něčím, co je dost důle�
 - 2026-09-07: Doplněna desátá kapitola o SaaS cenotvorbě, balíčcích, férových limitech, trialu a praktickém checklistu.
 - 2026-09-07: Doplněn praktický 30denní plán pro menší web nebo SaaS jako závěrečný akční dodatek e-booku.
 - 2026-09-07: Doplněn Dodatek B s praktickým postupem pro privacy-first výběr SaaS nástrojů a omezení vendor lock-inu.
+- 2026-09-07: Doplněn Dodatek C o obsahovém systému, vlastních kanálech, RSS a redakčním rytmu odolném vůči algoritmům.
