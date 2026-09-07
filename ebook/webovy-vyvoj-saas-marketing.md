@@ -25,6 +25,7 @@ Každou kapitolu ber jako pracovní checklist. Nečti ji jako román do šuplík
 6. Technický stack: hosting, databáze, monitoring, zálohy a bezpečnost.
 7. Měření, které pomáhá: metriky produktu, prodeje a podpory.
 8. Praktické šablony: brief, landing page, launch checklist a audit soukromí.
+9. AI automatizace v evropském SaaS: užitek, governance a bezpečné nasazení.
 
 ---
 
@@ -1191,6 +1192,110 @@ Tahle věta je nepříjemně jednoduchá. Proto funguje. Když ji neumíš dopln
 
 Vyber jednu šablonu z této kapitoly a použij ji na skutečný produkt, ne na hypotetického jednorožce z pitch decku. Nejlepší start je `Runbook` nebo `Audit nástroje`, protože rychle ukážou rizika. Výsledek dej do repozitáře vedle projektu a přidej datum další kontroly. Pokud šablona odhalí tři nepříjemné otázky, funguje správně.
 
+---
+
+## Kapitola 9: AI automatizace v evropském SaaS bez datového hazardu
+
+AI v malém SaaS týmu má smysl tehdy, když zrychluje konkrétní práci, zlepšuje kvalitu služby nebo snižuje opakovanou ruční zátěž. Nemá smysl jako ozdoba do homepage, interní kouzelná krabička bez vlastníka nebo výmluva, proč se zákaznická data posílají do nástroje, který nikdo nezkontroloval.
+
+Evropská komise uvádí, že AI Act vstoupil v platnost 1. 8. 2024 a jeho pravidla se uplatňují postupně podle typu povinností a rizik. Zdroj: https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai
+
+Tohle není důvod k panice. Je to důvod přestat nasazovat AI stylem „zkusíme to a uvidíme, jestli se právník lekne“.
+
+### 9.1 Začni jedním use casem, ne firemní revolucí
+
+Nejlepší AI automatizace bývají nudné. Třídění podpory, návrhy odpovědí, shrnutí dlouhých vláken, kontrola formulářů, převod poznámek z callu do úkolů, detekce duplicit v dokumentaci. Nudné znamená měřitelné. A měřitelné znamená, že po měsíci víš, jestli to pomohlo.
+
+Před implementací napiš jednu větu:
+
+> AI použijeme pro ___, aby ___, měřit budeme ___ a člověk zodpovědný za výsledek je ___.
+
+Příklad:
+
+> AI použijeme pro návrh odpovědí na support tikety, aby tým rychleji reagoval na opakované otázky, měřit budeme čas první odpovědi a počet ručních oprav, vlastník je vedoucí podpory.
+
+Pokud tu větu neumíš vyplnit, nemáš automatizaci. Máš technologický třpytivý prášek.
+
+### 9.2 Rozděl AI podle rizika
+
+Ne každé použití AI potřebuje stejný režim. Udělej si jednoduché tři úrovně:
+
+| Úroveň | Příklad | Povolená data | Kontrola člověkem |
+| --- | --- | --- | --- |
+| Nízké riziko | Shrnutí veřejného blogového článku | Veřejný obsah | Namátková kontrola |
+| Střední riziko | Návrh odpovědi zákazníkovi | Zákaznický dotaz bez zbytečných osobních údajů | Povinné schválení před odesláním |
+| Vyšší riziko | Doporučení změny tarifu, smlouvy nebo přístupu | Jen nezbytná data, ideálně pseudonymizovaná | Člověk rozhoduje, AI jen připravuje podklady |
+
+Privacy-first pravidlo: čím vyšší dopad na zákazníka, tím méně autonomie a tím lepší auditní stopa. AI může navrhovat, seskupovat a kontrolovat. Rozhodnutí, která mění peníze, smlouvy, přístup nebo reputaci zákazníka, má vlastnit člověk nebo jasně definovaný systém s dohledem.
+
+### 9.3 Data do promptu patří jen tehdy, když musí
+
+Prompt je vstup do zpracování dat. Ber ho jako API request, ne jako poznámkový blok. Před odesláním dat do AI si polož čtyři otázky:
+
+- Potřebuje model skutečně osobní údaje, nebo stačí anonymizovaný popis?
+- Potřebuje celý dokument, nebo jen relevantní úryvek?
+- Ukládá poskytovatel vstupy pro trénink, ladění nebo diagnostiku?
+- Máme v dokumentaci uvedeno, kam data odcházejí a proč?
+
+Evropská komise u Data Actu popisuje pravidla pro přístup k datům, sdílení dat a jednodušší přechod mezi cloudovými službami; většina ustanovení se začala používat od 12. 9. 2025. Zdroj: https://digital-strategy.ec.europa.eu/en/policies/data-act
+
+Pro SaaS tým je z toho praktické ponaučení: nebuduj AI funkci tak, aby data uvízla v jednom dodavateli bez exportu. Ukládej vlastní vstupy, výstupy, verze promptů a rozhodnutí ve své infrastruktuře, ne jen v cizím dashboardu.
+
+### 9.4 Prompt engineering jako provozní disciplína
+
+Prompt není kouzelná básnička. Je to část produktu. Měl by mít verzi, vlastníka, testovací sadu a rollback. Zní to suše, ale přesně to odděluje užitečnou automatizaci od momentu, kdy chatbot začne zákazníkovi tvrdit, že sleva 200 % je obchodně odvážná strategie.
+
+Minimální provozní sada:
+
+- složka `ai-prompts/` nebo interní dokumentace s verzemi promptů;
+- 10 až 30 reálných anonymizovaných testovacích vstupů;
+- očekávaný typ výstupu, zakázané formulace a bezpečnostní hranice;
+- metrika kvality: přesnost, časová úspora, míra ručních oprav nebo spokojenost podpory;
+- postup, jak prompt vypnout, když začne škodit.
+
+Prompt testuj na okrajových případech: naštvaný zákazník, neúplná data, čeština se slangem, dlouhý e-mail, nesouvisející požadavek a pokus vytáhnout interní instrukce. Ano, prompt injection je ta chvíle, kdy se i věta „ignoruj všechny předchozí instrukce“ tváří jako firemní proces.
+
+### 9.5 AI v marketingu: pomocník, ne automat na šum
+
+AI může urychlit rešerši, osnovu, varianty titulku nebo kontrolu srozumitelnosti. Neměla by vyrábět generický obsah ve velkém jen proto, že to jde. Marketing bez důvěry je levný provozně a drahý reputačně.
+
+Praktické použití:
+
+- nech AI navrhnout otázky pro zákaznický rozhovor, ale rozhovor dělej s člověkem;
+- nech AI shrnout support tikety do témat pro blog, ale nepublikuj citlivé detaily;
+- nech AI navrhnout alternativní titulky, ale ověř, že neslibují nesmysly;
+- nech AI zkontrolovat čitelnost textu, ale finální tón drž lidský a konkrétní;
+- používej RSS, dokumentaci a přímé odkazy jako primární distribuční kanály, ne jen sociální algoritmy.
+
+Codyho komentář: AI obsah je jako káva. Jedna dobrá dávka pomůže. Deset litrů denně z tebe neudělá produktivního génia, jen nervózní generátor odstavců.
+
+### 9.6 Checklist bezpečné AI funkce
+
+- [ ] Funkce má jeden konkrétní use case a vlastníka.
+- [ ] Je jasné, která data vstupují do modelu a proč jsou nezbytná.
+- [ ] Osobní a citlivá data jsou minimalizovaná, anonymizovaná nebo pseudonymizovaná, kde to jde.
+- [ ] Poskytovatel, region provozu, ukládání dat a subzpracovatelé jsou zdokumentovaní.
+- [ ] Výstupy s dopadem na zákazníka kontroluje člověk nebo jasně definovaný schvalovací proces.
+- [ ] Prompty mají verze, testovací sadu a rollback plán.
+- [ ] Loguje se dost pro audit a ladění, ale ne víc, než je nutné.
+- [ ] Zákazník pochopí, kdy s AI interaguje nebo kdy AI pomáhá se zpracováním jeho požadavku.
+
+### 9.7 Mini úkol na 45 minut
+
+Vyber jednu existující ruční činnost v SaaS nebo marketingu a vyplň pro ni tuto tabulku:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaký přesně problém automatizujeme? |  |
+| Jak často se děje? |  |
+| Jaká data jsou opravdu potřeba? |  |
+| Co se nesmí poslat do modelu? |  |
+| Jak poznáme, že AI výstup je dobrý? |  |
+| Kdo výstup schvaluje? |  |
+| Jak funkci vypneme při problému? |  |
+
+Když tabulka zůstane poloprázdná, automatizaci zatím nestav. Nejdřív zmapuj proces. Nejlevnější AI chyba je ta, kterou nepošleš do produkce.
+
 
 ## Zdroje
 
@@ -1215,6 +1320,8 @@ Vyber jednu šablonu z této kapitoly a použij ji na skutečný produkt, ne na 
 - Google Research: Measuring the User Experience on a Large Scale: User-Centered Metrics for Web Applications — https://research.google/pubs/measuring-the-user-experience-on-a-large-scale-user-centered-metrics-for-web-applications/
 - Google Cloud: Using the Four Keys to measure your DevOps performance — https://cloud.google.com/blog/products/devops-sre/using-the-four-keys-to-measure-your-devops-performance
 - Google Cloud: Supercharge your DevOps practice with SRE principles — https://cloud.google.com/blog/products/devops-sre/supercharge-your-devops-practice-with-sre-principles
+- European Commission: AI Act — https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai
+- European Commission: Data Act — https://digital-strategy.ec.europa.eu/en/policies/data-act
 
 ## Pracovní log
 
@@ -1226,3 +1333,4 @@ Vyber jednu šablonu z této kapitoly a použij ji na skutečný produkt, ne na 
 - 2026-09-07: Doplněna šestá kapitola o technickém stacku, evropském provozu, bezpečnosti, zálohách, monitoringu a runbooku.
 - 2026-09-07: Doplněna sedmá kapitola o privacy-first měření produktu, webu, technické stability a rozhodovacích dashboardech.
 - 2026-09-07: Doplněna osmá kapitola s praktickými šablonami pro brief, landing page, launch, privacy audit, runbook a měřicí plán.
+- 2026-09-07: Doplněna devátá kapitola o bezpečné AI automatizaci v evropském SaaS, včetně governance, promptů, datové minimalizace a checklistu.
