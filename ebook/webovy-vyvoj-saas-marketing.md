@@ -1728,6 +1728,121 @@ Projdi posledních deset zákaznických e-mailů, support dotazů nebo obchodní
 Nezačínej designem newsletteru. Nevybírej novou platformu. Neřeš font tlačítka „odebírat“. Nejprve najdi problém, který zákazník skutečně řeší. Obsah bez problému je jen hezky naformátované ťukání do klávesnice.
 
 
+---
+
+## Dodatek D: Přístupnost jako součást produktu, ne jako hasicí přístroj
+
+Přístupnost webu není kosmetická položka na konec projektu. Je to způsob, jak zajistit, že se k obsahu, nákupu, registraci, faktuře nebo supportu dostane člověk, který používá klávesnici, čtečku obrazovky, zvětšené písmo, slabší zařízení nebo prostě jen sedí ve vlaku na mizerném internetu. Jinými slovy: přístupnost není charita. Je to dobrý produktový design, který snižuje tření všem.
+
+Evropský kontext tomu dává ještě praktičtější rozměr. European Accessibility Act se v EU začal uplatňovat 28. 6. 2025 a podle Evropské komise míří mimo jiné na e-commerce, bankovní a platební služby, elektronické komunikace a vybrané digitální produkty. W3C zároveň doporučuje používat aktuální WCAG 2.2, které rozšiřuje starší verze o další testovatelná kritéria. Zdroje: https://commission.europa.eu/strategy-and-policy/policies/justice-and-fundamental-rights/disability/european-accessibility-act-eaa_en a https://www.w3.org/WAI/standards-guidelines/wcag/
+
+> Codyho komentář: Nejhorší accessibility strategie je „pak to projedeme automatickým auditem“. To je jako říct, že bezpečnost vyřešíš tím, že po deployi klikneš na antivirus a budeš doufat, že právo, UX i zdravý rozum mají zrovna dovolenou.
+
+### D.1 Začni scénáři, ne seznamem pravidel
+
+WCAG je důležitý standard, ale malý tým se v něm snadno ztratí, pokud začne číst kritéria bez kontextu. Lepší je vzít hlavní zákaznické scénáře a ověřit, zda jsou použitelné různými způsoby.
+
+Pro SaaS nebo prodejní web si napiš například:
+
+- Návštěvník pochopí nabídku a otevře ceník.
+- Zákazník vyplní poptávkový formulář nebo objednávku.
+- Uživatel se přihlásí, obnoví heslo a najde fakturu.
+- Člověk na mobilu dokončí onboarding bez horizontálního posouvání.
+- Uživatel s klávesnicí projde menu, dialogy, formuláře a nastavení účtu.
+- Čtečka obrazovky oznámí názvy polí, chyby a úspěšné odeslání.
+
+Když scénář nejde dokončit bez myši, bez dokonalého zraku nebo bez znalosti interní logiky UI, není to jen accessibility bug. Je to produktový bug.
+
+### D.2 Praktický audit na jednu hodinu
+
+Jednou za měsíc udělej krátký ruční audit. Nepotřebuješ začít drahým nástrojem. Potřebuješ disciplínu, klávesnici a ochotu zjistit, že tvůj krásný modal je ve skutečnosti digitální pastička na uživatele.
+
+Postup:
+
+1. Otevři homepage, ceník, registraci, přihlášení a jednu klíčovou aplikační obrazovku.
+2. Odlož myš a projdi vše jen klávesnicí: `Tab`, `Shift+Tab`, `Enter`, `Space`, `Esc`.
+3. Sleduj, jestli je vždy vidět fokus a jestli pořadí dává smysl.
+4. Zvětši stránku na 200 % a ověř, že obsah neutíká mimo obrazovku.
+5. Zkontroluj formuláře: popisky, chybové hlášky, povinná pole a návrat po chybě.
+6. Pusť automatický test jako pomocníka, ne jako soudce.
+7. Zapiš tři největší překážky a oprav jednu hned.
+
+Automatický audit umí najít část problémů: chybějící alternativní texty, nízký kontrast, špatnou strukturu nadpisů nebo formulář bez labelu. Neumí ale spolehlivě poznat, jestli text tlačítka dává smysl, jestli chyba pomáhá nebo jestli má stránka logický tok.
+
+### D.3 Přístupnost v designu a obsahu
+
+Nejlevnější accessibility práce se děje před implementací. Když design počítá s kontrastem, větším písmem, jasnými stavy a rozumnou hierarchií, vývojář nemusí později opravovat UI chirurgií přes CSS.
+
+Dobré návyky:
+
+- Text tlačítka popisuje akci: „Stáhnout fakturu“, ne jen „OK“.
+- Nadpisy tvoří logickou osnovu stránky, ne vizuální dekoraci.
+- Odkazy dávají smysl i mimo kontext: „Zobrazit ceník pro týmy“, ne „klikněte zde“.
+- Chybová hláška říká, co se stalo a jak to opravit.
+- Barva není jediný nosič informace; stav doplňuje text, ikona nebo vzor.
+- Animace lze omezit a neblokují obsah.
+- Formulář nechce znovu údaje, které už uživatel zadal, pokud to není nutné.
+
+U privacy-first webu má přístupnost ještě jeden bonus: čím méně zbytečných skriptů, popupů, reklamních widgetů a agresivních bannerů, tím méně věcí překáží asistivním technologiím. Minimalismus tady není estetická póza. Je to provozní výhoda.
+
+### D.4 Komponenty, které se vyplatí opravit první
+
+Neopravuj accessibility chaoticky po jednotlivých stránkách. Začni komponentami, které se opakují a umí pokazit hodně scénářů najednou.
+
+Priorita pro malý SaaS:
+
+- Navigace: smysluplný skip link, viditelný fokus, rozumné mobilní menu.
+- Formulářové prvky: `label`, popis chyby, nápověda a správné typy polí.
+- Dialogy a modaly: focus trap, zavření přes `Esc`, návrat fokusu na původní prvek.
+- Dropdowny a comboboxy: ovládání klávesnicí, jasně oznámený stav a výběr.
+- Toasty a alerty: důležité zprávy dostupné i bez vizuálního sledování obrazovky.
+- Tabulky: jasné hlavičky, popisky a možnost číst data bez horizontální gymnastiky.
+- Ceník a checkout: srozumitelné limity, žádné skryté závislosti na barvě nebo hoveru.
+
+Když opravíš komponentu, přidej do design systému krátkou poznámku: jak se používá, jaké stavy musí mít a co se nesmí rozbít. Budoucí já ti poděkuje. Možná ne nahlas, ale aspoň nebude ve tři ráno mluvit s modálním oknem.
+
+### D.5 Příklad: formulář pro demo
+
+Špatný formulář pro demo:
+
+- Pole mají placeholder místo labelu.
+- Chyby se zobrazí jen červeným rámečkem.
+- Po odeslání se stránka posune nahoru a uživatel neví proč.
+- Tlačítko říká „Odeslat“, i když jde o domluvení konzultace.
+- Povinný telefon blokuje lidi, kteří chtějí nejdřív psát e-mailem.
+
+Lepší privacy-first a accessibility-first verze:
+
+- Viditelné labely: „Pracovní e-mail“, „Firma“, „S čím chcete pomoct?“.
+- Chyba u pole: „Zadejte e-mail ve tvaru jmeno@firma.cz.“
+- Souhrn chyb nad formulářem s odkazy na konkrétní pole.
+- Tlačítko: „Domluvit demo“.
+- Telefon je volitelný a vysvětlený: „Vyplňte jen pokud chcete zavolat.“
+- Po úspěchu se zobrazí jasná zpráva a fokus se přesune na potvrzení.
+- Souhlas s podmínkami není schovaný v předzaškrtnutém checkboxu.
+
+Takový formulář je srozumitelnější, férovější a méně agresivní. A ano, pravděpodobně bude i lépe konvertovat, protože lidé obvykle rádi dokončují věci, které je neurážejí.
+
+### D.6 Checklist přístupnosti pro malý tým
+
+- [ ] Klíčové scénáře jdou dokončit jen klávesnicí.
+- [ ] Fokus je vždy viditelný a nepřekrývá ho sticky lišta nebo cookie banner.
+- [ ] Stránky mají jednu jasnou `h1` a logickou strukturu nadpisů.
+- [ ] Formuláře mají viditelné labely, nápovědu a konkrétní chybové hlášky.
+- [ ] Texty tlačítek a odkazů dávají smysl i bez okolního kontextu.
+- [ ] Kontrast textu a ovládacích prvků je ověřený, ne odhadnutý podle nálady monitoru.
+- [ ] Modaly, dropdowny a mobilní menu mají ošetřený fokus, zavření a návrat.
+- [ ] Obrázky mají smysluplný alternativní text, nebo jsou správně označené jako dekorativní.
+- [ ] Důležité informace nejsou sdělené jen barvou, hoverem nebo animací.
+- [ ] Accessibility chyby se zapisují do backlogu stejně jako bezpečnostní a produktové chyby.
+
+### D.7 Mini úkol na 45 minut
+
+Vyber jeden formulář, který přímo souvisí s obchodem: poptávka, registrace, checkout, přihlášení nebo žádost o demo. Projdi ho bez myši, zvětši stránku na 200 %, záměrně udělej chybu v každém poli a sleduj, jestli víš, co se stalo a jak pokračovat.
+
+Pak oprav jednu věc, která brání dokončení scénáře. Ne deset. Jednu. Přístupnost se zlepšuje nejrychleji, když se tým naučí pravidelně odstraňovat konkrétní překážky místo toho, aby jednou ročně vyráběl auditní PDF, které pak statečně spí v cloudu.
+
+
 ## Zdroje
 
 - Evropská komise: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -1753,6 +1868,10 @@ Nezačínej designem newsletteru. Nevybírej novou platformu. Neřeš font tlač
 - Google Cloud: Supercharge your DevOps practice with SRE principles — https://cloud.google.com/blog/products/devops-sre/supercharge-your-devops-practice-with-sre-principles
 - European Commission: AI Act — https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai
 - European Commission: Data Act — https://digital-strategy.ec.europa.eu/en/policies/data-act
+- European Commission: European Accessibility Act — https://commission.europa.eu/strategy-and-policy/policies/justice-and-fundamental-rights/disability/european-accessibility-act-eaa_en
+- European Commission: The EU becomes more accessible for all — https://commission.europa.eu/news-and-media/news/eu-becomes-more-accessible-all-2025-07-31_en
+- W3C WAI: Web Content Accessibility Guidelines WCAG 2.2 — https://www.w3.org/TR/WCAG22/
+- W3C WAI: What's New in WCAG 2.2 — https://www.w3.org/WAI/standards-guidelines/wcag/new-in-22/
 
 ## Pracovní log
 
@@ -1769,3 +1888,4 @@ Nezačínej designem newsletteru. Nevybírej novou platformu. Neřeš font tlač
 - 2026-09-07: Doplněn praktický 30denní plán pro menší web nebo SaaS jako závěrečný akční dodatek e-booku.
 - 2026-09-07: Doplněn Dodatek B s praktickým postupem pro privacy-first výběr SaaS nástrojů a omezení vendor lock-inu.
 - 2026-09-07: Doplněn Dodatek C o obsahovém systému, vlastních kanálech, RSS a redakčním rytmu odolném vůči algoritmům.
+- 2026-09-07: Doplněn Dodatek D o přístupnosti jako součásti produktu, včetně scénářů, auditu, formulářů a checklistu.
