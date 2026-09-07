@@ -106,12 +106,164 @@ Otevři svůj web a napiš seznam všech externích skriptů. U každého si odp
 
 > Codyho komentář: Nejlevnější optimalizace výkonu, soukromí i údržby je často brutálně nudná: smazat věci, které nikdo nepotřebuje. Nudné? Ano. Účinné? Taky ano. Krása minimalismu, žádný ohňostroj.
 
+
+---
+
+## Kapitola 2: Web, který rychle vysvětlí hodnotu
+
+Návštěvník webu ti nedluží pozornost. Nepřišel obdivovat interní slovník firmy, animovanou vlnku v hero sekci ani šest odstavců o tom, že „měníte budoucnost“. Přišel zjistit tři věci: jestli řešíš jeho problém, jestli ti může věřit a co má udělat dál.
+
+Dobrá webovka je proto méně galerie a více obchodní rozhovor. Ne křičící prodejce v saku z roku 2008, ale klidný konzultant, který ví, komu pomáhá a proč.
+
+### 2.1 Jedna stránka, jedna hlavní práce
+
+Každá důležitá stránka by měla mít jednu hlavní práci. Homepage může vysvětlit nabídku a nasměrovat lidi dál. Landing page pro kampaň má získat registraci, poptávku nebo objednávku. Dokumentační stránka má vyřešit konkrétní otázku. Pokud se stránka snaží dělat všechno, většinou nedělá nic pořádně.
+
+Začni jednoduchým zadáním:
+
+| Stránka | Pro koho je | Jaký problém řeší | Hlavní akce |
+| --- | --- | --- | --- |
+| Homepage | Majitel malé firmy | Neví, jestli produkt sedí na jeho případ | Prohlédnout řešení nebo objednat demo |
+| Ceník | Zájemce těsně před rozhodnutím | Potřebuje pochopit cenu a riziko | Vybrat tarif nebo se zeptat |
+| Blogový článek | Člověk hledající návod | Chce praktický postup | Přečíst související checklist nebo RSS |
+| Produktová stránka | Konkrétní segment | Chce vidět přínos pro svůj provoz | Spustit trial nebo poslat poptávku |
+
+Tahle tabulka je nudná. Přesně proto funguje. Nutí tě rozhodnout, co je důležité, ještě předtím než začneš řešit barvu tlačítka.
+
+### 2.2 Hero sekce bez mlhy
+
+Hero sekce má během pár vteřin říct, co nabízíš. Dobrá struktura:
+
+- Nadpis: výsledek pro konkrétního člověka.
+- Podnadpis: jak toho dosáhneš a pro koho to je.
+- Primární CTA: další krok bez hádanky.
+- Důkaz: logo, číslo, reference, ukázka výsledku nebo krátký screenshot.
+
+Slabý nadpis:
+
+> „Inovativní platforma pro moderní týmy.“
+
+Lepší nadpis:
+
+> „Zakázky, termíny a fakturace pro malé servisní týmy bez tabulek.“
+
+Je v něm segment, problém i výsledek. Není poetický, ale zákazník nemusí luštit, jestli je to software, koučink nebo další „AI revoluce“, která zatím umí hlavně generovat faktury investorům.
+
+### 2.3 Důvěra se nevykřičí, důvěra se doloží
+
+Na webu se často opakuje chyba: firma tvrdí, že je rychlá, bezpečná, profesionální a zákaznicky orientovaná. Jenže tvrdí to úplně všichni. Důvěra vzniká konkrétností.
+
+Místo „bezpečný provoz“ napiš:
+
+- kde aplikace běží,
+- jak zálohuješ,
+- kdo má přístup k produkčním datům,
+- jak řešíš export dat,
+- jak zákazník zruší účet,
+- koho kontaktovat při incidentu.
+
+Místo „skvělá podpora“ napiš:
+
+- kdy odpovídáš,
+- jestli podporu dělají lidé, kteří rozumí produktu,
+- jak vypadá onboarding,
+- kde je dokumentace,
+- co se stane po odeslání formuláře.
+
+U privacy-first SaaS je důvěra ještě praktičtější. Pokud říkáš, že data držíš v Evropě, ukaž to v architektuře, v dokumentaci a v obchodních materiálech. Nepotřebuješ na to právnickou fresku přes celou obrazovku. Stačí jasná stránka „Bezpečnost a soukromí“, kde člověk pochopí základní provozní model.
+
+### 2.4 SEO začíná srozumitelností
+
+SEO není kouzlení s klíčovými slovy. Google ve svém SEO Starter Guide zdůrazňuje užitečný obsah, čitelné struktury, srozumitelné odkazy, titulky a technickou dostupnost stránky. Zdroj: https://developers.google.com/search/docs/fundamentals/seo-starter-guide
+
+Prakticky:
+
+- Každá důležitá stránka má unikátní `<title>` a meta description.
+- Nadpis `H1` říká hlavní hodnotu stránky, ne interní název kampaně.
+- URL je čitelná: `/cenik`, `/reseni-pro-ucetni`, `/blog/audit-soukromi-webu`.
+- Obrázky mají smysluplný alternativní text, pokud nesou obsah.
+- Interní odkazy vedou člověka logicky dál: z článku na checklist, z checklistu na poptávku, z poptávky na potvrzení.
+
+Privacy-first poznámka: nepotřebuješ social share widgety, aby se obsah šířil. Často stačí normální URL, dobře napsaný titulek, RSS feed a obsah, který stojí za uložení. Ano, zní to méně sexy než „growth hack“. Ale aspoň kvůli tomu nespouštíš na čtenáře karneval třetích stran.
+
+### 2.5 Výkon je produktová vlastnost
+
+Rychlost není jen technická metrika. Je to pocit, že produkt respektuje čas uživatele. Google popisuje Core Web Vitals jako metriky reálné uživatelské zkušenosti pro načítání, interaktivitu a vizuální stabilitu stránky. Zdroj: https://developers.google.com/search/docs/appearance/core-web-vitals
+
+Nejčastější zabijáci rychlosti u malých webů:
+
+- Obří hero obrázek bez optimalizace.
+- Pět fontů a každé písmo ve třech řezech.
+- Marketingové skripty, které nikdo nevyhodnocuje.
+- Cookie lišta větší než samotná nabídka.
+- Frontend framework použitý tam, kde by stačilo pár statických šablon.
+
+Výkon řeš v pořadí, které má obchodní smysl:
+
+1. Nejprve homepage, ceník, registrační flow a kampaně.
+2. Potom šablony blogu a dokumentace.
+3. Nakonec kosmetické podstránky, které skoro nikdo nenavštěvuje.
+
+Neoptimalizuj slepě. Změř, které stránky ovlivňují poptávky, registrace nebo podporu, a začni tam.
+
+### 2.6 Přístupnost není charita, ale kvalita
+
+W3C popisuje WCAG jako sdílený standard pro přístupnost webového obsahu. Zdroj: https://www.w3.org/WAI/standards-guidelines/wcag/
+
+Pro malý tým začni tímhle minimem:
+
+- Web jde ovládat klávesnicí.
+- Text má dostatečný kontrast vůči pozadí.
+- Formuláře mají jasné popisky a chybové hlášky.
+- Tlačítka říkají, co udělají: „Objednat demo“, ne jen „Odeslat“.
+- Stránka používá logickou strukturu nadpisů.
+- Důležité informace nejsou jen v obrázku.
+
+Přístupnost pomáhá lidem s omezeními, ale zlepšuje web i pro všechny ostatní: na mobilu, ve spěchu, na horším displeji, při únavě nebo když zákazník zrovna drží kávu a dítě zároveň. Multitasking level: český podnikatel v pondělí ráno.
+
+### 2.7 Konkrétní příklad: stránka pro konzultační službu
+
+Řekněme, že nabízíš audit webu a SaaS provozu pro malé firmy.
+
+Dobrá stránka může mít tuto strukturu:
+
+1. **Hero:** „Audit webu, který najde úniky v konverzi, výkonu a soukromí.“
+2. **Pro koho:** malé SaaS týmy, B2B firmy, e-shopy s vlastním vývojem.
+3. **Co dostaneš:** seznam problémů, prioritizaci, návrh oprav a stručný privacy-first datový audit.
+4. **Jak to probíhá:** 30min úvod, technická kontrola, výstupní call, Markdown report.
+5. **Důkaz:** ukázka anonymizovaného reportu nebo krátká reference.
+6. **CTA:** „Poslat web k auditu“.
+7. **Soukromí:** co se sbírá, kam se ukládá komunikace, jak dlouho držíš podklady.
+
+Všimni si, že stránka neříká „jsme nejlepší“. Ukazuje postup, snižuje nejistotu a dává jasný další krok.
+
+### 2.8 Checklist dobré webové stránky
+
+- [ ] Do 5 vteřin je jasné, komu stránka pomáhá a s čím.
+- [ ] Hlavní CTA je konkrétní a opakuje se na logických místech.
+- [ ] Stránka obsahuje důkaz důvěry: reference, ukázku, proces, číslo nebo technické vysvětlení.
+- [ ] `title`, meta description, `H1` a URL odpovídají skutečnému obsahu.
+- [ ] Stránka funguje bez reklamních trackerů a zbytečných externích skriptů.
+- [ ] Formulář sbírá jen údaje, které opravdu potřebuješ.
+- [ ] Na mobilu jde rychle přečíst nabídka, ceník i další krok.
+- [ ] Texty neobsahují interní žargon, který zákazník nepoužívá.
+
+### 2.9 Mini úkol na 30 minut
+
+Otevři homepage a zakryj logo. Dej stránku někomu, kdo nezná tvůj projekt, a nech ho během 10 vteřin říct, co prodáváš, komu a co by měl udělat dál. Pokud to netrefí, neopravuj člověka. Oprav web.
+
+> Codyho komentář: Nejlepší UX test je občas brutálně levný: jeden člověk, jedna otázka a žádné vysvětlování. Pokud web potřebuje komentář autora, není to web. Je to hádanka v produkci.
+
 ## Zdroje
 
 - Evropská komise: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
 - European Data Protection Board: Privacy by design and by default — https://www.edpb.europa.eu/topics/ai-and-technology/privacy-by-design-and-by-default_en
 - EDPB Guidelines 4/2019 on Article 25, finální verze z 20. 10. 2020 — https://www.edpb.europa.eu/sites/default/files/files/file1/edpb_guidelines_201904_dataprotection_by_design_and_by_default_v2.0_en.pdf
+- Google Search Central: SEO Starter Guide — https://developers.google.com/search/docs/fundamentals/seo-starter-guide
+- Google Search Central: Core Web Vitals and Google Search results — https://developers.google.com/search/docs/appearance/core-web-vitals
+- W3C WAI: WCAG 2 Overview — https://www.w3.org/WAI/standards-guidelines/wcag/
 
 ## Pracovní log
 
 - 2026-09-07: Založena struktura e-booku, doplněn úvod a první kapitola o privacy-first základech webu a SaaS v Evropě.
+- 2026-09-07: Doplněna druhá kapitola o webu, který rychle vysvětlí hodnotu, důvěru, SEO, výkon a přístupnost.
