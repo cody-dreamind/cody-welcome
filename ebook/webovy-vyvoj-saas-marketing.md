@@ -1843,6 +1843,117 @@ Vyber jeden formulář, který přímo souvisí s obchodem: poptávka, registrac
 Pak oprav jednu věc, která brání dokončení scénáře. Ne deset. Jednu. Přístupnost se zlepšuje nejrychleji, když se tým naučí pravidelně odstraňovat konkrétní překážky místo toho, aby jednou ročně vyráběl auditní PDF, které pak statečně spí v cloudu.
 
 
+---
+
+## Dodatek E: Podpora, která nevyžaduje věšteckou kouli
+
+Zákaznická podpora není jen inbox, kam padají problémy. Je to část produktu, která ukazuje, jestli firma opravdu rozumí zákazníkům. Malý SaaS často nemá luxus samostatného support týmu, složitého helpdesku a tří úrovní eskalace. Má ale jednu výhodu: může být osobní, rychlý a konkrétní bez toho, aby z podpory udělal sledovací laboratoř.
+
+> Codyho komentář: Dobrá podpora není ta, která má nejvíc automatických odpovědí. Dobrá podpora vyřeší problém a zároveň z něj vyrobí lepší produkt. Automatické „váš požadavek je pro nás důležitý“ je často jen firemní verze pokrčení ramen.
+
+### E.1 Podpora začíná před prvním ticketem
+
+Nejlevnější ticket je ten, který nikdy nevznikne, protože uživatel našel odpověď v produktu, dokumentaci nebo jasném textu na stránce. To neznamená schovat kontakt na podporu za labyrint FAQ. Znamená to odstraňovat zmatek dřív, než se změní v frustraci.
+
+Začni třemi místy:
+
+- **Onboarding:** vysvětli první krok, první hodnotu a co se stane dál.
+- **Prázdné stavy:** místo „žádná data“ napiš, jak data vzniknou a proč na nich záleží.
+- **Chybové hlášky:** řekni, co se pokazilo, co může uživatel udělat a kdy má napsat podpoře.
+
+Příklad špatné hlášky:
+
+„Error 403.“
+
+Lepší hláška:
+
+„K této faktuře nemáte přístup. Zkontrolujte, jestli jste ve správné firmě, nebo požádejte administrátora o roli Účetnictví.“
+
+Ještě lepší verze přidá odkaz na nápovědu, kontakt na podporu a interní log pro tým. Uživatel má cestu ven a tým má stopu, kterou může řešit.
+
+### E.2 Kategorizuj dotazy podle práce, kterou mají udělat
+
+Malý tým nepotřebuje složitou taxonomii o padesáti štítcích. Potřebuje vědět, proč lidé píšou a co s tím dál. Pro začátek stačí pět kategorií:
+
+| Kategorie | Co znamená | Další krok |
+| --- | --- | --- |
+| Blokace | Uživatel nemůže dokončit důležitou práci | Opravit nebo obejít co nejdřív |
+| Nejasnost | Uživatel neví, jak něco funguje | Upravit text, onboarding nebo dokumentaci |
+| Chyba | Produkt se chová jinak, než má | Reprodukovat, založit bug, informovat uživatele |
+| Požadavek | Uživatel chce novou funkci nebo změnu | Zapsat kontext, ne slibovat termín z voleje |
+| Obchod | Dotaz na cenu, smlouvu, fakturaci nebo bezpečnost | Předat správné osobě a doplnit prodejní materiály |
+
+Každý týden si projdi posledních 10–20 dotazů a zeptej se: co se opakuje? Pokud se stejná nejasnost objeví třikrát, není to problém zákazníků. Je to signál, že produkt něco nevysvětluje.
+
+### E.3 Dokumentace jako produkt, ne skládka odkazů
+
+Dokumentace má pomáhat dokončit konkrétní práci. Pokud je psaná jako encyklopedie funkcí, čtenář sice najde spoustu slov, ale často neodpověď.
+
+Piš dokumentaci podle úkolů:
+
+- Jak pozvat kolegu do firmy.
+- Jak změnit fakturační údaje.
+- Jak exportovat data před zrušením účtu.
+- Jak nastavit role a přístupy.
+- Jak zjistit, kdo vidí zákaznické požadavky.
+
+Každý návod by měl mít:
+
+1. pro koho je,
+2. kdy ho použít,
+3. co musí být připravené,
+4. přesný postup,
+5. co se stane po dokončení,
+6. jak poznat a řešit chybu.
+
+Privacy-first bonus: dokumentace k exportu, mazání dat, rolím a přístupům není nudná právní povinnost. Je to důkaz, že zákazník není rukojmí. Když lidem ukážeš, jak odejít bezpečně, paradoxně snáz uvěří, že s tebou můžou zůstat.
+
+### E.4 Co do podpory neposílat
+
+Support systémy lákají k tomu, aby do nich teklo všechno: screenshoty, logy, celé profily, session replaye, interní poznámky a občas i údaje, které nikdo nikdy neměl vidět. Malý tým si tím může rychle vyrobit datový sklep bez světla.
+
+Nastav si pravidla:
+
+- Do ticketu neukládej hesla, tokeny, platební údaje ani celé exporty databází.
+- Screenshoty před sdílením anonymizuj, pokud obsahují osobní nebo zákaznická data.
+- Logy omez na relevantní čas, ID požadavku a technický kontext.
+- Interní poznámky piš tak, aby obstály i při exportu nebo kontrole.
+- Přístupy supportu nastav podle rolí, ne podle věty „všichni jsme přece tým“.
+
+Když potřebuješ citlivá data k diagnostice, sbírej je dočasně, popiš účel a po vyřešení je smaž nebo anonymizuj. Podpora nemá být druhá produkční databáze, jen chaotičtější a s horším vyhledáváním.
+
+### E.5 Příklad: první support systém pro B2B SaaS
+
+Představ si český B2B SaaS pro správu interních požadavků. Tým má tři lidi: vývoj, produkt a obchod. První verze podpory může být překvapivě jednoduchá:
+
+- `podpora@firma.cz` jako jasný vstupní kanál.
+- Sdílený inbox nebo helpdesk s EU provozem a exportem dat.
+- Pět kategorií dotazů z tabulky výše.
+- Denní krátká kontrola blokací a chyb.
+- Týdenní třicetiminutová revize opakovaných dotazů.
+- Veřejná dokumentace pro nejčastější úkoly.
+- Interní poznámka „co jsme změnili v produktu díky podpoře“.
+
+Takový systém není dokonalý, ale je čitelný. Každý ví, kde dotaz vzniká, kdo ho řeší a jak se z něj stává lepší produkt. Teprve až začne bolet objem, má smysl přidávat automatizace, formuláře, makra nebo pokročilejší reporting.
+
+### E.6 Checklist podpory a dokumentace
+
+- [ ] Uživatel snadno najde, kam napsat, když je zablokovaný.
+- [ ] Chybové hlášky říkají, co se stalo a jak pokračovat.
+- [ ] Dotazy mají jednoduché kategorie, které vedou k rozhodnutí.
+- [ ] Opakované otázky se mění v dokumentaci, úpravu UI nebo produktový úkol.
+- [ ] Dokumentace je psaná podle úkolů, ne podle interní struktury menu.
+- [ ] Support neukládá zbytečná citlivá data a má jasná pravidla anonymizace.
+- [ ] Přístupy k ticketům odpovídají rolím a potřebě vědět.
+- [ ] Každý týden vznikne aspoň jedna malá oprava z poznatků podpory.
+
+### E.7 Mini úkol na 45 minut
+
+Vezmi posledních 15 zákaznických dotazů nebo interních žádostí o pomoc. Ke každému napiš jednu kategorii: blokace, nejasnost, chyba, požadavek nebo obchod. Potom vyber nejčastější kategorii a udělej jednu konkrétní změnu: doplň nápovědu, přepiš chybovou hlášku, uprav onboarding, nebo založ bug s jasným reprodukčním postupem.
+
+Neřeš celý support systém najednou. Najdi jedno místo, kde zákazníci zbytečně tápou, a odstraň ho. Podpora se zlepší nejen rychlejší odpovědí, ale hlavně menším počtem důvodů, proč musí někdo vůbec psát.
+
+
 ## Zdroje
 
 - Evropská komise: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -1889,3 +2000,4 @@ Pak oprav jednu věc, která brání dokončení scénáře. Ne deset. Jednu. P�
 - 2026-09-07: Doplněn Dodatek B s praktickým postupem pro privacy-first výběr SaaS nástrojů a omezení vendor lock-inu.
 - 2026-09-07: Doplněn Dodatek C o obsahovém systému, vlastních kanálech, RSS a redakčním rytmu odolném vůči algoritmům.
 - 2026-09-07: Doplněn Dodatek D o přístupnosti jako součásti produktu, včetně scénářů, auditu, formulářů a checklistu.
+- 2026-09-07: Doplněn Dodatek E o zákaznické podpoře, dokumentaci, kategorizaci dotazů a privacy-first práci se support daty.
