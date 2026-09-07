@@ -598,6 +598,150 @@ Privacy-first detail: měř agregované produktové události a dobrovolnou zpě
 
 Vyber jeden zákaznický problém, který se tento měsíc opakoval v hovorech, e-mailech nebo podpoře. Napiš k němu osnovu článku o pěti bodech: situace, chyba, lepší postup, konkrétní příklad a checklist. Na konec přidej jeden nenásilný další krok. Pokud nedokážeš napsat příklad, problém ještě není dost konkrétní.
 
+## Kapitola 6: Technický stack, který malý tým unese
+
+Technický stack není sbírka log na nálepky na notebook. Je to provozní závazek. Každá databáze, fronta, CDN, analytika, monitoring nebo AI služba přidává možnosti, ale taky účty, bezpečnostní rizika, výpadkové scénáře a práci pro budoucí já. A budoucí já mívá méně času, méně kávy a méně tolerance k chytrým nápadům z minulého pátku.
+
+Privacy-first SaaS v Evropě potřebuje stack, který je dost jednoduchý na správu, dost bezpečný na důvěru a dost přenosný na to, aby tě jeden dodavatel nedržel za límec. Neznamená to stavět všechno ručně. Znamená to vědět, co provozuješ, proč to provozuješ a jak to vypneš nebo nahradíš.
+
+### 6.1 Začni provozní mapou, ne frameworkem
+
+Než vybereš framework nebo hosting, napiš si provozní mapu produktu. Měla by odpovědět na pět otázek:
+
+- **Kde běží aplikace:** region, poskytovatel, typ runtime, očekávaný provoz.
+- **Kde leží data:** primární databáze, soubory, zálohy, logy, analytika.
+- **Jak se produkt nasazuje:** ručně, CI/CD, preview prostředí, rollback.
+- **Jak poznáš problém:** monitoring, alerty, aplikační logy, zpětná vazba.
+- **Jak obnovíš provoz:** zálohy, exporty, náhradní komunikace, odpovědnosti.
+
+Tahle mapa nemusí být krásná. Stačí Markdown tabulka v repozitáři. Krása přijde později; provozní jistota chce nejdřív pravdu.
+
+Příklad jednoduché mapy:
+
+| Oblast | Doporučený start | Privacy-first otázka |
+| --- | --- | --- |
+| Aplikace | EU VPS nebo evropský PaaS | Běží primární provoz v EU? |
+| Databáze | PostgreSQL v EU regionu | Kdo má administrátorský přístup? |
+| Soubory | Objektové úložiště v EU | Jde nastavit životnost a mazání? |
+| Analytika | Agregovaná webová analytika | Lze fungovat bez cross-site identifikace? |
+| Logy | Krátká retence a redakce citlivých údajů | Nepíšeme do logů e-maily, tokeny nebo obsah zpráv? |
+| Zálohy | Automaticky, šifrovaně, testovaně | Umíme obnovit data bez dodavatele? |
+
+### 6.2 Jednoduchý stack pro první verzi
+
+Pro první placenou verzi SaaS často stačí nudná architektura:
+
+- monolitická webová aplikace,
+- PostgreSQL,
+- objektové úložiště pro přílohy,
+- e-mailová služba pro transakční zprávy,
+- agregovaná analytika,
+- monitoring dostupnosti a chyb,
+- automatické zálohy.
+
+Nudné je tady kompliment. Monolit se dá pochopit. Jedna databáze se dá zálohovat. Jeden deployment se dá rollbacknout. Tři mikroslužby, fronta, event bus a pět edge funkcí vypadají na diagramu dospěle, ale malému týmu umí sežrat týden jen tím, že se ráno špatně podíváš na DNS.
+
+Když přemýšlíš o nové technologii, použij jednoduchý filtr:
+
+1. Řeší problém, který máme teď, nebo jen problém, který vypadá prestižně?
+2. Umí ji spravovat aspoň dva lidé v týmu?
+3. Má jasný export nebo migrační cestu?
+4. Dá se provozovat v EU nebo s rozumnou kontrolou nad daty?
+5. Co se stane, když služba zítra zdraží, změní podmínky nebo vypadne?
+
+Pokud neumíš odpovědět na body 2 až 5, technologie není zakázaná. Jen ještě není rozhodnutá.
+
+### 6.3 Hosting: vybírej podle dat a obnovy
+
+Hosting není jen cena za měsíc. Je to kombinace dostupnosti, podpory, právního rámce, záloh, fyzické lokace dat a tvé schopnosti odejít. U privacy-first evropského provozu dávej přednost poskytovateli, který nabízí jasný EU region, přístup k exportům, srozumitelné smluvní podmínky a minimum magických černých skříněk.
+
+Praktické doporučení:
+
+- Pro menší web nebo interní nástroj začni statickým hostingem nebo jednoduchým serverem.
+- Pro SaaS s databází preferuj oddělenou databázi, pravidelné zálohy a jasný rollback aplikace.
+- Pro citlivější data odděl produkci, staging a lokální vývoj. Kopie produkčních dat do vývoje dělej jen anonymizovaně.
+- Nepoužívej produkční databázi jako testovací hřiště. To je jako opravovat motor za jízdy a divit se, že zákazníci slyší rány.
+- Zapiš si, kdo má přístup do hostingu, kdo umí nasadit a kdo umí obnovit zálohu.
+
+Codyho komentář: Nejlepší hosting pro malý tým není ten s největším billboardem. Je to ten, kde umíš v neděli večer pochopit fakturu, najít logy a obnovit poslední funkční stav bez archeologické expedice.
+
+### 6.4 Bezpečnost jako rutina, ne velký audit jednou ročně
+
+OWASP Top 10 je dobrý orientační seznam nejčastějších a nejrizikovějších tříd problémů webových aplikací. OWASP ASVS jde praktičtěji do ověřovacích požadavků pro bezpečnostní kontroly aplikací. Zdroje: https://owasp.org/Top10/ a https://owasp.org/www-project-application-security-verification-standard/
+
+Pro malý SaaS si z toho neber paniku. Vezmi si rutinu:
+
+- **Přístup:** vícefaktorové ověření pro administraci, nejmenší nutná oprávnění, pravidelný úklid účtů.
+- **Tajemství:** žádné API klíče v repozitáři, žádné tokeny v logu, rotace při podezření.
+- **Validace vstupů:** vše, co přijde od uživatele, ber jako nebezpečné, i když se uživatel tváří jako účetní tabulka.
+- **Aktualizace:** závislosti aktualizuj průběžně, ne až když internet hoří.
+- **Logování:** loguj chyby a bezpečnostní události, ale ne osobní údaje, hesla, tokeny nebo obsah soukromých zpráv.
+- **Review:** změny v autentizaci, platbách, oprávněních a exportech dat procházej minimálně druhým párem očí.
+
+Bezpečnostní práce má být malá a častá. Jednou týdně projít závislosti, jednou měsíčně obnovit testovací zálohu, jednou za kvartál zkontrolovat přístupy. To je pro malý tým užitečnější než jednou ročně luxusní PDF, které všichni založí do složky „až bude čas“.
+
+### 6.5 Zálohy jsou funkce, dokud nejsou otestované
+
+Záloha, kterou nikdo nikdy neobnovil, je spíš naděje než plán. ENISA ve svých doporučeních ke kybernetické odolnosti zdůrazňuje integritu záloh, ochranu proti neoprávněné změně nebo smazání a důkaz, že zálohy opravdu probíhají. Zdroj: https://www.enisa.europa.eu/sites/default/files/2025-06/ENISA_Technical_implementation_guidance_on_cybersecurity_risk_management_measures_version_1.0.pdf
+
+Praktický plán záloh:
+
+- **Databáze:** automatická denní záloha, krátká retence pro rychlé chyby, delší retence pro průšvihy zjištěné pozdě.
+- **Soubory:** zálohovat přílohy stejně vážně jako databázi; bez nich je účet zákazníka často poloviční.
+- **Konfigurace:** mít v repozitáři nebo bezpečném správci tajemství vše, co je potřeba k obnově prostředí.
+- **Izolace:** aspoň jedna kopie nemá být jednoduše smazatelná stejným účtem, který běžně provozuje aplikaci.
+- **Test obnovy:** minimálně jednou měsíčně obnovit do odděleného prostředí a zapsat čas i problém.
+
+Checklist obnovy by měl být tak jednoduchý, aby ho zvládl člověk, který není autor původního deploymentu. Pokud obnova existuje jen v hlavě jednoho vývojáře, nemáš disaster recovery. Máš lidský single point of failure v mikině.
+
+### 6.6 Monitoring, který hlídá zákaznickou realitu
+
+Monitoring není soutěž v počtu dashboardů. Smyslem je včas poznat, že zákazník nemůže udělat důležitou práci. Sleduj proto technické i produktové signály:
+
+- dostupnost hlavní aplikace,
+- stav přihlášení a registrace,
+- odesílání e-mailů,
+- chybovost klíčových endpointů,
+- latenci nejdůležitějších akcí,
+- stav platebních webhooků,
+- poslední úspěšnou zálohu.
+
+Alert má mít vlastníka a akci. „Něco je červené“ není alert, to je náladové osvětlení. Dobrý alert říká: co se rozbilo, koho to dopadá, kde hledat první log a co udělat jako první krok.
+
+Privacy-first poznámka: monitoring a logy často obsahují citlivé údaje omylem. Nastav redakci tokenů, e-mailů a osobních údajů už v aplikaci. Nespoléhej na to, že to za tebe udělá externí služba. Do logu patří technický kontext, ne celý život zákazníka.
+
+### 6.7 Konkrétní příklad: stack pro český B2B SaaS
+
+Představ si SaaS pro malé účetní kanceláře. První rozumná verze může vypadat takto:
+
+1. Webová aplikace jako monolit s jasným oddělením veřejného webu, administrace a API.
+2. PostgreSQL v EU regionu, šifrované zálohy a měsíční test obnovy.
+3. Přílohy v objektovém úložišti s oddělenými právy a pravidly pro mazání.
+4. Transakční e-maily přes poskytovatele, který má zpracovatelské podmínky a jasné logy doručení.
+5. Agregovaná analytika pro marketingový web a samostatné produktové metriky bez zbytečné identifikace.
+6. Monitoring dostupnosti, chyb aplikace, platebních webhooků a poslední zálohy.
+7. Dokument `RUNBOOK.md`: nasazení, rollback, obnova databáze, kontakt na hosting, incident postup.
+
+Tenhle stack není sexy na konferenční slide. Ale dá se provozovat, vysvětlit zákazníkovi a postupně škálovat. A to je pro první roky SaaS mnohem důležitější než architektura, která vypadá jako metro v Tokiu.
+
+### 6.8 Checklist technického stacku
+
+- [ ] Víme, kde fyzicky nebo smluvně leží aplikace, databáze, soubory, logy a zálohy.
+- [ ] Každá externí služba má jasný účel, vlastníka a plán náhrady.
+- [ ] Produkce, staging a vývoj jsou oddělené a vývoj nepoužívá neanonymizovaná produkční data.
+- [ ] Tajemství nejsou v repozitáři, v logu ani v dokumentaci.
+- [ ] Administrátorské účty mají MFA a přístupy se pravidelně kontrolují.
+- [ ] Zálohy běží automaticky, jsou izolované a obnova se pravidelně testuje.
+- [ ] Monitoring hlídá zákaznické scénáře, ne jen CPU a pocit kontroly.
+- [ ] Existuje krátký runbook pro deployment, rollback, incident a obnovu dat.
+- [ ] Logy mají omezenou retenci a neobsahují citlivé údaje.
+- [ ] Nová technologie se přidává až po odpovědi na otázky provozu, dat a migrace.
+
+### 6.9 Mini úkol na 60 minut
+
+Vezmi svůj aktuální produkt a napiš jednu stránku `PROVOZ.md`. Rozděl ji na čtyři části: kde běží aplikace, kde jsou data, jak se nasazuje a jak se obnovuje po chybě. U každé části přidej jeden největší risk a jednu konkrétní akci na tento týden. Pokud dokument nedokážeš napsat bez hledání hesel ve Slacku, právě jsi našel první provozní dluh.
+
+
 ## Zdroje
 
 - Evropská komise: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -614,6 +758,10 @@ Vyber jeden zákaznický problém, který se tento měsíc opakoval v hovorech, 
 - Atlassian: Postmortems — https://www.atlassian.com/incident-management/handbook/postmortems
 - Google Search Central: Creating helpful, reliable, people-first content — https://developers.google.com/search/docs/fundamentals/creating-helpful-content
 - RSS Advisory Board: RSS 2.0 Specification — https://www.rssboard.org/rss-specification
+- OWASP Top 10:2021 — https://owasp.org/Top10/
+- OWASP Application Security Verification Standard — https://owasp.org/www-project-application-security-verification-standard/
+- ENISA: Technical implementation guidance on cybersecurity risk-management measures, verze 1.0 — https://www.enisa.europa.eu/sites/default/files/2025-06/ENISA_Technical_implementation_guidance_on_cybersecurity_risk_management_measures_version_1.0.pdf
+- European Commission: NIS2 Directive — https://digital-strategy.ec.europa.eu/en/policies/nis2-directive
 
 ## Pracovní log
 
@@ -622,3 +770,4 @@ Vyber jeden zákaznický problém, který se tento měsíc opakoval v hovorech, 
 - 2026-09-07: Doplněna třetí kapitola o SaaS cestě od problému k první platbě, včetně MVP, onboardingu, SCA/DPH poznámek a checklistu.
 - 2026-09-07: Doplněna čtvrtá kapitola o produktivitě malého SaaS týmu, WIP limitech, dokumentaci rozhodnutí a blameless incidentech.
 - 2026-09-07: Doplněna pátá kapitola o marketingu bez spamu, vlastních kanálech, RSS, landing page filtru a launch rytmu malé SaaS funkce.
+- 2026-09-07: Doplněna šestá kapitola o technickém stacku, evropském provozu, bezpečnosti, zálohách, monitoringu a runbooku.
