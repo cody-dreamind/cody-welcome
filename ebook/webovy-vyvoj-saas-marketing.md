@@ -1510,6 +1510,130 @@ Vyber jednu položku z checklistu, která má největší dopad na důvěru zák
 
 Pokud si nemůžeš vybrat, začni mapou dat. Privacy-first provoz bez mapy dat je jako vaření bez seznamu surovin: možná vznikne večeře, ale taky možná zapálíš kuchyň a budeš tomu říkat experiment.
 
+---
+
+## Dodatek B: Jak vybrat nástroj bez vendor lock-in kocoviny
+
+Každý malý tým má slabost pro nový nástroj. Vypadá čistě, slibuje automatizaci, má hezký onboarding a na úvodní stránce se tváří, že po instalaci konečně přestane existovat chaos. Jenže nástroj není jen funkce. Je to místo, kam začneš posílat data, procesy a často i kus firemní paměti.
+
+Privacy-first výběr nástroje proto nezačíná otázkou „umí to integraci se vším?“. Začíná otázkou „co se stane, když to za rok budeme chtít vypnout?“. Pokud na ni nikdo neumí odpovědět, nekupuješ nástroj. Kupuješ budoucí migraci s nádechem detektivky.
+
+> Codyho komentář: Nejhorší vendor lock-in není ten, kde nejdou exportovat data. Nejhorší je ten, kde exportovat jdou, ale nikdo už neví, co znamenají sloupce `custom_field_17`, `legacy_status_2` a `final_final_owner_real`.
+
+### B.1 Rozděl nástroje podle rizika
+
+Ne všechny nástroje si zaslouží stejnou hloubku auditu. Ikonky pro sociální sítě jsou jiné riziko než CRM, fakturace nebo support s historií zákaznických problémů. Aby se tým nezasekl v nekonečné kontrole každé drobnosti, používej tři úrovně.
+
+| Úroveň | Typ nástroje | Typická data | Jak hluboko kontrolovat |
+| --- | --- | --- | --- |
+| Nízké riziko | Veřejný obsah, jednoduché utility | Bez osobních údajů nebo jen veřejné informace | Rychlá kontrola účelu, ceny a možnosti vypnutí |
+| Střední riziko | Marketing, formuláře, analytika, interní workflow | E-maily, agregovaná data, obsah komunikace | Zkontrolovat EU provoz, export, subdodavatele a retenční nastavení |
+| Vysoké riziko | CRM, support, platby, účetnictví, AI nad zákaznickými daty | Osobní, obchodní nebo citlivá provozní data | Udělat písemné rozhodnutí, právní/provozní kontrolu a plán migrace |
+
+Praktické pravidlo: pokud by únik dat z nástroje způsobil zákazníkovi ostudu, finanční škodu nebo právní problém, je to vysoké riziko. Pokud by způsobil jen povzdech „ach jo, další export CSV“, je to pravděpodobně střední nebo nízké riziko.
+
+### B.2 Sedm otázek před zapnutím nové služby
+
+Před nasazením si projdi krátký rozhodovací formulář. Není to byrokracie pro radost. Je to brzda proti tomu, aby se z firemního stacku stal digitální bazar.
+
+1. Jaký konkrétní problém nástroj řeší?
+2. Jaká data do něj pošleme a která z nich jsou osobní nebo obchodně citlivá?
+3. Kde budou data fyzicky nebo smluvně provozovaná?
+4. Kdo k datům získá přístup: náš tým, dodavatel, subdodavatelé, AI modely, support?
+5. Umíme nastavit retenci, mazání a export bez ručního vyjednávání?
+6. Jak nástroj vypneme, když zdraží, změní podmínky nebo přestane dávat smysl?
+7. Jak poznáme za 30 dní, že opravdu pomohl?
+
+Poslední otázka je často nejdůležitější. Nástroj bez vyhodnocení má tendenci zůstat ve firmě navždy, protože nikdo nechce být ten člověk, který „rozbije workflow“. I když workflow mezitím používá už jen jeden člověk a pes kanceláře. Pes, samozřejmě, bez přístupu do CRM.
+
+### B.3 Preferuj nástroje, které se dají opustit
+
+Dobrá služba tě nemusí držet jako rukojmí. Naopak: čím férovější export a dokumentace, tím větší důvěru buduje. Při výběru proto hledej známky zdravého vztahu mezi dodavatelem a zákazníkem.
+
+Dobré signály:
+
+- Export dat je dostupný přímo v administraci.
+- Dokumentace jasně popisuje API, formáty a limity.
+- Smluvní podmínky rozlišují zákaznická data, metadata a použití pro zlepšování služby.
+- Lze omezit zpracování dat pro trénování modelů, marketing nebo profilování.
+- Nástroj má jednoduché role a práva, ne jen „admin pro všechny, protože spěcháme“.
+- Fakturace a zrušení účtu jsou stejně srozumitelné jako registrace.
+
+Varovné signály:
+
+- Export existuje jen přes support ticket.
+- Ceník skrývá limity, které jsou pro tvůj use case zásadní.
+- Data se bez jasného důvodu kopírují do dalších regionů nebo marketingových systémů.
+- Nástroj vyžaduje víc oprávnění, než odpovídá práci, kterou má dělat.
+- Dodavatel neumí jednoduše vysvětlit, co se stane po ukončení smlouvy.
+
+### B.4 Příklad: výběr nástroje pro zákaznický support
+
+Představ si český B2B SaaS, který hledá support nástroj. Tým chce sdílenou schránku, štítky, SLA a znalostní bázi. Nejrychlejší cesta by byla vybrat první známé jméno, propojit inbox, zapnout AI shrnutí a hotovo. Jenže support obsahuje zákaznické problémy, obchodní detaily, přílohy a někdy i osobní údaje.
+
+Rozumnější postup:
+
+- Sepiš, jaká data support skutečně zpracuje: e-mail, jméno, firma, obsah ticketu, přílohy, interní poznámky.
+- Rozhodni, které funkce jsou povinné: společný inbox, role, export ticketů, znalostní báze, audit přístupů.
+- Ověř, zda lze provozovat data v EU nebo alespoň smluvně omezit přenosy a subdodavatele.
+- Vypni funkce, které nejsou potřeba: session replay, reklamní identifikátory, automatické obohacování kontaktů.
+- Nastav retenční pravidlo: například mazání starých příloh po určené době, pokud nejsou potřeba pro smluvní vztah.
+- Připrav exit plán: export ticketů, export článků znalostní báze, přesměrování e-mailu, změna formulářů na webu.
+
+Výstupem není jen vybraný nástroj. Výstupem je rozhodnutí, které přežije první incident, audit i budoucí otázku „proč jsme si sakra vybrali zrovna tohle?“.
+
+### B.5 Jednoduchá skórovací tabulka
+
+Když máš dvě až čtyři varianty, dej jim body 1–5. Nejde o exaktní vědu. Jde o to, aby tým nemíchal dohromady cenu, sympatie k UI a reálné riziko.
+
+| Kritérium | Váha | Nástroj A | Nástroj B | Poznámka |
+| --- | ---: | ---: | ---: | --- |
+| Řeší hlavní problém bez obcházek | 3 |  |  | Umí klíčový scénář bez hacků? |
+| EU provoz nebo silná kontrola dat | 3 |  |  | Kde jsou data a kdo je zpracovává? |
+| Export a možnost migrace | 3 |  |  | Dostaneš ven vše potřebné? |
+| Jednoduchost pro tým | 2 |  |  | Naučí se to lidé používat bez školení roku? |
+| Role, práva a audit přístupů | 2 |  |  | Lze omezit přístup podle potřeby? |
+| Cena po prvních 12 měsících | 2 |  |  | Nejen úvodní sleva, ale reálný provoz. |
+| Integrace bez datového chaosu | 1 |  |  | Posílá jen nutná data? |
+
+Vynásob body váhou a sečti výsledek. Pokud nástroj s nejvyšším skóre prohrává „protože se nám prostě líbí ten druhý“, aspoň víš, že děláš vědomou výjimku. Vědomá výjimka je v pořádku. Nevědomá výjimka je začátek interní archeologie.
+
+### B.6 Pilot bez závazku na věčnost
+
+Nový nástroj nenasazuj rovnou jako firemní standard. Udělej malý pilot s jasným koncem.
+
+Pilot na 30 dní by měl mít:
+
+- vlastníka, který odpovídá za vyhodnocení;
+- konkrétní scénář, ne obecné „uvidíme, jestli se chytne“;
+- omezenou skupinu uživatelů nebo dat;
+- měřitelný výsledek: méně ruční práce, rychlejší odpověď, méně chyb, lepší přehled;
+- předem napsané rozhodnutí, co znamená pokračovat, upravit nebo vypnout;
+- plán úklidu dat, pokud pilot skončí.
+
+Příklad: support nástroj testuj jen na nové poptávky z webu, ne na kompletní historii všech zákazníků od roku 2018. Pokud pilot nevyjde, uklidíš pár týdnů dat. Pokud bys importoval všechno, budeš místo vyhodnocení řešit, jak bezpečně odmotat klubko.
+
+### B.7 Checklist výběru nástroje
+
+- [ ] Víme, jaký problém nástroj řeší a kdo je jeho vlastník.
+- [ ] Máme sepsaná data, která do nástroje půjdou.
+- [ ] Známe region provozu, subdodavatele a základní smluvní nastavení.
+- [ ] Umíme vypnout zbytečné tracking, profilovací nebo AI funkce.
+- [ ] Máme ověřený export a víme, jak by vypadala migrace pryč.
+- [ ] Nastavili jsme role podle potřeby, ne podle lenosti.
+- [ ] Pilot má konec, kritéria úspěchu a plán úklidu.
+- [ ] Rozhodnutí je zapsané tak, aby mu tým rozuměl i za půl roku.
+
+### B.8 Mini úkol na 45 minut
+
+Vyber jeden nástroj, který ve firmě používáte často a nikdo ho poslední rok nekontroloval. Vyplň sedm otázek z části B.2. Pak rozhodni jednu ze tří možností:
+
+- Nechat a zdokumentovat.
+- Nechat, ale omezit data, práva nebo integrace.
+- Nahradit nebo vypnout.
+
+Nezačínej největším systémem ve firmě. Začni něčím, co je dost důležité, aby na tom záleželo, ale dost malé, aby šel úklid dokončit. Privacy-first provoz se nedělá jedním velkým heroickým projektem. Dělá se stovkou malých rozhodnutí, která přestanou pouštět data ven jen proto, že „to tak bylo vždycky“.
+
 
 
 ## Zdroje
@@ -1551,3 +1675,4 @@ Pokud si nemůžeš vybrat, začni mapou dat. Privacy-first provoz bez mapy dat 
 - 2026-09-07: Doplněna devátá kapitola o bezpečné AI automatizaci v evropském SaaS, včetně governance, promptů, datové minimalizace a checklistu.
 - 2026-09-07: Doplněna desátá kapitola o SaaS cenotvorbě, balíčcích, férových limitech, trialu a praktickém checklistu.
 - 2026-09-07: Doplněn praktický 30denní plán pro menší web nebo SaaS jako závěrečný akční dodatek e-booku.
+- 2026-09-07: Doplněn Dodatek B s praktickým postupem pro privacy-first výběr SaaS nástrojů a omezení vendor lock-inu.
