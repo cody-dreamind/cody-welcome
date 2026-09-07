@@ -491,6 +491,113 @@ Otevři svůj aktuální seznam úkolů a označ tři položky: jednu, která p�
 
 > Codyho komentář: Největší produktivní hack malého týmu je naučit se říkat „teď ne“ bez pocitu, že tím zabíjíš budoucnost. Většinou tím jen zachraňuješ přítomnost.
 
+## Kapitola 5: Marketing bez spamu a závislosti na algoritmech
+
+Marketing malého webu nebo SaaS produktu nemusí znamenat, že každý týden naháníš nový trik, nový formát a nové publikum na platformě, která ti zítra změní pravidla. Dobrý marketing je systém: pomáhá správným lidem pochopit problém, najít řešení, důvěřovat ti a vrátit se bez toho, aby ses musel chovat jako digitální kolotočář.
+
+Privacy-first marketing má jednoduché pravidlo: raději buduj aktiva, která vlastníš a umíš vysvětlit, než publikum, ke kterému se dostaneš jen přes aukci pozornosti. Web, blog, dokumentace, případové studie, RSS, přímé odkazy, partnerské doporučení a dobrý onboarding jsou nudnější než „hack“, ale nudné věci často platí faktury. Nepříjemné, já vím.
+
+### 5.1 Začni problémem, ne kanálem
+
+Kanál je až odpověď na otázku, kde zákazník hledá pomoc. Když začneš větou „musíme dělat LinkedIn“, velmi snadno skončíš u obsahu pro ostatní zakladatele, ne pro zákazníky. Lepší start je krátká mapa:
+
+| Otázka | Praktická odpověď |
+| --- | --- |
+| Koho chceme oslovit? | Například malé B2B týmy, které ručně řeší onboarding klientů. |
+| Jak poznají, že mají problém? | Ztrácí přehled, opakují stejné e-maily, nestíhají předávky. |
+| Co zadají do vyhledávání? | „client onboarding checklist“, „automatizace onboardingu“, „jak předat klienta po podpisu“. |
+| Čemu nevěří? | Obecným slibům „ušetříme čas“ bez konkrétní ukázky. |
+| Co potřebují před prvním kontaktem? | Příklad procesu, ceník nebo orientační rozsah, jasné další kroky. |
+
+Google ve svém SEO Starter Guide doporučuje vytvářet obsah primárně pro uživatele, ne pro vyhledávače, a technické SEO stavět na srozumitelné struktuře, titulcích a popisech. Užitečný obsah tedy nezačíná seznamem klíčových slov, ale přesnou formulací problému, který člověk opravdu řeší. Zdroj: https://developers.google.com/search/docs/fundamentals/seo-starter-guide
+
+### 5.2 Obsahové pilíře: méně témat, víc hloubky
+
+Malý tým nepotřebuje produkovat deset článků týdně. Potřebuje několik témat, ve kterých umí být užitečný opakovaně. Pilíř je téma, kde se potkává zákaznická bolest, tvoje expertíza a obchodní cíl.
+
+Příklad pro privacy-first SaaS studio:
+
+- **Webový výkon:** jak rychlost ovlivňuje důvěru, konverze a použitelnost.
+- **Evropský provoz:** kde leží data, jak vybírat nástroje a kdy zvolit vlastní hosting.
+- **Onboarding:** jak dostat zákazníka od registrace k první hodnotě.
+- **Měření bez šmírování:** jak poznat, co funguje, bez session replay cirkusu.
+- **Produktové rozhodování:** jak vybírat malé změny s reálným dopadem.
+
+Z každého pilíře může vzniknout praktický článek, checklist, šablona, krátká případovka, odpověď na častou otázku i část dokumentace. Nepřepisuješ pořád od nuly. Vytváříš znalostní sklad, ze kterého se dá čerpat.
+
+### 5.3 Vlastní kanály jsou pojistka proti náladě platforem
+
+Sociální sítě jsou užitečné pro distribuci, ale špatné jako jediný zdroj vztahu se zákazníkem. Algoritmus není partner. Je to pronajatý megafon s vlastním obchodním modelem.
+
+Vlastní kanály mají jinou logiku:
+
+- Web je domov obsahu, obchodních argumentů a konverzí.
+- RSS umožňuje lidem sledovat novinky bez účtu, newsletteru a sledovacích pixelů.
+- E-mail může fungovat dobře, pokud je dobrovolný, střídmý a bez manipulační automatizace.
+- Dokumentace a changelog pomáhají zákazníkům i vyhledávání.
+- Přímé odkazy se dají sdílet bez sociálních widgetů a externích skriptů.
+
+RSS 2.0 specifikace popisuje jednoduchý formát pro publikování seznamu položek v kanálu, který mohou číst různé aplikace. Pro privacy-first značku je to skvělý typ „nudné infrastruktury“: uživatel si vybere čtečku a nemusí se přihlašovat do další platformy. Zdroj: https://www.rssboard.org/rss-specification
+
+> Codyho komentář: RSS je trochu jako tramvaj. Není sexy, ale jezdí, nepotřebuje tvůj obličej a neptá se tě, jestli chceš zapnout personalizované peklo.
+
+### 5.4 Landing page jako marketingový filtr
+
+Landing page nemá přesvědčit každého. Má rychle pomoct správnému člověku poznat, jestli je řešení pro něj. Když stránka slibuje všechno všem, přivede špatné leady, horší podporu a produktové požadavky, které tě stáhnou do bažiny.
+
+Dobrá stránka filtruje pomocí konkrétnosti:
+
+- **Pro koho:** „Pro malé účetní firmy s 3–20 lidmi“, ne „pro moderní týmy“.
+- **Situace:** „Když každý měsíc ručně doháníte podklady od klientů.“
+- **Výsledek:** „Vidíte stav podkladů, automaticky připomínáte chybějící věci a máte auditní stopu.“
+- **Důkaz:** screenshot, krátká ukázka procesu, případová studie nebo měřitelný příklad.
+- **Další krok:** demo, zkušební účet, konzultace nebo checklist ke stažení bez agresivního sběru dat.
+
+Pokud používáš formulář, chtěj minimum údajů. U prvního kontaktu často stačí e-mail a jedna otázka typu „co řešíte“. Všechno ostatní se dá doplnit později, až člověk uvidí hodnotu.
+
+### 5.5 Obsahový rytmus pro malý tým
+
+Nejlepší publikační plán je ten, který přežije běžný týden. Žádný tým s jedním vývojářem, půl marketingovým mozkem a hromadou zákaznické podpory nepotřebuje kalendář jak mediální dům.
+
+Realistický měsíční rytmus:
+
+- **1 hlubší článek:** praktický návod nebo případová studie z jednoho pilíře.
+- **1 šablona nebo checklist:** něco, co si zákazník může rovnou použít.
+- **2 krátké poznámky:** odpovědi na časté otázky, changelog, mini tipy.
+- **1 recyklace:** rozdělit starší článek na krátký post, e-mail nebo dokumentační stránku.
+- **1 úklid:** aktualizovat starý obsah, opravit odkazy a odstranit zastaralé sliby.
+
+Každý kus obsahu by měl mít jasný další krok: přečíst související článek, vyzkoušet demo, stáhnout checklist, objednat konzultaci nebo se přihlásit k RSS. Bez dalšího kroku je obsah hezká výloha bez dveří.
+
+### 5.6 Konkrétní příklad: launch malé SaaS funkce
+
+Tým přidává funkci „automatické připomínky klientům“. Marketing bez spamu může vypadat takhle:
+
+1. Napsat krátký changelog: co je nové, pro koho, jak zapnout, jak vypnout.
+2. Přidat článek „Jak omezit ruční připomínání klientů bez ztráty osobního tónu“.
+3. Do článku vložit ukázkový e-mail a checklist nastavení frekvence připomínek.
+4. Na landing page doplnit konkrétní sekci s obrázkem workflow.
+5. Poslat stručný e-mail jen zákazníkům, kterých se funkce týká, ne celé databázi.
+6. Změřit zobrazení článku, klik na nastavení funkce a počet zapnutých připomínek.
+7. Po dvou týdnech projít podporu a doplnit FAQ podle reálných dotazů.
+
+Privacy-first detail: měř agregované produktové události a dobrovolnou zpětnou vazbu. Nepotřebuješ sledovat každý pohyb uživatele v administraci jen proto, abys zjistil, že tlačítko „Zapnout připomínky“ nikdo nenašel.
+
+### 5.7 Checklist marketingu bez spamu
+
+- [ ] Každý obsahový pilíř odpovídá konkrétnímu zákaznickému problému.
+- [ ] Web má jasné další kroky bez nátlakových dark patternů.
+- [ ] Publikovaný obsah má vlastní URL a dá se číst bez přihlášení na platformu.
+- [ ] RSS nebo jiný přímý odběr je dostupný bez sledovacích pixelů.
+- [ ] E-mail posíláš jen lidem, kteří ho čekají a mají z něj jasnou hodnotu.
+- [ ] Formuláře sbírají jen údaje nutné pro další krok.
+- [ ] Sociální sítě používáš jako distribuci, ne jako jediný archiv znalostí.
+- [ ] Starý obsah se pravidelně aktualizuje, slučuje nebo maže.
+
+### 5.8 Mini úkol na 45 minut
+
+Vyber jeden zákaznický problém, který se tento měsíc opakoval v hovorech, e-mailech nebo podpoře. Napiš k němu osnovu článku o pěti bodech: situace, chyba, lepší postup, konkrétní příklad a checklist. Na konec přidej jeden nenásilný další krok. Pokud nedokážeš napsat příklad, problém ještě není dost konkrétní.
+
 ## Zdroje
 
 - Evropská komise: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -505,6 +612,8 @@ Otevři svůj aktuální seznam úkolů a označ tři položky: jednu, která p�
 - Principles behind the Agile Manifesto — https://agilemanifesto.org/principles
 - Microsoft Learn: Set Work in Progress Limits in Azure Boards — https://learn.microsoft.com/en-us/azure/devops/boards/boards/wip-limits
 - Atlassian: Postmortems — https://www.atlassian.com/incident-management/handbook/postmortems
+- Google Search Central: Creating helpful, reliable, people-first content — https://developers.google.com/search/docs/fundamentals/creating-helpful-content
+- RSS Advisory Board: RSS 2.0 Specification — https://www.rssboard.org/rss-specification
 
 ## Pracovní log
 
@@ -512,3 +621,4 @@ Otevři svůj aktuální seznam úkolů a označ tři položky: jednu, která p�
 - 2026-09-07: Doplněna druhá kapitola o webu, který rychle vysvětlí hodnotu, důvěru, SEO, výkon a přístupnost.
 - 2026-09-07: Doplněna třetí kapitola o SaaS cestě od problému k první platbě, včetně MVP, onboardingu, SCA/DPH poznámek a checklistu.
 - 2026-09-07: Doplněna čtvrtá kapitola o produktivitě malého SaaS týmu, WIP limitech, dokumentaci rozhodnutí a blameless incidentech.
+- 2026-09-07: Doplněna pátá kapitola o marketingu bez spamu, vlastních kanálech, RSS, landing page filtru a launch rytmu malé SaaS funkce.
