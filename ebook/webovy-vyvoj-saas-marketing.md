@@ -27,7 +27,7 @@ Každou kapitolu ber jako pracovní checklist. Nečti ji jako román do šuplík
 8. Praktické šablony: brief, landing page, launch checklist a audit soukromí.
 9. AI automatizace v evropském SaaS: užitek, governance a bezpečné nasazení.
 10. Cenotvorba a balíčky: hodnota, jednoduchost, férovost a důvěra.
-11. Dodatky: 30denní plán, výběr nástrojů, obsah, přístupnost, podpora, retence, souhlasy, technické SEO a bezpečnostní minimum.
+11. Dodatky: 30denní plán, výběr nástrojů, obsah, přístupnost, podpora, retence, souhlasy, technické SEO, bezpečnostní minimum a roadmapa.
 
 ---
 
@@ -2651,6 +2651,124 @@ Tenhle záznam je nudný jen do chvíle, než ho potřebuješ. Pak je to mapa z 
 
 Vyber jeden SaaS nástroj, který už tým používá a ve kterém jsou zákaznická nebo obchodně citlivá data. Vyplň pro něj jednostránkový nákupní záznam, najdi export a stáhni testovací vzorek dat. Pokud export nenajdeš, napiš to do rizik. Gratuluju, právě jsi udělal víc governance než mnoho týmů s mnohem dražším nástrojem na governance.
 
+## Dodatek L: Roadmapa bez chaosu, slibotechny a feature bufetu
+
+Roadmapa není seznam přání, které tým hrdinsky tahá za sebou jako mokrý koberec. Dobrá roadmapa je dohoda o směru: jaké problémy řešíme, proč teď, pro koho a jak poznáme, že jsme pohnuli produktem dopředu. V malém SaaS je roadmapa zároveň marketingový filtr, support nástroj, prodejní pomůcka a ochrana týmu před tím, aby každý hlasitý požadavek vypadal jako strategie.
+
+> Codyho komentář: Pokud roadmapa obsahuje jen názvy funkcí a žádný zákaznický problém, není to roadmapa. Je to nákupní seznam do produktového supermarketu. A tam se hladový founder chová nebezpečně.
+
+### L.1 Začni problémy, ne funkcemi
+
+Feature požadavek často přichází ve tvaru „potřebujeme export do Excelu“, „chceme integraci s CRM“ nebo „přidejte AI asistenta“. To je už navržené řešení. Než ho zařadíš do roadmapy, vrať se o krok zpět a zeptej se:
+
+- Jakou práci se zákazník snaží dokončit?
+- Co mu dnes brání v úspěchu?
+- Kolik zákazníků to řeší a jak často?
+- Jaký dopad má problém na aktivaci, retenci, podporu nebo prodej?
+- Existuje jednodušší řešení než nová velká funkce?
+
+Praktický zápis do backlogu může vypadat takhle:
+
+| Místo funkce | Zapiš problém |
+| --- | --- |
+| „Přidat PDF export“ | Zákazník potřebuje poslat přehled vedení, které nemá účet v aplikaci. |
+| „Napojit Slack“ | Tým si nevšimne kritické události včas a musí ručně kontrolovat dashboard. |
+| „AI sumarizace“ | Manažer nechce číst 80 ticketů, ale potřebuje vědět tři hlavní příčiny problémů. |
+
+Jakmile znáš problém, můžeš navrhnout menší první krok. PDF export může být nejdřív sdílený read-only odkaz. Slack integrace může být e-mailové upozornění. AI sumarizace může být ručně připravený týdenní přehled, než začneš posílat zákaznická data do modelu. Tohle není zbabělost. To je produktová hygiena.
+
+### L.2 Používej jednoduché skóre, které tým opravdu pochopí
+
+Prioritizace nemusí být akademická disciplína s tajemným vzorcem. Pro malý tým stačí čtyři otázky ohodnocené od 1 do 5:
+
+| Kritérium | Otázka |
+| --- | --- |
+| Dopad | Jak moc to pomůže zákazníkovi nebo byznysu? |
+| Důkaz | Jak silně víme, že problém existuje? |
+| Náročnost | Jak drahé bude řešení na vývoj, provoz a podporu? |
+| Riziko | Může to zhoršit soukromí, bezpečnost, výkon nebo jednoduchost produktu? |
+
+Jednoduché pravidlo: vysoký dopad a silný důkaz posouvají věc nahoru. Vysoká náročnost a vysoké riziko ji brzdí. Nejde o to vypočítat pravdu na dvě desetinná místa. Jde o to donutit tým říct nahlas, proč něco dělá.
+
+Příklad:
+
+| Nápad | Dopad | Důkaz | Náročnost | Riziko | Rozhodnutí |
+| --- | --- | --- | --- | --- | --- |
+| Lepší onboarding checklist | 5 | 4 | 2 | 1 | Udělat teď |
+| Komplexní marketplace integrací | 4 | 2 | 5 | 4 | Rozsekat na výzkum |
+| Veřejné API pro tři zákazníky | 3 | 5 | 4 | 3 | Navrhnout pilot s limity |
+
+Privacy-first poznámka: riziko neznamená jen bezpečnostní drama. Riziko je i to, že nová funkce začne ukládat víc osobních údajů, přidá externího zpracovatele, vytvoří citlivější logy nebo zkomplikuje mazání účtu.
+
+### L.3 Roadmapa má mít horizonty, ne falešná data
+
+Přesná data vydání vypadají profesionálně, dokud nejsou vymyšlená. Malý SaaS tým se rychle učí, mění rozsah a reaguje na zákazníky. Proto je lepší dělit roadmapu na horizonty:
+
+- **Teď:** práce na nejbližší týdny, kde známe problém, rozsah i vlastníka.
+- **Příště:** důležité směry, které potřebují výzkum, návrh nebo rozsekání.
+- **Později:** témata, která dávají smysl strategicky, ale nejsou připravená na závazek.
+- **Ne teď:** dobré nápady, které vědomě odkládáme, aby se tým neutopil.
+
+Tohle pomáhá i komunikaci se zákazníky. Místo „bude to v Q2“ řekneš: „Řešíme problém exportu pro vedení, ověřujeme první jednodušší variantu a dáme vám vědět, až bude pilot.“ Je to méně bombastické, ale pravdivější. A pravda škáluje líp než slibotechnický ohňostroj.
+
+### L.4 Propoj roadmapu se supportem, prodejem a obsahem
+
+Roadmapa nesmí žít izolovaně v nástroji, který otvírá jen produktový manažer a jeho kaktus. Každý větší problém by měl mít stopu:
+
+- v supportu: kolik dotazů nebo ticketů se týká stejné bolesti,
+- v prodeji: kolikrát požadavek rozhodl nebo zablokoval obchod,
+- v analytice: kde uživatelé odpadají nebo obcházejí produkt,
+- v obsahu: jaké návody, články nebo šablony by snížily tlak na vývoj,
+- v privacy mapě: jaká data bude řešení sbírat, ukládat nebo posílat dál.
+
+Příklad: pokud zákazníci často chtějí „lepší reporty“, nemusí první krok být nový report builder. Může to být lepší šablona exportu, článek „Jak poslat měsíční přehled vedení“, jedna uložená konfigurace reportu nebo automatický e-mail bez osobních detailů navíc.
+
+### L.5 Veřejná roadmapa: opatrně, ale ne zbaběle
+
+Veřejná roadmapa může budovat důvěru. Zákazníci vidí, že produkt žije a tým poslouchá. Zároveň může vytvořit past, pokud publikuješ moc konkrétních slibů, necháš hlasovat bez kontextu nebo ukazuješ věci, které nechceš strategicky prozradit konkurenci.
+
+Rozumný kompromis:
+
+- veřejně ukaž problémy a směry, ne interní termíny a technické detaily,
+- odděl „zvažujeme“, „ověřujeme“, „stavíme“ a „hotovo“,
+- u každého bodu popiš, pro koho je důležitý,
+- nepoužívej roadmapu jako náhradu supportu,
+- nedávej do veřejné roadmapy zákaznická jména, citace ani citlivé kontexty bez souhlasu.
+
+Privacy-first varianta je jednoduchá: sbírej zpětnou vazbu přes formulář bez zbytečných trackerů, dovol e-mailový kontakt dobrovolně, ukládej jen to, co potřebuješ pro vyhodnocení, a staré požadavky pravidelně maž nebo agreguj.
+
+### L.6 Konkrétní příklad: týdenní roadmap review
+
+Jednou týdně si dej 45 minut. Ne víc, jinak se z review stane produktové divadlo o třech dějstvích.
+
+Agenda:
+
+1. Projdi nové signály ze supportu, prodeje, analytiky a rozhovorů se zákazníky.
+2. Slouč duplicitní požadavky pod jeden problém.
+3. U tří nejdůležitějších problémů doplň dopad, důkaz, náročnost a riziko.
+4. Rozhodni: teď, příště, později, ne teď.
+5. U věcí v „teď“ urč vlastníka a nejmenší ověřitelný výstup.
+6. U věcí v „ne teď“ napiš důvod, aby se stejná debata nevracela každý pátek jako špatný seriál.
+
+Výstup review má být krátký: tři rozhodnutí, tři otevřené otázky, tři věci, které zákazníkům nebo týmu někdo sdělí. Pokud z review nevznikne rozhodnutí, nebylo to review. Byla to synchronizační mlha.
+
+### L.7 Checklist roadmapy pro malý SaaS
+
+- [ ] Každá položka roadmapy popisuje zákaznický nebo byznysový problém, ne jen funkci.
+- [ ] U důležitých položek známe dopad, důkaz, náročnost a riziko.
+- [ ] Roadmapa používá horizonty „teď“, „příště“, „později“ a „ne teď“ místo falešně přesných slibů.
+- [ ] Support, prodej a produkt sdílejí signály na jednom místě.
+- [ ] Nové funkce mají privacy kontrolu: data, zpracovatelé, logy, retence a mazání.
+- [ ] U rozpracovaných věcí je jasný vlastník a nejmenší ověřitelný výstup.
+- [ ] Odmítnuté nebo odložené nápady mají stručný důvod.
+- [ ] Veřejná roadmapa neprozrazuje citlivé zákaznické informace ani interní termíny bez jistoty.
+- [ ] Tým pravidelně maže, slučuje nebo archivuje staré požadavky.
+- [ ] Roadmapa pomáhá rozhodovat, ne jen uklidňovat lidi hezkou tabulkou.
+
+### L.8 Mini úkol na 45 minut
+
+Vezmi deset posledních požadavků od zákazníků, supportu nebo obchodních schůzek. Přepiš je z funkcí na problémy, sluč duplicity a každému dej horizont: teď, příště, později nebo ne teď. U tří nejvýše zařazených doplň dopad, důkaz, náročnost a privacy riziko. Nakonec napiš jednu větu, kterou může support poslat zákazníkovi. Roadmapa právě přestala být interní chaos a začala být součást zákaznické důvěry. Ano, pořád je to tabulka. Ale aspoň tabulka, která něco dělá.
+
 ## Zdroje
 
 - Evropská komise: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -2719,3 +2837,4 @@ Vyber jeden SaaS nástroj, který už tým používá a ve kterém jsou zákazni
 - 2026-09-08: Doplněn Dodatek I o bezpečnostním minimu pro malý SaaS, včetně přístupů, tajemství, logů, záloh a incident plánu.
 - 2026-09-08: Doplněn Dodatek J o incidentové komunikaci, status page, kadenci aktualizací a postmortem bez paniky.
 - 2026-09-08: Doplněn Dodatek K o privacy-first nákupu SaaS nástrojů, kontrole DPA, exportu, riziku dodavatelů a checklistu před zadáním karty.
+- 2026-09-08: Doplněn Dodatek L o roadmapě bez chaosu, prioritizaci podle problémů, týdenním review a privacy kontrole nových funkcí.
