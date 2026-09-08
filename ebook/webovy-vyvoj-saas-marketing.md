@@ -27,7 +27,7 @@ Každou kapitolu ber jako pracovní checklist. Nečti ji jako román do šuplík
 8. Praktické šablony: brief, landing page, launch checklist a audit soukromí.
 9. AI automatizace v evropském SaaS: užitek, governance a bezpečné nasazení.
 10. Cenotvorba a balíčky: hodnota, jednoduchost, férovost a důvěra.
-11. Dodatky: 30denní plán, výběr nástrojů, obsah, přístupnost, podpora, retence, souhlasy, technické SEO, bezpečnostní minimum, roadmapa, prodejní discovery, onboarding, jednoduché CRM, zpětná vazba a produktové e-maily.
+11. Dodatky: 30denní plán, výběr nástrojů, obsah, přístupnost, podpora, retence, souhlasy, technické SEO, bezpečnostní minimum, roadmapa, prodejní discovery, onboarding, jednoduché CRM, zpětná vazba, produktové e-maily a dashboardy.
 
 ---
 
@@ -3750,6 +3750,121 @@ Krátké, věcné, bez ohňostroje. E-mail nemá vyhrát literární soutěž. M
 Vezmi posledních pět e-mailů, které tvůj produkt posílá. U každého napiš typ zprávy, účel, hlavní akci, komu chodí, jak se dá vypnout a jaká data se v něm objevují. Pak smaž nebo slouč zprávy, které nemají jasné rozhodnutí. Bonus: vytvoř jeden týdenní digest místo tří drobných upozornění. Inbox ti nepoděkuje nahlas, ale bude tě méně nenávidět.
 
 
+## Dodatek U: Dashboardy, které řídí práci, ne jen zdobí poradu
+
+Dashboard je užitečný jen tehdy, když mění rozhodnutí. Pokud se na něj tým dívá každý týden, pokývá hlavou a pak stejně řeší práci podle pocitu, není to dashboard. Je to drahá tapeta s čísly.
+
+Malý web nebo SaaS nepotřebuje velín jak z kosmické agentury. Potřebuje pár stabilních pohledů, které odpovídají na praktické otázky: funguje web, přichází správní lidé, aktivují se zákazníci, platí, zůstávají a netrpí podpora? Privacy-first dashboard navíc nevytváří novou sbírku osobních stop jen proto, aby graf vypadal chytřeji.
+
+### U.1 Začni rozhodnutími, ne metrikami
+
+Nejdřív napiš seznam rozhodnutí, která se mají opakovaně dělat. Až potom vybírej metriky.
+
+Příklady dobrých rozhodnutí:
+
+- Máme tento týden zlepšit onboarding, nebo ceník?
+- Která stránka potřebuje přepsat, protože přivádí návštěvy bez poptávek?
+- Máme posílit support dokumentaci, protože roste stejný typ dotazů?
+- Způsobuje nová funkce méně práce, nebo jen víc šumu?
+- Který kanál přivádí zákazníky s nejvyšší šancí dokončit první hodnotu?
+
+Špatný začátek zní: „Pojďme dát na dashboard všechno, co nástroj umí.“ Takhle vzniká metrický bufet. Vypadá hojně, ale po třetí porci nikdo neví, proč mu je těžko.
+
+### U.2 Jeden týdenní dashboard stačí na začátek
+
+Pro malý tým vytvoř jeden hlavní týdenní dashboard. Měl by se vejít na jednu obrazovku a mít maximálně pět bloků.
+
+| Blok | Otázka | Příklad metriky | Privacy-first poznámka |
+| --- | --- | --- | --- |
+| Web | Přichází relevantní návštěvnost? | návštěvy klíčových stránek, referrery, poptávky | používej agregovanou analytiku bez identifikace návštěvníků |
+| Aktivace | Dostane se nový uživatel k první hodnotě? | dokončené nastavení, první vytvořený projekt | měř produktové stavy, ne mikropohyby uživatele |
+| Revenue | Platí lidé za hodnotu? | nové platby, MRR, churn, trial konverze | odděl finanční data od marketingové analytiky |
+| Support | Kde produkt bolí? | počet dotazů podle tématu, doba první odpovědi | neukládej citlivý obsah ticketů do obecného BI |
+| Stabilita | Funguje služba spolehlivě? | uptime, chyby, incidenty, délka obnovy | logy drž jen po rozumnou dobu a rediguj osobní údaje |
+
+Tento dashboard není náhrada za detailní analýzu. Je to navigační mapa. Když ukáže problém, tým se může ponořit hlouběji do konkrétní oblasti.
+
+### U.3 Každá metrika má vlastníka a akci
+
+U každé metriky si napiš dvě věci: kdo ji sleduje a co se stane, když se změní.
+
+Příklad:
+
+| Metrika | Vlastník | Signál | Akce |
+| --- | --- | --- | --- |
+| Poptávky z landing page | marketing/produkt | klesají 2 týdny po sobě | zkontrolovat nabídku, CTA a kvalitu návštěvnosti |
+| Dokončený onboarding | produkt | méně než polovina nových účtů dokončí první krok | projít onboarding s jedním zákazníkem a odstranit největší tření |
+| Dotazy na fakturaci | support/provoz | opakuje se stejný dotaz | upravit nápovědu a text ve fakturační sekci |
+| Chyby při importu | vývoj | nárůst po releasu | zkontrolovat logy, přidat lepší validaci a jasnější chybovou zprávu |
+
+Metrika bez vlastníka je sirotek. Metrika bez akce je dekorace. Obojí má smutný život.
+
+### U.4 Nepleť si přesnost s užitečností
+
+Začínající SaaS často řeší, jestli má číslo o desetinné místo přesněji. Jenže první otázka zní: „Je to dost dobré pro rozhodnutí?“
+
+Pokud má landing page 37 návštěv týdně, nemá smysl dělat dramatické závěry z rozdílu mezi 2 a 3 kliknutími. Smysl má přečíst stránku očima zákazníka, podívat se na zdroje návštěvnosti, zkontrolovat technické chyby a domluvit pár rozhovorů.
+
+U malých čísel používej dashboard jako varovný signál, ne jako soudce. Kombinuj:
+
+- kvantitativní signál z agregovaných metrik;
+- kvalitativní poznámky ze supportu, prodeje a rozhovorů;
+- technickou kontrolu výkonu, chyb a dostupnosti;
+- vlastní úsudek týmu, jasně označený jako hypotéza.
+
+Codyho komentář: Graf s pěknou křivkou umí v týmu vyvolat falešný pocit vědy. Někdy je to ale jen pět lidí, z toho dva jste vy, jeden účetní a jeden robot, který se ztratil cestou na sitemapu.
+
+### U.5 Privacy-first pravidla pro dashboardy
+
+Dashboard se snadno stane místem, kam se kopíruje všechno „pro jistotu“. Proto potřebuje vlastní pravidla.
+
+- Preferuj agregace před seznamy jednotlivců.
+- Do obecného dashboardu nedávej e-maily, jména, IP adresy ani obsah zpráv.
+- Citlivé metriky odděl podle rolí: finance pro oprávněné lidi, support pro support, bezpečnost pro provoz.
+- Nastav retenci dat: denní agregace drž déle, surové události krátce nebo vůbec.
+- Dokumentuj, odkud metrika pochází a jak se počítá.
+- U každého externího BI nebo analytického nástroje zkontroluj region, DPA, subzpracovatele a export.
+- Neposílej do dashboardu produkční tajemství, tokeny, celé logy ani texty zákaznických zpráv.
+
+Privacy-first dashboard má být méně zvědavý, ale víc rozhodný. Není cílem vědět, co přesně dělal každý uživatel. Cílem je poznat, kde produkt pomáhá a kde škodí.
+
+### U.6 Konkrétní příklad: pondělní 30minutové review
+
+Malý B2B SaaS tým může každý týden projít dashboard takto:
+
+1. **5 minut — stav služby:** incidenty, chyby, dostupnost, výjimečné události.
+2. **7 minut — akvizice:** co přivedlo návštěvy, poptávky a registrace.
+3. **7 minut — aktivace:** kde noví uživatelé dokončili nebo nedokončili první hodnotu.
+4. **5 minut — support:** tři nejčastější témata a jeden dotaz, který se nesmí opakovat.
+5. **6 minut — rozhodnutí:** jedna věc zlepšit, jedna věc neměnit, jedna věc ověřit.
+
+Výstupem není debata o všem. Výstupem jsou tři řádky:
+
+```markdown
+Týden 37/2026
+- Zlepšíme: text kroku „Import zakázek“, protože 9 z 21 nových účtů skončilo právě tam.
+- Neměníme: ceník, protože poptávky rostou a support nehlásí nejasnosti kolem limitů.
+- Ověříme: jestli návštěvy z partnerského článku přicházejí na správnou landing page.
+```
+
+Krátký záznam je důležitý. Za měsíc uvidíš, jestli tým opravdu rozhodoval podle signálů, nebo jen každý týden statečně improvizoval s novým slovníkem.
+
+### U.7 Checklist dashboardu pro malý SaaS
+
+- [ ] Dashboard odpovídá na konkrétní opakovaná rozhodnutí.
+- [ ] Má maximálně pět hlavních bloků a vejde se na jednu obrazovku.
+- [ ] Každá metrika má vlastníka, vysvětlení a navazující akci.
+- [ ] Metriky jsou agregované, pokud detail jednotlivce není nezbytný.
+- [ ] Citlivá data nejsou viditelná všem lidem v týmu.
+- [ ] Je jasné, odkud data tečou, kde leží a jak dlouho se drží.
+- [ ] Dashboard kombinuje produkt, marketing, support, finance a stabilitu bez míchání práv k datům.
+- [ ] Tým má týdenní rytmus review a stručný záznam rozhodnutí.
+
+### U.8 Mini úkol na 60 minut
+
+Vytvoř první verzi týdenního dashboardu bez nového nástroje. Stačí Markdown tabulka nebo sdílený dokument. Napiš pět rozhodnutí, která potřebuješ dělat každý týden, a ke každému přidej jednu metriku, vlastníka a akci. Pak vyškrtej všechno, co nevede k rozhodnutí. Pokud ti zbyde méně grafů, gratuluju — dashboard právě začal pracovat, místo aby jen flexil.
+
+
 ## Zdroje
 
 - Evropská komise: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -3799,6 +3914,7 @@ Vezmi posledních pět e-mailů, které tvůj produkt posílá. U každého napi
 
 ## Pracovní log
 
+- 2026-09-08: Doplněn Dodatek U o praktických dashboardech, týdenním review, vlastnících metrik a privacy-first pravidlech pro rozhodování podle dat.
 - 2026-09-08: Doplněn Dodatek T o produktových e-mailech, transakčních zprávách, notifikacích, měření bez sledování a checklistu komunikace.
 - 2026-09-08: Doplněn Dodatek S o formulářích, mikrokopii, CTA, chybových stavech a privacy-first práci s formulářovými daty.
 - 2026-09-08: Doplněn Dodatek R o privacy-first zpětné vazbě, krátkých produktových otázkách, třídění signálů a práci s feedbackem bez zbytečného sledování.
