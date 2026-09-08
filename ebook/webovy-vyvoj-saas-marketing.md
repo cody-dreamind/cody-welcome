@@ -2051,6 +2051,100 @@ Vyber jeden systém, kde máš zákaznická data: aplikaci, support, fakturaci n
 Nečekej na dokonalou compliance dokumentaci. Začni tím, že jedno konkrétní místo přestane být datová půda plná krabic bez štítků.
 
 
+---
+
+## Dodatek G: Newsletter a cookie lišta bez manipulace
+
+Newsletter, měření kampaní a cookie lišta jsou malé prvky, které často rozhodnou, jestli web působí důvěryhodně, nebo jako stánek s losy u nádraží. U privacy-first SaaS nestačí, že tlačítko technicky funguje. Musí být jasné, proč člověk něco potvrzuje, co se stane po odmítnutí a jak se může později odhlásit.
+
+ÚOOÚ u cookies rozlišuje technické cookies nezbytné pro provoz webu a netechnické cookies pro analytiku, preference nebo marketing. U netechnických cookies je potřeba souhlas uživatele, zatímco u čistě technických cookies cookie lišta být nemusí, i když informační povinnost zůstává. U obchodních sdělení ÚOOÚ zároveň zdůrazňuje jasné označení, totožnost odesílatele a možnost jednoduchého odhlášení v každé zprávě. Zdroje: https://uoou.gov.cz/verejnost/qa-otazky-a-odpovedi/cookies a https://uoou.gov.cz/index.php/profesional/qa-otazky-a-odpovedi/obchodni-sdeleni
+
+> Codyho komentář: Cookie lišta nemá být psychologická úniková místnost. Když je odmítnutí schované za třemi šedými tlačítky, web tím neoptimalizuje konverze. Jen optimalizuje počet lidí, kteří ti přestanou věřit.
+
+### G.1 Nejdřív si ujasni, jestli lištu vůbec potřebuješ
+
+Nejlepší cookie lišta je často žádná cookie lišta. Pokud web používá jen technické cookies pro přihlášení, košík, bezpečnost nebo jazykové nastavení, obvykle stačí srozumitelně popsat cookies v zásadách soukromí a odkázat na ně v patičce. Jakmile přidáš analytiku třetí strany, remarketing, heatmapy, reklamní pixely nebo personalizační nástroje, jsi v jiné hře.
+
+Praktický postup:
+
+- Sepiš všechny skripty, které se načítají na webu před souhlasem.
+- Ke každému napiš účel: technický provoz, analytika, marketing, preference nebo externí obsah.
+- Ověř, jestli skript ukládá nebo čte informace v zařízení uživatele.
+- Vypni všechno, co není nutné před udělením souhlasu.
+- Pokud zbydou jen technické cookies, zvaž odstranění lišty a ponechání jasné cookie stránky.
+
+### G.2 Souhlas má být stejně snadný jako odmítnutí
+
+Privacy-first lišta má jednoduchou logiku: uživatel má dostat jasné informace a férovou volbu. Žádné předzaškrtnuté checkboxy, žádné „pokračováním souhlasíte“, žádné tlačítko „Přijmout vše“ jako neonová cedule a „Spravovat moje utrpení“ někde v textu.
+
+Dobrá první vrstva lišty:
+
+- Vysvětlí, že technické cookies jsou nutné pro fungování webu.
+- Oddělí analytiku od marketingu.
+- Nabídne `Přijmout vše`, `Odmítnout vše` a `Nastavit` ve srovnatelné viditelnosti.
+- Neaktivuje netechnické skripty před volbou.
+- Umožní pozdější změnu nastavení z patičky nebo stránky soukromí.
+
+Pokud chceš měřit privacy-first, často nepotřebuješ marketingové cookies vůbec. Pro první rok SaaS obvykle stačí serverové logy s krátkou retencí, agregovaná analytika bez cross-site identifikace a UTM parametry uložené jen tam, kde reálně pomáhají vyhodnotit kampaň.
+
+### G.3 Newsletter sbírej jako vztah, ne jako kořist
+
+Newsletter má být dobrovolný kanál pro lidi, kteří chtějí slyšet další věci. Ne vedlejší produkt objednávkového formuláře, kde člověk omylem souhlasil s odběrem, protože checkbox byl zabalený mezi obchodní podmínky a fakturu za duši.
+
+U neveřejných leadů nebo zájemců používej jasný opt-in:
+
+- Řekni, co bude chodit: tipy, novinky produktu, případové studie, pozvánky.
+- Řekni přibližnou frekvenci: týdně, měsíčně, nepravidelně při důležité novince.
+- Odděl souhlas s newsletterem od souhlasu s obchodními podmínkami.
+- Ulož zdroj přihlášení, čas, formulář a verzi textu souhlasu.
+- Po odhlášení kontakt nevracej do kampaní přes import z jiného nástroje.
+
+U existujících zákazníků může v některých situacích fungovat režim pro vlastní obdobné produkty nebo služby, pokud zákazník měl jasnou možnost odmítnout využití kontaktu při získání adresy i v každém dalším sdělení. Neber to ale jako pozvánku k bombardování. Pokud zákazník koupil malý doplněk, neposílej mu automaticky deset kampaní týdně na všechno, co firma kdy vymyslela.
+
+### G.4 Odděl produktové zprávy od marketingu
+
+Jedna častá chyba: firma začne všechno posílat jedním mailingovým kanálem. Pak se člověk odhlásí z newsletteru a najednou neví, že se mění podmínky služby nebo že bude výpadek. Opačně je stejně špatně, když se produktové oznámení zneužije jako nosič slevového kupónu.
+
+Rozlišuj minimálně tři typy komunikace:
+
+| Typ zprávy | Příklad | Odhlášení | Poznámka |
+| --- | --- | --- | --- |
+| Transakční | reset hesla, faktura, potvrzení objednávky | obvykle ne, pokud je nezbytná pro službu | bez marketingových vsuvek |
+| Produktová provozní | plánovaný výpadek, změna bezpečnostního nastavení | podle povahy služby | posílat jen relevantním účtům |
+| Marketingová | newsletter, akce, upsell, případová studie | vždy jednoduché | jasně označit jako obchodní sdělení |
+
+Tohle oddělení pomáhá nejen právně, ale i produktově. Uživatel, který ví, že provozní e-mail nebude maskovaný prodej, ho pravděpodobně nepřehlédne.
+
+### G.5 Konkrétní příklad: B2B SaaS launch newsletteru
+
+Představ si SaaS pro plánování zakázek, který chce spustit měsíční newsletter pro malé servisní firmy. Privacy-first verze vypadá takto:
+
+- Na webu je jednoduchý formulář: e-mail, volitelně typ firmy, jasný text „Jednou měsíčně pošleme praktické tipy k plánování zakázek a novinky produktu.“
+- Checkbox newsletteru není předem zaškrtnutý a není spojený s poptávkou dema.
+- Po přihlášení přijde potvrzovací e-mail s tím, co bude chodit a kde se dá odběr spravovat.
+- Mailing systém drží jen e-mail, preferovaný jazyk, zdroj přihlášení a historii odhlášení.
+- Každý newsletter má stručné označení, identitu odesílatele a odkaz pro odhlášení.
+- Vyhodnocení kampaně sleduje agregovaně návštěvy článků, kliky na demo a odpovědi, ne špionážní román o každém otevření.
+
+### G.6 Checklist newsletteru a cookies
+
+- [ ] Víš, které cookies a skripty jsou technické a které potřebují souhlas.
+- [ ] Netechnické skripty se nespouští před udělením souhlasu.
+- [ ] Cookie lišta nabízí férově viditelné přijetí, odmítnutí a nastavení.
+- [ ] Nastavení cookies jde později změnit z viditelného místa na webu.
+- [ ] Newsletter má samostatný a srozumitelný opt-in tam, kde je potřeba.
+- [ ] U každého kontaktu umíš doložit zdroj a čas přihlášení nebo oprávnění ke kontaktu.
+- [ ] Každé obchodní sdělení je rozpoznatelné, uvádí odesílatele a má funkční odhlášení.
+- [ ] Transakční, provozní a marketingové e-maily nejsou smíchané do jednoho chaosu.
+- [ ] Odhlášení se propisuje do všech nástrojů, ne jen do jednoho seznamu.
+
+### G.7 Mini úkol na 45 minut
+
+Otevři svůj web v anonymním okně a napiš si, co se načte před kliknutím na cookie lištu. Potom se přihlas k vlastnímu newsletteru jako nový člověk a zkontroluj celý tok: text formuláře, potvrzení, první e-mail, odhlášení a záznam v mailingovém nástroji.
+
+Vyber jednu opravu, která zlepší důvěru hned: zviditelni odmítnutí cookies, vypni marketingový skript před souhlasem, přepiš text u newsletteru nebo otestuj odhlášení. Malý čistý tok je lepší než velká marketingová mašina, která připomíná GDPR escape room.
+
+
 ## Zdroje
 
 - Evropská komise: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -2082,6 +2176,10 @@ Nečekej na dokonalou compliance dokumentaci. Začni tím, že jedno konkrétní
 - W3C WAI: What's New in WCAG 2.2 — https://www.w3.org/WAI/standards-guidelines/wcag/new-in-22/
 - European Commission: Dealing with requests from individuals — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/dealing-requests-individuals_en
 - EDPB: Guidelines 01/2025 on Pseudonymisation — https://www.edpb.europa.eu/public-consultations/guidelines-012025-on-pseudonymisation_en
+- ÚOOÚ: Cookies — https://uoou.gov.cz/verejnost/qa-otazky-a-odpovedi/cookies
+- ÚOOÚ: Cookies od začátku roku 2022 pouze se souhlasem — https://uoou.gov.cz/novinky/vse/cookies-od-zacatku-roku-2022-pouze-se-souhlasem
+- ÚOOÚ: Obchodní sdělení — https://uoou.gov.cz/index.php/profesional/qa-otazky-a-odpovedi/obchodni-sdeleni
+- Your Europe: Online privacy and cookies — https://europa.eu/youreurope/business/growing/digitalising/online-privacy/index_en.htm
 
 ## Pracovní log
 
@@ -2101,3 +2199,4 @@ Nečekej na dokonalou compliance dokumentaci. Začni tím, že jedno konkrétní
 - 2026-09-07: Doplněn Dodatek D o přístupnosti jako součásti produktu, včetně scénářů, auditu, formulářů a checklistu.
 - 2026-09-07: Doplněn Dodatek E o zákaznické podpoře, dokumentaci, kategorizaci dotazů a privacy-first práci se support daty.
 - 2026-09-07: Doplněn Dodatek F o retenci, mazání, exportu dat, zálohách a praktickém offboardingu zákazníka.
+- 2026-09-08: Doplněn Dodatek G o newsletteru, cookie liště, obchodních sděleních a férovém souhlasu bez manipulace.
