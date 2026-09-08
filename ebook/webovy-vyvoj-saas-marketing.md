@@ -27,7 +27,7 @@ Každou kapitolu ber jako pracovní checklist. Nečti ji jako román do šuplík
 8. Praktické šablony: brief, landing page, launch checklist a audit soukromí.
 9. AI automatizace v evropském SaaS: užitek, governance a bezpečné nasazení.
 10. Cenotvorba a balíčky: hodnota, jednoduchost, férovost a důvěra.
-11. Dodatky: 30denní plán, výběr nástrojů, obsah, přístupnost, podpora, retence, souhlasy a technické SEO.
+11. Dodatky: 30denní plán, výběr nástrojů, obsah, přístupnost, podpora, retence, souhlasy, technické SEO a bezpečnostní minimum.
 
 ---
 
@@ -2244,6 +2244,145 @@ Postup pro malý firemní web nebo SaaS:
 
 Vyber jednu nejdůležitější stránku webu. Přepiš její title, description, H1 a první odstavec tak, aby člověk přesně věděl, pro koho stránka je, co získá a jaký je další krok. Pak zkontroluj, že je v sitemap, má správný canonical a nepotřebuje žádný externí tracker k tomu, aby sis vyhodnotil, jestli funguje. Malý audit, velký klid. Tak to máme rádi.
 
+## Dodatek I: Bezpečnostní minimum pro malý SaaS bez paranoidního divadla
+
+Bezpečnost v malém SaaS často trpí dvěma extrémy. Buď se neřeší skoro vůbec, protože „zatím máme málo uživatelů“, nebo se z ní udělá obří chrám procesů, který paralyzuje tři lidi a jednu kávovarovou firmu v cloudu. Správná cesta je praktičtější: chránit nejdůležitější data, mít jasné odpovědnosti, umět rychle reagovat a nedělat zbytečné riziko jen proto, že nástroj měl hezké tlačítko „integrate everything“.
+
+OWASP Top 10 dlouhodobě upozorňuje na běžné třídy aplikačních rizik jako rozbitá kontrola přístupu, kryptografická selhání, injection nebo špatná konfigurace. OWASP ASVS k tomu dává praktičtější ověřovací rámec pro bezpečnost webových aplikací. Zdroje: https://owasp.org/Top10/ a https://owasp.org/www-project-application-security-verification-standard/
+
+Pro evropský provoz je užitečné sledovat i NIS2 a metodické materiály ENISA. Ne každý malý SaaS automaticky spadne do všech povinností, ale principy řízení rizik, incidentů, přístupů, záloh a dodavatelů dávají smysl i mimo regulované sektory. Zdroje: https://digital-strategy.ec.europa.eu/en/policies/nis2-directive a https://www.enisa.europa.eu/sites/default/files/2025-06/ENISA_Technical_implementation_guidance_on_cybersecurity_risk_management_measures_version_1.0.pdf
+
+> Codyho komentář: Bezpečnost není pocit, že máš v patičce slovo „enterprise“. Bezpečnost je stav, kdy víš, co se může rozbít, kdo to opraví a proč se útočník nedostane k celé databázi přes jeden zapomenutý testovací účet.
+
+### I.1 Nejdřív chraň přístupy, ne prezentaci o bezpečnosti
+
+U malého SaaS bývá největší riziko obyčejné: někdo má příliš široký přístup, starý token zůstal aktivní, admin účet nemá vícefaktorové ověření, nebo produkční databáze leží v nástroji, kam se přihlašuje půlka týmu. To není exotický hackerský film. To je úterní provozní realita.
+
+Začni těmito pravidly:
+
+- Každý člen týmu má vlastní účet, ne sdílené `admin@firma.cz`.
+- Admin práva má jen ten, kdo je opravdu potřebuje.
+- MFA je povinné u e-mailu, Git hostingu, produkčního hostingu, databáze, plateb, DNS a správce hesel.
+- Produkční přístup se přiděluje na konkrétní účel a odebírá po skončení práce.
+- Servisní účty mají minimum oprávnění a jasný popis, k čemu slouží.
+- Přístup externistů má datum revize, ne status „asi navždy“.
+
+Privacy-first pohled je jednoduchý: každý přístup je potenciální cesta k datům zákazníků. Pokud někdo nepotřebuje vidět osobní údaje, faktury nebo support historii, nemá je vidět. Ani ze zvědavosti, ani „kdyby se to někdy hodilo“.
+
+### I.2 Tajemství nepatří do repozitáře
+
+API klíče, databázová hesla, tokeny a privátní klíče nejsou konfigurace jako každá jiná. Jsou to tajemství. Jakmile se jednou dostanou do repozitáře, logu nebo sdíleného chatu, chovej se k nim jako ke kompromitovaným. Ne jako k „to snad nikdo neviděl“. Internet má paměť a roboti mají nudu.
+
+Praktické minimum:
+
+- Používej správce tajemství nebo alespoň oddělené produkční env proměnné v hostingu.
+- Do repozitáře patří `.env.example`, ne reálné `.env`.
+- CI/CD proměnné rozděl podle prostředí: development, staging, production.
+- Tokeny pojmenuj podle účelu: `billing_readonly_export`, ne `new_token_2_final_final`.
+- Nastav rotaci u klíčů, které dávají přístup k datům nebo penězům.
+- Po odchodu člověka z týmu zruš jeho osobní tokeny i přístupy do dodavatelských nástrojů.
+
+U každého tajemství si napiš: kde vzniklo, kdo ho může změnit, kde je použité a co se stane při úniku. Pokud odpověď zní „netušíme“, našel jsi bezpečnostní dluh. Gratuluji, archeologie v produkci.
+
+### I.3 Odděl prostředí, aby chyba nebolela víc než musí
+
+Malý tým často šetří čas tím, že všechno běží proti jedné databázi. Je to pohodlné přesně do chvíle, kdy testovací import smaže reálná data nebo vývojář zkusí nový webhook na produkčních zákaznících. Pak už to není úspora času, ale drahá lekce s potem na klávesnici.
+
+Základní rozdělení:
+
+- **Development:** lokální nebo vývojové prostředí s anonymizovanými daty.
+- **Staging:** prostředí co nejpodobnější produkci, ale bez reálných tajemství a bez přístupu k produkčním zákazníkům.
+- **Production:** ostrý provoz s omezeným přístupem, monitoringem, zálohami a jasnou odpovědností.
+
+Do developmentu a stagingu nepatří kopie produkční databáze jen proto, že je to nejrychlejší. Pokud potřebuješ realistická data, vytvoř anonymizovaný dataset. Jména, e-maily, adresy, faktury, poznámky v CRM a support zprávy nejsou dekorace do testů. Jsou to data lidí.
+
+### I.4 Loguj tak, aby logy pomohly a neprozradily všechno
+
+Logy jsou skvělé, když hledáš chybu. Jsou hrozné, když do nich potichu zapisuješ přístupové tokeny, celé payloady formulářů, osobní údaje a odpovědi z platební brány. Privacy-first logování má dvě otázky: pomůže to při diagnostice, a může to ublížit, když se log dostane ven?
+
+Do aplikačních logů obvykle patří:
+
+- čas události,
+- typ události,
+- interní ID požadavku nebo korelační ID,
+- technický výsledek,
+- chybový kód,
+- anonymizovaný nebo pseudonymizovaný identifikátor, pokud je opravdu nutný.
+
+Do logů obvykle nepatří:
+
+- hesla, tokeny a session cookies,
+- celé platební nebo fakturační údaje,
+- obsah soukromých zpráv zákazníků,
+- zbytečné IP adresy s dlouhou retencí,
+- kompletní request/response payloady bez filtrování.
+
+Nastav retenci logů podle účelu. Debug logy z vývoje nepotřebují žít půl roku. Bezpečnostní auditní logy mohou mít jiný režim než aplikační šum. A pokud logy posíláš do externí služby, vrať se k mapě dat: kde leží, kdo k nim má přístup, jak se mažou a jestli je umíš exportovat.
+
+### I.5 Zálohy jsou užitečné až po testu obnovy
+
+„Máme zálohy“ je věta, která nic neznamená, dokud někdo nezkusil obnovu. Záloha, kterou neumíš obnovit, je jen drahý talisman. Hezky hřeje u srdce, ale zákazníkovi účet nevrátí.
+
+Pro SaaS minimum nastav:
+
+- automatické zálohy databáze,
+- oddělené úložiště záloh od produkční databáze,
+- šifrování záloh,
+- retenční pravidla podle typu dat,
+- test obnovy alespoň jednou za kvartál,
+- zápis z testu: co se obnovovalo, jak dlouho to trvalo, kdo to dělal a co selhalo.
+
+Důležitá je i obnova po částech. Když zákazník omylem smaže projekt, nechceš kvůli tomu vracet celou databázi o den zpátky. Už v návrhu dat přemýšlej, jak obnovíš jeden účet, jednu organizaci nebo jeden dokument bez vedlejší demolice.
+
+### I.6 Incident plán na jednu stránku
+
+Incident plán nemusí být padesátistránkový dokument, který nikdo nečetl od doby, kdy ho vytvořil konzultant s láskou k tabulkám. Pro začátek stačí jedna stránka.
+
+Měla by obsahovat:
+
+- Kdo rozhoduje při incidentu.
+- Kdo komunikuje se zákazníky.
+- Kdo má přístup k infrastruktuře, DNS, repozitáři, databázi a platebnímu systému.
+- Jak vypnout nebo izolovat kompromitovanou část systému.
+- Kde jsou kontakty na hosting, dodavatele a právní podporu.
+- Jak se zapisuje časová osa incidentu.
+- Jak probíhá postmortem bez hledání obětního beránka.
+
+Při incidentu nepotřebuješ hrdiny. Potřebuješ klid, role a poznámky. Všechno, co se děje, zapisuj s časem. Ne proto, že miluješ byrokracii, ale protože po dvou hodinách stresu si nikdo přesně nepamatuje, co kdo restartoval a proč najednou nechodí e-maily.
+
+### I.7 Konkrétní příklad: bezpečnostní první týden pro nový SaaS
+
+Představ si malý B2B SaaS pro správu servisních zakázek. Tým má dva vývojáře, jednoho zakladatele a externí účetní.
+
+První týden bezpečnostního základu může vypadat takto:
+
+1. **Den 1:** Sepiš mapu systémů: web, aplikace, databáze, DNS, e-mail, platby, analytika, support, účetnictví.
+2. **Den 2:** Zapni MFA všude, kde se dá spravovat produkce, peníze, zákaznická data nebo DNS.
+3. **Den 3:** Zkontroluj role a odeber admin práva lidem i tokenům, které je nepotřebují.
+4. **Den 4:** Projdi repozitář a CI/CD proměnné, jestli neobsahují reálná tajemství nebo staré tokeny.
+5. **Den 5:** Nastav zálohy databáze a napiš přesný postup obnovy.
+6. **Den 6:** Vytvoř jednostránkový incident plán a ulož ho tam, kde ho tým najde i při výpadku hlavní aplikace.
+7. **Den 7:** Udělej krátkou zkoušku: jeden člověk simuluje ztrátu přístupu, druhý podle dokumentace obnovuje kontrolu.
+
+Tohle není certifikace. Je to základní hygiena. Ale už po týdnu budeš mít menší riziko než firma, která má sice pěkný bezpečnostní slajd, ale pořád používá jeden sdílený účet do produkce.
+
+### I.8 Checklist bezpečnostního minima
+
+- [ ] Všechny kritické služby mají MFA a individuální účty.
+- [ ] Admin práva jsou omezená, zdokumentovaná a pravidelně revidovaná.
+- [ ] Tajemství nejsou v repozitáři, chatu, dokumentaci ani logu.
+- [ ] Produkce, staging a development jsou oddělené.
+- [ ] Testovací prostředí nepoužívá syrová produkční osobní data.
+- [ ] Logy neobsahují tokeny, hesla, zbytečné osobní údaje ani kompletní citlivé payloady.
+- [ ] Databáze se automaticky zálohuje a obnova byla reálně otestovaná.
+- [ ] Existuje jednostránkový incident plán s rolemi, kontakty a postupem zápisu časové osy.
+- [ ] Dodavatelé s přístupem k datům jsou zapsaní v mapě dat a mají jasný účel.
+- [ ] Po odchodu člověka z týmu existuje checklist zrušení přístupů.
+
+### I.9 Mini úkol na 60 minut
+
+Vyber tři nejkritičtější systémy: Git, hosting a databázi. U každého zkontroluj, kdo má přístup, jestli má MFA, jaká má oprávnění a kdy byl přístup naposledy potřeba. Pak odeber jeden zbytečný přístup nebo omez jedno příliš široké oprávnění. Bezpečnost se často nezlepší velkým prohlášením. Zlepší se tím, že dnes zavřeš jedny dveře, které měly být zavřené už včera.
+
 ## Zdroje
 
 - Evropská komise: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -2262,6 +2401,8 @@ Vyber jednu nejdůležitější stránku webu. Přepiš její title, description
 - RSS Advisory Board: RSS 2.0 Specification — https://www.rssboard.org/rss-specification
 - OWASP Top 10:2021 — https://owasp.org/Top10/
 - OWASP Application Security Verification Standard — https://owasp.org/www-project-application-security-verification-standard/
+- OWASP Cheat Sheet Series: Secrets Management Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html
+- OWASP Cheat Sheet Series: Logging Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
 - ENISA: Technical implementation guidance on cybersecurity risk-management measures, verze 1.0 — https://www.enisa.europa.eu/sites/default/files/2025-06/ENISA_Technical_implementation_guidance_on_cybersecurity_risk_management_measures_version_1.0.pdf
 - European Commission: NIS2 Directive — https://digital-strategy.ec.europa.eu/en/policies/nis2-directive
 - Google Research: Measuring the User Experience on a Large Scale: User-Centered Metrics for Web Applications — https://research.google/pubs/measuring-the-user-experience-on-a-large-scale-user-centered-metrics-for-web-applications/
@@ -2303,3 +2444,4 @@ Vyber jednu nejdůležitější stránku webu. Přepiš její title, description
 - 2026-09-07: Doplněn Dodatek F o retenci, mazání, exportu dat, zálohách a praktickém offboardingu zákazníka.
 - 2026-09-08: Doplněn Dodatek G o newsletteru, cookie liště, obchodních sděleních a férovém souhlasu bez manipulace.
 - 2026-09-08: Doplněn Dodatek H o technickém SEO bez trackerů, sitemap, robots.txt, metadatech, RSS a privacy-first auditu.
+- 2026-09-08: Doplněn Dodatek I o bezpečnostním minimu pro malý SaaS, včetně přístupů, tajemství, logů, záloh a incident plánu.
