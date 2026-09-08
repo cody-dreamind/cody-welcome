@@ -27,7 +27,7 @@ Každou kapitolu ber jako pracovní checklist. Nečti ji jako román do šuplík
 8. Praktické šablony: brief, landing page, launch checklist a audit soukromí.
 9. AI automatizace v evropském SaaS: užitek, governance a bezpečné nasazení.
 10. Cenotvorba a balíčky: hodnota, jednoduchost, férovost a důvěra.
-11. Dodatky: 30denní plán, výběr nástrojů, obsah, přístupnost, podpora, retence, souhlasy, technické SEO, bezpečnostní minimum, roadmapa, prodejní discovery, onboarding, jednoduché CRM, zpětná vazba, produktové e-maily a dashboardy.
+11. Dodatky: 30denní plán, výběr nástrojů, obsah, přístupnost, podpora, retence, souhlasy, technické SEO, bezpečnostní minimum, roadmapa, prodejní discovery, onboarding, jednoduché CRM, zpětná vazba, produktové e-maily, dashboardy a experimenty.
 
 ---
 
@@ -3865,6 +3865,160 @@ Krátký záznam je důležitý. Za měsíc uvidíš, jestli tým opravdu rozhod
 Vytvoř první verzi týdenního dashboardu bez nového nástroje. Stačí Markdown tabulka nebo sdílený dokument. Napiš pět rozhodnutí, která potřebuješ dělat každý týden, a ke každému přidej jednu metriku, vlastníka a akci. Pak vyškrtej všechno, co nevede k rozhodnutí. Pokud ti zbyde méně grafů, gratuluju — dashboard právě začal pracovat, místo aby jen flexil.
 
 
+
+## Dodatek V: Experimenty bez růstového šamanismu
+
+Experiment je dobrý sluha a hrozný šéf. V malém SaaS týmu ti může pomoct zjistit, jestli nový onboarding, ceník nebo formulář opravdu zlepšuje práci zákazníka. Stejně snadno se ale může změnit v nekonečné přebarvování tlačítek, kde všichni čekají na „statistickou významnost“ a mezitím produkt pomalu připomíná vánoční stromek po meetingu marketingu.
+
+Privacy-first experimentování má jinou ambici: ověřit rozhodnutí s co nejmenším množstvím dat, co nejrychleji a bez tajného sledování lidí. Nejde o to vědět všechno. Jde o to zjistit dost na to, aby tým udělal lepší další krok.
+
+### V.1 Experiment začíná hypotézou, ne nápadem
+
+Nápad zní: „Zkusíme kratší formulář.“ Hypotéza zní: „Když v poptávkovém formuláři odstraníme pole telefon a rozpočet, zvýší se počet relevantních odeslání, protože návštěvník nebude mít pocit, že předává víc údajů, než je nutné.“
+
+Rozdíl je obrovský. Hypotéza obsahuje:
+
+- změnu, kterou uděláš;
+- důvod, proč by měla pomoct;
+- metriku, kterou budeš sledovat;
+- riziko, které si hlídáš.
+
+Bez hypotézy budeš po týdnu koukat do grafu a hádat, co se vlastně stalo. To je sice kreativní činnost, ale také drahá forma digitální astrologie.
+
+### V.2 Vyber experiment podle rozhodnutí
+
+Ne každý experiment potřebuje A/B test. Malý tým často získá rychlejší odpověď jednodušším způsobem.
+
+| Rozhodnutí | Praktický experiment | Co měřit | Privacy-first poznámka |
+| --- | --- | --- | --- |
+| Je nabídka srozumitelná? | pět rozhovorů nad landing page | kde lidé váhají a co zopakují vlastními slovy | zapisuj poznámky k problému, ne zbytečné osobní detaily |
+| Funguje nový onboarding? | pustit novou verzi malé skupině nových účtů | dokončení prvního hodnotového kroku | používej produktové stavy, ne session replay |
+| Je ceník čitelný? | porovnat dotazy před a po úpravě ceníku | počet nejasností v poptávkách | agreguj typy dotazů, ne celé konverzace |
+| Pomáhá nový článek pro SEO? | publikovat článek a sledovat organické vstupy a konverzní krok | návštěvy, demo kliknutí, interní prokliky | měř stránku a referrer, ne osobní profil návštěvníka |
+
+Codyho komentář: Pokud ke každé změně potřebuješ tři nové nástroje, dva pixely a jeden dashboard s názvem „Growth Command Center“, experiment už dávno utekl z laboratoře a začal vybírat firemní kartu.
+
+### V.3 Měř jen signál, který změní akci
+
+Před spuštěním experimentu si napiš větu: „Když výsledek bude ___, uděláme ___.“ Pokud ji neumíš dokončit, měření je dekorace.
+
+Příklady dobrých rozhodovacích pravidel:
+
+- Pokud se po zkrácení formuláře zvýší počet relevantních poptávek a nezhorší se kvalita odpovědí, změnu necháme.
+- Pokud nový onboarding zvýší dokončení prvního projektu, ale přibude support dotazů k nastavení, necháme tok a doplníme kontextovou nápovědu.
+- Pokud nová ceníková stránka přinese víc demo kliknutí, ale méně kvalifikovaných leadů, upravíme text limitů a příklady vhodných zákazníků.
+- Pokud článek přivádí návštěvnost, ale nevede k žádnému dalšímu kroku, doplníme relevantní CTA nebo interní odkaz.
+
+Slabé pravidlo je „uvidíme podle dat“. To většinou znamená „vybereme graf, který podpoří názor nejhlasitějšího člověka v místnosti“.
+
+### V.4 Chraň experiment před falešnou přesností
+
+Malý web nebo mladý SaaS často nemá tolik dat, aby každá změna měla krásný čistý závěr. To nevadí. Horší je tvářit se, že dva kliky navíc jsou produktová pravda vytesaná do kamene.
+
+Používej raději tři úrovně jistoty:
+
+- **Silný signál:** změna se opakuje napříč více týdny, segmenty nebo kanály a dává smysl i kvalitativně.
+- **Slabý signál:** něco se pohnulo, ale může jít o sezónnost, malý vzorek nebo jeden silný zdroj návštěvnosti.
+- **Žádný použitelný signál:** výsledek je nejasný; rozhodni podle strategie, nákladů a uživatelského dopadu.
+
+Do záznamu experimentu vždy napiš i omezení. Například: „Běželo pouze na české landing page“, „vzorek byl malý“, „během experimentu šla ven kampaň“, „support byl zrovna vytížený“. Neoslabuje to práci. Naopak to brání tomu, aby se z opatrného poznatku stala firemní pověra.
+
+### V.5 Privacy-first pravidla pro produktové experimenty
+
+Experimentování nesmí být omluva pro větší sběr dat. Pokud se ti nechce vysvětlovat zákazníkovi, proč daný údaj potřebuješ, je to dobrý signál, že ho nepotřebuješ.
+
+Drž se těchto pravidel:
+
+- Preferuj agregované metriky před individuálním sledováním.
+- Pokud potřebuješ segment, začni široce: nový účet, aktivní účet, placený účet, trial.
+- Nepoužívej session replay jako výchozí nástroj; nejdřív oprav logy, formuláře a jasnost textu.
+- Nepropojuj marketingové experimenty s osobními profily, pokud k tomu nemáš silný důvod a jasný právní základ.
+- Neposílej citlivá data do nástrojů pro heatmapy, A/B testy nebo reklamu.
+- U každého experimentu si napiš dobu uchování dat a kdo může výsledek vidět.
+
+Privacy-first experiment není pomalejší. Často je rychlejší, protože tým nemusí spravovat hromadu šumu, výjimek, přístupů a vysvětlování, proč se v analytice objevily údaje, které tam nikdy neměly být.
+
+### V.6 Konkrétní příklad: experiment se stránkou ceníku
+
+Situace: B2B SaaS má hodně návštěv ceníku, ale málo žádostí o demo. Zakladatel má chuť přidat agresivní pop-up. Cody mu jemně sebere klávesnici.
+
+Lepší experiment:
+
+**Hypotéza:** Návštěvníci neklikají na demo, protože nerozumí rozdílu mezi balíčky a bojí se, že špatně vyberou.
+
+**Změna:**
+
+- Přepsat názvy balíčků podle typu zákazníka, ne podle interního marketingu.
+- Přidat ke každému balíčku větu „vhodné pro“.
+- Zvýraznit férové limity a možnost změny balíčku.
+- CTA změnit z „Kontaktujte nás“ na „Probrat vhodný balíček“.
+
+**Měření:**
+
+- počet kliknutí na demo z ceníku;
+- počet poptávek, kde zákazník uvádí konkrétní balíček;
+- počet support/prodej dotazů typu „nevím, co vybrat“;
+- kvalita poptávek podle ručního týdenního review.
+
+**Ochrana dat:**
+
+- žádný nový reklamní pixel;
+- žádné ukládání celého chování návštěvníka;
+- jen agregované události stránky a ruční štítky typů dotazů;
+- po vyhodnocení zůstane záznam experimentu, ne surová hromada osobních údajů.
+
+### V.7 Jednostránkový záznam experimentu
+
+Použij tento formát pro každý experiment, který má ovlivnit produkt nebo marketing:
+
+```md
+## Experiment: [název]
+
+### Hypotéza
+Když [změna], stane se [výsledek], protože [důvod].
+
+### Rozhodnutí
+Pokud [signál], uděláme [akce]. Pokud ne, uděláme [náhradní akce].
+
+### Rozsah
+Stránka/funkce:
+Segment:
+Doba běhu:
+Vlastník:
+
+### Metriky
+Primární:
+Kontrolní:
+Kvalitativní poznámky:
+
+### Privacy kontrola
+Jaká data sbíráme:
+Kde leží:
+Kdo k nim má přístup:
+Kdy je smažeme nebo agregujeme:
+
+### Výsledek
+Co jsme zjistili:
+Co uděláme dál:
+Co nevíme:
+```
+
+### V.8 Checklist experimentu bez šmírování
+
+- Experiment má jasnou hypotézu, vlastníka a konec.
+- Metrika je napojená na rozhodnutí, ne jen na zvědavost.
+- Kontrolní metrika hlídá, jestli zlepšení nevyrábí nový problém.
+- Segmentace je co nejhrubší a obhajitelná.
+- Nástroje neposílají osobní ani citlivá data zbytečně mimo produkt.
+- Výsledek obsahuje omezení, ne jen vítězný graf.
+- Po vyhodnocení zůstane stručný záznam a nepotřebná surová data zmizí.
+- Každý experiment se dá vysvětlit zákazníkovi bez červenání.
+
+### V.9 Mini úkol na 45 minut
+
+Vyber jednu stránku nebo jeden krok v produktu, kde tým dlouho říká „tohle asi nefunguje“. Napiš jednu hypotézu, jednu metriku a jedno rozhodovací pravidlo. Pak zkontroluj, jestli kvůli tomu opravdu potřebuješ nový nástroj nebo nové osobní údaje. Pokud ne, gratuluju: právě jsi udělal experiment, ne sledovací reality show.
+
+
 ## Zdroje
 
 - Evropská komise: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -3914,6 +4068,7 @@ Vytvoř první verzi týdenního dashboardu bez nového nástroje. Stačí Markd
 
 ## Pracovní log
 
+- 2026-09-08: Doplněn Dodatek V o produktových a marketingových experimentech, hypotézách, rozhodovacích pravidlech a privacy-first měření bez šmírování.
 - 2026-09-08: Doplněn Dodatek U o praktických dashboardech, týdenním review, vlastnících metrik a privacy-first pravidlech pro rozhodování podle dat.
 - 2026-09-08: Doplněn Dodatek T o produktových e-mailech, transakčních zprávách, notifikacích, měření bez sledování a checklistu komunikace.
 - 2026-09-08: Doplněn Dodatek S o formulářích, mikrokopii, CTA, chybových stavech a privacy-first práci s formulářovými daty.
