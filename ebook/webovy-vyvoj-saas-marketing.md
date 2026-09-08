@@ -27,7 +27,7 @@ Každou kapitolu ber jako pracovní checklist. Nečti ji jako román do šuplík
 8. Praktické šablony: brief, landing page, launch checklist a audit soukromí.
 9. AI automatizace v evropském SaaS: užitek, governance a bezpečné nasazení.
 10. Cenotvorba a balíčky: hodnota, jednoduchost, férovost a důvěra.
-11. Dodatky: 30denní plán, výběr nástrojů, obsah, přístupnost, podpora, retence, souhlasy, technické SEO, bezpečnostní minimum, roadmapa, prodejní discovery, onboarding, jednoduché CRM a zpětná vazba.
+11. Dodatky: 30denní plán, výběr nástrojů, obsah, přístupnost, podpora, retence, souhlasy, technické SEO, bezpečnostní minimum, roadmapa, prodejní discovery, onboarding, jednoduché CRM, zpětná vazba a produktové e-maily.
 
 ---
 
@@ -3628,6 +3628,128 @@ Krátké, jasné, bez kouře. Přesně takhle má formulář působit.
 Vezmi jeden formulář na webu nebo v produktu. U každého pole napiš „proč ho potřebujeme právě teď“. Pak smaž nebo odlož všechno, co neobhájíš. Nakonec přepiš tlačítko a potvrzovací zprávu tak, aby člověk přesně věděl, co se stane po kliknutí. Pokud se formulář zkrátí o třetinu, nebourej šampaňské — jen jsi odstranil digitální celní kontrolu.
 
 
+## Dodatek T: Produktové e-maily a notifikace bez inboxového teroru
+
+E-mail je pořád jeden z nejspolehlivějších kanálů v SaaS. Ne proto, že je moderní, ale protože funguje napříč firmami, zařízeními a pracovními návyky. Právě proto se s ním musí zacházet opatrně. Špatně nastavené produktové e-maily dokážou během týdne změnit užitečný nástroj v hlučný automat na odhlášení.
+
+Privacy-first produktová komunikace má jednoduchý cíl: poslat správnou zprávu ve správný čas, s minimem dat a bez manipulace. Ne každý klik potřebuje e-mail. Ne každý e-mail potřebuje tracking pixel. A už vůbec ne každá novinka potřebuje dramatický předmět ve stylu „Tohle vám změní život“, když realita je nové tlačítko exportu do CSV.
+
+ÚOOÚ u obchodních sdělení připomíná, že marketingová komunikace má mít právní základ a příjemce musí mít možnost ji jednoduše odmítnout. Zdroj: https://uoou.gov.cz/index.php/profesional/qa-otazky-a-odpovedi/obchodni-sdeleni
+
+### T.1 Rozliš transakční, produktové a marketingové zprávy
+
+Než začneš psát šablony, rozděl e-maily podle účelu. Pomůže ti to s frekvencí, souhlasy, obsahem i technickým nastavením.
+
+| Typ zprávy | Příklad | Primární účel | Privacy-first poznámka |
+| --- | --- | --- | --- |
+| Transakční | potvrzení registrace, reset hesla, faktura | dokončit nebo potvrdit akci | neposílej do ní reklamu maskovanou jako servisní informaci |
+| Produktová | pozvánka do týmu, upozornění na dokončený export, změna stavu úkolu | pomoct s používáním služby | umožni vypnout nepovinné notifikace podle typu |
+| Bezpečnostní | nové přihlášení, změna hesla, změna práv | chránit účet | posílej rychle, stručně a s jasným dalším krokem |
+| Marketingová | newsletter, nabídka konzultace, launch kampaně | rozvíjet vztah a prodej | vyžaduje férový souhlas nebo jiný jasně zdokumentovaný základ |
+
+Nejhorší je míchat kategorie dohromady. Když do faktury přidáš tři promo bloky, možná získáš jedno kliknutí. Zároveň ale učíš zákazníka, že servisní e-maily jsou reklamní letáky v převleku.
+
+### T.2 Každý e-mail musí mít rozhodnutí
+
+Před odesláním si napiš jednu větu: „Tento e-mail má příjemci pomoct udělat ___.” Pokud prázdné místo neumíš vyplnit, e-mail pravděpodobně nemá existovat.
+
+Dobré cíle:
+
+- dokončit registraci;
+- obnovit přístup k účtu;
+- zkontrolovat novou fakturu;
+- pozvat kolegu do workspace;
+- zjistit, proč import selhal;
+- přečíst důležitou změnu podmínek nebo provozu.
+
+Slabé cíle:
+
+- „zvýšit engagement“;
+- „připomenout se“;
+- „využít databázi“;
+- „protože konkurence posílá onboarding sérii“.
+
+Codyho komentář: Pokud e-mail existuje hlavně proto, aby graf v marketingovém nástroji vypadal živěji, není to komunikace. Je to digitální klepání na rameno člověka, který se snaží pracovat.
+
+### T.3 Onboardingová sekvence má být krátká a situační
+
+Onboardingové e-maily často selhávají tím, že vysvětlují všechno všem. Nový uživatel nepotřebuje encyklopedii produktu. Potřebuje další krok, který ho přiblíží k první hodnotě.
+
+Pro malý B2B SaaS stačí jednoduchý start:
+
+1. **Uvítání po registraci:** potvrď účet, připomeň hlavní přínos, nabídni jeden první krok.
+2. **Pomoc po neaktivitě:** pokud uživatel nedokončil nastavení, pošli stručnou nápovědu a možnost odpovědět člověku.
+3. **První úspěch:** když dokončí důležitou akci, ukaž co dál — ne deset funkcí, jen jednu relevantní.
+4. **Tichý konec:** když nereaguje, neposílej nekonečný seriál. Dej poslední užitečný odkaz a nech ho dýchat.
+
+Privacy-first varianta používá stav produktu, ne šmírovací mikrosignály. Rozdíl je zásadní: „uživatel vytvořil první projekt“ je legitimní produktový stav. „uživatel otevřel e-mail v 22:13 a pohnul kurzorem nad odkazem“ je většinou zbytečný datový konfety kanón.
+
+### T.4 Nastavení notifikací patří do produktu
+
+Pokud produkt posílá notifikace, uživatel musí mít kontrolu. Ne až po kontaktování podpory, ne přes tajný odkaz v patičce, ale přímo v nastavení účtu.
+
+Rozumné volby:
+
+- bezpečnostní upozornění vždy zapnutá;
+- faktury a právní zprávy podle role uživatele;
+- produktové notifikace po kategoriích;
+- souhrnný denní nebo týdenní digest místo jednotlivých zpráv;
+- tiché režimy pro týmy s vysokou aktivitou;
+- okamžité vypnutí marketingových sdělení bez rušení účtu.
+
+U týmových produktů přidej i firemní úroveň: administrátor může nastavit, kdo dostává faktury, incidenty, exporty, pozvánky nebo bezpečnostní události. Jinak skončíš u univerzálního řešení „pošleme všechno majiteli“, což je elegantní způsob, jak z jednoho člověka udělat interní přeposílací router.
+
+### T.5 Měř méně, ale užitečněji
+
+U e-mailů je lákavé měřit open rate, každý klik a každý pohyb. Privacy-first přístup začíná otázkou: „Jaké rozhodnutí tím měřením uděláme?“
+
+Místo sledování jednotlivců často stačí:
+
+- počet doručených zpráv podle typu;
+- počet odhlášení po kampani;
+- počet odpovědí od reálných zákazníků;
+- počet dokončených produktových akcí po relevantní notifikaci;
+- počet support ticketů způsobených nejasným e-mailem;
+- počet chyb doručení u faktur a bezpečnostních zpráv.
+
+Nepotřebuješ vědět všechno o každém člověku. Potřebuješ vědět, jestli zpráva pomáhá nebo škodí. To je menší datový hlad a lepší produktové rozhodování. Divné, jak často spolu etika a zdravý rozum podezřele dobře vycházejí.
+
+### T.6 Šablona dobrého produktového e-mailu
+
+Použij jednoduchou strukturu:
+
+1. **Předmět:** konkrétní a klidný — „Export zakázek je připraven“.
+2. **První věta:** proč e-mail přichází — „Dokončili jsme export, který jste spustili dnes v 10:14.“
+3. **Hlavní akce:** jedno tlačítko nebo odkaz — „Stáhnout export“.
+4. **Bezpečnostní detail:** kdy odkaz vyprší, kdo akci spustil, čeho se týká.
+5. **Alternativa:** co dělat, když příjemce akci nepoznává nebo potřebuje pomoc.
+6. **Soukromí:** u citlivějších zpráv stručně připomeň, že odkaz nesdílíš veřejně a data držíš jen po nezbytnou dobu.
+
+Příklad:
+
+> Předmět: Export faktur je připraven
+>
+> Dobrý den, export faktur za srpen je hotový. Stáhnout ho může administrátor workspace do 7 dnů v části Fakturace → Exporty. Pokud jste export nespustili vy ani nikdo z týmu, odpovězte na tento e-mail a zkontrolujeme přístupy.
+
+Krátké, věcné, bez ohňostroje. E-mail nemá vyhrát literární soutěž. Má pomoct člověku dokončit práci.
+
+### T.7 Checklist produktové komunikace
+
+- [ ] Každý e-mail má jasný účel a jednu hlavní akci.
+- [ ] Transakční, bezpečnostní, produktové a marketingové zprávy jsou oddělené.
+- [ ] Nepovinné notifikace lze vypnout podle kategorií.
+- [ ] Marketingové zprávy mají férový souhlas nebo zdokumentovaný právní základ.
+- [ ] Servisní e-maily neobsahují skrytou reklamu.
+- [ ] Měření e-mailů je agregované a navázané na konkrétní rozhodnutí.
+- [ ] Citlivá data nejsou v předmětu e-mailu ani v chatových notifikacích.
+- [ ] Šablony mají jasné chybové a bezpečnostní scénáře.
+- [ ] Odhlášení z marketingu je jednodušší než založení účtu. Laťka není vysoko, tak ji prosím nepodlézejme.
+
+### T.8 Mini úkol na 45 minut
+
+Vezmi posledních pět e-mailů, které tvůj produkt posílá. U každého napiš typ zprávy, účel, hlavní akci, komu chodí, jak se dá vypnout a jaká data se v něm objevují. Pak smaž nebo slouč zprávy, které nemají jasné rozhodnutí. Bonus: vytvoř jeden týdenní digest místo tří drobných upozornění. Inbox ti nepoděkuje nahlas, ale bude tě méně nenávidět.
+
+
 ## Zdroje
 
 - Evropská komise: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -3677,6 +3799,7 @@ Vezmi jeden formulář na webu nebo v produktu. U každého pole napiš „proč
 
 ## Pracovní log
 
+- 2026-09-08: Doplněn Dodatek T o produktových e-mailech, transakčních zprávách, notifikacích, měření bez sledování a checklistu komunikace.
 - 2026-09-08: Doplněn Dodatek S o formulářích, mikrokopii, CTA, chybových stavech a privacy-first práci s formulářovými daty.
 - 2026-09-08: Doplněn Dodatek R o privacy-first zpětné vazbě, krátkých produktových otázkách, třídění signálů a práci s feedbackem bez zbytečného sledování.
 - 2026-09-08: Doplněn Dodatek Q o changelogu, release komunikaci, RSS, střídmých oznámeních a privacy-first pravidlech produktových novinek.
