@@ -27,7 +27,7 @@ Každou kapitolu ber jako pracovní checklist. Nečti ji jako román do šuplík
 8. Praktické šablony: brief, landing page, launch checklist a audit soukromí.
 9. AI automatizace v evropském SaaS: užitek, governance a bezpečné nasazení.
 10. Cenotvorba a balíčky: hodnota, jednoduchost, férovost a důvěra.
-11. Dodatky: 30denní plán, výběr nástrojů, obsah, přístupnost, podpora, retence, souhlasy, technické SEO, bezpečnostní minimum, roadmapa, prodejní discovery a onboarding.
+11. Dodatky: 30denní plán, výběr nástrojů, obsah, přístupnost, podpora, retence, souhlasy, technické SEO, bezpečnostní minimum, roadmapa, prodejní discovery, onboarding a jednoduché CRM.
 
 ---
 
@@ -3028,6 +3028,131 @@ Support si k tomu drží tři otázky:
 
 Otevři svůj aktuální onboarding a napiš na papír tři věci: první hodnota, první zbytečný údaj a první místo, kde uživatel může zabloudit. Jednu z nich dnes oprav. Ne všechno. Jednu. Produktivita není počet otevřených front, ale počet zavřených smyček.
 
+## Dodatek O: Jednoduché CRM bez datového smogu
+
+CRM není trezor na všechny lidi, kteří kdy prošli kolem stánku s logem. CRM je pracovní paměť obchodu a péče o zákazníky. Má týmu říct, s kým mluví, proč na tom záleží, co je další férový krok a kdy se má ozvat. V malém SaaS nebo agenturním provozu často stačí méně polí, méně automatizací a víc disciplíny.
+
+Codyho komentář: Když má CRM třicet povinných polí a nikdo mu nevěří, není to systém. Je to digitální skříň, do které tým hází ponožky a doufá, že se z nich samy spárují obchody.
+
+### O.1 Začni pipeline podle rozhodnutí zákazníka
+
+Pipeline nemá kopírovat interní naděje obchodníka. Má popisovat, kde je zákazník ve svém rozhodování. Díky tomu víš, jak pomoct, a nespleteš si „poslali jsme prezentaci“ s „zákazník chápe hodnotu“.
+
+Jednoduchá B2B SaaS pipeline může vypadat takto:
+
+| Fáze | Co víme | Další krok |
+| --- | --- | --- |
+| Nový kontakt | Víme, kdo se ozval a s jakým problémem | Ověřit kontext a vhodnost |
+| Potvrzený problém | Zákazník popsal bolest, dopad a současné řešení | Ukázat relevantní scénář nebo demo |
+| Vyhodnocení | Zákazník porovnává možnosti, cenu a riziko změny | Dodat odpovědi, bezpečnostní info a jasnou nabídku |
+| Rozhodnutí | Existuje konkrétní vlastník, termín a nákupní proces | Domluvit objednávku, trial nebo pilot |
+| Zákazník | Proběhla platba nebo aktivní používání | Předat do onboardingu a podpory |
+
+Každá fáze by měla mít vstupní kritérium. Pokud ho nemá, tým bude posouvat karty podle nálady. A nálada je špatný CRM engine, i když má hezký kanban.
+
+### O.2 Sbírej jen údaje, které mění další krok
+
+Privacy-first CRM stojí na jednoduché otázce: „Pomůže nám tento údaj zákazníkovi lépe poradit, obsloužit ho nebo splnit povinnost?“ Pokud ne, pole pryč.
+
+Užitečné minimum:
+
+- Kontakt: jméno, pracovní e-mail, firma a role, pokud jsou relevantní.
+- Kontext: problém, velikost týmu, současné řešení a očekávaný dopad.
+- Stav: fáze pipeline, další krok, odpovědný člověk a datum připomenutí.
+- Souhlasy: zda jde o obchodní komunikaci, produktové zprávy, nebo běžnou servisní komunikaci.
+- Poznámky: stručné shrnutí domluvy, ne přepis celé konverzace a osobní dojmy.
+
+Co do CRM nepatří bez opravdu dobrého důvodu:
+
+- Soukromé poznámky o osobnosti zákazníka.
+- Citlivé údaje, které nesouvisí s nákupem ani podporou.
+- Neomezené kopie e-mailů, příloh a nahrávek schůzek.
+- Automaticky nasáté kontakty bez jasného původu a účelu.
+
+### O.3 Zdroj kontaktu musí být dohledatelný
+
+U každého kontaktu si drž jednoduchou informaci, odkud přišel a proč mu smíš psát. Není to byrokracie pro radost z tabulek. Je to způsob, jak se vyhnout chaosu, trapným follow-upům a kampaním na lidi, kteří nikdy nechtěli být v databázi.
+
+Praktický záznam může mít čtyři položky:
+
+- Zdroj: formulář na webu, doporučení, konference, inbound e-mail, existující zákazník.
+- Účel: poptávka, support, partnerství, newsletter, účast na webináři.
+- Povolený typ komunikace: odpověď na dotaz, servisní zpráva, obchodní follow-up, marketingový newsletter.
+- Retence: kdy kontakt znovu vyhodnotit nebo smazat, pokud nevznikne vztah.
+
+Když nevíš, odkud kontakt je, nezačni mu psát „navazuji na náš skvělý rozhovor“. Možná žádný nebyl. A CRM amnézie není dobrý icebreaker.
+
+### O.4 Automatizace má hlídat rytmus, ne nahrazovat vztah
+
+Automatizace v CRM je užitečná, když brání zapomenutí. Je škodlivá, když předstírá osobní péči ve velkém. Malý tým obvykle nepotřebuje složitý scoring z padesáti signálů. Potřebuje spolehlivé připomínky a jasné šablony.
+
+Dobrý začátek:
+
+- Připomenout obchodníkovi, když slíbený follow-up nemá datum.
+- Upozornit na trial, který se blíží ke konci a zatím nemá domluvený další krok.
+- Vytvořit úkol pro support po prvním týdnu placeného zákazníka.
+- Označit kontakty bez aktivity po 90 dnech k revizi, ne k automatickému spamování.
+
+Špatný začátek:
+
+- Posílat sérii sedmi e-mailů podle každého kliknutí.
+- Zvyšovat lead score podle návštěvy ceníku bez ověření kontextu.
+- Kopírovat celé chaty do CRM bez retenčních pravidel.
+- Nutit tým vyplňovat pole, která nikdo nepoužívá při rozhodování.
+
+### O.5 Propoj CRM s onboardingem a podporou
+
+Největší hodnota CRM často přijde až po podpisu. Když obchod předá zákazníka bez kontextu, onboarding začíná výslechem: „Tak nám ještě jednou řekněte, co vlastně potřebujete.“ To je jako kdyby restaurace po objednávce chtěla znovu slyšet, proč máte hlad.
+
+Předávací poznámka ze CRM do onboardingu má obsahovat:
+
+- Původní problém zákazníka jednou větou.
+- Slíbený výsledek nebo důvod nákupu.
+- Rizika: migrace, integrace, termín, interní schvalování, odpor týmu.
+- Domluvené hranice: co produkt umí, co neumí a co nebylo slíbeno.
+- Kontakty: kdo rozhoduje, kdo používá produkt a kdo řeší fakturaci.
+
+Tahle poznámka nesmí být román. Ideálně se vejde do jedné obrazovky. Cílem je kontinuita, ne archiv reality show.
+
+### O.6 Konkrétní příklad: CRM pro malou SaaS firmu
+
+Firma prodává SaaS pro správu zakázek. Má jednoho zakladatele, jednu člověčici na support a externího vývojáře. CRM může začít v jednoduchém nástroji nebo tabulce, pokud má disciplínu.
+
+Základní sloupce:
+
+| Pole | Příklad |
+| --- | --- |
+| Firma | Novák Elektro s.r.o. |
+| Kontakt | Jana Nováková, provozní manažerka |
+| Problém | Zakázky jsou v e-mailech a ztrácí se termíny |
+| Fáze | Potvrzený problém |
+| Další krok | Poslat ukázku workflow pro servisní zásahy |
+| Datum dalšího kroku | Pátek 10:00 |
+| Zdroj | Doporučení od existujícího zákazníka |
+| Komunikace | Obchodní follow-up k poptávce, bez newsletteru |
+| Retence | Smazat nebo anonymizovat, pokud do 6 měsíců nevznikne vztah |
+
+Tým si každý pátek projde jen tři otázky:
+
+- Které příležitosti nemají další krok?
+- Které kontakty držíme bez jasného důvodu?
+- Co jsme se tento týden naučili pro produkt, onboarding nebo obsah?
+
+### O.7 Checklist jednoduchého CRM
+
+- Pipeline popisuje rozhodování zákazníka, ne interní pocity týmu.
+- Každá fáze má jasné vstupní kritérium a očekávaný další krok.
+- CRM obsahuje jen pole, která pomáhají prodeji, onboardingu, podpoře nebo povinnostem.
+- U kontaktů držíme zdroj, účel komunikace a pravidlo retence.
+- Automatizace vytváří úkoly a připomínky, ne agresivní sekvence bez kontextu.
+- Obchod předává onboardingu stručné shrnutí problému, slibu, rizik a kontaktů.
+- Staré kontakty pravidelně mažeme, anonymizujeme nebo znovu oprávněně zařazujeme.
+- Jednou měsíčně smažeme nebo sloučíme pole, která nikdo nepoužil k rozhodnutí.
+
+### O.8 Mini úkol na 45 minut
+
+Otevři CRM, tabulku nebo seznam kontaktů a najdi deset posledních záznamů. U každého si odpověz: víme, odkud přišel, proč ho držíme a co je další krok? Pokud ne, buď doplň kontext, nebo kontakt označ k vyčištění. CRM má být mapa vztahů, ne muzeum dávných nadějí.
+
 ## Zdroje
 
 - Evropská komise: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -3101,3 +3226,4 @@ Otevři svůj aktuální onboarding a napiš na papír tři věci: první hodnot
 - 2026-09-08: Doplněn Dodatek L o roadmapě bez chaosu, prioritizaci podle problémů, týdenním review a privacy kontrole nových funkcí.
 - 2026-09-08: Doplněn Dodatek M o prodejní discovery bez nátlaku, privacy-first zápisu ze schůzek, follow-upu a férovém odmítání nevhodných obchodů.
 - 2026-09-08: Doplněn Dodatek N o privacy-first onboardingu, první hodnotě, kontextové nápovědě, aktivačních metrikách a užitečných e-mailech.
+- 2026-09-08: Doplněn Dodatek O o jednoduchém privacy-first CRM, pipeline, zdrojích kontaktů, automatizaci a předání do onboardingu.
