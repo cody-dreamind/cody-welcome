@@ -3153,6 +3153,139 @@ Tým si každý pátek projde jen tři otázky:
 
 Otevři CRM, tabulku nebo seznam kontaktů a najdi deset posledních záznamů. U každého si odpověz: víme, odkud přišel, proč ho držíme a co je další krok? Pokud ne, buď doplň kontext, nebo kontakt označ k vyčištění. CRM má být mapa vztahů, ne muzeum dávných nadějí.
 
+
+## Dodatek P: Interní dokumentace, která nepáchne archivem
+
+Dokumentace v malém týmu nemá být chrám nekonečných stránek. Má být pracovní paměť firmy: proč jsme se rozhodli takhle, jak se co dělá, kdo za co odpovídá a co se stane, když někdo v pondělí ráno zapomene heslo, kontext nebo vlastní existenci. Dobrá dokumentace šetří čas, snižuje závislost na jednom člověku a pomáhá držet privacy-first provoz i ve chvíli, kdy tým roste.
+
+Codyho komentář: Nedokumentovaný proces je jako recept po babičce napsaný stylem „přidej trochu toho správného“. Funguje, dokud je babička online. Pak přijde produkční incident a všichni míchají mouku s DNS.
+
+### P.1 Dokumentuj rozhodnutí, ne všechno
+
+Nejčastější chyba je myslet si, že dokumentace znamená popsat celý vesmír. Tým pak začne velkolepě, vytvoří patnáct složek, tři šablony a po týdnu má dokumentační hřbitov. Mnohem lepší je zapisovat rozhodnutí, která budou bolet, pokud je zapomenete.
+
+Začni těmito typy záznamů:
+
+- **Produktové rozhodnutí:** proč funkci děláme, pro koho je a co záměrně neděláme.
+- **Technické rozhodnutí:** proč volíme konkrétní stack, knihovnu, hosting nebo databázi.
+- **Datové rozhodnutí:** jaká data sbíráme, proč, kde leží a kdy se mažou.
+- **Provozní rozhodnutí:** jak se zálohuje, nasazuje, řeší incident a předává podpora.
+- **Obchodní rozhodnutí:** pro jaký segment prodáváme, jaké sliby dáváme a kde jsou hranice.
+
+Každý záznam může mít pět řádků. Není potřeba psát diplomku. Stačí, aby za tři měsíce někdo pochopil, proč jste nepřidali další tracker, proč běží databáze v EU regionu a proč zákazníkovi neslibujete export ve formátu, který neumíte udržet.
+
+### P.2 Jedna stránka pro každý opakovaný proces
+
+Když se něco opakuje, zaslouží si stručný postup. Ne proto, že lidé neumí přemýšlet, ale proto, že nechceš utrácet pozornost za věci, které mají být nudně spolehlivé.
+
+Dobrá procesní stránka má tuto strukturu:
+
+| Sekce | Co obsahuje |
+| --- | --- |
+| Kdy postup použít | Spouštěč nebo situace, kdy stránka patří do ruky |
+| Cíl | Jak poznáme, že je hotovo |
+| Kroky | Krátký očíslovaný postup bez interních básní |
+| Rizika | Co se nesmí pokazit, hlavně u dat a přístupů |
+| Odpovědnost | Kdo rozhoduje, kdo provádí a koho informovat |
+| Kontrola | Jak ověřit výsledek |
+
+Příklad pro nový zákaznický účet:
+
+1. Ověřit smluvní a fakturační údaje.
+2. Vytvořit workspace bez zbytečných demo dat, pokud zákazník žádá čistý start.
+3. Přidat jen nutné administrátory.
+4. Poslat onboardingový e-mail s prvním krokem a odkazem na export/soukromí.
+5. Zapsat do CRM původní problém, slíbený výsledek a další kontrolní datum.
+
+Tohle není byrokracie. To je ochrana před „já myslel, že to děláš ty“. Tahle věta už položila víc projektů než špatně nastavený cache header.
+
+### P.3 Privacy-first dokumentace má vlastní pravidla
+
+Interní dokumentace často nepozorovaně nasává citlivé informace: screenshoty administrace, kopie e-mailů, exporty zákaznických dat, odkazy na záznamy hovorů nebo osobní poznámky ze schůzek. Pokud wiki nemá pravidla, stane se z ní druhá databáze, jen bez audit logu a retenčního plánu.
+
+Nastav jednoduché hranice:
+
+- Do dokumentace nepatří produkční osobní údaje, pokud nejsou nezbytné pro konkrétní incident nebo právní povinnost.
+- Screenshoty anonymizuj dřív, než je vložíš do návodu.
+- Přístup do wiki dej podle role, ne podle historického zvyku „všichni všechno“.
+- Záznamy incidentů drž odděleně od obecných postupů a nastav pro ně retenci.
+- Tajemství, tokeny a hesla nikdy nepatří do stránky, komentáře ani přílohy.
+- Když dokument odkazuje na externí nástroj, napiš, jaká data tam odcházejí.
+
+Privacy-first dokumentace není sterilní. Je použitelná, ale neukládá víc dat, než potřebuje. Když potřebuješ příklad, vytvoř fiktivní firmu, fiktivní e-mail a fiktivní fakturu. Zákazníkova reálná data nejsou výuková pomůcka.
+
+### P.4 Rozhodovací záznam pro malý tým
+
+Pro technická a produktová rozhodnutí stačí jednoduchý formát. Říkej mu ADR, decision log nebo „proč jsme se nezbláznili“. Název je vedlejší. Důležité je, aby se záznam dal rychle najít.
+
+Šablona:
+
+```md
+# Rozhodnutí: Použijeme privacy-first analytiku bez reklamních identifikátorů
+
+Datum: 2026-09-08
+Stav: přijato
+Vlastník: produkt / provoz
+
+## Kontext
+Potřebujeme měřit návštěvnost webu a konverze bez cross-site sledování.
+
+## Rozhodnutí
+Budeme měřit agregované pageviews, referrery a vlastní události. Nebudeme používat reklamní pixely ani session replay ve výchozím režimu.
+
+## Důsledky
+Marketing má méně detailní osobní data, ale web je jednodušší, rychlejší a lépe obhajitelný vůči zákazníkům.
+
+## Kontrola
+Jednou za měsíc projdeme, které události reálně používáme k rozhodování.
+```
+
+Takový záznam pomůže novému člověku pochopit hodnoty týmu. A pomůže i starému člověku, který si po třech sprintech pamatuje jen to, že „někde jsme to řešili“.
+
+### P.5 Dokumentace musí být blízko práci
+
+Dokumentace selhává, když je daleko od místa, kde ji lidé potřebují. Pokud vývojář řeší nasazení, runbook má být u repozitáře nebo přímo odkazovaný z README. Pokud support odpovídá na dotazy, odpovědi mají být u šablon podpory. Pokud obchod řeší bezpečnostní otázky, stránka o datech má být v CRM nebo sales enablement prostoru.
+
+Praktické pravidlo:
+
+- Technické postupy drž u kódu.
+- Produktová rozhodnutí drž u roadmapy.
+- Support postupy drž u helpdesku.
+- Obchodní argumentaci drž u CRM.
+- Veřejnou dokumentaci drž tam, kde ji najde zákazník bez prosby.
+
+Jedna centrální wiki může fungovat jako rozcestník, ale ne jako černá díra. Pokud dokument nejde najít do dvou minut, pro běžnou práci neexistuje. Ano, i když má krásný emoji nadpis.
+
+### P.6 Konkrétní příklad: týdenní údržba znalostí
+
+Malý SaaS tým si může nastavit páteční 30min rituál. Ne meeting pro meeting, ale úklid po týdnu.
+
+Agenda:
+
+1. Vybrat tři support dotazy, které se opakovaly.
+2. Zkontrolovat, jestli odpověď existuje v dokumentaci.
+3. Jednu chybějící odpověď doplnit veřejně, pokud neobsahuje interní citlivosti.
+4. Jeden interní postup zkrátit nebo opravit podle reality.
+5. Jeden starý dokument označit jako aktuální, archivovaný nebo k přepsání.
+
+Výsledek po měsíci: dokumentace roste podle skutečných problémů, ne podle ambicí někoho, kdo v lednu koupil nový nástroj na knowledge management a v únoru ho opustil jako novoroční předsevzetí.
+
+### P.7 Checklist dokumentace bez archivační mlhy
+
+- Máme jedno místo, kde najdu aktuální rozcestník dokumentace.
+- Každý opakovaný proces má stručný postup, vlastníka a kontrolu výsledku.
+- Technická, produktová a datová rozhodnutí zapisujeme ve formátu „kontext, rozhodnutí, důsledky“.
+- Do dokumentace nevkládáme produkční osobní údaje, tajemství ani zbytečné screenshoty.
+- U externích nástrojů píšeme, jaká data zpracovávají a proč je používáme.
+- Dokumenty mají datum poslední kontroly nebo jasný stav: aktuální, návrh, archiv.
+- Support a obchod umí z dokumentace vytáhnout odpověď bez hledací archeologie.
+- Jednou týdně opravíme aspoň jednu stránku podle reálného problému.
+
+### P.8 Mini úkol na 45 minut
+
+Najdi tři dokumenty, které tým používá nejčastěji: onboarding, nasazení, support odpověď, obchodní bezpečnostní FAQ nebo cokoliv podobného. U každého doplň vlastníka, datum poslední kontroly a jednu větu cíle. Pak smaž nebo archivuj jeden dokument, který už neplatí. Dokumentace není knihovna Alexandrijská. Nemusí shořet, ale občas potřebuje vyházet prošlé jogurty.
+
+
 ## Zdroje
 
 - Evropská komise: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -3202,6 +3335,7 @@ Otevři CRM, tabulku nebo seznam kontaktů a najdi deset posledních záznamů. 
 
 ## Pracovní log
 
+- 2026-09-08: Doplněn Dodatek P o interní dokumentaci, rozhodovacích záznamech, privacy-first pravidlech wiki a týdenní údržbě znalostí.
 - 2026-09-07: Založena struktura e-booku, doplněn úvod a první kapitola o privacy-first základech webu a SaaS v Evropě.
 - 2026-09-07: Doplněna druhá kapitola o webu, který rychle vysvětlí hodnotu, důvěru, SEO, výkon a přístupnost.
 - 2026-09-07: Doplněna třetí kapitola o SaaS cestě od problému k první platbě, včetně MVP, onboardingu, SCA/DPH poznámek a checklistu.
