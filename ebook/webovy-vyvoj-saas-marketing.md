@@ -2514,6 +2514,142 @@ Všimni si, že text zákazníkovi nevypráví všechno. Říká ale přesně to
 Vytvoř první verzi status stránky nebo aspoň Markdown dokument `status-template.md`. Přidej tři komponenty služby, které zákazníci chápou: „Přihlášení“, „Aplikace“, „API“, „Platby“ nebo „E-mailové notifikace“. Ke každé napiš, jak poznáš problém a jaký má dopad. Nakonec připrav jednu šablonu zprávy pro výpadek a jednu pro plánovanou údržbu. Až příště něco spadne, nebudeš psát první větu incidentu ve stresu. To je malý rozdíl, který vypadá jako profesionalita.
 
 
+
+## Dodatek K: Nákup SaaS bez slepé důvěry a nekonečných dotazníků
+
+Malý tým často nakupuje nástroje rychle: někdo doporučí aplikaci, founder zadá kartu, tým začne pracovat a za půl roku se zjistí, že v ní leží zákaznická data, export je bolestivý, subdodavatelé jsou nejasní a zrušení účtu připomíná únikovou místnost. Nákup SaaS není jen otázka ceny. Je to rozhodnutí o datech, provozu, závislosti a budoucí vyjednávací síle.
+
+Evropská komise u zpracovatelů osobních údajů připomíná, že správce má používat zpracovatele, kteří poskytují dostatečné záruky technických a organizačních opatření, a zpracování má být upravené smlouvou podle GDPR. Zdroj: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/obligations/controllerprocessor/can-someone-else-process-data-my-organisations-behalf_en
+
+> Codyho komentář: Nejhorší SaaS nákup není drahý nástroj. Nejhorší je levný nástroj, který se ti potichu stane databází zákazníků, knowledge base, CRM, supportem i terapeutem týmu. Pak už neplatíš měsíčně. Platíš odchodem.
+
+### K.1 Rozliš nákup podle rizika, ne podle ceny
+
+Cena je vidět hned. Riziko se ukáže později. Proto nástroje rozděl podle toho, co v nich bude žít.
+
+Nízké riziko:
+
+- nástroj bez osobních údajů zákazníků,
+- krátkodobý kreativní nebo interní experiment,
+- data lze snadno smazat a nahradit,
+- výpadek neblokuje prodej, podporu ani provoz produktu.
+
+Střední riziko:
+
+- nástroj obsahuje kontakty, support komunikaci nebo projektovou dokumentaci,
+- používá ho víc lidí v týmu,
+- výpadek zpomalí práci, ale nezastaví službu,
+- export existuje, ale musíš ho otestovat.
+
+Vysoké riziko:
+
+- nástroj obsahuje zákaznická data, smlouvy, fakturaci, produkční logy nebo přístupy,
+- je napojený na produkt, platby, e-mailing, CRM nebo podporu,
+- bez něj tým nedokáže obsloužit zákazníka,
+- odchod by znamenal migraci procesů, dat i návyků.
+
+U nízkého rizika stačí rychlá kontrola. U vysokého rizika potřebuješ jasnou odpovědnost, smlouvu, export, retenční pravidla a plán odchodu. Ano, zní to méně romanticky než „zkusíme to a uvidíme“. Ale romantika v procurementu obvykle končí sdíleným heslem v poznámkách.
+
+### K.2 Pět otázek před zadáním karty
+
+Než nástroj koupíš, zeptej se na pět věcí. Ne jako právnický rituál, ale jako ochranu před budoucí bolestí.
+
+1. **Jaká data do nástroje potečou?** Kontakty, osobní údaje, obsah zákaznických zpráv, soubory, faktury, telemetry, nebo jen anonymní pracovní poznámky?
+2. **Kde budou data uložená a kdo je zpracovává?** Má poskytovatel EU region, jasné subzpracovatele a srozumitelnou smlouvu?
+3. **Jak data dostanu ven?** Existuje export v otevřeném formátu, API nebo pravidelná záloha?
+4. **Jak nástroj vypnu?** Co se stane s účty, daty, integracemi, tokeny a fakturací?
+5. **Co se stane při incidentu?** Jak poskytovatel komunikuje výpadky, bezpečnostní události a změny subdodavatelů?
+
+Pokud na tyto otázky neumíš odpovědět, nástroj možná není špatný. Jen ještě není připravený na data, která mu chceš svěřit.
+
+### K.3 DPA není papír do šuplíku
+
+Když SaaS zpracovává osobní údaje za tebe, typicky potřebuješ zpracovatelskou smlouvu nebo odpovídající smluvní ujednání. Evropská komise zveřejňuje standardní smluvní doložky pro vztah správce a zpracovatele podle článku 28 GDPR. Zdroj: https://commission.europa.eu/publications/standard-contractual-clauses-controllers-and-processors-eueea_en
+
+Prakticky zkontroluj:
+
+- kdo je správce a kdo zpracovatel,
+- jaký je účel a rozsah zpracování,
+- jaké kategorie osobních údajů a subjektů údajů se zpracovávají,
+- zda jsou uvedení subzpracovatelé a způsob oznámení změn,
+- jak se řeší bezpečnostní opatření,
+- co se stane s daty po ukončení služby,
+- jak poskytovatel pomůže s požadavky subjektů údajů.
+
+EDPB ve svých pokynech k pojmům správce a zpracovatel rozebírá, že role závisí na reálném rozhodování o účelech a prostředcích zpracování, ne jen na tom, jak se firma sama nazve v marketingových materiálech. Zdroj: https://www.edpb.europa.eu/documents/guideline/guidelines-072020-on-the-concepts-of-controller-and-processor-in-the-gdpr_en
+
+Tohle není právní rada, ale provozní minimum: pokud nástroj obsahuje data zákazníků, nenech smluvní roli v mlze. Mlha je fajn v hororu, ne v registru zpracování.
+
+### K.4 Export otestuj dřív, než ho potřebuješ
+
+Vendor lock-in se často netváří jako past. Tváří se jako pohodlí. Máš krásné workflow, integrace, automatizace a tým si zvykne. Pak přijde zdražení, změna podmínek, horší podpora nebo požadavek zákazníka na evropský provoz. Najednou potřebuješ odejít a zjistíš, že export je „v roadmapě“.
+
+Evropský Data Act zavádí pravidla pro přechod mezi poskytovateli služeb zpracování dat, včetně cloudových a edge služeb, a je použitelný od 12. září 2025. Zdroj: https://digital-strategy.ec.europa.eu/en/policies/data-act
+
+Pro malý tým z toho plyne jednoduché pravidlo: nespoléhej jen na regulaci, otestuj odchod prakticky.
+
+Mini test exportu:
+
+- založ testovací projekt,
+- vlož realistická testovací data,
+- vyexportuj je,
+- ověř formát a úplnost,
+- zkus data importovat jinam nebo alespoň přečíst bez původní služby,
+- zapiš, co by migrace reálně obnášela.
+
+Když export nejde otestovat ani v trialu, ber to jako signál. Možná ne stopku, ale rozhodně žlutou kontrolku na palubovce.
+
+### K.5 Příklad: výběr nástroje pro support
+
+Představ si, že vybíráš helpdesk pro B2B SaaS. Do nástroje potečou e-maily zákazníků, popisy problémů, interní poznámky, přílohy a občas i citlivé obchodní informace. To není „jen support“. To je velmi živý archiv zákaznické reality.
+
+Rozumný postup:
+
+1. Sepiš, jaké typy dat se v ticketech smí objevit a co tam naopak nepatří.
+2. Vyber 3 kandidáty a zkontroluj EU hosting, DPA, subzpracovatele, export a SSO/MFA.
+3. Udělej týdenní pilot s testovacími nebo anonymizovanými daty.
+4. Otestuj export ticketů, kontaktů a příloh.
+5. Napiš interní pravidla: co se nesmí posílat do supportu, jak dlouho držet tickety a kdo má přístup.
+6. Teprve pak převeď reálnou podporu.
+
+Privacy-first detail: support nástroj často svádí k tomu, aby se stal CRM, analytikou, znalostní bází a automatizačním centrem najednou. Nedělej z něj datový vysavač. Každá integrace má mít jasný účel a vlastníka.
+
+### K.6 Jednostránkový SaaS nákupní záznam
+
+Pro každý důležitější nástroj si vytvoř krátký záznam. Nemusí to být enterprise formulář s třiceti záložkami. Stačí jedna stránka, kterou tým opravdu vyplní.
+
+| Pole | Co vyplnit |
+| --- | --- |
+| Název nástroje | Název, URL a vlastník v týmu |
+| Účel | Proč nástroj používáme a jakou práci dělá |
+| Data | Jaká data do něj posíláme |
+| Riziko | Nízké, střední nebo vysoké + důvod |
+| Region | Kde jsou data uložená, pokud je to známé |
+| Smlouvy | DPA, podmínky, subzpracovatelé |
+| Přístupy | Kdo má účet a kdo je admin |
+| Export | Jak dostaneme data ven a kdy byl export testovaný |
+| Retence | Jak dlouho data držíme a jak se mažou |
+| Odchod | Co uděláme, když službu rušíme |
+
+Tenhle záznam je nudný jen do chvíle, než ho potřebuješ. Pak je to mapa z hořící budovy.
+
+### K.7 Checklist nákupu SaaS nástroje
+
+- [ ] Víme, jaký problém nástroj řeší a kdo ho v týmu vlastní.
+- [ ] Nástroj má přiřazenou rizikovou úroveň podle dat a dopadu na provoz.
+- [ ] Je jasné, jaká data do nástroje posíláme a co tam posílat nesmíme.
+- [ ] Máme zkontrolované DPA nebo smluvní podmínky pro zpracování osobních údajů.
+- [ ] Víme, kde jsou data uložená a kdo jsou důležití subzpracovatelé.
+- [ ] Export dat byl reálně otestovaný, ne jen nalezený v dokumentaci.
+- [ ] Admin účty mají MFA a přístup má jen nutný okruh lidí.
+- [ ] Existuje jednoduchý postup pro ukončení služby, odebrání tokenů a smazání dat.
+- [ ] Nástroj nezavádí zbytečné trackery, profilování ani přenosy dat mimo očekávání zákazníka.
+- [ ] Po pilotu proběhlo rozhodnutí: koupit, odložit, nebo odmítnout.
+
+### K.8 Mini úkol na 60 minut
+
+Vyber jeden SaaS nástroj, který už tým používá a ve kterém jsou zákaznická nebo obchodně citlivá data. Vyplň pro něj jednostránkový nákupní záznam, najdi export a stáhni testovací vzorek dat. Pokud export nenajdeš, napiš to do rizik. Gratuluju, právě jsi udělal víc governance než mnoho týmů s mnohem dražším nástrojem na governance.
+
 ## Zdroje
 
 - Evropská komise: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -2555,6 +2691,9 @@ Vytvoř první verzi status stránky nebo aspoň Markdown dokument `status-templ
 - Google Search Central: Sitemaps overview — https://developers.google.com/search/docs/crawling-indexing/sitemaps/overview
 - Google Search Central: Introduction to robots.txt — https://developers.google.com/search/docs/crawling-indexing/robots/intro
 - Google Search Central: Intro to structured data markup — https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data
+- European Commission: Can someone else process the data on my organisation’s behalf? — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/obligations/controllerprocessor/can-someone-else-process-data-my-organisations-behalf_en
+- European Commission: Standard contractual clauses for controllers and processors in the EU/EEA — https://commission.europa.eu/publications/standard-contractual-clauses-controllers-and-processors-eueea_en
+- EDPB: Guidelines 07/2020 on the concepts of controller and processor in the GDPR — https://www.edpb.europa.eu/documents/guideline/guidelines-072020-on-the-concepts-of-controller-and-processor-in-the-gdpr_en
 
 ## Pracovní log
 
@@ -2578,3 +2717,4 @@ Vytvoř první verzi status stránky nebo aspoň Markdown dokument `status-templ
 - 2026-09-08: Doplněn Dodatek H o technickém SEO bez trackerů, sitemap, robots.txt, metadatech, RSS a privacy-first auditu.
 - 2026-09-08: Doplněn Dodatek I o bezpečnostním minimu pro malý SaaS, včetně přístupů, tajemství, logů, záloh a incident plánu.
 - 2026-09-08: Doplněn Dodatek J o incidentové komunikaci, status page, kadenci aktualizací a postmortem bez paniky.
+- 2026-09-08: Doplněn Dodatek K o privacy-first nákupu SaaS nástrojů, kontrole DPA, exportu, riziku dodavatelů a checklistu před zadáním karty.
