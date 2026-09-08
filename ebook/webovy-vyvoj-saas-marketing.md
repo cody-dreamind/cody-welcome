@@ -27,7 +27,7 @@ Každou kapitolu ber jako pracovní checklist. Nečti ji jako román do šuplík
 8. Praktické šablony: brief, landing page, launch checklist a audit soukromí.
 9. AI automatizace v evropském SaaS: užitek, governance a bezpečné nasazení.
 10. Cenotvorba a balíčky: hodnota, jednoduchost, férovost a důvěra.
-11. Dodatky: 30denní plán, výběr nástrojů, obsah, přístupnost, podpora, retence, souhlasy, technické SEO, bezpečnostní minimum a roadmapa.
+11. Dodatky: 30denní plán, výběr nástrojů, obsah, přístupnost, podpora, retence, souhlasy, technické SEO, bezpečnostní minimum, roadmapa a prodejní discovery.
 
 ---
 
@@ -2769,6 +2769,142 @@ Výstup review má být krátký: tři rozhodnutí, tři otevřené otázky, tř
 
 Vezmi deset posledních požadavků od zákazníků, supportu nebo obchodních schůzek. Přepiš je z funkcí na problémy, sluč duplicity a každému dej horizont: teď, příště, později nebo ne teď. U tří nejvýše zařazených doplň dopad, důkaz, náročnost a privacy riziko. Nakonec napiš jednu větu, kterou může support poslat zákazníkovi. Roadmapa právě přestala být interní chaos a začala být součást zákaznické důvěry. Ano, pořád je to tabulka. Ale aspoň tabulka, která něco dělá.
 
+
+## Dodatek M: Prodejní discovery bez nátlaku a datového vysavače
+
+Prodej v malém webovém nebo SaaS byznysu často trpí dvěma extrémy. Buď tým neprodává vůbec a čeká, že produkt bude tak dobrý, že si zákazníci sami najdou ceník, pochopí hodnotu, zavolají účetní a ještě pošlou děkovný dopis. Nebo naopak z každého kontaktu udělá agresivní sekvenci follow-upů, remarketingu a CRM políček, která působí jako digitální telemarketing v saku.
+
+Dobrá discovery je něco mezi: strukturovaný rozhovor, který pomůže zákazníkovi i tobě pochopit, jestli dává spolupráce smysl. Není to výslech. Není to demo všech funkcí. A už vůbec to není záminka k tomu, aby se každý návštěvník webu proměnil v profil s dvaceti štítky.
+
+> Codyho komentář: Když zákazník po prvním callu ví, co má dělat dál, a ty víš, jestli mu umíš pomoct, discovery splnila účel. Pokud máš jen pocit, že „lead je warm“ a šest nových polí v CRM, gratuluju: právě sis koupil administrativní fitness náramek.
+
+### M.1 Neprodávej demo, prodávej další jasný krok
+
+U malého SaaS nebo služby je první cíl jednoduchý: zjistit, jestli existuje reálný problém, rozumný rozpočet, správný člověk a vhodný čas. Teprve potom má smysl ukazovat produkt do detailu.
+
+Před každou schůzkou si napiš čtyři hypotézy:
+
+- **Problém:** co si myslíme, že zákazníka bolí.
+- **Dopad:** proč je to dost důležité na změnu.
+- **Vhodnost:** proč by naše řešení mohlo sedět.
+- **Riziko:** co může spolupráci zablokovat.
+
+Příklad pro privacy-first analytiku:
+
+| Hypotéza | Konkrétní formulace |
+| --- | --- |
+| Problém | Firma chce měřit web, ale nechce na něj dávat agresivní trackery. |
+| Dopad | Marketing neví, které stránky přivádějí poptávky, a právní tým brzdí nové skripty. |
+| Vhodnost | Stačí agregované metriky, vlastní doména, evropský provoz a jednoduchý dashboard. |
+| Riziko | Tým je zvyklý na staré kampaně s detailním profilováním a nechce měnit reporting. |
+
+Takový zápis chrání call před improvizovaným blouděním. Nejdeš „něco odprezentovat“. Jdeš ověřit, jestli svět vypadá tak, jak si myslíš.
+
+### M.2 Otázky, které nejsou manipulace
+
+Dobré discovery otázky nejsou nachytávky. Mají zákazníkovi pomoct pojmenovat situaci. Ptej se na práci, rozhodování a dopad, ne na to, jestli „by se mu líbila AI funkce“.
+
+Použitelné otázky:
+
+- Co dnes děláte ručně, i když by to podle vás nemělo být ruční?
+- Kde se v procesu nejčastěji ztrácí čas, peníze nebo důvěra zákazníků?
+- Co se stane, když se tenhle problém další tři měsíce nevyřeší?
+- Kdo kromě vás bude výsledek používat nebo schvalovat?
+- Jak dnes poznáte, že je řešení úspěšné?
+- Co by pro vás bylo jasné „ne“, i kdyby produkt vypadal dobře?
+- Jaká data do podobného nástroje posílat nechcete?
+
+Poslední otázka je v Evropě extrémně praktická. Často otevře téma bezpečnosti, právních obav, interních pravidel a zákaznické důvěry dřív, než se z nich stane blocker těsně před podpisem.
+
+### M.3 Demo až po kontextu
+
+Demo bez kontextu svádí k ukazování funkcí. Zákazník vidí obrazovky, ty mluvíš rychleji a všichni se tváří, že produktová prohlídka je totéž co obchodní pokrok. Není.
+
+Lepší struktura dema:
+
+1. Shrň problém, který jsi slyšel: „Rozumím tomu tak, že největší bolest je…“
+2. Potvrď úspěch: „Kdyby to fungovalo, poznáte to podle…“
+3. Ukaž jen relevantní tok, ne celý produkt.
+4. Vysvětli provozní realitu: data, přístupy, export, zálohy, podpora.
+5. Domluv další krok: pilot, nabídka, technická konzultace, nebo férové „teď ne“.
+
+Pokud zákazník řeší privacy-first provoz, demo má ukázat i neviditelné části produktu: kde jsou nastavení přístupů, jak vypadá export, co se loguje, jak se mažou data a jak se zákazník dostane ke smluvním nebo bezpečnostním informacím. Důvěra nevzniká jen z hezkého dashboardu. Hezký dashboard zvládne i produkt, který pod stolem posílá data na výlet kolem světa.
+
+### M.4 Zapisuj méně, ale lépe
+
+CRM se snadno promění ve skladiště dojmů. „Zájemce působí pozitivně“ je skoro k ničemu. „Potřebuje do konce měsíce nahradit ruční reporty pro pět poboček, rozhoduje finanční ředitelka, blocker je export dat“ už pomáhá produktu, prodeji i supportu.
+
+Minimalistický zápis ze schůzky:
+
+| Pole | Co zapsat |
+| --- | --- |
+| Kontext | Typ firmy, role člověka, proces, který řeší |
+| Bolest | Konkrétní problém vlastními slovy zákazníka |
+| Dopad | Čas, peníze, riziko, reputace nebo ztracené příležitosti |
+| Rozhodnutí | Kdo rozhoduje a podle čeho |
+| Data | Jaká data by do řešení tekla a jaká jsou citlivá |
+| Další krok | Přesná akce, vlastník a termín |
+| Produktový signál | Co se opakuje i u dalších zákazníků |
+
+Privacy-first pravidlo: nezapisuj osobní detaily, které nepotřebuješ pro obchod nebo podporu. Neukládej citlivé informace jen proto, že zazněly na callu. A pokud používáš nahrávky nebo přepisy, nastav jasný souhlas, retenci a přístupová práva. Poznámky mají pomáhat rozhodování, ne budovat tajný archiv lidských detailů.
+
+### M.5 Follow-up, který nezní jako robot v kravatě
+
+Follow-up má být krátký, konkrétní a užitečný. Ne „jen posouvám nahoru“. Pokud nemáš co dodat, raději napiš méně často a lépe.
+
+Šablona po discovery callu:
+
+```markdown
+Dobrý den,
+
+díky za dnešní rozhovor. Odnesl jsem si tři hlavní body:
+
+1. Potřebujete [konkrétní výsledek].
+2. Dnes vás brzdí [konkrétní problém].
+3. Důležité je, aby řešení splnilo [provozní/privacy/technickou podmínku].
+
+Navrhuji další krok: [pilot / krátké demo pro tým / návrh rozsahu / technická konzultace].
+Výstupem bude [konkrétní artefakt], abyste se mohli rozhodnout bez mlhy.
+
+Cody
+```
+
+Když zákazník neodpoví, pošli jednu až dvě užitečné připomínky, ne sedmidílný seriál. Například doplň slíbený checklist, anonymizovaný příklad, odpověď na technickou otázku nebo férové shrnutí rizik. Pokud ani potom nereaguje, uzavři smyčku slušně. Ne každý tichý lead potřebuje automatizační kladivo.
+
+### M.6 Kdy říct ne
+
+Jedna z nejlepších prodejních dovedností je poznat špatný obchod dřív, než se z něj stane dlouhý projekt s krátkou radostí. Malý tým si nemůže dovolit zákazníky, kteří rozbijí produkt, proces nebo hodnoty.
+
+Řekni ne, nebo aspoň zpomal, když:
+
+- zákazník chce funkci, která by výrazně zhoršila soukromí ostatních uživatelů,
+- očekává individuální vývoj za cenu běžného tarifu,
+- odmítá jasně určit vlastníka a další krok,
+- požaduje sběr dat, který neumíš bezpečně a férově obhájit,
+- chce obejít bezpečnostní nebo přístupová pravidla,
+- kupuje jen podle slibu budoucí funkce, kterou ještě neumíš dodat.
+
+Dobré „ne“ může znít takhle: „Tohle neumíme dodat způsobem, který by seděl našemu produktu a pravidlům pro práci s daty. Můžeme nabídnout menší variantu bez citlivých přenosů, nebo vám rovnou říct, že pro tento scénář nejsme nejlepší volba.“
+
+To není slabost. To je ochrana značky, týmu i zákazníka. Krátkodobě možná přijdeš o deal. Dlouhodobě nepřijdeš o nervy, reputaci a víkendy. Víkendy jsou důležité. I pro SaaS.
+
+### M.7 Checklist pro jednu obchodní iteraci
+
+- [ ] Před schůzkou máme čtyři hypotézy: problém, dopad, vhodnost a riziko.
+- [ ] Na callu jsme nejdřív ověřili kontext, teprve potom ukazovali produkt.
+- [ ] Zákazník vlastními slovy popsal problém a dopad.
+- [ ] Víme, kdo rozhoduje, kdo produkt používá a co může nákup zablokovat.
+- [ ] Zapsali jsme jen údaje potřebné pro rozhodnutí, obchod nebo podporu.
+- [ ] Probrali jsme datové a provozní požadavky dřív než těsně před podpisem.
+- [ ] Follow-up obsahuje shrnutí, jasný další krok a konkrétní výstup.
+- [ ] Pokud obchod nesedí, máme férový důvod pro „ne teď“ nebo doporučení jiné cesty.
+- [ ] Produktový signál ze schůzky je zapsaný tak, aby pomohl roadmapě.
+- [ ] Po týdnu víme, jestli discovery posunula obchod, produktové učení, nebo obojí.
+
+### M.8 Mini úkol na 60 minut
+
+Vezmi poslední tři obchodní rozhovory nebo poptávky. U každé napiš: problém, dopad, rozhodující člověk, datové riziko a další krok. Potom porovnej, co se opakuje. Pokud se stejný problém vrací třikrát, není to náhoda. Je to signál pro landing page, dokumentaci, ceník, roadmapu nebo nový produktový experiment. A pokud se neopakuje nic, možná zatím neprodáváš segmentu, ale sbíráš náhodné Pokémony v CRM.
+
 ## Zdroje
 
 - Evropská komise: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -2838,3 +2974,4 @@ Vezmi deset posledních požadavků od zákazníků, supportu nebo obchodních s
 - 2026-09-08: Doplněn Dodatek J o incidentové komunikaci, status page, kadenci aktualizací a postmortem bez paniky.
 - 2026-09-08: Doplněn Dodatek K o privacy-first nákupu SaaS nástrojů, kontrole DPA, exportu, riziku dodavatelů a checklistu před zadáním karty.
 - 2026-09-08: Doplněn Dodatek L o roadmapě bez chaosu, prioritizaci podle problémů, týdenním review a privacy kontrole nových funkcí.
+- 2026-09-08: Doplněn Dodatek M o prodejní discovery bez nátlaku, privacy-first zápisu ze schůzek, follow-upu a férovém odmítání nevhodných obchodů.
