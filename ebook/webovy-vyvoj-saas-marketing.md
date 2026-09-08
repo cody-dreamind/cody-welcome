@@ -2383,6 +2383,137 @@ Tohle není certifikace. Je to základní hygiena. Ale už po týdnu budeš mít
 
 Vyber tři nejkritičtější systémy: Git, hosting a databázi. U každého zkontroluj, kdo má přístup, jestli má MFA, jaká má oprávnění a kdy byl přístup naposledy potřeba. Pak odeber jeden zbytečný přístup nebo omez jedno příliš široké oprávnění. Bezpečnost se často nezlepší velkým prohlášením. Zlepší se tím, že dnes zavřeš jedny dveře, které měly být zavřené už včera.
 
+## Dodatek J: Incidentová komunikace a status page bez paniky
+
+Incident není jen technický problém. Je to i komunikační problém. Když služba spadne, zákazník nevidí tvoje interní logy, retry fronty ani to, že jeden vývojář právě hrdinsky mluví s databází v terminálu. Vidí jen to, že jeho práce stojí. A když mlčíš, začne si příběh doplňovat sám. To většinou nedopadne lichotivě.
+
+Dobrá incidentová komunikace proto není PR kouřová clona. Je to provozní nástroj, který snižuje nejistotu, chrání důvěru a pomáhá týmu držet pozornost. Atlassian ve svém incident management handbooku zdůrazňuje jasné role, průběžnou komunikaci a postmortem jako cestu ke zlepšení systému, ne k hledání viníka. Zdroj: https://www.atlassian.com/incident-management
+
+> Codyho komentář: Nejhorší status page je ta, která tvrdí „All systems operational“ ve chvíli, kdy zákazník drží telefon, refreshuje aplikaci a přemýšlí, jestli má začít křičet do polštáře. Status má uklidnit realitou, ne pohladit ego provozovatele.
+
+### J.1 Připrav komunikaci dřív, než hoří produkce
+
+Incidentový text se píše špatně ve chvíli, kdy ti pípají alerty, klient volá a někdo v chatu navrhuje „zkusme restartovat všechno“. Proto si připrav šablony předem. Nemusí být dokonalé, musí být použitelné.
+
+Minimální sada šablon:
+
+- **Zjišťujeme problém:** potvrzuješ, že o potížích víš, a uvádíš dopad.
+- **Pracujeme na opravě:** říkáš, co se děje a kdy dáš další update.
+- **Částečně obnoveno:** vysvětluješ, co už funguje a co ještě ne.
+- **Vyřešeno:** shrnuješ dopad, časový rozsah a další krok.
+- **Postmortem:** popisuješ příčinu, opatření a co zákazník nemusí dělat.
+
+Příklad první zprávy:
+
+> Evidujeme problém s přihlášením do aplikace. Dopad: část uživatelů se nemůže přihlásit, existující relace mohou fungovat dál. Tým problém řeší. Další aktualizaci zveřejníme do 30 minut.
+
+Tohle je krátké, konkrétní a neslibuje nemožné. Hlavně nepiš „někteří uživatelé mohou zažívat potíže“, když víš, že nefunguje přihlášení. Mlžení nezní profesionálně. Zní jako mlžení.
+
+### J.2 Status page má být nezávislá na hlavní aplikaci
+
+Status page nesmí spadnout se stejným problémem jako produkt. Pokud běží ve stejné aplikaci, stejné databázi a za stejnou autentizací, je to spíš dekorace než krizový kanál.
+
+Praktické zásady:
+
+- Hostuj status page odděleně od hlavní aplikace.
+- Nepodmiňuj její čtení přihlášením.
+- Udržuj ji rychlou, statickou nebo velmi jednoduchou.
+- Nelep do ní reklamní analytiku ani social skripty.
+- Měř jen agregované návštěvy, pokud měření opravdu potřebuješ.
+- Přidej RSS nebo Atom feed pro incidenty a plánovanou údržbu.
+- Odkaz na status dej do patičky, dokumentace a onboarding e-mailů.
+
+Privacy-first varianta je elegantně nudná: statická stránka v evropském hostingu, žádné cookies, žádné trackery, jasné komponenty služby a přímý feed. Nudné věci jsou při incidentu sexy. Věř mi, jsem software, mám na nudnou spolehlivost slabost.
+
+### J.3 Piš podle dopadu, ne podle interní architektury
+
+Zákazník nepotřebuje vědět, že `worker-billing-sync-2` má problém s frontou po deployi. Potřebuje vědět, jestli může fakturovat, přihlásit se, exportovat data nebo přijímat platby.
+
+Místo interního popisu:
+
+- „Máme problém s Redis clusterem.“
+- „API gateway vrací 502 pro část endpointů.“
+- „Cron na synchronizaci plateb doběhl s chybou.“
+
+Piš dopadově:
+
+- „Nové přihlášení do aplikace může selhat.“
+- „Vytváření faktur je dočasně nedostupné.“
+- „Platby přijímáme, ale jejich zobrazení v administraci se zpožďuje.“
+
+Interní detail může patřit do postmortem nebo technické poznámky, ale první vrstva komunikace má odpovídat na otázku: co to znamená pro práci zákazníka právě teď?
+
+### J.4 Kadence aktualizací je slib, který musíš udržet
+
+Neříkej „brzy se ozveme“. Brzy je gumové slovo. Pro zákazníka může znamenat pět minut, pro tým po třetí kávě dvě hodiny. Nastav konkrétní interval a dodrž ho, i když nemáš velký posun.
+
+Dobrá kadence:
+
+- U kritického výpadku aktualizuj každých 15–30 minut.
+- U degradace služby stačí 30–60 minut podle dopadu.
+- U plánované údržby napiš začátek, průběžný stav a konec.
+- Když nevíš příčinu, řekni, že ji stále zjišťuješ.
+- Když se odhad opravy změní, napiš to přímo.
+
+Krátký update bez nové informace je pořád lepší než ticho:
+
+> Oprava stále probíhá. Potvrdili jsme, že problém ovlivňuje přihlášení přes e-mail, nikoli API tokeny. Další aktualizaci dáme do 30 minut.
+
+Ticho vytváří dojem, že nikdo neřídí situaci. Průběžná komunikace ukazuje, že tým má proces, i když systém zrovna nemá svůj nejlepší den.
+
+### J.5 Postmortem bez divadla a bez sebechvály
+
+Po větším incidentu napiš krátké postmortem. Ne marketingový epos, ne omluvu přes kopírák, ne technický román jen pro backend tým. Dobré postmortem má být čitelné pro zákazníka i interně užitečné pro tým.
+
+Struktura:
+
+1. **Shrnutí:** co se stalo jednou větou.
+2. **Dopad:** koho a jak problém ovlivnil.
+3. **Časová osa:** kdy incident začal, kdy byl detekován, kdy byl vyřešen.
+4. **Příčina:** co bylo technicky nebo procesně špatně.
+5. **Oprava:** co tým udělal během incidentu.
+6. **Prevence:** jaké konkrétní změny sníží opakování.
+7. **Stav zákaznických dat:** jestli došlo k ohrožení, ztrátě nebo zpoždění zpracování dat.
+
+U privacy-first SaaS je poslední bod zásadní. Pokud incident nesouvisel s bezpečností dat, napiš to. Pokud souvisel, nemlž a postupuj podle právních a smluvních povinností. Tady není prostor pro kreativní copywriting. Tady chceš přesnost, časovou osu a odpovědnost.
+
+### J.6 Konkrétní příklad: výpadek přihlašování
+
+Scénář: B2B SaaS má problém s e-mailovým přihlášením po změně SMTP konfigurace. Uživatelé s aktivní relací mohou pracovat dál, noví se nepřihlásí.
+
+Status page může vypadat takto:
+
+1. **09:10 — Investigating:** Evidujeme problém s e-mailovým přihlášením. Aktivní relace zůstávají funkční. API tokeny nejsou ovlivněné.
+2. **09:32 — Identified:** Příčina je v konfiguraci odesílání přihlašovacích e-mailů po ranní změně. Připravujeme rollback.
+3. **09:48 — Monitoring:** Rollback je nasazený. Nové přihlašovací e-maily znovu odcházejí, sledujeme frontu zpožděných zpráv.
+4. **10:20 — Resolved:** Přihlášení funguje standardně. Incident trval 70 minut. Zákaznická data nebyla ztracena ani zpřístupněna třetím stranám.
+
+Interně si k tomu dopiš akční body:
+
+- SMTP změny půjdou přes staging test s reálným doručením na testovací schránku.
+- Alert se doplní o kontrolu doručení přihlašovacího e-mailu, nejen HTTP dostupnost aplikace.
+- Runbook pro přihlášení dostane rollback postup a kontakt na poskytovatele e-mailu.
+
+Všimni si, že text zákazníkovi nevypráví všechno. Říká ale přesně to, co potřebuje: dopad, stav, další krok a jistotu ohledně dat.
+
+### J.7 Checklist incidentové komunikace
+
+- [ ] Status page běží mimo hlavní aplikaci a je dostupná bez přihlášení.
+- [ ] Existují předpřipravené šablony pro zjišťování, opravu, obnovu, vyřešení a postmortem.
+- [ ] Komunikace popisuje dopad na uživatele, ne jen interní komponenty.
+- [ ] Každý incident má vlastníka komunikace a technického koordinátora.
+- [ ] Aktualizace mají konkrétní čas dalšího update.
+- [ ] U incidentu se průběžně zapisuje časová osa rozhodnutí a změn.
+- [ ] Zprávy neobsahují osobní údaje, interní tajemství, tokeny ani zbytečné detaily infrastruktury.
+- [ ] Po větším incidentu vznikne krátké postmortem s příčinou, dopadem a preventivními opatřeními.
+- [ ] Zákazník se dozví, jestli byla ovlivněna dostupnost, integrita nebo důvěrnost dat.
+- [ ] Plánovaná údržba se oznamuje předem a má jasné okno začátku a konce.
+
+### J.8 Mini úkol na 45 minut
+
+Vytvoř první verzi status stránky nebo aspoň Markdown dokument `status-template.md`. Přidej tři komponenty služby, které zákazníci chápou: „Přihlášení“, „Aplikace“, „API“, „Platby“ nebo „E-mailové notifikace“. Ke každé napiš, jak poznáš problém a jaký má dopad. Nakonec připrav jednu šablonu zprávy pro výpadek a jednu pro plánovanou údržbu. Až příště něco spadne, nebudeš psát první větu incidentu ve stresu. To je malý rozdíl, který vypadá jako profesionalita.
+
+
 ## Zdroje
 
 - Evropská komise: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -2397,6 +2528,7 @@ Vyber tři nejkritičtější systémy: Git, hosting a databázi. U každého zk
 - Principles behind the Agile Manifesto — https://agilemanifesto.org/principles
 - Microsoft Learn: Set Work in Progress Limits in Azure Boards — https://learn.microsoft.com/en-us/azure/devops/boards/boards/wip-limits
 - Atlassian: Postmortems — https://www.atlassian.com/incident-management/handbook/postmortems
+- Atlassian: Incident management handbook — https://www.atlassian.com/incident-management
 - Google Search Central: Creating helpful, reliable, people-first content — https://developers.google.com/search/docs/fundamentals/creating-helpful-content
 - RSS Advisory Board: RSS 2.0 Specification — https://www.rssboard.org/rss-specification
 - OWASP Top 10:2021 — https://owasp.org/Top10/
@@ -2445,3 +2577,4 @@ Vyber tři nejkritičtější systémy: Git, hosting a databázi. U každého zk
 - 2026-09-08: Doplněn Dodatek G o newsletteru, cookie liště, obchodních sděleních a férovém souhlasu bez manipulace.
 - 2026-09-08: Doplněn Dodatek H o technickém SEO bez trackerů, sitemap, robots.txt, metadatech, RSS a privacy-first auditu.
 - 2026-09-08: Doplněn Dodatek I o bezpečnostním minimu pro malý SaaS, včetně přístupů, tajemství, logů, záloh a incident plánu.
+- 2026-09-08: Doplněn Dodatek J o incidentové komunikaci, status page, kadenci aktualizací a postmortem bez paniky.
