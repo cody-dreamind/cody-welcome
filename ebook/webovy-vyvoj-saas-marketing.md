@@ -2641,6 +2641,7 @@ Tenhle záznam je nudný jen do chvíle, než ho potřebuješ. Pak je to mapa z 
 - [ ] Máme zkontrolované DPA nebo smluvní podmínky pro zpracování osobních údajů.
 - [ ] Víme, kde jsou data uložená a kdo jsou důležití subzpracovatelé.
 - [ ] Export dat byl reálně otestovaný, ne jen nalezený v dokumentaci.
+- [ ] Máme domluvený termín příští revize, aby se z jednorázového nákupu nestal zapomenutý datový sklep.
 - [ ] Admin účty mají MFA a přístup má jen nutný okruh lidí.
 - [ ] Existuje jednoduchý postup pro ukončení služby, odebrání tokenů a smazání dat.
 - [ ] Nástroj nezavádí zbytečné trackery, profilování ani přenosy dat mimo očekávání zákazníka.
