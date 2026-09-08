@@ -3286,6 +3286,115 @@ Výsledek po měsíci: dokumentace roste podle skutečných problémů, ne podle
 Najdi tři dokumenty, které tým používá nejčastěji: onboarding, nasazení, support odpověď, obchodní bezpečnostní FAQ nebo cokoliv podobného. U každého doplň vlastníka, datum poslední kontroly a jednu větu cíle. Pak smaž nebo archivuj jeden dokument, který už neplatí. Dokumentace není knihovna Alexandrijská. Nemusí shořet, ale občas potřebuje vyházet prošlé jogurty.
 
 
+## Dodatek Q: Changelog a release komunikace bez kouřové clony
+
+Changelog není seznam commitů převlečený za marketing. Je to dohoda se zákazníkem: „Tady je, co se změnilo, proč je to pro tebe užitečné a co máš případně udělat.“ Malý SaaS tím získá důvěru, méně opakovaných dotazů na podporu a lepší paměť produktu. Bonus: když změny popisuješ průběžně, nemusíš jednou za půl roku rekonstruovat historii podle Slacku, GitHubu a kolektivního pocitu v týmu. To je archeologie, ne provoz.
+
+Privacy-first verze changelogu má ještě jednu výhodu: nepotřebuje sledovací skripty, remarketingové publikum ani agresivní notifikace. Stačí veřejná stránka, RSS feed, přímý odkaz v aplikaci a pár dobře napsaných vět.
+
+### Q.1 Piš pro uživatele, ne pro Git
+
+Commit „fix auth bug“ je užitečný pro vývojáře. Pro zákazníka je užitečné vědět: „Opravili jsme situaci, kdy některým uživatelům po změně hesla nešlo obnovit přihlášení.“ Jeden popisuje technickou stopu, druhý popisuje dopad.
+
+Každý záznam v changelogu by měl odpovědět na tři otázky:
+
+- Co se změnilo?
+- Koho se to týká?
+- Musí zákazník něco udělat?
+
+Když odpověď na třetí otázku zní „ne“, napiš to. Uživatelé milují jasnost. Je to takový ten luxusní produktový doplněk, který nestojí skoro nic a přitom ho půl internetu pořád nemá skladem.
+
+### Q.2 Rozliš typ změny
+
+Jedna hromada novinek je nepřehledná. Rozděl změny podle typu, ať zákazník rychle pozná, jestli má zbystřit:
+
+- **Nové:** nová funkce, integrace, export, nastavení nebo šablona.
+- **Zlepšené:** rychlejší workflow, lepší texty, přehlednější obrazovka, méně kroků.
+- **Opravené:** chyba, nestabilní chování, rozbitý export, špatná validace.
+- **Bezpečnost a soukromí:** změny v přístupech, logování, retenci, šifrování, oprávněních.
+- **Akce uživatele:** migrace, nové oprávnění, změna nastavení, deadline.
+
+U bezpečnostních oprav nepiš návod pro útočníky. Popiš dopad, rozsah, stav nápravy a doporučený krok. Detailní technický rozbor může jít do interního postmortem nebo bezpečnostního oznámení pro konkrétní zákazníky.
+
+### Q.3 Release poznámky nejsou reklamní leták
+
+Dobrá release poznámka je stručná, konkrétní a lidská. Špatná release poznámka říká „vylepšili jsme uživatelskou zkušenost“. To může znamenat cokoliv od opravy tlačítka po přesun celého produktu do jiné dimenze.
+
+Lepší vzor:
+
+> Přidali jsme CSV export faktur za vybrané období. Najdete ho v části Fakturace → Exporty. Export respektuje role uživatelů, takže ho uvidí jen administrátoři účtu. Nemusíte nic nastavovat.
+
+Je v tom funkce, místo v aplikaci, dopad na oprávnění i informace, že není potřeba akce. Čtyři věty, žádný ohňostroj. Přesně tolik dramatu, kolik fakturační export potřebuje.
+
+### Q.4 Kde changelog publikovat
+
+Pro malý evropský SaaS doporučuji jednoduchou kombinaci:
+
+- Veřejná stránka `/changelog` bez trackerů a bez přihlašovací zdi.
+- RSS feed pro lidi, kteří chtějí sledovat změny po svém.
+- Nenápadný odkaz v aplikaci, například v menu nápovědy nebo v patičce účtu.
+- Krátké oznámení v aplikaci jen u změn, které opravdu ovlivňují práci.
+- E-mail pouze u zásadních změn, bezpečnosti, fakturace nebo povinné akce.
+
+Nepotřebuješ vyskakovací okno na každou opravu překlepu. Pokud uživatele přerušíš desetkrát kvůli drobnostem, jedenácté oznámení ignorují — a zrovna to může být důležité. Notifikační únava je produktový dluh v kostýmu „engagementu“.
+
+### Q.5 Privacy-first pravidla release komunikace
+
+Release komunikace často svádí k přidání nástrojů typu produktové tours, session tracking, behaviorální segmentace a e-mailové automatizace. Některé mohou dávat smysl, ale výchozí režim má být střídmý.
+
+Drž se těchto pravidel:
+
+- Neposílej do externího nástroje celý seznam zákazníků jen proto, abys ukázal bublinu „novinka“.
+- Segmentuj podle produktového kontextu, ne podle invazivního profilu uživatele.
+- U citlivých změn komunikuj přímo správcům účtu, ne všem lidem v organizaci.
+- Ukládej minimum dat o tom, kdo oznámení viděl, a nastav rozumnou retenci.
+- U veřejného changelogu nepřidávej social share skripty, reklamní pixely ani zbytečné fontové služby.
+- Interně eviduj, kdo schválil text změny, pokud se týká bezpečnosti, práva nebo dat.
+
+Codyho komentář: Nejlepší release komunikace není ta, která umí personalizovat každé slovo podle šestnácti signálů. Nejlepší je ta, po které zákazník ví, co se stalo, a nemusí si kvůli tomu vařit třetí kávu.
+
+### Q.6 Konkrétní příklad: měsíční changelog pro B2B SaaS
+
+Představ si SaaS pro správu zakázek. Měsíční changelog může vypadat takto:
+
+```
+## Srpen 2026
+
+### Nové
+- Přidali jsme export zakázek do CSV podle stavu a termínu. Export najdete v Zakázky → Export.
+
+### Zlepšené
+- Přehled zakázky nově ukazuje poslední interní poznámku přímo u detailu zákazníka.
+- Urychlili jsme načtení seznamu zakázek u účtů s více než 5 000 záznamy.
+
+### Opravené
+- Opravili jsme chybu, kdy se u některých opakovaných zakázek nezobrazil správný termín další návštěvy.
+
+### Soukromí a bezpečnost
+- Audit log nyní ukládá změny oprávnění přehledněji. Rozsah ukládaných osobních údajů se nemění.
+
+### Je potřeba akce?
+- Ne. Všechny změny jsou dostupné automaticky.
+```
+
+Takový zápis je krátký, ale použitelný pro zákazníka, support i obchod. Obchod může ukázat vývoj produktu. Support může odkázat na opravu. Produktový tým vidí, jestli dlouhodobě vydává hodnotu, nebo jen udržuje stroj při životě izolepou a optimismem.
+
+### Q.7 Checklist changelogu a release komunikace
+
+- Máme veřejnou stránku s historií změn a stabilní URL.
+- Každý záznam říká, co se změnilo, koho se to týká a zda je potřeba akce.
+- Změny dělíme alespoň na nové, zlepšené, opravené a bezpečnost/soukromí.
+- Bezpečnostní a právní texty před publikací kontroluje odpovědná osoba.
+- Oznámení v aplikaci používáme střídmě a jen pro relevantní změny.
+- RSS nebo přímý odkaz má přednost před závislostí na sociální síti.
+- Nepřidáváme trackery jen kvůli měření čtenosti changelogu.
+- Jednou měsíčně kontrolujeme, jestli changelog ukazuje skutečnou hodnotu pro zákazníka.
+
+### Q.8 Mini úkol na 45 minut
+
+Vezmi posledních pět změn v produktu nebo na webu. Ke každé napiš jednu uživatelskou větu podle vzoru: „Změnili jsme X, aby Y, týká se Z, akce je/není potřeba.“ Pak z toho slož první veřejný changelog za poslední měsíc. Pokud žádnou změnu neumíš popsat jazykem zákazníka, není to ostuda. Je to produktová kontrolka. Bliká proto, aby se s ní něco udělalo.
+
+
 ## Zdroje
 
 - Evropská komise: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -3335,6 +3444,7 @@ Najdi tři dokumenty, které tým používá nejčastěji: onboarding, nasazení
 
 ## Pracovní log
 
+- 2026-09-08: Doplněn Dodatek Q o changelogu, release komunikaci, RSS, střídmých oznámeních a privacy-first pravidlech produktových novinek.
 - 2026-09-08: Doplněn Dodatek P o interní dokumentaci, rozhodovacích záznamech, privacy-first pravidlech wiki a týdenní údržbě znalostí.
 - 2026-09-07: Založena struktura e-booku, doplněn úvod a první kapitola o privacy-first základech webu a SaaS v Evropě.
 - 2026-09-07: Doplněna druhá kapitola o webu, který rychle vysvětlí hodnotu, důvěru, SEO, výkon a přístupnost.
