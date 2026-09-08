@@ -27,6 +27,7 @@ Každou kapitolu ber jako pracovní checklist. Nečti ji jako román do šuplík
 8. Praktické šablony: brief, landing page, launch checklist a audit soukromí.
 9. AI automatizace v evropském SaaS: užitek, governance a bezpečné nasazení.
 10. Cenotvorba a balíčky: hodnota, jednoduchost, férovost a důvěra.
+11. Dodatky: 30denní plán, výběr nástrojů, obsah, přístupnost, podpora, retence, souhlasy a technické SEO.
 
 ---
 
@@ -2145,6 +2146,104 @@ Otevři svůj web v anonymním okně a napiš si, co se načte před kliknutím 
 Vyber jednu opravu, která zlepší důvěru hned: zviditelni odmítnutí cookies, vypni marketingový skript před souhlasem, přepiš text u newsletteru nebo otestuj odhlášení. Malý čistý tok je lepší než velká marketingová mašina, která připomíná GDPR escape room.
 
 
+## Dodatek H: Technické SEO bez sledovacího cirkusu
+
+SEO se často prodává jako tajná alchymie, kde stačí najít správné klíčové slovo, nasypat ho do stránky a čekat na organickou sklizeň. Praktická realita je sušší a mnohem užitečnější: vyhledávač musí stránku najít, pochopit, důvěřovat jí a poslat na ni člověka, který nebude po třech sekundách hledat tlačítko „zpět“. Google Search Central u technického základu popisuje mimo jiné sitemap, `robots.txt`, kanonické URL, strukturovaná data a užitečný obsah pro lidi. Zdroje: https://developers.google.com/search/docs/crawling-indexing/sitemaps/overview, https://developers.google.com/search/docs/crawling-indexing/robots/intro, https://developers.google.com/search/docs/fundamentals/creating-helpful-content
+
+Privacy-first SEO má jednu krásnou vlastnost: nepotřebuje reklamní pixel, aby fungovalo. Potřebuje dobrý obsah, čistou strukturu, rychlý web, smysluplné odkazy a základní měření agregovaných výsledků. Jinými slovy: méně voodoo, více řemesla. Cody si odkládá SEO kyblíček s flitry.
+
+### H.1 Začni inventurou indexovatelných stránek
+
+Nejdřív si napiš seznam stránek, které mají existovat ve vyhledávání. Ne každá URL je kandidát na indexaci. Stránka s obchodní hodnotou odpovídá na konkrétní záměr: vysvětluje službu, řeší problém, porovnává přístupy, dokumentuje funkci, popisuje cenu, nebo pomáhá zákazníkovi něco udělat.
+
+Jednoduchá tabulka:
+
+| URL | Záměr člověka | Hlavní odpověď | Další krok | Indexovat? |
+| --- | --- | --- | --- | --- |
+| `/` | Chci pochopit, co firma dělá | Jasná nabídka a důvěra | Demo / kontakt | Ano |
+| `/cena` | Kolik to stojí a pro koho je plán | Balíčky, limity, FAQ | Vybrat plán | Ano |
+| `/blog/privacy-first-analytika` | Jak měřit bez invazivních trackerů | Praktický návod | Přihlásit RSS / demo | Ano |
+| `/app/reset-password` | Chci obnovit heslo | Formulář | Odeslat e-mail | Ne |
+
+U každé indexovatelné stránky musí být jasné, proč má existovat samostatně. Pokud dvě stránky říkají totéž, spoj je. Pokud stránka nemá další krok, doplň ho. Pokud stránka existuje jen proto, že „SEO konzultant říkal landing pages“, pošli ji na rehabilitaci.
+
+### H.2 Metadata nejsou dekorace, ale dopravní značky
+
+Každá důležitá stránka má mít unikátní `<title>`, meta description, kanonickou URL a srozumitelný nadpis `H1`. Open Graph metadata nejsou jen pro sociální sítě; pomáhají i tam, kde někdo pošle odkaz do chatu, CRM nebo firemní wiki. Strukturovaná data přidávej jen tam, kde přesně odpovídají obsahu stránky. Google k nim má samostatnou dokumentaci a doporučuje dodržet podporovaný formát i viditelnost obsahu pro uživatele. Zdroj: https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data
+
+Praktické pravidlo:
+
+- `<title>`: co to je, pro koho, případně značka.
+- Meta description: konkrétní slib stránky, ne reklamní mlha.
+- `H1`: lidský nadpis, který potvrzuje očekávání z výsledku vyhledávání.
+- Canonical: jedna preferovaná URL pro stejný nebo velmi podobný obsah.
+- Open Graph obrázek: čistý, čitelný, bez mikropísma a bez generického stock chaosu.
+
+Příklad pro článek:
+
+```html
+<title>Privacy-first analytika pro český SaaS | Cody</title>
+<meta name="description" content="Praktický návod, jak měřit web a produkt bez reklamních pixelů, zbytečných cookies a ztráty kontroly nad daty.">
+<link rel="canonical" href="https://cody.dreamind.cz/blog/privacy-first-analytika">
+<meta property="og:title" content="Privacy-first analytika pro český SaaS">
+<meta property="og:description" content="Méně trackerů, více rozhodnutí. Jak měřit web a SaaS rozumně v evropském provozu.">
+```
+
+### H.3 Sitemap a robots.txt: jednoduché, ale nepodceňované
+
+`sitemap.xml` má vyhledávači pomoct objevit důležité URL. `robots.txt` má říct crawlerům, kam smí a kam nemají chodit. Není to bezpečnostní mechanismus pro citlivá data; neveřejné věci patří za autentizaci, ne jen za zákaz v `robots.txt`. Google Search Central výslovně popisuje `robots.txt` jako instrukce pro crawlery a sitemap jako způsob, jak oznámit URL vhodné k procházení. Zdroje: https://developers.google.com/search/docs/crawling-indexing/robots/intro a https://developers.google.com/search/docs/crawling-indexing/sitemaps/overview
+
+Minimální `robots.txt` pro veřejný obsah:
+
+```txt
+User-agent: *
+Allow: /
+
+Sitemap: https://example.cz/sitemap.xml
+```
+
+Do sitemap dávej jen kanonické, veřejné, hodnotné stránky. Nedávej tam interní vyhledávání, filtry bez obsahu, administrační URL, parametry kampaní ani každou technickou drobnost. Sitemap není skládka. Je to seznam dveří, kterými chceš návštěvníky pozvat dovnitř.
+
+### H.4 Obsahová distribuce bez závislosti na platformách
+
+Technické SEO není jen indexace. Je to i to, aby se obsah dal sledovat a sdílet bez cizích algoritmů. RSS je staré, nudné a nádherně praktické. Specifikace RSS 2.0 popisuje kanál, položky, odkazy, titulky a datum publikace; přesně ty věci, které obsahový web potřebuje pro čtečky, interní monitoring i automatizace. Zdroj: https://www.rssboard.org/rss-specification
+
+Privacy-first doporučení:
+
+- Měj `/feed.xml` nebo `/rss.xml` a odkazuj ho v hlavičce webu.
+- Posílej přímé odkazy místo „share“ widgetů s externími skripty.
+- U článků uváděj datum publikace a datum aktualizace.
+- Starší důležité články aktualizuj, místo abys donekonečna vyráběl ten samý text v novém kabátu.
+- Měř agregovaně návštěvy a kliky na další krok, ne identitu každého čtenáře.
+
+> Codyho komentář: Algoritmus je pronajaté pódium. RSS a přímé odkazy jsou vlastní dveře. Možná nejsou tak blyštivé, ale nikdo ti je zítra nepřebarví na „engagement experience“.
+
+### H.5 Příklad: technický SEO audit za 60 minut
+
+Postup pro malý firemní web nebo SaaS:
+
+1. Otevři sitemap a zkontroluj, že obsahuje jen veřejné kanonické stránky.
+2. Otevři `robots.txt` a ověř, že neblokuje důležité sekce omylem.
+3. Vyber pět nejdůležitějších stránek a zkontroluj title, description, H1 a canonical.
+4. Ověř, že každá z těchto stránek má jasný další krok: kontakt, demo, trial, ceník, RSS nebo relevantní článek.
+5. Zkontroluj interní odkazy: homepage → služba → ceník → FAQ → kontakt má být cesta, ne bludiště.
+6. Otevři web bez JavaScriptu nebo s pomalým připojením a ověř, že hlavní obsah nezmizel do kouřového efektu moderního frameworku.
+7. Zapiš tři opravy s nejvyšším dopadem a udělej jednu hned.
+
+### H.6 Checklist technického SEO bez trackerů
+
+- Každá důležitá URL má jasný záměr, unikátní title, description, H1 a canonical.
+- `sitemap.xml` obsahuje jen veřejné kanonické stránky s reálnou hodnotou.
+- `robots.txt` neblokuje důležité části webu a neslouží jako ochrana citlivých dat.
+- Blog nebo znalostní báze má RSS feed a přímé odkazy bez social share skriptů.
+- Strukturovaná data odpovídají viditelnému obsahu stránky.
+- Měření SEO výkonu používá agregovaná data: návštěvy, referrery, konverzní kliky a výkon stránek.
+- Starý obsah má plán aktualizací, ne jen tichý hřbitov v archivu.
+
+### H.7 Mini úkol na 45 minut
+
+Vyber jednu nejdůležitější stránku webu. Přepiš její title, description, H1 a první odstavec tak, aby člověk přesně věděl, pro koho stránka je, co získá a jaký je další krok. Pak zkontroluj, že je v sitemap, má správný canonical a nepotřebuje žádný externí tracker k tomu, aby sis vyhodnotil, jestli funguje. Malý audit, velký klid. Tak to máme rádi.
+
 ## Zdroje
 
 - Evropská komise: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -2180,6 +2279,9 @@ Vyber jednu opravu, která zlepší důvěru hned: zviditelni odmítnutí cookie
 - ÚOOÚ: Cookies od začátku roku 2022 pouze se souhlasem — https://uoou.gov.cz/novinky/vse/cookies-od-zacatku-roku-2022-pouze-se-souhlasem
 - ÚOOÚ: Obchodní sdělení — https://uoou.gov.cz/index.php/profesional/qa-otazky-a-odpovedi/obchodni-sdeleni
 - Your Europe: Online privacy and cookies — https://europa.eu/youreurope/business/growing/digitalising/online-privacy/index_en.htm
+- Google Search Central: Sitemaps overview — https://developers.google.com/search/docs/crawling-indexing/sitemaps/overview
+- Google Search Central: Introduction to robots.txt — https://developers.google.com/search/docs/crawling-indexing/robots/intro
+- Google Search Central: Intro to structured data markup — https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data
 
 ## Pracovní log
 
@@ -2200,3 +2302,4 @@ Vyber jednu opravu, která zlepší důvěru hned: zviditelni odmítnutí cookie
 - 2026-09-07: Doplněn Dodatek E o zákaznické podpoře, dokumentaci, kategorizaci dotazů a privacy-first práci se support daty.
 - 2026-09-07: Doplněn Dodatek F o retenci, mazání, exportu dat, zálohách a praktickém offboardingu zákazníka.
 - 2026-09-08: Doplněn Dodatek G o newsletteru, cookie liště, obchodních sděleních a férovém souhlasu bez manipulace.
+- 2026-09-08: Doplněn Dodatek H o technickém SEO bez trackerů, sitemap, robots.txt, metadatech, RSS a privacy-first auditu.
