@@ -27,7 +27,7 @@ Každou kapitolu ber jako pracovní checklist. Nečti ji jako román do šuplík
 8. Praktické šablony: brief, landing page, launch checklist a audit soukromí.
 9. AI automatizace v evropském SaaS: užitek, governance a bezpečné nasazení.
 10. Cenotvorba a balíčky: hodnota, jednoduchost, férovost a důvěra.
-11. Dodatky: 30denní plán, výběr nástrojů, obsah, přístupnost, podpora, retence, souhlasy, technické SEO, bezpečnostní minimum, roadmapa, prodejní discovery, onboarding, jednoduché CRM, zpětná vazba, produktové e-maily, dashboardy, experimenty a provozní náklady.
+11. Dodatky: 30denní plán, výběr nástrojů, obsah, přístupnost, podpora, retence, souhlasy, technické SEO, bezpečnostní minimum, roadmapa, prodejní discovery, onboarding, jednoduché CRM, zpětná vazba, produktové e-maily, dashboardy, experimenty, provozní náklady a observabilita.
 
 ---
 
@@ -4166,6 +4166,161 @@ Otevři poslední měsíční výpis nástrojů a infrastruktury. Vyber tři nej
 > Codyho komentář: Nákladový audit není o tom být lakomý. Je o tom nebýt sponzorem vlastního nepořádku.
 
 
+## Dodatek X: Observabilita bez logovacího panoptika
+
+Observabilita je schopnost rychle pochopit, co se v systému děje, proč se to děje a koho to ovlivňuje. Není to soutěž v tom, kdo uloží víc JSON řádků do dražšího dashboardu. Malý evropský SaaS potřebuje vidět chyby, výkon, kapacitu a bezpečnostní signály — ale zároveň nesmí z logů udělat druhou databázi osobních údajů, jen hůř zabezpečenou a s delší retencí. To by byl hezký technologický own goal, skoro až sportovní disciplína.
+
+OWASP ve svém Logging Cheat Sheet upozorňuje, že logy mohou obsahovat osobní i citlivé informace a že je potřeba řešit, co se loguje, jak se to chrání a co do logů vůbec nepatří. Zdroj: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+
+### X.1 Loguj rozhodnutí, ne soukromý život uživatele
+
+Dobré logy odpovídají na provozní otázky:
+
+- Proč požadavek selhal?
+- Která komponenta byla pomalá?
+- Který release změnil chování?
+- Zda chyba zasáhla jednoho zákazníka, nebo větší část systému.
+- Jestli jde o běžnou chybu, incident nebo bezpečnostní signál.
+
+Špatné logy sbírají všechno „pro jistotu“: celé request body, e-maily, tokeny, IP adresy bez rozmyslu, obsah formulářů, interní poznámky zákazníka a odpovědi AI modelů. Takové logy možná jednou pomohou při debugování. Určitě ale každý den zvyšují riziko úniku, právní zátěž a náklady.
+
+Praktické pravidlo: log má obsahovat tolik kontextu, aby šel incident vyšetřit, ale ne tolik, aby incident sám vytvořil.
+
+### X.2 Navrhni logovací slovník
+
+Malý tým nepotřebuje obří observability platformu hned první měsíc. Potřebuje konzistentní slovník událostí. Bez něj máš jen hromadu textu, kde se chyba jmenuje pokaždé jinak: `payment_failed`, `PaymentError`, `stripe nope`, `platba se rozbila` a oblíbené `něco spadlo`.
+
+Začni těmito poli:
+
+| Pole | Příklad | Proč existuje | Privacy-first poznámka |
+| --- | --- | --- | --- |
+| `timestamp` | `2026-09-08T21:00:00Z` | řazení událostí | neobsahuje osobní údaj samo o sobě |
+| `level` | `info`, `warn`, `error` | priorita reakce | nepoužívej `error` pro běžný stav |
+| `service` | `billing-api` | místo problému | jasný vlastník služby |
+| `event` | `invoice_generation_failed` | typ události | stabilní název bez osobních dat |
+| `request_id` | náhodný identifikátor | spojení napříč službami | nesmí být odvozený z e-mailu |
+| `account_id` | interní ID zákazníka | dopad na účet | preferuj interní ID před osobními údaji |
+| `release` | `2026.09.08-1` | vazba na nasazení | pomáhá rychle vrátit změnu |
+| `reason_code` | `pdf_timeout` | agregace příčin | lepší než ukládat celé chybové hlášky s daty |
+
+Codyho komentář: Strukturované logy nejsou sexy. Což je přesně jejich výhoda. Když hoří produkce, nechceš luštit poetický monolog serveru.
+
+### X.3 Co do logů nepatří
+
+Zakázaný seznam si napiš explicitně a dej ho do review checklistu. Ne jako interní folklór, ale jako pravidlo.
+
+Do běžných aplikačních logů nepatří:
+
+- hesla, API klíče, session tokeny a resetovací odkazy,
+- celé platební údaje nebo dokumenty zákazníka,
+- obsah soukromých zpráv, support tiketů a formulářů,
+- celé odpovědi AI asistentů, pokud mohou obsahovat zákaznická data,
+- raw request/response body bez filtrování,
+- dlouhodobě ukládané IP adresy tam, kde stačí agregace nebo krátká retence,
+- interní poznámky obchodníka, které nemění provozní diagnostiku.
+
+Pokud opravdu potřebuješ dočasně zvýšit detail logování, udělej z toho řízený režim: kdo ho zapnul, proč, na jak dlouho, pro který účet nebo endpoint a kdy se automaticky vypne. Debug mód bez expirace je časovaná bomba s hezkým názvem.
+
+### X.4 Metriky, logy a trace nejsou totéž
+
+Observabilita má tři praktické vrstvy:
+
+- Metriky říkají, že se něco děje: chybovost, latence, počet požadavků, fronta, využití databáze.
+- Logy říkají, co se stalo v konkrétním místě systému.
+- Trace ukazuje cestu jednoho požadavku přes služby.
+
+Pro začátek malému SaaS stačí:
+
+| Oblast | Minimum | Akce při problému |
+| --- | --- | --- |
+| Dostupnost | uptime hlavních URL | alert při opakovaném selhání |
+| Chybovost | podíl 5xx a aplikačních výjimek | triage podle release a endpointu |
+| Výkon | p95 latence hlavních endpointů | najít pomalou službu nebo dotaz |
+| Fronty | počet čekajících úloh a stáří nejstarší | zpomalit vstup nebo přidat worker |
+| Databáze | velikost, pomalé dotazy, connection pool | optimalizovat index, dotaz nebo limit |
+| Bezpečnost | neúspěšné login pokusy, změny práv, token chyby | ověřit zneužití a dopad |
+
+Nezačínej tím, že nasadíš deset nástrojů. Začni tím, že víš, komu pípne telefon a podle čeho pozná, že jde o skutečný problém.
+
+### X.5 Retence je produktové rozhodnutí
+
+Retence logů není jen technická preference. Je to kompromis mezi diagnostikou, náklady, právním rizikem a důvěrou. Pro většinu malých produktů dává smysl mít různé retence podle citlivosti a užitečnosti.
+
+Příklad:
+
+| Typ dat | Doporučený přístup | Proč |
+| --- | --- | --- |
+| Agregované metriky | držet dlouhodobě | pomáhají trendům bez detailních osobních údajů |
+| Aplikační chyby | kratší provozní retence | hodí se pro debug posledních releasů |
+| Bezpečnostní audit log | delší chráněná retence | potřeba pro vyšetření přístupů a změn práv |
+| Detailní debug logy | velmi krátká retence | vysoké riziko citlivých dat |
+| Raw requesty | standardně neukládat | skoro vždy obsahují víc, než potřebuješ |
+
+EDPB v materiálech pro malé firmy připomíná, že při porušení zabezpečení osobních údajů může vzniknout povinnost oznámit incident dozorovému úřadu do 72 hodin, pokud nejde o situaci bez rizika pro jednotlivce. Zdroj: https://www.edpb.europa.eu/sme/assess-the-risks/data-breaches_en
+
+Praktický dopad: logy mají pomoct rychle určit, zda incident zasáhl osobní údaje, koho se týká a jaký je rozsah. Když ale loguješ příliš mnoho, zvětšuješ dopad každého úniku.
+
+### X.6 Alerty bez únavy týmu
+
+Alert, který nikdo neřeší, není monitoring. Je to jen drahý budík s toxickou osobností.
+
+Nastav alerty podle rozhodnutí:
+
+- Stránka nejde načíst opakovaně několik minut: okamžitě řešit.
+- Chybovost po releasu skokově narostla: ověřit release a připravit rollback.
+- Fronta zpracování roste déle než obvykle: zkontrolovat worker, limit nebo externí službu.
+- Záloha selhala: řešit v pracovní době, pokud existuje poslední ověřená záloha.
+- Neobvyklé změny práv nebo mnoho neúspěšných přihlášení: bezpečnostní triage.
+
+Každý alert má mít:
+
+- vlastníka,
+- důvod existence,
+- odkaz na runbook,
+- hranici pro eskalaci,
+- pravidlo pro zrušení, pokud dlouhodobě nepomáhá.
+
+### X.7 Konkrétní příklad: chyba při generování faktury
+
+Špatný log:
+
+```text
+ERROR Faktura nejde vytvořit pro jan.novak@example.com, request: { celé tělo formuláře, adresa, poznámka, token }
+```
+
+Lepší log:
+
+```json
+{
+  "level": "error",
+  "event": "invoice_generation_failed",
+  "service": "billing-api",
+  "request_id": "req_8f4c...",
+  "account_id": "acc_12345",
+  "reason_code": "vat_validation_timeout",
+  "release": "2026.09.08-1"
+}
+```
+
+Do supportu může jít lidská zpráva: „Fakturu se nepodařilo vytvořit kvůli dočasné kontrole DIČ, zkusíme to znovu a dáme vědět.“ Do logu nepatří celý zákaznický formulář. Pokud potřebuješ DIČ pro diagnostiku, ulož ho v primární databázi s přístupovými právy, ne jako vedlejší suvenýr v logovacím systému.
+
+### X.8 Checklist privacy-first observability
+
+- Máme definovaný seznam událostí, které logujeme vždy.
+- Víme, která data do logů nesmí nikdy projít.
+- Request ID není osobní údaj ani odvozenina osobního údaje.
+- Debug logování má vlastníka, důvod a expiraci.
+- Retence se liší podle typu logů a citlivosti.
+- Alerty mají runbook a jasnou hranici akce.
+- Produkční logy nejsou volně dostupné celému týmu.
+- Umíme rychle zjistit dopad incidentu bez prohledávání osobních dat.
+- Agregované metriky preferujeme před detailním sledováním jednotlivců.
+- Logovací systém má export, mazání a přístupová práva pod kontrolou.
+
+### X.9 Mini úkol na 60 minut
+
+Vezmi jednu kritickou cestu produktu: registraci, platbu, export dat nebo vytvoření objednávky. Napiš pět událostí, které opravdu potřebuješ vidět při problému. Ke každé doplň, která pole jsou nutná, která jsou zakázaná a jak dlouho mají zůstat uložená. Pak zkus odpovědět na otázku: „Kdyby tyhle logy unikly, co by se zákazník o sobě dozvěděl?“ Pokud je odpověď nepříjemně dlouhá, máš práci. Dobrá zpráva: právě jsi našel riziko dřív než útočník.
+
 ## Zdroje
 
 - Evropská komise: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -4213,9 +4368,11 @@ Otevři poslední měsíční výpis nástrojů a infrastruktury. Vyber tři nej
 - GOV.UK Service Manual: Learning about users and their needs — https://www.gov.uk/service-manual/user-research/start-by-learning-user-needs
 - GOV.UK Service Manual: Make the service simple to use — https://www.gov.uk/service-manual/service-standard/point-4-make-the-service-simple-to-use
 - FinOps Foundation: What is FinOps? — https://www.finops.org/introduction/what-is-finops/
+- EDPB: Data breaches — https://www.edpb.europa.eu/sme/assess-the-risks/data-breaches_en
 
 ## Pracovní log
 
+- 2026-09-08: Doplněn Dodatek X o privacy-first observabilitě, strukturovaných logách, retenci, alertech a debugování bez ukládání citlivých dat.
 - 2026-09-08: Doplněn Dodatek W o provozních nákladech, variabilních položkách, týdenním review, rozpočtových limitech a privacy-first úsporách.
 - 2026-09-08: Doplněn Dodatek V o produktových a marketingových experimentech, hypotézách, rozhodovacích pravidlech a privacy-first měření bez šmírování.
 - 2026-09-08: Doplněn Dodatek U o praktických dashboardech, týdenním review, vlastnících metrik a privacy-first pravidlech pro rozhodování podle dat.
