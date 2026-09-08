@@ -27,7 +27,7 @@ Každou kapitolu ber jako pracovní checklist. Nečti ji jako román do šuplík
 8. Praktické šablony: brief, landing page, launch checklist a audit soukromí.
 9. AI automatizace v evropském SaaS: užitek, governance a bezpečné nasazení.
 10. Cenotvorba a balíčky: hodnota, jednoduchost, férovost a důvěra.
-11. Dodatky: 30denní plán, výběr nástrojů, obsah, přístupnost, podpora, retence, souhlasy, technické SEO, bezpečnostní minimum, roadmapa, prodejní discovery, onboarding a jednoduché CRM.
+11. Dodatky: 30denní plán, výběr nástrojů, obsah, přístupnost, podpora, retence, souhlasy, technické SEO, bezpečnostní minimum, roadmapa, prodejní discovery, onboarding, jednoduché CRM a zpětná vazba.
 
 ---
 
@@ -3395,6 +3395,106 @@ Takový zápis je krátký, ale použitelný pro zákazníka, support i obchod. 
 Vezmi posledních pět změn v produktu nebo na webu. Ke každé napiš jednu uživatelskou větu podle vzoru: „Změnili jsme X, aby Y, týká se Z, akce je/není potřeba.“ Pak z toho slož první veřejný changelog za poslední měsíc. Pokud žádnou změnu neumíš popsat jazykem zákazníka, není to ostuda. Je to produktová kontrolka. Bliká proto, aby se s ní něco udělalo.
 
 
+## Dodatek R: Zpětná vazba bez šmírování a anketního pekla
+
+Zpětná vazba není formulář s dvaceti otázkami, který uživatel vyplní jen proto, že omylem klikl a teď se bojí zavřít modal. Dobrá zpětná vazba je krátká, dobrovolná, propojená s rozhodnutím a nevyžaduje, aby zákazník odevzdal víc dat, než je potřeba.
+
+Malý SaaS tým nepotřebuje sledovat každý pohyb myši. Potřebuje rozumět tomu, kde se zákazník zasekl, co mu přineslo hodnotu a co brání další platbě, doporučení nebo rozšíření účtu.
+
+### R.1 Nejdřív rozhodnutí, potom otázka
+
+Každý sběr zpětné vazby začni větou: „Chceme rozhodnout X.“ Pokud tu větu neumíš napsat, pravděpodobně jen sbíráš názory do šuplíku. Šuplík je skvělý kus nábytku, ale mizerný produktový nástroj.
+
+Příklady dobrých rozhodnutí:
+
+- Chceme rozhodnout, jestli zjednodušit první nastavení projektu.
+- Chceme rozhodnout, jestli má smysl přidat export do účetního systému.
+- Chceme rozhodnout, jestli je ceník srozumitelný pro malé firmy.
+- Chceme rozhodnout, jestli dokumentace stačí bez úvodního callu.
+
+Ke každému rozhodnutí pak polož jednu až tři otázky. Ne deset. Když potřebuješ deset otázek, často nemáš problém, ale mlhu.
+
+### R.2 Tři kanály zpětné vazby stačí
+
+Pro malý tým doporučuji začít třemi jednoduchými kanály:
+
+1. Krátká otázka v produktu po dokončení důležité akce.
+2. Přímý e-mail nebo odkaz „Napište nám, co nefungovalo“ v dokumentaci.
+3. Pravidelný rozhovor s několika aktivními zákazníky jednou za měsíc.
+
+Všechny tři kanály mohou fungovat privacy-first. Nemusíš používat externí session replay, reklamní publika ani univerzální identifikátor návštěvníka. Stačí kontext akce, dobrovolná odpověď a jasné pravidlo, kdo odpovědi čte.
+
+### R.3 Otázky piš jako člověk
+
+Špatná otázka zní: „Ohodnoťte naši platformu na škále 1–10 z hlediska uživatelské zkušenosti.“ Zákazník si u toho představí tabulku, KPI meeting a lehkou ztrátu vůle žít.
+
+Lepší otázky:
+
+- „Co jste tu dnes chtěli udělat?“
+- „Kde jste se zasekli?“
+- „Co by vám ušetřilo nejvíc času?“
+- „Co vám v ceníku není jasné?“
+- „Co byste potřebovali vědět před rozhodnutím?“
+
+U B2B SaaS se často víc dozvíš z jedné otevřené odpovědi než ze stovky abstraktních hodnocení. Číslo může ukázat trend, ale text vysvětlí důvod.
+
+### R.4 Nepleť si hlasité přání s prioritou
+
+Zákazník, který nejhlasitěji žádá funkci, nemusí reprezentovat trh. Zákazník, který platí nejvíc, nemusí mít vždy nejlepší produktový směr. A zakladatel, který si danou funkci tajně přeje už půl roku, rozhodně není neutrální pozorovatel. Ano, koukám se i na sebe. Cody není výjimka, jen má lepší výmluvy.
+
+Každou zpětnou vazbu proto ukládej se třemi údaji:
+
+- Segment zákazníka: malá firma, agentura, enterprise, freelancer, interní tým.
+- Situace: onboarding, placení, export, reporting, každodenní práce, podpora.
+- Dopad: blokuje nákup, zpomaluje práci, zvyšuje podporu, je jen příjemné mít.
+
+Teprve potom ji spoj s roadmapou. Jedno přání není roadmapa. Deset podobných přání ze stejné situace už je signál.
+
+### R.5 Privacy-first pravidla pro feedback
+
+Feedback často obsahuje osobní údaje, obchodní informace nebo interní procesy zákazníka. Proto k němu přistupuj stejně opatrně jako k supportu.
+
+Praktická pravidla:
+
+- Do veřejných roadmap a changelogů nepřenášej jména zákazníků bez výslovného souhlasu.
+- V ukázkách problémů anonymizuj názvy firem, lidí, projektů a zakázek.
+- Do nástrojů třetích stran neposílej celé přepisy hovorů, pokud stačí shrnutí.
+- Citlivé požadavky označ a omez přístup jen na lidi, kteří s nimi opravdu pracují.
+- Nastav retenční dobu pro staré odpovědi; feedback z doby před třemi lety nemusí být věčný artefakt jako firemní hrnek.
+- Pokud používáš AI na třídění odpovědí, neposílej do ní zbytečné identifikátory.
+
+### R.6 Konkrétní příklad: feedback po dokončení onboardingu
+
+Představ si SaaS pro správu zakázek. Uživatel dokončí první projekt a systém mu nabídne jednu dobrovolnou otázku:
+
+„Co vám při založení první zakázky chybělo nebo nebylo jasné?“
+
+K odpovědi si interně uložíš jen:
+
+- typ účtu: trial nebo placený účet,
+- fázi: první dokončená zakázka,
+- čas od registrace: méně než jeden den, jeden až sedm dní, více než sedm dní,
+- text odpovědi,
+- souhlas s případným kontaktováním, pokud ho zákazník výslovně zaškrtl.
+
+Nepotřebuješ kompletní session replay, IP adresu, otisk zařízení ani propojení s reklamním profilem. Potřebuješ pochopit překážku. Pokud deset lidí napíše, že nevěděli, kam zadat termín, máš jasnější úkol než po hodině sledování heatmapy.
+
+### R.7 Checklist zpětné vazby pro malý SaaS
+
+- Každá otázka má jasné rozhodnutí, které má podpořit.
+- Ptáme se v kontextu konkrétní akce, ne náhodně při prvním načtení stránky.
+- Odpověď je dobrovolná a zavření formuláře je stejně snadné jako odeslání.
+- Sbíráme minimum metadat potřebných k pochopení situace.
+- Citlivé údaje anonymizujeme před sdílením v týmu.
+- Feedback pravidelně třídíme podle segmentu, situace a dopadu.
+- Výsledky propojujeme s roadmapou, podporou, dokumentací a changelogem.
+- Staré odpovědi mažeme nebo agregujeme podle retenčních pravidel.
+
+### R.8 Mini úkol na 45 minut
+
+Vyber jednu důležitou akci v produktu: registrace, první projekt, pozvánka kolegy, export, platba nebo zrušení účtu. Napiš jednu otázku, kterou položíš po dokončení akce. Vedle ní doplň rozhodnutí, které má odpověď podpořit, metadata, která opravdu potřebuješ, a retenční dobu odpovědí. Pokud zjistíš, že sbíráš víc metadat než samotné odpovědi, gratuluju: právě jsi objevil datový vysavač v přestrojení za produktový výzkum.
+
+
 ## Zdroje
 
 - Evropská komise: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -3444,6 +3544,7 @@ Vezmi posledních pět změn v produktu nebo na webu. Ke každé napiš jednu u�
 
 ## Pracovní log
 
+- 2026-09-08: Doplněn Dodatek R o privacy-first zpětné vazbě, krátkých produktových otázkách, třídění signálů a práci s feedbackem bez zbytečného sledování.
 - 2026-09-08: Doplněn Dodatek Q o changelogu, release komunikaci, RSS, střídmých oznámeních a privacy-first pravidlech produktových novinek.
 - 2026-09-08: Doplněn Dodatek P o interní dokumentaci, rozhodovacích záznamech, privacy-first pravidlech wiki a týdenní údržbě znalostí.
 - 2026-09-07: Založena struktura e-booku, doplněn úvod a první kapitola o privacy-first základech webu a SaaS v Evropě.
