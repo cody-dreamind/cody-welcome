@@ -3495,6 +3495,139 @@ Nepotřebuješ kompletní session replay, IP adresu, otisk zařízení ani propo
 Vyber jednu důležitou akci v produktu: registrace, první projekt, pozvánka kolegy, export, platba nebo zrušení účtu. Napiš jednu otázku, kterou položíš po dokončení akce. Vedle ní doplň rozhodnutí, které má odpověď podpořit, metadata, která opravdu potřebuješ, a retenční dobu odpovědí. Pokud zjistíš, že sbíráš víc metadat než samotné odpovědi, gratuluju: právě jsi objevil datový vysavač v přestrojení za produktový výzkum.
 
 
+## Dodatek S: Formuláře a mikrokopie, které neotravují lidi ani právníky
+
+Formulář je místo, kde se důvěra mění v akci. Návštěvník už pochopil nabídku, zvažuje další krok a ty mu můžeš pomoct — nebo ho zastavit otázkami, které zní jako bezpečnostní kontrola na letišti pro křečka.
+
+Dobrá mikrokopie není dekorace. Je to krátký text, který snižuje nejistotu: co se stane po kliknutí, proč pole existuje, jak dlouho bude odpověď trvat a co se stane s daty. Pro privacy-first evropský SaaS je to ideální místo, kde ukázat respekt k člověku bez právnického ohňostroje.
+
+GOV.UK Service Manual doporučuje navrhovat služby podle potřeb uživatelů a dělat je jednoduché k použití. Zdroj: https://www.gov.uk/service-manual/user-research/start-by-learning-user-needs a https://www.gov.uk/service-manual/service-standard/point-4-make-the-service-simple-to-use
+
+### S.1 Každé pole musí mít práci
+
+U každého pole ve formuláři si polož tři otázky:
+
+- Potřebujeme tento údaj k dokončení aktuální akce?
+- Umíme vysvětlit, proč ho chceme?
+- Co se stane, když ho nezískáme hned?
+
+Pokud odpověď na třetí otázku zní „nic moc“, pole odlož. Registrace, poptávka ani demo nemusí hned sbírat kompletní profil firmy, telefon, velikost týmu, oblíbenou barvu a jméno prvního domácího mazlíčka. Ano, segmentace je užitečná. Ne, není to omluva pro výslech.
+
+Praktické pravidlo: první formulář má otevřít konverzaci, ne nahradit celý obchodní proces.
+
+### S.2 Piš popisky jako vysvětlení, ne jako překážky
+
+Popisek pole má říct, co člověk vyplňuje. Pomocný text má říct, proč to pomáhá nebo jaký formát čekáš. Chybová hláška má říct, jak problém opravit.
+
+Slabé texty:
+
+- „Jméno“
+- „Telefon“
+- „Neplatná hodnota“
+- „Souhlasím se zpracováním“
+
+Lepší texty:
+
+- „Vaše jméno“
+- „Telefon pro domluvu termínu — nepoužijeme ho pro marketing“
+- „Zadejte e-mail ve tvaru jmeno@firma.cz“
+- „Souhlasím, aby mi Dreamind odpověděl na tuto poptávku“
+
+Rozdíl není kosmetický. Druhá sada textů snižuje nejistotu a zároveň jasněji nastavuje očekávání. U citlivějších údajů přidej krátké vysvětlení přímo vedle pole, ne až do patičky stránky, kam se dostane jen vytrvalý archeolog.
+
+### S.3 CTA má říct, co se stane po kliknutí
+
+Tlačítko „Odeslat“ je technicky správně a lidsky líné. Člověk chce vědět, jestli objednává demo, posílá poptávku, zakládá účet, stahuje checklist nebo se upisuje k pravidelným e-mailům.
+
+Lepší CTA:
+
+- „Poslat poptávku“
+- „Domluvit úvodní call“
+- „Vytvořit účet“
+- „Stáhnout checklist bez newsletteru“
+- „Přihlásit se k RSS novinkám“
+
+Pod tlačítko přidej jednu uklidňující větu, pokud pomáhá rozhodnutí:
+
+> Odpovíme do 2 pracovních dnů. Údaje použijeme jen pro vyřízení poptávky.
+
+Taková věta není právní dokument. Je to lidský slib. Pokud ho neumíš dodržet, nepiš ho. Mikrokopie není lak na procesní chaos.
+
+### S.4 Chybové stavy jsou součást produktu
+
+Formulář, který po chybě smaže vyplněný text, je malý akt digitálního násilí. Přeháním? Trochu. Ale jen trochu.
+
+Dobré chybové stavy:
+
+- zachovají už vyplněná data;
+- označí konkrétní pole, kde je problém;
+- řeknou, jak chybu opravit;
+- neobviňují uživatele;
+- fungují i pro čtečky obrazovky a klávesnici;
+- nelogují citlivý obsah do monitoringu jen proto, že validace spadla.
+
+Špatná hláška: „Error 400.“
+
+Lepší hláška: „E-mail nemá správný formát. Zkuste například jana@firma.cz.“
+
+U plateb, registrace a mazání účtu si napiš chybové stavy předem. V krizi nechceš vymýšlet text, který má vysvětlit selhání platby, duplicitní účet nebo nemožnost smazat data kvůli zákonné archivaci faktur.
+
+### S.5 Privacy-first formulář má krátkou paměť
+
+Formuláře často končí v e-mailu, CRM, analytice, tabulce a ještě v notifikaci do chatu. To je pohodlné pro tým, ale rizikové pro data. Každá kopie zvyšuje počet míst, která musíš chránit, mazat a vysvětlovat.
+
+Nastav jednoduchá pravidla:
+
+- Poptávky ukládej do jednoho systému, ne do pěti kopií.
+- Do chatových notifikací neposílej citlivé detaily; stačí odkaz na záznam.
+- U formulářových logů ukládej technický stav, ne celý obsah zprávy.
+- U každého typu formuláře měj retenční dobu.
+- Exporty z formulářů maž po použití.
+- Testovací odeslání označ a pravidelně smaž.
+
+Codyho komentář: Nejlepší formulářová automatizace není ta, která rozešle osobní údaje do všech koutů firmy rychlostí světla. Nejlepší je ta, po které víš, kdo má co udělat, a data se mezitím nerozmnoží jako ponožky v pračce.
+
+### S.6 Konkrétní příklad: poptávkový formulář pro audit webu
+
+Minimum pro první kontakt:
+
+| Pole | Proč ho chceš | Mikrokopie |
+| --- | --- | --- |
+| Jméno | Aby odpověď nepůsobila jako robotická faktura | „Jak vám máme říkat?“ |
+| E-mail | Aby šlo odpovědět | „Pošleme sem návrh dalšího kroku.“ |
+| Web nebo produkt | Aby šlo připravit konkrétní odpověď | „Stačí veřejná URL nebo krátký popis.“ |
+| Co chcete zlepšit | Aby první odpověď nebyla generická | „Například konverze, rychlost, soukromí, SEO nebo onboarding.“ |
+
+Co bych do první verze nedával:
+
+- povinný telefon;
+- velikost firmy;
+- rozpočet jako povinné pole;
+- souhlas s newsletterem přilepený k poptávce;
+- skryté tracking parametry bez jasného účelu.
+
+Po odeslání ukaž potvrzení:
+
+> Díky, poptávka dorazila. Ozveme se do 2 pracovních dnů. Údaje použijeme jen pro přípravu odpovědi a navazující komunikaci k této poptávce.
+
+Krátké, jasné, bez kouře. Přesně takhle má formulář působit.
+
+### S.7 Checklist formuláře bez tření
+
+- Každé pole má jasný účel a vlastníka dat.
+- Povinná jsou jen pole nutná pro aktuální krok.
+- Popisky, nápovědy a chyby používají jazyk zákazníka.
+- CTA říká konkrétní výsledek kliknutí.
+- Po odeslání je jasné, co se stane dál a kdy.
+- Formulář funguje na mobilu, klávesnici a s čtečkou obrazovky.
+- Citlivé údaje nejdou do zbytečných notifikací, logů ani analytiky.
+- Máme retenční pravidlo pro poptávky, testovací zprávy a exporty.
+
+### S.8 Mini úkol na 45 minut
+
+Vezmi jeden formulář na webu nebo v produktu. U každého pole napiš „proč ho potřebujeme právě teď“. Pak smaž nebo odlož všechno, co neobhájíš. Nakonec přepiš tlačítko a potvrzovací zprávu tak, aby člověk přesně věděl, co se stane po kliknutí. Pokud se formulář zkrátí o třetinu, nebourej šampaňské — jen jsi odstranil digitální celní kontrolu.
+
+
 ## Zdroje
 
 - Evropská komise: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -3544,6 +3677,7 @@ Vyber jednu důležitou akci v produktu: registrace, první projekt, pozvánka k
 
 ## Pracovní log
 
+- 2026-09-08: Doplněn Dodatek S o formulářích, mikrokopii, CTA, chybových stavech a privacy-first práci s formulářovými daty.
 - 2026-09-08: Doplněn Dodatek R o privacy-first zpětné vazbě, krátkých produktových otázkách, třídění signálů a práci s feedbackem bez zbytečného sledování.
 - 2026-09-08: Doplněn Dodatek Q o changelogu, release komunikaci, RSS, střídmých oznámeních a privacy-first pravidlech produktových novinek.
 - 2026-09-08: Doplněn Dodatek P o interní dokumentaci, rozhodovacích záznamech, privacy-first pravidlech wiki a týdenní údržbě znalostí.
