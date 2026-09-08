@@ -27,7 +27,7 @@ Každou kapitolu ber jako pracovní checklist. Nečti ji jako román do šuplík
 8. Praktické šablony: brief, landing page, launch checklist a audit soukromí.
 9. AI automatizace v evropském SaaS: užitek, governance a bezpečné nasazení.
 10. Cenotvorba a balíčky: hodnota, jednoduchost, férovost a důvěra.
-11. Dodatky: 30denní plán, výběr nástrojů, obsah, přístupnost, podpora, retence, souhlasy, technické SEO, bezpečnostní minimum, roadmapa a prodejní discovery.
+11. Dodatky: 30denní plán, výběr nástrojů, obsah, přístupnost, podpora, retence, souhlasy, technické SEO, bezpečnostní minimum, roadmapa, prodejní discovery a onboarding.
 
 ---
 
@@ -2905,6 +2905,129 @@ To není slabost. To je ochrana značky, týmu i zákazníka. Krátkodobě možn
 
 Vezmi poslední tři obchodní rozhovory nebo poptávky. U každé napiš: problém, dopad, rozhodující člověk, datové riziko a další krok. Potom porovnej, co se opakuje. Pokud se stejný problém vrací třikrát, není to náhoda. Je to signál pro landing page, dokumentaci, ceník, roadmapu nebo nový produktový experiment. A pokud se neopakuje nic, možná zatím neprodáváš segmentu, ale sbíráš náhodné Pokémony v CRM.
 
+
+## Dodatek N: Onboarding, který aktivuje bez šmírování
+
+Onboarding není úvodní ohňostroj tooltipů. Je to nejkratší férová cesta od „mám problém“ k „aha, tohle mi pomáhá“. U malého SaaS je onboarding často důležitější než další funkce, protože zákazník, který se nedostane k první hodnotě, nikdy neocení ani tu nejhezčí roadmapu.
+
+GOV.UK Service Manual doporučuje začínat porozuměním uživatelským potřebám a průběžně ověřovat, jestli služba skutečně pomáhá lidem dosáhnout správného výsledku. Stejný princip sedí i pro SaaS: onboarding nemá vysvětlovat interní architekturu produktu, ale dovést konkrétního člověka ke konkrétní práci. Zdroj: https://www.gov.uk/service-manual/user-research/start-by-learning-user-needs
+
+### N.1 Definuj první hodnotu jednou větou
+
+Nejdřív napiš větu, po které poznáš, že onboarding splnil práci:
+
+> Nový uživatel dokáže do 15 minut vytvořit první zakázku, pozvat kolegu a pochopit, co se stane zítra.
+
+Tohle je lepší než neurčité „uživatel se zorientuje v aplikaci“. Orientace je hezká, ale zákazník nepřišel meditovat nad menu. Přišel udělat práci.
+
+Dobrá věta první hodnoty má čtyři části:
+
+- Kdo ji získá: majitel, účetní, obchodník, technik, administrátor.
+- Co konkrétně udělá: založí projekt, importuje data, odešle nabídku, nastaví pravidlo.
+- Jak rychle: dnes, do 15 minut, před první poradou, bez zásahu supportu.
+- Proč na tom záleží: ušetří další e-mail, sníží chybu, získá přehled, pošle první fakturu.
+
+### N.2 Nechtěj všechno hned
+
+Registrace je špatné místo pro dotazník, který vypadá jako žádost o hypotéku. Privacy-first onboarding sbírá údaje postupně a jen ve chvíli, kdy dávají smysl.
+
+Příklad pro B2B SaaS:
+
+- Při registraci stačí e-mail, heslo nebo bezpečný magic link a základní potvrzení podmínek.
+- Název firmy se hodí až při vytvoření pracovního prostoru.
+- Fakturační údaje patří až k platbě nebo aktivaci placeného plánu.
+- Telefon sbírej jen tehdy, když opravdu poskytuješ telefonickou podporu nebo je nutný pro konkrétní proces.
+
+Princip GDPR „data protection by design and by default“ podporuje návrh služeb tak, aby ochrana dat nebyla dodatečná záplata, ale výchozí nastavení. Zdroj: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
+
+### N.3 Vysvětluj v kontextu, ne encyklopedií
+
+Uživatel nepotřebuje hned znát všechny možnosti. Potřebuje vědět, co udělat teď. GOV.UK Service Standard klade důraz na jednoduché použití služby tak, aby lidé dosáhli cíle s minimem pomoci. Zdroj: https://www.gov.uk/service-manual/service-standard/point-4-make-the-service-simple-to-use
+
+Prakticky:
+
+- Místo pětikrokového produktového tour ukaž prázdný stav s jedním doporučeným krokem.
+- Místo tooltipu na každé ikoně napiš jasný nadpis sekce a příklad vyplněného obsahu.
+- Místo „Importujte CSV dle dokumentace“ nabídni vzorový soubor a kontrolu chyb před uložením.
+- Místo „Nastavte integrace“ začni otázkou: „Odkud dnes dostáváte poptávky?“
+
+Codyho komentář: Tooltipy jsou jako koření. Trocha pomůže, hrstka zničí jídlo a pak všichni předstírají, že to tak mělo chutnat.
+
+### N.4 Měř aktivaci bez osobního detektivního klubu
+
+Onboarding potřebuje měření, ale nemusí z produktu udělat sledovací aparát. Většině malých SaaS stačí agregované události a několik stavových metrik.
+
+Užitečné události:
+
+- `workspace_created`: vznikl pracovní prostor.
+- `first_project_created`: uživatel vytvořil první projekt nebo zakázku.
+- `teammate_invited`: tým pozval dalšího člověka.
+- `sample_data_removed`: uživatel přešel od ukázky k vlastním datům.
+- `billing_started`: účet se rozhodl pro placený režim.
+
+K událostem si napiš retenční pravidla. Pokud nepotřebuješ identitu konkrétní osoby, ukládej jen agregaci na úrovni účtu nebo anonymizovaný stav. Pokud identitu potřebuješ kvůli podpoře, řekni to v interní mapě dat a drž ji jen tak dlouho, jak má smysl.
+
+### N.5 Navrhni tři onboardingové cesty
+
+Jeden onboarding pro všechny obvykle znamená, že není dobrý pro nikoho. Malý tým ale nemusí stavět personalizační raketu. Stačí tři jasné cesty:
+
+| Segment | První hodnota | Co neukazovat hned |
+| --- | --- | --- |
+| Zakladatel nebo majitel | Přehled práce a plateb | Detailní role a oprávnění |
+| Operátor nebo specialista | Rychlé zadání každodenní práce | Ceník, fakturaci a interní nastavení |
+| Administrátor | Nastavení týmu, bezpečnosti a dat | Marketingové tipy a prázdné inspirace |
+
+V UI to může být jednoduchá otázka po registraci: „Co chcete dnes nastavit?“ Odpověď nemusíš používat pro profilování. Stačí podle ní zobrazit správný checklist a uložit preferenci do účtu.
+
+### N.6 E-maily v onboardingu mají pomáhat, ne nahánět
+
+Onboardingový e-mail má mít jasný účel. Když zákazník nedokončí první krok, pošli mu stručnou nápovědu. Když první hodnotu získá, ukaž další rozumný krok. Neposílej sedmidílnou sérii jen proto, že to umí marketingový nástroj.
+
+Férová sekvence pro B2B SaaS:
+
+- Den 0: potvrzení účtu, odkaz na první krok a kontakt na podporu.
+- Den 1: jeden konkrétní tip podle nedokončeného kroku.
+- Den 3: krátký příklad použití podobného segmentu.
+- Den 7: otázka, jestli produkt řeší původní problém, plus možnost snadno se ozvat.
+
+Každý e-mail by měl projít testem: pomáhá zákazníkovi udělat práci, nebo jen připomíná, že marketing má kalendář? Pokud je odpověď druhá možnost, e-mail smaž. Kalendář to přežije.
+
+### N.7 Konkrétní příklad: onboarding pro nástroj na zakázky
+
+Produkt: jednoduchý SaaS pro řemeslníky, kteří chtějí evidovat poptávky, zakázky a stav plateb.
+
+První hodnota: uživatel do 15 minut zadá první zakázku a vidí, co má udělat jako další krok.
+
+Onboarding:
+
+1. Registrace: e-mail, heslo nebo magic link, potvrzení podmínek.
+2. Volba role: „Jsem majitel“, „Zadávám zakázky“, „Řeším administrativu“.
+3. Prázdný stav: jedno tlačítko „Přidat první zakázku“ a ukázka vyplněné zakázky.
+4. Formulář: zákazník, popis práce, termín, odhad ceny; telefon volitelně, ne povinně.
+5. Po uložení: checklist „pozvat kolegu“, „nastavit stav platby“, „vytvořit šablonu nabídky“.
+6. Měření: agregovaně spočítat dokončení kroků, ne nahrávat každý pohyb myši.
+
+Support si k tomu drží tři otázky:
+
+- Kde lidé nejčastěji zaváhají?
+- Jaký údaj nechtějí vyplnit a proč?
+- Který krok je pro ně první skutečný moment hodnoty?
+
+### N.8 Checklist privacy-first onboardingu
+
+- Máme jednu větu první hodnoty a všichni v týmu jí rozumí.
+- Registrace sbírá jen údaje nutné pro založení účtu.
+- Další údaje žádáme až ve chvíli, kdy jsou potřeba pro konkrétní akci.
+- Prázdné stavy ukazují příklady a jeden další krok, ne prázdnou bílou poušť.
+- Onboardingové e-maily jsou krátké, užitečné a snadno odhlásitelné, pokud jde o marketing.
+- Měříme dokončení klíčových kroků agregovaně a bez zbytečné identifikace.
+- Support má jednoduchý způsob, jak posílat poznatky zpět do produktu.
+- Každá nová onboardingová automatizace má zapsané, jaká data používá a proč.
+
+### N.9 Mini úkol na 60 minut
+
+Otevři svůj aktuální onboarding a napiš na papír tři věci: první hodnota, první zbytečný údaj a první místo, kde uživatel může zabloudit. Jednu z nich dnes oprav. Ne všechno. Jednu. Produktivita není počet otevřených front, ale počet zavřených smyček.
+
 ## Zdroje
 
 - Evropská komise: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -2949,6 +3072,8 @@ Vezmi poslední tři obchodní rozhovory nebo poptávky. U každé napiš: probl
 - European Commission: Can someone else process the data on my organisation’s behalf? — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/obligations/controllerprocessor/can-someone-else-process-data-my-organisations-behalf_en
 - European Commission: Standard contractual clauses for controllers and processors in the EU/EEA — https://commission.europa.eu/publications/standard-contractual-clauses-controllers-and-processors-eueea_en
 - EDPB: Guidelines 07/2020 on the concepts of controller and processor in the GDPR — https://www.edpb.europa.eu/documents/guideline/guidelines-072020-on-the-concepts-of-controller-and-processor-in-the-gdpr_en
+- GOV.UK Service Manual: Learning about users and their needs — https://www.gov.uk/service-manual/user-research/start-by-learning-user-needs
+- GOV.UK Service Manual: Make the service simple to use — https://www.gov.uk/service-manual/service-standard/point-4-make-the-service-simple-to-use
 
 ## Pracovní log
 
@@ -2975,3 +3100,4 @@ Vezmi poslední tři obchodní rozhovory nebo poptávky. U každé napiš: probl
 - 2026-09-08: Doplněn Dodatek K o privacy-first nákupu SaaS nástrojů, kontrole DPA, exportu, riziku dodavatelů a checklistu před zadáním karty.
 - 2026-09-08: Doplněn Dodatek L o roadmapě bez chaosu, prioritizaci podle problémů, týdenním review a privacy kontrole nových funkcí.
 - 2026-09-08: Doplněn Dodatek M o prodejní discovery bez nátlaku, privacy-first zápisu ze schůzek, follow-upu a férovém odmítání nevhodných obchodů.
+- 2026-09-08: Doplněn Dodatek N o privacy-first onboardingu, první hodnotě, kontextové nápovědě, aktivačních metrikách a užitečných e-mailech.
