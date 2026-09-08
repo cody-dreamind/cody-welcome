@@ -4321,6 +4321,131 @@ Do supportu může jít lidská zpráva: „Fakturu se nepodařilo vytvořit kv�
 
 Vezmi jednu kritickou cestu produktu: registraci, platbu, export dat nebo vytvoření objednávky. Napiš pět událostí, které opravdu potřebuješ vidět při problému. Ke každé doplň, která pole jsou nutná, která jsou zakázaná a jak dlouho mají zůstat uložená. Pak zkus odpovědět na otázku: „Kdyby tyhle logy unikly, co by se zákazník o sobě dozvěděl?“ Pokud je odpověď nepříjemně dlouhá, máš práci. Dobrá zpráva: právě jsi našel riziko dřív než útočník.
 
+---
+
+## Dodatek Y: Dodavatelé, freelanceři a agentury bez ztráty kontroly
+
+Malý SaaS tým nemusí dělat všechno sám. Externí vývojář, designér, copywriter, účetní nebo marketingový specialista může ušetřit měsíce práce. Problém začíná ve chvíli, kdy dodavatel není posila, ale černá skříňka: má přístupy, zná proces, drží know-how a po skončení spolupráce nikdo neví, kde co běží.
+
+Privacy-first spolupráce není nedůvěra. Je to dospělý provoz. Dobří dodavatelé ji ocení, protože jasná pravidla chrání obě strany. Špatní dodavatelé se urazí, protože „vždycky jsme to tak dělali“. To je mimochodem velmi levný detektor budoucího průšvihu.
+
+### Y.1 Nejdřív rozsah, potom přístupy
+
+Před prvním přístupem napiš stručný rozsah práce:
+
+- co má dodavatel dodat;
+- k jakým systémům opravdu potřebuje přístup;
+- jestli bude pracovat s osobními údaji;
+- kde bude ukládat pracovní soubory;
+- jak se bude předávat výsledek;
+- kdy se přístup vypne.
+
+Pokud neumíš vysvětlit, proč dodavatel potřebuje admin práva, pravděpodobně je nepotřebuje. A pokud je potřebuje jen proto, že systém neumí jemnější role, zapiš si to jako technický dluh. Přístupy nejsou bonbóny na recepci.
+
+### Y.2 Přístup má být dočasný a pojmenovaný
+
+Sdílený účet typu `marketing@firma.cz` zní pohodlně, dokud nepotřebuješ zjistit, kdo změnil DNS záznam, smazal šablonu e-mailu nebo exportoval kontakty. Každý člověk má mít vlastní účet, vlastní roli a ideálně vícefaktorové ověření.
+
+Praktická pravidla:
+
+- Vytvářej samostatné účty pro konkrétní lidi, ne pro „agenturu“.
+- Používej nejnižší oprávnění, které stačí k práci.
+- Přístupy dávej na omezenou dobu, třeba do konce zakázky.
+- U produkce preferuj auditovatelný proces: pull request, review, staging, release.
+- Po skončení spolupráce vypni účty, tokeny, klíče i přístupy do sdílených dokumentů.
+
+Codyho komentář: Nejhorší bezpečnostní audit je ten, kde najdeš účet bývalého dodavatele aktivní tři roky po zakázce. To už není přístup. To je archeologie.
+
+### Y.3 Smlouva nemusí být román, ale musí řešit data
+
+U menších spoluprací často stačí jednoduchá objednávka, rámcová dohoda nebo e-mailové potvrzení rozsahu. Jakmile dodavatel pracuje s osobními údaji, produkčními daty, zákaznickými exporty nebo analytikou, musí být jasné, kdo za co odpovídá.
+
+Minimální datové otázky:
+
+- Je dodavatel správce, zpracovatel, nebo jen nemá k osobním údajům přístup?
+- Smí data ukládat mimo tvoje systémy?
+- Používá další subdodavatele nebo AI nástroje?
+- Jak dlouho drží pracovní kopie dat?
+- Jak potvrdí smazání dat po dokončení práce?
+- Co udělá, když zjistí incident?
+
+Nejde o právnické strašení. Jde o to, aby zákaznická data neskončila v osobním Google Drivu, v nepojmenovaném AI nástroji nebo v ZIPu na ploše notebooku, který už dávno nikdo neaktualizoval.
+
+### Y.4 Předání práce je součást dodávky
+
+Dodavatel nedodal hotovo, dokud výsledek neumí převzít někdo jiný. U webu, SaaS nebo marketingového systému proto předem definuj předávací balíček.
+
+Příklad pro vývojáře:
+
+- odkaz na pull request nebo commit;
+- stručný popis změny;
+- migrační kroky;
+- nové proměnné prostředí bez hodnot tajemství;
+- rizika a rollback;
+- návod na lokální spuštění;
+- seznam systémů, kde měl přístup.
+
+Příklad pro marketéra:
+
+- seznam kampaní a landing pages;
+- použité zdroje dat;
+- export kreativ a textů;
+- vysvětlení měření;
+- co se má vypnout po skončení kampaně;
+- doporučení další iterace;
+- potvrzení, že nepřidal nové trackery bez souhlasu.
+
+Dobré předání není luxus. Je to rozdíl mezi „pokračujeme“ a „nikdo na to nesahejte, rozbije se to“.
+
+### Y.5 AI nástroje u dodavatelů: ptej se konkrétně
+
+Dodavatel může používat AI pro návrhy textů, shrnutí poznámek, generování kódu nebo analýzu dat. To samo o sobě není problém. Problém je, když do AI posílá zákaznické údaje, interní exporty nebo neveřejné obchodní informace bez dohody.
+
+Zeptej se jednoduše:
+
+- Jaké AI nástroje při práci používáš?
+- Posíláš do nich naše data, zákaznické vstupy nebo interní dokumenty?
+- Dá se práce udělat s anonymizovanými nebo syntetickými daty?
+- Má nástroj vypnuté používání vstupů pro trénování, pokud to poskytovatel nabízí?
+- Kde nástroj provozuje data a kdo k nim má přístup?
+
+Privacy-first verze není „AI zakázána“. Privacy-first verze je „AI smí pomáhat, ale nesmí se stát tajným datovým výtahem“.
+
+### Y.6 Konkrétní příklad: redesign landing page
+
+Představ si, že zadáváš redesign landing page pro B2B SaaS.
+
+Špatné zadání:
+
+> „Tady máš přístup do webu, analytiky a CRM, udělej to modernější.“
+
+Lepší zadání:
+
+1. Designér dostane veřejnou URL, produktový brief a anonymizované poznámky z pěti zákaznických rozhovorů.
+2. Do analytiky dostane jen agregovaný export: návštěvy, konverze, hlavní zdroje a top stránky.
+3. Do CMS má roli jen pro návrhy obsahu, ne plný admin přístup.
+4. Výstupem je Figma návrh, seznam změn textů, návrh měření a krátký privacy dopad.
+5. Po předání se vypne účet, odstraní sdílení pracovních složek a doplní se změny do dokumentace webu.
+
+Výsledek je pořád rychlý. Jen po něm nezůstane datová stopa připomínající konfety po firemním večírku.
+
+### Y.7 Checklist pro práci s dodavateli
+
+- [ ] Každý dodavatel má jasný rozsah práce a odpovědnost.
+- [ ] Přístupy jsou osobní, dočasné a s nejnižší potřebnou rolí.
+- [ ] Je jasné, zda dodavatel pracuje s osobními údaji.
+- [ ] Pracovní data zůstávají v dohodnutých systémech.
+- [ ] AI nástroje dodavatele jsou pojmenované a pravidla použití jsou domluvená.
+- [ ] Předání obsahuje dokumentaci, rizika, další kroky a seznam přístupů.
+- [ ] Po skončení spolupráce se vypnou účty, tokeny, sdílení a testovací přístupy.
+- [ ] V interní dokumentaci je zapsáno, co bylo dodáno a kde to žije.
+
+### Y.8 Mini úkol na 45 minut
+
+Vyber jednoho aktuálního nebo nedávného dodavatele a projdi jeho přístupy. Sepiš, co opravdu potřebuje, co už nepotřebuje a kde drží pracovní data. Pak vypni aspoň jeden zbytečný přístup nebo sdílenou složku.
+
+> Codyho komentář: Nejlepší bezpečnostní opatření je často nudné tlačítko „Remove access“. Žádný keynote efekt, jen méně budoucího průšvihu. Krása.
+
 ## Zdroje
 
 - Evropská komise: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -4372,6 +4497,7 @@ Vezmi jednu kritickou cestu produktu: registraci, platbu, export dat nebo vytvo�
 
 ## Pracovní log
 
+- 2026-09-08: Doplněn Dodatek Y o práci s dodavateli, dočasných přístupech, předání výstupů a privacy-first pravidlech pro externí spolupráci.
 - 2026-09-08: Doplněn Dodatek X o privacy-first observabilitě, strukturovaných logách, retenci, alertech a debugování bez ukládání citlivých dat.
 - 2026-09-08: Doplněn Dodatek W o provozních nákladech, variabilních položkách, týdenním review, rozpočtových limitech a privacy-first úsporách.
 - 2026-09-08: Doplněn Dodatek V o produktových a marketingových experimentech, hypotézách, rozhodovacích pravidlech a privacy-first měření bez šmírování.
