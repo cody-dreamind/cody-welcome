@@ -27,7 +27,7 @@ Každou kapitolu ber jako pracovní checklist. Nečti ji jako román do šuplík
 8. Praktické šablony: brief, landing page, launch checklist a audit soukromí.
 9. AI automatizace v evropském SaaS: užitek, governance a bezpečné nasazení.
 10. Cenotvorba a balíčky: hodnota, jednoduchost, férovost a důvěra.
-11. Dodatky: 30denní plán, výběr nástrojů, obsah, přístupnost, podpora, retence, souhlasy, technické SEO, bezpečnostní minimum, roadmapa, prodejní discovery, onboarding, jednoduché CRM, zpětná vazba, produktové e-maily, dashboardy, experimenty, provozní náklady, observabilita, dodavatelé, exporty, obnova dat, předstartovní QA, lokalizace, evropská expanze, prázdné stavy, role, nastavení, importy dat, API integrace, notifikace, platby a upomínky.
+11. Dodatky: 30denní plán, výběr nástrojů, obsah, přístupnost, podpora, retence, souhlasy, technické SEO, bezpečnostní minimum, roadmapa, prodejní discovery, onboarding, jednoduché CRM, zpětná vazba, produktové e-maily, dashboardy, experimenty, provozní náklady, observabilita, dodavatelé, exporty, obnova dat, předstartovní QA, lokalizace, evropská expanze, prázdné stavy, role, nastavení, importy dat, API integrace, notifikace, platby, upomínky a ukončení účtu.
 
 ---
 
@@ -5876,6 +5876,130 @@ Projdi svůj platební a fakturační proces od prvního kliknutí na „Koupit�
 
 Pak oprav jednu věc, která sníží počet support dotazů nebo zvýší důvěru. Nezačínej kompletním billing refaktorem. Začni místem, kde se zákazník nejčastěji ptá: „A co se teď stane?“
 
+
+## Dodatek AK: Ukončení účtu a mazání dat bez hořké pachuti
+
+Konec zákazníka není selhání produktu. Někdy firma vyroste jinam, někdy se změní rozpočet, někdy si zakladatel prostě uvědomí, že nepotřebuje další nástroj, který mu každé pondělí připomíná vlastní ambice. Důležité je, aby odchod nebyl rukojmí drama: žádné schované tlačítko, žádný support ping-pong, žádné „napište nám důvod a možná se slitujeme“.
+
+Privacy-first SaaS poznáš i podle toho, jak se chová, když už z uživatele nemá další peníze. Férový offboarding chrání důvěru, snižuje support a zlepšuje šanci, že se zákazník jednou vrátí nebo tě doporučí někomu jinému.
+
+Evropská komise u práv jednotlivců podle GDPR uvádí mimo jiné právo na výmaz, pokud data už nejsou potřeba nebo je zpracování nezákonné, a také právo na přenositelnost dat. Zároveň popisuje, že organizace mají na žádosti jednotlivců reagovat srozumitelně a při odmítnutí vysvětlit důvod i možnost stížnosti. Zdroj: https://commission.europa.eu/law/law-topic/data-protection/information-individuals_en a https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/dealing-requests-individuals_en
+
+### AK.1 Zrušení účtu není lov na poklad
+
+Pokud zákazník chce odejít, neměl by hledat cestu jako Indiana Jones v administraci fakturace. Umísti zrušení tam, kde ho člověk čeká: účet, předplatné, organizace, billing nebo nastavení workspace.
+
+Dobré zrušení odpoví na pět otázek:
+
+- Co přesně se zruší: účet, organizace, tarif, pracovní prostor, nebo jen automatické obnovení?
+- Kdy zrušení začne platit: hned, na konci období, nebo po exportu dat?
+- Co zůstane dostupné: faktury, exporty, audit log, čtení historických dat?
+- Co se smaže a kdy: pracovní data, uživatelé, soubory, integrace, tokeny?
+- Kdo má právo akci provést: vlastník, admin, účetní role, nebo jen zakladatel firmy?
+
+Nepoužívej zrušení jako poslední obchodní past. Můžeš nabídnout alternativu, třeba pauzu nebo nižší tarif, ale musí být jasné, že primární akce je pořád respektovaná. Tlačítko „Zrušit“ nemá být šedé, malé a schované pod textem „Promluvme si o vašem úspěchu“. To není customer success, to je digitální úniková místnost.
+
+### AK.2 Odděl zrušení předplatného od výmazu dat
+
+Zrušit placení a smazat data nejsou stejná věc. Pokud je smícháš, vytvoříš zmatek i riziko.
+
+Praktické rozdělení:
+
+- Zrušení předplatného: zastaví budoucí platby, ale účet může do konce období fungovat.
+- Deaktivace účtu: zabrání přihlášení nebo novým akcím, ale data mohou být dočasně uchovaná.
+- Export dat: dá zákazníkovi použitelný balík informací před odchodem.
+- Výmaz dat: spustí řízený proces odstranění dat podle pravidel retence a zákonných výjimek.
+- Archivace dokladů: ponechá faktury a účetní záznamy tam, kde existuje povinnost je držet.
+
+V rozhraní piš obyčejně: „Zrušení tarifu nesmaže vaše projekty. Data můžete exportovat do 30 dnů. Poté budou pracovní data odstraněna podle retenční politiky.“ Zákazník nepotřebuje právnický kouřostroj, potřebuje vědět, co se stane.
+
+### AK.3 Retenční plán napiš dřív, než ho budeš potřebovat
+
+Retence dat není věta v privacy policy, kterou někdo dopsal ve dvě ráno. Je to provozní pravidlo. Bez něj tým při každém odchodu improvizuje a improvizace s osobními daty je sport pro lidi, kteří mají rádi adrenalin a kontrolní úřady.
+
+Vytvoř jednoduchou tabulku:
+
+| Typ dat | Po zrušení tarifu | Po žádosti o výmaz | Poznámka |
+| --- | --- | --- | --- |
+| Projekty a obsah | Čtení/export 30 dnů | Smazat nebo anonymizovat | Pokud není právní důvod držet |
+| Faktury | Zachovat dle účetních pravidel | Nesmazat, omezit přístup | Vysvětlit zákazníkovi |
+| Audit log | Zkrátit a minimalizovat | Anonymizovat identifikátory | Neuchovávat citlivý obsah |
+| Support tikety | Zavřít a omezit retenci | Smazat/anonymizovat osobní údaje | Zachovat jen agregované poznatky |
+| API tokeny | Okamžitě revokovat | Okamžitě revokovat | Nečekat na konec období |
+
+Codyho komentář: Nejlepší retenční politika je tak nudná, že ji zvládne vysvětlit i unavený zakladatel na telefonu. Pokud potřebuješ diagram se sedmi výjimkami, pravděpodobně držíš moc dat moc dlouho.
+
+### AK.4 Export má být použitelný, ne symbolický
+
+Export dat často vypadá jako technické alibi: uživatel dostane ZIP plný interních ID, poloprázdných JSONů a soubor `readme_final_REAL.txt`. To není přenositelnost, to je hlavolam.
+
+Dobrá exportní zkušenost:
+
+- nabídne běžné formáty jako CSV, JSON, PDF nebo původní soubory,
+- vysvětlí obsah exportu před stažením,
+- rozdělí velká data na logické části,
+- přidá `README.md` s popisem sloupců a vztahů,
+- nastaví časově omezený odkaz místo veřejného trvalého URL,
+- zapíše auditní stopu, kdo export vytvořil a stáhl.
+
+U týmových účtů export nepatří každému uživateli. Měl by ho spustit vlastník nebo admin s jasným oprávněním. Pokud export obsahuje osobní údaje jiných lidí, upozorni na to přímo v rozhraní.
+
+### AK.5 Mazání musí být idempotentní a auditovatelné
+
+Mazání dat není jedno SQL `DELETE` v produkci a modlitbička. U reálného SaaS data žijí v databázi, souborech, vyhledávacím indexu, cache, analytice, logách, zálohách a integracích. Proto potřebuješ proces, který lze bezpečně opakovat.
+
+Praktický postup:
+
+1. Přijmi požadavek a ověř oprávnění žadatele.
+2. Zobraz shrnutí dopadu a nabídni export.
+3. Revokuj aktivní session, API tokeny a webhook secret klíče.
+4. Označ účet jako `pending_deletion`, aby nevznikala nová data.
+5. Spusť mazací job po jednotlivých úložištích.
+6. Zapiš technickou auditní stopu bez citlivého obsahu.
+7. Po dokončení pošli stručné potvrzení.
+
+Idempotence znamená, že když se job spustí znovu, nerozbije stav. Pokud soubor už neexistuje, výsledek je pořád úspěch. Pokud integrace odpoví dočasnou chybou, job se bezpečně zopakuje. Pokud zálohy drží data jen po omezenou dobu, zákazníkovi to vysvětli předem.
+
+### AK.6 Konkrétní příklad: tým ruší analytický SaaS
+
+Představ si agenturu, která používala analytický SaaS pro klientské weby. Končí spolupráci a chce odejít.
+
+Dobré flow:
+
+- Vlastník organizace klikne na „Zrušit předplatné“ v nastavení fakturace.
+- Produkt ukáže: tarif doběhne do 30. září, nové měření skončí na konci období, historická data půjdou exportovat 30 dnů.
+- Admin stáhne export po klientech: návštěvnost, události, seznam webů, faktury.
+- Systém automaticky zruší měřicí tokeny a označí embed skripty jako neaktivní.
+- Po 30 dnech se pracovní data smažou nebo agregují podle retenční politiky.
+- Faktury zůstanou dostupné vlastníkovi účtu v omezeném režimu.
+
+Špatné flow: zákazník musí psát na support, support se ptá na důvod, obchodník zkouší slevu, data mezitím dál tečou z webů a nikdo neví, zda se měřicí skripty vypnuly. To není retence. To je digitální lepidlo na botě.
+
+### AK.7 Checklist ukončení účtu a výmazu
+
+- Je zrušení předplatného dostupné v administraci bez kontaktování supportu?
+- Je jasně odlišeno zrušení tarifu, deaktivace účtu, export a výmaz dat?
+- Má každá datová kategorie retenční pravidlo a vlastníka?
+- Umí zákazník stáhnout použitelný export v běžných formátech?
+- Revokují se při odchodu session, API tokeny, webhooky a integrace?
+- Je mazací proces idempotentní, auditovatelný a bezpečný pro opakování?
+- Jsou zákonné výjimky, například faktury, vysvětlené lidsky?
+- Nezůstávají osobní údaje zbytečně v analytice, supportu, logách nebo cache?
+
+### AK.8 Mini úkol na 60 minut
+
+Vezmi svůj produkt a napiš „odchodovou mapu“:
+
+| Krok | Co vidí zákazník | Co se děje v systému | Riziko |
+| --- | --- | --- | --- |
+| Zrušení tarifu | Datum konce období | Subscription `cancel_at_period_end` | Nejasná cena |
+| Export | Tlačítko a popis dat | Vygenerování ZIPu | Citlivý obsah v exportu |
+| Revokace | Informace o vypnutí integrací | Tokeny a webhooky neaktivní | Data dál tečou z webu |
+| Výmaz | Potvrzení procesu | Mazací job přes úložiště | Zbytky v cache/logách |
+| Potvrzení | E-mail bez citlivých detailů | Auditní záznam | Nejasný důkaz dokončení |
+
+Pak vyber jedno místo, kde by dnes zákazník musel hádat, co se stane, a přepiš text v rozhraní. Malý kus jasnosti tady ušetří hodiny supportu později. A ano, support hodiny jsou taky život. Jen méně fotogenický.
+
 ## Zdroje
 
 - Evropská komise: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -5936,6 +6060,7 @@ Pak oprav jednu věc, která sníží počet support dotazů nebo zvýší dův�
 
 ## Pracovní log
 
+- 2026-09-09: Doplněn Dodatek AK o ukončení účtu, exportu, retenčním plánu, mazání dat, revokaci přístupů a férovém privacy-first offboardingu.
 - 2026-09-09: Doplněn Dodatek AJ o platbách, fakturaci, neúspěšných platbách, grace period, dohledatelných fakturách a privacy-first platebních datech.
 - 2026-09-09: Doplněn Dodatek AI o notifikacích, preferencích, frekvenci zpráv, bezpečných výchozích volbách a privacy-first komunikaci bez zbytečného hluku.
 - 2026-09-09: Doplněn Dodatek AH o API integracích, webhoocích, tokenech, idempotenci, rate limiting, externích API a privacy-first dokumentaci integrací.
