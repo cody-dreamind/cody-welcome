@@ -6376,6 +6376,155 @@ Vezmi svůj produkt nebo klientský web a napiš první verzi provozního slibu.
 
 Na konci smaž všechno, co neumíš měřit nebo splnit. SLA nemá být básnička pro obchod. Má to být mapa toho, jak se budeš chovat v pondělí v 9:13, když produkce kašle a káva došla.
 
+## Dodatek AO: DPA a subdodavatelé bez papírového alibi
+
+DPA, tedy smlouva o zpracování osobních údajů, není příloha, kterou člověk podepíše, aby se mohl vrátit ke kódu. Je to provozní mapa: kdo s daty pracuje, proč je potřebuje, jak dlouho je drží, kde leží, kdo mu pomáhá a co se stane, když se něco pokazí. Když ji bereš jen jako právní formalitu, velmi rychle skončíš u stavu „někdo něco někde zpracovává“ — a to je technická architektura psaná kouřem.
+
+Evropská komise k roli zpracovatele vysvětluje, že pokud někdo zpracovává osobní údaje jménem organizace, má být vztah upraven smlouvou nebo jiným právním aktem. EDPB zároveň rozlišuje role správce a zpracovatele podle skutečné kontroly nad účely a prostředky zpracování, ne podle toho, co si firma kreativně napíše do patičky. Prakticky: nestačí opsat šablonu. Musíš vědět, kdo o datech rozhoduje a kdo jen plní instrukce.
+
+Codyho komentář: DPA je jako runbook pro data. Když ho otevřeš až při incidentu, je pozdě. A když mu nikdo nerozumí, je to dekorace, ne ochrana.
+
+### AO.1 Nejdřív napiš mapu dat, potom řeš dokumenty
+
+Než začneš sbírat DPA od dodavatelů, sepiš jednoduchou mapu zpracování. Nemusí to být luxusní compliance nástroj. Stačí tabulka, kterou pochopí vývoj, obchod i člověk, který jednou bude vysvětlovat zákazníkovi export dat.
+
+Minimální sloupce:
+
+- kategorie dat,
+- proč je zpracováváš,
+- kde v produktu vznikají,
+- kde se ukládají,
+- kdo k nim má přístup,
+- který dodavatel je zpracovává,
+- jak dlouho je držíš,
+- jak se mažou nebo exportují.
+
+Příklad:
+
+| Data | Účel | Systém | Dodavatel | Region | Retence | Poznámka |
+| --- | --- | --- | --- | --- | --- | --- |
+| E-mail uživatele | Přihlášení a notifikace | aplikace + e-mailová služba | e-mail provider | EU preferováno | po dobu účtu | nepatří do debug logů |
+| Fakturační údaje | Daňový doklad | billing | účetní systém | EU/EHP nebo smluvně ošetřeno | podle účetních povinností | oddělit od produktové analytiky |
+| IP adresa v logu | Bezpečnost a diagnostika | reverse proxy | hosting/logging | EU preferováno | krátká technická retence | maskovat, pokud není nutná celá hodnota |
+| Obsah zákaznického projektu | Hlavní služba | databáze + zálohy | hosting | EU | podle smlouvy + export/mazání | nejvyšší citlivost |
+
+Tahle tabulka odhalí víc než deset PDF v jedné složce. Uvidíš duplicity, zbytečné exporty, zapomenuté integrace a místa, kde data putují mimo produkt jen proto, že kdysi někdo testoval nový nástroj.
+
+### AO.2 Každý dodavatel má mít jasnou roli
+
+U každého nástroje si polož tři otázky:
+
+- Rozhoduje dodavatel, proč se data používají?
+- Zpracovává data jen podle našich instrukcí?
+- Posílá data dalším subdodavatelům?
+
+Typické rozdělení:
+
+| Nástroj | Pravděpodobná role | Co zkontrolovat |
+| --- | --- | --- |
+| Hosting databáze | zpracovatel | region, zálohy, přístupy administrátorů, šifrování, subdodavatelé |
+| E-mailový provider | zpracovatel | obsah e-mailů, metadata, doručovací logy, retenční doba |
+| Platební brána | často samostatný správce pro část plateb | role v podmínkách, fakturační data, webhook payloady |
+| Support nástroj | zpracovatel nebo společný provozní partner | přílohy, přeposlané osobní údaje, přístupy podpory |
+| Analytika | zpracovatel, pokud měří pro tebe | cookies, IP, session identifikátory, sdílení dat |
+
+Nejde o akademickou hru na definice. Role určuje, co musí být ve smlouvě, jak odpovídáš zákazníkovi a kde hledáš problém při incidentu. Když nástroj neumí jasně vysvětlit svoji roli, je to rizikový signál. Ne nutně stopka, ale minimálně důvod nezadávat mu víc dat, než je nezbytné.
+
+### AO.3 Subdodavatelé nejsou poznámka pod čarou
+
+Dodavatel často nepoužívá jen vlastní infrastrukturu. Má hosting, monitoring, podporu, e-mail, interní analytiku a někdy i externí tým. Proto potřebuješ vědět, kdo jsou subdodavatelé a jak se dozvíš o změně.
+
+Praktické minimum:
+
+- udržuj seznam hlavních dodavatelů a jejich subdodavatelských stránek,
+- nastav si RSS nebo e-mail notifikaci změn, pokud existuje,
+- zaznamenej datum poslední kontroly,
+- u kritických dodavatelů ověř, jestli změna subdodavatele vyžaduje možnost námitky,
+- při změně posuď dopad na region, typ dat a zákaznické smlouvy.
+
+Interní záznam může vypadat takto:
+
+| Dodavatel | Co zpracovává | Subdodavatelská stránka | Poslední kontrola | Dopad změny |
+| --- | --- | --- | --- | --- |
+| Hosting | databáze, soubory, zálohy | URL v DPA | 2026-09-09 | vysoký |
+| E-mail | adresy, obsah transakčních e-mailů | URL v podmínkách | 2026-09-09 | střední |
+| Analytika | agregované návštěvy | URL v dokumentaci | 2026-09-09 | nízký, pokud bez osobních profilů |
+
+Codyho komentář: Pokud seznam subdodavatelů najdeš jen přes tři kliky, modal a PDF pojmenované `final_final_v7.pdf`, pořád ho zapiš. Jen si k tomu přidej malou červenou vlaječku.
+
+### AO.4 DPA musí odpovídat realitě produktu
+
+Při kontrole DPA nehledáš jen hezké věty. Hledáš shodu s tím, jak produkt opravdu běží.
+
+Zkontroluj hlavně:
+
+- zda jsou vypsané typy osobních údajů, které skutečně posíláš,
+- zda účel odpovídá produktu, ne univerzální šabloně,
+- zda je jasná retence po ukončení služby,
+- zda dodavatel umožňuje export nebo výmaz dat,
+- zda jsou popsána technická a organizační opatření,
+- zda smlouva řeší incidenty a oznamování porušení zabezpečení,
+- zda je jasné, kde se data zpracovávají a jak je řešen přenos mimo EU/EHP.
+
+Když používáš evropský provoz, neznamená to automaticky nulové riziko. Znamená to lepší výchozí pozici: méně právních přesmyček, kratší datové cesty a snazší vysvětlení zákazníkovi. Pořád ale musíš vědět, kdo spravuje zálohy, kdo vidí support tickety a kdo má přístup k produkční konzoli.
+
+### AO.5 Minimalizuj data ještě před smlouvou
+
+Nejlepší DPA je ta, která nemusí pokrývat zbytečná data, protože je nikam neposíláš. U každé integrace udělej malý dietní audit:
+
+- Potřebuje nástroj celé jméno, nebo stačí interní ID?
+- Musí webhook obsahovat celý payload, nebo jen referenci na záznam?
+- Potřebuje support nástroj přílohy automaticky, nebo je může uživatel přidat vědomě?
+- Musí analytika ukládat IP adresu, nebo stačí agregovaný pohled?
+- Musí logy obsahovat e-mail, nebo stačí hash/ID a samostatná dohledávka při incidentu?
+
+Privacy-first přístup není jen „máme evropského dodavatele“. Je to architektura, která i dobrým dodavatelům posílá co nejméně. Když data nepotřebuješ, nepředávej je. Když je předáváš, udělej to záměrně, dokumentovaně a vratně.
+
+### AO.6 Konkrétní příklad: nový nástroj pro produktovou zpětnou vazbu
+
+Tým chce přidat nástroj, kam budou zákazníci posílat nápady a hlásit problémy. Vypadá nevinně. Jenže feedback často obsahuje osobní údaje, screenshoty, názvy klientů, e-maily a někdy i data z produkce.
+
+Rozumný postup:
+
+1. Nejdřív definuj účel: sběr nápadů, třídění chyb, veřejný roadmap board, nebo interní evidence?
+2. Zakázat automatické posílání celých produkčních záznamů do feedbacku.
+3. V UI napsat: „Neposílejte hesla, osobní údaje třetích osob ani neveřejná zákaznická data.“
+4. Zkontrolovat DPA, region zpracování, subdodavatele a export.
+5. Nastavit role: kdo feedback vidí, kdo ho může exportovat, kdo ho může smazat.
+6. Přidat retenční pravidlo: staré uzavřené podněty anonymizovat nebo smazat.
+7. Do mapy dat doplnit nový tok a datum kontroly.
+
+Výsledek: tým má feedback, ale nevytvořil si druhou nekontrolovanou databázi zákaznických tajemství. Ano, méně romantické než „prostě tam dáme widget“. Ale výrazně méně budoucího potu.
+
+### AO.7 Checklist DPA a subdodavatelů
+
+- Máš aktuální mapu dat a dodavatelů.
+- U každého dodavatele víš, zda je správce, zpracovatel, nebo obojí v různých částech služby.
+- Kritičtí dodavatelé mají DPA uloženou na dohledatelném místě.
+- Víš, kde jsou data zpracovávaná a zálohovaná.
+- Máš seznam subdodavatelů a způsob sledování změn.
+- U každého nástroje je zapsaná retence a postup výmazu/exportu.
+- Webhooky, logy a support tickety neposílají zbytečné osobní údaje.
+- Nový nástroj nejde do produkce bez privacy review.
+- Zákazníkům umíš srozumitelně vysvětlit, kteří hlavní dodavatelé se podílejí na službě.
+
+### AO.8 Mini úkol na 60 minut
+
+Vyber jeden kritický nástroj: hosting, e-mail, support, platby nebo analytiku. Vyplň pro něj tento pracovní list:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaká data do nástroje posíláme? |  |
+| Proč je posíláme? |  |
+| Kde se data zpracovávají? |  |
+| Máme DPA a kde je uložená? |  |
+| Kdo jsou hlavní subdodavatelé? |  |
+| Jak dlouho data zůstávají v nástroji? |  |
+| Jak data exportujeme nebo smažeme? |  |
+| Co můžeme přestat posílat hned teď? |  |
+
+Na konci vyber jednu konkrétní redukci dat. Ne „jednou zlepšíme privacy“. Konkrétně: odstranit e-mail z logů, omezit webhook payload, vypnout ukládání IP, zkrátit retenci příloh nebo přesunout zákaznický screenshot do interního úložiště v EU. Malá redukce dnes je lepší než velká compliance prezentace někdy po kvartálu.
+
 
 ## Zdroje
 
@@ -6437,6 +6586,7 @@ Na konci smaž všechno, co neumíš měřit nebo splnit. SLA nemá být básni�
 
 ## Pracovní log
 
+- 2026-09-09: Doplněn Dodatek AO o DPA, rolích správců a zpracovatelů, subdodavatelích, mapě dat a privacy-first minimalizaci předávaných údajů.
 - 2026-09-09: Doplněn Dodatek AN o SLA, SLO, provozních slibech, plánované údržbě, status page a privacy-first incident komunikaci.
 - 2026-09-09: Doplněn Dodatek AM o vyhledávání v produktu, nápovědě, relevanci výsledků, bezpečných náhledech a privacy-first práci s hledacími dotazy.
 - 2026-09-09: Doplněn Dodatek AL o mobilním UX, scénářích, první obrazovce, formulářích, navigaci, výkonu a privacy-first mobilních cestách.
