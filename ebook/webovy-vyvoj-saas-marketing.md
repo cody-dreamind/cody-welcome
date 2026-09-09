@@ -27,7 +27,7 @@ Každou kapitolu ber jako pracovní checklist. Nečti ji jako román do šuplík
 8. Praktické šablony: brief, landing page, launch checklist a audit soukromí.
 9. AI automatizace v evropském SaaS: užitek, governance a bezpečné nasazení.
 10. Cenotvorba a balíčky: hodnota, jednoduchost, férovost a důvěra.
-11. Dodatky: 30denní plán, výběr nástrojů, obsah, přístupnost, podpora, retence, souhlasy, technické SEO, bezpečnostní minimum, roadmapa, prodejní discovery, onboarding, jednoduché CRM, zpětná vazba, produktové e-maily, dashboardy, experimenty, provozní náklady, observabilita, dodavatelé, exporty, obnova dat, předstartovní QA, lokalizace, evropská expanze, prázdné stavy, role, nastavení, importy dat a API integrace.
+11. Dodatky: 30denní plán, výběr nástrojů, obsah, přístupnost, podpora, retence, souhlasy, technické SEO, bezpečnostní minimum, roadmapa, prodejní discovery, onboarding, jednoduché CRM, zpětná vazba, produktové e-maily, dashboardy, experimenty, provozní náklady, observabilita, dodavatelé, exporty, obnova dat, předstartovní QA, lokalizace, evropská expanze, prázdné stavy, role, nastavení, importy dat, API integrace a notifikace.
 
 ---
 
@@ -5600,6 +5600,132 @@ Vyber jednu existující nebo plánovanou integraci a napiš pro ni jednostránk
 
 Potom najdi jeden token, webhook nebo endpoint, který má příliš široká oprávnění, a zúž ho. Integrace má být pomocník, ne hladový vysavač na data s vlastním názorem na bezpečnost.
 
+## Dodatek AI: Notifikace, preference a upozornění bez digitální sirény
+
+Notifikace jsou produktový zesilovač. Když jsou dobré, pomáhají zákazníkovi udělat správnou věc ve správný čas. Když jsou špatné, promění SaaS v malý poplašný systém, který křičí kvůli každému pohybu kurzoru. A protože křik se v B2B prostředí málokdy považuje za konkurenční výhodu, vyplatí se navrhovat notifikace jako součást produktu, ne jako marketingový megafon.
+
+Privacy-first přístup tady znamená jednoduchou otázku: „Musíme tuto zprávu poslat právě tomuto člověku právě tímto kanálem?“ Pokud odpověď není jasné ano, notifikace má počkat, sloučit se do souhrnu nebo vůbec nevzniknout.
+
+### AI.1 Začni typem rozhodnutí, ne kanálem
+
+Nejdřív si napiš, jaké rozhodnutí má uživatel po upozornění udělat. Teprve potom vybírej kanál. E-mail, push, SMS, Slack webhook nebo in-app banner nejsou neutrální technické varianty. Každý kanál má jinou naléhavost, cenu, očekávání i riziko úniku kontextu.
+
+Praktické rozdělení:
+
+- Kritická akce: výpadek služby, bezpečnostní incident, neúspěšná platba, blížící se ztráta dat.
+- Pracovní akce: čekající schválení, nový komentář, dokončený export, chyba importu.
+- Souhrn: týdenní výsledky, nové položky v inboxu, přehled faktur, změny v projektu.
+- Produktová novinka: release, nová funkce, změna limitů, úprava ceníku.
+
+Čím kritičtější rozhodnutí, tím přímější kanál můžeš použít. Čím víc jde o informaci „hodilo by se vědět“, tím víc patří do souhrnu, RSS, changelogu nebo in-app centra zpráv.
+
+### AI.2 Výchozí stav má být klidný
+
+Nový uživatel by neměl po registraci dostat koncert všech možných upozornění. Výchozí nastavení má být opatrné: bezpečnostní a transakční zprávy zapnuté, marketing a volitelné produktové souhrny vypnuté nebo jasně vysvětlené při onboardingové volbě.
+
+Dobrá obrazovka preferencí neříká jen „zapnout e-mail“. Říká:
+
+- jaký typ zprávy přijde,
+- jak často přijde,
+- kdo ji dostane,
+- proč je užitečná,
+- zda je povinná kvůli bezpečnosti nebo smluvnímu provozu,
+- jak ji lze později vypnout.
+
+Codyho komentář: Checkbox „souhlasím se vším, co nás v budoucnu napadne“ není preference. To je produktová rezignace v kabátě formuláře.
+
+### AI.3 Frekvence je součást UX
+
+Jedna užitečná zpráva denně může být služba. Deset drobných zpráv denně je trest. Proto si u každého typu upozornění nastav limit a pravidlo slučování.
+
+Příklady dobrých pravidel:
+
+- Komentáře ke stejnému úkolu sloučit do jednoho e-mailu za 15 minut.
+- Neúspěšnou platbu poslat hned, ale další připomínku nejdřív další den.
+- Týdenní souhrn neposílat, pokud neobsahuje žádnou novou hodnotnou informaci.
+- Kritické incidenty neposílat všem uživatelům účtu, ale jen vlastníkům a technickým kontaktům.
+- Produktové novinky publikovat primárně v changelogu a RSS; e-mailem poslat jen změny, které ovlivňují práci zákazníka.
+
+Tahle pravidla patří do produktu stejně jako validační pravidla formulářů. Když je schováš v hlavě zakladatele, dřív nebo později se z notifikací stane nekonzistentní džungle.
+
+### AI.4 Preference patří k účtu, ne jen k e-mailu
+
+V B2B SaaS často existuje víc rolí: vlastník účtu, účetní, vývojář, manažer projektu, externí dodavatel. Každý potřebuje jiné signály. Účetní zajímá faktura a platba, vývojáře webhook a incident, manažera týdenní souhrn projektu. Posílat všem všechno je nejrychlejší cesta k tomu, že důležité zprávy začnou ignorovat.
+
+Navrhni preference ve třech vrstvách:
+
+- Úroveň organizace: které typy upozornění firma používá.
+- Úroveň role: kdo smí dostávat provozní, finanční a bezpečnostní zprávy.
+- Úroveň uživatele: jaký kanál a frekvenci daný člověk preferuje.
+
+Když se někdo přidá do organizace, dostane rozumné výchozí nastavení podle role. Když odejde, jeho notifikace skončí s účtem. Zní to banálně, ale přesně tady často vznikají úniky: bývalý dodavatel dál dostává exporty, alerty nebo interní komentáře, protože „jen e-mail“ nikdo nebral jako oprávnění.
+
+### AI.5 Citlivý obsah neposílej celý
+
+Notifikace často opouští bezpečný kontext produktu. E-mail může skončit v přeposílání, mobilní notifikace na zamčené obrazovce, Slack zpráva v kanálu s externisty. Proto neposílej víc detailů, než je nutné.
+
+Privacy-first vzory:
+
+- Místo celé zprávy pošli „Máte nový komentář v projektu X“ a odkaz do aplikace.
+- Místo přílohy pošli informaci „Export je připraven“ s časově omezeným odkazem po přihlášení.
+- Místo osobních údajů v předmětu použij neutrální text „Vyžaduje se akce v účtu“.
+- Místo kompletního incidentu v chatu pošli krátký stav a odkaz na detail pro oprávněné role.
+
+To neznamená, že notifikace má být tajemná. Má být užitečná bez toho, aby vynášela citlivá data mimo místo, kde máš autentizaci, autorizaci a auditní stopu.
+
+### AI.6 Odhlášení musí být rychlé a poctivé
+
+Každý volitelný typ komunikace potřebuje jednoduché vypnutí. Ne jako labyrint přes tři obrazovky, ne jako „kontaktujte support“, ne jako temný pattern s tlačítkem v šedé na šedé. Uživatel má mít kontrolu.
+
+Rozlišuj ale typy zpráv:
+
+- Bezpečnostní a transakční zprávy mohou být povinné, protože chrání účet nebo plní smluvní službu.
+- Produktové souhrny a tipy mají být volitelné.
+- Marketingová komunikace má mít samostatné pravidlo, jasný účel a vlastní odhlášení.
+- Týmové notifikace může spravovat organizace, ale uživatel má vidět, proč je dostává.
+
+Když někdo notifikaci vypne, zaznamenej jen nezbytnou stopu: typ preference, čas změny a technický identifikátor účtu. Nepotřebuješ ukládat psychologický profil člověka, který si dovolil nebýt nadšený z tvého čtvrtého newsletteru týdně.
+
+### AI.7 Konkrétní příklad: projektový SaaS pro agenturu
+
+Představ si malý projektový SaaS pro agenturu a její klienty. Systém umí úkoly, komentáře, faktury a klientský portál.
+
+Rozumný notifikační návrh:
+
+- Klient dostane e-mail, když je připraven výstup ke schválení.
+- Projektový manažer dostane denní souhrn nových komentářů a blokérů.
+- Účetní dostane upozornění na novou fakturu a neúspěšnou platbu.
+- Vývojář dostane okamžitý alert jen při technické chybě, která blokuje práci.
+- Všichni vidí v aplikaci centrum zpráv s historií relevantních událostí.
+- Produktové novinky jdou do changelogu, RSS a měsíčního souhrnu, ne do náhodného pop-up ohňostroje.
+
+Citlivé přílohy se neposílají e-mailem. E-mail obsahuje jen kontext, výzvu k akci a odkaz do portálu. Pokud klient odchází, jeho notifikační preference se exportují nebo smažou podle pravidel účtu stejně jako ostatní související data.
+
+### AI.8 Checklist notifikací a preferencí
+
+- Má každá notifikace popsané rozhodnutí nebo akci, kterou podporuje?
+- Jsou bezpečnostní, transakční, pracovní, souhrnné a marketingové zprávy oddělené?
+- Má každý typ zprávy vlastní frekvenci, kanál a pravidlo slučování?
+- Jsou výchozí volby klidné a privacy-first?
+- Dostávají citlivé zprávy jen role, které je opravdu potřebují?
+- Neobsahují předměty e-mailů, push zprávy nebo chat alerty zbytečně osobní údaje?
+- Lze volitelné zprávy vypnout bez kontaktování supportu?
+- Je změna preferencí zaznamenaná v auditní stopě bez zbytečných detailů?
+- Končí notifikace automaticky při odebrání uživatele, role nebo integrace?
+
+### AI.9 Mini úkol na 45 minut
+
+Vezmi všechny e-maily, push zprávy, in-app bannery a chat alerty ve svém produktu a rozděl je do tabulky:
+
+| Notifikace | Typ | Příjemce | Kanál | Frekvence | Lze vypnout? | Obsahuje citlivá data? |
+| --- | --- | --- | --- | --- | --- | --- |
+| Nový komentář | Pracovní | Autor úkolu | E-mail + in-app | Sloučeno po 15 min | Ano | Ne |
+| Neúspěšná platba | Transakční | Vlastník účtu + účetní | E-mail | Ihned, pak denně | Ne | Minimálně |
+| Týdenní souhrn | Souhrn | Aktivní uživatel | E-mail | 1× týdně | Ano | Agregovaně |
+
+Potom vyber tři nejhlučnější zprávy a rozhodni: vypnout, sloučit, přesunout do souhrnu, nebo ponechat. Pokud si nejsi jistý, zvol klidnější variantu. Produkt, který mlčí ve správný čas, působí profesionálněji než produkt, který neustále mává rukama jako nafukovací panák před autosalonem.
+
+
 ## Zdroje
 
 - Evropská komise: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -5660,6 +5786,7 @@ Potom najdi jeden token, webhook nebo endpoint, který má příliš široká op
 
 ## Pracovní log
 
+- 2026-09-09: Doplněn Dodatek AI o notifikacích, preferencích, frekvenci zpráv, bezpečných výchozích volbách a privacy-first komunikaci bez zbytečného hluku.
 - 2026-09-09: Doplněn Dodatek AH o API integracích, webhoocích, tokenech, idempotenci, rate limiting, externích API a privacy-first dokumentaci integrací.
 - 2026-09-09: Doplněn Dodatek AG o importech a migracích dat, validaci, duplicitách, rollbacku, retenci souborů a privacy-first auditní stopě.
 - 2026-09-09: Doplněn Dodatek AF o nastavení produktu, bezpečných výchozích volbách, citlivých akcích, auditní stopě a privacy-first konfiguraci.
