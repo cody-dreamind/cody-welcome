@@ -27,7 +27,7 @@ Každou kapitolu ber jako pracovní checklist. Nečti ji jako román do šuplík
 8. Praktické šablony: brief, landing page, launch checklist a audit soukromí.
 9. AI automatizace v evropském SaaS: užitek, governance a bezpečné nasazení.
 10. Cenotvorba a balíčky: hodnota, jednoduchost, férovost a důvěra.
-11. Dodatky: 30denní plán, výběr nástrojů, obsah, přístupnost, podpora, retence, souhlasy, technické SEO, bezpečnostní minimum, roadmapa, prodejní discovery, onboarding, jednoduché CRM, zpětná vazba, produktové e-maily, dashboardy, experimenty, provozní náklady, observabilita, dodavatelé, exporty, obnova dat, předstartovní QA, lokalizace, evropská expanze, prázdné stavy, role, nastavení, importy dat, API integrace, notifikace, platby, upomínky, ukončení účtu, mobilní UX, vyhledávání a nápověda.
+11. Dodatky: 30denní plán, výběr nástrojů, obsah, přístupnost, podpora, retence, souhlasy, technické SEO, bezpečnostní minimum, roadmapa, prodejní discovery, onboarding, jednoduché CRM, zpětná vazba, produktové e-maily, dashboardy, experimenty, provozní náklady, observabilita, dodavatelé, exporty, obnova dat, předstartovní QA, lokalizace, evropská expanze, prázdné stavy, role, nastavení, importy dat, API integrace, notifikace, platby, upomínky, ukončení účtu, mobilní UX, vyhledávání, nápověda, SLA a provozní sliby.
 
 ---
 
@@ -6242,6 +6242,141 @@ Vezmi posledních deset dotazů na podporu nebo deset věcí, které zákazníci
 Vyber jednu opakovanou otázku a oprav ji v produktu nebo dokumentaci. Nezakládej hned nový vyhledávací engine. Nejprve odstraň bloudění tam, kde už teď vidíš ceduli „tady se lidi ztrácí“.
 
 
+## Dodatek AN: SLA a provozní sliby bez pohádkového uptime
+
+SLA není magická věta v obchodní nabídce. Je to dohoda o tom, co zákazník může rozumně čekat, jak pozná problém a co uděláš, když se služba pokazí. Malý SaaS často nepotřebuje právnický dokument dlouhý jako návod k jaderné elektrárně. Potřebuje poctivý provozní slib, který odpovídá realitě týmu, architektury a podpory.
+
+Nejhorší SLA je takové, které vzniklo proto, že konkurence píše „99,99 %“ a někdo ve firmě nechtěl vypadat skromně. Uptime slib není marketingová konfeta. Je to závazek, za který platíš monitoringem, zálohami, incident procesem, pohotovostí a někdy i kreditem zákazníkovi.
+
+### AN.1 Nejdřív definuj službu, potom procenta
+
+Než začneš slibovat dostupnost, napiš co vlastně musí fungovat. „Aplikace běží“ je příliš vágní. Zákazník obvykle potřebuje konkrétní schopnosti:
+
+- přihlášení do účtu,
+- načtení hlavního dashboardu,
+- vytvoření nebo úpravu klíčového záznamu,
+- odeslání formuláře, webhooku nebo objednávky,
+- export dat,
+- doručení transakčního e-mailu,
+- dostupnost veřejné landing page nebo dokumentace.
+
+Každá z těchto částí může mít jiné riziko. Veřejný blog může krátce vypadnout bez velkého dopadu. Platební brána uprostřed objednávky je jiná liga. Export dat před odchodem zákazníka zase není otázka každé minuty, ale musí být spolehlivý, auditovatelný a dostupný bez proseb na podporu.
+
+Praktická věta do interní dokumentace:
+
+> Kritická služba je schopnost přihlášeného zákazníka zobrazit, upravit a exportovat svá pracovní data. Marketingový web, blog a administrační reporty nejsou součástí stejného SLA, ale mají vlastní dostupnostní cíl.
+
+### AN.2 Dostupnost počítej tak, aby jí rozuměl obchod i vývoj
+
+Procenta znějí hezky, ale lidé rozhodují podle dopadu. Přepiš dostupnost na srozumitelný časový rozpočet výpadku:
+
+| Cíl dostupnosti | Přibližný maximální výpadek za 30 dní | Vhodné pro |
+| --- | ---: | --- |
+| 99,0 % | zhruba 7 hodin 18 minut | interní nástroje, malé nekrizové portály |
+| 99,5 % | zhruba 3 hodiny 39 minut | běžné B2B SaaS s pracovní denní závislostí |
+| 99,9 % | zhruba 43 minut | kritické zákaznické workflow a placené produkční API |
+| 99,95 % | zhruba 22 minut | vyšší enterprise závazky s pohotovostí a redundancí |
+
+Nepoužívej vyšší číslo jen proto, že vypadá dospěle. Každá další devítka stojí peníze, procesy a pozornost. Pokud nemáš automatické alerty, test obnovy, plán incident komunikace a člověka, který může problém řešit mimo běžnou pracovní dobu, neslibuj enterprise dostupnost. To není skromnost, to je matematika s helmou.
+
+Codyho komentář: Raději napiš „běžně reagujeme do jednoho pracovního dne a kritické výpadky řešíme prioritně“ než „garantujeme téměř vesmírnou dostupnost“, když jediný monitoring je zákazník na telefonu.
+
+### AN.3 Rozlišuj SLA, SLO a interní poplach
+
+V malém týmu pomůže jednoduché rozdělení:
+
+- SLA je slib zákazníkovi a případný obchodní dopad při nesplnění.
+- SLO je interní cíl, podle kterého řídíš provoz.
+- Alert je signál, který někoho vzbudí nebo aspoň vytrhne z kafe.
+
+Nemusí být stejné. Můžeš mít zákaznické SLA 99,5 %, interní SLO 99,8 % a alert už při pěti minutách chyb na přihlášení. Interní cíl musí být přísnější než veřejný slib, jinak se o problému dozvíš až ve chvíli, kdy už vysvětluješ kredit na faktuře.
+
+Pro každý důležitý tok si napiš:
+
+| Tok | Veřejný slib | Interní cíl | Alert | Vlastník |
+| --- | --- | --- | --- | --- |
+| Přihlášení | součást dostupnosti aplikace | 99,9 % měsíčně | 5 minut chyb nebo zvýšená latence | backend |
+| Export dat | dostupný v samoobsluze | 99 % úspěšných exportů do 24 hodin | 3 selhání za hodinu | produkt + backend |
+| Transakční e-mail | odeslání bez zbytečného prodlení | 95 % do 5 minut | fronta roste 10 minut | platforma |
+
+Tahle tabulka je užitečnější než obecná věta „monitorujeme produkci“. Ukazuje, kdo má problém řešit a podle čeho poznáte, že je problém opravdu problém.
+
+### AN.4 Údržbu oznamuj lidsky a předem
+
+Plánovaná údržba není incident, pokud ji zákazník čeká a rozumí jí. V praxi stačí krátká šablona:
+
+> Dne 16. 9. 2026 od 22:00 do 22:30 budeme provádět plánovanou údržbu databáze. Během okna může být administrace krátce nedostupná. Veřejné stránky zůstanou dostupné. Data zákazníků se nemažou ani nemigrují mimo EU. Po dokončení doplníme stručné potvrzení na status stránku.
+
+Dobrá zpráva o údržbě obsahuje:
+
+- přesný čas v časové zóně zákazníků,
+- očekávaný dopad na konkrétní části produktu,
+- informaci, zda jsou ohrožena data nebo jen dostupnost,
+- kontakt nebo odkaz na status stránku,
+- krátké potvrzení po dokončení.
+
+Neposílej obecné „proběhne maintenance“ bez dopadu. To je jako říct „něco se někde stane“. Ano, díky, Oracle z kanceláře.
+
+### AN.5 Privacy-first status page nepotřebuje sledovat návštěvníky
+
+Status stránka má být lehká, veřejná a srozumitelná. Nemá z ní být další analytický vysavač. U incidentu zákazník potřebuje vědět:
+
+- co je ovlivněno,
+- od kdy problém trvá,
+- jaká je aktuální fáze řešení,
+- kdy přijde další aktualizace,
+- jestli existuje workaround,
+- zda se problém dotkl dat, bezpečnosti nebo jen dostupnosti.
+
+Privacy-first pravidla:
+
+- Nepřidávej reklamní pixely ani behaviorální analytiku na status page.
+- Pokud měříš návštěvnost status page, stačí agregovaně a bez identifikace.
+- Neuváděj v incidentu jména zákazníků, e-maily, ID účtů ani interní názvy klientů.
+- Pokud došlo k bezpečnostnímu nebo datovému incidentu, odděl provozní aktualizaci od právní a bezpečnostní komunikace.
+- Archiv incidentů piš tak, aby pomáhal důvěře, ne aby vytvářel veřejný katalog interních zranitelností.
+
+Evropský provoz tady může být výhoda: když zákazník vidí jasnou komunikaci, rozumnou retenci logů a žádné zbytečné trackery, nepůsobíš menší. Působíš dospěleji než firma, která při výpadku nejdřív čeká, až se jí načte pět marketingových skriptů.
+
+### AN.6 Konkrétní příklad: provozní slib pro malý B2B SaaS
+
+Představ si český B2B SaaS pro projektové řízení agentur. Má 40 platících zákazníků, běží na evropském hostingu, má databázové zálohy, základní monitoring a podporu v pracovní době. Férový provozní slib může znít:
+
+- Produkční aplikaci provozujeme s interním cílem dostupnosti 99,5 % měsíčně.
+- Kritické incidenty řešíme prioritně a první veřejnou aktualizaci publikujeme do 30 minut od potvrzení problému.
+- Plánovanou údržbu oznamujeme aspoň 48 hodin předem, pokud nejde o bezpečnostní opravu.
+- Zákazník může kdykoli exportovat svá data v běžném formátu.
+- Provozní logy držíme jen po dobu potřebnou pro bezpečnost a diagnostiku, citlivé hodnoty maskujeme.
+- Data zákazníků primárně zůstávají v evropské infrastruktuře a nové subdodavatele posuzujeme i podle umístění dat.
+
+Tohle není enterprise SLA pro banku. Je to srozumitelný slib pro malý tým, který nechce prodávat vzdušné zámky s fakturační patičkou.
+
+### AN.7 Checklist SLA a provozních slibů
+
+- [ ] Máš jasně napsané, které části služby jsou kritické?
+- [ ] Umíš převést procento dostupnosti na čas výpadku za měsíc?
+- [ ] Je interní SLO přísnější než veřejný slib zákazníkovi?
+- [ ] Má každý kritický tok vlastníka a alertovací pravidlo?
+- [ ] Ví zákazník, kde najde status služby bez přihlášení?
+- [ ] Oznamuješ plánovanou údržbu s konkrétním dopadem a časem?
+- [ ] Odděluješ provozní incident od bezpečnostního nebo datového incidentu?
+- [ ] Neobsahují status stránka, incidenty ani logy zbytečné osobní údaje?
+- [ ] Máš připravenou jednoduchou šablonu incident update zprávy?
+- [ ] Neslibuje obchod víc, než umí provoz reálně doručit?
+
+### AN.8 Mini úkol na 60 minut
+
+Vezmi svůj produkt nebo klientský web a napiš první verzi provozního slibu. Použij tuto tabulku:
+
+| Oblast | Co slibujeme zákazníkovi | Interní cíl | Jak měříme | Co řekneme při problému |
+| --- | --- | --- | --- | --- |
+| Aplikace | Administrace je běžně dostupná během pracovního dne | 99,5 % měsíčně | syntetická kontrola přihlášení a dashboardu | stručný status update do 30 minut |
+| Export dat | Export je dostupný samoobslužně | dokončení do 24 hodin | počet úspěšných exportů | popis workaroundu a nový termín |
+| E-maily | Transakční e-maily posíláme bez zbytečného prodlení | většina do 5 minut | délka fronty a chyby providera | informace o zpoždění, ne o detailech adresátů |
+
+Na konci smaž všechno, co neumíš měřit nebo splnit. SLA nemá být básnička pro obchod. Má to být mapa toho, jak se budeš chovat v pondělí v 9:13, když produkce kašle a káva došla.
+
+
 ## Zdroje
 
 - Evropská komise: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -6302,6 +6437,7 @@ Vyber jednu opakovanou otázku a oprav ji v produktu nebo dokumentaci. Nezaklád
 
 ## Pracovní log
 
+- 2026-09-09: Doplněn Dodatek AN o SLA, SLO, provozních slibech, plánované údržbě, status page a privacy-first incident komunikaci.
 - 2026-09-09: Doplněn Dodatek AM o vyhledávání v produktu, nápovědě, relevanci výsledků, bezpečných náhledech a privacy-first práci s hledacími dotazy.
 - 2026-09-09: Doplněn Dodatek AL o mobilním UX, scénářích, první obrazovce, formulářích, navigaci, výkonu a privacy-first mobilních cestách.
 - 2026-09-09: Doplněn Dodatek AK o ukončení účtu, exportu, retenčním plánu, mazání dat, revokaci přístupů a férovém privacy-first offboardingu.
