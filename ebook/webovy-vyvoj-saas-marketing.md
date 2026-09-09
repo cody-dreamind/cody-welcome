@@ -27,7 +27,7 @@ Každou kapitolu ber jako pracovní checklist. Nečti ji jako román do šuplík
 8. Praktické šablony: brief, landing page, launch checklist a audit soukromí.
 9. AI automatizace v evropském SaaS: užitek, governance a bezpečné nasazení.
 10. Cenotvorba a balíčky: hodnota, jednoduchost, férovost a důvěra.
-11. Dodatky: 30denní plán, výběr nástrojů, obsah, přístupnost, podpora, retence, souhlasy, technické SEO, bezpečnostní minimum, roadmapa, prodejní discovery, onboarding, jednoduché CRM, zpětná vazba, produktové e-maily, dashboardy, experimenty, provozní náklady, observabilita, dodavatelé, exporty, obnova dat, předstartovní QA, lokalizace, evropská expanze, prázdné stavy, role, nastavení, importy dat, API integrace a notifikace.
+11. Dodatky: 30denní plán, výběr nástrojů, obsah, přístupnost, podpora, retence, souhlasy, technické SEO, bezpečnostní minimum, roadmapa, prodejní discovery, onboarding, jednoduché CRM, zpětná vazba, produktové e-maily, dashboardy, experimenty, provozní náklady, observabilita, dodavatelé, exporty, obnova dat, předstartovní QA, lokalizace, evropská expanze, prázdné stavy, role, nastavení, importy dat, API integrace, notifikace, platby a upomínky.
 
 ---
 
@@ -5726,6 +5726,156 @@ Vezmi všechny e-maily, push zprávy, in-app bannery a chat alerty ve svém prod
 Potom vyber tři nejhlučnější zprávy a rozhodni: vypnout, sloučit, přesunout do souhrnu, nebo ponechat. Pokud si nejsi jistý, zvol klidnější variantu. Produkt, který mlčí ve správný čas, působí profesionálněji než produkt, který neustále mává rukama jako nafukovací panák před autosalonem.
 
 
+
+## Dodatek AJ: Platby, fakturace a upomínky bez trapného nahánění
+
+Platby jsou chvíle pravdy. Do té doby může produkt působit krásně, chytrá automatizace může zpívat árie a onboarding může vonět novým autem. Pak přijde neúspěšná karta, faktura bez správných údajů nebo zákazník, který neví, jestli právě zaplatil, objednal, nebo omylem spustil rituál z účetního oddělení. Tady se důvěra buď upevní, nebo rozpadne.
+
+Malý SaaS nepotřebuje platební proces jako bankovní jádro. Potřebuje jasná pravidla, dobré texty, minimum ruční práce a privacy-first zacházení s fakturačními údaji. Peníze jsou citlivé téma. Když s nimi produkt zachází klidně, předvídatelně a bez nátlaku, zákazník má pocit, že firma ví, co dělá.
+
+### AJ.1 Platební flow navrhuj jako produkt, ne jako účetní dodatek
+
+Častá chyba: tým postaví krásný produkt a platby nechá „nějak na Stripe / fakturační systém / účetní plugin“. Jenže zákazník nevidí interní hranice mezi produktem, platební bránou a fakturací. Vidí jednu zkušenost.
+
+Platební flow musí odpovědět na obyčejné otázky:
+
+- Co přesně kupuji?
+- Kolik zaplatím teď a kolik později?
+- Je cena bez DPH, s DPH, nebo podle typu zákazníka?
+- Kdy dostanu fakturu?
+- Co se stane, když platba selže?
+- Jak změním kartu, tarif, fakturační údaje nebo zruším předplatné?
+
+Pokud tyto odpovědi nejsou vidět před platbou, zákazník si je doplní sám. A lidská představivost je v platebních věcech většinou horší než realita. Gratuluji, právě sis vytvořil support tiket ještě před tržbou.
+
+### AJ.2 Odděl produktovou hodnotu od platební administrativy
+
+V SaaS má platba podporovat vztah, ne ho neustále přerušovat. Zákazník platí za výsledek: ušetřený čas, klidnější provoz, lepší přehled, méně ruční práce. Faktura a karta jsou jen mechanismus.
+
+Proto udržuj administrativu krátkou:
+
+- Při registraci nevyžaduj fakturační údaje, pokud nejsou potřeba před aktivací placeného tarifu.
+- Trial nezačínej tím, že člověk vyplní půl účetnictví.
+- V administraci ukaž stav předplatného obyčejnou řečí: „Tarif Pro, další platba 15. října, karta končí na 4242.“
+- Faktury dej na jedno stabilní místo, ideálně s možností exportu.
+- Změnu tarifu potvrď shrnutím dopadu: nová cena, datum účinnosti, co se stane s limity.
+
+Privacy-first poznámka: platební údaje neukládej ve vlastním systému, pokud to opravdu nepotřebuješ a neumíš bezpečně provozovat. Ve vlastním produktu většinou stačí držet zákaznický identifikátor, stav předplatného, fakturační metadata a odkazy na doklady. Citlivé platební detaily patří specializovanému poskytovateli, ne do tabulky `cards_backup_final_v2`.
+
+### AJ.3 Neúspěšná platba není morální selhání zákazníka
+
+Dunning, tedy opakované řešení neúspěšných plateb, často vypadá jako robotický výslech: „Vaše platba selhala. Okamžitě zaplaťte.“ Přitom důvody bývají nudné: karta expirovala, banka odmítla transakci, limit je nízký, zákazník změnil účetní proces nebo SCA vyžaduje dodatečné ověření. Stripe ve svém průvodci SCA popisuje, že evropské platby mohou vyžadovat silné ověření zákazníka podle kontextu transakce. Zdroj: https://stripe.com/guides/strong-customer-authentication
+
+Dobrá upomínka má být klidná, konkrétní a užitečná:
+
+- Řekni, co se stalo: „Platbu za tarif Pro se nepodařilo dokončit.“
+- Řekni dopad: „Služba zatím běží, další pokus proběhne zítra.“
+- Dej bezpečný další krok: „Aktualizovat platební metodu v administraci.“
+- Neposílej citlivé detaily karty nebo faktury v e-mailu.
+- Nevyhrožuj vypnutím dřív, než má zákazník férovou šanci reagovat.
+
+Tón je důležitý. Neúspěšná platba je provozní problém, ne charakterová vada. Produkt, který komunikuje jako klidný účetní profesionál, získá víc důvěry než produkt, který po prvním odmítnutí karty začne bušit na dveře jako exekutor na espresso.
+
+### AJ.4 Grace period nastav podle rizika služby
+
+Grace period je období, kdy služba po neúspěšné platbě ještě běží. Nemá být nekonečná, ale nemá být ani nulová, pokud tím zákazníkovi způsobíš větší škodu než sobě.
+
+Rozliš scénáře:
+
+- U analytického dashboardu můžeš dát několik dní na opravu platby bez omezení.
+- U kritického provozního systému raději zachovej čtení dat a omez nové akce až později.
+- U služby s vysokými variabilními náklady můžeš rychleji zastavit nákladné generování, ale ponechat přístup k historii.
+- U týmového účtu informuj vlastníka účtu a případně fakturační roli, ne každého uživatele.
+
+Praktický model:
+
+1. Den 0: platba selže, zobrazí se in-app upozornění vlastníkovi a odejde stručný e-mail.
+2. Den 1–3: automatický opakovaný pokus, bez zbytečného drama textu.
+3. Den 4: druhá zpráva s jasným datem omezení služby.
+4. Den 7: služba přejde do omezeného režimu, data zůstávají dostupná ke čtení a exportu.
+5. Den 14+: účet jde do retenčního režimu podle smluvních a produktových pravidel.
+
+Tato čísla nejsou zákon. Jsou startovní návrh. Důležité je, aby pravidla byla napsaná předem a support nemusel pokaždé improvizovat podle nálady měsíce.
+
+### AJ.5 Faktury musí být dohledatelné bez supportu
+
+Faktury jsou nudné až do chvíle, kdy nejsou. Pak se z nich stane urgentní problém, protože zákazník zavírá měsíc, účetní chce doklad a někdo v týmu loví PDF v e-mailu z loňského listopadu.
+
+V produktu proto udělej jednoduchou sekci „Fakturace“:
+
+- aktuální tarif a stav předplatného,
+- fakturační údaje,
+- seznam faktur s datem, částkou, stavem a odkazem ke stažení,
+- kontaktní e-mail pro fakturační komunikaci,
+- historie změn tarifu a platebních metod v rozsahu, který zákazník pochopí.
+
+Pokud prodáváš v EU, mysli na rozdílné DPH scénáře a přeshraniční prodej. Evropské portály Your Europe a VAT One Stop Shop popisují praktický rámec pro přeshraniční podnikání a DPH v EU. Zdroje: https://europa.eu/youreurope/business/finance-and-tax/vat/one-stop-shop/index_en.htm a https://vat-one-stop-shop.ec.europa.eu/index_en
+
+Neznamená to, že máš do produktu psát daňový komentář. Znamená to, že máš vědět, jaké údaje potřebuješ pro správné vystavení dokladu, jaké scénáře neumíš automaticky obsloužit a kdy má zákazník dostat lidské vysvětlení místo tichého selhání.
+
+### AJ.6 Privacy-first pravidla pro platební a fakturační data
+
+Fakturační údaje často působí „jen administrativně“, ale pořád mohou být osobní nebo obchodně citlivé. U malých firem je fakturační e-mail často konkrétní člověk, adresa může být sídlo živnostníka a poznámky k platbě mohou prozrazovat víc, než si tým myslí.
+
+Drž se těchto pravidel:
+
+- Sbírej jen údaje nutné pro platbu, fakturaci a zákonné povinnosti.
+- V e-mailech neposílej celé adresy, interní poznámky ani zbytečné identifikátory.
+- Přístup k fakturaci dej jen rolím, které ho potřebují.
+- Loguj změnu fakturačních údajů, ale neukládej staré hodnoty navždy bez důvodu.
+- Export faktur a účtu udělej dostupný vlastníkovi účtu.
+- Retenci fakturačních dokladů odděl od retence produktových dat, protože mají jiný účel.
+
+> Codyho komentář: Privacy-first fakturace není „schováme všechno tak dobře, že to nenajde ani účetní“. Je to jasný režim: víme, co držíme, proč, kdo to vidí a kdy to zmizí nebo zůstává kvůli zákonné povinnosti.
+
+### AJ.7 Konkrétní příklad: neúspěšná platba v B2B SaaS
+
+Představ si SaaS pro správu klientských portálů. Agentura má tarif Team za 79 EUR měsíčně. Platba selže, protože firemní karta expiruje.
+
+Špatný scénář:
+
+- Všem členům týmu přijde agresivní e-mail.
+- V aplikaci se zobrazí červený banner bez vysvětlení.
+- Po 24 hodinách se účet zamkne úplně.
+- Klienti agentury nevidí svoje výstupy.
+- Support ručně hledá, co se stalo.
+
+Lepší scénář:
+
+- E-mail přijde vlastníkovi účtu a fakturačnímu kontaktu.
+- Banner vidí jen role s právem spravovat fakturaci.
+- Produkt běží dál sedm dní, nové velké exporty se mohou po několika dnech omezit.
+- Fakturační stránka nabízí aktualizaci karty, stažení faktur a kontakt na podporu.
+- Audit log ukáže změnu platební metody a obnovení předplatného.
+
+Výsledek: firma chrání příjmy, ale nezničí zákazníkovi pracovní den kvůli běžné kartové chybě. To je přesně ten typ nudné dospělosti, který v SaaS vydělává peníze.
+
+### AJ.8 Checklist plateb a upomínek
+
+- Je před platbou jasné, co zákazník kupuje, za kolik a kdy se částka opakuje?
+- Umí zákazník najít faktury bez psaní na support?
+- Je fakturační kontakt oddělený od běžných uživatelů produktu?
+- Má neúspěšná platba klidnou sekvenci zpráv a férovou grace period?
+- Posílají se platební zprávy jen lidem s relevantní rolí?
+- Neobsahují platební e-maily zbytečně citlivé údaje?
+- Umí produkt bezpečně aktualizovat platební metodu?
+- Je jasné, co se stane při změně tarifu, zrušení a obnově účtu?
+- Jsou fakturační data zahrnutá v mapě dat, retenčních pravidlech a exportech?
+
+### AJ.9 Mini úkol na 60 minut
+
+Projdi svůj platební a fakturační proces od prvního kliknutí na „Koupit“ až po stažení faktury. Zapiš si pět obrazovek nebo zpráv, které zákazník uvidí:
+
+| Moment | Co zákazník potřebuje vědět | Kde to uvidí | Riziko zmatení | Oprava |
+| --- | --- | --- | --- | --- |
+| Výběr tarifu | Cena, interval, limity | Ceník | Nejasné DPH | Doplnit text u ceny |
+| Zadání karty | Bezpečný další krok | Checkout | Strach z uložení karty | Vysvětlit zpracování platby |
+| Platba selže | Co se stalo a co dál | E-mail + aplikace | Panika z vypnutí | Přidat datum grace period |
+| Stažení faktury | Kde najdu doklad | Fakturace | Support tiket | Přidat seznam faktur |
+| Zrušení tarifu | Dopad na data | Nastavení účtu | Obava ze ztráty exportu | Nabídnout export před koncem |
+
+Pak oprav jednu věc, která sníží počet support dotazů nebo zvýší důvěru. Nezačínej kompletním billing refaktorem. Začni místem, kde se zákazník nejčastěji ptá: „A co se teď stane?“
+
 ## Zdroje
 
 - Evropská komise: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -5786,6 +5936,7 @@ Potom vyber tři nejhlučnější zprávy a rozhodni: vypnout, sloučit, přesun
 
 ## Pracovní log
 
+- 2026-09-09: Doplněn Dodatek AJ o platbách, fakturaci, neúspěšných platbách, grace period, dohledatelných fakturách a privacy-first platebních datech.
 - 2026-09-09: Doplněn Dodatek AI o notifikacích, preferencích, frekvenci zpráv, bezpečných výchozích volbách a privacy-first komunikaci bez zbytečného hluku.
 - 2026-09-09: Doplněn Dodatek AH o API integracích, webhoocích, tokenech, idempotenci, rate limiting, externích API a privacy-first dokumentaci integrací.
 - 2026-09-09: Doplněn Dodatek AG o importech a migracích dat, validaci, duplicitách, rollbacku, retenci souborů a privacy-first auditní stopě.
