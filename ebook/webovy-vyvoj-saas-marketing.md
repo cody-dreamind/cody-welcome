@@ -27,7 +27,7 @@ Každou kapitolu ber jako pracovní checklist. Nečti ji jako román do šuplík
 8. Praktické šablony: brief, landing page, launch checklist a audit soukromí.
 9. AI automatizace v evropském SaaS: užitek, governance a bezpečné nasazení.
 10. Cenotvorba a balíčky: hodnota, jednoduchost, férovost a důvěra.
-11. Dodatky: 30denní plán, výběr nástrojů, obsah, přístupnost, podpora, retence, souhlasy, technické SEO, bezpečnostní minimum, roadmapa, prodejní discovery, onboarding, jednoduché CRM, zpětná vazba, produktové e-maily, dashboardy, experimenty, provozní náklady, observabilita, dodavatelé, exporty, obnova dat, předstartovní QA, lokalizace, evropská expanze, prázdné stavy, role, nastavení, importy dat, API integrace, notifikace, platby, upomínky a ukončení účtu.
+11. Dodatky: 30denní plán, výběr nástrojů, obsah, přístupnost, podpora, retence, souhlasy, technické SEO, bezpečnostní minimum, roadmapa, prodejní discovery, onboarding, jednoduché CRM, zpětná vazba, produktové e-maily, dashboardy, experimenty, provozní náklady, observabilita, dodavatelé, exporty, obnova dat, předstartovní QA, lokalizace, evropská expanze, prázdné stavy, role, nastavení, importy dat, API integrace, notifikace, platby, upomínky, ukončení účtu a mobilní UX.
 
 ---
 
@@ -6000,6 +6000,128 @@ Vezmi svůj produkt a napiš „odchodovou mapu“:
 
 Pak vyber jedno místo, kde by dnes zákazník musel hádat, co se stane, a přepiš text v rozhraní. Malý kus jasnosti tady ušetří hodiny supportu později. A ano, support hodiny jsou taky život. Jen méně fotogenický.
 
+## Dodatek AL: Mobilní UX bez prstového origami
+
+Mobilní web není zmenšený desktop. Je to jiné prostředí: menší plocha, horší pozornost, pomalejší rozhodování, často horší signál a palec, který má vlastní odbory. Pokud tvoje landing page, onboarding nebo checkout funguje jen na velkém monitoru s myší, ve skutečnosti nemáš hotový produkt. Máš hezký plakát pro vlastní tým.
+
+Pro malý SaaS je mobilní UX důležité i v B2B. Člověk nemusí na telefonu konfigurovat celý účet, ale často si na něm otevře odkaz z e-mailu, zkontroluje cenu, přepošle stránku kolegovi, schválí pozvánku nebo hledá fakturu. Mobilní verze proto nemusí umět všechno stejně pohodlně jako desktop, ale musí bezpečně zvládnout hlavní rozhodnutí.
+
+Codyho komentář: Mobilní UX poznáš podle toho, jestli se uživatel cítí jako člověk, nebo jako laboratorní myš v testu jemné motoriky.
+
+### AL.1 Začni scénáři, ne breakpointy
+
+Breakpoint je technické rozhodnutí. Scénář je produktové rozhodnutí. Než začneš ladit šířky, napiš si, co má člověk na mobilu opravdu udělat.
+
+Typické mobilní scénáře pro web nebo SaaS:
+
+- návštěvník přijde z doporučení a chce během minuty pochopit hodnotu,
+- zakladatel firmy otevře ceník a potřebuje ho poslat kolegovi,
+- zákazník klikne na pozvánku do workspace z e-mailu,
+- uživatel chce resetovat heslo bez notebooku,
+- účetní potřebuje stáhnout fakturu,
+- admin chce rychle zkontrolovat stav incidentu nebo platby.
+
+Ke každému scénáři si napiš jednu větu úspěchu: „Uživatel pochopí cenu a pošle odkaz kolegovi“, „Admin přijme pozvánku a ví, co se stane dál“, „Zákazník najde fakturu bez supportu“. Teprve potom řeš layout.
+
+### AL.2 První obrazovka má nést rozhodnutí
+
+Na mobilu je první obrazovka tvrdší filtr než na desktopu. Nevejde se tam všechno, takže musíš vybrat to, co pomůže rozhodnout další krok.
+
+Dobrá první obrazovka landing page obsahuje:
+
+- jasnou větu, pro koho produkt je,
+- konkrétní výsledek, který slibuješ,
+- jedno hlavní CTA,
+- krátký důkaz důvěry,
+- žádné dekorace, které překryjí smysl.
+
+Špatná první obrazovka obsahuje hero ilustraci přes půl displeje, slogan typu „redefinujeme budoucnost synergie“ a tlačítko, které se objeví až po dvou swipes. Pokud musí uživatel rolovat, aby zjistil, co prodáváš, stránka má problém. Pokud musí rolovat přes animaci koule s gradientem, problém má i koule.
+
+### AL.3 Formuláře zkrať, rozděl a vysvětli
+
+Mobilní formulář není místo pro sběr „možná se jednou bude hodit“. Každé pole stojí pozornost. Každé špatné pole zvyšuje šanci, že člověk odejde a řekne si, že to zkusí později. Později je v produktovém světě často hřbitov dobrých úmyslů.
+
+Praktická pravidla:
+
+- Ptej se jen na údaje nutné pro aktuální krok.
+- Používej správné typy polí pro e-mail, telefon, čísla a hesla.
+- Validuj průběžně, ale neagresivně.
+- Chybovou hlášku dej k poli, ne na vzdálený vrchol stránky.
+- U dlouhých procesů ukaž počet kroků a možnost se vrátit.
+- Vysvětli, proč citlivější údaj potřebuješ.
+
+Privacy-first přístup tu není brzda, ale zrychlení. Když se neptáš na zbytečnosti, formulář je kratší, méně děsí a snáz se dokončí. Tvoje nejlepší optimalizace konverze může být tlačítko Delete v návrhu formuláře.
+
+### AL.4 Navigace musí být nudně předvídatelná
+
+Mobilní navigace nemá dokazovat kreativitu designéra. Má dostat člověka tam, kam potřebuje. U marketingového webu často stačí: produkt, cena, reference, obsah, kontakt. U SaaS administrace: dashboard, projekty, fakturace, nastavení, nápověda.
+
+Předvídatelná navigace:
+
+- používá stejné názvy napříč webem a aplikací,
+- neskrývá kritické akce za ikonky bez textu,
+- drží důležité položky dosažitelné jedním až dvěma klepnutími,
+- umožní návrat bez ztráty rozpracované práce,
+- neotevírá modaly přes modaly jako digitální matrjošku.
+
+U aplikací dobře funguje jednoduché pravidlo: mobil nemusí mít všechny administrační funkce, ale nesmí zablokovat člověka v důležitém okamžiku. Pokud třeba pokročilé nastavení necháš jen na desktopu, řekni to jasně a nabídni bezpečný další krok: „Toto nastavení je pohodlnější na větší obrazovce. Pošleme vám odkaz e-mailem.“ Nepředstírej, že rozhraní funguje, když jen zmenšilo tabulku do horizontálního pekla.
+
+### AL.5 Výkon je součást důvěry
+
+Pomalý mobilní web působí nedůvěryhodně dřív, než se načte tvoje sekce „Důvěřují nám“. Výkon proto ber jako součást značky, ne jako technický úklid na konec sprintu.
+
+Začni těmito kroky:
+
+- Zmenši obrázky a používej moderní formáty tam, kde dávají smysl.
+- Neposílej na mobil obří video, které nic nevysvětluje.
+- Načítej externí skripty jen tehdy, když mají jasný přínos.
+- Kritický obsah zobraz bez čekání na marketingové knihovny.
+- Otestuj stránku na běžném telefonu a horším připojení.
+
+Privacy-first provoz výkonu často pomáhá. Méně trackerů, méně reklamních skriptů a méně cizích widgetů znamená méně požadavků, menší riziko chyb a rychlejší první dojem. Není to asketismus. Je to produktová hygiena.
+
+### AL.6 Konkrétní příklad: mobilní landing page pro B2B SaaS
+
+Představ si B2B SaaS pro agentury, který hlídá klientské termíny. Desktopová landing page má hero sekci, tři sloupce výhod, animovaný dashboard, dlouhé reference, ceník, FAQ a kontaktní formulář. Na mobilu se z toho snadno stane kilometrový svitek naděje.
+
+Mobilní verzi bych poskládal takto:
+
+1. První obrazovka: „Méně zapomenutých termínů pro malé agentury“ + podtitulek + CTA „Vyzkoušet demo“.
+2. Krátký důkaz: „Pro týmy, které spravují 5–50 klientů“ a jedna konkrétní reference.
+3. Tři problémy v jednosloupcovém seznamu: pozdní výstupy, chaos v odpovědnosti, ruční připomínání.
+4. Tři odpovědi produktu: klientské termíny, odpovědné osoby, klidné notifikace.
+5. Ceník se dvěma balíčky bez tabulky s dvaceti řádky.
+6. FAQ k datům: kde běží služba, kdo vidí klientská data, jak funguje export.
+7. Krátký formulář: e-mail, velikost týmu, volitelná poznámka.
+
+Desktop může ukazovat širší dashboard. Mobil má ukázat jistotu: rozumím problému, vidím cenu, chápu práci s daty, můžu udělat další krok.
+
+### AL.7 Checklist mobilního UX
+
+- Je na první obrazovce jasné, co produkt dělá a pro koho je?
+- Má každá hlavní stránka jedno dominantní CTA?
+- Lze dokončit klíčový scénář jednou rukou bez zoomování?
+- Jsou formuláře kratší než ego průměrného SaaS pitch decku?
+- Jsou chybové stavy viditelné u konkrétních polí?
+- Neobsahuje mobilní stránka horizontální tabulku tam, kde má být seznam?
+- Jsou faktury, exporty, odhlášení a reset hesla dostupné i z telefonu?
+- Je obsah čitelný bez dekorací, které překrývají text?
+- Funguje navigace stejně pojmenovaně na webu i v aplikaci?
+- Ví uživatel u citlivých akcí, co přesně se stane s daty?
+
+### AL.8 Mini úkol na 60 minut
+
+Vyber jednu mobilní cestu: landing page → CTA, pozvánka → registrace, reset hesla, faktura nebo zrušení tarifu. Otevři ji na skutečném telefonu a napiš tabulku:
+
+| Krok | Co chce uživatel udělat | Co mu překáží | Privacy riziko | Jedna oprava |
+| --- | --- | --- | --- | --- |
+| První obrazovka | Pochopit nabídku | Nejasný headline | Žádné | Zpřesnit větu |
+| Formulář | Poslat poptávku | Moc polí | Zbytečný telefon | Telefon dát jako volitelný |
+| Potvrzení | Vědět co bude dál | Chybí očekávání | Nejasná retence poptávky | Doplnit text o zpracování |
+
+Pak oprav jednu překážku. Ne kompletní redesign. Jednu věc, která sníží tření nebo zvýší důvěru. Mobilní UX se zlepšuje nejlépe po malých dávkách, ne po velkém workshopu s třiceti sticky notes a jedním vybitým telefonem.
+
+
 ## Zdroje
 
 - Evropská komise: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -6060,6 +6182,7 @@ Pak vyber jedno místo, kde by dnes zákazník musel hádat, co se stane, a pře
 
 ## Pracovní log
 
+- 2026-09-09: Doplněn Dodatek AL o mobilním UX, scénářích, první obrazovce, formulářích, navigaci, výkonu a privacy-first mobilních cestách.
 - 2026-09-09: Doplněn Dodatek AK o ukončení účtu, exportu, retenčním plánu, mazání dat, revokaci přístupů a férovém privacy-first offboardingu.
 - 2026-09-09: Doplněn Dodatek AJ o platbách, fakturaci, neúspěšných platbách, grace period, dohledatelných fakturách a privacy-first platebních datech.
 - 2026-09-09: Doplněn Dodatek AI o notifikacích, preferencích, frekvenci zpráv, bezpečných výchozích volbách a privacy-first komunikaci bez zbytečného hluku.
