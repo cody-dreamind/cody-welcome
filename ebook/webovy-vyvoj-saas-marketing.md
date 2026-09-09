@@ -5055,6 +5055,144 @@ Potom jeden z nich rovnou přepiš v UI. Nečekej na velký redesign. Prázdný 
 
 > Codyho komentář: Prázdný stav nemá znít jako chyba systému. Má znít jako klidný člověk u recepce: „Jasně, jste tu poprvé, tudy prosím.“
 
+## Dodatek AE: Účty, role a oprávnění bez bezpečnostního divadla
+
+Oprávnění jsou jedna z těch částí SaaS, které vypadají nudně, dokud se nerozbijí. Pak najednou řešíš, proč juniorní kolega viděl export všech zákazníků, proč bývalý dodavatel pořád může do administrace a proč účetní omylem smazala projekt, který měl jen číst. Krása. Digitální escape room, jen bez zábavy.
+
+Privacy-first produkt nepotřebuje stovky rolí. Potřebuje jasný model: kdo je v účtu, co smí udělat, proč to smí udělat a jak se to dá zkontrolovat. OWASP ASVS má samostatné oblasti pro autentizaci, řízení přístupu a správu relací; pro malý tým z toho plyne jednoduchý závěr: identita a oprávnění nejsou doplněk po launchi, ale základní produktová infrastruktura. Zdroj: https://owasp.org/www-project-application-security-verification-standard/
+
+### AE.1 Začni akcemi, ne názvy rolí
+
+Nejdřív si napiš seznam citlivých akcí. Až potom vymýšlej role. Jinak skončíš u rolí „admin“, „manager“, „user“, „super user“ a „mega admin“, což je v překladu „nikdo neví“.
+
+Citlivé akce typicky jsou:
+
+- pozvat nebo odebrat člena týmu,
+- změnit fakturační údaje,
+- stáhnout export dat,
+- mazat projekty, zákazníky nebo přílohy,
+- měnit integrace a API klíče,
+- zobrazit audit log,
+- měnit retenční pravidla nebo nastavení soukromí,
+- přistupovat k administraci více zákaznických účtů.
+
+Teprve potom seskup akce do rolí. U malého B2B SaaS často stačí:
+
+| Role | Smysl | Co typicky nesmí |
+| --- | --- | --- |
+| Vlastník | Spravuje účet, fakturaci a členy | Neměl by obejít auditní stopu |
+| Správce | Nastavuje produkt a integrace | Nemusí vidět fakturaci nebo mazat účet |
+| Člen týmu | Pracuje s běžnými daty | Nemění oprávnění a exporty |
+| Pouze čtení | Kontrola, reporting, externí dohled | Nic nemění ani nemaže |
+| Podpora | Pomáhá zákazníkovi s omezeným přístupem | Nemá trvalý přístup bez důvodu |
+
+Role pojmenuj jazykem zákazníka. Pokud cílovka nejsou vývojáři, „read-only observer“ je zbytečný cosplay. „Pouze čtení“ vyhraje.
+
+### AE.2 Výchozí oprávnění mají být opatrná
+
+Nový uživatel nemá dostat moc jen proto, že je to vývojově pohodlnější. Výchozí nastavení je bezpečnostní rozhodnutí. Když pozvánka automaticky udělá z každého správce, šetříš si deset minut implementace a kupuješ si budoucí incident.
+
+Praktická pravidla:
+
+- První zakladatel účtu je vlastník, další lidé začínají jako členové týmu.
+- Mazání, exporty, fakturace a integrace vyžadují vyšší roli.
+- Změna role má být vědomá akce, ne vedlejší efekt pozvánky.
+- Nebezpečné akce potvrzuj textem, ne jen zeleným tlačítkem „OK“.
+- Každá role má popis přímo v UI, aby správce věděl, co uděluje.
+
+Privacy-first poznámka: oprávnění nejsou jen ochrana proti hackerům. Jsou to mantinely proti běžným lidským chybám. Většina týmů nepotřebuje víc svobody. Potřebuje méně příležitostí střelit se do nohy s administrátorskou brokovnicí.
+
+### AE.3 Pozvánky a odchody jsou plnohodnotný proces
+
+Životní cyklus uživatele nekončí vytvořením účtu. Musíš řešit pozvánku, přijetí, změnu role, neaktivitu, odchod z firmy a případné odebrání přístupu dodavateli.
+
+Pozvánka by měla obsahovat:
+
+- kdo zve,
+- do jakého účtu nebo workspace,
+- jaká role bude přidělena,
+- kdy pozvánka expiruje,
+- kam se obrátit, pokud je pozvánka nečekaná.
+
+Odchod uživatele má mít stejně jasný postup:
+
+- zrušit aktivní relace,
+- odebrat API klíče nebo osobní tokeny,
+- převést vlastnictví rozpracovaných objektů,
+- ponechat auditní stopu,
+- nepřepisovat historické akce anonymním „smazaný uživatel“, pokud to rozbije odpovědnost.
+
+U B2B zákazníků pomáhá stránka „Členové a přístupy“, kde vlastník účtu vidí všechny lidi, role, poslední aktivitu a otevřené pozvánky. Není to sexy funkce. Je to funkce, která šetří support, právní nervy a páteční večery.
+
+### AE.4 Podpora nemá být všemocný duch v systému
+
+Interní podpora často potřebuje pomoct zákazníkovi, ale to neznamená, že má mít trvalý neomezený přístup ke všemu. Privacy-first přístup je jednoduchý: přístup podpory má být omezený, odůvodněný, dohledatelný a pokud možno časově ohraničený.
+
+Dobrá varianta:
+
+- zákazník nebo vlastník účtu dočasně povolí přístup podpory,
+- systém zapíše důvod, čas a člověka,
+- podpora vidí jen potřebnou část účtu,
+- citlivá pole jsou maskovaná, pokud nejsou nutná,
+- po vypršení se přístup automaticky zavře.
+
+Ještě lepší varianta je režim „impersonace s majákem“: pracovník podpory jasně vidí, že jedná jménem zákazníka, zákazník to vidí v audit logu a systém nedovolí akce typu změna fakturace, export všech dat nebo trvalé odebrání vlastníka bez další kontroly.
+
+### AE.5 Audit log má odpovídat na lidské otázky
+
+Audit log není skládka JSON objektů pro archeology. Má odpovědět na otázky:
+
+- kdo udělal citlivou akci,
+- kdy se to stalo,
+- čeho se akce týkala,
+- odkud byla provedena,
+- jaký byl výsledek,
+- jestli šlo o běžného uživatele, podporu nebo automatizaci.
+
+Do audit logu nepatří hesla, tokeny, celé obsahy zpráv ani zbytečné osobní údaje. Pokud zapisuješ změnu fakturačního e-mailu, často stačí starou a novou hodnotu maskovat. Log má pomáhat s odpovědností, ne vytvářet druhou databázi citlivých údajů.
+
+Praktický formát jedné události:
+
+```md
+- Čas: 2026-09-09 10:15 UTC
+- Aktér: jana@example.cz (Správce)
+- Akce: změna role uživatele
+- Objekt: petr@example.cz
+- Výsledek: Člen týmu → Pouze čtení
+- Důvod: kvartální úklid přístupů
+```
+
+### AE.6 Konkrétní příklad: role pro klientský portál agentury
+
+Agentura provozuje klientský portál pro úkoly, dokumenty a schvalování výstupů. Potřebuje pustit dovnitř klienta, interní tým a externího copywritera.
+
+Rozumný model:
+
+1. **Vlastník klienta:** vidí projekty, schvaluje výstupy, zve další lidi za klienta.
+2. **Klient pouze čtení:** vidí stav, dokumenty a termíny, ale nic neschvaluje.
+3. **Agenturní správce:** spravuje projekt, členy agentury a nastavení.
+4. **Externista:** vidí jen přiřazené úkoly a materiály, ne všechny dokumenty klienta.
+5. **Podpora:** přístup jen na čas a s auditním záznamem.
+
+Klíčové rozhodnutí: externista nepotřebuje vidět celý klientský účet, jen protože pracuje na jedné kampani. Když mu systém umožní přístup pouze k vybranému projektu, snižuješ riziko a zároveň nemusíš vymýšlet složitou smluvní gymnastiku po každé změně dodavatele.
+
+### AE.7 Checklist účtů a oprávnění
+
+- [ ] Máš seznam citlivých akcí ještě před návrhem rolí.
+- [ ] Výchozí role nového člena není zbytečně silná.
+- [ ] Role mají popis v jazyce zákazníka a jsou viditelné při pozvání.
+- [ ] Pozvánky expirují a ukazují účet, roli i člověka, který zve.
+- [ ] Odchod uživatele ruší relace, tokeny a převádí vlastnictví objektů.
+- [ ] Podpora má omezený, časově ohraničený a auditovaný přístup.
+- [ ] Audit log neukládá tajemství ani zbytečné osobní údaje.
+- [ ] Nejméně jednou za kvartál vlastník účtu projde členy, role a otevřené pozvánky.
+
+### AE.8 Mini úkol na 50 minut
+
+Otevři svůj produkt nebo návrh administrace a napiš tabulku deseti citlivých akcí. Ke každé doplň, která role ji smí provést, jestli se má zapsat do audit logu a jestli vyžaduje potvrzení. Potom vyber jednu akci, která je dnes příliš volná, a zpřísni ji. Začni třeba exportem dat, mazáním projektu nebo změnou role. To jsou místa, kde se drobná pohodlnost umí změnit v hodně drahý trapas.
+
+> Codyho komentář: Role a oprávnění jsou jako klíče od kanceláře. Když je rozdáš všem, vypadá to přátelsky přesně do chvíle, než někdo odnese server, kávovar a databázi zákazníků.
+
 ## Zdroje
 
 - Evropská komise: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -5110,6 +5248,7 @@ Potom jeden z nich rovnou přepiš v UI. Nečekej na velký redesign. Prázdný 
 
 ## Pracovní log
 
+- 2026-09-09: Doplněn Dodatek AE o účtech, rolích, oprávněních, pozvánkách, podpoře, audit logu a privacy-first správě přístupů.
 - 2026-09-09: Rozšířen Dodatek AD o typy prázdných stavů, mikrokopii, privacy-first onboarding, přístupnost, příklad analytického dashboardu a checklist.
 - 2026-09-09: Doplněn Dodatek AC o lokalizaci, ověřování evropské expanze, fakturaci, DPH scénářích, podpoře a privacy-first komunikaci provozu.
 - 2026-09-09: Doplněn Dodatek AD o prázdných stavech, mikrokopii, přístupnosti a privacy-first onboardingu bez zbytečného sběru dat.
