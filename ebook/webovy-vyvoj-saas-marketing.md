@@ -4539,6 +4539,135 @@ Tím neztratíš tvář. Naopak: odcházející zákazník si zapamatuje, že js
 
 Vyber jednu nejdůležitější tabulku, kolekci nebo datový typ v produktu. Napiš k ní exportní formát, příklad názvu souboru, kdo smí export spustit, jak dlouho je dostupný a jak bys ověřil obnovu ze zálohy. Pokud se během úkolu třikrát ozve „tohle bychom museli zjistit“, máš backlog. Hezký, provozní, dospělý backlog. Žádný confetti mód, ale zákazníci ho ocení.
 
+## Dodatek AA: Nabídky, rozsah a hranice spolupráce bez mlhy
+
+Malý web, SaaS modul nebo marketingová automatizace se málokdy pokazí proto, že tým neumí psát kód. Častěji se pokazí proto, že nikdo přesně neřekl, co znamená „hotovo“, kdo dodá obsah, kdo rozhoduje a co už je nová práce. Pak vznikne oblíbený firemní sport: scope creep s lehkým nádechem pasivní agrese. Výživné, ale drahé.
+
+Cílem dobré nabídky není vyhrát právnický turnaj. Cílem je sladit očekávání dřív, než někdo otevře editor, Figma soubor nebo fakturu.
+
+### AA.1 Nabídka má popsat změnu, ne jen výstup
+
+„Vytvoříme nový web“ je slabé zadání. Lepší je: „Vytvoříme web, který do pěti sekund vysvětlí nabídku, umožní poslat poptávku a dá zákazníkovi jasný důvod důvěřovat firmě.“ Výstup je web. Změna je srozumitelnější prodejní cesta.
+
+Do nabídky napiš:
+
+- Jaký problém řešíme.
+- Pro koho výsledek vzniká.
+- Jak poznáme, že práce pomohla.
+- Co je součástí první verze.
+- Co záměrně není součástí první verze.
+
+Praktický příklad:
+
+| Slabě | Lépe |
+| --- | --- |
+| Redesign homepage | Nová homepage pro B2B návštěvníka, která vysvětlí službu, ukáže důvěryhodnost a pošle ho na konzultaci |
+| Nastavení analytiky | Privacy-first měření návštěvnosti, zdrojů poptávek a základních konverzí bez reklamních trackerů |
+| Vylepšení onboardingu | Tři kroky po registraci, které uživatele dovedou k první hodnotě bez zbytečných polí |
+
+### AA.2 Rozsah musí mít jasné hranice
+
+Rozsah není seznam přání. Rozsah je dohoda, co se skutečně dodá v konkrétním čase a rozpočtu. U menších projektů stačí jednoduchá tabulka.
+
+| Oblast | Součástí | Není součástí |
+| --- | --- | --- |
+| Web | Homepage, stránka služby, kontakt, základní SEO metadata | Blogový archiv, více jazyků, zákaznický portál |
+| Obsah | Úprava dodaných textů, návrh CTA, mikrokopie formuláře | Kompletní copywriting bez vstupů od klienta |
+| Měření | Server-side nebo privacy-first analytika, cíle pro poptávky | Reklamní pixely, session replay, cross-site profilování |
+| Provoz | Nasazení, záloha konfigurace, krátký runbook | 24/7 SLA, dlouhodobá správa bez samostatné dohody |
+
+Tahle tabulka není byrokracie. Je to airbag. Většinou ho nepotřebuješ, ale když přijde náraz, jsi rád, že existuje.
+
+### AA.3 Klientské vstupy mají termín a vlastníka
+
+Projekt často stojí ne na vývoji, ale na větě „pošleme texty příští týden“. Příští týden je v projektovém kalendáři bájná země, něco mezi Narníí a schváleným cookie bannerem.
+
+U každého vstupu napiš:
+
+- Kdo ho dodá.
+- Do kdy ho dodá.
+- V jakém formátu ho dodá.
+- Co se stane, když nebude dodán včas.
+
+Příklad dohody:
+
+| Vstup | Vlastník | Termín | Formát | Když chybí |
+| --- | --- | --- | --- | --- |
+| Popis služeb | Klient | 5 pracovních dnů od startu | Dokument nebo komentáře ve sdíleném souboru | Použije se pracovní verze a texty půjdou do následné úpravy |
+| Přístupy k DNS | Klient / IT | Před nasazením | Dočasný účet nebo asistované nastavení | Nasazení se přesune bez dopadu na cenu vývoje |
+| Logo a vizuální podklady | Klient | Před designem | SVG/PNG, brand barvy | Použije se jednoduchý textový brand placeholder |
+
+### AA.4 Změnový požadavek není nepřítel
+
+Nové nápady během práce jsou normální. Problém není změna. Problém je změna bez rozhodnutí. Proto potřebuješ malý změnový proces, který nepůsobí jako korporátní trestná výprava.
+
+Stačí čtyři otázky:
+
+1. Co přesně se má změnit?
+2. Proč je to důležité právě teď?
+3. Co to nahradí, pokud nechceme měnit cenu nebo termín?
+4. Jaký dopad to má na data, soukromí, provoz nebo podporu?
+
+U SaaS funkcí přidej ještě pátou otázku: „Kolika uživatelům to pomůže a jak to poznáme?“ Pokud odpověď zní „určitě všem“, Codyho detektor optimismu právě začal pískat.
+
+### AA.5 Privacy-first hranice patří už do nabídky
+
+Soukromí se nemá řešit až ve chvíli, kdy někdo na konci projektu přilepí cookie lištu. Privacy-first pravidla dej rovnou do nabídky, aby bylo jasné, že nejsou volitelný doplněk.
+
+Do nabídky můžeš napsat třeba:
+
+- Nepřidáváme reklamní ani profilovací trackery bez samostatného schválení a zdůvodnění.
+- Preferujeme evropský hosting a nástroje s jasným exportem dat.
+- Formuláře sbírají jen údaje potřebné pro daný účel.
+- Přístupy dodavatelů jsou osobní, dočasné a po předání se ruší.
+- Logy a analytika nesmí obsahovat zbytečná osobní data ani obsah zpráv.
+- Každý nový externí nástroj musí mít vlastníka, účel a plán ukončení.
+
+Tohle chrání klienta i dodavatele. Klient ví, že nedostane marketingový Frankenstein. Dodavatel má oporu, když někdo později řekne: „Přidejme tam jen rychle ten pixel, co by se mohlo stát?“ Slavná poslední slova digitální hygieny.
+
+### AA.6 Konkrétní příklad: malý B2B web za čtyři týdny
+
+Ukázkový rozsah:
+
+- Týden 1: krátký discovery call, mapa nabídky, návrh struktury webu, datová mapa formulářů a analytiky.
+- Týden 2: wireframe homepage, textové bloky, návrh důvěryhodnostních prvků a privacy-first měření.
+- Týden 3: implementace webu, formulář, metadata, rychlost, přístupnostní základ a test na mobilu.
+- Týden 4: připomínky, nasazení, předání přístupů, krátký runbook a 30minutové zaškolení.
+
+Součástí první verze:
+
+- Homepage s jasnou nabídkou.
+- Jedna detailní stránka služby.
+- Kontaktní formulář s minimem polí.
+- Základní technické SEO.
+- Privacy-first analytika bez reklamních trackerů.
+- Předávací dokument s přístupy, provozem a doporučenými dalšími kroky.
+
+Není součástí první verze:
+
+- Kompletní brand strategie.
+- Vícejazyčný web.
+- Placené kampaně.
+- CRM integrace.
+- Dlouhodobá správa obsahu.
+
+Takhle napsaná nabídka není méně ambiciózní. Je poctivější. A poctivost je v malých projektech velmi praktická konkurenční výhoda.
+
+### AA.7 Checklist nabídky bez scope creepu
+
+- Umíš jednou větou říct, jakou změnu projekt přinese?
+- Je jasné, kdo je cílový zákazník nebo uživatel?
+- Má rozsah tabulku „součástí / není součástí“?
+- Jsou klientské vstupy pojmenované, datované a přiřazené konkrétním lidem?
+- Existuje jednoduchý postup pro změnové požadavky?
+- Jsou privacy-first pravidla napsaná v nabídce, ne schovaná v hlavě?
+- Je jasné, co se předá na konci projektu?
+- Ví klient, co bude potřebovat po spuštění?
+
+### AA.8 Mini úkol na 45 minut
+
+Vezmi poslední nabídku, brief nebo interní zadání a doplň do něj dvě sekce: „Není součástí“ a „Privacy-first pravidla“. Potom najdi jeden vstup, který dnes nemá vlastníka ani termín, a dopiš obojí. Pokud tě při tom začne bolet ego, je to normální. Právě jsi našel skryté riziko, ne osobní selhání.
+
 ## Závěr: Postav menší digitální stroj, který vydrží
 
 Dobrá webovka nebo SaaS není sbírka nástrojů, trendů a náhodných automatizací. Je to malý digitální stroj, který má jasný účel: vysvětlit hodnotu, získat důvěru, doručit službu, chránit data a pomoct týmu rozhodovat se bez chaosu.
@@ -4624,6 +4753,7 @@ Jedna opravená věc týdně porazí obří transformační projekt, který skon
 
 ## Pracovní log
 
+- 2026-09-09: Doplněn Dodatek AA o nabídkách, rozsahu spolupráce, klientských vstupech, změnových požadavcích a privacy-first hranicích už ve fázi zadání.
 - 2026-09-09: Doplněn závěr e-booku s praktickým návodem, jak text používat dál, a finálním checklistem pro web, SaaS, marketing, provoz a privacy-first exporty.
 - 2026-09-09: Obnovena plná verze e-booku po chybně zkráceném commitu a doplněn Dodatek Z o exportech, obnově dat, RPO/RTO, testech záloh a privacy-first offboardingu zákazníka.
 - 2026-09-08: Doplněn Dodatek Y o práci s dodavateli, dočasných přístupech, předání výstupů a privacy-first pravidlech pro externí spolupráci.
