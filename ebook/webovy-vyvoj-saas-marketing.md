@@ -5193,6 +5193,137 @@ Otevři svůj produkt nebo návrh administrace a napiš tabulku deseti citlivýc
 
 > Codyho komentář: Role a oprávnění jsou jako klíče od kanceláře. Když je rozdáš všem, vypadá to přátelsky přesně do chvíle, než někdo odnese server, kávovar a databázi zákazníků.
 
+## Dodatek AF: Nastavení produktu bez skrytých pastí
+
+Nastavení je místo, kam uživatel často chodí až ve chvíli, kdy něco potřebuje změnit, zachránit nebo pochopit. To znamená jediné: nemá čas luštit interní mapu tvého produktu. Dobré nastavení není skladiště checkboxů. Je to ovládací panel důvěry.
+
+U SaaS produktu nastavení typicky rozhoduje o tom, kdo má přístup k datům, co se posílá e-mailem, jak dlouho se data drží, jak se integrace chovají a co se stane při odchodu zákazníka. Privacy-first přístup tady není dekorace. Je to hlavní architektonický princip: výchozí volby mají chránit zákazníka i tehdy, když na nastavení nikdy nesáhne.
+
+> Codyho komentář: Pokud je bezpečné nastavení schované za třemi záložkami a jedním nenápadným přepínačem, není to funkce. Je to velikonoční vajíčko pro právníky.
+
+### AF.1 Rozděl nastavení podle rozhodnutí, ne podle databázových tabulek
+
+Častá chyba je kopírovat do UI strukturu interního modelu: účet, workspace, tenant, user, integration, notification, billing, config. Vývojář tomu rozumí, zákazník méně. Zákazník nechce spravovat „tenant properties“. Chce vědět, kdo může do účtu, co se bude posílat ven a jak se dá produkt bezpečně používat.
+
+Praktičtější skupiny nastavení:
+
+- **Tým a přístupy:** členové, role, pozvánky, aktivní relace.
+- **Soukromí a data:** retence, exporty, mazání, souhlasy, region provozu.
+- **Komunikace:** produktové e-maily, upozornění, frekvence zpráv.
+- **Integrace:** připojené služby, API klíče, webhooky, oprávnění.
+- **Fakturace:** plán, limity, fakturační údaje, kontakty pro platby.
+- **Bezpečnost:** MFA, audit log, podezřelé přístupy, obnova účtu.
+
+Každá skupina má odpovědět na jednu lidskou otázku. „Kdo sem může?“ „Co o nás držíte?“ „Co odejde z produktu ven?“ „Kolik za to platíme?“ Když záložka neumí říct svou otázku, pravděpodobně je to šuplík na zmatek.
+
+### AF.2 Výchozí volby navrhuj pro opatrného zákazníka
+
+Výchozí nastavení je tichá smlouva. Uživatel většinou předpokládá, že když nic nezmění, produkt se bude chovat rozumně. Pokud výchozí volba zapne veřejné sdílení, agresivní notifikace nebo sběr zbytečných dat, zneužíváš důvěru.
+
+Dobré výchozí volby pro privacy-first SaaS:
+
+- veřejné sdílení je vypnuté, dokud ho vlastník vědomě nezapne,
+- nové integrace mají minimální oprávnění,
+- notifikace jsou užitečné, ale ne hysterické,
+- export dat je dostupný vlastníkovi nebo správci, ne každému členovi,
+- retence logů má rozumný limit a je vysvětlená lidsky,
+- demo data jsou jasně označená a nejdou omylem zaměnit za produkci.
+
+Opačný extrém je také problém: nastavení tak opatrné, že produkt nejde používat. Cíl není všechno zakázat. Cíl je udělat bezpečnou cestu pohodlnější než nebezpečnou.
+
+### AF.3 Nebezpečné akce potřebují kontext, ne jen potvrzení
+
+„Opravdu chcete pokračovat?“ je skoro vždy slabé potvrzení. Uživatel klikne, protože chce zmizet dialog, ne protože pochopil dopad. U citlivých akcí ukaž konkrétní následky.
+
+U mazání projektu napiš:
+
+- co přesně se smaže,
+- jestli jde akci vrátit,
+- jak dlouho zůstane záloha,
+- kdo dostane informaci,
+- jaký export má zákazník udělat předem.
+
+U vypnutí integrace napiš:
+
+- jaké automatizace přestanou běžet,
+- jestli se smažou tokeny,
+- co se stane s čekajícími úlohami,
+- kde najde uživatel auditní záznam.
+
+Potvrzení má být úměrné riziku. U změny barvy štítku stačí klik. U smazání dat chceš silnější potvrzení, ideálně s názvem objektu. Ne proto, že rád prudíš lidi. Protože páteční odpoledne a destruktivní tlačítka jsou kombinace, kterou by civilizace měla regulovat minimálně zdravým rozumem.
+
+### AF.4 Nastavení musí mít vlastníka a stopu
+
+V B2B SaaS je důležité vědět nejen, jaké nastavení platí, ale kdo ho změnil a proč. To neznamená ukládat každé pohnutí myší. Znamená to mít auditní stopu pro rozhodnutí, která mění riziko nebo odpovědnost.
+
+Do audit logu patří například:
+
+- změna role uživatele,
+- vytvoření nebo zrušení API klíče,
+- zapnutí veřejného sdílení,
+- změna retenční doby,
+- export dat,
+- změna fakturačního kontaktu,
+- vypnutí bezpečnostního prvku.
+
+Audit log piš tak, aby ho pochopil vlastník účtu: „Petra Nováková změnila roli Jana Svobody z Člen týmu na Správce.“ Ne „role_id updated from 2 to 3“. Databáze ať si mumlá svoje interní zaklínadla v koutě.
+
+### AF.5 Privacy-first nastavení ukaž i mimo administraci
+
+Soukromí nesmí být schované jen v nastavení po přihlášení. Část informací patří i na veřejný web, do dokumentace a do obchodních materiálů. Zákazník často řeší riziko ještě před registrací.
+
+Užitečné veřejné informace:
+
+- kde produkt běží a jaký je provozní region,
+- jaké typy dat produkt zpracovává,
+- jak se řeší export a smazání účtu,
+- jaké integrace mohou posílat data třetím stranám,
+- jak dlouho se drží provozní logy,
+- kdo je kontakt pro bezpečnost nebo soukromí.
+
+Nemusíš z toho dělat právní román. Stačí stránka „Soukromí a provoz“, která řekne pravdu lidsky. Pro evropské zákazníky je často důležitější klidná konkrétnost než marketingová mlha o „enterprise-grade security“.
+
+### AF.6 Konkrétní příklad: nastavení malého analytického SaaS
+
+Představ si jednoduchý analytický SaaS pro menší evropské weby. Produkt měří návštěvnost bez reklamních profilů a bez invazivního sledování.
+
+Nastavení může vypadat takhle:
+
+1. **Weby:** seznam měřených domén, stav měřicího skriptu, veřejné sdílení reportu.
+2. **Tým:** členové, role, otevřené pozvánky, poslední aktivita.
+3. **Data:** retenční doba, export CSV, smazání webu, region zpracování.
+4. **Události:** povolené vlastní eventy, doporučení neposílat osobní údaje.
+5. **Upozornění:** týdenní souhrn, alert při výpadku měření, fakturační zprávy.
+6. **Integrace:** webhooky, API tokeny, omezení oprávnění a poslední použití.
+7. **Audit:** změny přístupů, exporty, tokeny, veřejné sdílení.
+
+Výchozí stav: veřejné reporty vypnuté, pozvánky expirují, API tokeny nemají plný přístup, eventy obsahují nápovědu „neposílejte e-mail, telefon ani identifikátor zákazníka“. To je přesně ten typ nudné péče, která později ušetří velmi zajímavé průšvihy.
+
+### AF.7 Checklist dobrého nastavení
+
+- [ ] Nastavení je rozdělené podle rozhodnutí zákazníka, ne podle interních tabulek.
+- [ ] Každá sekce má jasný popis, co se v ní mění a koho se to týká.
+- [ ] Výchozí volby chrání data a neaktivují veřejné sdílení bez vědomé akce.
+- [ ] Citlivé změny mají konkrétní potvrzení s dopadem, ne obecné „Jste si jistí?“.
+- [ ] Nebezpečné akce jsou viditelné v audit logu.
+- [ ] Integrace ukazují rozsah oprávnění, poslední použití a možnost bezpečného odpojení.
+- [ ] Retence, export a mazání dat jsou dohledatelné bez kontaktování podpory.
+- [ ] Notifikace respektují pozornost uživatele a nejdou proti soukromí.
+- [ ] Veřejná dokumentace vysvětluje privacy-first provoz i lidem před registrací.
+- [ ] Texty v nastavení používají jazyk zákazníka, ne interní slang týmu.
+
+### AF.8 Mini úkol na 60 minut
+
+Otevři nastavení svého produktu a napiš si deset nejrizikovějších voleb. U každé odpověz:
+
+1. kdo ji smí změnit,
+2. jaký je bezpečný výchozí stav,
+3. co se stane při špatném nastavení,
+4. zda se změna zapisuje do audit logu,
+5. jestli zákazník chápe dopad bez podpory.
+
+Potom vyber jednu destruktivní nebo veřejně viditelnou akci a přepiš její potvrzovací dialog tak, aby ukazoval konkrétní dopad. Jedna dobrá věta v nastavení může zabránit incidentu, který by jinak dostal vlastní Slack kanál, postmortem a tři nové šediny.
+
 ## Zdroje
 
 - Evropská komise: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -5248,6 +5379,7 @@ Otevři svůj produkt nebo návrh administrace a napiš tabulku deseti citlivýc
 
 ## Pracovní log
 
+- 2026-09-09: Doplněn Dodatek AF o nastavení produktu, bezpečných výchozích volbách, citlivých akcích, auditní stopě a privacy-first konfiguraci.
 - 2026-09-09: Doplněn Dodatek AE o účtech, rolích, oprávněních, pozvánkách, podpoře, audit logu a privacy-first správě přístupů.
 - 2026-09-09: Rozšířen Dodatek AD o typy prázdných stavů, mikrokopii, privacy-first onboarding, přístupnost, příklad analytického dashboardu a checklist.
 - 2026-09-09: Doplněn Dodatek AC o lokalizaci, ověřování evropské expanze, fakturaci, DPH scénářích, podpoře a privacy-first komunikaci provozu.
